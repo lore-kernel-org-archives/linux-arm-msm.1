@@ -1,146 +1,138 @@
 Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 37C0D38B14F
-	for <linux-arm-msm@vger.kernel.org>; Wed, 19 Aug 2026 13:26:39 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DD08A3ADBA4
+	for <linux-arm-msm@vger.kernel.org>; Wed, 19 Aug 2026 13:26:45 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787146005; cv=none; b=iNwFOdhGmM0HrdS6zfD6kYWCRrUO1mT0YrloGeVWMHPNGSmPFzUx70R8hFUn1yyr6s8LNBW2KXrUDBgCzg66mjT0gZsnLgr671gXPlH1ZzyOuQFRjJZ1U7oJwhOI04YlIQGI1nHiFvMwen68eUs9UmNunUbJwcOD8sRtAsIAzg4=
+	t=1787146009; cv=none; b=Oyg0SOE31a/v26885oKJiVunwEab/qhwMudMh5k2eqyjksS2Ru7W1hUO29sSZpvMzFXCoKWEDeZI1lJFsOqY2KLSEl4uqMIFI1lvojwMgxF1jGvqROSNe368590VFtqdhPTKdw705HAg+itGyu60/r4cmxEf7kGGWUdnlE7AbZQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787146005; c=relaxed/simple;
-	bh=6HzawwOxkusOjOPeE6/oX/1EaAdxQaxMxK9EQzXaZDs=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=fnsh1ac5CCPztTg6D1BLJRZyP6MlslMvqe5Ykk1oVmWmYdw7mGijZXqlj9m+f7SJ1B3FdEiOo5EpOLFJrH3/6BQVb/iJ+6x8ZkCcQmNyKz1FDjyPvDN/ln+whXzOSoDCppS7Tf78bfvKxLFZydrjMWWYqTMNqfZMrbF+WmyL7OE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=G4hE9RKH; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=YfyHPHTg; arc=none smtp.client-ip=205.220.180.131
+	s=arc-20240116; t=1787146009; c=relaxed/simple;
+	bh=vqIPfxghX6uTA0vKHHb/u35II5suyu/XCxM8mJVVGd4=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
+	 In-Reply-To:To:Cc; b=g6Q8yiXAWlIbYqfpL1pzuKJ5ZaAifEYqYaKMTBB0wbxqHH4QZJ54ScvxTVwCVV/QqZdzX1osd61PJhM/fMPKo79+7En0m5GgXOnO6XbOUwvAvjtQ/t/3n8jf9QJK/0Bp6HxKTUFtSECGfBK6c/HUGKFb1wKofe9iFEPm9jonhcg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=pkxyGAih; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=In6umOgf; arc=none smtp.client-ip=205.220.180.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="G4hE9RKH";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="YfyHPHTg"
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="pkxyGAih";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="In6umOgf"
 Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67JD097p174262
-	for <linux-arm-msm@vger.kernel.org>; Wed, 19 Aug 2026 13:26:35 GMT
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67JD0AN5174298
+	for <linux-arm-msm@vger.kernel.org>; Wed, 19 Aug 2026 13:26:43 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	RC/u9yMGeHLFDrjdoHnolPqZvFBp4AVSt0SyCBdL7ug=; b=G4hE9RKHpv1cHu7k
-	VrLrbNQo/EAdJunCWDrxmKNhWRYHX2pb2l26AEVKrsFVirbZVNgywCKQhmReIlaG
-	JhEDxoUIoo89ZnoSKAq4GdcwQ0kJLGSe7yfC+5g+ZKuOkYYdzq8cfsILYgag2x50
-	DuWJ2+DbC4syzjVucQdBGDM42esXb10fNgDNTg004ivwBBVonqBA+X5zJFOg8rcS
-	rxIrqhtGuvXPFGbFJ7o3gDrbkjCCjr7lqQlLzJlKOg0G1yukAv5uAHA6uT2YE+Qj
-	rFF8ld744Q3PkrsOQUDb49WfVYuhG7ukFW1Z6wj/SIOIE3Hk03B8EwsbQLgOsOvH
-	szXX5A==
-Received: from mail-pf1-f198.google.com (mail-pf1-f198.google.com [209.85.210.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g4yfjkhd5-1
+	h5qjbIEG5djsa+d0E1yNhIsx/SvMTuNxv9MnBQROu70=; b=pkxyGAihLNj7+wce
+	6DTTucQVICQF7Y2FYPtJ5S9zoPsVRmuLeM+OWont32USbPUVoqNUg4KseIghXsc5
+	Q5c6KtioC6h7h5bLV2SrkVNXCli3LDr1SrOJdhQn8rWQj9K+X34Q7Rtv/Q0mZBdU
+	CMdVyTbEIKM9OYlfrJhGw6vOgAnQ8OqZ6hfN1kR/EgXmZNxFSmVCXKMMIq3pRs5P
+	yL9jBGcQnAAZnppvw7dLw0oZL132S21yoax2GNKmjt4v5Ixz1VMtZdHdAAnqKYd2
+	83ll2SPWde81OS8G0aOSlJn29HhiBwfP22XIvDU0ziEVX1pQPSLP/yA+wypaPj20
+	Nqwjig==
+Received: from mail-pg1-f199.google.com (mail-pg1-f199.google.com [209.85.215.199])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g4yfjkhe1-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 19 Aug 2026 13:26:35 +0000 (GMT)
-Received: by mail-pf1-f198.google.com with SMTP id d2e1a72fcca58-84a251c2e3eso2802559b3a.1
-        for <linux-arm-msm@vger.kernel.org>; Wed, 19 Aug 2026 06:26:35 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Wed, 19 Aug 2026 13:26:42 +0000 (GMT)
+Received: by mail-pg1-f199.google.com with SMTP id 41be03b00d2f7-cbedf42f199so986551a12.2
+        for <linux-arm-msm@vger.kernel.org>; Wed, 19 Aug 2026 06:26:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1787145994; x=1787750794; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=RC/u9yMGeHLFDrjdoHnolPqZvFBp4AVSt0SyCBdL7ug=;
-        b=YfyHPHTgO8tMxQCU/Ieq6/YmGsqpWixK51hUDOXvwRB6gxi0OK8WhCH2AGohsVbi3S
-         gieJcQ9ncz392/TYX/r2fyaBu2KtJIyzSbPj2ESaFAl8nDJURmRG3cF8LXKPnssmde5s
-         41SsdDCH3aHuhrsXv19iiB9GNu3BK/mFOgscF1zJB8tricmwx1RUTmrAfPINSdBtgQQF
-         qdD7cDInxig/WbjnRXRWbhe0MaROfTO5rY7XBksLxmGrUD8jyAK2OL5yGZLAk5mf1mkF
-         tv/rfIrE4GyJ23DRGxZMogSzfjhKFTeR39UO9gBqVahTaRiasdrFAnlr3AQM5duRlUaF
-         Q14g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787145994; x=1787750794;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=oss.qualcomm.com; s=google; t=1787146002; x=1787750802; darn=vger.kernel.org;
+        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=RC/u9yMGeHLFDrjdoHnolPqZvFBp4AVSt0SyCBdL7ug=;
-        b=Lm5O8lspXPPvF3IHMejTtDy8EsLfnp/T2PM8wnGZlJsvN83uSzbPqp8eB+1plnZpee
-         B79hy7ldpNFP4wDLz+DugLUm6fpYF11hyzDQD+o2wmy1rW4lGn/C0WM0TgNzjENg4Sts
-         TrnDs551LysjG4BomVljUZFxwITZ9fEfHUj2H6lYmBbSaGYg1+eq8ShNZv1z9WNZvJ7N
-         ahYyY6OV2vUkr2Uz59vcr4aA02Z6qp3PeMisXvrhHDzPgqt8XrC9P04vD7va/Mr70jXV
-         ztMonh3+aVTsS6hzF8+Q9x3nJlVfNjZiJt6tH19X9uI2Wwc3YiIovGNoyYSVT6PI7MzO
-         BPJA==
-X-Forwarded-Encrypted: i=1; AHgh+RpvIahDO2023gZwSwXe8iw9PLk6L2/oSmruS1/3L/fXVXMRZVNcLCucJL+lgJSEu59l5SPnkKvVcomiLAEl@vger.kernel.org
-X-Gm-Message-State: AOJu0YyvWkbPckt4KQ3KSW3S5yymz6VW+VkjEM2PmwCWMeABHbySNLuY
-	0IZSImmUA4L95cgwkb7drNQCADyeczTw0Ib7elvcVCs++ov1wPZYjBX6Ifn+hGk8BXGoWZIL5Mm
-	AEH/71FsqzYw9vEn5MrzCTFcGDzr/HJ9m5a8cc0qqfYPGlAJRO0oopbfGdRtj3NsKVjde
-X-Gm-Gg: AR+sD12n475JrUsCd+bWEHzzY5mI6TTYsNK4RGmI0XwHYlY5YI53L/qdAXIaMiITo8y
-	d4hphXNbvwkhbpYdF5/DHzVrxX+O/tYi7GpW+2kylqvCuFaYtm0+VaMC7p1OdeJBDLIqFDZUkvv
-	JxJVBnjgcp5GyrCQajhk12ktfY7i0FtwBPp6x6EIsoOuNEJykrfjpEUOwCFRvANEqJmirKuXUH0
-	TbCMYdo1NPF/ohkiB2/h3KPu8LEeiQU8KBqToexgx0b+Vrx60Hp8rMZahqRSiR3or9boVRLGEcf
-	mhf1RdaIs7ieXjGgkNoTft+k15qe2lZy8BwT77PRXC2APHXIgIq1XYqP3RAi64wCav8zPcMp3Eu
-	1a0ioyRduAKiQ+Ja3VTQwUYYZBGa/Rw==
-X-Received: by 2002:a05:6a21:110:b0:3b4:661d:8405 with SMTP id adf61e73a8af0-3cd00c6d745mr6160098637.4.1787145994363;
-        Wed, 19 Aug 2026 06:26:34 -0700 (PDT)
-X-Received: by 2002:a05:6a21:110:b0:3b4:661d:8405 with SMTP id adf61e73a8af0-3cd00c6d745mr6159988637.4.1787145993729;
-        Wed, 19 Aug 2026 06:26:33 -0700 (PDT)
-Received: from [10.219.56.166] ([202.46.23.19])
-        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-cc155689110sm598347a12.22.2026.08.19.06.26.24
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 19 Aug 2026 06:26:33 -0700 (PDT)
-Message-ID: <10349e29-b583-403f-a89a-9a00c73666bc@oss.qualcomm.com>
-Date: Wed, 19 Aug 2026 18:56:23 +0530
+        bh=h5qjbIEG5djsa+d0E1yNhIsx/SvMTuNxv9MnBQROu70=;
+        b=In6umOgffW/Y5UoTZ4gnQcjEmBIdeT5bXQTHRCbg4Z3buLj9q2+/Zo6JUSDvJYuCKe
+         9EzJKqu3gB70wPsDOBCep7+d92hpfh/oEM+JV7kAUioP1s1qFy8DqzD6iNpAeZcSyxFk
+         q2JyojxTk1Lclm+pm6Frmk3LngN4hR3K27Jq30FzyfRQ56spytarXvYKwKNJuZiu49HW
+         DmCoxk1K6/BqV6EtsSu/C06RrHa857qpLFboSkhQznRthhMhburxXuNVFj2Jp8n7rP2E
+         pH6RrPGN6r6Q8GWS6g3P/dbwT5r7Qgt3w594D5q+LEli58vwyqtXEO19g7drilU0LuSO
+         Ol4A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1787146002; x=1787750802;
+        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+         :content-type:mime-version:subject:date:from:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=h5qjbIEG5djsa+d0E1yNhIsx/SvMTuNxv9MnBQROu70=;
+        b=T1TpUqeFOx+Fne/C/x97fB4t4gQBVz40gJJtOn9BG9L1Dl8lf3h5vHHBQyqAw7z+XA
+         WBJAaslFYYVNVdGHAUtE7evR0LKaVhE33EfI0y1DNBvp3wfO5oWJ2+41wYAGgHUFstMY
+         HXU1y4jt/FGaxgm9E9h38DDyxvEj8ygIlQStYifJOVeaQ/+/oZ80TRx+ZuqZ2E34RtV8
+         EheaTozImH1HQc4JbOGkplWi6pljMTRFReOA8mHALPN2qD3uxeiToFruqo/GJtwdckBe
+         JMbb/4kaGFr/4GSyGb6xwT3ImOV2sJdlYzhecgDVuFbiEbujzCz8Z8KbmbcKNKqYq1Z4
+         TmxQ==
+X-Forwarded-Encrypted: i=1; AHgh+Rr9LN3D3M81afb3U53PFGqA8+5hzHtoIZLvlO2r9RRZ8kRa49JX41S0p7XDTLWCR3a8B5WCjfbngI3CIFSN@vger.kernel.org
+X-Gm-Message-State: AOJu0YzCyqcGhuMihbjVW2y7AgTvYfUGpnhj35M918VcPUBw8MIM67iE
+	wX9B49G8M1ub+UzArPVabm4uEuZnum77P1wyVNGcAI6HRMXQAJNkdAm6EUlAfWRzpsxyh8hIIs9
+	0C7iYx5p89EXoF8eH9qOYMgt/vRotVND+UVc7bkArlWuurjhUPayEhtKN+PyWRG8WSPtl
+X-Gm-Gg: AR+sD12pnaNyHJi+RRf/NuEV7O/HaQaVv3Z1po+GBHuv2dyNFi54F1tS0yxFUBM8fKU
+	OSNsvwXLQMkXvCElsGAxr2G1dRw90nbv5/JCZpmqqtwFTpVIE/+H/cLc8fNtkwOmW5dYXB6KGDZ
+	MP4Saw9EoPcsaBqClVZDsFWBlLCcrIcA/PPi+FGB/QJV2pa0ijon2O3eTmxf+TIFELVQuy20M6w
+	yriNVTgFpe4uDDwHNkhGs6v3rOKTAWkzX/gp8P9KN3evNSriSU1E5GWutWFjz9zcS5Gmp3dKIaq
+	QLL9I9ftgtktSv5e59jIWSip8Bh/pHvVnakqIulEQjVN54vRob+we5tUoVElD1MrgEZckHpmENi
+	bVTzfe+nqDRTLoflArKUutl3jMkvskF6fm7s=
+X-Received: by 2002:a05:6a21:1583:b0:3c3:a140:9392 with SMTP id adf61e73a8af0-3cd00aa4483mr10421356637.0.1787146001645;
+        Wed, 19 Aug 2026 06:26:41 -0700 (PDT)
+X-Received: by 2002:a05:6a21:1583:b0:3c3:a140:9392 with SMTP id adf61e73a8af0-3cd00aa4483mr10421238637.0.1787146001047;
+        Wed, 19 Aug 2026 06:26:41 -0700 (PDT)
+Received: from hu-krichai-hyd.qualcomm.com ([202.46.23.25])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-327c2a92406sm6126465eec.11.2026.08.19.06.26.35
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 19 Aug 2026 06:26:40 -0700 (PDT)
+From: Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>
+Date: Wed, 19 Aug 2026 18:55:55 +0530
+Subject: [PATCH v5 4/6] bus: mhi: host: Add support for Bandwidth scale
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 00/15] accel/qda: Qualcomm DSP Accelerator driver
-To: Krzysztof Kozlowski <krzk@kernel.org>, Oded Gabbay <ogabbay@kernel.org>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Shuah Khan <skhan@linuxfoundation.org>,
-        Randy Dunlap <rdunlap@infradead.org>,
-        Nathan Chancellor <nathan@kernel.org>,
-        Nick Desaulniers <ndesaulniers@google.com>,
-        Bill Wendling
- <morbo@google.com>,
-        Justin Stitt <justinstitt@google.com>,
-        "Joerg Roedel (AMD)" <joro@8bytes.org>, Will Deacon <will@kernel.org>,
-        Robin Murphy <robin.murphy@arm.com>,
-        Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
-        Maxime Ripard <mripard@kernel.org>,
-        Thomas Zimmermann <tzimmermann@suse.de>,
-        David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
-        Sumit Semwal <sumit.semwal@linaro.org>,
-        =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>
-Cc: Bharath Kumar <quic_bkumar@quicinc.com>,
-        Chenna Kesava Raju <quic_chennak@quicinc.com>,
-        srinivas.kandagatla@oss.qualcomm.com,
-        dmitry.baryshkov@oss.qualcomm.com, linux-kernel@vger.kernel.org,
-        dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org,
-        linux-arm-msm@vger.kernel.org, llvm@lists.linux.dev,
-        iommu@lists.linux.dev, linux-media@vger.kernel.org,
-        linaro-mm-sig@lists.linaro.org
-References: <20260817-qda-v2-v2-0-69a02e9090d4@oss.qualcomm.com>
- <3322b42b-3755-45ec-ad55-345125f0d488@kernel.org>
-Content-Language: en-US
-From: Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>
-In-Reply-To: <3322b42b-3755-45ec-ad55-345125f0d488@kernel.org>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODE5MDEwNCBTYWx0ZWRfX61WvLYkqjVTf
- I1AFPbnBhccdMb0p5Xec1Mk0EInCi3J48W/5HkNGOJz+py85VkvaS6haPqS63NvTaOFH2FajP0U
- 5/QhG1vqBHFCnZCFPAajXK2zorxx/k/gqTM09wZ2FuRYjXyfZliMVRZYaqxSoX5slNKy0IeKoPr
- JN2FeOtYWsti9UGHVHoZotqHs5trekUsjyFna4c0b3CPFO7A6vHDfO2WduO+xMhG/BdstIuV8WR
- /s0kkDVC5dWw5LUH0P7RveBzZb0XzBHbDvGelgbqfijySaK7J7fJ3BZ95HzlphaUID2Q+HuwX3k
- pGPISv5HEJFOs270YWl3HgJQ4I1xHHGZAGLvoXId/J4xAvl0QBLX9/Ol+U5kJgPdNK9kq7Jw8pU
- UhdmET57LurpSIc3l49KG9RJyGLdkfxinpospeS/5z9c+k1Ry/O6ObpWJ/h/OeTUKh0F5QUP6d2
- PK+LVTiM0bdkd4xJtEg==
-X-Proofpoint-GUID: sowQOMhKh65qRXaIKwCKfYpi0uvNAjJM
-X-Proofpoint-ORIG-GUID: sowQOMhKh65qRXaIKwCKfYpi0uvNAjJM
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODE5MDEwNCBTYWx0ZWRfX4C0NwyAEs2gt
- CrvfWn77PTafWIK7MRJwyjVBk2e6W9LpCtXIomPT5zuxX6vE/zojVeZK66Yv/lzaz2cuiFnfM7c
- XGqv+DfnpqSdzkTuCMGoZwlBcFzjEEk=
-X-Authority-Analysis: v=2.4 cv=Sb7HsPRu c=1 sm=1 tr=0 ts=6a85af0b cx=c_pps
- a=m5Vt/hrsBiPMCU0y4gIsQw==:117 a=j4ogTh8yFefVWWEFDRgCtg==:17
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260819-bwscale-v5-4-6dea79786b37@oss.qualcomm.com>
+References: <20260819-bwscale-v5-0-6dea79786b37@oss.qualcomm.com>
+In-Reply-To: <20260819-bwscale-v5-0-6dea79786b37@oss.qualcomm.com>
+To: Bjorn Helgaas <bhelgaas@google.com>,
+        =?utf-8?q?Ilpo_J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>,
+        Jingoo Han <jingoohan1@gmail.com>,
+        Lorenzo Pieralisi <lpieralisi@kernel.org>,
+        Rob Herring <robh@kernel.org>, Jeff Johnson <jjohnson@kernel.org>,
+        Bartosz Golaszewski <brgl@bgdev.pl>,
+        Manivannan Sadhasivam <mani@kernel.org>,
+        =?utf-8?q?Krzysztof_Wilczy=C5=84ski?= <kwilczynski@kernel.org>
+Cc: linux-pci@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-arm-msm@vger.kernel.org, mhi@lists.linux.dev,
+        linux-wireless@vger.kernel.org, ath11k@lists.infradead.org,
+        qiang.yu@oss.qualcomm.com,
+        Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1787145973; l=17383;
+ i=krishna.chundru@oss.qualcomm.com; s=20230907; h=from:subject:message-id;
+ bh=vqIPfxghX6uTA0vKHHb/u35II5suyu/XCxM8mJVVGd4=;
+ b=r5PP7HXRcZGud+lWzoxJ8rtNCQNtEJApHPb9w3+69FUbg21sKNKPpXBbcnm0XhtCUSTR3eiDa
+ pbTPbs+YoALCF3tVGyn9cbJJJuNZ8XgdQ3yvZW4vLVJftl3wIb2XOs7
+X-Developer-Key: i=krishna.chundru@oss.qualcomm.com; a=ed25519;
+ pk=10CL2pdAKFyzyOHbfSWHCD0X0my7CXxj8gJScmn1FAg=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODE5MDEwNCBTYWx0ZWRfX4kGBeuYIYR4s
+ //KOH5GIOa7tRaSleek4bbxw1j+2R+iCp3lqd104npC1eQykwsVthkWFDtvZZ7UbDcPTvOBPRk7
+ dO4TkpJL+TMEYdYycc/YyuVoxFIazRyG+1vY0F1JCc5HVUbtV18Ww1BVoZOSj/aUz+PkLGdtvx/
+ VXyXVB7eOC8tL3riZtVc+7KiCNfIrZlATFleKuXrHZTdzj3fGtvalE+Th/GvrbyIa/s/koC/sPG
+ dwTPEz7uwIIP+RFGbnN+jvksGrKMXiZ4z1We11bhhn6NVJL4U3bLrkGLDnHEluqkCfDpO6bGNWb
+ vJW1cYHmtlrKls/iTARpcZ6L4/ctWvgg3UF/5AmwJnTFI1aMHjjFc5uu30hXvXGRUQItsyPiiwQ
+ xMOyhQUjI5IaOWolupNbWUyjCWLFvhZfipRUJ37RqbL93fIREk0K91Y3oEHg5Xxdvn/lAQjMHDn
+ xXGWd90oviphvmbt0LQ==
+X-Proofpoint-GUID: coThdAoUfK3m7cb6CcBWVU7u4Aeqy1QN
+X-Proofpoint-ORIG-GUID: coThdAoUfK3m7cb6CcBWVU7u4Aeqy1QN
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODE5MDEwNCBTYWx0ZWRfX7hWTfZzdqbFL
+ 216eys+N7z5sReey5HX6hogBTkHE+2uxwbKrCl3f2hDIsvcFjHRgdmwvavHUQZ09CKya+InyugL
+ SBeB8qypmD1Aw2ulIh+82UZL3UcO5AY=
+X-Authority-Analysis: v=2.4 cv=Sb7HsPRu c=1 sm=1 tr=0 ts=6a85af12 cx=c_pps
+ a=Oh5Dbbf/trHjhBongsHeRQ==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
  a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
  a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
- a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=NEAV23lmAAAA:8 a=1aprj6cQADeN8GqOYRYA:9
- a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10 a=IoOABgeZipijB_acs4fv:22
+ a=EUspDBNiAAAA:8 a=1cv9sBuMcNe9vbkH22sA:9 a=QEXdDO2ut3YA:10 a=O8hF6Hzn-FEA:10
+ a=_Vgx9l1VpLgwpw_dHYaR:22
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-08-19_03,2026-08-19_01,2025-10-01_01
@@ -150,181 +142,497 @@ X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608190104
 
-On 19-08-2026 00:43, Krzysztof Kozlowski wrote:
-> On 17/08/2026 06:47, Ekansh Gupta wrote:
->> This patch series introduces the Qualcomm DSP Accelerator (QDA) driver,
->> a DRM-based accelerator driver for Qualcomm DSPs. The driver provides a
->> standardized interface for offloading computational tasks to DSPs found
->> on Qualcomm SoCs, supporting all DSP domains.
->>
->> The QDA driver implements the FastRPC protocol over the DRM accel
->> subsystem. It uses the same device-tree node structure as the existing
->> fastrpc driver in drivers/misc/. The approach for binding the QDA driver
->> to device-tree nodes while coexisting with the fastrpc driver is an open
->> item described below.
-> 
-> No. Grow/replace/improve existing driver instead of coming with a duplicate.
-> 
-> That's a standard upstream requirement, basically given on every
-> upstreaming guide.
-> 
-> Please watch old talk from Greg - "I Don’t Want Your Code!".
-Posted discussion threads here[1]. Would seek comments from Dmitry,
-Srini as well.
+As per MHI spec v1.2, sec 14, MHI supports bandwidth scaling to reduce
+power consumption. MHI bandwidth scaling is advertised by devices that
+contain the bandwidth scaling capability registers. If enabled, the device
+aggregates bandwidth requirements and sends them to the host through
+dedicated mhi event ring. After the host performs the bandwidth switch,
+it sends an acknowledgment by ringing a doorbell.
 
-[1]
-https://lore.kernel.org/all/3476b5c3-7983-4994-a901-3d7d8bd75255@oss.qualcomm.com/
+if the host supports bandwidth scaling events, then it must set
+BW_CFG.ENABLED bit, set BW_CFG.DB_CHAN_ID to the channel ID to the
+doorbell that will be used by the host to communicate the bandwidth
+scaling status and BW_CFG.ER_INDEX to the index for the event ring
+to which the device should send bandwidth scaling request in the
+bandwidth scaling capability register.
 
-> 
->>
->> v1: https://lore.kernel.org/all/20260519-qda-series-v1-0-b2d984c297f8@oss.qualcomm.com/
->> RFC: https://lore.kernel.org/dri-devel/20260224-qda-firstpost-v1-0-fe46a9c1a046@oss.qualcomm.com/T/
->>
->> Changes since v1
->> ================
->>
->> The v1 review raised two architectural objections and one correctness
->> issue; all three are resolved in v2:
->>
->> * Christian König (dma-buf maintainer) pointed out that the imported-
->>   buffer path silently assumed the IOMMU maps every buffer as a single
->>   contiguous range, which is not guaranteed. v2 walks the scatterlist
->>   and cleanly rejects non-contiguous imports; contiguous imports (e.g.
->>   CMA DMA-buf heap) are accepted. (patch 11)
->>
->> * Dmitry Baryshkov objected to three different buffer-passing formats
->>   in the invoke IOCTL (DMA-BUF fd, direct/inline, DMA handle). v2
->>   passes only GEM handles; userspace imports any fd to a GEM handle
->>   with DRM_IOCTL_PRIME_FD_TO_HANDLE before invoking. Packing and
->>   overlap handling are left to userspace. (patch 12)
->>
->> * The memory manager (patch 07) used a fixed 16-entry array without
->>   justification and leaked the device descriptor on teardown. v2
->>   allocates the array from the DT context-bank count (as Dmitry
->>   suggested) and frees it correctly.
->>
->> User-space staging branch
->> =========================
->> https://github.com/qualcomm/fastrpc/tree/accel/staging
->>
->> Key Features
->> ============
->>
->> * Standard DRM accelerator interface via /dev/accel/accelN
->> * GEM-based buffer management with DMA-BUF import (PRIME)
->> * IOMMU-based memory isolation using per-process context banks
->> * FastRPC protocol implementation for DSP communication
->> * RPMsg transport layer for reliable message passing
->> * Support for all DSP domains (ADSP, CDSP, SDSP, GDSP)
->> * DRM IOCTL interface for DSP session management, buffer allocation,
->>   and remote procedure invocation
->>
->> Architecture
->> ============
->>
->> 1. DRM Accelerator Framework Integration
->>    The driver registers as a DRM accel device, exposing a standard
->>    /dev/accel/accelN character device node. This provides established
->>    DRM infrastructure for device management, file operations, and
->>    IOCTL dispatch.
->>
->> 2. Memory Management
->>    Buffers are managed as GEM objects with PRIME support for DMA-BUF
->>    import. This enables buffer sharing with other DRM drivers (GPU,
->>    camera, video) using standard kernel mechanisms. Only contiguous
->>    imports are accepted; the driver verifies contiguity at import time
->>    rather than assuming it.
->>
->> 3. IOMMU Context Bank Management
->>    IOMMU context banks (CBs) are represented as proper struct device
->>    instances on a custom virtual bus (qda-compute-cb). Each CB device
->>    is registered with the IOMMU subsystem and receives its own IOMMU
->>    domain, enabling per-session address space isolation. The custom
->>    bus was introduced because IOMMU context banks are synthetic
->>    constructs — not real platform devices — and to ensure CB device
->>    lifetime is strictly subordinate to the parent QDA device.
->>    See also: https://lore.kernel.org/all/245d602f-3037-4ae3-9af9-d98f37258aae@oss.qualcomm.com/
->>
->> 4. Memory Manager Architecture
->>    The memory manager maintains a registry of IOMMU devices in an
->>    array sized to the number of context banks described in the device
->>    tree, and coordinates per-process device assignment with reference-
->>    counted lifetime management. The DMA-coherent backend allocates
->>    buffers with SID-prefixed DMA addresses for DSP firmware
->>    compatibility.
->>
->> 5. Transport Layer
->>    RPMsg communication is handled in a dedicated transport layer
->>    (qda_rpmsg.c), separate from the core DRM driver logic.
->>
->> 6. Code Organization
->>    The driver is organized across multiple files (~4800 lines total):
->>    * qda_drv.c:            Core driver and DRM integration
->>    * qda_rpmsg.c:          RPMsg transport layer
->>    * qda_cb.c:             Context bank device management
->>    * qda_compute_bus.c:    Custom virtual bus for CB devices
->>    * qda_gem.c:            GEM object management
->>    * qda_prime.c:          DMA-BUF import (PRIME)
->>    * qda_memory_manager.c: IOMMU device registry and allocation
->>    * qda_memory_dma.c:     DMA-coherent allocation backend
->>    * qda_fastrpc.c:        FastRPC protocol implementation
->>    * qda_ioctl.c:          IOCTL dispatch
->>
->> 7. UAPI Design
->>    The driver exposes DRM-style IOCTLs defined in
->>    include/uapi/drm/qda_accel.h, following DRM UAPI conventions
->>    (__u32/__u64 types, C++ guard, GPL-2.0-only WITH Linux-syscall-note).
->>    Buffer arguments are identified by GEM handles; the driver never
->>    accepts DMA-BUF fds directly in any IOCTL.
->>
->> Patch Series Organization
->> ==========================
->>
->> Patch 01:      MAINTAINERS entry
->> Patch 02:      Driver documentation (Documentation/accel/qda/)
->> Patches 03-04: Core driver skeleton and compute bus
->> Patch 05:      iommu: Register qda-compute-cb bus with IOMMU subsystem
->> Patches 06-07: CB device enumeration and memory manager
->> Patch 08:      QUERY IOCTL and UAPI header
->> Patches 09-11: GEM buffer management and PRIME import
->> Patches 12-15: FastRPC protocol (invoke, session create/release,
->>                map/unmap)
->>
->> Open Items
->> ===========
->>
->> 1. Device-Tree Compatible String
->>    The QDA driver uses the same device-tree node structure and
->>    properties as the existing fastrpc driver in drivers/misc/. A
->>    mechanism is needed to allow the QDA driver to bind to its device
->>    node independently of the fastrpc driver.
->>
->>    The intended coexistence model is: platforms that require the
->>    complete fastrpc feature set continue to use "qcom,fastrpc"; new
->>    platforms where QDA's feature set is sufficient use a QDA-specific
->>    compatible string. New feature development is directed toward QDA.
->>
->>    The options under consideration are:
->>
->>    a) Add a new "qcom,qda" compatible string to the existing
->>       qcom,fastrpc.yaml binding, since the DT node structure and
->>       properties are identical.
-> No
-> 
->>
->>    b) Introduce a separate qcom,qda.yaml binding that references or
->>       inherits the fastrpc binding properties.
-> 
-> No
-> 
->>
->>    Seeking guidance from DT binding maintainers on the preferred
->>    approach.
-> 
-> Grow existing driver. You do not get new driver, you do not get new
-> bindings.
-> 
-> 
-> Best regards,
-> Krzysztof
+As part of mmio init check if the bw scale capability is present or not,
+if present advertise host supports bw scale by setting all the required
+fields.
+
+MHI layer will only forward the bw scaling request to the controller
+driver since MHI doesn't have any idea about transport layer used by
+the controller, it is responsibility of the controller driver to do actual
+bw scaling and then pass status to the MHI. MHI will response back to the
+device based up on the status of the bw scale received.
+
+Add a new get_misc_doorbell() to get doorbell for misc capabilities to
+use the doorbell with mhi events like MHI BW scale etc.
+
+Use workqueue & mutex for the bw scale events as the pci_set_target_speed()
+which will called by the mhi controller driver can sleep.
+
+Co-developed-by: Qiang Yu <qiang.yu@oss.qualcomm.com>
+Signed-off-by: Qiang Yu <qiang.yu@oss.qualcomm.com>
+Signed-off-by: Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>
+---
+ drivers/bus/mhi/common.h        |  13 +++++
+ drivers/bus/mhi/host/init.c     |  93 +++++++++++++++++++++++++++++++--
+ drivers/bus/mhi/host/internal.h |   6 ++-
+ drivers/bus/mhi/host/main.c     | 113 +++++++++++++++++++++++++++++++++++++++-
+ drivers/bus/mhi/host/pm.c       |  10 +++-
+ drivers/bus/mhi/host/trace.h    |   7 +++
+ include/linux/mhi.h             |  13 +++++
+ 7 files changed, 247 insertions(+), 8 deletions(-)
+
+diff --git a/drivers/bus/mhi/common.h b/drivers/bus/mhi/common.h
+index 4c316f3d5a68..267260901a41 100644
+--- a/drivers/bus/mhi/common.h
++++ b/drivers/bus/mhi/common.h
+@@ -215,6 +215,19 @@
+ #define MHI_CAP_ID_MAX_TRB_LEN		0x5
+ #define MHI_CAP_ID_MAX			0x6
+ 
++/* MHI Bandwidth scaling offsets */
++#define MHI_BW_SCALE_CFG_OFFSET		0x4
++#define MHI_BW_SCALE_CAP_ID		(3)
++#define MHI_BW_SCALE_DB_CHAN_ID		GENMASK(31, 25)
++#define MHI_BW_SCALE_ENABLED		BIT(24)
++#define MHI_BW_SCALE_ER_INDEX		GENMASK(23, 19)
++
++#define MHI_TRE_GET_EV_BW_REQ_SEQ(tre)	FIELD_GET(GENMASK(15, 8), (MHI_TRE_GET_DWORD(tre, 0)))
++
++#define MHI_BW_SCALE_RESULT(status, seq)	(FIELD_PREP(GENMASK(11, 8), status) | \
++						FIELD_PREP(GENMASK(7, 0), seq))
++#define MHI_BW_SCALE_NACK			0xF
++
+ enum mhi_pkt_type {
+ 	MHI_PKT_TYPE_INVALID = 0x0,
+ 	MHI_PKT_TYPE_NOOP_CMD = 0x1,
+diff --git a/drivers/bus/mhi/host/init.c b/drivers/bus/mhi/host/init.c
+index 32db4aa4bbe8..d0975b6c2df0 100644
+--- a/drivers/bus/mhi/host/init.c
++++ b/drivers/bus/mhi/host/init.c
+@@ -497,10 +497,66 @@ static int mhi_find_capability(struct mhi_controller *mhi_cntrl, u32 capability)
+ 	return 0;
+ }
+ 
++static int mhi_get_er_index(struct mhi_controller *mhi_cntrl,
++			    enum mhi_er_data_type type)
++{
++	struct mhi_event *mhi_event = mhi_cntrl->mhi_event;
++	int i;
++
++	/* Find event ring for requested type */
++	for (i = 0; i < mhi_cntrl->total_ev_rings; i++, mhi_event++) {
++		if (mhi_event->data_type == type)
++			return mhi_event->er_index;
++	}
++
++	return -ENOENT;
++}
++
++static int mhi_init_bw_scale(struct mhi_controller *mhi_cntrl,
++			     int bw_scale_db)
++{
++	struct device *dev = &mhi_cntrl->mhi_dev->dev;
++	struct mhi_event *mhi_event;
++	u32 bw_cfg_offset, val;
++	int er_index, i;
++
++	bw_cfg_offset = mhi_find_capability(mhi_cntrl, MHI_BW_SCALE_CAP_ID);
++	if (!bw_cfg_offset)
++		return 0;
++
++	er_index = mhi_get_er_index(mhi_cntrl, MHI_ER_BW_SCALE);
++	if (er_index < 0)
++		return er_index;
++
++	/* Initialize BW scale event ring resources */
++	mhi_event = mhi_cntrl->mhi_event;
++	for (i = 0; i < mhi_cntrl->total_ev_rings; i++, mhi_event++) {
++		if (mhi_event->data_type == MHI_ER_BW_SCALE) {
++			INIT_WORK(&mhi_event->work, mhi_process_ev_work);
++			mutex_init(&mhi_event->mutex);
++			break;
++		}
++	}
++
++	bw_cfg_offset += MHI_BW_SCALE_CFG_OFFSET;
++
++	/* Advertise host support */
++	val = FIELD_PREP(MHI_BW_SCALE_DB_CHAN_ID, bw_scale_db) |
++			 FIELD_PREP(MHI_BW_SCALE_ER_INDEX, er_index) |
++			 MHI_BW_SCALE_ENABLED;
++
++	mhi_write_reg(mhi_cntrl, mhi_cntrl->regs, bw_cfg_offset, val);
++
++	dev_dbg(dev, "Bandwidth scaling setup complete with event ring: %d\n",
++		er_index);
++
++	return 0;
++}
++
+ int mhi_init_mmio(struct mhi_controller *mhi_cntrl)
+ {
+-	u32 val;
+-	int i, ret;
++	u32 val, chdb_offset;
++	int i, ret, doorbell = 0;
+ 	struct mhi_chan *mhi_chan;
+ 	struct mhi_event *mhi_event;
+ 	void __iomem *base = mhi_cntrl->regs;
+@@ -581,6 +637,8 @@ int mhi_init_mmio(struct mhi_controller *mhi_cntrl)
+ 		return -ERANGE;
+ 	}
+ 
++	chdb_offset = val;
++
+ 	/* Setup wake db */
+ 	mhi_cntrl->wake_db = base + val + (8 * MHI_DEV_WAKE_DB);
+ 	mhi_cntrl->wake_set = false;
+@@ -634,6 +692,17 @@ int mhi_init_mmio(struct mhi_controller *mhi_cntrl)
+ 		return ret;
+ 	}
+ 
++	if (mhi_cntrl->get_misc_doorbell)
++		doorbell = mhi_cntrl->get_misc_doorbell(mhi_cntrl, MHI_ER_BW_SCALE);
++
++	if (doorbell > 0) {
++		ret = mhi_init_bw_scale(mhi_cntrl, doorbell);
++		if (!ret)
++			mhi_cntrl->bw_scale_db = base + chdb_offset + (8 * doorbell);
++		else
++			dev_warn(dev, "Failed to setup bandwidth scaling: %d\n", ret);
++	}
++
+ 	return 0;
+ }
+ 
+@@ -778,6 +847,9 @@ static int parse_ev_cfg(struct mhi_controller *mhi_cntrl,
+ 		case MHI_ER_CTRL:
+ 			mhi_event->process_event = mhi_process_ctrl_ev_ring;
+ 			break;
++		case MHI_ER_BW_SCALE:
++			mhi_event->process_event = mhi_process_bw_scale_ev_ring;
++			break;
+ 		default:
+ 			dev_err(dev, "Event Ring type not supported\n");
+ 			goto error_ev_cfg;
+@@ -1001,10 +1073,12 @@ int mhi_register_controller(struct mhi_controller *mhi_cntrl,
+ 
+ 		mhi_event->mhi_cntrl = mhi_cntrl;
+ 		spin_lock_init(&mhi_event->lock);
+-		if (mhi_event->data_type == MHI_ER_CTRL)
++		if (mhi_event->data_type == MHI_ER_CTRL) {
+ 			tasklet_init(&mhi_event->task, mhi_ctrl_ev_task,
+ 				     (ulong)mhi_event);
+-		else
++		} else if (mhi_event->data_type == MHI_ER_BW_SCALE) {
++		/* BW scale resources will be initialized in mhi_init_mmio() if capability exists */
++		} else
+ 			tasklet_init(&mhi_event->task, mhi_ev_task,
+ 				     (ulong)mhi_event);
+ 	}
+@@ -1092,6 +1166,7 @@ void mhi_unregister_controller(struct mhi_controller *mhi_cntrl)
+ {
+ 	struct mhi_device *mhi_dev = mhi_cntrl->mhi_dev;
+ 	struct mhi_chan *mhi_chan = mhi_cntrl->mhi_chan;
++	struct mhi_event *mhi_event;
+ 	unsigned int i;
+ 
+ 	mhi_deinit_free_irq(mhi_cntrl);
+@@ -1101,6 +1176,16 @@ void mhi_unregister_controller(struct mhi_controller *mhi_cntrl)
+ 		sysfs_remove_file(&mhi_dev->dev.kobj, &dev_attr_trigger_edl.attr);
+ 
+ 	destroy_workqueue(mhi_cntrl->hiprio_wq);
++
++	/* Clean up BW scale resources */
++	mhi_event = mhi_cntrl->mhi_event;
++	for (i = 0; i < mhi_cntrl->total_ev_rings; i++, mhi_event++) {
++		if (mhi_event->data_type == MHI_ER_BW_SCALE) {
++			cancel_work_sync(&mhi_event->work);
++			mutex_destroy(&mhi_event->mutex);
++		}
++	}
++
+ 	kfree(mhi_cntrl->mhi_cmd);
+ 	kfree(mhi_cntrl->mhi_event);
+ 
+diff --git a/drivers/bus/mhi/host/internal.h b/drivers/bus/mhi/host/internal.h
+index 7b0ee5e3a12d..71d9c1fc5b29 100644
+--- a/drivers/bus/mhi/host/internal.h
++++ b/drivers/bus/mhi/host/internal.h
+@@ -250,6 +250,8 @@ struct mhi_event {
+ 	struct mhi_ring ring;
+ 	struct db_cfg db_cfg;
+ 	struct tasklet_struct task;
++	struct work_struct work;
++	struct mutex mutex; /* serializes bw_scale event processing */
+ 	spinlock_t lock;
+ 	int (*process_event)(struct mhi_controller *mhi_cntrl,
+ 			     struct mhi_event *mhi_event,
+@@ -404,6 +406,8 @@ int mhi_process_ctrl_ev_ring(struct mhi_controller *mhi_cntrl,
+ 			     struct mhi_event *mhi_event, u32 event_quota);
+ void mhi_uevent_notify(struct mhi_controller *mhi_cntrl, enum mhi_ee_type ee);
+ 
++int mhi_process_bw_scale_ev_ring(struct mhi_controller *mhi_cntrl,
++				 struct mhi_event *mhi_event, u32 event_quota);
+ /* ISR handlers */
+ irqreturn_t mhi_irq_handler(int irq_number, void *dev);
+ irqreturn_t mhi_intvec_threaded_handler(int irq_number, void *dev);
+@@ -419,5 +423,5 @@ void mhi_unmap_single_no_bb(struct mhi_controller *mhi_cntrl,
+ 			    struct mhi_buf_info *buf_info);
+ void mhi_unmap_single_use_bb(struct mhi_controller *mhi_cntrl,
+ 			     struct mhi_buf_info *buf_info);
+-
++void mhi_process_ev_work(struct work_struct *work);
+ #endif /* _MHI_INT_H */
+diff --git a/drivers/bus/mhi/host/main.c b/drivers/bus/mhi/host/main.c
+index 53c0ffe30070..7b4d2aeb03db 100644
+--- a/drivers/bus/mhi/host/main.c
++++ b/drivers/bus/mhi/host/main.c
+@@ -472,7 +472,10 @@ irqreturn_t mhi_irq_handler(int irq_number, void *dev)
+ 		if (mhi_dev)
+ 			mhi_notify(mhi_dev, MHI_CB_PENDING_DATA);
+ 	} else {
+-		tasklet_schedule(&mhi_event->task);
++		if (mhi_event->data_type == MHI_ER_BW_SCALE)
++			queue_work(mhi_cntrl->hiprio_wq, &mhi_event->work);
++		else
++			tasklet_schedule(&mhi_event->task);
+ 	}
+ 
+ 	return IRQ_HANDLED;
+@@ -1043,6 +1046,114 @@ int mhi_process_data_event_ring(struct mhi_controller *mhi_cntrl,
+ 	return count;
+ }
+ 
++int mhi_process_bw_scale_ev_ring(struct mhi_controller *mhi_cntrl,
++				 struct mhi_event *mhi_event, u32 event_quota)
++{
++	struct mhi_event_ctxt *er_ctxt = &mhi_cntrl->mhi_ctxt->er_ctxt[mhi_event->er_index];
++	struct device *dev = &mhi_cntrl->mhi_dev->dev;
++	struct mhi_ring *ev_ring = &mhi_event->ring;
++	dma_addr_t ptr = le64_to_cpu(er_ctxt->rp);
++	u32 response = MHI_BW_SCALE_NACK;
++	struct mhi_ring_element *dev_rp;
++	struct mhi_link_info link_info;
++	bool dev_wake_held = false;
++	int ret = 0;
++
++	if (unlikely(MHI_EVENT_ACCESS_INVALID(mhi_cntrl->pm_state)))
++		return -EIO;
++
++	if (!MHI_IN_MISSION_MODE(mhi_cntrl->ee))
++		return -EINVAL;
++
++	if (!is_valid_ring_ptr(ev_ring, ptr)) {
++		dev_err(dev,
++			"Event ring rp points outside of the event ring\n");
++		return -EIO;
++	}
++
++	dev_rp = mhi_to_virtual(ev_ring, ptr);
++	if (ev_ring->rp == dev_rp)
++		return 0;
++
++	/* If rp points to base, we need to wrap it around */
++	if (dev_rp == ev_ring->base)
++		dev_rp = ev_ring->base + ev_ring->len;
++	dev_rp--;
++
++	/* Fast forward to currently processed element and recycle er */
++	ev_ring->rp = dev_rp;
++	ev_ring->wp = dev_rp - 1;
++	if (ev_ring->wp < ev_ring->base)
++		ev_ring->wp = ev_ring->base + ev_ring->len - ev_ring->el_size;
++	mhi_recycle_ev_ring_element(mhi_cntrl, ev_ring);
++
++	if (WARN_ON(MHI_TRE_GET_EV_TYPE(dev_rp) != MHI_PKT_TYPE_BW_REQ_EVENT)) {
++		dev_err(dev, "Unexpected event type for BW scale event ring\n");
++		return -EINVAL;
++	}
++
++	trace_mhi_bw_scale_event(mhi_cntrl, dev_rp);
++
++	link_info.target_link_speed = MHI_TRE_GET_EV_LINKSPEED(dev_rp);
++	link_info.target_link_width = MHI_TRE_GET_EV_LINKWIDTH(dev_rp);
++	link_info.sequence_num = MHI_TRE_GET_EV_BW_REQ_SEQ(dev_rp);
++
++	dev_dbg(dev, "Received BW_REQ with seq:%d link speed:0x%x width:0x%x\n",
++		link_info.sequence_num,
++		link_info.target_link_speed,
++		link_info.target_link_width);
++
++	read_lock_bh(&mhi_cntrl->pm_lock);
++	if (likely(MHI_DB_ACCESS_VALID(mhi_cntrl)))
++		mhi_ring_er_db(mhi_event);
++	read_unlock_bh(&mhi_cntrl->pm_lock);
++
++	/* Bring host and device out of suspended states */
++	ret = mhi_device_get_sync(mhi_cntrl->mhi_dev);
++	if (ret)
++		goto send_bw_scale_resp;
++
++	mhi_cntrl->runtime_get(mhi_cntrl);
++	dev_wake_held = true;
++
++	ret = mhi_cntrl->bw_scale(mhi_cntrl, &link_info);
++	if (!ret)
++		response = 0;
++
++send_bw_scale_resp:
++	response = MHI_BW_SCALE_RESULT(response, link_info.sequence_num);
++
++	if (ret)
++		dev_err(dev, "BW_REQ seq:%d speed:0x%x width:0x%x NACKed, err:%d\n",
++			link_info.sequence_num, link_info.target_link_speed,
++			link_info.target_link_width, ret);
++
++	write_lock_bh(&mhi_cntrl->pm_lock);
++	mhi_write_reg(mhi_cntrl, mhi_cntrl->bw_scale_db, 0, response);
++	write_unlock_bh(&mhi_cntrl->pm_lock);
++
++	if (dev_wake_held) {
++		mhi_cntrl->runtime_put(mhi_cntrl);
++		mhi_device_put(mhi_cntrl->mhi_dev);
++	}
++
++	return ret;
++}
++
++void mhi_process_ev_work(struct work_struct *work)
++{
++	struct mhi_event *mhi_event = container_of(work, struct mhi_event,
++						   work);
++
++	struct mhi_controller *mhi_cntrl = mhi_event->mhi_cntrl;
++
++	if (unlikely(MHI_EVENT_ACCESS_INVALID(mhi_cntrl->pm_state)))
++		return;
++
++	guard(mutex)(&mhi_event->mutex);
++	mhi_event->process_event(mhi_cntrl, mhi_event, U32_MAX);
++}
++
+ void mhi_ev_task(unsigned long data)
+ {
+ 	struct mhi_event *mhi_event = (struct mhi_event *)data;
+diff --git a/drivers/bus/mhi/host/pm.c b/drivers/bus/mhi/host/pm.c
+index f799503c8f36..1023fdd699b9 100644
+--- a/drivers/bus/mhi/host/pm.c
++++ b/drivers/bus/mhi/host/pm.c
+@@ -524,7 +524,10 @@ static void mhi_pm_disable_transition(struct mhi_controller *mhi_cntrl,
+ 		if (mhi_event->offload_ev)
+ 			continue;
+ 		disable_irq(mhi_cntrl->irq[mhi_event->irq]);
+-		tasklet_kill(&mhi_event->task);
++		if (mhi_event->data_type == MHI_ER_BW_SCALE)
++			cancel_work_sync(&mhi_event->work);
++		else
++			tasklet_kill(&mhi_event->task);
+ 	}
+ 
+ 	/* Release lock and wait for all pending threads to complete */
+@@ -689,7 +692,10 @@ static void mhi_pm_sys_error_transition(struct mhi_controller *mhi_cntrl)
+ 	for (i = 0; i < mhi_cntrl->total_ev_rings; i++, mhi_event++) {
+ 		if (mhi_event->offload_ev)
+ 			continue;
+-		tasklet_kill(&mhi_event->task);
++		if (mhi_event->data_type == MHI_ER_BW_SCALE)
++			cancel_work_sync(&mhi_event->work);
++		else
++			tasklet_kill(&mhi_event->task);
+ 	}
+ 
+ 	/* Release lock and wait for all pending threads to complete */
+diff --git a/drivers/bus/mhi/host/trace.h b/drivers/bus/mhi/host/trace.h
+index 3e0c41777429..f7cc3470bcdb 100644
+--- a/drivers/bus/mhi/host/trace.h
++++ b/drivers/bus/mhi/host/trace.h
+@@ -212,6 +212,13 @@ DEFINE_EVENT(mhi_process_event_ring, mhi_ctrl_event,
+ 	TP_ARGS(mhi_cntrl, rp)
+ );
+ 
++DEFINE_EVENT(mhi_process_event_ring, mhi_bw_scale_event,
++
++	TP_PROTO(struct mhi_controller *mhi_cntrl, struct mhi_ring_element *rp),
++
++	TP_ARGS(mhi_cntrl, rp)
++);
++
+ DECLARE_EVENT_CLASS(mhi_update_channel_state,
+ 
+ 	TP_PROTO(struct mhi_controller *mhi_cntrl, struct mhi_chan *mhi_chan, int state,
+diff --git a/include/linux/mhi.h b/include/linux/mhi.h
+index 4b86ae6f6a82..22a8d05cf44d 100644
+--- a/include/linux/mhi.h
++++ b/include/linux/mhi.h
+@@ -119,10 +119,12 @@ struct image_info {
+  * struct mhi_link_info - BW requirement
+  * target_link_speed - Link speed as defined by TLS bits in LinkControl reg
+  * target_link_width - Link width as defined by NLW bits in LinkStatus reg
++ * sequence_num - used by device to track bw requests sent to host
+  */
+ struct mhi_link_info {
+ 	unsigned int target_link_speed;
+ 	unsigned int target_link_width;
++	int sequence_num;
+ };
+ 
+ /**
+@@ -200,10 +202,12 @@ enum mhi_ch_ee_mask {
+  * enum mhi_er_data_type - Event ring data types
+  * @MHI_ER_DATA: Only client data over this ring
+  * @MHI_ER_CTRL: MHI control data and client data
++ * @MHI_ER_BW_SCALE: MHI controller bandwidth scale functionality
+  */
+ enum mhi_er_data_type {
+ 	MHI_ER_DATA,
+ 	MHI_ER_CTRL,
++	MHI_ER_BW_SCALE,
+ };
+ 
+ /**
+@@ -314,6 +318,7 @@ struct mhi_controller_config {
+  * @bhi: Points to base of MHI BHI register space
+  * @bhie: Points to base of MHI BHIe register space
+  * @wake_db: MHI WAKE doorbell register address
++ * @bw_scale_db: MHI BW_SCALE doorbell register address
+  * @iova_start: IOMMU starting address for data (required)
+  * @iova_stop: IOMMU stop address for data (required)
+  * @fw_image: Firmware image name for normal booting (optional)
+@@ -370,6 +375,8 @@ struct mhi_controller_config {
+  * @write_reg: Write a MHI register via the physical link (required)
+  * @reset: Controller specific reset function (optional)
+  * @edl_trigger: CB function to trigger EDL mode (optional)
++ * @get_misc_doobell: function to get doorbell used for MISC feature like BW scale etc (optional)
++ * @bw_scale: CB function for passing BW scale info (optional)
+  * @buffer_len: Bounce buffer length
+  * @index: Index of the MHI controller instance
+  * @bounce_buf: Use of bounce buffer
+@@ -391,6 +398,7 @@ struct mhi_controller {
+ 	void __iomem *bhi;
+ 	void __iomem *bhie;
+ 	void __iomem *wake_db;
++	void __iomem *bw_scale_db;
+ 
+ 	dma_addr_t iova_start;
+ 	dma_addr_t iova_stop;
+@@ -455,6 +463,11 @@ struct mhi_controller {
+ 	void (*reset)(struct mhi_controller *mhi_cntrl);
+ 	int (*edl_trigger)(struct mhi_controller *mhi_cntrl);
+ 
++	int (*get_misc_doorbell)(struct mhi_controller *mhi_cntrl,
++				 enum mhi_er_data_type type);
++	int (*bw_scale)(struct mhi_controller *mhi_cntrl,
++			struct mhi_link_info *link_info);
++
+ 	size_t buffer_len;
+ 	int index;
+ 	bool bounce_buf;
+
+-- 
+2.34.1
 
