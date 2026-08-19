@@ -1,33 +1,86 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 051D73ACF18;
-	Wed, 19 Aug 2026 14:53:20 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5F44EE571
+	for <linux-arm-msm@vger.kernel.org>; Wed, 19 Aug 2026 14:54:09 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787151208; cv=none; b=o/WaRn7u8OZwr4cPcm3vnis6MF0N79TDPka1I94AiorRAzo8HEkc75EfrlCjiKtAEfQq3hiVntQbcBzWZRZ44f9E1qbaP1t2FHGsq+eSdZ8trVZSoMDj/xGV2mmUF4STZCb1EREX2MlEfiriQR300vCjzrkzkQPUIza6fN4JAnI=
+	t=1787151250; cv=none; b=QNgLqITU6oLMPIfNsyjIUUfCBpRrDiidGIx1fIjGF+HsaYai5NG11zJ9F/3DukLmylKTL/GoJfluyUsVPGZBBcSRt/px20OeGMpH4pFKvpBUK0386jSFIxxrvKJnxftgIYknY2iNsVWzZkhw0ct0CQ7Te4mfTZba81QRGJJ1bFY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787151208; c=relaxed/simple;
-	bh=QVcVWBaHPP43ECVAhtIVq7+L2mpEbVXEeS+wYVsb4A4=;
+	s=arc-20240116; t=1787151250; c=relaxed/simple;
+	bh=f2a+3auSdVqFq0/OWgRlgpu8Wcw9P7Ud+AsdKa8wAps=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=uITbxNY+mMaEBcvg9toq8bhs0cPtZp/tfJUgD7Mo0FRzrXm1KUr1YlOsly2pZQK1KFrkv6rVuR5r4FUFYGeCXH6fU6q8bgGw0C7xJk8a5kCQpi0EVUP8qMMKa/gnmDa9sc2AKZc07S4l4hGY2zdNGE88AaFzc08OWYffRaNrMWg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=U1UBIQu0; arc=none smtp.client-ip=100.103.45.18
+	 In-Reply-To:Content-Type; b=OtcksIr1ZaJ/+GaQ84j2XUM+yqxtwoLf2WB2tMb5udoPZLaKg9qgEUH5AgpWADSsQQWVYDz6UsLLSR2bYT6EDFD6oV8FAcxMuXdnqG4NP7wYS02np73VbJti/B9c6LFMirnBWX3snUMz8jFVP2/dV7lXS+iI5P/MpH80jSNglIo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=cpPniQzf; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=djKZDKNy; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="U1UBIQu0"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 62D581F000E9;
-	Wed, 19 Aug 2026 14:53:08 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1787151199;
-	bh=W2EIvkv9Nq32WWVSfwklxxGLToFHgsoCABwz/s4TkD8=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=U1UBIQu0ssOyvURDZkHuUnjZuEGlsrJqH+xUIcNmnFhrxDmytdrcG/vlRO8tYBLj6
-	 aqTHL0o5ITTMnnX594JQNTXv+MufvSl1yUMQrjWHne9GuXU9iVu9mxGGsArKKzb176
-	 nAV9kSrU/uady8iPq9hruXqEGPaRFHL7Ta14QTBRSZqPni/Sg3luPYTUbmCXZB+rlw
-	 /dh+tWIKxtq9QR6Luk3IP16uffZVs1aNM0vuSO5LRXlDTRZd6Pjsq8cnoPDJV8KUx7
-	 qfPIRTYx2/XJaAmyplVAgid4AuAcJTuixmTA+GbD3MsD1+TVXrNnxCqOZc7IybUIEf
-	 eXzQ6wjkVY1Ig==
-Message-ID: <e7b4eceb-cb3a-49ea-bed9-728c958594b0@kernel.org>
-Date: Wed, 19 Aug 2026 16:53:05 +0200
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="cpPniQzf";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="djKZDKNy"
+Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67JEbo50588414
+	for <linux-arm-msm@vger.kernel.org>; Wed, 19 Aug 2026 14:54:08 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	mxxPmQMGMhm+Xs4Nrgda2xGPqpRB9ToDopA2di+3clc=; b=cpPniQzfegnukT+8
+	t8RQ3DfLDmxcNw8s9KkaplGXAMhlVDo5TzltcYSUZIw+4eDsLik6DhrUeoE0uyyn
+	AsqeRxVAiAxx4JCQeOzRYoehzwaUqjBy1jIZ5v3RWSSbkeozQlkDphqBGlqsOfwB
+	mbPm8bIjstBeQGWeOLoMQnY0RFfv58p74vHPKZ+uat1EQNbqi7k/RXQUH5Cza+py
+	S7eqLZoGv4lsisc5tJSPyGYWL6OUlojFak7+auIrcu+spEv9dRuQiAOXhBpSbaWC
+	cJ55ITjaWxXAPNZtaUSCba75FWJv6Bj70ZphTew79/p7LhGHS080k0QPUfbPBWgk
+	6xlnfQ==
+Received: from mail-pl1-f197.google.com (mail-pl1-f197.google.com [209.85.214.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g4yfkbu1c-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Wed, 19 Aug 2026 14:54:08 +0000 (GMT)
+Received: by mail-pl1-f197.google.com with SMTP id d9443c01a7336-2ccb6823efcso9833565ad.0
+        for <linux-arm-msm@vger.kernel.org>; Wed, 19 Aug 2026 07:54:08 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1787151247; x=1787756047; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=mxxPmQMGMhm+Xs4Nrgda2xGPqpRB9ToDopA2di+3clc=;
+        b=djKZDKNyQQdxDn3jzNQbmDe89Pp8e8FkZcpEf65u4n5yyWbHdRC70NThhfvIa9y9kE
+         kkl6zKY9P8+dy3MwaDCMYXbmCLzVql41RVZWYtTelPlhXe7Aw2fS/fD118orrcAAIxg1
+         yx6dV4XVGLcQ1m4+lJbzdLpG5/tmpJe3T5N8uXSfMX2vhIgr5WoGh1Sw331F22a7ZvJI
+         6R2ujNU4rEPkpK6N3IA/CY4/Fzj0OIU1qT8vSzVhb+e6bZCV+lgWVaQw6X+hLGSWsgzG
+         WfIh4WILNx0zT7nARUwjJI25lUAn6l0FmigaCYHEXejnl4Aep4ixLw2410PIa55G/swc
+         dkfw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1787151247; x=1787756047;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=mxxPmQMGMhm+Xs4Nrgda2xGPqpRB9ToDopA2di+3clc=;
+        b=T74xV0cSLqFTw+pY4SWqW9sJ10Gfkr6OrbPoUQ4+O4vNzOZR8xQJJgkqSzR3D0W2lg
+         1CGAhfgZILbz1S8mTQ7r7hvDIh2FHkaeostsGha/xndHed7Lm5rhU/tRWNKoMgCFS1h/
+         CMEoZD6MWMB4T2r1bX+fl5DkqZN76jGFciGo16R4XkpVcC/f90m2/JYR9zbDIdYXNTLJ
+         VdK9nhjOetl9GO6TT8KX6zWKm7vnPqCMGRehgQaAaGy1CvUkRhQL6TEAxPbmCNfwFz9W
+         vMjx51mhI25lUgqNJWggUMLMTpSgrzJdeP26VxDsQgV3xYzSwzOOFUOQubsdW4Y/yJpA
+         1wNA==
+X-Gm-Message-State: AFuF++nBH2NGTDDTYNVPqIZX8Svx/kW+ADtlbkd7aQECeW2hE7wTBx5h
+	9/RJ04TDEofO07MMulskPKi5cvl0YmPOCnH6rLazEdlbtA1DBc5Atzji7A98GIG1LA5u6jWMX0O
+	JBJJXdDvJVGxHl13jPQh/qAs/9tGU0OJrCh5OoIy5Ez1N2vBdUv5+DZdqjDikzKGb72wB
+X-Gm-Gg: AR+sD10DC2VRNJISvqwkFuQUc0I+3EDSWKR16OWOWO/2rboYdwXv+afpYwwQCqrnn/7
+	m1IYqcXfdRrmir8b9dHrThz+VMoKrggubKF0WjV2qlsqm6TzWIStBloIL/kXuAb1DJ6dsJ8xVxB
+	M2IoNSLtnpcFCDElkwnqLWrmCal3jc/QyB/XKV1B4Se493UkQRM40bXvRTKpBBk9iR6yLPmFbTa
+	63qGAWoQlFiaXF5E+wJ/aBRKakADizrcqzPis0bX2mG4eEwh7ZJ4XcKp7ZbM2W+1lvsEf6b0d0/
+	TmHRycptjrHjhuDZmsTR3Sb59q0yfKKUXIzP41cnvBQM/zCU0/Xe7H2IvJfNy9IfSm3dFCnxmh2
+	Wl1KeHST8KKciof/sFU5SnCiQPqi91K9gv+8+iTbdCbS+iA==
+X-Received: by 2002:a17:903:3b84:b0:2d5:2f49:b3de with SMTP id d9443c01a7336-2d5fd3e78f6mr105269015ad.0.1787151247244;
+        Wed, 19 Aug 2026 07:54:07 -0700 (PDT)
+X-Received: by 2002:a17:903:3b84:b0:2d5:2f49:b3de with SMTP id d9443c01a7336-2d5fd3e78f6mr105267565ad.0.1787151246678;
+        Wed, 19 Aug 2026 07:54:06 -0700 (PDT)
+Received: from [192.168.1.17] ([122.164.82.116])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2d5bb4e1339sm28651605ad.19.2026.08.19.07.54.04
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 19 Aug 2026 07:54:05 -0700 (PDT)
+Message-ID: <18eb2d9f-474c-4b1c-bb57-87c7568f6612@oss.qualcomm.com>
+Date: Wed, 19 Aug 2026 20:24:00 +0530
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -35,159 +88,68 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 00/15] accel/qda: Qualcomm DSP Accelerator driver
-To: rob.clark@oss.qualcomm.com
-Cc: Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>,
- Oded Gabbay <ogabbay@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
- Shuah Khan <skhan@linuxfoundation.org>, Randy Dunlap
- <rdunlap@infradead.org>, Nathan Chancellor <nathan@kernel.org>,
- Nick Desaulniers <ndesaulniers@google.com>, Bill Wendling
- <morbo@google.com>, Justin Stitt <justinstitt@google.com>,
- "Joerg Roedel (AMD)" <joro@8bytes.org>, Will Deacon <will@kernel.org>,
- Robin Murphy <robin.murphy@arm.com>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
- Sumit Semwal <sumit.semwal@linaro.org>,
- =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
- Bharath Kumar <quic_bkumar@quicinc.com>,
- Chenna Kesava Raju <quic_chennak@quicinc.com>,
- srinivas.kandagatla@oss.qualcomm.com, dmitry.baryshkov@oss.qualcomm.com,
- linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
- linux-doc@vger.kernel.org, linux-arm-msm@vger.kernel.org,
- llvm@lists.linux.dev, iommu@lists.linux.dev, linux-media@vger.kernel.org,
- linaro-mm-sig@lists.linaro.org
-References: <20260817-qda-v2-v2-0-69a02e9090d4@oss.qualcomm.com>
- <3322b42b-3755-45ec-ad55-345125f0d488@kernel.org>
- <10349e29-b583-403f-a89a-9a00c73666bc@oss.qualcomm.com>
- <87dca76c-851e-4cc3-ab91-68949d283b79@kernel.org>
- <CACSVV01eYr6FyA6XBG0xw0yv2dydvTEhcY-WUy07mxM8WwkZcg@mail.gmail.com>
- <318f14c2-0e87-4e07-8173-1511dca67d78@kernel.org>
- <CACSVV01T=ytVJKM7NRoBTAJm7vH+JPJNT9Tftu5X9YskGXerwg@mail.gmail.com>
-From: Krzysztof Kozlowski <krzk@kernel.org>
+Subject: Re: [PATCH v2] soc: qcom: llcc: Update the SCT table for IPQ5424
+To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org
+References: <20260811-ipq5424_llcc_updates-v2-1-1e4350585671@oss.qualcomm.com>
+ <28bffcd1-4743-43ae-936b-9f9f92117a9e@oss.qualcomm.com>
 Content-Language: en-US
-Autocrypt: addr=krzk@kernel.org; keydata=
- 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
-In-Reply-To: <CACSVV01T=ytVJKM7NRoBTAJm7vH+JPJNT9Tftu5X9YskGXerwg@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
+From: Kathiravan Thirumoorthy <kathiravan.thirumoorthy@oss.qualcomm.com>
+In-Reply-To: <28bffcd1-4743-43ae-936b-9f9f92117a9e@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-
-On 19/08/2026 16:49, Rob Clark wrote:
-> On Wed, Aug 19, 2026 at 7:43 AM Krzysztof Kozlowski <krzk@kernel.org> wrote:
->>
->> On 19/08/2026 16:38, Rob Clark wrote:
->>> On Wed, Aug 19, 2026 at 7:21 AM Krzysztof Kozlowski <krzk@kernel.org> wrote:
->>>>
->>>> On 19/08/2026 15:26, Ekansh Gupta wrote:
->>>>> On 19-08-2026 00:43, Krzysztof Kozlowski wrote:
->>>>>> On 17/08/2026 06:47, Ekansh Gupta wrote:
->>>>>>> This patch series introduces the Qualcomm DSP Accelerator (QDA) driver,
->>>>>>> a DRM-based accelerator driver for Qualcomm DSPs. The driver provides a
->>>>>>> standardized interface for offloading computational tasks to DSPs found
->>>>>>> on Qualcomm SoCs, supporting all DSP domains.
->>>>>>>
->>>>>>> The QDA driver implements the FastRPC protocol over the DRM accel
->>>>>>> subsystem. It uses the same device-tree node structure as the existing
->>>>>>> fastrpc driver in drivers/misc/. The approach for binding the QDA driver
->>>>>>> to device-tree nodes while coexisting with the fastrpc driver is an open
->>>>>>> item described below.
->>>>>>
->>>>>> No. Grow/replace/improve existing driver instead of coming with a duplicate.
->>>>>>
->>>>>> That's a standard upstream requirement, basically given on every
->>>>>> upstreaming guide.
->>>>>>
->>>>>> Please watch old talk from Greg - "I Don’t Want Your Code!".
->>>>> Posted discussion threads here[1]. Would seek comments from Dmitry,
->>>>> Srini as well.
->>>>>
->>>>> [1]
->>>>> https://lore.kernel.org/all/3476b5c3-7983-4994-a901-3d7d8bd75255@oss.qualcomm.com/
->>>>
->>>> The rest of the comments is still valid even if you did not acknowledge
->>>> them.
->>>>
->>>> Anyway, regarding above - again, watch the talk from Greg.
->>>>
->>>> You have ONE driver. Not two.
->>>
->>> Long term, moving to the common driver framework (which did not exist
->>> when fastrpc was first created) seems like a good thing.  But does
->>> that not allow for some transition period?  How can we get from here
->>> to there without otherwise breaking userspace?  Is there some other
->>> precedent elsewhere in other driver subsystems?
->>
->> Yes, Iris and Venus where we agreed for an exception (two drivers) as
->> long as new driver supports old hardware / features.
->>
->> This is not the case here, right?
->>
->>>
->>> I suppose drm exposing legacy fbdev on top of drm drivers is _sort of_
->>> a precedent if you squint a bit?  I'm not really familiar enough to
->>> say if that would be reasonable/possible in this case.
->>
->> Growing old driver does not look complicated itself. The only a bit
->> tricky thing is to present somehow exclusive interface to user-space,
->> like usage of one disables the second etc. Depending on actual
->> differences in that interface.
->>
->> But having a duplicated driver is a clear no go and it is well known
->> upstream requirement. Nothing new here.
-> 
-> Would it be acceptable as a first step to, by default (ie. when no
-> cmdline override/etc) for the new driver to bind to new compatibles
-
-You have one compatible.
-
-> and the existing driver to old?  Ie. have both drivers but only one
-> binds on a given platform?
-
-I don't see how is it possible to write such DTS, because - repeating my
-question - how many hardware blocks is there? I believe only one per
-given DSP, so how could you have two device nodes?
+X-Proofpoint-GUID: vh4zuDdsxh86Oca09KvlI9jkQbZQY2en
+X-Proofpoint-ORIG-GUID: vh4zuDdsxh86Oca09KvlI9jkQbZQY2en
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODE5MDExNiBTYWx0ZWRfX21zjQIaUKshb
+ xB1JKxuvvSvgJHgQvdwca4N0Zb2ErBT96w43BiH6V/zNJg1YtFE48f8uXowaKStNgbQNWsif2aW
+ lHGeKdzfLIxt+Wau/r6M8u3P/kQQPe/Fhgum/A47qy7u28sY092jfiiq2IXNoLEh77QGL8yCZVr
+ pnMzDK9I4o8TWg+kviz25YDglS431B61F5IqmNq4iNzS41YinRZ5aABzLVB1eM7mg6vIZAsyl/c
+ YAH7mZPmjpfnlbL1RsMXLt9nZ9nsEN6M0eLkIIed217ssvsBluSEZFa0Pkfx2KRTRdsABWHnWhV
+ pGOxds9/6xxl+EA5plfVLqCpdT5RKrsL6hKVo8Lw7cie1atiWQveMGZCVPhUtYI27S9B83X0pE7
+ f6cPl4bYdIQQLIZ6jfDZyJqFTKnl9TQTskL0J9RmPQqTFkg6y4tMO0EqKYibKhJ7kuOH2Z44Vsm
+ 5IapzzQ3ynY9ax2NPtg==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODE5MDExNiBTYWx0ZWRfX5ci7sl2YKu+f
+ sQVelrHH2kEOPiqq+8Q2jThbgbGMVgrcdZVg41TP+poces1TWw8VGsRR0ykXyK5CedjxqzoiZkm
+ Rv6Clw2cDY9Nn7tUQhlcphwHBL0CGKs=
+X-Authority-Analysis: v=2.4 cv=fvfsol4f c=1 sm=1 tr=0 ts=6a85c390 cx=c_pps
+ a=cmESyDAEBpBGqyK7t0alAg==:117 a=qIqPzopyQqEoCwq43hjx9A==:17
+ a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
+ a=4pKe--ygYk9DO-BB_LoA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+ a=1OuFwYUASf3TG4hYMiVC:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-08-19_04,2026-08-19_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ phishscore=0 clxscore=1015 impostorscore=0 malwarescore=0 lowpriorityscore=0
+ bulkscore=0 spamscore=0 priorityscore=1501 suspectscore=0 adultscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608190116
 
 
-Best regards,
-Krzysztof
+On 8/19/2026 5:23 PM, Konrad Dybcio wrote:
+> On 8/11/26 2:34 PM, Kathiravan Thirumoorthy wrote:
+>> Update the IPQ5424 LLCC slice configuration table to give the PPE
+>> and Wi-Fi datapaths dedicated slices.
+>>
+>> Assign slice IDs 1 and 5 to the PPE RX descriptor and RX fill use cases,
+>> slice IDs 6 and 7 to the Wi-Fi radios connected over PCIe, and slice ID
+>> 2 to the CPU subsystem. Adjust the corresponding capacities, priorities,
+>> and way masks for these consumers.
+>>
+>> Having the dedicated slice configuration for each of these use cases helps
+>> to improve the networking throughput by more than 1 Gbps.
+>>
+>> Rename the usecase IDs for slice IDs 1 and 2 because LLCC_CPUSS and
+>> LLCC_VIDSC0 do not describe the actual users of those slices.
+> This reiterates the diff, but doesn't mention the actual reason for this
+> change (updated recommendations from the hardware team)
+
+These slice assignments are based on recommendations from our 
+performance team, following throughput measurements on IPQ5424 — not 
+from a hardware team. Please let me know if I'm missing something here.
+
+>
+> Konrad
