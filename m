@@ -1,230 +1,521 @@
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3AF9437D12E
-	for <linux-arm-msm@vger.kernel.org>; Thu, 20 Aug 2026 18:38:16 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 33AAE397695
+	for <linux-arm-msm@vger.kernel.org>; Thu, 20 Aug 2026 18:38:21 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787251098; cv=none; b=pnGE91tPQ8cEoDG9RY4w2LR0fO+hAdAXwraQJb9WihWSl8OCtCHuiZa2H94LtrLxznCwVMUF+j0AdYq9bFiGTBN/V42iUB/DhtqtFUGXZ03/qfTIA7qvqaOvasyhw2PqFYYhC0HSJH6wKF4d6Y+YLHQxYJ9VwABpaGcTG7AEwJA=
+	t=1787251103; cv=none; b=qYGozedNxROyHDAAPQrEC5J5yIEeK6FkJrZYzsA8x8Fc80Fid6dNGYqdobpfjxy/s5BaI3aHNVMBwVXbqKem3r74O8f+qyCKQrHkVLRkCJ3HW0VHy7bFBp541R+DVN9e3IqRs+C3rm/lyr/qIKrwUPEGm/FCTtcPw1o250TPnBE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787251098; c=relaxed/simple;
-	bh=fQ5f3+9GI85NgNrSAZm13wfXn7vkIjjblxUZUpisIjY=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=oTLhfJiUoMnznumDxtQE6GPY8CgTQg8okc5meCY34e6MC8KFCwWHxPHwA38bNslAyq838BD0D6sVOpJcFKx+bD9APCiDRzYdxdMy8eNyGKVSlRwP1S/pPYN0oivNNGgqqXO6tAPPXPTNGTefRk5hfsjJx+UPm6+zp2T0ss5usvg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=H3VpsG3y; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=ECAHNbMv; arc=none smtp.client-ip=205.220.168.131
+	s=arc-20240116; t=1787251103; c=relaxed/simple;
+	bh=cEF4bRKLrqqiBUyb62B212F6bXgMFPyo3HDQScv7ZBw=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=EJLqPPOTQJ0cYR3bntoIsMc8V40GVsn/uenL5gHpvY4FJdx1l/QqjkJSPS4N8VuI/mGEDE6tmdatJq+O+mwpCDNQXU9uHld+8ELLfj4V1p3R06u49r4xg0paDxhUNOt0Jc0kDWm66L0JkuyihohwyWtAfTwFUjHIU2DVPxfmgVY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=lYhddFJj; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=QEhyYoIL; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="H3VpsG3y";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="ECAHNbMv"
-Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67KIJ5Li3259550
-	for <linux-arm-msm@vger.kernel.org>; Thu, 20 Aug 2026 18:38:15 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="lYhddFJj";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="QEhyYoIL"
+Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67KIJ9Xn572283
+	for <linux-arm-msm@vger.kernel.org>; Thu, 20 Aug 2026 18:38:21 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-type:date:from:in-reply-to:message-id:mime-version
-	:references:subject:to; s=qcppdkim1; bh=qc+7njUReQUFZe7+fYwWzGrp
-	ycZ78k0Mq9dJrYEsPJ0=; b=H3VpsG3yyz4jelTLI/7tvO6YKF+p2D3dbsBWlyk4
-	XT49xseBZPbYKsCp30ZDi+zFWxU+47EcX+BzcaRJwFYN4tQx8QK+xgIvjSPeRUni
-	WaG/9xVlxBC7cxB2udAeWxL0ZG4S3Ur3I/S2SDax5yoQnk6QMPwKi8kBaaEBoOU3
-	UBuhVndgannwJNTIAlBiSPEnASmDBM92Fe6fjhgWZ2AIaeEdT1EeDrZuuSNRRX4a
-	MAw2KJvGjRO4bRSTAKNs7KBsgoRSMHFqBJ2TWYKAwHjJ6zwkx8eUToyL6C/8FBQe
-	aSVZ89PtNidI/ftTeMncRxffBT+Ou0h+YXWvXT8j503rNQ==
-Received: from mail-qt1-f198.google.com (mail-qt1-f198.google.com [209.85.160.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g5ytca8s5-1
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	kmzYg3MbcxJTU7gon1FozBvw0txqHCaP3JpjklH/fhg=; b=lYhddFJjckQqcBWt
+	1JhSuihi4y+N+Fh+Ml6JcyO3+ILkOf1Dyt1hwM+QDbon0YINHUjuhgCoL8EOaY39
+	LM1a7xCL4JyGEazHqcIyGa6jvEDtaYqgussMlx6rqLG1oorBw7QAsV5+ClCqDJhT
+	xvPqh1NvVngcWtHQyb5v/phUrzUzOYi3NimM06n5YoLBvtfPQ2LsWOJ/axQuUnFl
+	06RlSxNOem2RBwB/Vy4JpIYzriTS1Yx8KPu8XBdtzlBPUlyUn2XAJp0Kk7YHS3ym
+	d7UOdWE/89rwAcX6ht3B3d5cJItb8qzSY/bI0Y1VuuIQzpz47GZX57JBxKN3z2qr
+	vWNzkg==
+Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com [209.85.222.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g5xgcam0w-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Thu, 20 Aug 2026 18:38:15 +0000 (GMT)
-Received: by mail-qt1-f198.google.com with SMTP id d75a77b69052e-52ce64c41efso2115861cf.3
-        for <linux-arm-msm@vger.kernel.org>; Thu, 20 Aug 2026 11:38:15 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 20 Aug 2026 18:38:21 +0000 (GMT)
+Received: by mail-qk1-f197.google.com with SMTP id af79cd13be357-92e5e38fbc5so14703185a.2
+        for <linux-arm-msm@vger.kernel.org>; Thu, 20 Aug 2026 11:38:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1787251094; x=1787855894; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=qc+7njUReQUFZe7+fYwWzGrpycZ78k0Mq9dJrYEsPJ0=;
-        b=ECAHNbMvbeYWYAvH3edTwPIepF9xEXaM3zsnCOt+u9fcZRfBD4Qz7I0cysNXbqniJr
-         GrJcxB3SkCbmVEu4uUKeXuzO203q9dEckhIJLfcNhWLjMYpCfASGwhQ1gFtcm3bQhIaU
-         6dImfH0tdukhpy0C4ELce/nzYxmhN3aOUO1DrTmw8qzb8K4xnrhv3wtfqMEA3myhHcdm
-         YsFZ+hDg/+miKHMW4VoFQzrtNGBS0bHWM/00ymRHdAVE35R/jk/5KYGSNGJ5m7Q7NxEo
-         gYJGoA8TiLyqw58W9NwneMJpPkI0+7+8+boQGILucmajrffvKcn2UMFw9/lATD+j2Mfo
-         Lpxw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787251094; x=1787855894;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+        d=oss.qualcomm.com; s=google; t=1787251100; x=1787855900; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=qc+7njUReQUFZe7+fYwWzGrpycZ78k0Mq9dJrYEsPJ0=;
-        b=n48xxK7Cx2mH6lZr28qAsIxc09+z78QfloDE7kn3er/YVofa4ydVXDoEczfRedZRgo
-         AqEx7vJvLVnwxLZlsXbo4KM9F9MfGxEdUUqclGg+AcQnGxVeEYLb+Vg1swnW8sLSn5tS
-         CXcnuc8n/eQKXTZmcsC1CHNW/FK13osinxohVNp0MinD97aFGVX5WZDM4Oj/gaxvnnmC
-         QyHjGMAJc2HZJtDG5+ST9udrW5ADqv8xPwPYc7pyY5nR/1PrYclQV+fTo1wp2a63rNpZ
-         FJx73wwAn+6r36LE2gH3xsYorqbQF7VMhO2PPNQoJ4nn4wdLj+juY12USMbaMuhXbfcN
-         VxmA==
-X-Forwarded-Encrypted: i=1; AHgh+Rq9blvlhge4kQt1K1mX4M0swpH7o/HDmIG0koKfu2Td26Bue1wTDYmSaUqz7Zq0TrEhoRoNkfuZt2G4gm1Q@vger.kernel.org
-X-Gm-Message-State: AOJu0Yzz9RMlFGZLtBEYMmvKupYjBzzqEKKt1xPJcQU2diYj5VMd9cZr
-	hnDykNj+wEG7/cRiEGdhyeEf/jw5GH2GHgangXSyhJgESLZ17sFW4wOYyaHgJvRbKFHBhE9Qke1
-	MfNXnlLzghsQZ25CUtSuwC8AJe7CMan+ZwLCoge4scuzxtsM+e15A1WceI5rvlfbnwlEJ
-X-Gm-Gg: AR+sD125ickgJRnjOVnRkWxJGRkFZ0PHglPXkislM+m7kpaf36HYjEU7bBKDo+7hayR
-	WqOv0L37fDlvZeuJuoW5iAu42+m0P/eaiJ58nZ2qJpEx3ZeOFZ5t4Av4SOSzIwwBcRaVKLvidL2
-	tZx3KwK+is61SlBWZ8KjA/qlcvLqIPHUA9t21Tqy5cFbpjMTcJOQaNOL4HyMGKiNHbB35pBwHVZ
-	kgJnLHiCSqlszB/k75g/QmRUAwnPvAROe9bVVTLc7/2jG45oX87XioTuJXh0FTrAUbKFROt5tPE
-	oeuAa3u1NNnrzND8rs54HsHSK3Cn+mZEgyn9YXior27Cv7gcysFo0IiXCkLLbO4ExUQMtAPbl+3
-	sSr0vKlsyojVK85Q=
-X-Received: by 2002:ac8:5a46:0:b0:51c:f8f:13e with SMTP id d75a77b69052e-52df5a93f45mr2744211cf.40.1787251094288;
-        Thu, 20 Aug 2026 11:38:14 -0700 (PDT)
-X-Received: by 2002:ac8:5a46:0:b0:51c:f8f:13e with SMTP id d75a77b69052e-52df5a93f45mr2743681cf.40.1787251093676;
-        Thu, 20 Aug 2026 11:38:13 -0700 (PDT)
-Received: from oss.qualcomm.com ([188.27.161.240])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-499b29e19f2sm53748425e9.4.2026.08.20.11.38.11
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 20 Aug 2026 11:38:12 -0700 (PDT)
-Date: Thu, 20 Aug 2026 21:38:10 +0300
-From: Abel Vesa <abel.vesa@oss.qualcomm.com>
-To: Akash Kumar <akash.kumar@oss.qualcomm.com>
-Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
-        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>, linux-usb@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-        devicetree@vger.kernel.org
-Subject: Re: [PATCH 3/3] arm64: dts: qcom: shikra: Wire up usb-role-switch
- for USB Type-C ports
-Message-ID: <7ahrj4udyuebngj3dqox643ou3byb23qkbf5yfcdqk2anvyo6e@tjqu2igyvwqh>
-References: <20260820145036.2035641-1-akash.kumar@oss.qualcomm.com>
- <20260820145036.2035641-4-akash.kumar@oss.qualcomm.com>
+        bh=kmzYg3MbcxJTU7gon1FozBvw0txqHCaP3JpjklH/fhg=;
+        b=QEhyYoILMJrNAt71OZrYbBLVMK7EvtkP94SB/f/Ht/ODywqJyyRlgQWIBT7v7pHNXh
+         eoZ8Q/f6KySQBahjQhgDnBilFIfcg44EcEUhNWLFhAaXACZ+9XVy9E5BEmUQEU5poGPh
+         Ajt/ewzRkQ/2RG7LjruZ7lqctHIE3qs11QPwoowtKfhM940oGQqEWSlLNDGgBTOapvh2
+         q3xs93bxQIdFhHT/E1ORGYzW7iQ4QVrH6XZoD9WD2J29auP5DIroVix9Gzp+9mHlYZWN
+         9uHhMZblauI6nX4PBPb1F6kw1mmOtl4LqsEZLe368UpymGyPHITbDlzLh6AoxZaZPpPe
+         dvzQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1787251100; x=1787855900;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=kmzYg3MbcxJTU7gon1FozBvw0txqHCaP3JpjklH/fhg=;
+        b=BQ2/F/Ha2qGu3Vt7hCHyIIrVt4ZlsMAVyRv28mestP3v7kV0//OO9GqpF156TUSocy
+         vjzsTEKhOKGo5vgj9Q2IuzKPKwdByQUWSqDMwLMpSJepVy0wPxNLOW9gyxQuxT2JF3eX
+         7rwp8Wxct/SNB8fHkqYJimVKuOTycOD3ics2vWNvrPUr8yYxJcTCiFhPApGagHKFuEQ1
+         kj+ElAu5HtusKx1XYkersxwZ9Les2Fir4W31oaTEvowU0TgjJg49kntMtsFNLyJwagsi
+         JXZPIY62tyhA+LxNLWVwzx6OZOoapkN+rG1AXUg1KQyu+fJ6iyEOwhFd9RFoEx2VdCeA
+         Oecg==
+X-Forwarded-Encrypted: i=1; AHgh+RoyR16+jOnRFK+hLT0tHDhzWRf1XZh26ljk3aeKDwi6nO9YsQYDHmXUKRrrnuMD7Ai/mS/0brmNIJ+NPBkh@vger.kernel.org
+X-Gm-Message-State: AOJu0YwL+wcoV83uhP3iw8g7e8tcuNjRRuVptevJh2lfr0Hc6llhl69X
+	xj5mWy581ZnAY74unUrAlMUtPhx3tUAKlt8T83aLuYLlk+iPkY3k0GQpOAboy1YM0d6YnaXF6PK
+	ayMfRy/lBKWosjm57Hw1MZBpJ+TsNDAJf6SC2YN96WoD2J4BIF9g5aLUSkwsBjgcHSd27
+X-Gm-Gg: AR+sD12/ejjeXkayrJXei1qfhNLS37epHWlvRq2wiwgFP3Lfdk/CPhnlpqmLcJ41t33
+	/eCy67X0RhZaXK/GZxToNkA5/IgOvj4J1EWND8EzEski2SsNb6sT1eODhPSpcqGFN89mA+d9e6f
+	Mi3XTyUnY1coXhu4AWS5aSQi0I5sKsfXUreeySi8Lh8JKIyCqA6xGKHG4XN+cU9Bq2EEBBI3/Ur
+	l+y2EE+kZkS+GUlSBBJCm7T6j0rAqqOVsNz2osZKbHjusYqMzhN6t+SV6xQ2FDaCZWX3FoM/vwB
+	zJR2N05NH45q2e/iVxm0j/Hr3pj1DBZKzPHSedpNyqIVr1OY0Ya6g2z21JCX3sFH28JMYV9HaSR
+	BT4+nx9+xON54MfeHD4QoRtlYJf5PwHiT
+X-Received: by 2002:a05:620a:2983:b0:937:260b:4d8c with SMTP id af79cd13be357-937395747cemr6357585a.33.1787251099940;
+        Thu, 20 Aug 2026 11:38:19 -0700 (PDT)
+X-Received: by 2002:a05:620a:2983:b0:937:260b:4d8c with SMTP id af79cd13be357-937395747cemr6353785a.33.1787251099403;
+        Thu, 20 Aug 2026 11:38:19 -0700 (PDT)
+Received: from [192.168.1.73] ([92.247.57.178])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-499b90d297esm525945e9.2.2026.08.20.11.38.17
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 20 Aug 2026 11:38:18 -0700 (PDT)
+Message-ID: <8997090d-1749-42cd-b9ae-b9c42f9e263d@oss.qualcomm.com>
+Date: Thu, 20 Aug 2026 21:38:16 +0300
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260820145036.2035641-4-akash.kumar@oss.qualcomm.com>
-X-Authority-Analysis: v=2.4 cv=OqZ/DS/t c=1 sm=1 tr=0 ts=6a874997 cx=c_pps
- a=mPf7EqFMSY9/WdsSgAYMbA==:117 a=wUpz7uCjLrEXi01cjX+DLw==:17
- a=kj9zAlcOel0A:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
- a=EUspDBNiAAAA:8 a=Ba2XhVvwmFK6ezhSYYYA:9 a=CjuIK1q_8ugA:10
- a=dawVfQjAaf238kedN5IG:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODIwMDE0MCBTYWx0ZWRfX8/OmYPw+/POK
- Xq/1v9ObJDOq7/QM0fniwzEUDK1qsJo6Mt6ZQpAmbctpD9tglQObgvAbM2d6sTZOtAf99edV3uj
- g775dW3KZz75b9+iTa7FqH5uu4U+3oCzOTlckPTxhiQPjs1PjRRXlsW/1j7dtzF9gygFL28qLZK
- FHl9/wGy/NpBnSXvkpw1qx9us0/Cr4XDyHoBUUiD/8c3IQ8Pu1o45GtASfe6zlNBuKq4Kn1LNGg
- iogPnHtHjlLLLPfVrXwrjaV1hbeK+PFhwnT/QLLwNDV2qYmB0hBftJPECB/gePzuSAJcqHwdUhH
- RDZwhVjIc/bvTBiNFq9+KQMtjtTrgDxcnIhZqKjlykV8Cz0pn6GaF4HklDIZR4QgzWEiQJCQ+rf
- 2DxZtN0lNdZXh3AvQgHGWcsIU0dhZH89ECvWztVzPrk6nfWvk9hUe5Y+JJGHphz8pCZv1YC9YAc
- Sd+m12XJ1hnPDyL793g==
-X-Proofpoint-ORIG-GUID: UCmJHg13du31KVDCyl_6wGh-ff6cntQG
-X-Proofpoint-GUID: UCmJHg13du31KVDCyl_6wGh-ff6cntQG
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODIwMDE0MCBTYWx0ZWRfXwzfQlZdcOSY8
- RjUOBF/KLGFY6CjQLgleAfKEi6q2fJXEVc5fGI1AcVR2FUsvRX1vxiGLrK5QpeFRHAlSdT2JMdi
- UAwpGYvTiNaqIY3hWg8D+z5XaOqbeEM=
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v6 2/3] media: qcom: jpeg: Add Qualcomm JPEG V4L2 encoder
+To: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+Cc: linux-media@vger.kernel.org, bod@kernel.org, mchehab@kernel.org,
+        robh@kernel.org, krzk+dt@kernel.org, conor+dt@kernel.org,
+        andersson@kernel.org, konradybcio@kernel.org, loic.poulain@linaro.org,
+        linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+References: <20260730150524.2659577-1-atanas.filipov@oss.qualcomm.com>
+ <20260730150524.2659577-3-atanas.filipov@oss.qualcomm.com>
+ <vz6a2qugu7kkci3fcdkd236axr3ur33ghrgoopbrz3isueml45@b4frwo4l2hfh>
+Content-Language: en-US
+From: Atanas Filipov <atanas.filipov@oss.qualcomm.com>
+In-Reply-To: <vz6a2qugu7kkci3fcdkd236axr3ur33ghrgoopbrz3isueml45@b4frwo4l2hfh>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Authority-Analysis: v=2.4 cv=GPM41ONK c=1 sm=1 tr=0 ts=6a87499d cx=c_pps
+ a=50t2pK5VMbmlHzFWWp8p/g==:117 a=ybD9qRDIDfZaXNPQ7Ca20A==:17
+ a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22
+ a=SSmOFEACAAAA:8 a=EUspDBNiAAAA:8 a=hVmRQhEflVXrj2loCmwA:9 a=QEXdDO2ut3YA:10
+ a=IoWCM6iH3mJn3m4BftBB:22
+X-Proofpoint-ORIG-GUID: toMmxWn-2EgqxKIOMp0NzOqTMVgxtMm2
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODIwMDE0MCBTYWx0ZWRfX9UjHV0T7+MKB
+ 1a5sDb3lx2t/JfkTr8YjHCOm/ThiJlDi/Ago2rDnugA/cqI/oeGPLIyl8zOO/tmRynhLDf44aL/
+ DwYvJ7v08baCbuE7BkSYrboqlBjBFQ5Q8GaTqC/pJDrwtpLsF//0colM5LSAOkjuLe4yqjtP5/U
+ Dfej6ty0SThDC6NBaAliDevPi+3JXKLjA0LgUXK6zduY06FiCYgHCoafkCrCGePX5O3hDU0BLS1
+ KCu8TzAhuhJA5DjMWelKvDDs0UDfksFcRihh+XPYP8gw+bfHtup5//i46Cs2rV/NxnYTvn/5YIm
+ Zv1l8che50hIwhnuGJKIk1EhPNqfQ8Or3WhfOT4+ndSAKR4zU/WIbMGt66P229/aDSzG7DWQGus
+ U/t1p9H8lOT+1E+2/kC5MUV2xAIT+DHNX05PTmkxo+hV60TPl97VXx+DEM5g7Z2KV1aVoBAew3X
+ w/qPAXge6nBmCkBv6aA==
+X-Proofpoint-GUID: toMmxWn-2EgqxKIOMp0NzOqTMVgxtMm2
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODIwMDE0MCBTYWx0ZWRfXzjpQ3J91p/Sw
+ 9CEq+GiOqdc8qFVLQJbWgy+0XSKIEl9bHFviBbFWxTM21O6inR2fOjDJ/ETMUzTm5cblNHbOnbo
+ 54DSEQcvJRt1YZX3b5z8OXZqpw5k9rM=
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-08-20_01,2026-08-20_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 spamscore=0 malwarescore=0 clxscore=1015 adultscore=0
- bulkscore=0 suspectscore=0 lowpriorityscore=0 priorityscore=1501
- impostorscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
- definitions=main-2608200140
+ bulkscore=0 priorityscore=1501 spamscore=0 clxscore=1015 impostorscore=0
+ lowpriorityscore=0 suspectscore=0 phishscore=0 malwarescore=0 adultscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608200140
 
-On 26-08-20 20:17:38, Akash Kumar wrote:
-> On Shikra CQS/CQM platforms, usb-role-switch is handled by PM4125 on
-> the primary Type-C port and Cypress PD controller CYPD6129 on the
-> second Type-C port. On Shikra IQS platform, usb-role-switch is
-> handled by Cypress PD controller CYPD6129 on both Type-C ports.
+On 7/30/2026 6:57 PM, Dmitry Baryshkov wrote:
+> On Thu, Jul 30, 2026 at 06:05:23PM +0300, Atanas Filipov wrote:
+>> Add a Qualcomm JPEG encoder driver implemented on top of the
+>> V4L2 mem2mem framework.
+>>
+>> The driver wires vb2 queue handling, format negotiation, JPEG header
+>> handling, interrupt-driven job completion, and runtime PM/clock/ICC
+>> integration for the standalone JPEG encode hardware block.
+>>
+>> This series targets SM8250 (Kona) platforms.
+>>
+>> Signed-off-by: Atanas Filipov <atanas.filipov@oss.qualcomm.com>
+>> ---
 > 
-> Add the CYPD6129 typec node under i2c3, wire its connector endpoints
-> to the corresponding DWC3 controller ports via remote-endpoint
-> phandles, and switch the associated USB controllers to OTG mode so
-> role switching can take effect.
+>> +static int qcom_jpeg_clk_on(struct qcom_jenc_dev *jenc)
+>> +{
+>> +	struct dev_pm_opp *opp;
+>> +	int rc;
+>> +
+>> +	rc = clk_bulk_prepare_enable(jenc->num_clks, jenc->clks);
+>> +	if (rc)
+>> +		return rc;
+>> +
+>> +	/* setup the OPP according to the calculated optimal frequency */
+>> +	opp = dev_pm_opp_find_freq_ceil_indexed(jenc->dev, &jenc->opt_freq, JPEG_OPP_CORE_IDX);
 > 
-> Signed-off-by: Akash Kumar <akash.kumar@oss.qualcomm.com>
-> ---
->  arch/arm64/boot/dts/qcom/shikra-cqm-evk.dts |  64 +++++++++++-
->  arch/arm64/boot/dts/qcom/shikra-cqs-evk.dts |  64 +++++++++++-
->  arch/arm64/boot/dts/qcom/shikra-iqs-evk.dts | 108 +++++++++++++++++++-
->  3 files changed, 223 insertions(+), 13 deletions(-)
+> clk_bulk_prepare_enable starts ticking on a certain freq. Why does it
+> happen _before_ setting the performance points (including voltage rails)
+> which those clocks require?
 > 
-> diff --git a/arch/arm64/boot/dts/qcom/shikra-cqm-evk.dts b/arch/arm64/boot/dts/qcom/shikra-cqm-evk.dts
-> index 3866ab8b0faa..c92ab8e6cc0c 100644
-> --- a/arch/arm64/boot/dts/qcom/shikra-cqm-evk.dts
-> +++ b/arch/arm64/boot/dts/qcom/shikra-cqm-evk.dts
-> @@ -42,6 +42,43 @@ &remoteproc_mpss {
->  	status = "okay";
->  };
->  
-> +&i2c3 {
-> +	status = "okay";
-> +
-> +	typec@40 {
-> +		compatible = "cypress,cypd6129";
-> +		reg = <0x40>;
-> +		interrupts-extended = <&tlmm 136 IRQ_TYPE_LEVEL_LOW>;
-> +		pinctrl-0 = <&usb0_intr_state>;
-> +		pinctrl-names = "default";
-> +
-> +		#address-cells = <1>;
-> +		#size-cells = <0>;
-> +
-> +		ccg_typec_con0: connector@0 {
-> +			compatible = "usb-c-connector";
-> +			reg = <0>;
-> +			label = "USB-C";
-> +			data-role = "dual";
-> +			power-role = "dual";
-> +			wakeup-source;
+>> +	if (IS_ERR(opp)) {
+>> +		rc = PTR_ERR(opp);
+>> +		goto err_clk_disable;
+>> +	}
+>> +
+>> +	rc = dev_pm_opp_set_opp(jenc->dev, opp);
+>> +	dev_pm_opp_put(opp);
+>> +	if (rc)
+>> +		goto err_clk_disable;
+>> +
+>> +	return 0;
+>> +
+>> +err_clk_disable:
+>> +	clk_bulk_disable_unprepare(jenc->num_clks, jenc->clks);
+>> +
+>> +	return rc;
+>> +}
+>> +
+>> +static void qcom_jpeg_clk_off(struct qcom_jenc_dev *jenc)
+>> +{
+>> +	dev_pm_opp_set_opp(jenc->dev, NULL);
+>> +	clk_bulk_disable_unprepare(jenc->num_clks, jenc->clks);
+>> +	jenc->opt_freq = jenc->max_freq;
+>> +}
+>> +
+> 
+> [...]
+> 
+>> diff --git a/drivers/media/platform/qcom/jpeg/qcom_jenc_hdr.c b/drivers/media/platform/qcom/jpeg/qcom_jenc_hdr.c
+>> new file mode 100644
+>> index 000000000000..c9959518c64d
+>> --- /dev/null
+>> +++ b/drivers/media/platform/qcom/jpeg/qcom_jenc_hdr.c
+>> @@ -0,0 +1,331 @@
+>> +// SPDX-License-Identifier: GPL-2.0-only
+>> +/*
+>> + * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+>> + */
+>> +
+>> +#include <linux/errno.h>
+>> +#include <linux/string.h>
+>> +
+>> +#include <media/jpeg.h>
+>> +#include <media/v4l2-jpeg.h>
+>> +
+>> +#include "qcom_jenc_dev.h"
+>> +#include "qcom_jenc_hdr.h"
+>> +
+>> +/*
+>> + * The elements defined in this header are specified
+>> + * in the ITU-T T.81 / JPEG specification.
+>> + *
+>> + * https://www.w3.org/Graphics/JPEG/itu-t81.pdf
+>> + */
+>> +
+>> +#define JFIF_HEADER_WIDTH_OFFS		0x07
+>> +#define JFIF_HEADER_HEIGHT_OFFS		0x05
+> 
+> And you've ignored feedback here. PLEASE move all standard-related
+> defines and code to the common helpers. Are there any other drivers
+> which construct JPEG files manually? If not, you are lucky and you can
+> just push you code. If they are, find a way to unify the codebase.
+> 
+> At the very least, it would make you split this commit into at least
+> two, making them more readable.
+> 
+>> +#define JFIF_APP0_LENGTH_HI		0x00
+>> +#define JFIF_APP0_LENGTH_LO		0x10
+>> +#define JFIF_IDENT_TERM		0x00
+>> +#define JFIF_VERSION_MAJOR		0x01
+>> +#define JFIF_VERSION_MINOR		0x01
+>> +#define JFIF_DENSITY_HI			0x00
+>> +#define JFIF_DENSITY_LO			0x01
+>> +#define JFIF_THUMBNAIL_SIZE		0x00
+>> +
+>> +#define JPEG_SEG_LEN_HI			0x00
+>> +#define JPEG_LEN_DQT_LUMA_LO		0x43
+>> +#define JPEG_LEN_DQT_CHROMA_LO		0x43
+>> +#define JPEG_LEN_SOF0_MONO_LO		0x0b
+>> +#define JPEG_LEN_SOF0_COLOR_LO		0x11
+>> +#define JPEG_LEN_DHT_MONO_LO		0xd2
+>> +#define JPEG_LEN_DHT_COLOR_HI		0x01
+>> +#define JPEG_LEN_DHT_COLOR_LO		0xa2
+>> +#define JPEG_LEN_SOS_MONO_LO		0x08
+>> +#define JPEG_LEN_SOS_COLOR_LO		0x0c
+>> +
+> 
+> [...]
+> 
+>> +
+>> +static inline u32 jpeg_io_read(struct qcom_jenc_dev *jenc, u32 offset)
+>> +{
+>> +	return readl(jenc->jpeg_base + offset);
+>> +}
+> 
+> Ugh.
+> 
+>> +
+>> +static inline void jpeg_io_write(struct qcom_jenc_dev *jenc, u32 offset, u32 value)
+>> +{
+>> +	writel(value, jenc->jpeg_base + offset);
+>> +}
+>> +
+>> +/*
+>> + * Runtime bitfield helpers (for non-constant masks).
+> 
+> Why are the masks non-constant? They typically are, for register access.
+> Use FIELD_GET and FIELD_PREP.
+> 
+>> + *
+>> + * Requirements:
+>> + *  - mask must be non-zero
+>> + *  - mask must be contiguous (e.g. 0x7u << n)
+>> + */
+>> +
+>> +static inline u32 jpeg_bits_get(u32 mask, u32 val)
+>> +{
+>> +	/* __ffs(0) is undefined; fail-safe on invalid masks. */
+>> +	if (WARN_ON_ONCE(!mask))
+>> +		return 0;
+>> +
+>> +	return (val & mask) >> __ffs(mask);
+>> +}
+>> +
+>> +static inline u32 jpeg_bits_set(u32 mask, u32 val)
+>> +{
+>> +	/* __ffs(0) is undefined; fail-safe on invalid masks. */
+>> +	if (WARN_ON_ONCE(!mask))
+>> +		return 0;
+>> +
+>> +	return (val << __ffs(mask)) & mask;
+>> +}
+>> +
+>> +static inline u32 jpeg_rd_bits(struct qcom_jenc_dev *jenc, u32 offs, u32 mask)
+>> +{
+>> +	u32 reg = jpeg_io_read(jenc, offs);
+>> +
+>> +	return jpeg_bits_get(mask, reg);
+>> +}
+>> +
+>> +/*
+>> + * Read-modify-write (for R/W registers)
+>> + */
+>> +static inline void jpeg_rw_bits(struct qcom_jenc_dev *jenc, u32 offs, u32 mask, u32 val)
+>> +{
+>> +	u32 reg = jpeg_io_read(jenc, offs);
+>> +
+>> +	reg &= ~mask;
+>> +	reg |= jpeg_bits_set(mask, val);
+>> +
+>> +	jpeg_io_write(jenc, offs, reg);
+> 
+> And if you switch to regmap, you'd have gotten a nice function for this
+> too.
+> 
+>> +}
+>> +
+>> +/*
+>> + * Write-only variant (for write only registers)
+>> + */
+>> +static inline void jpeg_wo_bits(struct qcom_jenc_dev *jenc, u32 offs, u32 mask, u32 val)
+>> +{
+>> +	jpeg_io_write(jenc, offs, jpeg_bits_set(mask, val));
+> 
+> Ugh.
+> 
+>> +}
+>> +
+>> +
+> 
+> [...]
+> 
+>> +const struct qcom_jpeg_hw_ops qcom_jpeg_default_ops = {
+>> +	.hw_get_cap	= op_jpeg_get_hw_caps,
+>> +	.hw_acquire	= op_jpeg_acquire,
+>> +	.hw_release	= op_jpeg_release,
+>> +	.hw_prepare	= op_jpeg_prepare,
+>> +	.get_queue	= op_jpeg_get_buff_queue,
+>> +	.queue_setup	= op_jpeg_queue_setup,
+>> +	.src_fmt_update	= op_jpeg_src_fmt_update,
+>> +	.buf_prepare	= op_jpeg_buffer_prepare,
+>> +	.process_exec	= op_jpeg_process_exec,
+>> +	.hw_irq_top	= op_jpeg_irq_top,
+>> +	.hw_irq_bot	= op_jpeg_irq_bot
+> 
+> Function names should start with qcom_jpeg_
+> 
+>> +};
+>> diff --git a/drivers/media/platform/qcom/jpeg/qcom_jenc_ops.h b/drivers/media/platform/qcom/jpeg/qcom_jenc_ops.h
+>> new file mode 100644
+>> index 000000000000..5a64e33a28b0
+>> --- /dev/null
+>> +++ b/drivers/media/platform/qcom/jpeg/qcom_jenc_ops.h
+>> @@ -0,0 +1,52 @@
+>> +/* SPDX-License-Identifier: GPL-2.0-only */
+>> +/*
+>> + * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+>> + */
+>> +
+>> +#ifndef QCOM_JENC_OPS_H
+>> +#define QCOM_JENC_OPS_H
+>> +
+>> +#include <linux/device.h>
+>> +#include <linux/types.h>
+>> +#include <media/videobuf2-core.h>
+>> +
+>> +#include "qcom_jenc_dev.h"
+>> +
+>> +/*
+>> + * JENC encoder hardware operations.
+>> + */
+>> +struct qcom_jpeg_hw_ops {
+>> +	void (*hw_get_cap)
+>> +		(struct qcom_jenc_dev *jenc_dev, u32 *hw_caps);
+>> +
+>> +	int (*hw_acquire)
+>> +		(struct jenc_context *ectx, struct vb2_queue *queue);
+>> +
+>> +	int (*hw_release)
+>> +		(struct jenc_context *ectx, struct vb2_queue *queue);
+>> +
+>> +	int (*hw_prepare)
+>> +		(struct qcom_jenc_dev *jenc);
+>> +
+>> +	struct qcom_jenc_queue * (*get_queue)
+>> +		(struct jenc_context *ectx, enum qcom_enc_qid id);
+>> +
+>> +	int (*queue_setup)
+>> +		(struct jenc_context *ectx, enum qcom_enc_qid id);
+>> +
+>> +	int (*src_fmt_update)
+>> +		(struct jenc_context *ectx, u32 old_fourcc, u32 new_fourcc);
+>> +
+>> +	int (*buf_prepare)
+>> +		(struct jenc_context *ectx, struct vb2_buffer *vb2);
+>> +
+>> +	int (*process_exec)
+>> +		(struct qcom_jenc_dev *jenc, struct jenc_context *ectx, struct vb2_buffer *vb2);
+>> +
+>> +	irqreturn_t (*hw_irq_top)(int irq_num, void *data);
+>> +	irqreturn_t (*hw_irq_bot)(int irq_num, void *data);
+> 
+> How many non-default platforms do you support? Zero?
+> 
+> Drop the call table.
+> 
+>> +};
+>> +
+>> +extern const struct qcom_jpeg_hw_ops qcom_jpeg_default_ops;
+>> +
+>> +#endif /* QCOM_JENC_OPS_H */
+>> diff --git a/drivers/media/platform/qcom/jpeg/qcom_jenc_v420_hw_info.h b/drivers/media/platform/qcom/jpeg/qcom_jenc_v420_hw_info.h
+>> new file mode 100644
+>> index 000000000000..ebf69128cc2b
+>> --- /dev/null
+>> +++ b/drivers/media/platform/qcom/jpeg/qcom_jenc_v420_hw_info.h
+>> @@ -0,0 +1,410 @@
+>> +/* SPDX-License-Identifier: GPL-2.0-only */
+>> +/*
+>> + * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+>> + */
+>> +
+>> +#ifndef QCOM_JENC_V420_HW_INFO_H
+>> +#define QCOM_JENC_V420_HW_INFO_H
+>> +
+>> +#include "qcom_jenc_defs.h"
+>> +
+>> +#define JPEG_V420_HW_VER_STEP_POS 0
+>> +#define JPEG_V420_HW_VER_STEP_MSK \
+>> +	(0xffffu << JPEG_V420_HW_VER_STEP_POS)
+> 
+> No need to define _POS. Use GENMASK to define bitfields.
+> 
+>> +
+>> +#define JPEG_V420_HW_VER_MINOR_POS 16
+>> +#define JPEG_V420_HW_VER_MINOR_MSK \
+>> +	(0x0fffu << JPEG_V420_HW_VER_MINOR_POS)
+>> +
+>> +#define JPEG_V420_HW_VER_MAJOR_POS 28
+>> +#define JPEG_V420_HW_VER_MAJOR_MSK \
+>> +	(0xfu << JPEG_V420_HW_VER_MAJOR_POS)
+>> +
+>> +#define JPEG_V420_HW_CAP_ENCODE_MSK BIT_U32(0)
+>> +#define JPEG_V420_HW_CAP_DECODE_MSK BIT_U32(1)
+>> +
+>> +#define JPEG_V420_HW_CAP_UPSCALE_POS 4
+>> +#define JPEG_V420_HW_CAP_UPSCALE_MSK \
+>> +	(0x7u << JPEG_V420_HW_CAP_UPSCALE_POS)
+>> +
+>> +#define JPEG_V420_HW_CAP_DOWNSCALE_POS 8
+>> +#define JPEG_V420_HW_CAP_DOWNSCALE_MSK \
+>> +	(0x7u << JPEG_V420_HW_CAP_DOWNSCALE_POS)
+>> +
+>> +#define JPEG_V420_RST_CMD_FE_RESET_MSK			BIT_U32(0)
+> 
+> What is wrong with the standard BIT()?
+> 
 
-AFAICT, this fails dtbs_check because it isn't allowed by the
-usb-connector.yaml.
+What's wrong with standart BIT_U32() when dealing with 32-bit registers? 
+Or do you simply like requesting meaningless changes?!
 
-I see you added it in the example the new schema you added. That
-should've failed at dt_bindings_check.
+>> +#define JPEG_V420_RST_CMD_WE_RESET_MSK			BIT_U32(1)
+>> +#define JPEG_V420_RST_CMD_ENCODER_RESET_MSK		BIT_U32(4)
+>> +#define JPEG_V420_RST_CMD_DECODER_RESET_MSK		BIT_U32(5)
+>> +#define JPEG_V420_RST_CMD_BLOCK_FORMATTER_RST_MSK	BIT_U32(6)
+>> +#define JPEG_V420_RST_CMD_SCALE_RESET_MSK		BIT_U32(7)
+>> +#define JPEG_V420_RST_CMD_REGISTER_RESET_MSK		BIT_U32(13)
+>> +#define JPEG_V420_RST_CMD_MISR_RESET_MSK		BIT_U32(16)
+>> +#define JPEG_V420_RST_CMD_CORE_RESET_MSK		BIT_U32(17)
+>> +#define JPEG_V420_RST_CMD_JPEG_V420_DOMAIN_RESET_MSK	BIT_U32(29)
+>> +#define JPEG_V420_RST_CMD_RESET_BYPASS_MSK		BIT_U32(31)
+>> +
+> 
+>> diff --git a/include/uapi/linux/v4l2-controls.h b/include/uapi/linux/v4l2-controls.h
+>> index affec0ab4781..6408d3da29d4 100644
+>> --- a/include/uapi/linux/v4l2-controls.h
+>> +++ b/include/uapi/linux/v4l2-controls.h
+>> @@ -234,6 +234,27 @@ enum v4l2_colorfx {
+>>    */
+>>   #define V4L2_CID_USER_MALI_C55_BASE		(V4L2_CID_USER_BASE + 0x1230)
+>>   
+>> +/* Qualcomm JPEG encoder controls */
+>> +#define V4L2_CID_USER_QCOM_JENC_BASE		(V4L2_CID_USER_BASE + 0x1240)
+> 
+> Separate these to their own commit, making it easier for others to
+> review uAPI additions. How are these being handled by the other drivers?
+> 
+>> +
+>> +/*
+>> + * V4L2_CID_QCOM_JPEG_PERF_LEVEL_AUTO - enable adaptive performance scaling.
+>> + *
+>> + * When set to 1 the driver selects the core clock OPP level based on the
+>> + * encoded frame resolution and fps target. When set to 0 (default) the
+>> + * driver always runs at NOMINAL (highest) OPP level.
+>> + */
+>> +#define V4L2_CID_QCOM_JPEG_PERF_LEVEL_AUTO	(V4L2_CID_USER_QCOM_JENC_BASE + 0)
+>> +
+>> +/*
+>> + * V4L2_CID_QCOM_JPEG_FPS_TARGET - target encode rate in frames per second.
+>> + *
+>> + * Used together with V4L2_CID_QCOM_JPEG_PERF_LEVEL_AUTO to select the lowest
+>> + * OPP level whose throughput is sufficient for the requested frame rate.
+>> + * Has no effect when perf_level_auto is 0. Range: 1-240, default: 30.
+> 
+> I assume 1-240 is only applicable to your driver.
+> 
+>> + */
+>> +#define V4L2_CID_QCOM_JPEG_FPS_TARGET		(V4L2_CID_USER_QCOM_JENC_BASE + 1)
+>> +
+>>   /* MPEG-class control IDs */
+>>   /* The MPEG controls are applicable to all codec controls
+>>    * and the 'MPEG' part of the define is historical */
+>> -- 
+>> 2.34.1
+>>
+> 
 
-Same comment for the other dtes files.
-
-> +
-> +			ports {
-> +				#address-cells = <1>;
-> +				#size-cells = <0>;
-> +
-> +				port@0 {
-> +					reg = <0>;
-> +
-> +					ucsi_ccg_port: endpoint {
-> +						remote-endpoint = <&usb_1_dwc3_hs>;
-> +					};
-> +				};
-> +			};
-> +		};
-
-Where is the second connector?
-
-> +	};
-> +};
-> +
->  &sdhc_1 {
->  	vmmc-supply = <&pm4125_l20>;
->  	vqmmc-supply = <&pm4125_l14>;
-> @@ -58,6 +95,23 @@ &sdhc_1 {
->  	status = "okay";
->  };
->  
-> +&tlmm {
-> +	usb0_intr_state: usb0-intr-state {
-> +		pins = "gpio136";
-> +		function = "gpio";
-> +		drive-strength = <2>;
-> +		bias-pull-up;
-> +	};
-> +};
-> +
-> +&usb_1 {
-> +	/delete-property/ dr_mode;
-
-I don't think this property is actually defined anywhere. I wonder which
-tree is this done on.
