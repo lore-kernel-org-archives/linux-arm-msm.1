@@ -1,62 +1,62 @@
-Received: from mail-pg1-f182.google.com (mail-pg1-f182.google.com [209.85.215.182])
+Received: from mail-pg1-f170.google.com (mail-pg1-f170.google.com [209.85.215.170])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8559841A4F9
-	for <linux-arm-msm@vger.kernel.org>; Thu, 20 Aug 2026 11:04:07 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.215.182
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5D14E41A4F9
+	for <linux-arm-msm@vger.kernel.org>; Thu, 20 Aug 2026 11:04:12 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.215.170
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787223849; cv=none; b=B6l7is+NTC6l3Vhk+t0BZ+3YweuEkovWyYwHVkIMmTNj1eKtM1e9h0a+6N+Hz8QyZdlTl2g+X9XVHTIv3UYIf6cJYilOMr/HiMfh6QxdDaAzFeRur5WddCctCyptezaeLXvyPypkmgzHHMWwqUD1at7WX5zdiPyerZxm6wrhA/Y=
+	t=1787223855; cv=none; b=TWfewd3tBo6s7kZp3JXUSukQBY+2P+YFjSNqRRE3tR3WPOkJzYlTInGVVcu0tz3+FFO/6TfGl5qQV61UatDHFfLO3FkNK8/MR1tBRqPtknmiopHSgQeluI99OK/EMBibCjRmY+/cyQ57x6Hhp08aCGIW23E9DFSkke6Paw01rJU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787223849; c=relaxed/simple;
-	bh=pWoMjTkbFL8fsd9FdyFU+AP43bbp+tOHOCvu0aAZBrw=;
+	s=arc-20240116; t=1787223855; c=relaxed/simple;
+	bh=N28ryJa3YVWA1Cgupj5pKOjeNOpo+ptWos/yBchcvfk=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=PDTi2RGkZUs12t6+Muvrn2XbAkSEMZVz00F5f0BvHaLUkADYXnpe098+SeQMoPQbIKlGMvUPfY0dqQ0ijbi3Lp6MXR+x7cRGBYDThtIvuWH5UAxT8VjqiBNjrcqIBS1dSFHo1JUOoAZU2ouTE/Nzoqvb4SpGPynBg2qsC5eF7ZI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=DWb4q5SF; arc=none smtp.client-ip=209.85.215.182
+	 MIME-Version; b=c9saGlc19W/dLLIDiGK6o6WhWbxIMUQPUCeCsagOvizwKGvGU/bIEg0PezoUyS7/fdCbsoOhZO2+k5DGer3dws5rZ2ag/Zo3L4DatqoFcrldj9Yy68WsUi2m0r6s268fkJ/Yk4GMl679AfSk/IbVrQJQlcQaJhsuFQNKB3Oe3Po=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=dam4yxxJ; arc=none smtp.client-ip=209.85.215.170
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="DWb4q5SF"
-Received: by mail-pg1-f182.google.com with SMTP id 41be03b00d2f7-cbedd5aece4so550624a12.0
-        for <linux-arm-msm@vger.kernel.org>; Thu, 20 Aug 2026 04:04:07 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="dam4yxxJ"
+Received: by mail-pg1-f170.google.com with SMTP id 41be03b00d2f7-cc16c6dcae2so80672a12.2
+        for <linux-arm-msm@vger.kernel.org>; Thu, 20 Aug 2026 04:04:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1787223847; x=1787828647; darn=vger.kernel.org;
+        d=gmail.com; s=20251104; t=1787223850; x=1787828650; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=0hsPh6rJ9k7khbV1rxI1LTREfXN7mQXDJAbaQI7N/w4=;
-        b=DWb4q5SFsUWbQKuYi2MNvuq6IbYaTCP6DGgW2Jz+GsbGwK0LDTojDPpFXgivyGaLgL
-         dRjEJIqN/0TpmoxSqedUKZO9PC90s+P8yLG873fjjn6TgQJIrykW0faEg/8KPiiSuGfm
-         N3yrqQjJmY3sVRZEmAhv+7ia49AlRhYJ+/P3wxv2CiA6lBvuCpPhYMSwP2aDTKsoa+1X
-         hGlNLzFrrnldPcArsetEEltw1r3WU7mhDZSct9fa226tXl33iyAgXZSfHuvuVBPlLqcl
-         A2p2t+vQPU+3KCTgSUeL/0tgrT325dxjl0WtWRD99S7TWX9AuxnBHHbEzkvekSGpTdcD
-         PSbw==
+        bh=QVAB6pL6BfDoa5OsrighnSVQ76D8cSms3sDyrNBqKNk=;
+        b=dam4yxxJst81dgGeaEWMwKBUyxEunncqVwHY6TnKvEu+CBSJEU7YDo1KEY1k8w/Q4N
+         dc8+HPWlWe6Zwk3WTPXDsm5F15VnZOZNi+SlV2nyMSuXI20H8FN/+LMcb5WZQdZKysPr
+         BeK6z6PDRAJ88Iv8U9vJ6xXjjCAAGv6ogW4hvg6Rvgsa2vHusxbnwI/iyiCyFo4wK4OI
+         Ac8dJV3uDo/Irvf+gLWEL/E9KSIYwfG+KaTHD+2Qh9i7YyKU1QIUFqqvSGfb9XpBZcUe
+         CFs9BEalBBOueGLW4+nIwqgBAnw/OMLwLT0eSqjGorhHD3QlUJzV0ePJJ0xH7LDCP4j/
+         auEg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787223847; x=1787828647;
+        d=1e100.net; s=20251104; t=1787223850; x=1787828650;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=0hsPh6rJ9k7khbV1rxI1LTREfXN7mQXDJAbaQI7N/w4=;
-        b=QZyWf1E2qyqomxXq05n1vydkk5EgTttwUq8/20KfaUNvhS9BKZx704etamDSioYy+o
-         nqIJsYX5271vwE9qfXSPJkzXztHa2RsHRRssp6tM2jF9pXG0+T7386lnUojd+teAw6UA
-         5lKJsfKD4Q/v3gXvzGeaGdXSDC5gtdll+AC9sA0qanZOHwak4YnwuJ3ARAmwaQxSV73h
-         97avoQanN3cYVZRhLi6ytDPc6xs4hcqgyBmRC21riwktUTFIWpyHpGuMPMxhDWziWW3f
-         R+4w1u0mYIW+fZTEW8Ln/rX+oAtuYQCTK6tL3EoqbfHrsjx2+1QpBNZ7Slyn46s7C6Wa
-         INfg==
-X-Gm-Message-State: AFuF++noBbj3+FQCFwOz6H+4Y6gXwRjjTpiL2ksC3N5xpD56zz+qZL+X
-	oji1QF3sWhan9NuchDFHPPKj5LUY+saJXUn5YX54ZvF5IoOcTS8SM+LK
-X-Gm-Gg: AR+sD13L3s7YDtzO0YKP2N0q9G9sTqpT88mQpHgcUQtTzF2lykS5ZHXmLZvXgc/rbkH
-	oSNnI2qtk4cvcGuzA/+gjlWoPd5B2UGWJkDakrPnFxiIwtUtxDGix1m5eNTBUJMqMZ5Ak0qId40
-	a6I2ZLz8RInc3U16eJH52A13aZPfFzJDCZPoA14ocvUUsnYCFAqo3QkI80xAqQ2rmW1Q0DPe1mA
-	nc7+Mj7PBwfMhfYd0JKL8p0U9QCAV5h10cbmdwjU+MZMAwPHdjw/ieML3HWyAHleiJZOPKJ9AlY
-	3KcruUfvU/ZfgNOdB0LMgBVQZWUeV4RyRIGIxMOtfpGlBBCQKClUWG8UOKL4Rg9ThHHejFLEC7j
-	Hfz0JoULZrvlu2hQVzQ1rLQuk86m6va+6hOwwWStN5BHo8UCtGLBAnwnmj0GmIhRIlewx/7WKh5
-	slPsMjj/9s5sh320pzSFzjcofaOdHjRHkmnTl3ZVYzul+l6HTvQB8=
-X-Received: by 2002:a17:90b:2584:b0:38f:de94:bf34 with SMTP id 98e67ed59e1d1-395a074aab8mr6078776a91.10.1787223846856;
-        Thu, 20 Aug 2026 04:04:06 -0700 (PDT)
+        bh=QVAB6pL6BfDoa5OsrighnSVQ76D8cSms3sDyrNBqKNk=;
+        b=G1x6i/jTbCj8RC9x6WXgYrKPjdYQisu2IMm5uBawoca2Gw77iyfrq1STqO88VeeplT
+         KVu/2TcEWpkeNX8+57jnfSL23DnIwv0cJJynQOW8dmKnNv1XneWWai7+uvbS+yOJ6Puz
+         wsgoW4Yv4eZJuGKojmAw6sbBKKiqTminVJn6wN4U7yS4trUuchD1Tesb/G+9Tp+9U4rt
+         ia81qvgU5FooZL2e+jx3Y0iiSQfHg1bONxU1gEMxoH4TpAXe6rWz4NKU5dFmeLjgh5mE
+         ksmOuWaW9DC2NH6BrzEb7LjK6ahkzZ/kpdcplyNSZzrVGxKjXs/a10h3PWa1rKpUc/3T
+         qDmw==
+X-Gm-Message-State: AFuF++kiU3o2T2Q03H5+8P45SqXz/9aK5Gfo9sSAcQby86XI540zpxlp
+	6wAKcK/vpLpimOLIOkNf8TqgUbgGzGmwzxc7IUvPdC5MkA5RW2PIqnrqucWqyQ==
+X-Gm-Gg: AR+sD11oPy7vj0zdQCqa9F1kg7A2loComNYbOWerkksCaV/m4k2J1pJx5u0npOQ72p1
+	XXNbT3ngfSelYCE/IUY012Rmmf2vxSdusPHjNNKDKyrGY5b/cR8Q/9A3+xQJ2V3L4xWvaE5aJep
+	70w7FQNVOxRKfvV4aDEOapcb1NYKmDKoJglKDWV+J2JGGisgs9HbOYCsDHTQgklG112OxJBQ+JF
+	vsFisKojcXhomPbzyVOLKLJMV1+Go0bHZibAFju4GosS+wom5OfgCi/ydG+UZN9aOTH14aExBJ7
+	TSOQLVG0C27MecpLLR1qhV7vHMyHg+reFytNI3nn/ElHDoisDUxAk6E/LoPVtSiGwC43jETGNkj
+	pTcQ9oz0oF5J2nEoQYeJqAAYNK23Y1Hnb4O2TF6LhVij6ez9Z8NAfdpM2LxDCDgWVGFzsKCN7lP
+	DiEeJlPvZS6PD1fq9QhgPF+rHCTgV8P/msg9skHFN7QsYCFtQVXak=
+X-Received: by 2002:a17:90b:4cc5:b0:37c:6130:7a5b with SMTP id 98e67ed59e1d1-39580ed0a57mr23327925a91.8.1787223850387;
+        Thu, 20 Aug 2026 04:04:10 -0700 (PDT)
 Received: from thefoxflat ([2404:c0:7015:a156:d857:47e6:8c8a:886f])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3957fb12145sm6200668a91.4.2026.08.20.04.04.03
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3957fb12145sm6200668a91.4.2026.08.20.04.04.07
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 20 Aug 2026 04:04:06 -0700 (PDT)
+        Thu, 20 Aug 2026 04:04:09 -0700 (PDT)
 From: Reza Kurniawan <imkyufie@gmail.com>
 To: Bjorn Andersson <andersson@kernel.org>,
 	Konrad Dybcio <konradybcio@kernel.org>,
@@ -67,9 +67,9 @@ Cc: linux-arm-msm@vger.kernel.org,
 	devicetree@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
 	Reza Kurniawan <imkyufie@gmail.com>
-Subject: [PATCH v4 1/3] arm64: dts: qcom: msm8917-xiaomi-riva: Enable debug UART console
-Date: Thu, 20 Aug 2026 18:03:45 +0700
-Message-ID: <20260820110347.98068-2-imkyufie@gmail.com>
+Subject: [PATCH v4 2/3] arm64: dts: qcom: msm8917-xiaomi-riva: Add GPIO haptic vibrator
+Date: Thu, 20 Aug 2026 18:03:46 +0700
+Message-ID: <20260820110347.98068-3-imkyufie@gmail.com>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20260820110347.98068-1-imkyufie@gmail.com>
 References: <20260820110347.98068-1-imkyufie@gmail.com>
@@ -81,11 +81,10 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Xiaomi Redmi 5A has accessible UART test points on its PCB, they are
-routed to the BLSP1 UART2 port.
+The haptic vibrator in Xiaomi Redmi 5A is controlled through TLMM GPIO
+97 and is directly powered vph_pwr.
 
-Enable the blsp1_uart2 node and configure stdout-path under the chosen
-node to allow outputting kernel logs and facilitate early debugging.
+Define the vibrator node using the "gpio-vibrator" driver.
 
 Signed-off-by: Reza Kurniawan <imkyufie@gmail.com>
 ---
@@ -93,35 +92,29 @@ v4:
 - Simplify commit title
 - Add commit description
 
- arch/arm64/boot/dts/qcom/msm8917-xiaomi-riva.dts | 8 ++++++++
- 1 file changed, 8 insertions(+)
+v3:
+- Add vcc-supply for vibrator
+
+ arch/arm64/boot/dts/qcom/msm8917-xiaomi-riva.dts | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
 diff --git a/arch/arm64/boot/dts/qcom/msm8917-xiaomi-riva.dts b/arch/arm64/boot/dts/qcom/msm8917-xiaomi-riva.dts
-index 4ea4fbdb5..abfaae502 100644
+index abfaae502..a066d9d7a 100644
 --- a/arch/arm64/boot/dts/qcom/msm8917-xiaomi-riva.dts
 +++ b/arch/arm64/boot/dts/qcom/msm8917-xiaomi-riva.dts
-@@ -13,6 +13,10 @@ / {
- 
- 	qcom,board-id = <0x1000b 1>, <0x1000b 2>;
- 
-+	chosen {
-+		stdout-path = &blsp1_uart2;
-+	};
-+
- 	battery: battery {
- 		compatible = "simple-battery";
- 		charge-full-design-microamp-hours = <3000000>;
-@@ -25,6 +29,10 @@ battery: battery {
+@@ -27,6 +27,12 @@ battery: battery {
+ 		charge-term-current-microamp = <60000>;
+ 		voltage-min-design-microvolt = <3400000>;
  	};
++
++	vibrator {
++		compatible = "gpio-vibrator";
++		enable-gpios = <&tlmm 97 GPIO_ACTIVE_HIGH>;
++		vcc-supply = <&vph_pwr>;
++	};
  };
  
-+&blsp1_uart2 {
-+	status = "okay";
-+};
-+
- &blsp2_i2c1 {
- 	status = "okay";
- 
+ &blsp1_uart2 {
 -- 
 2.55.0
 
