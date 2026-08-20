@@ -1,249 +1,152 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EF89A3B776A
-	for <linux-arm-msm@vger.kernel.org>; Thu, 20 Aug 2026 07:53:32 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=205.220.180.131
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787212414; cv=pass; b=TpsPt7Y7pSG2whd5POmo+GJykCQpY2mCvkvb8N7FVZYVWxkhC6gRoA0GNRT2tRsnwqiZdsm0BDwUcHsimiAfOtA3mb4m9SdHYxT1nPiBo4QzouX9LKZZAsvxZ1OZBu7mppzcI91/kOpEi2ogacDJggDPTZkTPgXNKL1EhOTJeS8=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787212414; c=relaxed/simple;
-	bh=VizCQBMinCKZIQeApvAF6NKWz5JoYNftX3ZAIOL7fhM=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=WHN1UhWYBmUEOmleqF0L8kF+VkeeelxvrhH5WXG/Xmp4sp4IqJzcgy8s6LTAbnhCJBbrrG2SaUMo43aTAsGmXhm2POKbCc/JMXEE4/iSgwp5LTYITmt1T8ByLE+dhMScGZeYzOhMIolsdb1ywmXrr9X7MCNfllk0wcluI+o/0FM=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=ZZOokSdG; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=hXKD6r9J; arc=pass smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1F7AB3D902E
+	for <linux-arm-msm@vger.kernel.org>; Thu, 20 Aug 2026 08:13:38 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1787213619; cv=none; b=pcXZf6eJxHyFP0muyYZ/Ze3hCnSCQAC7+pnMIA76SSk5K89yxKdpPqQBTVvpEjzkT+911XrZPJspSXUIfnMbeD5r7YPK6apQlfFM8SL85pbFJldlRsWb5N9qnX+7BXER8/kiL5pM8S8/Eg4EQeyTwYEEWyla/V4XhjarOSNeVuo=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1787213619; c=relaxed/simple;
+	bh=o7y9i/st/OyyyYHXaxy+xTSHPCgHCDfViDGCUPeHkco=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=B/C7axd6aajJgE8zr0othLIc/MzyLv9n+M7e+ZIu8Y5/TqCA+kvs0MDJB3K3utURxzmN7V4X7bWK7P4C07Kd70S3Kl5rBrkGxmg7oDinw76ytO0BRC8gacq6uaUmPG/dt5xtpHXzmrrb91YqxaaV+EeYwlsVONuQh2l0eDL3O5M=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=YSPhujlZ; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=FwblgcuV; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="ZZOokSdG";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="hXKD6r9J"
-Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67K6Y0es1457562
-	for <linux-arm-msm@vger.kernel.org>; Thu, 20 Aug 2026 07:53:31 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="YSPhujlZ";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="FwblgcuV"
+Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67K6IBRf1006247
+	for <linux-arm-msm@vger.kernel.org>; Thu, 20 Aug 2026 08:13:37 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	cFbnnm4raDpYfoL8OuEtYJHYVYy0rI+rPAw5Nwnr2Z4=; b=ZZOokSdGz9PXRdKd
-	DzK0rlxpdP7idjxiUtsLZtjzuKZ2kILyIjaLuZX8I0iRtL+EiKlRUJQX+/4er8Ez
-	V52yzVYo3BimJ9BIpdl+J1VnJqczrDR18n0StWuaeGsyjCQT3NIaQItz5/gHyIP/
-	T6aN80BZzup5BDqDRF+QolqZAiwwtglXjzGggUxen0r/MSPAx38gHSjBCRsdLzkA
-	4FBxjHMUerzn+mG4SdDjfaY7A4iNTt0Gaez0m0uuL9SynDWbuHrCUgl1KhWZMxPr
-	iSN0SFW8UHaAW6njiIxrSHIOv1sxQsnhZJKEI1taW1vz+4xx6etM/aqlXjgr/rBZ
-	CYGPSQ==
-Received: from mail-yw1-f197.google.com (mail-yw1-f197.google.com [209.85.128.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g5es4br75-1
+	lSlQVMQM26yZB8tC7ntmn6PmxjJjFOHICmalvEJDy5E=; b=YSPhujlZn/CFkduG
+	MianceK8oKZICwNFFGRvwFaz+DONxfSjDtxJ7j/OgqpS8PSPIvIujWVGgsY33r+a
+	bDrWaTPijECg1tKLYMlv8RXiWpzHZmPGxti4XqSZNThpoSJBX+DxyPufMz2sX05/
+	GVk8/rb4tVOmRtPQSY8QDV4ypI2a7TmFXcH8+z948l7N+mzT0deoDRRkqgIIL5yc
+	+ka4Ftjdi365jXGSmLfLxTdCwMbf60ZyDtLut9LxH2G1NL+2/+lZ5rafH1yNVPQ1
+	mbWRhHMn0F6ufWubwcVLmbzuo+oeUQmsaXKXvsSkONrEaZ5RdU1TZMd6iNuK5D32
+	CbSneA==
+Received: from mail-qt1-f199.google.com (mail-qt1-f199.google.com [209.85.160.199])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g5esc3u44-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Thu, 20 Aug 2026 07:53:31 +0000 (GMT)
-Received: by mail-yw1-f197.google.com with SMTP id 00721157ae682-8461ade272bso25182017b3.1
-        for <linux-arm-msm@vger.kernel.org>; Thu, 20 Aug 2026 00:53:31 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1787212411; cv=none;
-        d=google.com; s=arc-20260327;
-        b=MpFWrJcKItYwFK9JuOe5+EmYTZYmObhaOqJAfWYLZnS3xPOmftJMCZLRpu3yMAvewX
-         xDYXSnKGDaYG8T56qDj/fbtCCueJhEBc+AihQQV0nYip14KRnXxbXdAWcHONwC/IgWnQ
-         EBS6y6LF2HxbrFTq0XV+1iixAUhOBuNjA7AvpLXGn6DNS47EPrUbpk4wTwMSGr1Ig57V
-         UzPc/6sfOUfau/qdW3e0gnjVOmduDUIUfCYzyCe9d0bDZGOgvRnE3xXkOXGLqort+6YV
-         cHAqcVjvUR7TG0pnEO4TYZuWyYPhThGBFjxbQha3EURFG/LxFi2kI9qOd8dLGe9NEza9
-         yf1w==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=cFbnnm4raDpYfoL8OuEtYJHYVYy0rI+rPAw5Nwnr2Z4=;
-        fh=+6NpQoJncbWd2YyqsMTadmyIxECqefhl11gAOpOmSk8=;
-        b=JKYqAA9qsV2Wl8EtQqWa3PI9oSwJWzLgn4ympHD1KetyCLgLsQFz2XYYtzOUaRK97B
-         KxwRELTgg2fc2rrdIC/P38XaVfQXqQ78Ew0nk5aTKDVfnZ3+dqqqSujQbBDMyvuvnvN8
-         50S26h339bDhzR4b7KHdhYBy6aJwlSSNV6tnBJhMoI0VCvtxCt5n8rkMONx1pYk6brGf
-         z28YO14meTykNbNKlFU8J3NwTEYBgM5BVjE3Qg6mPxQrJFnLs3VI1cveDgsquASaBuor
-         sg3CUdYYQtcKvmrQJk4RPcbSoxRSQQqT/Xu58AGbs9BWt9qH+eX/0xfoIYnbY10U9o1I
-         gWCA==;
-        darn=vger.kernel.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+	for <linux-arm-msm@vger.kernel.org>; Thu, 20 Aug 2026 08:13:37 +0000 (GMT)
+Received: by mail-qt1-f199.google.com with SMTP id d75a77b69052e-51c9d953b71so566351cf.0
+        for <linux-arm-msm@vger.kernel.org>; Thu, 20 Aug 2026 01:13:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1787212411; x=1787817211; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=cFbnnm4raDpYfoL8OuEtYJHYVYy0rI+rPAw5Nwnr2Z4=;
-        b=hXKD6r9Jjlb5/sxsx99K2oXI0pbit68PBjwuyGGPXomwpVYBt3MbntY/F/T5gLFwSk
-         kvUsZ4begdSwD1FN7J5pN5utiRYNedr/xacx7Su9mVZJXy1+EN9cUu+Srj/+jiDqMnPB
-         5RRTaENXJ1HHJT3LlsZ/7JLaIotaPLPPvTPSa2gNMCmRv0A7RSeDWFdMapNdw0pm7zjo
-         GYdFA4eyMDPh/H4d3PpY0kORu0JBSWQJqBUGMUDaI7sBHEA5sbVvjJTMa9BZHyOEVE1U
-         6RKeLj1/eGlnyqZ9G3n50qOXIuUyHt1Cl6p7yukgGm53DSDTKAqu9CqZJRKzUzX6Jpua
-         qm2w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787212411; x=1787817211;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+        d=oss.qualcomm.com; s=google; t=1787213616; x=1787818416; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=cFbnnm4raDpYfoL8OuEtYJHYVYy0rI+rPAw5Nwnr2Z4=;
-        b=a/s54EPQ1p8LwVJfBE96/66Z8TJVBU8RTSRbNFvWGWmGXfQsSkTMy2Lq/ifk9NkVBr
-         07NNib2hvb/QYZ1Cn5FHboCFpYvzQZ1vQyMCokD3Tw2iO1caPmSzh8fnXfjJfH1n1dWD
-         FmkD2u0mKDiu0vC4MnsxUI6SUP15fkFx9XHut7zB4c27qxwHPH7Bd9W+mcUxVKcQyWQb
-         d5Al066Vwl5z3Z5c68l/wJ5mggKGV73QdpIDd07nyOq/WSXnMtQtDbXMdaVlAF9w+OSR
-         6Nixdvo48LF+N67WwfSokz74zFJNNV90vgNh9kZKoqDb9u4T5VFmk69eSX4GrssddQJd
-         QZ3g==
-X-Forwarded-Encrypted: i=1; AHgh+RpfHoIfVWHuYzCDrPiDzMXwA2ZW9OFIPo3kicCWYDclYt/nch+PqzaIXw2mto3zie+x7qijbTouIHFJtrf0@vger.kernel.org
-X-Gm-Message-State: AFuF++nFPx9qFGvy+mHCrENPV8lgkJyth4xbQlkupc+CjZBzd57PI9/X
-	Dye1RZ378fiVV6Zr4Bv4t66SeXjVPNHbeVn1x1vciYGkvSN+a9rnu7ecDuBXvoJ8gofst2O9Nkj
-	bEx0Zmqsnk03WncXfv3h1T5IHUErbRhAeQCozD/LA0SvNFMNpqgSlffJUCaXc150GAowwd3eVkk
-	g+fbE5aAlz2XP9ddDWZShDBaFCWPRifskEFhanl4Qzp+s=
-X-Gm-Gg: AR+sD13JeDywp2JPlVlDX2saIQNxNhnyEfQtyWTd6l8vf7FR6MKKwnScSmqcNeZbELL
-	KJeJbMeqd/93NhMhpLIQZmUg/yTqH19ZLvdG7dchZNsDQbS5ROfxcGRMryU1CSw8vPzmc5hhoZu
-	HuzvDzpksiVZRWiLeKVwU9/hHmeFdGKnvYRtCpiLc4mtD371I9OaKoTd4=
-X-Received: by 2002:a05:690c:e3eb:b0:7ef:9fd9:db07 with SMTP id 00721157ae682-84709aa04a4mr17040607b3.12.1787212411206;
-        Thu, 20 Aug 2026 00:53:31 -0700 (PDT)
-X-Received: by 2002:a05:690c:e3eb:b0:7ef:9fd9:db07 with SMTP id
- 00721157ae682-84709aa04a4mr17040497b3.12.1787212410850; Thu, 20 Aug 2026
- 00:53:30 -0700 (PDT)
+        bh=lSlQVMQM26yZB8tC7ntmn6PmxjJjFOHICmalvEJDy5E=;
+        b=FwblgcuVf+AQwXkQANeYAxGnJhXtdGU8OnX/mBtT3/jGLVnduuSE/NulLhUOLpA0hj
+         nujjgQyogOvQhfRUskbPCElUPuZ8Z0ZOQ9wULJN3qoHrGoiKU27NB8e1OcPmatD1NZAk
+         AErKAMBg3jeSL5cWP9gPbW/gszxj5voTF83W7zGDqOZ9X0O354GcXRDleTATxI/fG4PJ
+         X9Kk23jTvujBjC8IymRReZklhZABKjv/IYdgAtgi4ra9P/MshaPB5k4kqbRSCGxdSvdu
+         JRNcwoZbQ9s609lI476QuowsswEu7nxPFI7MaV2JHSroyNlPVvLlrK6/WWLx/d64oOEg
+         zhhA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1787213616; x=1787818416;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=lSlQVMQM26yZB8tC7ntmn6PmxjJjFOHICmalvEJDy5E=;
+        b=SVp/5CHJuSaqRs0mMJX0QfsgNUXGiujNScT/YOdBhRvFcPfT6jWO/ooATOvJzO1xA2
+         v2bPN0Q8odewtdJkwLgHFzzUBpI9an4/uPas+fWhbXfc9ADsySe4JyfydOQIQbezMehJ
+         XzeBp0eSddNapO8NUyk4Yhbvjekwg4ewTGmnnU4k03SoydFk116om7bTeFZlHC/b++nX
+         y8t/HwytHJ9486OXQYDosDJW2FkHcW/k595Hqd3cGq7Fqjg7CJUbFf0rq46/Ot47OeAV
+         oqSoc1o4aTsxDINpNeFrMSeVDyhP+Ke5nP279z5ImuCD/MicXhxZ0ykwLm3nlzt2b9Dw
+         1GvA==
+X-Forwarded-Encrypted: i=1; AHgh+Rqea7UO4oOfnYekOkGixelbq6QYNdnhqVtmBBmfe6sClSv4VyJClVMILdxIPcrbNJFtXFjY/ek8+C0E6Iiq@vger.kernel.org
+X-Gm-Message-State: AOJu0Yw0FHdSH+qQzw8BRzbORD+w/dZwkXg2z+gCc6IX0a+q4cTpow60
+	GuILuvo9sVzmbYrLLPCCYqhb4tMhtvRJC6rG2Vggj6b4bHGHWs55HUlu5QBkXcvStR7V3eQ7jMO
+	WKBUk/eoEZ+7SofFAkxUYj7ErSTXSG7Jc/KRrEfz3ipuYaSag+u49ku5P/gToblVkvOnL
+X-Gm-Gg: AR+sD10ObNWs70KIKdeeovpaSAGzOhrnHk1pdfE6DVRUrzx6ssOGU/QEbwncKwYCXkE
+	19lwDMqErPTt3zDZwl6Qx6J8rgVTiScgEr8JWwBpPDi/MazCK8k4YVFX7VCJbDOSCtpA3nFawUE
+	I7JO1ynTXSW+53g4V8Zy+YdoXIBXHQN2mb4x/TvaOHFa3fl0qxtPUo87uHNntVn8eIQrIsXawmU
+	NfzbZLHa20Nv/G8/eMnoHNqdMSef1yqbxgWsAIhgVbKDz5Fw/1hDbWbHjqBp6j2cisTtCoQ6bEx
+	V/Sn+drPp+viNNzg/gLfGTYiW17l5u9gSJ3K8p5t8roSLkjncqHet+Sx4AmDPIW2m+e1JQ90yzL
+	IYn6NDCJ/O2zOnajBsZXTy3zM
+X-Received: by 2002:a05:622a:588:b0:50f:a53b:9d5 with SMTP id d75a77b69052e-52dd5771811mr72169481cf.2.1787213616346;
+        Thu, 20 Aug 2026 01:13:36 -0700 (PDT)
+X-Received: by 2002:a05:622a:588:b0:50f:a53b:9d5 with SMTP id d75a77b69052e-52dd5771811mr72169191cf.2.1787213615953;
+        Thu, 20 Aug 2026 01:13:35 -0700 (PDT)
+Received: from [192.168.120.193] ([178.235.128.140])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c2459223b93sm38324266b.61.2026.08.20.01.13.34
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 20 Aug 2026 01:13:35 -0700 (PDT)
+Message-ID: <e06004a4-4ed8-46f4-a949-8cece1348ddb@oss.qualcomm.com>
+Date: Thu, 20 Aug 2026 10:13:33 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <9f11db59-5245-4bd5-afbb-485500d37675@oss.qualcomm.com> <CAO8wpHw-J_A8bDL1MPnhXtVKSR1O4HCXbox1-eq2of5GU2wYKg@mail.gmail.com>
-In-Reply-To: <CAO8wpHw-J_A8bDL1MPnhXtVKSR1O4HCXbox1-eq2of5GU2wYKg@mail.gmail.com>
-From: Jens Wiklander <jens.wiklander@oss.qualcomm.com>
-Date: Thu, 20 Aug 2026 09:53:19 +0200
-X-Gm-Features: AcwNN1WsQ0YZ2JNZ1554gZN_8x9NVrq_O0lG8VkVS503IOlCZjsrxm2QL5Gk708
-Message-ID: <CAGgiveXZWSHDsKj1s3dHAhsBAOHgn_Pm_YrwM=u6SwwYUQGTPA@mail.gmail.com>
-Subject: Re: Re: [PATCH] tee: qcomtee: fix kernel-doc warnings
-To: Babanpreet Singh <bbnpreetsingh@gmail.com>
-Cc: amirreza.zarrabi@oss.qualcomm.com, jenswi@kernel.org,
-        sumit.garg@kernel.org, linux-arm-msm@vger.kernel.org,
-        op-tee@lists.trustedfirmware.org, linux-kernel@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Proofpoint-ORIG-GUID: s-_5Uynb5ejnpkp0lyJ53vIDzkjvzI3-
-X-Authority-Analysis: v=2.4 cv=PZXPQChd c=1 sm=1 tr=0 ts=6a86b27b cx=c_pps
- a=0mLRTIufkjop4KoA/9S1MA==:117 a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10
- a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
- a=gowsoOTTUOVcmtlkKump:22 a=pGLkceISAAAA:8 a=EUspDBNiAAAA:8
- a=tO4S_OtGMeP9oHhStmEA:9 a=QEXdDO2ut3YA:10 a=WgItmB6HBUc_1uVUp3mg:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODIwMDA1NiBTYWx0ZWRfX6NTaQQ9cYSl+
- jEvuYGqanFUv0vcvbBj8n1DZBDVBxnuL1SDGa3Mn/GteSPJGap0qUkfKiYsTFfiAHmthT9+GF20
- I0O30c7VcKA8kCFdjTcQHIQ51bJrK7k=
-X-Proofpoint-GUID: s-_5Uynb5ejnpkp0lyJ53vIDzkjvzI3-
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODIwMDA1NiBTYWx0ZWRfX928US4vjNly1
- Vnw1ADLlaZmacITIgulWS2srHBbPY9wGLuPRZOgnF6LfZNQfSxoetaUgHCpTqTlQ/wYYdNq7ljH
- yqG8tK13p5Pl2jxi754eT/pAH8DVcO64wztqxWFTBHQW4DMnM0y/xxYKt7KnW/UXQFE0GS17jPG
- 1c52G9/CwoR7T0W7BqlfXDD4RqH3tP0SvKamVziwbN6ZAbxw5l8zkeanofRG/epFCmZlyV+8LVO
- PluSIF85OxM/vP93dk3wVAZuG3tSkWkIPzFLPNZfTkrvw7bMOXT5lNWO4NPjHy94qOZVMRkv43y
- 60DNeCpr3qfEPeqehj6eNbAreLDaqLodsSydwFAB0AMojWAFr4nqGJhlG3JkfBUeLqnC1UGSkTM
- jf4KB92gEbvb1yFee4gSmf4PPQRdtPbM3G8nXXTJRBF/Fc9eSuCfOk9lYoJkOBRepcW14S2c1Gg
- n1wKqDrQ9theAWUXTIg==
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] usb: typec: qcom-pmic-typec: disable cc_debounce_dwork on
+ stop
+To: Fan Wu <fanwu01@zju.edu.cn>, linux-usb@vger.kernel.org
+Cc: bryan.odonoghue@linaro.org, heikki.krogerus@linux.intel.com,
+        gregkh@linuxfoundation.org, linux-arm-msm@vger.kernel.org,
+        linux-kernel@vger.kernel.org, stable@vger.kernel.org
+References: <20260819161950.77858-1-fanwu01@zju.edu.cn>
+Content-Language: en-US
+From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+In-Reply-To: <20260819161950.77858-1-fanwu01@zju.edu.cn>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-GUID: V_w-Cqw3qDzs6RnxBErskC59Wu0-9L7h
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODIwMDA1OCBTYWx0ZWRfXwM8kPoLDQZtL
+ SQpb0Ptfmhtg5syMij0SV1UED2+XQVdtrXpiIxM8GgX3c/HLuSkoEiYyDyGMIKxW8CEMkgV9RlF
+ J6Y6ZryUf+M66FIELzKpGOtT+7tLlJE=
+X-Proofpoint-ORIG-GUID: V_w-Cqw3qDzs6RnxBErskC59Wu0-9L7h
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODIwMDA1OCBTYWx0ZWRfX0iOrmce8W0i6
+ 2t+azJm57+PLWAfmBZulddqbr6ei2Jxbugl9/6CmM8/mcqG9V1khI1BNfVFnWhDxby8WJe2uI2j
+ xF66b6PaW1fKCjyyh5MOTTgQDezwEk400oab/ZQ7n7NX1U6AMheKcaghtOPe5En06QX6Yxk5ZPT
+ /jn04LcfSkEp4UgRsEL9fH09EYHaF66nCXJ4l18I/QdZ8Ifd1lUupbi4L7dYBWetpu8rZIK04AU
+ VDSBrpUqW5hYLJdQY2Mz7zTcR5/No63Yn9bdryK38PUq6pLqACDws/5vL4UWL3uP9LnoXyJMnXb
+ 4ztib7PoMiKSf6T5/NRQHf8of1MtsLeFQ8fgAXOT0451jw3cfvjJQ8nSjIEkHvHYmCHmVi4qKkf
+ ZyQ421HqHJvxdLXV8xAxE0s61xKx/JoXG55Ag21/THVl4QDRpoEpPEqVs+fdbLQMfVQ8+BPjbQY
+ Wqie//68D7OyTDfMbeQ==
+X-Authority-Analysis: v=2.4 cv=b6uCJNGx c=1 sm=1 tr=0 ts=6a86b731 cx=c_pps
+ a=WeENfcodrlLV9YRTxbY/uA==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
+ a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
+ a=ywe33jvvH3eccHNFifsA:9 a=QEXdDO2ut3YA:10 a=kacYvNCVWA4VmyqE58fU:22
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-08-19_06,2026-08-19_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- adultscore=0 phishscore=0 spamscore=0 lowpriorityscore=0 suspectscore=0
- impostorscore=0 clxscore=1011 malwarescore=0 priorityscore=1501 bulkscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608200056
+ impostorscore=0 malwarescore=0 lowpriorityscore=0 priorityscore=1501
+ suspectscore=0 spamscore=0 clxscore=1015 bulkscore=0 adultscore=0
+ phishscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2608200058
 
-Hi Babanpreet,
+On 8/19/26 6:19 PM, Fan Wu wrote:
+> cc_debounce_dwork lives on the system workqueue but is armed from
+> tcpm callbacks (set_cc/start_toggling).  Those callbacks run on tcpm's
+> kthread worker which is only destroyed by tcpm_unregister_port(), after
+> port_stop() has already returned, opening a potential race window where
+> tcpm's worker flush re-arms the work.
 
-Thanks for the ping.
+[...]
 
-On Tue, Aug 18, 2026 at 5:38=E2=80=AFAM Babanpreet Singh
-<bbnpreetsingh@gmail.com> wrote:
->
-> Hi Jens,
->
-> Gentle ping. Amirreza reviewed this a couple of weeks back =E2=80=94 is t=
-here
-> anything you need from me before it can be picked up?
->
-> Thanks,
-> Babanpreet
->
-> On Mon, Aug 03, 2026 08:49 PM, Amirreza Zarrabi <amirreza.zarrabi@oss.qua=
-lcomm.com> wrote:
->>
->> Hi Babanpreet,
->>
->> Thanks.
->>
->> Reviewed-by: Amirreza Zarrabi <amirreza.zarrabi@oss.qualcomm.com>
->>
->> Amir
->>
->> On 8/2/2026 10:39 AM, Babanpreet Singh wrote:
->> > Fix kernel-doc issues present since the driver was added in commit
->> > d6e290837e50 ("tee: add Qualcomm TEE driver"):
->> >
->> > - async_release() documents its second parameter as @msg, but the
->> >   parameter is named async_msg (msg is a local variable);
->> > - struct qcomtee_msg_object_invoke documents member @ctx, but the
->> >   member is named cxt;
->> > - enum qcomtee_arg_type leaves QCOMTEE_ARG_TYPE_NR undescribed.
->> >
->> > The cxt spelling is part of the QTEE message format and is used
->> > throughout the driver; struct qcomtee_msg_callback in the same header
->> > already documents it as @cxt, so the comment is corrected rather than
->> > the member.
->> >
->> > No functional changes.
->> >
->> > Assisted-by: Claude:claude-opus-5 [kernel-doc]
->> > Signed-off-by: Babanpreet Singh <bbnpreetsingh@gmail.com>
+> --- a/drivers/usb/typec/tcpm/qcom/qcom_pmic_typec_port.c
+> +++ b/drivers/usb/typec/tcpm/qcom/qcom_pmic_typec_port.c
+> @@ -694,6 +694,8 @@ static void qcom_pmic_typec_port_stop(struct pmic_typec *tcpm)
+>  
+>  	for (i = 0; i < pmic_typec_port->nr_irqs; i++)
+>  		disable_irq(pmic_typec_port->irq_data[i].irq);
+> +
+> +	disable_delayed_work_sync(&pmic_typec_port->cc_debounce_dwork);
 
-Since this is a fix, please add a proper fixes tag.
+Doesn't this make disable_irq() get called undesirably?
 
-Thanks,
-Jens
-
->> > ---
->> >  drivers/tee/qcomtee/async.c          | 4 ++--
->> >  drivers/tee/qcomtee/qcomtee_msg.h    | 2 +-
->> >  drivers/tee/qcomtee/qcomtee_object.h | 1 +
->> >  3 files changed, 4 insertions(+), 3 deletions(-)
->> >
->> > diff --git a/drivers/tee/qcomtee/async.c b/drivers/tee/qcomtee/async.c
->> > index 31bff4309e672..5849e51612033 100644
->> > --- a/drivers/tee/qcomtee/async.c
->> > +++ b/drivers/tee/qcomtee/async.c
->> > @@ -97,10 +97,10 @@ static void qcomtee_get_async_buffer(struct qcomte=
-e_object_invoke_ctx *oic,
->> >  /**
->> >   * async_release() - Process QTEE async release requests.
->> >   * @oic: context used for the current invocation.
->> > - * @msg: async message for object release.
->> > + * @async_msg: async message for object release.
->> >   * @size: size of the async buffer available.
->> >   *
->> > - * Return: Size of the outbound buffer used when processing @msg.
->> > + * Return: Size of the outbound buffer used when processing @async_ms=
-g.
->> >   */
->> >  static size_t async_release(struct qcomtee_object_invoke_ctx *oic,
->> >                           struct qcomtee_async_msg_hdr *async_msg,
->> > diff --git a/drivers/tee/qcomtee/qcomtee_msg.h b/drivers/tee/qcomtee/q=
-comtee_msg.h
->> > index 878f70178a5b6..5d7b21fdd3688 100644
->> > --- a/drivers/tee/qcomtee/qcomtee_msg.h
->> > +++ b/drivers/tee/qcomtee/qcomtee_msg.h
->> > @@ -112,7 +112,7 @@ union qcomtee_msg_arg {
->> >
->> >  /**
->> >   * struct qcomtee_msg_object_invoke - Direct object invocation messag=
-e.
->> > - * @ctx: object ID hosted in QTEE.
->> > + * @cxt: object ID hosted in QTEE.
->> >   * @op: operation for the object.
->> >   * @counts: number of different types of arguments in @args.
->> >   * @args: array of arguments.
->> > diff --git a/drivers/tee/qcomtee/qcomtee_object.h b/drivers/tee/qcomte=
-e/qcomtee_object.h
->> > index 8b4401ecad48c..d5de02dcef3b9 100644
->> > --- a/drivers/tee/qcomtee/qcomtee_object.h
->> > +++ b/drivers/tee/qcomtee/qcomtee_object.h
->> > @@ -74,6 +74,7 @@ enum qcomtee_object_type {
->> >   * @QCOMTEE_ARG_TYPE_OO: output object (OO).
->> >   * @QCOMTEE_ARG_TYPE_IB: input buffer (IB).
->> >   * @QCOMTEE_ARG_TYPE_IO: input object (IO).
->> > + * @QCOMTEE_ARG_TYPE_NR: number of argument types.
->> >   *
->> >   * Use the invalid type to specify the end of the argument array.
->> >   */
->>
+Konrad
