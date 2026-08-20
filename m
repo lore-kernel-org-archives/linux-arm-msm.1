@@ -1,67 +1,67 @@
-Received: from mail-wm1-f48.google.com (mail-wm1-f48.google.com [209.85.128.48])
+Received: from mail-wr1-f42.google.com (mail-wr1-f42.google.com [209.85.221.42])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DB5CA3FC5BE
-	for <linux-arm-msm@vger.kernel.org>; Thu, 20 Aug 2026 09:42:43 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.48
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DE2EB3FFAC6
+	for <linux-arm-msm@vger.kernel.org>; Thu, 20 Aug 2026 09:42:46 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.42
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787218974; cv=none; b=RQwjN2kTxYoIoPREqifWpLAKZlLwHzclpkN401lEL9rpuW9SFm1SOLjzKztd1QML6O+GJxi5qbO4rOwy9wOiUlkmLJoEmp7f+uDojexvKxjQSVaGfngTemvrf08VGpNNCzH0l+TIo0wX2NV129Rx+QBOb0CgC0doGNCeBi5HAm0=
+	t=1787218974; cv=none; b=CroCvuXmJoE70fOu32+m5VeFMaqIka3kIenYi0XAKavI8nlvrYg5VZzHSXNH54MvkCyaJfF5HoeTFEI+AAAGiXNTteEzFCLtNyGDwUKTSqlkU6US2DChJXQd7I/u+1zjKOlrC/NQZGq8F4uotrw0sXaB4pfW4mBVxIKTFCPnODg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1787218974; c=relaxed/simple;
-	bh=lvXJIYHg+Za7wwIfyKwrdptP8jCEhBX03Cv8tnpa48U=;
+	bh=+wTsJwvJtFqh8jtvmvkf/+uhS5Y+DGy7ouDjcsgyYHE=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=pzPZBhLSclN2vcAuVvlKVOfwup3TE0dHm07m3ZSBGeFoH03E9K01QxnWRrcovYns6E7TPv8aGhkBEO0qByrVh0XdZDDEgWP5lZaFdH2RRRwTimnzlEBxNf6Nqms5/3JtLZBYUngFL4bXQp1+D6YeryGCpX9aHtVR512qHehBd9E=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=OmSKwNBf; arc=none smtp.client-ip=209.85.128.48
+	 In-Reply-To:To:Cc; b=M4V1y4yHGTt9kGxYEBcbxw9iAViwO2ijp1aDg811xP3Imi1y7Y6IOZq1Sb+JKW4kFBWtUl0qG5eTXkl9sHsnZp4ZePoWvgp/ZwtJFHnBkgVtXuCW0XtrCVPsrkcyH/mFSKNrVvwdK6HLhRILK+x5ZBF56LUqo7+uXFq2/VXq8Zs=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=Ia+KXg11; arc=none smtp.client-ip=209.85.221.42
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="OmSKwNBf"
-Received: by mail-wm1-f48.google.com with SMTP id 5b1f17b1804b1-4996f1ee4a4so17534195e9.2
-        for <linux-arm-msm@vger.kernel.org>; Thu, 20 Aug 2026 02:42:43 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="Ia+KXg11"
+Received: by mail-wr1-f42.google.com with SMTP id ffacd0b85a97d-47fde295992so690756f8f.0
+        for <linux-arm-msm@vger.kernel.org>; Thu, 20 Aug 2026 02:42:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1787218961; x=1787823761; darn=vger.kernel.org;
+        d=gmail.com; s=20251104; t=1787218963; x=1787823763; darn=vger.kernel.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=Pna/XzfqXxr5JhHe4C9RpqDZzth/Iq1szA4HTr9J/M4=;
-        b=OmSKwNBfRXl3HffmJ3Zgtv9O9cXY9ahV1itKzw+q6P9mVQo0A5qpTlh1/xhuVPnzmu
-         0uP8UTDiP5HtTjcXSlKWFQyFUE5Nwu+AtoX83t3dhSh17U+cSMFIp26wDdJz7asN8eDh
-         kE+FtJD0mxIN1I4hQpwfwlGsfMQVW0oFAvQRxUhWVusgWrD9SUA9dQozJco8/nZllMiA
-         qIfzaeNa9y1Gz5WPMPSGm8kyUNdke8z+Wwori8GsBhcrtNlNZpAns7UuP3MqNxJy9x3y
-         xQ4jsWhy0v14jt29yau0Gp3WNFCoI48UFhqAduYzMp+qNV82r7hlGNfNyY3FzaypB5Mk
-         XtzA==
+        bh=lt8k/Dd1Z/q/hMJxt8UooInT8jJ6DAeFfFrep5RGgnA=;
+        b=Ia+KXg110lOcvzaAW9lyvVjTGwk0U5r1TNLI2xy1pL5YOpdiq955whgQVPm2CN2TEv
+         zala6Vxuluvr+gVJXLkOgmd4AllwWaNr6gyY29Q1KJnMDTiqe1W/Qhbm5ge89OGS3sQU
+         6cW67rMkNRmXgXLM80VBo/hDrbbux9aDMmrk9QA/rnjcTPHFwoI75ADaMUbNhRTHUFYr
+         QFptq3KyDRlUrdPLvQL2BGGj3mtXvAGTKNHYoURFT7vG4hrJGWiLafXTOfl6UXmaa8Hj
+         RY/zfVi7EfUwZ90M3MCWfIUGccbdqi+q3nQ+RZyE2NnLEvDg38rZNmiwxjp6FFfLOLjW
+         Jnzg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787218961; x=1787823761;
+        d=1e100.net; s=20251104; t=1787218963; x=1787823763;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=Pna/XzfqXxr5JhHe4C9RpqDZzth/Iq1szA4HTr9J/M4=;
-        b=Ie3idDpvwKcoXiq0BYDC7eo0dZL4tMIwISjygsufbVgkg7bShjtftZlikbB7qAoi9R
-         GfRtOihoJ1623vqTeTVgBjpa2Kx0P3Tl+p/noLnV5HknrRR5hFQJKNtuq3xhqw3jWGG9
-         +gTVKCTt/eivtzH8LF7wCOrtTSmdxAS7Pdswmvq67Fd9k49wCLHrycI2czqII9KvFoPu
-         qb7n9Bf0lIgmmAM+AG9WlwSeIoVdY7ih93oQuzr5/1zJ1QynbK9qzGhUwJilC/HbtUla
-         jzgxUEoMJgpBMII/+IRC3Aq7Zgs5GxsOkG/nJUZ19DfcLxp5IdLRu0NP25udlNLP9UEq
-         zoBw==
-X-Gm-Message-State: AOJu0Ywrsga91AQAp1HrkogniqOlQo1OAi+qxfWJRSwlH9c1t9pmyHJb
-	HvGkz4rU0SBkQmutCvNoekeHszfvOifDf4CPWOG9vv8TyiLV8hJn9AVG
-X-Gm-Gg: AR+sD11W1iNl/81iSWHHcS/Ltbw/xiwfg57syGF1sArVITP+GTjTNxnRpaNmyhJIpTq
-	yI3zeBwg5RRE2ShJ9rDiaXMo8EEDbZjfB7GDmLG+QTuSQ7fEB1c6TrXrUQMjpfU6GpEKMl8QMtl
-	ayTgkYJCzhWrlnDcCLnZpscwXo09Gpwsb1y+scP4XPGsbz0fvOwa9y+PLdIUhsyhNcTx3emCCeR
-	9gY2nYED9xtSIgUaUvpJzq+TbB3wT/VhftLLeSD+8jrUqK54R70wkTgiJ6khfkZPgHEfW6YG9z1
-	U1ksW3/Kt4S2VEMYtIUhlwnvU8Is5ZxJCnaVQV20JQZMuMOBO+oTxVPRDQ8zEm2zwPecFYnrTwu
-	Ako9nYUprsCfGvxu+BNwpfvE0Mdrh0Hagoq2EeQBu72ZAR5K6ZA/KSj1/E3vFjb0OidBUjty5s3
-	uD74OOrgXwp7Y3ixI/E9XVWvIa1jg9JM2/wXSMFn4cL144i9nOlNM3iNZ51SrBX3L2eUrKk6dYC
-	+yARNxzPtTN6O6nArRB3Y00
-X-Received: by 2002:a05:600d:19:b0:499:b4aa:3d70 with SMTP id 5b1f17b1804b1-499b4aa3dd7mr11458805e9.14.1787218960974;
-        Thu, 20 Aug 2026 02:42:40 -0700 (PDT)
+        bh=lt8k/Dd1Z/q/hMJxt8UooInT8jJ6DAeFfFrep5RGgnA=;
+        b=Q2wCJuJBEar2iBW8OBCFfwtLHZ2woLs2EFEIikwgCeIJwo7ArKPJ6RDA1fLbgSGGN0
+         mwbXkljIzVTY1zZ9h0cA28xl1M2tsS1GnTdnzxzr+8U4tNSj5ZV7U1LbanCYLcBaBx1h
+         YLpfsqwbYx71cuDG/6FawZZyLHuNTebsX88PDqZGNrvzLUL7hI/Dg5hyr4fv1nI56SqC
+         jkEoU2XmJVMlEfm7jT0hrvpCtSy13rxHIZPmnAitTvYzEXorkoUW4yeIGLzqRIusVF4z
+         nkAeeD1R+ppa+xedb3Kxpx0YEhF4eFVsb1huFr35sGOVutqbWFUFf1Q4qE4sDDy+wHb0
+         ySmw==
+X-Gm-Message-State: AFuF++lK7BLAZrsg0lPRCFpGyWsblvGWe4ZiNus2sXbyeusbRZcgG3hl
+	cIrXpgmInOR/Y114XQ7Mhz8P8prQ/PPyeM08WhHN7ndG+miBPtmJtpIN
+X-Gm-Gg: AR+sD10k4ffeaJP7b8mTuOJ8r48PHiwKRmLlfWw7QNF6kGI8ji7SvWESIO0cpqkboMu
+	2erX+KVhHUmfn9/sc4llynZgH9CGGrJh3z2EgjzAedLiA8cqHg4G1wB10jan9Dgh4JheqbjEMAh
+	wrJKGjriETxgj85Tw8jUldevs21j8bQoHjpOSBYYD2pPDw7QdEnr8JYml7sVQ4TFA1amnsSJA7S
+	zNf59I8RApkkt6//+QzH6rye+YocDWBNuEgWAN1Y9lssadsBYjbBXwjjapWcOdOE+w60MVM1euZ
+	cRw6ZspKCKTEMEK0EmZoEDZTW4qDhHCVQTFIgWE35SseEZKdz3gBX/zqi91qWPLiUlFJa74P/W8
+	M3z1hvta7nhYBu7ONxhZUpGgiTuSIATELKif3Yl59mGBbq0MpR2YSgZ21Gh4ANDOBrUO8wO/1JM
+	vB8CCBj1OB/pFCEWcxfqVLiYp9OLdtbUwnML+WngzQETSoUkEFwHLhIq6wqvY9Ub8uIw8NxHg44
+	gaZ4GAmYKdPA7OwT/VnX3muMrm/ddsFNWE=
+X-Received: by 2002:a5d:59a4:0:b0:47f:eb38:26f9 with SMTP id ffacd0b85a97d-482b781df0amr9271387f8f.8.1787218963263;
+        Thu, 20 Aug 2026 02:42:43 -0700 (PDT)
 Received: from [127.0.1.1] (83.31.75.144.ipv4.supernova.orange.pl. [83.31.75.144])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-482b144173csm11788090f8f.6.2026.08.20.02.42.39
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-482b144173csm11788090f8f.6.2026.08.20.02.42.42
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 20 Aug 2026 02:42:40 -0700 (PDT)
+        Thu, 20 Aug 2026 02:42:42 -0700 (PDT)
 From: Adam Skladowski <a39.skl@gmail.com>
-Date: Thu, 20 Aug 2026 11:42:24 +0200
-Subject: [PATCH v2 1/7] dt-bindings: vendor-prefixes: Add LeEco
+Date: Thu, 20 Aug 2026 11:42:26 +0200
+Subject: [PATCH v2 3/7] arm64: dts: qcom: Add Motorola One
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -70,7 +70,7 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260820-next-patches-v2-1-7130d68183d9@gmail.com>
+Message-Id: <20260820-next-patches-v2-3-7130d68183d9@gmail.com>
 References: <20260820-next-patches-v2-0-7130d68183d9@gmail.com>
 In-Reply-To: <20260820-next-patches-v2-0-7130d68183d9@gmail.com>
 To: Bjorn Andersson <andersson@kernel.org>, 
@@ -84,26 +84,503 @@ Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
  Adam Skladowski <a39.skl@gmail.com>
 X-Mailer: b4 0.15.2
 
-Add vendor prefix for now dead ecosystem company LeEco
+Add a devicetree for the Motorola One smartphone, which is based
+on the Jacala/MSM8953 SoC.
+
+Supported functionality as of this initial submission:
+* I2C peripherals (Touchscreen,NFC)
+* Power Button, Volume Keys
+* Regulators (PM8953)
+* Remoteprocs (ADSP, MPSS, WCNSS)
+* USB
+
+Device tree also contains supply maps to other subsystems like MDSS
+but due to missing dependencies like panel those are disabled.
 
 Signed-off-by: Adam Skladowski <a39.skl@gmail.com>
 ---
- Documentation/devicetree/bindings/vendor-prefixes.yaml | 2 ++
- 1 file changed, 2 insertions(+)
+ arch/arm64/boot/dts/qcom/Makefile                  |   1 +
+ arch/arm64/boot/dts/qcom/msm8953-motorola-deen.dts | 460 +++++++++++++++++++++
+ 2 files changed, 461 insertions(+)
 
-diff --git a/Documentation/devicetree/bindings/vendor-prefixes.yaml b/Documentation/devicetree/bindings/vendor-prefixes.yaml
-index 136681412501..dd0762d3334b 100644
---- a/Documentation/devicetree/bindings/vendor-prefixes.yaml
-+++ b/Documentation/devicetree/bindings/vendor-prefixes.yaml
-@@ -947,6 +947,8 @@ patternProperties:
-     description: Shenzen LC Technology Co., Ltd.
-   "^leadtek,.*":
-     description: Shenzhen Leadtek Technology Co., Ltd.
-+  "^leeco,.*":
-+    description: Leshi Holding Beijing.
-   "^leez,.*":
-     description: Leez
-   "^lego,.*":
+diff --git a/arch/arm64/boot/dts/qcom/Makefile b/arch/arm64/boot/dts/qcom/Makefile
+index 1c86e7e98f55..11e953657691 100644
+--- a/arch/arm64/boot/dts/qcom/Makefile
++++ b/arch/arm64/boot/dts/qcom/Makefile
+@@ -120,6 +120,7 @@ dtb-$(CONFIG_ARCH_QCOM)	+= msm8939-sony-xperia-kanuti-tulip.dtb
+ dtb-$(CONFIG_ARCH_QCOM)	+= msm8939-wingtech-wt82918.dtb
+ dtb-$(CONFIG_ARCH_QCOM)	+= msm8939-wingtech-wt82918hd.dtb
+ dtb-$(CONFIG_ARCH_QCOM)	+= msm8953-flipkart-rimob.dtb
++dtb-$(CONFIG_ARCH_QCOM)	+= msm8953-motorola-deen.dtb
+ dtb-$(CONFIG_ARCH_QCOM)	+= msm8953-motorola-potter.dtb
+ dtb-$(CONFIG_ARCH_QCOM)	+= msm8953-xiaomi-daisy.dtb
+ dtb-$(CONFIG_ARCH_QCOM)	+= msm8953-xiaomi-mido.dtb
+diff --git a/arch/arm64/boot/dts/qcom/msm8953-motorola-deen.dts b/arch/arm64/boot/dts/qcom/msm8953-motorola-deen.dts
+new file mode 100644
+index 000000000000..acb0b61b8f94
+--- /dev/null
++++ b/arch/arm64/boot/dts/qcom/msm8953-motorola-deen.dts
+@@ -0,0 +1,460 @@
++// SPDX-License-Identifier: (GPL-2.0+ OR BSD-3-Clause)
++/*
++ * Copyright (c) 2026 Adam Skladowski <a39skl@gmail.com>
++ */
++
++/dts-v1/;
++#include <dt-bindings/usb/pd.h>
++#include "msm8953.dtsi"
++#include "pm8953.dtsi"
++#include "pmi8950.dtsi"
++
++/delete-node/ &cont_splash_mem;
++/delete-node/ &qseecom_mem;
++
++/ {
++	model = "Motorola One";
++	compatible = "motorola,deen", "qcom,msm8953";
++	chassis-type = "handset";
++
++	gpio-keys {
++		compatible = "gpio-keys";
++
++		pinctrl-0 = <&gpio_key_default>;
++		pinctrl-names = "default";
++
++		key-volume-up {
++			label = "Volume Up";
++			gpios = <&tlmm 85 GPIO_ACTIVE_LOW>;
++			linux,code = <KEY_VOLUMEUP>;
++		};
++	};
++
++	reserved-memory {
++		qseecom_mem: qseecom@84300000 {
++			reg = <0x0 0x84300000 0x0 0x2000000>;
++			no-map;
++		};
++	};
++
++	vph_pwr: vph-pwr-regulator {
++		compatible = "regulator-fixed";
++		regulator-name = "vph_pwr";
++		regulator-always-on;
++		regulator-boot-on;
++	};
++
++	/* Fake VBUS 5V supply till we wire pmi8950 one */
++	fusb302_vbus: otg-vbus {
++		compatible = "regulator-fixed";
++		regulator-name = "otg-vbus";
++		regulator-min-microvolt = <5000000>;
++		regulator-max-microvolt = <5000000>;
++		regulator-always-on;
++		regulator-boot-on;
++	};
++};
++
++&hsusb_phy {
++	vdd-supply = <&pm8953_l3>;
++	vdda-phy-dpdm-supply = <&pm8953_l13>;
++	vdda-pll-supply = <&pm8953_l7>;
++
++	status = "okay";
++};
++
++&i2c_1 {
++	status = "okay";
++
++	typec-portc@22 {
++		compatible = "fcs,fusb302";
++		reg = <0x22>;
++		interrupts-extended = <&tlmm 9 IRQ_TYPE_LEVEL_LOW>;
++
++		pinctrl-names = "default";
++		pinctrl-0 = <&fusb302_int_default>;
++
++		usb-role-switch = <&usb3>;
++		vbus-supply = <&fusb302_vbus>;
++
++		connector {
++			compatible = "usb-c-connector";
++			label = "USB-C";
++			power-role = "dual";
++			data-role = "dual";
++			try-power-role = "sink";
++			typec-power-opmode = "default";
++			source-pdos = <PDO_FIXED(5000, 500,
++						 PDO_FIXED_DUAL_ROLE |
++						 PDO_FIXED_DATA_SWAP |
++						 PDO_FIXED_USB_COMM)>;
++			sink-pdos = <PDO_FIXED(5000, 3000,
++					       PDO_FIXED_DUAL_ROLE |
++					       PDO_FIXED_DATA_SWAP |
++					       PDO_FIXED_USB_COMM)>;
++			op-sink-microwatt = <2000000>;
++
++			port {
++				fusb302: endpoint {
++					remote-endpoint = <&usb_dwc3_hs>;
++				};
++			};
++		};
++	};
++};
++
++&i2c_2 {
++	status = "okay";
++};
++
++&i2c_3 {
++	status = "okay";
++
++	touchscreen@62 {
++		compatible = "novatek,nt36672a-ts";
++		reg = <0x62>;
++		interrupts-extended = <&tlmm 65 IRQ_TYPE_EDGE_RISING>;
++
++		reset-gpios = <&tlmm 64 GPIO_ACTIVE_HIGH>;
++		iovcc-supply = <&pm8953_l6>;
++		/* vcc-supply should follow lab from panel */
++
++		pinctrl-0 = <&ts_reset_default &ts_int_default>;
++		pinctrl-1 = <&ts_reset_sleep &ts_int_sleep>;
++		pinctrl-names = "default", "sleep";
++
++		touchscreen-size-x = <720>;
++		touchscreen-size-y = <1520>;
++
++		status = "disabled";
++	};
++};
++
++&i2c_5 {
++	status = "okay";
++
++	pn553: nfc@28 {
++		compatible = "nxp,pn553", "nxp,nxp-nci-i2c";
++		reg = <0x28>;
++		interrupts-extended = <&tlmm 17 IRQ_TYPE_LEVEL_HIGH>;
++
++		enable-gpios = <&tlmm 16 GPIO_ACTIVE_HIGH>;
++		firmware-gpios = <&tlmm 62 GPIO_ACTIVE_HIGH>;
++
++		pinctrl-0 = <&nfc_firm_default &nfc_irq_default &nfc_pwr_default>;
++		pinctrl-names = "default";
++	};
++};
++
++&ibb {
++	qcom,discharge-resistor-kohms = <32>;
++};
++
++&lpass {
++	status = "okay";
++};
++
++&mdss_dsi0 {
++	vdda-supply = <&pm8953_s3>;
++	vddio-supply = <&pm8953_l6>;
++};
++
++&mdss_dsi0_out {
++	data-lanes = <0 1 2 3>;
++};
++
++&mdss_dsi0_phy {
++	vcca-supply = <&pm8953_l3>;
++};
++
++&mpss {
++	pll-supply = <&pm8953_l7>;
++
++	status = "okay";
++};
++
++&pm8953_resin {
++	linux,code = <KEY_VOLUMEDOWN>;
++
++	status = "okay";
++};
++
++&pmi8950_wled {
++	qcom,current-limit-microamp = <25000>;
++	qcom,num-strings = <2>;
++
++	qcom,cabc;
++	qcom,external-pfet;
++};
++
++&q6afedai {
++	dai@22 {
++		reg = <QUATERNARY_MI2S_RX>;
++		qcom,sd-lines = <0>;
++	};
++
++	dai@127 {
++		reg = <QUINARY_MI2S_RX>;
++		qcom,sd-lines = <1>;
++	};
++};
++
++&rpm_requests {
++	regulators {
++		compatible = "qcom,rpm-pm8953-regulators";
++		vdd_s1-supply = <&vph_pwr>;
++		vdd_s2-supply = <&vph_pwr>;
++		vdd_s3-supply = <&vph_pwr>;
++		vdd_s4-supply = <&vph_pwr>;
++		vdd_s5-supply = <&vph_pwr>;
++		vdd_s6-supply = <&vph_pwr>;
++		vdd_s7-supply = <&vph_pwr>;
++		vdd_l1-supply = <&pm8953_s3>;
++		vdd_l2_l3-supply = <&pm8953_s3>;
++		vdd_l4_l5_l6_l7_l16_l19-supply = <&pm8953_s4>;
++		vdd_l8_l11_l12_l13_l14_l15-supply = <&vph_pwr>;
++		vdd_l9_l10_l17_l18_l22-supply = <&vph_pwr>;
++		vdd_l23-supply = <&pm8953_s3>;
++
++		pm8953_s1: s1 {
++			regulator-min-microvolt = <863000>;
++			regulator-max-microvolt = <1152000>;
++		};
++
++		pm8953_s3: s3 {
++			regulator-min-microvolt = <1224000>;
++			regulator-max-microvolt = <1224000>;
++		};
++
++		pm8953_s4: s4 {
++			regulator-min-microvolt = <1896000>;
++			regulator-max-microvolt = <2048000>;
++		};
++
++		pm8953_l1: l1 {
++			regulator-min-microvolt = <1000000>;
++			regulator-max-microvolt = <1100000>;
++		};
++
++		pm8953_l2: l2 {
++			regulator-min-microvolt = <1200000>;
++			regulator-max-microvolt = <1200000>;
++		};
++
++		pm8953_l3: l3 {
++			regulator-min-microvolt = <925000>;
++			regulator-max-microvolt = <925000>;
++			regulator-allow-set-load;
++		};
++
++		pm8953_l5: l5 {
++			regulator-min-microvolt = <1800000>;
++			regulator-max-microvolt = <1800000>;
++		};
++
++		pm8953_l6: l6 {
++			regulator-min-microvolt = <1800000>;
++			regulator-max-microvolt = <1800000>;
++			regulator-always-on;
++		};
++
++		pm8953_l7: l7 {
++			regulator-min-microvolt = <1800000>;
++			regulator-max-microvolt = <1900000>;
++		};
++
++		pm8953_l8: l8 {
++			regulator-min-microvolt = <2900000>;
++			regulator-max-microvolt = <2900000>;
++		};
++
++		pm8953_l9: l9 {
++			regulator-min-microvolt = <3000000>;
++			regulator-max-microvolt = <3300000>;
++		};
++
++		pm8953_l10: l10 {
++			regulator-min-microvolt = <2850000>;
++			regulator-max-microvolt = <2850000>;
++		};
++
++		pm8953_l11: l11 {
++			regulator-min-microvolt = <2950000>;
++			regulator-max-microvolt = <2950000>;
++			regulator-allow-set-load;
++			regulator-system-load = <200000>;
++		};
++
++		pm8953_l12: l12 {
++			regulator-min-microvolt = <1800000>;
++			regulator-max-microvolt = <3000000>;
++		};
++
++		pm8953_l13: l13 {
++			regulator-min-microvolt = <3075000>;
++			regulator-max-microvolt = <3125000>;
++		};
++
++		pm8953_l15: l15 {
++			regulator-min-microvolt = <1800000>;
++			regulator-max-microvolt = <1800000>;
++		};
++
++		pm8953_l16: l16 {
++			regulator-min-microvolt = <1800000>;
++			regulator-max-microvolt = <1800000>;
++		};
++
++		pm8953_l17: l17 {
++			regulator-min-microvolt = <2850000>;
++			regulator-max-microvolt = <2850000>;
++		};
++
++		pm8953_l19: l19 {
++			regulator-min-microvolt = <1200000>;
++			regulator-max-microvolt = <1350000>;
++		};
++
++		pm8953_l22: l22 {
++			regulator-min-microvolt = <2900000>;
++			regulator-max-microvolt = <2900000>;
++		};
++
++		pm8953_l23: l23 {
++			regulator-min-microvolt = <1200000>;
++			regulator-max-microvolt = <1200000>;
++		};
++	};
++};
++
++&sdhc_1 {
++	vmmc-supply = <&pm8953_l8>;
++	vqmmc-supply = <&pm8953_l5>;
++
++	status = "okay";
++};
++
++&sdhc_2 {
++	cd-gpios = <&tlmm 133 GPIO_ACTIVE_LOW>;
++
++	pinctrl-0 = <&sdc2_clk_on &sdc2_cmd_on &sdc2_data_on &sdc2_cd_off>;
++	pinctrl-1 = <&sdc2_clk_off &sdc2_cmd_off &sdc2_data_off &sdc2_cd_off>;
++	pinctrl-names = "default", "sleep";
++
++	vmmc-supply = <&pm8953_l11>;
++	vqmmc-supply = <&pm8953_l12>;
++
++	status = "okay";
++};
++
++&tlmm {
++	gpio-reserved-ranges = <96 4>; /* Fingerprint SPI */
++
++	disp_reset_n_active: disp-reset-n-active-state {
++		pins = "gpio61";
++		function = "gpio";
++		drive-strength = <8>;
++		bias-disable;
++	};
++
++	disp_reset_n_sleep: disp-reset-n-sleep-state {
++		pins = "gpio61";
++		function = "gpio";
++		drive-strength = <2>;
++		bias-pull-down;
++	};
++
++	fusb302_int_default: fusb302-int-default-state {
++		pins = "gpio9";
++		function = "gpio";
++		drive-strength = <2>;
++		bias-pull-up;
++	};
++
++	mi2s_sec_act: mi2s-quat-active-state {
++		pins = "gpio135", "gpio136", "gpio137", "gpio138";
++		function = "sec_mi2s";
++		drive-strength = <8>;
++	};
++
++	mi2s_sec_sus: mi2s-quat-sleep-state {
++		pins = "gpio135", "gpio136", "gpio137", "gpio138";
++		function = "sec_mi2s";
++		drive-strength = <2>;
++		bias-pull-down;
++	};
++
++	nfc_firm_default: nfc-firm-state {
++		pins = "gpio62";
++		function = "gpio";
++		bias-pull-down;
++		output-low;
++		drive-strength = <2>;
++	};
++
++	nfc_irq_default: nfc-irq-state {
++		pins = "gpio17";
++		function = "gpio";
++		bias-pull-down;
++		drive-strength = <2>;
++	};
++
++	nfc_pwr_default: nfc-pwr-state {
++		pins = "gpio16";
++		function = "gpio";
++		bias-pull-down;
++		output-low;
++		drive-strength = <2>;
++	};
++
++	ts_int_default: ts-int-default-state {
++		pins = "gpio65";
++		function = "gpio";
++		drive-strength = <8>;
++		bias-pull-up;
++	};
++
++	ts_int_sleep: ts-int-sleep-state {
++		pins = "gpio65";
++		function = "gpio";
++		drive-strength = <2>;
++		bias-pull-down;
++	};
++
++	ts_reset_default: ts-reset-default-state {
++		pins = "gpio64";
++		function = "gpio";
++		drive-strength = <8>;
++		bias-pull-up;
++	};
++
++	ts_reset_sleep: ts-reset-sleep-state {
++		pins = "gpio64";
++		function = "gpio";
++		drive-strength = <2>;
++		bias-pull-down;
++	};
++};
++
++&usb3 {
++	status = "okay";
++};
++
++&usb_dwc3_hs {
++	remote-endpoint = <&fusb302>;
++};
++
++&wcnss {
++	vddpx-supply = <&pm8953_l5>;
++
++	status = "okay";
++};
++
++&wcnss_iris {
++	compatible = "qcom,wcn3660b";
++
++	vdddig-supply = <&pm8953_l5>;
++	vddpa-supply = <&pm8953_l9>;
++	vddrfa-supply = <&pm8953_l19>;
++	vddxo-supply = <&pm8953_l7>;
++};
 
 -- 
 2.55.0
