@@ -1,187 +1,191 @@
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 76F3F3BF66B
-	for <linux-arm-msm@vger.kernel.org>; Thu, 20 Aug 2026 19:31:52 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EFC06391E78
+	for <linux-arm-msm@vger.kernel.org>; Thu, 20 Aug 2026 19:48:56 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787254315; cv=none; b=XE8YBBB726Q0wT2UHJKXfOjs2ln1gaakeTnWwI77t+sd1u5+8Dk56kHrfjnhjhgQM/ilg9NgNbjagEr8EQOIZdXl9Uf5HUz9XP6iyntWtI2NInczjrXMOQLsQ+PxLpIup8wsSoFA3/vtroUbZahGyqBwLXnH1OiEeoDtWWb2jvA=
+	t=1787255338; cv=none; b=IZTJLF57agazb9tR25n+i40vh82l/sqZJqyHYZYs0vjn5oy6F2WcxtoVrzMkH5ehXVthcl/blvqbI/+gPiSTbpXW54HGUxuMTiEvwVcaNO9webXAOPukAZjpTBhAuLhuPgIhjJph5rFYgoeIUoPOA/B6K0nnDCh/wD0JAjhtVNo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787254315; c=relaxed/simple;
-	bh=buYWTX0uLRFSFElpOhOCi6lNLyb922r6zQZtzMYXQGk=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=YWisr2JM8+eXYwEY4QeNto9E5wcE1qHKbnVJ2nFdX6FpwcBlcM1GTVRXFqvF4N88JaAV4G/ltGupFUozZYF98IR6dyRjqpe9Ae0S6yV4vUVDRl6g40Zv4W8oO7gDDOWwNO9PjeOiSwI1PfiSHVci3o1nUr6yJzXkmtAHppeB/Tk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=kFPwPNAB; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=hCEb0C+X; arc=none smtp.client-ip=205.220.168.131
+	s=arc-20240116; t=1787255338; c=relaxed/simple;
+	bh=C8tLQCcUPVyl+nU7V9GvLsHmUI3vby175dXTcf2BV9Q=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=PVHqoeqBmrnhyxCHjQCoREcdS1JUpi5u24CRf/qSZHidgyCeg73oYZJbIwCXOy4+fEMe1XuUZfsAGUek9xCxFfSwam3CaRrPk8HfK4mmX70l96ZSRhi00H0MKYTZ6+/64vKZFPck18UDDL0cI019j3OyNzuwtRoDSq1f/KK8exw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=DOWetbHj; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=DpDFSXdf; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="kFPwPNAB";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="hCEb0C+X"
-Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67KIIv6K571549
-	for <linux-arm-msm@vger.kernel.org>; Thu, 20 Aug 2026 19:31:50 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="DOWetbHj";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="DpDFSXdf"
+Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67KIJ7Tq1066010
+	for <linux-arm-msm@vger.kernel.org>; Thu, 20 Aug 2026 19:48:56 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-type:date:from:in-reply-to:message-id:mime-version
-	:references:subject:to; s=qcppdkim1; bh=/b78zQyH2KktyaZ8ILgT2EEZ
-	CMgaqsbRBxYI5c6jus0=; b=kFPwPNAB38FNi1anfHcCqcwc7XeNh3hUnW1tBlf8
-	kQqMyX/TftqZu9h1vReikx1iD18ZUx6ODDZJ994quEp2a9fjDNetOTqhjuUjx8Wz
-	/037mwnl2yU1o1eoNvP7e8J/+D0kvGyGpPVWBHgp7CpxCSDAXiCV4A9yREJ4Xxhk
-	VkoTBhXX+aGUk0nLhI7eqiWnNaeyYVF3iP4ndKj2CLu8NtSCcxn4jKO0a9mOA+nz
-	cDZsdpI/XERL3BKSSuh4t8fVPun0imCrwMuu2YwXrK9Z26forIA5+LsSitax4ZJN
-	e8romIjE+Jiz3Ym92boeOR6SxvHT0PmEYh0sMCjO0UzuOA==
+	cc:content-transfer-encoding:date:from:message-id:mime-version
+	:subject:to; s=qcppdkim1; bh=x2Cmaab1c8skxG2XWMAOAO6+MfGSdVWYe9e
+	RT+Q7FR0=; b=DOWetbHjIo3hBlH5OepFF2/oJtZ9sj1U5SchZFWIhPK9l2Wv4yA
+	wku2TSLme2SYWGRTyUNtwtxGkUq0f8aTT8+W9YjBaFuZpOgWkwL+Rz2rvIjMt2TX
+	P1zt+CMJGxoNXfLp7KzLU7+Kw4EofrpCUqYwSW3R327aMkwwJJAqqBFCsZZfZ8Jj
+	fU8em8swmTbbBkz0MJJ0YhWmzRC8HZXDhFL8dNdMIL3hgoQscfu/mUTM+hg9R8v7
+	G5QZ4bXXVccc8858rLayGlRBhA3r6dA0wkJQmHmIStKX8ooYO1ISX9h+rDYa2afT
+	Qt3SZFMXTU9KJRmo4htp0GnEV5FMMgZEKYA==
 Received: from mail-qk1-f200.google.com (mail-qk1-f200.google.com [209.85.222.200])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g5xgcaxfj-1
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g5vn8beue-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Thu, 20 Aug 2026 19:31:50 +0000 (GMT)
-Received: by mail-qk1-f200.google.com with SMTP id af79cd13be357-9308eafb465so35885185a.2
-        for <linux-arm-msm@vger.kernel.org>; Thu, 20 Aug 2026 12:31:50 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 20 Aug 2026 19:48:56 +0000 (GMT)
+Received: by mail-qk1-f200.google.com with SMTP id af79cd13be357-92e52306621so22523085a.1
+        for <linux-arm-msm@vger.kernel.org>; Thu, 20 Aug 2026 12:48:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1787254309; x=1787859109; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=/b78zQyH2KktyaZ8ILgT2EEZCMgaqsbRBxYI5c6jus0=;
-        b=hCEb0C+XGUt8jv+pDd4ZHCsWccbMPO0/vLkyB8VdFZ4m5pVwL2zb+XXjSC4qx7VoQC
-         dWejgjxFIwY6jQW3XHLDHiP9RhG9gN3KdgrgbdpmEP+EYosE6QlraL8J/+5N35kaopW0
-         Fl37Kof9QH6XGPhgbdTkJviI8WilsDEgBaj5IScayAqidtpsMroki/k6HcvYr+d1VDOp
-         WIXP8AJIjTJpeWXbVOd5iSic4ut+4QqECee841g/Q/HYeZIUTjmN/QWqLAqM1HnoA4PL
-         +QQPrT2zz/uLCejtddkUAr1R+kXMEOKOj6JbBrU2aVqqWj97XiCo2PuXkuoD0gYQnD/5
-         tWNg==
+        d=oss.qualcomm.com; s=google; t=1787255335; x=1787860135; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=x2Cmaab1c8skxG2XWMAOAO6+MfGSdVWYe9eRT+Q7FR0=;
+        b=DpDFSXdfEfNgONTfhQMtyY2tw2z+CwAIXMIrBgknUDNC0eSVjk+1MsKKDHfApRE3Q8
+         LJMIMN6dVgaKMm/J/PDqfBSeYjuNUC8sBtKm3RK3yfqb8wTQ6Ib1JoFVY7DUT6yPNIwo
+         7ux9L259oGGOG5MY10ZaIiIznwWWXMChDGZ1OMbn4sgkpoAoUZhnAgjkPxcrszI6rIxi
+         YYn2njU8RP4rBn7oIoyubLFoXHbojQt1w4CfiDEnchEwn+PlUMyIMWEaiuQtCKrGZxkk
+         t/gBITvnsna//O2nLp2ijE6vWO8Mmbe02W1KHsPtVWKLgQ/eG/5JWNLzVKQbfNzfWf/u
+         Hcow==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787254309; x=1787859109;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=/b78zQyH2KktyaZ8ILgT2EEZCMgaqsbRBxYI5c6jus0=;
-        b=RtIQVOWgBW03wHRD4b3mZQoXUTAzybjytwPFvhbI8eQE3NrEf5cTeJhIfVvVZpQMfb
-         ur5qjvKOLijON9b6eoc1Q3lxp0i61+eq5DYT0H8MdzeeTOjfH0eqIsvCi+62GJuteo5C
-         EVbtcuWEzPU+s0T3hfeztbaxIbtj0F7Xhv2B0jy8Wfpu/sBKjR8wYViIn5/+vRRjkP3/
-         dYnQ++0/zDVV6RaV394szxlpH98pMAv2l/AwNgvhLBEj7khp/9lMyS2+0GhNrvFqy1+2
-         9BFWs51VkpjP0fZ2KpQTh5/KglsVCPNhL/XzJ9FykB44aKrsq67veTuwosIwivWg6+zB
-         SxZg==
-X-Forwarded-Encrypted: i=1; AHgh+Rr5hfmLsv9D+JRojO/M2wjeTr8x6GiTZrURpbJzL9k3w/gRWxRdfgHxbWyp7YPbsQl9EtSccdRbHLAEezMM@vger.kernel.org
-X-Gm-Message-State: AOJu0Yy9MlVObN51JMRh00kgWax/1+lsVQi8FI3y4TH4jNy35slrK4N3
-	g0O7tXQrHKG2Kk6g8Xe09kf5n5gdH6sRKBkMJVYABvux8oFTzDdq3u+2Ru1Q2vllFixchLn4PQb
-	DB/E5Cxrea0JjkjX9267BlZHg9l7csPoMTOQhsQXMAC8wOjVxdSBOMZAx/Yv6luappnbB
-X-Gm-Gg: AR+sD12fqrma5FQQSpH56ZurkhK5Lu9MsaOCXysKEPDZRyqLRSpuQrBKfEFtwgFo6Sa
-	GuXq4upR/0BgLISA0yaOUjkx/BT3calJ3ZbnOfFRWOjKi+fv1DffyZXfHnwDKxHPL4+SDoEHu9N
-	qkeG701fiwfr45o1DpcLyiHtcKx7Ui2mLqy/ozmj8rrMH7BgWSqJk/wG1sDjFznUuhOVDJglf9N
-	yf19xameyesG4bbaM0rbGUozXLD3wnV4xJUfM6jg8Z05RBNInkXsTlNLBd94zDacX8qh9xJxcGq
-	ICex0j7ZqP6fXrsI6ZeKVKDi/M/4+k2K9/GJrQXenCq6gj6jYa3FnGIRchYCb/ChjaIQJYH5XTs
-	NWgMyYoecMaLMbqA=
-X-Received: by 2002:a05:620a:a805:b0:936:e243:9f07 with SMTP id af79cd13be357-93739539337mr43649285a.27.1787254309196;
-        Thu, 20 Aug 2026 12:31:49 -0700 (PDT)
-X-Received: by 2002:a05:620a:a805:b0:936:e243:9f07 with SMTP id af79cd13be357-93739539337mr43641385a.27.1787254308543;
-        Thu, 20 Aug 2026 12:31:48 -0700 (PDT)
-Received: from oss.qualcomm.com ([188.27.161.240])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-499b914bfcbsm2614135e9.9.2026.08.20.12.31.47
+        d=1e100.net; s=20251104; t=1787255335; x=1787860135;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=x2Cmaab1c8skxG2XWMAOAO6+MfGSdVWYe9eRT+Q7FR0=;
+        b=hpMPzv5ePf6GoPxv1lHKnlnRpQxpQNSQclfCbAMTiodvR/6gjRmrBC6Q5on1V4/wqz
+         0gHzkwetoWayBmuGNLQuk8tA9HfEz4cZGiRFMQkXUl1in/vkL2Yr/1+IhaZ0O9Y9luhE
+         sgk4UwJteHJC+aUxl4S/oOnHUxgYn39AhUJWj+tORaiGzzHfWifPUptmwPg2SxrfJFKo
+         SOnrzxtg2drpmdF/ei6lmFOTxfEWaBZXgEU6F/56+FTD3d1ZGAnEi3xaq7xOACte187A
+         Oejz1EfOu55mIxOltZYLRKWJUnISQhSTMfu19Y812rZ52v+jjxu0LjCo8yTERWP6Wuf8
+         sEKA==
+X-Forwarded-Encrypted: i=1; AHgh+RoljM7935GcJhoRhMPxSYp60ZyscgBSzis3SOMVt8s3x0MNhIlqd/yY1kZ+r0L+Qey9yW+Ksq5TyyvdjlSl@vger.kernel.org
+X-Gm-Message-State: AOJu0YwgoPBzTZ5W8JIzk46Uv7YC2DS9/r3k3E3AiTPpLsS0XyUchCbA
+	UYgIQxsTfXcpG6ntJVbDrqbaq3eqKlfLiHu4lci5oDX6hWEKi3/Ncwgoj+NTe+Y+6HyCF6XdhAQ
+	GJlipJVXhywUu61xB+6vgRh/79jZ3Wfouh5UU6s9uMiQh0wlMfeQWYKtSVWbJvV7XZOPL
+X-Gm-Gg: AR+sD10D8UVPj7FT2VXBpmaq2Djy3kSHU1JBW3WG4F2WAgk+Eb0P85duSZdAf+x1nk6
+	genY0BwmzJgf5qDNV/6rZ2OTPoCjd5nZSie/hRuD4VatQdzWWytKVJb8d9ZD2coLzP3YfYbsNzq
+	NL4swSNQxAt0zS8XmBcDeeyDY6ujqkpAeyEUtjrnLiOXOWtpi12RKnz+gY3XysuvZrlbhW8+LNe
+	tjM75q0G4bFiN1+jsA95vtJ1Jk6E+ZZxt3GY9NDQ3OuBVci61DxUjhz05Pso18CT/BPuQYqqENV
+	2TQUSDcmwDMeFOmOIRoh066GPGGsPaBkjYmudS8WjDZy4PQmtGrrx8dvBmuR3PEhvb8SZb5H5dN
+	e85wY5V2VTjnG
+X-Received: by 2002:a05:620a:319e:b0:936:ea3d:9313 with SMTP id af79cd13be357-93739497c75mr56868085a.20.1787255335017;
+        Thu, 20 Aug 2026 12:48:55 -0700 (PDT)
+X-Received: by 2002:a05:620a:319e:b0:936:ea3d:9313 with SMTP id af79cd13be357-93739497c75mr56863585a.20.1787255334517;
+        Thu, 20 Aug 2026 12:48:54 -0700 (PDT)
+Received: from shalem ([2001:1c00:c32:7800:5bfa:a036:83f0:f9ec])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c2459198ec5sm113433266b.34.2026.08.20.12.48.53
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 20 Aug 2026 12:31:47 -0700 (PDT)
-Date: Thu, 20 Aug 2026 22:31:46 +0300
-From: Abel Vesa <abel.vesa@oss.qualcomm.com>
-To: Konrad Dybcio <konradybcio@kernel.org>
-Cc: Bjorn Andersson <andersson@kernel.org>, linux-arm-msm@vger.kernel.org,
-        linux-kernel@vger.kernel.org,
-        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-Subject: Re: [PATCH] soc: qcom: smem: support Glymur DRAM info
-Message-ID: <zwpgeeapcjwtad7xyerz3bdegrtbuu2ajdqt5yjpcvxgopq3kq@cg2uvzmdtwyh>
-References: <20260820-topic-glymur_dramc-v1-1-f714eef34e4d@oss.qualcomm.com>
+        Thu, 20 Aug 2026 12:48:53 -0700 (PDT)
+From: Hans de Goede <johannes.goede@oss.qualcomm.com>
+To: Bjorn Andersson <andersson@kernel.org>,
+        Cristian Marussi <cristian.marussi@arm.com>,
+        Sudeep Holla <sudeep.holla@kernel.org>
+Cc: Hans de Goede <johannes.goede@oss.qualcomm.com>,
+        Daniel Lezcano <daniel.lezcano@oss.qualcomm.com>,
+        arm-scmi@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
+        linux-arm-msm@vger.kernel.org, imx@lists.linux.dev,
+        linux-kernel@vger.kernel.org
+Subject: [PATCH v3 0/3] firmware: arm_scmi: fix module auto-loading
+Date: Thu, 20 Aug 2026 21:48:47 +0200
+Message-ID: <20260820194850.459739-1-johannes.goede@oss.qualcomm.com>
+X-Mailer: git-send-email 2.55.0
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260820-topic-glymur_dramc-v1-1-f714eef34e4d@oss.qualcomm.com>
-X-Authority-Analysis: v=2.4 cv=GPM41ONK c=1 sm=1 tr=0 ts=6a875626 cx=c_pps
- a=hnmNkyzTK/kJ09Xio7VxxA==:117 a=wUpz7uCjLrEXi01cjX+DLw==:17
- a=kj9zAlcOel0A:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22
- a=EUspDBNiAAAA:8 a=Jo7FG_STVPlGlPSEqzEA:9 a=CjuIK1q_8ugA:10
- a=PEH46H7Ffwr30OY-TuGO:22
-X-Proofpoint-ORIG-GUID: KAka0O9RQW9tlb7Wdj7X64dvNekVMX15
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODIwMDE0NyBTYWx0ZWRfX3uSSThz9TV9W
- AOQiLA/eRvA7O35TqNZJ8g5rL50sZn2Yaz9JM9WjNZTj3N2+AIsv4eEPUdzn7q28MfMxJIO/qsK
- uls3qkn60qKvPTO8P57K1Tv2gFNoEda3sV6SGMcaTaLQ7Kn2GQUpKENsgQ0PUIdvnAOibj/dzRR
- qgSbhkCJBcNEXp3+FWWpKaRIUeCx/y/8Lc25wlrD3gt6YiiQjm07fGynZWuA9ChGkj3QEPKTfqd
- 0s1eVQBy/hIFvh2MnAh5UxC5k36swrMEPTyVIrCkBbRy2l5qOjcDxuUnejRtyMli8/E68tpnzCr
- M3C7sLIqIaAaJjUVNDn80O6vj6gh/5Q08HDJ1A8W+4Xm95779sp4OfCb7XRGxzgFTX2rp2iNohr
- N1npO/diQK/Z6SgiYHjzuyGNFLx6P7PxQd6ueUIpjLFrf6ABF+Fv/jU4u5XhFFfHLb02nvh+SDI
- GmnyqHyO3Dj0fmlrGqQ==
-X-Proofpoint-GUID: KAka0O9RQW9tlb7Wdj7X64dvNekVMX15
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODIwMDE0NyBTYWx0ZWRfX7dVNdhv8YDUE
- +dpkS+Qv9K9GhCcHXu7XGtGbhwM22rG/s+w+v7B436iNxp+WX7ZTE/b7zToIEKvPpudTCmX7hQr
- P4rZVftYZ2X3nloD8VgxunQWEOK3lZ0=
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODIwMDE0OSBTYWx0ZWRfX3lonEUlNf6qu
+ EE9Dm32ULoCfkfvGBZwlM2X0M0aiI/51BjTrSnFB6+/sBU+DaBtwTU9TurHeDE77qnmIIJO6ZOD
+ SZw0lELPs2OsIshT+MAUXm2XqHxAnpT+xrccbQp17stVbfya7l2oyveCpFFq7yxHMuszDQWx215
+ KbqzeFyMVKLXCPZFs1Qd4DSsXFbv1JtzLmNWgzDcmNdz3myoQdfoN6Mz3JHStBVCaBvcnmwyMAB
+ kVEyFr9blYWraT9E/Ke8BZPuFOA5qAn42P8rPNOH17Ytqw+AfGs9T8SNuzKUkGaW8zy8XOo1p3v
+ hxfrFqRTWojAjbU72rtvT9CuR6v6g9MOjGK+TaQRg2MebQeBaFdl0JUhfuqdV/EBPtieiFRv/WN
+ l0uVKh8SuAMEfiOFxzjkmFvwGG+9ylS7wXcJI9TwrKw/E24RB72RewxJRX/tlvuJFPsI1fLblaf
+ xrwD6SkHbEKv2VOpUhw==
+X-Authority-Analysis: v=2.4 cv=KpJ9H2WN c=1 sm=1 tr=0 ts=6a875a28 cx=c_pps
+ a=hnmNkyzTK/kJ09Xio7VxxA==:117 a=xqWC_Br6kY4A:10 a=Sv0fKeRqtYgA:10
+ a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
+ a=eoimf2acIAo5FJnRuUoq:22 a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=bC-a23v3AAAA:8
+ a=7CQSdrXTAAAA:8 a=QYgjaYqrS4LJc6J_j6wA:9 a=PEH46H7Ffwr30OY-TuGO:22
+ a=FO4_E8m0qiDe52t0p3_H:22 a=a-qgeE7W1pNrGK8U0ZQC:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODIwMDE0OSBTYWx0ZWRfX0wk4nFgeQ9Fn
+ L6SRMk7/3LQoNDo7yPybH7z2d+mr3yygGq+BvUmkkT4P1yoGwpYe+FKbO0lHFnEtV4frCM+qaTC
+ n1fEkQBD36PfDrJtitoZTYFAZOMeMhk=
+X-Proofpoint-ORIG-GUID: MuCc_GMCtTri4Ld0hzv61LIA3rpkaWqm
+X-Proofpoint-GUID: MuCc_GMCtTri4Ld0hzv61LIA3rpkaWqm
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-08-20_01,2026-08-20_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- bulkscore=0 priorityscore=1501 spamscore=0 clxscore=1015 impostorscore=0
- lowpriorityscore=0 suspectscore=0 phishscore=0 malwarescore=0 adultscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608200147
+ phishscore=0 adultscore=0 malwarescore=0 lowpriorityscore=0
+ priorityscore=1501 impostorscore=0 bulkscore=0 suspectscore=0 clxscore=1015
+ spamscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
+ adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2608200149
 
-On 26-08-20 18:30:08, Konrad Dybcio wrote:
-> From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-> 
-> Glymur firmware provides a version 7 DDR-info SMEM entry whose 872-byte
-> layout is different from the one the driver supports today.
-> 
-> The data contains 16 channel descriptors, 14 DDR frequency slots, four
-> 4 DDR region slots, a 10-entry SHUB frequency plan, and v6 misc information.
-> It accounts for 616 bytes; the captured SMEM entry has a further 256
-> zero bytes.
-> 
-> Add a Glymur-specific version 7 layout and recognize that complete entry.
-> Parse the DDR frequencies and highest-bank bit from the common fields.
-> 
-> Assisted-by: LLM
-> Signed-off-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-> ---
-> Validated on the ASUS Zenbook A16 and Glymur CRD
-> ---
->  drivers/soc/qcom/smem_dramc.c | 66 +++++++++++++++++++++++++++++++++++++++++++
->  1 file changed, 66 insertions(+)
-> 
-> diff --git a/drivers/soc/qcom/smem_dramc.c b/drivers/soc/qcom/smem_dramc.c
-> index 63ebe7f6db59..9e3234a67406 100644
-> --- a/drivers/soc/qcom/smem_dramc.c
-> +++ b/drivers/soc/qcom/smem_dramc.c
-> @@ -20,12 +20,22 @@
->  #define MAX_DDR_FREQ_NUM_V5		14
->  
->  #define MAX_CHAN_NUM			8
-> +#define MAX_CHAN_NUM_V7_GLYMUR		16
->  #define MAX_RANK_NUM			2
->  
->  #define DDR_HBB_MIN			13
->  #define DDR_HBB_MAX			19
->  
->  #define MAX_SHUB_ENTRIES		8
-> +#define MAX_SHUB_ENTRIES_V7_GLYMUR	10
-> +#define MAX_DDR_REGIONS_V7_GLYMUR	4
-> +
-> +/*
-> + * Glymur's DRAM information entry has 256 bytes of trailing zeroes
-> + * after its DDR details, four region slots, 10-entry SHUB frequency
-> + * plan, and v6 misc information.
-> + */
-> +#define DDR_V7_GLYMUR_RESERVED_SIZE	256
->  
->  static struct smem_dram *__dram;
->  
-> @@ -39,6 +49,7 @@ enum ddr_info_version {
->  	INFO_V6, /* INFO_V6 seems to only have shipped with 6 DDR regions, unlike V7 */
->  	INFO_V7,
->  	INFO_V7_WITH_6_REGIONS,
-> +	INFO_V7_GLYMUR,
+Hi All,
 
-Just curious, isn't there like a minor version number that could be
-used instead of the GLYMUR suffix here?
+Here is a patch series fixing arm_scmi module autoloading this combines:
 
-Anyway, looks OK to me, so:
+1. Patch 1/2 from Bjorn to add support for scmi bus modaliases to modpost:
+https://lore.kernel.org/all/20260618-scmi-modalias-v2-1-8c7547c1be21@oss.qualcomm.com/
 
-Reviewed-by: Abel Vesa <abel.vesa@oss.qualcomm.com>
+2. RFC 2/2 from Cristian which pre-populates the scmi { protocol, name }
+tupple list with standard protocol info to break the circular dep:
+https://patch.msgid.link/20250203100154.140877-2-cristian.marussi@arm.com
+
+1. is not enough by itself because driver module auto-loading requires
+the devices to already be created for udev to get the necessary uevents
+based on which udev auto-loads modules.
+
+But SCMI devices are only created after their { protocol, name } tupples
+have been registered which is done from scmi_driver_register(), creating
+a circular dependency.
+
+2. breaks the circular dependency by pre-populating the { protocol, name }
+list with the standard protocols. This allows the devices to be created
+before the module with the driver is loaded, after which module auto
+loading works the same as it does on any other bus.
+
+I've tested this on a T14s Snapdragon laptop with Fedora's kernel config
+where scmi_cpufreq is a module. With this series scmi_cpufreq correctly
+autoloads even if it is not included in the initramfs.
+
+I've added a 3th patch extending the pre-populating to also include all
+the { protocol, name } tupples for the in tree SCMI drivers for IMX
+vendor protocols, so that module auto-loading will work for all in tree
+drivers.
+
+Out of tree drivers can still register new tupples as before but their
+modules will need to be manually loaded (also as before).
+
+Regards,
+
+Hans
+
+
+Bjorn Andersson (1):
+  module: add SCMI device table alias support
+
+Cristian Marussi (1):
+  firmware: arm_scmi: Pre-register protocol, name tupples for standard
+    protocols
+
+Hans de Goede (1):
+  firmware: arm_scmi: Pre-register protocol, name tupples for IMX
+    protocols
+
+ MAINTAINERS                       |  1 +
+ drivers/firmware/arm_scmi/bus.c   | 75 +++++++++++++++++++++++--------
+ include/linux/device-id/scmi.h    | 19 ++++++++
+ include/linux/mod_devicetable.h   |  1 +
+ include/linux/scmi_protocol.h     |  6 +--
+ scripts/mod/devicetable-offsets.c |  4 ++
+ scripts/mod/file2alias.c          | 11 +++++
+ 7 files changed, 94 insertions(+), 23 deletions(-)
+ create mode 100644 include/linux/device-id/scmi.h
+
+-- 
+2.55.0
+
