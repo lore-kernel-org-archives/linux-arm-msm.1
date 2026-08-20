@@ -1,160 +1,228 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EE47123ED60
-	for <linux-arm-msm@vger.kernel.org>; Thu, 20 Aug 2026 08:53:58 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AA5763815E1;
+	Thu, 20 Aug 2026 09:08:01 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787216040; cv=none; b=LjAI3m6EHV8Q9sc3pGMZeY7TuWX5p5pWSgQkvCSZMkqNKXRrJDxEdnByZHJNc2JMArRU44hkUFsYtRpGmtGZTATqhrrq2FdY4pSEif7+SmN4fWbnZCxFjeKwkxjJ3U8hb/q7oiDsfXDDts4skboKIj4FE7LjKtRJR/lY3V0qiD8=
+	t=1787216883; cv=none; b=ZxRKT9mLyYl/9GjtjiKSGMFvoaIH8qweYv4Bsw0HC2p/ZRo7Xtsr0I8DEwqk4GWXqfrGznplggHEQlbmtIoLicswGqsgbdoWFv1P+piECWkhnEM1p6Pc4RoXD/nu5F1piIQAap7AOqr5kRsB0bpvt+a11lz0AHpNVmPaQ5JIgeg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787216040; c=relaxed/simple;
-	bh=n7Zs+sfj3JVKbeDjlNAC6tOKobXagwDkJLMc/UeWY/I=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=BPZpVrgkSacy38ZY0sAublMr5omU/w4iwQ46bn9UxA5RwnxG9c9LBWfdJTHxZB1PjVsoOcyanBbzoVSirmKVtFcBwrwpRpMusFAGMOvPpYmLmvnD4HQrtE8JfhWCC6Rkqa4M8iIm8CFODU6TYXvW9RbrtTJqST2FlsXsuMoAlBk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=WnjVshFV; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=CydCZS6R; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1787216883; c=relaxed/simple;
+	bh=CjiDKzlsB4CYB3VlBFqqIUTkbqsfzicmrXYq15K6CAc=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=iGwgqa6W1T4N3QUfbc8iclxWCxlVdIRLBxLJv6nlExg94ADrQ8R1jsY1C5sVYtjj5k0PpsYvn3qMINfQakU1hansJQ9pit4wvdijzx6IhVPC9ngCtoHfCk4E6ChN+CBURR17OPHSHL4XjBS6/EiQhTPSVQUMl30cf7fv3B485I8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=mlmSPT3J; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="WnjVshFV";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="CydCZS6R"
-Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67K6edEY2161218
-	for <linux-arm-msm@vger.kernel.org>; Thu, 20 Aug 2026 08:53:58 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:date:from:message-id:mime-version
-	:subject:to; s=qcppdkim1; bh=G6rSLeSwhh0joHC9IB21m9Hfs8vxaMS/tmh
-	xtXJXReo=; b=WnjVshFVQAzQ8ekq3BBtJtmNaqgiEf8IVE8Rs8f0KJqquwMpibg
-	Z9NInt0DGBEQF+hgjc5Lqmiw9PVJi60lF1j7GTJjpWHObHvhQ1iL8x4anPmFYrSV
-	9WSEzbNqRY5GUcp9rue0wqoRCdyE0Rq2KaVuclMNrEibg7X2cqk/VhfYyyymT/JE
-	+11kaF9j4B4JfNlOF1HMNROE7F5t07BuQiTGqPhpfD5bifqRES7JPvvxAew7HsVH
-	Gt1VQP+POGwjJlybBFPLSlQxjCMpeVr/X5YGVOvSDDoSJ4ODevwUrGp8nT6BN9Qh
-	xLiLNOuqkbSRcsWNqUhQQsmxCisGfKSZApQ==
-Received: from mail-pl1-f199.google.com (mail-pl1-f199.google.com [209.85.214.199])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g5vh7rffu-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Thu, 20 Aug 2026 08:53:58 +0000 (GMT)
-Received: by mail-pl1-f199.google.com with SMTP id d9443c01a7336-2cee1ec30f2so26780835ad.3
-        for <linux-arm-msm@vger.kernel.org>; Thu, 20 Aug 2026 01:53:58 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1787216037; x=1787820837; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=G6rSLeSwhh0joHC9IB21m9Hfs8vxaMS/tmhxtXJXReo=;
-        b=CydCZS6RbLwfdACyQsAwgsNBXTw/Ci32En8y1y3y9n9b6r7qs+OX+MmT6iEIWzjeKz
-         E6PSQfuY5GTPn9LeHubtXFQS9CeQ5YmIIzFT8QMvcjNrYHKhzWyojqw7hdUPN0kNisJ9
-         NyJKRkWnYDX8Lp7eXcP8Txb+TPZT977hAb6Wm3wLtHqANMzjtUTX7h8f1D7XjQF+N2tF
-         5vfyFdBAQWM3I9xb8iCUYugTkYsNQptFshP9lQaWC+tdswloK+P+XlzNYvt0JcSRd8Qp
-         4+XP9mqpDaURuXhD6dJSB8iKYMlF4X1SHqksUobN8SWmQIPsiF21HWLb417pthvDzrQA
-         TJ9g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787216037; x=1787820837;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=G6rSLeSwhh0joHC9IB21m9Hfs8vxaMS/tmhxtXJXReo=;
-        b=oxYQxOjgEmPDBYvAZygmpb92tAerfJwD/05IcqP54AIuCZz53gB/+li6K7HVTU6wNB
-         fzBiBlDMegjV1tycSGL94lf2/u7n0/XEhRBuRWQBN4dhr9IPiixcp1Z6gewOkh5opx1D
-         qrE/S5nHEUbm7L5xZNnS3vSsnWk8yv8DB5cazR4UXBb1Z46SulX/KOmWL0mcHM6pRxOx
-         cAQagjDyUQMqiAL6HhF78cwooeuROXzpotw5B0HHlS0AA5IbRd3HGr9nrwHRYH3866Cf
-         O/vvhdqonq1QThSYzfikOxI8zWadsqqQED7vV/E8HTD4p5+AbYTZSGrX58qMPDBKNKJe
-         JNww==
-X-Gm-Message-State: AFuF++mhYVOh+K+5U/j4G6eHqHzUoIHdMOuRIBY8xRBvp+uK4sg5/SeU
-	2YxiMO+d42nFoBzMax24wbM0wenJ98x5fD5WwsObV06VkBiZTZRpkBz18E4jm+OkZvPRD4FISKm
-	R6PEb8L8B196whSpU27C5TcaSgQXHYpF0K7DithNzFFF2zIXOo8fo4mEvIzwB3fgyyvVg
-X-Gm-Gg: AR+sD13e77ncqqnoLPuMSCWUoBdIlpbHc7McRpiYlzs51ZbRjJmv81bxH3BVUQyy6ig
-	vDOrwBUGEUKyicHsY9YPMDEuUKtBBkWA97IggEaxlbfMzZndCmw4D8cvkcEccOG3hg1JHMdhe/H
-	siBlB3R++8YpQ0H77zoygupMEE/5ukq9exkK0e89NIUOVIfhirnUsUOT410jdZyOqWTN1dWw7bx
-	KtjzwQpkkNafsnNvZ3Mey1YmTHaHTIPJbmgkcYax1rrkMH3oIfpdkFMpOPyGauVqHlLxK8B26F3
-	7G19LMuskBGFN+n4uNbr3TWQJJxOWYlIXFVm+BlYd36H8jKaz88kPUO8sHkpdJLCexcYQC3RSDz
-	MUx6CHcDSe+JdDZrrv+X2u+N6+V147S1+7b/KpA3NInEQlAoCWg6LwbkOkaKys5JhszUdAw==
-X-Received: by 2002:a17:902:ef43:b0:2bf:27b2:4b80 with SMTP id d9443c01a7336-2d5fd7121cdmr217454335ad.14.1787216037412;
-        Thu, 20 Aug 2026 01:53:57 -0700 (PDT)
-X-Received: by 2002:a17:902:ef43:b0:2bf:27b2:4b80 with SMTP id d9443c01a7336-2d5fd7121cdmr217453565ad.14.1787216036900;
-        Thu, 20 Aug 2026 01:53:56 -0700 (PDT)
-Received: from QCOM-FNWBis4jZR.qualcomm.com (tpe-colo-wan-fw-bordernet.qualcomm.com. [103.229.16.4])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2d62d353556sm4059325ad.0.2026.08.20.01.53.51
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 20 Aug 2026 01:53:56 -0700 (PDT)
-From: Xueyao An <xueyao.an@oss.qualcomm.com>
-To: Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-Subject: [PATCH v1] arm64: dts: qcom: shikra: Unreserve GPIOs 14-17 blocking SPI5 access
-Date: Thu, 20 Aug 2026 16:53:47 +0800
-Message-ID: <20260820085347.822-1-xueyao.an@oss.qualcomm.com>
-X-Mailer: git-send-email 2.43.0
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="mlmSPT3J"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3E4C01F000E9;
+	Thu, 20 Aug 2026 09:07:48 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1787216881;
+	bh=HbWHyhAGccmmUKHPlabuPDznJTtRzS7rm2Ks8U4Pdfc=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To;
+	b=mlmSPT3J/cxMvk1ov/w4xrvfdrL6tX66o8ftXD5mN3k7JQ8j3foKO9uBxmBQydxt1
+	 TtMSCXwwGkasHU0t3ucF2w3dJWF7QFP/DVBqasId6l5nO45toANB+2trMq8b8Lturb
+	 1tzJWNqxDt/Uwp0HuNtForVsvHnj06UOoe4pkyxDdPKrScwLpD/QxB3fzbKoe6ZBqf
+	 YS3e+wDJI8t3uWw8HpZjGmY868z0ohcXf+doJY12cRN3l+HFNq+ZB2JQVseDqVIMe5
+	 Lc2M/o42Xq42es7Zh5DrfISEpE4qv23FIKNLg38AAtA4TbonNtvyniinosKwNGP/09
+	 qzqp3pidoqThg==
+Message-ID: <a642833b-f22a-4bea-8a20-0debc47e1895@kernel.org>
+Date: Thu, 20 Aug 2026 11:07:45 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODIwMDA2NCBTYWx0ZWRfX8qEaeELcU30b
- ikirxUqKvtJ1Gdv02JePKkMfum6PTYBmuhV1vvg3j7AHMN+QW8MPtH0QG+1ZpGDK2Khrg0PbrEk
- wSH8Tuniuk3hAFjNMNMCfHNJah1iClMVcMjwzAZCvuFgg6Pe0waUclYLGLKmMtWe4PGrmLshN5G
- /V1lvUTLdBUAJ9IpFS47G2eY+P0XSaeHHrt4J5z8UCntTT3WmKJb3+ThHnZcEnL2PWe2wfxTXzV
- OEQBm+78mWiXUZgO9827FKcXkTa364JFanADJLmj7ic8ZCRhLXakKXgZE3m8RN531NDEmAxV8T3
- 6tJuSx8aFoWLEEfRc1KnYoKEYtwsBHmttwgolj5BfFl7484cB7KVTymnV87R6SUt4rzc3A1C4hT
- oca+o8SsDuf42uX/ertyq4E/FNAfThZOCqDIyr/R7jLPgFFmxsx1XpzID5JWl07L4QkzJnGuWkm
- Y6WEk+DyJpIielZ+big==
-X-Proofpoint-ORIG-GUID: mDa3VqtPLNDszL6j7Hqb-1tJuMqbtBly
-X-Authority-Analysis: v=2.4 cv=Y7fIdBeN c=1 sm=1 tr=0 ts=6a86c0a6 cx=c_pps
- a=JL+w9abYAAE89/QcEU+0QA==:117 a=nuhDOHQX5FNHPW3J6Bj6AA==:17
- a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22 a=EUspDBNiAAAA:8
- a=AHVglHzCgFTiPKyIrRAA:9 a=324X-CrmTo6CU4MGRt3R:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODIwMDA2NCBTYWx0ZWRfX8M8sYKFqmBtR
- Fo9wt991nLYh/EWFUtZNIJh6Rhz002qPaPHVqQT9y4wWzAJrULjYPE8jPxCy2du9iS9TcFhKkRV
- HARr4XP9TqAR1QLIrUMhyJgOUG88hvk=
-X-Proofpoint-GUID: mDa3VqtPLNDszL6j7Hqb-1tJuMqbtBly
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-08-19_06,2026-08-19_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- suspectscore=0 bulkscore=0 clxscore=1011 malwarescore=0 impostorscore=0
- lowpriorityscore=0 spamscore=0 adultscore=0 phishscore=0 priorityscore=1501
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608200064
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 03/15] accel/qda: Add initial QDA DRM accelerator
+ driver
+To: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+Cc: Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>,
+ Oded Gabbay <ogabbay@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
+ Shuah Khan <skhan@linuxfoundation.org>, Randy Dunlap
+ <rdunlap@infradead.org>, Nathan Chancellor <nathan@kernel.org>,
+ Nick Desaulniers <ndesaulniers@google.com>, Bill Wendling
+ <morbo@google.com>, Justin Stitt <justinstitt@google.com>,
+ "Joerg Roedel (AMD)" <joro@8bytes.org>, Will Deacon <will@kernel.org>,
+ Robin Murphy <robin.murphy@arm.com>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+ Sumit Semwal <sumit.semwal@linaro.org>,
+ =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
+ Bharath Kumar <quic_bkumar@quicinc.com>,
+ Chenna Kesava Raju <quic_chennak@quicinc.com>,
+ srinivas.kandagatla@oss.qualcomm.com, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org,
+ linux-arm-msm@vger.kernel.org, llvm@lists.linux.dev, iommu@lists.linux.dev,
+ linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
+References: <20260817-qda-v2-v2-0-69a02e9090d4@oss.qualcomm.com>
+ <20260817-qda-v2-v2-3-69a02e9090d4@oss.qualcomm.com>
+ <81708487-89ce-4cd5-b39a-2989bdce6088@kernel.org>
+ <3476b5c3-7983-4994-a901-3d7d8bd75255@oss.qualcomm.com>
+ <4ef74e14-8433-4619-ac97-62868c8799d1@kernel.org>
+ <g5orcvzjbwww27vwcsxl3ehrek6lvznxptd7jutifoiuicjnm6@iqq2pus6omsl>
+From: Krzysztof Kozlowski <krzk@kernel.org>
+Content-Language: en-US
+Autocrypt: addr=krzk@kernel.org; keydata=
+ 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
+In-Reply-To: <g5orcvzjbwww27vwcsxl3ehrek6lvznxptd7jutifoiuicjnm6@iqq2pus6omsl>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-GPIOs 14-17 were previously reserved in the tlmm gpio-reserved-ranges,
-preventing Linux from accessing SPI5. Since there is no TZ use case for
-these pins on Linux, they can be safely unreserved. Removing them from
-the reserved list across all three Shikra EVK variants (CQM, CQS, IQS)
-resolves the SPI5 access issue.
+On 20/08/2026 10:52, Dmitry Baryshkov wrote:
+> On Wed, Aug 19, 2026 at 04:18:51PM +0200, Krzysztof Kozlowski wrote:
+>> On 19/08/2026 15:17, Ekansh Gupta wrote:
+>>> On 19-08-2026 00:40, Krzysztof Kozlowski wrote:
+>>>> On 17/08/2026 06:47, Ekansh Gupta wrote:
+>>>>> Add the skeleton of the Qualcomm DSP Accelerator (QDA) driver, a DRM
+>>>>> accel driver for the Hexagon DSPs found on Qualcomm SoCs.
+>>>>>
+>>>>> This patch registers a DRM accel device, exposing a /dev/accel/accelN
+>>>>> character device node, and binds it to the RPMsg channel used to reach
+>>>>> the DSP. Buffer management, IOMMU context banks and the FastRPC
+>>>>> protocol are added by later patches in this series.
+>>>>>
+>>>>> qda_drv.c / qda_drv.h define the drm_driver ops table, the per-file
+>>>>> private state (qda_file_priv) and the main device structure (qda_dev),
+>>>>> which embeds drm_device so that it can be recovered with container_of().
+>>>>>
+>>>>> qda_rpmsg.c binds to the "qcom,fastrpc" compatible via
+>>>>> module_rpmsg_driver(), reads the DSP domain name from the "label"
+>>>>> device-tree property, and registers the DRM device.
+>>>>>
+>>>>> Assisted-by: Claude:claude-sonnet-5
+>>>>> Signed-off-by: Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>
+>>>>> ---
+>>>>> Changes in v2:
+>>>>> - Use module_rpmsg_driver() and drop the qda_rpmsg_register()/
+>>>>>   _unregister() wrappers, module_init()/module_exit() and
+>>>>>   qda_rpmsg.h entirely (Dmitry Baryshkov)
+>>>>> - Read the "label" property directly into qdev->dsp_name (Dmitry Baryshkov)
+>>>>> - Drop the probe/remove/init log messages (Dmitry Baryshkov)
+>>>>> - Return the result of qda_register_device() directly (Dmitry Baryshkov)
+>>>>> - Clarify the Kconfig help text (Dmitry Baryshkov)
+>>>>> ---
+>>>>>  drivers/accel/Kconfig         |  1 +
+>>>>>  drivers/accel/Makefile        |  1 +
+>>>>>  drivers/accel/qda/Kconfig     | 30 ++++++++++++++++
+>>>>>  drivers/accel/qda/Makefile    | 10 ++++++
+>>>>>  drivers/accel/qda/qda_drv.c   | 71 ++++++++++++++++++++++++++++++++++++++
+>>>>>  drivers/accel/qda/qda_drv.h   | 61 +++++++++++++++++++++++++++++++++
+>>>>>  drivers/accel/qda/qda_rpmsg.c | 79 +++++++++++++++++++++++++++++++++++++++++++
+>>>>>  7 files changed, 253 insertions(+)
+>>>>>
+>>>>> diff --git a/drivers/accel/Kconfig b/drivers/accel/Kconfig
+>>>>> index bdf48ccafcf2..74ac0f71bc9d 100644
+>>>>> --- a/drivers/accel/Kconfig
+>>>>> +++ b/drivers/accel/Kconfig
+>>>>> @@ -29,6 +29,7 @@ source "drivers/accel/ethosu/Kconfig"
+>>>>>  source "drivers/accel/habanalabs/Kconfig"
+>>>>>  source "drivers/accel/ivpu/Kconfig"
+>>>>>  source "drivers/accel/qaic/Kconfig"
+>>>>> +source "drivers/accel/qda/Kconfig"
+>>>>>  source "drivers/accel/rocket/Kconfig"
+>>>>>  
+>>>>>  endif
+>>>>> diff --git a/drivers/accel/Makefile b/drivers/accel/Makefile
+>>>>> index 1d3a7251b950..58c08dd5f389 100644
+>>>>> --- a/drivers/accel/Makefile
+>>>>> +++ b/drivers/accel/Makefile
+>>>>> @@ -5,4 +5,5 @@ obj-$(CONFIG_DRM_ACCEL_ARM_ETHOSU)	+= ethosu/
+>>>>>  obj-$(CONFIG_DRM_ACCEL_HABANALABS)	+= habanalabs/
+>>>>>  obj-$(CONFIG_DRM_ACCEL_IVPU)		+= ivpu/
+>>>>>  obj-$(CONFIG_DRM_ACCEL_QAIC)		+= qaic/
+>>>>> +obj-$(CONFIG_DRM_ACCEL_QDA)		+= qda/
+>>>>>  obj-$(CONFIG_DRM_ACCEL_ROCKET)		+= rocket/
+>>>>> \ No newline at end of file
+>>>>
+>>>> You have trivial patch errors.
+>>> newline problem was already there, wasn't introduced as part of this
+>>> patch series, so I wasn't sure to fix it here. I can fix this in v3.>
+>>>> ...
+>>>>
+>>>>> +}
+>>>>> +
+>>>>> +static const struct of_device_id qda_rpmsg_id_table[] = {
+>>>>> +	{ .compatible = "qcom,fastrpc" },
+>>>>> +	{},
+>>>>
+>>>> Device node with this compatible is already populated, so this looks
+>>>> simply wrong or you are adding a duplicated driver.
+>>>>
+>>>> That's a no-go, you are supposed to work with existing drivers and grow
+>>>> them.
+>>> I'll bring the discussion again here, there was a discussion to move the
+>>> driver to accel subsystem if we want to support new features/uAPI
+>>> changes. Please read [1],[2] threads. The intention is to replace
+>>> fastrpc driver with QDA eventually.
+>>
+>> None of them address the problem. You want to grow fastrpc into user of
+>> dmabuf? So you move it from misc to here.
+> 
+> It's not as easy and nice, so I think in this case it's better to repeat
 
-Signed-off-by: Xueyao An <xueyao.an@oss.qualcomm.com>
----
- arch/arm64/boot/dts/qcom/shikra-cqm-som.dtsi | 1 -
- arch/arm64/boot/dts/qcom/shikra-iqs-som.dtsi | 1 -
- 2 files changed, 2 deletions(-)
+I disagree. The existing fastrpc driver is not that complicated. It's
+actually moderate amount of code, much less than Venus was (~7 times less).
 
-diff --git a/arch/arm64/boot/dts/qcom/shikra-cqm-som.dtsi b/arch/arm64/boot/dts/qcom/shikra-cqm-som.dtsi
-index 8ac42ff625a0..fde7fc035bf5 100644
---- a/arch/arm64/boot/dts/qcom/shikra-cqm-som.dtsi
-+++ b/arch/arm64/boot/dts/qcom/shikra-cqm-som.dtsi
-@@ -197,7 +197,6 @@ pm4125_l22: l22 {
- 
- &tlmm {
- 	gpio-reserved-ranges = <6 4>, /* Fingerprint SPI */
--			       <14 4>, /* eSE SPI */
- 			       <30 2>, /* NFC SPI */
- 			       <138 1>, /* NFC Secure IO */
- 			       <155 11>; /* eMMC Boot */
-diff --git a/arch/arm64/boot/dts/qcom/shikra-iqs-som.dtsi b/arch/arm64/boot/dts/qcom/shikra-iqs-som.dtsi
-index 4ff97945274d..e119ace54e58 100644
---- a/arch/arm64/boot/dts/qcom/shikra-iqs-som.dtsi
-+++ b/arch/arm64/boot/dts/qcom/shikra-iqs-som.dtsi
-@@ -219,7 +219,6 @@ pm8150_l18: l18 {
- 
- &tlmm {
- 	 gpio-reserved-ranges = <6 4>, /* Fingerprint SPI */
--			       <14 4>, /* eSE SPI */
- 			       <30 2>, /* NFC SPI */
- 			       <138 1>, /* NFC Secure IO */
- 			       <155 11>; /* eMMC Boot */
--- 
-2.43.0
+It easily can grow to support two interfaces and the only difficulty is
+how to manage these two interfaces simultaneously or exclusively, e.g.
+opening first one disables the second.
 
+> what we did for the venus/iris migration or what happened already
+> several times in the kernel history (for example the AIC7xxx SCSI host
+> drivers were migrated by introducing the second driver and then removing
+> the first one after the grace period). The backwards compatibility is a
+> separate topic, but it will be addressed before the driver can be
+
+Backwards compatibility should be one of the first things explained in
+cover letter in one of the first paragraphs.
+
+And if you make it backwards compatible, then just remove old driver,
+because there is no point to keep it there. Again, this should be one of
+the first things explained in cover letter.
+
+Best regards,
+Krzysztof
