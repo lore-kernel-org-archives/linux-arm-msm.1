@@ -1,159 +1,109 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-ed1-f48.google.com (mail-ed1-f48.google.com [209.85.208.48])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9425146D2DB;
-	Thu, 20 Aug 2026 13:31:45 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 961FC44AB80
+	for <linux-arm-msm@vger.kernel.org>; Thu, 20 Aug 2026 13:44:32 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.208.48
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787232710; cv=none; b=i9edkzeG6efBfmg7nkI0Eg90wlg/PXAUNTj/RV2OtPi6z28VELdQqDV1S6LWCPy5pMyr94Po9DU8Q3pnigJwD67F6AV6ZIQceGwpKabUFtUb3L6MvQOaI3DOfYu/OdOlkIuDOj+l/hJ20310OfDVC6Pgjdq3quRq14GMLEarivA=
+	t=1787233474; cv=none; b=La8WfQwHXyrkvWC4yinTExJU1dUs7T9RGu/lrP1k+Zkrg/9P5Bmo+hFbsTjtSBNEVAC2gKAHDLDBtraFNljHouJHMKrQyoFY9VLVs8BFLX3AVafzfcG1MIJE6ynbBXI0na7Bib1TqcMB1x9Wqbh0BJZElmapFPLbaTN2o7Axkzg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787232710; c=relaxed/simple;
-	bh=IXH532W9nQe3iTd6yiQpJQVVtTqis60RHuj3w12JoIc=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=AlzUawnFmhvBE+wqrhtRmIpC5zcLFAGH6RF7qa/0mUx5LXxGSmpRr5MqB89PB+jsi/M17Ho4Efttvb3LExHIh2//95OhZucUFe0Y9ZsuBG9CWchrYqtpqYDEtgl68SIlKiC+CsxIUjWq7XqFF7GdBYZWYoqKm9Zeb56BZVKemWg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Ulo0GSHk; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1787233474; c=relaxed/simple;
+	bh=V/MT0h4y0UuCq9bmmF639GPbx8+zDtKLwl4uzqXwhWE=;
+	h=From:To:Cc:Subject:Message-ID:Date:MIME-Version:Content-Type; b=EhId7cIWEBs2/aiNKPJPXoRgcXftzRswBEhtdkiEY96RvdUhpc1H39LEorhLFo9mHETqJQwU85Z6odVlC6+NtIK3dDmXHJDsTY+2ruSN6uekcugM8+5dXEJChr34+LbiMYO9lgORwBozNbwK9jwRYBoARfyOObyyppIs1MUX4YI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=ferrisoft.com; spf=pass smtp.mailfrom=ferrisoft.com; dkim=pass (2048-bit key) header.d=ferrisoft-com.20251104.gappssmtp.com header.i=@ferrisoft-com.20251104.gappssmtp.com header.b=nlNbIg39; arc=none smtp.client-ip=209.85.208.48
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=ferrisoft.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ferrisoft.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Ulo0GSHk"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 399211F000E9;
-	Thu, 20 Aug 2026 13:31:30 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1787232701;
-	bh=ulM9nrSrQt6FECJtLrk+YzsnAy0bZz7OONexKExTW14=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=Ulo0GSHkUqjgMYyzSRC5s33m4+ChuX6N3cRQUDz9P5Wffg+Iblb6lihFpLGkv67AS
-	 wPbIZ6/tWXPw5QXGHSsD7WtmFK2SC3J7hdx5j55bwPeja13VWh/0Tbc2ewqrw4bZcl
-	 sZiVYJoWo4h3+i+ct+KBoOSF1/4jO4dvcu2Rt6ZYH8nLJM5aQiLwJHzTfYJSXO4zfU
-	 ++uJdip1oiG6Tdzd50fJSxxwsHrfG+r5w9IKwQirGlpwavYNkqsiw2+/5F/mibutjI
-	 zozqDP5tqAz0Wh5ISNmd8/wiNfulwUpVIytMFkp62/9KX6exuMBwfSsRowxRX2WEai
-	 fugb4xiUNOayQ==
-Message-ID: <59aa182d-1b4c-4bdc-a1d5-e76cc9c88ed9@kernel.org>
-Date: Thu, 20 Aug 2026 15:31:28 +0200
+	dkim=pass (2048-bit key) header.d=ferrisoft-com.20251104.gappssmtp.com header.i=@ferrisoft-com.20251104.gappssmtp.com header.b="nlNbIg39"
+Received: by mail-ed1-f48.google.com with SMTP id 4fb4d7f45d1cf-6a36982a875so3583414a12.0
+        for <linux-arm-msm@vger.kernel.org>; Thu, 20 Aug 2026 06:44:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=ferrisoft-com.20251104.gappssmtp.com; s=20251104; t=1787233471; x=1787838271; darn=vger.kernel.org;
+        h=content-type:mime-version:date:message-id:subject:cc:to:from:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=gpygo29h7AxRRVUfGlZ5f0maeaHqpMwX6cqMH9s1eBE=;
+        b=nlNbIg39pd6AcznSogqeh/5yV1HpdMokV1szy2nFXgwCpjMgBF8gdTHjHIoQXd0RsZ
+         nfO1cXiL0UHLZozXdw54uwYRImi05zUXLYAX/pQKEAeWnxkKh+erQp1aUCgbVD/PJFQL
+         TQ8zWBws74pbzzSr388uZTq/0Jg4McD8+upTYgcS/j0t7qMkpoIRStj5dw7SFy3RvNTj
+         Sn+r39V90mhsIK0qhlIZAC5+clSZncDdI1uKgowXM4Vyd4UB8ghYkohN4TzaYEV9BFxk
+         xxb8+NMcoou4oqteZWovv9AEx3MueMsXr/v5aI5XSGYedjc5HZVb9Zxu/YPt5i9JjXOv
+         YaJg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1787233471; x=1787838271;
+        h=content-type:mime-version:date:message-id:subject:cc:to:from
+         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=gpygo29h7AxRRVUfGlZ5f0maeaHqpMwX6cqMH9s1eBE=;
+        b=hq1itFSeKKKktycdH6dRKzWQ6DoV6/Rx0kNiIAdDuQBuQsDxjp4SaI5xayqulyZjZv
+         gtyj3oFCoXYE/exGmhIcazPvhEzb+/lx5YOWyO9izuumMv+aHupBPXX4BhmFjwoqY7f+
+         QDq7XP6x0CVBRXAR2qB0ot0bym/6hEjXmkMv/chm/5pP5JxEzyGzqTxO6Of5X2Ps5u+q
+         MmF45UnPX3A4qK75Ljhuu0NGIG/wY0X4JuFs6H32dEWD0bT/6EMXr0O5U192Xium7X8x
+         PlIFi6tnYHo8wlCg7zZ3OPVDWBE/H4kpAExTXxpPkoZq9NhnvIVDl89ePN4OUVM+Uwfn
+         lqfg==
+X-Gm-Message-State: AFuF++lhn1Y8B3NTxGZqyAUGSpvCOxbLou8Bl2V7xFFXPX7kbDMWHRz5
+	SRIjx0ZsdYL4jAvhdIe3rAzxah9Jv2CmjdtvKoickjZl5olYMHMDzx+QqC89Nb0H2+xTmgKXYTH
+	0T8q5qx3cY2f6Yg==
+X-Gm-Gg: AR+sD12P3Sl3IcLWvVbGVzkWkkkUHvc2GKZvrJh02WbxZIIeB/+XTpvI6XzIHMietqb
+	0Jyq58UqDBXuIAnNXOBzajlIBN+se4qbc5QnG/Oi9drRSKZjwRmWNe5ScnwKxd9KlN1HxixeztM
+	sFNHPWOTen2PHfG571tvlAX9/YhLzKnU1sQqJDihH/ZG5Gx8I5IUn7FHI+736lZOk1ubi9tbN92
+	Cmxio7A18+x74zuv+cXOLMsNso9LFKEvKPKio4+REneSBwsjWOgdj3InHntpUYNyPZ84RbaGd1H
+	QOusjKiSTtCGZzgc+dx2/d5gsMi9hIt6Mc8RTbRgjN5GXsY6qGuevw70iv84UYYnfeHZ5pRa3Xm
+	sWWceB06+4DYGBRlG6585wPfw0HtvV+fC7xIeKkQDn8mrDQQyWvA/bdKe6p0BrVuSyD/QosU3hX
+	nn5X2imr2mBWiipD4ihk0Qck2KNTZgbImX1Rt3yVktYTstuDBfpHJZiI2BFd8dLCp8Y1OWrgeDZ
+	/Abp4aTtyWPPg==
+X-Received: by 2002:a05:6402:2403:b0:6a3:e813:8457 with SMTP id 4fb4d7f45d1cf-6a4032f9c61mr9541576a12.12.1787233470427;
+        Thu, 20 Aug 2026 06:44:30 -0700 (PDT)
+Received: from mail-0004.txt (45-11-61-69.ip4.greenlan.pl. [45.11.61.69])
+        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-6a3ff0c3491sm2182899a12.10.2026.08.20.06.44.28
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 20 Aug 2026 06:44:29 -0700 (PDT)
+From: Greg Ociepka <greg@ferrisoft.com>
+To: linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org, freedreno@lists.freedesktop.org
+Cc: Rob Clark <robin.clark@oss.qualcomm.com>, Sean Paul <sean@poorly.run>, Konrad Dybcio <konradybcio@kernel.org>, Akhil P Oommen <akhilpo@oss.qualcomm.com>
+Subject: drm/msm: unrecoverable a8xx hang-recovery loop on Glymur ("cx gdsc didn't collapse"); killing the offending client does not stop the loop
+Message-ID: <20260820154428.1278@ferrisoft.com>
+Date: Thu, 20 Aug 2026 15:44:28 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 03/15] accel/qda: Add initial QDA DRM accelerator
- driver
-To: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-Cc: Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>,
- Oded Gabbay <ogabbay@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
- Shuah Khan <skhan@linuxfoundation.org>, Randy Dunlap
- <rdunlap@infradead.org>, Nathan Chancellor <nathan@kernel.org>,
- Nick Desaulniers <ndesaulniers@google.com>, Bill Wendling
- <morbo@google.com>, Justin Stitt <justinstitt@google.com>,
- "Joerg Roedel (AMD)" <joro@8bytes.org>, Will Deacon <will@kernel.org>,
- Robin Murphy <robin.murphy@arm.com>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
- Sumit Semwal <sumit.semwal@linaro.org>,
- =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
- Bharath Kumar <quic_bkumar@quicinc.com>,
- Chenna Kesava Raju <quic_chennak@quicinc.com>,
- srinivas.kandagatla@oss.qualcomm.com, linux-kernel@vger.kernel.org,
- dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org,
- linux-arm-msm@vger.kernel.org, llvm@lists.linux.dev, iommu@lists.linux.dev,
- linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
-References: <20260817-qda-v2-v2-0-69a02e9090d4@oss.qualcomm.com>
- <20260817-qda-v2-v2-3-69a02e9090d4@oss.qualcomm.com>
- <81708487-89ce-4cd5-b39a-2989bdce6088@kernel.org>
- <3476b5c3-7983-4994-a901-3d7d8bd75255@oss.qualcomm.com>
- <4ef74e14-8433-4619-ac97-62868c8799d1@kernel.org>
- <g5orcvzjbwww27vwcsxl3ehrek6lvznxptd7jutifoiuicjnm6@iqq2pus6omsl>
- <a642833b-f22a-4bea-8a20-0debc47e1895@kernel.org>
- <4xcyqqrqbvgxojfcmnpwbi2uqk5tvhts52l6sxetltcgb7mo75@lfsgfoq4npz3>
-From: Krzysztof Kozlowski <krzk@kernel.org>
-Content-Language: en-US
-Autocrypt: addr=krzk@kernel.org; keydata=
- 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
-In-Reply-To: <4xcyqqrqbvgxojfcmnpwbi2uqk5tvhts52l6sxetltcgb7mo75@lfsgfoq4npz3>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
 
-On 20/08/2026 12:07, Dmitry Baryshkov wrote:
-> On Thu, Aug 20, 2026 at 11:07:45AM +0200, Krzysztof Kozlowski wrote:
->>>>>>
->>>>>> Device node with this compatible is already populated, so this looks
->>>>>> simply wrong or you are adding a duplicated driver.
->>>>>>
->>>>>> That's a no-go, you are supposed to work with existing drivers and grow
->>>>>> them.
->>>>> I'll bring the discussion again here, there was a discussion to move the
->>>>> driver to accel subsystem if we want to support new features/uAPI
->>>>> changes. Please read [1],[2] threads. The intention is to replace
->>>>> fastrpc driver with QDA eventually.
->>>>
->>>> None of them address the problem. You want to grow fastrpc into user of
->>>> dmabuf? So you move it from misc to here.
->>>
->>> It's not as easy and nice, so I think in this case it's better to repeat
->>
->> I disagree. The existing fastrpc driver is not that complicated. It's
->> actually moderate amount of code, much less than Venus was (~7 times less).
->>
->> It easily can grow to support two interfaces and the only difficulty is
->> how to manage these two interfaces simultaneously or exclusively, e.g.
->> opening first one disables the second.
-> 
-> I see the point here.
-> 
-> Would it be acceptable if we add QDA support only on the new platforms
-> (e.g. via the SoC-specific compat), provide QDA for those platforms,
-> and, once it reaches complete API and feature parity, we remove the old
-> fastrpc driver, migrati old platforms.
+Hi,
 
-The problem with this approach is that we have no guarantees that it
-will reach feature parity in respect of old interface, thus old driver
-might stay forever. If we agree for duplicated driver, contributors have
-no incentives to support old approach.
+On an ASUS Zenbook A16 (UX3607OA, Snapdragon X2 Elite Extreme "Glymur", Adreno GPU, chip id 0x44070041) we are hitting an unrecoverable GPU recovery loop that, once triggered, can only be cleared by a full reboot.
 
-Much better is to refine the old driver, gradually adding new features
-while maintaining old stuff. This is the only way we can force
-contributors to actively work on minimizing duplicate parts.
+Environment:
+- kernel: linux-next next-20260730, plus a handful of local patches for this laptop (USB wakeup-source/dma-coherent DTS, CPU thermal trips, an eDP link-training retry tweak and a DP debug-print ratelimit); none of them touch the GPU, GMU, GDSC or GPU clock paths
+- Mesa 26.1.5 (freedreno, a8xx)
+- GMU firmware v5.2.38 (qcom/gen80100_gmu.bin) and gen80100_sqe.fw from linux-firmware
+- niri (smithay-based Wayland compositor), ordinary desktop clients
 
-Best regards,
-Krzysztof
+Symptom: a regular client (rotating across sessions: chromium, firefox, Xwayland, thunderbird) eventually triggers a GPU fault. From that point recovery loops at roughly 1 Hz; every iteration logs:
+
+  adreno 3d00000.gpu: [drm:a8xx_irq [msm]] *ERROR* gpu fault ring 2 fence 28f9c status 00880005 gfx_status 00880004
+  adreno 3d00000.gpu: [drm:a8xx_irq [msm]] *ERROR* BR: status 00880004 rb 0002/0078 ib1 0000000000000000/0000 ib2 0000000000000000/0000 ib3 0000000000000000/0000
+  adreno 3d00000.gpu: [drm:a8xx_irq [msm]] *ERROR* BV: status 00880004 rb 0000/0078 ib1 0000000000000000/0000 ib2 0000000000000000/0000 ib3 0000000000000000/0000
+  msm_dpu ae01000.display-controller: [drm:recover_worker [msm]] *ERROR* 44070041: hangcheck recover!
+  msm_dpu ae01000.display-controller: [drm:recover_worker [msm]] *ERROR* 44070041: offending task: <client>
+  adreno 3d00000.gpu: [drm:a8xx_recover [msm]] *ERROR* cx gdsc didn't collapse
+
+Observations across four separate incidents (2026-08-09 to 2026-08-20; longest 60+ minutes; worst measured rate 161 recover cycles in 5 minutes):
+
+1. The reported offending client differs between incidents and can change within a single incident.
+2. Killing the offending client does not stop the loop. We verified this explicitly: after SIGTERM-ing the reported victim the loop continued at an unchanged rate within seconds, and the next client that submitted work became the new "offending task". The corrupted state evidently survives in hardware/firmware rather than in the client.
+3. The loop never converges on its own; only a full reboot restores the GPU. While it runs, the victim's surface stays black and the whole desktop degrades, since every recovery stalls the GPU.
+4. Onset correlates with many clients creating GPU contexts in parallel, e.g. right after a session restore spawns half a dozen applications at once.
+
+Since every iteration reports "cx gdsc didn't collapse", the recovery path apparently never succeeds in power-cycling the GPU, which would explain why the fault state persists across recovery attempts. Two questions this raises:
+
+- Is the CX GDSC on Glymur shared with, or kept up by, other consumers (the display path, for instance) so that it cannot collapse while the panel is active - which would make this recovery flow structurally ineffective on this SoC?
+- Or does gen8/GMU require a different stop/reset sequence before the collapse is attempted?
+
+We are happy to test patches, run instrumented builds, and provide full journals or devcoredumps - the machine reproduces this every couple of days under normal desktop use.
+
+Thanks,
+Greg Ociepka
+
