@@ -1,109 +1,84 @@
-Received: from mail-ed1-f48.google.com (mail-ed1-f48.google.com [209.85.208.48])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 961FC44AB80
-	for <linux-arm-msm@vger.kernel.org>; Thu, 20 Aug 2026 13:44:32 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.208.48
+Received: from azure-sdnproxy.icoremail.net (azure-sdnproxy.icoremail.net [13.76.78.106])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5FDF53002D1;
+	Thu, 20 Aug 2026 13:54:31 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=13.76.78.106
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787233474; cv=none; b=La8WfQwHXyrkvWC4yinTExJU1dUs7T9RGu/lrP1k+Zkrg/9P5Bmo+hFbsTjtSBNEVAC2gKAHDLDBtraFNljHouJHMKrQyoFY9VLVs8BFLX3AVafzfcG1MIJE6ynbBXI0na7Bib1TqcMB1x9Wqbh0BJZElmapFPLbaTN2o7Axkzg=
+	t=1787234077; cv=none; b=L1g2xhyMO1+jXpJd6YR7PVOBbH9JScW/F3TqTVLIhZHMO2fBYc1jzRjQDPdRuaHsTERTGva38Bu3BtdtOUJ2tZLOUFU7cEdKMNNTtvkvcxkS8ap3D3bHg38mtboIeTPtTaGazIEWSWqacMABbMuUsKQ0P5k1O2IRTo8xl9sDoSI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787233474; c=relaxed/simple;
-	bh=V/MT0h4y0UuCq9bmmF639GPbx8+zDtKLwl4uzqXwhWE=;
-	h=From:To:Cc:Subject:Message-ID:Date:MIME-Version:Content-Type; b=EhId7cIWEBs2/aiNKPJPXoRgcXftzRswBEhtdkiEY96RvdUhpc1H39LEorhLFo9mHETqJQwU85Z6odVlC6+NtIK3dDmXHJDsTY+2ruSN6uekcugM8+5dXEJChr34+LbiMYO9lgORwBozNbwK9jwRYBoARfyOObyyppIs1MUX4YI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=ferrisoft.com; spf=pass smtp.mailfrom=ferrisoft.com; dkim=pass (2048-bit key) header.d=ferrisoft-com.20251104.gappssmtp.com header.i=@ferrisoft-com.20251104.gappssmtp.com header.b=nlNbIg39; arc=none smtp.client-ip=209.85.208.48
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=ferrisoft.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ferrisoft.com
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=ferrisoft-com.20251104.gappssmtp.com header.i=@ferrisoft-com.20251104.gappssmtp.com header.b="nlNbIg39"
-Received: by mail-ed1-f48.google.com with SMTP id 4fb4d7f45d1cf-6a36982a875so3583414a12.0
-        for <linux-arm-msm@vger.kernel.org>; Thu, 20 Aug 2026 06:44:32 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=ferrisoft-com.20251104.gappssmtp.com; s=20251104; t=1787233471; x=1787838271; darn=vger.kernel.org;
-        h=content-type:mime-version:date:message-id:subject:cc:to:from:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=gpygo29h7AxRRVUfGlZ5f0maeaHqpMwX6cqMH9s1eBE=;
-        b=nlNbIg39pd6AcznSogqeh/5yV1HpdMokV1szy2nFXgwCpjMgBF8gdTHjHIoQXd0RsZ
-         nfO1cXiL0UHLZozXdw54uwYRImi05zUXLYAX/pQKEAeWnxkKh+erQp1aUCgbVD/PJFQL
-         TQ8zWBws74pbzzSr388uZTq/0Jg4McD8+upTYgcS/j0t7qMkpoIRStj5dw7SFy3RvNTj
-         Sn+r39V90mhsIK0qhlIZAC5+clSZncDdI1uKgowXM4Vyd4UB8ghYkohN4TzaYEV9BFxk
-         xxb8+NMcoou4oqteZWovv9AEx3MueMsXr/v5aI5XSGYedjc5HZVb9Zxu/YPt5i9JjXOv
-         YaJg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787233471; x=1787838271;
-        h=content-type:mime-version:date:message-id:subject:cc:to:from
-         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=gpygo29h7AxRRVUfGlZ5f0maeaHqpMwX6cqMH9s1eBE=;
-        b=hq1itFSeKKKktycdH6dRKzWQ6DoV6/Rx0kNiIAdDuQBuQsDxjp4SaI5xayqulyZjZv
-         gtyj3oFCoXYE/exGmhIcazPvhEzb+/lx5YOWyO9izuumMv+aHupBPXX4BhmFjwoqY7f+
-         QDq7XP6x0CVBRXAR2qB0ot0bym/6hEjXmkMv/chm/5pP5JxEzyGzqTxO6Of5X2Ps5u+q
-         MmF45UnPX3A4qK75Ljhuu0NGIG/wY0X4JuFs6H32dEWD0bT/6EMXr0O5U192Xium7X8x
-         PlIFi6tnYHo8wlCg7zZ3OPVDWBE/H4kpAExTXxpPkoZq9NhnvIVDl89ePN4OUVM+Uwfn
-         lqfg==
-X-Gm-Message-State: AFuF++lhn1Y8B3NTxGZqyAUGSpvCOxbLou8Bl2V7xFFXPX7kbDMWHRz5
-	SRIjx0ZsdYL4jAvhdIe3rAzxah9Jv2CmjdtvKoickjZl5olYMHMDzx+QqC89Nb0H2+xTmgKXYTH
-	0T8q5qx3cY2f6Yg==
-X-Gm-Gg: AR+sD12P3Sl3IcLWvVbGVzkWkkkUHvc2GKZvrJh02WbxZIIeB/+XTpvI6XzIHMietqb
-	0Jyq58UqDBXuIAnNXOBzajlIBN+se4qbc5QnG/Oi9drRSKZjwRmWNe5ScnwKxd9KlN1HxixeztM
-	sFNHPWOTen2PHfG571tvlAX9/YhLzKnU1sQqJDihH/ZG5Gx8I5IUn7FHI+736lZOk1ubi9tbN92
-	Cmxio7A18+x74zuv+cXOLMsNso9LFKEvKPKio4+REneSBwsjWOgdj3InHntpUYNyPZ84RbaGd1H
-	QOusjKiSTtCGZzgc+dx2/d5gsMi9hIt6Mc8RTbRgjN5GXsY6qGuevw70iv84UYYnfeHZ5pRa3Xm
-	sWWceB06+4DYGBRlG6585wPfw0HtvV+fC7xIeKkQDn8mrDQQyWvA/bdKe6p0BrVuSyD/QosU3hX
-	nn5X2imr2mBWiipD4ihk0Qck2KNTZgbImX1Rt3yVktYTstuDBfpHJZiI2BFd8dLCp8Y1OWrgeDZ
-	/Abp4aTtyWPPg==
-X-Received: by 2002:a05:6402:2403:b0:6a3:e813:8457 with SMTP id 4fb4d7f45d1cf-6a4032f9c61mr9541576a12.12.1787233470427;
-        Thu, 20 Aug 2026 06:44:30 -0700 (PDT)
-Received: from mail-0004.txt (45-11-61-69.ip4.greenlan.pl. [45.11.61.69])
-        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-6a3ff0c3491sm2182899a12.10.2026.08.20.06.44.28
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 20 Aug 2026 06:44:29 -0700 (PDT)
-From: Greg Ociepka <greg@ferrisoft.com>
-To: linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org, freedreno@lists.freedesktop.org
-Cc: Rob Clark <robin.clark@oss.qualcomm.com>, Sean Paul <sean@poorly.run>, Konrad Dybcio <konradybcio@kernel.org>, Akhil P Oommen <akhilpo@oss.qualcomm.com>
-Subject: drm/msm: unrecoverable a8xx hang-recovery loop on Glymur ("cx gdsc didn't collapse"); killing the offending client does not stop the loop
-Message-ID: <20260820154428.1278@ferrisoft.com>
-Date: Thu, 20 Aug 2026 15:44:28 +0200
+	s=arc-20240116; t=1787234077; c=relaxed/simple;
+	bh=wrba2UJ86qo1PVuFl2HwutZLudLXaonc7ur9SlppQn0=;
+	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
+	 MIME-Version; b=Q848bufJbHRx0F4mbO2nDbAo+0CGEqfaIe1aJv/YbPF2T5h+10drhZbgyjdLKbKk7wN02b98C/d+Hz4ekCOq1WF3HzmyGZQZHC6S3XzMKzjB/mEhCZKvpyTghSgREbrfUZR1/sEd87cW7YOvpCVMrC7Y7fAF2l0hiRDGueMta6g=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=zju.edu.cn; spf=pass smtp.mailfrom=zju.edu.cn; arc=none smtp.client-ip=13.76.78.106
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=zju.edu.cn
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=zju.edu.cn
+Received: from zju.edu.cn (unknown [10.98.66.117])
+	by mtasvr (Coremail) with SMTP id _____wBHXnwNB4dqrAauAA--.5917S3;
+	Thu, 20 Aug 2026 21:54:22 +0800 (CST)
+Received: from localhost.localdomain (unknown [10.98.66.117])
+	by mail-app3 (Coremail) with SMTP id zS_KCgCXgncNB4dq4qKJBA--.53615S2;
+	Thu, 20 Aug 2026 21:54:21 +0800 (CST)
+From: Fan Wu <fanwu01@zju.edu.cn>
+To: linux-usb@vger.kernel.org
+Cc: bryan.odonoghue@linaro.org,
+	heikki.krogerus@linux.intel.com,
+	gregkh@linuxfoundation.org,
+	linux-arm-msm@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	stable@vger.kernel.org,
+	Fan Wu <fanwu01@zju.edu.cn>
+Subject: [PATCH v2 0/2] usb: typec: qcom-pmic-typec: cc_debounce_dwork lifetime fixes
+Date: Thu, 20 Aug 2026 13:53:05 +0000
+Message-Id: <20260820135307.153773-1-fanwu01@zju.edu.cn>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20260819161950.77858-1-fanwu01@zju.edu.cn>
+References: <20260819161950.77858-1-fanwu01@zju.edu.cn>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID:zS_KCgCXgncNB4dq4qKJBA--.53615S2
+X-CM-SenderInfo: qrstjiaswqq6lmxovvfxof0/
+X-CM-DELIVERINFO: =?B?gqmj7wXKKxbFmtjJiESix3B1w3vZ3A9ovKVTomAyoQazvoRs/NHSP8GI2EvgeEEW7R
+	sfnZPoDCNGYdHSfuFmYJL54WNeoIa8HzmzMWM8lWt4H0+dgkqcYy6hAI3JzeV6+CAacnY9
+	YJ/ZOx+MvV2CKLice6up9E6mavGmQbzmcFsnzP86
+X-Coremail-Antispam: 1Uk129KBj9xXoWrtrykCr15CFWfXFWrAF45CFX_yoW3urb_Za
+	48t3y8uw4UZFn2v3WUWFyUA34ftFy3Xa45tFnYgF40k3s8KFnxGa9FyrZ3Ar1Sk3yFyFnr
+	Ga1DZ34vvrs29osvyTuYvTs0mTUanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUj1kv1TuYvT
+	s0mT0YCTnIWjqI5I8CrVACY4xI64kE6c02F40Ex7xfYxn0WfASr-VFAUDa7-sFnT9fnUUI
+	cSsGvfJTRUUUbT8YFVCjjxCrM7AC8VAFwI0_Gr0_Xr1l1xkIjI8I6I8E6xAIw20EY4v20x
+	vaj40_Wr0E3s1l1IIY67AEw4v_Jr0_Jr4l8cAvFVAK0II2c7xJM28CjxkF64kEwVA0rcxS
+	w2x7M28EF7xvwVC0I7IYx2IY67AKxVWDJVCq3wA2z4x0Y4vE2Ix0cI8IcVCY1x0267AKxV
+	W8Jr0_Cr1UM28EF7xvwVC2z280aVAFwI0_GcCE3s1l84ACjcxK6I8E87Iv6xkF7I0E14v2
+	6rxl6s0DM2vYz4IE04k24VAvwVAKI4IrM2AIxVAIcxkEcVAq07x20xvEncxIr21l57IF6x
+	kI12xvs2x26I8E6xACxx1l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj6xIIjxv20xvE14v2
+	6r1j6r18McIj6I8E87Iv67AKxVW8JVWxJwAm72CE4IkC6x0Yz7v_Jr0_Gr1lF7xvr2IYc2
+	Ij64vIr41lF7xvr2IYc2Ij64vIr40E4x8a64kEw24l42xK82IYc2Ij64vIr41l4I8I3I0E
+	4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGV
+	WUWwC2zVAF1VAY17CE14v26r1q6r43MIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_
+	Jr0_JF4lIxAIcVC0I7IYx2IY6xkF7I0E14v26r1j6r4UMIIF0xvE42xK8VAvwI8IcIk0rV
+	WUJVWUCwCI42IY6I8E87Iv67AKxVW8JVWxJwCI42IY6I8E87Iv6xkF7I0E14v26r4j6r4U
+	JbIYCTnIWIevJa73UjIFyTuYvjxU2EoXUUUUU
 
-Hi,
+This is v2 of "usb: typec: qcom-pmic-typec: disable cc_debounce_dwork
+on stop", split at the "also" as Bryan asked: patch 1 fixes the
+stop/remove path, patch 2 the probe-failure path.
 
-On an ASUS Zenbook A16 (UX3607OA, Snapdragon X2 Elite Extreme "Glymur", Adreno GPU, chip id 0x44070041) we are hitting an unrecoverable GPU recovery loop that, once triggered, can only be cleared by a full reboot.
+Changes in v2:
+- Split the probe-failure handling into its own patch (Bryan).
+- The failed port_start() path now drains the delayed work at the
+  port_start() error exit instead of unwinding through port_stop(), so
+  the IRQF_NO_AUTOEN IRQs, which are only enabled at the end of a
+  successful port_start(), are not disabled unnecessarily (Konrad).
 
-Environment:
-- kernel: linux-next next-20260730, plus a handful of local patches for this laptop (USB wakeup-source/dma-coherent DTS, CPU thermal trips, an eDP link-training retry tweak and a DP debug-print ratelimit); none of them touch the GPU, GMU, GDSC or GPU clock paths
-- Mesa 26.1.5 (freedreno, a8xx)
-- GMU firmware v5.2.38 (qcom/gen80100_gmu.bin) and gen80100_sqe.fw from linux-firmware
-- niri (smithay-based Wayland compositor), ordinary desktop clients
+Fan Wu (2):
+  usb: typec: qcom-pmic-typec: disable cc_debounce_dwork on stop
+  usb: typec: qcom-pmic-typec: drain cc_debounce_dwork if port_start()
+    fails
 
-Symptom: a regular client (rotating across sessions: chromium, firefox, Xwayland, thunderbird) eventually triggers a GPU fault. From that point recovery loops at roughly 1 Hz; every iteration logs:
-
-  adreno 3d00000.gpu: [drm:a8xx_irq [msm]] *ERROR* gpu fault ring 2 fence 28f9c status 00880005 gfx_status 00880004
-  adreno 3d00000.gpu: [drm:a8xx_irq [msm]] *ERROR* BR: status 00880004 rb 0002/0078 ib1 0000000000000000/0000 ib2 0000000000000000/0000 ib3 0000000000000000/0000
-  adreno 3d00000.gpu: [drm:a8xx_irq [msm]] *ERROR* BV: status 00880004 rb 0000/0078 ib1 0000000000000000/0000 ib2 0000000000000000/0000 ib3 0000000000000000/0000
-  msm_dpu ae01000.display-controller: [drm:recover_worker [msm]] *ERROR* 44070041: hangcheck recover!
-  msm_dpu ae01000.display-controller: [drm:recover_worker [msm]] *ERROR* 44070041: offending task: <client>
-  adreno 3d00000.gpu: [drm:a8xx_recover [msm]] *ERROR* cx gdsc didn't collapse
-
-Observations across four separate incidents (2026-08-09 to 2026-08-20; longest 60+ minutes; worst measured rate 161 recover cycles in 5 minutes):
-
-1. The reported offending client differs between incidents and can change within a single incident.
-2. Killing the offending client does not stop the loop. We verified this explicitly: after SIGTERM-ing the reported victim the loop continued at an unchanged rate within seconds, and the next client that submitted work became the new "offending task". The corrupted state evidently survives in hardware/firmware rather than in the client.
-3. The loop never converges on its own; only a full reboot restores the GPU. While it runs, the victim's surface stays black and the whole desktop degrades, since every recovery stalls the GPU.
-4. Onset correlates with many clients creating GPU contexts in parallel, e.g. right after a session restore spawns half a dozen applications at once.
-
-Since every iteration reports "cx gdsc didn't collapse", the recovery path apparently never succeeds in power-cycling the GPU, which would explain why the fault state persists across recovery attempts. Two questions this raises:
-
-- Is the CX GDSC on Glymur shared with, or kept up by, other consumers (the display path, for instance) so that it cannot collapse while the panel is active - which would make this recovery flow structurally ineffective on this SoC?
-- Or does gen8/GMU require a different stop/reset sequence before the collapse is attempted?
-
-We are happy to test patches, run instrumented builds, and provide full journals or devcoredumps - the machine reproduces this every couple of days under normal desktop use.
-
-Thanks,
-Greg Ociepka
+ drivers/usb/typec/tcpm/qcom/qcom_pmic_typec_port.c | 5 +++++
+ 1 file changed, 5 insertions(+)
 
