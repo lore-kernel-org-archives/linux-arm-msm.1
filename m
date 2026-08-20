@@ -1,45 +1,47 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E76873B71AA;
-	Thu, 20 Aug 2026 06:59:53 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 774DE1A262D;
+	Thu, 20 Aug 2026 07:25:42 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787209195; cv=none; b=nzPlXK27PgO9SOpBztN9uje6MlNk+CLHC6itP7hGE3/Gu+DdK8XFnhJDB0e2LRexI4k0B/sjBs2IHRdBaA7pPSqWqKM0h185ZLzmvo7ocsYlDENjpPzJFKDobFrV2R/zVRdd9mzIqD2D/juj84W2l9OIC2OUAntQjP00WO4jipk=
+	t=1787210743; cv=none; b=dEFX0Zc2DsBxbTT28jON8wzCFNJTPemXz4Z2xswSGblusXfbUzTkGXb+qhliE7QLtdh/YTdaMuoFaZfVcsZr9QYW/Kn0CnXit6gLk5hMbmTreXtSkQDCPGUp1P/V0Cp33R0Y6i8kxtdE3pDeGKfoEzVmpmx/tDaGHKjGFojbI4o=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787209195; c=relaxed/simple;
-	bh=XFU63hRXbDc+cDHeczZs791xHD2IK7VshdWjnJvRzbc=;
+	s=arc-20240116; t=1787210743; c=relaxed/simple;
+	bh=1Cj2Vcgqn5krhfvBamvQXC8qXV3Ha/g6efKHf4VCBXk=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=tFCbnvICWzBLEc7w8rKR718UzbTH0zlWG51pW3H20fL5LKfIW+vrRMr/kfYNJBXGKNEWOvVlWUy9W+73lRHk4/9ymVq8KC75vuXZeTrpu4avNG9Pe4Le9MZtC9iePmPnC2JMYSrlbicGyAPC+04rW8K/xb8RiCuzMc4XDCycQP8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ElcaT5Jl; arc=none smtp.client-ip=100.103.45.18
+	 Content-Type:Content-Disposition:In-Reply-To; b=I5qlXfWK4buLsxImBkiJt11ya41C6gu/b3Sc0qWQIRCVOQAzk126wZkJAFx23LW2obH68rmZbNN2BMQRgvW2h8CxBzGNA9SwDdX8W8AgBhdxrxObHrEU5whRw9uB3jb33IvJmYFswjAcbnYJpzQdXAWgxpN8QTb3V17agpZSMS0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=A8g8lb6N; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="ElcaT5Jl"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 58FF41F000E9;
-	Thu, 20 Aug 2026 06:59:52 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="A8g8lb6N"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E750A1F00A3A;
+	Thu, 20 Aug 2026 07:25:36 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1787209193;
-	bh=oGn8fOuy8oVvpGY+DXUVnjiYFZUagRhqbSRyQXZKQ98=;
+	s=k20260515; t=1787210742;
+	bh=0RrODx3V1Px/U/AojeH5jmVTwASzYYtIbWBrlSirhEY=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=ElcaT5JleopP6H8bLbNUl2SPrT6/I/OUzvxFi/dAq3/SoSuRNh6kRY0ACdwKLj4d2
-	 /Nh2vt+GofaizAxgdNIYUElX/3CRvjomp/qJx1dimiyWNsNAPXiSSA+WRbUl8K+1R1
-	 j8hgCnqfnJB9m8kyhv4fV569zi6SzV0akyztaWrUv+p4FQa3P6uRUmO0LfgAjo5Nm9
-	 8G5oJjS0Nm0vJpHNaDPkNWT1wDbXYiXvTvFptlxnuVizg7zCuRtlnde0JVwqei2/dH
-	 SLFtwDWs8NglzRr4vNq3rKXvmZURW3pxLYsNdPEdZvH8rTULBGhVjQAaJ4I8VsuKuq
-	 hOGvRuKo2GqFQ==
-Date: Thu, 20 Aug 2026 08:59:48 +0200
-From: Krzysztof Kozlowski <krzk@kernel.org>
-To: Shawn Guo <shengchao.guo@oss.qualcomm.com>
-Cc: Bjorn Andersson <andersson@kernel.org>, 
-	Mathieu Poirier <mathieu.poirier@linaro.org>, Rob Herring <robh@kernel.org>, 
+	b=A8g8lb6NMK3qMUbPsHmj3OZgI+IecMWiyT7M+csIZQ50OySFgpqMSptFxiC3hhSxc
+	 p5e1zKBhe3arBFSnS6gm1Qa7uPkGALrG6QKlpRptu5t4/ixp+3Ld29ou+UOirvferl
+	 jFzsQRIIZ09OUBcpKkS/XinDPnINzc+iFt72OlkBH2VTgNYihHLZiOFii6yHek9hhj
+	 5eWWf6dD1F2jkMV5uj66QH8b2hhxdaCPfNu6kV3IkmPXK2s9lv5MhiFMQ9tdx2kppl
+	 msFOh3/ASo48YOIHd/UCewTKQtqstshEIJ/0xNHKXrnGa/TVVmtXwN+8yEVZmdR2c/
+	 K9QNC2Fib7M1A==
+Date: Thu, 20 Aug 2026 09:25:32 +0200
+From: Manivannan Sadhasivam <mani@kernel.org>
+To: Ziyue Zhang <ziyue.zhang@oss.qualcomm.com>
+Cc: Vinod Koul <vkoul@kernel.org>, 
+	Neil Armstrong <neil.armstrong@linaro.org>, Rob Herring <robh@kernel.org>, 
 	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
-	Bartosz Golaszewski <brgl@kernel.org>, Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>, 
-	linux-arm-msm@vger.kernel.org, linux-remoteproc@vger.kernel.org, devicetree@vger.kernel.org, 
+	Bjorn Andersson <andersson@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>, 
+	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>, Abel Vesa <abelvesa@kernel.org>, 
+	Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>, Qiang Yu <qiang.yu@oss.qualcomm.com>, 
+	linux-arm-msm@vger.kernel.org, linux-phy@lists.infradead.org, devicetree@vger.kernel.org, 
 	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH 1/8] dt-bindings: remoteproc: qcom,nord-pas: Add
- qcom,cluster-root property
-Message-ID: <20260820-controversial-mussel-from-vega-aaba16@quoll>
-References: <20260815132541.1575121-1-shengchao.guo@oss.qualcomm.com>
- <20260815132541.1575121-2-shengchao.guo@oss.qualcomm.com>
+Subject: Re: [PATCH v1 2/4] phy: qcom: qmp-pcie: Add qref and refgen
+ regulator vote for QCS8300 and SA8775p PHY
+Message-ID: <oxnts55ylqdejsawsz42m4fc5ajh3jaypu3hkpdld5jmdyjjoa@iigp3bxas2qd>
+References: <20260810112735.1326807-1-ziyue.zhang@oss.qualcomm.com>
+ <20260810112735.1326807-3-ziyue.zhang@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -48,66 +50,21 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
-In-Reply-To: <20260815132541.1575121-2-shengchao.guo@oss.qualcomm.com>
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <20260810112735.1326807-3-ziyue.zhang@oss.qualcomm.com>
 
-On Sat, Aug 15, 2026 at 09:25:34PM +0800, Shawn Guo wrote:
-> Document the qcom,cluster-root phandle property used to describe HPASS's
-> ADSP0/1/2 cluster relationship. Every member of a cluster carries the
-> property, including the instance owning the shared resources, which
-> references itself; instances referencing the same node form one cluster
-> that boots in order and is torn down as a single unit.
+On Mon, Aug 10, 2026 at 07:27:33PM +0800, Ziyue Zhang wrote:
+> Add a new sa8775p_qmp_phy_vreg_l that includes vdda-phy, vdda-pll,
+> vdda-qref, vdda-refgen and refgen supplies, and use it for QCS8300
+> and SA8775p PCIe PHY configurations. This avoids modifying
+> sm8550_qmp_phy_vreg_l and breaking SM8550 and SM8650.
 > 
-> The relationship is described with a phandle rather than by containment
-> in a parent node, as ti,k3-r5f-rproc and xlnx,zynqmp-r5fss do, because
-> the hardware does not express it by containment either: the three QDSP6SS
-> blocks are register-independent, with no shared register window for a
-> container node to describe.
-> 
-> Also add the qcom,nord-adsp1-pas and qcom,nord-adsp2-pas compatible
-> strings used by the non-root cluster members.
-> 
-> Assisted-by: LLM
-> Signed-off-by: Shawn Guo <shengchao.guo@oss.qualcomm.com>
-> ---
->  .../bindings/remoteproc/qcom,nord-pas.yaml      | 17 +++++++++++++++++
->  1 file changed, 17 insertions(+)
-> 
-> diff --git a/Documentation/devicetree/bindings/remoteproc/qcom,nord-pas.yaml b/Documentation/devicetree/bindings/remoteproc/qcom,nord-pas.yaml
-> index e90d2953ba69..58d88cb07e52 100644
-> --- a/Documentation/devicetree/bindings/remoteproc/qcom,nord-pas.yaml
-> +++ b/Documentation/devicetree/bindings/remoteproc/qcom,nord-pas.yaml
-> @@ -17,6 +17,8 @@ properties:
->    compatible:
->      enum:
->        - qcom,nord-adsp-pas
-> +      - qcom,nord-adsp1-pas
-> +      - qcom,nord-adsp2-pas
->        - qcom,nord-cdsp0-pas
->        - qcom,nord-cdsp1-pas
->        - qcom,nord-cdsp2-pas
-> @@ -89,6 +91,19 @@ properties:
->      maxItems: 1
->      description: The names of the state bits used for SMP2P output
->  
-> +  qcom,cluster-root:
-> +    $ref: /schemas/types.yaml#/definitions/phandle
-> +    description:
-> +      Reference to the Peripheral Authentication Service instance that owns the
-> +      resources shared across this DSP's cluster. HPASS shares clock/reset/NoC
-> +      resources between its ADSP0/1/2 QDSP6 instances, and the owning instance
-> +      (ADSP0) has to boot first to initialize them before ADSP1/ADSP2 can cold
 
-This feels way too much SW. We design hardware resources in
-owner-independent, meaning each device is the owner. Most of Linux
-frameworks, including listed clock, reset and ICC, support resource
-sharing for multi-owner case.
+Can you add a small note on why you are now voting for these supplies, what
+issue you encountered? In a nutshell, you need to explain why this change is
+submitted now.
 
+- Mani
 
-If this is not SW related, then I claim that compatible defines whether
-services is owner of the hardware or not.
-
-Also, unresponded Sashiko comments.
-
-Best regards,
-Krzysztof
-
+-- 
+மணிவண்ணன் சதாசிவம்
