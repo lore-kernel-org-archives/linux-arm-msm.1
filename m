@@ -1,42 +1,102 @@
-Received: from mail-244123.protonmail.ch (mail-244123.protonmail.ch [109.224.244.123])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 656533DAABD
-	for <linux-arm-msm@vger.kernel.org>; Thu, 20 Aug 2026 20:56:18 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=109.224.244.123
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B7E3047D94B
+	for <linux-arm-msm@vger.kernel.org>; Thu, 20 Aug 2026 21:26:58 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787259387; cv=none; b=l+SqC2pLwDyngWhxphg65X8uPwtAYHCCBZMobHTxnUuQKHy5fUEGsuWeY0LVDZanjA0TFBq0je9HZFWqX8QpL1LGvVdcYnMne03GGqnEAFoZSk8FoaHBg0BIUyEGEkQgVam/WzpWz++zaE5rfJsfSa33MS1n21snMsvCGp9uQeU=
+	t=1787261220; cv=none; b=dd57H/0WkIPPRfHZkp+rUfBiTt1+zE52OWMT1Om3MAZwLl11UiJDhJBtwzWZDZgYbbbfs43tK8w5ZE5Ho+CVN9T4+Q8lYitz4EY8rH+PWc3YepWOiHXfrSyZ5BDlTBxvn2m28xVCegSCWPBWGei2xKiX/f1LiaHeARbc9bBjH6c=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787259387; c=relaxed/simple;
-	bh=XnXWwXuVRfBNc42Aw8+v/kKQaXxXXJkksLSzgJcWuK4=;
-	h=Date:From:Cc:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=ZI+Ihx2s49dmvav6W3jSTwRTfpi8thI7VhebkKTFe2QacurGsghLORqMLFu/O29YauGB7TuAa9FBBRftCeRnwbufwAgYSbeI0k5WM3qNIpp96Td1hlwSnmZltWzG36+/12J6hpJUr1rPJQ47VPZbUwkOIDDuBhCNjC9rpMWH04o=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=proton.me; spf=pass smtp.mailfrom=proton.me; dkim=pass (2048-bit key) header.d=proton.me header.i=@proton.me header.b=eERE2+MP; arc=none smtp.client-ip=109.224.244.123
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=proton.me
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=proton.me
+	s=arc-20240116; t=1787261220; c=relaxed/simple;
+	bh=flVWlbv6HVxee9sFquQe7n8ODcDyLvNO3XEPWMCqKBQ=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=b9xYdtKggzVwm7VgwWqwCm15ay8blfcTV+xltaw20gD+ovVas8FEvPq2+iD80Eaj7+VW1NyKdnc4vBk6TUSPn3ydxzZzLGOomZY4qVSgpdqTOc4PRAtlE879T4aALdJ9L4WEOTZbfRzLyy5KOMBho2FyRzlN5UtFOR1Y8htpFUw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=GIQQTUBT; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=T4jQgQrz; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=proton.me header.i=@proton.me header.b="eERE2+MP"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=proton.me;
-	s=wcmevsiipjdnlleewr5p6h2pyq.protonmail; t=1787259376; x=1787518576;
-	bh=kMjLAYW+zARf+rgZNABlOlscGbUg88r+sAn3Q8XieO4=;
-	h=Date:From:Cc:Subject:Message-ID:In-Reply-To:References:
-	 Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
-	 Message-ID:BIMI-Selector;
-	b=eERE2+MPFJekUILapkLt4IAQp+mRxw8rtGmdQdCmuyziByqkEiSAO7jeG9uJgsYcH
-	 jVmykYnWfeogvIMIj22kPIVDINg/GUsrFV37zu0IRaEGuGTLBu2D/kt/8G3wiCNx4T
-	 X5oy1nu5WHbNS0dRwqcGfg1R3nE0R+oTF2viFvU9QwyM7mdlgL5nm/75xVSwQehfSi
-	 nT/g/lC1PoKQjh7YN/fCBFu5x29k3Iza6I9WQO9UtjPzqr7Wd6X3Nd12dyKREIaXFt
-	 wfr/Niq5Y/Xhq5UX0TqrbgJeEaKL+4Q7QiwCseUz3HxnzjEe91lNwYpkACZZAwhMRp
-	 9cFy/AlExqbCw==
-Date: Thu, 20 Aug 2026 20:56:10 +0000
-From: Kristian Brox <isyourbrainfoss@proton.me>
-Cc: Krzysztof Kozlowski <krzk@kernel.org>, Luca Weiss <luca.weiss@fairphone.com>, Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>, oe-linux-nfc@lists.linux.dev, netdev@vger.kernel.org, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org, Kristian Brox <isyourbrainfoss@proton.me>
-Subject: [PATCH v3 2/3] nfc: st-nci: add raw NCI path for ST21NFCD
-Message-ID: <20260820-fp5-st21nfcd-v3-v3-2-5ee0a7f44d04@proton.me>
-In-Reply-To: <20260820-fp5-st21nfcd-v3-v3-0-5ee0a7f44d04@proton.me>
-References: <20260820-fp5-st21nfcd-v3-v3-0-5ee0a7f44d04@proton.me>
-Feedback-ID: 203906395:user:proton
-X-Pm-Message-ID: cd9a2f6d5d39c7684d229939cc1e4a91ae2087bc
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="GIQQTUBT";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="T4jQgQrz"
+Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67KK7VqB1298371
+	for <linux-arm-msm@vger.kernel.org>; Thu, 20 Aug 2026 21:26:58 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	29JvqW0qyorM0smiBWAgN7RXSiPY2l2EMYW4kmCkF0U=; b=GIQQTUBTS2jzW8Oh
+	JCJ0vZS/ez9fV7J0PIWPBQ0yIoNBa2uPnTkbelnNP5kJM0GqQAHOWFXgdZxyIGZQ
+	to3xZxAvGvreFkg0GezDlN3l/e4Hsc+4lS+hOsQ1mdxrTJ6kX6xsG6Z/FgzwCAiQ
+	ctz1zTfB3TPNUrbCxKtETzuN8iVYeNqW5SYTE9mdr33/ogbhaL1gUpAfAraY6EuK
+	EMHto+1RMefJa9so7A0owdmxd075BEBdC7jN6WrKJ1siYbZJROWr7ELLvZ3R5oeo
+	h+wH287Zmbeaj3alxAXgibUJ0JsipqXAX7dr/BLyzWL3NroYKLUCDy8W98h8BNwj
+	z9GCiw==
+Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com [209.85.222.198])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g5vn8brxj-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 20 Aug 2026 21:26:57 +0000 (GMT)
+Received: by mail-qk1-f198.google.com with SMTP id af79cd13be357-91931144870so39605285a.1
+        for <linux-arm-msm@vger.kernel.org>; Thu, 20 Aug 2026 14:26:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1787261217; x=1787866017; darn=vger.kernel.org;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :content-type:mime-version:references:message-id:subject:cc:to:from
+         :date:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=29JvqW0qyorM0smiBWAgN7RXSiPY2l2EMYW4kmCkF0U=;
+        b=T4jQgQrzRV2z9HOleaoZvjcP79kX1ZGCuz0RSHdD+eLL4wccgdLRp1QAsR2JckjE1v
+         j0kwawXnsSoXDReZPcwOkX9+ZGZKNVyJp1vGbxTHOYfcq4ORRd7WfvqxhcyfqveqBUSv
+         ZMans/Aq/5dCIqMD096etZKrTmVzUdscr6UaKBL9QqRDKfdmGyWnRmolW/n/d25XDPAH
+         KokndnUf+y0U88Ts59abX/Fv+US7pebP0y5QW6vRJbix5Dc3nyfrDU8SlVE4SQVEoL/7
+         aNhqUokXULQZrBJZHFMfYrv9eqDar4KVSww/HR1kup7amQ1lZ3RTmLOA4lyeUY9M9Q19
+         15jg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1787261217; x=1787866017;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :content-type:mime-version:references:message-id:subject:cc:to:from
+         :date:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=29JvqW0qyorM0smiBWAgN7RXSiPY2l2EMYW4kmCkF0U=;
+        b=D4MEh7iqnfC8mFiWWgrQynZGtEXCwtvuhwwCNawm+lSUmRwqIg9RBfVz2hv2XHHic3
+         zc8opC8UyTqOPlgj4E863GkrQhioUO1RL4MOZjjvtcuiPvw19Of1lYaCDT73yfChDgka
+         RRRHBfAOnaM04nSF6eTOy/EXZzH8FAkGm70KcjnfnT/HTQyvYE95OdxGIAakdtkC0JZj
+         FPn/aAGkPhmEYga85eEiHYh7tsgROm2t8ox7hzjNs7rATILxLZ9tK9DJ12nplYRSwGcl
+         PyySltuEGLp1YtJ2V00hSYwYScL1rvsGabRpy3W9XRd81lzCdx9qer7MtsaoYgJE/l1S
+         ZEbQ==
+X-Forwarded-Encrypted: i=1; AHgh+Rod5gcxJsl4WDk/2fEArKXJJ0nrDioIQOPj9SbILXEXNShNbYmd3Y1UGBlIBetBmeYosuMtYQ0TvpF2mfu+@vger.kernel.org
+X-Gm-Message-State: AOJu0YyShEaJeIeCF/WGqzqk0Lyvc8Ey4cVyRQlH4SX4AwlwmImLikFJ
+	mv73XQTuySenmVe9/yN3CB6Bb9IZ4XdcLYaFgsYeqm7RPPUN4D/D/bMN1gc6omE37E6P7MyeAAQ
+	KMQnCky+lqar6HUdgzzKaAXz8rgNpXQJqyrzddxJ9XjTRbKswQjAb2MlgTncvaTT4xOYN
+X-Gm-Gg: AR+sD10EJ4WzEPStM81rAVHctY88ACJR3f3uDR5vdcQ3XYjghQyROV+6ov9hEEK57Bx
+	pIcNWE41nPWMbuJegs1VVnBwYRM0H6KP9F2wpYCfVXXmfKb0MQWpHUNHqJ4I8gcZ63DUZFEUs6E
+	wcpEo+Kw+s+zZvTFl0VFsOAxOP6P34vJZSsYkBR5Gv9aiF/6No0AFbyrOEaKdUA9cTaetwUnYqP
+	hZgSOmrR3gZgUsfGIP+XDFE1WD2mbthwafWENPWItPd9f5yBP9nkg9j1rfq05y1Nez58c5Y0LcO
+	xIJ6yly88FEmJkRPNNC48YRCQWxC7FT9Bwl2YPSxCutSirqNhjrjpkyINbHgyna0UmBadt3MXJL
+	EstWKjRl8HVzGFF/XdUwbbuCbD4TfDK3N8f2HEPP8EAEwsHFw555EjTzspWMNV4E075pJ6QSDqj
+	thCdAnmxJhq1Kc
+X-Received: by 2002:a05:620a:404a:b0:936:cd76:4d4b with SMTP id af79cd13be357-937395d4298mr113972785a.42.1787261216930;
+        Thu, 20 Aug 2026 14:26:56 -0700 (PDT)
+X-Received: by 2002:a05:620a:404a:b0:936:cd76:4d4b with SMTP id af79cd13be357-937395d4298mr113967785a.42.1787261216418;
+        Thu, 20 Aug 2026 14:26:56 -0700 (PDT)
+Received: from umbar.lan (2001-14ba-a073-af00-264b-feff-fe8b-be8a.rev.dnainternet.fi. [2001:14ba:a073:af00:264b:feff:fe8b:be8a])
+        by smtp.gmail.com with ESMTPSA id 38308e7fff4ca-3a189dfc265sm15991681fa.19.2026.08.20.14.26.55
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 20 Aug 2026 14:26:55 -0700 (PDT)
+Date: Fri, 21 Aug 2026 00:26:53 +0300
+From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+To: "Gjorgji Rosikopulos (Consultant)" <gjorgji.rosikopulos@oss.qualcomm.com>
+Cc: Atanas Filipov <atanas.filipov@oss.qualcomm.com>,
+        linux-media@vger.kernel.org, bod@kernel.org, mchehab@kernel.org,
+        robh@kernel.org, krzk+dt@kernel.org, conor+dt@kernel.org,
+        andersson@kernel.org, konradybcio@kernel.org, loic.poulain@linaro.org,
+        linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v6 2/3] media: qcom: jpeg: Add Qualcomm JPEG V4L2 encoder
+Message-ID: <bqcu6de5gitz7oo7tyyutrkas5rq3u6bvfbjlje4afofscycch@2l5g2pelxju3>
+References: <20260730150524.2659577-1-atanas.filipov@oss.qualcomm.com>
+ <20260730150524.2659577-3-atanas.filipov@oss.qualcomm.com>
+ <vz6a2qugu7kkci3fcdkd236axr3ur33ghrgoopbrz3isueml45@b4frwo4l2hfh>
+ <3f40cde3-a4bd-424d-be42-60915c90e6c3@oss.qualcomm.com>
+ <h7e5t6rqvrlogj4li4incr2pog57dfal23rqo326vi2cz4zpxl@m7orpk6dftty>
+ <3c70019f-28a9-445c-b2be-fd61fd13be50@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -44,305 +104,103 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <3c70019f-28a9-445c-b2be-fd61fd13be50@oss.qualcomm.com>
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODIwMDE2MCBTYWx0ZWRfXz7OfkcBKlyDY
+ fYlkyst56s7LO2YrltQbuF/v3EFRWLdlY/hpQ3CffakQKwwbG+P79Vhs+mpsLvlf5B23jo3pL4Z
+ 6aW+Sxlnon4zOPgw/T9Bc31UkiymZphhcXMTfWK7rUrzbf6TKUaRVBOBSUSMkTJJ5CpU+ab4Y+7
+ H7nZcf5acFEBTcGeTVmw32dHdlZp4PEw/oIPYcu8E2klh2t4psQ7FdyG0jGO7wkkOuHwkKgsLKv
+ R5nUwA9wcDdaIyQzIK4j5eKztC+Lw39z7X4rczbRd4Ww83YfFiCdxpvJL3tuXJWYnnSaJF05Rpo
+ Eyj4p938dA0NB3kfmK9T4SHM6mpH2eorcSDPSqB3A0LFqYkSEbugHPtCdq1mEIx3WxP8c7GYQgS
+ T1gw7oEyP73Q5d7rOLRuD6+nlDUmZS9SyaGRvqBYWvKr9BoSgADhcj7PD7EbBpvXnbtO/HPwya1
+ iC7rpWdnJ0bUc6l2CIA==
+X-Authority-Analysis: v=2.4 cv=KpJ9H2WN c=1 sm=1 tr=0 ts=6a877121 cx=c_pps
+ a=qKBjSQ1v91RyAK45QCPf5w==:117 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
+ a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22 a=kBAx4iqJ9KIqBnPNQ-4A:9
+ a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10 a=NFOGd7dJGGMPyQGDc5-O:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODIwMDE2MCBTYWx0ZWRfX5vr82ms7ZPOc
+ BUiQVXhoTfcEduS6ptIGaG4Qwda7TIngJ77JsTwZzic5JzZy6V9UnbqppJFsV8OiAlp7CqXBjnV
+ YXTMgam/hAX8zqKu6n2PwOAquF9+mEQ=
+X-Proofpoint-ORIG-GUID: WBqJtYGDk3fEtcRV6yrHcUogQBJKUkAz
+X-Proofpoint-GUID: WBqJtYGDk3fEtcRV6yrHcUogQBJKUkAz
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-08-20_02,2026-08-20_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ phishscore=0 adultscore=0 malwarescore=0 lowpriorityscore=0
+ priorityscore=1501 impostorscore=0 bulkscore=0 suspectscore=0 clxscore=1015
+ spamscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
+ adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2608200160
 
-ST21NFCD does not use NDLC. When the compatible is st,st21nfcd,
-talk raw NCI:
+On Tue, Aug 04, 2026 at 08:53:36AM +0300, Gjorgji Rosikopulos (Consultant) wrote:
+> Hi Dmitry,
+> 
+> On 8/3/2026 9:37 PM, Dmitry Baryshkov wrote:
+> > On Mon, Aug 03, 2026 at 06:57:09PM +0300, Gjorgji Rosikopulos (Consultant) wrote:
+> >> Hi Dmitry, 
+> >>
+> >> On 7/30/2026 6:57 PM, Dmitry Baryshkov wrote:
+> >>> On Thu, Jul 30, 2026 at 06:05:23PM +0300, Atanas Filipov wrote:
+> >>>> Add a Qualcomm JPEG encoder driver implemented on top of the
+> >>>> V4L2 mem2mem framework.
+> >>>>
+> >>>> The driver wires vb2 queue handling, format negotiation, JPEG header
+> >>>> handling, interrupt-driven job completion, and runtime PM/clock/ICC
+> >>>> integration for the standalone JPEG encode hardware block.
+> >>>>
+> >>
+> >> <snip>
+> >>
+> >>>> + */
+> >>>> +
+> >>>> +#define JFIF_HEADER_WIDTH_OFFS		0x07
+> >>>> +#define JFIF_HEADER_HEIGHT_OFFS		0x05
+> >>>
+> >>> And you've ignored feedback here. PLEASE move all standard-related
+> >>> defines and code to the common helpers. Are there any other drivers
+> >>> which construct JPEG files manually? If not, you are lucky and you can
+> >>> just push you code. If they are, find a way to unify the codebase.
+> >>>
+> >>> At the very least, it would make you split this commit into at least
+> >>> two, making them more readable.
+> >>
+> >> Yes, this comment was incorporated, maybe partially, or it wasn't fully understood.
+> >> The helper is used for the quantization tables and wherever helpers are available, 
+> >> similar to other drivers: hantro_jpeg.c, e5010-jpeg-enc.c.
+> >>
+> >> The missing JFIF tags and additional helpers can certainly be added,
+> >> but is holding up the current driver just for that a reasonable ask? 
+> >> This discussion may continue for a long time — is it reasonable to wait that long?
+> > 
+> > From my point of view, yes. From your comment it feels like each driver
+> > having their own way of wriing JPEG framings.
+> > 
+> >>
+> >> I agree it would be good to have all other upstream JPEG encoder drivers move to shared helpers,
+> >> but the effort isn't uniform across them. 
+> >>
+> >> Five drivers — hantro_jpeg.c, mxc-jpeg.c, rcar_jpu.c, gspca/jpeg.h, and solo6x10-jpeg.h,
+> >> build a fixed byte-array template and patch width/height/table values at hardcoded offsets, 
+> >> so they could plausibly migrate to a shared builder with a similar shape to what we're proposing. 
+> > 
+> > Can we start with something as simple as this for our driver too?
+> 
+> Yes i agree we can add helpers, and qcom jpeg to be first driver to use them.
+> 
+> > 
+> > Then you can converge all these drivers to use those simple helpers
+> > (this should not require the actual hardware to test), then improve the
+> > helpers.
+> 
+> I don not fell confident to touch other platform drivers which i can not verify, but i think
+> that can be done as part of separate patchset after initial helpers are reviewed-merged.
 
-- do not add or strip an NDLC PCB
-- do not run the T1/T2 ACK timers
-- I2C reads are a 3-byte NCI header plus payload
-- skip proprietary SET_NFC_MODE and HCI SE discovery
-
-Optionally enable clocks (SYS_CLK) and vdd-io (VPS_IO) when the
-DT describes them. Existing st21nfcb / st21nfcc boards keep the
-NDLC path and do not need those properties.
-
-Tested on Fairphone 5: adapter powers up and reads an NTAG 215.
-
-Signed-off-by: Kristian Brox <isyourbrainfoss@proton.me>
----
- drivers/nfc/st-nci/core.c |  5 +++
- drivers/nfc/st-nci/i2c.c  | 87 ++++++++++++++++++++++++++++++++++++++++---=
-----
- drivers/nfc/st-nci/ndlc.c | 23 +++++++++----
- drivers/nfc/st-nci/ndlc.h |  2 ++
- drivers/nfc/st-nci/se.c   |  3 ++
- 5 files changed, 102 insertions(+), 18 deletions(-)
-
-diff --git a/drivers/nfc/st-nci/core.c b/drivers/nfc/st-nci/core.c
-index a367136d4..2356f16b8 100644
---- a/drivers/nfc/st-nci/core.c
-+++ b/drivers/nfc/st-nci/core.c
-@@ -18,8 +18,13 @@
-=20
- static int st_nci_init(struct nci_dev *ndev)
- {
-+=09struct st_nci_info *info =3D nci_get_drvdata(ndev);
- =09struct nci_mode_set_cmd cmd;
-=20
-+=09/* ST21NFCD has no NDLC proprietary SET_NFC_MODE */
-+=09if (info->ndlc->raw_nci)
-+=09=09return 0;
-+
- =09cmd.cmd_type =3D ST_NCI_SET_NFC_MODE;
- =09cmd.mode =3D 1;
-=20
-diff --git a/drivers/nfc/st-nci/i2c.c b/drivers/nfc/st-nci/i2c.c
-index 152c20b6b..cfddb7ffe 100644
---- a/drivers/nfc/st-nci/i2c.c
-+++ b/drivers/nfc/st-nci/i2c.c
-@@ -10,10 +10,13 @@
- #include <linux/i2c.h>
- #include <linux/gpio/consumer.h>
- #include <linux/acpi.h>
-+#include <linux/clk.h>
- #include <linux/interrupt.h>
- #include <linux/delay.h>
- #include <linux/nfc.h>
- #include <linux/of.h>
-+#include <linux/property.h>
-+#include <linux/regulator/consumer.h>
-=20
- #include "st-nci.h"
-=20
-@@ -22,10 +25,17 @@
- /* ndlc header */
- #define ST_NCI_FRAME_HEADROOM 1
- #define ST_NCI_FRAME_TAILROOM 0
-+#define ST_NCI_RAW_FRAME_HEADROOM 0
-=20
- #define ST_NCI_I2C_MIN_SIZE 4   /* PCB(1) + NCI Packet header(3) */
-+#define ST_NCI_NCI_HDR_SIZE 3   /* raw NCI: MT/PBF/GID + OID + len */
- #define ST_NCI_I2C_MAX_SIZE 250 /* req 4.2.1 */
-=20
-+enum st_nci_i2c_proto {
-+=09ST_NCI_I2C_PROTO_NDLC =3D 0,
-+=09ST_NCI_I2C_PROTO_RAW_NCI,
-+};
-+
- #define ST_NCI_DRIVER_NAME "st_nci"
- #define ST_NCI_I2C_DRIVER_NAME "st_nci_i2c"
-=20
-@@ -34,6 +44,7 @@ struct st_nci_i2c_phy {
- =09struct llt_ndlc *ndlc;
-=20
- =09bool irq_active;
-+=09bool raw_nci;
-=20
- =09struct gpio_desc *gpiod_reset;
-=20
-@@ -111,6 +122,42 @@ static int st_nci_i2c_read(struct st_nci_i2c_phy *phy,
- =09u8 buf[ST_NCI_I2C_MAX_SIZE];
- =09struct i2c_client *client =3D phy->i2c_dev;
-=20
-+=09if (phy->raw_nci) {
-+=09=09r =3D i2c_master_recv(client, buf, ST_NCI_NCI_HDR_SIZE);
-+=09=09if (r < 0) {
-+=09=09=09usleep_range(1000, 4000);
-+=09=09=09r =3D i2c_master_recv(client, buf, ST_NCI_NCI_HDR_SIZE);
-+=09=09}
-+=09=09if (r !=3D ST_NCI_NCI_HDR_SIZE)
-+=09=09=09return -EREMOTEIO;
-+
-+=09=09len =3D buf[2];
-+=09=09if (len > ST_NCI_I2C_MAX_SIZE) {
-+=09=09=09nfc_err(&client->dev, "invalid frame len\n");
-+=09=09=09return -EBADMSG;
-+=09=09}
-+
-+=09=09*skb =3D alloc_skb(ST_NCI_NCI_HDR_SIZE + len, GFP_KERNEL);
-+=09=09if (!*skb)
-+=09=09=09return -ENOMEM;
-+
-+=09=09skb_put(*skb, ST_NCI_NCI_HDR_SIZE);
-+=09=09memcpy((*skb)->data, buf, ST_NCI_NCI_HDR_SIZE);
-+
-+=09=09if (!len)
-+=09=09=09return 0;
-+
-+=09=09r =3D i2c_master_recv(client, buf, len);
-+=09=09if (r !=3D len) {
-+=09=09=09kfree_skb(*skb);
-+=09=09=09return -EREMOTEIO;
-+=09=09}
-+
-+=09=09skb_put(*skb, len);
-+=09=09memcpy((*skb)->data + ST_NCI_NCI_HDR_SIZE, buf, len);
-+=09=09return 0;
-+=09}
-+
- =09r =3D i2c_master_recv(client, buf, ST_NCI_I2C_MIN_SIZE);
- =09if (r < 0) {  /* Retry, chip was in standby */
- =09=09usleep_range(1000, 4000);
-@@ -211,6 +258,8 @@ static int st_nci_i2c_probe(struct i2c_client *client)
- =09=09return -ENOMEM;
-=20
- =09phy->i2c_dev =3D client;
-+=09phy->raw_nci =3D (uintptr_t)device_get_match_data(dev) =3D=3D
-+=09=09=09ST_NCI_I2C_PROTO_RAW_NCI;
-=20
- =09i2c_set_clientdata(client, phy);
-=20
-@@ -225,19 +274,31 @@ static int st_nci_i2c_probe(struct i2c_client *client=
-)
- =09=09return -ENODEV;
- =09}
-=20
-+=09r =3D devm_regulator_get_enable_optional(dev, "vdd-io");
-+=09if (r && r !=3D -ENODEV)
-+=09=09return dev_err_probe(dev, r, "failed to enable vdd-io\n");
-+
-+=09r =3D PTR_ERR_OR_ZERO(devm_clk_get_optional_enabled(dev, NULL));
-+=09if (r)
-+=09=09return dev_err_probe(dev, r, "failed to enable clock\n");
-+
- =09phy->se_status.is_ese_present =3D
- =09=09=09=09device_property_read_bool(dev, "ese-present");
- =09phy->se_status.is_uicc_present =3D
- =09=09=09=09device_property_read_bool(dev, "uicc-present");
-=20
- =09r =3D ndlc_probe(phy, &i2c_phy_ops, &client->dev,
--=09=09=09ST_NCI_FRAME_HEADROOM, ST_NCI_FRAME_TAILROOM,
-+=09=09=09phy->raw_nci ? ST_NCI_RAW_FRAME_HEADROOM :
-+=09=09=09=09       ST_NCI_FRAME_HEADROOM,
-+=09=09=09ST_NCI_FRAME_TAILROOM,
- =09=09=09&phy->ndlc, &phy->se_status);
- =09if (r < 0) {
- =09=09nfc_err(&client->dev, "Unable to register ndlc layer\n");
- =09=09return r;
- =09}
-=20
-+=09phy->ndlc->raw_nci =3D phy->raw_nci;
-+
- =09phy->irq_active =3D true;
- =09r =3D devm_request_threaded_irq(&client->dev, client->irq, NULL,
- =09=09=09=09st_nci_irq_thread_fn,
-@@ -257,23 +318,25 @@ static void st_nci_i2c_remove(struct i2c_client *clie=
-nt)
- }
-=20
- static const struct i2c_device_id st_nci_i2c_id_table[] =3D {
--=09{ .name =3D ST_NCI_DRIVER_NAME },
--=09{ }
-+=09{ ST_NCI_DRIVER_NAME },
-+=09{}
- };
- MODULE_DEVICE_TABLE(i2c, st_nci_i2c_id_table);
-=20
--static const struct acpi_device_id st_nci_i2c_acpi_match[] =3D {
--=09{ .id =3D "SMO2101" },
--=09{ .id =3D "SMO2102" },
--=09{ }
-+static const struct acpi_device_id st_nci_i2c_acpi_match[] __maybe_unused =
-=3D {
-+=09{"SMO2101"},
-+=09{"SMO2102"},
-+=09{}
- };
- MODULE_DEVICE_TABLE(acpi, st_nci_i2c_acpi_match);
-=20
--static const struct of_device_id of_st_nci_i2c_match[] =3D {
--=09{ .compatible =3D "st,st21nfcb-i2c" },
--=09{ .compatible =3D "st,st21nfcb_i2c" },
--=09{ .compatible =3D "st,st21nfcc-i2c" },
--=09{ }
-+static const struct of_device_id of_st_nci_i2c_match[] __maybe_unused =3D =
-{
-+=09{ .compatible =3D "st,st21nfcb-i2c", },
-+=09{ .compatible =3D "st,st21nfcb_i2c", },
-+=09{ .compatible =3D "st,st21nfcc-i2c", },
-+=09{ .compatible =3D "st,st21nfcd",
-+=09  .data =3D (void *)ST_NCI_I2C_PROTO_RAW_NCI },
-+=09{}
- };
- MODULE_DEVICE_TABLE(of, of_st_nci_i2c_match);
-=20
-diff --git a/drivers/nfc/st-nci/ndlc.c b/drivers/nfc/st-nci/ndlc.c
-index be4808859..b3192460c 100644
---- a/drivers/nfc/st-nci/ndlc.c
-+++ b/drivers/nfc/st-nci/ndlc.c
-@@ -62,8 +62,9 @@ void ndlc_close(struct llt_ndlc *ndlc)
- =09/* toggle reset pin */
- =09ndlc->ops->enable(ndlc->phy_id);
-=20
--=09nci_prop_cmd(ndlc->ndev, ST_NCI_CORE_PROP,
--=09=09     sizeof(struct nci_mode_set_cmd), (__u8 *)&cmd);
-+=09if (!ndlc->raw_nci)
-+=09=09nci_prop_cmd(ndlc->ndev, ST_NCI_CORE_PROP,
-+=09=09=09     sizeof(struct nci_mode_set_cmd), (__u8 *)&cmd);
-=20
- =09ndlc->powered =3D 0;
- =09ndlc->ops->disable(ndlc->phy_id);
-@@ -72,11 +73,13 @@ EXPORT_SYMBOL(ndlc_close);
-=20
- int ndlc_send(struct llt_ndlc *ndlc, struct sk_buff *skb)
- {
--=09/* add ndlc header */
--=09u8 pcb =3D PCB_TYPE_DATAFRAME | PCB_DATAFRAME_RETRANSMIT_NO |
--=09=09PCB_FRAME_CRC_INFO_NOTPRESENT;
-+=09if (!ndlc->raw_nci) {
-+=09=09/* add ndlc header */
-+=09=09u8 pcb =3D PCB_TYPE_DATAFRAME | PCB_DATAFRAME_RETRANSMIT_NO |
-+=09=09=09PCB_FRAME_CRC_INFO_NOTPRESENT;
-=20
--=09*(u8 *)skb_push(skb, 1) =3D pcb;
-+=09=09*(u8 *)skb_push(skb, 1) =3D pcb;
-+=09}
- =09skb_queue_tail(&ndlc->send_q, skb);
-=20
- =09schedule_work(&ndlc->sm_work);
-@@ -103,6 +106,10 @@ static void llt_ndlc_send_queue(struct llt_ndlc *ndlc)
- =09=09=09ndlc->hard_fault =3D r;
- =09=09=09break;
- =09=09}
-+=09=09if (ndlc->raw_nci) {
-+=09=09=09kfree_skb(skb);
-+=09=09=09continue;
-+=09=09}
- =09=09time_sent =3D jiffies;
- =09=09*(unsigned long *)skb->cb =3D time_sent;
-=20
-@@ -154,6 +161,10 @@ static void llt_ndlc_rcv_queue(struct llt_ndlc *ndlc)
- =09=09pr_debug("rcvQlen=3D%d\n", ndlc->rcv_q.qlen);
-=20
- =09while ((skb =3D skb_dequeue(&ndlc->rcv_q)) !=3D NULL) {
-+=09=09if (ndlc->raw_nci) {
-+=09=09=09nci_recv_frame(ndlc->ndev, skb);
-+=09=09=09continue;
-+=09=09}
- =09=09pcb =3D skb->data[0];
- =09=09skb_pull(skb, 1);
- =09=09if ((pcb & PCB_TYPE_MASK) =3D=3D PCB_TYPE_SUPERVISOR) {
-diff --git a/drivers/nfc/st-nci/ndlc.h b/drivers/nfc/st-nci/ndlc.h
-index c24ce9b0d..5c1f8baf0 100644
---- a/drivers/nfc/st-nci/ndlc.h
-+++ b/drivers/nfc/st-nci/ndlc.h
-@@ -39,6 +39,8 @@ struct llt_ndlc {
- =09 */
- =09int hard_fault;
- =09int powered;
-+=09/* ST21NFCD: raw NCI on the wire, no NDLC PCB / ACK timers */
-+=09bool raw_nci;
- };
-=20
- int ndlc_open(struct llt_ndlc *ndlc);
-diff --git a/drivers/nfc/st-nci/se.c b/drivers/nfc/st-nci/se.c
-index 607ec768e..44cc102bc 100644
---- a/drivers/nfc/st-nci/se.c
-+++ b/drivers/nfc/st-nci/se.c
-@@ -621,6 +621,9 @@ int st_nci_discover_se(struct nci_dev *ndev)
- =09int se_count =3D 0;
- =09struct st_nci_info *info =3D nci_get_drvdata(ndev);
-=20
-+=09if (info->ndlc->raw_nci)
-+=09=09return 0;
-+
- =09r =3D st_nci_hci_network_init(ndev);
- =09if (r !=3D 0)
- =09=09return r;
-
---=20
-2.55.0
+Ok.
 
 
+-- 
+With best wishes
+Dmitry
