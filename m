@@ -1,101 +1,128 @@
-Received: from azure-sdnproxy.icoremail.net (azure-sdnproxy.icoremail.net [207.46.229.174])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id E31A031327A;
-	Thu, 20 Aug 2026 13:54:35 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=207.46.229.174
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AE22033F58C;
+	Thu, 20 Aug 2026 14:01:14 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787234079; cv=none; b=VYN4qhQbpEFiM4SjO2zs4OIoC8SNWldIQ1YkR0zgriQ2pnN39VRWFYGVdSl+yQ0NM6QgS4NSzBmies6sGXPBwXbbJLXZTwIp6CnwphKX0GVHp8+AflIOmRehukcVsux70DRxPk8/UNs9lb+BYwKbXjVkuUw/n1hYHyLrop24AUA=
+	t=1787234475; cv=none; b=iPWviKmyxAJxABfVEmWZXJoKSSoos+TmDvhSahFDLqHyzUETkqNFNdeYZ8kaC1j1Q3kTk8Vrbu4IteVLAjhTcpqFs1341RNsIH4ruqbHY4V46AhQBi6p0kBehaeJ+SrY0k02ILQiV5RrpgvlDEPnyzLzJBvOlHUqdVpCkfI76Ec=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787234079; c=relaxed/simple;
-	bh=EdlHy+FbipDz7p2bONSkEJpzLywLmtVwgsShP5wunkc=;
-	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
-	 MIME-Version; b=Yt0y53ilq7gdLjFJP8gKp7Ww+LIhHZWUO1tOFHSomK83+0f1FhfNBU2Z9bupiFp0UKWx0b2/Dr+LkvRJJsrZw0m81a6XgBfAAf8Vf4fNSj0+Mxt0v6HTn2T2uMS1FSTvSPKiR2ULHRfZCMd4xZS6K3OSZh1zTHf2FZJ5aFvyzEU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=zju.edu.cn; spf=pass smtp.mailfrom=zju.edu.cn; arc=none smtp.client-ip=207.46.229.174
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=zju.edu.cn
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=zju.edu.cn
-Received: from zju.edu.cn (unknown [10.98.66.117])
-	by mtasvr (Coremail) with SMTP id _____wBnEz0UB4dqvAauAA--.5984S3;
-	Thu, 20 Aug 2026 21:54:28 +0800 (CST)
-Received: from localhost.localdomain (unknown [10.98.66.117])
-	by mail-app3 (Coremail) with SMTP id zS_KCgCXgncNB4dq4qKJBA--.53615S3;
-	Thu, 20 Aug 2026 21:54:28 +0800 (CST)
-From: Fan Wu <fanwu01@zju.edu.cn>
-To: linux-usb@vger.kernel.org
-Cc: bryan.odonoghue@linaro.org,
-	heikki.krogerus@linux.intel.com,
-	gregkh@linuxfoundation.org,
-	linux-arm-msm@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	stable@vger.kernel.org,
-	Fan Wu <fanwu01@zju.edu.cn>
-Subject: [PATCH v2 1/2] usb: typec: qcom-pmic-typec: disable cc_debounce_dwork on stop
-Date: Thu, 20 Aug 2026 13:53:06 +0000
-Message-Id: <20260820135307.153773-2-fanwu01@zju.edu.cn>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20260820135307.153773-1-fanwu01@zju.edu.cn>
-References: <20260819161950.77858-1-fanwu01@zju.edu.cn>
- <20260820135307.153773-1-fanwu01@zju.edu.cn>
+	s=arc-20240116; t=1787234475; c=relaxed/simple;
+	bh=ZhZeyH4cUmZhBq/Kcn46arGUb7S0rQCn7/FG/Rzgp1I=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=jjavx8IWvOTTSc1KTUDUKE9TrXgRRCB0RS8qKB/to2dDtuzoyLkWYKTwGILgYrznlFspKuhHa7IjCf0gcJ8rcsiNwuZao1oxaR+T1qIyqgZZ4x35s0jwmRpAyW1CurA98GD4br3h4NB/DtU4FHBeljubm0xWKcBg41HmFL2xHQE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=HVQTPXQi; arc=none smtp.client-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="HVQTPXQi"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 518BE1F000E9;
+	Thu, 20 Aug 2026 14:01:10 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1787234474;
+	bh=kWq4BIqw/keC1n7yxwLNrJo/GuCBdDJ+y3txl8w8/dY=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To;
+	b=HVQTPXQio2Z0c/yKmgY8DAl9NuVxVomgB7bbv9LtDsd+9q7FRMmrolqUGk8uBft9D
+	 fBx4jFjYVJULmfLoR6vUkkRkJzqZ6Za1R6tXhIF1rmsqc0flw8OFKC0YC9rfvrt4Ti
+	 QYBRXlaI52N48vFG9q4GMUlrxksRL+Tb7R+HAxdi9/zx08UrmNfXCGyDcM7Ae/nOE/
+	 l3Mdy5oCPyuiL8OxcZs+ddu6Blx5QU0GUWq7gFKfcUsUUy8IJdqsV5LNsfaxID384u
+	 vozkuP82pp8ZyubUr/yjwQbacyu8170O7L+r3X6gU+rK7wXRRun+UlJC/rX+krZ1QH
+	 N6L5Vzmj9AdrQ==
+Message-ID: <327de6a8-6c67-4328-83a2-bfea332aba7c@kernel.org>
+Date: Thu, 20 Aug 2026 16:01:07 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-CM-TRANSID:zS_KCgCXgncNB4dq4qKJBA--.53615S3
-X-CM-SenderInfo: qrstjiaswqq6lmxovvfxof0/
-X-CM-DELIVERINFO: =?B?1xpyKQXKKxbFmtjJiESix3B1w3vZ3A9ovKVTomAyoQazvoRs/NHSP8GI2EvgeEEW7R
-	sfnZPoDCNGYdHSfuFmYJL54WNnH1O4G0enPJIj3LGmHDxOgkqcYy6hAI3JzeV6+CAacoqU
-	1X3/xAf4+zarVqYB1+2p9E6mavGmQbzmcFsnzP86
-X-Coremail-Antispam: 1Uk129KBj93XoW7tw18CFWDtryxCr4kKFyUJwc_yoW8Xw1Dpa
-	s8KryDJrykWanFy3sIqF47ZF4UuanrA347G3y0g34ftF4qqw1UtrWUtr109Fy5CFsrJFya
-	vr4agFyaya4kWwcCm3ZEXasCq-sJn29KB7ZKAUJUUUUU529EdanIXcx71UUUUU7KY7ZEXa
-	sCq-sGcSsGvfJ3Ic02F40EFcxC0VAKzVAqx4xG6I80ebIjqfuFe4nvWSU5nxnvy29KBjDU
-	0xBIdaVrnRJUUU9Gb4IE77IF4wAFF20E14v26r4j6ryUM7CY07I20VC2zVCF04k26cxKx2
-	IYs7xG6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48v
-	e4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_tr0E3s1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI
-	0_Gr1j6F4UJwA2z4x0Y4vEx4A2jsIE14v26rxl6s0DM28EF7xvwVC2z280aVCY1x0267AK
-	xVW0oVCq3wAac4AC62xK8xCEY4vEwIxC4wAS0I0E0xvYzxvE52x082IY62kv0487Mc804V
-	CY07AIYIkI8VC2zVCFFI0UMc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0I7IYx2IY67AK
-	xVWUXVWUAwAv7VC2z280aVAFwI0_Gr0_Cr1lOx8S6xCaFVCjc4AY6r1j6r4UM4x0Y48Icx
-	kI7VAKI48JM4x0Y48IcxkI7VAKI48G6xCjnVAKz4kxMxAIw28IcxkI7VAKI48JMxC20s02
-	6xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8CrVAFwI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_Jr
-	I_JrWlx4CE17CEb7AF67AKxVWUtVW8ZwCIc40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v2
-	6r1j6r1xMIIF0xvE2Ix0cI8IcVCY1x0267AKxVW8JVWxJwCI42IY6xAIw20EY4v20xvaj4
-	0_Jr0_JF4lIxAIcVC2z280aVAFwI0_Gr0_Cr1lIxAIcVC2z280aVCY1x0267AKxVW8JVW8
-	JrUvcSsGvfC2KfnxnUUI43ZEXa7IU8aQ6JUUUUU==
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] i2c: qcom-cci: fix autosuspend cleanup
+To: Guangshuo Li <lgs201920130244@gmail.com>,
+ Loic Poulain <loic.poulain@oss.qualcomm.com>, Robert Foss
+ <rfoss@kernel.org>, Andi Shyti <andi.shyti@kernel.org>,
+ Todor Tomov <todor.too@gmail.com>, Wolfram Sang <wsa@kernel.org>,
+ Vinod Koul <vkoul@kernel.org>, Bjorn Andersson <andersson@kernel.org>,
+ linux-i2c@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+ linux-kernel@vger.kernel.org
+Cc: stable@vger.kernel.org
+References: <20260812094425.3515179-1-lgs201920130244@gmail.com>
+From: Krzysztof Kozlowski <krzk@kernel.org>
+Content-Language: en-US
+Autocrypt: addr=krzk@kernel.org; keydata=
+ xsFNBFVDQq4BEAC6KeLOfFsAvFMBsrCrJ2bCalhPv5+KQF2PS2+iwZI8BpRZoV+Bd5kWvN79
+ cFgcqTTuNHjAvxtUG8pQgGTHAObYs6xeYJtjUH0ZX6ndJ33FJYf5V3yXqqjcZ30FgHzJCFUu
+ JMp7PSyMPzpUXfU12yfcRYVEMQrmplNZssmYhiTeVicuOOypWugZKVLGNm0IweVCaZ/DJDIH
+ gNbpvVwjcKYrx85m9cBVEBUGaQP6AT7qlVCkrf50v8bofSIyVa2xmubbAwwFA1oxoOusjPIE
+ J3iadrwpFvsZjF5uHAKS+7wHLoW9hVzOnLbX6ajk5Hf8Pb1m+VH/E8bPBNNYKkfTtypTDUCj
+ NYcd27tjnXfG+SDs/EXNUAIRefCyvaRG7oRYF3Ec+2RgQDRnmmjCjoQNbFrJvJkFHlPeHaeS
+ BosGY+XWKydnmsfY7SSnjAzLUGAFhLd/XDVpb1Een2XucPpKvt9ORF+48gy12FA5GduRLhQU
+ vK4tU7ojoem/G23PcowM1CwPurC8sAVsQb9KmwTGh7rVz3ks3w/zfGBy3+WmLg++C2Wct6nM
+ Pd8/6CBVjEWqD06/RjI2AnjIq5fSEH/BIfXXfC68nMp9BZoy3So4ZsbOlBmtAPvMYX6U8VwD
+ TNeBxJu5Ex0Izf1NV9CzC3nNaFUYOY8KfN01X5SExAoVTr09ewARAQABzSVLcnp5c3p0b2Yg
+ S296bG93c2tpIDxrcnprQGtlcm5lbC5vcmc+wsGPBBMBCgA5AhsDBgsJCAcDAgYVCAIJCgsE
+ FgIDAQIeAQIXgBYhBJvQfg4MUfjVlne3VBuTQ307QWKbBQJp2mE8AAoJEBuTQ307QWKbeaIP
+ /ihHTkTW4KsN/DQ945JJbyu5tI0J80Wue7QyyLPglyKfhgb5cLLNPpOC8cCIJsc7+W3i2P38
+ s2c1cOH6CYGE7E9ur3Vfme8NW2S2I/Z8VC7bZnzyS23wT17LrsdS/qCpx4o8U+pt/xdXDKph
+ EGRYrIEmMpUWvyYzyYKGIe25FtaayIIKpq8eZYyFcp2f/sG5IkOW5uZzHPMPdcm87jU7fyuQ
+ rAU2vx9r+ulUfQ/q9Z2roC/ode3l7t2pN7BCBCsUDp6JCrUyZrtT1e7EbA0ZRP3aOBNk2P2E
+ DQOgJGjGdO5Yx2Y9LFtltu6JbsBJHi1syGRX3AtQYOMc4Y1WGoeZJmMlvKj2ZqqXNkcWi2DS
+ IQEWB0uW6CqFsBBIMGDa+6OzdaVO/uAVXWDWml02Men3CILdI1MbVjoh8ECqYUY7OQ+JJvNN
+ vnliuq5WM3Ghd3jg/LZZrxXjdIginRHFQCjIJYLKpLZWm1/iDFedcfzqRNYmTtqscdCNHW41
+ oT3Z7BmO9xwdjuwBS6nmS6JJwkbf5Ot2QR4pB/DRU7ZwjT1qHe+9r9gF32wXVQatHNGK/VVu
+ sfwOnkdxCWkp/qb2gdQRmZh+SedStWshigH6sNfuHBloF/q+hjMRc8b2m326OZdrbSHwY1Sz
+ vti8Hn7n8NjdHO9LKB7BIdjkA9DA5WsqOuVCzsFNBFVDXDQBEADNkrQYSREUL4D3Gws46JEo
+ Z9HEQOKtkrwjrzlw/tCmqVzERRPvz2Xg8n7+HRCrgqnodIYoUh5WsU84N03KlLueMNsWLJBv
+ BaubYN4JuJIdRr4dS4oyF1/fQAQPHh8Thpiz0SAZFx6iWKB7Qrz3OrGCjTPcW6eiOMheesVS
+ 5hxietSmlin+SilmIAPZHx7n242u6kdHOh+/SyLImKn/dh9RzatVpUKbv34eP1wAGldWsRxb
+ f3WP9pFNObSzI/Bo3kA89Xx2rO2roC+Gq4LeHvo7ptzcLcrqaHUAcZ3CgFG88CnA6z6lBZn0
+ WyewEcPOPdcUB2Q7D/NiUY+HDiV99rAYPJztjeTrBSTnHeSBPb+qn5ZZGQwIdUW9YegxWKvX
+ XHTwB5eMzo/RB6vffwqcnHDoe0q7VgzRRZJwpi6aMIXLfeWZ5Wrwaw2zldFuO4Dt91pFzBSO
+ IpeMtfgb/Pfe/a1WJ/GgaIRIBE+NUqckM+3zJHGmVPqJP/h2Iwv6nw8U+7Yyl6gUBLHFTg2h
+ YnLFJI4Xjg+AX1hHFVKmvl3VBHIsBv0oDcsQWXqY+NaFahT0lRPjYtrTa1v3tem/JoFzZ4B0
+ p27K+qQCF2R96hVvuEyjzBmdq2esyE6zIqftdo4MOJho8uctOiWbwNNq2U9pPWmu4vXVFBYI
+ GmpyNPYzRm0QPwARAQABwsF2BBgBCgAgAhsMFiEEm9B+DgxR+NWWd7dUG5NDfTtBYpsFAmna
+ YUkACgkQG5NDfTtBYptX+BAApg32CkxwNucNEi8WfWA8oKkW0y8YDuY6ORMo9FWNGiT/OTy0
+ vyJrLocrpn86zwfjVp+eCrssPYh8eqJfnWqmYv6ACQtHPYzPZQ3mSo8H97Z01oUxITzCxpXm
+ ZkLgPIqtDPcC2E3dPM/fVxcyowM8XsaMA9wcsaUYrta8toOq2b9tKcjleKMfMrm0gQ9u7wUc
+ QbLkwj6TCLOwucb07GXzLTNF9PZmaDUpKAZjMjmrW+le+SFvQbhamx0rxLWPR0NWntXpbCn+
+ +ACch03p/JyTBVktxFsFyCt7pTPE1kEaeuXBTe/a2D9iQvRxRW19LvuO2e59/u1wYUiH/orz
+ wbIC2S4dBsPAPihL3ztOU1yE86GPyQtSE0kU+/7snnLt4QGi6PChf3t5gnNjAzjUUovO8rgI
+ c+5yN5heq5loYHgK6OQ9OlHzsPHO9e9MOQcKlFycs1pyijFGzDwdNUm/SchK8iWT2QApTx4A
+ K9bCVaboTA2T77QYkRcRJYSsO1alGX0ome/hMLD1daXlkrNUp1HWa3K4iytLRXjCSIorWiGs
+ n+q3krnpXu3TFkA8qtOFZMdnIiFuiq1yLT8hptsV5xh1TA2nsVvSYiaCr3q4s4BKjS/KrLDb
+ qoxzw8ISjdUp4pA85vb6YLCmb39NgidD+7PmAr65lBNveIFynTgsja1rRQ4=
+In-Reply-To: <20260812094425.3515179-1-lgs201920130244@gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-cc_debounce_dwork is queued from the set_cc() and start_toggling()
-callbacks, which run from TCPM's kthread worker.  port_stop() returns
-before tcpm_unregister_port() destroys that worker.  Flushing the worker
-during unregister may therefore run a callback which queues the delayed
-work after port_stop() has returned.
+On 12/08/2026 11:44, Guangshuo Li wrote:
+> cci_probe() calls pm_runtime_use_autosuspend(), but the remove path
+> does not call the matching pm_runtime_dont_use_autosuspend() before
+> disabling runtime PM.
+> 
+> If the autosuspend delay is set to a negative value while autosuspend
+> is enabled, the runtime PM core increments usage_count to prevent
+> runtime suspend. Without undoing the autosuspend setting during
+> teardown, this reference is not dropped and usage_count remains
+> unbalanced.
+> 
+> Use devm_pm_runtime_set_active_enabled() to manage the runtime PM
+> state. Its managed cleanup disables autosuspend and runtime PM and
+> restores the suspended state on probe failure and driver removal.
+> Remove the now redundant manual runtime PM cleanup.
+> 
+> This issue was found by manual code inspection.
+> 
+> Fixes: e517526195de ("i2c: Add Qualcomm CCI I2C driver")
+> Cc: stable@vger.kernel.org
+> Signed-off-by: Guangshuo Li <lgs201920130244@gmail.com>
 
-The delayed work can then run after devres has freed pmic_typec_port.
+You sent vast amount of patches, all separate, making it very difficult
+to track and respond in efficient way. Do not do that.
 
-Use disable_delayed_work_sync() in port_stop() to cancel a pending
-instance and prevent the TCPM callbacks from queueing another one.
+Group your work per subsystem.
 
-This issue was found by an in-house static analysis tool.
+You were asked to clarify and respond to incorrect fixes statement. I do
+not see how you clarified and responded at all.
 
-Fixes: a4422ff22142 ("usb: typec: qcom: Add Qualcomm PMIC Type-C driver")
-Cc: stable@vger.kernel.org # v6.10+
-Assisted-by: Codex:gpt-5.6
-Signed-off-by: Fan Wu <fanwu01@zju.edu.cn>
----
- drivers/usb/typec/tcpm/qcom/qcom_pmic_typec_port.c | 2 ++
- 1 file changed, 2 insertions(+)
-
-diff --git a/drivers/usb/typec/tcpm/qcom/qcom_pmic_typec_port.c b/drivers/usb/typec/tcpm/qcom/qcom_pmic_typec_port.c
-index 429bd42a0..fdc379fc4 100644
---- a/drivers/usb/typec/tcpm/qcom/qcom_pmic_typec_port.c
-+++ b/drivers/usb/typec/tcpm/qcom/qcom_pmic_typec_port.c
-@@ -694,6 +694,8 @@ static void qcom_pmic_typec_port_stop(struct pmic_typec *tcpm)
- 
- 	for (i = 0; i < pmic_typec_port->nr_irqs; i++)
- 		disable_irq(pmic_typec_port->irq_data[i].irq);
-+
-+	disable_delayed_work_sync(&pmic_typec_port->cc_debounce_dwork);
- }
- 
- int qcom_pmic_typec_port_probe(struct platform_device *pdev,
-
+Best regards,
+Krzysztof
