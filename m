@@ -1,33 +1,33 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8B0261D5CFB;
-	Thu, 20 Aug 2026 06:05:46 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id ECB6738DC70;
+	Thu, 20 Aug 2026 06:15:47 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787205947; cv=none; b=HdxyIPaS7Pc6P/HPE2Ci7k2Nau9YNN6ofo0KjFM+WKPbJDuLGV9f0DRHBdoHMsLl2u4nRghJjrQ3MqeJ1eeYgYD+T3h0Ab28EssSqYe/48XSBQCclETfcrZnGkONQYvsi+73V5HG0Jr2DvTA7gmsD/CpA9x5oPnNwYLN71Wi/3g=
+	t=1787206549; cv=none; b=jhfuCxrlofNL2pKYzTkJqqUD20/1h6LgxbeJYNAkrKLQ8a+sU55ZCljKu/Ub1ms4JYbwzfsIQxIbIUUu4S7pKDotC3INTTsxFszZUGNOd1RRh6i4bPVk4XyLVK2xMvoPhzMUCLwAcv3SFOxuCj+zf+KOSjesEFUSwb94FtJJ9lA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787205947; c=relaxed/simple;
-	bh=PqkjF3jBLK6/DuoceMwkDJ5uMuQtgPXfKyWHfLwuRbs=;
+	s=arc-20240116; t=1787206549; c=relaxed/simple;
+	bh=SklRxN7mEANhrw3OIl9o/qB+Ne/MfLjbYiAZke9Rk/U=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=MOtQgBsVmcgEWQIQE35HhPYPuMDlJg6F4cDfXt81yHcFVE0WJpnZQ9f32V4C7F4OMtU8A+8W/WT5n0hB3CJgfDw4z+qAvDrvgb6eVp9KUpr5AG9Kw+gtdkphVRMRmKSKyqHfwvUKAEkVOJTEkrRl88azKkf6W7E6lDQtcYkO36s=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=EEj33zDe; arc=none smtp.client-ip=100.103.45.18
+	 In-Reply-To:Content-Type; b=AactHlXDEGiW9kZH7Fpb8WVb6gfyiHFEAxlzuLiGRvRkVQ6nnlVtQpbJSr5TJMhqHT0uyU+6DF1WabmgkLSojoCwu4Rct+TIyNXAOLNuU32F734YoEzDwu4x4jNojowrFbp8A4NGftenBuu23xYoViNPb+xpv+7YYSejzEoQAnQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=mzJuM1QN; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="EEj33zDe"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5BFF71F000E9;
-	Thu, 20 Aug 2026 06:05:41 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="mzJuM1QN"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4ACEE1F000E9;
+	Thu, 20 Aug 2026 06:15:35 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1787205946;
-	bh=dgkzOqfnNn3oIpBNkeMAEPPh8onIVrDTGwHG0nb7Jeo=;
+	s=k20260515; t=1787206547;
+	bh=GjH+o1SJZXwZP6LjV3NYbnv7qasj8wLo3h2/Tpx3eDo=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=EEj33zDebSYNIeXaqnR1bZKsO+2fK2mB4t0u2uoMKo8nRMMmVv16wyeFta3CePO48
-	 276Vu5UyryUkPnRgHnOraWDBz0kJ8N5c52e/CDLPep1LvUismKPRf0zTerE9fu8+XT
-	 fTlqNilSTJxkwPouf1Ho4A3OooeIT2USayHwDQizgO1X0aXWsxz9q5puRWpvGfkWml
-	 Vu+O7sLL/f4Y17+VxZb1ub8AKhYDeFYPf4+VAyEkXyT7HzHEyAYzziD2VTj7178h4w
-	 vBOwvs8kfzWYlczcakibPQrRFfW+FjsZtXIvXmb3QQdCyYcVJ9ilbd9h79fkIvhffK
-	 zLtrcgKK3/vCA==
-Message-ID: <a0269455-5423-489c-9a12-90d8df83040e@kernel.org>
-Date: Thu, 20 Aug 2026 08:05:39 +0200
+	b=mzJuM1QNJ6KPGL8QoKAFDpr6G8Vs/kQQ3dOUy9Ni9bqNQ7Wkih4ikUMYpBmtUS7yQ
+	 uyXzJ0vRl/Wqj1SGSgzM3TMO+OCRFj6lmzoZTAKDj5jSXWpD2IxrCpRRgYy+Szo3fF
+	 UmB1tqjTEX7mXxe/vO4zsFa43s3sNKFlx2bGwlIe6r7sxrhiyOLabD78F4B3/ygvpm
+	 yyrBMx2ka9jxQJ/Ly/Dx05WiraRMV9riFLfL6Nfi6DzdA8MDW1fQiGRLgrVYdVqEH3
+	 JBqeeLfn39RPzRfTm7Crf8qB57GKjF3+GP6TnT/39b49MywxUgsszxFm70BvKN2R+M
+	 4bANgcWxnZJNw==
+Message-ID: <dd3da35b-1db6-43a4-ae1f-35620692f51f@kernel.org>
+Date: Thu, 20 Aug 2026 08:15:33 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -35,14 +35,39 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/3] dt-bindings: net: nfc: add st,st21nfcd
-To: Kristian Brox <isyourbrainfoss@proton.me>, oe-linux-nfc@lists.linux.dev
-Cc: david@ixit.cz, krzk+dt@kernel.org, devicetree@vger.kernel.org,
- dmitry.baryshkov@oss.qualcomm.com, luca.weiss@fairphone.com,
- linux-arm-msm@vger.kernel.org, netdev@vger.kernel.org
-References: <20260818205940.1973944-1-isyourbrainfoss@proton.me>
- <20260819210906.2500789-1-isyourbrainfoss@proton.me>
- <20260819210906.2500789-2-isyourbrainfoss@proton.me>
+Subject: Re: [PATCH v2 00/15] accel/qda: Qualcomm DSP Accelerator driver
+To: rob.clark@oss.qualcomm.com
+Cc: Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>,
+ Oded Gabbay <ogabbay@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
+ Shuah Khan <skhan@linuxfoundation.org>, Randy Dunlap
+ <rdunlap@infradead.org>, Nathan Chancellor <nathan@kernel.org>,
+ Nick Desaulniers <ndesaulniers@google.com>, Bill Wendling
+ <morbo@google.com>, Justin Stitt <justinstitt@google.com>,
+ "Joerg Roedel (AMD)" <joro@8bytes.org>, Will Deacon <will@kernel.org>,
+ Robin Murphy <robin.murphy@arm.com>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+ Sumit Semwal <sumit.semwal@linaro.org>,
+ =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
+ Bharath Kumar <quic_bkumar@quicinc.com>,
+ Chenna Kesava Raju <quic_chennak@quicinc.com>,
+ srinivas.kandagatla@oss.qualcomm.com, dmitry.baryshkov@oss.qualcomm.com,
+ linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ linux-doc@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+ llvm@lists.linux.dev, iommu@lists.linux.dev, linux-media@vger.kernel.org,
+ linaro-mm-sig@lists.linaro.org
+References: <20260817-qda-v2-v2-0-69a02e9090d4@oss.qualcomm.com>
+ <3322b42b-3755-45ec-ad55-345125f0d488@kernel.org>
+ <10349e29-b583-403f-a89a-9a00c73666bc@oss.qualcomm.com>
+ <87dca76c-851e-4cc3-ab91-68949d283b79@kernel.org>
+ <CACSVV01eYr6FyA6XBG0xw0yv2dydvTEhcY-WUy07mxM8WwkZcg@mail.gmail.com>
+ <318f14c2-0e87-4e07-8173-1511dca67d78@kernel.org>
+ <CACSVV01T=ytVJKM7NRoBTAJm7vH+JPJNT9Tftu5X9YskGXerwg@mail.gmail.com>
+ <e7b4eceb-cb3a-49ea-bed9-728c958594b0@kernel.org>
+ <CACSVV03ypjBYkhRpt=TyDwOKhejKKke3x=Fi_TvxXN-5U_rCsw@mail.gmail.com>
+ <fb834ae5-7113-4a86-bb84-ca5115c8d7ff@kernel.org>
+ <CACSVV018jB4WRRJ_CUHQmkHXZcqauWJXWGgrzY_HA6cFQ+Q3Xw@mail.gmail.com>
 From: Krzysztof Kozlowski <krzk@kernel.org>
 Content-Language: en-US
 Autocrypt: addr=krzk@kernel.org; keydata=
@@ -88,44 +113,41 @@ Autocrypt: addr=krzk@kernel.org; keydata=
  K9bCVaboTA2T77QYkRcRJYSsO1alGX0ome/hMLD1daXlkrNUp1HWa3K4iytLRXjCSIorWiGs
  n+q3krnpXu3TFkA8qtOFZMdnIiFuiq1yLT8hptsV5xh1TA2nsVvSYiaCr3q4s4BKjS/KrLDb
  qoxzw8ISjdUp4pA85vb6YLCmb39NgidD+7PmAr65lBNveIFynTgsja1rRQ4=
-In-Reply-To: <20260819210906.2500789-2-isyourbrainfoss@proton.me>
+In-Reply-To: <CACSVV018jB4WRRJ_CUHQmkHXZcqauWJXWGgrzY_HA6cFQ+Q3Xw@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-On 19/08/2026 23:09, Kristian Brox wrote:
-> The ST21NFCD (e.g. Fairphone 5) speaks raw NCI on I2C. Existing
-> st,st21nfcb-* and st,st21nfcc-i2c compatibles stay NDLC. Add a
-> separate compatible so those boards are not switched to the wrong
-> framing.
+On 19/08/2026 17:48, Rob Clark wrote:
+> On Wed, Aug 19, 2026 at 8:27 AM Krzysztof Kozlowski <krzk@kernel.org> wrote:
+>> The rule of usptream development is that we do not accept duplicated
+>> code, just because a vendor wants to write something new. This is
+>> basically the concept applied all over the drivers tree, where we pushed
+>> back against all sorts of duplications all over the vendors.
+>>
+>> What I miss in this thread is why would there be any exception here. We
+>> do not grant exceptions from standard practices on "I want" reasons.
 > 
-> Also document the optional SYS_CLK (clocks) and VPS_IO (vdd-io-supply)
-> used on Fairphone 5, and add an I2C example.
+> I agree that we should not have duplicated drivers just for vendor
+> lolz.  But when it comes to adopting common frameworks and integrating
+> better into the ecosystem, this doesn't seem like something we should
+> actively discourage.  I don't think this is a case of vendor lolz, but
+
+No one discourages it. Following standard Linux kernel practices and
+requirements is not discouraging, do not twist the narrative here.
+Again, it is standard upstream review telling that we do not duplicate
+drivers. Ever, unless there is serious exception needed.
+
+I asked why there should be an exception granted? Is the reason for
+exception following:
+"We want to adopt common framework"
+?
+
+> rather reacting to drm/accel emerging as the standard framework for
+> this sort of driver.
 > 
-> Signed-off-by: Kristian Brox <isyourbrainfoss@proton.me>
+> So how do we get from here to there?
 
-You already received below comment, so me needing to repeat is not the
-right way because it means you just ignore me. So I assume you will
-ignore rest of my comments as well.
-
-Additionally, you need to develop on mainline, not postmarketos kernel.
-
-Please use scripts/get_maintainers.pl to get a list of necessary people
-and lists to CC. It might happen, that command when run on an older
-kernel, gives you outdated entries. Therefore please be sure you base
-your patches on recent Linux kernel.
-
-Tools like b4 or scripts/get_maintainer.pl provide you proper list of
-people, so fix your workflow. Tools might also fail if you work on some
-ancient tree (don't, instead use mainline) or work on fork of kernel
-(don't, instead use mainline). Just use b4 and everything should be
-fine, although remember about `b4 prep --auto-to-cc` if you added new
-patches to the patchset.
-
-You missed at least devicetree list (maybe more), so this won't be
-tested by automated tooling. Performing review on untested code might be
-a waste of time.
-
-Please kindly resend and include all necessary To/Cc entries.
+What is wrong with my proposal?
 
 Best regards,
 Krzysztof
