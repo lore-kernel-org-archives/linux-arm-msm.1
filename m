@@ -1,82 +1,82 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 22E23372ED3
-	for <linux-arm-msm@vger.kernel.org>; Thu, 20 Aug 2026 14:50:50 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2F41837BE70
+	for <linux-arm-msm@vger.kernel.org>; Thu, 20 Aug 2026 14:51:00 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787237454; cv=none; b=aZaBhvIuth+aIHjm/WPKnK10MR7RhUFEyQgqWSI9DHFB1QFyLscsD0lIP9dgjYj9PhZoSA+70HPLKR36QUj5NmT1C2G2HWdlstPCkRDDVjgsEv18g6EmVSXWgGxuksCXnZrq8cVOFw2CYs2+eFrCVO6hUxR0PM8Jmb+ah7lRQrc=
+	t=1787237461; cv=none; b=JWf5NE/Nm//PgKB3s79rGSp7MmAbtHRGUCnDF1/Wk6bavxS1PQU8C49wIgZu5hVXdHWeq4LGI7WL/dJpAaf5YRl7Tt5F/H2PGsRf4QVbH6K2i05p3ZazTE1RBRRrfKTJS/bzRKszI4zwluBJMBULzNNaUl2Zk+9110V+qfYGmjc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787237454; c=relaxed/simple;
-	bh=nnn2VvmmY04QPKvQdTFVcUFoN3Rvxlc3uGFzFkpIl3E=;
+	s=arc-20240116; t=1787237461; c=relaxed/simple;
+	bh=wo+u3YWeKj+W8pl1NIWMDdTiciUwV1jwvTY3dqUCWkI=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=C1L3q4RLe+/256oMBTwtCDhYdZ3YjyvI4N2pB2vEPfiZW23dsaDWoWgPkmV6nnZywqUuPZBy5k6gXQD5Bawxb0hvg/U8RcP1sY2AInM8F17d4VvYoDoZSyMqtd86rEi6lBNx8BlCjzuBEu97KkYsEQcaowSUA8Orga7GXWDC+5k=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=c8w76avN; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=EW0FODES; arc=none smtp.client-ip=205.220.180.131
+	 MIME-Version; b=j9YC0MubSPe39PmcKFE+SHHcnA493+uRCszv7u512T2+e0RA58xSUyInnCMQ76fl7NMctSaIiywiPjh7Tz39EhdeI38BheBT7KSy04hkX8Q7Wl78FwV+dHLXeQvAyeJ5IzjbwrghdldvWA8A7vHKTDYWhyWm1U8Q4U9Ox50p/Ig=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=Eja80+Jt; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=DhuRIPV1; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="c8w76avN";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="EW0FODES"
-Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67KE7kdb3234908
-	for <linux-arm-msm@vger.kernel.org>; Thu, 20 Aug 2026 14:50:50 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="Eja80+Jt";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="DhuRIPV1"
+Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67KE7PEb010394
+	for <linux-arm-msm@vger.kernel.org>; Thu, 20 Aug 2026 14:50:59 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:date:from:in-reply-to:message-id
-	:mime-version:references:subject:to; s=qcppdkim1; bh=S7BAfSM3xAy
-	lZQ2ziEWr2lR6yuzSoZq5hoVHdXm5m90=; b=c8w76avNVE+ySgMegkHf3kJOS5a
-	uDxaJn5bH0JOkd+w5pSnKg3Cdqa0GEF13tWtrCfcpH44Tb1AXUJuTsglN8PXd2v6
-	Wtt+tRq55Gn2IWi+kJGBmQpaaDM9CrJ7KDnxVBE527YgTtnTz4bggfSn81bNIZuT
-	4P4LoIsk7iTIpL5vLenp9eGzoCVQJttqiVUru87DUCfeKqcNbOZYqSfI8Eosh3Ji
-	0scNrU1JAL+nOLAgVAm3VUMr4ce4W+7u+A0KPBQGGalHZ4AeYxODwGxnl/AyeDtR
-	tdLtW1/yFWAhJm/0zuXHkqDl2TVscg4+6POeEWkT1EXGCnvL3/brRi01XiQ==
-Received: from mail-oo1-f71.google.com (mail-oo1-f71.google.com [209.85.161.71])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g5xbv9evq-1
+	:mime-version:references:subject:to; s=qcppdkim1; bh=A/9hqo/Rrzg
+	mEvda3g1SNdYaNhtBxjx7Sp2rY2ny7rY=; b=Eja80+JtIA1Mld6NbiOnmJGIn02
+	4j4sj1ySoCHeiH1OryQSi0bvBGwXMzusWmlmOgR6hVcn7bk8mLIVDeFJm/NC91bV
+	im/fHcRC8sA4bhlV5mX00QFiJTVWd9A5POyx2/c14cyuX48CXpftk7vpE1wbWzk3
+	h/fRjvyX0Sy6WTD/dzEL8OvRz3KAd5OEv1sRitRHu5oUnNhatMAZmTxzUwG0keYz
+	Py5vReiKge3uHhJ92VElv3bUoAzEfYRfHoPo8LBmmE+KY3AHDbTO5H/nzftuD9Hx
+	PxSTy+rCSCnRcDzn/Ie0mopb7ZhvnZMDNO1QskPPxcCJYqG9Su1DLKEMphg==
+Received: from mail-oi1-f198.google.com (mail-oi1-f198.google.com [209.85.167.198])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g5xgc9epf-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Thu, 20 Aug 2026 14:50:49 +0000 (GMT)
-Received: by mail-oo1-f71.google.com with SMTP id 006d021491bc7-6b12d84686eso2496425eaf.3
-        for <linux-arm-msm@vger.kernel.org>; Thu, 20 Aug 2026 07:50:49 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 20 Aug 2026 14:50:59 +0000 (GMT)
+Received: by mail-oi1-f198.google.com with SMTP id 5614622812f47-4a7de733fa9so2997365b6e.3
+        for <linux-arm-msm@vger.kernel.org>; Thu, 20 Aug 2026 07:50:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1787237449; x=1787842249; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1787237458; x=1787842258; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=S7BAfSM3xAylZQ2ziEWr2lR6yuzSoZq5hoVHdXm5m90=;
-        b=EW0FODESl+X+nwWA3DJ2dDircqKSDqUm1nXXjvmc5AdyBED3biWNp4cpRy2CnmGT7C
-         jyjubhpOUcIQkLYhmL/XAD4HReTg1HfUrGTqr6dxVfEqYpZi43CFLhPpJdj5+vR5d1Mx
-         he7KFg+PwXvYvYdDwLXKwrMm0lyvbsCB9/ppp9RLX0Wa5uuZMnDlw6l2Q/9d5iCIy8Eh
-         oQI6Cg11tcA9OyVZ3K2simvIAak1MPDHPt1fs+TEQh3YMVdY0/+W/ply8wBTMGiMCnpH
-         SxlSJzBIoPOWpVhgION+6XsrX+PYhLdgCIDQhNsj4Q/g1pXw8oEO0RJfNhP0EX5Wero1
-         xFhA==
+        bh=A/9hqo/RrzgmEvda3g1SNdYaNhtBxjx7Sp2rY2ny7rY=;
+        b=DhuRIPV1fAAf1mHeEJdWlzXVYPLmrCzh7oXscjMWDFCuaHtd4pFW9Sg6K2y6BrmSp5
+         pGnI/3kx92d8rsYgQvv1QqDApx5WmVioxfPhaAbDltXCNudzweIrFX8pP6u19oWcwHqF
+         DgrnkmaX8lKOOed2Jq87hqLkckd7ZEnTFb4ppns59lmJ7WutFvfFXxlhV1i1vP+7ZxH+
+         4HQjAkg2XZo7ZyotxsLjLmrjg0es/7ojHLc9yqbqzB1WgKz5r73U1JExsZKio209BT/c
+         VR4eU69nagqBEEBaMsTPcFVvxipB73UTFCgAaohmxs7OwvkS0ZcJ8jx0Va2w1iLe1mn2
+         TTgQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787237449; x=1787842249;
+        d=1e100.net; s=20251104; t=1787237458; x=1787842258;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=S7BAfSM3xAylZQ2ziEWr2lR6yuzSoZq5hoVHdXm5m90=;
-        b=RUgiJltw3tH+X90iw1iw0RBODSitd/ZNrhoPHeQ2YhnFOermlSCVTmScliTuIpUKhm
-         Ji77PSIRFVlX8CNOMcoK3p+ACuKP4uk2Vd14H77WqUhstTPaDLdOokpHzVsWVladbFzS
-         JoE/x93uJElahnFtmLL11nMp/Hi+2rc/icf7pdDW4P/j9Awnxo9NG4erwGHSjBmOeEh7
-         bJYjG/GYI3RxkM4z/wVxUsagJv6KseLtj4mDKBMVOVGEzgg/TvyJttwUpN92xKpXcDnw
-         3oxo723hEwiQgVVyd9mK5GcgoM0fdZuBZrxZ1b0h4g8sPLAJeLXA1DODA03ZdnPgd1CA
-         gNdA==
-X-Forwarded-Encrypted: i=1; AHgh+RoH524lT4XX9599O0XMUTq0uWnvv4G+1mvguFnVH2XKEJ7iL8vCvS7Nr1cRMFVQVe2UDxYB7FTT1GZ37CKl@vger.kernel.org
-X-Gm-Message-State: AOJu0Yzc6ZVSKLb3qbN/w5SyWHLBb492d+m4hcN2VmyQvNjFXtSjLuQf
-	piNtIXV+Vx4gITF7J3jHiY5S/eGkrM6InJKgQ2N4TDPpAXABcFBjQ6iYRLAirrAE+OaCgl7V2fN
-	dGCK+o5DN+KSVRIVE5N7WTZx0QMK5V1pspu8OPohUZkSln+Uu+P4kcuT9FUowUpwXT5kw
-X-Gm-Gg: AR+sD12LkHCdlfP/lyNeRxj/HCHQVy3aSnADV3q19JtaaGsMVoW/o9QSS0jiLJ+NeVf
-	P5GMO6TSxUjopMcItLRaykQWJyLXqQxBR2QcbdpBPva0V123eDSW/0gmyHNG9ynyy6/WoyqUe42
-	JwwoHvi1qLtVGtd1nrjXbNRVf2FqUeXl79C32uBEYs/h3SMTpQM7/EqAP+zqDYybunJRPAp7OII
-	khqBkePpCMeW2JHtWNhZQbymmcN/Gnp+LNi4sofl6xn8ho1zNR3gqzfc2VV8vqNgGPJeuwys/T/
-	/sfJN/7Ozrn8kcDYBeAG4BkUztQVJAOiXRENMiBt4roUYXYFNk7ZLqIUNgcU1dxFMCXUGFNOSl2
-	nZi25bvORDQlxSPlieoSiw+3NJxUY
-X-Received: by 2002:a05:6820:4dee:b0:6ae:aa38:a0bb with SMTP id 006d021491bc7-6b13c64e72amr12538938eaf.33.1787237449295;
-        Thu, 20 Aug 2026 07:50:49 -0700 (PDT)
-X-Received: by 2002:a05:6820:4dee:b0:6ae:aa38:a0bb with SMTP id 006d021491bc7-6b13c64e72amr12538882eaf.33.1787237448849;
-        Thu, 20 Aug 2026 07:50:48 -0700 (PDT)
+        bh=A/9hqo/RrzgmEvda3g1SNdYaNhtBxjx7Sp2rY2ny7rY=;
+        b=SrznhCG8wQ3pOspWocGbs50BeThF/bLd78D+oFwVnucI+qIvLqTawPDX5sMrsmxoyl
+         8EJU8FP1EevNYoPdeevz8G3SmfB5G25sebyTgCj0OSvzM2t75ehg8UojLosZEhiCNYf2
+         65EJt9BNRpy4bE7PfsZgWeELl3q68bfLmvYGONR8p1AA13FWgH0aF73IRDNOTl5rZIl4
+         UePGB/AIcpQZaTm/rEvK7PTY7qR/bcggnIUk7VVn/ZnT2nm+lBRoVcySDKJmbhCocwQu
+         UYhouk5iI0Kqw6yutD5AuqyiC22LTYiiN3qzRybRC8vaqIqGKW3KEqsQ8bPgyh8LR2V1
+         xM3w==
+X-Forwarded-Encrypted: i=1; AHgh+Rr2Yny1jTJwPMuInOdv/+pgO7AhiLsjr0EsPPHyjSPhP0gqO796hZSSAvXazAJEotuL6o/g+FQeHSKKd1Pq@vger.kernel.org
+X-Gm-Message-State: AOJu0YzyGdJySWwB0Je5v5SNvtLWoQDT6hjGEaGuknA4gveeeKK/hyLI
+	EQSMujhxHnxfC4jO51EloLCve5kC7/qFRgyB3c01S4opDH1rwDDRGkemomNn8ZvQGInnYGCqzSU
+	2tppZS74zwrBAu/vWcXY1nPB3eQ0wwE5jjWQhC4lRrW4EUKwm1zuE3aXothr9NFVHbx6v
+X-Gm-Gg: AR+sD10ZUoJ4EEBJEspq61swSOkIDl/+T7nMUDPFNvbgZfFZT4/rMKkgwD7wykW8zuf
+	F6EUnbELoGfH3D1Oa+Sy2v32/q0wowYRx/NHQiKsqLijc2Xr5KvsKVpYpRMOXjWkayM74gUszDX
+	0aT2MKMKg6tVYTLEAxda7xtYqKffVU17l1YgL93JTBCOdCRdH+GSQi0OwtQ0iMEMg0gaVdPgnig
+	C4FhK17XULwzGmmWsiy80Heih/SEw+H5OqQfOw4KwyDsLbyZVbFdG0F2B8fuerxcSG9Ue6TyPeq
+	JoFPAXHvSAMXdROI62GXoSH93MccvpID751fsAr24E2onblsSEb3KBD1em+A8wzB+WqcSLkmPki
+	VKdFuTXu3tjqzpIN3SSAW1vrqd2Lk
+X-Received: by 2002:a05:6820:2d05:b0:6b0:b196:99ba with SMTP id 006d021491bc7-6b13c5a269fmr12788654eaf.17.1787237453655;
+        Thu, 20 Aug 2026 07:50:53 -0700 (PDT)
+X-Received: by 2002:a05:6820:2d05:b0:6b0:b196:99ba with SMTP id 006d021491bc7-6b13c5a269fmr12788608eaf.17.1787237453282;
+        Thu, 20 Aug 2026 07:50:53 -0700 (PDT)
 Received: from hu-akakum-hyd.qualcomm.com ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id 46e09a7af769-7f440056836sm5147383a34.20.2026.08.20.07.50.44
+        by smtp.gmail.com with ESMTPSA id 46e09a7af769-7f440056836sm5147383a34.20.2026.08.20.07.50.49
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 20 Aug 2026 07:50:48 -0700 (PDT)
+        Thu, 20 Aug 2026 07:50:52 -0700 (PDT)
 From: Akash Kumar <akash.kumar@oss.qualcomm.com>
 To: Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
         Bjorn Andersson <andersson@kernel.org>,
@@ -86,9 +86,9 @@ To: Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
         Conor Dooley <conor+dt@kernel.org>
 Cc: linux-usb@vger.kernel.org, linux-kernel@vger.kernel.org,
         linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org
-Subject: [PATCH 1/3] dt-bindings: usb: Add Cypress cypd6129/cypd6229 Type-C controller
-Date: Thu, 20 Aug 2026 20:17:36 +0530
-Message-ID: <20260820145036.2035641-2-akash.kumar@oss.qualcomm.com>
+Subject: [PATCH 2/3] usb: typec: ucsi: ccg: Add support for cypd6129/cypd6229
+Date: Thu, 20 Aug 2026 20:17:37 +0530
+Message-ID: <20260820145036.2035641-3-akash.kumar@oss.qualcomm.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260820145036.2035641-1-akash.kumar@oss.qualcomm.com>
 References: <20260820145036.2035641-1-akash.kumar@oss.qualcomm.com>
@@ -99,154 +99,57 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Authority-Analysis: v=2.4 cv=AMKAkK6n c=1 sm=1 tr=0 ts=6a871449 cx=c_pps
- a=V4L7fE8DliODT/OoDI2WOg==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
+X-Authority-Analysis: v=2.4 cv=GPM41ONK c=1 sm=1 tr=0 ts=6a871453 cx=c_pps
+ a=4ztaESFFfuz8Af0l9swBwA==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
  a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22 a=gEfo2CItAAAA:8
- a=EUspDBNiAAAA:8 a=PyXS-OjWu00qIW_W-2gA:9 a=WZGXeFmKUf7gPmL3hEjn:22
- a=sptkURWiP4Gy88Gu7hUp:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODIwMDExMSBTYWx0ZWRfX3A6hbANhWUix
- HqpLcl7ujo8hj9HFOiX/ZiuS1g/hoxKhIeMZZc+7NkneJGbw2uM8EvhmpVqMM5GPmubqugUmoml
- 6HUVd1A4vzpqyRR58bwp1ugAFXC7s4Rt32Nt+UOTcNgZlNVqdfsR46ypaXymjktmlmUYmDRzZWp
- jgsHE+3RliNTmwC3GFTebAcHK99IBrZk1rUajQOmFOzz+pUdLxS8HwroC76BVhMmf1inL9B5uBD
- 6sbcou96Mmft8fDpzHKyne8FrzVhlhbukNvbHw9tA78XfO/3iTIm5IrMwVVdIhWHSHIo2Tp5M0r
- U6W+43cpfCedqQQZj+WYx+lIoFbKE61LIjgzEHuZR3LhiC0Zuq3sUHUg57OFZ/n8HI3jJUSC8FO
- A/IsyXYFK6IMfF3Sarh4cMls9+qoQ78Z1+reeou0aUrzGDz8f+ge0Out9l0qCQKF5fGD6d1R1IB
- FxWkeMoZsZDSWvKZNgg==
-X-Proofpoint-GUID: LpfaBmhZUhCWwP6fbp5uhZdtKWIbwpfG
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODIwMDExMSBTYWx0ZWRfX5Nt7d01/i4cm
- HYNGrnGP12mDK8uPuOxOuM2lQv/A1/oY7Qm3DSU5XlppvmN6bic4Qmaki9ADtPug3jBGDwmm0VR
- Pk8k6UJa27EfqlvcqbPssvRMlocr2GM=
-X-Proofpoint-ORIG-GUID: LpfaBmhZUhCWwP6fbp5uhZdtKWIbwpfG
+ a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22 a=EUspDBNiAAAA:8
+ a=5ttfkXOUkHmYICtgt44A:9 a=TPnrazJqx2CeVZ-ItzZ-:22
+X-Proofpoint-ORIG-GUID: tzkxjD0f7ArWGadr2PXkNAy5o2ytaWxz
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODIwMDExMSBTYWx0ZWRfX53L/YN9iOB4O
+ GSGwPBM+x9rS5r2GWcmWCJgN2qRPsOUSmRoFx3DV9yr48OtizXCp9GW2ovdzWNYLifOHoxnr0ph
+ Nn/2OydfGwnX6yX7pQyDJ8MaDj+nIq7x1n/W3rnEASB5gpAfaxG7b9XC4Q5NrL/snz/kfDlJDo4
+ DfHho3ATu321+yHUdOm19Lucbfd8AP7yHYGeu6Pq2xZDzpCtBaZiIi3faqKzDOqh4YLJ8ZALLtm
+ rOf+K1SekykET2ebu6SnYJ8z+F+igZ52IWbW+HpRYeoZU/a/4r/lzEUXCWmqzXvbhR7K6tEwofK
+ Lnkqa4DhDHDy6vnhbkmlj33YGi5e5INPrXXldvUdkBsNulV2dhrAWOmSBOqhED129g5DC2CGEJD
+ PAa0IDWaAk+hiWeYaArmWNhYaQz0TFuSj7eE9geN98WTbDC73J2LoCE6uYRWQqV/CnrKtIQiK06
+ ST7lcLS+f9q+uyfG9HQ==
+X-Proofpoint-GUID: tzkxjD0f7ArWGadr2PXkNAy5o2ytaWxz
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODIwMDExMSBTYWx0ZWRfXy7sxDeJm669k
+ lz+W6fUORPG0q05ILwHabqUJRL7QN6Uwqgl8NK5+HZu7ztUoTPRGmAkYb1q4drmQfnbq2f/p1BM
+ Q+em+ce4aEFVzlJ8eUCOMrxhEfYmpQ0=
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-08-19_06,2026-08-20_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 spamscore=0 phishscore=0 lowpriorityscore=0 bulkscore=0
- adultscore=0 suspectscore=0 malwarescore=0 impostorscore=0 clxscore=1015
+ bulkscore=0 priorityscore=1501 spamscore=0 clxscore=1015 impostorscore=0
+ lowpriorityscore=0 suspectscore=0 phishscore=0 malwarescore=0 adultscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608200111
 
-Add the device-tree binding documentation for the Cypress cypd6129
-and cypd6229 dual Type-C PD controllers. These are used on Shikra
-CQM/CQS/IQS platforms to handle usb-role-switch for the USB Type-C
-ports over an I2C interface, similarly to the existing cypd4226
-binding.
-
-cypd6229 is a variant of cypd6129 and is described with a
-"cypress,cypd6129" fallback compatible string.
+Add cypd6129 and cypd6229 compatible strings to the of_device_id
+match table so the driver binds to boards describing these Cypress
+PD controllers in their device tree. No other driver changes are
+needed since the chip is accessed through the same generic UCSI/HPI
+I2C register protocol as the existing cypd4226 support.
 
 Signed-off-by: Akash Kumar <akash.kumar@oss.qualcomm.com>
 ---
- .../bindings/usb/cypress,cypd6129.yaml        | 99 +++++++++++++++++++
- 1 file changed, 99 insertions(+)
- create mode 100644 Documentation/devicetree/bindings/usb/cypress,cypd6129.yaml
+ drivers/usb/typec/ucsi/ucsi_ccg.c | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/Documentation/devicetree/bindings/usb/cypress,cypd6129.yaml b/Documentation/devicetree/bindings/usb/cypress,cypd6129.yaml
-new file mode 100644
-index 000000000000..f709f82f2092
---- /dev/null
-+++ b/Documentation/devicetree/bindings/usb/cypress,cypd6129.yaml
-@@ -0,0 +1,99 @@
-+# SPDX-License-Identifier: (GPL-2.0 OR BSD-2-Clause)
-+%YAML 1.2
-+---
-+$id: http://devicetree.org/schemas/usb/cypress,cypd6129.yaml#
-+$schema: http://devicetree.org/meta-schemas/core.yaml#
-+
-+title: Cypress cypd6129/cypd6229 Type-C Controller
-+
-+maintainers:
-+  - Akash Kumar <akash.kumar@oss.qualcomm.com>
-+
-+description:
-+  The Cypress cypd6129 and cypd6229 are dual Type-C PD controllers that are
-+  controlled via an I2C interface.
-+
-+properties:
-+  compatible:
-+    oneOf:
-+      - const: cypress,cypd6129
-+      - items:
-+          - const: cypress,cypd6229
-+          - const: cypress,cypd6129
-+
-+  '#address-cells':
-+    const: 1
-+
-+  '#size-cells':
-+    const: 0
-+
-+  reg:
-+    maxItems: 1
-+
-+  interrupts:
-+    maxItems: 1
-+
-+  pinctrl-0: true
-+  pinctrl-1: true
-+
-+  pinctrl-names:
-+    minItems: 1
-+    items:
-+      - const: default
-+      - const: sleep
-+
-+patternProperties:
-+  '^connector@[01]$':
-+    $ref: /schemas/connector/usb-connector.yaml#
-+    required:
-+      - reg
-+
-+required:
-+  - compatible
-+  - reg
-+  - interrupts
-+
-+anyOf:
-+  - required:
-+      - connector@0
-+  - required:
-+      - connector@1
-+
-+additionalProperties: false
-+
-+examples:
-+  - |
-+    #include <dt-bindings/interrupt-controller/irq.h>
-+    i2c {
-+      #address-cells = <1>;
-+      #size-cells = <0>;
-+
-+      typec@40 {
-+        compatible = "cypress,cypd6129";
-+        reg = <0x40>;
-+        interrupts-extended = <&tlmm 136 IRQ_TYPE_LEVEL_LOW>;
-+        pinctrl-0 = <&usb0_intr_state>;
-+        pinctrl-names = "default";
-+        #address-cells = <1>;
-+        #size-cells = <0>;
-+
-+        connector@0 {
-+          compatible = "usb-c-connector";
-+          reg = <0>;
-+          label = "USB-C";
-+          data-role = "dual";
-+          power-role = "dual";
-+          wakeup-source;
-+          ports {
-+            #address-cells = <1>;
-+            #size-cells = <0>;
-+            port@0 {
-+              reg = <0>;
-+              endpoint {
-+                remote-endpoint = <&usb_role_switch0>;
-+              };
-+            };
-+          };
-+        };
-+      };
-+    };
+diff --git a/drivers/usb/typec/ucsi/ucsi_ccg.c b/drivers/usb/typec/ucsi/ucsi_ccg.c
+index d46ca942026e..37b96d662e59 100644
+--- a/drivers/usb/typec/ucsi/ucsi_ccg.c
++++ b/drivers/usb/typec/ucsi/ucsi_ccg.c
+@@ -1527,6 +1527,8 @@ static void ucsi_ccg_remove(struct i2c_client *client)
+ 
+ static const struct of_device_id ucsi_ccg_of_match_table[] = {
+ 		{ .compatible = "cypress,cypd4226", },
++		{ .compatible = "cypress,cypd6129", },
++		{ .compatible = "cypress,cypd6229", },
+ 		{ /* sentinel */ }
+ };
+ MODULE_DEVICE_TABLE(of, ucsi_ccg_of_match_table);
 -- 
 2.43.0
 
