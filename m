@@ -1,80 +1,198 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 57C3547D478
-	for <linux-arm-msm@vger.kernel.org>; Thu, 20 Aug 2026 16:38:05 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 14E9247D478
+	for <linux-arm-msm@vger.kernel.org>; Thu, 20 Aug 2026 16:38:24 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787243886; cv=none; b=U6JkbXLuIucTktE8Dvxd6Vm18F5ANlZsE8H4M/TaUW2a5mufMFNSLgR5f1yFVQURaQMcMBTJLcLZ9fUmTkh0asw9ly1aI4c3/TgsGOs2ssKuNzGotZM0icDOyhW/BmRsO9CguO9CDk9H5itoZinj9MUT2/+ih06b1TCyVRV9Sx4=
+	t=1787243907; cv=none; b=sFLBy+MEGQdBxzyYhfCKu3CYkDQv4l296+dodd12aowV6xFm9RKP5iCjKgDR4BacceQdLoPkqkSYRw0q9/lgHg67ISsEHsa6Yrs0a1zDMSmrj00Qo2t5asZuZQBZHjgzqX89d0vrwBgoT5ei0xnlhg514ebgfPnQkNzKve8EvV0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787243886; c=relaxed/simple;
-	bh=9VIAdGxSp2wAwONWsuwIOG0ANZNJMdmKrPjHId5rZqI=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=rcPiBYY+7RAteK6MGsXj29ESUzsv+8L3pqQrdxQ0I2n8kPBPKXgmoX/WA0swPPeyRl3L3Ql/AK18fF5lLI2W1a6a3Jwa9h41SXK0O0ouu+xnhRqDhNZ1hDxIPzvlqPw2AR9JncIG0BlTarjtmQfKx01A7DunGo4vlI9gPcJ7vLg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=a/qYns4z; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1787243907; c=relaxed/simple;
+	bh=3wJW98XflLtaOT9jCkfJCEzdj2hb2N4cu5BJxkHFG68=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=K7TIgmORORkUpCpRYHbkR2CPtjS5gJtTHJbGmS4LmPZBl0ZYycAg6gfojebt/phrfMeQjb53nJYPYPoQ8k3nDoeNwG1G0tAnnby2ceX2oblONapy/QNnB41D3AAcwaG/9W3xPACy+nfmtJYfrwRYwOnSlmPstfZY8xLvoXcZBKY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=bK3uWMI2; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=SHVRrOS9; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="a/qYns4z"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D95811F00A3A
-	for <linux-arm-msm@vger.kernel.org>; Thu, 20 Aug 2026 16:38:04 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1787243884;
-	bh=9VIAdGxSp2wAwONWsuwIOG0ANZNJMdmKrPjHId5rZqI=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc;
-	b=a/qYns4zyUuV9s0SMrBkLCupSKfy3sLgnKywJHrlmC0YGjsOvxJrojGGcIGl/dE8P
-	 IOQrFFQjkSB/VjxFmBMLPDVgI4oTV3ow0Yj8+P+lpciaYbVlMsPT+V4vfp+SMJ9kq9
-	 YvrYMbnB+IjR534TNuJYrHaQg145NrX/zhkVAeZPs5NM1ZRcIhpPg3Ms/JM4dfULhz
-	 5OJKBBSnRlVtOvXi9s19qbDLIqX5MHrFRCaxitk+H9XHz+jDi7Mb8+sFz6dbe9A2s2
-	 FcYsVB0aNJK1wr7Qtnpb1kwQwu0h63Kpoe46STb3gCut5k09gBmwSuYlW3klQDdVei
-	 rQ4ztMzDjsXfg==
-Received: by mail-lf1-f46.google.com with SMTP id 2adb3069b0e04-5b29599b81cso62271e87.1
-        for <linux-arm-msm@vger.kernel.org>; Thu, 20 Aug 2026 09:38:04 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AHgh+RoxJkSddDf1MynCjITgBwXpXzlCgyqFgvq/jWFMW0zA8leaW1kcHk1BOIdrtulOnrQFg84lUTz8gnzNPkP3@vger.kernel.org
-X-Gm-Message-State: AFuF++mO1PtRK20pv5yMLXDron6mUleQW7alzGnXrND3ELONmR6ihXs4
-	mXfJrOCgIGZ4JXV1QDv+LmsWoKCXlUMgUWZ/AuzSAnGzDF6J6CopEm3OM87gI92nyIQJPxjwRCv
-	vF71fx7iBxBVPpH9tSahk/flJ5gD0VXU=
-X-Received: by 2002:a05:6512:3da1:b0:5ae:b59e:aa45 with SMTP id
- 2adb3069b0e04-5b478b6e385mr4801077e87.17.1787243883692; Thu, 20 Aug 2026
- 09:38:03 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="bK3uWMI2";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="SHVRrOS9"
+Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67KG6wCV3734883
+	for <linux-arm-msm@vger.kernel.org>; Thu, 20 Aug 2026 16:38:23 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-type:date:from:in-reply-to:message-id:mime-version
+	:references:subject:to; s=qcppdkim1; bh=Ql67hRddUguykUiSPbDbJEU5
+	3SdkjDitCjeD5xqABPU=; b=bK3uWMI2izKg1W79iJxY6edtpZnHtmgjevQzRz5t
+	0DENnDWqwBGch6HBkYfnhH82DduA8Uzf3GqZjpbhvti67Fev562RkHVDCzhTPkpK
+	ULkR1kYz3qTL9UhwO8y+9dMxHn7NxKCVSH9UoDIQgWNMdrWqMfZ5K3DpJhDa39hz
+	K2zBfV5rhlDDgOBnwEsRco0DotXc3D9wi/GhdZLTej5J9yTTDCpN8S1T9n4FU6PL
+	OOULQMso6tD8fsVJ35Xhfqr8GAkgfKgKmbhfRR7Y88cw3sRRqH5RbF/rxm9EPSlT
+	hFQmRoTO+7WUkBAsy5dwbIj7QM0V532VaFLxsWex7w3vBQ==
+Received: from mail-pj1-f70.google.com (mail-pj1-f70.google.com [209.85.216.70])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g5yg0hpx1-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 20 Aug 2026 16:38:23 +0000 (GMT)
+Received: by mail-pj1-f70.google.com with SMTP id 98e67ed59e1d1-388cfc4848dso2365902a91.3
+        for <linux-arm-msm@vger.kernel.org>; Thu, 20 Aug 2026 09:38:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1787243903; x=1787848703; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=Ql67hRddUguykUiSPbDbJEU53SdkjDitCjeD5xqABPU=;
+        b=SHVRrOS9+DEup+j9p5VPDUccWXYy0GmArBXfEDnNg8TY3p+orfQXxbwCmdZDM7lXAF
+         fdprAVJDBSePZlwg5XaYEyelrgDKXXQ8gsEAxPcsfYwM25+vr12veoTwT0RhRV97wHsd
+         XcNon/AnJvTQeRyYdOGgayA27IObVIIBoecPKMYAiMqlK1utXFtr1S+xJ81kWyf4bGx5
+         HXZV9sDpZp5snBf2qAbfk4F7nZllmL25RMtQtayaLLeZDZB1hSO7RUQiRjSViCNRs5/1
+         tQBEuI9iWGIKCODY1Jh0dcorQLyAOINvt6CSF5KxPMx4qR7aUlwPXkIkmQbf7CxKR37w
+         lGcw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1787243903; x=1787848703;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=Ql67hRddUguykUiSPbDbJEU53SdkjDitCjeD5xqABPU=;
+        b=r05GSWpOsM4g1rLBC0aG4aMkHTsU17ohj1E76+8+pffx7XTkUWOm5d2LrZ3vh3JZGE
+         cEEDV6YSAHYq8ardZGmrzj9SFYhZ7KuMmYZuDoKVUFNBm6tU4SrUW/mMXSCW5ghJ0Uzw
+         STDPqv6R5znGwirqFL1uR7gS9c5bnoLujCN5GIAyTMzFQZ6zZVJG+YGa5lEbyxxG2x9t
+         08nVw/74ySkHBudR6yWs2RejwzLOaDasEr4StDWiHpWUTiSIz0PWcNPAsg+Et6ME0usD
+         LRjI6/PKd41JIMs3AkGpS9ffHaiddHZaGYnyGM+0E3p3JUMaAXBhO3/NdTebvX33VrwX
+         bffw==
+X-Forwarded-Encrypted: i=1; AHgh+RqvipFb+EdmeuxDNGTt8j2HlYYTyi0rVVWlql2NL7kJGD+/zSSmIcjjrQixVvWPQIefZ91ZP7qRzv9/gQs7@vger.kernel.org
+X-Gm-Message-State: AFuF++nwqxITbOT0Wu6Ye2qAlCxzzbb3HWSKtUfmprr10NCeoVtVi3ds
+	8N+lZg835vhYkBaobQ9tLsOdSLqyHt7ggUeYex2iAjp+keFRi0C76CFijNxJL/3CG7n/b3Gx376
+	7/Zp+Gd6gGUrj1/pl7RsP65G+YDsEKaq1kff3OELteKPpO7WX2v6XrSO8Q1bShygGkUEB
+X-Gm-Gg: AR+sD12RoRdmykpWdloQph7jv2hGXdF6lH2EfOhA3Rn8s6wiXVvWR+7LYRsX80a300Y
+	btqbjzSmMTcLxucgicyNyu8YrZqPqjy8elisgh2B0yEXAzWeU+35pw53+tPKhgRl5G6ancooSQG
+	mTVuhHD1fjn65JNcsUyZuXKH+wORyhHg5qJI87pUMa/PsnW8lkozgoUUjrhQYMYqDvYbO+aRqNQ
+	eampkl42gN1bVQuDW5uaQf2zSc0wj75NrB5g5jdXpF2nVqr3k26ytqjoNxcL2vuzDeH/yn8gs/0
+	UAWsjwwK8O6A2yv1mx2MQvOF0M+ivrBkLMTIBEngIaR5+uOa0n+Im3P5+OnkQXKkj7cxXDAszST
+	i1kdtNnd1JtzgDwWjXeGEybUZreCBnA==
+X-Received: by 2002:a17:90b:3145:b0:395:4de5:1054 with SMTP id 98e67ed59e1d1-395810af13bmr22648316a91.16.1787243902669;
+        Thu, 20 Aug 2026 09:38:22 -0700 (PDT)
+X-Received: by 2002:a17:90b:3145:b0:395:4de5:1054 with SMTP id 98e67ed59e1d1-395810af13bmr22648206a91.16.1787243902175;
+        Thu, 20 Aug 2026 09:38:22 -0700 (PDT)
+Received: from hu-kamalw-hyd.qualcomm.com ([202.46.22.19])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3957fb4ffb4sm6972093a91.5.2026.08.20.09.38.18
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 20 Aug 2026 09:38:21 -0700 (PDT)
+Date: Thu, 20 Aug 2026 22:08:15 +0530
+From: Kamal Wadhwa <kamal.wadhwa@oss.qualcomm.com>
+To: Troels Vognbjerg <hekatombe@gmail.com>
+Cc: alexandre.belloni@bootlin.com, andersson@kernel.org, conor+dt@kernel.org,
+        devicetree@vger.kernel.org, konradybcio@kernel.org, krzk+dt@kernel.org,
+        linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-rtc@vger.kernel.org, raryan@qti.qualcomm.com, robh@kernel.org
+Subject: Re: [PATCH 0/2] rtc: Add Qualcomm PMIC RTC-GLINK support for Glymur
+Message-ID: <hb3jvyuf2j6sl7pjimnccoj4hsmqtxdq6s7w626sbmpbcqw7t3@wzyo563dmcle>
+References: <20260807-rtc-glink-cleanup-v1-0-7801e4d69c4f@oss.qualcomm.com>
+ <20260811121012.7046-1-hekatombe@gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260820-msm8952-pinctrl-v2-0-bf2b8b7b379b@mainlining.org>
-In-Reply-To: <20260820-msm8952-pinctrl-v2-0-bf2b8b7b379b@mainlining.org>
-From: Linus Walleij <linusw@kernel.org>
-Date: Thu, 20 Aug 2026 18:37:50 +0200
-X-Gmail-Original-Message-ID: <CAD++jLnGGonfOxLHhM-uXAzP10J9o5=0e_cV9JM5r7SJawChnA@mail.gmail.com>
-X-Gm-Features: AcwNN1VIofihN13MO74vPgIKX8RfzOrO0BtkLko8hhZ6miZ8I36rRd39GndE8sQ
-Message-ID: <CAD++jLnGGonfOxLHhM-uXAzP10J9o5=0e_cV9JM5r7SJawChnA@mail.gmail.com>
-Subject: Re: [PATCH v2 0/2] Add pinctrl support for MSM8952
-To: muzafferkadir@mainlining.org, Bartosz Golaszewski <brgl@kernel.org>
-Cc: Bjorn Andersson <andersson@kernel.org>, Rob Herring <robh@kernel.org>, 
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, linux-arm-msm@vger.kernel.org, 
-	linux-gpio@vger.kernel.org, devicetree@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, 
-	Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260811121012.7046-1-hekatombe@gmail.com>
+X-Proofpoint-GUID: Vb3SebF3AC_eO4Soy8ESmnZl5kbcA6nP
+X-Proofpoint-ORIG-GUID: Vb3SebF3AC_eO4Soy8ESmnZl5kbcA6nP
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODIwMDEyNSBTYWx0ZWRfX5qt5zXzoMnwd
+ SERjSNGZwSvd1My2yULG+XFNekerqAUOHC7HXHvxzpClb80IyzaRpL3JdrDqb4cclVGOFB/6DPX
+ AMmA0Lq9GEAOqU2HL3K0c8fi2a5FCElLtNMC6LEyXToUiNoL6955YhKXMDlAazeIknlq+5A3QrC
+ 8kzceXj+ylq+QM4NYEr7A2pAdAZaxrd3BSlvrflopecf3PlFvtV5uhYpBLQu11fU9NRoHpvjfXr
+ Pa5i7YTQ7cZbkGuPaRZ0RvqxeIsc9hltr+vbLjuH3oXJd/RvaWpmNWt7xwazNswQ8imPT26+q8N
+ d289DsKOiro8IWSZ9KotLCQR3/+E5z9dN9F6y57SW/CpTzGNboYT7X3TBHS+Y/tDexG8WrKFwYa
+ AwaWDkVFAcLpwFhwIjveMWqV1w7YHrckB/06wPvsGNramkVcMo09WfnHKyXXTWPicz+DCHRTud5
+ 7o9O/uheZIhoZKpY9Tg==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODIwMDEyNSBTYWx0ZWRfX1I1N9K/BJtXx
+ YXPDnrhpvu/Ee+U41QwGFQ3vBfjqX+kT16pvlIY+RD6GqjpomFBGcLAIIm1GISGoAlSVlF3Nm+D
+ VzUdwjPgITbFhVw26mMwNASdguci1h0=
+X-Authority-Analysis: v=2.4 cv=JoXBas4C c=1 sm=1 tr=0 ts=6a872d7f cx=c_pps
+ a=0uOsjrqzRL749jD1oC5vDA==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
+ a=kj9zAlcOel0A:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
+ a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=hkoF_9UkUv8IWmCfoxQA:9 a=CjuIK1q_8ugA:10
+ a=mQ_c8vxmzFEMiUWkPHU9:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-08-20_01,2026-08-20_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ suspectscore=0 bulkscore=0 spamscore=0 priorityscore=1501 lowpriorityscore=0
+ malwarescore=0 phishscore=0 adultscore=0 impostorscore=0 clxscore=1015
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608200125
 
-On Thu, Aug 20, 2026 at 1:17=E2=80=AFPM Muzaffer Kadir via B4 Relay
-<devnull+muzafferkadir.mainlining.org@kernel.org> wrote:
+On Tue, Aug 11, 2026 at 02:10:12PM +0200, Troels Vognbjerg wrote:
+> Kamal Wadhwa <kamal.wadhwa@oss.qualcomm.com> wrote on Fri, 07 Aug 2026 02:26:29 +0530:
+> > On some targets like Glymur, the permission for receving the RTC
+> > alarms is routed to charger firmware running on remote subsystem.
+> > 
+> > This is because Glymur boards have to  support MSFT's `TAD feature`
+> > on the windows OS devices.
+> > 
+> > So rtc-pm8xxx.c driver cannot recieve RTC alarm IRQs via SPMI on
+> > Glymur. So in order to make the IRQ available on the Linux kernel,
+> > the PMIC RTC Alarm IRQ must be routed to APPS via remote subsystem.
+> > 
+> > To implement this, add support for a New Qualcomm PMIC GLINK RTC
+> > client, which will request for RTC set/get calls for time/alarm IRQ
+> >  via the existing pmic_glink interface to the charger firmware.
+> > 
+> > Also, add a DT property to explicily support enabling the RTC
+> > writes, keep RTC writes disabled by default to align behaviour
+> > with the existing rtc-pm8xxx.c driver.
+> 
+> You mentioned this patch series applies to targets like Glymur. Does that include
+> the ASUS Zenbook A16 UX3607OA, or did ASUS do something different on this
+> laptop?
+> 
+> The reason I am asking is because when I build this as a kernel module,
+> I get the following error message:
+> [    2.241461] rtc-pm8xxx c426000.spmi:pmic@0:rtc@6100: probe with driver rtc-pm8xxx failed with error -2
 
-> MSM8952 has pinctrl system that is similar to MSM8917 pinctrl, but it
-> has some differences in some of the pins and their functions.
-> This driver was tested on General Mobile GM 5 Plus
-> (shamrock) using my own kernel fork [1].
-> I'm holding off on sending the GCC (Global Clock
-> Controller) driver and initial device tree until I've resolved some
-> outstanding bugs in the GCC driver.
->
-> [1] https://github.com/kadir1243/linux
->
-> Signed-off-by: Muzaffer Kadir <muzafferkadir@mainlining.org>
+This is a different driver error, this is for the one which works on the SPMI bus.
+While the driver that i have posted in the current series is based on pmic_glink interface, which relays the
+RTC alarm requests to charger firmware running in remote processor (which implements the Windows TAD feature)
 
-Bartosz needs to look at this series, he'll review and merge
-it.
+do you have this `qcom,no-alarm` prop defined?
+https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/arm64/boot/dts/qcom/glymur-crd.dtsi?h=v7.2#n565
 
-Yours,
-Linus Walleij
+
+> [    2.499556] Modules linked in: rtc_pm8xxx aes_ce_blk ghash_ce gf128mul sm4_ce_gcm sm4_ce_ccm sm4_ce sm4_ce_cipher sm4 qcom_battmgr rtc_qcom_glink(+) simple_bridge display_connector
+> [    3.277788] rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: 0x68 failed (-110), falling back
+> [    4.318666] rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: all time sources failed
+> [    4.319085] rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: registered as rtc0
+> [    5.359404] rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: 0x68 failed (-110), falling back
+> [    6.400331] rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: all time sources failed
+> [    6.400496] rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: hctosys: unable to read the hardware clock
+> [   25.447761] rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: 0x68 failed (-110), falling back
+> [   26.488271] rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: all time sources failed
+> [   27.517573] rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: 0x68 failed (-110), falling back
+> [   28.560114] rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: all time sources failed
+> [   29.609224] rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: 0x68 failed (-110), falling back
+> [   30.638629] rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: all time sources failed
+> [   31.677524] rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: 0x68 failed (-110), falling back
+> [   32.720749] rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: all time sources failed
+> [   33.757662] rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: 0x68 failed (-110), falling back
+> [   34.808360] rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: all time sources failed
+> [   35.837651] rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: 0x68 failed (-110), falling back
+> 
+> And the error message keeps repeating every second or so.
+
+Sorry for this, i think the firmware needs to be updated for this feature, I will fix this by existing cleanly
+if the firmware doesnt support it. To avoid repeated messages.
+
+Also will check internally how you can get new firmware (if you want to use it?)
+
+Again sorry for the trouble.
+
+> 
+> --
+> Troels Vognbjerg
+
+Regards,
+Kamal
