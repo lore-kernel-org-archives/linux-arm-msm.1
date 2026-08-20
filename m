@@ -1,219 +1,281 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C4E71409266;
-	Thu, 20 Aug 2026 10:03:50 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E29383E16A5
+	for <linux-arm-msm@vger.kernel.org>; Thu, 20 Aug 2026 10:07:18 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787220230; cv=none; b=R0n7yae1A/REsJiK9Ih0Qw3HtTqGQ9nEYo+fKuoIFrRR9+qDuSIGSLIA69T9EwnCmhEcIDNh8VhS6uIZaIp+Nlj1sAA6dqjaUUQ75e0aDP633D5Nesi12MsIO42JalSDiN4lby6RkVWrOs+C6tnt/jpJ49DK4K9XZi6ELIWnDRE=
+	t=1787220441; cv=none; b=rzGIv2Eoc11Q7MMe5oPqIof5YLQQ61NcbuGlMLgo43hiVLF/tiN0QVjPWYxHYjGAFJMnI3UQoWFk3UOpQYkAvLcMbAaDeU22LQWPi+E2NPGb1wvI2fQTPoWOIwIUiW4wPa262RNEN0Y9thkPFEdAtn9qqFGynq7D94cCgvfR8Ao=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787220230; c=relaxed/simple;
-	bh=GgT+UWaean8wq72FuURXdZSwG6OugUjz5R7U1uI6mcw=;
-	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=IJU5ZHSKeTICA/3KC/ep+g2uvCOcC3mbuY2BUvIFuvrTkJ+CsfeNq9bzC2RVBb1C7hL2ASdYZtfhuOcNAFndwV7wN7GO8oExQP31boAfTUXY59MdkEdn5yLNsEaZfZArE0fGDUBlwh/N71dlijA3Ja9S/3QjS4eS0ICQk9gPocM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=d8RNbhD5; arc=none smtp.client-ip=10.30.226.201
+	s=arc-20240116; t=1787220441; c=relaxed/simple;
+	bh=MVJm9aVbCpzmQBNjnuzpFUj3AwV5++J7vwOgdi2VWIg=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=ambmvNaj5fiW3gPFFrVjsoExyF57xZTyeubk9ITMmCQ438iX9CSO3DT+qu4l+rexlD+NbbDqpOH+qlrId32C84EcSMmanF4SjEWO4naV7NI24X2BL5gu2G74JYVWG0aC5hiPM38sReisdfxiAGbXagV6eP6+Aav2LcV32je9hrw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=iHJwVu+Z; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=OGYdLIjI; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="d8RNbhD5"
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 5D474C2BCB3;
-	Thu, 20 Aug 2026 10:03:50 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1787220230;
-	bh=GgT+UWaean8wq72FuURXdZSwG6OugUjz5R7U1uI6mcw=;
-	h=From:Subject:Date:To:Cc:Reply-To:From;
-	b=d8RNbhD5oNkFh+b4ZLv0QrU0uu8F+D7ft5q/1q10fTiwYApK1zRMzAeHOCMkIhXIR
-	 5gUTGLuRh6OkcKcP3+XztxuCLLCfx1z1GL5mHFIU+2Agd0BPFSlzW5pSdDS245NyEi
-	 k5E6farwAQuItSFCaU4a5zt1g62ilgrBRMoItqg8z1WCqgmgcg3J98rpC5FcapxtQV
-	 BWixcta2m99U0G7aeZ8f3HPPTUUujjvxUex6Oxsj446x0FMbA6j6Q2HJKaKPLabLt3
-	 sg/vDmpyhKOhiuFXz908tg/LGzFmFppWda4rF/KRMO4t0kQMJE+kQGaOfMiD1TrcV5
-	 0C6eBoHt5TXMw==
-Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 33CF8C5DF87;
-	Thu, 20 Aug 2026 10:03:50 +0000 (UTC)
-From: Robin Snyders via B4 Relay <devnull+robin.snyders.xyz@kernel.org>
-Subject: [PATCH v4 0/2] power: supply: qcom_smbx: add SMB5 support
-Date: Thu, 20 Aug 2026 12:03:48 +0200
-Message-Id: <20260820-submit-qcom-smbx-send-v1-v4-0-818dabb2771e@snyders.xyz>
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="iHJwVu+Z";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="OGYdLIjI"
+Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67K7LC9t2753039
+	for <linux-arm-msm@vger.kernel.org>; Thu, 20 Aug 2026 10:07:18 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-type:date:from:in-reply-to:message-id:mime-version
+	:references:subject:to; s=qcppdkim1; bh=z8C6/88Cs+/FbVbD4LERoO0X
+	qQDdvLPythJnwKlVaPE=; b=iHJwVu+Z5314Eps6OYQhkbLMkm5m2OY1FH/myogq
+	cy72fgfxVMqCPgcJ0rsRchLfUktZPj4CEnPcU+m02xHAjw7gx6HcQNkZD1GWD2ZW
+	RbtUc9F1u1JGkWt2wsI2HE2n0aQB+A23yh9wrE2ofTd3bG0s95nbIzF8WfkNHHyC
+	/gW2G/aGTqN7A4mpq0QBScRllqvv4M2l7smF5WPXZbo0HS6qWP281mvyCdJzdADM
+	Dq2dGN4UHWs8mVtrAQwCePpBLr8qjZAUBonXQL4BJdPD45roEtd//eEaNPtlCdWd
+	BnbKoO/IamJ8BT1O2WHo5hhaadEeM8QVyY1jj9BlvHx4nA==
+Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com [209.85.222.199])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g5w498mgd-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 20 Aug 2026 10:07:18 +0000 (GMT)
+Received: by mail-qk1-f199.google.com with SMTP id af79cd13be357-91931144870so309445385a.1
+        for <linux-arm-msm@vger.kernel.org>; Thu, 20 Aug 2026 03:07:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1787220437; x=1787825237; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=z8C6/88Cs+/FbVbD4LERoO0XqQDdvLPythJnwKlVaPE=;
+        b=OGYdLIjIyVBcayJevisbIoAIJnCQ2e6OxsY9Grn2B2Az2Dp8T+F/dMEYbnD76+Cv3q
+         VitEpwJLFi4RYRfIWEfPz+So/W159b/Xoql0VsAMV54oKFRbTqog6KfkN8fgTpKosEm9
+         6Hw/Fz14zmpx6+e2nE000Fd4UCC8EgvELZ6HLXaeSbcXCAXgGt9VJNmed73DLMD9Avc7
+         1PYYRHq0H+gK9Oe+bhEZ8VjOq6bqR24Grcuz5GZMu4HUS1PxDxt2WzeP5eE3VUat4lXs
+         +8cLzU/BBOLxSC+SEG9Fbcw+gqAoacTbLGmOGTDyfznfC4ayUmGSi/EDQqfSaxPx/htp
+         XrtQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1787220437; x=1787825237;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=z8C6/88Cs+/FbVbD4LERoO0XqQDdvLPythJnwKlVaPE=;
+        b=ipX1xlJVw6fOQjJiXl0wDqXqde2SDaQtJnUqdilxY5aF+b8sClMogwu9ranYk516A8
+         Jg664pPgfUS+WgMtjJfyY7Cn/EHQzYTa0Mt0ootqLUgNeb81pVufU81/VVefCuACZvWr
+         e+mrFYDDbRAlrFEMEA8n8QWxA1KFkatwsyUl6+LVGnzY82IVdrxuOAJEJha1scs/COW/
+         aXFAtM8Jw9j5NP/KKpGsnmdrNKfDXnx9EKQ88icwV/r+07+G3+s7XBrwZrmR+KrhPtl+
+         6wml4lZ3abx+ZepChA27v0E+5Zrs1IMh8KLvayTflQZHtR+8o0g2ziia/sshG061rS1r
+         xVdg==
+X-Forwarded-Encrypted: i=1; AHgh+RrmxUn7GY0wXdLt/4CiNkxQ58uq1oelYXhjsAypzTcRhQO2BgRLgT7Xdkvn2BuxNLeD8ER3IS3OZy91kW//@vger.kernel.org
+X-Gm-Message-State: AOJu0YzDqY7sHy89QpI/UeU4LhRIXwjtg0ZaEATEAaFigDsPpTa5vJbU
+	VpXfZJcoeC8A24R9YfoaNWXrEiSnyX9lzs39XW1XnczYryh5TaSdvVXCYZ7+14V1DiDJkMdI74P
+	H6L9OTotPYPRYfHnRyj91qYG1lp8RbQI725T+yO9liBeGMtwSrU1WCVVK/oJTa8MwdnSo
+X-Gm-Gg: AR+sD11FVgy87XDQnAuD5+iwK7ZnBWTZEkatBq0p5HhInY5pDk33N+7B65ySWZo5lBT
+	hF4UIzNWn89XQkvn4FDaXzjlRLel3xB5Q3XNSd4xicKLgUshYIVWY3U8YJTnbL4V+YOcDb0qjPB
+	+4D9waHOASh9hElR89+9JP7uW7V8dM1GtDULdayBeWqhT5mZzh2xHT6SmvA3aPz7Qnp7sR3pfqn
+	nUGaGy7GJ+gnROuqAieIstJsHeWsMTblX/EM2p+6rWDrS76ULhD4QBqsO2gK8aRS8il4FX12W/4
+	OpAtMUvnR6eEc62LVhL/K61fcq+d/VL5Rk14hzZ9uYslaW43lFuIN58/PBUSs+xRjUMPINyxkfp
+	YLsPQbAMBJqR/1SlSJcocdr62GtM9VA1EJ5UVdMCANRYYb+RybRqGECXppJzkQleFG96FKBLCXM
+	C6MpnrHESGNFxW
+X-Received: by 2002:a05:620a:2602:b0:930:a12d:b158 with SMTP id af79cd13be357-9371e29fab7mr1125138685a.21.1787220436727;
+        Thu, 20 Aug 2026 03:07:16 -0700 (PDT)
+X-Received: by 2002:a05:620a:2602:b0:930:a12d:b158 with SMTP id af79cd13be357-9371e29fab7mr1125130885a.21.1787220436171;
+        Thu, 20 Aug 2026 03:07:16 -0700 (PDT)
+Received: from umbar.lan (2001-14ba-a073-af00-264b-feff-fe8b-be8a.rev.dnainternet.fi. [2001:14ba:a073:af00:264b:feff:fe8b:be8a])
+        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5b4788f59acsm1173118e87.75.2026.08.20.03.07.14
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 20 Aug 2026 03:07:14 -0700 (PDT)
+Date: Thu, 20 Aug 2026 13:07:12 +0300
+From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+To: Krzysztof Kozlowski <krzk@kernel.org>
+Cc: Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>,
+        Oded Gabbay <ogabbay@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
+        Shuah Khan <skhan@linuxfoundation.org>,
+        Randy Dunlap <rdunlap@infradead.org>,
+        Nathan Chancellor <nathan@kernel.org>,
+        Nick Desaulniers <ndesaulniers@google.com>,
+        Bill Wendling <morbo@google.com>,
+        Justin Stitt <justinstitt@google.com>,
+        "Joerg Roedel (AMD)" <joro@8bytes.org>, Will Deacon <will@kernel.org>,
+        Robin Murphy <robin.murphy@arm.com>,
+        Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+        Maxime Ripard <mripard@kernel.org>,
+        Thomas Zimmermann <tzimmermann@suse.de>,
+        David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+        Sumit Semwal <sumit.semwal@linaro.org>,
+        Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>,
+        Bharath Kumar <quic_bkumar@quicinc.com>,
+        Chenna Kesava Raju <quic_chennak@quicinc.com>,
+        srinivas.kandagatla@oss.qualcomm.com, linux-kernel@vger.kernel.org,
+        dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org,
+        linux-arm-msm@vger.kernel.org, llvm@lists.linux.dev,
+        iommu@lists.linux.dev, linux-media@vger.kernel.org,
+        linaro-mm-sig@lists.linaro.org
+Subject: Re: [PATCH v2 03/15] accel/qda: Add initial QDA DRM accelerator
+ driver
+Message-ID: <4xcyqqrqbvgxojfcmnpwbi2uqk5tvhts52l6sxetltcgb7mo75@lfsgfoq4npz3>
+References: <20260817-qda-v2-v2-0-69a02e9090d4@oss.qualcomm.com>
+ <20260817-qda-v2-v2-3-69a02e9090d4@oss.qualcomm.com>
+ <81708487-89ce-4cd5-b39a-2989bdce6088@kernel.org>
+ <3476b5c3-7983-4994-a901-3d7d8bd75255@oss.qualcomm.com>
+ <4ef74e14-8433-4619-ac97-62868c8799d1@kernel.org>
+ <g5orcvzjbwww27vwcsxl3ehrek6lvznxptd7jutifoiuicjnm6@iqq2pus6omsl>
+ <a642833b-f22a-4bea-8a20-0debc47e1895@kernel.org>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/42Qy24bMQxFf8WYdSeQROrBrPofRRcURdazsJ2MH
- MNukH+P7ABF3AJBAW0o4B7yntep67ponx43r9Oqp6Uvh/0Y8Ntmki3vf+m8tDFPwYXkivdzf6m
- 75Tg/y2E39109z133bT75ORGLGidPOU8j/rSqLecb+sfPMW+Xfjysl9umk7/+/gd0PDebqiQx9
- gH4e99fmq794Xz5PV2xp/AZFb5AhSsqOqzFqBq3f1HwGQVfoGCgQq7qHPmWJd+j3j7ar/r8Mnw
- ePxRMT3yU7bD5uIFWmMQQatSoLAk5OR4lo5KQK8VVsUzhZvFPqikoVCQ0SoiRrkZQ2ARSEHYVS
- yhFMP6VihoCO9MsLUbIaMmNi4NUj9qg2ZCB6up9ipQH3KMLSrklBo2QqKpgaoZKrUILbOk+FRO
- USs5L8y5nMCYsMbloBWuI7FsrIXHBa6py13mIHYLHOqpQpDEYCpZRrAo6Ayna1GcHcZxI5mGof
- XsHsf3GWbICAAA=
-X-Change-ID: 20260811-submit-qcom-smbx-send-v1-69acefa61977
-To: Casey Connolly <casey.connolly@linaro.org>, 
- Sebastian Reichel <sre@kernel.org>, Rob Herring <robh@kernel.org>, 
- Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>
-Cc: Robin Snyders <robin@snyders.xyz>, linux-arm-msm@vger.kernel.org, 
- linux-pm@vger.kernel.org, devicetree@vger.kernel.org, 
- linux-kernel@vger.kernel.org, 
- Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>, 
- Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, 
- Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>, 
- Joel Selvaraj <foss@joelselvaraj.com>
-X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1787220228; l=7898;
- i=robin@snyders.xyz; s=default; h=from:subject:message-id;
- bh=GgT+UWaean8wq72FuURXdZSwG6OugUjz5R7U1uI6mcw=;
- b=EuCPMaBaqO8YZOCdiFEBZvJNwG4OHwo9My6s7C8qKcCio6BPCtGVnJzpzOFoPCU9PDk9LvqJA
- cOJkOmK8zRZB6lgfnDOJGs43I956008c0oly7BvwQR4HK9vhZODeO/q
-X-Developer-Key: i=robin@snyders.xyz; a=ed25519;
- pk=Mdk5dNn+Tkcy7BWexDxBLR/s1BNz8WdqDPnr3qtYBIU=
-X-Endpoint-Received: by B4 Relay for robin@snyders.xyz/default with
- auth_id=938
-X-Original-From: Robin Snyders <robin@snyders.xyz>
-Reply-To: robin@snyders.xyz
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <a642833b-f22a-4bea-8a20-0debc47e1895@kernel.org>
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODIwMDA3NCBTYWx0ZWRfX7TFYt2dC83h6
+ 4fIpAkuUPYehrbM4A7m9wgYMvjQ4vMUrXEbhozcO0JNBUt6sYfdFLtOlL9bjFZKbcwPOXwx7NBu
+ foRaBh8V73wEn8vzad8EGDzlCaJwVx4=
+X-Authority-Analysis: v=2.4 cv=YP+vDxGx c=1 sm=1 tr=0 ts=6a86d1d6 cx=c_pps
+ a=HLyN3IcIa5EE8TELMZ618Q==:117 a=xqWC_Br6kY4A:10 a=kj9zAlcOel0A:10
+ a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22 a=EUspDBNiAAAA:8
+ a=xc-yKiw0VIFfRBD-69AA:9 a=CjuIK1q_8ugA:10 a=bTQJ7kPSJx9SKPbeHEYW:22
+X-Proofpoint-ORIG-GUID: tBebOu2KBIPll_iDoJ3Q99BTTmZapVJ8
+X-Proofpoint-GUID: tBebOu2KBIPll_iDoJ3Q99BTTmZapVJ8
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODIwMDA3NCBTYWx0ZWRfXyqCqD0IFp3Js
+ U+xT389le6V7V+9uTPMKbXPE+/8qFdq8uHqr3e0kPWGLuptq1yRgW4wdn0qJfgYoKetjxa0Vdw0
+ Moznu7x7+Ll9fT6u6vkJmxmLxVzCjtR1LmI7yd6pFCiWm7aeAycMHuk7Pq62/qlnMzBE296jxU+
+ JI4k3xzLZDDU4J0Vd4V9xWxjS2WEhM6/wtLFXaLqy+R4fRPZa5+AeS9IQlmaHZHIMD7YAaW/K9M
+ wIJX/z0KUsnY9fqi/5Ya9HWz1zGTtTaI1lEbgMev3R8xAB2ndJQ7grlVHfepz0NzaqzP5eId4nF
+ 9Pp/kPuSWN1dF66J/2WHlm8HSVXOAQrSPK8+6rbTFdZodoNEph/h50W19cIZs6QrL0CWGBHpDdL
+ Hr0atvIzJYPD7KZjNAJVrrVuie8zUlgKb+1z8gGd+IkB/mqBVkWdmLuRvHckQUTy1mLOvAf1EDa
+ eYHK7QIa5FLg2ozG6kA==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-08-19_06,2026-08-19_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ spamscore=0 suspectscore=0 bulkscore=0 adultscore=0 impostorscore=0
+ lowpriorityscore=0 priorityscore=1501 phishscore=0 clxscore=1015
+ malwarescore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2608200074
 
-Add support for the SMB5 charger generation found in PM7250B and
-PM8150B to the existing qcom_smbx driver.
+On Thu, Aug 20, 2026 at 11:07:45AM +0200, Krzysztof Kozlowski wrote:
+> On 20/08/2026 10:52, Dmitry Baryshkov wrote:
+> > On Wed, Aug 19, 2026 at 04:18:51PM +0200, Krzysztof Kozlowski wrote:
+> >> On 19/08/2026 15:17, Ekansh Gupta wrote:
+> >>> On 19-08-2026 00:40, Krzysztof Kozlowski wrote:
+> >>>> On 17/08/2026 06:47, Ekansh Gupta wrote:
+> >>>>> Add the skeleton of the Qualcomm DSP Accelerator (QDA) driver, a DRM
+> >>>>> accel driver for the Hexagon DSPs found on Qualcomm SoCs.
+> >>>>>
+> >>>>> This patch registers a DRM accel device, exposing a /dev/accel/accelN
+> >>>>> character device node, and binds it to the RPMsg channel used to reach
+> >>>>> the DSP. Buffer management, IOMMU context banks and the FastRPC
+> >>>>> protocol are added by later patches in this series.
+> >>>>>
+> >>>>> qda_drv.c / qda_drv.h define the drm_driver ops table, the per-file
+> >>>>> private state (qda_file_priv) and the main device structure (qda_dev),
+> >>>>> which embeds drm_device so that it can be recovered with container_of().
+> >>>>>
+> >>>>> qda_rpmsg.c binds to the "qcom,fastrpc" compatible via
+> >>>>> module_rpmsg_driver(), reads the DSP domain name from the "label"
+> >>>>> device-tree property, and registers the DRM device.
+> >>>>>
+> >>>>> Assisted-by: Claude:claude-sonnet-5
+> >>>>> Signed-off-by: Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>
+> >>>>> ---
+> >>>>> Changes in v2:
+> >>>>> - Use module_rpmsg_driver() and drop the qda_rpmsg_register()/
+> >>>>>   _unregister() wrappers, module_init()/module_exit() and
+> >>>>>   qda_rpmsg.h entirely (Dmitry Baryshkov)
+> >>>>> - Read the "label" property directly into qdev->dsp_name (Dmitry Baryshkov)
+> >>>>> - Drop the probe/remove/init log messages (Dmitry Baryshkov)
+> >>>>> - Return the result of qda_register_device() directly (Dmitry Baryshkov)
+> >>>>> - Clarify the Kconfig help text (Dmitry Baryshkov)
+> >>>>> ---
+> >>>>>  drivers/accel/Kconfig         |  1 +
+> >>>>>  drivers/accel/Makefile        |  1 +
+> >>>>>  drivers/accel/qda/Kconfig     | 30 ++++++++++++++++
+> >>>>>  drivers/accel/qda/Makefile    | 10 ++++++
+> >>>>>  drivers/accel/qda/qda_drv.c   | 71 ++++++++++++++++++++++++++++++++++++++
+> >>>>>  drivers/accel/qda/qda_drv.h   | 61 +++++++++++++++++++++++++++++++++
+> >>>>>  drivers/accel/qda/qda_rpmsg.c | 79 +++++++++++++++++++++++++++++++++++++++++++
+> >>>>>  7 files changed, 253 insertions(+)
+> >>>>>
+> >>>>> diff --git a/drivers/accel/Kconfig b/drivers/accel/Kconfig
+> >>>>> index bdf48ccafcf2..74ac0f71bc9d 100644
+> >>>>> --- a/drivers/accel/Kconfig
+> >>>>> +++ b/drivers/accel/Kconfig
+> >>>>> @@ -29,6 +29,7 @@ source "drivers/accel/ethosu/Kconfig"
+> >>>>>  source "drivers/accel/habanalabs/Kconfig"
+> >>>>>  source "drivers/accel/ivpu/Kconfig"
+> >>>>>  source "drivers/accel/qaic/Kconfig"
+> >>>>> +source "drivers/accel/qda/Kconfig"
+> >>>>>  source "drivers/accel/rocket/Kconfig"
+> >>>>>  
+> >>>>>  endif
+> >>>>> diff --git a/drivers/accel/Makefile b/drivers/accel/Makefile
+> >>>>> index 1d3a7251b950..58c08dd5f389 100644
+> >>>>> --- a/drivers/accel/Makefile
+> >>>>> +++ b/drivers/accel/Makefile
+> >>>>> @@ -5,4 +5,5 @@ obj-$(CONFIG_DRM_ACCEL_ARM_ETHOSU)	+= ethosu/
+> >>>>>  obj-$(CONFIG_DRM_ACCEL_HABANALABS)	+= habanalabs/
+> >>>>>  obj-$(CONFIG_DRM_ACCEL_IVPU)		+= ivpu/
+> >>>>>  obj-$(CONFIG_DRM_ACCEL_QAIC)		+= qaic/
+> >>>>> +obj-$(CONFIG_DRM_ACCEL_QDA)		+= qda/
+> >>>>>  obj-$(CONFIG_DRM_ACCEL_ROCKET)		+= rocket/
+> >>>>> \ No newline at end of file
+> >>>>
+> >>>> You have trivial patch errors.
+> >>> newline problem was already there, wasn't introduced as part of this
+> >>> patch series, so I wasn't sure to fix it here. I can fix this in v3.>
+> >>>> ...
+> >>>>
+> >>>>> +}
+> >>>>> +
+> >>>>> +static const struct of_device_id qda_rpmsg_id_table[] = {
+> >>>>> +	{ .compatible = "qcom,fastrpc" },
+> >>>>> +	{},
+> >>>>
+> >>>> Device node with this compatible is already populated, so this looks
+> >>>> simply wrong or you are adding a duplicated driver.
+> >>>>
+> >>>> That's a no-go, you are supposed to work with existing drivers and grow
+> >>>> them.
+> >>> I'll bring the discussion again here, there was a discussion to move the
+> >>> driver to accel subsystem if we want to support new features/uAPI
+> >>> changes. Please read [1],[2] threads. The intention is to replace
+> >>> fastrpc driver with QDA eventually.
+> >>
+> >> None of them address the problem. You want to grow fastrpc into user of
+> >> dmabuf? So you move it from misc to here.
+> > 
+> > It's not as easy and nice, so I think in this case it's better to repeat
+> 
+> I disagree. The existing fastrpc driver is not that complicated. It's
+> actually moderate amount of code, much less than Venus was (~7 times less).
+> 
+> It easily can grow to support two interfaces and the only difficulty is
+> how to manage these two interfaces simultaneously or exclusively, e.g.
+> opening first one disables the second.
 
-The series extends the binding and selects register layouts, charger
-status encodings and electrical limits from per-PMIC match data. Encode
-PM7250B as PM8150B-compatible in the binding and let the compatible
-fallback select the shared charge-parameter block, including the +0x08
-effective input-current status register. Convert the SMB5 0.2 V/A USB
-current-sense voltage measurement to microamps while leaving the SMB2
-current reading unchanged.
+I see the point here.
 
-SMB5 setup suspends USB input and disables charging before configuration.
-The power-supply registration init callback programs battery limits and
-completes final input and charging setup before device_add publishes the
-properties, so public callbacks cannot observe partially initialized
-hardware. Managed rollback restores the charging state before the USB input
-state; if charging cannot be restored, USB input remains suspended. Managed
-teardown cancels status work before unregistering the power supply.
+Would it be acceptable if we add QDA support only on the new platforms
+(e.g. via the SoC-specific compat), provide QDA for those platforms,
+and, once it reaches complete API and feature parity, we remove the old
+fastrpc driver, migrati old platforms.
 
-Enable periodic hardware AICL with the downstream twelve-second rerun
-interval while leaving ADC-based AICL disabled by default. Clear the
-unsupported HVDCP modes so firmware state cannot raise VBUS, and do not
-override the firmware recharge policy without a binding input. The
-dedicated TCPM and VBUS regulator drivers retain ownership of Type-C
-power-role and VBUS control.
+> 
+> > what we did for the venus/iris migration or what happened already
+> > several times in the kernel history (for example the AIC7xxx SCSI host
+> > drivers were migrated by introducing the second driver and then removing
+> > the first one after the grace period). The backwards compatibility is a
+> > separate topic, but it will be addressed before the driver can be
+> 
+> Backwards compatibility should be one of the first things explained in
+> cover letter in one of the first paragraphs.
+> 
+> And if you make it backwards compatible, then just remove old driver,
+> because there is no point to keep it there.
 
-On PM8150B, the SMB5 charger and VBUS regulator use the same DCDC
-peripheral but do not write the same registers. qcom_smbx only reads
-0x1108 and 0x110b there; qcom_usb_vbus-regulator writes 0x1140, 0x1152
-and 0x1153. The qcom_smbx write to 0x1153 belongs only to the SMB2
-initialization sequence and is not executed for SMB5. The TCPM port and PD
-PHY use the separate 0x15xx and 0x17xx peripherals. Patch 2 names the
-USBIN BC1.2 integration register and SMB2-only OTG definitions explicitly
-to document this boundary.
+That's the plan.
 
-Apply the five-patch qcom_smbx Fixes series before this one. This series is
-based on power-supply for-next (99b38cda3f4c). The b4 dependency metadata
-records all five prerequisite patch IDs. This ordering preserves the SMB2
-watchdog, health, overvoltage and float-voltage fixes across the SMB5
-driver refactoring. The prerequisite series is public at:
-https://lore.kernel.org/r/20260812-qcom-smbx-fixes-v1-0-eb48246be599@snyders.xyz/
-
-The v3 implementation was tested on a OnePlus 7T Pro (HD1913) with
-PM8150B. Register reads confirmed 4.40 V, 1.50 A and 500 mA limits. A
-180-second guarded charging trace and a subsequent 600-second runtime
-trace completed with health Good and the input current below its 500 mA
-limit. After a physical USB-C disconnect and reconnect, USB networking and
-the charger recovered automatically; a further 60-second trace remained
-Good and below the input-current limit. The final kernel log had no SMB5
-warning, error, oops or lockdep report.
-
-The v4 driver was rebuilt and retested on the same device. A 180-second
-trace and a 600-second, 121-sample guarded trace completed with the charger
-online, health Good and no guard failure. With a powered USB-C dock, the
-phone remained the data host and PD power sink; with the dock unpowered, it
-remained the data host and enabled the VBUS regulator as the power source.
-The USB 2 and USB 3 hubs, storage and RTL8153 interface enumerated in both
-connector orientations, and 64 MiB read-only storage reads produced the
-same hash in all four dock configurations. Reconnecting the phone directly
-to the PC restored the power-sink/device roles, charging, NCM and SSH
-without a reboot. Ethernet traffic and visual DisplayPort output were not
-tested in this run because no Ethernet carrier or display was available.
-The final kernel log had no SMB5, Type-C or VBUS warning, error, oops or
-lockdep report.
-
-The driver builds with LLVM W=1 and passes Sparse. The binding passes
-dt_binding_check, and both patches pass checkpatch --strict. A full LLVM
-Image, modules and DTBs integration build completed and booted on the test
-device.
-
-Signed-off-by: Robin Snyders <robin@snyders.xyz>
----
-Changes in v4:
-- Make the PM8150B charger, VBUS regulator and TCPM register ownership
-  explicit, including the shared DCDC peripheral's disjoint accesses.
-- Rename the USBIN BC1.2 integration register and SMB2-only OTG definitions
-  to prevent them from being mistaken for SMB5 TCPM/VBUS controls.
-- Test powered sink/host and unpowered source/host USB-C dock operation in
-  both connector orientations, including storage I/O and gadget recovery.
-- Link to v3: https://lore.kernel.org/r/20260813-submit-qcom-smbx-send-v1-v3-0-27be0091d7c7@snyders.xyz
-
-Changes in v3:
-- Complete SMB5 input and charging setup in the pre-device_add power-supply
-  registration init callback instead of gating setters on a driver-specific
-  probe flag.
-- Register the power supply and initialize managed status work before
-  requesting IRQs so handlers cannot observe an unassigned power supply.
-- Let PM7250B match the required PM8150B compatible fallback and remove its
-  duplicate match-data entry.
-- Collect the binding Reviewed-by tag.
-- Link to v2: https://lore.kernel.org/r/20260812-submit-qcom-smbx-send-v1-v2-0-f504b8f9bfad@snyders.xyz
-
-Changes in v2:
-- Rebase onto power-supply for-next 99b38cda3f4c.
-- Encode PM7250B with the required PM8150B compatible fallback.
-- Leave SMB5 Type-C power-role and VBUS control to the TCPM and regulator
-  drivers.
-- Preserve the SMB2 3-second AICL interval and use the SMB5 downstream
-  12-second interval; leave ADC-based AICL disabled by default.
-- Disable unsupported HVDCP negotiation deterministically.
-- Do not override the firmware recharge policy without a binding input.
-- Model PM7250B with PM8150B electrical limits and the +0x08 AICL ICL
-  status register.
-- Convert the SMB5 0.2 V/A USB current-sense reading to microamps while
-  leaving the SMB2 current reading unscaled.
-- Program battery limits in the pre-device_add registration init callback
-  and gate setters until probe completes.
-- Order managed teardown so status work is cancelled before the power
-  supply is unregistered.
-- Restore charging before USB input on probe failure, and leave input
-  suspended if charging restoration fails.
-- Correct the SMB5 overvoltage register and charger-state decoding.
-- Avoid repeated error logs when polling a persistent overvoltage state.
-- Use battery-info property presence when selecting charge targets.
-- Remove duplicate scaling from the already-prescaled USB voltage reading
-  and clarify the binding IIO channel descriptions.
-- Update the binding title, Kconfig prompt and module description for both
-  charger generations.
-- Move the five pre-existing SMB2 fixes to a prerequisite Fixes series.
-- Link to v1: https://lore.kernel.org/r/20260811-submit-qcom-smbx-send-v1-v1-0-feec6cfa123a@snyders.xyz
-
----
-Casey Connolly (2):
-      dt-bindings: power: supply: qcom,pmi8998-charger: add SMB5 PMICs
-      power: supply: qcom_smbx: add SMB5 support
-
- .../power/supply/qcom,pmi8998-charger.yaml         |  17 +-
- drivers/power/supply/Kconfig                       |   8 +-
- drivers/power/supply/qcom_smbx.c                   | 757 ++++++++++++++++-----
- 3 files changed, 609 insertions(+), 173 deletions(-)
----
-base-commit: 99b38cda3f4c486cfbc40f3c8ede1703594e9f13
-change-id: 20260811-submit-qcom-smbx-send-v1-69acefa61977
-prerequisite-patch-id: 3d8a9cf43b5e5eac64a60aeec5e9c90880bcf792
-prerequisite-patch-id: de3e3b494f9644596cfa4cafc362ca0b48288c45
-prerequisite-patch-id: d5e22a0fe7cd55374f60d7c2cb14ed3df8f94e0b
-prerequisite-patch-id: 9eafa41402e97d6a3e5369bec46df4e9db3d2af6
-prerequisite-patch-id: 5638b901cd10773fa9485605f84b25a1dd826a84
-
-Best regards,
+> Again, this should be one of
+> the first things explained in cover letter.
 -- 
-Robin Snyders <robin@snyders.xyz>
-
-
+With best wishes
+Dmitry
