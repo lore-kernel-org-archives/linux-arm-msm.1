@@ -1,203 +1,131 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0D2983AB460
-	for <linux-arm-msm@vger.kernel.org>; Thu, 20 Aug 2026 05:51:55 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8B0261D5CFB;
+	Thu, 20 Aug 2026 06:05:46 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787205117; cv=none; b=MpirCNahtJfExdh8CN6F7ac5rsUVZFRIj4AaBNKFl7b+TuiDqlx5UMOtaxlp7JnhtWT0F5LfCL7vHjds5B9JBYbb5Z5VQd+vqto2PzpkOf+k5On93XrHMzin3VauyqMFM0qmcvfjgnmDXH0LLgnuBmQR3mjFFO2Iaeb/64HHmDQ=
+	t=1787205947; cv=none; b=HdxyIPaS7Pc6P/HPE2Ci7k2Nau9YNN6ofo0KjFM+WKPbJDuLGV9f0DRHBdoHMsLl2u4nRghJjrQ3MqeJ1eeYgYD+T3h0Ab28EssSqYe/48XSBQCclETfcrZnGkONQYvsi+73V5HG0Jr2DvTA7gmsD/CpA9x5oPnNwYLN71Wi/3g=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787205117; c=relaxed/simple;
-	bh=ILV7hBvZwBEUvabJv9MTYx2JVDfAUHT94TuIvlC7E+k=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=hh4l0EaSsgR8yA/WfCQa/tAseqAY229tTbNbW+hlcKdBadbY90VqmFamDyjgLe0HGGJeNB7jPAR0krJmZy18eu18m5f+f/EFlSeY3ZMnVIAVxdA6qAQuQ8K2FYXhj8ZNM8dk9h18TYpvZKegM9qCwX1SbSZkW8VmQT5tF3Cug8M=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=FVn1aABk; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=DHtWqYuW; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1787205947; c=relaxed/simple;
+	bh=PqkjF3jBLK6/DuoceMwkDJ5uMuQtgPXfKyWHfLwuRbs=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=MOtQgBsVmcgEWQIQE35HhPYPuMDlJg6F4cDfXt81yHcFVE0WJpnZQ9f32V4C7F4OMtU8A+8W/WT5n0hB3CJgfDw4z+qAvDrvgb6eVp9KUpr5AG9Kw+gtdkphVRMRmKSKyqHfwvUKAEkVOJTEkrRl88azKkf6W7E6lDQtcYkO36s=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=EEj33zDe; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="FVn1aABk";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="DHtWqYuW"
-Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67JL8E9V231645
-	for <linux-arm-msm@vger.kernel.org>; Thu, 20 Aug 2026 05:51:55 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:message-id
-	:mime-version:subject:to; s=qcppdkim1; bh=19r7/8qn6HtW8BtFPh6L4s
-	Pf3k/JQEeFpgwrZz8kt8E=; b=FVn1aABkpZQMCDYA7idm3FhuEMUrDmmvdiFB4E
-	5Zh1B12NYMm1IXlLVP4DqYjouGLki5oPnX8Tl9kDt2HSq+tdSX9MHLtGDK03C2qn
-	3gqQ21Gt2I0w52xAO3dRMUT8l+BksTUa3FZcIqg+QxnynaXlOT3L5+vnwhnoI5Qa
-	2fblO2lpgnF8Hb6TuUt4ZOvx2aHSf37iY4GkP5jxAEZuyaUI9pDrA/wMFUlXB38h
-	rOyEN+7BDgyqrlfVLC3stWX46g6QOYODLadaJLYtMlhvwVjlCZcXxMGj1Johjddd
-	7AuM8ZL1pM4u2ghOYiiQbUNQ2OmslTcBdkLE6uyaxJ8OBOfw==
-Received: from mail-pj1-f70.google.com (mail-pj1-f70.google.com [209.85.216.70])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g5esaubcu-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Thu, 20 Aug 2026 05:51:54 +0000 (GMT)
-Received: by mail-pj1-f70.google.com with SMTP id 98e67ed59e1d1-38dde0df80bso3464817a91.3
-        for <linux-arm-msm@vger.kernel.org>; Wed, 19 Aug 2026 22:51:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1787205114; x=1787809914; darn=vger.kernel.org;
-        h=cc:to:message-id:content-transfer-encoding:content-type
-         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=19r7/8qn6HtW8BtFPh6L4sPf3k/JQEeFpgwrZz8kt8E=;
-        b=DHtWqYuW2CkgqApDr+NxNKH3EjmdF6/TsnSy1WHLOtIhRNZMpt5kdziNN2eMOMBqhF
-         XFiu2YDbx/kgLV+8n1AdFAsYcd2i26T1pgJa7Zxuh2shL9Z5qQw/SkWt4+c1fv5q/iKy
-         aAuyCgv7bu+QWJpcE2yOuDzsQmnioKPFmwDB5aYGSpWzQkUsVQG0WIOIOsVekE+c9Vrt
-         pkQifk12cB45a7u9YLkqnv7CuYIeRlt38h+Io9jfDAS3Rc3QD3kgSUh0hoVVQRcjAGXJ
-         0GWK8y8eoYjNf1ryL6Cv9c+oUI06st7VACsuhMElSpUHx/60WwoLDjWR8VYpvFynGBkc
-         1DTA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787205114; x=1787809914;
-        h=cc:to:message-id:content-transfer-encoding:content-type
-         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to:content-type;
-        bh=19r7/8qn6HtW8BtFPh6L4sPf3k/JQEeFpgwrZz8kt8E=;
-        b=L+uk+EN0BtO8tbkU5RFm+VPzSgGQ4WshrTkWUVOGIBksxhy0zVchSkTvynxnnUn/HO
-         ckAZbMg5H/AvmOqMMTzkanRDUIHaK9PM2pYnujLW7UQvryCb6YH0nDCw9UTc06bAW9yz
-         fQs+HRw8AHjekWENpD1bczaJnWEoW+sb0WCqqxNY59ezwDf/ANDQZtosHi16LykSbPZr
-         E1LujSzMvKw8zyWLqlU3QmE16njxg8fN7WkhmCLzBIpZDjSSVr1viRm5Ci1mGbYmYbw+
-         i+T8s9C6d+CfITXq9O/lbsSOjcUD+v+FCKLapNcLRhPi55KcHBUjbIHpg6JEHbrtJLuX
-         mJXw==
-X-Forwarded-Encrypted: i=1; AHgh+Rpie1HhtBtAXEva+wK726oexTB1gSPUsLTnWYkbF9+3eEle6v62mW8n5D+JibXcb/dIxpnEOEmpNPfmmT/k@vger.kernel.org
-X-Gm-Message-State: AFuF++nlGK94SWQc2T+9VjzrCYeaW1conEGE2D61DbQTWmBWMEGkJYxk
-	6VfDf/pS7GNANdsGr7bOHbdq2V4/LqFSC7fPaJ19dXLu5vOr9EnuXkX8SKvu3PEttA+0aOAVFG9
-	0+WIvYYm2DKko+LT51e0WaCs6KXHPviqJDeJ/PJDVdjfsXTBAP7KB/ftJM+KHwAiJgNYQ
-X-Gm-Gg: AR+sD12Uyb12RuGRvJbazJVMive7vlsyqo+S3Wv9mq+puvgjHf6baq2+7k1etGfiFhg
-	MOuCL2m6K4Bn5zJLOvtkaw4vYH0AbGGRf17DaT6QdH9V2cGNnKLYjqJQ99JKBUkwaZkDLwDaczL
-	jR0xjGvSI0U/CobwpmdY461bsyXiRRdlwP1f8XALNSwNRBdwy74zdxAjCENsneJ93jYu12xTy47
-	AGoXwmN+iHoBWfz21CPlLlIbxUbouNN1YAEM108gxPfS+zDiGQgj0ap9ePj/+DW4/UM8RPqcvlR
-	FTEMEELZIFtqAEEFHVQPlbr4irRmwSdPJdiDo/t9G14shhIsoq+uAlb4AueQpeEojdfw6UFFjea
-	wsDh7lC1ODML9V74ep5t8rp1XHtYH1s3erg==
-X-Received: by 2002:a17:90b:2e90:b0:38e:c7b0:84ad with SMTP id 98e67ed59e1d1-395804993b6mr18554826a91.0.1787205113409;
-        Wed, 19 Aug 2026 22:51:53 -0700 (PDT)
-X-Received: by 2002:a17:90b:2e90:b0:38e:c7b0:84ad with SMTP id 98e67ed59e1d1-395804993b6mr18554748a91.0.1787205112994;
-        Wed, 19 Aug 2026 22:51:52 -0700 (PDT)
-Received: from hu-vkatoch-hyd.qualcomm.com ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3957fb7cc17sm6085131a91.9.2026.08.19.22.51.48
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 19 Aug 2026 22:51:52 -0700 (PDT)
-From: Vinayak Katoch <vinayak.katoch@oss.qualcomm.com>
-Date: Thu, 20 Aug 2026 11:21:28 +0530
-Subject: [PATCH v3] arm64: dts: qcom: agatti: Add memory-region for audio
- PD
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="EEj33zDe"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5BFF71F000E9;
+	Thu, 20 Aug 2026 06:05:41 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1787205946;
+	bh=dgkzOqfnNn3oIpBNkeMAEPPh8onIVrDTGwHG0nb7Jeo=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To;
+	b=EEj33zDebSYNIeXaqnR1bZKsO+2fK2mB4t0u2uoMKo8nRMMmVv16wyeFta3CePO48
+	 276Vu5UyryUkPnRgHnOraWDBz0kJ8N5c52e/CDLPep1LvUismKPRf0zTerE9fu8+XT
+	 fTlqNilSTJxkwPouf1Ho4A3OooeIT2USayHwDQizgO1X0aXWsxz9q5puRWpvGfkWml
+	 Vu+O7sLL/f4Y17+VxZb1ub8AKhYDeFYPf4+VAyEkXyT7HzHEyAYzziD2VTj7178h4w
+	 vBOwvs8kfzWYlczcakibPQrRFfW+FjsZtXIvXmb3QQdCyYcVJ9ilbd9h79fkIvhffK
+	 zLtrcgKK3/vCA==
+Message-ID: <a0269455-5423-489c-9a12-90d8df83040e@kernel.org>
+Date: Thu, 20 Aug 2026 08:05:39 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 1/3] dt-bindings: net: nfc: add st,st21nfcd
+To: Kristian Brox <isyourbrainfoss@proton.me>, oe-linux-nfc@lists.linux.dev
+Cc: david@ixit.cz, krzk+dt@kernel.org, devicetree@vger.kernel.org,
+ dmitry.baryshkov@oss.qualcomm.com, luca.weiss@fairphone.com,
+ linux-arm-msm@vger.kernel.org, netdev@vger.kernel.org
+References: <20260818205940.1973944-1-isyourbrainfoss@proton.me>
+ <20260819210906.2500789-1-isyourbrainfoss@proton.me>
+ <20260819210906.2500789-2-isyourbrainfoss@proton.me>
+From: Krzysztof Kozlowski <krzk@kernel.org>
+Content-Language: en-US
+Autocrypt: addr=krzk@kernel.org; keydata=
+ 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
+In-Reply-To: <20260819210906.2500789-2-isyourbrainfoss@proton.me>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260820-agatti-audio-v3-1-47337097ee53@oss.qualcomm.com>
-X-B4-Tracking: v=1; b=H4sIAN+VhmoC/3XMQQ7CIBCF4asY1tIAtVBceQ/jgg7YTmKLQks0T
- e8u7coY3UzyT/K+mUQX0EVy3M0kuIQR/ZCj3O8IdGZoHUWbmwgmJKuZpKY144jUTBY9LSvVgFU
- H4zSQPLkHd8Xnxp0vuTuMow+vTU98/f6BEqecgpVKSgAN0Jx8jMVjMjfwfV/kQ1YviU9DfRkiG
- 6WudMNNU7NK/zCWZXkD5YDnHPMAAAA=
-X-Change-ID: 20260806-agatti-audio-357bcd74ae9c
-To: Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>
-Cc: Bharath Kumar <bkumar@qti.qualcomm.com>,
-        Chenna Kesava Raju <chennak@qti.qualcomm.com>,
-        Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>,
-        linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org,
-        Christopher Obbard <chris.obbard@oss.qualcomm.com>,
-        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
-        Vinayak Katoch <vinayak.katoch@oss.qualcomm.com>
-X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1787205108; l=1989;
- i=vinayak.katoch@oss.qualcomm.com; s=20260609; h=from:subject:message-id;
- bh=ILV7hBvZwBEUvabJv9MTYx2JVDfAUHT94TuIvlC7E+k=;
- b=3WOwRzWn+7SSfEi+ysNFn+nF+YOKoTFwYm9P/dIWVXjHo8hsAlVMyINhpU7vbXfE602QfuKN1
- qm9aLxgozx5CPzgRbOK0O51qUXp5Ssr6jotbZsQbQqTS0tfLOzdtRBg
-X-Developer-Key: i=vinayak.katoch@oss.qualcomm.com; a=ed25519;
- pk=UrGeKKxjIjpHZIjsbQKS/8rrVaP9KVGki69pFclCH08=
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODIwMDA0MCBTYWx0ZWRfXxHISghwrwLOK
- /qVVNw+muTNuyEBscqIqPwyE2uzDuAa5pC3+yckDgocvOg0lvesATg++QcIj6Gj4xtfoFPjIsfO
- g8nykbQARuv2gNzd+sEiqphogNUHKU0=
-X-Authority-Analysis: v=2.4 cv=fKcJG5ae c=1 sm=1 tr=0 ts=6a8695fa cx=c_pps
- a=0uOsjrqzRL749jD1oC5vDA==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
- a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_glEPmIy2e8OvE2BGh3C:22
- a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=NEAuMJsDzbBXlsf1WKcA:9 a=QEXdDO2ut3YA:10
- a=mQ_c8vxmzFEMiUWkPHU9:22
-X-Proofpoint-ORIG-GUID: y5DcvqBEKTjGXdDMjb0WWkPb87fmrsOb
-X-Proofpoint-GUID: y5DcvqBEKTjGXdDMjb0WWkPb87fmrsOb
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODIwMDA0MCBTYWx0ZWRfX9yhMoR1MuYTX
- mrzkpfkxgXlbLGajIgLgulul7vZ8CQO4mSYrfrHIOrscuHgUe0cYLVqGqydsIZNPXoh5YVsyMc3
- sggYdmFn6yDE6faN3isu/Uvuw5+WOxZ9XFPtlxqPxKD/48Z04zfPfwdlGq+z5HMhck2Yc3czfKq
- /m2CTpK36z2aMCbFAAIF1ipZhGuXzsFIlihjbwv3t2pboiLujWQy+lCYbkeMkMOnLHfy1KsDA/H
- 6GnEt7FkMMVAhyxqRJHGki6fV1yAj8OnNOCOlMLP6JnfiiEaRocP4eO0a0HggN0DKVCvS3rTZM9
- MP03+Efj4AxN346fDYoPqWMxR55sWJUji2168g2mx1k8nUQL19RBdJ94JssUX68/wiq1NbSGGY7
- 0f0vPj+59u/R14MfsyHhSG/TzSR8zZtIUnUSJAwAgJZzaMn+uAT6AQ4YPUObiMm/be9RPhE6U0z
- g09f+KETA2gUjDFwssQ==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-08-19_06,2026-08-19_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- suspectscore=0 lowpriorityscore=0 clxscore=1015 spamscore=0 impostorscore=0
- bulkscore=0 adultscore=0 priorityscore=1501 malwarescore=0 phishscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608200040
 
-Reserve memory region for audio PD dynamic loading and remote heap
-requirements. Add the required VMID list for memory ownership
-transfers.
+On 19/08/2026 23:09, Kristian Brox wrote:
+> The ST21NFCD (e.g. Fairphone 5) speaks raw NCI on I2C. Existing
+> st,st21nfcb-* and st,st21nfcc-i2c compatibles stay NDLC. Add a
+> separate compatible so those boards are not switched to the wrong
+> framing.
+> 
+> Also document the optional SYS_CLK (clocks) and VPS_IO (vdd-io-supply)
+> used on Fairphone 5, and add an I2C example.
+> 
+> Signed-off-by: Kristian Brox <isyourbrainfoss@proton.me>
 
-Tested-by: Christopher Obbard <chris.obbard@oss.qualcomm.com>
-Reviewed-by: Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>
-Reviewed-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-Signed-off-by: Vinayak Katoch <vinayak.katoch@oss.qualcomm.com>
----
-Changes in v3:
-- Changed alloc-ranges to <0x0 0x0 0x1 0x0> to cover the full 32-bit address space.
-- Collected Reviewed-by/Tested-by tags.
-- Link to v2: https://lore.kernel.org/r/20260807-agatti-audio-v2-1-3959b1ab8059@oss.qualcomm.com
+You already received below comment, so me needing to repeat is not the
+right way because it means you just ignore me. So I assume you will
+ignore rest of my comments as well.
 
-Changes in v2:
-- Fixed VMID list alignment.
-- Link to v1: https://lore.kernel.org/r/20260806-agatti-audio-v1-1-cd6766cc9ccb@oss.qualcomm.com
----
- arch/arm64/boot/dts/qcom/agatti.dtsi | 11 +++++++++++
- 1 file changed, 11 insertions(+)
+Additionally, you need to develop on mainline, not postmarketos kernel.
 
-diff --git a/arch/arm64/boot/dts/qcom/agatti.dtsi b/arch/arm64/boot/dts/qcom/agatti.dtsi
-index 590bd2432d85..d010ef7fdf8c 100644
---- a/arch/arm64/boot/dts/qcom/agatti.dtsi
-+++ b/arch/arm64/boot/dts/qcom/agatti.dtsi
-@@ -381,6 +381,14 @@ rmtfs_mem: memory@89b01000 {
- 			qcom,client-id = <1>;
- 			qcom,vmid = <QCOM_SCM_VMID_MSS_MSA QCOM_SCM_VMID_NAV>;
- 		};
-+
-+		adsp_rpc_remote_heap_mem: adsp-rpc-remote-heap {
-+			compatible = "shared-dma-pool";
-+			alloc-ranges = <0x0 0x0 0x1 0x0>;
-+			reusable;
-+			alignment = <0x0 0x400000>;
-+			size = <0x0 0x800000>;
-+		};
- 	};
- 
- 	smp2p-adsp {
-@@ -2348,6 +2356,9 @@ fastrpc {
- 					compatible = "qcom,fastrpc";
- 					qcom,glink-channels = "fastrpcglink-apps-dsp";
- 					label = "adsp";
-+					memory-region = <&adsp_rpc_remote_heap_mem>;
-+					qcom,vmids = <QCOM_SCM_VMID_LPASS
-+						      QCOM_SCM_VMID_ADSP_HEAP>;
- 
- 					qcom,non-secure-domain;
- 
+Please use scripts/get_maintainers.pl to get a list of necessary people
+and lists to CC. It might happen, that command when run on an older
+kernel, gives you outdated entries. Therefore please be sure you base
+your patches on recent Linux kernel.
 
----
-base-commit: 1701fda2f58e345c050f4309971bdc07cd6146ba
-change-id: 20260806-agatti-audio-357bcd74ae9c
+Tools like b4 or scripts/get_maintainer.pl provide you proper list of
+people, so fix your workflow. Tools might also fail if you work on some
+ancient tree (don't, instead use mainline) or work on fork of kernel
+(don't, instead use mainline). Just use b4 and everything should be
+fine, although remember about `b4 prep --auto-to-cc` if you added new
+patches to the patchset.
+
+You missed at least devicetree list (maybe more), so this won't be
+tested by automated tooling. Performing review on untested code might be
+a waste of time.
+
+Please kindly resend and include all necessary To/Cc entries.
 
 Best regards,
--- 
-Vinayak Katoch <vinayak.katoch@oss.qualcomm.com>
-
+Krzysztof
