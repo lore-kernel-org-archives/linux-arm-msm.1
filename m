@@ -1,165 +1,235 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0911B38AC7D
-	for <linux-arm-msm@vger.kernel.org>; Fri, 21 Aug 2026 10:52:51 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7F2AC379EFF;
+	Fri, 21 Aug 2026 11:36:08 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787309575; cv=none; b=CIpDWOrdLaOZZ6dfyrDmZDwZ9+jkGFLjZGJkMv6FeDm07rmj+rh1ED1BA8TjzsRGLLZW7uIJyRP+H2om5VjEz8eYg2CrWPtLVnK58ICx/Xct1pB5roM8apncTGcDH+FhR6I5I06az5pT1QHHf2bLYu7pSo2PIC7oXCGj+RYFJS4=
+	t=1787312170; cv=none; b=o0heqwMLygBynqv0HL45RGqtwtHrwqX5lEdUZdOSa1fCkRdx3Dcw0+TSHxKaZF8vmm95P68hTuJn4hOcPyC+UZySGIYQZRTKwS49gA2nJ6LrzCBHZ4NYbsBdyxswSiXhU8DLJVXc5FPlM205FRPStHfbXICvm8NL1vsHiSP5pHg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787309575; c=relaxed/simple;
-	bh=wHykAF+Fcx5AAZCtROJj4e+qMyAZO13kGrd6uhFnJwg=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=L8NcZ6KRGsM0JbvAU22b9m37OSCLJLaZI53m05OzOrVDx0/nMjO2nWdxuunVobZg4stjL4226LlMYCaTMUWCcPjRHdsJP3/xLRzGZJlqMccJeeDXfFHWEWpK4aXVujIzG5lOPEYVbBGckD6r9aeQn9pPizjfl0nGuRrxRX4Pv2I=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=hthVBLjy; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=SPf1j0Ry; arc=none smtp.client-ip=205.220.180.131
+	s=arc-20240116; t=1787312170; c=relaxed/simple;
+	bh=o1Bhez6qyf0vI6dDip45ZKlBNsGfUzARPydzPVrup1Y=;
+	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
+	 MIME-Version; b=KuCp06V3u2w99Cg/OqNzq31phrakHFq+xI2yAsbN6j041BkMyjR9nqtXMhqjy4s9TSdzHOG7+EyaU0YG7R3WEqBkAbt8d35xeZxluhNqK2w9+bU4JDzZRGL1gGb/pGErV1nMXi5bMCAyr4VZXDd2gc1nM/zQVzoHZ5U4jKgDCZ8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=nw6zwRHP; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="hthVBLjy";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="SPf1j0Ry"
-Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67L9M3tG1799934
-	for <linux-arm-msm@vger.kernel.org>; Fri, 21 Aug 2026 10:52:48 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="nw6zwRHP"
+Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67L9LncR1474544;
+	Fri, 21 Aug 2026 11:36:06 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-type:date:from:in-reply-to:message-id:mime-version
-	:references:subject:to; s=qcppdkim1; bh=y2oZfmd0XqCYaK1sXSHEKjq4
-	RE7FTd9km0ymNC84mi0=; b=hthVBLjyQxCzcmChEENlK2lCKSmrRDeelYIOsIHt
-	r3kydkwcSDm7PG7lwthy/4xdWumsi39zDSbCh9ahwH+PKxa3y3AQDfp2G2A6PfXg
-	dnp6jRLRhN0cu/FhQUsper5QQP1w8BM6scHSiTaXlvZm11griD17xSdrsbkD1+8r
-	8Fx275t+JTDEXBYtfYVvSUUgJDqz0bpYUFQTAdk6043XmkCuJMLYGgxmQY1r3w39
-	zAMDC+y6BLmwJC7nBO2oiVklvSz6TQEODiWPc9GocizKfSHI00fuSLrdHZZ4sSks
-	KUSWQPIyfeGQOTxA67hiwingE//m1AlSbQINXbVZov5VRg==
-Received: from mail-qt1-f197.google.com (mail-qt1-f197.google.com [209.85.160.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g6ecb9jt5-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Fri, 21 Aug 2026 10:52:48 +0000 (GMT)
-Received: by mail-qt1-f197.google.com with SMTP id d75a77b69052e-51c1d7886cdso16065861cf.1
-        for <linux-arm-msm@vger.kernel.org>; Fri, 21 Aug 2026 03:52:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1787309568; x=1787914368; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=y2oZfmd0XqCYaK1sXSHEKjq4RE7FTd9km0ymNC84mi0=;
-        b=SPf1j0RyCpkC9N8ZR8DAtC+Wt2vMwYzR5XecKZ+ka47P1+WXwIJkneYHLIp2+pP952
-         Hk6ShX/thfOZOQMiFp1XueDZbw0/zO3rzhJI0W9W/h/4w++PRC0M8xfdem4GLtJ0DbWd
-         xbPDbIFSaTmYLLGezFDEjg/JJSIo2KpO7R9VajcgrC3KY7piyaDUwjZWWD1Ld6+aOlqJ
-         2tL+UqWoUVAZTtgybHWEwtdLTCvDKR3iO/a8UIh+SI70ki01P02GQiV/ejW12ThFnqiS
-         sI6S8aMri1w4QaCGRnTwTcygMzPhkKT+xZXhs3Mq7pYIbHqCsXABxsARs5+cxImtaeoW
-         7cQw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787309568; x=1787914368;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=y2oZfmd0XqCYaK1sXSHEKjq4RE7FTd9km0ymNC84mi0=;
-        b=AiMODdtaLkrSfUPPzsQ95y1+yklYiFoSQsS8lKD+d3B9kazY2vZy8naBVIzB4mfKkM
-         XfbdsS1GmzQpu1AuRj7erpf/IEkdGiwBteI1yJi8FOqmHM4x4G1uCQwTSKBpPgNjnLxp
-         DOlmUl8YRAQbzaypo/RxaS/oFKfTk+ca6U0xMgcHElUtzMSadwlKKLc9xM2FVGtnltzv
-         iehbgK7EVBoNfv/Wp8MBoZjnrFtrkL8JixRe05olu8hznzbjkf/p81YPyVBBuqHGSAQ5
-         Ecdl0LMy7+9hYScLPY7X4+VS4bjihz1K4w+8vBvU53mMpz9VNhgBUsQo6xG3ZrX2RcME
-         BgjQ==
-X-Gm-Message-State: AOJu0Yz9ZPF6RSodsTAln+0Ufzy2VlGx9QI78p9Hza8ES7CXYHFX6LwK
-	s5bHt/ZBNh8A36w2vn9MaDnRbWY3oxdjeBfxi8Pmn6fx/Be9xeRtsKPRS7aX61es9Lw1PfqYXQF
-	PFoJnJ+4YhHTwpO5KDwpwg/dPzubP8YgP/kY7CUJdoclIXFu5dwJJSAk0pL7Vf8OeX/dX
-X-Gm-Gg: AR+sD10lvCaT/eT8mWf9oPDj45eRcAG+Cth+7XV7JAKAIEqTZfxmZuy0zyzHzwXP+Hj
-	oo+FjOqZBiGeNrmDqCN84KEWRR1Hn/WlCym56gFxzPIBMexGVE8SF3Cc1EXEypwddHb48hkGnjW
-	5GUPYlF1RiXVzVmnPSMo7k1jobSRJMlMpx3YyoS75rtnh5pwokxA7kCgeJdgAoPim5HVwOlbp11
-	TwvveVtKEK/2McfStmIlkoE3rNsc+xtEuRlB4dUWVfscnrLIXae7BxAm9Ma7FPm0VjS+CwHTS58
-	qVCCw0CQPGhkwKrYtX6oP0h/RWlTpqBSiOibV0Qkhnqg3YN9yh3oXRokp8igE+JeScucLFI2Y4X
-	SAV9hLJM+y0cPeGhtAGC/qnwqr9+OW9IUIWHW32AWm1jGDsyFXODCLhhDsKE1sdFL2POl4u75k+
-	38sxTCEixwKux0
-X-Received: by 2002:a05:622a:17c5:b0:521:8ef0:b4e0 with SMTP id d75a77b69052e-52df5739b84mr47906431cf.17.1787309568127;
-        Fri, 21 Aug 2026 03:52:48 -0700 (PDT)
-X-Received: by 2002:a05:622a:17c5:b0:521:8ef0:b4e0 with SMTP id d75a77b69052e-52df5739b84mr47906211cf.17.1787309567708;
-        Fri, 21 Aug 2026 03:52:47 -0700 (PDT)
-Received: from umbar.lan (2001-14ba-a073-af00-264b-feff-fe8b-be8a.rev.dnainternet.fi. [2001:14ba:a073:af00:264b:feff:fe8b:be8a])
-        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5b4788dafd9sm1894294e87.51.2026.08.21.03.52.46
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 21 Aug 2026 03:52:46 -0700 (PDT)
-Date: Fri, 21 Aug 2026 13:52:44 +0300
-From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-To: Venkata Kota <venkata.kota@oss.qualcomm.com>
-Cc: "linux-arm-msm@vger.kernel.org" <linux-arm-msm@vger.kernel.org>
-Subject: Re: NSP Images upstream for Nord Platform
-Message-ID: <kug342o2og57tdhortgabobe4vdjn2jkv3bxoqzfei767neg27@46p2slgpyj3w>
-References: <ca4efa2a-41c8-4658-b386-0bc691e95179@oss.qualcomm.com>
+	cc:content-transfer-encoding:date:from:in-reply-to:message-id
+	:mime-version:references:subject:to; s=qcppdkim1; bh=CXjD5M0e/Wr
+	v8YrUbZUegzsnwQ++lVeh8HIc5uUcP04=; b=nw6zwRHPrxRogTyZ9MD2FiIx+wZ
+	SBTfqMZNtD5WiXOaEE/9xB55+dnY5HC+aPP5k1xR35mhrhn3TVIoivHDRurlGUq1
+	vystLGIADt0U+60DylO7SfoD0z2nuyVI2f7gk5C6nZKCANRef4TbWTLgrrVXZhoL
+	2BOSGJGM/PU9cD1GOQ8Tm1XdpIfQ9WNMOWg9mnFEm24dqdcaPiJA9iYnEK0KCFEG
+	d3WhsBKJlIerELVrXGrlDaPcs0zOOloMP6MBhbk544xt51yvrFP5gESf4036WWOz
+	I329ahA/GeWdiY9lPlPOv5IbRBLgLXdpUihgZAsrK0dqMQ6cq3QpN3XXRbQ==
+Received: from apblrppmta02.qualcomm.com (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com [103.229.18.19])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g6fbw9fvu-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Fri, 21 Aug 2026 11:36:06 +0000 (GMT)
+Received: from pps.filterd (APBLRPPMTA02.qualcomm.com [127.0.0.1])
+	by APBLRPPMTA02.qualcomm.com (8.18.1.7/8.18.1.7) with ESMTP id 67LBa2OI029385;
+	Fri, 21 Aug 2026 11:36:02 GMT
+Received: from pps.reinject (localhost [127.0.0.1])
+	by APBLRPPMTA02.qualcomm.com (PPS) with ESMTPS id 4g2h6m45px-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Fri, 21 Aug 2026 11:36:02 +0000 (GMT)
+Received: from APBLRPPMTA02.qualcomm.com (APBLRPPMTA02.qualcomm.com [127.0.0.1])
+	by pps.reinject (8.18.1.12/8.18.1.12) with ESMTP id 67LBa1Ok029365;
+	Fri, 21 Aug 2026 11:36:01 GMT
+Received: from hu-devc-hyd-u22-c.qualcomm.com (hu-pkumpatl-hyd.qualcomm.com [10.147.245.204])
+	by APBLRPPMTA02.qualcomm.com (PPS) with ESMTPS id 67LBa1ch029359
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Fri, 21 Aug 2026 11:36:01 +0000 (GMT)
+Received: by hu-devc-hyd-u22-c.qualcomm.com (Postfix, from userid 3914174)
+	id A53CE5D7; Fri, 21 Aug 2026 17:06:00 +0530 (+0530)
+From: Prasad Kumpatla <prasad.kumpatla@oss.qualcomm.com>
+To: Bartosz Golaszewski <brgl@kernel.org>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Linus Walleij <linusw@kernel.org>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>,
+        Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>,
+        Prasad Kumpatla <prasad.kumpatla@oss.qualcomm.com>
+Cc: Krzysztof Kozlowski <krzk@kernel.org>, linux-arm-msm@vger.kernel.org,
+        linux-gpio@vger.kernel.org, devicetree@vger.kernel.org,
+        linux-kernel@vger.kernel.org,
+        Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+Subject: [PATCH v7 1/2] dt-bindings: pinctrl: qcom,hawi-lpass-lpi-pinctrl: Add Hawi LPI pinctrl
+Date: Fri, 21 Aug 2026 17:05:47 +0530
+Message-Id: <20260821113548.2686650-2-prasad.kumpatla@oss.qualcomm.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20260821113548.2686650-1-prasad.kumpatla@oss.qualcomm.com>
+References: <20260821113548.2686650-1-prasad.kumpatla@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <ca4efa2a-41c8-4658-b386-0bc691e95179@oss.qualcomm.com>
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODIxMDA4MSBTYWx0ZWRfX47by0FBKtjnV
- ZglZumvIm/+pjb4+Zl7QE5AImcnn4AZX5hrosXXo+dqH98deJ965O0lzlsgrl9HVSq0meS4Sz1E
- d4KveZUU55EYwYOxvOSmCEfmekunbESSDoyp5HhIBhIoTLzpG99e3xv5Wp4jV/KPhCgMn6bDb7m
- mrqsC6GkPHGFAy4s9Ou8wq1fydhLhmSVRmSiKUUWIxLBEcweCJQRTDsn9dWtoB5Ub4+Rp7al7uu
- 3Bktdo/r24s8aqgt/YJvk+rx4rZuasSPwcPC9CPax6xqk6rubZ4h72138rdkIG7FqMq2UdTRdCL
- rvgRrfZtE/nZCq/1KIbvlA/Ve9IyBSy4oTMl5sKYJ1/C4Ad1i1DntcPHx0xR8HQakBTIUVxmVEH
- 8QuhANxoDSbpDMZjUDqnAN8nQx44R6HVlkhSNsCbfFOWFcE446yTVlbUUmluYIZdXu+IeptkxbE
- 7gpx0oesi4N8KDNeqDw==
-X-Authority-Analysis: v=2.4 cv=e/s2j6p/ c=1 sm=1 tr=0 ts=6a882e00 cx=c_pps
- a=EVbN6Ke/fEF3bsl7X48z0g==:117 a=xqWC_Br6kY4A:10 a=kj9zAlcOel0A:10
- a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22 a=nLBuxvsX9MiwT8o7xfIA:9
- a=CjuIK1q_8ugA:10 a=a_PwQJl-kcHnX1M80qC6:22
-X-Proofpoint-GUID: -y_0n9QW1hh490Xk8qO3GJq9s08aeFoV
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODIxMDA4MSBTYWx0ZWRfX/ItfNhJuipYS
- 0nIouFJfHlmhEPJQNWhLtF3eACAgiw2igcBccZNZu5Ebp+yZdhE7Bayi+oHqbCf8TReS4E24KU8
- WpadqSNmmWv5N7z6k2YqUuamDWVn8Y4=
-X-Proofpoint-ORIG-GUID: -y_0n9QW1hh490Xk8qO3GJq9s08aeFoV
+Content-Transfer-Encoding: 8bit
+X-QCInternal: smtphost
+X-QCInternal: smtphost
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODIxMDA4NyBTYWx0ZWRfX3Mt3Ih1ITc52
+ fn0Hw/wujT4kqsIo9ddZOR3RiU26cJRhCAVp1W4L1Z2tQUl7G0Zq5PoDaW06epUE/18SX8SJ6mz
+ xXHkUiYw5ipZYykz2SU7Fwj7RZ7WAtg=
+X-Proofpoint-ORIG-GUID: m6vcE7qoeAr1a_8oNM4nLcnySim6LOtI
+X-Authority-Analysis: v=2.4 cv=L9AtheT8 c=1 sm=1 tr=0 ts=6a883826 cx=c_pps
+ a=Ou0eQOY4+eZoSc0qltEV5Q==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+ a=Sv0fKeRqtYgA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
+ a=YMgV9FUhrdKAYTUUvYB2:22 a=gEfo2CItAAAA:8 a=EUspDBNiAAAA:8 a=VwQbUJbxAAAA:8
+ a=bT5XQOCXPleopHcqzpYA:9 a=sptkURWiP4Gy88Gu7hUp:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODIxMDA4NyBTYWx0ZWRfX6y/mtzBeZv15
+ Wc2ub1DmGUwWPqBrY7sB6POH6/HmL7uhZEY52Vzj94xBgbo3TPxBGpWa6uPvkz8GgN0m4S0AryO
+ 7/AxpRdLqHxjh7e2jB9dETf6T37yP/USRIjCvp2Yof2mFZwgft0ld7JmSfomFhR0lT1z6fhnW/e
+ vPBZLw2l6bM0cEQZ7vTtk90haxcaFDTf/E40W1UYoW9sHxlX69ABRyNt1BXBAay/geF5UdnyKWK
+ WERI6sDams+fX6TORDSfDjmTLtA0UCZKtDi1WMfgmiTL+j8O1spvOQ8bMjAPGzcILmnKinW0UCo
+ JHUqACcruQ9lsKDpOcg4Let42UzWCPjltgWRdl7WrXxxfhNYUnc6vpIln+IPWpnHoGIbgX/zqZm
+ h2T4Q/sozaBVXrBu517TiqBqquC5lRfGM19XnxfBqHLMLMyv2oljD0chih9rIxORf7UDGWVYUAx
+ qODOl/JYNzhNqj8insg==
+X-Proofpoint-GUID: m6vcE7qoeAr1a_8oNM4nLcnySim6LOtI
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-08-21_03,2026-08-21_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- adultscore=0 impostorscore=0 suspectscore=0 spamscore=0 phishscore=0
- lowpriorityscore=0 clxscore=1015 malwarescore=0 priorityscore=1501
- bulkscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
- adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
- definitions=main-2608210081
+ impostorscore=0 bulkscore=0 clxscore=1015 priorityscore=1501 suspectscore=0
+ lowpriorityscore=0 malwarescore=0 phishscore=0 adultscore=0 spamscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608210087
 
-On Fri, Aug 21, 2026 at 03:50:14PM +0530, Venkata Kota wrote:
-> We are currently planning to upstream the NSP firmware for the Nord
-> platform. The platform contains four NSPs, and a single NSP firmware binary
-> is built that can be used across all of them. However, the current SSL
-> validation mechanism requires a unique SWID to authenticate firmware loading
-> on each NSP. As a result, four copies of the same firmware image are
-> generated during the build process, with each copy undergoing a signing step
-> to embed the corresponding SWID information.
-> 
-> This approach is consistent with the methodology followed in the earlier
-> Nord program where firmware was successfully delivered. The same reference
-> image is used for both QLI and upstream releases.
-> 
-> We attempted to upstream all four NSP firmware images; however, the
-> submission was rejected on the basis that the images are identical. While
-> the underlying firmware content is the same, each image contains a distinct
-> SWID and therefore does not represent a binary-identical copy. These
-> uniquely signed images are required to ensure successful authentication and
-> loading on their respective NSPs. This requirement arises from the current
-> SSL authentication implementation governing firmware loading.
-> 
-> Several proposals have been discussed regarding potential enhancements to
-> the SSL authentication process. The SSL team has evaluated these suggestions
-> and is currently assessing available options. However, any viable solution
-> would require significant design changes, along with the associated
-> development effort and validation time.
+Add bindings for the pin controller in Low Power Audio SubSystem (LPASS)
+of Qualcomm Hawi SoC.
 
-Thanks for providing a good summary. The mdt_loader, the module used by
-the DSP driver to load the firmware, already supports loading ELF
-firmware split into multiple binary segments. While this (legacy) format
-is considered obsolete, it gives a hint on how to support the Nord
-platform, while keeping linux-firmware contents sane.
+The controller has 23 GPIOs (gpio0-gpio22) with functions including
+SoundWire, I2S, DMIC, VA I2S, ext_mclk1, slimbus and lpass_lpi_dbg_clk.
 
-Please split the signature segment to a separate file having .bNN
-extension (where NN is the segment index) and make sure that mdt_loader
-can load it correctly, possibly extending the helper code. Use symbolic
-links to share main firmware image, while keeping only signatures apart.
+Reviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+Signed-off-by: Prasad Kumpatla <prasad.kumpatla@oss.qualcomm.com>
+---
+ .../pinctrl/qcom,hawi-lpass-lpi-pinctrl.yaml  | 109 ++++++++++++++++++
+ 1 file changed, 109 insertions(+)
+ create mode 100644 Documentation/devicetree/bindings/pinctrl/qcom,hawi-lpass-lpi-pinctrl.yaml
 
+diff --git a/Documentation/devicetree/bindings/pinctrl/qcom,hawi-lpass-lpi-pinctrl.yaml b/Documentation/devicetree/bindings/pinctrl/qcom,hawi-lpass-lpi-pinctrl.yaml
+new file mode 100644
+index 000000000000..af68581750cf
+--- /dev/null
++++ b/Documentation/devicetree/bindings/pinctrl/qcom,hawi-lpass-lpi-pinctrl.yaml
+@@ -0,0 +1,109 @@
++# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
++%YAML 1.2
++---
++$id: http://devicetree.org/schemas/pinctrl/qcom,hawi-lpass-lpi-pinctrl.yaml#
++$schema: http://devicetree.org/meta-schemas/core.yaml#
++
++title: Qualcomm Hawi SoC LPASS LPI TLMM
++
++maintainers:
++  - Krzysztof Kozlowski <krzk@kernel.org>
++  - Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
++  - Prasad Kumpatla <prasad.kumpatla@oss.qualcomm.com>
++
++description:
++  Top Level Mode Multiplexer pin controller in the Low Power Audio SubSystem
++  (LPASS) Low Power Island (LPI) of Qualcomm Hawi SoC.
++
++properties:
++  compatible:
++    const: qcom,hawi-lpass-lpi-pinctrl
++
++  reg:
++    items:
++      - description: LPASS LPI TLMM Control and Status registers
++
++  clocks:
++    items:
++      - description: LPASS LPR(Low Power Resource) voting clock
++      - description: LPASS Audio voting clock
++
++  clock-names:
++    items:
++      - const: lpr
++      - const: audio
++
++patternProperties:
++  "-state$":
++    oneOf:
++      - $ref: "#/$defs/qcom-hawi-lpass-state"
++      - patternProperties:
++          "-pins$":
++            $ref: "#/$defs/qcom-hawi-lpass-state"
++        additionalProperties: false
++
++$defs:
++  qcom-hawi-lpass-state:
++    type: object
++    description:
++      Pinctrl node's client devices use subnodes for desired pin configuration.
++      Client device subnodes use below standard properties.
++    $ref: qcom,lpass-lpi-common.yaml#/$defs/qcom-tlmm-state
++    unevaluatedProperties: false
++
++    properties:
++      pins:
++        description:
++          List of gpio pins affected by the properties specified in this
++          subnode.
++        items:
++          pattern: "^gpio([0-9]|1[0-9]|2[0-2])$"
++
++      function:
++        enum: [dmic1_clk, dmic1_data, dmic2_clk, dmic2_data, dmic3_clk,
++               dmic3_data, dmic4_clk, dmic4_data, ext_mclk1_a, ext_mclk1_b,
++               ext_mclk1_c, ext_mclk1_d, ext_mclk1_e, gpio, i2s0_clk,
++               i2s0_data, i2s0_ws, i2s1_clk, i2s1_data, i2s1_ws, i2s2_clk,
++               i2s2_data, i2s2_ws, i2s3_clk, i2s3_data, i2s3_ws,
++               lpass_lpi_dbg_clk, qca_swr_clk, qca_swr_data, slimbus_clk,
++               slimbus_data, swr_rx_clk, swr_rx_data, swr_tx_clk, swr_tx_clk1,
++               swr_tx_data, va_i2s0_clk, va_i2s0_data, va_i2s0_ws,
++               wsa2_swr_clk, wsa2_swr_data, wsa_swr_clk, wsa_swr_data]
++        description:
++          Specify the alternative function to be configured for the specified
++          pins.
++
++allOf:
++  - $ref: qcom,lpass-lpi-common.yaml#
++
++required:
++  - compatible
++  - reg
++  - clocks
++  - clock-names
++
++unevaluatedProperties: false
++
++examples:
++  - |
++    #include <dt-bindings/sound/qcom,q6dsp-lpass-ports.h>
++
++    lpass_tlmm: pinctrl@7f60000 {
++        compatible = "qcom,hawi-lpass-lpi-pinctrl";
++        reg = <0x07f60000 0x20000>;
++
++        clocks = <&q6prmcc LPASS_HW_LPR_VOTE LPASS_CLK_ATTRIBUTE_COUPLE_NO>,
++                 <&q6prmcc LPASS_HW_DCODEC_VOTE LPASS_CLK_ATTRIBUTE_COUPLE_NO>;
++        clock-names = "lpr", "audio";
++
++        gpio-controller;
++        #gpio-cells = <2>;
++        gpio-ranges = <&lpass_tlmm 0 0 23>;
++
++        tx-swr-sleep-clk-state {
++            pins = "gpio0";
++            function = "swr_tx_clk";
++            drive-strength = <2>;
++            bias-pull-down;
++        };
++    };
 -- 
-With best wishes
-Dmitry
+2.34.1
+
