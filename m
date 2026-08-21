@@ -1,282 +1,192 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7BDAA2931FE;
-	Fri, 21 Aug 2026 17:56:52 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 98CAF3998AF;
+	Fri, 21 Aug 2026 23:30:15 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787335012; cv=none; b=NQtmmqZBOsKJwNWI2DDS/TeTaDVigJLEV/Mp0raIi/yY8yfdxFtDVVTOhwGE5BcZKHc8ZFxoBYs8dax9TEejdjT8RYH+WKktBULjDR9Xn4HJD9kTOepn3dsAhGPlld6eQpSvrPll+MWogTpuc5dnumwvCokcjFw2N8/VWh33ilM=
+	t=1787355017; cv=none; b=lYtPHvdSBerJy1lXQ4sJ3PI3+Why03QR9NoOpFNhoFPCoZi6hEPEjB4ba8uoqA1Zu/tecubCvvAwsqICmGpntiCzAKj0MyRAdsvRhGnj60H9Zz+bo5z2ZKOdA6fI2mG6bntJtFg19bBXTkH6FOLdXBt9SL8pd5GfE4PJwb2HW5A=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787335012; c=relaxed/simple;
-	bh=hL+RVHESgMeJ0wCfwfzcm4+HyeyJS/QPc7GeZ+PODik=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=IDo5cY6LMLX8vVMCkw8AsBPgVLjL8WHYpDuZ6SfMvwfegt2QHEa6lFldd53h1oLUVQ/Dt+Q4qyTeMSNlMmYitL+WFMsbggZaIVXC8KuHQCLondHs+wlCAYmLW9YH1V4BkKW7WJm8X2Z3XCvuY7rbV56PYBEbab5q1z6yx9Y7JuY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ni7C6X1j; arc=none smtp.client-ip=10.30.226.201
+	s=arc-20240116; t=1787355017; c=relaxed/simple;
+	bh=MdK9rRHNyWJYLFRZyYYiCTN2IYQprF7r183bLLMS4j8=;
+	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=mvrf6oaq8Ee4Imo2FQZXOXA3t80FUWya3CxAt9ccJxsKVOfKWRc2IUv3NqjGGnz5IhSwxZzQzEbAyEhTf/dnyqMi7mFiQotx2+adm650zuvJfrsY+p3/g9Ncc3PKZ8r53obXTjJycBAOfleXS9Ri+BDXYgAipv3EyDVkvgDlSL4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Jo+ZWh2I; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="ni7C6X1j"
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 0F9E5C2BCF4;
-	Fri, 21 Aug 2026 17:56:52 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1787335012;
-	bh=hL+RVHESgMeJ0wCfwfzcm4+HyeyJS/QPc7GeZ+PODik=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
-	b=ni7C6X1jNKjSKVsZu4hqf/Kz/Uii2VatU/UXsmycwdyHHNqzKNUd6j6IRatfdo4Mz
-	 gi0y+VN5jUQruv7TlR/7XUyt28x+ofF3la8NxTySI461J9UZY4ytV2PhSiq7jsszl3
-	 T8rENs5OkJ6WZHVc86+fejC30q8snl/yOuyHsEBJH7lGG4i9HPSoydTyoFRgpgNCtd
-	 08iKI5WjNmV3L0IuXO+6VD6YSA7POpN+HTuvVVSzvMGhaLfYDCAXkY34N7JT4N+VN3
-	 LBvpdnxoDBRm/r4e51x7qOsBfIHjodsWnRhnk5I6MC++zHlVc4vOwB1OIfHLiyyXGx
-	 G+MMg26cmvKFg==
-Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E1F76C5DF97;
-	Fri, 21 Aug 2026 17:56:51 +0000 (UTC)
-From: Sarath Ganapathiraju via B4 Relay <devnull+sarath.ganapathiraju.oss.qualcomm.com@kernel.org>
-Date: Fri, 21 Aug 2026 23:26:51 +0530
-Subject: [PATCH v6 2/2] clk: qcom: Add LPASS VA CSR heartbeat pulse clock
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Jo+ZWh2I"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 41C6C1F000E9;
+	Fri, 21 Aug 2026 23:30:11 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1787355015;
+	bh=Ibh9L+fRKuXLx86P55NwGkzi3Fg5cFtJydY7cjyAm4U=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References;
+	b=Jo+ZWh2IV9lEA2k8h5u9hhVtzVtqeQMYpiAwi0wYMxp9rY8L5Zm1ua8zPZU6/AfJd
+	 U5y5D+P05QhZHqjBUPUSIWd0K5UWiVwOE/6GjJSC7zNEF4lfD9n3I8ikLLTtyxQoOn
+	 +Q6+WHXCBSaqZ2hzn85nku/MM+T7cLQtKVk8j79hdKDKOFDVkdZLn9hk5FUH32AxE7
+	 1I3BaJUWZqublQzewv/De7vZ8c6QLKgdIgITgA6sSpPUyFS9N+xRPcbJb7yiCK8FDm
+	 UMfkpQAOu/RjFiLRXwEKB+QRX+scE2lOrdhPSIAo7Q0FelLBYFFxNbdlLqNH0uYaaC
+	 gQmfSVGVsY2kQ==
+Date: Sat, 22 Aug 2026 00:30:08 +0100
+From: Jonathan Cameron <jic23@kernel.org>
+To: Jishnu Prakash <jishnu.prakash@oss.qualcomm.com>
+Cc: David Lechner <dlechner@baylibre.com>, Nuno =?UTF-8?B?U8Oh?=
+ <nuno.sa@analog.com>, Andy Shevchenko <andy@kernel.org>, Rob Herring
+ <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
+ <conor+dt@kernel.org>, Amit Kucheria <amitk@kernel.org>, Thara Gopinath
+ <thara.gopinath@gmail.com>, "Rafael J. Wysocki" <rafael@kernel.org>, Daniel
+ Lezcano <daniel.lezcano@kernel.org>, Zhang Rui <rui.zhang@intel.com>,
+ Lukasz Luba <lukasz.luba@arm.com>, Bjorn Andersson <andersson@kernel.org>,
+ Konrad Dybcio <konradybcio@kernel.org>, linux-iio@vger.kernel.org,
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-arm-msm@vger.kernel.org, linux-pm@vger.kernel.org, Kamal Wadhwa
+ <kamal.wadhwa@oss.qualcomm.com>, Anjelique Melendez
+ <anjelique.melendez@oss.qualcomm.com>, Manaf Meethalavalappu Pallikunhi
+ <manaf.pallikunhi@oss.qualcomm.com>, Priyansh Jain
+ <priyansh.jain@oss.qualcomm.com>
+Subject: Re: [PATCH 2/7] iio: adc: qcom-spmi-adc5-gen3: Add support for QCOM
+ PMIC5 Gen4 ADC
+Message-ID: <20260822003008.0d13144d@jic23-huawei>
+In-Reply-To: <04990044-45b3-45ca-9e39-925d5bbe62e2@oss.qualcomm.com>
+References: <20260731-pmic5_gen4_adc-v1-0-9c49b2eea6f9@oss.qualcomm.com>
+	<20260731-pmic5_gen4_adc-v1-2-9c49b2eea6f9@oss.qualcomm.com>
+	<20260803011400.1fb6c93a@jic23-huawei>
+	<a98d90bd-aa9d-4af3-aa54-3a34300070d4@oss.qualcomm.com>
+	<20260807001822.31f7c137@jic23-huawei>
+	<f2b2f590-de3e-4f10-b883-92845f59412d@oss.qualcomm.com>
+	<20260815030830.24fc732f@jic23-huawei>
+	<04990044-45b3-45ca-9e39-925d5bbe62e2@oss.qualcomm.com>
+X-Mailer: Claws Mail 4.4.0 (GTK 3.24.52; x86_64-pc-linux-gnu)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260821-heartbeat-v6-next-20260821-send-v6-2-62c5df84ce21@oss.qualcomm.com>
-References: <20260821-heartbeat-v6-next-20260821-send-v6-0-62c5df84ce21@oss.qualcomm.com>
-In-Reply-To: <20260821-heartbeat-v6-next-20260821-send-v6-0-62c5df84ce21@oss.qualcomm.com>
-To: Bjorn Andersson <andersson@kernel.org>, Stephen Boyd <sboyd@kernel.org>, 
- Brian Masney <bmasney+clk@redhat.com>, 
- Jerome Brunet <jbrunet+clk@baylibre.com>, Rob Herring <robh@kernel.org>, 
- Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>, 
- Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
-Cc: linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org, 
- devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
- Sarath Ganapathiraju <sarath.ganapathiraju@oss.qualcomm.com>, 
- prasad.kumpatla@oss.qualcomm.com
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1787335010; l=6667;
- i=sarath.ganapathiraju@oss.qualcomm.com; s=default;
- h=from:subject:message-id;
- bh=KBDrlQEytxmwbO1eLzVG/VjEj8q1MEkayOXlhNTb7+w=;
- b=73kq1Pwc7peyUML1EphzXA7eQlbONVzDoxeYcEeS5t6Q4uy23EBZtn6Wy/rk6C2TdTRzSJDdE
- mAFADVp+gphD28cl+LSk+QulvffyRBS0kR1GaMt1bO3GRpeiQkuOX2y
-X-Developer-Key: i=sarath.ganapathiraju@oss.qualcomm.com; a=ed25519;
- pk=4p2FWGXM+F2sir13Lu5stw5aKX5trUymK/ttESvgxQg=
-X-Endpoint-Received: by B4 Relay for
- sarath.ganapathiraju@oss.qualcomm.com/default with auth_id=870
-X-Original-From: Sarath Ganapathiraju <sarath.ganapathiraju@oss.qualcomm.com>
-Reply-To: sarath.ganapathiraju@oss.qualcomm.com
 
-From: Sarath Ganapathiraju <sarath.ganapathiraju@oss.qualcomm.com>
+On Fri, 21 Aug 2026 10:24:39 +0530
+Jishnu Prakash <jishnu.prakash@oss.qualcomm.com> wrote:
 
-The HeartBeat Pulse (also known as RateGen Pulse) synchronizes the
-start of the DMAs and Codec Interfaces for the audio usecases and can
-serve as a periodic wakeup source for the DSP.
+> Hi Jonathan,
+> 
+> On 8/15/2026 7:38 AM, Jonathan Cameron wrote:
+> > On Fri, 7 Aug 2026 13:37:02 +0530
+> > Jishnu Prakash <jishnu.prakash@oss.qualcomm.com> wrote:
+> >   
+> >> Hi Jonathan,
+> >>
+> >> On 8/7/2026 4:48 AM, Jonathan Cameron wrote:  
+> >>> On Thu, 6 Aug 2026 16:22:16 +0530
+> >>> Jishnu Prakash <jishnu.prakash@oss.qualcomm.com> wrote:
+> >>>     
+> >>>> Hi Jonathan,
+> >>>>
+> >>>> On 8/3/2026 5:44 AM, Jonathan Cameron wrote:    
+> >>>>> On Fri, 31 Jul 2026 23:36:15 +0530
+> >>>>> Jishnu Prakash <jishnu.prakash@oss.qualcomm.com> wrote:
+> >>>>>       
+> >>>>>> PMIC5 Gen4 ADC is similar to PMIC5 Gen3 ADC, with several changes made
+> >>>>>> for improved performance, mostly at the hardware level.
+> >>>>>>
+> >>>>>> One significant software change is that ratiometric conversion resolution
+> >>>>>> has been increased from 14 bits to 16 bits, so the maximum value of
+> >>>>>> these measurements needs to be updated for Gen4. Add a new scaling
+> >>>>>> function for thermistor channels which use this type of conversion.
+> >>>>>>
+> >>>>>> In the latest PMIC arbiter version (v8), there can be up to 4 buses
+> >>>>>> under the PMIC arbiter and 32 PMICs under each bus. In order to
+> >>>>>> support communication between ADC on the master PMIC and ADCs on any
+> >>>>>> of the other PMICs, a field of width 2 bits is added for bus index
+> >>>>>> and the bits for SID are extended from 4 to 5 bits, in the SID
+> >>>>>> register. Add support for this.
+> >>>>>>
+> >>>>>> In addition, it is possible that the master PMIC has ADC of one generation
+> >>>>>> and it needs to communicate with another PMIC with ADC of a different
+> >>>>>> generation.      
+> >>>>>
+> >>>>> "Possible" sounds a bit hypothetical.  Can we state this actually happens
+> >>>>> on some devices?      
+> >>>>
+> >>>> Considering existing upstream platforms, this is applicable for SM8750. I'll
+> >>>> mention this in the next version of the series.    
+> >>>
+> >>> What happens on that platform today?  Wrong values?  Should this be treated
+> >>> as a fix rather than a feature?     
+> >>
+> >> There is no issue on that platform right now as ADC channels needing this
+> >> support are not added yet. SM8750 board files only include pmk8550.dtsi, which
+> >> has the top-level Gen3 ADC peripheral and some ADC channels on the same PMIC.
+> >> Gen4 support would be needed only when PMIH0108 ADC channels are added.  
+> > 
+> > I guess chances of anyone running an older kernel that the device tree on
+> > that device is low as other critical stuff won't be supported?
+> > 
+> > If there is something easy to point to for that, add a note to the patch
+> > description as it justifies this not being a fix.
+> >   
+> 
+> Sorry, I did not fully understand your concern here. Are you asking if
+> SM8750 runs on any older kernels and the lack of Gen4 ADC support may be an
+> issue there?
+> This would not happen - let me try explaining with some more details.
+> 
+> DT support for SM8750 has been present since kernel version 6.14. At that
+> time, it included pmk8550.dtsi, but this file did not have an ADC peripheral
+> at the time.
+> 
+> The Gen3 ADC peripheral was added in pmk8550.dtsi very recently in this series
+> from Neil Armstrong: https://lore.kernel.org/all/20260721-topic-sm8x50-adc5-gen3-v6-0-a507f4a1e537@linaro.org/,
+> and I see this series is present only in linux-next right now.
+> 
+> With this change applied, the ADC peripheral with 3 channels of
+> PMK8550 alone (which is Gen3) would appear for SM8750. This
+> would work as its functionality is fully supported by the existing
+> Gen3 driver.
+> 
+> Gen4 support is needed only when we add full ADC support for SM8750,
+> meaning when we add channels under all its other PMICs (PMIH0108
+> specifically as it's Gen4.).
+> 
+> Would it work if I mention in the commit message that SM8750, added from
+> kernel 6.14 without ADC support initially, would need this mixed-generation
+> support, but only once we add the full ADC support (for all its PMICs)?
 
-Add the LPASS VA CSR driver that models the rate generator as a clock
-provider so it is enabled and disabled automatically alongside the other
-clocks during runtime PM resume and suspend.
+In the ideal world we would assume no coupling between device tree seen
+on a board and the kernel with which a device tree was pushed out.  For
+many devices the delivery path is independent.
 
-Signed-off-by: Sarath Ganapathiraju <sarath.ganapathiraju@oss.qualcomm.com>
----
- drivers/clk/qcom/Kconfig        |  14 ++++
- drivers/clk/qcom/Makefile       |   1 +
- drivers/clk/qcom/lpass-va-csr.c | 148 ++++++++++++++++++++++++++++++++++++++++
- 3 files changed, 163 insertions(+)
+As such we might well see a dt with the new property and a kernel that
+predates it's introduction.  If there is another reason such a kernel
+will simply not boot on that board, then that would be a valid argument
+why we can skip striving for the ideal.  Similarly if the driver
+would not bind for some other reason.  If either of those is the case then
+add a comment to the patch to say so.
 
-diff --git a/drivers/clk/qcom/Kconfig b/drivers/clk/qcom/Kconfig
-index e609a7819e07..502acd86efd6 100644
---- a/drivers/clk/qcom/Kconfig
-+++ b/drivers/clk/qcom/Kconfig
-@@ -2105,6 +2105,20 @@ config CLK_GFM_LPASS_SM8250
- 	  Support for the Glitch Free Mux (GFM) Low power audio
-           subsystem (LPASS) clocks found on SM8250 SoCs.
- 
-+config QCOM_CLK_LPASS_HEARTBEAT_PULSE
-+	tristate "Qualcomm LPASS VA CSR heartbeat pulse clock provider"
-+	depends on COMMON_CLK
-+	depends on ARM64 || COMPILE_TEST
-+	select REGMAP_MMIO
-+	default m if ARCH_QCOM
-+	help
-+	  Qualcomm LPASS VA CSR block contains the rate generator hardware
-+	  that produces the HeartBeat Pulse (also known as RateGen Pulse).
-+	  This driver models the rate generator as a clock provider so
-+	  that consumers can enable or disable it via the common clock
-+	  framework, and it can be used to synchronize the start of DMAs
-+	  and Codec Interfaces or as a periodic wakeup source for the DSP.
-+
- config SM_VIDEOCC_8450
- 	tristate "SM8450 Video Clock Controller"
- 	depends on ARM64 || COMPILE_TEST
-diff --git a/drivers/clk/qcom/Makefile b/drivers/clk/qcom/Makefile
-index b8590963736a..3f6a52cc7ec7 100644
---- a/drivers/clk/qcom/Makefile
-+++ b/drivers/clk/qcom/Makefile
-@@ -28,6 +28,7 @@ obj-$(CONFIG_CLK_ELIZA_GPUCC) += gpucc-eliza.o
- obj-$(CONFIG_CLK_ELIZA_TCSRCC) += tcsrcc-eliza.o
- obj-$(CONFIG_CLK_ELIZA_VIDEOCC) += videocc-eliza.o
- obj-$(CONFIG_CLK_GFM_LPASS_SM8250) += lpass-gfm-sm8250.o
-+obj-$(CONFIG_QCOM_CLK_LPASS_HEARTBEAT_PULSE) += lpass-va-csr.o
- obj-$(CONFIG_CLK_GLYMUR_CAMCC) += camcc-glymur.o
- obj-$(CONFIG_CLK_GLYMUR_DISPCC) += dispcc-glymur.o
- obj-$(CONFIG_CLK_GLYMUR_EVACC) += evacc-glymur.o
-diff --git a/drivers/clk/qcom/lpass-va-csr.c b/drivers/clk/qcom/lpass-va-csr.c
-new file mode 100644
-index 000000000000..8438d000814e
---- /dev/null
-+++ b/drivers/clk/qcom/lpass-va-csr.c
-@@ -0,0 +1,148 @@
-+// SPDX-License-Identifier: GPL-2.0-only
-+/*
-+ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
-+ */
-+
-+#include <linux/clk-provider.h>
-+#include <linux/device.h>
-+#include <linux/module.h>
-+#include <linux/of_clk.h>
-+#include <linux/platform_device.h>
-+#include <linux/pm_runtime.h>
-+#include <linux/regmap.h>
-+
-+#define LPASS_RATE_GEN_CTRL		0xd000
-+#define LPASS_RATE_GEN_COUNTER_0	0xd004
-+#define LPASS_RATE_GEN_DELAY		0xd010
-+
-+#define LPASS_RATE_GEN_MAX_REG		LPASS_RATE_GEN_DELAY
-+
-+#define LPASS_RG_CTRL_EN		BIT(0)
-+
-+struct lpass_va_csr_data {
-+	u32 counter_0;
-+	u32 delay;
-+};
-+
-+static const struct lpass_va_csr_data hawi_csr_data = {
-+	.counter_0 = 0x960,
-+	.delay = 0x16,
-+};
-+
-+static const struct regmap_config lpass_rate_gen_regmap_config = {
-+	.name = "lpass_rate_gen",
-+	.reg_bits = 32,
-+	.val_bits = 32,
-+	.reg_stride = 4,
-+	.max_register = LPASS_RATE_GEN_MAX_REG,
-+	.cache_type = REGCACHE_MAPLE,
-+};
-+
-+struct lpass_va_csr {
-+	struct regmap *regmap;
-+	const struct lpass_va_csr_data *data;
-+	struct clk_hw hb_hw;
-+};
-+
-+#define to_lpass_va_csr(_hw) container_of(_hw, struct lpass_va_csr, hb_hw)
-+
-+static int heartbeat_pulse_prepare(struct clk_hw *hw)
-+{
-+	struct lpass_va_csr *csr = to_lpass_va_csr(hw);
-+	int ret;
-+
-+	ret = regmap_write(csr->regmap, LPASS_RATE_GEN_COUNTER_0, csr->data->counter_0);
-+	if (ret)
-+		return ret;
-+
-+	ret = regmap_write(csr->regmap, LPASS_RATE_GEN_DELAY, csr->data->delay);
-+	if (ret)
-+		return ret;
-+
-+	return regmap_set_bits(csr->regmap, LPASS_RATE_GEN_CTRL, LPASS_RG_CTRL_EN);
-+}
-+
-+static void heartbeat_pulse_unprepare(struct clk_hw *hw)
-+{
-+	struct lpass_va_csr *csr = to_lpass_va_csr(hw);
-+
-+	regmap_clear_bits(csr->regmap, LPASS_RATE_GEN_CTRL, LPASS_RG_CTRL_EN);
-+}
-+
-+static int heartbeat_pulse_is_prepared(struct clk_hw *hw)
-+{
-+	struct lpass_va_csr *csr = to_lpass_va_csr(hw);
-+
-+	return regmap_test_bits(csr->regmap, LPASS_RATE_GEN_CTRL, LPASS_RG_CTRL_EN);
-+}
-+
-+static const struct clk_ops heartbeat_pulse_ops = {
-+	.prepare = heartbeat_pulse_prepare,
-+	.unprepare = heartbeat_pulse_unprepare,
-+	.is_prepared = heartbeat_pulse_is_prepared,
-+};
-+
-+static int lpass_va_csr_probe(struct platform_device *pdev)
-+{
-+	struct device *dev = &pdev->dev;
-+	struct lpass_va_csr *csr;
-+	struct clk_init_data init = {
-+		.name = "lpass_heartbeat_pulse",
-+		.ops = &heartbeat_pulse_ops,
-+	};
-+	void __iomem *base;
-+	int ret;
-+
-+	csr = devm_kzalloc(dev, sizeof(*csr), GFP_KERNEL);
-+	if (!csr)
-+		return -ENOMEM;
-+
-+	csr->data = of_device_get_match_data(dev);
-+	if (!csr->data)
-+		return dev_err_probe(dev, -EINVAL, "no variant data for compatible\n");
-+
-+	base = devm_platform_ioremap_resource(pdev, 0);
-+	if (IS_ERR(base))
-+		return PTR_ERR(base);
-+
-+	csr->regmap = devm_regmap_init_mmio(dev, base,
-+					    &lpass_rate_gen_regmap_config);
-+	if (IS_ERR(csr->regmap))
-+		return dev_err_probe(dev, PTR_ERR(csr->regmap),
-+				     "failed to init regmap\n");
-+
-+	csr->hb_hw.init = &init;
-+
-+	ret = devm_pm_runtime_enable(dev);
-+	if (ret)
-+		return dev_err_probe(dev, ret, "failed to enable PM runtime\n");
-+
-+	ret = devm_clk_hw_register(dev, &csr->hb_hw);
-+	if (ret)
-+		return dev_err_probe(dev, ret, "failed to register heartbeat clock\n");
-+
-+	ret = devm_of_clk_add_hw_provider(dev, of_clk_hw_simple_get, &csr->hb_hw);
-+	if (ret)
-+		return dev_err_probe(dev, ret, "failed to add clock provider\n");
-+
-+	return 0;
-+}
-+
-+static const struct of_device_id lpass_va_csr_dt_match[] = {
-+	{ .compatible = "qcom,hawi-lpass-va-csr", .data = &hawi_csr_data },
-+	{}
-+};
-+MODULE_DEVICE_TABLE(of, lpass_va_csr_dt_match);
-+
-+static struct platform_driver lpass_va_csr_driver = {
-+	.driver = {
-+		.name = "qcom-lpass-va-csr",
-+		.of_match_table = lpass_va_csr_dt_match,
-+	},
-+	.probe = lpass_va_csr_probe,
-+};
-+
-+module_platform_driver(lpass_va_csr_driver);
-+
-+MODULE_DESCRIPTION("Qualcomm LPASS VA CSR heartbeat pulse clock provider");
-+MODULE_LICENSE("GPL");
+Otherwise, I'd like to see the extra property dt patch (arguably a fix
+but not critical to mark it as such) + a patch for the driver support
+for the new property (also arguably a fix).
 
--- 
-2.34.1
+That would cover the older driver and decision on whether to backport
+that could then be made (or left to downstream users).
 
+On top of that then build the new compatible support.
+
+Superficially this looks to me like a bit of minor patch reorg so
+I think it is worth doing even if we don't expect to ever run into the
+theoretical problems form a miss match!
+
+Thanks
+
+Jonathan
+
+> 
+> Thanks,
+> Jishnu
+> 
+> 
+> > Thanks,
+> > 
+> > Jonathan  
+> 
 
