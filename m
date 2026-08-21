@@ -1,204 +1,189 @@
-Received: from relay.yourmailgateway.de (relay.yourmailgateway.de [188.68.63.102])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0DC8341169B;
-	Fri, 21 Aug 2026 06:36:03 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=188.68.63.102
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A11B02E542C
+	for <linux-arm-msm@vger.kernel.org>; Fri, 21 Aug 2026 06:36:29 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787294170; cv=none; b=dumhqS1V5KeOAZLYMMSyo56mk9MUWKfDUQL8BNVAFP+bFqMJQv4KwwZ9Z6qpGvzgym2AVQUe9cotBmnva7yOLkS7fQNz+c3//sVxUnC90pqNlLUWx150qP157arsdfdFNDr0BAsk37EF94fn1l3u+ShNtGeYocQDLZm2m6dERQs=
+	t=1787294191; cv=none; b=nLad5+C1dvf5r6jiaSO/rK2B2mZMKz9q9rEgBlvEhzJnA0j4qlPh/s7pNFLU1B1yGXxOubaOECWPrazYVKutyZHQ9w0ofq9EiE+r47vh11WlrTwFMyFqdGfLjYmaAQvqmhSPsj6iZTY+iM4dPKmmAL69tFb/OXoHnypdWowO5Ps=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787294170; c=relaxed/simple;
-	bh=fWzhvxr4a/sLeJPe/1v2NF5fNebBN1hiMDIf/zflUEI=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=WZQ9X5KlpQi2awd4+XQxyiO7RnAN0sJ2RUt+bumQOuSmownwCWVEEzCOP5KKhzRzvtpSuaL/nwng2RR6zjlDMqbI8WG2IE2WeocCkhzdxz+IFF/GV2dlyyboMdfiN8CSnpGabZPjgSOp5oaDdQL0lKFwNNLRCDqI/SblD30oFyQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=leemhuis.info; spf=pass smtp.mailfrom=leemhuis.info; dkim=pass (2048-bit key) header.d=leemhuis.info header.i=@leemhuis.info header.b=Kv6D9hrV; arc=none smtp.client-ip=188.68.63.102
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=leemhuis.info
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=leemhuis.info
+	s=arc-20240116; t=1787294191; c=relaxed/simple;
+	bh=RarZbGpulP8iV7HiNc1e4BVeYUoDq7GNGkKAv4Gu4Vw=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=fJg9vFvUM4S8lxHQF1SwIPkmIMFk650i2qyeg3an9VuNXBrO4lGyzXhmTd1uJJNxGbln76ivY3QxlgKBG2UsFpnt4Jk1mL7WVJzkbXILLk6aQmUihx9C/9/865C5tj0WMjSPEWxQrBx9Wq43q7DKcchjuaPAtB/oHt369i5vxV8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=MI3F+Er9; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=D+s3MCbG; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=leemhuis.info header.i=@leemhuis.info header.b="Kv6D9hrV"
-Received: from mors-relay-2502.netcup.net (localhost [127.0.0.1])
-	by mors-relay-2502.netcup.net (Postfix) with ESMTPS id 4hR9Wz1T2Wz69S2;
-	Fri, 21 Aug 2026 08:34:39 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=leemhuis.info;
-	s=key2; t=1787294079;
-	bh=fWzhvxr4a/sLeJPe/1v2NF5fNebBN1hiMDIf/zflUEI=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
-	b=Kv6D9hrVcE3tlzweEpaFeqbL12Wunuz7tbgpAiOGwkkpguPK3N6sioxGtcdEQWd40
-	 B4ofRsI6L/U8vXmHbyoqfY8Z81YThU+CDMslPhFs+UJn+xGYbz+Saiz0osxpGRoZZ9
-	 40XBfZ7FSehAGA5+8KASM/+9jW6cQGUy7muhgTV1eKA4alMPEJ9tRjyuNy8gMkPO6A
-	 OpikIkqiQcKNkMKllvqYnBLBkZYfvZ9kqMB0JeuHM2hDeCde6wfTz9QAUFzU3n67AG
-	 IOoJRe9RM1P4icGUKh/885jgANtqszshPnR8i1E0VI9w42eEWxAUhpNdITLsOzONjB
-	 ElOBd6VNT5OHQ==
-Received: from policy02-mors.netcup.net (unknown [46.38.225.35])
-	by mors-relay-2502.netcup.net (Postfix) with ESMTPS id 4hR9VV6CK4z4yWc;
-	Fri, 21 Aug 2026 08:33:22 +0200 (CEST)
-Received: from mxe9fb.netcup.net (unknown [10.243.12.53])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange ECDHE (P-256) server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by policy02-mors.netcup.net (Postfix) with ESMTPS id 4hR9VT3rfvz8sch;
-	Fri, 21 Aug 2026 08:33:21 +0200 (CEST)
-Received: from [IPV6:2a02:8108:8984:1d00:a0cf:1912:4be:477f] (unknown [IPv6:2a02:8108:8984:1d00:a0cf:1912:4be:477f])
-	by mxe9fb.netcup.net (Postfix) with ESMTPSA id 7B9D35F9C0;
-	Fri, 21 Aug 2026 08:33:20 +0200 (CEST)
-Authentication-Results: mxe9fb;
-        spf=pass (sender IP is 2a02:8108:8984:1d00:a0cf:1912:4be:477f) smtp.mailfrom=regressions@leemhuis.info smtp.helo=[IPV6:2a02:8108:8984:1d00:a0cf:1912:4be:477f]
-Received-SPF: pass (mxe9fb: connection is authenticated)
-Message-ID: <943d1db3-f117-4e9c-94db-7221b47d9d29@leemhuis.info>
-Date: Fri, 21 Aug 2026 08:33:19 +0200
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="MI3F+Er9";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="D+s3MCbG"
+Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67L5TlZJ260380
+	for <linux-arm-msm@vger.kernel.org>; Fri, 21 Aug 2026 06:36:28 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=nw/gwSZ4M1MHXOm0XJl8hc
+	tK4ZwNsRl6X/FHG6JCAJY=; b=MI3F+Er9HkoH6+vXweySeufmoZGx4eNlqjsVpb
+	el3519L/k9RsZHK7hjDjJ2BkImpyEszTm+u8xNOsOr4aq889AKdJRunMuQ/kpGMZ
+	LaywodGKO1gIjJndXOpD002xORaCV1ONRWBQTA52F/1v2sZO3iKyXrPOAzm4BqTH
+	VhRree8KICDusDgVqACQF+HVR5q/83Uju+Z0ZRpLU3ilGXT1Q3H+1lKviS2c6gF4
+	wmNZ6tjFTiH1Q4He0q3KpRTKGaasDuQVq4IYC1ghTMc7np7oHMX2HV3t8IXROd4D
+	NtBphWYspfznjOGbCuCs7StPbVgIbCVim+jzfXjHhWcjoKjg==
+Received: from mail-pj1-f72.google.com (mail-pj1-f72.google.com [209.85.216.72])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g6eburkue-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 21 Aug 2026 06:36:28 +0000 (GMT)
+Received: by mail-pj1-f72.google.com with SMTP id 98e67ed59e1d1-38e54b6556aso763523a91.2
+        for <linux-arm-msm@vger.kernel.org>; Thu, 20 Aug 2026 23:36:28 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1787294187; x=1787898987; darn=vger.kernel.org;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=nw/gwSZ4M1MHXOm0XJl8hctK4ZwNsRl6X/FHG6JCAJY=;
+        b=D+s3MCbGa3Vh50GNsnzouUdjnds0DX0z1Dc6DrTN+akXATrjdNDeSTCNveBViATHlK
+         u7BeV4ETnaSJM+//TJIzyXNiOd1dTnfPrC6/Ltkoiz1tyUsqYf0b8SxZVSsf1F3c8ZOm
+         obryEVb/kwXE/m+a/pSA9XvPgBvuGHVMFA8bLf1xX37iAkKBxTOX9MIrPWetPfM3agAi
+         cf+VcGKBkmwGQmly19k7NZoao9/7YYABvy7uj7YwGJ1Xr4PLlk5H/+/wKtxLDZmmM6K7
+         Y5WP5Fibn5lVuvvRnWBUble21M0mUTFLzXgvAcQEU4GQak0hJv+v56tz5zOJuN7SZVf+
+         FDcA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1787294187; x=1787898987;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=nw/gwSZ4M1MHXOm0XJl8hctK4ZwNsRl6X/FHG6JCAJY=;
+        b=gR2Ibu7PKQDBAORJG/MJ+T7wZnIU6fXRX/8xvZRmFhjXPQdw3+WfoIlg/sY9iScKAp
+         pnD36krDCrr9fbZHnqzq6Av/GMfk6xRHCPNBD8IbHpE+UmdVaVrinhfssUfbDUcavpCQ
+         juKALRGcRxmTeswRBWlThz75JKMwzsNLcxuuKevPBJJROLs2aR22yWVboiicjpc9SKE7
+         vpS807pCtGXlcm0B0/q/4kcMm2mZhA8TSVBO+/AN+dOPfd9PjR83EYDOtE5FTJDj2IVx
+         KE2/jHZr4FPrqLKTiVvEV8lsOB1eNyAouhxp7CjqMaQ19NpeuCUg1L4z79PA60/xaRwf
+         vWNg==
+X-Gm-Message-State: AFuF++lJwC1DGPkFpRFH1sgT/QeFaDy3Ksgrw6qa7jYP8NhDBFee4ew1
+	j1zODm4W2zc4/e4dDVrM1If6YW/G3QHyd0Dlh+IW5mWDpDveFlIyB5hjpnXLtTbIrxxBMseqOxX
+	Ud7KL82V0LcuhFa4pb63zYzdO1WXek7j6WdbgDg2kORiIC469GQCGPZdPQIXIahjyBVG6
+X-Gm-Gg: AR+sD10xx2GjMtXM6NCbCohc+LSEAgEpaRsQDwhinq/8hhsRAxxe2CpMHgdWY4SSqei
+	Ht1DvQK/8Dn7oJRprPq13LAo5cHF/RJYd6/+RthLir46gbV0DP2ia2uHcE6hOZhvy+LaKsTK2YD
+	LFF8GNRzu+/t2ka+aPlQNWN381vTLz1avG5DyHrkV1rDaXePjsu1iks1To3DvyLgmU7A2ZTQaXQ
+	1j2apF03Lvxzc8VAqznQR3Kqaco1qO8TKxFXVjcyhehFmeYLRB5bpkXrBQAQFcStMwHRLZJaeZl
+	aL+KRaU+2UIBrivBPl8R4RawvBmP1hixe5Muzoc0fhBY7ug+ndj4LPqU958ZAembOGPrqaSdIMT
+	2lRIMJhIbh+PeJNymvkXmaARfxNZ6ayFsQBte
+X-Received: by 2002:a17:90b:2f0d:b0:381:cef1:11ac with SMTP id 98e67ed59e1d1-395c3561a6dmr7864177a91.10.1787294187453;
+        Thu, 20 Aug 2026 23:36:27 -0700 (PDT)
+X-Received: by 2002:a17:90b:2f0d:b0:381:cef1:11ac with SMTP id 98e67ed59e1d1-395c3561a6dmr7864080a91.10.1787294186885;
+        Thu, 20 Aug 2026 23:36:26 -0700 (PDT)
+Received: from hu-vdadhani-hyd.qualcomm.com ([202.46.23.25])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-395c4c3da9csm1787377a91.17.2026.08.20.23.36.23
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 20 Aug 2026 23:36:26 -0700 (PDT)
+From: Viken Dadhaniya <viken.dadhaniya@oss.qualcomm.com>
+Subject: [PATCH v3 0/4] Fix endian, overflow, and write-protection bugs in
+ SE firmware loading
+Date: Fri, 21 Aug 2026 12:06:16 +0530
+Message-Id: <20260821-fix-write-to-read-only-firmware-buffer-v3-0-43e6a3abd651@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [REGRESSION] qcom PAS TZ API migration breaks GPU and modem on
- TrustZone without PAS (sc7180 trogdor)
-To: Konrad Dybcio <konradybcio@gmail.com>,
- Paul Hollinsky <phollinsky@holtechnik.com>, sumit.garg@oss.qualcomm.com,
- andersson@kernel.org
-Cc: mathieu.poirier@linaro.org, robin.clark@oss.qualcomm.com,
- lumag@kernel.org, abhinav.kumar@linux.dev, akhilpo@oss.qualcomm.com,
- konradybcio@kernel.org, mukesh.ojha@oss.qualcomm.com,
- cros-qcom-dts-watchers@chromium.org, linux-arm-msm@vger.kernel.org,
- linux-remoteproc@vger.kernel.org, dri-devel@lists.freedesktop.org,
- freedreno@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- regressions@lists.linux.dev
-References: <20260808034716.58888-1-phollinsky@holtechnik.com>
- <b63e93e4-2f4c-4cad-b726-e1b0565379d7@gmail.com>
-From: Thorsten Leemhuis <regressions@leemhuis.info>
-Content-Language: de-DE, en-US
-In-Reply-To: <b63e93e4-2f4c-4cad-b726-e1b0565379d7@gmail.com>
-Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-PPP-Message-ID: <178729400123.2293361.5180616562923228567@mxe9fb.netcup.net>
-X-NC-CID: mdasp+gq17ABdqs7sDaa4dURyEqNXzgIFUK85nSdbZpvVCs/raw=
+X-B4-Tracking: v=1; b=H4sIAODxh2oC/5WOuw7CMAxFfwVlxiiPlhYm/gMxpKkDQW0DTh9UV
+ f+dFBYGBlgsXev6HE8sIDkMbL+aGGHvgvNNDGq9YuaimzOCK2Nmksstz8UOrHvAQK5FaD0Q6hJ
+ 8U41xTfWgCaHorEUCtTM6y1WCSnAWYTfCePkSHU/vHLriiqZd6Evj4kLraXx90oul97e0FyCgw
+ HybKmlRSHnwIWzuna6Mr+tNHGxx9/KDLvnPdAkcskKXpjRJmlr8Qp/n+Qlh0HY8UwEAAA==
+X-Change-ID: 20260819-fix-write-to-read-only-firmware-buffer-39ca7834e310
+To: Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        Viken Dadhaniya <viken.dadhaniya@oss.qualcomm.com>,
+        Mukesh Kumar Savaliya <mukesh.savaliya@oss.qualcomm.com>
+Cc: linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
+        stable@vger.kernel.org, Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+X-Mailer: b4 0.16-dev
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1787294183; l=2404;
+ i=viken.dadhaniya@oss.qualcomm.com; s=20260324; h=from:subject:message-id;
+ bh=RarZbGpulP8iV7HiNc1e4BVeYUoDq7GNGkKAv4Gu4Vw=;
+ b=qVUEzVCiq/n88Tx/BazI3OYeazxJzggN8i3hyd9CesvYT3ZV/0yoGVlF71ZW+EKUljXvcoKp2
+ zI7VRufskAoCe4sl3U9FHbeKIfa8r3ScfZdHKMdopBJY9d9PZcn2cTb
+X-Developer-Key: i=viken.dadhaniya@oss.qualcomm.com; a=ed25519;
+ pk=C39f+LOIGhh/02LQpT46TsUSXRvBn9qXC8Xb26KJ44Y=
+X-Proofpoint-GUID: 2hOVHP5oHXNxDqra8a5t6w4ef7ZrEz3o
+X-Proofpoint-ORIG-GUID: 2hOVHP5oHXNxDqra8a5t6w4ef7ZrEz3o
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODIxMDA0NiBTYWx0ZWRfXwVA5LgxwW6NR
+ ef+uodoHFpUQpxT/SceFlUO9N3/UprUpjqHFZkRk6GBF+O+DjwtIgRBhCSsezR5EX9yXmoJJfgs
+ A8bgr+FaeR+zffw3ctDMY9M4ZjrdLD8=
+X-Authority-Analysis: v=2.4 cv=QJlYgALL c=1 sm=1 tr=0 ts=6a87f1ec cx=c_pps
+ a=RP+M6JBNLl+fLTcSJhASfg==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
+ a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_glEPmIy2e8OvE2BGh3C:22
+ a=bC-a23v3AAAA:8 a=EUspDBNiAAAA:8 a=XQMRRsFmXZ0RbJubXJcA:9 a=QEXdDO2ut3YA:10
+ a=iS9zxrgQBfv6-_F4QbHw:22 a=FO4_E8m0qiDe52t0p3_H:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODIxMDA0NiBTYWx0ZWRfXz9S93f/+exSO
+ Qe9f1aCaClxbG6H4z1PKPCP4nJig0NPW/JXZTP4m0GEEDZy56Yy2+Swk4jIn+mv2AShP8TH0LRL
+ iTKOZrA2/yrwbxUWpVsJztL94CsduqVH9ImoD64N60ax1aJrEb0zjy4kRl4/66xEnN5c87/oUTd
+ iNSVCgML9Cnk1rxx0halpLCinjFUXl0cANRR9OqVdGqm763m3wWaXMfGkWLuf4QtgJyooOIiuWq
+ bMOAooJxG+/Qnpg+FULyYgOmRVxmoE7cshjLM4ZAMrMG1L9o5nVEX1BgOZoV4yl2RjzpFTex+Lp
+ wOmKIZeARrQbWMGFE5+rovyS4ZGjJMrRxztzfs1FQ/Z74OF9pEKBZOaelwSNBZJNYDOJU2QPAfx
+ 26TQFN4ui7zyqKDVeLAapsare5riOgQy8pB9AQjZOzg7r/wdWMJW4Dl4LvUJv7/59VdfBKHVPRn
+ 8YnVjCgk+pp2TD1dtBQ==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-08-21_02,2026-08-20_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ adultscore=0 bulkscore=0 suspectscore=0 impostorscore=0 clxscore=1015
+ priorityscore=1501 spamscore=0 lowpriorityscore=0 phishscore=0 malwarescore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608210046
 
-On 8/17/26 17:41, Konrad Dybcio wrote:
-> On 8/8/26 5:47 AM, Paul Hollinsky wrote:
->> Two commits from the "firmware: qcom: Add OP-TEE PAS service support"
->> series break the GPU and the modem on SC7180 Chromebooks (trogdor):
->>
->>   f3b1357673dd ("remoteproc: qcom_q6v5_mss: Switch to generic PAS TZ APIs")
->>   0be72be03ca7 ("drm/msm: Switch to generic PAS TZ APIs")
->>
->> Both are in linux-next as of next-20260805 and neither is in a released
->> kernel yet, so there is still time to fix this before v7.3.
-> 
-> First of all, thank you for the amazingly thorough write-up. I've been on
-> holiday so I couldn't look into it quicker.
-> 
-> [...]
-> 
->> Suggested fix, drm/msm
->> ======================
->>
->> Given the above, I think the right fix is to move the availability check
->> behind the DT discovery rather than restore the SCM check. Boards with no
->> zap-shader node then never consult PAS at all, and boards that do have one
->> keep the qcom_pas_is_available() gate the original patch was going for:
->>
->> --- a/drivers/gpu/drm/msm/adreno/adreno_gpu.c
->> +++ b/drivers/gpu/drm/msm/adreno/adreno_gpu.c
->> @@ -52,6 +52,12 @@
->>  		return -ENODEV;
->>  	}
->>  
->> +	/* We need PAS to be able to load the firmware */
->> +	if (!qcom_pas_is_available()) {
->> +		DRM_DEV_ERROR(dev, "PAS is not available\n");
->> +		return -EPROBE_DEFER;
->> +	}
->> +
->>  	ret = of_reserved_mem_region_to_resource(np, 0, &r);
->>  	if (ret) {
->>  		zap_available = false;
->> @@ -170,18 +176,11 @@
->>  int adreno_zap_shader_load(struct msm_gpu *gpu, u32 pasid)
->>  {
->>  	struct adreno_gpu *adreno_gpu = to_adreno_gpu(gpu);
->> -	struct platform_device *pdev = gpu->pdev;
->>  
->>  	/* Short cut if we determine the zap shader isn't available/needed */
->>  	if (!zap_available)
->>  		return -ENODEV;
->>  
->> -	/* We need PAS to be able to load the firmware */
->> -	if (!qcom_pas_is_available()) {
->> -		DRM_DEV_ERROR(&pdev->dev, "PAS is not available\n");
->> -		return -EPROBE_DEFER;
->> -	}
->> -
->>  	return zap_shader_load_mdt(gpu, adreno_gpu->info->zapfw, pasid);
->>  }
-> 
-> I believe this is the right fix
+This series fixes four issues in geni_find_protocol_fw() and
+geni_load_se_fw(), all introduced by commit d4bf06592ad6 ("soc: qcom:
+geni-se: Add support to load QUP SE Firmware via Linux subsystem").
 
-Just wondering: who will submit the proper fix to ideally fix this
-before the culprit hits mainline (as Linus afaik does not like it much
-if changes that are know to cause regressions in -next enter his tree)
--- or at least before -rc1 is out?
+The most critical issue (patch 4/4) causes a level-3 permission fault
+and crashes the kernel during QUP firmware load on CentOS; writing through
+a non-const cast into a read-only firmware mapping is undefined behavior
+regardless of whether the fault is raised.
 
-The culprit afaics was authored by Sumit Garg, whose last msg on Lore is
-from 260731 -- which indicates a well deserved vacation or something
-like that, so waiting for Sumit to act might take too long.
+The remaining three patches fix related issues that were uncovered while
+addressing the above:
 
-Ciao, Thorsten
->> I have this booting here: the GPU initialises and logs "Zap shader not
->> enabled - using SECVID_TRUST_CNTL instead", as it did before the
->> regression.
->>
->>
->> Suggested fix, remoteproc
->> =========================
->>
->> Keep an SCM gate for need_mem_protection and add a separate PAS gate for
->> need_pas_mem_setup. This is what I did to get it working:
->>
->> --- a/drivers/remoteproc/qcom_q6v5_mss.c
->> +++ b/drivers/remoteproc/qcom_q6v5_mss.c
->> @@ -2079,7 +2079,16 @@ static int q6v5_probe(struct platform_device *pdev)
->>  	if (!desc)
->>  		return -EINVAL;
->>  
->> -	if (desc->need_mem_protection && !qcom_pas_is_available())
->> +	/*
->> +	 * Memory protection is done through qcom_scm_assign_mem(), which needs
->> +	 * SCM but not PAS. Only the memory setup path issues PAS calls, so
->> +	 * requiring PAS for every need_mem_protection platform prevents the
->> +	 * modem from probing at all on TZ firmware that offers no PAS.
->> +	 */
->> +	if (desc->need_mem_protection && !qcom_scm_is_available())
->> +		return -EPROBE_DEFER;
->> +
->> +	if (desc->need_pas_mem_setup && !qcom_pas_is_available())
->>  		return -EPROBE_DEFER;
-> 
-> And likewise this looks like the correct fix too, feel free to submit
-> both as patches
-> 
-> [...]
-> 
->> On the API contract
->> ===================
->>
->> For what it is worth, the kernel-doc for qcom_pas_is_available()
->> (qcom_pas.c:256) reads:
->>
->>   Note that it is mandatory for any PAS client to invoke this API.
->>   If it returns true then only any other PAS API can be invoked.
->>
->> That is a guard to call before invoking a PAS API, not a statement that a
->> driver touching TZ at all should refuse to probe without PAS.
->> ipa_main.c:764 consults it only on the loader path that genuinely needs
->> PAS rather than as a blanket probe precondition, which is the shape both
->> fixes above are aiming for.
-> 
-> This is a sloppiness that got through the transition patchset.. previously
-> as you mentioned, qcom_scm_is_available() was a blanket "can we talk to TZ
-> yet"?, and as the conversion happened, it was largely just find-and-replaced..
-> 
-> Konrad
-> 
+- The fw_end bounds check was computed from the unrounded fw_size,
+  allowing an odd-word-count segment to pass validation but trigger an
+  out-of-bounds read during the subsequent memcpy_toio() (patch 3/4).
+
+- fw_size was stored as u16; incrementing 0xffff silently wraps to 0,
+  bypassing the MAX_GENI_CFG_RAMn_CNT check and permitting an
+  arbitrarily large copy into SE RAM (patch 2/4).
+
+- serial_protocol is __le16 but was decoded with le32_to_cpu(), causing
+  the protocol match to always fail on big-endian systems and preventing
+  any firmware from loading (patch 1/4).
+
+---
+Changes in v3:
+- Replace "the previous commit" with a self-contained reference to
+  geni_find_protocol_fw() to avoid ordering assumptions
+- Add Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+- Link to v2: https://patch.msgid.link/20260820-fix-write-to-read-only-firmware-buffer-v2-0-7badcdc455fe@oss.qualcomm.com
+
+Changes in v2:
+- Split into four atomic patches (one fix per commit) for easier review and bisection.
+- Link to v1: https://patch.msgid.link/20260819-fix-write-to-read-only-firmware-buffer-v1-1-be86532fe122@oss.qualcomm.com
+
+---
+Viken Dadhaniya (4):
+      soc: qcom: geni-se: Fix endian conversion for serial_protocol comparison
+      soc: qcom: geni-se: Widen fw_size to u32 to prevent wrap-around
+      soc: qcom: geni-se: Fix fw_end computed before round-up; propagate size to caller
+      soc: qcom: geni-se: Fix write to read-only firmware buffer
+
+ drivers/soc/qcom/qcom-geni-se.c | 45 ++++++++++++++++++++++-------------------
+ 1 file changed, 24 insertions(+), 21 deletions(-)
+---
+base-commit: e6664f2b33db9b6811eb4cec109f06cb2b4f458d
+change-id: 20260819-fix-write-to-read-only-firmware-buffer-39ca7834e310
+
+Best regards,
+--  
+Viken Dadhaniya <viken.dadhaniya@oss.qualcomm.com>
 
