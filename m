@@ -1,152 +1,210 @@
-Received: from mail-ed1-f49.google.com (mail-ed1-f49.google.com [209.85.208.49])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F16F24C77D7
-	for <linux-arm-msm@vger.kernel.org>; Fri, 21 Aug 2026 16:11:51 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.208.49
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B60164D8DA2
+	for <linux-arm-msm@vger.kernel.org>; Fri, 21 Aug 2026 16:19:40 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787328713; cv=none; b=B4WSzi/W48oyqmLsMd7TNycdxRs/01JIb8PbkP1crAvVtee2brI6Fbk4i/te0XiWq30eFLWR/vg6HaQwSMw1I++8lkpBR8VKQSzDppz2GqzgBhSeootASnq/MHj5A9yBI3eGNSbVEuZFxmuP/zz0/q4NMNRKspLfbwxu96xlMrM=
+	t=1787329185; cv=none; b=uKUCvroB2mXj2SYgx3NG7/5xUylJGxisqjk39OakpCZB3aMiDnAIvB2CQjwR5JTYHMTpDCboejGs1SnXo/Hc991O2jH+uYDgAmbDU66uhKoILaNekibrfPD8RBh3PU+n6P8MOsX0z8igPgQot6Ia7SJlSZ7DXzZU0ML29qHDcrk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787328713; c=relaxed/simple;
-	bh=aBhiBc53YA3GDhUV9SnPyRNrnQKHyJ4QjY/pswKB5us=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=U30mP38NH/xw31RhGGm+BsXOoZzJHXXcdSMfWyp6DfVuUaLGFB7BpX2B2cic+bt2gumVQqmvZggChO3WL0WFnbrkzeSQPQlklkKh6R6WHiqp2y3qwqVkyBT4eYtic3cJLZZ6nPwte31zGcGz9+jLubcW7qiirgguPu+5M0w1qQc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=ferrisoft.com; spf=pass smtp.mailfrom=ferrisoft.com; dkim=pass (2048-bit key) header.d=ferrisoft-com.20251104.gappssmtp.com header.i=@ferrisoft-com.20251104.gappssmtp.com header.b=cZPewnzE; arc=none smtp.client-ip=209.85.208.49
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=ferrisoft.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ferrisoft.com
+	s=arc-20240116; t=1787329185; c=relaxed/simple;
+	bh=X10fgcE/VdvZBiLYK96ZfvDAsItFNmfond2stuPddA4=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=rh3I9spEihM+LTK1spj7atctf6eiMxx9XVpzLUd0devFEpHc+KxEEyWMOSAI+LF9DYS3ulw7I0iTSLLv+AnYyzdl91XsoEwgKkSLVFqTndpETsZK7Y1rTrHeHPS3S/7MXaifNLD8jh+DoJplGDXGA/Eii9mXPGeSHmlFam/MDW8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=N71lhcbr; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=V1IPRsxu; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=ferrisoft-com.20251104.gappssmtp.com header.i=@ferrisoft-com.20251104.gappssmtp.com header.b="cZPewnzE"
-Received: by mail-ed1-f49.google.com with SMTP id 4fb4d7f45d1cf-6a18840e2abso2229603a12.0
-        for <linux-arm-msm@vger.kernel.org>; Fri, 21 Aug 2026 09:11:51 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="N71lhcbr";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="V1IPRsxu"
+Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67LFmCfG3876604
+	for <linux-arm-msm@vger.kernel.org>; Fri, 21 Aug 2026 16:19:39 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	gEYvpnAfzkeKW0yeKy1jpo0v3pAYiHrS+jiYSV5Tvjw=; b=N71lhcbr5rc5+Ma7
+	v7CHr5pI0zWKHpS5WKfVzmaKWSDa0qPLNneY6rafufgyARMVgi9FcrqVaWYBBHrY
+	COagBa67FingibI8pSKl3ZwRQA9CnJ5QMJBs6Z4TjfF2GhOwIr2vp3P1uMeIIG4t
+	qmYRQR3ydxJpNjiwhamZ4GfR6vuUGjPkmNG/wjhw7aue4GfQo+tL4uDY2pkovlLi
+	+dcVHB5V7ynk77UYXI9igboWYJBlMlZ7vZXn8ML+KVjbaIDJLqogTXzyrh2tERZe
+	Q6CfduM2rbDDPPMwB9E36inNdUhnSpN0Zzd50lct6zIe71nJpniAs06X+P+IOYuD
+	gULumQ==
+Received: from mail-ot1-f71.google.com (mail-ot1-f71.google.com [209.85.210.71])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g6fg9tk7m-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 21 Aug 2026 16:19:38 +0000 (GMT)
+Received: by mail-ot1-f71.google.com with SMTP id 46e09a7af769-7eb64224fd2so2410634a34.0
+        for <linux-arm-msm@vger.kernel.org>; Fri, 21 Aug 2026 09:19:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=ferrisoft-com.20251104.gappssmtp.com; s=20251104; t=1787328710; x=1787933510; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:mime-version:message-id:date
-         :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to
+        d=oss.qualcomm.com; s=google; t=1787329178; x=1787933978; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=HPAM+SQP2Ol/FHmKFN7iyLYiVV7aXF8S5KkoBqF9vbs=;
-        b=cZPewnzEMCCPsKmYftfW4lBsqTZbthK5rx1uieOZrwvXYtLApZSeFUFNfjb5zIlQ0s
-         FFLmIYjDFDso1X97JwMuvCE0ni6JnLHtMKGAA9WJJyIqKESIhHXkMwK6gf3wiS30VB/R
-         tYpI/oDb+BKXPyj/De83feyyxpA0pQGK7c+OZIb0FK3UtQqG9e77E7huPnKXxkxF+KE1
-         G13lHPX9wgWQNAURmx7nchnU2kD5fQXMl0xJCTJXnrAYKF9IJbpihNgXQ1qVYB/doNS6
-         D8l+Tw+v0Ci67gym8Wm3lHk5OaUmtrh/GyqGM9q+0V//bOzo9SX4y1qOj/xBnowFAAqw
-         Myyw==
+        bh=gEYvpnAfzkeKW0yeKy1jpo0v3pAYiHrS+jiYSV5Tvjw=;
+        b=V1IPRsxuDG6rg7FbMrCs755o/yJHxniVx8t3O/XDpKeH4JHqh1Ejeb54QKZEzfxhOZ
+         D4RY9/mo5xct8nyGObaLIoZ+0V7t/vcTnzrHpjTQ3ccBZ7tqbcfS1lAXhUK+yR+8ShQc
+         bRKNg1rGygzqSjmoPFo5enrWMg/tvvVdLSbuJv894LBcpbGV2wfmBnelUHzNzjOoLV8d
+         N/xW0oNLqVVMi+eVmy5Dj6fAZ6BIsDVgq6QTJRFG2Ek4sDf8emYqY5Sy/z8+ALYrTRd0
+         aF3qqjks6zjWzbAjPeetunghHd/HnjMrh5OHsa+VqQC6SM1ZPpdo1YmNkQi9fgjjBX6o
+         ad5g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787328710; x=1787933510;
-        h=content-transfer-encoding:content-type:mime-version:message-id:date
-         :subject:cc:to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=HPAM+SQP2Ol/FHmKFN7iyLYiVV7aXF8S5KkoBqF9vbs=;
-        b=WNyNEPaz/69nOOCUXBIJnbJkPRkAgCBQflraHPG6n4h6b8V7c6o5HlXfPVUMttRODA
-         7Mad8AQiHcNk0Q92Ncb/2SdUtgpGQ92qgSgvqKC+XuY1rU8tX+bIPa6SS0AUake/EBOb
-         9md1v+GhIQ6Udf7qNKBtNafneZ1IRMfGLogrWY/ZkYpfhxHDHelf+EnN6b5FKM+X71RJ
-         fdIi7f4J4KW/GVhtgjrwtznRZIGjxMj0m7eptzFFCflFnKNfYCXSuNcdLKoa9Usa9kRK
-         NyVjkehPKdJ8Ypa4Wj5N1+aokeze3xH4AfadPlhVhPW4hvVZ9Shglm6LjxOOPeCATn10
-         /JTA==
-X-Forwarded-Encrypted: i=1; AHgh+RpExbWhjzDGotJDWji50LChHQ9fMUSatospooL1F2/UgAsapeT1GKiaeMAMpkrvpM+aijmN34+AjwZS3iAm@vger.kernel.org
-X-Gm-Message-State: AFuF++kK3qtS+dJeK5+tGugDEK0GWiEmA9aOOQ+W9c56pXl3XoxngM+A
-	3bhZB4GW2GcxCjWlgfjHjoOitI/eEwy6aJaiyOKTP0AcFr2VhvtvsYKgqimiEgGg2TuzZRnvfSD
-	89oBZn4vQCMJ8HQ==
-X-Gm-Gg: AR+sD122766G19GCOMAoIQ/5dn3vXYuytIwresQ0HVrRApsmpfwrrFLEZrdRjABud/J
-	ZZJggnK7sTnm9oza7bcp3YdfCoN+lBo2J4zRz1LW7O9P5JICpkL4gQHp9n6mEpaLJ+2myC/X38U
-	bvHp67zr8m66YQesf9Q65UpnNqwzJeMVJyQj+M1P0HWPrq2uu1BSu+1XwQXO9z2rF6oXcj6fTmQ
-	E66T+Av2Hvnm+txujrmRuGhJZPNoSCI1ECsv3D/Y+85mc51Vjws4/1oSk6q4wgt9nY6iTa0t0gh
-	sq9rTwCvm4nWR05dA1pz0OQjpDiMDlo70PmTIAN2RjiJyFOPsFntfkgfg5GtoRk4uurgi4x94Ne
-	TtjcmFdUlBxFNC9I2P8KQ9L7MTCplSugZMxHADvS0hIPLeOKltAWLLJxTHFegY+lMeoHFCBVsDD
-	N3ajUJ2QjOZoo/DZjygbv2Vk2KB1YXjQgLR4jEt2qICF0y9XK01aqZO8qAgyTyWJSGMebtoIEJs
-	8zI08s=
-X-Received: by 2002:a05:6402:322a:b0:6a1:f895:1ba with SMTP id 4fb4d7f45d1cf-6a42f20b899mr9009049a12.12.1787328709973;
-        Fri, 21 Aug 2026 09:11:49 -0700 (PDT)
-Received: from 0005.eml (45-11-61-69.ip4.greenlan.pl. [45.11.61.69])
-        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-6a3ff16c2cbsm7593937a12.22.2026.08.21.09.11.49
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 21 Aug 2026 09:11:49 -0700 (PDT)
-From: Greg Ociepka <greg@ferrisoft.com>
-To: Alexandre Belloni <alexandre.belloni@bootlin.com>
-Cc: linux-rtc@vger.kernel.org, Johan Hovold <johan+linaro@kernel.org>, linux-arm-msm@vger.kernel.org
-Subject: [PATCH] rtc: pm8xxx: do not fail probe when UEFI offset variable is missing
-Date: Fri, 21 Aug 2026 18:11:48 +0200
-Message-ID: <20260821181148.1642208-1-greg@ferrisoft.com>
+        d=1e100.net; s=20251104; t=1787329178; x=1787933978;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=gEYvpnAfzkeKW0yeKy1jpo0v3pAYiHrS+jiYSV5Tvjw=;
+        b=sC2YS/OOnfeEyrD/adXT6swBPCH/+/LnNyuWKXotQpvZ20o7FodQE05PXA+M7t9Bv+
+         7rVblhdkLmcBMYq85j1M6KVKSD5C1vVt3Qk0RSBbmS1l/Uw1Fb2YEYYcc889fnn2QSO5
+         qPVOipbmF02du5T0rrKRkZWAlgwoiRNRackKbzziWW1LtJgqk59Xp7M7pRVuyU3mI6Fx
+         iDMb1XpB4xgWxoqqbhb8O9u+LpjsAASMZsMRIObPuTQq7G5Sz1xI3cLS9sYnIg4MfUky
+         RfKY238YruvTIn5f90yV5Tys90wLH+7pGae3fy00vj3RiCvegkuhrLZVh6zOT1ZRtsyJ
+         yx+Q==
+X-Gm-Message-State: AOJu0YyhSa1tBX/Ay6+go+pCcWuBUDC67dVmqhv1fw+O6ZNp2e4MRM1u
+	bzyGzzik7sYD2N7Q0U7G4VqzuVXMzPpZrS5PD3fjPYdR9RLsF9tgTJSytbAaZ2E/yJ4GIwgOqGp
+	cyN5lAAyM0gLRnA9ynvzLVbVfdDmuVxh+/Oa90YZ+U4Nag8YBABU3P6g0CE54AKFwybxgE4t7I3
+	hh
+X-Gm-Gg: AR+sD13ltGumX4XQfEC1shdGJ7bKhgdycdcFRbYGiFXLuH08ufLvajneYc6FLFsH2W6
+	yO4xTA+wkRO6olExgaGoPfB+9BsttpA7OFz7BCOrBU8eLrTr9+jKd890hbaHf8jvy6G2msBR2x/
+	0/zAPRyFtmylJo2w33LcdngCYe8N6QCcMh9yuEpdN11Fk3wBL6qkeO5YCwId5FeD8neOyC3P+Fo
+	hWKI75O8wnKCqvRjZTEWBpBiMsmRJssOz2N0h2hr9UUlvybgu6x4MeC80ZFO4SqvOSUltWMe3F6
+	0MRkSWphifgDkTfawVxjDKXtm0EJmj/ms6IXhUY0WHLq3lYs4Qf+JpxIX9JXCCN8sXFbJYlveNa
+	s2gd9nHH/2zRGgxOJyau/A36Y+7TjJtWk
+X-Received: by 2002:a05:6820:308d:b0:6b1:681f:81a1 with SMTP id 006d021491bc7-6b1681f9275mr1606887eaf.24.1787329178058;
+        Fri, 21 Aug 2026 09:19:38 -0700 (PDT)
+X-Received: by 2002:a05:6820:308d:b0:6b1:681f:81a1 with SMTP id 006d021491bc7-6b1681f9275mr1606821eaf.24.1787329177641;
+        Fri, 21 Aug 2026 09:19:37 -0700 (PDT)
+Received: from [192.168.1.2] ([122.171.20.211])
+        by smtp.gmail.com with ESMTPSA id 586e51a60fabf-4632a6c360asm4738369fac.5.2026.08.21.09.19.29
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Fri, 21 Aug 2026 09:19:37 -0700 (PDT)
+Message-ID: <c82359a1-6b64-468d-9823-a196f291df0c@oss.qualcomm.com>
+Date: Fri, 21 Aug 2026 21:49:26 +0530
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 09/15] pinctrl: qcom: Add Kuno pinctrl driver
+To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>,
+        Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>, Ulf Hansson <ulfh@kernel.org>,
+        Michael Turquette <mturquette@baylibre.com>,
+        Stephen Boyd
+ <sboyd@kernel.org>, Brian Masney <bmasney@redhat.com>,
+        Taniya Das <quic_tdas@quicinc.com>, Georgi Djakov <djakov@kernel.org>,
+        Bartosz Golaszewski <brgl@kernel.org>,
+        Linus Walleij <linusw@kernel.org>, Thomas Gleixner <tglx@kernel.org>,
+        Radu Rendec <radu@rendec.net>, Robert Marko <robimarko@gmail.com>,
+        Guru Das Srinagesh <linux@gurudas.dev>
+Cc: linux-arm-msm@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
+        linux-kernel@vger.kernel.org, devicetree@vger.kernel.org,
+        linux-pm@vger.kernel.org, linux-clk@vger.kernel.org,
+        linux-gpio@vger.kernel.org
+References: <20260814-kuno-soc-support-v2-0-3079794f0f73@oss.qualcomm.com>
+ <20260814-kuno-soc-support-v2-9-3079794f0f73@oss.qualcomm.com>
+ <b88c7884-f86b-460d-9880-8dbc23798b02@oss.qualcomm.com>
+ <4e7a398b-e75c-4dca-8380-440ca7cb22c6@oss.qualcomm.com>
+ <f7386ff7-9700-4a19-bde4-df4460ec6963@oss.qualcomm.com>
+Content-Language: en-US
+From: Hardeep Sharma <hardeep.sharma@oss.qualcomm.com>
+In-Reply-To: <f7386ff7-9700-4a19-bde4-df4460ec6963@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODIxMDEyNyBTYWx0ZWRfXx0nrW8MtRPS+
+ SrR958rK6PipkvgwSq/gHuQzV+UbMeruFFPE6Us3oOs4c+bsJMdWW1ZZukbhj1/TIAL6o+toDmF
+ CPswBLVM+B3QA9BsM9tVchJp2COZ+mXoznsSwcC3PyBt/XmxwYHUdkf1Z10iYcM723IkRTmPVj1
+ IXt1C33yNXT+eEN4H1VLEOM0twEFbgEy9ekc5jWmqtjeysLwlwopLBEg3AiIOH2aGnlMOQk1gLj
+ V+2Wtjx6TLkuO9BUFCCFIeV2Esdp8RkKjWoLucyi3QKPVcJtlOpyAP9WzKikjM+e/5aO6qUjpq6
+ Cm6vioatJs8WbyrTkb0aqhK2eV69oc30Bu5/J+qDPjD7HjiOh+VHLU+sCFNXAL+hW8j1YPVaj43
+ gnsOaZUbWNa7Y38EEoLb0kqaBYs2BahOHT0YxMajuJ9D4Qzi91D0AC/htspv/mM9yQSjf3vVirQ
+ Xg9R1vxO3QYvHKDkO6w==
+X-Proofpoint-ORIG-GUID: kGyWfKaHqMvgtpdFGrNXqftQ8eTd1egc
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODIxMDEyNyBTYWx0ZWRfX5laB+eiPJh+d
+ h8OAkfcu5VIHFD3Ut5QZBSxwPNiVxiuCSIJDX181RjGurb1K9/23RkRaTkHeKTiKJTDeXT+wAQ4
+ NMiEaMr3xoIjYvQBIfaLH3y8iJCSQ6k=
+X-Authority-Analysis: v=2.4 cv=Av/eGu9P c=1 sm=1 tr=0 ts=6a887a9a cx=c_pps
+ a=OI0sxtj7PyCX9F1bxD/puw==:117 a=+KmVXPE0btiop/5qwQKk0Q==:17
+ a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22
+ a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=A1cAmru4g_ti7Hb5znAA:9 a=3ZKOabzyN94A:10
+ a=QEXdDO2ut3YA:10 a=Z1Yy7GAxqfX1iEi80vsk:22
+X-Proofpoint-GUID: kGyWfKaHqMvgtpdFGrNXqftQ8eTd1egc
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-08-21_05,2026-08-21_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ malwarescore=0 phishscore=0 lowpriorityscore=0 suspectscore=0 spamscore=0
+ clxscore=1015 bulkscore=0 priorityscore=1501 adultscore=0 impostorscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608210127
 
-On machines using "qcom,uefi-rtc-info" the Unix epoch offset for the
-read-only PMIC RTC counter lives in the RTCInfo UEFI variable. The
-driver reads it at probe time and treats every failure as fatal,
-including EFI_NOT_FOUND.
 
-That turns a merely-uninitialized clock into a permanently absent one
-on firmware that never creates the variable. The ASUS Zenbook A16
-(UX3607OA, Snapdragon X2 Elite Extreme "Glymur", InsydeH2O UEFI) is
-such a machine: qseecom and uefisecapp come up fine, other variables
-in the same Qualcomm vendor GUID (882f8c2b-9646-435f-8de5-f208ff80c1bd)
-exist and are readable, but among the 110 variables exposed through
-efivarfs there is no RTCInfo -- and Windows on the same machine does
-not create one either. Probe then fails:
+On 8/17/2026 8:55 PM, Konrad Dybcio wrote:
+> On 8/17/26 3:42 PM, Hardeep Sharma wrote:
+>> On 8/17/2026 6:54 PM, Konrad Dybcio wrote:
+>>> On 8/14/26 9:31 AM, Hardeep Sharma wrote:
+>>>> Add the TLMM pinctrl driver for the Qualcomm Kuno platform, supporting
+>>>> 110 GPIOs and their pin multiplexing, pin configuration and gpiolib
+>>>> interface through the common pinctrl-msm driver.
+>>>>
+>>>> Signed-off-by: Hardeep Sharma <hardeep.sharma@oss.qualcomm.com>
+>>>> ---
+>>> [...]
+>>>
+>>>> +    [65] = PINGROUP(65, qup0_se1, qdss_cti_trig1, qdss_cti_trig1, NA, NA, NA, NA, NA, NA),
+>>>> +    [66] = PINGROUP(66, qup0_se1, qdss_cti_trig1, qdss_cti_trig1, NA, NA, NA, NA, NA, NA),
+>>> Function3 can't be selected because of repeating names
+>>>
+>>> In qdss_cti_trig1_groups, you have qdss_cti_trig1 specified twice.
+>>> Perhaps there was a longer name that got truncated?
+>>>
+>>> Konrad
+>> Thanks Konrad for review.
+>>
+>> It's a real qdss_cti_trig1 line - the in/out
+>> mirror partner of funcsel 2:
+>>
+>>     GPIO65: fsel2 = qdss_cti_trig1_in_mirb, fsel3 = qdss_cti_trig1_out_mire
+>>     GPIO66: fsel2 = qdss_cti_trig1_out_mirb, fsel3 = qdss_cti_trig1_in_mire
+>>
+>> Both map to the same name because the driver uses one coarse
+>> "qdss_cti_trig1" for the in/out mirror variants.
+> But these are physically separate functions, even if the mirror feature
+> makes them seemingly one and the same
+>
+>> Listing the function on both funcsels is the normal sdx convention for
+>> these mirror pairs - the in-tree drivers do it, including the same pins
+>> on sdx65:
+>>
+>>     - sdx55 [16][17][22][23][54][55][94][95] → in pinctrl-sdx55.c, pins
+>> 16, 17, 22, 23, 54, 55, 94, 95 each repeat qdss_cti at two funcsels.
+>>     - sdx65 [65]/[66] → in pinctrl-sdx65.c, pins 65 and 66 do it —
+>>     - sdx75 [16][52][53][56][57][78][79] → in pinctrl-sdx75.c, those pins
+>> do it.
+>>
+>> Only funcsel 2
+>> is selectable from DT (first-match), which is expected and matches those
+>> drivers.
+> As you described it, you found a bug (FSEL3 is not selectable), please
+> fix it in all the instances you've mentioned.
+>
+> Konrad
 
-  rtc-pm8xxx c426000.spmi:pmic@0:rtc@6100: probe with driver rtc-pm8xxx
-      failed with error -2
+Thanks for review.
 
-This is a chicken-and-egg failure: pm8xxx_rtc_write_uefi_offset()
-would create the variable (the set path uses EFI_VARIABLE_NON_VOLATILE
-attributes and efivar_set_variable() creates missing variables), but
-it can only run from the RTC set_time path -- and the RTC device never
-registers because probe failed. The variable can never come into
-existence.
+Corrected in v3 : 
+https://lore.kernel.org/all/20260821-kuno-soc-support-v3-0-196e2b306368@oss.qualcomm.com/
 
-Treat a missing variable like an unset clock instead: warn, keep the
-zero offset, and register the RTC. Reads expose the raw counter until
-the first clock set (typically the NTP-triggered RTC synchronization)
-computes the offset and creates the variable; from then on the machine
-keeps time across reboots. Userspace already copes with an implausible
-RTC value at boot -- systemd only steps the clock forward from its
-persistent timestamp.
+Best Wishes
 
-Other read errors still fail the probe as before.
-
-Verified on the Zenbook A16 across consecutive boots: on the first
-boot the driver warns, registers rtc0 and sets the system clock from
-the raw counter (1970-01-04 here -- the counter had been running for
-three days); the first NTP-triggered clock set creates RTCInfo; every
-following boot restores correct wall time from the RTC before any
-network is up.
-
-Fixes: bba38b874886 ("rtc: pm8xxx: add support for uefi offset")
-Signed-off-by: Greg Ociepka <greg@ferrisoft.com>
-Assisted-by: Claude:fable-5
----
- drivers/rtc/rtc-pm8xxx.c | 16 +++++++++++++++-
- 1 file changed, 15 insertions(+), 1 deletion(-)
-
-diff --git a/drivers/rtc/rtc-pm8xxx.c b/drivers/rtc/rtc-pm8xxx.c
-index e624f84..4627f4e 100644
---- a/drivers/rtc/rtc-pm8xxx.c
-+++ b/drivers/rtc/rtc-pm8xxx.c
-@@ -589,7 +589,21 @@ static int pm8xxx_rtc_probe_offset(struct pm8xxx_rtc *rtc_dd)
- 		rtc_dd->use_uefi = false;
- 	}
- 
--	return pm8xxx_rtc_read_uefi_offset(rtc_dd);
-+	rc = pm8xxx_rtc_read_uefi_offset(rtc_dd);
-+	if (rc == -ENOENT) {
-+		/*
-+		 * The variable does not exist until something stores an
-+		 * offset: pm8xxx_rtc_write_uefi_offset() creates it on the
-+		 * first clock set. Keep probing with a zero offset instead
-+		 * of failing -- otherwise the RTC never registers and the
-+		 * variable can never come into existence.
-+		 */
-+		dev_warn(rtc_dd->dev,
-+			 "UEFI offset variable not found, will be created on first clock set\n");
-+		return 0;
-+	}
-+
-+	return rc;
- }
- 
- static int pm8xxx_rtc_probe(struct platform_device *pdev)
+Hardeep Sharma
 
