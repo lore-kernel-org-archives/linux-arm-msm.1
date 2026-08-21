@@ -1,162 +1,197 @@
-Received: from ixit.cz (ixit.cz [84.42.129.46])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B44181DDC37;
-	Fri, 21 Aug 2026 12:41:55 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=84.42.129.46
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787316117; cv=none; b=t6ctHKX5Z3tROoixSNTGvN8BcIJR8T5dmo4+Ao4ROCoAUdKOAvPBSuChCD3uVdIodBifmV4rr7ZYOpswmSrS1azPA3MBEJ0XR3y3i78A+sm6BSb346P86wy1bJMHyzhlO0SpMMMVsXuK9SC0UFVhGmkDE0uPkiO3jXgHkvee3a0=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787316117; c=relaxed/simple;
-	bh=ItdycJ0ClGLmGAAxgcnNOFaBBg4+WVmTrXEZmhqOJa4=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=sV8MUNu/ACBR0KUgHp/QKsWhOTtRNuvxvyaGpPjsLX2qJAOuub7S4JSqn4OXq+ko5/S3hGW8xymTKRiZ64gp5sGbVOEg9WAR2JA0GZkDyWfjk2q900pyVwXbog+tyCkawpPO/myXBh0XsFQRfeaiGQtQDv9HRsIx47BHDnmDYOo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=ixit.cz; spf=pass smtp.mailfrom=ixit.cz; dkim=pass (1024-bit key) header.d=ixit.cz header.i=@ixit.cz header.b=m0iFc3kw; arc=none smtp.client-ip=84.42.129.46
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=ixit.cz
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ixit.cz
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3041347668E
+	for <linux-arm-msm@vger.kernel.org>; Fri, 21 Aug 2026 12:51:38 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=205.220.180.131
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1787316700; cv=pass; b=OBdBBcjK+vWAZMnrLkUt0N9hprXwoZJxXNWVHxlxSWNUJaFnZ+2zVK9eYynGnwKY/I3NnZr7E5Z7vy5g+mJVAXqJHlxu4rAWsLMBjfeZ/r+yTutfBR290e8ZFhof3EAgSzx5Y71xkUBymOmoqjaiPT4ywLVG84JRA7smuad2Kg4=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1787316700; c=relaxed/simple;
+	bh=fZbb9v4e2sk6/OnDmZnaaF3vmjmxv3DVkekcYhG8d5o=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=Tp49YVsFietc8ctTxKea/yAkU2axgvLMKaDj2WRlH/8PiPhbnnlvq9rPDcxsUFPBph0BW/NmNv3haOiBFPhU6QRLyaIdrCvp+OJxkRjPjr6xA/WwrpB6AtDvlZDXyDEdyyCG8WF/27+Jm6sJC3zuWRi35ZJJaVLvq+ZgiTjNPCQ=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=TxAtR3li; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=Ewc3U80T; arc=pass smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=ixit.cz header.i=@ixit.cz header.b="m0iFc3kw"
-Received: from [172.16.124.192] (ip-78-44-13-22.bb.vodafone.cz [78.44.13.22])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange x25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by ixit.cz (Postfix) with ESMTPSA id 9F6A253401CE;
-	Fri, 21 Aug 2026 14:41:46 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ixit.cz; s=dkim;
-	t=1787316107;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
-	bh=opLLXtL6IndG/zAcxQ0YK5eXgU6TXGyQYECW5sFzucE=;
-	b=m0iFc3kwOK0vrh5GavBCd2/xCO86rdkW6iqtm8XHHl4wNPdWRSiY7OV8LuvTJ79GU0Go0b
-	/rO4jF02GT+IBPECDu6dxpR3uq16YRf4BczMMeWbM32T0MjroCSY1zs7b31vbBZZvvQjA5
-	DcCNecUdo/dIbitfW2l1pJ+yElFuEvE=
-Message-ID: <e01a7430-1670-4aed-bb2d-3e505218d07a@ixit.cz>
-Date: Fri, 21 Aug 2026 14:41:46 +0200
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="TxAtR3li";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Ewc3U80T"
+Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67LCokYn2029747
+	for <linux-arm-msm@vger.kernel.org>; Fri, 21 Aug 2026 12:51:37 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	OX8Kh+7PnOwt46WAC1QaJaLq8pinJzLn9zW07ubaMoo=; b=TxAtR3liTbaL0Hia
+	95Zbr6NdFTGIDe0fK4fJUWbNOREu4ldJzKYTmbmTnonEPZPZ6q4KfcBNrDt8oNT7
+	n/bjMWYHFdX59oyQcs+066+e5LwMt5YN6JA8DBPw0EMiFip1ZreMkSZTPFBxP2V8
+	GOmM/KXtQxDTx/cW9eXcHRumPmf1Yr8Cqh0Jo42AFwulfZUN4ttBDSOv1Vl1aqau
+	7ukVDIhC2B+ZJtUyBRDpjUpcMoMjm58gfL1sEykw+OTkiZzi2V1RL9pcZmdNguR+
+	/blkOopN4tSlxuZ9iZiPMS7Jdw3+HgwyDEokHWkhV88BEsLEGvlCAsY6RZteo+it
+	S4VsBA==
+Received: from mail-pl1-f197.google.com (mail-pl1-f197.google.com [209.85.214.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g6fue1pwf-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 21 Aug 2026 12:51:37 +0000 (GMT)
+Received: by mail-pl1-f197.google.com with SMTP id d9443c01a7336-2ccd1958e8fso14827015ad.2
+        for <linux-arm-msm@vger.kernel.org>; Fri, 21 Aug 2026 05:51:37 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1787316696; cv=none;
+        d=google.com; s=arc-20260327;
+        b=V8fLVJZaTKonPeK88eseD9pCpubgZQDLXDj1iR0YjrMPF5Qum6FL+N9hHyKCJhgno+
+         PLuSsNgZZwvY/vxphkR1woFe9JxkjTdqYxtwbjkBdwvup5QcAQSnqA35upziPnJ0UaNh
+         FfthcTW/e+tnVa1KozPGlRkgBMOpE/Ga25Qpa1ckp0pgjZZvRUweV5pri5H9ShPvU0rO
+         u1P5YmcYtzTvW48UJ26nialqqTdDOOGhZBPpT1iznfuZkb74qN2vIOQ3mDmkN5MOS3CC
+         sbQGNiaEP42FBx8aqCwdllP9Z+AnbafJHahKx4JVUXxxtS5wmLtmCytJF2uDeML7qZ3x
+         w9sA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:dkim-signature;
+        bh=OX8Kh+7PnOwt46WAC1QaJaLq8pinJzLn9zW07ubaMoo=;
+        fh=9vef5hLZ/A9//iuHOMGJ9PrhZ95vr9rXzVRfThBw+6Q=;
+        b=sf4+2eVSJmRsB3/ng6VUwO0MpbxgvyOh656oKEJqJ7vw5Ex8VyZgPFclhOFcql7c85
+         LfzZ/wM1qotXwTk93N6WMdYRwcCBho9PMbw8cHplYiaM5EjQ11dQoEorKlIAtPUnY/KI
+         DL/i/5u5CSozUMXYrrKM+XI7E5I8oisoUP5aWU99YoRJxf14hBYi9NoGTQvt4K8Gj2lA
+         vT8mi7mDtinHHfslvrPX/MqcAdlzJxn8lkDy3q0Hcm2sHtaB9EeVU6+rvbT/x3VcKeQ9
+         xvU3ieDY2BehokyD93xBfqMvH/Sq5WrK88w/4Jc0pLoSlnApQHHvIwnNeKVBhRaU39wo
+         VSyA==;
+        darn=vger.kernel.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1787316696; x=1787921496; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=OX8Kh+7PnOwt46WAC1QaJaLq8pinJzLn9zW07ubaMoo=;
+        b=Ewc3U80TW2Qt3ljglCcLUza3h/Pk6+orf5SabxZxUUtydWaNiqWQ9YIq4pUlUpZjlb
+         EqFWGsqAKU8/PbNh1a34O0fajpbFtjTTiiYV1hP6+OT70HIRr7LrHgCHXL59kpTkSZ5v
+         4A34IaSvThoLAEzlD3w6HyfVZzC3gIe9YpgKtOXN79NKmxHMihvDslWvgv+rMPp62jFm
+         c1iffH6o2JbaGhqCwegJ6nj4KV3MfI0W5em/enmZBln5oIgcmFcowxuWzpWtDKYc6LXk
+         NRzOpPTCcVyXMqW80Wos/ll0C2DRmbppSw51qtMe6ipwxqaQWnK+KMLyKK+DF/I6y+52
+         eJZw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1787316696; x=1787921496;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=OX8Kh+7PnOwt46WAC1QaJaLq8pinJzLn9zW07ubaMoo=;
+        b=qhqtMrEzCOLiI6trEg6fiJemXDA62lx2hP8DuTZ9r/MqkuHgzj+mQgbcuP1gopAFjY
+         soXQ0tYqqGe4Tr5UTw/WTN2UNdUCaJ3mFHltLqPXuuzJnTJ/R/X9aZ1rNiz9A2ROBJat
+         KzReuHQm2r3H1FwDEyiHvUxGCBxH7yL/0iUP61gfzsi4iRwV9w61yyzsvwxVUyC0QaQJ
+         vogFBnryXF2m40klNzC2PoWhCMSPeaQ+OGWNAbUAxl/ArNLqwp2y4gVYIVq1RaaPQTEO
+         ptYaKpRbEcATN1xhTBBTDh7tAve+hBE7tweH6j4/oW1idMjiGoc8RODdT5r5q+oiyB4w
+         e3VQ==
+X-Forwarded-Encrypted: i=1; AHgh+Rp6+MEjHFlXh8qS1XomXDUxB54CWnfB8YxvI6R09+Q8i6CV6UL75xJ3l/k+/2BSPNetEYtJSNfQrNKuV9ju@vger.kernel.org
+X-Gm-Message-State: AOJu0Yy1lgznmHHwSE4RI0aM800jyxRmmKYagnTJssjmZpvjEVhQL+M9
+	fh4hw05cAuOfuOT8r/6SqguKoSy0EG4DkYcoaCtlYZaNvtTDyaGQKQzTVC1Bpc6+4UF3ocuu7WD
+	WeWlssbosAMXH+Jb1Nq+FNH0k6cGRv96sAL9OWwchGY6CQlnYhZsfW7mLBpbtSLRtXiRTGISn3/
+	qFT+Rjbn7vTNd8Q90Mdu5+5KsAmRultyXVjmlYsQ8pu1w=
+X-Gm-Gg: AR+sD11SsVaTYzebt4PkYwDZNTCGlPAYswWuXuMs5TPgSI67gNKbswYzqW4PgzvHFNv
+	+MPlUbrtNxZBdptSXFhXbr1tjLyw9sg/5HUjaMsN6TG3vWZPb1O74pifdMXsNSa+QnPmr9dhpBZ
+	rXT3MS+yme7Cxw8GR2LsyC9S5Fu+jw2iNeQ9cqWLU3M8BPNnnO082Fvko1CA==
+X-Received: by 2002:a05:6a20:d74c:b0:3c3:b57b:645e with SMTP id adf61e73a8af0-3cd2fe23ae8mr13247616637.5.1787316696112;
+        Fri, 21 Aug 2026 05:51:36 -0700 (PDT)
+X-Received: by 2002:a05:6a20:d74c:b0:3c3:b57b:645e with SMTP id
+ adf61e73a8af0-3cd2fe23ae8mr13247497637.5.1787316695591; Fri, 21 Aug 2026
+ 05:51:35 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 3/3] arm64: dts: qcom: sm7225-fairphone-fp4: Enable
- touchscreen
-To: Luca Weiss <luca.weiss@fairphone.com>, Job Noorman <job@noorman.info>,
- Dmitry Torokhov <dmitry.torokhov@gmail.com>, Rob Herring <robh@kernel.org>,
- Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
- <conor+dt@kernel.org>, Frank Li <Frank.Li@nxp.com>,
- Bjorn Andersson <andersson@kernel.org>,
- Konrad Dybcio <konradybcio@kernel.org>
-Cc: phone-devel@vger.kernel.org, linux-input@vger.kernel.org,
- devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-arm-msm@vger.kernel.org
-References: <20260821-fp4-hx83112a-v1-0-474941bd8860@fairphone.com>
- <20260821-fp4-hx83112a-v1-3-474941bd8860@fairphone.com>
-Content-Language: en-US, cs-CZ
-From: David Heidelberg <david@ixit.cz>
-Autocrypt: addr=david@ixit.cz; keydata=
- xsFNBF5v1x4BEADS3EddwsNsvVAI1XF8uQKbdYPY/GhjaSLziwVnbwv5BGwqB1tfXoHnccoA
- 9kTgKAbiXG/CiZFhD6l4WCIskQDKzyQN3JhCUIxh16Xyw0lECI7iqoW9LmMoN1dNKcUmCO9g
- lZxQaOl+1bY/7ttd7DapLh9rmBXJ2lKiMEaIpUwb/Nw0d7Enp4Jy2TpkhPywIpUn8CoJCv3/
- 61qbvI9y5utB/UhfMAUXsaAgwEJyGPAqHlC0YZjaTwOu+YQUE3AFzhCbksq95CwDz4U4gdls
- dmv9tkATfu2OmzERZQ6vJTehK0Pu4l5KmCAzYg42I9Dy4E6b17x6NncKbcByQFOXMtG0qVUk
- F1yeeOQUHwu+8t3ZDMBUhCkRL/juuoqLmyDWKMc0hKNNeZ9BNXgB8fXkRLWEUfgDXsFyEkKp
- NxUy5bDRlivf6XfExnikk5kj9l2gGlNQwqROti/46bfbmlmc/a2GM4k8ZyalHNEAdwtXYSpP
- 8JJmlbQ7hNTLkc3HQLRsIocN5th/ur7pPMz1Beyp0gbE9GcOceqmdZQB80vJ01XDyCAihf6l
- AMnzwpXZsjqIqH9r7T7tM6tVEVbPSwPt4eZYXSoJijEBC/43TBbmxDX+5+3txRaSCRQrG9dY
- k3mMGM3xJLCps2KnaqMcgUnvb1KdTgEFUZQaItw7HyRd6RppewARAQABzSBEYXZpZCBIZWlk
- ZWxiZXJnIDxkYXZpZEBpeGl0LmN6PsLBlAQTAQgAPgIbAwULCQgHAgYVCgkICwIEFgIDAQIe
- AQIXgBYhBNd6Cc/u3Cu9U6cEdGACP8TTSSByBQJl+KksBQkPDaAOAAoJEGACP8TTSSBy6IAQ
- AMqFqVi9LLxCEcUWBn82ssQGiVSDniKpFE/tp7lMXflwhjD5xoftoWOmMYkiWE86t5x5Fsp7
- afALx7SEDz599F1K1bLnaga+budu55JEAYGudD2WwpLJ0kPzRhqBwGFIx8k6F+goZJzxPDsf
- loAtXQE62UvEKa4KRRcZmF0GGoRsgA7vE7OnV8LMeocdD3eb2CuXLzauHAfdvqF50IfPH/sE
- jbzROiAZU+WgrwU946aOzrN8jVU+Cy8XAccGAZxsmPBfhTY5f2VN1IqvfaRdkKKlmWVJWGw+
- ycFpAEJKFRdfcc5PSjUJcALn5C+hxzL2hBpIZJdfdfStn+DWHXNgBeRDiZj1x6vvyaC43RAb
- VXvRzOQfG4EaMVMIOvBjBA/FtIpb1gtXA42ewhvPnd5RVCqD9YYUxsVpJ9d+XsAy7uib3BsV
- W2idAEsPtoqhVhq8bCUs/G4sC2DdyGZK8MRFDJqciJSUbqA+5z1ZCuE8UOPDpZKiW6H/OuOM
- zDcjh0lOzr4p+/1TSg1PbUh7fQ+nbMuiT044sC1lLtJK0+Zyn0GwhR82oNM4fldNsaHRW42w
- QGD35+eNo5Pvb3We5XRMlBdhFnj7Siggp4J8/PJ6MJvRyC+RIJPGtbdMB2/RxWunFLn87e5w
- UgwR9jPMHAstuTR1yR23c4SIYoQ2fzkrRzuazsFNBF5v1x4BEADnlrbta2WL87BlEOotZUh0
- zXANMrNV15WxexsirLetfqbs0AGCaTRNj+uWlTUDJRXOVIwzmF76Us3I2796+Od2ocNpLheZ
- 7EIkq8budtLVd1c06qJ+GMraz51zfgSIazVInNMPk9T6fz0lembji5yEcNPNNBA4sHiFmXfo
- IhepHFOBApjS0CiOPqowYxSTPe/DLcJ/LDwWpTi37doKPhBwlHev1BwVCbrLEIFjY0MLM0aT
- jiBBlyLJaTqvE48gblonu2SGaNmGtkC3VoQUQFcVYDXtlL9CVbNo7BAt5gwPcNqEqkUL60Jh
- FtvVSKyQh6gn7HHsyMtgltjZ3NKjv8S3yQd7zxvCn79tCKwoeNevsvoMq/bzlKxc9QiKaRPO
- aDj3FtW7R/3XoKJBY8Hckyug6uc2qYWRpnuXc0as6S0wfek6gauExUttBKrtSbPPHiuTeNHt
- NsT4+dyvaJtQKPBTbPHkXpTO8e1+YAg7kPj3aKFToE/dakIh8iqUHLNxywDAamRVn8Ha67WO
- AEAA3iklJ49QQk2ZyS1RJ2Ul28ePFDZ3QSr9LoJiOBZv9XkbhXS164iRB7rBZk6ZRVgCz3V6
- hhhjkipYvpJ/fpjXNsVL8jvel1mYNf0a46T4QQDQx4KQj0zXJbC2fFikAtu1AULktF4iEXEI
- rSjFoqhd4euZ+QARAQABwsF8BBgBCAAmAhsMFiEE13oJz+7cK71TpwR0YAI/xNNJIHIFAmX4
- qVAFCQ8NoDIACgkQYAI/xNNJIHKN4A/+Ine2Ii7JiuGITjJkcV6pgKlfwYdEs4eFD1pTRb/K
- 5dprUz3QSLP41u9OJQ23HnESMvn31UENk9ffebNoW7WxZ/8cTQY0JY/cgTTrlNXtyAlGbR3/
- 3Q/VBJptf04Er7I6TaKAmqWzdVeKTw33LljpkHp02vrbOdylb4JQG/SginLV9purGAFptYRO
- 8JNa2J4FAQtQTrfOUjulOWMxy7XRkqK3QqLcPW79/CFn7q1yxamPkpoXUJq9/fVjlhk7P+da
- NYQpe4WQQnktBY29SkFnvfIAwqIVU8ix5Oz8rghuCcAdR7lEJ7hCX9bR0EE05FOXdZy5FWL9
- GHvFa/Opkq3DPmFl/0nt4HJqq1Nwrr+WR6d0414oo1n2hPEllge/6iD3ZYwptTvOFKEw/v0A
- yqOoYSiKX9F7Ko7QO+VnYeVDsDDevKic2T/4GDpcSVd9ipiKxCQvUAzKUH7RUpqDTa+rYurm
- zRKcgRumz2Tc1ouHj6qINlzEe3a5ldctIn/dvR1l2Ko7GBTG+VGp9U5NOAEkGpxHG9yg6eeY
- fFYnMme51H/HKiyUlFiE3yd5LSmv8Dhbf+vsI4x6BOOOq4Iyop/Exavj1owGxW0hpdUGcCl1
- ovlwVPO/6l/XLAmSGwdnGqok5eGZQzSst0tj9RC9O0dXO1TZocOsf0tJ8dR2egX4kxM=
-In-Reply-To: <20260821-fp4-hx83112a-v1-3-474941bd8860@fairphone.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+References: <20260819-pmdomain-revert-adding-mxc-mmcx-on-eliza-v1-1-0608e7900b9a@oss.qualcomm.com>
+In-Reply-To: <20260819-pmdomain-revert-adding-mxc-mmcx-on-eliza-v1-1-0608e7900b9a@oss.qualcomm.com>
+From: Ulf Hansson <ulf.hansson@oss.qualcomm.com>
+Date: Fri, 21 Aug 2026 14:51:24 +0200
+X-Gm-Features: AcwNN1VEQ7RIyD8FZDlATdfFkVI8H4V_7PjBAw26wxnRmKQq2VE3dRp_xLlAr3I
+Message-ID: <CAPx+jO_WgxJSyW_ZPYLrYaQMJMv6w918CQupeHoPSr7JPxqa8Q@mail.gmail.com>
+Subject: Re: [PATCH] Revert "pmdomain: qcom: rpmhpd: Add missing MXC and MMCX
+ power domains for Eliza"
+To: Abel Vesa <abel.vesa@oss.qualcomm.com>
+Cc: Ulf Hansson <ulfh@kernel.org>, stable@vger.kernel.org,
+        linux-arm-msm@vger.kernel.org, linux-pm@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODIxMDA5NyBTYWx0ZWRfX5a7d+Bd7pc4r
+ x14id38WGQIlo455Dm1YXO4HHLYBSnUT+P3KDOYow8fdfAjv3T454Xd3I1rS9m9xTh/3ygA87Ax
+ yXkvzjr7qJ6OJxsIOS7WQDSydE1o0GQ=
+X-Authority-Analysis: v=2.4 cv=U9+iy+ru c=1 sm=1 tr=0 ts=6a8849d9 cx=c_pps
+ a=cmESyDAEBpBGqyK7t0alAg==:117 a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10
+ a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
+ a=yx91gb_oNiZeI1HMLzn7:22 a=EUspDBNiAAAA:8 a=Xfj96N0bkABj-llejB0A:9
+ a=QEXdDO2ut3YA:10 a=1OuFwYUASf3TG4hYMiVC:22
+X-Proofpoint-GUID: bmCz0QPa5yaa5QYaEhXoLWELY6D40j6N
+X-Proofpoint-ORIG-GUID: bmCz0QPa5yaa5QYaEhXoLWELY6D40j6N
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODIxMDA5NyBTYWx0ZWRfXykpl5qr0DwWV
+ rMnGZK4qGJ3DljDtcjF2u9uvotppYrMGQOC+rttIxkNlkDB/SAQcxTo/4102ryciEsmufaZU7F/
+ ob47ivuLwXIEZr/56W0B3Yw1JYubH7fN1Th85Tx0R96ZRtaDX6J3UxaxTukibkKDtgP2k4F1faC
+ S6WmGG41epjEiAmGwqKKn5fGa/+k08hNdfsJRlqBz5XVK0x4uuEH0xwo6CF/AjhSvIv6+6bWdy4
+ 7e5InaUwAxapSE5qsc4HnEyxpBlCcvhYjxjERGjWUUK51prNATqGb1K7j8WooEP4EAwBe/VrBJr
+ ZThkmnSB44n6Eq3gKN19WoDvKPVtx2b1gOCETi53QcQAgF3ZP3wW3ouN+cBwrGoyBfIsybRToTp
+ D8TUXLUjj0XwUxxA9Bj0ce6RVkHMzPpHN5GYnl1qubE4fBFvCKl+DHKa5KA2Dq1AWkekFqhvWTo
+ wLYUi2V4fv83NUrcgZg==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-08-21_04,2026-08-21_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ impostorscore=0 adultscore=0 lowpriorityscore=0 bulkscore=0 clxscore=1015
+ malwarescore=0 phishscore=0 suspectscore=0 spamscore=0 priorityscore=1501
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608210097
 
-On 21/08/2026 09:12, Luca Weiss wrote:
-> Add a node and pinctrl for the Himax HX83112A touchscreen found on this
-> phone.
-> 
-> Signed-off-by: Luca Weiss <luca.weiss@fairphone.com>
+On Wed, Aug 19, 2026 at 7:55=E2=80=AFAM Abel Vesa <abel.vesa@oss.qualcomm.c=
+om> wrote:
+>
+> This reverts commit b48a0a0a76ccecec60f0568e2af4d89994b08bec, which
+> wrongfully added the MXC and MMCX power domains on Eliza.
+>
+> Even though they are indeed available in cmd-db, which has been the sourc=
+e
+> of information for adding these two, at hardware level they are not
+> actually wired up. Therefore they need to be dropped.
+>
+> Fixes: b48a0a0a76cc ("pmdomain: qcom: rpmhpd: Add missing MXC and MMCX po=
+wer domains for Eliza")
+> Signed-off-by: Abel Vesa <abel.vesa@oss.qualcomm.com>
+
+Applied for fixes and by adding a stable tag, thanks!
+
+Kind regards
+Uffe
+
+
 > ---
->   arch/arm64/boot/dts/qcom/sm7225-fairphone-fp4.dts | 21 ++++++++++++++++++++-
->   1 file changed, 20 insertions(+), 1 deletion(-)
-> 
-> diff --git a/arch/arm64/boot/dts/qcom/sm7225-fairphone-fp4.dts b/arch/arm64/boot/dts/qcom/sm7225-fairphone-fp4.dts
-> index 23f950067a08..ff609f7e1796 100644
-> --- a/arch/arm64/boot/dts/qcom/sm7225-fairphone-fp4.dts
-> +++ b/arch/arm64/boot/dts/qcom/sm7225-fairphone-fp4.dts
-> @@ -626,7 +626,19 @@ &i2c8 {
->   	clock-frequency = <400000>;
->   	status = "okay";
->   
-> -	/* HX83112A touchscreen @ 48 */
-> +	touchscreen@48 {
-> +		compatible = "himax,hx83112a";
-> +		reg = <0x48>;
-> +
-> +		interrupts-extended = <&tlmm 22 IRQ_TYPE_EDGE_FALLING>;
-> +		reset-gpios = <&tlmm 21 GPIO_ACTIVE_LOW>;
-> +
-> +		touchscreen-size-x = <1080>;
-> +		touchscreen-size-y = <2340>;
-> +
-> +		pinctrl-0 = <&touchscreen_default>;
-> +		pinctrl-names = "default";
-> +	};
->   };
->   
->   &i2c10 {
-> @@ -1117,6 +1129,13 @@ platform {
->   &tlmm {
->   	gpio-reserved-ranges = <13 4>, <56 2>;
->   
-> +	touchscreen_default: touchscreen-default-state {
-> +		pins = "gpio21", "gpio22";
-
-I guess you could use here irq-pins {}, reset-pins {},
-
-but with or without change,
-
-Reviewed-by: David Heidelberg <david@ixit.cz>
-
-> +		function = "gpio";
-> +		drive-strength = <8>;
-> +		bias-pull-up;
-> +	};
-> +
->   	qup_uart1_sleep_cts: qup-uart1-sleep-cts-state {
->   		pins = "gpio61";
->   		function = "gpio";
-> 
-
+>  drivers/pmdomain/qcom/rpmhpd.c | 4 ----
+>  1 file changed, 4 deletions(-)
+>
+> diff --git a/drivers/pmdomain/qcom/rpmhpd.c b/drivers/pmdomain/qcom/rpmhp=
+d.c
+> index 96e4bd2f5a14..90743275942d 100644
+> --- a/drivers/pmdomain/qcom/rpmhpd.c
+> +++ b/drivers/pmdomain/qcom/rpmhpd.c
+> @@ -241,13 +241,9 @@ static struct rpmhpd *eliza_rpmhpds[] =3D {
+>         [RPMHPD_GFX] =3D &gfx,
+>         [RPMHPD_LCX] =3D &lcx,
+>         [RPMHPD_LMX] =3D &lmx,
+> -       [RPMHPD_MMCX] =3D &mmcx,
+> -       [RPMHPD_MMCX_AO] =3D &mmcx_ao,
+>         [RPMHPD_MSS] =3D &mss,
+>         [RPMHPD_MX] =3D &mx,
+>         [RPMHPD_MX_AO] =3D &mx_ao,
+> -       [RPMHPD_MXC] =3D &mxc,
+> -       [RPMHPD_MXC_AO] =3D &mxc_ao,
+>         [RPMHPD_NSP] =3D &nsp,
+>  };
+>
+>
+> ---
+> base-commit: 5453bc3279e9f8578ac3e534d476240e40c879e1
+> change-id: 20260819-pmdomain-revert-adding-mxc-mmcx-on-eliza-647d25519f0c
+>
+> Best regards,
+> --
+> Abel Vesa <abel.vesa@oss.qualcomm.com>
+>
