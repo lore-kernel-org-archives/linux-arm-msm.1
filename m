@@ -1,35 +1,34 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AE2FF4C9010
-	for <linux-arm-msm@vger.kernel.org>; Fri, 21 Aug 2026 14:40:07 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1056A30C619
+	for <linux-arm-msm@vger.kernel.org>; Fri, 21 Aug 2026 14:41:32 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787323212; cv=none; b=V2CTav0xw8Q5FsMgZ5ZL1uHegwSBS90Kwe6c1qaulUG6GhF5k82HRJGnP76FmpDvwqtoC1MIeSQhj5WY8m79NxDvfSd1lHn8AYTb1AojnhKR8vgXxD19PRSo4BxdmU5vqXv0WOT2BTJYbL6Ece86ldgcrDkUzimEezYd/L0DGAE=
+	t=1787323295; cv=none; b=fD+zjZTd4+aggsUtNtnRbo3EMECHPrV8Wr6pn1IJFTQxQW2CSjVO38n1YpEGrQTmyKfSmqVwwbVyn3ZmxsxaPoq4MZMPxlO0EZZpEt9VNuW++n4dzZKMOHArjauuOLvXzSrav4a6SwJwhWLX9IpKk2EafzncJzdbULTqdYE3llU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787323212; c=relaxed/simple;
-	bh=GH8nQshyLLnzmePPkdHs/dNDNb7kP5GsBV4zWI8Cxns=;
+	s=arc-20240116; t=1787323295; c=relaxed/simple;
+	bh=gAAR9JxqZrUHdI4fWljp332+26WQXUo/QQj2HXmplI4=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=HFWoVRstZhX40yKrLeivrUyICDozAGYlzSSHerYck2qaLqlwyPckBzC5ISdgxPlUWcYLmfW1SS3EGUCVlPgCc0d2DcZjLbMuMKzxqFSzTbVPckwo4X0uPVASa9q1JRg4kXqMq8FEJqjFXuwIEBhgo8VhOTU/XH0gFRAvtqz9JbQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=TdiZxrCv; arc=none smtp.client-ip=100.103.45.18
+	 In-Reply-To:To:Cc; b=fql05M236noATvGIGjdaCnXdTq5fslyFqFmKSejRQmaNUUXn2EIpcSrKOQiKw0vJJFJ6Opx2Ed/OYrlYOVEhFdKaHJBBDPJLxlpWZct7laVCUsgvvbN+L7zTU5eNvlI2ebQI+KjrBNqeUXvfi+wHo2VpcA3a85VEQTyNdeHsrAA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=KUnwKwfI; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="TdiZxrCv"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4C9E01F000E9;
-	Fri, 21 Aug 2026 14:40:03 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="KUnwKwfI"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id EBC401F000E9;
+	Fri, 21 Aug 2026 14:41:31 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1787323203;
-	bh=R/wr3BnRW2h74QzRjCstkBDHB0wUDUGJuBpar7/eCTc=;
+	s=k20260515; t=1787323292;
+	bh=4YySIM4KosiS7XYFs5fzX4tZtV6If24C0BYm/xoN8uI=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc;
-	b=TdiZxrCvFtfaw9xpHwriBbLhIYxE0duk+8PUQ5NliFJUDYcQ2YRYmLXxxKhGOrSVe
-	 dkH+3k3BV9L7xc+0tiWB/Xq69+N9BKQilXrArDztqR8dbxcc+UKQK4kpxR4p74ZMIG
-	 gnmLyf6qh+7BdRPThoov474crWd+BKY26dVlIou9h4KWG5PBWFrGWROuF/PYb+cByV
-	 NxcEw0jHcAUjmUFhduzUmhRn/deFbv9Jq35b0lH7f69qyfG9uGdSCulxahyEPVwHj7
-	 ka4mx/pkBgMn0Fw+HwuKCmao7qUUGRc3yfGA6wk5vsXhORCaBu1daQsgc1DIqPrAEo
-	 hiX6yiKJleDTw==
+	b=KUnwKwfIVZJZpshpp5Bq3YW9gJooGmzSmvolB2k6z3vR1KLaUsNAB3TEYAYVw7NOj
+	 cIsBZ1u+eW7p0XhpRQmG3ZOheXckKVGpdenKI5v8HADcw4OuYKVSq2HXVyFTuItQtC
+	 2auqB8/sYquXy1DjrRWXer5f4UON9xchLZiwy2lOqg5M7c8McThZIuBLN1P03fBXE3
+	 CvLLaS1xUDSYYVmtJ0Sk8LB+ZMS5xacQ7cR9WsF+tYhbudzOFWEWQZP53wIO73U4tF
+	 pSjjjHRAmiYfvJ1RbrmZzTZjAFsbnFo2kjjz8O3dC60lNIDwumdjjx18rIG6QDDtNB
+	 b85Hvyb2ziTPw==
 From: Maxime Ripard <mripard@kernel.org>
-Date: Fri, 21 Aug 2026 16:38:53 +0200
-Subject: [PATCH 17/70] drm/msm: mdp4: Switch to
- drm_atomic_helper_crtc_create_state
+Date: Fri, 21 Aug 2026 16:39:30 +0200
+Subject: [PATCH 54/70] drm/msm: dpu1: Convert to atomic_create_state
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -38,7 +37,7 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260821-drm-no-more-crtc-reset-v1-17-fb793475c05a@kernel.org>
+Message-Id: <20260821-drm-no-more-crtc-reset-v1-54-fb793475c05a@kernel.org>
 References: <20260821-drm-no-more-crtc-reset-v1-0-fb793475c05a@kernel.org>
 In-Reply-To: <20260821-drm-no-more-crtc-reset-v1-0-fb793475c05a@kernel.org>
 To: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
@@ -51,19 +50,24 @@ Cc: dri-devel@lists.freedesktop.org, Maxime Ripard <mripard@kernel.org>,
  Rob Clark <robin.clark@oss.qualcomm.com>, Sean Paul <sean@poorly.run>, 
  freedreno@lists.freedesktop.org, linux-arm-msm@vger.kernel.org
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1569; i=mripard@kernel.org;
- h=from:subject:message-id; bh=GH8nQshyLLnzmePPkdHs/dNDNb7kP5GsBV4zWI8Cxns=;
- b=owGbwMvMwCmsHn9OcpHtvjLG02pJDFkdSf+r72xud4pqf7eGY/fen/LpSt+jDyffae2erXvoa
- tETvQTfjqksDMKcDLJiiixPZMJOL29fXOVgv/IHzBxWJpAhDFycAjARMVXGhg/1ZTN2v76eOI/j
- c8itU4minZp2V+qt/ijP+v5FVneD3gKWqgMcm7f/DHPlOSV0/ML5YsaGuTInqtluHY5qfF23tfP
- klCn6ZzbturW0pXi9KHvNLHenmZsOu7dwSH3aEVn7y6Lyj4ECAA==
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2634; i=mripard@kernel.org;
+ h=from:subject:message-id; bh=gAAR9JxqZrUHdI4fWljp332+26WQXUo/QQj2HXmplI4=;
+ b=owGbwMvMwCmsHn9OcpHtvjLG02pJDFkdyQL3m5ldv8ZPYSl2l0xeXeTo8/ds0KHp0jvFHk01y
+ DfjuJHYMZWFQZiTQVZMkeWJTNjp5e2LqxzsV/6AmcPKBDKEgYtTACaSe4qxPrJN0JK7wde18P2X
+ naHiBblKC/U9/x7vfPVf/9ihr9vrbRhClxzXNLrBP5GpXnT3ltNZjA0/DjdsD6hzSjXaZvv95Nt
+ pt702Kv+xmn33WchMXe69m3b5aDkWvNvndPCI9RG5hKkf91sAAA==
 X-Developer-Key: i=mripard@kernel.org; a=openpgp;
  fpr=BE5675C37E818C8B5764241C254BCFC56BF6CE8D
 
-The mdp4 crtc implementation uses the deprecated
-drm_atomic_helper_crtc_reset() as its reset hook.
+The dpu1 crtc implementation provides a custom reset hook. However,
+this hook only allocates the state, initializes it with
+__drm_atomic_helper_crtc_reset(), and frees the previous state. It
+does not perform any hardware reset.
 
-Switch to drm_atomic_helper_crtc_create_state() instead.
+Since this is exactly what the atomic_create_state hook is meant to
+do, minus the old state cleanup which the caller handles, convert the
+implementation to use atomic_create_state with
+__drm_atomic_helper_crtc_state_init() instead.
 
 Signed-off-by: Maxime Ripard <mripard@kernel.org>
 ---
@@ -76,26 +80,56 @@ Cc: Sean Paul <sean@poorly.run>
 Cc: freedreno@lists.freedesktop.org
 Cc: linux-arm-msm@vger.kernel.org
 ---
- drivers/gpu/drm/msm/disp/mdp4/mdp4_crtc.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ drivers/gpu/drm/msm/disp/dpu1/dpu_crtc.c | 18 +++++++++---------
+ 1 file changed, 9 insertions(+), 9 deletions(-)
 
-diff --git a/drivers/gpu/drm/msm/disp/mdp4/mdp4_crtc.c b/drivers/gpu/drm/msm/disp/mdp4/mdp4_crtc.c
-index 57dfce58450b..93050b3c3548 100644
---- a/drivers/gpu/drm/msm/disp/mdp4/mdp4_crtc.c
-+++ b/drivers/gpu/drm/msm/disp/mdp4/mdp4_crtc.c
-@@ -475,11 +475,11 @@ static int mdp4_crtc_cursor_move(struct drm_crtc *crtc, int x, int y)
- static const struct drm_crtc_funcs mdp4_crtc_funcs = {
+diff --git a/drivers/gpu/drm/msm/disp/dpu1/dpu_crtc.c b/drivers/gpu/drm/msm/disp/dpu1/dpu_crtc.c
+index 42d0a529b4d5..77a2d1f6700d 100644
+--- a/drivers/gpu/drm/msm/disp/dpu1/dpu_crtc.c
++++ b/drivers/gpu/drm/msm/disp/dpu1/dpu_crtc.c
+@@ -1138,21 +1138,21 @@ void dpu_crtc_commit_kickoff(struct drm_crtc *crtc)
+ 
+ end:
+ 	DPU_ATRACE_END("crtc_commit");
+ }
+ 
+-static void dpu_crtc_reset(struct drm_crtc *crtc)
++static struct drm_crtc_state *dpu_crtc_create_state(struct drm_crtc *crtc)
+ {
+-	struct dpu_crtc_state *cstate = kzalloc_obj(*cstate);
++	struct dpu_crtc_state *cstate;
+ 
+-	if (crtc->state)
+-		dpu_crtc_destroy_state(crtc, crtc->state);
++	cstate = kzalloc_obj(*cstate);
++	if (!cstate)
++		return ERR_PTR(-ENOMEM);
+ 
+-	if (cstate)
+-		__drm_atomic_helper_crtc_reset(crtc, &cstate->base);
+-	else
+-		__drm_atomic_helper_crtc_reset(crtc, NULL);
++	__drm_atomic_helper_crtc_state_init(&cstate->base, crtc);
++
++	return &cstate->base;
+ }
+ 
+ /**
+  * dpu_crtc_duplicate_state - state duplicate hook
+  * @crtc: Pointer to drm crtc structure
+@@ -1841,11 +1841,11 @@ static int dpu_crtc_late_register(struct drm_crtc *crtc)
+ }
+ 
+ static const struct drm_crtc_funcs dpu_crtc_funcs = {
  	.set_config = drm_atomic_helper_set_config,
  	.page_flip = drm_atomic_helper_page_flip,
- 	.cursor_set = mdp4_crtc_cursor_set,
- 	.cursor_move = mdp4_crtc_cursor_move,
--	.reset = drm_atomic_helper_crtc_reset,
-+	.atomic_create_state = drm_atomic_helper_crtc_create_state,
- 	.atomic_duplicate_state = drm_atomic_helper_crtc_duplicate_state,
- 	.atomic_destroy_state = drm_atomic_helper_crtc_destroy_state,
- 	.enable_vblank  = msm_crtc_enable_vblank,
- 	.disable_vblank = msm_crtc_disable_vblank,
- };
+-	.reset = dpu_crtc_reset,
++	.atomic_create_state = dpu_crtc_create_state,
+ 	.atomic_duplicate_state = dpu_crtc_duplicate_state,
+ 	.atomic_destroy_state = dpu_crtc_destroy_state,
+ 	.atomic_print_state = dpu_crtc_atomic_print_state,
+ 	.late_register = dpu_crtc_late_register,
+ 	.verify_crc_source = dpu_crtc_verify_crc_source,
 
 -- 
 2.55.0
