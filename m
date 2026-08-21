@@ -1,88 +1,35 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 22EC14C6EF3
-	for <linux-arm-msm@vger.kernel.org>; Fri, 21 Aug 2026 14:04:52 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1F152490BFA;
+	Fri, 21 Aug 2026 14:39:22 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787321093; cv=none; b=i4X0GiElLuvTYlnkodMC0ua5QxAS4bZGQedwI4/03vr52gZ+OGqODf2DnnVMlXJEj78ga1CwH3z193Y+JyoepG/iS4uYdfyRG0V3qX3x82eOGawRN5altRCRVtBZDUGL6AkiE30wMbSO7vxRkFy4G6KKaxCYm4Powgn05CPlL30=
+	t=1787323164; cv=none; b=bn7ivDAhJDUto/3NieNgwovXpcK/XeUOPVoQcWtYOCLDoOb+UoaW3BzjCLkQkHtE8fXwFNa+OD4Ysz1BsLk00bNmtICezJMKFOmld6JiHwGpMFj419ECziFhvpH9HmzOL5zlMlJoG9mASAwoBPM/MJo8JFz4fcOA97/2DX98HpU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787321093; c=relaxed/simple;
-	bh=p5ms3ettnsZUkMaMVpgaQ1dF7NvICnT7m59e4toR5Yg=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=aXkxd4AeBQvMt0Y7ySBUe6/KtFpsz24E2fP6av+RrBnp6ff/LPfsBHQU+/PU4vC47XuAxVfXJp+8Wl76fiq7zPd61zk+sPx3LuP24xwY/ws9QVwyy3Uzhs0dyduvZAhsf0AlgmOCrlnzu+n6AH286CPlgGOFhlorrbO2PyPMtII=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=X6A93P90; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=FLVrR6UZ; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1787323164; c=relaxed/simple;
+	bh=XrpjqpxeU7ALF5OLpK2WpdbG15zlPyFx5PlM9LAlHdY=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=IY5Zn+nNslg2BV3OmdtRu9dgfx1uVjP+uAEuRJVXXmH1nJC9E/RN+5Tibte8xkEZKKnCQFIgWFOGe/r9huEAbRPwlRuOqzYgIpeoppvqrFpsw4uKR3LucWm/gjVcapSlueSEJzb17qWbjYkil3xKvbr0cblouju235EEkHz0ncA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=FN1u/yS7; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="X6A93P90";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="FLVrR6UZ"
-Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67LCoWl51486233
-	for <linux-arm-msm@vger.kernel.org>; Fri, 21 Aug 2026 14:04:51 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	UHxd2nhjsoPjXsrENyRfnR3wWpIKcv2XiaMwrKt9YmA=; b=X6A93P90A1+gXmS4
-	sQ924F9ZEelFEAAlsvB4FCYrHYhG0NuGkK3eEsWfX+keqmu3/7czdEeLWn8Y1wFe
-	q9GZE4sQGQm8pJ1Ffh3HutYRt6vqIDttCM4hi4LnwIou4j9ZsN1xwfyrcTZqrap4
-	UN41YUSI+I+eaqkXZCDgE9oLR+A6mnTeS4OlTIZMwfWx99BHGgamkVzEdSGJ35WK
-	YQFc8xiw7skv3h9dHeYiExDPHM8NMYEM1fMCAMgH5O8pYkE2hAx1p66LA05jDBrU
-	AK3ApYHkVlcCZFN3I8suAmVEwn+8iln3MvtOuMs5cjs/gEq29xr9pfZpXfAXKMgy
-	SzMMHg==
-Received: from mail-pj1-f71.google.com (mail-pj1-f71.google.com [209.85.216.71])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g6gde9vmp-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Fri, 21 Aug 2026 14:04:51 +0000 (GMT)
-Received: by mail-pj1-f71.google.com with SMTP id 98e67ed59e1d1-38dc085b0a7so1880125a91.2
-        for <linux-arm-msm@vger.kernel.org>; Fri, 21 Aug 2026 07:04:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1787321091; x=1787925891; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=UHxd2nhjsoPjXsrENyRfnR3wWpIKcv2XiaMwrKt9YmA=;
-        b=FLVrR6UZ3p/S/Zm52aiTRoUHFNApN3loZXRfCM4aIcSluznG3rj90jW4oJc58Ss0UH
-         BHUc8j48QZ547+vZPlExejp6l7NWJO+mXf2zf2WR+LV1FRrtx1BSBaf0WbpZh3cxb2gF
-         c8Z+e7O3PZp++uA8XDqMsIzG1RYgWop5yh9eAQ1E7dJOqpsUzJ93MsltfSl/IP9g2Kp8
-         o8cJCpxBhyqmvVc2ByhOabq3f55zgmfjn3rs9vLa2Zrls7pOmccXesus2MkagkO6y82h
-         J9q5sYzgacklNOsmmMd7jYrjeTx/u26ApZCgD46J9xyMqTVzromsrrCXDS6btuPH/Krx
-         jKyQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787321091; x=1787925891;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=UHxd2nhjsoPjXsrENyRfnR3wWpIKcv2XiaMwrKt9YmA=;
-        b=DwAGUf/x+MpjKzzGsKS2vF3iWhtNJj/4nJaeQzKx4wavRwerUuKqmI6YpRrzFB3H6Q
-         DZFkx+dDbFF0ekIowZbSiiMBNTsZTtU/ghY2MIPXC38Vd9kGfNM566ItDwXYkuii96Ta
-         UimXLF9mAF9DJgJ8STKnVYqVsu470n3fX3jCykLM4JOsHz0ev5CPXAJuiktZv9ohyB5g
-         XtOKf5a7+gk43+o5hE8woeISpqrdY12yBvk7fvRp7dZT2WWZzw4HTCCxlmLPAr1qHX1u
-         VmimCayAtIaE4bc3kSGyiwgmZ8vOnE+8V709lquAaa69oUzjDxtqqQLkzlKNjBwk7WIt
-         4sPw==
-X-Forwarded-Encrypted: i=1; AHgh+RozKu4ZSOKfP0R42EG0lSKDdxz4SF8pt2Qtw85PwLqxHbKFE8CEKsE00TsWtgVXfFwhmYoV56pYGR8p/Wqa@vger.kernel.org
-X-Gm-Message-State: AFuF++mK1a7uDxxQcW0pHk0wmQ4TQcQ2Ee101BuUWfbt4umYkXAxfjPP
-	Of3C5oL7eUwp/mmI8w2v/UA4nG012ZgAFluSOayZM+chw5wRUvXsGRB7ifgEjrPN6ZCPNGC2yRJ
-	yRRreTj7LbCppcwi0ZGEjpQC6LkFC+aXZPuXlGRnL6uKPMCzfa6liEJwzT2wVh3LgvP7E
-X-Gm-Gg: AR+sD10p+DfTKfTYQtPjpRMa+M4dwTMs1299OEbAKpbCvfSM6VxPVIKpjzWpX2s5adq
-	TcVl6agWS9NkOibIPaxHMVvhWpZm+lmppxfO7qOUoBfhiPCjWAJvlMg7Fy1q85TO+cEBX00djq0
-	xZnILDKt1PRq5ctS9hSrFVX7Cdo+3G938hmgxuATm3/Wy2p0p6wyjEA2lnQX4/WKvNCExQ3fDIR
-	3+7xPYNX1BIXZIBepwcQpN4zqCTNzSfaSwLyTZ6xShffN1sv0szLTN4TLE5xFqPN+7U1Sxwy2Vf
-	Xs2Wcj3zZNuUHo+irft2RkWjscJE8W4Moo81RWeDHe9QJuAFCORJnSc+JsvhZxEI5XP7uIbBNle
-	tZzSR6pyhx7Q0eA0dZp/F81CheM6x
-X-Received: by 2002:a17:90b:384d:b0:38e:7f1b:efa with SMTP id 98e67ed59e1d1-395c37130eamr10641004a91.11.1787321090593;
-        Fri, 21 Aug 2026 07:04:50 -0700 (PDT)
-X-Received: by 2002:a17:90b:384d:b0:38e:7f1b:efa with SMTP id 98e67ed59e1d1-395c37130eamr10640910a91.11.1787321090030;
-        Fri, 21 Aug 2026 07:04:50 -0700 (PDT)
-Received: from hu-akakum-hyd.qualcomm.com ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-395c45530absm3331680a91.4.2026.08.21.07.04.46
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 21 Aug 2026 07:04:49 -0700 (PDT)
-From: Akash Kumar <akash.kumar@oss.qualcomm.com>
-Date: Fri, 21 Aug 2026 19:34:33 +0530
-Subject: [PATCH v2 3/3] arm64: dts: qcom: shikra: Wire up usb-role-switch
- for USB Type-C ports
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="FN1u/yS7"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 911B61F000E9;
+	Fri, 21 Aug 2026 14:39:21 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1787323162;
+	bh=1is4vlPBYIemAGJNcyTfyeB4LcQTBxiGBN1U0sCNEMs=;
+	h=From:Subject:Date:To:Cc;
+	b=FN1u/yS7xdcJbsStZ+nKUxoMvs+kEhII7QUNCGLCDiEhPuJw8j37Gjf3ioEGHsays
+	 B4R6H/mGhya901xaI8+TExbsArw8P2XBnjAaCN0Z/T6tQ3ZOnXhBqOG9Y/MCuxFQ6C
+	 HN/AQR2D5n3xrnHkUZefY218B3odTqpVVkxm7+dJ5uNAgi1zBZ7kt0gno/MpL1h+Xb
+	 MKG/JonL4EzBXyXM3CGkhUnJDh8c16VtEqLvL0r3/Mmy54DYjR08fTieu12GmNe5E0
+	 pdEgW/sYqNxYCl6bEerjcj1H24XdynDHugbHesM92juDFZ/tIH8ZmNuSGm3l1YgeXa
+	 Bk7E97B55Zwjw==
+From: Maxime Ripard <mripard@kernel.org>
+Subject: [PATCH 00/70] drm/crtc: Convert all drivers to atomic_create_state
+ and remove reset
+Date: Fri, 21 Aug 2026 16:38:36 +0200
+Message-Id: <20260821-drm-no-more-crtc-reset-v1-0-fb793475c05a@kernel.org>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -91,489 +38,302 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260821-shikra-usb-dt-v7-apply-v2-3-628885fc1d0e@oss.qualcomm.com>
-References: <20260821-shikra-usb-dt-v7-apply-v2-0-628885fc1d0e@oss.qualcomm.com>
-In-Reply-To: <20260821-shikra-usb-dt-v7-apply-v2-0-628885fc1d0e@oss.qualcomm.com>
-To: Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>,
-        Heikki Krogerus <heikki.krogerus@linux.intel.com>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>
-Cc: linux-usb@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-        Akash Kumar <akash.kumar@oss.qualcomm.com>
-X-Mailer: b4 0.13.0
-X-Authority-Analysis: v=2.4 cv=BcroFLt2 c=1 sm=1 tr=0 ts=6a885b03 cx=c_pps
- a=UNFcQwm+pnOIJct1K4W+Mw==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
- a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
- a=EUspDBNiAAAA:8 a=OKfUiDEiIDe3Zo9lHMoA:9 a=QEXdDO2ut3YA:10
- a=uKXjsCUrEbL0IQVhDsJ9:22
-X-Proofpoint-GUID: aAj5eCkTipXaMlwN49pkAUUPo1C-UVAY
-X-Proofpoint-ORIG-GUID: aAj5eCkTipXaMlwN49pkAUUPo1C-UVAY
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODIxMDEwOCBTYWx0ZWRfX/kMpjeqH/KO9
- DsYBUwKeyZcOF1+bitxOxjeb34Jeb0K7vxR/X+Oj/yRq1zOkvKwQCbrh/w0doFAfq1OlLOm6xMp
- rk4hoVdfJlU+nGb8u8VE9E7lUZTE88I=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODIxMDEwOCBTYWx0ZWRfX/HrmlZFnu4pT
- YOmD0p8kl+CRAOaUWMgw2AXnoHlsRpLppWfV3ByshI2fxBkWr4/+uc4Q8pfhThFOaKz2gjf+yl4
- 7SVc9U3ezJFNZeSCtzf5DcVMlU8nVKZuc+UXDd6x4PhKSuWt0WM9QHxWRFKw8IQoWUfDeoG81WG
- z64rJ9NpkONa6OwC0ZiYAAbz8qQ/Tw0mxG2ZDg4YYdw/4GlLlWyXNhNQ1no2eph7SJ2U5Zrvxp0
- Vrmrlt0zkxXUaYHMokFHqr1yBsQevYstSLWAynd6UjKDMmZtuoesWxjlxw1Ph9bNd2nveZBeo7L
- fXl/1gYyHqibkNot86UgV7DbAAerMhp1BNwO6b/oexjlauggvcVs1acAKV4kBpxmouo7ltXyibj
- 0odx/Q5gqy0F5HSzB1n/XsGOjWf5s4MlrN/5xaBLf+Erfukslc0X/7SIGTNXOaBUf9jRDba23ef
- 9aD8T6CSxSdA2H1QEVg==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-08-21_04,2026-08-21_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- spamscore=0 impostorscore=0 phishscore=0 malwarescore=0 suspectscore=0
- priorityscore=1501 bulkscore=0 clxscore=1015 adultscore=0 lowpriorityscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608210108
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXNwQ7CIAzG8VchPdsEFnRur2J2YFC1B0ALmiXL3
+ l3mjv8v6a8rFBKmAqNaQejLhXNqYU4K/NOlByGH1tDp7qJ7PWCQiCljzELopXoUKlTRWGfDefb
+ XYA2045fQnZc/fJuOFnp/ml+PEWZXmpBj5DqqXY1cPCZaKu7PUPeoB5i27QeOVHDlpAAAAA==
+X-Change-ID: 20260709-drm-no-more-crtc-reset-14a4d5bc8d41
+To: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
+ Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@gmail.com>, 
+ Simona Vetter <simona@ffwll.ch>
+Cc: dri-devel@lists.freedesktop.org, Maxime Ripard <mripard@kernel.org>, 
+ Janne Grunau <j@jannau.net>, Sasha Finkelstein <k@chaosmail.tech>, 
+ asahi@lists.linux.dev, 
+ =?utf-8?q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, 
+ Alex Deucher <alexander.deucher@amd.com>, amd-gfx@lists.freedesktop.org, 
+ Liviu Dudau <liviu.dudau@arm.com>, Russell King <linux@armlinux.org.uk>, 
+ Alim Akhtar <alim.akhtar@samsung.com>, Inki Dae <inki.dae@samsung.com>, 
+ Krzysztof Kozlowski <krzk@kernel.org>, 
+ Kyungmin Park <kyungmin.park@samsung.com>, 
+ Peter Griffin <peter.griffin@linaro.org>, 
+ Seung-Woo Kim <sw0312.kim@samsung.com>, linux-samsung-soc@vger.kernel.org, 
+ Alison Wang <alison.wang@nxp.com>, Stefan Agner <stefan@agner.ch>, 
+ Ruben Wauters <rubenru09@aol.com>, Tian Tao <tiantao6@hisilicon.com>, 
+ Xinwei Kong <kong.kongxinwei@hisilicon.com>, 
+ Yongbang Shi <shiyongbang@huawei.com>, John Stultz <jstultz@google.com>, 
+ Sumit Semwal <sumit.semwal@linaro.org>, 
+ Xinliang Liu <xinliang.liu@linaro.org>, 
+ Yongqin Liu <yongqin.liu@linaro.org>, Dexuan Cui <decui@microsoft.com>, 
+ Long Li <longli@microsoft.com>, 
+ Saurabh Sengar <ssengar@linux.microsoft.com>, linux-hyperv@vger.kernel.org, 
+ Fabio Estevam <festevam@gmail.com>, Frank Li <Frank.Li@nxp.com>, 
+ Liu Ying <victor.liu@nxp.com>, 
+ Pengutronix Kernel Team <kernel@pengutronix.de>, 
+ Sascha Hauer <s.hauer@pengutronix.de>, imx@lists.linux.dev, 
+ Laurentiu Palcu <laurentiu.palcu@oss.nxp.com>, 
+ Lucas Stach <l.stach@pengutronix.de>, Paul Cercueil <paul@crapouillou.net>, 
+ linux-mips@vger.kernel.org, 
+ Anitha Chrisanthus <anitha.chrisanthus@intel.com>, 
+ Paul Kocialkowski <paulk@sys-base.io>, Jerome Brunet <jbrunet@baylibre.com>, 
+ Kevin Hilman <khilman@baylibre.com>, 
+ Martin Blumenstingl <martin.blumenstingl@googlemail.com>, 
+ linux-amlogic@lists.infradead.org, Abhinav Kumar <abhinav.kumar@linux.dev>, 
+ Dmitry Baryshkov <lumag@kernel.org>, Jessica Zhang <jesszhan0024@gmail.com>, 
+ Marijn Suijten <marijn.suijten@somainline.org>, 
+ Rob Clark <robin.clark@oss.qualcomm.com>, Sean Paul <sean@poorly.run>, 
+ freedreno@lists.freedesktop.org, linux-arm-msm@vger.kernel.org, 
+ Marek Vasut <marex@denx.de>, Dave Airlie <airlied@redhat.com>, 
+ Gerd Hoffmann <kraxel@redhat.com>, spice-devel@lists.freedesktop.org, 
+ virtualization@lists.linux.dev, 
+ Geert Uytterhoeven <geert+renesas@glider.be>, 
+ linux-renesas-soc@vger.kernel.org, 
+ Marcus Folkesson <marcus.folkesson@gmail.com>, 
+ Baolin Wang <baolin.wang@linux.alibaba.com>, 
+ Chunyan Zhang <zhang.lyra@gmail.com>, Orson Zhai <orsonzhai@gmail.com>, 
+ Alain Volmat <alain.volmat@foss.st.com>, 
+ Raphael Gallais-Pou <rgallaispou@gmail.com>, 
+ Alexandre Torgue <alexandre.torgue@foss.st.com>, 
+ Maxime Coquelin <mcoquelin.stm32@gmail.com>, 
+ Philippe Cornu <philippe.cornu@foss.st.com>, 
+ Raphael Gallais-Pou <raphael.gallais-pou@foss.st.com>, 
+ Yannick Fertre <yannick.fertre@foss.st.com>, Chen-Yu Tsai <wens@kernel.org>, 
+ Samuel Holland <samuel@sholland.org>, linux-sunxi@lists.linux.dev, 
+ Jyri Sarha <jyri.sarha@iki.fi>, 
+ Tomi Valkeinen <tomi.valkeinen@ideasonboard.com>, 
+ Aditya Garg <gargaditya08@proton.me>, Aun-Ali Zaidi <admin@kodeit.net>, 
+ LiangCheng Wang <zaq14760@gmail.com>, Alex Lanzano <lanzano.alex@gmail.com>, 
+ Hans de Goede <hansg@kernel.org>, Icenowy Zheng <zhengxingda@iscas.ac.cn>, 
+ Chia-I Wu <olvaffe@gmail.com>, 
+ Dmitry Osipenko <dmitry.osipenko@collabora.com>, 
+ Gurchetan Singh <gurchetansingh@chromium.org>, 
+ Michal Simek <michal.simek@amd.com>, 
+ Javier Martinez Canillas <javierm@redhat.com>, 
+ Harry Wentland <harry.wentland@amd.com>, Leo Li <sunpeng.li@amd.com>, 
+ Rodrigo Siqueira <siqueira@igalia.com>, 
+ Jocelyn Falempe <jfalempe@redhat.com>, 
+ Alexandre Belloni <alexandre.belloni@bootlin.com>, 
+ Claudiu Beznea <claudiu.beznea@tuxon.dev>, 
+ Dharma Balasubiramani <dharma.b@microchip.com>, 
+ Manikandan Muralidharan <manikandan.m@microchip.com>, 
+ Nicolas Ferre <nicolas.ferre@microchip.com>, 
+ Philipp Zabel <p.zabel@pengutronix.de>, Huacai Chen <chenhuacai@kernel.org>, 
+ Jianmin Lv <lvjianmin@loongson.cn>, Mingcong Bai <jeffbai@aosc.io>, 
+ Qianhai Wu <wuqianhai@loongson.cn>, Xi Ruoyao <xry111@xry111.site>, 
+ AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>, 
+ Chun-Kuang Hu <chunkuang.hu@kernel.org>, 
+ Matthias Brugger <matthias.bgg@gmail.com>, 
+ Danilo Krummrich <dakr@kernel.org>, Lyude Paul <lyude@redhat.com>, 
+ nouveau@lists.freedesktop.org, 
+ Kieran Bingham <kieran.bingham+renesas@ideasonboard.com>, 
+ Laurent Pinchart <laurent.pinchart+renesas@ideasonboard.com>, 
+ Magnus Damm <magnus.damm@gmail.com>, 
+ Tomi Valkeinen <tomi.valkeinen+renesas@ideasonboard.com>, 
+ Biju Das <biju.das.jz@bp.renesas.com>, 
+ =?utf-8?q?Heiko_St=C3=BCbner?= <heiko@sntech.de>, 
+ Andy Yan <andy.yan@rock-chips.com>, Sandy Huang <hjc@rock-chips.com>, 
+ linux-rockchip@lists.infradead.org, Iker Pedrosa <ikerpedrosam@gmail.com>, 
+ Jonathan Hunter <jonathanh@nvidia.com>, 
+ Mikko Perttunen <mperttunen@nvidia.com>, 
+ Thierry Reding <thierry.reding@kernel.org>, linux-tegra@vger.kernel.org, 
+ =?utf-8?q?Ma=C3=ADra_Canal?= <mcanal@igalia.com>, 
+ Dave Stevenson <dave.stevenson@raspberrypi.com>, 
+ Raspberry Pi Kernel Maintenance <kernel-list@raspberrypi.com>, 
+ Haneen Mohammed <hamohammed.sa@gmail.com>, 
+ Louis Chauvet <louis.chauvet@bootlin.com>, 
+ Melissa Wen <melissa.srw@gmail.com>, 
+ Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>, 
+ Zack Rusin <zack.rusin@broadcom.com>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=openpgp-sha256; l=10779; i=mripard@kernel.org;
+ h=from:subject:message-id; bh=XrpjqpxeU7ALF5OLpK2WpdbG15zlPyFx5PlM9LAlHdY=;
+ b=owGbwMvMwCmsHn9OcpHtvjLG02pJDFkdSd+XbtrDvPLAypKrqwIuJBVtKGP58e3vNoGDLkZFC
+ yNyzqqYdkxlYRDmZJAVU2R5IhN2enn74ioH+5U/YOawMoEMYeDiFICJRGgxVrO/2eF1MjFl/cHs
+ Jxsn5npdOsF9VzR9SUlnHHvK7MgDb5U7ja6LGKsfk5sjoxNiGpPyibE+bdafRRv8i237pSPUjJy
+ TN8z19j5uyFy45IQqZ1NX/r7E2TskJUSfuzM9XtUaqtnAHgQA
+X-Developer-Key: i=mripard@kernel.org; a=openpgp;
+ fpr=BE5675C37E818C8B5764241C254BCFC56BF6CE8D
 
-On Shikra CQS/CQM platforms, usb-role-switch is handled by PM4125 on
-the primary Type-C port and Cypress PD controller CYPD6129 on the
-second Type-C port. On Shikra IQS platform, usb-role-switch is
-handled by Cypress PD controller CYPD6129 on both Type-C ports.
+This is a follow-up to the plane reset removal series, and part of a
+larger effort to remove the reset hook from all KMS objects.
 
-Add the CYPD6129 typec node under i2c3, wire its connector endpoints
-to the corresponding DWC3 controller ports via remote-endpoint
-phandles, and switch the associated USB controllers to OTG mode so
-role switching can take effect.
+The CRTC reset hook is overloaded: it is called both at probe time to
+create the initial software state and during suspend/resume to reset
+hardware and software state. These two roles have different
+requirements, and the reset hook is not fallible, making error
+handling difficult for the initial state allocation path.
 
-Signed-off-by: Akash Kumar <akash.kumar@oss.qualcomm.com>
+While reset has the semantics to reset both the software and hardware
+state, the vast majority of implementations and all the helpers only
+reset the software state, making them equivalent to
+atomic_create_state in practice. The atomic_create_state hook makes
+this explicit: it only allocates and initializes a pristine state
+without any side effect, and returns the state pointer or an ERR_PTR
+on failure.
+
+This series converts all CRTC drivers tree-wide from the reset hook to
+atomic_create_state, then removes the reset hook from struct
+drm_crtc_funcs entirely. Two drivers (tilcdc and loongson) had actual
+hardware reset logic mixed into their reset hook; those are moved to
+CRTC creation instead. The conversions were done using a combination of
+Coccinelle semantic patches and manual adjustments.
+
+Signed-off-by: Maxime Ripard <mripard@kernel.org>
 ---
- arch/arm64/boot/dts/qcom/shikra-cqm-evk.dts  |  84 ++++++++++++++++++++-
- arch/arm64/boot/dts/qcom/shikra-cqm-som.dtsi |  45 +++++++++++
- arch/arm64/boot/dts/qcom/shikra-cqs-evk.dts  |  84 ++++++++++++++++++++-
- arch/arm64/boot/dts/qcom/shikra-iqs-evk.dts  | 107 ++++++++++++++++++++++++++-
- 4 files changed, 309 insertions(+), 11 deletions(-)
+Maxime Ripard (70):
+      drm/adp: Switch to drm_atomic_helper_crtc_create_state
+      drm/amdgpu: vkms: Switch to drm_atomic_helper_crtc_create_state
+      drm/arm: hdlcd: Switch to drm_atomic_helper_crtc_create_state
+      drm/armada: Switch to drm_atomic_helper_crtc_create_state
+      drm/exynos: Switch to drm_atomic_helper_crtc_create_state
+      drm/fsl-dcu: Switch to drm_atomic_helper_crtc_create_state
+      drm/gud: Switch to drm_atomic_helper_crtc_create_state
+      drm/hisilicon: hibmc: Switch to drm_atomic_helper_crtc_create_state
+      drm/hisilicon: kirin: Switch to drm_atomic_helper_crtc_create_state
+      drm/hyperv: Switch to drm_atomic_helper_crtc_create_state
+      drm/imx: dc: Switch to drm_atomic_helper_crtc_create_state
+      drm/imx: dcss: Switch to drm_atomic_helper_crtc_create_state
+      drm/ingenic: Switch to drm_atomic_helper_crtc_create_state
+      drm/kmb: Switch to drm_atomic_helper_crtc_create_state
+      drm/logicvc: Switch to drm_atomic_helper_crtc_create_state
+      drm/meson: Switch to drm_atomic_helper_crtc_create_state
+      drm/msm: mdp4: Switch to drm_atomic_helper_crtc_create_state
+      drm/mxs: mxsfb: Switch to drm_atomic_helper_crtc_create_state
+      drm/qxl: Switch to drm_atomic_helper_crtc_create_state
+      drm/renesas: shmobile: Switch to drm_atomic_helper_crtc_create_state
+      drm/simple-kms: Remove unused reset_crtc hook
+      drm/simple-kms: Switch to drm_atomic_helper_crtc_create_state
+      drm/sitronix: st7571: Switch to drm_atomic_helper_crtc_create_state
+      drm/sprd: Switch to drm_atomic_helper_crtc_create_state
+      drm/sti: Switch to drm_atomic_helper_crtc_create_state
+      drm/stm: Switch to drm_atomic_helper_crtc_create_state
+      drm/sun4i: Switch to drm_atomic_helper_crtc_create_state
+      drm/tests: Switch to drm_atomic_helper_crtc_create_state
+      drm/tilcdc: Move hardware reset to CRTC creation
+      drm/tilcdc: Switch to drm_atomic_helper_crtc_create_state
+      drm/tiny: appletbdrm: Switch to drm_atomic_helper_crtc_create_state
+      drm/tiny: bochs: Switch to drm_atomic_helper_crtc_create_state
+      drm/tiny: cirrus: Switch to drm_atomic_helper_crtc_create_state
+      drm/tiny: pixpaper: Switch to drm_atomic_helper_crtc_create_state
+      drm/tiny: sharp: Switch to drm_atomic_helper_crtc_create_state
+      drm/udl: Switch to drm_atomic_helper_crtc_create_state
+      drm/vbox: Switch to drm_atomic_helper_crtc_create_state
+      drm/verisilicon: Switch to drm_atomic_helper_crtc_create_state
+      drm/virtio: Switch to drm_atomic_helper_crtc_create_state
+      drm/xlnx: Switch to drm_atomic_helper_crtc_create_state
+      drm/mipi-dbi: Switch to drm_atomic_helper_crtc_create_state
+      drm/atomic-helper: Remove drm_atomic_helper_crtc_reset
+      sysfb: Convert to create_state
+      drm/amdgpu: dm: Convert to atomic_create_state
+      drm/komeda: Convert to atomic_create_state
+      drm/malidp: Convert to atomic_create_state
+      drm/ast: Convert to atomic_create_state
+      drm/atmel-hlcdc: Convert to atomic_create_state
+      drm/imx: ipuv3: Convert to atomic_create_state
+      drm/loongsoon: Move hardware reset to CRTC creation
+      drm/loongson: Convert to atomic_create_state
+      drm/mediatek: Convert to atomic_create_state
+      drm/mgag200: Convert to atomic_create_state
+      drm/msm: dpu1: Convert to atomic_create_state
+      drm/msm: mdp5: Convert to atomic_create_state
+      drm/mxsfb: lcdif: Convert to atomic_create_state
+      drm/nouveau: Convert to atomic_create_state
+      drm/omapdrm: Convert to atomic_create_state
+      drm/rcar-du: Convert to atomic_create_state
+      drm/rzg2l-du: Convert to atomic_create_state
+      drm/rockchip: vop: Convert to atomic_create_state
+      drm/rockchip: vop2: Convert to atomic_create_state
+      drm/sitronix: st7920: Convert to atomic_create_state
+      drm/solomon: ssd130x: Convert to atomic_create_state
+      drm/tegra: Convert to atomic_create_state
+      drm/vc4: Convert to atomic_create_state
+      drm/vkms: Convert to atomic_create_state
+      drm/vmwgfx: Convert to atomic_create_state
+      drm/atomic-helper: Remove __drm_atomic_helper_crtc_reset
+      drm/crtc: Remove reset
 
-diff --git a/arch/arm64/boot/dts/qcom/shikra-cqm-evk.dts b/arch/arm64/boot/dts/qcom/shikra-cqm-evk.dts
-index 3866ab8b0faa..41290b562fa3 100644
---- a/arch/arm64/boot/dts/qcom/shikra-cqm-evk.dts
-+++ b/arch/arm64/boot/dts/qcom/shikra-cqm-evk.dts
-@@ -42,6 +42,51 @@ &remoteproc_mpss {
- 	status = "okay";
- };
- 
-+&i2c3 {
-+	status = "okay";
-+
-+	typec@40 {
-+		compatible = "cypress,cypd6129";
-+		reg = <0x40>;
-+		interrupts-extended = <&tlmm 136 IRQ_TYPE_LEVEL_LOW>;
-+		pinctrl-0 = <&usb0_intr_state>;
-+		pinctrl-names = "default";
-+		wakeup-source;
-+
-+		#address-cells = <1>;
-+		#size-cells = <0>;
-+
-+		ccg_typec_con0: connector@0 {
-+			compatible = "usb-c-connector";
-+			reg = <0>;
-+			label = "USB-C";
-+			data-role = "dual";
-+			power-role = "dual";
-+
-+			ports {
-+				#address-cells = <1>;
-+				#size-cells = <0>;
-+
-+				port@0 {
-+					reg = <0>;
-+
-+					ucsi_ccg_port: endpoint {
-+						remote-endpoint = <&usb_2_dwc3_hs>;
-+					};
-+				};
-+			};
-+		};
-+	};
-+};
-+
-+&pm4125_hs_in {
-+	remote-endpoint = <&usb_1_dwc3_hs>;
-+};
-+
-+&pm4125_ss_in {
-+	remote-endpoint = <&usb_qmpphy_out>;
-+};
-+
- &sdhc_1 {
- 	vmmc-supply = <&pm4125_l20>;
- 	vqmmc-supply = <&pm4125_l14>;
-@@ -58,6 +103,23 @@ &sdhc_1 {
- 	status = "okay";
- };
- 
-+&tlmm {
-+	usb0_intr_state: usb0-intr-state {
-+		pins = "gpio136";
-+		function = "gpio";
-+		drive-strength = <2>;
-+		bias-pull-up;
-+	};
-+};
-+
-+&usb_1 {
-+	/delete-property/ dr_mode;
-+};
-+
-+&usb_1_dwc3_hs {
-+	remote-endpoint = <&pm4125_hs_in>;
-+};
-+
- &usb_1_hsphy {
- 	vdd-supply = <&pm4125_l12>;
- 	vdda-pll-supply = <&pm4125_l13>;
-@@ -66,11 +128,14 @@ &usb_1_hsphy {
- 	status = "okay";
- };
- 
--&usb_qmpphy {
--	vdda-phy-supply = <&pm4125_l8>;
--	vdda-pll-supply = <&pm4125_l13>;
-+&usb_2 {
-+	/delete-property/ dr_mode;
- 
--	status = "okay";
-+	port {
-+		usb_2_dwc3_hs: endpoint {
-+			remote-endpoint = <&ucsi_ccg_port>;
-+		};
-+	};
- };
- 
- &usb_2_hsphy {
-@@ -80,3 +145,14 @@ &usb_2_hsphy {
- 
- 	status = "okay";
- };
-+
-+&usb_qmpphy_out {
-+	remote-endpoint = <&pm4125_ss_in>;
-+};
-+
-+&usb_qmpphy {
-+	vdda-phy-supply = <&pm4125_l8>;
-+	vdda-pll-supply = <&pm4125_l13>;
-+
-+	status = "okay";
-+};
-diff --git a/arch/arm64/boot/dts/qcom/shikra-cqm-som.dtsi b/arch/arm64/boot/dts/qcom/shikra-cqm-som.dtsi
-index 8ac42ff625a0..e4dd793c882b 100644
---- a/arch/arm64/boot/dts/qcom/shikra-cqm-som.dtsi
-+++ b/arch/arm64/boot/dts/qcom/shikra-cqm-som.dtsi
-@@ -85,6 +85,51 @@ &pm4125_resin {
- 	status = "okay";
- };
- 
-+&pm4125_typec {
-+	status = "okay";
-+
-+	connector {
-+		compatible = "usb-c-connector";
-+
-+		power-role = "dual";
-+		data-role = "dual";
-+		self-powered;
-+
-+		typec-power-opmode = "default";
-+		pd-disable;
-+
-+		vbus-supply = <&pm4125_vbus>;
-+
-+		ports {
-+			#address-cells = <1>;
-+			#size-cells = <0>;
-+
-+			port@0 {
-+				reg = <0>;
-+
-+				pm4125_hs_in: endpoint {
-+				};
-+			};
-+
-+			port@1 {
-+				reg = <1>;
-+
-+				pm4125_ss_in: endpoint {
-+				};
-+			};
-+		};
-+	};
-+};
-+
-+&pm4125_vbus {
-+	regulator-min-microvolt = <5000000>;
-+	regulator-max-microvolt = <5000000>;
-+	regulator-min-microamp = <500000>;
-+	regulator-max-microamp = <500000>;
-+
-+	status = "okay";
-+};
-+
- &pm8005_regulators {
- 	status = "disabled";
- };
-diff --git a/arch/arm64/boot/dts/qcom/shikra-cqs-evk.dts b/arch/arm64/boot/dts/qcom/shikra-cqs-evk.dts
-index 34568f1c7b63..36514a31d66e 100644
---- a/arch/arm64/boot/dts/qcom/shikra-cqs-evk.dts
-+++ b/arch/arm64/boot/dts/qcom/shikra-cqs-evk.dts
-@@ -42,6 +42,51 @@ &remoteproc_mpss {
- 	status = "okay";
- };
- 
-+&i2c3 {
-+	status = "okay";
-+
-+	typec@40 {
-+		compatible = "cypress,cypd6129";
-+		reg = <0x40>;
-+		interrupts-extended = <&tlmm 136 IRQ_TYPE_LEVEL_LOW>;
-+		pinctrl-0 = <&usb0_intr_state>;
-+		pinctrl-names = "default";
-+		wakeup-source;
-+
-+		#address-cells = <1>;
-+		#size-cells = <0>;
-+
-+		ccg_typec_con0: connector@0 {
-+			compatible = "usb-c-connector";
-+			reg = <0>;
-+			label = "USB-C";
-+			data-role = "dual";
-+			power-role = "dual";
-+
-+			ports {
-+				#address-cells = <1>;
-+				#size-cells = <0>;
-+
-+				port@0 {
-+					reg = <0>;
-+
-+					ucsi_ccg_port: endpoint {
-+						remote-endpoint = <&usb_2_dwc3_hs>;
-+					};
-+				};
-+			};
-+		};
-+	};
-+};
-+
-+&pm4125_hs_in {
-+	remote-endpoint = <&usb_1_dwc3_hs>;
-+};
-+
-+&pm4125_ss_in {
-+	remote-endpoint = <&usb_qmpphy_out>;
-+};
-+
- &sdhc_1 {
- 	vmmc-supply = <&pm4125_l20>;
- 	vqmmc-supply = <&pm4125_l14>;
-@@ -58,6 +103,23 @@ &sdhc_1 {
- 	status = "okay";
- };
- 
-+&tlmm {
-+	usb0_intr_state: usb0-intr-state {
-+		pins = "gpio136";
-+		function = "gpio";
-+		drive-strength = <2>;
-+		bias-pull-up;
-+	};
-+};
-+
-+&usb_1 {
-+	/delete-property/ dr_mode;
-+};
-+
-+&usb_1_dwc3_hs {
-+	remote-endpoint = <&pm4125_hs_in>;
-+};
-+
- &usb_1_hsphy {
- 	vdd-supply = <&pm4125_l12>;
- 	vdda-pll-supply = <&pm4125_l13>;
-@@ -66,11 +128,14 @@ &usb_1_hsphy {
- 	status = "okay";
- };
- 
--&usb_qmpphy {
--	vdda-phy-supply = <&pm4125_l8>;
--	vdda-pll-supply = <&pm4125_l13>;
-+&usb_2 {
-+	/delete-property/ dr_mode;
- 
--	status = "okay";
-+	port {
-+		usb_2_dwc3_hs: endpoint {
-+			remote-endpoint = <&ucsi_ccg_port>;
-+		};
-+	};
- };
- 
- &usb_2_hsphy {
-@@ -80,3 +145,14 @@ &usb_2_hsphy {
- 
- 	status = "okay";
- };
-+
-+&usb_qmpphy_out {
-+	remote-endpoint = <&pm4125_ss_in>;
-+};
-+
-+&usb_qmpphy {
-+	vdda-phy-supply = <&pm4125_l8>;
-+	vdda-pll-supply = <&pm4125_l13>;
-+
-+	status = "okay";
-+};
-diff --git a/arch/arm64/boot/dts/qcom/shikra-iqs-evk.dts b/arch/arm64/boot/dts/qcom/shikra-iqs-evk.dts
-index 543d769125ef..ee0b55b2c462 100644
---- a/arch/arm64/boot/dts/qcom/shikra-iqs-evk.dts
-+++ b/arch/arm64/boot/dts/qcom/shikra-iqs-evk.dts
-@@ -42,6 +42,72 @@ &remoteproc_mpss {
- 	status = "okay";
- };
- 
-+&i2c3 {
-+	status = "okay";
-+
-+	typec@40 {
-+		compatible = "cypress,cypd6229", "cypress,cypd6129";
-+		reg = <0x40>;
-+		interrupts-extended = <&tlmm 50 IRQ_TYPE_LEVEL_LOW>;
-+		pinctrl-0 = <&usb0_intr_state>;
-+		pinctrl-names = "default";
-+		wakeup-source;
-+
-+		#address-cells = <1>;
-+		#size-cells = <0>;
-+
-+		ccg_typec_con0: connector@0 {
-+			compatible = "usb-c-connector";
-+			reg = <0>;
-+			label = "USB2-Type-C";
-+			data-role = "dual";
-+			power-role = "dual";
-+
-+			ports {
-+				#address-cells = <1>;
-+				#size-cells = <0>;
-+
-+				port@0 {
-+					reg = <0>;
-+
-+					ucsi_ccg_port0_hs: endpoint {
-+						remote-endpoint = <&usb_2_dwc3_hs>;
-+					};
-+				};
-+			};
-+		};
-+
-+		ccg_typec_con1: connector@1 {
-+			compatible = "usb-c-connector";
-+			reg = <1>;
-+			label = "USB3-Type-C";
-+			data-role = "dual";
-+			power-role = "dual";
-+
-+			ports {
-+				#address-cells = <1>;
-+				#size-cells = <0>;
-+
-+				port@0 {
-+					reg = <0>;
-+
-+					ucsi_ccg_port_1_hs: endpoint {
-+						remote-endpoint = <&usb_1_dwc3_hs>;
-+					};
-+				};
-+
-+				port@1 {
-+					reg = <1>;
-+
-+					ucsi_ccg_port_1_ss: endpoint {
-+						remote-endpoint = <&usb_qmpphy_out>;
-+					};
-+				};
-+			};
-+		};
-+	};
-+};
-+
- &sdhc_1 {
- 	vmmc-supply = <&pm8150_l17>;
- 	vqmmc-supply = <&pm8150_s4>;
-@@ -58,6 +124,25 @@ &sdhc_1 {
- 	status = "okay";
- };
- 
-+&tlmm {
-+	usb0_intr_state: usb0-intr-state {
-+		pins = "gpio50";
-+		function = "gpio";
-+		drive-strength = <2>;
-+		bias-pull-up;
-+	};
-+};
-+
-+&usb_1 {
-+	/delete-property/ dr_mode;
-+
-+	status = "okay";
-+};
-+
-+&usb_1_dwc3_hs {
-+	remote-endpoint = <&ucsi_ccg_port_1_hs>;
-+};
-+
- &usb_1_hsphy {
- 	vdd-supply = <&pm8150_l4>;
- 	vdda-pll-supply = <&pm8150_l12>;
-@@ -66,11 +151,16 @@ &usb_1_hsphy {
- 	status = "okay";
- };
- 
--&usb_qmpphy {
--	vdda-phy-supply = <&pm8150_l6>;
--	vdda-pll-supply = <&pm8150_l12>;
-+&usb_2 {
-+	/delete-property/ dr_mode;
- 
- 	status = "okay";
-+
-+	port {
-+		usb_2_dwc3_hs: endpoint {
-+			remote-endpoint = <&ucsi_ccg_port0_hs>;
-+		};
-+	};
- };
- 
- &usb_2_hsphy {
-@@ -80,3 +170,14 @@ &usb_2_hsphy {
- 
- 	status = "okay";
- };
-+
-+&usb_qmpphy {
-+	vdda-phy-supply = <&pm8150_l6>;
-+	vdda-pll-supply = <&pm8150_l12>;
-+
-+	status = "okay";
-+};
-+
-+&usb_qmpphy_out {
-+	remote-endpoint = <&ucsi_ccg_port_1_ss>;
-+};
+ drivers/gpu/drm/adp/adp_drv.c                      |  2 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_vkms.c           |  2 +-
+ .../gpu/drm/amd/display/amdgpu_dm/amdgpu_dm_crtc.c | 17 ++++----
+ drivers/gpu/drm/arm/display/komeda/komeda_crtc.c   | 18 ++++----
+ drivers/gpu/drm/arm/hdlcd_crtc.c                   |  2 +-
+ drivers/gpu/drm/arm/malidp_crtc.c                  | 18 ++++----
+ drivers/gpu/drm/armada/armada_crtc.c               |  2 +-
+ drivers/gpu/drm/ast/ast_mode.c                     | 18 ++++----
+ drivers/gpu/drm/atmel-hlcdc/atmel_hlcdc_crtc.c     | 19 ++++-----
+ drivers/gpu/drm/drm_atomic_state_helper.c          | 45 --------------------
+ drivers/gpu/drm/drm_mode_config.c                  |  4 +-
+ drivers/gpu/drm/drm_simple_kms_helper.c            | 13 +-----
+ drivers/gpu/drm/exynos/exynos_drm_crtc.c           |  2 +-
+ drivers/gpu/drm/fsl-dcu/fsl_dcu_drm_crtc.c         |  2 +-
+ drivers/gpu/drm/gud/gud_drv.c                      |  2 +-
+ drivers/gpu/drm/hisilicon/hibmc/hibmc_drm_de.c     |  2 +-
+ drivers/gpu/drm/hisilicon/kirin/kirin_drm_ade.c    |  2 +-
+ drivers/gpu/drm/hyperv/hyperv_drm_modeset.c        |  2 +-
+ drivers/gpu/drm/imx/dc/dc-crtc.c                   |  2 +-
+ drivers/gpu/drm/imx/dcss/dcss-crtc.c               |  2 +-
+ drivers/gpu/drm/imx/ipuv3/ipuv3-crtc.c             | 18 ++++----
+ drivers/gpu/drm/ingenic/ingenic-drm-drv.c          |  2 +-
+ drivers/gpu/drm/kmb/kmb_crtc.c                     |  2 +-
+ drivers/gpu/drm/logicvc/logicvc_crtc.c             |  2 +-
+ drivers/gpu/drm/loongson/lsdc_crtc.c               | 26 ++++++------
+ drivers/gpu/drm/mediatek/mtk_crtc.c                | 18 ++++----
+ drivers/gpu/drm/meson/meson_crtc.c                 |  2 +-
+ drivers/gpu/drm/mgag200/mgag200_drv.h              |  4 +-
+ drivers/gpu/drm/mgag200/mgag200_mode.c             | 15 ++++---
+ drivers/gpu/drm/msm/disp/dpu1/dpu_crtc.c           | 18 ++++----
+ drivers/gpu/drm/msm/disp/mdp4/mdp4_crtc.c          |  2 +-
+ drivers/gpu/drm/msm/disp/mdp5/mdp5_crtc.c          | 20 ++++-----
+ drivers/gpu/drm/mxsfb/lcdif_kms.c                  | 17 ++++----
+ drivers/gpu/drm/mxsfb/mxsfb_kms.c                  |  4 +-
+ drivers/gpu/drm/nouveau/dispnv50/head.c            | 14 +++----
+ drivers/gpu/drm/omapdrm/omap_crtc.c                | 17 ++++----
+ drivers/gpu/drm/qxl/qxl_display.c                  |  2 +-
+ drivers/gpu/drm/renesas/rcar-du/rcar_du_crtc.c     | 17 ++++----
+ drivers/gpu/drm/renesas/rz-du/rzg2l_du_crtc.c      | 15 +++----
+ drivers/gpu/drm/renesas/shmobile/shmob_drm_crtc.c  |  2 +-
+ drivers/gpu/drm/rockchip/rockchip_drm_vop.c        | 18 ++++----
+ drivers/gpu/drm/rockchip/rockchip_drm_vop2.c       | 18 ++++----
+ drivers/gpu/drm/sitronix/st7571.c                  |  2 +-
+ drivers/gpu/drm/sitronix/st7920.c                  | 10 +++--
+ drivers/gpu/drm/solomon/ssd130x.c                  | 10 +++--
+ drivers/gpu/drm/sprd/sprd_dpu.c                    |  2 +-
+ drivers/gpu/drm/sti/sti_crtc.c                     |  2 +-
+ drivers/gpu/drm/stm/ltdc.c                         |  4 +-
+ drivers/gpu/drm/sun4i/sun4i_crtc.c                 |  2 +-
+ drivers/gpu/drm/sysfb/drm_sysfb_helper.h           |  4 +-
+ drivers/gpu/drm/sysfb/drm_sysfb_modeset.c          | 20 ++++-----
+ drivers/gpu/drm/tegra/dc.c                         | 18 ++++----
+ drivers/gpu/drm/tests/drm_kunit_helpers.c          |  2 +-
+ drivers/gpu/drm/tilcdc/tilcdc_crtc.c               | 49 +++++++++-------------
+ drivers/gpu/drm/tiny/appletbdrm.c                  |  2 +-
+ drivers/gpu/drm/tiny/bochs.c                       |  2 +-
+ drivers/gpu/drm/tiny/cirrus-qemu.c                 |  2 +-
+ drivers/gpu/drm/tiny/pixpaper.c                    |  2 +-
+ drivers/gpu/drm/tiny/sharp-memory.c                |  2 +-
+ drivers/gpu/drm/udl/udl_modeset.c                  |  2 +-
+ drivers/gpu/drm/vboxvideo/vbox_mode.c              |  2 +-
+ drivers/gpu/drm/vc4/tests/vc4_mock_crtc.c          |  2 +-
+ drivers/gpu/drm/vc4/vc4_crtc.c                     | 14 +++----
+ drivers/gpu/drm/vc4/vc4_drv.h                      |  2 +-
+ drivers/gpu/drm/vc4/vc4_txp.c                      |  2 +-
+ drivers/gpu/drm/verisilicon/vs_crtc.c              |  2 +-
+ drivers/gpu/drm/virtio/virtgpu_display.c           |  2 +-
+ drivers/gpu/drm/vkms/vkms_crtc.c                   | 18 ++++----
+ drivers/gpu/drm/vmwgfx/vmwgfx_kms.c                | 22 ++++------
+ drivers/gpu/drm/vmwgfx/vmwgfx_kms.h                |  2 +-
+ drivers/gpu/drm/vmwgfx/vmwgfx_ldu.c                |  2 +-
+ drivers/gpu/drm/vmwgfx/vmwgfx_scrn.c               |  2 +-
+ drivers/gpu/drm/vmwgfx/vmwgfx_stdu.c               |  2 +-
+ drivers/gpu/drm/xlnx/zynqmp_kms.c                  |  2 +-
+ include/drm/drm_atomic_state_helper.h              |  3 --
+ include/drm/drm_crtc.h                             | 12 ------
+ include/drm/drm_mipi_dbi.h                         |  2 +-
+ include/drm/drm_simple_kms_helper.h                |  1 -
+ 78 files changed, 275 insertions(+), 385 deletions(-)
+---
+base-commit: 7ea58b9ddb52264a4ed36bccb975062ada32c62d
+change-id: 20260709-drm-no-more-crtc-reset-14a4d5bc8d41
 
+Best regards,
 -- 
-2.43.0
+Maxime Ripard <mripard@kernel.org>
 
