@@ -1,116 +1,130 @@
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.8])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-ej1-f44.google.com (mail-ej1-f44.google.com [209.85.218.44])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 97269288C81
-	for <linux-arm-msm@vger.kernel.org>; Fri, 21 Aug 2026 00:29:22 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.8
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D8E9734B1A6
+	for <linux-arm-msm@vger.kernel.org>; Fri, 21 Aug 2026 03:03:30 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.218.44
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787272164; cv=none; b=Zm6l5KU84YUiYZNhTJviK8qRG29M7FUzC1KxGdsBYMGlX210azsrokwhiG2b/KUs5PIatH/tncDl/LRF0uBtbXUux1I5QinrtJ+daOS++lEgl2jzucKnXnsrrjR2cJmffp1LlH90GHbJd3pi81EqHRAA4XxRmylhzP0EVAC0ifo=
+	t=1787281412; cv=none; b=NgBdDjcndYNomsjWJAecD3HfuFvAQD5mYmgW+Zlg7y5+QtJXJYn/5WedV+Ml+siFPWNZPsIjLgWkMt1zsuy72NfyWhJDHARECEyOsZ5r8AQUTLTCdBi2BzYAB2m282ODJ085fneapEbybqNsWFGWp/VhXcYpEcNU4hE7tr4TjDk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787272164; c=relaxed/simple;
-	bh=PmhnE36F/dgYkeJ+H6lXW4sx7C9Wu4TDdQEoD+EkJMw=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=AyYQ2AE5KtUCkYWEzNpwdvhYWM1lr+t2SNtByhxmqAYxtE7tyPBMmEGGfzsHUR4je29Ed3VmsaT4oSmOhI1Cihj8rpoBC0Ra0DpgZG73KoofvpCKWcJRsWknTyS+YbufmJ4pjhgzY+/opxv8vIVv4GuHhTQ/9GaoXRxadkhxr+0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=KbW6TAJK; arc=none smtp.client-ip=192.198.163.8
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
+	s=arc-20240116; t=1787281412; c=relaxed/simple;
+	bh=xW3iwMJdUf28ooxJCG/iuJQ1bRNNMmFlcIn6TRT+ipc=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=CIIT1Viap4eLncvHunPidpijEtwavgDpPuFY4+VGz4PnFKYA2rVmFUtmLk9pPh/1WwIPpP6HZRpgZjrODJCF4oSgougI/d7tsfVK51Wx9CZmYEaEGh1ysYvnDZeT/cgJ6+BCRIuYnWXUb2GfN+qfN/N+iSWqNef/HKnUqMZOSt4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=mswin.me; spf=none smtp.mailfrom=mswin.me; dkim=pass (2048-bit key) header.d=mswin-me.20251104.gappssmtp.com header.i=@mswin-me.20251104.gappssmtp.com header.b=zEtk+5Nq; arc=none smtp.client-ip=209.85.218.44
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=mswin.me
+Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=mswin.me
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="KbW6TAJK"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1787272162; x=1818808162;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=PmhnE36F/dgYkeJ+H6lXW4sx7C9Wu4TDdQEoD+EkJMw=;
-  b=KbW6TAJKjaHiDvmHS7eu1dpcsjlLgodFzyQdz1WWNAPflL2MObvAp600
-   /VC3j7GRNLhsXMz0uG0wQdqf0h1KzgFIm6dR8CWD3IKoqH8DztEfFftqO
-   zZSQz+dlCk4HzIvUGdoAKWsSGvEVAgJ0u2BPwQXX+hKfZ7NV/q5JSaAQk
-   izl8KhCtc9/sZsYHEbtTH0y9+9ToTSTKhu5cYncQzHXZkg3ZatbpQc2Z2
-   efNqLfYF7pK30A8IQpXMWepD12TJs/q7dj+Z9Q0Q9vVNyn2/5r+L3vr/f
-   rwi3NQ+CxvJsZRubd3Icfyeixp7Rr5HsO0gnlhHkl5isdNq1+lLcuvcVW
-   w==;
-X-CSE-ConnectionGUID: KER6xUZkRr+SrlywOkGy1g==
-X-CSE-MsgGUID: AYJZI3teREidOAOr48FTWg==
-X-IronPort-AV: E=McAfee;i="6800,10657,11881"; a="105356670"
-X-IronPort-AV: E=Sophos;i="6.25,234,1779174000"; 
-   d="scan'208";a="105356670"
-Received: from orviesa004.jf.intel.com ([10.64.159.144])
-  by fmvoesa102.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 20 Aug 2026 17:29:22 -0700
-X-CSE-ConnectionGUID: jQIY0Ts/QAOBsW4rpJyPaw==
-X-CSE-MsgGUID: o5NXq30DTYSdEVni4r7l0Q==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.25,234,1779174000"; 
-   d="scan'208";a="270002012"
-Received: from lkp-server01.sh.intel.com (HELO 6eda058d650d) ([10.239.97.150])
-  by orviesa004.jf.intel.com with ESMTP; 20 Aug 2026 17:29:20 -0700
-Received: from kbuild by 6eda058d650d with local (Exim 4.98.2)
-	(envelope-from <lkp@intel.com>)
-	id 1wxD8G-00000000ooj-3QEF;
-	Fri, 21 Aug 2026 00:29:16 +0000
-Date: Fri, 21 Aug 2026 08:28:30 +0800
-From: kernel test robot <lkp@intel.com>
-To: Youssef Samir <youssef.abdulrahman@oss.qualcomm.com>,
-	jeff.hugo@oss.qualcomm.com, carl.vanderlip@oss.qualcomm.com,
-	troy.hanson@oss.qualcomm.com, zachary.mckevitt@oss.qualcomm.com
-Cc: llvm@lists.linux.dev, oe-kbuild-all@lists.linux.dev, ogabbay@kernel.org,
-	lizhi.hou@amd.com, karol.wachowski@linux.intel.com,
-	linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org,
-	Troy Hanson <thanson@qti.qualcomm.com>
-Subject: Re: [PATCH] accel/qaic: Add support for AI200 virtual functions
-Message-ID: <202608210811.E9e3fBWz-lkp@intel.com>
-References: <20260814164125.3652876-1-youssef.abdulrahman@oss.qualcomm.com>
+	dkim=pass (2048-bit key) header.d=mswin-me.20251104.gappssmtp.com header.i=@mswin-me.20251104.gappssmtp.com header.b="zEtk+5Nq"
+Received: by mail-ej1-f44.google.com with SMTP id a640c23a62f3a-c1c52d920b8so77518566b.2
+        for <linux-arm-msm@vger.kernel.org>; Thu, 20 Aug 2026 20:03:30 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=mswin-me.20251104.gappssmtp.com; s=20251104; t=1787281409; x=1787886209; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=nR3vivEFJtd3iQZRVlYjMI32Qa6Jn8xRiGEyh0JL5Ok=;
+        b=zEtk+5NqCwl3r/Oj3BNwBSI1a63nxMKHV9SC+pvoewYbfMjUn35UJC1g88qfWm05x5
+         fpvojNRmW/sXgXDSzMZKi++ePgQICOTBZNb5UYWDUZptmUUDrPGWiYOKy357zYGEJ/J1
+         7xX85G/4oKm9gp7rB7burDe6AV/MWLu3eUYKt1wuYSRvU2B0bmN+LbpTQYWMZhukFfdU
+         JJjKDdo233wpx2q7dtGWYXBLg9dPtgNKCBv+eXSd5qbVe8G3cyzw75oC2A6vQZtER3vb
+         H00WtFSQxr+ZRSQEB3j7iwUR5giyUHs+ZnpnQmujD53iJxG39gAdwmMWYjtgPUQCn+CH
+         455w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1787281409; x=1787886209;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=nR3vivEFJtd3iQZRVlYjMI32Qa6Jn8xRiGEyh0JL5Ok=;
+        b=RJqscYV2IVisaKR92ZmXthzprZPaNZ0WmAsBjkqlDVw/dNrJMjZ3gy2mpuUmiW1d/Y
+         hf2KL/XALu1TOY4ycQsYlkxMjMNloRLih+ebSHwv8AALGqefHHcPULDo55qZlHBK7Cd2
+         /fMebiNFGoviicNt9u3ujHa3UXFR+ou7vlsZwCQSCHy3GU0KzVxIVKyVF8eaVqP3u1Pu
+         sSgNxlb0BD5eLi9dY8+dPO8sEzVVhPo6N+kCf71ESFw5gvpIvW3sCkfu8Sp465/pyJGe
+         tIbgPdSPbWz5AWemLctJAMPUZNmDmH2a0fmWMSQvQv/mowmyC1kCH3+U62xz9p7InnPE
+         txqA==
+X-Gm-Message-State: AOJu0Ywx+tSI9Vm/Qj9QpVv+EjhbT9533m/dYdvHiIf53IxYQjKq5ssO
+	4fzCgP3UGJ58Vm8wTgYOO4YN4MoIonemRu1e0IAmzcpoMZSoaOBwh/oqtGOu9VkrkVo=
+X-Gm-Gg: AR+sD13luTRyd4uorcUel4z3C6tsupc0bcspB+2iWDN7oftMNPEYPG48BmZYk6FEi6t
+	yXYrt5mDptkPCXDkzN57uBIm+oPtVBPTosGCHAMFe5Vg6ZjgZYic6QXYEASfoA73r5BIgXPKgjX
+	WfXOnwyVuqRX7OvLK0A+qlaYN0T/wqJ7kZxapxwGgduuBREQkItVOqYsfmNQhH3exPNXoItOfoT
+	83T6HupD7iucX01jEV4GX9py57AdFVLd7CiX1S5mS2oWJiJIxLWVknRn4FDsZU2L8ikBOMpUPhd
+	l1pm+mp46KLTTxrnh3GPZ2ufwkXnIcZAtm+/9t3y3Pqd8cBPRH4IHqLMYDCsW1jPgifb4KmaZQ9
+	+ipsGhLUU5OnSOPoJfA5VPD9SH1VIOkdulg9B/DDbcuP/dU1SWUALnxQzWbwPgF91Zsy2yCQYDt
+	jWH3nJvc6edA0cK1loqxxwUz4iAMzSmjxZKoofkNGCi0n57xPPF3i5i9j0xQD/mPpFcA==
+X-Received: by 2002:a17:906:1014:20b0:c20:f871:1020 with SMTP id a640c23a62f3a-c246a63f53cmr205362566b.19.1787281408924;
+        Thu, 20 Aug 2026 20:03:28 -0700 (PDT)
+Received: from zephyr.int.serkovo.ru ([85.17.200.167])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c24591df293sm274875866b.45.2026.08.20.20.03.26
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 20 Aug 2026 20:03:28 -0700 (PDT)
+From: Roman Linev <admin@mswin.me>
+To: Amit Kucheria <amitk@kernel.org>,
+	Thara Gopinath <thara.gopinath@gmail.com>,
+	"Rafael J. Wysocki" <rafael@kernel.org>,
+	Daniel Lezcano <daniel.lezcano@kernel.org>,
+	Zhang Rui <rui.zhang@intel.com>,
+	Lukasz Luba <lukasz.luba@arm.com>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Bjorn Andersson <andersson@kernel.org>,
+	Konrad Dybcio <konradybcio@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org,
+	linux-pm@vger.kernel.org,
+	devicetree@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	Roman Linev <admin@mswin.me>
+Subject: [PATCH 0/2] arm64: dts: qcom: sm6125: add TSENS die temperature sensing
+Date: Fri, 21 Aug 2026 06:03:23 +0300
+Message-ID: <20260821030325.1823829-1-admin@mswin.me>
+X-Mailer: git-send-email 2.55.0
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260814164125.3652876-1-youssef.abdulrahman@oss.qualcomm.com>
+Content-Transfer-Encoding: 8bit
 
-Hi Youssef,
+SM6125 has a TSENS v2 block that mainline does not describe, so the SoC
+has no die temperature sensing: on a stock kernel the only thermal zones
+on an SM6125 board are the handful backed by PMIC ADC channels.
 
-kernel test robot noticed the following build warnings:
+The block needs no new driver code. Its register and interrupt layout is
+identical to SM6115's and, being v2, it self-calibrates and needs no
+qfprom nvmem cells, so it binds through the existing qcom,tsens-v2
+fallback. Patch 1 documents the SoC-specific compatible; patch 2 adds the
+controller and the thermal zones.
 
-[auto build test WARNING on drm-misc/drm-misc-next]
-[also build test WARNING on linus/master v7.2 next-20260819]
-[If your patch is applied to the wrong git tree, kindly drop us a note.
-And when submitting patch, we suggest to use '--base' as documented in
-https://git-scm.com/docs/git-format-patch#_base_tree_information]
+Sensor-to-zone mapping was taken from the downstream device tree for the
+Xiaomi Mi A3 (laurel_sprout) and cross-checked against sm6115.dtsi, which
+agrees on every sensor the two have in common (2, 3, 4, 13, 14 and 15).
+Sensor 5 is not referenced downstream and is left out, so 15 of the 16
+sensors get zones.
 
-url:    https://github.com/intel-lab-lkp/linux/commits/Youssef-Samir/accel-qaic-Add-support-for-AI200-virtual-functions/20260814-184125
-base:   https://gitlab.freedesktop.org/drm/misc/kernel.git drm-misc-next
-patch link:    https://lore.kernel.org/r/20260814164125.3652876-1-youssef.abdulrahman%40oss.qualcomm.com
-patch subject: [PATCH] accel/qaic: Add support for AI200 virtual functions
-config: i386-randconfig-005-20260821 (https://download.01.org/0day-ci/archive/20260821/202608210811.E9e3fBWz-lkp@intel.com/config)
-compiler: clang version 22.1.3 (https://github.com/llvm/llvm-project e9846648fd6183ee6d8cbdb4502213fcf902a211)
-reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20260821/202608210811.E9e3fBWz-lkp@intel.com/reproduce)
+No cooling devices are referenced, since SM6125 has no GPU node upstream
+yet. The zones report temperature and carry passive and critical trips;
+a cooling map for gpu-thermal can follow alongside the GPU node.
 
-If you fix the issue in a separate patch/commit (i.e. not just a new version of
-the same patch/commit), kindly add following tags
-| Reported-by: kernel test robot <lkp@intel.com>
-| Closes: https://lore.kernel.org/oe-kbuild-all/202608210811.E9e3fBWz-lkp@intel.com/
+Tested on a Xiaomi Mi A3: tsens0 binds at 4411000.thermal-sensor with no
+dmesg output, the thermal zone count goes from 5 to 20, and the 15 new
+die zones read 37.7-39.6 degrees Celsius at idle. Under a 660 s
+glmark2-es2-drm soak the hottest zone reached 52.2 degrees Celsius
+against its 85 degrees Celsius passive trip.
 
-All warnings (new ones prefixed by >>):
+Both SM6125 boards (laurel-sprout and ginkgo) compile with no new dtc
+warnings: pristine master emits 7 unique_unit_address warnings on the
+geniqup nodes, and the series emits the same 7.
 
->> drivers/accel/qaic/qaic_drv.c:81:40: warning: unused variable 'aic200vf_config' [-Wunused-const-variable]
-      81 | static const struct qaic_device_config aic200vf_config = {
-         |                                        ^~~~~~~~~~~~~~~
-   1 warning generated.
+I have no other SM6125 board to test on, so the zone naming beyond the
+sensors shared with SM6115 rests on the downstream device tree.
 
+Roman Linev (2):
+  dt-bindings: thermal: qcom-tsens: add qcom,sm6125-tsens
+  arm64: dts: qcom: sm6125: add TSENS and thermal zones
 
-vim +/aic200vf_config +81 drivers/accel/qaic/qaic_drv.c
+ .../bindings/thermal/qcom-tsens.yaml          |   1 +
+ arch/arm64/boot/dts/qcom/sm6125.dtsi          | 299 ++++++++++++++++++
+ 2 files changed, 300 insertions(+)
 
-    80	
-  > 81	static const struct qaic_device_config aic200vf_config = {
-    82		.family = FAMILY_AIC200_VF,
-    83		.bar_mask = BIT(0) | BIT(1) | BIT(2) | BIT(4),
-    84		.mhi_bar_idx = 1,
-    85		.dbc_bar_idx = 2,
-    86	};
-    87	
+-- 
+2.55.0
 
---
-0-DAY CI Kernel Test Service
-https://github.com/intel/lkp-tests/wiki
