@@ -1,98 +1,51 @@
-Received: from mail-pg1-f173.google.com (mail-pg1-f173.google.com [209.85.215.173])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from hognose1.porkbun.com (hognose1.porkbun.com [35.82.102.206])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2DBB84334A5
-	for <linux-arm-msm@vger.kernel.org>; Fri, 21 Aug 2026 08:14:11 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.215.173
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 33C9B435EF3;
+	Fri, 21 Aug 2026 08:15:54 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=35.82.102.206
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787300053; cv=none; b=IMl8f9oESm78001pXhuE7I0O5jBSHBfUDuabuId0/wQCDdC6EZjaRDqnfIvVSubKvB6v8NROthDf40OqR5Oj5L1W4aTGch0+fB3GJvvFaKdK8tL8huRCyhwECnmj1sNVOxfEQFH+IsBEkyjGTLqv6BIw5oSwu1+Emb496gKmAbM=
+	t=1787300155; cv=none; b=RniJTy4keUQMGw/PdxXTVrCTiypKTgGC7lsSO0vUlK0O/8XfTO7hYaAAOQmP/H4bVc/lFU5/piHkMcGFL+XQYC1uM6sAIToeC4R7eQe0D3nHkmGqynb8Xotu+Y5GzxfBAg7p+EF2bIx5W4usVCcPx3rrKfzsx9vaiFUYZCua/cA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787300053; c=relaxed/simple;
-	bh=dF8uzEsgksprtmjykFaOtwrhcLU4t7k3EdVfqfUSb/4=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=I2rjjyzIkpi/pw9q4rbW53wDrDYjg0IYHU+Dbqk5evqyFNLx5sAvNT0FmH6dgrLZlsf5nHrlCXlbdIQlvHwIT2q5aeSKjlOpRCj4nqRnWEoCye0GPx7PrzSqj66hFFiWqa4B1eS23vX8qS0keFpVrUbkfuXnz+q5s9Z5BUtFkoQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=WRwDp2ZC; arc=none smtp.client-ip=209.85.215.173
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	s=arc-20240116; t=1787300155; c=relaxed/simple;
+	bh=jOyVG+WwPv372q41edGqCQq4qsPqPMvY/811tMjqsHw=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=Tf9oqQwns2/NISupp84hrNi46fD2L/FFSB6yCeNpFLj1qSl+ZsfFaT5C7imz6AGjP70vwdqqEz9iQxuSUcG7V9s0KJLMnBLjUAKeGHkYnBHo7utU3lNE5VvNqGMxhNvJ9tnwFC/eTP4gmub0HRnfDbnVobM0n0rmWuhkEkr+1vo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=holtechnik.com; spf=pass smtp.mailfrom=holtechnik.com; dkim=pass (1024-bit key) header.d=holtechnik.com header.i=@holtechnik.com header.b=Sgi9kcL7; arc=none smtp.client-ip=35.82.102.206
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=holtechnik.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=holtechnik.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="WRwDp2ZC"
-Received: by mail-pg1-f173.google.com with SMTP id 41be03b00d2f7-ca7bea5e5b3so615871a12.1
-        for <linux-arm-msm@vger.kernel.org>; Fri, 21 Aug 2026 01:14:11 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1787300050; x=1787904850; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=TGzoV9AJXSeYihr4xIl3cdAZC8sj0VKSUQCzJLFzqXM=;
-        b=WRwDp2ZCEnvhgLj5+UYdq7n1SUtUxoP69tyJ0I9gJcR0HSsZNX92MolcPIomiIdHoM
-         ad6EJVO+aTRjN+z214LptUoM2kG6SzNt3B106e9yoZi2x67rCOiLRkXoYnyUWuDaEWqJ
-         eekrB4okz1MKe4CaZxhzAZ3D0qM7w2usO4D0UR45NHQTltd+mwToGi6jf2qbdErqccQb
-         A9c9ttJ6jOBSKpm/dxYGqD0NGR+l0JDOz4FM51yHvRdWnGxmCYXzr5pkmT63sew+F5W2
-         uni7YzacteSk/jbD2Y7RgKHCsqd54gvHUnUbUMDBEBSPiU4cm4mRK4Etwk0I1E6MXWhp
-         bONQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787300050; x=1787904850;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=TGzoV9AJXSeYihr4xIl3cdAZC8sj0VKSUQCzJLFzqXM=;
-        b=dUao+Ftgpiza8NMn7gPYTt5kFe+ivq2SRwZPzTok86maq7znVctIB7Q6q4ufLU7g/f
-         aDKshXH5k/ynCsaWnSlrnEFmk/wyHNnXidqnmPUb8Iv+QxgV5URDj2TYIF81TP1MjIGz
-         dT+fdpWC/IDG48mYEzRsf0EJwFH8dDU8BSYpCtKwPmydlUAGNKZkvBMIIwgcSJWpdYvV
-         HphnkGAbfXs0XlcYgWBrVKBhlulRq25iA9jgp5uJp/x/cmHSrsUIddRBJr2PAN18ojFr
-         SYnn7bOlr+5kRFwt9xV/8rFIaq+7wtiSTVdDihppBEYJKiHbGVKPR0EYCoadiArr2RtN
-         GbLA==
-X-Forwarded-Encrypted: i=1; AHgh+RqRMUl+nD1TNx8f8FX0YeVUFpseFz9UB+QijqHpsZT+TMYFoRN/ii2RsWPGlNC6czeDAAmgPa8vcHn2oI4X@vger.kernel.org
-X-Gm-Message-State: AFuF++kzAOU++5Qwuq7dpkQUjl0MLU+AYgV0grhnNQgQ7acJYJTKUglp
-	P96CmV+ZZZ66kaLqChdKFOmA/EIDr37FY5cs+B4FY7Uq6FUOLBDcTbEl
-X-Gm-Gg: AR+sD134Ji4RF1RSO+lEWasSqB65ZK+nPEnzf653Bp6IyE3ML/gUXrrBDi+O/ELZ4wc
-	Z1zxZrIl4P4sYuWN7BdUEguzl2yCmuyU49ezGxozYK7W65Pi5yfXdZxgWiZdPnH7XyFX6USDYJ0
-	nmx7D6yDew8NhkxzEKuVN2S6uIcOoJHg8a/bMCcaTMKNc/L+4T80L6XVsO8D0aJf/aVLJW28TVd
-	bh7zgzX9/8+Cg7zWXJrd2wZ/9VUaOCpbUkSEOXllRlrVqYsgGY7YChXjrLf2HXrPLCM4S2xmWCu
-	zlDCamdS1kBUttBOWckEomjR6k71mlmdHPBuTmpHtPg1ZEABxiz/jTMUwrbGnSLyVXso3p5/iHv
-	ZoQaWs0tOKbQSvB9SOgG1KVmKPQeJdt3726P8KC7YKBfhKmVNDopy9ZMb6B8jTJ1XknDLPDEARn
-	51sNTcZ7SM5JfyGIuNOrpMNGZpCwRY1GWaUHWguS6JNsv68XYmGANjuFbIRmUOtURWyODEECxUD
-	EwuoFPgozk+GxixbQX9z+U=
-X-Received: by 2002:a17:90a:da87:b0:38e:2860:253f with SMTP id 98e67ed59e1d1-395c3731c29mr8956504a91.12.1787300050356;
-        Fri, 21 Aug 2026 01:14:10 -0700 (PDT)
-Received: from localhost.localdomain ([152.58.217.163])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1416ae48761sm22040786c88.12.2026.08.21.01.14.00
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 21 Aug 2026 01:14:09 -0700 (PDT)
-From: Sreeshankar K <sreeshankar0910@gmail.com>
-To: robh@kernel.org,
-	krzk+dt@kernel.org,
-	conor+dt@kernel.org,
-	andersson@kernel.org,
-	mturquette@baylibre.com,
-	sboyd@kernel.org,
-	rafael@kernel.org,
-	viresh.kumar@linaro.org,
-	konradybcio@kernel.org,
-	tglx@kernel.org,
-	ulfh@kernel.org
-Cc: bmasney@redhat.com,
-	radu@rendec.net,
-	abel.vesa@oss.qualcomm.com,
-	lpieralisi@kernel.org,
-	quic_tdas@quicinc.com,
-	danila@mainlining.org,
-	davidwronek@gmail.com,
-	mani@kernel.org,
-	robimarko@gmail.com,
-	linux@gurudas.dev,
-	devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
+	dkim=pass (1024-bit key) header.d=holtechnik.com header.i=@holtechnik.com header.b="Sgi9kcL7"
+Received: from localhost.localdomain (192-184-175-24.fiber.dynamic.sonic.net [192.184.175.24])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(Client did not present a certificate)
+	(Authenticated sender: phollinsky@holtechnik.com)
+	by hognose1.porkbun.com (Postfix) with ESMTPSA id 358BB485B9E;
+	Fri, 21 Aug 2026 08:15:53 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=holtechnik.com;
+	s=default; t=1787300154;
+	bh=tplTwxBcQnlsHR+fiXgn8x5nZCtSC7P4+/RRAZuGJ20=;
+	h=From:To:Cc:Subject:Date;
+	b=Sgi9kcL7wLv6JovvbJTawUcGyeMTIGb0CnEQ9rli0XoKU5X6glKOO10J9eoFm1CGh
+	 k6qnDP6+H4En9boxaxkbRUQDoH04Rz8o5YgeVK7kWvXQF1yc4o6w/YYoKsBOsjFhAQ
+	 ofsHDuHXt/tUsBekU7xjnEA8wKW1FkIjvYhPt7sA=
+From: Paul Hollinsky <phollinsky@holtechnik.com>
+To: Bjorn Andersson <andersson@kernel.org>,
+	Mathieu Poirier <mathieu.poirier@linaro.org>
+Cc: Sumit Garg <sumit.garg@oss.qualcomm.com>,
+	Konrad Dybcio <konradybcio@kernel.org>,
+	Konrad Dybcio <konradybcio@gmail.com>,
+	Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>,
+	cros-qcom-dts-watchers@chromium.org,
 	linux-arm-msm@vger.kernel.org,
-	linux-clk@vger.kernel.org,
-	linux-pm@vger.kernel.org,
-	Sreeshankar K <sreeshankar0910@gmail.com>
-Subject: [PATCH v3 13/13] arm64: dts: qcom: Add SM7250 devicetree file
-Date: Fri, 21 Aug 2026 08:11:25 +0000
-Message-ID: <20260821081125.4522-14-sreeshankar0910@gmail.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260821081125.4522-1-sreeshankar0910@gmail.com>
-References: <20260821081125.4522-1-sreeshankar0910@gmail.com>
+	linux-remoteproc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	regressions@lists.linux.dev,
+	Paul Hollinsky <phollinsky@holtechnik.com>
+Subject: [PATCH] remoteproc: qcom_q6v5_mss: Don't require PAS for memory protection
+Date: Fri, 21 Aug 2026 01:15:40 -0700
+Message-ID: <20260821081540.89137-1-phollinsky@holtechnik.com>
+X-Mailer: git-send-email 2.55.0
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -101,634 +54,76 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Add base devicetree file for SM7250 SoC.
-This file adds the basic nodes like cpu, psci and other required
-configuration for booting up to the serial console.
+Commit f3b1357673dd ("remoteproc: qcom_q6v5_mss: Switch to generic PAS
+TZ APIs") changed the probe-time gate for need_mem_protection platforms
+from qcom_scm_is_available() to qcom_pas_is_available(). Memory
+protection in this driver is implemented with qcom_scm_assign_mem(),
+which is a TZ service distinct from PAS. The only PAS call in the driver
+is qcom_pas_mem_setup(), and it is already guarded by need_pas_mem_setup.
 
-Signed-off-by: Sreeshankar K <sreeshankar0910@gmail.com>
+No descriptor sets both flags: sc7180, sc7280, sdm660, sdm845, msm8996
+and msm8998 set need_mem_protection only, while msm8937, msm8940 and
+msm8953 set need_pas_mem_setup only. On TrustZone firmware that does not
+implement PAS - for example SC7180 Chromebooks, where call-availability
+queries report every QCOM_SCM_SVC_PIL command as unavailable - the modem
+consequently never probes:
+
+  platform 4080000.remoteproc: deferred probe pending: (reason unknown)
+
+On those machines the modem is also what loads the WLAN firmware, so
+ath10k never receives QMI and wifi does not come up either.
+
+Gate memory protection on SCM availability as it was before, and require
+PAS only where a PAS call is actually issued. Keeping the SCM check
+matters: qcom_scm_assign_mem() passes __scm->mempool to
+qcom_tzmem_alloc() without testing __scm, so dropping the gate entirely
+would allow a NULL dereference when qcom_scm has not yet probed.
+
+Fixes: f3b1357673dd ("remoteproc: qcom_q6v5_mss: Switch to generic PAS TZ APIs")
+Link: https://lore.kernel.org/r/20260808034716.58888-1-phollinsky@holtechnik.com
+Signed-off-by: Paul Hollinsky <phollinsky@holtechnik.com>
 ---
- arch/arm64/boot/dts/qcom/sm7250.dtsi | 612 +++++++++++++++++++++++++++
- 1 file changed, 612 insertions(+)
- create mode 100644 arch/arm64/boot/dts/qcom/sm7250.dtsi
+Reported and analysed in:
+https://lore.kernel.org/linux-arm-msm/20260808034716.58888-1-phollinsky@holtechnik.com/
+Konrad agreed with this shape in
+https://lore.kernel.org/linux-arm-msm/b63e93e4-2f4c-4cad-b726-e1b0565379d7@gmail.com/
 
-diff --git a/arch/arm64/boot/dts/qcom/sm7250.dtsi b/arch/arm64/boot/dts/qcom/sm7250.dtsi
-new file mode 100644
-index 000000000..7caa11c80
---- /dev/null
-+++ b/arch/arm64/boot/dts/qcom/sm7250.dtsi
-@@ -0,0 +1,612 @@
-+// SPDX-License-Identifier: BSD-3-Clause
-+/*
-+ * Copyright (c) 2026, Sreeshankar K <sreeshankar0910@gmail.com>
-+ */
-+
-+#include <dt-bindings/clock/qcom,rpmh.h>
-+#include <dt-bindings/clock/qcom,sm7250-gcc.h>
-+#include <dt-bindings/interrupt-controller/arm-gic.h>
-+#include <dt-bindings/power/qcom,rpmhpd.h>
-+#include <dt-bindings/power/qcom-rpmpd.h>
-+#include <dt-bindings/soc/qcom,rpmh-rsc.h>
-+
-+/ {
-+	interrupt-parent = <&intc>;
-+	#address-cells = <2>;
-+	#size-cells = <2>;
-+
-+	clocks {
-+		xo_board: xo-board {
-+			compatible = "fixed-clock";
-+			clock-frequency = <38400000>;
-+			#clock-cells = <0>;
-+		};
-+
-+		sleep_clk: sleep-clk {
-+			compatible = "fixed-clock";
-+			clock-frequency = <32764>;
-+			#clock-cells = <0>;
-+		};
-+	};
-+
-+	cpus {
-+		#address-cells = <2>;
-+		#size-cells = <0>;
-+
-+		cpu0: cpu@0 {
-+			device_type = "cpu";
-+			compatible = "qcom,kryo475";
-+			reg = <0x0 0x0>;
-+			clocks = <&cpufreq_hw 0>;
-+			enable-method = "psci";
-+			capacity-dmips-mhz = <1024>;
-+			dynamic-power-coefficient = <100>;
-+			next-level-cache = <&l2_0>;
-+			qcom,freq-domain = <&cpufreq_hw 0>;
-+			#cooling-cells = <2>;
-+
-+			l2_0: l2-cache {
-+				compatible = "cache";
-+				cache-level = <2>;
-+				cache-size = <0x20000>;
-+				cache-unified;
-+				next-level-cache = <&l3_0>;
-+
-+				l3_0: l3-cache {
-+					compatible = "cache";
-+					cache-level = <3>;
-+					cache-size = <0x200000>;
-+					cache-unified;
-+				};
-+			};
-+		};
-+
-+		cpu1: cpu@100 {
-+			device_type = "cpu";
-+			compatible = "qcom,kryo475";
-+			reg = <0x0 0x100>;
-+			clocks = <&cpufreq_hw 0>;
-+			enable-method = "psci";
-+			capacity-dmips-mhz = <1024>;
-+			dynamic-power-coefficient = <100>;
-+			next-level-cache = <&l2_100>;
-+			qcom,freq-domain = <&cpufreq_hw 0>;
-+			#cooling-cells = <2>;
-+
-+			l2_100: l2-cache {
-+				compatible = "cache";
-+				cache-level = <2>;
-+				cache-size = <0x20000>;
-+				cache-unified;
-+				next-level-cache = <&l3_0>;
-+			};
-+		};
-+
-+		cpu2: cpu@200 {
-+			device_type = "cpu";
-+			compatible = "qcom,kryo475";
-+			reg = <0x0 0x200>;
-+			clocks = <&cpufreq_hw 0>;
-+			enable-method = "psci";
-+			capacity-dmips-mhz = <1024>;
-+			dynamic-power-coefficient = <100>;
-+			next-level-cache = <&l2_200>;
-+			qcom,freq-domain = <&cpufreq_hw 0>;
-+			#cooling-cells = <2>;
-+
-+			l2_200: l2-cache {
-+				compatible = "cache";
-+				cache-level = <2>;
-+				cache-size = <0x20000>;
-+				cache-unified;
-+				next-level-cache = <&l3_0>;
-+			};
-+		};
-+
-+		cpu3: cpu@300 {
-+			device_type = "cpu";
-+			compatible = "qcom,kryo475";
-+			reg = <0x0 0x300>;
-+			clocks = <&cpufreq_hw 0>;
-+			enable-method = "psci";
-+			next-level-cache = <&l2_300>;
-+			qcom,freq-domain = <&cpufreq_hw 0>;
-+			#cooling-cells = <2>;
-+
-+			l2_300: l2-cache {
-+				compatible = "cache";
-+				cache-level = <2>;
-+				cache-size = <0x20000>;
-+				cache-unified;
-+				next-level-cache = <&l3_0>;
-+			};
-+		};
-+
-+		cpu4: cpu@400 {
-+			device_type = "cpu";
-+			compatible = "qcom,kryo475";
-+			reg = <0x0 0x400>;
-+			clocks = <&cpufreq_hw 0>;
-+			enable-method = "psci";
-+			capacity-dmips-mhz = <1024>;
-+			dynamic-power-coefficient = <100>;
-+			next-level-cache = <&l2_400>;
-+			qcom,freq-domain = <&cpufreq_hw 0>;
-+			#cooling-cells = <2>;
-+
-+			l2_400: l2-cache {
-+				compatible = "cache";
-+				cache-level = <2>;
-+				cache-size = <0x20000>;
-+				cache-unified;
-+				next-level-cache = <&l3_0>;
-+			};
-+		};
-+
-+		cpu5: cpu@500 {
-+			device_type = "cpu";
-+			compatible = "qcom,kryo475";
-+			reg = <0x0 0x500>;
-+			clocks = <&cpufreq_hw 0>;
-+			enable-method = "psci";
-+			capacity-dmips-mhz = <1024>;
-+			dynamic-power-coefficient = <100>;
-+			next-level-cache = <&l2_500>;
-+			qcom,freq-domain = <&cpufreq_hw 0>;
-+			#cooling-cells = <2>;
-+
-+			l2_500: l2-cache {
-+				compatible = "cache";
-+				cache-level = <2>;
-+				cache-size = <0x20000>;
-+				cache-unified;
-+				next-level-cache = <&l3_0>;
-+			};
-+		};
-+
-+		cpu6: cpu@600 {
-+			device_type = "cpu";
-+			compatible = "qcom,kryo475";
-+			reg = <0x0 0x600>;
-+			clocks = <&cpufreq_hw 1>;
-+			enable-method = "psci";
-+			capacity-dmips-mhz = <1740>;
-+			dynamic-power-coefficient = <341>;
-+			next-level-cache = <&l2_600>;
-+			qcom,freq-domain = <&cpufreq_hw 1>;
-+			#cooling-cells = <2>;
-+
-+			l2_600: l2-cache {
-+				compatible = "cache";
-+				cache-level = <2>;
-+				cache-size = <0x40000>;
-+				cache-unified;
-+				next-level-cache = <&l3_0>;
-+			};
-+		};
-+
-+		cpu7: cpu@700 {
-+			device_type = "cpu";
-+			compatible = "qcom,kryo475";
-+			reg = <0x0 0x700>;
-+			clocks = <&cpufreq_hw 2>;
-+			enable-method = "psci";
-+			capacity-dmips-mhz = <1740>;
-+			dynamic-power-coefficient = <375>;
-+			next-level-cache = <&l2_700>;
-+			qcom,freq-domain = <&cpufreq_hw 2>;
-+			#cooling-cells = <2>;
-+
-+			l2_700: l2-cache {
-+				compatible = "cache";
-+				cache-level = <2>;
-+				cache-size = <0x80000>;
-+				cache-unified;
-+				next-level-cache = <&l3_0>;
-+			};
-+		};
-+
-+		cpu-map {
-+			cluster0 {
-+				core0 {
-+					cpu = <&cpu0>;
-+				};
-+
-+				core1 {
-+					cpu = <&cpu1>;
-+				};
-+
-+				core2 {
-+					cpu = <&cpu2>;
-+				};
-+
-+				core3 {
-+					cpu = <&cpu3>;
-+				};
-+
-+				core4 {
-+					cpu = <&cpu4>;
-+				};
-+
-+				core5 {
-+					cpu = <&cpu5>;
-+				};
-+			};
-+
-+			cluster1 {
-+				core6 {
-+					cpu = <&cpu6>;
-+				};
-+			};
-+
-+			cluster2 {
-+				core7 {
-+					cpu = <&cpu7>;
-+				};
-+			};
-+		};
-+	};
-+
-+	firmware {
-+		scm: scm {
-+			compatible = "qcom,scm-sm7250", "qcom,scm";
-+			#reset-cells = <1>;
-+		};
-+	};
-+
-+	memory@80000000 {
-+		device_type = "memory";
-+		/* We expect the bootloader to fill in the size */
-+		reg = <0x0 0x80000000 0x0 0x0>;
-+	};
-+
-+	pmu {
-+		compatible = "arm,armv8-pmuv3";
-+		interrupts = <GIC_PPI 5 IRQ_TYPE_LEVEL_HIGH>;
-+	};
-+
-+	psci {
-+		compatible = "arm,psci-1.0";
-+		method = "smc";
-+	};
-+
-+	reserved_memory: reserved-memory {
-+		#address-cells = <2>;
-+		#size-cells = <2>;
-+		ranges;
-+
-+		hyp_mem: hyp@80000000 {
-+			reg = <0x0 0x80000000 0x0 0x600000>;
-+			no-map;
-+		};
-+
-+		xbl_aop_mem: xbl-aop@80700000 {
-+			reg = <0x0 0x80700000 0x0 0x160000>;
-+			no-map;
-+		};
-+
-+		cmd_db: cmd-db@80860000 {
-+			compatible = "qcom,cmd-db";
-+			reg = <0x0 0x80860000 0x0 0x20000>;
-+			no-map;
-+		};
-+
-+		xbl_uefi_mem: xbl-uefi@80880000 {
-+			reg = <0 0x80880000 0 0x14000>;
-+			no-map;
-+		};
-+
-+		smem_mem: smem@80900000 {
-+			compatible = "qcom,smem";
-+			reg = <0x0 0x80900000 0x0 0x200000>;
-+			no-map;
-+			hwlocks = <&tcsr_mutex 3>;
-+		};
-+
-+		removed_mem: removed@80b00000 {
-+			reg = <0x0 0x80b00000 0x0 0x1300000>;
-+			no-map;
-+		};
-+
-+		camera_mem: camera@86000000 {
-+			reg = <0x0 0x86000000 0x0 0x500000>;
-+			no-map;
-+		};
-+
-+		npu_mem: npu@86500000 {
-+			reg = <0x0 0x86500000 0x0 0x500000>;
-+			no-map;
-+		};
-+
-+		video_mem: video@86a00000 {
-+			reg = <0x0 0x86a00000 0x0 0x500000>;
-+			no-map;
-+		};
-+
-+		cdsp_mem: cdsp@87400000 {
-+			reg = <0x0 0x87400000 0x0 0x1e00000>;
-+			no-map;
-+		};
-+
-+		adsp_mem: adsp@89200000 {
-+			reg = <0x0 0x89200000 0x0 0x2800000>;
-+			no-map;
-+		};
-+
-+		wlan_fw_mem: wlan-fw@8ba00000 {
-+			reg = <0x0 0x8ba00000 0x0 0x200000>;
-+			no-map;
-+		};
-+
-+		ipa_fw_mem: ipa-fw@8bc00000 {
-+			reg = <0x0 0x8bc00000 0x0 0x10000>;
-+			no-map;
-+		};
-+
-+		ipa_gsi_mem: ipa-gsi@8bc10000 {
-+			reg = <0x0 0x8bc10000 0x0 0x5400>;
-+			no-map;
-+		};
-+
-+		gpu_mem: gpu@8bc15400 {
-+			reg = <0x0 0x8bc15400 0x0 0x2000>;
-+			no-map;
-+		};
-+
-+		modem_wlan_mem: modem-wlan@8c000000 {
-+			reg = <0x0 0x8c000000 0x0 0xf800000>;
-+			no-map;
-+		};
-+
-+		cdsp_sec_mem: cdsp-sec@9f400000 {
-+			reg = <0x0 0x9f400000 0x0 0xc00000>;
-+			no-map;
-+		};
-+	};
-+
-+	soc: soc@0 {
-+		#address-cells = <2>;
-+		#size-cells = <2>;
-+		ranges = <0 0 0 0 0x10 0>;
-+		dma-ranges = <0 0 0 0 0x10 0>;
-+		compatible = "simple-bus";
-+
-+		gcc: clock-controller@100000 {
-+			compatible = "qcom,sm7250-gcc";
-+			reg = <0x0 0x00100000 0x0 0x1f0000>;
-+			clock-names = "bi_tcxo",
-+				      "bi_tcxo_ao",
-+				      "sleep_clk";
-+			clocks = <&rpmhcc RPMH_CXO_CLK>,
-+				 <&rpmhcc RPMH_CXO_CLK_A>,
-+				 <&sleep_clk>;
-+			power-domains = <&rpmhpd RPMHPD_CX>;
-+			#clock-cells = <1>;
-+			#reset-cells = <1>;
-+			#power-domain-cells = <1>;
-+		};
-+
-+		qupv3_id_1: geniqup@9c0000 {
-+			compatible = "qcom,geni-se-qup";
-+			reg = <0x0 0x009c0000 0x0 0x6000>;
-+			clock-names = "m-ahb", "s-ahb";
-+			clocks = <&gcc GCC_QUPV3_WRAP_1_M_AHB_CLK>,
-+				 <&gcc GCC_QUPV3_WRAP_1_S_AHB_CLK>;
-+			#address-cells = <2>;
-+			#size-cells = <2>;
-+			ranges;
-+			status = "disabled";
-+
-+			uart2: serial@988000 {
-+				compatible = "qcom,geni-debug-uart";
-+				reg = <0 0x00988000 0 0x4000>;
-+				clock-names = "se";
-+				clocks = <&gcc GCC_QUPV3_WRAP1_S2_CLK>;
-+				interrupts = <GIC_SPI 355 IRQ_TYPE_LEVEL_HIGH>;
-+				status = "disabled";
-+			};
-+		};
-+
-+		intc: interrupt-controller@17a00000 {
-+			compatible = "arm,gic-v3";
-+			reg = <0x0 0x17a00000 0x0 0x10000>,     /* GICD */
-+			      <0x0 0x17a60000 0x0 0x100000>;    /* GICR * 8 */
-+			#interrupt-cells = <3>;
-+			interrupt-controller;
-+			interrupts = <GIC_PPI 8 IRQ_TYPE_LEVEL_HIGH>;
-+		};
-+
-+		pdc: interrupt-controller@b220000 {
-+			compatible = "qcom,sm7250-pdc", "qcom,pdc";
-+			reg = <0 0xb220000 0 0x30000>, <0 0x17c000f0 0 0x60>;
-+			qcom,pdc-ranges = <0 480 42>, <42 612 28>,
-+					  <70 63 1>, <71 640 15>, <86 522 52>;
-+			#interrupt-cells = <2>;
-+			interrupt-parent = <&intc>;
-+			interrupt-controller;
-+		};
-+
-+		spmi_bus: spmi@c440000 {
-+			compatible = "qcom,spmi-pmic-arb";
-+			reg = <0x0 0x0c440000 0x0 0x0001100>,
-+			      <0x0 0x0c600000 0x0 0x2000000>,
-+			      <0x0 0x0e600000 0x0 0x0100000>,
-+			      <0x0 0x0e700000 0x0 0x00a0000>,
-+			      <0x0 0x0c40a000 0x0 0x0026000>;
-+			reg-names = "core", "chnls", "obsrvr", "intr", "cnfg";
-+			interrupt-names = "periph_irq";
-+			interrupts-extended = <&pdc 1 IRQ_TYPE_LEVEL_HIGH>;
-+			qcom,ee = <0>;
-+			qcom,channel = <0>;
-+			#address-cells = <2>;
-+			#size-cells = <0>;
-+			interrupt-controller;
-+			#interrupt-cells = <4>;
-+		};
-+
-+		apps_rsc: rsc@18200000 {
-+			compatible = "qcom,rpmh-rsc";
-+			reg = <0x0 0x18200000 0x0 0x10000>,
-+			      <0x0 0x18210000 0x0 0x10000>,
-+			      <0x0 0x18220000 0x0 0x10000>;
-+			reg-names = "drv-0", "drv-1", "drv-2";
-+			interrupts = <GIC_SPI 3 IRQ_TYPE_LEVEL_HIGH>,
-+				     <GIC_SPI 4 IRQ_TYPE_LEVEL_HIGH>,
-+				     <GIC_SPI 5 IRQ_TYPE_LEVEL_HIGH>;
-+			label = "apps_rsc";
-+			qcom,tcs-offset = <0xd00>;
-+			qcom,drv-id = <2>;
-+			qcom,tcs-config = <ACTIVE_TCS  2>, <SLEEP_TCS   3>,
-+					  <WAKE_TCS    3>, <CONTROL_TCS 1>;
-+
-+			rpmhcc: clock-controller {
-+				compatible = "qcom,sm7250-rpmh-clk";
-+				#clock-cells = <1>;
-+				clock-names = "xo";
-+				clocks = <&xo_board>;
-+			};
-+
-+			rpmhpd: power-controller {
-+				compatible = "qcom,sm7250-rpmhpd";
-+				#power-domain-cells = <1>;
-+				operating-points-v2 = <&rpmhpd_opp_table>;
-+
-+				rpmhpd_opp_table: opp-table {
-+					compatible = "operating-points-v2";
-+
-+					rpmhpd_opp_ret: opp1 {
-+						opp-level = <RPMH_REGULATOR_LEVEL_RETENTION>;
-+					};
-+
-+					rpmhpd_opp_min_svs: opp2 {
-+						opp-level = <RPMH_REGULATOR_LEVEL_MIN_SVS>;
-+					};
-+
-+					rpmhpd_opp_low_svs: opp3 {
-+						opp-level = <RPMH_REGULATOR_LEVEL_LOW_SVS>;
-+					};
-+
-+					rpmhpd_opp_svs: opp4 {
-+						opp-level = <RPMH_REGULATOR_LEVEL_SVS>;
-+					};
-+
-+					rpmhpd_opp_svs_l1: opp5 {
-+						opp-level = <RPMH_REGULATOR_LEVEL_SVS_L1>;
-+					};
-+
-+					rpmhpd_opp_nom: opp6 {
-+						opp-level = <RPMH_REGULATOR_LEVEL_NOM>;
-+					};
-+
-+					rpmhpd_opp_nom_l1: opp7 {
-+						opp-level = <RPMH_REGULATOR_LEVEL_NOM_L1>;
-+					};
-+
-+					rpmhpd_opp_nom_l2: opp8 {
-+						opp-level = <RPMH_REGULATOR_LEVEL_NOM_L2>;
-+					};
-+
-+					rpmhpd_opp_turbo: opp9 {
-+						opp-level = <RPMH_REGULATOR_LEVEL_TURBO>;
-+					};
-+
-+					rpmhpd_opp_turbo_l1: opp10 {
-+						opp-level = <RPMH_REGULATOR_LEVEL_TURBO_L1>;
-+					};
-+				};
-+			};
-+
-+			apps_bcm_voter: bcm-voter {
-+				compatible = "qcom,bcm-voter";
-+			};
-+		};
-+
-+		cpufreq_hw: cpufreq@18323000 {
-+			compatible = "qcom,sm7250-cpufreq-hw", "qcom,cpufreq-hw";
-+			reg = <0 0x18323000 0 0x1000>,
-+			      <0 0x18325800 0 0x1000>,
-+			      <0 0x18327800 0 0x1000>;
-+			reg-names = "freq-domain0", "freq-domain1",
-+				    "freq-domain2";
-+
-+			clocks = <&rpmhcc RPMH_CXO_CLK>, <&gcc GPLL0>;
-+			clock-names = "xo", "alternate";
-+			#freq-domain-cells = <1>;
-+			#clock-cells = <1>;
-+		};
-+
-+		tcsr_mutex: hwlock@1f40000 {
-+			compatible = "qcom,tcsr-mutex";
-+			reg = <0x0 0x01f40000 0x0 0x40000>;
-+			#hwlock-cells = <1>;
-+		};
-+
-+		timer@17c20000 {
-+			#address-cells = <1>;
-+			#size-cells = <1>;
-+			ranges;
-+			compatible = "arm,armv7-timer-mem";
-+			reg = <0x0 0x17c20000 0x0 0x1000>;
-+			clock-frequency = <19200000>;
-+
-+			frame@17c21000 {
-+				frame-number = <0>;
-+				interrupts = <GIC_SPI 8 IRQ_TYPE_LEVEL_HIGH>,
-+					     <GIC_SPI 6 IRQ_TYPE_LEVEL_HIGH>;
-+				reg = <0x17c21000 0x1000>,
-+				      <0x17c22000 0x1000>;
-+			};
-+
-+			frame@17c23000 {
-+				frame-number = <1>;
-+				interrupts = <GIC_SPI 9 IRQ_TYPE_LEVEL_HIGH>;
-+				reg = <0x17c23000 0x1000>;
-+				status = "disabled";
-+			};
-+
-+			frame@17c25000 {
-+				frame-number = <2>;
-+				interrupts = <GIC_SPI 10 IRQ_TYPE_LEVEL_HIGH>;
-+				reg = <0x17c25000 0x1000>;
-+				status = "disabled";
-+			};
-+
-+			frame@17c27000 {
-+				frame-number = <3>;
-+				interrupts = <GIC_SPI 11 IRQ_TYPE_LEVEL_HIGH>;
-+				reg = <0x17c27000 0x1000>;
-+				status = "disabled";
-+			};
-+
-+			frame@17c29000 {
-+				frame-number = <4>;
-+				interrupts = <GIC_SPI 12 IRQ_TYPE_LEVEL_HIGH>;
-+				reg = <0x17c29000 0x1000>;
-+				status = "disabled";
-+			};
-+
-+			frame@17c2b000 {
-+				frame-number = <5>;
-+				interrupts = <GIC_SPI 13 IRQ_TYPE_LEVEL_HIGH>;
-+				reg = <0x17c2b000 0x1000>;
-+				status = "disabled";
-+			};
-+
-+			frame@17c2d000 {
-+				frame-number = <6>;
-+				interrupts = <GIC_SPI 14 IRQ_TYPE_LEVEL_HIGH>;
-+				reg = <0x17c2d000 0x1000>;
-+				status = "disabled";
-+			};
-+		};
-+
-+	};
-+
-+	timer {
-+		compatible = "arm,armv8-timer";
-+		interrupts = <GIC_PPI 1 IRQ_TYPE_LEVEL_LOW>,
-+			     <GIC_PPI 2 IRQ_TYPE_LEVEL_LOW>,
-+			     <GIC_PPI 3 IRQ_TYPE_LEVEL_LOW>,
-+			     <GIC_PPI 0 IRQ_TYPE_LEVEL_LOW>;
-+	};
-+};
+f3b1357673dd is not in mainline yet, so this is based on
+remoteproc/rproc-next; it would be good to get it in before that branch
+is sent on.
+
+Tested on a Lenovo IdeaPad Duet 3 (sc7180-trogdor-wormdingler) on
+next-20260805, which carries the same code: with this applied the modem
+probes, mba/mpss load, and ath10k_snoc gets its QMI handshake so wifi
+comes up.
+
+ drivers/remoteproc/qcom_q6v5_mss.c | 11 ++++++++++-
+ 1 file changed, 10 insertions(+), 1 deletion(-)
+
+diff --git a/drivers/remoteproc/qcom_q6v5_mss.c b/drivers/remoteproc/qcom_q6v5_mss.c
+index bef198b9ee63..2f71ed2feff6 100644
+--- a/drivers/remoteproc/qcom_q6v5_mss.c
++++ b/drivers/remoteproc/qcom_q6v5_mss.c
+@@ -2079,7 +2079,16 @@ static int q6v5_probe(struct platform_device *pdev)
+ 	if (!desc)
+ 		return -EINVAL;
+ 
+-	if (desc->need_mem_protection && !qcom_pas_is_available())
++	/*
++	 * Memory protection is done through qcom_scm_assign_mem(), which needs
++	 * SCM but not PAS. Only the memory setup path issues PAS calls, so
++	 * requiring PAS for every need_mem_protection platform prevents the
++	 * modem from probing at all on TZ firmware that offers no PAS.
++	 */
++	if (desc->need_mem_protection && !qcom_scm_is_available())
++		return -EPROBE_DEFER;
++
++	if (desc->need_pas_mem_setup && !qcom_pas_is_available())
+ 		return -EPROBE_DEFER;
+ 
+ 	mba_image = desc->hexagon_mba_image;
+
+base-commit: bb840ea69347aff7bde5a208e7b5b180669a7656
 -- 
-2.43.0
+2.55.0
 
