@@ -1,60 +1,62 @@
-Received: from mail-ej1-f44.google.com (mail-ej1-f44.google.com [209.85.218.44])
+Received: from mail-ej1-f43.google.com (mail-ej1-f43.google.com [209.85.218.43])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D8E9734B1A6
-	for <linux-arm-msm@vger.kernel.org>; Fri, 21 Aug 2026 03:03:30 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.218.44
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1173635E549
+	for <linux-arm-msm@vger.kernel.org>; Fri, 21 Aug 2026 03:03:32 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.218.43
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787281412; cv=none; b=NgBdDjcndYNomsjWJAecD3HfuFvAQD5mYmgW+Zlg7y5+QtJXJYn/5WedV+Ml+siFPWNZPsIjLgWkMt1zsuy72NfyWhJDHARECEyOsZ5r8AQUTLTCdBi2BzYAB2m282ODJ085fneapEbybqNsWFGWp/VhXcYpEcNU4hE7tr4TjDk=
+	t=1787281414; cv=none; b=gEJw+8f+yQvUe+woi/CnJ+U6lB6aMXJnLsB/ChVyJyGDjNuc4RZ5nEQuNZuLRlCMMP9moXKFb5/orHz5H8Nkw0shDjN+UN6CIRVVcqXBOyrF+YaJ/XBuHW7T3DyD3Dith4Apv7v8Rhqi5rEpQ9IQdxn2IqWQ0Wae/DoRFG1K61Y=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787281412; c=relaxed/simple;
-	bh=xW3iwMJdUf28ooxJCG/iuJQ1bRNNMmFlcIn6TRT+ipc=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=CIIT1Viap4eLncvHunPidpijEtwavgDpPuFY4+VGz4PnFKYA2rVmFUtmLk9pPh/1WwIPpP6HZRpgZjrODJCF4oSgougI/d7tsfVK51Wx9CZmYEaEGh1ysYvnDZeT/cgJ6+BCRIuYnWXUb2GfN+qfN/N+iSWqNef/HKnUqMZOSt4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=mswin.me; spf=none smtp.mailfrom=mswin.me; dkim=pass (2048-bit key) header.d=mswin-me.20251104.gappssmtp.com header.i=@mswin-me.20251104.gappssmtp.com header.b=zEtk+5Nq; arc=none smtp.client-ip=209.85.218.44
+	s=arc-20240116; t=1787281414; c=relaxed/simple;
+	bh=UIFM5M3YdbW6mYCh+6wGdniTiIWoponM/veuMwUGqD4=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=kZ1FFSgKCZUlXp/EcPqCtFacSwo/Wb31qp5jvDy8Gbaxdqfi89+fxjJJQuvFXSUoQXtSiLFTl25Nt9vF7PW4t6H6WYQVps+l72L2DDFZPk4Gor0mdKlNixJSxLwmsMEQG9OUshSWDjVaj+BMmYQ94rf+k8yErm4KKTD+RLgVQEQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=mswin.me; spf=none smtp.mailfrom=mswin.me; dkim=pass (2048-bit key) header.d=mswin-me.20251104.gappssmtp.com header.i=@mswin-me.20251104.gappssmtp.com header.b=bwz1mg5O; arc=none smtp.client-ip=209.85.218.43
 Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=mswin.me
 Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=mswin.me
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=mswin-me.20251104.gappssmtp.com header.i=@mswin-me.20251104.gappssmtp.com header.b="zEtk+5Nq"
-Received: by mail-ej1-f44.google.com with SMTP id a640c23a62f3a-c1c52d920b8so77518566b.2
-        for <linux-arm-msm@vger.kernel.org>; Thu, 20 Aug 2026 20:03:30 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=mswin-me.20251104.gappssmtp.com header.i=@mswin-me.20251104.gappssmtp.com header.b="bwz1mg5O"
+Received: by mail-ej1-f43.google.com with SMTP id a640c23a62f3a-c15e2dab83eso105215966b.1
+        for <linux-arm-msm@vger.kernel.org>; Thu, 20 Aug 2026 20:03:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=mswin-me.20251104.gappssmtp.com; s=20251104; t=1787281409; x=1787886209; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=nR3vivEFJtd3iQZRVlYjMI32Qa6Jn8xRiGEyh0JL5Ok=;
-        b=zEtk+5NqCwl3r/Oj3BNwBSI1a63nxMKHV9SC+pvoewYbfMjUn35UJC1g88qfWm05x5
-         fpvojNRmW/sXgXDSzMZKi++ePgQICOTBZNb5UYWDUZptmUUDrPGWiYOKy357zYGEJ/J1
-         7xX85G/4oKm9gp7rB7burDe6AV/MWLu3eUYKt1wuYSRvU2B0bmN+LbpTQYWMZhukFfdU
-         JJjKDdo233wpx2q7dtGWYXBLg9dPtgNKCBv+eXSd5qbVe8G3cyzw75oC2A6vQZtER3vb
-         H00WtFSQxr+ZRSQEB3j7iwUR5giyUHs+ZnpnQmujD53iJxG39gAdwmMWYjtgPUQCn+CH
-         455w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787281409; x=1787886209;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=mswin-me.20251104.gappssmtp.com; s=20251104; t=1787281411; x=1787886211; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=nR3vivEFJtd3iQZRVlYjMI32Qa6Jn8xRiGEyh0JL5Ok=;
-        b=RJqscYV2IVisaKR92ZmXthzprZPaNZ0WmAsBjkqlDVw/dNrJMjZ3gy2mpuUmiW1d/Y
-         hf2KL/XALu1TOY4ycQsYlkxMjMNloRLih+ebSHwv8AALGqefHHcPULDo55qZlHBK7Cd2
-         /fMebiNFGoviicNt9u3ujHa3UXFR+ou7vlsZwCQSCHy3GU0KzVxIVKyVF8eaVqP3u1Pu
-         sSgNxlb0BD5eLi9dY8+dPO8sEzVVhPo6N+kCf71ESFw5gvpIvW3sCkfu8Sp465/pyJGe
-         tIbgPdSPbWz5AWemLctJAMPUZNmDmH2a0fmWMSQvQv/mowmyC1kCH3+U62xz9p7InnPE
-         txqA==
-X-Gm-Message-State: AOJu0Ywx+tSI9Vm/Qj9QpVv+EjhbT9533m/dYdvHiIf53IxYQjKq5ssO
-	4fzCgP3UGJ58Vm8wTgYOO4YN4MoIonemRu1e0IAmzcpoMZSoaOBwh/oqtGOu9VkrkVo=
-X-Gm-Gg: AR+sD13luTRyd4uorcUel4z3C6tsupc0bcspB+2iWDN7oftMNPEYPG48BmZYk6FEi6t
-	yXYrt5mDptkPCXDkzN57uBIm+oPtVBPTosGCHAMFe5Vg6ZjgZYic6QXYEASfoA73r5BIgXPKgjX
-	WfXOnwyVuqRX7OvLK0A+qlaYN0T/wqJ7kZxapxwGgduuBREQkItVOqYsfmNQhH3exPNXoItOfoT
-	83T6HupD7iucX01jEV4GX9py57AdFVLd7CiX1S5mS2oWJiJIxLWVknRn4FDsZU2L8ikBOMpUPhd
-	l1pm+mp46KLTTxrnh3GPZ2ufwkXnIcZAtm+/9t3y3Pqd8cBPRH4IHqLMYDCsW1jPgifb4KmaZQ9
-	+ipsGhLUU5OnSOPoJfA5VPD9SH1VIOkdulg9B/DDbcuP/dU1SWUALnxQzWbwPgF91Zsy2yCQYDt
-	jWH3nJvc6edA0cK1loqxxwUz4iAMzSmjxZKoofkNGCi0n57xPPF3i5i9j0xQD/mPpFcA==
-X-Received: by 2002:a17:906:1014:20b0:c20:f871:1020 with SMTP id a640c23a62f3a-c246a63f53cmr205362566b.19.1787281408924;
-        Thu, 20 Aug 2026 20:03:28 -0700 (PDT)
+        bh=M/djXBvzShY6dqn1dOwwRCbzxLVbePc2HPBHRPfCh3w=;
+        b=bwz1mg5OIKujiLlokKFrYUsNon0ZCo0obMVZSe1X43vhCZ2ZMh8NMfFicTHN/UQAFE
+         /d1LjeuOd0ytM6kyzzWeDrCRhqiPlZpgE6vGc31NS5tIXMT2gDkmKUb3xDR7vmQeDrNk
+         QLvSndwAOwGv0AdRRTqkfzoiOt/LFmG3AI/fam1fXXcSJ3XhEcE4Wone8aCLvE8P51xA
+         OeF3bjvsWfd0OztNzIRZB0ej5AULfCsdQ3vzWK1oE9f3iMFC9f2KyQhmaV6c72kpw9U8
+         S5cDG9zZJBwF7F6z02bDO1Crzr3yO1zJitA3iNYrDEzcqcuzPKghxMEZZrGu/bvwo0aB
+         ZEhQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1787281411; x=1787886211;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=M/djXBvzShY6dqn1dOwwRCbzxLVbePc2HPBHRPfCh3w=;
+        b=OwNihtt0UhwtR6iUyvMyKlxYiylG8L17k52aJh/dUcKrmkUIXXA6MGgOnEUWbGLhRD
+         HMVXnRrIjfH2YOpeLJuJAJ5pp6E+Gn+O2wGDtMg7RJB/6fYPYIOFHEXwrk40GSL+BaGe
+         zWdAaqllHBOnBvTRojAsLBOQ38uRkgjAt24wE1Y2br7xDuWGm86Misag9r4OqpB/0kpO
+         O47vZoJgCJNOjVn0Xzt/5iMLJzn9zmHEqH4rRih3mkbjU+/YJjlXBlpghqfDxig4Uq2l
+         mt9aPzIrkaBrnKvuiHWW2ARPuGj1tn1leKxULqRFMt/0SWe6z55L1U5Md55mgNKok34K
+         Jleg==
+X-Gm-Message-State: AOJu0YyyOH7lilsvmyP55Hw5KJiOALlEbyEz9pynpkLXn5xfGPrc91Q5
+	rgyIIHIM+TvVE8Utz5oIqj4vuSTChmrZKcx5oQvCfo3a/c5fx2Q9Mey3HnTv+es5MG8=
+X-Gm-Gg: AR+sD10DT8oONF/YpcmP6E+NTM4KojXJta/hYGCAldmzENaqTAudt73zePM7hZiyT29
+	47zgtTtSVI/hD5xyeIXoVDuKQ/dzpj6PoLSLJcTf2ghVZW5LyeqO9qMQD3IHAdNvPPV37EXmRHN
+	FfvfA7xb3eSOmiOkOVNDjqEiZz9hQB/EXzpvD/feYl1ZHsOSDguI/ZR1vGYysbI/e6jkUnyji/n
+	lpMtjXQjN06qwBBiX/uMu+kwaU35/jBi+eKEdp0AGrr74P69YVsfVYAk1Gn4gHDRUvX6WsGWR7i
+	TsGmOQjWYNddCOBjbjMI741ocO1bivBqaCdpVIKFVuAYGng7uAk07kHmw/Ccx0ku+BHdSdLXJll
+	VTHNPZ0tdhA8RI8p3diCkJEbuGL/6jgiyXCvHe1l9Kv3ZMvdYqqSsRnM7CEWT1CLnPKnNNGtpu/
+	DvPXSV5APZK0+jFJs2wqBRsJvi3DXcdAxJ7vpZcOZ1n6GYP8m72NPhKsx7g4lMbBesgw==
+X-Received: by 2002:a17:906:4787:b0:c24:6f60:3f7e with SMTP id a640c23a62f3a-c246f60404cmr227752166b.2.1787281411245;
+        Thu, 20 Aug 2026 20:03:31 -0700 (PDT)
 Received: from zephyr.int.serkovo.ru ([85.17.200.167])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c24591df293sm274875866b.45.2026.08.20.20.03.26
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c24591df293sm274875866b.45.2026.08.20.20.03.29
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 20 Aug 2026 20:03:28 -0700 (PDT)
+        Thu, 20 Aug 2026 20:03:30 -0700 (PDT)
 From: Roman Linev <admin@mswin.me>
 To: Amit Kucheria <amitk@kernel.org>,
 	Thara Gopinath <thara.gopinath@gmail.com>,
@@ -72,10 +74,12 @@ Cc: linux-arm-msm@vger.kernel.org,
 	devicetree@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
 	Roman Linev <admin@mswin.me>
-Subject: [PATCH 0/2] arm64: dts: qcom: sm6125: add TSENS die temperature sensing
-Date: Fri, 21 Aug 2026 06:03:23 +0300
-Message-ID: <20260821030325.1823829-1-admin@mswin.me>
+Subject: [PATCH 1/2] dt-bindings: thermal: qcom-tsens: add qcom,sm6125-tsens
+Date: Fri, 21 Aug 2026 06:03:24 +0300
+Message-ID: <20260821030325.1823829-2-admin@mswin.me>
 X-Mailer: git-send-email 2.55.0
+In-Reply-To: <20260821030325.1823829-1-admin@mswin.me>
+References: <20260821030325.1823829-1-admin@mswin.me>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -84,47 +88,30 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-SM6125 has a TSENS v2 block that mainline does not describe, so the SoC
-has no die temperature sensing: on a stock kernel the only thermal zones
-on an SM6125 board are the handful backed by PMIC ADC channels.
+SM6125 has a TSENS v2 block with 16 sensors. Its register and interrupt
+layout is identical to SM6115's, and it needs no calibration cells
+because v2 self-calibrates, so it is generic apart from the SoC-specific
+compatible.
 
-The block needs no new driver code. Its register and interrupt layout is
-identical to SM6115's and, being v2, it self-calibrates and needs no
-qfprom nvmem cells, so it binds through the existing qcom,tsens-v2
-fallback. Patch 1 documents the SoC-specific compatible; patch 2 adds the
-controller and the thermal zones.
+Document it in the v2 list, bound by the qcom,tsens-v2 fallback.
 
-Sensor-to-zone mapping was taken from the downstream device tree for the
-Xiaomi Mi A3 (laurel_sprout) and cross-checked against sm6115.dtsi, which
-agrees on every sensor the two have in common (2, 3, 4, 13, 14 and 15).
-Sensor 5 is not referenced downstream and is left out, so 15 of the 16
-sensors get zones.
+Signed-off-by: Roman Linev <admin@mswin.me>
+---
+ Documentation/devicetree/bindings/thermal/qcom-tsens.yaml | 1 +
+ 1 file changed, 1 insertion(+)
 
-No cooling devices are referenced, since SM6125 has no GPU node upstream
-yet. The zones report temperature and carry passive and critical trips;
-a cooling map for gpu-thermal can follow alongside the GPU node.
-
-Tested on a Xiaomi Mi A3: tsens0 binds at 4411000.thermal-sensor with no
-dmesg output, the thermal zone count goes from 5 to 20, and the 15 new
-die zones read 37.7-39.6 degrees Celsius at idle. Under a 660 s
-glmark2-es2-drm soak the hottest zone reached 52.2 degrees Celsius
-against its 85 degrees Celsius passive trip.
-
-Both SM6125 boards (laurel-sprout and ginkgo) compile with no new dtc
-warnings: pristine master emits 7 unique_unit_address warnings on the
-geniqup nodes, and the series emits the same 7.
-
-I have no other SM6125 board to test on, so the zone naming beyond the
-sensors shared with SM6115 rests on the downstream device tree.
-
-Roman Linev (2):
-  dt-bindings: thermal: qcom-tsens: add qcom,sm6125-tsens
-  arm64: dts: qcom: sm6125: add TSENS and thermal zones
-
- .../bindings/thermal/qcom-tsens.yaml          |   1 +
- arch/arm64/boot/dts/qcom/sm6125.dtsi          | 299 ++++++++++++++++++
- 2 files changed, 300 insertions(+)
-
+diff --git a/Documentation/devicetree/bindings/thermal/qcom-tsens.yaml b/Documentation/devicetree/bindings/thermal/qcom-tsens.yaml
+index f0efaa834..cb808ce5c 100644
+--- a/Documentation/devicetree/bindings/thermal/qcom-tsens.yaml
++++ b/Documentation/devicetree/bindings/thermal/qcom-tsens.yaml
+@@ -78,6 +78,7 @@ properties:
+               - qcom,sdm845-tsens
+               - qcom,shikra-tsens
+               - qcom,sm6115-tsens
++              - qcom,sm6125-tsens
+               - qcom,sm6350-tsens
+               - qcom,sm6375-tsens
+               - qcom,sm8150-tsens
 -- 
 2.55.0
 
