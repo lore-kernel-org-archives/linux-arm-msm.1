@@ -1,222 +1,256 @@
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A3E2B3DA5D9
-	for <linux-arm-msm@vger.kernel.org>; Fri, 21 Aug 2026 09:55:53 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4EEAE4766BC
+	for <linux-arm-msm@vger.kernel.org>; Fri, 21 Aug 2026 10:12:29 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787306158; cv=none; b=T3UK7zQn19EC1bYnwo3Evqf0ldDVsycnlXG1eIpBLBjFQeNfzZ9VIkFtDAXVzlQMXzlo5GtycGCprPalgLnl++iHtA7EIFrehNnDxoVBv2IHjt7NfSJCZf0Srd9YEVMig8XQBy37iM3mQGIO9NH5cMYe3Xhs3+MjTP9IPAQxqLE=
+	t=1787307161; cv=none; b=gya697b1zt30pYUTOz2Yg+g+/4PZ3AwWD6zIYZuBiwJ69ANVlb937TZ55lNvggAuE1bk3NfagSDVpx9NeLn3bCl96gxTwUFLEu5rFeQEE8bUfoPiacaedCI3gItINQmcBgEs/OVjx0W2VpbHUIQkaGnl/7UQU6ykNrEGqodzHVA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787306158; c=relaxed/simple;
-	bh=h07MlbR4zpwjxk1OAWIHqfGIVg0JNyAMUwKv5muQyC8=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=f3xjeVPk8AqdhM+97yNEV+nbI2jynmxzOgj3GXHMoBE4m1fsFp+VtjHb1y1MEPrRULnZ+6DQHWiYiKD5bz6ZCK0mkLU1oJ8ylFPU5oLri94w0VwJvee4plk5VBZQNggILF3HG3hIG7P81QMsqSQI/FeeBksQH2lrfjNgS1FIaYg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=HuwVBfZ1; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=KfIFkBV8; arc=none smtp.client-ip=205.220.168.131
+	s=arc-20240116; t=1787307161; c=relaxed/simple;
+	bh=DiH5UzajGrApAb2LRnf0TdnfZVH7UpcgdFCXsVnPHRY=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=SE8i25hb4fn+y9s3MLJQTLMLikSpK7k8nJUAeZVVm6EkbKQSh8nrTPkw6FOBimcHJQu3dycgvs9PNd5i3byzFj9GkNaChnLse7UtfkWbjCfLRaapteUGNp18s/EGYJIRrrVj7eq5wj51A8WNYGLEKA2tDE/kwou5pfjx1Ti/fIU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=bSG92Jtl; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=gXGSdEMr; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="HuwVBfZ1";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="KfIFkBV8"
-Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67L9Lq861025265
-	for <linux-arm-msm@vger.kernel.org>; Fri, 21 Aug 2026 09:55:48 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="bSG92Jtl";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="gXGSdEMr"
+Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67L9LtrU2539747
+	for <linux-arm-msm@vger.kernel.org>; Fri, 21 Aug 2026 10:12:27 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	VClMmOILbaRk+It2Uje1g6EoFtr+YGAAo4jOnTeOag8=; b=HuwVBfZ1duPyEjjt
-	dPngyi0yTgWEG8Y729IwKskVbWUs5XdoAVXjCKqw2QpTRwmJc5uKMT1IBJ/0djD+
-	HxSANLg3PUwV3iXyp1/NomBIn0s3R9/Yf0ky9BOrWeOCCbZscnEzF8FYf14JY4Rn
-	chkUS0Sz2rh9BRFplc7sTVqZBhlFe5dOoB48FQrpJ3AfA99z3tAihTFkWKIxH3j9
-	/h24T24r0fe2It0mf6Q5gkBX/+9hqNfTUUiq+6ZbXrevS/dF3OsnJjpwQQD2yPYi
-	ARJNIL6UhVpmRHIqk1dfhXOVRbrRcc3SLjpc2aqpxMj9tFmgqqvmcEuCi/wzTRry
-	kQ7Vsw==
-Received: from mail-pj1-f72.google.com (mail-pj1-f72.google.com [209.85.216.72])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g6gde8xub-1
+	cc:content-type:date:from:in-reply-to:message-id:mime-version
+	:references:subject:to; s=qcppdkim1; bh=yksbzOTQ/eC3Z53PGx/czvNi
+	B3RKb7i+djGFkbXFPg8=; b=bSG92Jtlp7Ugc8PCGs0gGExQ/jRBfx5rwvFGhF27
+	parmlyomdS3YJi4wYjWDyFQCqFQcitoZonE00epurXO7dO5cGPcoXbn46bwLMgOG
+	5ng423QDx20E40ASknUKiB+LlqnOzbNLvzi9wPATp0CDv5oXwKdjf3Vh9x8owwem
+	AtZwFItFFXBZwPVvjZqiuGOU5SofsIWUgX12Blw5dXeUFgw4jQgDvVl+53yPPQ8P
+	NdVKwCL9qqHMkfA4KvOOOsFQCuYT1ATuPvWWTQA1s6/Z29fMgoPxnbZxQLpitSOe
+	MAWl4Nj6EJkS3L6IinTGHjpsBmiTAkKFZPpiTCzpbLkIsA==
+Received: from mail-qt1-f199.google.com (mail-qt1-f199.google.com [209.85.160.199])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g6fuhh4c8-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Fri, 21 Aug 2026 09:55:48 +0000 (GMT)
-Received: by mail-pj1-f72.google.com with SMTP id 98e67ed59e1d1-38f283baf1fso1149612a91.3
-        for <linux-arm-msm@vger.kernel.org>; Fri, 21 Aug 2026 02:55:48 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 21 Aug 2026 10:12:27 +0000 (GMT)
+Received: by mail-qt1-f199.google.com with SMTP id d75a77b69052e-51c21c01cf3so13535471cf.2
+        for <linux-arm-msm@vger.kernel.org>; Fri, 21 Aug 2026 03:12:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1787306147; x=1787910947; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=VClMmOILbaRk+It2Uje1g6EoFtr+YGAAo4jOnTeOag8=;
-        b=KfIFkBV8Ra5HngmuiqLt6Kdp3hupoTJo/w+Rdnee4wwpv1F0QAVBGLBFljolixuNuC
-         2rX6soqNEeLCChc0lBGCmcaJBfj8k4QOywuWd7wpvKThweLhxC+NeW51c29hKK0dFJai
-         oDWkC8pzhiTvrOdi9pvn8S1AGnHHi5vdIbqNiBFfD9smH4j4hbTGC/vpugpbniPo0FNf
-         GI5S/K8nVDesHLC+rmicfiw07fX7C7F51sfSEYSNh/LZIyUo9We9wu/3Z0Q1fRpcAqWD
-         gWOnIV3b11MTmPASFD/Sk3fRVquI/cZrDLvPVNr0A/hKxKzBQxRx47ohbKaMpdP7Wmyh
-         /QiA==
+        d=oss.qualcomm.com; s=google; t=1787307147; x=1787911947; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=yksbzOTQ/eC3Z53PGx/czvNiB3RKb7i+djGFkbXFPg8=;
+        b=gXGSdEMr4aU/xGXgFT1/Be6kfywoVfUoUEVUgdUcor7vDt3rTJiiGqWlegsgDK490A
+         XxWDbU0qdfJCTn7ue8XiXLclTNU49Yq/gsAeXXQ6F+07r3eOBzmwddcCfTBZbKoby0WY
+         xYZ32Dt2iZSGRpsar9oQUUqyEKiQAxXX2qWHgofxpw4zjOHiUwtdZbQ0RJY7FpuH/alW
+         pP0+u8rKah1296msO1MFKTdf4iRDxeU/O/UYCLMUs947MzHqRUBXR+L9U2l6W4ZD5mMk
+         Tc4k9npnrkpYIvCbMUKkXxFKG3dCTSwp8rpGgtdoIVKs8hIbEW/909sIXd9Zcnk1rIa9
+         NC2g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787306147; x=1787910947;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=VClMmOILbaRk+It2Uje1g6EoFtr+YGAAo4jOnTeOag8=;
-        b=HvsgxY4sdHjwLDSA8Kdx5IVJqLx2V+gqw4ZG3Xbb8H39hpAdBixh2/rTbLdy347X0P
-         Ul17qne4RYVRbRjv+biNqoPof/hHDHUbyByV8K5qO2ovJKexwS05GvAzTUQuaYgUvUNk
-         PLG8xKlGUZqEVQWsJFVQHlsic/OtFiKYzXXx74q60PpkKMxzmHTJMAmCJ00z2pHcd82B
-         Sa6pC7AjUkEkb0YVBYmQMOhJo/25BaZw1Ox4Zr5i4nU9y200tiWjrjyFJIdwoN074WEO
-         DCR+YBT7L1hZIP8KiDedfsDviBj9gOJQrexQEtcgI+EWXtT+qiv+RHLhJgA8UmfAWisa
-         d1Dw==
-X-Gm-Message-State: AFuF++kl8ygd+TFegsmxI8pENCtkyPKe52x49UzUgfT19cKJ1LTHabU5
-	GRi84HBjF66HA/AE6Rszlsu41oN5bmjFTyCQLge6J2NXSoZqUSuGmZrcXxq/YdIzzaiF4uLHEZC
-	fGDfvN2N4NhEHI+wWJWJ63HtZavURS+k4ti774fieoAz5l8Mm5gWgw+G7Qx0dIfCWgLk5qvJPQu
-	09
-X-Gm-Gg: AR+sD126nVVl2T2z8jqHDFJabPaB7MR+hDrKzf3b+RvJ4YLQgHRddHYScP1fr16T0OV
-	EglgTKrreW+yW/ez3OsY4/H17nY6Z0DtvqJnDx0Jc3cSCzyIkHwTw2qSvTXQOQaOfr5nVQ4GBxD
-	2HNPOJph139g9HmsHZEOeuql2FXPwfJL85/ym7y+Mplrs5PXf1DKO+rsgrexyzb/MCN8221WfKX
-	OI8TGQAgcABDD89fYt7cdmy/SP6ODjigUhiMvuMO5WgbBu+vUey9w2AvePyTEkycGwXWkak/jMi
-	oP81LWk3lFTyNktZs3xaFSCD5lXJfGYL1WIGkkRM9LQbwB54Qi6Oq4XRdySbxdCTXzY9uwDFErP
-	3jid4jslq+q4NMUIvP+E/E5EFuR/bjBo=
-X-Received: by 2002:a17:90b:528f:b0:380:f85c:94b4 with SMTP id 98e67ed59e1d1-395c35636acmr10037767a91.7.1787306147444;
-        Fri, 21 Aug 2026 02:55:47 -0700 (PDT)
-X-Received: by 2002:a17:90b:528f:b0:380:f85c:94b4 with SMTP id 98e67ed59e1d1-395c35636acmr10037590a91.7.1787306146553;
-        Fri, 21 Aug 2026 02:55:46 -0700 (PDT)
-Received: from [10.218.14.97] ([202.46.22.19])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-395c4be47d7sm2437968a91.9.2026.08.21.02.55.43
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 21 Aug 2026 02:55:45 -0700 (PDT)
-Message-ID: <b117d9ad-7fa3-4130-80cf-d7cfbee20fba@oss.qualcomm.com>
-Date: Fri, 21 Aug 2026 15:25:41 +0530
+        d=1e100.net; s=20251104; t=1787307147; x=1787911947;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=yksbzOTQ/eC3Z53PGx/czvNiB3RKb7i+djGFkbXFPg8=;
+        b=bgfTr2PSHSjiaDcgz4uHolYLOhfsNu71omJWj8mMSRe98YxZLnK/kZUoOKyMK4xegH
+         /Lr5DJXtt24Pc25LtGLzDzrC6fkVbAPQZa+glb5jmnXk4YHg+1dUaHqMxGm5UY+3CfzJ
+         LmDXa3NJU0gi4tIppq8Y8lym4mOOS0dRrQPPPShMv7yV2morGbpWA4gvHajyaFHLWMz1
+         KvF/pjkVR/XrwGoStWqtm0eOH86dJbd8U5DjdMdziPMe3N92DZKvgwQvph/tMzmUhpA1
+         Ke1RpTUF+HKX98or+WdFEYsI4B4L+ks15OfNnw2XtT784lSZV8vtdUZR6W3tXjTz9v04
+         gVmg==
+X-Forwarded-Encrypted: i=1; AHgh+Rryp24PAEWi39rF/SGLe0q8aMCYvWcjm547bR/JsqABrBvlrsjeDB48lEojjB7ney4NKN7W2MdGuU9Q4El1@vger.kernel.org
+X-Gm-Message-State: AOJu0YyDiE4KUj2NpWd7sKh340oL0FJ7RptF0R4wmSs7ECbREyAOs0YH
+	H6+rspPN7jnAEGAq3e8EU7BYKD+8eqZf+uK/Lv29Ps4yk3B9iNpBx98yY2SK6PiFO7R4S4Aa8+t
+	ctX6kTMV+nHzAVF7uJSbVuV1cm59Ee5s/mbZ/TucI50bNJF92iv+gdKRFzy46ll3sDE5O
+X-Gm-Gg: AR+sD106l19t7Tx3UHFkgIjkVvlV5F524WyH6QpFAU6sTUIlS3kyobd1xRor4hCBTiO
+	alj56OzUTnm7rjkvYaM1YoFI+puJSEz6RDP+ApeiiO6BY68JyNweZdBFuKcV1NSoDRC1+mHB/BL
+	6wDnNegtRG5DpJGrMu/Tv3308VXaKj6ZvHrOxO7OC14onq5A9T4RkqSJ8xi0k9+CEcQJIxjTkaB
+	vrGNYdki33IkJ38jcmkrXrl7Me3Llu9ytc91ugwdZHde0gFj9TrsCF3nVLB2nk7bAb1cYTWGOYb
+	wbWn2XRWZ0/zjRqfh6sR2Te4mjAl2KtytqQ51tRAeBmo4r+ZAniryMLuFAPhn0HXH4TRjn0hb1i
+	VLogEpJdSm6P8ivk=
+X-Received: by 2002:a05:622a:5591:b0:516:ed02:c85d with SMTP id d75a77b69052e-52df5637a7dmr48417711cf.3.1787307146583;
+        Fri, 21 Aug 2026 03:12:26 -0700 (PDT)
+X-Received: by 2002:a05:622a:5591:b0:516:ed02:c85d with SMTP id d75a77b69052e-52df5637a7dmr48416921cf.3.1787307145847;
+        Fri, 21 Aug 2026 03:12:25 -0700 (PDT)
+Received: from oss.qualcomm.com ([188.27.161.240])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c2459223b9esm407623366b.62.2026.08.21.03.12.23
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 21 Aug 2026 03:12:24 -0700 (PDT)
+Date: Fri, 21 Aug 2026 13:12:22 +0300
+From: Abel Vesa <abel.vesa@oss.qualcomm.com>
+To: Sreeshankar K <sreeshankar0910@gmail.com>
+Cc: robh@kernel.org, krzk+dt@kernel.org, conor+dt@kernel.org,
+        andersson@kernel.org, mturquette@baylibre.com, sboyd@kernel.org,
+        rafael@kernel.org, viresh.kumar@linaro.org, konradybcio@kernel.org,
+        tglx@kernel.org, ulfh@kernel.org, bmasney@redhat.com, radu@rendec.net,
+        lpieralisi@kernel.org, quic_tdas@quicinc.com, danila@mainlining.org,
+        davidwronek@gmail.com, mani@kernel.org, robimarko@gmail.com,
+        linux@gurudas.dev, devicetree@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+        linux-clk@vger.kernel.org, linux-pm@vger.kernel.org
+Subject: Re: [PATCH v3 04/13] clk: qcom: Add Global Clock Controller (GCC)
+ driver for SM7250
+Message-ID: <345sjivput4nhwbid5ic5ar6fj3prkzmbozhjkvhob4kk2keio@jzs737d26og2>
+References: <20260821081125.4522-1-sreeshankar0910@gmail.com>
+ <20260821081125.4522-5-sreeshankar0910@gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 2/2] spi: qcom-geni: Add panic notifier to cancel and
- reset DMA during panic
-To: Mukesh Savaliya <mukesh.savaliya@oss.qualcomm.com>,
-        konrad.dybcio@oss.qualcomm.com, Mark Brown <broonie@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, linux-spi@vger.kernel.org,
-        linux-kernel@vger.kernel.org, chandana.chiluveru@oss.qualcomm.com
-References: <20260818-add-shutdown-and-panic-notifier-for-spi-v3-0-8b62c4bc2d21@oss.qualcomm.com>
- <20260818-add-shutdown-and-panic-notifier-for-spi-v3-2-8b62c4bc2d21@oss.qualcomm.com>
- <54e4fa7b-9a95-4871-94f9-65ac55688f7b@oss.qualcomm.com>
-Content-Language: en-US
-From: Praveen Talari <praveen.talari@oss.qualcomm.com>
-In-Reply-To: <54e4fa7b-9a95-4871-94f9-65ac55688f7b@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Authority-Analysis: v=2.4 cv=BcroFLt2 c=1 sm=1 tr=0 ts=6a8820a4 cx=c_pps
- a=RP+M6JBNLl+fLTcSJhASfg==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
- a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
- a=01GmVmAJTjHGYBpbkKwA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
- a=iS9zxrgQBfv6-_F4QbHw:22
-X-Proofpoint-GUID: QuRBxLJxGv3MHRJcUP-lf0LwI11_Owdy
-X-Proofpoint-ORIG-GUID: QuRBxLJxGv3MHRJcUP-lf0LwI11_Owdy
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODIxMDA3MyBTYWx0ZWRfXzTD+h+2Bb5/n
- kRvzKsGBbvWsJxcnmZYkZ6yiGcduDNoaAGgvKM9GgB1KLKK/2xlf48tS1qd7ZDKiBNZUs6kQ2H8
- BZwQadP86jB9h3ao3hnjYohCjfEFfm4=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODIxMDA3MyBTYWx0ZWRfX8on43VVq/ZI5
- sWYbdeWuK/ZRkUEbuVRiAbh7c+snSvlNrx9lJ7OCOjMrghDCw0pLEWQ+oBbthlGDUYKQupFRvQN
- HEUGD7QKu0yISx2Ov3It32VHRrz4VzeRahFlnMF+Zpr72Nl+uqPgBesE7omcgLukxGsOT6cwmMJ
- yD2Tag+IBT8k+yZ0Lt7q47McLONjJSAyA9LLXQcotj9dj0pKFO2K3UeWFCVLHXitxLFj3ABF8Oq
- Iq6lv9J8VCo9WS3gSyYz+Gt3gru5gxTuSlasgn5JWqmoKA4UTYmkm7fsMZjyksHN7XII6lzMUkh
- Gap7c0GTrkMEt1NZ7K4DopxH0nsp87Ik0rlVnF18AOQUrWc290gPU4w8tl7kMc9zHVuRhbUFWna
- C7XcWpEUCZ2t8RqnJnqBvmdzJIe1yMuGGTDlUlYKYUBNsFoUsKR0YvdVr5D3IGPfZEJuBKKm1gy
- eX1oqDOdsELhP3UB+iw==
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260821081125.4522-5-sreeshankar0910@gmail.com>
+X-Proofpoint-ORIG-GUID: TVNK0qODIrdW0GQt-s18HJ8eIZo2xawU
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODIxMDA3NiBTYWx0ZWRfXzid741H6G7xp
+ A//3P67EfSl0/m8/6cXp7fmb/2RcDZZyaLcpu1FoMhC/5jQFMOLr8SMF70cjmF8TaabtcCe9Kan
+ w2o1jEDwYfn/DzLT0o23ddwAjpiv3oU=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODIxMDA3NiBTYWx0ZWRfXy2HTRmNn+yIe
+ D/kiSFro3mH7ZjwrmdBDj/z8FBHbV6i5GNTLTbUcpSuUn42moih5lIMHESxI4uiXtwsVRS9sKg3
+ 7MNgh70gfHNsPm8CENbcMb53dd30u3kWQv7ZyGUyVkfqJDL+Mq9Yh6++iuEDsk37MkDB2dvSIAT
+ uypNRDLxh6a4jmY7D2WionJz2DwIFrbPh5+9cLX6J+UMcKqwBpN/iafxbkNYOfkHRx8zKmudGlh
+ kwJWLiJZ9JaQsFv/cK/1N3BZ5lYZ9vID5j4M/MMi7uAMcAbUvSpSgsXGuGt68Czr8VzR06CTWZt
+ MOe4IEtFlI9NQf6xnnxEFpAKa0KoHHGStWyaMrPMNuzF1XHPlSW3bUpNPeNdeuCnpMo7ctm6CE5
+ g8F4XAMlVbso2FBuU1PeceOQWngo7psYYJaCqT2GxwxWcEKfiH3NPfZ1JHouh94exuSIobe/7m3
+ PKUmrOKpKUyXR9htWmg==
+X-Proofpoint-GUID: TVNK0qODIrdW0GQt-s18HJ8eIZo2xawU
+X-Authority-Analysis: v=2.4 cv=UtFT8ewB c=1 sm=1 tr=0 ts=6a88248b cx=c_pps
+ a=WeENfcodrlLV9YRTxbY/uA==:117 a=wUpz7uCjLrEXi01cjX+DLw==:17
+ a=kj9zAlcOel0A:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22
+ a=pGLkceISAAAA:8 a=LIp7Q8giVWzGnOrG83AA:9 a=CjuIK1q_8ugA:10
+ a=kacYvNCVWA4VmyqE58fU:22
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-08-21_03,2026-08-21_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- spamscore=0 impostorscore=0 phishscore=0 malwarescore=0 suspectscore=0
- priorityscore=1501 bulkscore=0 clxscore=1015 adultscore=0 lowpriorityscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608210073
+ phishscore=0 lowpriorityscore=0 malwarescore=0 priorityscore=1501
+ impostorscore=0 suspectscore=0 bulkscore=0 adultscore=0 clxscore=1015
+ spamscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
+ adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2608210076
 
-Hi Mukesh
+On 26-08-21 08:11:16, Sreeshankar K wrote:
+> Add support for the global clock controller found on SM7250
+> based devices. This should allow most non-multimedia device
+> drivers to probe and control their clocks.
+> 
+> Signed-off-by: Sreeshankar K <sreeshankar0910@gmail.com>
+> ---
+>  drivers/clk/qcom/Kconfig      |    9 +
+>  drivers/clk/qcom/Makefile     |    1 +
+>  drivers/clk/qcom/gcc-sm7250.c | 2269 +++++++++++++++++++++++++++++++++
+>  3 files changed, 2279 insertions(+)
+>  create mode 100644 drivers/clk/qcom/gcc-sm7250.c
+> 
+> diff --git a/drivers/clk/qcom/Kconfig b/drivers/clk/qcom/Kconfig
+> index 7d84c2f1d..532d8f002 100644
+> --- a/drivers/clk/qcom/Kconfig
+> +++ b/drivers/clk/qcom/Kconfig
+> @@ -1416,6 +1416,15 @@ config SM_GCC_7150
+>  	  Say Y if you want to use peripheral devices such as UART,
+>  	  SPI, I2C, USB, SD/UFS, PCIe etc.
+>  
+> +config SM_GCC_7250
+> +	tristate "SM7250 Global Clock Controller"
+> +	depends on ARM64 || COMPILE_TEST
+> +	select QCOM_GDSC
+> +	help
+> +	  Support for the global clock controller on SM7250 devices.
+> +	  Say Y if you want to use peripheral devices such as UART,
+> +	  SPI, I2C, USB, SD/UFS etc.
+> +
+>  config SM_GCC_MILOS
+>  	tristate "Milos Global Clock Controller"
+>  	depends on ARM64 || COMPILE_TEST
+> diff --git a/drivers/clk/qcom/Makefile b/drivers/clk/qcom/Makefile
+> index 58f9a5eb6..18414089c 100644
+> --- a/drivers/clk/qcom/Makefile
+> +++ b/drivers/clk/qcom/Makefile
+> @@ -174,6 +174,7 @@ obj-$(CONFIG_SM_GCC_6125) += gcc-sm6125.o
+>  obj-$(CONFIG_SM_GCC_6350) += gcc-sm6350.o
+>  obj-$(CONFIG_SM_GCC_6375) += gcc-sm6375.o
+>  obj-$(CONFIG_SM_GCC_7150) += gcc-sm7150.o
+> +obj-$(CONFIG_SM_GCC_7250) += gcc-sm7250.o
+>  obj-$(CONFIG_SM_GCC_8150) += gcc-sm8150.o
+>  obj-$(CONFIG_SM_GCC_8250) += gcc-sm8250.o
+>  obj-$(CONFIG_SM_GCC_8350) += gcc-sm8350.o
+> diff --git a/drivers/clk/qcom/gcc-sm7250.c b/drivers/clk/qcom/gcc-sm7250.c
+> new file mode 100644
+> index 000000000..b98806fab
+> --- /dev/null
+> +++ b/drivers/clk/qcom/gcc-sm7250.c
+> @@ -0,0 +1,2269 @@
+> +// SPDX-License-Identifier: GPL-2.0-only
+> +/*
+> + * Copyright (c) 2018-2019, The Linux Foundation. All rights reserved.
+> + * Copyright (c) 2026, Sreeshankar K <sreeshankar0910@gmail.com>
+> + */
+> +
+> +#include <linux/clk-provider.h>
+> +#include <linux/err.h>
+> +#include <linux/kernel.h>
+> +#include <linux/module.h>
+> +#include <linux/of.h>
+> +#include <linux/platform_device.h>
+> +#include <linux/regmap.h>
+> +
+> +#include <dt-bindings/clock/qcom,sm7250-gcc.h>
+> +
+> +#include "clk-alpha-pll.h"
+> +#include "clk-branch.h"
+> +#include "clk-rcg.h"
+> +#include "clk-regmap.h"
+> +#include "common.h"
+> +#include "gdsc.h"
+> +#include "reset.h"
+> +
+> +enum {
+> +	P_BI_TCXO,
+> +	P_GPLL0_OUT_EVEN,
+> +	P_GPLL0_OUT_MAIN,
+> +	P_GPLL6_OUT_MAIN,
+> +	P_GPLL9_OUT_MAIN,
+> +	P_SLEEP_CLK,
+> +};
+> +
+> +static struct clk_alpha_pll gpll0 = {
+> +	.offset = 0x0,
+> +	.regs = clk_alpha_pll_regs[CLK_ALPHA_PLL_TYPE_LUCID],
+> +	.clkr = {
+> +		.enable_reg = 0x52010,
+> +		.enable_mask = BIT(0),
+> +		.hw.init = &(struct clk_init_data){
+> +			.name = "gpll0",
+> +			.parent_data = &(const struct clk_parent_data){
+> +				.fw_name = "bi_tcxo",
 
-On 20-08-2026 01:02, Mukesh Savaliya wrote:
->
->
-> On 8/18/2026 6:58 PM, Praveen Talari wrote:
-> [...]
->
->> +static int spi_geni_panic_notifier(struct notifier_block *nb,
->> +                   unsigned long action, void *data)
->> +{
->> +    struct spi_geni_master *mas = container_of(nb, struct 
->> spi_geni_master, panic_nb);
->> +    struct spi_controller *spi = dev_get_drvdata(mas->dev);
->> +    struct geni_se *se = &mas->se;
->> +    u32 val;
->> +
->> +    if (!pm_runtime_active(mas->dev))
->
-> Not completely sure, but why not NOTIFY_DONE ? we haven't handled 
-> anything here.
-My intention was to treat this as a successful no-op since no action is 
-required when the device is runtime suspended.
->
->> +        return NOTIFY_OK;
->> +
->> +    if (mas->cur_xfer_mode == GENI_GPI_DMA) {
->> +        dmaengine_terminate_async(mas->tx);
->> +        dmaengine_terminate_async(mas->rx);
->> +        return NOTIFY_OK;
->> +    }
->> +
->> +    if (!(readl_relaxed(se->base + SE_GENI_STATUS) & 
->> M_GENI_CMD_ACTIVE))
-> Shouldn't this be under FIFO mode check  ? As i can see SE DMA mode 
-> and GPI mode conditions present but not for FIFO.
-This code path is shared between FIFO and SE_DMA modes. The DMA reset 
-sequence below is only required when the transfer is operating in DMA mode.
->
->> +        return NOTIFY_OK;
->> +
->> +    if (!spi->target) {
->> +        geni_se_cancel_m_cmd(se);
->> +        if (!readl_poll_timeout_atomic(se->base + 
->> SE_GENI_M_IRQ_STATUS, val,
->> +                           val & M_CMD_CANCEL_EN, 10, 50000)) {
->> +            writel_relaxed(M_CMD_CANCEL_EN, se->base + 
->> SE_GENI_M_IRQ_CLEAR);
->> +            return NOTIFY_OK;
->> +        }
->> +    }
->> +
->> +    geni_se_abort_m_cmd(se);
->
-> why abort is done directly for target device and not for master ?
-> shouldn't be combined with cancel failure ?
+We use index here. Look at gcc-sm7150.c.
 
-The target doesn't support cancel.
+Same for the rest below.
 
->> +    if (!readl_poll_timeout_atomic(se->base + SE_GENI_M_IRQ_STATUS, 
->> val,
->> +                       val & M_CMD_ABORT_EN, 10, 50000))
->> +        writel_relaxed(M_CMD_ABORT_EN, se->base + SE_GENI_M_IRQ_CLEAR);
->> +
->> +    if (mas->cur_xfer_mode == GENI_SE_DMA) {
->> +        writel_relaxed(1, se->base + SE_DMA_TX_FSM_RST);
->> +        readl_poll_timeout_atomic(se->base + SE_DMA_TX_IRQ_STAT, val,
->> +                      val & TX_RESET_DONE, 10, 50000);
->> +        writel_relaxed(val, se->base + SE_DMA_TX_IRQ_CLR);
->> +
->> +        writel_relaxed(1, se->base + SE_DMA_RX_FSM_RST);
->> +        readl_poll_timeout_atomic(se->base + SE_DMA_RX_IRQ_STAT, val,
->> +                      val & RX_RESET_DONE, 10, 50000);
-> May be good to declar macro for 10usec and 50msec ? Multiple places 
-> it's being used.> +        writel_relaxed(val, se->base + 
-> SE_DMA_RX_IRQ_CLR);
+> +			},
+> +			.num_parents = 1,
+> +			.ops = &clk_alpha_pll_fixed_lucid_ops,
+> +		},
+> +	},
+> +};
+> +
+> +static const struct clk_div_table post_div_table_gpll0_out_even[] = {
+> +	{ 0x1, 2 },
+> +	{ }
+> +};
+> +
+> +static struct clk_alpha_pll_postdiv gpll0_out_even = {
+> +	.offset = 0x0,
+> +	.post_div_shift = 8,
+> +	.post_div_table = post_div_table_gpll0_out_even,
+> +	.num_post_div = ARRAY_SIZE(post_div_table_gpll0_out_even),
+> +	.width = 4,
+> +	.regs = clk_alpha_pll_regs[CLK_ALPHA_PLL_TYPE_LUCID],
+> +	.clkr.hw.init = &(struct clk_init_data){
 
-Let me review and update.
-
-
-Thanks,
-
-Praveen Talari
-
->> +    }
->> +
->> +    return NOTIFY_OK;
->> +}
->> +[...]
+const. Like above. And everywhere else.
