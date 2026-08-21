@@ -1,67 +1,66 @@
-Received: from mail-ej1-f52.google.com (mail-ej1-f52.google.com [209.85.218.52])
+Received: from mail-ed1-f47.google.com (mail-ed1-f47.google.com [209.85.208.47])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 708A93B19AA
-	for <linux-arm-msm@vger.kernel.org>; Fri, 21 Aug 2026 12:19:17 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.218.52
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1FDE3221F26
+	for <linux-arm-msm@vger.kernel.org>; Fri, 21 Aug 2026 12:27:08 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.208.47
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787314762; cv=none; b=KKw+HEWHK0iBaDoP71FMM3vikWe6I+mZGIMYEjA7G5TJZl+xhjNV1a6U1nnD7bu6bFWLoxTVKvenbS2tQzbWvo3Ohvu483UnlIkhjci/l2ByEFeHX9Kw+TyFvMbVxcApSHX/ZWzyQMmllpV7j/mWLLMYkMWbVNOn36JwIhqiOFk=
+	t=1787315230; cv=none; b=WSLDPHeXBQnHZKjdfHAZ/Rdohurrrw0Yxn55KqaL2KjC8ILCA8OuEHsdOgnGTa6VcH9WTp60efYbUd1w7MkLNzPNFfoUMy7gYgtQOkzUZsA4lLmvzxL3UeejoTBX63Yp/ucXcYOo6o3wXIFxXyXSaC/lpp1jKlM+Cf9SYVLzYsU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787314762; c=relaxed/simple;
-	bh=9tX4vlqIqUDKwRTNzqaZh6vBQ4ue7seqLdlKCinQQ2I=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=rGtKjIG49DId7D/roPqzioK4LtK5RBqX+fVmxwFjs04JQsgeMcnIQymx8KoF6unOHKOXq0df9DWWrIw5ZxQ5uMzevVnOB/nSiAX3ipl9UGk4bZWwuopLeapyquJQUjG+r21VyhHN6Jb1HxHt3mTDsaD+/sl22dNCS8DDriEQNBU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=NawK+6q9; arc=none smtp.client-ip=209.85.218.52
+	s=arc-20240116; t=1787315230; c=relaxed/simple;
+	bh=MSZmz3ogoTTbq2SvL9a0p+hrLN13bkrV1NENG+7L1QI=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=jk9SKXW+kT+tzTqUD3JKc/jlAI0+Cw3yrysru9dk6err4FkZY+ge2woEQG75kMNm28IYdXEQv4DpFBi+1HVzuSsXMTPqZWeYDFzXghHvna1MJjpTKnD7KInaC2DKg84PkVkfK+beZUOHPhPJimkKb66P39mJUNun8asGqil6WtQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=Flr+c4Ma; arc=none smtp.client-ip=209.85.208.47
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="NawK+6q9"
-Received: by mail-ej1-f52.google.com with SMTP id a640c23a62f3a-c15cd3fd760so117814866b.2
-        for <linux-arm-msm@vger.kernel.org>; Fri, 21 Aug 2026 05:19:17 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="Flr+c4Ma"
+Received: by mail-ed1-f47.google.com with SMTP id 4fb4d7f45d1cf-6a3efa2b38aso1851038a12.2
+        for <linux-arm-msm@vger.kernel.org>; Fri, 21 Aug 2026 05:27:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1787314753; x=1787919553; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=Pg60NrqAtbFMf+hekjwzsvKyojDNyaSGf41CfCmu3bU=;
-        b=NawK+6q9MWriL2q9jxEhC15KdotPKeK8SxX4DW7lLnxOCu/jZBpQrt9n03DS2NqRT9
-         ESMR4toMxoWBdevYw6t0xWBPlutSuPu8TxrCiNv3OT1Cll27tUTlWCnOJemarIBMpfce
-         jqDtybU8iB4Fy6azr0MLCkf4D5LYe7vP4X12txGa0gjq1i2yrDK6x5JXYYlCN/+QReHp
-         zfSV1Xav8VWOiWGk14DdQbIacQu3xwm7WD2norunhpFQ8D8XVJ40DIkX5JNwbnDPgMZf
-         Jyq7XIS69udCGbqUUdipvzPbgIZsk+3PpaI6WHSHI38Msr8HgpfNaiGxi4KJiEhmiuUO
-         +g2w==
+        d=gmail.com; s=20251104; t=1787315226; x=1787920026; darn=vger.kernel.org;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=7J4KlWaMeDIJAUzjbu/18icyGppSzee+FADTJNXVjCs=;
+        b=Flr+c4Mar1SIbQQRL4h1b2LCLffbx3X5wQLLVs4WRmbqQENXYDtCX7NwVHR+lqXGP/
+         6jxXCE8XZqOeD8+gvbcdb3fg7IOFhAKT8avIToBacFAuv8AugFXiYswSTK8NTHHMJ48O
+         yawiotd6Vq+34z/bxVlm1m6e5DJQ0H3+ZvZKBDhFHE5brqGt3+oBJhZGC0plueL2+TeE
+         UvBXdkUOO4GpwF2hN6qMMZS6SP3UmybA7rSn429jOFr2ErxE/MOH6/+IryQobR4GXIZ6
+         fzq5sefT0+l9K11kmwzRQQMw+b/N1434SD7mevHBIuA3oKp4c4pQ6a8mwY/QMpmaU+KL
+         nGOA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787314753; x=1787919553;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=Pg60NrqAtbFMf+hekjwzsvKyojDNyaSGf41CfCmu3bU=;
-        b=BMpDPtF0bdUBpfya6eV5zLXvLNueUVhwmIFOQL/lvDYsCN9ozZAdlatrlhCvV/iWNj
-         6R451AW3ivd2Oh8UUZYEO2Hc0KldcgsLBqVmlVlpD27jmkND+LZ1yptniKswO0QmQLhR
-         3/q2SzyJU8eClQ9ly6vniFnz+394oMSb4eX5FGCEe2vHOnQzHGnHT1V/7K4AZ5bU5EI7
-         TOBZlHksDndLAMo6LJ4TaTxsv235MFNvGMyOcYwlooDHYrGUcWmHGkVCWmlXSxG2qc8J
-         Putz/t5jcOZAUThjswoy3hJmtHUbicaIeFD7Uml+U5diAVB4yTOC7fEHmZ3q7Haz6uUa
-         jgxg==
-X-Gm-Message-State: AFuF++l4drVMOMKk8oqiBbUwwwCRk3NILwG4xNMAcpT6uAIH5sZOvmrW
-	v6Yq6m91EmxNUcmCNkJmKKBS4URgWJUygnwQYEk01Yf2S01W3+0xBflA
-X-Gm-Gg: AR+sD10XKYVp+LlTmJTOIWAKcu8IdpEHa3YQg7blBGOdwJ7UudyarrhMDVAT3lecGFh
-	MhUuR71D0I7XCyqQDcmS19SYLBYdVTxGEeHW7yXkaWXiu7Kn7ZAqnm0Q/rqwr7I6ogv83zaDTBf
-	18qRdKaZVQ3309nPt7oSIXYLa2O1A5QvFk3pN41p+EbIezAiYS6QKos7s7uicQC/53j9T48sqIi
-	EhSGyMQh2kiNb6hva7GrLpe+phlqfYPzrGF3nF5RSuZgoR1O124HoN+MAa+6KVMQQrrfkwnd9Vg
-	2IcFQrm9GEZfCO9bQJ+QDCiqIiT+htGi0RgmKgORo1kBq2aKDLkK0FltAGwXjcpooRgRMHVdJcP
-	PkZZMXFLWXarrQt50+xjU9t3qnLYYqYTjoViAbSzM42S0pTQioiKLnMmHz6y16BpkBu6RrLDAxV
-	LRumuKn3UbvttqonK55MOoLfotGv3+EDI+4JNjjCaQLLwk/GCS+F2Tj/o47Dd5u2zsead0cXZPC
-	thnvF6l9SOBS1aDEH07mXUpnNI=
-X-Received: by 2002:a17:907:3ea0:b0:c20:3679:a2e6 with SMTP id a640c23a62f3a-c246a627a50mr624172066b.10.1787314753528;
-        Fri, 21 Aug 2026 05:19:13 -0700 (PDT)
+        d=1e100.net; s=20251104; t=1787315226; x=1787920026;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=7J4KlWaMeDIJAUzjbu/18icyGppSzee+FADTJNXVjCs=;
+        b=TPIQu9CNB3VbEG/J3EMOBwrrJg0Tkqin1ZduOyArv8z5SGnVWaYGi6JoD7+QTluwky
+         ouk6EUfA/kRzl4d+rzjHObejiN3vnOfqEk1RDfaLT3B9rtI+fGr1obYn1caxj8cgR+DT
+         RWL51XnoBWuywCn9aIs+jsJEhAR7rRcaekixKh70WrCQPr1xX/w2WQZHQVFbz3IsnDwr
+         j1Nfs9lRs5OzKdhNjqCTRHKHMTP0NrKpgcWjoZJ4VeMHyTYyHaqzTCNpUSWnIC6ANqE+
+         dpBx+GAkTdEcKZrVIuIQ7oDsYG8H7MnPrwL76c63pbzwhm6XcAiJC8szzVruLa1Fx4vm
+         JJQA==
+X-Gm-Message-State: AFuF++n0HRqXm+a2m5dYoQ0SrbbRrbi0CbJqX6BwjMb6H8vqeBpsMQsK
+	RDl81Ld31AVV+QCoZhs0tlyGPlXgiih4v7dGFLF6a41BuwG4ahbZiA8U
+X-Gm-Gg: AR+sD11+yQmInsUnUjarpiYPVL6h2U1PXZr9ev5Oly+tWoVat+I2zx2SIGe/5Zf3f4n
+	y3rD1fBulzNBE1HrlNZdPbJe37I1EjYM0Xl5hGhEJvW7RyYqHH91V2sXymNevaNMJbFWjWkllu+
+	KvFlJYGzoxKVc2FAEG73ymAHp2vS2RuuERO6eU4YYDV3W03zj35+0JuDQkbvjZRriiR0eAbqpFd
+	lwrtN5NMd1+6/0hGDGV76XXe7dHKB/Y4YnfBbJ6ajikFOgelHgQAQH4sfFqxVOYEL5hiKtjxQQp
+	OHxR3beSAz1gAkLYzDCCKuYflFenXvLdqM4M8tT5Ls3Mw6t7Ym9M6z1TYuHWWXGpcxTFFjt/cik
+	ei44HAcyx1shu1aWB3FY076pPFUsD0AiMY1rbMkEqS06c9AgUAvYmzMCfHsNHEJjucvVhmeE8wQ
+	hqdfTtXmXHs6VqbwQVwdYvOSAnF5rd35YuSyA5yQUIMvgud1cq1uSA4uXOJHPAPPbTmigaXikQc
+	EJfaDOvoMKNuHeVpQT2lQY8qCQ=
+X-Received: by 2002:a05:6402:2b91:b0:6a1:fd13:48a2 with SMTP id 4fb4d7f45d1cf-6a42f238138mr6885248a12.15.1787315226416;
+        Fri, 21 Aug 2026 05:27:06 -0700 (PDT)
 Received: from [127.0.1.1] (83.24.178.112.ipv4.supernova.orange.pl. [83.24.178.112])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c24589d9df9sm447823866b.1.2026.08.21.05.19.12
+        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-6a3ff0c315dsm6220262a12.9.2026.08.21.05.27.05
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 21 Aug 2026 05:19:13 -0700 (PDT)
+        Fri, 21 Aug 2026 05:27:06 -0700 (PDT)
 From: Adam Skladowski <a39.skl@gmail.com>
-Date: Fri, 21 Aug 2026 14:19:06 +0200
-Subject: [PATCH v4 7/7] arm64: dts: qcom: Add Xiaomi Redmi 9T
+Subject: [PATCH v5 0/7] arm64: dts: qcom: Add 3 new devices
+Date: Fri, 21 Aug 2026 14:26:59 +0200
+Message-Id: <20260821-next-patches-v5-0-ec81cee63e09@gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -70,9 +69,12 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260821-next-patches-v4-7-7ab02c0d4eb9@gmail.com>
-References: <20260821-next-patches-v4-0-7ab02c0d4eb9@gmail.com>
-In-Reply-To: <20260821-next-patches-v4-0-7ab02c0d4eb9@gmail.com>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/33NzQ6CMBAE4FchPVuz22ILnnwP46G0C9TITygSj
+ eHdpXpREj1OMt/MgwUaPAW2Tx5soMkH37VL2G0SZmvTVsS9WzITIBRkCLyl28h7M9qaAlfGKYc
+ AWhtgC+kHKv3tNXc8vXO4FmeyY9yIjdqHsRvur78JY+/H9IQcuM6N1rnTCrU8VI3xl63tGhanJ
+ /GBxRqLiFGCUxlm0uVrLD8xrrBcsHUqLSyVigSucfoPp/HZFCAsuJSKr+d5np+nNz+WcQEAAA=
+ =
+X-Change-ID: 20260810-next-patches-6ad6d10077a0
 To: Bjorn Andersson <andersson@kernel.org>, 
  Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>, 
  Krzysztof Kozlowski <krzk+dt@kernel.org>, 
@@ -82,549 +84,96 @@ To: Bjorn Andersson <andersson@kernel.org>,
 Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
  linux-kernel@vger.kernel.org, linux-hardening@vger.kernel.org, 
  Adam Skladowski <a39.skl@gmail.com>, 
+ Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>, 
  Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
 X-Mailer: b4 0.15.2
 
-Add a devicetree for the Xiaomi Redmi 9T smartphone, which is based
-on the Bengal/SM6115 SoC.
+Introduce support for 3 new devices:
+- Motorola Moto One based on MSM8953
+- LeEco Le2 based on MSM8976
+- Xiaomi Redmi 9T based on SM6115
 
-Supported functionality as of this initial submission:
+Device trees besides enabling most of supported hardware also wires power to
+subsystems like MDSS even if those are not enabled to lower maintenance burden
+on out of tree forks.
 
-* Display via SimpleFB/SimpleDRM
-* GPU
-* I2C peripherals (Backlight)
-* Power Button, Volume Keys
-* Regulators
-* Remoteprocs (ADSP, CDSP, MPSS)
-* UFS/SDCARD
-* USB
-
-Device tree also contains supply maps to other subsystems like MDSS
-but due to missing dependencies like panel those are disabled.
-
-Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
 Signed-off-by: Adam Skladowski <a39.skl@gmail.com>
 ---
- arch/arm64/boot/dts/qcom/Makefile                |   1 +
- arch/arm64/boot/dts/qcom/sm6115-xiaomi-lemon.dts | 497 +++++++++++++++++++++++
- 2 files changed, 498 insertions(+)
+Changes in v5:
+- Leeco Le2 fixed lacking -supply on map added previously
 
-diff --git a/arch/arm64/boot/dts/qcom/Makefile b/arch/arm64/boot/dts/qcom/Makefile
-index 1487f2beff3d..34789de13552 100644
---- a/arch/arm64/boot/dts/qcom/Makefile
-+++ b/arch/arm64/boot/dts/qcom/Makefile
-@@ -344,6 +344,7 @@ dtb-$(CONFIG_ARCH_QCOM)	+= shikra-iqs-evk.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= sm4250-oneplus-billie2.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= sm4450-qrd.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= sm6115-fxtec-pro1x.dtb
-+dtb-$(CONFIG_ARCH_QCOM)	+= sm6115-xiaomi-lemon.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= sm6115p-lenovo-j606f.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= sm6125-sony-xperia-seine-pdx201.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= sm6125-xiaomi-ginkgo.dtb
-diff --git a/arch/arm64/boot/dts/qcom/sm6115-xiaomi-lemon.dts b/arch/arm64/boot/dts/qcom/sm6115-xiaomi-lemon.dts
-new file mode 100644
-index 000000000000..881e05b70116
---- /dev/null
-+++ b/arch/arm64/boot/dts/qcom/sm6115-xiaomi-lemon.dts
-@@ -0,0 +1,497 @@
-+// SPDX-License-Identifier: (GPL-2.0+ OR BSD-3-Clause)
-+/*
-+ * Copyright (c) 2026 Adam Skladowski <a39skl@gmail.com>
-+ */
-+
-+/dts-v1/;
-+
-+#include "sm6115.dtsi"
-+#include "pm6125.dtsi"
-+#include "pmi632.dtsi"
-+#include <dt-bindings/leds/common.h>
-+
-+/delete-node/ &pil_adsp_mem;
-+/delete-node/ &pil_gpu_mem;
-+/delete-node/ &pil_ipa_fw_mem;
-+/delete-node/ &pil_ipa_gsi_mem;
-+
-+/ {
-+	model = "Xiaomi Redmi 9T";
-+	compatible = "xiaomi,lemon", "qcom,sm6115";
-+	chassis-type = "handset";
-+
-+	aliases {
-+		mmc0 = &sdhc_2;
-+	};
-+
-+	chosen {
-+		#address-cells = <2>;
-+		#size-cells = <2>;
-+		ranges;
-+
-+		framebuffer0: framebuffer@5c000000 {
-+			compatible = "simple-framebuffer";
-+			reg = <0 0x5c000000 0 (2340 * 1080 * 4)>;
-+			width = <1080>;
-+			height = <2340>;
-+			stride = <(1080 * 4)>;
-+			format = "a8r8g8b8";
-+			clocks = <&gcc GCC_DISP_HF_AXI_CLK>;
-+		};
-+	};
-+
-+	backlight_dsi: backlight-dsi {
-+		compatible = "led-backlight";
-+		leds = <&led_backlight>;
-+		brightness-levels = <255>;
-+		default-brightness-level = <190>;
-+		/* Backlight controllers can differ between panel variants */
-+		status = "disabled";
-+	};
-+
-+	gpio-keys {
-+		compatible = "gpio-keys";
-+
-+		pinctrl-0 = <&vol_up_n>;
-+		pinctrl-names = "default";
-+
-+		key-volume-up {
-+			label = "Volume Up";
-+			linux,code = <KEY_VOLUMEUP>;
-+			gpios = <&pm6125_gpios 5 GPIO_ACTIVE_LOW>;
-+			debounce-interval = <15>;
-+			linux,can-disable;
-+			wakeup-source;
-+		};
-+	};
-+
-+	reserved-memory {
-+		pil_adsp_mem: memory@53400000 {
-+			reg = <0x0 0x53400000 0x0 0x2600000>;
-+			no-map;
-+		};
-+
-+		pil_ipa_fw_mem: memory@55a00000 {
-+			reg = <0x0 0x55a00000 0x0 0x10000>;
-+			no-map;
-+		};
-+
-+		pil_ipa_gsi_mem: memory@55a10000 {
-+			reg = <0x0 0x55a10000 0x0 0x5000>;
-+			no-map;
-+		};
-+
-+		pil_gpu_mem: memory@fa400000 {
-+			reg = <0x0 0xfa400000 0x0 0x2000>;
-+			no-map;
-+		};
-+
-+		ramoops: ramoops@64000000 {
-+			compatible = "ramoops";
-+			no-map;
-+			reg = <0x0 0x64000000 0x0 0x400000>;
-+			record-size = <0x100000>;
-+			console-size = <0x100000>;
-+			pmsg-size = <0x200000>;
-+			ecc-size = <16>;
-+		};
-+	};
-+
-+	vph_pwr: vph-pwr-regulator {
-+		compatible = "regulator-fixed";
-+		regulator-name = "vph_pwr";
-+		regulator-min-microvolt = <3700000>;
-+		regulator-max-microvolt = <3700000>;
-+
-+		regulator-always-on;
-+		regulator-boot-on;
-+	};
-+};
-+
-+&dispcc {
-+	/* Prevent simplefb from dying until we wire panel driver */
-+	status = "disabled";
-+};
-+
-+&gpi_dma0 {
-+	status = "okay";
-+};
-+
-+&gpu {
-+	status = "okay";
-+};
-+
-+&i2c1 {
-+	status = "okay";
-+
-+	lm36923_bl: led-controller@36 {
-+		compatible = "ti,lm36923";
-+		reg = <0x36>;
-+
-+		pinctrl-0 = <&lm3692x_bl_active>;
-+		pinctrl-names = "default";
-+
-+		enable-gpios = <&tlmm 99 GPIO_ACTIVE_HIGH>;
-+		ti,ovp-microvolt = <29000000>;
-+		/* Backlight controllers can differ between panel variants */
-+		status = "disabled";
-+
-+		#address-cells = <1>;
-+		#size-cells = <0>;
-+
-+		led_backlight: led@0 {
-+			reg = <0>;
-+			function = LED_FUNCTION_BACKLIGHT;
-+			color = <LED_COLOR_ID_WHITE>;
-+			label = ":backlight";
-+			linux,default-trigger = "backlight";
-+			led-max-microamp = <25000>;
-+		};
-+	};
-+};
-+
-+&mdss_dsi0 {
-+	vdda-supply = <&pm6125_l18>;
-+};
-+
-+&mdss_dsi0_out {
-+	data-lanes = <0 1 2 3>;
-+};
-+
-+&pil_cdsp_mem {
-+	reg = <0x0 0x51a00000 0x0 0xa00000>;
-+};
-+
-+&pm6125_gpios {
-+	vol_up_n: vol-up-n-state {
-+		pins = "gpio5";
-+		function = "normal";
-+		power-source = <0>;
-+		bias-pull-up;
-+		input-enable;
-+	};
-+};
-+
-+&pmi632_typec {
-+	status = "okay";
-+
-+	connector {
-+		compatible = "usb-c-connector";
-+
-+		power-role = "dual";
-+		data-role = "dual";
-+		self-powered;
-+
-+		typec-power-opmode = "default";
-+		pd-disable;
-+
-+		vbus-supply = <&pmi632_vbus>;
-+
-+		ports {
-+			#address-cells = <1>;
-+			#size-cells = <0>;
-+
-+			port@0 {
-+				reg = <0>;
-+				pmi632_hs_in: endpoint {
-+					remote-endpoint = <&usb_dwc3_hs>;
-+				};
-+			};
-+
-+			port@1 {
-+				reg = <1>;
-+				pmi632_ss_in: endpoint {
-+					remote-endpoint = <&usb_qmpphy_out>;
-+				};
-+			};
-+		};
-+	};
-+};
-+
-+&pmi632_vbus {
-+	regulator-min-microamp = <500000>;
-+	regulator-max-microamp = <1000000>;
-+
-+	status = "okay";
-+};
-+
-+&pon_pwrkey {
-+	status = "okay";
-+};
-+
-+&pon_resin {
-+	linux,code = <KEY_VOLUMEDOWN>;
-+
-+	status = "okay";
-+};
-+
-+&qupv3_id_0 {
-+	status = "okay";
-+};
-+
-+&remoteproc_adsp {
-+	status = "okay";
-+};
-+
-+&remoteproc_cdsp {
-+	status = "okay";
-+};
-+
-+&remoteproc_mpss {
-+	status = "okay";
-+};
-+
-+&rpm_requests {
-+	regulators-0 {
-+		compatible = "qcom,rpm-pm6125-regulators";
-+
-+		pm6125_s6: s6 {
-+			regulator-min-microvolt = <304000>;
-+			regulator-max-microvolt = <1456000>;
-+		};
-+
-+		pm6125_s7: s7 {
-+			regulator-min-microvolt = <1280000>;
-+			regulator-max-microvolt = <2080000>;
-+		};
-+
-+		pm6125_s8: s8 {
-+			regulator-min-microvolt = <1064000>;
-+			regulator-max-microvolt = <1304000>;
-+		};
-+
-+		pm6125_l1: l1 {
-+			regulator-min-microvolt = <952000>;
-+			regulator-max-microvolt = <1152000>;
-+		};
-+
-+		pm6125_l4: l4 {
-+			regulator-min-microvolt = <488000>;
-+			regulator-max-microvolt = <1000000>;
-+		};
-+
-+		pm6125_l5: l5 {
-+			regulator-min-microvolt = <1648000>;
-+			regulator-max-microvolt = <2960000>;
-+			regulator-allow-set-load;
-+
-+			regulator-always-on;
-+		};
-+
-+		pm6125_l6: l6 {
-+			regulator-min-microvolt = <576000>;
-+			regulator-max-microvolt = <656000>;
-+		};
-+
-+		pm6125_l7: l7 {
-+			/* sdhci2 vdd-io-bias supply */
-+			regulator-min-microvolt = <1256000>;
-+			regulator-max-microvolt = <1256000>;
-+
-+			regulator-always-on;
-+		};
-+
-+		pm6125_l8: l8 {
-+			regulator-min-microvolt = <400000>;
-+			regulator-max-microvolt = <728000>;
-+		};
-+
-+		pm6125_l9: l9 {
-+			regulator-min-microvolt = <1800000>;
-+			regulator-max-microvolt = <2000000>;
-+		};
-+
-+		pm6125_l10: l10 {
-+			regulator-min-microvolt = <1704000>;
-+			regulator-max-microvolt = <1904000>;
-+		};
-+
-+		pm6125_l11: l11 {
-+			regulator-min-microvolt = <1768000>;
-+			regulator-max-microvolt = <1952000>;
-+		};
-+
-+		pm6125_l12: l12 {
-+			regulator-min-microvolt = <1624000>;
-+			regulator-max-microvolt = <1984000>;
-+		};
-+
-+		pm6125_l13: l13 {
-+			regulator-min-microvolt = <1504000>;
-+			regulator-max-microvolt = <1952000>;
-+		};
-+
-+		pm6125_l14: l14 {
-+			regulator-min-microvolt = <1704000>;
-+			regulator-max-microvolt = <1904000>;
-+		};
-+
-+		pm6125_l15: l15 {
-+			regulator-min-microvolt = <2920000>;
-+			regulator-max-microvolt = <3232000>;
-+		};
-+
-+		pm6125_l16: l16 {
-+			regulator-min-microvolt = <1704000>;
-+			regulator-max-microvolt = <1904000>;
-+		};
-+
-+		pm6125_l17: l17 {
-+			regulator-min-microvolt = <1152000>;
-+			regulator-max-microvolt = <1384000>;
-+		};
-+
-+		pm6125_l18: l18 {
-+			regulator-min-microvolt = <1232000>;
-+			regulator-max-microvolt = <1232000>;
-+		};
-+
-+		pm6125_l19: l19 {
-+			regulator-min-microvolt = <1624000>;
-+			regulator-max-microvolt = <3304000>;
-+		};
-+
-+		pm6125_l20: l20 {
-+			regulator-min-microvolt = <1624000>;
-+			regulator-max-microvolt = <3304000>;
-+		};
-+
-+		pm6125_l21: l21 {
-+			regulator-min-microvolt = <2400000>;
-+			regulator-max-microvolt = <3600000>;
-+		};
-+
-+		pm6125_l22: l22 {
-+			regulator-min-microvolt = <2952000>;
-+			regulator-max-microvolt = <2960000>;
-+			regulator-allow-set-load;
-+
-+			regulator-always-on;
-+		};
-+
-+		pm6125_l23: l23 {
-+			regulator-min-microvolt = <3200000>;
-+			regulator-max-microvolt = <3400000>;
-+		};
-+
-+		pm6125_l24: l24 {
-+			regulator-min-microvolt = <2704000>;
-+			regulator-max-microvolt = <3600000>;
-+		};
-+	};
-+};
-+
-+&sdhc_2 {
-+	cd-gpios = <&tlmm 88 GPIO_ACTIVE_HIGH>;
-+
-+	pinctrl-0 = <&sdc2_state_on>, <&sdc2_cd_on>;
-+	pinctrl-1 = <&sdc2_state_off>, <&sdc2_cd_off>;
-+	pinctrl-names = "default", "sleep";
-+
-+	vmmc-supply = <&pm6125_l22>;
-+	vqmmc-supply = <&pm6125_l5>;
-+	/* No binding for vdd-io-bias on L7*/
-+	no-sdio;
-+	no-mmc;
-+
-+	status = "okay";
-+};
-+
-+&sleep_clk {
-+	clock-frequency = <32764>;
-+};
-+
-+&spi2 {
-+	status = "okay";
-+};
-+
-+&tlmm {
-+	gpio-reserved-ranges = <14 4>; /* Fingerprint SPI */
-+
-+	lm3692x_bl_active: lm3692x-active-state {
-+		pins = "gpio99";
-+		function = "gpio";
-+		drive-strength = <0x02>;
-+		bias-pull-up;
-+	};
-+
-+	mdss_dsi_active: mdss-dsi-active-state {
-+		pins = "gpio85";
-+		function = "gpio";
-+		drive-strength = <8>;
-+		bias-disable;
-+	};
-+
-+	sdc2_cd_on: sdc2-cd-on-state {
-+		pins = "gpio88";
-+		function = "gpio";
-+		drive-strength = <2>;
-+		bias-pull-up;
-+	};
-+
-+	sdc2_cd_off: sdc2-cd-off-state {
-+		pins = "gpio88";
-+		function = "gpio";
-+		drive-strength = <2>;
-+		bias-disable;
-+	};
-+
-+	te_active: te-active-state {
-+		pins = "gpio81";
-+		function = "mdp_vsync";
-+		drive-strength = <2>;
-+		bias-pull-down;
-+	};
-+};
-+
-+&ufs_mem_hc {
-+	vcc-max-microamp = <600000>;
-+	vcc-supply = <&pm6125_l24>;
-+	vccq2-max-microamp = <600000>;
-+	vccq2-supply = <&pm6125_l11>;
-+	vdd-hba-supply = <&pm6125_l18>;
-+
-+	status = "okay";
-+};
-+
-+&ufs_mem_phy {
-+	vdda-phy-supply = <&pm6125_l4>;
-+	vdda-pll-supply = <&pm6125_l12>;
-+
-+	status = "okay";
-+};
-+
-+&usb {
-+	status = "okay";
-+};
-+
-+&usb_dwc3 {
-+	maximum-speed = "high-speed";
-+};
-+
-+&usb_dwc3_hs {
-+	remote-endpoint = <&pmi632_hs_in>;
-+};
-+
-+&usb_hsphy {
-+	vdd-supply = <&pm6125_l4>;
-+	vdda-pll-supply = <&pm6125_l12>;
-+	vdda-phy-dpdm-supply = <&pm6125_l15>;
-+
-+	status = "okay";
-+};
-+
-+&usb_qmpphy {
-+	vdda-phy-supply = <&pm6125_l4>;
-+	vdda-pll-supply = <&pm6125_l12>;
-+
-+	status = "okay";
-+};
-+
-+&usb_qmpphy_out {
-+	remote-endpoint = <&pmi632_ss_in>;
-+};
-+
-+&xo_board {
-+	clock-frequency = <19200000>;
-+};
+- Link to v4: https://patch.msgid.link/20260821-next-patches-v4-0-7ab02c0d4eb9@gmail.com
 
--- 
-2.55.0
+Changes in v4:
+- Leeco Le 2 and Motorola One fixed-regulators aligned to schema
+- Motorola One commit msg reworded to drop touchscreen
+- Leeco Le 2 added lacking parent supply for rpm regulators
+- Redmi 9T makefile placement fixed to be after other sm6115 device
+
+- Link to v3: https://patch.msgid.link/20260821-next-patches-v3-0-cd64bcef6e21@gmail.com
+
+Changes in v3:
+- Motorola One Touchscreen was removed as it doesn't work
+- Leeco Le 2 gpio-keys node name was fixed
+- Leeco Le 2 volume down key via pm8950 resin was added
+- Redmi 9T Reviewed-by tag was added
+- Adressed more Sashiko-bot warnings
+
+- Link to v2: https://patch.msgid.link/20260820-next-patches-v2-0-7130d68183d9@gmail.com
+
+Changes in v2:
+- Adressed Sashiko-bot warnings
+- Added Krzysztof's Acks
+- Dropped confusing link from first vendor-prefix patch
+- Removed ramoops nodes from Motorola and Leeco patches(now handled via lk2nd)
+- Motorola One USB-C connector and FUSB302 is now fully wired and enabled
+- Motorola One Touchscreen has been disabled due to panel power dependency
+- Motorola One debug memory regions were removed
+- Motorola One regulator setup values were ajusted
+- Motorola One NFC now have more specific compatible
+- All devices now have described reserved GPIOs and trimmed unused ones
+- Leeco Le2 added missing pinctrls for peripheral IRQs
+- Leeco Le2 OTG is no longer enabled as phy dependency is not enabled(need rework)
+- Redmi 9T USB-C connector now is fully wired including pmi632 setup
+- Redmi 9T nodes are sorted now
+- Various changes to styling to keep nodes within single dts consistent
+
+- Link to v1: https://patch.msgid.link/20260810-next-patches-v1-0-79a779d76173@gmail.com
+
+To: Rob Herring <robh@kernel.org>
+To: Krzysztof Kozlowski <krzk+dt@kernel.org>
+To: Conor Dooley <conor+dt@kernel.org>
+To: Bjorn Andersson <andersson@kernel.org>
+To: Konrad Dybcio <konradybcio@kernel.org>
+To: Kees Cook <kees@kernel.org>
+To: Tony Luck <tony.luck@intel.com>
+To: "Guilherme G. Piccoli" <gpiccoli@igalia.com>
+Cc: devicetree@vger.kernel.org
+Cc: linux-kernel@vger.kernel.org
+Cc: linux-arm-msm@vger.kernel.org
+
+---
+Adam Skladowski (7):
+      dt-bindings: vendor-prefixes: Add LeEco
+      dt-bindings: arm: qcom: Document Motorola Moto One
+      arm64: dts: qcom: Add Motorola One
+      dt-bindings: arm: qcom: Document LeEco Le2
+      arm64: dts: qcom: Add LeEco Le2
+      dt-bindings: arm: qcom: Document Xiaomi Redmi 9T
+      arm64: dts: qcom: Add Xiaomi Redmi 9T
+
+ Documentation/devicetree/bindings/arm/qcom.yaml    |   3 +
+ .../devicetree/bindings/vendor-prefixes.yaml       |   2 +
+ arch/arm64/boot/dts/qcom/Makefile                  |   3 +
+ arch/arm64/boot/dts/qcom/msm8953-motorola-deen.dts | 440 ++++++++++++++++++
+ arch/arm64/boot/dts/qcom/msm8976-leeco-s2.dts      | 442 ++++++++++++++++++
+ arch/arm64/boot/dts/qcom/sm6115-xiaomi-lemon.dts   | 497 +++++++++++++++++++++
+ 6 files changed, 1387 insertions(+)
+---
+base-commit: 6b8c8af514d739d0335f5579b585e02babe8a727
+change-id: 20260810-next-patches-6ad6d10077a0
+
+Best regards,
+--  
+Adam Skladowski <a39.skl@gmail.com>
 
