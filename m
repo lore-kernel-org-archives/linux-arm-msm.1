@@ -1,157 +1,217 @@
-Received: from mail-pg1-f181.google.com (mail-pg1-f181.google.com [209.85.215.181])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 621C035CB87
-	for <linux-arm-msm@vger.kernel.org>; Fri, 21 Aug 2026 05:03:26 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.215.181
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E6B213F54C6
+	for <linux-arm-msm@vger.kernel.org>; Fri, 21 Aug 2026 05:07:40 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787288609; cv=none; b=tU6O5kgo1FdB3TXn/SlUk57Jhx0MAOqoxttOSPwEqc2+7EUjjK6e8s1Knh3OcUG1aV8Ye+F01opXrtnEeKioEY78+EQIa6V0WXCqztg399Ivm1MkoGPkuD8b3RnsSMPWdSeOJf+EIgGCX8sa1IHsB3lspoZdzknFCr87qS8YEq8=
+	t=1787288862; cv=none; b=KW4gXbGUUC01nKfShiXYhP5l+fOBjHZ8cIsrxm4I6Z7CnRbIIWPJWIKicWkdWbd3GhbInLcZYSUB6ii+90bXV6gKLVWwdLgbzlVTBPnSrt4Gfslt/zKdpsy5DDhSQ2Ek+0cO8J1i7NWrkXDW+7FAG9UUK9TkRvJeCTLhZgxnhv0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787288609; c=relaxed/simple;
-	bh=CkFcnYrJr4cU+t0pt8E/I5SSVnxKOnIqrTf+yKl113I=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=c41zpe3Ik0J4Wsa6afqP7diAQmShgfIuHqcftbfwJAQdLmuXUU1oWi+DYzyCfaccVQ2UsbQPdYd5rQxK3Fu4PdvAHZAiwGTvM+vp4qOijEL3gQohJuR/zaH5jOFDUMnDVbxr4IvtTqv5MsIIQfbit2ZWEUoKm4WuNCXerC3LVCY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=DxyjvDW+; arc=none smtp.client-ip=209.85.215.181
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	s=arc-20240116; t=1787288862; c=relaxed/simple;
+	bh=hX0xMl1RocF2QCivBcji9cjijZkMYUqq+bU/WzaVaYg=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=SlV/5Km6xHKYRRM5VBWanIU/7kJm4qO/W7dLUqEodXgIIVqd3TzwFIvQCt9BbIRFprlD0LXsuvRsaYxqshjxYMI4zwrdecsouGZilBY94wQDsKD92CcoSL6x9zeY9045847iTkVZZKz55V1nlOF5bUWpmcEzB+E8hCi7Xf1Ys04=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=fTgdELoI; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=OqMnWhiB; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="DxyjvDW+"
-Received: by mail-pg1-f181.google.com with SMTP id 41be03b00d2f7-c9e7391839cso629702a12.0
-        for <linux-arm-msm@vger.kernel.org>; Thu, 20 Aug 2026 22:03:26 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="fTgdELoI";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="OqMnWhiB"
+Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67L21WxY574867
+	for <linux-arm-msm@vger.kernel.org>; Fri, 21 Aug 2026 05:07:40 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	GgVJks6rWjz9+JEM9GtoFAYqpjJvbvWBn2zqOGuRKzo=; b=fTgdELoIOlRmwcHw
+	hBYPtxNqZLcZJBODPvcRKDZzAzVxjeYrsfLsOYLgclP/KsHQvmMmUC4hAxb2X4eO
+	xLNPQ3n5yIRXlLEI2jvqHTC5AAJY1vwouWXtT2fSmX8bV/6HhHVYc52XjZGXcP0u
+	2MOg37Bw1ep0O+j0gpSFZn3EEH0nbLs8/4HpSf9AsJPWoLOwGHHAx32AAIn8kLPg
+	BbvMBaZnAASeG1iJDWuPhM6OQS0K8kzg92WNxpr5T7m5Hx/XSIjVcu0X06Xbh3nc
+	N0npLKHxwVm7fFBG8Ss9DP/KClOsQtPUHs6jw5PX2OFyJIl5e3Gu760yfngghtH/
+	XoSRDw==
+Received: from mail-pj1-f70.google.com (mail-pj1-f70.google.com [209.85.216.70])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g6d068mmc-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 21 Aug 2026 05:07:39 +0000 (GMT)
+Received: by mail-pj1-f70.google.com with SMTP id 98e67ed59e1d1-385d2703b64so1838040a91.1
+        for <linux-arm-msm@vger.kernel.org>; Thu, 20 Aug 2026 22:07:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1787288606; x=1787893406; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=FAQIFeKdsDioxUGJtAjD1TEqdlw3Fo0BSbJ+hyxm5bA=;
-        b=DxyjvDW+Ktl7vjxIA1W4M+tbQG+9bcay+ylkQBFk5so2jkmdWttnmr1LMj4M1XphNk
-         m4YsBQBw7o2mWFNqhmwlHmW+sFTxGLF2/sfSfFQbC3Sim8kQwsrbVPcedmj8Q1hu5rFj
-         h9yQP3jHHfdWuu8wDJI1Ceqqzfy2UNsRWVcx4BmzxLQU0B+u669IgRJu+hNnHxMsbpW/
-         Su56HNohhfecj18ly3FYKKTYcwWnjHrE8RVqs3vO3Hd5JuoPJAkfxCRiRkssO+fBc6Ht
-         jB8D+glBeJe9effBB2PyRGx+9z6yF+o1IM+yHjaBxLPB7BqYnQTrm8gRnR56REIuRKz5
-         fDPQ==
+        d=oss.qualcomm.com; s=google; t=1787288859; x=1787893659; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=GgVJks6rWjz9+JEM9GtoFAYqpjJvbvWBn2zqOGuRKzo=;
+        b=OqMnWhiBF1ILKXFhDbHEJOb94/0pq3PrhiKdoUJz8EqdioY7r/MACDb1Tcla3cJh0u
+         t3BA3Pd+w4Vo7zmJM9d+GoCuite2Xos4db2gHbWyieUt/hMg4ss3VPnNL/7zX+7w2J5i
+         ZCYFj4x3GLg6aeHDCwmrWLDjWIhY4wCwdxF1vx/wX3O/gO7W0u4UZC3CYlxpK58Vq9Nl
+         I+Uln1PoC4whu3ahQZ6u+lBzy794HrLHMzWUv0UcYTmAS48slFZuYKGpyxzzScKlb6JK
+         eWoYua+Qz6j1XlVFHxOSSkYs0imHJmn0c/6rdqe4ESmZPkA+v9QPEZ/CSpEcZ9Gf0bbW
+         MTyg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787288606; x=1787893406;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=1e100.net; s=20251104; t=1787288859; x=1787893659;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=FAQIFeKdsDioxUGJtAjD1TEqdlw3Fo0BSbJ+hyxm5bA=;
-        b=Y7C7y9qYPNWb3tuSMVWEMm6TuCHgRGFdoMMTQ3jMK/xqDXB9Yx53axMkIk81pjIle5
-         MwJdfgWfc3Buv5UVIw/VaL/DNe5jlNEbcBqWcBEqX6+6roPgqTWZIS5koJp1L+bF0VgX
-         ztz+vp6/BzsVwXGWUWVF7x3cTl3vrJgdM/ohwAjtmYmBNJE6YjJmnFWk79TMGluDbz+F
-         +m5am0SKGXn+2xUMD3/FNs9/oo6Ti8iWtY1d96Ju8uxOxyBbbsBrYwrW5OtDKi6zXwbV
-         6fvoNq7U8nSlNrWc7lmnGApsaXkcw4c3lNDSnqUElAid2bMQ0whIrihNPuoW/mCQxi2s
-         ZKzQ==
-X-Forwarded-Encrypted: i=1; AHgh+Rp5ShaQ+81Vn2qVDd/1rIRjGIdvJMGSPhIQ1gXLVV365wuM6Cj0bC4JGbsDHGVCr6vdhdZ82+z08L0605HD@vger.kernel.org
-X-Gm-Message-State: AFuF++mIdZS9q+70I6NAjQz1lxfKii+XWFMgl4EjeQYx2lajimBbeIJk
-	E12b77jhMyTVoMP68LhvNcXocGeF8M67Ny/ID7GkT/6HS7hzwCiGHopX
-X-Gm-Gg: AR+sD13oTpQvc3cZa892N+mQJAR+9mYwAWX3P4xWBQt62PEBWApmR5CewmKZ9JrLzk0
-	4LShgYCXSRfqteXfPYxp0cELKhiCD7pypQlP7R7oGyVmaJS4fp49IsJGTPnV7rM+hAH8HSpDQHd
-	HNdDviKb4TTZGU9NulXcYlwwWkUG8nToE7u+Q6Q1XulconoqDsF+DOt/v/Xd5DJ74PooLfKd7rr
-	4ckO2x1wPTyQuaLeM9Jr/vbIBdhVW7kbkRtRWuJ/ePcn3FJth5ucv3nF2o9dvgfL+gYbwUmW42+
-	CfQV65uaDmFwZjpkZYDHmVg6h4GbXt0sTuNysjfdwg8m2ZmoJdSYYGI244V/Y2V2JpPIGj5i2/2
-	io9ACWN5HqX/e5WSTMhCGqoNJ5HzwxAxmEJ9P1dyGmLIA293H78zJWSwUAAK2h99Tw2EHcuYq/3
-	6IL1Gb2cAMXIDXbmsE5TTjPlPrDiL1DqsqZkX/KcedViw59XDHtOv9e8jabA+Reg==
-X-Received: by 2002:a17:90b:54d0:b0:36d:b424:4f17 with SMTP id 98e67ed59e1d1-395c35188fcmr7567404a91.1.1787288605580;
-        Thu, 20 Aug 2026 22:03:25 -0700 (PDT)
-Received: from kdev.. ([108.180.130.139])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-395c4baa594sm1511835a91.17.2026.08.20.22.03.24
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 20 Aug 2026 22:03:24 -0700 (PDT)
-From: Babanpreet Singh <bbnpreetsingh@gmail.com>
-To: Amirreza Zarrabi <amirreza.zarrabi@oss.qualcomm.com>,
-	Jens Wiklander <jenswi@kernel.org>
-Cc: Sumit Garg <sumit.garg@kernel.org>,
-	linux-arm-msm@vger.kernel.org,
-	op-tee@lists.trustedfirmware.org,
-	linux-kernel@vger.kernel.org,
-	Babanpreet Singh <bbnpreetsingh@gmail.com>
-Subject: [PATCH v2] tee: qcomtee: fix kernel-doc warnings
-Date: Fri, 21 Aug 2026 05:03:23 +0000
-Message-ID: <20260821050323.7-1-bbnpreetsingh@gmail.com>
-X-Mailer: git-send-email 2.47.3
+        bh=GgVJks6rWjz9+JEM9GtoFAYqpjJvbvWBn2zqOGuRKzo=;
+        b=d+Gb4pzAFimgxD/WqIXLow4osBPlTMjLhkOK82ATe/61QvbjI/K2ozKjn7D4jCiYuj
+         JCEOgMCP+C5ZJI7AHr12uXvLNTKodiuZi+jQLMbprr1ZGK4zDjw73dA9uhjHDh+9pFLQ
+         Cs2sjNqBEUyAXG9Q0Ux6zNDk+pies8nP4HQADSXQx9EdohWWyee9JRlEK50LY33c7qNf
+         XZ4UWCMv5wd4+hXv1BEZBGB+7T1tv5sV0+MsBYwad8AK0G2kKv1orLWToQcXef/76caS
+         kMPmar0tZXQPvsd2nJ9m+e5Bi4iCUF3fsNpj7mlKRhD0w5UN7EGlfKPL+sQuXfty0uYj
+         Yb6A==
+X-Gm-Message-State: AFuF++mYUfYlBC8YGRjSCZfhGvYwkIScYqqJBVaDFcxNAi/BxTsc1fuj
+	nhyT1FLVEkkQRSsthNnsKK9XvlMgXzMfl+QHOWmovjLP7cboPUAio891BVnngK4SLDIFDyr0P8z
+	zpfN4yf2BE4q+kFfF4RAJnTlY3aWgpvS9Y1MthbrUbmIl8mpFy0Jtmv6wtRX7YRqc6ojh
+X-Gm-Gg: AR+sD11L3LBz16GgGOJS7oRFjFdYzidIyzFwFilhn/b9ei4kzCtxe0QVrjvn0gygNXy
+	jLz+XqWkvMg7N2NHBuL8Fln1MHuVDhpUV7Lu/VR4R1FyuIAYeLMsN62OycVHTVjm23UOeJhprkF
+	p6NZNV4ILPV4SN6ZC6RWC76UaYEUxU/gHFCcJCkyTI3stTZtMIZoZbIqajVaX7wfOeNubvdxpaY
+	9Lm2GGmhsaxhMjh+2FmDwjx0YxGd2Xcepjo4C+VDw/HeQ7kELg3c8JDxD0IVlVuwa60CPhxFQC5
+	c51NuBLZfx6yL+GPUU+ODbRxIvxH6b3mxambJh141qv6ze3mbc3oxADk8bt2AxWTqbgpOtc7dZB
+	6ZHpDti6aCYpPxDGENZAx9/XZ4geUhTs=
+X-Received: by 2002:a17:90b:4488:b0:38e:7297:a92e with SMTP id 98e67ed59e1d1-395c5114895mr2616792a91.9.1787288858861;
+        Thu, 20 Aug 2026 22:07:38 -0700 (PDT)
+X-Received: by 2002:a17:90b:4488:b0:38e:7297:a92e with SMTP id 98e67ed59e1d1-395c5114895mr2616772a91.9.1787288858347;
+        Thu, 20 Aug 2026 22:07:38 -0700 (PDT)
+Received: from [10.218.14.97] ([202.46.22.19])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-395c8fd34d9sm386285a91.1.2026.08.20.22.07.35
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 20 Aug 2026 22:07:37 -0700 (PDT)
+Message-ID: <39b33f3e-08bb-42eb-bc02-9de9810e0058@oss.qualcomm.com>
+Date: Fri, 21 Aug 2026 10:37:33 +0530
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3] dmaengine: qcom: gpi: Fix resource leaks as part of
+ channel clean up
+To: Aniket Randive <aniket.randive@oss.qualcomm.com>,
+        Vinod Koul <vkoul@kernel.org>, Frank Li <Frank.Li@kernel.org>,
+        Mukesh Kumar Savaliya <mukesh.savaliya@oss.qualcomm.com>
+Cc: linux-arm-msm@vger.kernel.org, dmaengine@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+References: <20260819-gpi_bug_fix-v3-1-4c97333e6f5b@oss.qualcomm.com>
+Content-Language: en-US
+From: Praveen Talari <praveen.talari@oss.qualcomm.com>
+In-Reply-To: <20260819-gpi_bug_fix-v3-1-4c97333e6f5b@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODIxMDAzMyBTYWx0ZWRfXxeMfv9+5JDjM
+ YNtc2td5L5MlZM/NqlU8PXSARloFEa3kIrfbb8NRKN/Cx8j792adXGD2wlhJh6Fve1KQGlVk0qg
+ 7reVPbSNGtNfuFlkZL8LuLo29WRsB+Y2PmspiQElpMEGfmS/TNoHL2VJHs1lHJNplNJywPdeTil
+ +64FFfY4dJ1u5fborEqHObJ7/V6Fr2615Bi0X6MKQjUFeosDNQwF+nHUZxyRI4Zq6Qd6+63lPvs
+ IUmOBpRHbL0HxL8g2ct6/n8whQlAgqPDTxCUojYlSNESf3QTZQ1Zu0SL4M0CoUvKRpqr2QSX9wO
+ B8sb3msO/qPx0U3OQaQBitu+jcvvezG/pJ3/B5svdTo0I36/f9wvNtAR9M6z8v7WD+BkF8kdBkt
+ ZHrj6W5euMnMjvzSMA29CqALIFVCORJxcmGpJ1syr7sKkBmOvySaXG7pKTHtwUTmAdtw0r9iDiS
+ ZxPG2L8AejWL0Xpv+MQ==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODIxMDAzMyBTYWx0ZWRfXw0foZpdlIPxY
+ xnAPJLw5yExC1h9lKcYGwbzTqE2igqz5nxwKlIdwn7nevpTqdWkHXl3xq8QdvlqoZmaz2Sfx7d3
+ 9ZEykv/zddBwk1T+KffmfdRf47qEQJU=
+X-Authority-Analysis: v=2.4 cv=DdQnbPtW c=1 sm=1 tr=0 ts=6a87dd1b cx=c_pps
+ a=0uOsjrqzRL749jD1oC5vDA==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
+ a=6mmPj426WQFTegYL:21 a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
+ a=bC-a23v3AAAA:8 a=EUspDBNiAAAA:8 a=SC794FZWIIagycjiN0UA:9 a=QEXdDO2ut3YA:10
+ a=mQ_c8vxmzFEMiUWkPHU9:22 a=FO4_E8m0qiDe52t0p3_H:22
+X-Proofpoint-ORIG-GUID: 0voXhpwQ8swwt6CxAEEIPdorlSPnT79l
+X-Proofpoint-GUID: 0voXhpwQ8swwt6CxAEEIPdorlSPnT79l
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-08-21_01,2026-08-20_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ spamscore=0 clxscore=1015 priorityscore=1501 phishscore=0 bulkscore=0
+ impostorscore=0 suspectscore=0 adultscore=0 lowpriorityscore=0 malwarescore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608210033
 
-Fix kernel-doc issues present since the driver was added in commit
-d6e290837e50 ("tee: add Qualcomm TEE driver"):
 
-- async_release() documents its second parameter as @msg, but the
-  parameter is named async_msg (msg is a local variable);
-- struct qcomtee_msg_object_invoke documents member @ctx, but the
-  member is named cxt;
-- enum qcomtee_arg_type leaves QCOMTEE_ARG_TYPE_NR undescribed.
+On 19-08-2026 17:09, Aniket Randive wrote:
+> The gpi_ch_init() error handling paths do not fully clean up resources
+> when channel initialization fails.
+>
+> The unwind paths iterate over the original channel pointer instead of
+> the channels stored in gpii->gchan[], preventing previously initialized
+> sibling channels from being properly reset and deallocated.
+>
+> In addition, gpi_alloc_chan_resources() allocates ch_ring before calling
+> gpi_ch_init(), but does not release it when initialization fails,
+> resulting in a memory leak.
+>
+> The event ring cleanup path also leaves the PM state unchanged after
+> freeing the ring. As a result, subsequent cleanup may incorrectly assume
+> that the ring is still allocated, leading to a redundant EV_CMD_DEALLOC
+> command and an attempt to deallocate an already released ring.
+>
+> Fix the unwind paths to operate on the correct channels, release
+> ch_ring when channel initialization fails, and restore the event ring
+> PM state after freeing the ring.
+>
+> Signed-off-by: Aniket Randive <aniket.randive@oss.qualcomm.com>
+> ---
+> Changes in v3:
+> - Updated the commit message as per Mukesh suggestion.
+> - Link to v2: https://patch.msgid.link/20260810-gpi_bug_fix-v2-1-60555394cbf9@oss.qualcomm.com
+>
+> Changes in v2:
+> - Updated the commit message as per Mukesh suggestion.
+> ---
+>   drivers/dma/qcom/gpi.c | 9 +++++++--
+>   1 file changed, 7 insertions(+), 2 deletions(-)
+>
+> diff --git a/drivers/dma/qcom/gpi.c b/drivers/dma/qcom/gpi.c
+> index a5055a6273af..c41bfac65ddf 100644
+> --- a/drivers/dma/qcom/gpi.c
+> +++ b/drivers/dma/qcom/gpi.c
+> @@ -1965,16 +1965,19 @@ static int gpi_ch_init(struct gchan *gchan)
+>   error_start_chan:
+>   	for (i = i - 1; i >= 0; i--) {
+>   		gpi_stop_chan(&gpii->gchan[i]);
+> -		gpi_send_cmd(gpii, gchan, GPI_CH_CMD_RESET);
+> +		gpi_send_cmd(gpii, &gpii->gchan[i], GPI_CH_CMD_RESET);
+>   	}
+>   	i = 2;
+>   error_alloc_chan:
+>   	for (i = i - 1; i >= 0; i--)
+> -		gpi_reset_chan(gchan, GPI_CH_CMD_DE_ALLOC);
+> +		gpi_reset_chan(&gpii->gchan[i], GPI_CH_CMD_DE_ALLOC);
+>   error_alloc_ev_ring:
+>   	gpi_disable_interrupts(gpii);
+>   error_config_int:
+>   	gpi_free_ring(&gpii->ev_ring, gpii);
+> +	write_lock_irq(&gpii->pm_lock);
+> +	gpii->pm_state = DISABLE_STATE;
+> +	write_unlock_irq(&gpii->pm_lock);
+>   exit_gpi_init:
+>   	return ret;
+>   }
+> @@ -2065,6 +2068,8 @@ static int gpi_alloc_chan_resources(struct dma_chan *chan)
+>   		goto xfer_alloc_err;
+>   
+>   	ret = gpi_ch_init(gchan);
+> +	if (ret)
+> +		gpi_free_ring(&gchan->ch_ring, gpii);
 
-The cxt spelling is part of the QTEE message format and is used
-throughout the driver; struct qcomtee_msg_callback in the same header
-already documents it as @cxt, so the comment is corrected rather than
-the member.
+Reviewed-by: Praveen Talari <praveen.talari@oss.qualcomm.com>
 
-No functional changes.
+Thanks,
 
-Fixes: d6e290837e50 ("tee: add Qualcomm TEE driver")
-Reviewed-by: Amirreza Zarrabi <amirreza.zarrabi@oss.qualcomm.com>
-Assisted-by: Claude:claude-opus-5 [kernel-doc]
-Signed-off-by: Babanpreet Singh <bbnpreetsingh@gmail.com>
----
-v2:
-- add the Fixes tag Jens asked for; no code changes
-- pick up Amirreza's Reviewed-by
+Praveen Talari
 
-v1: https://lore.kernel.org/all/20260802003956.7-1-bbnpreetsingh@gmail.com/
-
- drivers/tee/qcomtee/async.c          | 4 ++--
- drivers/tee/qcomtee/qcomtee_msg.h    | 2 +-
- drivers/tee/qcomtee/qcomtee_object.h | 1 +
- 3 files changed, 4 insertions(+), 3 deletions(-)
-
-diff --git a/drivers/tee/qcomtee/async.c b/drivers/tee/qcomtee/async.c
-index 31bff4309e672..5849e51612033 100644
---- a/drivers/tee/qcomtee/async.c
-+++ b/drivers/tee/qcomtee/async.c
-@@ -97,10 +97,10 @@ static void qcomtee_get_async_buffer(struct qcomtee_object_invoke_ctx *oic,
- /**
-  * async_release() - Process QTEE async release requests.
-  * @oic: context used for the current invocation.
-- * @msg: async message for object release.
-+ * @async_msg: async message for object release.
-  * @size: size of the async buffer available.
-  *
-- * Return: Size of the outbound buffer used when processing @msg.
-+ * Return: Size of the outbound buffer used when processing @async_msg.
-  */
- static size_t async_release(struct qcomtee_object_invoke_ctx *oic,
- 			    struct qcomtee_async_msg_hdr *async_msg,
-diff --git a/drivers/tee/qcomtee/qcomtee_msg.h b/drivers/tee/qcomtee/qcomtee_msg.h
-index 878f70178a5b6..5d7b21fdd3688 100644
---- a/drivers/tee/qcomtee/qcomtee_msg.h
-+++ b/drivers/tee/qcomtee/qcomtee_msg.h
-@@ -112,7 +112,7 @@ union qcomtee_msg_arg {
- 
- /**
-  * struct qcomtee_msg_object_invoke - Direct object invocation message.
-- * @ctx: object ID hosted in QTEE.
-+ * @cxt: object ID hosted in QTEE.
-  * @op: operation for the object.
-  * @counts: number of different types of arguments in @args.
-  * @args: array of arguments.
-diff --git a/drivers/tee/qcomtee/qcomtee_object.h b/drivers/tee/qcomtee/qcomtee_object.h
-index 8b4401ecad48c..d5de02dcef3b9 100644
---- a/drivers/tee/qcomtee/qcomtee_object.h
-+++ b/drivers/tee/qcomtee/qcomtee_object.h
-@@ -74,6 +74,7 @@ enum qcomtee_object_type {
-  * @QCOMTEE_ARG_TYPE_OO: output object (OO).
-  * @QCOMTEE_ARG_TYPE_IB: input buffer (IB).
-  * @QCOMTEE_ARG_TYPE_IO: input object (IO).
-+ * @QCOMTEE_ARG_TYPE_NR: number of argument types.
-  *
-  * Use the invalid type to specify the end of the argument array.
-  */
-
-base-commit: 2d2338c93da79b3bfe4b6099a931d9468d539952
--- 
-2.43.0
-
+>   
+>   	mutex_unlock(&gpii->ctrl_lock);
+>   
+>
+> ---
+> base-commit: 415606a7be939835db9b0d6b711887586646346d
+> change-id: 20260803-gpi_bug_fix-b0b80ef315b5
+>
+> Best regards,
+> --
+> Aniket Randive <aniket.randive@oss.qualcomm.com>
+>
+>
