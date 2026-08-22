@@ -1,38 +1,86 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 29F6B2D7DD7;
-	Sat, 22 Aug 2026 05:15:44 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1E7C536896D
+	for <linux-arm-msm@vger.kernel.org>; Sat, 22 Aug 2026 05:34:34 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787375744; cv=none; b=dQ66TsJHpghYmQYZcUjiIIVXUBne+KH3pmQM/fpr27VehyztH5PqCBhsdYG0cC/U9QM737eS252k9/pdFWR0ToTijykiDlFqb7knYQqGtYUMOROSW0nPATK4FKqJ9v3PbTkxaZViAAQM/Jq7N862lSR0soiy884hA4KVG4Igkew=
+	t=1787376876; cv=none; b=JuqsRxCYhpMlFtfHZYFxhfzyn929p+ROEf7zTl8fXA22lJQplRllGJ06+D8s6MrN6r6hMJSnJl0yetohvZtOtJtDHuYm8gVvDYf5PPHThODfxs26/GlejPwNLZ+9TfkdsuY8DDi5ZnQ44ufdNyxJA1vLletXbj31wEIyKYeRRUk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787375744; c=relaxed/simple;
-	bh=OWTXtyjeFMgy0pedbYElIbBJks0vaqgsTW1iYCsAdKo=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=Db2BMztyp8P9yvgPYh1InpB+WIlZ7BWFXBt6dICnUEh617J93Sb+ocExlcsm3CjgSrVV53qnp48/bW4F6nH2FhYYbSMFtFJCmNzH72Lq4/ykrBUdap+ZsNA+qzE1BEv4YI1q7XDlLLywf3eZ1n12p691XNuRDlBZ9Wh/+oCpVw8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=L235ytuR; arc=none smtp.client-ip=10.30.226.201
+	s=arc-20240116; t=1787376876; c=relaxed/simple;
+	bh=RL91UTvYbZW76eRz+2B6ER0owSlhRMJj4Hr2EC7S1u0=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=aI1K4v+GUEsHgilEkRWTfPyyeFq4byGP9V+iJkesZxFdXg2ILRgNXmSzBw3w8hpiW5BT6pNKPrzBCFXHu2+6mmd8r4Ctv6RwZYnsU4MwalTbcW9DWiP0LCysD4/+MXWTMxIM8ij/Mc2T2CvpT/pdSk+lXIrwB9Wq5AJIV3yiH4I=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=m4+gR2QW; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=ES8kyyvq; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="L235ytuR"
-Received: by smtp.kernel.org (Postfix) with ESMTPS id C0D40C2BCFB;
-	Sat, 22 Aug 2026 05:15:43 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1787375743;
-	bh=OWTXtyjeFMgy0pedbYElIbBJks0vaqgsTW1iYCsAdKo=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
-	b=L235ytuRZR+xYkEiAb2REwcHOnViH69cR3GVrRvaAsdAh5+RFhV9U9wd8UoGF3lYb
-	 aSq1Mq9A2hg4hMDnqdTfUv31t8br41d4mZa55H826pvSPZ4ZsPKBF3pPZHLmUKbWNS
-	 bZIv7pHemqZ6Q/bcnHQmjJURSoO7xyj4itcMe+bJCBSe3nNKftMPuD/U5X8ToTgNBf
-	 ycsVBCU8iG3hYhz7kmgN4WdLcrtYIVscq+w+ADsbnaAPfB4Y2FFWtsDwfuPsvit4Lq
-	 fVtVpMNsUmKbfK07u6x2Ela8nX2fy9vBuNyc7M7/OpziN3Zz4o7mGsDVmXrO6ohujp
-	 vywH12viBetHQ==
-Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A2A8AC5DF97;
-	Sat, 22 Aug 2026 05:15:43 +0000 (UTC)
-From: David Heidelberg via B4 Relay <devnull+david.ixit.cz@kernel.org>
-Date: Sat, 22 Aug 2026 07:15:18 +0200
-Subject: [PATCH v5 3/3] arm64: dts: qcom: sdm845-shift-axolotl: Add
- actuator for second rear camera
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="m4+gR2QW";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="ES8kyyvq"
+Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67M4gtNr067899
+	for <linux-arm-msm@vger.kernel.org>; Sat, 22 Aug 2026 05:34:34 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=QUZpPU8ncvXJtUpgN2LTk+
+	wqFuszyYUhUbUQUNpFo+c=; b=m4+gR2QW32FH4p6oEd5s5HX2ftRNOCjo4TY7QU
+	pKiqUoEa+cbx/L1j1tFlLqkEJH4865khS9V9NBx/lPtNBI5yuCxOTgMLD67i0kNR
+	9JtEF3cQC30sJqXA5tIRVvw1BR/44zSZ9E54dZPl6aNrpNoKSdnw35FNqGJvUxbW
+	MikmqEEWfdL16ci+xrMmj7aD+u2XXPc8rTrsjlXl2Z98grtEf1OoIVqQR7tr5vBh
+	Y2T/0nUerpu6cqqeic6IKkgulucKHIvvJcBtwWWCT1ekBjDWpiZ/s0WuAVuHwsJs
+	5ms2R4i++jeJHSu27HFg5Ir1x0BHh7pu1AdXj6RoYg0z7Qbw==
+Received: from mail-pl1-f198.google.com (mail-pl1-f198.google.com [209.85.214.198])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g740f064c-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Sat, 22 Aug 2026 05:34:33 +0000 (GMT)
+Received: by mail-pl1-f198.google.com with SMTP id d9443c01a7336-2cc7e86e7c5so30856815ad.3
+        for <linux-arm-msm@vger.kernel.org>; Fri, 21 Aug 2026 22:34:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1787376873; x=1787981673; darn=vger.kernel.org;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=QUZpPU8ncvXJtUpgN2LTk+wqFuszyYUhUbUQUNpFo+c=;
+        b=ES8kyyvqBOM/YA7qyBRHpI/Bdf5djpPNuhg/E1uukI16IDx0EftDW85zEBKWZJBb8/
+         BsZOq8bTVthsunir1xCCNOh1wQMka8S/iXG91MbGDx73jOyueH7ktmYIwX7Sp4FaMDzO
+         3p+y3FUGA+7QCY4l617+GsomDRBu1NR+gj3yS9puT+AnQGQxiieTJ60CbZ3cRblhTNoe
+         ldgBiN9Lqoo9MBtK+40kDtE97942fJ1hbiAtA42wmZti5S8NlcuSLnGmR74G+sJsq7hv
+         OnzTRjvVSEc5KeZz2DLR0xM17CoNgT322IucLVbD876TAigi6tVx2FUi9ELTsdZe7yOo
+         bL0g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1787376873; x=1787981673;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=QUZpPU8ncvXJtUpgN2LTk+wqFuszyYUhUbUQUNpFo+c=;
+        b=K+BPyElXU4/F50LoqDy1aDgBCkNY5TWVWDon8BWcH5tuCfzMlmnS9nlM0kgWI1JGoX
+         rVpaMPKSA5ePP5YI+gTVvTvGBg+HKln6Pew7gesoelvj5Wyu6E7YWkbDmkLt5OUyJwT3
+         naoBfFyHmh45YZiKExJZcLzGQmCr/kTkWZWN73UGDmUVvwWLwvq+m359YtzEjVNeiwk1
+         cbNmtW978HiPmJfXenzV1HoZRiC3VeeLQ3EaaW9FeqY+mrpls9SyhqAz4p0yn3+bfCYv
+         ED5hRUSWClNVxUO1o0O8qzUF4qzt4VkmtgEzn5K4LFWEq3jmRuFaoFW1lonyWn0/O0Y1
+         sGhA==
+X-Forwarded-Encrypted: i=1; AHgh+Robr1DcBQYcV0G9FNCwpT1x/5jilqE5C1fwTJt/kVKjKqtR0FGXQtZdclBJUJb/2WpLGKT9CzmiQljqDBHj@vger.kernel.org
+X-Gm-Message-State: AFuF++mFabVO/CWBpoj3aNe0CAFXe9N4U/CS/dyRUUunxQeEFqiGitDy
+	t3FeO4iUtl298ISqWPEzqj2qN1+fhx9KiuMTcPr2k0XIIeB9jNVmF5rve4t4NcV94ay9Xib5FIt
+	zkhySgUH1UxntPXT5sL6lVW3u+wlVg/e0tyqmvxmUkG9KxerU5RYetJRMsdGZTY+wDjVv
+X-Gm-Gg: AR+sD11/D47JcKz9T8opRTkUUoIkMQ3LyEEeB3Wg0F/DfObtcDuhHjx462Bl/zQlpqm
+	Xtf1zQlh4MUZZ+KbbNWwSQZicCaLUCFFEPoCTPcqINJkQ2+DSRbJCFRpUT0tVcX6B+lhQ72xsSL
+	dRcXN7KOggrerhj/SIhR4CM+I2NupY9jmB2af2SUaWVBlnM2/FnutNJqwxuoS/7xEEymLnIGguN
+	ciO2fIdx/x6EZookWCP59SwzneGg47z3QspJblCmBi+7k3tDv77U5ZYMe2KE+iVWHQU0xTi/Ljk
+	B+4j0Krlroe13ARAYqm2o7eWyhunvemM/qzluS+z30iaswqzJrZUstdUuimnFaWdCUfYQK2Ou10
+	JVdWn9ZM9NGRTmpxYJUxVU+GAXiW0txXEgno=
+X-Received: by 2002:a17:902:cf04:b0:2ce:93a3:c16c with SMTP id d9443c01a7336-2d670cbd303mr61688675ad.12.1787376872862;
+        Fri, 21 Aug 2026 22:34:32 -0700 (PDT)
+X-Received: by 2002:a17:902:cf04:b0:2ce:93a3:c16c with SMTP id d9443c01a7336-2d670cbd303mr61687825ad.12.1787376872436;
+        Fri, 21 Aug 2026 22:34:32 -0700 (PDT)
+Received: from hu-krichai-hyd.qualcomm.com ([202.46.23.25])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-327f923490bsm3533807eec.26.2026.08.21.22.34.28
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 21 Aug 2026 22:34:31 -0700 (PDT)
+From: Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>
+Subject: [PATCH v2 0/2] PCI: qcom: Implement shutdown() to avoid SMMU/NoC
+ errors on reboot
+Date: Sat, 22 Aug 2026 11:04:16 +0530
+Message-Id: <20260822-shutdown-v2-0-520a68f1b4a5@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -41,147 +89,90 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260822-dw9714v-v5-3-502bc7f43b8f@ixit.cz>
-References: <20260822-dw9714v-v5-0-502bc7f43b8f@ixit.cz>
-In-Reply-To: <20260822-dw9714v-v5-0-502bc7f43b8f@ixit.cz>
-To: Alexander Martinz <amartinz@shiftphones.com>, 
- Bjorn Andersson <andersson@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
- Konrad Dybcio <konradybcio@kernel.org>, 
- Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Mauro Carvalho Chehab <mchehab@kernel.org>, Rob Herring <robh@kernel.org>, 
- Sakari Ailus <sakari.ailus@linux.intel.com>
-Cc: Krzysztof Kozlowski <krzk@kernel.org>, devicetree@vger.kernel.org, 
- linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org, 
- linux-media@vger.kernel.org, phone-devel@vger.kernel.org, 
- David Heidelberg <david@ixit.cz>
+X-B4-Tracking: v=1; b=H4sIANg0iWoC/yXMyw5AMBCF4VeRWWvCSNxeRSzQKWNR0lEk4t0Vy
+ y/5z7lAyDEJ1NEFjnYWXmwAxhEMU2dHUqyDARPMkxJRyeQ3vRxWGSrTrNLGYF9AyFdHhs/vqml
+ /i+9nGrZ3D/f9AOSSPuZsAAAA
+X-Change-ID: 20260822-shutdown-fe8139dff2b7
+To: Jingoo Han <jingoohan1@gmail.com>, Manivannan Sadhasivam <mani@kernel.org>,
+        Lorenzo Pieralisi <lpieralisi@kernel.org>,
+        =?utf-8?q?Krzysztof_Wilczy=C5=84ski?= <kwilczynski@kernel.org>,
+        Rob Herring <robh@kernel.org>, Bjorn Helgaas <bhelgaas@google.com>
+Cc: linux-pci@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-arm-msm@vger.kernel.org,
+        Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>,
+        Manivannan Sadhasivam <mani@kernel.org>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2564; i=david@ixit.cz;
- h=from:subject:message-id;
- bh=MkyskRm5zOC8VqbKWX20phVUAB1U8R05LT18kNWIUpM=;
- b=owEBbQKS/ZANAwAIAWACP8TTSSByAcsmYgBqiTB+CyUjVppimaT5DUyiV2e9ZL4gfGthq6h9C
- mUY+80SfqWJAjMEAAEIAB0WIQTXegnP7twrvVOnBHRgAj/E00kgcgUCaokwfgAKCRBgAj/E00kg
- csfCD/4/ps9N6J2gP7/hTbN7zynmdRUAlJZvBriMBvJpksogXr3sma8kirEKFGCo+zS1Ib/LsXM
- dXCvxsf3ZEywTrFuHBibmXQ65kTuBl4hp8kmgvMSrmySESqQe8KA7SVp9e1ColXl+1J6YJKdEzx
- C7k/CTt8ep4OM0z1baavJVsGQ6PduXlrrMCiMEU3OEK8fGcy3bntex4dFAM9XI986zpQ3huWzNo
- TOrKjvIHvBYHKycWVxl3G8NagEEPz8piaraWaxvVnKKMZ/sqFoh7B6dd5rEnDkrgAihHkOrsCB9
- UcntNKi2EHv8CeqsK7ALYAnffHbOY5sYa6FTlqQTZZXkcY1GalqRy3Ewvc0T1K04wq4BD1speyW
- GvsE/cxL2h1+gh3gqk49Y7gHaQCFTvsWjGML6Rnl0BaVQpwhoebM3NGZEUFUGCVD5wfE92GH5vZ
- +zk32BmMMAUuoqkKoaXnY9dxVcAspCmfzsD55qYlc2mjdK/025mH6XX3UYUDzXpQCwasE8ZYUVw
- 4ZNHjM4O3LH3nEz/21i5Jb9GFA6+10+kXJ+VWmzNgbwzHHiLK/ue/k/YPUrHLoM+h0vrTh7WzTR
- LXNPkoL5NdkhDERCJ9tTqZXM3e7xJtqTCx7qNZsrJzW2DCVc6Vi/tQouraFiQk8wzXRj6Tnn8QS
- ylaoqhBaiimYiFg==
-X-Developer-Key: i=david@ixit.cz; a=openpgp;
- fpr=D77A09CFEEDC2BBD53A7047460023FC4D3492072
-X-Endpoint-Received: by B4 Relay for david@ixit.cz/default with auth_id=355
-X-Original-From: David Heidelberg <david@ixit.cz>
-Reply-To: david@ixit.cz
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1787376868; l=1462;
+ i=krishna.chundru@oss.qualcomm.com; s=20230907; h=from:subject:message-id;
+ bh=RL91UTvYbZW76eRz+2B6ER0owSlhRMJj4Hr2EC7S1u0=;
+ b=T5JnL24k7YKOPPNKP2N2/goCpN4xbp6TeV2YL6IZePMqyhuMFMSXDiIYbNPLglmbIy+qMFilH
+ YQ/1NX/GbVZB9N0JBIe/wlu9Cyt+xMicRIFdbBylY8yYc3RY/6ElzaT
+X-Developer-Key: i=krishna.chundru@oss.qualcomm.com; a=ed25519;
+ pk=10CL2pdAKFyzyOHbfSWHCD0X0my7CXxj8gJScmn1FAg=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODIyMDA0MSBTYWx0ZWRfXwC2IFmYCTrbK
+ 9fd919Y0auoYGWp9DNIIh0ZsIS1LZUuZHtZn7kbTqGmAuLGSdpHradbXqDnULZodgQhGmjpP3a/
+ FK2RzdcH3NBJX/Irgc/o0SzhasHLky9mx7Wptl2erye3KGIuoPRy78B0UoYwF/mM45yF8nNfx2m
+ v+3fdkMK7He/eNdeJTAdv/enWyNNoGo4DLvWqpq20TohA2zjbtd2PQYTxE9333FIt9ijE8t1RGv
+ F1e7mCStWFWAwhfBnY1xGOpv8WMx9IjFFkoPsahwtnXuY22x13ka00RtQSmV9Nez5AewM6jT0UV
+ rijOVcQ6iuKsvQ6d2EWdV0bUQChSyKcTGSuN3GTHWUl6QJZOm7eXa5fOWLm9qCOM0qF+COdhBzY
+ 4n5yDuSiJxaNOm3qfueKjW+GL9XeHqo5hTqBS/qfftdSvI0G3mLsqezmjkxNje6JFv5Ji4EdPk5
+ ubUgjMYDxsizpD+WHQQ==
+X-Authority-Analysis: v=2.4 cv=BZjoFLt2 c=1 sm=1 tr=0 ts=6a8934e9 cx=c_pps
+ a=MTSHoo12Qbhz2p7MsH1ifg==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
+ a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
+ a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=qIbWdXD6M1inJYch3NYA:9 a=QEXdDO2ut3YA:10
+ a=GvdueXVYPmCkWapjIL-Q:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODIyMDA0MSBTYWx0ZWRfX93AXtFK1lb9V
+ 7fSKVMqwbogXSeA8tdosLMVNszMGYRGZbyQQS6jnYIS5SrM/afF0mc2lGCbR44dP7LY4cjITXt3
+ RPd3xMGSVKXeTR+Om6LThIjciD1/AnA=
+X-Proofpoint-GUID: sV5ltr7yscE-AZm52uTf8fm-j6rnVamm
+X-Proofpoint-ORIG-GUID: sV5ltr7yscE-AZm52uTf8fm-j6rnVamm
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-08-22_02,2026-08-21_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ impostorscore=0 malwarescore=0 lowpriorityscore=0 priorityscore=1501
+ clxscore=1015 phishscore=0 suspectscore=0 spamscore=0 adultscore=0
+ bulkscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
+ adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2608220041
 
-From: David Heidelberg <david@ixit.cz>
+During system shutdown/reboot, power/clocks to the PCIe controller get
+removed regardless of link state. If the link is still up when that
+happens, it can trigger SMMU or NoC errors.
 
-The SHIFT 6MQ has a second rear (auxiliary) camera. Its autofocus
-actuator is a Dongwoon DW9714V.
+This series adds a shutdown() callback to the Qualcomm PCIe host driver
+that forces the link into L2/D3cold before shutdown proceeds, reusing
+the existing suspend_noirq() path.
 
-Signed-off-by: David Heidelberg <david@ixit.cz>
+Patch 1 makes dw_pcie_suspend_noirq() skip the D3cold capability check
+during shutdown/reboot, since that check can fail and leave the link up
+if any endpoint hasn't suspended yet.
+
+Patch 2 adds qcom_pcie_shutdown() and wires it up as .shutdown.
+
+Signed-off-by: Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>
 ---
- arch/arm64/boot/dts/qcom/sdm845-shift-axolotl.dts | 39 +++++++++++++++++++++++
- 1 file changed, 39 insertions(+)
+Changes in v2:
+1) don't remove the endpoint pci dev's only keep link in D3cold.
+Link to v1: https://lore.kernel.org/all/20250401-shutdown-v1-1-f699859403ae@oss.qualcomm.com/
 
-diff --git a/arch/arm64/boot/dts/qcom/sdm845-shift-axolotl.dts b/arch/arm64/boot/dts/qcom/sdm845-shift-axolotl.dts
-index f14fe8e175e96..3cfc11127f5e1 100644
---- a/arch/arm64/boot/dts/qcom/sdm845-shift-axolotl.dts
-+++ b/arch/arm64/boot/dts/qcom/sdm845-shift-axolotl.dts
-@@ -99,16 +99,34 @@ cam_main_af_2p8: regulator-cam-main-af-2p8 {
- 		enable-active-high;
- 
- 		pinctrl-0 = <&cam_main_af_default_state>;
- 		pinctrl-names = "default";
- 
- 		vin-supply = <&vreg_bob>;
- 	};
- 
-+	/* SGM2036-2.8YUDH4G/TR */
-+	cam_rear2_af_2p8: regulator-cam-rear2-af-2p8 {
-+		compatible = "regulator-fixed";
-+
-+		regulator-name = "cam_rear2_af_2p8";
-+		regulator-min-microvolt = <2800000>;
-+		regulator-max-microvolt = <2800000>;
-+		regulator-enable-ramp-delay = <100>;
-+
-+		gpio = <&tlmm 76 GPIO_ACTIVE_HIGH>;
-+		enable-active-high;
-+
-+		pinctrl-0 = <&cam_rear2_af_default_state>;
-+		pinctrl-names = "default";
-+
-+		vin-supply = <&vreg_bob>;
-+	};
-+
- 	vph_pwr: vph-pwr-regulator {
- 		compatible = "regulator-fixed";
- 		regulator-name = "vph_pwr";
- 		regulator-min-microvolt = <3700000>;
- 		regulator-max-microvolt = <3700000>;
- 	};
- 
- 	vreg_s4a_1p8: pm8998-smps4 {
-@@ -484,16 +502,30 @@ camera-lens@c {
- 			     "dongwoon,dw9714a",
- 			     "dongwoon,dw9714";
- 		reg = <0x0c>;
- 
- 		vcc-supply = <&cam_main_af_2p8>;
- 	};
- };
- 
-+&cci_i2c1 {
-+	/* samsung,s5k2x7sp @ 10 */
-+
-+	/* 2nd rear camera actuator */
-+	camera-lens@c {
-+		compatible = "dongwoon,dw9714v",
-+			     "dongwoon,dw9714a",
-+			     "dongwoon,dw9714";
-+		reg = <0x0c>;
-+
-+		vcc-supply = <&cam_rear2_af_2p8>;
-+	};
-+};
-+
- &cdsp_pas {
- 	firmware-name = "qcom/sdm845/SHIFT/axolotl/cdsp.mbn";
- 
- 	status = "okay";
- };
- 
- &gcc {
- 	protected-clocks = <GCC_QSPI_CORE_CLK>,
-@@ -749,16 +781,23 @@ &tlmm {
- 
- 	cam_main_af_default_state: cam-main-af-default-state {
- 		pins = "gpio8";
- 		function = "gpio";
- 		drive-strength = <2>;
- 		bias-disable;
- 	};
- 
-+	cam_rear2_af_default_state: cam-rear2-af-default-state {
-+		pins = "gpio76";
-+		function = "gpio";
-+		drive-strength = <2>;
-+		bias-disable;
-+	};
-+
- 	sdc2_default_state: sdc2-default-state {
- 		clk-pins {
- 			pins = "sdc2_clk";
- 			drive-strength = <16>;
- 			bias-disable;
- 		};
- 
- 		cmd-pins {
+---
+Krishna Chaitanya Chundru (1):
+      PCI: dwc: Force L2 link entry on shutdown/reboot without D3cold check
 
--- 
-2.55.0
+Manivannan Sadhasivam (1):
+      PCI: qcom: Implement shutdown() callback
 
+ drivers/pci/controller/dwc/pcie-designware-host.c | 18 ++++++++++++++++--
+ drivers/pci/controller/dwc/pcie-qcom.c            | 10 ++++++++++
+ 2 files changed, 26 insertions(+), 2 deletions(-)
+---
+base-commit: c1366b72ad4e87be60b57b74635a3a0bc58d2b0b
+change-id: 20260822-shutdown-fe8139dff2b7
+
+Best regards,
+--  
+Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>
 
