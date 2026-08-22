@@ -1,487 +1,113 @@
-Received: from mail-m49197.qiye.163.com (mail-m49197.qiye.163.com [45.254.49.197])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from sonic314-20.consmr.mail.ne1.yahoo.com (sonic314-20.consmr.mail.ne1.yahoo.com [66.163.189.146])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3A4F538DC73;
-	Sat, 22 Aug 2026 08:53:13 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.254.49.197
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8F1153C2790
+	for <linux-arm-msm@vger.kernel.org>; Sat, 22 Aug 2026 12:14:36 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=66.163.189.146
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787388800; cv=none; b=qs3beQJ3q8WEw4hPnhgn+7M34D2apb+zVQQ3AT/wkbB4oRdzp4Jihotvex+bATCMRKR7MIfOsoah17YjvhQoBQ2T4YvywxTGEghjkrlt04Zg7JnbNLgoNN5veApTmVT/tNOC2BQWp2Cx4ATOwDO0ZioKZPvQwsx2N6+Rk0/UbGI=
+	t=1787400878; cv=none; b=daZ5jHv+NDehVOa3+mjBpBslSepj2QbtRKttJhubKd52p+/hJ1PNBxGTAYgc/ZfxcZkWVBqPfv4zMTayzFM4OC9Y+yz83TUygL8AOz5Lzv0VDlBGy1JJh8DJVqBug2PGdNKJjwYTsJl8n+PXBGg/6b+HpVELFCh2IvwPo6hFh5I=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787388800; c=relaxed/simple;
-	bh=dFP902pU3727NvHoSuNeR3TJbAryOVEqc3QwpuEdoEs=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=pNqLxnWDTm3egIUIdDDTbauraS81gOU8VehMLfjFAEFCySYmP9ChGcK5RfFCRK5o48Es9FzThLak3TF7LIT9ecWM2+vwL4KUMnJiAv8rlrrGl+nS7h7RdPCZE9BCwCJkYjqLt/kIjOr0Gr/1c0nFl8l1bngqjTVtYQZElEqYZKI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=seu.edu.cn; spf=pass smtp.mailfrom=seu.edu.cn; dkim=pass (1024-bit key) header.d=seu.edu.cn header.i=@seu.edu.cn header.b=cyrf6kTo; arc=none smtp.client-ip=45.254.49.197
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=seu.edu.cn
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=seu.edu.cn
+	s=arc-20240116; t=1787400878; c=relaxed/simple;
+	bh=s4Wa0qWjE6AXVdv0c07yVbuoJbOretYa3cy6R6vDmBg=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=C62laCozEg+NkoQvvsAF37DFS8vOVpIw2LDGh63RRbRIZkw8eFHiZBOzWNKg71XVoLkZw8w9q+ZeNbagdRlikkLm2dU72VyUzObl7hx6ryvURibwYfa2znquMSEPm40vV8mECo+rmpLL+elDFSSBEs7g7G1npxFmfjEE5xuijaI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=yahoo.com; spf=pass smtp.mailfrom=yahoo.com; dkim=pass (2048-bit key) header.d=yahoo.com header.i=@yahoo.com header.b=VXUe7RXb; arc=none smtp.client-ip=66.163.189.146
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=yahoo.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=yahoo.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=seu.edu.cn header.i=@seu.edu.cn header.b="cyrf6kTo"
-Received: from LAPTOP-99KJFSET (unknown [36.153.54.101])
-	by smtp.qiye.163.com (Hmail) with ESMTP id 4aeeb3cc6;
-	Sat, 22 Aug 2026 16:53:09 +0800 (GMT+08:00)
-From: Hongyan Xu <getshell@seu.edu.cn>
-To: Stephan Gerhold <stephan@gerhold.net>
-Cc: Loic Poulain <loic.poulain@oss.qualcomm.com>,
-	Sergey Ryazanov <ryazanov.s.a@gmail.com>,
-	Johannes Berg <johannes@sipsolutions.net>,
-	Andrew Lunn <andrew+netdev@lunn.ch>,
-	davem@davemloft.net,
-	Eric Dumazet <edumazet@google.com>,
-	Jakub Kicinski <kuba@kernel.org>,
-	Paolo Abeni <pabeni@redhat.com>,
-	netdev@vger.kernel.org,
-	linux-arm-msm@vger.kernel.org,
-	stable@vger.kernel.org,
-	Hongyan Xu <getshell@seu.edu.cn>
-Subject: [PATCH net v4] net: wwan: qcom_bam_dmux: fix TX DMA channel use-after-free
-Date: Sat, 22 Aug 2026 16:53:08 +0800
-Message-ID: <20260822085308.1089-1-getshell@seu.edu.cn>
-X-Mailer: git-send-email 2.50.1.windows.1
-In-Reply-To: <20260822085214.1595-1-getshell@seu.edu.cn>
-References: <20260822085214.1595-1-getshell@seu.edu.cn>
+	dkim=pass (2048-bit key) header.d=yahoo.com header.i=@yahoo.com header.b="VXUe7RXb"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048; t=1787400875; bh=s4Wa0qWjE6AXVdv0c07yVbuoJbOretYa3cy6R6vDmBg=; h=Date:Subject:To:Cc:References:From:In-Reply-To:From:Subject:Reply-To; b=VXUe7RXb8yyOSmrUUAwi27y02ybsLJvDYXkjqqzpEAnL+tKzVZF08bQrM10oyySY7rtPGLVWx9hI39CMh79EaBrjNR1CDbcQWmmJq9Jatt/jueiyu3dK3mTplceB3/T2pdJngPVMha/mKm/vaTpM2U6Wn1+Q39yrC+va02dCl7RZCopim+bCMPv4vhGmBp95346oN2a0N1+AWEeISvmDa7O0iuCuxJPEJAqx/tAeZqYHsNuNMrX/cpVP0xtX6fTkfoW5y/PxUGXDS1gAmTPjxxoQPlH8VpmJGiqHUBqvo4cY/pj4DwftoMKIv9Gj4lKr3vKaABrHNagCL/N4xmUTQg==
+X-SONIC-DKIM-SIGN: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048; t=1787400875; bh=shoRK+vz5NScE9uFcLv3HGdTzqLAc7PE113Sf3rs17H=; h=X-Sonic-MF:Date:Subject:To:From:From:Subject; b=jDvj70pFuHKUHL39eTbu83h0VqlNOvr0UI1jWCGIuit2AZfbdG6VDfABPIDxqUsKhKx9wlFi9+Ao5J7dI9APi9ueRaQeXEEvrnluM7XhCvQMNbCbtBDZLfWuDv9+P9qg/pNAXBqyJYEDYXWw5MmiOMhTckXaw7WeejxzsxhlUfbnL+GZxhXYtRyIvFkowJb9EWr1bI7KhnzHeNCdeVHQfRR0o9yIf1p3vaHVb6x2xPLoCoKWAHAqaolTzXOWjEVcbC8bl+BkzZz4ZeEF1gglFv9qFNn1YLEtYQMux+5nruFOrhwbY4igqCfp7E5/vzZhb/qHhRyeQo3DF9c6jqwvsg==
+X-YMail-OSG: dsIeJhoVM1lHJZPUUvoNlnZ0qVZ8ALlP8UZRvcddlcOM1KWfx063_B50xgy_dXe
+ zup2O1KAqs.klqN8wWJnwO.0KGHJfCZCsNAdfnmxRexgXN6r400ZV6ZZps9PCCY_JOUsR.r79tQi
+ M2.2mCAWuwtqhsp2tNU6HFiQbNppyL3xsAQ9JsrndyjMcHh88HdPHkdeRGnfhQ7.7FhuMMlrA7kq
+ 5VMdp.0u7CNQERpORPP7nMB1DWnR.k81ZBnGV7lCM5a90W0oG_KqK8yPwnusRVeIhJoRztFFNPbo
+ _cAA0F85Ar9ENJOOFBpPJ15mIKL84y5cpkaGZSbM3V1rgqPgvGXi3pj66eyqiVEHWz5Bwn4oZA_j
+ VQu8Iuj2RaKh4ZHWVFMo_p9vW6POz5Z0qJ40HUfGQnGwl6l8Z9fvENhwTyIGgDB7Z6ZFaex.Wacv
+ UcsgA72YvOn4e2NIcWAnTH9zzTziW1t_af_KhVGf4uWh85rqiNwcNZWDcy7zcOgTqPHc1Zryw1ru
+ dv8zq_sKlm9eWlPCNwhBn9rX8Jn6PaHD.90Dak7AlkXzUctaa8UWNfVS8qh20lbUyw9HJSseIs6Q
+ 7nviZl_JgvyiCJsIl98Nn91iWNdgGKwYKKZrgzQse59C3mAgFop9h_wgtrRLbRz8Q.FbrjiRP9P3
+ l53DpXxzBmYjDYSlPsHxlaH9pK_LQLExh7S7kIBqpysA9wMDthrYSqychPYm7tk_PTUiIT3sXRq_
+ _426Ljcxda5bqnY_1GHHD99.7egU9JnUG7AVzavoTjmuKVg._t9JDn2U4DvJWM.6.3W3Cn15oiDH
+ QI8g4gIYedmNIcYnz4PBqv7GrN.jJNvzbI1DnF5EiqvaY5GIXbpMemeH6etzoXr7fou1QUI_Oj6f
+ KTN.us9MW7NAbfWqPEdMqetw74EZKKQ9mQSXJ6W5jT6gObwednntSCj6O0CoLtpoQpsRLrifLj4_
+ ST8wfYTP30ejxr2T56nsbzWfIY0FYdAYPiPYGpy1.m1x1XVMkFnl1Zub28yoTFNhXJektJX74E7S
+ OdH.abXNdMh6LZumC2ET9z1L7dvsbn6DMyFI8QDEKz.oJJpUm1sDdm.rZf8kpCvOn1HhH5TiOUOu
+ QmrFCeWZvHOScxLGYkE6LADtIgbtT5hEkGtkg17lJeZ287kWt5uNtNQn9NYfSw9hEx3R5U4vcR2_
+ nCZrn6sYhrUf616Bp8mGfCakNY95JqUkllCsS5hnjLSLoFja9y34KXmjpvITvvdzh21zh0Se9lS7
+ Yg5FPkCs2s5omhBmcytLovO54XD_TUzmgDMfew9jLsl53IeSGXbT_kcrjRUrHPWLJFBMyOADcyah
+ RoxCMt1feTE0TLa0sJJGFQACX7bzZL8KL3ZXseMWVFRiFyf5TRH0XB5p9WZqSIrJo4SkRKQuZ4WA
+ 3bSFtdhjr4fe.nSPhdsvBE9rzeAYoVH8NlN5WNuieMkrYP1kjclDtBU.A9L8xq7nQrLSNGoS_5g5
+ jbeCE0DF4_w8emc_Rv32De0MCFORlgZeJo0coMMR_.2NCYZ9ug4GoF95V8Byhvt9AyJuGSIcgHao
+ l0G44OSG02BAbN_hu5p.mawA_nTcXKUxbzXMpBOo5GmJpYDgUrb7VCn7FsfAHLlrYkWh2kip30P6
+ eq2vuUb35wLyY14_HLW5X2rgGJ.tzs52d.cQmphEpmR_ExPayVY6AI_QDU4ZdZhgiGpyfTKeSL3j
+ enhEypHhgFLydw2Wyv7yPnxW5u5_hn4pbxz_7OdjHC.pNwZE1SrTWH5W1AARNV2DwqTcDzZlgpe2
+ j7t.VHFYXcd3XBnuPpuJwL11jc6cn7HsmOp5gZRJzVdelbARsuMVdmv0RHJAnxfqfCAyvZtFBVGk
+ gimZxoiWJuSws5WS3XF07JpYuVDrBpgmSIxpks4E08ZSB_RcG_8O_imgHGgOqERhobMGipQMqRBX
+ 2eKkc8.WOTX4c_qEBCEiBozLm2cLt9mepkXps.MIpNPhg8e_VHS5Y6VrXzJDNVjL4VZjVICU9xpI
+ QMCXIW0rruoei5v0TyGqEg61zht0cYHb9X2djXSXJf7xA5DyvWzAsn2BuPQJs2II6JZ_c5okr3so
+ Q56rRtPraMc5_dNNUSAgPUqyf9eFCBg.g1MK5Pcj4p5Ssb_N3NffqOqlgYPBZl7ciE9lRmAEG_N7
+ piy4EN0Ctb8vLXsro7jwvmIOOewBapg5tiRwHan2YDPdo3Eie7uhxQPF3MHRXFRVUGmaTn3pmbGc
+ 4FHg6Hhy8jZClbZKk9lBnI1qMwCJ6HD_TQOcnaO_8L73ilnc7goZk15gXDJjEnP1c7DbJ27Hf6oo
+ ecszofmeMttpuIy2ofA9nOCGhk4orX326NQ--
+X-Sonic-MF: <namiltd@yahoo.com>
+X-Sonic-ID: 8f0b58d9-8ade-450f-86f8-2ca7c74bfa99
+Received: from sonic.gate.mail.ne1.yahoo.com by sonic314.consmr.mail.ne1.yahoo.com with HTTP; Sat, 22 Aug 2026 12:14:35 +0000
+Received: by hermes--production-ir2-cddf86dcf-wdr5c (Yahoo Inc. Hermes SMTP Server) with ESMTPA ID d9e6700a592f300a4cd05ef193b7d1cf;
+          Sat, 22 Aug 2026 11:19:50 +0000 (UTC)
+Message-ID: <8286b42e-0314-477b-ac2e-4b410a97d833@yahoo.com>
+Date: Sat, 22 Aug 2026 13:19:37 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] clk: qcom: ipq-cmn-pll: keep the CMN block bus clocks
+ enabled
+To: Jie Luo <jie.luo@oss.qualcomm.com>,
+ Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+ Stanislaw Pal <kuncy7@gmail.com>
+Cc: Bjorn Andersson <andersson@kernel.org>, Stephen Boyd <sboyd@kernel.org>,
+ Michael Turquette <mturquette@baylibre.com>,
+ Brian Masney <bmasney@redhat.com>, linux-arm-msm@vger.kernel.org,
+ linux-clk@vger.kernel.org, linux-kernel@vger.kernel.org,
+ stable@vger.kernel.org
+References: <20260730191353.557494-1-kuncy7@gmail.com>
+ <aeeeebf9-dbd4-4f57-847a-5f495b3236a2@oss.qualcomm.com>
+ <20260803091003.15285-1-kuncy7@gmail.com>
+ <8af46926-fecc-4396-973e-2290ae285998@oss.qualcomm.com>
+ <cd5a25ed-76a3-4f1f-b924-06bb685ff426@oss.qualcomm.com>
+ <181944c2-2484-4384-9c91-45cc87f31955@oss.qualcomm.com>
+Content-Language: pl
+From: Mieczyslaw Nalewaj <namiltd@yahoo.com>
+In-Reply-To: <181944c2-2484-4384-9c91-45cc87f31955@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-HM-Tid: 0aa028ac81a903a1kunm904100c41c325b
-X-HM-MType: 10
-X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
-	tZV1koWUFITzdXWRgWCB1ZQUpXWS1ZQUlXWQ8JGhUIEh9ZQVlDGB0fVhhLTUsaSxgdGkMeGVYeHw
-	5VEwETFhoSFyQUDg9ZV1kYEgtZQVlITVVKTkhVTk9VSktKWVdZFhoPEhUdFFlBWU9LSFVKS0hKTE
-	NKVUpLS1VKQktLWQY+
-DKIM-Signature: a=rsa-sha256;
-	b=cyrf6kToX+3DXcvM2aSkyX46QxkOFvoUDvsK+qCB/m4SLXfKLlOED0HBWEpkobeSzxkvm9C6JbnLd319PX+k4V7o6x/zBJx5+CmVSGNGsBR/qJyGBLb1Gq1824C8ZssqFBOTyhqGMfaQRa9bCbJz9C/1SJkkibUdCnJIHJzuGO8=; c=relaxed/relaxed; s=default; d=seu.edu.cn; v=1;
-	bh=hNgvAC/0a3H1+mLp59JSkVL8F0puIpMRnM2y/wJG5GU=;
-	h=date:mime-version:subject:message-id:from;
+X-Mailer: WebService/1.1.26380 mail.backend.jedi.jws.acl:role.jedi.acl.token.atz.jws.hermes.yahoo
 
-The modem power-control interrupt can release dmux->tx while the command,
-netdev transmit, or deferred wakeup paths are preparing and submitting
-DMA descriptors. A runtime PM reference alone does not order those paths
-against the modem-driven interrupt.
+On Thu, Aug 20, 2026 at 01:39:52PM +0800, Jie Luo wrote:
+> The CMN PLL output clocks do not depend on the AHB or SYS clocks. They
+> continue to operate correctly at the fixed rates even when the AHB
+> and SYS clocks are disabled.
 
-The pc and pc-ack IRQ actions do not encode the modem protocol order. A
-pc=false edge raised before a new host power vote is acknowledged can
-therefore be handled after runtime resume observes the acknowledgment and
-starts using TX. On the other hand, acknowledging a new pc=false transition
-while the acknowledged host vote remains active lets the modem power down
-the DMA engine underneath the driver.
+The PLL outputs keep running, but the AHB register interface does not.
+Once autosuspend gates AHB/SYS, any later register access to the CMN
+block hangs the bus. That is the bug we are fixing.
 
-Serialize power-control state with a mutex and distinguish a requested host
-vote from an acknowledged one. Publish each vote acknowledgment and its
-completion under that lock. Before publishing the host-vote acknowledgment,
-sample the actual pc line and process any delayed transition. A valid
-pc=false transition is then handled before runtime resume returns, when no
-path can submit through TX. The channels are released before pc is
-acknowledged, and a queued BAM_DMUX_CMD_OPEN remains queued for the new TX
-channel.
+> On IPQ5018, the CMN PLL provides a 50 MHz output clock that is used as
+> the reference clock for the connected Ethernet device.
 
-If pc goes low after the host vote was acknowledged, refuse the pc
-acknowledgment and keep the DMA channels allocated. Remember the pending
-transition so runtime suspend can first release the channels and only then
-acknowledge pc=false. This preserves the protocol ordering without exposing
-a released TX channel or cancelling an OPEN command that already succeeded.
+Correct, and that consumer is hardwired in silicon — the internal GE
+PHY and uniphy blocks take proxied this clock without any Linux driver
+calling clk_get() on it. Therefore no device link exists to keep the
+provider active, and CCF rightfully gates the bus clocks after probe.
 
-Use an enum for the host power-vote state, initialize the power mutex with
-devm_mutex_init(), and use scoped mutex guards in runtime PM paths. Let
-runtime suspend perform cleanup when runtime resume cannot acquire the TX
-channel. Keep both state IRQs disabled until the initial probe state is
-committed, and disable both before final remove cleanup.
+Adding DT consumers would require touching PHY and datapath drivers
+across multiple subsystems just to create artificial clk references.
+That is not a stable material. The v4 driver fix is minimal, correct,
+and self-contained.
 
-This issue was found by the author's in-house static analysis tool.
-The patch was reviewed by the author.
+Reviewed-by: Mieczyslaw Nalewaj <namiltd@yahoo.com>
 
-Fixes: 21a0ffd9b38c ("net: wwan: Add Qualcomm BAM-DMUX WWAN network driver")
-Cc: stable@vger.kernel.org
-Signed-off-by: Hongyan Xu <getshell@seu.edu.cn>
-
----
-Changes in v4:
-- Replace the power-vote booleans with an explicit enum state.
-- Remove the redundant RX-channel check and use devm_mutex_init().
-- Use scoped mutex guards and let runtime_suspend() clean up resume failures.
-- Keep both state IRQs disabled until probe initialization is complete.
-- Disable both state IRQs before final remove cleanup.
-
-diff --git a/drivers/net/wwan/qcom_bam_dmux.c b/drivers/net/wwan/qcom_bam_dmux.c
-index cc6ace8..3756cdb 100644
---- a/drivers/net/wwan/qcom_bam_dmux.c
-+++ b/drivers/net/wwan/qcom_bam_dmux.c
-@@ -6,12 +6,14 @@
- 
- #include <linux/atomic.h>
- #include <linux/bitops.h>
-+#include <linux/cleanup.h>
- #include <linux/completion.h>
- #include <linux/dma-mapping.h>
- #include <linux/dmaengine.h>
- #include <linux/if_arp.h>
- #include <linux/interrupt.h>
- #include <linux/module.h>
-+#include <linux/mutex.h>
- #include <linux/netdevice.h>
- #include <linux/platform_device.h>
- #include <linux/pm_runtime.h>
-@@ -64,15 +66,24 @@ struct bam_dmux_skb_dma {
- 	dma_addr_t addr;
- };
- 
-+enum bam_dmux_pc_vote {
-+	BAM_DMUX_PC_VOTE_INACTIVE, /* pc_vote = false */
-+	BAM_DMUX_PC_VOTE_PENDING, /* pc_vote = true, waiting for ACK */
-+	BAM_DMUX_PC_VOTE_ACKED, /* pc_vote = true, ACK received */
-+	BAM_DMUX_PC_VOTE_DOWN_PENDING, /* pc = false while host vote active */
-+};
-+
- struct bam_dmux {
- 	struct device *dev;
- 
--	int pc_irq;
-+	int pc_irq, pc_ack_irq;
- 	bool pc_state, pc_ack_state;
- 	struct qcom_smem_state *pc, *pc_ack;
- 	u32 pc_mask, pc_ack_mask;
- 	wait_queue_head_t pc_wait;
- 	struct completion pc_ack_completion;
-+	struct mutex power_lock; /* Protect power-control state */
-+	enum bam_dmux_pc_vote pc_vote;
- 
- 	struct dma_chan *rx, *tx;
- 	struct bam_dmux_skb_dma rx_skbs[BAM_DMUX_NUM_SKB];
-@@ -99,6 +110,24 @@ static void bam_dmux_pc_vote(struct bam_dmux *dmux, bool enable)
- 				    enable ? dmux->pc_mask : 0);
- }
- 
-+static void bam_dmux_pc_vote_locked(struct bam_dmux *dmux, bool enable)
-+{
-+	lockdep_assert_held(&dmux->power_lock);
-+
-+	if (enable)
-+		dmux->pc_vote = BAM_DMUX_PC_VOTE_PENDING;
-+	else if (dmux->pc_vote != BAM_DMUX_PC_VOTE_DOWN_PENDING)
-+		dmux->pc_vote = BAM_DMUX_PC_VOTE_INACTIVE;
-+	bam_dmux_pc_vote(dmux, enable);
-+}
-+
-+static void bam_dmux_pc_vote_protected(struct bam_dmux *dmux, bool enable)
-+{
-+	mutex_lock(&dmux->power_lock);
-+	bam_dmux_pc_vote_locked(dmux, enable);
-+	mutex_unlock(&dmux->power_lock);
-+}
-+
- static void bam_dmux_pc_ack(struct bam_dmux *dmux)
- {
- 	qcom_smem_state_update_bits(dmux->pc_ack, dmux->pc_ack_mask,
-@@ -655,6 +684,8 @@ static void bam_dmux_free_skbs(struct bam_dmux_skb_dma skbs[],
- 
- static void bam_dmux_power_off(struct bam_dmux *dmux)
- {
-+	lockdep_assert_held(&dmux->power_lock);
-+
- 	if (dmux->tx) {
- 		dmaengine_terminate_sync(dmux->tx);
- 		dma_release_channel(dmux->tx);
-@@ -670,10 +701,15 @@ static void bam_dmux_power_off(struct bam_dmux *dmux)
- 	bam_dmux_free_skbs(dmux->rx_skbs, DMA_FROM_DEVICE);
- }
- 
--static irqreturn_t bam_dmux_pc_irq(int irq, void *data)
-+static bool bam_dmux_handle_pc(struct bam_dmux *dmux, bool new_state)
- {
--	struct bam_dmux *dmux = data;
--	bool new_state = !dmux->pc_state;
-+	lockdep_assert_held(&dmux->power_lock);
-+
-+	if (new_state == dmux->pc_state) {
-+		if (new_state && dmux->pc_vote == BAM_DMUX_PC_VOTE_DOWN_PENDING)
-+			dmux->pc_vote = BAM_DMUX_PC_VOTE_ACKED;
-+		return false;
-+	}
- 
- 	dev_dbg(dmux->dev, "pc: %u\n", new_state);
- 
-@@ -682,13 +718,41 @@ static irqreturn_t bam_dmux_pc_irq(int irq, void *data)
- 			bam_dmux_pc_ack(dmux);
- 		else
- 			bam_dmux_power_off(dmux);
-+	} else if (dmux->pc_vote == BAM_DMUX_PC_VOTE_ACKED) {
-+		/* The modem must keep the DMA engine on until pc is acked. */
-+		dmux->pc_vote = BAM_DMUX_PC_VOTE_DOWN_PENDING;
-+		dev_err_ratelimited(dmux->dev,
-+				    "refusing pc down while host vote is active\n");
-+		return false;
- 	} else {
- 		bam_dmux_power_off(dmux);
- 		bam_dmux_pc_ack(dmux);
-+		dmux->pc_vote = BAM_DMUX_PC_VOTE_INACTIVE;
- 	}
- 
--	dmux->pc_state = new_state;
--	wake_up_all(&dmux->pc_wait);
-+	WRITE_ONCE(dmux->pc_state, new_state);
-+	return true;
-+}
-+
-+static irqreturn_t bam_dmux_pc_irq(int irq, void *data)
-+{
-+	struct bam_dmux *dmux = data;
-+	bool new_state, wake;
-+	int ret;
-+
-+	mutex_lock(&dmux->power_lock);
-+	ret = irq_get_irqchip_state(dmux->pc_irq, IRQCHIP_STATE_LINE_LEVEL,
-+				    &new_state);
-+	if (ret) {
-+		mutex_unlock(&dmux->power_lock);
-+		dev_err_ratelimited(dmux->dev, "failed to read pc state: %d\n", ret);
-+		return IRQ_HANDLED;
-+	}
-+
-+	wake = bam_dmux_handle_pc(dmux, new_state);
-+	mutex_unlock(&dmux->power_lock);
-+	if (wake)
-+		wake_up_all(&dmux->pc_wait);
- 
- 	return IRQ_HANDLED;
- }
-@@ -696,9 +760,30 @@ static irqreturn_t bam_dmux_pc_irq(int irq, void *data)
- static irqreturn_t bam_dmux_pc_ack_irq(int irq, void *data)
- {
- 	struct bam_dmux *dmux = data;
-+	bool new_state, wake = false;
-+	int ret;
- 
- 	dev_dbg(dmux->dev, "pc ack\n");
-+
-+	/* Process an earlier pc edge before publishing the host-vote ack. */
-+	synchronize_irq(dmux->pc_irq);
-+	mutex_lock(&dmux->power_lock);
-+	ret = irq_get_irqchip_state(dmux->pc_irq, IRQCHIP_STATE_LINE_LEVEL,
-+				    &new_state);
-+	if (ret) {
-+		mutex_unlock(&dmux->power_lock);
-+		dev_err_ratelimited(dmux->dev, "failed to read pc state: %d\n", ret);
-+		return IRQ_HANDLED;
-+	}
-+
-+	wake = bam_dmux_handle_pc(dmux, new_state);
-+	if (new_state && dmux->pc_state &&
-+	    dmux->pc_vote == BAM_DMUX_PC_VOTE_PENDING)
-+		dmux->pc_vote = BAM_DMUX_PC_VOTE_ACKED;
- 	complete_all(&dmux->pc_ack_completion);
-+	mutex_unlock(&dmux->power_lock);
-+	if (wake)
-+		wake_up_all(&dmux->pc_wait);
- 
- 	return IRQ_HANDLED;
- }
-@@ -706,9 +791,21 @@ static irqreturn_t bam_dmux_pc_ack_irq(int irq, void *data)
- static int bam_dmux_runtime_suspend(struct device *dev)
- {
- 	struct bam_dmux *dmux = dev_get_drvdata(dev);
-+	bool wake = false;
- 
- 	dev_dbg(dev, "runtime suspend\n");
--	bam_dmux_pc_vote(dmux, false);
-+
-+	{
-+		guard(mutex)(&dmux->power_lock);
-+
-+		bam_dmux_pc_vote_locked(dmux, false);
-+		if (dmux->pc_vote == BAM_DMUX_PC_VOTE_DOWN_PENDING)
-+			wake = bam_dmux_handle_pc(dmux, false);
-+		else if (!dmux->pc_state)
-+			bam_dmux_power_off(dmux);
-+	}
-+	if (wake)
-+		wake_up_all(&dmux->pc_wait);
- 
- 	return 0;
- }
-@@ -716,6 +813,7 @@ static int bam_dmux_runtime_suspend(struct device *dev)
- static int __maybe_unused bam_dmux_runtime_resume(struct device *dev)
- {
- 	struct bam_dmux *dmux = dev_get_drvdata(dev);
-+	int ret = 0;
- 
- 	dev_dbg(dev, "runtime resume\n");
- 
-@@ -724,50 +822,58 @@ static int __maybe_unused bam_dmux_runtime_resume(struct device *dev)
- 					 BAM_DMUX_REMOTE_TIMEOUT))
- 		return -ETIMEDOUT;
- 
-+	synchronize_irq(dmux->pc_irq);
-+
- 	/* Vote for power state */
--	bam_dmux_pc_vote(dmux, true);
-+	bam_dmux_pc_vote_protected(dmux, true);
- 
- 	/* Wait for ack */
- 	if (!wait_for_completion_timeout(&dmux->pc_ack_completion,
- 					 BAM_DMUX_REMOTE_TIMEOUT)) {
--		bam_dmux_pc_vote(dmux, false);
-+		bam_dmux_runtime_suspend(dev);
- 		return -ETIMEDOUT;
- 	}
- 
-+	synchronize_irq(dmux->pc_irq);
-+
- 	/* Wait until we're up */
--	if (!wait_event_timeout(dmux->pc_wait, dmux->pc_state,
-+	if (!wait_event_timeout(dmux->pc_wait, READ_ONCE(dmux->pc_state),
- 				BAM_DMUX_REMOTE_TIMEOUT)) {
--		bam_dmux_pc_vote(dmux, false);
-+		bam_dmux_runtime_suspend(dev);
- 		return -ETIMEDOUT;
- 	}
- 
--	/* Ensure that we actually initialized successfully */
--	if (!dmux->rx) {
--		bam_dmux_pc_vote(dmux, false);
--		return -ENXIO;
-+	{
-+		guard(mutex)(&dmux->power_lock);
-+
-+		/* Ensure that we actually initialized successfully */
-+		if (!dmux->rx) {
-+			ret = -ENXIO;
-+		} else if (!dmux->tx) {
-+			/* Request TX channel if necessary */
-+			dmux->tx = dma_request_chan(dev, "tx");
-+			if (IS_ERR(dmux->tx)) {
-+				dev_err(dev, "Failed to request TX DMA channel: %pe\n",
-+					dmux->tx);
-+				dmux->tx = NULL;
-+				ret = -ENXIO;
-+			}
-+		}
- 	}
- 
--	/* Request TX channel if necessary */
--	if (dmux->tx)
--		return 0;
--
--	dmux->tx = dma_request_chan(dev, "tx");
--	if (IS_ERR(dmux->tx)) {
--		dev_err(dev, "Failed to request TX DMA channel: %pe\n", dmux->tx);
--		dmux->tx = NULL;
-+	if (ret)
- 		bam_dmux_runtime_suspend(dev);
--		return -ENXIO;
--	}
- 
--	return 0;
-+	return ret;
- }
- 
- static int bam_dmux_probe(struct platform_device *pdev)
- {
- 	struct device *dev = &pdev->dev;
- 	struct bam_dmux *dmux;
--	int ret, pc_ack_irq, i;
-+	int ret, i;
- 	unsigned int bit;
-+	bool pc_state;
- 
- 	dmux = devm_kzalloc(dev, sizeof(*dmux), GFP_KERNEL);
- 	if (!dmux)
-@@ -780,9 +886,9 @@ static int bam_dmux_probe(struct platform_device *pdev)
- 	if (dmux->pc_irq < 0)
- 		return dmux->pc_irq;
- 
--	pc_ack_irq = platform_get_irq_byname(pdev, "pc-ack");
--	if (pc_ack_irq < 0)
--		return pc_ack_irq;
-+	dmux->pc_ack_irq = platform_get_irq_byname(pdev, "pc-ack");
-+	if (dmux->pc_ack_irq < 0)
-+		return dmux->pc_ack_irq;
- 
- 	dmux->pc = devm_qcom_smem_state_get(dev, "pc", &bit);
- 	if (IS_ERR(dmux->pc))
-@@ -799,6 +905,9 @@ static int bam_dmux_probe(struct platform_device *pdev)
- 	init_waitqueue_head(&dmux->pc_wait);
- 	init_completion(&dmux->pc_ack_completion);
- 	complete_all(&dmux->pc_ack_completion);
-+	ret = devm_mutex_init(dev, &dmux->power_lock);
-+	if (ret)
-+		return ret;
- 
- 	spin_lock_init(&dmux->tx_lock);
- 	INIT_WORK(&dmux->tx_wakeup_work, bam_dmux_tx_wakeup_work);
-@@ -817,31 +926,40 @@ static int bam_dmux_probe(struct platform_device *pdev)
- 	pm_runtime_use_autosuspend(dev);
- 	pm_runtime_enable(dev);
- 
--	ret = devm_request_threaded_irq(dev, pc_ack_irq, NULL, bam_dmux_pc_ack_irq,
--					IRQF_ONESHOT, NULL, dmux);
-+	ret = devm_request_threaded_irq(dev, dmux->pc_ack_irq, NULL,
-+					bam_dmux_pc_ack_irq,
-+					IRQF_ONESHOT | IRQF_NO_AUTOEN,
-+					NULL, dmux);
- 	if (ret)
- 		goto err_disable_pm;
- 
- 	ret = devm_request_threaded_irq(dev, dmux->pc_irq, NULL, bam_dmux_pc_irq,
--					IRQF_ONESHOT, NULL, dmux);
-+					IRQF_ONESHOT | IRQF_NO_AUTOEN, NULL, dmux);
- 	if (ret)
--		goto err_disable_pm;
-+		goto err_power_off;
- 
-+	mutex_lock(&dmux->power_lock);
- 	ret = irq_get_irqchip_state(dmux->pc_irq, IRQCHIP_STATE_LINE_LEVEL,
--				    &dmux->pc_state);
--	if (ret)
--		goto err_disable_pm;
-+				    &pc_state);
-+	if (ret) {
-+		mutex_unlock(&dmux->power_lock);
-+		goto err_power_off;
-+	}
- 
- 	/* Check if remote finished initialization before us */
--	if (dmux->pc_state) {
--		if (bam_dmux_power_on(dmux))
--			bam_dmux_pc_ack(dmux);
--		else
--			bam_dmux_power_off(dmux);
--	}
-+	bam_dmux_handle_pc(dmux, pc_state);
-+	mutex_unlock(&dmux->power_lock);
-+
-+	/* Start handling state changes after the initial state is processed. */
-+	enable_irq(dmux->pc_ack_irq);
-+	enable_irq(dmux->pc_irq);
- 
- 	return 0;
- 
-+err_power_off:
-+	mutex_lock(&dmux->power_lock);
-+	bam_dmux_power_off(dmux);
-+	mutex_unlock(&dmux->power_lock);
- err_disable_pm:
- 	pm_runtime_disable(dev);
- 	pm_runtime_dont_use_autosuspend(dev);
-@@ -872,12 +990,16 @@ static void bam_dmux_remove(struct platform_device *pdev)
- 	pm_runtime_set_suspended(dev);
- 
- 	/* Try to wait for remote side to drop power vote */
--	if (!wait_event_timeout(dmux->pc_wait, !dmux->rx, BAM_DMUX_REMOTE_TIMEOUT))
-+	if (!wait_event_timeout(dmux->pc_wait, !READ_ONCE(dmux->rx),
-+				BAM_DMUX_REMOTE_TIMEOUT))
- 		dev_err(dev, "Timed out waiting for remote side to suspend\n");
- 
- 	/* Make sure everything is cleaned up before we return */
-+	disable_irq(dmux->pc_ack_irq);
- 	disable_irq(dmux->pc_irq);
-+	mutex_lock(&dmux->power_lock);
- 	bam_dmux_power_off(dmux);
-+	mutex_unlock(&dmux->power_lock);
- 	bam_dmux_free_skbs(dmux->tx_skbs, DMA_TO_DEVICE);
- }
- 
--- 
-2.50.1.windows.1
