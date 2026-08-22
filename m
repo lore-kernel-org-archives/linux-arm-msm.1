@@ -1,192 +1,272 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 98CAF3998AF;
-	Fri, 21 Aug 2026 23:30:15 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2845B2BEC5E;
+	Sat, 22 Aug 2026 02:25:28 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787355017; cv=none; b=lYtPHvdSBerJy1lXQ4sJ3PI3+Why03QR9NoOpFNhoFPCoZi6hEPEjB4ba8uoqA1Zu/tecubCvvAwsqICmGpntiCzAKj0MyRAdsvRhGnj60H9Zz+bo5z2ZKOdA6fI2mG6bntJtFg19bBXTkH6FOLdXBt9SL8pd5GfE4PJwb2HW5A=
+	t=1787365529; cv=none; b=qUlvmtL2nhEG+Dgl6H+EA11YzZOAxQHHmEIaqYHebaAwIug0FQkuOd8xH7WX14C/h09tI4YSVAsyX3Bx8bpS15P/nrQL50twOr3NDRQqRQ4llExi8Aa1KvUEQCVH/gBbxTWCHgyW3BVjQvGOtaZpmutGJWJxk5IEZsKKFcHgQMU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787355017; c=relaxed/simple;
-	bh=MdK9rRHNyWJYLFRZyYYiCTN2IYQprF7r183bLLMS4j8=;
-	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=mvrf6oaq8Ee4Imo2FQZXOXA3t80FUWya3CxAt9ccJxsKVOfKWRc2IUv3NqjGGnz5IhSwxZzQzEbAyEhTf/dnyqMi7mFiQotx2+adm650zuvJfrsY+p3/g9Ncc3PKZ8r53obXTjJycBAOfleXS9Ri+BDXYgAipv3EyDVkvgDlSL4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Jo+ZWh2I; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1787365529; c=relaxed/simple;
+	bh=gxM5H/NgHn7xMpjWvEs/K7X74h5vRMWcdyngUYGNxqs=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=b2bqUabvs6F8LEj0vlMFZeaL4FqVtW5XyHE3DoxJxWXns4afUOoF/izLJxwh3lJOotmWsvvS7afWJ5bxSuoJc49KCBzKYGkMJjEJknPjo6NcXYKQaBd301OC6FuqSNllDagJop0z5FC95AxIa1M/7jki7kZjF4i+Wy4hcLc+jxo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=iQl+SD1R; arc=none smtp.client-ip=10.30.226.201
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Jo+ZWh2I"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 41C6C1F000E9;
-	Fri, 21 Aug 2026 23:30:11 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1787355015;
-	bh=Ibh9L+fRKuXLx86P55NwGkzi3Fg5cFtJydY7cjyAm4U=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References;
-	b=Jo+ZWh2IV9lEA2k8h5u9hhVtzVtqeQMYpiAwi0wYMxp9rY8L5Zm1ua8zPZU6/AfJd
-	 U5y5D+P05QhZHqjBUPUSIWd0K5UWiVwOE/6GjJSC7zNEF4lfD9n3I8ikLLTtyxQoOn
-	 +Q6+WHXCBSaqZ2hzn85nku/MM+T7cLQtKVk8j79hdKDKOFDVkdZLn9hk5FUH32AxE7
-	 1I3BaJUWZqublQzewv/De7vZ8c6QLKgdIgITgA6sSpPUyFS9N+xRPcbJb7yiCK8FDm
-	 UMfkpQAOu/RjFiLRXwEKB+QRX+scE2lOrdhPSIAo7Q0FelLBYFFxNbdlLqNH0uYaaC
-	 gQmfSVGVsY2kQ==
-Date: Sat, 22 Aug 2026 00:30:08 +0100
-From: Jonathan Cameron <jic23@kernel.org>
-To: Jishnu Prakash <jishnu.prakash@oss.qualcomm.com>
-Cc: David Lechner <dlechner@baylibre.com>, Nuno =?UTF-8?B?U8Oh?=
- <nuno.sa@analog.com>, Andy Shevchenko <andy@kernel.org>, Rob Herring
- <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
- <conor+dt@kernel.org>, Amit Kucheria <amitk@kernel.org>, Thara Gopinath
- <thara.gopinath@gmail.com>, "Rafael J. Wysocki" <rafael@kernel.org>, Daniel
- Lezcano <daniel.lezcano@kernel.org>, Zhang Rui <rui.zhang@intel.com>,
- Lukasz Luba <lukasz.luba@arm.com>, Bjorn Andersson <andersson@kernel.org>,
- Konrad Dybcio <konradybcio@kernel.org>, linux-iio@vger.kernel.org,
- devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-arm-msm@vger.kernel.org, linux-pm@vger.kernel.org, Kamal Wadhwa
- <kamal.wadhwa@oss.qualcomm.com>, Anjelique Melendez
- <anjelique.melendez@oss.qualcomm.com>, Manaf Meethalavalappu Pallikunhi
- <manaf.pallikunhi@oss.qualcomm.com>, Priyansh Jain
- <priyansh.jain@oss.qualcomm.com>
-Subject: Re: [PATCH 2/7] iio: adc: qcom-spmi-adc5-gen3: Add support for QCOM
- PMIC5 Gen4 ADC
-Message-ID: <20260822003008.0d13144d@jic23-huawei>
-In-Reply-To: <04990044-45b3-45ca-9e39-925d5bbe62e2@oss.qualcomm.com>
-References: <20260731-pmic5_gen4_adc-v1-0-9c49b2eea6f9@oss.qualcomm.com>
-	<20260731-pmic5_gen4_adc-v1-2-9c49b2eea6f9@oss.qualcomm.com>
-	<20260803011400.1fb6c93a@jic23-huawei>
-	<a98d90bd-aa9d-4af3-aa54-3a34300070d4@oss.qualcomm.com>
-	<20260807001822.31f7c137@jic23-huawei>
-	<f2b2f590-de3e-4f10-b883-92845f59412d@oss.qualcomm.com>
-	<20260815030830.24fc732f@jic23-huawei>
-	<04990044-45b3-45ca-9e39-925d5bbe62e2@oss.qualcomm.com>
-X-Mailer: Claws Mail 4.4.0 (GTK 3.24.52; x86_64-pc-linux-gnu)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="iQl+SD1R"
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 96A0AC19425;
+	Sat, 22 Aug 2026 02:25:28 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1787365528;
+	bh=gxM5H/NgHn7xMpjWvEs/K7X74h5vRMWcdyngUYGNxqs=;
+	h=From:Date:Subject:To:Cc:Reply-To:From;
+	b=iQl+SD1RuPO9HUF/9UX+y0CBxd0PjogiMi1ydRoBNEswuocUZy1ItCFOhHMR0o2BD
+	 INggr82YvCYYRtwhau6XXm3ixc5ibxyRDYW6owfel3Bm0HZ1VMB6W5pwIZh9jHZJT/
+	 Zt8xZwbkXX0RFLoq7cR/CAGtPxG447Q05r5XKp0dCStJFcj4xDoyQN/U1QnmV5qxNE
+	 JM2LIoyKKD7xfwIFqauFtsbE81czBMuzJOo+Q8zzW/VfHDaYd0tlSm0MlhjfruVOgL
+	 Omp6ZQUYzaQoT/Y9F+pjnP4jTnvm0LEf5m8IBvCdETxLYjYnsYVIO8VD9EEN4+sA0D
+	 LfQf6DevEQvVg==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6D329C5DF97;
+	Sat, 22 Aug 2026 02:25:28 +0000 (UTC)
+From: David Heidelberg via B4 Relay <devnull+david.ixit.cz@kernel.org>
+Date: Sat, 22 Aug 2026 04:25:24 +0200
+Subject: [PATCH] clk: qcom: camcc-sdm845/670: Raise CSIPHY timer clock
+ limit
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+Message-Id: <20260822-csiphy-sdm845-limits-v1-1-d360bf7cd38f@ixit.cz>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXMSQqEMBBA0atIrbtA40DwKtILk5Ra4kTKbhTx7
+ kZdvsX/Bwh5JoEyOsDTn4XnKSD5RGC7emoJ2QWDilURa6XQCi/djuJGneU48MiroEkodaZucpd
+ qCOniqeHt2Vbf1/IzPdn1fsF5XqAI/A14AAAA
+X-Change-ID: 20260822-csiphy-sdm845-limits-b1e3dbaf5d38
+To: Bjorn Andersson <andersson@kernel.org>, Stephen Boyd <sboyd@kernel.org>, 
+ Brian Masney <bmasney+clk@redhat.com>, 
+ Jerome Brunet <jbrunet+clk@baylibre.com>, 
+ Bryan O'Donoghue <bryan.odonoghue@linaro.org>, 
+ Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>, 
+ Loic Poulain <loic.poulain@oss.qualcomm.com>, 
+ Mauro Carvalho Chehab <mchehab@kernel.org>, 
+ Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Cc: linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, 
+ phone-devel@vger.kernel.org, David Heidelberg <david@ixit.cz>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=openpgp-sha256; l=5946; i=david@ixit.cz;
+ h=from:subject:message-id;
+ bh=DYQKHB8AunZw7f/1fW2n+DYOf95ExVe+TTy2tBTvI1Q=;
+ b=kA0DAAgBYAI/xNNJIHIByyZiAGqJCJWjGJGYquDI9eAI1VgPj41qzj2+T/sbzqxfO18UYVgEg
+ IkCMwQAAQgAHRYhBNd6Cc/u3Cu9U6cEdGACP8TTSSByBQJqiQiVAAoJEGACP8TTSSBymGoQAL4z
+ /9+pDXWW6rn2EaAPVVhf6SvOk18a4gNEbEELXCqsAMhF3Rqgre878k85Q9eO3tnNyG0P9JWeXn/
+ xDJbrtP2W1EsV+lWZRKwiaKelkeB7VLKndYdoUlXJwJjK+D2WOxXmnOamRFDeU9WWY5zGu62OrK
+ qZp11Ch4Fi7NbQfc1ui6TzYy2DVSj0DYK3lxDF/ChxHbZz05mvfrcXW0zXQCX7Px532P2Eu9PAT
+ xf10lEIpLyLgyf/JMfgn5jJ/x6B5eL85nvBbOzfp06CgHXkxas2PMrvT26dvkwnXFUVSViSIsym
+ lyb2KkWhGQB9A0u+tGQICNuy+TYazu5oj/sTKZ3PT9HxJgXehFa6zydaq+DbVSl2aEG3vbOtd6P
+ 2JcsA25eZEHuMVEI5UNz1jS0q4u7CaLYO2R/QoIq4uyE2QjDQF8iLbhjYQcPatEC7LXFGZYqgF2
+ pBmq584YxUr3mllKrL5lm9TXnxNLsKZN1hwnb39cORkWPFiIdoK9LDqK6j4aEL+7TxWkEfWuQOL
+ vKSOnixIdpQD1PPy0cO7lo11XtIk9beb5I1I/AIgBPfmIEYe7gShR/n/+WPnsNLpzoA+zZORLB/
+ 1iNJJvYaNgWKvvgHhYb9BjpcrpHK+30AyJ6Kn2E7Lq6lcx2pPiSCDupCKwPSX8MlgIO4lqJ/Jxm
+ wJQy5
+X-Developer-Key: i=david@ixit.cz; a=openpgp;
+ fpr=D77A09CFEEDC2BBD53A7047460023FC4D3492072
+X-Endpoint-Received: by B4 Relay for david@ixit.cz/default with auth_id=355
+X-Original-From: David Heidelberg <david@ixit.cz>
+Reply-To: david@ixit.cz
 
-On Fri, 21 Aug 2026 10:24:39 +0530
-Jishnu Prakash <jishnu.prakash@oss.qualcomm.com> wrote:
+From: David Heidelberg <david@ixit.cz>
 
-> Hi Jonathan,
-> 
-> On 8/15/2026 7:38 AM, Jonathan Cameron wrote:
-> > On Fri, 7 Aug 2026 13:37:02 +0530
-> > Jishnu Prakash <jishnu.prakash@oss.qualcomm.com> wrote:
-> >   
-> >> Hi Jonathan,
-> >>
-> >> On 8/7/2026 4:48 AM, Jonathan Cameron wrote:  
-> >>> On Thu, 6 Aug 2026 16:22:16 +0530
-> >>> Jishnu Prakash <jishnu.prakash@oss.qualcomm.com> wrote:
-> >>>     
-> >>>> Hi Jonathan,
-> >>>>
-> >>>> On 8/3/2026 5:44 AM, Jonathan Cameron wrote:    
-> >>>>> On Fri, 31 Jul 2026 23:36:15 +0530
-> >>>>> Jishnu Prakash <jishnu.prakash@oss.qualcomm.com> wrote:
-> >>>>>       
-> >>>>>> PMIC5 Gen4 ADC is similar to PMIC5 Gen3 ADC, with several changes made
-> >>>>>> for improved performance, mostly at the hardware level.
-> >>>>>>
-> >>>>>> One significant software change is that ratiometric conversion resolution
-> >>>>>> has been increased from 14 bits to 16 bits, so the maximum value of
-> >>>>>> these measurements needs to be updated for Gen4. Add a new scaling
-> >>>>>> function for thermistor channels which use this type of conversion.
-> >>>>>>
-> >>>>>> In the latest PMIC arbiter version (v8), there can be up to 4 buses
-> >>>>>> under the PMIC arbiter and 32 PMICs under each bus. In order to
-> >>>>>> support communication between ADC on the master PMIC and ADCs on any
-> >>>>>> of the other PMICs, a field of width 2 bits is added for bus index
-> >>>>>> and the bits for SID are extended from 4 to 5 bits, in the SID
-> >>>>>> register. Add support for this.
-> >>>>>>
-> >>>>>> In addition, it is possible that the master PMIC has ADC of one generation
-> >>>>>> and it needs to communicate with another PMIC with ADC of a different
-> >>>>>> generation.      
-> >>>>>
-> >>>>> "Possible" sounds a bit hypothetical.  Can we state this actually happens
-> >>>>> on some devices?      
-> >>>>
-> >>>> Considering existing upstream platforms, this is applicable for SM8750. I'll
-> >>>> mention this in the next version of the series.    
-> >>>
-> >>> What happens on that platform today?  Wrong values?  Should this be treated
-> >>> as a fix rather than a feature?     
-> >>
-> >> There is no issue on that platform right now as ADC channels needing this
-> >> support are not added yet. SM8750 board files only include pmk8550.dtsi, which
-> >> has the top-level Gen3 ADC peripheral and some ADC channels on the same PMIC.
-> >> Gen4 support would be needed only when PMIH0108 ADC channels are added.  
-> > 
-> > I guess chances of anyone running an older kernel that the device tree on
-> > that device is low as other critical stuff won't be supported?
-> > 
-> > If there is something easy to point to for that, add a note to the patch
-> > description as it justifies this not being a fix.
-> >   
-> 
-> Sorry, I did not fully understand your concern here. Are you asking if
-> SM8750 runs on any older kernels and the lack of Gen4 ADC support may be an
-> issue there?
-> This would not happen - let me try explaining with some more details.
-> 
-> DT support for SM8750 has been present since kernel version 6.14. At that
-> time, it included pmk8550.dtsi, but this file did not have an ADC peripheral
-> at the time.
-> 
-> The Gen3 ADC peripheral was added in pmk8550.dtsi very recently in this series
-> from Neil Armstrong: https://lore.kernel.org/all/20260721-topic-sm8x50-adc5-gen3-v6-0-a507f4a1e537@linaro.org/,
-> and I see this series is present only in linux-next right now.
-> 
-> With this change applied, the ADC peripheral with 3 channels of
-> PMK8550 alone (which is Gen3) would appear for SM8750. This
-> would work as its functionality is fully supported by the existing
-> Gen3 driver.
-> 
-> Gen4 support is needed only when we add full ADC support for SM8750,
-> meaning when we add channels under all its other PMICs (PMIH0108
-> specifically as it's Gen4.).
-> 
-> Would it work if I mention in the commit message that SM8750, added from
-> kernel 6.14 without ADC support initially, would need this mixed-generation
-> support, but only once we add the full ADC support (for all its PMICs)?
+The sdm845 CSIPHY timer clock only listed up to 269.33 MHz, capping the
+supported CSI link frequency at roughly 1.07 GHz
+(CSIPHY timer = link_freq / 4). The Samsung S5K2X7SP camera runs at a
+1.15 GHz link frequency, so camss rejected powering up the
+pipeline with 'Pixel clock is too high for CSIPHY'.
 
-In the ideal world we would assume no coupling between device tree seen
-on a board and the kernel with which a device tree was pushed out.  For
-many devices the delivery path is independent.
+Add a 288 MHz entry to the shared camcc CSIPHY timer frequency table
+(PLL1 VCO 1152 MHz, well within range) and add a 400 MHz entry to the
+sdm845 CSIPHY timer clock_rate tables. The camss min_rate check now
+passes and the timer clock rounds to 288 MHz, matching the ~287.5 MHz
+required by the 1.15 GHz link.
 
-As such we might well see a dt with the new property and a kernel that
-predates it's introduction.  If there is another reason such a kernel
-will simply not boot on that board, then that would be a valid argument
-why we can skip striving for the ideal.  Similarly if the driver
-would not bind for some other reason.  If either of those is the case then
-add a comment to the patch to say so.
+Assisted-by: tencent:hy3
+Signed-off-by: David Heidelberg <david@ixit.cz>
+---
+Tested on SHIFT 6MQ with next-20260820.
+---
+ drivers/clk/qcom/camcc-sdm845.c           |  1 +
+ drivers/media/platform/qcom/camss/camss.c | 14 +++++++-------
+ 2 files changed, 8 insertions(+), 7 deletions(-)
 
-Otherwise, I'd like to see the extra property dt patch (arguably a fix
-but not critical to mark it as such) + a patch for the driver support
-for the new property (also arguably a fix).
+diff --git a/drivers/clk/qcom/camcc-sdm845.c b/drivers/clk/qcom/camcc-sdm845.c
+index 534dc56fc13ca..77bb783b4ef0a 100644
+--- a/drivers/clk/qcom/camcc-sdm845.c
++++ b/drivers/clk/qcom/camcc-sdm845.c
+@@ -250,16 +250,17 @@ static struct clk_rcg2 cam_cc_cphy_rx_clk_src = {
+ 		.ops = &clk_rcg2_ops,
+ 	},
+ };
+ 
+ static const struct freq_tbl ftbl_cam_cc_csi0phytimer_clk_src[] = {
+ 	F(19200000, P_BI_TCXO, 1, 0, 0),
+ 	F(240000000, P_CAM_CC_PLL2_OUT_EVEN, 2, 0, 0),
+ 	F(269333333, P_CAM_CC_PLL1_OUT_EVEN, 3, 0, 0),
++	F(288000000, P_CAM_CC_PLL1_OUT_EVEN, 2, 0, 0),
+ 	{ }
+ };
+ 
+ static struct clk_rcg2 cam_cc_csi0phytimer_clk_src = {
+ 	.cmd_rcgr = 0x5004,
+ 	.mnd_width = 0,
+ 	.hid_width = 5,
+ 	.parent_map = cam_cc_parent_map_0,
+diff --git a/drivers/media/platform/qcom/camss/camss.c b/drivers/media/platform/qcom/camss/camss.c
+index 2123f6388e3d7..e1bf828cf7af2 100644
+--- a/drivers/media/platform/qcom/camss/camss.c
++++ b/drivers/media/platform/qcom/camss/camss.c
+@@ -1070,17 +1070,17 @@ static const struct camss_subdev_resources csiphy_res_670[] = {
+ 			{ .supply = "vdda-phy", .init_load_uA = 42800 },
+ 			{ .supply = "vdda-pll", .init_load_uA = 13900 }
+ 		},
+ 		.clock = { "soc_ahb", "cpas_ahb",
+ 			   "csiphy0", "csiphy0_timer" },
+ 		.clock_rate = { { 0 },
+ 				{ 0 },
+ 				{ 0 },
+-				{ 19200000, 240000000, 269333333 } },
++				{ 19200000, 240000000, 269333333, 400000000 } },
+ 		.reg = { "csiphy0" },
+ 		.interrupt = { "csiphy0" },
+ 		.csiphy = {
+ 			.id = 0,
+ 			.hw_ops = &csiphy_ops_3ph_1_0,
+ 			.formats = &csiphy_formats_sdm845
+ 		}
+ 	},
+@@ -1091,17 +1091,17 @@ static const struct camss_subdev_resources csiphy_res_670[] = {
+ 			{ .supply = "vdda-phy", .init_load_uA = 42800 },
+ 			{ .supply = "vdda-pll", .init_load_uA = 13900 }
+ 		},
+ 		.clock = { "soc_ahb", "cpas_ahb",
+ 			   "csiphy1", "csiphy1_timer" },
+ 		.clock_rate = { { 0 },
+ 				{ 0 },
+ 				{ 0 },
+-				{ 19200000, 240000000, 269333333 } },
++				{ 19200000, 240000000, 269333333, 400000000 } },
+ 		.reg = { "csiphy1" },
+ 		.interrupt = { "csiphy1" },
+ 		.csiphy = {
+ 			.id = 1,
+ 			.hw_ops = &csiphy_ops_3ph_1_0,
+ 			.formats = &csiphy_formats_sdm845
+ 		}
+ 	},
+@@ -1112,17 +1112,17 @@ static const struct camss_subdev_resources csiphy_res_670[] = {
+ 			{ .supply = "vdda-phy", .init_load_uA = 42800 },
+ 			{ .supply = "vdda-pll", .init_load_uA = 13900 }
+ 		},
+ 		.clock = { "soc_ahb", "cpas_ahb",
+ 			   "csiphy2", "csiphy2_timer" },
+ 		.clock_rate = { { 0 },
+ 				{ 0 },
+ 				{ 0 },
+-				{ 19200000, 240000000, 269333333 } },
++				{ 19200000, 240000000, 269333333, 400000000 } },
+ 		.reg = { "csiphy2" },
+ 		.interrupt = { "csiphy2" },
+ 		.csiphy = {
+ 			.id = 2,
+ 			.hw_ops = &csiphy_ops_3ph_1_0,
+ 			.formats = &csiphy_formats_sdm845
+ 		}
+ 	}
+@@ -1263,17 +1263,17 @@ static const struct camss_subdev_resources csiphy_res_845[] = {
+ 				"csiphy0_timer_src", "csiphy0_timer" },
+ 		.clock_rate = { { 0 },
+ 				{ 0 },
+ 				{ 0 },
+ 				{ 0 },
+ 				{ 0 },
+ 				{ 0 },
+ 				{ 0 },
+-				{ 19200000, 240000000, 269333333 } },
++				{ 19200000, 240000000, 269333333, 400000000 } },
+ 		.reg = { "csiphy0" },
+ 		.interrupt = { "csiphy0" },
+ 		.csiphy = {
+ 			.id = 0,
+ 			.hw_ops = &csiphy_ops_3ph_1_0,
+ 			.formats = &csiphy_formats_sdm845
+ 		}
+ 	},
+@@ -1286,17 +1286,17 @@ static const struct camss_subdev_resources csiphy_res_845[] = {
+ 				"csiphy1_timer_src", "csiphy1_timer" },
+ 		.clock_rate = { { 0 },
+ 				{ 0 },
+ 				{ 0 },
+ 				{ 0 },
+ 				{ 0 },
+ 				{ 0 },
+ 				{ 0 },
+-				{ 19200000, 240000000, 269333333 } },
++				{ 19200000, 240000000, 269333333, 400000000 } },
+ 		.reg = { "csiphy1" },
+ 		.interrupt = { "csiphy1" },
+ 		.csiphy = {
+ 			.id = 1,
+ 			.hw_ops = &csiphy_ops_3ph_1_0,
+ 			.formats = &csiphy_formats_sdm845
+ 		}
+ 	},
+@@ -1309,17 +1309,17 @@ static const struct camss_subdev_resources csiphy_res_845[] = {
+ 				"csiphy2_timer_src", "csiphy2_timer" },
+ 		.clock_rate = { { 0 },
+ 				{ 0 },
+ 				{ 0 },
+ 				{ 0 },
+ 				{ 0 },
+ 				{ 0 },
+ 				{ 0 },
+-				{ 19200000, 240000000, 269333333 } },
++				{ 19200000, 240000000, 269333333, 400000000 } },
+ 		.reg = { "csiphy2" },
+ 		.interrupt = { "csiphy2" },
+ 		.csiphy = {
+ 			.id = 2,
+ 			.hw_ops = &csiphy_ops_3ph_1_0,
+ 			.formats = &csiphy_formats_sdm845
+ 		}
+ 	},
+@@ -1332,17 +1332,17 @@ static const struct camss_subdev_resources csiphy_res_845[] = {
+ 				"csiphy3_timer_src", "csiphy3_timer" },
+ 		.clock_rate = { { 0 },
+ 				{ 0 },
+ 				{ 0 },
+ 				{ 0 },
+ 				{ 0 },
+ 				{ 0 },
+ 				{ 0 },
+-				{ 19200000, 240000000, 269333333 } },
++				{ 19200000, 240000000, 269333333, 400000000 } },
+ 		.reg = { "csiphy3" },
+ 		.interrupt = { "csiphy3" },
+ 		.csiphy = {
+ 			.id = 3,
+ 			.hw_ops = &csiphy_ops_3ph_1_0,
+ 			.formats = &csiphy_formats_sdm845
+ 		}
+ 	}
 
-That would cover the older driver and decision on whether to backport
-that could then be made (or left to downstream users).
+---
+base-commit: 7079a12d7506b07fb53b54a664bfad5fa9b16d70
+change-id: 20260822-csiphy-sdm845-limits-b1e3dbaf5d38
 
-On top of that then build the new compatible support.
+Best regards,
+--  
+David Heidelberg <david@ixit.cz>
 
-Superficially this looks to me like a bit of minor patch reorg so
-I think it is worth doing even if we don't expect to ever run into the
-theoretical problems form a miss match!
-
-Thanks
-
-Jonathan
-
-> 
-> Thanks,
-> Jishnu
-> 
-> 
-> > Thanks,
-> > 
-> > Jonathan  
-> 
 
