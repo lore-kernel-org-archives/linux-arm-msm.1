@@ -1,38 +1,37 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8A4333655E6;
-	Sun, 23 Aug 2026 08:35:51 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6BC14364EB0;
+	Sun, 23 Aug 2026 09:09:56 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787474151; cv=none; b=lZYLkhSGHL559id2Z4c4UOVO4BtDU1aZz9p5w/VT64gwRusHOCXtLVXzYHvXZjIMKqAbfeRlOErzOigz8o9cz7zLtWNJyrEg1XTmybJ//KHzTo2Z7W1/OW8XmNEqGlUItAgOtB2+CGLxFn4O07J9Oh6q7jqUTjIQnw3QPXzze74=
+	t=1787476197; cv=none; b=sR0Sza0c1c7F54nbRsfCJqzIbhOws+bdC+TJlnjQYHZUEmyAFL/O9D0lcF5v0l9twyyyTeqMGljHmBCflzd2gAyNasomQuSllQeha4cJY6le5d6VfFk3M5FIpkxVXwZK6LncmAMkP+yJmZjs+5/+wjKUDImRrZKvvnWvwxCHPb8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787474151; c=relaxed/simple;
-	bh=FSFoCK6IHrRjmW5HyaObQ6LDcPClFVEMEOre0yaXIkE=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=qXPiDBoUVoZqcazHCCMqRRjTcwEwvLDG0C4nqXQFEfwgMSZ77mwDfULaORUJHo/fKPORKwk3AaEHNWO6JK6unOeCYgwJx5o/P9Mw0XKyPE3uuXhUL2xU8uQ31cSChCrzCriY3w47N88iuAYL8XzL9H2epG0qTq4J50ZNHdNbJQU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=cS7YrKqC; arc=none smtp.client-ip=10.30.226.201
+	s=arc-20240116; t=1787476197; c=relaxed/simple;
+	bh=+qAhjexHSsdSLImM5dnJqcRevK8xSg9zeLPfFnsSiRA=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=ibRW63KnAqzYKBAcldnt262LywD52FPEaNodPE28vyaT6c82QOecnMtKiOMkxIBnmViJQNr38p5vvGDumBHZQYnjpUSWDa8aEOIhx66rkwe5vPS37DNGT0iLG3UZHZMQGe8U3vXOjtDbgibphAfD4DPF9hKqtROYgeDey8GN8qU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=hL9hAo3u; arc=none smtp.client-ip=10.30.226.201
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="cS7YrKqC"
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 19705C2BCC7;
-	Sun, 23 Aug 2026 08:35:51 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="hL9hAo3u"
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 5FBDAC2BCB8;
+	Sun, 23 Aug 2026 09:09:56 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1787474151;
-	bh=FSFoCK6IHrRjmW5HyaObQ6LDcPClFVEMEOre0yaXIkE=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
-	b=cS7YrKqCIzovtMAzJrMmuk9xO6kJdNBaSaZNr2leWTWFxaT4vJidCAGDhJiCuHxpQ
-	 O621ZIlDJ5kKjhxvEK/GtizokalTpAlgv/jNqn4jKRS7ZdBpiKC0HRUpmpsfV8GvE7
-	 c5/LlK3XweobHYwqYxCoQKlOJ0roAqaimtRGmmJig1nRtuyJWlpmMQJ+HLbXi+ZXnX
-	 q8m6aYmgTaje7iSdjMKaSw/Rc7loV9pyx5dgctmYCR9gHbQrfLD9TbR7iYfmSBmtRw
-	 3mMM8A+/R2H0IEEhJrzbrHew/16LITfFGdtBC5VjyAUy4oOlusohcA8LgtnyBfijrx
-	 qqFuLprEr5qbw==
+	s=k20201202; t=1787476196;
+	bh=+qAhjexHSsdSLImM5dnJqcRevK8xSg9zeLPfFnsSiRA=;
+	h=From:Date:Subject:To:Cc:Reply-To:From;
+	b=hL9hAo3u+nZkF50DHVQ+kksdojKFZTjNS/7T90z5FPYmiUoq5fJ9q27bQFNKRzSpF
+	 WpCg3Dy+mjDvYhzId6oCpRWxKC6wCIqiNau9wxZiT2dTFRJ63H/t7gFJocCkqYANv5
+	 XIuWR1yCbAHZTNK/3FXqZdpw4YvZ+ENd3WRoy3CqCe3BctyypJ++3Vg4gsGxy6YKhk
+	 cGtcgwu8M38GE/On0sRbuYLvD6l5bWKjCkzZaIqm1tDGNs5uhyOYat8kxWGELogZzb
+	 ccVQC0WrsfVZdN9FS4Rd/XliF0jrXUKxxcL4MUYMKdnw/hAdeeuy0PM8YF4iapYZ/9
+	 63UEbAXjH4sXg==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E773FC5DF81;
-	Sun, 23 Aug 2026 08:35:50 +0000 (UTC)
-From: Jens Glathe via B4 Relay <devnull+jens.glathe.oldschoolsolutions.biz@kernel.org>
-Date: Sun, 23 Aug 2026 10:35:28 +0200
-Subject: [PATCH 1/2] arm64: dts: qcom: sc8280xp-microsoft-blackrock: enable
- DisplayPort audio
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 33AC2C5DF97;
+	Sun, 23 Aug 2026 09:09:56 +0000 (UTC)
+From: David Heidelberg via B4 Relay <devnull+david.ixit.cz@kernel.org>
+Date: Sun, 23 Aug 2026 11:09:55 +0200
+Subject: [PATCH] ASoC: wcd-mbhc-v2: Fix incorrect properties names and
+ typos
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -41,282 +40,124 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260823-blackrock-audio-v1-1-f319387fc6a6@oldschoolsolutions.biz>
-References: <20260823-blackrock-audio-v1-0-f319387fc6a6@oldschoolsolutions.biz>
-In-Reply-To: <20260823-blackrock-audio-v1-0-f319387fc6a6@oldschoolsolutions.biz>
-To: Bjorn Andersson <andersson@kernel.org>, 
- Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>, 
- Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>
-Cc: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, 
- =?utf-8?q?J=C3=A9r=C3=B4me_de_Bretagne?= <jerome.debretagne@gmail.com>, 
- linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
- linux-kernel@vger.kernel.org, 
- Jens Glathe <jens.glathe@oldschoolsolutions.biz>
-X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1787474149; l=5573;
- i=jens.glathe@oldschoolsolutions.biz; s=20240919;
+Message-Id: <20260823-wcd-dt-typo-fix-v1-1-a71b458e0d31@ixit.cz>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXMyw5AMBCF4VeRWZuENq6vIha0g7FA2rpFvLti+
+ Z3k/BdYMkwWyuACQxtbniePOAxADc3UE7L2BhGJNMqFxF1p1A7duczY8YFFHgstVZF1lIB/LYb
+ 8/BWr+rdd25GUezNw3w/J3L1fcwAAAA==
+X-Change-ID: 20260823-wcd-dt-typo-fix-9812d3c97fe5
+To: Srinivas Kandagatla <srini@kernel.org>, 
+ Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>, 
+ Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>
+Cc: linux-sound@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, David Heidelberg <david@ixit.cz>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3259; i=david@ixit.cz;
  h=from:subject:message-id;
- bh=32rGsJ0/lgmsGUI4MsIonhCViNoJkotGVHvYJscYBpo=;
- b=IhYtoCQwM8xR2VJWBBhq9Q3iLMStKQEBR2KoBO39aWk5E+uI2y9BauTVy+sj7fRtv9GFQAcTc
- 8V19dos4uDbByTPztWu+bgII5FoNzl0AjOkFh+HVpUuDSULjt7Z1HHc
-X-Developer-Key: i=jens.glathe@oldschoolsolutions.biz; a=ed25519;
- pk=JcRJqJc/y8LsxOlPakALD3juGfOKmFBWtO+GfELMJVg=
-X-Endpoint-Received: by B4 Relay for
- jens.glathe@oldschoolsolutions.biz/20240919 with auth_id=216
-X-Original-From: Jens Glathe <jens.glathe@oldschoolsolutions.biz>
-Reply-To: jens.glathe@oldschoolsolutions.biz
+ bh=b2eL9Z1VE+RnX6fFKw1IaZPJWpmERV04U6h9XPnL7FM=;
+ b=owEBbQKS/ZANAwAIAWACP8TTSSByAcsmYgBqirjjWSeyHMdFLZStFtxonLbX/0wNn4Ih208NO
+ gOX1pRZVAuJAjMEAAEIAB0WIQTXegnP7twrvVOnBHRgAj/E00kgcgUCaoq44wAKCRBgAj/E00kg
+ ckQeD/9B6oA9spMyujeC7MMahuIKZjOJrxCHZX1XO04klOuazMbTa079X7ZFRIsdEzYuMrS2Rhq
+ sD8Bkx7HicI9wUDPAc2R/mCVJqTmD0jozAOskovrWbIQHd+QHVmuqrdPvbLmRZK+190mdWNtFQu
+ Y4S2dJZ5kUu5IsF7OysLjPtIAKD0BEZ1xX+xJsEwhFlLxNgzF28hccrUKYN/ksGqByG48gCRe9c
+ zveMI+DCXiOzSYH2yAw1gCdBvO7PvTOQ06gIWNZpjFzJgQENzCRu8NE1Lq9yJ47sSH8AwqWm1z0
+ 0qoKlX+NURDMAoUtmDurXnW9zyRLY+Deu8Ut599iuasw6bUVwteS03ckk0lcwr22W7GFW4fnoS+
+ RQD4wBZJxsyR6gtjPxfnbR1QLk7Pea4/AOYuHrWAX/hcs1beeHU7ux17jIUWxmMNOFZy2MSFZi+
+ 6UVNODX9TgCYs3ivfY/zRiijPStAVvcBmB/8Rv1ePGZzPtNuw9TFRxh83U6du+euvoKHtB4I3hE
+ XUH4V73NkJKEe3a6R1Zl6ukmcISy3WhWn77EzRhk9RP7damLo0qfJgEUf3ks3RR6wp03pZ1YxgY
+ pNLGWUWHt2ww7viCntaazdY9/MwUU3/X4MIHkaKfGyx7w29uvvy9FZS3M9Sc2Ye3kByvX2JoTtZ
+ o2aAHVt1b0NrIBg==
+X-Developer-Key: i=david@ixit.cz; a=openpgp;
+ fpr=D77A09CFEEDC2BBD53A7047460023FC4D3492072
+X-Endpoint-Received: by B4 Relay for david@ixit.cz/default with auth_id=355
+X-Original-From: David Heidelberg <david@ixit.cz>
+Reply-To: david@ixit.cz
 
-From: Jens Glathe <jens.glathe@oldschoolsolutions.biz>
+From: David Heidelberg <david@ixit.cz>
 
-The Windows Dev Kit 2023 has no built-in speakers, microphones or
-headphone jack. Likewise the device with the same mainboard, Surface
-Pro 9 5G [1]. The previous WCD938x / WSA / VA sound card definition
-was therefore non-functional.
+Improves debugging experience.
 
-Replace the unused codec nodes, SoundWire controllers, LPASS macros
-and related pinctrl with DisplayPort DAI links (DP0/DP1/DP2) so that
-audio is available over the DP connectors. Add the required
-sound-name-prefix properties and update the card model name to the
-conventional SC8280XP-MICROSOFT-BLACKROCK form.
-
-[1]: https://support.microsoft.com/en-us/surface/models/surface-pro-9-features-and-specs
-
-Fixes: 16a7fed11714 ("arm64: dts: qcom: sc8280xp-blackrock: dt definition for WDK2023")
-Signed-off-by: Jens Glathe <jens.glathe@oldschoolsolutions.biz>
+Fixes: 0e5c9e7ff899 ("ASoC: codecs: wcd: add multi button Headset detection support")
+Signed-off-by: David Heidelberg <david@ixit.cz>
 ---
- .../boot/dts/qcom/sc8280xp-microsoft-blackrock.dts | 134 +++------------------
- 1 file changed, 20 insertions(+), 114 deletions(-)
+ sound/soc/codecs/wcd-mbhc-v2.c | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/arch/arm64/boot/dts/qcom/sc8280xp-microsoft-blackrock.dts b/arch/arm64/boot/dts/qcom/sc8280xp-microsoft-blackrock.dts
-index 4f4b5f4285ec2..a94141d670f62 100644
---- a/arch/arm64/boot/dts/qcom/sc8280xp-microsoft-blackrock.dts
-+++ b/arch/arm64/boot/dts/qcom/sc8280xp-microsoft-blackrock.dts
-@@ -28,32 +28,6 @@ aliases {
- 		serial1 = &uart2;
- 	};
+diff --git a/sound/soc/codecs/wcd-mbhc-v2.c b/sound/soc/codecs/wcd-mbhc-v2.c
+index bb0c8478a8eb5..850be84d65ceb 100644
+--- a/sound/soc/codecs/wcd-mbhc-v2.c
++++ b/sound/soc/codecs/wcd-mbhc-v2.c
+@@ -859,17 +859,17 @@ static int wcd_get_voltage_from_adc(u8 val, int micbias)
+ static int wcd_measure_adc_continuous(struct wcd_mbhc *mbhc)
+ {
+ 	u8 adc_result;
+ 	int output_mv;
+ 	int retry = 3;
+ 	u8 adc_en;
  
--	wcd938x: audio-codec {
--		compatible = "qcom,wcd9380-codec";
--
--		pinctrl-0 = <&wcd_default>;
--		pinctrl-names = "default";
--
--		reset-gpios = <&tlmm 106 GPIO_ACTIVE_LOW>;
--
--		vdd-buck-supply = <&vreg_s10b>;
--		vdd-rxtx-supply = <&vreg_s10b>;
--		vdd-io-supply = <&vreg_s10b>;
--		vdd-mic-bias-supply = <&vreg_bob>;
--
--		qcom,micbias1-microvolt = <1800000>;
--		qcom,micbias2-microvolt = <1800000>;
--		qcom,micbias3-microvolt = <1800000>;
--		qcom,micbias4-microvolt = <1800000>;
--		qcom,mbhc-buttons-vthreshold-microvolt = <75000 150000 237000 500000 500000 500000 500000 500000>;
--		qcom,mbhc-headset-vthreshold-microvolt = <1700000>;
--		qcom,mbhc-headphone-vthreshold-microvolt = <50000>;
--		qcom,rx-device = <&wcd_rx>;
--		qcom,tx-device = <&wcd_tx>;
--
--		#sound-dai-cells = <1>;
--	};
--
- 	dp3_connector: connector {
- 		compatible = "dp-connector";
- 		label = "DP-3";
-@@ -585,6 +559,7 @@ &mdss0 {
- };
+ 	/* Pre-requisites for ADC continuous measurement */
+-	/* Read legacy electircal detection and disable */
++	/* Read legacy electrical detection and disable */
+ 	wcd_mbhc_write_field(mbhc, WCD_MBHC_ELECT_SCHMT_ISRC, 0x00);
+ 	/* Set ADC to continuous measurement */
+ 	wcd_mbhc_write_field(mbhc, WCD_MBHC_ADC_MODE, 1);
+ 	/* Read ADC Enable bit to restore after adc measurement */
+ 	adc_en = wcd_mbhc_read_field(mbhc, WCD_MBHC_ADC_EN);
+ 	/* Disable ADC_ENABLE bit */
+ 	wcd_mbhc_write_field(mbhc, WCD_MBHC_ADC_EN, 0);
+ 	/* Disable MBHC FSM */
+@@ -960,17 +960,17 @@ static int wcd_check_cross_conn(struct wcd_mbhc *mbhc)
+ 	u8 adc_mode, elect_ctl, adc_en, fsm_en;
+ 	int hphl_adc_res, hphr_adc_res;
+ 	bool is_cross_conn = false;
  
- &mdss0_dp0 {
-+	sound-name-prefix = "DisplayPort0";
- 	status = "okay";
- };
+ 	/* If PA is enabled, dont check for cross-connection */
+ 	if (wcd_mbhc_read_field(mbhc, WCD_MBHC_HPH_PA_EN))
+ 		return -EINVAL;
  
-@@ -594,6 +569,7 @@ &mdss0_dp0_out {
- };
+-	/* Read legacy electircal detection and disable */
++	/* Read legacy electrical detection and disable */
+ 	elect_ctl = wcd_mbhc_read_field(mbhc, WCD_MBHC_ELECT_SCHMT_ISRC);
+ 	wcd_mbhc_write_field(mbhc, WCD_MBHC_ELECT_SCHMT_ISRC, 0);
  
- &mdss0_dp1 {
-+	sound-name-prefix = "DisplayPort1";
- 	status = "okay";
- };
+ 	/* Read and set ADC to single measurement */
+ 	adc_mode = wcd_mbhc_read_field(mbhc, WCD_MBHC_ADC_MODE);
+ 	/* Read ADC Enable bit to restore after adc measurement */
+ 	adc_en = wcd_mbhc_read_field(mbhc, WCD_MBHC_ADC_EN);
+ 	/* Read FSM status */
+@@ -1465,24 +1465,24 @@ int wcd_dt_parse_mbhc_data(struct device *dev, struct wcd_mbhc_config *cfg)
+ 	if (of_property_read_bool(np, "qcom,ground-jack-type-normally-closed"))
+ 		cfg->gnd_swh = false;
+ 	else
+ 		cfg->gnd_swh = true;
  
-@@ -603,6 +579,7 @@ &mdss0_dp1_out {
- };
+ 	ret = of_property_read_u32(np, "qcom,mbhc-headset-vthreshold-microvolt",
+ 				   &microvolt);
+ 	if (ret)
+-		dev_dbg(dev, "missing qcom,mbhc-hs-mic-max-vthreshold--microvolt in dt node\n");
++		dev_dbg(dev, "missing qcom,mbhc-headset-vthreshold-microvolt in dt node\n");
+ 	else
+ 		cfg->hs_thr = microvolt/1000;
  
- &mdss0_dp2 {
-+	sound-name-prefix = "DisplayPort2";
- 	compatible = "qcom,sc8280xp-dp";
+ 	ret = of_property_read_u32(np, "qcom,mbhc-headphone-vthreshold-microvolt",
+ 				   &microvolt);
+ 	if (ret)
+-		dev_dbg(dev, "missing qcom,mbhc-hs-mic-min-vthreshold-microvolt	entry\n");
++		dev_dbg(dev, "missing qcom,mbhc-headphone-vthreshold-microvolt entry\n");
+ 	else
+ 		cfg->hph_thr = microvolt/1000;
  
- 	data-lanes = <0 1 2 3>;
-@@ -858,17 +835,17 @@ &rxmacro {
- 
- &sound {
- 	compatible = "qcom,sc8280xp-sndcard";
--	model = "microsoft/blackrock";
-+	model = "SC8280XP-MICROSOFT-BLACKROCK";
- 
--	wcd-playback-dai-link {
--		link-name = "WCD Playback";
-+	dp0-dai-link {
-+		link-name = "DP0 Playback";
- 
--		cpu {
--			sound-dai = <&q6apmbedai RX_CODEC_DMA_RX_0>;
-+		codec {
-+			sound-dai = <&mdss0_dp0>;
- 		};
- 
--		codec {
--			sound-dai = <&wcd938x 0>, <&swr1 0>, <&rxmacro 0>;
-+		cpu {
-+			sound-dai = <&q6apmbedai DISPLAY_PORT_RX_0>;
- 		};
- 
- 		platform {
-@@ -876,15 +853,15 @@ platform {
- 		};
- 	};
- 
--	wcd-capture-dai-link {
--		link-name = "WCD Capture";
-+	dp1-dai-link {
-+		link-name = "DP1 Playback";
- 
--		cpu {
--			sound-dai = <&q6apmbedai TX_CODEC_DMA_TX_3>;
-+		codec {
-+			sound-dai = <&mdss0_dp1>;
- 		};
- 
--		codec {
--			sound-dai = <&wcd938x 1>, <&swr2 0>, <&txmacro 0>;
-+		cpu {
-+			sound-dai = <&q6apmbedai DISPLAY_PORT_RX_1>;
- 		};
- 
- 		platform {
-@@ -892,67 +869,23 @@ platform {
- 		};
- 	};
- 
--	wsa-dai-link {
--		link-name = "WSA Playback";
--
--		cpu {
--			sound-dai = <&q6apmbedai WSA_CODEC_DMA_RX_0>;
--		};
-+	dp2-dai-link {
-+		link-name = "DP2 Playback";
- 
- 		codec {
--			sound-dai = <&swr0 0>, <&wsamacro 0>;
--		};
--
--		platform {
--			sound-dai = <&q6apm>;
-+			sound-dai = <&mdss0_dp2>;
- 		};
--	};
--
--	va-dai-link {
--		link-name = "VA Capture";
- 
- 		cpu {
--			sound-dai = <&q6apmbedai VA_CODEC_DMA_TX_0>;
-+			sound-dai = <&q6apmbedai DISPLAY_PORT_RX_2>;
- 		};
- 
- 		platform {
- 			sound-dai = <&q6apm>;
- 		};
--
--		codec {
--			sound-dai = <&vamacro 0>;
--		};
--	};
--};
--
--&swr0 {
--	status = "okay";
--};
--
--&swr1 {
--	status = "okay";
--
--	wcd_rx: wcd9380-rx@0,4 {
--		compatible = "sdw20217010d00";
--		reg = <0 4>;
--		qcom,rx-port-mapping = <1 2 3 4 5>;
--	};
--};
--
--&swr2 {
--	status = "okay";
--
--	wcd_tx: wcd9380-tx@0,3 {
--		compatible = "sdw20217010d00";
--		reg = <0 3>;
--		qcom,tx-port-mapping = <1 1 2 3>;
- 	};
- };
- 
--&txmacro {
--	status = "okay";
--};
--
- &uart2 {
- 	pinctrl-0 = <&uart2_default>;
- 	pinctrl-names = "default";
-@@ -1076,31 +1009,12 @@ &usb_2_qmpphy0 {
- 	status = "okay";
- };
- 
--&vamacro {
--	pinctrl-0 = <&dmic01_default>, <&dmic23_default>;
--	pinctrl-names = "default";
--
--	vdd-micb-supply = <&vreg_s10b>;
--
--	qcom,dmic-sample-rate = <4800000>;
--
--	status = "okay";
--};
--
--&wsamacro {
--	status = "okay";
--};
--
- &xo_board_clk {
- 	clock-frequency = <38400000>;
- };
- 
- /* PINCTRL */
- 
--&lpass_tlmm {
--	status = "okay";
--};
--
- &pmc8280_1_gpios {
- 	misc_3p3_reg_en: misc-3p3-reg-en-state {
- 		pins = "gpio1";
-@@ -1302,14 +1216,6 @@ usb2_en_state: usb2-en-state {
- 		output-low;
- 	};
- 
--	wcd_default: wcd-default-state {
--		reset-pins {
--			pins = "gpio106";
--			function = "gpio";
--			bias-disable;
--		};
--	};
--
- 	wlan_en: wlan-en-state {
- 		pins = "gpio134";
- 		function = "gpio";
+ 	ret = of_property_read_u32_array(np,
+ 					 "qcom,mbhc-buttons-vthreshold-microvolt",
+ 					 &cfg->btn_high[0],
+ 					 WCD_MBHC_DEF_BUTTONS);
+ 	if (ret)
 
--- 
-2.53.0
+---
+base-commit: 7079a12d7506b07fb53b54a664bfad5fa9b16d70
+change-id: 20260823-wcd-dt-typo-fix-9812d3c97fe5
+
+Best regards,
+--  
+David Heidelberg <david@ixit.cz>
 
 
