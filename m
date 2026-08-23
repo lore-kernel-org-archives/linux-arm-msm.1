@@ -1,163 +1,130 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from ixit.cz (ixit.cz [84.42.129.46])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6BC14364EB0;
-	Sun, 23 Aug 2026 09:09:56 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6501E2472A2;
+	Sun, 23 Aug 2026 11:36:49 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=84.42.129.46
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787476197; cv=none; b=sR0Sza0c1c7F54nbRsfCJqzIbhOws+bdC+TJlnjQYHZUEmyAFL/O9D0lcF5v0l9twyyyTeqMGljHmBCflzd2gAyNasomQuSllQeha4cJY6le5d6VfFk3M5FIpkxVXwZK6LncmAMkP+yJmZjs+5/+wjKUDImRrZKvvnWvwxCHPb8=
+	t=1787485011; cv=none; b=MFRJzmPHGCWAPeL0F5Qe3ve99wKrwN3Afc3MViI994AUzyu7xSVRg09rdtRi74Qt/ADMvbunzkLFjCBJRAr0HOUZ7tzxouBZoe1cZSt9NBMzCCeIZLz+bNwsT3+vNKOLm/MoeIADYrKLiGc9HYS0uGFYU8jrgZwovnPrWFj8uUo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787476197; c=relaxed/simple;
-	bh=+qAhjexHSsdSLImM5dnJqcRevK8xSg9zeLPfFnsSiRA=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=ibRW63KnAqzYKBAcldnt262LywD52FPEaNodPE28vyaT6c82QOecnMtKiOMkxIBnmViJQNr38p5vvGDumBHZQYnjpUSWDa8aEOIhx66rkwe5vPS37DNGT0iLG3UZHZMQGe8U3vXOjtDbgibphAfD4DPF9hKqtROYgeDey8GN8qU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=hL9hAo3u; arc=none smtp.client-ip=10.30.226.201
+	s=arc-20240116; t=1787485011; c=relaxed/simple;
+	bh=qsavDS75FwaA2nzZMPJxqb/YthIsUW4ps5oUPuXGwmc=;
+	h=Message-ID:Date:MIME-Version:Subject:From:To:Cc:References:
+	 In-Reply-To:Content-Type; b=EbYn3OW6HL9BI6a4Mw7nuMhiIgvv/iuQAe7xlbp17GPGBfzpvcsLsplm/nEMoef3A6bweIq4Us9nSrY0zExKv047xM8fI33ZxfwRgc4omFa/whBPJ6WakLgf5Rj0LtUN8hE1byetLKzmmnoJgca+H5jnUrLuzjVCKIlaoeVKnws=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=ixit.cz; spf=pass smtp.mailfrom=ixit.cz; dkim=pass (1024-bit key) header.d=ixit.cz header.i=@ixit.cz header.b=NisWJ7l6; arc=none smtp.client-ip=84.42.129.46
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=ixit.cz
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ixit.cz
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="hL9hAo3u"
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 5FBDAC2BCB8;
-	Sun, 23 Aug 2026 09:09:56 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1787476196;
-	bh=+qAhjexHSsdSLImM5dnJqcRevK8xSg9zeLPfFnsSiRA=;
-	h=From:Date:Subject:To:Cc:Reply-To:From;
-	b=hL9hAo3u+nZkF50DHVQ+kksdojKFZTjNS/7T90z5FPYmiUoq5fJ9q27bQFNKRzSpF
-	 WpCg3Dy+mjDvYhzId6oCpRWxKC6wCIqiNau9wxZiT2dTFRJ63H/t7gFJocCkqYANv5
-	 XIuWR1yCbAHZTNK/3FXqZdpw4YvZ+ENd3WRoy3CqCe3BctyypJ++3Vg4gsGxy6YKhk
-	 cGtcgwu8M38GE/On0sRbuYLvD6l5bWKjCkzZaIqm1tDGNs5uhyOYat8kxWGELogZzb
-	 ccVQC0WrsfVZdN9FS4Rd/XliF0jrXUKxxcL4MUYMKdnw/hAdeeuy0PM8YF4iapYZ/9
-	 63UEbAXjH4sXg==
-Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 33AC2C5DF97;
-	Sun, 23 Aug 2026 09:09:56 +0000 (UTC)
-From: David Heidelberg via B4 Relay <devnull+david.ixit.cz@kernel.org>
-Date: Sun, 23 Aug 2026 11:09:55 +0200
-Subject: [PATCH] ASoC: wcd-mbhc-v2: Fix incorrect properties names and
- typos
+	dkim=pass (1024-bit key) header.d=ixit.cz header.i=@ixit.cz header.b="NisWJ7l6"
+Received: from [172.16.124.192] (ip-78-44-13-22.bb.vodafone.cz [78.44.13.22])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange x25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by ixit.cz (Postfix) with ESMTPSA id 6B7025340655;
+	Sun, 23 Aug 2026 13:36:46 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ixit.cz; s=dkim;
+	t=1787485006;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+	bh=rv08Lm3LOD0foXTOq5xqoZa2NwR2DHy3i20jUMhz/xc=;
+	b=NisWJ7l6iUQ9WJmJ2FuE3siRPuswQsc82yqwJcVBKqSiJb7H01crZbALSLxpsMuQ4HxMaq
+	Nd1q189YwjuMIAOvUsLJt473Z62zi7Ym2JHFDowLwFpzuu0K/9j0d2oS7lLAcV1to6Ta0U
+	/rr5totujNaXTvpTKWNGdNRUpfcwCgc=
+Message-ID: <7df4c69d-9d7b-418f-b7dc-a03a710dfb13@ixit.cz>
+Date: Sun, 23 Aug 2026 13:36:45 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260823-wcd-dt-typo-fix-v1-1-a71b458e0d31@ixit.cz>
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXMyw5AMBCF4VeRWZuENq6vIha0g7FA2rpFvLti+
- Z3k/BdYMkwWyuACQxtbniePOAxADc3UE7L2BhGJNMqFxF1p1A7duczY8YFFHgstVZF1lIB/LYb
- 8/BWr+rdd25GUezNw3w/J3L1fcwAAAA==
-X-Change-ID: 20260823-wcd-dt-typo-fix-9812d3c97fe5
-To: Srinivas Kandagatla <srini@kernel.org>, 
- Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>, 
- Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>
-Cc: linux-sound@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
- linux-kernel@vger.kernel.org, David Heidelberg <david@ixit.cz>
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3259; i=david@ixit.cz;
- h=from:subject:message-id;
- bh=b2eL9Z1VE+RnX6fFKw1IaZPJWpmERV04U6h9XPnL7FM=;
- b=owEBbQKS/ZANAwAIAWACP8TTSSByAcsmYgBqirjjWSeyHMdFLZStFtxonLbX/0wNn4Ih208NO
- gOX1pRZVAuJAjMEAAEIAB0WIQTXegnP7twrvVOnBHRgAj/E00kgcgUCaoq44wAKCRBgAj/E00kg
- ckQeD/9B6oA9spMyujeC7MMahuIKZjOJrxCHZX1XO04klOuazMbTa079X7ZFRIsdEzYuMrS2Rhq
- sD8Bkx7HicI9wUDPAc2R/mCVJqTmD0jozAOskovrWbIQHd+QHVmuqrdPvbLmRZK+190mdWNtFQu
- Y4S2dJZ5kUu5IsF7OysLjPtIAKD0BEZ1xX+xJsEwhFlLxNgzF28hccrUKYN/ksGqByG48gCRe9c
- zveMI+DCXiOzSYH2yAw1gCdBvO7PvTOQ06gIWNZpjFzJgQENzCRu8NE1Lq9yJ47sSH8AwqWm1z0
- 0qoKlX+NURDMAoUtmDurXnW9zyRLY+Deu8Ut599iuasw6bUVwteS03ckk0lcwr22W7GFW4fnoS+
- RQD4wBZJxsyR6gtjPxfnbR1QLk7Pea4/AOYuHrWAX/hcs1beeHU7ux17jIUWxmMNOFZy2MSFZi+
- 6UVNODX9TgCYs3ivfY/zRiijPStAVvcBmB/8Rv1ePGZzPtNuw9TFRxh83U6du+euvoKHtB4I3hE
- XUH4V73NkJKEe3a6R1Zl6ukmcISy3WhWn77EzRhk9RP7damLo0qfJgEUf3ks3RR6wp03pZ1YxgY
- pNLGWUWHt2ww7viCntaazdY9/MwUU3/X4MIHkaKfGyx7w29uvvy9FZS3M9Sc2Ye3kByvX2JoTtZ
- o2aAHVt1b0NrIBg==
-X-Developer-Key: i=david@ixit.cz; a=openpgp;
- fpr=D77A09CFEEDC2BBD53A7047460023FC4D3492072
-X-Endpoint-Received: by B4 Relay for david@ixit.cz/default with auth_id=355
-X-Original-From: David Heidelberg <david@ixit.cz>
-Reply-To: david@ixit.cz
-
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v6 2/2] input: misc: Add Qualcomm SPMI PMIC haptics driver
 From: David Heidelberg <david@ixit.cz>
+To: Fenglin Wu <fenglin.wu@oss.qualcomm.com>, linux-arm-msm@vger.kernel.org,
+ Dmitry Torokhov <dmitry.torokhov@gmail.com>, Rob Herring <robh@kernel.org>,
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
+ <conor+dt@kernel.org>, Lee Jones <lee@kernel.org>,
+ Stephen Boyd <sboyd@kernel.org>, Bjorn Andersson <andersson@kernel.org>,
+ Konrad Dybcio <konradybcio@kernel.org>
+Cc: David Collins <david.collins@oss.qualcomm.com>,
+ Subbaraman Narayanamurthy <subbaraman.narayanamurthy@oss.qualcomm.com>,
+ Kamal Wadhwa <kamal.wadhwa@oss.qualcomm.com>, linux-input@vger.kernel.org,
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
+References: <20260806-qcom-spmi-haptics-v6-0-19fcecd5204f@oss.qualcomm.com>
+ <20260806-qcom-spmi-haptics-v6-2-19fcecd5204f@oss.qualcomm.com>
+ <214bbcf7-38ba-458b-81ba-d7f3a42cb73d@ixit.cz>
+Content-Language: en-US, cs-CZ
+Autocrypt: addr=david@ixit.cz; keydata=
+ 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
+In-Reply-To: <214bbcf7-38ba-458b-81ba-d7f3a42cb73d@ixit.cz>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-Improves debugging experience.
+On 17/08/2026 14:08, David Heidelberg wrote:
+> On 07/08/2026 08:21, Fenglin Wu wrote:
+>> Add an initial driver for the Qualcomm PMIH0108 PMIC haptics module,
+>> named as HAP530_HV. This module supports several play modes, including
+>> DIRECT_PLAY, FIFO, PAT_MEM, and SWR, each with distinct data sourcing
+>> and hardware data handling logic. Currently, the driver provides support
+>> for two play modes using the input force-feedback framework: FF_CONSTANT
+>> effect for DIRECT_PLAY mode and FF_PERIODIC effect with FF_CUSTOM
+>> waveform for FIFO mode.
+>>
+>> Assisted-by: Claude:claude-4-8-opus
+>> Signed-off-by: Fenglin Wu <fenglin.wu@oss.qualcomm.com>
+>> ---
+>>   drivers/input/misc/Kconfig             |   11 +
+>>   drivers/input/misc/Makefile            |    1 +
+>>   drivers/input/misc/qcom-spmi-haptics.c | 1252 ++++++++++++++++++++++++++++++++
+>>   3 files changed, 1264 insertions(+)
+>>
+P.S. Could you post together with the PMIH0108 device-tree part and ideally the 
+device integration you testing with? (or at least share the WIP DT, if it's not 
+finished yet)
 
-Fixes: 0e5c9e7ff899 ("ASoC: codecs: wcd: add multi button Headset detection support")
-Signed-off-by: David Heidelberg <david@ixit.cz>
----
- sound/soc/codecs/wcd-mbhc-v2.c | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
-
-diff --git a/sound/soc/codecs/wcd-mbhc-v2.c b/sound/soc/codecs/wcd-mbhc-v2.c
-index bb0c8478a8eb5..850be84d65ceb 100644
---- a/sound/soc/codecs/wcd-mbhc-v2.c
-+++ b/sound/soc/codecs/wcd-mbhc-v2.c
-@@ -859,17 +859,17 @@ static int wcd_get_voltage_from_adc(u8 val, int micbias)
- static int wcd_measure_adc_continuous(struct wcd_mbhc *mbhc)
- {
- 	u8 adc_result;
- 	int output_mv;
- 	int retry = 3;
- 	u8 adc_en;
- 
- 	/* Pre-requisites for ADC continuous measurement */
--	/* Read legacy electircal detection and disable */
-+	/* Read legacy electrical detection and disable */
- 	wcd_mbhc_write_field(mbhc, WCD_MBHC_ELECT_SCHMT_ISRC, 0x00);
- 	/* Set ADC to continuous measurement */
- 	wcd_mbhc_write_field(mbhc, WCD_MBHC_ADC_MODE, 1);
- 	/* Read ADC Enable bit to restore after adc measurement */
- 	adc_en = wcd_mbhc_read_field(mbhc, WCD_MBHC_ADC_EN);
- 	/* Disable ADC_ENABLE bit */
- 	wcd_mbhc_write_field(mbhc, WCD_MBHC_ADC_EN, 0);
- 	/* Disable MBHC FSM */
-@@ -960,17 +960,17 @@ static int wcd_check_cross_conn(struct wcd_mbhc *mbhc)
- 	u8 adc_mode, elect_ctl, adc_en, fsm_en;
- 	int hphl_adc_res, hphr_adc_res;
- 	bool is_cross_conn = false;
- 
- 	/* If PA is enabled, dont check for cross-connection */
- 	if (wcd_mbhc_read_field(mbhc, WCD_MBHC_HPH_PA_EN))
- 		return -EINVAL;
- 
--	/* Read legacy electircal detection and disable */
-+	/* Read legacy electrical detection and disable */
- 	elect_ctl = wcd_mbhc_read_field(mbhc, WCD_MBHC_ELECT_SCHMT_ISRC);
- 	wcd_mbhc_write_field(mbhc, WCD_MBHC_ELECT_SCHMT_ISRC, 0);
- 
- 	/* Read and set ADC to single measurement */
- 	adc_mode = wcd_mbhc_read_field(mbhc, WCD_MBHC_ADC_MODE);
- 	/* Read ADC Enable bit to restore after adc measurement */
- 	adc_en = wcd_mbhc_read_field(mbhc, WCD_MBHC_ADC_EN);
- 	/* Read FSM status */
-@@ -1465,24 +1465,24 @@ int wcd_dt_parse_mbhc_data(struct device *dev, struct wcd_mbhc_config *cfg)
- 	if (of_property_read_bool(np, "qcom,ground-jack-type-normally-closed"))
- 		cfg->gnd_swh = false;
- 	else
- 		cfg->gnd_swh = true;
- 
- 	ret = of_property_read_u32(np, "qcom,mbhc-headset-vthreshold-microvolt",
- 				   &microvolt);
- 	if (ret)
--		dev_dbg(dev, "missing qcom,mbhc-hs-mic-max-vthreshold--microvolt in dt node\n");
-+		dev_dbg(dev, "missing qcom,mbhc-headset-vthreshold-microvolt in dt node\n");
- 	else
- 		cfg->hs_thr = microvolt/1000;
- 
- 	ret = of_property_read_u32(np, "qcom,mbhc-headphone-vthreshold-microvolt",
- 				   &microvolt);
- 	if (ret)
--		dev_dbg(dev, "missing qcom,mbhc-hs-mic-min-vthreshold-microvolt	entry\n");
-+		dev_dbg(dev, "missing qcom,mbhc-headphone-vthreshold-microvolt entry\n");
- 	else
- 		cfg->hph_thr = microvolt/1000;
- 
- 	ret = of_property_read_u32_array(np,
- 					 "qcom,mbhc-buttons-vthreshold-microvolt",
- 					 &cfg->btn_high[0],
- 					 WCD_MBHC_DEF_BUTTONS);
- 	if (ret)
-
----
-base-commit: 7079a12d7506b07fb53b54a664bfad5fa9b16d70
-change-id: 20260823-wcd-dt-typo-fix-9812d3c97fe5
-
-Best regards,
---  
-David Heidelberg <david@ixit.cz>
-
-
+Thanks
+David
