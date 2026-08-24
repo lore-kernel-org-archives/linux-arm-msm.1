@@ -1,88 +1,88 @@
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B1DFE3E6DC8
-	for <linux-arm-msm@vger.kernel.org>; Mon, 24 Aug 2026 06:53:48 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5BD773EC808
+	for <linux-arm-msm@vger.kernel.org>; Mon, 24 Aug 2026 07:06:05 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787554430; cv=none; b=YTSw3SEmvzQcch+xnPOM+spAQ6FGmdjKnNYUmYX4T4fXEn/NFgZC7QEkxTMFWAyHkxol3j40Vb70VOkJmu/Z0BBFwEM5jDpGFLO95IKkeldtCmgsVDjFK1fXfPSGaEjgH0lH5T1lvk44CituS1qm5Xo7tPdbq12uAyI/pSw3Ff8=
+	t=1787555166; cv=none; b=kjD6DSHJz2vEqdX2ks/+nzXSYDXqBAmeYjkA7gSMg1dqT7IwNk1JPpbIJ4eAUIMekkfpm9HnSuXYXjxW5fjDOn1DBfqniXUS04jQiAdu7OiaCJcxZa+acwSS3/2436yBjpBGg5k3JWGYVQVYN//k8tVFgKMKNuvp8X9mRDdu2RM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787554430; c=relaxed/simple;
-	bh=n3x0cJOu246TSwgd6On6Ug7dWBRcqQbFbOZ6s80OiCA=;
+	s=arc-20240116; t=1787555166; c=relaxed/simple;
+	bh=7GMn7+pY4NrOqBGNfEhN/wEFhTlvXdgKNBf0GUDbwNM=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=g+JLv7V8tLZc3xovDOQcWDjti3PXvBF+x/H16v84NTGlgi9m+x3fFCzRYiCuPoIeX6wzumUJVmXG5MTiP0oPaKK1Q3bNfoYngWCzY66wfGPrGmNLCO7s87e/bCk3bgZjwIoKkFbRn5uaVhEkyAfbNrIzNARJIVnkvF3T23hHNAg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=WLOXQWsc; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=A2rKQHdl; arc=none smtp.client-ip=205.220.168.131
+	 In-Reply-To:To:Cc; b=FQ2vwwbuZqTi9+pq7de5jCMiZYw7ePXpyreZZYe6oLl7VI5yXAOkAL6ZA7SWN9CypVzNHrPQ/v+aADUSGzuZjSAkAa2XMCHOorvnUZCespsIw+hjUftRFbfoqMrEsrHrwMImU7hJBJR1+MdK5QVPFHCKAsU2UaeBf2rcc8BtNmo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=AI5PdXYX; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=LkFcXQAJ; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="WLOXQWsc";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="A2rKQHdl"
-Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67O5RF0i3067007
-	for <linux-arm-msm@vger.kernel.org>; Mon, 24 Aug 2026 06:53:48 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="AI5PdXYX";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="LkFcXQAJ"
+Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67O5REl32602034
+	for <linux-arm-msm@vger.kernel.org>; Mon, 24 Aug 2026 07:06:04 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	8vxdNmJ62Dm4NfiRo2IDW9sWDVOYUVG5lo8mJcJ2cRU=; b=WLOXQWsc48obTFol
-	p2ZSJvsmL6Dk0lv53vqVW5zc6aTtu0sErBQVvs/I80aOMqVgPj3aGP3e+LjTZx0Y
-	ehl2fwjxJilKgPQucveV6Ek71zn7NgmgWiFkXcowujgKAr80JPrbhp0VplcFKun2
-	bA/8e20zIU3kXHl/P+Q3xQWzQhlE6DMw+lCkqncf1TiT/TxFlGNjay6FEHpLk5yC
-	FHlx7eGFJjd+FVunTyjxhXcAbaq1jquhZHqhEHG7MP4FLDlwMMYY4HpuD3+0REgz
-	nz4tuq2R3FVuKBZSVLgn2nFNBg8rQ5r/aY47ix4xwC/ammZVJtBx8carZDMoh9BB
-	4WPaow==
-Received: from mail-pj1-f71.google.com (mail-pj1-f71.google.com [209.85.216.71])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g88jph7ys-1
+	tAcnAbP32S5gpYPX5Og5xiDNjJ/HxZkg1tijhne6rng=; b=AI5PdXYXjFQBmbMn
+	+St0RY6BMbHSllvHlm+jhhTXTySQsNKlDltcXL0lR+wPfOw+6BhA8BhIIYzGNNbR
+	gkQdHxHpjasuBbVnbbMiDh918rOdEZGUKE1gyIYKNB/X8Zr4IH1DylMTp23FShQo
+	GDusAIW0kKXn3PsMnROxPhprmpdG3GtKu5mOQuREkffUZmMyL2KP20tt4X0MAvXD
+	LrFBmQLXzwMQxbZoiC0RaVg1AONhNxU4cKyYVXQMI1tMT5QKdSmCnydhzGylSQnF
+	QWqFWSU+P1YHWMTxH3dONpzfuhFrFlKX/nUA7ljH3QM5AYAXzJINdPKD4NsXdv7V
+	LHjpNQ==
+Received: from mail-pf1-f200.google.com (mail-pf1-f200.google.com [209.85.210.200])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g744wwnjw-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Mon, 24 Aug 2026 06:53:47 +0000 (GMT)
-Received: by mail-pj1-f71.google.com with SMTP id 98e67ed59e1d1-38f97b3f853so4991915a91.3
-        for <linux-arm-msm@vger.kernel.org>; Sun, 23 Aug 2026 23:53:47 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Mon, 24 Aug 2026 07:06:03 +0000 (GMT)
+Received: by mail-pf1-f200.google.com with SMTP id d2e1a72fcca58-84e4ef9a74aso2027126b3a.1
+        for <linux-arm-msm@vger.kernel.org>; Mon, 24 Aug 2026 00:06:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1787554427; x=1788159227; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1787555162; x=1788159962; darn=vger.kernel.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=8vxdNmJ62Dm4NfiRo2IDW9sWDVOYUVG5lo8mJcJ2cRU=;
-        b=A2rKQHdlXC6S77QGc5ALBty8OpXWUm0ZJK9zjRcFLFVARKFTZL7TQM/XrLc+u30tEd
-         qcQDcpJ8qdCl9Y1ED2VTXywxrhZw4YdMa6wrRogR/a+KHIehVxRso2TjMR9bo8dj1uw0
-         HCv+wTUbb6hM/33LRrK9r/jR6hpqr+q3Y6wYRqGhQWt2qctN2Ng4tQ3qO3gMn3/HGFM+
-         QiFEuu/4pqwWyg18tVjKCr2M9K6jVOK2t85yj4+39IkWRk43VtzcAFiwoCYOAk2ZwgHy
-         onJfVilFkPKtP+eQ1zhb0T+Laeo4mHG/Wg3FW/Em5pnzixiEIA7vLix0lG4AYhA5tlJN
-         9/sQ==
+        bh=tAcnAbP32S5gpYPX5Og5xiDNjJ/HxZkg1tijhne6rng=;
+        b=LkFcXQAJIsY4xZDLWFIV/MfAbF29gAB5U0dYhI/8WKMGHijJFnFNfDEt1lccrdWJW7
+         65yeX+qPZNE0pA5rLo4019pfvD3yxxfGGaXVNkZZIcnREZl4alYmtKbCdlTbFrZZlU5M
+         NqK1yol4iVq5kZt15eyXr/ybJZk8FPLWOPnpLmjnOb/flAWJr/F+LbUxICdmF7FuDBx1
+         eYImbdAx4x92H/ivmtHH9IWLzdvv0hDDaU69pdYy4tGvGjgD3kD9ut2pJG9yehv+XH9o
+         FhtdepSTStjK8LlBCeW83o8I2g0S+eova5BzjiPcj9UEzHtLrERVdbK1fn0jHNId8/Qa
+         rXKw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787554427; x=1788159227;
+        d=1e100.net; s=20251104; t=1787555162; x=1788159962;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=8vxdNmJ62Dm4NfiRo2IDW9sWDVOYUVG5lo8mJcJ2cRU=;
-        b=LGT2Fl8iTok+ctgZpu9e19hin/6avhCGMXQ1zpnd81aDXkm1tJ3ogAWfqbv+uEoQS1
-         xZ/HfOuy37jwJlQ/sjtKsTpwklA2G0ht59ZrLs2EzvvMcC+6qyYUIqWuhAMIpURfoJtd
-         RUojeAJM+OIt1Bhlt2f95zPRmaD2EwwfQ+yo2H8XDfQVXF8Eo23F/FlPcp8lCioK3aYE
-         jokaPLenp8veH9cCK8kCJjmPLXcNX2Z4BYNTngkTFQBRhyTthg2uO2fE1AspdyaJQR/j
-         sskLI3d1nlWoUdsHQrSvXoDyrIagQnzj4sXda0EjC+ufdCwPMNRbK8m8xQHQ+1SVhcMM
-         mQXg==
-X-Forwarded-Encrypted: i=1; AHgh+Rq3dKD8phl3giEtbEgpS4Bz7D228q8escmBN07fKfJtQw5YqDOqXrQdnbX+0j2R5HLr10Lc+IDl8GTgJvEC@vger.kernel.org
-X-Gm-Message-State: AFuF++n/QhN8BfnDzICXT/DI7QSj4SEoRC97SkAFoCeJEdC5SnM+6AOy
-	S3k8d0UN9+UnDgcNjmlIDefkTU9Dfsn+wLO1KFv1PVqcZjlal+wE4j3WbBK9ZAl8AavlK69OxRO
-	gPs++t0QcY/Vuy3S3bwGQAn/aVdyoVCwAFYBWkz5d5KqIZtcYbolKicXbtq3Hm5kt6OKh
-X-Gm-Gg: AR+sD10zTsSAARyLdOL3YZSGbwA026SnYKwt2PO3oSqb9tEsCfp0CyeYEtoP+IwBZac
-	PCUNtP7Yj2QMAQHMcM1N7dOWQHwvNHTNllWbYXHne6dkUbQxW2tWeE3Cvgo4+vJ253flI+QMp5+
-	SCDsbLfH+w0IBEoF+7mQ2e3XaUFmmJNQpL1PlV7/YkMWLjksUS65CpKvNgjAeEZw+3+57K20Pn+
-	0sDP/NGfrzNG50slZPis3m+H41EzdFtvabqVQ8F+PFYDRIJfNtv9OQL/sskRIsxYke40RSFON+n
-	Uj/H905FY2HAf2QKyrqMc19vsSbhsPWpJ0r0ekSbFaFE3LkJrobFf1YYqEbgDMyATHQtbFfpkje
-	RiS40IKwcWXNmJSxAbLK4ZWQ9
-X-Received: by 2002:a17:90b:538f:b0:38e:b400:a860 with SMTP id 98e67ed59e1d1-395df29e128mr30994181a91.13.1787554427018;
-        Sun, 23 Aug 2026 23:53:47 -0700 (PDT)
-X-Received: by 2002:a17:90b:538f:b0:38e:b400:a860 with SMTP id 98e67ed59e1d1-395df29e128mr30994099a91.13.1787554426596;
-        Sun, 23 Aug 2026 23:53:46 -0700 (PDT)
-Received: from hu-tdas-hyd.qualcomm.com ([202.46.22.19])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-395e4b240e7sm8768031a91.13.2026.08.23.23.53.41
+        bh=tAcnAbP32S5gpYPX5Og5xiDNjJ/HxZkg1tijhne6rng=;
+        b=j3cX+1wWfEvgrsc/IYa9vs+cyZENIk0m0ev9tp6ufAyHYniWlymiRFdOYnToZAwGHG
+         6QHlOSNL+toq61dxul0+W4yHF1oUBth9yiuVRYsJfZyKsS2ojTUTiRgY7BBi0cJtDlN8
+         QdJHx8VbxZnsCTVpActhnRzooOBBvK4EMScBB1BLyDCMbxsfd2AWnR3l1H7IQtNlAhKF
+         /UEbjKEy5g8rSPIrvV8qO+fLuaTbP+nXPUzu2nK0Z9oftY9HEPTTIpL/QEQZg2qfZ6/f
+         KpcaLr2NJy9/sWwHaQUEnzyBqMEOYRkLhNJL/PeKX36R5MLMpjgA3Wl63r67+54Z9nMy
+         MALQ==
+X-Forwarded-Encrypted: i=1; AHgh+RpfLzhaQ9v/FWqx9JaLACw+pncCYrqBOn2/UYBxsgXen7P7WZ1ZyUIJgdmxsJXOBLcXifvlOpcG+Oc7dncz@vger.kernel.org
+X-Gm-Message-State: AFuF++kjmCItxGfdfRDnKnL0zmDJo61FpSZlarYjJY7ErFKKANlEluZE
+	JQGGWlVRuEV/wTl9fZThlHbUX6vhl8v61OJrDDnuzDd7dh+XyDW0AkFCst4fgEgt3XQf7EsiP/6
+	LNkg1o2u6H42CeqdaV1AidIpjAKhsgBodM45c4PFbiG4mVxXkmrXv2j8+2cQM+UNrwczK
+X-Gm-Gg: AR+sD12HcT+8vHYNcawON+MeSFzj8obF51rHumv8xRpAa6lZexeQuUXM2Pbch3I/+ur
+	Y75bqU+tFkWj8vL37nS9laYy2MjBoQR41fsCVlK+VBPnANSpWu3DLvWjJMVvesqOFgK6OpW6oCL
+	/qklESXV4Wwk+PRKFa1vWOWIbXhReznYFY9p67BBXWQ/Max0jGiYO39sopdctyMkEYDGgYPDk2O
+	PkVC2i5xEtYuFtz9LyFVZDlPMXxmkqsbhiC1QTpyik/V9EKoXS8ACRb1W+kj8FoPDhK+DLccae8
+	grEdlmLfygDamstv+1k0yuW0nCRs7yFCLb14v/+CjQFfLUhw4U1VCHomJ/2wDZMmKLTDvyWopAU
+	zXdZRcsnzOwcHw+9lQG432yrSkfJPku/nBDcy4awSeXsXRgxFOF8lZSc=
+X-Received: by 2002:a05:6a00:ba8d:b0:82f:50cd:e586 with SMTP id d2e1a72fcca58-851fa018939mr42280445b3a.13.1787555162119;
+        Mon, 24 Aug 2026 00:06:02 -0700 (PDT)
+X-Received: by 2002:a05:6a00:ba8d:b0:82f:50cd:e586 with SMTP id d2e1a72fcca58-851fa018939mr42280353b3a.13.1787555161644;
+        Mon, 24 Aug 2026 00:06:01 -0700 (PDT)
+Received: from hu-chunkaid-lv.qualcomm.com (Global_NAT1.qualcomm.com. [129.46.96.20])
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-8520f149ef3sm1642178b3a.41.2026.08.24.00.05.59
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 23 Aug 2026 23:53:46 -0700 (PDT)
-From: Taniya Das <taniya.das@oss.qualcomm.com>
-Date: Mon, 24 Aug 2026 12:23:30 +0530
-Subject: [PATCH 2/2] clk: qcom: segcc-nord: Add EMAC CNOC APB clocks for
- Nord SoC
+        Mon, 24 Aug 2026 00:06:00 -0700 (PDT)
+From: Chunkai Deng <chunkai.deng@oss.qualcomm.com>
+Date: Mon, 24 Aug 2026 00:05:53 -0700
+Subject: [PATCH v2 1/2] rpmsg: glink: Split protocol start out of
+ native_probe
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -91,126 +91,177 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260824-nords_emac_apb_clk-v1-2-290767386bf5@oss.qualcomm.com>
-References: <20260824-nords_emac_apb_clk-v1-0-290767386bf5@oss.qualcomm.com>
-In-Reply-To: <20260824-nords_emac_apb_clk-v1-0-290767386bf5@oss.qualcomm.com>
-To: Bjorn Andersson <andersson@kernel.org>, Stephen Boyd <sboyd@kernel.org>,
-        Brian Masney <bmasney+clk@redhat.com>,
-        Jerome Brunet <jbrunet+clk@baylibre.com>,
-        Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>
-Cc: Ajit Pandey <ajit.pandey@oss.qualcomm.com>,
-        Imran Shaik <imran.shaik@oss.qualcomm.com>,
-        Jagadeesh Kona <jagadeesh.kona@oss.qualcomm.com>,
-        linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org,
-        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-        Taniya Das <taniya.das@oss.qualcomm.com>
-X-Mailer: b4 0.15-dev-aa3f6
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODI0MDA1OSBTYWx0ZWRfX5QPs047FMt1i
- 3UPJIT9wpFrcPLucPMtaC56Bk/ZRuoU8fBfwChLOGPcsbwPypbtNLxoQllnY2YwdEX36KHitI6V
- t5E/0PQNCFGcbVB2nl3jdejZtPMI676euuNPLuJ0IpCgGNCffoVrjWhes98wUxiQLbReg1QyWiU
- E9X4v8QkR05W32clZlt6EnYFAm8OfcSVJoZL77vw6GqZC/ebLSehjPKL3DN7Maa2dHk37Ci7AfJ
- phgTzg32n1X3cZY38CfdLMWctyXAVbbPgjJR7SqK4JQkbyKF9ybKi6EnFndvi6OXlfIeZwcIZYq
- 6Y8UezA+XPbhx+u8quHbhd4OJJXjfTgU67ni/jv+lUohPmbmIUI/Z1qqV58P0X+5KUGlZIuZmP/
- q9y7850ZFK2Ti943RSaJqNN9CUZ1tq22xDbDmwQXi3vEbnJh1r2TxfAoY+t2LPQCiwQQTp2PI3F
- sJ9BivgqZRSisIk+3hA==
-X-Proofpoint-GUID: olP75WhA6TCX05jb-JNKqWyIYhyXzhuE
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODI0MDA1OSBTYWx0ZWRfXxwJFmNqXdobp
- iRPDwQlhUDtTzY/ODGs7KdseQk8eoAv9Ea3+XtMIipNuYDBhGtTYgUGcqwKpjz753a1wD/GdsG7
- Lpr/xeZL58D3hN8ORkw2OTSI9rLB5mE=
-X-Authority-Analysis: v=2.4 cv=Xey5Co55 c=1 sm=1 tr=0 ts=6a8bea7b cx=c_pps
- a=UNFcQwm+pnOIJct1K4W+Mw==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
+Message-Id: <20260824-rpmsg-glink-split-protocol-start-v2-1-362d7c233f66@oss.qualcomm.com>
+References: <20260824-rpmsg-glink-split-protocol-start-v2-0-362d7c233f66@oss.qualcomm.com>
+In-Reply-To: <20260824-rpmsg-glink-split-protocol-start-v2-0-362d7c233f66@oss.qualcomm.com>
+To: Bjorn Andersson <andersson@kernel.org>,
+        Mathieu Poirier <mathieu.poirier@linaro.org>
+Cc: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+        linux-arm-msm@vger.kernel.org, linux-remoteproc@vger.kernel.org,
+        linux-kernel@vger.kernel.org, chris.lew@oss.qualcomm.com,
+        tony.truong@oss.qualcomm.com, tao.zhang1@oss.qualcomm.com,
+        peter.chen@oss.qualcomm.com,
+        Chunkai Deng <chunkai.deng@oss.qualcomm.com>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1787555157; l=4229;
+ i=chunkai.deng@oss.qualcomm.com; s=20260604; h=from:subject:message-id;
+ bh=7GMn7+pY4NrOqBGNfEhN/wEFhTlvXdgKNBf0GUDbwNM=;
+ b=TdL9EzepQjh26r3EHeZ4Ev45MZucLOUINRa9RkYJJo/ADsyjONx8PJKx5zc/9EHN0Y5WZQaz8
+ /pZ/mLtlGN0BrsvqTSuPOrpaYdVtiIMgi/jcGoPku6LCL1ZIb3trsly
+X-Developer-Key: i=chunkai.deng@oss.qualcomm.com; a=ed25519;
+ pk=wWxCpsJRKQeVRzpZ8GLRnUX6ozLMowqE3hiz/j+j9O8=
+X-Proofpoint-ORIG-GUID: Kz6L3RvO-lNHwJI6Tgj8QViPVQLmcsJT
+X-Proofpoint-GUID: Kz6L3RvO-lNHwJI6Tgj8QViPVQLmcsJT
+X-Authority-Analysis: v=2.4 cv=KuF9H2WN c=1 sm=1 tr=0 ts=6a8bed5c cx=c_pps
+ a=mDZGXZTwRPZaeRUbqKGCBw==:117 a=ouPCqIW2jiPt+lZRy3xVPw==:17
  a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22
- a=EUspDBNiAAAA:8 a=Izso3j8jpzlsbR86OAQA:9 a=QEXdDO2ut3YA:10
- a=uKXjsCUrEbL0IQVhDsJ9:22
-X-Proofpoint-ORIG-GUID: olP75WhA6TCX05jb-JNKqWyIYhyXzhuE
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22
+ a=EUspDBNiAAAA:8 a=DdSiwBDnyMY8Rz7v4E0A:9 a=QEXdDO2ut3YA:10
+ a=zc0IvFSfCIW2DFIPzwfm:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODI0MDA2MCBTYWx0ZWRfXytAZUKzQuSOp
+ nAnRQRW+6gOJVaYDm+xEytDhhm8xFyOuRXscgRC1quGI0twKQyB1vyJqgUCAxpPLQZClJQF/O/d
+ Ui5VUzTuHSSzdlIJDCaDT6A8wD3amis+Cs3Hg7j9DhTmDvg/veSD46EEMfZE3/jaLQdeIlVfVUp
+ 0dWMHeSDB9hwXOduJC5oQ/EHC36S45x5rqn35uE7Vmrb5eyrfAyVbq/hMWWaJBi9FMeFsBI8Z7j
+ L/+RZtFks8K82n7fsRqnF5eO6fpcBK4rWDwDoCIHeAsPs4/824ev95lyR06NbPKwnFKB16LlAZs
+ 1WOOZ9g+pWr7ghvvqWwEXhwx2r1raO8BHlu2UUaNCMHsgkIm5m+KZDEUFQ28XpheKISCgOQSsKS
+ fslXFMGk9dEgk/4nrcGz7X818dbBnCMcvuecDd87rHyaZ3W0MU6tE8qERnOOYi8ecFLk+Iyo2Q8
+ 7C6MdtZZ1ndISlPnkbg==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODI0MDA2MCBTYWx0ZWRfX9cXQ/cSh5+U3
+ hEaCzH3b5JZVe3B1DGDLLMPdD8TW1QQgEUzsh2J4DMG+ey7VKgWIRuJTNsI0RIDR/E+PtAFF8c3
+ Z88uQBoj24Skq7PJ8TlCr/nvePUs71w=
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-08-24_02,2026-08-21_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 adultscore=0 impostorscore=0 spamscore=0
- lowpriorityscore=0 malwarescore=0 phishscore=0 clxscore=1015 bulkscore=0
- suspectscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ spamscore=0 priorityscore=1501 malwarescore=0 clxscore=1015
+ lowpriorityscore=0 phishscore=0 impostorscore=0 bulkscore=0 suspectscore=0
+ adultscore=0 classifier=typeunknown authscore=0 authtc= authcc=
  route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
- definitions=main-2608240059
+ definitions=main-2608240060
 
-Add the EMAC0 and EMAC1 CNOC APB clocks to the SE_GCC clock controller
-on the Qualcomm Nord SoC. These branch clocks gate the config NoC APB
-access to the two EMAC controllers and are required for register access
-to the Ethernet MACs.
+The SMEM and RPM transports request their receive interrupt with
+IRQF_NO_AUTOEN and enable it only once qcom_glink_native_probe() has
+returned. But native_probe() sends the version command, so on a fast
+remote the version ACK can land while the interrupt is still masked. The
+ACK is dropped and the handshake never completes.
 
-Signed-off-by: Taniya Das <taniya.das@oss.qualcomm.com>
+Move the version command and the chrdev registration into a new
+qcom_glink_native_start(), leaving native_probe() to set up the glink
+instance. Both transports enable their interrupt before calling
+native_start().
+
+Signed-off-by: Chunkai Deng <chunkai.deng@oss.qualcomm.com>
+Assisted-by: Claude:claude-opus-5
 ---
- drivers/clk/qcom/segcc-nord.c | 32 ++++++++++++++++++++++++++++++++
- 1 file changed, 32 insertions(+)
+ drivers/rpmsg/qcom_glink_native.c | 32 ++++++++++++++++++++++++++++----
+ drivers/rpmsg/qcom_glink_native.h |  1 +
+ drivers/rpmsg/qcom_glink_rpm.c    |  8 ++++++++
+ drivers/rpmsg/qcom_glink_smem.c   |  8 ++++++++
+ 4 files changed, 45 insertions(+), 4 deletions(-)
 
-diff --git a/drivers/clk/qcom/segcc-nord.c b/drivers/clk/qcom/segcc-nord.c
-index 51d7f83e21b6b2f2780088f26f547cc48801c6e4..aa807980d464d90e6a1ae209612b0ba9841bb35d 100644
---- a/drivers/clk/qcom/segcc-nord.c
-+++ b/drivers/clk/qcom/segcc-nord.c
-@@ -747,6 +747,21 @@ static struct clk_branch se_gcc_emac0_cc_sgmiiphy_tx_clk = {
- 	},
- };
+diff --git a/drivers/rpmsg/qcom_glink_native.c b/drivers/rpmsg/qcom_glink_native.c
+index d9d4468e4cbd..2a284b22a037 100644
+--- a/drivers/rpmsg/qcom_glink_native.c
++++ b/drivers/rpmsg/qcom_glink_native.c
+@@ -1928,17 +1928,41 @@ struct qcom_glink *qcom_glink_native_probe(struct device *dev,
+ 	if (ret)
+ 		dev_err(dev, "failed to add groups\n");
  
-+static struct clk_branch se_gcc_emac0_cnoc_apb_clk = {
-+	.halt_reg = 0x24018,
-+	.halt_check = BRANCH_HALT_VOTED,
-+	.hwcg_reg = 0x24018,
-+	.hwcg_bit = 1,
-+	.clkr = {
-+		.enable_reg = 0x24018,
-+		.enable_mask = BIT(0),
-+		.hw.init = &(const struct clk_init_data) {
-+			.name = "se_gcc_emac0_cnoc_apb_clk",
-+			.ops = &clk_branch2_ops,
-+		},
-+	},
-+};
++	return glink;
++}
++EXPORT_SYMBOL_GPL(qcom_glink_native_probe);
 +
- static struct clk_branch se_gcc_emac0_phy_aux_clk = {
- 	.halt_reg = 0x2402c,
- 	.halt_check = BRANCH_HALT,
-@@ -894,6 +909,21 @@ static struct clk_branch se_gcc_emac1_cc_sgmiiphy_tx_clk = {
- 	},
- };
++/**
++ * qcom_glink_native_start() - start the GLINK protocol handshake
++ * @glink:	glink handle returned by qcom_glink_native_probe()
++ *
++ * Send the initial version command and register the chrdev. This is split
++ * out from qcom_glink_native_probe() so that a transport can enable its
++ * receive interrupt before the version handshake is initiated, ensuring the
++ * version ACK from the remote is not missed.
++ *
++ * Failure to register the chrdev is not fatal and only logged, matching the
++ * previous behaviour of qcom_glink_native_probe().
++ *
++ * Return: 0 on success, negative errno if sending the version command failed.
++ */
++int qcom_glink_native_start(struct qcom_glink *glink)
++{
++	int ret;
++
+ 	ret = qcom_glink_send_version(glink);
+-	if (ret)
+-		return ERR_PTR(ret);
++	if (ret) {
++		dev_err(glink->dev, "failed to send version: %d\n", ret);
++		return ret;
++	}
  
-+static struct clk_branch se_gcc_emac1_cnoc_apb_clk = {
-+	.halt_reg = 0x25018,
-+	.halt_check = BRANCH_HALT_VOTED,
-+	.hwcg_reg = 0x25018,
-+	.hwcg_bit = 1,
-+	.clkr = {
-+		.enable_reg = 0x25018,
-+		.enable_mask = BIT(0),
-+		.hw.init = &(const struct clk_init_data) {
-+			.name = "se_gcc_emac1_cnoc_apb_clk",
-+			.ops = &clk_branch2_ops,
-+		},
-+	},
-+};
+ 	ret = qcom_glink_create_chrdev(glink);
+ 	if (ret)
+ 		dev_err(glink->dev, "failed to register chrdev\n");
+ 
+-	return glink;
++	return 0;
+ }
+-EXPORT_SYMBOL_GPL(qcom_glink_native_probe);
++EXPORT_SYMBOL_GPL(qcom_glink_native_start);
+ 
+ static int qcom_glink_remove_device(struct device *dev, void *data)
+ {
+diff --git a/drivers/rpmsg/qcom_glink_native.h b/drivers/rpmsg/qcom_glink_native.h
+index 8dbec24de23e..783209980c3a 100644
+--- a/drivers/rpmsg/qcom_glink_native.h
++++ b/drivers/rpmsg/qcom_glink_native.h
+@@ -35,6 +35,7 @@ struct qcom_glink *qcom_glink_native_probe(struct device *dev,
+ 					   struct qcom_glink_pipe *rx,
+ 					   struct qcom_glink_pipe *tx,
+ 					   bool intentless);
++int qcom_glink_native_start(struct qcom_glink *glink);
+ void qcom_glink_native_remove(struct qcom_glink *glink);
+ void qcom_glink_native_rx(struct qcom_glink *glink);
+ 
+diff --git a/drivers/rpmsg/qcom_glink_rpm.c b/drivers/rpmsg/qcom_glink_rpm.c
+index e3ba2c63a5fc..34f18c3e58c8 100644
+--- a/drivers/rpmsg/qcom_glink_rpm.c
++++ b/drivers/rpmsg/qcom_glink_rpm.c
+@@ -358,6 +358,14 @@ static int glink_rpm_probe(struct platform_device *pdev)
+ 
+ 	enable_irq(rpm->irq);
+ 
++	ret = qcom_glink_native_start(glink);
++	if (ret) {
++		disable_irq(rpm->irq);
++		qcom_glink_native_remove(glink);
++		mbox_free_channel(rpm->mbox_chan);
++		return ret;
++	}
 +
- static struct clk_branch se_gcc_emac1_phy_aux_clk = {
- 	.halt_reg = 0x2502c,
- 	.halt_check = BRANCH_HALT,
-@@ -1458,6 +1488,7 @@ static struct clk_regmap *se_gcc_nord_clocks[] = {
- 	[SE_GCC_EMAC0_AXI_CLK] = &se_gcc_emac0_axi_clk.clkr,
- 	[SE_GCC_EMAC0_CC_SGMIIPHY_RX_CLK] = &se_gcc_emac0_cc_sgmiiphy_rx_clk.clkr,
- 	[SE_GCC_EMAC0_CC_SGMIIPHY_TX_CLK] = &se_gcc_emac0_cc_sgmiiphy_tx_clk.clkr,
-+	[SE_GCC_EMAC0_CNOC_APB_CLK] = &se_gcc_emac0_cnoc_apb_clk.clkr,
- 	[SE_GCC_EMAC0_PHY_AUX_CLK] = &se_gcc_emac0_phy_aux_clk.clkr,
- 	[SE_GCC_EMAC0_PHY_AUX_CLK_SRC] = &se_gcc_emac0_phy_aux_clk_src.clkr,
- 	[SE_GCC_EMAC0_PTP_CLK] = &se_gcc_emac0_ptp_clk.clkr,
-@@ -1471,6 +1502,7 @@ static struct clk_regmap *se_gcc_nord_clocks[] = {
- 	[SE_GCC_EMAC1_AXI_CLK] = &se_gcc_emac1_axi_clk.clkr,
- 	[SE_GCC_EMAC1_CC_SGMIIPHY_RX_CLK] = &se_gcc_emac1_cc_sgmiiphy_rx_clk.clkr,
- 	[SE_GCC_EMAC1_CC_SGMIIPHY_TX_CLK] = &se_gcc_emac1_cc_sgmiiphy_tx_clk.clkr,
-+	[SE_GCC_EMAC1_CNOC_APB_CLK] = &se_gcc_emac1_cnoc_apb_clk.clkr,
- 	[SE_GCC_EMAC1_PHY_AUX_CLK] = &se_gcc_emac1_phy_aux_clk.clkr,
- 	[SE_GCC_EMAC1_PHY_AUX_CLK_SRC] = &se_gcc_emac1_phy_aux_clk_src.clkr,
- 	[SE_GCC_EMAC1_PTP_CLK] = &se_gcc_emac1_ptp_clk.clkr,
+ 	return 0;
+ }
+ 
+diff --git a/drivers/rpmsg/qcom_glink_smem.c b/drivers/rpmsg/qcom_glink_smem.c
+index 62adc4db2317..28f6cfda6352 100644
+--- a/drivers/rpmsg/qcom_glink_smem.c
++++ b/drivers/rpmsg/qcom_glink_smem.c
+@@ -348,8 +348,16 @@ struct qcom_glink_smem *qcom_glink_smem_register(struct device *parent,
+ 
+ 	enable_irq(smem->irq);
+ 
++	ret = qcom_glink_native_start(glink);
++	if (ret)
++		goto err_disable_irq;
++
+ 	return smem;
+ 
++err_disable_irq:
++	disable_irq(smem->irq);
++	qcom_glink_native_remove(glink);
++
+ err_free_mbox:
+ 	mbox_free_channel(smem->mbox_chan);
+ 
 
 -- 
-2.34.1
+2.43.0
 
