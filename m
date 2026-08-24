@@ -1,88 +1,87 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F05F5376475
-	for <linux-arm-msm@vger.kernel.org>; Mon, 24 Aug 2026 13:23:23 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C1943428473
+	for <linux-arm-msm@vger.kernel.org>; Mon, 24 Aug 2026 13:42:01 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787577805; cv=none; b=u0/AIhYQ+61SmvphqRJLgQjtbQSdWax1+hY6LDGdpYH8lIeHUhtsqkSDHMwnT7V8NmjqVyxOlIRy70SldrOAeCaT82pk2Qra7yq5NxUq3x5ZfxLqxlDnQ1LJxJS4HkgCQY+QmasDBVYzP074DOsOPpDSyH7MSsMFFMKpvib2r00=
+	t=1787578925; cv=none; b=HYs4e4chhv+f3gpMyK5qcdDKbKgs251jlom3XL9hfZfJn1/DkBrhDOH/FJEtcTE9yGwCnVPedEENGVXX2cigVNDSZ3+887DfeKJtzZddp/Fhn2TwRb6Ab3Ougo+5pZmBaDaTn/SKfaId0Vwbks73Ti+R7gm2b9kRJGLbFh2G+Fs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787577805; c=relaxed/simple;
-	bh=c84EENtMlpj4dcqmfrCTzYWwu1VFPCw85ytM+ZGBn/c=;
+	s=arc-20240116; t=1787578925; c=relaxed/simple;
+	bh=220sKSJfAH66EhAx6MKsNA3uJHuVRcM7xOCoY8od3n0=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=QCBDZZgk4Et/xk/UmHWcar3VFTmvGMdJTi/G0FbZinDRC2wOaN860Nq6uBra6O7cbE0ZhGRZmkrG6+yw8y+U3+BdUjdDKPlvdTIHT7hHVma7gC+W/goN8+X4JuWcmX0xmh6TzTJZfNajAVou3ku5BU8SrVu5pUDxwE3CIkFTWrk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=LVu7C1jo; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=cqQzOAGo; arc=none smtp.client-ip=205.220.180.131
+	 In-Reply-To:Content-Type; b=qt6hmhodj8GVlSy0ejgqmLr1zfCcdLzMiB3FrUyipvUUGh7Z6jCAg8LrMCXZNQKBLetKveOGczuoYBtQBvVoLMYjts22GuD3cSr4mCkIN30/vGiHwDVp6MamGmR/y9Da8IHzVPiyHqhGUDfiMt9KiHqkBhMBW4uzLokAvuFEQ8E=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=WeLnskcV; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=OM+pGXEK; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="LVu7C1jo";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="cqQzOAGo"
-Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67OCvFe52579540
-	for <linux-arm-msm@vger.kernel.org>; Mon, 24 Aug 2026 13:23:22 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="WeLnskcV";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="OM+pGXEK"
+Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67OCvCmx2584273
+	for <linux-arm-msm@vger.kernel.org>; Mon, 24 Aug 2026 13:42:01 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	Ht/73UpQIIZyUpRTYArGJnPpIGG8cQZGTaPS+SJfDcE=; b=LVu7C1jo62a64VKS
-	xh0Nb4RJvu0BxOGQFyVX3Yr4kMrYrY1quBwAs/9hrAwSrKAT8VPfzC2v1NN7DtZw
-	Gp5biwo0Du7HEHUOzZOaVwXeTLjYHOKyedkkBNS1fgLbeN19NyIsWEzN5IMLja0d
-	Z15Lkc2tfNw03DWcLx1lDXP64huNMtJeyiWrW8YzGygNIJB8Sp/uNwe+7L/do0ZR
-	IF1u3+Oi48DWa4bjzOCM9ZeXonhhgila2Xr7wUFg3t43blukYM17w89yxkTuHiUb
-	qqAARehG00CH8bFH4IkWqy5QvnIOxXQuuBTBtGnGd9dPk4xjjFEGPPqHWVVwsFqt
-	5aSyag==
-Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com [209.85.222.199])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g8gdshujd-1
+	4nn3T1t/sB7+ffZyruvK0mZmx5y7OMfO+jTRwc/O4fA=; b=WeLnskcVZok8Wavb
+	M2odJvv5d8hV/LD5NQp27uGONnXiEafmZkgE5sg4Sjf62xEqH6D74PlYl0xvO93k
+	04Nf71ranEH5xPy5z0e3iywNAYhUMUYubaMk4JJuiaB96nxzuCr2V1j4tDc6E532
+	QIvjOdRcqyjgE8N3Q8xqz+MfZ8Kji5dpI9gtXa3WF7BB0cDciV6AQbmcYwLgomM0
+	ncmZVxqqqEhympv/jZRilWh5VIj+SUsAw6kEqxFmF9kaMZCtIjahq06Oli8t5Ztv
+	dSrGJp+Q9Z56fnRzHeENNT5x3XMjMHLskW9MSF3lk3vyLfyR+sGuaN01L8jXNyxJ
+	GVv6+Q==
+Received: from mail-pj1-f71.google.com (mail-pj1-f71.google.com [209.85.216.71])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g8hbthmba-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Mon, 24 Aug 2026 13:23:22 +0000 (GMT)
-Received: by mail-qk1-f199.google.com with SMTP id af79cd13be357-93495488976so61887485a.3
-        for <linux-arm-msm@vger.kernel.org>; Mon, 24 Aug 2026 06:23:22 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Mon, 24 Aug 2026 13:42:00 +0000 (GMT)
+Received: by mail-pj1-f71.google.com with SMTP id 98e67ed59e1d1-38e22137fb3so5503389a91.0
+        for <linux-arm-msm@vger.kernel.org>; Mon, 24 Aug 2026 06:42:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1787577802; x=1788182602; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1787578920; x=1788183720; darn=vger.kernel.org;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=Ht/73UpQIIZyUpRTYArGJnPpIGG8cQZGTaPS+SJfDcE=;
-        b=cqQzOAGo1DzN4qiNShKmCyRafY32qopunVOWIunnE3U+6Nc9hFcJL2T/X7a0A4/+D2
-         4mAX6xsD0eAYNbULzjjQyGB/M3VyKaLfkoa/fzBvyHSrLwUdB9CvqZOavBMNh62FBfM+
-         Tzl1JeW6d18WhJHa5134PqJ496kCmNvI5kW81zmbWzRHped7EuDDma0ESM5LtXG+cC8o
-         /ARi8ay1wQbiY+LnEk6Brb3YwG9/ZxWfoo7Mr28NipHWKrsrjTDTU81w7kJv72rHt4pX
-         fS6eWHRa6Z7wL18f7jHbpxDTrUyacTWP/M7/WUGMvcW+aJLLwzuZXU5TKtgCF6nMfHmO
-         wJkw==
+        bh=4nn3T1t/sB7+ffZyruvK0mZmx5y7OMfO+jTRwc/O4fA=;
+        b=OM+pGXEKndGdb2eKbWcGMWHrc43pPutKa/fpI70ZTCXh3H0Sb30FMe9d++yGoEImTx
+         K0rL4x2lwJ3PvWP+Mpzl9TvKtMA++doIeF/yFovYdEBj26Hcy4AVUiCPoZ4ZCQ7C+yZq
+         RK9MWI6aNEMcBpfhENw5lQc1/po4oN1WC86kdJwwhAjpDkN0KdoEi2L4Qh1LGy5gFHCt
+         dWefkA0ssQq1mJeBD3dZdx6RWu5ktc7ZsiSYXvD6+8wUWukOCnCDiY5OjIVzN7whRNRt
+         LzcRCZhTLzjp5xNUQSEr2oaI2idDO0PBqGxvnWRADzxpevM4SiPCSTaEjS5r64UrQsgQ
+         RMMw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787577802; x=1788182602;
+        d=1e100.net; s=20251104; t=1787578920; x=1788183720;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=Ht/73UpQIIZyUpRTYArGJnPpIGG8cQZGTaPS+SJfDcE=;
-        b=GJUz1KenXtgd597bDcq/iB7V/mmW6UDM8U98UmSn0nVh5FFt8sAd3i+cJL7OEItgcd
-         JisZ7ssCKis1D+4ikc8BzBrq1k9HXBW6qn59gZURY+mFPuCPydyvaINeyBwo8Uw5jbbP
-         o2Ngf1wWyqatoQdyGeZUeoxz4GbPJQcwExLjRQQAcObAbiohJhBuCxELIymeXNE7+LuV
-         isHG4syMVq9+nxCF3eiX6HAaeGjgw/lsAq6lcOhWAPe0JRjjDQMo/UlQ1qubP65PG/11
-         JobFIRsUEKC0QjX+L7BWR6apxzLp716qtkDjjVdLQ6N/5xufZEgaY5HAM80YUkzPVFsl
-         QFOQ==
-X-Forwarded-Encrypted: i=1; AHgh+RpqWpSnlOiNzjTXMYaQWvp9R0DoLR0xEwOZokOyzSGOpo5iqTqYe6ZEsibOfItvro76XPAxoSDGcVFe+bas@vger.kernel.org
-X-Gm-Message-State: AFuF++mg5QSYYgR/Ra6mlqXBRGTKA8BZyANLrAbOl18pvCra1wrQo9vV
-	kZjUeMPOx6pmEGrQ/noCKWsyZ8doaZbMdMsGXKi6EweikCGPAWvUTA21a/+/bltB4NLW8QTlYlH
-	soroKiIb16kfhElkhRvpAaz6c44y2ZyfD5kfHO8mSrMYSP8eVZa21iLnmINEC9QkwEonTnxdF0X
-	v5
-X-Gm-Gg: AR+sD11Q2ZWC19B5Jtqcj00/bHVb8t/h1MEBzLb8KKzSUwxwgGDPg/DbgyLqe4bS2QE
-	gzkiiwpDljahsnhv6JDllgneK/5WvoFRvLZOtwStazTM5WlfTYaesi7j5LT0nKn9jTOaae4dpbz
-	8219fe6ZMde6LJDdDrcDzJLeZ6KQR+n/flp3hhJ9R7zctfP7xI/ACF1nzAo/O5RjzbSuFX5mNip
-	qrueTPz8fKCunem4maJ1+0D4uYdH5RTYzQpAVE5EOdnb9y8cx8vXv7Dps7644vJ9886yyH0GSxP
-	oubOBUSdR1monrgJPnRD3JAZwcuu7J/w6QAsZWUGBf1uOvFms/VQKYFruR5hwyqH2U7s9tn/NgL
-	kMpxp42eOoJWuiLvqmHGvG6fc
-X-Received: by 2002:a05:620a:2806:b0:92e:6485:f640 with SMTP id af79cd13be357-937395ae7ecmr1685240185a.4.1787577802088;
-        Mon, 24 Aug 2026 06:23:22 -0700 (PDT)
-X-Received: by 2002:a05:620a:2806:b0:92e:6485:f640 with SMTP id af79cd13be357-937395ae7ecmr1685235085a.4.1787577801667;
-        Mon, 24 Aug 2026 06:23:21 -0700 (PDT)
-Received: from [192.168.120.193] ([178.235.128.140])
-        by smtp.gmail.com with ESMTPSA id 38308e7fff4ca-3a1c2fe663esm14943741fa.35.2026.08.24.06.23.19
+        bh=4nn3T1t/sB7+ffZyruvK0mZmx5y7OMfO+jTRwc/O4fA=;
+        b=fhP/hflEFzxEhCMP0Rosk1Rh5eO/uBqeuRF/1VpBs9PmeiFj5Ib63FGQsfCyUiNOAG
+         m2myQMKqK11uRynAq5e69L7tQEQzC50YjfEVl4cOLvjMiwJQZJOlukNPf0WWNvVZiBkf
+         iLFmMLMcR2lSgEXf0WjEW1r9f7XT+6HHvEG9NgxtdpAH0eMPsshqYvAIpw0ns5diDVcx
+         0Di+CZ+R5eFGWKosyEdtc2SYSahow3lvekKF8tw3awCeaE7zJhSTYH3fueHy3kRFnDHc
+         L/oDQxjukQgJNFQh28FaGM3PguNlBs2WJcbuTtagjxD1Jm5nbITo1LpWEqHIoY7SSRir
+         /+sg==
+X-Forwarded-Encrypted: i=1; AHgh+RrwMivrXcqXouq34uR1jjfCkvUML3yjuJsgHrr7vDqzN189KqB4DlBW8DAlygqE3UEkgWe1MBZZPNKqZP3z@vger.kernel.org
+X-Gm-Message-State: AFuF++lXQ1iebpjcO/Jan6FNsQpUQvFg2ncf3yYiBPs0egplHOpI3jPo
+	POZA7OSqqgGWglG70dZ5c/FewhWkw4+5686zpdok4w6Zs0Hkd4IW7A81oNMAxyki3A/bkCyEnF8
+	VCUTwTDfVnttdGglbYxCDagPDg3WXAVhKuMDsKGvh15gLvIkR9/5XCj1NFMwSQmLTT0uE
+X-Gm-Gg: AR+sD11ge5ofNCSZ6NXfUeeeW6y3wj4Xwrx7tPC8ZkYGFa6gZf+t2unT74myGv1N7Ig
+	ASA+jqMZZPCNTsETe2ilc7JhAqRAhNDEnvbru/vqqpIezCgMWJSBbuqs6+ovWA3foxMW0CikiKg
+	V23Rq96CEDR42oLpJqsl7lnwb3EOjAJTMIJtbeONiyLbBoI5S0OldObXIGkQZWbhIEDVKtDjE7r
+	6ZhaJsOVdgeQTAHKh2TZFj4uBSyJ1PqbkjSXggi4iNWTX6/HwxY5RsPVZ75ugX4sThZp2Mc9X5y
+	2ybgszlYyGxgnBU8wG+HnGiitPutJSSIENzfk626nDVbMizlQpKKCMJbeEs6kIg6k0u449zliXW
+	GsgR66fCBOef/sbpmAtnRC9thgg7PfQKVuKc=
+X-Received: by 2002:a17:90b:1b41:b0:383:5a16:bd70 with SMTP id 98e67ed59e1d1-395c39f97e8mr42709366a91.16.1787578920176;
+        Mon, 24 Aug 2026 06:42:00 -0700 (PDT)
+X-Received: by 2002:a17:90b:1b41:b0:383:5a16:bd70 with SMTP id 98e67ed59e1d1-395c39f97e8mr42709251a91.16.1787578919646;
+        Mon, 24 Aug 2026 06:41:59 -0700 (PDT)
+Received: from [10.217.218.158] ([202.46.22.19])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-395e42d6139sm10107597a91.0.2026.08.24.06.41.53
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 24 Aug 2026 06:23:20 -0700 (PDT)
-Message-ID: <bbf024e1-0e0a-4b49-988b-9827120e359b@oss.qualcomm.com>
-Date: Mon, 24 Aug 2026 15:23:19 +0200
+        Mon, 24 Aug 2026 06:41:58 -0700 (PDT)
+Message-ID: <8af7a34a-da4f-492f-a51c-cc420edc5e6e@oss.qualcomm.com>
+Date: Mon, 24 Aug 2026 19:11:51 +0530
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -90,95 +89,119 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] arm64: dts: qcom: sm6125-xiaomi-laurel-sprout: reserve
- firmware-owned DRAM
-To: Roman Linev <admin@mswin.me>, Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>
-Cc: =?UTF-8?B?QmFybmFiw6FzIEN6w6ltw6Fu?= <barnabas.czeman@mainlining.org>,
-        linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-References: <20260821032541.1856299-1-admin@mswin.me>
+Subject: Re: [PATCH 7/7] i2c: qcom-geni: Use geni_se_set_rate() for setting
+ source clock frequency
+To: Praveen Talari <praveen.talari@oss.qualcomm.com>,
+        konrad.dybcio@oss.qualcomm.com, Sudeep Holla <sudeep.holla@kernel.org>,
+        Cristian Marussi <cristian.marussi@arm.com>,
+        Ulf Hansson <ulfh@kernel.org>, Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        Jiri Slaby <jirislaby@kernel.org>, Mark Brown <broonie@kernel.org>,
+        Viken Dadhaniya <viken.dadhaniya@oss.qualcomm.com>,
+        Andi Shyti <andi.shyti@kernel.org>
+Cc: chandana.chiluveru@oss.qualcomm.com, arm-scmi@vger.kernel.org,
+        linux-arm-kernel@lists.infradead.org, linux-pm@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+        linux-serial@vger.kernel.org, linux-spi@vger.kernel.org,
+        linux-i2c@vger.kernel.org
+References: <20260805-derive_clk_perf_tbl_from_perf_domain_opp_table-v1-0-61171ab1cdce@oss.qualcomm.com>
+ <20260805-derive_clk_perf_tbl_from_perf_domain_opp_table-v1-7-61171ab1cdce@oss.qualcomm.com>
 Content-Language: en-US
-From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-In-Reply-To: <20260821032541.1856299-1-admin@mswin.me>
-Content-Type: text/plain; charset=UTF-8
+From: Mukesh Savaliya <mukesh.savaliya@oss.qualcomm.com>
+In-Reply-To: <20260805-derive_clk_perf_tbl_from_perf_domain_opp_table-v1-7-61171ab1cdce@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Proofpoint-GUID: O2YzES_EjYCMa9X8WygXQJsE8Xnfs8L9
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODI0MDExMiBTYWx0ZWRfX165ha16lhq4l
- ce2Yi52jJXqaipdzJ+ZXuWNIeZy4IfIcXDWB93JwSwPbkDzK2kkDiYt45mqvERh6ojCDaeZzQN9
- duwTGAonI4g8AM1pzbrdyP6fdBeBGeQ3EwASeKThQJ1pQyjUjlyJyohWJiTFKopQ7ImmhWSs9J2
- bZ4EATlTf7XTZaVxERWofv2KxekEDI86pw3X4kiI20zTVwEAgkH6pwv8luhhHB8hhhycDO1yDgu
- tehodtCkfEdiea3wmX0juOtWPCfUaiDdfiDG70ITwLmzpR3Zng6psOZJ22zZpZWJOldiCCuDocz
- QhlWfq7cPR/Y/UUXq2KGHZwoq16CevzmTOe960huPGbgWDUwUAHa0JK6bpJphR4uDoJ6rJdxTtI
- Mm5lbEzcjwzE93pvoYUWQidf3vGsSRrLecz+gF3s4hwS2FeXZRNuf/N9q58eSEMnIOGwOYCtbJT
- fNxza1bp1QQrevX729g==
-X-Authority-Analysis: v=2.4 cv=Fqo1OWrq c=1 sm=1 tr=0 ts=6a8c45ca cx=c_pps
- a=HLyN3IcIa5EE8TELMZ618Q==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODI0MDExNSBTYWx0ZWRfX3eZypBMEeN6T
+ ec9LS3Rs/h7vIbQqOmsFJosNEUtAYQ6CwkMfrStoo3bfIAELbLvuETIEh8FXU8+xIx7wmLz2M/B
+ F927T1pDuX2EUxjBFWULW45aJNVyDUtPTl0PuiKNq65Ec2/RYBa8qxN1DvIi1Ra1b+IRYi5Q4ew
+ 9oBjB2G/fBMUL3MDF9VdSVDum6zn5Yajyo1bZ0UgKg1JXfYve33bwxyClvCJ4LNI7t46a0dRx26
+ tYvkeq6spTdqNrCpWH/ACUaHqDGkB+kiXuDiJi4r7KWWduhWZXNh5vMokoQnuQtZe8Paq2fn/tV
+ pqJfhKSB/Dcb79YKOC+6w+9HzoskCxHbbOLyEgDzUHV8GBIVIMjXpshha5SGTldYw42Pc5TUUSe
+ ZXH4w1K1AytNq/O92I/yF+sUgQDCqolmSDUAjDGRtoG/Px5sSGMZTx51Jrgzg7cQY5CTCGNBCzk
+ DYCKQozFmiLuS43Rhww==
+X-Authority-Analysis: v=2.4 cv=JL0LdcKb c=1 sm=1 tr=0 ts=6a8c4a28 cx=c_pps
+ a=UNFcQwm+pnOIJct1K4W+Mw==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
  a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22
- a=cPhRdkEELQjuWZljFz4A:9 a=QEXdDO2ut3YA:10 a=bTQJ7kPSJx9SKPbeHEYW:22
-X-Proofpoint-ORIG-GUID: O2YzES_EjYCMa9X8WygXQJsE8Xnfs8L9
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODI0MDExMiBTYWx0ZWRfX+NLAGOynvqLV
- 928T3D8BqBwqqLpQ7VNHmA/JIkuHtBlIbaESYdaGUhmBDSvVkqLxDUX7bo3o/5P0UqdBLoKSm+9
- /O/8sIVL3Ump3FVt9OreOb3BvaMDbO8=
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
+ a=EUspDBNiAAAA:8 a=bL_AZauQwEGehf-WiMEA:9 a=QEXdDO2ut3YA:10
+ a=uKXjsCUrEbL0IQVhDsJ9:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODI0MDExNSBTYWx0ZWRfX5krsupQyVgmN
+ S1Ac3mnia5qfX4D0x9GbuuzAgSqHAbIYiQ49GXoboWasPIaT4m51ssxyT/wLRKAVkSsypKvOySX
+ R1UaEvahryVWgNGZ+bpozhWz+JB8WbI=
+X-Proofpoint-GUID: R9UnAWvrdKStyw72Nuxay3feXw1rtXzK
+X-Proofpoint-ORIG-GUID: R9UnAWvrdKStyw72Nuxay3feXw1rtXzK
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-08-24_04,2026-08-24_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- bulkscore=0 malwarescore=0 adultscore=0 lowpriorityscore=0 suspectscore=0
- impostorscore=0 phishscore=0 spamscore=0 clxscore=1015 priorityscore=1501
+ phishscore=0 suspectscore=0 clxscore=1015 impostorscore=0 priorityscore=1501
+ adultscore=0 bulkscore=0 malwarescore=0 spamscore=0 lowpriorityscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608240112
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608240115
 
-On 8/21/26 5:25 AM, Roman Linev wrote:
-> sm6125.dtsi sizes reserved_mem1@46200000 at 0x2d00000 (45 MiB), so it ends
-> at 0x48f00000. On laurel-sprout the firmware owns 0x4900000 (73 MiB) at
-> that base: the downstream device tree overrides the SoC region with
+
+
+On 8/5/2026 1:27 AM, Praveen Talari wrote:
+> On the SA8255P platform there is no Linux clock handler for the SE source
+> clock; resources are instead managed by firmware via a genpd performance
+> domain. The I2C driver therefore relies on geni_se_set_rate() to apply the
+> fixed 19.2 MHz source clock frequency expected by the SCL divider and
+
+somewhere it's 32 MHz also and this may change too ?
+
+> counter values programmed by qcom_geni_i2c_conf().
 > 
-> 	removed_region@46200000 { reg = <0 0x46200000 0 0x4900000>; };
+> Call geni_se_set_rate() directly from qcom_geni_i2c_conf() so the
+> configured frequency is applied to the correct device (the perf domain
+> device on the firmware-managed path, or se->dev otherwise) without the I2C
+> driver needing to know which resources_init() variant is in use.
 > 
-> which ends exactly at 0x4ab00000, where mainline places camera_mem. The
-> 28 MiB between 0x48f00000 and 0x4ab00000 is therefore firmware-owned on
-> this board while mainline leaves it as free System RAM and hands it to the
-> page allocator.
+> Drop the now-unused set_rate field from struct geni_i2c_desc, the
+> geni_se_set_perf_opp() usage on the SA8255P variant, and the unused freq
+> parameter from qcom_geni_i2c_conf().
 > 
-> On Qualcomm a "removed_region" is XPU-protected, so this is not a matter of
-> reading stale data: the region is not the kernel's to allocate.
+> Signed-off-by: Praveen Talari <praveen.talari@oss.qualcomm.com>
+> ---
+>   drivers/i2c/busses/i2c-qcom-geni.c | 13 +++++++------
+>   1 file changed, 7 insertions(+), 6 deletions(-)
+> 
+> diff --git a/drivers/i2c/busses/i2c-qcom-geni.c b/drivers/i2c/busses/i2c-qcom-geni.c
+> index a23554d101fd..4561e2d235d5 100644
+> --- a/drivers/i2c/busses/i2c-qcom-geni.c
+> +++ b/drivers/i2c/busses/i2c-qcom-geni.c
+> @@ -213,11 +213,11 @@ static int geni_i2c_clk_map_idx(struct geni_i2c_dev *gi2c)
+>   	return -EINVAL;
+>   }
+>   
+> -static int qcom_geni_i2c_conf(struct geni_se *se, unsigned long freq)
+> +static int qcom_geni_i2c_conf(struct geni_se *se)
+>   {
+>   	struct geni_i2c_dev *gi2c = dev_get_drvdata(se->dev);
+>   	const struct geni_i2c_clk_fld *itr = gi2c->clk_fld;
+> -	u32 val;
+> +	u32 val, ret;
+>   
+>   	writel_relaxed(0, gi2c->se.base + SE_GENI_CLK_SEL);
+>   
+> @@ -233,6 +233,10 @@ static int qcom_geni_i2c_conf(struct geni_se *se, unsigned long freq)
+>   				 itr->clk_div, itr->t_high_cnt,
+>   				 itr->t_low_cnt, itr->t_cycle_cnt);
+>   
+> +	ret = geni_se_set_rate(&gi2c->se, 19200000);
 
-Not necessarily, XPU protection is a specialized mechanism, there may be
-other owners that don't like tampering with their memory (hyp, tz..)
+hard code ?
+May work currently, but if higher frequency support added, source may 
+change.
 
-> The observed symptom is hard lockups under sustained buffered reads, where
-> page-cache pressure eventually reaches the disputed range. Before this
-> change the device wedged at a rate of roughly one lockup per 59 MiB of
-> buffered reads from the SD card, reproducibly enough to fire on demand.
-> With the region reserved, the same workload has run 691 GiB of buffered
-> reads with zero lockups.
+Also you have added in commit message, but add a comment also here.
 
-CONFIG_MEMTEST=y and `memtest=1` in cmdline is good to run to confirm
-your memory map checks out
+> +	if (ret)
+> +		return ret;
+> +
+>   	return geni_icc_set_bw_ab(&gi2c->se, GENI_DEFAULT_BW, GENI_DEFAULT_BW,
+>   				  Bps_to_icc(gi2c->clk_freq_out));
+>   }
 
 [...]
 
-> +		/*
-> +		 * The SoC dtsi sizes reserved_mem1 at 0x2d00000 (45 MiB), ending
-> +		 * at 0x48f00000. This device's firmware owns 0x4900000 (73 MiB)
-> +		 * there -- downstream laurel_sprout carves out
-> +		 * removed_region@46200000 with that size, ending exactly at
-> +		 * camera_mem's 0x4ab00000. The 28 MiB in between is XPU-owned
-> +		 * on this board and mainline currently hands it to the buddy
-> +		 * allocator.
-> +		 */
-> +		reserved_mem1_laurel: memory@48f00000 {
-
-The label is unused, you can drop it. I think you should just do something
-like this:
-
-/* This carveout is larger than on other devices  */
-&reserved_mem1 {
-	reg = <0x0 0x46200000 0x0 foo>;
-};
-
-Konrad
