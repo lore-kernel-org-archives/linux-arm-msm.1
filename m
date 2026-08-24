@@ -1,87 +1,40 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from mout.web.de (mout.web.de [212.227.15.4])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D58F51C75F9
-	for <linux-arm-msm@vger.kernel.org>; Mon, 24 Aug 2026 09:24:56 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4706B374185;
+	Mon, 24 Aug 2026 09:25:51 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=212.227.15.4
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787563499; cv=none; b=hH4JyYgeDJzjymc72vn21gafL+PU8qn4futtDvW4ejXa9H8jHLicFi1eH6A76yzJHdVnFnSfHCWTioGvar6f5J103ZJOuOAQn3n2aNPvPQ760jeIMhEcsT+n0PZy5WqxpZnBkPn8zV667QN8/ElrkPFx2FmXHdtFXfCSmnRUiRs=
+	t=1787563554; cv=none; b=MPYsmT3mBLCn9s7lEvjVty6RnthNelK3hDB+lbONHqsTYEIXi68SFnLoElbHfUiS3GXKqRXzj4IWnySIorpuj3vsUKMe+8nB+fUBpfv2eQmjqMH4hW9LHKcqUrJ69UDpeYkXyR3ARsZxGoky7lOteHE87fBDHxrsH90HCHnU1J8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787563499; c=relaxed/simple;
-	bh=Y4EgcjluYnSRJLSjmvyLzbSd0FfjBnqIP95LJDK8Xd0=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=T0Apj7C5l/+bMQQPoNXjfdRmKRxiTgkovOudeggEDTWyCa+LsbNw9xcJQ1/69s5DRUk2XlRZ5SGRns1TxjlqRVMTwetPQpLCTZ8kZOLZRsc22cMjcQ5h/C0qeddYxKt3YECo0NPSQkCrGrUPqIUH2zBozEFp+H4TBZIeZ28J9dI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=Mm5hBv2H; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=hjrrvFhT; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1787563554; c=relaxed/simple;
+	bh=KZy83leTHRVpqpF16/Ku0U89Haiv3Ln1dQuxBgviagU=;
+	h=Message-ID:Date:MIME-Version:To:Cc:References:Subject:From:
+	 In-Reply-To:Content-Type; b=L/D1uCkduZ/xx9it0R/UtBtv+rTbzAP/tKUMNbRdXC59T/LpsUrdd4yBt1K0sbuGhkJN94gsPgf/D/HbvdQVzFkWIk6W1hQ5ey5ARJB6lYcY13DO3RcTD0eiihg5KAyzh9GG5TqS+0vjbz3xHdT8dagVB1FbTV4Kh0Ob2q636pw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=web.de; spf=pass smtp.mailfrom=web.de; dkim=pass (2048-bit key) header.d=web.de header.i=markus.elfring@web.de header.b=GWo4oyN2; arc=none smtp.client-ip=212.227.15.4
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=web.de
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=web.de
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="Mm5hBv2H";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="hjrrvFhT"
-Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67O99P2g3575690
-	for <linux-arm-msm@vger.kernel.org>; Mon, 24 Aug 2026 09:24:56 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	PRh437KQ7ulwK7lu5Bc/hF/l6rZw1vWutipg0275TjE=; b=Mm5hBv2Hu29EiFSQ
-	aD+o9lx0dpXmXug1FTo+YGJpikM6UujbnAVDQ46BWskqfSeNudMUrDrDSwk0DKJV
-	gLg9W/BXSZSjnvNbkbscetWBaGHGCviydf+VbSiHUbtJEY6VtK4I0PIRR4peRvQn
-	Kfzv9WLU9ZMsQeo/6rnXvS8eh0EHDebWFZfGdLiZQhbzK2zH4pmRmvoaZUi+kNTv
-	M4MSzObS3U0GhpnS5RtC8iJSKYHkWLEihOUHiYL6msER1EGQ4TS3oZo6s7Az2v0f
-	GM7+8O0pCPLYw28KSEMVZAu7JhaBIO6sJhSULTkXxZkGt8osjBL9XXvAUXwMEYrV
-	5oG7tQ==
-Received: from mail-qt1-f198.google.com (mail-qt1-f198.google.com [209.85.160.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g88jpj059-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Mon, 24 Aug 2026 09:24:56 +0000 (GMT)
-Received: by mail-qt1-f198.google.com with SMTP id d75a77b69052e-52d57d17d6cso6914371cf.3
-        for <linux-arm-msm@vger.kernel.org>; Mon, 24 Aug 2026 02:24:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1787563495; x=1788168295; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=PRh437KQ7ulwK7lu5Bc/hF/l6rZw1vWutipg0275TjE=;
-        b=hjrrvFhTBGKN9jQYCMZh5lAal/2qtZ8C7t99HYRIKeoxRjr+YdruAg7XlEv9NTH+JW
-         nz/O2qj0NxIU/5hvG1Ba344fTnTZ+IyxWdSLGAY999zxgk4IvNiIYANaCUZwEUU8lmHy
-         /n/4PTt4UfLbMakkmMlx+YjitABR2nJStxoAje/aStaNdjGg4FWP3a4oL5vnVxArymxm
-         f5cAGLgPozw56yOyaqndDfa4lCfNl71WAASsuCvAXYzvoBycS+ZCsf9THXjC4+nDKgNo
-         uIteSn4R1wwkKWk+0HDKO6pLPBPlc4pzagzDTlMs4h6O0v5gb/4MM07bTiIaH7NkgYmL
-         4TkQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787563495; x=1788168295;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=PRh437KQ7ulwK7lu5Bc/hF/l6rZw1vWutipg0275TjE=;
-        b=rdHTnFdo5ZNJk9PiPBxiKLoWhuafIKfTPQqhctxsvIfQhvwVs8S/fUowRX0BTe9xab
-         172LyVkUPkDLWcwTrVen1lkryKZ8joIliutmErMKNpnOg2xXDFl2byvzkirYK9OjCVmF
-         RdKbnUU+NY4NQzc/cFTUrRYKZOsPdc8RGiS/6waD1fMz4l8SO+H5VQtaNWYkqwaOwqw3
-         jAFqQ/a5S+FOq5baVdv+7jYigdO6WSk83IrnuMDy3C+Beks2x7pf38FWSTo2R9OjMMR7
-         pauXnU6usgwrlraKlnFx9v19SclLXElKMgaqmtWZjUgcT03Z5jhvMZc+HSsM1P8LXpPf
-         PM7g==
-X-Forwarded-Encrypted: i=1; AHgh+RooZHPzOdvv2HyOr8YS5wQloLDNAPda7uJfQ4bf+z8ONFJE1ApwxKJ/QJdNQGKYRmjCGjgFKeYRkafvMX4Z@vger.kernel.org
-X-Gm-Message-State: AFuF++lOBC2USUMQU4egvavl1YaKV+l3dksJHbCQObpTrwL4m2IeZha4
-	5zOQi7tkwaGVJoKm0QUGnSnzKdW1v+VA2F+G1/y+Alih3L021qgzBs+e6DqEQkUU0rXH/AHvbyT
-	yawtDKJYmaO+5CmNDFF0zJF0tzt2VTYaDMwIH0Zb4QooBhKMy1MvbfxInKF1y7ac7aK1f
-X-Gm-Gg: AR+sD134hXLY7lwefvJlFqpB8yrFDiKg6TTkjVWl60rZnOza4fSCG/UZiIZVDxsJKv6
-	BYsfnuifYhc9h0b1NojFy1yffspY3AhBeN7tSbIf7E52ZxO1b4/DAs0R4VhL16PrKHH8RfsK5Ye
-	zmCZUhlP4VfcUmNP1odRU7FcOqUJOT9uNJnlfGb7iYCPOXArwUAPe3n8Hn2CMtjCCF1ASoBcZQA
-	tendb1lh12YHBIHREhAA7Rk16LL/sXxb3voH6HQVWWuFyeYkPiaIWJJVDvn25PE/WQJo2ePuskN
-	G0coQBfbV9iQgTgsVAaevB4bCqx9Y9akeYhpNkPl7qZDZT8Mn5FVN6nSdB6tT9YnYGV53adzMeL
-	jEtKvz5khanq7yJod/dafTa2Y
-X-Received: by 2002:ac8:5a95:0:b0:50f:a53b:9d5 with SMTP id d75a77b69052e-52df565735dmr167550731cf.2.1787563494989;
-        Mon, 24 Aug 2026 02:24:54 -0700 (PDT)
-X-Received: by 2002:ac8:5a95:0:b0:50f:a53b:9d5 with SMTP id d75a77b69052e-52df565735dmr167550501cf.2.1787563494479;
-        Mon, 24 Aug 2026 02:24:54 -0700 (PDT)
-Received: from [192.168.120.193] ([178.235.128.140])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c2496734bfcsm1236377566b.43.2026.08.24.02.24.52
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 24 Aug 2026 02:24:53 -0700 (PDT)
-Message-ID: <30a04183-b8d5-4a6d-8092-6b888a240410@oss.qualcomm.com>
-Date: Mon, 24 Aug 2026 11:24:51 +0200
+	dkim=pass (2048-bit key) header.d=web.de header.i=markus.elfring@web.de header.b="GWo4oyN2"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=web.de;
+	s=s29768273; t=1787563531; x=1788168331; i=markus.elfring@web.de;
+	bh=rNv8Zp/w4Hgh32sXahptz04Hka8TlTqKMPD+izguuHU=;
+	h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:To:Cc:References:
+	 Subject:From:In-Reply-To:Content-Type:Content-Transfer-Encoding:
+	 cc:content-transfer-encoding:content-type:date:from:message-id:
+	 mime-version:reply-to:subject:to;
+	b=GWo4oyN2c0HZsmY3kbVi5JAdIENFgWI9+3//jownviMHVta3tFHnDum0iEqtcAjD
+	 MSY3ynfYWxit9IHnLHIJ0waT73ckxe1I2V9ezDPFQXIZcOD2cTJ5r8R6pN2Z5LvlC
+	 DLUV4jz1HRT2Ib+92aL5Xl5sdtIj1PFwntY8fygFvRd+giKsYPNt3QZY3CQty+dEK
+	 +7l3mWZFmr/dIhQ1UcawXEzkhyI3JIKry/P4JSSaskGjBqJmLczsdengxlzWCb8Zy
+	 heL3Y3p3ibAokddocyAfAh9IEVDZPjVk5L/O1Nsft35czrgQSWYJKebsFxd53eSn3
+	 IQTIFlCBOUBK1DtnDw==
+X-UI-Sender-Class: 814a7b36-bfc1-4dae-8640-3722d8ec6cd6
+Received: from client.hidden.invalid by smtp.web.de (mrweb005
+ [213.165.67.108]) with ESMTPSA (Nemesis) id 1MC0PR-1x4EMg0Lmv-006k4y; Mon, 24
+ Aug 2026 11:25:31 +0200
+Message-ID: <aff28775-b27f-4440-b7e8-01bb5a8ea906@web.de>
+Date: Mon, 24 Aug 2026 11:25:28 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -89,100 +42,144 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/2] i2c: qcom-geni: add I2C frequency table for 32 MHz
- firmware-based SEs
-To: Kathiravan Thirumoorthy <kathiravan.thirumoorthy@oss.qualcomm.com>,
-        Mukesh Kumar Savaliya <mukesh.savaliya@oss.qualcomm.com>,
-        Viken Dadhaniya <viken.dadhaniya@oss.qualcomm.com>,
-        Andi Shyti <andi.shyti@kernel.org>,
-        Manikanta Mylavarapu <quic_mmanikan@quicinc.com>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>
-Cc: Mukesh Kumar Savaliya <quic_msavaliy@quicinc.com>,
-        linux-i2c@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-References: <20260812-ipq5424_i2c_scl_updates-v2-0-e09cd39d01d7@oss.qualcomm.com>
- <20260812-ipq5424_i2c_scl_updates-v2-2-e09cd39d01d7@oss.qualcomm.com>
-Content-Language: en-US
-From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-In-Reply-To: <20260812-ipq5424_i2c_scl_updates-v2-2-e09cd39d01d7@oss.qualcomm.com>
+To: Harendra Gautam <harendra.gautam@oss.qualcomm.com>,
+ linux-sound@vger.kernel.org, devicetree@vger.kernel.org,
+ linux-arm-msm@vger.kernel.org, Srinivas Kandagatla <srini@kernel.org>
+Cc: LKML <linux-kernel@vger.kernel.org>, Conor Dooley <conor+dt@kernel.org>,
+ Jaroslav Kysela <perex@perex.cz>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
+ Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>,
+ Kumar Anurag Singh <kumar.singh@oss.qualcomm.com>,
+ Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>,
+ Mohammad Rafi Shaik <mohammad.rafi.shaik@oss.qualcomm.com>,
+ Prasad Kumpatla <prasad.kumpatla@oss.qualcomm.com>,
+ Rob Herring <robh@kernel.org>,
+ Sarath Ganapathiraju <sarath.ganapathiraju@oss.qualcomm.com>,
+ Takashi Iwai <tiwai@suse.com>
+References: <20260824063627.3595610-7-harendra.gautam@oss.qualcomm.com>
+Subject: Re: [PATCH v3 6/9] ASoC: qcom: Add QAIF PCM operations
+Content-Language: en-GB, de-DE
+From: Markus Elfring <Markus.Elfring@web.de>
+In-Reply-To: <20260824063627.3595610-7-harendra.gautam@oss.qualcomm.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODI0MDA4MiBTYWx0ZWRfX/a+hbu+FuNEf
- NKC7krj5SLcKdgdyDhY/Dx4V+C87NjBmaAJWh9nLVGdynVbyrsjHarMiQWI+Lw5vmJDJreNm74M
- jAZWgHkbjg6HdcwsnPGWVLipvPcSfRo0alLTMk1SsHBeMXROkOOZ/TzlOxG0yCBu7RHiyyZLHmR
- Bc2hv2+7CDCEjAPReRvpSYYfKrBVnPUPAh9dOVreeYMXlG1lIh03dimP5fMuOXNHGTHWTuaw7NO
- GIYhloYQKDd0Dbgn1nQER1b2gQoILL6oszlnWcLHemAGI00gwtoda9hDD3scY10WtFqjBm1N3Ta
- cj7p7u1C8dkWxEG1keC+J/g4ZsOoDdpbaNGt0tGGwabwNxNf0Htd6l6smsOmB2sT9ztLWHX6W9P
- u3Jm1gjcf6UnLchp2HhNKfWi++V2QD7ENejQ1G+kXHD+9CRNloZL/0Ke9eQZGqugnumGLbWNbSx
- ifv//14j/onlK0o/MQA==
-X-Proofpoint-GUID: CIxHOZEJoBZKkf4qoasc1o4BITw7z_bl
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODI0MDA4MiBTYWx0ZWRfX7CczmVPzGUH9
- aYrI9ftVjoqWqUO3sJte0VWWBB+RubssjI+XaNmvvXBtesnze4Vvsgdp5TpJzS7WEe5JMP9BWyZ
- c4hvaJuWMwvxVTeAb04QDlEXsLAbfHg=
-X-Authority-Analysis: v=2.4 cv=Xey5Co55 c=1 sm=1 tr=0 ts=6a8c0de8 cx=c_pps
- a=mPf7EqFMSY9/WdsSgAYMbA==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
- a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22
- a=EUspDBNiAAAA:8 a=NH3m5DBF-mqJd7-nbgUA:9 a=QEXdDO2ut3YA:10
- a=dawVfQjAaf238kedN5IG:22
-X-Proofpoint-ORIG-GUID: CIxHOZEJoBZKkf4qoasc1o4BITw7z_bl
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-08-24_03,2026-08-21_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 adultscore=0 impostorscore=0 spamscore=0
- lowpriorityscore=0 malwarescore=0 phishscore=0 clxscore=1015 bulkscore=0
- suspectscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
- definitions=main-2608240082
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:OpUpV8lIBkBSehLE+Gg9dR+ufkSXZo/IKhawiwkx5MzA2g8EQrD
+ SFAKLXrALq3SSexCErCH2TUa/MNZWG+pEatb1ay43MbPLCKXK08B7p3ul2yYxa9xjsTrFTD
+ GUHsBtjQworF53mubFN1awqJe/AQJw8ekFlKSoYHUKSD5uZ4hdqTlxgVTUt61jOu7zjYHpY
+ Zc0g6AQ/hFKy7FxRvlwMw==
+X-Spam-Flag: NO
+UI-OutboundReport: notjunk:1;M01:P0:ejGKmdAPyNY=;MzGxJgI4epdTWfxBr3zZCEwFMgt
+ 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
+ 2PV9WgZLCiszdaF7j2yw=
 
-On 8/12/26 10:30 AM, Kathiravan Thirumoorthy wrote:
-> On IPQ5424, the I2C controller can operate on both RTL-hardened SEs
-> and firmware-based SEs. As documented in commit 506bb2ab0075
-> ("i2c: qcom-geni: Support systems with 32MHz serial engine clock"),
-> in IPQ5424 SEs use a 32 MHz source clock.
-> 
-> The existing frequency table does not provide the required SCL timing
-> parameters for firmware-based SEs. Add a dedicated frequency table
-> using the SCL counter values recommended by the hardware design team
-> and select it for firmware-based SEs to achieve the target bus
-> frequencies.
-> 
-> Move geni_i2c_clk_map_idx() from geni_i2c_resources_init() to
-> geni_i2c_init() to ensure SE_HW_PARAM_2 is accessed only after the
-> required clocks have been enabled.
-> 
-> Signed-off-by: Kathiravan Thirumoorthy <kathiravan.thirumoorthy@oss.qualcomm.com>
-> ---
->  drivers/i2c/busses/i2c-qcom-geni.c | 25 ++++++++++++++++++-------
->  include/linux/soc/qcom/geni-se.h   |  1 +
->  2 files changed, 19 insertions(+), 7 deletions(-)
-> 
-> diff --git a/drivers/i2c/busses/i2c-qcom-geni.c b/drivers/i2c/busses/i2c-qcom-geni.c
-> index 00013b41a6f5..15835f10b062 100644
-> --- a/drivers/i2c/busses/i2c-qcom-geni.c
-> +++ b/drivers/i2c/busses/i2c-qcom-geni.c
-> @@ -187,19 +187,28 @@ static const struct geni_i2c_clk_fld geni_i2c_clk_map_19p2mhz[] = {
->  };
->  
->  /* source_clock = 32 MHz */
-> -static const struct geni_i2c_clk_fld geni_i2c_clk_map_32mhz[] = {
-> +static const struct geni_i2c_clk_fld geni_i2c_clk_map_32mhz_minicore[] = {
->  	{ I2C_MAX_STANDARD_MODE_FREQ, 12, 9, 10, 26 },
->  	{ I2C_MAX_FAST_MODE_FREQ, 4, 3, 9, 19 },
->  	{ I2C_MAX_FAST_MODE_PLUS_FREQ, 2, 3, 5, 15 },
->  	{}
->  };
->  
-> +static const struct geni_i2c_clk_fld geni_i2c_clk_map_32mhz_fwcore[] = {
-> +	{ I2C_MAX_STANDARD_MODE_FREQ, 12, 9, 10, 25 },
-> +	{ I2C_MAX_FAST_MODE_FREQ, 4, 3, 9, 18 },
-> +	{ I2C_MAX_FAST_MODE_PLUS_FREQ, 1, 6, 15, 29 },
-> +	{}
-> +};
+=E2=80=A6
+> +++ b/sound/soc/qcom/qaif-platform.c
+> @@ -0,0 +1,544 @@
+=E2=80=A6
+> +static int qaif_platform_pcmops_close(struct snd_soc_component *compone=
+nt,
+> +				      struct snd_pcm_substream *substream)
+> +{
+=E2=80=A6
+> +	mutex_lock(&drvdata->stream_lock);
+> +	if (v->free_stream_dma_idx)
+> +		v->free_stream_dma_idx(drvdata, data->stream_dma_idx, dai_id);
+> +	mutex_unlock(&drvdata->stream_lock);
+=E2=80=A6
 
-The fwcore one seems to be slightly "stricter" - wouldn't it work
-for both of them?
+Under which circumstances would you become interested to apply a statement
+like =E2=80=9Cguard(mutex)(&drvdata->stream_lock);=E2=80=9D?
+https://elixir.bootlin.com/linux/v7.2/source/include/linux/mutex.h#L253
 
-Konrad
+Regards,
+Markus
