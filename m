@@ -1,87 +1,87 @@
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C1943428473
-	for <linux-arm-msm@vger.kernel.org>; Mon, 24 Aug 2026 13:42:01 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3C8C2429CC2
+	for <linux-arm-msm@vger.kernel.org>; Mon, 24 Aug 2026 13:44:18 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787578925; cv=none; b=HYs4e4chhv+f3gpMyK5qcdDKbKgs251jlom3XL9hfZfJn1/DkBrhDOH/FJEtcTE9yGwCnVPedEENGVXX2cigVNDSZ3+887DfeKJtzZddp/Fhn2TwRb6Ab3Ougo+5pZmBaDaTn/SKfaId0Vwbks73Ti+R7gm2b9kRJGLbFh2G+Fs=
+	t=1787579061; cv=none; b=Uc43DM7TZ/8ZOEa3OJ3yTM+3Ex8bPpMZ0ZrEC+CcxY36ae0jOsCh+upZzu95RZo7RjJP4E64bL92ElAZEzgdwlcSOVGDolOEPeVzu+I54lt0IJfMtOOsibJIm8tYxh5fF5cEns/5BjO639yK1DX6Ui2ImQJIR4Ls0nNsa5hAFNE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787578925; c=relaxed/simple;
-	bh=220sKSJfAH66EhAx6MKsNA3uJHuVRcM7xOCoY8od3n0=;
+	s=arc-20240116; t=1787579061; c=relaxed/simple;
+	bh=drVhuBxQeShpDUOyhOfxcT08VPuo0dfiuRftN0uOQDA=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=qt6hmhodj8GVlSy0ejgqmLr1zfCcdLzMiB3FrUyipvUUGh7Z6jCAg8LrMCXZNQKBLetKveOGczuoYBtQBvVoLMYjts22GuD3cSr4mCkIN30/vGiHwDVp6MamGmR/y9Da8IHzVPiyHqhGUDfiMt9KiHqkBhMBW4uzLokAvuFEQ8E=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=WeLnskcV; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=OM+pGXEK; arc=none smtp.client-ip=205.220.168.131
+	 In-Reply-To:Content-Type; b=m+vLoEgpI0B8F8SYPsuEPk1lqOGvUQie8PQugFJnUQbD8o4qsBw9FTe01kBgG6JJ3RfoMS2oRK8TgdMM2R+yoqMvHBsNBc5E1WlSwMRm6oYjNKZ6KPuPtBWcvcmZ6BTZuBWk0IpTu13zybZyMNf65dr8E1cfm6jMOk8yUZjyndU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=nnyFdS6U; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=fL/4iB0o; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="WeLnskcV";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="OM+pGXEK"
-Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67OCvCmx2584273
-	for <linux-arm-msm@vger.kernel.org>; Mon, 24 Aug 2026 13:42:01 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="nnyFdS6U";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="fL/4iB0o"
+Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67OCvCnY3613735
+	for <linux-arm-msm@vger.kernel.org>; Mon, 24 Aug 2026 13:44:16 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	4nn3T1t/sB7+ffZyruvK0mZmx5y7OMfO+jTRwc/O4fA=; b=WeLnskcVZok8Wavb
-	M2odJvv5d8hV/LD5NQp27uGONnXiEafmZkgE5sg4Sjf62xEqH6D74PlYl0xvO93k
-	04Nf71ranEH5xPy5z0e3iywNAYhUMUYubaMk4JJuiaB96nxzuCr2V1j4tDc6E532
-	QIvjOdRcqyjgE8N3Q8xqz+MfZ8Kji5dpI9gtXa3WF7BB0cDciV6AQbmcYwLgomM0
-	ncmZVxqqqEhympv/jZRilWh5VIj+SUsAw6kEqxFmF9kaMZCtIjahq06Oli8t5Ztv
-	dSrGJp+Q9Z56fnRzHeENNT5x3XMjMHLskW9MSF3lk3vyLfyR+sGuaN01L8jXNyxJ
-	GVv6+Q==
-Received: from mail-pj1-f71.google.com (mail-pj1-f71.google.com [209.85.216.71])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g8hbthmba-1
+	lKMa1e5vKvj2ijBkWIx/18zNau1rRjql4sCYPc/YlcM=; b=nnyFdS6UPNZWC0e+
+	MgDNvc7nrm7C30gyxlOUfJEHh0CiRoCoqZvYE+3/JqhIFhdSRUHVQxaghq2qCBEP
+	S4krOmfrvCErv9LN14pJ7aPFyBSZALKZGVgtdKk/IlmHuaXZ4SOksAl5xfqGPMaw
+	fjii4zInmPpeTrunmE3KHboUP4MYffwFobZZx8PmOf7I1aEcNdgymw3QXb4YaT70
+	AuVPSeJQL4Bnr3+7Hy0AC3aaIbigPhe1GE3tU3sZ7572JH7EwxCuGef4wCQrAsfA
+	T/q04f1nkK+MxdogYC3q4xYATL3XVoH7PWuOedjB5a5jgnri83EexGGvjooUNVwz
+	4qrbvw==
+Received: from mail-pf1-f197.google.com (mail-pf1-f197.google.com [209.85.210.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g8jgk1cb8-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Mon, 24 Aug 2026 13:42:00 +0000 (GMT)
-Received: by mail-pj1-f71.google.com with SMTP id 98e67ed59e1d1-38e22137fb3so5503389a91.0
-        for <linux-arm-msm@vger.kernel.org>; Mon, 24 Aug 2026 06:42:00 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Mon, 24 Aug 2026 13:44:16 +0000 (GMT)
+Received: by mail-pf1-f197.google.com with SMTP id d2e1a72fcca58-8487eb67173so6024000b3a.2
+        for <linux-arm-msm@vger.kernel.org>; Mon, 24 Aug 2026 06:44:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1787578920; x=1788183720; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1787579056; x=1788183856; darn=vger.kernel.org;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=4nn3T1t/sB7+ffZyruvK0mZmx5y7OMfO+jTRwc/O4fA=;
-        b=OM+pGXEKndGdb2eKbWcGMWHrc43pPutKa/fpI70ZTCXh3H0Sb30FMe9d++yGoEImTx
-         K0rL4x2lwJ3PvWP+Mpzl9TvKtMA++doIeF/yFovYdEBj26Hcy4AVUiCPoZ4ZCQ7C+yZq
-         RK9MWI6aNEMcBpfhENw5lQc1/po4oN1WC86kdJwwhAjpDkN0KdoEi2L4Qh1LGy5gFHCt
-         dWefkA0ssQq1mJeBD3dZdx6RWu5ktc7ZsiSYXvD6+8wUWukOCnCDiY5OjIVzN7whRNRt
-         LzcRCZhTLzjp5xNUQSEr2oaI2idDO0PBqGxvnWRADzxpevM4SiPCSTaEjS5r64UrQsgQ
-         RMMw==
+        bh=lKMa1e5vKvj2ijBkWIx/18zNau1rRjql4sCYPc/YlcM=;
+        b=fL/4iB0o5inUVpjE23YBnbSDnPc3HWDh/MofgMk0gdd8LFsOl35/G5zArFMseF3ZbI
+         +9wx0VFjcH5HR6sZJC2Mz8I6eyROnhJTJo6Pn2qGGL6HtB9gdmQlGqYgPdqy1OeMQFy/
+         81HykE8HxBuCQYzgYwh2MdXuNu20bMKiCfX+J3l4g+kqdPCgisJKyAtM0D0T2bFLSbPS
+         KCIP7rDkU47i1AZa+2chR0NHJBRMyyCjUR8LU0apabsT8tOT7iJiPtS0s3A+gNuauGjm
+         3DJ2qEmt7clscAAUMEBbbI4Zhcyn8cYu6SfXs3TTv8yYVUnGQKcwEIZ4f/eslOCePKlI
+         JrVw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787578920; x=1788183720;
+        d=1e100.net; s=20251104; t=1787579056; x=1788183856;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=4nn3T1t/sB7+ffZyruvK0mZmx5y7OMfO+jTRwc/O4fA=;
-        b=fhP/hflEFzxEhCMP0Rosk1Rh5eO/uBqeuRF/1VpBs9PmeiFj5Ib63FGQsfCyUiNOAG
-         m2myQMKqK11uRynAq5e69L7tQEQzC50YjfEVl4cOLvjMiwJQZJOlukNPf0WWNvVZiBkf
-         iLFmMLMcR2lSgEXf0WjEW1r9f7XT+6HHvEG9NgxtdpAH0eMPsshqYvAIpw0ns5diDVcx
-         0Di+CZ+R5eFGWKosyEdtc2SYSahow3lvekKF8tw3awCeaE7zJhSTYH3fueHy3kRFnDHc
-         L/oDQxjukQgJNFQh28FaGM3PguNlBs2WJcbuTtagjxD1Jm5nbITo1LpWEqHIoY7SSRir
-         /+sg==
-X-Forwarded-Encrypted: i=1; AHgh+RrwMivrXcqXouq34uR1jjfCkvUML3yjuJsgHrr7vDqzN189KqB4DlBW8DAlygqE3UEkgWe1MBZZPNKqZP3z@vger.kernel.org
-X-Gm-Message-State: AFuF++lXQ1iebpjcO/Jan6FNsQpUQvFg2ncf3yYiBPs0egplHOpI3jPo
-	POZA7OSqqgGWglG70dZ5c/FewhWkw4+5686zpdok4w6Zs0Hkd4IW7A81oNMAxyki3A/bkCyEnF8
-	VCUTwTDfVnttdGglbYxCDagPDg3WXAVhKuMDsKGvh15gLvIkR9/5XCj1NFMwSQmLTT0uE
-X-Gm-Gg: AR+sD11ge5ofNCSZ6NXfUeeeW6y3wj4Xwrx7tPC8ZkYGFa6gZf+t2unT74myGv1N7Ig
-	ASA+jqMZZPCNTsETe2ilc7JhAqRAhNDEnvbru/vqqpIezCgMWJSBbuqs6+ovWA3foxMW0CikiKg
-	V23Rq96CEDR42oLpJqsl7lnwb3EOjAJTMIJtbeONiyLbBoI5S0OldObXIGkQZWbhIEDVKtDjE7r
-	6ZhaJsOVdgeQTAHKh2TZFj4uBSyJ1PqbkjSXggi4iNWTX6/HwxY5RsPVZ75ugX4sThZp2Mc9X5y
-	2ybgszlYyGxgnBU8wG+HnGiitPutJSSIENzfk626nDVbMizlQpKKCMJbeEs6kIg6k0u449zliXW
-	GsgR66fCBOef/sbpmAtnRC9thgg7PfQKVuKc=
-X-Received: by 2002:a17:90b:1b41:b0:383:5a16:bd70 with SMTP id 98e67ed59e1d1-395c39f97e8mr42709366a91.16.1787578920176;
-        Mon, 24 Aug 2026 06:42:00 -0700 (PDT)
-X-Received: by 2002:a17:90b:1b41:b0:383:5a16:bd70 with SMTP id 98e67ed59e1d1-395c39f97e8mr42709251a91.16.1787578919646;
-        Mon, 24 Aug 2026 06:41:59 -0700 (PDT)
+        bh=lKMa1e5vKvj2ijBkWIx/18zNau1rRjql4sCYPc/YlcM=;
+        b=Ts0r/uglqYjD5joxjURvVIYsPNykAGqUA+SmEYmWRUDzVoQ7Z8ylmMYzGL0HCdCOYH
+         /Py79y57q/6X1TKfgaILv9tiGb/FdijxJlTB4Ca5clQ/lvDLFZZRIfP5qdslUT5DeBec
+         yAM4NZuxb1sa2j3IbMvZxS4zlTs9321OQg4Kn84bTKK9QmLqQdHOWkGzifYHd2Wz0hk9
+         EHsydsYe1LEHthLmdXKyMCQ9rS0dGdhPR7W4l02R6ertPswMA/cLE9ZP6bS3ZUoHX1/O
+         ch2YiFii3MSGvoylvmcndZ9LjL6uOcdaWKJy8M5JNNxl+ZuD4FzA8KV2kR8/4ipf7Zce
+         8ONQ==
+X-Forwarded-Encrypted: i=1; AHgh+RrDicMWI3XRY6q8at4XPXLrzNS25NEVFWkGqx7z/DljWNOgmbhbNm2ezHMXlGK1kxiKqzdXjSStp+fDZt9s@vger.kernel.org
+X-Gm-Message-State: AFuF++lT0angMV5F/DWdFW2KtLXbgTMzMsh7iRdF50uhyXv7U6XvWY7x
+	fP/PaKXgrSw5hkREuJMf0Ism3YoLWmmDDBS+N6rllIEW1twFBd4PM1pvfQmy8C7W4hqmo/AXpWH
+	HCQmf7VLijrznK9gB1l7jrwcCvJXHJvu4/+dWUMpfTcCNapId5E1gIar3LGdLR+oM21rI
+X-Gm-Gg: AR+sD11yvha5yYTO9qiSNFJQhUxVveU65rqfKhdpAWEtcvvCrLlhElpZXmWKHyvJX/s
+	1HG8+foWBL7v7Rre9vBfPGcXzB8KkcIIL+qazJj+5jWUENcaKgAEP9A/aj0fG6DkaJRswFOoURC
+	Y11HT9fNkAesTDUjmYzJ/8lj0trGV/TR9gFGHOFhPhxFpv+ouYNe+3w2rfBbbFfTSzFzpbfcWnv
+	P6W5JuUWxRpBq8DWxWJvjbY5cYdZ+9U+Yvfli2cFNal5nPV/EOH+U4tOnv6iaPwwTCRSK0RM2Qk
+	nPhJ4+XIsMEIxP8Ykmc4E5jOJc6hy8pTF6brJ9fvITnNy/hNfUh7BUnfmyaNLWvlqvkbno2nRgZ
+	3DstUTeURgBDSAGV+bgZwkBnL4EteKuVEMkY=
+X-Received: by 2002:a05:6a00:139c:b0:847:9015:e68c with SMTP id d2e1a72fcca58-851fa081399mr43335476b3a.17.1787579055707;
+        Mon, 24 Aug 2026 06:44:15 -0700 (PDT)
+X-Received: by 2002:a05:6a00:139c:b0:847:9015:e68c with SMTP id d2e1a72fcca58-851fa081399mr43335140b3a.17.1787579055149;
+        Mon, 24 Aug 2026 06:44:15 -0700 (PDT)
 Received: from [10.217.218.158] ([202.46.22.19])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-395e42d6139sm10107597a91.0.2026.08.24.06.41.53
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-8520eed50d7sm1901620b3a.7.2026.08.24.06.44.10
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 24 Aug 2026 06:41:58 -0700 (PDT)
-Message-ID: <8af7a34a-da4f-492f-a51c-cc420edc5e6e@oss.qualcomm.com>
-Date: Mon, 24 Aug 2026 19:11:51 +0530
+        Mon, 24 Aug 2026 06:44:13 -0700 (PDT)
+Message-ID: <baa02329-ac3b-4e1f-aa74-72785af78a7f@oss.qualcomm.com>
+Date: Mon, 24 Aug 2026 19:14:09 +0530
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -89,119 +89,106 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 7/7] i2c: qcom-geni: Use geni_se_set_rate() for setting
- source clock frequency
-To: Praveen Talari <praveen.talari@oss.qualcomm.com>,
-        konrad.dybcio@oss.qualcomm.com, Sudeep Holla <sudeep.holla@kernel.org>,
-        Cristian Marussi <cristian.marussi@arm.com>,
-        Ulf Hansson <ulfh@kernel.org>, Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        Jiri Slaby <jirislaby@kernel.org>, Mark Brown <broonie@kernel.org>,
-        Viken Dadhaniya <viken.dadhaniya@oss.qualcomm.com>,
-        Andi Shyti <andi.shyti@kernel.org>
-Cc: chandana.chiluveru@oss.qualcomm.com, arm-scmi@vger.kernel.org,
-        linux-arm-kernel@lists.infradead.org, linux-pm@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-        linux-serial@vger.kernel.org, linux-spi@vger.kernel.org,
-        linux-i2c@vger.kernel.org
-References: <20260805-derive_clk_perf_tbl_from_perf_domain_opp_table-v1-0-61171ab1cdce@oss.qualcomm.com>
- <20260805-derive_clk_perf_tbl_from_perf_domain_opp_table-v1-7-61171ab1cdce@oss.qualcomm.com>
+Subject: Re: [PATCH v7 1/2] i2c: core: Add i2c_update_timeout() helper for
+ dynamic transfer timeouts
+To: Aniket RANDIVE <aniket.randive@oss.qualcomm.com>,
+        Wolfram Sang <wsa+renesas@sang-engineering.com>,
+        Andi Shyti <andi.shyti@kernel.org>,
+        Dmitry Guzman <Dmitry.Guzman@mobileye.com>
+Cc: Viken Dadhaniya <viken.dadhaniya@oss.qualcomm.com>,
+        linux-i2c@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+References: <20260813-master-v7-0-3f9010cf9229@oss.qualcomm.com>
+ <20260813-master-v7-1-3f9010cf9229@oss.qualcomm.com>
+ <29719c5f-757d-426e-94ca-c221f45c00cf@oss.qualcomm.com>
+ <92e89073-69d1-41ff-8545-d872b6b0c147@oss.qualcomm.com>
 Content-Language: en-US
 From: Mukesh Savaliya <mukesh.savaliya@oss.qualcomm.com>
-In-Reply-To: <20260805-derive_clk_perf_tbl_from_perf_domain_opp_table-v1-7-61171ab1cdce@oss.qualcomm.com>
+In-Reply-To: <92e89073-69d1-41ff-8545-d872b6b0c147@oss.qualcomm.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODI0MDExNSBTYWx0ZWRfX3eZypBMEeN6T
- ec9LS3Rs/h7vIbQqOmsFJosNEUtAYQ6CwkMfrStoo3bfIAELbLvuETIEh8FXU8+xIx7wmLz2M/B
- F927T1pDuX2EUxjBFWULW45aJNVyDUtPTl0PuiKNq65Ec2/RYBa8qxN1DvIi1Ra1b+IRYi5Q4ew
- 9oBjB2G/fBMUL3MDF9VdSVDum6zn5Yajyo1bZ0UgKg1JXfYve33bwxyClvCJ4LNI7t46a0dRx26
- tYvkeq6spTdqNrCpWH/ACUaHqDGkB+kiXuDiJi4r7KWWduhWZXNh5vMokoQnuQtZe8Paq2fn/tV
- pqJfhKSB/Dcb79YKOC+6w+9HzoskCxHbbOLyEgDzUHV8GBIVIMjXpshha5SGTldYw42Pc5TUUSe
- ZXH4w1K1AytNq/O92I/yF+sUgQDCqolmSDUAjDGRtoG/Px5sSGMZTx51Jrgzg7cQY5CTCGNBCzk
- DYCKQozFmiLuS43Rhww==
-X-Authority-Analysis: v=2.4 cv=JL0LdcKb c=1 sm=1 tr=0 ts=6a8c4a28 cx=c_pps
- a=UNFcQwm+pnOIJct1K4W+Mw==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-ORIG-GUID: mrPU5gCPDrPpjb0bX6FA4d_1Q4nqpL6v
+X-Proofpoint-GUID: mrPU5gCPDrPpjb0bX6FA4d_1Q4nqpL6v
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODI0MDExNSBTYWx0ZWRfXyuSNwfIb0vMf
+ hSLsMblwe3PxvAF/zY01tpM3cnEbjvypGFm4bwGzrQ3UkRKJ6c22jD/N4kK0uL5jzSKH6mbvSTt
+ s6qrt5uDq7iILwqtgSRymiQZ2rqbOFs=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODI0MDExNSBTYWx0ZWRfXzn++JMhLNnL8
+ BCiu9LSXuSZb60qHsiV4TXE2uIUeyfMXwSqWUmu6n1qIEGMtYONy+tCe+mxuW6AxmwHZF/L7SQz
+ zgWmhJlxmdynTkmf7R2MfYqf0k7SMQvBMlhz8HuhltN2pvQo4rAu0wZtSf69yb0LXYWeg7wbxUC
+ 61O7JDm2ILV1co2OP1AuyN/M9D5K1yrVXenaZ5A2oo4DDBnqNUkhz8PXOrO7tPNJoeEy2P/Yikn
+ cVSR4VH4MXkXIORj3tJo58g0RsMCMSrCf6rM72Tt/qp1ahVid8zuBK1YECBoZvGhFFksw5AasbR
+ ZwcnjJVC/Ri5GEa8Cm+rxG/VSEWSjUd8OJ/jUKUA14qxN3hyGRNxA25jTlIx+r7SDG6eEJHYDFS
+ xlKYhdbVpDWgkPGJMrmvdaOJCamZQ6SlNRrkhR64IJBsqobEpoN87dUmTzT0ROSW8sMwoAO6wMb
+ P+4LNk2axP+lIyZbzZQ==
+X-Authority-Analysis: v=2.4 cv=KcvidwYD c=1 sm=1 tr=0 ts=6a8c4ab0 cx=c_pps
+ a=rEQLjTOiSrHUhVqRoksmgQ==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
  a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
- a=EUspDBNiAAAA:8 a=bL_AZauQwEGehf-WiMEA:9 a=QEXdDO2ut3YA:10
- a=uKXjsCUrEbL0IQVhDsJ9:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODI0MDExNSBTYWx0ZWRfX5krsupQyVgmN
- S1Ac3mnia5qfX4D0x9GbuuzAgSqHAbIYiQ49GXoboWasPIaT4m51ssxyT/wLRKAVkSsypKvOySX
- R1UaEvahryVWgNGZ+bpozhWz+JB8WbI=
-X-Proofpoint-GUID: R9UnAWvrdKStyw72Nuxay3feXw1rtXzK
-X-Proofpoint-ORIG-GUID: R9UnAWvrdKStyw72Nuxay3feXw1rtXzK
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22
+ a=pjdmtgn-RlP7ytGTrpkA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+ a=2VI0MkxyNR6bbpdq8BZq:22
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-08-24_04,2026-08-24_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 suspectscore=0 clxscore=1015 impostorscore=0 priorityscore=1501
- adultscore=0 bulkscore=0 malwarescore=0 spamscore=0 lowpriorityscore=0
+ phishscore=0 impostorscore=0 adultscore=0 spamscore=0 priorityscore=1501
+ lowpriorityscore=0 bulkscore=0 clxscore=1015 suspectscore=0 malwarescore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608240115
 
 
 
-On 8/5/2026 1:27 AM, Praveen Talari wrote:
-> On the SA8255P platform there is no Linux clock handler for the SE source
-> clock; resources are instead managed by firmware via a genpd performance
-> domain. The I2C driver therefore relies on geni_se_set_rate() to apply the
-> fixed 19.2 MHz source clock frequency expected by the SCL divider and
-
-somewhere it's 32 MHz also and this may change too ?
-
-> counter values programmed by qcom_geni_i2c_conf().
+On 8/24/2026 3:36 PM, Aniket RANDIVE wrote:
 > 
-> Call geni_se_set_rate() directly from qcom_geni_i2c_conf() so the
-> configured frequency is applied to the correct device (the perf domain
-> device on the firmware-managed path, or se->dev otherwise) without the I2C
-> driver needing to know which resources_init() variant is in use.
 > 
-> Drop the now-unused set_rate field from struct geni_i2c_desc, the
-> geni_se_set_perf_opp() usage on the SA8255P variant, and the unused freq
-> parameter from qcom_geni_i2c_conf().
+> On 8/24/2026 11:49 AM, Mukesh Savaliya wrote:
+>>
+>>
+>> On 8/13/2026 11:15 AM, Aniket Randive wrote:
+>> [...]
+>>
+>>> +void i2c_update_timeout(struct i2c_adapter *adap, u32 bus_freq_hz,
+>>> +            size_t len, unsigned int safety_coeff,
+>>> +            unsigned int min_usec)
+>>> +{
+>>> +    u64 bit_usec = mul_u64_u32_div(len * 9, USEC_PER_SEC, bus_freq_hz);
+>> let's validate bus_freq_hz to prevent from 0 value in case of any 
+>> abnormal caller.
 > 
-> Signed-off-by: Praveen Talari <praveen.talari@oss.qualcomm.com>
-> ---
->   drivers/i2c/busses/i2c-qcom-geni.c | 13 +++++++------
->   1 file changed, 7 insertions(+), 6 deletions(-)
+> This scenario is highly unlikely. Most drivers operate with a default 
+> bus frequency, typically 400 kHz, and therefore the condition being 
+> checked is not expected to occur in practice. As a result, I do not 
+> believe this validation is necessary in this case.
 > 
-> diff --git a/drivers/i2c/busses/i2c-qcom-geni.c b/drivers/i2c/busses/i2c-qcom-geni.c
-> index a23554d101fd..4561e2d235d5 100644
-> --- a/drivers/i2c/busses/i2c-qcom-geni.c
-> +++ b/drivers/i2c/busses/i2c-qcom-geni.c
-> @@ -213,11 +213,11 @@ static int geni_i2c_clk_map_idx(struct geni_i2c_dev *gi2c)
->   	return -EINVAL;
->   }
->   
-> -static int qcom_geni_i2c_conf(struct geni_se *se, unsigned long freq)
-> +static int qcom_geni_i2c_conf(struct geni_se *se)
->   {
->   	struct geni_i2c_dev *gi2c = dev_get_drvdata(se->dev);
->   	const struct geni_i2c_clk_fld *itr = gi2c->clk_fld;
-> -	u32 val;
-> +	u32 val, ret;
->   
->   	writel_relaxed(0, gi2c->se.base + SE_GENI_CLK_SEL);
->   
-> @@ -233,6 +233,10 @@ static int qcom_geni_i2c_conf(struct geni_se *se, unsigned long freq)
->   				 itr->clk_div, itr->t_high_cnt,
->   				 itr->t_low_cnt, itr->t_cycle_cnt);
->   
-> +	ret = geni_se_set_rate(&gi2c->se, 19200000);
 
-hard code ?
-May work currently, but if higher frequency support added, source may 
-change.
+Unlikely but also possible, it's framework change. So can't guarantee 
+about all other soc drivers.
 
-Also you have added in commit message, but add a comment also here.
+> Thanks,
+> Aniket
 
-> +	if (ret)
-> +		return ret;
-> +
->   	return geni_icc_set_bw_ab(&gi2c->se, GENI_DEFAULT_BW, GENI_DEFAULT_BW,
->   				  Bps_to_icc(gi2c->clk_freq_out));
->   }
+Please remove this sign from in between.
 
-[...]
+> 
+>>
+>>> +    u64 total_usec = bit_usec * safety_coeff + min_usec;
+>>> +    unsigned long jiffies_val;
+>>> +
+>>> +    /* Userspace-configured timeout always takes precedence. */
+>>> +    if (adap->user_timeout > 0) {
+>>> +        adap->timeout = adap->user_timeout;
+>>> +        return;
+>>> +    }
+>>> +
+>>> +    jiffies_val = usecs_to_jiffies((unsigned int)min_t(u64, 
+>>> total_usec, UINT_MAX));
+>>> +    /* adap->timeout is int; guard against signed overflow. */
+>>> +    adap->timeout = (int)min_t(unsigned long, jiffies_val, INT_MAX);
+>>> +}
+>>> +EXPORT_SYMBOL_GPL(i2c_update_timeout);
+>>> +#endif /* CONFIG_I2C_DYNAMIC_TIMEOUT */
+>>> +
+>>
+>> [...]
+>>
+> 
 
