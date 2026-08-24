@@ -1,68 +1,51 @@
-Received: from mail-ej1-f51.google.com (mail-ej1-f51.google.com [209.85.218.51])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from relay.yourmailgateway.de (relay.yourmailgateway.de [188.68.63.162])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 02F4641A501
-	for <linux-arm-msm@vger.kernel.org>; Mon, 24 Aug 2026 12:42:47 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.218.51
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C6639416854;
+	Mon, 24 Aug 2026 12:46:53 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=188.68.63.162
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787575369; cv=none; b=aA0Vp7cDDjc4nyS66YvWAjkuvg7KdjWV+820uLT6KDZm7MZKND7nScXE5roNUDuNorJixX5AD7VcH0KSQJ2At6Kc8IqztgPnxSFSt4tbARg04kL1SGa+39VJ1GrbcpMB7BATctlhPKc8Rzw7CvXzz6mtNAuNWJCmDMmwek6+xvY=
+	t=1787575616; cv=none; b=DoZnWRV6BdwmQIc2dU8cXyvU3Bpv+2p5BxHVe7aQIWZHQXCSYQXIWz0UZeL8OfihCwCqdVlY4UN7Mt30pHMyneksL5N+I/wh5uuP912Xy1VL5GCFiIUaYm/TBoVdwB5NQ9Ctu8TvGdsLxAXu5SSyG8QDwe7yIk+zYPlIvnqNMDo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787575369; c=relaxed/simple;
-	bh=pBwaVH3+F4aywsHC/pUjnCRqPo1dtZMH1dC6s1o4CP0=;
+	s=arc-20240116; t=1787575616; c=relaxed/simple;
+	bh=0l2zeqrTdw9H+RHbIvbgxdX3SD9eSTkmI+cOQDy5rkw=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=GDrT+AEkFFhx+S6VmxFrNFHucGF6vKVZTNTGBCXBRp0Khle6tXStHxfc9+taXdYx++g34kQE2OjapH1sGoMMtFT9u7ZdzcuwAhqIIFhBD/WMVe41gI+3sT22lGqovgOKGcYIhDrCZytfSMtmuLXl2a0B1yBZWlhQPdCv93GU/wc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=HXcN5yWr; arc=none smtp.client-ip=209.85.218.51
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	 In-Reply-To:Content-Type; b=TkNLh7NYyzHLKB2H8GfiGl+pb0DdFnh+SUszB7hUVJ0zvh06qvU58nrIlrG/WQC2iEozITiOaNM+JiAPsjIWa8DtwaUjHtr+xttdYmIFvXBGom6+blAXi3fpOE9IO8vjPT6aVXic/1VbDwOqosEwRrFT0gJ+0gkjeMcD5YiuD0Y=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=leemhuis.info; spf=pass smtp.mailfrom=leemhuis.info; dkim=pass (2048-bit key) header.d=leemhuis.info header.i=@leemhuis.info header.b=VgIg5y6m; arc=none smtp.client-ip=188.68.63.162
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=leemhuis.info
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=leemhuis.info
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="HXcN5yWr"
-Received: by mail-ej1-f51.google.com with SMTP id a640c23a62f3a-c167aa9500dso511525266b.3
-        for <linux-arm-msm@vger.kernel.org>; Mon, 24 Aug 2026 05:42:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1787575366; x=1788180166; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=MzHfY6cefdCdPGqFyAr7rWtx24z4JIT/TgxLZWE2Czc=;
-        b=HXcN5yWrSQQSX2BYCiSwY+TJ17P2X9I+8LolCl3MuhNgGyjVriAc4HDC5687TNAhAX
-         QTpXe48pa7LqJb3cy7IuU4PdPXo+7tN/PRobYWJo52nOESEUpFhJqLdlWox8CxgqE0aC
-         JzNJqp57feIwzKlq3KDmJ8ziaB7izbCILuiZqhmuvuFd2ej6DnkGUu+6gEPdr+1jzj5H
-         05RNdMZ0FnW+T/WAWgoHAIeh+ddaNy74opS73ZOE+R0q6NAnMuIWX++9JXSn+oyb3xL5
-         76NtgeaO7r2G+IHSMRr9x74wa+wigZctLv2ZRVMIHYZ0jI/LL/LSZ7/iMFHoQF3Wgo5r
-         ZhBA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787575366; x=1788180166;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=MzHfY6cefdCdPGqFyAr7rWtx24z4JIT/TgxLZWE2Czc=;
-        b=TG+jLQLxKSBWd/WXb5nfcNjgPCVXaIqL81GJakmLipVHnmycIO/6Be+VILJ5uNFXi+
-         atzbX6VCxbc/Mf89SyJ+4jbRPudTAKcszSdt2bmEKAzPLwgbd4F85MBhbHkSfcKmRpz6
-         vp3hj6v7fHSafq8ZJClbOSELbgQJeuLiXdl3I1nX0lYpxDueEUTWX6kZah9V5tKXZ279
-         /dxc0zlYVb+hM30SD4GdELO9Ns5W9kihviYajOuy3YgIpI6dcuR6+P+/gtXLty9Q0Ba0
-         X/xjsDuhyER03jM4rniZdAlZdJ8mlnM44KtklySMpXJGalzg2JLr/OUQiJ48vX4JO/BP
-         Xrfg==
-X-Forwarded-Encrypted: i=1; AHgh+RoEU6Pmh/3x/okUbKeKKbyKq8SsT8+hTN0U15NyF+Fz6VbwdO3kozDeOJ+bTywOPKQZbd9j+n8m5nyQuP4A@vger.kernel.org
-X-Gm-Message-State: AFuF++lThfu0+u/+ZKWGh13agr/jnXq13w5kwTL9nliDlrCzYQw5De7o
-	lmG7vMSAP8Rdo6Ed6v6Va04kYfC9AyeVjq/XoApyQv5cNifKzGzCSRKf
-X-Gm-Gg: AR+sD11Phpfds8pvJxZa0HEDC+hB+5iLf8G0VjgOT/F+0hpzUsaVJ5P1QNrFyeTKx9D
-	dOdcjDU6rMBOZRTsQVXvfVW0ilgB9DkWNJhmoiVPcV8h9KltVLzycQmlDCAa6PbOP8zwGQvocqu
-	P9LGwwhaWgs0KU6zf6a0X/FA4c7Uey2Pdm9WOApyXOA+8QfsaVeFKEmhgCzrSHNYS6zmYVQ7CRO
-	rJDTtWEgQnGevAZJmi0cAaOCWadpmFVY/Og2tD7rNURJl4CkHVWA3uPw5LE4TgvJtBq5riaKMIk
-	GlcnVwqtBfWkCEJ6utfL8MAuiq32Uq2sT9A5daH6THKkNOW07HLI8M9PuKYhU+VBbbyEBLbBIpn
-	tfTZ8fLmc6+ipReU1iGpuTaf9JbQg82/Fd5BS0u+NUu+VcnhrF/awr/lQLHidv2ZWKjwyhzRhRy
-	Jmyc8E2DkferoxZyvlLSHW3bCCf8Pw8vUm6785ffQmFRrJJ5miyaeeRC9ynKesNaA9WCC28r1to
-	3S5BfAL9X+MWF3afnVN
-X-Received: by 2002:a17:906:f246:b0:c21:61a6:8821 with SMTP id a640c23a62f3a-c246a6cd384mr2373422566b.23.1787575365769;
-        Mon, 24 Aug 2026 05:42:45 -0700 (PDT)
-Received: from [192.168.178.84] ([134.19.53.142])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c249689fa97sm1090754566b.57.2026.08.24.05.42.44
-        (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
-        Mon, 24 Aug 2026 05:42:44 -0700 (PDT)
-Message-ID: <b7e18a9b-2c1b-43b1-b62d-afca4659b4dd@gmail.com>
-Date: Mon, 24 Aug 2026 14:42:44 +0200
+	dkim=pass (2048-bit key) header.d=leemhuis.info header.i=@leemhuis.info header.b="VgIg5y6m"
+Received: from mors-relay-8201.netcup.net (localhost [127.0.0.1])
+	by mors-relay-8201.netcup.net (Postfix) with ESMTPS id 4hT9dw0Nymz3v7T;
+	Mon, 24 Aug 2026 14:46:44 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=leemhuis.info;
+	s=key2; t=1787575604;
+	bh=0l2zeqrTdw9H+RHbIvbgxdX3SD9eSTkmI+cOQDy5rkw=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+	b=VgIg5y6mlw/AaxlzF0RPGz8GioiHOn6lHFB9iqmBro/bqlk5JayWLHiAGIVX4dVVh
+	 SnYCdtI9o50EHgd+riNRziRCCdNT+zXJhzlZuoQ1a81QjY5nNwEqfCTjORTouw2oGm
+	 fgJKE7CTyMglcHxF/5GRMyQhReqJpjMYPKG265N76xHGSW9MM2xSV4lZx60T7Wqohy
+	 rYdK3YjnaC6TCpaW1OLI2eawqnC7YdYLYD9ItzCTl8nqTUEgKh2GVFszuV5GOueBLA
+	 1oFxoeZIQcIJ8SXJuYqD7571sdT1PC+wTpvwHx8ZDPqB85vh5JPWaH4J3wCOO3eNqQ
+	 g4YL4OeFGW7OA==
+Received: from policy02-mors.netcup.net (unknown [46.38.225.35])
+	by mors-relay-8201.netcup.net (Postfix) with ESMTPS id 4hT9dv6nmPz3rj5;
+	Mon, 24 Aug 2026 14:46:43 +0200 (CEST)
+Received: from mxe9fb.netcup.net (unknown [10.243.12.53])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange ECDHE (P-256) server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by policy02-mors.netcup.net (Postfix) with ESMTPS id 4hT9dt6r4zz8sZP;
+	Mon, 24 Aug 2026 14:46:42 +0200 (CEST)
+Received: from [IPV6:2a02:8108:8984:1d00:a0cf:1912:4be:477f] (unknown [IPv6:2a02:8108:8984:1d00:a0cf:1912:4be:477f])
+	by mxe9fb.netcup.net (Postfix) with ESMTPSA id E2E8D5FA38;
+	Mon, 24 Aug 2026 14:46:37 +0200 (CEST)
+Authentication-Results: mxe9fb;
+        spf=pass (sender IP is 2a02:8108:8984:1d00:a0cf:1912:4be:477f) smtp.mailfrom=regressions@leemhuis.info smtp.helo=[IPV6:2a02:8108:8984:1d00:a0cf:1912:4be:477f]
+Received-SPF: pass (mxe9fb: connection is authenticated)
+Message-ID: <f64db45c-63f7-4f2e-aa10-e8ee5fd9accb@leemhuis.info>
+Date: Mon, 24 Aug 2026 14:46:36 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -70,104 +53,175 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v7 0/4] dma-buf: fix fd leak when copy_to_user() fails
- after fd_install()
-To: Baineng Shou <shoubaineng@gmail.com>,
- Sumit Semwal <sumit.semwal@linaro.org>,
- "T . J . Mercier" <tjmercier@google.com>,
- Benjamin Gaignard <benjamin.gaignard@collabora.com>,
- Brian Starkey <Brian.Starkey@arm.com>, John Stultz <jstultz@google.com>,
- Sandeep Patil <sspatil@android.com>, "Andrew F . Davis" <afd@ti.com>,
- Srinivas Kandagatla <srini@kernel.org>, David Airlie <airlied@gmail.com>,
- Simona Vetter <simona@ffwll.ch>
-Cc: dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org,
- linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org,
- linux-arm-msm@vger.kernel.org
-References: <CABdmKX1-0bXdU_pWKrY3LR4JmOpxC48ka9akS8PHYDBnngFqWQ@mail.gmail.com>
- <20260817050457.1005285-1-shoubaineng@gmail.com>
-Content-Language: en-US
-From: =?UTF-8?Q?Christian_K=C3=B6nig?= <ckoenig.leichtzumerken@gmail.com>
-In-Reply-To: <20260817050457.1005285-1-shoubaineng@gmail.com>
+Subject: Re: [REGRESSION] PCIe/qcom: on-board WCN7850 link stuck in Polling on
+ X1E80100 (Surface Pro 11)
+To: Manivannan Sadhasivam <mani@kernel.org>,
+ Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>,
+ franzelverbier <info@humanlearning.ch>
+Cc: Bartosz Golaszewski <brgl@kernel.org>,
+ Lorenzo Pieralisi <lpieralisi@kernel.org>,
+ Krzysztof Wilczynski <kwilczynski@kernel.org>, Rob Herring
+ <robh@kernel.org>, Bjorn Helgaas <bhelgaas@google.com>,
+ regressions@lists.linux.dev, linux-pci@vger.kernel.org,
+ linux-arm-msm@vger.kernel.org, linux-pm@vger.kernel.org,
+ linux-kernel@vger.kernel.org
+References: <20260731122233.18345-1-info@humanlearning.ch>
+ <qgol7nv7vrhdwt6sofbxip3dat3kag4xgoamgp6li25rkbn4oa@ie5dhaswmxbt>
+From: Thorsten Leemhuis <regressions@leemhuis.info>
+Content-Language: de-DE, en-US
+In-Reply-To: <qgol7nv7vrhdwt6sofbxip3dat3kag4xgoamgp6li25rkbn4oa@ie5dhaswmxbt>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
+X-PPP-Message-ID: 
+ <178757559850.2729949.14311381177292394726@mxe9fb.netcup.net>
+X-Rspamd-Server: rspamd-worker-8404
+X-Rspamd-Queue-Id: E2E8D5FA38
+X-NC-CID: wfs2Aj5DfQ4rH2iAQKmoymFkKFqLoPerQgMfpVmfTihTsK25VqQ=
 
-I've gone ahead, added one more rb and pushed the result to drm-misc-fixes.
+On 8/18/26 13:13, Manivannan Sadhasivam wrote:
+> + Krishna
 
-Thanks for the help,
-Christian.
+Hmm, nothing happened here. Or did it and I just missed it?
 
-On 8/17/26 07:04, Baineng Shou wrote:
-> Several drivers call dma_buf_fd() — which internally calls fd_install()
-> — before copy_to_user() returns the fd number to userspace.  If
-> copy_to_user() fails, the fd is already published in the caller's fd
-> table but the ioctl returns an error, so userspace never learns the fd
-> number.  Worse, the window between fd_install() and copy_to_user()
-> allows other threads to observe and manipulate the fd (dup, close,
-> SCM_RIGHTS), making any "close it on the failure path" fix unsafe.
-> 
-> The fix is to split the allocation into three steps: reserve an fd with
-> get_unused_fd_flags() (not yet visible to other threads), do
-> copy_to_user(), and only then publish the fd with fd_install() via the
-> new dma_buf_fd_install() helper.  On copy_to_user() failure,
-> put_unused_fd() + dma_buf_put() cleanly unwind with no user-visible
-> side effects.
-> 
-> Patch 1 introduces dma_buf_fd_install() in dma-buf.c (wrapping
-> fd_install() together with the DMA_BUF_TRACE call to preserve export
-> tracing) and applies the fix to dma-heap.
-> 
-> Patch 2 applies the same fix to fastrpc, which even had a comment
-> acknowledging the problem could not be fixed before.
-> 
-> Patch 3 replaces the bare fd_install() in drm_gem_prime_handle_to_fd()
-> with dma_buf_fd_install() to restore tracepoint coverage for DRM PRIME
-> exports (suggested by Christian König).
-> 
-> Patch 4 adds a selftest to tools/testing/selftests/dmabuf-heaps/ that
-> reproduces the fd-leak scenario (mprotect flip before the ioctl) and
-> verifies the fd count is unchanged after a failed ioctl (suggested by
-> Sumit Semwal).
-> 
-> v1: https://lore.kernel.org/dri-devel/20260703080922.1838362-1-shoubaineng@gmail.com/
-> v2: https://lore.kernel.org/dri-devel/20260710105740.3080070-1-shoubaineng@gmail.com/
-> v3: https://lore.kernel.org/dri-devel/20260714114654.3885457-1-shoubaineng@gmail.com/
-> v5: https://lore.kernel.org/dri-devel/20260730062645.233148-1-shoubaineng@gmail.com/
-> v6: https://lore.kernel.org/dri-devel/20260807101140.1357218-1-shoubaineng@gmail.com/
-> 
-> Changes in v7:
->  - Add Reviewed-by: T.J. Mercier to patch 4 (selftest).
->  - Add Acked-by: Sumit Semwal to the whole series.
-> 
-> Changes in v6:
->  - Rework the selftest (patch 4) per review: extract a count_open_fds()
->    helper, fix the copy_from_user() comment, fail (not skip) when the
->    ioctl does not return -1, drop the bogus mprotect-race mention, and
->    reword the result message.
-> 
-> Changes in v5:
->  - Add selftest (patch 4) reproducing the fd-leak scenario (Sumit Semwal)
-> 
-> Changes in v4:
->  - Add patch 3: drm/prime: use dma_buf_fd_install() (Christian König)
->  - Add Acked-by: Christian König to patches 1 and 2
-> 
-> Changes in v3:
->  - Split into two patches (dma-heap + fastrpc separately)
->  - Add dma_buf_fd_install() to preserve trace_dma_buf_fd tracepoint
->  - Add fastrpc fix using the new helper (T.J. Mercier)
-> 
-> Baineng Shou (4):
->   dma-buf: dma-heap: don't publish fd before copy_to_user() succeeds
->   misc: fastrpc: don't publish fd before copy_to_user() succeeds
->   drm/prime: use dma_buf_fd_install() to preserve export tracing
->   selftests: dmabuf-heaps: add fd-leak-on-EFAULT regression test
-> 
->  drivers/dma-buf/dma-buf.c                     |  20 ++++
->  drivers/dma-buf/dma-heap.c                    |  80 ++++++-------
->  drivers/gpu/drm/drm_prime.c                   |   2 +-
->  drivers/misc/fastrpc.c                        |  16 +--
->  include/linux/dma-buf.h                       |   1 +
->  .../selftests/dmabuf-heaps/dmabuf-heap.c      | 113 +++++++++++++++++-
->  6 files changed, 180 insertions(+), 52 deletions(-)
+Krishna, it seemed Mani thought you might haven an idea what's wrong. Do
+you do by chance?
+
+If not, I guess Franzelverbier might need to bisect this.
+
+Ciao, Thorsten
+
+> On Fri, Jul 31, 2026 at 02:22:25PM +0200, franzelverbier wrote:
+>> Hi,
+>>
+>> On a Microsoft Surface Pro 11 (Snapdragon X Elite, X1E80100, board
+>> x1e80100-microsoft-denali-oled), the on-board WCN7850 Wi-Fi PCIe link
+>> no longer trains on linux-next. It works on 6.17.
+>>
+>>   Good: v6.17
+>>   Bad:  next-20260721, next-20260723
+>>
+>> #regzbot introduced: v6.17..next-20260721
+>> #regzbot title: PCIe/qcom: WCN7850 link stuck in Polling on X1E80100
+>>
+>> The device sits behind PCIe controller 1c08000.pci (pcie4,
+>> qcom,pcie-x1e80100, gen3x2) and has no PERST# GPIO -- it is
+>> power-sequenced via wcn7850-pmu / pwrseq.
+>>
+>> Symptom
+>> =======
+>>
+>>   qcom-pcie 1c08000.pci: Device found, but not active
+>>   qcom-pcie 1c08000.pci: PCI host bridge to bus 0004:00
+>>
+>> dw_pcie_wait_for_link() finds the LTSSM in POLL_ACTIVE/POLL_COMPLIANCE
+>> and returns -EIO. The endpoint 0004:01:00.0 is never enumerated, ath12k
+>> never probes, and there is no wlan interface. On 6.17 the same
+>> controller trains at ~0.6 s and ath12k probes normally.
+>>
+>> Ruled out: the chip is powered, and power control is bound
+>> ==========================================================
+>>
+>> - Bluetooth on the same WCN7850 (UART) comes up fine, so the PMU and
+>>   regulators are on.
+>>
+>> - pwrseq_qcom_wcn is loaded, and pci-pwrctrl-pwrseq is bound to the
+>>   platform device 1c08000.pci:pcie@0:wifi@0 (compatible pci17cb,1107 is
+>>   present in pwrseq_pwrctrl_of_match[]). The vddaon-supply
+>>   validate_device() check passes.
+>>
+>> Ruled out: not a device-tree regression
+>> =======================================
+>>
+>> The wifi@0, &pcie4 and &pcie4_phy nodes are equivalent between the 6.17
+>> and 7.2 device trees -- same supplies, same compatibles. The only
+>> difference in wifi@0 is "disable-rfkill;" (6.17), which is
+>> post-enumeration ath12k behaviour and cannot affect link training.
+>>
+>> What changed
+>> ============
+>>
+>> qcom_pcie_host_init() was reworked around the pci-pwrctrl framework,
+>> and qcom_pcie_start_link() now calls qcom_pcie_common_set_equalization()
+>> -- absent in 6.17 -- before enabling the LTSSM.
+>>
+>> Finding 1: Gen3 equalization prevents link training
+>> ===================================================
+>>
+>> Forcing the port to Gen1 makes the link train and ath12k probe:
+>>
+>>   &pcie4 { max-link-speed = <1>; status = "okay"; };
+>>
+>>   qcom-pcie 1c08000.pci: PCIe Gen.1 x2 link up
+>>   ath12k_wifi7_pci 0004:01:00.0: Wi-Fi 7 Hardware name: wcn7850 hw2.0
+>>
+>> qcom_pcie_common_set_equalization() only programs GEN3_EQ_* for speeds
+>>> = 8GT, so max-link-speed=<1> skips it entirely, reproducing the 6.17
+>> behaviour of no EQ programming.
+>>
+>> Note this is not a wrong preset value. The presets come from DT via
+>> of_pci_get_equalization_presets() and are applied by the DWC host core.
+>> In hamoa.dtsi:
+>>
+>>   pcie4  (pci@1c08000, gen3x2, on-board WCN7850)
+>>     eq-presets-8gts = /bits/ 16 <0x5555 0x5555>;
+>>
+>>   pcie6a (pci@1bf8000, NVMe, gen4x4)
+>>     eq-presets-8gts = /bits/ 16 <0x5555 0x5555 0x5555 0x5555>;
+>>
+>> Both use the same per-lane preset 0x5555. The NVMe port trains at Gen4
+>> fine; only the WCN7850 port fails. So the WCN7850 endpoint specifically
+>> cannot complete Gen3 equalization with these presets on this
+>> controller, while an NVMe SSD on the same SoC can.
+>>
+>> The board DTS (x1-microsoft-denali.dtsi, also in mainline) leaves
+>> &pcie4 as status = "okay" with no per-port override, so it inherits the
+>> SoC preset.
+>>
+>> Finding 2: an LTSSM re-kick does not recover the link
+>> =====================================================
+>>
+>> Even at Gen1, the link does not train on the first attempt at boot
+>> (~4 s); in one instance it only came up much later via a pciehp slot
+>> event. An experimental retry in qcom_pcie_start_link() toggling
+>> PARF_LTSSM.LTSSM_EN (clear/set) for up to 30 s never recovered the
+>> link.
+>>
+>> That suggests the endpoint needs a full power/reset re-sequence
+>> (pwrseq) to leave the failed state, not just an LTSSM restart -- i.e.
+>> the pwrseq power-on may be racing link bring-up at boot for PERST-less
+>> on-board devices.
+>>
+>> When the link does come up late (fragmented CMA, tight PCI windows),
+>> secondary symptoms appear that are absent on a clean boot-time
+>> bring-up:
+>>
+>>   ath12k ... qmi dma allocation failed
+>>   BAR 0 ... failed to assign
+>>   rfkill ... Hard blocked: yes
+>>
+>> Questions
+>> =========
+>>
+>> 1. Are the qcom_pcie_common_set_equalization() Gen3 EQ presets expected
+>>    to be safe for a gen3x2 PHY driving an on-board WCN7850? They
+>>    prevent link training here, and skipping them (Gen1) works.
+>>
+>> 2. Is pci-pwrctrl/pwrseq power-on racing link training at boot for
+>>    on-board devices with no PERST# GPIO, such that the endpoint is not
+>>    ready on the first LTSSM attempt and cannot be recovered by an LTSSM
+>>    re-kick?
+>>
+>> I have not bisected to a single commit yet -- the range above is v6.17
+>> to next-20260721. I am happy to bisect, test patches, or dump any
+>> register on this hardware; rebuilding is a short loop here.
+>>
+>> Environment
+>> ===========
+>>
+>> linux-next next-20260723, CONFIG_PCIE_QCOM=y, CONFIG_CMA_SIZE_MBYTES=128,
+>> ath12k, board x1e80100-microsoft-denali-oled, Arch Linux ARM (aarch64).
+>>
+>> Thanks,
+>> franzelverbier
 > 
 
