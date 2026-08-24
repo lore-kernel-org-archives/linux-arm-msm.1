@@ -1,163 +1,1069 @@
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 324474334DC
-	for <linux-arm-msm@vger.kernel.org>; Mon, 24 Aug 2026 15:07:00 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787584023; cv=none; b=ZX0fXfa12aBsjMR4kzihbvjL8QdB+JgZOTyk7UHVMiB3QhXgPrlSHg4svJDpoH+baRngvQtT/1aB658MRgNqKT6LSEm3/PtrWdm+JJRk7hJ1+9YUh2W8E2mr7gb7GVR7xG9+KsuklRiqABdPpGRezu+lHcOp2MejsOIPHE4jLjw=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787584023; c=relaxed/simple;
-	bh=WsnfpTDfkMnaQf6HEL+ttL08frhpgTwPFvG7hASiU0c=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=rRedqHBia4eatU8WzO/PFlh/WFoKRuQP5zlkQhQ51kXYeo6RgLAhuilNz0eVJ9kE8xDLm8pYKo4x0OPsALeNGCQKQNBCs2AC8cfSBJ80YiKKTina5wRQNtygW/3cje1U2AgcOoIbXc5pm7q3w/vclCJ56NKXGJ/Q2D0lKNO1xCw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=ateVbhtm; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=Gc/upujG; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 00DE336B915
+	for <linux-arm-msm@vger.kernel.org>; Mon, 24 Aug 2026 15:08:00 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=205.220.168.131
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1787584084; cv=pass; b=lGMLN3k61D/lerTfTVuMriFB5dI0UPyO0Z2Z9ah63Lxma4zP0EXiVNjRyJa075AamxcRew60epdk5RLNfjaH+FscbcIo5C81quuOOfectvSwoOqX5TZzqDB66Y/3+NqTq1KFLkTgqgOm8TLC+5kaevR57XqISDNOjV+4GwDb15c=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1787584084; c=relaxed/simple;
+	bh=kx3NaihLsZMc9mXR33QLt1ZgY0XelCuXCVP1l5iABiY=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=eA2y6ZzytAy2JRA1d0J1t1uXMM+rdfXZqrEcE+h6ssIJwG+oFDdRwk4OOLA1c/Db/2Md9Ew73ZRODBgo3+j2gNEkazsm9OrgDFlWsRqHFSjwyuRCzWyHeXyX0qPgySbdXnrbkkTWaKSeR3Oppj8lwfn3AaT6wjPGsq4TBNG/ZFc=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=Fgy0aiJT; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=VMePT4Ck; arc=pass smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="ateVbhtm";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Gc/upujG"
-Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67OCvBwG2006814
-	for <linux-arm-msm@vger.kernel.org>; Mon, 24 Aug 2026 15:06:59 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="Fgy0aiJT";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="VMePT4Ck"
+Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67OCus4a2583541
+	for <linux-arm-msm@vger.kernel.org>; Mon, 24 Aug 2026 15:08:00 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	8G2ECsoTYtsyvfoNVIawmowBPsx5W3LlCQSF/qBNKBE=; b=ateVbhtm+14kvfjM
-	DGoIJjbkOeNppgOxnkxhmXJ0kbvA+4O9h0ks0U2b0R3CsgH1wLql/YWPjzR4tWSA
-	7TjtpvVg0AG4rj9E3PrwO/kqu6nsrBY98YB8aV0l3dHa5X8ylVaWqHvCPQksfTt+
-	9lWerPMdhULTye/QlBOC9fGCDkNZlFlBZSYEWFE1EDVVhLm9NyjEeoeVKWJGQ6LJ
-	wcgpbcIryQXmQ8iX8yQAmD+qPL2reEpsIzj3XOk83mZHUMlR0JscrwzHMXKzKTzs
-	xsCp0SxIz1jyAPd9XQy+LGaae5TmSz8mgT78yrcbPagsJ57560vifAqFVrSVNGbN
-	kWzALQ==
-Received: from mail-ua1-f69.google.com (mail-ua1-f69.google.com [209.85.222.69])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g8kv799t2-1
+	:message-id:mime-version:references:reply-to:subject:to; s=
+	qcppdkim1; bh=Hyle+U8D28MC5G69uxudHerMnPCZoLVIe9KmF6dXIWY=; b=Fg
+	y0aiJTpQixkyZPO2b2itaeD3NUAs8YOuMxrQsMwRWBVti1gbwm8Vr3MXZKRyI+tK
+	i9ILfA6NvJl3KHdavmTVMMPtGLGQXXVUpuFzH+pKpxygR/yzDqtTBR+Yzg6G5gBG
+	QlyKLbt+yUDPdTg49mBgMCfC7IsnD9poLmlSexGfLoPKkV2FVSrfXIRUd5jdd1aj
+	2LQ6S05wqOhojN17K68WK2Ow0FOYD6ThnIcDQtjbJ+lpT2nUuhH282VnLj2jXuR8
+	PqBdLyG6vpLrfBFqtmwdch6YQCGYBfCNP7QQ+p8WU7DD12GfYr6pdScNVovDHPvg
+	WOagOogdwgfm6bL+8gsA==
+Received: from mail-oa1-f70.google.com (mail-oa1-f70.google.com [209.85.160.70])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g8hbtj2gf-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Mon, 24 Aug 2026 15:06:59 +0000 (GMT)
-Received: by mail-ua1-f69.google.com with SMTP id a1e0cc1a2514c-97752c2acb7so52099241.3
-        for <linux-arm-msm@vger.kernel.org>; Mon, 24 Aug 2026 08:06:59 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Mon, 24 Aug 2026 15:07:59 +0000 (GMT)
+Received: by mail-oa1-f70.google.com with SMTP id 586e51a60fabf-451acf33124so7171646fac.0
+        for <linux-arm-msm@vger.kernel.org>; Mon, 24 Aug 2026 08:07:59 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1787584079; cv=none;
+        d=google.com; s=arc-20260327;
+        b=QAnJlcgZB9S+zaWd3RGOAJ2/3DhJzQrvl5CDgJeuQF/SI/bO71KJXmrfzLeT9dMMFt
+         q1lMgHg5RxzdVVDMpARctw647rarINRCGztutAg2mq3j+NiQkFywnScTqPp+A/9GXlIS
+         C7ILnP/STvcaOjh8U476i96T6A0LiVUitksq2EsWkRzg3YsLQ7HHzbd3J+EiKbaBxkbQ
+         Ny3v5cf/qw221p+64csx3bVCdbjM7Zfctoqu03Ug+V3gAILGosDwwTjQwEOMUyXUbqe+
+         8Y5YRb+kJtJoBeY9q9JHOUH3bnUJcPdmloQ9VaJZc2YgkGA6ui/Ze4/qKkMTXuc6JDn3
+         eQ6w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :reply-to:in-reply-to:references:mime-version:dkim-signature;
+        bh=Hyle+U8D28MC5G69uxudHerMnPCZoLVIe9KmF6dXIWY=;
+        fh=p3q2CYMCpfKy/7RIH+0egijQzo/u9Okar/cw4fKVMzA=;
+        b=qyhoj92BGPAQu1jO74r5ALkXq92kkmkxBI2ro3RrAYf4CKg8AsgEA6tdziHgUfKVg6
+         yZk1safp6ITV8ykyCDRpg8hXU6+CR0kiS5C4c/r3ckLQ/JIzbMC4SHZZZbGEC3VIiTXv
+         RBzzOlgPF8xySlEg6LnlojtpRFMtcP71iZNcbPcPOWnfQ1RTIcnbKI2BYnUg994gjU8K
+         32GQ+IUmYoLuLRM4sKjI7hPoeSTJTNtUymV6v/4W6wFtToJBDaN74PpQaeJ077Y3ItCR
+         E997//k7d8uBo2fw4HCMZBvkD4SNT0QvgFYTLOZS8N9O9IfOOl7KVmBoJbBP2SMUvUZ0
+         /yIg==;
+        darn=vger.kernel.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1787584018; x=1788188818; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=8G2ECsoTYtsyvfoNVIawmowBPsx5W3LlCQSF/qBNKBE=;
-        b=Gc/upujGDOUYRfD5bn3XnKuj4By+4y6Jn4r5dYb85u08JZR7f8itr2LO+wB9XIBLjL
-         yWTlVHA2h012PgmQaWeKdVl9ybAGpJL7eySgoMkeEUS30pxX2uaFQF3/wpzd/v8eQK7g
-         9jMluDgM/IpZ6Cnkd+lB0f+Wk24ygdZcgB/vvhFby/H9Gz7GaORE2bVh4NlwHuXbvN8k
-         A6pOtxfMidjSLAkuM+apj16ZZvrgRcwV5KJnnHspcKRXgOZ7Pw6GxE5GbX9ZL5WntISX
-         5zdaCGqOEbuFreGH1cICdatIabZBgTbrfwfiHzf8sbF2zmNW/zb3YZraftvwGv+N3v5w
-         3i7w==
+        d=oss.qualcomm.com; s=google; t=1787584079; x=1788188879; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:reply-to:in-reply-to:references:mime-version:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=Hyle+U8D28MC5G69uxudHerMnPCZoLVIe9KmF6dXIWY=;
+        b=VMePT4Ck4cUWKoToLDFAXR3DLdbQeQXJO2s4rSF9ZUGn/jDa+xijyE2himd6aWUe+G
+         ctEHgLalqT9XwPQW1q/NddQSnGGVCSLYR0ondggrs7EHibzMrKWb9N83x8eR/UqTy6nH
+         /JOOjAv7A92QrrEn5t9Yc96twUucEhHzNxhmEksShfl2UeHLFDghoefcdRlFwalClBTf
+         te+igekCNmG8CxYCcGKErpM4/8FJSXaOKPuF07C0HZyXHD5LOqzxJxKp9nk2vm0ijG7r
+         4Wd9I4qfR3DFzeBRkkdJlan0B4iRwwKE5SZOGSsUDt2isU5cq7M8emqCOn3C4/gA0N1N
+         HCMA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787584018; x=1788188818;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=8G2ECsoTYtsyvfoNVIawmowBPsx5W3LlCQSF/qBNKBE=;
-        b=qxDq3iyeZtQ33QJDssnKnUHizyItlaAq6aMe9JMojkayuMPgaA7+bwLnTMRbyRHOr6
-         HuUJ4NaW2NSn7I7SWua0pqdSfnuBdaegV/EQCy8JrAo3Jz1d6OmVrI6Hz4PIjw3YNjhO
-         qmgnABVE4ghHR8kJqzwrwdyGiYbG6MV/FJleAtXK2VrkRQhugG4KTkEwidSJN+jF+rcm
-         Mlw2B23MTBchr2YGVj/2/WwW4cLqyy+II/esVZZBP8GxExIYG3CGsmcR/6g7j1IdM1iv
-         qPvHIjObHnTNF0m4yWHPdKPagqtAx2xpP6U3+xjE6GjO7X1fsIM3Y+JleksbjZPwgKSv
-         YANQ==
-X-Forwarded-Encrypted: i=1; AHgh+RrrCrAMU+jso/PnwB44/uRDDkVg2W6nMCuUpUhflxnfg7hfcGXgqJcbm21mT5qyioKeXeoeMevbMosxB3o5@vger.kernel.org
-X-Gm-Message-State: AFuF++kPeqUrYGdQ0yMWGur5dGL0kKoU5bI0WRvRTaTH9onaNy8vVu1s
-	KAikMdTZc2MuICzM/1sweYl0Uo3+63qPUiAnHWB4NRl1hjatZu7EbGykZPARR3ikcr6HrkRKRvY
-	InYRJ69LemzOfNxkjGqgo6VhPDKjxXKnmsH5Dq2Jqm7/Mf6FQsPXPWyYvMMWcV4ouEBe+
-X-Gm-Gg: AR+sD118mSc51cEHuLQh5klhSNWYz5Xw6T24vzjRIW6YAL6jkvt1UhDbigEJhb6lz1c
-	rRYsPH9Ux5etszf8evAOSu7Q88VqM3v7ANZ9xqDhzkwYDBZA3xv1zmACDr7vQGs6ZdOAsJku5kW
-	KS+oMytOgDDAUPpwaluNsWjaqJZUY9fL7PEURCkxadf4KeeF2J6YpU0cJein9oQ6DYJbk3/4scN
-	iiQkF8dkLM7XIRJIbojNY6nvmMEgcVFtDSnKiOtcA8BeJNg3c2pVJz0QTtC588ZeahhhFAKHI1k
-	Q8ztiOGRR2AfaWd40a8QCf94dNerpu0TTENTd4PZiZRC8Oo/Nlp4RUfuVLRAPLOSbCmvrSWEeL5
-	4ENvlWSSKkYx4gNiQiMCsqCny
-X-Received: by 2002:a05:6102:6893:b0:6d1:8f7:18a5 with SMTP id ada2fe7eead31-77a6433632emr3704106137.1.1787584018230;
-        Mon, 24 Aug 2026 08:06:58 -0700 (PDT)
-X-Received: by 2002:a05:6102:6893:b0:6d1:8f7:18a5 with SMTP id ada2fe7eead31-77a6433632emr3704068137.1.1787584017657;
-        Mon, 24 Aug 2026 08:06:57 -0700 (PDT)
-Received: from [192.168.120.193] ([178.235.128.140])
-        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-6a59e199ad5sm9278440a12.18.2026.08.24.08.06.54
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 24 Aug 2026 08:06:56 -0700 (PDT)
-Message-ID: <aca6afe7-4659-4359-b5c8-e19390a07f8a@oss.qualcomm.com>
-Date: Mon, 24 Aug 2026 17:06:53 +0200
+        d=1e100.net; s=20251104; t=1787584079; x=1788188879;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:reply-to:in-reply-to:references:mime-version:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=Hyle+U8D28MC5G69uxudHerMnPCZoLVIe9KmF6dXIWY=;
+        b=LLSMCQ9hnJmdDLR01/3pzUh3xVAXie9KH+gN7C3T0PVne+TkWoYF0N17XHPfAb3/EU
+         MHNzFj5HnZ1txhrXuDrI7mqRkrzZgRQ1Oa2tI9V0toXDTFU5gmTxmB1RTlAEfp5fGHZ8
+         tLakhf9ywj1CxoZLO1BBGok6kTwYzLeQ7QQ0xPxuZ0dwpC66TEAIGAiXFV+uSKNyaNti
+         UMP/9ofeWjglYarj8TspkfSPXgeUrLOgTe6Dc/IioKC122BjXLKcBUrr7rC9NeUX3xCE
+         MmZZSDjakTspBnB2KzL7xPM2SKGONklJJdu4WdahB59RSDUHh5wFAKbbQ4Kbeq/TpmOw
+         u7Og==
+X-Forwarded-Encrypted: i=1; AHgh+RoSV7Wymef5Dm0qQFrpH9SaazpBS7HrUFUMfsjJGkcoV2saRA99cGU8AiZ5trQCt1TSkO8j1j1m9ogdkv+K@vger.kernel.org
+X-Gm-Message-State: AFuF++kZmKCKTnxWXD74i0FDavXnzc46hT1jtDSO3oBL32DhTkCPVs8W
+	rkyhlz8GYRr4if8f/CEmdtYBrc6/f74UatSK9haUaHRPbvno45rmTOQSgZ0AoZK6K0Myso0Cedm
+	tLhpug3gcRbMZgEAlQoOfdBsXxyh+Dx/x+hq7CSRlZSq50lvbM0eycRjrANxlufnS5hTCZy7KA0
+	ZqvqRklcwzRzBIAiysYOM6klX9r6jOejOTdrQi4j/uirk=
+X-Gm-Gg: AR+sD11hqRUdc40NmP1VdFOUgNNaxby1zEtJb3NhWa7DX9cWqHGzzoXG8C/rwKk33iP
+	PmUUKI6gSRP0buGC5QW5Mm3wpYaYuhSkzkKMPqpzPN9v1cK+vYJSrRjzX0vrUwTSMQRjR1YFwVV
+	tHe3zz4x9avU/Ntqbwoy+o2+k1xN+LPapOfIEfkeTTx4uz+ct0wfmS1Fe0
+X-Received: by 2002:a05:6870:b017:b0:430:7c2:9a30 with SMTP id 586e51a60fabf-463514647d1mr23964529fac.15.1787584078931;
+        Mon, 24 Aug 2026 08:07:58 -0700 (PDT)
+X-Received: by 2002:a05:6870:b017:b0:430:7c2:9a30 with SMTP id
+ 586e51a60fabf-463514647d1mr23964465fac.15.1787584078339; Mon, 24 Aug 2026
+ 08:07:58 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 7/7] i2c: qcom-geni: Use geni_se_set_rate() for setting
- source clock frequency
-To: Praveen Talari <praveen.talari@oss.qualcomm.com>,
-        Sudeep Holla <sudeep.holla@kernel.org>,
-        Cristian Marussi <cristian.marussi@arm.com>,
-        Ulf Hansson <ulfh@kernel.org>, Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        Jiri Slaby <jirislaby@kernel.org>, Mark Brown <broonie@kernel.org>,
-        Viken Dadhaniya <viken.dadhaniya@oss.qualcomm.com>,
-        Andi Shyti <andi.shyti@kernel.org>
-Cc: mukesh.savaliya@oss.qualcomm.com, chandana.chiluveru@oss.qualcomm.com,
-        arm-scmi@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
-        linux-pm@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-arm-msm@vger.kernel.org, linux-serial@vger.kernel.org,
-        linux-spi@vger.kernel.org, linux-i2c@vger.kernel.org
-References: <20260805-derive_clk_perf_tbl_from_perf_domain_opp_table-v1-0-61171ab1cdce@oss.qualcomm.com>
- <20260805-derive_clk_perf_tbl_from_perf_domain_opp_table-v1-7-61171ab1cdce@oss.qualcomm.com>
-Content-Language: en-US
-From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-In-Reply-To: <20260805-derive_clk_perf_tbl_from_perf_domain_opp_table-v1-7-61171ab1cdce@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Authority-Analysis: v=2.4 cv=Cfg4Irrl c=1 sm=1 tr=0 ts=6a8c5e13 cx=c_pps
- a=UbhLPJ621ZpgOD2l3yZY1w==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
- a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
- a=7mB3cpwZ_riAn9QYn-4A:9 a=QEXdDO2ut3YA:10 a=TOPH6uDL9cOC6tEoww4z:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODI0MDEyNyBTYWx0ZWRfX/9P2NHQftkcE
- yQ6PbOaejpmlRASfmg4kbvNV0UkOhvQ+vD1SzuBmaeov5WJvluQrqUUdWTx5XG4jjClqj3H8W2m
- 7nSoyvtgVTeNzy+yw7yKnInd13JDG+U=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODI0MDEyNyBTYWx0ZWRfX0d242INp/MFe
- nCzyrAMK6boEMpQBEUZ2jHGRfdm3RaUBDKstU8+0LgGylL+5b02SayErtvnuz7VIRTA/yOvP3k0
- yGAI7zNzJlOE3Esbe42C4WCdgN29+p5wZLGoev6GVVLWj9KEBKB99uJmJyIv4PgBdi3eq8X+qqP
- 6JMksmWOWtdGoaO0Ow11j/+G+d1O7wCQFZuIkOq2NJ+dtcG7TqlRtaGRWYf4u6lzyRTkE0o2O0N
- lnVjFYgkSSDLDNBZvU5lxzTifrNua/EGvBifgg+lpEyMaI6Qd8a38SsrnImyh4lsWiWZWMqUlpb
- aG9fJC9yYfFgPrcixFFniyoCHp8IlRqUTGDHtyFoOjYx5ffQVSM2dHfBTK85bgE6kbnWektB83V
- Uy2zlSTI6a69d2wNrRBB8rdRUM5dE2XVcuSKvmpsszgMmVKy3HRwc5yNE1zhfHqhYhXVJFW0eOF
- 3j6smvFnBaqqubFI19Q==
-X-Proofpoint-ORIG-GUID: ie_nRPGcuDK5Da3VxIlZTZ_Z8a5Qxbfp
-X-Proofpoint-GUID: ie_nRPGcuDK5Da3VxIlZTZ_Z8a5Qxbfp
+References: <20260817-qda-v2-v2-0-69a02e9090d4@oss.qualcomm.com>
+ <20260817-qda-v2-v2-9-69a02e9090d4@oss.qualcomm.com> <7030a8f8-f320-4b09-b2de-2c8e897409f8@amd.com>
+In-Reply-To: <7030a8f8-f320-4b09-b2de-2c8e897409f8@amd.com>
+Reply-To: rob.clark@oss.qualcomm.com
+From: Rob Clark <rob.clark@oss.qualcomm.com>
+Date: Mon, 24 Aug 2026 08:07:45 -0700
+X-Gm-Features: AcwNN1VFbqhhiJLvWH1NFcU6NtrCPGMII3xv7bbLUyQcFEp8F3pgy2kkKFrRtdE
+Message-ID: <CACSVV00MubttbkVJgMommPMorf67yqn7D1kfwpxVUZ0t-6au8Q@mail.gmail.com>
+Subject: Re: [PATCH v2 09/15] accel/qda: Add DMA-backed GEM objects and memory
+ manager integration
+To: =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>
+Cc: Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>,
+        Oded Gabbay <ogabbay@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
+        Shuah Khan <skhan@linuxfoundation.org>,
+        Randy Dunlap <rdunlap@infradead.org>,
+        Nathan Chancellor <nathan@kernel.org>,
+        Nick Desaulniers <ndesaulniers@google.com>,
+        Bill Wendling <morbo@google.com>,
+        Justin Stitt <justinstitt@google.com>,
+        "Joerg Roedel (AMD)" <joro@8bytes.org>, Will Deacon <will@kernel.org>,
+        Robin Murphy <robin.murphy@arm.com>,
+        Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+        Maxime Ripard <mripard@kernel.org>,
+        Thomas Zimmermann <tzimmermann@suse.de>,
+        David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+        Sumit Semwal <sumit.semwal@linaro.org>,
+        Bharath Kumar <quic_bkumar@quicinc.com>,
+        Chenna Kesava Raju <quic_chennak@quicinc.com>,
+        srinivas.kandagatla@oss.qualcomm.com,
+        dmitry.baryshkov@oss.qualcomm.com, linux-kernel@vger.kernel.org,
+        dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org,
+        linux-arm-msm@vger.kernel.org, llvm@lists.linux.dev,
+        iommu@lists.linux.dev, linux-media@vger.kernel.org,
+        linaro-mm-sig@lists.linaro.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODI0MDEyNyBTYWx0ZWRfXxGXmx5t78pVc
+ AhS/5jQg8v+3VU45sds0BKa1hFLApdpw56mXao3m7ZW6uvFqB0ocwkfp2F4We9URDLWws889zoM
+ usqQJH/i9OC5yawfwWB5fFroOA0b5IsAHSKzsvQxDqYn7fdynZuiKXxKAxB6dYYjVJtu26qoIGQ
+ QII9mtFAFETEoloHL6MCn18fX7XSnQpkcjtbJfQprP+Q4tl0tcSu7Y6SFvTKwkARc/f3w/rBeYo
+ jwrBvzz0kKab4GsKX15/KzdVJ+HmjNR0HGkE5++3xTOHOTOykThdINKAwvp4SCiNS4cOsq1mS+g
+ +iC3vsqtPJaLMBfyE6gmgn09HTU/wqpkAMrjSHfXtbsSMSmZ73uDXCH9jVucPKHIBqXKYv4a1mk
+ EGXi3SuYkgy/WBX813KeOXRun0iagXfbkoUp0PlTtmHnHvCDIuaaPYotRkOrIe/uNQvnNN5BByW
+ ScmRfqcPdcabJxxvvVg==
+X-Authority-Analysis: v=2.4 cv=JL0LdcKb c=1 sm=1 tr=0 ts=6a8c5e50 cx=c_pps
+ a=nSjmGuzVYOmhOUYzIAhsAg==:117 a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10
+ a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
+ a=_K5XuSEh1TEqbUxoQ0s3:22 a=zd2uoN0lAAAA:8 a=EUspDBNiAAAA:8
+ a=ABG8zexEJSlfSB4JGioA:9 a=Me1utG3SuDqcFyGJ:21 a=QEXdDO2ut3YA:10
+ a=1zu1i0D7hVQfj8NKfPKu:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODI0MDEyNyBTYWx0ZWRfXyTlyylIxuBmX
+ weF1XNwSdCfbh8bnCcxi+QQx5fxo4nq8i0iTOpmTVPt0bPUQwOdpewDhQMHgPqtgaO1USMdKfiY
+ geFEL+S9kDifvVcSDGIe2WpeBilwA2A=
+X-Proofpoint-GUID: gtna24vaCe2NxTTkKGQqwnvIj86dhxD4
+X-Proofpoint-ORIG-GUID: gtna24vaCe2NxTTkKGQqwnvIj86dhxD4
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-08-24_04,2026-08-24_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- adultscore=0 phishscore=0 impostorscore=0 spamscore=0 suspectscore=0
- priorityscore=1501 malwarescore=0 clxscore=1015 lowpriorityscore=0
- bulkscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
- adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
- definitions=main-2608240127
+ phishscore=0 suspectscore=0 clxscore=1015 impostorscore=0 priorityscore=1501
+ adultscore=0 bulkscore=0 malwarescore=0 spamscore=0 lowpriorityscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608240127
 
-On 8/4/26 9:57 PM, Praveen Talari wrote:
-> On the SA8255P platform there is no Linux clock handler for the SE source
-> clock; resources are instead managed by firmware via a genpd performance
-> domain. The I2C driver therefore relies on geni_se_set_rate() to apply the
-> fixed 19.2 MHz source clock frequency expected by the SCL divider and
-> counter values programmed by qcom_geni_i2c_conf().
+On Mon, Aug 24, 2026 at 7:31=E2=80=AFAM Christian K=C3=B6nig
+<christian.koenig@amd.com> wrote:
+>
+> On 8/17/26 06:47, Ekansh Gupta wrote:
+> > Introduce DMA-coherent buffer management for the QDA driver, wiring
+> > together the GEM subsystem, the IOMMU memory manager, and a DMA
+> > allocation backend.
+> >
+> > qda_gem.c / qda_gem.h
+> >   Implements the GEM object lifecycle for QDA buffers. Each buffer is
+> >   represented by a qda_gem_obj which embeds a drm_gem_object and
+> >   carries the kernel virtual address, DMA address, and a pointer to
+> >   the IOMMU device that performed the allocation. The .free callback
+> >   delegates to the memory manager, and the .mmap callback uses
+> >   dma_mmap_coherent() via the DMA backend.
+> >
+> > qda_memory_dma.c / qda_memory_dma.h
+> >   DMA coherent allocation backend. qda_dma_alloc() calls
+> >   dma_alloc_coherent() on the CB device and encodes the stream ID
+> >   (SID) in the upper 32 bits of the returned DMA address, following
+> >   the Qualcomm FastRPC convention for IOMMU address space tagging.
+> >   qda_dma_free() strips the SID prefix before calling
+> >   dma_free_coherent().
+> >
+> > qda_memory_manager.c
+> >   Adds process-to-device assignment: each DRM file (process) is
+> >   assigned one IOMMU context bank device for the lifetime of the
+> >   session. qda_memory_manager_assign_device() first checks whether
+> >   the process already has a device (reusing it with a refcount
+> >   increment), then falls back to claiming an unassigned device.
+> >   qda_memory_manager_alloc() and qda_memory_manager_free() delegate
+> >   to the DMA backend after resolving the correct CB device for the
+> >   calling process.
+>
+> Oh, stuff like that is usually a pretty big NO-GO now.
+>
+> AMD has made the same mistake with KFD and it resulted in a massive chaos=
+.
+>
+> The DRM file is the driver context your process uses and even if there ar=
+e multiple DRM files for the same PID you should absolute *NOT* share anyth=
+ing between them.
+>
+> The general rule of thumb is to not attach anything to the process using =
+the DRM file descriptor.
 
-[...]
+A couple other things to keep in mind:
 
-> @@ -233,6 +233,10 @@ static int qcom_geni_i2c_conf(struct geni_se *se, unsigned long freq)
->  				 itr->clk_div, itr->t_high_cnt,
->  				 itr->t_low_cnt, itr->t_cycle_cnt);
->  
-> +	ret = geni_se_set_rate(&gi2c->se, 19200000);
-> +	if (ret)
-> +		return ret;
+1. drm device fd can be passed across processes
+2. virtgpu/virglrenderer drm native ctx is a single process that opens
+the drm device file N times on behalf of N guest userspace processes.
 
-This wasn't here before and the commit message only says something to the
-amount of "it's necessary" - what's the difference?
+All that to say, Christian is right here.. drm_file is your context,
+pgtables should be attached to the drm_file (potentially via
+drm_gpuvm.. which you perhaps want to use).
 
-Konrad
+BR,
+-R
+
+> Regards,
+> Christian.
+>
+> >
+> > qda_drv.c / qda_drv.h
+> >   qda_file_priv gains an assigned_iommu_dev pointer and a pid field.
+> >   The .postclose callback decrements the IOMMU device refcount and
+> >   clears the process assignment when the last reference is dropped.
+> >
+> > Assisted-by: Claude:claude-sonnet-5
+> > Signed-off-by: Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>
+> > ---
+> > Changes in v2:
+> > - Adapt to the dynamically-sized device array introduced in patch 07
+> >   (kcalloc'd from DT node count, replaces fixed QDA_IOMMU_DEVICES_MAX)
+> > - Protect register/unregister with the process_assignment_lock mutex so
+> >   the device-assignment and device-registration paths are serialised
+> > - No functional changes requested by reviewers on this patch
+> > ---
+> >  drivers/accel/qda/Makefile             |   2 +
+> >  drivers/accel/qda/qda_drv.c            |   4 +
+> >  drivers/accel/qda/qda_drv.h            |   4 +
+> >  drivers/accel/qda/qda_gem.c            | 134 ++++++++++++++++++
+> >  drivers/accel/qda/qda_gem.h            |  52 +++++++
+> >  drivers/accel/qda/qda_memory_dma.c     |  82 +++++++++++
+> >  drivers/accel/qda/qda_memory_dma.h     |  17 +++
+> >  drivers/accel/qda/qda_memory_manager.c | 239 +++++++++++++++++++++++++=
++++++++-
+> >  drivers/accel/qda/qda_memory_manager.h |  30 +++++
+> >  9 files changed, 559 insertions(+), 5 deletions(-)
+> >
+> > diff --git a/drivers/accel/qda/Makefile b/drivers/accel/qda/Makefile
+> > index b658dad35fee..a46ddceecfc5 100644
+> > --- a/drivers/accel/qda/Makefile
+> > +++ b/drivers/accel/qda/Makefile
+> > @@ -8,7 +8,9 @@ obj-$(CONFIG_DRM_ACCEL_QDA)   :=3D qda.o
+> >  qda-y :=3D \
+> >       qda_cb.o \
+> >       qda_drv.o \
+> > +     qda_gem.o \
+> >       qda_ioctl.o \
+> > +     qda_memory_dma.o \
+> >       qda_memory_manager.o \
+> >       qda_rpmsg.o
+> >
+> > diff --git a/drivers/accel/qda/qda_drv.c b/drivers/accel/qda/qda_drv.c
+> > index e1fd8bfa12d7..2b14dab95507 100644
+> > --- a/drivers/accel/qda/qda_drv.c
+> > +++ b/drivers/accel/qda/qda_drv.c
+> > @@ -21,6 +21,7 @@ static int qda_open(struct drm_device *dev, struct dr=
+m_file *file)
+> >       if (!qda_file_priv)
+> >               return -ENOMEM;
+> >
+> > +     qda_file_priv->pid =3D current->pid;
+> >       qda_file_priv->qda_dev =3D qda_dev_from_drm(dev);
+> >       file->driver_priv =3D qda_file_priv;
+> >
+> > @@ -31,6 +32,9 @@ static void qda_postclose(struct drm_device *dev, str=
+uct drm_file *file)
+> >  {
+> >       struct qda_file_priv *qda_file_priv =3D file->driver_priv;
+> >
+> > +     if (qda_file_priv->assigned_iommu_dev)
+> > +             qda_memory_manager_release_device(qda_file_priv->assigned=
+_iommu_dev);
+> > +
+> >       kfree(qda_file_priv);
+> >       file->driver_priv =3D NULL;
+> >  }
+> > diff --git a/drivers/accel/qda/qda_drv.h b/drivers/accel/qda/qda_drv.h
+> > index 690a833d732b..2fe58f3efec0 100644
+> > --- a/drivers/accel/qda/qda_drv.h
+> > +++ b/drivers/accel/qda/qda_drv.h
+> > @@ -24,6 +24,10 @@
+> >  struct qda_file_priv {
+> >       /** @qda_dev: Back-pointer to device structure */
+> >       struct qda_dev *qda_dev;
+> > +     /** @assigned_iommu_dev: IOMMU device assigned to this process */
+> > +     struct qda_iommu_device *assigned_iommu_dev;
+> > +     /** @pid: Process ID for tracking */
+> > +     pid_t pid;
+> >  };
+> >
+> >  /**
+> > diff --git a/drivers/accel/qda/qda_gem.c b/drivers/accel/qda/qda_gem.c
+> > new file mode 100644
+> > index 000000000000..66e78013a726
+> > --- /dev/null
+> > +++ b/drivers/accel/qda/qda_gem.c
+> > @@ -0,0 +1,134 @@
+> > +// SPDX-License-Identifier: GPL-2.0-only
+> > +// Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+> > +#include <drm/drm_gem.h>
+> > +#include <drm/drm_prime.h>
+> > +#include <drm/drm_print.h>
+> > +#include <linux/slab.h>
+> > +#include <linux/dma-mapping.h>
+> > +#include "qda_drv.h"
+> > +#include "qda_gem.h"
+> > +#include "qda_memory_manager.h"
+> > +#include "qda_memory_dma.h"
+> > +
+> > +/**
+> > + * qda_gem_free_object() - Free a GEM object and its associated resour=
+ces
+> > + * @gem_obj: DRM GEM object to free
+> > + */
+> > +void qda_gem_free_object(struct drm_gem_object *gem_obj)
+> > +{
+> > +     struct qda_gem_obj *qda_gem_obj =3D to_qda_gem_obj(gem_obj);
+> > +     struct qda_dev *qdev =3D qda_dev_from_drm(gem_obj->dev);
+> > +
+> > +     if (qda_gem_obj->virt && qdev->iommu_mgr)
+> > +             qda_memory_manager_free(qdev->iommu_mgr, qda_gem_obj);
+> > +
+> > +     drm_gem_object_release(gem_obj);
+> > +     kfree(qda_gem_obj);
+> > +}
+> > +
+> > +/**
+> > + * qda_gem_mmap_obj() - Map a GEM object into userspace
+> > + * @drm_obj: DRM GEM object to map
+> > + * @vma: Virtual memory area to map into
+> > + *
+> > + * Return: 0 on success, negative error code on failure
+> > + */
+> > +int qda_gem_mmap_obj(struct drm_gem_object *drm_obj, struct vm_area_st=
+ruct *vma)
+> > +{
+> > +     struct qda_gem_obj *qda_gem_obj =3D to_qda_gem_obj(drm_obj);
+> > +     int ret;
+> > +
+> > +     /* The fake offset is only used to find the object, not to index =
+it */
+> > +     vma->vm_pgoff =3D 0;
+> > +
+> > +     ret =3D qda_dma_mmap(qda_gem_obj, vma);
+> > +     if (ret)
+> > +             return ret;
+> > +
+> > +     vm_flags_set(vma, VM_DONTEXPAND | VM_DONTDUMP);
+> > +
+> > +     return 0;
+> > +}
+> > +
+> > +static const struct drm_gem_object_funcs qda_gem_object_funcs =3D {
+> > +     .free =3D qda_gem_free_object,
+> > +     .mmap =3D qda_gem_mmap_obj,
+> > +};
+> > +
+> > +/**
+> > + * qda_gem_alloc_object() - Allocate a new QDA GEM object
+> > + * @drm_dev: DRM device
+> > + * @aligned_size: Size of the object in bytes (must be page-aligned)
+> > + *
+> > + * Return: Pointer to the new GEM object, or ERR_PTR on failure
+> > + */
+> > +struct qda_gem_obj *qda_gem_alloc_object(struct drm_device *drm_dev, s=
+ize_t aligned_size)
+> > +{
+> > +     struct qda_gem_obj *qda_gem_obj;
+> > +     int ret;
+> > +
+> > +     qda_gem_obj =3D kzalloc_obj(*qda_gem_obj);
+> > +     if (!qda_gem_obj)
+> > +             return ERR_PTR(-ENOMEM);
+> > +
+> > +     ret =3D drm_gem_object_init(drm_dev, &qda_gem_obj->base, aligned_=
+size);
+> > +     if (ret) {
+> > +             kfree(qda_gem_obj);
+> > +             return ERR_PTR(ret);
+> > +     }
+> > +
+> > +     qda_gem_obj->base.funcs =3D &qda_gem_object_funcs;
+> > +     qda_gem_obj->size =3D aligned_size;
+> > +
+> > +     return qda_gem_obj;
+> > +}
+> > +
+> > +void qda_gem_cleanup_object(struct qda_gem_obj *qda_gem_obj)
+> > +{
+> > +     drm_gem_object_release(&qda_gem_obj->base);
+> > +     kfree(qda_gem_obj);
+> > +}
+> > +
+> > +int qda_gem_create_handle(struct drm_file *file_priv, struct drm_gem_o=
+bject *gem_obj, u32 *handle)
+> > +{
+> > +     int ret;
+> > +
+> > +     ret =3D drm_gem_handle_create(file_priv, gem_obj, handle);
+> > +     drm_gem_object_put(gem_obj);
+> > +
+> > +     return ret;
+> > +}
+> > +
+> > +/**
+> > + * qda_gem_create_object() - Allocate and initialize a GEM object with=
+ DMA backing
+> > + * @drm_dev: DRM device
+> > + * @iommu_mgr: Memory manager to use for DMA allocation
+> > + * @size: Requested size in bytes
+> > + * @file_priv: DRM file private data for process association
+> > + *
+> > + * Return: Pointer to the base DRM GEM object on success, ERR_PTR on f=
+ailure
+> > + */
+> > +struct drm_gem_object *qda_gem_create_object(struct drm_device *drm_de=
+v,
+> > +                                          struct qda_memory_manager *i=
+ommu_mgr, size_t size,
+> > +                                          struct drm_file *file_priv)
+> > +{
+> > +     struct qda_gem_obj *qda_gem_obj;
+> > +     size_t aligned_size;
+> > +     int ret;
+> > +
+> > +     aligned_size =3D PAGE_ALIGN(size);
+> > +     if (!aligned_size)
+> > +             return ERR_PTR(-EINVAL);
+> > +
+> > +     qda_gem_obj =3D qda_gem_alloc_object(drm_dev, aligned_size);
+> > +     if (IS_ERR(qda_gem_obj))
+> > +             return ERR_CAST(qda_gem_obj);
+> > +
+> > +     ret =3D qda_memory_manager_alloc(iommu_mgr, qda_gem_obj, file_pri=
+v);
+> > +     if (ret) {
+> > +             qda_gem_cleanup_object(qda_gem_obj);
+> > +             return ERR_PTR(ret);
+> > +     }
+> > +
+> > +     return &qda_gem_obj->base;
+> > +}
+> > diff --git a/drivers/accel/qda/qda_gem.h b/drivers/accel/qda/qda_gem.h
+> > new file mode 100644
+> > index 000000000000..afd7c9b49549
+> > --- /dev/null
+> > +++ b/drivers/accel/qda/qda_gem.h
+> > @@ -0,0 +1,52 @@
+> > +/* SPDX-License-Identifier: GPL-2.0-only */
+> > +/*
+> > + * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+> > + */
+> > +#ifndef __QDA_GEM_H__
+> > +#define __QDA_GEM_H__
+> > +
+> > +#include <linux/dma-mapping.h>
+> > +#include <drm/drm_device.h>
+> > +#include <drm/drm_gem.h>
+> > +#include "qda_memory_manager.h"
+> > +
+> > +/**
+> > + * struct qda_gem_obj - QDA GEM buffer object
+> > + *
+> > + * Represents a GEM buffer object that can be allocated by the driver
+> > + * or imported from another driver via DMA-BUF.
+> > + */
+> > +struct qda_gem_obj {
+> > +     /** @base: DRM GEM object base =E2=80=94 must be first member */
+> > +     struct drm_gem_object base;
+> > +     /** @iommu_dev: IOMMU context bank device that performed the allo=
+cation */
+> > +     struct qda_iommu_device *iommu_dev;
+> > +     /** @virt: Kernel virtual address of the allocated DMA memory */
+> > +     void *virt;
+> > +     /** @dma_addr: DMA address (with SID encoded in upper 32 bits) */
+> > +     dma_addr_t dma_addr;
+> > +     /** @size: Size of the buffer in bytes */
+> > +     size_t size;
+> > +};
+> > +
+> > +/**
+> > + * to_qda_gem_obj - Cast a drm_gem_object pointer to qda_gem_obj
+> > + * @gem_obj: Pointer to the embedded drm_gem_object
+> > + */
+> > +#define to_qda_gem_obj(gem_obj) container_of(gem_obj, struct qda_gem_o=
+bj, base)
+> > +
+> > +/* GEM object lifecycle */
+> > +struct drm_gem_object *qda_gem_create_object(struct drm_device *drm_de=
+v,
+> > +                                          struct qda_memory_manager *i=
+ommu_mgr,
+> > +                                          size_t size, struct drm_file=
+ *file_priv);
+> > +void qda_gem_free_object(struct drm_gem_object *gem_obj);
+> > +int qda_gem_mmap_obj(struct drm_gem_object *gem_obj, struct vm_area_st=
+ruct *vma);
+> > +
+> > +/* Internal helpers (also used by PRIME import) */
+> > +struct qda_gem_obj *qda_gem_alloc_object(struct drm_device *drm_dev, s=
+ize_t aligned_size);
+> > +void qda_gem_cleanup_object(struct qda_gem_obj *qda_gem_obj);
+> > +
+> > +/* Utility functions */
+> > +int qda_gem_create_handle(struct drm_file *file_priv, struct drm_gem_o=
+bject *gem_obj, u32 *handle);
+> > +
+> > +#endif /* __QDA_GEM_H__ */
+> > diff --git a/drivers/accel/qda/qda_memory_dma.c b/drivers/accel/qda/qda=
+_memory_dma.c
+> > new file mode 100644
+> > index 000000000000..7072ed8edf0b
+> > --- /dev/null
+> > +++ b/drivers/accel/qda/qda_memory_dma.c
+> > @@ -0,0 +1,82 @@
+> > +// SPDX-License-Identifier: GPL-2.0-only
+> > +// Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+> > +#include <linux/slab.h>
+> > +#include <linux/dma-mapping.h>
+> > +#include "qda_drv.h"
+> > +#include "qda_gem.h"
+> > +#include "qda_memory_dma.h"
+> > +
+> > +/*
+> > + * The DSP identifies the IOMMU context bank from the upper bits of th=
+e address,
+> > + * so the stream ID is folded into every address handed to it. The DMA=
+ API only
+> > + * ever sees the plain 32-bit address, which is why the context bank d=
+evices are
+> > + * created with a 32-bit DMA mask.
+> > + */
+> > +static dma_addr_t get_actual_dma_addr(struct qda_gem_obj *gem_obj)
+> > +{
+> > +     return gem_obj->dma_addr - ((u64)gem_obj->iommu_dev->sid << 32);
+> > +}
+> > +
+> > +static void setup_gem_object(struct qda_gem_obj *gem_obj, void *virt,
+> > +                          dma_addr_t dma_addr, struct qda_iommu_device=
+ *iommu_dev)
+> > +{
+> > +     gem_obj->virt =3D virt;
+> > +     gem_obj->dma_addr =3D dma_addr;
+> > +     gem_obj->iommu_dev =3D iommu_dev;
+> > +}
+> > +
+> > +static void cleanup_gem_object_fields(struct qda_gem_obj *gem_obj)
+> > +{
+> > +     gem_obj->virt =3D NULL;
+> > +     gem_obj->dma_addr =3D 0;
+> > +     gem_obj->iommu_dev =3D NULL;
+> > +}
+> > +
+> > +/**
+> > + * qda_dma_alloc() - Allocate DMA coherent memory for a GEM object
+> > + * @iommu_dev: Pointer to the QDA IOMMU device structure
+> > + * @gem_obj: Pointer to GEM object to allocate memory for
+> > + * @size: Size of memory to allocate in bytes
+> > + *
+> > + * Return: 0 on success, negative error code on failure
+> > + */
+> > +int qda_dma_alloc(struct qda_iommu_device *iommu_dev,
+> > +               struct qda_gem_obj *gem_obj, size_t size)
+> > +{
+> > +     dma_addr_t dma_addr;
+> > +     void *virt;
+> > +
+> > +     virt =3D dma_alloc_coherent(iommu_dev->dev, size, &dma_addr, GFP_=
+KERNEL);
+> > +     if (!virt)
+> > +             return -ENOMEM;
+> > +
+> > +     dma_addr +=3D ((u64)iommu_dev->sid << 32);
+> > +     setup_gem_object(gem_obj, virt, dma_addr, iommu_dev);
+> > +
+> > +     return 0;
+> > +}
+> > +
+> > +/**
+> > + * qda_dma_free() - Free DMA coherent memory for a GEM object
+> > + * @gem_obj: Pointer to GEM object to free memory for
+> > + */
+> > +void qda_dma_free(struct qda_gem_obj *gem_obj)
+> > +{
+> > +     dma_free_coherent(gem_obj->iommu_dev->dev, gem_obj->size,
+> > +                       gem_obj->virt, get_actual_dma_addr(gem_obj));
+> > +
+> > +     cleanup_gem_object_fields(gem_obj);
+> > +}
+> > +
+> > +/**
+> > + * qda_dma_mmap() - Map DMA memory into userspace
+> > + * @gem_obj: Pointer to GEM object containing DMA memory
+> > + * @vma: Virtual memory area to map into
+> > + *
+> > + * Return: 0 on success, negative error code on failure
+> > + */
+> > +int qda_dma_mmap(struct qda_gem_obj *gem_obj, struct vm_area_struct *v=
+ma)
+> > +{
+> > +     return dma_mmap_coherent(gem_obj->iommu_dev->dev, vma, gem_obj->v=
+irt,
+> > +                              get_actual_dma_addr(gem_obj), gem_obj->s=
+ize);
+> > +}
+> > diff --git a/drivers/accel/qda/qda_memory_dma.h b/drivers/accel/qda/qda=
+_memory_dma.h
+> > new file mode 100644
+> > index 000000000000..99352a99dc33
+> > --- /dev/null
+> > +++ b/drivers/accel/qda/qda_memory_dma.h
+> > @@ -0,0 +1,17 @@
+> > +/* SPDX-License-Identifier: GPL-2.0-only */
+> > +/*
+> > + * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+> > + */
+> > +
+> > +#ifndef __QDA_MEMORY_DMA_H__
+> > +#define __QDA_MEMORY_DMA_H__
+> > +
+> > +#include <linux/dma-mapping.h>
+> > +#include "qda_memory_manager.h"
+> > +
+> > +int qda_dma_alloc(struct qda_iommu_device *iommu_dev,
+> > +               struct qda_gem_obj *gem_obj, size_t size);
+> > +void qda_dma_free(struct qda_gem_obj *gem_obj);
+> > +int qda_dma_mmap(struct qda_gem_obj *gem_obj, struct vm_area_struct *v=
+ma);
+> > +
+> > +#endif /* __QDA_MEMORY_DMA_H__ */
+> > diff --git a/drivers/accel/qda/qda_memory_manager.c b/drivers/accel/qda=
+/qda_memory_manager.c
+> > index b1a80ee77c35..d47c7419e11d 100644
+> > --- a/drivers/accel/qda/qda_memory_manager.c
+> > +++ b/drivers/accel/qda/qda_memory_manager.c
+> > @@ -1,14 +1,26 @@
+> >  // SPDX-License-Identifier: GPL-2.0-only
+> >  // Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+> >
+> > +#include <linux/refcount.h>
+> >  #include <linux/slab.h>
+> > +#include <linux/spinlock.h>
+> > +#include <drm/drm_file.h>
+> > +#include <drm/drm_print.h>
+> >  #include "qda_drv.h"
+> > +#include "qda_gem.h"
+> >  #include "qda_memory_manager.h"
+> > +#include "qda_memory_dma.h"
+> > +
+> > +static void iommu_device_free(struct kref *ref)
+> > +{
+> > +     kfree(container_of(ref, struct qda_iommu_device, ref));
+> > +}
+> >
+> >  static void cleanup_all_memory_devices(struct qda_memory_manager *mem_=
+mgr)
+> >  {
+> >       int i;
+> >
+> > +     mutex_lock(&mem_mgr->process_assignment_lock);
+> >       for (i =3D 0; i < mem_mgr->num_devices; i++) {
+> >               struct qda_iommu_device *iommu_dev =3D mem_mgr->devices[i=
+];
+> >
+> > @@ -16,9 +28,215 @@ static void cleanup_all_memory_devices(struct qda_m=
+emory_manager *mem_mgr)
+> >                       continue;
+> >
+> >               mem_mgr->devices[i] =3D NULL;
+> > -             kfree(iommu_dev);
+> > +             kref_put(&iommu_dev->ref, iommu_device_free);
+> >       }
+> >       mem_mgr->num_devices =3D 0;
+> > +     mutex_unlock(&mem_mgr->process_assignment_lock);
+> > +}
+> > +
+> > +static void init_iommu_device_fields(struct qda_iommu_device *iommu_de=
+v)
+> > +{
+> > +     spin_lock_init(&iommu_dev->lock);
+> > +     refcount_set(&iommu_dev->users, 0);
+> > +     kref_init(&iommu_dev->ref);
+> > +     iommu_dev->assigned_pid =3D 0;
+> > +     iommu_dev->assigned_file_priv =3D NULL;
+> > +}
+> > +
+> > +static struct qda_iommu_device *find_device_for_pid(struct qda_memory_=
+manager *mem_mgr,
+> > +                                                 pid_t pid)
+> > +{
+> > +     struct qda_iommu_device *found_dev =3D NULL;
+> > +     unsigned long flags;
+> > +     int i;
+> > +
+> > +     for (i =3D 0; i < mem_mgr->num_devices; i++) {
+> > +             struct qda_iommu_device *iommu_dev =3D mem_mgr->devices[i=
+];
+> > +
+> > +             if (!iommu_dev)
+> > +                     continue;
+> > +
+> > +             spin_lock_irqsave(&iommu_dev->lock, flags);
+> > +             if (iommu_dev->assigned_pid =3D=3D pid) {
+> > +                     found_dev =3D iommu_dev;
+> > +                     refcount_inc(&found_dev->users);
+> > +                     kref_get(&found_dev->ref);
+> > +                     spin_unlock_irqrestore(&iommu_dev->lock, flags);
+> > +                     break;
+> > +             }
+> > +             spin_unlock_irqrestore(&iommu_dev->lock, flags);
+> > +     }
+> > +
+> > +     return found_dev;
+> > +}
+> > +
+> > +static struct qda_iommu_device *assign_available_device_to_pid(struct =
+qda_memory_manager *mem_mgr,
+> > +                                                            pid_t pid,
+> > +                                                            struct drm=
+_file *file_priv)
+> > +{
+> > +     struct qda_iommu_device *selected_dev =3D NULL;
+> > +     unsigned long flags;
+> > +     int i;
+> > +
+> > +     for (i =3D 0; i < mem_mgr->num_devices; i++) {
+> > +             struct qda_iommu_device *iommu_dev =3D mem_mgr->devices[i=
+];
+> > +
+> > +             if (!iommu_dev)
+> > +                     continue;
+> > +
+> > +             spin_lock_irqsave(&iommu_dev->lock, flags);
+> > +             if (iommu_dev->assigned_pid =3D=3D 0) {
+> > +                     iommu_dev->assigned_pid =3D pid;
+> > +                     iommu_dev->assigned_file_priv =3D file_priv;
+> > +                     selected_dev =3D iommu_dev;
+> > +                     refcount_set(&selected_dev->users, 1);
+> > +                     kref_get(&selected_dev->ref);
+> > +                     spin_unlock_irqrestore(&iommu_dev->lock, flags);
+> > +                     break;
+> > +             }
+> > +             spin_unlock_irqrestore(&iommu_dev->lock, flags);
+> > +     }
+> > +
+> > +     return selected_dev;
+> > +}
+> > +
+> > +static struct qda_iommu_device *get_process_iommu_device(struct qda_me=
+mory_manager *mem_mgr,
+> > +                                                      struct drm_file =
+*file_priv)
+> > +{
+> > +     struct qda_file_priv *qda_priv;
+> > +
+> > +     if (!file_priv || !file_priv->driver_priv)
+> > +             return NULL;
+> > +
+> > +     qda_priv =3D (struct qda_file_priv *)file_priv->driver_priv;
+> > +     return qda_priv->assigned_iommu_dev;
+> > +}
+> > +
+> > +/**
+> > + * qda_memory_manager_assign_device() - Assign an IOMMU device to a pr=
+ocess
+> > + * @mem_mgr: Pointer to memory manager
+> > + * @file_priv: DRM file private data for process association
+> > + *
+> > + * On success the caller owns a reference on the device and must relea=
+se it
+> > + * with qda_memory_manager_release_device().
+> > + *
+> > + * Return: 0 on success, negative error code on failure
+> > + */
+> > +int qda_memory_manager_assign_device(struct qda_memory_manager *mem_mg=
+r,
+> > +                                  struct drm_file *file_priv)
+> > +{
+> > +     struct qda_file_priv *qda_priv;
+> > +     struct qda_iommu_device *selected_dev =3D NULL;
+> > +     int ret =3D 0;
+> > +     pid_t current_pid;
+> > +
+> > +     if (!file_priv || !file_priv->driver_priv)
+> > +             return -EINVAL;
+> > +
+> > +     qda_priv =3D (struct qda_file_priv *)file_priv->driver_priv;
+> > +     current_pid =3D qda_priv->pid;
+> > +
+> > +     mutex_lock(&mem_mgr->process_assignment_lock);
+> > +
+> > +     if (qda_priv->assigned_iommu_dev) {
+> > +             ret =3D 0;
+> > +             goto unlock_and_return;
+> > +     }
+> > +
+> > +     selected_dev =3D find_device_for_pid(mem_mgr, current_pid);
+> > +
+> > +     if (selected_dev) {
+> > +             qda_priv->assigned_iommu_dev =3D selected_dev;
+> > +             goto unlock_and_return;
+> > +     }
+> > +
+> > +     selected_dev =3D assign_available_device_to_pid(mem_mgr, current_=
+pid, file_priv);
+> > +
+> > +     if (!selected_dev) {
+> > +             drm_dbg_driver(file_priv->minor->dev, "No context bank av=
+ailable for PID %d\n",
+> > +                            current_pid);
+> > +             ret =3D -EBUSY;
+> > +             goto unlock_and_return;
+> > +     }
+> > +
+> > +     qda_priv->assigned_iommu_dev =3D selected_dev;
+> > +
+> > +unlock_and_return:
+> > +     mutex_unlock(&mem_mgr->process_assignment_lock);
+> > +
+> > +     return ret;
+> > +}
+> > +
+> > +/**
+> > + * qda_memory_manager_release_device() - Release a process assignment
+> > + * @iommu_dev: Device previously obtained from qda_memory_manager_assi=
+gn_device()
+> > + *
+> > + * Drops the caller's reference. Once the last process using the devic=
+e is
+> > + * gone the assignment is cleared so the device can serve another proc=
+ess.
+> > + */
+> > +void qda_memory_manager_release_device(struct qda_iommu_device *iommu_=
+dev)
+> > +{
+> > +     unsigned long flags;
+> > +
+> > +     if (refcount_dec_and_test(&iommu_dev->users)) {
+> > +             spin_lock_irqsave(&iommu_dev->lock, flags);
+> > +             iommu_dev->assigned_pid =3D 0;
+> > +             iommu_dev->assigned_file_priv =3D NULL;
+> > +             spin_unlock_irqrestore(&iommu_dev->lock, flags);
+> > +     }
+> > +
+> > +     kref_put(&iommu_dev->ref, iommu_device_free);
+> > +}
+> > +
+> > +static struct qda_iommu_device *get_or_assign_iommu_device(struct qda_=
+memory_manager *mem_mgr,
+> > +                                                        struct drm_fil=
+e *file_priv)
+> > +{
+> > +     struct qda_iommu_device *iommu_dev;
+> > +     int ret;
+> > +
+> > +     iommu_dev =3D get_process_iommu_device(mem_mgr, file_priv);
+> > +     if (iommu_dev)
+> > +             return iommu_dev;
+> > +
+> > +     ret =3D qda_memory_manager_assign_device(mem_mgr, file_priv);
+> > +     if (ret)
+> > +             return NULL;
+> > +
+> > +     iommu_dev =3D get_process_iommu_device(mem_mgr, file_priv);
+> > +     if (iommu_dev)
+> > +             return iommu_dev;
+> > +
+> > +     return NULL;
+> > +}
+> > +
+> > +/**
+> > + * qda_memory_manager_alloc() - Allocate memory for a GEM object
+> > + * @mem_mgr: Pointer to memory manager
+> > + * @gem_obj: Pointer to GEM object to allocate memory for
+> > + * @file_priv: DRM file private data for process association
+> > + *
+> > + * Return: 0 on success, negative error code on failure
+> > + */
+> > +int qda_memory_manager_alloc(struct qda_memory_manager *mem_mgr, struc=
+t qda_gem_obj *gem_obj,
+> > +                          struct drm_file *file_priv)
+> > +{
+> > +     struct qda_iommu_device *selected_dev;
+> > +
+> > +     selected_dev =3D get_or_assign_iommu_device(mem_mgr, file_priv);
+> > +     if (!selected_dev)
+> > +             return -EBUSY;
+> > +
+> > +     return qda_dma_alloc(selected_dev, gem_obj, gem_obj->size);
+> > +}
+> > +
+> > +/**
+> > + * qda_memory_manager_free() - Free memory for a GEM object
+> > + * @mem_mgr: Pointer to memory manager
+> > + * @gem_obj: Pointer to GEM object to free memory for
+> > + */
+> > +void qda_memory_manager_free(struct qda_memory_manager *mem_mgr, struc=
+t qda_gem_obj *gem_obj)
+> > +{
+> > +     qda_dma_free(gem_obj);
+> >  }
+> >
+> >  /**
+> > @@ -31,13 +249,21 @@ static void cleanup_all_memory_devices(struct qda_=
+memory_manager *mem_mgr)
+> >  int qda_memory_manager_register_device(struct qda_memory_manager *mem_=
+mgr,
+> >                                      struct qda_iommu_device *iommu_dev=
+)
+> >  {
+> > -     if (mem_mgr->num_devices >=3D mem_mgr->max_devices)
+> > -             return -ENOSPC;
+> > +     int ret =3D 0;
+> >
+> > +     mutex_lock(&mem_mgr->process_assignment_lock);
+> > +     if (mem_mgr->num_devices >=3D mem_mgr->max_devices) {
+> > +             ret =3D -ENOSPC;
+> > +             goto out;
+> > +     }
+> > +
+> > +     init_iommu_device_fields(iommu_dev);
+> >       iommu_dev->id =3D mem_mgr->num_devices;
+> >       mem_mgr->devices[mem_mgr->num_devices++] =3D iommu_dev;
+> >
+> > -     return 0;
+> > +out:
+> > +     mutex_unlock(&mem_mgr->process_assignment_lock);
+> > +     return ret;
+> >  }
+> >
+> >  /**
+> > @@ -52,14 +278,16 @@ void qda_memory_manager_unregister_device(struct q=
+da_memory_manager *mem_mgr,
+> >  {
+> >       int i;
+> >
+> > +     mutex_lock(&mem_mgr->process_assignment_lock);
+> >       for (i =3D 0; i < mem_mgr->num_devices; i++) {
+> >               if (mem_mgr->devices[i] =3D=3D iommu_dev) {
+> >                       mem_mgr->devices[i] =3D NULL;
+> >                       break;
+> >               }
+> >       }
+> > +     mutex_unlock(&mem_mgr->process_assignment_lock);
+> >
+> > -     kfree(iommu_dev);
+> > +     kref_put(&iommu_dev->ref, iommu_device_free);
+> >  }
+> >
+> >  /**
+> > @@ -80,6 +308,7 @@ int qda_memory_manager_init(struct qda_memory_manage=
+r *mem_mgr, int max_devices)
+> >
+> >       mem_mgr->num_devices =3D 0;
+> >       mem_mgr->max_devices =3D max_devices;
+> > +     mutex_init(&mem_mgr->process_assignment_lock);
+> >
+> >       return 0;
+> >  }
+> > diff --git a/drivers/accel/qda/qda_memory_manager.h b/drivers/accel/qda=
+/qda_memory_manager.h
+> > index 7e38c8a18284..0949c0c213f6 100644
+> > --- a/drivers/accel/qda/qda_memory_manager.h
+> > +++ b/drivers/accel/qda/qda_memory_manager.h
+> > @@ -7,25 +7,44 @@
+> >  #define __QDA_MEMORY_MANAGER_H__
+> >
+> >  #include <linux/device.h>
+> > +#include <linux/kref.h>
+> > +#include <linux/mutex.h>
+> > +#include <linux/refcount.h>
+> > +#include <linux/spinlock.h>
+> > +#include <drm/drm_file.h>
+> >
+> >  /* Forward declarations */
+> >  struct qda_dev;
+> > +struct qda_gem_obj;
+> >
+> >  /**
+> >   * struct qda_iommu_device - IOMMU device instance for memory manageme=
+nt
+> >   *
+> >   * Represents a single IOMMU-enabled device managed by the memory mana=
+ger.
+> >   * Each device can be assigned to a specific process session.
+> > + *
+> > + * The object outlives its registration: open files keep a reference t=
+hrough
+> > + * @ref, so a device can be unregistered while a process still holds i=
+t.
+> >   */
+> >  struct qda_iommu_device {
+> >       /** @dev: Pointer to the underlying device */
+> >       struct device *dev;
+> >       /** @qdev: Back-pointer to the parent QDA device */
+> >       struct qda_dev *qdev;
+> > +     /** @assigned_file_priv: DRM file private data for the assigned p=
+rocess */
+> > +     struct drm_file *assigned_file_priv;
+> >       /** @id: Unique identifier assigned by the memory manager */
+> >       u32 id;
+> >       /** @sid: Stream ID for IOMMU transactions */
+> >       u32 sid;
+> > +     /** @assigned_pid: Process ID of the process assigned to this dev=
+ice */
+> > +     pid_t assigned_pid;
+> > +     /** @users: Number of open files sharing this device */
+> > +     refcount_t users;
+> > +     /** @ref: Reference count controlling when the object is freed */
+> > +     struct kref ref;
+> > +     /** @lock: Spinlock protecting concurrent access to device */
+> > +     spinlock_t lock;
+> >  };
+> >
+> >  /**
+> > @@ -42,6 +61,8 @@ struct qda_memory_manager {
+> >       int num_devices;
+> >       /** @max_devices: Capacity of the @devices array */
+> >       int max_devices;
+> > +     /** @process_assignment_lock: Mutex protecting process-to-device =
+assignments */
+> > +     struct mutex process_assignment_lock;
+> >  };
+> >
+> >  int qda_memory_manager_init(struct qda_memory_manager *mem_mgr, int ma=
+x_devices);
+> > @@ -51,5 +72,14 @@ int qda_memory_manager_register_device(struct qda_me=
+mory_manager *mem_mgr,
+> >                                      struct qda_iommu_device *iommu_dev=
+);
+> >  void qda_memory_manager_unregister_device(struct qda_memory_manager *m=
+em_mgr,
+> >                                         struct qda_iommu_device *iommu_=
+dev);
+> > +int qda_memory_manager_assign_device(struct qda_memory_manager *mem_mg=
+r,
+> > +                                  struct drm_file *file_priv);
+> > +void qda_memory_manager_release_device(struct qda_iommu_device *iommu_=
+dev);
+> > +
+> > +int qda_memory_manager_alloc(struct qda_memory_manager *mem_mgr,
+> > +                          struct qda_gem_obj *gem_obj,
+> > +                          struct drm_file *file_priv);
+> > +void qda_memory_manager_free(struct qda_memory_manager *mem_mgr,
+> > +                          struct qda_gem_obj *gem_obj);
+> >
+> >  #endif /* __QDA_MEMORY_MANAGER_H__ */
+> >
+>
