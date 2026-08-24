@@ -1,114 +1,202 @@
-Received: from mx1.white.stw.pengutronix.de (mx1.white.stw.pengutronix.de [185.203.200.13])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 79ADB3A8749;
-	Mon, 24 Aug 2026 14:31:50 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.203.200.13
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CAC4E367291
+	for <linux-arm-msm@vger.kernel.org>; Mon, 24 Aug 2026 14:32:24 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787581913; cv=none; b=OjSOKQB6aouEMwnHB+vqizC24kTzNwOYNOscdOU1mxgcnDVaF+JPn2T8GdsMIt1ly3VgXH0zL+dtgRVpvaxcaQAqXaOmtSO1ewor5I+I7g0xOAyASnC0VXqm3E3QhfGGHBdDOBUf+vZsiDFIVEEaVB5f6LKhBkP6dicVAuvHhew=
+	t=1787581946; cv=none; b=pre5nU8K6mK81vOgxQFfrkBCwwDvtZLJbaJOF/Zo+ttMrY0lz9KRmCbtbmbfYgwVg5F6WFgg05GPdOuT/RE3dKAWuoVeHwclD+38n55xJVvRJM5fy5rww6oW5eXs/3WsLP7ge1073y4yUjvsE3/UxRro2EMha8Qq7RAPazwVpyM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787581913; c=relaxed/simple;
-	bh=CFdp2VkVfTAThSR2QMD1DG+F4FjVJRM+hh0mzal9d8E=;
-	h=Message-ID:Subject:From:To:Cc:Date:In-Reply-To:References:
-	 Content-Type:MIME-Version; b=bUQvz65aSt9G4MlfdAdUujPAhlIoJ7UXr5Gs4dxULpMmrfPnn3fpT3pZVJB45gO1v/h28y5duvchdwDTHZdT2di7AFPcqGd6js6p2dhqzIILJ3uRQ6YLWA20cYo21R5HRHl2KCXMkIYSyY4x6taIzjdGbxe3JvsUdRhiuFgMXDo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=pengutronix.de; spf=pass smtp.mailfrom=pengutronix.de; arc=none smtp.client-ip=185.203.200.13
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=pengutronix.de
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=pengutronix.de
-Received: from [IPv6:2a0a:edc0:0:900:1d::4e] (lupine.office.stw.pengutronix.de [IPv6:2a0a:edc0:0:900:1d::4e])
-	(Authenticated sender: pza@pengutronix.de)
-	by mx1.white.stw.pengutronix.de (Postfix) with ESMTPSA id 20ED72003DE;
-	Mon, 24 Aug 2026 16:31:44 +0200 (CEST)
-Message-ID: <a01e558769b4b30e792c3b37fd0bfa60d022159e.camel@pengutronix.de>
-Subject: Re: [PATCH v2 02/14] phy: qcom: Introduce Qualcomm IPQ5332
- Super-Speed USB UNIPHY driver
-From: Philipp Zabel <p.zabel@pengutronix.de>
-To: george.moussalem@outlook.com, Vinod Koul <vkoul@kernel.org>, Neil
- Armstrong	 <neil.armstrong@linaro.org>, Rob Herring <robh@kernel.org>,
- Krzysztof Kozlowski	 <krzk+dt@kernel.org>, Conor Dooley
- <conor+dt@kernel.org>, Praveenkumar I	 <quic_ipkumar@quicinc.com>,
- Varadarajan Narayanan <quic_varada@quicinc.com>,  Bjorn Andersson
- <andersson@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>, Greg
- Kroah-Hartman	 <gregkh@linuxfoundation.org>, Wesley Cheng
- <quic_wcheng@quicinc.com>
-Cc: linux-arm-msm@vger.kernel.org, linux-phy@lists.infradead.org, 
-	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	linux-usb@vger.kernel.org
-Date: Mon, 24 Aug 2026 16:31:44 +0200
-In-Reply-To: <20260812-ipq5018-usb3-v2-2-8f355d7ff0ef@outlook.com>
-References: <20260812-ipq5018-usb3-v2-0-8f355d7ff0ef@outlook.com>
-	 <20260812-ipq5018-usb3-v2-2-8f355d7ff0ef@outlook.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.56.2-0+deb13u1 
+	s=arc-20240116; t=1787581946; c=relaxed/simple;
+	bh=lZhPUxX46U8cz7NCrnERk6mwOihx4Cpq1wkLQOYWdvY=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=OTlZhHNUrL4BrAit6HuT9kh5HJdnnHdZKFPD6yJQwAjLvCb/6JlkeJ4KV8aXwgwohBMMG6Tlr4Q4MVzdF9OCsiLg0T54VpgmqfhCRvGUn0vkf600Wgg9nKJY5vkf2qU4dEWIcZI7oT+2CkRoghOiWgdKD86HqLc4kUSImM5Zp6M=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=cA17SWBa; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=UKnxZ0/P; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="cA17SWBa";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="UKnxZ0/P"
+Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67OCv5Ax2855059
+	for <linux-arm-msm@vger.kernel.org>; Mon, 24 Aug 2026 14:32:23 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=lzgtT73adN8oD8okeoxk47
+	Ph58ooJDhQByvZ1BW01M0=; b=cA17SWBaeU54q1/NqbT96chGFfF4/0TdOB3r+G
+	EFPhVoVvJzcQFz5Rx/Xc8YqruPTDgIWmNr7Om0MBzPTNF+iNYLFcyuBORb71EIyd
+	xh8l53S90n+Rf4Xf4btDPkA6EDvFod3mTh7mtlkaDZHoQ6Z9sfAqr6hrwNj//w22
+	Rb40M5855TALhG9HhoZXevIj//Uc/eeFihBMeyoONk7D4b74IAgrt/znLd9Qpulb
+	s3ylspud7JsG3IXwi4YtrmYmWx/SpEJ7pMvW1iMptJ/z5QyIbZfWldQhflwP0ZsG
+	OOr4a6Ky9CPL8Q845SNpcicyLAVHEAwginSc37oTM+nQjGMA==
+Received: from mail-pf1-f198.google.com (mail-pf1-f198.google.com [209.85.210.198])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g8gqn9y88-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Mon, 24 Aug 2026 14:32:23 +0000 (GMT)
+Received: by mail-pf1-f198.google.com with SMTP id d2e1a72fcca58-84eee2147ffso4422022b3a.0
+        for <linux-arm-msm@vger.kernel.org>; Mon, 24 Aug 2026 07:32:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1787581942; x=1788186742; darn=vger.kernel.org;
+        h=cc:to:message-id:content-transfer-encoding:content-type
+         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=lzgtT73adN8oD8okeoxk47Ph58ooJDhQByvZ1BW01M0=;
+        b=UKnxZ0/PUHXBTHCLEovv1FlZstUxccBtkYg8E8+1xKANhczJ0TnmiJsijAJKDWPVIn
+         FUwH7zChU0HqKfvRIlfgraqRXQEV96p/YmyaIqei5kunPQFbHy15Th/X0WWKuCPDr02a
+         uHMF9P9j1f9QgM1oNprOtA8iioSACphwG671TE06LpEWLi4k0ELbCgwfucH+31VywdhZ
+         mLU2kOBgoaWGdva25Z/AWgdpJ9QmCTLjUy6667xpZiu0a9yL2AxITqndI0Gi5v7WPPug
+         yA77Od1WANHcU9ZeNUQO8ASbXVfaNX26aCrCpj1GUyZ4zKAhqNJIYbT1pbJKKW/OUCwO
+         rEog==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1787581942; x=1788186742;
+        h=cc:to:message-id:content-transfer-encoding:content-type
+         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to:content-type;
+        bh=lzgtT73adN8oD8okeoxk47Ph58ooJDhQByvZ1BW01M0=;
+        b=STAO1IteTsKkDSX3Cj0+GCSJieEbahgN2ILRwzJwIHNAXnh7wewdcSbsxiQSGnF0VE
+         RWrox0z3xcDYgd123tm8kcxnAD6JEhTrxBslYaPSdVo84022+hQsWofvAZic8Uc+3lDO
+         HdmYf8L4eK2HU14oq1Bkeue/OwkmNx62+0+wDRsjtbtECyW85BbEbGeAJxyokw5HuDiu
+         FxrQOLHoquIB761HLd6l5P9LZ+gVWI9XsiHKhMYTt2Ya9lGNdEINJCwuGVJOhUkIWV0z
+         6+dbIFY1pBkpb/KW0sJ5fpP8jCUijyZm1Co2h2wujhAysKP6+Ds/Xzk33m3kxAS7gUJ0
+         F4ug==
+X-Forwarded-Encrypted: i=1; AHgh+RoJTe5yb8JdsTHy4EkStqN4XkABH86b6p9W9a0KSWHVsDKwuUvHOsL930jB2H7N/o0LZ6q2Ift7+zysazM3@vger.kernel.org
+X-Gm-Message-State: AFuF++kV3qd/kXcBDAq9vJsR2SsCMmxzVF2y+dVjg1pWXfJ+vqsHg8Dy
+	Fk9jMmH+V393lh7+AaG3xCyATfukJ4DqTtQfcMoEZH//EOGW+ec1fUxRS9rwcrXcR+GxRI1kDOw
+	cEpIjuTA9pjYH41+n07LRIucWDYCr5dpVRborscL6bY2zwixPG2tk5Rb5t943e8ZvwgF5
+X-Gm-Gg: AR+sD13wcg59b8HuivusRq8+pnUiKtHNvgwtDrHRKs88nzuUKlT64xLiqTomrVh+sOd
+	XtUcvKeLTn0e11bLrvyi8ssICDdtJDBnIvDoKGgyp4HjF2gzOeYEzRnXbCpN1dkBndvgnunp7oO
+	aYwL5Hc9i/5TAHflL3VIDfhZ9qkauMMrcES+Y5z82iTKsc2/jRKitueTGI4dQjzP9gKGBranCAz
+	wTyBGBsJ9FuCR1UutPrIZBxkPC8z4Lt9BGJHMJLC6QjKl5QxILQewcAcqEPg6p9AFJpocaOGUS6
+	5ecMTtCkyGFi7Z79G4EXoqVNW/9wyvTs78lIsPsQqE/YwjS9RqFbH7m7aPgzhzLM4bZ4gukkoaf
+	3aQLrWA68/zL/psyGRuHggdG/7edvof3lAg==
+X-Received: by 2002:a05:6a00:2d02:b0:851:92fe:504b with SMTP id d2e1a72fcca58-8520b9fff6bmr26848331b3a.7.1787581942500;
+        Mon, 24 Aug 2026 07:32:22 -0700 (PDT)
+X-Received: by 2002:a05:6a00:2d02:b0:851:92fe:504b with SMTP id d2e1a72fcca58-8520b9fff6bmr26848153b3a.7.1787581941732;
+        Mon, 24 Aug 2026 07:32:21 -0700 (PDT)
+Received: from hu-ptalari-hyd.qualcomm.com ([202.46.22.19])
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-8520f161e29sm2062684b3a.56.2026.08.24.07.30.30
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 24 Aug 2026 07:32:20 -0700 (PDT)
+From: Praveen Talari <praveen.talari@oss.qualcomm.com>
+Date: Mon, 24 Aug 2026 20:00:17 +0530
+Subject: [PATCH v2] serial: qcom-geni: Drop unsafe rx_buf realloc from
+ setup_fifos()
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260824-drop-unsafe-rx-buf-realloc-from-setup-fifos-v2-1-9a1c8f711e98@oss.qualcomm.com>
+X-B4-Tracking: v=1; b=H4sIAHhVjGoC/5WOQQqDMBBFryJZd8RMtUhXvUdxYeKkpqixGSMW8
+ e6Nlh6gmw8PPv/9VTB5SyyuySo8zZatGyLgKRG6rYcHgW0iC8zwkpWI0Hg3Qhi4NgR+ARUMeKq
+ 7zmkw3vXANIURjDWOAVWJpDKtiiYXcXH0ZOxy2O7VlzmoJ+lpV+yN1vLk/Pu4M8u99zPnf5lnC
+ RIKbPAsdZlnJG+OOX2FutOu79MYotq27QNQUMA2/wAAAA==
+X-Change-ID: 20260822-drop-unsafe-rx-buf-realloc-from-setup-fifos-2b82eb0cb5d4
+To: konrad.dybcio@oss.qualcomm.com,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        Jiri Slaby <jirislaby@kernel.org>
+Cc: chandana.chiluveru@oss.qualcomm.com, linux-arm-msm@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-serial@vger.kernel.org,
+        Praveen Talari <praveen.talari@oss.qualcomm.com>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1787581830; l=2545;
+ i=praveen.talari@oss.qualcomm.com; s=20251114; h=from:subject:message-id;
+ bh=lZhPUxX46U8cz7NCrnERk6mwOihx4Cpq1wkLQOYWdvY=;
+ b=E7kyAPaXnQwNN5xXNYO6MsOW+aTsbNY8/GnIHw2mXSJMp6Kere5IyvscSKX0NXvICgrQ4VLer
+ JAQSMu/ZiGZCMncQ3Q7wiZPf52cp0oN4VHdcjneWInefRkt64LGLaAo
+X-Developer-Key: i=praveen.talari@oss.qualcomm.com; a=ed25519;
+ pk=NGK/88fjyHXgfhIKwag7+uIytOmyOypvZ/hDFaYPEss=
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODI0MDEyMiBTYWx0ZWRfXykIT0xEJgAtt
+ 5DsQYHf0/+ArUi9ef8QDSNqBStVv5U6GMJqd+7R3/Jwl5RI2RRsCkJEBD4KxD96nbb8fH85FKzC
+ vqyGSTDYc2WOYqdaYealmyQ1joGCFL4=
+X-Proofpoint-GUID: lfKWrQyOsQ4FCgVY4dwvulhAfoGwqOCz
+X-Authority-Analysis: v=2.4 cv=fqXsol4f c=1 sm=1 tr=0 ts=6a8c55f7 cx=c_pps
+ a=m5Vt/hrsBiPMCU0y4gIsQw==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
+ a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
+ a=bC-a23v3AAAA:8 a=EUspDBNiAAAA:8 a=rO80i1saf4kzB67oEq4A:9 a=QEXdDO2ut3YA:10
+ a=IoOABgeZipijB_acs4fv:22 a=FO4_E8m0qiDe52t0p3_H:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODI0MDEyMiBTYWx0ZWRfX2SNmQx/Rma2M
+ zydNRIPlwWWbidV+ma4qmFGDAMHiNSTvGLw3FHZvrm1WeYUFy0JIBr5+uCwSnhlAOtLVPnL2jH7
+ 0ZUBDGXUpt7WuUWmF5qKwiPN7jF0qsHf606KDob33Nt0BwnA2LRptO6QOUgtulc4bhQf5ikI9j8
+ 92EyC50YxGL8QtGNxKG2SovU3IcsmVsVKvcZ1JhIIZqrmhC+UWWODEyfIaMYdyVPu/Ce1yw8RRA
+ 7M+2abmAjn0oeNCfIHDV6jZeaRZWLQmKAHIeI0tNZsL9qXzkQX9ea637GSS3YyTaU6n7MTos2WU
+ sj00YBwFYqsjPRtZSi4aeoCsII6ho79+22FvgxJVyNzvXFxpBA32P7ve7U2v1EQ5cYruUHjVtER
+ me/P2QFDR+FJJ0KBb17PEXVB/cZ9ZpIWf2UK21TvI2pdBHXuyQQ7kDcp8RVr625mxmGZJPLScne
+ kRhGDZY4s0dBi5zRNjw==
+X-Proofpoint-ORIG-GUID: lfKWrQyOsQ4FCgVY4dwvulhAfoGwqOCz
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-08-24_04,2026-08-24_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ priorityscore=1501 bulkscore=0 impostorscore=0 phishscore=0 clxscore=1015
+ spamscore=0 lowpriorityscore=0 suspectscore=0 malwarescore=0 adultscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608240122
 
-On Mi, 2026-08-12 at 13:34 +0400, George Moussalem via B4 Relay wrote:
-> From: Praveenkumar I <quic_ipkumar@quicinc.com>
->=20
-> Adds Qualcomm 22ull Super-Speed USB UNIPHY driver support which is
-> present in Qualcomm IPQ5018 & IPQ5332 SoCs.
->=20
-> This PHY is interfaced with SNPS DWC3 USB and SNPS DWC PCIe. Either one
-> of the interface can use the it and selection is done via mux present in
-> TCSR register. By default, the PHY is configured for PCIe interface and
-> needs this driver to configure the mux for USB.
->=20
-> Signed-off-by: Praveenkumar I <quic_ipkumar@quicinc.com>
-> Signed-off-by: George Moussalem <george.moussalem@outlook.com>
-> ---
->  drivers/phy/qualcomm/Kconfig                       |  10 +
->  drivers/phy/qualcomm/Makefile                      |   1 +
->  .../phy/qualcomm/phy-qcom-uniphy-usb-ss-22ull.c    | 304 +++++++++++++++=
-++++++
->  3 files changed, 315 insertions(+)
->=20
-[...]
-> diff --git a/drivers/phy/qualcomm/phy-qcom-uniphy-usb-ss-22ull.c b/driver=
-s/phy/qualcomm/phy-qcom-uniphy-usb-ss-22ull.c
-> new file mode 100644
-> index 000000000000..089de7cebef0
-> --- /dev/null
-> +++ b/drivers/phy/qualcomm/phy-qcom-uniphy-usb-ss-22ull.c
-> @@ -0,0 +1,304 @@
-[...]
-> +static int qcom_uniphy_usb_probe(struct platform_device *pdev)
-> +{
-> +	struct phy_provider *phy_provider;
-> +	struct device *dev =3D &pdev->dev;
-> +	struct uniphy_usb *uniphy;
-> +	int ret;
-> +
-> +	uniphy =3D devm_kzalloc(dev, sizeof(*uniphy), GFP_KERNEL);
-> +	if (!uniphy)
-> +		return -ENOMEM;
-> +
-> +	uniphy->dev =3D dev;
-> +
-> +	uniphy->cfg =3D of_device_get_match_data(dev);
-> +	if (!uniphy->cfg)
-> +		return -EINVAL;
-> +
-> +	uniphy->base =3D devm_platform_ioremap_resource(pdev, 0);
-> +	if (IS_ERR(uniphy->base))
-> +		return dev_err_probe(dev, PTR_ERR(uniphy->base),
-> +				     "failed to map base\n");
-> +
-> +	ret =3D devm_clk_bulk_get_all(dev, &uniphy->clks);
-> +	if (ret < 0)
-> +		return dev_err_probe(dev, ret, "failed to get clocks\n");
-> +
-> +	uniphy->num_clks =3D ret;
-> +
-> +	uniphy->reset =3D devm_reset_control_get_exclusive_by_index(dev, 0);
+The RX buffer is allocated once during probe using a fixed DMA_RX_BUF_SIZE
+and is DMA-mapped for the lifetime of the port. However, setup_fifos()
+attempts to reallocate rx_buf whenever the reported RX FIFO depth changes.
+Since the DMA mapping is not re-established after reallocation, the buffer
+pointer may change while the DMA engine continues using the stale DMA
+address. This can result in RX DMA targeting memory that no longer
+corresponds to the active buffer, leading to invalid DMA accesses and
+potential memory corruption.
 
-There is only a single reset control. Don't use
-devm_reset_control_get_exclusive_by_index(), use
-devm_reset_control_get_exclusive(dev, NULL) instead.
+The RX FIFO depth is unrelated to the size of rx_buf. The buffer is
+allocated independently using DMA_RX_BUF_SIZE and all RX DMA paths consume
+it at that fixed size. As such, resizing the buffer based on FIFO depth
+changes provides no functional benefit.
 
-regards
-Philipp
+Signed-off-by: Praveen Talari <praveen.talari@oss.qualcomm.com>
+---
+Changes in v2:
+- Updated correct mail id.
+- Link to v1: https://patch.msgid.link/20260824-drop-unsafe-rx-buf-realloc-from-setup-fifos-v1-1-52d231c840e1@oss.qualcomm.com
+---
+ drivers/tty/serial/qcom_geni_serial.c | 14 --------------
+ 1 file changed, 14 deletions(-)
+
+diff --git a/drivers/tty/serial/qcom_geni_serial.c b/drivers/tty/serial/qcom_geni_serial.c
+index 3633723acef8..75b2e0b77d05 100644
+--- a/drivers/tty/serial/qcom_geni_serial.c
++++ b/drivers/tty/serial/qcom_geni_serial.c
+@@ -1291,7 +1291,6 @@ static irqreturn_t qcom_geni_serial_isr(int isr, void *dev)
+ static int setup_fifos(struct qcom_geni_serial_port *port)
+ {
+ 	struct uart_port *uport;
+-	u32 old_rx_fifo_depth = port->rx_fifo_depth;
+ 
+ 	uport = &port->uport;
+ 	port->tx_fifo_depth = geni_se_get_tx_fifo_depth(&port->se);
+@@ -1300,19 +1299,6 @@ static int setup_fifos(struct qcom_geni_serial_port *port)
+ 	uport->fifosize =
+ 		(port->tx_fifo_depth * port->tx_fifo_width) / BITS_PER_BYTE;
+ 
+-	if (port->rx_buf && (old_rx_fifo_depth != port->rx_fifo_depth) && port->rx_fifo_depth) {
+-		/*
+-		 * Use krealloc rather than krealloc_array because rx_buf is
+-		 * accessed as 1 byte entries as well as 4 byte entries so it's
+-		 * not necessarily an array.
+-		 */
+-		port->rx_buf = devm_krealloc(uport->dev, port->rx_buf,
+-					     port->rx_fifo_depth * sizeof(u32),
+-					     GFP_KERNEL);
+-		if (!port->rx_buf)
+-			return -ENOMEM;
+-	}
+-
+ 	return 0;
+ }
+ 
+
+---
+base-commit: 903c1cf6dff9964e71eda98a39e2e5d442050472
+change-id: 20260822-drop-unsafe-rx-buf-realloc-from-setup-fifos-2b82eb0cb5d4
+
+Best regards,
+--  
+Praveen Talari <praveen.talari@oss.qualcomm.com>
+
