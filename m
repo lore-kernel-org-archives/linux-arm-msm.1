@@ -1,103 +1,163 @@
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2239D40F743
-	for <linux-arm-msm@vger.kernel.org>; Mon, 24 Aug 2026 11:36:05 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.133.124
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CC34640DB4E
+	for <linux-arm-msm@vger.kernel.org>; Mon, 24 Aug 2026 11:40:06 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787571366; cv=none; b=OO6B2g1P0OuxR7XGW3pIGQdKhe93vrWZFxjlsSx62n/uylH7oyc87sQzWuR5DqeKKFOMDo8TgJ2BliQJp97ybblIeYr0p9vD4+VMYaAqHyVOvua3PsQwMOkCOpoy3Q20nLZY0HtkUzzXRQyXVHgetlOYfgcyeR9tgKNRJmxjL6Q=
+	t=1787571608; cv=none; b=dVdUHABATz8s7bJRurMGqNY4x9+JvbtrUw7CW/QAu8DFS6k4/WzO4UZUgQouSqFfNeRs17XKxdE+cB/mHFDs0A17KyJvLLHxCx1bDc3AKBPevcfC2ibQEcMptI5ULOWTz2OTpLHJixwoVFCVHps5hDQbg9pbNZ2YAdXC41r5PNc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787571366; c=relaxed/simple;
-	bh=QWRr8CxzXvPWaix5hGx8EX/H/lti1q7GsX2u1ipImUc=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=WBv5+CaDbuxXPzNK58wAVD8YdlMjmHPbusm7zR7kiH7oBv80k/fuvcDgoG/sgcZKb7qAfTMSrv/3R++othmSmTe1PkuRvH9SCjPUc82bj+5Lw2CJiWpFx655IaQKEC1h+3hHb4adr5t8Zy9CoDaoWJkGOaR/GZFW1M3uZ9YpQDQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=RRILnb3Z; arc=none smtp.client-ip=170.10.133.124
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
+	s=arc-20240116; t=1787571608; c=relaxed/simple;
+	bh=mhM1nJgariA7Drln0GvxSUCFkFDiM3od2qwlyHrudFk=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=gbL9qvKdxLPFB0zyTim84+eOjZl8yov/MyzP0mRf9w4liGxSF4qHYtAiUQm4YTHbVs0Y58RVzDqopyULdEm76eJJHMeWQzKfSF3Yp/aHC2zc1XAMOqKm24+UWIaoIuIvWCCeX3IcglxX07Ap0iI+NTUmy17xd5zT9ZC9QwgOSiY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=iFJI3fRU; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=DbsCTWw9; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="RRILnb3Z"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1787571364;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=Opm83gEnNsatCxFqsloP04tPydftxfYtMg5hJEhh3tc=;
-	b=RRILnb3Ze5qdCA4oXDllmUwqzheGyhuMB5zlA+4t/RTIfWG04hKi0Tp5GK9OpZwOyTOL7P
-	rIjkzJQXAqPlnLeQDHvvi0CWvi73r7ohzh5uU3/pSA3oJbjvsep/V9WfKEzDSCu+vFrVO3
-	mr7B2IfPuhp1zoLZ5Ln/q1g8/xtsFo8=
-Received: from mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
- relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-52-XpYJVJ2ANXebGsLU6F0jQg-1; Mon,
- 24 Aug 2026 07:35:59 -0400
-X-MC-Unique: XpYJVJ2ANXebGsLU6F0jQg-1
-X-Mimecast-MFC-AGG-ID: XpYJVJ2ANXebGsLU6F0jQg_1787571358
-Received: from mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com (mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.93])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS id 1555D1829E0E;
-	Mon, 24 Aug 2026 11:35:58 +0000 (UTC)
-Received: from [192.168.1.153] (headnet05.pony-001.prod.iad2.dc.redhat.com [10.2.32.117])
-	by mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS id 1DBA318005B0;
-	Mon, 24 Aug 2026 11:35:55 +0000 (UTC)
-From: Albert Esteve <aesteve@redhat.com>
-Date: Mon, 24 Aug 2026 13:35:40 +0200
-Subject: [PATCH 2/2] firmware: qcom: scm: Allow the SMC request to freeze
- and kill
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="iFJI3fRU";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="DbsCTWw9"
+Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67OBMRkw2274752
+	for <linux-arm-msm@vger.kernel.org>; Mon, 24 Aug 2026 11:40:06 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	3PFyPMRWHHZzfiXJ+pBlyqnTTzHCJvh3CG4+6T4pjYU=; b=iFJI3fRU23uszfgu
+	5sEEIzYEiTTWjY1lLLHsvKScGW1RZlun7PE2G2leVNNyC5gj+t4lxuZpkWDMJBoZ
+	7EFRFKRd1CkFXa2bxK4W4YfsWUUTBSkkAQTsXFtU86Ys5cOj6uMCbzUrtrag4eVb
+	cJl/kxC9jSRcvT5OkGz06ZeFsHdmpF68J5Be8yqRhapo5MsFG38diRuSJIk+XBTu
+	tushN3mu71MMuQnbh3Ln2PThkoIYOfGfVBX39ZSTJQnrpqVpYNiH5vXzCbIw7FEx
+	6+UeqFTb9ea82QUhLuPY69R2WrpoCo7diq1RQKGBo5bL3oLbeLX6Mvp6+fg4q1R8
+	G7cD8Q==
+Received: from mail-pj1-f72.google.com (mail-pj1-f72.google.com [209.85.216.72])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g8kdsge3x-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Mon, 24 Aug 2026 11:40:06 +0000 (GMT)
+Received: by mail-pj1-f72.google.com with SMTP id 98e67ed59e1d1-38f0fe57470so4691055a91.0
+        for <linux-arm-msm@vger.kernel.org>; Mon, 24 Aug 2026 04:40:05 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1787571605; x=1788176405; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=3PFyPMRWHHZzfiXJ+pBlyqnTTzHCJvh3CG4+6T4pjYU=;
+        b=DbsCTWw9qBigNpukJCfLohk0niBZIcPnLiUe5MK1YvR1kNtfOL9bxrmgeE24mIz/Qw
+         YVPNF3l961Db6M4e8+Kozmr4Ubs0I018s/DyrOW3PjyCZbTYE7jO2peV/HYk0vXjrxN8
+         Tt1LjCIi+EFKNVqLIIoLmfDRntM7X/W4RkYUFyUEzge/wo7M/yI06K3Fj/Yj6oltqX3f
+         NeRXNY/BtInmePjX2EGPotcRnsQODsm7UR6gFvSw7B7LpTB/rD5OSXGjD9FVZJpH+KeH
+         7UidrantMfF5xAQmM2QKktkZcpDZYj8DpuUBJyTRvJHoh+AQl5gB/tgRKpCyuqmEXGdR
+         9V4Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1787571605; x=1788176405;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=3PFyPMRWHHZzfiXJ+pBlyqnTTzHCJvh3CG4+6T4pjYU=;
+        b=UVNqXm10K8MNnFQXL5FbIgYeuXqapwtylo5IDyoyYAeF/3RAOHcrWRwLKEsNUH7By1
+         MYstyhxBRcErnA6uVCPkinZf4ikWQTI0kXeECYJDeWzFeUn/Uh2gaNxpNl5wNoeYw93t
+         f4o6fQf8+2ZqULTg8ikfuk2So6o2u67pTbKDzdOiQfaIGqDPHCiMbUyT/lbS74Mm3qIZ
+         v7misB7TqrRNzTdx6fk7q1BRTPUSUTaza/jYvL5zHqtmCjXynFiGwgpvW8cU5xOzYYzl
+         yVTmiKqtEoZP9snQ2AmN3hHvtHZyze2db2DIyDD+kElCv7vipwniLlpWyGQOnKfDgBPy
+         yDkw==
+X-Forwarded-Encrypted: i=1; AHgh+Ro0ItPy/L0/SGrQyuN87BDgrS3CetlgjFx+GwOiPFVpaOUtqS/HRif12s1JMcfGJ/kJqnkg6acAocfMIcdE@vger.kernel.org
+X-Gm-Message-State: AFuF++ly45RDvg8d6dGblI6UV4C15HQdDJJnUK/GJCRlbWqnR3VGox1g
+	XRqivBJpGD8v26ZA+H4pHccVEfpydb8ksEoG+OK6ws1zV60Dm9w4xi3ArsJkBlEeJP7NTqrV+Sw
+	0t2c4QBFVBy9dn5FhqRuXluZILW/8duDzA2RV0Bd/xP1JJW+dkq6BwphRZI7TNUlzrYA7
+X-Gm-Gg: AR+sD13LgGg8D9YTXoGCohPxRf8k34fyqERUN7cNzNgZdzmwSE9P+MXFvWGOsJKnDN/
+	4liGJcYvFMcbWCi7Bvhz/6unX/zGi1+fAyXpHlEVpxwSvx+sAO+6a1tBR30eXx+MXNpqKkzDPvK
+	GyCKD0uXu3+yQhPob6BoApiPE9J966JR+jzlLalxsdRu3EAlwCL72K/GFz/eoTuSL4s0eTbon34
+	ld0KBtwQyhB0oxatzlk+/d5OASKJp1Pq66TpG5Cddd1/M61ayrPuaOYs4tAaRWwUMrWBSSEEVtd
+	LjU4HD/GBnJSaX2v62MimG8kjGjDXk/3faHg3W/O/OiWXCZplUCZy/Xw5xVcR+hmF71Fd/ygWe4
+	mLwyju7z5MnuZJ02GuSks4Dox8O3HhHgw7/E=
+X-Received: by 2002:a17:90b:57c3:b0:395:8124:ac53 with SMTP id 98e67ed59e1d1-395c4fa443fmr22916688a91.6.1787571605403;
+        Mon, 24 Aug 2026 04:40:05 -0700 (PDT)
+X-Received: by 2002:a17:90b:57c3:b0:395:8124:ac53 with SMTP id 98e67ed59e1d1-395c4fa443fmr22916593a91.6.1787571604902;
+        Mon, 24 Aug 2026 04:40:04 -0700 (PDT)
+Received: from [10.217.218.158] ([202.46.22.19])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-395e49e6f59sm9678818a91.12.2026.08.24.04.39.57
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 24 Aug 2026 04:40:03 -0700 (PDT)
+Message-ID: <9d73e9aa-240c-40b5-94cb-9b1b9c2ee380@oss.qualcomm.com>
+Date: Mon, 24 Aug 2026 17:09:55 +0530
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 4/7] serial: qcom-geni: Use geni_se_set_rate() for source
+ clock configuration
+To: Praveen Talari <praveen.talari@oss.qualcomm.com>,
+        konrad.dybcio@oss.qualcomm.com, Sudeep Holla <sudeep.holla@kernel.org>,
+        Cristian Marussi <cristian.marussi@arm.com>,
+        Ulf Hansson <ulfh@kernel.org>, Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        Jiri Slaby <jirislaby@kernel.org>, Mark Brown <broonie@kernel.org>,
+        Viken Dadhaniya <viken.dadhaniya@oss.qualcomm.com>,
+        Andi Shyti <andi.shyti@kernel.org>
+Cc: chandana.chiluveru@oss.qualcomm.com, arm-scmi@vger.kernel.org,
+        linux-arm-kernel@lists.infradead.org, linux-pm@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+        linux-serial@vger.kernel.org, linux-spi@vger.kernel.org,
+        linux-i2c@vger.kernel.org
+References: <20260805-derive_clk_perf_tbl_from_perf_domain_opp_table-v1-0-61171ab1cdce@oss.qualcomm.com>
+ <20260805-derive_clk_perf_tbl_from_perf_domain_opp_table-v1-4-61171ab1cdce@oss.qualcomm.com>
+Content-Language: en-US
+From: Mukesh Savaliya <mukesh.savaliya@oss.qualcomm.com>
+In-Reply-To: <20260805-derive_clk_perf_tbl_from_perf_domain_opp_table-v1-4-61171ab1cdce@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260824-port-scm-patches-v1-2-1dfd69374402@redhat.com>
-References: <20260824-port-scm-patches-v1-0-1dfd69374402@redhat.com>
-In-Reply-To: <20260824-port-scm-patches-v1-0-1dfd69374402@redhat.com>
-To: Bjorn Andersson <andersson@kernel.org>, 
- Konrad Dybcio <konradybcio@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org, 
- Albert Esteve <aesteve@redhat.com>, 
- Yuvaraj Ranganathan <yrangana@qti.qualcomm.com>
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1787571348; l=943;
- i=aesteve@redhat.com; s=20260303; h=from:subject:message-id;
- bh=66EbpJ8HufayhBSTL5IIV8WsQZzYH3jvBp6OX1kpJ5I=;
- b=8U3sTBaQguafzapKb8FNwNPMN5hGOeragNF5q8uWNlo/0QtgalhJNf7c8ckxXQ53+qAbm8wgM
- kcanlZLacM0BCyw31UqyxbXMenQ/OjI6ZfHPpIah2g4llVRnV7GifwX
-X-Developer-Key: i=aesteve@redhat.com; a=ed25519;
- pk=YSFz6sOHd2L45+Fr8DIvHTi6lSIjhLZ5T+rkxspJt1s=
-X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.93
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODI0MDA5NyBTYWx0ZWRfXx3UURZe2qMHF
+ RMa1bvM9phldaSzJBjt7TVLngrP9mtlCccO9ZeAh1D34/BdlP0ZblxLjXeRYwM3+pbsuMg7L+tq
+ EYg/j2DqIPhqm3p295E8JYYHYh8T0yI=
+X-Proofpoint-ORIG-GUID: Gwt2Er6vEeU694CnrQS8-qB-0cUv-hKn
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODI0MDA5NyBTYWx0ZWRfX9tQkLAQ22aQr
+ t9c5BBG9ayPdaxyvW236U+iQE90F3zChA4+PjLxqe9JeIKZIZt2yqV8m6i4/J7YrjBA18t8e4as
+ La2BgMmIQ12ql+f+YZ/155aJuW1nrFFt6BZ+GrfTQVhXxg1cTcLjJaN07mzGHpHvwcRiwHWePBe
+ sxeSi00hMQnrJqrMfyuOSTPNMU52iSVIiX8i+0CeQ7PkwEGAVLiOXnZYzH1VEMFGgdJae7sveej
+ hh2K2eLK6QwdxU1ru8nZkvbeMR3WuPjSeuC9+7X3r3YI7td35+NkmaE/DNuw+G90+Krh38ObVoL
+ 7oFlPrIeqnI5mPh/aa8OQnpLfrC2GLlX5See7KD+Cv1ibvj5y8/UzYFjjpGmwDelGY3Q8Q5f6dv
+ PxRrZd+MUWKrUVd9bhDEzAR3z3jr5KlFB9nFl2Oe6LbPOhjVX8uU/eSmtgKErSg7aHRI6pke7s1
+ e8AVPPciv8b8MLAn8zA==
+X-Proofpoint-GUID: Gwt2Er6vEeU694CnrQS8-qB-0cUv-hKn
+X-Authority-Analysis: v=2.4 cv=d8DFDxjE c=1 sm=1 tr=0 ts=6a8c2d96 cx=c_pps
+ a=RP+M6JBNLl+fLTcSJhASfg==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
+ a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22
+ a=qpM7YB9Ikm2qReIqoCUA:9 a=QEXdDO2ut3YA:10 a=iS9zxrgQBfv6-_F4QbHw:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-08-24_03,2026-08-24_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ suspectscore=0 lowpriorityscore=0 bulkscore=0 adultscore=0 priorityscore=1501
+ malwarescore=0 spamscore=0 phishscore=0 clxscore=1015 impostorscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608240097
 
-From: Yuvaraj Ranganathan <yrangana@qti.qualcomm.com>
 
-SMC requests in waitQ are put into IDLE state which is not allowing
-the task to freeze/kill, adding FREEZABLE & KILLABLE flag will allow the
-task to freeze and restore the waitQ state on resume and kill the task
-on shutdown.
 
-Signed-off-by: Yuvaraj Ranganathan <yrangana@qti.qualcomm.com>
-Signed-off-by: Albert Esteve <aesteve@redhat.com>
----
- drivers/firmware/qcom/qcom_scm.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/firmware/qcom/qcom_scm.c b/drivers/firmware/qcom/qcom_scm.c
-index 7a042273d6d5b..e4ebe4c0746bb 100644
---- a/drivers/firmware/qcom/qcom_scm.c
-+++ b/drivers/firmware/qcom/qcom_scm.c
-@@ -2664,7 +2664,7 @@ int qcom_scm_wait_for_wq_completion(struct device *dev, u32 wq_ctx)
- 	if (IS_ERR(wq))
- 		return PTR_ERR(wq);
- 
--	wait_for_completion_state(wq, TASK_IDLE);
-+	wait_for_completion_state(wq, TASK_IDLE | TASK_FREEZABLE | TASK_KILLABLE);
- 
- 	return 0;
- }
+On 8/5/2026 1:27 AM, Praveen Talari wrote:
 
--- 
-2.55.0
+
+> @@ -1474,7 +1473,10 @@ static int geni_serial_set_rate(struct geni_se *se, unsigned long baud)
+>   
+>   	uport->uartclk = clk_rate;
+>   	port->clk_rate = clk_rate;
+> -	dev_pm_opp_set_rate(uport->dev, clk_rate);
+> +	ret = geni_se_set_rate(&port->se, clk_rate);
+> +	if (ret)
+Can you add trace log with an error for geni serial driver ?> +		return ret;
+> +
+>   	ser_clk_cfg = SER_CLK_EN;
+>   	ser_clk_cfg |= clk_div << CLK_DIV_SHFT;
+>   
+> @@ -1513,7 +1515,7 @@ static void qcom_geni_serial_set_termios(struct uart_port *uport,
+
+[...]
 
