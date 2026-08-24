@@ -1,239 +1,153 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9F49943F08D;
-	Mon, 24 Aug 2026 15:58:20 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2B92A43BDDA;
+	Mon, 24 Aug 2026 16:03:08 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787587100; cv=none; b=XJIuWawAxEZk0GIZ3kqFHBmqXVIE8RuzUtL/09vO5xg80YUssCTagsjuFrTrB/cHwCbfIiDgUjauxrqedyEV5Rwj7jR4SLarQdtPihotBsRCYWDc5t44PhtiCTZElU/O13cODGSEzlEpg7bSarP7FkolnG10aSCjscgOPUD7s6s=
+	t=1787587391; cv=none; b=MD1lHiaw6jc/Yj9myo5Ck+zvkEfkFD1qi498+cWbQVdbVQn9NtnCe3LF9BUm17dF+Bn1+wFCK9pdXTpEgfXFoxTa5iv7Dpa63zJJYWRTWyW2J6aBx1blccTxRBEA4kQnAq/MD0RG6WFVdsgSPH6vQezqtOTl0nEKkeR5nXNtw7w=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787587100; c=relaxed/simple;
-	bh=m+fAoTrznB0MdI3WUA5lHdRRd1kdAp3djMI11/p04iY=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=HuIdHaY4alDcH4Xlx+V2N4oqSUKWf72GjikvXPvgHoqJWhMCW9qN1+tmnLikWLJl4/r/zUexQTM0+Jqmf2uT9b+snHdrXLVQ9PkEhNtju0YIlDOVxb7MPmTMo4Q1YW/mysB+p+0hrspr5RpVQpkOWYXZ10SQpPdxOyPI590CcQg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=R7c1WwbT; arc=none smtp.client-ip=10.30.226.201
+	s=arc-20240116; t=1787587391; c=relaxed/simple;
+	bh=AG6+ddTypEUlHRreNr0P6PVfHH0YA5sAtB1O6uw5j5E=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=CCHjvV3j3A80fOfdeWtNACL64ZbkGq4m4Hv9GhrU8PrmB+P1AiREK6aDkabpUhbtWQgsf4fmyOOjwLq4NvWorSdqFQZKyhkGKkN6BX/TFIl5y8a7pCH32TcoHWiVlmeCJV5QWfTyQu1hy+6kGW5I8dinriv6RoUEDJOlCPSwVW8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=h20F1q+s; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="R7c1WwbT"
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 6E19EC4AF0D;
-	Mon, 24 Aug 2026 15:58:20 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1787587100;
-	bh=m+fAoTrznB0MdI3WUA5lHdRRd1kdAp3djMI11/p04iY=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
-	b=R7c1WwbTeeOG0qOqwTuaYXPoqw23G89qnA+hBHle1W6XCpjK9tv6Esu+OKFb25bYL
-	 3WTH/Xl41NxiDtC8tblajVJLnwYlb5PKgDuifUnQFwQeVVWU54+p8pJInMbqOgnj8f
-	 ciy7OzUgCT6Z1AkGfnG1vIaCOA3cFEHsV/9BR2OsH2w151dyXIet8fpGl+pYRcmZ0r
-	 poq2IZHzoIFfVG0aph0xPs96HiwgWEgsn0lcQ2B2dfIJo1O4+SAM8+gS+vKNVboo2R
-	 EnTlRHO13H2uOl7rVQa6u5p9u2krIQrtVkXVIPzS6sKpWdAWg9f0A/6dKPBVI03sZb
-	 mnFnMvmH1cxeQ==
-Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 542B4C61DB6;
-	Mon, 24 Aug 2026 15:58:20 +0000 (UTC)
-From: Alexandre Hamamdjian via B4 Relay <devnull+azkali.limited.gmail.com@kernel.org>
-Date: Mon, 24 Aug 2026 22:58:22 +0700
-Subject: [PATCH v6 4/4] arm64: dts: qcom: qcs8550-ayaneo-pocket-ds: add the
- lower DSI panel
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="h20F1q+s"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5EFB91F000E9;
+	Mon, 24 Aug 2026 16:03:08 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1787587388;
+	bh=RCjgHPB1JH7XWcCeQw9/7Cj3OkRUTR5GrMqvgGXxgB4=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=h20F1q+sQ9eDnw6kKYtK6k4bqjqlzqASvCd2XfkYNgvzsQ8ZsxQ7QSNb+y01IhNaL
+	 k/6AFU82DE2dIWQD+fneAQQfYrcqUQbQh9vO3gAxttOc82/kTuHoQ15QsbEwycNcrv
+	 vf18dm4vGI+Cf6eRXvUK0HESW8UcYn4BplmUEhsfUMP3uJK5rcxl8wn1hvc7CDC4Td
+	 wWqbaxKb7aFiqZqCKln5vwRC7hFHBpM8g1Vyf/9LWK1v42aX6ORTtsErecmUB8AXVF
+	 LASbQYjPWcoOf8Hh6tEPGVHYAQzRIHhxlT1Z/fEiVGkEhJnIYGHlA1eksy1IkIHBU0
+	 U67IBVt+nSbYA==
+Received: from johan by xi.lan with local (Exim 4.99.4)
+	(envelope-from <johan@kernel.org>)
+	id 1wyX8b-00000001q4R-47X6;
+	Mon, 24 Aug 2026 18:03:05 +0200
+Date: Mon, 24 Aug 2026 18:03:05 +0200
+From: Johan Hovold <johan@kernel.org>
+To: Greg Ociepka <greg@ferrisoft.com>
+Cc: Alexandre Belloni <alexandre.belloni@bootlin.com>,
+	linux-rtc@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+	Konrad Dybcio <konradybcio@kernel.org>,
+	Bjorn Andersson <andersson@kernel.org>
+Subject: Re: [PATCH] rtc: pm8xxx: do not fail probe when UEFI offset variable
+ is missing
+Message-ID: <aoxrOaY7RIFEqVr2@hovoldconsulting.com>
+References: <20260821181148.1642208-1-greg@ferrisoft.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260824-pocketds-v6-4-370161574ca2@gmail.com>
-References: <20260824-pocketds-v6-0-370161574ca2@gmail.com>
-In-Reply-To: <20260824-pocketds-v6-0-370161574ca2@gmail.com>
-To: Bjorn Andersson <andersson@kernel.org>, 
- Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>, 
- Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
- linux-kernel@vger.kernel.org, 
- Alexandre Hamamdjian <azkali.limited@gmail.com>
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1787587098; l=4952;
- i=azkali.limited@gmail.com; s=20260510; h=from:subject:message-id;
- bh=awleFrCmpPFN90BPSQOiVC+g+5SKQU6evS103lfDdww=;
- b=EzxjVbypyuklUc/NKIYnzEHclEtqVACsFpTGizN9DW6MKINpX5L8YQIuKIL0Lzsof4/BZpckT
- O6DEllO5b6QBE5w9TeaTyAFFMrimkc2/YsFfgQRzTxwyUzY5Oi74d8r
-X-Developer-Key: i=azkali.limited@gmail.com; a=ed25519;
- pk=I0Z0IdCdQJqNGX+FQUnXhrHg950u3cM6Xzz3YT6JOyQ=
-X-Endpoint-Received: by B4 Relay for azkali.limited@gmail.com/20260510 with
- auth_id=774
-X-Original-From: Alexandre Hamamdjian <azkali.limited@gmail.com>
-Reply-To: azkali.limited@gmail.com
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260821181148.1642208-1-greg@ferrisoft.com>
 
-From: Alexandre Hamamdjian <azkali.limited@gmail.com>
+[ +CC: Konrad and Bjorn ]
 
-The Pocket DS drives two panels. The lower one is a 768x1024 IPS LCD on
-a Sitronix ST7703 DDIC hanging off mdss_dsi1, and all of the pieces it
-needs have now landed: the ayaneo,pocket-ds-lower-panel compatible in
-the ST7703 binding, the SGMicro SGM3804 dual-rail charge pump driver and
-the Silergy SY7758 backlight driver.
+On Fri, Aug 21, 2026 at 06:11:48PM +0200, Greg Ociepka wrote:
+> On machines using "qcom,uefi-rtc-info" the Unix epoch offset for the
+> read-only PMIC RTC counter lives in the RTCInfo UEFI variable. The
+> driver reads it at probe time and treats every failure as fatal,
+> including EFI_NOT_FOUND.
 
-The SGM3804 on i2c0 supplies the panel bias. Its two rails are enabled
-by separate GPIOs and both are programmed to 5.2 V; that figure is the
-vendor register configuration (0x00 = 0x0c, 0x01 = 0x0c), which lands on
-5.2 V in the driver's 4.0 V + 100 mV linear range. tlmm 152 enables the
-positive rail and tlmm 153 the negative one. Only the positive rail has
-a consumer, because the ST7703 binding models a single vcc-supply, so
-the negative rail is marked regulator-always-on to keep AVEE up while
-the panel is on; a better modelling of the pair is welcome.
+This is intentional as "qcom,uefi-rtc-info" should not be set unless the
+offset *is* stored (by the firmware) in said UEFI variable as documented
+in the binding.
 
-The SY7758 backlight sits on the same bus. Its enable line was
-determined on the device: driving tlmm 42 low makes the chip stop
-acknowledging on i2c while the TCA6408 on the same segment keeps
-responding, so tlmm 42 gates the SY7758 alone rather than the bus.
+> That turns a merely-uninitialized clock into a permanently absent one
+> on firmware that never creates the variable. The ASUS Zenbook A16
+> (UX3607OA, Snapdragon X2 Elite Extreme "Glymur", InsydeH2O UEFI) is
+> such a machine: qseecom and uefisecapp come up fine, other variables
+> in the same Qualcomm vendor GUID (882f8c2b-9646-435f-8de5-f208ff80c1bd)
+> exist and are readable, but among the 110 variables exposed through
+> efivarfs there is no RTCInfo -- and Windows on the same machine does
+> not create one either. Probe then fails:
 
-The TCA6408 expander supplies the rest: line 0 gates the panel IOVCC
-rail, modelled as a fixed regulator, and line 2 is the panel reset.
+Then the devicetree added by e8fbbca94db7 ("arm64: dts: qcom: glymur:
+Add Asus Zenbook A16 (UX3607OA)") for 7.3 is incorrect and you should
+drop the corresponding DT property.
 
-sde_dsi1_active keeps its output-high because tlmm 137 has no GPIO
-consumer anywhere in the tree; pinctrl is the only thing asserting it.
+>   rtc-pm8xxx c426000.spmi:pmic@0:rtc@6100: probe with driver rtc-pm8xxx
+>       failed with error -2
+> 
+> This is a chicken-and-egg failure: pm8xxx_rtc_write_uefi_offset()
+> would create the variable (the set path uses EFI_VARIABLE_NON_VOLATILE
+> attributes and efivar_set_variable() creates missing variables), but
+> it can only run from the RTC set_time path -- and the RTC device never
+> registers because probe failed. The variable can never come into
+> existence.
 
-The upper panel is not added here. Its Chipone ICNA3512 binding makes
-disp-supply and blvdd-supply mandatory, and this board has no separately
-controllable rail for either; the vendor device tree drives the upper
-panel purely through a platform enable GPIO and points the panel node at
-the simulator supply list. It will follow once that wiring is confirmed.
+No, it's not. If your firmware doesn't use the EFI variable for the
+offset then you need to figure out how the RTC is supposed to work on
+these platforms (e.g. if you can set the time using some other measure
+and should not be using an external offset all).
 
-Signed-off-by: Alexandre Hamamdjian <azkali.limited@gmail.com>
----
- .../boot/dts/qcom/qcs8550-ayaneo-pocket-ds.dts     | 97 ++++++++++++++++++++++
- 1 file changed, 97 insertions(+)
+> Treat a missing variable like an unset clock instead: warn, keep the
+> zero offset, and register the RTC. Reads expose the raw counter until
+> the first clock set (typically the NTP-triggered RTC synchronization)
+> computes the offset and creates the variable; from then on the machine
+> keeps time across reboots. Userspace already copes with an implausible
+> RTC value at boot -- systemd only steps the clock forward from its
+> persistent timestamp.
 
-diff --git a/arch/arm64/boot/dts/qcom/qcs8550-ayaneo-pocket-ds.dts b/arch/arm64/boot/dts/qcom/qcs8550-ayaneo-pocket-ds.dts
-index 09b1c86cc3d3..72c81667c085 100644
---- a/arch/arm64/boot/dts/qcom/qcs8550-ayaneo-pocket-ds.dts
-+++ b/arch/arm64/boot/dts/qcom/qcs8550-ayaneo-pocket-ds.dts
-@@ -314,6 +314,17 @@ upd720201_vdd33_reg: upd720201-vdd33-regulator {
- 		pinctrl-names = "default";
- 	};
- 
-+	vreg_panel1_iovcc: panel1-iovcc-regulator {
-+		compatible = "regulator-fixed";
-+
-+		regulator-name = "panel1_iovcc";
-+		regulator-min-microvolt = <1800000>;
-+		regulator-max-microvolt = <1800000>;
-+
-+		gpios = <&tca6408 0 GPIO_ACTIVE_HIGH>;
-+		enable-active-high;
-+	};
-+
- 	vdd_fan_5v0: vdd-fan-5v0-regulator {
- 		compatible = "regulator-fixed";
- 
-@@ -829,6 +840,38 @@ tca6408: gpio@20 {
- 
- 		vcc-supply = <&tca6424_vcc>;
- 	};
-+
-+	backlight: backlight@2e {
-+		compatible = "silergy,sy7758";
-+		reg = <0x2e>;
-+
-+		enable-gpios = <&tlmm 42 GPIO_ACTIVE_HIGH>;
-+	};
-+
-+	sgm3804: regulator@3e {
-+		compatible = "sgmicro,sgm3804";
-+		reg = <0x3e>;
-+
-+		vin-supply = <&vph_pwr>;
-+
-+		sgm3804_pos: pos {
-+			regulator-name = "panel1_avdd";
-+			regulator-min-microvolt = <5200000>;
-+			regulator-max-microvolt = <5200000>;
-+
-+			enable-gpios = <&tlmm 152 GPIO_ACTIVE_HIGH>;
-+		};
-+
-+		sgm3804_neg: neg {
-+			regulator-name = "panel1_avee";
-+			regulator-min-microvolt = <5200000>;
-+			regulator-max-microvolt = <5200000>;
-+
-+			enable-gpios = <&tlmm 153 GPIO_ACTIVE_HIGH>;
-+
-+			regulator-always-on;
-+		};
-+	};
- };
- 
- &i2c2 {
-@@ -960,6 +1003,45 @@ &mdss_dp0_out {
- 	data-lanes = <0 1 2 3>;
- };
- 
-+&mdss_dsi1 {
-+	vdda-supply = <&vreg_l3e_1p2>;
-+
-+	status = "okay";
-+
-+	panel@0 {
-+		compatible = "ayaneo,pocket-ds-lower-panel";
-+		reg = <0>;
-+
-+		vcc-supply = <&sgm3804_pos>;
-+		iovcc-supply = <&vreg_panel1_iovcc>;
-+
-+		reset-gpios = <&tca6408 2 GPIO_ACTIVE_LOW>;
-+		backlight = <&backlight>;
-+		rotation = <270>;
-+
-+		pinctrl-0 = <&sde_dsi1_active>;
-+		pinctrl-1 = <&sde_dsi1_suspend>;
-+		pinctrl-names = "default", "sleep";
-+
-+		port {
-+			panel1_in: endpoint {
-+				remote-endpoint = <&mdss_dsi1_out>;
-+			};
-+		};
-+	};
-+};
-+
-+&mdss_dsi1_out {
-+	remote-endpoint = <&panel1_in>;
-+	data-lanes = <0 1 2 3>;
-+};
-+
-+&mdss_dsi1_phy {
-+	vdds-supply = <&vreg_l1e_0p88>;
-+
-+	status = "okay";
-+};
-+
- &pcie0 {
- 	wake-gpios = <&tlmm 96 GPIO_ACTIVE_HIGH>;
- 	perst-gpios = <&tlmm 94 GPIO_ACTIVE_LOW>;
-@@ -1558,6 +1640,21 @@ ts2_irq: ts2-irq-state {
- 		bias-disable;
- 	};
- 
-+	sde_dsi1_active: sde-dsi1-active-state {
-+		pins = "gpio137";
-+		function = "gpio";
-+		drive-strength = <8>;
-+		bias-disable;
-+		output-high;
-+	};
-+
-+	sde_dsi1_suspend: sde-dsi1-suspend-state {
-+		pins = "gpio137";
-+		function = "gpio";
-+		drive-strength = <2>;
-+		bias-pull-down;
-+	};
-+
- 	ts2_reset: ts2-reset-state {
- 		pins = "gpio38";
- 		function = "gpio";
+No, this is a hack. And it, for example, prevents you from having the
+RTC provide the same time in BIOS, Windows and Linux.
 
--- 
-2.55.0
+> Other read errors still fail the probe as before.
+> 
+> Verified on the Zenbook A16 across consecutive boots: on the first
+> boot the driver warns, registers rtc0 and sets the system clock from
+> the raw counter (1970-01-04 here -- the counter had been running for
+> three days); the first NTP-triggered clock set creates RTCInfo; every
+> following boot restores correct wall time from the RTC before any
+> network is up.
+> 
+> Fixes: bba38b874886 ("rtc: pm8xxx: add support for uefi offset")
 
+The current driver is not buggy, it's working as intended so there
+should be no Fixes tag.
 
+> Signed-off-by: Greg Ociepka <greg@ferrisoft.com>
+> Assisted-by: Claude:fable-5
+> ---
+>  drivers/rtc/rtc-pm8xxx.c | 16 +++++++++++++++-
+>  1 file changed, 15 insertions(+), 1 deletion(-)
+> 
+> diff --git a/drivers/rtc/rtc-pm8xxx.c b/drivers/rtc/rtc-pm8xxx.c
+> index e624f84..4627f4e 100644
+> --- a/drivers/rtc/rtc-pm8xxx.c
+> +++ b/drivers/rtc/rtc-pm8xxx.c
+> @@ -589,7 +589,21 @@ static int pm8xxx_rtc_probe_offset(struct pm8xxx_rtc *rtc_dd)
+>  		rtc_dd->use_uefi = false;
+>  	}
+>  
+> -	return pm8xxx_rtc_read_uefi_offset(rtc_dd);
+> +	rc = pm8xxx_rtc_read_uefi_offset(rtc_dd);
+> +	if (rc == -ENOENT) {
+> +		/*
+> +		 * The variable does not exist until something stores an
+> +		 * offset: pm8xxx_rtc_write_uefi_offset() creates it on the
+> +		 * first clock set. Keep probing with a zero offset instead
+> +		 * of failing -- otherwise the RTC never registers and the
+> +		 * variable can never come into existence.
+> +		 */
+> +		dev_warn(rtc_dd->dev,
+> +			 "UEFI offset variable not found, will be created on first clock set\n");
+> +		return 0;
+> +	}
+> +
+> +	return rc;
+>  }
+>  
+>  static int pm8xxx_rtc_probe(struct platform_device *pdev)
+
+Johan
