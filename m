@@ -1,102 +1,174 @@
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.12])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8ADAC369D64;
-	Mon, 24 Aug 2026 11:22:28 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.12
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D5D8F3B0AE7
+	for <linux-arm-msm@vger.kernel.org>; Mon, 24 Aug 2026 11:26:15 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787570550; cv=none; b=Q1O/HYHNYMjFdbhwtAK81e/BT4a+cqgCqeL4y3QwEXC6FI6ukY36EshwdymUYAOcqMyHGvcLVW1+icGRXEphyjYxSKGa9bbjyDtG1/8nlpN2OAFX6JyvsCcgehz4VV7pt4UHlfDMWCzyQTr0184mkQAebFgctfyqce2aoAS0XiY=
+	t=1787570777; cv=none; b=rbOTXLJkU+1Spdezo8/mLJOSe5K3Ys9xz30JB2l6306w5gI56VdJFx0gRisovn7I+n9r5UlMnFPEHxD6iwe4gRMFfXF5dqfflGeVyTC/O2VaoJQJiPYQ2Aeo45AiXObo2hZDwfCOFECcbi1al75J0MnW4N2zViONWOErGtJIt9g=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787570550; c=relaxed/simple;
-	bh=GxNf1H16VO6sS50tTEr7AHCYWZ7TVFYSYfLtGWfkUbQ=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=UYElrhbhtB4Q9yXqe2wsmndZHNn7BRJ3UbYKOWvcNZJoDvdZau4WYrSE2nhupkn2Jkdj/E4au3pgAcAMGRRGNjEMgeisTKEZ9h//zoUqmtit9aS4BduBINIj/Nf81zgiQtXVsFmn6PrqwLz5bZqXbbsFwvLcbM9CUG0t6lxQtps=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=pass smtp.mailfrom=linux.intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=VMLjgOxC; arc=none smtp.client-ip=192.198.163.12
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.intel.com
+	s=arc-20240116; t=1787570777; c=relaxed/simple;
+	bh=cLkJLX+H69tkE3/m3/QggjlzGba7oXv/ShCNu9i/mfA=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=sbA8yM1nmsXky6FDAiIsLU0yDPtS5g2e8WgaiuIY9h1jqJnt0QSX/a6sOmR1XcTyEx3uwlfXxszXhO7BZOrYsWNAzJOvkkcwJ6ZzF/S8OfJyiDJ5WWzEojXGsFpx8KvUtvKDO8EPWIRHCTwZoJ4lSr9oC6RevPwveDTnZ1KBjzU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=JdsqGeQX; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=bLSdckN0; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="VMLjgOxC"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1787570548; x=1819106548;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=GxNf1H16VO6sS50tTEr7AHCYWZ7TVFYSYfLtGWfkUbQ=;
-  b=VMLjgOxCo4XwV8UIGjE64Kgnaurbymg+SsWySzuE0gS3I5KC0Oy27NQj
-   oFSrOurT1M04QRVPaxUfd5nG9ggsCJjGvOWEtVuTLuo6Bia8r9AfR97zk
-   X7L/jI14kgi32t6JWIjx9b9qW9OGjqGeJaufdFfTXJRfxNaFAgC66azjc
-   67c0xINOnjPmHzPu7Bzp9Wjjy8LuwtGhBtR1UOTdLL9Fx46BDcPmjmdMq
-   J16q0dYsNuabgrmedIo8k79WgH6LbtGFCC5rJT+HgdQxYMB440/OSPI3g
-   Aco/I6k0SxFiNoR179fN0sRp7yJdM0f4hZFCq9PZDuAtNtZcnaqZ/4B4R
-   A==;
-X-CSE-ConnectionGUID: MJAdZpF/QSC/izPb2kYgSA==
-X-CSE-MsgGUID: 1uybE1sCRNuu6bRgXbYg+Q==
-X-IronPort-AV: E=McAfee;i="6800,10657,11884"; a="91832012"
-X-IronPort-AV: E=Sophos;i="6.25,240,1779174000"; 
-   d="scan'208";a="91832012"
-Received: from fmviesa009.fm.intel.com ([10.60.135.149])
-  by fmvoesa106.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 24 Aug 2026 04:22:27 -0700
-X-CSE-ConnectionGUID: a+wj8XdmRDCMXOsorLVefA==
-X-CSE-MsgGUID: QUcP43ggRXKKhYwR4QnXxA==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.25,240,1779174000"; 
-   d="scan'208";a="260827468"
-Received: from black.igk.intel.com ([10.91.253.5])
-  by fmviesa009.fm.intel.com with ESMTP; 24 Aug 2026 04:22:26 -0700
-Received: by black.igk.intel.com (Postfix, from userid 1008)
-	id 14BC899; Mon, 24 Aug 2026 13:22:25 +0200 (CEST)
-Date: Mon, 24 Aug 2026 13:22:25 +0200
-From: Heikki Krogerus <heikki.krogerus@linux.intel.com>
-To: Fan Wu <fanwu01@zju.edu.cn>
-Cc: linux-usb@vger.kernel.org, bryan.odonoghue@linaro.org,
-	gregkh@linuxfoundation.org, linux-arm-msm@vger.kernel.org,
-	linux-kernel@vger.kernel.org, stable@vger.kernel.org
-Subject: Re: [PATCH] usb: typec: qcom-pmic: cancel reset_work on stop
-Message-ID: <aowpcQnisJNRNh29@black.igk.intel.com>
-References: <20260819161448.76597-1-fanwu01@zju.edu.cn>
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="JdsqGeQX";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="bLSdckN0"
+Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67OBMdGp3194980
+	for <linux-arm-msm@vger.kernel.org>; Mon, 24 Aug 2026 11:26:15 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=UAVPp94T/5SaNTTaQXVK8f
+	eOqhgiEdfM1yPy3gJVPb8=; b=JdsqGeQXYj5cXIZBtSkum6YDHOuFcYZKzaVTdO
+	QeWC0CPC6gyM2w/X/VRUDuszVHHg3HHielQ15fBfUVVWepewtNiXFtqE0mFcM6tq
+	wv4zh+7vGIIWKTwGfX8LBBuar9sust572a2zU0DzNT+BtDimE+cbB3ZKIx0SXtGq
+	inIJHHtw0SStq3gvla5rrzy+evtjmbktbqBKK7UQc0nFofL7VbN6ZZefY3P5odqD
+	nEY4kSfTXSRUET9oGNMD8eSCdBUQpLgwaR6+DXdepAJ/RwiemZf4zo8wUPxxNNzY
+	MoJpH6Kt/8OLVaaU9h4Ymcs2CxpBbloT19QRXKlW4J74ztwA==
+Received: from mail-pj1-f69.google.com (mail-pj1-f69.google.com [209.85.216.69])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g8hjgryr3-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Mon, 24 Aug 2026 11:26:14 +0000 (GMT)
+Received: by mail-pj1-f69.google.com with SMTP id 98e67ed59e1d1-38ec0f510a9so8420378a91.2
+        for <linux-arm-msm@vger.kernel.org>; Mon, 24 Aug 2026 04:26:14 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1787570774; x=1788175574; darn=vger.kernel.org;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=UAVPp94T/5SaNTTaQXVK8feOqhgiEdfM1yPy3gJVPb8=;
+        b=bLSdckN0BEajvW8HhE9u2/dbcR0TtcqhRjHB/D7tMwn9Vtl1Yw+D9OKURoN/YdgIRO
+         aRdEXxRya+F3jDexHo5baysy3yyIJPLAOITmZr6f2i4Ni0AMHP2Y1xReFQEndB7XIqQU
+         NfITcXX9XdWstCjSVEtrxfDGnn6uGYsPHkD9uTDHjODWUmomzGv+TzV0IC912EGYF9ao
+         SJfCYJA3xQd2tE/KouciyjxuHxXbNd5q9esP/Rlo5B/ZJ1CZ3F/zUf5oLM1KCNrNGuhP
+         ATMt83nHuEQwsLo/pW1hOUiwwEUngYbN+VhcLxYZVUibXQKTwYiWEKu32w96PaHsb7nN
+         LKFQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1787570774; x=1788175574;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=UAVPp94T/5SaNTTaQXVK8feOqhgiEdfM1yPy3gJVPb8=;
+        b=GwfGnUb+avIGmLWMfJBeAt3QeAcfD8G6138qewaae6xTZDpLkzu5U21sR/MX3kG0v9
+         GK/BoerVcoa0DM4PM27Kcd5xUia4mpbk4/DxTsU1z7WMSPc3p4Gng2ljLPxNgShF8UOp
+         pFUhIRsatZvnfGEiRTtFlQAuI9iY1ZE9HePEElgWEHVrMN7ak4hT81ajEZ7sbpO3KUBM
+         rG/Tt98P67YbVZKVRlnlhk7lKtrI/tN0YFLfWTRv8zZ6Vgk3NgicI3RmgPI193EroAtt
+         mruozmNn7UIoNe0FbRXEVnpw5Z6lQi7hbFLgvrE+fp7qiBmUeKzo/XBLH0CueGn2Ywml
+         gfeA==
+X-Gm-Message-State: AFuF++kb9VknAazaU/iRT1qWj7H9qupCWgMusySHbwprsSFOtwqHc++I
+	USSN8DoVqi8t9c1E+dKB1Qp3dgrcJj3oAwBNVhS3Lyo8Qe+Ht3V2WDIKXViFjJRrpTW344Xg7u7
+	+fmc5aQ2UcKS1xu1VBbp4AwxO0v6PVOIQ8DgV9LYHGiXHl4lM8MqmDK5i4R8gy0I8l4/9kh2bsh
+	aj
+X-Gm-Gg: AR+sD13/A9SA6zqVC0xkFLL7CP4v/PvgqhA4DWkSWZS0leexsZEWyATri1MQCubncqA
+	WzI90fxRmQdMT8yDmkyriaFXtzdnZhhpieBaiFMLQOQUsJjyrxwMNhqHCcYCScxJ39TrG4CEeM6
+	COAGHIrxkXrXqLk1aWImlvLI7Mh1ee3AoI7fZpoUV4D83/OhDbaUCuWOrnjvQZZ4GTdYWtAXZU8
+	1YMkN833VRuFZvDw/h5bt1vAG5YPIvWdUUF1Vs9KOEhiA2TKOrBHWfMGitBE0L/ryWc5g3zHU/k
+	exuIoKeQcco84b/paePmN2Nr5Ln/eDteNkN5eBvbPSuhw72EnLHU0KVI0eJ0vQ9xAeraJsmLNHT
+	Iql2cI4+5sb6Kz4Y5SwHEvXEO5AopQQWNLVo=
+X-Received: by 2002:a17:90b:5347:b0:395:a7eb:a4d8 with SMTP id 98e67ed59e1d1-395c3a4bd22mr49999924a91.14.1787570773842;
+        Mon, 24 Aug 2026 04:26:13 -0700 (PDT)
+X-Received: by 2002:a17:90b:5347:b0:395:a7eb:a4d8 with SMTP id 98e67ed59e1d1-395c3a4bd22mr49999852a91.14.1787570773410;
+        Mon, 24 Aug 2026 04:26:13 -0700 (PDT)
+Received: from hu-jseerapu-hyd.qualcomm.com ([202.46.22.19])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-395e4a1597csm9767137a91.13.2026.08.24.04.26.10
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 24 Aug 2026 04:26:13 -0700 (PDT)
+From: Jyothi Kumar Seerapu <jyothi.seerapu@oss.qualcomm.com>
+Subject: [PATCH 0/2] i2c: Add I2C High-Speed mode support for qcom-geni
+Date: Mon, 24 Aug 2026 16:55:47 +0530
+Message-Id: <20260824-i2c-hs-v1-0-8dd94e5c6113@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260819161448.76597-1-fanwu01@zju.edu.cn>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIADsqjGoC/yXMQQ5AMBCF4avIrDWphipXEQtq6FggHUTSuLti+
+ SX/ewEYPSFDnQTweBLTukRkaQLWdcuEgoZoUFJpaVQmSFnhWOTSlNoUsjK6gBhvHke6vqOm/c1
+ HP6Pd3zXc9wNf4xhEagAAAA==
+X-Change-ID: 20260821-i2c-hs-408768509865
+To: Vinod Koul <vkoul@kernel.org>, Frank Li <Frank.Li@kernel.org>,
+        Mukesh Kumar Savaliya <mukesh.savaliya@oss.qualcomm.com>,
+        Viken Dadhaniya <viken.dadhaniya@oss.qualcomm.com>,
+        Andi Shyti <andi.shyti@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, dmaengine@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-i2c@vger.kernel.org,
+        Jyothi Kumar Seerapu <jyothi.seerapu@oss.qualcomm.com>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1787570769; l=1599;
+ i=jyothi.seerapu@oss.qualcomm.com; h=from:subject:message-id;
+ bh=cLkJLX+H69tkE3/m3/QggjlzGba7oXv/ShCNu9i/mfA=;
+ b=oLX1iowxS4Wmt2opkT74s3VIjIFLSoTXBB+pJPFvPwPxzghoRi5exrfkRyWEPlUt1uuHaPfmC
+ wQjXshkPXX1C5O1B8+zBPjUWyPVo0lSLphxuzpmeI/cHOUqfNO53dKK
+X-Developer-Key: i=jyothi.seerapu@oss.qualcomm.com; a=ed25519;
+ pk=9vafyYsia0OnBKWSEwhmWe3hPVQfI2T1xOs5dPaFvEo=
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODI0MDA5NSBTYWx0ZWRfX+02ki7hpDh/2
+ OF1hF2Xw8HneLfPUCR8Ai7dsJhavyvHA/duEmRx+kwnlCLfHa3gKfhY/TiMAHSHNbHn/49frdar
+ V1oGxiVjY9xRyvlEIauGWp6S4b9H4dI=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODI0MDA5NSBTYWx0ZWRfX0KBGaDl5yBll
+ xQOxrMJdVo7s6WI36z+Z40EWuG/9U54zqSf5EADljtKvgHTJE+zLuE5M4/PeEceq+mWr94v4zDZ
+ BRf7ZJrqlYBjWdw4v18bdZYIafJyi180O3VJkSQMrOWlxSFpVEErfSSOztHjdkn3jYMbnrQUB9u
+ IpgqIsg1qwe4Gt8GU3TP76gHxDGJ1b5NtdioxPlI6SOeR1fX3fYd6z/gf8N0DRQgoa0TPRQhgsc
+ qu4dVRCi+ARnAMjsgMTq9XRFBzWDBrgQqYmfExz/dL33mfP2XNuIVDC32pQKvx0vMXzZhs3pvMF
+ P0CBhS7sBirr+Lp+Ds1S/Doq+VS5Vzq8XbZeLRttZMuog3PSytWy+WFsgAfvXErcJl5snzPBD5X
+ PtkkdZLs5tCOs/IVtvJiQproR5Kehk8GJsRl9avJ0XYTt5A7t2lVVDbXkylreJkrLPDN6MBmiMp
+ 0HvHLZFrVmgkGf26rDA==
+X-Proofpoint-ORIG-GUID: Wlq-ix5S1RHhbFpytno5UYQIfdjH_MAd
+X-Authority-Analysis: v=2.4 cv=CoCPtH4D c=1 sm=1 tr=0 ts=6a8c2a56 cx=c_pps
+ a=vVfyC5vLCtgYJKYeQD43oA==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
+ a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22
+ a=EUspDBNiAAAA:8 a=DYxQ9-Bz8KIyXcFcPm8A:9 a=QEXdDO2ut3YA:10
+ a=rl5im9kqc5Lf4LNbBjHf:22
+X-Proofpoint-GUID: Wlq-ix5S1RHhbFpytno5UYQIfdjH_MAd
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-08-24_03,2026-08-24_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ suspectscore=0 priorityscore=1501 malwarescore=0 phishscore=0 bulkscore=0
+ adultscore=0 spamscore=0 clxscore=1015 lowpriorityscore=0 impostorscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608240095
 
-On Wed, Aug 19, 2026 at 04:14:48PM +0000, Fan Wu wrote:
-> pdphy_stop() disables IRQs but leaves reset_work pending.  If the IRQ
-> handler schedules it just before disable_irq(), the work runs after
-> remove() frees the struct via devm.
-> 
-> Call cancel_work_sync() after disabling IRQs to close the window.
-> 
-> This issue was found by an in-house static analysis tool.
-> 
-> Fixes: a4422ff22142 ("usb: typec: qcom: Add Qualcomm PMIC Type-C driver")
-> Cc: stable@vger.kernel.org
-> Assisted-by: Codex:gpt-5.6
-> Signed-off-by: Fan Wu <fanwu01@zju.edu.cn>
+Add I2C High-Speed (HS) mode support for the Qualcomm GENI I2C
+controller, detecting HS mode requests based on a 3.4 MHz bus
+frequency.
 
-Reviewed-by: Heikki Krogerus <heikki.krogerus@linux.intel.com>
+I2C HS mode is supported by the underlying QUP hardware starting with
+QUPv3 core version 4.3 (per the GENI/QUP Hardware Programming Guide).
+This series adds the driver support to detect that capability and
+enable HS-mode transfers on SoCs whose QUP core version meets that
+requirement, rather than tying HS mode to any specific peripheral.
 
-> ---
->  drivers/usb/typec/tcpm/qcom/qcom_pmic_typec_pdphy.c | 2 ++
->  1 file changed, 2 insertions(+)
-> 
-> diff --git a/drivers/usb/typec/tcpm/qcom/qcom_pmic_typec_pdphy.c b/drivers/usb/typec/tcpm/qcom/qcom_pmic_typec_pdphy.c
-> index c8b1463e6..abb9d0321 100644
-> --- a/drivers/usb/typec/tcpm/qcom/qcom_pmic_typec_pdphy.c
-> +++ b/drivers/usb/typec/tcpm/qcom/qcom_pmic_typec_pdphy.c
-> @@ -544,6 +544,8 @@ static void qcom_pmic_typec_pdphy_stop(struct pmic_typec *tcpm)
->  	for (i = 0; i < pmic_typec_pdphy->nr_irqs; i++)
->  		disable_irq(pmic_typec_pdphy->irq_data[i].irq);
->  
-> +	cancel_work_sync(&pmic_typec_pdphy->reset_work);
-> +
->  	qcom_pmic_typec_pdphy_reset_on(pmic_typec_pdphy);
->  
->  	regulator_disable(pmic_typec_pdphy->vdd_pdphy);
+Patch 1 (dmaengine: qcom-gpi) is for GPI DMA transfers and adds
+a CONFIG1 TRE to the GPI DMA engine to convey HS-specific timing
+parameters (tcycle_cnt/tlow_cnt) to the hardware.
 
--- 
-heikki
+Patch 2 (i2c: qcom-geni) handles FIFO/SE-DMA transfers; It configures
+the GENI controller's source clock and timing accordingly, and adds
+the HS-specific FIFO/SE-DMA opcodes and master-code preamble needed
+to switch the bus from Fast Mode Plus to HS speed.
+
+Signed-off-by: Jyothi Kumar Seerapu <jyothi.seerapu@oss.qualcomm.com>
+---
+Jyothi Kumar Seerapu (2):
+      dmaengine: qcom-gpi: Add I2C High-Speed mode configuration support
+      i2c: qcom-geni: Add support for I2C High-Speed mode
+
+ drivers/dma/qcom/gpi.c             |  54 +++++++++++++--
+ drivers/i2c/busses/i2c-qcom-geni.c | 133 +++++++++++++++++++++++++++++++++----
+ include/linux/dma/qcom-gpi-dma.h   |  28 +++++++-
+ 3 files changed, 196 insertions(+), 19 deletions(-)
+---
+base-commit: 7079a12d7506b07fb53b54a664bfad5fa9b16d70
+change-id: 20260821-i2c-hs-408768509865
+
+Best regards,
+--  
+Jyothi Kumar Seerapu <jyothi.seerapu@oss.qualcomm.com>
+
