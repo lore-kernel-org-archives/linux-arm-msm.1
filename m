@@ -1,86 +1,87 @@
 Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B14FC3EF0A6
-	for <linux-arm-msm@vger.kernel.org>; Mon, 24 Aug 2026 11:28:30 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AF1DA38E119
+	for <linux-arm-msm@vger.kernel.org>; Mon, 24 Aug 2026 11:28:38 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787570912; cv=none; b=tCW3UKbN3Ok2EbgcvjF8hnpAF+nwhlMOX9gxSvWxtMF3edFem4Qu1Z6Z8piuKWlP07Xdn4KKwEv829IlWHfQbY+71jToOJhoL3a1bh3pmGo4lGgb0OVrVvojpo0Yrzn7rXuS65adblmIws8UuAxfq47slHHb18Djf+qsLXcLHI0=
+	t=1787570920; cv=none; b=VJp82MwO2SWn2X50JI72cVtnMJmTvTtMGAsmSt7/7QbhZc95Ica12DW1XVtkmKcryl5U+aHPN5yZ6xfccJ387Ze06p0/DR37RxaL1ovJp/YsgLzqzEdptPAW32gH4o0cLstsqXVgQYBoyEkBaZ4dnfYUld0TEi9NiMH0HJEqLw0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787570912; c=relaxed/simple;
-	bh=PswsC0kHCstclWvWwSDNMuzSq86/iBtX2wdJRtaS5ig=;
-	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=QoeT8SHvUlTiT+i7WYsKKjl8WWwUHzoycOQmeA3wDXSrNq50qdAzktYuckFCYB/YU2USM8KPMoBExQCke9OSlGzFv84Z3ppaU00MRuyr2qhm/F61rJ8/PWN7V9y4+hhxTVX9uCJkE5HGHQNu3kkhDCPxJZAjcrnzdntjKZCv/cY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=nkKc7P5T; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=TU4a0ziO; arc=none smtp.client-ip=205.220.180.131
+	s=arc-20240116; t=1787570920; c=relaxed/simple;
+	bh=y2k61bLaxakC11xmIND99HCevfgEkScpEhGzbvIkkXg=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
+	 In-Reply-To:To:Cc; b=HrwhJTb9/BAOD18mGLRfneJiQYTgPw43EDdThQSrDamg+ZVQxjRibYXJe1Cdrjx0oQwrYjVe1Ou3081uwU8cVXk45Zy2pfMCPlPLIqFkA6DGwjF0n7xCzIqWoS1VutCpP+2f+E5iPnXMWHiH0jg9mY58QJ7+1lA6118slgZ05dQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=DrsQ/At1; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=P1QYAzMk; arc=none smtp.client-ip=205.220.180.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="nkKc7P5T";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="TU4a0ziO"
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="DrsQ/At1";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="P1QYAzMk"
 Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67OBMeER2372617
-	for <linux-arm-msm@vger.kernel.org>; Mon, 24 Aug 2026 11:28:29 GMT
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67OBMYwF2372307
+	for <linux-arm-msm@vger.kernel.org>; Mon, 24 Aug 2026 11:28:37 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:message-id
-	:mime-version:subject:to; s=qcppdkim1; bh=4CmRFowfZ47tSun/jApPDw
-	h5aVgBOZwiAhT8GUQqJg0=; b=nkKc7P5TvknCYmEAa3ItX+YViPnb5DiIP2+Dv5
-	7ewcO+RSndW1Sv4UCY8izU/UKR/JLcmyubaxXjXmFkp6QAhdoplhK3B8+oEunzoi
-	tii5rqdRiLOd9EGE7EqFEzC+kapCYQ/o7I8XfQjiCRU6zGOmticuC4maxK8S0Mah
-	5HGWlLB7sMy/ut3BPBSYvw4I8xo1gCwPa/rPhEbatWq/QqDBhcyMuVHT8DvUf0Az
-	UvCTGOuzwS0dit+e9/r5MPLVTK4fr4H2WHK7eCSVHz46RR99auXfHuudaopxmySO
-	N4PJ8SjhiAmnmhME9dQltJHJ4KVYuuAFgyEmdTvCTJBnza/w==
-Received: from mail-pj1-f69.google.com (mail-pj1-f69.google.com [209.85.216.69])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g8gdshbhq-1
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	vYF8IMeScLS8uXOagtGPkjVovyxJMz305NPZ1OMf6D0=; b=DrsQ/At1BkqIW5SJ
+	1Ug2h1z697x60kZ6pcWAdp9YIBS5SGu6qE3ugXMp74AS3EgTMN/sF24/6uTy7KGL
+	noFUjjLxKbeLlVCvd5sJ8FFz6NlRHQE3pYoqAP81BkpKfEigkosbAkAuqYFrRvVW
+	R1YvaDvey9yItrInIh8CITS6W1pbtgdf7WeR8tVXB8cPF5HH+FEzawFXLthNSMZJ
+	N1BeLda4Ppo9P8J7leRZHlxXu5QvMl4Y3wsOBlPy/gDC3DznjamJx47gT+21tPXx
+	/uOiI4caUKOhh6r0l+ZP/Ty174Lbsa9ZQCR1Us7Z16cICtj9phkbABlfZagFXLdm
+	mgVdJQ==
+Received: from mail-pj1-f70.google.com (mail-pj1-f70.google.com [209.85.216.70])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g8gdshbjd-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Mon, 24 Aug 2026 11:28:29 +0000 (GMT)
-Received: by mail-pj1-f69.google.com with SMTP id 98e67ed59e1d1-38f5ac7416eso3392331a91.3
-        for <linux-arm-msm@vger.kernel.org>; Mon, 24 Aug 2026 04:28:29 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Mon, 24 Aug 2026 11:28:37 +0000 (GMT)
+Received: by mail-pj1-f70.google.com with SMTP id 98e67ed59e1d1-38ea32e57e2so7321281a91.1
+        for <linux-arm-msm@vger.kernel.org>; Mon, 24 Aug 2026 04:28:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1787570909; x=1788175709; darn=vger.kernel.org;
-        h=cc:to:content-transfer-encoding:content-type:mime-version
-         :message-id:date:subject:from:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=4CmRFowfZ47tSun/jApPDwh5aVgBOZwiAhT8GUQqJg0=;
-        b=TU4a0ziOARGiBvtyUWmvdjwI/Rd9bzD6X3iqTpDNHB+gw7GvKOrSetqninipUSxRBo
-         Ug/u0gSRcl9RZrl+bnZYeGI9rviYTd2L67d8/QhbPvWbbVPvzPRdkMg42LJVzDwkU5gl
-         StTDrdfSdOTV7XNr2/sbrAFTerGpoL1HD2EnPfobz/jmh5fIS9BpykC6OAtyoxEVDb/3
-         eLsDkTkmDg/tjKqFG+DuLOZvQclkSs0qSpoYQTG8XL9u7+2Z6oNDiUrjZAAx3SMOedLa
-         YYAwQ9Qy4ZmXQKX0YZ0vsURF6VdmUWEi/sIGCxtEdIIxmY/67duyyn4HDFZwfOH4nr3Z
-         MK0w==
+        d=oss.qualcomm.com; s=google; t=1787570916; x=1788175716; darn=vger.kernel.org;
+        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=vYF8IMeScLS8uXOagtGPkjVovyxJMz305NPZ1OMf6D0=;
+        b=P1QYAzMkKl6ON0EelKI9tdSkg5X52vS/oXdKEH3rpnDjb0pA0It1hCS6RID/3NZzbX
+         wcXfxaLEW4VDdDeK1LoBvEROY912buStkw9+Rwy1oKhOqLLgARDkRPxRg+E62crGpRas
+         D3kkLjHLdNJDAIokujV83DvLcAh80t5iYiXYInlQaq1ZlncqffPv09nOrfbfctQW7LvK
+         NITKfg1mpudXe0hTuLBF8OtTGNDnKajpHdlqQo7hrWe8WswNW+vunHK833ukjBVAWeJe
+         A8CfzRGJIK7cJsSTGpDabvM8ovuKgvcU7xBbSEa+MeyaLM6xOSgt9ZqB0QsCFWLCFZk6
+         ni2Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787570909; x=1788175709;
-        h=cc:to:content-transfer-encoding:content-type:mime-version
-         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=4CmRFowfZ47tSun/jApPDwh5aVgBOZwiAhT8GUQqJg0=;
-        b=W5OGf6Zt0lRkv724dyc4G4M9cUXeD8gv9Tsos66v6RQ8SIdq8Z/WkMMUgb61V8KPM7
-         qxpiGTQcd99LI3rwBPCTv4rcYCV7EUrkCujPLyw2hhuwAAjmrBP79buwQwPa7G9Nfnv6
-         fzlAkhkxr6IjrASGtRqhyA28LKUtx4gkT/efJEEu762L/WKNmiwdJfmQx5ALzKRnpOpn
-         SQs7LfiuNa3gTaqoMltPoSLw6uI53B/1M3kfd6u1Eh794SBnngn6ahu5jeXegStI+Q9c
-         udLezGSpRFfYlIc58tgdC+tk4FrN9qp2R31vVRiR5dfC9KKmGC5gVwfoz+c835Y5/ks9
-         YTKA==
-X-Gm-Message-State: AFuF++neFvokRlRJXgwQr3uyt6aHilE7yFCU4rwk3mjA7fLivKIvBpNz
-	vUiKILN5Nd+PrkrDq/IEB7EdpcnCQgTL7+lNAnJnX6sEW3WCg7IKwZioxC5SDYR+XaoR1LM8CSF
-	Gem8+DR147mM3tuJ4Tcd+S2xfRPZ4/FtT51MJv9L2ZjuiunMCV0a5QoqhXw1lE3hpsJ28IZnVcg
-	R5
-X-Gm-Gg: AR+sD134V4X4Otg9u5BMEvtp+c2ZxpWgDopO+r0oBI0J+FH3UadcEaP2DEukbmWhQlY
-	DvK8I5YSvIniqp01Zx4LTdg8G7rNXwSUoTIr0c6pqBpUwI1fOcugXQWg6k7tI2mBTz/nFna2BMJ
-	N8XOxXlx+MPZVVKnCYAXNXQ5maP1JZD4pMgVacomOUIvgXHPbb/XWxgoAzj1ZyGAzo2UyQN2cIm
-	9M9R53JGweuXvjsMS5r01UGo9+sxoa4sreJd5KfVfbPRWVxkMQs1RIQDucIaAxwXuFWo8Vg9hZh
-	Iu3sVBgK5Bq4/l6maurZnJOjuOKu+HnLqb6+cMh7i3Uo35HdK4V5AubOziqcZWB2TgxBGsvnZxa
-	FleyNPr3l2xllrQU3
-X-Received: by 2002:a17:90b:1b42:b0:37f:fd1f:d30f with SMTP id 98e67ed59e1d1-395c3a06ffcmr43323209a91.12.1787570908579;
-        Mon, 24 Aug 2026 04:28:28 -0700 (PDT)
-X-Received: by 2002:a17:90b:1b42:b0:37f:fd1f:d30f with SMTP id 98e67ed59e1d1-395c3a06ffcmr43323139a91.12.1787570908109;
-        Mon, 24 Aug 2026 04:28:28 -0700 (PDT)
+        d=1e100.net; s=20251104; t=1787570916; x=1788175716;
+        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+         :content-type:mime-version:subject:date:from:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=vYF8IMeScLS8uXOagtGPkjVovyxJMz305NPZ1OMf6D0=;
+        b=Np6uXKjPNjpj8v/TCEVLVDvxkIWmsUjhh01g2ggfARgDTi4EJCeu9m/vyJhvw1ku1i
+         0nZLE2ANrMqt2qtaUQ5ceRU+aEtGHJsG76pNWskOHOvbN58n50c0h7Qbn/Cs4QSwjBkX
+         BMQW2405nLzDUk+X+vCKzSOxEByvEsRoB8NGvbM69DC4hW5C8iCaCHdA3q1//QW6CbGd
+         StGQ9oKWf2VetAGJ526/50AEm7DHfWo6PxIemQ/txZq7a7OkaYiBunyU/Kfh49hnkUq0
+         l3NWvWCoVP6z457KmysaZw7TlgZnx8qHwaAtr5NP+ZENQ7g7CHmqiwupXEI6wYKKccQ+
+         47wQ==
+X-Gm-Message-State: AFuF++lo5650vdE0UjMnz+Vo0rIHkp5jBu/AbF6MUQjYMhFfwsCUnWb1
+	bmeUFx5Fj+qpgb7Sgn0svHJbbgYZ3EU6MBYDWVoIccD0noImMgfLJ7U5s1OQngPAn4bPPWIBpv2
+	qA8meZuu2ZC3uGK2o3luZOiHurFAWLb2OO0wHb8cVXjHfIAEu1yhocLOI2B+arEiACxsG
+X-Gm-Gg: AR+sD120Yn2MhsvHO6JLk6KRrl2MT+efxMnY5dZVOa0cPmtZoz3gdP0zC3aqcMe1ZJ+
+	pBmhYit5Sdb3U2wawEGoN5wq1q+IrUr1mEvufxRBFt4SNKktVhMDxeJQJwOySNEFK4eKRtraCCq
+	WLqP5goM04d1A29IxV1GH/sDRqfmP9md+frr14+Tw/EoUbbPmfkA86VuG8QVZT+DYobiOJsrLxO
+	aQzqNoNuu8F/GHGvz6HIlippyIhASxu/iffuPjN2UyBOIT1TqxST0fpjGWnVLL/ZWc8a3ftoj3v
+	ya0HvI3nYOECuM8P/GRs0/e3kFDm/n3j+dLn2Daq1EMVmEV4nD9CLki3SWHGffbDbYHIHaUpWTr
+	x02Zf0jZKXb9owEBd
+X-Received: by 2002:a17:90b:580d:b0:38f:5869:387b with SMTP id 98e67ed59e1d1-395df24e757mr34344893a91.9.1787570916294;
+        Mon, 24 Aug 2026 04:28:36 -0700 (PDT)
+X-Received: by 2002:a17:90b:580d:b0:38f:5869:387b with SMTP id 98e67ed59e1d1-395df24e757mr34344681a91.9.1787570915598;
+        Mon, 24 Aug 2026 04:28:35 -0700 (PDT)
 Received: from [10.213.109.15] ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-395e4af750esm9825643a91.11.2026.08.24.04.28.21
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-395e4af750esm9825643a91.11.2026.08.24.04.28.28
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 24 Aug 2026 04:28:27 -0700 (PDT)
+        Mon, 24 Aug 2026 04:28:33 -0700 (PDT)
 From: Saurabh Anand <saurabh.anand@oss.qualcomm.com>
-Subject: [PATCH 0/4] drm/msm/dp, phy: qcom: improve DP Type-C reconnect
- handling
-Date: Mon, 24 Aug 2026 16:58:03 +0530
-Message-Id: <20260824-qcom-dp-typec-reconnect-fixes-v1-0-2825e5bf8a96@oss.qualcomm.com>
+Date: Mon, 24 Aug 2026 16:58:04 +0530
+Subject: [PATCH 1/4] phy: qcom: qmp-combo: delay Type-C mux switch while DP
+ PHY is initializing
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -89,10 +90,9 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAMMqjGoC/yXM0QrCMAyF4VcZuTZQu9EWX0W80CxqBNvaTFHG3
- n1RL38O55tBuQkr7LoZGr9EpWSL7aYDuh7zhVFGa/DOB5f8gA8qdxwrTp/KhI2p5Mw04VnerOh
- 6F0NMIaU+ghm18W8wYn/4tz5PNzt8UViWFcsOSW2BAAAA
-X-Change-ID: 20260824-qcom-dp-typec-reconnect-fixes-030767868837
+Message-Id: <20260824-qcom-dp-typec-reconnect-fixes-v1-1-2825e5bf8a96@oss.qualcomm.com>
+References: <20260824-qcom-dp-typec-reconnect-fixes-v1-0-2825e5bf8a96@oss.qualcomm.com>
+In-Reply-To: <20260824-qcom-dp-typec-reconnect-fixes-v1-0-2825e5bf8a96@oss.qualcomm.com>
 To: Vinod Koul <vkoul@kernel.org>, Neil Armstrong <neil.armstrong@linaro.org>,
         Manivannan Sadhasivam <mani@kernel.org>,
         Rob Clark <robin.clark@oss.qualcomm.com>,
@@ -110,32 +110,32 @@ Cc: linux-arm-msm@vger.kernel.org, linux-phy@lists.infradead.org,
         Mahadevan P <mahadevan.p@oss.qualcomm.com>,
         Saurabh Anand <saurabh.anand@oss.qualcomm.com>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1787570901; l=1578;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1787570901; l=1390;
  i=saurabh.anand@oss.qualcomm.com; s=20260824; h=from:subject:message-id;
- bh=PswsC0kHCstclWvWwSDNMuzSq86/iBtX2wdJRtaS5ig=;
- b=6hEfZ5576SLS82wemytMrt7rkgq5oL/XkzUgPwLN7shjG/6Cy6MS4tVCkL1DRpF1AySG5dqmq
- tJxt5o1FNx5Cm7QOaCyFHEuWKB8CvWmj0YNHET+IENlHWB+ag7vhu0Y
+ bh=y2k61bLaxakC11xmIND99HCevfgEkScpEhGzbvIkkXg=;
+ b=YnnBPYMDGOpuT28P13YjgvNgaUOm0REayyFOl+w9n1bbmuJYRSC7ZPy5YJYHSEBYNFN1d8YLv
+ Rc8x5As6KkpDsdlwWZrEpgf+gGmLjqagkMCGtUsW2tIEzhikWNOlVr7
 X-Developer-Key: i=saurabh.anand@oss.qualcomm.com; a=ed25519;
  pk=AzGwbGUPO11yi5XTeGyJKOJWLfzXp5Dru4z+PCg/uXs=
-X-Proofpoint-GUID: dXhsG7eABft1WTlFoTZCqaoKvBUO6d0X
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODI0MDA5NiBTYWx0ZWRfXyLsJNWhSJMft
- viRUCojakxBvldraSKqoT+NkYTWnye6JRWkrQzrI/RQrAhVRy+wrUkLTMg4/IZ4abKuZO2mICXh
- G+uUI+L4skjT4QHKj59HVzF0Bdnw9EdOLzFNY5kP/H7cLgVuO8+MQE4FPfDhkDeVlYxT4gN1P1H
- U22Iumsc/XUBPA3qtzEt8HClhU4QWf8daaH54s7MPKUHXXBBR9Fiajq1XAUvGKu1avkMTi6Z0Z7
- kjbbJYQrAp04jEA/u4fuchLgjPRIPGtiuf/jlSF/4hhmnZQsn5EPVxqliwGbT+sbWE3Z94yRUSx
- OzsCQDWZQ5nFEGWxc6+n8Udyv+zFB/CUyQOrZdFHXHMtuYdmzpZRRtnRA3qh2oqCvoXljXiIf1n
- Sop9a3I9Qta144PH0lygMC8D8E15VmkkNh4nnxTr0BLEuzoLT0pO0mBUmyTUJu08kIMItrWSXv8
- 3bshq2xStIiU9l6v50g==
-X-Authority-Analysis: v=2.4 cv=Fqo1OWrq c=1 sm=1 tr=0 ts=6a8c2add cx=c_pps
- a=vVfyC5vLCtgYJKYeQD43oA==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
+X-Proofpoint-GUID: vcMXHkD63ndUK3YVx98mpoJPwupJrP_D
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODI0MDA5NiBTYWx0ZWRfX1dci4BXuwy8T
+ JNSlfbwwRN9DIQ3zI5+MvRbhtnerLWAkTYWG/vC3t6g5FME4a749PfzRbrPfY4P4rNuql3YOCZ8
+ NsqWkNH+Iv7PErdoGpcqdn4LE8plvLNlxkdNoNHwiu8i3geqafDF9AemIg524iXkMl9FcZGNDeT
+ GLQgcplv/bbhJTDptfiOPy4X+6doK0usD+LtX+4vr+UBJOdnlF0vxwLYsbVd1lFPYuVEjUJlhLT
+ zPs5LGGB5vDawIoaGAyShBVL3zO2rb6po4KfXzumMeIBtIe5dMGJIx6xdLGMoR0z7oDVqtAKVUY
+ Whia2WvWMBKkfTZmgbM5gdobEWlILQnL2JbOQ/Z6yJMSLMEbQoiPAA9LlTGH6fFu046UZKSBmjt
+ C+Rcuh2HlzWbmmTrQVEDJZp7Uhjh+af7w3IS5/64zMI5QrxIZByrW8Vk1pCTLjzRUdKj1wCHpRN
+ XswqDUbboKQ4+J4Hkow==
+X-Authority-Analysis: v=2.4 cv=Fqo1OWrq c=1 sm=1 tr=0 ts=6a8c2ae5 cx=c_pps
+ a=0uOsjrqzRL749jD1oC5vDA==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
  a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
  a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22
- a=EUspDBNiAAAA:8 a=_V60umORN3TpBg0EziMA:9 a=QEXdDO2ut3YA:10
- a=rl5im9kqc5Lf4LNbBjHf:22
-X-Proofpoint-ORIG-GUID: dXhsG7eABft1WTlFoTZCqaoKvBUO6d0X
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODI0MDA5NiBTYWx0ZWRfX8J2KGRsjGely
- lok8ogb0AekbeRtyw+OFaloC2szEltJ/ZAApNTzkihfn9x1+Etg3Ltb2jwZdgtafvd5MZ1u6bYJ
- dJwInsDRWvumjTyt4uCI7fcSDqY8/GA=
+ a=EUspDBNiAAAA:8 a=HxeoS3nH6iSbXD-5zs0A:9 a=QEXdDO2ut3YA:10
+ a=mQ_c8vxmzFEMiUWkPHU9:22
+X-Proofpoint-ORIG-GUID: vcMXHkD63ndUK3YVx98mpoJPwupJrP_D
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODI0MDA5NiBTYWx0ZWRfX3hxSoCw2InJI
+ 00C/X80zKc6dXnm8UFggghuXIxuFk+UWNBck0JS5YyqLlUbKajRO0tqEANQoX1MSRl0cs46Js90
+ xx9Q44FIq4tk1lqcbUSZnrzPhdDGBZI=
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-08-24_03,2026-08-24_01,2025-10-01_01
@@ -145,39 +145,36 @@ X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608240096
 
-This series improves the Qualcomm DP Type-C bring-up and reconnect paths
-by handling PHY initialization races and link-training corner cases more
-consistently.
+The Type-C mux switch guard only checked dp_powered_on, which is set in
+qmp_combo_dp_power_on(). However there is a race window between
+qmp_combo_dp_init() and qmp_combo_dp_power_on() during which dp_init_count
+is non-zero but dp_powered_on is still false. A Type-C orientation change
+arriving in this window would proceed with the mux switch while the DP PHY
+is mid-initialization, corrupting the PHY state.
 
-The fixes cover races and link-training corner cases in the Qualcomm DP
-Type-C path. They prevent Type-C mux switching while the DP PHY is still
-initializing, avoid unnecessary retraining after a successful link train,
-skip LTTPR setup when no LTTPRs are present, and keep the downgrade retry
-path running across transient AUX disconnects when the cable is still
-plugged.
-
-Together these changes make DP reconnect and orientation-switch
-handling more robust, especially when AUX link status briefly disagrees
-with Type-C cable presence during reconnect.
+Extend the guard to also block the mux switch when dp_init_count is
+non-zero, covering the full period from dp_init through dp_power_on.
 
 Signed-off-by: Saurabh Anand <saurabh.anand@oss.qualcomm.com>
 ---
-Saurabh Anand (4):
-      phy: qcom: qmp-combo: delay Type-C mux switch while DP PHY is initializing
-      drm/msm/dp: clear force_link_train flag when link training succeeds
-      drm/msm/dp: skip LTTPR init when no LTTPRs are present
-      drm/msm/dp: continue link training downgrade when cable is still plugged
-
- drivers/gpu/drm/msm/dp/dp_ctrl.c          | 4 ++--
- drivers/gpu/drm/msm/dp/dp_ctrl.h          | 1 +
- drivers/gpu/drm/msm/dp/dp_display.c       | 7 +++++++
  drivers/phy/qualcomm/phy-qcom-qmp-combo.c | 3 ++-
- 4 files changed, 12 insertions(+), 3 deletions(-)
----
-base-commit: e6664f2b33db9b6811eb4cec109f06cb2b4f458d
-change-id: 20260824-qcom-dp-typec-reconnect-fixes-030767868837
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-Best regards,
---  
-Saurabh Anand <saurabh.anand@oss.qualcomm.com>
+diff --git a/drivers/phy/qualcomm/phy-qcom-qmp-combo.c b/drivers/phy/qualcomm/phy-qcom-qmp-combo.c
+index c39ced168d03..f23aff79ca08 100644
+--- a/drivers/phy/qualcomm/phy-qcom-qmp-combo.c
++++ b/drivers/phy/qualcomm/phy-qcom-qmp-combo.c
+@@ -4842,7 +4842,8 @@ static int qmp_combo_typec_mux_set(struct typec_mux_dev *mux, struct typec_mux_s
+ 		return 0;
+ 	}
+ 
+-	if (qmp->qmpphy_mode != QMPPHY_MODE_USB3_ONLY && qmp->dp_powered_on) {
++	if (qmp->qmpphy_mode != QMPPHY_MODE_USB3_ONLY &&
++	    (qmp->dp_powered_on || qmp->dp_init_count)) {
+ 		dev_dbg(qmp->dev, "typec_mux_set: DP PHY is still in use, delaying switch\n");
+ 		return 0;
+ 	}
+
+-- 
+2.34.1
 
