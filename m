@@ -1,49 +1,46 @@
-Received: from mail-m19731108.qiye.163.com (mail-m19731108.qiye.163.com [220.197.31.108])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2E1D03F6C2D;
-	Tue, 25 Aug 2026 11:18:33 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=220.197.31.108
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EE84B3FF8AD;
+	Tue, 25 Aug 2026 11:49:50 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787656717; cv=none; b=b3sHs2O3E5RsFAugjI/QCHbrBZvCYoKEyyi58wZsjEJsoYx9Q9kY8h/QsVsDcsLytVMDEbNv2Oer2iqWbUgvRrdQiS4Tt1lXfvX1zWAwaHvT/QAVIlEz5318KFfmRwSBVvyDQ8PrRys6y16oYcQudqZQA2Eharo2goZF/+3hPGY=
+	t=1787658592; cv=none; b=OCZBBsoyqw7wNJz/wMH72g99v+2gKCdwbKv167aydY1dkbqDu9qZG2245T35McFfbfq36KLIOdhCDgShkBuMzTBwEuTN6I3uHmE2YE7b5XntaDxOMQcHqHW05pC3fD7COI4s1sv1vdcoN9MgtR76Yd5xUbmnBuCoWg7LC5Twc2s=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787656717; c=relaxed/simple;
-	bh=UlgNgsoI2mgmcPjZD9IEaM7dJdoYRpuKMNwGpLxOlJM=;
+	s=arc-20240116; t=1787658592; c=relaxed/simple;
+	bh=K9HLkIPmB9mfoubfIXzGGSCkeF45Tq1N7AaeMxZv2MQ=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=aNxZ+43514i1IskgyucOekH5u41Wt0/zfah31amAyKFoBnNRLqjPvLPznSFAQfiqlEm8sFyYdk5gJi7i43PQebO7es/xJ04ICoc9FXMZuDNkZDvhH3Q5cgDs5J4WS9rea7tsaKXTDxdMrmhCc7yns8mPGpdaDQOET6Hj3ou8Rgk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=thundersoft.com; spf=pass smtp.mailfrom=thundersoft.com; dkim=pass (1024-bit key) header.d=thundersoft.com header.i=@thundersoft.com header.b=g6sSXvDm; arc=none smtp.client-ip=220.197.31.108
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=thundersoft.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=thundersoft.com
+	 MIME-Version; b=qm/hbAbEX3UpNSBZUvq3xo2/VcA7RzD/mZRExmY8U4k2DMRLo+SC/CMDyYHnrNWmt/QDFN128VA8i5b6WMNMFQITLcaCZlluQo3wTyDwwX1IdGtSsv+KXIejCxfwif7NjfM2j5KRAXqRDywQOCiBGxJUXYD5N5/Rvy5hPjGd+wE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=EuvBgON4; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=thundersoft.com header.i=@thundersoft.com header.b="g6sSXvDm"
-Received: from tsdl-HP-EliteDesk-880-G6-Tower-PC.. (unknown [36.129.139.90])
-	by smtp.qiye.163.com (Hmail) with ESMTP id 4b42473f7;
-	Tue, 25 Aug 2026 19:13:14 +0800 (GMT+08:00)
-From: Hongyang Zhao <hongyang.zhao@thundersoft.com>
-To: konrad.dybcio@oss.qualcomm.com
-Cc: Frank.Li@nxp.com,
-	andersson@kernel.org,
-	bryan.odonoghue@linaro.org,
-	conor+dt@kernel.org,
-	devicetree@vger.kernel.org,
-	festevam@gmail.com,
-	hongyang.zhao@thundersoft.com,
-	imx@lists.linux.dev,
-	kernel@pengutronix.de,
-	konradybcio@kernel.org,
-	krzk+dt@kernel.org,
-	linux-arm-kernel@lists.infradead.org,
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="EuvBgON4"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id F26611F000E9;
+	Tue, 25 Aug 2026 11:49:49 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1787658590;
+	bh=cPViORCFrxsxEx74yJ3PYYV50HrV9rFpBBd8ks58f/8=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References;
+	b=EuvBgON4gsbPw6cZPX8Q1Nw0R9iD4fuVsTuPvYR7lW4CKeNW39xECMmm8Anf1ta9e
+	 Wo4ujbzFMsQjseuzVraShzS9j4EqWTOG2pXKg9dJYYmXyHbAc7Hn9knNqXJQO62hod
+	 Mnq3Yw1BwsBsevMav2CF6yoh57au+B1ID3w7USmj/0NjXH6SdN5ahyTmIspJmVkyCP
+	 Awwf8pa0f0geY4lAxBFClpPiCZ0aBrepwvJf82NdxouPHUTxVbIte49XozMvzeqU8S
+	 +1fjKIVhwlje3SpHdFaULXuC3wVFQSJJph0FrlKZED90FyUgllkDUauPHAMsY4aPJr
+	 sXPMSNSaLz8ZQ==
+From: Sasha Levin <sashal@kernel.org>
+To: Abel Vesa <abel.vesa@oss.qualcomm.com>
+Cc: Sasha Levin <sashal@kernel.org>,
+	Ulf Hansson <ulfh@kernel.org>,
+	stable@vger.kernel.org,
 	linux-arm-msm@vger.kernel.org,
+	linux-pm@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
-	robh@kernel.org,
-	rosh@debian.org,
-	s.hauer@pengutronix.de
-Subject: Re: [PATCH v3 2/2] arm64: dts: qcom: qcs6490-rubikpi3: Add IMX219 camera overlays
-Date: Tue, 25 Aug 2026 19:13:00 +0800
-Message-ID: <20260825111300.578054-1-hongyang.zhao@thundersoft.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <1ef41a49-dcf8-4252-acdd-f7f3c1210c55@oss.qualcomm.com>
-References: <1ef41a49-dcf8-4252-acdd-f7f3c1210c55@oss.qualcomm.com>
+	Ulf Hansson <ulf.hansson@oss.qualcomm.com>
+Subject: Re: [PATCH] Revert "pmdomain: qcom: rpmhpd: Add missing MXC and MMCX power domains for Eliza"
+Date: Tue, 25 Aug 2026 07:49:31 -0400
+Message-ID: <202608250010.26978953f092a26a@kernel.org>
+X-Mailer: git-send-email 2.53.0
+In-Reply-To: <CAPx+jO_WgxJSyW_ZPYLrYaQMJMv6w918CQupeHoPSr7JPxqa8Q@mail.gmail.com>
+References: <CAPx+jO_WgxJSyW_ZPYLrYaQMJMv6w918CQupeHoPSr7JPxqa8Q@mail.gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -51,86 +48,18 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-HM-Tid: 0aa0389fd69e09d5kunmfc72ad39516699
-X-HM-MType: 1
-X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
-	tZV1koWUFITzdXWRgWCB1ZQUpXWS1ZQUlXWQ8JGhUIEh9ZQVkaQksdVkhNSkJKTklNT0MeSFYVFA
-	kWGhdVEwETFhoSFyQUDg9ZV1kYEgtZQVlITVVKSUJVSkhCVUJLWVdZFhoPEhUdFFlBWU9LSFVCQk
-	lOS1VKS0tVSkJLQlkG
-DKIM-Signature: a=rsa-sha256;
-	b=g6sSXvDmyQWkNKsuejnsoucOf08FtjSwsRNkWjRVUoH/E29b1E0J9z8qeSrVwN809tPpS8Ilc0BD+F/R7/QBNEetBJKtHhWfzAyZyZSq2UVy8DqjM5ZjQyY7oJMoNXKLyV9aXvejDAWSEkdToPQ2lF1y4Bqdk+hw7aVITxyVexs=; c=relaxed/relaxed; s=default; d=thundersoft.com; v=1;
-	bh=vu2NX5WQU7lXnOIBq1D5RPPESP5Qndpwyx9mUpie3Rk=;
-	h=date:mime-version:subject:message-id:from;
 
-Hi Konrad,
+On Fri, Aug 21, 2026 at 02:51:24PM +0200, Ulf Hansson wrote:
+> Applied for fixes and by adding a stable tag, thanks!
 
-Thanks for the review.
+Thanks - then there is nothing for us to do ahead of time.
 
-On 8/12/26 4:22 AM, Hongyang Zhao wrote:
-> > RUBIK Pi 3 ships without camera sensors, and its two connectors support
-> > multiple modules. Keep module-specific nodes out of the base board DTS
-> > and add per-connector overlays for Raspberry Pi Camera Module V2 IMX219
-> > sensors.
-> > 
-> > CAM1 uses CCI1 and CSIPHY1, while CAM2 uses CCI0 and CSIPHY4. Each
-> > overlay describes the 24 MHz sensor input clock and models the module
-> > power domain controlled through the connector PWR_EN signal. The
-> > baseboard supplies VCC3V3_OUTPUT separately and has no per-camera
-> > regulator.
-> > 
-> > Describe each connector CAMERA_GPIO signal as a privacy indicator LED
-> > and associate it with the corresponding sensor. This lets the V4L2 core
-> > control the LED while the sensor is streaming.
-> > 
-> > Reviewed-by: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
-> > Signed-off-by: Hongyang Zhao <hongyang.zhao@thundersoft.com>
-> > ---
-> 
-> [...]
-> 
-> > +	camera@10 {
-> > +		compatible = "sony,imx219";
-> > +		reg = <0x10>;
-> > +
-> > +		clocks = <&cam1_imx219_clk>;
-> > +
-> > +		VANA-supply = <&vreg_cam1_pwr>;
-> > +		VDIG-supply = <&vreg_cam1_pwr>;
-> > +		VDDL-supply = <&vreg_cam1_pwr>;
-> > +
-> > +		leds = <&cam1_privacy_led>;
-> > +		led-names = "privacy";
-> 
-> No reset GPIOs?
+b48a0a0a76cc ("pmdomain: qcom: rpmhpd: Add missing MXC and MMCX power
+domains for Eliza") only reached 7.1.y (6.18 and older have no
+eliza_rpmhpds table at all), and the revert will flow into 7.1.y
+automatically once it lands in Linus' tree with the stable tag. No
+stable-only revert needed.
 
-Yes. The RubikPi camera connector does not route a dedicated sensor reset
-signal. It exposes PWR_EN and CAMERA_GPIO, but neither is connected
-directly to the IMX219 reset input when using the official Raspberry Pi
-Camera Module 2.
-
-PWR_EN is connected to the module's ENABLE signal and controls the
-module-local power supplies. CAMERA_GPIO corresponds to a pin that is
-not connected on Camera Module 2. The IMX219 /PWDN signal remains local
-to the camera module and is tied to its 1.8 V rail.
-
-Therefore, there is no board-controllable reset GPIO to describe for
-this camera configuration.
-
-> 
-> You should also have a reference to the mclk pin state to make sure
-> the correct pin function kicks in
-
-The Camera Module 2 provides its own 24 MHz oscillator, which is
-connected to the IMX219 MCLK input on the module. RubikPi does not route
-a SoC CAM_MCLK signal to this connector. The fixed-clock node represents
-that module-local oscillator, so there is no corresponding TLMM MCLK
-pin state.
-
-The Camera Module 2 schematic shows both connections:
-https://datasheets.raspberrypi.com/camera/camera-module-2-schematics.pdf
-
-RUBIK Pi 3 schematic (CSI connector, page 13):
-https://thundercomm.s3-accelerate.amazonaws.com/uploads/web/rubik-pi-3/RUBIKPI3-IOB-V02-RELEASE.pdf
-
-Best regards,
-Hongyang
+-- 
+Thanks,
+Sasha
