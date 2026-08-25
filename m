@@ -1,33 +1,33 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4AEDB3D1ABD;
-	Tue, 25 Aug 2026 07:12:49 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 50BDD35E1CE;
+	Tue, 25 Aug 2026 07:23:39 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787641971; cv=none; b=PWnd2TUeUyeAdKVHshbcNgo+TMSEEdAygICu+j5DVQ0ZSha/vrtcmTFnRWkmBIhOHCgYwUTO/ZS25m8EZffgOgM0+Tk5NEeGjLdXlMF1cfR2OnKa58UahxOeDigRp3p51kcLEbdthO2utaRD5Fm+RdQpK+DM4c1VvwDRON4ROr0=
+	t=1787642620; cv=none; b=R+ieV0+ccgNZLv7uGfD+Gx6Zp9RrwiUbU+ATmDl0c2IiEHhuJt72sWMOkOigSLMlgQ0BYvrdBgt9pXwNoGbNlt4Bkt3amDVuVVbzQtksR6jyuMOZOaf+KjKDl5AjT3pgfiLOv0o3JBhDYcnqqzcqDGs+lyDFBSTCNnS/Fz9fB/g=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787641971; c=relaxed/simple;
-	bh=xzGZTYkrQ9nyfVHqZW6veLzcSWAuPzDQYLKZUOZAVqA=;
+	s=arc-20240116; t=1787642620; c=relaxed/simple;
+	bh=m+MO2xFuRSnRyqEZyY535niCmpxT/R1WsROsqE3m0Io=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=SdCGJVbwVSi7ARRjw/IDw0G1NJlxcSGRY6U3S4Z905wQ3f46+DcjmfisuOsQr/FyDolRH06yCoaxD57ftmrketvSuLw8mWn5Nq430tTJlUphevLO98/9qrUKPJCzh8RxCziR2voysey16Xnnu945Qse75zuTXffHovKnGKuvwWg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=an+fMrXi; arc=none smtp.client-ip=100.103.45.18
+	 In-Reply-To:Content-Type; b=TbV9EzZSyi7DJszi+QuWE+0eI9KRoSuO3F+H+/GuQstTcSbrk+Q1NvLus/sIGbHWh1odjWfz9yN57MO6Po5NL69aiv1Uf0/Kq3XDpFE97HwIzpQnqDfEEmwniQJcZg47xumD4EoIF2TDh5WIeh+FT9FQoqtNWoPRgNM0pyK7rQA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=WhjF1Ec+; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="an+fMrXi"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A6CFE1F00ACF;
-	Tue, 25 Aug 2026 07:12:44 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="WhjF1Ec+"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7EF8A1F000E9;
+	Tue, 25 Aug 2026 07:23:34 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1787641969;
-	bh=fSnPxOXxbPqn44HU8F1vVplrQwAFdhDYxhZwMac+fCo=;
+	s=k20260515; t=1787642619;
+	bh=vAw6JWzCLJCJfF1ryBusB9YNiK9qysUpkRpMaqRUIv4=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=an+fMrXiyWYpott+Z6owFw/JOtZH9cA8hHYiKw7TP3fiB9xeEnfYIKAdBo/evUxSW
-	 ER4IqZZPuiRHN2bC0VI9e/tla+FocezAQV05KqNqePxG+wYeu+ALfEuP3pM0WkN0Ks
-	 CqiaCLJK8BNlGpLPJklx1YIDwMPvwKSqC+GNqAcejxoWqLQPEd0ivwEYIdEcnud2Ry
-	 iZXEKx2zBCpvwaLVNgz8EtgG6/Aoav2dcH31F1UGmj771KH3/fuAMXo07HNWXh40HQ
-	 U7OO5oINerfba7ZU4Pnzlw0SGZ3IQRJj7X/n82AZZkjVWYi57ojILaPHdFMWQafX5i
-	 Cr+TRrAJVTfPQ==
-Message-ID: <115c74e0-2e08-48ac-a70b-c11d2fa808f5@kernel.org>
-Date: Tue, 25 Aug 2026 09:12:42 +0200
+	b=WhjF1Ec+nHplXcGqwKrVydAMuYpkfPOzq1ZZJi4KKDreG26+ynF7VwUT1MiIBg5uE
+	 rbe8V+kP3IHjGS3OTaYkGxKpqTpFu4fD2rurO02SffoXY1LS0Fv1vUUcEqrZaojqK7
+	 rr8tVV0vkFextHlPRNEB5hWPZ4OO+FrXpRLQ64KTrr+ryi2iCZJh2aRklGXalub5ZR
+	 ktQOoN4ft77xyTP4rydIDBx1uhz7/spW7nRwy2OlKPl+PQaPri+rdJ2wvXSLp0S6Bi
+	 Nd33gJ42UgbbPD2h7wbsV4Yb3HUzfsoiwoFz/EUVxWhSOcC5i9V7uCzG1jeWTH1o8v
+	 M4+XEtgo9306w==
+Message-ID: <ac6b2c8e-5670-4075-a0e5-d5424cefd6a7@kernel.org>
+Date: Tue, 25 Aug 2026 09:23:32 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -35,22 +35,19 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/2] clk: qcom: segcc-nord: Add EMAC CNOC APB clocks for
- Nord SoC
-To: Abel Vesa <abel.vesa@oss.qualcomm.com>,
- Taniya Das <taniya.das@oss.qualcomm.com>
-Cc: Bjorn Andersson <andersson@kernel.org>, Stephen Boyd <sboyd@kernel.org>,
- Brian Masney <bmasney+clk@redhat.com>,
- Jerome Brunet <jbrunet+clk@baylibre.com>, Rob Herring <robh@kernel.org>,
- Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
- <conor+dt@kernel.org>, Ajit Pandey <ajit.pandey@oss.qualcomm.com>,
- Imran Shaik <imran.shaik@oss.qualcomm.com>,
- Jagadeesh Kona <jagadeesh.kona@oss.qualcomm.com>,
- linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org,
- devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
-References: <20260824-nords_emac_apb_clk-v1-0-290767386bf5@oss.qualcomm.com>
- <20260824-nords_emac_apb_clk-v1-2-290767386bf5@oss.qualcomm.com>
- <z3d2awmpulr5cwexhso24verb24ec4rsnj4pxfhhqxwezrfjat@pwoxszguelpg>
+Subject: Re: [PATCH v2 1/3] dt-bindings: usb: Add Cypress cypd6129/cypd6229
+ Type-C controller
+To: Akash Kumar <akash.kumar@oss.qualcomm.com>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+ Bjorn Andersson <andersson@kernel.org>,
+ Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
+ Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>
+Cc: linux-usb@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org
+References: <20260820145036.2035641-1-akash.kumar@oss.qualcomm.com>
+ <20260821-shikra-usb-dt-v7-apply-v2-0-030647f06285@oss.qualcomm.com>
+ <20260821-shikra-usb-dt-v7-apply-v2-1-030647f06285@oss.qualcomm.com>
 From: Krzysztof Kozlowski <krzk@kernel.org>
 Content-Language: en-US
 Autocrypt: addr=krzk@kernel.org; keydata=
@@ -96,22 +93,34 @@ Autocrypt: addr=krzk@kernel.org; keydata=
  K9bCVaboTA2T77QYkRcRJYSsO1alGX0ome/hMLD1daXlkrNUp1HWa3K4iytLRXjCSIorWiGs
  n+q3krnpXu3TFkA8qtOFZMdnIiFuiq1yLT8hptsV5xh1TA2nsVvSYiaCr3q4s4BKjS/KrLDb
  qoxzw8ISjdUp4pA85vb6YLCmb39NgidD+7PmAr65lBNveIFynTgsja1rRQ4=
-In-Reply-To: <z3d2awmpulr5cwexhso24verb24ec4rsnj4pxfhhqxwezrfjat@pwoxszguelpg>
+In-Reply-To: <20260821-shikra-usb-dt-v7-apply-v2-1-030647f06285@oss.qualcomm.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-On 24/08/2026 10:12, Abel Vesa wrote:
-> On 26-08-24 12:23:30, Taniya Das wrote:
->> Add the EMAC0 and EMAC1 CNOC APB clocks to the SE_GCC clock controller
->> on the Qualcomm Nord SoC. These branch clocks gate the config NoC APB
->> access to the two EMAC controllers and are required for register access
->> to the Ethernet MACs.
->>
->> Signed-off-by: Taniya Das <taniya.das@oss.qualcomm.com>
+On 21/08/2026 12:26, Akash Kumar wrote:
+> Add the device-tree binding documentation for the Cypress cypd6129
+> and cypd6229 dual Type-C PD controllers. These are used on Shikra
+> CQM/CQS/IQS platforms to handle usb-role-switch for the USB Type-C
+> ports over an I2C interface, similarly to the existing cypd4226
+> binding.
 > 
-> Fixes tag, maybe?
+> cypd6229 is a variant of cypd6129 and is described with a
+> "cypress,cypd6129" fallback compatible string.
 
-Same here. Fixes needs proper bug description.
+Why is this replied to v1? Where is the changelog?
+
+> 
+> Signed-off-by: Akash Kumar <akash.kumar@oss.qualcomm.com>
+> ---
+>  .../devicetree/bindings/usb/cypress,cypd6129.yaml  | 107 +++++++++++++++++++++
+>  1 file changed, 107 insertions(+)
+
+
+> 
+> diff --git a/Documentation/devicetree/bindings/usb/cypress,cypd6129.yaml b/Documentation/devicetree/bindings/usb/cypress,cypd6129.yaml
+
+So now you need a new file? Why?
+
 
 Best regards,
 Krzysztof
