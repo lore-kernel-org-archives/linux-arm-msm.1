@@ -1,177 +1,378 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 98D29427F9C
-	for <linux-arm-msm@vger.kernel.org>; Tue, 25 Aug 2026 12:25:16 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9AD44426D0C;
+	Tue, 25 Aug 2026 12:37:34 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787660718; cv=none; b=SKuaQo6MEViz0puWZVnWVNbQoManTUBCP+OKQ9bXWf3utC9UsPNfpX82NZMZsCLVLBDv3O5zVLpYt5SN86WfkRE7IeAwhASf0xtiksq5NTw9dyr7hB1P5eRauOc/FkbTIKjeHrPOIWknQLrrcsV7LtyDK9kAyfGLuSdoND+whJM=
+	t=1787661454; cv=none; b=lxUw07xJV8THdNsDDzaqsoS5WEW3GI2+SsX6wNySTw0v0jd0Np3/sxlVj0jGWEsCiC3yBx6fHIcHvmxRANBANXRT/vKk6O+ecsuJhzxgH1CyTt87IZ/fK3ykwPPW5z5/Ji3j1WVowm7N5/Q7IKCKFxAhJFSWE6GcEZ5Knu15u7U=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787660718; c=relaxed/simple;
-	bh=JpvP2FsKNOLwyzEV35Oy7RuDzh4oUbBOacuQEwMmnbQ=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=RMWkg9LJog+Jk+iDwyvcPlDErcxFVByScd05cKyAFO+6KmY4YIRiOoRJfLtCAJAk/TJMe9Eu67IDRBhD1QE9BIKWFt5n8d42e/8BWC86bJOhHaAqOUGUozEgGcDMZ4nu0l8+NMmRiuXxFJpKzJIwkIwsxOWLgz6wlEFdkBk7YkA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=JKGA+KsV; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=bDO76iKi; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1787661454; c=relaxed/simple;
+	bh=j5WGDZq4JFhhRkNnOtlgnMroG1FmpIpiWmK2eo2bQ9Y=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
+	 In-Reply-To:To:Cc; b=kIeEu4ismjDA2uuui5SHiE9PgGZtn+27YJRhJXthLCP+bPLtWs3Rhg6V6RFWHsSKyxi8slAqzEdzFdmouHZeTZYaGdJR9j6l/tmTryIK5wlcmQ9oXlWJdml+bBVp2SU/EJRlotcsEilpbD4XvdU/UkZcuHZuFSZhLo4BPajw4jg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=WSgOEFaS; arc=none smtp.client-ip=10.30.226.201
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="JKGA+KsV";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="bDO76iKi"
-Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67PAvBVA2090828
-	for <linux-arm-msm@vger.kernel.org>; Tue, 25 Aug 2026 12:25:15 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	IxvYHaduN6TNCEf+tZMW4tMw4ZUU9VGjbq8UEfNnSPw=; b=JKGA+KsVLsBLyuvw
-	xVq7fI4ge6xMju05qBRPExADjgpuVwDLbXTXFPEtaYaajwe6c1ZHgkhSFeJaMNY9
-	Ju052pqAkgFZ31gdzFjlFfjgNBXHL8OYV/r765siaLeUnLE4JPk23+/ARmDYMa9x
-	XyUWZFzt2CJHoV6EvjW4D4L9RREnzTHnLQmAdnRCXSEJpwZ7iISQPEqs+AlWZLpJ
-	oc6XP+uHUCgngzpLKqzKmwzAXzqnc5IOzheGpsSddWKZor0+TEWc/5bGv0GDn1EH
-	YF/JPAlC6My1LxuyAExsenqNkDwUTFvjOTbC6JcvBEX9fCikEyFKGeT4HT/uXnT6
-	yptwJQ==
-Received: from mail-pl1-f198.google.com (mail-pl1-f198.google.com [209.85.214.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g93kvsux9-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 25 Aug 2026 12:25:15 +0000 (GMT)
-Received: by mail-pl1-f198.google.com with SMTP id d9443c01a7336-2d6f75c1219so9680045ad.3
-        for <linux-arm-msm@vger.kernel.org>; Tue, 25 Aug 2026 05:25:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1787660714; x=1788265514; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=IxvYHaduN6TNCEf+tZMW4tMw4ZUU9VGjbq8UEfNnSPw=;
-        b=bDO76iKioX3lqGxCWSUCWSszaVJYfScGH8eO6GwdL7dL0+cSTRcdeT5FySRYEd8pIr
-         JGIst0FsyujKMw8VXcqX8e8iIpHJVEaHAI52R2Mcws+2JPM5PWlrPGMwRO76CJ26aYW8
-         KptNwWPnETmhFdCUEC7eCtq+DxnSr7csN1kZsYaFQf+NjcWu7WvMF8hIBOppaVTkdT5O
-         7oz4Zrhongh0/MLbzQlMuOfUky/oEKDhg8JT8avbZqhhtht0k4pBiO+D/7yeIWPd+oW4
-         CnMyyYRqxMMMNYLf886TixjdWzQ29xgFgrw3dPNlhHiU+5JuF+BDVTnO+8MJJ8sK9jBK
-         4Pgg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787660714; x=1788265514;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=IxvYHaduN6TNCEf+tZMW4tMw4ZUU9VGjbq8UEfNnSPw=;
-        b=glEvVtxoBRb0juo3fwihYpeK1BPbiZXKmLrpacyamx3ZQFs0BQRwGYbIgl+s12NNu+
-         mDuZC0mHkMkdTsZznspr46MMlHmIkdSFe7Ln8Jri8KQVGH+OM+0OAPrkMFXXbuijYpuT
-         9powIim28A1XfsFiQqLBTox712CVkzww0BD6mf5t1tnPVzhj3F/ng21/DSo5QieyR3IH
-         kayZQ+fKD0m06pR/y4r0qj8MfyhqJNkV7gxBbIg4f5NYupbR9HJ6fFbXCf+pSFGiaJ3B
-         He4gruLq71EdYs7wZo31TLRZO4YWrJPNhUiuHuCHIQJr9JYMuxZ/don5+CCkE83Di1en
-         UvWw==
-X-Gm-Message-State: AFuF++mbLqrz0Qa5PuQx+0nrm6ROaRlxit0aK48ziuQCjKzQ3PSsYjzy
-	sK+bUMmigh4tpAT+GwkgK8RFUtGUKELszAWrBNN73LMqZv3+xCLfIlfagM9ppFULpDVgkBAl8cg
-	J/iH1a0rhCo9f095oaII36bmftUQ9P/ZGZB1u3/aDihyGzTKvj1XeEGcbeNiBe9JA4R66
-X-Gm-Gg: AR+sD11XkhIfrnrcLo+lJjMw+V+nMIh721CqGmZK4bFR/1tx/6dbwR5u1/Ni7tqLTzm
-	sD1uIuu/lltEfH8XMVIXX4A1vx2+FqH00kPFF7JIAHhGVS9oi4aCmogqG0kbNOmQkjVfa+DUoP3
-	rj4EHsjA05G6pBuL4SF6mbXIqfnBc3cGX3npnYmIwEuBYOelGzgZXFiNYuRjZRUCFwv89S1Z6Tl
-	T/wC1dfipkWpkW2PPnWoGqDUUXm8L2U1o9YXgpCEnTYDDVW5bqi0Xfb7RvUjlTJq7sRhz1ej+zA
-	F9L9aNlgKMmr0qu/peVOLfU9x588/ovUw6lQjKCIJdAigG2CrqpwkmSmMEa+0E5aafTYgPvMAbJ
-	hlIwAwmHLAkHTOEceFPYXh1r6R2eEiFA=
-X-Received: by 2002:a17:902:ce8c:b0:2d6:2901:6265 with SMTP id d9443c01a7336-2d6dcaddacfmr124084625ad.2.1787660714324;
-        Tue, 25 Aug 2026 05:25:14 -0700 (PDT)
-X-Received: by 2002:a17:902:ce8c:b0:2d6:2901:6265 with SMTP id d9443c01a7336-2d6dcaddacfmr124083815ad.2.1787660713917;
-        Tue, 25 Aug 2026 05:25:13 -0700 (PDT)
-Received: from [192.168.1.16] ([106.222.229.34])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2d6768ba291sm27562625ad.64.2026.08.25.05.25.06
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 25 Aug 2026 05:25:13 -0700 (PDT)
-Message-ID: <ff0c8c22-bd37-451f-80bb-35389ba162c6@oss.qualcomm.com>
-Date: Tue, 25 Aug 2026 17:55:05 +0530
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="WSgOEFaS"
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 1A531C32786;
+	Tue, 25 Aug 2026 12:37:33 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1787661453;
+	bh=j5WGDZq4JFhhRkNnOtlgnMroG1FmpIpiWmK2eo2bQ9Y=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
+	b=WSgOEFaSpM/OMAjeXY1/ebR/c20kAD/M996R04ZPZ/+5Y8IbROI4wMZzcVA7XJotk
+	 k9DVTBfVxouhe3Dl4rz/ScZ6PBx+Pgdvlj75t2Hd+5BTRSuKJRu1YO0zESoO1jLEtH
+	 Km/uNDHiZnUwy1fTPEGDajf8uiwDA9KSkTJIgMinhw3br8+tcBqEAv366SHT29Dy/r
+	 sBn+BEe5ZGD2yNx1QS9m8/1uPb7+cf26Bq4jVd2qXVkGd1rU5ZewJa8NwcuRF+ATcr
+	 XhKM4A8b/wptMB0Tx+VSYZADqQAXcpa83YzTvqYQm76k1LE/FLnrVgxGUUEjK2mttf
+	 bHvGWVFf4W1Gg==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E94DCC61DC6;
+	Tue, 25 Aug 2026 12:37:32 +0000 (UTC)
+From: George Moussalem via B4 Relay <devnull+george.moussalem.outlook.com@kernel.org>
+Date: Tue, 25 Aug 2026 16:37:20 +0400
+Subject: [PATCH v3 03/12] phy: qualcomm: qcom-uniphy-pcie-28lp: Convert to
+ PCIe/USB3 combo PHY driver
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v8 8/9] arm64: dts: qcom: monaco: Enable CDSP cooling
-To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Mathieu Poirier <mathieu.poirier@linaro.org>,
-        Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley
- <conor+dt@kernel.org>,
-        Daniel Lezcano <daniel.lezcano@oss.qualcomm.com>,
-        Amit Kucheria <amit.kucheria@oss.qualcomm.com>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        "Rafael J. Wysocki"
- <rafael@kernel.org>,
-        Daniel Lezcano <daniel.lezcano@kernel.org>,
-        Zhang Rui <rui.zhang@intel.com>, Lukasz Luba <lukasz.luba@arm.com>,
-        Manivannan Sadhasivam <mani@kernel.org>, Kees Cook <kees@kernel.org>,
-        "Gustavo A. R. Silva" <gustavoars@kernel.org>,
-        cros-qcom-dts-watchers@chromium.org
-Cc: linux-arm-msm@vger.kernel.org, linux-remoteproc@vger.kernel.org,
-        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-pm@vger.kernel.org, linux-hardening@vger.kernel.org,
-        manaf.pallikunhi@oss.qualcomm.com,
-        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-References: <20260809-b4-qmi-tmd-v8-0-b15d47adc379@oss.qualcomm.com>
- <20260809-b4-qmi-tmd-v8-8-b15d47adc379@oss.qualcomm.com>
- <01cd0d90-2908-42cb-9ae8-29828d4c03a0@oss.qualcomm.com>
-Content-Language: en-US
-From: Gaurav Kohli <gaurav.kohli@oss.qualcomm.com>
-In-Reply-To: <01cd0d90-2908-42cb-9ae8-29828d4c03a0@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODI1MDEwNSBTYWx0ZWRfX+wBdVRS0+tRS
- m8VpNyJ8ifkq7HSpeZuwjsdfyy/YGLbeW3tYuLvkqBLdvmy2Fjjn/3jzymJaIZuSc8HYNAShsQa
- aMvjXSH04UqGYlfoqcyVCl+Ao+tGe7ziXnxzljAw0aLvzRIL0k35GSurtzVjKLmloilxiV5EL/j
- OefUcjAoLA9RcjsXDOXCiRvLlw9+d/s3Z20Y6iHNlxn09QTBcskCDChfCZa5WqJITge9QocDBQr
- zvnBAXotgj9WzV8BswjHluRdr8Ijtc0Du1jSSOZqFzvRvIvBkvJPVIKv1Pioyid3WPTU6c+LZm3
- iXpGGxrWjgHy3hD31pSuXuOwFKIr1o/VN8bijEuMcLcRSukhWQG3VAjapNBAn3TMS2UIXOgtQJm
- cbub8Tjhz7mWvIDdYd9T8b7rMdcPeSA+JCglCFZ3KQfDtjmcBVsAhOO5oGyk7a0rLxB0gOFTjKq
- FqlgGwFdKTV3+yrFwyA==
-X-Authority-Analysis: v=2.4 cv=aPHAb79m c=1 sm=1 tr=0 ts=6a8d89ab cx=c_pps
- a=MTSHoo12Qbhz2p7MsH1ifg==:117 a=x3UvaR+l8cLCJ1uKBUlNag==:17
- a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22
- a=ctB7yVnqyLGUopViubUA:9 a=QEXdDO2ut3YA:10 a=GvdueXVYPmCkWapjIL-Q:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODI1MDEwNSBTYWx0ZWRfX5kAt7mZIPsCf
- icKGWtG3LpjViABrAuifFj8fesyZgNLYfEQ84JlpzNRdFG1dIpu0vEdiatGrs/KDHFehOuwVF7W
- C4YhXdJq1Ko4nrNXx5vIVu7Qyh48DhM=
-X-Proofpoint-ORIG-GUID: 46mA8ivsklIJN4txAveLUYdL0gC7t-7r
-X-Proofpoint-GUID: 46mA8ivsklIJN4txAveLUYdL0gC7t-7r
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-08-25_03,2026-08-24_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 bulkscore=0 adultscore=0 malwarescore=0 clxscore=1015
- impostorscore=0 lowpriorityscore=0 priorityscore=1501 suspectscore=0
- spamscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
- adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
- definitions=main-2608250105
+Message-Id: <20260825-ipq5018-usb3-v3-3-39be0955a6aa@outlook.com>
+References: <20260825-ipq5018-usb3-v3-0-39be0955a6aa@outlook.com>
+In-Reply-To: <20260825-ipq5018-usb3-v3-0-39be0955a6aa@outlook.com>
+To: Vinod Koul <vkoul@kernel.org>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, Rob Herring <robh@kernel.org>, 
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, 
+ Praveenkumar I <praveenkumar.i@oss.qualcomm.com>, 
+ Philipp Zabel <p.zabel@pengutronix.de>, 
+ Bjorn Andersson <andersson@kernel.org>, 
+ Konrad Dybcio <konradybcio@kernel.org>, 
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>, 
+ Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>, 
+ Nitheesh Sekar <quic_nsekar@quicinc.com>, 
+ Wesley Cheng <quic_wcheng@quicinc.com>, 
+ Manivannan Sadhasivam <mani@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, linux-phy@lists.infradead.org, 
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
+ linux-usb@vger.kernel.org, George Moussalem <george.moussalem@outlook.com>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1787661450; l=10621;
+ i=george.moussalem@outlook.com; s=20250321; h=from:subject:message-id;
+ bh=0yuZk82tzQfyVclB/GgiAcNvs78YUKjs9vvJMW3iyVM=;
+ b=/pmvVrLJ6Un6MrwUYxtGn6H/WfZktRg6pUnH0HzlKDelB0n7Do30f5r+ZJRdrLKEBeGwIUm6r
+ JWShDzGzv7WApInEnTaKFCHgKE38Y1i7fc5vKgvvSIT9Lfq0oG9vbnU
+X-Developer-Key: i=george.moussalem@outlook.com; a=ed25519;
+ pk=/PuRTSI9iYiHwcc6Nrde8qF4ZDhJBlUgpHdhsIjnqIk=
+X-Endpoint-Received: by B4 Relay for george.moussalem@outlook.com/20250321
+ with auth_id=364
+X-Original-From: George Moussalem <george.moussalem@outlook.com>
+Reply-To: george.moussalem@outlook.com
 
+From: George Moussalem <george.moussalem@outlook.com>
 
+This PHY found in IPQ5332 and IPQ5018 SoCs is actually a multi-purpose
+PCIe/USB3 combo PHY. The driver was initially created for PCIe PHY
+support only. As such, rename the driver and generalize function and
+struct names to reflect that it is a PCIe and USB3 combo PHY driver so
+that USB3 support can be added in subsequent patches.
 
-On 8/24/2026 7:49 PM, Konrad Dybcio wrote:
-> On 8/9/26 2:29 PM, Gaurav Kohli wrote:
->> Unlike the CPU, the CDSP does not throttle its speed automatically
->> when it reaches high temperatures in monaco.
-> 
-> [...]
-> 
->>   		nsp-0-0-0-thermal {
->> +			polling-delay-passive = <200>;
-> 
-> ..and here it's 200 - I really think there should be a single value
-> that makes sense, this seems no less than random
+Signed-off-by: George Moussalem <george.moussalem@outlook.com>
+---
+ drivers/phy/qualcomm/Kconfig                       | 24 +++---
+ drivers/phy/qualcomm/Makefile                      |  2 +-
+ ...cie-28lp.c => phy-qcom-uniphy-pcie-usb3-28lp.c} | 87 +++++++++++-----------
+ 3 files changed, 55 insertions(+), 58 deletions(-)
 
-Thanks for the review, Konrad.
+diff --git a/drivers/phy/qualcomm/Kconfig b/drivers/phy/qualcomm/Kconfig
+index d910a5d1a1ac..6872aa919cf2 100644
+--- a/drivers/phy/qualcomm/Kconfig
++++ b/drivers/phy/qualcomm/Kconfig
+@@ -155,19 +155,6 @@ config PHY_QCOM_M31_USB
+ 	  management. This driver is required even for peripheral only or
+ 	  host only mode configurations.
+ 
+-config PHY_QCOM_UNIPHY_PCIE_28LP
+-	bool "PCIE UNIPHY 28LP PHY driver"
+-	depends on ARCH_QCOM
+-	depends on COMMON_CLK
+-	depends on HAS_IOMEM
+-	depends on OF
+-	select GENERIC_PHY
+-	help
+-	  Enable this to support the PCIe UNIPHY 28LP phy transceiver that
+-	  is used with PCIe controllers on Qualcomm IPQ5332 chips. It
+-	  handles PHY initialization, clock management required after
+-	  resetting the hardware and power management.
+-
+ config PHY_QCOM_M31_EUSB
+ 	tristate "Qualcomm M31 eUSB2 PHY driver support"
+ 	depends on USB && (ARCH_QCOM || COMPILE_TEST)
+@@ -178,6 +165,17 @@ config PHY_QCOM_M31_EUSB
+ 	  up of the associated USB repeater that is paired with the eUSB2
+ 	  PHY.
+ 
++config PHY_QCOM_UNIPHY_PCIE_USB3_28LP
++	bool "Qualcomm IPQ5332 UNIPHY PCIe USB3 28LP PHY driver"
++	depends on OF && (ARCH_QCOM || COMPILE_TEST)
++	select GENERIC_PHY
++	select MFD_SYSCON
++	help
++	  Enable this to support the Qualcomm USB Super-Speed UNIPHY transceiver
++	  that is used on Qualcomm IPQ5018 and IPQ5332 SoCs with DWC3 USB core.
++	  It handles PHY initialization, clock management required after
++	  resetting the hardware and power management.
++
+ config PHY_QCOM_USB_HS
+ 	tristate "Qualcomm USB HS PHY module"
+ 	depends on USB_ULPI_BUS
+diff --git a/drivers/phy/qualcomm/Makefile b/drivers/phy/qualcomm/Makefile
+index 8bf887d58ee4..6e2e9737e387 100644
+--- a/drivers/phy/qualcomm/Makefile
++++ b/drivers/phy/qualcomm/Makefile
+@@ -18,7 +18,7 @@ obj-$(CONFIG_PHY_QCOM_QMP_USB_LEGACY)	+= phy-qcom-qmp-usb-legacy.o
+ 
+ obj-$(CONFIG_PHY_QCOM_QUSB2)		+= phy-qcom-qusb2.o
+ obj-$(CONFIG_PHY_QCOM_EUSB2_REPEATER)	+= phy-qcom-eusb2-repeater.o
+-obj-$(CONFIG_PHY_QCOM_UNIPHY_PCIE_28LP)	+= phy-qcom-uniphy-pcie-28lp.o
++obj-$(CONFIG_PHY_QCOM_UNIPHY_PCIE_USB3_28LP)	+= phy-qcom-uniphy-pcie-usb3-28lp.o
+ obj-$(CONFIG_PHY_QCOM_USB_HS) 		+= phy-qcom-usb-hs.o
+ obj-$(CONFIG_PHY_QCOM_USB_HSIC) 	+= phy-qcom-usb-hsic.o
+ obj-$(CONFIG_PHY_QCOM_USB_HS_28NM)	+= phy-qcom-usb-hs-28nm.o
+diff --git a/drivers/phy/qualcomm/phy-qcom-uniphy-pcie-28lp.c b/drivers/phy/qualcomm/phy-qcom-uniphy-pcie-usb3-28lp.c
+similarity index 75%
+rename from drivers/phy/qualcomm/phy-qcom-uniphy-pcie-28lp.c
+rename to drivers/phy/qualcomm/phy-qcom-uniphy-pcie-usb3-28lp.c
+index 324c0a5d658e..aeb8f7ddbd7a 100644
+--- a/drivers/phy/qualcomm/phy-qcom-uniphy-pcie-28lp.c
++++ b/drivers/phy/qualcomm/phy-qcom-uniphy-pcie-usb3-28lp.c
+@@ -43,29 +43,29 @@
+ #define PHY_CFG_EIOS_DTCT_REG			0x3e4
+ #define PHY_CFG_GEN3_ALIGN_HOLDOFF_TIME		0x3e8
+ 
+-enum qcom_uniphy_pcie_type {
++enum qcom_uniphy_type {
+ 	PHY_TYPE_PCIE = 1,
+ 	PHY_TYPE_PCIE_GEN2,
+ 	PHY_TYPE_PCIE_GEN3,
+ };
+ 
+-struct qcom_uniphy_pcie_regs {
++struct qcom_uniphy_regs {
+ 	u32 offset;
+ 	u32 val;
+ };
+ 
+-struct qcom_uniphy_pcie_data {
++struct qcom_uniphy_data {
+ 	int lane_offset; /* offset between the lane register bases */
+ 	u32 phy_type;
+-	const struct qcom_uniphy_pcie_regs *init_seq;
++	const struct qcom_uniphy_regs *init_seq;
+ 	u32 init_seq_num;
+ 	u32 pipe_clk_rate;
+ };
+ 
+-struct qcom_uniphy_pcie {
++struct qcom_uniphy {
+ 	struct phy phy;
+ 	struct device *dev;
+-	const struct qcom_uniphy_pcie_data *data;
++	const struct qcom_uniphy_data *data;
+ 	struct clk_bulk_data *clks;
+ 	int num_clks;
+ 	struct reset_control *resets;
+@@ -73,9 +73,9 @@ struct qcom_uniphy_pcie {
+ 	int lanes;
+ };
+ 
+-#define phy_to_dw_phy(x)	container_of((x), struct qca_uni_pcie_phy, phy)
++#define phy_to_dw_phy(x)	container_of((x), struct qcom_uniphy, phy)
+ 
+-static const struct qcom_uniphy_pcie_regs ipq5018_regs[] = {
++static const struct qcom_uniphy_regs ipq5018_pcie_regs[] = {
+ 	{
+ 		.offset = SSCG_CTRL_REG_4,
+ 		.val = 0x1cb9,
+@@ -109,7 +109,7 @@ static const struct qcom_uniphy_pcie_regs ipq5018_regs[] = {
+ 	},
+ };
+ 
+-static const struct qcom_uniphy_pcie_regs ipq5332_regs[] = {
++static const struct qcom_uniphy_regs ipq5332_pcie_regs[] = {
+ 	{
+ 		.offset = PHY_CFG_PLLCFG,
+ 		.val = 0x30,
+@@ -122,26 +122,26 @@ static const struct qcom_uniphy_pcie_regs ipq5332_regs[] = {
+ 	},
+ };
+ 
+-static const struct qcom_uniphy_pcie_data ipq5018_data = {
++static const struct qcom_uniphy_data ipq5018_data = {
+ 	.lane_offset	= 0x800,
+ 	.phy_type	= PHY_TYPE_PCIE_GEN2,
+-	.init_seq	= ipq5018_regs,
+-	.init_seq_num	= ARRAY_SIZE(ipq5018_regs),
++	.init_seq	= ipq5018_pcie_regs,
++	.init_seq_num	= ARRAY_SIZE(ipq5018_pcie_regs),
+ 	.pipe_clk_rate	= 125 * MEGA,
+ };
+ 
+-static const struct qcom_uniphy_pcie_data ipq5332_data = {
++static const struct qcom_uniphy_data ipq5332_data = {
+ 	.lane_offset	= 0x800,
+ 	.phy_type	= PHY_TYPE_PCIE_GEN3,
+-	.init_seq	= ipq5332_regs,
+-	.init_seq_num	= ARRAY_SIZE(ipq5332_regs),
++	.init_seq	= ipq5332_pcie_regs,
++	.init_seq_num	= ARRAY_SIZE(ipq5332_pcie_regs),
+ 	.pipe_clk_rate	= 250 * MEGA,
+ };
+ 
+-static void qcom_uniphy_pcie_init(struct qcom_uniphy_pcie *phy)
++static void qcom_uniphy_pcie_usb3_init(struct qcom_uniphy *phy)
+ {
+-	const struct qcom_uniphy_pcie_data *data = phy->data;
+-	const struct qcom_uniphy_pcie_regs *init_seq;
++	const struct qcom_uniphy_data *data = phy->data;
++	const struct qcom_uniphy_regs *init_seq;
+ 	void __iomem *base = phy->base;
+ 	int lane, i;
+ 
+@@ -155,18 +155,18 @@ static void qcom_uniphy_pcie_init(struct qcom_uniphy_pcie *phy)
+ 	}
+ }
+ 
+-static int qcom_uniphy_pcie_power_off(struct phy *x)
++static int qcom_uniphy_pcie_usb3_power_off(struct phy *x)
+ {
+-	struct qcom_uniphy_pcie *phy = phy_get_drvdata(x);
++	struct qcom_uniphy *phy = phy_get_drvdata(x);
+ 
+ 	clk_bulk_disable_unprepare(phy->num_clks, phy->clks);
+ 
+ 	return reset_control_assert(phy->resets);
+ }
+ 
+-static int qcom_uniphy_pcie_power_on(struct phy *x)
++static int qcom_uniphy_pcie_usb3_power_on(struct phy *x)
+ {
+-	struct qcom_uniphy_pcie *phy = phy_get_drvdata(x);
++	struct qcom_uniphy *phy = phy_get_drvdata(x);
+ 	int ret;
+ 
+ 	ret = reset_control_assert(phy->resets);
+@@ -193,13 +193,13 @@ static int qcom_uniphy_pcie_power_on(struct phy *x)
+ 
+ 	usleep_range(CLK_EN_DELAY_MIN_US, CLK_EN_DELAY_MAX_US);
+ 
+-	qcom_uniphy_pcie_init(phy);
++	qcom_uniphy_pcie_usb3_init(phy);
+ 
+ 	return 0;
+ }
+ 
+-static inline int qcom_uniphy_pcie_get_resources(struct platform_device *pdev,
+-						 struct qcom_uniphy_pcie *phy)
++static inline int qcom_uniphy_pcie_usb3_get_resources(struct platform_device *pdev,
++						      struct qcom_uniphy *phy)
+ {
+ 	struct resource *res;
+ 
+@@ -236,9 +236,9 @@ static inline int qcom_uniphy_pcie_get_resources(struct platform_device *pdev,
+  *    clk  |   +-------+   |                   +-----+
+  *         +---------------+
+  */
+-static inline int phy_pipe_clk_register(struct qcom_uniphy_pcie *phy, int id)
++static inline int phy_pipe_clk_register(struct qcom_uniphy *phy, int id)
+ {
+-	const struct qcom_uniphy_pcie_data *data = phy->data;
++	const struct qcom_uniphy_data *data = phy->data;
+ 	struct clk_hw *hw;
+ 	char name[64];
+ 
+@@ -252,30 +252,29 @@ static inline int phy_pipe_clk_register(struct qcom_uniphy_pcie *phy, int id)
+ 	return devm_of_clk_add_hw_provider(phy->dev, of_clk_hw_simple_get, hw);
+ }
+ 
+-static const struct of_device_id qcom_uniphy_pcie_id_table[] = {
++static const struct of_device_id qcom_uniphy_pcie_usb3_id_table[] = {
+ 	{
+ 		.compatible = "qcom,ipq5018-uniphy-pcie-phy",
+ 		.data = &ipq5018_data,
+ 	}, {
+ 		.compatible = "qcom,ipq5332-uniphy-pcie-phy",
+ 		.data = &ipq5332_data,
+-	}, {
+-		/* Sentinel */
+ 	},
++	{ },
+ };
+-MODULE_DEVICE_TABLE(of, qcom_uniphy_pcie_id_table);
++MODULE_DEVICE_TABLE(of, qcom_uniphy_pcie_usb3_id_table);
+ 
+-static const struct phy_ops pcie_ops = {
+-	.power_on	= qcom_uniphy_pcie_power_on,
+-	.power_off	= qcom_uniphy_pcie_power_off,
++static const struct phy_ops qcom_uniphy_ops = {
++	.power_on	= qcom_uniphy_pcie_usb3_power_on,
++	.power_off	= qcom_uniphy_pcie_usb3_power_off,
+ 	.owner          = THIS_MODULE,
+ };
+ 
+-static int qcom_uniphy_pcie_probe(struct platform_device *pdev)
++static int qcom_uniphy_pcie_usb3_probe(struct platform_device *pdev)
+ {
+ 	struct phy_provider *phy_provider;
+ 	struct device *dev = &pdev->dev;
+-	struct qcom_uniphy_pcie *phy;
++	struct qcom_uniphy *phy;
+ 	struct phy *generic_phy;
+ 	int ret;
+ 
+@@ -294,12 +293,12 @@ static int qcom_uniphy_pcie_probe(struct platform_device *pdev)
+ 	if (ret)
+ 		return dev_err_probe(dev, ret, "Couldn't read num-lanes\n");
+ 
+-	ret = qcom_uniphy_pcie_get_resources(pdev, phy);
++	ret = qcom_uniphy_pcie_usb3_get_resources(pdev, phy);
+ 	if (ret < 0)
+ 		return dev_err_probe(&pdev->dev, ret,
+ 				     "failed to get resources: %d\n", ret);
+ 
+-	generic_phy = devm_phy_create(phy->dev, NULL, &pcie_ops);
++	generic_phy = devm_phy_create(phy->dev, NULL, &qcom_uniphy_ops);
+ 	if (IS_ERR(generic_phy))
+ 		return PTR_ERR(generic_phy);
+ 
+@@ -317,15 +316,15 @@ static int qcom_uniphy_pcie_probe(struct platform_device *pdev)
+ 	return 0;
+ }
+ 
+-static struct platform_driver qcom_uniphy_pcie_driver = {
+-	.probe		= qcom_uniphy_pcie_probe,
++static struct platform_driver qcom_uniphy_pcie_usb3_driver = {
++	.probe		= qcom_uniphy_pcie_usb3_probe,
+ 	.driver		= {
+-		.name	= "qcom-uniphy-pcie",
+-		.of_match_table = qcom_uniphy_pcie_id_table,
++		.name	= "qcom-uniphy-pcie-usb3-28lp",
++		.of_match_table = qcom_uniphy_pcie_usb3_id_table,
+ 	},
+ };
+ 
+-module_platform_driver(qcom_uniphy_pcie_driver);
++module_platform_driver(qcom_uniphy_pcie_usb3_driver);
+ 
+-MODULE_DESCRIPTION("PCIE QCOM UNIPHY driver");
++MODULE_DESCRIPTION("Qualcomm IPQ5332 UNIPHY PCIe USB3 28LP PHY driver");
+ MODULE_LICENSE("GPL");
 
-All targets added in this series use polling-delay-passive = <200> 
-except Lemans, where the DTS already has polling-delay-passive = <10>. 
-This series only adds the cooling maps there.
+-- 
+2.53.0
 
-As per internal profiling, 200 ms was chosen for remoteproc/QMI-based 
-cooling. I can send a separate follow-up patch to normalize Lemans to 
-200 ms as well.
-
-> 
-> Konrad
 
