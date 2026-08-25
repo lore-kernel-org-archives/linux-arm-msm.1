@@ -1,33 +1,33 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 32129480DCB;
-	Tue, 25 Aug 2026 13:34:51 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 888A2481255;
+	Tue, 25 Aug 2026 13:43:02 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787664892; cv=none; b=rpngtyLl71a+ga2ut+NT1j3JCmfsfWh8RT6yvlLDfl1kePdHaZj2td8KkfoV91MjQTzxOqU/58n9LuGyXDYWmpFIBbOMN2rjgFRt0ueoIWG5xmxK/NnUbuVJjgtRHSM16nv8f2I79g+iuHoY5a9KYFpJjde5rMwowGIabTyFBis=
+	t=1787665383; cv=none; b=O/hOKrMhgJyO78mxKinjlopWcI+2NaXZ+g4aEXoPbh2ueASCty+HEq4F79lInF6+1tWaEo36vsM2n7Zt5oZoexy2eQJjB9ciirTwk/qeqOzgBsc7EJZxSJbGmNOFJijOZHZfv1AbDXkySH5dLn1Fo6eIclGyUr78+N+DdyVWACo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787664892; c=relaxed/simple;
-	bh=mfjf7oOvJs9/gvbg90Kbob5/18GBTsJvaKncp2gzanw=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=gjraGyivjKamzanz7s9bGCxylsP4x70QSW/krDTGQFg3rNb6+9C0XBeBfsgzV8RgtImeL+GiGZTKtN8Bo4HWgIX4aeEjq0KpjwF7ko8LE5FhoP65QChkz9EnnigWhZYLdLMoioHbBQm63+nKWswcbvswbfPOIT2mVJxitucpoio=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Mo/A/Evz; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1787665383; c=relaxed/simple;
+	bh=+ld5p03DFLdf0vRq/18GLxG2EtZHIfWbO5K7Op7bfOA=;
+	h=Message-ID:Date:MIME-Version:Subject:From:To:Cc:References:
+	 In-Reply-To:Content-Type; b=MtC/wEF7Gfa3pdHH7iQFOUYTLQ37juV8Kb6E8b2pXs8xujDJQ8En0IwUrlqqr/2J4ifRJdbaNT1mqzmNb/e5XwJEGKHMggu7gdljTgtd+o81qPXgMGWJWsAY9/EBUOL+RZTx57lYEQY1o5f+4252imSMbJZ7uq0qs68GPDc98Uw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=oLHwF9Q/; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Mo/A/Evz"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B2CD01F00A3A;
-	Tue, 25 Aug 2026 13:34:47 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="oLHwF9Q/"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id CF8CB1F00A3A;
+	Tue, 25 Aug 2026 13:42:58 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1787664891;
-	bh=EKLPLcIqt06r0g2nL7dOxnTCLgVDMzQwzIkUoM5OgUM=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=Mo/A/EvzGs4c3YnzGzcp27S8AenPDQ/LwzeiHTGRIeRny1k81tdII2PcvhGcKFVml
-	 Y4ha6OYYC8EHdpLzYo+5Dkc8O9grdwnJQoAaqlV++jq3K8mG8/bhE/uuY9QnHk+S0d
-	 P62FQYSXYsOXk40JVqFWXMZwHll+2LxgqBP4gm2Bhm2svCwtdRx4kTVjQNTFh2fODy
-	 d/etWg5meMRnSqGjw5pRPqxSouXzV1brVp9nz8E1jWap3+7VBamlLTZXMGcPPgbqJd
-	 3K7J4+R2K6840axujuRK55H9UJUz0Z0701QLc/NuyNg7RNw94XzzZpsMiNerAEzOzu
-	 MvFMsVPwaJOzg==
-Message-ID: <62fda76e-771a-4242-92a8-36374345883d@kernel.org>
-Date: Tue, 25 Aug 2026 15:34:45 +0200
+	s=k20260515; t=1787665382;
+	bh=+ld5p03DFLdf0vRq/18GLxG2EtZHIfWbO5K7Op7bfOA=;
+	h=Date:Subject:From:To:Cc:References:In-Reply-To;
+	b=oLHwF9Q/qC0zeYEdWdG4tWVYA5TC63O/8OyYRFCId03O04nZYgLNzQ7O7OnxCmcm1
+	 SXqDBKskM+QlGqRnaTGycJZH3CFgbJo/lS9xLhhyWpv+RW2V7Sm998NjwOr97KUofk
+	 J9GBRbkdRtG/bFq4d0zwSNgpj92egKLMbd687d0n6m+M0+uCLHQasr0zTJ8dq+WhNP
+	 gIPADdugWRWn3Qoo3vKzLW3sB2gPTuS48UkcniiCFmpUHcpR5g8tAS7twDEzyeWP6w
+	 pPkDIfNVpb1nt1YqigVALh+U9xr6RXIfE4sz3sNbAB58ezVeWmIjtSKjp4UxzE/Qdg
+	 gdPDjVent8VAA==
+Message-ID: <c29c325f-d6ee-4f07-96c5-9daa258d2da1@kernel.org>
+Date: Tue, 25 Aug 2026 15:42:55 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -37,6 +37,7 @@ MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH v1 1/2] arm64: dts: qcom: qcs6490-rb3gen2: add audio CMA
  memory region for AudioReach
+From: Krzysztof Kozlowski <krzk@kernel.org>
 To: Karthik S <karthik.s@oss.qualcomm.com>,
  Bjorn Andersson <andersson@kernel.org>,
  Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
@@ -45,7 +46,7 @@ Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
  linux-kernel@vger.kernel.org
 References: <20260825133333.376591-1-karthik.s@oss.qualcomm.com>
  <20260825133333.376591-2-karthik.s@oss.qualcomm.com>
-From: Krzysztof Kozlowski <krzk@kernel.org>
+ <62fda76e-771a-4242-92a8-36374345883d@kernel.org>
 Content-Language: en-US
 Autocrypt: addr=krzk@kernel.org; keydata=
  xsFNBFVDQq4BEAC6KeLOfFsAvFMBsrCrJ2bCalhPv5+KQF2PS2+iwZI8BpRZoV+Bd5kWvN79
@@ -90,50 +91,22 @@ Autocrypt: addr=krzk@kernel.org; keydata=
  K9bCVaboTA2T77QYkRcRJYSsO1alGX0ome/hMLD1daXlkrNUp1HWa3K4iytLRXjCSIorWiGs
  n+q3krnpXu3TFkA8qtOFZMdnIiFuiq1yLT8hptsV5xh1TA2nsVvSYiaCr3q4s4BKjS/KrLDb
  qoxzw8ISjdUp4pA85vb6YLCmb39NgidD+7PmAr65lBNveIFynTgsja1rRQ4=
-In-Reply-To: <20260825133333.376591-2-karthik.s@oss.qualcomm.com>
+In-Reply-To: <62fda76e-771a-4242-92a8-36374345883d@kernel.org>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-On 25/08/2026 15:33, Karthik S wrote:
-> Add a dynamic CMA pool for the AudioReach audio stack on qcs6490-rb3gen2.
-> Use alloc-ranges to let the kernel pick a free address rather than a fixed
-> reg, which avoided EFI-reserved memory at 0x9cc00000. Add 4 MiB alignment
-> to satisfy CMA_MIN_ALIGNMENT_BYTES. Wire memory-region into q6apmdai so
-> the q6apm-audio-mem-cma child driver can attach the pool.
-> 
-> Based on the equivalent implementation for lemans (SA8295P).
-> 
-> Signed-off-by: Karthik S <karthik.s@oss.qualcomm.com>
-> ---
->  arch/arm64/boot/dts/qcom/qcs6490-audioreach.dtsi | 1 +
->  arch/arm64/boot/dts/qcom/qcs6490-rb3gen2.dts     | 8 ++++++++
->  2 files changed, 9 insertions(+)
-> 
-> diff --git a/arch/arm64/boot/dts/qcom/qcs6490-audioreach.dtsi b/arch/arm64/boot/dts/qcom/qcs6490-audioreach.dtsi
-> index c1867711298b..06f65ae8afbc 100644
-> --- a/arch/arm64/boot/dts/qcom/qcs6490-audioreach.dtsi
-> +++ b/arch/arm64/boot/dts/qcom/qcs6490-audioreach.dtsi
-> @@ -97,6 +97,7 @@ q6apm: service@1 {
->  			q6apmdai: dais {
->  				compatible = "qcom,q6apm-dais";
->  				iommus = <&apps_smmu 0x1801 0x0>;
-> +				memory-region = <&audio_cma_mem>;
->  			};
->  
->  			q6apmbedai: bedais {
-> diff --git a/arch/arm64/boot/dts/qcom/qcs6490-rb3gen2.dts b/arch/arm64/boot/dts/qcom/qcs6490-rb3gen2.dts
-> index a13315bf0fb0..d39246f34172 100644
-> --- a/arch/arm64/boot/dts/qcom/qcs6490-rb3gen2.dts
-> +++ b/arch/arm64/boot/dts/qcom/qcs6490-rb3gen2.dts
-> @@ -174,6 +174,14 @@ rmtfs_mem: memory@f8500000 {
->  			qcom,client-id = <1>;
->  			qcom,vmid = <QCOM_SCM_VMID_MSS_MSA>, <QCOM_SCM_VMID_NAV>;
->  		};
-> +
-> +		audio_cma_mem: qcom,audio-ml {
+On 25/08/2026 15:34, Krzysztof Kozlowski wrote:
+> On 25/08/2026 15:33, Karthik S wrote:
+>> Add a dynamic CMA pool for the AudioReach audio stack on qcs6490-rb3gen2.
+>> Use alloc-ranges to let the kernel pick a free address rather than a fixed
+>> reg, which avoided EFI-reserved memory at 0x9cc00000. Add 4 MiB alignment
+>> to satisfy CMA_MIN_ALIGNMENT_BYTES. Wire memory-region into q6apmdai so
+>> the q6apm-audio-mem-cma child driver can attach the pool.
+>>
+>> Based on the equivalent implementation for lemans (SA8295P).
 
-Don't send downstream code. There are no such patterns in upstream for
-years.
+And the "equivalent implementation for lemans" received comments which
+you missed and re-implemented the same issues.
 
 Best regards,
 Krzysztof
