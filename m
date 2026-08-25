@@ -1,181 +1,80 @@
-Received: from mail-lf1-f52.google.com (mail-lf1-f52.google.com [209.85.167.52])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 921113B42F2
-	for <linux-arm-msm@vger.kernel.org>; Tue, 25 Aug 2026 19:39:03 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=209.85.167.52
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787686745; cv=pass; b=uPzITsbYEACMWmm8lkrunBOOIPEkJYlNEoGjugFAmzXSkSshWea+DnOOnbI1qcO9OlHqS92aLfkTYJEo4reaTymdlIljXfVp4o7fxi5MqZiMjJRHpSzVMcUFn1+4pHGsK+45RhcPHhBw08jJjqYp+Eilvm/E3cXoXah+hj+ZLoQ=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787686745; c=relaxed/simple;
-	bh=wgf3EEkFlzf+G6IdltrSynW+0EZc5Ur1qA++WoxIUPo=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=VbkYMsmC/sbnyvuDxRQspZfQuvLcUP4+a+Rk/20zvxbSjMZ3iR9CMntkJSuCEatNsIkOBVnqhcSWvZ/YxGy7Unim4FjvEfm/ylVBAPLRR0ulriBg0T5fzElPb0/KhNcu0IbKqzqktBN+rLGIGNWcTp/aUbN6FEOQXu4nDtRcmxg=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=EPQfQbNy; arc=pass smtp.client-ip=209.85.167.52
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0FD283806D2;
+	Tue, 25 Aug 2026 20:01:43 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1787688104; cv=none; b=VvEXPqHQW6oAhdczdTcjtv7/VjiLRYeLb0NE/Mny6HrSBNordyaeuvYx5EVJB16nm/Qn4UpwE0/ZpWLkwTLeEBhzp3tPyeyGUtUvqK2nE2ph/GHENVhYxhmDUORss8GhBLT/DmF6z49Z2kwU/32JoR3LvWYhF48P1jJmn79m+T0=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1787688104; c=relaxed/simple;
+	bh=3chy/HcnVBMhhr5qvvFytuYaCA1gib5BRuzuSIaNLE0=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
+	 MIME-Version:Content-Type; b=ShALc66h8OYYlPCiFsHJVahsokw+2Vic4drNYPpBCI2JY4La7NdlwY3zNjnUyX4Lg3V4WjO9f7hBR2yvp2+e9awsfrJBBrgNhNV5G3ygbVRjQlrk2q7K4DNHx+nmU6dyLxHVb2xuSWdVxvsGWHuOlD+6q/qdAJQzsqelMbJtRXY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=HX/EJ3dC; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="EPQfQbNy"
-Received: by mail-lf1-f52.google.com with SMTP id 2adb3069b0e04-5b29599b81cso132524e87.1
-        for <linux-arm-msm@vger.kernel.org>; Tue, 25 Aug 2026 12:39:03 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1787686741; cv=none;
-        d=google.com; s=arc-20260327;
-        b=DA7LbNKM9OtSbXNprzkwKHQsci0DAlc+n1FB4+ocaiZzDCiBuvu5bZUeiUOKq1WsOc
-         SACGYN6Z2Xr6Za6iBvRlxClWHGwPF3yVJnAyWGuQ27hUfId4zbXUyIorkxu9l5VXzVj+
-         jBKhyubB0H9PRiuTwOWKD2XfDPoe7cuHEF64LniGMxIdp0PiWocl6ef0O8rA1bVFRnsa
-         YeqU6eBYjZsVlj/aG+XI44bUvFNHfzEHNr36d2aiTiorFPkxUiJZCfRIKDDb0XfuK66w
-         HEQaAiHAjcSR/bl8m0+hLF/6Z7QARHBn6OK12MPvHgyS+CqUp8B0vdfiMsE5+4LW26MT
-         Hb/Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:dkim-signature;
-        bh=8ogUiHTu0eFI0J8r+4KzxzBHNBTHluLzoqKdtSeUpls=;
-        fh=ke+Uy3fQCLIwzythF998/Raput7PLNqU1nMuRShespg=;
-        b=L2Ei89/BCX2TYhhW2BoBz6J6DwGgrJLHyLHgcpGBJxQRwVd1uPQsgLnZjwH7UL8jvD
-         655hfC5rY+TbQUkUWIkteLQ1JZ1nqvaADgEYrB9ll7AabOkHJweUCXuc2/VbtlMM4J85
-         4BBZ0zzefABBqN1+aRqcsJSojR4D2nJ7a8v/56wZZfpIrhRV603NFZrd6P1EA9ZB3NtY
-         H3hr1X7binvOCT6o458+JBRAjdEr3utKzTHwinF+h6GIAWekIp9Uo1V1w/Q/XqXOAFI5
-         YBO9ncHW1HvgPoBJpGJXmfzemF6j+fXTtrPJttoyJaC4EW7S5L0L2ufXb8U4etjBSIDj
-         cd4g==;
-        darn=vger.kernel.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1787686741; x=1788291541; darn=vger.kernel.org;
-        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
-         :references:mime-version:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=8ogUiHTu0eFI0J8r+4KzxzBHNBTHluLzoqKdtSeUpls=;
-        b=EPQfQbNyOWwH0PJjTC2qhLGiI+FhXGrXFny+RgzOzmQ+Y3cyaHKE5JMlVrinYU1vC4
-         KNOSgip9gOIdncTQRnU36C0Mqri1gpxEJJItVvQSRP07ty70en6UH9UreFbA7gkC8Pce
-         Q+DCIXmxsJEaoLc4jKVngikCoeKabsLXvMqy9WOwO0OcR7nut//IaVq8tDCld92dv6Bi
-         Vk+SNy6K2JFwTG5rI7Ez1nBJMt/8OhNiiWAg/HeoiEyYGswloq1SvkbtT6lCDIdK4ZGp
-         WvR9rJisPQaD/YphEvXoc/iAu+qMXM3eGb3xMq0lI7wNt8Z+eJ8cxm5/YjIf3gC2b5zN
-         tzFQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787686741; x=1788291541;
-        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
-         :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=8ogUiHTu0eFI0J8r+4KzxzBHNBTHluLzoqKdtSeUpls=;
-        b=EHXjUN8XsTfOKVeq4jGhp7+7J0HoVN9mfXJ6Wn1yn7bgQZP72tJiLHNQ5uoW7f/S5o
-         DRKkVb4qSj7Ufxx61np1Jgk01r/XFGjeLPg3vGVNSKoxz1qb/hLiJTCXxH3DefR5F75v
-         6MiJQUbJ8HFifpE7jiZWgnAhW3JrynYqJG/9ELuDpgtZbt070ow19poMj6i1PvhP2+2D
-         51USyLtY5mcv9DahawKPFJQnh8THAOhTOuDBGreszgWKIr0Ef0ZLgJwgJ/GJv4mz1z3f
-         z6IUkSb5lfsOPrW2t6sTLC0uyw3/6Dq39SBRL6OnHe8TXN6l/V3OXAjQWvjyGFThyEDu
-         tH4A==
-X-Forwarded-Encrypted: i=1; AHgh+RrcYuf5dMbIQHfnzn1cAQTpsX4TSaOly3VAENCp8auP3bVBjOAnf+B1X5bJQJcigDeZ2RSYS2aw1xr2XZjz@vger.kernel.org
-X-Gm-Message-State: AFuF++nOujXduwM4dqUdYZGdrMfPgVzzOS3B2nCmycxc3PGhGRaLrXSb
-	SdrM78kA6r51TmkbVonT4Hd0elmTAXlvB1QQ3iGXrL75KPKAM9EKRTU+Sf7JWNJVCt+C3WECqlZ
-	LInEQ+pnzOsOrFNynDt1hgRasddch2u0=
-X-Gm-Gg: AR+sD10XvR10EObCyl9fWiK8Y7Igw/CSmR3uioOqGYwH2Yw7h7yyXf2muUhEsH9GEDa
-	+0zV2X+ScsEgXaK67ro6jQ6M8bq1WF9gfAmK50euAjMaQH6JVQgfTSsl03aEAJcO8CIM8q71x3i
-	Hymtq9lokTfDEfbQbSFI/pDTjX8TYRtn+umSE4SbkXDuBNe0YeAjKzbYG5j3xATKKnSv78heWVh
-	PxBN/oRewATDtaz2Ey5qxYs85rCLlelz53koKzOLH79TbfDL0m7VfM8Oy17c4ugiZfaXk2H/Lkz
-	YFisQW9oRN3haqJKDpOvKfrSaBMzTnxCJPBBTW5CI9tkr/aQkopg1L7Y/qHURpX8JCEfh0RZUWA
-	0GA==
-X-Received: by 2002:a05:6512:800d:10b0:5b4:a2ec:c078 with SMTP id
- 2adb3069b0e04-5b4a90634e2mr132019e87.21.1787686741212; Tue, 25 Aug 2026
- 12:39:01 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="HX/EJ3dC"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3F6B41F000E9;
+	Tue, 25 Aug 2026 20:01:42 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1787688102;
+	bh=i/9fr3QGe6o/MrBjROnoUVWteonOveyd6QVH/D/4RgI=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date;
+	b=HX/EJ3dCzIgLbwUxZZN8g/bpaeFy7O4Bn7WU3rTgei1NLbcITqoigj4vFUnjwiF+M
+	 0236dSoTmXStFQgVW1WfCwIiVvlNOUOzlu0WDO4eKfRuBjVXQeJC3Mhkj1MZhTX63G
+	 itJWXm/LrZINx0EZG3o+0dLXvOMgfgYGmzcFjf1PngsHIL5VS18WwCOeRnzN6CftPR
+	 TVKem5Syv9fWe+OiaTu5uED55zOh6aukr+5xIwVTZ2jWhq830OMhLiR2pp1H+14a+B
+	 tbkrPLAvtqS484LUUQFPQSA4b0e6wEwcztQVlQb9RMNv09V9GYs0VANgRitPmlcD65
+	 yOBlH0NcGywZw==
+From: Thomas Gleixner <tglx@kernel.org>
+To: Mayank Rungta <mrungta@google.com>
+Cc: Doug Anderson <dianders@chromium.org>, Guenter Roeck
+ <linux@roeck-us.net>, Wim Van Sebroeck <wim@linux-watchdog.org>,
+ linux-watchdog@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-arm-msm@vger.kernel.org, "Kirill A. Shutemov" <kas@kernel.org>
+Subject: Re: [PATCH 2/3] genirq: Export NMI APIs
+In-Reply-To: <CABz7rdCKHcXx6U5qo83HaiR_b17CsoQoVVEiZ=03c+h2FUFHpA@mail.gmail.com>
+References: <20260730-qcom-wdt-nmi-series-v1-0-3aa86d162914@google.com>
+ <20260730-qcom-wdt-nmi-series-v1-2-3aa86d162914@google.com>
+ <CAD=FV=V+nrmtK6FJ2G+LGnvxkLEWMR+2A253-gQ2smxf9LoEWg@mail.gmail.com>
+ <eddc90dc-3223-4356-9e9b-350af904b144@roeck-us.net>
+ <CAD=FV=XuCHdOv8kct63JzmbgjxJMxL7fc75KtAQL0hbJc7_v0w@mail.gmail.com>
+ <87h5l5ex9r.ffs@fw13>
+ <CABz7rdCKHcXx6U5qo83HaiR_b17CsoQoVVEiZ=03c+h2FUFHpA@mail.gmail.com>
+Date: Tue, 25 Aug 2026 22:01:40 +0200
+Message-ID: <87cxv6geaj.ffs@fw13>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260807-rtc-glink-cleanup-v1-0-7801e4d69c4f@oss.qualcomm.com>
- <20260811121012.7046-1-hekatombe@gmail.com> <hb3jvyuf2j6sl7pjimnccoj4hsmqtxdq6s7w626sbmpbcqw7t3@wzyo563dmcle>
-In-Reply-To: <hb3jvyuf2j6sl7pjimnccoj4hsmqtxdq6s7w626sbmpbcqw7t3@wzyo563dmcle>
-From: Troels Vognbjerg <hekatombe@gmail.com>
-Date: Tue, 25 Aug 2026 21:38:49 +0200
-X-Gm-Features: AcwNN1VZcKL5ZYQ8eFKgbPi5mRCnrneKZXfFkqke67BVsou1ADgT2iiGjFFRt6Q
-Message-ID: <CAPMyOuBXBS+zOEbNHk-TRTG43RPcXPpZLtmpHka-WDzATC8nzg@mail.gmail.com>
-Subject: Re: [PATCH 0/2] rtc: Add Qualcomm PMIC RTC-GLINK support for Glymur
-To: Kamal Wadhwa <kamal.wadhwa@oss.qualcomm.com>
-Cc: alexandre.belloni@bootlin.com, andersson@kernel.org, conor+dt@kernel.org, 
-	devicetree@vger.kernel.org, konradybcio@kernel.org, krzk+dt@kernel.org, 
-	linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	linux-rtc@vger.kernel.org, raryan@qti.qualcomm.com, robh@kernel.org
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-On Thu, 20 Aug 2026 at 18:38, Kamal Wadhwa
-<kamal.wadhwa@oss.qualcomm.com> wrote:
+On Mon, Aug 24 2026 at 17:00, Mayank Rungta wrote:
+> On Fri, Aug 7, 2026 at 9:00=E2=80=AFAM Thomas Gleixner <tglx@kernel.org> =
+wrote:
+>> Sorry, I did not pay attention as I was AFK and busy with bugs. I'll
+>> have a look once the dust settles on my side (hopefully soonish).
+>>
 >
-> On Tue, Aug 11, 2026 at 02:10:12PM +0200, Troels Vognbjerg wrote:
-> > Kamal Wadhwa <kamal.wadhwa@oss.qualcomm.com> wrote on Fri, 07 Aug 2026 02:26:29 +0530:
-> > > On some targets like Glymur, the permission for receving the RTC
-> > > alarms is routed to charger firmware running on remote subsystem.
-> > >
-> > > This is because Glymur boards have to  support MSFT's `TAD feature`
-> > > on the windows OS devices.
-> > >
-> > > So rtc-pm8xxx.c driver cannot recieve RTC alarm IRQs via SPMI on
-> > > Glymur. So in order to make the IRQ available on the Linux kernel,
-> > > the PMIC RTC Alarm IRQ must be routed to APPS via remote subsystem.
-> > >
-> > > To implement this, add support for a New Qualcomm PMIC GLINK RTC
-> > > client, which will request for RTC set/get calls for time/alarm IRQ
-> > >  via the existing pmic_glink interface to the charger firmware.
-> > >
-> > > Also, add a DT property to explicily support enabling the RTC
-> > > writes, keep RTC writes disabled by default to align behaviour
-> > > with the existing rtc-pm8xxx.c driver.
-> >
-> > You mentioned this patch series applies to targets like Glymur. Does that include
-> > the ASUS Zenbook A16 UX3607OA, or did ASUS do something different on this
-> > laptop?
-> >
-> > The reason I am asking is because when I build this as a kernel module,
-> > I get the following error message:
-> > [    2.241461] rtc-pm8xxx c426000.spmi:pmic@0:rtc@6100: probe with driver rtc-pm8xxx failed with error -2
+> Hi Thomas,
 >
-> This is a different driver error, this is for the one which works on the SPMI bus.
-> While the driver that i have posted in the current series is based on pmic_glink interface, which relays the
-> RTC alarm requests to charger firmware running in remote processor (which implements the Windows TAD feature)
+> Friendly ping on this thread!
 >
-> do you have this `qcom,no-alarm` prop defined?
-> https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/arm64/boot/dts/qcom/glymur-crd.dtsi?h=v7.2#n565
+> I completely understand maintainer schedules are very busy. If you
+> haven't had a chance to look at this by the end of the week, I'm happy
+> to take a stab at implementing the NMI teardown synchronization in v2
+> myself for your review.
+>
+> Please let me know if you have any thoughts or guidance on the approach.
 
-Yes. I used the DTS for the Asus
-A16.https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/arm64/boot/dts/qcom/glymur-asus-zenbook-a16-ux3607oa.dts#n863&pmk8850_rtc
-{
-qcom,uefi-rtc-info;
-qcom,no-alarm;
-};>
-> > [    2.499556] Modules linked in: rtc_pm8xxx aes_ce_blk ghash_ce gf128mul sm4_ce_gcm sm4_ce_ccm sm4_ce sm4_ce_cipher sm4 qcom_battmgr rtc_qcom_glink(+) simple_bridge display_connector
-> > [    3.277788] rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: 0x68 failed (-110), falling back
-> > [    4.318666] rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: all time sources failed
-> > [    4.319085] rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: registered as rtc0
-> > [    5.359404] rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: 0x68 failed (-110), falling back
-> > [    6.400331] rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: all time sources failed
-> > [    6.400496] rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: hctosys: unable to read the hardware clock
-> > [   25.447761] rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: 0x68 failed (-110), falling back
-> > [   26.488271] rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: all time sources failed
-> > [   27.517573] rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: 0x68 failed (-110), falling back
-> > [   28.560114] rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: all time sources failed
-> > [   29.609224] rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: 0x68 failed (-110), falling back
-> > [   30.638629] rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: all time sources failed
-> > [   31.677524] rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: 0x68 failed (-110), falling back
-> > [   32.720749] rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: all time sources failed
-> > [   33.757662] rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: 0x68 failed (-110), falling back
-> > [   34.808360] rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: all time sources failed
-> > [   35.837651] rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: 0x68 failed (-110), falling back
-> >
-> > And the error message keeps repeating every second or so.
->
-> Sorry for this, i think the firmware needs to be updated for this feature, I will fix this by existing cleanly
-> if the firmware doesnt support it. To avoid repeated messages.
->
-> Also will check internally how you can get new firmware (if you want to use it?)
-Again, I am on the Asus A16. I think I better wait for Asus to the update.
+I'm stuck in regressions, security fixes and I try to maintain some
+private life aside of that. I surely have opinions, but I probably won't
+come around to write them down before next week. Feel free to do a v2
+and I'll go and look at that.
 
-> Again sorry for the trouble.
->
-> >
-> > --
-> > Troels Vognbjerg
->
-> Regards,
-> Kamal
+Thanks,
 
--- 
-Troels Vognbjerg
+        tglx
