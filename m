@@ -1,167 +1,181 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-lf1-f52.google.com (mail-lf1-f52.google.com [209.85.167.52])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B451F3C1092
-	for <linux-arm-msm@vger.kernel.org>; Tue, 25 Aug 2026 19:13:44 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787685225; cv=none; b=EBvigFPv4uEgIKBcijaK2cYRnxy7aSSZQJw2jW9Ql7FASpSeHMhSuFgQdPJAQKPMZNRbvGDwhLZTfu1OGn7jiuHP6Poo0QmAXyr+blanGkPzMkNjrewPWE7x9hVezNhl/gyv2sqG3Z+4pFKTij0HE+yl1vYCKvwgGFubmDaL+es=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787685225; c=relaxed/simple;
-	bh=dbmx/W67JCVIALQIqb/RkHyLo6NQgtoo7SnJ/KM4xDI=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=DCW94C2d9a2U48KXcUXasjDpBLK+Rfg19T7CF9LylvW8wuU2yp9gh5zTPxqFJXGxL5CqlrCBFAtA2+Ff8Q5QTc1cihDEAB9V6xMS8H05qMi4tw51ggyvxZhEyriJiUjpvMmYAztz0CczMWrlf0kxZWD1vzLAHKtkslaNaNd2Q1E=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=OFz76rUp; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=cTZmzQlu; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 921113B42F2
+	for <linux-arm-msm@vger.kernel.org>; Tue, 25 Aug 2026 19:39:03 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=209.85.167.52
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1787686745; cv=pass; b=uPzITsbYEACMWmm8lkrunBOOIPEkJYlNEoGjugFAmzXSkSshWea+DnOOnbI1qcO9OlHqS92aLfkTYJEo4reaTymdlIljXfVp4o7fxi5MqZiMjJRHpSzVMcUFn1+4pHGsK+45RhcPHhBw08jJjqYp+Eilvm/E3cXoXah+hj+ZLoQ=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1787686745; c=relaxed/simple;
+	bh=wgf3EEkFlzf+G6IdltrSynW+0EZc5Ur1qA++WoxIUPo=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=VbkYMsmC/sbnyvuDxRQspZfQuvLcUP4+a+Rk/20zvxbSjMZ3iR9CMntkJSuCEatNsIkOBVnqhcSWvZ/YxGy7Unim4FjvEfm/ylVBAPLRR0ulriBg0T5fzElPb0/KhNcu0IbKqzqktBN+rLGIGNWcTp/aUbN6FEOQXu4nDtRcmxg=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=EPQfQbNy; arc=pass smtp.client-ip=209.85.167.52
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="OFz76rUp";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="cTZmzQlu"
-Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67PHdGNd2048981
-	for <linux-arm-msm@vger.kernel.org>; Tue, 25 Aug 2026 19:13:44 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	wSG9jyQWZ/3aOSzM1SwMhKd6p1qQKUizzvvLAiAsy7E=; b=OFz76rUpjtH7dHlm
-	Hd+oq+Rq4o+nrT0xGR97CPVICE6ml2zcIW0lNuLz9CSXGvykMLRcjsD3oM05aVxe
-	yZXVlsY35xuKDpJ7oDKIN+vqXCL7UcBTwARsclcCZWXkcQ9o6jelyia4M/E/Ihoc
-	rUl9fKGtMT9maIntzBTvdipdsqZ1U7SQ+Kr5t9poq2KD0SMMLcwZ9cW2jVm5cXCe
-	0ZclK/IWd8WwR4oq3fKdsn+wesLisQRtqvdjqu2bohNGwj6gBRvW8LfoHb67sE3w
-	0LBHFcEilFdGn278hYr8ft07midUdzV5MTkzuV4F1xtFwGQJwTwJicuTOZgQCnLA
-	F2f0AA==
-Received: from mail-pl1-f198.google.com (mail-pl1-f198.google.com [209.85.214.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g9fjn0d03-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 25 Aug 2026 19:13:44 +0000 (GMT)
-Received: by mail-pl1-f198.google.com with SMTP id d9443c01a7336-2d6fb956002so2459855ad.1
-        for <linux-arm-msm@vger.kernel.org>; Tue, 25 Aug 2026 12:13:44 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="EPQfQbNy"
+Received: by mail-lf1-f52.google.com with SMTP id 2adb3069b0e04-5b29599b81cso132524e87.1
+        for <linux-arm-msm@vger.kernel.org>; Tue, 25 Aug 2026 12:39:03 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1787686741; cv=none;
+        d=google.com; s=arc-20260327;
+        b=DA7LbNKM9OtSbXNprzkwKHQsci0DAlc+n1FB4+ocaiZzDCiBuvu5bZUeiUOKq1WsOc
+         SACGYN6Z2Xr6Za6iBvRlxClWHGwPF3yVJnAyWGuQ27hUfId4zbXUyIorkxu9l5VXzVj+
+         jBKhyubB0H9PRiuTwOWKD2XfDPoe7cuHEF64LniGMxIdp0PiWocl6ef0O8rA1bVFRnsa
+         YeqU6eBYjZsVlj/aG+XI44bUvFNHfzEHNr36d2aiTiorFPkxUiJZCfRIKDDb0XfuK66w
+         HEQaAiHAjcSR/bl8m0+hLF/6Z7QARHBn6OK12MPvHgyS+CqUp8B0vdfiMsE5+4LW26MT
+         Hb/Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:dkim-signature;
+        bh=8ogUiHTu0eFI0J8r+4KzxzBHNBTHluLzoqKdtSeUpls=;
+        fh=ke+Uy3fQCLIwzythF998/Raput7PLNqU1nMuRShespg=;
+        b=L2Ei89/BCX2TYhhW2BoBz6J6DwGgrJLHyLHgcpGBJxQRwVd1uPQsgLnZjwH7UL8jvD
+         655hfC5rY+TbQUkUWIkteLQ1JZ1nqvaADgEYrB9ll7AabOkHJweUCXuc2/VbtlMM4J85
+         4BBZ0zzefABBqN1+aRqcsJSojR4D2nJ7a8v/56wZZfpIrhRV603NFZrd6P1EA9ZB3NtY
+         H3hr1X7binvOCT6o458+JBRAjdEr3utKzTHwinF+h6GIAWekIp9Uo1V1w/Q/XqXOAFI5
+         YBO9ncHW1HvgPoBJpGJXmfzemF6j+fXTtrPJttoyJaC4EW7S5L0L2ufXb8U4etjBSIDj
+         cd4g==;
+        darn=vger.kernel.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1787685223; x=1788290023; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=wSG9jyQWZ/3aOSzM1SwMhKd6p1qQKUizzvvLAiAsy7E=;
-        b=cTZmzQluyqG2m0tgez3FufkJV1UgWKoaDZ9dC8BrguP5awUSQTlCXmZuBHEOls8yi0
-         YEEy77Lo09GIH5IEwJPhRfEdInFLlupnE883X6IAcQS5qkYtgTxbAMHRC6ow4Ebprh8a
-         pYy8oVGoOiz8M5EWlVFWzeVze9t4K540x04cZoR0Y8sLLZuKEDhg6NV/cAvVQfZZ4vGX
-         sH9xJxLoGbLPo5wIo9iLvCaS1tDteW5l72b99uTvAZFlJ1Nl4ZFkmxSYenoXDVxPRPqm
-         3FnvGmHZ5+B4G+sG5bLnIpkXpMHRqu3RBDoqWGfJNnitv+CIvjoHkeWMMzIH5ZZvGzzH
-         o/TQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787685223; x=1788290023;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+        d=gmail.com; s=20251104; t=1787686741; x=1788291541; darn=vger.kernel.org;
+        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+         :references:mime-version:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=wSG9jyQWZ/3aOSzM1SwMhKd6p1qQKUizzvvLAiAsy7E=;
-        b=i2mR633YshMd5TRze+tUcdLbezgOcWp3R22Q8LYECJ1MFopql6pk9wgrM9ROPddUeq
-         PYKPeB2RnVW7Yn2dPTWIQdsRa2RSpvD92Qo2wlzI9XLFjf2m50gLZmC2CkeMu/X73i4j
-         Xjzjsj5qI5d8KGxjVhlIcT7T0NaoBcCTagfh4emrVBYsZFBH2t+AJkF26GPapzKM6W1J
-         Z7sGl3PB8HtUwf7n+vsoJbTek4WE23km9vItF+XDt1/SarFaDZTz5iZkSF2xeT3AoM27
-         tf1atP2tih7FmcoAa/rdCbKug2qgm+XVSDjHnO+mS0/PmbpOHBaIbM5Ss4AINfxvRs/a
-         QFYQ==
-X-Gm-Message-State: AFuF++mOGsmq2Ms0DxHu8mlCdh+eEpFnP2pgFsksvho+xNDmnC5BCFM0
-	9LXz1wuw2xYzCiPX5rSsu1TWHY7ITX4ABxT2WmGsPYw6BPwkd7mul63hECuS/Z8l/s0rvTkwhbu
-	NV6xPwe2W0KP+TJGWTPDGWFg1167zhM3qhcUyKnd6Q3KkWXCYnwfrC5MIFfiLqaSf+VEr
-X-Gm-Gg: AR+sD13aWaNHZCZqPDhSBR+z56jhuAoA+Wp/IfwuRotp0E/yjjBoevq7dEA7SWXM4rW
-	KU/HwVW/d2F+UC781RvL5JEFbffOzpFmk3ja1/egNF/5MQwL7E3VIsBF5S98cluPfRVajoiEejK
-	XPuhPMFvRswNf2QzxDWbiYjCBbtoL057f6Bch9e7LXU+NeShVKMWBz129R4mKbkmdIQvFupJwJZ
-	TfNoYXyIu7W/EwMNhMFuv4X7ppZGEPuUMZ7nujErRG31PnXJtUoxDVw9Ik8C3ZelwJQntIjkF6r
-	ZYd924V9QUrIS/k0r2dCGZOnODbfdmoPwrlhaAbXTq7JXEcclpBUqgPRMEavu4lxgqAnRw/vt3a
-	Ex0YOrYgOSa72VEl6btFB9JztbMGsSkYy
-X-Received: by 2002:a17:903:2c03:b0:2d6:ee6b:1b08 with SMTP id d9443c01a7336-2d707a2f363mr7602465ad.3.1787685223531;
-        Tue, 25 Aug 2026 12:13:43 -0700 (PDT)
-X-Received: by 2002:a17:903:2c03:b0:2d6:ee6b:1b08 with SMTP id d9443c01a7336-2d707a2f363mr7601725ad.3.1787685223041;
-        Tue, 25 Aug 2026 12:13:43 -0700 (PDT)
-Received: from hu-afaisal-hyd.qualcomm.com ([202.46.22.19])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3283da048d3sm930416eec.28.2026.08.25.12.13.39
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 25 Aug 2026 12:13:42 -0700 (PDT)
-From: Khalid Faisal Ansari <khalid.ansari@oss.qualcomm.com>
-Date: Wed, 26 Aug 2026 00:43:22 +0530
-Subject: [PATCH v4 2/2] arm64: dts: qcom: shikra: enable ST33 TPM
+        bh=8ogUiHTu0eFI0J8r+4KzxzBHNBTHluLzoqKdtSeUpls=;
+        b=EPQfQbNyOWwH0PJjTC2qhLGiI+FhXGrXFny+RgzOzmQ+Y3cyaHKE5JMlVrinYU1vC4
+         KNOSgip9gOIdncTQRnU36C0Mqri1gpxEJJItVvQSRP07ty70en6UH9UreFbA7gkC8Pce
+         Q+DCIXmxsJEaoLc4jKVngikCoeKabsLXvMqy9WOwO0OcR7nut//IaVq8tDCld92dv6Bi
+         Vk+SNy6K2JFwTG5rI7Ez1nBJMt/8OhNiiWAg/HeoiEyYGswloq1SvkbtT6lCDIdK4ZGp
+         WvR9rJisPQaD/YphEvXoc/iAu+qMXM3eGb3xMq0lI7wNt8Z+eJ8cxm5/YjIf3gC2b5zN
+         tzFQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1787686741; x=1788291541;
+        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+         :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=8ogUiHTu0eFI0J8r+4KzxzBHNBTHluLzoqKdtSeUpls=;
+        b=EHXjUN8XsTfOKVeq4jGhp7+7J0HoVN9mfXJ6Wn1yn7bgQZP72tJiLHNQ5uoW7f/S5o
+         DRKkVb4qSj7Ufxx61np1Jgk01r/XFGjeLPg3vGVNSKoxz1qb/hLiJTCXxH3DefR5F75v
+         6MiJQUbJ8HFifpE7jiZWgnAhW3JrynYqJG/9ELuDpgtZbt070ow19poMj6i1PvhP2+2D
+         51USyLtY5mcv9DahawKPFJQnh8THAOhTOuDBGreszgWKIr0Ef0ZLgJwgJ/GJv4mz1z3f
+         z6IUkSb5lfsOPrW2t6sTLC0uyw3/6Dq39SBRL6OnHe8TXN6l/V3OXAjQWvjyGFThyEDu
+         tH4A==
+X-Forwarded-Encrypted: i=1; AHgh+RrcYuf5dMbIQHfnzn1cAQTpsX4TSaOly3VAENCp8auP3bVBjOAnf+B1X5bJQJcigDeZ2RSYS2aw1xr2XZjz@vger.kernel.org
+X-Gm-Message-State: AFuF++nOujXduwM4dqUdYZGdrMfPgVzzOS3B2nCmycxc3PGhGRaLrXSb
+	SdrM78kA6r51TmkbVonT4Hd0elmTAXlvB1QQ3iGXrL75KPKAM9EKRTU+Sf7JWNJVCt+C3WECqlZ
+	LInEQ+pnzOsOrFNynDt1hgRasddch2u0=
+X-Gm-Gg: AR+sD10XvR10EObCyl9fWiK8Y7Igw/CSmR3uioOqGYwH2Yw7h7yyXf2muUhEsH9GEDa
+	+0zV2X+ScsEgXaK67ro6jQ6M8bq1WF9gfAmK50euAjMaQH6JVQgfTSsl03aEAJcO8CIM8q71x3i
+	Hymtq9lokTfDEfbQbSFI/pDTjX8TYRtn+umSE4SbkXDuBNe0YeAjKzbYG5j3xATKKnSv78heWVh
+	PxBN/oRewATDtaz2Ey5qxYs85rCLlelz53koKzOLH79TbfDL0m7VfM8Oy17c4ugiZfaXk2H/Lkz
+	YFisQW9oRN3haqJKDpOvKfrSaBMzTnxCJPBBTW5CI9tkr/aQkopg1L7Y/qHURpX8JCEfh0RZUWA
+	0GA==
+X-Received: by 2002:a05:6512:800d:10b0:5b4:a2ec:c078 with SMTP id
+ 2adb3069b0e04-5b4a90634e2mr132019e87.21.1787686741212; Tue, 25 Aug 2026
+ 12:39:01 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260826-shikra-dtpm-v4-2-8476223184de@oss.qualcomm.com>
-References: <20260826-shikra-dtpm-v4-0-8476223184de@oss.qualcomm.com>
-In-Reply-To: <20260826-shikra-dtpm-v4-0-8476223184de@oss.qualcomm.com>
-To: Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org,
-        Khalid Faisal Ansari <khalid.ansari@oss.qualcomm.com>
-X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1787685212; l=750;
- i=khalid.ansari@oss.qualcomm.com; s=20251105; h=from:subject:message-id;
- bh=dbmx/W67JCVIALQIqb/RkHyLo6NQgtoo7SnJ/KM4xDI=;
- b=swjVKDYB9ZRIp1jGaRmYBI6oSxVJyyDLlcTr2c35v/vXTEfxFCVFgmNfzfa0EAJ+sayKI6zrZ
- wohcDeEVmzbC5JFCQyqBYzCIDg034vjewGd8dnmJOx4tggHJqloqGdT
-X-Developer-Key: i=khalid.ansari@oss.qualcomm.com; a=ed25519;
- pk=eBXrIUgTWV0cgG+GsNeZPPgvj1Tm6g9L2sfcoxMGrKo=
-X-Proofpoint-GUID: 1n7519hM6Y7uXNYjyND6KLBfYbYNHAEh
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODI1MDE2MyBTYWx0ZWRfX058Klsl6Urxb
- hu25ELxowMuwj7Fmm/kQ7t4XzGfEmLF4VUctsnY/vhmhhUZXYyojKD9I3FcjJaeHc5YjG+xvOcr
- IE6B0dYwLGsr9RSOTB2Jy9n7TgGY/Lo=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODI1MDE2MyBTYWx0ZWRfX0xstsE4ZTDGU
- vGflcMp/iI35BD9705+VacfEGrR05AkvSgZVxOO+oINrKwyOorfT/cc48qT1kePcORbK6rpDkf3
- m2eCh+NYA9gWzcTwLJrRmCVDOKcLJAHh2YLCmVeFKRkUC/mYuQhLl7dycz3X1nCCkUfxopmEuz8
- 4L1ERyFz5LBeUdV+fKI+c51xMrB3mxLLU61T89q3xKX0WRTfFLzjA0aPs1034QFERVMWL6dKdYQ
- YU74Vzk7Em1pdSkZHo9OGC90QvU2PT7GtNn356rNVai03lR4+Oo4Op9JYCs4umrtKlVV/pWDfeC
- jlXTCWuFlrx6YkH/gMdegoBhxYDZVaTItHMGB37S+w2b8t5DazyRt4Bt5e9xRWHOnyAm93BKIIx
- JfelcQ60v3sKf98A9YkM7lhy6aowMw3ZZ24HTbfGAsyp/rFYoeuuORFGDEWgT33Uki3HN3XpmSq
- L47zSKpsfvk4G3/TkHg==
-X-Authority-Analysis: v=2.4 cv=ccziaHDM c=1 sm=1 tr=0 ts=6a8de968 cx=c_pps
- a=MTSHoo12Qbhz2p7MsH1ifg==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
- a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22
- a=EUspDBNiAAAA:8 a=YSeSwzeZyu-nVJi06OQA:9 a=QEXdDO2ut3YA:10
- a=GvdueXVYPmCkWapjIL-Q:22
-X-Proofpoint-ORIG-GUID: 1n7519hM6Y7uXNYjyND6KLBfYbYNHAEh
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-08-25_05,2026-08-24_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 phishscore=0 lowpriorityscore=0 spamscore=0 suspectscore=0
- clxscore=1015 malwarescore=0 bulkscore=0 adultscore=0 impostorscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608250163
+References: <20260807-rtc-glink-cleanup-v1-0-7801e4d69c4f@oss.qualcomm.com>
+ <20260811121012.7046-1-hekatombe@gmail.com> <hb3jvyuf2j6sl7pjimnccoj4hsmqtxdq6s7w626sbmpbcqw7t3@wzyo563dmcle>
+In-Reply-To: <hb3jvyuf2j6sl7pjimnccoj4hsmqtxdq6s7w626sbmpbcqw7t3@wzyo563dmcle>
+From: Troels Vognbjerg <hekatombe@gmail.com>
+Date: Tue, 25 Aug 2026 21:38:49 +0200
+X-Gm-Features: AcwNN1VZcKL5ZYQ8eFKgbPi5mRCnrneKZXfFkqke67BVsou1ADgT2iiGjFFRt6Q
+Message-ID: <CAPMyOuBXBS+zOEbNHk-TRTG43RPcXPpZLtmpHka-WDzATC8nzg@mail.gmail.com>
+Subject: Re: [PATCH 0/2] rtc: Add Qualcomm PMIC RTC-GLINK support for Glymur
+To: Kamal Wadhwa <kamal.wadhwa@oss.qualcomm.com>
+Cc: alexandre.belloni@bootlin.com, andersson@kernel.org, conor+dt@kernel.org, 
+	devicetree@vger.kernel.org, konradybcio@kernel.org, krzk+dt@kernel.org, 
+	linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	linux-rtc@vger.kernel.org, raryan@qti.qualcomm.com, robh@kernel.org
+Content-Type: text/plain; charset="UTF-8"
 
-Enable ST33HTPM TPM over SPI5 on the Shikra IoT EVK by adding the
-required SPI and TPM nodes.
+On Thu, 20 Aug 2026 at 18:38, Kamal Wadhwa
+<kamal.wadhwa@oss.qualcomm.com> wrote:
+>
+> On Tue, Aug 11, 2026 at 02:10:12PM +0200, Troels Vognbjerg wrote:
+> > Kamal Wadhwa <kamal.wadhwa@oss.qualcomm.com> wrote on Fri, 07 Aug 2026 02:26:29 +0530:
+> > > On some targets like Glymur, the permission for receving the RTC
+> > > alarms is routed to charger firmware running on remote subsystem.
+> > >
+> > > This is because Glymur boards have to  support MSFT's `TAD feature`
+> > > on the windows OS devices.
+> > >
+> > > So rtc-pm8xxx.c driver cannot recieve RTC alarm IRQs via SPMI on
+> > > Glymur. So in order to make the IRQ available on the Linux kernel,
+> > > the PMIC RTC Alarm IRQ must be routed to APPS via remote subsystem.
+> > >
+> > > To implement this, add support for a New Qualcomm PMIC GLINK RTC
+> > > client, which will request for RTC set/get calls for time/alarm IRQ
+> > >  via the existing pmic_glink interface to the charger firmware.
+> > >
+> > > Also, add a DT property to explicily support enabling the RTC
+> > > writes, keep RTC writes disabled by default to align behaviour
+> > > with the existing rtc-pm8xxx.c driver.
+> >
+> > You mentioned this patch series applies to targets like Glymur. Does that include
+> > the ASUS Zenbook A16 UX3607OA, or did ASUS do something different on this
+> > laptop?
+> >
+> > The reason I am asking is because when I build this as a kernel module,
+> > I get the following error message:
+> > [    2.241461] rtc-pm8xxx c426000.spmi:pmic@0:rtc@6100: probe with driver rtc-pm8xxx failed with error -2
+>
+> This is a different driver error, this is for the one which works on the SPMI bus.
+> While the driver that i have posted in the current series is based on pmic_glink interface, which relays the
+> RTC alarm requests to charger firmware running in remote processor (which implements the Windows TAD feature)
+>
+> do you have this `qcom,no-alarm` prop defined?
+> https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/arm64/boot/dts/qcom/glymur-crd.dtsi?h=v7.2#n565
 
-Signed-off-by: Khalid Faisal Ansari <khalid.ansari@oss.qualcomm.com>
----
- arch/arm64/boot/dts/qcom/shikra-evk.dtsi | 10 ++++++++++
- 1 file changed, 10 insertions(+)
+Yes. I used the DTS for the Asus
+A16.https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/arm64/boot/dts/qcom/glymur-asus-zenbook-a16-ux3607oa.dts#n863&pmk8850_rtc
+{
+qcom,uefi-rtc-info;
+qcom,no-alarm;
+};>
+> > [    2.499556] Modules linked in: rtc_pm8xxx aes_ce_blk ghash_ce gf128mul sm4_ce_gcm sm4_ce_ccm sm4_ce sm4_ce_cipher sm4 qcom_battmgr rtc_qcom_glink(+) simple_bridge display_connector
+> > [    3.277788] rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: 0x68 failed (-110), falling back
+> > [    4.318666] rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: all time sources failed
+> > [    4.319085] rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: registered as rtc0
+> > [    5.359404] rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: 0x68 failed (-110), falling back
+> > [    6.400331] rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: all time sources failed
+> > [    6.400496] rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: hctosys: unable to read the hardware clock
+> > [   25.447761] rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: 0x68 failed (-110), falling back
+> > [   26.488271] rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: all time sources failed
+> > [   27.517573] rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: 0x68 failed (-110), falling back
+> > [   28.560114] rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: all time sources failed
+> > [   29.609224] rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: 0x68 failed (-110), falling back
+> > [   30.638629] rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: all time sources failed
+> > [   31.677524] rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: 0x68 failed (-110), falling back
+> > [   32.720749] rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: all time sources failed
+> > [   33.757662] rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: 0x68 failed (-110), falling back
+> > [   34.808360] rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: all time sources failed
+> > [   35.837651] rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: 0x68 failed (-110), falling back
+> >
+> > And the error message keeps repeating every second or so.
+>
+> Sorry for this, i think the firmware needs to be updated for this feature, I will fix this by existing cleanly
+> if the firmware doesnt support it. To avoid repeated messages.
+>
+> Also will check internally how you can get new firmware (if you want to use it?)
+Again, I am on the Asus A16. I think I better wait for Asus to the update.
 
-diff --git a/arch/arm64/boot/dts/qcom/shikra-evk.dtsi b/arch/arm64/boot/dts/qcom/shikra-evk.dtsi
-index 6eb4184f7642..9f3a880e95e6 100644
---- a/arch/arm64/boot/dts/qcom/shikra-evk.dtsi
-+++ b/arch/arm64/boot/dts/qcom/shikra-evk.dtsi
-@@ -12,3 +12,13 @@ &qupv3_0 {
- &uart0 {
- 	status = "okay";
- };
-+
-+&spi5 {
-+	status = "okay";
-+
-+	tpm@0 {
-+		compatible = "st,st33htpm-spi", "tcg,tpm_tis-spi";
-+		reg = <0>;
-+		spi-max-frequency = <20000000>;
-+	};
-+};
+> Again sorry for the trouble.
+>
+> >
+> > --
+> > Troels Vognbjerg
+>
+> Regards,
+> Kamal
 
 -- 
-2.34.1
-
+Troels Vognbjerg
