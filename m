@@ -1,142 +1,320 @@
-Received: from sendmail.purelymail.com (sendmail.purelymail.com [34.202.193.197])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 59F3330B53F
-	for <linux-arm-msm@vger.kernel.org>; Tue, 25 Aug 2026 01:39:37 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=34.202.193.197
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2FF192DB7A3
+	for <linux-arm-msm@vger.kernel.org>; Tue, 25 Aug 2026 02:51:41 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787621979; cv=none; b=MsJyxjzZ0XU4TjwL8mbli3ISs2a6Vs1FEOKIpdGZAmRSFlVWgBsIdPwAneOrmu0lmfSmCZeM14z2IJSFlZkP5zNBP05JNPx6wQxIodIYNbvhXyIuJl2JFs2TetKNk5kGlKEb1P/rlnoCr/cOtFLGERYpXX76URveykNGygFTA6w=
+	t=1787626302; cv=none; b=PqcCfqtD4aRAxF3JTb/Ezuvnt1vnokHy07bJZ7BZIZQDXd/ztERJW2CRKShVDgSDTDZmtPmMKiK9iZSB2B05H20R39ritVNL7IJRD3eW2mQ20TJh+pFg5tdknoSurCiii7v0iQ10GH2+liU3W1p8wCEcuVZpC1/40Y0XcPLZFMY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787621979; c=relaxed/simple;
-	bh=S41ebfT7xo/qZtIIIBZyOORVT3DUlpSqNwSmIUKtTl0=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=GG3U6tq/IT5mckkSNQYGDshUjpfYdy/DwUn+1qKvkbDEKh+lqlzYygUAT2z9uqx100CbeO9tkZto91a43sWC43WTyGwRULvnRidGlCbkdrN+3RVJDJTgZi3UQsSBWihwPcNbRrDAf8zKsW46uF3fp6X6A9pCLhhu/kFhy6iQsg8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=c127.dev; spf=pass smtp.mailfrom=c127.dev; dkim=pass (2048-bit key) header.d=c127.dev header.i=@c127.dev header.b=e01QFpG9; dkim=pass (2048-bit key) header.d=purelymail.com header.i=@purelymail.com header.b=LPJQDrx/; arc=none smtp.client-ip=34.202.193.197
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=c127.dev
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=c127.dev
+	s=arc-20240116; t=1787626302; c=relaxed/simple;
+	bh=bhE4RuI9V+MVZ2WHKjpClmsRXUuzg8N3aIWaYUU2wA8=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=NPoN2pusHvMMaP8/GTaqSI6HBtQDO/Lmac6tFMO8e16l7oBs0CXpVHAlVqAJAmkferzSkpT5tuqg9zBtIrAeXyIA7tb928Xv3Uaqo/0DUlh2yrXOFenQDOqt7xhejUFxT6lvv8CSZgQDgFUSW6il/Nw3BHixePm0aM/m58R+9uI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=feqQQeXJ; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=Q1usSyLw; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=c127.dev header.i=@c127.dev header.b="e01QFpG9";
-	dkim=pass (2048-bit key) header.d=purelymail.com header.i=@purelymail.com header.b="LPJQDrx/"
-DKIM-Signature: a=rsa-sha256; b=e01QFpG9Gq3786qtZIww7tX6T1Ihw9j1szgJSJhkyyw2oFtXg7DTeSV7KNzgSTsdbhr3kPiVsgMZMRv9qbUrLsjoeRgEMmudMiXzYxKfZDn7yJcZAMpph+10eg16xHtEXAXnMWthmQfN9BV7ZBye6jLNJmpYkcjGQditZ2sz5xrlI41J6knNY/DHp7MsKbnjDjCzWMI5AljOOKghyBpkF/IpQXfzyoALqrOZduz+C8MU+RaMa2kVNRmoWiVYFCcXdHeAC3HA2us/G2WQLRBV7jdxnNp6C6p9X4dbNDcyegHYd895I5qg8VFtyZxLT/48C2Ieu2Sq4vlgeeBtyE2S9Q==; s=purelymail1; d=c127.dev; v=1; bh=S41ebfT7xo/qZtIIIBZyOORVT3DUlpSqNwSmIUKtTl0=; h=Received:From:To:Subject:Date;
-DKIM-Signature: a=rsa-sha256; b=LPJQDrx/fajOg6CYdhAOYtztRZMC3ueqX9+tgZk1ZEbzKPbE0vJjjSLtgLUEwzbYbLasHIUGo+veK6dFFJhtTHhlc7hPxvXYRss2OkTIysm+iou2onk40qcpTXEaVKbVwWr699e4Tqw6jRWRfthWO1YOAmu1O+EUYFcWUEyu/BVGj5j3yzXDvbzh0UAP3qHCXxnnXy4zTW3rLeUOKMZbQLuIqobqHXsNnT3Gh8nkKaZ0SuGpGVD6XcdOSSDXPtI7QdKZnfGblpNDbqURBHu7LbHNCIdl44s3gyzTcxEiaZc+g0rQ7bhRTx/ai4Yf53NmF4YZuFwo4igsaytn5WlZ+w==; s=purelymail1; d=purelymail.com; v=1; bh=S41ebfT7xo/qZtIIIBZyOORVT3DUlpSqNwSmIUKtTl0=; h=Feedback-ID:Received:From:To:Subject:Date;
-Feedback-ID: 1017243:43747:null:purelymail
-X-Pm-Original-To: linux-arm-msm@vger.kernel.org
-Received: by smtp.purelymail.com (Purelymail SMTP) with ESMTPSA id 936311042;
-          (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
-          Tue, 25 Aug 2026 01:38:52 +0000 (UTC)
-From: Johan Alvarado <contact@c127.dev>
-To: broonie@kernel.org,
-	md.alam@oss.qualcomm.com
-Cc: konradybcio@kernel.org,
-	pengpeng@iscas.ac.cn,
-	miquel.raynal@bootlin.com,
-	j4g8y7@gmail.com,
-	quic_varada@quicinc.com,
-	quic_srichara@quicinc.com,
-	linux-spi@vger.kernel.org,
-	linux-mtd@lists.infradead.org,
-	linux-arm-msm@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	Johan Alvarado <contact@c127.dev>
-Subject: [PATCH] spi: spi-qpic-snand: publish the ECC context to snandc->qspi
-Date: Mon, 24 Aug 2026 20:38:48 -0500
-Message-ID: <20260825013848.1056946-1-contact@c127.dev>
-X-Mailer: git-send-email 2.55.0
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="feqQQeXJ";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Q1usSyLw"
+Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67P2R11B125586
+	for <linux-arm-msm@vger.kernel.org>; Tue, 25 Aug 2026 02:51:40 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	UoErnvSWXkC4s7oreViW8HAdb+aeLpfKk8vSmTkAGRw=; b=feqQQeXJqunMp8tn
+	28O5T0KIdAH6Ee0GMHEZj0h6QOF9q5+St8ZBtDvv4+dii9xnX0Mqx+QCjvL/oEWK
+	OKZpd+y5CnbB3IxbG7yKZdyeZ64zDwR3auTDB+FaWxeMN/Y5nt53scfkiCoibUjO
+	OFSbeKnTbLJYPNALXv+wKbCNVvGvAcu2C1GGYo2Ovqje2RsTRksaXlEhib9ch68A
+	mD7xhoyakqrV8MTDOnd732qMopbV9ej4iBF1UoCJQYUt8h/Z4IfYBoWfWsuHEQoj
+	eSGrmdjTqvnBruVjLcd4Q9PIy5vUudZMupKL3OP3iEuJeucm8AEosaQeu0nCMbLD
+	iU4maw==
+Received: from mail-pj1-f71.google.com (mail-pj1-f71.google.com [209.85.216.71])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g8rquj7y8-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Tue, 25 Aug 2026 02:51:40 +0000 (GMT)
+Received: by mail-pj1-f71.google.com with SMTP id 98e67ed59e1d1-38e6d253330so477911a91.1
+        for <linux-arm-msm@vger.kernel.org>; Mon, 24 Aug 2026 19:51:40 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1787626300; x=1788231100; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=UoErnvSWXkC4s7oreViW8HAdb+aeLpfKk8vSmTkAGRw=;
+        b=Q1usSyLwJq0t07N/cdRTfGAqQCZsNL669P0RogM1q691XWeavYOukQfk+iLcoPwnHk
+         tFkinIijBbIDpxaJZk1LdeWZzsb5Dj2CyNxZz1ktI+pmePfBxkEo99l7zYbsIOVrUBVD
+         IaeR6fBnHFWeA2iTnsJuZV4LuoP9y2OmR7yItTe3+D3Eh0YN2v1FbGhkY8yk7fhugNRa
+         hmBJT3KCbx0ChWb9wwYnVTw4KpJNU16pIyPy2VwkzitdYU6fuRw9+wrkEzE88gaOslXP
+         BoGZND0bouL2uvPBI6ICDzK5/veSsZGeUovY6w1hJdsyq8bkjmAtEy0kW3Kdppp19Lw+
+         AqwA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1787626300; x=1788231100;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=UoErnvSWXkC4s7oreViW8HAdb+aeLpfKk8vSmTkAGRw=;
+        b=WlJUGo7syy8zqY8Y4P6q1obr456qGJTbicb/9Fd85aPTiMAog5u/KircxGJIoT4Rfj
+         gV5rtDAd+zheAY4j6MkyQVy+eLlJyVqAOgMOcMRaYJtimloaI3aZKxjLiruEdZ5A54Cc
+         eLb8Nd0M2BqU9mqeosL05tlSGuzT8byCU8kJQioxwK3S8fqszxdh5SBYb54ZaBi8Z/F8
+         i2iM8r/KtkRQUQFt4gNIr+I0M3UJz7UXR+LyT7M8xuN7pvVxpeMr7SzX2xwWw5wusvsT
+         SICvd8AJVkb8mxMfbVc52BxUssgYHhv1htDNNhCmcLry7/Tq8OPg2Uq9xcVrdSwAvAv/
+         42dA==
+X-Gm-Message-State: AFuF++nOIl+zjDy23xxePU+0ST0+SMNgcgN1Vpb1LBODlRcF26bmUNEt
+	hgY0j/1GWiZWqbJFn1kht0gmaPYzw5deqDOFfy0aj8Gz0IWHneRQQIcEEKL1QVU78mY/XAJ+J0F
+	ycnwlbpZ0LoSfsqm2B2wWp5lBwDJTgDjSdIxNJG0P405AldFNX0XMY2m8SstKy1bI5keX
+X-Gm-Gg: AR+sD11xZjyX4y7wp2TxPF7FgQJQnlWR5Avyerqr9eR7HSwXpVc1YZVyWegXqOxXhcn
+	2IZ2/vCwRUiU9AuTeKAWVnHlXsYXeQfdu35Q29od1iSAZ0NNMt9/NIvBFNzGBGk+akV/l5qaaS8
+	lOKuhKN2wB2a5WzUAAFPVyGsfmvpcBN5Hft2OBnNRQaXlNRGQ8Gic7FcHRzsH+vqWkrQwUG4klz
+	HFEB7PmNGjrNYOUKkTrQ/f5ADAtx2wrCOLnesqUsJgpmuUBPWvIu398Q59j6cGupyBMRht1PPpr
+	7HT/juORPGdigh6S974+yCJHL1BM1bHRuEDcZUL0iEAlO8Nh8Qctq6BSS0QtVHxiMRk9h4kbbeI
+	vkkQdo10COlxsEI9TdDgUbsxpF8A7xMPqLT6pXBw4qLhMbOz/Hhf4ifC4PH+dywFZHi3R
+X-Received: by 2002:a17:90b:2543:b0:395:8124:ac53 with SMTP id 98e67ed59e1d1-39645aaa837mr3945710a91.6.1787626299620;
+        Mon, 24 Aug 2026 19:51:39 -0700 (PDT)
+X-Received: by 2002:a17:90b:2543:b0:395:8124:ac53 with SMTP id 98e67ed59e1d1-39645aaa837mr3945666a91.6.1787626299087;
+        Mon, 24 Aug 2026 19:51:39 -0700 (PDT)
+Received: from [10.133.33.69] (tpe-colo-wan-fw-bordernet.qualcomm.com. [103.229.16.4])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-39645d69f74sm1713636a91.14.2026.08.24.19.51.35
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 24 Aug 2026 19:51:38 -0700 (PDT)
+Message-ID: <02269d67-41e3-48eb-9ce1-e3775a4c2eaa@oss.qualcomm.com>
+Date: Tue, 25 Aug 2026 10:51:34 +0800
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-X-MIME-Autoconverted: from 8bit to quoted-printable by Purelymail
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v6 1/2] dt-bindings: input: Add Qualcomm SPMI PMIC haptics
+To: Rob Herring <robh@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org,
+        Dmitry Torokhov
+ <dmitry.torokhov@gmail.com>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>, Lee Jones <lee@kernel.org>,
+        Stephen Boyd <sboyd@kernel.org>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        David Collins <david.collins@oss.qualcomm.com>,
+        Subbaraman Narayanamurthy <subbaraman.narayanamurthy@oss.qualcomm.com>,
+        Kamal Wadhwa <kamal.wadhwa@oss.qualcomm.com>,
+        linux-input@vger.kernel.org, devicetree@vger.kernel.org,
+        linux-kernel@vger.kernel.org,
+        Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+References: <20260806-qcom-spmi-haptics-v6-0-19fcecd5204f@oss.qualcomm.com>
+ <20260806-qcom-spmi-haptics-v6-1-19fcecd5204f@oss.qualcomm.com>
+ <20260807155640.GA893689-robh@kernel.org>
+Content-Language: en-US
+From: Fenglin Wu <fenglin.wu@oss.qualcomm.com>
+In-Reply-To: <20260807155640.GA893689-robh@kernel.org>
 Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-ORIG-GUID: eZK9ZckWhOG6t-9T7q0fkX5x2X9JM6g2
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODI1MDAyMyBTYWx0ZWRfX8QNZVH20YzOz
+ pW2XceNH94DLtGZgx2zLiehsR5j5NYCw84ib/kh2KbimK50cfa0/TUX9pHgSPaUdDCxSNrwfML7
+ RmuBtdf0XrvkXDSMGWldIgT7XdGPhB8=
+X-Authority-Analysis: v=2.4 cv=CbQ4Irrl c=1 sm=1 tr=0 ts=6a8d033c cx=c_pps
+ a=UNFcQwm+pnOIJct1K4W+Mw==:117 a=nuhDOHQX5FNHPW3J6Bj6AA==:17
+ a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
+ a=gEfo2CItAAAA:8 a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=HhSylQvuivqysCgRbxUA:9
+ a=QEXdDO2ut3YA:10 a=uKXjsCUrEbL0IQVhDsJ9:22 a=sptkURWiP4Gy88Gu7hUp:22
+X-Proofpoint-GUID: eZK9ZckWhOG6t-9T7q0fkX5x2X9JM6g2
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODI1MDAyMyBTYWx0ZWRfXyoizdk4Tstj7
+ VbKvsmLfmKpGKl7+6Wp5H/Icee7VL0wqQCMv/e1dEJbTGZi9sxkyEj7dMmuvH/ch+5MK+ifjnAL
+ JL3KUyn5tJqDDNmvnNKmc2Pxd9SkhPlD+cH4qA2+14Wlzf/PZKbjhggP8dF2KWLuA57tqm/O4qe
+ yYdBya0vU5djwAR1sc7HOlc0wUT9Jb4kUSpTnHkhmTrGq6laMxpDXsdSGS87EbIVuc0h7EgIizg
+ zLhg7A+3hR33gx/pv4IPBHDPeehekDFTDvKSSqTSCrxqHU6854eOamaybYHFnGyZxrdf5S3AkwB
+ tx/Cz9ZI9WsLn+pSymexzaYQSvEaeXumS3n43DTYg72kbhy8irAmeO0ILjLIL8JZr/Dl9T+wIz+
+ 1P33HY2GwbznOw78wnJoaK2Q8wZULGjG0D28/Cv5hMRnTrVwaYpKTLA7iDekTfZOGsx+6AlX7PA
+ NMnR6dNAyhBmCjtYB6Q==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-08-25_01,2026-08-24_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ bulkscore=0 priorityscore=1501 lowpriorityscore=0 phishscore=0 suspectscore=0
+ impostorscore=0 malwarescore=0 spamscore=0 clxscore=1015 adultscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608250023
 
-qcom_spi_ooblayout_ecc() and qcom_spi_ooblayout_free() read the ECC
-configuration through snandc->qspi->ecc. qcom_spi_probe() points it at a
-zeroed scratch struct and only qcom_spi_ecc_prepare_io_req_pipelined(),
-which runs on page I/O, ever updates it. qcom_spi_ecc_init_ctx_pipelined()
-installs the ooblayout but does not publish the context it just
-allocated, and qcom_spi_ecc_cleanup_ctx_pipelined() frees that context
-without clearing the pointer.
 
-spinand_init() calls mtd_ooblayout_count_freebytes() right after the ECC
-context is created and before any page I/O, so the ooblayout always runs
-against a pointer that does not describe the current context:
 
-  - On a first probe it reads the zeroed struct from qcom_spi_probe(),
-    so steps, bytes and bbm_size are 0. The count then returns 0 rather
-    than an error, so the probe continues with mtd->oobavail set to 0.
+On 8/7/2026 11:56 PM, Rob Herring wrote:
+> On Thu, Aug 06, 2026 at 11:21:40PM -0700, Fenglin Wu wrote:
+>> Add binding document for the haptics module inside Qualcomm PMIC
+>> PMIH0108.
+>>
+>> Assisted-by: Claude:claude-4-8-opus
+>> Reviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+>> Signed-off-by: Fenglin Wu <fenglin.wu@oss.qualcomm.com>
+>> ---
+>>  .../bindings/input/qcom,spmi-haptics.yaml          | 136 +++++++++++++++++++++
+>>  1 file changed, 136 insertions(+)
+>>
+>> diff --git a/Documentation/devicetree/bindings/input/qcom,spmi-haptics.yaml b/Documentation/devicetree/bindings/input/qcom,spmi-haptics.yaml
+>> new file mode 100644
+>> index 000000000000..b1a69e9886ee
+>> --- /dev/null
+>> +++ b/Documentation/devicetree/bindings/input/qcom,spmi-haptics.yaml
+>> @@ -0,0 +1,136 @@
+>> +# SPDX-License-Identifier: GPL-2.0-only OR BSD-2-Clause
+>> +%YAML 1.2
+>> +---
+>> +$id: http://devicetree.org/schemas/input/qcom,spmi-haptics.yaml#
+>> +$schema: http://devicetree.org/meta-schemas/core.yaml#
+>> +
+>> +title: Haptics device inside Qualcomm Technologies, Inc. PMIC
+>> +
+>> +maintainers:
+>> +  - Fenglin Wu <fenglin.wu@oss.qualcomm.com>
+>> +
+>> +description: |
+>> +  Certain Qualcomm PMICs integrate a haptics module, such as the HAP530_HV haptics
+>> +  module in the PMIH0108 PMIC, which drives an LRA (Linear Resonant Actuator) with
+>> +  an output voltage up to 10 V. Several play modes are supported in HAP530_HV:
+>> +
+>> +    DIRECT_PLAY: The hardware outputs sinusoidal waveforms whose period is
+>> +      defined by qcom,lra-period-us and whose peak voltage is defined by
+>> +      qcom,vmax-microvolt. The driving amplitude can be scaled in the range
+>> +      [0, 255] via a single register byte.  Hardware-based LRA auto-resonance
+>> +      tracking is enabled by default in this mode, allowing the haptics engine
+>> +      to follow the actual resonant frequency of the LRA and update the driving
+>> +      period accordingly to achieve stronger vibration magnitude.
+>> +
+>> +    FIFO: The hardware can play an arbitrary waveform composed of a sequence
+>> +      of 8-bit samples at a configurable play rate.  Samples are pre-filled
+>> +      into the internal FIFO memory of the haptics module and continuously
+>> +      replenished via the FIFO-empty IRQ until all samples have been played.
+>> +      An 8K-byte FIFO memory bank is available in the HAP530_HV haptics module,
+>> +      shared between the FIFO and PAT_MEM play modes. The memory partition
+>> +      between the two modes is configurable via registers, and FIFO mode always
+>> +      uses the 1st partition starting from offset 0.
+>> +
+>> +    PAT_MEM: This mode is very similar to FIFO streaming mode but without the
+>> +      data refilling capability. It is designed mainly for short, latency-critical
+>> +      vibrations. The memory space for PAT_MEM mode must be reserved for dedicated
+>> +      usage, and the waveform data should be preloaded and remain unchanged
+>> +      thereafter. The haptics module can play the waveform data from the memory
+>> +      region specified by the PAT_MEM play start address and length registers.
+>> +
+>> +    In either FIFO mode or PAT_MEM mode, the following play rates are supported:
+>> +      -- 0(T_LRA): each FIFO byte drives one full sinusoidal cycle with the
+>> +        period defined in qcom,lra-period-us.
+>> +      -- 1/2/3(T_LRA_DIV_2/4/8): each FIFO byte drives a half/quarter/eighth
+>> +        sinusoidal cycle with the period defined in qcom,lra-period-us.
+>> +      -- 4/5/6(T_LRA_X_2/4/8): each FIFO byte drives 2/4/8 sinusoidal cycles
+>> +        with the period defined in qcom,lra-period-us.
+>> +      -- 8/9/10/11/12/13(8KHz/16KHz/24KHz/32KHz/44.1KHz/48KHz): the FIFO
+>> +        data is treated as PCM samples and drives the output with an
+>> +        arbitrarily shaped waveform.  This mode is typically used to define
+>> +        custom driving waveforms for specific vibration effects such as fast
+>> +        attack, crisp brake, etc.
+>> +
+>> +    The drive voltage in FIFO or PAT_MEM mode can exceed the value defined in
+>> +    qcom,vmax-microvolt to achieve a special vibration effect, but the waveform
+>> +    must be short enough to prevent the LRA from being damaged by operating at
+>> +    an overvoltage.
+>> +
+>> +    Also, hardware-based LRA auto-resonance tracking is normally disabled in
+>> +    FIFO or PAT_MEM mode, as these modes are intended to drive arbitrary
+>> +    waveforms that may not follow the resonant frequency; autonomous hardware
+>> +    resonance correction would interfere with the intended output.
+>> +
+>> +properties:
+>> +  compatible:
+>> +    items:
+>> +      - const: qcom,pmih0108-haptics
+>> +      - const: qcom,spmi-haptics
+>> +
+>> +  reg:
+>> +    items:
+>> +      - description: HAP_CFG module base address
+>> +      - description: HAP_PTN module base address
+>> +
+>> +  reg-names:
+>> +    items:
+>> +      - const: cfg
+>> +      - const: ptn
+>> +
+>> +  interrupts:
+>> +    maxItems: 1
+>> +
+>> +  interrupt-names:
+>> +    items:
+>> +      - const: fifo-empty
+>> +
+>> +  qcom,vmax-microvolt:
+>> +    description:
+>> +      Maximum allowed output driving voltage in microvolts, must be a multiple
+>> +      of 50,000 uV. This is the peak driving voltage in DIRECT_PLAY mode,
+>> +      which outputs sinusoidal waveforms. The value should be equal to the
+>> +      square root of 2 times the Vrms voltage of the LRA.
+>> +    minimum: 50000
+>> +    maximum: 10000000
+>> +    multipleOf: 50000
+>> +
+>> +  qcom,lra-period-us:
+>> +    description:
+>> +      LRA actuator initial resonance period in microseconds
+>> +      (1,000,000 / resonant_freq_hz).  Used to configure T_LRA-based play
+>> +      rates and the auto-resonance zero-crossing window. It could be also used
+>> +      as the initial period if the LRA wants to be driven off resonance.
+>> +    minimum: 5
+>> +    maximum: 20475
+>> +    multipleOf: 5
+>> +
+>> +required:
+>> +  - compatible
+>> +  - reg
+>> +  - reg-names
+>> +  - interrupts
+>> +  - interrupt-names
+>> +  - qcom,vmax-microvolt
+>> +  - qcom,lra-period-us
+>> +
+>> +additionalProperties: false
+>> +
+>> +examples:
+>> +  - |
+>> +    #include <dt-bindings/interrupt-controller/irq.h>
+>> +
+>> +    pmic {
+>> +        #address-cells = <1>;
+>> +        #size-cells = <0>;
+>> +
+>> +        haptics@f000 {
+> 
+> No incomplete examples please. Put this in the example for the PMIC.
 
-  - On a probe retry it reads the ecc_cfg the previous attempt freed.
+Thanks for the suggestion. I will change to below in next patch:
 
-A retry is easy to hit. On IPQ5018 with the qcom,smem-part parser the
-partition parse returns -EPROBE_DEFER until SMEM has probed, so the
-first spi-nand probe defers. It defers inside
-mtd_device_parse_register(), after mtd_otp_nvmem_add() has already read
-the factory OTP - that read goes through prepare_io_req and leaves
-snandc->qspi->ecc pointing at the context that spinand_cleanup() then
-frees. The second probe allocates a new context, never publishes it, and
-computes the OOB layout from the freed one. Once the slab has been
-reused, qecc->steps holds garbage and
+    pmic@7 {
+        compatible = "qcom,pmih0108", "qcom,spmi-pmic";
+        reg = <0x7 SPMI_USID>;
+        #address-cells = <1>;
+        #size-cells = <0>;
 
-  oobregion->length =3D qecc->steps * 4;
+        haptics@f000 {
+            compatible = "qcom,pmih0108-haptics", "qcom,spmi-haptics";
+            reg = <0xf000>, <0xf100>;
+            reg-names = "cfg", "ptn";
+            interrupts = <0x7 0xf0 0x1 IRQ_TYPE_EDGE_RISING>;
+            interrupt-names = "fifo-empty";
 
-goes negative. qcom_spi_ooblayout_free() only reports -ERANGE for
-section 1 and later, so mtd_ooblayout_count_bytes() sums the regions and
-returns that negative length as the byte count. The -512 below is
-steps * 4 with steps =3D=3D -128. It is a byte count that happens to
-collide with -ERESTARTSYS, not an error the driver returned.
-spinand_init() takes it as an error, and because it is not
--EPROBE_DEFER the driver core never retries and the NAND never appears:
+            qcom,vmax-microvolt = <1300000>;
+            qcom,lra-period-us = <5880>;
+        };
+    };
+> 
+> And please comment on sashiko report. Looks valid to me.
 
-  spi-nand spi0.0: ESMT SPI NAND was found.
-  spi-nand spi0.0: probe with driver spi-nand failed with error -512
-  UBI error: cannot open mtd rootfs, error -2
-  Waiting for root device /dev/ubiblock0_1...
+I just replied on that. I dropped the change which added the haptics
+device in the spmi-pmic schema as it had been applied:
 
-On a Mercusys MR80X (IPQ5018, ESMT F50D1G41LB) about half of the boots
-failed to mount the rootfs, the outcome depending on whether the freed
-memory had been overwritten yet.
-
-Publish the context when it is created and clear the pointer when it is
-destroyed. Clearing leaves snandc->qspi->ecc NULL after cleanup, which
-is safe: the mtd is unregistered before cleanup_ctx runs, so no
-ooblayout callback can follow.
-
-Fixes: 7304d1909080 ("spi: spi-qpic: add driver for QCOM SPI NAND flash Int=
-erface")
-Cc: stable@vger.kernel.org
-Signed-off-by: Johan Alvarado <contact@c127.dev>
----
-Tested on a Mercusys MR80X (IPQ5018, ESMT F50D1G41LB) running 6.18.44
-with the equivalent change; mainline build-tested with W=3D1, no warnings.
-
- drivers/spi/spi-qpic-snand.c | 3 +++
- 1 file changed, 3 insertions(+)
-
-diff --git a/drivers/spi/spi-qpic-snand.c b/drivers/spi/spi-qpic-snand.c
-index 61b1f2eb19ce..0d0ae93ad4bf 100644
---- a/drivers/spi/spi-qpic-snand.c
-+++ b/drivers/spi/spi-qpic-snand.c
-@@ -411,6 +411,8 @@ static int qcom_spi_ecc_init_ctx_pipelined(struct nand_=
-device *nand)
- =09dev_dbg(snandc->dev, "ECC strength: %u bits per %u bytes\n",
- =09=09ecc_cfg->strength, ecc_cfg->step_size);
-=20
-+=09snandc->qspi->ecc =3D ecc_cfg;
-+
- =09return 0;
-=20
- err_free_ecc_cfg:
-@@ -427,6 +429,7 @@ static void qcom_spi_ecc_cleanup_ctx_pipelined(struct n=
-and_device *nand)
-=20
- =09kfree(snandc->qspi->oob_buf);
- =09snandc->qspi->oob_buf =3D NULL;
-+=09snandc->qspi->ecc =3D NULL;
- =09kfree(ecc_cfg);
- }
-=20
---=20
-2.55.0
+https://lore.kernel.org/linux-input/178602255123.2917765.7426706813083510078.b4-ty@b4/
+> 
+> Rob
 
