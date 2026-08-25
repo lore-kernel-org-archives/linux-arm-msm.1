@@ -1,86 +1,86 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2FF192DB7A3
-	for <linux-arm-msm@vger.kernel.org>; Tue, 25 Aug 2026 02:51:41 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C147015A85A
+	for <linux-arm-msm@vger.kernel.org>; Tue, 25 Aug 2026 03:15:19 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787626302; cv=none; b=PqcCfqtD4aRAxF3JTb/Ezuvnt1vnokHy07bJZ7BZIZQDXd/ztERJW2CRKShVDgSDTDZmtPmMKiK9iZSB2B05H20R39ritVNL7IJRD3eW2mQ20TJh+pFg5tdknoSurCiii7v0iQ10GH2+liU3W1p8wCEcuVZpC1/40Y0XcPLZFMY=
+	t=1787627721; cv=none; b=h3EVFVWeZbn6dAvmfv3MhpJUe3RqLvScta5ilrC7lPbewDIaUMzw+QLyITzIlVcOAjEdnpD7hYJsnZ4ubaOunQeVXyf5rr3yBgnoPj7mofnFflJNZc59TXyMHhjse9E+SWZLISKvhCLvEM3NqzBXuWOhPVnXRuL/r/TF6dbY854=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787626302; c=relaxed/simple;
-	bh=bhE4RuI9V+MVZ2WHKjpClmsRXUuzg8N3aIWaYUU2wA8=;
+	s=arc-20240116; t=1787627721; c=relaxed/simple;
+	bh=yPWrCzoXIqgAXeIruzKGmM/XEqVv57+pEiuntlLY9pM=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=NPoN2pusHvMMaP8/GTaqSI6HBtQDO/Lmac6tFMO8e16l7oBs0CXpVHAlVqAJAmkferzSkpT5tuqg9zBtIrAeXyIA7tb928Xv3Uaqo/0DUlh2yrXOFenQDOqt7xhejUFxT6lvv8CSZgQDgFUSW6il/Nw3BHixePm0aM/m58R+9uI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=feqQQeXJ; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=Q1usSyLw; arc=none smtp.client-ip=205.220.168.131
+	 In-Reply-To:Content-Type; b=TxJY9viWC+7KhRn3bX0WxmxS49BF4r+GPTadMQwKomJwXoAXSiGfGbEOrSurMxKM8C1z1qjjhpYO4NfbgdZtt3MeX7r4DAlOI22Gi/nFvnnB5OFLR2i0hTx6K0mh9TSaJ24E4K59LkocDpUQYk35FFt/a+yfDToM0ssUh6R85Cs=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=BpLqdgvd; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=Mg2Vc9iw; arc=none smtp.client-ip=205.220.180.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="feqQQeXJ";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Q1usSyLw"
-Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67P2R11B125586
-	for <linux-arm-msm@vger.kernel.org>; Tue, 25 Aug 2026 02:51:40 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="BpLqdgvd";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Mg2Vc9iw"
+Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67P2R5Hr955241
+	for <linux-arm-msm@vger.kernel.org>; Tue, 25 Aug 2026 03:15:18 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	UoErnvSWXkC4s7oreViW8HAdb+aeLpfKk8vSmTkAGRw=; b=feqQQeXJqunMp8tn
-	28O5T0KIdAH6Ee0GMHEZj0h6QOF9q5+St8ZBtDvv4+dii9xnX0Mqx+QCjvL/oEWK
-	OKZpd+y5CnbB3IxbG7yKZdyeZ64zDwR3auTDB+FaWxeMN/Y5nt53scfkiCoibUjO
-	OFSbeKnTbLJYPNALXv+wKbCNVvGvAcu2C1GGYo2Ovqje2RsTRksaXlEhib9ch68A
-	mD7xhoyakqrV8MTDOnd732qMopbV9ej4iBF1UoCJQYUt8h/Z4IfYBoWfWsuHEQoj
-	eSGrmdjTqvnBruVjLcd4Q9PIy5vUudZMupKL3OP3iEuJeucm8AEosaQeu0nCMbLD
-	iU4maw==
-Received: from mail-pj1-f71.google.com (mail-pj1-f71.google.com [209.85.216.71])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g8rquj7y8-1
+	zw9BJ9wTlK9G8KvdBmOSxdt0qW2SYtUaRVnoZ3uGJ3I=; b=BpLqdgvdoswUs+IH
+	0x3lJdhCyzU/6Lw8XTtjV3s8hKAuzFKENCdytC2CgkspdTClE3qoJgDKA0DhX+NT
+	igSqdvRkkEAtghKnZsMWKyYEJiHJAmz2G7+YUHB4Rchn8hDAsO3BaRVltt/mveIh
+	YroTGR8FTS4mzgkvGg2SBR7GTh86zi+cDOU8FEc3w0t3NtFGT77cqGSNo6Lx7TN0
+	OGLFLmU0uv8/SX63TkaiMMBLsxJGk9n9WMExDRZ/tED1VqKXQJsUBE+iFwEAeYmM
+	YVvRGtZ0V4AGs1iSBR1pYw97ctU0VS1xbRPv51XDTnUoAwhcxsRNEolVbmEZL48f
+	3gKABA==
+Received: from mail-pg1-f197.google.com (mail-pg1-f197.google.com [209.85.215.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g8hjgv99s-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 25 Aug 2026 02:51:40 +0000 (GMT)
-Received: by mail-pj1-f71.google.com with SMTP id 98e67ed59e1d1-38e6d253330so477911a91.1
-        for <linux-arm-msm@vger.kernel.org>; Mon, 24 Aug 2026 19:51:40 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Tue, 25 Aug 2026 03:15:18 +0000 (GMT)
+Received: by mail-pg1-f197.google.com with SMTP id 41be03b00d2f7-c85798977dcso7419189a12.0
+        for <linux-arm-msm@vger.kernel.org>; Mon, 24 Aug 2026 20:15:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1787626300; x=1788231100; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1787627717; x=1788232517; darn=vger.kernel.org;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=UoErnvSWXkC4s7oreViW8HAdb+aeLpfKk8vSmTkAGRw=;
-        b=Q1usSyLwJq0t07N/cdRTfGAqQCZsNL669P0RogM1q691XWeavYOukQfk+iLcoPwnHk
-         tFkinIijBbIDpxaJZk1LdeWZzsb5Dj2CyNxZz1ktI+pmePfBxkEo99l7zYbsIOVrUBVD
-         IaeR6fBnHFWeA2iTnsJuZV4LuoP9y2OmR7yItTe3+D3Eh0YN2v1FbGhkY8yk7fhugNRa
-         hmBJT3KCbx0ChWb9wwYnVTw4KpJNU16pIyPy2VwkzitdYU6fuRw9+wrkEzE88gaOslXP
-         BoGZND0bouL2uvPBI6ICDzK5/veSsZGeUovY6w1hJdsyq8bkjmAtEy0kW3Kdppp19Lw+
-         AqwA==
+        bh=zw9BJ9wTlK9G8KvdBmOSxdt0qW2SYtUaRVnoZ3uGJ3I=;
+        b=Mg2Vc9iwQ7+94JOcSN0TWLX0K+ImQdLBmxQWHDGGS1I7QhJiX5oy5JLgSgJJThgka+
+         vGbZiaF3MDgq2K/1g072x+qIcXq9o5YOjl7Ju/AK+j88GMckxfVMajaET6Qrs779o/6w
+         O1t3wy5XMyS1J+1d1kTcE4mozhPz88eGN59VyNiwloRcEGPOhRBhmZudoOMcAVPuTxnP
+         YyWSyN9QxjcWR19UhbCJ5hW2cFqVvMw7BXovz1MH45O/Rx43IwZXXQiQjKab/ris5h+5
+         9liPqcqxuWZWUiz04a5eXCnPGslr8nQBdAVc5LIFZ1N5yma2YUeW+1PO1aqkQniHnjeM
+         HAAA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787626300; x=1788231100;
+        d=1e100.net; s=20251104; t=1787627717; x=1788232517;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=UoErnvSWXkC4s7oreViW8HAdb+aeLpfKk8vSmTkAGRw=;
-        b=WlJUGo7syy8zqY8Y4P6q1obr456qGJTbicb/9Fd85aPTiMAog5u/KircxGJIoT4Rfj
-         gV5rtDAd+zheAY4j6MkyQVy+eLlJyVqAOgMOcMRaYJtimloaI3aZKxjLiruEdZ5A54Cc
-         eLb8Nd0M2BqU9mqeosL05tlSGuzT8byCU8kJQioxwK3S8fqszxdh5SBYb54ZaBi8Z/F8
-         i2iM8r/KtkRQUQFt4gNIr+I0M3UJz7UXR+LyT7M8xuN7pvVxpeMr7SzX2xwWw5wusvsT
-         SICvd8AJVkb8mxMfbVc52BxUssgYHhv1htDNNhCmcLry7/Tq8OPg2Uq9xcVrdSwAvAv/
-         42dA==
-X-Gm-Message-State: AFuF++nOIl+zjDy23xxePU+0ST0+SMNgcgN1Vpb1LBODlRcF26bmUNEt
-	hgY0j/1GWiZWqbJFn1kht0gmaPYzw5deqDOFfy0aj8Gz0IWHneRQQIcEEKL1QVU78mY/XAJ+J0F
-	ycnwlbpZ0LoSfsqm2B2wWp5lBwDJTgDjSdIxNJG0P405AldFNX0XMY2m8SstKy1bI5keX
-X-Gm-Gg: AR+sD11xZjyX4y7wp2TxPF7FgQJQnlWR5Avyerqr9eR7HSwXpVc1YZVyWegXqOxXhcn
-	2IZ2/vCwRUiU9AuTeKAWVnHlXsYXeQfdu35Q29od1iSAZ0NNMt9/NIvBFNzGBGk+akV/l5qaaS8
-	lOKuhKN2wB2a5WzUAAFPVyGsfmvpcBN5Hft2OBnNRQaXlNRGQ8Gic7FcHRzsH+vqWkrQwUG4klz
-	HFEB7PmNGjrNYOUKkTrQ/f5ADAtx2wrCOLnesqUsJgpmuUBPWvIu398Q59j6cGupyBMRht1PPpr
-	7HT/juORPGdigh6S974+yCJHL1BM1bHRuEDcZUL0iEAlO8Nh8Qctq6BSS0QtVHxiMRk9h4kbbeI
-	vkkQdo10COlxsEI9TdDgUbsxpF8A7xMPqLT6pXBw4qLhMbOz/Hhf4ifC4PH+dywFZHi3R
-X-Received: by 2002:a17:90b:2543:b0:395:8124:ac53 with SMTP id 98e67ed59e1d1-39645aaa837mr3945710a91.6.1787626299620;
-        Mon, 24 Aug 2026 19:51:39 -0700 (PDT)
-X-Received: by 2002:a17:90b:2543:b0:395:8124:ac53 with SMTP id 98e67ed59e1d1-39645aaa837mr3945666a91.6.1787626299087;
-        Mon, 24 Aug 2026 19:51:39 -0700 (PDT)
-Received: from [10.133.33.69] (tpe-colo-wan-fw-bordernet.qualcomm.com. [103.229.16.4])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-39645d69f74sm1713636a91.14.2026.08.24.19.51.35
+        bh=zw9BJ9wTlK9G8KvdBmOSxdt0qW2SYtUaRVnoZ3uGJ3I=;
+        b=rRhL7/0ulZ08UcPEZgIGHKPgrist2A71aoXvkskx4UHnWck9V6r+riwOEViSIRJFl1
+         es6TAIcU/KqiGsz5dDxLZJXt3+9FvNvVK4o5vjyIJDvaVQgqCly0DO0UjjNZ/KEpQvf8
+         +5tILsWQcS2gdbxKy+J/+ZinkfvcMr1c07xj7DM88tukT6LGQvhs0arHIu1UFDGAGW6J
+         5DNMeBGeHnVKUAPAk+eboGugNPVNPF2iZe7/WQJxjv+APd+SmpCR6Pluz0S/saDpm1x+
+         WXSXGWNyAnGaFA8Q2qjORYespP5wA7mIHEVqxKYWmbbfqeco1bup1Gt/gklW6z5SILDR
+         i2iQ==
+X-Gm-Message-State: AFuF++lp0ZU8+C7teyb9gDG31BtvkTrp/g+DWKAe9TBnkElARqYwX+sH
+	NHvFg4c/kTtLhQQtcy3hGJd8jj8hdcRSRUO8c27CNnfUPex6VYVL0o1IZAnXioq7kmo7Hs5Quz9
+	Fla/sIlEreTdKUM8hU33L/tpMUWjZaQEFTAyJjpP++b8l6XIRfLb/WZoMgnewUIbhFw4R
+X-Gm-Gg: AR+sD11hhZ134+9Y8tGscZa1HdWSTZtLjdmUBNulhSA5/MOnnYIUkGzjdBtwQvl53np
+	YfRgb5/ltHYGpudVDPDG0GV6gyhirT02RZakaTgaSROGRfyShFTQxzsT44kd63X+7Ben58fFHDa
+	S3dEVlREycADXPkaddq8a245stDd0EPG+LPreHRz8JQyAdmQBNpCE+FWpDgX09aNbsv6BGGtJ5/
+	ecrbl3qOHFybMjFuDmHnDOZ3Xj0Idt0YqeFKXNnftTP9oUelpV376eq1vWgj9l/iziFCN0aItH2
+	a1/G+cruNTHjA8tc/bLSObfkiXADiUBRxOQJvAAtQFoV5tZm4t7EFqpkje4FtERF62nNg8UdvZO
+	XBBHmu5HGLtrrOZszL/6W1bo2+2RLSw==
+X-Received: by 2002:a17:902:fc46:b0:2d6:dfa7:fad4 with SMTP id d9443c01a7336-2d6dfa7ff18mr60428055ad.0.1787627717430;
+        Mon, 24 Aug 2026 20:15:17 -0700 (PDT)
+X-Received: by 2002:a17:902:fc46:b0:2d6:dfa7:fad4 with SMTP id d9443c01a7336-2d6dfa7ff18mr60427295ad.0.1787627717013;
+        Mon, 24 Aug 2026 20:15:17 -0700 (PDT)
+Received: from [192.168.1.132] ([70.95.199.79])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-32801d7f812sm28570652eec.1.2026.08.24.20.15.15
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 24 Aug 2026 19:51:38 -0700 (PDT)
-Message-ID: <02269d67-41e3-48eb-9ce1-e3775a4c2eaa@oss.qualcomm.com>
-Date: Tue, 25 Aug 2026 10:51:34 +0800
+        Mon, 24 Aug 2026 20:15:16 -0700 (PDT)
+Message-ID: <502df11d-c372-445d-99a8-512fdb0e9a4c@oss.qualcomm.com>
+Date: Mon, 24 Aug 2026 20:15:14 -0700
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -88,233 +88,97 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v6 1/2] dt-bindings: input: Add Qualcomm SPMI PMIC haptics
-To: Rob Herring <robh@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org,
-        Dmitry Torokhov
- <dmitry.torokhov@gmail.com>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>, Lee Jones <lee@kernel.org>,
-        Stephen Boyd <sboyd@kernel.org>,
+Subject: Re: [PATCH v6 4/9] usb: misc: qcom_eud: add per-path role switch
+ support
+To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
         Bjorn Andersson <andersson@kernel.org>,
+        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
         Konrad Dybcio <konradybcio@kernel.org>,
-        David Collins <david.collins@oss.qualcomm.com>,
-        Subbaraman Narayanamurthy <subbaraman.narayanamurthy@oss.qualcomm.com>,
-        Kamal Wadhwa <kamal.wadhwa@oss.qualcomm.com>,
-        linux-input@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org,
-        Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
-References: <20260806-qcom-spmi-haptics-v6-0-19fcecd5204f@oss.qualcomm.com>
- <20260806-qcom-spmi-haptics-v6-1-19fcecd5204f@oss.qualcomm.com>
- <20260807155640.GA893689-robh@kernel.org>
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Peter Chen
+ <peter.chen@kernel.org>, Rob Herring <robh@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
+        linux-usb@vger.kernel.org, linux-kernel@vger.kernel.org
+References: <20260811213610.2956147-1-elson.serrao@oss.qualcomm.com>
+ <20260811213610.2956147-5-elson.serrao@oss.qualcomm.com>
+ <c0215cd9-3973-4306-85e9-d58674d6bc83@oss.qualcomm.com>
 Content-Language: en-US
-From: Fenglin Wu <fenglin.wu@oss.qualcomm.com>
-In-Reply-To: <20260807155640.GA893689-robh@kernel.org>
+From: Elson Serrao <elson.serrao@oss.qualcomm.com>
+In-Reply-To: <c0215cd9-3973-4306-85e9-d58674d6bc83@oss.qualcomm.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-Proofpoint-ORIG-GUID: eZK9ZckWhOG6t-9T7q0fkX5x2X9JM6g2
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODI1MDAyMyBTYWx0ZWRfX8QNZVH20YzOz
- pW2XceNH94DLtGZgx2zLiehsR5j5NYCw84ib/kh2KbimK50cfa0/TUX9pHgSPaUdDCxSNrwfML7
- RmuBtdf0XrvkXDSMGWldIgT7XdGPhB8=
-X-Authority-Analysis: v=2.4 cv=CbQ4Irrl c=1 sm=1 tr=0 ts=6a8d033c cx=c_pps
- a=UNFcQwm+pnOIJct1K4W+Mw==:117 a=nuhDOHQX5FNHPW3J6Bj6AA==:17
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODI1MDAyNCBTYWx0ZWRfX3hwTEBmAjZvb
+ 7ui9APJ2sYWIDU24kOsiqoll8YapMxdqb/r5sszZjug5RTf3qqN24eNej8WlEQuCXNhWc8Jt0Eb
+ anDKzpspNoAv5XEzkugRh/+bUHzFjQo=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODI1MDAyNCBTYWx0ZWRfX332xVqAKQsxA
+ 0TNgQl2PlJC2Cw9V+fb3rV71+pMi1XnCMgAxaWYYEmrrAFySaJh82T4maMrUuEnPLOdTFLit5rN
+ 5/m6DTAwKh315DLLtH7x1vAmZbUU+SJKtZH0Ekn0532YZsT5glZyGv6bNMPD+sYKvbIgKMrQANj
+ v0am1BSG1wZCRDt4g4hlNPF6a/AE3IQTYxh4yzsmz9QVlTyuOMYwMTRMizKw1z057xia0ZFP9RA
+ dgfM0XfXrKo7ZygG35nfTFagF78Hs+L4zVIXJQwHFuW6AtO+sOK7q6axj69IkN7tKZJ7922T7S9
+ Z3xDIpTKxt7jLMLNkjoYW5ipzyYO4MceHUkdH07NQMKZpAHJntPQDaUWmOTdw5iONwRtEb70d1x
+ xvNbPL3P68wZU6ybJmKNV9PFsMgqowTajdzqm64CjFxIs/sAmX5+h9e+VLT1g1wnD/hr6lyNmx7
+ 99bH37Kj6R+WH0/8yMw==
+X-Proofpoint-ORIG-GUID: hXwvk4qWMZvECNqltyUIpmdKnvPvhTMa
+X-Authority-Analysis: v=2.4 cv=CoCPtH4D c=1 sm=1 tr=0 ts=6a8d08c6 cx=c_pps
+ a=rz3CxIlbcmazkYymdCej/Q==:117 a=uHxescsG3rBdxcXwcPaeSg==:17
  a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
- a=gEfo2CItAAAA:8 a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=HhSylQvuivqysCgRbxUA:9
- a=QEXdDO2ut3YA:10 a=uKXjsCUrEbL0IQVhDsJ9:22 a=sptkURWiP4Gy88Gu7hUp:22
-X-Proofpoint-GUID: eZK9ZckWhOG6t-9T7q0fkX5x2X9JM6g2
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODI1MDAyMyBTYWx0ZWRfXyoizdk4Tstj7
- VbKvsmLfmKpGKl7+6Wp5H/Icee7VL0wqQCMv/e1dEJbTGZi9sxkyEj7dMmuvH/ch+5MK+ifjnAL
- JL3KUyn5tJqDDNmvnNKmc2Pxd9SkhPlD+cH4qA2+14Wlzf/PZKbjhggP8dF2KWLuA57tqm/O4qe
- yYdBya0vU5djwAR1sc7HOlc0wUT9Jb4kUSpTnHkhmTrGq6laMxpDXsdSGS87EbIVuc0h7EgIizg
- zLhg7A+3hR33gx/pv4IPBHDPeehekDFTDvKSSqTSCrxqHU6854eOamaybYHFnGyZxrdf5S3AkwB
- tx/Cz9ZI9WsLn+pSymexzaYQSvEaeXumS3n43DTYg72kbhy8irAmeO0ILjLIL8JZr/Dl9T+wIz+
- 1P33HY2GwbznOw78wnJoaK2Q8wZULGjG0D28/Cv5hMRnTrVwaYpKTLA7iDekTfZOGsx+6AlX7PA
- NMnR6dNAyhBmCjtYB6Q==
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22
+ a=L8Mv0my-441DvGKMhw0A:9 a=QEXdDO2ut3YA:10 a=bFCP_H2QrGi7Okbo017w:22
+X-Proofpoint-GUID: hXwvk4qWMZvECNqltyUIpmdKnvPvhTMa
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-08-25_01,2026-08-24_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- bulkscore=0 priorityscore=1501 lowpriorityscore=0 phishscore=0 suspectscore=0
- impostorscore=0 malwarescore=0 spamscore=0 clxscore=1015 adultscore=0
+ suspectscore=0 priorityscore=1501 malwarescore=0 phishscore=0 bulkscore=0
+ adultscore=0 spamscore=0 clxscore=1015 lowpriorityscore=0 impostorscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608250023
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608250024
 
 
 
-On 8/7/2026 11:56 PM, Rob Herring wrote:
-> On Thu, Aug 06, 2026 at 11:21:40PM -0700, Fenglin Wu wrote:
->> Add binding document for the haptics module inside Qualcomm PMIC
->> PMIH0108.
->>
->> Assisted-by: Claude:claude-4-8-opus
->> Reviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
->> Signed-off-by: Fenglin Wu <fenglin.wu@oss.qualcomm.com>
->> ---
->>  .../bindings/input/qcom,spmi-haptics.yaml          | 136 +++++++++++++++++++++
->>  1 file changed, 136 insertions(+)
->>
->> diff --git a/Documentation/devicetree/bindings/input/qcom,spmi-haptics.yaml b/Documentation/devicetree/bindings/input/qcom,spmi-haptics.yaml
->> new file mode 100644
->> index 000000000000..b1a69e9886ee
->> --- /dev/null
->> +++ b/Documentation/devicetree/bindings/input/qcom,spmi-haptics.yaml
->> @@ -0,0 +1,136 @@
->> +# SPDX-License-Identifier: GPL-2.0-only OR BSD-2-Clause
->> +%YAML 1.2
->> +---
->> +$id: http://devicetree.org/schemas/input/qcom,spmi-haptics.yaml#
->> +$schema: http://devicetree.org/meta-schemas/core.yaml#
->> +
->> +title: Haptics device inside Qualcomm Technologies, Inc. PMIC
->> +
->> +maintainers:
->> +  - Fenglin Wu <fenglin.wu@oss.qualcomm.com>
->> +
->> +description: |
->> +  Certain Qualcomm PMICs integrate a haptics module, such as the HAP530_HV haptics
->> +  module in the PMIH0108 PMIC, which drives an LRA (Linear Resonant Actuator) with
->> +  an output voltage up to 10 V. Several play modes are supported in HAP530_HV:
->> +
->> +    DIRECT_PLAY: The hardware outputs sinusoidal waveforms whose period is
->> +      defined by qcom,lra-period-us and whose peak voltage is defined by
->> +      qcom,vmax-microvolt. The driving amplitude can be scaled in the range
->> +      [0, 255] via a single register byte.  Hardware-based LRA auto-resonance
->> +      tracking is enabled by default in this mode, allowing the haptics engine
->> +      to follow the actual resonant frequency of the LRA and update the driving
->> +      period accordingly to achieve stronger vibration magnitude.
->> +
->> +    FIFO: The hardware can play an arbitrary waveform composed of a sequence
->> +      of 8-bit samples at a configurable play rate.  Samples are pre-filled
->> +      into the internal FIFO memory of the haptics module and continuously
->> +      replenished via the FIFO-empty IRQ until all samples have been played.
->> +      An 8K-byte FIFO memory bank is available in the HAP530_HV haptics module,
->> +      shared between the FIFO and PAT_MEM play modes. The memory partition
->> +      between the two modes is configurable via registers, and FIFO mode always
->> +      uses the 1st partition starting from offset 0.
->> +
->> +    PAT_MEM: This mode is very similar to FIFO streaming mode but without the
->> +      data refilling capability. It is designed mainly for short, latency-critical
->> +      vibrations. The memory space for PAT_MEM mode must be reserved for dedicated
->> +      usage, and the waveform data should be preloaded and remain unchanged
->> +      thereafter. The haptics module can play the waveform data from the memory
->> +      region specified by the PAT_MEM play start address and length registers.
->> +
->> +    In either FIFO mode or PAT_MEM mode, the following play rates are supported:
->> +      -- 0(T_LRA): each FIFO byte drives one full sinusoidal cycle with the
->> +        period defined in qcom,lra-period-us.
->> +      -- 1/2/3(T_LRA_DIV_2/4/8): each FIFO byte drives a half/quarter/eighth
->> +        sinusoidal cycle with the period defined in qcom,lra-period-us.
->> +      -- 4/5/6(T_LRA_X_2/4/8): each FIFO byte drives 2/4/8 sinusoidal cycles
->> +        with the period defined in qcom,lra-period-us.
->> +      -- 8/9/10/11/12/13(8KHz/16KHz/24KHz/32KHz/44.1KHz/48KHz): the FIFO
->> +        data is treated as PCM samples and drives the output with an
->> +        arbitrarily shaped waveform.  This mode is typically used to define
->> +        custom driving waveforms for specific vibration effects such as fast
->> +        attack, crisp brake, etc.
->> +
->> +    The drive voltage in FIFO or PAT_MEM mode can exceed the value defined in
->> +    qcom,vmax-microvolt to achieve a special vibration effect, but the waveform
->> +    must be short enough to prevent the LRA from being damaged by operating at
->> +    an overvoltage.
->> +
->> +    Also, hardware-based LRA auto-resonance tracking is normally disabled in
->> +    FIFO or PAT_MEM mode, as these modes are intended to drive arbitrary
->> +    waveforms that may not follow the resonant frequency; autonomous hardware
->> +    resonance correction would interfere with the intended output.
->> +
->> +properties:
->> +  compatible:
->> +    items:
->> +      - const: qcom,pmih0108-haptics
->> +      - const: qcom,spmi-haptics
->> +
->> +  reg:
->> +    items:
->> +      - description: HAP_CFG module base address
->> +      - description: HAP_PTN module base address
->> +
->> +  reg-names:
->> +    items:
->> +      - const: cfg
->> +      - const: ptn
->> +
->> +  interrupts:
->> +    maxItems: 1
->> +
->> +  interrupt-names:
->> +    items:
->> +      - const: fifo-empty
->> +
->> +  qcom,vmax-microvolt:
->> +    description:
->> +      Maximum allowed output driving voltage in microvolts, must be a multiple
->> +      of 50,000 uV. This is the peak driving voltage in DIRECT_PLAY mode,
->> +      which outputs sinusoidal waveforms. The value should be equal to the
->> +      square root of 2 times the Vrms voltage of the LRA.
->> +    minimum: 50000
->> +    maximum: 10000000
->> +    multipleOf: 50000
->> +
->> +  qcom,lra-period-us:
->> +    description:
->> +      LRA actuator initial resonance period in microseconds
->> +      (1,000,000 / resonant_freq_hz).  Used to configure T_LRA-based play
->> +      rates and the auto-resonance zero-crossing window. It could be also used
->> +      as the initial period if the LRA wants to be driven off resonance.
->> +    minimum: 5
->> +    maximum: 20475
->> +    multipleOf: 5
->> +
->> +required:
->> +  - compatible
->> +  - reg
->> +  - reg-names
->> +  - interrupts
->> +  - interrupt-names
->> +  - qcom,vmax-microvolt
->> +  - qcom,lra-period-us
->> +
->> +additionalProperties: false
->> +
->> +examples:
->> +  - |
->> +    #include <dt-bindings/interrupt-controller/irq.h>
->> +
->> +    pmic {
->> +        #address-cells = <1>;
->> +        #size-cells = <0>;
->> +
->> +        haptics@f000 {
+On 8/24/2026 6:44 AM, Konrad Dybcio wrote:
+> On 8/11/26 11:36 PM, Elson Serrao wrote:
+>> The EUD hardware can support multiple High-Speed USB paths, each connected
+>> to different USB controllers. The current implementation uses a single
+>> chip-level role switch, which cannot properly handle multi-path
+>> configurations where each path needs independent role management. Since
+>> EUD is physically present between the USB connector and the controller,
+>> it should also relay the role change requests from the connector.
 > 
-> No incomplete examples please. Put this in the example for the PMIC.
-
-Thanks for the suggestion. I will change to below in next patch:
-
-    pmic@7 {
-        compatible = "qcom,pmih0108", "qcom,spmi-pmic";
-        reg = <0x7 SPMI_USID>;
-        #address-cells = <1>;
-        #size-cells = <0>;
-
-        haptics@f000 {
-            compatible = "qcom,pmih0108-haptics", "qcom,spmi-haptics";
-            reg = <0xf000>, <0xf100>;
-            reg-names = "cfg", "ptn";
-            interrupts = <0x7 0xf0 0x1 IRQ_TYPE_EDGE_RISING>;
-            interrupt-names = "fifo-empty";
-
-            qcom,vmax-microvolt = <1300000>;
-            qcom,lra-period-us = <5880>;
-        };
-    };
+> [...]
 > 
-> And please comment on sashiko report. Looks valid to me.
-
-I just replied on that. I dropped the change which added the haptics
-device in the spmi-pmic schema as it had been applied:
-
-https://lore.kernel.org/linux-input/178602255123.2917765.7426706813083510078.b4-ty@b4/
+>> +	if (!strcmp(dr_mode, "host"))
+>> +		path->curr_role = USB_ROLE_HOST;
+>> +	else if (!strcmp(dr_mode, "peripheral"))
+>> +		path->curr_role = USB_ROLE_DEVICE;
+>> +	else
+>> +		path->curr_role = USB_ROLE_NONE;
+>> +
+>> +	/* No role switch needed for fixed role controllers */
+>> +	if (path->curr_role != USB_ROLE_NONE) {
+>> +		of_node_put(controller_node);
+>> +		return 0;
+>> +	}
 > 
-> Rob
+> IIUC think this is a bit of a convoluted way intending to say:
+> 
+> if dr_mode != effectively_otg
+> 	return
+> 
+> I don't think there's much of a better choice in APIs here, so let's
+> maybe just do something like:
+> 
+> if (host || peripheral)
+> 	return 0;
+> 
+> directly (i.e. without making ROLE_NONE the "desired case" as that
+> is very much not obvious)
+> 
+
+Sure. I will change this in v7
+
+Thanks
+Elson
 
