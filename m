@@ -1,87 +1,86 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A7E783E49CA
-	for <linux-arm-msm@vger.kernel.org>; Tue, 25 Aug 2026 08:28:45 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CE98E3CF020
+	for <linux-arm-msm@vger.kernel.org>; Tue, 25 Aug 2026 08:30:31 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787646527; cv=none; b=MpyHtWdsZ4NUlwpVE/6wLc97LBDWKlO0H7W5BeQpgHBkDi/I4bwEY8oBr5eyUcKhk4QqwGifr0CkoX9ogQy8sgIOxg3X8UtYX9Yf0Xr9aok4xXq8kSTCLTayf8WQ0bJJAQGWNHTub1TRdNFjZ0UAvlZIkZgAkYE+VvpQMQiMDzQ=
+	t=1787646633; cv=none; b=OWyn4383tmb0kTAEZ++d0PgbVEEeRV9IGBYUjttMbGuGIk04tR4JRprRPABLKj31bJ8snuBvk61gJRHlXEIgXd1V0JchaNW3X4btnip8PRK79EZj6sXUg8baHxN9CISZwTy044Tg/MFi2aoKHdNMpCc5NWTH/EPaD8BDw9qVz/M=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787646527; c=relaxed/simple;
-	bh=M6+Z/n2sPEdxSkumdm4fpxZDeQlqm0ww7+RLX0T8tDo=;
+	s=arc-20240116; t=1787646633; c=relaxed/simple;
+	bh=64/cYG9myfSJX42Xk7/0Ge7yncxwau+CA0g9LBRZtkM=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=rSdQNEOboFukwhCo6jw+v7iRbeC/N7B+/0/nyc4l+qG0+vPd8GKmn2Hcx1jtrd3jiRBb4e70M5sAO945Hyt6+FQn/RkjrefRsW7g+bRIVb+Prr9isxFugEC632oUZ9hXUiIgEGyD8U0nHxw3WrOOHepsYepT1Rc5GT/pq/GC6N8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=hb9oUO/W; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=TBXtRCwp; arc=none smtp.client-ip=205.220.168.131
+	 In-Reply-To:Content-Type; b=OW5mdfQLbCVcrn3MbquBU35eAlh8XXOfLK6uJzLTrcegHY1+8/98fmrCgxSNYRE8LTIvcDaSsGaKAvaeZBNsB4lATdFq+C+yNc0z+7CI72+/40JNkBO3ai3mD0t0FMvPA45XvZvvyrHOeTPztOm8tODldJGrJkvE5oRzoYIvm3Q=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=IKvjAPf+; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=Hc7Nwtg2; arc=none smtp.client-ip=205.220.180.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="hb9oUO/W";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="TBXtRCwp"
-Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67P888eB771414
-	for <linux-arm-msm@vger.kernel.org>; Tue, 25 Aug 2026 08:28:45 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="IKvjAPf+";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Hc7Nwtg2"
+Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67P88I841706704
+	for <linux-arm-msm@vger.kernel.org>; Tue, 25 Aug 2026 08:30:30 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	bYhkDV0y7XOpWdvVDzgGnrF9K75KOavFDUraFzDkeMs=; b=hb9oUO/W4rgIbipL
-	mGFectRAfdZBqpJCcwpB1ofAMp8oW3JaDF/3oGnhjjRjyg2iyuqKO8sZObFeUYzW
-	7XE0gnADDbK3HC628p4fbs6euvMI8a5pHQLTHFRdEUTtzDrjSyMl8nZt+7N17gNE
-	a6Ag6K4qIJCWKEDkW55cbGE9Bb5mQN0xLyYxDpbZ3+xtMAicAQYhWwoBzYbBAnYd
-	oJwJtB4UzeKUTFlm5AVzFHjTPEw4F5dMM/OUaIegUF5KBLFbnNTX6uozastRZTGS
-	gnZWV3jfiwK+AQ9Q7JIXqTIyUAS/+mlc7135RIl7S8IhUUXRL+FzM+CQev6emWL5
-	r1a6XQ==
-Received: from mail-qt1-f200.google.com (mail-qt1-f200.google.com [209.85.160.200])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g93narxgy-1
+	snUCad4MSlI6CTjQKRUKgLOV4nb44hzzXkl5AybhC/k=; b=IKvjAPf+TMmj9Iqv
+	E49fkXNvWA9Jw/RHW/U+2JBXDxyS+Tz2rqEO9v0DAc+/ga33Ka1CCWE62a9VODgA
+	IUsYBhJG6oEWsw0EpjCFhF3CTgLsAfvAs0oimfwm4x62TVn4uUsifS0AiX8TYZIf
+	gnZfVqV+gZC/B1LQlW3AAjD6t+ebHU/Nps20mXSeG/hAz1CGnyLqK1IxFcQ7dnPP
+	RiXYJEIXDCRNMQOhGAL8DffdzSAMeFescWxBaHSdxzaAFE7cUSp9ffdiXcNGuNBS
+	h8ltWQ5/aytFeoFAi4MiFK80o2HXg6wQIF7A2QLc7hkFzvPyY0zKhzaOqaYS7xtv
+	vaWkvw==
+Received: from mail-qt1-f197.google.com (mail-qt1-f197.google.com [209.85.160.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g93kvrych-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 25 Aug 2026 08:28:44 +0000 (GMT)
-Received: by mail-qt1-f200.google.com with SMTP id d75a77b69052e-51c9e97b626so7971871cf.1
-        for <linux-arm-msm@vger.kernel.org>; Tue, 25 Aug 2026 01:28:44 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Tue, 25 Aug 2026 08:30:30 +0000 (GMT)
+Received: by mail-qt1-f197.google.com with SMTP id d75a77b69052e-51bfd1772d8so9940741cf.1
+        for <linux-arm-msm@vger.kernel.org>; Tue, 25 Aug 2026 01:30:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1787646524; x=1788251324; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1787646630; x=1788251430; darn=vger.kernel.org;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=bYhkDV0y7XOpWdvVDzgGnrF9K75KOavFDUraFzDkeMs=;
-        b=TBXtRCwpxmXRRev1Olbv/b/EPCsWPpbXDp82LD2cKU6aQD0fqrI2EsJ/dCLYiOu0am
-         Ly+mxDvjYbEYJQzHhrVYwc2pr4wRi94Der/PHL1DahPMHN2BYKk9hft+FN/vapI88avV
-         iYktJ5PT7XLqWQ5Ce1nVqjk+33mkwhDUx0rUJdyw1fZAEpJ6aZvsWKJrN9mhfRra3cvL
-         NLZKN6FuSig3cPw3f0rpldS18vyoXpxOBXUV4Mvav0hIjHsxaUWoeSQe9pIUBrzPRJgU
-         XuhVvRJBzVAGbTxoBB8ub9Q0SH7pNOdggjfYISndd0s4h4ZknlVkiDaVG95pUE1NPxEV
-         4vcw==
+        bh=snUCad4MSlI6CTjQKRUKgLOV4nb44hzzXkl5AybhC/k=;
+        b=Hc7Nwtg2kYNpe/e64dE/EtzmW3z1pe52++YzrFTVSvSZ2u/Qk9sMEMYzP+lbjvjMgK
+         RA6h/8ZCJ+VD/b7uKOcL21CiwSYmNN80JowlFqSB3CxNVULWKDQWV8WD4WeO1AHcdAdc
+         itJ47K9h1+S+aq6I9s/EbFSJx9UUu30ksIYxFcuRIp6weg87IeHadijdPW8nsC+R3qO9
+         lsuqB13ws9TbXJR2rtPBSXH4Js9JYISUXXK2clgmyrCjTWv7V9kxhOioB0ECqfSd59me
+         AHOvCDAfNCqUOa4rR6crYokNqM5IbVkqvjRGbfowK/2NOl4liy2ivgs5g6tvbRfgR/+T
+         lACw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787646524; x=1788251324;
+        d=1e100.net; s=20251104; t=1787646630; x=1788251430;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=bYhkDV0y7XOpWdvVDzgGnrF9K75KOavFDUraFzDkeMs=;
-        b=aJvpoyrX/NX3CN+R/ieiLx700ZnZDYyYPzezZyYos9Wz3qD9U3zwntwAWRL9IDRTXv
-         LG0JfO5KjRwwVrZJTNB+n0zS2oUIy152GpAd6b7rHRXvNivj5UK18srHcooiWnkpuYbz
-         wkhUjdnQ0zw2k8rlIymFPtMW3/xkVLwSu/F7O4/QW4q2FA+IE2qTXZKTn13937euKSk7
-         VOdTmHyCesSJcz66yk/45tPrsKKyxOBbWAlNvIppHSc0pnct95mRWXDIvPufFyOBJq59
-         IwZ70c9UJRP8XPn9PJfc7P8JBBtt8EY8Sc8LpEvauMKKgOmuhNS5ZVdUFWC3f41PBqRF
-         qkqw==
-X-Forwarded-Encrypted: i=1; AHgh+Rp8VJoEs6LuaDEHpOnnOCecsJTBwiZPuhEqoh9SoRpaX9YSRhoSDLVdvfYfof452u4eWAWhHeust/kVL+7b@vger.kernel.org
-X-Gm-Message-State: AFuF++kE7gHsbVt/SNOMCdUA07NllJNqgZOihMsXMo51qPITacwQKfoi
-	16xMewCj9/C1nf4gd1c9YJfj5DnWStxg71Eu47BsS1M43Fq5B5EAumsJQQBEG0GhKVs8xUKULWP
-	0oqH7ZHw+k+slHq89nsIbv0abX4MnXd/kfwy3P93N2EZqNgGDZLGJMvtSt7Wr2iDxnmxh
-X-Gm-Gg: AR+sD11BIHibyYCnsTHvy/TbDrzkPCaAIOghHSQN3ytwG5+v2E8/5WITnhfdcynPe9l
-	gAM6kvHk6qfRUYpOBmKJiBMghuGCoburIXMnlu/foGwR/S+Mye+71aMZ7ioJq+OFAI7VlXu1Vzf
-	s4pXnzf36OdqKNAVBlfe5w2o86QBQzuwSQ4OgKXZUFo7WYPZlWknxGwd7llMsQ9CAEAsXXKDizm
-	T9Hkn/ebFijrEA97bZMVj9xEXgxsiP/N9/AiiOwfTjLBz/KXVQuF6ya4qbJNsK200VJXJOtDhoV
-	7EoW/5TerAVBarvPQxytjeQ5Pr5OdzWOeCCt3qlYKZ5/HofN6HOtNGeW1rwt+EuLsx7DxC39mpf
-	qQ2l3Wkohmp9y7AXoRWh6JIvA
-X-Received: by 2002:ac8:5f50:0:b0:51b:f40b:2faf with SMTP id d75a77b69052e-52df5a35311mr225835631cf.4.1787646523850;
-        Tue, 25 Aug 2026 01:28:43 -0700 (PDT)
-X-Received: by 2002:ac8:5f50:0:b0:51b:f40b:2faf with SMTP id d75a77b69052e-52df5a35311mr225835341cf.4.1787646523448;
-        Tue, 25 Aug 2026 01:28:43 -0700 (PDT)
+        bh=snUCad4MSlI6CTjQKRUKgLOV4nb44hzzXkl5AybhC/k=;
+        b=ANf4/tLM3bDVaG9S70jImrQcd0HrHSAst40en+IlcfCbINsHVOVyEQwS/eljFsFrgz
+         Uo1Fv9dSPv5baMzQvcgC4IIGdKCZwdUdK3MOdSzXb/lQU+SLotCXUMyfna9UKUfhqHDr
+         4GaAPsgxuFvjcPwZ2jDOcVcqGLPUxAXEdQ7MX6ESWIhOtxL/KV6Gouun7B2topuPXNwL
+         1cpef/IvbPtpPSJdIKa8sb4QfHxz/8BTIqJSG2UCMjJMHiJ394hd+Ma6Elu4u0V9va5r
+         KBTWM7cuka6RmBOXfSW3apzUegK9CgtF0BYDYoeCbKjAU6B6TMuAp8dJevTyvywgJ4WW
+         lSyg==
+X-Gm-Message-State: AFuF++nxKNyg/AMh68AOWZAhRyciA1uJPVCfr3uAEwF8xBbAIyWHwFch
+	bK6/Pv8OgCyjoIEQACX+SIa78iPOks5czbwMFrntFH7bjJ3l7MpcsD9zjh97s9HhYgIknVkCgAw
+	0LMa01exJ1oMS/b6Rdq/PNrSAVEQHrO410YGhn/VXP6FbCQv68+C0Urwe6nF3ArGejnQk
+X-Gm-Gg: AR+sD10+zpqCS5+feDRRqyqsQny0/m+QQkP2eu4J0LwMhjlwRJNkNt6NpUOICIREQko
+	mfiTC8jGZevpyCL661/QjRUGNOjUFHpbZ3k7PYFqEyG/9nrYGK+QQlPwhfMoQiDksoX0XV5PqiL
+	tPdkFx+nb/WuNJ8Sy2C7E4UUvheh5LHy3EBpeUDreiHaHAnVYjF9RYTnaaqNvDpZKd52uSUMuwO
+	K8gMFayWeAl9wBwH+yvYR5++cetXL23hDOKcSInGh5133Qx5VBlCY4gogNEAna1OULQNkuezPk/
+	bokJzT9TR/qHDO6L8zAytd3OhXi4PPUx9ejfHYrlNXuGXtmYZA6+rQQkezUHj0HBJCx1y7UEair
+	Yt848A2B5uS8aXbqJjeeO0oBA
+X-Received: by 2002:a05:622a:1102:b0:51c:10e9:ec47 with SMTP id d75a77b69052e-52df5a21154mr240432631cf.5.1787646629691;
+        Tue, 25 Aug 2026 01:30:29 -0700 (PDT)
+X-Received: by 2002:a05:622a:1102:b0:51c:10e9:ec47 with SMTP id d75a77b69052e-52df5a21154mr240431961cf.5.1787646629105;
+        Tue, 25 Aug 2026 01:30:29 -0700 (PDT)
 Received: from [192.168.120.193] ([178.235.128.140])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c249629a901sm1820302366b.25.2026.08.25.01.28.41
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c24966f809bsm1827029066b.41.2026.08.25.01.30.25
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 25 Aug 2026 01:28:42 -0700 (PDT)
-Message-ID: <8d8f7742-fd4a-4605-a9b1-153ace9e14a4@oss.qualcomm.com>
-Date: Tue, 25 Aug 2026 10:28:41 +0200
+        Tue, 25 Aug 2026 01:30:28 -0700 (PDT)
+Message-ID: <b6d6b627-a38b-427a-9e62-ee883505b2ad@oss.qualcomm.com>
+Date: Tue, 25 Aug 2026 10:30:25 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -89,92 +88,100 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 4/7] serial: qcom-geni: Use geni_se_set_rate() for source
- clock configuration
-To: Praveen Talari <praveen.talari@oss.qualcomm.com>,
-        Sudeep Holla <sudeep.holla@kernel.org>,
-        Cristian Marussi <cristian.marussi@arm.com>,
-        Ulf Hansson <ulfh@kernel.org>, Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        Jiri Slaby <jirislaby@kernel.org>, Mark Brown <broonie@kernel.org>,
-        Viken Dadhaniya <viken.dadhaniya@oss.qualcomm.com>,
-        Andi Shyti <andi.shyti@kernel.org>
-Cc: mukesh.savaliya@oss.qualcomm.com, chandana.chiluveru@oss.qualcomm.com,
-        arm-scmi@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
-        linux-pm@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-arm-msm@vger.kernel.org, linux-serial@vger.kernel.org,
-        linux-spi@vger.kernel.org, linux-i2c@vger.kernel.org
-References: <20260805-derive_clk_perf_tbl_from_perf_domain_opp_table-v1-0-61171ab1cdce@oss.qualcomm.com>
- <20260805-derive_clk_perf_tbl_from_perf_domain_opp_table-v1-4-61171ab1cdce@oss.qualcomm.com>
- <4e0d636a-7975-4711-8070-6f71957b754e@oss.qualcomm.com>
- <17735f83-fd07-4fad-97a3-727cfbeabbcb@oss.qualcomm.com>
+Subject: Re: [PATCH 1/3] dt-bindings: display: msm: Allow two MDSS power
+ domains
+To: Yongxing Mou <yongxing.mou@oss.qualcomm.com>,
+        Rob Clark <robin.clark@oss.qualcomm.com>,
+        Dmitry Baryshkov
+ <lumag@kernel.org>,
+        Abhinav Kumar <abhinav.kumar@linux.dev>,
+        Jessica Zhang <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>,
+        Marijn Suijten <marijn.suijten@somainline.org>,
+        David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+        Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+        Maxime Ripard <mripard@kernel.org>,
+        Thomas Zimmermann <tzimmermann@suse.de>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>,
+        Krishna Manikandan <quic_mkrishn@quicinc.com>,
+        Abel Vesa <abelvesa@kernel.org>,
+        Yuanjie Yang
+ <yuanjie.yang@oss.qualcomm.com>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org,
+        freedreno@lists.freedesktop.org, devicetree@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+References: <20260720-msm_gdsc2-v1-0-4687866d6cb0@oss.qualcomm.com>
+ <20260720-msm_gdsc2-v1-1-4687866d6cb0@oss.qualcomm.com>
+ <b36691d3-e996-4fc0-8955-25beeeecc385@oss.qualcomm.com>
+ <ccab8aae-d980-423a-b39e-3ce2a7c82542@oss.qualcomm.com>
+ <5341e732-0deb-4d00-9a7c-595e317bf1e8@oss.qualcomm.com>
+ <db2a18aa-f5fb-4ee8-8747-05fcf740749f@oss.qualcomm.com>
+ <f344a913-cc95-4fef-880b-f1fee200c108@oss.qualcomm.com>
 Content-Language: en-US
 From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-In-Reply-To: <17735f83-fd07-4fad-97a3-727cfbeabbcb@oss.qualcomm.com>
+In-Reply-To: <f344a913-cc95-4fef-880b-f1fee200c108@oss.qualcomm.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODI1MDA3MSBTYWx0ZWRfX9FpWpa2udo/u
- wBP/AyAWzWHvufsop2aZkLERKjtzDDjvr4a72lIqZnJ/wm6aNsFovvk8wJQZud5nTVoBlxiorTI
- 8XGvlKFnbOeKenEJHPWOBVbLg+3Mido=
-X-Proofpoint-ORIG-GUID: pw1nQryYoQyQ-PbI0F4tIfltZP3EcnTx
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODI1MDA3MSBTYWx0ZWRfX/ys6zT47ZIxM
- NL5MWJLfCJux/40hvx0+bsffiq67xeu3CjrPIJzRkPDGaUPvufc+MAi4JNs14CdUXCOR1Rubpsr
- 8V39tZBvNorwUAF2hVW+NS61njzTSoyQAXLmb3ybaQnoMdS8vwpupQX53duilm6koRPw+IyaCTW
- b86/vOwlTT0CWF/NfflTG592FnbRNbIXcJiAF5W8iJ4wigWR675TqMYSxaKemuI9bhYlg22/HfM
- I+xKPF4QmGthq9JQziBdq6pfsM21CoVX6MnL/xa0eYEz0zt5VCRGJE8X1io7F7Ogz/G8xtEvGDs
- 6Smhe8KX2YzLKBfMlxF3/tmcyavy+4LboTO1uNtOAZqhlXgG75hjqoUC5jipMHjUIVKwlzNcgmK
- I/SjcqVApk5RRW4wdBz4IPY35KQnZy5JhZRgHfl9fQjKQ2vqH5Fz65XDD8QL5Wmtzf8bJpBEG9r
- T/ZTluL1voCv79qs3tA==
-X-Proofpoint-GUID: pw1nQryYoQyQ-PbI0F4tIfltZP3EcnTx
-X-Authority-Analysis: v=2.4 cv=W74IkxWk c=1 sm=1 tr=0 ts=6a8d523c cx=c_pps
- a=JbAStetqSzwMeJznSMzCyw==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODI1MDA3MSBTYWx0ZWRfX3SRA7ML+EV0F
+ DrWWdbRtfrgHDEGF/4b8m2D18ZD8nRc9rQIESs3w+LSLW7yBnDXB+ZQd92REh1cCh3xtUW1RRwd
+ ZWUsLJr2qTGW37A3O2AccNhTn6WzeFCqfwsHo5Q4RKMpgByI5R2Cuc4a4AUuaq5rbU/wzaBwepB
+ kerHuT7yHGpRYWJEltTHPQ8GWhp6ZOAsfbB2lLbVj9SK2QztcFRopCwWt3aSopIz681fW35Hjkj
+ fzr/q3N0iJSrpSz1PdFDHjwqRpouGF27tPMgFOSipU3du1zGoZODO66mrxFBf0L81PqBWyStwtV
+ l9AEcQnkH3D5/NKj2qK2Jfw982RiYkyFQ5mhYLt74KWmVRu7thxH5kURQGi2QnrCQ/KSgFD5dHZ
+ eMTAggTbn9LiI9JMEgA9V4PDz8TrmTHdNYrTQv+KN4OFjLICQgWTA6NaG0A/gkyQ5IY4VOY2MqH
+ ZJgmRLzFTTSL0Xvb6Pw==
+X-Authority-Analysis: v=2.4 cv=aPHAb79m c=1 sm=1 tr=0 ts=6a8d52a6 cx=c_pps
+ a=EVbN6Ke/fEF3bsl7X48z0g==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
  a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22
- a=CZKBZ6wm4gaK5Uy4Yf8A:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
- a=uxP6HrT_eTzRwkO_Te1X:22
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22
+ a=-6rRdagTYtbFvggOUc8A:9 a=QEXdDO2ut3YA:10 a=a_PwQJl-kcHnX1M80qC6:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODI1MDA3MSBTYWx0ZWRfX6VpjlgPeiShw
+ SDQuADwt53RO2ICOK4sDeYtjGnZHD9VaOUcQowpEh5G+gd/SNANqtWLMScp7Vf2COkZAf9drboh
+ 8qDqGSMHck1uHxaMvpfSRU1bXyhgSNw=
+X-Proofpoint-ORIG-GUID: sN0Br3vNDFBVouWO0znuT3sVxfnn75Gx
+X-Proofpoint-GUID: sN0Br3vNDFBVouWO0znuT3sVxfnn75Gx
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-08-25_02,2026-08-24_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0 suspectscore=0 priorityscore=1501 impostorscore=0
- clxscore=1015 spamscore=0 lowpriorityscore=0 bulkscore=0 phishscore=0
- adultscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ phishscore=0 bulkscore=0 adultscore=0 malwarescore=0 clxscore=1015
+ impostorscore=0 lowpriorityscore=0 priorityscore=1501 suspectscore=0
+ spamscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
+ adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
  definitions=main-2608250071
 
-On 8/25/26 6:00 AM, Praveen Talari wrote:
-> HI Konrad,
+On 8/25/26 8:28 AM, Yongxing Mou wrote:
 > 
-> On 24-08-2026 20:35, Konrad Dybcio wrote:
->> On 8/4/26 9:57 PM, Praveen Talari wrote:
->>> The driver calls dev_pm_opp_set_rate() directly on uport->dev to apply
->>> the computed source clock frequency, and dispatches baud rate handling
->>> through a per-variant dev_data->set_rate() callback that either
->>> recalculates the clock divider (Linux clock managed path) or selects
->>> a performance level via geni_se_set_perf_level() (SA8255P firmware
->>> managed path).
->> [...]
->>
->>> +    geni_se_set_rate(&port->se, 0);
->> This ends up calling dev_pm_opp_set_rate(0) [i see this is an existing
->> bug in geni_se_resources_deactivate()], which removes the power vote,
->> but does nothing to the clock (neither set_rate nor disable_unprepare),
->> which will crash the platform
->>
->> Both of these calls (new and existing) should be removed. Clocks will
->> be disabled by geni_se_clks_off() in geni_se_resources_deactivate().
->>
->> Then, we should do dev_pm_set_opp(se->dev, NULL) *after* they are off
->> to remove any trailing OPP resources (i.e. icc votes defined in the OPP
->> table in our case)
-> So, if I understand correctly, the expected sequence is:
 > 
-> 1. Disable the clocks.
-> 
-> 2. Remove the OPP/performance resources.
+> On 8/17/2026 10:14 PM, Konrad Dybcio wrote:
+>> On 8/17/26 4:13 PM, Konrad Dybcio wrote:
+>>> On 8/13/26 9:44 AM, Yongxing Mou wrote:
+>>>>
+>>>>
+>>>> On 7/20/2026 4:49 PM, Konrad Dybcio wrote:
+>>>>> On 7/20/26 10:43 AM, Yongxing Mou wrote:
+>>>>>> Kaanapali (SM8750) and Glymur use two display power domains.
+>>>>>> CORE_GDSC powers the main display hardware while INT2_GDSC
+>>>>>> powers a subset of SSPP blocks.
+>>>>>
+>>>>> Can they operate independently? Does INT2_GDSC need to be
+>>>>> powered on after CORE_GDSC?
+>>>>>
+>>>> On Kaanapali, my understanding is that CORE_GDSC and INT2_GDSC should generally track the same state, except that INT2_GDSC may be powered down when SSPP1 (VIG2/VIG3/DMA5) is unused.
+>>>
+>>> Is the MDSS any useful if *only* INT2_GDSC is enabled? Can the INT2_GDSC
+>>> be enabled itself if CORE_GDSC is off?
+>>
+>> (I didn't quite know how to parse the list of states you provided in your
+>> reply so I asked again)
+>>
+>> Konrad
+> Hi, Konard. Would you recommend adding the parent clock in the clock driver, or handling 2 GDSC in the display driver? I'm preparing the next revision and would appreciate your feedback.
 
-Yes, otherwise there is no guarantee that the clocks have sufficient
-power for a given rate
+Does disabling INT2 provide us with any power benefits and will the
+display driver do the accounting for what resources need the INT2
+GDSC specifically?
 
 Konrad
