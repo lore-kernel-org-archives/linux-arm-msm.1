@@ -1,74 +1,71 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3D14F44780D
-	for <linux-arm-msm@vger.kernel.org>; Wed, 26 Aug 2026 14:41:19 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4F49131D730
+	for <linux-arm-msm@vger.kernel.org>; Wed, 26 Aug 2026 14:58:10 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787755282; cv=none; b=fj5HXK654zRkCscxHDDZh5ZX2SyUh75ls6pxuw9FsA3s2QDTbnOv2JDLR0AkNrM47FcWIN3sRwvxXJNwh6CNRF+iEBmdUKcAWQW0e0C/dSaHo/azODD3UnVNsNF+r5IAOcuPuSMcPF5NXtsL/zzX6ElQ1WpHKag310l5B0DArs0=
+	t=1787756291; cv=none; b=l4K0AmbAS4Z7MUGBL7w3h510hjgb+6tSVVtO6oeDbs8XrO2sMI49Hml5e+258B9tsanUOB9RwrtSzIucQkvNCz8BjjuuFMXHhJ3ef43MF8/S3CgL47AbuliHBTQxtKwN4Dr7wtw5vnJEcFfsnVWrjtqeQFkHtmW1FAz9qVH4Zn8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787755282; c=relaxed/simple;
-	bh=38ulmt4xq+ksW8krj+T3oRElOAiMeGlxgJwWv/HNTLc=;
+	s=arc-20240116; t=1787756291; c=relaxed/simple;
+	bh=YvujksyLFDhmPQJuueDPzzMP/JE9fimvOtcAO4bvLZU=;
 	h=From:In-Reply-To:MIME-Version:References:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=KU/AxmtHebnj7HJdMye361rS9t+vTS208CJ7kzydOMyknjxRywSa5H+i7iCRpcbI6A2VZl/zc7Jr4G7TRuEyhXYS4XRQTBN9h6b5LxYy8+vcjTMgIiRPQHu5TSAkZgG019/4EkfkBuyWIdrx3D6mfKjpTdKJRnu3jzUgrpKJpuI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=oWOAWoxn; arc=none smtp.client-ip=100.103.45.18
+	 To:Cc:Content-Type; b=rfqAgmqjh+JLmMeRtBwCqNoyzixTYQyvldDswA8d01OWF1bmqL6OqdzXXTphnnV2lrU7HHyLuSdMXM96Be1is+WRk1U2bPlkk5ELt4vRQRyEuPPDN5+TZEdysFjwxDgtleMk9GvvI1pv0ufD5eT6hbO4vIJxA+qCoH6tLPCGUA4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=RUqdbNvZ; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="oWOAWoxn"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id EF5871F00ADB
-	for <linux-arm-msm@vger.kernel.org>; Wed, 26 Aug 2026 14:41:17 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="RUqdbNvZ"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 063F41F00A3E
+	for <linux-arm-msm@vger.kernel.org>; Wed, 26 Aug 2026 14:58:10 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1787755278;
-	bh=38ulmt4xq+ksW8krj+T3oRElOAiMeGlxgJwWv/HNTLc=;
+	s=k20260515; t=1787756290;
+	bh=YvujksyLFDhmPQJuueDPzzMP/JE9fimvOtcAO4bvLZU=;
 	h=From:In-Reply-To:References:Date:Subject:To:Cc;
-	b=oWOAWoxncL4VASYLAvYM4yCDGKxY04ms7bdXhMqqDJygkVyLNLmE6EAssiuhVkJ7R
-	 oHLTzEkBSNNbdd8x6G/xBXvxTp7OCeaLgx2j93nECKWcxSLs3LITms5e7XtbO5bObv
-	 dPIz7/66blVU8f0utY4er9pZyGlIbE8bMdB5WdQlE5khhogOBRo8JLvaZ1NlyLJJme
-	 u9SxJ/kcwI39I7D6CRV5hKriLaEMzY6OM0TZ4HWMU66Gx9yQS0+DEjrB7ce/Dt1mMK
-	 KQn8BuIFevvyAJs+6+snLMR0f5HT0eb3CJ/9KwdAyw6Y9hFXfpKHwabPmkZboSn71I
-	 fGyrIjFoTFgRw==
-Received: by mail-lf1-f47.google.com with SMTP id 2adb3069b0e04-5b00d083818so1976100e87.1
-        for <linux-arm-msm@vger.kernel.org>; Wed, 26 Aug 2026 07:41:17 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AHgh+RpkjxuA1haNrsC6BdGZI8WXIj6KTmTEW83oWkeW1DmTp6nNol9pOAgXazY4f865ytp4ZM5+G5aJvPbEEkme@vger.kernel.org
-X-Gm-Message-State: AFuF++kQUXEwTnCVhz+s7xV5YLV/mUsflDeZwSTTKTRO84O+H+v6SejU
-	mPL1p80GVoFRa5hfZDJ8t5v/4ZS9uZdhTyEBTAr5L4y/CGD31x2knuq96gUUsn0+M/4weXTIuxP
-	WsRINZniOe8H7nwNndDSXWt63r2RsWaQiQhVF6tCxFA==
-X-Received: by 2002:a05:6512:65c9:20b0:5b4:9d3b:9188 with SMTP id
- 2adb3069b0e04-5b49d3b9499mr2279161e87.6.1787755276572; Wed, 26 Aug 2026
- 07:41:16 -0700 (PDT)
+	b=RUqdbNvZSuWZezsEwc2FRMAC80gbuiOrO0thk1oS3UG015LUJ/UnqR591EohEUPyU
+	 xOAhXABHctlRziAcUC0LE9RYCyZxxt7s6wRpzNlNcKKxX98Q9OxdtPI3CVCyHjOHps
+	 L8rXPCgFQhLIqdnKn6QTgAwvP2OuzjURwQGyLzH0mbkqt3/zbMh107qENU77OlavjS
+	 b82KQ+WNr49Yt84SSFXjyGTBidYmInjjkOwwZTUTaFDn0X+FDz9gvanBFjgcmYEllM
+	 OcHg+rw2f4+IOzT5aVeE7SOyFByCLQuxEOrJOduhYt1PkBlZRroLjYANjmgLjqzpUb
+	 0smNflUQs9wZw==
+Received: by mail-lf1-f47.google.com with SMTP id 2adb3069b0e04-5b159850b16so809116e87.3
+        for <linux-arm-msm@vger.kernel.org>; Wed, 26 Aug 2026 07:58:09 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AHgh+RrKuuUlY/kKdgacXOTinQv8UmIt1Yt/NYp/Hq7k0nxh5v1j4j6ABd7K5zr30YU83yqOeQf/EuKIDmEATMGk@vger.kernel.org
+X-Gm-Message-State: AFuF++kD+NNo1L+OgQJIQL1ihZGHqOwzFkyib12WV77NBDfVFs8nFzUv
+	UpolO2Dk8dtzttsGixbZ054zpfbd85I+XexSoPNpDZDnIP6eIb0BmBu9sHqFLLzyJIXgtpeJuHE
+	clG5W94u5RtGB9HYv6FmE9KUtLcfx6x9XjGt/cJdqFw==
+X-Received: by 2002:a05:6512:318c:b0:5b0:197b:9827 with SMTP id
+ 2adb3069b0e04-5b4a9003109mr2324523e87.3.1787756288681; Wed, 26 Aug 2026
+ 07:58:08 -0700 (PDT)
 Received: from 969154062570 named unknown by gmailapi.google.com with
- HTTPREST; Wed, 26 Aug 2026 07:41:15 -0700
+ HTTPREST; Wed, 26 Aug 2026 09:58:06 -0500
 Received: from 969154062570 named unknown by gmailapi.google.com with
- HTTPREST; Wed, 26 Aug 2026 07:41:15 -0700
+ HTTPREST; Wed, 26 Aug 2026 09:58:06 -0500
 From: Bartosz Golaszewski <brgl@kernel.org>
-In-Reply-To: <20260820044258.1954272-1-triet.hoang.dev@gmail.com>
+In-Reply-To: <20260815150946.12142-3-thorsten.blum@linux.dev>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260820044258.1954272-1-triet.hoang.dev@gmail.com>
-Date: Wed, 26 Aug 2026 07:41:15 -0700
-X-Gmail-Original-Message-ID: <CAMRc=McVLkVGQ6B_MF6GdV6EV4t3dVkuB2+Mnof41htRX8qdTg@mail.gmail.com>
-X-Gm-Features: AcwNN1Wy6AKMKqiYa_2rmxei9FhG5QhdaCCzKF5MhaantZDU0Z0UkKucl3vG4F8
-Message-ID: <CAMRc=McVLkVGQ6B_MF6GdV6EV4t3dVkuB2+Mnof41htRX8qdTg@mail.gmail.com>
-Subject: Re: [PATCH] Bluetooth: hci_qca: Convert to DEFINE_SIMPLE_DEV_PM_OPS()
-To: Triet Hoang <triet.hoang.dev@gmail.com>
-Cc: brgl@kernel.org, linux-arm-msm@vger.kernel.org, 
-	linux-bluetooth@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	marcel@holtmann.org, luiz.dentz@gmail.com
+References: <20260815150946.12142-3-thorsten.blum@linux.dev>
+Date: Wed, 26 Aug 2026 09:58:06 -0500
+X-Gmail-Original-Message-ID: <CAMRc=Mdbk0tH=-hG=MXwFpY9ARzuAuMmvi7fhTKEPzmpuw5_AQ@mail.gmail.com>
+X-Gm-Features: AcwNN1Wnew0yhSJaB7OhGm28Gy9RvMow8DWUWA6z3mUd8NRlAST-l5JlU_tfAYU
+Message-ID: <CAMRc=Mdbk0tH=-hG=MXwFpY9ARzuAuMmvi7fhTKEPzmpuw5_AQ@mail.gmail.com>
+Subject: Re: [PATCH] crypto: qce - simplify control flow in register functions
+To: Thorsten Blum <thorsten.blum@linux.dev>
+Cc: linux-crypto@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, Bartosz Golaszewski <brgl@kernel.org>, 
+	Herbert Xu <herbert@gondor.apana.org.au>, "David S. Miller" <davem@davemloft.net>
 Content-Type: text/plain; charset="UTF-8"
 
-On Thu, 20 Aug 2026 06:42:58 +0200, Triet Hoang
-<triet.hoang.dev@gmail.com> said:
-> Convert the deprecated SIMPLE_DEV_PM_OPS
-> to DEFINE_SIMPLE_DEV_PM_OPS and pm_sleep_ptr().
+On Sat, 15 Aug 2026 17:09:47 +0200, Thorsten Blum
+<thorsten.blum@linux.dev> said:
+> Remove the goto statements and handle errors directly to simplify the
+> control flow in qce_aead_register(), qce_ahash_register(), and
+> qce_skcipher_register().
 >
-> This lets us drop the __maybe_unused annotations from its suspend and
-> resume callbacks, and reduces kernel size in case CONFIG_PM or
-> CONFIG_PM_SLEEP is disabled.
->
-> Signed-off-by: Triet Hoang <triet.hoang.dev@gmail.com>
+> Signed-off-by: Thorsten Blum <thorsten.blum@linux.dev>
 > ---
 
 Reviewed-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
