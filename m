@@ -1,87 +1,87 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0244F3A48ED
-	for <linux-arm-msm@vger.kernel.org>; Wed, 26 Aug 2026 07:49:15 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 213903AD52D
+	for <linux-arm-msm@vger.kernel.org>; Wed, 26 Aug 2026 07:49:19 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787730557; cv=none; b=kaD2XtSVgjETDuYK09Ro4z7un9mUE53drfM8CvdG22L9AX8YNDEfLuxP3wCPwllckb+OxVVLSVnRr9IpEnDKkPolH2QYqJsQ80ztBJpjMo8nVwNR3HclYkr40+7nqszzIEY0Fa1PVubOO22mmf1zq8SN4LCFfbzg0PgIc85kAd8=
+	t=1787730561; cv=none; b=o0vv3M3k+BGWPieqlGa9quutpAz4nuWXyZYmeh/HfIybEz41lENtVEkvWBPwvCb/RT9omxQb+tA7v2MehOpSX8wlq5nBt55kfNH6C63KTExSMOpLKbLbafSXFFqDYkEuchM/CGebWM+ZhbYJ8aF1pwIH3iIzfamNfclhxgDGAQA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787730557; c=relaxed/simple;
-	bh=6ocZhRLw/F2XxO4SHZxtWg0n+5C2r862DeT3i+TWk7k=;
+	s=arc-20240116; t=1787730561; c=relaxed/simple;
+	bh=57S0b3Uju4otbJ/vTQYhL9qni3w2zEnVxPW1NpD6sT0=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=FSa7AfyCtdYq/QJ4Ff5v5kS1ryXzgbMH15ai027Bhc4NTiT1aT2fCHlUzo53JZrr7APr8xjpBPnnsdjDfH4j75OB8KVGTvLcj124KJ3Xg8XaYcS5mlVt+xpHeHAqkFWqM1/lpF0tkTM5Z8WSWO9+DlLZqGoyTV+0WDEKt8ozUlo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=FWltw3kN; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=ehNig931; arc=none smtp.client-ip=205.220.180.131
+	 In-Reply-To:Content-Type; b=HdRUmL1kp5zaZAGlCKUZBIO4BUd0a00hhLqyNudBno5xf7Mh6zPPZ5dY3m1JB9/NEOtmRUyeh1XdN/KBxhGcrHZaAX6QwnuUqDXQwLDufDd5Gjyvc7lpGkx8B4ucG1y+qC+wEIK3zXY9ftGpOLvZIJUe7t7RwOA+gRows/fZDew=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=WpXfvZgt; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=RzLK7+35; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="FWltw3kN";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="ehNig931"
-Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67Q7UH4b3272234
-	for <linux-arm-msm@vger.kernel.org>; Wed, 26 Aug 2026 07:49:15 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="WpXfvZgt";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="RzLK7+35"
+Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67Q6Rd0Y105987
+	for <linux-arm-msm@vger.kernel.org>; Wed, 26 Aug 2026 07:49:19 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	S0XsFRYzKpYHY56wQV41jHqVJYDkSElvSQdFTSDDPBQ=; b=FWltw3kNKLHZMZ4X
-	L9DWqNwFEunZ+Cqoal0VdxlemRCJfXre07Eq0TYh/CFEsffOeh/2fH1QHTWHfTdc
-	cmN1mRWpRxVTrczd4A+mLwdyuyPh2Z7VcvF0Tur6/8l1ASuUFvjwbJFkY284WI7u
-	v5kwaz2d/zEXHTd2M1ovRzltgOtdbN5gkvdV3gscaXNEYMdaIzdcjmIkh3JoQhKV
-	LInFZc7syDAuG/6HbSDh8seaSOULqMnR6VGOMf2ELb2znoWwEGILJ5bVC61emVyd
-	2PR06bi4fC6m9NXMTzj0ElZVwcPh+iMzzN667wQwLK6DKmHCivd49K9X0qBm1OSw
-	OvomVw==
-Received: from mail-pg1-f200.google.com (mail-pg1-f200.google.com [209.85.215.200])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g9uthr2pm-1
+	6DCmBsvDeuI8ABH6xP2YOY9HZossfW23sCzfnm22eqE=; b=WpXfvZgtvPv32iNy
+	or8PX7JwoUsUHI2qkxa0vBHZbtCqriiINVxk6ttQ5HEGTvPv3kPeB55hgFucoheu
+	P6k/66bSkxasHh5MiMWg/nS8PIeqDst4hC2QL2Wtc0TvfAK5wy+P1paFKzJgrMlV
+	4jC+oLmtGFDkCEVfYtznyyNHJN6fMu4x9y2alZzle80HFK6xZoxFvtuCGhWXdp9w
+	iw8dp2Nj4cieL07X3109rxTs5/p8u+rhzNlF4Q+/WOKKm8h+vRw4PrRkl2FAA3Lc
+	LKqK9Q/FCHGqrXCa3qHW4KvfIV1n1CN675+RhRZis5RuUjt6H/WlNKXjc+r7JjSE
+	+/hxgw==
+Received: from mail-pf1-f197.google.com (mail-pf1-f197.google.com [209.85.210.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g9r0k10ka-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 26 Aug 2026 07:49:14 +0000 (GMT)
-Received: by mail-pg1-f200.google.com with SMTP id 41be03b00d2f7-cbe77d6864dso1013122a12.2
-        for <linux-arm-msm@vger.kernel.org>; Wed, 26 Aug 2026 00:49:14 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Wed, 26 Aug 2026 07:49:19 +0000 (GMT)
+Received: by mail-pf1-f197.google.com with SMTP id d2e1a72fcca58-84eee2147ffso972680b3a.0
+        for <linux-arm-msm@vger.kernel.org>; Wed, 26 Aug 2026 00:49:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1787730554; x=1788335354; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1787730558; x=1788335358; darn=vger.kernel.org;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=S0XsFRYzKpYHY56wQV41jHqVJYDkSElvSQdFTSDDPBQ=;
-        b=ehNig931/2aX7tHflpGcbINPG/89JZE6IpU1NS+hucLi6sZ/LlfujB1+E8XbT7K9fj
-         hu8g2faCPMbwFW5k/RBfH2OjYdPRTQtSPl4vzrdpkCo+fAhe06Sm+9dsY9iKZW+HlP0u
-         55g1GfatP2F2uYnlIRpVOCPC2GliJLmd7SMau58Twills72ySCxBrB9pwpdap60CRBNx
-         a+Mn8pgDsLvpITLIRztOXoOxolo77xA8Gc6e9LlwHxR8JXLUSpqZTajHSjxqV95OyA9S
-         fDyiFeUjFy0HlhpoD4GpqOnC5onoSWIDZEiCQ/ErJe8dmupe0Wg7w35wB9t0CdwSqDmA
-         ECeg==
+        bh=6DCmBsvDeuI8ABH6xP2YOY9HZossfW23sCzfnm22eqE=;
+        b=RzLK7+35/Eh12msPgbSrYUzApWTA+4XEdEzp94ndYn4Cb8qZasxuNLypECVmg/ODKp
+         a/l9wZS4WK/gSBwx0fTGhqpW4IQNNWqhGAeg5lKd2jxoMejk3h6eamwTKa/pLUnl2LiU
+         lZIvz4cJvVMpjydAjd2jvXs7O/wpniZtcldt7z+7G6yVTj/JBmyvBNZRS9ofqRtPgirl
+         j/w5LP/0SneBcYShVgMHa//yQFdWJD5/gvyudNeNNARfnF2E8X964Hifydayyc/HJSJJ
+         06TeDTzThASY4svwNuZJVQNEOoWfA1TV9pz0HtZgDcPqWiNwfLpYV8f4Yy2sh42EBUpK
+         NMyg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787730554; x=1788335354;
+        d=1e100.net; s=20251104; t=1787730558; x=1788335358;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=S0XsFRYzKpYHY56wQV41jHqVJYDkSElvSQdFTSDDPBQ=;
-        b=E9XwQkzN8XM1fyzJ9sc3tM7MN/KmTDgEK00Oyeg6OjwJEbzSa4lI8jqJFLIJ2cJbHC
-         f6UlqDl2KOIA4OwUaeD/x7uYCEgWYMpdRD9GgmKT01DwazLy1dI7BfVFpNtHiPr6VYW9
-         Uea2mItyGbdu582uveqaeY4g5Oi+0iUgrr2DDVhTh/WqybxXf6gIaAauy5hzcDKWFh8S
-         k41S6ZHX/24tu3XY8f+pTs31pXR1OcfOZRF3ObwEFAhcOONvFqZXtX0v6ks7hO4k665d
-         0ow54t1qiMTVEhWyiyzaC354XZTv/ihTCJf/l6gqqNiDu5IQfcrk9ESs9NlqCf8ix5Jh
-         xItg==
-X-Forwarded-Encrypted: i=1; AHgh+Rr7nUW79+l/G7ltyn6p7tJU7E8NdGZraeWZ4az2vs73vBHrYIXKZLS1xt7GiPNLHPNbfcq13U25w89LLPqZ@vger.kernel.org
-X-Gm-Message-State: AFuF++mVPs1VBj2XgGLaaLaxpGmxNqf95UPPyqyG0fSwOwakxF+7I5Ly
-	u4ALBBSgrMiGlpvLLcMe4tdynOp1L4HqiXcnQOH5bgkZfCnj6EEMhSSi2jyrf7aqtiGTPMGasWs
-	KfRzWlmERpJCbduaXcvL1Btc+jkMF3EG2i+TH9KGvBRIHjuMQFSg5u173BTK8nY+i17pe
-X-Gm-Gg: AR+sD105mFPZfIGCgkVD24jEtIU4pbRQAtaGEHPkL9mNUNwX9+3a8xgAVcUKHt6gl05
-	crHvTN3f/Q+Zkw8gHlleXbYWAWvXpsfj2mIRxJr42pVNpjiMR/Zrz4skpq2aFLZI8Rg35OP/mDi
-	j22f+AuaG7xSxWU9/2AjAGJQ+rzDxbqxiAYPxKcf/oH4FF0PC3vXMv4R8OTV6z6lhQrWHaVvjMx
-	zgUipgBkgrZxXCUNByvST1zUX1Rs0hxXcIWZ3fZL63HyD5mEpQJBCWAE8oGGZu356BXZh3CHUpd
-	cvZCOjmDk300NXlYsaVkYsLMl/uvpVluzpDzog41TexynaKT9LhHJpH16HnLhTfocWwSn8wR4gN
-	mNg9a3C9puTu5mE76moXVc59Yz6s8O2kKWFGopmo8T2LSMj87Nnc4bDFqFM9d1/XAArPoCrT9
-X-Received: by 2002:a05:6a00:2342:b0:851:c2a6:172f with SMTP id d2e1a72fcca58-85373bb5653mr9072532b3a.7.1787730553708;
-        Wed, 26 Aug 2026 00:49:13 -0700 (PDT)
-X-Received: by 2002:a05:6a00:2342:b0:851:c2a6:172f with SMTP id d2e1a72fcca58-85373bb5653mr9072431b3a.7.1787730553215;
-        Wed, 26 Aug 2026 00:49:13 -0700 (PDT)
+        bh=6DCmBsvDeuI8ABH6xP2YOY9HZossfW23sCzfnm22eqE=;
+        b=I+m6cKUkjBiKOmXJ1BcTXvazY1FaI64tnQZBD794JTfz94h5qPaDbWsEW0L+1Aq5T6
+         cvbvBWirJJ2R4ciN2VkmTJpAawtTjPNxsr5gEnZ15GoqDCcdcekyuYJoIZ8FJisluC51
+         IC096gREAm3Sx2WK1mX72IA+V8jqGmqrwCjRcUHx+hPEGTZKbKN2RXFrQzMr4foMWMF5
+         p5huzLLIupiIpb6TfjlzY7m0/ydgjaODE+Uvrct7dmkw+bLaHnenCA18+6N4CLiRP4OT
+         u8nUxLVpjruzV7UO5GQLmgmfvAiO7hu2iun+szINaRgizoNhN1fvnQ5Q9KqGm10yccAD
+         qSpw==
+X-Forwarded-Encrypted: i=1; AHgh+Rq+4ArDB+ZWosEWy8FuCMXyoIURuXpY9IiAOesUI6Y7jvAs5d6Em3+IFCiFAbhNVvsyBgJfPWi12KmPCc/4@vger.kernel.org
+X-Gm-Message-State: AFuF++lTEYDDsSMcxB5GadQbD7zYB/VLwOa5Ak9FtjCsOGQjWXWVBBZp
+	SB+ZfPZXVVqcsnG3wbtLF29tkpGdoBdCXvR14v7SkXWeJx9hTxnrNuTJvabm2+sTOIX8t99/ja8
+	tAs7jU+2oNjzlnfD2gjQwmnQgVQ1+RGO2lcm3fsQWg4iZKwJ2SSAghUjQAghUC1utwtV8
+X-Gm-Gg: AR+sD12cIBTi7FW3B8vsvyDYPXtZtFTcGgPrgVkDFB47AjNV/4qup2A83kHqqdlsud6
+	E9VdGQvSpShc403rEVmVlUb1kHRu2RKAwCfVYcDT9+2R1M3Z70j+h3+dK84bUF6+hn502XJgGPo
+	/rIOMUp7JJevLnWiAnR7oOLTMjItpR3T1lMZoUn8RhpCn4+PmC1QEeIQwpxsW3FVjS7q0Wc2w32
+	uyajh3o2ae92v2sciCUdmC0mrV7LW6iBM878v6VKMZYrhuTCguiJ3jHgws0rQv9RPrAOVzJfM1j
+	HbrGn+5HC4Kcktx9xGAoceO0nvxtVdZpbrW8HIN/7jM2veuDtDFndLdIYW5VAcEh+sWWNmyxR2s
+	qPj6AvzMRP5MRbmKWl9e8VBpAr3Kbb4RlK2MZgm4++PpMHpy66KcGkxv4Dex2ZTebOp+8pYj1
+X-Received: by 2002:a05:6a00:4216:b0:851:b03a:fcb with SMTP id d2e1a72fcca58-85374bbae36mr9760673b3a.14.1787730558317;
+        Wed, 26 Aug 2026 00:49:18 -0700 (PDT)
+X-Received: by 2002:a05:6a00:4216:b0:851:b03a:fcb with SMTP id d2e1a72fcca58-85374bbae36mr9760557b3a.14.1787730557806;
+        Wed, 26 Aug 2026 00:49:17 -0700 (PDT)
 Received: from [10.133.33.101] (tpe-colo-wan-fw-bordernet.qualcomm.com. [103.229.16.4])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-8535cd8a41esm588474b3a.29.2026.08.26.00.49.09
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-8535cd8a41esm588474b3a.29.2026.08.26.00.49.13
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 26 Aug 2026 00:49:12 -0700 (PDT)
-Message-ID: <4b15dc5d-d9ff-45b9-b46e-e36319ff0570@oss.qualcomm.com>
-Date: Wed, 26 Aug 2026 15:49:06 +0800
+        Wed, 26 Aug 2026 00:49:17 -0700 (PDT)
+Message-ID: <06462446-9a80-4c41-a882-59f19f6a5ccc@oss.qualcomm.com>
+Date: Wed, 26 Aug 2026 15:49:10 +0800
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -89,8 +89,8 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH RESEND v5 17/25] drm/msm/dp: add link_ready to manage
- link-level operations
+Subject: Re: [PATCH RESEND v5 23/25] drm/msm/dp: add dp_mst_drm to manage DP
+ MST encoder operations
 To: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
 Cc: Rob Clark <robin.clark@oss.qualcomm.com>,
         Dmitry Baryshkov <lumag@kernel.org>,
@@ -103,122 +103,480 @@ Cc: Rob Clark <robin.clark@oss.qualcomm.com>,
         linux-kernel@vger.kernel.org,
         Abhinav Kumar <quic_abhinavk@quicinc.com>
 References: <20260629-msm-dp-mst-v5-0-2ed6aee1867a@oss.qualcomm.com>
- <20260629-msm-dp-mst-v5-17-2ed6aee1867a@oss.qualcomm.com>
- <2ciespht5pfxvqnrik4a26drkmow2ilvxbkcnpt43jprhndryq@vfetl33dz3yg>
+ <20260629-msm-dp-mst-v5-23-2ed6aee1867a@oss.qualcomm.com>
+ <z3eqtcsn43bjlnyqarrclyuukg54wzl2pmtd4sosr6ske4scqq@vrdyrare46hr>
 Content-Language: en-US
 From: Yongxing Mou <yongxing.mou@oss.qualcomm.com>
-In-Reply-To: <2ciespht5pfxvqnrik4a26drkmow2ilvxbkcnpt43jprhndryq@vfetl33dz3yg>
+In-Reply-To: <z3eqtcsn43bjlnyqarrclyuukg54wzl2pmtd4sosr6ske4scqq@vrdyrare46hr>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Authority-Analysis: v=2.4 cv=EMA2FVZC c=1 sm=1 tr=0 ts=6a8e9a7a cx=c_pps
- a=oF/VQ+ItUULfLr/lQ2/icg==:117 a=nuhDOHQX5FNHPW3J6Bj6AA==:17
+Content-Transfer-Encoding: 8bit
+X-Authority-Analysis: v=2.4 cv=fPEJG5ae c=1 sm=1 tr=0 ts=6a8e9a7f cx=c_pps
+ a=rEQLjTOiSrHUhVqRoksmgQ==:117 a=nuhDOHQX5FNHPW3J6Bj6AA==:17
  a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_glEPmIy2e8OvE2BGh3C:22
- a=COk6AnOGAAAA:8 a=EUspDBNiAAAA:8 a=e8pokjpGc4Y85sSXAHsA:9 a=QEXdDO2ut3YA:10
- a=3WC7DwWrALyhR5TkjVHa:22 a=TjNXssC_j7lpFel5tvFf:22
-X-Proofpoint-ORIG-GUID: zLqzYzW2K4lCZum4aTI651K8XHRSH4WA
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODI2MDA2MyBTYWx0ZWRfX1Js5nOifAtyL
- G9YKCedzJb8UK2O8Gv1q0egiMz8fyhsCkiBPRun728x28JkfGgYd9LaxPdFAs9+rcyENxXQY2E+
- c2/hROxgO1lkBOsAUXAv4+gAZ0pn7YBhHSXELHweXO/zV+uCjGvtkSMzYUoOsIkLdPfB5wQbwa0
- dzALZCcsXh1WmEzatM8YT+euLH6A88IJzgf1A/X/aWwpc9Fh/5NQqGVfrUNb4lkuJY+21zP9XLO
- G+oZ0wJPS6byOL+GZSeRKpk+vcz1zYpcaG+Dh04jFLdp6MsOwt9/dNyV1KSV/ponIeWb/yOPtLv
- EQZlt/tV9Rl3aBQ9d6AhBA/5zIGsbDpzAmQGbRO3BdDgbQTuqPfyFXcqdnGKTHdk7c0ya0VpPSk
- XB6L/XtyfYqAhEXC77U0DGkBbX5Rdo3gYahtzSECnjh46NpLY/py3OncXze7tEkLAWoM+ka5PbK
- 9OnSE7pOT3hNtE2InvQ==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODI2MDA2MyBTYWx0ZWRfX/d2mxcB4We85
- E/L6x+FHDzDKi92DHwwPS+vfnwP/HxDmB0gcUAFIVMJ4mB/bvEjbWRHCCKMiCSrQ47Kz8Eq7RbN
- Y1sAaIkUgtj/E4MZmQgoeV+FX5aGbMk=
-X-Proofpoint-GUID: zLqzYzW2K4lCZum4aTI651K8XHRSH4WA
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22
+ a=COk6AnOGAAAA:8 a=EUspDBNiAAAA:8 a=QDH60ZEL_tEWVS7y0fAA:9 a=3ZKOabzyN94A:10
+ a=QEXdDO2ut3YA:10 a=2VI0MkxyNR6bbpdq8BZq:22 a=TjNXssC_j7lpFel5tvFf:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODI2MDA2MyBTYWx0ZWRfX3veFlzRXizw8
+ YgLpjWVqe/qKhE0lIPI/9TVK2gZLU2RN3djUZlMxzojwMD2q0C0MwY4GFZxoZ885SNU7Jdgi0px
+ eXDb6Kc66GYwz/bX2KHfyQVcKDyjhYI=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODI2MDA2MyBTYWx0ZWRfX/CAF2AXe9xey
+ Wl3+2B2Xw64ccjKoVyjZsjdZrgKqds3y3/0YNsmkHQRfZ3c47+JMim3ASgzmqJtzzCG1GPZF9DO
+ HpcjrY0/ggJoqHCSmD/FQcfI68fHSLMcG3aPtDoZiYQxHOx6uaVSOeDKaNuXPSN/e5nLZsq3t9m
+ oxGWred74GYZSMMr5+RDThbpGqcsNAybgm0IPg8MGMds4mCZSxU41sOtccpN8zvAozpVYmP2X4X
+ OWQ3coiGnD6d0YUJ67ZEzCkFfPq9vBP9RxDh1de94PnGuuFdVgHFq7tEzfT1b9cA4I3RfS4IIyR
+ Lav4VldZfkb5vjtwoOj0nc50YQjsl0ME3ivcOTU5KJI6Az63JWxSqVUl73xQb7dpOrstFBy5SwF
+ 0RCsv6MEE9HJ0z+79ZAfLEU5i1dSWPJAbiUsu/6Q1fnFVLE8ebhIAdGtNTooxcyGggWJ3kDnO5N
+ s1f174v6nxunezMX41Q==
+X-Proofpoint-ORIG-GUID: ialWudYsCGm5LzlnX3ftf1pMhCzomdEn
+X-Proofpoint-GUID: ialWudYsCGm5LzlnX3ftf1pMhCzomdEn
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-08-26_02,2026-08-24_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 lowpriorityscore=0 spamscore=0 adultscore=0 malwarescore=0
- clxscore=1015 phishscore=0 priorityscore=1501 suspectscore=0 bulkscore=0
+ priorityscore=1501 spamscore=0 suspectscore=0 impostorscore=0 malwarescore=0
+ clxscore=1015 adultscore=0 phishscore=0 bulkscore=0 lowpriorityscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608260063
 
 
 
-On 7/13/2026 7:46 AM, Dmitry Baryshkov wrote:
-> On Mon, Jun 29, 2026 at 10:14:38PM +0800, Yongxing Mou wrote:
->> In MST mode, multiple streams share the same DP link. Track a link_ready
->> state so msm_dp_display_prepare_link() runs only once per link and
->> repeated calls are skipped.
+On 7/13/2026 8:40 AM, Dmitry Baryshkov wrote:
+> On Mon, Jun 29, 2026 at 10:14:44PM +0800, Yongxing Mou wrote:
+>> drm/msm/dp: introduce dp_mst_drm for MST stream management
+> 
+> duplicate subject?
+> 
+>>
+>> Add a dp_mst_drm layer to manage DP MST streams with a clear ownership
+>> model between encoder, panel and connector.
+>>
+>> Each MST stream is represented by a dedicated drm_encoder. At modeset
+>> initialization time, one (encoder, dp_panel) pair is created per
+>> stream_id and remains fixed for the lifetime of the driver. The
+>> dp_panel thus carries a stable stream context, including stream_id
+>> and pixel mapping.
+>>
+>> MST connectors are created and destroyed dynamically on hotplug and
+>> are attached to a dp_panel through atomic routing. During an atomic
+>> commit, connectors are associated with encoders via
+>> atomic_best_encoder(), forming a temporary binding for the duration
+>> of the commit.
+> 
+> This doesnt't seem to be true any longer.
+> 
+Got it. will modify commit message next version.
+>>
+>> Encoder helper callbacks drive the MST stream lifecycle, including
+>> timeslot allocation, link enable/disable and payload programming.
+>>
+>> A per-MST-instance lock serializes operations on shared link state
+>> across multiple streams.
 >>
 >> Signed-off-by: Abhinav Kumar <quic_abhinavk@quicinc.com>
 >> Signed-off-by: Yongxing Mou <yongxing.mou@oss.qualcomm.com>
 >> ---
->>   drivers/gpu/drm/msm/dp/dp_display.c | 42 ++++++++++++++++++++++++-------------
->>   drivers/gpu/drm/msm/dp/dp_display.h |  1 +
->>   2 files changed, 29 insertions(+), 14 deletions(-)
+>>   drivers/gpu/drm/msm/disp/dpu1/dpu_kms.c |   6 +
+>>   drivers/gpu/drm/msm/dp/dp_display.c     |   9 ++
+>>   drivers/gpu/drm/msm/dp/dp_display.h     |   2 +
+>>   drivers/gpu/drm/msm/dp/dp_mst_drm.c     | 245 ++++++++++++++++++++++++++++++++
+>>   drivers/gpu/drm/msm/msm_drv.h           |   7 +
+>>   5 files changed, 269 insertions(+)
 >>
->> diff --git a/drivers/gpu/drm/msm/dp/dp_display.c b/drivers/gpu/drm/msm/dp/dp_display.c
->> index 2a74302bcb7c..d56ee10ee065 100644
->> --- a/drivers/gpu/drm/msm/dp/dp_display.c
->> +++ b/drivers/gpu/drm/msm/dp/dp_display.c
->> @@ -702,6 +702,9 @@ int msm_dp_display_prepare_link(struct msm_dp *msm_dp_display)
->>   	if (msm_dp_display->is_edp)
->>   		msm_dp_hpd_plug_handle(dp);
->>   
->> +	if (msm_dp_display->link_ready)
->> +		return 0;
+>> diff --git a/drivers/gpu/drm/msm/disp/dpu1/dpu_kms.c b/drivers/gpu/drm/msm/disp/dpu1/dpu_kms.c
+>> index b32ecd5b0777..ac5dc844fead 100644
+>> --- a/drivers/gpu/drm/msm/disp/dpu1/dpu_kms.c
+>> +++ b/drivers/gpu/drm/msm/disp/dpu1/dpu_kms.c
+>> @@ -696,6 +696,12 @@ static int _dpu_kms_initialize_displayport(struct drm_device *dev,
+>>   					DPU_ERROR("encoder init failed for dp mst display\n");
+>>   					return PTR_ERR(encoder);
+>>   				}
 >> +
+>> +				rc = msm_dp_mst_attach_encoder(priv->kms->dp[i], encoder);
+>> +				if (rc) {
+>> +					DPU_ERROR("dp_mst attach_encoder failed, rc = %d\n", rc);
+>> +					return rc;
+>> +				}
 > 
-> What kind of locking is protecting this variable? What prevents it from
-> being accessed concurrently?
-> 
-In MST, the entire function is protected by mst_lock, so concurrent 
-access to this variable is serialized.
->>   	rc = pm_runtime_resume_and_get(&msm_dp_display->pdev->dev);
->>   	if (rc) {
->>   		DRM_ERROR("failed to pm_runtime_resume\n");
->> @@ -714,14 +717,18 @@ int msm_dp_display_prepare_link(struct msm_dp *msm_dp_display)
->>   	if (!msm_dp_display->active_stream_cnt) {
->>   		msm_dp_display_host_phy_init(dp);
->>   		force_link_train = true;
->> +
->> +		rc = msm_dp_ctrl_on_link(dp->ctrl, dp->panel);
->> +		if (rc)
->> +			DRM_ERROR("Failed link training (rc=%d)\n", rc);
->> +		// TODO: schedule drm_connector_set_link_status_property()
->>   	}
->>   
->> -	rc = msm_dp_ctrl_on_link(dp->ctrl, dp->panel);
->> -	if (rc)
->> -		DRM_ERROR("Failed link training (rc=%d)\n", rc);
->> -	// TODO: schedule drm_connector_set_link_status_property()
-> 
-> Why is it being moved now rather than in the patch where
-> active_stream_cnt was introduced?
-> 
-Got it. will move to that part
->> +	rc = msm_dp_ctrl_prepare_stream_on(dp->ctrl, dp->panel, force_link_train);
->> +	if (!rc)
->> +		msm_dp_display->link_ready = true;
->>   
->> -	return msm_dp_ctrl_prepare_stream_on(dp->ctrl, dp->panel, force_link_train);
->> +	return rc;
->>   }
->>   
->>   static int msm_dp_display_enable(struct msm_dp_display_private *dp,
-> 
->> diff --git a/drivers/gpu/drm/msm/dp/dp_display.h b/drivers/gpu/drm/msm/dp/dp_display.h
->> index 676213a48089..0464f8941e8d 100644
->> --- a/drivers/gpu/drm/msm/dp/dp_display.h
->> +++ b/drivers/gpu/drm/msm/dp/dp_display.h
->> @@ -22,6 +22,7 @@ struct msm_dp {
->>   	bool mst_active;
->>   	unsigned int connector_type;
->>   	bool is_edp;
->> +	bool link_ready;
-> 
-> Please group the status variables together.
+> Reoder, this should be a part of the patch, adding the encoder.
 > 
 Got it.
+>>   			}
+>>   		}
+>>   	}
+>> diff --git a/drivers/gpu/drm/msm/dp/dp_display.c b/drivers/gpu/drm/msm/dp/dp_display.c
+>> index fc9c1e3e57ab..6eac390af2e0 100644
+>> --- a/drivers/gpu/drm/msm/dp/dp_display.c
+>> +++ b/drivers/gpu/drm/msm/dp/dp_display.c
+>> @@ -601,6 +601,15 @@ struct msm_dp_panel *msm_dp_display_get_panel(struct msm_dp *msm_dp_display,
+>>   	return dp_panel;
+>>   }
 >>   
->>   	struct msm_dp_audio *msm_dp_audio;
->>   	bool psr_supported;
+>> +void msm_dp_display_set_link_info(struct msm_dp *msm_dp_display,
+>> +				  struct msm_dp_link_info *dst)
+>> +{
+>> +	struct msm_dp_display_private *dp =
+>> +		container_of(msm_dp_display, struct msm_dp_display_private, msm_dp_display);
+>> +
+>> +	memcpy(dst, &dp->panel->link_info, sizeof(*dst));
+>> +}
+>> +
+>>   static void msm_dp_display_deinit_sub_modules(struct msm_dp_display_private *dp)
+>>   {
+>>   	msm_dp_audio_put(dp->audio);
+>> diff --git a/drivers/gpu/drm/msm/dp/dp_display.h b/drivers/gpu/drm/msm/dp/dp_display.h
+>> index a185819ec57e..fb6bdd372b52 100644
+>> --- a/drivers/gpu/drm/msm/dp/dp_display.h
+>> +++ b/drivers/gpu/drm/msm/dp/dp_display.h
+>> @@ -63,4 +63,6 @@ void msm_dp_display_unprepare(struct msm_dp *dp);
+>>   
+>>   struct msm_dp_panel *msm_dp_display_get_panel(struct msm_dp *msm_dp_display,
+>>   					      enum msm_dp_stream_id stream_id);
+>> +void msm_dp_display_set_link_info(struct msm_dp *msm_dp_display,
+>> +				  struct msm_dp_link_info *dst);
+>>   #endif /* _DP_DISPLAY_H_ */
+>> diff --git a/drivers/gpu/drm/msm/dp/dp_mst_drm.c b/drivers/gpu/drm/msm/dp/dp_mst_drm.c
+>> index 78b8dffe111b..6a77fdef85e9 100644
+>> --- a/drivers/gpu/drm/msm/dp/dp_mst_drm.c
+>> +++ b/drivers/gpu/drm/msm/dp/dp_mst_drm.c
+>> @@ -4,18 +4,259 @@
+>>    */
+>>   
+>>   #include <drm/drm_edid.h>
+>> +#include <drm/drm_fixed.h>
+>> +#include <drm/drm_atomic_helper.h>
+>>   #include <drm/display/drm_dp_mst_helper.h>
+>>   
+>>   #include "dp_mst_drm.h"
+>>   #include "dp_panel.h"
+>> +#include "dpu_encoder.h"
+>> +
+>> +#define to_dp_mst_connector(x) \
+>> +		container_of((x), struct msm_dp_mst_connector, connector)
+>> +
+>> +struct msm_dp_mst_encoder {
+>> +	struct drm_encoder *enc;
+>> +	int stream_id;
+>> +	struct msm_dp_panel *dp_panel;
+>> +};
+>> +
+>> +struct msm_dp_mst_connector {
+>> +	struct drm_connector connector;
+>> +	struct drm_dp_mst_port *mst_port;
+>> +	struct msm_dp_mst *dp_mst;
+>> +};
+>> +
+> 
+> Extra empty line.
+> 
+>>   
+>>   struct msm_dp_mst {
+>>   	struct drm_dp_mst_topology_mgr mst_mgr;
+>> +	struct msm_dp_mst_encoder mst_encoders[DP_STREAM_MAX];
+>>   	struct msm_dp *msm_dp;
+>>   	struct drm_dp_aux *dp_aux;
+>>   	u32 max_streams;
+>> +	struct mutex mst_lock;
+>> +	struct msm_dp_link_info link_info;
+>>   };
+>>   
+>> +static struct msm_dp_panel *msm_dp_mst_panel_from_encoder(struct msm_dp_mst *mst,
+>> +							  struct drm_encoder *enc)
+>> +{
+>> +	int i;
+>> +
+>> +	for (i = 0; i < mst->max_streams; i++) {
+>> +		if (mst->mst_encoders[i].enc == enc)
+>> +			return mst->mst_encoders[i].dp_panel;
+>> +	}
+>> +	return NULL;
+>> +}
+>> +
+>> +static void msm_dp_mst_update_timeslots(struct msm_dp_mst *mst,
+>> +					struct msm_dp_panel *panel,
+>> +					struct drm_dp_mst_atomic_payload *payload)
+>> +{
+>> +	if (payload->vc_start_slot < 0)
+>> +		msm_dp_display_set_stream_info(mst->msm_dp, panel, 1, 0, 0);
+>> +	else
+>> +		msm_dp_display_set_stream_info(mst->msm_dp, panel,
+>> +					       payload->vc_start_slot,
+>> +					       payload->time_slots, payload->pbn);
+> 
+> Can you pass payload as is? Then you don't need a wrapping function.
+> 
+Yes, we can directly use this.
+>> +
+>> +	drm_dbg_kms(mst->msm_dp->drm_dev,
+>> +		    "[MST] stream:%u timeslots vc_start:%d slots:%d pbn:%d\n",
+>> +		    panel->stream_id, payload->vc_start_slot,
+>> +		    payload->time_slots, payload->pbn);
+>> +}
+>> +
+>> +static void msm_dp_mst_stream_enable(struct drm_encoder *encoder,
+>> +				     struct drm_atomic_commit *state)
+>> +{
+>> +	struct drm_connector *connector =
+>> +		drm_atomic_get_new_connector_for_encoder(state, encoder);
+>> +	struct msm_dp_mst_connector *mst_conn = to_dp_mst_connector(connector);
+>> +	struct msm_dp_mst *mst = mst_conn->dp_mst;
+>> +	struct msm_dp *dp_display = mst->msm_dp;
+>> +	struct msm_dp_panel *panel = msm_dp_mst_panel_from_encoder(mst, encoder);
+>> +	struct drm_dp_mst_port *port = mst_conn->mst_port;
+>> +	struct drm_dp_mst_topology_state *mst_state =
+>> +		drm_atomic_get_new_mst_topology_state(state, &mst->mst_mgr);
+>> +	struct drm_dp_mst_atomic_payload *payload =
+>> +		drm_atomic_get_mst_payload_state(mst_state, port);
+>> +	int rc;
+>> +
+>> +	panel->connector = connector;
+> 
+> The connector should be _get before assigning.
+> 
+Got it.
+>> +
+>> +	guard(mutex)(&mst->mst_lock);
+>> +
+>> +	rc = msm_dp_display_set_mode_helper(dp_display, state, encoder, panel);
+>> +	if (rc) {
+>> +		drm_err(dp_display->drm_dev,
+>> +			"[MST] stream:%u set_mode failed rc=%d\n", panel->stream_id, rc);
+>> +		goto out;
+>> +	}
+>> +
+>> +	rc = msm_dp_display_prepare_link(dp_display);
+>> +	if (rc) {
+>> +		drm_err(dp_display->drm_dev,
+>> +			"[MST] stream:%u prepare_link failed rc=%d\n", panel->stream_id, rc);
+>> +		msm_dp_display_unprepare(dp_display);
+>> +		goto out;
+>> +	}
+>> +
+>> +	drm_dp_mst_update_slots(mst_state, DP_CAP_ANSI_8B10B);
+>> +
+>> +	rc = drm_dp_add_payload_part1(&mst->mst_mgr, mst_state, payload);
+>> +	if (rc) {
+>> +		drm_err(dp_display->drm_dev,
+>> +			"[MST] payload allocation failure for conn:%d\n", connector->base.id);
+>> +		msm_dp_display_unprepare(dp_display);
+>> +		goto out;
+>> +	}
+>> +
+>> +	msm_dp_mst_update_timeslots(mst, panel, payload);
+>> +
+>> +	msm_dp_display_enable_helper(dp_display, panel);
+>> +
+>> +	drm_dp_check_act_status(&mst->mst_mgr);
+>> +
+>> +	drm_dp_add_payload_part2(&mst->mst_mgr, payload);
+>> +
+>> +out:
+>> +	drm_connector_get(connector);
+>> +}
+>> +
+>> +static void msm_dp_mst_stream_disable(struct drm_encoder *encoder,
+>> +				      struct drm_atomic_commit *state)
+>> +{
+>> +	struct drm_connector *connector = drm_atomic_get_old_connector_for_encoder(state, encoder);
+>> +	struct msm_dp_mst_connector *mst_conn = to_dp_mst_connector(connector);
+>> +	struct msm_dp_mst *mst = mst_conn->dp_mst;
+>> +	struct msm_dp_panel *panel = msm_dp_mst_panel_from_encoder(mst, encoder);
+>> +	struct drm_dp_mst_topology_state *old_mst_state =
+>> +		drm_atomic_get_old_mst_topology_state(state, &mst->mst_mgr);
+>> +	struct drm_dp_mst_topology_state *new_mst_state =
+>> +		drm_atomic_get_new_mst_topology_state(state, &mst->mst_mgr);
+>> +	struct drm_dp_mst_atomic_payload *old_payload =
+>> +		drm_atomic_get_mst_payload_state(old_mst_state, mst_conn->mst_port);
+>> +	struct drm_dp_mst_atomic_payload *new_payload =
+>> +		drm_atomic_get_mst_payload_state(new_mst_state, mst_conn->mst_port);
+>> +
+>> +	guard(mutex)(&mst->mst_lock);
+>> +
+>> +	drm_dp_remove_payload_part1(&mst->mst_mgr, new_mst_state, new_payload);
+>> +
+>> +	drm_dp_remove_payload_part2(&mst->mst_mgr, new_mst_state, old_payload, new_payload);
+>> +
+>> +	msm_dp_mst_update_timeslots(mst, panel, new_payload);
+>> +
+>> +	msm_dp_display_disable_helper(mst->msm_dp, panel);
+>> +
+>> +	drm_dp_check_act_status(&mst->mst_mgr);
+>> +}
+>> +
+>> +static void msm_dp_mst_stream_post_disable(struct drm_encoder *encoder,
+>> +					   struct drm_atomic_commit *state)
+>> +{
+>> +	struct drm_connector *connector = drm_atomic_get_old_connector_for_encoder(state, encoder);
+>> +	struct msm_dp_mst_connector *mst_conn = to_dp_mst_connector(connector);
+>> +	struct msm_dp_mst *mst = mst_conn->dp_mst;
+>> +	struct msm_dp_panel *panel = msm_dp_mst_panel_from_encoder(mst, encoder);
+>> +
+>> +	guard(mutex)(&mst->mst_lock);
+>> +
+>> +	msm_dp_display_atomic_post_disable_helper(mst->msm_dp, panel);
+>> +
+>> +	if (!mst->msm_dp->mst_active)
+>> +		msm_dp_display_unprepare(mst->msm_dp);
+>> +
+>> +	panel->connector = NULL;
+>> +
+>> +	drm_connector_put(connector);
+>> +}
+>> +
+>> +static int msm_dp_mst_enc_atomic_check(struct drm_encoder *enc,
+>> +				       struct drm_crtc_state *crtc_state,
+>> +				       struct drm_connector_state *conn_state)
+>> +{
+>> +	struct msm_dp_mst_connector *mst_conn = to_dp_mst_connector(conn_state->connector);
+>> +	struct msm_dp_mst *mst = mst_conn->dp_mst;
+>> +	struct drm_dp_mst_topology_state *mst_state;
+>> +	int bpp, pbn, slots;
+>> +
+>> +	if (!conn_state->crtc)
+>> +		return 0;
+>> +
+>> +	if (!drm_atomic_crtc_needs_modeset(crtc_state) || !crtc_state->active)
+>> +		return 0;
+>> +
+>> +	bpp = (conn_state->connector->display_info.bpc * 3) ?: 24; /* fallback: assume 8bpc */
+>> +	pbn = drm_dp_calc_pbn_mode(crtc_state->mode.clock, bpp << 4);
+>> +
+>> +	mst_state = drm_atomic_get_mst_topology_state(crtc_state->state, &mst->mst_mgr);
+>> +	if (IS_ERR(mst_state))
+>> +		return PTR_ERR(mst_state);
+>> +
+>> +	if (!dfixed_trunc(mst_state->pbn_div)) {
+>> +		mst_state->pbn_div =
+>> +			drm_dp_get_vc_payload_bw(mst->link_info.rate,
+>> +						 mst->link_info.num_lanes);
+>> +	}
+>> +
+>> +	slots = drm_dp_atomic_find_time_slots(crtc_state->state, &mst->mst_mgr,
+>> +					      mst_conn->mst_port, pbn);
+>> +	if (slots < 0)
+>> +		return slots;
+>> +
+>> +	return 0;
+>> +}
+>> +
+>> +static void msm_dp_mst_enc_atomic_enable(struct drm_encoder *enc,
+>> +					 struct drm_atomic_commit *state)
+>> +{
+>> +	msm_dp_mst_stream_enable(enc, state);
+>> +	dpu_encoder_phys_enable(enc, state);
+> 
+> Looking at this, no, squashing the bridge and the encoder was not a good
+> idea, excuse me. The encoder is an internal implement of the DPU layer
+> and we should leave it there as is. DPU can use DP functions, but not
+> other way around.
+> 
+We could also invoke it from dpu_encoder.c, similar to how the MST 
+encoder helper functions are handled:
+static const struct drm_encoder_helper_funcs 
+dpu_mst_encoder_helper_funcs = {
+	.atomic_check    = dpu_encoder_mst_atomic_check,
+	.atomic_mode_set = dpu_encoder_virt_atomic_mode_set,
+	.atomic_enable   = dpu_encoder_mst_atomic_enable,
+	.atomic_disable  = dpu_encoder_mst_atomic_disable,
+};
+......
+	if (drm_enc_mode == DRM_MODE_ENCODER_DPMST)
+		drm_encoder_helper_add(&dpu_enc->base, &dpu_mst_encoder_helper_funcs);
+..。。。。。
+This looks much better.
+>> +}
+>> +
+>> +static void msm_dp_mst_enc_atomic_disable(struct drm_encoder *enc,
+>> +					  struct drm_atomic_commit *state)
+>> +{
+>> +	msm_dp_mst_stream_disable(enc, state);
+>> +	dpu_encoder_phys_disable(enc, state);
+>> +	msm_dp_mst_stream_post_disable(enc, state);
+>> +}
+>> +
+>> +static const struct drm_encoder_helper_funcs msm_dp_mst_encoder_helper_funcs = {
+>> +	.atomic_check    = msm_dp_mst_enc_atomic_check,
+>> +	.atomic_mode_set = dpu_encoder_atomic_mode_set,
+>> +	.atomic_enable   = msm_dp_mst_enc_atomic_enable,
+>> +	.atomic_disable  = msm_dp_mst_enc_atomic_disable,
+>> +};
+>> +
+>> +int msm_dp_mst_attach_encoder(struct msm_dp *dp_display, struct drm_encoder *encoder)
+>> +{
+>> +	struct msm_dp_mst *mst = dp_display->msm_dp_mst;
+>> +	struct msm_dp_panel *dp_panel;
+>> +	int i;
+>> +
+>> +	for (i = 0; i < mst->max_streams; i++) {
+>> +		if (!mst->mst_encoders[i].enc)
+>> +			break;
+>> +	}
+>> +
+>> +	dp_panel = msm_dp_display_get_panel(dp_display, i);
+>> +	if (!dp_panel) {
+>> +		drm_err(dp_display->drm_dev,
+>> +			"[MST] failed to allocate panel for stream %d\n", i);
+>> +		return -ENOMEM;
+>> +	}
+>> +
+>> +	mst->mst_encoders[i].enc = encoder;
+>> +	mst->mst_encoders[i].stream_id = i;
+>> +	mst->mst_encoders[i].dp_panel = dp_panel;
+>> +	drm_encoder_helper_add(encoder, &msm_dp_mst_encoder_helper_funcs);
+>> +
+>> +	return 0;
+>> +}
+>> +
+>>   int msm_dp_mst_display_set_mgr_state(struct msm_dp *dp_display, bool state)
+>>   {
+>>   	struct msm_dp_mst *mst = dp_display->msm_dp_mst;
+>> @@ -27,6 +268,9 @@ int msm_dp_mst_display_set_mgr_state(struct msm_dp *dp_display, bool state)
+>>   			"[MST] failed to set topology mgr state to %d rc:%d\n", state, rc);
+>>   	}
+>>   
+>> +	if (state)
+> 
+> Why?
+> 
+At the moment, link_info is maintained in the SST panel. After link 
+training is completed, we need to propagate a copy of it to the MST context.
+>> +		msm_dp_display_set_link_info(dp_display, &mst->link_info);
+>> +
+>>   	drm_dbg_kms(dp_display->drm_dev, "[MST] set_mgr_state state:%d\n", state);
+>>   	return rc;
+>>   }
+>> @@ -55,6 +299,7 @@ int msm_dp_mst_init(struct msm_dp *dp_display, u32 max_streams, struct drm_dp_au
+>>   		return ret;
+>>   	}
+>>   
+>> +	mutex_init(&mst->mst_lock);
+>>   	dp_display->msm_dp_mst = mst;
+>>   	return 0;
+>>   }
+>> diff --git a/drivers/gpu/drm/msm/msm_drv.h b/drivers/gpu/drm/msm/msm_drv.h
+>> index f71200a790f3..854dd08eede2 100644
+>> --- a/drivers/gpu/drm/msm/msm_drv.h
+>> +++ b/drivers/gpu/drm/msm/msm_drv.h
+>> @@ -358,6 +358,8 @@ bool msm_dp_needs_periph_flush(const struct msm_dp *dp_display,
+>>   bool msm_dp_wide_bus_available(const struct msm_dp *dp_display);
+>>   int msm_dp_get_mst_max_stream(struct msm_dp *dp_display);
+>>   int msm_dp_mst_register(struct msm_dp *dp_display);
+>> +int msm_dp_mst_attach_encoder(struct msm_dp *dp_display, struct drm_encoder *encoder);
+>> +
+>>   #else
+>>   static inline int __init msm_dp_register(void)
+>>   {
+>> @@ -384,6 +386,11 @@ static inline int msm_dp_mst_register(struct msm_dp *dp_display)
+>>   	return -EINVAL;
+>>   }
+>>   
+>> +static inline int msm_dp_mst_attach_encoder(struct msm_dp *dp_display, struct drm_encoder *encoder)
+>> +{
+>> +	return -EINVAL;
+>> +}
+>> +
+>>   static inline void msm_dp_snapshot(struct msm_disp_state *disp_state, struct msm_dp *dp_display)
+>>   {
+>>   }
 >>
 >> -- 
 >> 2.43.0
