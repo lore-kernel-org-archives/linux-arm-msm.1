@@ -1,165 +1,153 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-yx1-f54.google.com (mail-yx1-f54.google.com [74.125.224.54])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EFAFA3B7752
-	for <linux-arm-msm@vger.kernel.org>; Wed, 26 Aug 2026 08:09:27 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787731771; cv=none; b=oENQ1Z0uTBwfaQTb/YsBZG69qmfAkFCBHrNtpVS7TDOF3BMw3NtHtnUwq5GboQmF0pxsWTXj0KzGkYyGErEIesIcqkIaoS0oVBz/PoDZ7ho+Ijy+3bHfShcCncQCQX358SgpJ+RGkoRNt2dAJbz+8MNkcdZMfkedJoRU8K0puco=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787731771; c=relaxed/simple;
-	bh=rEbNkFigjp0FGDCJsty0si0XKQ+e9anzsk0sFIsDhoU=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=tN0d2Ac0Gi9z/uQHyn2ykA7cxtmbbyJ/nWpIHVjKwzYF2T7Mod61P2tJHE8d1x22H9T45RF67usIU3EEmUQ3QWdhyTOrHCnk/7F6SbdjkO1ppOO2o/vmUhbYK5GexFOGjY10Y1+sEhxf+FvKtj3Q66uyEpPqNxCOhWwkZqmvfuQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=YuQ1hN9N; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=EesU6/Ck; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0F0823AD52A
+	for <linux-arm-msm@vger.kernel.org>; Wed, 26 Aug 2026 08:11:04 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=74.125.224.54
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1787731866; cv=pass; b=cseI0lRVMWUP2jMZez7xF1TCh57a4RssiW3gvhQCtxXQYwJSeCazeQxCsnpH1zqUwnPELCb2/zcA5M3/bFbKklrRkCdIpzBJbKMJg1aVhbJ62ZUHbqeDTDByvsQ4lGXIOAuhTN1sve21uOAHiIBdMHyHk4WAZ6cmsQCyH6ztYb0=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1787731866; c=relaxed/simple;
+	bh=5yyh1VvWI+vaETl8iuGoTVN8P021SyOBwMiKg7S/KSA=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=KjO9IWTyiLGPRsFYlwN5y95+E1OZJbL3aAe/n5rEuirNxT6rrJ3jbOv/gSdD8QhaK+so3IT4YFYUZxWIPloLMSDbpw5Si2RcjnK3X/5X5YZ22mA1SetGN74cy2z83srYTFCtnRlyFx6lZPvgCXgj6HSVsEDoZcZJHIsINt9Ml4I=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=Lr+vgW92; arc=pass smtp.client-ip=74.125.224.54
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="YuQ1hN9N";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="EesU6/Ck"
-Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67Q7N0541261368
-	for <linux-arm-msm@vger.kernel.org>; Wed, 26 Aug 2026 08:09:27 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	OJXQT0c6OYFN2aHcq1lc8qaGVj0md3a70HDIO/2Fy+0=; b=YuQ1hN9NkB+j/f2K
-	jM4IdS4G+UxnMIRU84VU68/00IK/Or+kzo4uaBrPFYs+NqjhdZ3MONsOrl1mXxAV
-	Dwj/k1yXeXte7091lspDKCgublXsw+jOBMltcaZFLiUxA+xJ9cghEBkD6925xiAw
-	N01RVw4hEZlasO1juIDloEqq5SAL1aC0P2DqultRwCzLNHDq0UH+IKYpsxjfgT2L
-	BHGYYkD58l2QL0GpcEDWFPz0giEt7t4wAXs23Ej/tn6kfPB2Y7Ngp+Volbb1PHl4
-	bI0WpaxoBUjUO4+HrOIgYSZKTC9LERCexEGDfXVwjKm4JelbNEFSrSYxdjkaFRzM
-	HmuAjg==
-Received: from mail-qt1-f198.google.com (mail-qt1-f198.google.com [209.85.160.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g9uq1r600-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 26 Aug 2026 08:09:27 +0000 (GMT)
-Received: by mail-qt1-f198.google.com with SMTP id d75a77b69052e-52827090cc5so6925591cf.0
-        for <linux-arm-msm@vger.kernel.org>; Wed, 26 Aug 2026 01:09:27 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="Lr+vgW92"
+Received: by mail-yx1-f54.google.com with SMTP id 956f58d0204a3-66d1447e2b1so943226d50.0
+        for <linux-arm-msm@vger.kernel.org>; Wed, 26 Aug 2026 01:11:04 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1787731864; cv=none;
+        d=google.com; s=arc-20260327;
+        b=e8a7VEeoEMdBPI4HKqSRcD6+8t+0GMrHJt2XLcWumF666aZ7LhFdSeFkKVjxMuSMiT
+         feQ1X/sb7HJrF56RNCwIwte/NAEbCrNw0zkosU/sQnbBNWxzO8ldR/fVw7Qn6ZleXnhd
+         REH3JGYlXwVYdPAN3c36u431c+x6zC2sUKvV6/vyaBeWheeoF/j46aM6Yq/KdJiKP2yp
+         af0FvIFKvbXzr7794YJsYyrpd3+GofiekawhRDG0XpYc4xBvmoRp2HTH1n+MbKikQtLf
+         sBp4Znoykrpxk4am4EH/8qpyHX5caASHWLpMF9dvRwCr5MPl+NVSSOAuVXZlsog4E01+
+         dW5g==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:dkim-signature;
+        bh=5yyh1VvWI+vaETl8iuGoTVN8P021SyOBwMiKg7S/KSA=;
+        fh=jXsH4xXcIbWqAk4PMSARpIAR4z+UpkFFINpi0qDwRWw=;
+        b=YEBwZ9upeTtsfU2eKTSVaTBuVIGz/NypAVD1D4WdTw0PhJbm4aZTVwwf/4OzKEHUls
+         Voja1/RuGik86WdZJPeHTi1ZLDpmHV/MtUw65EXoXzJL1oDjPQxrGbIb35GxqgukOCYt
+         ORBV2963tkRpCvWlWeFj7aCrhFtCf6zcM2/fRdUizzwfNI6qSQaWN02STA/wI/klNJTy
+         XLvOCzP2/5XFjNdGImYR4wcget1LBZCegnKXzfzGOQ2m5jMJZQ82FtY8C426dK7D9KdU
+         YQ9PIRLjMyFznmSSLhHJlEVMG3rTxsjcLhTF7/5jieJ5APWd+xjnPsX+jiIQFj1GDc23
+         JdTQ==;
+        darn=vger.kernel.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1787731766; x=1788336566; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:mime-version:references
-         :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=OJXQT0c6OYFN2aHcq1lc8qaGVj0md3a70HDIO/2Fy+0=;
-        b=EesU6/CkhAShe5PRTIpIMtJ2EBGbKbyHgadTLRkeuz92p10et/KS2G4evShrQJ2ku3
-         N5ZbmM4jlP03LgKr6fQs2HGhqg06lvPdERZI0MQGVb3XxFpVpKPxg5S/WkG5AkSvRl9v
-         Pzq7BldSswNrmgs5QfVZoBCrR+HbdrbF6ApUvfr6UxyE83sW7QKd7DVNQwldCF5AwdL0
-         gFVdNbram0CmziAySg0BJ49YCDIWtWKRDZSiFwP46vPZoG32d+Smu0zDMR5NBQtCjsct
-         l2mYWM4saXam+j9LkjaTQIF8crimRdG26FrGnc39y5bxS257rJThH9yEIuuFFvz26QDg
-         hMFw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787731766; x=1788336566;
-        h=content-transfer-encoding:content-type:mime-version:references
-         :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+        d=gmail.com; s=20251104; t=1787731864; x=1788336664; darn=vger.kernel.org;
+        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+         :references:mime-version:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=OJXQT0c6OYFN2aHcq1lc8qaGVj0md3a70HDIO/2Fy+0=;
-        b=eXip06CepVXpigvtkV7heCfeTaLhm/p03ZxvrQReu+rB6N7WiUaPSUek91gcO6/ok8
-         4fanBBZ/bbQWuGPRh1nvHQiLROPr9RbUM/L5K7tVj8fAj6Qg3Aov9uCwHecqEF7YBn3a
-         pC7QsctWZSgII35ixKlUyR941udhyw+U2+/nWyO5GUGGiG5UFWRl5IygTYcuhx4sqnXN
-         EEtSHlkAQbiFpvcdjom8iP2+7WhSAZdkwhL+IZx18zabiCnY9Xeawu8XGcFizdkIC2hp
-         sU/7IyFy2swLuU06zLpgS8EKxRjwoscPT8NxF7cB4VZiX0VUSF2dGPNoRQ21LGKf3P63
-         Oa+g==
-X-Forwarded-Encrypted: i=1; AHgh+RpRKyM/Hhng3yAnNZIwArEf84eeItetT30x3Jqqb56ZMfSiaPqe3PL0R1DGuTu1ac5wS7mWeGFxlQKQJei+@vger.kernel.org
-X-Gm-Message-State: AFuF++kANFn/teyCLCHLe6bBi66WQB4xkxuu3V/dLBXciMe4OWt5+J+o
-	iUz7rOQg0XMLON68ZV8NtBs3wnEY9J3Q+xJ7HOTCc3R4gQFParqJywiLPSQYG2P4NOH9p0kYADz
-	0MkL/+9PbtT4KGHuhGdxp45VpYFI6gL1CbLiYnOtUMCF4v3YG9IlH0Zb7XrmM2Y/42tXknuFQ1b
-	qU
-X-Gm-Gg: AR+sD11w44eR3kIaeUeXANC4zjP2dsU5qy0HJgkgd8FlNRdKNR+EOy+oRynesaK2MQY
-	44P4wYUpp3Wu/xwsz9VQVfjMz7b5qScBz6AeiI6UM6/o05apRFUU81Q7bj1Y8I1kQLLp4BuwQ/u
-	vKHXW1Z1/Qmavy/RudElPCYOzKdLbhg3vY27zSVGoqwuUog5JaTbmL6t3EBiSVcWWZr+lhtDwgE
-	jMkJrok2WutfMHRZrX3dumRLgML38FvZaq3xxAS3NMGovkGF8XJwtJEIDFDLTld4Wt4seadYt1K
-	ORDHNPeGXi6NdB36U0DEswVpjU8li3L826k+Kc+1htASulkpS6S3DckbwROnwNCXGveI6bqN36q
-	R5JpRMDNy13DPnpYPEGfk2SKdRWgU
-X-Received: by 2002:a05:622a:cc:b0:516:82e2:7788 with SMTP id d75a77b69052e-52e2ec1e3c5mr116721581cf.1.1787731766319;
-        Wed, 26 Aug 2026 01:09:26 -0700 (PDT)
-X-Received: by 2002:a05:622a:cc:b0:516:82e2:7788 with SMTP id d75a77b69052e-52e2ec1e3c5mr116721221cf.1.1787731765865;
-        Wed, 26 Aug 2026 01:09:25 -0700 (PDT)
-Received: from brgl-qcom.home ([2a01:cb1d:dc:7e00:dfd4:a0a3:2df2:7724])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-499dc96bff9sm18773245e9.5.2026.08.26.01.09.23
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 26 Aug 2026 01:09:24 -0700 (PDT)
-From: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
-To: Bartosz Golaszewski <brgl@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
-        Shuah Khan <skhan@linuxfoundation.org>,
-        Marcel Holtmann <marcel@holtmann.org>,
-        Luiz Augusto von Dentz <luiz.dentz@gmail.com>,
-        Alessio Belle <alessio.belle@imgtec.com>,
-        Luigi Santivetti <luigi.santivetti@imgtec.com>,
-        Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
-        Maxime Ripard <mripard@kernel.org>,
-        Thomas Zimmermann <tzimmermann@suse.de>,
-        David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
-        Jeff Johnson <jjohnson@kernel.org>,
-        Manivannan Sadhasivam <mani@kernel.org>,
-        Bjorn Helgaas <bhelgaas@google.com>, Chen-Yu Tsai <wens@kernel.org>,
-        Loic Poulain <loic.poulain@oss.qualcomm.com>,
-        Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
-Cc: linux-pm@vger.kernel.org, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-        linux-bluetooth@vger.kernel.org, imagination@lists.freedesktop.org,
-        dri-devel@lists.freedesktop.org, linux-wireless@vger.kernel.org,
-        ath10k@lists.infradead.org, linux-pci@vger.kernel.org,
-        Jeff Johnson <jeff.johnson@oss.qualcomm.com>
-Subject: Re: [PATCH v3] power: sequencing: rename pwrseq_power_on/off() to pwrseq_enable/disable()
-Date: Wed, 26 Aug 2026 10:09:22 +0200
-Message-ID: <178773176015.26343.5524450275043262993.b4-ty@oss.qualcomm.com>
-X-Mailer: git-send-email 2.47.3
-In-Reply-To: <20260731-pwrseq-vote-rename-v3-1-44e60b8be053@oss.qualcomm.com>
-References: <20260731-pwrseq-vote-rename-v3-1-44e60b8be053@oss.qualcomm.com>
+        bh=5yyh1VvWI+vaETl8iuGoTVN8P021SyOBwMiKg7S/KSA=;
+        b=Lr+vgW92ye+oaEzoXzTK8hlpJBNdB1DBQSZTpTpbEMXzPkyUlCY9z0QWXr1rr1H+91
+         pyp+5UmX0PHS1vNABd/h5efHbnjiUutDJUOdPLZn4Qi7nUotv59zYK7ZrY9BQqHm/5Bb
+         pEL9gEFCvKHoRyCtn1KHWg2qVq/TUrty35g37F9MiWJaR1hEo0FnTMHcFIehu4kogCLD
+         zisWIwVVUoZ/paXB+Zqa2WN4fJrYJTtI4NwR8amTFSYLdv+S3/6v2nFgd7/qOOhUwCR1
+         Zi+B7r9f8nzmdEzQBUa80jYWEVVe6p65qFhRCUFKMKI9h2ubdMJml7gd6GG+zz3FxVf5
+         Qr0Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1787731864; x=1788336664;
+        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+         :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=5yyh1VvWI+vaETl8iuGoTVN8P021SyOBwMiKg7S/KSA=;
+        b=OQ9humsVgHcMAbg9Bqp/bWXYQL4+j/z+NsuXa2At/5KHmK6G3QswnPf3ax07b9xiqh
+         OYmLnmJ+3O4Z7NdD4OshI6TEBuRnKSmLMkK00XJ9+Pqd0aPpyJxI9Nw0Xno3UmH2ujAF
+         WL/nni/XVFJAzKiTnJwQA924luJUtoICXa4jt3iirNucRgvmnarKoX/R5WpYb3ZX7uLQ
+         iU45CrnelPmO7GN68zb8yYZ2JLquGEdYdXFcmBgSHy5CjUpjnZf+SjrCmpcIfAVVmtsi
+         J/faA2JO95aNTlXYpTal/DZlRRY3EWNFcN/XGTOogHOcn+3ZenJoPtfXr1sxMT1KbSct
+         x4Kg==
+X-Forwarded-Encrypted: i=1; AHgh+RoMNAyjTsnqASjWifs/at4uYzxO+U63ebeNJ6uHm9w0kPqkT76MYgnQCZMPEELaiN0B09nYbXs4sQ5GqqUK@vger.kernel.org
+X-Gm-Message-State: AFuF++kc5e6nmnDv4/i934wQ+fs9aCszARIydRMaIFtTgNJY69oC5sDS
+	dUdTplTL3AesJkfcHILYsmLzUJdcbCsBE/em/dnwraeYTUKObV5L/ebhWbjfF1PsjTGTxdpixhf
+	CqpBIYDLM/+DaR8fZLnlxxNXG3BsQbvs=
+X-Gm-Gg: AR+sD10Fn71J5cGZi1gvHugeKLrUDgF3yl1MCz+3SuOVvER+gSQHnC6Oil+MAqiN8Dh
+	LEAOneNY7DJkVt6I+1pTaRBHWG6d1mbHjYRQC9neUyhkjEfPlJamYlMxYTsrsRV5mEJpuuiaGqY
+	dc9wnzrNXsjrSTWks5HCfcfh5Qphs0CsODzF9YQH4ltTRmGInlcS8Lm8X/n862spDKaZ/080y+Y
+	ceyoijK0rRPw58d6bKlj237qPU4hilJ1lThzlB6jrA7FBcP/qFQr5Cq6YmWmDFjYuX8THDzRNmm
+	KbvDFZIowrL1v5E/xteCsT26IdVN7hu1o007CWBjJ/X3cb0=
+X-Received: by 2002:a05:690e:214f:b0:66a:b15e:bb93 with SMTP id
+ 956f58d0204a3-66d25197bf4mr1276551d50.13.1787731863957; Wed, 26 Aug 2026
+ 01:11:03 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-GUID: h7IE4M5aQRZOeGjpNahnHE46tXq5QKzg
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODI2MDA2NiBTYWx0ZWRfX2jW6+4W0aadF
- ybk9BJZNGqobjt0ATdrRV2oIbMmxZpzwNSBh/lDs0uQrgikgY5sS5nqhh5xPOb6amEeXn5HeDZI
- C06+G2c5vxOz5OpgjZOcUa1+Zs52WsP5Ct0qajy2Mbk69JLLNbtJHvh6JdbrLZreKTVIX/VgGec
- UpCMijeSSk7rjrrhKM/sXlj0qBsg+u66DE/K5IHpCSbBhxDsutiO9F7aL4hz69MKpHU6V1Vfbfo
- ZAn8pJlqy95PQdzopszV22FacH6/0tYDO4BuCvtNgf2my5MgPJhtC5rhJUFPbfPvbY1PlGKsxdd
- CkDWyYx0SYuoPBzC4sUR1XjD1w8ZM+w41qgms5iUHXWQnItpHtspnINAaXGcs0GuzqMI8mXk/fq
- ZCMiuRpagiMkYgea4RhBQw0NHqtiZIwUkOlmURBHDpFAsF8sMRPNoo9K73N6vlp+YlasRtqvykI
- ZnvcSA+cgekjxfESuDA==
-X-Authority-Analysis: v=2.4 cv=Y77IdBeN c=1 sm=1 tr=0 ts=6a8e9f37 cx=c_pps
- a=mPf7EqFMSY9/WdsSgAYMbA==:117 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
- a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22 a=VwQbUJbxAAAA:8
- a=EUspDBNiAAAA:8 a=_EivlD1RsPJwtJxW0JgA:9 a=QEXdDO2ut3YA:10 a=ZXulRonScM0A:10
- a=dawVfQjAaf238kedN5IG:22
-X-Proofpoint-ORIG-GUID: h7IE4M5aQRZOeGjpNahnHE46tXq5QKzg
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODI2MDA2NiBTYWx0ZWRfX8QlmMN9RFBL5
- 5sRqurt+gY/GA+2i1RnKV1ZXAGChlp96k0Y53UyrtAsg55cy5FeTm++rLxgtGYUowD8oGHbBzbi
- k54PNRlbu/kCeZOVN0+A69csE+04+xE=
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-08-26_02,2026-08-24_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 suspectscore=0 bulkscore=0 priorityscore=1501 clxscore=1015
- phishscore=0 spamscore=0 malwarescore=0 adultscore=0 lowpriorityscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608260066
+References: <20260808131624.2854412-1-lgs201920130244@gmail.com>
+ <e5964398-cc23-440c-8c69-01353b5a5ecc@oss.qualcomm.com> <d85c9ffc-d9a4-4f33-bd63-5cb7a505a840@kernel.org>
+In-Reply-To: <d85c9ffc-d9a4-4f33-bd63-5cb7a505a840@kernel.org>
+From: Guangshuo Li <lgs201920130244@gmail.com>
+Date: Wed, 26 Aug 2026 16:10:51 +0800
+X-Gm-Features: AcwNN1X9rQBObyVrmy9DFrGufRcw2p9RUUYyy3KtMY7rqaV5_V0d3WC11PgO3Yo
+Message-ID: <CANUHTR8sA2xbXsex1VQu2acL2kZyCHAK6xQk1EKA_Hxv4n12rQ@mail.gmail.com>
+Subject: Re: [PATCH] drm/msm/adreno: fix autosuspend cleanup during teardown
+To: Krzysztof Kozlowski <krzk@kernel.org>
+Cc: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, 
+	Rob Clark <robin.clark@oss.qualcomm.com>, Sean Paul <sean@poorly.run>, 
+	Konrad Dybcio <konradybcio@kernel.org>, Akhil P Oommen <akhilpo@oss.qualcomm.com>, 
+	Dmitry Baryshkov <lumag@kernel.org>, Abhinav Kumar <abhinav.kumar@linux.dev>, 
+	Jessica Zhang <jesszhan0024@gmail.com>, Marijn Suijten <marijn.suijten@somainline.org>, 
+	David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, linux-arm-msm@vger.kernel.org, 
+	dri-devel@lists.freedesktop.org, freedreno@lists.freedesktop.org, 
+	linux-kernel@vger.kernel.org, stable@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
 
+Hi Krzysztof,
 
-On Fri, 31 Jul 2026 15:42:18 +0200, Bartosz Golaszewski wrote:
-> The way power sequencing works means that a call to pwrseq_power_on()
-> does not necessarily result in the pwrseq target being powered-on at
-> that time: it may have already been powered on before. Similarly: a call
-> to pwrseq_power_off() does not have to result in an actual powering off
-> of resources: there may still be other users that requested a power-on
-> before.
-> 
-> [...]
+On Mon, 24 Aug 2026 at 14:17, Krzysztof Kozlowski <krzk@kernel.org> wrote:
+>
+> On 18/08/2026 12:40, Konrad Dybcio wrote:
+> > On 8/8/26 3:16 PM, Guangshuo Li wrote:
+> >> adreno_gpu_init() calls pm_runtime_use_autosuspend(), but
+> >> adreno_gpu_cleanup() does not call the matching
+> >> pm_runtime_dont_use_autosuspend() during teardown.
+> >>
+> >> If the autosuspend delay is set to a negative value while autosuspend
+> >> is enabled, the runtime PM core increments usage_count to prevent
+> >> runtime suspend. Without calling pm_runtime_dont_use_autosuspend()
+> >> during teardown, this reference is not dropped and usage_count remains
+> >> unbalanced.
+> >>
+> >> The documentation for pm_runtime_use_autosuspend() also notes that it
+> >> is important to undo it with pm_runtime_dont_use_autosuspend() at
+> >> driver exit time, unless runtime PM was initially enabled with
+> >> devm_pm_runtime_enable().
+> >>
+> >> Add the missing pm_runtime_dont_use_autosuspend() call to
+> >> adreno_gpu_cleanup().
+> >>
+> >> This issue was found by manual code inspection.
+> >>
+> >> Fixes: eeb754746b14 ("drm/msm/gpu: use pm-runtime")
+> >> Cc: stable@vger.kernel.org
+> >> Signed-off-by: Guangshuo Li <lgs201920130244@gmail.com>
+> >> ---
+> >
+> > I think we can use devm_pm_runtime_enable() instead, which will take
+> > care of cleaning up both the autosuspend and runpm halves
+> >
+>
+> Author here is unresponsive, he was told a few times to send corrections
+> for his vast amount of unthreaded patches and there is zero reaction.
+>
+> Best regards,
+> Krzysztof
 
-Applied, thanks!
+Sorry about that. I should have replied to the earlier review comments
+explicitly, and I also should not have sent so many separate patches.
 
-[1/1] power: sequencing: rename pwrseq_power_on/off() to pwrseq_enable/disable()
-      https://git.kernel.org/brgl/c/d51fc9d4cd6eb18ac82913d83ecf7bd8c85f71ee
+I will group future patches by subsystem and make sure to respond
+clearly to review feedback before resending.
+
+Thanks for pointing this out.
 
 Best regards,
--- 
-Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+Guangshuo
