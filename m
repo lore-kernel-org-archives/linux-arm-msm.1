@@ -1,324 +1,192 @@
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 45C7F3E8C74
-	for <linux-arm-msm@vger.kernel.org>; Wed, 26 Aug 2026 13:14:32 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 44B693B19B6
+	for <linux-arm-msm@vger.kernel.org>; Wed, 26 Aug 2026 13:17:56 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787750073; cv=none; b=tb2dkOq3iYK/p+OCoQiTmq2yxD6Qq1xgUzqdnkrGg9GcYDVZhSLk/Nwcj7dg3SqHOMcnbnjfuDG1aadkq0GeXoXSgInmOC9LJpldHc3eKqYZaoDl3h8I7HvEhecTkBfRSCcffdezn7zyxd3m8nllEVHbgxUEXhG0/+Z1PIHL92E=
+	t=1787750277; cv=none; b=e2PpHKVBLRpRdBahGPGFXOMJlIFApyxL02UgU0/U6fHyil42hmgYAZmYURvcjKRSfaJND43S2VPxnt+Ct0GZnvfPt+ULPXkWFlOkjQf54QJulsGHYstV2c+K3lTXl1mlZq+0/gcpK1op7ifqBtO2gtYD/yfJ0AwIGl7rcnri67E=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787750073; c=relaxed/simple;
-	bh=TONygGSLK9eRUQeUSACVoCsHZVIfM7GHGYxKbUihzRg=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=ELF0nfhpQAN3cdB6s2CRsqfwtAG2T23DLDM4PSszvyFIhGlrgKou/8txqT2mUKdljwcwQJXogBCFYIItrCy0vDaSJl0Gx1jEbTx2ratOYevF9I6DocWrFXqi9KxEzIuF/5NsKct5WgM2gwG7oHsyCku+qmwLUdxb3vV1/X26H4U=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=mGyuCiGG; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=h/BFi3c2; arc=none smtp.client-ip=205.220.168.131
+	s=arc-20240116; t=1787750277; c=relaxed/simple;
+	bh=BYDsTpoHZztHpVH/KB9MIt4S85CTFk7lYHBkXkgV+nA=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=ht8QKVlpxu3EvzNaQt5G3sx9xyunwkV19D6u2pT6uvYrtQU9KoGRptY5vMggu+jbjy+8Re1Z5Ky05hDediHuVFOjqIFvmTchIpkJuC3YLZhaBt9B1cV+VdEItXAqFaiQ00PyaJHlTRuXfu2zSY3mf0Rt7rdNiP/CqsyERVu9K+U=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=gFBmXjrd; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=DTlSjaeV; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="mGyuCiGG";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="h/BFi3c2"
-Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67QCCIYX374901
-	for <linux-arm-msm@vger.kernel.org>; Wed, 26 Aug 2026 13:14:31 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="gFBmXjrd";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="DTlSjaeV"
+Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67QDHfe31617729
+	for <linux-arm-msm@vger.kernel.org>; Wed, 26 Aug 2026 13:17:55 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-type:date:from:in-reply-to:message-id:mime-version
-	:references:subject:to; s=qcppdkim1; bh=9b65bGNzy50Pq14wclGP/2PS
-	9e7oVjr2Cl6312ucGxg=; b=mGyuCiGG+vlg2M5GqPw79eoVKBFrxAOoWmHjz32h
-	BLhsTETjNIsn3j3JMf8GZpYSM3sonU4I5sXSjAQ/XYsZJlooQUA0zos6VpR3cUAR
-	y674nCmmb/Nl6SXgvq4mmtaHTgkRMtb7Fgiy4NqjQWqzf2m7Xr7fBS0vRA9MF6L9
-	CswdFbefabXFGRxMnvLmFbytZyVVKdAE/fv0koUh+g5Gf79LffkEbBofjYgLTS/W
-	ttkSYmx/TY5I/BzOavnXys5p5w0uhKMc9pnE6SfSzxzK5BHj3E4EA6puRD/72iUl
-	zy7EaNLIZcVRS91JKHH8H9XUBCFICAwhv9rO0bsrukkFAg==
-Received: from mail-pj1-f71.google.com (mail-pj1-f71.google.com [209.85.216.71])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g9smx9y1f-1
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	DELOI9rOA6Bm04F7WLidIklLxMdtsGlI2iiw3Tgfc7I=; b=gFBmXjrd0bXAHG1r
+	R8/tATY6zngKD0xcvCkn3tiCgsi6wIGAwzpH0mjUV3GoGyhMdGGKOmfZ6XtxI9hK
+	kObU0MuJ4yFt0gUW1SGU9g1TMyxNIQ7PNBb8ZolH2tcO1LNatYFTNLJf3iOMJQNN
+	fzhmQVhxLfgWCsbBH+6trMDyDqDk68AD4aPAey98vgRG7oLGVOelxmRnwZtoK4tT
+	lmbrnuq4hasJd8uvcIcZvgwAGuQ1jsAL6/dNxrReTNxeFyQ9VmP6SUmVPr9vl9dn
+	2U0y+03fmfLeJl4D5UFfo5+Yx293EF+8KPxUQfj5iTLYOkzTJSFJtu0zNtzNtIKP
+	SqL6tA==
+Received: from mail-vs1-f72.google.com (mail-vs1-f72.google.com [209.85.217.72])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ga0wbr01q-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 26 Aug 2026 13:14:31 +0000 (GMT)
-Received: by mail-pj1-f71.google.com with SMTP id 98e67ed59e1d1-38ea32e57e2so2296262a91.1
-        for <linux-arm-msm@vger.kernel.org>; Wed, 26 Aug 2026 06:14:31 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Wed, 26 Aug 2026 13:17:55 +0000 (GMT)
+Received: by mail-vs1-f72.google.com with SMTP id ada2fe7eead31-7530aaa7212so39020137.3
+        for <linux-arm-msm@vger.kernel.org>; Wed, 26 Aug 2026 06:17:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1787750070; x=1788354870; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=9b65bGNzy50Pq14wclGP/2PS9e7oVjr2Cl6312ucGxg=;
-        b=h/BFi3c2wyG6KEiXNiMMSwnlL3bYtpFkzo+5ZxfuJg6cEemWwwWDV5EnnnHEPGtQVA
-         vzlC91kRwN9NefUUw2iKbtJ6AenYwTKNzwGDCIwnCDL4g1ojJJTX/3E8ELxxiuhleYD/
-         5praHztxTq6H/qdndMAsvoL1mp+zJW06sOlz44Z+qnR628xNyP9iSgns5ztWSNrhq0fV
-         ZSUSuympFn/U/2bQWNxStqgHmuKVj7iWgQCdBj5SHTCQPQI8b1BgVDj9teCEmMD70OtJ
-         h2uU85wOovNs4jPRM3MhO742rWek2oCE2C1VOponnOZowxLy+yWNQErEBmsgJMErkBFT
-         suDQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787750070; x=1788354870;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+        d=oss.qualcomm.com; s=google; t=1787750274; x=1788355074; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=9b65bGNzy50Pq14wclGP/2PS9e7oVjr2Cl6312ucGxg=;
-        b=DNj+9YRQNglV2ZZwOtFEYm6SRAnRwOZXUNRnzyNhWdlVoDxOyYYkMXcXOpyz1EXQx3
-         +y0h/boKXe7mvrGhn/i9dYRAd/4KN3tXCaztj2T+PIVEb/SQg8t5IFpk0EmCii+Vp3DC
-         zHU8/y5H63Q3kqiHop/Wxvp8D0MaWPrqj4B0PHtQDAq26iVNKtHz/aSyGysFrT/ShDxg
-         i/KpglZH+AvzePyYw3sKphhb4brGPbc/daCbkmoFqQgR9ybF5f7+7Sg1/PgN9P8aLBgy
-         Ggrr+FDPSHyklfuOUt82OxSTBphuYsC7XWdMKs/cUvkxKx1LWDXqr2sGW/m4DbOm9m55
-         LbHQ==
-X-Forwarded-Encrypted: i=1; AHgh+Rpw+K7YWyI6VN6Hktl8vHlYN/Y79XS+C0ULQRa2beK0IKdcg6BszhA7qb/ioDwhdtpxAc/MzNzAlS2fSQoE@vger.kernel.org
-X-Gm-Message-State: AFuF++n0p91YtzmbRkRBh3xlve2b2lWbLklf8PiR15aFJGvIXiKilySm
-	icG5IONBSaWsJiRUdgNzcVzJ9CVSAw9iqQUGBaKgWGoVH6weTom/J4VyE8iIZvc1bbkPiTHtKu/
-	5MjFyGEiSJ6cuyjwTIEyW837tmGxRKAAoG/216oIDDCenTJmexzTZzJVqxoF4MU7cHPkS
-X-Gm-Gg: AR+sD13tN74RrZ5QtT49qrYJQTaV9H5Mr/QlXQ/sCD7WH660u6Gz8T86nVPvMDe+ESS
-	3zd28d5IvEBngu5HyPWVQKDnZ56VxN0RM77F6iYvavENWYeJTxbALI3T5EnbuD+8/AXjBT7mUNU
-	wDIiC1fQBdBUs0v8XcgP27qAdiibzMpH/0Jny5xb9zlJFEcB0AKhhoWn1qlywTA1pyztHvgCexn
-	YwFy4h2MSkHHASSn5kgLsGxOLtFZKgJJGdV+9ucumPVKzpUVa6tD8IOOh+obMrbT4pjznaVcWp5
-	pLdH2PKiofEM+8fFzNf1CT2WMKm2+EQPbHixJQZsy91NY2qvpTGWauyaa51xBmrb5wUkTv/WotS
-	w4i3NtxRwvQxTgitQJxj13bmSeoVyz356rngqqmLpBkQ=
-X-Received: by 2002:a17:90b:4c4a:b0:38e:ad9d:1161 with SMTP id 98e67ed59e1d1-3966d00a01amr13595728a91.0.1787750070275;
-        Wed, 26 Aug 2026 06:14:30 -0700 (PDT)
-X-Received: by 2002:a17:90b:4c4a:b0:38e:ad9d:1161 with SMTP id 98e67ed59e1d1-3966d00a01amr13595579a91.0.1787750069721;
-        Wed, 26 Aug 2026 06:14:29 -0700 (PDT)
-Received: from QCOM-aGQu4IUr3Y (i-global052.qualcomm.com. [199.106.103.52])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-39645b07394sm8149417a91.4.2026.08.26.06.14.24
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 26 Aug 2026 06:14:29 -0700 (PDT)
-Date: Wed, 26 Aug 2026 21:14:22 +0800
-From: Shawn Guo <shengchao.guo@oss.qualcomm.com>
-To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-Cc: Ulf Hansson <ulfh@kernel.org>, Bjorn Andersson <andersson@kernel.org>,
-        Mathieu Poirier <mathieu.poirier@linaro.org>,
-        Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>,
-        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
-        Abel Vesa <abel.vesa@oss.qualcomm.com>,
-        Bartosz Golaszewski <brgl@kernel.org>,
-        Anurag Pateriya <anurag.pateriya@oss.qualcomm.com>,
-        linux-arm-msm@vger.kernel.org, linux-remoteproc@vger.kernel.org,
-        devicetree@vger.kernel.org, linux-pm@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-Subject: Re: [PATCH 2/4] pmdomain: qcom: rpmhpd: Add NMXC power domain for
- Nord
-Message-ID: <ao7mrrW_ob77EAIp@QCOM-aGQu4IUr3Y>
-References: <20260826102746.633076-1-shengchao.guo@oss.qualcomm.com>
- <20260826102746.633076-3-shengchao.guo@oss.qualcomm.com>
- <6b2f4411-9c38-4b82-b605-6b9a047ab973@oss.qualcomm.com>
+        bh=DELOI9rOA6Bm04F7WLidIklLxMdtsGlI2iiw3Tgfc7I=;
+        b=DTlSjaeVtToDTGsjIQzVMRta77mFCNInpnfh9JtJPg0e57ujaiu4CjTORBrW3LMDtI
+         BdquZSDC8WbYn5jyFQOHeYVLf7QXqhD1N3PFP6pFdrzUbNDdMz+xlIWdn35+llj4aKnG
+         9QixYm67lhz5Oy3cqcehelix1LXjYfS/iCcjVTu7BSiYBSRO7TKQFMxgk2QZ/tUZBtoa
+         qIamOZjD23sDdPSM/aiAn3Lyn2yX9igLM+lImT6Mls0VRtvrM+QqpFVZeoY7+2Gfub/N
+         UBdZ0hQzUgz3ZBBzF7W6zYNgV5a7/+fMpQjBDRaPeFzDrvH0Bo40ZDBsq6aL5Wvv49+h
+         /r+w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1787750274; x=1788355074;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=DELOI9rOA6Bm04F7WLidIklLxMdtsGlI2iiw3Tgfc7I=;
+        b=K+O+nTcpTgCsyzfFjoDU+IOqHvSx+f8HeZfwct3i8LvZwfrKrzmrh/BLw2PTDqUc/i
+         ev7VVuJwI+iZkKlBbJVgPTK7hEbce4nZoVhttQwAp/0A9igzQsRtMx+nY2UzhXxFrnme
+         9eogl/tJj+7Fb8l75SQp1dxth3FMwbfaaq5AQjgVa3BPOPWd147XKahr0xMrhCmHQowu
+         kp9fikn5cZG00ze6xeHWtGuctLwup/T2Lb/0GwO1xnZbIrtH31iDJggjBHAMa57WYcUu
+         4hQsqQY1rBKFbH+4sxID+5jZaRwL4QqyN37v2jQnu1wU9zTPow9OiWFaTHg7tC6WCwL+
+         dzHw==
+X-Forwarded-Encrypted: i=1; AHgh+Rqqf/hDIYMlZwEiF5lPEnDKqLSPIl6k1SGK7E/X5gHEcAxcW52SXTJUwaaclCNPQv1m/6j1COkeUvPaF6ur@vger.kernel.org
+X-Gm-Message-State: AFuF++laJUPVQuPPSgAvd+7zoRAcV/OmDjTqIZFlmo7VgIlC/AluLbjW
+	sW7ahYw3DdfarPvOLopXKv1LZrmHmEgHP+bNRUoEVOGWSMBa6DKhcRDsUYa97YyImoGu/ZaDs7I
+	3O4KcDJHGoikx62gpfl5vyEyav5qwv/lVSy8+JT/wTtokjpnPUPs2xrvsOtMzo1CtMbP8
+X-Gm-Gg: AR+sD10ejTgHVUfdf9AvHM0DYnWhqU21IleEfcm894MZXo/gDQhzH9+c4dCePIdJcmY
+	GydOIUDmNX6hZCxlNPczjt7SqGtzjoAX6okimdJ8cZb9Jh+oIZ16O4oGC6oERAfgLDZFff1Lrjr
+	ZPIFbimjWFqccy4qHv89JrohJhzBy+PiOh8lU03Xgb5IKETxW6mpmiowXei5hyDSXUtA445EBFB
+	x4mM5MgZWQsz5DjbC8ddYuOD7682g+7Ofc9OK56cvRz7Qq0qdRuoEU+9+DcVzz5pHqQaCfEWUPJ
+	1oC6TOVYDv+3c+Skear+exo5Ab0bDxlH0dhEnX7GF2nJiGZol2UCDLBenhDK2wPM5oKc9WpWYzf
+	ZLeLhKWsMg85F3TqyNmGq4Lrk
+X-Received: by 2002:a05:6102:3166:b0:783:73ba:7df6 with SMTP id ada2fe7eead31-78373ba9fd5mr278642137.1.1787750274189;
+        Wed, 26 Aug 2026 06:17:54 -0700 (PDT)
+X-Received: by 2002:a05:6102:3166:b0:783:73ba:7df6 with SMTP id ada2fe7eead31-78373ba9fd5mr278603137.1.1787750272973;
+        Wed, 26 Aug 2026 06:17:52 -0700 (PDT)
+Received: from [192.168.120.193] ([178.235.128.140])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c250a9b235csm376838866b.44.2026.08.26.06.17.49
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 26 Aug 2026 06:17:51 -0700 (PDT)
+Message-ID: <0d493aed-acb5-4905-83a2-6dbd6349cb49@oss.qualcomm.com>
+Date: Wed, 26 Aug 2026 15:17:48 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <6b2f4411-9c38-4b82-b605-6b9a047ab973@oss.qualcomm.com>
-X-Authority-Analysis: v=2.4 cv=O/oJeh9W c=1 sm=1 tr=0 ts=6a8ee6b7 cx=c_pps
- a=UNFcQwm+pnOIJct1K4W+Mw==:117 a=b9+bayejhc3NMeqCNyeLQQ==:17
- a=kj9zAlcOel0A:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
- a=EUspDBNiAAAA:8 a=3Qi1WCIwDasdfMXOsCAA:9 a=CjuIK1q_8ugA:10
- a=uKXjsCUrEbL0IQVhDsJ9:22
-X-Proofpoint-GUID: _jQRZ27QBaMxNuNmkR4tgRS7mGM0Gzma
-X-Proofpoint-ORIG-GUID: _jQRZ27QBaMxNuNmkR4tgRS7mGM0Gzma
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODI2MDEwOSBTYWx0ZWRfX3dFVilM1Ypsz
- KA6+HMKUGoaQ28C6ZE6MPgW48uw72v3Xu55NxVkJ21eiv3aCB/NNDzRAa75YpvsetT2YK4gYmZG
- gPNEACyec5yXLLm9D6VYSw/YD8DpLT3pe51AD3OROIYZwzL1Zk+m3fBLbIvAWlPWjg9FdY7VjBI
- 2bqIhxHPrz0Xbclx6ipFybijOUUSALIG04v5wcy8kvz/q9JRVGjc9kv4eGB2AMnNfD893Cm4fSy
- 1+CC6S1RYHZgtby0HCiXsiQoT2SqW/lmYflmHTKCaww95PnqM+J8LyGA/Ac+F2t2Y70tH5nzPVI
- ZfT/jcLfwXCShvL7jJvvKzZe2lg5826bdGwhsXWMHaqA14hqVNN/xcu2wOzJnKg0oh08tWUCF8K
- 7N1TlC3cMIEDn002Wfpk2J/DqrvmQGvqx/QfTpQQR69PU2KX2LlrmazfAjKhjMrXc3SIS77hKkR
- vR0S38rqAh/QM5vYpbw==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODI2MDEwOSBTYWx0ZWRfX7u5XFH/fM6Jw
- rK7W0bLlWNaj+FAACZ+qkhfPZX/qp3JdfxBJd+CUcsyuE71ouKmCoJnkgWz3ZI46qQcANKLwIDj
- KkyYEjYE3hK7sylcusxWFU4OFooKG+4=
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 2/4] pmdomain: qcom: rpmhpd: Add NMXC power domain for
+ Nord
+To: Shawn Guo <shengchao.guo@oss.qualcomm.com>
+Cc: Ulf Hansson <ulfh@kernel.org>, Bjorn Andersson <andersson@kernel.org>,
+        Mathieu Poirier <mathieu.poirier@linaro.org>,
+        Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley
+ <conor+dt@kernel.org>,
+        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+        Abel Vesa <abel.vesa@oss.qualcomm.com>,
+        Bartosz Golaszewski
+ <brgl@kernel.org>,
+        Anurag Pateriya <anurag.pateriya@oss.qualcomm.com>,
+        linux-arm-msm@vger.kernel.org, linux-remoteproc@vger.kernel.org,
+        devicetree@vger.kernel.org, linux-pm@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+References: <20260826102746.633076-1-shengchao.guo@oss.qualcomm.com>
+ <20260826102746.633076-3-shengchao.guo@oss.qualcomm.com>
+ <6b2f4411-9c38-4b82-b605-6b9a047ab973@oss.qualcomm.com>
+ <ao7mrrW_ob77EAIp@QCOM-aGQu4IUr3Y>
+Content-Language: en-US
+From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+In-Reply-To: <ao7mrrW_ob77EAIp@QCOM-aGQu4IUr3Y>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-ORIG-GUID: KX1sSwQUtplWCUINmFs4d9B6sEimjnvS
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODI2MDExMCBTYWx0ZWRfX3cLLbLOQcEAD
+ ZaWZA+g7FQaSqapBPEfOPAoHZABeblmKxViTgb+7M+xSA14W5E5EMPI0Sxrrm8g4EUeWfN8nLWQ
+ 40EHON5Mxh9weem9oEDi/qqOVvN8abM=
+X-Proofpoint-GUID: KX1sSwQUtplWCUINmFs4d9B6sEimjnvS
+X-Authority-Analysis: v=2.4 cv=SoCgLvO0 c=1 sm=1 tr=0 ts=6a8ee783 cx=c_pps
+ a=DUEm7b3gzWu7BqY5nP7+9g==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
+ a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22
+ a=EUspDBNiAAAA:8 a=P5qJYf1CprfF32mA9rkA:9 a=QEXdDO2ut3YA:10
+ a=-aSRE8QhW-JAV6biHavz:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODI2MDExMCBTYWx0ZWRfX28RVFmWFhdI2
+ BiOYLUJJSVCfICyYJhka1alKdNDvNVAV0hCi8kxuRZJuugLeThjFDRHXKGDYFpXQkPRTci+miqi
+ LlAepLHIzrtVkZJquYFykW8nSaxjFBUkDkViAj5s00eK/PAg4NcLloGDYmgF36j5p8F2hQdfYEU
+ L6igbRSkMc7I6j3bFCy2PH2Ht3qkGqtFt60JBW929XL8bj+sJVpYhsfIw6nypFEoopzdJRGaoUf
+ 1y3Tz9x0Gp9s+znLMf+7xIDA/S+9FKj+au9ewxtkDmLYqjlpVomN1Svr1Aeo4c6CejcK/y5tt7y
+ pcC3PQJN8DBnwvVMsM/X/5hB+NYpQ+AsK+x36C3W3cGFAWRQrHg8XIoEAFlBfuXkCwM15XKq6sz
+ /tn8HyclwaGSesc4OlLAPqT5vxI7Te2YspRHe7hpCO9iqYr8678VP3AbWPm8daKltlu3Y18LDVI
+ fIVm70n/95rlx3GJ6mA==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-08-26_03,2026-08-26_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0 suspectscore=0 spamscore=0 adultscore=0 impostorscore=0
- lowpriorityscore=0 clxscore=1015 bulkscore=0 priorityscore=1501 phishscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608260109
+ phishscore=0 impostorscore=0 malwarescore=0 bulkscore=0 spamscore=0
+ clxscore=1015 lowpriorityscore=0 priorityscore=1501 suspectscore=0
+ adultscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2608260110
 
-On Wed, Aug 26, 2026 at 03:04:33PM +0200, Konrad Dybcio wrote:
-> On 8/26/26 12:27 PM, Shawn Guo wrote:
-> > From: Anurag Pateriya <anurag.pateriya@oss.qualcomm.com>
-> > 
-> > Add the nmxc.lvl RPMh resource and register it in the Nord power domain
-> > table. Nord supplies the NSP memory rail from this dedicated resource
-> > rather than from the shared MX rail, so consumers need it exposed as its
-> > own power domain.
-> > 
-> > Signed-off-by: Anurag Pateriya <anurag.pateriya@oss.qualcomm.com>
-> > Signed-off-by: Shawn Guo <shengchao.guo@oss.qualcomm.com>
-> > ---
-> >  drivers/pmdomain/qcom/rpmhpd.c | 6 ++++++
-> >  1 file changed, 6 insertions(+)
-> > 
-> > diff --git a/drivers/pmdomain/qcom/rpmhpd.c b/drivers/pmdomain/qcom/rpmhpd.c
-> > index 96e4bd2f5a14..717c44d1c39a 100644
-> > --- a/drivers/pmdomain/qcom/rpmhpd.c
-> > +++ b/drivers/pmdomain/qcom/rpmhpd.c
-> > @@ -198,6 +198,11 @@ static struct rpmhpd mxc_ao = {
-> >  	.res_name = "mxc.lvl",
-> >  };
-> >  
-> > +static struct rpmhpd nmxc = {
-> > +	.pd = { .name = "nmxc", },
-> > +	.res_name = "nmxc.lvl",
+On 8/26/26 3:14 PM, Shawn Guo wrote:
+> On Wed, Aug 26, 2026 at 03:04:33PM +0200, Konrad Dybcio wrote:
+>> On 8/26/26 12:27 PM, Shawn Guo wrote:
+>>> From: Anurag Pateriya <anurag.pateriya@oss.qualcomm.com>
+>>>
+>>> Add the nmxc.lvl RPMh resource and register it in the Nord power domain
+>>> table. Nord supplies the NSP memory rail from this dedicated resource
+>>> rather than from the shared MX rail, so consumers need it exposed as its
+>>> own power domain.
+>>>
+>>> Signed-off-by: Anurag Pateriya <anurag.pateriya@oss.qualcomm.com>
+>>> Signed-off-by: Shawn Guo <shengchao.guo@oss.qualcomm.com>
+>>> ---
+>>>  drivers/pmdomain/qcom/rpmhpd.c | 6 ++++++
+>>>  1 file changed, 6 insertions(+)
+>>>
+>>> diff --git a/drivers/pmdomain/qcom/rpmhpd.c b/drivers/pmdomain/qcom/rpmhpd.c
+>>> index 96e4bd2f5a14..717c44d1c39a 100644
+>>> --- a/drivers/pmdomain/qcom/rpmhpd.c
+>>> +++ b/drivers/pmdomain/qcom/rpmhpd.c
+>>> @@ -198,6 +198,11 @@ static struct rpmhpd mxc_ao = {
+>>>  	.res_name = "mxc.lvl",
+>>>  };
+>>>  
+>>> +static struct rpmhpd nmxc = {
+>>> +	.pd = { .name = "nmxc", },
+>>> +	.res_name = "nmxc.lvl",
+>>
+>> The commandDB sources suggest this shouls be nspmxc.lvl instead..
+>>
+>> Can you dump /sys/kernel/debug/cmd-db?
 > 
-> The commandDB sources suggest this shouls be nspmxc.lvl instead..
-> 
-> Can you dump /sys/kernel/debug/cmd-db?
+> root@qcom-armv8a:~# cat /sys/kernel/debug/cmd-db
 
-root@qcom-armv8a:~# cat /sys/kernel/debug/cmd-db
-Command DB DUMP
-Slave ARC (v16.0)
--------------------------
-0x30000: cx.lvl [00 00 10 00 10 00 c0 00 00 01 80 01 a0 01 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]
-0x30004: cx.tmr
-0x30010: mx.lvl [00 00 10 00 c0 00 00 01 80 01 a0 01 b0 01 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]
-0x30014: mx.tmr
-0x30020: ebi.lvl [00 00 10 00 c0 00 00 01 80 01 a0 01 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]
-0x30024: ebi.tmr
-0x30030: gfx.lvl [00 00 01 00 c0 00 00 01 80 01 a0 01 b0 01 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]
-0x30034: gfx.tmr
-0x30040: ddr.lvl [00 00 20 00 80 00 a0 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]
-0x30044: ddr.tmr
-0x30050: mmcx.lvl [00 00 01 00 c0 00 00 01 80 01 a0 01 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]
-0x30054: mmcx.tmr
-0x30060: nsp0.lvl [00 00 01 00 c0 00 00 01 80 01 a0 01 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]
-0x30064: nsp0.tmr
-0x30070: mxc.lvl [00 00 10 00 c0 00 00 01 80 01 a0 01 b0 01 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]
-0x30074: mxc.tmr
-0x30080: nsp1.lvl [00 00 01 00 c0 00 00 01 80 01 a0 01 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]
-0x30084: nsp1.tmr
-0x30090: nsp2.lvl [00 00 01 00 c0 00 00 01 80 01 a0 01 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]
-0x30094: nsp2.tmr
-0x300a0: nsp3.lvl [00 00 01 00 c0 00 00 01 80 01 a0 01 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]
-0x300a4: nsp3.tmr
-0x300b0: nmxc.lvl [00 00 10 00 c0 00 00 01 80 01 a0 01 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]
-0x300b4: nmxc.tmr
-0x300c0: gic.lvl [00 00 20 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]
-0x300c4: gic.tmr
-0x300d0: ds.lvl [00 00 20 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]
-0x300d4: ds.tmr
-0x300e0: gfx1.lvl [00 00 01 00 c0 00 00 01 80 01 a0 01 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]
-0x300e4: gfx1.tmr
-0x300f0: xo.lvl [00 00 20 00 50 00 80 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]
-0x300f4: xo.tmr
-Slave ARC (v16.0)
--------------------------
-0x00000: cx.mol [80 00]
-0x00000: mx.mol [c0 00]
-0x00000: ebi.mol [c0 00]
-0x00000: gfx.mol [80 00]
-0x00000: ddr.mol [a0 00]
-0x00000: mmcx.mol [80 00]
-0x00000: nsp0.mol [80 00]
-0x00000: mxc.mol [c0 00]
-0x00000: nsp1.mol [80 00]
-0x00000: nsp2.mol [80 00]
-0x00000: nsp3.mol [80 00]
-0x00000: nmxc.mol [c0 00]
-0x00000: gic.mol [20 00]
-0x00000: ds.mol [20 00]
-0x00000: gfx1.mol [80 00]
-0x00000: xo.mol [80 00]
-Slave BCM (v16.0)
--------------------------
-0x50000: MC0 [40 d0 1b 01 40 00 00 00]
-0x50094: MC1 [40 d0 1b 01 40 00 00 00]
-0x5009c: MC2 [40 d0 1b 01 40 00 00 00]
-0x50080: MC3 [40 d0 1b 01 40 00 00 00]
-0x50004: SH0 [c0 ea 21 01 00 01 01 00]
-0x50008: SH1 [c0 ea 21 01 00 01 01 00]
-0x50098: SH2 [c0 ea 21 01 00 01 01 00]
-0x50084: SH3 [c0 ea 21 01 00 01 01 00]
-0x50010: SN0 [10 e4 1f 00 40 00 03 00]
-0x50014: SN1 [10 e4 1f 00 40 00 03 00]
-0x50018: SN2 [10 e4 1f 00 10 00 03 00]
-0x5001c: SN3 [10 e4 1f 00 10 00 03 00]
-0x50024: SN4 [10 e4 1f 00 10 00 03 00]
-0x50028: MM0 [b0 db 23 00 40 00 04 00]
-0x5002c: MM1 [b0 db 23 00 40 00 04 00]
-0x50030: CN0 [e0 22 02 00 04 00 05 00]
-0x50034: CN1 [e0 22 02 00 04 00 05 00]
-0x50038: CE0 [fc 5c 00 00 08 00 06 00]
-0x50070: CE1 [fc 5c 00 00 08 00 06 00]
-0x50074: CE2 [fc 5c 00 00 08 00 06 00]
-0x5003c: IP0 [28 00 00 00 08 00 07 00]
-0x50040: QUP0 [14 00 00 00 04 00 08 00]
-0x50044: QUP1 [14 00 00 00 04 00 08 00]
-0x50048: QUP2 [14 00 00 00 04 00 08 00]
-0x50068: QUP3 [14 00 00 00 04 00 08 00]
-0x5004c: C0N0 [60 b7 47 00 40 00 09 00]
-0x50050: C1N0 [60 b7 47 00 40 00 0a 00]
-0x50054: C2N0 [60 b7 47 00 40 00 0b 00]
-0x50058: C3N0 [60 b7 47 00 40 00 0c 00]
-0x5005c: CP0 [30 75 00 00 04 00 0d 00]
-0x50060: DCP0 [30 75 00 00 04 00 0e 00]
-0x50064: DTP0 [80 38 01 00 04 00 0f 00]
-0x5006c: ALC [01 00 00 00 00 00 11 00]
-0x50088: ACV [01 00 00 00 00 00 12 00]
-Slave VRM (v1.0)
--------------------------
-0x4d000: vrm.aoss [03 da 00 00]
-0x4d004: vrm.ds [03 da 00 00]
-0x40200: S1A_E0 [01 0b 00 00]
-0x40300: S3A_E0 [01 0d 00 00]
-0x40000: S5A_E0 [01 11 00 00]
-0x40400: S6A_E0 [01 13 00 00]
-0x40500: S8A_E0 [01 17 00 00]
-0x40500: vrm.ebi [01 17 00 00]
-0x40600: L4A_E0 [01 49 00 00]
-0x40700: L6A_E0 [01 4b 00 00]
-0x40800: L7A_E0 [01 4c 00 00]
-0x40b00: L8A_E0 [01 4d 00 00]
-0x4a000: C1A_E0 [02 69 00 00]
-0x4a000: vrm.xob [02 69 00 00]
-0x4a100: C2A_E0 [02 6a 00 00]
-0x4a100: lnbclka2 [02 6a 00 00]
-0x4a200: C3A_E0 [02 6b 00 00]
-0x4a200: lnbclka3 [02 6b 00 00]
-0x4a300: C4A_E0 [02 6c 00 00]
-0x4a300: divclka1 [02 6c 00 00]
-0x40c00: S1E_E0 [01 1b 00 00]
-0x40c00: vrm.nsp3 [01 1b 00 00]
-0x40d00: S7E_E0 [01 1d 00 00]
-0x40d00: vrm.mx [01 1d 00 00]
-0x40e00: L1E_E0 [01 4f 00 00]
-0x40f00: L2E_E0 [01 50 00 00]
-0x41600: L3E_E0 [01 51 00 00]
-0x41700: S1F_E0 [01 1f 00 00]
-0x41700: vrm.nsp1 [01 1f 00 00]
-0x40100: S7F_E0 [01 21 00 00]
-0x41800: S8F_E0 [01 23 00 00]
-0x41000: L1F_E0 [01 52 00 00]
-0x41900: L3F_E0 [01 54 00 00]
-0x41a00: S1G_E0 [01 25 00 00]
-0x41a00: vrm.nsp0 [01 25 00 00]
-0x41b00: S5G_E0 [01 27 00 00]
-0x41100: L2G_E0 [01 56 00 00]
-0x41c00: S1H_E0 [01 2b 00 00]
-0x41c00: vrm.nsp2 [01 2b 00 00]
-0x41d00: S5H_E0 [01 2d 00 00]
-0x41d00: vrm.mxc [01 2d 00 00]
-0x41200: L1H_E0 [01 58 00 00]
-0x40900: L2H_E0 [01 59 00 00]
-0x41e00: S2I_E0 [01 31 00 00]
-0x41e00: vrm.gfx [01 31 00 00]
-0x41f00: S7I_E0 [01 00 00 00]
-0x41f00: vrm.mmcx [01 00 00 00]
-0x41300: L1I_E0 [01 5b 00 00]
-0x40a00: L2I_E0 [01 5c 00 00]
-0x42000: L3I_E0 [01 5d 00 00]
-0x42100: S7J_E0 [01 00 00 00]
-0x42100: vrm.gfx1 [01 00 00 00]
-0x41400: L1K_E0 [01 61 00 00]
-0x41500: L2K_E0 [01 62 00 00]
-0x42200: L3K_E0 [01 63 00 00]
-0x42300: S1L_E0 [01 00 00 00]
-0x42300: vrm.nmxc [01 00 00 00]
-0x42400: S2L_E0 [01 45 00 00]
-0x42400: vrm.cx [01 45 00 00]
-0x42500: L3L_E0 [01 66 00 00]
-0x4a400: vrm.sail [02 67 00 00]
+[...]
 
-Shawn
+> 0x300a0: nsp3.lvl [00 00 01 00 c0 00 00 01 80 01 a0 01 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]
+> 0x300a4: nsp3.tmr
+> 0x300b0: nmxc.lvl [00 00 10 00 c0 00 00 01 80 01 a0 01 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]
+> 0x300b4: nmxc.tmr
+
+Alright then
+
+Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+
+Konrad
