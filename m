@@ -1,186 +1,239 @@
-Received: from AS8PR04CU009.outbound.protection.outlook.com (mail-westeuropeazon11011050.outbound.protection.outlook.com [52.101.70.50])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7582D439F80;
-	Wed, 26 Aug 2026 13:41:28 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=52.101.70.50
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787751694; cv=fail; b=J0zjuzIYOMfpjLj5Y8ASWnNuvIs0PBzNbqOZXmuZTH2TfbLoFWiJYH9tgt1+I4hbA+PZq4LOKa9i1/ZNKcw+kWLdJOZLr7uV+z+SJq0Wm+qJeAvfLS/Fx3q6EZwB604QzH4xiLffJik6ja8WyFzZT5DhGcb/ZedJ2Zr/CSNawgQ=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787751694; c=relaxed/simple;
-	bh=8du+yZi5AZdJaX5pFpA2+37se4g5AAlqd61T1eO+BsY=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 Content-Type:MIME-Version; b=M0oQz30EuwXhTPfVt25nnNr48NvXvNH8ujI53rV+XMl+bSdJxRhBag7KvZRSBYcOOzzSSzC4SR/faCCcifU+qKZazY05c7KOcSWeRit8qXne2zJFhjcp/Tb+RU82aVMkrCniBJJepxqQ0cgI7+G/EhmVX+gwrspIRjUD8ycbe0s=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.nxp.com; spf=pass smtp.mailfrom=oss.nxp.com; dkim=pass (2048-bit key) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b=I6psuXVw; arc=fail smtp.client-ip=52.101.70.50
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.nxp.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.nxp.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2EBD242DA5B
+	for <linux-arm-msm@vger.kernel.org>; Wed, 26 Aug 2026 13:45:05 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1787751913; cv=none; b=sErQcbVieTLlttHMEgCFP4hdEJW1UT2OJIGHn5Lrsv7ddmF5iO2ydCpQ/y5cdvVn9eAnfX2gs9OZXHc/jmJzv79HiZT3TAV7fpPRtkVMkRdhtcvpYnUeuLClZOu2itV1Qdis1XHwY6flgMvrrwzXVBERv7w8aJIcc0RTy/5XuD4=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1787751913; c=relaxed/simple;
+	bh=LX3nqpwS0fC6BJCoe4QxlvZf/geKnh5eNaAhQC8kX9I=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=ApQ12n3pMsVnYj8X1gr54EagiVCi5MrMCoL8PgS/L/cwEd1TSj8os6P/n60GXhoGlBGD3gEym/dILbZZXUpNA5oBd7h2AiGw5fe7auDKHbMCElcvg8N1EI2or/oAk4xXi2WH0eedNrKX+A0B+ZNKh1G5GaGYdlkxSI+8lY+0b/U=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=A9NRXbQq; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=bXl/rO9l; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="I6psuXVw"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=SntUvktY8FrUy8lu4uGdXdsc/WRRZ84EH/Go4MLLBAebXUeOlFDcqCKDw7F6/SOzFxP4IcgGL7GvpuxzraQD4WXc/jZd4oIooWlUcWLch1gdznBncR3BrHB5KWnThwPWkNg8Dn8UDAr3gtNAJvyfK/z/mX70RIlla4BlP2I6p/DHIxyLM1J7ZBqy7WmgUHeu2rif1LftrMt2uko2/ORPEjZGD7KXU++eIY6mw3fny0xqy0NJPOKj60APXWnFKXABetfKaPVow+ss52LrD+E/AhFwRDuhYYS8cd+OPRIEXoSx21a/O7jayP3zLpgtsIHrHsQwPOtulNOOe38KHuFAVQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=S7eOlcE/MrbQgmawDnbaXovUJ0y1hnFx7/DZQXlzyNY=;
- b=K3O/6eELEX+TQ677AO/SXSRpg8WdXKmCq3w90RYEB43XF23geTlDeN/kep2oWjRHpIDS8fSgLfhHD9Lky3++DFAfxQJgxPYNEPpp/TTQXyuIhb5tmNjgR3So2GNe+PYUpsXzFVpwAiwGtxwcAugsFHwwF1B619IEQ6NCp8X/6XQA4VODmJx5MkHcZsnS702kyTSmzcbTHjrdfETEXtHjEdKOEC7VhbnxWCI+N1g2AoLq/qeRh1D1O4rZwIa1/fUPJLM0rM/s2TANELtbI41D2cX/k6OAPJKqnY3TZvb0jP8RFoCveP3QDXSnJfzZhtEY/cZWL1tqkNgAUU8WqkdFWQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
- dkim=pass header.d=oss.nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com;
- s=selector1-NXP1-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=S7eOlcE/MrbQgmawDnbaXovUJ0y1hnFx7/DZQXlzyNY=;
- b=I6psuXVwm58UzGzHywr5lSFIJ0+u8CBLI4Sx54D5VWIq7s4n4aHF43uiXm2JT+bsVrqR3oEy69S0imRNapOAhb1F9JM4R/QGPCZhebhRNEuyiPa48N2sCpfMvASNf3rgNhbXkxrTVLbk19fKM2GdYk+oI2GvzC0JS47ZHmDpXLYM55PjnOofQbmJoTluveO52cjuG30C5XRCFkM9JLz2Qw+mxgZKPzxpzerGasDdc4qW31yXI6uOuL4t2SspHtZI4pKS+zLNte2kwCyBzUGfT2AGJo1cY5hSevano+GbrPrcBUMKbu2FIxZGQirEL5Qwh23DyKxtCZNP3j0Ld14TPA==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=oss.nxp.com;
-Received: from GV2PR04MB12558.eurprd04.prod.outlook.com
- (2603:10a6:150:368::10) by GV2PR04MB11862.eurprd04.prod.outlook.com
- (2603:10a6:150:2f8::12) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.339.12; Wed, 26 Aug
- 2026 13:41:10 +0000
-Received: from GV2PR04MB12558.eurprd04.prod.outlook.com
- ([fe80::cd9f:102:ea58:4c49]) by GV2PR04MB12558.eurprd04.prod.outlook.com
- ([fe80::cd9f:102:ea58:4c49%6]) with mapi id 15.21.0360.006; Wed, 26 Aug 2026
- 13:41:10 +0000
-From: Larisa Grigore <larisa.grigore@oss.nxp.com>
-To: Larisa Grigore <larisa.grigore@oss.nxp.com>,
-	NXP S32 Linux Team <s32@nxp.com>,
-	Alim Akhtar <alim.akhtar@samsung.com>,
-	Avri Altman <avri.altman@sandisk.com>,
-	Bart Van Assche <bvanassche@acm.org>,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Frank Li <Frank.Li@nxp.com>,
-	Sascha Hauer <s.hauer@pengutronix.de>,
-	Pengutronix Kernel Team <kernel@pengutronix.de>,
-	Fabio Estevam <festevam@gmail.com>,
-	"James E . J . Bottomley" <James.Bottomley@HansenPartnership.com>,
-	"Martin K . Petersen" <martin.petersen@oracle.com>,
-	Sai Krishna Potthuri <sai.krishna.potthuri@amd.com>,
-	Ajay Neeli <ajay.neeli@amd.com>,
-	Manivannan Sadhasivam <mani@kernel.org>,
-	Pedro Sousa <pedrom.sousa@synopsys.com>,
-	clizzi@redhat.com,
-	aruizrui@redhat.com,
-	eballetb@redhat.com,
-	echanude@redhat.com
-Cc: linux-scsi@vger.kernel.org,
-	devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	imx@lists.linux.dev,
-	linux-arm-kernel@lists.infradead.org,
-	linux-arm-msm@vger.kernel.org
-Subject: [PATCH 09/10] arm64: dts: freescale: s32n79-rdb: Enable UFS
-Date: Wed, 26 Aug 2026 15:40:47 +0200
-Message-ID: <20260826134048.854748-10-larisa.grigore@oss.nxp.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260826134048.854748-1-larisa.grigore@oss.nxp.com>
-References: <20260826134048.854748-1-larisa.grigore@oss.nxp.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: FR4P281CA0426.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:d1::9) To GV2PR04MB12558.eurprd04.prod.outlook.com
- (2603:10a6:150:368::10)
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="A9NRXbQq";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="bXl/rO9l"
+Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67QCUFm8949050
+	for <linux-arm-msm@vger.kernel.org>; Wed, 26 Aug 2026 13:45:01 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-type:date:from:in-reply-to:message-id:mime-version
+	:references:subject:to; s=qcppdkim1; bh=5mZV0itA3lsoJNJxG2ntO+RX
+	31WBEmhiAf1sNhpQbjg=; b=A9NRXbQqZq6GFmHSOEKpAPAQ8veuHFtRmvu7JVc9
+	SiBFdk50qFDSXULA2VDd++3oxqnSq6xgO15FVzaIX93HzdmrELn8FnAgCrZRoXBe
+	CLOkWzG9fmG/Bq8QIiDOS8EcrgDH4wRRFvmLXV2WpFkj0qqcDE/ZXkURLUUcjHLj
+	NRTKkP8j4/Sc9axljusz3WQ2WTl/JehOY6yHwLHbnOGcEuazsj1ix/Vym0J/GQkH
+	5D7GJPk1ZrwBuGpAchRqEXNIuGktf5wZ4u0O6d+g2cp/tv+QtfuZLiL6kB8TgvKa
+	kBx6xdUsA3VvV6z3cq4M9E1yJ9HMpWOnBy/0Z32OOyXlTA==
+Received: from mail-qt1-f197.google.com (mail-qt1-f197.google.com [209.85.160.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ga07589g6-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Wed, 26 Aug 2026 13:45:01 +0000 (GMT)
+Received: by mail-qt1-f197.google.com with SMTP id d75a77b69052e-52de05de414so11903391cf.2
+        for <linux-arm-msm@vger.kernel.org>; Wed, 26 Aug 2026 06:45:01 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1787751901; x=1788356701; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=5mZV0itA3lsoJNJxG2ntO+RX31WBEmhiAf1sNhpQbjg=;
+        b=bXl/rO9lDj7IxZLPJYNxI5CEz9C4swOID4iCAq197NPqAvpXW6Px9cl5xuL6cB690u
+         3csdMsVZSTP4UwjTp+aiTYvNswIbftghnNK98j1RkLbYg7fPag9S7v4Nb2lLAUVux+Af
+         a3AjXDZReYfRt0NMxgwdDHfFGhhzlam7AS+PNSJuuVglDyiZIrxK/sZuOBOL4Hs6/HD5
+         ekk6YVMKZwHNZBHJyPGlz/P0qgnHT9rD+Mki8vfnvTm0zC2CnhuBW4juYbEQuqBCxhN4
+         w/X1ES77jNqK+DmKim9zia/ZSVqbccX2AWEg34PyktsoNV5qfFEJecNTdtqD5DAiIp8s
+         nDrg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1787751901; x=1788356701;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=5mZV0itA3lsoJNJxG2ntO+RX31WBEmhiAf1sNhpQbjg=;
+        b=ec1DtBhvve8wjjPNdpt7nOpxYWhnzP3rc3c8wxxk1aZkZWYDi5Yp06UCv5ZA7FidYp
+         fUaF1a1aHDvrChA425FheHWYOJQoTbVwUrw4KjezsazshyJ0Lo3BBtbH2+dCfEIg0GcO
+         KbCRLLYKpul6gs5suM7oo+KjPplOxJUkHRbdKippfWLmWeOVvgCf5cRwPqYGi636QqZv
+         WJtRK0Rz3JuGHnugXeutxgEBO1NuB7JRPmCyE3h3J20Caj77qWYsAKY2HkFL9Qy4XbF6
+         ja00+W8QiggGHDO8McoMxV0Rf3WOKtpCKkHEDmrJluqb8DuHu6Aqb+KKT3XUAYiHI0ma
+         V4aw==
+X-Gm-Message-State: AFuF++ndEg3V9IdS9UQIbrs9c5aOxhSMND/2sGnrOKgJgZRDwl8aZBGR
+	0VxT4AJvGMDdi/Onga1gZPQ2ZnmUFgzU25gxU1CWYIRBJNVIMD3xSm43iV6NVEslDkwzEe3uMeJ
+	zbXSXVctS8PrKtWo/NflWi1Q3ZBHeDvcWiyuWxCEazUMJjov+Rpd5lCORxZ31grgwrO15
+X-Gm-Gg: AR+sD10i7+gBOa672YN3yYviw4Qol/aC0POvp392J7WUjxLajDz6nnJj0DxsTltcaxX
+	FiONtxSETp68U+lpyv87tfx/PMXXDvhtE1Np/rW1PtD0h/xAIHzVOb2ZXryu2HiWwWVQj9nOJJ+
+	J69/z2n4drN3yUvJzAGsPU+gmq5CeNvkHevF6VBbx/0RuTTFHLEKSJG+ZmEjPmogYNRSVvgfE5s
+	+F0D8LXlOExdI40a9SgobeJACaoFmot9+iCUaK+VQZxY3NeWZ5PHctH2XrYLGuQrg++IIgY0rg/
+	Ua6HRJ6NfL818PYiQP3oriwPSnlrBLBsmpVsUORTu7BXj0prg2/Qb4cJfjoheKIlz6iLFOHahYX
+	20J0hW7uI4FF8yOrzvpYhQmC+FzRu1eXWvCgqeYEdxZX/R9ExhnelgFXg638unlPcoO3C6qhi1r
+	i92+RXOKVPsve5
+X-Received: by 2002:a05:622b:117:10b0:52e:4831:cdc4 with SMTP id d75a77b69052e-52e4831cf29mr28042011cf.7.1787751900598;
+        Wed, 26 Aug 2026 06:45:00 -0700 (PDT)
+X-Received: by 2002:a05:622b:117:10b0:52e:4831:cdc4 with SMTP id d75a77b69052e-52e4831cf29mr28041511cf.7.1787751900128;
+        Wed, 26 Aug 2026 06:45:00 -0700 (PDT)
+Received: from umbar.lan (2001-14ba-a073-af00-264b-feff-fe8b-be8a.rev.dnainternet.fi. [2001:14ba:a073:af00:264b:feff:fe8b:be8a])
+        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5b4a415346bsm593679e87.11.2026.08.26.06.44.58
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 26 Aug 2026 06:44:59 -0700 (PDT)
+Date: Wed, 26 Aug 2026 16:44:57 +0300
+From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+To: Venkata Kota <venkata.kota@oss.qualcomm.com>
+Cc: "linux-arm-msm@vger.kernel.org" <linux-arm-msm@vger.kernel.org>,
+        kssb@qti.qualcomm.com
+Subject: Re: NSP Images upstream for Nord Platform
+Message-ID: <um3gwtud3z3hbsr52yftcozyqku7phvxhd24244knnm3hzfaem@j6i7uhod6pyv>
+References: <ca4efa2a-41c8-4658-b386-0bc691e95179@oss.qualcomm.com>
+ <kug342o2og57tdhortgabobe4vdjn2jkv3bxoqzfei767neg27@46p2slgpyj3w>
+ <fa3ea7e5-2624-494d-a754-3ecc73ec832b@oss.qualcomm.com>
+ <1b7a301e-9a2e-48c8-a78a-d3a800a2f9e7@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: GV2PR04MB12558:EE_|GV2PR04MB11862:EE_
-X-MS-Office365-Filtering-Correlation-Id: b3b3aced-ff4b-42bb-237d-08df0377b02d
-X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
-X-LD-Processed: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635,ExtAddr
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
- BCL:0;ARA:13230040|1800799024|23010399003|7416014|19092799006|376014|366016|921020|10067099003|56012099006|11063799006|22082099003|18002099003;
-X-Microsoft-Antispam-Message-Info:
- fhAOjpEpR3ve8xwI0zX20eFCYNzI6TDpc1F7aM9o0MQX2Qj0Owp9S+Ye4LeF9YnD7112DeIXh3R5KZa3l+8jk8O3a5xYznp68xZ8jzB4f8T/jidousiYU1iS8pqZ8Z81dy+CYDKeMtJ/7C409TpXYZPZlgHsorTqKQf5oc4eb9sBrlC7we9zYgcyZ49JmhfELWbEvbFWVsjRQC8l8TeV+caz77l+q9Aw0HmQCh45iKMdnYXISfX/e/GjSm/k3ZvLZ4HJ7w+UbuGWfWlaN83hcMEteD+oEGAYBS0c/5/r+NkBC/4QPmRvWGfQjhCwrpmKZlLKKhCaxENAtMEhQ1QfFlzFO7tE63SlRSr9I7g0UQwuoIBGve72O8KY3RSMuOG4dwk9FmXYrc9JiSqm85xbxxgquwofncCSD+0DwjWidVi1CybHT/lNnvryrcYM7EW/Q2ph50BSq1lyvaLBWjOPY5ArbRE0Zd+9f+7JiHcVSI7pa/wUCz6aDF3h8pBisZRTHjSsFtMJxm6V6s/gHSRJG84lVaNAKUSCuggDRQlEmTb1yPnmthsiOjeBBrNvoiqWBNC9+Qc+XRLfTcHMLDVaS/NBnC9eTj+qVrpKZvMa6vE5cakP46g2eji6QkjBSQPvLlzhDXilSqDVX/2PjPyGxluPjn2r/91Xuo4zpJGuaGDvakSRcZrMCUm9kUFzK1wZ2mgXLPYKUPsFABKt40AHww==
-X-Forefront-Antispam-Report:
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:GV2PR04MB12558.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(23010399003)(7416014)(19092799006)(376014)(366016)(921020)(10067099003)(56012099006)(11063799006)(22082099003)(18002099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
- =?utf-8?B?UjdWYnp6cG5xaGNYNXFqTTM5YkxRUkE4QlZtcVNPckE5UkZuUWI2MDR0bUov?=
- =?utf-8?B?NGxZM0FTckFJVlNJYzJXd2dRSk9tT09IOFdkMXBhTm4xSTd0dVZmeHZYM2hY?=
- =?utf-8?B?Nkpod2RYVnFMR044VjV1aE8wQW9kcWk5WDl4RWNMQ05sbThXa3hBZk9kZXJW?=
- =?utf-8?B?bG1yWFJ5NTlLSkFMd2NVQUtmSjB2VUpRbGFDWmFTbDVxeU45NFQrQ3UyNVpV?=
- =?utf-8?B?OU5jQmNwMXFqU3QrU3loUkFnck5TVUc5MWJMaFFiY1IrSHJUMkhDUVBSVVQy?=
- =?utf-8?B?V3oyQ1BMb1VzSDRGMHFRNVpGUHljdTN3YklCRko3Q3VwVVE2WlJwSnBNM2ta?=
- =?utf-8?B?UkFkV0RCb0hRZXJBSlRWMjdUelRSNHB0WkhzQ0N5ZWUvTnp4R29NSkRsTkp5?=
- =?utf-8?B?NnhiRUZjM0lIUHF1RFJiSTlXUzd5QXZCdDJCL1ZJWTljbWRYeE9yMHBXbWR5?=
- =?utf-8?B?RVl1Yk81bU9zVncxMVJhd1l5ZS9vbHdzQ1cxZnJkSCtUN1I3ZGhVR3N1cnlq?=
- =?utf-8?B?UTVwRUwvdVJzTnF6SFdpOXFhbjRqSFJBTGt6VklDQmp6UkREd2NmeGUzU1VM?=
- =?utf-8?B?VVUyRHliYlVaK0F2cTdnVUlVdlZxRC8rVWw5WDBPZytuVEJBV3hrS2RuMko5?=
- =?utf-8?B?eWRlN2ZhUlVMaUZ1MWs4VHM2VFo1MjlGaFRFWUpuSFAzbVNLVDQraERIUU5w?=
- =?utf-8?B?cVZxRHVmMHphREtqeXYzZGxEWHJMOTJtU3VrZXhITmhpbzBOZzZnRlpzeFg1?=
- =?utf-8?B?ekVySEF2cS9vcXBYcHhYWXE4bXo5NndNWGZ2ZWtsZlpRVlIyZWNtTnppcE9Y?=
- =?utf-8?B?UmJBeXdtUGEvL2pEeXhydG5lMmE3dVZwR21xM29valN5eXVQOTQvTHIzNWgr?=
- =?utf-8?B?NmhRLzBRUGxSM0hFMzhpMHFxdDJmR0ZvS3E4Z0x0Q3ZKSU04dGFQVHlCZ2tm?=
- =?utf-8?B?TXJmTWNOOEJ1TExML0ZRQUo0VVRGZjZROFRZVEJkcHdkZnJEbEtNSVkxdjVj?=
- =?utf-8?B?dzlka3NsdUlZSWhNSnJVQ0dwTk15eXBIWlh5STdUbGdWaVUxMnNsVzcyOTNm?=
- =?utf-8?B?Uno0T1J5Umd3R1d0M0FacDNWUDdnL1NhdUQrTjFGUDd3OGxLMG8wQ3NBTm5W?=
- =?utf-8?B?d3FpL1o3d29yUWNPN3d0U0tvaCt2bzZCTjZpcUphenBvQ056azAxTUgybWlO?=
- =?utf-8?B?QzAyRStRdFJnZUlqejJMVHF1WnhBc0U5SnBtaWgwQWFndURCOTd4OWVtV3l6?=
- =?utf-8?B?RXZXRDg0VmM2a2lpMnRFOVl6R3Y3eVowSWF3Skt6cm1uWEpzNTZHUW5XdVRy?=
- =?utf-8?B?bG53dFhOQmdKWndEeG0zb2ZaNTVHTnIyeGZuaHg4MXpIcGZiOVkvUzg1V1BP?=
- =?utf-8?B?MHRwYmt0d2xrbkc0YVo5d3RZUzRLcFlRNzlUZEhqWlZjeWdHTm9jQU1zUitx?=
- =?utf-8?B?ZHlZeHVweFVHaXpWS01NZjFWaXBTSTd2dVM1enVmakZUMitzMisxdm5KRS9p?=
- =?utf-8?B?SHZnRjhtTGFVdmdvUVBKL096Wk1LQis0d1JDa3hYeVNKVjdZRDdYYWlLcjVZ?=
- =?utf-8?B?UlFXRk93YWVSTE1aQTlNMmJCY0VPcDA1UVhlN3NtNHhVcThMOTM0eWdHRjBT?=
- =?utf-8?B?UjhlcjBVZE5XWU5xREQwV3FXZyt0UytubnVmL1NIaWppNmZlVjVmbXJwVzcx?=
- =?utf-8?B?S1NxRzdmTDdHOGRzTXZXTEJsNHZkcE5xM2ZNdW1UdDh6TkEyMTNQUWYrZmd1?=
- =?utf-8?B?eVBNSktrVFZhdkR3RWFIM3JLdjFTeTdjeGt0TGxpOVRHdEZ1Y1c4T1JyMnZF?=
- =?utf-8?B?eHpQV0NqcGE4ekU0MWh0Ykh6ZUl1MGd4UngvZ2R1bklHZ2cxbStoc3YvVXU5?=
- =?utf-8?B?QTV5bFVqa2hnUnFkWDZnTlo1SHNwMW9yd01LWmIxZlhaVFJiVGJXWFFMQkJW?=
- =?utf-8?B?bFNlWWZ4MFkyLzNWNUJQUk9jZURBR0s0TmZiYUJ3Q0c1MDhNdTNUSDlPMkIv?=
- =?utf-8?B?QW9YOWl5Qk42Vkk1NVhqVE9LUmdoN3dCeVU1R3dmNmlDM3FOckJRVzdieTcw?=
- =?utf-8?B?a1FJZ2RQSFE5djZLeThUaFpLdHVvRStoVkd4M2g3cnBTdk9PSEU1eXFpdmlz?=
- =?utf-8?B?VFYvU0g4WGlVcWtJV0hnb1ZmVzM3NStnS0VhUUg5QlpTL0l0K29zVUNxcFhv?=
- =?utf-8?B?MEZHbTk4elhsQ1lPcGVYU2o4U2doZjIxdTQrWGFCUTZQK0JQMnQ4cDU5MGcz?=
- =?utf-8?B?WHlyb1ZZSTA2cVlaRnlETm9pUFRIV2RxbWkrbjBwY0RmM0xrQXE5U0VJZ2RG?=
- =?utf-8?B?VDdWeXBIMHRZYVM5TXI5Nk01dS8xdG1BTFE5U2d0NkNMVEFaOXBvNitsUEVy?=
- =?utf-8?Q?HDZiL4WvDbdYH8B0=3D?=
-X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: b3b3aced-ff4b-42bb-237d-08df0377b02d
-X-MS-Exchange-CrossTenant-AuthSource: GV2PR04MB12558.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Aug 2026 13:41:10.2363
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: aLODwXwTBVcphgvuDh5kmsKJHqaGJ0AZ+p6xPP5/uSTdHiHX37b2Nn/HmhFC1KyAxLQmTyLdi4ohZIxxGjsYvw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV2PR04MB11862
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <1b7a301e-9a2e-48c8-a78a-d3a800a2f9e7@oss.qualcomm.com>
+X-Proofpoint-ORIG-GUID: ssDjNOKlnNhc6LVO9QjeqEuPm3HaBlGd
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODI2MDExMyBTYWx0ZWRfX7thhEnigMODv
+ JJxWkseFAcvhR3mSR2jt84KV53HCbs6LT4dtmcA66HO3o1MCTPuJ3PdScx+RDIGTteR8rBEV8CD
+ 1A//t/9/q9G0Ik+y/XAnWiYyIduVA8ihf6KG1NVAd1GZC85K5F3Bs/ewIa311bsaXvpAVUf1d0p
+ 24jvbgOB+Es6JcX0YOv0hoPg+O+I8fxU/NCPcKuthW55XxNCcYv64/oee/P3s3bID+alW7FZc+G
+ Th08mW53Toj7v6fIWM0thhOLUxbT8Aqqak1kbPioMmp0fbx5XoC41KGuy1DzqghXaSFma2xgZ94
+ /BT1tQn3xiu4LP3csvOCVMC8ViuCgZUGhCbOjKu6I8Z6a0Wd+WYcajqBTKzS6VgsEU77RHRDBOa
+ NQKFfxX1eWiIPXMtKGYrXOgdMQCtvHQxAsUjyh0kC93jZK542wmv9sBM0FaYU930oiPmReqhX9i
+ pz/gky2CEB6TcR49B1g==
+X-Proofpoint-GUID: ssDjNOKlnNhc6LVO9QjeqEuPm3HaBlGd
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODI2MDExMyBTYWx0ZWRfX0HEZ2OjMDAae
+ 7fFyWLTM3+x9Lc8NqRy1EKJd6BRy8lvm3WJuTYnp4DMhhh9csJvLnmgHifM96+PEaBKNaKydx9K
+ 9YLHBmXk9qs5A5lOZBup+iaOHMCDt9Q=
+X-Authority-Analysis: v=2.4 cv=RPiD2Yi+ c=1 sm=1 tr=0 ts=6a8eeddd cx=c_pps
+ a=EVbN6Ke/fEF3bsl7X48z0g==:117 a=xqWC_Br6kY4A:10 a=kj9zAlcOel0A:10
+ a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22 a=fZIp80y1_M88fl-JViAA:9
+ a=CjuIK1q_8ugA:10 a=a_PwQJl-kcHnX1M80qC6:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-08-26_03,2026-08-26_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ adultscore=0 clxscore=1015 priorityscore=1501 spamscore=0 lowpriorityscore=0
+ malwarescore=0 phishscore=0 suspectscore=0 bulkscore=0 impostorscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608260113
 
-Enable the UFS host controller on the S32N79 RDB and select the M-PHY
-boot mode. Configure the controller for two lanes per direction.
+On Wed, Aug 26, 2026 at 02:49:15PM +0530, Venkata Kota wrote:
+> 
+> 
+> On 8/26/2026 10:18 AM, Venkata Kota wrote:
+> > 
+> > 
+> > On 8/21/2026 4:22 PM, Dmitry Baryshkov wrote:
+> > > On Fri, Aug 21, 2026 at 03:50:14PM +0530, Venkata Kota wrote:
+> > > > We are currently planning to upstream the NSP firmware for the Nord
+> > > > platform. The platform contains four NSPs, and a single NSP
+> > > > firmware binary
+> > > > is built that can be used across all of them. However, the current SSL
+> > > > validation mechanism requires a unique SWID to authenticate
+> > > > firmware loading
+> > > > on each NSP. As a result, four copies of the same firmware image are
+> > > > generated during the build process, with each copy undergoing a
+> > > > signing step
+> > > > to embed the corresponding SWID information.
+> > > > 
+> > > > This approach is consistent with the methodology followed in the earlier
+> > > > Nord program where firmware was successfully delivered. The same
+> > > > reference
+> > > > image is used for both QLI and upstream releases.
+> > > > 
+> > > > We attempted to upstream all four NSP firmware images; however, the
+> > > > submission was rejected on the basis that the images are
+> > > > identical. While
+> > > > the underlying firmware content is the same, each image contains
+> > > > a distinct
+> > > > SWID and therefore does not represent a binary-identical copy. These
+> > > > uniquely signed images are required to ensure successful
+> > > > authentication and
+> > > > loading on their respective NSPs. This requirement arises from
+> > > > the current
+> > > > SSL authentication implementation governing firmware loading.
+> > > > 
+> > > > Several proposals have been discussed regarding potential
+> > > > enhancements to
+> > > > the SSL authentication process. The SSL team has evaluated these
+> > > > suggestions
+> > > > and is currently assessing available options. However, any
+> > > > viable solution
+> > > > would require significant design changes, along with the associated
+> > > > development effort and validation time.
+> > > 
+> > > Thanks for providing a good summary. The mdt_loader, the module used by
+> > > the DSP driver to load the firmware, already supports loading ELF
+> > > firmware split into multiple binary segments. While this (legacy) format
+> > > is considered obsolete, it gives a hint on how to support the Nord
+> > > platform, while keeping linux-firmware contents sane.
+> > > 
+> > > Please split the signature segment to a separate file having .bNN
+> > > extension (where NN is the segment index) and make sure that mdt_loader
+> > > can load it correctly, possibly extending the helper code. Use symbolic
+> > > links to share main firmware image, while keeping only signatures apart.
+> > > 
+> > Hi Dmitry, I am working with the concerned teams to get this implemented
+> > and take care of this problem not for this chipset, but a bunch of them
+> > that would follow. This needs work from different teams and validation
+> > as well. This is not in the purview of the image team to make these
+> > changes and push. The solution needs to work upstream as well as on QLI
+> > metas planned internally.
 
-Signed-off-by: Larisa Grigore <larisa.grigore@oss.nxp.com>
----
- arch/arm64/boot/dts/freescale/s32n79-rdb.dts | 6 ++++++
- 1 file changed, 6 insertions(+)
+This is of no concern to the upstream linux-firmware or to the users of
+it. You are trying to add more firmware files, which takes some space,
+after it gets reworked we will still need to provide backwards
+compatibility for the exsting filenames in linux-firmware, etc.
 
-diff --git a/arch/arm64/boot/dts/freescale/s32n79-rdb.dts b/arch/arm64/boot/dts/freescale/s32n79-rdb.dts
-index 1feccd61258e..ff0c2b638037 100644
---- a/arch/arm64/boot/dts/freescale/s32n79-rdb.dts
-+++ b/arch/arm64/boot/dts/freescale/s32n79-rdb.dts
-@@ -63,6 +63,12 @@ &uart7 {
- 	status = "okay";
- };
- 
-+&ufshc {
-+	nxp,mphy-boot-mode = "rom";
-+	lanes-per-direction = <2>;
-+	status = "okay";
-+};
-+
- &usdhc0 {
- 	disable-wp;
- 	no-sdio;
+> > The estimated effort has been provided to be
+> > roughly a month considering changes (generic) to all branches wherever
+> > needed and push after validation.
+
+mdt_loader already supports splitting the firmware into multiple
+segments and loading it from the split configuration. It just needs to
+be either reused as is or extended for this particular case. So, the
+month is an overkill for such a simple task.
+
+> > In the interim, in order to unblock
+> > the feature testing for NORD across teams for the next one month or so,
+> > the request is to allow the copies of the firmware for now. We would
+> > remove them with the right solution as soon as the solution is available
+> > with testing.
+> 
+> Hi Dmitry,
+> As I understand, we see this release this week is the only release before
+> December, by when we would move to latest Kernel on this program.
+
+How is this related to the files being added to linux-firmware?
+
+> There would not be any update on the NHLOS post this till December and this
+
+Why? What if there are critical issues? Vulnerabilities?
+
+More importantly, do you really need a new NHLOS update? Can it be
+solved completely on the kernel side?
+
+> is to unblock the rest of the teams work on their PRs. We would work on
+> getting the changes done for a single copy of the image by then and post
+> proper testing across targets and images, we would make changes to the
+> upstream branch as well. The request is to help unblock the internal
+> development activity.
+
+Rejected. Internal development should not complicate upstream workflows
+or upstream support process. We have had complaints that there are too
+many firmware files for Qualcomm platforms. We should not bring extra
+firmware files for no reason. Consider this as a request to also fix
+lemans firmware to remove the duplication. On that platform, cdsp0/1 and
+gpdsp0/1 show a significant overlap between firmware files.
+
 -- 
-2.43.0
-
+With best wishes
+Dmitry
