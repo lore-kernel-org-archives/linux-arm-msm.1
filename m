@@ -1,161 +1,158 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-yx1-f53.google.com (mail-yx1-f53.google.com [74.125.224.53])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7BD6F3B813C;
-	Wed, 26 Aug 2026 15:57:56 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787759877; cv=none; b=FQ5LACc2ECamsFga94cn+2rlIbXGIHBTSOMUhJA8SiIgi6EEdexeUqvQsJdMZ5BVjdwGhOXI+Ft252fgBZMmNbTd5B8o+Sn0Mzj9Z81vpGtExishKoD8hSyQV4JlLL0iBB/iIX1/WtiL2jqzlio57YU5CDxetZelZ/p7RdTcI9w=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787759877; c=relaxed/simple;
-	bh=aeZmqlIwyJK4VPxm1g1mfmdGUHum1lBwQU5+McRqTso=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=tNsSip2IAIVGD9ni3Hj4eCRmmzztz+fpAZqH6R3w1PHSUBY5Chd10FABe6S42hds7n0W+VnhAik7X+i4n2HMq2+7i1x56T34+wcTYagjvEUjs61Jyp3OWXdet9TA5SjtouAiv5IjlDfdanBu3C84yvg+bnuI8C2Vf/dXll04iEs=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=hn4sEiod; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A066E371868
+	for <linux-arm-msm@vger.kernel.org>; Wed, 26 Aug 2026 16:07:07 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=74.125.224.53
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1787760429; cv=pass; b=dpLUtebEjfTkUV6hJrQKi84+e6rwxHPikUMXbfl0IVZX/nMIUMCFrPXrwNJMYQvnAvDw6kewF3oKxrpaZ6gWykwHnKL8/1hwWOTHtoFOzodYA7QEou9PQLDjNnG1f6opg2P7ezobu3r1f1WZOSG+fJkBhyxhkJsuIuCFD4x4A68=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1787760429; c=relaxed/simple;
+	bh=aFuIk6AbhdcNiE1bV56o6X7K9fMz1Hx6enV/8s/aroE=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=DXvQFM7G4xRFJq7BZrUCUFYiEV6ZH8s82eZ2nJ1vU4Yyo+aayksz+F4Na0Im5YsxaZlzoJQ1F2iPgSZAt5X/fzRue78aRdGS07U7MRJChrDTSPWzb8gTWSXurYUHGShS2lMCtttIC+dbCa/4aiQaw64WRgcxQ0qLwaVWzDOagZ4=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=ZAyksSd5; arc=pass smtp.client-ip=74.125.224.53
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="hn4sEiod"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 42F901F000E9;
-	Wed, 26 Aug 2026 15:57:51 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1787759876;
-	bh=+zvkuLBS5kN0dE2ru9sc83bhYR6xAZIN/lkuUx7s1rk=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=hn4sEiodCLZJ6ZQ4HtQf22da+N6rNnUyB+5+xzJU+csx7ycH8p6d9BiHjOMdi/CdO
-	 aX7WNzaI1zz9FRJSowxDpeEzuc+WdOHT/cuQuUduOYShwxYhmJGVioiegtF15vm3QH
-	 FTJzdpNtNdIXUm2DjbYbVCHdtcupa+o7RwF6uhaWN1idh91718mQL+NFj4D4zEJc5W
-	 1/ZrzZXFPuuHA+px+Hp8WOHMNeFC9nA1xir8YHWrGr9tBXvDG1uN40pau7foz6sukk
-	 enGhajoAXdqyZyKY/skV6wGSw3WBuI4Bf+LRCClf635JvWc9Rs91no5hrEUkgcriAK
-	 2gpvrHcSNl2ag==
-Date: Wed, 26 Aug 2026 16:57:49 +0100
-From: Conor Dooley <conor@kernel.org>
-To: Frank Li <Frank.li@oss.nxp.com>
-Cc: Larisa Grigore <larisa.grigore@oss.nxp.com>,
-	NXP S32 Linux Team <s32@nxp.com>,
-	Alim Akhtar <alim.akhtar@samsung.com>,
-	Avri Altman <avri.altman@sandisk.com>,
-	Bart Van Assche <bvanassche@acm.org>, Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>, Frank Li <Frank.Li@nxp.com>,
-	Sascha Hauer <s.hauer@pengutronix.de>,
-	Pengutronix Kernel Team <kernel@pengutronix.de>,
-	Fabio Estevam <festevam@gmail.com>,
-	"James E . J . Bottomley" <James.Bottomley@hansenpartnership.com>,
-	"Martin K . Petersen" <martin.petersen@oracle.com>,
-	Sai Krishna Potthuri <sai.krishna.potthuri@amd.com>,
-	Ajay Neeli <ajay.neeli@amd.com>,
-	Manivannan Sadhasivam <mani@kernel.org>,
-	Pedro Sousa <pedrom.sousa@synopsys.com>, clizzi@redhat.com,
-	aruizrui@redhat.com, eballetb@redhat.com, echanude@redhat.com,
-	linux-scsi@vger.kernel.org, devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org, imx@lists.linux.dev,
-	linux-arm-kernel@lists.infradead.org, linux-arm-msm@vger.kernel.org
-Subject: Re: [PATCH 06/10] dt-bindings: ufs: Add compatibles for S32N79 Host
- Controller platform driver
-Message-ID: <20260826-surely-sandal-64ca2d2c4481@spud>
-References: <20260826134048.854748-1-larisa.grigore@oss.nxp.com>
- <20260826134048.854748-7-larisa.grigore@oss.nxp.com>
- <ao75lU2zYDeOZi2f@SMW015318>
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="ZAyksSd5"
+Received: by mail-yx1-f53.google.com with SMTP id 956f58d0204a3-66dee7a0c09so144951d50.0
+        for <linux-arm-msm@vger.kernel.org>; Wed, 26 Aug 2026 09:07:07 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1787760426; cv=none;
+        d=google.com; s=arc-20260327;
+        b=kR7O5op38t9MpCockbWz+wayQIq2w+HUSpSMJ9/WUlawMgglcl0JChoEpROngJxA6P
+         +Fez17NAa+rxhVRchZcUKXG9S7YPVLv2iYMVaYCtdvyVL1DM555IUcvUnapAa05JrTrN
+         S39ibTFqihqxOd8qm1h42iDrVrbFjX518SjaqRi8ud4UDgZZTejViR1VJHZnMBE3hssN
+         ccooKEhG3jggNBVTNLqpPG+xiN8xqwOxTw1SPR8RU1rHm00gbjBNkmM4oN+F10QZzo5X
+         K3WV/567CMNEAO0GBXsk71n7vPRRVKeVYfW7IT+gY7HPBTvti00SniWeb4AcI+xaacKT
+         0d1Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:dkim-signature;
+        bh=NZlZQ8Rhh1qyGK3bhrJ6S37zPY0GD0Zfh5+8vycnKN4=;
+        fh=6qhv0h/+BDEHsjhixuaHIPONny4WMYydIkLY9b2Xysw=;
+        b=fqMb5qAx/8HN5ebvKCt+fhMPnIonFOJCTZeLCv8/pymHoihJWl5ZoZMhX6YLzTUt3s
+         PNNcW0w1nF3Y/1ZCPFnWO6DvPpoewsYBTDgkxNOsPIdw486oVePUOjgsJRP9CfSikY0n
+         khByWBWPYYAJ8ZhBIwVmieJK/mTgz/5vymTOFBEBsqVwqjVz8JDKK4kmtHONxpxiDgKx
+         09Oyx5gcmLi9og08tr0JOtZbapcOpzGkobnJwhE913Vm/KgNow1W0rRIAAmau9QI7fsJ
+         dGWiT3Po2hZtPXGIW/XyUjUYA77Cad1L6p9jdO5Ha1AAyNjvsWZ0rSa78eHUVmP333G2
+         huaw==;
+        darn=vger.kernel.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1787760426; x=1788365226; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=NZlZQ8Rhh1qyGK3bhrJ6S37zPY0GD0Zfh5+8vycnKN4=;
+        b=ZAyksSd5/Dm7wmw2SqPibtg79xKHT9liPdYXA2k50TFiw+nnuXd/lKkFvtdANK0909
+         FJvA2gFPQEIjsOANZN+yjVwQJyvtEWjVy6WMkSjg2Ubp/Ekl6LouEXhnOU2RHNXfBxDY
+         0ErbnX/z095WYMmHOAbxsQ5DwNTVad3zkNJT0v8C1PfmrXbKvjg5t98zgy4i20beBA7P
+         s8gBsnn7oUUACZUsKHiHYi76VcaRgh+M9StIZcoLsRyOUWtAKLv9bLRqkyN3nVyaq2Mv
+         B6v+WiP1bG5CMduItYtUD+7crr8Wy1lQAmw0vaDvjq7XmC0a5BG3kikhvjBL6GGD4HIS
+         wXkQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1787760426; x=1788365226;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=NZlZQ8Rhh1qyGK3bhrJ6S37zPY0GD0Zfh5+8vycnKN4=;
+        b=YmxKcacB+RK5CufxTOgPE/2FZtDnsmn/0KjYQeMHFLBKPI/MHN5VY92Ef4soc1Xgov
+         dBP5vF4Drz+BnHci1uY4k7vIMYXd6mRxI+m6uAWjbc0FnwSrrlYWlCcu1s69nvVrrEsh
+         /f5XWi2UmlmSQ2djOCZ5jks6gIUIc1ibOQE7Nzq7SCuJr6gfHkhkm+74jE8Qr6exGV6v
+         3stAG3rzjCXLaE7BllGkGMQ/cgvfdfvKqU5bNQ8iieLh6zdI/Piagueb7P2opsA+gpTG
+         nqUs09sXiABVl8XF58Kqx5+F8BPMXZsXM8qa+Dv7gESWZch+pIBpfL22+YvWnNTniSg3
+         G0Og==
+X-Forwarded-Encrypted: i=1; AHgh+RqgKDAOI1Uczfq1c3QxG3M14BfNz/x/6IlGweQWRBPWBBsDLe7ChAyhft/7hcieHsESvPU5dTK6z/2A+b4u@vger.kernel.org
+X-Gm-Message-State: AFuF++lB7QuR6zdmNTn2kgT2P8qmbyUJHuyoIpZiSKT4QERjq+JpjZ+5
+	phw64irD3fjwrYVIcvJWRgNGuCjQN/WYbxIwy3TYMb1r1ldoJ8PfP9p1Nm+3UvSgDGVfSojrOjv
+	kTdfFbqs0qgNj0kTLxGSiW7fzrGqu5xE=
+X-Gm-Gg: AR+sD10SWhdzqG318H91PvmSpNlCwUKdqg6lzJ1RiS1jYzCou4SLxkxE5OcljIFvwGd
+	1wlLUq3O6rGAQD/cQ3zeKw2ntP+a08J3xC/DIOlgsjDUT3P6S8mVqFNyPHEM5Z7O00xiVEOSW9z
+	whf3z0nwf9OWR+3OEuOYn+iQJFHEbveHdND8akJWE+WbsfWQEZ6VuvYvpv1pKpjvcpNItjgFhWL
+	mYaeEOegfUwtNT2zVY+lYa1TccupbK0jX3qojFXx2dOydATSO5/4AQzTRBpR7CRBiMmJm9/WC5J
+	goFNRqpw+KwjZnUROodfsWfKowVutuSDkBYq78vL7JDFbQLPp3jdEKUrlY+B2OOryf4DaEzK+Qp
+	QdTa20zTVSCNKSx1U76i1MkIPnO/6tg==
+X-Received: by 2002:a05:690e:d53:b0:66d:2469:2518 with SMTP id
+ 956f58d0204a3-66d256eece7mr2798681d50.13.1787760426443; Wed, 26 Aug 2026
+ 09:07:06 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="5vEWqBk1JjVncxTQ"
-Content-Disposition: inline
-In-Reply-To: <ao75lU2zYDeOZi2f@SMW015318>
-
---5vEWqBk1JjVncxTQ
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+References: <20260820-rp-qcs8550-v2-0-d4ce78fe9385@gmail.com>
+ <20260820-rp-qcs8550-v2-4-d4ce78fe9385@gmail.com> <a518f6c8-7880-4854-8dc3-ac90f0eb93c3@oss.qualcomm.com>
+In-Reply-To: <a518f6c8-7880-4854-8dc3-ac90f0eb93c3@oss.qualcomm.com>
+From: Aaron Kling <webgeek1234@gmail.com>
+Date: Wed, 26 Aug 2026 11:06:52 -0500
+X-Gm-Features: AcwNN1XibUJOXyNOa2k-QB-afByCcBkGNudzVWR4SXKPlPfS0zWVsrdForCs6cY
+Message-ID: <CALHNRZ8rqcDYcBJY0+Y_ioJroWsns_BFggMpuwZy9tiPavvBaA@mail.gmail.com>
+Subject: Re: [PATCH v2 4/4] arm64: dts: qcom: Add Retroid Pocket Nova
+To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Cc: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+	Conor Dooley <conor+dt@kernel.org>, Bjorn Andersson <andersson@kernel.org>, 
+	Konrad Dybcio <konradybcio@kernel.org>, devicetree@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Aug 26, 2026 at 09:35:01AM -0500, Frank Li wrote:
-> On Wed, Aug 26, 2026 at 03:40:44PM +0200, Larisa Grigore wrote:
-> > [You don't often get email from larisa.grigore@oss.nxp.com. Learn why t=
-his is important at https://aka.ms/LearnAboutSenderIdentification ]
+On Tue, Aug 25, 2026 at 5:26=E2=80=AFAM Konrad Dybcio
+<konrad.dybcio@oss.qualcomm.com> wrote:
+>
+> On 8/21/26 5:30 AM, Aaron Kling via B4 Relay wrote:
+> > From: Aaron Kling <webgeek1234@gmail.com>
 > >
-> > Document the device tree binding for the NXP S32N79 DWC-based UFS host
-> > controller which is compliant with JESD-223D "Universal Flash Storage H=
-ost
-> > Controller Interface" v3.0.
+> > The Retroid Pocket Nova is a high-performance Android-based handheld
+> > gaming console powered by the Qualcomm Snapdragon 8 Gen 2 processor
+> > featuring a 4.5-inch 4:3 AMOLED touchscreen.
 > >
-> > The controller requires access to the SCM register block and the core
-> > clock rate when M-PHY initialization is performed. Add the optional
-> > nxp,mphy-boot-mode property to select the M-PHY firmware execution
-> > environment.
-> > Currently, the M-PHY firmware can only run from ROM. If the property is
-> > omitted, M-PHY initialization is assumed to be handled externally.
-> >
-> > Signed-off-by: Larisa Grigore <larisa.grigore@oss.nxp.com>
+> > Signed-off-by: Aaron Kling <webgeek1234@gmail.com>
 > > ---
-> >  .../bindings/ufs/nxp,s32n7-ufshc.yaml         | 99 +++++++++++++++++++
-> >  1 file changed, 99 insertions(+)
-> >  create mode 100644 Documentation/devicetree/bindings/ufs/nxp,s32n7-ufs=
-hc.yaml
+> >  arch/arm64/boot/dts/qcom/Makefile                  |   1 +
+> >  .../boot/dts/qcom/qcs8550-retroidpocket-nova.dts   | 118 +++++++++++++=
+++++++++
+> >  2 files changed, 119 insertions(+)
 > >
-> > diff --git a/Documentation/devicetree/bindings/ufs/nxp,s32n7-ufshc.yaml=
- b/Documentation/devicetree/bindings/ufs/nxp,s32n7-ufshc.yaml
+> > diff --git a/arch/arm64/boot/dts/qcom/Makefile b/arch/arm64/boot/dts/qc=
+om/Makefile
+> > index 09b3c5b2d9dab..582805e89f4cb 100644
+> > --- a/arch/arm64/boot/dts/qcom/Makefile
+> > +++ b/arch/arm64/boot/dts/qcom/Makefile
+> > @@ -196,6 +196,7 @@ dtb-$(CONFIG_ARCH_QCOM)   +=3D qcs8550-aim300-aiot.=
+dtb
+> >  dtb-$(CONFIG_ARCH_QCOM)      +=3D qcs8550-ayntec-odin2mini.dtb
+> >  dtb-$(CONFIG_ARCH_QCOM)      +=3D qcs8550-ayntec-odin2portal.dtb
+> >  dtb-$(CONFIG_ARCH_QCOM)      +=3D qcs8550-ayntec-thor.dtb
+> > +dtb-$(CONFIG_ARCH_QCOM)      +=3D qcs8550-retroidpocket-nova.dtb
+> >  dtb-$(CONFIG_ARCH_QCOM)      +=3D qcs8550-retroidpocket-rp6.dtb
+> >  dtb-$(CONFIG_ARCH_QCOM)      +=3D qcs8550-rb5gen2.dtb
+> >  dtb-$(CONFIG_ARCH_QCOM)      +=3D qcs9100-ride.dtb
+> > diff --git a/arch/arm64/boot/dts/qcom/qcs8550-retroidpocket-nova.dts b/=
+arch/arm64/boot/dts/qcom/qcs8550-retroidpocket-nova.dts
 > > new file mode 100644
-> > index 000000000000..d9d5669be313
+> > index 0000000000000..2422be63f0f13
 > > --- /dev/null
-> > +++ b/Documentation/devicetree/bindings/ufs/nxp,s32n7-ufshc.yaml
-> > @@ -0,0 +1,99 @@
-> > +# SPDX-License-Identifier: GPL-2.0-only OR BSD-2-Clause
-> > +%YAML 1.2
-> > +---
-> > +$id: http://devicetree.org/schemas/ufs/nxp,s32n7-ufshc.yaml#
-> > +$schema: http://devicetree.org/meta-schemas/core.yaml#
+> > +++ b/arch/arm64/boot/dts/qcom/qcs8550-retroidpocket-nova.dts
+> > @@ -0,0 +1,118 @@
+> > +// SPDX-License-Identifier: BSD-3-Clause
 > > +
-> > +title: NXP S32N79 Universal Flash Storage (UFS) Controller
+> > +/dts-v1/;
 > > +
-> > +maintainers:
-> > +  - Larisa Grigore <larisa.grigore@oss.nxp.com>
+> > +#include <dt-bindings/gpio/gpio.h>
+> > +#include <dt-bindings/interrupt-controller/irq.h>
+> > +#include "qcs8550-ayntec-common.dtsi"
 > > +
-> > +# Select only our matches, not all jedec,ufs
-> > +select:
-> > +  properties:
-> > +    compatible:
-> > +      contains:
-> > +        const: nxp,s32n79-ufshc
-> > +  required:
-> > +    - compatible
-> > +
-> > +properties:
-> > +  compatible:
-> > +    items:
-> > +      - const: nxp,s32n79-ufshc
-> > +      - const: jedec,ufs-3.0
->=20
-> Any place actually use this fallback?
+> > +&{/} {
+> > +     model =3D "Retroid Pocket Nova";
+> > +     compatible =3D "retroidpocket,nova", "qcom,qcs8550", "qcom,sm8550=
+";
+>
+> Do these actually have any common lineage with the AYNTEC devices, the
+> common DT for which you include above?
 
-I don't think that this exists anywhere already:
-https://lore.kernel.org/all/?q=3D%22jedec%2Cufs-3.0%22
-$ git checkout korg-next/master=20
-Previous HEAD position was 2697ef8943c9 Add linux-next specific files for 2=
-0260813
-HEAD is now at f82a5da2f049 Add linux-next specific files for 20260826
-$ rg jedec,ufs-3.0
-$=20
+Please see the cover letter to this series.
 
-So not entirely sure what the point of this actually is, if the driver
-doesn't use the fallback.
-
-pw-bot: changes-requested
-
-Thanks,
-Conor.
-
---5vEWqBk1JjVncxTQ
-Content-Type: application/pgp-signature; name=signature.asc
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCao8M+QAKCRB4tDGHoIJi
-0g41AQCGpkSGcoAvf+CzvNuvNHv3yKhESnto+t6iakbMYinbeQD+KGZ2lO97yx4I
-pYak7Fs9jzkDftZfbefu6CGhyBZr/AM=
-=7Ege
------END PGP SIGNATURE-----
-
---5vEWqBk1JjVncxTQ--
+Aaron
