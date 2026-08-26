@@ -1,197 +1,87 @@
-Received: from mail-lf1-f49.google.com (mail-lf1-f49.google.com [209.85.167.49])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DE0BD30F526
-	for <linux-arm-msm@vger.kernel.org>; Wed, 26 Aug 2026 22:41:34 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.167.49
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E2B3E30F526;
+	Wed, 26 Aug 2026 22:44:10 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787784096; cv=none; b=S6JXck7F9U0cQxYAIy7GnLY1DFBrdPLbtohz9ff5ER5zJIt8OBreS+mCGqR4La/mcO6TojaXc4Yw0skfm8HVidamfyUx6lr5yDQw43lvh0j0WTrl6DstJPi6KUIpeXzOOZ7bmiJf9x1fP1xoN8qTCxnp4v6CmQ+SlQpXbthKXtw=
+	t=1787784251; cv=none; b=TGIXDNxAE5RHOP9bJeQh+p2zKOxLs5XVPWNk+9km/imFgWavdtGXt7Heebj86hMWcMUCdZhtDlzUdG+yzBNlVMWrA/ElCINbvNBo9LExUevCwCd/v/ejuGAF8aFXNLw3UFusJ+I8BGiA/0XTNFFBs3+mED/10HrDDfbrRFFhdoI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787784096; c=relaxed/simple;
-	bh=YYP4LDWXmiVuY4BifmOxZHgSPLWqAFlVz+yqVaK9xjQ=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=RDVjcPGx8F8XetutkLs+Zcg6/p9ml6WsvwUM9A5ZBhYCoZONhrmXc1oUjjsLLsnBGzbrelKqPVDwCk5VkmuD2OJrPzOzYiLKs/gi4OjHSeNc1h5lYpR/tDR8CeU6vhut0u3OchdTZSTuqRVVEoHuTKJ1aXTamAAjjNWdDbDcpMA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=Grulj4bS; arc=none smtp.client-ip=209.85.167.49
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
+	s=arc-20240116; t=1787784251; c=relaxed/simple;
+	bh=WtKwuad73ZA7KB+e2evPWVWEk8dpaQ9l5PD+N+RBzyM=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=tWzhdzfoxDEfDbR635UJaFM9/Sx7pg41ZX7ZIf2ILl5T6TTvI09aiu4g9Vh42U+8t0RgvpMeodmNQ2V/D5cc/6EI2AufHEymPAwRu4ciMPxBgmOPosnobYSGVRLa2iFoTULYiHpHWTtNX0KZ/0Ga1/LjUzyFev+K5pdTyg9JNGQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=e13YDO4H; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="Grulj4bS"
-Received: by mail-lf1-f49.google.com with SMTP id 2adb3069b0e04-5b4afb31f42so70339e87.3
-        for <linux-arm-msm@vger.kernel.org>; Wed, 26 Aug 2026 15:41:34 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1787784093; x=1788388893; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from:references
-         :cc:to:subject:user-agent:mime-version:date:message-id:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=GTHFPFjzAIX6+cbdIahV/L/cBl8xgXAW8UO1u2AMYdE=;
-        b=Grulj4bS2RWbOVK3QoaS5z9nJSC/BERxR6wGBHU+BHuLLJJqZfc/3GOObJIQcbC/kD
-         0VavTiw6SCM4uIG6+j27dIYYFYa7z1U7Liu8PSlJzBmU0nHzWvtDxZfJ2HovzWjZLP25
-         UBEHtZUsihMjsj5Q8vHpjmVFlxB2oOAaMsnY/L+gPS9IbO4xo0Zqqxymu38jR6va0Y3O
-         aSBan+lZL8aEtvtcK6y401L7C/7qZy3TwIiXsiPPEz3qv+Bkz8d+7pXtZMpEUGGZMNeU
-         I1yYmdCnAqdUCskqpe8IgktxblaEC/rWJDxFpiA2HTNX9HErpiUsAfxPzuCqLqbZ3/wU
-         /X5Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787784093; x=1788388893;
-        h=content-transfer-encoding:content-type:in-reply-to:from:references
-         :cc:to:subject:user-agent:mime-version:date:message-id:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=GTHFPFjzAIX6+cbdIahV/L/cBl8xgXAW8UO1u2AMYdE=;
-        b=nyOGQf86TS6TE+U3n+/TOu/O8Fzl28Ot7LaESS7DUC0AqeIMal+wyPXc5ZrFxemFSM
-         i1dFLfYT5RRCtUnOtVJPXonhYaoCENmDzQIN7KJwe6GN5qBlwMblgN2rqUr4DCGHda/f
-         HghqDVHYHwK8whNFiwLM2Q0SAZ5/KU0jj1gksLwJUpWE14/7d+CbTmelffS9ZkNvZAsQ
-         k+7USLhAiTFKP0fu0Q7CDw41vpoBqhwCoZWo5AQ+OEORYf44/i71JcJgf+sjRkGdFY2E
-         +n/3czpSk28QOv6hBlj6WuvCUu+KG7qX95pR1493cyz1IfaoagGxJMq8J7XZAFe4+LG/
-         esCQ==
-X-Forwarded-Encrypted: i=1; AHgh+Rqh4++hKIm7fTe7FGZWJHGjsho29ZBSFq9Z/VFoGPFasdFxXhZSTWW67/z85Y5vZwwSu67i1VzAAIghXXmZ@vger.kernel.org
-X-Gm-Message-State: AFuF++lNWSYmexHn0IYg5Llpef9sRldP495f47aSeLNlo+/4f7YRzT6K
-	ZzKKi/SJUe3N276PxJJvzRFmyTHi/QdfLiCAfabFij2hDXEhb0e59f3bJHvP4fHDYw0=
-X-Gm-Gg: AR+sD12OtPspiflps+DFamH4OeDVoQlJipyymTGidikPVBANu+2ZoZ4qZ1nVWrKVVgU
-	z4huu3brHLVjCRjFCT7WPTG1tB4H2NT8FrKd8HgK12hw4abhT6akQB+IZFwo1sSkIGJ61/cz88C
-	/ObE6RDCKY1IcIqAfRHhWL9f0E/0lOSrwB6cdTIpbfFfpWCORB2YQY8foG7YwrZOPjopC/uhaa6
-	XAHyASsUc4v+Y37cWcHkQDP7jF58gcZSqqJ3YfGE0LYVPYRZC0w5PiPUelPsfCje2SVkTE0eNcR
-	B+zjtqXlrMgc9ehoxmh1RIqVI7SUj2IJZVWjnSbEY2O/VetcRCQcOlcrVbvXWgxwBFYJi8PV/9E
-	MGidZkwxf2KgQ/ezuXDLnMCZNHTcQwtZbZ7yULUbJJJuG/4khALE0arJuMrIjv7AfiTQQcC7jun
-	9ibUVvAvAGYXaV5hSO+lvTB8hq5ZljHqNS9YkquNHDRmba/CnRVPAeRM90SoOR38i7n9N/VgB/L
-	XehtqdqcP7u3Wt2L9i+/cR+OYKEpzbzOznCmXcvwLEg2IWHF5JC
-X-Received: by 2002:a05:6512:3d8b:b0:5b1:5b9e:8de7 with SMTP id 2adb3069b0e04-5b4af80f515mr492279e87.2.1787784092777;
-        Wed, 26 Aug 2026 15:41:32 -0700 (PDT)
-Received: from [192.168.1.100] (91-159-24-186.elisa-laajakaista.fi. [91.159.24.186])
-        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5b4a41ae602sm855942e87.56.2026.08.26.15.41.32
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 26 Aug 2026 15:41:32 -0700 (PDT)
-Message-ID: <b74c2990-ad2a-4ec3-b7e3-e78797c3d4e0@linaro.org>
-Date: Thu, 27 Aug 2026 01:41:31 +0300
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="e13YDO4H"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2A28F1F000E9;
+	Wed, 26 Aug 2026 22:44:08 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1787784250;
+	bh=WtKwuad73ZA7KB+e2evPWVWEk8dpaQ9l5PD+N+RBzyM=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=e13YDO4Hn6u/k2+QNfIMl1j6PGkAWlcSWnEFCEqZ0sd7C6eZTvyMe7kXPSG2q1xNI
+	 7i7gyov7lL6+gI1U6QzKXUOSHRiVLE8mRQf/a0u3jhthpTYAWtBhAEdxl3shFjgKun
+	 bJCXLkv9EfWr1uQ6hF0zwYyIiRG9bZQj5n/9s6g6AS5ZjmcKtC6nX/Z9n1pAzzSsop
+	 EAqUnW7AUezEOLlFOQXc19uWGrGELKcE/i0po4RiqkuhGdOiut5D5GGkbt70j8Jm69
+	 vnmy6aFusMmmY2vLpA82VrWrn+MmmyTFBH0OZu60jFXNtb/TFB4GFNJmJEL8Ol3W23
+	 zxWDo0o+B9oVA==
+Date: Wed, 26 Aug 2026 23:44:05 +0100
+From: Mark Brown <broonie@kernel.org>
+To: Ajay Kumar Nandam <ajay.nandam@oss.qualcomm.com>
+Cc: Srinivas Kandagatla <srini@kernel.org>,
+	Liam Girdwood <lgirdwood@gmail.com>, Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>,
+	linux-sound@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v2 1/3] dt-bindings: sound: qcom,q6apm-dai: add stage-2
+ (SCM/VMID) access model
+Message-ID: <c7c29560-ff28-4321-989a-e081f2870555@sirena.org.uk>
+References: <20260826-a2a-shikra-vmid-v5-v2-0-c3dc62354eee@oss.qualcomm.com>
+ <20260826-a2a-shikra-vmid-v5-v2-1-c3dc62354eee@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/2] clk: qcom: common: Tune clock controller dependency
- on runtime PM framework
-To: Abel Vesa <abel.vesa@oss.qualcomm.com>
-Cc: Bjorn Andersson <andersson@kernel.org>, linux-arm-msm@vger.kernel.org
-References: <20260826112021.1455707-1-vladimir.zapolskiy@linaro.org>
- <20260826112021.1455707-2-vladimir.zapolskiy@linaro.org>
- <r3nxoo4w56oiyhbs6ysdh3rzfntwwk75m4csktar2hoxdhmfmu@rh4ghbaav4lu>
- <5c5a5617-1a74-435c-bff8-8813e4acc5b7@linaro.org>
- <6xbm6uq266y42ga54wkdn6364gjj44v4mmsjg53rhfi4e7rzmq@i2uwudm7pxcf>
- <a144bd80-f49a-42bc-90ef-a114467e4b39@linaro.org>
- <tpoqvfsrny7xqykjevjiyyuctwceenfjry6pf6zbwf2yg5hi7j@5rq554qe7ghj>
-From: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>
-In-Reply-To: <tpoqvfsrny7xqykjevjiyyuctwceenfjry6pf6zbwf2yg5hi7j@5rq554qe7ghj>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="Hd4wADyx6tZLNZ1g"
+Content-Disposition: inline
+In-Reply-To: <20260826-a2a-shikra-vmid-v5-v2-1-c3dc62354eee@oss.qualcomm.com>
+X-Cookie: Obey all traffic laws.
 
-On 8/26/26 16:05, Abel Vesa wrote:
-> On 26-08-26 15:33:02, Vladimir Zapolskiy wrote:
->> On 8/26/26 15:10, Abel Vesa wrote:
->>> On 26-08-26 14:50:03, Vladimir Zapolskiy wrote:
->>>> On 8/26/26 14:31, Abel Vesa wrote:
->>>>> On 26-08-26 14:20:20, Vladimir Zapolskiy wrote:
->>>>>> A clock controller driver is expected to be embedded into runtime
->>>>>> PM framework iff there are specified power domains to supply the clock
->>>>>> controller. If there is no power domain, then it's a noop to add
->>>>>> the driver into the runtime PM framework, and if there is a power domain,
->>>>>> the dependency can be considered using this fact rather than relying on
->>>>>> a probably stale data from a particular clock controller device driver.
->>>>>>
->>>>>
->>>>> I don't think this is right.
->>>>>
->>>>
->>>> Please elaborate what is wrong in the statement above.
->>>
->>> Enabling runtime PM just because there is a power domain attached to it
->>> is prone for breaking consumers. If for whatever reason the power
->>> domains parent child relationship isn't right, the child PD vote might
->>
->> If so, it's a bug on the consumer's side, likely this is unrelated to
->> this particular change, and it should be fixed independently from this
->> changeset.
-> 
-> Providers establish the parent child relationships for power domains.
-> Consumers don't need to be aware of a specific PD being the child of
-> another.
-> 
->>
->> To be precise, I don't see any interference between this series and
->> any side fixes, the changes can coexist IMO.
-> 
-> This change basically says "look, there is a PD attached, lets enable
-> runtime PM".
 
-Exactly, this is the expected situation to enable runtime PM if there
-is an attached PD, this is normal, and it means the change is correct.
+--Hd4wADyx6tZLNZ1g
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-> But if genpd is missing information about the hierarchy,
+On Wed, Aug 26, 2026 at 12:10:12AM +0530, Ajay Kumar Nandam wrote:
+> The APM DAIs expose PCM buffers that the backing DSP must be able to
+> reach. On existing targets the DSP runs in a stage-1 context and the
+> buffers are described to the SMMU via the iommus property.
 
-Sounds like a bug.
+Please submit patches using subject lines reflecting the style for the
+subsystem, this makes it easier for people to identify relevant patches.
+Look at what existing commits in the area you're changing are doing and
+make sure your subject lines visually resemble what they're doing.
+There's no need to resubmit to fix this alone.
 
-> enabling runtime PM could potentially leave the child PD unpowered due
-> to parent being powered off.
+--Hd4wADyx6tZLNZ1g
+Content-Type: application/pgp-signature; name="signature.asc"
 
-Sure, but it is not runtime PM enablement to blame, it's another problem
-to be fixed in the driver.
+-----BEGIN PGP SIGNATURE-----
 
->>> not trickle down to the parent PD. So if runtime PM suspend happens, it will
->>> drop the vote on its PD just because the genpd tree is missing stuff.
+iQEzBAABCgAdFiEEreZoqmdXGLWf4p/qJNaLcl1Uh9AFAmqPbDQACgkQJNaLcl1U
+h9D/mwf+Oldii1nLbT1oQfkDYm/DX8gI01xY4GAxyUSJpmwY3U09+eApU9Wg/5n/
+b1ERIqRCstALM7VEwbd1Gi2Pvhx+LKPySCosEzbqRviReImo0nUvN9ALMviEsh8A
+trwkMKtJ8kI231NWV8QlWZNRNYSiPX/E93hI/1R5G2NtNlW0kFdiBHpyIGPnmStO
+nkyFW3hGe9NdF6KIZXkCNXk0Brdb+8N4R8Wmgmbq9+s6oGL1PEmhfuWveCdHefSS
+Z4/ExLSoZslXDYFcXJP6ZR3RSIgH0WvNtyuIGGNLnVFb6LE4t8CwODtDg+/ZmgbI
+3JBUptRtHQDPIcAY88H2cH9BoQgeTQ==
+=unmd
+-----END PGP SIGNATURE-----
 
-This is expected and it's a totally valid behaviour.
-
->>> And you're enabling runtime PM for all controllers that have a PD attached,
->>> even for those that do not have the use_rpm set to true currently (e.g.
->>> Eliza).
->>
->> What is the point of specifying 'power-domains' property for Eliza GCC,
-> 
-> Having a 'power-domains' property in DT node, doesn't mean the device
-> has to do runtime PM implicitly. The reason a PD gets attached to a
-> DT node is to make sure that PD gets enabled and stays enabled for the
-> device to be operational. Runtime PM is just a great way of reducing
-> power consumption when the device is idle.
-
-A proper runtime PM enablement in a driver ensures this "PD gets enabled
-and stays enabled for the device to be operational" target, no contradiction.
-
-> So GCC needs the CX PD attached otherwise RPMh could drop the vote and
-> result either in undervolt or actually failed reg access.
-
-Is it going to be fixed one day, so the drivers earn "use_rpm", or not?
-
-So far I get an impression that all these reasonings above are unrelated
-to this change, it sounds like there is no problem in the runtime PM
-framework, and something else is broken
-
->> if it is anyway explicitly ignored by the driver? It sounds like anattempt
->> to cloak a bug, and if it is necessary before the bugs are got fixed, then
->> the 'use_rpm' flag shall be inverted to 'do_not_use_rpm' flag for broken
->> platforms.
-> 
-> Well, when you add support for a new platform, usually you don't enable
-> runtime PM by default for these controllers,
-
-Why not?
-
-So, today there is a flag to mark a properly supported platform like it
-is a wonder.
-
-As I said above, a properly supported platform/driver shall be the norm,
-and an ill platform should be marked as broken, and the quirk, if needed,
-should be inverted to the yelling 'do_not_use_rpm, I'm broken in upstream'.
-
-> until you made sure that it actually works. So use_rpm is basically
-> saying: "we're good with runtime PM now". So I'd not revert the flag either.
-
-I belive it's wrong to mark "good" drivers/platforms as "good" ones
-explicitly, the purpose of quirks is totally opposite.
-
-If a complete removal of the flag is not possible due to "broken" drivers,
-then I'll invert the flag in v2, and then remove it for the clock drivers,
-which does not require explicit PDs to be enabled at all.
-
--- 
-Best wishes,
-Vladimir
+--Hd4wADyx6tZLNZ1g--
