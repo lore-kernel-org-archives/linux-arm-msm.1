@@ -1,174 +1,190 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 63B01346AFB
-	for <linux-arm-msm@vger.kernel.org>; Wed, 26 Aug 2026 13:56:01 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 265D943CE6F;
+	Wed, 26 Aug 2026 13:57:11 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787752562; cv=none; b=T0WA6ED/Hstl9nP/dK+anatvo0FSDxUPc6RaIviAGCPZ9ZRYVzg0/K08GNf4bNQKfjrmoezcp9/NeBReQmto3+I1yrp52xhzMMe15rpboZoJ2PECNrHMfyXTuz8NBux7/dn5fA9xwQdikTI3naHai9mYZ2dSRz2jYFqJPUyHM9U=
+	t=1787752633; cv=none; b=vDknwred2wdlfAgUW8o2i4BHCcdANL5G4+YrpZ3y+fowReh7jYbH5AnntMY4V2Ha0wKE0Y8M8oQZK5eku56ovM6caMbded88vH9B+j7JoiaEdERhTsx0UkTxmXnIHQ9rhvwLvvhUZl//t9dEb12WrU9xp6og9fTybc7RZ1E2wNE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787752562; c=relaxed/simple;
-	bh=Fuk5n0D0xHvMhCw4oobLuLcYYMG2iZyU2fYgQ3JvG78=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=nVs5T4PBo38vT2u4xfqRyqUCq+cf2bSheZ1fumweCfI8QEqmDzze5RXTVm5llifxVUSANRYOxPbdt1FVu5icNAxvd8b0EAyoB5eWi4cUjbWeACqsCd1PN71irNPtzDs4M09yJ6psx6A2O5g4BHwqn6R2FAlRGI9upiD2DDUvlzE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=GNzIsZgY; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=OATq09f1; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1787752633; c=relaxed/simple;
+	bh=NcRPV43rVKX/2XfHEHMdDAXWGtg+e5JV86w+pOf6Kf8=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=MLHTGxJHzgDCcSHkxRwoq0YK1Pjz1hio8mrnv+CwYJifkyuk+qJIT/OzqWiIRtbNBuEJSPemHbZNCIxdNWqF9WSo1+50dKn15MSDZQ6s+G5RIBQbZ97Mz9+op1C2jXYOcmsk4qj2Pq+0lJTFb39JL+yrLXY73EmLXEwhnnTz1/I=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=fQZYM1s9; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="GNzIsZgY";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="OATq09f1"
-Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67QCBjvs1909029
-	for <linux-arm-msm@vger.kernel.org>; Wed, 26 Aug 2026 13:56:00 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:date:from:in-reply-to:message-id
-	:mime-version:references:subject:to; s=qcppdkim1; bh=GvF3M2opMH+
-	9skTu0SBBPHHkzkOh1jenzvfxkr9qQpo=; b=GNzIsZgYoZ+Cp0Ialf+Ep1+MYXo
-	Qq3p8AtunjfmGxaWwc5GMV7+vGictha0tVDGoJJxTEn4VChALWuARR2xxiZeZ0kh
-	/xo9R0wFcu/RXAuRfF7v6HbAXJTNPg3BjF6vR7WpI6SGARmAXQZi9MG6qHvPr/Ep
-	aGNZCtMfXQspnnq3yBm6sd5gf5/qnc33BTvFpP3mbQ/bEiujZLtxQIVKBCAxzodU
-	LgMfLRWvnq3cXnLknCmapMz018HzpMcCg//TseSIQNv2drRnhsnwnG+0aTEM3JUU
-	IRzRL2VqKFuqXTnGI1XbW9DGIQFKtfr3WZzZlHvEZKK7EwGhJRtH7+m/f1Q==
-Received: from mail-pj1-f71.google.com (mail-pj1-f71.google.com [209.85.216.71])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g9uq1sja1-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 26 Aug 2026 13:56:00 +0000 (GMT)
-Received: by mail-pj1-f71.google.com with SMTP id 98e67ed59e1d1-39640eebc57so2248872a91.0
-        for <linux-arm-msm@vger.kernel.org>; Wed, 26 Aug 2026 06:56:00 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1787752560; x=1788357360; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=GvF3M2opMH+9skTu0SBBPHHkzkOh1jenzvfxkr9qQpo=;
-        b=OATq09f1MWGBl3aKoXjrba6WGCa9wCoPqjbCoYCivbAtxXLVW0msBTJGtRjXtIZ309
-         AD6Qw9ENRFP3P7AqTF01fLgV8tqd+gcEomeQqonX4kuILBb5SCp6qM6NDwqfiuIzS0YP
-         ZfhhyZ5F9aBQgAcRVccmpF02PtDxF8L4sEMroSfa4fkFBej8wvCl1X5BhFgMs2Il2g+X
-         3oEMWUG6UtOUyscbD7x/BnNu5aVWGIsznYtiGAzwoMTPkfFuYrQkoNJp+aWAHg1O570K
-         YMb2v6Gm8NDNJIxHFivfF5/8IIYYHkMLnlIZ6Q74V8CUuODX7crTFhwrvc3AaOskgr+4
-         3crQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787752560; x=1788357360;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=GvF3M2opMH+9skTu0SBBPHHkzkOh1jenzvfxkr9qQpo=;
-        b=WM42bsDFIKFwBuWtwHMsJY8mJVjq5li5cDs9B+oS37+bBvEHT5w3yRxUxtAJwfTews
-         jQdObmrN8FoAn2op7+MmHFTE7w0tKOuhglOjrvSJG9jcv/flTAO9rbpZwXifpej3AKxu
-         6qih31+JvYpPFJ3kETs2y6Yh8lh5DxL5JgKxR5rhqjGdki8jbThHemUub8LJu347HP0m
-         JzWs0AwATRojWSg/v1oVECJcKdyMj59ty7DBlv+iZHgMg460yAHvp5iPxBYn5kuyF3dg
-         uWBUPVEMZVXOmWct1b2L95aer6eBMBfqvxUQiV5qWd+48d6OGwYD4w/lw7VcBSXflLY/
-         D7VQ==
-X-Forwarded-Encrypted: i=1; AHgh+RqefFwK8mxlmY4seVcfx90g9fiWTRgsrkV0T9vXgJXbjuuGY7wrXsZxQwWFarzaWs/QuLNMHiMe72/D7RHS@vger.kernel.org
-X-Gm-Message-State: AFuF++nPWWOjS5meAX3wFoAy0ir3TyNqpgbEiyegyYk8SsiA6JvpBPi2
-	FzLZhx4fn16Y+TQKamFHEZVPcoUIKzVATQe2m9kfOz77si2anhS/Ujj6K4EOO0MPoT+0JWHeYlq
-	jIWjBoWXZSrOQHknR4Kc/7ZX+IAoPmaPWlnSyT8t0cK30Oxqt4kDyRFt0PFprAYiUyrvc
-X-Gm-Gg: AR+sD11N8JirQSrdPC9TbvXSyPQ7w9tDVO8lzjwIm5raQ/RtlcOykJTMB1mvFoCfMVA
-	zDEMFaJ/bAQaqlAKN/k4FxSj1Iw/z8dgg+VZiIzU1iojmYZhFpdVxWQUTQ7ilKqWetdCS3Ecf1N
-	yvRbUcS472iCxeivB48FVTfvzKHUikOUDpiiHkfu8QYzlS7/f6aPq7ohOSfk64iidT/r4fBGP/g
-	CpeWSAyoIiiwzunl2KXqY1rso6Qt5I+Vz6suzv4+2aRTTKLGiRYFVpGU9JSIw653e+r1Gc2ZF8P
-	DrHFKm3pNZtSfaL5nOKN4qSk8ZSh/shK8K18HSMiL1HYLnljOzeiSOJ8Ilr/dtsGXC+RCWpjnVz
-	9O5k9JeDDTDla9y4PbK8T0BFiI+CFJsp/H0V3hOVBpM0CEKlMjInl+ONPNzPD
-X-Received: by 2002:a17:90b:268b:b0:380:fead:448d with SMTP id 98e67ed59e1d1-3966d73212emr15756299a91.13.1787752559632;
-        Wed, 26 Aug 2026 06:55:59 -0700 (PDT)
-X-Received: by 2002:a17:90b:268b:b0:380:fead:448d with SMTP id 98e67ed59e1d1-3966d73212emr15756154a91.13.1787752559073;
-        Wed, 26 Aug 2026 06:55:59 -0700 (PDT)
-Received: from QCOM-aGQu4IUr3Y.qualcomm.com (i-global052.qualcomm.com. [199.106.103.52])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-39668a573a1sm4347911a91.14.2026.08.26.06.55.51
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 26 Aug 2026 06:55:58 -0700 (PDT)
-From: Shawn Guo <shengchao.guo@oss.qualcomm.com>
-To: Ulf Hansson <ulfh@kernel.org>
-Cc: Bjorn Andersson <andersson@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>,
-        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
-        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
-        Abel Vesa <abel.vesa@oss.qualcomm.com>,
-        Bartosz Golaszewski <brgl@kernel.org>,
-        Anurag Pateriya <anurag.pateriya@oss.qualcomm.com>,
-        linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-pm@vger.kernel.org, linux-kernel@vger.kernel.org,
-        Shawn Guo <shengchao.guo@oss.qualcomm.com>
-Subject: [PATCH v2 2/2] pmdomain: qcom: rpmhpd: Add NMXC power domain for Nord
-Date: Wed, 26 Aug 2026 21:54:54 +0800
-Message-ID: <20260826135454.658615-3-shengchao.guo@oss.qualcomm.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260826135454.658615-1-shengchao.guo@oss.qualcomm.com>
-References: <20260826135454.658615-1-shengchao.guo@oss.qualcomm.com>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="fQZYM1s9"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 195591F00A3A;
+	Wed, 26 Aug 2026 13:57:09 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1787752631;
+	bh=Ng6UyxcJG17QHhsyPARDfyJal85V14/IeVc1pjyLAZ8=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=fQZYM1s9E4o7LMUGYuCBa0bLUCOAx+T5jP1cW776JNFJ7AvOmWPO/tHPrCCYqqYwG
+	 aozam6RXj2zmMKYpi8FLXOcIAg2YMWekRGVNuEBYdMCmvf995jrxdTZaGEvIN6XEaU
+	 dFkpXczvXpDsmrYQWSznX+i8iNYEQL2T8wU8gnQ3spoZYhRvH3uvzUehIeo3T6xMFi
+	 VtGx1Rdgk/MNGP7Ssr+HYgTNvQQh00Fr2K/Myy5NDRD9ugaFvg+GQyG0MsoNwsbgVG
+	 2o4VbyM8IUNRXGQs4J+dUa9V5SW+bcZ7KP2SCYQmSWQd69MfaC035yaH9mv8Uz5rtM
+	 KNV1kloDK7Oew==
+Date: Wed, 26 Aug 2026 15:57:07 +0200
+From: Andi Shyti <andi.shyti@kernel.org>
+To: Viken Dadhaniya <viken.dadhaniya@oss.qualcomm.com>
+Cc: Mukesh Kumar Savaliya <mukesh.savaliya@oss.qualcomm.com>, 
+	Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+	Conor Dooley <conor+dt@kernel.org>, linux-arm-msm@vger.kernel.org, linux-i2c@vger.kernel.org, 
+	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v3 2/2] i2c: qcom-target: Add driver for Qualcomm I2C
+ target controller
+Message-ID: <ao7vB8cDufnJZKAI@zenone.zhora.eu>
+References: <20260813-i2c-qcom-slave-v3-0-1d3742e2ad47@oss.qualcomm.com>
+ <20260813-i2c-qcom-slave-v3-2-1d3742e2ad47@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-GUID: l8PePsqNV1rcU8svPK1wJPEasZMDv7e5
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODI2MDExNSBTYWx0ZWRfXyFZCHYJzD78P
- RYk+s7HdJiJgw4M4oHsC3dMK+/5Oyg09ALD5hgsZIDEYY0fvBxB3Ys7q76eQWYKJk1c6sLph/sq
- FSh+ms13Xlx7niBfoXR5do5WpCmeHU9oaQfr02IxAhkM/afWPVW6Zte0Vogll2+fQw5NqdO0fL1
- L66gBG7S/QrPsbVrvBOJgr584GCEfJwdZ5qnbuy5HuY47GxqxG1eOg2VcDj8NPvIQirzDh1WAwx
- 6Qjo2MR3UIkeqwzGn+NiY6K3qACZlRgtuy+sOKLg49bTJENP59eveJEjewVb6Ci53+FXXd1UKml
- R+ScNo7MZfCh0Rf578/DtM1Q37ocsRtOU2T0qjUjP7X2Cb4XjK2PB27p5SoUQbJOivn/f+Q5Qha
- PtneD17qq2VcW9HWS1p86aKwq5+8jIWlVOvssmV1V7yK27of0lGbq/sju07UmzHSVwikiD48hwl
- x2lYzk0gajzR/7Zd3AA==
-X-Authority-Analysis: v=2.4 cv=Y77IdBeN c=1 sm=1 tr=0 ts=6a8ef070 cx=c_pps
- a=UNFcQwm+pnOIJct1K4W+Mw==:117 a=b9+bayejhc3NMeqCNyeLQQ==:17
- a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22 a=EUspDBNiAAAA:8
- a=lHabChWoiVafOPoG-uEA:9 a=uKXjsCUrEbL0IQVhDsJ9:22
-X-Proofpoint-ORIG-GUID: l8PePsqNV1rcU8svPK1wJPEasZMDv7e5
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODI2MDExNSBTYWx0ZWRfXxVrtNMaVW5yA
- m1EvY4aiYP87QJMrfbj8zEOYvgQphZ7qhxiV2EpFUlU52W8WPu9gGm880cXRGE3ZvEqWGWHVx2v
- vDuVKcfXBbozNl/1xkm/j7haqRyIBFI=
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-08-26_03,2026-08-26_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 suspectscore=0 bulkscore=0 priorityscore=1501 clxscore=1015
- phishscore=0 spamscore=0 malwarescore=0 adultscore=0 lowpriorityscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608260115
+In-Reply-To: <20260813-i2c-qcom-slave-v3-2-1d3742e2ad47@oss.qualcomm.com>
 
-From: Anurag Pateriya <anurag.pateriya@oss.qualcomm.com>
+Hi Viken,
 
-Add the nmxc.lvl RPMh resource and register it in the Nord power domain
-table. Nord supplies the NSP memory rail from this dedicated resource
-rather than from the shared MX rail, so consumers need it exposed as its
-own power domain.
+just a quick look here.
 
-Signed-off-by: Anurag Pateriya <anurag.pateriya@oss.qualcomm.com>
-Reviewed-by: Abel Vesa <abel.vesa@oss.qualcomm.com>
-Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-Signed-off-by: Shawn Guo <shengchao.guo@oss.qualcomm.com>
----
- drivers/pmdomain/qcom/rpmhpd.c | 6 ++++++
- 1 file changed, 6 insertions(+)
+...
 
-diff --git a/drivers/pmdomain/qcom/rpmhpd.c b/drivers/pmdomain/qcom/rpmhpd.c
-index 96e4bd2f5a14..717c44d1c39a 100644
---- a/drivers/pmdomain/qcom/rpmhpd.c
-+++ b/drivers/pmdomain/qcom/rpmhpd.c
-@@ -198,6 +198,11 @@ static struct rpmhpd mxc_ao = {
- 	.res_name = "mxc.lvl",
- };
- 
-+static struct rpmhpd nmxc = {
-+	.pd = { .name = "nmxc", },
-+	.res_name = "nmxc.lvl",
-+};
-+
- static struct rpmhpd nsp = {
- 	.pd = { .name = "nsp", },
- 	.res_name = "nsp.lvl",
-@@ -331,6 +336,7 @@ static struct rpmhpd *nord_rpmhpds[] = {
- 	[RPMHPD_MX_AO] = &mx_ao,
- 	[RPMHPD_MXC] = &mxc,
- 	[RPMHPD_MXC_AO] = &mxc_ao,
-+	[RPMHPD_NMXC] = &nmxc,
- 	[RPMHPD_NSP0] = &nsp0,
- 	[RPMHPD_NSP1] = &nsp1,
- 	[RPMHPD_NSP2] = &nsp2,
--- 
-2.43.0
+> +static void qcom_i2c_target_hw_reset(struct qcom_i2c_target *target)
+> +{
+> +	/* Clear error bits before SW_RESET; the reset may not be instantaneous */
+> +	writel(BIT(ERR_CONDITION) | BIT(CLOCK_LOW_TIMEOUT),
+> +	       target->base + I2C_S_IRQ_CLR);
+> +	writel(SW_RESET, target->base + I2C_S_SW_RESET_REG);
+> +	/*
+> +	 * I2C_S_SW_RESET_REG is write-only so completion cannot be polled.
+> +	 * Use a conservative delay to allow the reset to finish before
+> +	 * reconfiguring the controller.
+> +	 */
+> +	usleep_range(10, 20);
 
+This is also called in atomic context from the irq handler.
+Please avoid using usleep_range(), perhaps you can put this in a
+thread.
+
+> +	qcom_i2c_target_hw_init(target);
+> +	writel(target->slave->addr, target->base + I2C_S_DEVICE_ADDR);
+> +	writel(I2C_S_CORE_EN, target->base + I2C_S_CONFIG);
+> +}
+> +
+> +static irqreturn_t qcom_i2c_target_handle_error(struct qcom_i2c_target *target,
+> +						u32 irq_stat)
+> +{
+> +	u8 val = 0;
+> +
+> +	if (irq_stat & BIT(ERR_CONDITION))
+> +		dev_err(target->dev, "Error condition: unexpected Start/Stop bits\n");
+> +	else
+> +		dev_err(target->dev, "Clock low timeout\n");
+> +	qcom_i2c_target_dump_regs(target);
+> +	qcom_i2c_target_hw_reset(target);
+> +	i2c_slave_event(target->slave, I2C_SLAVE_STOP, &val);
+> +	target->status = 0;
+> +	return IRQ_HANDLED;
+> +}
+
+...
+
+> +static irqreturn_t qcom_i2c_target_irq(int irq, void *dev)
+> +{
+> +	struct qcom_i2c_target *target = dev;
+> +	u32 irq_stat, rx_bits;
+> +
+> +	/*
+> +	 * Dispatch priority (highest first):
+> +	 *   ERR_CONDITION / CLOCK_LOW_TIMEOUT  — hardware error, triggers SW reset
+> +	 *   STOP_DETECTED                      — end of transaction, clears all state
+> +	 *   RESTART_DETECTED                   — repeated start, resets state before
+> +	 *                                        any data phase in the same snapshot
+> +	 *   STRCH_RD                           — read-phase data supply
+> +	 *   RX_FIFO_FULL / RX_DATA_AVAIL /
+> +	 *   STRCH_WR                           — write-phase Rx, coalesced into one drain
+> +	 */
+> +	irq_stat = readl_relaxed(target->base + I2C_S_IRQ_STATUS);
+> +	if (!irq_stat)
+> +		return IRQ_NONE;
+> +
+> +	dev_dbg(target->dev, "IRQ status: 0x%x\n", irq_stat);
+> +
+> +	/*
+> +	 * Load target->slave once. Both reg_slave() and unreg_slave() disable
+> +	 * the IRQ before writing the pointer, so it cannot change while this
+> +	 * handler runs. Sub-handlers may dereference target->slave directly.
+> +	 *
+> +	 * The core is enabled only in reg_slave() and disabled in unreg_slave(),
+> +	 * so no bus activity is expected here. Clear and discard any stale IRQ.
+> +	 */
+> +	if (!READ_ONCE(target->slave)) {
+> +		writel(irq_stat, target->base + I2C_S_IRQ_CLR);
+> +		return IRQ_HANDLED;
+> +	}
+> +
+> +	if (irq_stat & (BIT(ERR_CONDITION) | BIT(CLOCK_LOW_TIMEOUT)))
+> +		return qcom_i2c_target_handle_error(target, irq_stat);
+> +
+> +	if (irq_stat & BIT(STOP_DETECTED))
+> +		return qcom_i2c_target_handle_stop(target, irq_stat);
+
+...
+
+> +	target->xo_clk = devm_clk_get(dev, "xo");
+> +	if (IS_ERR(target->xo_clk))
+> +		return dev_err_probe(dev, PTR_ERR(target->xo_clk),
+> +				     "failed to get XO clock\n");
+> +
+> +	target->ahb_clk = devm_clk_get(dev, "ahb");
+> +	if (IS_ERR(target->ahb_clk))
+> +		return dev_err_probe(dev, PTR_ERR(target->ahb_clk),
+> +				     "failed to get AHB clock\n");
+> +
+> +	ret = clk_prepare_enable(target->xo_clk);
+> +	if (ret)
+> +		return dev_err_probe(dev, ret, "failed to enable XO clock\n");
+> +
+> +	ret = clk_prepare_enable(target->ahb_clk);
+> +	if (ret) {
+> +		clk_disable_unprepare(target->xo_clk);
+> +		return dev_err_probe(dev, ret, "failed to enable AHB clock\n");
+> +	}
+
+The problem is that these clocks are not disabled in the returns
+below.
+
+Thanks,
+Andi
+
+> +
+> +	target->irq = platform_get_irq(pdev, 0);
+> +	if (target->irq < 0)
+> +		return target->irq;
+> +
+> +	ret = qcom_i2c_target_icc_init(target);
+> +	if (ret)
+> +		return ret;
+> +
+> +	ret = devm_request_irq(dev, target->irq, qcom_i2c_target_irq, 0,
+> +			       dev_name(dev), target);
+> +	if (ret)
+> +		return dev_err_probe(dev, ret, "request_irq failed for IRQ %d\n",
+> +				     target->irq);
+> +
+> +	qcom_i2c_target_hw_init(target);
+> +
+> +	platform_set_drvdata(pdev, target);
+> +
+> +	ret = qcom_i2c_target_adap_init(target);
+> +	if (ret)
+> +		return dev_err_probe(dev, ret, "i2c_add_adapter failed\n");
+> +
+> +	return 0;
+> +}
