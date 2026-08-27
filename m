@@ -1,88 +1,33 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 22ABC314A6F
-	for <linux-arm-msm@vger.kernel.org>; Thu, 27 Aug 2026 05:55:30 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 163293002AB;
+	Thu, 27 Aug 2026 06:03:31 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787810133; cv=none; b=A5GMExNG7Kep4Cj+wDP6tWonoYy6KD2g+IhEbU9TQfGXZE3iqTt3z4UWQHZ6i6wunk88vqNPM2lPFQX8OrBPVo51PaMNmytWj1mN/H3Vx0DUwWUHatYLSogQq5pTzAivJhRWymIHys6Ne5CWR6IUMdn3G9USpXgGt32SYybswTU=
+	t=1787810613; cv=none; b=fSTmyRCetUYe71h0jry8ZItwfY6AI6i8Sr3GCH4sJDfLiajjeAL8WPrba1+UhrcDgLyCk6jq3f6gPApc9ZTOHs3YZWZE4xLgHOx3l4YL12fTyqwm5iVXH+tlIkhdYzB5Ckg1eE7Y3Pefi199TO4XWAEqvU3HxeainDSWiHtlGaU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787810133; c=relaxed/simple;
-	bh=hPMuyywoVecl8ax2KcK5SPpsS7pAlk7mB4FHSFpJk6w=;
+	s=arc-20240116; t=1787810613; c=relaxed/simple;
+	bh=eVYzJGAIjQtqQDbeCgDE5Md9phOns18vg8xOXxuMsRk=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=SAlBga/k2D2p6wqpEqGQ8uP28gUSkcQsd4+C7QTieQPYa4D2Gr3yR9b5Ys+BZC/WskCRRrlv0DrvyTwM19ySqOAEieyqjM32dgWyAIukPQnvSIUi/wa9TWeaw1W2Nipenzcq+0+UrT0eL8oPwwqOJkBT4fTe09LWk4WI7DtI/vE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=Cv1Q9mLx; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=kejDy50V; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	 In-Reply-To:Content-Type; b=kVLxX24/5F0iyNvAqCWi7NnfwDSO83Jii7qEs2vaUlZn4ye4QxbQwGA1pf/l75eac9nhT8/3fkQ1wRIKHHwK8cpWaxmwCJXKRnMiRf3Oa+nNe8fkYqvpcb+lb5u234pEaWu6H6NfmJhEwAG27jWNweoOO9TzL1lJMQHeSk9lGgQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=b084J/mv; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="Cv1Q9mLx";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="kejDy50V"
-Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67R3J4oP2851107
-	for <linux-arm-msm@vger.kernel.org>; Thu, 27 Aug 2026 05:55:30 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	f9KwtqjdHygA+JfB7KLbWaNqlpDVgF/I0UutfMHntlA=; b=Cv1Q9mLxWzu4kkmi
-	pojw3wJuTKcBQU5/brnmhfMjXRBQQ2UzSk0XLb5fzssGnUQzae/brdDrsb2S2Bix
-	hBqOwlwd36CMbh5aV5SUjinaDLe8AxjXmDccvSUk1+sXvproKpqaxOSN7K4didVZ
-	TrW5KNcsHenQWr2suhF5nLgMXI3PpOYhSjNpnwVfKC33S2TE0U3K9OCINcd2Ma0O
-	JmtW5Vz+fSdBKVhWleTO4Ns7iwfXSGviWgF6PMaaspspdLaVSp+IW45k6QXeYcTi
-	Y691rCLDaAviGRACwt6LslSFusMC90FMd/D7w5P1D2OX4HeLqOf8DYHBKrhuSNGV
-	sDKkXQ==
-Received: from mail-pj1-f70.google.com (mail-pj1-f70.google.com [209.85.216.70])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ga4eca6bg-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Thu, 27 Aug 2026 05:55:30 +0000 (GMT)
-Received: by mail-pj1-f70.google.com with SMTP id 98e67ed59e1d1-38e1118e4abso3135211a91.0
-        for <linux-arm-msm@vger.kernel.org>; Wed, 26 Aug 2026 22:55:30 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1787810129; x=1788414929; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=f9KwtqjdHygA+JfB7KLbWaNqlpDVgF/I0UutfMHntlA=;
-        b=kejDy50V7d7ZxipPtxk51ExLxy2msywQE97bBcDXc7C9iufkTFSzSDYaI6tq7+NewB
-         bc0t/ibjhxasdMvVbcwVuiw5vDiFV+UkLcAVsKGxGpVAY5aSdLNMGLwbU22Yk9lzl+PP
-         xv8+a76nKepTNGHvuLSPVfIqrOZ+YZHk8+iCeB+dCBJKILAQaYjafPkFhICH8tfsfXhG
-         S8LVn5w/1AGs1uFq0C3YAHQxwmvu/BAccyNNt9DInOhx0PNMs017bRSWpK5gHXris7Wl
-         9sjtLcYvtRCXJtsMbYNiG16o+qqeKIzRq6/qyk3HXidWGJgDbjy8EnpIhgVkunrfz4tE
-         bicQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787810129; x=1788414929;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=f9KwtqjdHygA+JfB7KLbWaNqlpDVgF/I0UutfMHntlA=;
-        b=bDmySyMRTBXn5EjhX5mOFRCajtHqUyaVkIEo/gGb8hDe3U6IIIDZe8D6UEQ/y6YrOc
-         uNtzQV9tOO6o5JGlmWLY9SLJ8xzSOHBORVxbjQrFrgaDHjNlbgHd8n9Ak9LpD60JvHEZ
-         DMvhQchFtZ5jyxg7DT+EFTLzFOy+Gu3zFdxUC6tk3t6bc/ny0qaSJpn0hFyUZw6gW2xn
-         Uyd4HRUNrcuXOLziR3fWfdcNeJtcjirFrtYWD1luIJIOIMugQ9LUnfb6VhdB/PMrHLjr
-         RPyY4O+OyNwnZf5upIJk7p8Ogq6M69MncLtlGLoQH5q32Xt+CHmM33lgquXFokrisv0K
-         WvEg==
-X-Forwarded-Encrypted: i=1; AHgh+RpjBbkgJNQl3+uCP/bCXq0o7MVUGUfUttARSGkN28n2vUdo+TX0/f1y81839WGwOgTv6hxkxwxFADyXKmMG@vger.kernel.org
-X-Gm-Message-State: AFuF++lV6EkslcXmXhcjrLKtXnf87ojFnB/1fVIQ3DECBshg5kGFZaWK
-	0M6YGq8EruE7QZoxtEinrEefy2HOkiNnmXn7GOpXoVGvwff9sdbSK2mQrwqo28s9X80k+OTVzoi
-	zg6/1OQIyRYWBsG3DaloPeObKnoUQXv+JBL4LfckInSlSnwkflNiqMGknpxMl1849TSaf6C3FCo
-	rj
-X-Gm-Gg: AR+sD11vDBUoVWMeAIdLTolKvwU//gwImvIB5Hqh3itNHG462yhpAMFskh88X27AYSe
-	InviEhski6mS+xpxQ7bRYS6ZNDYW2dlatbQ9CzpKNzg2tfpy7v3dyeu2GvTdWXcULYSGDgoXmnY
-	JyjqyAkhGsK1qxsL2Pasw1X7sxPF4qnlSd5g/RcVKmtxyci7bzezyLs3Bpn7xN950NfnCN77JRc
-	AQwnfH3cYgOaeRDu3QfurEROo92WLO+7btK84B0Mm56/SagTCPyfJiQLuHvLcobOiVrwQjpWmzw
-	jFx1jOdcZirxKU092biqqxmRJz9sF2st3W7oTL9zRDfVdfxadb1PpkeaSSmECTrKcNi3rCyL63C
-	x58vzOvMbOskQU+IaD6DO7IwiBgM7a3IeTQ==
-X-Received: by 2002:a17:90b:586d:b0:396:4cbf:45bc with SMTP id 98e67ed59e1d1-3966d491c45mr26906383a91.16.1787810129206;
-        Wed, 26 Aug 2026 22:55:29 -0700 (PDT)
-X-Received: by 2002:a17:90b:586d:b0:396:4cbf:45bc with SMTP id 98e67ed59e1d1-3966d491c45mr26905985a91.16.1787810128348;
-        Wed, 26 Aug 2026 22:55:28 -0700 (PDT)
-Received: from [10.218.39.50] ([202.46.22.19])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-141a8f20036sm22588440c88.5.2026.08.26.22.55.24
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 26 Aug 2026 22:55:27 -0700 (PDT)
-Message-ID: <9c28300b-a17f-4324-b9d5-8fc800e4d794@oss.qualcomm.com>
-Date: Thu, 27 Aug 2026 11:24:16 +0530
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="b084J/mv"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 564891F000E9;
+	Thu, 27 Aug 2026 06:03:26 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1787810611;
+	bh=lJlXA2kwLoTfDo4tJ3+9iNIhRW5M0Zb7cMLr/tH8zJU=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To;
+	b=b084J/mvtWIlJZRA0TvNW50gmDidKFYYLtXiIK/+EoWo8nNi4HZFQ3RB3pKZ5yJsR
+	 xZGJn1oGgULrLcLlNvk7dAbFeSgjaQrG0Hf/wTVMpUC0e9WuJmN8dSJb/XoxMHhuLc
+	 EzfisW4LrqLTvEnKd5wCvjoAtgUCs2ITmC442ys/wQRgEqZn7wo3bUmAwLXNXxMT/W
+	 PcbmYMtuw4qCRWlX2+X+Rfvba95TbSBBWGO3L5CC99QbgE1l2qFIeJ4IPhWdw11b6V
+	 ohlPjU8eqZvh4qZEbOOZ4lXr4SSpZzIfTxPDsZeqJ862KqHE24iw+QJmhlrJAGt/aC
+	 Xj1ditT75Gb2w==
+Message-ID: <006617c6-e3b0-4a3b-85e5-6b5af8f11879@kernel.org>
+Date: Thu, 27 Aug 2026 08:03:24 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -90,284 +35,211 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4] iommu/io-pgtable-arm: Add support for contiguous hint
- bit
-To: Daniel Mentz <danielmentz@google.com>
-Cc: Prakash Gupta <prakash.gupta@oss.qualcomm.com>,
-        Will Deacon <will@kernel.org>, Robin Murphy <robin.murphy@arm.com>,
-        "Joerg Roedel (AMD)" <joro@8bytes.org>, linux-arm-msm@vger.kernel.org,
-        linux-arm-kernel@lists.infradead.org, iommu@lists.linux.dev,
-        linux-kernel@vger.kernel.org
-References: <20260804-iommu_contig_hint-v4-1-d7a47ed5db98@oss.qualcomm.com>
- <CAE2F3rBQQEHsksOyE2ojQPbMd_vvFqaFMC2RzT0B6KkxMB5YgQ@mail.gmail.com>
- <c84e61b1-785e-4a47-9082-c5111bf35fd4@oss.qualcomm.com>
- <CAE2F3rC80=ZpiHVtmRDU6f8g4AwV_RrJ-Zqr0Xi7zbUc0fsQog@mail.gmail.com>
+Subject: Re: [PATCH v2 1/3] dt-bindings: sound: qcom,q6apm-dai: add stage-2
+ (SCM/VMID) access model
+To: Ajay Kumar Nandam <ajay.nandam@oss.qualcomm.com>,
+ Srinivas Kandagatla <srini@kernel.org>, Liam Girdwood <lgirdwood@gmail.com>,
+ Mark Brown <broonie@kernel.org>, Rob Herring <robh@kernel.org>,
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
+ <conor+dt@kernel.org>, Jaroslav Kysela <perex@perex.cz>,
+ Takashi Iwai <tiwai@suse.com>
+Cc: linux-sound@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
+References: <20260826-a2a-shikra-vmid-v5-v2-0-c3dc62354eee@oss.qualcomm.com>
+ <20260826-a2a-shikra-vmid-v5-v2-1-c3dc62354eee@oss.qualcomm.com>
+From: Krzysztof Kozlowski <krzk@kernel.org>
 Content-Language: en-US
-From: Vijayanand Jitta <vijayanand.jitta@oss.qualcomm.com>
-In-Reply-To: <CAE2F3rC80=ZpiHVtmRDU6f8g4AwV_RrJ-Zqr0Xi7zbUc0fsQog@mail.gmail.com>
+Autocrypt: addr=krzk@kernel.org; keydata=
+ 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
+In-Reply-To: <20260826-a2a-shikra-vmid-v5-v2-1-c3dc62354eee@oss.qualcomm.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-Authority-Analysis: v=2.4 cv=KIBqylFo c=1 sm=1 tr=0 ts=6a8fd152 cx=c_pps
- a=0uOsjrqzRL749jD1oC5vDA==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
- a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22
- a=EUspDBNiAAAA:8 a=CZE9kkL2blzp5uFjx4sA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
- a=mQ_c8vxmzFEMiUWkPHU9:22
-X-Proofpoint-ORIG-GUID: mTv17uRCQAniu_CPZ5Mj0t42votRc-A9
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODI3MDA0NyBTYWx0ZWRfX87BBV9EcKZ+a
- u184zxBm4QuvqMPQyXHg94GV/Qorp4dTmkPfw7nqOctYjOXk1fg++Z83fWhRrcBHqenE8QYRV4e
- mJjJQEuISxyYhbXZhoX9XKWJ2+UUutQm8hrKVoDRkGrJUyP+224oCl9/j1QEXaOAG0qUVbE8TDN
- oOrtWIGla6Z92HVsd3fbLUyDzLb7hm1bJTSvPQJzws1iJOau8VpaxpE7EXuc/h+Maez50hb1UCk
- kgX3Orkb5N1DL9mQTaS9uJmZMze0jLvo3ZmFc4RUkyS9j0lBsF2tMmys+lnwC2zyET2VIULfqc8
- 9trpGaBbfO0TgevIz6UHlQkfmn8fLiYdzXyH+VgWWTQDXvM7ppBsjMHpVPXopDCGHdgBpb2zvgA
- 0XrQl3UCufF0r6GmaY4UkrAAamPcfWeLD/o3cAoa5xp3eHuTgwydnRiqeWloAlzVK9oC6Tf+fq3
- h2zi26zh5UGyiSi+KbA==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODI3MDA0NyBTYWx0ZWRfX+88uAAp2LsZ5
- BJrzMclHlP3ImKVaW0jM3HuSFzjCuMj4KAVU27S0SG3mi24d/reljVPQ2puvVBJF95M5VxkSdhr
- mT4hWzf65P4M17hgykvSh53ouj6oWN0=
-X-Proofpoint-GUID: mTv17uRCQAniu_CPZ5Mj0t42votRc-A9
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-08-27_02,2026-08-26_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0 clxscore=1015 impostorscore=0 spamscore=0 phishscore=0
- adultscore=0 suspectscore=0 lowpriorityscore=0 bulkscore=0 priorityscore=1501
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608270047
+Content-Transfer-Encoding: 7bit
 
-
-
-On 8/15/2026 2:15 AM, Daniel Mentz wrote:
-> On Thu, Aug 13, 2026 at 11:13 PM Vijayanand Jitta
-> <vijayanand.jitta@oss.qualcomm.com> wrote:
->>
->>
->>
->> On 8/11/2026 10:34 AM, Daniel Mentz wrote:
->>> On Mon, Aug 3, 2026 at 11:19 PM Vijayanand Jitta
->>> <vijayanand.jitta@oss.qualcomm.com> wrote:
->>>> diff --git a/drivers/iommu/io-pgtable-arm.c b/drivers/iommu/io-pgtable-arm.c
->>>> index 476c0e25631af..23a238de53ed5 100644
->>>> --- a/drivers/iommu/io-pgtable-arm.c
->>>> +++ b/drivers/iommu/io-pgtable-arm.c
->>>> [...]
->>>> +static unsigned long arm_lpae_get_cont_sizes(struct io_pgtable_cfg *cfg)
+On 25/08/2026 20:40, Ajay Kumar Nandam wrote:
+> The APM DAIs expose PCM buffers that the backing DSP must be able to
+> reach. On existing targets the DSP runs in a stage-1 context and the
+> buffers are described to the SMMU via the iommus property.
 > 
-> I'm wondering if we need this function at all. I'm trying to
-> understand that would happen if we advertise page sizes that cannot
-> possibly be used given the constraints imposed by cfg->ias and
-> cfg->oas.
-> arm_lpae_read_and_clear_dirty() appears to check if the end of the
-> iova range is out-of-bounds (WARN_ON((iova + size - 1) &
-> ~(BIT(cfg->ias) - 1))), but function arm_lpae_map_pages() appears to
-> not have such a check.
+> On platforms such as Qualcomm Shikra, where audio is served by the modem
+> DSP (mDSP) rather than the ADSP, the DSP runs in a stage-2 protected
+> context and cannot use the SMMU. The buffers are reachable only after
+> hypervisor (SCM) memory assignment to the fixed set of consumer Virtual
+> Machine IDs (VMIDs) that own that protected context. Describe those
+> consumers with a new qcom,vmids property.
 > 
-> If we need to restrict the "cont sizes", we could consider Will's
-> suggestion: Add all the sizes to cfg->pgsize_bitmap in
-> arm_lpae_restrict_pgsizes, and then subsequently clamp it like so
+> The two access models are mutually exclusive: a node carries either
+> iommus (stage-1/SMMU) or qcom,vmids (stage-2/SCM), expressed with a
+> oneOf constraint. iommus is therefore no longer unconditionally required.
+> SCM assignment replaces the buffer's current owners with the supplied
+> destination set, so the driver always adds HLOS to that set itself to
+> retain host access; HLOS must not be listed in qcom,vmids.
 > 
-> cfg->pgsize_bitmap &= (BIT(cfg->ias) - 1))
-> cfg->pgsize_bitmap &= (BIT(cfg->oas) - 1))
+> When qcom,vmids is present the PCM buffers must reside in reserved-memory
+> carveouts that are SCM-assigned to the consumer VMIDs. Add an optional
+> memory-region property listing those carveouts. The first entry is the
+> control-path buffer and subsequent entries are data-path buffers.
+> memory-region is only meaningful alongside qcom,vmids, enforced via
+> dependentRequired.
 > 
-> That would be shorter than the 39-line arm_lpae_get_cont_sizes function.
+> Signed-off-by: Ajay Kumar Nandam <ajay.nandam@oss.qualcomm.com>
+> ---
+>  .../devicetree/bindings/sound/qcom,q6apm-dai.yaml  | 72 +++++++++++++++++++++-
+>  1 file changed, 70 insertions(+), 2 deletions(-)
 > 
+> diff --git a/Documentation/devicetree/bindings/sound/qcom,q6apm-dai.yaml b/Documentation/devicetree/bindings/sound/qcom,q6apm-dai.yaml
+> index 9e5b30d9c6e6..d9a6bc4a14f2 100644
+> --- a/Documentation/devicetree/bindings/sound/qcom,q6apm-dai.yaml
+> +++ b/Documentation/devicetree/bindings/sound/qcom,q6apm-dai.yaml
+> @@ -10,7 +10,15 @@ maintainers:
+>    - Srinivas Kandagatla <srinivas.kandagatla@linaro.org>
+>  
+>  description: |
+> -  This binding describes the Qualcomm APM DAIs in DSP
+> +  This binding describes the Qualcomm APM DAIs in DSP.
+> +
+> +  The DSP that runs the APM must be able to reach the PCM buffers. On
+> +  existing targets the DSP runs in a stage-1 context and the buffers are
+> +  described to the SMMU via iommus. On targets whose APM DSP runs in a
+> +  stage-2 protected context that cannot use the SMMU, the buffers are
+> +  reachable only after hypervisor (SCM) memory assignment to the fixed
+> +  set of consumer VMIDs that own that protected context, described by
+> +  qcom,vmids. The two access models are mutually exclusive.
+>  
+>  properties:
+>    compatible:
+> @@ -20,9 +28,42 @@ properties:
+>      minItems: 1
+>      maxItems: 2
 
-Agree , I think both arm_lpae_get_cont_sizes and arm_lpae_cont_size_fits can
-be removed.
-
-Instead I'll add something like below to arm_lpae_restrict_pgsizes as suggested.
-
-+ if (!(cfg->quirks & IO_PGTABLE_QUIRK_ARM_NO_CONT_HINT)) {
-+        unsigned long sizes = cfg->pgsize_bitmap;
-+
-+        while (sizes) {
-+                unsigned long size = BIT(__ffs(sizes));
-+
-+                cfg->pgsize_bitmap |= arm_lpae_num_cont(size) * size;
-+                sizes &= ~size;
-+        }
-+  }
-
-  cfg->ias = min(cfg->ias, max_addr_bits);
-  cfg->oas = min(cfg->oas, max_addr_bits);
-
-+ cfg->pgsize_bitmap &= (BIT(cfg->ias) - 1);
-+ cfg->pgsize_bitmap &= (BIT(cfg->oas) - 1);
-
->>>> +/*
->>>> + * Install num_entries leaf entries starting at ptep (index map_idx_start
->>>> + * within the current table), tagging arm_lpae_num_cont()-sized groups with
->>>> + * the contiguous hint where both idx and paddr are aligned to the group
->>>> + * size. Entries in a misaligned group are installed without the hint.
->>>> + *
->>>> + * idx and paddr both advance by block_size per entry, so their alignment
->>>> + * relative to the group size is invariant across a run of entries within
->>>> + * this call: once a group qualifies (or fails to), every later whole group
->>>> + * does too, up to num_entries. This merges each such run into a single
->>>> + * arm_lpae_init_pte() call instead of one call per group.
->>>> + */
->>>
->>> Can you provide an example for when this function installs descriptors
->>> where the contiguous bit is only set on a subset of them. I would
->>> assume that the contiguous bit is either set for all descriptors or
->>> none of them.
->>>
->>
->> That assumption doesn't hold in general -- it's only true when the
->> map request happens to start and end on a cont_size boundary. For an
->> arbitrary map_pages() call it usually doesn't.
-> 
-> I believe you won't see arbitrary map_pages() calls. I understand that
-> these calls are exclusively coming from __iommu_map_domain_pgtbl()
-> which uses iommu_pgsize() to determine optimal page sizes.
-> 
->> Example, 4K granule (num_cont = 16, cont_size = 64K),
->> iova = paddr = 0x1000, pgcount = 34:
->>
->>    - idx 1..15  (off != 0, misaligned prefix):        installed plain
->>    - idx 16..31 (off == 0, paddr now 64K-aligned):     installed w/ CONT
->>    - idx 32..34 (off == 0, remaining < num_cont):      installed plain
-> 
-> In the example you provided, I expect that you'll receive three
-> separate calls from __iommu_map_domain_pgtbl:
->  * idx 1..15 with pgsize 4KB
->  * one call with pgsize 64KB
->  * idx 32..34 with pgsize 4KB
-> 
-> If I took your argument further, I could argue that we'd also have to
-> check if we can put down a block mapping if iova = paddr = 0x0 and
-> pgcount = 512, but we're not doing that either.
-> 
-> Could you provide the input parameters to the iommu_map() call that
-> resulted in the parameters you provided i.e. iova = paddr = 0x1000,
-> pgcount = 34:
-> 
-
-You're right -- for the iommu_map()/__iommu_map_domain_pgtbl() path, iommu_pgsize()
-already splits the request at the boundaries you describe before install_leaf() ever
-sees it, so install_leaf() doesn't need to handle a mixed prefix/CONT-group/suffix
-chunk for that caller.
-
-That said, install_leaf() is shared by other callers that reach it through
-ops->map_pages() directly, without going through iommu_pgsize(). panthor_vm_map_pages()
-(drivers/gpu/drm/panthor/panthor_mmu.c) is one -- it allocates its io_pgtable_ops via
-alloc_io_pgtable_ops(ARM_64_LPAE_S1, ...), same as any other LPAE consumer, but does its
-own chunking with a local get_pgsize() that only ever returns SZ_4K or SZ_2M, with no
-notion of the 64K/32M CONT boundaries. That can hand install_leaf() exactly the mixed
-iova=paddr=0x1000, pgcount=34 shape in a single call (panfrost's map loop uses the same
-get_pgsize() and hits the same case). So the prefix/aligned-group/suffix handling in
-install_leaf() is still needed for that path.
+As I said last time, different hardware, different programming
+interface, different features, so a different compatible.
 
 
->>
->> One arm_lpae_install_leaf() call, three chunks, CONT set on only the
->> middle one.
->>
->>>> +static int arm_lpae_install_leaf(struct arm_lpae_io_pgtable *data,
->>>> +                                unsigned long iova, phys_addr_t paddr,
->>>> +                                arm_lpae_iopte prot, int lvl,
->>>> +                                int map_idx_start, int num_entries, int num_cont,
->>>> +                                arm_lpae_iopte *ptep, size_t *mapped)
->>>> +{
->>>> +       size_t block_size = ARM_LPAE_BLOCK_SIZE(lvl, data);
->>>> +       size_t cont_size = num_cont * block_size;
->>>> +       int done = 0;
->>>> +
->>>> +       while (done < num_entries) {
->>>> +               int idx = map_idx_start + done;
->>>> +               int remaining = num_entries - done;
->>>> +               int off = idx % num_cont;
->>>> +               arm_lpae_iopte pte = prot;
->>>> +               int chunk, ret;
->>>> +
->>>> +               if (off) {
->>>> +                       /* Misaligned prefix: advance to the next boundary */
->>>> +                       chunk = min_t(int, num_cont - off, remaining);
->>>> +               } else if (remaining >= num_cont && IS_ALIGNED(paddr, cont_size)) {
->>>> +                       /* Aligned: merge every full group in this run */
->>>> +                       chunk = remaining - remaining % num_cont;
->>>> +                       pte |= ARM_LPAE_PTE_CONT;
->>>> +               } else {
->>>> +                       /*
->>>> +                        * Aligned idx but paddr doesn't line up with cont_size,
->>>> +                        * or too short for a full group. That holds for the
->>>> +                        * rest of this call too, so install the remainder
->>>> +                        * plain in one go.
->>>> +                        */
->>>> +                       chunk = remaining;
->>>> +               }
->>>> +
->>>> +               ret = arm_lpae_init_pte(data, iova, paddr, pte, lvl, chunk, ptep);
->>>> +               if (ret)
->>>> +                       return ret;
->>>> +
->>>> +               *mapped += chunk * block_size;
->>>> +               ptep += chunk;
->>>> +               iova += chunk * block_size;
->>>> +               paddr += chunk * block_size;
->>>> +               done += chunk;
->>>> +       }
->>>> +
->>>> +       return 0;
->>>> +}
->>>> +
->>>>  static int __arm_lpae_map(struct arm_lpae_io_pgtable *data, unsigned long iova,
->>>>                           phys_addr_t paddr, size_t size, size_t pgcount,
->>>>                           arm_lpae_iopte prot, int lvl, arm_lpae_iopte *ptep,
->>>> @@ -462,21 +608,44 @@ static int __arm_lpae_map(struct arm_lpae_io_pgtable *data, unsigned long iova,
->>>>         size_t block_size = ARM_LPAE_BLOCK_SIZE(lvl, data);
->>>>         size_t tblsz = ARM_LPAE_GRANULE(data);
->>>>         struct io_pgtable_cfg *cfg = &data->iop.cfg;
->>>> -       int ret = 0, num_entries, max_entries, map_idx_start;
->>>> +       bool cont_hint_enabled = !(cfg->quirks & IO_PGTABLE_QUIRK_ARM_NO_CONT_HINT);
->>>> +       int num_entries, max_entries, map_idx_start;
->>>> +       int num_cont = cont_hint_enabled ? arm_lpae_num_cont(block_size) : 1;
->>>> +       bool use_cont = cont_hint_enabled && num_cont > 1;
->>>>
->>>>         /* Find our entry at the current level */
->>>>         map_idx_start = ARM_LPAE_LVL_IDX(iova, lvl, data);
->>>>         ptep += map_idx_start;
->>>>
->>>> +       /*
->>>> +        * Normalize an exact whole-CONT-group request down to the
->>>> +        * equivalent block_size/pgcount so it funnels through the same
->>>> +        * leaf path below. arm_lpae_install_leaf() independently decides,
->>>> +        * per sub-chunk, whether the CONT hint actually applies.
->>>> +        */
->>>> +       if (use_cont && size == block_size * num_cont) {
->>>> +               pgcount *= num_cont;
->>>> +               size = block_size;
->>>
->>> This appears to me as if you're throwing away information about
->>> whether this mapping request is suitable for the contiguous bit, and
->>> then in arm_lpae_install_leaf(), you're trying to recover that
->>> information. Can't you just do "prot |=ARM_LPAE_PTE_CONT" here and
->>> then completely avoid the logic in arm_lpae_install_leaf?
->>>
->>
->> That optimization only applies to the exact-whole-group case already
->> handled above (size == block_size * num_cont). A single map_pages()
->> call can also cover the general case shown above, where a misaligned
->> prefix/suffix surrounds one or more aligned groups within the same
->> call. Setting prot |= ARM_LPAE_PTE_CONT unconditionally here would
->> incorrectly tag those misaligned entries with the hint.
-> 
-> Due to how __iommu_map_domain_pgtbl and iommu_pgsize operate, I don't
-> expect to see the prefixes and suffixes that you are describing.
-> Instead, I expect we'll see separate calls to __arm_lpae_map(): One
-> for the prefix, one for the set of aligned groups and another one for
-> the suffix.
+>  
+> +  memory-region:
+> +    description:
+> +      Reserved-memory carveouts (shared-dma-pool, no-map) that hold the
+> +      PCM buffers and must be SCM-assigned to the VMIDs in qcom,vmids.
+> +      The first entry is the control-path buffer; the second entry is
+> +      the data-path buffer. Only used together with qcom,vmids.
+> +    minItems: 1
+> +    maxItems: 2
+
+List the items with description, isntead of free form text
+
+items:
+  - description:
+  - description:
+
+> +
+> +  qcom,vmids:
+> +    description:
+> +      Virtual Machine IDs (VMIDs) of the processors that consume the PCM
+> +      buffers and therefore must be granted access through SCM memory
+> +      assignment. Required on targets whose APM DSP runs in a stage-2
+> +      protected context and cannot use the SMMU; mutually exclusive with
+> +      iommus. SCM assignment replaces the buffer's current owners with the
+> +      supplied set, so the driver always adds HLOS to the destination list
+> +      itself to retain host access; HLOS must not be listed here. All
+> +      listed VMIDs and HLOS receive read-write access.
+> +    $ref: /schemas/types.yaml#/definitions/uint32-array
+> +    minItems: 1
+> +    maxItems: 2
+> +    uniqueItems: true
+> +
+>  required:
+>    - compatible
+> -  - iommus
+> +
+> +oneOf:
+> +  - required:
+> +      - iommus
+> +  - required:
+> +      - qcom,vmids
+> +
+> +dependentRequired:
+> +  memory-region:
+> +    - qcom,vmids
+>  
+>  additionalProperties: false
+>  
+> @@ -32,3 +73,30 @@ examples:
+>          compatible = "qcom,q6apm-dais";
+>          iommus = <&apps_smmu 0x1801 0x0>;
+>      };
+> +  - |
+> +    #include <dt-bindings/firmware/qcom,scm.h>
+> +
+> +    reserved-memory {
+> +        #address-cells = <2>;
+> +        #size-cells = <2>;
+> +        ranges;
+> +
+> +        audio_heap_mem: audio-heap@a1000000 {
+> +            compatible = "shared-dma-pool";
+> +            reg = <0x0 0xa1000000 0x0 0x100000>;
+> +            no-map;
+> +        };
+> +
+> +        audio_mdsp_carveout_mem: audio-carveout@a1100000 {
+> +            compatible = "shared-dma-pool";
+> +            reg = <0x0 0xa1100000 0x0 0x400000>;
+> +            no-map;
+> +        };
+> +    };
+
+Drop entire node, not really relevant.
+
+> +
+> +    dais {
+> +        compatible = "qcom,q6apm-dais";
+> +        /* index 0: control path, index 1: data path */
+> +        memory-region = <&audio_heap_mem>, <&audio_mdsp_carveout_mem>;
+> +        qcom,vmids = <QCOM_SCM_VMID_LPASS QCOM_SCM_VMID_MSS_MSA>;
+> +    };
 > 
 
-Agreed, Replied in above comment.
 
-Thanks,
-Vijay>>
->> arm_lpae_install_leaf()'s off/remaining logic is what detects those
->> group boundaries per chunk, so I don't think we can drop it in favor
->> of always setting prot |= CONT at this call site. The size ==
->> block_size * num_cont check here is just a fast path for the common
->> whole-group case, avoiding a walk through install_leaf() for something
->> the caller has already told us.
->>
-
+Best regards,
+Krzysztof
