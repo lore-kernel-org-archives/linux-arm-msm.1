@@ -1,651 +1,160 @@
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3577B4908AA
-	for <linux-arm-msm@vger.kernel.org>; Thu, 27 Aug 2026 16:40:38 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8032948EBF6
+	for <linux-arm-msm@vger.kernel.org>; Thu, 27 Aug 2026 16:44:48 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787848840; cv=none; b=g3ENyBjUT2hTzmXl5zUh10R7DntNBdQTOhCZvVRTBGq76W4zBLA5lkaURg4jLq34SV138jLVyiW6lgM1ZbwAQ3gxaPrlqr4lLOwieGrd7v6BZgX/8Dh/BOTBXV3XorLUHAFu6FCkkxpRJRlK1bSdwS8gEUsPWAG0eKSr6/xKBmQ=
+	t=1787849090; cv=none; b=UqgXb4mBZ/psSlKD+ksW3BsGhVJy2Twh10UyUlUbKYOJ5N340T/U5xjzkid4GBtC4RFoCM6xoga7bw1xvz6q2Zl19IPYgKRm5/y8/2Rb/41d68mSYWCzrUfvqTUNByAj27ORtFLIS8pC4P32zDjkX4wJqZfewNk9FSeNuAnYlQA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787848840; c=relaxed/simple;
-	bh=VMPk8iPi43dEtmYkKXt01Gm+7aUp6TmVF3AL6pfOShE=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=Sku3zUjYp6pNwLCir1l1aF1fofsfCHWgYGN8cGRwGyplaqAuAb5fBxex/v3Z5RGcMr86hCTPzqLpItOkcbGK3RliAzci4U1Qt5L/y/qxklrMkbbapfOhqKsHxu66/YDJIXXUaoNiwVudfVrZTwT23ZU7S42rfI1kSq6xBhYxmoQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=ZIz7gNZh; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=XFwUxMkY; arc=none smtp.client-ip=205.220.168.131
+	s=arc-20240116; t=1787849090; c=relaxed/simple;
+	bh=LIWudmjBuuTC7oQDej8L1/vHU4MkvFeRxy+wdt0a58A=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=EtVH8qJN7BVNuUuSjdJ8Iqc3ysf6cw2HqvU+HG7xcii0MuoFI+M6IHWTRefXsjTqTSrXxzJumKsWzKhIbhjdIx/TeOKiJSydilcRQFfQdfRV6MiMG9++n/zKnV7pVNJ6CUUiKxEBremuWWikEwhQX+NPB5IPOGvPQ8gxHPACgEo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=kZInGT3E; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=Z6nHE+6Y; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="ZIz7gNZh";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="XFwUxMkY"
-Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67RG4OZU342332
-	for <linux-arm-msm@vger.kernel.org>; Thu, 27 Aug 2026 16:40:37 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="kZInGT3E";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Z6nHE+6Y"
+Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67RFbg9u3829417
+	for <linux-arm-msm@vger.kernel.org>; Thu, 27 Aug 2026 16:44:48 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	1CyKk8AZ6pREhlf/bx2YZm9z4JF80rBaz1RtOIA/3FU=; b=ZIz7gNZhskc8aILc
-	bxHHRGHVCTVHcxR+fdwonbQlkc2xMG6Bj5l1Ww4O65Rv23O0ZsETh+185LDlOiIZ
-	dwH80625bwDxPNGfd89YQnldI+qBE3j1KpCkhr+achh4lz/lMMsJHCXjAuYtvx/t
-	gNVxzl3rvOomBl0lHWgzGQZVra/2MKlPOMrzxUiVLlcRI3V8gkZCyW9CsKfjE5c3
-	lUEUvSAnxKtL6jSbZKCS57SqfFExVlb5+aZTHFMHCC6WcCI+wH7usBq1tJYMggck
-	aT+SG/rGUpcU61SgW+NGd6FJzusQ8ui6ASFz2j/rs/4hwPDNRaaNGebQWfPuFIc8
-	84Fb9A==
-Received: from mail-ot1-f71.google.com (mail-ot1-f71.google.com [209.85.210.71])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4garee0515-1
+	CaEEc2AwRgBYqxtCo+TjIv+MSn3HdYNx2K80+kYCoZE=; b=kZInGT3ECVzaq4wJ
+	7GaKlLA5q37fgPbHoGzEu4Mzmt4ATXsuzcwsi8TES9wCtD0j1eBYIgcivZQEoZpp
+	Ve2iKcWNtUEzg7InLKOjjDMCuxN5NHN4JcoAC18N88LJ9tYPljPqmcw6WcHjt2nB
+	smvuMotesHkm38LDuub+IxbwDW37/PGIMn3WagVIytlAxv1uhytou1C1H/fUyxm8
+	xb9CBeZHGfoZO7QpG5vxwhhpLJkDreDDgvWTRZ+U8+XPw1bsIMbyaiPs5lDJHL5l
+	V3yEw9B/+2eqDvrkcY9RorKG7jV5Q3OTioMJGsFgedg62K5FQGcDe21P54hKrznC
+	822rRg==
+Received: from mail-oa1-f70.google.com (mail-oa1-f70.google.com [209.85.160.70])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4game7s9yw-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Thu, 27 Aug 2026 16:40:37 +0000 (GMT)
-Received: by mail-ot1-f71.google.com with SMTP id 46e09a7af769-7f1da5e5b06so136205a34.2
-        for <linux-arm-msm@vger.kernel.org>; Thu, 27 Aug 2026 09:40:37 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 27 Aug 2026 16:44:47 +0000 (GMT)
+Received: by mail-oa1-f70.google.com with SMTP id 586e51a60fabf-43cd2d12617so219681fac.3
+        for <linux-arm-msm@vger.kernel.org>; Thu, 27 Aug 2026 09:44:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1787848836; x=1788453636; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=1CyKk8AZ6pREhlf/bx2YZm9z4JF80rBaz1RtOIA/3FU=;
-        b=XFwUxMkYJokW74lkZ5o/78L/CMoOfuEjcrv2MCkLSjWtz5GNXIIPjuPeBHwgz/Y8+d
-         IWgjIW5eC4vqyzauEZ/pP9IUopztL/vlwqYtRTDJz8nxIzNmUZ+YuZL7YGtIk44pfdIs
-         AqDJPWwhgPPsHeaUDybIaPd++dd6vJZKKaQKDHvdJGv9KTa5t278Etu9i7R56WHkqvRq
-         WO4Y4DpJiCZAm02Fg1EydtQoptPbZkR892WifxOJz2c2d3bWLoDfS+phJS0G+XBKBeZm
-         k6i7oiL8QFPdAUZWm/X8ooOJFSPo/O1Jlb0DCUHoxs45m+uvIchEBAsKklx0VpNQWlE6
-         JTXA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787848836; x=1788453636;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+        d=oss.qualcomm.com; s=google; t=1787849087; x=1788453887; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=1CyKk8AZ6pREhlf/bx2YZm9z4JF80rBaz1RtOIA/3FU=;
-        b=Ujl8lL1+51KdWRc3yBRI+Pd/VI3sDfr6MHdzoWJwy80K+0Kf9wIi6vmu8d1sT+Tdd7
-         5weUzSUynksVXtUv/1vwdDdArQgwG8m6xCkqOBXzcz/pM6/HAlQCX1P1Vl2Ba/GxDgBZ
-         3fOpIAaIyIK7KD8uwzO62jNrSkeyHRqZjNO5CqVtb88DJjROVlpD4k8Tkrk9qoQmz7cH
-         jYzQ3ejgXoGv9iDKyWgwX6jIUKroa9N70/5/RX4H3L/0VInCwsSivKVj31T7XuzFxAw6
-         LMm5BxjOiKxm0UqaHIiiB5R0E7g3T2ZxGoQwPUOrYg7Pj+EFo8nVFQlUi5+J5prM5am2
-         tITw==
-X-Gm-Message-State: AFuF++n67aN1xUhZmQXF9sk0ec5/7SZnPyRLXH/7WOh84UZC63YyQkZA
-	5hfy81gRqKCLrhnwf7cV/p7KUezCU+FyKUlEJxodJJB3nsooVhpnxmj3TVDjED19OVEfwYCk1D6
-	cPwtC37gTd3nEdcpO6YpCj0jMMMKiFKcrlTeOYDla75/f+h/obUhlmxMPJuyq6RIlLMeE
-X-Gm-Gg: AR+sD11zF2qfo0rftxHl2QDDabpE/gQOYP0E80iIvGFE/OMpUU7R23O/1x6cM//RjZu
-	3eUL4PBsJ/v5VQUo+1V0A+R5WCsJD7EftSIRnEAylWawUYfZ8CRPMiCIUnVF2ZPSM10a4V2Iwq0
-	42C1hLuF9np2VhA0nG5cGtg8Lmoco0TPTaRC9viih6XRGU6qHN3UE95robu+RzvOnA20O+AWAgr
-	GstRi4h8ajiffeTyvfj42h6nEqXQLTMbCN+2SlrWYK1+Rx3bamz81zBYscT5YVsj7ym9PNci8pm
-	PIDAfXCXrcHfojWujRfsihXS8VmlJfDasiifI2nbBe4DXlKeEo830tmAVJqYeaNuqh9lnn29Spt
-	nJY8XAy5F5avwhQ9xq23DAlqerrsQ82NG7oCLqCtjo+df8SQeWA+NO8Nm0s3D9QTagMpt5m3ZuQ
-	WGDkQH4C1l35UKtL3/vN3OWBA=
-X-Received: by 2002:a05:6820:618:b0:6a0:f44b:1265 with SMTP id 006d021491bc7-6b1a035e476mr14878602eaf.4.1787848836007;
-        Thu, 27 Aug 2026 09:40:36 -0700 (PDT)
-X-Received: by 2002:a05:6820:618:b0:6a0:f44b:1265 with SMTP id 006d021491bc7-6b1a035e476mr14878512eaf.4.1787848835490;
-        Thu, 27 Aug 2026 09:40:35 -0700 (PDT)
-Received: from hu-hardshar-blr.qualcomm.com (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
-        by smtp.gmail.com with ESMTPSA id 006d021491bc7-6b1a24bce78sm4253171eaf.3.2026.08.27.09.40.26
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 27 Aug 2026 09:40:35 -0700 (PDT)
-From: Hardeep Sharma <hardeep.sharma@oss.qualcomm.com>
-Date: Thu, 27 Aug 2026 22:08:16 +0530
-Subject: [PATCH v4 15/15] ARM: dts: qcom: Add initial device tree for Kuno
- SoC
+        bh=CaEEc2AwRgBYqxtCo+TjIv+MSn3HdYNx2K80+kYCoZE=;
+        b=Z6nHE+6YWOlHBfJZMuLMCGsxeBwSVzNnDNU6BoV7VPEg+vvJ9zFMdFRxvx75cslKa+
+         jLkz790Xc8pglkfiaTDtJZAxIpI6deV22AHtaCTnWISk0EjThyDIUkGQcW9mfokIdEBp
+         U6JJdUD0mcwRYltgnV7nptD7RfGFBlxjbza3wHFstfQLXQL6nnYajYHtWisNSIfDbK92
+         GOiJsa0QKjANFoo4WAW9V2vmD05WqT7so9HuPQT6s6wIKPs4rDBkLPyHsKQZB0Td9k7c
+         ykXfDGu1zp/W6tBOW4teFo5KBeam3oRCUfN5lEj0wDKwFlXydA/1xLz79CwaDucDILCQ
+         ZY0Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1787849087; x=1788453887;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=CaEEc2AwRgBYqxtCo+TjIv+MSn3HdYNx2K80+kYCoZE=;
+        b=dynQWHfrWmkMlDAHi+uzz34dG3d3mwFdF2rde4QN2rarCCG3oyK1HholcihMV6BQUs
+         NNX8lAkpEkHHxg01WCzAyvfKCQLnA5aQ23frHQmEXUU7SLbteLMCUb4HXIhcRYR4CDMg
+         1dt+QAZ4D0A6XCjJmxjl1qAQ6enNjG/HTpNvZU8153hcSRb/Gw+0mZCfGE1LLHjFbSvb
+         WdPIKpGBCQFqpE5TMKhl+7zcpHHKr2Z0ghgES0Xm8eXAE98wo+hAPAdKQOzRpQUnhgsM
+         MYPHeqGuXZ8DaUhuVFLJIYaa7u51bBClCM53d1eNGQ76zN1juN8Pr8n1mz/SBfTLt+Hb
+         Hv8Q==
+X-Forwarded-Encrypted: i=1; AHgh+RopvJn4sLEXzZx+xrxKG2QuEv39kBZIKVCxctDfeapeGiTnptk0TXXPFWueGSKPssx20s1amqxxa9rsjw63@vger.kernel.org
+X-Gm-Message-State: AFuF++nPBntZm8UOOkkFdwz658qLaXbN3AiH9xYWS0Lu/79X6coOT5rO
+	8UiRptJolfBADNkmw9X8g5Iuz11bm9bHgmopTBLT0ZcfRlvBFOLyG1a4R+ch88ZSV6GkI6NlkwJ
+	dqYDRb8rvufLESpADCQKKCbStfLhB6+IGpf5JWQwXckXSlq6CjbQfgglLZSFcfd7hELEy
+X-Gm-Gg: AR+sD13jKEjZKT4CGnf8VYcgi54oD/FGpyn0FCtmFwOyZrAeJSC8k0pZHEq1doWBqU3
+	zls7QlSrJz2jqQxBDCu8ryDdcaAQHcmCl0eXtCdb8xnoPmxAQ7PlST/KIy60NtmjfHLwpTMK4ms
+	8fBb/vdPBUtx0MXlPlicw5pk53/yXN2Y6/HEpYpWOhcI79CrYkXoj1yxY0M7LMUOmXdcpi4xwl9
+	7sLADqGV0vl5NmGzPdYUhSmmaxFS+Ei9rf0KpFFjRD3xnAvWtgRy5dq0DYoUgrA+/G4pzr20nzz
+	IGWCtCViKXKN3E78OakJ73fdVW1wumRd1MJYVqaffu9eEGG1m7SgqrHUd8qENt/AmOaDxTWuyDg
+	SGEh2fb9Y8eyy4wwH4r/oNBPqS/1QZ1M=
+X-Received: by 2002:a05:6820:83da:20b0:6b1:95fb:81e with SMTP id 006d021491bc7-6b1a049cb22mr12410519eaf.22.1787849086998;
+        Thu, 27 Aug 2026 09:44:46 -0700 (PDT)
+X-Received: by 2002:a05:6820:83da:20b0:6b1:95fb:81e with SMTP id 006d021491bc7-6b1a049cb22mr12410471eaf.22.1787849086580;
+        Thu, 27 Aug 2026 09:44:46 -0700 (PDT)
+Received: from [192.168.1.6] ([122.171.23.69])
+        by smtp.gmail.com with ESMTPSA id 006d021491bc7-6b1a253d6e7sm5112145eaf.7.2026.08.27.09.44.37
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 27 Aug 2026 09:44:46 -0700 (PDT)
+Message-ID: <67819cd4-013f-411f-8f5a-77df0e3a88df@oss.qualcomm.com>
+Date: Thu, 27 Aug 2026 22:14:34 +0530
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260827-kuno-soc-support-v4-15-dd34f235fc1a@oss.qualcomm.com>
-References: <20260827-kuno-soc-support-v4-0-dd34f235fc1a@oss.qualcomm.com>
-In-Reply-To: <20260827-kuno-soc-support-v4-0-dd34f235fc1a@oss.qualcomm.com>
-To: Bjorn Andersson <andersson@kernel.org>,
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 07/15] interconnect: qcom: Add Kuno interconnect
+ provider driver
+To: Abel Vesa <abel.vesa@oss.qualcomm.com>
+Cc: Bjorn Andersson <andersson@kernel.org>,
         Konrad Dybcio <konradybcio@kernel.org>,
         Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>,
         Rob Herring <robh@kernel.org>,
         Krzysztof Kozlowski <krzk+dt@kernel.org>,
         Conor Dooley <conor+dt@kernel.org>, Ulf Hansson <ulfh@kernel.org>,
         Michael Turquette <mturquette@baylibre.com>,
-        Stephen Boyd <sboyd@kernel.org>, Brian Masney <bmasney@redhat.com>,
-        Georgi Djakov <djakov@kernel.org>,
+        Stephen Boyd
+ <sboyd@kernel.org>, Brian Masney <bmasney@redhat.com>,
+        Taniya Das <quic_tdas@quicinc.com>, Georgi Djakov <djakov@kernel.org>,
         Bartosz Golaszewski <brgl@kernel.org>,
         Linus Walleij <linusw@kernel.org>, Thomas Gleixner <tglx@kernel.org>,
         Radu Rendec <radu@rendec.net>, Robert Marko <robimarko@gmail.com>,
-        Guru Das Srinagesh <linux@gurudas.dev>,
-        Taniya Das <taniya.das@oss.qualcomm.com>
-Cc: linux-arm-msm@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
-        linux-kernel@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-pm@vger.kernel.org, linux-clk@vger.kernel.org,
-        linux-gpio@vger.kernel.org,
-        Hardeep Sharma <hardeep.sharma@oss.qualcomm.com>,
-        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
-        Abel Vesa <abel.vesa@oss.qualcomm.com>
-X-Mailer: b4 0.15-dev-47773
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1787848688; l=12320;
- i=hardeep.sharma@oss.qualcomm.com; s=20260204; h=from:subject:message-id;
- bh=VMPk8iPi43dEtmYkKXt01Gm+7aUp6TmVF3AL6pfOShE=;
- b=SPbz05t3R8boKbDajcmBt7Z66jqziTESt5X5RZnlljA91R+TkwG0nj3SOxGLNyD7pHFtzTe+y
- AZbRkSgMRSQBlNcf+1WEz/9RZpp8mj8iI7RVY+T2Vzb1gFRsNQzPeoB
-X-Developer-Key: i=hardeep.sharma@oss.qualcomm.com; a=ed25519;
- pk=IvwPDKA2xr6jWaCIBBY2ran/H0124QUzVfun+CtEikM=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODI3MDE0MCBTYWx0ZWRfX+uKZq/KJjADp
- O3cFo8uyPehK6N5eZi1ogiVEcJm4vz+cq1lQOkKhclTnRd2cb5SpSmOFFhsMh9A1MOLKWUWG7vW
- FUeq+ko26J+wwW8MgZSWm1z42exVZmrtUn2r/QXSBkdpdGFNZ4CjRnrrZPD2ugXNVwqDtuZC3j7
- kvU/fHexXQyaIdRV8Vfn9vBRrFfAFd1JDHYCo/VFM9R0aN/zz3jTPR//y42++notdeKvzVqx2Cf
- 4OQV9E9sRxhiX8OoqRZNBz5iKj9Bm158fqCAEMtZnSLvBvETiBQKJzmBjp5lwUoa4t23L9ATrg7
- Zb9c3ZZcSgMSAbWFJcNhh6CyVK6FLze9GtJ9CC010TmETKeSwtZpqs7qZ1tSpCjvruFpiAw59kg
- iPnz+9cJuYdhi5+tpSV37uBzyj5tWNJMIp444MG2UaZgkMpIm4ynhIRK48G67cGha6tbScirnUF
- d0hwBDy3gj2HJbzTicg==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODI3MDE0MCBTYWx0ZWRfX3vAVxZZz5qYf
- QGnaik7ayto5UZLHNlyrCh0DZnDJ67GHH0bTNOqCX9GVZ77/PekhpSgyEFbpKvKMFXargip+nG9
- opWDQ1JOWnn1NgDc3ZkYHc9XaDGTO0c=
-X-Proofpoint-ORIG-GUID: UeepHSyLdIMyTpu0bKdLYYYZt4tkfe04
-X-Proofpoint-GUID: UeepHSyLdIMyTpu0bKdLYYYZt4tkfe04
-X-Authority-Analysis: v=2.4 cv=e8E2j6p/ c=1 sm=1 tr=0 ts=6a906885 cx=c_pps
- a=OI0sxtj7PyCX9F1bxD/puw==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+        Guru Das Srinagesh <linux@gurudas.dev>, linux-arm-msm@vger.kernel.org,
+        linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org,
+        devicetree@vger.kernel.org, linux-pm@vger.kernel.org,
+        linux-clk@vger.kernel.org, linux-gpio@vger.kernel.org,
+        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+References: <20260821-kuno-soc-support-v3-0-196e2b306368@oss.qualcomm.com>
+ <20260821-kuno-soc-support-v3-7-196e2b306368@oss.qualcomm.com>
+ <mhjq6szchgrgoegi7jrzmeumlhdjr2njkh5jdyjb3cjb4pd2hb@qjvx34fyo5au>
+Content-Language: en-US
+From: Hardeep Sharma <hardeep.sharma@oss.qualcomm.com>
+In-Reply-To: <mhjq6szchgrgoegi7jrzmeumlhdjr2njkh5jdyjb3cjb4pd2hb@qjvx34fyo5au>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODI3MDE0MSBTYWx0ZWRfXyhL5DSmQgbJS
+ bWuhz/R4U2Lm0YdW1TUH+m1nkV3O4h7EkP62cp5uyFBNQWf16e6wI647Hv+2jbX57Zkfgnk8NyM
+ pn8p2fcI/5DCbrj4mSkMt2eT0UVCm8D4Ip4fkZ4zmQX4L84v5UxII+8tWXezp2tifqZKyHDtrZ4
+ RIjjVFuMgtd8sWcBHev0G92BxoqYa+oo4y4IZoZtFaGWYeqthGato5fHNuWwQAyugvE7LY9ph9j
+ pIj2Kbloa8LOk9gL/WFBs8/e3mgrDAKbCPn5bfwZDf+agW+I77cR9qkKH4NSwqYjEnZw3LkznRH
+ DwJ19fE5cVIhrq99P4zNoOBLZfxmZzwv4kUG6IH3uOfehV8hc8zJBGiEHFVi7A6FsQbUG6FqMw5
+ mRcv9bHk73k7UHL/odPnbEMXUcd643NG9Z4H4sBpHBOblMLLRZmSXSYREF/CL67guUyqDK5zfFL
+ modKSKWqnuOexCfPrvw==
+X-Proofpoint-GUID: ZqVJkhoXk-1dUg36t5vJGJCGMOtp-HEz
+X-Authority-Analysis: v=2.4 cv=Yrc/gYYX c=1 sm=1 tr=0 ts=6a90697f cx=c_pps
+ a=nSjmGuzVYOmhOUYzIAhsAg==:117 a=WTDSa4fX56zQulHxy5BIwg==:17
  a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22
- a=EUspDBNiAAAA:8 a=VwQbUJbxAAAA:8 a=lKFnvmfiA1OmcLezn0cA:9 a=QEXdDO2ut3YA:10
- a=Z1Yy7GAxqfX1iEi80vsk:22
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22
+ a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=6qgGxlNUwWlbBUD903MA:9 a=QEXdDO2ut3YA:10
+ a=1zu1i0D7hVQfj8NKfPKu:22
+X-Proofpoint-ORIG-GUID: ZqVJkhoXk-1dUg36t5vJGJCGMOtp-HEz
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODI3MDE0MSBTYWx0ZWRfXwRqp5i+EbJk1
+ u2oXa+Era38tuQ9ahP1UxIbfPOY0NoJO6LjPXJetObUfzdPz0xI2NRwye/Un1uPIJcjDzDOt3n0
+ 9PSXrbaLSHvm43cC+J3qGBg9qEJsJlU=
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-08-27_07,2026-08-27_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0 clxscore=1015 phishscore=0 adultscore=0 priorityscore=1501
- bulkscore=0 malwarescore=0 suspectscore=0 spamscore=0 impostorscore=0
+ phishscore=0 clxscore=1015 spamscore=0 priorityscore=1501 adultscore=0
+ impostorscore=0 bulkscore=0 suspectscore=0 lowpriorityscore=0 malwarescore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608270140
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608270141
 
-Add SoC-level DTSI (qcom-kuno.dtsi) and IDP board DTS
-(qcom-kuno-idp.dts) for the Qualcomm Kuno SoC.
 
-Peripherals included in this initial set:
-  - Single Cortex-A7 CPU with PSCI idle states
-  - RPMh RSC with clock controller, power domains, and BCM voter
-  - GCC (Global Clock Controller)
-  - TLMM pin controller (110 GPIOs)
-  - Interconnect (aggre-noc, cnoc-main)
-  - GENI UART console (QUP SE3)
-  - SMEM, hardware spinlocks (TCSR mutex)
+On 8/24/2026 1:27 PM, Abel Vesa wrote:
+> drivers/interconnect/qcom/kuno.c
 
-Reviewed-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-Reviewed-by: Linus Walleij <linusw@kernel.org>
-Reviewed-by: Abel Vesa <abel.vesa@oss.qualcomm.com>
-Signed-off-by: Hardeep Sharma <hardeep.sharma@oss.qualcomm.com>
----
- arch/arm/boot/dts/qcom/Makefile          |   1 +
- arch/arm/boot/dts/qcom/qcom-kuno-idp.dts |  25 ++
- arch/arm/boot/dts/qcom/qcom-kuno.dtsi    | 423 +++++++++++++++++++++++++++++++
- 3 files changed, 449 insertions(+)
+Thanks for review.
 
-diff --git a/arch/arm/boot/dts/qcom/Makefile b/arch/arm/boot/dts/qcom/Makefile
-index 026d5b682b2b..7327a7b8180e 100644
---- a/arch/arm/boot/dts/qcom/Makefile
-+++ b/arch/arm/boot/dts/qcom/Makefile
-@@ -26,6 +26,7 @@ dtb-$(CONFIG_ARCH_QCOM) += \
- 	qcom-ipq4019-ap.dk07.1-c2.dtb \
- 	qcom-ipq8064-ap148.dtb \
- 	qcom-ipq8064-rb3011.dtb \
-+	qcom-kuno-idp.dtb \
- 	qcom-msm8226-microsoft-dempsey.dtb \
- 	qcom-msm8226-microsoft-makepeace.dtb \
- 	qcom-msm8226-microsoft-moneypenny.dtb \
-diff --git a/arch/arm/boot/dts/qcom/qcom-kuno-idp.dts b/arch/arm/boot/dts/qcom/qcom-kuno-idp.dts
-new file mode 100644
-index 000000000000..c2f6650d3fe6
---- /dev/null
-+++ b/arch/arm/boot/dts/qcom/qcom-kuno-idp.dts
-@@ -0,0 +1,25 @@
-+// SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
-+/*
-+ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
-+ */
-+
-+/dts-v1/;
-+
-+#include "qcom-kuno.dtsi"
-+
-+/ {
-+	model = "Qualcomm Technologies, Inc. Kuno IDP";
-+	compatible = "qcom,kuno-idp", "qcom,kuno";
-+
-+	aliases {
-+		serial0 = &uart3;
-+	};
-+
-+	chosen {
-+		stdout-path = "serial0:115200n8";
-+	};
-+};
-+
-+&uart3 {
-+	status = "okay";
-+};
-diff --git a/arch/arm/boot/dts/qcom/qcom-kuno.dtsi b/arch/arm/boot/dts/qcom/qcom-kuno.dtsi
-new file mode 100644
-index 000000000000..d0c6e3f21a14
---- /dev/null
-+++ b/arch/arm/boot/dts/qcom/qcom-kuno.dtsi
-@@ -0,0 +1,423 @@
-+// SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
-+/*
-+ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
-+ */
-+
-+#include <dt-bindings/clock/qcom,kuno-gcc.h>
-+#include <dt-bindings/clock/qcom,rpmh.h>
-+#include <dt-bindings/interrupt-controller/arm-gic.h>
-+#include <dt-bindings/power/qcom,rpmhpd.h>
-+#include <dt-bindings/power/qcom-rpmpd.h>
-+#include <dt-bindings/soc/qcom,rpmh-rsc.h>
-+
-+/ {
-+	#address-cells = <1>;
-+	#size-cells = <1>;
-+	interrupt-parent = <&intc>;
-+
-+	clocks {
-+		xo_board: xo-board {
-+			compatible = "fixed-clock";
-+			clock-frequency = <38400000>;
-+			#clock-cells = <0>;
-+		};
-+
-+		sleep_clk: sleep-clk {
-+			compatible = "fixed-clock";
-+			clock-frequency = <32000>;
-+			#clock-cells = <0>;
-+		};
-+	};
-+
-+	cpus {
-+		#address-cells = <1>;
-+		#size-cells = <0>;
-+
-+		cpu0: cpu@0 {
-+			device_type = "cpu";
-+			compatible = "arm,cortex-a7";
-+			reg = <0x0>;
-+			enable-method = "psci";
-+			cpu-idle-states = <&little_cpu_sleep_0>,
-+					  <&little_cpu_sleep_1>;
-+			power-domains = <&cpu_pd0>;
-+			power-domain-names = "psci";
-+		};
-+
-+		idle-states {
-+			entry-method = "psci";
-+
-+			little_cpu_sleep_0: cpu-sleep-0 {
-+				compatible = "arm,idle-state";
-+				idle-state-name = "standalone-pc";
-+				entry-latency-us = <350>;
-+				exit-latency-us = <450>;
-+				min-residency-us = <1774>;
-+				arm,psci-suspend-param = <0x40000003>;
-+				local-timer-stop;
-+			};
-+
-+			little_cpu_sleep_1: cpu-sleep-1 {
-+				compatible = "arm,idle-state";
-+				idle-state-name = "pc";
-+				entry-latency-us = <550>;
-+				exit-latency-us = <750>;
-+				min-residency-us = <6700>;
-+				arm,psci-suspend-param = <0x40000004>;
-+				local-timer-stop;
-+			};
-+		};
-+
-+		domain-idle-states {
-+			cluster_sleep_0: cluster-sleep-0 {
-+				compatible = "domain-idle-state";
-+				idle-state-name = "cx-min";
-+				entry-latency-us = <750>;
-+				exit-latency-us = <2350>;
-+				min-residency-us = <9144>;
-+				arm,psci-suspend-param = <0x40000008>;
-+			};
-+		};
-+	};
-+
-+	firmware {
-+		scm {
-+			compatible = "qcom,scm-kuno", "qcom,scm";
-+		};
-+	};
-+
-+	memory {
-+		device_type = "memory";
-+		/* Bootloader will fill base and size */
-+		reg = <0x0 0x0>;
-+	};
-+
-+	psci {
-+		compatible = "arm,psci-1.0";
-+		method = "smc";
-+
-+		cpu_pd0: power-domain-cpu0 {
-+			#power-domain-cells = <0>;
-+			power-domains = <&cluster_pd>;
-+		};
-+
-+		cluster_pd: power-domain-cluster {
-+			#power-domain-cells = <0>;
-+			domain-idle-states = <&cluster_sleep_0>;
-+		};
-+	};
-+
-+	reserved-memory {
-+		#address-cells = <1>;
-+		#size-cells = <1>;
-+		ranges;
-+
-+		quickboot@82100000 {
-+			reg = <0x82100000 0x100000>;
-+			no-map;
-+		};
-+
-+		aop-image@82200000 {
-+			reg = <0x82200000 0x20000>;
-+			no-map;
-+		};
-+
-+		aop-cmd-db@82220000 {
-+			compatible = "qcom,cmd-db";
-+			reg = <0x82220000 0x20000>;
-+			no-map;
-+		};
-+
-+		aop-config@82240000 {
-+			reg = <0x82240000 0x20000>;
-+			no-map;
-+		};
-+
-+		uefi-log@82260000 {
-+			reg = <0x82260000 0x10000>;
-+			no-map;
-+		};
-+
-+		ipa-fw@82270000 {
-+			reg = <0x82270000 0x10000>;
-+			no-map;
-+		};
-+
-+		smem@82280000 {
-+			compatible = "qcom,smem";
-+			reg = <0x82280000 0xc0000>;
-+			hwlocks = <&tcsr_mutex 3>;
-+			no-map;
-+		};
-+
-+		tme-crashdump@82340000 {
-+			reg = <0x82340000 0x40000>;
-+			no-map;
-+		};
-+
-+		tme-log@82380000 {
-+			reg = <0x82380000 0x4000>;
-+			no-map;
-+		};
-+
-+		access-control-db@82384000 {
-+			reg = <0x82384000 0x40000>;
-+			no-map;
-+		};
-+
-+		secdata@823c4000 {
-+			reg = <0x823c4000 0x1000>;
-+			no-map;
-+		};
-+
-+		modem-efs@823c5000 {
-+			reg = <0x823c5000 0x10000>;
-+			no-map;
-+		};
-+
-+		cpucp-fw@82400000 {
-+			reg = <0x82400000 0x80000>;
-+			no-map;
-+		};
-+
-+		xbl-dt-log@824c0000 {
-+			reg = <0x824c0000 0x20000>;
-+			no-map;
-+		};
-+
-+		qtee@82500000 {
-+			reg = <0x82500000 0x180000>;
-+			no-map;
-+		};
-+
-+		trusted-apps@82680000 {
-+			reg = <0x82680000 0x600000>;
-+			no-map;
-+		};
-+
-+		mpss-audio@82e00000 {
-+			reg = <0x82e00000 0x5a00000>;
-+			no-map;
-+		};
-+	};
-+
-+	soc: soc@0 {
-+		compatible = "simple-bus";
-+		#address-cells = <1>;
-+		#size-cells = <1>;
-+		ranges = <0 0 0xffffffff>;
-+
-+		gcc: clock-controller@80000 {
-+			compatible = "qcom,kuno-gcc";
-+			reg = <0x00080000 0x1f4200>;
-+			clocks = <&rpmhcc RPMH_CXO_CLK>,
-+				 <&rpmhcc RPMH_CXO_CLK_A>,
-+				 <&sleep_clk>,
-+				 <0>;
-+			#clock-cells = <1>;
-+			#reset-cells = <1>;
-+			#power-domain-cells = <1>;
-+		};
-+
-+		qup0: geniqup@9c0000 {
-+			compatible = "qcom,geni-se-qup";
-+			reg = <0x009c0000 0x2000>;
-+			clocks = <&gcc GCC_QUPV3_WRAP_0_M_AHB_CLK>,
-+				 <&gcc GCC_QUPV3_WRAP_0_S_AHB_CLK>;
-+			clock-names = "m-ahb", "s-ahb";
-+			#address-cells = <2>;
-+			#size-cells = <2>;
-+			ranges = <0x0 0x0 0x0 0x0 0x1000000>;
-+
-+			uart3: serial@98c000 {
-+				compatible = "qcom,geni-debug-uart";
-+				reg = <0x0 0x0098c000 0x0 0x4000>;
-+				interrupts = <GIC_SPI 58 IRQ_TYPE_LEVEL_HIGH>;
-+				clocks = <&gcc GCC_QUPV3_WRAP0_S3_CLK>;
-+				clock-names = "se";
-+				pinctrl-0 = <&uart_console_active>;
-+				pinctrl-1 = <&uart_console_sleep>;
-+				pinctrl-names = "default", "sleep";
-+
-+				status = "disabled";
-+			};
-+		};
-+
-+		cnoc_main: interconnect@1580000 {
-+			compatible = "qcom,kuno-cnoc-main";
-+			reg = <0x01580000 0x19200>;
-+			#interconnect-cells = <1>;
-+			qcom,bcm-voters = <&apps_bcm_voter>;
-+		};
-+
-+		aggre_noc: interconnect@1640000 {
-+			compatible = "qcom,kuno-aggre-noc";
-+			reg = <0x01640000 0x33400>;
-+			clocks = <&gcc GCC_SYS_NOC_USB_SF_AXI_CLK>,
-+				 <&rpmhcc RPMH_IPA_CLK>;
-+			#interconnect-cells = <1>;
-+			qcom,bcm-voters = <&apps_bcm_voter>;
-+		};
-+
-+		tcsr_mutex: hwlock@1f40000 {
-+			compatible = "qcom,tcsr-mutex";
-+			reg = <0x01f40000 0x40000>;
-+			#hwlock-cells = <1>;
-+		};
-+
-+		pdc: interrupt-controller@b220000 {
-+			compatible = "qcom,kuno-pdc", "qcom,pdc";
-+			reg = <0x0b220000 0x10000>;
-+			qcom,pdc-ranges = <1 148 6>,
-+					  <9 156 2>,
-+					  <17 164 7>;
-+			#interrupt-cells = <2>;
-+			interrupt-parent = <&intc>;
-+			interrupt-controller;
-+		};
-+
-+		restart@c264000 {
-+			compatible = "qcom,pshold";
-+			reg = <0x0c264000 0x1000>;
-+		};
-+
-+		tlmm: pinctrl@f000000 {
-+			compatible = "qcom,kuno-tlmm";
-+			reg = <0x0f000000 0x400000>;
-+			interrupts = <GIC_SPI 212 IRQ_TYPE_LEVEL_HIGH>;
-+			gpio-controller;
-+			#gpio-cells = <2>;
-+			gpio-ranges = <&tlmm 0 0 110>;
-+			interrupt-controller;
-+			#interrupt-cells = <2>;
-+
-+			uart_console_active: uart-console-active-state {
-+				pins = "gpio8", "gpio9";
-+				function = "qup0_se3_mira";
-+				drive-strength = <2>;
-+				bias-disable;
-+			};
-+
-+			uart_console_sleep: uart-console-sleep-state {
-+				pins = "gpio8", "gpio9";
-+				function = "gpio";
-+				drive-strength = <2>;
-+				bias-pull-down;
-+			};
-+		};
-+
-+		intc: interrupt-controller@17000000 {
-+			compatible = "qcom,msm-qgic2";
-+			reg = <0x17000000 0x1000>,
-+			      <0x17002000 0x1000>;
-+			interrupt-controller;
-+			#interrupt-cells = <3>;
-+		};
-+
-+		timer@17020000 {
-+			compatible = "arm,armv7-timer-mem";
-+			reg = <0x17020000 0x1000>;
-+			#address-cells = <1>;
-+			#size-cells = <1>;
-+			ranges;
-+
-+			frame@17021000 {
-+				reg = <0x17021000 0x1000>,
-+				      <0x17022000 0x1000>;
-+				frame-number = <0>;
-+				interrupts = <GIC_SPI 7 IRQ_TYPE_LEVEL_HIGH>,
-+					     <GIC_SPI 6 IRQ_TYPE_LEVEL_HIGH>;
-+			};
-+		};
-+
-+		apps_rsc: rsc@17040000 {
-+			compatible = "qcom,rpmh-rsc";
-+			reg = <0x17040000 0x10000>,
-+			      <0x17050000 0x10000>,
-+			      <0x17060000 0x10000>;
-+			reg-names = "drv-0",
-+				    "drv-1",
-+				    "drv-2";
-+			interrupts = <GIC_SPI 16 IRQ_TYPE_LEVEL_HIGH>,
-+				     /* drv-1: placeholder (unused) */
-+				     <GIC_SPI 17 IRQ_TYPE_LEVEL_HIGH>,
-+				     <GIC_SPI 17 IRQ_TYPE_LEVEL_HIGH>;
-+			qcom,tcs-offset = <0xd00>;
-+			qcom,drv-id = <2>;
-+			qcom,tcs-config = <ACTIVE_TCS 2>,
-+					  <SLEEP_TCS 3>,
-+					  <WAKE_TCS 3>,
-+					  <CONTROL_TCS 1>;
-+			power-domains = <&cluster_pd>;
-+
-+			rpmhcc: clock-controller {
-+				compatible = "qcom,kuno-rpmh-clk";
-+				clocks = <&xo_board>;
-+				clock-names = "xo";
-+				#clock-cells = <1>;
-+			};
-+
-+			rpmhpd: power-controller {
-+				compatible = "qcom,kuno-rpmhpd";
-+				#power-domain-cells = <1>;
-+				operating-points-v2 = <&rpmhpd_opp_table>;
-+
-+				rpmhpd_opp_table: opp-table {
-+					compatible = "operating-points-v2";
-+
-+					rpmhpd_opp_ret: opp1 {
-+						opp-level = <RPMH_REGULATOR_LEVEL_RETENTION>;
-+					};
-+
-+					rpmhpd_opp_min_svs: opp2 {
-+						opp-level = <RPMH_REGULATOR_LEVEL_MIN_SVS>;
-+					};
-+
-+					rpmhpd_opp_low_svs: opp3 {
-+						opp-level = <RPMH_REGULATOR_LEVEL_LOW_SVS>;
-+					};
-+
-+					rpmhpd_opp_svs: opp4 {
-+						opp-level = <RPMH_REGULATOR_LEVEL_SVS>;
-+					};
-+
-+					rpmhpd_opp_svs_l1: opp5 {
-+						opp-level = <RPMH_REGULATOR_LEVEL_SVS_L1>;
-+					};
-+
-+					rpmhpd_opp_nom: opp6 {
-+						opp-level = <RPMH_REGULATOR_LEVEL_NOM>;
-+					};
-+
-+					rpmhpd_opp_nom_l1: opp7 {
-+						opp-level = <RPMH_REGULATOR_LEVEL_NOM_L1>;
-+					};
-+
-+					rpmhpd_opp_nom_l2: opp8 {
-+						opp-level = <RPMH_REGULATOR_LEVEL_NOM_L2>;
-+					};
-+
-+					rpmhpd_opp_turbo: opp9 {
-+						opp-level = <RPMH_REGULATOR_LEVEL_TURBO>;
-+					};
-+
-+					rpmhpd_opp_turbo_l1: opp10 {
-+						opp-level = <RPMH_REGULATOR_LEVEL_TURBO_L1>;
-+					};
-+				};
-+			};
-+
-+			apps_bcm_voter: bcm-voter {
-+				compatible = "qcom,bcm-voter";
-+			};
-+		};
-+	};
-+
-+	timer {
-+		compatible = "arm,armv7-timer";
-+		interrupts = <GIC_PPI 13 (GIC_CPU_MASK_SIMPLE(1) | IRQ_TYPE_LEVEL_LOW)>,
-+			     <GIC_PPI 12 (GIC_CPU_MASK_SIMPLE(1) | IRQ_TYPE_LEVEL_LOW)>,
-+			     <GIC_PPI 10 (GIC_CPU_MASK_SIMPLE(1) | IRQ_TYPE_LEVEL_LOW)>,
-+			     <GIC_PPI 11 (GIC_CPU_MASK_SIMPLE(1) | IRQ_TYPE_LEVEL_LOW)>;
-+	};
-+};
+Corrected in v4 : 
+https://lore.kernel.org/all/20260827-kuno-soc-support-v4-0-dd34f235fc1a@oss.qualcomm.com/
 
--- 
-2.43.0
+Best Wishes
+Hardeep Sharma
 
