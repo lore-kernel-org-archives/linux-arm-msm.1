@@ -1,91 +1,122 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wr1-f42.google.com (mail-wr1-f42.google.com [209.85.221.42])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 48D1D381B0D;
-	Thu, 27 Aug 2026 18:42:21 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4F8BA428830
+	for <linux-arm-msm@vger.kernel.org>; Thu, 27 Aug 2026 19:06:58 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.42
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787856143; cv=none; b=uzYEORYyE0n61oBSSpsDOK9T2Z7SAWfpHVf0JZFf9g00OuBtSbXbSOpRUrbKDP160WPouewMuAj1Db3IZNilWVRcL+WteLr/YCSNq/u1KMqN6YdWy6srBLVfpiOOBsV0dHgnYHbfQzImmjgXYPCLzOCtD+Gnj/tJma/SCLunjc4=
+	t=1787857620; cv=none; b=hn7eEdEK+0HRIq/WoG1/gUHKvrihGhUFf3ehenW4a9YIhlffn/P5c8/FbuxhxfeO08eZ+22Iy/zTyZ0zjioPsJaEz/nWSQfBQK9J77owNjsNle+nCKPOnLm8CFh9qI0RWX/M48w+d8D7AQBNwYIyWZDnEqu8+U6l845bPiVOBYQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787856143; c=relaxed/simple;
-	bh=BQxeBCzlpdIBx1IQubyGP4cIIBLKUfAEpmsojcE+y0o=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=WwsbLJhSSRzo88WJWhuniaWbY4xu29Ut8jBgjORiPVs2rGKhGTArm3SMAcR3ZKJ/tK+Iy3HeRrKn71WcDNZ+Ec7PiLq9vbpwniYoJ2hImfrFFvdtMRglRJ4Vaj/RItdkbmRFbpDttQ+74yVutyzvYQ9fmBY3MBKw/yQn1eRfc2A=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=JGyGZ1iF; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1787857620; c=relaxed/simple;
+	bh=pzJEecE88unv5hwvpYlWQPdf7Vo4wY8J4FgxcB/2nvA=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=sGcy6UBznso9T+Qddi9P/tLLDr8pppi/EhFL2SgK3wW/jHV6Ksg5NNJ++ufIZfla9MZr9YCf/EpYZ3771y3P1HLWpj/coszov+DiWdzqKerl29Zdu3X0Nk5/qzhYttjOI9BU1dLiKRB+yacKfQBSiVOheJ4dLyhtdZwOTyvQdrY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=cJ2QQ6yT; arc=none smtp.client-ip=209.85.221.42
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="JGyGZ1iF"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D5E891F000E9;
-	Thu, 27 Aug 2026 18:42:20 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1787856141;
-	bh=KHhkLS/1kvPLnma3IR3pFI9fv8AtiL1iUd3rkfzN1lg=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=JGyGZ1iFBz3zCcmK5s+YpaPPkJwF8HLlFKvCFOqnrCOgPcUbrmKgH4FEBYa/xbr7a
-	 h/1ZV4SVVbM08ujfZXsGjzeLQi4WVe7WUlIBnKyfNROLYwwBE28tqTXgbthsIqCcr9
-	 ZTWE0eGpePQDRxQ4T0lnMZV/0ukCtizTYpLByJER98aCyL6tH9cbxgroRedeTOZdvL
-	 L4OLoDn9U3H0qcxLGzwu9kX45We7ZNJbUcASVdMW9I5BuakpxhZ1Nj+jjlWmKwxDYc
-	 IT4Z/cvAibf/UWNXsYhG8Xs0ZCsGG25RgCt0UAQWvVjYpyNU/7Ig3ny/dkKNLseFfP
-	 aDTjGRsQ/HeTg==
-Date: Thu, 27 Aug 2026 18:42:19 +0000
-From: Eric Biggers <ebiggers@kernel.org>
-To: Linlin Zhang <linlin.zhang@oss.qualcomm.com>
-Cc: axboe@kernel.dk, mst@redhat.com, jasowangio@gmail.com,
-	James.Bottomley@hansenpartnership.com, martin.petersen@oracle.com,
-	robh@kernel.org, krzk+dt@kernel.org, conor+dt@kernel.org,
-	linux-block@vger.kernel.org, linux-crypto@vger.kernel.org,
-	linux-scsi@vger.kernel.org, virtualization@lists.linux.dev,
-	devicetree@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-	neeraj.soni@oss.qualcomm.com, gaurav.kashyap@oss.qualcomm.com,
-	mani@kernel.org, andersson@kernel.org, konradybcio@kernel.org,
-	bvanassche@acm.org, alim.akhtar@samsung.com,
-	avri.altman@sandisk.com, stefanha@redhat.com, pbonzini@redhat.com,
-	eperezma@redhat.com, xuanzhuo@linux.alibaba.com,
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="cJ2QQ6yT"
+Received: by mail-wr1-f42.google.com with SMTP id ffacd0b85a97d-47f84023916so144367f8f.3
+        for <linux-arm-msm@vger.kernel.org>; Thu, 27 Aug 2026 12:06:58 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1787857616; x=1788462416; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=ye/9ulKBaC7alnS77GSpaMa7bLzaEniiM9r+DAjS4/o=;
+        b=cJ2QQ6yT7HN0Icpr2XOW9cAcXLkyEWtZTvJb8XGtmAmcUbq0CgiT3iFQRlUJB6+LHK
+         zXGvRoY4Hi81I1o/eujkj85md8dtiGwp/yl4qm0EEwgggriioRnkEmidpM5N4s1g85XL
+         ZVwvHAnbLYSaH/EqCxM8TKoW44t2Fir+NqfOawJaAMrVfqrLzKG5C+w9FGq+7FJv1aOB
+         kYFc4iVqQgJU3xYPchySVTWRMrplUEWNyqxYJcpg/GEmOohvKK3jCI73Cec9ECxxVVQo
+         JqX/ibPXh7X5qqb106kdsXOGMGoVuMR9kcjLXxywGDYn5XyIHOsdwgpBwvkKwI20Ljp1
+         FU4Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1787857616; x=1788462416;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=ye/9ulKBaC7alnS77GSpaMa7bLzaEniiM9r+DAjS4/o=;
+        b=hELXc3MDDGN6cBW3tqC3PTwtqtbOYxemtLKm1JQt3o+H1s5yjMKzFtaG776sp+EsCN
+         RQ/j9FqabkqxgJwnwDzG+dU2TLVUD9sTuComDhQCnfr2nwimtOe8RmRpifmqjRKM3kSB
+         xF+kX+gB7ENyVjy0WlRKo+n5gnYmVQd2KasKuzlKQZmIx4pGEs2pThUfj+fwA5Q8Po4P
+         cGFeudHnaQo1xwKwgtw5180YdKRRSGS96ugWBn7tCqJ6SjDK6uxd1oCkjhSBNZ54Tebz
+         Oxykp+4HKCX4iTwL8Sxdfm/l6dIB7yqlkt63mrcRk6Q4rFuNAO5SMJ0Qxd0iXmpUhwUQ
+         A7IQ==
+X-Gm-Message-State: AFuF++lAudzzCQLj3rmQ4dCR1AMyxnYzD2ESxMeW/o3Z5Mjbez+IJxvV
+	HnLPcEKTTPCjokGmkMIC2N7rfY/PmqCYkn/UVz6sgsMd0izHWKkYSxHB
+X-Gm-Gg: AR+sD112uKsipiMIzO0ZKxnmQm0nPvb+hi/yHqJqUY+5GsWU3owFcUqQ/OHd2HKwF86
+	oQWjYu0bfOk5ml/T7v+ptzPMErMbBySc9O/8abO3zSW8zPjU01aKMOc9LGtGRoRkr8509XleLWO
+	ZBXgDbB5VYbfynyzNVGxQ8EoQz2dSXjp55tfrsgLaH58ouQOswF7Y92KHr89gJxouRyHMfiLqCe
+	2MsXsV6rXMxstXiXvLR1Ixo9JWI8OpVwni79o6tbIMpc903z8F47N9EtoVxAtSSkaM2Z0E/Y0pe
+	rzai/2cwRhpdqbBBg1dWSjBUNo/kI9i404PdddRDRKaW2YcERgvhQd7fCBsPKZWZxnawIMxBRIg
+	oshrPwWVIM6mzg137NeKqB1Wd09emM/W5IVhmT0pspHPq27rcgU17xb44Pgr7Vq1ZGc/Kpfl/ED
+	0cjpomDuJeOMjpP/imH7sBDLXNnBWxpHQKhreNyXN1lbMa5vIZjjx6EJ7gfvsYl1SChfsm9iNm3
+	ddeWaFAmw==
+X-Received: by 2002:adf:e00f:0:10b0:482:a9d7:7ced with SMTP id ffacd0b85a97d-482f79b2420mr1034763f8f.14.1787857616265;
+        Thu, 27 Aug 2026 12:06:56 -0700 (PDT)
+Received: from VivoBook-ASUS-X712UA-M712UA.lan ([2a00:f44:c90:ce5e:8e8e:8023:a4fb:572e])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-482e2756112sm11992439f8f.0.2026.08.27.12.06.53
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 27 Aug 2026 12:06:55 -0700 (PDT)
+From: Stanislaw Pal <kuncy7@gmail.com>
+To: George Moussalem <george.moussalem@outlook.com>,
+	Vinod Koul <vkoul@kernel.org>,
+	Neil Armstrong <neil.armstrong@linaro.org>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Praveenkumar I <praveenkumar.i@oss.qualcomm.com>,
+	Philipp Zabel <p.zabel@pengutronix.de>,
+	Bjorn Andersson <andersson@kernel.org>,
+	Konrad Dybcio <konradybcio@kernel.org>,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>,
+	Nitheesh Sekar <quic_nsekar@quicinc.com>,
+	Wesley Cheng <quic_wcheng@quicinc.com>,
+	Manivannan Sadhasivam <mani@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org,
+	linux-phy@lists.infradead.org,
+	devicetree@vger.kernel.org,
+	linux-usb@vger.kernel.org,
 	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v1 00/11] FBE virtualization: inline encryption for
- virtio-blk guests
-Message-ID: <20260827184219.GB2137493@google.com>
-References: <20260827160806.1295313-1-linlin.zhang@oss.qualcomm.com>
+Subject: Re: [PATCH v3 00/12] Enable USB3 for Qualcomm IPQ5018
+Date: Thu, 27 Aug 2026 21:06:47 +0200
+Message-ID: <20260827190647.807193-1-kuncy7@gmail.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260825-ipq5018-usb3-v3-0-39be0955a6aa@outlook.com>
+References: <20260825-ipq5018-usb3-v3-0-39be0955a6aa@outlook.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <20260827160806.1295313-1-linlin.zhang@oss.qualcomm.com>
 
-On Thu, Aug 27, 2026 at 09:07:09AM -0700, Linlin Zhang wrote:
-> From: linlzhan <linlin.zhang@oss.qualcomm.com>
-> 
-> Current virtio-blk does not provide a mechanism for a guest to
-> program hardware keys or submit encrypted I/O using pre-programmed
-> keyslots.  It drops the crypto context when issuing a bio request
-> to the virtio-blk queue, preventing inline-encryption-based FBE
-> on virtio block devices.
-> 
-> This series enables File-Based Encryption in guest VMs on Qualcomm
-> GVM platforms where the ICE inline encryption hardware is shared
-> between the host and guests.  In this environment the guest kernel
-> has no access to the ICE hardware directly; it supplies a virtual
-> keyslot index and data unit number with each encrypted I/O request
-> via VIRTIO_BLK_F_INLINE_ENCRYPTION, and the host must translate the
-> virtual slot to a physical ICE keyslot and submit the bio — without
-> transferring raw key material across the VM boundary.
+Tested this revision on IPQ5018 hardware - a TP-Link Archer AX55 v1,
+backported onto 6.18.44. Both radios on this board are on AHB and PCIe
+is unused, so nothing else contends for the SS PHY; the combo driver is
+exercised purely on its USB3 side here.
 
-This seems to be designed incorrectly by not making virtio-blk itself
-support key programming and eviction.  That complicates things
-significantly by then having to handle the key programming and eviction
-out-of-band using Qualcomm-specific SCM calls.  It also means that
-adding other implementations of this would be very difficult.
+Two USB 3.2 gen 1 sticks, all enumerating SuperSpeed (speed=5000,
+version=3.20, 5000M in lsusb -t):
 
-There are some claims that not transmitting keys across the VM boundary
-is desirable.  But that doesn't seem meaningful, given that all the I/O
-is transmitted across that boundary in plaintext anyway, and also it
-seems that hardware-wrapped keys will be supported too.
+  - hot-plug, both sticks;
+  - warm reboot with the stick inserted - SuperSpeed 0.8 s after xHCI
+    registers;
+  - cold power-on with the stick inserted - same, no fall back to
+    480M;
+  - 130 MB/s sustained over a 3 GB raw read, unchanged from the
+    previous revision on the same stick;
+  - no USB or xHCI error in dmesg across the whole run.
 
-Please make virtio-blk support the key programming, eviction, and
-HW-wrapped key management operations that are needed for this to work.
+I also exercised the vdd-supply path that patch 12 adds to the RDP432-C2,
+since enable/disable sits in phy_init/phy_shutdown and that is the code
+this revision rewrites: unbinding dwc3-qcom drops the port's 5 V rail and
+the device disappears, re-binding brings it back at SuperSpeed 1.8 s
+later. Works on this board too.
 
-- Eric
+I do not have an IPQ5332, so the combo PHY's PCIe side and the 5332
+instance are untested by me.
+
+Tested-by: Stanislaw Pal <kuncy7@gmail.com>
