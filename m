@@ -1,245 +1,261 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 163293002AB;
-	Thu, 27 Aug 2026 06:03:31 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 11A14353A64
+	for <linux-arm-msm@vger.kernel.org>; Thu, 27 Aug 2026 06:39:50 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787810613; cv=none; b=fSTmyRCetUYe71h0jry8ZItwfY6AI6i8Sr3GCH4sJDfLiajjeAL8WPrba1+UhrcDgLyCk6jq3f6gPApc9ZTOHs3YZWZE4xLgHOx3l4YL12fTyqwm5iVXH+tlIkhdYzB5Ckg1eE7Y3Pefi199TO4XWAEqvU3HxeainDSWiHtlGaU=
+	t=1787812792; cv=none; b=UjHQybhimcGrT9Vt3PMryDN43izjqRiT5BxYuCGwW9UqIYViTWWtmuVU75K74suf6SJLdzKwhixmaTOJ25qjf/mc43x96+OtY9ujsOTuqafLnN3kTmNZ1fD88qH+RTSBPLTm2fDrmRpk2O5kKbBEPHn4/brOWVGrMdkkD9k0nxU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787810613; c=relaxed/simple;
-	bh=eVYzJGAIjQtqQDbeCgDE5Md9phOns18vg8xOXxuMsRk=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=kVLxX24/5F0iyNvAqCWi7NnfwDSO83Jii7qEs2vaUlZn4ye4QxbQwGA1pf/l75eac9nhT8/3fkQ1wRIKHHwK8cpWaxmwCJXKRnMiRf3Oa+nNe8fkYqvpcb+lb5u234pEaWu6H6NfmJhEwAG27jWNweoOO9TzL1lJMQHeSk9lGgQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=b084J/mv; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1787812792; c=relaxed/simple;
+	bh=Cj6vFAWO7M0EpdlqhbOZQRN8Ksivmts2TEEpPHjIv3Q=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=WH9m8bgdZ6g7fwU7pje6vizeF7j1jiCNYGqqv/+nMWpw1NDOaZQ7tlIvdUs640TokYlQbi0GE/GeTBmi7mQjV4HGVWF9JA1TiakgURGEgmmLQR8V8RA9ZK12Gr/tGpmWCxQ4iuWLLy9wj7EhLJmRk7/L5MBuuOTxC53M16TU2Qw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=f+w2v6pz; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=gQ6F+e7a; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="b084J/mv"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 564891F000E9;
-	Thu, 27 Aug 2026 06:03:26 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1787810611;
-	bh=lJlXA2kwLoTfDo4tJ3+9iNIhRW5M0Zb7cMLr/tH8zJU=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=b084J/mvtWIlJZRA0TvNW50gmDidKFYYLtXiIK/+EoWo8nNi4HZFQ3RB3pKZ5yJsR
-	 xZGJn1oGgULrLcLlNvk7dAbFeSgjaQrG0Hf/wTVMpUC0e9WuJmN8dSJb/XoxMHhuLc
-	 EzfisW4LrqLTvEnKd5wCvjoAtgUCs2ITmC442ys/wQRgEqZn7wo3bUmAwLXNXxMT/W
-	 PcbmYMtuw4qCRWlX2+X+Rfvba95TbSBBWGO3L5CC99QbgE1l2qFIeJ4IPhWdw11b6V
-	 ohlPjU8eqZvh4qZEbOOZ4lXr4SSpZzIfTxPDsZeqJ862KqHE24iw+QJmhlrJAGt/aC
-	 Xj1ditT75Gb2w==
-Message-ID: <006617c6-e3b0-4a3b-85e5-6b5af8f11879@kernel.org>
-Date: Thu, 27 Aug 2026 08:03:24 +0200
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="f+w2v6pz";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="gQ6F+e7a"
+Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67R6RCmh2726628
+	for <linux-arm-msm@vger.kernel.org>; Thu, 27 Aug 2026 06:39:50 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:date:from:message-id:mime-version
+	:subject:to; s=qcppdkim1; bh=iZjIrF+rfvajebhoApDH4OezeUsEvneqopR
+	VQByZHyk=; b=f+w2v6pzSGo7/mz3kwcjXXjKaBmEIDyKmQdut3a1cNerjJIi+hg
+	+sEyvTB0yuuYfqM7m8DIK2fHrBEDTTYMWk/pnlUDitFI/7EaT4pLh5fpbk9S9Uk4
+	jToLw+Qe0JLBc39LDp7JSS4AldygPvVKcnw4sT4BjPmSYbdpOypMhLu2cZyDZChU
+	XNBaIk9F9WBkPQkEG8oH9K0MYxo6pSWYEp85QvdtEeoqhLHm54Ge5yla4g5JimSc
+	KOGEKeiIiGfK9ZzfqXxk29jqCW9qUU17mycywLowUAKQFm/KPhY5Q8NruIsmpYl1
+	zgQE8mr66VFFOezFRmWMqHG6LCHRHh9fCQQ==
+Received: from mail-qt1-f199.google.com (mail-qt1-f199.google.com [209.85.160.199])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ga6etsuxj-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 27 Aug 2026 06:39:50 +0000 (GMT)
+Received: by mail-qt1-f199.google.com with SMTP id d75a77b69052e-5174a236220so23392061cf.3
+        for <linux-arm-msm@vger.kernel.org>; Wed, 26 Aug 2026 23:39:50 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1787812789; x=1788417589; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=iZjIrF+rfvajebhoApDH4OezeUsEvneqopRVQByZHyk=;
+        b=gQ6F+e7aI7Rbgmha2cBO+yppncwfulKuKXhICYionH7d8odr2Cz7LPg1rnS/grTk26
+         bgSlJPYZUX95g/xxtCi2yDpE1gRkwTduVq137Bzj9hDriaGURZGHT1srBvEl4C5Ic+fD
+         nRefgHNh+UpEsH4n/Yk1MfX4ON4F67qi1f98Uf5RSEZJbs32OWtogPMf+s0jTZ+jJxyU
+         EHBLAboIdhWMT7cwMmqyANrWuynRke2xzzwBNRjca6GVpMeWbqv3Jedh75q5Y2CxTIzi
+         aBu/J76FNTs9UjP8CK0XlS7SSoiMDEh2ma5kOLXCdzGwiI22IV8LQKrn0SZzCu+5XlLQ
+         vklA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1787812789; x=1788417589;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=iZjIrF+rfvajebhoApDH4OezeUsEvneqopRVQByZHyk=;
+        b=UXJY5CsNeZiRIdYsuBhNQ2as9lMOkJuajVlq0ZbRpQlr7gv4QqOPvJvZv8DtKN8z5P
+         iwM5YdcUb8ugJoxfqIaSOQ2eouAa77KVsvqyLuChwqWw3jg/agYFh2tMdhyVQmADhaef
+         E8MVic0728Tv9kBpTXqe7fXKp22P8HYEmQ6jzJ5wQ9rUljoTq1vMT6AYdz/FDnyyQhrL
+         pjiEt0eqhUkiaR+8dVxrU7uQ9+ERa5gyssk1aJ2rms7EogOVA5nU/DVsIeqZxzKghXZO
+         YcKGT9pa3fFEDkWfy0aCj2lrNaZ4xtEWw/6P5eX9K4udQxz3WlUARQhZIKzejyMhgKv+
+         s42w==
+X-Forwarded-Encrypted: i=1; AHgh+RpcTv4fV3tyuazR09PDBLm2PLfeUBH1dPsMi0L0YGyPhcbJAyQpe6C/pqu3X8/bw2r7zGNAgR0yipMgr10h@vger.kernel.org
+X-Gm-Message-State: AFuF++mep4/nuj3HV4va0ZCaAkM4Btab4gS7C8GCnDItpqjMnQlp6QYL
+	YxpkwZ6JRB8kQh0WsR3n4X1PrvtbfI43jMg8civzHxiDTFbIQXGAeSBMTlTP+0z39tdwjLrby/O
+	NmDJst68ImlJ1O1P+zHPxqSm+x4j/PNdbC3O1gFLjjN2A4hIYKQQnTiz+5m3R3VIogvm1
+X-Gm-Gg: AR+sD10pF/e/O23UF4XP2zKh+Kho5LqlMVDYmdHJUf6dbO7Ff/G0yzhufW/0Iz0HUlK
+	Dt5N0M2N7tiUPtSP5EJRJt0b7bAk5VZxI5kdbHKjlRuZUin7chWWPH4NxaXnB7cQANXKGssTNWr
+	9WTPUhHWUXvYVVBcWzyi3rtxJHY/1RYxWVjxf+xIvVE5IlNScgI9LhFNmJQy2qS0cBCsUml+hXT
+	rUxHoe5EYTjxtgMHVeWmITcO+BjeeZWHgQbsW+oGzIovMNkiViWh/m9cedLPIFNgSAAF+w8Jhd3
+	aB18Q8Ok/QAjKg4a73cRN6mgVhfybS+G+JwiqG5ebdWrCxCxfhYvNlyQ/BYavTxQmy0C6bxEL/q
+	yi73FahocL+h8M6Q=
+X-Received: by 2002:a05:622a:2cb:b0:52e:2d4e:8ef5 with SMTP id d75a77b69052e-52e4204e8a2mr119069571cf.0.1787812789230;
+        Wed, 26 Aug 2026 23:39:49 -0700 (PDT)
+X-Received: by 2002:a05:622a:2cb:b0:52e:2d4e:8ef5 with SMTP id d75a77b69052e-52e4204e8a2mr119069351cf.0.1787812788778;
+        Wed, 26 Aug 2026 23:39:48 -0700 (PDT)
+Received: from quoll ([178.197.219.214])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-49b465226d8sm27230685e9.0.2026.08.26.23.39.46
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 26 Aug 2026 23:39:47 -0700 (PDT)
+From: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+To: Bjorn Andersson <andersson@kernel.org>,
+        Michael Turquette <mturquette@baylibre.com>,
+        Stephen Boyd <sboyd@kernel.org>, Brian Masney <bmasney@redhat.com>,
+        Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        Danila Tikhonov <danila@mainlining.org>,
+        David Wronek <davidwronek@gmail.com>, linux-arm-msm@vger.kernel.org,
+        linux-clk@vger.kernel.org, devicetree@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+Cc: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+Subject: [PATCH v2] dt-bindings: clock: qcom,sm6375-gcc: Merge SM7150 into SM6375
+Date: Thu, 27 Aug 2026 08:39:41 +0200
+Message-ID: <20260827063940.44497-2-krzysztof.kozlowski@oss.qualcomm.com>
+X-Mailer: git-send-email 2.53.0
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/3] dt-bindings: sound: qcom,q6apm-dai: add stage-2
- (SCM/VMID) access model
-To: Ajay Kumar Nandam <ajay.nandam@oss.qualcomm.com>,
- Srinivas Kandagatla <srini@kernel.org>, Liam Girdwood <lgirdwood@gmail.com>,
- Mark Brown <broonie@kernel.org>, Rob Herring <robh@kernel.org>,
- Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
- <conor+dt@kernel.org>, Jaroslav Kysela <perex@perex.cz>,
- Takashi Iwai <tiwai@suse.com>
-Cc: linux-sound@vger.kernel.org, linux-arm-msm@vger.kernel.org,
- devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
-References: <20260826-a2a-shikra-vmid-v5-v2-0-c3dc62354eee@oss.qualcomm.com>
- <20260826-a2a-shikra-vmid-v5-v2-1-c3dc62354eee@oss.qualcomm.com>
-From: Krzysztof Kozlowski <krzk@kernel.org>
-Content-Language: en-US
-Autocrypt: addr=krzk@kernel.org; keydata=
- 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
-In-Reply-To: <20260826-a2a-shikra-vmid-v5-v2-1-c3dc62354eee@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3576; i=krzysztof.kozlowski@oss.qualcomm.com;
+ h=from:subject; bh=Cj6vFAWO7M0EpdlqhbOZQRN8Ksivmts2TEEpPHjIv3Q=;
+ b=owEBbQKS/ZANAwAKAcE3ZuaGi4PXAcsmYgBqj9usg1hFJCnIJEObJ2sa+7LtisjOWRtLPLXAC
+ xM20BNtNTuJAjMEAAEKAB0WIQTd0mIoPREbIztuuKjBN2bmhouD1wUCao/brAAKCRDBN2bmhouD
+ 1/+zD/93WgifP3aIuah2IKi4RNNWqc2I3PJcnAXKTN6i/goIfwLoxAbZFogvmz8RKqw74qPHjLr
+ yByrtmXrDnv3f8cRHM53DcjzRocaAd4ORb20B5TF73jDD70US1VZrMroGUJ5egf04ZQGlUIFHrs
+ KLUvZUPD9BaIvxHm9WQdwqXypkcCTmW+LjU4GDL1uL0wqmGHgK3T5l4BYA9MMLq/dsSM+64dqzY
+ hsQitO2tYOUPJOlJ4HGamfKZ0+vTap+CwFf9S1OgmJV7vVNeLbVjaQ2F5fFYHxqApNaj/sUnDtZ
+ TTlf0TcVeBVxm85JdgBTUzBqdniFOpUtqicJMKkIeE2tpWksp1U+UpeD7JEhOdkwWInoNxg8OvH
+ GsAKpO4uDab9vamtLI6YJZ00hfKj+8AvHbyNS3UpeXf+nwMEiOz0UgNKAXSX0ELbw8x4R7Z1AmD
+ 9bICs9x2/+tukYuzLGqHk0/7IOqwP9yGRRIYSG7pyZinHYdwHLAq8vHpsILdkas0G1A482hw4Ep
+ hJDYnnSaBGSh4LW3Lmp15wbIooTjT/FjjDb3BbZbWNA0jE4nWDjlpaPCqAWkICkTXyKj9VcK1Zs
+ NRj25CPdXZAj9tXoLRX2/rLichv7iQ96aw8WLJdC3G9LhYu/HhdqXv0qdz8VTfhsS6Ykpu46lRW NtKA1orm6DYi+Ng==
+X-Developer-Key: i=krzysztof.kozlowski@oss.qualcomm.com; a=openpgp; fpr=9BD07E0E0C51F8D59677B7541B93437D3B41629B
+Content-Transfer-Encoding: 8bit
+X-Authority-Analysis: v=2.4 cv=NrThtcdJ c=1 sm=1 tr=0 ts=6a8fdbb6 cx=c_pps
+ a=WeENfcodrlLV9YRTxbY/uA==:117 a=+bKQE0WJfmhK2875HamI0Q==:17
+ a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22 a=gEfo2CItAAAA:8
+ a=EUspDBNiAAAA:8 a=VwQbUJbxAAAA:8 a=7ibcVnAUAAAA:8 a=pGLkceISAAAA:8
+ a=rN_0p8sgu83ql7wKLuAA:9 a=kacYvNCVWA4VmyqE58fU:22 a=sptkURWiP4Gy88Gu7hUp:22
+ a=HywIFdX19-EX8Ph82vJO:22
+X-Proofpoint-ORIG-GUID: 5uqtS4kG2TDnPALaIzZDf9fckjlk-5gC
+X-Proofpoint-GUID: 5uqtS4kG2TDnPALaIzZDf9fckjlk-5gC
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODI3MDA1MyBTYWx0ZWRfXxtLqsvpAvJMu
+ Cd/7J9rkDIv3Q3BR9iD99MlnPU7kp6seDeQRKyev7aNlskacw8mEmyEFFHMw3+kXr9JpY0zT+Wc
+ 0ZkVNpznDGat23eBe33lnuEWus1+Jl31POhfH+JkC/7mragB7L4l1sLgK9BMhSmZmboXIkocCH+
+ CT1R6JcjlBG8umGRK3IOZhMHwP93WMQCm2+iI4hALaILW5wWB6Q4qJoETwwuffP781Q0NWEU92F
+ fpD8FIU9CV82Jfcj4fJbOLIk4LNmOH6uQWRZkG6JHqRl/dqEMfIrQ1OEGmLLe5QgqHHXYVGjmuv
+ Ay4K6PUkB/YlGN9S6je0uDU8rKULv3qqH2wxkyRfnBks1eZ3Agyx41z7TRkR1/o+IApsMsyXDYv
+ B3Uyv9qINK5OhAiLYmKqZNqn3WDRcKe63yzYyqWAFK3GtPheotqxT4ttw1Ubc4S0NwBEs7n8dMj
+ LPjR/aGP4j0qNoVeCGg==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODI3MDA1MyBTYWx0ZWRfX4nuSdoV39dF6
+ k2trwidbdyVYJNUsgywtOG8guGYGkDxCb2Q6AFlqMderuUCYYan6+baY60RKhmTrNgyRvdShlxW
+ /FPiQhUYRYvVk2zNNQdWp6kTajxxqkE=
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-08-27_03,2026-08-26_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ impostorscore=0 spamscore=0 adultscore=0 suspectscore=0 phishscore=0
+ priorityscore=1501 lowpriorityscore=0 malwarescore=0 clxscore=1015
+ bulkscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
+ adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2608270053
 
-On 25/08/2026 20:40, Ajay Kumar Nandam wrote:
-> The APM DAIs expose PCM buffers that the backing DSP must be able to
-> reach. On existing targets the DSP runs in a stage-1 context and the
-> buffers are described to the SMMU via the iommus property.
-> 
-> On platforms such as Qualcomm Shikra, where audio is served by the modem
-> DSP (mDSP) rather than the ADSP, the DSP runs in a stage-2 protected
-> context and cannot use the SMMU. The buffers are reachable only after
-> hypervisor (SCM) memory assignment to the fixed set of consumer Virtual
-> Machine IDs (VMIDs) that own that protected context. Describe those
-> consumers with a new qcom,vmids property.
-> 
-> The two access models are mutually exclusive: a node carries either
-> iommus (stage-1/SMMU) or qcom,vmids (stage-2/SCM), expressed with a
-> oneOf constraint. iommus is therefore no longer unconditionally required.
-> SCM assignment replaces the buffer's current owners with the supplied
-> destination set, so the driver always adds HLOS to that set itself to
-> retain host access; HLOS must not be listed in qcom,vmids.
-> 
-> When qcom,vmids is present the PCM buffers must reside in reserved-memory
-> carveouts that are SCM-assigned to the consumer VMIDs. Add an optional
-> memory-region property listing those carveouts. The first entry is the
-> control-path buffer and subsequent entries are data-path buffers.
-> memory-region is only meaningful alongside qcom,vmids, enforced via
-> dependentRequired.
-> 
-> Signed-off-by: Ajay Kumar Nandam <ajay.nandam@oss.qualcomm.com>
-> ---
->  .../devicetree/bindings/sound/qcom,q6apm-dai.yaml  | 72 +++++++++++++++++++++-
->  1 file changed, 70 insertions(+), 2 deletions(-)
-> 
-> diff --git a/Documentation/devicetree/bindings/sound/qcom,q6apm-dai.yaml b/Documentation/devicetree/bindings/sound/qcom,q6apm-dai.yaml
-> index 9e5b30d9c6e6..d9a6bc4a14f2 100644
-> --- a/Documentation/devicetree/bindings/sound/qcom,q6apm-dai.yaml
-> +++ b/Documentation/devicetree/bindings/sound/qcom,q6apm-dai.yaml
-> @@ -10,7 +10,15 @@ maintainers:
->    - Srinivas Kandagatla <srinivas.kandagatla@linaro.org>
->  
->  description: |
-> -  This binding describes the Qualcomm APM DAIs in DSP
-> +  This binding describes the Qualcomm APM DAIs in DSP.
-> +
-> +  The DSP that runs the APM must be able to reach the PCM buffers. On
-> +  existing targets the DSP runs in a stage-1 context and the buffers are
-> +  described to the SMMU via iommus. On targets whose APM DSP runs in a
-> +  stage-2 protected context that cannot use the SMMU, the buffers are
-> +  reachable only after hypervisor (SCM) memory assignment to the fixed
-> +  set of consumer VMIDs that own that protected context, described by
-> +  qcom,vmids. The two access models are mutually exclusive.
->  
->  properties:
->    compatible:
-> @@ -20,9 +28,42 @@ properties:
->      minItems: 1
->      maxItems: 2
+Bindings for Qualcomm SM7150 and SM6375 GCC clock controllers are
+identical, so this could be one file for less handling and encouraging
+future grouping of similar devices (like SM7250 which also would fit here).
 
-As I said last time, different hardware, different programming
-interface, different features, so a different compatible.
+Signed-off-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
 
+---
 
->  
-> +  memory-region:
-> +    description:
-> +      Reserved-memory carveouts (shared-dma-pool, no-map) that hold the
-> +      PCM buffers and must be SCM-assigned to the VMIDs in qcom,vmids.
-> +      The first entry is the control-path buffer; the second entry is
-> +      the data-path buffer. Only used together with qcom,vmids.
-> +    minItems: 1
-> +    maxItems: 2
+Changes in v2:
+1. Update description/header path
+---
+ .../bindings/clock/qcom,sm6375-gcc.yaml       | 13 +++--
+ .../bindings/clock/qcom,sm7150-gcc.yaml       | 53 -------------------
+ 2 files changed, 10 insertions(+), 56 deletions(-)
+ delete mode 100644 Documentation/devicetree/bindings/clock/qcom,sm7150-gcc.yaml
 
-List the items with description, isntead of free form text
+diff --git a/Documentation/devicetree/bindings/clock/qcom,sm6375-gcc.yaml b/Documentation/devicetree/bindings/clock/qcom,sm6375-gcc.yaml
+index 66dfa72fa975..7abf229e4940 100644
+--- a/Documentation/devicetree/bindings/clock/qcom,sm6375-gcc.yaml
++++ b/Documentation/devicetree/bindings/clock/qcom,sm6375-gcc.yaml
+@@ -4,23 +4,30 @@
+ $id: http://devicetree.org/schemas/clock/qcom,sm6375-gcc.yaml#
+ $schema: http://devicetree.org/meta-schemas/core.yaml#
+ 
+-title: Qualcomm Global Clock & Reset Controller on SM6375
++title: Qualcomm Global Clock & Reset Controller on SM6375 and SM7150
+ 
+ maintainers:
+   - Konrad Dybcio <konradybcio@kernel.org>
++  - Bjorn Andersson <andersson@kernel.org>
++  - Danila Tikhonov <danila@jiaxyga.com>
++  - David Wronek <davidwronek@gmail.com>
+ 
+ description: |
+   Qualcomm global clock control module provides the clocks, resets and power
+   domains on SM6375
+ 
+-  See also: include/dt-bindings/clock/qcom,sm6375-gcc.h
++  See also:
++    include/dt-bindings/clock/qcom,sm6375-gcc.h
++    include/dt-bindings/clock/qcom,sm7150-gcc.h
+ 
+ allOf:
+   - $ref: qcom,gcc.yaml#
+ 
+ properties:
+   compatible:
+-    const: qcom,sm6375-gcc
++    enum:
++      - qcom,sm6375-gcc
++      - qcom,sm7150-gcc
+ 
+   clocks:
+     items:
+diff --git a/Documentation/devicetree/bindings/clock/qcom,sm7150-gcc.yaml b/Documentation/devicetree/bindings/clock/qcom,sm7150-gcc.yaml
+deleted file mode 100644
+index 3878808f811e..000000000000
+--- a/Documentation/devicetree/bindings/clock/qcom,sm7150-gcc.yaml
++++ /dev/null
+@@ -1,53 +0,0 @@
+-# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
+-%YAML 1.2
+----
+-$id: http://devicetree.org/schemas/clock/qcom,sm7150-gcc.yaml#
+-$schema: http://devicetree.org/meta-schemas/core.yaml#
+-
+-title: Qualcomm Global Clock & Reset Controller on SM7150
+-
+-maintainers:
+-  - Bjorn Andersson <andersson@kernel.org>
+-  - Danila Tikhonov <danila@jiaxyga.com>
+-  - David Wronek <davidwronek@gmail.com>
+-
+-description: |
+-  Qualcomm global clock control module provides the clocks, resets and power
+-  domains on SM7150
+-
+-  See also: include/dt-bindings/clock/qcom,sm7150-gcc.h
+-
+-properties:
+-  compatible:
+-    const: qcom,sm7150-gcc
+-
+-  clocks:
+-    items:
+-      - description: Board XO source
+-      - description: Board XO Active-Only source
+-      - description: Sleep clock source
+-
+-required:
+-  - compatible
+-  - clocks
+-  - '#power-domain-cells'
+-
+-allOf:
+-  - $ref: qcom,gcc.yaml#
+-
+-unevaluatedProperties: false
+-
+-examples:
+-  - |
+-    #include <dt-bindings/clock/qcom,rpmh.h>
+-    clock-controller@100000 {
+-      compatible = "qcom,sm7150-gcc";
+-      reg = <0x00100000 0x001f0000>;
+-      clocks = <&rpmhcc RPMH_CXO_CLK>,
+-               <&rpmhcc RPMH_CXO_CLK_A>,
+-               <&sleep_clk>;
+-      #clock-cells = <1>;
+-      #reset-cells = <1>;
+-      #power-domain-cells = <1>;
+-    };
+-...
+-- 
+2.53.0
 
-items:
-  - description:
-  - description:
-
-> +
-> +  qcom,vmids:
-> +    description:
-> +      Virtual Machine IDs (VMIDs) of the processors that consume the PCM
-> +      buffers and therefore must be granted access through SCM memory
-> +      assignment. Required on targets whose APM DSP runs in a stage-2
-> +      protected context and cannot use the SMMU; mutually exclusive with
-> +      iommus. SCM assignment replaces the buffer's current owners with the
-> +      supplied set, so the driver always adds HLOS to the destination list
-> +      itself to retain host access; HLOS must not be listed here. All
-> +      listed VMIDs and HLOS receive read-write access.
-> +    $ref: /schemas/types.yaml#/definitions/uint32-array
-> +    minItems: 1
-> +    maxItems: 2
-> +    uniqueItems: true
-> +
->  required:
->    - compatible
-> -  - iommus
-> +
-> +oneOf:
-> +  - required:
-> +      - iommus
-> +  - required:
-> +      - qcom,vmids
-> +
-> +dependentRequired:
-> +  memory-region:
-> +    - qcom,vmids
->  
->  additionalProperties: false
->  
-> @@ -32,3 +73,30 @@ examples:
->          compatible = "qcom,q6apm-dais";
->          iommus = <&apps_smmu 0x1801 0x0>;
->      };
-> +  - |
-> +    #include <dt-bindings/firmware/qcom,scm.h>
-> +
-> +    reserved-memory {
-> +        #address-cells = <2>;
-> +        #size-cells = <2>;
-> +        ranges;
-> +
-> +        audio_heap_mem: audio-heap@a1000000 {
-> +            compatible = "shared-dma-pool";
-> +            reg = <0x0 0xa1000000 0x0 0x100000>;
-> +            no-map;
-> +        };
-> +
-> +        audio_mdsp_carveout_mem: audio-carveout@a1100000 {
-> +            compatible = "shared-dma-pool";
-> +            reg = <0x0 0xa1100000 0x0 0x400000>;
-> +            no-map;
-> +        };
-> +    };
-
-Drop entire node, not really relevant.
-
-> +
-> +    dais {
-> +        compatible = "qcom,q6apm-dais";
-> +        /* index 0: control path, index 1: data path */
-> +        memory-region = <&audio_heap_mem>, <&audio_mdsp_carveout_mem>;
-> +        qcom,vmids = <QCOM_SCM_VMID_LPASS QCOM_SCM_VMID_MSS_MSA>;
-> +    };
-> 
-
-
-Best regards,
-Krzysztof
