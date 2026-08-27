@@ -1,455 +1,82 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9A0683F1660
-	for <linux-arm-msm@vger.kernel.org>; Thu, 27 Aug 2026 12:18:55 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6C82E415F1F;
+	Thu, 27 Aug 2026 12:20:20 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787833138; cv=none; b=ip+HZ/vrI6huvK05jdzg9DGlKd9QiXhM7cpPI9f+8dd1D/wizPkGdkNY+8fPaBgYYgLl4LpVJK8tgYjbKrWjhgCBWVZ9+grULpyHl2TucIUXRi7G1r5wp0vP6d3MbD+LNvptXAvy76VL7mhHnlyzPiFtP5XWj4TMjfjWV3FUFxs=
+	t=1787833221; cv=none; b=eudjKsyTXkZriyLMjdcNWRU7cO23GkhAOK+vF+9/f6Tv00yKcX2Q4GI4Cy+LtZ8rUBN1KBbTeRLam1YfzbZS723vHP0CJXiUKxCygVWvR/q1jEK7Kga7dzxUijzz1079AbsupfucuVV0obv/597Zxn/MXAEcgJPba8IN4ltnILQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787833138; c=relaxed/simple;
-	bh=UYgQmB7qLR7zkxPPkjkq6G5CfKxuU6jxBNtb9Zqv8IE=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=Na7lUBo/s1z+y0OLz1tFNrSsWgwh7SLZxxyhQjbXkh+gDlcrkPoJs2BsCKuacDftbMW4Ur/1frRjSdotwN3IOfy+uksxxtgjplKgpSKfIZT4cXGf9B6cp0J/e0+XbMmSTPaUB2+f/U3dyg+bTCnCybAwg10Bz0ixJGFzfXiO7Ys=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=aTBrtmWb; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=AoK1YA5m; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1787833221; c=relaxed/simple;
+	bh=VHraeBIZleTsAxdBtv6ZKxlOuK71+qD7wSnonQkE2g0=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=rN3kOVqgc6OcCif+CWyKk4lRikcc6IC3+Icne7A1mbNIMlu8lwshrBYRwYqjMND/IZ0Bz9j7TAmBDyClyEDpWQKIdg+7gOv7j35ggWsBVm7U4loUnHFJfVYMK3Yzjwk0lDGtQ6qt6eIrKv7ioswgQSHO7UrgU6Trtu3bgRjRhSo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ns3c1dbg; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="aTBrtmWb";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="AoK1YA5m"
-Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67RCCE263473776
-	for <linux-arm-msm@vger.kernel.org>; Thu, 27 Aug 2026 12:18:54 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:message-id
-	:mime-version:subject:to; s=qcppdkim1; bh=yvZRm8NKgBNpbaweKVg3t7
-	RUcwrN4G+we2r4OoXb1u4=; b=aTBrtmWbsrxeUDVJwPq/RbmB1QRo2AYC/aHgGF
-	ANy7egl7FVqibdRzRc0To+EBa228DKA93yEerP4zXEcMbE9FNvpkoZha/tkfrJzh
-	woBmyAMKsuioa5w8uQsm/Zqo3qKo0CujHoe78S0SBiogqSg3AeD476HTIJS77bMD
-	YcY6x5TQRON7tSPS/9KeqcU52U2iQ4a/kk6lZYJL5OpazzBTVjP+MUjMnkaIhHzH
-	Vbqv2mYq88a4cgX7KDaQAFUNiaVQiyr9HojyupuJe07fAaJNT7XDwBX/884kBkPn
-	inG9a/8VkvIsb+pxKQ4USJ6THPLs7vczTOk+m+OfAgW13YpQ==
-Received: from mail-pf1-f199.google.com (mail-pf1-f199.google.com [209.85.210.199])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ga4fwkqv6-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Thu, 27 Aug 2026 12:18:54 +0000 (GMT)
-Received: by mail-pf1-f199.google.com with SMTP id d2e1a72fcca58-84e01a62d99so2180323b3a.0
-        for <linux-arm-msm@vger.kernel.org>; Thu, 27 Aug 2026 05:18:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1787833133; x=1788437933; darn=vger.kernel.org;
-        h=cc:to:message-id:content-transfer-encoding:content-type
-         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=yvZRm8NKgBNpbaweKVg3t7RUcwrN4G+we2r4OoXb1u4=;
-        b=AoK1YA5m9yptzX309Q7Qyr3beY2TCQJlTVDEXz031dit3uvuFJJ/RUhX1xuPbPzRjK
-         j9kimYkVqXREStWVI/2bv/wXLVh9ElkmPzD1hN+v6ocmZenM7DqsUcwYNbgzE1zwl+QN
-         tB8hzmA4D6hk1v47xVUwdzDGxfBCbbrgT1Ieh5Lkgpa+vsaPVrIy2ISi0OhShfvW/B9u
-         dWwPrixlAPW4uTpRgxPm98yN7lK5jNR2cCxLugz5lBE0E+TYoYpPYL8+5gM8y0Wi1N8X
-         m7WhUKX1WBJ8bvAiiRvhIf2RGXfanV9S1hTjR6LJO4AUIijqKBHCSygp5yD42vVLS4zx
-         /yRg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787833133; x=1788437933;
-        h=cc:to:message-id:content-transfer-encoding:content-type
-         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to:content-type;
-        bh=yvZRm8NKgBNpbaweKVg3t7RUcwrN4G+we2r4OoXb1u4=;
-        b=fntZahXpZf9YY0/8vWtjqeQ9IaAIkb7pKJ2RMYNT0ncrYaapK6Hf3W+B8eIG/L1u2m
-         oVDtikd+466Wc9XKsvr4fpuIWptyseqWZrercBx2bNtGOyeG0Qr1/W4cPGyDBhWr737y
-         UOsLe3uW6t+ouDWz76XyTx6WtJhUAu2/G+QkFjI4AiSY6apx+YMTTVE7S2ZpB3wiy8lH
-         252TJpxujA7NwAphMb2Rm1C8YOr7IBD0hU79a1OvjHzWcpXXGAL8tSK+OPL6W4lz223p
-         +yzDFRjioGUNDVpZ7d8EP+oqJjNlLTchowC4INDrTgxZFnHVZRce0I7mVUFKZyRQ215q
-         F/5w==
-X-Gm-Message-State: AFuF++nRyRAHkrlanRnArRD+kqHjmYmCufxBdhz8RFl0qDRz/8HtWIwU
-	vSANhc7c9/1/HmU2AIcgQ4Ub3ykNb5NFUwzlkMK2e2hajijycQcebC6FgT931MslhT9d11qTGDv
-	DrFIA3BIPFr15ozl4gtMUwAF19TRJZaiS4wHEr4pnGxORT0aZhSqFpjfFWTayXrWVAexl
-X-Gm-Gg: AR+sD13UgajUKhsRpD4A8jyEPBrTeY8vw+j7FOO1T1A7sFfBIm4T9HHTDqpRfmUbof0
-	76RSaOyIaN1FoZi5g07sYF+/jb/FeL9HdENnpeaq60l5Yl9qkKoHjG1Dw0tm+44RBIzoUl/7XFI
-	X/iGvhBrtiis5W1Az/jHmTtp42ROvoE/fprsYU5hgQJcIw9CIXxqB3Efi2RaD39nQSi+FVhAU53
-	Ssk3sOyeWekSc03v86i8BHw7bgyi2ssrRo/Onz8kSLsYsvLD1Zx4nqPdE7+7hEZlTHsSy/b9tiI
-	oIxDW9rQUZnIBtNXQLk/zNn0mdJjrP6qXlq/Z7Q/R+qICoMifibXBm3QNrtpi13xcRHBQrt7tRq
-	7jrbShZzRAfOpPtYzgNMHLArpDZrbBxwcTiEkGco=
-X-Received: by 2002:aa7:8887:0:b0:846:22ea:e171 with SMTP id d2e1a72fcca58-85371cb5f0dmr25326589b3a.3.1787833133250;
-        Thu, 27 Aug 2026 05:18:53 -0700 (PDT)
-X-Received: by 2002:aa7:8887:0:b0:846:22ea:e171 with SMTP id d2e1a72fcca58-85371cb5f0dmr25326323b3a.3.1787833132242;
-        Thu, 27 Aug 2026 05:18:52 -0700 (PDT)
-Received: from hu-pphansal-hyd.qualcomm.com ([202.46.22.19])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-8535d344577sm1990580b3a.60.2026.08.27.05.18.48
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 27 Aug 2026 05:18:51 -0700 (PDT)
-From: Pranav Mahesh Phansalkar <pranav.phansalkar@oss.qualcomm.com>
-Date: Thu, 27 Aug 2026 17:48:46 +0530
-Subject: [PATCH v3] net: qrtr: Send HELLO message on endpoint register
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="ns3c1dbg"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6F6301F000E9;
+	Thu, 27 Aug 2026 12:20:18 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1787833220;
+	bh=JC8KEH2A5MaBWTLPjH1KEcQphE7kFFAbdhvua3h0dxM=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=ns3c1dbgik71leiI5OFOgqECUIefVwx/zRnd6jyWTbatex/odpR1+VaXlszUnQ2Gz
+	 +Oc1OMOAS+mMgDM+HVN8N8q4Rq858mfCFiFs/XTZfwlnx+uuYcYMBkEr7t+vHGr7i/
+	 3bIp+aBVOQtpxadtjMEoJR0aoh5pTydMhZlUhEZW+4X9jmK+oP9iATtr77WsZX+I+l
+	 tD6rg9A4+diFFnctSArK3/GBlDNIe6DrQwBbHc5ckdLqaugZefKMG2koXa/vgeNH1B
+	 1rY1hp2+4lYToz7u5eOIBhnGonlqlBUvZ8a1d8tBLc+CtmH4LdAsz7kMLaH2cvjHKT
+	 ThEaoKXn0Y3vQ==
+Date: Thu, 27 Aug 2026 14:20:15 +0200
+From: Krzysztof Kozlowski <krzk@kernel.org>
+To: Hardeep Sharma <hardeep.sharma@oss.qualcomm.com>
+Cc: Bjorn Andersson <andersson@kernel.org>, 
+	Konrad Dybcio <konradybcio@kernel.org>, Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>, 
+	Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+	Conor Dooley <conor+dt@kernel.org>, Ulf Hansson <ulfh@kernel.org>, 
+	Michael Turquette <mturquette@baylibre.com>, Stephen Boyd <sboyd@kernel.org>, 
+	Brian Masney <bmasney@redhat.com>, Taniya Das <quic_tdas@quicinc.com>, 
+	Georgi Djakov <djakov@kernel.org>, Bartosz Golaszewski <brgl@kernel.org>, 
+	Linus Walleij <linusw@kernel.org>, Thomas Gleixner <tglx@kernel.org>, Radu Rendec <radu@rendec.net>, 
+	Robert Marko <robimarko@gmail.com>, Guru Das Srinagesh <linux@gurudas.dev>, 
+	linux-arm-msm@vger.kernel.org, linux-arm-kernel@lists.infradead.org, 
+	linux-kernel@vger.kernel.org, devicetree@vger.kernel.org, linux-pm@vger.kernel.org, 
+	linux-clk@vger.kernel.org, linux-gpio@vger.kernel.org
+Subject: Re: [PATCH v3 06/15] dt-bindings: interconnect: Add Qualcomm Kuno NoC
+Message-ID: <20260827-predictable-mauve-catfish-3d5ad0@quoll>
+References: <20260821-kuno-soc-support-v3-0-196e2b306368@oss.qualcomm.com>
+ <20260821-kuno-soc-support-v3-6-196e2b306368@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260827-qrtr-hello-on-ep-register-v3-1-ca289ff99abf@oss.qualcomm.com>
-X-B4-Tracking: v=1; b=H4sIACUrkGoC/43PzW7DIAwH8FepOJfKkABhp73H1AMfpkFKQwtdt
- KnKu5e0u21rerH0t+Bn+0oK5oiFvG2uJOMUS0xjDc12Q1xvxgPS6GsmHLgEyRt6zpdMexyGRNN
- I8UQzHmK5YKYKZGuldM4rIPX/KWOIX3f7Y19zX5+l/H0fNbGl+1AVsCfqxCijrdauRYCOe/ueS
- tmdP83g0vG4q2WZ9QPJNcgKoYLVYButn0DN6kbeIwrLbDDofkPLuRN/+URewS54K5ABEwr/36w
- DtQYZFbgUpuXhL2g/z/MNLsHc5/UBAAA=
-X-Change-ID: 20260623-qrtr-hello-on-ep-register-7064b66ccd70
-To: Manivannan Sadhasivam <mani@kernel.org>,
-        "David S. Miller" <davem@davemloft.net>,
-        Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>,
-        Paolo Abeni <pabeni@redhat.com>, Simon Horman <horms@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, netdev@vger.kernel.org,
-        linux-kernel@vger.kernel.org, bjorn.andersson@oss.qualcomm.com,
-        Chris Lew <christopher.lew@oss.qualcomm.com>,
-        Deepak Kumar Singh <deepak.singh@oss.qualcomm.com>,
-        Pranav Mahesh Phansalkar <pranav.phansalkar@oss.qualcomm.com>
-X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1787833128; l=11592;
- i=pranav.phansalkar@oss.qualcomm.com; s=20260220; h=from:subject:message-id;
- bh=NLUfYOcMrrwUw0L5ZHuerkaARAXtk2ri2zjWh5wzObY=;
- b=+/J0aT7Agrze+fa13PYdzP8eSxa+fsuvxqyOBo+FSHeN13v0MSL4lCFiJaiRikanBZuUxjnMi
- /sK9eC4wbHiAGEDasnx0y0gGITY/hccAiMLww6qK0CuoHfpdhILYgLF
-X-Developer-Key: i=pranav.phansalkar@oss.qualcomm.com; a=ed25519;
- pk=MI1mUPTtmeY/WO9GsLnjtoVy4wYL57rtVnRammLT8B8=
-X-Proofpoint-GUID: GEu3Uw2Hu9JyRk4T5we3mxpu2tAB6EmV
-X-Authority-Analysis: v=2.4 cv=OtZ/DS/t c=1 sm=1 tr=0 ts=6a902b2e cx=c_pps
- a=WW5sKcV1LcKqjgzy2JUPuA==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
- a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22
- a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=nbVe5d7HPEM6lZhScKcA:9 a=QEXdDO2ut3YA:10
- a=OpyuDcXvxspvyRM73sMx:22
-X-Proofpoint-ORIG-GUID: GEu3Uw2Hu9JyRk4T5we3mxpu2tAB6EmV
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODI3MDEwMSBTYWx0ZWRfX+Z8EYyf8tPL7
- y8zOb0ZAwYziYCGDrWfMJ1tPNiiJEg/i01AtoO7ou9bm0r2eDFnkLwKnWWemAlud8WoHSeQl/RK
- f12GhSmzua+j2zDmIGRH9aPmAKr6jL6bXdk9btcQArsSkQjSdFxsnwZCH1ctiFEm5pdHJRkIKW7
- JuFSzjJsXM0QyT14ba91HhYvyA6jQ9qrBfzlMbeFURDr93mNv67LgkrbxEx4VuoA87v5IqLy8dv
- QVj2deW9xIVuwpXnwMKy55g8Qw78sCqkvVvNB+9VluZklJAjzVmd7IUnMyUx9DF9OWLxgdDNaED
- +1kFT9Hx8/0JzKn0pC7lnOIrziYUBwfFAlQU4gUq7SfHSZYCw6yQeql+bPGTBBldWX+xifOPdhV
- ewoOY01/3Nf3nbx5wSoWg4eH2Nkr+m6UrFf/qabMfhcWD9OzbnxSoMsADBIss8/SsP0B8gFcjgs
- SLSZ1Ls5ifK4728a4xw==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODI3MDEwMSBTYWx0ZWRfX6MeBPJDIq/46
- sgn214yI08flmbLZnTBiMTkA0/SIACXwanV1ZAOieTFNiGhAazRutNy15rN3tLA/IOHki9fU513
- bn1UoKwopftAvFB8euAABHRz+bLqXy4=
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-08-27_05,2026-08-26_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- spamscore=0 lowpriorityscore=0 clxscore=1015 impostorscore=0
- priorityscore=1501 malwarescore=0 bulkscore=0 phishscore=0 suspectscore=0
- adultscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
- definitions=main-2608270101
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <20260821-kuno-soc-support-v3-6-196e2b306368@oss.qualcomm.com>
 
-From: Chris Lew <christopher.lew@oss.qualcomm.com>
+On Fri, Aug 21, 2026 at 09:38:59PM +0530, Hardeep Sharma wrote:
+> +properties:
+> +  compatible:
+> +    enum:
+> +      - qcom,kuno-aggre-noc
+> +      - qcom,kuno-clk-virt
+> +      - qcom,kuno-cnoc-main
+> +      - qcom,kuno-dc-noc
+> +      - qcom,kuno-mc-virt
+> +      - qcom,kuno-mem-noc
+> +      - qcom,kuno-pcie-anoc
+> +      - qcom,kuno-system-noc
+> +
+> +  reg:
+> +    maxItems: 1
+> +
+> +  clocks:
 
-HELLO is currently handled entirely by the name server (NS): it is
-sent once as a broadcast when the NS initializes, and again as a
-reply whenever the NS receives an inbound HELLO from a remote.
-
-Some remote QRTR endpoints (e.g. an external WLAN chipset attached
-over MHI) operate in a slave role: they only ever send a HELLO in
-response to one they receive, and never initiate. Since the host cannot
-tell in advance which remotes behave this way, if the host also only
-replies, both sides wait on the other to speak first and no HELLO is
-ever exchanged, stalling further communication.
-
-To fix this:
-- Transfer HELLO handshake ownership to the core layer. A HELLO is
-  now sent once, per endpoint, at registration time.
-- Schedule a delayed work item on endpoint registration to send a
-  HELLO once the name server is bound. The work reschedules itself
-  with a 100ms backoff if the name server socket is not yet bound or
-  if allocating the control packet fails, so a transient startup
-  condition does not abandon the handshake permanently.
-- Enforce HELLO-first ordering by dropping non-HELLO packets and
-  returning -EAGAIN until the HELLO is confirmed sent, using bool
-  hello_sent guarded by ep_lock to make the gate check atomic with
-  xmit().
-- Skip nodes with nid == QRTR_EP_NID_AUTO in bcast_enqueue(), to avoid
-  broadcasting control packets with QRTR_EP_NID_AUTO as the destination
-  node ID.
-- Remove say_hello() from the name server's ctrl_cmd_hello() handler
-  and from qrtr_ns_init(); the core layer is now the sole sender of
-  the outbound HELLO. This removes the NS's reply-on-receive
-  behaviour without a replacement.
-
-Signed-off-by: Chris Lew <christopher.lew@oss.qualcomm.com>
-Co-developed-by: Deepak Kumar Singh <deepak.singh@oss.qualcomm.com>
-Signed-off-by: Deepak Kumar Singh <deepak.singh@oss.qualcomm.com>
-Co-developed-by: Pranav Mahesh Phansalkar <pranav.phansalkar@oss.qualcomm.com>
-Signed-off-by: Pranav Mahesh Phansalkar <pranav.phansalkar@oss.qualcomm.com>
----
-Changes in v3:
-- qrtr_node_enqueue()'s pre-handshake gate now returns -EAGAIN instead
-  of 0, so qrtr_sendmsg() no longer reports a fabricated full-length
-  success when a packet is dropped before HELLO completes.
-- say_hello (qrtr_hello_work) converted from work_struct to
-  delayed_work. The retry on a HELLO xmit failure now fires only on
-  -EAGAIN, with a 100ms backoff, instead of unconditionally with zero
-  delay; other failures are terminal for that attempt instead of
-  self-requeuing indefinitely.
-- The two early-return paths in qrtr_hello_work() (name server not
-  yet bound; control packet allocation failure) now reschedule with
-  the same 100ms backoff instead of abandoning the handshake.
-- Reworded the qrtr_bcast_enqueue() comment to describe the actual
-  nid-availability check rather than implying it tracks hello_sent.
-  Annotated the lockless reads of node->nid with READ_ONCE(), paired
-  with WRITE_ONCE() on the qrtr_node_assign() write side.
-- Removed say_hello() from qrtr_ns_init() in addition to
-  ctrl_cmd_hello(); the remaining call fired once during module init,
-  before any transport could register an endpoint, so it never
-  reached a remote peer.
-- Expanded the commit message to describe the slave-role scenario
-  this patch addresses, and to state that the reply-on-receive HELLO
-  behaviour is being removed without a replacement.
-- Link to v2: https://lore.kernel.org/r/20260807-qrtr-hello-on-ep-register-v2-1-a7f265a42f7e@oss.qualcomm.com
-
-Changes in v2:
-- Drop say_hello() from the name server's ctrl_cmd_hello() handler;
-  the core layer is now the sole sender of the outbound HELLO, so
-  the NS no longer needs to duplicate that logic.
-- Fix Signed-off-by/Co-developed-by ordering so the submitter's
-  Signed-off-by is last.
-- Duplicate-HELLO detection at the name server (hello_rcvd) will be
-  handled in a separate patch, so it is dropped from this series.
-- Link to v1: https://lore.kernel.org/r/20260731-qrtr-hello-on-ep-register-v1-1-ddee5b1bfaec@oss.qualcomm.com
----
- net/qrtr/af_qrtr.c | 66 ++++++++++++++++++++++++++++++++++++++++++++++++++++--
- net/qrtr/ns.c      | 35 +----------------------------
- 2 files changed, 65 insertions(+), 36 deletions(-)
-
-diff --git a/net/qrtr/af_qrtr.c b/net/qrtr/af_qrtr.c
-index d02ef9a74c3c..8e9b36479bab 100644
---- a/net/qrtr/af_qrtr.c
-+++ b/net/qrtr/af_qrtr.c
-@@ -9,6 +9,7 @@
- #include <linux/termios.h>	/* For TIOCINQ/OUTQ */
- #include <linux/spinlock.h>
- #include <linux/wait.h>
-+#include <linux/workqueue.h>
- 
- #include <net/sock.h>
- 
-@@ -120,8 +121,10 @@ static DEFINE_XARRAY_ALLOC(qrtr_ports);
-  * @nid: node id
-  * @qrtr_tx_flow: xarray of qrtr_tx_flow, keyed by node << 32 | port
-  * @qrtr_tx_lock: lock for qrtr_tx_flow inserts
-+ * @hello_sent: hello packet send successful
-  * @rx_queue: receive queue
-  * @item: list item for broadcast list
-+ * @say_hello: delayed work for sending hello packet
-  */
- struct qrtr_node {
- 	struct mutex ep_lock;
-@@ -132,8 +135,11 @@ struct qrtr_node {
- 	struct xarray qrtr_tx_flow;
- 	struct mutex qrtr_tx_lock; /* for qrtr_tx_flow */
- 
-+	bool hello_sent;
-+
- 	struct sk_buff_head rx_queue;
- 	struct list_head item;
-+	struct delayed_work say_hello;
- };
- 
- /**
-@@ -187,6 +193,8 @@ static void __qrtr_node_release(struct kref *kref)
- 	list_del(&node->item);
- 	mutex_unlock(&qrtr_node_lock);
- 
-+	cancel_delayed_work_sync(&node->say_hello);
-+
- 	skb_queue_purge(&node->rx_queue);
- 
- 	/* Free tx flow counters */
-@@ -341,6 +349,14 @@ static int qrtr_node_enqueue(struct qrtr_node *node, struct sk_buff *skb,
- 	size_t len = skb->len;
- 	int rc, confirm_rx;
- 
-+	mutex_lock(&node->ep_lock);
-+	if (!node->hello_sent && type != QRTR_TYPE_HELLO) {
-+		mutex_unlock(&node->ep_lock);
-+		kfree_skb(skb);
-+		return -EAGAIN;
-+	}
-+	mutex_unlock(&node->ep_lock);
-+
- 	confirm_rx = qrtr_tx_wait(node, to->sq_node, to->sq_port, type);
- 	if (confirm_rx < 0) {
- 		kfree_skb(skb);
-@@ -353,7 +369,7 @@ static int qrtr_node_enqueue(struct qrtr_node *node, struct sk_buff *skb,
- 	hdr->src_node_id = cpu_to_le32(from->sq_node);
- 	hdr->src_port_id = cpu_to_le32(from->sq_port);
- 	if (to->sq_port == QRTR_PORT_CTRL) {
--		hdr->dst_node_id = cpu_to_le32(node->nid);
-+		hdr->dst_node_id = cpu_to_le32(READ_ONCE(node->nid));
- 		hdr->dst_port_id = cpu_to_le32(QRTR_PORT_CTRL);
- 	} else {
- 		hdr->dst_node_id = cpu_to_le32(to->sq_node);
-@@ -372,6 +388,8 @@ static int qrtr_node_enqueue(struct qrtr_node *node, struct sk_buff *skb,
- 			rc = node->ep->xmit(node->ep, skb);
- 		else
- 			kfree_skb(skb);
-+		if (!rc && type == QRTR_TYPE_HELLO)
-+			node->hello_sent = true;
- 		mutex_unlock(&node->ep_lock);
- 	}
- 	/* Need to ensure that a subsequent message carries the otherwise lost
-@@ -379,6 +397,9 @@ static int qrtr_node_enqueue(struct qrtr_node *node, struct sk_buff *skb,
- 	if (rc && confirm_rx)
- 		qrtr_tx_flow_failed(node, to->sq_node, to->sq_port);
- 
-+	if (rc == -EAGAIN && type == QRTR_TYPE_HELLO)
-+		schedule_delayed_work(&node->say_hello, msecs_to_jiffies(100));
-+
- 	return rc;
- }
- 
-@@ -416,7 +437,7 @@ static void qrtr_node_assign(struct qrtr_node *node, unsigned int nid)
- 	spin_lock_irqsave(&qrtr_nodes_lock, flags);
- 	radix_tree_insert(&qrtr_nodes, nid, node);
- 	if (node->nid == QRTR_EP_NID_AUTO)
--		node->nid = nid;
-+		WRITE_ONCE(node->nid, nid);
- 	spin_unlock_irqrestore(&qrtr_nodes_lock, flags);
- }
- 
-@@ -570,6 +591,38 @@ static struct sk_buff *qrtr_alloc_ctrl_packet(struct qrtr_ctrl_pkt **pkt,
- 	return skb;
- }
- 
-+static void qrtr_hello_work(struct work_struct *work)
-+{
-+	struct sockaddr_qrtr from = {AF_QIPCRTR, 0, QRTR_PORT_CTRL};
-+	struct sockaddr_qrtr to = {AF_QIPCRTR, 0, QRTR_PORT_CTRL};
-+	struct qrtr_ctrl_pkt *pkt;
-+	struct qrtr_node *node;
-+	struct qrtr_sock *ctrl;
-+	struct sk_buff *skb;
-+
-+	node = container_of(to_delayed_work(work), struct qrtr_node, say_hello);
-+
-+	/* NS must be bound before we can send; retry with backoff if not ready */
-+	ctrl = qrtr_port_lookup(QRTR_PORT_CTRL);
-+	if (!ctrl) {
-+		schedule_delayed_work(&node->say_hello, msecs_to_jiffies(100));
-+		return;
-+	}
-+
-+	skb = qrtr_alloc_ctrl_packet(&pkt, GFP_KERNEL);
-+	if (!skb) {
-+		qrtr_port_put(ctrl);
-+		schedule_delayed_work(&node->say_hello, msecs_to_jiffies(100));
-+		return;
-+	}
-+
-+	pkt->cmd = cpu_to_le32(QRTR_TYPE_HELLO);
-+	from.sq_node = qrtr_local_nid;
-+	to.sq_node = node->nid;
-+	qrtr_node_enqueue(node, skb, QRTR_TYPE_HELLO, &from, &to);
-+	qrtr_port_put(ctrl);
-+}
-+
- /**
-  * qrtr_endpoint_register() - register a new endpoint
-  * @ep: endpoint to register
-@@ -595,6 +648,9 @@ int qrtr_endpoint_register(struct qrtr_endpoint *ep, unsigned int nid)
- 	node->nid = QRTR_EP_NID_AUTO;
- 	node->ep = ep;
- 
-+	node->hello_sent = false;
-+	INIT_DELAYED_WORK(&node->say_hello, qrtr_hello_work);
-+
- 	xa_init(&node->qrtr_tx_flow);
- 	mutex_init(&node->qrtr_tx_lock);
- 
-@@ -605,6 +661,9 @@ int qrtr_endpoint_register(struct qrtr_endpoint *ep, unsigned int nid)
- 	mutex_unlock(&qrtr_node_lock);
- 	ep->node = node;
- 
-+	/* Initiate HELLO handshake from the core layer */
-+	schedule_delayed_work(&node->say_hello, 0);
-+
- 	return 0;
- }
- EXPORT_SYMBOL_GPL(qrtr_endpoint_register);
-@@ -879,6 +938,9 @@ static int qrtr_bcast_enqueue(struct qrtr_node *node, struct sk_buff *skb,
- 
- 	mutex_lock(&qrtr_node_lock);
- 	list_for_each_entry(node, &qrtr_all_nodes, item) {
-+		/* Skip nodes with no assigned node ID yet. */
-+		if (READ_ONCE(node->nid) == QRTR_EP_NID_AUTO)
-+			continue;
- 		skbn = pskb_copy(skb, GFP_KERNEL);
- 		if (!skbn)
- 			break;
-diff --git a/net/qrtr/ns.c b/net/qrtr/ns.c
-index b3f9bbcf9ab9..6d93bcd250e7 100644
---- a/net/qrtr/ns.c
-+++ b/net/qrtr/ns.c
-@@ -212,6 +212,7 @@ static void lookup_notify(struct sockaddr_qrtr *to, struct qrtr_server *srv,
- 		pr_err("failed to send lookup notification\n");
- }
- 
-+/* Announce the list of servers registered on the local node */
- static int announce_servers(struct sockaddr_qrtr *sq)
- {
- 	struct qrtr_server *srv;
-@@ -326,38 +327,8 @@ static int server_del(struct qrtr_node *node, unsigned int port, bool bcast)
- 	return 0;
- }
- 
--static int say_hello(struct sockaddr_qrtr *dest)
--{
--	struct qrtr_ctrl_pkt pkt;
--	struct msghdr msg = { };
--	struct kvec iv;
--	int ret;
--
--	iv.iov_base = &pkt;
--	iv.iov_len = sizeof(pkt);
--
--	memset(&pkt, 0, sizeof(pkt));
--	pkt.cmd = cpu_to_le32(QRTR_TYPE_HELLO);
--
--	msg.msg_name = (struct sockaddr *)dest;
--	msg.msg_namelen = sizeof(*dest);
--
--	ret = kernel_sendmsg(qrtr_ns.sock, &msg, &iv, 1, sizeof(pkt));
--	if (ret < 0)
--		pr_err("failed to send hello msg\n");
--
--	return ret;
--}
--
--/* Announce the list of servers registered on the local node */
- static int ctrl_cmd_hello(struct sockaddr_qrtr *sq)
- {
--	int ret;
--
--	ret = say_hello(sq);
--	if (ret < 0)
--		return ret;
--
- 	return announce_servers(sq);
- }
- 
-@@ -774,10 +745,6 @@ int qrtr_ns_init(void)
- 	qrtr_ns.bcast_sq.sq_node = QRTR_NODE_BCAST;
- 	qrtr_ns.bcast_sq.sq_port = QRTR_PORT_CTRL;
- 
--	ret = say_hello(&qrtr_ns.bcast_sq);
--	if (ret < 0)
--		goto err_wq;
--
- 	/* As the qrtr ns socket owner and creator is the same module, we have
- 	 * to decrease the qrtr module reference count to guarantee that it
- 	 * remains zero after the ns socket is created, otherwise, executing
-
----
-base-commit: 502d801f0ab03e4f32f9a33d203154ce84887921
-change-id: 20260623-qrtr-hello-on-ep-register-7064b66ccd70
+Missing minItems. I asked to open other bindings to see how this is
+done. So for example you took qcom,maili-rpmh.yaml. What do you see
+there but you do not see here?
 
 Best regards,
--- 
-Pranav Mahesh Phansalkar <pranav.phansalkar@oss.qualcomm.com>
+Krzysztof
 
