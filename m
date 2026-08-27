@@ -1,299 +1,99 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from sg-2-3.ptr.blmpb.com (sg-2-3.ptr.blmpb.com [71.18.227.3])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8A5334766A9
-	for <linux-arm-msm@vger.kernel.org>; Thu, 27 Aug 2026 15:16:34 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4F27D46D0A9
+	for <linux-arm-msm@vger.kernel.org>; Thu, 27 Aug 2026 15:43:18 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=71.18.227.3
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787843796; cv=none; b=EEsNnifTwMxkoi6MpcAeSsmSCjPs2Z8MSn1ssM3qN5yzY+BXjYn6IlUme8uJRf11Do/EWOiM0HmUwTn8KxcbRG2LZWi4OkxmZlLT1J65hj5ppF46oD4pmlccGW369dqNJweE8zVPFFPfeyEAgVM4XFCknIrDwvR+TZSgm6pe+Js=
+	t=1787845400; cv=none; b=nWT3RarQA97LroWE6xhsT/xCQ4OkcfFJfMpDmJn4k4gVj9CYxhvFgNirO6ZQZ17DxniEd81VLYLYK9cgLcn+uRsM4eoMKQoMo6tuye/rcsfySjkdKEsS4J0bP1+re1DtpORQlgeLCl1TJo4KBJ0aWvSDvFdxSzBeA6Am2WXOoac=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787843796; c=relaxed/simple;
-	bh=PpCc/vlf9b07SxvzQVU62p72CK12ySdmO+yXnpobbbQ=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=lVlNyQmerjATRHCLBXCCGfdya0pafgERdwI09kQrItH5Z+Y1y1qHFocSUAXw0y5paKvuzdf/JBrhhIeNUzxX2iNrY0vnuyW7iU2LWoFj2J+hxDRgEgFgSGc4KaOi0+w5yHmkipSivk9GI6U58XCxSQXvvoCxEoSabKD25y7cgew=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=j+XThCSr; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=M6AS3E/u; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1787845400; c=relaxed/simple;
+	bh=/oqgHYDPvMDVagPO7AKnMT/fGfUZ6coiSZBJygQnBzM=;
+	h=Date:Mime-Version:Subject:Content-Type:To:From:Cc:Message-Id; b=ISGpr28cIE/saFKdO0eAatyj5AAfCR1V/lzQi0nSaFyMWlQhg5GLNUFpG4zzaxujGwV5wc95zRvU+JPL9+EpUGMYPIpK45+yOhuWvwiIjkooXSoZAuDg7Psqeh9PzbcOvvtHdWZ2egld3/vm+yn4QJsmwI80RQonOd2x5A4pgbE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=cherr.cc; spf=pass smtp.mailfrom=cherr.cc; dkim=pass (2048-bit key) header.d=cherr.cc header.i=@cherr.cc header.b=V00chBgz; arc=none smtp.client-ip=71.18.227.3
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=cherr.cc
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=cherr.cc
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="j+XThCSr";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="M6AS3E/u"
-Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67RF2Agf4176552
-	for <linux-arm-msm@vger.kernel.org>; Thu, 27 Aug 2026 15:16:33 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	gtDukmFMoEJfDZ7a3V4nn+CIGOUTzNyajLc2q8Q3TpM=; b=j+XThCSrYVsBV38y
-	WGJiNA26F8jrtVFxmIgWyPv3i+PDPn/SvJPYpxIcYCEDXAfJn+h3yDEUP34/gJP0
-	rX4w9mYYrB2kQhYkiD5a0baBmYqun1OPHFtBJ3uW+Ffmu0LkxWZljavjjRftTUWM
-	bjNCN72zNK+Wujo/sV+mUQsZpJWKXkYK/llurxcihkx8YOfJYMElShamuUWLXLFn
-	VynY5VWlNSqns7f6gwu7XvBa9jNoq0KZ9b5ZTX/P+Ihs419FLlducY5Nm7gPrfZf
-	4QtEDB/FBR5mX3BqjIEHCow4wCs2LSra/TMrxgIgebAYqOzcgalJQbA8u9Eob2Ff
-	Jp9TYA==
-Received: from mail-pf1-f199.google.com (mail-pf1-f199.google.com [209.85.210.199])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gak5614f1-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Thu, 27 Aug 2026 15:16:33 +0000 (GMT)
-Received: by mail-pf1-f199.google.com with SMTP id d2e1a72fcca58-848568a6f62so72439b3a.0
-        for <linux-arm-msm@vger.kernel.org>; Thu, 27 Aug 2026 08:16:32 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1787843792; x=1788448592; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=gtDukmFMoEJfDZ7a3V4nn+CIGOUTzNyajLc2q8Q3TpM=;
-        b=M6AS3E/uH7r5I6GWjkw17hN2wJRKwC/8bWVeMpV4ZLnTkgwZEwhH3OLb35zIfo5R71
-         VdvzYOWAg9faf35z2t1wS01eAunk3OjF4+Nagza4Y9Rhf65asdtBoyQcxSAEc+ICJRdh
-         VcfhaqOseGS6+0A5EApjdp9tXev0UPShZmkoLuDbswQ30vzUTQScjFrGcBnXeizXPuEf
-         i/4eV9go/HNvsnWW0kC4jLs6PYlL+mJv5BOwt6OlDKDUnJB2jPyqiBU/1NGC/7d7kmHc
-         Pz0M6+gDjhyt4aGUgQsdvc25Gtj/rXnTAxM9InhxvLPB6h4syWVY20fgAUVNfqH7bzU9
-         TA1w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787843792; x=1788448592;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=gtDukmFMoEJfDZ7a3V4nn+CIGOUTzNyajLc2q8Q3TpM=;
-        b=l0UFaUfFztQCubJNfgBpd2/+uqrOvtjctWJzQu/5Jd0qHwiHepWruXZ3WGxtJ91GaO
-         f4pyFzAlxn1mmAdt6sMvePIyEhHE0aWNfC54Z6/22lUkKYpfzAQ9HT5XYWNUOIn0am9i
-         JWQruHm5A+XAnBCvOr0NADkvCW2XAJ9gTG6qIKOOF2A96g9P4Aiv5dqHC2icJ3X/GaVz
-         Ok3nfz9H4XiL30SABXJXeV3TgUWMgtAuAjHbJEQMeEFz80/fHOAdmBotaBlRtnASLDCj
-         MDQdqBOfVGDecqgOObY9aUSEFRPUc+KscDT+8l3BG5lRIWvjZdFqrncz3oAwS9sZpsXn
-         Ry6A==
-X-Forwarded-Encrypted: i=1; AHgh+RqvtzXsYGAY8juFxFFeYKnGOr/T8XM7QxV8h/9OyzzACseeT12p+YdqV5ijYJzdlFPx7lK8sVxhKoqGrYST@vger.kernel.org
-X-Gm-Message-State: AFuF++mcdEqXswOrhj/QndAAT8rfBQgKhUsaVdm2VTUsnZSi+PAeeI2B
-	KC8RdhWHcKwcmI+Km5WnTi2LsPR8K0OQcFnYIZb43WdG6zTXicGPCgpjnojnIfmWW2W//nwCGuM
-	d/B3TKI4uPFmenPN1AcYLFCITNkSA8jnqGR3hi9GRl5CWRMycfhDCdnI1WvpBFmIdmmRshTvxLc
-	L+
-X-Gm-Gg: AR+sD10WpWVc2PyA3obTuVUPXldkSxxsTxtG4bj8EflZUUVLo6h9Ueo5FOszTz36UH9
-	GVX/2l0IxAz+x0QuINbwOQsNNbVtj/K6SpbtB/kuMwjc9uX0cDnZ9dlfH+GlZ0OeXzuf1r4dvwq
-	CzKh3JTe1QmEVaOlASgJMRpB+IKeKeZ+sUeZINVj3okwz3CMzZmgg96hMEAcPAyobYWH97Ks7xG
-	QSqpsugFlb9j6XPqa0MiYf2T4N2sl8nnGhnOHBtL5ZBhO0GookGbwNz5YbGNpj7SINKD7cdJotV
-	VBoOmZHKeixvbXYggfaPmOCK9j66etWPgN+FsdfTVho4PvkuwYElj0okejfl9MKZZxAYJMuRnRW
-	IUBL/c4qLi7TvTCXryX/fhcRu701l2znb
-X-Received: by 2002:a05:6a00:c96:b0:845:ce5f:c926 with SMTP id d2e1a72fcca58-85372ea6666mr29735309b3a.1.1787843792083;
-        Thu, 27 Aug 2026 08:16:32 -0700 (PDT)
-X-Received: by 2002:a05:6a00:c96:b0:845:ce5f:c926 with SMTP id d2e1a72fcca58-85372ea6666mr29735131b3a.1.1787843791473;
-        Thu, 27 Aug 2026 08:16:31 -0700 (PDT)
-Received: from [192.168.1.100] ([157.35.77.54])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-8535ced205csm2204956b3a.45.2026.08.27.08.16.21
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 27 Aug 2026 08:16:29 -0700 (PDT)
-Message-ID: <863bb5e4-5dfa-4e0d-9824-87ad2b461128@oss.qualcomm.com>
-Date: Thu, 27 Aug 2026 20:46:19 +0530
+	dkim=pass (2048-bit key) header.d=cherr.cc header.i=@cherr.cc header.b="V00chBgz"
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ s=feishu2604220257; d=cherr.cc; t=1787845391; h=from:subject:
+ mime-version:from:date:message-id:subject:to:cc:reply-to:content-type:
+ mime-version:in-reply-to:message-id;
+ bh=Bh0KpptlHo4EabAVwVEP+7z/2v5dfwz3z0l/dDVT/I0=;
+ b=V00chBgzzYgCqNjsuHPKFjsaKDb0LkzBjsxut47JqxA7+5W4pM0BccR2F2R7vQes0TTFpB
+ CqsGB8gZYtZG+s6NxpTU9ZmZgDVVrYWPC/nmikjbHWJdGVzsm8GmCSaQTPhUpQQ2wntGhb
+ lC8z9JgzYZrDvEA/PA+1hqfz3syOhXPy19RLct8Go+Q+MGt1GTJVX5k1Z+2NSwciBV4wHB
+ DyOUkyR6J2fz6xSV1BkC1cNjkQuxBMO2tJ6StH4Bu3/x9/vJkye70qdlRUjYsoOTS8zCCj
+ GPBhaAbl57rJBKTSBN5cujFZ/cDy16J+ritY4XpZDlhHLIIE+TjR3THmtvlw1A==
+Date: Thu, 27 Aug 2026 23:43:00 +0800
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/7] iio: adc: qcom-spmi-adc5-gen3: Add support for QCOM
- PMIC5 Gen4 ADC
-To: Jonathan Cameron <jic23@kernel.org>
-Cc: David Lechner <dlechner@baylibre.com>,
-        =?UTF-8?Q?Nuno_S=C3=A1?=
- <nuno.sa@analog.com>,
-        Andy Shevchenko <andy@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>, Amit Kucheria <amitk@kernel.org>,
-        Thara Gopinath <thara.gopinath@gmail.com>,
-        "Rafael J. Wysocki" <rafael@kernel.org>,
-        Daniel Lezcano <daniel.lezcano@kernel.org>,
-        Zhang Rui <rui.zhang@intel.com>, Lukasz Luba <lukasz.luba@arm.com>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>, linux-iio@vger.kernel.org,
-        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-arm-msm@vger.kernel.org, linux-pm@vger.kernel.org,
-        Kamal Wadhwa <kamal.wadhwa@oss.qualcomm.com>,
-        Anjelique Melendez <anjelique.melendez@oss.qualcomm.com>,
-        Manaf Meethalavalappu Pallikunhi <manaf.pallikunhi@oss.qualcomm.com>,
-        Priyansh Jain <priyansh.jain@oss.qualcomm.com>
-References: <20260731-pmic5_gen4_adc-v1-0-9c49b2eea6f9@oss.qualcomm.com>
- <20260731-pmic5_gen4_adc-v1-2-9c49b2eea6f9@oss.qualcomm.com>
- <20260803011400.1fb6c93a@jic23-huawei>
- <a98d90bd-aa9d-4af3-aa54-3a34300070d4@oss.qualcomm.com>
- <20260807001822.31f7c137@jic23-huawei>
- <f2b2f590-de3e-4f10-b883-92845f59412d@oss.qualcomm.com>
- <20260815030830.24fc732f@jic23-huawei>
- <04990044-45b3-45ca-9e39-925d5bbe62e2@oss.qualcomm.com>
- <20260822003008.0d13144d@jic23-huawei>
-Content-Language: en-US
-From: Jishnu Prakash <jishnu.prakash@oss.qualcomm.com>
-In-Reply-To: <20260822003008.0d13144d@jic23-huawei>
+Mime-Version: 1.0
+X-Change-Id: 20260827-i2c-dma-channel-leak-b58522243736
+Subject: [PATCH 0/3] i2c: fix DMA channel leaks on probe error and remove
 Content-Type: text/plain; charset=UTF-8
+Received: from [192.168.9.107] ([111.42.148.163]) by smtp.feishu.cn with ESMTPS; Thu, 27 Aug 2026 23:43:09 +0800
 Content-Transfer-Encoding: 7bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODI3MDEyOCBTYWx0ZWRfX95btxTpCQ8Z0
- JMnG0z8gNojsNSUdV37arriqewScjEvGZeLg17LqHm865046VizZ+DriugRK6y70N5480+LM6fL
- H5KS1SmeSyDmYO5DNulXIT4JlIQi8pg=
-X-Proofpoint-ORIG-GUID: xXab2fjHYX2aVRzUx9lfVlVq9zRNjewI
-X-Proofpoint-GUID: xXab2fjHYX2aVRzUx9lfVlVq9zRNjewI
-X-Authority-Analysis: v=2.4 cv=G+Ms1dk5 c=1 sm=1 tr=0 ts=6a9054d1 cx=c_pps
- a=WW5sKcV1LcKqjgzy2JUPuA==:117 a=9si47aXRbTlBVgoeFCxZeg==:17
- a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
- a=VwQbUJbxAAAA:8 a=KKAkSRfTAAAA:8 a=EUspDBNiAAAA:8 a=p9GNROPkpVv0wmWxth4A:9
- a=QEXdDO2ut3YA:10 a=OpyuDcXvxspvyRM73sMx:22 a=cvBusfyB2V15izCimMoJ:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODI3MDEyOCBTYWx0ZWRfX0TbZ105Sciyw
- LBMzcHSj7sou1WtcdZp9+zBp7IZYoxKZnhSyQpLT/wSDa+xbg24T/VBnvh0hBjsdPxVYrKHNb2N
- sa8XGyN1SoAg/O5sKr9enc1usVQY/U0zDgnY2+twNaCDyglURbNmADokjkOHyoWypSFt/QBF0D/
- eb7MQzNbTww1OBVdyIAWlq+umnfN3EX/rc0EuF8flvLlvA//KEY+cHfMAUce9rNGur5Dx0zo84P
- yT3iPr5o4nWSjlxO3+933kCfxgyIb7TNWd7RJ2eD5FVP4ruL2P9p6hTyy8godwHs6zBzQg2lFVh
- DBqsJZJwpyusy8QFij1iPs+EO46tt/obT14i/0Xayp2DOYATJDRFiwF5lJNBSzFLSL35SfDMdcy
- 3juqAp31vmfpQ5wB4u81A5eLdeflD7bDLlW2fnAOJi3WGUczbx4hVu6qcIZmaJJZHZo6eSK+qYX
- PImfBhqDgxSJil2VwNw==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-08-27_06,2026-08-27_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 lowpriorityscore=0 adultscore=0 clxscore=1015 bulkscore=0
- phishscore=0 spamscore=0 impostorscore=0 malwarescore=0 suspectscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608270128
+To: "Codrin Ciubotariu" <codrin.ciubotariu@microchip.com>, 
+	"Andi Shyti" <andi.shyti@kernel.org>, 
+	"Nicolas Ferre" <nicolas.ferre@microchip.com>, 
+	"Alexandre Belloni" <alexandre.belloni@bootlin.com>, 
+	"Claudiu Beznea" <claudiu.beznea@tuxon.dev>, 
+	"Wolfram Sang" <wsa@kernel.org>, 
+	"Ludovic Desroches" <ludovic.desroches@atmel.com>, 
+	"Oleksij Rempel" <o.rempel@pengutronix.de>, 
+	"Pengutronix Kernel Team" <kernel@pengutronix.de>, 
+	"Frank Li" <Frank.Li@nxp.com>, "Sascha Hauer" <s.hauer@pengutronix.de>, 
+	"Fabio Estevam" <festevam@gmail.com>, 
+	"Yao Yuan" <yao.yuan@freescale.com>, 
+	"Mukesh Kumar Savaliya" <mukesh.savaliya@oss.qualcomm.com>, 
+	"Viken Dadhaniya" <viken.dadhaniya@oss.qualcomm.com>, 
+	"Bjorn Andersson" <andersson@kernel.org>, 
+	"Vinod Koul" <vkoul@kernel.org>, 
+	"Konrad Dybcio" <konrad.dybcio@oss.qualcomm.com>, 
+	"Praveen Talari" <praveen.talari@oss.qualcomm.com>
+From: "Shengzhuo Wei" <me@cherr.cc>
+X-Original-From: Shengzhuo Wei <me@cherr.cc>
+X-Lms-Return-Path: <lba+26a905b0e+0576c5+vger.kernel.org+me@cherr.cc>
+X-B4-Tracking: v=1; b=H4sIAAVbkGoC/yXMQQ6CMBCF4auQWTMJTi0Qr0JctGXUAayko8ak4 e4WXX55eX8G5SSscKoyJH6LyiMWHOoKws3FK6OMxUANtU1PHQoFHO8O9zXyggu7Gb3tLREdTWd aKNc18UU+v+xw/ltffuLw3FuwbV9sRvTUeAAAAA==
+Cc: <linux-i2c@vger.kernel.org>, <linux-arm-kernel@lists.infradead.org>, 
+	<linux-kernel@vger.kernel.org>, <imx@lists.linux.dev>, 
+	<linux-arm-msm@vger.kernel.org>, <stable@vger.kernel.org>, 
+	"Shengzhuo Wei" <me@cherr.cc>
+Message-Id: <20260827-i2c-dma-channel-leak-v1-0-271d4adc03a0@cherr.cc>
+X-Mailer: b4 0.16.0
 
-Hi Jonathan,
+Three I2C bus drivers request exclusive DMA channels before
+registering their adapter, but none of them releases the channels on
+the probe error path (the remove callback is not invoked after a
+failed probe), and the at91 driver never releases them on remove
+either. Same class as 777979e62711 ("i2c: mxs: fix DMA channel leak on
+probe error"), which used devm_dma_request_chan() for mxs; here the
+drivers own non-devm state, so the fixes release the channels
+explicitly on the error paths.
 
-On 8/22/2026 5:00 AM, Jonathan Cameron wrote:
-> On Fri, 21 Aug 2026 10:24:39 +0530
-> Jishnu Prakash <jishnu.prakash@oss.qualcomm.com> wrote:
-> 
->> Hi Jonathan,
->>
->> On 8/15/2026 7:38 AM, Jonathan Cameron wrote:
->>> On Fri, 7 Aug 2026 13:37:02 +0530
->>> Jishnu Prakash <jishnu.prakash@oss.qualcomm.com> wrote:
->>>   
->>>> Hi Jonathan,
->>>>
->>>> On 8/7/2026 4:48 AM, Jonathan Cameron wrote:  
->>>>> On Thu, 6 Aug 2026 16:22:16 +0530
->>>>> Jishnu Prakash <jishnu.prakash@oss.qualcomm.com> wrote:
->>>>>     
->>>>>> Hi Jonathan,
->>>>>>
->>>>>> On 8/3/2026 5:44 AM, Jonathan Cameron wrote:    
->>>>>>> On Fri, 31 Jul 2026 23:36:15 +0530
->>>>>>> Jishnu Prakash <jishnu.prakash@oss.qualcomm.com> wrote:
->>>>>>>       
->>>>>>>> PMIC5 Gen4 ADC is similar to PMIC5 Gen3 ADC, with several changes made
->>>>>>>> for improved performance, mostly at the hardware level.
->>>>>>>>
->>>>>>>> One significant software change is that ratiometric conversion resolution
->>>>>>>> has been increased from 14 bits to 16 bits, so the maximum value of
->>>>>>>> these measurements needs to be updated for Gen4. Add a new scaling
->>>>>>>> function for thermistor channels which use this type of conversion.
->>>>>>>>
->>>>>>>> In the latest PMIC arbiter version (v8), there can be up to 4 buses
->>>>>>>> under the PMIC arbiter and 32 PMICs under each bus. In order to
->>>>>>>> support communication between ADC on the master PMIC and ADCs on any
->>>>>>>> of the other PMICs, a field of width 2 bits is added for bus index
->>>>>>>> and the bits for SID are extended from 4 to 5 bits, in the SID
->>>>>>>> register. Add support for this.
->>>>>>>>
->>>>>>>> In addition, it is possible that the master PMIC has ADC of one generation
->>>>>>>> and it needs to communicate with another PMIC with ADC of a different
->>>>>>>> generation.      
->>>>>>>
->>>>>>> "Possible" sounds a bit hypothetical.  Can we state this actually happens
->>>>>>> on some devices?      
->>>>>>
->>>>>> Considering existing upstream platforms, this is applicable for SM8750. I'll
->>>>>> mention this in the next version of the series.    
->>>>>
->>>>> What happens on that platform today?  Wrong values?  Should this be treated
->>>>> as a fix rather than a feature?     
->>>>
->>>> There is no issue on that platform right now as ADC channels needing this
->>>> support are not added yet. SM8750 board files only include pmk8550.dtsi, which
->>>> has the top-level Gen3 ADC peripheral and some ADC channels on the same PMIC.
->>>> Gen4 support would be needed only when PMIH0108 ADC channels are added.  
->>>
->>> I guess chances of anyone running an older kernel that the device tree on
->>> that device is low as other critical stuff won't be supported?
->>>
->>> If there is something easy to point to for that, add a note to the patch
->>> description as it justifies this not being a fix.
->>>   
->>
->> Sorry, I did not fully understand your concern here. Are you asking if
->> SM8750 runs on any older kernels and the lack of Gen4 ADC support may be an
->> issue there?
->> This would not happen - let me try explaining with some more details.
->>
->> DT support for SM8750 has been present since kernel version 6.14. At that
->> time, it included pmk8550.dtsi, but this file did not have an ADC peripheral
->> at the time.
->>
->> The Gen3 ADC peripheral was added in pmk8550.dtsi very recently in this series
->> from Neil Armstrong: https://lore.kernel.org/all/20260721-topic-sm8x50-adc5-gen3-v6-0-a507f4a1e537@linaro.org/,
->> and I see this series is present only in linux-next right now.
->>
->> With this change applied, the ADC peripheral with 3 channels of
->> PMK8550 alone (which is Gen3) would appear for SM8750. This
->> would work as its functionality is fully supported by the existing
->> Gen3 driver.
->>
->> Gen4 support is needed only when we add full ADC support for SM8750,
->> meaning when we add channels under all its other PMICs (PMIH0108
->> specifically as it's Gen4.).
->>
->> Would it work if I mention in the commit message that SM8750, added from
->> kernel 6.14 without ADC support initially, would need this mixed-generation
->> support, but only once we add the full ADC support (for all its PMICs)?
-> 
-> In the ideal world we would assume no coupling between device tree seen
-> on a board and the kernel with which a device tree was pushed out.  For
-> many devices the delivery path is independent.
-> 
-> As such we might well see a dt with the new property and a kernel that
-> predates it's introduction.  If there is another reason such a kernel
-> will simply not boot on that board, then that would be a valid argument
-> why we can skip striving for the ideal.  Similarly if the driver
-> would not bind for some other reason.  If either of those is the case then
-> add a comment to the patch to say so.
-> 
-> Otherwise, I'd like to see the extra property dt patch (arguably a fix
-> but not critical to mark it as such) + a patch for the driver support
-> for the new property (also arguably a fix).
-> 
-> That would cover the older driver and decision on whether to backport
-> that could then be made (or left to downstream users).
-> 
-> On top of that then build the new compatible support.
-> 
-> Superficially this looks to me like a bit of minor patch reorg so
-> I think it is worth doing even if we don't expect to ever run into the
-> theoretical problems form a miss match!
-> 
+The three drivers are otherwise unrelated; the series exists only
+because the bug shape and the fix shape are identical.
 
-Thanks for your clarification, I understand the issue now.
+---
+Shengzhuo Wei (3):
+      i2c: at91: release DMA channels on remove and probe error
+      i2c: imx: release DMA channels on probe error
+      i2c: qcom-geni: release DMA channels on probe error
 
-From what I see, SM8750 has been supported since v6.14 and the ADC5 Gen3 driver
-since v7.1, so the exceptions you mentioned may not always apply. Someone using
-a kernel version >= v7.1 with Gen4 ADC DT support might get incorrect readings for
-Gen4 channels, as they are treated like Gen3 channels.
+ drivers/i2c/busses/i2c-at91-core.c   |  3 +++
+ drivers/i2c/busses/i2c-at91-master.c | 12 +++++++++++-
+ drivers/i2c/busses/i2c-at91.h        |  1 +
+ drivers/i2c/busses/i2c-imx.c         |  2 ++
+ drivers/i2c/busses/i2c-qcom-geni.c   |  4 +++-
+ 5 files changed, 20 insertions(+), 2 deletions(-)
+---
+base-commit: 45c13f3f9e3bb15fd89ff2864c6f627a3b4b4229
+change-id: 20260827-i2c-dma-channel-leak-b58522243736
 
-I'll split the series as you suggested, to first add binding and driver support
-for the case of Gen4 channels under Gen3 master, and then to add the remaining
-binding and driver support for Gen4.
-
-Thanks,
-Jishnu
-
-> Thanks
-> 
-> Jonathan
-> 
->>
->> Thanks,
->> Jishnu
->>
->>
->>> Thanks,
->>>
->>> Jonathan  
->>
-> 
-
+Best regards,
+--  
+Shengzhuo Wei <me@cherr.cc>
