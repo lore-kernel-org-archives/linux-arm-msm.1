@@ -1,180 +1,361 @@
-Received: from AS8PR04CU009.outbound.protection.outlook.com (mail-westeuropeazon11011051.outbound.protection.outlook.com [52.101.70.51])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9A91E455184;
-	Thu, 27 Aug 2026 16:01:46 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=52.101.70.51
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787846507; cv=fail; b=c74C/AyGeXvsiRfDAo6hpUPchxozbSnznGuti5m6eYnVIMeQ7i9seqpjof0ze74RduoAGMlTK7Vwj3IZQhHP9Rw28Yzpyf+g3c7H98GgP9ADxF2ts2Ja+ljuN9jkKO0JRCSQCMHzxfWT3VHBuMlMVt5oW57tUY7btF5AONA5Axk=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787846507; c=relaxed/simple;
-	bh=Y7ELVi3DxI8BZcWGAVhivNHMhIHs7itbBfvizrUdLlM=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:Content-Type:
-	 Content-Disposition:In-Reply-To:MIME-Version; b=guFr2Oe/g4r7iteLzF+FOULtPHKg77PB1Dh/21v5O9gaGh8M9ihtHX0w9Snn9IjuupgMqRj6yK24ePFvUnkP6p5p1UjuZnkHZwBmLTtyZ4YHTJCH0/zIizbzDWWvKO1WjqWh4kDqUP5dAPBylKW+J0ZAwzyMVFM/iVbAsDSnPGo=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.nxp.com; spf=pass smtp.mailfrom=oss.nxp.com; dkim=pass (2048-bit key) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b=wMhfGddH; arc=fail smtp.client-ip=52.101.70.51
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.nxp.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.nxp.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2D552488221
+	for <linux-arm-msm@vger.kernel.org>; Thu, 27 Aug 2026 16:08:25 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1787846907; cv=none; b=s+9EAzELHttuP0Npov84O8SpLVYJvsi+iFvdTVEQ3eg9JlRXHa+9679Ob5rebtKG4xgcVTWOwDWqvpaABSFki/tUN93PD/RG2UMll2eI8LpnF5s1RP4GgZ/cp/3ZRBKdAnNjd5CLs4C95/2lblU7cRLo4eJqhCnsJM3nyEHPgDw=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1787846907; c=relaxed/simple;
+	bh=InJBi1ft2hBbaFKieY6YZqUXPU/gfk8w7Fh7r9+bQPc=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=A8W5jZypceOoLRubtjDiEIoBNwGsgFjfiUVbGKDvxFO6TOiY1HA/jgwDPhMFGsjk1D1yiaWthtDzSHzo5uBo+6odFj2yFlfGS2mF5TujBnEhHrln5F/XwxbyWNybUaAObPJKo5KveF+a+TtMStZlmI57fc0Kn1x+n4QF0ghocwE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=Y4uq6JlM; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=F1Gzg4Vm; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="wMhfGddH"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ZDHpcbU+TzgoModXJNVcCL4KFMsCcIVZfoLtqYQlAnuGkHOVhxWBArEak189wA39Z1rNVD0D1WDEa0s+IQHLpOD9eC26kIjj5HVughicZ/NPNgCPoihg0mGiDQtT8eo8NR/salC63G2JG0XfdUs6wyQIkt9zAgkS3+5nUHg4t418WZ93Gc/ZVA5jxVimDoIxJaef2qEO6a7a/9W1Vj/jiFtA3yvPWj382izFiQuiMhg5BnK1Iw5a5aZ8o332+7nuYrQTh+6XJvCOp/oYodFEXwVejI/S2ZQXi16BcLkYqc1NKict0gjBAxaiLZxIgsu+nbM/M2Ggq/yFNktJXJvb8Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=uto+BvrZoeEwa6MdxOBIK2+F/boLU+ojvq4RxvsuJkw=;
- b=XUVUwkEFCJv4hKI2iE7+LyIe0kJ8q0mUV2o3L4s6kVm+3pl7xs0/4zFIs9mYU/oBUkMcetiK5bT36H+/GbA3Sq6NGoWU75sr/CCNyy/5HpPOVyVA/Ue5kztB3t5c8I9W/XxDiRMJlV4e4lCtoDV+pay4tZEpGDLOxU/9hWf6O9FzjGZbdD5B17wD4/5ag8RlKs3Pj3eBBEr0iefUOw9NYkSCabCVdt8in2mSRP4CaQ3dtSyjwKvum99GF6JN5Wm8ZO79B6uGnBZSPg6FQwZXktdIrFNaOB1RVe+pb8Ub565KHr4SVmc5RDxEo/X/DJqNjMVJCLoWzh2JeKlNGL5RqQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
- dkim=pass header.d=oss.nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com;
- s=selector1-NXP1-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=uto+BvrZoeEwa6MdxOBIK2+F/boLU+ojvq4RxvsuJkw=;
- b=wMhfGddHHjBGX/fGKjiDpVP5gmxoon6zuNU8Q4HfgXgfTrw9X+E4lLiFZ3ctW5E3ySyys8tS/f9CFDGfEW+Qmui5hDN3yQqrnngKn3QnZZSKj5JIRnV3eb5F/qm5X9GK07Iw6wbe/9bT1FLBHzTHa7cwgC44PjRy/1qp3HKGcL63swU8H0ZuTNYnJsfGBSARlMbYGftrioUhz0aH8GLU2FOxUoJxp7RFNFaN1l51O6YUamz4WMUXr0gxfzho6jU4NYY2UO90cBbyjOpRUaqhwx9cIG2hckAd1EBf3EKXaPaJOyDFXkR++Vgjwym6Gy4G1bwDOhbctfVcv5iToOO4ng==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=oss.nxp.com;
-Received: from GV2PR04MB11799.eurprd04.prod.outlook.com (2603:10a6:150:2cf::9)
- by DBAPR04MB7302.eurprd04.prod.outlook.com (2603:10a6:10:1a5::14) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.339.12; Thu, 27 Aug
- 2026 16:01:42 +0000
-Received: from GV2PR04MB11799.eurprd04.prod.outlook.com
- ([fe80::2146:83a2:5329:b7c]) by GV2PR04MB11799.eurprd04.prod.outlook.com
- ([fe80::2146:83a2:5329:b7c%7]) with mapi id 15.21.0360.008; Thu, 27 Aug 2026
- 16:01:42 +0000
-Date: Thu, 27 Aug 2026 11:01:31 -0500
-From: Frank Li <Frank.li@oss.nxp.com>
-To: sashiko-reviews@lists.linux.dev
-Cc: Codrin Ciubotariu <codrin.ciubotariu@microchip.com>,
-	Andi Shyti <andi.shyti@kernel.org>,
-	Nicolas Ferre <nicolas.ferre@microchip.com>,
-	Alexandre Belloni <alexandre.belloni@bootlin.com>,
-	Claudiu Beznea <claudiu.beznea@tuxon.dev>,
-	Wolfram Sang <wsa@kernel.org>,
-	Ludovic Desroches <ludovic.desroches@atmel.com>,
-	Oleksij Rempel <o.rempel@pengutronix.de>,
-	Pengutronix Kernel Team <kernel@pengutronix.de>,
-	Frank Li <Frank.Li@nxp.com>, Sascha Hauer <s.hauer@pengutronix.de>,
-	Fabio Estevam <festevam@gmail.com>,
-	Yao Yuan <yao.yuan@freescale.com>,
-	Mukesh Kumar Savaliya <mukesh.savaliya@oss.qualcomm.com>,
-	Viken Dadhaniya <viken.dadhaniya@oss.qualcomm.com>,
-	Bjorn Andersson <andersson@kernel.org>,
-	Vinod Koul <vkoul@kernel.org>,
-	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
-	Praveen Talari <praveen.talari@oss.qualcomm.com>,
-	linux-i2c@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
-	linux-kernel@vger.kernel.org, imx@lists.linux.dev,
-	linux-arm-msm@vger.kernel.org, stable@vger.kernel.org
-Subject: Re: [PATCH 2/3] i2c: imx: release DMA channels on probe error
-Message-ID: <apBfW01p9Zik5WOI@SMW015318>
-References: <20260827-i2c-dma-channel-leak-v1-0-271d4adc03a0@cherr.cc>
- <20260827-i2c-dma-channel-leak-v1-2-271d4adc03a0@cherr.cc>
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260827-i2c-dma-channel-leak-v1-2-271d4adc03a0@cherr.cc>
-X-ClientProxiedBy: SA9PR10CA0029.namprd10.prod.outlook.com
- (2603:10b6:806:a7::34) To GV2PR04MB11799.eurprd04.prod.outlook.com
- (2603:10a6:150:2cf::9)
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="Y4uq6JlM";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="F1Gzg4Vm"
+Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67RFcWMJ3360499
+	for <linux-arm-msm@vger.kernel.org>; Thu, 27 Aug 2026 16:08:24 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=atRu9g3ecGR/Ax5Jg8bJIB
+	651HizDXONPJoQtisnwWc=; b=Y4uq6JlMpmj0npdFeC57HIRdcXHvB1w2M6L9O9
+	PwLZ2U/E0etX95l5S3QazbFxtQ84dSCpFhs45XMhhNr3ykMBlc1XAe08rxWKIf93
+	ISwIavbNkpr3MlFveW/yD//12y0VEiu3W4O4nTwolGa++uMHbVVNsr38aOU7Ccob
+	nAAhMKFTAbbbRqXqxz0wW2chDr7MQ4aF8D7HsMFFWPhL78MCVYcgmQe7N9Jv2Aks
+	dANs4IPALWTMepSN4Eu5YdlOwWxdhvCJ5Fo/H19ieoRURWH+ZGvNlorRanqW5mN7
+	JP7f9tVZZ3N/9OpCUX+Y6KR5kKq6jRemzqPyb59O9qxQdGMQ==
+Received: from mail-pj1-f69.google.com (mail-pj1-f69.google.com [209.85.216.69])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gab7t39cy-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 27 Aug 2026 16:08:23 +0000 (GMT)
+Received: by mail-pj1-f69.google.com with SMTP id 98e67ed59e1d1-38e4758ab46so191946a91.0
+        for <linux-arm-msm@vger.kernel.org>; Thu, 27 Aug 2026 09:08:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1787846903; x=1788451703; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:mime-version:message-id:date
+         :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=atRu9g3ecGR/Ax5Jg8bJIB651HizDXONPJoQtisnwWc=;
+        b=F1Gzg4VmkuOEsACdblWuKAtOcr6W6YKWMVFwu+Kh+gqkimFgSCc2waBhtWpILUSOrv
+         DO7w/AJuTdBuIde3AdytuBdGizsu4+v2Unpni5n5oR+DC+NTUZjJw+prd7nmEqVoTfxB
+         kvFax5lZ85MmKppQTTDpSvFHWVMOwR01gshwQqiGAnwGWLww9oy1QI5TyQQlvOi5rOkE
+         3s015XgPsOf/meLzGNptBOBC1/zVuUvZrahT6/T6XTFzfzbEoj5zWbMx1/nIVYgsNZkY
+         2h/p5WWerLNSk+N9aRCq2MQaW920TkEXf28Pwpa1ZUN24kTIJedpyYaukAC7SH+ztFgt
+         y/fA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1787846903; x=1788451703;
+        h=content-transfer-encoding:content-type:mime-version:message-id:date
+         :subject:cc:to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=atRu9g3ecGR/Ax5Jg8bJIB651HizDXONPJoQtisnwWc=;
+        b=ryiUtOEO9QG7U7ZvVvhSlbq+9kb1T0imchLD/ah7vms4+oKOTKOClTLzIl7e63A+Qd
+         cu/IoU9RALuwAxadMNIaRUgFdc4WxGzCPkMW52gmXXvW608zndjk7R/AlSyhYptVVBBy
+         SX9xvZ+J5+5w3+PvmW4VDpzN4K/535ghpV2G9fYnZ5NfqOxU5KGne+62OGys4OWPlWr/
+         SkYXF68zezQ/L3n59ixZqeRqrrK/nTeFK2B/E/jG9tCFUcWpRmYjVH32tCokyLDLQi/H
+         FPZPQdzslaAXZwcKmUZCVhDM3V5SzyWz8pL78Vlkqpy2XD+OO+Wk4diQOSu7Zd2j7nOc
+         ahAA==
+X-Forwarded-Encrypted: i=1; AHgh+RqQ8cUEh/oO+TQzk++hoiEeD/rKRSoA/IPSSXax57xcd4IAlwSrFzhakwcxh7XCkFgLNow8rQQFVUJJZE12@vger.kernel.org
+X-Gm-Message-State: AFuF++mNmju753QUZNj6fhVdki7lH4FE5vc2n7N0qZKc03XlbL3iuTNB
+	aa5RzgChzLgUM7NiM2MRDtwHn+R/rAg755IysSUxegqMy4FhA5p6mKocrpz5FBzB8N9FGUyijMy
+	ozIgFsXHL/oSKfh6yNGM76donNilpDcb1q99qGd4KdTcLDTk0BSVLU388m7yFSFcVmeRt
+X-Gm-Gg: AR+sD12dLPU0m9t8vRta9cJt+hE0nav5E4uz+rIznzTDkxF+8B/25OEE9JCLgrWJVKc
+	EhO2Fq/lkjQcvwWv1T8NXhJDiHyRHyKzKl5+mrKyirpJ7bpK1cVinmUqwvqett7Iwr2zoWzQ0Ho
+	OLvhaRp0V3tJSH4htDq2PBS7Nxm+7aXaSb2Sm9WUNkoVSwjdhiYinE+td0c6GQwACz0rUG4KTW2
+	DUMo0VA+N71sZUwoqv4Go7xzetFWAk2r5zv8xvPc4EbN8iZ4ZYpwhCzdvWtihgAxONSL1wKXnXZ
+	2OiAUf/RrcTp3RZh5QJ1qCCPe1kuP63xuoYFlPJxwGKLVRSCYd8L0LE+u+hq+alzj+c3mSGIYV3
+	kMXbC0DUuSPoDkh3/ld9EutH6SOXh9+/OIWC/ARpVtCkMS9foK+1ZMzTOyLc=
+X-Received: by 2002:a17:90b:3c8a:b0:38e:524:8797 with SMTP id 98e67ed59e1d1-396d10076e9mr459899a91.13.1787846901410;
+        Thu, 27 Aug 2026 09:08:21 -0700 (PDT)
+X-Received: by 2002:a17:90b:3c8a:b0:38e:524:8797 with SMTP id 98e67ed59e1d1-396d10076e9mr459325a91.13.1787846899408;
+        Thu, 27 Aug 2026 09:08:19 -0700 (PDT)
+Received: from u24-san1p10108.qualcomm.com (i-global254.qualcomm.com. [199.106.103.254])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-396b0fd9085sm3245892a91.12.2026.08.27.09.08.17
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 27 Aug 2026 09:08:18 -0700 (PDT)
+From: Linlin Zhang <linlin.zhang@oss.qualcomm.com>
+To: ebiggers@kernel.org, axboe@kernel.dk, mst@redhat.com, jasowangio@gmail.com,
+        James.Bottomley@HansenPartnership.com, martin.petersen@oracle.com,
+        robh@kernel.org, krzk+dt@kernel.org, conor+dt@kernel.org,
+        linux-block@vger.kernel.org, linux-crypto@vger.kernel.org,
+        linux-scsi@vger.kernel.org, virtualization@lists.linux.dev,
+        devicetree@vger.kernel.org, linux-arm-msm@vger.kernel.org
+Cc: neeraj.soni@oss.qualcomm.com, gaurav.kashyap@oss.qualcomm.com,
+        mani@kernel.org, andersson@kernel.org, konradybcio@kernel.org,
+        bvanassche@acm.org, alim.akhtar@samsung.com, avri.altman@sandisk.com,
+        stefanha@redhat.com, pbonzini@redhat.com, eperezma@redhat.com,
+        xuanzhuo@linux.alibaba.com, linux-kernel@vger.kernel.org
+Subject: [PATCH v1 00/11] FBE virtualization: inline encryption for virtio-blk guests
+Date: Thu, 27 Aug 2026 09:07:09 -0700
+Message-ID: <20260827160806.1295313-1-linlin.zhang@oss.qualcomm.com>
+X-Mailer: git-send-email 2.43.0
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: GV2PR04MB11799:EE_|DBAPR04MB7302:EE_
-X-MS-Office365-Filtering-Correlation-Id: 15851e93-b41f-4637-2496-08df04547c9e
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|23010399003|7416014|376014|1800799024|366016|19092799006|5023799004|6133799003|10067099003|4143699003|11063799006|56012099006|22082099003|18002099003;
-X-Microsoft-Antispam-Message-Info:
-	476jyKYPpLbeG3VPioPmcYwSVcias5eBiuQ/0S53+pHdDJqyrUesh77B6dNUurFBVWzoQgTzdRwtLMDZOZaXjNucgSD9YF2JLBmFPHtI2s1WaNy9jhjmXoBCp0x3PayfFsUikwlwce/A/3VMz44EBHqQUcO30wSgrtZAb2fVgc1rHjeV5Y3TVPAvO6W0q1VEAOAuaAGWMAgneWypmIbHUwtOktlDUNfUPA3E8/td4GMSK9SHrvtyUazJX4U+Z21PQxEBBIWIh2J8A0r5SQXCHYYKub8Ho9n9qpp68otCXFro4CMNpsA9RZqz0vHHjd7Nn17AOtRKg/ddHvAAzM5Ka9hGkFCwrxwA0w+P3R/DCAZX7eBpukhRWYhg7oMV0/2p4jVBztgE3z/WlMlOEnZaQRDjhIbMgWpVZAot0rjbP0VWWhQ6qdFXZr+0Yg8DwjF0PsMPdlPAzmFXjRjAELEzGv+8onnAZkbQHhej+bpWzaLiFcQSC8F3INpsG8kpFJ4kG9G3hojQOG4p69qptvp0RKvGnSUIjZc/hRw/LLmcgyuOOZDBh0OujH0qeTNl8FORMIEjH0yKLYGg5YQ9danAhowBDeA8eD5U/KpIkjyQEvmEg4XJHAKF4AHWMHOb8/yzrLkjxoUV5Ax2363yU4zSqEabKTpN6kwVDfkfe3DlR90=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:GV2PR04MB11799.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(23010399003)(7416014)(376014)(1800799024)(366016)(19092799006)(5023799004)(6133799003)(10067099003)(4143699003)(11063799006)(56012099006)(22082099003)(18002099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?OnKWu6J3CMn66P5XzClU0w+xgKJYsStzajKpnEnhrNpE6qr6ZDoMgFR1WpmI?=
- =?us-ascii?Q?NUEUs2tcYFf5Ac4FMCrAl9YhCelB3gpQ7oXn1WL/Ady1oJ/47ySwX2SBbyHn?=
- =?us-ascii?Q?JUckQkOIVTSXe0USZBX9vV1+bUtOciCm4NE14CFJLwx5CkqUpSZI9Q/zl4B/?=
- =?us-ascii?Q?sSPrJE8Q55CPAZTYNjXePgrOtrVidHbrIGzLmmfSnl0OMVRYF5h7OMrJSvCI?=
- =?us-ascii?Q?tRStHTL614MdwliUpimtQyXRGDG4XtanePkZVwe+Q1NQKpyVEPCvH31kdqVZ?=
- =?us-ascii?Q?ClbMw3k55pJgRmdeKbA2dAeq+LrtkdDYs9uhVHI/9FkOA+y38eEQ7LY+KJCB?=
- =?us-ascii?Q?C7pTKiwgZPRtcoH53rfeRMEBBIcrRYde2LBq+eo+5wfCinrdFy7dGEPqxZOl?=
- =?us-ascii?Q?ABKiD+IV7qlW/pYRA0CVJ65H7+O1cFKcCffyDR37YoqbE/zdUlm1rbXoT1/p?=
- =?us-ascii?Q?0SVdfD+9fujfWUxWcbRhFHfB5bmSBNnwdO4ge0Bs9ITam6Q/ic54flDgdB72?=
- =?us-ascii?Q?1INXKkWl4tt/7OiqiWRkp7nZ1RAIaotTVerYx2rHCXkRfsruEDftR7MYyAiB?=
- =?us-ascii?Q?VvBAApTSCnWdQGlqKwCOHeHhi/TkkUt/1TVoof4crG9vo9bq9Tq+BxwPHaOt?=
- =?us-ascii?Q?Km25dAh24HGxWkHheDM1K3LlR4CXwuCyhBTK7fPKnb+0Ss0aGb8bQuZ8N+aS?=
- =?us-ascii?Q?ILwTMQ8ziI5/57wiAk7GH0VC3p/ltLM290mMdh1GMfDDgBiFL3g3r4pQD5Hj?=
- =?us-ascii?Q?qDhC6TxdreTMSVM7wPwFM6QDXzQlXIlKrEcDvYOXMUbGMMxL20O0vJ7GpGoq?=
- =?us-ascii?Q?XOxbyqeeeBA2B/DOsU8xmah4ZcSZnTJUiZEJu591n5tQ6r+ZlYd5ShVp4tta?=
- =?us-ascii?Q?zi/gPtfYVPDng1ye3jfz0QqJcfuz5Pw+fzQGmJIMW03oUvgBTqtlMb5pazqH?=
- =?us-ascii?Q?RpOwe5WliX4/23k0vreShTd7TWYUTnJjhjroRsle7FVRvuilRe6mzMBGjdGi?=
- =?us-ascii?Q?RBeYXEciCjpmlVrOnqXSulin/iCvsEhvKVv45GC4OgLxWpebHRED8DvF/tGc?=
- =?us-ascii?Q?gcxzck3g27oVghu3J3j+/Lpp+tjePZHW6HwxDXq9k5vM1RqQDcdmuu9LTvKo?=
- =?us-ascii?Q?ckcAyBlgbox66/+PpjoRVLnV6pmspBzx1SVR/JzFNregmrsiIluYg4jIFs3B?=
- =?us-ascii?Q?pXpOwH2dkFCAvJAa0UkmacVf5unJhA1HW82fOJQLrN7Zn6Tnovqm50GRdSat?=
- =?us-ascii?Q?Wfx/bBYEqvNYTG9NrAfe5Xrca+JCfVfGU+5M6msTAxg5v20Q6Tf6EXR6cMU5?=
- =?us-ascii?Q?TQbyDBRR4wXlFVHbT3BJ5UBVvsmND5bgNLxJ5FSc3K+CX8c/IMO/NnbA9h/X?=
- =?us-ascii?Q?yov0yZ2VrOxFmcyYI7ydr/tNSRcDv4pJxC9AffCrFGSbRaW0xFfY07JuWN7L?=
- =?us-ascii?Q?g6pc002Pct/RYZGIDWsI6S58Xct/Bwz+3eWx3S+FUpma7cLewqmPfGygG7KW?=
- =?us-ascii?Q?av54HvwZthdPA2iXBGExsT0QR9kJ0yDV4qNTaPLH6HvDXhYNm7ekRHlnyWIH?=
- =?us-ascii?Q?zRDeod32mkTt+XmFVjf3PJKiCQvR9idKCUP6qQ+eU3RjAWIXTUUur8jsu+Py?=
- =?us-ascii?Q?ZUDuMwDYluBW1+PjxXwN0X/C80csTHzM6onrUMSiJJ8YAuqhu0CgXUd0Is/d?=
- =?us-ascii?Q?lTS64zbuaknqYHSX8ULmZ7nDR9UtUfyZF+UVnplvpdFRuAaXr/aV1JX5PubC?=
- =?us-ascii?Q?47IQtTpI47EBdgL8LchysOAgxIeXD/IE4shO+9L0WjLxwbNBUV5k?=
-X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 15851e93-b41f-4637-2496-08df04547c9e
-X-MS-Exchange-CrossTenant-AuthSource: GV2PR04MB11799.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Aug 2026 16:01:42.7995
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: EY61Z+41K5PYfM1+/pt3a0HXDpOFg6bvUF0pPF6pp0ZlswK1vOXurv7hCcifOe61BBvXEQGfFYtIXUumxGxsHv1hCSUxuzWeIhnmzNSCXc7dXrGuMT5h9GVlxo6an0d5
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DBAPR04MB7302
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-Authority-Analysis: v=2.4 cv=X6Bi7mTe c=1 sm=1 tr=0 ts=6a9060f8 cx=c_pps
+ a=vVfyC5vLCtgYJKYeQD43oA==:117 a=JYp8KDb2vCoCEuGobkYCKw==:17
+ a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
+ a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=bZYwddHGPv9KEr_TRj0A:9 a=3ZKOabzyN94A:10
+ a=QEXdDO2ut3YA:10 a=rl5im9kqc5Lf4LNbBjHf:22
+X-Proofpoint-ORIG-GUID: IKu3PV0LoLzec0kRe-QUL4gOGrKrcfxI
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODI3MDEzNiBTYWx0ZWRfX/vQsk7uMY5QE
+ NnqeHkwzWwjEpE3D6yx08F+DB8YzL6TIfEL4OoZeC4A7Yx+A/k8BJnZV0ONObpnZ3UACbFGmYDr
+ nGG3JVoq3Qy5n0R7YpqYaKlgyti8byE=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODI3MDEzNiBTYWx0ZWRfX/7SSQkaKB4yx
+ WNds4pBbIy83nCl1UaTzIrKNy+6SqO9JoI0rkb4ZefOvzLhfUFcBCS11UsT+ayrU8LIOc7hoc5G
+ XrOQPcf3KGlF8maOVqcNidTvteZskBwKGOqn9NnbqkC826V9JBtlYCwVnajWIJ+o68MgilyXVSr
+ H2GOHDgIh3XAhXQQ65Rl52JHJMnrvAL1aAFp11b/Yo6Kw0F1r9DPRjEtSY8y/0EPMR6/NLWuG8K
+ 1hoyI5b1xxtVEHzSOjTQqxBM6bF9/GKuPz1AsKFiF1OuQkUi33G0B3Ayvacjq+pk9TEYzM9hLb9
+ Og0tuvjGWi6xtH2aXE5ZhWBFfvaK4ZY3ijdCxba5KGWzLwTX3RHAzmRa5M7skSa6L4S6Mk7EZzv
+ 3TDZBjqDO9C+t12dScnjKIJs1v8XivLgGPXVFc3eOJsf5H7MIcSxHaKCJneK3kHH6YQdhnQTRhO
+ dxaqVARAWHPCtq9OFdA==
+X-Proofpoint-GUID: IKu3PV0LoLzec0kRe-QUL4gOGrKrcfxI
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-08-27_07,2026-08-27_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ lowpriorityscore=0 bulkscore=0 impostorscore=0 adultscore=0 clxscore=1015
+ priorityscore=1501 suspectscore=0 spamscore=0 phishscore=0 malwarescore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608270136
 
-On Thu, Aug 27, 2026 at 11:43:02PM +0800, Shengzhuo Wei wrote:
-> i2c_imx_dma_request() acquires exclusive tx/rx DMA channels and is
-> optional: on errors other than -EPROBE_DEFER the driver falls back to
-> PIO mode and probe continues. If i2c_add_numbered_adapter() then fails,
-> probe returns through clk_notifier_unregister without releasing the
-> channels, because the remove callback is not invoked after a failed
-> probe.
->
-> Release the channels on the probe error path, mirroring
-> i2c_imx_remove().
->
-> Fixes: ce1a78840ff7 ("i2c: imx: add DMA support for freescale i2c driver")
-> Cc: stable@vger.kernel.org
-> Signed-off-by: Shengzhuo Wei <me@cherr.cc>
-> Assisted-by: GLM:5.3
+From: linlzhan <linlin.zhang@oss.qualcomm.com>
 
-Nit: signed-off-by should be last tag
+Current virtio-blk does not provide a mechanism for a guest to
+program hardware keys or submit encrypted I/O using pre-programmed
+keyslots.  It drops the crypto context when issuing a bio request
+to the virtio-blk queue, preventing inline-encryption-based FBE
+on virtio block devices.
 
-Reviewed-by: Frank Li <Frank.Li@nxp.com>
+This series enables File-Based Encryption in guest VMs on Qualcomm
+GVM platforms where the ICE inline encryption hardware is shared
+between the host and guests.  In this environment the guest kernel
+has no access to the ICE hardware directly; it supplies a virtual
+keyslot index and data unit number with each encrypted I/O request
+via VIRTIO_BLK_F_INLINE_ENCRYPTION, and the host must translate the
+virtual slot to a physical ICE keyslot and submit the bio — without
+transferring raw key material across the VM boundary.
 
-> ---
->  drivers/i2c/busses/i2c-imx.c | 2 ++
->  1 file changed, 2 insertions(+)
->
-> diff --git a/drivers/i2c/busses/i2c-imx.c b/drivers/i2c/busses/i2c-imx.c
-> index 19ec056b00af..c24d9201a60e 100644
-> --- a/drivers/i2c/busses/i2c-imx.c
-> +++ b/drivers/i2c/busses/i2c-imx.c
-> @@ -1880,6 +1880,8 @@ static int i2c_imx_probe(struct platform_device *pdev)
->
->  clk_notifier_unregister:
->  	clk_notifier_unregister(i2c_imx->clk, &i2c_imx->clk_change_nb);
-> +	if (i2c_imx->dma)
-> +		i2c_imx_dma_free(i2c_imx);
->  	free_irq(irq, i2c_imx);
->  rpm_disable:
->  	pm_runtime_put_noidle(&pdev->dev);
->
-> --
-> 2.47.3
->
+             +----------------------------------------------------------------+   
+             |                                                                |   
+             |               LA GVM                                           |   
+             |                                                                |   
+             |                                                       |        |   
+             |                                                       |        |   
+             |                                                       |        |   
+             |                                                +------v------+ |   
+             |                               +----y-----------+   blk-mq    | |   
+             |                               |                +-------+-----+ |   
+             |                               |                        |       |   
+             |                               |                        |       |   
+             |                    +----------v-----------+            |       |   
+             |                    |blk-crypto-profile    +------------v       |   
+             |                    +----------------------+            |       |   
+             |                                                        |       |   
+             |                                                        |       |   
+             |            Control path:                               |       |   
+             |            generate/import/prepare key                 |       |   
+             |            program/evict/derive_sw_secret key          |       |   
++----------+ |                                                        |       |   
+|          | |+-------------+     +-----------------------+     +-----v-----+ |   
+|Trust Zone| || crypto-virt <-----+ virtio-blk-crypto-ext <-----+virtio-blk | |   
+|          | |+------+------+     +-----------------------+     +-----+-----+ |   
+|          | |       |                                         Data path: I/O |   
++-------^--+ +-------+------------------------------------------------+-------+   
+        |         SMC|call                                (virt_slot, DUN, DUSize)
+        |            |                                    appended in virtblk_req 
+    +---+------------v------------------------------------------------v----------+
+    |  +--------------+                             +--------------------------+ |
+    |  | SMC trap     |                  Hypervisor | MMIO trap/VIRQ injection | |
+    +--+--------------+-----------------------------+--------------------------+ +
+
+    +--------------------------------------------------------------------------------------------+
+    |                                                                    PVM                     |
+    |                                                                                            |
+    | Crypto IO    +--------------+                                                              |
+  +-+-------------->  QEMU/Crosvm +-------+                                                      |
+  | |              +--------------+  IO data                                                     |
+  | |                             virt_slot, DUN, DUSize                                         |
+  | |                                     |                                                      |
+  | |+----------------+       +--------- -v-----+                                                |
+  | ||  blk-crypto    <-------+ blk-crypto-proxy+-------------+----------------------+           |
+  | |+----------------+       +-----------+-----+             |                      |           |
+  | |                             slot path based             |                      |           |
+  | |                               bio_crypt_ctx             |                      |           |
+  | |+-----------------------+       +--- v----+              |                      |           |
+  | || blk-crypto-profile    <---x---+  blk-mq |      bcp_hypervisor_ops             |           |
+  | |+-----------------------+       +----+----+              |                      |           |
+  | |                                     |                   |             bcp_slot_virt_ops    |
+  | |                         +-----------v-----+             |                      |           |
+  | |                         |         SCSI    |             |                      |           |
+  | |                         +-----------+-----+             |                      |           |
+  | |                                     |                   |                      |           |
+  | |                 crypto msg in UTRD  |                   |                      |           |
+  | |+----------------------+        +----v-----+  +----------v-- ---------+ +-------v--- ------+|
+  | ||    ufs crypto        <--------+ ufs-core |  |blk-crypto-hyp-backend | | keyslot-partition||
+  | |+----------------------+        +-----+----+  +-----------------------+ +------------------+|
+  | +--------------------------------------+-----------------------------------------------------+
+  |                                        |                                                      
+  |                                        |                                                      
++-----------------------------------+   +--v---+-----------+                                      
+| +------------------------+        |   |  ICE |    UFS    |                                      
+||MMIO trap/VIRQ injection |  HYP   |   +------+-----------+                                      
++ +------------------------+--------+                                                             
+
+Patches 1-3 land in the guest kernel.  Patch 1 negotiates
+VIRTIO_BLK_F_INLINE_ENCRYPTION and wires it into blk-crypto.
+Patches 2-3 add the Qualcomm GVM-side crypto backend, which routes
+key programming and software-secret derivation through SCM calls to
+TrustZone.  These patches are sent for review; the virtio-blk inline
+encryption protocol is also under review (see
+https://lore.kernel.org/all/20260814142306.3934029-1-linlin.zhang@oss.qualcomm.com/).
+These patches and the virtio-spec depend on each other.  They must be
+kept consistent for upstream merging.
+
+Patch 4 adds the dt-binding for the Qualcomm crypto-virt node used by
+the guest-side backend.
+
+Patch 5 introduces a "slot path" in blk-crypto that lets a bio carry
+a pre-programmed physical ICE keyslot index in bc_slot rather than a
+blk_crypto_key pointer (bc_key == NULL).  This is needed on the host
+side where the hypervisor has already programmed the keyslot; the host
+kernel has no access to the raw key.  Patch 6 extends
+ufshcd_prepare_lrbp_crypto() to handle this path.  Patch 7 moves
+bio_crypt_dun_increment() to the public header so it can be called
+from drivers/block/.
+
+Patch 8 adds /dev/blk-crypto-proxy, a misc character device for
+userspace virtio-blk backends.  The interface is three ioctls:
+BCP_BIND_CONTEXT binds a host block device fd and a hypervisor VM fd;
+BCP_GET_CRYPTO_CAPS queries the device's inline-crypto capabilities
+and the VM's ICE keyslot allocation; BCP_SUBMIT_IO_BY_VSLOT resolves
+a guest virtual slot to a physical ICE keyslot and submits the
+inline-encrypted bio synchronously.  The driver is
+hypervisor-agnostic and storage-vendor-agnostic, using two pluggable
+op-sets registered by platform drivers at runtime.
+
+Patch 9 implements bcp_slot_virt_ops for Qualcomm platforms: it parses
+a qcom,ice-keyslot-map device-tree node that maps each guest_id to a
+contiguous physical keyslot range.  Patch 10 adds slot_offset to struct
+blk_crypto_profile so that blk_crypto_keyslot_index() returns the
+correct physical slot number when the host's ICE range does not start
+at slot 0.  Patch 11 extends ufs-qcom to read the host's own slot
+reservation from the same DT node and initialize the
+blk_crypto_profile accordingly.
+
+Patches 1-4 are technically ready for review.  However, since they
+depend on the proposed virtio-blk inline encryption protocol, progress
+on these patches is expected to follow consensus on the protocol design.
+Feedback on the overall architecture is therefore particularly valuable,
+as it will also help advance the associated virtio-spec work.
+
+Patches 5-8 implement the core host-side infrastructure and are
+believed ready for review.
+
+Patches 9-11 do not depend on any hypervisor-specific code.  Of them,
+patches 9 and 11 provide the Qualcomm platform implementation based
+on a static device-tree keyslot mapping; this may be revised in a future
+version to use a TZ SCM query interface.
+
+The kernel-internal header declares bcp_hypervisor_ops, which
+translates a hypervisor VM fd to an opaque guest_id.  No upstream
+implementation is included in this series because the series was
+validated on a downstream Qualcomm GVM platform using the Gunyah
+hypervisor, which provides a stable per-VM identifier but is not
+yet upstream.  KVM does not currently expose an externally-visible
+per-VM identifier that a kernel module could use for this purpose.
+Input from KVM maintainers on whether and how such an interface
+could be added, or whether an alternative identity mechanism is
+preferred, would be welcome.
+
+Known limitations
+-------
+  - Only AES-256-XTS has been tested.
+  - virtio_blk_crypto_msg.dun is a fixed __virtio64; the driver refuses
+    to enable inline crypto if the device advertises max_dun_bytes > 8 to
+    prevent silent IV truncation and reuse.
+  - Inline encryption is mutually exclusive with VIRTIO_BLK_F_ZONED.
+  - The qcom_ice_slots driver uses a
+    global singleton and ignores the blk_crypto_profile argument to its
+    callbacks, so multiple storage controllers sharing a single slot table
+    are not yet supported.
+  - BCP_SUBMIT_IO_BY_VSLOT submits each bio synchronously with
+    submit_bio_wait(); concurrent in-flight bios from multiple threads
+    sharing one fd are not supported.
+
+Testing
+-------
+Compilation pass on Linux-next.
+End-to-end FBE virtualization with wrapped key enabled was validated
+on top of gunyah hypervisor.  wrapped_key_test is a local utility to
+get wrapped key and ephemeral wrapped key via storage ioctl interfaces.
+  - /data/wrapped_key_test /dev/block/userdata generate
+  - /data/wrapped_key_test /dev/block/userdata prepare /data/lt_key.bin
+  - /data/fscryptctl insert_wrapped_key < /data/eph_key.bin
+  - /data/fscryptctl set_policy --identifier=20f553802e64e36b43469211266a5f1c /data/testing
+  - echo "data" > /data/testing/file.txt
+  - sync and reboot
+  - /data/wrapped_key_test /dev/block/userdata prepare /data/lt_key.bin
+  - /data/fscryptctl insert_wrapped_key < /data/eph_key_2.bin
+  - /data/fscryptctl set_policy --identifier=d8ca51d6d2094b73b2dae5ee7e3a10b6 /data/testing
+  - cat /data/testing/file.txt
+
+
+linlzhan (11):
+  virtio_blk: add inline encryption support
+  soc: qcom: add crypto_virt backend for virtio-blk inline crypto
+  soc: qcom: crypto_virt: add support for create, prepare and import
+    keys
+  dt-bindings: soc: qcom: add binding for qcom,crypto-virt
+  blk-crypto: add slot-based inline encryption path
+  scsi: ufs: core: add slot path to ufshcd_prepare_lrbp_crypto
+  blk-crypto: move bio_crypt_dun_increment() to the public header
+  block: add /dev/blk-crypto-proxy for host-side virtio-blk inline
+    encryption
+  soc: qcom: add ICE keyslot partitioning driver for guest VMs
+  blk-crypto: add slot_offset to blk_crypto_profile
+  scsi: ufs: ufs-qcom: support ICE keyslot partitioning for guest VMs
+
+ .../bindings/soc/qcom/qcom,crypto-virt.yaml   |  39 +
+ block/blk-crypto-internal.h                   |   5 +-
+ block/blk-crypto-profile.c                    |   7 +-
+ block/blk-crypto.c                            |  57 +-
+ drivers/block/Kconfig                         |  28 +
+ drivers/block/Makefile                        |   3 +
+ drivers/block/blk-crypto-proxy.c              | 667 ++++++++++++++++++
+ drivers/block/virtio_blk.c                    | 199 +++++-
+ drivers/block/virtio_blk_crypto_ext.c         | 283 ++++++++
+ drivers/soc/qcom/Kconfig                      |  30 +
+ drivers/soc/qcom/Makefile                     |   2 +
+ drivers/soc/qcom/crypto_virt.c                | 197 ++++++
+ drivers/soc/qcom/qcom_ice_slots.c             | 232 ++++++
+ drivers/ufs/core/ufshcd-crypto.h              |  14 +-
+ drivers/ufs/host/ufs-qcom.c                   |  91 ++-
+ include/linux/blk-crypto-profile.h            |   9 +
+ include/linux/blk-crypto-proxy.h              | 100 +++
+ include/linux/blk-crypto.h                    |  28 +
+ include/linux/virtio_blk_crypto_ext.h         |  78 ++
+ include/uapi/linux/blk-crypto-proxy.h         | 122 ++++
+ include/uapi/linux/virtio_blk.h               |  62 ++
+ 21 files changed, 2224 insertions(+), 29 deletions(-)
+ create mode 100644 Documentation/devicetree/bindings/soc/qcom/qcom,crypto-virt.yaml
+ create mode 100644 drivers/block/blk-crypto-proxy.c
+ create mode 100644 drivers/block/virtio_blk_crypto_ext.c
+ create mode 100644 drivers/soc/qcom/crypto_virt.c
+ create mode 100644 drivers/soc/qcom/qcom_ice_slots.c
+ create mode 100644 include/linux/blk-crypto-proxy.h
+ create mode 100644 include/linux/virtio_blk_crypto_ext.h
+ create mode 100644 include/uapi/linux/blk-crypto-proxy.h
+
+-- 
+2.34.1
+
