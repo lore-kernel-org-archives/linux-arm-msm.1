@@ -1,78 +1,47 @@
-Received: from mail-lf1-f54.google.com (mail-lf1-f54.google.com [209.85.167.54])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mailgw.kylinos.cn (mailgw.kylinos.cn [124.126.103.232])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2C18D3A963E
-	for <linux-arm-msm@vger.kernel.org>; Wed, 26 Aug 2026 23:38:31 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.167.54
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B9DBD284693;
+	Thu, 27 Aug 2026 02:04:58 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=124.126.103.232
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787787512; cv=none; b=FqyZWXzEaN4imoBys+Lk4EDINgWEdf7IyifLEBXQaFJuFfy3dPvhTj07E06rTYQEzBp08vT11KJj6u5OEQY85s7HfTrzj+oGMYkvWQkVYUNljA6LaYksmp4Fc6s+/s8HeTVSSyFunwviC/l7LXPhr27o3o8c6INiZJP0ca8nH/I=
+	t=1787796302; cv=none; b=QyRoyDn7Cpf1O7WONbTGYui0s4dzYUKFmj08Ry5JQ8IomV0l8FlxQRW4QAMZbO2XilMtr9UIrU/3wRDYNBKdecrfjGYm+tNyzw8M2B67JYO55h96ZyV5ZteYVmbucTDvcFTxEq2YJ4NrQlB0z99+OV21GGtkLBR40/fHeO3WJhc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787787512; c=relaxed/simple;
-	bh=Ks97iZYDefkxuuXZdEEEwMFqACfSJ7anPx9rAcG522s=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=E+xj8LvMn+FM+a0C+QlvXohBIDb7TN6XR2334/fLbrDxGETJLkhEJLwU048lGNZqNtwtxoavhtUhwagkTpTmH7Ky/jrh62acyLXIhXaAT01RMJ+PIIGjZH/taJPNrW7rhffcTI07yaqxI1hLqvjCrc74p/7DFPqz/e6TP4g9EqE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=aMbd5GS6; arc=none smtp.client-ip=209.85.167.54
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="aMbd5GS6"
-Received: by mail-lf1-f54.google.com with SMTP id 2adb3069b0e04-5aeb98460c6so1716833e87.2
-        for <linux-arm-msm@vger.kernel.org>; Wed, 26 Aug 2026 16:38:31 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1787787509; x=1788392309; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=Pn5cuibYSV1eGH20SoQ75z6FLNMGEndFYPOvwFpT6w4=;
-        b=aMbd5GS6znl027MTkpR9BsaCElgxZNisqvUwdWkAk8orLyOkJPsuVciMP70Bx2c453
-         +AihopAuglpwsX4wIZybx5IhND+we58KYClYTBV9zNrSBn+BF04V/BpUS/kU66SQtah9
-         eLvNC3AJ0kIYRxTSeGNPd6L+BzXCeXxl2krlbxfz04AR2p6/hwW69CJ2ayWg2oWW+uH7
-         6lW2WTbkDdjD2pDJyJMfih/JVaaSpOcHK2Bs1oljN1Oh1hYplOyphHkL2++4ogp11O9k
-         OKkSkvOLL/xRNGJGBnVwS7XWrhGSYqgHstHrhwvP/5HaWjmfwLje0Aa6EjxP9ngEctEV
-         BK2Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787787509; x=1788392309;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=Pn5cuibYSV1eGH20SoQ75z6FLNMGEndFYPOvwFpT6w4=;
-        b=WTRTJXiVvrmQNIwhB/xUFl6y0Z8GrsfMEDSzaHlVS8pugQ/IPje/GqbDQlS9Mt6bz3
-         Z/w7Aky/c3NgZ53oz+g4il90Zuzuo7p38eejuSEQxG0npM9nSXbwCPigp6cumjgR0XAG
-         kOIMmZYxOMdBwX/6hBKHHQZa71kRF0xqeKKYM1W2tAE13O/z3po777ilYAjj19T0R/h+
-         tISW1UhOaZm3zdK4XlnLdG6bKkwCEtwDpijfK+xIF+2AAqhNrNKWOSd/ynkRWkzq6xEC
-         s8KMdAMWCCMXs3m+rJ6bBMIjN+hEJ4U8nbu1vW0uDQIwVAYqsW15vHvLNFFeNZ0GDxfm
-         YgUA==
-X-Forwarded-Encrypted: i=1; AHgh+Rqw2npYBt/NPA0HFR6c2SK3qXjJxNFkObxVOX5zrNBSkRLArQcKTrAO798uOS1Ojc4H3LybKv8rfXrjGhhu@vger.kernel.org
-X-Gm-Message-State: AFuF++mZcNxOpxUNpYFdZbcpu38ton42i9tPzLjwRc/5YXYE9kUzG4kG
-	jKyFk8mpgGJsTOe5LkPae3D0XLIO0OeHHEvzqaFtw1krPviN0EC6vExK
-X-Gm-Gg: AR+sD126Azkai7hiCydZgMNS0XyQMzbgX76wtvuQyP539xJYa/TmoAJiC7IkXIv8Cyx
-	6k4X2lSikJ/yYAB+r9hGAb5ucAfz0QtkdSohpv1ElAl3fZyrPUVkpX00BI2nRtVrxwNmdEXQBaK
-	Nb7fz8ihhXbz4eClYP9ZTdlk+QjPihtxIHVbR2WI/IB1L5NyRVVWebCCm/2UmIrZownmMBQEkg2
-	mBt2abV3ksef4avocYBtX729bC3AeRn6bWajT6B8Q+LaW9Rn2aglv10xk4R/McHLAC9qXr3RWiE
-	aFBPKEpK4be/pfqS+poDRFEoCl6pZDthtOBuUsg2LkiJGFNz/33DrMukAfMZ8g4Gn29jyOalchf
-	nxr9ub6YMkVo6NCX1OOcknGPEuSmp+RRIEQmqsFfT0IXY1I7F4C8kOv9X/30ocqCOwSUSunmDSD
-	LPVs+9YMhChDrfXr73SMm1NAU1OZCQcJWIe2vLtJEVpiJRAHiFsdKGLiEoGYsFgP8cpoa1qo+mb
-	KvUT1EafvgljcFvoZpzM7jBMEw2VtQHfdOdssOJ
-X-Received: by 2002:a05:6512:3b83:b0:5b4:74ca:b5c4 with SMTP id 2adb3069b0e04-5b4a909b296mr3384719e87.17.1787787508779;
-        Wed, 26 Aug 2026 16:38:28 -0700 (PDT)
-Received: from notebook ([93.189.200.242])
-        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5b4a41ae602sm873550e87.56.2026.08.26.16.38.27
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 26 Aug 2026 16:38:28 -0700 (PDT)
-From: Rinat Muhamedgaliev <rinat.muhamedgaliev@gmail.com>
-To: Bjorn Andersson <andersson@kernel.org>,
-	Konrad Dybcio <konradybcio@kernel.org>
-Cc: Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	linux-arm-msm@vger.kernel.org,
-	devicetree@vger.kernel.org,
+	s=arc-20240116; t=1787796302; c=relaxed/simple;
+	bh=nyZE+swJePNDu+zLlOjoG+7TP24Yaq/1mW84CTN0F1U=;
+	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=Cu9dj/lYM4G1lrQ5K5oTOA+MlKDuGN3y1A/0U0hOVHTJ3HhiCyM1eFbTnFAKRptV5hcV0upC/F72VvD+xlFM876C1CAE+NnMCYB72Z6Rt63U7CNrreLovHweLnRLvajquyETtFpLTr5nsyM6fxjHcB9NEjBcTXyWqBM80x/TuEE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=kylinos.cn; spf=pass smtp.mailfrom=kylinos.cn; arc=none smtp.client-ip=124.126.103.232
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=kylinos.cn
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=kylinos.cn
+X-UUID: b0be5a2ca1bb11f19a56ed5b684f684d-20260827
+X-CID-P-RULE: Release_Ham
+X-CID-O-INFO: VERSION:1.3.19,REQID:0014b72f-4a7a-4bb8-bbc5-e462f4f193c9,IP:0,U
+	RL:0,TC:0,Content:0,EDM:25,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTION
+	:release,TS:25
+X-CID-META: VersionHash:7db8b62,CLOUDID:0d330f4a5d021cf8f9cd6a5ce3ece5de,BulkI
+	D:nil,BulkQuantity:0,SF:102|136|850|865|898,TC:nil,Content:0|15|50,EDM:5|-
+	100,IP:nil,URL:0,File:nil,RT:nil,Bulk:nil,QS:nil,BEC:nil,COL:0,OSI:0,OSA:0
+	,AV:0,LES:1,SPR:NO,DKR:0,DKP:0,BRR:0,BRE:0,ARC:0
+X-CID-BVR: 2,SSN|SDN
+X-CID-BAS: 2,SSN|SDN,0,_
+X-CID-FACTOR: TF_CID_SPAM_SNR
+X-CID-RHF: D41D8CD98F00B204E9800998ECF8427E
+X-UUID: b0be5a2ca1bb11f19a56ed5b684f684d-20260827
+X-User: lilinmao@kylinos.cn
+Received: from localhost.localdomain [(10.44.16.150)] by mailgw.kylinos.cn
+	(envelope-from <lilinmao@kylinos.cn>)
+	(Generic MTA with TLSv1.3 TLS_AES_256_GCM_SHA384 256/256)
+	with ESMTP id 2130908766; Thu, 27 Aug 2026 10:04:52 +0800
+From: Linmao Li <lilinmao@kylinos.cn>
+To: andersson@kernel.org,
+	konradybcio@kernel.org
+Cc: linux-arm-msm@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
-	Caleb Connolly <caleb@connolly.tech>,
-	Frederic Laing <dev@fredfunk.tech>,
-	Rinat Muhamedgaliev <rinat.muhamedgaliev@gmail.com>
-Subject: [PATCH] arm64: dts: qcom: sdm845-oneplus: fix fuel gauge compatible
-Date: Thu, 27 Aug 2026 02:38:18 +0300
-Message-ID: <20260826233818.124278-1-rinat.muhamedgaliev@gmail.com>
-X-Mailer: git-send-email 2.55.0
+	Linmao Li <lilinmao@kylinos.cn>
+Subject: [PATCH] soc: qcom: smem: Fix byte order in v3 14-frequency parser
+Date: Thu, 27 Aug 2026 10:04:47 +0800
+Message-Id: <20260827020447.2642830-1-lilinmao@kylinos.cn>
+X-Mailer: git-send-email 2.25.1
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -81,71 +50,39 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-The fuel gauge at I2C address 0x55 on OnePlus 6T (fajita) reports
-DeviceType 0x0541, identifying it as a TI bq27541 rather than bq27411.
+smem_dram_parse_v3_14freqs_data() uses the little-endian
+freq_khz field directly when scaling the frequency from kHz to Hz. This
+produces byte-swapped values on big-endian systems.
 
-Binding it as bq27411 selects the wrong register map and produces
-invalid voltage, state-of-charge, and temperature readings. Use the
-bq27541 compatible and rename the shared label along with its fajita
-and enchilada consumers.
+Convert freq_khz to CPU byte order before using it, as the other DDR
+data parsers do.
 
-Tested on OnePlus 6T (fajita): queried DeviceType directly over I2C,
-built the DTB, booted it once with fastboot boot, then installed a
-locally built postmarketOS kernel package. Before the change, readings
-included about 65 V, over 10000% SOC, and -273.1 C. Afterward, the
-bq27xxx driver bound as ti,bq27541 and reported 3.835 V, 42% SOC, and
-33.3 C.
-
-Fixes: 12dfb002ca01 ("arm64: dts: qcom: sdm845-oneplus-*: add fuel gauge")
-Closes: https://gitlab.com/sdm845-mainline/linux/-/issues/36
-Link: https://gitlab.com/sdm845-mainline/linux/-/merge_requests/148
-Signed-off-by: Rinat Muhamedgaliev <rinat.muhamedgaliev@gmail.com>
+Fixes: 1d234eeafc56 ("soc: qcom: smem: Expose DDR data from SMEM")
+Signed-off-by: Linmao Li <lilinmao@kylinos.cn>
 ---
- arch/arm64/boot/dts/qcom/sdm845-oneplus-common.dtsi   | 4 ++--
- arch/arm64/boot/dts/qcom/sdm845-oneplus-enchilada.dts | 2 +-
- arch/arm64/boot/dts/qcom/sdm845-oneplus-fajita.dts    | 2 +-
- 3 files changed, 4 insertions(+), 4 deletions(-)
+ drivers/soc/qcom/smem_dramc.c | 7 +++++--
+ 1 file changed, 5 insertions(+), 2 deletions(-)
 
-diff --git a/arch/arm64/boot/dts/qcom/sdm845-oneplus-common.dtsi b/arch/arm64/boot/dts/qcom/sdm845-oneplus-common.dtsi
-index 948a0dd18..0c6203fa8 100644
---- a/arch/arm64/boot/dts/qcom/sdm845-oneplus-common.dtsi
-+++ b/arch/arm64/boot/dts/qcom/sdm845-oneplus-common.dtsi
-@@ -790,8 +790,8 @@ &i2c10 {
- 	status = "okay";
- 	clock-frequency = <100000>;
+diff --git a/drivers/soc/qcom/smem_dramc.c b/drivers/soc/qcom/smem_dramc.c
+index 63ebe7f6db590..380746ac18402 100644
+--- a/drivers/soc/qcom/smem_dramc.c
++++ b/drivers/soc/qcom/smem_dramc.c
+@@ -231,8 +231,11 @@ static void smem_dram_parse_v3_14freqs_data(struct smem_dram *dram, void *data)
+ 	for (int i = 0; i < MAX_DDR_FREQ_NUM_V3 + 1; i++) {
+ 		struct ddr_freq_table *freq_entry = &details->ddr_freq_tbl.ddr_freq[i];
  
--	bq27441_fg: bq27441-battery@55 {
--		compatible = "ti,bq27411";
-+	bq27541_fg: bq27541-battery@55 {
-+		compatible = "ti,bq27541";
- 		status = "okay";
- 		reg = <0x55>;
- 	};
-diff --git a/arch/arm64/boot/dts/qcom/sdm845-oneplus-enchilada.dts b/arch/arm64/boot/dts/qcom/sdm845-oneplus-enchilada.dts
-index 5f01115e2..21ebd3f67 100644
---- a/arch/arm64/boot/dts/qcom/sdm845-oneplus-enchilada.dts
-+++ b/arch/arm64/boot/dts/qcom/sdm845-oneplus-enchilada.dts
-@@ -44,7 +44,7 @@ main_cam_ois: main-cam-ois-regulator {
- 	};
- };
+-		if (freq_entry->freq_khz && freq_entry->enabled)
+-			dram->frequencies[dram->num_frequencies++] = 1000 * freq_entry->freq_khz;
++		if (freq_entry->freq_khz && freq_entry->enabled) {
++			u32 freq_khz = le32_to_cpu(freq_entry->freq_khz);
++
++			dram->frequencies[dram->num_frequencies++] = 1000 * freq_khz;
++		}
+ 	}
+ }
  
--&bq27441_fg {
-+&bq27541_fg {
- 	monitored-battery = <&battery>;
- };
- 
-diff --git a/arch/arm64/boot/dts/qcom/sdm845-oneplus-fajita.dts b/arch/arm64/boot/dts/qcom/sdm845-oneplus-fajita.dts
-index 7ffcad24d..d640b38b5 100644
---- a/arch/arm64/boot/dts/qcom/sdm845-oneplus-fajita.dts
-+++ b/arch/arm64/boot/dts/qcom/sdm845-oneplus-fajita.dts
-@@ -67,7 +67,7 @@ tfa9894_codec: tfa9894@34 {
- 
- };
- 
--&bq27441_fg {
-+&bq27541_fg {
- 	monitored-battery = <&battery>;
- };
- 
+
+base-commit: 94d3305d990b055e1561e3b78275344b1f40c86e
 -- 
-2.55.0
+2.25.1
+
