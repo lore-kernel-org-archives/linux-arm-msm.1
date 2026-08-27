@@ -1,86 +1,87 @@
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CCE782E7BD3
-	for <linux-arm-msm@vger.kernel.org>; Thu, 27 Aug 2026 19:26:40 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9DCB047277C
+	for <linux-arm-msm@vger.kernel.org>; Thu, 27 Aug 2026 19:26:47 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787858802; cv=none; b=BtsjwSzAeGYGkjIMe5ZuhLV7EZZ/41+/6/ZOYFNteIiwt1elkKBPkPQDw33lKrhkV4HUsHrSG/Y+zIeoHogcFQy6u4avnWipiEzBQO2P8EYwDmgDYedkFBDfp4ibdM4e54S4ILEeKOTI8aW5crgxczp56eNZp9tMOSBVunfD6AY=
+	t=1787858809; cv=none; b=QMdMNfg/gF/1bwJ2F4WWGTGMblBB++fbLOZywuga0XT4YfHn4By/DatXBxwJ+JuKfqZIHkqg/jEV3Xm680GsdnWVgbOCvG1h4US7h6aXVuLiLDZiUEzKTtCe/9AEFzYn19Pvg6V19IwLu87nVtarhcplJ8YJNoM4in810CX9HSE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787858802; c=relaxed/simple;
-	bh=cvcmLjI7+Lm650KUaOK60qAcwKubSHECRDPNtyPRiSA=;
+	s=arc-20240116; t=1787858809; c=relaxed/simple;
+	bh=YC79HeWvnLoyma6IwIqP+gAXtzxEjRgm2akZa7/5MNw=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=IHkEQi68jPkKSQRvfA5OMdA973KP98bZj9KTo41rH7Ck07rJFXqpQ72lLckwFtAGtjhVU9JaI8HbLkhzOCkCq4zj36LvsOFu9PyBNeh1/uBaKRsiOZg9hg0Dx3tdbpupQRsfApDBcqgPrl0beCukiQ5G/7kE9q3QKQe/WisPVg8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=bsjoBU+v; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=BMg0vtAr; arc=none smtp.client-ip=205.220.168.131
+	 In-Reply-To:Content-Type; b=SWfyB/S+Infc1tATFX8KLOMdg5lJUVaVe4Y/A8SWKF843CH9oQTNx4Ur3Bz37Diln/Z4uyEKzkbmvrgvZ9oGSEFYtrhEblN2dXbol9clNB9jKv5IqvdRtOInb1roRHtQ2vZ0nlwPMBQrxK8o1jPPgUBbGqORkMCAI4HxfoOu5/A=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=FvhnjjUA; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=L24IK5Zx; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="bsjoBU+v";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="BMg0vtAr"
-Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67RJLtMQ3848282
-	for <linux-arm-msm@vger.kernel.org>; Thu, 27 Aug 2026 19:26:40 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="FvhnjjUA";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="L24IK5Zx"
+Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67RJLg8R1358579
+	for <linux-arm-msm@vger.kernel.org>; Thu, 27 Aug 2026 19:26:47 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	HdusM4nn6P63GToOQBHwn7pPb8nxGiunoqhm5Xs9Agw=; b=bsjoBU+vTcic2jZj
-	OIoGFhIF2feOhXLuvwFs+PNP2VDqQj6AV/moAA37wkriclnpiHIIp53/qFgFQBSV
-	DWgycdt1POFENlFbfdLSB2b0hOOGddcbOw1YifWUDMurekVSaMaeTalDAVJh0AN4
-	yamCk0+P4u0/fjLQxnEk9HIh/L32caMOBDmsGOYqBbE2++NtCWWVdQR/Rm23rm3Y
-	zAUavkuIPWJ6zQE8r8Rjq1//XgUYawq0bEegLiL+ywplTL3Bnf5Dr18rwfN1Axe5
-	WXxrPLH1qTzq83b7EJ3YWOBxnNgE6BVcCqYc8J+EHRyTLJYODMwpnBZoOVGMFQGy
-	VCImYg==
-Received: from mail-pj1-f69.google.com (mail-pj1-f69.google.com [209.85.216.69])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gatnc05dq-1
+	zZ9jZYAushPEfiwAksE6M7BwCZChPUs7hwDd556RB3M=; b=FvhnjjUATfdF579N
+	DrGSEAZdxxuvKjN/4tiaZ8kpRi8jp8z7lnofCPTJCV3d66DZxmLXN5kzDYn3NLHi
+	Qz+5tF/n0FjP5Ka5S2Z5/aD7c3lEele00Q97nTofIGj0XN5NZGA0Z940NUdu+gPo
+	NiuPkF9i01Wqp0xKt2NP0SLQRKKVQMEX/nToDLmSZtnstriWtgzjzBMafmXMSwmj
+	aVr/t1gaRXbam3caYio3Xv6Q1eV47Ao8UdYTAtai3uJpLqPgfuTEtB6Z0ULbX6DX
+	k0tTMQQYLD66WjL2V5SmZoyNCpPSzMczVhbd6tHcQUIgqmZj8ycZUSOoi+yVjF4y
+	XQCL8w==
+Received: from mail-pj1-f70.google.com (mail-pj1-f70.google.com [209.85.216.70])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gapgv9mb4-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Thu, 27 Aug 2026 19:26:39 +0000 (GMT)
-Received: by mail-pj1-f69.google.com with SMTP id 98e67ed59e1d1-39533bb224cso52458a91.3
-        for <linux-arm-msm@vger.kernel.org>; Thu, 27 Aug 2026 12:26:39 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 27 Aug 2026 19:26:46 +0000 (GMT)
+Received: by mail-pj1-f70.google.com with SMTP id 98e67ed59e1d1-38f5ac7416eso342264a91.3
+        for <linux-arm-msm@vger.kernel.org>; Thu, 27 Aug 2026 12:26:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1787858799; x=1788463599; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1787858806; x=1788463606; darn=vger.kernel.org;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=HdusM4nn6P63GToOQBHwn7pPb8nxGiunoqhm5Xs9Agw=;
-        b=BMg0vtAr3aT2mKhwyr9UhTxq3C4zNdFM6oZZEILV3IBsNxKwfr0Ibf87h7omidaou5
-         dFsKA5fmh+tabC6WJJoEGuVcQG6t2REVoI48B7XDSoIQueJWFBDfAvySNQwkpCmMfC4D
-         kSORByqjSgnlaHJVC/ogZSKux5aRPEPHkg3E1e8TNzI1BUH4nhrxf09R9IvQgaiNwRu1
-         +9xSun4YtSBQQlmyRAmhJHqBfL0vTwIgkPkyjSpn4uTq5W6wR4jmYUdyIJs13ezHHZeZ
-         H8JQWSNlZxeG9RnRt2M4LQQN3szYyoVD4sV4Pnw5ZXj+/BJWav36/rVZ9U6/K3g7By2U
-         l3OQ==
+        bh=zZ9jZYAushPEfiwAksE6M7BwCZChPUs7hwDd556RB3M=;
+        b=L24IK5Zxx1ANDnc2t1LNhAFCxUcoSy+mT7n5KHZ5rw9qWBw30uWZzdTN84tqLyKEch
+         +heManH+5cnsuErD50GgsRPcaXOcWpZ8XhxsW00nYIODcZ19q4BA5fOBephYEATvzfN9
+         C9MF9cXI/Mg/VYiRvAKyUgNGUKM1F8cPek0/+t6c3v278eYn2zSiteHTCRlZ/FE6L9l1
+         t1fq/VHxdB5DKBYoSor52LNlBSM1t3V88UGDKFJufws+ScTWka6uX/+PjkRf5iRktOPB
+         5hcHF4OQwxU6ViZnI4O7gAk9aIua0+sTr1n0RoLYxIPbm0OQovc3f/XgYZ3i+0eya3LN
+         UaxA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787858799; x=1788463599;
+        d=1e100.net; s=20251104; t=1787858806; x=1788463606;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=HdusM4nn6P63GToOQBHwn7pPb8nxGiunoqhm5Xs9Agw=;
-        b=pBXk6RsGOWhlZFLz/17P2QIkBM+rZmrwGrsxKU8qpg7MUHcSUvLT4nrAomMZNByJOg
-         T/pVSDw8UPCue4E7Q9Mz6sLKsdn8jNKNFUjcaDNVP91Kl0TLd94PNOoEieia23jpRugY
-         73hVkxeDBsGlohrxMptVvNICbyyyqJF+P/6NvZVojwo1dMKKgW3IiWJXL28lHa+1TOfn
-         ENbDb3E7zhW5CiEgV4ZHDI866b0bJOzKi6L1pf7v2IxDRqB19dKbN/RwY1c3xRpo6k7F
-         6VqYTECOAwSfHBrHTMYc2lAXQHKCcGmSDXqwPwIBdypgFbR7HroUCEfL4FP0cf9k72oH
-         yXuw==
-X-Gm-Message-State: AFuF++m+q9u3wZ8dfqC56Nq7+0j3ygjSQkAIiK9K7iXsN/oQ7Q5vJ4IB
-	o65uT6VMk9Ze6o8cPVJylsNh3sZoUGFX6iLe1R9iS7Yt/G0nbVbkbh1m3QU2ibxDGarF4HDqkwF
-	lULfa7bp/dyHUCL+ac2UN7o/kFD5qjhfRWSRX8yTuuPL17dMAtDXFCJPwKIMhqVKUuWBv
-X-Gm-Gg: AR+sD11sXurmy0ONa+AYVjvbqACO4sYFkmH5nNPU+fPbtOj4NHt+dlcLSEI1kn5cZbG
-	9KqyGgy37zpTQ//I9KsHntqmM4ZW5ScSsENCPN27wlZILiIMyi35yECYilwXsl6feNR/i71cVmy
-	bVwSzVAwzqHcAvhbzxjE45/eQ+/2ZIRKmUMfXX/vmJpGTsdNFiZfas/veZL7oQPWkM4dW6lC+P1
-	HOkqP8l2zjr5/LDO2iv8X6qGyTxHoZYK//U3ut0yncBF6kDSRKxEN9VQtC9zMKdusLJVQ5rgpta
-	TrBQFK1WY9C7LSgtAiOtV1T/mwmPDP5xbc9VtFw/sjfA0e8LEy/IYzQKSu+iU8UDFNCyKYFaAVk
-	Q7DFpguRYUEJha6w5yl7CdoXDZ84UeamzcQ==
-X-Received: by 2002:a05:6a20:244f:b0:3bf:9b3d:61bb with SMTP id adf61e73a8af0-3d26839c4b1mr2269327637.16.1787858799253;
-        Thu, 27 Aug 2026 12:26:39 -0700 (PDT)
-X-Received: by 2002:a05:6a20:244f:b0:3bf:9b3d:61bb with SMTP id adf61e73a8af0-3d26839c4b1mr2269265637.16.1787858798802;
-        Thu, 27 Aug 2026 12:26:38 -0700 (PDT)
+        bh=zZ9jZYAushPEfiwAksE6M7BwCZChPUs7hwDd556RB3M=;
+        b=b8AaKptZt8ADAM6wTMEIOHso6ikednWCMaRKwQ90eDL0iVUXsHA//Ip/CZHcQIqoa7
+         6PiIyCARfcdmaK1tOnuROHQZW71SxNz45RMOvL7zsw0ZiOhUxoP4KzaREIwogR3/OpH0
+         xtPt2Qkll3ZX0xvDCn4xDzUUzhfUAg2/4VbXgA20EozPNtzntc54ygsuxIvHIGWiwj5z
+         Y0BMmxYzCHYtok0k+H8OhLnAJxLO9J3QxhAV7IgR8/Gn02/aFLWVcD/BcCEgdsSV16mG
+         k7BRsv7hmbdtHQie1ImaMOAi1+sMyb3x5ub6uDOE6lUaYAj55qVl9uSjHHKTVrws92Zk
+         P+Gg==
+X-Gm-Message-State: AFuF++l/XCcEXrqmgeLxLNFqgyGynjYgwt1NkO25wMuiTaRQX12/iMBv
+	vj8fDIyPRTatfboCKUADB071BsrRYWugw/uFWoh/R6R/pF78Rm1C/AK8hURQ+ThpRG16yjN/do9
+	AkSwYdgqTd//GHdTPJRmlPyrvyjZsXkaryZxZDIUC2FeP5d8YYt8ThgUnW64djAjE2N7WMxpORq
+	/A
+X-Gm-Gg: AR+sD12ppC1FUl57JTtq2N8i/vaRzzs1DtLYQbLiXMcI6FXVVgGpvfzvP9AQfNQyOaU
+	MJa/aic14dpu8p+/ditD1ypb2hCsMX5HR0/f2j3vAwhRTPNlx4cACrEP2NQr0rUD8Wc0GhiprWk
+	cz1zq9P5sUm4XeZGGhFjOBgXZbf27DRqBuW9mgEvtsOjX1d0wSV/cwpkxjIC4YltcrvE4FQaq3s
+	IBcKbB6/MfRLxj+LgyKqi4ZzET159n3vjGttpPXcM0gUxHM4+fn+ZjweKVykgyuFV4Gcq0E6+El
+	qPj+2MuWuj/CzoppDl2U7XaeeH8PaOnNhLOqdA6cXlIDaYVScSRBPml/kewM/JvUQ+/GFCVWwXj
+	9PmfAJb9tXPMq0a6NB8dlTCZY0pkoOHwxUg==
+X-Received: by 2002:a17:90b:43:b0:396:673f:fe56 with SMTP id 98e67ed59e1d1-396d0f2dc87mr2778465a91.9.1787858806175;
+        Thu, 27 Aug 2026 12:26:46 -0700 (PDT)
+X-Received: by 2002:a17:90b:43:b0:396:673f:fe56 with SMTP id 98e67ed59e1d1-396d0f2dc87mr2778361a91.9.1787858805578;
+        Thu, 27 Aug 2026 12:26:45 -0700 (PDT)
 Received: from [192.168.1.5] ([106.222.229.32])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3283d60c2b4sm33313437eec.5.2026.08.27.12.26.35
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3283d60c2b4sm33313437eec.5.2026.08.27.12.26.42
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 27 Aug 2026 12:26:38 -0700 (PDT)
-Message-ID: <613960df-3d3d-445f-9533-57257eb5099b@oss.qualcomm.com>
-Date: Fri, 28 Aug 2026 00:56:33 +0530
+        Thu, 27 Aug 2026 12:26:45 -0700 (PDT)
+Message-ID: <f69d4f56-82c7-403e-98b9-f78b79ac5906@oss.qualcomm.com>
+Date: Fri, 28 Aug 2026 00:56:41 +0530
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -88,7 +89,8 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 0/2] i2c: Add I2C High-Speed mode support for qcom-geni
+Subject: Re: [PATCH 1/2] dmaengine: qcom-gpi: Add I2C High-Speed mode
+ configuration support
 To: Jyothi Kumar Seerapu <jyothi.seerapu@oss.qualcomm.com>,
         Vinod Koul <vkoul@kernel.org>, Frank Li <Frank.Li@kernel.org>,
         Viken Dadhaniya <viken.dadhaniya@oss.qualcomm.com>,
@@ -96,87 +98,214 @@ To: Jyothi Kumar Seerapu <jyothi.seerapu@oss.qualcomm.com>,
 Cc: linux-arm-msm@vger.kernel.org, dmaengine@vger.kernel.org,
         linux-kernel@vger.kernel.org, linux-i2c@vger.kernel.org
 References: <20260824-i2c-hs-v1-0-8dd94e5c6113@oss.qualcomm.com>
+ <20260824-i2c-hs-v1-1-8dd94e5c6113@oss.qualcomm.com>
 Content-Language: en-US
 From: Mukesh Savaliya <mukesh.savaliya@oss.qualcomm.com>
-In-Reply-To: <20260824-i2c-hs-v1-0-8dd94e5c6113@oss.qualcomm.com>
+In-Reply-To: <20260824-i2c-hs-v1-1-8dd94e5c6113@oss.qualcomm.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODI3MDE2NCBTYWx0ZWRfX+Wu8qDYmFzYl
- i7Zf6ffRJ1x5CiqA6jm/Bt7vjQfmSlx1I0g5enXlLLSDz+MIzNqxL62SG4tSqVRMvketzUyUr5w
- ZTd/bJuyqX4WvyTDWDdCvnhVnVE4RbOr2sL6qe8AJbsDK992W6FD1JuAlaAEE10mNwyVO7w0Ypb
- i3Hl7DxgXAkdFTmQrlSw18nxzEkCw4QZ4kdX1Hab9oDg3/jO7zQz8TiD+8Fzz6+J9s+R2B64gMa
- KVr/NmdGwNDXu/dzljgwzYlgfPXud8hw+6SB3Desk/WWETg7VeX5yvZqFXU9t/Djbtw4znypplr
- 4k41rO1FHpa6P4997dFKFs2LmIRYMt1sy1IzFKd6xQ2DE7JUH6o815KztK+EXkCF6iPJtPtzFBl
- spCaJP5RqOHWYKuqUCv9Sz6x8Flus9Bj0xnOfjNO1NC4ja8Wz/OSU5fd7EhzcybaP/913xqLcrj
- Mt4Sw56LIRZHJ4iRTHw==
-X-Proofpoint-ORIG-GUID: Hg6W0RrI_fqv6enYFjIo_g5wlcqMOnKr
-X-Authority-Analysis: v=2.4 cv=HfUkiCE8 c=1 sm=1 tr=0 ts=6a908f70 cx=c_pps
- a=vVfyC5vLCtgYJKYeQD43oA==:117 a=n+669z1BX7WhZ/F6bI95gA==:17
+X-Proofpoint-ORIG-GUID: QpcJmBaVZAUid0yq3qIBfj8ynSzjVGfS
+X-Proofpoint-GUID: QpcJmBaVZAUid0yq3qIBfj8ynSzjVGfS
+X-Authority-Analysis: v=2.4 cv=FpU1OWrq c=1 sm=1 tr=0 ts=6a908f76 cx=c_pps
+ a=0uOsjrqzRL749jD1oC5vDA==:117 a=n+669z1BX7WhZ/F6bI95gA==:17
  a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
- a=EUspDBNiAAAA:8 a=PWE_YMljOzt1LMCm500A:9 a=QEXdDO2ut3YA:10
- a=rl5im9kqc5Lf4LNbBjHf:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODI3MDE2NCBTYWx0ZWRfX00lF90T0klOw
- pazEYZt8erVz4r3UA9kLXLcmIWkXSrZ8sy2VKT+U73okOtMGl9B9fgLoPkD9lp1clvbJnzAKTrI
- SmglHjvhLcOPEimdiefmNEd09tr8PaQ=
-X-Proofpoint-GUID: Hg6W0RrI_fqv6enYFjIo_g5wlcqMOnKr
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22
+ a=EUspDBNiAAAA:8 a=cWZROLwJx0uAb0cS5nkA:9 a=QEXdDO2ut3YA:10
+ a=mQ_c8vxmzFEMiUWkPHU9:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODI3MDE2NCBTYWx0ZWRfX4l8UbhDKD9Zg
+ h18xMCklgynUJIxJDbfuq0qy66eJI7rYXt0Ty0Gw7DqUdH91TuH3BHn0ZEPorxL2eWYkcR0N7eI
+ edSy64a4ec3X3gT2/2j93qaU0HY1TrZsuplmtZwKPCkthfsPq23Gb47hI5YwMUwA99uufaCgp/J
+ 7BIGkr8+BIux5AWfjf3RHl2EjIjN+fAQCNgMI2KH5oLuz5tKwyd1tar5NGTZhha8TrosW6Gf4HL
+ OdYKRwV+1I6My397MPAhDilcIoUMiWSsY1GtYEc9ZxsLeweCejp/4gXYrhOtd62a9cHOEMBvaFA
+ aW72l5tMuuaKH6I7MiAZmYGDtcuXOk1LtdX+Zrb+sryR4J40dpi4VGNLAhs3YH4ozHSFcxVV/J1
+ m/9t+D8AiQHyzeIDeJk0jWj4+sBMEMXIpV0bBgiecifsOWDtoE9/X/VEwmkQQ8Y87ygP9140Deg
+ q9ewETrBHJUIUb7FT+Q==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODI3MDE2NCBTYWx0ZWRfX5nNKS1grxmZu
+ +SnIr2gysfvwO1E3i9hVkx3/dU8liDYhD9txMIC3gskl8py2most3FMyxKCNwTIIMbCLeG8ffAi
+ 2P2qGtyBBnpW+kTxmR6YoIs0DYRmSJ0=
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-08-27_08,2026-08-27_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 adultscore=0 impostorscore=0 bulkscore=0 priorityscore=1501
- suspectscore=0 malwarescore=0 clxscore=1015 lowpriorityscore=0 spamscore=0
+ clxscore=1015 adultscore=0 suspectscore=0 impostorscore=0 phishscore=0
+ spamscore=0 bulkscore=0 malwarescore=0 priorityscore=1501 lowpriorityscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608270164
 
 
 
 On 8/24/2026 4:55 PM, Jyothi Kumar Seerapu wrote:
-> Add I2C High-Speed (HS) mode support for the Qualcomm GENI I2C
-> controller, detecting HS mode requests based on a 3.4 MHz bus
-> frequency.
-
-what's the detecting here ? HS mode itself is 3.4 MHz freq.
-may be you be you can start with current support freq modes and not 
-supported.>
-> I2C HS mode is supported by the underlying QUP hardware starting with
-> QUPv3 core version 4.3 (per the GENI/QUP Hardware Programming Guide).
-> This series adds the driver support to detect that capability and
-is this detect things repeating ?> enable HS-mode transfers on SoCs 
-whose QUP core version meets that
-> requirement, rather than tying HS mode to any specific peripheral.
+> Add support in the Qualcomm GPI (Generic Packet Interface) DMA engine
+> to configure I2C High-Speed (HS) mode transfers.
 > 
-> Patch 1 (dmaengine: qcom-gpi) is for GPI DMA transfers and adds
-> a CONFIG1 TRE to the GPI DMA engine to convey HS-specific timing
-> parameters (tcycle_cnt/tlow_cnt) to the hardware.
+> Introduce support for CONFIG1 Transfer Ring Element (TRE) to convey
+> HS-specific timing parameters to the hardware. Define a new
+> gpi_i2c_config1 structure containing tcycle_cnt and tlow_cnt fields,
+> with default values of 28 and 38 respectively, as required for 3.4 MHz
+> HS mode operation.
 > 
-Patch 1 is to convey config parameters for HS mode in GPI DMA tranfser.
+Little more enhanced -
 
-> Patch 2 (i2c: qcom-geni) handles FIFO/SE-DMA transfers; It configures
-> the GENI controller's source clock and timing accordingly, and adds
-> the HS-specific FIFO/SE-DMA opcodes and master-code preamble needed
-> to switch the bus from Fast Mode Plus to HS speed.
-> 
+dmaengine: qcom: gpi: Add I2C High-Speed mode frequency support
 
-Like above just say high level in short, individual patch will add more 
-details in its commit log.
+Introduce CONFIG1 Transfer Ring Element (TRE) support to program
+I2C High-Speed (HS) mode timing parameters through the Qualcomm
+GPI DMA engine.
+
+Add a new gpi_i2c_config1 structure containing tcycle_cnt and
+tlow_cnt fields. The fields are initialized to the hardware
+recommended values of 28 and 38, enabling 3.4 MHz HS-mode I2C
+transfers.
+
 
 > Signed-off-by: Jyothi Kumar Seerapu <jyothi.seerapu@oss.qualcomm.com>
 > ---
-> Jyothi Kumar Seerapu (2):
->        dmaengine: qcom-gpi: Add I2C High-Speed mode configuration support
->        i2c: qcom-geni: Add support for I2C High-Speed mode
+>   drivers/dma/qcom/gpi.c           | 54 +++++++++++++++++++++++++++++++++++-----
+>   include/linux/dma/qcom-gpi-dma.h | 28 ++++++++++++++++++++-
+>   2 files changed, 75 insertions(+), 7 deletions(-)
 > 
->   drivers/dma/qcom/gpi.c             |  54 +++++++++++++--
->   drivers/i2c/busses/i2c-qcom-geni.c | 133 +++++++++++++++++++++++++++++++++----
->   include/linux/dma/qcom-gpi-dma.h   |  28 +++++++-
->   3 files changed, 196 insertions(+), 19 deletions(-)
-> ---
-> base-commit: 7079a12d7506b07fb53b54a664bfad5fa9b16d70
-> change-id: 20260821-i2c-hs-408768509865
-> 
-> Best regards,
-> --
-> Jyothi Kumar Seerapu <jyothi.seerapu@oss.qualcomm.com>
+> diff --git a/drivers/dma/qcom/gpi.c b/drivers/dma/qcom/gpi.c
+> index a5055a6273af..52a7800ed4f5 100644
+> --- a/drivers/dma/qcom/gpi.c
+> +++ b/drivers/dma/qcom/gpi.c
+> @@ -21,6 +21,7 @@
+>   #define TRE_TYPE_IMMEDIATE_DMA	0x11
+>   #define TRE_TYPE_GO		0x20
+>   #define TRE_TYPE_CONFIG0	0x22
+> +#define TRE_TYPE_CONFIG1	0x23
+>   
+>   /* TRE flags */
+>   #define TRE_FLAGS_CHAIN		BIT(0)
+> @@ -58,9 +59,14 @@
+>   #define TRE_I2C_C0_TX_PACK	BIT(24)
+>   #define TRE_I2C_C0_RX_PACK      BIT(25)
+>   
+> +/* I2C Config1 WD0 */
+> +#define TRE_I2C_C1_TLOW		GENMASK(9, 0)
+> +#define TRE_I2C_C1_TCYCLE	GENMASK(19, 10)
+> +
+
+Not sure why above two not looking aligned by tab
+
+>   /* I2C GO WD0 */
+>   #define TRE_I2C_GO_CMD          GENMASK(4, 0)
+
+[...]
+
+>   
+> -	/* create the GO tre for Tx */
+> -	if (i2c->op == I2C_WRITE) {
+> +	/* Create CONFIG1 TRE if requested */
+> +	if (i2c->set_config1) {
+can we move this set_config1 into else if part of set_config, above ?> 
+		tre = &desc->tre[tre_idx];
+>   		tre_idx++;
+>   
+> +		/* CONFIG1 TRE with timing parameters */
+> +		tre->dword[0] = u32_encode_bits(i2c->config1.tlow_cnt, TRE_I2C_C1_TLOW);
+> +		tre->dword[0] |= u32_encode_bits(i2c->config1.tcycle_cnt, TRE_I2C_C1_TCYCLE);
+> +		tre->dword[1] = 0;
+> +		tre->dword[2] = 0;
+> +		tre->dword[3] = u32_encode_bits(TRE_TYPE_CONFIG1, TRE_FLAGS_TYPE);
+> +		tre->dword[3] |= u32_encode_bits(1, TRE_FLAGS_CHAIN);
+> +	}
+> +
+> +	/* create the GO tre for Tx */
+> +	if (i2c->op == I2C_WRITE || i2c->op == I2C_HS_WRITE) {
+> +		u8 master_code = 0; /* Default master code for Linux EE */
+why for Linux EE ? what else could be ?> +		u32 cmd_opcode;
+> +		bool is_hs_mode = false;
+> +
+> +		tre = &desc->tre[tre_idx];
+> +		tre_idx++;
+> +
+> +		is_hs_mode = (i2c->op == I2C_HS_WRITE || i2c->op == I2C_HS_READ);
+> +
+> +		/* Determine the command opcode based on HS mode and multi_msg flag */
+Comment is mostly restates the code, would write as -
+/* Select HS-mode or standard I2C opcode. */
+>   		if (i2c->multi_msg)
+> -			tre->dword[0] = u32_encode_bits(I2C_READ, TRE_I2C_GO_CMD);
+> +			cmd_opcode = is_hs_mode ? I2C_HS_READ : I2C_READ;
+can you add explanation of cmd opcode into commit log too ? That would 
+make story describing changes.>   		else
+> -			tre->dword[0] = u32_encode_bits(i2c->op, TRE_I2C_GO_CMD);
+> +			/* I2C HS write vs Regular I2C write */
+> +			cmd_opcode = is_hs_mode ? I2C_HS_WRITE : i2c->op;
+> +
+what if i write as below, will be simplified ?
+i2c->op = cmd_opcode ; //OR can store directly into i2c->op.
+tre->dword[0] = u32_encode_bits(i2c->op, TRE_I2C_GO_CMD);
+
+> +		tre->dword[0] = u32_encode_bits(cmd_opcode, TRE_I2C_GO_CMD);
+> +
+> +		if (is_hs_mode)
+> +			tre->dword[0] |= u32_encode_bits(master_code, TRE_I2C_GO_MASTER_CODE);
+>   
+>   		tre->dword[0] |= u32_encode_bits(i2c->addr, TRE_I2C_GO_ADDR);
+>   		tre->dword[0] |= u32_encode_bits(i2c->stretch, TRE_I2C_GO_STRETCH);
+> @@ -1674,7 +1708,7 @@ static int gpi_create_i2c_tre(struct gchan *chan, struct gpi_desc *desc,
+>   			tre->dword[3] |= u32_encode_bits(1, TRE_FLAGS_CHAIN);
+>   	}
+>   
+> -	if (i2c->op == I2C_READ || i2c->multi_msg == false) {
+> +	if (i2c->op == I2C_READ || i2c->op == I2C_HS_READ || i2c->multi_msg == false) {
+>   		/* create the DMA TRE */
+>   		tre = &desc->tre[tre_idx];
+>   		tre_idx++;
+> @@ -1826,6 +1860,14 @@ gpi_prep_slave_sg(struct dma_chan *chan, struct scatterlist *sgl,
+>   	if (direction == DMA_DEV_TO_MEM) /* rx */
+>   		nr_tre = 1;
+>   
+> +	/* I2C High-Speed mode sends an extra CONFIG1 TRE ahead of the GO TRE */
+> +	if (gchan->protocol == QCOM_GPI_I2C) {
+> +		struct gpi_i2c_config *i2c = gchan->config;
+> +
+> +		if (i2c->set_config1)
+> +			nr_tre++;
+> +	}
+> +
+>   	/* calculate # of elements required & available */
+>   	nr = gpi_ring_num_elements_avail(ch_ring);
+>   	if (nr < nr_tre) {
+> diff --git a/include/linux/dma/qcom-gpi-dma.h b/include/linux/dma/qcom-gpi-dma.h
+> index 332be28427e4..6e9f09fc109a 100644
+> --- a/include/linux/dma/qcom-gpi-dma.h
+> +++ b/include/linux/dma/qcom-gpi-dma.h
+
+[...]
+
+>   
+>   /**
+> @@ -62,15 +82,19 @@ enum i2c_op {
+>    * @high_count: high period of clock
+>    * @low_count: low period of clock
+>    * @clk_div: source clock divider
+> + * @clk_src: serial clock
+source clock right ?>    * @addr: i2c bus address
+>    * @stretch: stretch the clock at eot
+> - * @set_config: set peripheral config
+> + * @set_config: set peripheral config (CONFIG0)
+> + * @set_config1: set peripheral config1 (CONFIG1)
+> + * @config1: I2C HS mode timing configuration (CONFIG1 TRE parameters)
+>    * @rx_len: receive length for buffer
+>    * @op: i2c cmd
+>    * @multi_msg: is part of multi i2c r-w msgs
+>    */
+>   struct gpi_i2c_config {
+>   	u8 set_config;
+> +	u8 set_config1;
+>   	u8 pack_enable;
+>   	u8 cycle_count;
+>   	u8 high_count;
+> @@ -78,6 +102,8 @@ struct gpi_i2c_config {
+>   	u8 addr;
+>   	u8 stretch;
+>   	u16 clk_div;
+> +	u32 clk_src;
+> +	struct gpi_i2c_config1 config1;
+>   	u32 rx_len;
+>   	enum i2c_op op;
+>   	bool multi_msg;
 > 
 
