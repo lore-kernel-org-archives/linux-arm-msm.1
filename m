@@ -1,317 +1,326 @@
-Received: from MRWPR03CU001.outbound.protection.outlook.com (mail-francesouthazon11011062.outbound.protection.outlook.com [40.107.130.62])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-lf1-f46.google.com (mail-lf1-f46.google.com [209.85.167.46])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 28E7633ADB3;
-	Thu, 27 Aug 2026 14:46:20 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=40.107.130.62
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787841990; cv=fail; b=FJT+pNh13jJ9xJhm/yiurB+CEYNE0JLV+RExQPtOx2Ofg68nxr+GuUVE8aDJZuiL23fRs3b7ir4ygeOjm6HNBoOjN1SXWFvNALLzQilXOKNAIq+NCySnTXMd6WETvbx1DCeuiMK3dlx84HmQYtloMzoJql61GerMokvFqgrNoj8=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787841990; c=relaxed/simple;
-	bh=sgwLG/D/JoOjlltNKr6VIFQyt3YJY2wY6rdSy7Tn9xY=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:Content-Type:
-	 Content-Disposition:In-Reply-To:MIME-Version; b=Aui0lYHNuTw4gOG4EWETNEMkibtPKQyOo7M9ETCX7jucYjFU3T6I94l8JeRTXCvSosfTT+77wxf4LSXIux7CJmwi89sudRCJ9BlCWPoTEG3u3BlXGER5Ug5vEWgxk6UXXjKwKUn7MO0OXMs4CZc8mUjycJxN3QQi9Ovs6tmHMtI=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.nxp.com; spf=pass smtp.mailfrom=oss.nxp.com; dkim=pass (2048-bit key) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b=hGZT+Z7t; arc=fail smtp.client-ip=40.107.130.62
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.nxp.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.nxp.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AC3CB22D4E9
+	for <linux-arm-msm@vger.kernel.org>; Thu, 27 Aug 2026 14:58:33 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.167.46
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1787842716; cv=none; b=XKRaqWZ4d7WiKR5hGrkts4p3WjXzJsQUAUoyrmQytbwiqsUgUnRfYoxwaeGoZFlUY7R3Q3T6eTxwS8LhuRwD+nES1fgDiL6X+B83TtDz92SV7VCvsBrl8+gE0Twr2Z2AlqreNpD7O1jZh8mF3kXOKvhFu7+XRyi0bl1eA3DVoBc=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1787842716; c=relaxed/simple;
+	bh=ruciOHcoWR/AumoEkGRJS7gGI475d3VyC4GciR63C+U=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=hnKlHdOijDkDKRpthUemPURNHlh6KiWFbxvF+Bbj+VKdE6hdR14IPXgOiZQj1XQ5HW9FI1PTrewN5bZjVp1YlGLFZ7gaDFSjFGgMPHAcn+sOW5wQytzi5eygLkMgPUiCOfdASzqhti9UMBVW/rJDzJ60yJR+A4X/BB6CBZ4Xh1Y=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=pSzTfLan; arc=none smtp.client-ip=209.85.167.46
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="hGZT+Z7t"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=a94ncca1qpXRF2NHR7rLDo3GhYVtoElGAIT7xrbiEQoVCT63W2uiIy8JFYhMA2wsCLEGJQ1+ZiRoqt2Yd2oUxsFvYoiMpJBGQ0VOzmFDxTNtarAuP5SL5hatEDv/y36U0gadlzr8bNbGApLBmIFUjbTITStu2CMwioMUrgaJrbM09gdMQ9ZYV3Vozh3trhoDxZA9SWMDBm8BhwEwE4F4XQ0bkJ1LdPFLmijzAuBJLeeEFiIT7B5ERVKgMPUo941Sc8MhcftYvWMtGEUCbVFSqK4gx0AbuXzV4n1pjsS1V0aMiPdVuHduWYK69rMj+qeaoT4LqxnoxryXBQLtm2esJA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=kqzHX3PjvaKGiG9oZ24IXsSCpIlD3GTPoZV7PmlD7rI=;
- b=GnvGWJWa3wTJURCEfK/S+Id8hnzZW/GOQGhOHYUXpgaixiOtjVZ+sjg1Yx6crilg4N+ZtUVnw2CIUpuGF1hZmPj38Z9VdIVojATDF5R20VimfoOoICb17t9hnPIC4GmyLCwsbh44WPzmIMVGP4umN7tW2VssHjtobZXm/bJWoDcrAeMnrUdBCK4JxyPzmBmYi4ALuNDEGZuS7oK8ggw/CmrhQdpA5uMTJhOioYGkUwsJt+hYqk6CB3pLtKe54v7yYkXlmDM45fg7nTcoRFNG7mLMBL9CB0V/4/PeFpOqK+bRUzJsE8RvjPQfnrrXBRb964iNY3Xs+RPYLTWKFCsUhw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
- dkim=pass header.d=oss.nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com;
- s=selector1-NXP1-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=kqzHX3PjvaKGiG9oZ24IXsSCpIlD3GTPoZV7PmlD7rI=;
- b=hGZT+Z7tpJROWu6/UAUjr1rFMTFVEC+hyDfmKou2qccWlo9UeB1LnR/6l7/4k2laJGKt4+izkWUtrRzSpPctJdNrDx3ivEqP5KRugTgZQSwmFklXZs+dI12Mli4feI8YhQoCGlDcfdg0xn2VvG/5gknV08jtodh+w3TRFvYHDQGA3gE0jL5CwU2YpZLQWvi2oLL/tg1SM74ZHjepf8kJ5SNJlcbewElQILCNRFFZWMHXfEpL5MwQAQ+NtJfsHG4xi5oR9QgY7HkRCAG5pYq3HNjOIIB5h9hvuPOF4pArHzQQ6Z2bZ6n5IZiyrWD6wVDONQLlPfzD33ssNatnQboyMw==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=oss.nxp.com;
-Received: from GV2PR04MB11799.eurprd04.prod.outlook.com (2603:10a6:150:2cf::9)
- by PA1PR04MB10817.eurprd04.prod.outlook.com (2603:10a6:102:485::16) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.339.12; Thu, 27 Aug
- 2026 14:46:11 +0000
-Received: from GV2PR04MB11799.eurprd04.prod.outlook.com
- ([fe80::2146:83a2:5329:b7c]) by GV2PR04MB11799.eurprd04.prod.outlook.com
- ([fe80::2146:83a2:5329:b7c%7]) with mapi id 15.21.0360.008; Thu, 27 Aug 2026
- 14:46:11 +0000
-Date: Thu, 27 Aug 2026 09:45:59 -0500
-From: Frank Li <Frank.li@oss.nxp.com>
-To: Larisa Ileana Grigore <larisa.grigore@oss.nxp.com>
-Cc: NXP S32 Linux Team <s32@nxp.com>, Alim Akhtar <alim.akhtar@samsung.com>,
-	Avri Altman <avri.altman@sandisk.com>,
-	Bart Van Assche <bvanassche@acm.org>, Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>, Frank Li <Frank.Li@nxp.com>,
-	Sascha Hauer <s.hauer@pengutronix.de>,
-	Pengutronix Kernel Team <kernel@pengutronix.de>,
-	Fabio Estevam <festevam@gmail.com>,
-	"James E . J . Bottomley" <James.Bottomley@hansenpartnership.com>,
-	"Martin K . Petersen" <martin.petersen@oracle.com>,
-	Sai Krishna Potthuri <sai.krishna.potthuri@amd.com>,
-	Ajay Neeli <ajay.neeli@amd.com>,
-	Manivannan Sadhasivam <mani@kernel.org>,
-	Pedro Sousa <pedrom.sousa@synopsys.com>, clizzi@redhat.com,
-	aruizrui@redhat.com, eballetb@redhat.com, echanude@redhat.com,
-	linux-scsi@vger.kernel.org, devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org, imx@lists.linux.dev,
-	linux-arm-kernel@lists.infradead.org, linux-arm-msm@vger.kernel.org
-Subject: Re: [PATCH 06/10] dt-bindings: ufs: Add compatibles for S32N79 Host
- Controller platform driver
-Message-ID: <apBNp1ybnHsNrHSL@SMW015318>
-References: <20260826134048.854748-1-larisa.grigore@oss.nxp.com>
- <20260826134048.854748-7-larisa.grigore@oss.nxp.com>
- <ao75lU2zYDeOZi2f@SMW015318>
- <ccacc3bc-7f81-4363-a273-a6076e468618@oss.nxp.com>
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <ccacc3bc-7f81-4363-a273-a6076e468618@oss.nxp.com>
-X-ClientProxiedBy: SA9PR13CA0178.namprd13.prod.outlook.com
- (2603:10b6:806:28::33) To GV2PR04MB11799.eurprd04.prod.outlook.com
- (2603:10a6:150:2cf::9)
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="pSzTfLan"
+Received: by mail-lf1-f46.google.com with SMTP id 2adb3069b0e04-5aeb7ccb9f0so216531e87.0
+        for <linux-arm-msm@vger.kernel.org>; Thu, 27 Aug 2026 07:58:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google; t=1787842712; x=1788447512; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from:references
+         :cc:to:subject:user-agent:mime-version:date:message-id:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=ACbKtE14I/cMHm34yNKa84YaRHvuYaEQivDRdwGd6eA=;
+        b=pSzTfLanu+KTkz6zLXCAzXlWdwrWmeIbokq07AJZ3a4aYgkk+Ev6s1L1cqynUDHFLH
+         xBD83hBvrUw5+tecoZhRV5paHvgiha2eVvgCbCaZVM4XnCjFsDpZ5JBK1x0m4gF05i2s
+         osENhqJiRLL3mkk1kb+fXT8bgfaNvYBg8wB4BX8nGg/GSvKzW5qBb3uk8vr3/UapLV5+
+         UEdG0MC7PH8tIod5wldORHPF/aUG7xOY0kIGrHJotfQSE8bRoEawfdwqKUcDSv0PwGO7
+         eiJ9ud6Cy9nIbquF0H63UXGKwis4O5wjtA4k8AHy0SgUvSSyb3EZOtR1ZrGZ4l4rMCnM
+         adWg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1787842712; x=1788447512;
+        h=content-transfer-encoding:content-type:in-reply-to:from:references
+         :cc:to:subject:user-agent:mime-version:date:message-id:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=ACbKtE14I/cMHm34yNKa84YaRHvuYaEQivDRdwGd6eA=;
+        b=AcqkC7kJoOjLj/rgHhjiKLWbyVb/VrfIoMjLxpzy2dyUMGqrZI2W2fgvYm5/eYcxRO
+         wYid6MyAyFQjSRmDskMJ+Rhp8kX9LoOsDbuWvCj88gI7oxf30roPnw3tXwVu70n0rK+h
+         xDhtGZu5LNMfs64XTWYy4Pym749GAIs4JIQMpkUdCIfZSm9bnG80vFtGH7rwufl4jmFj
+         WulDV2RoUZ96JDfL3qtA9QW5E9eFtBI1i/HqCQTdz26+gKVZvaxrhUvzbusXa4weSmWJ
+         iawvXfVdnT0lZM0lKZrGJ4QGqAeaqMbLsY+2LUPuHxxht5/J85KqwZd6jDHZM/1Z9+no
+         W6bQ==
+X-Forwarded-Encrypted: i=1; AHgh+Rr0GnH5VpF+7+MoLSGUi+4M6u3FWPrRQ2EWZgNj6BeU8jyQCdx81xzff/SpIL8syDzW69mRqOdcpQz6IScH@vger.kernel.org
+X-Gm-Message-State: AFuF++npXL3uNLSSf8lJbo2I7Itgh3Eg5zROrR9Lqg3cq2MDRhkbW+aX
+	qzmbRPZ019P/ee/Z511Ls3tTsv0X+9gifsChwJONOO50WA1BtbuJpIDgJo0iMjeyMld0Bmh35jt
+	Uzsa7zHU=
+X-Gm-Gg: AR+sD13AzPZVbX+4zwXj4tK6FF7vdJm/Hed3OgWGU0CKKcO2JB+aVCAtOAwiqHsO1Hg
+	WLo5VLcKt7gF+Er3bewxZ6eL/+Qh0m5apFWsIQsjK4+q0WIA2JTsD0W9CviL37RAHHGTrv/nAuf
+	N8AR1M9jI7ddLpsIu0QvKhYmj/Dxr68LOkrDyzsFDBdCntid5TtKZ/89aVd0nrLEZlzBNIYtF/N
+	8HJHUr0hFI4UFzW8YdEEjcpkAljMlOhadVJ7mKlgoDOk7VzVC32a5fz93i8H4FlV3g+RMXHQr99
+	Tqt6awW/cou28ziZmd0C2mQrz2gwj+F06kdiXg843S4xUV1GEDgtuyqlr9rdDP42U7MZodjexCX
+	VkTZnZ8k4BqZt1SjoRQ3MVlkbimlRM5HkIB5k6QEsGowNWnWZ5JZklezrdyfcG6nu23NLWDIgkD
+	fJVmeOO1GDIvrlIXJUajl1SvQtbTo+he8SgMPau8TTe2nIRiOQk1k3zfUNyJ0fiylvuL9nLmGGr
+	KA+/rXticVDrCDgyYSYqA7utfr5vB+MsuaK+IQAPQ==
+X-Received: by 2002:a05:6512:224c:b0:5b4:59a3:c67 with SMTP id 2adb3069b0e04-5b4af823f98mr1552489e87.3.1787842711360;
+        Thu, 27 Aug 2026 07:58:31 -0700 (PDT)
+Received: from [192.168.1.100] (91-159-24-186.elisa-laajakaista.fi. [91.159.24.186])
+        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5b4a41a2958sm1345681e87.44.2026.08.27.07.58.30
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 27 Aug 2026 07:58:31 -0700 (PDT)
+Message-ID: <abdfd5c1-1965-492b-bd02-13452278704e@linaro.org>
+Date: Thu, 27 Aug 2026 17:58:30 +0300
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: GV2PR04MB11799:EE_|PA1PR04MB10817:EE_
-X-MS-Office365-Filtering-Correlation-Id: d475b4d6-55ef-4164-434e-08df0449ef7f
-X-LD-Processed: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635,ExtAddr
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
- BCL:0;ARA:13230040|23010399003|19092799006|376014|7416014|1800799024|366016|10067099003|56012099006|4143699003|6133799003|11063799006|3023799007|18002099003|22082099003;
-X-Microsoft-Antispam-Message-Info:
- GEoqqsc7FCzhDFvzXk3gtCthSTgIkn9jrsBYQi7Z5O5Xb/YVs3qbUvp9k60cnDred3jNFCVILV3V4GIVfmF/fFsaC+l1XSxgEhTd57JVyD+nLKbMGOLgE7tMjpiwLw/Zo2X4wXu9hG+HW1mFhmTTlazVTdep10bZ3q3oN4d+ij5b4uRc04O8hSJh51WaGFesLwf3CAyORB55NZ+tCdaq5RWNyRZ8B/cN/wgLscstdKqTEFYnZ6GD+nQljAQNj0tjK1Gg0EyKyLGhFKD6fJMs16fk2hdQrz8MvvcLYqJngC9RSDuGUiR/R0pfHmpWzWXuMXegIfDLgcIOFgN+/XFv9ApRfQazu3OE0TyxAzeBefXubgoeq0DhNGOxRATF7CluylO2lCBsF7/hQbeIpnRzUlBr1exuwfxNAoqFemphUFYZ1e8PhN8AfnjNrxTrRM5SHGkW8CBSt1ULHMnprgFdqnHSCTvjXL9kH9PqLlCK0rvFeImP5xBNa9Nj6RDHPt28L7bBBZnrIDgwDd6IoPRnUM7wWOMq4XF7FOPX7IGHvL1MXH1ZDSwGuZUqw1GRgvxRthLH6C4q0znYEJBupJqoWwbi3whwbUz8Z0ZLMdIDcmtVGoHRFFuTMv1ZTUFa2Pl5
-X-Forefront-Antispam-Report:
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:GV2PR04MB11799.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(23010399003)(19092799006)(376014)(7416014)(1800799024)(366016)(10067099003)(56012099006)(4143699003)(6133799003)(11063799006)(3023799007)(18002099003)(22082099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
- =?us-ascii?Q?kHYV2sMVG9r0PwAKxwg3mYOL1R8HdKtsar4h4Vs11KJoyfQIkA/8CNl176Pp?=
- =?us-ascii?Q?X6sGgYdX3s6Jg/Iil47UPp4xEmP95w6wUnpDFOit2t3Fz5TSpG+nGVfkIu4F?=
- =?us-ascii?Q?JQew7hGslrIw+rFFTYF9CVIOkzUWWMYutQkI2AoblLsXc7aTYeU6XvP4Pzp7?=
- =?us-ascii?Q?1Kn8o4FX7D9/OkxyBi3bZRI7r7i2ci9Llkzr2GI7t0dSus/iGj4xMPY4Q3HZ?=
- =?us-ascii?Q?cIJuw4lPrNGs2UXeSP48snphO/Vl7Mmbj9FQfn1c83p/MziWQnEqN5STqwbr?=
- =?us-ascii?Q?5jd9G24IYbhptvGZjyMBdD+Gw0eY9QPu4dnTdAFS3LczXin0bcFriPrnOzK4?=
- =?us-ascii?Q?hc/OVtVoK2mAPSX2lEA5UgiYekC6CXA1XqbUCZlQA3HVR7rewEM88GehU+hy?=
- =?us-ascii?Q?vYUEII2smM24cMjs1j5Ml7Eas1iEbBrVQBgwK8SJJjIeVAt4Tk2+wayHCC6L?=
- =?us-ascii?Q?rsLcDpYtY0rScf+BnDe8W8ukkCZgk3/vVasntwZxb5mDkB6fWgaXsDPocaGA?=
- =?us-ascii?Q?TKnpUrjelvwIc49GZN3E+5gGxHgLwNQwpmPvSMBwuycJ4BjRZZSiSJF5vC99?=
- =?us-ascii?Q?tY1IVVGr3c/HiI8H/RtimceH3TZEzZxpyaHO1dA3RxP6+72u1Ys8GiVQyHGS?=
- =?us-ascii?Q?75DzR92wzke2Dx70WBwkdowOMCRnq/6SZJOjHukEcW1AqYw1jZyOQepzxSEF?=
- =?us-ascii?Q?EyXAZd7VzgR9khuzK2Zzd+Px9NH7dCTNBTw9GuQJTlpYF0C2Jejuksy5Q57h?=
- =?us-ascii?Q?RXqFgy3fIDGiyT0vHU9aw7WuuI7C3qVMcmiAIDF3/Zw1ykIIF5OAiQlHmlbQ?=
- =?us-ascii?Q?loKOdf2wWzvnbleT6kkS6iyBRWSaXMnpDxC95lfhOtdaBGC/4VE26NcEcfjx?=
- =?us-ascii?Q?4+rK8C01WF7T+kXmjFEErXo2Q3rXRmP/gyWaNund6DsdtJWyxLKAmt9JouIh?=
- =?us-ascii?Q?ADE9LZMyQnZxY30UnS3u8/Yoyv7f+yZN5+mAiwwmmA9iqzyVZyP8mWnIxf4C?=
- =?us-ascii?Q?vX9ynsMIgeUmrb8eGUd3bW3pa6+n1+JSso00RKHePmFllI7Ayc5/+bXDGX4x?=
- =?us-ascii?Q?uqG9Vh7REJl2BHm6+LCVYpsQb/5oX4nWp9wf9d1OEFo0LwX8CpsOnZHp0wbi?=
- =?us-ascii?Q?as65D4n38QxOs6JqBFAGnW4mCSGgiTBCgzorB9rbwTE57cSfyqp9e2tPKVu+?=
- =?us-ascii?Q?p0V9smE+oJA4dunls1MHKSuR52ZXdmKGIHpo9NgyqAhVStyP0HG9E0ieR6TQ?=
- =?us-ascii?Q?UEXgvvAok737ZkOLuBIiyY4fVbTtQmSrV0B7jZuOg19zWjluRGy+yKuLx4Cw?=
- =?us-ascii?Q?gb+PEn3fxq5VikKaOfwfSqn8yg+jhE6F3b6UHZITdlv8jOjzOZDraTFHvot/?=
- =?us-ascii?Q?hzr19PnIyK6Uq0PuwuXeFUkg3/V0bDDJ9Z5Mk8tVA23tHzzZns+ZkZBGT6qJ?=
- =?us-ascii?Q?3KzsFKz6tpdfjnIuomqsjt9FcgBCYLVZ5wBSEIcHEDG33q/kta2bBkPE2iw1?=
- =?us-ascii?Q?tNqqw7NVZIwP+jseKCU64Tj45HyOEdTesy/AjX0Ptr8rXTecfW+RZd77Cgfg?=
- =?us-ascii?Q?MfKEGVPmVz1/f28v07WFHuelX7k/gm5Ta5QJIeUtZKIIXpPEXQaYF4mH1s9X?=
- =?us-ascii?Q?oKI62vVouoCIHQWpu7xfgZ2swaQOsnWNnbRyO9jvTtBDuI8WhDSos9TR4l3o?=
- =?us-ascii?Q?W/tXbPt+qWD0RovMdcuR6+mQxOlCs3IYXA9VY6aq5vkrFwbPkohL42S2YwJu?=
- =?us-ascii?Q?dJVSdnLe9dbcIbBkUXomkklSWS7Jl3Q3auQkT4/MtWzIeJfF2u6M?=
-X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: d475b4d6-55ef-4164-434e-08df0449ef7f
-X-MS-Exchange-CrossTenant-AuthSource: GV2PR04MB11799.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Aug 2026 14:46:11.4806
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: qJLHFjGCnVcj4wE3PBb7NEYSsi+0Z6vyFuF13ulSuoj6nYc3Sw+s5xc8N6/ztG8N4q1lopInl9s23CUPECt6AyGpKu9Z0w3DrETheQVqM8liNaYD8XZdOua4s9Z+i8Vp
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA1PR04MB10817
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/2] clk: qcom: common: Tune clock controller dependency
+ on runtime PM framework
+To: Abel Vesa <abel.vesa@oss.qualcomm.com>
+Cc: Bjorn Andersson <andersson@kernel.org>, linux-arm-msm@vger.kernel.org
+References: <20260826112021.1455707-1-vladimir.zapolskiy@linaro.org>
+ <20260826112021.1455707-2-vladimir.zapolskiy@linaro.org>
+ <r3nxoo4w56oiyhbs6ysdh3rzfntwwk75m4csktar2hoxdhmfmu@rh4ghbaav4lu>
+ <5c5a5617-1a74-435c-bff8-8813e4acc5b7@linaro.org>
+ <6xbm6uq266y42ga54wkdn6364gjj44v4mmsjg53rhfi4e7rzmq@i2uwudm7pxcf>
+ <a144bd80-f49a-42bc-90ef-a114467e4b39@linaro.org>
+ <tpoqvfsrny7xqykjevjiyyuctwceenfjry6pf6zbwf2yg5hi7j@5rq554qe7ghj>
+ <b74c2990-ad2a-4ec3-b7e3-e78797c3d4e0@linaro.org>
+ <zvs72iseaipj5ouljgrivq2y2cv245kt37gjavbh26he4576iu@d67g25es7ojs>
+From: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>
+In-Reply-To: <zvs72iseaipj5ouljgrivq2y2cv245kt37gjavbh26he4576iu@d67g25es7ojs>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Thu, Aug 27, 2026 at 05:36:27PM +0300, Larisa Ileana Grigore wrote:
-> On 8/26/2026 5:35 PM, Frank Li wrote:
-> > On Wed, Aug 26, 2026 at 03:40:44PM +0200, Larisa Grigore wrote:
-> > > [You don't often get email from larisa.grigore@oss.nxp.com. Learn why this is important at https://aka.ms/LearnAboutSenderIdentification ]
-> > >
-> > > Document the device tree binding for the NXP S32N79 DWC-based UFS host
-> > > controller which is compliant with JESD-223D "Universal Flash Storage Host
-> > > Controller Interface" v3.0.
-> > >
-> > > The controller requires access to the SCM register block and the core
-> > > clock rate when M-PHY initialization is performed. Add the optional
-> > > nxp,mphy-boot-mode property to select the M-PHY firmware execution
-> > > environment.
-> > > Currently, the M-PHY firmware can only run from ROM. If the property is
-> > > omitted, M-PHY initialization is assumed to be handled externally.
-> > >
-> > > Signed-off-by: Larisa Grigore <larisa.grigore@oss.nxp.com>
-> > > ---
-> > >   .../bindings/ufs/nxp,s32n7-ufshc.yaml         | 99 +++++++++++++++++++
-> > >   1 file changed, 99 insertions(+)
-> > >   create mode 100644 Documentation/devicetree/bindings/ufs/nxp,s32n7-ufshc.yaml
-> > >
-> > > diff --git a/Documentation/devicetree/bindings/ufs/nxp,s32n7-ufshc.yaml b/Documentation/devicetree/bindings/ufs/nxp,s32n7-ufshc.yaml
-> > > new file mode 100644
-> > > index 000000000000..d9d5669be313
-> > > --- /dev/null
-> > > +++ b/Documentation/devicetree/bindings/ufs/nxp,s32n7-ufshc.yaml
-> > > @@ -0,0 +1,99 @@
-> > > +# SPDX-License-Identifier: GPL-2.0-only OR BSD-2-Clause
-> > > +%YAML 1.2
-> > > +---
-> > > +$id: http://devicetree.org/schemas/ufs/nxp,s32n7-ufshc.yaml#
-> > > +$schema: http://devicetree.org/meta-schemas/core.yaml#
-> > > +
-> > > +title: NXP S32N79 Universal Flash Storage (UFS) Controller
-> > > +
-> > > +maintainers:
-> > > +  - Larisa Grigore <larisa.grigore@oss.nxp.com>
-> > > +
-> > > +# Select only our matches, not all jedec,ufs
-> > > +select:
-> > > +  properties:
-> > > +    compatible:
-> > > +      contains:
-> > > +        const: nxp,s32n79-ufshc
-> > > +  required:
-> > > +    - compatible
-> > > +
-> > > +properties:
-> > > +  compatible:
-> > > +    items:
-> > > +      - const: nxp,s32n79-ufshc
-> > > +      - const: jedec,ufs-3.0
-> >
-> > Any place actually use this fallback?
->
-> You're right Frank! I will switch to `jedec,ufs-2.0` in v2.
->
-> >
-> > > +
-> > > +  reg:
-> > > +    minItems: 1
-> > > +    items:
-> > > +      - description: UFS Host Controller registers
-> > > +      - description: System Control Module registers
-> > > +
-> > > +  reg-names:
-> > > +    description: |
-> > > +      Names for the register regions. The first entry must be "ufshc".
-> > > +      The second entry "scm" is mandatory only when nxp,mphy-boot-mode
-> > > +      property is present.
-> >
-> > you already us if - else branch to restrict this limition, needn't
-> > description here.
->
-> Thank you! Will drop reg-names description in v2.
->
-> > > +    minItems: 1
-> > > +    items:
-> > > +      - const: ufshc
-> > > +      - const: scm
-> > > +
-> > > +  clocks:
-> > > +    maxItems: 1
-> > > +    description: UFS core clock
-> > > +
-> > > +  clock-names:
-> > > +    items:
-> > > +      - const: core_clk
-> >
-> > Needn't suffix _clk, just "core", generally needn't clock-names if only
-> > one clocks.
->
-> I will rename it to "core" in v2, if that works for you.
->
-> > > +
-> > > +  nxp,mphy-boot-mode:
-> > > +    description: |
-> > > +      MPHY initialization mode. Defines how the MPHY firmware should be
-> > > +      initialized and executed during UFS controller startup.
-> > > +      If this property is not specified, MPHY initialization will be skipped.
-> > > +    $ref: /schemas/types.yaml#/definitions/string
-> > > +    enum:
-> > > +      - rom
-> >
-> > why not use standard "phy" property, if no "phy" means ROM init it.
->
-> First, apologies for not including enough background in the commit message.
->
-> On the S32N79, the M-PHY firmware can be brought up in one of three ways,
-> selected through the SoC's SCM MPHY_RAM_CONFIG_STATUS register:
->
-> 1. running MPHY from internal FW ROM,
-> 2. running MPHY from a (modified) FW ROM copy in external SRAM, or
-> 3. running MPHY from a FW image in external SRAM.
->
-> `nxp,mphy-boot-mode` was introduced to select which of these boot sequences
-> the controller driver programs. Today only option 1, "rom", is implemented
-> and validated, but the property was meant to leave room for the two
-> SRAM-based modes.
+On 8/27/26 14:36, Abel Vesa wrote:
+> On 26-08-27 01:41:31, Vladimir Zapolskiy wrote:
+>> On 8/26/26 16:05, Abel Vesa wrote:
+>>> On 26-08-26 15:33:02, Vladimir Zapolskiy wrote:
+>>>> On 8/26/26 15:10, Abel Vesa wrote:
+>>>>> On 26-08-26 14:50:03, Vladimir Zapolskiy wrote:
+>>>>>> On 8/26/26 14:31, Abel Vesa wrote:
+>>>>>>> On 26-08-26 14:20:20, Vladimir Zapolskiy wrote:
+>>>>>>>> A clock controller driver is expected to be embedded into runtime
+>>>>>>>> PM framework iff there are specified power domains to supply the clock
+>>>>>>>> controller. If there is no power domain, then it's a noop to add
+>>>>>>>> the driver into the runtime PM framework, and if there is a power domain,
+>>>>>>>> the dependency can be considered using this fact rather than relying on
+>>>>>>>> a probably stale data from a particular clock controller device driver.
+>>>>>>>>
+>>>>>>>
+>>>>>>> I don't think this is right.
+>>>>>>>
+>>>>>>
+>>>>>> Please elaborate what is wrong in the statement above.
+>>>>>
+>>>>> Enabling runtime PM just because there is a power domain attached to it
+>>>>> is prone for breaking consumers. If for whatever reason the power
+>>>>> domains parent child relationship isn't right, the child PD vote might
+>>>>
+>>>> If so, it's a bug on the consumer's side, likely this is unrelated to
+>>>> this particular change, and it should be fixed independently from this
+>>>> changeset.
+>>>
+>>> Providers establish the parent child relationships for power domains.
+>>> Consumers don't need to be aware of a specific PD being the child of
+>>> another.
+>>>
+>>>>
+>>>> To be precise, I don't see any interference between this series and
+>>>> any side fixes, the changes can coexist IMO.
+>>>
+>>> This change basically says "look, there is a PD attached, lets enable
+>>> runtime PM".
+>>
+>> Exactly, this is the expected situation to enable runtime PM if there
+>> is an attached PD, this is normal, and it means the change is correct.
+> 
+> Wrong. There are tons of devices that cannot do runtime PM, yet they need a PD
+> attached to be able to function.
+> 
+> This is why genpd doesn't try to enable runtime PM by default, just
+> because there is a PD attached.
+> 
+>>
+>>> But if genpd is missing information about the hierarchy,
+>>
+>> Sounds like a bug.
+> 
+> Yes. But most of the platforms still don't have an issue unless runtime PM
+> gets enabled. And you are basically enabling runtime PM on all clock
+> controllers with a PD attached, unaware of the consequencies.
+> 
+> This has been my point from the start.
 
+My intention is to keep the change small and identical for all clock
+controllers. But if some clock controller driver is known to be broken
+I'd like to know it looking at its driver, however right now there
+is no distinction between two cases of ".use_rpm = false":
+1) there is no PD, and therefore runtime PM is not needed,
+2) there is PD, but the driver is broken in a way, that runtime PM can
+not be enabled.
 
-You need define all options in binding.  who load FW?
+The problem of distinction of these two cases is resolved by inverting
+the "use_rpm" flag, and, of course, manually mark all broken drivers
+thereafter.
 
-Frank
+>>
+>>> enabling runtime PM could potentially leave the child PD unpowered due
+>>> to parent being powered off.
+>>
+>> Sure, but it is not runtime PM enablement to blame, it's another problem
+>> to be fixed in the driver.
+> 
+> So basically, you break all platforms and then we need to fix the PD
+> hierarchy on all? I'd suggest we go the other way around:
+> First we fix PD hierarchy, then we can get rid of this flag, if needed.
 
->
-> Given this setup, what would you suggest as the appropriate DT
-> representation? I would greatly appreciate any guidance you can provide.
->
-> > Frank
-> > > +
-> > > +required:
-> > > +  - compatible
-> > > +  - reg
-> > > +
-> > > +allOf:
-> > > +  - $ref: ufs-common.yaml
-> > > +  - if:
-> > > +      required:
-> > > +        - nxp,mphy-boot-mode
-> > > +    then:
-> > > +      properties:
-> > > +        reg:
-> > > +          minItems: 2
-> > > +        reg-names:
-> > > +          minItems: 2
-> > > +      required:
-> > > +        - reg-names
-> > > +        - clocks
-> > > +        - clock-names
-> > > +    else:
-> > > +      properties:
-> > > +        reg:
-> > > +          maxItems: 1
-> > > +        reg-names:
-> > > +          maxItems: 1
-> > > +
-> > > +unevaluatedProperties: false
-> > > +
-> > > +examples:
-> > > +  - |
-> > > +    ufshc@4ac80000 {
-> > > +        compatible = "nxp,s32n79-ufshc", "jedec,ufs-3.0";
-> > > +        reg = <0x4ac80000 0x1000>, <0x4ac40000 0x1000>;
-> > > +        reg-names = "ufshc", "scm";
-> > > +        interrupt-parent = <&irqsteer_coss>;
-> > > +        interrupts = <211>;
-> > > +        clocks = <&sys_clk>;
-> > > +        clock-names = "core_clk";
-> > > +        nxp,mphy-boot-mode = "rom";
-> > > +    };
-> > > --
-> > > 2.43.0
-> > >
-> > >
->
+I'll revert the flag, so that it becomes a proper quirk flag for broken
+drivers instead of serving as a questionable "quality control passed"
+function.
+
+>>
+>>>>> not trickle down to the parent PD. So if runtime PM suspend happens, it will
+>>>>> drop the vote on its PD just because the genpd tree is missing stuff.
+>>
+>> This is expected and it's a totally valid behaviour.
+> 
+> So consumers crashing when some clock controllers do runtime PM is
+> expected and valid behaviour? Again, we need to make sure enabling
+
+It's an absolutely expected and wanted behaviour for the PM framework to
+turn off the power, if there is no consumers. It's someone's else mistake,
+if the hierarchy is not described properly.
+
+> runtime PM for a provider does not leave consumers hanging due to
+> missing parent-child relationship in the genpd tree.
+> 
+>>
+>>>>> And you're enabling runtime PM for all controllers that have a PD attached,
+>>>>> even for those that do not have the use_rpm set to true currently (e.g.
+>>>>> Eliza).
+>>>>
+>>>> What is the point of specifying 'power-domains' property for Eliza GCC,
+>>>
+>>> Having a 'power-domains' property in DT node, doesn't mean the device
+>>> has to do runtime PM implicitly. The reason a PD gets attached to a
+>>> DT node is to make sure that PD gets enabled and stays enabled for the
+>>> device to be operational. Runtime PM is just a great way of reducing
+>>> power consumption when the device is idle.
+>>
+>> A proper runtime PM enablement in a driver ensures this "PD gets enabled
+>> and stays enabled for the device to be operational" target, no contradiction.
+> 
+> But it is not proper runtime PM yet. Not until we make sure genpd tree
+> is accurate. Enabling runtime PM in bulk isn't a good idea.
+
+Okay, I'll invert the flag and mark all incomplete in sense of runtime PM
+support drivers by the new value.
+
+>>
+>>> So GCC needs the CX PD attached otherwise RPMh could drop the vote and
+>>> result either in undervolt or actually failed reg access.
+>>
+>> Is it going to be fixed one day, so the drivers earn "use_rpm", or not?
+> 
+> Yes. I'm already working my way up through clock controllers, accross all
+> platforms, attaching PDs where missing and enabling runtime PM one
+> provider at the time. Even with this approach we might break stuff on
+> some platforms, but at least we can revert that single commit, if
+> necessary, instead of one that applies to all.
+> 
+>>
+>> So far I get an impression that all these reasonings above are unrelated
+>> to this change, it sounds like there is no problem in the runtime PM
+>> framework, and something else is broken
+> 
+> You insist on breaking all platforms with this patch just because of
+> it's a nice rework. I'm trying to prevent breaking all plaforms.
+
+No worries, I'll take care that there will be no regressions.
+
+> Again, first we fix genpd tree and enable runtime PM one provider at the
+> time. Then we can rework this and drop the use_rpm entirely. That way is
+> less hassle to debug and easier to pinpoint a commit that enabled
+> runtime PM via the use_rpm flag for a single provider, rather than having
+> to revert this patch that does this in a bulk.
+> 
+>>
+>>>> if it is anyway explicitly ignored by the driver? It sounds like anattempt
+>>>> to cloak a bug, and if it is necessary before the bugs are got fixed, then
+>>>> the 'use_rpm' flag shall be inverted to 'do_not_use_rpm' flag for broken
+>>>> platforms.
+>>>
+>>> Well, when you add support for a new platform, usually you don't enable
+>>> runtime PM by default for these controllers,
+>>
+>> Why not?
+> 
+> Because runtime PM is usually an extra effort, on top of the existing
+> functionality of a driver. Specially for a resource provider. Done
+> wrong, you break all consumers.
+> 
+>>
+>> So, today there is a flag to mark a properly supported platform like it
+>> is a wonder.
+> 
+> No, it is a generic way of enabling runtime PM.
+> 
+> If this generic way would've not existed, you would've not added runtime
+> PM APIs calls for all providers in a bulk way, right?
+> 
+>>
+>> As I said above, a properly supported platform/driver shall be the norm,
+>> and an ill platform should be marked as broken, and the quirk, if needed,
+>> should be inverted to the yelling 'do_not_use_rpm, I'm broken in upstream'.
+> 
+> It's like saying genpd framework should enable runtime PM by default for every
+> device, and provide a flag like 'do_not_use_rpm'. That would be bad all around.
+> 
+> Again, in general, just because there is a PD attached, doens't mean
+> that that device has to do runtime PM. That's why genpd framework doesn't make
+> such assumptions either, but rather gives you an API to add it yourself,
+> if the device can actually do runtime PM.
+> 
+>>
+>>> until you made sure that it actually works. So use_rpm is basically
+>>> saying: "we're good with runtime PM now". So I'd not revert the flag either.
+>>
+>> I belive it's wrong to mark "good" drivers/platforms as "good" ones
+>> explicitly, the purpose of quirks is totally opposite.
+> 
+> You are thinking of this the other way around. Again, if the Qualcomm
+> common clock implementation would've not existed, the we would have
+> added runtime PM API calls all over each provider, one at the time.
+> 
+> The benefit of the Qualcomm common clock implementation is that it
+> basically takes care of calling RPM for us.
+> 
+>>
+>> If a complete removal of the flag is not possible due to "broken" drivers,
+>> then I'll invert the flag in v2, and then remove it for the clock drivers,
+>> which does not require explicit PDs to be enabled at all.
+> 
+> Why?
+> 
+> Again, RPM is not a given in any scenario. Proper RPM is done per
+> driver, after the driver brings the device into a functional state,
+> therefore an extra step, sometimes even impossible for some devices.
+> 
+> Inverting it will just force us to add the flag from the start for each new
+> provider until we figure out properly the PD tree for that platform.
+> 
+> The value of this patch is outweighed by the current functionality of
+> all platforms. Taking this in will most likely break that.
+> 
+> Due to this facts, I think this should not be merged. But it's up to Bjorn.
+
+v1 should not be merged.
+
+I'll send v2 though, since there is a problem I need to resolve, namely,
+as I've said above, there is a need to separate the clock drivers without
+PDs, which are excluded from runtime PM due to this reason, and the clock
+drivers with PDs, which are excluded from runtime PM due to their incomplete
+support.
+
+Thank you for review and fruitful discussion!
+
+-- 
+Best wishes,
+Vladimir
