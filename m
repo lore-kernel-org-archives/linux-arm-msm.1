@@ -1,216 +1,301 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6101C3CBE89
-	for <linux-arm-msm@vger.kernel.org>; Thu, 27 Aug 2026 08:13:24 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 453B5361978
+	for <linux-arm-msm@vger.kernel.org>; Thu, 27 Aug 2026 08:24:47 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787818408; cv=none; b=TU89aYzvYutXwjI9DBCG3cXP3zSal6zUs3xuzoPbEyXdBmHjOtuiPCBRp1kVzlO55ehtRhSTse95Am9JzWrjE0WeplmNYmhj8yU4nf9JYme7Oooe8GQlRSvkPcCekRYStIBBopRte+50cJaKnSfnk2FNRrqlDzoaXdb3toRLWEg=
+	t=1787819088; cv=none; b=t8zuqyed3kmW9QRtxVeq5X2JrWJiOSYQ9Bc+cyCb4YmjMJ8LWmZG++Eovdocdg+dEaQ3VrsWe2OV42Jcj+KnFL8b5SWIMtLI2WVrDLxKhiBzUZMFMQlPnHp/SXO1KXwP+bivh/mjzqAYfOZfjAq+E8Ht4dGAW1J1Gk7c8qDF6iA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787818408; c=relaxed/simple;
-	bh=t8GjYgE6EMM19F6RxsbIprvmjnmTi3x/F720AMusbb0=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=N28REoD/e7I0YuL2SbMVlNSJ5ClXxEiCfD9b3V9ed7OAYB9cj5odXsDwXe6aQ+AwQ/urMYun953eOXGpqrNb+EL73A0s1SltQpCCQwB+Ap2m4WMDIMItBT6Awocqgpl5CfyzF9qHG1vclEYOvsN4iYLqeDzLo8sXc5u9oyjckzY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=T4TXXrG5; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=TPyJXvUJ; arc=none smtp.client-ip=205.220.180.131
+	s=arc-20240116; t=1787819088; c=relaxed/simple;
+	bh=/Q0aJrv+yl12z/4UckcwepB9NSMo1dKRgB+t+KI/qk8=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=uRvQB/fSO0YUWbYGnXqJbkWgZ6wa4idJfUVtq3Q1K696EdUWbo1Q7sOai98WaQwAt2XbKYMDxA/lqr6aev8Xqa5kvkIEwTSO3wieABLc7KttfDT1793urkKuXqjITM25drvNb1lb05AWasOB5ttBbsjKakT7VIe0SsxTOnMmrNA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=cHTYdhin; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=LHQ+WtSW; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="T4TXXrG5";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="TPyJXvUJ"
-Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67R6R6Qk2074659
-	for <linux-arm-msm@vger.kernel.org>; Thu, 27 Aug 2026 08:13:22 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="cHTYdhin";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="LHQ+WtSW"
+Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67R6R5bk2143793
+	for <linux-arm-msm@vger.kernel.org>; Thu, 27 Aug 2026 08:24:46 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:message-id
-	:mime-version:subject:to; s=qcppdkim1; bh=id40phT/RVjPBVcSNSIiEA
-	JtrrPWIXKWs4eDewBUW7Y=; b=T4TXXrG5mznvvHMuzsQsomR5dUgk9AJf6OyNfB
-	lyAXpheWtmstCGBZNAxbj2C+VGa6lfxBrXGd9/l3UcELF6l68HODNctYtv3byaWy
-	+jWc5pZRZhMUDpElISKE4V2kX3AG7R+ZbulbzftrfIQuh85PA0CgZTkDFKqkEqkw
-	zZnLQR8WQacKpzTHzLS6HcO8WBS3qAlDArYMTDyn95VuXdnxCwAqk5i8M1rcmSH9
-	b5vsEOX/v/WFa4Iiupx/aEDu1h5pz+1GdnEP107XJs0DDj1GWSl5Bj4RqYgGB46n
-	UuTxNr2YZR1w3F6aSFLByd7I0VSU+7uT34o95OFghSV/YTkw==
-Received: from mail-pj1-f71.google.com (mail-pj1-f71.google.com [209.85.216.71])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gaa3bhhyq-1
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	0WOkKUTTNS6mJs2BwdqhMg+NA2BpiKjHIQAe3GoU9ZE=; b=cHTYdhinTE2J6jHu
+	CRsL3AEWHTNk59lfjUAvsY2eSKPkO65LCpqfIwm/F11fPHe/TxipKRpCch1qPUkZ
+	g0Zdv5f7ZZXJglBzZ++Pp45Lmlp9ohyoW6BLLGdr+ZP+Eb2pjefHo3Nyqtq7TFBn
+	tGBokPgf5kGmoiQD6ZWQttK8rcjHUoqkv7dbovdNbY3RHs9MfrB9/KowXcrbm+3g
+	RoPU5AWjwPUqM57H5P/JtaOoIrJdhJG7Qsdqkkkb23DvYJsyWys2s3IEe4/ALx17
+	qERojUpilfpRoAI/RLXWthRvqKZ7pp0nSDOrVbBrd+YGq69eQYKQZctTWJXklQ4n
+	4ra5MA==
+Received: from mail-pf1-f200.google.com (mail-pf1-f200.google.com [209.85.210.200])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gab7t1e2x-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Thu, 27 Aug 2026 08:13:22 +0000 (GMT)
-Received: by mail-pj1-f71.google.com with SMTP id 98e67ed59e1d1-38e25e4b41cso3631225a91.0
-        for <linux-arm-msm@vger.kernel.org>; Thu, 27 Aug 2026 01:13:21 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 27 Aug 2026 08:24:46 +0000 (GMT)
+Received: by mail-pf1-f200.google.com with SMTP id d2e1a72fcca58-853d0d87123so409942b3a.1
+        for <linux-arm-msm@vger.kernel.org>; Thu, 27 Aug 2026 01:24:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1787818401; x=1788423201; darn=vger.kernel.org;
-        h=cc:to:message-id:content-transfer-encoding:content-type
-         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=id40phT/RVjPBVcSNSIiEAJtrrPWIXKWs4eDewBUW7Y=;
-        b=TPyJXvUJFSuqZLYjtle5Avi+aaaB9QyiYnwnUaXAQmUvSis+ad69O9HRhA+XGeXrzS
-         z9zZ38rlfaHAiQEPt0PzBLSanRMJwzy+3srd3ZuE6FKKEhwbDTEa/bDiVIHz8zhEiH8J
-         u0pi+PqLd7rGaj60+Tnsd+Cgjb+C9dJZOFpnGB6zrzzF2C3rsf4z+8VHz055qzqWbZJz
-         Y9rHUvZSe6/y0/hVsq9lkwQluTh5MpbmC1WU+AWA7iG25AbemovU0Y2ZSi2NBOEOTUva
-         yClEdddDEUhhekS5dFrX2h8vMaT4WVLPD+JitjY47ldeDsXxsPI0Hif4++2vbL9XN7kL
-         KCnQ==
+        d=oss.qualcomm.com; s=google; t=1787819086; x=1788423886; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=0WOkKUTTNS6mJs2BwdqhMg+NA2BpiKjHIQAe3GoU9ZE=;
+        b=LHQ+WtSWaazwSjqQjV1GfxntMqi9earZF52xpbAnnNJ9fW+iRyY1jGJu4SdDugmhb6
+         BLITk1p5jp69HSxwMBKxco60hcnn43ne862A0ASEQWWUmPmDSMCWI7s+vwtpXw70TjI9
+         vPW+VqiPCeTP3GudsuLTrHjixmxz12HIrIYGZweUS1IH+LYDQj7Qmb0K7CTcc+keRTyF
+         mYTVVRnHJrieYD5MJVy75Oo9ryvVjIpBjZMGnDa3O36FNGe0uJG18vKwe6wE4w6LS+Ma
+         51cbQ2+yWtBy+ChKX2v+NmIS/wYzqkmXlZSjh53WZ6cJRPiN9QDyh+u0GzgNXamfRkDw
+         vhHQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787818401; x=1788423201;
-        h=cc:to:message-id:content-transfer-encoding:content-type
-         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to:content-type;
-        bh=id40phT/RVjPBVcSNSIiEAJtrrPWIXKWs4eDewBUW7Y=;
-        b=pk4rtt/m+Qu7iaKc6vLM3Oi9fCS5TJaFsLKpYlgzXvUgMPAH+o3FSAVuGYlvuMLRA3
-         9YApYAjy2gfbWz3mlKAs/RER/+g0vaSJQ2Oe1ctWxmVZatUMbhBfM4+7Jun7x78G8Cvz
-         yLEzedJfQGVZuRje1NJ/J+UojrjhRwlUykcuRswpsR/wOoLT9vhYho19TRQ4fXecde2n
-         1Yo5tQMk0Q4AYzbMPECzaVV7mpHDNkMOB6rHJcDOqNPh8rX8YYzIxrJo0Z7eDa7b7SI+
-         c6rhH6Y7sKHmXBcNE3m9TB/pF0o8droUW9Xibf1uo6mTbiORmnlGHMCz3GZIXBbwToE7
-         A1fQ==
-X-Forwarded-Encrypted: i=1; AHgh+RrzsG+lr/+jJSgnuwEvTlTOgPAViaaVC0zDP6+uWylKcP5b3xK5a180gqVmt+cAhdMFLJj1lh+7tCdKhwas@vger.kernel.org
-X-Gm-Message-State: AFuF++mDm4qqGLRhV6Iuz8sbuekFMeEogh9NZm5PLcc6NgB4Xcxry12X
-	KB5upBb3kLYdZ+WsIfB06+QF5NsYXFwhlfKX3VOTzmLqkyQKeJELgoxxzhrcLmPMCVrIbljJiKw
-	xwA3eJYLl0nC+b+7NIUu/9gLDQMawYFHbdBdDMFDZE78SjrXJedMlK1w7Hzx002sABBBp
-X-Gm-Gg: AR+sD12vbySZqsRqVC+sREuHyrLjlGt33jXwPJp5Kiaui82o5GR48JlIJOi8LCzs3PH
-	6dyydq4tTx6SSwaS8jiBilXL3kj8aCCp8qdgQi5eJuTkLocB/9G+RMMonv0P4nDwDYP3h1akOUx
-	9iqLW3uUN8nXXdav7zKbA2IzYHNLMiQWt3XDusOUNvEEDR1T65TpIBNfOXHDP+JRqYTWFFHXy6N
-	sM7Ixpt8/D5V3pMJfOP78LSQBkpVMG5N47h6loXupBffJb9AH5/o35aAwBO/yMOf2KCcjR6KiA2
-	pOLASO7yxEZ4M4OQt/b5ovh+KUgG/gCOXZ2DCZdukW7fBUA9FeH/7k2i79eWH0W7+tFXFG6TZ7z
-	RDkskJXOtRKaThqn3ga06+l1kAVuWlvPfEUk3AcpEGdtvjZLjMg472VIbuXKd/QkB
-X-Received: by 2002:a17:90b:2b4c:b0:38e:97f0:aa4b with SMTP id 98e67ed59e1d1-3966d4592fdmr28943904a91.13.1787818401073;
-        Thu, 27 Aug 2026 01:13:21 -0700 (PDT)
-X-Received: by 2002:a17:90b:2b4c:b0:38e:97f0:aa4b with SMTP id 98e67ed59e1d1-3966d4592fdmr28943788a91.13.1787818400563;
-        Thu, 27 Aug 2026 01:13:20 -0700 (PDT)
-Received: from hu-ggarmidi-lv.qualcomm.com (Global_NAT1.qualcomm.com. [129.46.96.20])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-141a8eedd13sm14214847c88.1.2026.08.27.01.13.19
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 27 Aug 2026 01:13:20 -0700 (PDT)
-From: Gopikrishna Garmidi <gopikrishna.garmidi@oss.qualcomm.com>
-Date: Thu, 27 Aug 2026 01:13:17 -0700
-Subject: [PATCH] soc: qcom: smem: fix 32-bit overflow in DDR frequency
- calculation
+        d=1e100.net; s=20251104; t=1787819086; x=1788423886;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=0WOkKUTTNS6mJs2BwdqhMg+NA2BpiKjHIQAe3GoU9ZE=;
+        b=gAydgFlMI84D2uwEbmUOH7b6oYpvWRX+QePGYNKyEvpLVvHJds3geJyupECM0+gyGS
+         I8awWAk3zq3oRvbXgtVwo5gcp0irGsv7I/39DvYfZoSeVp06FIlt86ivNjHqr+XzxsiW
+         2/+RlIooQyykNlecmbFz+1dOmo3bH4mbCqf/JLd4ZQv5X2iGhalrP0LjxRpsoJG1Elho
+         PAqwe8zOuv+d1UcbVq+0gRvD2IuWWDA7D+x2KvBqfevqZHSsq8nXnUyZUUmhvTnX8T86
+         l6f+DuW86AleEdj7SCZYL5hboSpdg1MwYe51J6grBw9Ijy3FkCXjFwbQokcpDa5N/L0p
+         lCBw==
+X-Forwarded-Encrypted: i=1; AHgh+RqRAWle0h3fvB4jq8Gc3PK1yPvPrLnMrpFCa1DBYBe0yimFjsQdLWOoogxEHQ22JSTYMsYr8cSKHKvgZblQ@vger.kernel.org
+X-Gm-Message-State: AFuF++nJljs9f2eENJdfzEHCm09rSp9Mh2iICmihJqxUBUuNt1IzOzJn
+	a4ST7UGf5HkYrCqF1ejrsVWAPoR1fNxefwTC7LoUkTG74EUTH4Gel77Be2NbNmxpGBeBW+qR65G
+	uyUd367t/Rsc08I5kvlRvo+4arFRo2Y54IT0bKHXf4ky7AU/xjZTjW2YCFopuI4Vrmu+CpugY7S
+	6E
+X-Gm-Gg: AR+sD124PEwv6Wv6aqSc2LUGPFZp5hxw6dTdpdpi3iSFCvNpoHuO7/71aIDZOlmDzKb
+	UR7VWNBtZCjANVblBG9d+RyQW83QyuZ/7JY7BDkn4Rr5xDHeUQHtyOtEfABPh5HQHHH/+D6Q5zg
+	J8AMTjN3nWVUoBEU2eBoLo8H4O/tt2Em/Mq78C7+/erVGrwH0WD2NLKmdVBH326okSXTMzRve+I
+	RVkisuZKVg/gcZ56IW6CI6mfo1wx6b9qMQSGzUJfDTZptZdxG4CUOW4vjh0SM9gE69fxrVp6uq2
+	GUXfNDiBy2cn/r7gaiX8zy8pq+HIxcjl/wtaUNmdROIiRbRm5n3BhMHe/BFSSPNU8pDGL6C072q
+	KCVdAOke95lbMlBmbrLBsf0p1M0jxJOOfKA==
+X-Received: by 2002:a05:6a21:9d84:b0:3c3:f371:1ea9 with SMTP id adf61e73a8af0-3cf844449abmr28579010637.10.1787819085639;
+        Thu, 27 Aug 2026 01:24:45 -0700 (PDT)
+X-Received: by 2002:a05:6a21:9d84:b0:3c3:f371:1ea9 with SMTP id adf61e73a8af0-3cf844449abmr28578942637.10.1787819085169;
+        Thu, 27 Aug 2026 01:24:45 -0700 (PDT)
+Received: from [10.218.39.50] ([202.46.22.19])
+        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-cc1bec989f2sm1835547a12.28.2026.08.27.01.24.41
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 27 Aug 2026 01:24:44 -0700 (PDT)
+Message-ID: <8188c158-60ed-4d05-a26e-c127850520cb@oss.qualcomm.com>
+Date: Thu, 27 Aug 2026 13:54:40 +0530
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260827-glymur_dramc-v1-1-eba358d504b8@oss.qualcomm.com>
-X-B4-Tracking: v=1; b=H4sIAJzxj2oC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
- vPSU3UzU4B8JSMDIzMDCyMz3fScytzSoviUosTcZF1T0zSzRANTA4vEVAMloJaCotS0zAqwcdG
- xEH5xaVJWanIJyAyl2loAFiYxknAAAAA=
-X-Change-ID: 20260826-glymur_dramc-55f6a0508ae0
-To: Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Pankaj Patil <pankaj.patil@oss.qualcomm.com>
-Cc: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
-        Sibi Sankar <sibi.sankar@oss.qualcomm.com>,
-        Rajendra Nayak <rajendra.nayak@oss.qualcomm.com>,
-        linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
-        Gopikrishna Garmidi <gopikrishna.garmidi@oss.qualcomm.com>
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1787818399; l=3071;
- i=gopikrishna.garmidi@oss.qualcomm.com; s=20260102;
- h=from:subject:message-id; bh=t8GjYgE6EMM19F6RxsbIprvmjnmTi3x/F720AMusbb0=;
- b=B0ErN2NGLU/2NSWGmZznEQYgJHMExgLbXLVYViJMztoFeovGlPkME0b0eHA3zk1LxFZKBmYJF
- rb8Y8wZvZoCBrsBElFQ6S68Vu8Hsw+UYy5O1szNAC29U6OjRJIENlRY
-X-Developer-Key: i=gopikrishna.garmidi@oss.qualcomm.com; a=ed25519;
- pk=TkSjNEhrfsj90i3wkABTZtAjLNr2cfYsujaTvyOIDsE=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODI3MDA2NyBTYWx0ZWRfX15amda0lgaK1
- dHapCbdlgIQe/l/QDUEwOutbb5NuM3+dl6lzO0ISfxWG5vJ72Vn6H81tSve4cuhRZss7vDb5Fgi
- kiZ9D0SBTIKvXZlswr0KPoHhj2IN9UAkV4szTdv0z+6R6r2kvW68SkwuA8Bmopf4089yoo+WLt0
- f/R17tmHoQVoG5HMBXwWVQhzWcOBIfr30wGV2DD/UQh8p+Zkd3AUm8AOaRGCLv3Aau52TBE9FkF
- 1tkT6Vx3c7TfvvNg66K6/OZ17guD8wBBa0cXdlUNEldkvcffYMzcjM74PvXW2jmlOiie9b/PEVx
- 6xDQeKH9Ftf/7MxHLZSSsjwpsUVOK17wWIHfpNrfXQ/I4J14DGjBJ5mW9xzP78/o8IP4CiverLI
- oQY2NrRdraHk0HJ6u39tSe6dHclPt/Gh72wCS3hc3zcvnxyuU0QRj8Yo1YxZtVCP4JWxhkj3XY4
- gENy3P77raAQHvRV2bg==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODI3MDA2NyBTYWx0ZWRfX8JHVSkoqXWME
- eCYfl2Rqem8/SN94hg8JPhYIv2YjS+b9ZSJOPA3QG4DYCdZ6/UIzosn6fEqyYimHPccxI3Rf+co
- +WIrZgX2XQCfCPGgooXNj7WUl1yq8kk=
-X-Proofpoint-ORIG-GUID: T-_SitC4Tz7fy-6Zy3vMgYL2jWvDMR-i
-X-Proofpoint-GUID: T-_SitC4Tz7fy-6Zy3vMgYL2jWvDMR-i
-X-Authority-Analysis: v=2.4 cv=KbfidwYD c=1 sm=1 tr=0 ts=6a8ff1a2 cx=c_pps
- a=UNFcQwm+pnOIJct1K4W+Mw==:117 a=ouPCqIW2jiPt+lZRy3xVPw==:17
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4] iommu/io-pgtable-arm: Add support for contiguous hint
+ bit
+To: Daniel Mentz <danielmentz@google.com>
+Cc: Will Deacon <will@kernel.org>, Robin Murphy <robin.murphy@arm.com>,
+        "Joerg Roedel (AMD)" <joro@8bytes.org>, linux-arm-msm@vger.kernel.org,
+        linux-arm-kernel@lists.infradead.org, iommu@lists.linux.dev,
+        linux-kernel@vger.kernel.org,
+        Prakash Gupta <prakash.gupta@oss.qualcomm.com>
+References: <20260804-iommu_contig_hint-v4-1-d7a47ed5db98@oss.qualcomm.com>
+ <CAE2F3rB7zpPFfC376mP=god9HWRmKOaQUEgPVzKScxS12pZrvQ@mail.gmail.com>
+Content-Language: en-US
+From: Vijayanand Jitta <vijayanand.jitta@oss.qualcomm.com>
+In-Reply-To: <CAE2F3rB7zpPFfC376mP=god9HWRmKOaQUEgPVzKScxS12pZrvQ@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-Authority-Analysis: v=2.4 cv=X6Bi7mTe c=1 sm=1 tr=0 ts=6a8ff44e cx=c_pps
+ a=mDZGXZTwRPZaeRUbqKGCBw==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
  a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_glEPmIy2e8OvE2BGh3C:22
- a=EUspDBNiAAAA:8 a=Y8tzQJoX9WwRSfPLOGYA:9 a=QEXdDO2ut3YA:10
- a=uKXjsCUrEbL0IQVhDsJ9:22
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
+ a=EUspDBNiAAAA:8 a=hD7wzR-C_dcGOD24FjMA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+ a=zc0IvFSfCIW2DFIPzwfm:22
+X-Proofpoint-ORIG-GUID: s36SyKwvShzxwps5jpf0OXN-g-low5lp
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODI3MDA2OCBTYWx0ZWRfX8qQiTTaDN4DB
+ lbCNrSzj0duSzEXRS0a2ro4jFPeHnDgWoUUNDxoGNHeT9sUIETZRaEKLvF160Zaa5VBKEiAwWrO
+ I8hTh7RMKv/Zg1Ub6nH7oOceBybWDgE=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODI3MDA2OCBTYWx0ZWRfXyQCbPaaaD9Pg
+ dqYTGZxzVWZUWmewOo77CM0cE1AOpHdgDTvWESHgcAXbZhWeatE48N8JbHwomKxasy2sumMTGMV
+ MaYYNI/vGho6NWmM5RIWsY3xTcH/EYWY0az1PIGXhYCYtQVt8ZSjXmPWmEcomWH6XDTxos8zVo5
+ tVk3TJN4OaXBfEcpum38jl4KDIYuzFiZLDX8EY+0OuXZadjIBPiP7iYW/OTZ02WD6SuQr8KY/vn
+ scf2ywBISQfeapz9Twh3ueI7HoOx3u+7bfrrey9X3G+BHxlGjcu5tQOanuxnKZvEWyl+49EVCV0
+ 5BgHfk/BQYyUAXhBKX4RWnYGoejOe2QOSx9KXbWH15beUp3qzYlqVemBtvF9XKhBZ/TFBAGB7pQ
+ KbT8KxIlWoIS1zYWU1915q1qqBpqAKr2TflJFkGpmhutWMTym2OXj9U5D5F2oXYb5vaIGqQ1SVy
+ MM5oppnbJ2cIbDU8ydg==
+X-Proofpoint-GUID: s36SyKwvShzxwps5jpf0OXN-g-low5lp
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-08-27_03,2026-08-26_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0 spamscore=0 clxscore=1015 priorityscore=1501
- impostorscore=0 bulkscore=0 adultscore=0 malwarescore=0 phishscore=0
- suspectscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
- definitions=main-2608270067
+ lowpriorityscore=0 bulkscore=0 impostorscore=0 adultscore=0 clxscore=1015
+ priorityscore=1501 suspectscore=0 spamscore=0 phishscore=0 malwarescore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608270068
 
-The DDR frequency in SMEM is reported in kHz and converted to Hz by
-multiplying it by 1000. Since the SMEM frequency value is a u32, using
-an unsuffixed integer constant causes the multiplication to be performed
-with 32-bit arithmetic.
 
-This overflows for DDR frequencies above 4294967 kHz, resulting in an
-incorrect frequency being reported through the SMEM DRAM interface.
 
-Use an unsigned long constant for the multiplication so the calculation
-is performed with 64-bit arithmetic on the supported Qualcomm platforms.
-Apply the fix consistently to the v3, v3.1, v4, v5, and v7 SMEM parsers.
+On 8/15/2026 3:27 AM, Daniel Mentz wrote:
+> On Mon, Aug 3, 2026 at 11:19 PM Vijayanand Jitta
+> <vijayanand.jitta@oss.qualcomm.com> wrote:
+>> +static unsigned long arm_lpae_get_cont_sizes(struct io_pgtable_cfg *cfg)
+>> +{
+>> +       unsigned long pg_size, blk_size, l1_blk_size, cont_sizes = 0;
+>> +       unsigned long cont_leaf_size, cont_blk_size, cont_l1_blk_size;
+>> +       int pg_shift, bits_per_level;
+>> +
+>> +       if (!cfg->pgsize_bitmap || (cfg->quirks & IO_PGTABLE_QUIRK_ARM_NO_CONT_HINT))
+>> +               return 0;
+>> +
+>> +       pg_shift = __ffs(cfg->pgsize_bitmap);
+>> +       bits_per_level = pg_shift - ilog2(sizeof(arm_lpae_iopte));
+>> +       pg_size = 1UL << pg_shift;
+>> +       blk_size = pg_size << bits_per_level;
+>> +       l1_blk_size = blk_size << bits_per_level;
+>> +
+>> +       cont_leaf_size = arm_lpae_num_cont(pg_size) * pg_size;
+>> +       if ((cfg->pgsize_bitmap & pg_size) &&
+>> +           arm_lpae_cont_size_fits(cfg, cont_leaf_size))
+>> +               cont_sizes |= cont_leaf_size;
+>> +
+>> +       if (cfg->pgsize_bitmap & blk_size) {
+>> +               cont_blk_size = arm_lpae_num_cont(blk_size) * blk_size;
+>> +               if (arm_lpae_cont_size_fits(cfg, cont_blk_size))
+>> +                       cont_sizes |= cont_blk_size;
+>> +       }
+>> +
+>> +       /*
+>> +        * l1_blk_size is only set in pgsize_bitmap if level-1 blocks are
+>> +        * supported for this granule (not 16K/64K, per
+>> +        * arm_lpae_restrict_pgsizes()), so no extra gating is needed here.
+>> +        */
+>> +       if (cfg->pgsize_bitmap & l1_blk_size) {
+>> +               cont_l1_blk_size = arm_lpae_num_cont(l1_blk_size) * l1_blk_size;
+> 
+> Our AI model is saying that this might overflow cont_l1_blk_size on 32
+> bit platforms i.e. 16 * 1G doesn't fit into a 32 bit type. It says
+> that cont_l1_blk_size will be truncated to 0, and
+> arm_lpae_cont_size_fits() then calls ilog2(0) which is undefined.
+> 
 
-Fixes: 1d234eeafc56 ("soc: qcom: smem: Expose DDR data from SMEM")
-Signed-off-by: Gopikrishna Garmidi <gopikrishna.garmidi@oss.qualcomm.com>
----
- drivers/soc/qcom/smem_dramc.c | 10 +++++-----
- 1 file changed, 5 insertions(+), 5 deletions(-)
+Ack. With arm_lpae_cont_size_fits removed this won't be an issue anymore.
 
-diff --git a/drivers/soc/qcom/smem_dramc.c b/drivers/soc/qcom/smem_dramc.c
-index 63ebe7f6db59..9612230a03be 100644
---- a/drivers/soc/qcom/smem_dramc.c
-+++ b/drivers/soc/qcom/smem_dramc.c
-@@ -219,7 +219,7 @@ static void smem_dram_parse_v3_data(struct smem_dram *dram, void *data)
- 
- 		if (freq_entry->freq_khz && freq_entry->enabled) {
- 			u32 freq_khz = le32_to_cpu(freq_entry->freq_khz);
--			dram->frequencies[dram->num_frequencies++] = 1000 * freq_khz;
-+			dram->frequencies[dram->num_frequencies++] = 1000UL * freq_khz;
- 		}
- 	}
- }
-@@ -232,7 +232,7 @@ static void smem_dram_parse_v3_14freqs_data(struct smem_dram *dram, void *data)
- 		struct ddr_freq_table *freq_entry = &details->ddr_freq_tbl.ddr_freq[i];
- 
- 		if (freq_entry->freq_khz && freq_entry->enabled)
--			dram->frequencies[dram->num_frequencies++] = 1000 * freq_entry->freq_khz;
-+			dram->frequencies[dram->num_frequencies++] = 1000UL * freq_entry->freq_khz;
- 	}
- }
- 
-@@ -248,7 +248,7 @@ static void smem_dram_parse_v4_data(struct smem_dram *dram, void *data)
- 
- 		if (freq_entry->freq_khz && freq_entry->enabled) {
- 			u32 freq_khz = le32_to_cpu(freq_entry->freq_khz);
--			dram->frequencies[dram->num_frequencies++] = 1000 * freq_khz;
-+			dram->frequencies[dram->num_frequencies++] = 1000UL * freq_khz;
- 		}
- 	}
- }
-@@ -265,7 +265,7 @@ static void smem_dram_parse_v5_data(struct smem_dram *dram, void *data)
- 
- 		if (freq_entry->freq_khz && freq_entry->enabled) {
- 			u32 freq_khz = le32_to_cpu(freq_entry->freq_khz);
--			dram->frequencies[dram->num_frequencies++] = 1000 * freq_khz;
-+			dram->frequencies[dram->num_frequencies++] = 1000UL * freq_khz;
- 		}
- 	}
- }
-@@ -282,7 +282,7 @@ static void smem_dram_parse_v7_data(struct smem_dram *dram, void *data)
- 
- 		if (freq_entry->freq_khz && freq_entry->enabled) {
- 			u32 freq_khz = le32_to_cpu(freq_entry->freq_khz);
--			dram->frequencies[dram->num_frequencies++] = 1000 * freq_khz;
-+			dram->frequencies[dram->num_frequencies++] = 1000UL * freq_khz;
- 		}
- 	}
- }
+>> +               if (arm_lpae_cont_size_fits(cfg, cont_l1_blk_size))
+>> +                       cont_sizes |= cont_l1_blk_size;
+>> +       }
+>> +
+>> +       return cont_sizes;
+>> +}
+> [...]
+>> @@ -660,6 +829,8 @@ static size_t __arm_lpae_unmap(struct arm_lpae_io_pgtable *data,
+>>  {
+>>         arm_lpae_iopte pte;
+>>         struct io_pgtable *iop = &data->iop;
+>> +       size_t block_size = ARM_LPAE_BLOCK_SIZE(lvl, data);
+>> +       int num_cont = arm_lpae_num_cont(block_size);
+>>         int i = 0, num_entries, max_entries, unmap_idx_start;
+>>
+>>         /* Something went horribly wrong and we ran out of page table */
+>> @@ -674,10 +845,22 @@ static size_t __arm_lpae_unmap(struct arm_lpae_io_pgtable *data,
+>>                 return 0;
+>>         }
+>>
+>> +       /*
+>> +        * Normalize an exact whole-CONT-group request down to the
+>> +        * equivalent block_size/pgcount, mirroring __arm_lpae_map().
+>> +        */
+>> +       if (!(data->iop.cfg.quirks & IO_PGTABLE_QUIRK_ARM_NO_CONT_HINT) &&
+>> +           num_cont > 1 && size == block_size * num_cont) {
+>> +               pgcount *= num_cont;
+>> +               size = block_size;
+>> +       }
+>> +
+>>         /* If the size matches this level, we're in the right place */
+>> -       if (size == ARM_LPAE_BLOCK_SIZE(lvl, data)) {
+>> +       if (size == block_size) {
+>> +               size_t cont_size = num_cont * block_size;
+>> +
+>>                 max_entries = arm_lpae_max_entries(unmap_idx_start, data);
+>> -               num_entries = min_t(int, pgcount, max_entries);
+>> +               num_entries = min_t(size_t, pgcount, max_entries);
+>>
+>>                 /* Find and handle non-leaf entries */
+> 
+> This comment is no longer accurate. The handling now extends beyond
+> non-leaf entries.
+> 
 
----
-base-commit: f82a5da2f04960df9fb57489992d03dd5e64ec6f
-change-id: 20260826-glymur_dramc-55f6a0508ae0
+Agreed, that comment is stale -- the loop now also validates CONT-group
+alignment on leaf entries (rejecting an unmap that would split a tagged
+group) before falling through to the non-leaf teardown. Will update it to
+something like:
 
-Best regards,
---  
-Gopikrishna Garmidi <gopikrishna.garmidi@oss.qualcomm.com>
+/* Validate leaf entries and handle non-leaf entries */
+
+
+>>                 for (i = 0; i < num_entries; i++) {
+>> @@ -687,6 +870,40 @@ static size_t __arm_lpae_unmap(struct arm_lpae_io_pgtable *data,
+>>                                 break;
+>>                         }
+>>
+>> +                       /*
+>> +                        * A real CONT group must always be invalidated as a
+>> +                        * unit, so reject an unmap that splits one. Check the
+>> +                        * PTE's own CONT bit rather than the caller's size,
+>> +                        * since a legitimate unmap can span multiple prior
+>> +                        * iommu_map() calls and its size alone doesn't say how
+>> +                        * the underlying PTEs were grouped. Only the first and
+>> +                        * last entries can straddle a group boundary; an
+>> +                        * interior CONT-tagged entry's group is necessarily
+>> +                        * fully covered by this unmap, since groups can't
+>> +                        * overlap without also covering everything between
+>> +                        * them.
+>> +                        */
+>> +                       if (pte & ARM_LPAE_PTE_CONT) {
+>> +                               bool ok = true;
+>> +
+>> +                               if (i == 0)
+>> +                                       ok = ok && IS_ALIGNED(iova, cont_size);
+>> +                               if (i == num_entries - 1)
+>> +                                       ok = ok && IS_ALIGNED(iova + (i + 1) * block_size,
+>> +                                                             cont_size);
+>> +
+>> +                               /*
+>> +                                * Stop short of this entry instead of returning
+>> +                                * 0: entries before i may already have had
+>> +                                * non-leaf sub-tables torn down above, so the
+>> +                                * caller needs the real unmapped count, and the
+>> +                                * loop exit below still clears/gathers entries
+>> +                                * [0, i) correctly.
+>> +                                */
+>> +                               if (WARN_ON_ONCE(!ok))
+> 
+> Consider aligning with the following WARN_ONCE in the same function:
+> 
+> WARN_ONCE(true, "Unmap of a partial large IOPTE is not allowed");
+> 
+
+Ack.
+
+>> +                                       break;
+> 
+> I think this behavior is inconsistent: when a problem is detected at
+> the beginning of the unmap range, you return without modifying the
+> table, whereas if it's detected at the end, the code proceeds with
+> unmapping and leaves the table misconfigured. Could these checks be
+> performed before entering the loop?
+> 
+
+Agreed, Will move both checks before the loop so a rejected unmap is always a
+full no-op, regardless of whether the violation is at the start or end of
+the range.
+
+Thanks,
+Vijay
+
+>> +                       }
+>> +
+>>                         if (!iopte_leaf(pte, lvl, iop->fmt)) {
+>>                                 __arm_lpae_clear_pte(&ptep[i], &iop->cfg, 1);
+>>
 
