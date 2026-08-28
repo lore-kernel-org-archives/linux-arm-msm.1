@@ -1,87 +1,87 @@
 Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 51061471243
-	for <linux-arm-msm@vger.kernel.org>; Fri, 28 Aug 2026 14:05:56 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 03B68470451
+	for <linux-arm-msm@vger.kernel.org>; Fri, 28 Aug 2026 14:06:02 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787925962; cv=none; b=GtQXngo1fs68FqaT8dth23Y6uCyZz/Np2dLgFKU4qswlK05fec+DvsSqBCs3sapR6OHwD1/6HQ6o3BIIj4sEIKi+zIhFDolbE6CN6MYuJXyUSrF2Mp7smwprYtn0tpWsBiipf+Rxk0Ej2Bf43DnnvKOozZ0FX+mIciYpwnzdkns=
+	t=1787925965; cv=none; b=cC1ESrT9jP6eBK01/VhcOLaDDQrMECzknTLQlwawt67RS9cfj9IwPyCPYlH2gcRLwrq1gXwzKFOR34m0bk831mCRBJkJrRqL05fJDpbi/9qi24H4EZb6j7mpXkPFRKgrE7KU6LTV3nvVLWFzvudA5Mb+IWPeLonGmXR1zJYOfeQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787925962; c=relaxed/simple;
-	bh=3tdhm3owA+5jaxcS1URgoZO7Y2lY7qINi0ceeKg9TnE=;
+	s=arc-20240116; t=1787925965; c=relaxed/simple;
+	bh=1brovUppJvb6ttZNs7kwMEVpoh0akbg09pFKeVhGO2I=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=RieKQgLMLDI9a6dnFT8i4NjZNCBCZny3XqM6lYiVbkJVnpc0Q60L7x8aKyp1PAMsJw7L82C82bk1iI42LHWYSMQSKNmRzPJzxmUnkDIFXZ7RMIAC/T5e27QMt4n1pRpPtPmRtnp2FYWevgZP/I4KeTzMFqzI/MQyPG023/Azkjo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=id68aQpy; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=U1vZ6d6E; arc=none smtp.client-ip=205.220.180.131
+	 In-Reply-To:To:Cc; b=VhgKkzf+yJWPLhgZpQB9IHR+PKzE5dU3QYoLEgtGs8n/+D5ZMFaxT6MN0hjItmfKIVnqxiKte3+PSD9knfrLtYTeyTEFLPqS8Sf319LyLFea8zUHnx71U1CwG+SusV5U9WA/7RJth/5uU+EhmAyUY1WUL5jB21UeV0FvgxK69Ac=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=VwCD4dLo; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=SBg6OJTB; arc=none smtp.client-ip=205.220.180.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="id68aQpy";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="U1vZ6d6E"
-Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67SDkpC22970107
-	for <linux-arm-msm@vger.kernel.org>; Fri, 28 Aug 2026 14:05:53 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="VwCD4dLo";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="SBg6OJTB"
+Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67SDkgho3545504
+	for <linux-arm-msm@vger.kernel.org>; Fri, 28 Aug 2026 14:05:59 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	bFRrVkjQCFlDgD3LOxA8bXZmJYkAPm0glaH1elOSAeU=; b=id68aQpyNyKAhnwd
-	0oZXVHKuWaRD0cgimOcDPOmukC6lv/JDk3LBha+x8RUEBUTP1mcJ6k4mGVzcaqYW
-	qL3BtIcGkrvhQm+riKRs1Ci/FRfh3DLWPt3VwILNp7XsSWj+JZInZtdlAATqqO+U
-	aQLxGPicN8jsYrcly6NrybD5guOZW2OSWxa40LTegAUU8smWrsriF9Vs6ZnmcgZl
-	pezORIwcWqWLrXytLoDy9u3HgHuJXdhJWVQ46fY+cgVzERraK/lTS5jUb513Bc6O
-	JMQu55/1ojJivgB3b/l8qISj9FKgMHRlsyDkK4lvJI2iwEanmXqDs6iclpM0uKP5
-	TUrEsQ==
-Received: from mail-ua1-f71.google.com (mail-ua1-f71.google.com [209.85.222.71])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gb3hs247v-1
+	7S42qkfhoToVEYy/FsQ080jT2C6K7HXx1NfxPU2yAE8=; b=VwCD4dLoAzD8N4dr
+	LLUEvS2ahZRwbDsYPXkb8GI1OEVLwv1y8ArrGOd+5h0/FX22zw29Ck7jZMFy5LCV
+	TRKniVInuRMhWTbUrH1epIu2notpicVY25m4JqBOmH3Z6Ro2X09ORiyFKHykj+X7
+	bAfy/tM6bVMKAC8s8WyxlrRrfX1qm4/oFwnF0aP2iq00BMYvZgP7mcZuzfy/ji/Y
+	UJMQNARJSm0nVp1IKICpIT9xk2+jH6W2QNm7EesVdeh3NibnHH3wT+LcqrWrmTSo
+	ZYan83EWZD/Vz2VYf1mEhGqUPa7KLcE4DapI73IEDQwPI/omNCw9h6cjWYNgHs1B
+	RDAoyw==
+Received: from mail-vs1-f71.google.com (mail-vs1-f71.google.com [209.85.217.71])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gb47n1xr4-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Fri, 28 Aug 2026 14:05:53 +0000 (GMT)
-Received: by mail-ua1-f71.google.com with SMTP id a1e0cc1a2514c-97bf8de7d8cso959092241.0
-        for <linux-arm-msm@vger.kernel.org>; Fri, 28 Aug 2026 07:05:53 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 28 Aug 2026 14:05:58 +0000 (GMT)
+Received: by mail-vs1-f71.google.com with SMTP id ada2fe7eead31-785c40b6318so625870137.2
+        for <linux-arm-msm@vger.kernel.org>; Fri, 28 Aug 2026 07:05:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1787925953; x=1788530753; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1787925958; x=1788530758; darn=vger.kernel.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=bFRrVkjQCFlDgD3LOxA8bXZmJYkAPm0glaH1elOSAeU=;
-        b=U1vZ6d6Ed3f0A23uNpEPraip519e6H8KnnQMTZkc6JCYXgdqQ7MDkleaJ1dIhWhh8X
-         d6LV6fYwZE+AsSSC57U+JCjZ+WvQDJLkajN7Q0w7+fSBNuX96WYNcuJdapMm5cAwKK3R
-         7wf4IKtAp88GUS29rxwZMswzfgPx7m7jOKex0Ctf5BF0ukYAGql9ET9pkpnrBfy7VgTT
-         rZm9yiPV8Q1mUNPIYZw9H0hkfaxHbKxOHj088EA1a3yWIa3x+FX0gxiYrw87FA+1aQMB
-         HwdKSNjYUsW7NNQmpDr5vK9A5wPtf8UKRLBuaNyVEpnDprCFRpP/TSxwmjdjpTdVMwm7
-         ++xg==
+        bh=7S42qkfhoToVEYy/FsQ080jT2C6K7HXx1NfxPU2yAE8=;
+        b=SBg6OJTBTn0kkYVU8pspEY7a9jOX4HW0z/cNJOCT8qA93iG1lc0PVeTiFaMvZLCnfp
+         G0hPA88nXYztp5ImZhR8HGy/zO4OvZT7jqoOQq1sOm3iZ0KXvvaXELtaJlkw/3Rv9VUR
+         Pxc6Z0SRGSnnxGrluYI/qnPSrKZYDsDelNtFUG0+o1JTyLdjdqfMw5dOjZyUcOaHlm8x
+         DYgrC11GAGncVf7mf/FH16Hnp8iM0W7X6/x4A3QsNJU8O+XpUTBasRCd6GMB60gck3/w
+         RsiJE9qoRaKy2IeU1fCFtxnjMW/73HVsM+/TYgPs8mQjCV1O2NJp47DiZSNtzfZGBHqN
+         tmVg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787925953; x=1788530753;
+        d=1e100.net; s=20251104; t=1787925958; x=1788530758;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=bFRrVkjQCFlDgD3LOxA8bXZmJYkAPm0glaH1elOSAeU=;
-        b=EUwkCAQs4uQbaTRqR21w/eaashV3LClwcgdydDMm5b+F4mXbfyvY4AQeP6b1w2fTA3
-         FXWDtWuWgftBefGjoXpdrXGVd0SRzxgjOSnoZ7UP10C6d+uLtsDic1Lf75OTjGTUEqhG
-         dgDeb1O1OF7SKs3UZVroPX78Iwp5BDW1rStxj6p+EnMXkMsbNLngHAmNoGsGEK2ENQVA
-         ZV+3xCxVhF0yrvkHOIhkhdFNVziidZyqs7rTOt7UYt2J434fF315bCmLoa2vvxwhlhmi
-         9SORsf9HEMK92STVORoJRydyqbs3pJJTyx6sBI7zDa58kqEkYvkPdCvvw5GPLWdSkHhQ
-         VOnQ==
-X-Gm-Message-State: AFuF++n5djSJF0w9tcIsgleZfyuwnhI4iisij2yHb1CmNokLabmpY/Sh
-	7vjRsgsvaTC3UNnMGJobWIx7HW6Nmer62GX1iV02miPhtNdivoYCxU+jbn/ZwlgNoUbbsVpntFl
-	G53P6d4m1ySb5usggL1Iu/fPt3kUuU/QnWbOHdbElnLxR+A/rM64QhRjjKEcycIYAp0HZ
-X-Gm-Gg: AR+sD13CCCVPtX0iJfz7oAMxTJDerB5HPIIYByj5RjQo5Pkx4x79Hrfj4dYSZ1IALPM
-	2Xof+nV/ZSxNB/7cdzzvsq3l8Hox7klkckDQ+/VCSHb1TdS07ExsvMOJRtkkLYlU0Q0Oz8ttjrw
-	cc9icCTvQ9tcFnsJafL1MZ9ZdZqGgBIQRrTIZMC3QGF9EzEQYsuxUwytvEgoaTHLHzH7bHe5C3B
-	5Q5IR+2HP8h/B6v+XKBBg26dWMreql9f6xlvWgiJjY+01W+4Ax0GSXiXDR1jFVW4IjI+ALdSsy7
-	IA66M/B2KayRTYRPy2+lI0UoEBUNfHEtEjUgT3wGYkUsZdW+07Te/BdcBhXNJ44n2qj2fNWjL+g
-	V3lHXYKO59RF/CaMw4XntM8I=
-X-Received: by 2002:a05:6102:a1c4:10b0:785:c3dc:2f5d with SMTP id ada2fe7eead31-785c3ebd1bcmr1298764137.9.1787925952594;
-        Fri, 28 Aug 2026 07:05:52 -0700 (PDT)
-X-Received: by 2002:a05:6102:a1c4:10b0:785:c3dc:2f5d with SMTP id ada2fe7eead31-785c3ebd1bcmr1298728137.9.1787925952050;
-        Fri, 28 Aug 2026 07:05:52 -0700 (PDT)
+        bh=7S42qkfhoToVEYy/FsQ080jT2C6K7HXx1NfxPU2yAE8=;
+        b=UhT2ffpCSVI6fComSFSZbU3zBp6597nknWbLsHrS5Opi4r9BS/7ronWTDZ/c2GaI5V
+         sDQy4Ga1ZVcnfCe7l97S1FDfArCI/Obxi4cgl+cqSB+T0adiZzLt3IDscJ+jAiG8O1wl
+         4dFk5bJdBryvbO1BEH51dzVGT6E9S6uhojEewYDKJSj3YOFKIaII5bCaIhV5YlCp2kfV
+         lwx2xFtVg6p2AJuNy81H9FO1vtHr6BrFgQstmY3smq8hhlDahYP9JIufzSZruYTIL/Uw
+         4AUNQK1rYh9yoIy7Zjtz2NZPlFGNLT2T2EPrC2yY7aIc0Ajv7FtTor7wCWpaeHhowaKH
+         O0pw==
+X-Gm-Message-State: AFuF++nhcWPtBDBax//A2lH12HwZG6GoNpgNNLw1eST5c0c+Buu3xYiL
+	2JjcWxmxSuQ+Pjq5FIHOb724Xr3CKA85lXNpviEtKkYbQOz8qAOCHRr2SDXCsf1LRV3+nj0jiu2
+	oCvqepG/Zg3B2CFHEydldxVvPWSjRBqrLetRLTajuHVH4KRUdGYJ0PFPNkte5JohaFyyu
+X-Gm-Gg: AR+sD10ARYK84MHTZAq0P7/GbzhCKmn6wJFfk9O4hYkm029QSaaTpgrKHW5sBDvM1uZ
+	uYiJDOGXYeL3kOPSmv5LgmrYr3NtoHLgyGSi21kQEFgfFP3DVEJdkV/SW4puL8djYfuwoBG26Hk
+	0Z3McXltJQZORKAdovQ9428wMc/Tvjc5voKhn/PoBVTVPwYFax3Tgm63KZ2bXiJwttHgus8YP6t
+	FJf7HqWFTnbmodLispDSwV9eZU9NXtAAzXLbeaEsOL+kfEGmzuQAuLi0yISEUYKGzBFaNVHjztz
+	wCwSCVXlh8oZEKnUq/8rMpr4dyRs/Hama5nnsIAFC02WpZ32Dp0MFuUHHpKZQQqdB3CRJpOMbWZ
+	z8lb9d1UKGZT9U8tGymK4I/Y=
+X-Received: by 2002:a05:6102:14a0:b0:785:8f76:654d with SMTP id ada2fe7eead31-7859996dea3mr2555575137.13.1787925958208;
+        Fri, 28 Aug 2026 07:05:58 -0700 (PDT)
+X-Received: by 2002:a05:6102:14a0:b0:785:8f76:654d with SMTP id ada2fe7eead31-7859996dea3mr2555540137.13.1787925957739;
+        Fri, 28 Aug 2026 07:05:57 -0700 (PDT)
 Received: from [127.0.1.1] ([178.197.219.214])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-482fbb20122sm3908633f8f.20.2026.08.28.07.05.49
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-482fbb20122sm3908633f8f.20.2026.08.28.07.05.55
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 28 Aug 2026 07:05:50 -0700 (PDT)
+        Fri, 28 Aug 2026 07:05:56 -0700 (PDT)
 From: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
-Date: Fri, 28 Aug 2026 16:05:07 +0200
-Subject: [PATCH RFC/DO NOT MERGE 09/12] drm/msm/hdmi: Add HDMI for Eliza
- SoC
+Date: Fri, 28 Aug 2026 16:05:09 +0200
+Subject: [PATCH RFC/DO NOT MERGE 11/12] arm64: dts: qcom: eliza: Add HDMI
+ display with HDMI PHY
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -90,7 +90,7 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260828-drm-msm-hdmi-eliza-v1-9-67843277de17@oss.qualcomm.com>
+Message-Id: <20260828-drm-msm-hdmi-eliza-v1-11-67843277de17@oss.qualcomm.com>
 References: <20260828-drm-msm-hdmi-eliza-v1-0-67843277de17@oss.qualcomm.com>
 In-Reply-To: <20260828-drm-msm-hdmi-eliza-v1-0-67843277de17@oss.qualcomm.com>
 To: Rob Clark <robin.clark@oss.qualcomm.com>,
@@ -114,359 +114,178 @@ Cc: linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org,
         Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>,
         linux-phy@lists.infradead.org
 X-Mailer: b4 0.16.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=10789;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3332;
  i=krzysztof.kozlowski@oss.qualcomm.com; h=from:subject:message-id;
- bh=3tdhm3owA+5jaxcS1URgoZO7Y2lY7qINi0ceeKg9TnE=;
- b=owEBbQKS/ZANAwAKAcE3ZuaGi4PXAcsmYgBqkZWg4SJKrYlfhfSTs4mvG5iIa3yXTHG/K/N1q
- 8QPz/LOiXiJAjMEAAEKAB0WIQTd0mIoPREbIztuuKjBN2bmhouD1wUCapGVoAAKCRDBN2bmhouD
- 17E9EACF8KUrHId12k+yzI4p4t3Neswnd9rTeGHAKUTf1ycGMgQV4PdNrG6Mp2qGSjHq7wUtcmm
- UQL2eB0pvJ4hpjO/LgfimmxLkka1Co6jmrklIOq62McbXNkvRHLea2L6RN0xVMkcZ+fPRj7e/rZ
- VSWtROignZpm1Jjkhcz0Y6mwY7QZHayRueZG4XA8FlFew2u+9a2wPo4csDhKh2P5jENshHlqKCm
- 8R8Zchj7glcG0xt8mg/qqun+OQjTW64ouAlE6WlBCwTvEExyTecldIpRrtWdptvAnnRwWt+qfCj
- peRUNIQzBXd4xfnyygO8HfqIPjPhrNJcsoc1UMdnstN3xWfilWlSudxBoLZSOtteEXNdVIbOYIr
- 6HWpz23G/5ASVEbq322dZisOLX09mbzXXw4aXdMvvEFCzNxtKzP2nhUfuJmImPIQXRSE19FA1Nt
- rg+eDcgVvv/0YqQGWLsOz4L1OTIZNf031HpgQdul+nxex/p7FZ1rdKLLbvsI3pgBnTeLaTYORWe
- 13RRSfQuvqaEp//y4+JkG85RnKwyv6VF75gy8tY4rc46TXdtTZqaMSaeCYg0mGdtdSY6s4J9gJQ
- AeyoW+ZoI9hXzFqOP6bvK4022PJbFz7L1PcDMPZ1R1a6Gr+I0OZEjiTzhEvRnN1T8gTk+QN9qhA
- YToDOENfXF4ZF1w==
+ bh=1brovUppJvb6ttZNs7kwMEVpoh0akbg09pFKeVhGO2I=;
+ b=owEBbQKS/ZANAwAKAcE3ZuaGi4PXAcsmYgBqkZWh434bFUqmEnSRcqsBUTydZhsSgPv4+miDG
+ XMlneJoAQ2JAjMEAAEKAB0WIQTd0mIoPREbIztuuKjBN2bmhouD1wUCapGVoQAKCRDBN2bmhouD
+ 1wsCD/9Mr2Zz4eadLs8rLbHZ5HLoj8IHcYC6XeDJBJ1hq4JmXgA9jzZ+iJwEmqmCHO+hd3lbluM
+ L1ufQWKSIRAP93y/MLCFtw77XbOtvmpCg6nKr1393bd6hMFwzpwJn4E8VlMojR7kl+PnXamsAsh
+ pPuK6s6pnv/uY5yZfWO0gMCBdTuwXjpUbpYYnMhP88AgUFUykJ55+9Ba5DSZVAtmK7ZjetkAv61
+ I/u2P1IbLdsIKgUUQiR1wbXa0phdVCUoVr8ziBhkOVT60LBNksyXoKjGZPr8EzQpAgU9LUhxJ3d
+ TjiM3PLC6Ur1wPvN8ANHOxQtnDkCdY4He9djZ5266iTpV1ZrAHpqGNhbMWnsjXVuTBwv3QeKRXA
+ hlppN+whNMClQuLSY12GNHRINbI1bSyh5gWk7bHKsO988VkutbnhSgOnGUTBpjTz1OC5bNaxFNs
+ 6pPhgIq8plNv3MOhsu6rpno+QcujtZ4y1k5oIFHp0kbkLK60F5WP5urqGNR0sUBD7XmqwmzlyJs
+ eFQYX2MnjvFzese4jNfjZHcapT7f6R8OKRxGRH4kP9pOYIkCkzNQ/tQXxUC/gxdnBigh/riykcV
+ O9mPclqIeHGQSjF7S2fHOvChM2pvK5j+L6J4aCQe+FpFYpo7edImd/Kub32vtHP1DtbIKgp6Eb+
+ 0RMxMekt3ocM8ZA==
 X-Developer-Key: i=krzysztof.kozlowski@oss.qualcomm.com; a=openpgp;
  fpr=9BD07E0E0C51F8D59677B7541B93437D3B41629B
-X-Authority-Analysis: v=2.4 cv=XKYAjwhE c=1 sm=1 tr=0 ts=6a9195c1 cx=c_pps
- a=KB4UBwrhAZV1kjiGHFQexw==:117 a=+bKQE0WJfmhK2875HamI0Q==:17
+X-Authority-Analysis: v=2.4 cv=a8YAM0SF c=1 sm=1 tr=0 ts=6a9195c6 cx=c_pps
+ a=P2rfLEam3zuxRRdjJWA2cw==:117 a=+bKQE0WJfmhK2875HamI0Q==:17
  a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
- a=EUspDBNiAAAA:8 a=RX5K5x96Qe6Feoj_i64A:9 a=QEXdDO2ut3YA:10
- a=o1xkdb1NAhiiM49bd1HK:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODI4MDEyMiBTYWx0ZWRfXy8kGWuV0f3LY
- iMHWpkk210/Sadd4qja25qr21GdOGXi445O5J7e6Yc7T+MuP3Q4JIAtUq9LLwj9MYeF9QvBo5fV
- CBrLBB9Xai/OGUOimRBc3y5AgbZ2PeV1JAdxo0H8YmiBjYFa6D1G3tEko6uAWvyh6Sp88mpndl7
- 56mpS9/H2MsX6YH3HJlAL+suBhGWDN1dJxl9KGeB/ZzzsVOMIBIK0oDfFX6Oo9bAOeQOp6wahuD
- k/g3D4MMOdPIGfGotJjsu9cnE3NOMqkcxg5xBnHmfwk5xg6ABNuI8Gg3Ve1I29SpYLHJVie55tJ
- pC2QFsOz6JK67OHLo2iJpGshqMlRKlLzsgmklcXHYwEbNPP3hvS7Tgaw6gmhW0gY5Z17+XnK66e
- DzdKuO6rLljlUC8w/KlCvCUSUvjla8urowTO3s32jXKgAlKzQl3qwLoDkmx4nKVtlH0avxQLmZh
- QZznFE0vXvgbfsOzKoQ==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODI4MDEyMiBTYWx0ZWRfXw4/Lhz01m3gw
- YrWsMhxgQ8bOLrc3I0lBFRRxT/gEJi+Drpb0qfG9scNrx2SU7q5cY2M1NbJA4BXrkabdldgNS2i
- hhTmfOMj5Al9r8JnR5FdTiSGtBrHiog=
-X-Proofpoint-GUID: A5Oo9OFWDdwmQ7eIPeKdCaI0dCf1avzc
-X-Proofpoint-ORIG-GUID: A5Oo9OFWDdwmQ7eIPeKdCaI0dCf1avzc
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22
+ a=EUspDBNiAAAA:8 a=BhlsTWrtbvULCAht3EwA:9 a=QEXdDO2ut3YA:10
+ a=ODZdjJIeia2B_SHc_B0f:22
+X-Proofpoint-ORIG-GUID: q_aTlZucCmGjKWPh4YxiKt-mpezACTA-
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODI4MDEyMiBTYWx0ZWRfX5gEoDBMZq2+r
+ Y8kwb/YAe0E81WjKaiBiJ3qxl0jim+mrxW0YxWmoQuu5hTentWED6LYH+W+UCYQN1oTvILsnx1w
+ PedB6/K+90rYoQB2gnyixWU8puugGuk=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODI4MDEyMiBTYWx0ZWRfX5p7da8xXfzEO
+ doIr/LSnEcV0WPUQN8Jd8nThew6MGn4wW8vwaUgcHixiYeY3H1ylK36EoHWJ9+FG/9swMYXIZ8Q
+ 1AqPuErZHwQYPvq+qJSeVkeFEcuNY+O8N23Q1WxOqEHZLPaIcorvx4giPnEypKl9JkAy5JMCIvD
+ 14rPiDgp2/EostBTk41hbvPSPWYzCXaWf9v2Q1B2sxg0TFyRmCDnlkhIlpe8Ts5yo3CkB8CYPOf
+ TvU7xckhG/jsYQ5DhUnmHQHeRBazp+ErtKntlGa9K2BR8vZ9Q6UN8SE/MDwijlOcLUEt/5BlG8s
+ JvtBPOY3aOSfN9gTfrOtrmTyF8WI0i/szhWiKXumGtDLdcdA3u4lomQfSJnBLzT7PxFRk6oKIE7
+ XE+NawCIfFF7ouOqEiSYl1HufEYAUOLjAHz4RK4cs+EdU9BoQOSadNAdXpYrVOSIjFrsU9AqxJC
+ 9vzaIQmeit4zQSfKqug==
+X-Proofpoint-GUID: q_aTlZucCmGjKWPh4YxiKt-mpezACTA-
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-08-28_04,2026-08-27_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0 lowpriorityscore=0 clxscore=1015 priorityscore=1501
- bulkscore=0 adultscore=0 phishscore=0 suspectscore=0 impostorscore=0
- spamscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
- adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
- definitions=main-2608280122
+ clxscore=1015 phishscore=0 impostorscore=0 lowpriorityscore=0 bulkscore=0
+ spamscore=0 malwarescore=0 priorityscore=1501 suspectscore=0 adultscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608280122
 
-Qualcomm Eliza SoC with DPU v12.4 comes with HDMI on INTF_11 with
-additional INTR registers.  The device clocks look different comparing
-to last variant of HDMI from MSM8998.
+Add device nodes for HDMI (similar to previous one in MSM8998) and HDMI
+PHY (new Synopsys-based block).
 
 Signed-off-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
 ---
- .../gpu/drm/msm/disp/dpu1/catalog/dpu_12_4_eliza.h |  8 +++
- drivers/gpu/drm/msm/disp/dpu1/dpu_hw_interrupts.c  | 15 +++++
- drivers/gpu/drm/msm/disp/dpu1/dpu_hw_interrupts.h  |  3 +
- drivers/gpu/drm/msm/disp/dpu1/dpu_hw_mdss.h        |  3 +
- drivers/gpu/drm/msm/hdmi/hdmi.c                    | 32 +++++++++
- drivers/gpu/drm/msm/hdmi/hdmi.h                    |  4 ++
- drivers/gpu/drm/msm/hdmi/hdmi_bridge.c             | 75 +++++++++++++++++++---
- drivers/gpu/drm/msm/msm_drv.h                      |  5 ++
- 8 files changed, 136 insertions(+), 9 deletions(-)
+ arch/arm64/boot/dts/qcom/eliza.dtsi | 94 ++++++++++++++++++++++++++++++++++++-
+ 1 file changed, 92 insertions(+), 2 deletions(-)
 
-diff --git a/drivers/gpu/drm/msm/disp/dpu1/catalog/dpu_12_4_eliza.h b/drivers/gpu/drm/msm/disp/dpu1/catalog/dpu_12_4_eliza.h
-index b93d32888972..c95cf4e38c12 100644
---- a/drivers/gpu/drm/msm/disp/dpu1/catalog/dpu_12_4_eliza.h
-+++ b/drivers/gpu/drm/msm/disp/dpu1/catalog/dpu_12_4_eliza.h
-@@ -294,6 +294,14 @@ static const struct dpu_intf_cfg eliza_intf[] = {
- 		.prog_fetch_lines_worst_case = 24,
- 		.intr_underrun = DPU_IRQ_IDX(MDP_SSPP_TOP0_INTR, 30),
- 		.intr_vsync = DPU_IRQ_IDX(MDP_SSPP_TOP0_INTR, 31),
-+	}, {
-+		.name = "intf_11", .id = INTF_11,
-+		.base = 0x3f000, .len = 0x4bc,
-+		.type = INTF_HDMI,
-+		.controller_id = MSM_HDMI_CONTROLLER_0,
-+		.prog_fetch_lines_worst_case = 24,
-+		.intr_underrun = DPU_IRQ_IDX(MDP_SSPP_TOP0_INTR, 14),
-+		.intr_vsync = DPU_IRQ_IDX(MDP_SSPP_TOP0_INTR, 15),
- 	}
- };
- 
-diff --git a/drivers/gpu/drm/msm/disp/dpu1/dpu_hw_interrupts.c b/drivers/gpu/drm/msm/disp/dpu1/dpu_hw_interrupts.c
-index 5b7cd5241f45..f6d1f944f4ba 100644
---- a/drivers/gpu/drm/msm/disp/dpu1/dpu_hw_interrupts.c
-+++ b/drivers/gpu/drm/msm/disp/dpu1/dpu_hw_interrupts.c
-@@ -206,6 +206,21 @@ static const struct dpu_intr_reg dpu_intr_set_7xxx[] = {
- 		MDP_INTF_REV_7xxx_INTR_EN(8),
- 		MDP_INTF_REV_7xxx_INTR_STATUS(8)
- 	},
-+	[MDP_INTF9_INTR] = {
-+		MDP_INTF_REV_7xxx_INTR_CLEAR(9),
-+		MDP_INTF_REV_7xxx_INTR_EN(9),
-+		MDP_INTF_REV_7xxx_INTR_STATUS(9)
-+	},
-+	[MDP_INTF10_INTR] = {
-+		MDP_INTF_REV_7xxx_INTR_CLEAR(10),
-+		MDP_INTF_REV_7xxx_INTR_EN(10),
-+		MDP_INTF_REV_7xxx_INTR_STATUS(10)
-+	},
-+	[MDP_INTF11_INTR] = {
-+		MDP_INTF_REV_7xxx_INTR_CLEAR(11),
-+		MDP_INTF_REV_7xxx_INTR_EN(11),
-+		MDP_INTF_REV_7xxx_INTR_STATUS(11)
-+	},
- };
- 
- /*
-diff --git a/drivers/gpu/drm/msm/disp/dpu1/dpu_hw_interrupts.h b/drivers/gpu/drm/msm/disp/dpu1/dpu_hw_interrupts.h
-index 142358a105c5..231809607be1 100644
---- a/drivers/gpu/drm/msm/disp/dpu1/dpu_hw_interrupts.h
-+++ b/drivers/gpu/drm/msm/disp/dpu1/dpu_hw_interrupts.h
-@@ -27,6 +27,9 @@ enum dpu_hw_intr_reg {
- 	MDP_INTF6_INTR,
- 	MDP_INTF7_INTR,
- 	MDP_INTF8_INTR,
-+	MDP_INTF9_INTR,
-+	MDP_INTF10_INTR,
-+	MDP_INTF11_INTR,
- 	MDP_INTF1_TEAR_INTR,
- 	MDP_INTF2_TEAR_INTR,
- 	MDP_AD4_0_INTR,
-diff --git a/drivers/gpu/drm/msm/disp/dpu1/dpu_hw_mdss.h b/drivers/gpu/drm/msm/disp/dpu1/dpu_hw_mdss.h
-index 0e65bf5ddc4a..bdcc0caa4e4f 100644
---- a/drivers/gpu/drm/msm/disp/dpu1/dpu_hw_mdss.h
-+++ b/drivers/gpu/drm/msm/disp/dpu1/dpu_hw_mdss.h
-@@ -226,6 +226,9 @@ enum dpu_intf {
- 	INTF_6,
- 	INTF_7,
- 	INTF_8,
-+	INTF_9,
-+	INTF_10,
-+	INTF_11,
- 	INTF_MAX
- };
- 
-diff --git a/drivers/gpu/drm/msm/hdmi/hdmi.c b/drivers/gpu/drm/msm/hdmi/hdmi.c
-index c46f30063f14..b769780cd5dd 100644
---- a/drivers/gpu/drm/msm/hdmi/hdmi.c
-+++ b/drivers/gpu/drm/msm/hdmi/hdmi.c
-@@ -234,6 +234,16 @@ static const struct hdmi_platform_config hdmi_tx_8974_config = {
- 	.pwr_clk_cnt = ARRAY_SIZE(pwr_clk_names_8x74),
- };
- 
-+static const char * const pwr_reg_names_eliza[] = {"core-vdda", "core-vcc", "vddio"};
-+static const char * const pwr_clk_names_eliza[] = {"iface", "core"};
+diff --git a/arch/arm64/boot/dts/qcom/eliza.dtsi b/arch/arm64/boot/dts/qcom/eliza.dtsi
+index 66ea4aaafd73..27dd15766f51 100644
+--- a/arch/arm64/boot/dts/qcom/eliza.dtsi
++++ b/arch/arm64/boot/dts/qcom/eliza.dtsi
+@@ -2570,7 +2570,14 @@ dpu_intf0_out: endpoint {
+ 							remote-endpoint = <&mdss_dp0_in>;
+ 						};
+ 					};
+-					/* TODO: HDMI */
 +
-+static const struct hdmi_platform_config hdmi_tx_eliza_config = {
-+	.pwr_reg_names = pwr_reg_names_eliza,
-+	.pwr_reg_cnt = ARRAY_SIZE(pwr_reg_names_eliza),
-+	.pwr_clk_names = pwr_clk_names_eliza,
-+	.pwr_clk_cnt = ARRAY_SIZE(pwr_clk_names_eliza),
-+};
++					port@3 {
++						reg = <3>;
 +
- static int msm_hdmi_bind(struct device *dev, struct device *master, void *data)
- {
- 	struct msm_drm_private *priv = dev_get_drvdata(master);
-@@ -360,6 +370,27 @@ static int msm_hdmi_dev_probe(struct platform_device *pdev)
- 		goto err_put_bridge;
- 	}
++						dpu_intf4_out: endpoint {
++							remote-endpoint = <&mdss_hdmi_in>;
++						};
++					};
+ 				};
  
-+	hdmi->phy_iface_clk = devm_clk_get_optional(dev, "phy_iface");
-+	if (IS_ERR(hdmi->phy_iface_clk)) {
-+		ret = dev_err_probe(dev, PTR_ERR(hdmi->phy_iface_clk),
-+				    "failed to get phy iface clock\n");
-+		goto err_put_bridge;
-+	}
+ 				mdp_opp_table: opp-table {
+@@ -2805,6 +2812,89 @@ mdss_dsi1_phy: phy@ae97000 {
+ 				status = "disabled";
+ 			};
+ 
++			mdss_hdmi: hdmi@aea0000 {
++				compatible = "qcom,eliza-hdmi-tx";
++				reg = <0x0 0x0aea0000 0x0 0x1000>,
++				      <0x0 0x0aee0000 0x0 0x1000>;
++				reg-names = "core_physical",
++					    "hdcp_physical";
 +
-+	hdmi->pixel_src_clk = devm_clk_get_optional(dev, "pixel_src");
-+	if (IS_ERR(hdmi->pixel_src_clk)) {
-+		ret = dev_err_probe(dev, PTR_ERR(hdmi->pixel_src_clk),
-+				    "failed to get pixel src clock\n");
-+		goto err_put_bridge;
-+	}
++				interrupts-extended = <&mdss 8>;
 +
-+	hdmi->pll_clk = devm_clk_get_optional(dev, "pll");
-+	if (IS_ERR(hdmi->pll_clk)) {
-+		ret = dev_err_probe(dev, PTR_ERR(hdmi->pll_clk),
-+				    "failed to get pll clock\n");
-+		goto err_put_bridge;
-+	}
++				clocks = <&dispcc DISP_CC_MDSS_HDMI_AHBM_CLK>,
++					 <&dispcc DISP_CC_MDSS_HDMI_APP_CLK>,
++					 <&dispcc DISP_CC_MDSS_HDMI_PCLK_CLK>,
++					 <&dispcc DISP_CC_MDSS_HDMI_INTF_CLK>,
++					 <&mdss_hdmi_phy>,
++					 <&dispcc DISP_CC_MDSS_HDMI_PCLK_CLK_SRC>;
++				clock-names = "iface",
++					      "core",
++					      "extp",
++					      "phy_iface",
++					      "pll",
++					      "pixel_src";
 +
- 	hdmi->hpd_gpiod = devm_gpiod_get_optional(dev, "hpd", GPIOD_IN);
- 	/* This will catch e.g. -EPROBE_DEFER */
- 	if (IS_ERR(hdmi->hpd_gpiod)) {
-@@ -458,6 +489,7 @@ static int msm_hdmi_runtime_resume(struct device *dev)
- static DEFINE_RUNTIME_DEV_PM_OPS(msm_hdmi_pm_ops, msm_hdmi_runtime_suspend, msm_hdmi_runtime_resume, NULL);
- 
- static const struct of_device_id msm_hdmi_dt_match[] = {
-+	{ .compatible = "qcom,eliza-hdmi-tx", .data = &hdmi_tx_eliza_config },
- 	{ .compatible = "qcom,hdmi-tx-8998", .data = &hdmi_tx_8974_config },
- 	{ .compatible = "qcom,hdmi-tx-8996", .data = &hdmi_tx_8974_config },
- 	{ .compatible = "qcom,hdmi-tx-8994", .data = &hdmi_tx_8974_config },
-diff --git a/drivers/gpu/drm/msm/hdmi/hdmi.h b/drivers/gpu/drm/msm/hdmi/hdmi.h
-index 306b988bca72..2fa9bec455b4 100644
---- a/drivers/gpu/drm/msm/hdmi/hdmi.h
-+++ b/drivers/gpu/drm/msm/hdmi/hdmi.h
-@@ -52,6 +52,9 @@ struct hdmi {
- 	struct regulator_bulk_data *pwr_regs;
- 	struct clk_bulk_data *pwr_clks;
- 	struct clk *extp_clk;
-+	struct clk *phy_iface_clk;
-+	struct clk *pixel_src_clk;
-+	struct clk *pll_clk;
- 
- 	struct gpio_desc *hpd_gpiod;
- 
-@@ -171,6 +174,7 @@ struct hdmi_phy {
- 	struct platform_device *pdev;
- 	void __iomem *mmio;
- 	struct hdmi_phy_cfg *cfg;
-+	void *pll;
- 	const struct hdmi_phy_funcs *funcs;
- 	struct regulator_bulk_data *regs;
- 	struct clk **clks;
-diff --git a/drivers/gpu/drm/msm/hdmi/hdmi_bridge.c b/drivers/gpu/drm/msm/hdmi/hdmi_bridge.c
-index 621083a97b37..c6a75f653915 100644
---- a/drivers/gpu/drm/msm/hdmi/hdmi_bridge.c
-+++ b/drivers/gpu/drm/msm/hdmi/hdmi_bridge.c
-@@ -14,6 +14,18 @@
- #include "msm_kms.h"
- #include "hdmi.h"
- 
-+static void msm_hdmi_clk_reparent(struct hdmi *hdmi)
-+{
-+	int ret;
++				operating-points-v2 = <&mdss_hdmi_opp_table>;
 +
-+	if (hdmi->pixel_src_clk && hdmi->pll_clk) {
-+		ret = clk_set_parent(hdmi->pixel_src_clk, hdmi->pll_clk);
-+		if (ret)
-+			DRM_DEV_ERROR(hdmi->dev->dev, "failed to set reparent pixel src clock rate: %d\n",
-+				      ret);
-+	}
-+}
++				phys = <&mdss_hdmi_phy>;
++				power-domains = <&rpmhpd RPMHPD_CX>;
++				#sound-dai-cells = <1>;
 +
- static void msm_hdmi_power_on(struct drm_bridge *bridge)
- {
- 	struct hdmi_bridge *hdmi_bridge = to_hdmi_bridge(bridge);
-@@ -29,16 +41,34 @@ static void msm_hdmi_clk_prepare(struct drm_bridge *bridge)
- 	struct hdmi *hdmi = hdmi_bridge->hdmi;
- 	int ret;
- 
-+	msm_hdmi_clk_reparent(hdmi);
- 	if (hdmi->extp_clk) {
-+		/*
-+		 * Set rate to hdmi->pixclock: PCLK_CLK_SRC and PCLK_CLK
-+		 * Set rate to hdmi->pixclock/2: INTF_CLK and PCLK_DIV_CLK_SRC
-+		 * Set rate to hdmi->pixclock: HDMI PHY PLL
-+		 */
- 		DBG("pixclock: %lu", hdmi->pixclock);
- 
- 		ret = dev_pm_opp_set_rate(&hdmi->pdev->dev, hdmi->pixclock);
- 		if (ret)
- 			DRM_DEV_ERROR(dev->dev, "failed to set OPP rate: %d\n", ret);
- 
-+		ret = clk_set_rate(hdmi->pixel_src_clk, hdmi->pixclock);
-+		if (ret)
-+			DRM_DEV_ERROR(dev->dev, "failed to set pixel src clk rate: %d\n", ret);
++				status = "disabled";
 +
-+		ret = clk_set_rate(hdmi->phy_iface_clk, hdmi->pixclock / 2);
-+		if (ret)
-+			DRM_DEV_ERROR(dev->dev, "failed to set pixel iface clk rate: %d\n", ret);
++				ports {
++					#address-cells = <1>;
++					#size-cells = <0>;
 +
- 		ret = clk_prepare_enable(hdmi->extp_clk);
- 		if (ret)
- 			DRM_DEV_ERROR(dev->dev, "failed to enable extp clk: %d\n", ret);
++					port@0 {
++						reg = <0>;
 +
-+		ret = clk_prepare_enable(hdmi->phy_iface_clk);
-+		if (ret)
-+			DRM_DEV_ERROR(dev->dev, "failed to enable phy iface clk: %d\n", ret);
- 	}
- }
- 
-@@ -61,6 +91,7 @@ static void msm_hdmi_clk_unprepare(struct drm_bridge *bridge)
- 	struct hdmi *hdmi = hdmi_bridge->hdmi;
- 
- 	if (hdmi->extp_clk) {
-+		clk_disable_unprepare(hdmi->phy_iface_clk);
- 		clk_disable_unprepare(hdmi->extp_clk);
- 		dev_pm_opp_set_rate(&hdmi->pdev->dev, 0);
- 	}
-@@ -443,21 +474,47 @@ static enum drm_mode_status msm_hdmi_bridge_tmds_char_rate_valid(const struct dr
- 	 * mdp4/dtv stuff where pixel clk is assigned to mdp/encoder
- 	 * instead):
- 	 */
--	if (kms->funcs->round_pixclk)
-+	if (kms->funcs->round_pixclk) {
- 		actual = kms->funcs->round_pixclk(kms,
- 						  tmds_rate,
- 						  hdmi_bridge->hdmi->encoder);
--	else if (hdmi->extp_clk)
--		actual = clk_round_rate(hdmi->extp_clk, tmds_rate);
--	else
--		actual = tmds_rate;
-+		DBG("requested=%lld, actual=%ld", tmds_rate, actual);
- 
--	DBG("requested=%lld, actual=%ld", tmds_rate, actual);
-+		if (actual != tmds_rate)
-+			return MODE_CLOCK_RANGE;
-+		return MODE_OK;
-+	} else if (!dev_pm_opp_get_opp_count(&hdmi->pdev->dev)) {
-+		if (hdmi->extp_clk)
-+			actual = clk_round_rate(hdmi->extp_clk, tmds_rate);
-+		else
-+			actual = tmds_rate;
- 
--	if (actual != tmds_rate)
--		return MODE_CLOCK_RANGE;
-+		if (actual != tmds_rate)
-+			return MODE_CLOCK_RANGE;
-+		return MODE_OK;
-+	} else {
-+		struct dev_pm_opp *opp;
-+		unsigned long pclk_rate = tmds_rate;
- 
--	return 0;
-+		if (mode->clock > 600000)
-+			return MODE_CLOCK_HIGH;
++						mdss_hdmi_in: endpoint {
++							remote-endpoint = <&dpu_intf4_out>;
++						};
++					};
 +
-+		opp = dev_pm_opp_find_freq_ceil(&hdmi->pdev->dev, &pclk_rate);
-+		if (!IS_ERR(opp)) {
-+			dev_pm_opp_put(opp);
-+		} else if (PTR_ERR(opp) == -ERANGE) {
-+			/*
-+			 * An empty table is created by devm_pm_opp_set_clkname() even
-+			 * if there is none. Thus find_freq_ceil will still return
-+			 * -ERANGE in such case.
-+			 */
-+			return MODE_CLOCK_RANGE;
-+		} else {
-+			return MODE_ERROR;
-+		}
++					port@1 {
++						reg = <1>;
 +
-+		return MODE_OK;
-+	}
- }
- 
- static const struct drm_bridge_funcs msm_hdmi_bridge_funcs = {
-diff --git a/drivers/gpu/drm/msm/msm_drv.h b/drivers/gpu/drm/msm/msm_drv.h
-index eb4bbae8557b..e63c63ae7d6f 100644
---- a/drivers/gpu/drm/msm/msm_drv.h
-+++ b/drivers/gpu/drm/msm/msm_drv.h
-@@ -67,6 +67,11 @@ enum msm_dsi_controller {
- 	MSM_DSI_CONTROLLER_COUNT,
- };
- 
-+enum msm_hdmi_controller {
-+	MSM_HDMI_CONTROLLER_0,
-+	MSM_HDMI_CONTROLLER_COUNT,
-+};
++						mdss_hdmi_out: endpoint {
++						};
++					};
++				};
 +
- #define MSM_GPU_MAX_RINGS 4
++				mdss_hdmi_opp_table: opp-table {
++					compatible = "operating-points-v2";
++
++					opp-150000000 {
++						opp-hz = /bits/ 64 <150000000>;
++						required-opps = <&rpmhpd_opp_low_svs_d1>;
++					};
++
++					opp-300000000 {
++						opp-hz = /bits/ 64 <300000000>;
++						required-opps = <&rpmhpd_opp_svs>;
++					};
++				};
++			};
++
++			mdss_hdmi_phy: phy@aea1000 {
++				compatible = "qcom,eliza-hdmi-phy";
++				reg = <0x0 0x0aea1000 0x0 0x1000>;
++
++				clocks = <&dispcc DISP_CC_MDSS_AHB_CLK>,
++					 <&tcsr TCSR_HDMI_CLKREF_EN>,
++					 <&bi_tcxo_div2>;
++				clock-names = "iface",
++					      "ref",
++					      "xo";
++
++				#clock-cells = <0>;
++				#phy-cells = <0>;
++				power-domains = <&rpmhpd RPMHPD_CX>;
++
++				status = "disabled";
++			};
++
+ 			mdss_dp0: displayport-controller@af54000 {
+ 				compatible = "qcom,eliza-dp", "qcom,sm8650-dp";
+ 				reg = <0x0 0x0af54000 0x0 0x200>,
+@@ -2913,7 +3003,7 @@ dispcc: clock-controller@af00000 {
+ 				 <0>,
+ 				 <0>, /* dp3 */
+ 				 <0>,
+-				 <0>; /* HDMI phy */
++				 <&mdss_hdmi_phy>; /* HDMI phy */
  
- struct msm_drm_private {
+ 			power-domains = <&rpmhpd RPMHPD_MX>;
+ 			required-opps = <&rpmhpd_opp_low_svs>;
 
 -- 
 2.53.0
