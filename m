@@ -1,86 +1,39 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from ixit.cz (ixit.cz [84.42.129.46])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8077A448D16
-	for <linux-arm-msm@vger.kernel.org>; Fri, 28 Aug 2026 11:49:58 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DA50443FD32;
+	Fri, 28 Aug 2026 12:12:34 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=84.42.129.46
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787917808; cv=none; b=ZMeAnptWcpBllJzFrSrrC0mPjT0ohkEt62QxBiPKRHWaffZFZH0JCx1i0lHmEyTZ1AkxnMQaUnD40+1yqBA9YTsTJ3piVpFz+7DRd+T8UEOkBTZNYrykHf1txvC37yx+/ssCGr4rDPxf3il/QcoE1u2u+7GyxIf2YzEvHuquyVU=
+	t=1787919170; cv=none; b=scqay23/YUOIYedkOR4E0qp6pl4UHoXi9jymly1FW/5Jy2J3HrgPhXee3Gx/ocK3juER6mmEKMDjLPwar384iAQxrRrUEmUF0+jccA0am91+nmC58BfXWNhNVTSXucIrlxkN5fN/JwYwiDmmi4Dc/lkhVDeiWPuwnVyPAz5VJLE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787917808; c=relaxed/simple;
-	bh=OPMKygoceZMDJyOGH20lQgoZZX+2mPTA8duNWRXxNLA=;
+	s=arc-20240116; t=1787919170; c=relaxed/simple;
+	bh=sYUuNwo4GjCMxDOumVZA51pMc9VSkLkCI2wD2k+x8d0=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=CaBeQnqNWRwLkQ7IECQHcZgUk+kfgbJlvO5EQs2LgdUbiBtgCMfWGhLsKMI/od+lD4KSsJe7m2O5SniQgJwCoUfhhdCLfqvfC+mJ21r3COIi2k0Y1XxrCDhy1+ithBOS6mL+z2FOxaIURtagkKdENSTQ5Svu9zIVkuyk7rS1Wmo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=JhEsOIRO; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=O1P6lxAC; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	 In-Reply-To:Content-Type; b=V1Vs16v6M8hBhYFpDQHDYosE/n7RbjCgn0swZcmOWuP7/NFMhefA42QBLAhfhiGX5XLtjSM/KD7SDZfAvHSLKCS5rttNyjYQtHmufB7ErTCtQibXAIeBZ+Juy72to5RyUliJZtXVn5bhRyKA7tLJZtAj2W1BbC6Y0HHa9tkpM+Q=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=ixit.cz; spf=pass smtp.mailfrom=ixit.cz; dkim=pass (1024-bit key) header.d=ixit.cz header.i=@ixit.cz header.b=2jJ4tgFj; arc=none smtp.client-ip=84.42.129.46
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=ixit.cz
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ixit.cz
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="JhEsOIRO";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="O1P6lxAC"
-Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67SA88TK2596139
-	for <linux-arm-msm@vger.kernel.org>; Fri, 28 Aug 2026 11:49:55 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	zkscxSeQA75G5CVLELcqbbwuEp11lW2ijBGhi/h86ik=; b=JhEsOIRO+a/i+u/r
-	lv9dHczGxjqUsTe3Qwz8GafxHU13THPXMyE25KvSWe3Rd9gz7/laWRzJe5e/E1HK
-	aOtHFWmWlGGLggkELzg7LfP7Z+T95CSgZ4U8Upa+ZXIWmoqBuMvvUhJoSJzXYZAH
-	C+oy1TEku44trBtEavVlJIJfhue707iyK5rjK37AEi5pM5Fsh6X+M29mZEEct/2p
-	TWAVHHmj+/VeRuIFhqmo7WqpjKIDCPzwHXCECiXWNu6neE/o/jj+NQQigVzTZ9tQ
-	SNcmIJr7QuC+qmOb53OWtg3Q2cMDRAvQP75GTXjXvwUBwMZ9QU0rgYfGlE5hfZ0t
-	STO2vw==
-Received: from mail-qt1-f197.google.com (mail-qt1-f197.google.com [209.85.160.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gb1v3a1kb-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Fri, 28 Aug 2026 11:49:55 +0000 (GMT)
-Received: by mail-qt1-f197.google.com with SMTP id d75a77b69052e-51c21be5bb4so1091631cf.0
-        for <linux-arm-msm@vger.kernel.org>; Fri, 28 Aug 2026 04:49:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1787917794; x=1788522594; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=zkscxSeQA75G5CVLELcqbbwuEp11lW2ijBGhi/h86ik=;
-        b=O1P6lxACLh3x5S9m/hXkfZOudtyPLBYJQWHFtlFpGBlEafj4nN9N1eeuY5iiA1vdTM
-         Vpa3YU6TO6d/r/VTD0kPNMCFgwAC839v4ZpotzVQx8H6pnQlUUCPVNAB3W96xLYTF/gE
-         nleVW5ZgLJQaXv8UcpQNYHlPqwzo2qbg8yeRSaDY3SJ5PkG+UxMcyh0sqdqVno6FOSCX
-         Yj7BGIJHnrJkZZEGD9RF5GJs+AiUL552mBcg5GRGy/oYpH/IIJOABd6IyYJlEnDxn8We
-         IA5ZhkOqhFpdySk/H06dbJ1VEvsJPU5dG8Qx5BM7wtFAGVGVZ4sKVMvXzpvl8ysogtnB
-         HpgQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787917794; x=1788522594;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=zkscxSeQA75G5CVLELcqbbwuEp11lW2ijBGhi/h86ik=;
-        b=nmBsA4YbiiMlOJwe7S/poZt+m6Zhg5zf10odt/PYE+pjBZ8RamjRxQ6z9lygDNOI8s
-         VLSh6JJ78QP+RyNd/d3pwurZu341IosUN/rIIIcV4iN51s3aX0HK40ydog2mhahrnckh
-         ZzNJu/UHIhmKD9LhFbLSfftri2/PCpzpelBXgZbJ+VyYNBBcvKM8DKh16pfH5fez7X0v
-         1U8c2QYEzlVFxOV26wmtfQ+RnY54Zx+ULQBsHo1Nby/glttBUEbid6cTGZzRDqBM/FTa
-         jwfBM9t8k1yd+NP6ShrPYQWbJVnhXcccfWw/pwAAAmLTirgZH/yy1KY97OuMlIq+H2p2
-         5rVw==
-X-Gm-Message-State: AFuF++mYvWRYqZg4sQQdPkj4y+yAU4iswEB2bxZYBBFwPBnrzspBLe+/
-	k1R4iJiqL58Z3RKELLDNtMs7HRF1lAhFDT7yp9bPR9xwJAv8/JefXx+V8buhf5BjXoCXQxT15c4
-	Ie9BwoCSE2OZOgqIHREJ966qdTMDYRfm74urn9Xyt/7Mc7ocItZymp9rsDgAdTOAPUMek
-X-Gm-Gg: AR+sD10WbIDKjUsTaN8VSMD2kG0gSdlZN45QHcrgQkizUD4zOS3ZoEFYJxH2nzJHhbo
-	tFyZfb8+KGVwfe8eiOQ944N9wKEHfWagXEvkwmY+XYMbXckAV5jzwLeLSECNCQyooiInJYDJZPs
-	cwbK7vJMbkH2kisuuhYAi2ss/9xmSrGXIMdkU12k4v0KKvyNB/tl1JD37d0f0xJcjUOEvKVRidz
-	DnrdPjCDMvk/DTnMOadnoh58xaY9qa2IKx78oA2MLX0sch4K9DHyB5eDJcIb/5gJLviUTIAmkZU
-	JNzXDPXS+s2crL1iqi+Go/SB+hEWqvYVfzydpu1H0sc2NcJoxk2UuiDu44v33i+cL9c3c5JcZEF
-	eaOjLjJuCfRR0f46ZDj1CfEs=
-X-Received: by 2002:a05:622a:130b:b0:51c:2324:666 with SMTP id d75a77b69052e-52fb9603de5mr48555481cf.3.1787917794462;
-        Fri, 28 Aug 2026 04:49:54 -0700 (PDT)
-X-Received: by 2002:a05:622a:130b:b0:51c:2324:666 with SMTP id d75a77b69052e-52fb9603de5mr48554871cf.3.1787917793734;
-        Fri, 28 Aug 2026 04:49:53 -0700 (PDT)
-Received: from [192.168.120.193] ([178.235.128.140])
-        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-6a611c38e82sm439669a12.19.2026.08.28.04.49.51
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 28 Aug 2026 04:49:52 -0700 (PDT)
-Message-ID: <cc0906d0-5a56-4878-88c6-24f28a7b2fd2@oss.qualcomm.com>
-Date: Fri, 28 Aug 2026 13:49:51 +0200
+	dkim=pass (1024-bit key) header.d=ixit.cz header.i=@ixit.cz header.b="2jJ4tgFj"
+Received: from [10.0.0.32] (unknown [185.110.89.192])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange x25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by ixit.cz (Postfix) with ESMTPSA id 6A29E53401E6;
+	Fri, 28 Aug 2026 14:12:21 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ixit.cz; s=dkim;
+	t=1787919142;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+	bh=QxdsXA/ZvyTSPjgJ6dSXmUKdhnb8n25QrPrJPCDLRXA=;
+	b=2jJ4tgFjdLCaVewECwxqKu4jVYHM4BQEOBbvP+wcrYVLVoLITqkosG7RZ5DIQ+tGQsAyqE
+	/KfOdGKHf56oyBBAmAxMVQ1EZChmLdBrRPBS05zipodkSLHqVDmbLjh51obJJ//lt773YG
+	FcqsEmrm+5kzQ3mz1SGElJzhLlshRTY=
+Message-ID: <cfa1d6c7-267c-4e9d-b3ab-2c483503a1e6@ixit.cz>
+Date: Fri, 28 Aug 2026 14:12:20 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -88,65 +41,120 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 3/4] phy: qualcomm: qmp-combo: Update link rate
- specific DP PHY tables
-To: Nabige Aala <nabige.aala@oss.qualcomm.com>, Vinod Koul
- <vkoul@kernel.org>,
-        Neil Armstrong <neil.armstrong@linaro.org>,
-        Manivannan Sadhasivam <mani@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, linux-phy@lists.infradead.org,
-        linux-kernel@vger.kernel.org,
-        Ritesh Kumar <ritesh.kumar@oss.qualcomm.com>,
-        Mahadevan P <mahadevan.p@oss.qualcomm.com>
-References: <20260828-glymur-phy-v3-v3-0-8e73ce7c4636@oss.qualcomm.com>
- <20260828-glymur-phy-v3-v3-3-8e73ce7c4636@oss.qualcomm.com>
-Content-Language: en-US
-From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-In-Reply-To: <20260828-glymur-phy-v3-v3-3-8e73ce7c4636@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8
+Subject: Re: [PATCH v7 2/2] input: misc: Add Qualcomm SPMI PMIC haptics driver
+To: Fenglin Wu <fenglin.wu@oss.qualcomm.com>, linux-arm-msm@vger.kernel.org,
+ Dmitry Torokhov <dmitry.torokhov@gmail.com>, Rob Herring <robh@kernel.org>,
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
+ <conor+dt@kernel.org>, Lee Jones <lee@kernel.org>,
+ Stephen Boyd <sboyd@kernel.org>, Bjorn Andersson <andersson@kernel.org>,
+ Konrad Dybcio <konradybcio@kernel.org>
+Cc: David Collins <david.collins@oss.qualcomm.com>,
+ Subbaraman Narayanamurthy <subbaraman.narayanamurthy@oss.qualcomm.com>,
+ Kamal Wadhwa <kamal.wadhwa@oss.qualcomm.com>, linux-input@vger.kernel.org,
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
+References: <20260828-qcom-spmi-haptics-v7-0-0367b3ac2e1e@oss.qualcomm.com>
+ <20260828-qcom-spmi-haptics-v7-2-0367b3ac2e1e@oss.qualcomm.com>
+Content-Language: en-US, cs-CZ
+From: David Heidelberg <david@ixit.cz>
+Autocrypt: addr=david@ixit.cz; keydata=
+ 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
+In-Reply-To: <20260828-qcom-spmi-haptics-v7-2-0367b3ac2e1e@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODI4MDEwMSBTYWx0ZWRfXxgzJkD6S6Sg0
- sUYYwNhA1ImvquIzqzqhnh9GV7hra3Ti/w8b5gylEA1Q1gQbtXJPBrrDisKXA3u2XP3I4r8Q0dW
- af4EGe224AO4SyiPwBWF5Mw0elsnD94HVZi4GqYbMeJjWMV37kR5lUti5eT+Kk8OTrVX92L+Ytx
- w3pEan4xijfDn648eerGs4Cf+mDv/50ACwi/KcoT/2PBjuZj9jkGK/sRFkF9rDfCIylm7cPODsN
- Ko1zpzzt7F4YJrlXKwkbSDKwTqFXun5ue9uL6Jij4E3NyGTk8yauy/lbQkpGXqzHK4ZGZVLFwRG
- sxUbaGA3i6BZjwhPQc8UvgweKhPimT65XPtq3uGy5k4ZCYP9nNWhoxlpslw0cvZ5RljbdfSY+VS
- 3vIXYufGe3E2CZNgZMEurp6ynIwe8ZF4yBTPSfI7FW60lW39wEz4ATmY0oUJbQmdLWWWPKtePJ2
- zPJCB+HOKY3i0Kn/TwA==
-X-Proofpoint-ORIG-GUID: fJbPSZd0x-JOMe_easKUmq1cn0Qw7quP
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODI4MDEwMSBTYWx0ZWRfX89T1MFMObdKt
- xPSPmrq8FJzz32k3J4N9xvpLdmMdfE+SJ+KIUKao5bUoS/a+zwdhPp0UP/q3tBCcD1qbLMxswKK
- IEEVv64vjPwsPdC914266PLKiEYVLCM=
-X-Authority-Analysis: v=2.4 cv=faedDUQF c=1 sm=1 tr=0 ts=6a9175e3 cx=c_pps
- a=EVbN6Ke/fEF3bsl7X48z0g==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
- a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
- a=EUspDBNiAAAA:8 a=ICfJUWih502foIDt9eMA:9 a=QEXdDO2ut3YA:10
- a=a_PwQJl-kcHnX1M80qC6:22
-X-Proofpoint-GUID: fJbPSZd0x-JOMe_easKUmq1cn0Qw7quP
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-08-28_03,2026-08-27_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- bulkscore=0 priorityscore=1501 phishscore=0 spamscore=0 impostorscore=0
- lowpriorityscore=0 suspectscore=0 adultscore=0 malwarescore=0 clxscore=1015
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608280101
 
-On 8/28/26 11:43 AM, Nabige Aala wrote:
-> From: Ritesh Kumar <ritesh.kumar@oss.qualcomm.com>
+On 28/08/2026 11:49, Fenglin Wu wrote:
+> Add an initial driver for the Qualcomm PMIH0108 PMIC haptics module,
+> named as HAP530_HV. This module supports several play modes, including
+> DIRECT_PLAY, FIFO, PAT_MEM, and SWR, each with distinct data sourcing
+> and hardware data handling logic. Currently, the driver provides support
+> for two play modes using the input force-feedback framework: FF_CONSTANT
+> effect for DIRECT_PLAY mode and FF_PERIODIC effect with FF_CUSTOM
+> waveform for FIFO mode.
 > 
-> Update DP PHY initialization tables for all link rates (RBR, HBR,
-> HBR2, HBR3) with corrected VCO calibration codes, lock compare
-> values, SSC step sizes, clock forward config, and bias enable
-> settings for proper PLL programming across different data rates.
-> 
-> Signed-off-by: Ritesh Kumar <ritesh.kumar@oss.qualcomm.com>
-> Signed-off-by: Mahadevan P <mahadevan.p@oss.qualcomm.com>
-> Signed-off-by: Nabige Aala <nabige.aala@oss.qualcomm.com>
+> Assisted-by: Claude:claude-4-8-opus
+> Signed-off-by: Fenglin Wu <fenglin.wu@oss.qualcomm.com>
 > ---
+>   drivers/input/misc/Kconfig             |   11 +
+>   drivers/input/misc/Makefile            |    1 +
+>   drivers/input/misc/qcom-spmi-haptics.c | 1251 ++++++++++++++++++++++++++++++++
+>   3 files changed, 1263 insertions(+)
+> 
 
-Fixes: d10736db98d2 ("phy: qualcomm: qmp-combo: Add DP offsets and settings for Glymur platforms")
-Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+[...]
 
-Konrad
+> +
+> +static const struct of_device_id qcom_haptics_of_match[] = {
+> +	{ .compatible = "qcom,spmi-haptics" },
+
+Hello Fenglin.
+
+Same comment as for v6. As you mentioned, this driver won't work for:
+
+compatible = "qcom,pmi8998-haptics", "qcom,spmi-haptics";
+
+which I'll be upstreaming soon, can you please use device specific compatibles 
+here, thus listing the devices which will work? e.g. qcom,pmih0108-haptics or 
+any other you tested?
+
+Thanks
+David
+
+> +	{ }
+> +};
+> +MODULE_DEVICE_TABLE(of, qcom_haptics_of_match);
+> +
+> +static struct platform_driver qcom_haptics_driver = {
+> +	.probe  = qcom_haptics_probe,
+> +	.driver = {
+> +		.name		= "qcom-spmi-haptics",
+> +		.of_match_table	= qcom_haptics_of_match,
+> +		.pm		= pm_ptr(&qcom_haptics_pm_ops),
+> +	},
+> +};
+> +module_platform_driver(qcom_haptics_driver);
+> +
+> +MODULE_DESCRIPTION("Qualcomm SPMI PMIC Haptics driver");
+> +MODULE_LICENSE("GPL");
+> 
+
