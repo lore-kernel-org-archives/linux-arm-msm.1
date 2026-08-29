@@ -1,38 +1,38 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D8D2F323416;
-	Sat, 29 Aug 2026 19:31:54 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5FDA979CD;
+	Sat, 29 Aug 2026 19:35:42 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788031914; cv=none; b=DrW4FrQKbdMc3BP6eXsBJ8kOL5Cv39ZwkbsGt05S/ICiwRJ9eHzfrFLsTugaKcxL+fXifcqQlEpOdjvD+SjInwfL0p5cvMi1z67CrQSLP/a5wFjh1ypPDxAcxpTG+jZzvc4M9Jo/yOjr1nVEv+hnJt6f9vUS74PyTarpZd6Wapw=
+	t=1788032142; cv=none; b=eV/h73+r+QKBfVTH1lDBKsmL0rNTpLBCBOX+Rhs5yiUzcZ2UHFx5w95IQmEvYS2+yACGjrzcIyfRZ1cYbgsiADULEp/wSfzgwOz9IM2wpywn9DnU/nrUbb0Cezxd/oRvGeaKrpC3rnAqCwdJBZgMCudNg90kL26s85Ml7CPHulc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788031914; c=relaxed/simple;
-	bh=ddAQYawPd0rBebEnTcT8XWO8b9jW9FenrCtUHjfghgk=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=Uf8MjOZc9PBiEEPq68Yjwt58edPid28eacVG8cVrKOM7v/sV8+GUJEc96kJHKxYaO3xGepPIS/x7M00zhJIzzs3m1VgU75M/km2eTmKp0stzQ2sm5+OdTe09+LWqe1znrQMNb71cTybr12jvSXFr0aTOD3ocAE0hPHuBPuO6ndw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=RhbU6b8W; arc=none smtp.client-ip=10.30.226.201
+	s=arc-20240116; t=1788032142; c=relaxed/simple;
+	bh=K8swZAGgof7VWw4iTiXBhaHNf2yTnB5IW5DZ4tGyzE0=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=Sp7c2GPAgfiWN/rYXheSxJCanA84RHcqGcKOfrPiYs3Xootm3ta6D6ZEiWhSWyTgohti2Shqdms5tygo3jvbmOrRRKEuPvMi3wZqLiC+9z2YaNBW9cAC3L/ZqDXDmmtMfduCe09T2m2vdbuoxvB5zBPk7c81J2P8QRtBsCtM3Jo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ATUonFs7; arc=none smtp.client-ip=10.30.226.201
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="RhbU6b8W"
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 90145C2BCFD;
-	Sat, 29 Aug 2026 19:31:54 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="ATUonFs7"
+Received: by smtp.kernel.org (Postfix) with ESMTPS id EBF7CC2BCB9;
+	Sat, 29 Aug 2026 19:35:41 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1788031914;
-	bh=ddAQYawPd0rBebEnTcT8XWO8b9jW9FenrCtUHjfghgk=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
-	b=RhbU6b8WM0Tqy+Fnsa8n84Hkpe5nnt0vObcn6/3RK0tyYpWSIH5rlbcWUuTyQrQ3E
-	 jCsvrD4TqiiFN0IAnuE14WQz1brwrCFqYCDWdczUP5neNNwTWOeKdXJL0yqvsvehdo
-	 zJsboxIsOzW0mom0NMeWektkXDF5v8vIHk4lpGt4lxJ5zC9AjlZP5qNs/pKMKOggq0
-	 wbcNRPrht/uyEBu/qDq4kVe75Q/eFoGiNshGgvdQ05MSato3o6YfH648OlsN82Rycj
-	 kQxNgVswAjW6FtkZxK6CLALQ/v1kD1Wz8OrGS2UhfJf7wwAbjNJT2N+tjnnjZipY0q
-	 wvuAommR6JLtA==
+	s=k20201202; t=1788032142;
+	bh=K8swZAGgof7VWw4iTiXBhaHNf2yTnB5IW5DZ4tGyzE0=;
+	h=From:Subject:Date:To:Cc:Reply-To:From;
+	b=ATUonFs7Hx7i8362OLjqVh7CvI/sz7/pZ1v2LOpxNzpgcw6l9IJFuB8h49ZzwdZXq
+	 eyo+eCI48KdMVA0esgJhNupsF3bVCab0zYuAIiJeKV/1nZvhauxeaQvBMwJo4ZhCiH
+	 RWUuqjX6oG3nZ6L1NaT6wM4W1gowY//CituatTp6VU3CLa8QZu3YfeJkB0PQfuK8EC
+	 cgqKpF/OYBluIfWdEhm3lKqIXA5bT0zThDJcbcuuZhO94EhZkwY5UTHc/z5PWeppwt
+	 S4QvqUWRrMXxf/lDuKlT/TTzlb+nb3eCPzJmWaL5OV8Nf4Hm4zlesE8/f4Ri6uNCje
+	 ixx1WATEtgQBA==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6E227C61DCB;
-	Sat, 29 Aug 2026 19:31:54 +0000 (UTC)
-From: Matt Eaton via B4 Relay <devnull+linux.divinehawk.com@kernel.org>
-Date: Sat, 29 Aug 2026 21:31:25 +0200
-Subject: [PATCH 1/2] dt-bindings: usb: qcom,snps-dwc3: relax interrupt
- requirements for ipq4019
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C28BDC61DD9;
+	Sat, 29 Aug 2026 19:35:41 +0000 (UTC)
+From: Aaron Kling via B4 Relay <devnull+webgeek1234.gmail.com@kernel.org>
+Subject: [PATCH v3 0/4] arm64: dts: qcom: Support Retroid Pocket QCS8550
+ Devices
+Date: Sat, 29 Aug 2026 14:35:30 -0500
+Message-Id: <20260829-rp-qcs8550-v3-0-198d5b2fc475@gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -41,113 +41,93 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260829-ipq4019-dwc3-migration-v1-1-cc66b54ce21c@divinehawk.com>
-References: <20260829-ipq4019-dwc3-migration-v1-0-cc66b54ce21c@divinehawk.com>
-In-Reply-To: <20260829-ipq4019-dwc3-migration-v1-0-cc66b54ce21c@divinehawk.com>
-To: Greg Kroah-Hartman <gregkh@linuxfoundation.org>, 
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>, Wesley Cheng <quic_wcheng@quicinc.com>, 
- Bjorn Andersson <andersson@kernel.org>, 
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/22PwWrDMBBEf8XoXBV5Za1kn/IfpQd5vU4EtZ1Ir
+ mgI/vcqDrQN9DgD7w1zE4lj4CS66iYi55DCMpegXypBJz8fWYahZAEKUDnlZDzLCyVnjJLOkGs
+ sqhFHLQpwjjyGr1329v7IkS+fxbk+yl9lV+1CqK301/nHWCMp26MeGLDL7V3a+8SSlmkKa1exV
+ gjoQPtGoQVDDG1P1lDvmBq0g+aaNaC4z59CWpd43a/let//70WupZLeeI2m93ogczhOPny8ls1
+ dk+EPCuoJhYIODbF1I7faPaHbtn0DwT2z2F4BAAA=
+X-Change-ID: 20260808-rp-qcs8550-85c84760f6f3
+To: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, Bjorn Andersson <andersson@kernel.org>, 
  Konrad Dybcio <konradybcio@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, linux-usb@vger.kernel.org, 
- devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
- Matt Eaton <linux@divinehawk.com>
-X-Mailer: b4 0.16.0
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1788031913; l=3070;
- i=linux@divinehawk.com; s=20260828; h=from:subject:message-id;
- bh=0I9pzx+6YLuKTnpvjptQRbcepTykbRTTfqfao05DWJI=;
- b=QUmFMQqpbC9g1l0FYCO/8hfQ2N4XIhJdxr/G2oyA1HRvIcAqTqbrIIWyNhG9Ce2gNO/aKXIkL
- y/d0mHUk22XAhSFN67n6e7g9a8ATfEJI5PbGb0ea+8T7AYyYqcHr2Ed
-X-Developer-Key: i=linux@divinehawk.com; a=ed25519;
- pk=UG4KnKXGwxjTNdirUPh/nySblET4aRxWYWSMTQwzlMw=
-X-Endpoint-Received: by B4 Relay for linux@divinehawk.com/20260828 with
- auth_id=982
-X-Original-From: Matt Eaton <linux@divinehawk.com>
-Reply-To: linux@divinehawk.com
+Cc: devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
+ linux-arm-msm@vger.kernel.org, Aaron Kling <webgeek1234@gmail.com>, 
+ Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1788032140; l=2596;
+ i=webgeek1234@gmail.com; s=20250217; h=from:subject:message-id;
+ bh=K8swZAGgof7VWw4iTiXBhaHNf2yTnB5IW5DZ4tGyzE0=;
+ b=DeVh/Jkm068lVypf2P71HRF15JwgChjPUAe1eNak/KKJco1CxELHMJDUvNxtd+IGG3zD+WX2m
+ zmk6+xtzVPpA4r5ujPi5nYJzI768Af01m4aN5x+LdHvIgrD/rir+HEu
+X-Developer-Key: i=webgeek1234@gmail.com; a=ed25519;
+ pk=TQwd6q26txw7bkK7B8qtI/kcAohZc7bHHGSD7domdrU=
+X-Endpoint-Received: by B4 Relay for webgeek1234@gmail.com/20250217 with
+ auth_id=342
+X-Original-From: Aaron Kling <webgeek1234@gmail.com>
+Reply-To: webgeek1234@gmail.com
 
-From: Matt Eaton <linux@divinehawk.com>
+This specifically includes:
+* Nova
+* RP6
 
-qcom,ipq4019-dwc3 is grouped with the platforms that must supply five or
-six named interrupts, but neither mainline nor Qualcomm's own IPQ4019
-vendor devicetree specifies any wakeup interrupts for this SoC. Both
-describe only the core dwc_usb3 interrupt: GIC_SPI 132 for the usb3
-instance and GIC_SPI 136 for the usb2 instance.
+Retroid Pocket is effectively a sister company/brand to AYN. They are
+both under Moorechip and all hardware designs are handled by Moorechip.
+Thus the electrical designs are largely shared within a SoC generation.
+Hence these include the AYN QCS8550 common dtsi. As such, this series
+depends on the AYN QCS8550 series [0].
 
-commit dd566faebe9f ("dt-bindings: usb: qcom,dwc3: refine interrupt
-requirements") listed ipq4019 among the compatibles in this position and
-chose to keep the schema warnings for the time being.
+These two devices are almost electrically identical. The only notable
+difference is the panels.
 
-Migrating the ipq4019 devicetree onto this binding otherwise fails
-dtbs_check:
+Definitions for parts of the hardware that are not yet supported by
+mainline are not included. Such as:
 
-usb@8a00000 (qcom,ipq4019-dwc3): interrupts: [[0, 132, 4]] is too short
-usb@8a00000 (qcom,ipq4019-dwc3): interrupt-names: ['dwc_usb3'] is too short
+* Panels
+* All rgb leds
+* The built-in uart gamepad
 
-Give ipq4019 its own clause allowing a single interrupt, and lower the
-top-level minimum to match. The per-SoC clause cannot loosen the
-top-level constraint on its own, since allOf intersects.
+[0] https://lore.kernel.org/linux-arm-msm/20260727-ayn-qcs8550-v9-0-e3db456e10e5@gmail.com/
 
-dwc3-qcom.c looks all four wakeup interrupts up with
-platform_get_irq_byname_optional(), so nothing in the driver depends on
-their presence. If the wakeup interrupt numbers are established later
-they can be added without another binding change.
-
-Note that qcom,ipq9574-dwc3, qcom,qcm2290-dwc3, qcom,sar2130p-dwc3 and
-qcom,sm6375-dwc3 have no per-SoC interrupt clause and relied on the
-top-level minimum, so they are left unconstrained at the low end by this
-change.
-
-Signed-off-by: Matt Eaton <linux@divinehawk.com>
+Signed-off-by: Aaron Kling <webgeek1234@gmail.com>
 ---
- .../devicetree/bindings/usb/qcom,snps-dwc3.yaml    | 23 ++++++++++++++++++++--
- 1 file changed, 21 insertions(+), 2 deletions(-)
+Changes in v3:
+- In patches 3 and 4, drop unnecessary status on backlight nodes
+- Link to v2: https://lore.kernel.org/r/20260820-rp-qcs8550-v2-0-d4ce78fe9385@gmail.com
 
-diff --git a/Documentation/devicetree/bindings/usb/qcom,snps-dwc3.yaml b/Documentation/devicetree/bindings/usb/qcom,snps-dwc3.yaml
-index 7d784a648b7d..28e78302b814 100644
---- a/Documentation/devicetree/bindings/usb/qcom,snps-dwc3.yaml
-+++ b/Documentation/devicetree/bindings/usb/qcom,snps-dwc3.yaml
-@@ -137,11 +137,11 @@ properties:
-                                only on SoCs with non-QUSB2 targets with
-                                exception of SDM670/SDM845/SM6350.
-         - ss_phy_irq: Used for remote wakeup in Super Speed mode of operation.
--    minItems: 3
-+    minItems: 1
-     maxItems: 19
- 
-   interrupt-names:
--    minItems: 3
-+    minItems: 1
-     maxItems: 19
- 
-   qcom,select-utmi-as-pipe-clk:
-@@ -508,6 +508,25 @@ allOf:
-           contains:
-             enum:
-               - qcom,ipq4019-dwc3
-+    then:
-+      properties:
-+        interrupts:
-+          minItems: 1
-+          maxItems: 6
-+        interrupt-names:
-+          minItems: 1
-+          items:
-+            - const: dwc_usb3
-+            - const: pwr_event
-+            - const: hs_phy_irq
-+            - const: dp_hs_phy_irq
-+            - const: dm_hs_phy_irq
-+            - const: ss_phy_irq
-+  - if:
-+      properties:
-+        compatible:
-+          contains:
-+            enum:
-               - qcom,ipq8064-dwc3
-               - qcom,kaanapali-dwc3
-               - qcom,qcs615-dwc3
+Changes in v2:
+- In patch 1, consolidate the new devices to the existing qcs8550 list
+- In patches 2 and 3, make regulator naming consistent
+- In patches 2 and 3, move the mdss_dsi1 node to the correct
+  alphabetical location
+- In patches 2 and 3, fix some style issues with pinctrl references
+- Link to v1: https://lore.kernel.org/r/20260808-rp-qcs8550-v1-0-a5a365ba3dc5@gmail.com
 
+---
+Aaron Kling (4):
+      dt-bindings: vendor-prefixes: Add Retroid Pocket
+      dt-bindings: arm: qcom: Add Retroid Pocket QCS8550 Devices
+      arm64: dts: qcom: Add Retroid Pocket 6
+      arm64: dts: qcom: Add Retroid Pocket Nova
+
+ Documentation/devicetree/bindings/arm/qcom.yaml    |   2 +
+ .../devicetree/bindings/vendor-prefixes.yaml       |   2 +
+ arch/arm64/boot/dts/qcom/Makefile                  |   2 +
+ .../boot/dts/qcom/qcs8550-retroidpocket-nova.dts   | 116 ++++++++++++++++++++
+ .../boot/dts/qcom/qcs8550-retroidpocket-rp6.dts    | 120 +++++++++++++++++++++
+ 5 files changed, 242 insertions(+)
+---
+base-commit: e30626823a406725ce29bc75cb8ec467d3e1e326
+change-id: 20260808-rp-qcs8550-85c84760f6f3
+prerequisite-change-id: 20260217-ayn-qcs8550-16c07b63de26:v9
+prerequisite-patch-id: 17ba304f7a8a08cc78f98e198db9c51f4786a22c
+prerequisite-patch-id: 21873631f5dcdb9bbbdb5c20c3f5e9816cc405f9
+prerequisite-patch-id: bf7b5dea0097cbbdf04929a4246d1fc65c607ea8
+prerequisite-patch-id: d7f546eddc96a4f31a1e681abddbc96bd68abb32
+prerequisite-patch-id: d40d784ad8efbb1204c024408be2067725a06cf2
+prerequisite-patch-id: 25bbd55199a8250a912ef542b31f43dd5ccdbc90
+
+Best regards,
 -- 
-2.43.0
+Aaron Kling <webgeek1234@gmail.com>
 
 
