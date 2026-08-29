@@ -1,200 +1,60 @@
-Received: from mail-pj1-f71.google.com (mail-pj1-f71.google.com [209.85.216.71])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 88CE4334C1D
-	for <linux-arm-msm@vger.kernel.org>; Sat, 29 Aug 2026 01:00:31 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.216.71
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3FB8A35893;
+	Sat, 29 Aug 2026 01:56:03 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787965233; cv=none; b=M7fK0ZoBb3yQyoLIaWTDuLvuSfDYo2dZ+fwkcNccqHmzLI+3aZhjytC7gQsKLlpVoRwW4K0jY2CuZfDJ7X7BntXdxfZCaVgJnximWTSFqQd356Erfr/CKvkW4i0mAI00FWrS2WkS/K6ChBvPtznCMNHwSp/aN/Au/vXY8StKdcA=
+	t=1787968564; cv=none; b=gydsMl/I9PEXYNlOnKVcEn5DNZLR0hGN48Hw5sP2gRiTVI55eANmoNVww9ocsMrV9rVIdWA0FdKkyOl1Rv98S3LG+6kS+2CL1oDY4nJDmUBWzBLokbJ6+uMWgEC2MIHdPtWuttp11IM8fOTZSDTVkSq5l6KAJ02UtPngaKlp/aY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787965233; c=relaxed/simple;
-	bh=AdywQK2vtYiSsYhi6sIq4NfA3XpXoE4VXMIiQOI8gj4=;
-	h=Date:In-Reply-To:Mime-Version:References:Message-ID:Subject:From:
-	 To:Cc:Content-Type; b=efwCPYkLF0tStS0OLrZtGVZUk7HVzaDdnVN+D+ePufqZo9hgMnPu9d6toLBBODi1V3IUaBIHhDTuJYtlS9+M4tGZ8b1DNZY79fsVEsNKtOpe0Dhtan+6Rkf7GIajPgQ5RIyYMu8iwf4Sf6i3CbfDICfGsP0t/E3LJgU8lN8upec=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=flex--mrungta.bounces.google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=HAHX1gHA; arc=none smtp.client-ip=209.85.216.71
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=flex--mrungta.bounces.google.com
+	s=arc-20240116; t=1787968564; c=relaxed/simple;
+	bh=rouOJ0fn0NGR3hJb2Oo7sokwcDejIbaOe7O4dJsYHn8=;
+	h=To:Cc:Subject:From:In-Reply-To:Message-ID:References:Date:
+	 MIME-Version:Content-Type; b=YP62AZgNxT074VBvf1f7rEc2a6T2YH/iSVtZZrRaEAlbrbpD4H4c7zXlQ1LKJqDln3dwFi/BHoNBp8vtIdhbSzBzqmRsx87r5zJpitUtyUYpCnWHGO7KXpsqbBG2HEVH7NKa9y+Edlv+oGNDGRieSzm63TAoDMiSYiukyabT0n4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=G4E3M0ff; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="HAHX1gHA"
-Received: by mail-pj1-f71.google.com with SMTP id 98e67ed59e1d1-3968bb86fb7so2314158a91.2
-        for <linux-arm-msm@vger.kernel.org>; Fri, 28 Aug 2026 18:00:31 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20251104; t=1787965231; x=1788570031; darn=vger.kernel.org;
-        h=content-type:cc:to:from:subject:message-id:references:mime-version
-         :in-reply-to:date:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=MDHpM2Mouytn9B02GRyIXBlE0tDWaaixXQnYQVljoqg=;
-        b=HAHX1gHAsfjoiMzvMQudbX4+Se/YwgEMbpyQl7eDfVvw6msEnw6PF1abOJUk71587U
-         mQhmJK7bHwZl/6hSlBkUrMT9Ftfzi9R1inUx2oPMFyUZITV637oK1cWEGuv+TxiROszn
-         kKmgUkT5cf+8UTUdfmsrHg4JWjy168E/gm2OCvNU8iPOLkT0F99EbFnfEzr23TzlqD7r
-         hlgMGIcPWJYUIkkxXfmpfl8oTvrvvZnwf3B0qzF64lenwof/JDnQXK1r6TWRaheHimPD
-         G8ZnDkWDp/WpHv72IwZWokffLrE5vZWXEAzcyl0W8a9X1LrWjRZN+GLJcF4eFyGNGQkZ
-         wyzA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787965231; x=1788570031;
-        h=content-type:cc:to:from:subject:message-id:references:mime-version
-         :in-reply-to:date:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=MDHpM2Mouytn9B02GRyIXBlE0tDWaaixXQnYQVljoqg=;
-        b=mjn8HGnxuZKPYx4l53r6Am86revhd/gKwY69QKCH6ZIzHJ3fJMSd5Vzc/h1UFqO7Qb
-         JqixPO6G3u28KUAkzRy7SXLK2tF1ZKNpYYvXxBqHMgrj0Jy765ZMjDD4y6d2vkH/GivN
-         iSbeY56N6gd2rg44VFXYXT6VNSmISlChPmgZPP2vZ40AcunAbKjh5N9SihW8Zx/edG2M
-         oFcgsJEAoYvD9k1dZSTzh/e7dw4lhjPnLRQ3tcEjAVmU6XtFMadsGyNrNI3dbWsoIeq6
-         KVZMg0a2znU2KfHDacqsKjS39EPFRNrN4JG79osI3jeNHtByczU58GO5Wlvx6M+0xsBL
-         ZIOw==
-X-Forwarded-Encrypted: i=1; AKwUvBx/ryfz9n3DEslNrc1Lzcn/dhJpkPtGvgosH4cwPLVtZVRDSiI/N5ELk1WR8+XpNsNvZAf2QiZBWl7zmnv/@vger.kernel.org
-X-Gm-Message-State: AFuF++l9pkjGbmmq5nRJyx5Aecnw9/aVYAlYG6A9zpNb1YQR98fOUKWL
-	+nSfYYcl4kT3h8ELRrMGXAVVafDHra/Jtpx75ShAGp6A8hhmqXjeLukWx0AfUyMcoD588rU025Y
-	nrG6nlF648g==
-X-Received: from dybcu36.prod.google.com ([2002:a05:7300:ad24:b0:327:dccf:72c8])
- (user=mrungta job=prod-delivery.src-stubby-dispatcher) by 2002:a17:90b:3e43:b0:37f:fd1f:d30f
- with SMTP id 98e67ed59e1d1-396d0f67646mr20132797a91.12.1787965230440; Fri, 28
- Aug 2026 18:00:30 -0700 (PDT)
-Date: Fri, 28 Aug 2026 17:59:59 -0700
-In-Reply-To: <20260828-qcom-wdt-nmi-series-v2-0-363979fe6b6b@google.com>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="G4E3M0ff"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9F7CD1F000E9;
+	Sat, 29 Aug 2026 01:56:02 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1787968562;
+	bh=p+iwwAa4aHtJ/dd0bS0M8FDBVd5ex315gZZmcp2Fz8E=;
+	h=To:Cc:Subject:From:In-Reply-To:References:Date;
+	b=G4E3M0ffBBD0AFZqMoz7fJwZD6oF5A8VTrcCOAogc7/uM1yxA6dnCcG4Ugsp98DVy
+	 uPKIPalq6Iii7ByQsgtANvQauB9LHMF9fx+KYix4LCnC5eg94HKuqPHoQwUFHutIwB
+	 UUfh7ewQ1TYodQ82rPqqBVPo+8L/q+r1iwKW3oMxZTYfv+b1y01TpWmtz8LcqcKvH4
+	 ttiOSEGfNPMVepX/qPoR4fsJccZgF3pEzuZfPLzco7IZxgbyuDxvOMk5krVj6hGFfJ
+	 AaQw4riGFFvIRkEol/oHHGcPCpLiRfmchmpVKJKGL56zZqzOiMGGGDE8AM+5UgQX2J
+	 6IraR7LOA7Ssw==
+To: Nitin Rawat <nitin.rawat@oss.qualcomm.com>
+Cc: mani@kernel.org,  James.Bottomley@HansenPartnership.com,
+  martin.petersen@oracle.com,  konrad.dybcio@oss.qualcomm.com,
+  linux-scsi@vger.kernel.org,  linux-kernel@vger.kernel.org,
+  linux-arm-msm@vger.kernel.org
+Subject: Re: [PATCH V2 0/2] ufs: ufs-qcom: Fixes and optimizations for
+ Qualcomm UFS Controller
+From: "Martin K. Petersen (Oracle)" <mkp@kernel.org>
+In-Reply-To: <20260825145203.265579-1-nitin.rawat@oss.qualcomm.com> (Nitin
+	Rawat's message of "Tue, 25 Aug 2026 20:22:01 +0530")
+Message-ID: <yq17bl9k7vb.fsf@mail.kernel.org>
+References: <20260825145203.265579-1-nitin.rawat@oss.qualcomm.com>
+Date: Fri, 28 Aug 2026 21:56:01 -0400
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
-Mime-Version: 1.0
-References: <20260828-qcom-wdt-nmi-series-v2-0-363979fe6b6b@google.com>
-X-Developer-Key: i=mrungta@google.com; a=ed25519; pk=2Bjwbv/ibL10QnyvK9G7DoKpffXy7z6+M4NawEYgYDI=
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1787965218; l=3708;
- i=mrungta@google.com; s=20260212; h=from:subject:message-id;
- bh=AdywQK2vtYiSsYhi6sIq4NfA3XpXoE4VXMIiQOI8gj4=; b=kxYNMe8TIaM84CWHv8NQ/UaaZjYbEr5I+gGXw5xbYW95jwNEn3HR03JRZYZYYTFOMdblLLspb
- aMj71QLA8ZeAc/oA4IK9jOf3TD9fsjxJeyd2tYbIfiLIXbBs045csQF
-X-Mailer: b4 0.14.3
-Message-ID: <20260828-qcom-wdt-nmi-series-v2-5-363979fe6b6b@google.com>
-Subject: [PATCH v2 5/5] watchdog: qcom: Register pretimeout interrupt as NMI
-From: Mayank Rungta <mrungta@google.com>
-To: Wim Van Sebroeck <wim@linux-watchdog.org>, Guenter Roeck <linux@roeck-us.net>, 
-	Thomas Gleixner <tglx@kernel.org>, Radu Rendec <radu@rendec.net>
-Cc: linux-watchdog@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	linux-arm-msm@vger.kernel.org, "Kirill A. Shutemov" <kas@kernel.org>, 
-	Douglas Anderson <dianders@chromium.org>, Mayank Rungta <mrungta@google.com>
-Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Type: text/plain
 
-When a system is completely unresponsive due to an interrupt storm or
-deadlocked CPU cores with standard interrupts disabled, a standard
-watchdog pretimeout bark interrupt will fail to execute, preventing the
-pretimeout governor from capturing CPU backtraces before the hardware
-reset bite.
 
-Attempt to request the Qualcomm watchdog pretimeout bark interrupt as an
-NMI (or pseudo-NMI) using request_nmi(). If NMI registration is not
-supported on the platform (e.g. pseudo-NMIs are disabled), gracefully
-fall back to a standard interrupt via devm_request_irq().
+Nitin,
 
-When NMI is used, register a devres cleanup action to free the NMI upon
-driver unbind, and use enable_nmi() and disable_nmi() during start and
-stop.
+> This patch series introduces few fixes and performance optimizations
+> for the Qualcomm UFS host controller driver to improve performance and
+> to align with Qualcomm UFS hardware programming sequence.
 
-Assisted-by: Antigravity:gemini
-Signed-off-by: Mayank Rungta <mrungta@google.com>
----
- drivers/watchdog/qcom-wdt.c | 52 +++++++++++++++++++++++++++++++++++++++++----
- 1 file changed, 48 insertions(+), 4 deletions(-)
-
-diff --git a/drivers/watchdog/qcom-wdt.c b/drivers/watchdog/qcom-wdt.c
-index 4eb1bf979012..82eaf8786426 100644
---- a/drivers/watchdog/qcom-wdt.c
-+++ b/drivers/watchdog/qcom-wdt.c
-@@ -52,6 +52,8 @@ struct qcom_wdt {
- 	unsigned long		rate;
- 	void __iomem		*base;
- 	const u32		*layout;
-+	int			irq;
-+	bool			is_nmi;
- };
- 
- static void __iomem *wdt_addr(struct qcom_wdt *wdt, enum wdt_reg reg)
-@@ -74,6 +76,28 @@ static irqreturn_t qcom_wdt_isr(int irq, void *arg)
- 	return IRQ_HANDLED;
- }
- 
-+static void qcom_wdt_enable_irq(struct qcom_wdt *wdt)
-+{
-+	if (wdt->is_nmi && wdt->irq > 0)
-+		enable_nmi(wdt->irq);
-+}
-+
-+static void qcom_wdt_disable_irq(struct qcom_wdt *wdt)
-+{
-+	if (wdt->is_nmi && wdt->irq > 0)
-+		disable_nmi(wdt->irq);
-+}
-+
-+static void qcom_wdt_free_nmi(void *arg)
-+{
-+	struct qcom_wdt *wdt = arg;
-+
-+	if (watchdog_active(&wdt->wdd))
-+		qcom_wdt_disable_irq(wdt);
-+
-+	free_nmi(wdt->irq, &wdt->wdd);
-+}
-+
- static int qcom_wdt_start(struct watchdog_device *wdd)
- {
- 	struct qcom_wdt *wdt = to_qcom_wdt(wdd);
-@@ -84,6 +108,8 @@ static int qcom_wdt_start(struct watchdog_device *wdd)
- 	writel(bark * wdt->rate, wdt_addr(wdt, WDT_BARK_TIME));
- 	writel(wdd->timeout * wdt->rate, wdt_addr(wdt, WDT_BITE_TIME));
- 	writel(QCOM_WDT_ENABLE, wdt_addr(wdt, WDT_EN));
-+
-+	qcom_wdt_enable_irq(wdt);
- 	return 0;
- }
- 
-@@ -91,6 +117,8 @@ static int qcom_wdt_stop(struct watchdog_device *wdd)
- {
- 	struct qcom_wdt *wdt = to_qcom_wdt(wdd);
- 
-+	qcom_wdt_disable_irq(wdt);
-+
- 	writel(0, wdt_addr(wdt, WDT_EN));
- 	return 0;
- }
-@@ -256,6 +284,7 @@ static int qcom_wdt_probe(struct platform_device *pdev)
- 	u32 percpu_offset;
- 	int irq, ret;
- 	struct clk *clk;
-+	unsigned long irq_flags;
- 
- 	data = of_device_get_match_data(dev);
- 	if (!data) {
-@@ -311,10 +340,25 @@ static int qcom_wdt_probe(struct platform_device *pdev)
- 		if (irq < 0 && irq != -ENXIO)
- 			return irq;
- 		if (irq > 0) {
--			ret = devm_request_irq(dev, irq, qcom_wdt_isr, 0,
--					       "wdt_bark", &wdt->wdd);
--			if (ret)
--				return ret;
-+			wdt->irq = irq;
-+			irq_flags = IRQF_PERCPU | IRQF_NOBALANCING |
-+				    IRQF_NO_AUTOEN | IRQF_NO_THREAD;
-+
-+			ret = request_nmi(irq, qcom_wdt_isr, irq_flags,
-+					  "wdt_bark", &wdt->wdd);
-+			if (ret) {
-+				/* Fallback to normal interrupt if NMI not supported */
-+				ret = devm_request_irq(dev, irq, qcom_wdt_isr, 0,
-+						       "wdt_bark", &wdt->wdd);
-+				if (ret)
-+					return ret;
-+			} else {
-+				wdt->is_nmi = true;
-+				ret = devm_add_action_or_reset(dev, qcom_wdt_free_nmi,
-+							       wdt);
-+				if (ret)
-+					return ret;
-+			}
- 
- 			wdt->wdd.info = &qcom_wdt_pt_info;
- 			wdt->wdd.pretimeout = 1;
+Applied to 7.3/scsi-staging, thanks!
 
 -- 
-2.55.0.897.gb25b4bd76c-goog
-
+Martin K. Petersen
