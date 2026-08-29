@@ -1,56 +1,56 @@
-Received: from mail-pj1-f69.google.com (mail-pj1-f69.google.com [209.85.216.69])
+Received: from mail-pl1-f200.google.com (mail-pl1-f200.google.com [209.85.214.200])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 73C8D3A1A3F
-	for <linux-arm-msm@vger.kernel.org>; Sat, 29 Aug 2026 01:00:27 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.216.69
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2BEAC3A1A3F
+	for <linux-arm-msm@vger.kernel.org>; Sat, 29 Aug 2026 01:00:29 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.200
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787965230; cv=none; b=RqvsVBPup4wLiwcSIbdQO8ijqOFNw3Ih/0bhsg3SUG7auhjlxZs672Jn2gT6nfEIAjQb2lKLrfuUj/YubR7C0SeAXwlBa/5xwtrzRqF7efyMu2dzBxXjk5sm6Qdp71LCJcVrOnTvlx+DPtYdeQs72tyt90JoRelzV7uwLj0k6Xs=
+	t=1787965232; cv=none; b=ntLqAs6v4AK6bz1LAPSTyIA/RDISCz/rauVLUObVNmQDrPftAQhfpXs1rZtAFHptXW57HiNlh33BmEoRWw/4+FzT7rVLYqK+sZVCqlJZ4Ky7tnksWxvuc45mZghZUjWJ2RXVkLe6monGeJ0PNG7jIOMydelyVSfYjWI7B2Jt1sI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787965230; c=relaxed/simple;
-	bh=YCBb6JCBz9uYY2aQS0mNeRjnKbSKsvsyrD2Dfk1TJ64=;
+	s=arc-20240116; t=1787965232; c=relaxed/simple;
+	bh=VRMP7JkkrsgtGCqNZ8apRQnntFni3AQp0Jl77stRJ70=;
 	h=Date:In-Reply-To:Mime-Version:References:Message-ID:Subject:From:
-	 To:Cc:Content-Type; b=mOU4eXP+uh2MNULWQxV1r1T/JCzRTc3OxbnfYsXoAu8b2bFGEtT/DZ2RKmaymA5tuxMqdJeFFsBfEB3xNVxHZFY0yb+3lr3tyJ0YGXemYMX0P6767KnUGJNmGbjDOTZGjKMMR2ClDE1VKE9xkjiWUPkpTPv+FEouIUOCzP8lorc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=flex--mrungta.bounces.google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=hRRx87hD; arc=none smtp.client-ip=209.85.216.69
+	 To:Cc:Content-Type; b=Qc6cI/KO2TLsOBqGqMWEnQ+S4ularZJdFJYdrOOevlwEleguEcg9Q6uJItY+Ocwenle2eXMDI+0kCbwW74BnOAQZR1t7Jp+4y0aqo0QKADkLPaVZkgSZ792vfIg+3HBWQslazaQm6CoyPS3AqXYDPpSoEQrLGeoXCP4tqEJbcEo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=flex--mrungta.bounces.google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=WW9OtZjO; arc=none smtp.client-ip=209.85.214.200
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=flex--mrungta.bounces.google.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="hRRx87hD"
-Received: by mail-pj1-f69.google.com with SMTP id 98e67ed59e1d1-39533bb224cso2153031a91.3
-        for <linux-arm-msm@vger.kernel.org>; Fri, 28 Aug 2026 18:00:27 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="WW9OtZjO"
+Received: by mail-pl1-f200.google.com with SMTP id d9443c01a7336-2cfc52ddc55so30140985ad.3
+        for <linux-arm-msm@vger.kernel.org>; Fri, 28 Aug 2026 18:00:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20251104; t=1787965226; x=1788570026; darn=vger.kernel.org;
+        d=google.com; s=20251104; t=1787965228; x=1788570028; darn=vger.kernel.org;
         h=content-type:cc:to:from:subject:message-id:references:mime-version
          :in-reply-to:date:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=lOCsF+Q/dEN9C/W+xZWUHpAFMeTYzX55pmMwwrUJKsE=;
-        b=hRRx87hDYI0IiaSLgSLJ768W/kTd9QGs68+uhoIX9MwVQZHKR/JfzLUKakIqcCfgxj
-         dZ5A2nVj6xdDj8vI8q6Q4ggzYgXG0FW59ggOE/QN2IMssxBT8t6KSPlVHCq8+lOoX0hR
-         6G9y44OE8Ae9DdcFOaBU3MbUauvWsCWC+rtrYFAYOFMjPFukJSM2Z+2u3PGmpkdYWgto
-         i+Kyy7OjPQGljlq1NVmFmcnuvUM7u73r/ZjnRY2Q3WxrqTnX7Sr46mOxagvX0QXXmZK5
-         TaLys9FiOOxXVtQ1WRaSodz+PT+LtAMcdN8JNH0zOC63Fa36RmiJpNBUv8XrGkP/LjSE
-         frFQ==
+        bh=Xqu55i/xt2SdtDol/u9w0q9bCB+z+btqRC0BIY7IKUs=;
+        b=WW9OtZjOqTJvoRWEO9MA1HjrFqSF1YUN7FvplJPkmyYJnNMz8gY0oJPdSbbBA1rAyN
+         Vc5V3FXAiYVOoKZRSNXgGgS3fyvP+/GSyUM3Z3Rs0NZoh+9cZfdwu8WG7JhQnTK4MClV
+         Hhzg2J3zEXspyetyrwtnQ3HFX85YvepWQZAm1pfb0aOTbgrMjdKAaPPT6jXl6X12mZWS
+         m8kIFELngB1H83HqcVOYIftYU72z2WqaOqk00EZK9wVWYzu1dV1nK1jefUgDGnZpNsLj
+         fAvav/0PH4qdAC+KhVpjN1wgYLIW38y7pynwbo42mku2pPMzlSRowc0ed1vzqb3Wl8BS
+         58Lg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787965226; x=1788570026;
+        d=1e100.net; s=20251104; t=1787965228; x=1788570028;
         h=content-type:cc:to:from:subject:message-id:references:mime-version
          :in-reply-to:date:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=lOCsF+Q/dEN9C/W+xZWUHpAFMeTYzX55pmMwwrUJKsE=;
-        b=beNDDHn0IH5mbL+SY5uNDe3CzSmBjK8dqOzHbouao0OfsJbMPQFBPjSrTGD4gzjb3V
-         fU4TaJH1Zdko2Qce7AoGUA4zPr5WHeXH1n/XJgMypGIs1PNoDsHFleOM+LeU3XdGL6DF
-         O98eQdoLVpyaXzkU1oxZx0k+SkrnAlAY18l505DS63AI2Pe5xCW7DOW9NaLvWOYK/ErO
-         9XDU3CoRkwvOLm1UbRdO8j/zsNtizEGqPW9O1BGWLrZz1MozpxYJPJ4vqjEdzKR4hyPQ
-         SrQDbOIIqtqiTCxahytEohQ3wvmE90OsHHaeQVropK87nePXkv17eml2Melk2+lt9jSB
-         E2Dg==
-X-Forwarded-Encrypted: i=1; AKwUvBxxoDfMhLxEiy1yJn9QoXU5W03Ufee4qLi9+yOspATFraymhVg6Y9abMkAqRdLkL/ySXJClizv0E9AF3AUq@vger.kernel.org
-X-Gm-Message-State: AFuF++ntEXINV4QIKP/CGkkIelUyQzrHC2cWfaErTDG4S302Ikanga97
-	k/dNKnxRSS7kW27Gg3wcAAxgn+TsnR2OKoICCWC0BhW4lZEtjB0x+tcWGeDBagE5HLESWWG9tOW
-	Et/tjx2W+Ig==
-X-Received: from dlah10.prod.google.com ([2002:a05:701b:260a:b0:13b:9fe2:1c73])
- (user=mrungta job=prod-delivery.src-stubby-dispatcher) by 2002:a17:90b:2f0f:b0:380:540:d499
- with SMTP id 98e67ed59e1d1-396d0ed0023mr21152806a91.6.1787965226318; Fri, 28
- Aug 2026 18:00:26 -0700 (PDT)
-Date: Fri, 28 Aug 2026 17:59:57 -0700
+        bh=Xqu55i/xt2SdtDol/u9w0q9bCB+z+btqRC0BIY7IKUs=;
+        b=Lz+2tE3pTyTL8WlKZsErC/r2nEON5ot44veVNmEj9kFw8ACShgQsPZLKkbTL+yVJ0/
+         lxHOcDesOGTQRep+YvV5Fxp9gigYBYfw1KuVjs4FYTXC+EwtdRSznf/5Z2t9gQJ3tcZw
+         sgI0KdVONe9UIPVuYmItoWiMmvPQNzBrFccmBiO/NcJaNv7j6e3m4CAfZDb02JpTvnLc
+         OYlcbknnFSKxWJDdKYxC2bHkUGgZ02m8gyc+9tQVk6o7AMVblfKQ9ymBr6Jw6j3Sr5vh
+         hSG2UGXGzf2UZY8+DW4aZPpz4oW0XU3KER7O4VJZrkI1WEU9ADf6Z+85CIumRJY3+aJd
+         CfoA==
+X-Forwarded-Encrypted: i=1; AKwUvBw5B+IeY1NuOA5y403KJAbEqIsNMM8wIGCgijE3pJwLNPzrLeXp6W1oGaJHsZTkW9YTcDaShlOv34sMnsnl@vger.kernel.org
+X-Gm-Message-State: AFuF++nqO5uJtFIntPqxUmNWoiQcE+IleptB6yj+KOIK82FmVBrvh+Mv
+	vOWHqp9EZbSp77YVKaohf9MJpRV8nPBdsnzHLdI3QUlOrMMHlgrtzYSaWBAr0GfcAxraTOh8HyW
+	WisB68uTSgA==
+X-Received: from dybqs1.prod.google.com ([2002:a05:7301:6501:b0:311:50ef:5b3a])
+ (user=mrungta job=prod-delivery.src-stubby-dispatcher) by 2002:a17:903:228a:b0:2cf:9347:f445
+ with SMTP id d9443c01a7336-2d74ddc705cmr171196165ad.10.1787965228149; Fri, 28
+ Aug 2026 18:00:28 -0700 (PDT)
+Date: Fri, 28 Aug 2026 17:59:58 -0700
 In-Reply-To: <20260828-qcom-wdt-nmi-series-v2-0-363979fe6b6b@google.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
@@ -60,13 +60,14 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 Mime-Version: 1.0
 References: <20260828-qcom-wdt-nmi-series-v2-0-363979fe6b6b@google.com>
 X-Developer-Key: i=mrungta@google.com; a=ed25519; pk=2Bjwbv/ibL10QnyvK9G7DoKpffXy7z6+M4NawEYgYDI=
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1787965218; l=1613;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1787965218; l=4776;
  i=mrungta@google.com; s=20260212; h=from:subject:message-id;
- bh=YCBb6JCBz9uYY2aQS0mNeRjnKbSKsvsyrD2Dfk1TJ64=; b=r+FkIG3uoRHWf8zvZBgP2LQJplrrII+2fgmGZr8wQQQ2+GsRnMTGG35UZNGl1Z6BWeBhh1pd5
- K/xVzdb6L/HA8PJvG3/1noyvj3CcVRcUDkjd0lgDrkwGqB+4wjn32oy
+ bh=VRMP7JkkrsgtGCqNZ8apRQnntFni3AQp0Jl77stRJ70=; b=CQZHeEJJRpzMeZ+Luy30tTlvb62nDg6Gs9sbPGqt+ftDk3VVsUC5Aylz4w4wA7a6YMiEL7Nja
+ 3ybUFt+GL+rCXWFMnkIgUGWRattx0hVGNakUrC6EVg1JO6A8CIPtMN6
 X-Mailer: b4 0.14.3
-Message-ID: <20260828-qcom-wdt-nmi-series-v2-3-363979fe6b6b@google.com>
-Subject: [PATCH v2 3/5] genirq: Export NMI APIs
+Message-ID: <20260828-qcom-wdt-nmi-series-v2-4-363979fe6b6b@google.com>
+Subject: [PATCH v2 4/5] watchdog: pretimeout: Protect governor access with RCU
+ for NMI safety
 From: Mayank Rungta <mrungta@google.com>
 To: Wim Van Sebroeck <wim@linux-watchdog.org>, Guenter Roeck <linux@roeck-us.net>, 
 	Thomas Gleixner <tglx@kernel.org>, Radu Rendec <radu@rendec.net>
@@ -75,63 +76,152 @@ Cc: linux-watchdog@vger.kernel.org, linux-kernel@vger.kernel.org,
 	Douglas Anderson <dianders@chromium.org>, Mayank Rungta <mrungta@google.com>
 Content-Type: text/plain; charset="utf-8"
 
-Currently, request_nmi(), free_nmi(), enable_nmi(), disable_nmi_nosync(),
-and disable_nmi() are restricted to built-in kernel code because they are
-not exported.
+When watchdog pretimeout interrupts are configured as NMIs (or
+pseudo-NMIs), pretimeout handlers execute in NMI context. Accessing
+the watchdog governor via spinlocks in watchdog_notify_pretimeout() is
+unsafe in NMI context and can cause deadlocks if an NMI arrives while a
+spinlock is held.
 
-Export these symbols with EXPORT_SYMBOL_GPL so loadable kernel modules can
-register and manage NMIs.
+Protect governor assignment and dereference with RCU instead of
+spinlocks, allowing lockless, NMI-safe governor notifications while
+preserving safe runtime governor switching.
 
 Assisted-by: Antigravity:gemini
 Signed-off-by: Mayank Rungta <mrungta@google.com>
 ---
- kernel/irq/manage.c | 5 +++++
- 1 file changed, 5 insertions(+)
+ drivers/watchdog/watchdog_pretimeout.c | 45 +++++++++++++++++++---------------
+ include/linux/watchdog.h               |  2 +-
+ 2 files changed, 26 insertions(+), 21 deletions(-)
 
-diff --git a/kernel/irq/manage.c b/kernel/irq/manage.c
-index 40013aa94481..ded8cc33381c 100644
---- a/kernel/irq/manage.c
-+++ b/kernel/irq/manage.c
-@@ -766,6 +766,7 @@ void disable_nmi_nosync(unsigned int irq)
+diff --git a/drivers/watchdog/watchdog_pretimeout.c b/drivers/watchdog/watchdog_pretimeout.c
+index 02e09b9e396d..7fb586c77403 100644
+--- a/drivers/watchdog/watchdog_pretimeout.c
++++ b/drivers/watchdog/watchdog_pretimeout.c
+@@ -4,6 +4,7 @@
+  */
+ 
+ #include <linux/list.h>
++#include <linux/rcupdate.h>
+ #include <linux/slab.h>
+ #include <linux/spinlock.h>
+ #include <linux/string.h>
+@@ -67,12 +68,14 @@ int watchdog_pretimeout_available_governors_get(char *buf)
+ 
+ int watchdog_pretimeout_governor_get(struct watchdog_device *wdd, char *buf)
  {
- 	disable_irq_nosync(irq);
++	const struct watchdog_governor *gov;
+ 	int count = 0;
+ 
+-	spin_lock_irq(&pretimeout_lock);
+-	if (wdd->gov)
+-		count = sysfs_emit(buf, "%s\n", wdd->gov->name);
+-	spin_unlock_irq(&pretimeout_lock);
++	rcu_read_lock();
++	gov = rcu_dereference(wdd->gov);
++	if (gov)
++		count = sysfs_emit(buf, "%s\n", gov->name);
++	rcu_read_unlock();
+ 
+ 	return count;
  }
-+EXPORT_SYMBOL_GPL(disable_nmi_nosync);
+@@ -91,7 +94,7 @@ int watchdog_pretimeout_governor_set(struct watchdog_device *wdd,
+ 	}
  
- /**
-  * disable_nmi - disable an nmi and wait for any pending handlers
-@@ -781,6 +782,7 @@ void disable_nmi(unsigned int irq)
+ 	spin_lock_irq(&pretimeout_lock);
+-	wdd->gov = priv->gov;
++	rcu_assign_pointer(wdd->gov, priv->gov);
+ 	spin_unlock_irq(&pretimeout_lock);
+ 
+ 	mutex_unlock(&governor_lock);
+@@ -101,16 +104,13 @@ int watchdog_pretimeout_governor_set(struct watchdog_device *wdd,
+ 
+ void watchdog_notify_pretimeout(struct watchdog_device *wdd)
  {
- 	disable_irq(irq);
+-	unsigned long flags;
++	const struct watchdog_governor *gov;
+ 
+-	spin_lock_irqsave(&pretimeout_lock, flags);
+-	if (!wdd->gov) {
+-		spin_unlock_irqrestore(&pretimeout_lock, flags);
+-		return;
+-	}
+-
+-	wdd->gov->pretimeout(wdd);
+-	spin_unlock_irqrestore(&pretimeout_lock, flags);
++	rcu_read_lock();
++	gov = rcu_dereference(wdd->gov);
++	if (gov)
++		gov->pretimeout(wdd);
++	rcu_read_unlock();
  }
-+EXPORT_SYMBOL_GPL(disable_nmi);
+ EXPORT_SYMBOL_GPL(watchdog_notify_pretimeout);
  
- void __enable_irq(struct irq_desc *desc)
- {
-@@ -848,6 +850,7 @@ void enable_nmi(unsigned int irq)
- {
- 	enable_irq(irq);
+@@ -140,8 +140,8 @@ int watchdog_register_governor(struct watchdog_governor *gov)
+ 		default_gov = gov;
+ 
+ 		list_for_each_entry(p, &pretimeout_list, entry)
+-			if (!p->wdd->gov)
+-				p->wdd->gov = default_gov;
++			if (!rcu_access_pointer(p->wdd->gov))
++				rcu_assign_pointer(p->wdd->gov, default_gov);
+ 		spin_unlock_irq(&pretimeout_lock);
+ 	}
+ 
+@@ -170,11 +170,14 @@ void watchdog_unregister_governor(struct watchdog_governor *gov)
+ 	if (default_gov == gov)
+ 		default_gov = NULL;
+ 	list_for_each_entry(p, &pretimeout_list, entry)
+-		if (p->wdd->gov == gov)
+-			p->wdd->gov = default_gov;
++		if (rcu_dereference_protected(p->wdd->gov,
++					      lockdep_is_held(&pretimeout_lock)) == gov)
++			rcu_assign_pointer(p->wdd->gov, default_gov);
+ 	spin_unlock_irq(&pretimeout_lock);
+ 
+ 	mutex_unlock(&governor_lock);
++
++	synchronize_rcu();
  }
-+EXPORT_SYMBOL_GPL(enable_nmi);
+ EXPORT_SYMBOL(watchdog_unregister_governor);
  
- static int set_irq_wake_real(unsigned int irq, unsigned int on)
- {
-@@ -2110,6 +2113,7 @@ const void *free_nmi(unsigned int irq, void *dev_id)
+@@ -192,7 +195,7 @@ int watchdog_register_pretimeout(struct watchdog_device *wdd)
+ 	spin_lock_irq(&pretimeout_lock);
+ 	list_add(&p->entry, &pretimeout_list);
+ 	p->wdd = wdd;
+-	wdd->gov = default_gov;
++	rcu_assign_pointer(wdd->gov, default_gov);
+ 	spin_unlock_irq(&pretimeout_lock);
  
- 	return __cleanup_nmi(irq, desc);
+ 	return 0;
+@@ -206,7 +209,7 @@ void watchdog_unregister_pretimeout(struct watchdog_device *wdd)
+ 		return;
+ 
+ 	spin_lock_irq(&pretimeout_lock);
+-	wdd->gov = NULL;
++	rcu_assign_pointer(wdd->gov, NULL);
+ 
+ 	list_for_each_entry_safe(p, t, &pretimeout_list, entry) {
+ 		if (p->wdd == wdd) {
+@@ -216,4 +219,6 @@ void watchdog_unregister_pretimeout(struct watchdog_device *wdd)
+ 		}
+ 	}
+ 	spin_unlock_irq(&pretimeout_lock);
++
++	synchronize_rcu();
  }
-+EXPORT_SYMBOL_GPL(free_nmi);
- 
- /**
-  * request_threaded_irq - allocate an interrupt line
-@@ -2372,6 +2376,7 @@ int request_nmi(unsigned int irq, irq_handler_t handler,
- 
- 	return retval;
- }
-+EXPORT_SYMBOL_GPL(request_nmi);
- 
- void enable_percpu_irq(unsigned int irq, unsigned int type)
- {
+diff --git a/include/linux/watchdog.h b/include/linux/watchdog.h
+index 29cd03686154..5a3c35968cc8 100644
+--- a/include/linux/watchdog.h
++++ b/include/linux/watchdog.h
+@@ -105,7 +105,7 @@ struct watchdog_device {
+ 	const struct attribute_group **groups;
+ 	const struct watchdog_info *info;
+ 	const struct watchdog_ops *ops;
+-	const struct watchdog_governor *gov;
++	const struct watchdog_governor __rcu *gov;
+ 	unsigned int bootstatus;
+ 	unsigned int timeout;
+ 	unsigned int pretimeout;
 
 -- 
 2.55.0.897.gb25b4bd76c-goog
