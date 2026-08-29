@@ -1,60 +1,114 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from tabos.org (krueger-it.net [145.239.1.22])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3FB8A35893;
-	Sat, 29 Aug 2026 01:56:03 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 74C7A3164B4;
+	Sat, 29 Aug 2026 05:45:52 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=145.239.1.22
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787968564; cv=none; b=gydsMl/I9PEXYNlOnKVcEn5DNZLR0hGN48Hw5sP2gRiTVI55eANmoNVww9ocsMrV9rVIdWA0FdKkyOl1Rv98S3LG+6kS+2CL1oDY4nJDmUBWzBLokbJ6+uMWgEC2MIHdPtWuttp11IM8fOTZSDTVkSq5l6KAJ02UtPngaKlp/aY=
+	t=1787982353; cv=none; b=cE7YVhe70nC0Y+TfLYIPdkyVuyUYnhAMXulpIoY9p4ckItMhMB8370mPK2GV0K78vw3GKvP3PtYsJOyYVesiL2hr5yRU7i8fS63XZFckvgmawiD8k6PfDF3A4DPUmQGdhYQr48Xgf89ciV+1VSoA7lwAv5sQhfViB4YC3KumQZM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787968564; c=relaxed/simple;
-	bh=rouOJ0fn0NGR3hJb2Oo7sokwcDejIbaOe7O4dJsYHn8=;
-	h=To:Cc:Subject:From:In-Reply-To:Message-ID:References:Date:
-	 MIME-Version:Content-Type; b=YP62AZgNxT074VBvf1f7rEc2a6T2YH/iSVtZZrRaEAlbrbpD4H4c7zXlQ1LKJqDln3dwFi/BHoNBp8vtIdhbSzBzqmRsx87r5zJpitUtyUYpCnWHGO7KXpsqbBG2HEVH7NKa9y+Edlv+oGNDGRieSzm63TAoDMiSYiukyabT0n4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=G4E3M0ff; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1787982353; c=relaxed/simple;
+	bh=OrxYAnJ7fWEgGjDFAEVYgjNxXsjaQ703A0BMRoo+8YQ=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=KxuGZCnA7Pw/HgZMxbHlCmPzW0P6LLPbkjFYXaaa51/IliYWdNweIcSVjpRoouhYFwAjWmJWPcSCyTLeCYJURK3BZm62D2+9r4NxCOQizpPYZACsYUDbB8HxUqxcA26KivzOAjV+y6HbzLCXATuohy8PpksTOrEErY29wIgU6PA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=tabos.org; spf=pass smtp.mailfrom=tabos.org; dkim=pass (2048-bit key) header.d=tabos.org header.i=@tabos.org header.b=PQCTd6qZ; arc=none smtp.client-ip=145.239.1.22
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=tabos.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=tabos.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="G4E3M0ff"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9F7CD1F000E9;
-	Sat, 29 Aug 2026 01:56:02 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1787968562;
-	bh=p+iwwAa4aHtJ/dd0bS0M8FDBVd5ex315gZZmcp2Fz8E=;
-	h=To:Cc:Subject:From:In-Reply-To:References:Date;
-	b=G4E3M0ffBBD0AFZqMoz7fJwZD6oF5A8VTrcCOAogc7/uM1yxA6dnCcG4Ugsp98DVy
-	 uPKIPalq6Iii7ByQsgtANvQauB9LHMF9fx+KYix4LCnC5eg94HKuqPHoQwUFHutIwB
-	 UUfh7ewQ1TYodQ82rPqqBVPo+8L/q+r1iwKW3oMxZTYfv+b1y01TpWmtz8LcqcKvH4
-	 ttiOSEGfNPMVepX/qPoR4fsJccZgF3pEzuZfPLzco7IZxgbyuDxvOMk5krVj6hGFfJ
-	 AaQw4riGFFvIRkEol/oHHGcPCpLiRfmchmpVKJKGL56zZqzOiMGGGDE8AM+5UgQX2J
-	 6IraR7LOA7Ssw==
-To: Nitin Rawat <nitin.rawat@oss.qualcomm.com>
-Cc: mani@kernel.org,  James.Bottomley@HansenPartnership.com,
-  martin.petersen@oracle.com,  konrad.dybcio@oss.qualcomm.com,
-  linux-scsi@vger.kernel.org,  linux-kernel@vger.kernel.org,
-  linux-arm-msm@vger.kernel.org
-Subject: Re: [PATCH V2 0/2] ufs: ufs-qcom: Fixes and optimizations for
- Qualcomm UFS Controller
-From: "Martin K. Petersen (Oracle)" <mkp@kernel.org>
-In-Reply-To: <20260825145203.265579-1-nitin.rawat@oss.qualcomm.com> (Nitin
-	Rawat's message of "Tue, 25 Aug 2026 20:22:01 +0530")
-Message-ID: <yq17bl9k7vb.fsf@mail.kernel.org>
-References: <20260825145203.265579-1-nitin.rawat@oss.qualcomm.com>
-Date: Fri, 28 Aug 2026 21:56:01 -0400
+	dkim=pass (2048-bit key) header.d=tabos.org header.i=@tabos.org header.b="PQCTd6qZ"
+Received: from c0d1ngstat1on.fritz.box (unknown [94.31.74.100])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by dserver.krueger-it.net (Postfix) with ESMTPSA id 1F6B262E0388;
+	Sat, 29 Aug 2026 07:45:50 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=tabos.org;
+	s=default; t=1787982350;
+	bh=2LtXMhy2p0owS9hwq3abjMi2M+8ilWSUwuPZ0Z1IEs8=; h=From:To:Subject;
+	b=PQCTd6qZvwAGyVzfxNUn9da2rGfrzYvNVy6leRNmmGKzCqvIxbeQDYBBqy4MrSsV4
+	 P3MsovGY3+VOmuofb0Of8+ljUBD52LajCcNK0V7xsSMBvAJJXktEtmpfZcftOd5GIo
+	 4eDICdx4muSlQ0UVnf1iq9mi/psXhb9AFh1ukfkbD2Ls9iOZqpYmpxWZmO9OnVtmht
+	 fiCUmORGxkyElCYXzn80D4b9LFJSY9BTD5A2Id0XBUGP+XKsT/Ehs5RcNceuMqeumU
+	 W/gE4G/p2fT8GrEfR1Jt7PNOIk5msQlu7sAUpPXCNtWqtLfEiE8r+C3YdsaipADcym
+	 DFXfX0HQwzeIQ==
+Authentication-Results: dserver.krueger-it.net;
+	spf=pass (sender IP is 94.31.74.100) smtp.mailfrom=jan.brummer@tabos.org smtp.helo=c0d1ngstat1on.fritz.box
+Received-SPF: pass (dserver.krueger-it.net: connection is authenticated)
+From: Jan-Michael Brummer <jan.brummer@tabos.org>
+To: sre@kernel.org
+Cc: andersson@kernel.org,
+	neil.armstrong@linaro.org,
+	linux-arm-msm@vger.kernel.org,
+	linux-pm@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	Jan-Michael Brummer <jan.brummer@tabos.org>
+Subject: [PATCH 0/2] power: supply: qcom_battmgr: report charge levels on SM8350-class firmware
+Date: Sat, 29 Aug 2026 07:45:44 +0200
+Message-ID: <20260829054546.86210-1-jan.brummer@tabos.org>
+X-Mailer: git-send-email 2.55.0
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain
+Content-Transfer-Encoding: 8bit
 
+On SM8350-class firmware (everything that is not SC8280XP/X1E80100) the
+battery reports no usable charge level to userspace: charge_full and
+charge_full_design fail with -ENODATA and there is no charge_now at all.
+As a consequence UPower cannot derive an absolute energy level and never
+shows a runtime estimate - the UI is limited to "charging"/"discharging".
 
-Nitin,
+Patch 1 is the actual bug: battmgr->unit is only populated from a
+BATTMGR_BAT_INFO response, which this firmware class never sends, so the
+mAh guard on the CHARGE_* properties always rejects them. The values are
+fetched from the firmware and stored on every access, they are just
+thrown away again.
 
-> This patch series introduces few fixes and performance optimizations
-> for the Qualcomm UFS host controller driver to improve performance and
-> to align with Qualcomm UFS hardware programming sequence.
+Patch 2 adds CHARGE_NOW. There is no dedicated firmware property for it,
+but BATT_CHG_COUNTER carries the remaining charge rather than a
+monotonic counter on this firmware. This is the part I am least sure
+about, since it does not match the charge_counter semantics described in
+Documentation/ABI/testing/sysfs-class-power. Two measurements across the
+SoC range agree with the reported capacity to within a percent, so at
+least on this platform the interpretation holds. Happy to drop this
+patch or to collect a full discharge curve if you prefer.
 
-Applied to 7.3/scsi-staging, thanks!
+Both patches were tested on a Fairphone 5 (QCM6490) running
+postmarketOS. Before the series:
 
--- 
-Martin K. Petersen
+    energy:              0 Wh
+    energy-full:         0 Wh
+    energy-rate:         12.4713 W
+    percentage:          59%
+
+After, discharging and charging:
+
+    energy:              14.4347 Wh       energy:              15.6003 Wh
+    energy-full:         16.8807 Wh       energy-full:         18.1505 Wh
+    energy-rate:         3.39313 W        energy-rate:         7.3492 W
+    time to empty:       4.3 hours        time to full:        20.8 minutes
+
+Two observations that are out of scope here but worth recording:
+
+  - power_now reports 72097076 while current_now * voltage_now gives
+    ~11.9 W, and qcom-battmgr-usb/current_now reports 11078000 against
+    an input_current_limit of 3000000. Both look like unscaled firmware
+    values. UPower does not use either, so this series is unaffected.
+
+  - state_of_health reports 100 while charge_full/charge_full_design
+    works out to 96.6%, so the firmware appears to derive the two
+    independently.
+
+The time-to-full estimate is optimistic compared to the firmware's own
+time_to_full_avg because UPower extrapolates linearly and does not model
+the CV taper. That is expected and not a regression.
+
+Jan-Michael Brummer (2):
+  power: supply: qcom_battmgr: fix CHARGE_FULL* on SM8350-class firmware
+  power: supply: qcom_battmgr: expose CHARGE_NOW on SM8350-class
+    firmware
+
+ drivers/power/supply/qcom_battmgr.c | 16 +++++++++++++++-
+ 1 file changed, 15 insertions(+), 1 deletion(-)
+
