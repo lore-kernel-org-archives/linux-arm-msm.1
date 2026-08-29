@@ -1,117 +1,146 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-lj1-f178.google.com (mail-lj1-f178.google.com [209.85.208.178])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 20C243C09E7;
-	Sat, 29 Aug 2026 20:04:15 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C8B2B39A4B3
+	for <linux-arm-msm@vger.kernel.org>; Sat, 29 Aug 2026 20:53:08 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.208.178
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788033856; cv=none; b=JmEw4UCiCCtFa5ZHGH33zI3es+8Q3XudvP0pwojW8OW1T9sVUjwn9XW6HfqTZKk2+/4AxQnelrG/JuKr7F2IVkoIf07zIJRd9p8vpRylGAe9C8ngnLM6PkockYEyZZNOP3/Iu5XMkWXw+NInn3TLlrj7yQeq7uIKi3BiYykw2b8=
+	t=1788036790; cv=none; b=q2zx21GD63UfxZtnUBmTLBUcCA/C6EuaZyg7i3fsLSnDYkE+ps/+ZLtlpnpN+07App9fF8wcycsOEYG+o3gSooXn0uvBsiH+08x5MpXQIcBAxVM5sV6FBVotN6mtJCyQ+oe6e/vCMD4/9DC5fRUYnc70DBJsuZWUjQ7fd86HGso=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788033856; c=relaxed/simple;
-	bh=ZsVboOaElz1fshbAtApbyNEwQi9OTkk/MIHXqoY+l/w=;
-	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=g6UVAyr6zrkBxnCCjY/wDZGSLehfBIdisDGpAZL19VMA60Gw33Lp8udw2eNwsf4n2l3BfL4CtteusAsA/cctsNoveWGFc8fPTW4hZnKW+yIRrVFaWPL3A69o46W964n4U7LtaPPGha3uP5fkF0mb1Tl3+q0o3tJ5fh7rSXSInM8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=WEVTs6x0; arc=none smtp.client-ip=10.30.226.201
+	s=arc-20240116; t=1788036790; c=relaxed/simple;
+	bh=pT8Ko0/c4eySlc9+PwI5/4NMBjgQS+yfWqpd40NW6pc=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=IU3eWbpX/WHviYaOo+T2lSERfWb2VshZgfAUlLLj6qBzxbJkK0Ai3MloY9LQeOyBGSaBvivXtphXSlgQrtDD63fOzCuNTB8FqsifCOLYcc7SNEHehYZTly3d25Ifyi+7ZlK1wEGcZWBa+kjQbpHnnbd/5kugjjK3spMt+fT+GVE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=LpXBkmQo; arc=none smtp.client-ip=209.85.208.178
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="WEVTs6x0"
-Received: by smtp.kernel.org (Postfix) with ESMTPS id ADC62C2BCB9;
-	Sat, 29 Aug 2026 20:04:15 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1788033855;
-	bh=ZsVboOaElz1fshbAtApbyNEwQi9OTkk/MIHXqoY+l/w=;
-	h=From:Subject:Date:To:Cc:Reply-To:From;
-	b=WEVTs6x0oBPscuvfJ6y4nVLBIRunuYMJcMK8R/RPGYh3353NSngOihKyrMwkVYof9
-	 gG6vMy6bAMGtZrjYFVLaAxQXpx/5gtjdBZWt6YlZJ4uqLF3luC8W5t43ArJaoZ7Hd7
-	 YXhIoRPpXvYdXK+0dYV0SAGTU6ba60C6Sj24cb2z0AvNk/asHLaFktjyJOLG342H40
-	 jHKCsAHJ04xln8WpiTKPJ2Li8G43Qoj+RilOOUgk/1cb4HbKU4/2SHeJ03y8IyCFrH
-	 jHyQWdkOTHmLcxpwLeafcl/pH1upDQPApzgqIOoZ3RItgNKLi5kTqtoZE5ORgzDb6c
-	 sKDxoKS4xnJNw==
-Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 99946C61DDE;
-	Sat, 29 Aug 2026 20:04:15 +0000 (UTC)
-From: Matt Eaton via B4 Relay <devnull+linux.divinehawk.com@kernel.org>
-Subject: [PATCH v2 0/3] usb: xhci: add xhci-no-soft-retry-quirk
-Date: Sat, 29 Aug 2026 22:04:09 +0200
-Message-Id: <20260829-xhci-no-soft-retry-v2-0-0efe22f1c2f8@divinehawk.com>
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="LpXBkmQo"
+Received: by mail-lj1-f178.google.com with SMTP id 38308e7fff4ca-3a2015bbfceso25947681fa.1
+        for <linux-arm-msm@vger.kernel.org>; Sat, 29 Aug 2026 13:53:08 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1788036787; x=1788641587; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=k3Uy0TOuIul9efNHzUpq/ykIN1z+3xgY/HMWCteDfWM=;
+        b=LpXBkmQokLfMedkHYLtRsh3n4rwFznM7DpwARevOdjTpF8VLWsGnNiSXv2hWkI5cL9
+         635ViI0g5XkPCmmkI3LCCNZmwe7GwwR0PuRRSbOvqjYUKx7egC+iMuTw+RppXlIrrsn9
+         c2G+RLmYwrmc8zRMK/irs5KqU++foe4ruEGkwPiqdI2f7HEKrT2OHdttJqDBznJgV3c2
+         9IYuUJH3v2BGsbBf9RGL9SwUzcKYv1G+i2355BariXTjJYkrobwt5Ez+blhE9Oj+wJkl
+         2Pwq6Wjkqti4wBANnXgVVzwin8VjYbS7bHIwdcgXpVfwsWjgOIVmHEPdmlvMNuMBPhQT
+         3JCA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1788036787; x=1788641587;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=k3Uy0TOuIul9efNHzUpq/ykIN1z+3xgY/HMWCteDfWM=;
+        b=JNtCzIxSbYZEf1l/p1dDwhrealu6XYLNMOG9vnBc5SgEJ4wa6tcR+FgeQklmlldkDM
+         7zWD0dFZXynxEa8qI8kHqVtEfnGT1KsMnOB+uJKxVl06g5CgKYtMtXrnH1J6Vaj47b+U
+         QirKWB0TYteb1MoyW/UugLOgvkRcU8xMeAcYYruQ9P9DTGlxqz3QwHhX3FnJ+yndTLO6
+         YQ4NDJnrgVJXE00V4b2tUtKP6Aund/lfanDp0ZDwusFWgDKPDtUaGSRH1RUwghMLqjw8
+         F17U92UsEc11WB9Q6h6PMCbEjzjfJYBZXn9FVzUaP5ky+B1hdm15HmBO8crKuJNqszAf
+         fiCQ==
+X-Forwarded-Encrypted: i=1; AKwUvByQbfMyZljKG8dlBnVt0PXqxRYY3uSSEG2buIhDlmwb3gtCh7l/QqZjhXvaCs3Iis2R3vLxDcB977vQoFpU@vger.kernel.org
+X-Gm-Message-State: AFuF++khY9XT2H3QlDyHClOJbG5/1zJjI+KzmE1/jbi+jwIQaDYTBBFa
+	qE+fB6n8/yterbkCwfY72l0fBqEXtVPaZNzOD/xA2ZNPRly3uDg95zGY5qBbFhoHQ2A=
+X-Gm-Gg: AYBFou11H140Frc4f00dm9fTfkFKZJf2WD/KDzYFqIzEoWfPh2QpAuLpfqQ4V1PZD8K
+	2w1+y8UMp34HYl/qpUXIZvqbed0aNzgSHftT90KGauqIzAogJNhnotNxlrL0TkFftjr+vmb3HOE
+	za8GRKGogO1/ZESYQys8p8m+1ifIiHsHnJdu/z9jzXavAMjV6FZ2PkvvCuhklXMnK9sXrM51cmD
+	krKQbbqlw4/+9S15jFc7yXYBLM0ZlfChhGfn/nYVcfggr/ouI2KbsZoXSXOw6pt+JyU9Ke0lHJg
+	jgWwQf0jt0pGeRk27FiU7AP1VQlZkdJF5Ju/KghWW1a5B6IJLq3/Rs5iTvPBkYK566+X4b0hdxe
+	j/BT9Ojki6yLvKYrm4sq/s/Sw8WrGW6FcBOniWoxEoIIItpLopwKTIbqlL8s4NUV6ygFxtr4cMS
+	Armtce/aydhSmBfsmvpDzhMSoMVKbeoWordlQL9BRjkb7v7tjEcZ0RQPfInDB9DAbTbReBIMAHx
+	Zo/8yGMiY6fOIUIxnrZUhbMHiuPHA==
+X-Received: by 2002:a05:6512:1093:b0:5b0:113e:9c77 with SMTP id 2adb3069b0e04-5b5edba4c66mr2026170e87.4.1788036786257;
+        Sat, 29 Aug 2026 13:53:06 -0700 (PDT)
+Received: from notebook ([93.189.200.242])
+        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5b5e8a0f52dsm1192510e87.64.2026.08.29.13.53.04
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sat, 29 Aug 2026 13:53:05 -0700 (PDT)
+From: Rinat Muhamedgaliev <rinat.muhamedgaliev@gmail.com>
+To: Bjorn Andersson <andersson@kernel.org>,
+	Konrad Dybcio <konradybcio@kernel.org>
+Cc: Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	linux-arm-msm@vger.kernel.org,
+	devicetree@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	Caleb Connolly <caleb@connolly.tech>,
+	Frederic Laing <dev@fredfunk.tech>,
+	Rinat Muhamedgaliev <rinat.muhamedgaliev@gmail.com>
+Subject: [PATCH v2] arm64: dts: qcom: sdm845-oneplus: fix fuel gauge compatible
+Date: Sat, 29 Aug 2026 23:52:58 +0300
+Message-ID: <20260829205258.26955-1-rinat.muhamedgaliev@gmail.com>
+X-Mailer: git-send-email 2.55.0
+In-Reply-To: <20260826233818.124278-1-rinat.muhamedgaliev@gmail.com>
+References: <20260826233818.124278-1-rinat.muhamedgaliev@gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIADk7k2oC/32NwQ6CMBAFf4X07JpSsYIn/8NwoO1iV2Nr2lohh
- H8X8O5xknnzJhYxEEZ2LiYWMFMk7xYQu4Jp27kbApmFmeBC8lrUMFhN4DxE3ycImMIIVddL3Ry
- MPhnBluErYE/DFr22P45vdUed1tJqWIrJh3F7zeXq/T3IJXBQjRayUkcpeXkxlMmh7T6PvfZP1
- s7z/AUq87jjywAAAA==
-X-Change-ID: 20260828-xhci-no-soft-retry-4af6c93dc7d2
-To: Mathias Nyman <mathias.nyman@intel.com>, 
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>, 
- Thinh Nguyen <Thinh.Nguyen@synopsys.com>
-Cc: linux-usb@vger.kernel.org, linux-kernel@vger.kernel.org, 
- linux-arm-msm@vger.kernel.org, Matt Eaton <linux@divinehawk.com>
-X-Mailer: b4 0.16.0
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1788033855; l=2142;
- i=linux@divinehawk.com; s=20260828; h=from:subject:message-id;
- bh=ZsVboOaElz1fshbAtApbyNEwQi9OTkk/MIHXqoY+l/w=;
- b=pJ9FzabRTijMqGGViWZE3UpnKnL2rty/NfNQ6n0yRb4LvaTCcZ1zQX4fU19Zvj9p/TnVWlV9s
- 1a2gOXPpJ6mBWLfPEwKEMNCDXlnLZgMXDIDJvEFMYKdFZiedcdHX0tl
-X-Developer-Key: i=linux@divinehawk.com; a=ed25519;
- pk=UG4KnKXGwxjTNdirUPh/nySblET4aRxWYWSMTQwzlMw=
-X-Endpoint-Received: by B4 Relay for linux@divinehawk.com/20260828 with
- auth_id=982
-X-Original-From: Matt Eaton <linux@divinehawk.com>
-Reply-To: linux@divinehawk.com
+Content-Transfer-Encoding: 8bit
 
-The dwc3 instances on Qualcomm IPQ4019 mishandle xHCI 1.0 Soft Retry. A
-Stop Endpoint command landing on a just-soft-retry-reset endpoint wedges
-the command ring, and the stop-endpoint watchdog kills the host five
-seconds later. Reproducible by unplugging a USB-tethered phone
-mid-transfer; the port stays dead until the platform device is rebound.
+The fuel gauge at I2C address 0x55 on OnePlus 6T (fajita) reports DeviceType 0x0541, identifying it as a TI bq27541 rather than bq27411.
 
-XHCI_NO_SOFT_RETRY already exists for this class of defect but is only
-reachable from xhci-pci, matched against two AMD Promontory PCI ids.
+Binding it as bq27411 selects the wrong register map and produces invalid voltage, state-of-charge, and temperature readings. Use the bq27541 compatible and rename the shared label along with its fajita and enchilada consumers.
 
-Patch 1 adds a device property so platform hosts can request it. Patch 2
-carries it through the dwc3 core as a software property. Patch 3 sets it
-from the qcom glue on the SoC compatible.
+Tested on OnePlus 6T (fajita): queried DeviceType directly over I2C, built the DTB, booted it once with fastboot boot, then installed a locally built postmarketOS kernel package. Before the change, readings included about 65 V, over 10000% SOC, and -273.1 C. Afterward, the bq27xxx driver bound as ti,bq27541 and reported 3.835 V, 42% SOC, and 33.3 C.
 
-The match entry in patch 3 has no effect until the ipq4019 devicetree
-moves to the qcom,snps-dwc3 glue, sent separately:
-https://lore.kernel.org/r/20260829-ipq4019-dwc3-migration-v1-0-cc66b54ce21c@divinehawk.com
-
-This series applies and builds independently of that.
-
-Tested on a Ubiquiti UniFi Travel Router.
-
-Signed-off-by: Matt Eaton <linux@divinehawk.com>
+Fixes: 12dfb002ca01 ("arm64: dts: qcom: sdm845-oneplus-*: add fuel gauge")
+Closes: https://gitlab.com/sdm845-mainline/linux/-/issues/36
+Signed-off-by: Rinat Muhamedgaliev <rinat.muhamedgaliev@gmail.com>
 ---
-Changes in v2:
-- Drop the dt-bindings patch; Krzysztof pointed out this is implied by
-  compatible and shouldn't be a devicetree property.
-- Set the quirk from the dwc3 core instead, via a new dwc3_properties
-  field carried as match data in the qcom glue, per Thinh's review.
-- Link to v1: https://lore.kernel.org/r/20260828-xhci-no-soft-retry-v1-0-b9c264b56601@divinehawk.com
+ arch/arm64/boot/dts/qcom/sdm845-oneplus-common.dtsi   | 4 ++--
+ arch/arm64/boot/dts/qcom/sdm845-oneplus-enchilada.dts | 2 +-
+ arch/arm64/boot/dts/qcom/sdm845-oneplus-fajita.dts    | 2 +-
+ 3 files changed, 4 insertions(+), 4 deletions(-)
 
----
-Matt Eaton (3):
-      usb: xhci-plat: add xhci-no-soft-retry-quirk device property
-      usb: dwc3: add xhci_no_soft_retry software property
-      usb: dwc3: qcom: set xhci_no_soft_retry for IPQ4019
-
- drivers/usb/dwc3/core.c      |  3 +++
- drivers/usb/dwc3/core.h      |  3 +++
- drivers/usb/dwc3/dwc3-qcom.c | 17 ++++++++++++++++-
- drivers/usb/dwc3/glue.h      |  3 +++
- drivers/usb/dwc3/host.c      |  5 ++++-
- drivers/usb/host/xhci-plat.c |  3 +++
- 6 files changed, 32 insertions(+), 2 deletions(-)
----
-base-commit: 45c13f3f9e3bb15fd89ff2864c6f627a3b4b4229
-change-id: 20260828-xhci-no-soft-retry-4af6c93dc7d2
-
-Best regards,
---  
-Matt Eaton <linux@divinehawk.com>
-
+diff --git a/arch/arm64/boot/dts/qcom/sdm845-oneplus-common.dtsi b/arch/arm64/boot/dts/qcom/sdm845-oneplus-common.dtsi
+index 948a0dd18d13..f3459226bf7b 100644
+--- a/arch/arm64/boot/dts/qcom/sdm845-oneplus-common.dtsi
++++ b/arch/arm64/boot/dts/qcom/sdm845-oneplus-common.dtsi
+@@ -790,8 +790,8 @@ &i2c10 {
+ 	status = "okay";
+ 	clock-frequency = <100000>;
+ 
+-	bq27441_fg: bq27441-battery@55 {
+-		compatible = "ti,bq27411";
++	bq27541_fg: fuel-gauge@55 {
++		compatible = "ti,bq27541";
+ 		status = "okay";
+ 		reg = <0x55>;
+ 	};
+diff --git a/arch/arm64/boot/dts/qcom/sdm845-oneplus-enchilada.dts b/arch/arm64/boot/dts/qcom/sdm845-oneplus-enchilada.dts
+index 5f01115e2322..21ebd3f67155 100644
+--- a/arch/arm64/boot/dts/qcom/sdm845-oneplus-enchilada.dts
++++ b/arch/arm64/boot/dts/qcom/sdm845-oneplus-enchilada.dts
+@@ -44,7 +44,7 @@ main_cam_ois: main-cam-ois-regulator {
+ 	};
+ };
+ 
+-&bq27441_fg {
++&bq27541_fg {
+ 	monitored-battery = <&battery>;
+ };
+ 
+diff --git a/arch/arm64/boot/dts/qcom/sdm845-oneplus-fajita.dts b/arch/arm64/boot/dts/qcom/sdm845-oneplus-fajita.dts
+index 7ffcad24d505..d640b38b53f4 100644
+--- a/arch/arm64/boot/dts/qcom/sdm845-oneplus-fajita.dts
++++ b/arch/arm64/boot/dts/qcom/sdm845-oneplus-fajita.dts
+@@ -67,7 +67,7 @@ tfa9894_codec: tfa9894@34 {
+ 
+ };
+ 
+-&bq27441_fg {
++&bq27541_fg {
+ 	monitored-battery = <&battery>;
+ };
+ 
+-- 
+2.55.0
 
