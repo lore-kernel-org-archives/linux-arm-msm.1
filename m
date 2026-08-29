@@ -1,65 +1,84 @@
-Received: from mail-wm1-f46.google.com (mail-wm1-f46.google.com [209.85.128.46])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0F6D940B379
-	for <linux-arm-msm@vger.kernel.org>; Sat, 29 Aug 2026 18:41:38 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.46
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EDB953191D3
+	for <linux-arm-msm@vger.kernel.org>; Sat, 29 Aug 2026 19:08:13 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788028900; cv=none; b=BTJ8nz2snWg0CQ09XjoJMenOpgtAyyPpkNNY/DavxhZilVxbYvsGZ7X9HhMI0LFHmbye9nUBrMjvdEW/fgHnI3ZOlwW6kj/+oEk32gDT0xICAHGDrMJJVrhgJP9atvL/2ldSTD3F5dZicyDBa394ZUPEH4YokX18VbK2WXMa6IE=
+	t=1788030495; cv=none; b=dnX5dSwAct/Lwo3aV7EXWy29paqXUQiOsfXqy/eTLI3nM+CWONj1QRkOUgncmXAijk4zDZ1N42neJGxy9OtCRO7N00dpfn3xnzM/UczXZHqTQbU8JEQ1PoW0osJbszp8vbMAgomHectuiJhSf8bJ92sUxxzQ0BfyDIqb9c87ulA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788028900; c=relaxed/simple;
-	bh=gjh1l+NNPC/cZ6uQzI1O65AFFuEkwTycyBvCBbn0TTY=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=u4E7A+c17bNymXitkvyL4YArmKAV3O/SA5bjnXj+DcA6rObzgRh0gMMgtoHeOGni1CXqMYF/xNvRLvIQ/kqOdbSnjFobAtkNpaR3EFyyVqoA3bd9LnJRBvd4d7jS5MNZ/sl6kMeZUkwmVPWNfGVQRQikG037xRaSLKUoh5lLoxs=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=PgyLkuXw; arc=none smtp.client-ip=209.85.128.46
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	s=arc-20240116; t=1788030495; c=relaxed/simple;
+	bh=SGfDjsecwR9u5vX8MdDxHG1TB82/XXTRCshHLZXATXI=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=hwlHrY9YQJDFLWakjpqJ0nov/BHEowOZmeNGfpRjUWiPabhFS0SMqX9EOUrirqHWDxUntoFSEB1Tq+6t6bt0iFN75bQrKoCDyU0EpQnL50vzud5GBUodiP2+PsW3rDDETylhxMwCY9ADrKO1QWTOKrglHVGWNbTmZGOrO6kQcJ0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=XlVyPv+R; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=iFAsbmk3; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="PgyLkuXw"
-Received: by mail-wm1-f46.google.com with SMTP id 5b1f17b1804b1-498028b3d5eso21835635e9.1
-        for <linux-arm-msm@vger.kernel.org>; Sat, 29 Aug 2026 11:41:38 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="XlVyPv+R";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="iFAsbmk3"
+Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67TH0sTi2306501
+	for <linux-arm-msm@vger.kernel.org>; Sat, 29 Aug 2026 19:08:12 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=eou0ZmVNA4ERY2pys+B8C0
+	iazu+Yp7hGkGpZoTcQFqU=; b=XlVyPv+RAxo41ZxLFLUKMUT+n7vQELcD9O02DA
+	x3lror1ETJcls8lc88AhNZyQtofWf8TGTjidLwP2Q0opuvRcrXQDLTMLaBJHtx3j
+	0oTWROFBGG48KThnmhtFfddT3kk2SzbXNwBNsD9l0QygYLiaYywt6vmvVaKivc3M
+	LLH92Lgn22ru6+BxA4nQRbM6K5PRfPS77IrbkAC+SpKXCVQoBYTdOvyhD9Ord6qA
+	wBHd7hrkUHFk8Wy9ajBzhI3joyCm0CLqtwq3hPjbi1evxlNydc4EeU1e+548MJNO
+	u6sREIXTgWdj/+t++kgTAcQKSOVnQ7mRBGZI4URb/hZGXDCw==
+Received: from mail-yx1-f69.google.com (mail-yx1-f69.google.com [74.125.224.69])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gbqfb1mtw-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Sat, 29 Aug 2026 19:08:12 +0000 (GMT)
+Received: by mail-yx1-f69.google.com with SMTP id 956f58d0204a3-66e50de8143so2394649d50.2
+        for <linux-arm-msm@vger.kernel.org>; Sat, 29 Aug 2026 12:08:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1788028897; x=1788633697; darn=vger.kernel.org;
-        h=cc:to:message-id:content-transfer-encoding:content-type
-         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+        d=oss.qualcomm.com; s=google; t=1788030492; x=1788635292; darn=vger.kernel.org;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:from:to:cc:subject:date:message-id
          :reply-to:content-type;
-        bh=0H8PyiwPo+CDsOXKQ6pG40Z5MKHjfZ12JW+zPqmUMOM=;
-        b=PgyLkuXwccJ/iB5spApIN4v1aYJaXlKq1yg12HCq4KtSCkXDaTlT8BwJ+wVROxeWwJ
-         Khcw6xQ8XmNcfEdtkWhRJEp56KDmfHwVRe/uz8E/FilsZOzb3qiX4IduS1sn8/V1ubVl
-         hBL9nHMtfJma6+qu3aHPh+cbts9I5wisLc3GT+2jVcNBhq8lWyfaOsCUlJ2tjdaDfkIn
-         LcOAbgeo2ynjHz/5x+pjf108/ijktlIYno4UbPpBEdJ0sApCvwxC5ik9dThSFZyTSgpU
-         5zz3AUcSblasQjX+e2GQtvEKCmv/UyE4Vtlm9koKIhY2JGuP1dDj21LdIZB2Y3hZt9yW
-         u/Fw==
+        bh=eou0ZmVNA4ERY2pys+B8C0iazu+Yp7hGkGpZoTcQFqU=;
+        b=iFAsbmk30OcXrXNAMmT1JzAZNMqqHXgw5WAeOMELbBhg6FmJpyTghZpVV+F4o7/XTo
+         Pf3be0WjVAJMwAOw1+GCUAdH2pxOHy+9pBdMhMWjvsaw2AqJUATCz7J2IvFyemE+8QqW
+         LVKO5/AJq00nnqIXH/+k+6sBwi0Cc6oqr7ghORGhOaNKdAquQs3zoeTZVrY/X4+LHszs
+         vjLmWsCY/IOLB8M7j91je9o7zNdJ/NtLqjT3fMS5x5lNeohzOJJbJobGj3ALQhm4Hkfc
+         CAWmdz8w/k/Ihokgwj2/DEsQR/fcMSwwSlYdEn19yrci7Sy7byVKEmVC2aFOyPlOZKoE
+         Copw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788028897; x=1788633697;
-        h=cc:to:message-id:content-transfer-encoding:content-type
-         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to:content-type;
-        bh=0H8PyiwPo+CDsOXKQ6pG40Z5MKHjfZ12JW+zPqmUMOM=;
-        b=ik/iAquW8k7nqgN/fyY68349HdwLw7bY7ngF9+Y3UwevwgFNgGjIo614odNc4I/TlY
-         LvFhn4GxzgPw9GyZy7U/+A2x7YlgLPC5Fui+tpqJb8Q3m54yoLovXuppKtsFX/V17A53
-         KS1kfwbQRc0qEhcp6mPifBjn87xqKXD4op+7NvLgBa4D1wGCpKGdxHtuRKBV0uqkrLjX
-         PhS7iTsYNio15pT3KjceCTm7BQCRsSfoKc7b6/srxSdndaJFgLJIHY/tCh1i7PVPADk4
-         JX7olRqoR6KnvLOSrR4kXEyhGyVbcKxoxu1SM/s7nTj8Aryat2zm9C4+K9yzAoLVPGsc
-         Vmaw==
-X-Gm-Message-State: AFuF++kEj6fDhEm6VRXM+4urseeEzFiZm+WNnATHb3RlO5TTND4V6nkN
-	A6XxK1tufUIgay1E1Pj6qZCO2fgBEsmdcz7HDg+J5C2x8fVSnfZZ8beGtjJfbpB3jNcGvnt3
-X-Gm-Gg: AR+sD13GnSGoFuP4/PmXdCUIHlhpr1UJSf7CGy0VtZE7j/ghfmSs6Acw42tngDdLs+r
-	J/4PKHoKvf0I+iDiO5GaWvgdXIO+gSjZ/eyqQSNyVT1Uq4Goes52RDIbxaMKOu9jlShNLZoLq3i
-	dIT9MdcaOx6LUgNqzT1elYB881TQvtFWYvsyHQwtbUzNUW8z4ymbTnVUWmpaazFw0rJ+0tCh1cD
-	QfDzUiP4GU1CgsElHwsN4eyUdVI9McQ0v+0d2pDuXBqRIa3X3foWvN22xqwfcMLL/a+5gDetj9u
-	8gzA/kgT/sOlkqTzeH2CfQI5GocvJ2ZW0fE7Jk2ewPfpkz568DAjcV+NXDt3SXbSkenmNPtsOMC
-	FFUnmqxczB7VLbNv4eXIDuC2eco5q5Cp51CRowK4rbd/i5EQvvlkXyj9KhF0t9GiL/U/45xKHDt
-	QL1vfvp5/zJNMA4BZIXbGKQPUKV6bgajqqICZlkWM9G+LKxsGBoERDWKr7A2rgRyAo1jPipBHAO
-	ZpNWm7m6In7GuR5xr/FQg==
-X-Received: by 2002:a05:600c:a403:b0:49b:924e:9a28 with SMTP id 5b1f17b1804b1-49b924e9b14mr211725925e9.1.1788028897076;
-        Sat, 29 Aug 2026 11:41:37 -0700 (PDT)
-Received: from [192.168.1.11] ([148.252.146.192])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-49b49cc61cfsm252044895e9.6.2026.08.29.11.41.35
+        d=1e100.net; s=20251104; t=1788030492; x=1788635292;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=eou0ZmVNA4ERY2pys+B8C0iazu+Yp7hGkGpZoTcQFqU=;
+        b=BJZa3Z0ED9N4603SGtUNIlSjjuMwt5sJnZP1baJYFI7MrVULDN9Z5OkQZsCaHhCUxg
+         Z0GGE//Zpq0JXCmpRSYRO1nVYYkpiIqx34C1MpC87z+mEaLKaxz6tQgQAALhUVssd9e4
+         MAOnSjbuuGEION/MFp5Iy6+/8PtEsU09UMJQV9KOz3PiwUlgTsMEVOWRkSYU37idUq7O
+         fOhJz0NkkzAjRpearDqGR4mGfUYokoU9fHsVxqziVeMXIunMF3ZJ+oeOHDAP2/GTZgwL
+         9+9sG7EFXa1PGqbQKT0aWvSlTnbX6wwjGKj0x3tUm2kFEkH/ZFmgQ5t2Q9jtag+utvOA
+         lGsw==
+X-Gm-Message-State: AFuF++lloqi/rLYR7WYx7XdRSwY2TCYKTO2MHkHDJYOw1pRNZ0jsaMqE
+	q4VglJagPXbKRJIvUcfTJd0gUHhtHLL//OojUx4t3m3rLfuheuvlDt79DJTe1Cp2+i+ibC6UHfv
+	wQYPEiQGZk9gA8vlY3hICkFaSHkZTkCSopCUK4JCtW1L8KIqFEUeRr5bJl5Dct49q6fqe
+X-Gm-Gg: AYBFou1MylTx2tNrA5hPy7mqbiNAs3FtNEuFDcHMRnMbNW+F60AYvQ4klmT8AS/aJF5
+	NwGHANXIGUBO3vU9TR7q73oq0bAj0CnZdolIqCwpz42pfsTFc36KnN/gu9qBu8nPIq/bpF1Hnx2
+	2YqNOZnIrbAIsdCY320GXtuXHZBG68413RXX/o0gg9ZcIBnzkZHM1VCIIuFIfhlAFD+ztYrtD6N
+	M31IEXph1zVDt7sDxeoSXtC3n8m+LxXo+gFT1rJNmGvEcOKYvMbXxLiIQbTvjo86fR+t/sHmEGN
+	/G8pSqfGrNReewW8NPoalj9k2ZHI/1j3d7jhAh+L8doqh9hCy6nLb8i5dM2dwDVrvgKVD3cNxjv
+	H5zto+Jy28XAF+QUxD5LFXWBRPWn+jz4RvlHJW51WbjV/GNt+
+X-Received: by 2002:a05:690e:4891:20b0:66e:4df8:2d6f with SMTP id 956f58d0204a3-66e4df82dadmr3302746d50.22.1788030492101;
+        Sat, 29 Aug 2026 12:08:12 -0700 (PDT)
+X-Received: by 2002:a05:690e:4891:20b0:66e:4df8:2d6f with SMTP id 956f58d0204a3-66e4df82dadmr3302720d50.22.1788030491274;
+        Sat, 29 Aug 2026 12:08:11 -0700 (PDT)
+Received: from agents-mac-mini.lan ([2600:1700:b450:a0df:44f5:f599:5679:b5a])
+        by smtp.gmail.com with ESMTPSA id 956f58d0204a3-66e4ecf1f6fsm3013945d50.13.2026.08.29.12.08.09
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 29 Aug 2026 11:41:36 -0700 (PDT)
-From: Dale Whinham <daleyo@gmail.com>
-Date: Sat, 29 Aug 2026 19:41:30 +0100
-Subject: [PATCH] arm64: dts: qcom: x1-denali: Add volume up/down GPIO keys
+        Sat, 29 Aug 2026 12:08:10 -0700 (PDT)
+From: Jason Pettit <jason.pettit@oss.qualcomm.com>
+Subject: [PATCH v5 0/3] X2 Elite HP EliteBook X G2q support
+Date: Sat, 29 Aug 2026 12:08:07 -0700
+Message-Id: <20260829-glymur-send-v5-0-a11bdf6a4b66@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -68,103 +87,175 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260829-surface-pro-11-volume-buttons-v1-1-ace589343a68@gmail.com>
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXMwQrCMAwA0F8ZORtoyxzqr4iHNaZa0XYk7RiM/
- bvVHd/lraAskRUu3QrCc9SYU4M9dEDPMT0Y470ZnHGDObkzapUwEuMkGa3FOb/rh9HXUnJSDL3
- vDbsjMXloxyQc4vL/r7fdWv2LqfxS2LYvAJTkYYEAAAA=
-X-Change-ID: 20260829-surface-pro-11-volume-buttons-f4b40e25cecb
-To: Bjorn Andersson <andersson@kernel.org>, 
- Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>, 
- Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
- linux-kernel@vger.kernel.org, 
- =?utf-8?q?J=C3=A9r=C3=B4me_de_Bretagne?= <jerome.debretagne@gmail.com>, 
- Dale Whinham <daleyo@gmail.com>
+X-B4-Tracking: v=1; b=H4sIABcuk2oC/3XQQW6DMBAF0Ksgr+toPDYGsuo9qi6MPU5cBUgwo
+ EYRd6+BSg1Ss7H0pfGbr3mwSH2gyI7Zg/U0hRi6NoX8LWP2bNoT8eBSZgioQYuKny73Zux5pNZ
+ xIaR2qKQRCCz9uPbkw/eqfXxuOY71F9lhIX4nerqNac2wjbHaROK2a5owHDOSoFGXKI0CXWBuC
+ avaFrmtS7JKF06SIImaLfo5xKHr72v1SazY1hJh13ISHLi3yqD1TkBh37sYD7fRXJa1h/Ss3IT
+ PRL4nMBEAFeQSlfe1f0HIP6KE/a0mmQh0glIFkqasXhDqiRDFnlCJkL4uK0u2AEn/EPM8/wD6u
+ 5r51AEAAA==
+X-Change-ID: 20260619-glymur-send-1136d243a120
+To: Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
+        linux-kernel@vger.kernel.org,
+        Akhil P Oommen <akhilpo@oss.qualcomm.com>,
+        Mahadevan P <mahadevan.p@oss.qualcomm.com>,
+        Sibi Sankar <sibi.sankar@oss.qualcomm.com>,
+        Jingyi Wang <jingyi.wang@oss.qualcomm.com>,
+        Ananthu C V <ananthu.cv@oss.qualcomm.com>,
+        Jason Pettit <jason.pettit@oss.qualcomm.com>,
+        Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>,
+        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1788028895; l=2043;
- i=daleyo@gmail.com; s=20251214; h=from:subject:message-id;
- bh=gjh1l+NNPC/cZ6uQzI1O65AFFuEkwTycyBvCBbn0TTY=;
- b=3g5gzi2RSLoc0SXrt332SzG91tDDODYz0ZGabjDixgUXJYo5rQau/5fDMmno3A9Wonyf6rJwC
- eAw2VtwPBI6DBPkvaqSbzF1UX5DQUjN7ZtPr6l+iXHfYAx2LjZOXzeO
-X-Developer-Key: i=daleyo@gmail.com; a=ed25519;
- pk=M4mvgx1TB2TniKaedTDsO3PbLKgFosJuegXRXPbn2Ds=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODI5MDE2NSBTYWx0ZWRfX6nhfrAYvUj2C
+ 3eEiuV8i5Pnp9muTqb3faHckb2ioGAvX0H00/Sr41OunLmghaWoRGQAl3ErYvOF6WxndwoClqVJ
+ RIjNjxg3M7BXrBePSCauiPxOqDFF4vzFNJdQFvtjtxtHM3g2Mistjn45RixjW417PzoMGo2sp3e
+ ti/wgdFU/vCarXc1aZlfT05h3CZi6RoLjXN0q8m2NqvWONXRAJZ/GOPLPXFVFMgQgSq+jqvOnfN
+ C5UfKtndYl1r5Wtzz8JpItoPVoChfdCdfNrfLkqn7fKt6hF0XScCFhqibH7mBvTfIJ03JBI9oC9
+ h7NnMNaizhflSLDIEr81HpxbYC4ncmz4BZORtf8hl3E/Vm45PpnTNrdTfGtoCP5qGnb4NGA5ewL
+ oVykocP9nJJoYvnxc5BNzeAbvS/q0nWJQc8qFnew8ujoV2WNtiZenBmF+/2T5/Us4uMWUmlwd+7
+ dmtb38bJ4hlwjNtWENQ==
+X-Proofpoint-ORIG-GUID: WwOFOe6s27Ie0K07PeLG9EjOia5QX3zj
+X-Proofpoint-GUID: WwOFOe6s27Ie0K07PeLG9EjOia5QX3zj
+X-Authority-Analysis: v=2.4 cv=Q77iJY2a c=1 sm=1 tr=0 ts=6a932e1c cx=c_pps
+ a=J+5FMm3BkXb42VdG8aMU9w==:117 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
+ a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22 a=VwQbUJbxAAAA:8
+ a=EUspDBNiAAAA:8 a=pGLkceISAAAA:8 a=bC-a23v3AAAA:8 a=N0R_qAP9jCjoCUmMprsA:9
+ a=QEXdDO2ut3YA:10 a=Epx66wHExT0cjJnnR-oj:22 a=FO4_E8m0qiDe52t0p3_H:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODI5MDE2NSBTYWx0ZWRfX8qlSpfZSSHNN
+ m+ytFQMDn8wsWvVXTuhnIjrfz0fDIVUFncTyG8XT6hGWHq9y8IxtEIK/l64kgUcO6kBDIGgmI0k
+ v6NhhOw6OKJfCFcH+XGBDAwXsll5cvw=
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-08-29_05,2026-08-27_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ suspectscore=0 phishscore=0 malwarescore=0 clxscore=1015 priorityscore=1501
+ adultscore=0 bulkscore=0 lowpriorityscore=0 impostorscore=0 spamscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608290165
 
-Configure gpio6 and gpio8 as volume up and volume down respectively, to
-enable the volume rocker located at the top of the screen.
+This series adds initial device-tree support for the HP EliteBook X G2q 14"
+Next Gen AI PC (product SKU C4JG0AV, board 8E91), a Snapdragon X2 Elite
+(Glymur) laptop.
 
-Signed-off-by: Dale Whinham <daleyo@gmail.com>
+The board was brought up and validated on real hardware. The electrical
+description (PMIC rails, PHY supplies) was verified against the live unit
+rather than copied from a Glymur CRD.
+
+Working on this laptop with this series and the Glymur DP PHY series
+applied:
+
+  - Internal eDP panel (samsung,atna33xc20)
+  - 2x USB Type-C with DisplayPort alt-mode and USB
+  - Chassis USB-A host port
+  - Fingerprint reader
+  - NVMe SSD on PCIe5
+  - Wi-Fi, Bluetooth
+  - Keyboard, touchpad, touchscreen, lid switch
+  - Adreno GPU and GMU (Freedreno GL on Mesa)
+  - Audio playback and capture
+  - Real-time clock
+  - Compute DSP (cDSP)
+
+This patch series builds upon the recent work of Qualcomm engineers to
+enable another Glymur-based laptop.
+
+Like its peer submissions, the camera support is missing today.
+
+The audio, GPU and SoCCP series this board previously depended on have
+since merged. One runtime dependency remains, the Glymur DP PHY series:
+
+  https://lore.kernel.org/all/20260828-glymur-phy-v3-v3-0-8e73ce7c4636@oss.qualcomm.com/
+
+It is not needed to apply or build this series. With no PHY patches
+applied, this series applies cleanly to the base commit below and
+qcom/glymur-hp-elitebook-x-g2q.dtb builds without error. The dependency is
+runtime only. Without it the DP PHY fails link training and the DisplayPort
+outputs do not come up.
+
+The chassis HDMI jack is removed in v5. It is driven from the usb_2 combo
+PHY as a DisplayPort-only instance, and that path does not come up on
+Glymur. The driver enables the USB half's com_aux clock even on a
+DisplayPort-only instance, where nothing powers the block that clock lives
+in, so it never ungates and DP init fails with -EBUSY.
+
+This is not specific to this board. The same failure was reported against
+the already-merged Asus Zenbook A16 (UX3607OA), which describes its usb_2
+combo PHY the same way:
+
+  https://lore.kernel.org/all/20260808164148.123057-1-jesse.casco@gmail.com/
+
+A fix is in progress but not yet available.
+
+arm64 defconfig builds the CPUCP mailbox as a module. SCMI needs it built
+in (=y) on Glymur. As a module it loads too late, every SCMI transaction
+times out, and cpufreq does not come up on any CPU.
+
+The ADSP and cDSP auto-boot before the rootfs is mounted and do not retry,
+so their firmware has to be reachable from the initramfs. With it only on
+the rootfs both remoteprocs stay offline and audio does not come up.
+
+The bindings patch 1/3 is independent and can be reviewed/applied on its
+own.
+
+Signed-off-by: Jason Pettit <jason.pettit@oss.qualcomm.com>
 ---
- arch/arm64/boot/dts/qcom/x1-microsoft-denali.dtsi | 36 ++++++++++++++++++++++-
- 1 file changed, 35 insertions(+), 1 deletion(-)
+Changes in v5:
+- Rebased onto next-20260828.
+- Correct the usb_0, usb_1 and usb_mp combo PHY supplies.
+- Remove the HDMI path pending a combo PHY driver fix.
+- Add the SoCCP firmware names. Drop the redundant status override on that
+  node, which glymur.dtsi already leaves enabled.
+- Link to v4: https://patch.msgid.link/20260817-glymur-send-v4-0-3fb89cec703e@oss.qualcomm.com
 
-diff --git a/arch/arm64/boot/dts/qcom/x1-microsoft-denali.dtsi b/arch/arm64/boot/dts/qcom/x1-microsoft-denali.dtsi
-index 7559557610ed..c467f61545cb 100644
---- a/arch/arm64/boot/dts/qcom/x1-microsoft-denali.dtsi
-+++ b/arch/arm64/boot/dts/qcom/x1-microsoft-denali.dtsi
-@@ -20,7 +20,7 @@ aliases {
- 	gpio-keys {
- 		compatible = "gpio-keys";
- 
--		pinctrl-0 = <&hall_int_n_default>;
-+		pinctrl-0 = <&hall_int_n_default>, <&vol_down_n>, <&vol_up_n>;
- 		pinctrl-names = "default";
- 
- 		switch-lid {
-@@ -30,6 +30,24 @@ switch-lid {
- 			wakeup-source;
- 			wakeup-event-action = <EV_ACT_DEASSERTED>;
- 		};
-+
-+		key-vol-down {
-+			debounce-interval = <15>;
-+			gpios = <&pm8550_gpios 8 GPIO_ACTIVE_LOW>;
-+			label = "Volume Down";
-+			linux,can-disable;
-+			linux,code = <KEY_VOLUMEDOWN>;
-+			wakeup-source;
-+		};
-+
-+		key-vol-up {
-+			debounce-interval = <15>;
-+			gpios = <&pm8550_gpios 6 GPIO_ACTIVE_LOW>;
-+			label = "Volume Up";
-+			linux,can-disable;
-+			linux,code = <KEY_VOLUMEUP>;
-+			wakeup-source;
-+		};
- 	};
- 
- 	pmic-glink {
-@@ -995,6 +1013,22 @@ rtmr0_3p3_reg_en: rtmr0-3p3-reg-en-state {
- 		function = "normal";
- 		power-source = <1>; /* 1.8V */
- 	};
-+
-+	vol_down_n: vol-down-n-state {
-+		bias-pull-up;
-+		input-enable;
-+		pins = "gpio8";
-+		function = "normal";
-+		power-source = <1>; /* 1.8V */
-+	};
-+
-+	vol_up_n: vol-up-n-state {
-+		bias-pull-up;
-+		input-enable;
-+		pins = "gpio6";
-+		function = "normal";
-+		power-source = <1>; /* 1.8V */
-+	};
- };
- 
- &pm8550ve_9_gpios {
+Changes in v4:
+- Rebased onto next-20260814. The Glymur combo-PHY configuration patch
+  remains the one declared prerequisite.
+- Fix the touchpad interrupt. TPAD_INT_N is GPIO 3, not GPIO 66.
+- Describe only the microphones this board has. GPIO 200 and GPIO 201, the
+  second DMIC clock/data pair, are not connected and are removed in v4.
+- Addressed comments received on v3 as reflected in the next two items.
+- Use the firmware names from the vendor package (qcadsp8480.mbn,
+  adsp_dtbs.elf, qccdsp8480.mbn, cdsp_dtbs.elf)
+- Drop the smb2370_l_e2 status override; SMB2370_2 is already disabled by
+  "arm64: dts: qcom: smb2370: Disable SMB2370_2 by default".
+- Link to v3: https://patch.msgid.link/20260809-glymur-send-v3-0-2d1ed10e3a89@oss.qualcomm.com
+
+Changes in v3:
+- Rebased onto next-20260807; the audio, GPU and SoCCP prerequisites have
+  merged, leaving only the combo-PHY configuration patch.
+- Added the TCSR reference-generator supplies (vdda-qref*/vdda-refgen*) and
+  the vreg_l1f_e1_0p88 LDO they reference.
+- Set dr_mode = "host" on usb_hs; glymur.dtsi dropped it from that node.
+- Reworded the usb_2 and smb2370_l override comments.
+- Link to v2: https://patch.msgid.link/20260625-glymur-send-v2-0-00905324ffbf@oss.qualcomm.com
+
+Changes in v2:
+- Enable the PMIC RTC (qcom,no-alarm + qcom,uefi-rtc-info)
+- Add the SMB2370 eUSB2 repeaters on usb_0/usb_1
+- Enable the compute DSP (remoteproc_cdsp / fastrpc)
+- Addressed comments from reviewers on v1
+- Link to v1: https://lore.kernel.org/linux-arm-msm/20260620-glymur-send-v1-0-fc4a2cfd107c@oss.qualcomm.com
 
 ---
-base-commit: 8d3ae59288f1e7d58d76558a6ee96d533bc5019f
-change-id: 20260829-surface-pro-11-volume-buttons-f4b40e25cecb
+Jason Pettit (3):
+      dt-bindings: arm: qcom: Add HP EliteBook X G2q 14 AI
+      arm64: dts: qcom: Add HP EliteBook X G2q 14 AI
+      firmware: qcom: scm: Allow QSEECOM on HP EliteBook X G2q 14 AI
+
+ Documentation/devicetree/bindings/arm/qcom.yaml    |   1 +
+ arch/arm64/boot/dts/qcom/Makefile                  |   1 +
+ .../boot/dts/qcom/glymur-hp-elitebook-x-g2q.dts    | 940 +++++++++++++++++++++
+ drivers/firmware/qcom/qcom_scm.c                   |   1 +
+ 4 files changed, 943 insertions(+)
+---
+base-commit: e30626823a406725ce29bc75cb8ec467d3e1e326
+change-id: 20260619-glymur-send-1136d243a120
 
 Best regards,
 --  
-Dale Whinham <daleyo@gmail.com>
+Jason Pettit <jason.pettit@oss.qualcomm.com>
 
