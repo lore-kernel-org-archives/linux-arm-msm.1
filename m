@@ -1,82 +1,108 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4182D488211
-	for <linux-arm-msm@vger.kernel.org>; Tue,  1 Sep 2026 17:22:57 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B6A5049B212;
+	Tue,  1 Sep 2026 18:20:28 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788283378; cv=none; b=j3OUpNtRYzEzKXcl9mtOGRPddKKfX10yM8Lep0XI8UAfsBMLqR+qoX9n/ZLvieTucK397WuCyfo8KpcJxJ1UpNcFNsdoCt/5rE9TuEIYYuJgw9ClbtWXF8wwfRWzMfYjPRTZsiDvV4tIhqF3h2AsudAgqGynggSWj3mFUhGpLMU=
+	t=1788286829; cv=none; b=HToZfpXE40nFw3/GF9tseUZCRcsvohs0TLTp/YfxncWKKfuQn6GMGBxq4pCoVeaIMc8B6do+jUHWQpSgaw7plbWfh2y7bMLljnaTJ01UN+uuJDSjYpYvDFJizZldo0PxBWZs1eCSWfNwjugXEdZm/MCsfmAKKz1wYpIlK663Iv4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788283378; c=relaxed/simple;
-	bh=Ad1DukBGwLi6ArucFKVFRHpCwR2Weby1EPL9ATOHJ1c=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=T0eg6Xl/BhWKcR8scKvsnvgU2pzk2/U/L6/KoEjxslJAZGHE/jsvkJcM8xJohT5Itz4Evkp15rapH6VPk8h7R5JnpCiWI33WptaeAW74wB2WJ90EHuOlHaFreogUXUTsaMuDoc/VnuT4uagG7DTH+7rib48sGnuX+Td1dKLhAZE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=hLT6pqk/; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1788286829; c=relaxed/simple;
+	bh=DKgfyVbofqDzA/MOsM4DBxeNKSOEExGEVqcGPbIy//w=;
+	h=From:To:Cc:In-Reply-To:References:Subject:Message-Id:Date:
+	 MIME-Version:Content-Type; b=XYqfUNcFlXTTAff0iMz42O6RtW3gYaOcYnG1hbYI641tROiGCe5O0CsJwvDcqIPG+TllwgJVYPc3BC1g0kCalGsM8aKwhqtuBiioCnlJrvVmkbfe8yW78j+33ud8GChCWVJPu5BZzar0Kd7pS5JxIMy1SZoJMyRI0i4HFXFj3dc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=CmMODAd7; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="hLT6pqk/"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 22E4E1F00ACF
-	for <linux-arm-msm@vger.kernel.org>; Tue,  1 Sep 2026 17:22:57 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="CmMODAd7"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3066F1F000E9;
+	Tue,  1 Sep 2026 18:20:26 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1788283377;
-	bh=Ad1DukBGwLi6ArucFKVFRHpCwR2Weby1EPL9ATOHJ1c=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc;
-	b=hLT6pqk/N3t4GsJHKh6IsbFpP3/hTTyorJFTxXTtgNJXA6dBXcp/OsAr/8n8udXL2
-	 yPmUjPQnbS7tthwscVDgkBq0SpjosQzqiNizqvhoNY9oQT6oPiGLUAcgp7cbmnMb3Q
-	 FzZjM3JzC2jleBf4G97WdhXulwnZuZrKjMpUOQMSv3N39ayy9KVor+RQs1iQnnZkF8
-	 A2NkG8MKPzXB6EiPADiumEzl35X73acZNA96sFjXu35zszn+mHIm/2C9zB1BIGnDfN
-	 YrQ1HzKChXi0MGA2X3ERbmr4r2zuBI2tFkW6LwhYtie1Ygd6J8oea2NX2at8grVpE8
-	 bZuBEPcgIAgnw==
-Received: by mail-lf1-f53.google.com with SMTP id 2adb3069b0e04-5b5e907853eso1042664e87.2
-        for <linux-arm-msm@vger.kernel.org>; Tue, 01 Sep 2026 10:22:57 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AKwUvBy7wUbBRNTpUrfA0AIvzNUpBESEHUXl70ZdZ0L40YWGcVTXBMsH6+swRx6DjJBwsUrVQXrRZPUccZpBZx6S@vger.kernel.org
-X-Gm-Message-State: AFuF++nEjohsuliYmD094vEWb8C/EvEWk615QPHcq8qVyulv4HRTiWnH
-	G3ySlJHCTtSLvKTkA9sln0AYSgdCNiAZGmpmxpHKeu2tVwVfnkwl85ccwbTJIMwwQrqJspfkvz8
-	hQAtqXYtTCjiL3oAIt5hSbCR6nzych5k=
-X-Received: by 2002:a05:6512:ac7:b0:5ae:b998:9134 with SMTP id
- 2adb3069b0e04-5b5e68a7adfmr11827743e87.1.1788283375630; Tue, 01 Sep 2026
- 10:22:55 -0700 (PDT)
+	s=k20260515; t=1788286828;
+	bh=EloQfZ2mL/lXfqlR6ymHVzXiIi84Uaj0B75ZbDX4aQk=;
+	h=From:To:Cc:In-Reply-To:References:Subject:Date;
+	b=CmMODAd7w9+mHLAH5offUIqUAeOpWfJbnUsZTGkIrggUnGxVCyqYG1czkio+K1aVo
+	 eLGg2kSqRBD4da5zaKlSUBMz7Q+b2T5r1ym3FwmSXz1salDyvhIy19l0+rXmWuY05C
+	 yNHuWVzQ51Ki7QX9tRCj7t+luIsI7551AWE+6FIWsT+HThc/GGdNDFgpUUXz+lB6X9
+	 b6Iwl/oeFCPIXClT3/TQLs3DIr73Q+bWZUpOEU6CnyvwxlIMNmqtOf/+2H8Bm0cLEY
+	 soSMhVKpwJL/g4EpLwiEaPO7zmRf5E3uA2jShxCR+RKKZnjfeqa2xb5W+xZA2ejtlg
+	 S907OC0XEGqvQ==
+From: Mark Brown <broonie@kernel.org>
+To: Srinivas Kandagatla <srini@kernel.org>, 
+ Liam Girdwood <lgirdwood@gmail.com>, Jaroslav Kysela <perex@perex.cz>, 
+ Takashi Iwai <tiwai@suse.com>, Shenghao Ding <shenghao-ding@ti.com>, 
+ Kevin Lu <kevin-lu@ti.com>, Baojun Xu <baojun.xu@ti.com>, 
+ Sen Wang <sen@ti.com>, Geert Uytterhoeven <geert+renesas@glider.be>
+Cc: linux-sound@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
+ linux-clk@vger.kernel.org
+In-Reply-To: <cover.1787239902.git.geert+renesas@glider.be>
+References: <cover.1787239902.git.geert+renesas@glider.be>
+Subject: Re: [PATCH 0/3] ASoC: Make sure clk_init_data is fully initialized
+Message-Id: <178813056998.13461.16219353923059804507.b4-ty@b4>
+Date: Sun, 30 Aug 2026 23:56:09 +0100
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260827-kuno-soc-support-v5-0-6d47636a8f09@oss.qualcomm.com> <20260827-kuno-soc-support-v5-9-6d47636a8f09@oss.qualcomm.com>
-In-Reply-To: <20260827-kuno-soc-support-v5-9-6d47636a8f09@oss.qualcomm.com>
-From: Linus Walleij <linusw@kernel.org>
-Date: Tue, 1 Sep 2026 19:22:42 +0200
-X-Gmail-Original-Message-ID: <CAD++jLnHCrhvdVCzbU5JA1qVOQ7hh7B=gwPr9QPtZdqh9ZxADw@mail.gmail.com>
-X-Gm-Features: AcwNN1V_scX2qdh9lKw1huy2nxRfP13bn5JqOZZxyJX3f5glJ69SIw1ECTFLPMk
-Message-ID: <CAD++jLnHCrhvdVCzbU5JA1qVOQ7hh7B=gwPr9QPtZdqh9ZxADw@mail.gmail.com>
-Subject: Re: [PATCH v5 09/15] pinctrl: qcom: Add Kuno pinctrl driver
-To: Hardeep Sharma <hardeep.sharma@oss.qualcomm.com>, Bartosz Golaszewski <brgl@kernel.org>
-Cc: Bjorn Andersson <andersson@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>, 
-	Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>, Rob Herring <robh@kernel.org>, 
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, Ulf Hansson <ulfh@kernel.org>, 
-	Michael Turquette <mturquette@baylibre.com>, Stephen Boyd <sboyd@kernel.org>, 
-	Brian Masney <bmasney@redhat.com>, Georgi Djakov <djakov@kernel.org>, 
-	Thomas Gleixner <tglx@kernel.org>, Radu Rendec <radu@rendec.net>, Robert Marko <robimarko@gmail.com>, 
-	Guru Das Srinagesh <linux@gurudas.dev>, Taniya Das <taniya.das@oss.qualcomm.com>, 
-	linux-arm-msm@vger.kernel.org, linux-arm-kernel@lists.infradead.org, 
-	linux-kernel@vger.kernel.org, devicetree@vger.kernel.org, 
-	linux-pm@vger.kernel.org, linux-clk@vger.kernel.org, 
-	linux-gpio@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.17-dev
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1814; i=broonie@kernel.org;
+ h=from:subject:message-id; bh=DKgfyVbofqDzA/MOsM4DBxeNKSOEExGEVqcGPbIy//w=;
+ b=owEBbQGS/pANAwAKASTWi3JdVIfQAcsmYgBqlxdndR4NJry+vIrGpBTF6GDpEqEC7fFg19o2B
+ CMFuwVTD3uJATMEAAEKAB0WIQSt5miqZ1cYtZ/in+ok1otyXVSH0AUCapcXZwAKCRAk1otyXVSH
+ 0KIAB/4oT/wIau+4AIhcu4yLr06yLsb/FtYEed7GoXPvG12sNcWNkowVM3yPYrS16vTF/PVVky6
+ i0hqhFMG2KJBPxWIohjes9jJdVaTYLQ6AXzySrdknEoe6/12ozq+AmmwZ5k61JN/riXbqX84Yjw
+ 4mtub2w51nW1AQjrOPgT6ep7pTFMTaiOp0r6k+4mgAoFR1JMvABm/Q6yIFpGoulFrGd5ED7TCQk
+ vTFE3LPihQIm4ZRFXXyuVLun06EvJyDzqB+pdHPZxTzeGThFKeyMYu9fiXZaLMGgLtZz2mYjhs6
+ VzaR4jQHPd20wl+ZFCSpnKRRRF40XA1LZITfC022t0IJo4Bc
+X-Developer-Key: i=broonie@kernel.org; a=openpgp;
+ fpr=3F2568AAC26998F9E813A1C5C3F436CA30F5D8EB
 
-On Thu, Aug 27, 2026 at 7:52=E2=80=AFPM Hardeep Sharma
-<hardeep.sharma@oss.qualcomm.com> wrote:
+On Fri, 21 Aug 2026 10:52:54 +0200, Geert Uytterhoeven wrote:
+> ASoC: Make sure clk_init_data is fully initialized
+> 
+> 	Hi all,
+> 
+> The clk_init_data structure contains several mutually-exclusive members
+> for different methods to specify the possible parents of a clock,
+> prompting drivers to initialize only the members they need.  However,
+> not initializing all members may cause subtle issues, which are only
+> exposed when CONFIG_INIT_STACK_ALL_PATTERN or CONFIG_INIT_STACK_NONE is
+> enabled.
+> 
+> [...]
 
-> Add the TLMM pinctrl driver for the Qualcomm Kuno platform, supporting
-> 110 GPIOs and their pin multiplexing, pin configuration and gpiolib
-> interface through the common pinctrl-msm driver.
->
-> Signed-off-by: Hardeep Sharma <hardeep.sharma@oss.qualcomm.com>
+Applied to
 
-FWIW LGTM
-Reviewed-by: Linus Walleij <linusw@kernel.org>
+   https://git.kernel.org/pub/scm/linux/kernel/git/broonie/sound.git for-7.4
 
-Bartosz will decide and merge when it is ready.
+Thanks!
 
-Yours,
-Linus Walleij
+[1/3] ASoC: codecs: lpass: Make sure clk_init_data is fully initialized
+      https://git.kernel.org/broonie/sound/c/2cf55c64e64e
+[2/3] ASoC: codecs: wcd934x: Make sure clk_init_data is fully initialized
+      https://git.kernel.org/broonie/sound/c/738a163b7ad5
+[3/3] ASoC: tlv320aic32x4: Make sure clk_init_data is fully initialized
+      https://git.kernel.org/broonie/sound/c/f1b2a0434b5b
+
+All being well this means that it will be integrated into the linux-next
+tree (usually sometime in the next 24 hours) and sent to Linus during
+the next merge window (or sooner if it is a bug fix), however if
+problems are discovered then the patch may be dropped or reverted.
+
+You may get further e-mails resulting from automated or manual testing
+and review of the tree, please engage with people reporting problems and
+send followup patches addressing any issues that are reported if needed.
+
+If any updates are required or you are submitting further changes they
+should be sent as incremental updates against current git, existing
+patches will not be replaced.
+
+Please add any relevant lists and maintainers to the CCs when replying
+to this mail.
+
+Thanks,
+Mark
+
