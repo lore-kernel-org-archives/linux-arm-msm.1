@@ -1,45 +1,40 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9F1EE340A47;
-	Sun, 30 Aug 2026 09:50:37 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9EBEE35F170;
+	Sun, 30 Aug 2026 09:54:42 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788083438; cv=none; b=PG4akW8TfnCucaz+nlfc2lAnldHCx/pSfqQyg2De3p3D3sE3gO9pd2599FMNFdRnlEv3F+KHJ+V/Ms93xpBgYdGpG1Xj1bUtEyAF4yTmKB5Pz5esqh0tkme+nVojqawR9JUm68BfUpRIN6iHXVs0F4vhcC31G9g4f+qbeDHV3gQ=
+	t=1788083683; cv=none; b=Zk5HeuXkTTVDY9J4a2F/llpv4LsM9EEuVEfUxoUY0cNkCi+6U4KTP4xYXo8jPVNB1CrqgpSIcB+5FAeev8sZ/p9+uXl0j1abIQ1MITdHpSne53mOiZGTbySZFs4ilBvqseXjPCZu7yNboQwemRdSomhF5QFGMlP2OWPXQ3o5k0w=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788083438; c=relaxed/simple;
-	bh=n8JNqEz6Rv/9hhnk0QiRELTnfG3TVYjuVkxC24GK+GA=;
+	s=arc-20240116; t=1788083683; c=relaxed/simple;
+	bh=CYH52uyF2CtF4DngemQpVHHqkMv7GkRcxpkH5w4S400=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=qhs27Xo4ENSV9CB/FlDac/r7oVoE6CLYeAGNmACHzHu2RJaVzJO/ndIqhUrzGq4vqqAulXjIkbLr24mJHbdAuD1QFLp0dmQxrJNa1feyzMyCqcA+E23BYA3GMvfqApXk9EWbWEMuhtn6ydbKDDqcc9tBIwixyqCiT2yym7jm5nI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Bgzta3yB; arc=none smtp.client-ip=100.103.45.18
+	 Content-Type:Content-Disposition:In-Reply-To; b=STQo+2TFWjRXedwmw37zbW5iliRe0jF1hj583M+X9SZciHm62QjtRdFvPNkq2oUUf7Yl8a4KR917HiCrA27cplznpmXCg7HUew/Zo51/OPAa/SeD5QnYYInPnqCv9VjHCD8Kht+u9bOUTaMmwrtMGlC2Kr2YiFXPTPIan+FApi8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=eafQcu7p; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Bgzta3yB"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0E7461F000E9;
-	Sun, 30 Aug 2026 09:50:35 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="eafQcu7p"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 63CE81F000E9;
+	Sun, 30 Aug 2026 09:54:41 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1788083437;
-	bh=FYIfK3uTkNCT+KVZTnBM/k5ekM0A7fNCMCiGAvjFqVQ=;
+	s=k20260515; t=1788083682;
+	bh=CgBrUiBAKCC56x+TVfnfJ4aLrIDbkJO4XUeVoG5VVsY=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=Bgzta3yB5Kc4FdjDdpPuSyRmToIgrAt4Cn/vsD2/opxxWp6r17x0Ciz8B96v+yuPn
-	 9ttxB9scgLD5vFo+TazrVVI6kZBRtMhhAzcdtEGsXoXadOftOOZCevSHlNMvO32HW2
-	 /a02G/FsEqsRm/9zTUs7dREtKHpqRtWIGqeBHaYiVQK2AkJ20MsD9Z6vY+vJToLqjh
-	 mu/matyEEx9hsMR/UrK8vZfS0OKIOQB1SxQbSwRlVij4LSHHXzlBI5Rtzp+5nQb7lB
-	 8GmOBpbgrpCRQJD165QpyiTUsNem2oU2JWeaB2C/sbc6OMNIUyAf4HosHJxP8osAv5
-	 4LiBgKvz6fupw==
-Date: Sun, 30 Aug 2026 11:50:32 +0200
+	b=eafQcu7p8qIVE77ejviVCGXFdVteUCoGSqiX8dm2Z1jxVwcTWqBY8ZoXqFNDmBJ9R
+	 v3oZFeQIafVXekVDXXhWMteJC2oFM0yZpbINc2s2dedtyUrNgKVjjdIumyHnlNm6v4
+	 H8xg0TfXLy8RnbLabGm7B2gyJPxRU6KJ1Pi/KPPp6yVh5WyRHp6sTLMOZoOHjAsOZq
+	 8Ir6HIy2+3fKMZteQ6U3VGKVdSaE1HLcM0Lnr36fRUoXIi1MzauTdv4UBPGkhKXhqm
+	 CwY6rNmTxBnCrxpns/FcXJrGU1PmfB/vzXoTfdaLa3lzPK6XO3+8VrYwTODahAphFd
+	 y1Eu3m66G+v5A==
+Date: Sun, 30 Aug 2026 11:54:38 +0200
 From: Krzysztof Kozlowski <krzk@kernel.org>
-To: Vinayak Katoch <vinayak.katoch@oss.qualcomm.com>
-Cc: Srinivas Kandagatla <srini@kernel.org>, 
-	Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>, Rob Herring <robh@kernel.org>, 
+To: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
+Cc: Jassi Brar <jassisinghbrar@gmail.com>, Rob Herring <robh@kernel.org>, 
 	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
-	Arnd Bergmann <arnd@arndb.de>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, 
-	Bjorn Andersson <andersson@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>, 
-	Bharath Kumar <bkumar@qti.qualcomm.com>, Chenna Kesava Raju <chennak@qti.qualcomm.com>, 
-	linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org, devicetree@vger.kernel.org, 
-	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH 0/6] misc: fastrpc: Add extended IOVA mapping support
-Message-ID: <20260830-hilarious-controversial-boa-bbcb1d@quoll>
-References: <20260826-extended-mapping-v1-0-d046c1cb9a9f@oss.qualcomm.com>
+	linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org, devicetree@vger.kernel.org
+Subject: Re: [PATCH] dt-bindings: mailbox: qcom: Add IPQ9650 APCS compatible
+Message-ID: <20260830-quartz-hippo-of-wonder-0826cc@quoll>
+References: <20260827-apcs-v1-1-33087bf44620@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -48,28 +43,19 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
-In-Reply-To: <20260826-extended-mapping-v1-0-d046c1cb9a9f@oss.qualcomm.com>
+In-Reply-To: <20260827-apcs-v1-1-33087bf44620@oss.qualcomm.com>
 
-On Wed, Aug 26, 2026 at 07:15:42PM +0530, Vinayak Katoch wrote:
+On Thu, Aug 27, 2026 at 09:48:07AM +0530, Varadarajan Narayanan wrote:
+> Document the APCS mailbox compatible for the IPQ9650 SoC. IPQ9650 uses
+> qcom,msm8994-apcs-kpss-global as a fallback, so add the valid compatible
+> string combination to the binding.
 > 
-> - Two new UAPI flags (FASTRPC_MAP_FD_EXTENDED and
->   FASTRPC_MAP_FD_DELAYED_EXTENDED) allow userspace to request extended
->   mapping. When set, fastrpc_map_attach() iterates cctx->ext_cb[] and
->   retries on -ENOMEM, falling over to the next extended CB if one
->   exhausts its IOVA space. The SID offset is corrected per-CB so the
->   IOVA forwarded to the DSP is valid.
-> 
-> Signed-off-by: Vinayak Katoch <vinayak.katoch@oss.qualcomm.com>
+> Signed-off-by: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
 > ---
-> Vinayak Katoch (6):
->       dt-bindings: misc: fastrpc: Add memory-region property for context bank
->       misc: fastrpc: Handle multi-cell reg in context bank probe
->       arm64: dts: qcom: kaanapali: Add CDSP FastRPC extended context bank
->       arm64: dts: qcom: glymur: Add CDSP FastRPC extended context bank
->       misc: fastrpc: Add extended context bank support
->       misc: fastrpc: Add UAPI flags for extended IOVA mapping
+>  Documentation/devicetree/bindings/mailbox/qcom,apcs-kpss-global.yaml | 1 +
+>  1 file changed, 1 insertion(+)
 
-DTS must not be part of misc posting. Please always split it.
+Acked-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
 
 Best regards,
 Krzysztof
