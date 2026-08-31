@@ -1,217 +1,118 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wm1-f52.google.com (mail-wm1-f52.google.com [209.85.128.52])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CA65D3AFAFF
-	for <linux-arm-msm@vger.kernel.org>; Mon, 31 Aug 2026 05:43:43 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B69E13AAF5A
+	for <linux-arm-msm@vger.kernel.org>; Mon, 31 Aug 2026 05:52:38 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.52
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788155026; cv=none; b=iUl4k7p+ZxCGNzcKdPGDGp3V33Wo57Ow9hanNed812+97vjz5tXEg5ni4o+61SVhuXepRdyWCfi5t/Cht5fAfBV3DspIlevdi5zllohUIivJAWf+1ZyC5bcdTRsKE46uKwOsjhdr+GFsX51JQOojl0RUaoM7R1YMlF1qpyZtk08=
+	t=1788155560; cv=none; b=BrVE2ppN676KnW5fmlC+0yM3csY1EwHbJFHp9AihV6RunzlDgx1V+hYwD0hha8QCm2v+RAAPjyviXbcVC+C/2E4tQEUigO9Xyg5EvqLx93VfGSaG+nrGoUTHEHomCRyLC8mf9zyDw75KF1ez5LYU35HvirTpqtuxQ6Z3GitF8iM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788155026; c=relaxed/simple;
-	bh=kcLadk2Z38v7gaYvHSz3XN/7Lv5Ephg49UsBJXMNr0k=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=CzKxgpBvUsC7noYlBMoBJZ9WOdNpNw/mmrkn1kynfqr25Zvut20p7FjU3tDPaXATDoxU9yI1XN05/Bq2NF4a4ARIz67WB8urY6dPE3oTMVFd1SzWGL4jUl4s3y0R0+8CwlgxK3Ba+hW4QJ3uOy27eh/39rhSJsrFuKu40hv+krA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=M8cLKCZW; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=Ow3PMdrC; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1788155560; c=relaxed/simple;
+	bh=Gx8dA2g+mBwttry7LSB36CW/iS8nutJKidZ1ioeEuZA=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=r+HhfJRj2Hf75zps5nwsNI/Rx48LlbLZLdAk6wZ8KLIj80tncma6mUlpNCO55zt5rGEjTNrsPJFTLTgpRN9Qd5Onf3mHFMqboBvDzpgi8YAeozS5YS45Sz+mKAHtlbj1+rCPWzz+C9M2zlpFBHShLmD2le5E8hizgRCHJzkgr3w=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=AVrGWze+; arc=none smtp.client-ip=209.85.128.52
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="M8cLKCZW";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Ow3PMdrC"
-Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67V52MnW3678649
-	for <linux-arm-msm@vger.kernel.org>; Mon, 31 Aug 2026 05:43:43 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	A0ZhG+vDmZ74SEYobGlTuCd8Sa+5pitgxvkRQkRMcFY=; b=M8cLKCZWmsP7SpdC
-	HPYwcY9RHiK/M/b1uKeAHxU5SO0zoyaL3hNqYDaTflqMqvF/HXyfjzVeDaRtkiB3
-	+4LrcZhbKglNw8M8m4OvHr7WCEptMeLj5JupOIr3deNN1ZbHBWQQlhSmxO9gOvdb
-	Zhrb+e6Jix6gizjCE80UnBWilrL4rMKjI2N8Pb0/pYJqMMFi5Q0ClEorj+FQKCmQ
-	yLVmZzgsEwO63SZLpYcwFiIAovYb/XQbOCpNkIDzPK0+IUwdGvSs+TF39GQsuq3t
-	1OPi8XIkW5zl0jmDG2SrTj3XFgoVFP2in/EGTF5rzM26122bm8i5+gLWDFsxfWcX
-	HMDN4A==
-Received: from mail-pf1-f199.google.com (mail-pf1-f199.google.com [209.85.210.199])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gcv8h10pn-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Mon, 31 Aug 2026 05:43:42 +0000 (GMT)
-Received: by mail-pf1-f199.google.com with SMTP id d2e1a72fcca58-84e13b57b2cso4184342b3a.1
-        for <linux-arm-msm@vger.kernel.org>; Sun, 30 Aug 2026 22:43:42 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="AVrGWze+"
+Received: by mail-wm1-f52.google.com with SMTP id 5b1f17b1804b1-499ac87c92bso27764255e9.1
+        for <linux-arm-msm@vger.kernel.org>; Sun, 30 Aug 2026 22:52:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1788155022; x=1788759822; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=A0ZhG+vDmZ74SEYobGlTuCd8Sa+5pitgxvkRQkRMcFY=;
-        b=Ow3PMdrCyiCsFxHzAcmZOugrq0sVdnt0iFAIT030yORPxYHHTAuEhgCxc4ltKQRGxP
-         4LzN2/FkdEEjZK7l60PIneLg1VG4aKOE+493+Z1x7iujUk99MJVuFgaTOna6qypbzMMM
-         IVhjXmgcgEbIKSS9WPoGzkLTVnEjukBM5y+7Y5FA973PrqfJ0IhjkjaHl8E8DZex/UHo
-         lD3tWfpZIjoIRPzsUqejbVEx0RNBzM0t5IkdP0jnm5JpxBL4ch35ggYdyUmIoTjZiDJW
-         CCxQI2/nlvi4A34P01FbaM0SZ26gtI+Gn5WkqXazX0O6Y+nv5eIfwjvcSGmeUr0m7KYI
-         jXAQ==
+        d=linaro.org; s=google; t=1788155557; x=1788760357; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=XgW48+Yzc91knnksx3tvkw+5MBtgMA/lwUwkXpa2nc4=;
+        b=AVrGWze+YW0FuUxMuY587aPpy3iWGqPV7wnTA9CxG5cHFMK0LpRkp8tTsQBW+ENF/5
+         FAvqlak8CYa+axHsSHeP5yQct+FgWbAAkXP5NvjDxSQMpa82zvQ0yuCGgGDdmBhL6Y2d
+         VZaN+4jSO5xajMrc4bAfG8c3pNI7HhJWTDZGuGVtzlP43q195mu8nd0Ds16mSj5Hv5iJ
+         r2xZYx8hTwQmH8QOJcmTnp8p5btbyLur3PQLMPYjPl6sphIqJs2Uu6/OsMJy678K71lD
+         zQdQXLCde61axBmrw1zE94KNCATmdYkqzZdmCU6BGxoPMBPakRj1mqQHsTM48XNj4D6u
+         M5eQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788155022; x=1788759822;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=A0ZhG+vDmZ74SEYobGlTuCd8Sa+5pitgxvkRQkRMcFY=;
-        b=XsgnMXHcNK3yQc1a6UtLvsvu5myJFGz6S/vvElLl7+W8QXBBbvpMHhFpckUWjFxVdP
-         S2CI+/bCjrAwST7KqVGFnBuPYF7A8v2zaR4bo6fdsVdb3U2NCvBSRUVnVrU0OGqFqI0k
-         XCe6C7P33vkbGNisUqeUL95zo68Tfh6wpUZ826zZGuDj/bj3OrefLPElRIdYbk2O1zr7
-         TJwGNpIy4SVubWR3oDO/XK7TTjtKRn2KYWEDuTIApGoT9JQRRbfEG24cynLlPScHyBEz
-         S505NSbJK/8t1S/X8Mn0vAYl8XSJEF+h03r6WA7jSXSGNlun+LbbQwf4tXsM90ZLozwg
-         Gv4Q==
-X-Forwarded-Encrypted: i=1; AHgh+Rrr4/jCEIFwEhX2fGPVCXx3Aw1uYykN7hbSlN1UozmbeCogNtQ+zzKsmetmvs+RHBiXXNhAb90SENk2x+3W@vger.kernel.org
-X-Gm-Message-State: AFuF++nNwB0ymlKCe2TOr34Ac/3ilBAr4y8nOY9iEa08nRt2HPONLhxa
-	2lELDIDkiHfZE9xPrqwt52bJ6C3klf5CxlkN3LhfE7G081zuDVHP85+MbGjxWzIXKzlEKl5jktY
-	lG6KRsCpM+TOu+cOcKtnN1NvXKwxeUcqcSIvK/L9mT+EOWsvqqiT1Hsip6ouCO6FhNkef
-X-Gm-Gg: AR+sD128hSeKRUbNUKNOxtpNWA4/5bBlDQYC3h5+gvf7lMFn+1xUgWPNZTK040rpfXi
-	HQLb/YJ5t/lfdhuOSsvYVBdj6jITCUQY3dUx/XkREhDMB70JK+CFrP5Kx80I75YJvuZ8rIiF50V
-	wwd5Ms7a4EEHAmU0TwBZMtpYFusCvQU0rC3D/s7dx54c9AiOKv6BN5xmuX7OZjtFPqEFJ+nm6wE
-	NgqCaEGVitEG3Wz6rDlJT+fnNvh+0P3WaY47g85EX9BOJ5WmMEafx+wrIgQJvOYufcCaO4s2wEY
-	jk6ffv+9Sh3nvhj8jsaTEv/8WjHdYoUhJRPR+gWqJuARxCy9Z2Zlc91bp2jYuvC7XUhx2beU1Jq
-	u9/sZvZtadYy51rP8W/zEma9C9u/nOYTPxrq+/Rk1NjIk99t/JhslDxzYKalRU6kw
-X-Received: by 2002:a05:6a00:ad5:b0:848:8619:c149 with SMTP id d2e1a72fcca58-85ad924285amr1374237b3a.2.1788155022318;
-        Sun, 30 Aug 2026 22:43:42 -0700 (PDT)
-X-Received: by 2002:a05:6a00:ad5:b0:848:8619:c149 with SMTP id d2e1a72fcca58-85ad924285amr1374205b3a.2.1788155021895;
-        Sun, 30 Aug 2026 22:43:41 -0700 (PDT)
-Received: from [10.133.33.153] (tpe-colo-wan-fw-bordernet.qualcomm.com. [103.229.16.4])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-8569f49e3bfsm3075779b3a.9.2026.08.30.22.43.36
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Sun, 30 Aug 2026 22:43:41 -0700 (PDT)
-Message-ID: <0cb5eddd-2422-4ccd-aa42-34b46086491f@oss.qualcomm.com>
-Date: Mon, 31 Aug 2026 13:43:34 +0800
+        d=1e100.net; s=20251104; t=1788155557; x=1788760357;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=XgW48+Yzc91knnksx3tvkw+5MBtgMA/lwUwkXpa2nc4=;
+        b=OsaQh/1++vBmxoMCmRT8lHfPkxxEaZQMTDKLL2C/1kDxcsYpWqDeLyoB+UQwEEkQ3W
+         YM1c8E8zBLYD5/aOoKx9SGC6xOk/UToO/C6mZa/Dm5N/qXo6dBId7JNqFPGfRuOaaaGI
+         OPayZ/DGR4gY53S8XP8eihRcGJ9+zwnaBJJeMmYVL4lTz83xuFmkYjTQWjJQanB8hjXu
+         FW+H4T9/QI6LltBC2sGe/8LYYiaMlq5UYfoIh1NIu/p4o9TACnzM3fla/XH1DryLA83B
+         IgIMdM66OdX3FfoUbi8tcF1eaiao3/s0b3w/V/KDXD9FaPHoUcFLVyG/JvCPMaWQof3L
+         6OFQ==
+X-Forwarded-Encrypted: i=1; AHgh+RrNeqQOsHEWepH9Kjlk2aVF9clmdxF8e5kIanIes/Km0rpYNCWVTY7vrlDGGhBxIuUw587KyGlG6megQyXY@vger.kernel.org
+X-Gm-Message-State: AFuF++nL4XoWtmqttxPnlRilXr0HUW0DwBmKEa3c8ri0OgrGaZBaBHsw
+	4MEO+51vBbPrY8TfmZ4TFIWuYdXxVyQeedRBk0glo7/NAabSSYWnsr/RNhDzEjcOoc4=
+X-Gm-Gg: AR+sD13F5/ngkL3utG1HnsfBmaXBt6iDqbX9UEpxT4Vulsb8P40PhEscArT6F//h5uW
+	WNaNYDi8t7vk8bApd7EG9+lveo+MbFkXO8WE09eKJ9tJsjhTyEPMg2tVtL99iHHelQW9SiRgasB
+	dzLsJeUBFqOqD/MtKMnTBcO0U6jr7f1ZljyDwRLQEqnc1vS+fCnpChmL/QVGmi95hLHoWTfty0u
+	YfdlqAmwRAO/FSZeiRPCd6Q2ZqdXu0tQhJZpcFe6LrPPw/TD4tMW7DljDMVYdutt28+yB/2ALoE
+	lVbL33ugwI6ctW3qYSAl8wR/91CIB/ZIp6wOoBZGOJ4Hwvf1/v3vLzoAM99h6MlP6PblYFjtZun
+	pOkNgDq0m3Di1QDxMvoim8Q8jKRIN2N/d2WhuLc2qHSp4ikiy4tOZrmieOQY0mWRTqoCy3pBNC5
+	yldecDHcfL4K5po6SYxPVNq/t50QrmbVpRJtbUbPSz5oWXTfMwvXpORJEzRSQJbogrtHIO2I0Ti
+	HbqTfVXPDE=
+X-Received: by 2002:a05:600c:6096:b0:49c:cfad:90c1 with SMTP id 5b1f17b1804b1-49ccfad9180mr194739605e9.14.1788155556937;
+        Sun, 30 Aug 2026 22:52:36 -0700 (PDT)
+Received: from linaro.org ([2a02:2454:ff24:7241:7d09:c3ef:cd6:3fed])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-49b9500c80asm302186875e9.9.2026.08.30.22.52.36
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 30 Aug 2026 22:52:36 -0700 (PDT)
+Date: Mon, 31 Aug 2026 07:52:32 +0200
+From: Stephan Gerhold <stephan.gerhold@linaro.org>
+To: Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>
+Cc: Bjorn Andersson <andersson@kernel.org>,
+	Mathieu Poirier <mathieu.poirier@linaro.org>,
+	Jingyi Wang <jingyi.wang@oss.qualcomm.com>,
+	Gokul Krishna Krishnakumar <gokul.krishnakumar@oss.qualcomm.com>,
+	linux-arm-msm@vger.kernel.org, linux-remoteproc@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Subject: Re: [PATCH 2/3] remoteproc: qcom_q6v5: Skip handover callback if
+ already issued
+Message-ID: <apUWoCCfgthl40AZ@linaro.org>
+References: <20260828181311.4038346-1-mukesh.ojha@oss.qualcomm.com>
+ <20260828181311.4038346-2-mukesh.ojha@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH RFC 02/15] cacheinfo: Expose the code to generate a
- cache-id from a device_node
-To: Drew Fustini <fustini@kernel.org>
-Cc: "Rafael J. Wysocki" <rafael@kernel.org>,
-        Shanker Donthineni <sdonthineni@nvidia.com>,
-        Conor Dooley <conor+dt@kernel.org>, Fenghua Yu <fenghuay@nvidia.com>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Rob Herring <robh@kernel.org>,
-        Reinette Chatre <reinette.chatre@intel.com>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        James Morse <james.morse@arm.com>, Ben Horgan <ben.horgan@arm.com>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Danilo Krummrich <dakr@kernel.org>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        linux-arm-msm@vger.kernel.org, ganapatrao.kulkarni@oss.qualcomm.com,
-        trilok.soni@oss.qualcomm.com, devicetree@vger.kernel.org,
-        driver-core@lists.linux.dev,
-        Srivathsa L Rao
- <srivathsa.rao@oss.qualcomm.com>,
-        Huang Yiwei
- <huang.yiwei@oss.qualcomm.com>, aiqun.yu@oss.qualcomm.com,
-        linux-kernel@vger.kernel.org
-References: <20260811-mpam-resctrl-dt-knp-support-v1-0-ea6397bead59@oss.qualcomm.com>
- <20260811-mpam-resctrl-dt-knp-support-v1-2-ea6397bead59@oss.qualcomm.com>
- <ao3ozXIhNgvb5nuS@gen8>
-Content-Language: en-US
-From: Yin Li <yin.li@oss.qualcomm.com>
-In-Reply-To: <ao3ozXIhNgvb5nuS@gen8>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Authority-Analysis: v=2.4 cv=DY0nbPtW c=1 sm=1 tr=0 ts=6a95148e cx=c_pps
- a=WW5sKcV1LcKqjgzy2JUPuA==:117 a=nuhDOHQX5FNHPW3J6Bj6AA==:17
- a=NSEGM1D4AEf8_kYA:21 a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22
- a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=7CQSdrXTAAAA:8 a=z04GtWAkmwoQ-eLwQmwA:9
- a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10 a=OpyuDcXvxspvyRM73sMx:22
- a=a-qgeE7W1pNrGK8U0ZQC:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODMxMDA0NyBTYWx0ZWRfXwpwt4mqllEOp
- bboH7IC0Un/i1Wgl46D9CGukpCnVOeWWHKfJ7gt7AtXIMjonRwFdcEg9V+BZlgrMOR19+FWoTRS
- 9t9KzcdiSvN60QTQe2tZaI2+Tl8FTDVaKyYINFb8AEWGstM1AyHwSNNQHC/3CenW823JFJ4vfKT
- qZGhvDz/rgCjDEeV0Mm1TD+wFPver4zziRtDSy9tx5nVP2YF6WpfIietiBHVpPH4CnxciCFx4f6
- GPY1cx5qBpeqW3OAb/KuE0hHKMZBN6+SsHYts7RZSe9NHEDA6+7Q/VXTL0375yImgTqwM657kHN
- LhlHm09K6MHCPTCFuOpBLDA48sBDI5MHeCT97YgtF2hh6nYV0ER8jMk2322rCt2Vom7vAqgnPeb
- ezWtc3YacdOhOsZsmllMLi36DVxn7H/BJAviND8n+HQlK5Dsx4wsz/IY4wgipOiUkV9KYYQi4uK
- wZpdITQAyccHG7gcE9Q==
-X-Proofpoint-ORIG-GUID: i6J1AtwaWJHQc2jKa7xj4p04otJX2avF
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODMxMDA0NyBTYWx0ZWRfX9MCakc+y5PlX
- Zw5i9Mvd0PILwAHNF648Qp6+FBFjFQQkvwWe1qnkFjWcul+XL91dt3y4G2i4T3RBeoURzQYU6gZ
- dftR9JFcpa6fDYwpArbSFVFwZMG9rE4=
-X-Proofpoint-GUID: i6J1AtwaWJHQc2jKa7xj4p04otJX2avF
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-08-31_02,2026-08-27_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 adultscore=0 clxscore=1015 priorityscore=1501 spamscore=0
- suspectscore=0 malwarescore=0 bulkscore=0 lowpriorityscore=0 impostorscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608310047
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260828181311.4038346-2-mukesh.ojha@oss.qualcomm.com>
 
-
-
-On 8/26/2026 3:11 AM, Drew Fustini wrote:
-> On Tue, Aug 11, 2026 at 09:30:31PM +0800, Yin Li wrote:
->> From: James Morse <james.morse@arm.com>
->>
->> The MPAM driver identifies caches by id for use with resctrl. It
->> needs to know the cache-id when probe-ing, but the value isn't set
->> in cacheinfo until device_initcall(). Even after device_initcall(),
->> the cache-id is only available if at least one CPU associated with
->> the cache is online.
->>
->> Instead of making the driver wait, expose the code that generates the
->> cache-id. The parts of the MPAM driver that run early can use this to
->> set up the resctrl structures before cacheinfo is ready in
->> device_initcall().
+On Fri, Aug 28, 2026 at 11:43:10PM +0530, Mukesh Ojha wrote:
+> When qcom_pas_attach() is called (subsystem already running at kernel
+> probe time), it sets handover_issued = true before enabling the handover
+> IRQ. The handover line may be high already (from bootloader boot), causing
+> the IRQ to fire immediately. Since proxy resources were never acquired via
+> qcom_pas_pds_enable() in the attach path, the resulting handover callback
+> calls pm_runtime_put() on proxy power domains with usage count = 0:
 > 
-> This patch would also be helpful for resctrl support on RISC-V, too. The
-> probe function in the CBQRI capacity allocation platform driver [1] has
-> the same problem. The current solution is to scan the online CPUs for a
-> cacheinfo leaf whose fw_token is the cache node from the phandle.
-> However, that does not work if no cpu sharing that cache is online yet.
+>   genpd genpd:0:d00000.remoteproc: Runtime PM usage count underflow!
+>   genpd genpd:1:d00000.remoteproc: Runtime PM usage count underflow!
 > 
-
-Hi Drew,
-
-Thanks for the review.
-
-Good to know that cache_of_calculate_id() could help with the RISC-V
-CBQRI driver as well. Since the function is guarded by CONFIG_OF in
-cacheinfo.h, it should be available on DT-based RISC-V platforms
-without any issue. You're welcome to use it.
-
-> [..]
->> +u32 cache_of_calculate_id(struct device_node *cache_node)
->>   {
->>   	struct device_node *cpu;
->>   	u32 min_id = ~0;
->> @@ -238,15 +237,23 @@ static void cache_of_set_id(struct cacheinfo *this_leaf,
->>   		id = arch_compact_of_hwid(id);
->>   		if (FIELD_GET(GENMASK_ULL(63, 32), id)) {
->>   			of_node_put(cpu);
->> -			return;
->> +			return ~0;
+> Also, because the old code left handover_irq_enabled = false after attach
+> (fixed separately), the handover IRQ was never disabled inside the handler,
+> allowing it to fire repeatedly and generating multiple underflows.
 > 
-> Maybe this should be U32_MAX instead?
+> Fix by recording whether handover_issued was already set before the IRQ
+> fires and skipping the handover callback in that case. The callback
+> releases proxy resources that are only held when the normal start path
+> ran qcom_pas_pds_enable(); if handover was already marked as issued,
+> those resources were never acquired and must not be released.
 > 
+> Fixes: 16472c99f469 ("remoteproc: qcom: pas: Add late attach support for subsystems")
+> Signed-off-by: Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>
 
-Regarding the ~0 vs U32_MAX point:
-You're right that U32_MAX is more appropriate than ~0 here. This is
-addressed in patch 06/15 ("arm_mpam: Fix cache ID sentinel from ~0UL
-to U32_MAX to match u32 return type").
-https://lore.kernel.org/all/20260811-mpam-resctrl-dt-knp-support-v1-6-ea6397bead59@oss.qualcomm.com/
+Shawn sent the same patch already and the same comment applies here:
+https://lore.kernel.org/linux-arm-msm/amxf7MODINj26a4m@linaro.org/
 
-The fix is in a separate patch because this patch is based on James
-Morse's original unmerged work — I kept my fixes separate for easier
-review. The plan is to fold them back in once James has responded.
+v2 fixes it properly:
+https://lore.kernel.org/linux-arm-msm/20260801011731.1084591-1-shengchao.guo@oss.qualcomm.com/
 
-> Thanks,
-> Drew
-> 
-> [1] https://lore.kernel.org/all/20260729-dfustini-atl-sc-cbqri-dt-v6-8-7c22b05d461b@kernel.org/
-
--- 
-Thx and BRs,
-Yin
-
+Thanks,
+Stephan
