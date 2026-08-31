@@ -1,99 +1,174 @@
-Received: from vps0.lunn.ch (vps0.lunn.ch [156.67.10.101])
+Received: from relay.hostedemail.com (smtprelay0013.hostedemail.com [216.40.44.13])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 36A454A49BD;
-	Mon, 31 Aug 2026 17:14:29 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=156.67.10.101
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 28A4846EC90;
+	Mon, 31 Aug 2026 17:23:50 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=216.40.44.13
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788196471; cv=none; b=BDiPGVXg65U3gNO/1Qk+ZxxOzKfc+/J9cmHG+1uAzxUkDKDHjdi34JG82d94aEUfBNmmbk4Gp0EtYrfzG3AMKKG2wccqvG83W0vobuMZfyXGLzE6Y88wP1w6o58VfjfM+3j27+I3yRzg0K7Hvh+Ytrf3TUeGqKV+7+nZc4SdRWU=
+	t=1788197033; cv=none; b=WdnB/nqcaBX5Ieg7UikqxarUBqYju2gfktXZDDEX5WhgttXOZP17ULinSVgIr8LTb+z8f84S6z0sx+F6dkWJtAmy1toNJPpXt08bzkeRCXNFdpaCX3/0Rq260/tzXVFeFkLaNKsU4O/WOvymStRkm199Fr0H8l+O5WhHc3YnY/w=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788196471; c=relaxed/simple;
-	bh=EuYrqhbgzITCE3SQYpdNNeE4L189G9BPhKcSZqVreLA=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=ki7eZV4Ef3LV5HxzNCCMmN8fjSzUdeK/dgYwYPTb0gnHEuFa2G+yuEW8gTi6mDKVIZcoIVp/KmRv1DAFSIV4IRS8oDGvpbD265+Dbzv9WKA6LapDJ4zO442AOGKZ4VPoXKvihmkwN7ysVnLqqG4DC6Cus8LkdIQ6X7hjGYDZ/Ds=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lunn.ch; spf=pass smtp.mailfrom=lunn.ch; dkim=pass (1024-bit key) header.d=lunn.ch header.i=@lunn.ch header.b=ITG0MN6j; arc=none smtp.client-ip=156.67.10.101
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lunn.ch
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lunn.ch
+	s=arc-20240116; t=1788197033; c=relaxed/simple;
+	bh=SofsqkZn9Sfflh3ZuGu0KB4bjMJ/qEOKFsuU4lZlqTQ=;
+	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=B7rI5XMV+Lc8jdFuEilvUch2sjjGa6YTtTC62mc5DdT7qESOpOwqhx7Kz5/ECPgIk1A8v2hYHI9tIqXy4KZATy4jFVoVQ5KXma3/fLJdaOLiYRqKvrPiSND/UgimTNAtMCWDSQdHoOi8qI39rVddyAsP1Hjl2l2P263ShATJt40=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=goodmis.org; spf=pass smtp.mailfrom=goodmis.org; dkim=pass (1024-bit key) header.d=goodmis.org header.i=@goodmis.org header.b=ijHpdeEs; arc=none smtp.client-ip=216.40.44.13
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=goodmis.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=goodmis.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=lunn.ch header.i=@lunn.ch header.b="ITG0MN6j"
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=lunn.ch;
-	s=20171124; h=In-Reply-To:Content-Disposition:Content-Type:MIME-Version:
-	References:Message-ID:Subject:Cc:To:From:Date:From:Sender:Reply-To:Subject:
-	Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:
-	Content-ID:Content-Description:Content-Disposition:In-Reply-To:References;
-	bh=Mg93C/BLYgHh/n0G+OklhbEZ69gCR/bdEIeH7kWAQMQ=; b=ITG0MN6jXzAjEeH42+oh9s8CZ0
-	fqpgRXe8s30hgWWZ2a6Fu05Z1F6PqiA1mP6iNK3XCjSlCpUXy8Wmi4ncnza3+G/jVDeW+qiUeuK9q
-	Xfp1OHPYdvwjJ+SmyOe6bph7E/LSnxpklT04hIkB/Tgqe3PAgEXRC1czEdPAmFLj1l+o=;
-Received: from andrew by vps0.lunn.ch with local (Exim 4.94.2)
-	(envelope-from <andrew@lunn.ch>)
-	id 1x15aG-002EHW-IU; Mon, 31 Aug 2026 19:14:12 +0200
-Date: Mon, 31 Aug 2026 19:14:12 +0200
-From: Andrew Lunn <andrew@lunn.ch>
-To: Maxime Chevallier <maxime.chevallier@bootlin.com>
-Cc: Mohd Ayaan Anwar <mohd.anwar@oss.qualcomm.com>,
-	Andrew Lunn <andrew+netdev@lunn.ch>,
-	"David S. Miller" <davem@davemloft.net>,
-	Eric Dumazet <edumazet@google.com>,
-	Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Richard Cochran <richardcochran@gmail.com>,
-	Bjorn Andersson <andersson@kernel.org>,
-	Konrad Dybcio <konradybcio@kernel.org>,
-	Maxime Coquelin <mcoquelin.stm32@gmail.com>,
-	Alexandre Torgue <alexandre.torgue@foss.st.com>,
-	Russell King <linux@armlinux.org.uk>, linux-arm-msm@vger.kernel.org,
-	netdev@vger.kernel.org, devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	linux-stm32@st-md-mailman.stormreply.com,
-	linux-arm-kernel@lists.infradead.org
-Subject: Re: [PATCH RFC 3/9] net: stmmac: qcom-ethqos: fix RGMII_ID mode to
- use DLL bypass
-Message-ID: <74541d4c-5090-454f-96ad-f6c5baa21b93@lunn.ch>
-References: <20260612-shikra_ethernet-v1-0-f0f4a1d19929@oss.qualcomm.com>
- <20260612-shikra_ethernet-v1-3-f0f4a1d19929@oss.qualcomm.com>
- <42355330-c22a-4fce-98ab-dc22b321ff16@lunn.ch>
- <ai93X/cNWHtEQsDt@oss.qualcomm.com>
- <82705420-771d-41bf-a4d9-ed94dff86ff0@lunn.ch>
- <ajF6q5eKz92ddqVl@oss.qualcomm.com>
- <apU8Yx08/PJiS9Xw@oss.qualcomm.com>
- <b36109c3-00e5-434e-a9b7-46049b0bff40@bootlin.com>
+	dkim=pass (1024-bit key) header.d=goodmis.org header.i=@goodmis.org header.b="ijHpdeEs"
+Received: from omf04.hostedemail.com (lb01a-stub [10.200.18.249])
+	by unirelay05.hostedemail.com (Postfix) with ESMTP id 3D879401E0;
+	Mon, 31 Aug 2026 17:23:43 +0000 (UTC)
+Received: from [HIDDEN] (Authenticated sender: rostedt@goodmis.org) by omf04.hostedemail.com (Postfix) with ESMTPA id A8F3B2002B;
+	Mon, 31 Aug 2026 17:23:40 +0000 (UTC)
+Date: Mon, 31 Aug 2026 13:24:37 -0400
+From: Steven Rostedt <rostedt@goodmis.org>
+To: Praveen Talari <praveen.talari@oss.qualcomm.com>
+Cc: konrad.dybcio@oss.qualcomm.com, Masami Hiramatsu <mhiramat@kernel.org>,
+ Mathieu Desnoyers <mathieu.desnoyers@efficios.com>, Vinod Koul
+ <vkoul@kernel.org>, Frank Li <Frank.Li@kernel.org>,
+ chandana.chiluveru@oss.qualcomm.com, mukesh.savaliya@oss.qualcomm.com,
+ linux-kernel@vger.kernel.org, linux-trace-kernel@vger.kernel.org,
+ linux-arm-msm@vger.kernel.org, dmaengine@vger.kernel.org
+Subject: Re: [PATCH 1/3] dmaengine: qcom: gpi: trace: Add trace events
+ header for Qualcomm GPI DMA
+Message-ID: <20260831132437.2477e920@gandalf.local.home>
+In-Reply-To: <20260831-add-trace-support-gpio-v1-1-7b0fd0d0ddb3@oss.qualcomm.com>
+References: <20260831-add-trace-support-gpio-v1-0-7b0fd0d0ddb3@oss.qualcomm.com>
+	<20260831-add-trace-support-gpio-v1-1-7b0fd0d0ddb3@oss.qualcomm.com>
+X-Mailer: Claws Mail 3.20.0git84 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <b36109c3-00e5-434e-a9b7-46049b0bff40@bootlin.com>
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
+X-Rspamd-Server: rspamout01
+X-Rspamd-Queue-Id: A8F3B2002B
+X-Stat-Signature: tcjjuyeg8ochjc1mze7kfhqd6zmzfbc9
+X-Session-Marker: 726F737465647440676F6F646D69732E6F7267
+X-Session-ID: U2FsdGVkX18fF0ui6xjKhLdEp6d+GUR4oNAc3xDXTh0=
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=goodmis.org; h=date:from:to:cc:subject:message-id:in-reply-to:references:mime-version:content-type:content-transfer-encoding; s=dkim1; bh=TZXXHOZM/aShp3K6xp57FxmGWKsPm0eT9S0BWA7sJhI=; b=ijHpdeEsazzJhDAyk8i45p8+N9FTyKKs636cO2W/ExILrzN84VXHwGK6tA6cQgRHsalQloXkxTPmSx7Xs2WsPVAr5E5KBaa5sC1k1jQeOCkhLd81bsqrZCgPOqSNlggJXhNaPIw+dPvGzmWlUWISrJqPyRX9Wu97EQnDsSkRTP8=
+X-HE-Tag: 1788197020-800869
+X-HE-Meta: U2FsdGVkX19bNpgFulyRSYJnQtOa7YUgjITi2mr8MHUqqxYHbbNtgQJpAQxc5hS4v1JLecQECY2lApvgULoRWOAwG2WyhyElhHy4KfsokhPkiFg3Ch6om8u+ShSegKws22noG5/TxMIeMT/LEb2/05WMFvhzSu0f44Ef3dAp894vniN/MzzduL5fS9f94+JH2MR4ZAL1Jc9SVO9wPlmcFM6/9O3IBW0ruaipPCDzTLInXmYVSnxugsJD4gJwV4yrUBUBVVk1qXiWfZHAV2uauQETB84UzqhWl+My21+0mZgEncEtcvAiNs3h5TpO/5h40iYzRgTo+EIXKkcgEfywc/3efasR0uIf
 
-> > With this in mind, I was thinking of breaking up this patch series into
-> > separate ones to solve one problem at a time:
-> > 
-> >  1. Introduce support for "rgmii-id" using PHY-side delays rather than
-> >  MAC-provided delays. Also, issue a warning if any other phy-mode is
-> >  being used.
-> > 
-> >  2. Fix the DTS of the existing boards to use "rgmii-id".
-> > 
-> >  3. Once the DTS is fixed, remove the now-unused code handling non
-> >  RGMII-ID cases. This should also allow us to remove the whole
-> >  ethqos_emac_por code since it wouldn't be needed for RGMII-ID.
-> 
-> I'm wondering if we should add some temporary very loud warning for
-> boards that use "rgmii" before changing this, or even just keep the
-> actual "rgmii" behaviour which inserts the delays, as there seems to
-> be lots of such users...
+On Mon, 31 Aug 2026 22:06:35 +0530
+Praveen Talari <praveen.talari@oss.qualcomm.com> wrote:
 
-We cannot break in tree users, and backwards compatibility with old
-mainline DT blobs is required. So for those, we need 'rgmii' to
-continue to work as is.
 
-So steps 1 and 2 are correct. But we cannot do 3. 
+> +TRACE_EVENT(gpi_ev_process,
+> +	    TP_PROTO(struct device *dev, u32 chid, u32 ev_type, u8 code,
+> +		     u16 status, u32 length),
+> +	    TP_ARGS(dev, chid, ev_type, code, status, length),
+> +
+> +	    TP_STRUCT__entry(__string(name, dev_name(dev))
+> +			     __field(u32, chid)
+> +			     __field(u32, ev_type)
+> +			     __field(u8, code)
+> +			     __field(u16, status)
+> +			     __field(u32, length)
 
-We can however issue a warning when 'rgmii' is used, advising users to
-upgrade to a newer DT blob.
+I would swap the above a little to have the u8 code at the end to remove
+any holes. It may have a hole at the end of the event, but you don't want
+holes in the middle.
 
-	Andrew
+			     __field(u32, chid)
+			     __field(u32, ev_type)
+			     __field(u32, length)
+			     __field(u16, status)
+			     __field(u8, code)
+
+
+
+> +	    ),
+> +
+> +	    TP_fast_assign(__assign_str(name);
+> +			   __entry->chid = chid;
+> +			   __entry->ev_type = ev_type;
+> +			   __entry->code = code;
+> +			   __entry->status = status;
+> +			   __entry->length = length;
+> +	    ),
+> +
+> +	    TP_printk("%s: chid=%u ev_type=0x%02x code=%u status=%u length=%u",
+> +		      __get_str(name), __entry->chid, __entry->ev_type,
+> +		      __entry->code, __entry->status, __entry->length)
+> +);
+> +
+>
+
+
+> +TRACE_EVENT(gpi_alloc_ring,
+> +	    TP_PROTO(struct device *dev, u32 elements, u32 el_size,
+> +		     u32 req_len, u64 len, size_t alloc_size),
+> +	    TP_ARGS(dev, elements, el_size, req_len, len, alloc_size),
+> +
+> +	    TP_STRUCT__entry(__string(name, dev_name(dev))
+> +			     __field(u32, elements)
+> +			     __field(u32, el_size)
+> +			     __field(u32, req_len)
+> +			     __field(u64, len)
+> +			     __field(size_t, alloc_size)
+
+Same here. I would move the 64 and size to the beginning and the other 4
+byte fields to the end:
+
+	    TP_STRUCT__entry(__field(u64, len)
+			     __field(size_t, alloc_size)
+			     __string(name, dev_name(dev))
+			     __field(u32, elements)
+			     __field(u32, el_size)
+			     __field(u32, req_len)
+
+
+And yes, the __string() is a 4 byte meta-data and should be treated as 4
+bytes.
+
+> +	    ),
+> +
+> +	    TP_fast_assign(__assign_str(name);
+> +			   __entry->elements = elements;
+> +			   __entry->el_size = el_size;
+> +			   __entry->req_len = req_len;
+> +			   __entry->len = len;
+> +			   __entry->alloc_size = alloc_size;
+> +	    ),
+> +
+> +	    TP_printk("%s: elements=%u el_size=%u req_len=%u len=%llu alloc_size=%zu",
+> +		      __get_str(name), __entry->elements, __entry->el_size,
+> +		      __entry->req_len, __entry->len, __entry->alloc_size)
+> +);
+> +
+> +TRACE_EVENT(gpi_ring_info,
+> +	    TP_PROTO(struct device *dev, dma_addr_t dma_handle, phys_addr_t phys_addr,
+> +		     u32 len, u32 el_size, u32 elements),
+> +	    TP_ARGS(dev, dma_handle, phys_addr, len, el_size, elements),
+> +
+> +	    TP_STRUCT__entry(__string(name, dev_name(dev))
+
+Move the __string() to after phys_addr.
+
+> +			     __field(u64, dma_handle)
+> +			     __field(u64, phys_addr)
+> +			     __field(u32, len)
+> +			     __field(u32, el_size)
+> +			     __field(u32, elements)
+> +	    ),
+> +
+> +	    TP_fast_assign(__assign_str(name);
+> +			   __entry->dma_handle = dma_handle;
+> +			   __entry->phys_addr = phys_addr;
+> +			   __entry->len = len;
+> +			   __entry->el_size = el_size;
+> +			   __entry->elements = elements;
+> +	    ),
+> +
+> +	    TP_printk("%s: dma_handle=%llx phys_addr=%llx len=%u el_size=%u elements=%u",
+> +		      __get_str(name), __entry->dma_handle, __entry->phys_addr,
+> +		      __entry->len, __entry->el_size, __entry->elements)
+> +);
+> +
+
+-- Steve
