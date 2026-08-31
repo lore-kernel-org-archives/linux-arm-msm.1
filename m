@@ -1,219 +1,110 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wm1-f43.google.com (mail-wm1-f43.google.com [209.85.128.43])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DE3EA41B362;
-	Mon, 31 Aug 2026 14:20:17 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A40704A0EEB
+	for <linux-arm-msm@vger.kernel.org>; Mon, 31 Aug 2026 14:29:27 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.43
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788186019; cv=none; b=WkHJpPBjIPPCcpKas4JOYHDKCAFG0T5cNoy46lnDtULjcqIZz1Pl0ztW6e+fxCZ9u/XOHDyXnjozz8T7WEF6mQPPD1ePSOovHxods/6GoChe8RPM8XNKiQXhVKgxaxJuYJkmN+yFwbQno3IBn5I0OP3V4Pju4wSrTpHCdx8bUgc=
+	t=1788186569; cv=none; b=Vr4PFeA6CpfhnyY9kthwKVeo3z3Bj1QiPgciLnjnyRO+3vIWdu7/Pbw6YZjE1dQmi0cpD8oQ4RbY6rRQT2DlmTXQh4Ff49EMXpEqEgU+XB1SQfX0TUzMahQifP+6wq6GB2VcfpUzpj+uXFYgfqRmq60tg3kZwAKueSVy9IenBCw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788186019; c=relaxed/simple;
-	bh=biYVhkFtO28r+7j+reA+gcMEJeS5ra+83YJv/eUxk2M=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=ahbV4nrS6S9zMZ63Mo5n7e6ZGIHacZhxSFdveyYMnWM+7vJnu9zTSip8pz8i9lycsu5/Qv7FaVchvFL8W2hnyeblShf+ZNhdeEu1EhtioJsqBz73lSzzYhrOC1jdo+5JJoSfwwu+u9QBFfIAE/ykrIapl6Mqvb1yACTdlR/+ugY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=XVtXf3Ai; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1788186569; c=relaxed/simple;
+	bh=dYj69jFFjRWn7Sys/t/m3JYBC1fu8Ks5fI5qkXxrx3A=;
+	h=From:To:Cc:In-Reply-To:References:Subject:Message-Id:Date:
+	 MIME-Version:Content-Type; b=cqp8Q4VEy5qekIl4VlSdeM9Yai3cCsgVdoHo/loL3soZ47xTtCzJRJ1ajrNP1Tf2fMZz56/YJU6KeS7rLG1d6HWFeS32m0Oe6KRgpW2yitqP65ScmLfG3Q8gWH8XZFOGTdBHyo3brOQitzQ9bhSY8sc8iDQvNoptwFkpzoxdbxA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=hhysf+AX; arc=none smtp.client-ip=209.85.128.43
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="XVtXf3Ai"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E94A31F000E9;
-	Mon, 31 Aug 2026 14:20:16 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1788186017;
-	bh=7+rdhKp2I28DH6fAQPVY9ON3ORgsCf4pgIBJNXPjRz8=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=XVtXf3AixinZmDucIRgKxfMHu1Rm9IoCDEIyKBjKRORKb2a3zqOAAu1eFi8YQGbrt
-	 /8IT+Rw8IEF1+l8vjJX9EPYCXOB0rbtid2UCGPSjk1hC+zdW2A5Fu/ToATDeJwNVOu
-	 /HqOQ2wIN4DW1/KpuAH6sMme/kiP0DSnHiKwlvG5cXwqkCpbI4LqBjE/BtReEnCCyA
-	 3KKLBk23YTWMvWhtl5ayM1aMRDmQJfT+aleQJxMMCZSS8ZWGBE4VpHK9if7pwGNICt
-	 v5G3YnFQw/epbL/OSTBBT7q28iGWzWsWu0JG1pqclvOLQ56J1vI1TksNeOkgsmltti
-	 sEZ8QoOBZQALw==
-Date: Mon, 31 Aug 2026 09:20:14 -0500
-From: Bjorn Andersson <andersson@kernel.org>
-To: Stephan Gerhold <stephan.gerhold@linaro.org>
-Cc: Bjorn Andersson <bjorn.andersson@oss.qualcomm.com>, 
-	Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>, 
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
-	linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH 2/3] arm64: dts: qcom: hamoa-crd: Add thermal control
-Message-ID: <apWIbtyQQ4mOjZKn@baldur>
-References: <20260830-hamoa-sys-therm-v1-0-27108c40fba5@oss.qualcomm.com>
- <20260830-hamoa-sys-therm-v1-2-27108c40fba5@oss.qualcomm.com>
- <apVCUObyxf8Akbsc@linaro.org>
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="hhysf+AX"
+Received: by mail-wm1-f43.google.com with SMTP id 5b1f17b1804b1-49b8f86c6deso20849215e9.0
+        for <linux-arm-msm@vger.kernel.org>; Mon, 31 Aug 2026 07:29:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google; t=1788186566; x=1788791366; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:mime-version:date:message-id
+         :subject:references:in-reply-to:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=6E89hI6dDsHxKquITrLVBigGlAGgfkia7MnsBoaZjOA=;
+        b=hhysf+AX6SaSD38bFEwIGJuZQ3U4y1NxVqT7eg5CxU5iI74lJudY6o74QyhWVS4xqz
+         BkUZAodkqHOONBJ0CDbMfLzizJAH1Zoq+bfuCCXE3UgJ9Tm8yaNoMVww+00hDqF/0Unx
+         6JKeYt/4ABzaHG1S573cuEc6sS8j86r8Za/NfMpUPJgTl/srqLV6jhiL7VAzYAadNNa2
+         VPBfjPZmgUP1fQqGbba75URUKqZraXfBcD4T3Gj947iCkobRKXKdaEzBwmbOap1nSAB+
+         NIHGS8q1jA7r4Yvr1oDtDE9ORUPx8NNofVmuAPtsi8qSPGbCQrJ1iUGJpjrzXKhaiuKU
+         rGvw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1788186566; x=1788791366;
+        h=content-transfer-encoding:content-type:mime-version:date:message-id
+         :subject:references:in-reply-to:cc:to:from:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=6E89hI6dDsHxKquITrLVBigGlAGgfkia7MnsBoaZjOA=;
+        b=FTAuykg5rHPyAy5pgVUyYhP9RMHg11VuDLByXgfeIUE8Si3nF5CT+Ht6V8RfWw1E2X
+         Mda5/3dfvXLZxKs2axw+RfG1HRzFodrE9NW+xoli+h22lodZCesmFah8VDoNuMnSEAGd
+         iUp5T6Tfc+tQ4itrGLF4CdEOaFixsBlGAs9UOqzTgmcn4YLbAaHhGLIsvyyEzdf8GAi4
+         WyXCNBG86Jva7T5yipdqGqtpGXA1vj97nJZBd8PJtdNssjq6Egf2ARGuyISZcuIjyD/5
+         Ghe3yhtGh5nrSmD48u7dARLSXH9QafJE/pjFKGc0wsn0KPi/n8MxMN2kpC7LW7Z9n3bt
+         lVFA==
+X-Forwarded-Encrypted: i=1; AHgh+Rq3KJ1G+IFhAVLC4+DTVG1PefwUjpy+sA+fRf3A8YcEqGuX4/IGt70c5chBPwFKwPzE8SmA5utREdXKIYCa@vger.kernel.org
+X-Gm-Message-State: AFuF++n6dDT5SdvWnCTiEuqs2mU1vwHOWf8d7oraFDrlN8WACoaQXeXJ
+	deH+TdJKoMSOYdORx9JClcuJT2COxvLa8iOmkMES9M7Je5xN1qEqGl67FiqzlwxvQ1c=
+X-Gm-Gg: AR+sD11ghl+kfoYm2XbjhJyeB/h7Sw3Q0s2bdH4DQvg2EsxTYTBzRXMlXf4ZituBo98
+	YEcuTShSRZr81I0uxZFh00mUQcAqphTzrPKIyyQDG9DypIQfiOT0TtBgR1SkUhvdGI3AybUPVAx
+	BNV9Nx7JzLd06DWSFFpzDUeXMjAklz3nBQzDpLJ4wOFz/W09LCSlIZ2v8BmLTd2GG51ws7WaFAf
+	qG94ie/3KZhYgf+HkM6VtPCROvHHoOUqQpTlfiJ3vcS5SG+sd3VgPdNbNmJ35fRrK3dm9dqDzvU
+	6J+KU2cS9hrQTkQAexyq73Q2YbQ/1VVAJJg+MGioXquMfCsQhhO78AgnV5OJiQwAFqLE7iebjMN
+	l0u/U/QHF5V3J6779viVLQ1lYOmVLWeM/z6X51+/je18iAuYQevrx128Xv47krTeC99lnz/P0KZ
+	EeLK80LtGSM6l3STG8sshRhF6KAPkDX8MYXYBUwQrebc8F3xa39n9IViC4NhkmrmMw4kj5Hh8ue
+	MU=
+X-Received: by 2002:a05:600c:1d11:b0:496:c1f3:e8f8 with SMTP id 5b1f17b1804b1-49b91c25414mr366990155e9.7.1788186565847;
+        Mon, 31 Aug 2026 07:29:25 -0700 (PDT)
+Received: from arrakeen-2.home ([2a01:e0e:1005:fa8b:52eb:f6ff:feb3:451a])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-49ccea87e1asm145266605e9.2.2026.08.31.07.29.24
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 31 Aug 2026 07:29:25 -0700 (PDT)
+From: Neil Armstrong <neil.armstrong@linaro.org>
+To: jesszhan0024@gmail.com, maarten.lankhorst@linux.intel.com, 
+ mripard@kernel.org, tzimmermann@suse.de, airlied@gmail.com, simona@ffwll.ch, 
+ robh@kernel.org, krzk+dt@kernel.org, conor+dt@kernel.org, 
+ Junjie Cao <junjie.cao@linux.dev>
+Cc: dmitry.baryshkov@oss.qualcomm.com, konrad.dybcio@oss.qualcomm.com, 
+ mitltlatltl@gmail.com, dri-devel@lists.freedesktop.org, 
+ devicetree@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
+ linux-kernel@vger.kernel.org
+In-Reply-To: <20260804073419.84727-1-junjie.cao@linux.dev>
+References: <20260804073419.84727-1-junjie.cao@linux.dev>
+Subject: Re: [PATCH v3 0/2] drm/panel: Add support for Novatek NT36532
+ panel
+Message-Id: <178818656440.2615924.7721380988384497454.b4-ty@b4>
+Date: Mon, 31 Aug 2026 16:29:24 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <apVCUObyxf8Akbsc@linaro.org>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.15.1
 
-On Mon, Aug 31, 2026 at 10:58:56AM +0200, Stephan Gerhold wrote:
-> On Sun, Aug 30, 2026 at 09:02:03PM +0000, Bjorn Andersson wrote:
-> > The "limits" hardware performs rapid thermal management of the CPU
-> > cores, but during prolonged CPU usage the system's overall temperature
-> > need to be further managed by software.
-> > 
-> > The reference design provides seven "system thermistors", connected to
-> > the PMK8550 VADC. Particularly interesting is the "keyboard hotspot
-> > thermistor", which is wired up to sys_therm1.
-> > 
-> > Use this to throttle the CPUs, in the same way that we're throttling
-> > previous generation laptops based on "skin-temp". The trips are chosen
-> > from those existing examples, but are comparable with the ACPI thermal
-> > policy.
-> > 
+Hi,
+
+On Tue, 04 Aug 2026 00:34:17 -0700, Junjie Cao wrote:
+> This series adds support for panels using the Novatek NT36532 Display
+> Driver IC, a dual-DSI, dual-DSC controller that requires DPU support
+> for MIPI_DSI_MODE_DSC_ALL_SLICES_IN_PKT.
 > 
-> In general, following the ACPI thermal policy as close as possible is
-> better than following existing examples. Most X1E-based devices use
-> hybrid active/passive cooling, with the fan controlled independently by
-> the EC. If you start throttling even just 1-2°C before the EC reaches
-> its highest fan trip point, it will result in bad performance. Linux
-> will try to keep the temperature below the specified temperature, and
-> the EC will never fully ramp up the fan.
+> The first user is the CSOT PPC100HB1-1 panel found in the OnePlus Pad 2
+> (OnePlus Pad Pro in China) tablet: 3000x2120, dual-DSI in bonded mode,
+> DSC 1.2 with two slices per line.
 > 
+> [...]
 
-That's certainly true. On X13s it was a bit easier as it's passively
-cooled, but these things needs to be taken into consideration.
+Thanks, Applied to https://gitlab.freedesktop.org/drm/misc/kernel.git (drm-misc-next)
 
-> This is what I determined from the CRD ACPI tables last year:
-> https://github.com/stephan-gh/linux/commit/24f053436ec2eaf70968803adfa8c17905e53cae.patch
-> 
+[1/2] dt-bindings: display: panel: Add Novatek NT36532
+      https://gitlab.freedesktop.org/drm/misc/kernel/-/commit/1c523f0a930107191c95d96340c69a295a086e5a
+[2/2] drm/panel: Add Novatek NT36532 panel driver
+      https://gitlab.freedesktop.org/drm/misc/kernel/-/commit/47b823940e38607dad180eb2f82094ae65565a4b
 
-Why don't you post your patches!? Have I missed it?
+-- 
+Neil
 
-> The fact that GPU is only throttled based on back-thermal is a little
-> odd, but this is what the ACPI tables specified back then as far as
-> I could tell (maybe it was fixed since then).
-> 
-> Your changes seem close enough to not cause the performance problem
-> I mentioned above, although I think it would be worth setting a good
-> examples for others to follow.
-> 
-
-Sure, I'll compare with ACPI tables and adjust the numbers accordingly.
-
-> > While not used for cooling/throttling, also add the other thermal zones
-> > for temperature reporting purposes.
-> > 
-> > Enable thermal-monitor mode for all 7 channels in the ADC.
-> > 
-> > Signed-off-by: Bjorn Andersson <bjorn.andersson@oss.qualcomm.com>
-> > ---
-> >  arch/arm64/boot/dts/qcom/x1e80100-crd.dts | 116 ++++++++++++++++++++++++++++++
-> >  1 file changed, 116 insertions(+)
-> > 
-> > diff --git a/arch/arm64/boot/dts/qcom/x1e80100-crd.dts b/arch/arm64/boot/dts/qcom/x1e80100-crd.dts
-> > index 429deffcf3e9..065af18357d7 100644
-> > --- a/arch/arm64/boot/dts/qcom/x1e80100-crd.dts
-> > +++ b/arch/arm64/boot/dts/qcom/x1e80100-crd.dts
-> > @@ -11,6 +11,92 @@
-> >  / {
-> >  	model = "Qualcomm Technologies, Inc. X1E80100 CRD";
-> >  	compatible = "qcom,x1e80100-crd", "qcom,x1e80100";
-> > +
-> > +	thermal-zones {
-> > +		soc-thermal {
-> > +			thermal-sensors = <&pmk8550_vadc ADC5_GEN3_AMUX1_GPIO_100K_PU(1)>;
-> > +		};
-> > +
-> > +		keyboard-thermal {
-> > +			polling-delay-passive = <250>;
-> > +
-> > +			thermal-sensors = <&pmk8550_vadc ADC5_GEN3_AMUX2_GPIO_100K_PU(1)>;
-> > +
-> > +			trips {
-> > +				skin_alert0: trip-point0 {
-> > +					temperature = <55000>;
-> > +					hysteresis = <1000>;
-> > +					type = "passive";
-> > +				};
-> > +
-> > +				skin_alert1: trip-point1 {
-> > +					temperature = <58000>;
-> > +					hysteresis = <1000>;
-> > +					type = "passive";
-> > +				};
-> 
-> What does this second trip point do differently than the first? It has
-> the same cooling devices. Will it try throttling "harder" than before?
-> 
-> I know sc8280xp-lenovo-thinkpad-x13s.dts has the same, but I'm not
-> entirely sure what it does there either.
-> 
-> My experience was if you specify 55°C as one passive trip point, then
-> Linux will try its best to keep it with the specified cooling devices.
-> 
-
-I didn't dive into this rabbit hole... I'll review and update
-accordingly.
-
-> > +
-> > +				skin-crit {
-> > +					temperature = <73000>;
-
-Your patch has 115C here. That may be what the ACPI tables are saying,
-but it seems a bit excessive.
-
-> > +					hysteresis = <1000>;
-> > +					type = "critical";
-> > +				};
-> > +			};
-> > +
-> > +			cooling-maps {
-> > +				map0 {
-> > +					trip = <&skin_alert0>;
-> > +					cooling-device = <&cpu0 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
-> > +							 <&cpu1 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
-> > +							 <&cpu2 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
-> > +							 <&cpu3 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
-> > +							 <&cpu4 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
-> > +							 <&cpu5 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
-> > +							 <&cpu6 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
-> > +							 <&cpu7 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
-> > +							 <&cpu8 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
-> > +							 <&cpu9 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
-> > +							 <&cpu10 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
-> > +							 <&cpu11 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>;
-> > +				};
-> > +
-> > +				map1 {
-> > +					trip = <&skin_alert1>;
-> > +					cooling-device = <&cpu0 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
-> > +							 <&cpu1 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
-> > +							 <&cpu2 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
-> > +							 <&cpu3 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
-> > +							 <&cpu4 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
-> > +							 <&cpu5 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
-> > +							 <&cpu6 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
-> > +							 <&cpu7 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
-> > +							 <&cpu8 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
-> > +							 <&cpu9 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
-> > +							 <&cpu10 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
-> > +							 <&cpu11 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>;
-> > +				};
-> > +			};
-> > +		};
-> > +
-> > +		backcover-thermal {
-> > +			thermal-sensors = <&pmk8550_vadc ADC5_GEN3_AMUX1_THM_100K_PU(1)>;
-> > +		};
-> 
-> Should we add throttling here as well to match Windows?
-> 
-
-Then there are the reports that indicate that we should throttle things
-when the SMB temperatures reaches something like 80C, which doesn't seem
-to be something represented in the ACPI tables.
-
-I'll do a respin of this and then we can tweak it from there. The
-important thing for me is to get some reference in, so we can propagate
-this to the consumer devices (NB: which doesn't have the same sys_therm
-mapping).
-
-Thanks,
-Bjorn
-
-> Thanks,
-> Stephan
