@@ -1,151 +1,95 @@
-Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com [209.85.128.54])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 10AEA3D3D0C
-	for <linux-arm-msm@vger.kernel.org>; Mon, 31 Aug 2026 18:20:57 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.54
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4761547126D;
+	Mon, 31 Aug 2026 18:27:24 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788200459; cv=none; b=pk9uvKXfHnMKl6KytewYIHCIAFMth7q4+3uH5Z0Yrp9ABYJUjZJowIBsyFNzGPES/vCH2+JZDGYUIu45KizXvNb0tNzJZv/pEIyAh6NpfUHTyPKq2AWDsSb2nWTJ9zVjs24q5t6KH5TWn8PGrQdCSBvGXh60XqJ5mSKfX0a2QCc=
+	t=1788200845; cv=none; b=eCnehAVfqOTNaA69l7A7ZxJbp27OO3YdaqrLfqR02iTWt4PYXZnkyRlNdSiI6IISOGRav5oKjkkuALAPRTPHtmiwwd8A3seSKQYdUDV1pAgXiGFgXKDCRIe8CCfCMUmQVfla41iQnS1rk/sokS1Sa6tqCdd9drUEjyyn0DS1UYk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788200459; c=relaxed/simple;
-	bh=rb3HKaLLxJzwcBkHRVKkVwDnPxrRHTfCEOty9h/3Dj4=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=Onzzp7/oxTTJRjBheSz20WiyvtXaF5D5fADXTkfCzNJ/vJ0OIPYlCXWoGPsTMpsPww1XGqG/dde9z9B7Wm8Gpylm5Ty0W9sDTYNgBBBtpYu3klJ0vZbP5L2LXGas5NfH/LrGhtZd26aAtpNDsgwJZd60aOaXmz1XfendSsnekdg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=gfFA0NNC; arc=none smtp.client-ip=209.85.128.54
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	s=arc-20240116; t=1788200845; c=relaxed/simple;
+	bh=urSK/T9UPl1QGabGZ+SRc4v6qbYavUCpPlVzwoBkwRs=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=iuwt4tsUfgfG++up5KgKSl9yU4W5jWx3pCHK293tU61T65iTWwRaL7IyH/qDto+mJFp9g/n6UkT4qCDK2GhHG5sHgeA8hH98vWVQxD0Jd32Tbp9aXL8Xvsh25TL4tbM4mmj+mit7H7Xpy5ZuEnJ0FBpIQ3EK+AVm6odfdgazYic=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=k5rAfokq; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="gfFA0NNC"
-Received: by mail-wm1-f54.google.com with SMTP id 5b1f17b1804b1-49b8eeb3ff2so28320635e9.2
-        for <linux-arm-msm@vger.kernel.org>; Mon, 31 Aug 2026 11:20:57 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1788200456; x=1788805256; darn=vger.kernel.org;
-        h=cc:to:message-id:content-transfer-encoding:content-type
-         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=OQu21g+jvYzg+hR8nIxI4Zsc1brzVFs3c2vxWfEZwO8=;
-        b=gfFA0NNClt535kbQ/Xd9ftznrAlSMXcdp2NW824ufMZp78w9HO3iafhEBE1AwH7ao4
-         b1oPVNS08Ef85EcgF1xuvAxiLH9O6AK9ZVTfqW4SLX5q6AV1iMduJ9DuvzDWZmLHkBQY
-         Npk8GYlRZo6ST1RjAIjUfaF3fKfa/M3Po5scpDi7YxF1hCRXl1x8zm3jxMQvvtsZd3wv
-         y19QSX6t4aGmL6RXQNaNcjH1UCgB/0fxvsdH+iaDvnikc7eUM2EIKQVVGQjWdxjUDZho
-         zLaggydGcqoSqBPXwgiooqjX2/CapgKPiPT4g+EIfFw2LPqE6XxY1888DtUnks9/blpG
-         3fRQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788200456; x=1788805256;
-        h=cc:to:message-id:content-transfer-encoding:content-type
-         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to:content-type;
-        bh=OQu21g+jvYzg+hR8nIxI4Zsc1brzVFs3c2vxWfEZwO8=;
-        b=o4wPHqMg1GBHRQk9fHIrqS4gKoW3K0EXTbXWlEJ+tudf1eCugEba4PAOP4sHFwc9c/
-         87mTreC+7PKZ1gRt7Whhcg883PeFzNRoicd/Lv1SHQ3n0iMr43n9SKXXSjTWmjz58ZME
-         ArT4U7PGiZIFAXshM5AMbd8kmg4W4tiidUcNiBsZmzJqcdB16ktk1ryPKhE8dnL05nEk
-         2MyaHZk1X99dixbo8JQR1dzfDREiZ8CEg9FouO0gE//Qt5NZoZOilHn+BgirVgrup6Wj
-         OZNChlN/3FourAcRn/WHPw/3Emge8EjuwkRaYyZwqK4Kk2AkWPGMYSjK07T7vccjxMny
-         1sew==
-X-Gm-Message-State: AFuF++kLJ+4XU85pILUKedbqxQCsHjv+AD8JF3vz2qsrjYUCp5JeM9PJ
-	lFCicbuMsxe0Ze4J/hvbXW2Ik3KcXSJxCUxuWS3M5RN16b0lAPU/PPP7
-X-Gm-Gg: AR+sD10lHF+2v8l3KNEr8QWQT80lRQXRwg2Ab5txc78sLbtIWYnhYWeT3u/rm1s+UGT
-	w43xLz2vVEP2ldGwQTd7zZE5QRsHsFvpsIVpEdMT9s7NtjfT1f+v+FNOPyC1oo4/g9NpW/y+N4W
-	TLXvubwAyz+f8oF9LrFXA8v/QJmcaKO882MpwOJOuFGRo/uAf47Qx6UQ5pU3WyeXWVo7Zzuphjr
-	45e0dYGO6ZyClztRwvH34MvsdjPAMBJlZn9uHG4adJfwuQkaWbmxhA+L9YUkdFjZdXCjNCz0sxc
-	EkGPtW74gTtXu0Ca5DMBmZyxUX26r0FtRPoo25DJGkenIgQ4UK3DahcZFMuOrIV+rzKOiSd07Je
-	YE1rAXgf24GP1h/eEeyLQj8Pq9SLgV/RMGz3Mf6WtvHNIF30A5aT8S+CWapqVXaMQvyYxdUOIco
-	VXsDex2wu/UID4afKErOnkkfnVYyN9oNVkgTRSKcmkZ3ILt26wT0bZvniiCoiZX3Q7w+SFkw/9c
-	/+HGxZJozO8+OUODg==
-X-Received: by 2002:a05:600c:1906:b0:499:9240:9a1c with SMTP id 5b1f17b1804b1-49cdc555496mr39483805e9.15.1788200456098;
-        Mon, 31 Aug 2026 11:20:56 -0700 (PDT)
-Received: from [192.168.1.9] ([148.252.128.8])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-49cdce08862sm10721955e9.1.2026.08.31.11.20.54
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 31 Aug 2026 11:20:55 -0700 (PDT)
-From: Dale Whinham <daleyo@gmail.com>
-Date: Mon, 31 Aug 2026 19:20:48 +0100
-Subject: [PATCH] arm64: dts: qcom: x1-denali: Add audio playback over
- DisplayPort
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="k5rAfokq"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 176581F000E9;
+	Mon, 31 Aug 2026 18:27:23 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1788200844;
+	bh=UofIsFzrTXsnboW9JVMv443Kkl552tUkRj3AMbCFOWw=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=k5rAfokqagJ3Ylr2e5dHbjQTdqucLyp5qzzj9uRpaPJMfr/hSGHNgKUIwtk/Yoso6
+	 iGlZTAKF6w8EhHxdBWrWULSIHhVOBierpyeRlyhqU/ACt9U2hIUtK8fTHmfMRbqjXy
+	 O5dHnbKy1k9GN1H3xLuZWaI5L4VXlesZ5+RE271ou1GUVr2hjJpUOBgHCll/XoJp8p
+	 yIl/RQjvmkbacfsMnJ2mHngGjR5PM/ps307UnA3fAnF/Kpx+NMlmamYY4PofrgJeEr
+	 QCxXHdlk1WfyXON9LWMVQCIQwredfsMpghSTsABWpsmRCDzPs2BXuj8mhKjUyRLRYP
+	 8E2D9iPFv0XnQ==
+Date: Mon, 31 Aug 2026 13:27:20 -0500
+From: Bjorn Andersson <andersson@kernel.org>
+To: Hangxiang Ma <hangxiang.ma@oss.qualcomm.com>
+Cc: Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	jeyaprakash.soundrapandian@oss.qualcomm.com, Vijay Kumar Tumati <vijay.tumati@oss.qualcomm.com>, 
+	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Subject: Re: [PATCH v2 0/3] Add CCI and CAMSS support for SM8750
+Message-ID: <apXHKDEAwhlP-eA4@baldur>
+References: <20260618-pakala-camera-v2-0-9fbb729fd242@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260831-surface-pro-11-dp-audio-v1-1-fb9c0d3216b7@gmail.com>
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXMMQ7CMAxA0atUnrGUNICAqyAGN3HADE1kE4RU9
- e4NML7h/wWMVdjgMiyg/BaTMnf43QDxQfOdUVI3jG48ulPwaE0zRcaqBb3HVJFakoLhvD+4kB1
- xJOh1Vc7y+Z2vt7+tTU+Or+8O1nUDVFJ6DXsAAAA=
-X-Change-ID: 20260831-surface-pro-11-dp-audio-394503f0aeca
-To: Bjorn Andersson <andersson@kernel.org>, 
- Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>, 
- Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
- linux-kernel@vger.kernel.org, Dale Whinham <daleyo@gmail.com>
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1788200454; l=1386;
- i=daleyo@gmail.com; s=20251214; h=from:subject:message-id;
- bh=rb3HKaLLxJzwcBkHRVKkVwDnPxrRHTfCEOty9h/3Dj4=;
- b=0m34U2jSQLU+yNJSgYdPHWwTU3Re1UwGoq0Ng92diwb5aZgzY1W/jRL26WqpaCM9abGwq3uOF
- AyIlcCFxtPMAqxFNJre90wdlT2F0oj45p7nbB4XmDXN6oU1x7OZth64
-X-Developer-Key: i=daleyo@gmail.com; a=ed25519;
- pk=M4mvgx1TB2TniKaedTDsO3PbLKgFosJuegXRXPbn2Ds=
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260618-pakala-camera-v2-0-9fbb729fd242@oss.qualcomm.com>
 
-Add the DAI links needed to enable audio playback over the two
-USB/DisplayPort outputs.
+On Thu, Jun 18, 2026 at 05:03:49AM -0700, Hangxiang Ma wrote:
+> This series adds CCI and CAMSS support for Qualcomm SM8750 SoC.
+> 
+> This series has been tested using the following commands with a downstream
+> driver for S5KJN5 sensor.
+> - media-ctl --reset
+> - media-ctl -V '"msm_csiphy2":0[fmt:SGBRG10/4096x3072]'
+> - media-ctl -V '"msm_csid0":0[fmt:SGBRG10/4096x3072]'
+> - media-ctl -V '"msm_vfe0_rdi0":0[fmt:SGBRG10/4096x3072]'
+> - media-ctl -l '"msm_csiphy2":1->"msm_csid0":0[1]'
+> - media-ctl -l '"msm_csid0":1->"msm_vfe0_rdi0":0[1]'
+> - yavta  --capture=20 -I -n 5 -f SGBRG10P -s 4096x3072 -F  /dev/video0
+> 
+> Driver and dt-binding are waiting to be merged:
+> https://lore.kernel.org/all/20260601-add-support-for-camss-on-sm8750-v5-0-dac36a190de8@oss.qualcomm.com/
+> 
 
-Signed-off-by: Dale Whinham <daleyo@gmail.com>
----
- arch/arm64/boot/dts/qcom/x1-microsoft-denali.dtsi | 32 +++++++++++++++++++++++
- 1 file changed, 32 insertions(+)
+I don't see any progress on that dependency, so I'm rejecting this
+series due to inactivity. Please send v3 once all dependencies has been
+accepted and this has been validated on top.
 
-diff --git a/arch/arm64/boot/dts/qcom/x1-microsoft-denali.dtsi b/arch/arm64/boot/dts/qcom/x1-microsoft-denali.dtsi
-index 7559557610ed..bc8e00e59dc9 100644
---- a/arch/arm64/boot/dts/qcom/x1-microsoft-denali.dtsi
-+++ b/arch/arm64/boot/dts/qcom/x1-microsoft-denali.dtsi
-@@ -314,6 +314,38 @@ sound {
- 				"VA DMIC0", "vdd-micb",
- 				"VA DMIC1", "vdd-micb";
- 
-+		displayport-0-dai-link {
-+			link-name = "DisplayPort0 Playback";
-+
-+			codec {
-+				sound-dai = <&mdss_dp0>;
-+			};
-+
-+			cpu {
-+				sound-dai = <&q6apmbedai DISPLAY_PORT_RX_0>;
-+			};
-+
-+			platform {
-+				sound-dai = <&q6apm>;
-+			};
-+		};
-+
-+		displayport-1-dai-link {
-+			link-name = "DisplayPort1 Playback";
-+
-+			codec {
-+				sound-dai = <&mdss_dp1>;
-+			};
-+
-+			cpu {
-+				sound-dai = <&q6apmbedai DISPLAY_PORT_RX_1>;
-+			};
-+
-+			platform {
-+				sound-dai = <&q6apm>;
-+			};
-+		};
-+
- 		wsa-dai-link {
- 			link-name = "WSA Playback";
- 
+Thanks,
+Bjorn
 
----
-base-commit: 8d3ae59288f1e7d58d76558a6ee96d533bc5019f
-change-id: 20260831-surface-pro-11-dp-audio-394503f0aeca
-
-Best regards,
---  
-Dale Whinham <daleyo@gmail.com>
-
+> Signed-off-by: Hangxiang Ma <hangxiang.ma@oss.qualcomm.com>
+> ---
+> Changes in v2:
+> - Fix typo for mclk2 and mclk4 tlmm function
+> - Link to v1: https://lore.kernel.org/r/20260519-pakala-camera-v1-0-b6d897864916@oss.qualcomm.com
+> 
+> ---
+> Hangxiang Ma (3):
+>       arm64: dts: qcom: sm8750: Add camss node
+>       arm64: dts: qcom: sm8750: Add CCI definitions
+>       arm64: dts: qcom: sm8750: Add camera MCLK pinctrl
+> 
+>  arch/arm64/boot/dts/qcom/sm8750.dtsi | 541 +++++++++++++++++++++++++++++++++++
+>  1 file changed, 541 insertions(+)
+> ---
+> base-commit: fb80987f81756cb697a01362654a8e55fb505600
+> change-id: 20260518-pakala-camera-bf03e3df1db8
+> 
+> Best regards,
+> -- 
+> Hangxiang Ma <hangxiang.ma@oss.qualcomm.com>
+> 
