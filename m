@@ -1,82 +1,174 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 093C74C6D;
-	Mon, 31 Aug 2026 07:27:21 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5DCCB3C3F76
+	for <linux-arm-msm@vger.kernel.org>; Mon, 31 Aug 2026 07:28:15 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788161243; cv=none; b=rkpw4Zr3gooePi33uw6nr3wK34PErfpEXhEviLzVn4hfi7JGE7nFTgfKOb6G0w06e7gIZ3x+Mj4y7LXaArz6eJuKdvOl1T4dsbmNhnXw95c4jcrFhGadK8ldoGZ0L/sC7uZjTAwK0RU6/MrS5+Noh5e0lNUJwkRAW5EjEzpoWK4=
+	t=1788161297; cv=none; b=UA4ih46CeYTnK7tnqY1Bl1e4ZyC7OnI/AdFIZZOyrDum5uhx1uEH6saAbpcN/1O1lvVXLKsgKLWFdb66vZSPNhWHYG17qGYBOuV150HMFwjVaY308IbYP7j4K+Sb0t8XWqtxLpLlHBRDtmF57RWe8BmRUkvKTyOEYuIifsVqI/A=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788161243; c=relaxed/simple;
-	bh=3eJh8lKlTSMT66jtXXUivIhdzm+2ibaSV4rCQdFElyA=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=qyLY52+cVOdlJWzN+uhXOqOVQ1L0bMg6JBWVFQorkX/o41nmc/HqQmJH54BBo4IQc5+4+ZZ+9DMZGwulIJwAmWQVvBTMJxaSFTbeDENODuUiqze4NNJXxxng/l7ImthjZzAJMlojkXs+GK1/6ixcVxyVQ1WrXfDyVQq5hMaUThc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=PMgiu5Xl; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1788161297; c=relaxed/simple;
+	bh=Conlgr4Jj+Rf23wPK+rlJYqiMx5qO0VUoIAd/YrvSHw=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=H3i1uCLzmxO9EbRVCPJs/1Y+B5ETf6MTmMtRnsJ3gIET2q9afvmZQQtu8n+8JpQ2hH69/kjQdglnfcVIeOH8rjluPsjYDMXWWNzR4mTeZ3LgeDWj0O9fFqDzvNzf4aqwDyJYJ4z+8i1VeQvJUMiK1h0FmIloQRa/rVbG6rs0ebQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=picNtWO/; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=cpIM+9rz; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="PMgiu5Xl"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 18E7D1F000E9;
-	Mon, 31 Aug 2026 07:27:20 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1788161241;
-	bh=rU7LA4eKjnDRvScYayCrmuHQplFrllwWDBoWgb710pk=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=PMgiu5XlcCRV+ARmzlavl8pdj0wmliZ8v+vbFISM3mXZhxpL60AVAptYUsdHYTq/5
-	 09YgRsk4GyVu+rjdE5e1JsJnNR/o2/sgwEu9V8Jfu+LWPIbeRr2IXepLHGRgazGWBL
-	 KyjXz91pU0BL735fA2K2xrQdb4jnasdnbNgwKWyn3yksyZ8gjE4eIoY34ZvhT0gh14
-	 5i0TWpTgR8IQut78oeF6FXiDAR70fZymKwU1i16ebWK7BCUD2B8JnRDKsOKWA55FiT
-	 gLO5gFKe8wkoMGn2geuOiV3mszDuG+HZO1blN+jxpmy+zcdLhr6cx3ftVyBwUZH5Em
-	 KYF1wXVdudBdQ==
-Date: Mon, 31 Aug 2026 09:27:17 +0200
-From: Krzysztof Kozlowski <krzk@kernel.org>
-To: Qiang Yu <qiang.yu@oss.qualcomm.com>
-Cc: Bjorn Andersson <andersson@kernel.org>, 
-	Stephen Boyd <sboyd@kernel.org>, Brian Masney <bmasney+clk@redhat.com>, 
-	Jerome Brunet <jbrunet+clk@baylibre.com>, Rob Herring <robh@kernel.org>, 
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
-	Taniya Das <taniya.das@oss.qualcomm.com>, Konrad Dybcio <konradybcio@kernel.org>, 
-	linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org, devicetree@vger.kernel.org, 
-	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v4 1/4] dt-bindings: clock: qcom: Move x1e80100 TCSR to
- own binding
-Message-ID: <20260831-ambitious-aloof-inchworm-88acb1@quoll>
-References: <20260827-hamoa_tcsr_qref_0826-v4-0-663c9d30468d@oss.qualcomm.com>
- <20260827-hamoa_tcsr_qref_0826-v4-1-663c9d30468d@oss.qualcomm.com>
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="picNtWO/";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="cpIM+9rz"
+Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67V7L8L72374530
+	for <linux-arm-msm@vger.kernel.org>; Mon, 31 Aug 2026 07:28:14 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	Jstrj3U0d113gfNlzGFGnlJ5/DtEAJkVT3MaC5FsOBw=; b=picNtWO/ASScH6rQ
+	srFBNNgX5zLpnQ6gwD4fjeG0l9S+JuuwXvCdEerJaMwzZ6NoKLCEQOQ2OXc29tG1
+	Dl/ck1MYeVKVcjnSxdkX6LA0NseTDdRaqFuVXDTYMj5HJOYZY/OUlpht+zg7rVgl
+	M9uQ6J+NcjQtTal6RXBwY83b+zkwCry75YS7VA4hy1X/9NYlbg2q7qmpLN3ugbJ7
+	ziixTmAsnqAnxNrsqe8c+3u/0M7DaV4eGDcd1pM4RnLlWKTV9FfBM9hmUEscQgI2
+	gekw2PMgrrixZO8CTC54kbroUbXA6topdWO7xwihJ0I4m7MzTfgZt4Ye5jVymFBH
+	UXCTEg==
+Received: from mail-qt1-f199.google.com (mail-qt1-f199.google.com [209.85.160.199])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gd556r0wp-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Mon, 31 Aug 2026 07:28:14 +0000 (GMT)
+Received: by mail-qt1-f199.google.com with SMTP id d75a77b69052e-52b4e315000so13690831cf.1
+        for <linux-arm-msm@vger.kernel.org>; Mon, 31 Aug 2026 00:28:14 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1788161293; x=1788766093; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=Jstrj3U0d113gfNlzGFGnlJ5/DtEAJkVT3MaC5FsOBw=;
+        b=cpIM+9rzdE20z4H5+bd7ooTyB3vldjZdjxD6lwUHADRJZdDY1QzVrdNRpeYuEBNs81
+         SEpzv293XM6Guo0CQHIC/IYj3ZuI6GYbCB2Q7N8NXrzlR0Z14xkke48m2o68dM+A0+IK
+         v6n6FLIzy1Nz7UJ9ij0pdJIe+6Y8Kz+bRr4eEdF0+fyH6P6mOJVKckFvwSUOBSC6Leg3
+         ndXMwv2d7798/VlJ0oulXuztOiPuc9r0WqMmzXvh0EF71BkIC8SMZY4WOYjzC/w7HB+m
+         Hs8fjtjHuIv3fbFuDQSfDVNHtdYUV/XazJmA2EkVPz+aDifVNnJoXzyvcH5jNZ6jxy0W
+         fAmQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1788161293; x=1788766093;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=Jstrj3U0d113gfNlzGFGnlJ5/DtEAJkVT3MaC5FsOBw=;
+        b=ee/UQ2+PhrCOgmgcVAwGUHdBsD7xJscAEcxMIIINj+VOPJ5pwHQfvClmUuP5sTCJ6y
+         Llv/Ss7X047rjJUeLhUW3hAP34N4FeTI55K+Yil0N8l7QX/JZU8V+TO4TLxq6/VE4jjW
+         9zh6DVQQCTO+6so6ik0GV90U0UWHVaFsBo9wfTiuc+mTejchl4iNSBS5UV3nj38C8k3F
+         8kXTwqzesLT9oDaGTRWRXjCdmXr65ezviyqjIKUx5QqWAFd6VII+8LZddFXvGxVxRm5Y
+         TIeIAvV+JQn+YiOvpELIlmzxHUYPyN1WaxPJbgGijOiiXfT7M8z6Nh/SDrlCH/g8BZQw
+         ffyw==
+X-Gm-Message-State: AFuF++nHQ7zeu0Oz5hcgEttwS1QDYmPnAKN78ir0PSAr17zaxrjd+Mrl
+	BWrQ+nL1a+ELflihIquCvsEqpOdQnztyvrwCP4WwknRlTbithn8EZocO5+GyPJ/AYFPKHHUrTSy
+	gU/yphbWCwY18x/0ssKAxsGWXEWIUoVy11sNrv5WIcosihEQWmzfZQOlbyoi0I+Z/KOqO
+X-Gm-Gg: AR+sD11AT39/PCQ1kezKe88uEHC9RXaJlaYNybE4Y8A6IW+Z6ZrPEXbR/dXxNv4KgNy
+	cS5RKZ+bwWVCAo6T85qhR2vyu42R0p1MtqXcYJy0asylhrKtyAi6fQnmc4+dNPIEm19O9UNJtzA
+	fMdIja7PRy0zvLIUpt23QqCj9Flg5pUamAYqpl9hOJsI4/0fT6S1nQjrKL2aSs5+rUMOVEOwgbp
+	kleS4ypoeYCBEFlImcsgTaK4BhTbjDaTokjZPappKrmAjYmfA43uotCL9yvWuukxbJVZOJkkvN1
+	zltfRrvhnUGfhxMNZI4Ba7KN70m7X0RlFw6rmPGCsGarYVgy5w1qahATK7bwCMLvYtw2nlnkGjZ
+	r7v7bsNeXKA4wGyxVeoRHbw==
+X-Received: by 2002:a05:620a:8018:b0:92e:9cb3:3f67 with SMTP id af79cd13be357-9392875e6b1mr812919585a.2.1788161293272;
+        Mon, 31 Aug 2026 00:28:13 -0700 (PDT)
+X-Received: by 2002:a05:620a:8018:b0:92e:9cb3:3f67 with SMTP id af79cd13be357-9392875e6b1mr812917785a.2.1788161292806;
+        Mon, 31 Aug 2026 00:28:12 -0700 (PDT)
+Received: from [192.168.202.12] ([178.235.128.140])
+        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-6a611c7720asm2883859a12.30.2026.08.31.00.28.11
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 31 Aug 2026 00:28:12 -0700 (PDT)
+Message-ID: <e16478f8-6b56-4e7f-b4fc-7c434045ec96@oss.qualcomm.com>
+Date: Mon, 31 Aug 2026 09:28:10 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <20260827-hamoa_tcsr_qref_0826-v4-1-663c9d30468d@oss.qualcomm.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v1] serial: qcom-geni: Fix port_ida handling for console
+ and probe errors
+To: Aniket Randive <aniket.randive@oss.qualcomm.com>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        Jiri Slaby <jirislaby@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-serial@vger.kernel.org
+References: <20260828-master-v1-1-1f8afa5f82c2@oss.qualcomm.com>
+Content-Language: en-US
+From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+In-Reply-To: <20260828-master-v1-1-1f8afa5f82c2@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODMxMDA2MyBTYWx0ZWRfX5YyMhteNYHTf
+ Fii7WGYAQ1Kc6812P5xoX72XIly3tqt8E77UMBGz/Xsa+sUzhTdi7GutL8g6BjJEL1lASNV7OGH
+ dcBpaXrBEKzw7RUNgnOb+kWOPKZXE3A=
+X-Authority-Analysis: v=2.4 cv=O7sJeh9W c=1 sm=1 tr=0 ts=6a952d0e cx=c_pps
+ a=WeENfcodrlLV9YRTxbY/uA==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
+ a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
+ a=EUspDBNiAAAA:8 a=SusbOXjRFks2-79YJ0gA:9 a=QEXdDO2ut3YA:10
+ a=kacYvNCVWA4VmyqE58fU:22
+X-Proofpoint-ORIG-GUID: UXEAk_pP1hnKpdQ_0w3VzWXu43oExY-L
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODMxMDA2MyBTYWx0ZWRfX4HNGEtlfCrVe
+ XikHEmpPpta+MxSUby57wRpnELKdjIK/c7sUn9DGSu6XflQ4VF6HPictdDzst2ycjTc7nHmnfTy
+ uSgJn1go5F/pRGK0Xe16HppoS3daPOZVmnJXRYFU6UUymrZ/usujfZrIUT4wsdxYd2FrBM5vuaq
+ cEfPTR5SffwdgxSefrUOxHKqoFPNPyxonh9e1iqn0Mf3OIs0WQfR7E9JWjL3CKTDsWUWLG2DDHA
+ pOD5ESEzqhknAIC0tIMeB8W+HDFvexX/ApGlXI5XKG9CBitROLScmLbGZzD9kiqzIXwLs3xm0cy
+ Eytz6IszLM9/AqL72xb6vOBAWfqQzcOl/gsq7Ky+SFol9SNOTPFkh6YpNAWnZnWdJXz/SAo0vx9
+ VfmlUhoJsRSVGioz5oz5UIfYbFOkERNBx3+zRErxDWwUMfp7w89g210KXUpwykUDr+No3UjaXiI
+ /QPgx0G7eCsw+9OKC6g==
+X-Proofpoint-GUID: UXEAk_pP1hnKpdQ_0w3VzWXu43oExY-L
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-08-31_02,2026-08-27_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ phishscore=0 priorityscore=1501 malwarescore=0 adultscore=0 suspectscore=0
+ bulkscore=0 spamscore=0 lowpriorityscore=0 impostorscore=0 clxscore=1015
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608310063
 
-On Thu, Aug 27, 2026 at 11:00:33PM -0700, Qiang Yu wrote:
-> The QREF block supplies reference clocks to PCIe/USB/UFS PHYs and requires
-> dedicated LDO supplies to operate. The digital control interface for QREF
-> (clkref_en registers) resides in TCSR on x1e80100. Since QREF has no
-> dedicated DT node of its own, these supply properties are placed in the
-> TCSR node which acts as the control interface for QREF.
+On 8/28/26 1:14 PM, Aniket Randive wrote:
+> The console port uses a fixed line number and is not allocated from
+> port_ida. However, qcom_geni_serial_remove() unconditionally frees the
+> line number for all ports, including the console port.
 > 
-> These LDOs are required by QREF to provide a stable reference clock,
-> without which the USB/PCIe/eDP PHYs cannot work properly, so the supplies
-> are marked required even though it breaks ABI.
+> Skip ida_free() for console ports so that only IDs allocated from
+> port_ida are returned.
 > 
-> TCSR does not act as a reset provider on x1e80100: no driver has ever
-> registered a reset controller for it, and no consumer references it as a
-> reset, so #reset-cells is dropped entirely rather than documented.
+> Also release allocated IDs from the common probe error path. Currently,
+> IDs are freed only on the wake-IRQ failure path, causing leaks when
+> probe fails after a successful allocation. Move the ida_free() call to
+> the common error path and guard it for console ports.
 > 
-> Add a dedicated binding file for qcom,x1e80100-tcsr and document the
-> supply properties.
-> 
-> Signed-off-by: Qiang Yu <qiang.yu@oss.qualcomm.com>
+> Signed-off-by: Aniket Randive <aniket.randive@oss.qualcomm.com>
 > ---
->  .../bindings/clock/qcom,sm8550-tcsr.yaml           |   1 -
->  .../bindings/clock/qcom,x1e80100-tcsr.yaml         | 114 +++++++++++++++++++++
->  2 files changed, 114 insertions(+), 1 deletion(-)
+>  drivers/tty/serial/qcom_geni_serial.c | 6 ++++--
+>  1 file changed, 4 insertions(+), 2 deletions(-)
+> 
+> diff --git a/drivers/tty/serial/qcom_geni_serial.c b/drivers/tty/serial/qcom_geni_serial.c
+> index 3633723acef8..3bfe597d2c83 100644
+> --- a/drivers/tty/serial/qcom_geni_serial.c
+> +++ b/drivers/tty/serial/qcom_geni_serial.c
+> @@ -1979,7 +1979,6 @@ static int qcom_geni_serial_probe(struct platform_device *pdev)
+>  						port->wakeup_irq);
+>  		if (ret) {
+>  			device_init_wakeup(&pdev->dev, false);
+> -			ida_free(&port_ida, uport->line);
+>  			goto error;
+>  		}
+>  	}
 
-Reviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+GPT suggested that the failure of
 
-Best regards,
-Krzysztof
+ret = port->dev_data->resources_init(&port->se);
 
+should also be updated to have a 'goto error' rather than a direct
+return
+
+
+also that in get_port_from_line(), reordering the devm_kzalloc before
+ida_alloc_range() would prevent another leak
+
+Konrad
