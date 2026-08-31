@@ -1,33 +1,86 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 86B832941A;
-	Mon, 31 Aug 2026 07:04:01 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E26D73A9D8D
+	for <linux-arm-msm@vger.kernel.org>; Mon, 31 Aug 2026 07:08:19 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788159842; cv=none; b=nkQHbk+sF7at0Xz5HeZ++R9BJccW5cml7iB0ppD7BLyghA4k87T7S+TGtokwK/EH/bDbMYuTtGK0RhW+FcXKLp8KloHB4G+if9D4YM+MFQlLmrqc4yCiLicLoR2Y/ReSxhrHkfgTNYJWnaFZSa8r2hFi/16wDmvr852xv+kIXvE=
+	t=1788160101; cv=none; b=bdAE3Uv4cfVIE3foHAUOSQVEARFWwzimc0TdXp4rYvpXKX5cbOBjKGJU+fPropMQxGV8Srggi6+s7Y0HVuhjpAjnrwrAUmTbv3Tr/w8vmRmu/URJyc2GYxxVUlLjOQBm9sXNLEyfV8/1uBcM+Yahf5zygSqDqMxQ/wfKQrDrC+E=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788159842; c=relaxed/simple;
-	bh=gmNMkW8BJZK0ghbj5E3UG1lGb6HMaLQ+7eEIVm4U4TU=;
+	s=arc-20240116; t=1788160101; c=relaxed/simple;
+	bh=OtDf5kcTqEA1PEC3v0u0wM/mWSz9h5KHwFsQnufun3E=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=aueIJjjPO6MFW3gkEjUct6uxt9BcVD99g0zB8CGS1fIrYLZy44vgFZqALhQqC/hG7bZLcee/u5aL8TJ18r3Sjdl0p+FnXbuXpawN3vnh55rUdcUYDUhK+EPGCz3SoyL9nW9LaEHNSDpLqFIjzeNHUqVXCzU6uji/hpLjs7X2MEU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=AFKrmk+5; arc=none smtp.client-ip=100.103.45.18
+	 In-Reply-To:Content-Type; b=cmxL+vLLXrsjOt7nVYAkc/aQewzjLX1ewo0rnRXs1Kimy7O8fLBkF3uoj/Hg/iKAdJSaICRU7f4YpA5H/LG5KruOBddTc9Fm64vDtT8sDe3eoHAqufWuNlRtQ8XuT+vEp7+TIsSPxE7KtTc4XY6Jcci6phIDm9u9t73nuyH/rn0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=WW6EBvTt; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=fIau3zYA; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="AFKrmk+5"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 696831F000E9;
-	Mon, 31 Aug 2026 07:03:51 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1788159841;
-	bh=dn2CLObij1YYUhH1wWw0aDiMly3mPdNFWYv1tBBXevA=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=AFKrmk+5vDmyG9G8H1JEEwJbmAk+fBzl7A0jPF47kKkG+EJygmQXSJwqVFQbAzhk/
-	 PQWVVpn+fKH7QbCTKRdmHwFbsuYrC/B8t8Gz0lS/xu7n/SOD6dRijaAxUSDkoyUoBR
-	 gBEi1NI5wl7DxC/qfV/hOWx4BA3YQJYDQfGeltl2TY784nvgMeCm7JtPYj72kkecdA
-	 tbubdBPTQfwKEazPBtnDGmq5dwRnog+8wTykLf3KSUrjIcF419bX1TSvaUkxIKVTxl
-	 8eiNF0B12+vwHQhjYN33moZ5mka0UJHlAnck/1tYihFEFYWZMlx7lc3ostmD3wvR2I
-	 KM0aMaRSvf+pw==
-Message-ID: <046e4b62-6d25-40fc-baa3-2978eb96eb70@kernel.org>
-Date: Mon, 31 Aug 2026 09:03:48 +0200
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="WW6EBvTt";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="fIau3zYA"
+Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67V52qiC2522826
+	for <linux-arm-msm@vger.kernel.org>; Mon, 31 Aug 2026 07:08:19 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	Z5+jtKls3jVZt1Vk8tCZgUdFuEyXJOu1YclDw7gKN9w=; b=WW6EBvTthhXbs/IQ
+	QKblKD9+s8LJJUVw81dIUv2Yv9CxXVAxNFroXU1TMH/OCnOfzGfZmiTe3//aew25
+	nloGvaRIljsbOELbTRFcewDIR4aCW+nBzX4b59eSZORL7i387oWq2BfkmreOg9wk
+	cwVlretRiHb+33uCW03OxZH1TXGtLZNS9pwp8+q+cjqe1PNQcH/wxEWmYrQD+uVs
+	S+cRxRN6HOd9BEsa2ha8YfD88YPWGQ/dLkU8KFWQjHktapOYaju/Q/d5DsyT65CB
+	OJh+wSfv6xKK48YN3crcC3G7+2VP9jyKagRW2olSyMccQCtZsw5neJAD5K96ZnXc
+	zZU3bw==
+Received: from mail-qt1-f197.google.com (mail-qt1-f197.google.com [209.85.160.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gcv7w9cgc-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Mon, 31 Aug 2026 07:08:18 +0000 (GMT)
+Received: by mail-qt1-f197.google.com with SMTP id d75a77b69052e-52fa40fed05so6295121cf.2
+        for <linux-arm-msm@vger.kernel.org>; Mon, 31 Aug 2026 00:08:18 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1788160098; x=1788764898; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=Z5+jtKls3jVZt1Vk8tCZgUdFuEyXJOu1YclDw7gKN9w=;
+        b=fIau3zYALqBXVxnyZuWM2ztooE0hOL3PTGhsD5Kbd6URdw5Hl87QnQIi2ITlaIlcBz
+         BjrmIXxYVhA9lhTSyD4ep00EwpSOJkAI4jS98Q7bYSJErMGj6paY/nBu2ZjyHsr+g3vK
+         wZ67z0DY1q+tIDzzXkPt0ifRf1hOf0deJE+FTy10NY47C1RVObO6zcv76ImohIwsxF0A
+         X2git/OEHD5N7/lHOhNbyp6ec6m/Qj7Pw1CX4T9FogU+DiVKkb5g70DP4krylL7+47/d
+         +0Zx0hHspiVxv8teDknh6WG5qi3nHohLATI95mDujBRW6fFumQ60Lw7ETwOY7BYoposz
+         v7bw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1788160098; x=1788764898;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=Z5+jtKls3jVZt1Vk8tCZgUdFuEyXJOu1YclDw7gKN9w=;
+        b=WoX6bHoH8H39CHa2OHkr2bOuzEDSKh+E320NH44WAWqz8AEBgXogHg98igylouYIIc
+         CUZgrlrSvVv6nSq8qJMEpdb2+HPp/2oPQxdH9Ig78irzYbdp+TtHYz8wgSHgCgDhL1h2
+         DwvMJURw2eStZzPO/2uKnW7FDQQQ07Y4BaRYxIKOpWfVanfu1az93OmJTONC9ZOwbXAC
+         yHcb3IBdjBi6pkhPVbw//eaCOTreA4pKn/TCenIAdybRpjYCsab5x8P1rMmf0flbQdhe
+         ln6VhZ7Tn1mnHZRq1fdr/2bbHjz2g1+nVrtc1lgSBTe5Nzr0SwvjqxosYgl6dQw5z87L
+         ZauA==
+X-Gm-Message-State: AFuF++l4gZ31innfeb/qYynnfsS/9YU7y5yoMjTcuAvLLflTF5e3B0Gz
+	TjCATLRPMDkGlSYJzfID9lY+mrprP1w3tbeHxvNys9psnp7zuQVKg14bTV3H8ZCk28mHA05LsEL
+	ejus/R7L2jiONOPn7eUKtHTBOYsskviHAsjRpz0CTpl78xOU4bTf35k0GqY/CHWCa+cbh
+X-Gm-Gg: AR+sD139ulRtWBX8eT9MzSKS4WR8Uiszemn3u65BRVKprNoHFZTLBWA7vUascDjDQBH
+	IawwAiZEhCxJf3TSyCpzxkZmrdORi0TxkErXQB1j1pRXe75ZtLNBbXcKy7LU6cdsUam+FK5PqpC
+	iacapqr6DrBHSG5ooE/YV7l5H/zSqTw8vgJ0Or+OLubfCQO0QjlybRhhff7M8E5xDx612fdUeAf
+	0SHXGHyaRUByHfofkEnumb4YzmJg7oUqzcbUAV/EqrI+AnJ3qFELU03ljeYtFO/pwYRZ88+ZC+6
+	pgArbVw6jSIpf3G2QowJqBgJsOwLdjg5t4ePxvRdUAkqNL0KOYlcLBsIeqVWbVlQSy85rCbnLDU
+	zE/cW0cupko5Y1tKDrnxRDw==
+X-Received: by 2002:a05:620a:1b9a:b0:92b:7420:bd58 with SMTP id af79cd13be357-939285432f8mr768780585a.0.1788160098285;
+        Mon, 31 Aug 2026 00:08:18 -0700 (PDT)
+X-Received: by 2002:a05:620a:1b9a:b0:92b:7420:bd58 with SMTP id af79cd13be357-939285432f8mr768779785a.0.1788160097890;
+        Mon, 31 Aug 2026 00:08:17 -0700 (PDT)
+Received: from [192.168.202.12] ([178.235.128.140])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c255f249434sm389101766b.55.2026.08.31.00.08.16
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 31 Aug 2026 00:08:17 -0700 (PDT)
+Message-ID: <1ad7deb5-5544-40aa-baab-865a4612af70@oss.qualcomm.com>
+Date: Mon, 31 Aug 2026 09:08:15 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -35,156 +88,58 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 11/11] scsi: ufs: ufs-qcom: support ICE keyslot
- partitioning for guest VMs
-To: Linlin Zhang <linlin.zhang@oss.qualcomm.com>, ebiggers@kernel.org,
- axboe@kernel.dk, mst@redhat.com, jasowangio@gmail.com,
- James.Bottomley@HansenPartnership.com, martin.petersen@oracle.com,
- robh@kernel.org, krzk+dt@kernel.org, conor+dt@kernel.org,
- linux-block@vger.kernel.org, linux-crypto@vger.kernel.org,
- linux-scsi@vger.kernel.org, virtualization@lists.linux.dev,
- devicetree@vger.kernel.org, linux-arm-msm@vger.kernel.org
-Cc: neeraj.soni@oss.qualcomm.com, gaurav.kashyap@oss.qualcomm.com,
- mani@kernel.org, andersson@kernel.org, konradybcio@kernel.org,
- bvanassche@acm.org, alim.akhtar@samsung.com, avri.altman@sandisk.com,
- stefanha@redhat.com, pbonzini@redhat.com, eperezma@redhat.com,
- xuanzhuo@linux.alibaba.com, linux-kernel@vger.kernel.org
-References: <20260827160806.1295313-1-linlin.zhang@oss.qualcomm.com>
- <20260827160806.1295313-12-linlin.zhang@oss.qualcomm.com>
-From: Krzysztof Kozlowski <krzk@kernel.org>
+Subject: Re: [PATCH 3/3] remoteproc: qcom_q6v5_pas: Add per-PD proxy
+ performance states for Hawi CDSP
+To: Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Mathieu Poirier <mathieu.poirier@linaro.org>,
+        Jingyi Wang <jingyi.wang@oss.qualcomm.com>,
+        Gokul Krishna Krishnakumar <gokul.krishnakumar@oss.qualcomm.com>
+Cc: linux-arm-msm@vger.kernel.org, linux-remoteproc@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+References: <20260828181311.4038346-1-mukesh.ojha@oss.qualcomm.com>
+ <20260828181311.4038346-3-mukesh.ojha@oss.qualcomm.com>
 Content-Language: en-US
-Autocrypt: addr=krzk@kernel.org; keydata=
- xsFNBFVDQq4BEAC6KeLOfFsAvFMBsrCrJ2bCalhPv5+KQF2PS2+iwZI8BpRZoV+Bd5kWvN79
- cFgcqTTuNHjAvxtUG8pQgGTHAObYs6xeYJtjUH0ZX6ndJ33FJYf5V3yXqqjcZ30FgHzJCFUu
- JMp7PSyMPzpUXfU12yfcRYVEMQrmplNZssmYhiTeVicuOOypWugZKVLGNm0IweVCaZ/DJDIH
- gNbpvVwjcKYrx85m9cBVEBUGaQP6AT7qlVCkrf50v8bofSIyVa2xmubbAwwFA1oxoOusjPIE
- J3iadrwpFvsZjF5uHAKS+7wHLoW9hVzOnLbX6ajk5Hf8Pb1m+VH/E8bPBNNYKkfTtypTDUCj
- NYcd27tjnXfG+SDs/EXNUAIRefCyvaRG7oRYF3Ec+2RgQDRnmmjCjoQNbFrJvJkFHlPeHaeS
- BosGY+XWKydnmsfY7SSnjAzLUGAFhLd/XDVpb1Een2XucPpKvt9ORF+48gy12FA5GduRLhQU
- vK4tU7ojoem/G23PcowM1CwPurC8sAVsQb9KmwTGh7rVz3ks3w/zfGBy3+WmLg++C2Wct6nM
- Pd8/6CBVjEWqD06/RjI2AnjIq5fSEH/BIfXXfC68nMp9BZoy3So4ZsbOlBmtAPvMYX6U8VwD
- TNeBxJu5Ex0Izf1NV9CzC3nNaFUYOY8KfN01X5SExAoVTr09ewARAQABzSVLcnp5c3p0b2Yg
- S296bG93c2tpIDxrcnprQGtlcm5lbC5vcmc+wsGPBBMBCgA5AhsDBgsJCAcDAgYVCAIJCgsE
- FgIDAQIeAQIXgBYhBJvQfg4MUfjVlne3VBuTQ307QWKbBQJp2mE8AAoJEBuTQ307QWKbeaIP
- /ihHTkTW4KsN/DQ945JJbyu5tI0J80Wue7QyyLPglyKfhgb5cLLNPpOC8cCIJsc7+W3i2P38
- s2c1cOH6CYGE7E9ur3Vfme8NW2S2I/Z8VC7bZnzyS23wT17LrsdS/qCpx4o8U+pt/xdXDKph
- EGRYrIEmMpUWvyYzyYKGIe25FtaayIIKpq8eZYyFcp2f/sG5IkOW5uZzHPMPdcm87jU7fyuQ
- rAU2vx9r+ulUfQ/q9Z2roC/ode3l7t2pN7BCBCsUDp6JCrUyZrtT1e7EbA0ZRP3aOBNk2P2E
- DQOgJGjGdO5Yx2Y9LFtltu6JbsBJHi1syGRX3AtQYOMc4Y1WGoeZJmMlvKj2ZqqXNkcWi2DS
- IQEWB0uW6CqFsBBIMGDa+6OzdaVO/uAVXWDWml02Men3CILdI1MbVjoh8ECqYUY7OQ+JJvNN
- vnliuq5WM3Ghd3jg/LZZrxXjdIginRHFQCjIJYLKpLZWm1/iDFedcfzqRNYmTtqscdCNHW41
- oT3Z7BmO9xwdjuwBS6nmS6JJwkbf5Ot2QR4pB/DRU7ZwjT1qHe+9r9gF32wXVQatHNGK/VVu
- sfwOnkdxCWkp/qb2gdQRmZh+SedStWshigH6sNfuHBloF/q+hjMRc8b2m326OZdrbSHwY1Sz
- vti8Hn7n8NjdHO9LKB7BIdjkA9DA5WsqOuVCzsFNBFVDXDQBEADNkrQYSREUL4D3Gws46JEo
- Z9HEQOKtkrwjrzlw/tCmqVzERRPvz2Xg8n7+HRCrgqnodIYoUh5WsU84N03KlLueMNsWLJBv
- BaubYN4JuJIdRr4dS4oyF1/fQAQPHh8Thpiz0SAZFx6iWKB7Qrz3OrGCjTPcW6eiOMheesVS
- 5hxietSmlin+SilmIAPZHx7n242u6kdHOh+/SyLImKn/dh9RzatVpUKbv34eP1wAGldWsRxb
- f3WP9pFNObSzI/Bo3kA89Xx2rO2roC+Gq4LeHvo7ptzcLcrqaHUAcZ3CgFG88CnA6z6lBZn0
- WyewEcPOPdcUB2Q7D/NiUY+HDiV99rAYPJztjeTrBSTnHeSBPb+qn5ZZGQwIdUW9YegxWKvX
- XHTwB5eMzo/RB6vffwqcnHDoe0q7VgzRRZJwpi6aMIXLfeWZ5Wrwaw2zldFuO4Dt91pFzBSO
- IpeMtfgb/Pfe/a1WJ/GgaIRIBE+NUqckM+3zJHGmVPqJP/h2Iwv6nw8U+7Yyl6gUBLHFTg2h
- YnLFJI4Xjg+AX1hHFVKmvl3VBHIsBv0oDcsQWXqY+NaFahT0lRPjYtrTa1v3tem/JoFzZ4B0
- p27K+qQCF2R96hVvuEyjzBmdq2esyE6zIqftdo4MOJho8uctOiWbwNNq2U9pPWmu4vXVFBYI
- GmpyNPYzRm0QPwARAQABwsF2BBgBCgAgAhsMFiEEm9B+DgxR+NWWd7dUG5NDfTtBYpsFAmna
- YUkACgkQG5NDfTtBYptX+BAApg32CkxwNucNEi8WfWA8oKkW0y8YDuY6ORMo9FWNGiT/OTy0
- vyJrLocrpn86zwfjVp+eCrssPYh8eqJfnWqmYv6ACQtHPYzPZQ3mSo8H97Z01oUxITzCxpXm
- ZkLgPIqtDPcC2E3dPM/fVxcyowM8XsaMA9wcsaUYrta8toOq2b9tKcjleKMfMrm0gQ9u7wUc
- QbLkwj6TCLOwucb07GXzLTNF9PZmaDUpKAZjMjmrW+le+SFvQbhamx0rxLWPR0NWntXpbCn+
- +ACch03p/JyTBVktxFsFyCt7pTPE1kEaeuXBTe/a2D9iQvRxRW19LvuO2e59/u1wYUiH/orz
- wbIC2S4dBsPAPihL3ztOU1yE86GPyQtSE0kU+/7snnLt4QGi6PChf3t5gnNjAzjUUovO8rgI
- c+5yN5heq5loYHgK6OQ9OlHzsPHO9e9MOQcKlFycs1pyijFGzDwdNUm/SchK8iWT2QApTx4A
- K9bCVaboTA2T77QYkRcRJYSsO1alGX0ome/hMLD1daXlkrNUp1HWa3K4iytLRXjCSIorWiGs
- n+q3krnpXu3TFkA8qtOFZMdnIiFuiq1yLT8hptsV5xh1TA2nsVvSYiaCr3q4s4BKjS/KrLDb
- qoxzw8ISjdUp4pA85vb6YLCmb39NgidD+7PmAr65lBNveIFynTgsja1rRQ4=
-In-Reply-To: <20260827160806.1295313-12-linlin.zhang@oss.qualcomm.com>
+From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+In-Reply-To: <20260828181311.4038346-3-mukesh.ojha@oss.qualcomm.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
+X-Authority-Analysis: v=2.4 cv=E9f9Y6dl c=1 sm=1 tr=0 ts=6a952862 cx=c_pps
+ a=EVbN6Ke/fEF3bsl7X48z0g==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
+ a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
+ a=LiietuZ_TH7RrXzX-7sA:9 a=QEXdDO2ut3YA:10 a=a_PwQJl-kcHnX1M80qC6:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODMxMDA1OSBTYWx0ZWRfX+nAFO3FBCxVU
+ J7FPdWKkW+J8CoL25lXiHR5vpAbMDaE7WR5sTv0NvnCMulXBPRHVpYeQFsYtAqnqyBA/u3V2Lwd
+ NKW/KRm35snvKIQrW+jb0ZHFLzJfpco=
+X-Proofpoint-ORIG-GUID: jUA1yAyXTrLya8P4OmrZE2C3xZRibg0W
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODMxMDA1OSBTYWx0ZWRfX4o1z/8pkAdlR
+ XWTykUVVu/ZrefDcVwzQXiE5LDxPHLh59j7Z9zWsX+JYKLuVlJbX6i7kIigWerESZh6gnFceb9p
+ JiRvKjVK2r6OMyZ7+7oBRbJUSlHO3kpZ9x01puAmBgMxxFo7Dp3IHlLEkIu2xSx9wKZ+dZgNvDd
+ W/hmozk/4S069SYND7c+0bLzBNI6UC7G9vRqdy+ik/qaFUJ9gO14cp+qiRiGd7MWcH7YaStuAjh
+ CtRfkpM98Y9CJP9GQtKPDV7xB2oZuR5Vyt/RIxlKHnmzQHNxM6d+fU5yKHRwWrRPKswPN6JdvYi
+ EV0IfeDwVcTm21eLSNTTqRFQffnfVFOYexvF35k4e0ISa/CRShH1vGBDjBZL/fD+mZRsEwAkGnu
+ ZF4Jnon4oTvKEN/uHPsCsOo2TpUeeOO+IWBKoq/nKpfIIoKvvLFbAqvC9yaHiOnPG0iG3IFDLKs
+ g3vKgk2UjVs0Y+QYScQ==
+X-Proofpoint-GUID: jUA1yAyXTrLya8P4OmrZE2C3xZRibg0W
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-08-31_02,2026-08-27_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ suspectscore=0 malwarescore=0 bulkscore=0 spamscore=0 phishscore=0
+ lowpriorityscore=0 adultscore=0 impostorscore=0 priorityscore=1501
+ clxscore=1015 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2608310059
 
-On 27/08/2026 18:07, Linlin Zhang wrote:
-> From: linlzhan <linlin.zhang@oss.qualcomm.com>
-> 
-> On Qualcomm platforms where UFS inline encryption is shared between
-> the host and guest VMs, the ICE hardware keyslots must be partitioned
-> so that each VM operates only within its own physical slot range.
-> Without this, the host's blk_crypto_profile would manage all hardware
-> slots, conflicting with slots already allocated to guests.
-> 
-> Add ufs_qcom_ice_parse_slot_table() to read the qcom,ice-keyslot-map
-> device-tree node.  The function parses all child entries and validates
-> that no entry's slot range or the combined total exceeds the hardware
-> slot count from REG_UFS_CCAP.  The first child entry is taken as the
-> host's own reservation; its slot count and offset are returned to the
-> caller.
-> 
-> In ufs_qcom_ice_init(), use the parsed host reservation to initialize
-> the blk_crypto_profile with only the host's slot count rather than the
-> full hardware range.  Set profile->slot_offset so that
-> blk_crypto_keyslot_index() returns the correct physical ICE slot
-> number when programming hardware.  If no qcom,ice-keyslot-map node is
-> present, the existing behaviour (profile manages all slots) is
-> preserved.
-> 
-> Note: This patch is submitted for visibility. The ufs-qcom driver
-> gets its max_slots and slot_offset based on the the current
-> DT-based keyslot mechanis. we are aware this may need to be replaced
-> by a TZ SCM interface, submit it RFC for design discussion.
-> 
-> Signed-off-by: linlzhan <linlin.zhang@oss.qualcomm.com>
-> ---
->  drivers/ufs/host/ufs-qcom.c | 91 ++++++++++++++++++++++++++++++++++++-
->  1 file changed, 90 insertions(+), 1 deletion(-)
-> 
-> diff --git a/drivers/ufs/host/ufs-qcom.c b/drivers/ufs/host/ufs-qcom.c
-> index 62396212a0a7..0611ab50f4cc 100644
-> --- a/drivers/ufs/host/ufs-qcom.c
-> +++ b/drivers/ufs/host/ufs-qcom.c
-> @@ -163,6 +163,74 @@ static inline void ufs_qcom_ice_enable(struct ufs_qcom_host *host)
->  		qcom_ice_enable(host->ice);
->  }
->  
-> +/**
-> + * ufs_qcom_ice_parse_slot_table() - parse qcom,ice-keyslot-map DT node
-> + * @dev:          UFS controller device
-> + * @hw_max_slots: total physical ICE keyslots reported by REG_UFS_CCAP
-> + * @num_slots:    receives host max_ice_slots (0 = no partitioning)
-> + * @slot_offset:  receives host ice-slot-offset
-> + *
-> + * Parses the qcom,ice-keyslot-map device-tree node.  The first child entry
-> + * is the host's own reservation; subsequent children are guest reservations.
-> + * Validates that no entry's range exceeds @hw_max_slots and that the sum of
-> + * all entries does not exceed @hw_max_slots.
-> + *
-> + * If no qcom,ice-keyslot-map phandle is present, sets @num_slots to 0 and
-> + * returns 0.  Returns -EINVAL if any entry or the total exceeds @hw_max_slots.
-> + */
-> +static int ufs_qcom_ice_parse_slot_table(struct device *dev,
-> +					 unsigned int hw_max_slots,
-> +					 unsigned int *num_slots,
-> +					 unsigned int *slot_offset)
-> +{
-> +	struct device_node *slots_np, *child;
-> +	unsigned int total_slots = 0;
-> +	bool first = true;
-> +	int ret = 0;
-> +
-> +	*num_slots   = 0;
-> +	*slot_offset = 0;
-> +
-> +	slots_np = of_parse_phandle(dev->of_node, "qcom,ice-keyslot-map", 0);
+On 8/28/26 8:13 PM, Mukesh Ojha wrote:
+> The proxy power domain enable path currently requests INT_MAX performance
+> state for every proxy PD.  While this serves as a "take highest available"
+> hint, some SoCs require specific per-domain RPMH levels for correct
+> operation during firmware load rather than a blanket maximum.
 
-No
+I would have assumed having a surplus of power shouldn't be an issue..
 
-> +	if (!slots_np)
-> +		return 0;
-> +
-> +	for_each_child_of_node(slots_np, child) {
-> +		u32 off, max;
-> +
-> +		if (of_property_read_u32(child, "qcom,ice-slot-offset", &off) ||
-> +		    of_property_read_u32(child, "qcom,max-ice-slots", &max))
+Is this specific to Hawi? Is that a firmware bug essentially?
 
-No, there is no such ABI.
-
-
-Best regards,
-Krzysztof
+Konrad
