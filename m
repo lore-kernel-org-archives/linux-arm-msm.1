@@ -1,45 +1,46 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1D7514968EE;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DF89A499F1E;
 	Mon, 31 Aug 2026 17:54:21 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788198862; cv=none; b=TjSdeuW790azqCqsntRd5pys9d0p6M91xexNpL20AgZ5POiGaMPu2RXnfqobnG6p2rdekfbAeWbRWeu5Z7VT5m/aOjITktEC6LYfk5PN53HcXD7smLjp6U9cD592kEnKtx+Z/ZY33HwJw1eB4qfeOlupGN9eHgG0mb63MZdHXc4=
+	t=1788198863; cv=none; b=DtpnNBE9uY7h5pk1bssjxPv1Ag9puz62vdfroUYWyndLtN3s4X8mlW9agqH+CLOAeaaZz07TgVN+In22OAz1RkTPZG0IAZXA24gIVdXRahgdEzYmcvfUXsccMtHUN0MPBtcNrCePuswyZLyRzYd8fLFJpu6+VAhCdmRP2WQX8cw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788198862; c=relaxed/simple;
-	bh=UBw8U4P1zzMBUxbXAbA5GnrUday+gMb0sML5kDFVsko=;
+	s=arc-20240116; t=1788198863; c=relaxed/simple;
+	bh=CLP0Zs8FcVoLb/ca1fWkg6f+ehXCLl7jvsgeOolHfzY=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=GiKreQ1xdvMRhvg9RuoIB7IrAVfwNGaX2gWfRMGgKH8W29jDjcUzk71ehqdT7Je3bS4ONTT0vMoHX/5EBknz5KLnAieYqCdSsH3avnj+YxdCLXLTHrBokr3Br9rpVyTI0jg+fIz15c3jFueZ+gM/zYSuwFT2Pw22P23OgSthEUw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=oPVHHNpD; arc=none smtp.client-ip=100.103.45.18
+	 MIME-Version:Content-Type; b=ge57cEbR2kGx3Vx49yfZgTgnfgBUK2dcyLIyz8bmCZqm3JJ1fFcW3s5+Mxy6UW9e7EvReKjwR/hddnY79CPvv6/iRPZJEmGaITKQux/2ATIUtmKpKU4wbXfOTIsiYO/pr4FASRbSusBsejB503DKNcTVVcj5lNmMijN7WaoaPxM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=BxvKonl7; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="oPVHHNpD"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 79B3A1F00A3F;
-	Mon, 31 Aug 2026 17:54:20 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="BxvKonl7"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 396C51F00A3D;
+	Mon, 31 Aug 2026 17:54:21 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
 	s=k20260515; t=1788198861;
-	bh=2N7Q2ZMDgn7jMiRiGogUoaXP6JblA9mljddMuVcH0lc=;
+	bh=dWWbcBwqDlx8QShY/YpuD/ZcfTs6H9vSeSmK8QgTDJM=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=oPVHHNpDE7P0PHqQcRk+cMQybdD35eeHZQHf2Oks7f3lp0bSsetHmWkIHhFwdrLFa
-	 68Zg/Qt6GL11LXnLsoFuJTu1x59kAJxGIBvxQdSARwntUvop8+9IaAvoh6QkKKSUZ2
-	 q7aWGyAWkKCYxo6EE1AksqztD3YeedFiJsB1hHdcqF7SMqyDrhbWzwNLjUgDQ1980I
-	 G5HBky5k8JWvHPvJHoUttnwjR+bYTefbaI/LV1fA1KD1zwACUxFJGSrKieZ0R3SiQV
-	 GWameGtsJYr4leX/4166wjIk9P4NzfRAPMtFxw7CwOHpD9jkHgWgb4Wy79BVwBWCb2
-	 y2kE3/9vuiWIA==
+	b=BxvKonl7AZLHvQ6L000CGjhZr/9keDAG+B75WS6em6mo5/u5WVSjadv7vSt1nD/6+
+	 p/f+MBKIYkZ7wB9k0QqniNHEY2Rm5+7Hx+L8CuSs/duK+GKQnaQdeq9e6kFbe08MR3
+	 CSMU5Io3z/CWNf1Kq9ypzZ2qifg3nzlaK4oHQXzmNtnRJsMfcWMokCXM/q7SgNiIwt
+	 B6AyN3mjK5KkdU6SEaxUrtGj+Wls/feN9mcnFBoIP/jEldryJvd70X1jh+378gzn17
+	 NK1IT3iUiWlB7behHS5IujLtYqw5+Bdj6rH6r1tlRbVXFYsB7sArfoeZXL8XYSTLmw
+	 2Tl4QIABZwuuA==
 From: Bjorn Andersson <andersson@kernel.org>
-To: Shawn Guo <shengchao.guo@oss.qualcomm.com>
-Cc: Stephen Boyd <sboyd@kernel.org>,
-	Brian Masney <bmasney+clk@redhat.com>,
-	Jerome Brunet <jbrunet+clk@baylibre.com>,
+To: konrad.dybcio@oss.qualcomm.com,
+	Shujath Mohd <shujath@outlook.in>
+Cc: conor+dt@kernel.org,
+	devicetree@vger.kernel.org,
+	konradybcio@kernel.org,
+	krzk+dt@kernel.org,
 	linux-arm-msm@vger.kernel.org,
-	linux-clk@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH] clk: qcom: Sort Nord clock driver entries in Kconfig
-Date: Mon, 31 Aug 2026 12:53:50 -0500
-Message-ID: <178819882997.1411250.8262023626369697707.b4-ty@kernel.org>
+	robh@kernel.org
+Subject: Re: (subset) [PATCH] arm64: dts: qcom: sdm845-sony-xperia-tama: Fix Bluetooth UART pinctrl
+Date: Mon, 31 Aug 2026 12:53:51 -0500
+Message-ID: <178819882987.1411250.13799863323959632704.b4-ty@kernel.org>
 X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260831134717.510383-1-shengchao.guo@oss.qualcomm.com>
-References: <20260831134717.510383-1-shengchao.guo@oss.qualcomm.com>
+In-Reply-To: <PUZPR01MB51413F6FF89A8FA82A9B2755C3A02@PUZPR01MB5141.apcprd01.prod.exchangelabs.com>
+References: <7334c260-0130-453f-8169-c07a3145aa19@oss.qualcomm.com> <PUZPR01MB51413F6FF89A8FA82A9B2755C3A02@PUZPR01MB5141.apcprd01.prod.exchangelabs.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -50,17 +51,22 @@ Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 
 
-On Mon, 31 Aug 2026 21:47:17 +0800, Shawn Guo wrote:
-> The Nord clock driver entries in Kconfig were out of alphabetical order.
-> Reorder these symbols so Kconfig follows the same order as Makefile,
-> making it easier to locate and add entries consistently.
+On Mon, 24 Aug 2026 15:15:07 +0530, Shujath Mohd wrote:
+> Use the 4-pin UART6 pinctrl configuration for the WCN3990 Bluetooth
+> controller on Sony Xperia Tama devices.
 > 
+> This enables the UART hardware flow control required for reliable
+> Bluetooth communication at higher baud rates.
 > 
+> Fixes: d54331131cde ("arm64: dts: qcom: sdm845-sony-xperia-tama: Add bluetooth")
+> Fixes: 30a7f99befc6 ("arm64: dts: qcom: Add support for SONY Xperia XZ2 / XZ2C / XZ3 (Tama platform)")
+> 
+> [...]
 
 Applied, thanks!
 
-[1/1] clk: qcom: Sort Nord clock driver entries in Kconfig
-      commit: c0f912e6a2088cd8aa356a47ce9325ec9b739686
+[1/1] arm64: dts: qcom: sdm845-sony-xperia-tama: Fix Bluetooth UART pinctrl
+      commit: cd0f33393882e2554d46e8e068ab95d00593f385
 
 Best regards,
 -- 
