@@ -1,31 +1,66 @@
-Received: from smtpbg150.qq.com (smtpbg150.qq.com [18.132.163.193])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pg1-f176.google.com (mail-pg1-f176.google.com [209.85.215.176])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 176E34252A6;
-	Mon, 31 Aug 2026 15:11:20 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=18.132.163.193
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8B5B546EC76
+	for <linux-arm-msm@vger.kernel.org>; Mon, 31 Aug 2026 15:28:24 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.215.176
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788189085; cv=none; b=Pd+nacofL/LcpnXrq+zNyid4OgtM6a33lSxEJqSo7p0ZGKuKGQ2vrrSnTOrAMmMGJCqbZDqDiD9fR+yMf77fZDpVCsbqf6w+QbRfWd/K6T4hIo7MP+y09+etG+L/04nb7+/aFNwHVGqmfNLHPhCBR2kF0Yv+niAyg/k62SSaFyM=
+	t=1788190106; cv=none; b=b2sMB2rU5sFAhbAF4IifxdMBbjYYiHaw8J7os+MvbaBSvsvRoxDovFLsLPWaPMf5YIv/sttod/hM8xTO5VTEJeAh3LTmT5dl3P47UoT422uBR1gqfNFh9klflYQMVyMDj4hTqUBqP2VGu2lYh1hRsUBUopE5JwWNxI5UEW8fU4s=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788189085; c=relaxed/simple;
-	bh=+HY9roeovzLPLp9PfnmL3ix2ruSeghbpxMKPT8WC9Vs=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=V0PfVZTUa0SGQcU4/xVucM2b8/ioKqiMcGNjoTNTkwdjMTXW5KE1XRGeijJmO63AFTuype3EdEYcaNUE7O85AoFdWBz7tIRbiPyrEm0fgBRfhi7oefu+q/Md5vf93u0+ECcVYJ75SyVf2Thv9NmNfk3brgZ3gc38fKOmfG77ltU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=radxa.com; spf=pass smtp.mailfrom=radxa.com; arc=none smtp.client-ip=18.132.163.193
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=radxa.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=radxa.com
-X-QQ-mid: zesmtpip2t1788188982t03bb5d34
-X-QQ-Originating-IP: 4MRKJyemqlG+kh2C8mZXGJ6mJl4yOClYvuJoSQB9Wes=
-Received: from [192.168.30.32] ( [localhost])
-	by bizesmtp.qq.com (ESMTP) with 
-	id ; Mon, 31 Aug 2026 23:09:41 +0800 (CST)
-X-QQ-SSF: 0000000000000000000000000000000
-X-QQ-GoodBg: 0
-X-BIZMAIL-ID: 13722627836330943033
-EX-QQ-RecipientCnt: 13
-From: Xilin Wu <sophon@radxa.com>
-Date: Mon, 31 Aug 2026 23:09:32 +0800
-Subject: [PATCH 1/2] platform: arm64: Add Radxa SVC GLINK driver
+	s=arc-20240116; t=1788190106; c=relaxed/simple;
+	bh=UVaSnAntsnidTQyQIAWkdDSWDG/mfhc9FkANFMl71lU=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=dD9gf6MDIjfRS4Ak6sbEkHB9iVC+V3p0DFDqzCfpu972V6bxHc15u3lV77uJlE6fOUSIxjZGNuTHOsBYIdei2OstGPXBVa2uAXwk/TYqlm9+xrcCnyxK9FWJmZb1VerKSTdSeRy1ZzCvCSdJ9gXNZp2+i9DzPLwYAY+coQ5lOLI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=Dv+VGBAV; arc=none smtp.client-ip=209.85.215.176
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="Dv+VGBAV"
+Received: by mail-pg1-f176.google.com with SMTP id 41be03b00d2f7-cc1c9879395so2831082a12.1
+        for <linux-arm-msm@vger.kernel.org>; Mon, 31 Aug 2026 08:28:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1788190104; x=1788794904; darn=vger.kernel.org;
+        h=cc:to:message-id:content-transfer-encoding:content-type
+         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=LzXEuTigiTiPkrsvsB4lTws1Gv1eiCRXL/HMjZW3pgA=;
+        b=Dv+VGBAV+xNPvTURXvUpAquidUdVTNnjzTCKqfdp3UJJpd65cXNMzBLMld+TUnvsvl
+         3M0/jI5cJ0vlK0OvYcMcdMIhufAk84ePXu3TYpWsJznaP8cEVyf/WClCnPigPZaM5Any
+         0URwA8aZgD0LzdsRTDDZY16Za0XcuJ86s2Pcq6NjV417uBgzHnSy1OuSmZ9qa5uru/xc
+         B/Q+vXyk63e1558Jw8yUDgBGShTXpJKa0bXGhJx1zzL2Thn+AVwkePtfltOxY7D/+/g2
+         6p1j2xjRt/20Be9q2YeElAx8j5H0+HiUJ21ImopC0ZJA5WRP1EIF4cAyxhdL5XmR7JQm
+         yvpg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1788190104; x=1788794904;
+        h=cc:to:message-id:content-transfer-encoding:content-type
+         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to:content-type;
+        bh=LzXEuTigiTiPkrsvsB4lTws1Gv1eiCRXL/HMjZW3pgA=;
+        b=KoMNZjPug/6XzjYm5J6iYvcrL6cudqJ+801dNoFCR2uAW8bB5Eu++UxbUmjblTPj24
+         niRcT7GU9jkbjxtOVoyZ+UeFz+trdfaFTl8CQYPHu+zMwf8i+OPpl/i7g9GAdrUqHipG
+         va8GAEK4sTurpuzgJLiojGjprrZ8tCpsI2iCzFXSr4Q6UN/+VJuV5wYtmFRf/Rv7fQPg
+         EZqnLnBpRAIs4vz8ErECIWv2GeZEsM8SsVcGT2KSqmqteph32op67/nYdZgPAR7oD0xN
+         KTMdKMa1tUuXD0mJ7wWK+9DiTZvOIJ/w8JYWnR5uDl/l0i6JfM3WWwk/tfOJ2y9lhn1q
+         RqQQ==
+X-Gm-Message-State: AFuF++nCIX765ne4ekok79HGao6uOR+A3J5wNmqhNMdFBmef/qsrKpUP
+	RZYpif5C4fRUAhlfKrfdjrJwf8Eos3Jvvdc1laXYpG6LtN8YfY75OxcA
+X-Gm-Gg: AYBFou1kqs2FclCHJ9exPyApaYYzy58Wj4cZROOp6YuFHyE89SEW8tYE+1aFcci5CMM
+	HNyCOFRz19yLNuM8S2pvb1BUqm62mNOkFfN9oiwU1X/4iY7QY9rehuzbTshcU7FJMY/rhzP46eA
+	uQ4C70xqs+ZPRxbOaNucHyVYxcDIZhaeGJaBl/UwNjKoHKhBf47M7Es0ZdK8UDHwg8rvr/kuKfS
+	fb2XPKgzjBC3NUZflrcT86oVjyt81gyao4MxNVbrzLjWvSQfrKO6SXJZhvrB/+mSdjV3J7jy4gK
+	sg12mNNQlC+Kc13sRzxuv4UW6ScdF1cKUeZuvXf3ulEyz74QjMNje87MHr86Czg25VYmzRo9IbM
+	nSVpnA/Bp+9p0oJBk2RshFWo2PrdJkD22Vj895mVpQoOHYHg+PZUg8hg8hLEh2qpGa+RcptyAZK
+	YEQrvGuFeDR9NUqjuo8HvLAjmGC2TnwVrbIG9gs9ZUAfgVZDY/vJ4sME5xTfcksUve8ShXtx8Le
+	N285UzvM6k3OXlE1NN+aa+OpzIdwQ==
+X-Received: by 2002:a17:90b:2551:b0:37d:f983:7b5 with SMTP id 98e67ed59e1d1-396d0fe384cmr47180926a91.9.1788190103615;
+        Mon, 31 Aug 2026 08:28:23 -0700 (PDT)
+Received: from urmom.urmom ([14.170.170.155])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3990bcf7ca7sm8891a91.4.2026.08.31.08.28.20
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 31 Aug 2026 08:28:23 -0700 (PDT)
+From: Lucas Sproule <lucas.sproule.42@gmail.com>
+Date: Mon, 31 Aug 2026 22:28:08 +0700
+Subject: [PATCH v2] remoteproc: qcom_wcnss: Fix error check after
+ devm_ioremap_wc() switch
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -34,906 +69,68 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260831-radxa-svc-v1-1-7c028de6a387@radxa.com>
-References: <20260831-radxa-svc-v1-0-7c028de6a387@radxa.com>
-In-Reply-To: <20260831-radxa-svc-v1-0-7c028de6a387@radxa.com>
-To: Guenter Roeck <linux@roeck-us.net>, Jonathan Corbet <corbet@lwn.net>, 
- Shuah Khan <skhan@linuxfoundation.org>, 
- Randy Dunlap <rdunlap@infradead.org>, Hans de Goede <hansg@kernel.org>, 
- =?utf-8?q?Ilpo_J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>, 
- Bryan O'Donoghue <bryan.odonoghue@linaro.org>
-Cc: linux-hwmon@vger.kernel.org, linux-doc@vger.kernel.org, 
- linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
- platform-driver-x86@vger.kernel.org, Xilin Wu <sophon@radxa.com>
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=22911; i=sophon@radxa.com;
- h=from:subject:message-id; bh=+HY9roeovzLPLp9PfnmL3ix2ruSeghbpxMKPT8WC9Vs=;
- b=owGbwMvMwCVmdFg0fe08Iz/G02pJDFlTZxpVcn9deyTpwc6tEts3vtLls5D6Mdtu+y9VI3uf1
- xPMJmvM7ShlYRDjYpAVU2RRiGeYy16Ze+2pWKkezBxWJpAhDFycAjARlZ2MDPceCEbsX8v/ZWJk
- 13eHHLFtees+H3igkZn9y2bdTRHbv7cZGR43Ze9e8dBK8Z1A5e3EFa5ebZY5HZoTiviuSrf/mf3
- GnREA
-X-Developer-Key: i=sophon@radxa.com; a=openpgp;
- fpr=205F009D07796DD6E516752E32C31567AD9E324E
-X-QQ-SENDSIZE: 520
-Feedback-ID: zesmtpip:radxa.com:qybglogicsvrsz:qybglogicsvrsz3b-0
-X-QQ-XMAILINFO: MrfJYRspGRl/9fqNU+1JeKz0fEfYla6UwY6HXFkz/0tCjSWKELyf+0gl
-	8v5paW2/SGy2x9oxlAVLnBC/EXBUx0ljN0WdjjqKOhSxWWiuflo3QZ4a4LNE7Sh1mQ4IRyw
-	C0tM8hfpQkulcQ07vNX04jF22AqtWu4JOeFi5fMp6TqCqMMB9I8Nmwkt/GXy0q60YKLnBwx
-	xC/r72JQOBuUfucbGkrF6MtltuOfyxu/p5Rvc2OajrVZMyWJWa82evPc4OZ3aIzm1qnWRtt
-	7yTKufbct3HLXcr9z23XNRknJLUjqQXeGsnKScw4cKGyoUrJdUygy7QDC+lVGXxpkOqmzeP
-	S/Zq3uFawzyhQi2ZeBTWktUN/znYsJscARjHPOUowqdWLZ9eUMbIVpEdzEjhIJLKzLvPmBt
-	xhyx9/gVeDbWBUuAhEliKKbcU7d2AC0EMAUI3QI0NtGlqf7uZ04ZRd4Y8NVv03CEAemCtqx
-	whTKo5xHU3JB47DPzrg/c0iwwN7ree6KGnYk7lOePPcCVYOa/SyFy6DBv+V5I9QB2VMFfax
-	vVSAq3h6i+WtDWDXbgKgSnT6ly+PyhRmmLrXMir3cN9scEkRr6pkPEfew4Q3G+/kKa3MadB
-	WP2O6EFYEH8ODp6BDxozMJyMYAHpDk4Wfheht+2GdOB9r1nxxr2iqIuCTFue5QkaVLEAo2f
-	FcW1D7Pm4lOd86UiojlKtOs3yRnEGpxytpG53eqHzeHK0kIeQ+rNYDyqkGkyc4hNIfzSMOZ
-	cEoaQD9BrxsqwGrmsynHyyfb7OcDMUmmXc5auGP3KvMgoi3lBKiD/g9i8b2KAxxvJFiMpQl
-	YET3RN8TlQ26LVLk9UWM8LbZsXNbIi4+ELT+AGIOXCr/xq7PK0C2dS8Fu+l2rPvmYM9v0a6
-	xmholP4hT4TXmSpgHtnrZAN3+rJO41yEnJ3dURlqY+3Wk19cEjk6Mn4ZWdU05lS6EgISUfG
-	5Q/Z4IfpsfpRD5QBbP5qcoF0IlRonInCA01uLAH+6OFUxevyLxgYsGTZFVjyU2Lqw61jXZg
-	LMejEetYOMAAjGUOfd8UZd8zd1k64=
-X-QQ-XMRINFO: NyFYKkN4Ny6FuXrnB5Ye7Aabb3ujjtK+gg==
-X-QQ-RECHKSPAM: 0
+Message-Id: <20260831-wcnss-is-err-fix-v2-1-5520fd4c6b50@gmail.com>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXMwQ6CQAyE4VchPdMEligur0I8QB21HlbTqpAQ3
+ p0Vj98k8y/kMIVTVyxk+KrrM2WEsiC5D+kG1ks2hSocq1NT8yTJndUZZnzVmdsQJdZAbA9C+fY
+ y5HlP9ue//TM+IO9fh9Z1AzHfXE90AAAA
+X-Change-ID: 20260831-wcnss-is-err-fix-729c91ee975c
+To: Bjorn Andersson <andersson@kernel.org>, 
+ Mathieu Poirier <mathieu.poirier@linaro.org>, 
+ "Rob Herring (Arm)" <robh@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, linux-remoteproc@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, stable@vger.kernel.org, 
+ Lucas Sproule <lucas.sproule.42@gmail.com>, 
+ Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+X-Mailer: b4 0.16.0
 
-Add an rpmsg client for the RADXA_SVC_ADSP_APPS firmware service used
-on supported Radxa boards with Qualcomm SoCs.
+Commit f9b888599418 ("remoteproc: qcom_wcnss: Fix reserved region
+mapping failure") switched back from devm_ioremap_resource_wc() to
+devm_ioremap_wc(), but kept the IS_ERR() check that had been added to
+match the resource variant.
 
-Expose fan control through the standard hwmon pwm1 and pwm1_enable
-attributes. SET_PROFILE only changes the fan curve, so map its quiet and
-performance curves to automatic modes instead of platform_profile.
+devm_ioremap_wc() returns NULL on failure rather than an error pointer,
+so IS_ERR() never fires and wcnss_alloc_memory_region() returns success
+with wcnss->mem_region left NULL.  Probe completes, and every subsequent
+firmware boot then fails with a bare -EINVAL from qcom_mdt_load_no_init(),
+masking the real mapping failure.
 
-Signed-off-by: Xilin Wu <sophon@radxa.com>
+Check for NULL instead, and return -ENOMEM to match the other remoteproc
+drivers.
+
+Fixes: f9b888599418 ("remoteproc: qcom_wcnss: Fix reserved region mapping failure")
+Cc: stable@vger.kernel.org # v7.0+
+Signed-off-by: Lucas Sproule <lucas.sproule.42@gmail.com>
+Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
 ---
- Documentation/hwmon/index.rst            |   1 +
- Documentation/hwmon/radxa-svc-glink.rst  |  32 ++
- MAINTAINERS                              |   8 +
- drivers/platform/arm64/Kconfig           |  13 +
- drivers/platform/arm64/Makefile          |   1 +
- drivers/platform/arm64/radxa_svc_glink.c | 735 +++++++++++++++++++++++++++++++
- 6 files changed, 790 insertions(+)
+Changes in v2:
+- Collect Konrad's Reviewed-by.
+- Resend using b4; v1 was whitespace-damaged in transit.
+---
+ drivers/remoteproc/qcom_wcnss.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/Documentation/hwmon/index.rst b/Documentation/hwmon/index.rst
-index 9955a525436a..08a2062b4f84 100644
---- a/Documentation/hwmon/index.rst
-+++ b/Documentation/hwmon/index.rst
-@@ -234,6 +234,7 @@ Hardware Monitoring Kernel Drivers
-    pwm-fan
-    q54sj108a2
-    qnap-mcu-hwmon
-+   radxa-svc-glink
-    raspberrypi-hwmon
-    sbrmi
-    sbtsi_temp
-diff --git a/Documentation/hwmon/radxa-svc-glink.rst b/Documentation/hwmon/radxa-svc-glink.rst
-new file mode 100644
-index 000000000000..c464b130a4e4
---- /dev/null
-+++ b/Documentation/hwmon/radxa-svc-glink.rst
-@@ -0,0 +1,32 @@
-+.. SPDX-License-Identifier: GPL-2.0-only
-+
-+Kernel driver radxa-svc-glink
-+=============================
-+
-+Description
-+-----------
-+
-+The Radxa SVC GLINK driver communicates with the ``RADXA_SVC_ADSP_APPS``
-+firmware service found on supported Radxa boards with Qualcomm SoCs. The
-+firmware provides fan control.
-+
-+Fan control
-+-----------
-+
-+The fan controller provides the following attributes:
-+
-+=============== ======= ======================================================
-+``pwm1``        RW      Current fan PWM value. Writes are accepted in manual
-+                        mode and use values from 0 to 255.
-+``pwm1_enable`` RW      Fan control mode, as described below.
-+=============== ======= ======================================================
-+
-+The supported ``pwm1_enable`` values are:
-+
-+  - 0: fan at full speed
-+  - 1: manual control using ``pwm1``
-+  - 2: automatic control using the quiet curve
-+  - 3: automatic control using the performance curve
-+
-+When manual mode is selected, the driver starts with the current fan speed. If
-+the current speed cannot be determined, it starts at full speed.
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 3a19da74d00c..9e4685759194 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -22719,6 +22719,14 @@ F:	Documentation/ABI/testing/sysfs-bus-rbd
- F:	drivers/block/rbd.c
- F:	drivers/block/rbd_types.h
- 
-+RADXA SVC GLINK DRIVER
-+M:	Xilin Wu <sophon@radxa.com>
-+L:	linux-arm-msm@vger.kernel.org
-+L:	linux-hwmon@vger.kernel.org
-+S:	Maintained
-+F:	Documentation/hwmon/radxa-svc-glink.rst
-+F:	drivers/platform/arm64/radxa_svc_glink.c
-+
- RAGE128 FRAMEBUFFER DISPLAY DRIVER
- L:	linux-fbdev@vger.kernel.org
- S:	Orphan
-diff --git a/drivers/platform/arm64/Kconfig b/drivers/platform/arm64/Kconfig
-index e32e01b2a9bd..60c1e541fe89 100644
---- a/drivers/platform/arm64/Kconfig
-+++ b/drivers/platform/arm64/Kconfig
-@@ -103,4 +103,17 @@ config EC_QCOM_HAMOA
- 
- 	  This driver currently supports Hamoa/Purwa/Glymur reference devices.
- 
-+config RADXA_SVC_GLINK
-+	tristate "Radxa SVC GLINK driver"
-+	depends on ARCH_QCOM || COMPILE_TEST
-+	depends on RPMSG
-+	depends on HWMON
-+	help
-+	  Enable support for the Radxa SVC firmware service found on supported
-+	  Radxa boards using Qualcomm SoCs. The driver communicates with the
-+	  RADXA_SVC_ADSP_APPS service over rpmsg and exposes fan control through
-+	  the standard hwmon interface.
-+
-+	  Say M or Y here to include this support.
-+
- endif # ARM64_PLATFORM_DEVICES
-diff --git a/drivers/platform/arm64/Makefile b/drivers/platform/arm64/Makefile
-index 7681be4a46e9..327acb7b983c 100644
---- a/drivers/platform/arm64/Makefile
-+++ b/drivers/platform/arm64/Makefile
-@@ -10,3 +10,4 @@ obj-$(CONFIG_EC_HUAWEI_GAOKUN)	+= huawei-gaokun-ec.o
- obj-$(CONFIG_EC_LENOVO_YOGA_C630) += lenovo-yoga-c630.o
- obj-$(CONFIG_EC_LENOVO_THINKPAD_T14S) += lenovo-thinkpad-t14s.o
- obj-$(CONFIG_EC_QCOM_HAMOA) += qcom-hamoa-ec.o
-+obj-$(CONFIG_RADXA_SVC_GLINK)	+= radxa_svc_glink.o
-diff --git a/drivers/platform/arm64/radxa_svc_glink.c b/drivers/platform/arm64/radxa_svc_glink.c
-new file mode 100644
-index 000000000000..1c91bfabcd12
---- /dev/null
-+++ b/drivers/platform/arm64/radxa_svc_glink.c
-@@ -0,0 +1,735 @@
-+// SPDX-License-Identifier: GPL-2.0-only
-+/*
-+ * Radxa SVC GLINK driver.
-+ *
-+ * Copyright (c) 2026 Radxa Computer (Shenzhen) Co., Ltd.
-+ */
-+
-+#include <linux/completion.h>
-+#include <linux/errno.h>
-+#include <linux/hwmon.h>
-+#include <linux/jiffies.h>
-+#include <linux/kernel.h>
-+#include <linux/minmax.h>
-+#include <linux/module.h>
-+#include <linux/mutex.h>
-+#include <linux/rpmsg.h>
-+#include <linux/slab.h>
-+#include <linux/spinlock.h>
-+#include <linux/string.h>
-+
-+#define RADXA_SVC_MAGIC		0x58444152 /* "RADX" */
-+#define RADXA_SVC_VERSION	1
-+#define RADXA_SVC_TIMEOUT	msecs_to_jiffies(5000)
-+
-+#define RADXA_SVC_MAX_TX_PAYLOAD	64
-+#define RADXA_SVC_MAX_RX_PAYLOAD	2048
-+
-+#define RADXA_SVC_OP_GET_VERSION	0x02
-+#define RADXA_SVC_OP_SET_PROFILE	0x10
-+#define RADXA_SVC_OP_GET_PROFILE	0x11
-+#define RADXA_SVC_OP_FAN_GET_STATE	0x50
-+#define RADXA_SVC_OP_FAN_SET_CONTROL	0x51
-+#define RADXA_SVC_OP_FAN_GET_CONTROL	0x52
-+
-+#define RADXA_SVC_PROFILE_QUIET		0
-+#define RADXA_SVC_PROFILE_PERFORMANCE	1
-+
-+#define RADXA_SVC_FAN_CONTROL_FULL_SPEED	0
-+#define RADXA_SVC_FAN_CONTROL_MANUAL		1
-+#define RADXA_SVC_FAN_CONTROL_AUTO		2
-+#define RADXA_SVC_FAN_PWM_MAX			255
-+
-+#define RADXA_SVC_PWM_MODE_FULL_SPEED		0
-+#define RADXA_SVC_PWM_MODE_MANUAL		1
-+#define RADXA_SVC_PWM_MODE_AUTO_QUIET		2
-+#define RADXA_SVC_PWM_MODE_AUTO_PERFORMANCE	3
-+
-+#define RADXA_SVC_CAP_PROFILE		BIT(1)
-+#define RADXA_SVC_CAP_FANCTL		BIT(5)
-+#define RADXA_SVC_CAP_FANCTL_CTRL	BIT(6)
-+
-+#define RADXA_SVC_REQUIRED_CAPS		(RADXA_SVC_CAP_PROFILE | \
-+					 RADXA_SVC_CAP_FANCTL | \
-+					 RADXA_SVC_CAP_FANCTL_CTRL)
-+
-+struct radxa_svc_hdr {
-+	__le32 magic;
-+	__le16 version;
-+	__le16 header_size;
-+	__le32 opcode;
-+	__le32 seq;
-+	__le32 status;
-+	__le32 payload_len;
-+} __packed;
-+
-+struct radxa_svc_version_resp {
-+	__le16 major;
-+	__le16 minor;
-+	__le32 caps;
-+} __packed;
-+
-+struct radxa_svc_fan_state_resp {
-+	__le32 profile;
-+	__le32 running;
-+	__le32 emergency;
-+	__le32 cpu_valid;
-+	__le32 cpu_stale_ticks;
-+	__le32 cpu_temp_deci_c;
-+	__le32 gpu_valid;
-+	__le32 gpu_stale_ticks;
-+	__le32 gpu_temp_deci_c;
-+	__le32 current_duty_ns;
-+	__le32 target_duty_ns;
-+	__le32 pwm_channel;
-+	__le32 pwm_period_ns;
-+	__le32 loop_count;
-+	__le32 fault_count;
-+	__le32 last_status;
-+	__le32 control_mode;
-+	__le32 manual_pwm;
-+} __packed;
-+
-+struct radxa_svc_fan_control_req {
-+	__le32 control_mode;
-+	__le32 manual_pwm;
-+} __packed;
-+
-+struct radxa_svc_fan_control_resp {
-+	__le32 control_mode;
-+	__le32 manual_pwm;
-+} __packed;
-+
-+struct radxa_svc_glink {
-+	struct device *dev;
-+	struct rpmsg_device *rpdev;
-+	struct device *hwmon_dev;
-+
-+	struct mutex xfer_lock; /* serializes request/response transactions */
-+	struct mutex fan_lock; /* serializes multi-request fan configuration */
-+	spinlock_t rsp_lock;
-+	struct completion rsp;
-+	bool pending;
-+	bool shutting_down;
-+	u32 pending_seq;
-+	u32 seq;
-+
-+	u32 rsp_opcode;
-+	int rsp_status;
-+	size_t rsp_len;
-+	u8 rsp_payload[RADXA_SVC_MAX_RX_PAYLOAD];
-+	u32 caps;
-+};
-+
-+static int radxa_svc_request(struct radxa_svc_glink *svc, u32 opcode,
-+			     const void *req_payload, size_t req_len,
-+			     void *rsp_payload, size_t *rsp_len);
-+
-+static int radxa_svc_get_version(struct radxa_svc_glink *svc,
-+				 struct radxa_svc_version_resp *resp)
-+{
-+	size_t len = sizeof(*resp);
-+	int ret;
-+
-+	ret = radxa_svc_request(svc, RADXA_SVC_OP_GET_VERSION, NULL, 0,
-+				resp, &len);
-+	if (ret)
-+		return ret;
-+
-+	if (len < sizeof(*resp))
-+		return -EIO;
-+
-+	return 0;
-+}
-+
-+static int radxa_svc_check_version(struct device *dev,
-+				   const struct radxa_svc_version_resp *resp,
-+				   u32 *caps)
-+{
-+	u32 missing_caps;
-+	u16 major;
-+
-+	major = le16_to_cpu(resp->major);
-+	*caps = le32_to_cpu(resp->caps);
-+
-+	if (major != RADXA_SVC_VERSION)
-+		return dev_err_probe(dev, -EPROTONOSUPPORT,
-+				     "unsupported service major version %u\n",
-+				     major);
-+
-+	missing_caps = RADXA_SVC_REQUIRED_CAPS & ~*caps;
-+	if (missing_caps)
-+		return dev_err_probe(dev, -ENODEV,
-+				     "service missing required caps 0x%08x\n",
-+				     missing_caps);
-+
-+	return 0;
-+}
-+
-+static int radxa_svc_get_profile(struct radxa_svc_glink *svc, u32 *profile)
-+{
-+	__le32 resp;
-+	size_t len = sizeof(resp);
-+	int ret;
-+
-+	ret = radxa_svc_request(svc, RADXA_SVC_OP_GET_PROFILE, NULL, 0,
-+				&resp, &len);
-+	if (ret)
-+		return ret;
-+
-+	if (len < sizeof(resp))
-+		return -EIO;
-+
-+	*profile = le32_to_cpu(resp);
-+
-+	return 0;
-+}
-+
-+static int radxa_svc_set_profile(struct radxa_svc_glink *svc, u32 profile)
-+{
-+	__le32 payload;
-+
-+	switch (profile) {
-+	case RADXA_SVC_PROFILE_QUIET:
-+	case RADXA_SVC_PROFILE_PERFORMANCE:
-+		break;
-+	default:
-+		return -EINVAL;
-+	}
-+
-+	payload = cpu_to_le32(profile);
-+
-+	return radxa_svc_request(svc, RADXA_SVC_OP_SET_PROFILE, &payload,
-+				 sizeof(payload), NULL, NULL);
-+}
-+
-+static int radxa_svc_fan_get_state(struct radxa_svc_glink *svc,
-+				   struct radxa_svc_fan_state_resp *resp)
-+{
-+	size_t len = sizeof(*resp);
-+	size_t base_len = offsetof(struct radxa_svc_fan_state_resp,
-+				   control_mode);
-+	int ret;
-+
-+	ret = radxa_svc_request(svc, RADXA_SVC_OP_FAN_GET_STATE, NULL, 0,
-+				resp, &len);
-+	if (ret)
-+		return ret;
-+
-+	if (len < base_len)
-+		return -EIO;
-+
-+	return 0;
-+}
-+
-+static int radxa_svc_fan_get_control(struct radxa_svc_glink *svc,
-+				     struct radxa_svc_fan_control_resp *resp)
-+{
-+	size_t len = sizeof(*resp);
-+	u32 control_mode;
-+	u32 manual_pwm;
-+	int ret;
-+
-+	ret = radxa_svc_request(svc, RADXA_SVC_OP_FAN_GET_CONTROL, NULL, 0,
-+				resp, &len);
-+	if (ret)
-+		return ret;
-+
-+	if (len < sizeof(*resp))
-+		return -EIO;
-+
-+	control_mode = le32_to_cpu(resp->control_mode);
-+	manual_pwm = le32_to_cpu(resp->manual_pwm);
-+	if (control_mode > RADXA_SVC_FAN_CONTROL_AUTO ||
-+	    manual_pwm > RADXA_SVC_FAN_PWM_MAX)
-+		return -EIO;
-+
-+	return 0;
-+}
-+
-+static int radxa_svc_fan_set_control(struct radxa_svc_glink *svc,
-+				     u32 control_mode, u32 manual_pwm)
-+{
-+	struct radxa_svc_fan_control_req req;
-+
-+	if (control_mode > RADXA_SVC_FAN_CONTROL_AUTO ||
-+	    manual_pwm > RADXA_SVC_FAN_PWM_MAX)
-+		return -EINVAL;
-+
-+	req.control_mode = cpu_to_le32(control_mode);
-+	req.manual_pwm = cpu_to_le32(manual_pwm);
-+
-+	return radxa_svc_request(svc, RADXA_SVC_OP_FAN_SET_CONTROL, &req,
-+				 sizeof(req), NULL, NULL);
-+}
-+
-+static int radxa_svc_fan_duty_to_pwm(u32 period_ns, u32 duty_ns, u32 *value)
-+{
-+	u64 pwm;
-+
-+	if (!period_ns)
-+		return -ENODATA;
-+
-+	if (duty_ns > period_ns)
-+		return -EPROTO;
-+
-+	pwm = (u64)(period_ns - duty_ns) * RADXA_SVC_FAN_PWM_MAX;
-+	*value = min_t(u64, DIV_ROUND_CLOSEST_ULL(pwm, period_ns),
-+		       RADXA_SVC_FAN_PWM_MAX);
-+
-+	return 0;
-+}
-+
-+static int radxa_svc_request(struct radxa_svc_glink *svc, u32 opcode,
-+			     const void *req_payload, size_t req_len,
-+			     void *rsp_payload, size_t *rsp_len)
-+{
-+	struct radxa_svc_hdr *hdr;
-+	unsigned long flags;
-+	size_t tx_len;
-+	u32 seq;
-+	u8 *tx_buf;
-+	int ret;
-+
-+	if (req_len > RADXA_SVC_MAX_TX_PAYLOAD)
-+		return -EMSGSIZE;
-+
-+	tx_len = sizeof(*hdr) + req_len;
-+	tx_buf = kzalloc(tx_len, GFP_KERNEL);
-+	if (!tx_buf)
+diff --git a/drivers/remoteproc/qcom_wcnss.c b/drivers/remoteproc/qcom_wcnss.c
+index c856a92af43c..90747af237f7 100644
+--- a/drivers/remoteproc/qcom_wcnss.c
++++ b/drivers/remoteproc/qcom_wcnss.c
+@@ -542,9 +542,9 @@ static int wcnss_alloc_memory_region(struct qcom_wcnss *wcnss)
+ 	wcnss->mem_phys = wcnss->mem_reloc = res.start;
+ 	wcnss->mem_size = resource_size(&res);
+ 	wcnss->mem_region = devm_ioremap_wc(wcnss->dev, wcnss->mem_phys, wcnss->mem_size);
+-	if (IS_ERR(wcnss->mem_region)) {
++	if (!wcnss->mem_region) {
+ 		dev_err(wcnss->dev, "unable to map memory region: %pR\n", &res);
+-		return PTR_ERR(wcnss->mem_region);
 +		return -ENOMEM;
-+
-+	mutex_lock(&svc->xfer_lock);
-+
-+	if (!svc->rpdev || !svc->rpdev->ept) {
-+		ret = -ENODEV;
-+		goto out_unlock;
-+	}
-+
-+	seq = ++svc->seq;
-+	if (!seq)
-+		seq = ++svc->seq;
-+
-+	hdr = (struct radxa_svc_hdr *)tx_buf;
-+	hdr->magic = cpu_to_le32(RADXA_SVC_MAGIC);
-+	hdr->version = cpu_to_le16(RADXA_SVC_VERSION);
-+	hdr->header_size = cpu_to_le16(sizeof(*hdr));
-+	hdr->opcode = cpu_to_le32(opcode);
-+	hdr->seq = cpu_to_le32(seq);
-+	hdr->status = cpu_to_le32(0);
-+	hdr->payload_len = cpu_to_le32(req_len);
-+
-+	if (req_len)
-+		memcpy(tx_buf + sizeof(*hdr), req_payload, req_len);
-+
-+	reinit_completion(&svc->rsp);
-+
-+	spin_lock_irqsave(&svc->rsp_lock, flags);
-+	if (svc->shutting_down) {
-+		spin_unlock_irqrestore(&svc->rsp_lock, flags);
-+		ret = -ENODEV;
-+		goto out_unlock;
-+	}
-+
-+	svc->pending = true;
-+	svc->pending_seq = seq;
-+	svc->rsp_opcode = 0;
-+	svc->rsp_status = 0;
-+	svc->rsp_len = 0;
-+	spin_unlock_irqrestore(&svc->rsp_lock, flags);
-+
-+	ret = rpmsg_send(svc->rpdev->ept, tx_buf, tx_len);
-+	if (ret) {
-+		spin_lock_irqsave(&svc->rsp_lock, flags);
-+		svc->pending = false;
-+		spin_unlock_irqrestore(&svc->rsp_lock, flags);
-+		goto out_unlock;
-+	}
-+
-+	if (!wait_for_completion_timeout(&svc->rsp, RADXA_SVC_TIMEOUT)) {
-+		spin_lock_irqsave(&svc->rsp_lock, flags);
-+		svc->pending = false;
-+		spin_unlock_irqrestore(&svc->rsp_lock, flags);
-+		ret = -ETIMEDOUT;
-+		goto out_unlock;
-+	}
-+
-+	spin_lock_irqsave(&svc->rsp_lock, flags);
-+	if (svc->shutting_down) {
-+		ret = -ENODEV;
-+	} else if (svc->rsp_opcode != opcode) {
-+		ret = -EIO;
-+	} else {
-+		ret = svc->rsp_status;
-+		if (rsp_payload && rsp_len) {
-+			size_t copy_len = min(*rsp_len, svc->rsp_len);
-+
-+			memcpy(rsp_payload, svc->rsp_payload, copy_len);
-+			if (*rsp_len < svc->rsp_len && !ret)
-+				ret = -EMSGSIZE;
-+			*rsp_len = svc->rsp_len;
-+		}
-+	}
-+	spin_unlock_irqrestore(&svc->rsp_lock, flags);
-+
-+out_unlock:
-+	mutex_unlock(&svc->xfer_lock);
-+	kfree(tx_buf);
-+
-+	return ret;
-+}
-+
-+static int radxa_svc_rpmsg_callback(struct rpmsg_device *rpdev, void *data,
-+				    int len, void *priv, u32 addr)
-+{
-+	struct radxa_svc_glink *svc = dev_get_drvdata(&rpdev->dev);
-+	const struct radxa_svc_hdr *hdr = data;
-+	unsigned long flags;
-+	size_t header_size;
-+	size_t payload_len;
-+	bool do_complete = false;
-+	u32 seq;
-+
-+	if (len < sizeof(*hdr))
-+		goto bad_msg;
-+
-+	if (le32_to_cpu(hdr->magic) != RADXA_SVC_MAGIC ||
-+	    le16_to_cpu(hdr->version) != RADXA_SVC_VERSION)
-+		goto bad_msg;
-+
-+	header_size = le16_to_cpu(hdr->header_size);
-+	if (header_size < sizeof(*hdr) || header_size > len)
-+		goto bad_msg;
-+
-+	payload_len = le32_to_cpu(hdr->payload_len);
-+	if (payload_len > len - header_size ||
-+	    payload_len > RADXA_SVC_MAX_RX_PAYLOAD)
-+		goto bad_msg;
-+
-+	seq = le32_to_cpu(hdr->seq);
-+
-+	spin_lock_irqsave(&svc->rsp_lock, flags);
-+	if (svc->pending && seq == svc->pending_seq) {
-+		svc->rsp_opcode = le32_to_cpu(hdr->opcode);
-+		svc->rsp_status = (s32)le32_to_cpu(hdr->status);
-+		svc->rsp_len = payload_len;
-+		memcpy(svc->rsp_payload, data + header_size, payload_len);
-+		svc->pending = false;
-+		do_complete = true;
-+	}
-+	spin_unlock_irqrestore(&svc->rsp_lock, flags);
-+
-+	if (do_complete)
-+		complete(&svc->rsp);
-+
-+	return 0;
-+
-+bad_msg:
-+	return 0;
-+}
-+
-+static int radxa_svc_fan_get_pwm_mode(struct radxa_svc_glink *svc,
-+				      long *mode)
-+{
-+	struct radxa_svc_fan_control_resp control = {};
-+	u32 control_mode;
-+	u32 profile;
-+	int ret;
-+
-+	ret = radxa_svc_fan_get_control(svc, &control);
-+	if (ret)
-+		return ret;
-+
-+	control_mode = le32_to_cpu(control.control_mode);
-+
-+	switch (control_mode) {
-+	case RADXA_SVC_FAN_CONTROL_FULL_SPEED:
-+		*mode = RADXA_SVC_PWM_MODE_FULL_SPEED;
-+		return 0;
-+	case RADXA_SVC_FAN_CONTROL_MANUAL:
-+		*mode = RADXA_SVC_PWM_MODE_MANUAL;
-+		return 0;
-+	case RADXA_SVC_FAN_CONTROL_AUTO:
-+		break;
-+	default:
-+		return -EIO;
-+	}
-+
-+	ret = radxa_svc_get_profile(svc, &profile);
-+	if (ret)
-+		return ret;
-+
-+	switch (profile) {
-+	case RADXA_SVC_PROFILE_QUIET:
-+		*mode = RADXA_SVC_PWM_MODE_AUTO_QUIET;
-+		return 0;
-+	case RADXA_SVC_PROFILE_PERFORMANCE:
-+		*mode = RADXA_SVC_PWM_MODE_AUTO_PERFORMANCE;
-+		return 0;
-+	default:
-+		return -EIO;
-+	}
-+}
-+
-+static int radxa_svc_fan_set_auto_mode(struct radxa_svc_glink *svc,
-+				       u32 profile)
-+{
-+	struct radxa_svc_fan_control_resp control = {};
-+	int ret;
-+
-+	ret = radxa_svc_fan_get_control(svc, &control);
-+	if (ret)
-+		return ret;
-+
-+	ret = radxa_svc_set_profile(svc, profile);
-+	if (ret)
-+		return ret;
-+
-+	return radxa_svc_fan_set_control(svc, RADXA_SVC_FAN_CONTROL_AUTO,
-+					 le32_to_cpu(control.manual_pwm));
-+}
-+
-+static int radxa_svc_fan_set_pwm_mode(struct radxa_svc_glink *svc, long mode)
-+{
-+	struct radxa_svc_fan_state_resp state = {};
-+	u32 duty_ns;
-+	u32 manual_pwm;
-+	u32 period_ns;
-+	int ret;
-+
-+	switch (mode) {
-+	case RADXA_SVC_PWM_MODE_FULL_SPEED:
-+		return radxa_svc_fan_set_control(svc,
-+						 RADXA_SVC_FAN_CONTROL_FULL_SPEED,
-+						 RADXA_SVC_FAN_PWM_MAX);
-+	case RADXA_SVC_PWM_MODE_MANUAL:
-+		ret = radxa_svc_fan_get_state(svc, &state);
-+		if (ret)
-+			return ret;
-+
-+		period_ns = le32_to_cpu(state.pwm_period_ns);
-+		duty_ns = le32_to_cpu(state.current_duty_ns);
-+		if (!period_ns) {
-+			manual_pwm = RADXA_SVC_FAN_PWM_MAX;
-+		} else {
-+			ret = radxa_svc_fan_duty_to_pwm(period_ns, duty_ns,
-+							&manual_pwm);
-+			if (ret)
-+				return ret;
-+		}
-+
-+		return radxa_svc_fan_set_control(svc,
-+						 RADXA_SVC_FAN_CONTROL_MANUAL,
-+						 manual_pwm);
-+	case RADXA_SVC_PWM_MODE_AUTO_QUIET:
-+		return radxa_svc_fan_set_auto_mode(svc,
-+						RADXA_SVC_PROFILE_QUIET);
-+	case RADXA_SVC_PWM_MODE_AUTO_PERFORMANCE:
-+		return radxa_svc_fan_set_auto_mode(svc,
-+						RADXA_SVC_PROFILE_PERFORMANCE);
-+	default:
-+		return -EINVAL;
-+	}
-+}
-+
-+static umode_t radxa_svc_hwmon_is_visible(const void *data,
-+					  enum hwmon_sensor_types type,
-+					  u32 attr, int channel)
-+{
-+	if (type != hwmon_pwm || channel)
-+		return 0;
-+
-+	switch (attr) {
-+	case hwmon_pwm_input:
-+	case hwmon_pwm_enable:
-+		return 0644;
-+	default:
-+		return 0;
-+	}
-+}
-+
-+static int radxa_svc_hwmon_read(struct device *dev,
-+				enum hwmon_sensor_types type, u32 attr,
-+				int channel, long *val)
-+{
-+	struct radxa_svc_glink *svc = dev_get_drvdata(dev);
-+	struct radxa_svc_fan_state_resp state = {};
-+	u32 duty_ns;
-+	u32 period_ns;
-+	u32 pwm;
-+	int ret;
-+
-+	if (type != hwmon_pwm || channel)
-+		return -EOPNOTSUPP;
-+
-+	switch (attr) {
-+	case hwmon_pwm_input:
-+		ret = radxa_svc_fan_get_state(svc, &state);
-+		if (ret)
-+			return ret;
-+
-+		period_ns = le32_to_cpu(state.pwm_period_ns);
-+		duty_ns = le32_to_cpu(state.current_duty_ns);
-+		ret = radxa_svc_fan_duty_to_pwm(period_ns, duty_ns, &pwm);
-+		if (ret)
-+			return ret;
-+
-+		*val = pwm;
-+		return 0;
-+	case hwmon_pwm_enable:
-+		mutex_lock(&svc->fan_lock);
-+		ret = radxa_svc_fan_get_pwm_mode(svc, val);
-+		mutex_unlock(&svc->fan_lock);
-+
-+		return ret;
-+	default:
-+		return -EOPNOTSUPP;
-+	}
-+}
-+
-+static int radxa_svc_hwmon_write(struct device *dev,
-+				 enum hwmon_sensor_types type, u32 attr,
-+				 int channel, long val)
-+{
-+	struct radxa_svc_glink *svc = dev_get_drvdata(dev);
-+	struct radxa_svc_fan_control_resp control = {};
-+	int ret;
-+
-+	if (type != hwmon_pwm || channel)
-+		return -EOPNOTSUPP;
-+
-+	mutex_lock(&svc->fan_lock);
-+
-+	switch (attr) {
-+	case hwmon_pwm_input:
-+		if (val < 0 || val > RADXA_SVC_FAN_PWM_MAX) {
-+			ret = -EINVAL;
-+			break;
-+		}
-+
-+		ret = radxa_svc_fan_get_control(svc, &control);
-+		if (ret)
-+			break;
-+
-+		if (le32_to_cpu(control.control_mode) !=
-+		    RADXA_SVC_FAN_CONTROL_MANUAL) {
-+			ret = -EINVAL;
-+			break;
-+		}
-+
-+		ret = radxa_svc_fan_set_control(svc,
-+						RADXA_SVC_FAN_CONTROL_MANUAL,
-+						val);
-+		break;
-+	case hwmon_pwm_enable:
-+		ret = radxa_svc_fan_set_pwm_mode(svc, val);
-+		break;
-+	default:
-+		ret = -EOPNOTSUPP;
-+		break;
-+	}
-+
-+	mutex_unlock(&svc->fan_lock);
-+
-+	return ret;
-+}
-+
-+static const struct hwmon_ops radxa_svc_hwmon_ops = {
-+	.is_visible = radxa_svc_hwmon_is_visible,
-+	.read = radxa_svc_hwmon_read,
-+	.write = radxa_svc_hwmon_write,
-+};
-+
-+static const struct hwmon_channel_info * const radxa_svc_hwmon_info[] = {
-+	HWMON_CHANNEL_INFO(pwm, HWMON_PWM_INPUT | HWMON_PWM_ENABLE),
-+	NULL
-+};
-+
-+static const struct hwmon_chip_info radxa_svc_hwmon_chip_info = {
-+	.ops = &radxa_svc_hwmon_ops,
-+	.info = radxa_svc_hwmon_info,
-+};
-+
-+static int radxa_svc_hwmon_init(struct radxa_svc_glink *svc)
-+{
-+	svc->hwmon_dev = devm_hwmon_device_register_with_info(svc->dev,
-+							      "radxa_svc_glink",
-+							      svc,
-+							      &radxa_svc_hwmon_chip_info,
-+							      NULL);
-+
-+	return PTR_ERR_OR_ZERO(svc->hwmon_dev);
-+}
-+
-+static int radxa_svc_rpmsg_probe(struct rpmsg_device *rpdev)
-+{
-+	struct radxa_svc_version_resp version = {};
-+	struct radxa_svc_glink *svc;
-+	int ret;
-+
-+	svc = devm_kzalloc(&rpdev->dev, sizeof(*svc), GFP_KERNEL);
-+	if (!svc)
-+		return -ENOMEM;
-+
-+	svc->dev = &rpdev->dev;
-+	svc->rpdev = rpdev;
-+	mutex_init(&svc->xfer_lock);
-+	mutex_init(&svc->fan_lock);
-+	spin_lock_init(&svc->rsp_lock);
-+	init_completion(&svc->rsp);
-+
-+	dev_set_drvdata(&rpdev->dev, svc);
-+
-+	ret = radxa_svc_get_version(svc, &version);
-+	if (ret)
-+		return dev_err_probe(&rpdev->dev, ret,
-+				     "failed to read service version\n");
-+
-+	ret = radxa_svc_check_version(&rpdev->dev, &version, &svc->caps);
-+	if (ret)
-+		return ret;
-+
-+	ret = radxa_svc_hwmon_init(svc);
-+	if (ret)
-+		return dev_err_probe(&rpdev->dev, ret,
-+				     "failed to register hwmon\n");
-+
-+	return 0;
-+}
-+
-+static void radxa_svc_rpmsg_remove(struct rpmsg_device *rpdev)
-+{
-+	struct radxa_svc_glink *svc = dev_get_drvdata(&rpdev->dev);
-+	unsigned long flags;
-+
-+	spin_lock_irqsave(&svc->rsp_lock, flags);
-+	svc->shutting_down = true;
-+	svc->pending = false;
-+	spin_unlock_irqrestore(&svc->rsp_lock, flags);
-+	complete_all(&svc->rsp);
-+
-+	mutex_lock(&svc->xfer_lock);
-+	svc->rpdev = NULL;
-+	mutex_unlock(&svc->xfer_lock);
-+}
-+
-+static const struct rpmsg_device_id radxa_svc_rpmsg_id_match[] = {
-+	{ "RADXA_SVC_ADSP_APPS" },
-+	{}
-+};
-+MODULE_DEVICE_TABLE(rpmsg, radxa_svc_rpmsg_id_match);
-+
-+static struct rpmsg_driver radxa_svc_rpmsg_driver = {
-+	.probe = radxa_svc_rpmsg_probe,
-+	.remove = radxa_svc_rpmsg_remove,
-+	.callback = radxa_svc_rpmsg_callback,
-+	.id_table = radxa_svc_rpmsg_id_match,
-+	.drv = {
-+		.name = "radxa_svc_glink",
-+	},
-+};
-+module_rpmsg_driver(radxa_svc_rpmsg_driver);
-+
-+MODULE_AUTHOR("Xilin Wu <sophon@radxa.com>");
-+MODULE_DESCRIPTION("Radxa SVC GLINK driver");
-+MODULE_LICENSE("GPL");
+ 	}
+ 
+ 	return 0;
 
--- 
-2.55.0
+---
+base-commit: 73e3f0710014fe6d4ed98cfc02292f6121db7558
+change-id: 20260831-wcnss-is-err-fix-729c91ee975c
+
+Best regards,
+--  
+Lucas Sproule <lucas.sproule.42@gmail.com>
 
