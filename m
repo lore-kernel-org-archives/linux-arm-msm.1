@@ -1,174 +1,172 @@
-Received: from relay.hostedemail.com (smtprelay0013.hostedemail.com [216.40.44.13])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 28A4846EC90;
-	Mon, 31 Aug 2026 17:23:50 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=216.40.44.13
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0AE4F470451
+	for <linux-arm-msm@vger.kernel.org>; Mon, 31 Aug 2026 17:24:56 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788197033; cv=none; b=WdnB/nqcaBX5Ieg7UikqxarUBqYju2gfktXZDDEX5WhgttXOZP17ULinSVgIr8LTb+z8f84S6z0sx+F6dkWJtAmy1toNJPpXt08bzkeRCXNFdpaCX3/0Rq260/tzXVFeFkLaNKsU4O/WOvymStRkm199Fr0H8l+O5WhHc3YnY/w=
+	t=1788197098; cv=none; b=FkEOcacmrOwq81mS3+lmA55UIpfVXpLIzd0iYbiyuDz4uiJr8HM1AMcrNTzXLdkN+IcLfhbTb7LMy+yL14HMHqUJasR/dyE8JiU2R9o6fKpykTKQ4oLyJosIbhCCfFjDbPL4nTU6Y32HTlbweRR2RfLpYqXnJj4MbqX0HhxJ4Gg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788197033; c=relaxed/simple;
-	bh=SofsqkZn9Sfflh3ZuGu0KB4bjMJ/qEOKFsuU4lZlqTQ=;
-	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=B7rI5XMV+Lc8jdFuEilvUch2sjjGa6YTtTC62mc5DdT7qESOpOwqhx7Kz5/ECPgIk1A8v2hYHI9tIqXy4KZATy4jFVoVQ5KXma3/fLJdaOLiYRqKvrPiSND/UgimTNAtMCWDSQdHoOi8qI39rVddyAsP1Hjl2l2P263ShATJt40=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=goodmis.org; spf=pass smtp.mailfrom=goodmis.org; dkim=pass (1024-bit key) header.d=goodmis.org header.i=@goodmis.org header.b=ijHpdeEs; arc=none smtp.client-ip=216.40.44.13
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=goodmis.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=goodmis.org
+	s=arc-20240116; t=1788197098; c=relaxed/simple;
+	bh=HbixYzEXx1PRPxmVitJxv67tGbiTm1VQWyjni/4bsqs=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=IN0hAVvnMWguSaCaVp+Wm2lt86As92M6De+hP7CVwzdh11jdumt82DBn3f3l/g84zjzJa+Lj3WZZgRShvI4fowL6jFf8Fw4ETZVXviIER0Osbv26KTceHqbmwQQTBGCPaPLMZ0WDBwx6KRwUSQPdv/hcVmgeCo9A13xf6atZBl4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=O4yEu5ru; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=ctXCG1MV; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=goodmis.org header.i=@goodmis.org header.b="ijHpdeEs"
-Received: from omf04.hostedemail.com (lb01a-stub [10.200.18.249])
-	by unirelay05.hostedemail.com (Postfix) with ESMTP id 3D879401E0;
-	Mon, 31 Aug 2026 17:23:43 +0000 (UTC)
-Received: from [HIDDEN] (Authenticated sender: rostedt@goodmis.org) by omf04.hostedemail.com (Postfix) with ESMTPA id A8F3B2002B;
-	Mon, 31 Aug 2026 17:23:40 +0000 (UTC)
-Date: Mon, 31 Aug 2026 13:24:37 -0400
-From: Steven Rostedt <rostedt@goodmis.org>
-To: Praveen Talari <praveen.talari@oss.qualcomm.com>
-Cc: konrad.dybcio@oss.qualcomm.com, Masami Hiramatsu <mhiramat@kernel.org>,
- Mathieu Desnoyers <mathieu.desnoyers@efficios.com>, Vinod Koul
- <vkoul@kernel.org>, Frank Li <Frank.Li@kernel.org>,
- chandana.chiluveru@oss.qualcomm.com, mukesh.savaliya@oss.qualcomm.com,
- linux-kernel@vger.kernel.org, linux-trace-kernel@vger.kernel.org,
- linux-arm-msm@vger.kernel.org, dmaengine@vger.kernel.org
-Subject: Re: [PATCH 1/3] dmaengine: qcom: gpi: trace: Add trace events
- header for Qualcomm GPI DMA
-Message-ID: <20260831132437.2477e920@gandalf.local.home>
-In-Reply-To: <20260831-add-trace-support-gpio-v1-1-7b0fd0d0ddb3@oss.qualcomm.com>
-References: <20260831-add-trace-support-gpio-v1-0-7b0fd0d0ddb3@oss.qualcomm.com>
-	<20260831-add-trace-support-gpio-v1-1-7b0fd0d0ddb3@oss.qualcomm.com>
-X-Mailer: Claws Mail 3.20.0git84 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="O4yEu5ru";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="ctXCG1MV"
+Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67VFrYYA3891423
+	for <linux-arm-msm@vger.kernel.org>; Mon, 31 Aug 2026 17:24:56 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-type:date:from:in-reply-to:message-id:mime-version
+	:references:subject:to; s=qcppdkim1; bh=Za4Py3RVGu3jGoQM9ED6Pifq
+	Ex4GFg0us87MrAwz0og=; b=O4yEu5ruP2EVSNm6/DOFH8w/GnKC+KLPevcNYcSS
+	J8PL6czTAXsPl78YWYt+oK84dN1txJsqmryED0c+LCCl8sQpRHB58aeUxBquqfVM
+	lI5XVS6WK84qFkmvUDN+aXuRxZFEkXYwRy0gFHxX12Pq1y9kjK/tnVHTc1Dr264+
+	aTdUfAr7HX+VsvGlbPQ4vnFWSX3LDdVxyqRJVyopcefs1qUDu2ckuHo6XmlaOiQn
+	roWWe262VX0RF34vcYXDiCTWuLykmYkI2+WMFr/Ybfdn7AZGn4tpnyiKv4X6U77N
+	+ElXhpKtrwU28YWSjUuvp0wl1+7736WLqvxmZk2aXsr7Mg==
+Received: from mail-pj1-f72.google.com (mail-pj1-f72.google.com [209.85.216.72])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gd6yat4rp-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Mon, 31 Aug 2026 17:24:55 +0000 (GMT)
+Received: by mail-pj1-f72.google.com with SMTP id 98e67ed59e1d1-398e1f7d1a5so2029705a91.0
+        for <linux-arm-msm@vger.kernel.org>; Mon, 31 Aug 2026 10:24:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1788197095; x=1788801895; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=Za4Py3RVGu3jGoQM9ED6PifqEx4GFg0us87MrAwz0og=;
+        b=ctXCG1MV+xhDbEZl3AexSxHQG0wZ7AObti9vrDDkwcAzhKw3Sh4VehfnAEStcj9vLa
+         C3Wz/k6q0AcwA4PvBsxGjDVr3AYT4HkpdFEcpMirzlVfmxNRTJHdV2eyNnaUSbl9FMH1
+         +hWPcb6fy5lOAXnKz1/CeX5q3gvdPtSWFYmwXSJktONX9G05NUlg8HFZQ/ylv1h9KtOH
+         +If7dzr8LAw69qg+k4r6cWTZleyX3oh/eNwFM21IrYM87/u+CylR8Di9G0A4qTt+ORX0
+         NiwqKhLhLEiE5xjCWWoTDZnnI9jMBjNqePJClKSZ1suLHyLveqvGCVinaKc2HpzeHVDP
+         Rdkw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1788197095; x=1788801895;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=Za4Py3RVGu3jGoQM9ED6PifqEx4GFg0us87MrAwz0og=;
+        b=SAa13PijZxugnl/GDPXcE13xBBOdPXZUqB/SOQtWZPxqPFtkUH934JxLYKALJfR4Kf
+         DiQQuVkXij9F0uSIxYZ7QUdPXsO0ENcCXx3QDD1rrXUjObfHvHCtDJMZddFhCz73NHFk
+         U1xrsN4VgnMW5gkzHkni0BLUnc3nx6SW6M26CnAuOkSB8VzmxisK0hO0zWrnauTZ3L4a
+         035pd0TwtF8SHuA6qDWQyuMXHLO7wk73G4a+zCSuhuogsnzpGqPPzbTDrMFEvoWDNGpU
+         IHHWaFpA98dpjxZHcWcsVb8scyD7XzUhnlYFDBngGbxJNrGTBvj+lcjt4Z/U+jaDZyRR
+         J+lA==
+X-Forwarded-Encrypted: i=1; AKwUvBy0vMY3qPWJPc2AG2CWuPYa7lI/TLXfqW3prt8ZoFu0MUIf+kTFGinzkC3UEKwsgueBP/AU215f/3LWm6DO@vger.kernel.org
+X-Gm-Message-State: AFuF++mQ+tYlWFzRuzuCeOwPz0f9KSklulmaHETLDQlqIkZkEAxx7AEN
+	YzbuY3mrLHfnA+qIqcOZH9dvK2EBiOnA63DdF7r3zMxTjgQzcjA7mKdM3FB3mlrQPv8rVoPKs7p
+	Kx/O7L4Keji797wFtEj24gu1cVbet5DSgtwpyfioilT9svc+WdpC1HvDP++1x02Sk04bG1kK0U4
+	gK
+X-Gm-Gg: AYBFou0DmXvfKcEyUnBV6kJR475CQhAiwABafuNQtTCBMLlIe/7MekK14ASLgfCBEl0
+	nLlDmEObXVpIUE+8IffqEcGJ23ZhdeHyJlUTEmRe9m5o1//iwfwmtqgTCy03rAFMy9kwrxYeqaU
+	R8lfoMeStMAYIm/VNJhmFp59l0aa7HZ2f6n3Xyrf9UuBfvQt5JU17Rgl1GAnSDYOqiArvyqm+X1
+	sMEBU+SQgwWj+UbaGSmjdFVeItJWG4lRToBqgO6BpwNPwmm664lHDigowklyVHjHnn5lfoYhiYi
+	wflIsAvXV4WxQ6xaBMaRNB29mopWJINZckthlf9LbBvYRvbsv3BK6vHfeq0ltDWrEgYD8V/37vk
+	ygEfTEvdjFKRDBJpPKyjZz8yNukk=
+X-Received: by 2002:a17:90b:2b4b:b0:398:9beb:5c18 with SMTP id 98e67ed59e1d1-3989beb635dmr29307803a91.19.1788197094565;
+        Mon, 31 Aug 2026 10:24:54 -0700 (PDT)
+X-Received: by 2002:a17:90b:2b4b:b0:398:9beb:5c18 with SMTP id 98e67ed59e1d1-3989beb635dmr29307734a91.19.1788197093957;
+        Mon, 31 Aug 2026 10:24:53 -0700 (PDT)
+Received: from hu-mojha-hyd.qualcomm.com ([202.46.23.25])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3286f9e3cf8sm34060325eec.24.2026.08.31.10.24.50
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 31 Aug 2026 10:24:53 -0700 (PDT)
+Date: Mon, 31 Aug 2026 22:54:47 +0530
+From: Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>
+To: Stephan Gerhold <stephan.gerhold@linaro.org>
+Cc: Bjorn Andersson <andersson@kernel.org>,
+        Mathieu Poirier <mathieu.poirier@linaro.org>,
+        Jingyi Wang <jingyi.wang@oss.qualcomm.com>,
+        Gokul Krishna Krishnakumar <gokul.krishnakumar@oss.qualcomm.com>,
+        linux-arm-msm@vger.kernel.org, linux-remoteproc@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+Subject: Re: [PATCH 2/3] remoteproc: qcom_q6v5: Skip handover callback if
+ already issued
+Message-ID: <20260831172447.bwyf7xj646z7rrme@hu-mojha-hyd.qualcomm.com>
+References: <20260828181311.4038346-1-mukesh.ojha@oss.qualcomm.com>
+ <20260828181311.4038346-2-mukesh.ojha@oss.qualcomm.com>
+ <apUWoCCfgthl40AZ@linaro.org>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
-X-Rspamd-Server: rspamout01
-X-Rspamd-Queue-Id: A8F3B2002B
-X-Stat-Signature: tcjjuyeg8ochjc1mze7kfhqd6zmzfbc9
-X-Session-Marker: 726F737465647440676F6F646D69732E6F7267
-X-Session-ID: U2FsdGVkX18fF0ui6xjKhLdEp6d+GUR4oNAc3xDXTh0=
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=goodmis.org; h=date:from:to:cc:subject:message-id:in-reply-to:references:mime-version:content-type:content-transfer-encoding; s=dkim1; bh=TZXXHOZM/aShp3K6xp57FxmGWKsPm0eT9S0BWA7sJhI=; b=ijHpdeEsazzJhDAyk8i45p8+N9FTyKKs636cO2W/ExILrzN84VXHwGK6tA6cQgRHsalQloXkxTPmSx7Xs2WsPVAr5E5KBaa5sC1k1jQeOCkhLd81bsqrZCgPOqSNlggJXhNaPIw+dPvGzmWlUWISrJqPyRX9Wu97EQnDsSkRTP8=
-X-HE-Tag: 1788197020-800869
-X-HE-Meta: U2FsdGVkX19bNpgFulyRSYJnQtOa7YUgjITi2mr8MHUqqxYHbbNtgQJpAQxc5hS4v1JLecQECY2lApvgULoRWOAwG2WyhyElhHy4KfsokhPkiFg3Ch6om8u+ShSegKws22noG5/TxMIeMT/LEb2/05WMFvhzSu0f44Ef3dAp894vniN/MzzduL5fS9f94+JH2MR4ZAL1Jc9SVO9wPlmcFM6/9O3IBW0ruaipPCDzTLInXmYVSnxugsJD4gJwV4yrUBUBVVk1qXiWfZHAV2uauQETB84UzqhWl+My21+0mZgEncEtcvAiNs3h5TpO/5h40iYzRgTo+EIXKkcgEfywc/3efasR0uIf
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <apUWoCCfgthl40AZ@linaro.org>
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODMxMDE1MCBTYWx0ZWRfXwVXypbASiw0D
+ 5NFH+ByG0clELkpd7Hskk9RIPjVTI5FnK43aV4z7hbgmBx+/ILEOyGuUWv8GoubrKRZfRIuLy01
+ XrYGPyAywYRpdGuLIbJPjeqYP63s4EM=
+X-Authority-Analysis: v=2.4 cv=CpaPtH4D c=1 sm=1 tr=0 ts=6a95b8e7 cx=c_pps
+ a=RP+M6JBNLl+fLTcSJhASfg==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
+ a=kj9zAlcOel0A:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
+ a=VwQbUJbxAAAA:8 a=KKAkSRfTAAAA:8 a=EUspDBNiAAAA:8 a=sks43m-1jzInu8jmEAIA:9
+ a=CjuIK1q_8ugA:10 a=iS9zxrgQBfv6-_F4QbHw:22 a=cvBusfyB2V15izCimMoJ:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODMxMDE1MCBTYWx0ZWRfX1NG9zb4JPVwX
+ LyrGjftUd2zweHMJOR444d+q5pappDaQVntXwL6eF6sMteLZdgNifv5vvM0RIcPhnmMpjv/A2+q
+ 8xbtgxEq02bySFQdHry/JdZF9gMuGdGxNr4BjMW15vcDlX23163YwpJsGJ5WVYy/rtY4m8y8Nv+
+ nUQwwPZ9kYoWBsWL7tR375bopg6ZQqe0s0Bphl60QG9PdCuh0Ig8k49ODcMzwfmovpA7vBSoXZX
+ Wcfb6CmC+eHWxvN0JuBJ6zb2KTbiQQVOeAUVjdYVKox1ZNx/k/Bj3AubcMn5mFb07YBYfhuDqky
+ DYJBQ+qV0sdStIN5fdP6BiDNm2JuafRo3Rb5qFcJM+GF5hcH+8ggQaBvjXgaJQx9eXqMOadCnt0
+ bRKzXZvzbSKxrUKlU0LBFzqMPZTBMgky8/Qna23XZgj1LqwjzmzCO28N4usPXREJpl3hoehBHB0
+ e6ijeHF10/MoTzt/SYw==
+X-Proofpoint-ORIG-GUID: QGdN2qgV6qAyvv1sE6ua2uupBrKzAquO
+X-Proofpoint-GUID: QGdN2qgV6qAyvv1sE6ua2uupBrKzAquO
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-08-31_05,2026-08-31_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ bulkscore=0 adultscore=0 lowpriorityscore=0 clxscore=1015 priorityscore=1501
+ malwarescore=0 phishscore=0 suspectscore=0 spamscore=0 impostorscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608310150
 
-On Mon, 31 Aug 2026 22:06:35 +0530
-Praveen Talari <praveen.talari@oss.qualcomm.com> wrote:
+On Mon, Aug 31, 2026 at 07:52:32AM +0200, Stephan Gerhold wrote:
+> On Fri, Aug 28, 2026 at 11:43:10PM +0530, Mukesh Ojha wrote:
+> > When qcom_pas_attach() is called (subsystem already running at kernel
+> > probe time), it sets handover_issued = true before enabling the handover
+> > IRQ. The handover line may be high already (from bootloader boot), causing
+> > the IRQ to fire immediately. Since proxy resources were never acquired via
+> > qcom_pas_pds_enable() in the attach path, the resulting handover callback
+> > calls pm_runtime_put() on proxy power domains with usage count = 0:
+> > 
+> >   genpd genpd:0:d00000.remoteproc: Runtime PM usage count underflow!
+> >   genpd genpd:1:d00000.remoteproc: Runtime PM usage count underflow!
+> > 
+> > Also, because the old code left handover_irq_enabled = false after attach
+> > (fixed separately), the handover IRQ was never disabled inside the handler,
+> > allowing it to fire repeatedly and generating multiple underflows.
+> > 
+> > Fix by recording whether handover_issued was already set before the IRQ
+> > fires and skipping the handover callback in that case. The callback
+> > releases proxy resources that are only held when the normal start path
+> > ran qcom_pas_pds_enable(); if handover was already marked as issued,
+> > those resources were never acquired and must not be released.
+> > 
+> > Fixes: 16472c99f469 ("remoteproc: qcom: pas: Add late attach support for subsystems")
+> > Signed-off-by: Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>
+> 
+> Shawn sent the same patch already and the same comment applies here:
+> https://lore.kernel.org/linux-arm-msm/amxf7MODINj26a4m@linaro.org/
+> 
+> v2 fixes it properly:
+> https://lore.kernel.org/linux-arm-msm/20260801011731.1084591-1-shengchao.guo@oss.qualcomm.com/
 
-
-> +TRACE_EVENT(gpi_ev_process,
-> +	    TP_PROTO(struct device *dev, u32 chid, u32 ev_type, u8 code,
-> +		     u16 status, u32 length),
-> +	    TP_ARGS(dev, chid, ev_type, code, status, length),
-> +
-> +	    TP_STRUCT__entry(__string(name, dev_name(dev))
-> +			     __field(u32, chid)
-> +			     __field(u32, ev_type)
-> +			     __field(u8, code)
-> +			     __field(u16, status)
-> +			     __field(u32, length)
-
-I would swap the above a little to have the u8 code at the end to remove
-any holes. It may have a hole at the end of the event, but you don't want
-holes in the middle.
-
-			     __field(u32, chid)
-			     __field(u32, ev_type)
-			     __field(u32, length)
-			     __field(u16, status)
-			     __field(u8, code)
-
-
-
-> +	    ),
-> +
-> +	    TP_fast_assign(__assign_str(name);
-> +			   __entry->chid = chid;
-> +			   __entry->ev_type = ev_type;
-> +			   __entry->code = code;
-> +			   __entry->status = status;
-> +			   __entry->length = length;
-> +	    ),
-> +
-> +	    TP_printk("%s: chid=%u ev_type=0x%02x code=%u status=%u length=%u",
-> +		      __get_str(name), __entry->chid, __entry->ev_type,
-> +		      __entry->code, __entry->status, __entry->length)
-> +);
-> +
->
-
-
-> +TRACE_EVENT(gpi_alloc_ring,
-> +	    TP_PROTO(struct device *dev, u32 elements, u32 el_size,
-> +		     u32 req_len, u64 len, size_t alloc_size),
-> +	    TP_ARGS(dev, elements, el_size, req_len, len, alloc_size),
-> +
-> +	    TP_STRUCT__entry(__string(name, dev_name(dev))
-> +			     __field(u32, elements)
-> +			     __field(u32, el_size)
-> +			     __field(u32, req_len)
-> +			     __field(u64, len)
-> +			     __field(size_t, alloc_size)
-
-Same here. I would move the 64 and size to the beginning and the other 4
-byte fields to the end:
-
-	    TP_STRUCT__entry(__field(u64, len)
-			     __field(size_t, alloc_size)
-			     __string(name, dev_name(dev))
-			     __field(u32, elements)
-			     __field(u32, el_size)
-			     __field(u32, req_len)
+Sure, thanks..
 
 
-And yes, the __string() is a 4 byte meta-data and should be treated as 4
-bytes.
+> Thanks,
+> Stephan
 
-> +	    ),
-> +
-> +	    TP_fast_assign(__assign_str(name);
-> +			   __entry->elements = elements;
-> +			   __entry->el_size = el_size;
-> +			   __entry->req_len = req_len;
-> +			   __entry->len = len;
-> +			   __entry->alloc_size = alloc_size;
-> +	    ),
-> +
-> +	    TP_printk("%s: elements=%u el_size=%u req_len=%u len=%llu alloc_size=%zu",
-> +		      __get_str(name), __entry->elements, __entry->el_size,
-> +		      __entry->req_len, __entry->len, __entry->alloc_size)
-> +);
-> +
-> +TRACE_EVENT(gpi_ring_info,
-> +	    TP_PROTO(struct device *dev, dma_addr_t dma_handle, phys_addr_t phys_addr,
-> +		     u32 len, u32 el_size, u32 elements),
-> +	    TP_ARGS(dev, dma_handle, phys_addr, len, el_size, elements),
-> +
-> +	    TP_STRUCT__entry(__string(name, dev_name(dev))
-
-Move the __string() to after phys_addr.
-
-> +			     __field(u64, dma_handle)
-> +			     __field(u64, phys_addr)
-> +			     __field(u32, len)
-> +			     __field(u32, el_size)
-> +			     __field(u32, elements)
-> +	    ),
-> +
-> +	    TP_fast_assign(__assign_str(name);
-> +			   __entry->dma_handle = dma_handle;
-> +			   __entry->phys_addr = phys_addr;
-> +			   __entry->len = len;
-> +			   __entry->el_size = el_size;
-> +			   __entry->elements = elements;
-> +	    ),
-> +
-> +	    TP_printk("%s: dma_handle=%llx phys_addr=%llx len=%u el_size=%u elements=%u",
-> +		      __get_str(name), __entry->dma_handle, __entry->phys_addr,
-> +		      __entry->len, __entry->el_size, __entry->elements)
-> +);
-> +
-
--- Steve
+-- 
+-Mukesh Ojha
