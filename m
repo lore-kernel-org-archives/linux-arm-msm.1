@@ -1,45 +1,41 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 05F78362138;
-	Mon, 31 Aug 2026 22:39:10 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 105303AA1B6;
+	Mon, 31 Aug 2026 22:54:08 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788215951; cv=none; b=BQyrdgbgzdiy6JO2CHGWGQW0MY95l8jJfIJ5W+9ECglGQTvH20gOlUIhK3UoH1MogXKrAjN8sPDNEeujt8Ggh/EwGkmtYiMVVZ1evWcQNaCWOMY3Ei5YdGtqv5JBNBNEms6+mbhNe/fC5W5ZkMva5kvF1/b2kL1lcN5dt/w4GiE=
+	t=1788216850; cv=none; b=AUe2UkrdBYG2dOTlTUFohVvW9NDltuE4zNVFBCh5JzFC1OgPYQBle0UE9MKQfWQd2599OEPhayzraTGasb1c2ASbRU5T1cLpAH83xZW+sN28dp8q/wLWZso1vtqOM5X2dZuC+Y4R907xk5TCDuntVHwas/zzC28rIlPtz7WP7i0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788215951; c=relaxed/simple;
-	bh=Jo0Dqa4f0OQM+TQSxhYX6bH9M6j4+4/eRDZJhvejqg8=;
+	s=arc-20240116; t=1788216850; c=relaxed/simple;
+	bh=+kLJTOQcgtnujjFfaBXmldwr7QkPXcN2ecuSsR5BaNQ=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=moZN17+d/0CVsAPLBcYbq3cPGoiF1CPtGCO35NqaOj0psPi3vC1MkRl9OjkBl3L0SwuQeUK3SaZdesuHI2BJPgrhLnVku/DTzmpQ5inZIGP1UCqfif8o0G7WLRAuScXSAQ57NUN2zMy2NZDMykKYUHRVQWNviXBGhYYoiXWNIos=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=cSGHsVy0; arc=none smtp.client-ip=100.103.45.18
+	 Content-Type:Content-Disposition:In-Reply-To; b=pp8DiRyeBZNS1e6vGlvKocEOTr6aPehDwCLYcgjsRsvUv2g3VxUT6eUSvXE3urWpZMeKRnxu98VeRf+XmsyfP1fSOfXuOySMXKf2FZ/lgwBje6P5cshV7cQIekV5hK9NgDH7/ZlzHNfPLjCAglowJfRNxPrmL1pzQAp+FtesOp0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=JNp2Fa+/; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="cSGHsVy0"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 13E101F000E9;
-	Mon, 31 Aug 2026 22:39:09 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="JNp2Fa+/"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D59E41F000E9;
+	Mon, 31 Aug 2026 22:54:07 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1788215949;
-	bh=NgLuCSc5MZRS8g/zjyDJLlD9wWkbg/zA6QcbJG+zlaU=;
+	s=k20260515; t=1788216848;
+	bh=c1xMaguqzWma2hDRCTuvoAbCewOIauRAijFiNm/Uyco=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=cSGHsVy00l3fsBa/egcf9AsdUP/JsF85nroEWi+0N8R8Nh1WBKFqZRP3czxyOlCBH
-	 bMSadqlJo/dsW8m2xyHeYnLN1X+RZ26qn49tpLWAr63NKdR8kx2S5E0DAIlacHtbSh
-	 LhNS3G9Bwa/V8PmxKltU370XrN7glRYSrEkbDePNxFt1eCZPZsqUGKW2ZYQiZdkm5y
-	 KHmGOB0qsZJrZFzJ9Hl6zh77c98yTeoUN/nLoDoLp1OsBtVJjOqI45qXL+Q8pszLZh
-	 tjYwsCr/6oYpW16dnH4URUQpIL3Zb6vflwezuGc0K/L0xbmCd7xBlTUTmREIoOxH5T
-	 YJ6AbtvRnIShA==
-Date: Mon, 31 Aug 2026 17:39:06 -0500
+	b=JNp2Fa+/GWKkskm9Xq2o/HbnOQ07uGP+J9wZ+Q1RVOqIDNsfFCDYXi//popRWtaz3
+	 IOY9tSvDrjMGJUKIk8k4eITONAW4NYZNhs2jLrP5Ra598P3XJFK+/R38dm7N05EIK8
+	 jFVmsS6xUVHiZ0MTzzz+syUmpvf3W/Eo01FWAfMRLGNAe0G9tNvQvex5okhF50KEv4
+	 HEGbECO+libvCiQAFZ/OvdpBmOoeK4XpCrwHnyxsf8b9dutgGoRGvj9mE/y/nPDwq3
+	 daHl8lgTAENtYGU1jNwNHmmIG6i9goDTixqEXhCbwBApQBha2IBe2NkPoFNFmOylti
+	 6cAiVN7FDeY0A==
+Date: Mon, 31 Aug 2026 17:54:05 -0500
 From: Bjorn Andersson <andersson@kernel.org>
-To: Elson Serrao <elson.serrao@oss.qualcomm.com>
-Cc: Conor Dooley <conor+dt@kernel.org>, 
-	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, 
-	Konrad Dybcio <konradybcio@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
-	Rob Herring <robh@kernel.org>, linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
-	linux-usb@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
-Subject: Re: [PATCH v7 1/8] dt-bindings: soc: qcom: eud: Add per-path child
- nodes for UTMI routing
-Message-ID: <apYCal5G0S9cOWJf@baldur>
-References: <20260831030147.1500616-1-elson.serrao@oss.qualcomm.com>
- <20260831030147.1500616-2-elson.serrao@oss.qualcomm.com>
+To: Albert Esteve <aesteve@redhat.com>
+Cc: Konrad Dybcio <konradybcio@kernel.org>, linux-arm-msm@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, Sudeepgoud Patil <quic_sudeepgo@quicinc.com>, 
+	Sarannya S <quic_sarannya@quicinc.com>, Pranav Mahesh Phansalkar <quic_pphansal@quicinc.com>
+Subject: Re: [PATCH 1/2] soc: qcom: smem: add boundary checks for partitions
+Message-ID: <apYFPXLD6hLWohz0@baldur>
+References: <20260820-port-smem-v1-0-d19a45f583bf@redhat.com>
+ <20260820-port-smem-v1-1-d19a45f583bf@redhat.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -48,206 +44,229 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20260831030147.1500616-2-elson.serrao@oss.qualcomm.com>
+In-Reply-To: <20260820-port-smem-v1-1-d19a45f583bf@redhat.com>
 
-On Sun, Aug 30, 2026 at 08:01:40PM -0700, Elson Serrao wrote:
-> The Qualcomm Embedded USB Debugger (EUD) can intercept one or two
-> High-Speed UTMI paths depending on the SoC. For example, SC7280 supports
-> EUD on the primary UTMI path only, while SM8350 supports EUD on both
-> primary and secondary UTMI paths.
+On Thu, Aug 20, 2026 at 01:34:18PM +0200, Albert Esteve wrote:
+> From: Sudeepgoud Patil <quic_sudeepgo@quicinc.com>
 > 
-> Each UTMI path connects an independent USB controller/connector pair and
-> forms its own role-switch domain. EUD routes traffic based on USB role.
-> In device role the debug hub is inserted, while in host role it is
-> bypassed.
+> Add condition check to make sure that the end address
+> of private entry does not go out of partition.
 > 
-> The existing binding models EUD using a flattened ports representation.
-> While sufficient for fixed device-role configurations, it cannot naturally
-> associate a controller, connector, and role switch with a specific
-> EUD-routable path. This is problematic for role-switch capable ports and
-> becomes more pronounced on SoCs with multiple paths. In such cases, each
-> path forms an independent role-switch domain and requires per-path role
-> awareness.
-> 
-> Model each UTMI path as a separate child node with its own OF graph. This
-> representation is used for role-aware EUD routing regardless of whether a
-> SoC exposes one or two UTMI paths. Add an SM8350 compatible for
-> dual-path EUD topologies. Retain support for the legacy flat ports
-> representation on SC7280 for backward compatibility.
-> 
+> Signed-off-by: Sarannya S <quic_sarannya@quicinc.com>
+> Signed-off-by: Pranav Mahesh Phansalkar <quic_pphansal@quicinc.com>
+> Signed-off-by: Sudeepgoud Patil <quic_sudeepgo@quicinc.com>
+> Signed-off-by: Albert Esteve <aesteve@redhat.com>
 
-Acked-by: Bjorn Andersson <andersson@kernel.org>
+I'm sorry, Albert. Sudeepgoud messed up the authorship vs signed-off-by
+chain here. The author should be "Sarannya", as that's the first
+signed-off-by.
 
-Please merge this together with the driver changes.
+PS. It would also be nice if this was submitted with updated email
+addresses and copyright statement. But I'd not expect you to fix that.
 
 Regards,
 Bjorn
 
-> Reviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
-> Signed-off-by: Elson Serrao <elson.serrao@oss.qualcomm.com>
 > ---
->  .../bindings/soc/qcom/qcom,eud.yaml           | 134 +++++++++++++++++-
->  1 file changed, 133 insertions(+), 1 deletion(-)
+>  drivers/soc/qcom/smem.c | 105 +++++++++++++++++++++++++++++++++---------------
+>  1 file changed, 72 insertions(+), 33 deletions(-)
 > 
-> diff --git a/Documentation/devicetree/bindings/soc/qcom/qcom,eud.yaml b/Documentation/devicetree/bindings/soc/qcom/qcom,eud.yaml
-> index 84218636c0d8..c377a77d623c 100644
-> --- a/Documentation/devicetree/bindings/soc/qcom/qcom,eud.yaml
-> +++ b/Documentation/devicetree/bindings/soc/qcom/qcom,eud.yaml
-> @@ -18,6 +18,7 @@ properties:
->      items:
->        - enum:
->            - qcom,sc7280-eud
-> +          - qcom,sm8350-eud
->        - const: qcom,eud
+> diff --git a/drivers/soc/qcom/smem.c b/drivers/soc/qcom/smem.c
+> index afb21a778fe7b..194ffb2ac010f 100644
+> --- a/drivers/soc/qcom/smem.c
+> +++ b/drivers/soc/qcom/smem.c
+> @@ -2,6 +2,7 @@
+>  /*
+>   * Copyright (c) 2015, Sony Mobile Communications AB.
+>   * Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
+> + * Copyright (c) 2023-2024 Qualcomm Innovation Center, Inc. All rights reserved.
+>   */
 >  
->    reg:
-> @@ -45,10 +46,88 @@ properties:
->          $ref: /schemas/graph.yaml#/properties/port
->          description: This port is to be attached to the type C connector.
+>  #include <linux/hwspinlock.h>
+> @@ -85,6 +86,17 @@
+>  /* Processor/host identifier for the global partition */
+>  #define SMEM_GLOBAL_HOST	0xfffe
 >  
-> +  '#address-cells':
-> +    const: 1
+> +/* Entry range check
+> + * ptr >= start : Checks if ptr is greater than the start of access region
+> + * ptr + size >= ptr: Check for integer overflow (On 32bit system where ptr
+> + * and size are 32bits, ptr + size can wrap around to be a small integer)
+> + * ptr + size <= end: Checks if ptr+size is less than the end of access region
+> + */
+> +#define IN_PARTITION_RANGE(ptr, size, start, end)		\
+> +	(((void *)(ptr) >= (void *)(start)) &&			\
+> +	 (((void *)(ptr) + (size)) >= (void *)(ptr)) &&	\
+> +	 (((void *)(ptr) + (size)) <= (void *)(end)))
 > +
-> +  '#size-cells':
-> +    const: 0
-> +
-> +patternProperties:
-> +  "^eud-path@[0-1]$":
-> +    type: object
-> +    description:
-> +      Represents one High-Speed UTMI path that EUD intercepts. Use eud-path nodes
-> +      to associate role-switching behavior with specific port connections, allowing
-> +      EUD to manage role transitions independently for each UTMI path.
-> +
-> +    properties:
-> +      reg:
-> +        maxItems: 1
-> +        description: Path number
-> +
-> +      usb-role-switch:
-> +        type: boolean
-> +        description:
-> +          Indicates that EUD relays USB role-switch events for this path and
-> +          performs role-dependent UTMI routing accordingly. In device role,
-> +          the EUD hub is inserted into this path to enable debug
-> +          functionality. In host role, the EUD hub is bypassed and UTMI
-> +          traffic flows directly between the PHY and the USB controller.
-> +
-> +      ports:
-> +        $ref: /schemas/graph.yaml#/properties/ports
-> +        description:
-> +          These ports are to be attached to the endpoint of the USB controller node
-> +          and USB connector node.
-> +
-> +        properties:
-> +          port@0:
-> +            $ref: /schemas/graph.yaml#/properties/port
-> +            description: This port is to be attached to the USB controller.
-> +
-> +          port@1:
-> +            $ref: /schemas/graph.yaml#/properties/port
-> +            description: This port is to be attached to the USB connector.
-> +
-> +    required:
-> +      - reg
-> +      - ports
-> +
-> +    additionalProperties: false
-> +
->  required:
->    - compatible
->    - reg
-> -  - ports
-> +
-> +allOf:
-> +  - if:
-> +      properties:
-> +        compatible:
-> +          contains:
-> +            const: qcom,sc7280-eud
-> +    then:
-> +      oneOf:
-> +        - required:
-> +            - ports
-> +          properties:
-> +            eud-path@0: false
-> +            eud-path@1: false
-> +        - required:
-> +            - eud-path@0
-> +          properties:
-> +            ports: false
-> +            eud-path@1: false
-> +  - if:
-> +      properties:
-> +        compatible:
-> +          contains:
-> +            const: qcom,sm8350-eud
-> +    then:
-> +      required:
-> +        - eud-path@0
-> +        - eud-path@1
-> +      properties:
-> +        ports: false
+>  /**
+>    * struct smem_proc_comm - proc_comm communication struct (legacy)
+>    * @command:	current command to be executed
+> @@ -403,6 +415,7 @@ static int qcom_smem_alloc_private(struct qcom_smem *smem,
+>  				   size_t size)
+>  {
+>  	struct smem_private_entry *hdr, *end;
+> +	struct smem_private_entry *next_hdr;
+>  	struct smem_partition_header *phdr;
+>  	size_t alloc_size;
+>  	void *cached;
+> @@ -415,19 +428,25 @@ static int qcom_smem_alloc_private(struct qcom_smem *smem,
+>  	end = phdr_to_last_uncached_entry(phdr);
+>  	cached = phdr_to_last_cached_entry(phdr);
 >  
->  additionalProperties: false
+> -	if (WARN_ON((void *)end > p_end || cached > p_end))
+> +	if (WARN_ON(!IN_PARTITION_RANGE(end, 0, phdr, cached) ||
+> +						cached > p_end))
+>  		return -EINVAL;
 >  
-> @@ -77,3 +156,56 @@ examples:
->              };
->          };
->      };
-> +  - |
-> +    eud@88e0000 {
-> +        compatible = "qcom,sm8350-eud", "qcom,eud";
-> +        reg = <0x88e0000 0x2000>,
-> +              <0x88e2000 0x1000>;
-> +        #address-cells = <1>;
-> +        #size-cells = <0>;
+> -	while (hdr < end) {
+> +	while ((hdr < end) && ((hdr + 1) < end)) {
+>  		if (hdr->canary != SMEM_PRIVATE_CANARY)
+>  			goto bad_canary;
+>  		if (le16_to_cpu(hdr->item) == item)
+>  			return -EEXIST;
+>  
+> -		hdr = uncached_entry_next(hdr);
+> +		next_hdr = uncached_entry_next(hdr);
 > +
-> +        eud-path@0 {
-> +            reg = <0>;
-> +            usb-role-switch;
+> +		if (WARN_ON(next_hdr <= hdr))
+> +			return -EINVAL;
 > +
-> +            ports {
-> +                #address-cells = <1>;
-> +                #size-cells = <0>;
-> +                port@0 {
-> +                    reg = <0>;
-> +                    eud_usb0: endpoint {
-> +                        remote-endpoint = <&usb_1_dwc3_hs>;
-> +                    };
-> +                };
+> +		hdr = next_hdr;
+>  	}
+>  
+> -	if (WARN_ON((void *)hdr > p_end))
+> +	if (WARN_ON((void *)hdr > (void *)end))
+>  		return -EINVAL;
+>  
+>  	/* Check that we don't grow into the cached region */
+> @@ -587,9 +606,11 @@ static void *qcom_smem_get_private(struct qcom_smem *smem,
+>  				   unsigned item,
+>  				   size_t *size)
+>  {
+> -	struct smem_private_entry *e, *end;
+> +	struct smem_private_entry *e, *uncached_end, *cached_end;
+> +	struct smem_private_entry *next_e;
+>  	struct smem_partition_header *phdr;
+>  	void *item_ptr, *p_end;
+> +	size_t entry_size = 0;
+>  	u32 padding_data;
+>  	u32 e_size;
+>  
+> @@ -597,67 +618,85 @@ static void *qcom_smem_get_private(struct qcom_smem *smem,
+>  	p_end = (void *)phdr + part->size;
+>  
+>  	e = phdr_to_first_uncached_entry(phdr);
+> -	end = phdr_to_last_uncached_entry(phdr);
+> +	uncached_end = phdr_to_last_uncached_entry(phdr);
+> +	cached_end = phdr_to_last_cached_entry(phdr);
 > +
-> +                port@1 {
-> +                    reg = <1>;
-> +                    eud_con0: endpoint {
-> +                        remote-endpoint = <&pmic_glink_hs_in>;
-> +                    };
-> +                };
-> +            };
-> +        };
+> +	if (WARN_ON(!IN_PARTITION_RANGE(uncached_end, 0, phdr, cached_end)
+> +					|| (void *)cached_end > p_end))
+> +		return ERR_PTR(-EINVAL);
+>  
+> -	while (e < end) {
+> +	while ((e < uncached_end) && ((e + 1) < uncached_end)) {
+>  		if (e->canary != SMEM_PRIVATE_CANARY)
+>  			goto invalid_canary;
+>  
+>  		if (le16_to_cpu(e->item) == item) {
+> -			if (size != NULL) {
+> -				e_size = le32_to_cpu(e->size);
+> -				padding_data = le16_to_cpu(e->padding_data);
+> +			e_size = le32_to_cpu(e->size);
+> +			padding_data = le16_to_cpu(e->padding_data);
+>  
+> -				if (WARN_ON(e_size > part->size || padding_data > e_size))
+> -					return ERR_PTR(-EINVAL);
+> +			if (e_size < part->size && padding_data < e_size)
+> +				entry_size = e_size - padding_data;
+> +			else
+> +				return ERR_PTR(-EINVAL);
+>  
+> -				*size = e_size - padding_data;
+> -			}
+> +			item_ptr =  uncached_entry_to_item(e);
+>  
+> -			item_ptr = uncached_entry_to_item(e);
+> -			if (WARN_ON(item_ptr > p_end))
+> +			if (WARN_ON(!IN_PARTITION_RANGE(item_ptr, entry_size, e, uncached_end)))
+>  				return ERR_PTR(-EINVAL);
+>  
+> +			if (size != NULL)
+> +				*size = entry_size;
 > +
-> +        eud-path@1 {
-> +            reg = <1>;
+>  			return item_ptr;
+>  		}
+>  
+> -		e = uncached_entry_next(e);
+> -	}
+> +		next_e = uncached_entry_next(e);
+> +		if (WARN_ON(next_e <= e))
+> +			return ERR_PTR(-EINVAL);
+>  
+> -	if (WARN_ON((void *)e > p_end))
+> +		e = next_e;
+> +	}
+> +	if (WARN_ON((void *)e > (void *)uncached_end))
+>  		return ERR_PTR(-EINVAL);
+>  
+>  	/* Item was not found in the uncached list, search the cached list */
+>  
+> +	if (cached_end == p_end)
+> +		return ERR_PTR(-ENOENT);
 > +
-> +            ports {
-> +                #address-cells = <1>;
-> +                #size-cells = <0>;
-> +                port@0 {
-> +                    reg = <0>;
-> +                    eud_usb1: endpoint {
-> +                        remote-endpoint = <&usb_2_dwc3_hs>;
-> +                    };
-> +                };
+>  	e = phdr_to_first_cached_entry(phdr, part->cacheline);
+> -	end = phdr_to_last_cached_entry(phdr);
+>  
+> -	if (WARN_ON((void *)e < (void *)phdr || (void *)end > p_end))
+> +	if (WARN_ON(!IN_PARTITION_RANGE(cached_end, 0, uncached_end, p_end) ||
+> +			!IN_PARTITION_RANGE(e, sizeof(*e), cached_end, p_end)))
+>  		return ERR_PTR(-EINVAL);
+>  
+> -	while (e > end) {
+> +	while (e > cached_end) {
+>  		if (e->canary != SMEM_PRIVATE_CANARY)
+>  			goto invalid_canary;
+>  
+>  		if (le16_to_cpu(e->item) == item) {
+> -			if (size != NULL) {
+> -				e_size = le32_to_cpu(e->size);
+> -				padding_data = le16_to_cpu(e->padding_data);
+> +			e_size = le32_to_cpu(e->size);
+> +			padding_data = le16_to_cpu(e->padding_data);
+>  
+> -				if (WARN_ON(e_size > part->size || padding_data > e_size))
+> -					return ERR_PTR(-EINVAL);
+> -
+> -				*size = e_size - padding_data;
+> -			}
+> +			if (e_size < part->size && padding_data < e_size)
+> +				entry_size  = e_size - padding_data;
+> +			else
+> +				return ERR_PTR(-EINVAL);
+>  
+> -			item_ptr = cached_entry_to_item(e);
+> -			if (WARN_ON(item_ptr < (void *)phdr))
+> +			item_ptr =  cached_entry_to_item(e);
+> +			if (WARN_ON(!IN_PARTITION_RANGE(item_ptr, entry_size, cached_end, e)))
+>  				return ERR_PTR(-EINVAL);
+>  
+> +			if (size != NULL)
+> +				*size = entry_size;
 > +
-> +                port@1 {
-> +                    reg = <1>;
-> +                    eud_con1: endpoint {
-> +                        remote-endpoint = <&conn_2_hs_in>;
-> +                    };
-> +                };
-> +            };
-> +        };
-> +    };
+>  			return item_ptr;
+>  		}
+>  
+> -		e = cached_entry_next(e, part->cacheline);
+> +		next_e = cached_entry_next(e, part->cacheline);
+> +		if (WARN_ON(next_e >= e))
+> +			return ERR_PTR(-EINVAL);
+> +
+> +		e = next_e;
+>  	}
+>  
+>  	if (WARN_ON((void *)e < (void *)phdr))
+> 
 > -- 
-> 2.34.1
+> 2.55.0
 > 
