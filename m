@@ -1,166 +1,250 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.7])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 649915293EA
-	for <linux-arm-msm@vger.kernel.org>; Mon, 31 Aug 2026 13:44:38 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 207104A840A;
+	Mon, 31 Aug 2026 13:45:22 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.7
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788183880; cv=none; b=EqMitI0EJOHa1h4MDzBB/0ywr4gfGfeE33oIOtm+MroBTCWgkry4YwatyLwN+ASA2+E07FAIad70mWoEGcG7MQiGN/NiqA7AeGVniD7B0GsI/fCJY4dhr7nXY6xHTnOKsBPY+v0WABJwrH8bDAkuPh7i+QfPBpGNn4ct256G7cU=
+	t=1788183926; cv=none; b=HV0pOavV0uB+J4eClCJzMOxXS8M2j9Ej1mk4iv5c00lALxq9F8UGNsjCA2ZonbjijLAxduspHmZioXmJDfw5giXrLgJfK/g9eslWzhANsxnOAp5eQK/dThu8PqyqpusWTJJwO4nniVBERBnnK6eQUik0lxJ6QS+XLD5McwLDDJU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788183880; c=relaxed/simple;
-	bh=oiqARqCOkMd8hSrrfA2nLUvJyn5QS3R63KdLJ1NDbv8=;
+	s=arc-20240116; t=1788183926; c=relaxed/simple;
+	bh=iJE3knD8GZpNzW3zg5su/vA3JNJNn8xjodGntYeADPc=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=XAYpGIsll1ODR8qiPZZoE5XBdGR9sXm7lDbA+/OOw4yOpbZfsV5cjriSSAeyOSM0WCu/qfn8PCUIfyr9BrZ3duXP+xMJaMkhFwhVaXOzxI1Phv4qnvxo/pK3FIKqKjvOS9TNgDU+Tur9dqjQlmv7r/HNP1yDruY1w5SVN9BA5Y4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=VanVX5dN; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=Di3vA9Gd; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	 Content-Type:Content-Disposition:In-Reply-To; b=o4RPiwEcXIMRu/oXbd0JSVKiJlJV3p79GhbOCm6TakhzsYeKeXebyUgY9hlX9be4Tui4z+qbABJW+hazKDpC/5IdiuFshodDU/WMxsvBnhbi2irsbBpSZcXSTa0XZxOc69Zv2IcUIF38tfQPabQyuugrBGa4ficFj4SGd0ZUZ98=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=b8ob630k; arc=none smtp.client-ip=192.198.163.7
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="VanVX5dN";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Di3vA9Gd"
-Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67VBAHEQ2891640
-	for <linux-arm-msm@vger.kernel.org>; Mon, 31 Aug 2026 13:44:37 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-type:date:from:in-reply-to:message-id:mime-version
-	:references:subject:to; s=qcppdkim1; bh=6pxU5CaPWXEMftRO7XErFgsm
-	+7DIruyIV8kqUHD/wuI=; b=VanVX5dNkaw0w0W/yCr/EpPoddR6A2dCxwQXTq+l
-	CbdTShS53hA+qnYCwzUfWL6UIGcXaCsFWc761whQv1s83NCA4p7+e0qu24YT6fEg
-	lvQzaftWnXBMYm3jZ9KEVw9N4Ytx0mZ7vhSTblB6TROnNwpW52nlXNCtfIH3nlot
-	0ZrU1ytMty893LJ7RhPd5FRxX1caeUELj0KlnEqmfkK9OPUUvOVlfdch+JFYrb/n
-	RbGWZioa2TfqlLx0YUlKstue2HdJkUg5FKqiL5VS/SZAOyJpalblF9ahAVM2nc+A
-	Sp9ZuKdH+p4B8k7fwcqvSqAC6wTjEjg4O4Oz+YxNX8zDpg==
-Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com [209.85.222.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gd556sj40-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Mon, 31 Aug 2026 13:44:37 +0000 (GMT)
-Received: by mail-qk1-f197.google.com with SMTP id af79cd13be357-930edb4362dso470127085a.3
-        for <linux-arm-msm@vger.kernel.org>; Mon, 31 Aug 2026 06:44:37 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1788183877; x=1788788677; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=6pxU5CaPWXEMftRO7XErFgsm+7DIruyIV8kqUHD/wuI=;
-        b=Di3vA9GdseRt/eMc2Xq5k5X/ZIuMX9Yzv324p8XNB5dCbFSMyIW+sEYKXRijO544/7
-         vSc59XE2sqZC6zw7rckOF9lpiPnIfoqcOwjaNq4XWLFCdxCeoGE++Ps5vVzv20GV16t+
-         TmTouSp6KZ2da2ZLxinHTZUxlWgtUsFttSZEriyBAhrYbqe63/pD4Ray49vo+aExLaig
-         iY/RvNlYlxF15CSAqdixQGFaMisDMGAO8Vw3yX9wFzDNTHFGzF8iOYtYk/zWOawwkoIu
-         KPn+yY/6JGJKbVC63hZPQfEDj/C5lqfpCE2BKzswyWz7Vhm99+Jp+3tO6/Fx4hu0q+Ql
-         pYJA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788183877; x=1788788677;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=6pxU5CaPWXEMftRO7XErFgsm+7DIruyIV8kqUHD/wuI=;
-        b=DAs1YnTAmwBzVd/KKtRkM5RWMVTKHwo45EiNqFMO48arsQuQcVvVDcWzsr9PQgn6u6
-         kBlZ2RijxaQ9oNjf1JciEBa80ydI6tbAiZ+LJP7534snjcybZkXkzZEPnke0nDJYY2/S
-         85mAsvSF5bKYBj/tXIak56JGEAAYlrWcpmf8IQREEWLBMZg0z49V/XB29nPXjDRBTBv/
-         cQh3e6FtewdX/ApsVxC5E6jU7fcz7OVIC0rU6g3iXbA27dFOOxvCDHpZUSuyotiujdkK
-         BucwX8cC2atj3Q+U0xXQ+Ix/Rta9pVl9habQsZ11FhmdRtpLZSB+JEPTQ/8pNVn7N6nh
-         ZEgg==
-X-Forwarded-Encrypted: i=1; AHgh+Rq9xKTSTkYmKiLm+j2mkp3WEAlz2b+CW9eYlhjI4R1Fs0u3VjK7hStZnJ/sSgDvnzvEYc/W9Ln/Lj2S1AE0@vger.kernel.org
-X-Gm-Message-State: AFuF++lm7FBEgFIzuFtyaKNoCx2fGBex+LgdW8YMpvcSJBeFkS8ayNSV
-	e5NcF/9eaHb3W8c21isl2rLSineaKPY2kwDdKxMpBx23lyRwJ3V2XPdjgqaHYQ8gfNrYwUwa6oz
-	GScVBsCeB5Gplq3M7Jw+G8v3xg0Mt/cNaSSh6FbQr3+TBiA2Xpi/BkwMiJAvzE5LZyKph
-X-Gm-Gg: AR+sD118L7BaTXReqfeaVgXn0UKMZ+ZpO9s0M72Eqy570UVOiupfR12mTmj1ixsQXT4
-	RdA07OEs8QEdxP0OwlNkDTvoKfZavCFcSSakJfOIlozdS+490v/u/jDQwLSP3qgAA6zSv+9hD6I
-	AN5bXMZ4fgrilzRXsCk/jlBh0KRYvP44ycZ4Vf2jOx2CeEzXThGYSE1FCImI+op3F27Wnw7xzoA
-	mxohSeJ1dRHSkdy+YEPImQzMD1wG3A7QeAnwSHx1V5kfLI5Xc+DjByTBAQ+1oftTzz+X0g7h4x5
-	LAVBG3YOmfrZC324vjcLrTlavPZTFvBozB4iC2S5KxEKy6uhlaJxobWsY9hEgF+6YvcvQ3HwTWB
-	N+qi1QpCDFBwoYg==
-X-Received: by 2002:a05:620a:2b43:b0:936:bc78:791b with SMTP id af79cd13be357-9391379810fmr3355082785a.15.1788183876434;
-        Mon, 31 Aug 2026 06:44:36 -0700 (PDT)
-X-Received: by 2002:a05:620a:2b43:b0:936:bc78:791b with SMTP id af79cd13be357-9391379810fmr3355067885a.15.1788183875496;
-        Mon, 31 Aug 2026 06:44:35 -0700 (PDT)
-Received: from oss.qualcomm.com ([86.121.170.13])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48437bdd41csm11735854f8f.10.2026.08.31.06.44.33
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 31 Aug 2026 06:44:34 -0700 (PDT)
-Date: Mon, 31 Aug 2026 16:44:32 +0300
-From: Abel Vesa <abel.vesa@oss.qualcomm.com>
-To: Aleksandrs Vinarskis <alex.vinarskis@gmail.com>
-Cc: Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>,
-        Sibi Sankar <sibi.sankar@oss.qualcomm.com>,
-        Abel Vesa <abelvesa@kernel.org>,
-        Rajendra Nayak <quic_rjendra@quicinc.com>,
-        Marc Zyngier <maz@kernel.org>, Konstantin Shabanov <mail@etehtsea.me>,
-        Srinivas Kandagatla <srini@kernel.org>,
-        Georg Gottleuber <ggo@tuxedocomputers.com>,
-        Ettore Chimenti <ettore.chimenti@linaro.org>,
-        linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org,
-        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
-        Konrad Dybcio <quic_kdybcio@quicinc.com>
-Subject: Re: [PATCH 4/9] arm64: dts: qcom: x1e80100-dell-xps13-9345: Mark the
- EC reset gpio as reserved
-Message-ID: <py57i22nmumse66q6rdtld4jern3pxosadhpzlq45a253m5mb5@4cibicidkm5j>
-References: <20260831-dts-qcom-hamoa-reserve-ec-reset-gpio-v1-0-5b202de8c74f@oss.qualcomm.com>
- <20260831-dts-qcom-hamoa-reserve-ec-reset-gpio-v1-4-5b202de8c74f@oss.qualcomm.com>
- <CAMcHhXqCFzMy=VX+Pm+T21DuJ==-28wBwSJxKzCi1NMJhBKqfg@mail.gmail.com>
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="b8ob630k"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1788183923; x=1819719923;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:content-transfer-encoding:in-reply-to;
+  bh=iJE3knD8GZpNzW3zg5su/vA3JNJNn8xjodGntYeADPc=;
+  b=b8ob630kGceMOIaT1UpM784iJyr/ykIsx5oegjACNgtnjWcker96eYTn
+   uKGX7qjlTLWSdq5Z4M2xuK7DuHDsGPt/2pw9uUlFfrZSaoMjqbejQNnZ7
+   29TKfKg7cGC/PnH81G7MjTQO/4Duyx8i90Z7Lpwq6TysongbqZ9dHNjU1
+   8Y905f2haawe+nJ5cYiMqJcRyVNG9wR34oJeNtf0Nww1VHatCHP+BbeRo
+   QOzd24IIldoqIjptu+i78V7gy/rYJeTuMNgjCi/Pv1euQFCVpiQI2tblk
+   J0I2Zk/l5rUfnZ4DPa0ph+Bm0aqNfMHL+xXNP9iTrDMgSf90eZ68tROR4
+   w==;
+X-CSE-ConnectionGUID: N+fF6TtQTMqXyr09JvcZ3Q==
+X-CSE-MsgGUID: F6jPQ3gyQx2DuajCnMB34A==
+X-IronPort-AV: E=McAfee;i="6800,10657,11891"; a="114129498"
+X-IronPort-AV: E=Sophos;i="6.25,254,1779174000"; 
+   d="scan'208";a="114129498"
+Received: from fmviesa001.fm.intel.com ([10.60.135.141])
+  by fmvoesa101.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 31 Aug 2026 06:45:22 -0700
+X-CSE-ConnectionGUID: 8jytYmUyR0S7PAi1zuNgxw==
+X-CSE-MsgGUID: YDMavWC2Tn2LTkRLkvF7YQ==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.25,254,1779174000"; 
+   d="scan'208";a="293632864"
+Received: from fpallare-mobl4.ger.corp.intel.com (HELO localhost) ([10.245.244.21])
+  by smtpauth.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 31 Aug 2026 06:45:17 -0700
+Date: Mon, 31 Aug 2026 16:45:15 +0300
+From: Andy Shevchenko <andriy.shevchenko@intel.com>
+To: Nuno =?iso-8859-1?Q?S=E1?= <nuno.sa@analog.com>
+Cc: linux-kernel@vger.kernel.org, dmaengine@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org,
+	linux-stm32@st-md-mailman.stormreply.com,
+	linux-arm-kernel@lists.infradead.org, linux-iio@vger.kernel.org,
+	linux-sound@vger.kernel.org, linux-spi@vger.kernel.org,
+	Vinod Koul <vkoul@kernel.org>, Frank Li <Frank.Li@kernel.org>,
+	Lars-Peter Clausen <lars@metafoo.de>,
+	Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>,
+	=?iso-8859-1?Q?Am=E9lie?= Delaunay <amelie.delaunay@foss.st.com>,
+	Maxime Coquelin <mcoquelin.stm32@gmail.com>,
+	Alexandre Torgue <alexandre.torgue@foss.st.com>,
+	Jonathan Cameron <jic23@kernel.org>,
+	David Lechner <dlechner@baylibre.com>,
+	Andy Shevchenko <andy@kernel.org>, Jaroslav Kysela <perex@perex.cz>,
+	Takashi Iwai <tiwai@suse.com>, Mark Brown <broonie@kernel.org>
+Subject: Re: [PATCH v3 1/9] dmaengine: Support bus widths of 32 bytes and
+ above
+Message-ID: <apWFa4BFoAL2AhG3@ashevche-desk.local>
+References: <20260831-dmaengine-support-wider-dma-masks-v3-0-507d97496f2d@analog.com>
+ <20260831-dmaengine-support-wider-dma-masks-v3-1-507d97496f2d@analog.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
-In-Reply-To: <CAMcHhXqCFzMy=VX+Pm+T21DuJ==-28wBwSJxKzCi1NMJhBKqfg@mail.gmail.com>
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODMxMDExOCBTYWx0ZWRfX2aUw18ZVGdSA
- D/cIbbI+dy6sYqS62U/OA4L0k7LlajLCTHGCx3MpiGD+3iSIv2XGwc0WU4oL9djN/mI9aJW5Zs2
- 0LYw5JQbUjzCJ6hAgr1eAdRgZlhLQz8=
-X-Authority-Analysis: v=2.4 cv=O7sJeh9W c=1 sm=1 tr=0 ts=6a958545 cx=c_pps
- a=50t2pK5VMbmlHzFWWp8p/g==:117 a=clBUptZa5v5FR042Ey+sjA==:17
- a=kj9zAlcOel0A:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
- a=VwQbUJbxAAAA:8 a=I76Qk8w-AAAA:8 a=EUspDBNiAAAA:8 a=Wcc9KN-piPjDXZmWtXEA:9
- a=CjuIK1q_8ugA:10 a=IoWCM6iH3mJn3m4BftBB:22 a=vUPM0Wvl0xcrLs4nqPIT:22
-X-Proofpoint-ORIG-GUID: RKuC23GHMH2wXoCP0tyUsNElmMgDADAz
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODMxMDExOCBTYWx0ZWRfX7XjKMwgorhoW
- De6McOaGxNlpSl4t+vOM2zaiZGZWFmykIDsCD7QlV2yhyBnWS5ot+NyMwkWM7hO5sMwspWeqKlP
- I4RfQHfhNgijBK3YEPmJzlDymlkLzRPvKcj9IlC3ct6uRnxZZYgdei3jSqIsOtQHJUW1YpJwqXo
- L46ADHiRyyUMdrMMBapOyx7xs1T9I3hRfWwMGQ21PeTWNEPj3rtg7QRA8HpSTr0BodJZFRfdh8y
- PCXPzvPtzeRjdgy5c/Li9Z/VLxGEl1InCm+KTLO9meFhjom0gIjBZZJ2i2bpWNqyUol7C1Bb8Zj
- pEH6BNC1a8qZvBkm1gr0UQ94Ab8V129IRtzoHI79rGAiLrev6DXDS9RLYjWw5vAWX/7o9f6xrHx
- uFkJnLUZRzBmFBQ1qGuqfRRRFZrIR+E/IESyaL7Z5eLhpeLA74ippGUMaUhe7yezhnPMTn3nI6b
- ntQv3INW/leIZtsYtZQ==
-X-Proofpoint-GUID: RKuC23GHMH2wXoCP0tyUsNElmMgDADAz
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-08-31_04,2026-08-27_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 priorityscore=1501 malwarescore=0 adultscore=0 suspectscore=0
- bulkscore=0 spamscore=0 lowpriorityscore=0 impostorscore=0 clxscore=1015
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608310118
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <20260831-dmaengine-support-wider-dma-masks-v3-1-507d97496f2d@analog.com>
+Organization: Intel Finland Oy - BIC 0357606-4 - c/o Alberga Business Park, 6
+ krs, Bertel Jungin Aukio 5, 02600 Espoo
 
-On 26-08-31 14:00:35, Aleksandrs Vinarskis wrote:
-> On Mon, 31 Aug 2026 at 12:05, Abel Vesa <abel.vesa@oss.qualcomm.com> wrote:
-> >
-> > GPIO 65 from TLMM is used by the embedded controller as its reset line.
-> > Reserve it to prevent Linux from requesting or reconfiguring it.
-> >
-> > Fixes: f5b788d0e8cd ("arm64: dts: qcom: Add support for X1-based Dell XPS 13 9345")
-> > Signed-off-by: Abel Vesa <abel.vesa@oss.qualcomm.com>
+On Mon, Aug 31, 2026 at 12:46:38PM +0100, Nuno Sá wrote:
+> The src_addr_widths and dst_addr_widths capability masks encode each
+> supported width as a bit whose position equals the corresponding
+> enum dma_slave_buswidth value (e.g. DMA_SLAVE_BUSWIDTH_4_BYTES sets bit
+> 4). As these masks are plain u32, widths of 32 bytes and above
+> (DMA_SLAVE_BUSWIDTH_32/64/128_BYTES map to bits 32, 64 and 128) cannot
+> be represented at all.
 > 
-> Hi Abel,
+> Introduce bitmap-based bus width capabilities that span the full enum
+> range, through a new dma_buswidth_mask_t type modeled after
+> dma_cap_mask_t. To allow DMA controller drivers to be converted
+> incrementally, the legacy dma_device u32 fields are kept alongside the
+> new masks and the core folds a legacy-only driver's u32 into the mask
+> when the device is registered, so consumers only ever have to look at
+> the mask.
 > 
-> For XPS 9345 this change is already included in my series for EC driver:
-> https://lore.kernel.org/all/20260809-dell-xps-9345-ec-v4-0-88306dbbc7aa@vinarskis.com/
+> The new interface lives in two new headers under a new
+> include/linux/dma/engine/ directory instead of growing
+> linux/dmaengine.h, which is included nearly everywhere:
 > 
-> To avoid conflict, could you drop the XPS 9345 from your series? I'm hoping my
-> change will land shortly, its already reviewed.
+>  - dma/engine/types.h holds enum dma_slave_buswidth and the new
+>    dma_buswidth_mask_t type. Like dma_cap_mask_t, the type only needs
+>    DECLARE_BITMAP();
+> 
+>  - dma/engine/widthmask.h holds the accessors which are based on the new
+>    dma_buswidth_mask_t type. This gives us freedom to change the core
+>    without affecting consumers as they only see (and should only use) the
+>    new type.
+> 
+> Note the fold only has to happen in one direction on the producer side:
+> nothing outside a controller driver reads the legacy dma_device fields,
+> so a converted driver's mask is not mirrored back into them. The legacy
+> dma_slave_caps fields are different, as consumers not converted yet
+> still read them: dma_get_slave_caps() derives them from the mask when a
+> device_caps() callback adjusted it. Both go away with the legacy fields.
 
-If your change lands first, then I'll drop the xps13 patch.
+...
 
-But yours does not have fixes tag nor should it since it is just
-adjacent to your EC enablement.
+>  F:	drivers/dma/
+>  F:	include/dt-bindings/dma/
+>  F:	include/linux/dma/
+> +F:	include/linux/dma/engine/
+>  F:	include/linux/dmaengine.h
+>  F:	include/linux/of_dma.h
 
-This fix of mine needs to be backported as having the gpio controllable
-messes up EC in such a way where you need to unplug the battery on some
-devices.
+Unneeded, previous entry includes recursively.
+
+...
+
+> +/*
+> + * Basic types shared by the DMA engine interfaces.
+> + */
+> +#ifndef LINUX_DMA_ENGINE_TYPES_H
+> +#define LINUX_DMA_ENGINE_TYPES_H
+> +
+> +#include <linux/bitops.h>
+
+Not yet? Perhaps next changes will use it, then they can add it.
+
+> +#include <linux/types.h>
+> +
+> +/**
+> + * enum dma_slave_buswidth - defines bus width of the DMA slave
+> + * device, source or target buses
+
+I would describe the _UNDEFINED case, it might require some clarification on
+what behaviour is to expect with this one.
+
+> + */
+
+> +enum dma_slave_buswidth {
+> +	DMA_SLAVE_BUSWIDTH_UNDEFINED = 0,
+> +	DMA_SLAVE_BUSWIDTH_1_BYTE = 1,
+> +	DMA_SLAVE_BUSWIDTH_2_BYTES = 2,
+> +	DMA_SLAVE_BUSWIDTH_3_BYTES = 3,
+> +	DMA_SLAVE_BUSWIDTH_4_BYTES = 4,
+> +	DMA_SLAVE_BUSWIDTH_8_BYTES = 8,
+> +	DMA_SLAVE_BUSWIDTH_16_BYTES = 16,
+> +	DMA_SLAVE_BUSWIDTH_32_BYTES = 32,
+> +	DMA_SLAVE_BUSWIDTH_64_BYTES = 64,
+> +	DMA_SLAVE_BUSWIDTH_128_BYTES = 128,
+> +	DMA_SLAVE_BUSWIDTH_MAX
+> +};
+
+> +/**
+> + * typedef dma_buswidth_mask_t - bus width capabilities bitmap modeled after
+> + * dma_cap_mask_t.
+> + *
+> + * Each supported bus width is represented by the bit whose position equals the
+> + * corresponding enum dma_slave_buswidth value, e.g. a device supporting a bus
+> + * width of 4 bytes has bit 4 set.
+> + */
+> +typedef struct {
+> +	DECLARE_BITMAP(bits, DMA_SLAVE_BUSWIDTH_MAX);
+> +} dma_buswidth_mask_t;
+> +
+> +#endif /* LINUX_DMA_ENGINE_TYPES_H */
+
+...
+
+> +/*
+> + * Bus width capabilities of DMA engine devices and channels.
+> + */
+> +#ifndef LINUX_DMA_ENGINE_WIDTHMASK_H
+> +#define LINUX_DMA_ENGINE_WIDTHMASK_H
+> +
+> +#include <linux/bitmap.h>
+> +#include <linux/dma/engine/types.h>
+
++ errno.h
+
+> +#include <linux/types.h>
+
+I would group subsystem ones.
+
+#include <linux/bitmap.h>
+#include <linux/errno.h>
+#include <linux/types.h>
+
+#include <linux/dma/engine/types.h>
+
+...
+
+> +static inline enum dma_slave_buswidth
+> +__dma_bus_width_min(const dma_buswidth_mask_t *mask)
+> +{
+> +	enum dma_slave_buswidth width = find_first_bit(mask->bits,
+> +						       DMA_SLAVE_BUSWIDTH_MAX);
+> +
+
+For easier maintenance better to split the assignment.
+
+	enum dma_slave_buswidth width;
+
+	width = find_first_bit(mask->bits, DMA_SLAVE_BUSWIDTH_MAX);
+
+> +	if (width == DMA_SLAVE_BUSWIDTH_MAX)
+> +		return DMA_SLAVE_BUSWIDTH_UNDEFINED;
+> +
+> +	return width;
+> +}
+
+...
+
+>  #ifndef LINUX_DMAENGINE_H
+>  #define LINUX_DMAENGINE_H
+>  
+> +#include <linux/bitops.h>
+>  #include <linux/device.h>
+
+> +#include <linux/dma/engine/types.h>
+
+Same, group them after generic linux/*.h.
+
+>  #include <linux/err.h>
+>  #include <linux/uio.h>
+>  #include <linux/bug.h>
+
+...
+
+It's possible to split this patch to two:
+- move the existing type into a new types.h header
+- add support for the new API
+
+-- 
+With Best Regards,
+Andy Shevchenko
+
+
