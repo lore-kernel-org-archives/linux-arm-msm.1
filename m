@@ -1,66 +1,66 @@
-Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com [209.85.128.45])
+Received: from mail-wr1-f48.google.com (mail-wr1-f48.google.com [209.85.221.48])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 76AA43DAAD5
-	for <linux-arm-msm@vger.kernel.org>; Mon, 31 Aug 2026 08:20:58 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.45
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EB7F23D1A82
+	for <linux-arm-msm@vger.kernel.org>; Mon, 31 Aug 2026 08:22:18 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.48
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788164460; cv=none; b=iZZHz7vgj8HlJWPC+y3hVoBu6BNJloT0/VenOb3RZ7iKiazowsvX5h0iuYaVM3rXWlY6yhIskAQccJwl6N8DJ+O2nd6xUynfDDMCbdtXgt/yvdVHSLj6ghSmTSZU6cVV9adKpCMXGZStHZOKB56rm0weObRcgzMpVYAuiuCJlP8=
+	t=1788164540; cv=none; b=sO7C+vOxM12wyKm77zPleuWqzbUc9Pm4NjNZjBsKm6/hTjoyShbq3T3eW/1tiaFQZ0ZMUMoOJL6ENR8SbmmWDoiudd3Mt9b7W85VvKVQETNOUVQ0b5LuBsdm9aCVw65/O+rKECW0qu4xbIWmBFPUn2RKtAgDZekSpCUtyYUHwIM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788164460; c=relaxed/simple;
-	bh=XMF+vhUKOjUOuc40M2urXASf8+nQxGMRr42QCyG7Rdw=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=eEqGqjGJUq7SMceOcHWfnr/jqXiifEujwxqg0dgXi7KbC1n49YG0a06Su60syjlVcdHaDQ66eNCPOr5iQRyuGawUYQg6J++ORlDuyy0BDze6vqj457yOeTDif3r5Y2sA3wMF+DkfGnGheGuNrCjPUFtVbKoOnzpx6VzG7SF0YSI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=WtOZhAWq; arc=none smtp.client-ip=209.85.128.45
+	s=arc-20240116; t=1788164540; c=relaxed/simple;
+	bh=zy5HflWMSJKpdEDAhcS6LMg6T9VvkVh36wf255mMT/E=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=Fd0SMNScHqSqt4IgVBzYyp97C3wvVwL+oYMwZ57T10p6yq/CVzfsrqMmlnC2FuXzgZ93H85Qf+u6y4FehIgukkHs9GfUuxIDW8aWW1cKR8CN3kRcHLEt6dri6Nxi25w4qNOJ8D3BTsGJL6t0g7Ec9hDIyuJqq6YiRRGfm/z0zoU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=xncDe4aM; arc=none smtp.client-ip=209.85.221.48
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="WtOZhAWq"
-Received: by mail-wm1-f45.google.com with SMTP id 5b1f17b1804b1-4998b5a63e2so29684345e9.1
-        for <linux-arm-msm@vger.kernel.org>; Mon, 31 Aug 2026 01:20:58 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="xncDe4aM"
+Received: by mail-wr1-f48.google.com with SMTP id ffacd0b85a97d-48431648f33so1000364f8f.0
+        for <linux-arm-msm@vger.kernel.org>; Mon, 31 Aug 2026 01:22:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1788164457; x=1788769257; darn=vger.kernel.org;
+        d=linaro.org; s=google; t=1788164537; x=1788769337; darn=vger.kernel.org;
         h=cc:to:message-id:content-transfer-encoding:content-type
          :mime-version:subject:date:from:from:to:cc:subject:date:message-id
          :reply-to:content-type;
-        bh=MgBK+9leXVbxmDatVupt3ofH6riq2Lw8Q4eAqxxizh4=;
-        b=WtOZhAWq9HU3W6ZcVtXecwkKv5mpAcQ7hpAsbu0nIP13KgHMnWWWulHwiMCNju+s1N
-         aEO1lZaIQnsiUpUaC3qH75TYkG6D3HUXmr0Y/Xg+zcyWSr72wwQeMDUR5DS+QrGgQx+q
-         aDW+imwFtMWyfgJZ3tzcwCX6KvgpuSxmihULC9qtBvF8NuOtyWTKd74O/yABwQxlXKqa
-         6nkoYnPBz/KBhQBw6WtinAfx9Rxb2/Lc8fPvK56iDqHS/gn3gtsZ3cwZCWCYXyqvqjzk
-         quVuxA8UulGHnVeIFna75O8wZzqgaRaSTfq2b4q7a3ZyjEpsqFxoJqAARzVhcOdZlQJh
-         Vk2Q==
+        bh=kABR3d14T2hX24+Iq8Rghe1MFpuB/gfE4DOUA56gUPI=;
+        b=xncDe4aMHgY7uTNvGwbih6VoyO4WDJKKUpeYiT4yrcaxInMAdhhGWK5VyZhKKWxz4T
+         m1mU8gwpIhZlL2XH8EPKvAOvWkE7mr3toy8EceZcvSZ4MeR8K50dOmWgD/BHNyYzlg0c
+         qmNnDpb+ep+o72HJyiM/+0oOuy98FODW8MLVxG5sOg/kk0d8+lNm3L5FNvTRhpD6av5H
+         ykAtCmepIeWvXv9DbZXLY77i1Yfe4pyTvru6gfyVyAhiPQbdcrkT3SM3Sy8qCy7fbYQh
+         DU/88xy27AGwodd3GZ02Pt4vrQivsNrEaQirm8pdMo1oRYdeBApI4FZfj/Oc17D7fLPU
+         8GNg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788164457; x=1788769257;
+        d=1e100.net; s=20251104; t=1788164537; x=1788769337;
         h=cc:to:message-id:content-transfer-encoding:content-type
          :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
          :cc:subject:date:message-id:reply-to:content-type;
-        bh=MgBK+9leXVbxmDatVupt3ofH6riq2Lw8Q4eAqxxizh4=;
-        b=M72JbCTvMTVYw6aLI1w09Z48HGzUipLtvNstbglTBpktVdgetnWTxsQy9Tv91kBqoC
-         vvFshaPKw26RHI0NU2jwomi9MXBSMI8/Vj+FJNI51L5rDvSOgAG3tUVRUNwhErrIW5f8
-         6L2zP8u+WpiFGI8R3GH7dY0TvjIZ8pxVJnTD4S3mDz/lK3UcKIWBRRk9Q6NqdgNYMMLu
-         Ksq2TVLeYLyKQbNd44IQY51HRQYYjlf0oJ7KxPidslCK1C3tFnE8/Diq61cZjC6NhBO5
-         55EzSvGZ77yje1dxKuWO81NUuYTDNdsDmnIYEsk9WdLkAI4zSpTgXa6+Berj8+fc/Cq7
-         U9Lg==
-X-Gm-Message-State: AFuF++lYPe6/bm2oz2ftknDfWZ/38gFEm9vKsguvPlqxYnx+Um4xmlsO
-	o+HAo8s4R0jh2l6wAFEb6NJq0lOv7LeC3rKtxZTLsIGj0mweonx2BnxD5em4Bg8eI94=
-X-Gm-Gg: AR+sD10EwpAk/2j1C8XdAgy9JYh55FSms0Qba/FzAIijSxdyRJ7dSXf6hmxwT2fnp1E
-	dlLnIEInHjaylOYUUv3Z4wv3ca/yEpQSnaBMnQIb2np8lG/xpJDeh4vZ3CALb6ilkQiEGEtxgiw
-	lCJ+V7wUCEz8tSBAU9z6qQiIlvvvfb7qgw/Jy+kQ6REuo5uPB176Agwr+dadbVWfrgnvCijysEj
-	G0uWgGEa2l7Dq/oCMW7/93UExSeM+SIU9H5dbYHwQbHQjIwf2KXWoMdf5b4wRtNv5PhkvoW9vb9
-	i0PJoTVLs4vI8Lx731nRacaf8cyj2yBxwL0f9T7xoQtii2i7jTB/qXigboI6g+O5iab98d4q9yM
-	n6+pEuuWCzvWi12KAnwTHdtvMbFuk32Bul75WGIKxTub9V9bfXttQQ+m+MVAQqMPLNqnU7G+dRV
-	ccMgFDRvcnY0ttdiuycnVwvZrKSDfYG9J08RebAcVVb1cXXq4bwBrHvqh60L0SJwpLjhj/8xjJT
-	burJKWO2Q==
-X-Received: by 2002:a05:600c:b85:b0:49c:c96a:d36b with SMTP id 5b1f17b1804b1-49cc96ad411mr280936065e9.12.1788164456461;
-        Mon, 31 Aug 2026 01:20:56 -0700 (PDT)
+        bh=kABR3d14T2hX24+Iq8Rghe1MFpuB/gfE4DOUA56gUPI=;
+        b=eT1lKD65uLkozTG35jL8sa+Jt4Djkxik97peJc3yzMgLNyO7hY13qUhLUzLGwuYH9I
+         aqfhcb/5NVyP90uezHDvIlbPOD1Ry1pu5fXBnAYE6p2RpPqOyNp+ZaEsEJZlb3JCOWMm
+         FgZDMK8dZmOgC5P5Rynq94KRGwr5Vg6d2Ckk+rcASihx+0VlA5tc1Z+qaCdqBBRq2Pxt
+         XT6aFAwhqccAf0WirDpEi/+K99xDM/qFbRw4FX8zsPMHBAjXCWubBv8tepOyZH444uCp
+         Q7U4xqG9Ig+JGsceT6IEKb3Ci+2h0Ij9KtfqpJKQQwZvujfIIuFXT0XOEkZsIFuCMZ6t
+         r+Nw==
+X-Gm-Message-State: AFuF++n8nQKJxJuFvl/cI0yWTyZGKO99e2NHOIFi8P7SgTv/L7cnJUbW
+	aOU4l936R8OIUMiJqIQy+ekriQ2Dt67mIp9wzFNtyILpEhgXNr1O57qw/aU4MTZLrjY=
+X-Gm-Gg: AYBFou1s/ZgBhXztr+/ZPcHDmYrwTxkGIyAVUmyAK+i3/C0DBEqtSTSoPXdbRFsghLq
+	7Uk1yO/oSeODnhVKuaE5NbGbKoMj0k6fMYKf4Gv3C64/5tjJqhO8ZxjvDjsFPUQjji67aAbjPzI
+	SIc+MO9dyDJi7fv1pqbiTn+SQSx1RviAPtJd1umMLJKbGXhGHzfsxisaNuGkbHtw2aw7UDB7d5A
+	UQr7VcJJqEGuYsokcn2VG5PYqwb4LYR1Zf20AsApu3GRYA+0R+sukEtjaU09+fONhrD+8/ztG5j
+	tmVrhUlL6H+ox78P5Nw5fahpOrkEwjyMKeidwdMBjgs8kHfxkYXEpFDKqCWQwUUen8Ot6Xlpqz2
+	fq5P5M5Ajf0BFLZMNvEBjtHG/4RaWL5VQX1hhCJOTJJHLGx5Z+dtvqNVJUst7XOGlSTT3lndNbw
+	yXc+nFSkXGeaAqOjPDBI5KmVphwKZp4/ENF3zP9jsZ2NFxFK5rvpNV5NPTlyYjzby0hJm5PR+Yq
+	vOef3x6OQ==
+X-Received: by 2002:a05:6000:481b:b0:484:3600:35a9 with SMTP id ffacd0b85a97d-4843978e680mr12223716f8f.3.1788164536876;
+        Mon, 31 Aug 2026 01:22:16 -0700 (PDT)
 Received: from arrakeen.starnux.net ([2a01:e0e:1007:7be3:8261:5fff:fe11:bdda])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-482fbab3fcesm20105883f8f.5.2026.08.31.01.20.55
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48435b024fbsm12098269f8f.29.2026.08.31.01.22.15
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 31 Aug 2026 01:20:56 -0700 (PDT)
+        Mon, 31 Aug 2026 01:22:16 -0700 (PDT)
 From: Neil Armstrong <neil.armstrong@linaro.org>
-Date: Mon, 31 Aug 2026 10:20:52 +0200
-Subject: [PATCH v6] arm64: dts: qcom: sm8650-ayaneo-pocket-s2: add display
- nodes
+Date: Mon, 31 Aug 2026 10:22:14 +0200
+Subject: [PATCH v3] arm64: defconfig: enable the necessary drivers for the
+ Ayaneo Pocket S2
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -69,378 +69,88 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260831-topic-sm8650-ayaneo-pocket-s2-display-dt-v6-1-1e3b67711eac@linaro.org>
-X-B4-Tracking: v=1; b=H4sIAGM5lWoC/5XQTW7CMBAF4KsgrzvImcROzIp7VF34ZwJuIU5tE
- xUh7l4TKkHFKssnPX8zngtLFD0ltlldWKTJJx+GEuTbitm9HnYE3pXMkKPkDXaQw+gtpGMnBQd
- 91gMFGIP9ogwJwfk0HvQZXAZRK2NaRablihVujNT7n3nU+8c9p5P5JJtv/l8j0vep7JDvNWZ0I
- rDhePR5s5raNUK0yG6v9z7lEM/z3lM1l5evOFVQQd9XNVrOHW/l9uAHHcM6xN08ZcKHLBAXyFh
- k61xTfk9CV69y/ZBbvkSui0zSkexcXffKvMjNk4zVArkpsuxI9FpxIbV7kcWzvOTOosidQm2Us
- WR7+idfr9df3QuHWIcCAAA=
-X-Change-ID: 20260428-topic-sm8650-ayaneo-pocket-s2-display-dt-539bb79eb709
+Message-Id: <20260831-topic-sm8650-ayaneo-pocket-s2-defconfigs-v3-1-bd8ef3322632@linaro.org>
+X-B4-Tracking: v=1; b=H4sIALU5lWoC/52OOw7CMBAFr4Jcs8h2vqbiHojCLOuwfOzIDhERy
+ t1JoIESypGeZt5DJIpMSawXDxGp58TBT5AtFwKP1jcEfJhYaKlLWekautAyQrrWZSHBDtZTgDb
+ gmTpIGg7kMHjHTYLKyaosTF6XTolJ10ZyfH+ltrs3p9v+RNjN/nlx5NSFOLy+9Gre/ZHtFUjID
+ WUWFdbO5ZsLexvDKsRGzN1ef5gz9YNZgwKHuTRUGG0kfpnHcXwCgFqUPU0BAAA=
+X-Change-ID: 20260728-topic-sm8650-ayaneo-pocket-s2-defconfigs-7f07659486f1
 To: Bjorn Andersson <andersson@kernel.org>, 
- Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>, 
- Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>, 
- Geert Uytterhoeven <geert+renesas@glider.be>, 
- Magnus Damm <magnus.damm@gmail.com>
-Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
- linux-kernel@vger.kernel.org, linux-renesas-soc@vger.kernel.org, 
- KancyJoe <kancy2333@outlook.com>, 
- Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, 
+ Konrad Dybcio <konradybcio@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, linux-arm-kernel@lists.infradead.org, 
+ linux-kernel@vger.kernel.org, 
+ Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>, 
  Neil Armstrong <neil.armstrong@linaro.org>
 X-Mailer: b4 0.15.1
-X-Developer-Signature: v=1; a=openpgp-sha256; l=7893;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1961;
  i=neil.armstrong@linaro.org; h=from:subject:message-id;
- bh=4Gbxk0saXYa0vASwZGvK4kGYCHKXsm2fZeaiMljHqRo=;
- b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBqlTlmOyq3GMlmNDzU4U/6VF+CdgkgwVrjQjC7+VOJ
- Fj72PTqJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCapU5ZgAKCRB33NvayMhJ0Vh4EA
- CbWT1ORbrBcK51UsHCcC0nbL5Q4GC5/NCxCbt9ZFL4XMHoqN+dfouMOfQgTqelIOZVHRHTqFRxrSMJ
- 3UEpdjviccDkJzRQPWoK80xnhw9sEMzaBbNv/9MV2Xq9bqkq4aJNkr8D9tmeyRXfv/azay8qotxexA
- ePtu58dnTLXMMelwVpah59TIs71YKkCOKwVuJqF6G65N4SMbZH854o3zWWOsY6zzsooaAoiohCXb45
- o2h/O+cVFJQtnJC3npUK0NXIggdIFbBfzDjDgRWKSfIDbul9VtU46nEX8bXw6oJcOUiPKWi8J8zLRs
- 8fgmO4Xu6ImDmT2lBu0u7MgtvinoqNbfZHS2sgw4d9EXQWuscsr+FzQiUJR2RkFFv1MD+o9mxaqigy
- ny8HcyzfIbZCHXnv4JNbhwFnG5HoFW6zUkSvYUIsnTdihX91adG6/Ujsjvoyhx2EMLQA7RQXLnpXgw
- AWQTaWl25WrkAAPiDlHcnAhmkprLoo0K4l/ITnPnxDtdMSpUZWqpgqSePRTylLVjBtTJBkclmP0x+N
- 2BIwSeijnPVuL1jotOwiQIoIs+Uw2Ma/UuV2JQ1kxeML0j88cPtKZ0LoqWGYcJpujnxVohtRu1LyR8
- +Gdjdh/44lWarwdrlPG+dik85QJFUFbZX3/Ry/0vLQ1JolfK6YD5Z+PoKeow==
+ bh=zy5HflWMSJKpdEDAhcS6LMg6T9VvkVh36wf255mMT/E=;
+ b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBqlTm3FFYFQlpBKjavnp28Ebf4fBNU8FaZ1HNpDJqn
+ K7jLNIaJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCapU5twAKCRB33NvayMhJ0bwDEA
+ CbHr4DskqKJW8GD0DR8UWpdnMYQc9PSFTbTOGqq2xy/NfhJAXamcWG+TKLr9aGSMmVVGaruo4G9BqW
+ 4+V5G3GqFQudmsRzLQPM/XHNP3XlhhsDl7kvqfQUx8qEbAX/yB1w9tcc0+TmTN/dFkgmE0e+J9RJuX
+ 244ApS1ohgDzkyb2JzZTdjyB2qTyBPXF61Fxua1U1sUtkbEsouR2fFS2A7xs/CoO1xblEFCCMvlFXT
+ f3LVkldH0AN3E0aQgtMxxPn9W4YTaaIE7nfkQAjjX12Nfyo6IDCity2sAAH//MiYjKCzW+D/ntSpcS
+ 4OBxIpQKPwlM7m9lNAMkQniOFkyw09TZbrUn0+stdB92L2s61IWhiriTlyT+TCiojLkUskm8NuXpne
+ GEv1CZPSL5ObyPI8ch0WZ0R0ujfTbk602ax6Us/MEVUqpgxb+eD55qPZmz4ScDrF27Pj1+1d9o+lSo
+ QfFcz57gxBpOYuES7fxYdHyaQwRXmZlDBDh5EhlaDNJVCHTzmsHciu65z2ou7PAKHAEC/16oPMQqIe
+ LzcbyUxLyyZVM6M+rY6gH3wbSCGybYK3CuoU81B8ccFX0insZcqGQPpavJjnxE0cNLETAniqwNHK1Z
+ C11Et2aL2WPX8dJaOX+fJEenwCEZsfDxSqflsqZo7apgslRPeEcp+6tPgUHg==
 X-Developer-Key: i=neil.armstrong@linaro.org; a=openpgp;
  fpr=89EC3D058446217450F22848169AB7B1A4CFF8AE
 
-From: KancyJoe <kancy2333@outlook.com>
+Enable the SGM3804 regulator, SY7758 backlight and Renesas 63419 panel
+drivers as module since used by the display on the Qualcomm SM8650 based
+Ayaneo Pocket S2 Gaming Console.
 
-Add nodes for the dual DSI panel, the SGM3804 regulator, the
-SY7758 backlight controller, the touch controller, and enable
-the GPU to enable full display support.
-
-Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-Signed-off-by: KancyJoe <kancy2333@outlook.com>
+Reviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
 Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
 ---
-Changes in v6:
-- Rebase on v7.3-rc1
-- Link to v5: https://patch.msgid.link/20260728-topic-sm8650-ayaneo-pocket-s2-display-dt-v5-1-892ab9bcecfe@linaro.org
-
-Changes in v5:
-- Dropped unneeded mdp vsync pinctrl nodes
-- Link to v4: https://patch.msgid.link/20260721-topic-sm8650-ayaneo-pocket-s2-display-dt-v4-1-68e5fa9056ad@linaro.org
-
-Changes in v4:
-- Reordered regulator & mdss nodes
-- Moved zap shared firmware into separate node
-- Link to v3: https://patch.msgid.link/20260702-topic-sm8650-ayaneo-pocket-s2-display-dt-v3-1-e6de68d33f9b@linaro.org
-
 Changes in v3:
-- renamed backlight label and node as "backlight"
-- reordered pinctrl properties
-- added regulator-boot-on to display regulators
-- Link to v2: https://patch.msgid.link/20260522-topic-sm8650-ayaneo-pocket-s2-display-dt-v2-1-cdd4b70e5a16@linaro.org
+- Fix subject
+- Get review tag
+- Rebase on v7.3-rc1
+- Link to v2: https://patch.msgid.link/20260731-topic-sm8650-ayaneo-pocket-s2-defconfigs-v2-1-fc409e59290c@linaro.org
 
 Changes in v2:
-- Update for bindings changes
-- Remove empty line
-- Link to v1: https://patch.msgid.link/20260428-topic-sm8650-ayaneo-pocket-s2-display-dt-v1-1-ff132c00d076@linaro.org
+- squashed into a single patch
+- Link to v1: https://patch.msgid.link/20260728-topic-sm8650-ayaneo-pocket-s2-defconfigs-v1-0-49e3ac1c8ff4@linaro.org
 ---
- .../boot/dts/qcom/sm8650-ayaneo-pocket-s2.dts      | 230 +++++++++++++++++++++
- 1 file changed, 230 insertions(+)
+ arch/arm64/configs/defconfig | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/arch/arm64/boot/dts/qcom/sm8650-ayaneo-pocket-s2.dts b/arch/arm64/boot/dts/qcom/sm8650-ayaneo-pocket-s2.dts
-index 6ddf30ecabfe..58368ce3cb44 100644
---- a/arch/arm64/boot/dts/qcom/sm8650-ayaneo-pocket-s2.dts
-+++ b/arch/arm64/boot/dts/qcom/sm8650-ayaneo-pocket-s2.dts
-@@ -325,6 +325,23 @@ platform {
- 		};
- 	};
- 
-+	sy7758_vdd33_reg: sy7758-vdd33-regulator {
-+		compatible = "regulator-fixed";
-+
-+		regulator-name = "sy7758_vdd33";
-+		regulator-min-microvolt = <3300000>;
-+		regulator-max-microvolt = <3300000>;
-+		regulator-boot-on;
-+
-+		gpios = <&tlmm 163 GPIO_ACTIVE_HIGH>;
-+		enable-active-high;
-+
-+		vin-supply = <&vph_pwr>;
-+
-+		pinctrl-0 = <&sy7758_vdd33>;
-+		pinctrl-names = "default";
-+	};
-+
- 	vph_pwr: vph-pwr-regulator {
- 		compatible = "regulator-fixed";
- 
-@@ -986,6 +1003,10 @@ gpu7_active: trip-active {
- 	};
- };
- 
-+&gpu {
-+	status = "okay";
-+};
-+
- &i2c3 {
- 	clock-frequency = <100000>;
- 
-@@ -1016,6 +1037,30 @@ wcd_usbss_sbu_mux: endpoint {
- 	};
- };
- 
-+&i2c4 {
-+	clock-frequency = <400000>;
-+
-+	status = "okay";
-+
-+	touchscreen@5d {
-+		compatible = "goodix,gt911";
-+		reg = <0x5d>;
-+
-+		interrupt-parent = <&tlmm>;
-+		interrupts = <162 IRQ_TYPE_EDGE_FALLING>;
-+
-+		reset-gpios = <&tlmm 161 GPIO_ACTIVE_HIGH>;
-+		VDDIO-supply = <&vreg_l14b_3p2>;
-+		AVDD28-supply = <&vreg_l14b_3p2>;
-+
-+		touchscreen-size-x = <1440>;
-+		touchscreen-size-y = <2560>;
-+
-+		pinctrl-names = "default";
-+		pinctrl-0 = <&ts_reset_default>, <&ts_irq_default>;
-+	};
-+};
-+
- &i2c6 {
- 	clock-frequency = <100000>;
- 
-@@ -1053,6 +1098,51 @@ redriver_ss_in: endpoint {
- 	};
- };
- 
-+&i2c9 {
-+	status = "okay";
-+
-+	/* Screen power */
-+	regulator@3e {
-+		compatible = "sgmicro,sgm3804";
-+		reg = <0x3e>;
-+
-+		pinctrl-0 = <&sgm3804_default>;
-+		pinctrl-names = "default";
-+
-+		vin-supply = <&vph_pwr>;
-+
-+		sgm3804_pos: pos {
-+			regulator-name = "panel-avdd-pos";
-+			regulator-min-microvolt = <5200000>;
-+			regulator-max-microvolt = <5200000>;
-+			regulator-active-discharge = <1>;
-+			regulator-boot-on;
-+			enable-gpios = <&tlmm 59 GPIO_ACTIVE_HIGH>;
-+		};
-+
-+		sgm3804_neg: neg {
-+			regulator-name = "panel-avdd-neg";
-+			regulator-min-microvolt = <5200000>;
-+			regulator-max-microvolt = <5200000>;
-+			regulator-active-discharge = <1>;
-+			regulator-boot-on;
-+			enable-gpios = <&tlmm 58 GPIO_ACTIVE_HIGH>;
-+		};
-+	};
-+
-+	/* Backlight */
-+	backlight: backlight@2e {
-+		compatible = "silergy,sy7758";
-+		reg = <0x2e>;
-+
-+		pinctrl-0 = <&sy7758_default>;
-+		pinctrl-names = "default";
-+
-+		vdd-supply = <&sy7758_vdd33_reg>;
-+		enable-gpios = <&tlmm 164 GPIO_ACTIVE_HIGH>;
-+	};
-+};
-+
- &iris {
- 	status = "okay";
- };
-@@ -1073,6 +1163,93 @@ &mdss_dp0_out {
- 	status = "okay";
- };
- 
-+&mdss_dsi0 {
-+	vdda-supply = <&vreg_l3i_1p2>;
-+
-+	qcom,master-dsi;
-+	qcom,dual-dsi-mode;
-+	qcom,sync-dual-dsi;
-+
-+	status = "okay";
-+
-+	panel@0 {
-+		status = "okay";
-+		compatible = "ayaneo,wt0630-2k", "renesas,r63419";
-+		reg = <0>;
-+
-+		pinctrl-0 = <&disp0_reset_n_active>;
-+		pinctrl-1 = <&disp0_reset_n_suspend>;
-+		pinctrl-names = "default", "sleep";
-+
-+		vddio-supply = <&vreg_l12b_1p8>;
-+		vdd-supply = <&vreg_l11b_1p2>;
-+		vsp-supply = <&sgm3804_pos>;
-+		vsn-supply = <&sgm3804_neg>;
-+		vci-supply = <&vreg_l13b_3p0>;
-+
-+		backlight = <&backlight>;
-+
-+		reset-gpios = <&tlmm 133 GPIO_ACTIVE_LOW>;
-+
-+		rotation = <90>;
-+
-+		ports {
-+			#address-cells = <1>;
-+			#size-cells = <0>;
-+
-+			port@0 {
-+				reg = <0>;
-+				panel0_in_0: endpoint {
-+					remote-endpoint = <&mdss_dsi0_out>;
-+				};
-+			};
-+
-+			port@1{
-+				reg = <1>;
-+				panel0_in_1: endpoint {
-+					remote-endpoint = <&mdss_dsi1_out>;
-+				};
-+			};
-+		};
-+	};
-+};
-+
-+&mdss_dsi0_out {
-+	remote-endpoint = <&panel0_in_0>;
-+
-+	data-lanes = <0 1 2 3>;
-+};
-+
-+&mdss_dsi0_phy {
-+	vdds-supply = <&vreg_l1i_0p88>;
-+
-+	status = "okay";
-+};
-+
-+&mdss_dsi1 {
-+	vdda-supply = <&vreg_l3i_1p2>;
-+
-+	assigned-clock-parents = <&mdss_dsi0_phy DSI_BYTE_PLL_CLK>,
-+				 <&mdss_dsi0_phy DSI_PIXEL_PLL_CLK>;
-+
-+	qcom,dual-dsi-mode;
-+	qcom,sync-dual-dsi;
-+
-+	status = "okay";
-+};
-+
-+&mdss_dsi1_out {
-+	remote-endpoint = <&panel0_in_1>;
-+
-+	data-lanes = <0 1 2 3>;
-+};
-+
-+&mdss_dsi1_phy {
-+	vdds-supply = <&vreg_l1i_0p88>;
-+
-+	status = "okay";
-+};
-+
- &pcie0 {
- 	wake-gpios = <&tlmm 96 GPIO_ACTIVE_HIGH>;
- 	perst-gpios = <&tlmm 94 GPIO_ACTIVE_LOW>;
-@@ -1390,6 +1567,20 @@ sw-ctrl-pins {
- 		};
- 	};
- 
-+	disp0_reset_n_active: disp0-reset-n-active-state {
-+		pins = "gpio133";
-+		function = "gpio";
-+		drive-strength = <8>;
-+		bias-disable;
-+	};
-+
-+	disp0_reset_n_suspend: disp0-reset-n-suspend-state {
-+		pins = "gpio133";
-+		function = "gpio";
-+		drive-strength = <2>;
-+		bias-pull-down;
-+	};
-+
- 	fan_pwr_pins: fan-pwr-state {
- 		pins = "gpio125";
- 		function = "gpio";
-@@ -1440,6 +1631,13 @@ gamepad_pwr_en: gamepad-pwr-en-active-state {
- 		output-high;
- 	};
- 
-+	sgm3804_default: sgm3804-default-state {
-+		pins = "gpio58", "gpio59";
-+		function = "gpio";
-+		drive-strength = <8>;
-+		bias-disable;
-+	};
-+
- 	spkr_23_sd_n_active: spkr-23-sd-n-active-state {
- 		pins = "gpio77";
- 		function = "gpio";
-@@ -1454,6 +1652,34 @@ spkr_01_sd_n_active: spkr-01-sd-n-active-state {
- 		bias-disable;
- 	};
- 
-+	sy7758_default: sy7758-default-state {
-+		pins = "gpio164";
-+		function = "gpio";
-+		drive-strength = <2>;
-+		bias-disable;
-+	};
-+
-+	sy7758_vdd33: sy7758-vdd33-state {
-+		pins = "gpio163";
-+		function = "gpio";
-+		drive-strength = <2>;
-+		bias-disable;
-+	};
-+
-+	ts_irq_default: ts-irq-active-state {
-+		pins = "gpio162";
-+		function = "gpio";
-+		drive-strength = <8>;
-+		bias-disable;
-+	};
-+
-+	ts_reset_default: ts-reset-active-state {
-+		pins = "gpio161";
-+		function = "gpio";
-+		drive-strength = <8>;
-+		bias-pull-down;
-+	};
-+
- 	wcd_default: wcd-reset-n-active-state {
- 		pins = "gpio107";
- 		function = "gpio";
-@@ -1549,3 +1775,7 @@ &usb_dp_qmpphy_out {
- &xo_board {
- 	clock-frequency = <76800000>;
- };
-+
-+&gpu_zap_shader {
-+	firmware-name = "qcom/sm8650/ayaneo/ps2/gen70900_zap.mbn";
-+};
+diff --git a/arch/arm64/configs/defconfig b/arch/arm64/configs/defconfig
+index 6ec8d3a69c98..87a6c50bdd14 100644
+--- a/arch/arm64/configs/defconfig
++++ b/arch/arm64/configs/defconfig
+@@ -895,6 +895,7 @@ CONFIG_REGULATOR_QCOM_USB_VBUS=m
+ CONFIG_REGULATOR_RAA215300=y
+ CONFIG_REGULATOR_RK808=y
+ CONFIG_REGULATOR_S2MPS11=y
++CONFIG_REGULATOR_SGM3804=y
+ CONFIG_REGULATOR_TPS65132=m
+ CONFIG_REGULATOR_TPS65219=y
+ CONFIG_REGULATOR_VCTRL=m
+@@ -1026,6 +1027,7 @@ CONFIG_DRM_PANEL_NOVATEK_NT36672E=m
+ CONFIG_DRM_PANEL_NOVATEK_NT37801=m
+ CONFIG_DRM_PANEL_RAYDIUM_RM67191=m
+ CONFIG_DRM_PANEL_RAYDIUM_RM692E5=m
++CONFIG_DRM_PANEL_RENESAS_R63419=m
+ CONFIG_DRM_PANEL_SAMSUNG_ATNA33XC20=m
+ CONFIG_DRM_PANEL_SITRONIX_ST7703=m
+ CONFIG_DRM_PANEL_STARTEK_KD070FHFID015=m
+@@ -1062,6 +1064,7 @@ CONFIG_DRM_ZYNQMP_DPSUB_AUDIO=y
+ CONFIG_FB=y
+ CONFIG_FB_EFI=y
+ CONFIG_FB_MODE_HELPERS=y
++CONFIG_BACKLIGHT_SY7758=m
+ CONFIG_BACKLIGHT_PWM=m
+ CONFIG_BACKLIGHT_APPLE_DWI=m
+ CONFIG_BACKLIGHT_QCOM_WLED=m
 
 ---
-base-commit: 4c45e14df2f4e77982ad70d6d8e3fe750edd4c37
-change-id: 20260428-topic-sm8650-ayaneo-pocket-s2-display-dt-539bb79eb709
+base-commit: cee9395acd8043be0644b25c34bfa86623f2b935
+change-id: 20260728-topic-sm8650-ayaneo-pocket-s2-defconfigs-7f07659486f1
 
 Best regards,
 --  
