@@ -1,135 +1,151 @@
-Received: from mail-ej1-f41.google.com (mail-ej1-f41.google.com [209.85.218.41])
+Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com [209.85.128.54])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 514FB46EF61
-	for <linux-arm-msm@vger.kernel.org>; Mon, 31 Aug 2026 18:17:36 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.218.41
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 10AEA3D3D0C
+	for <linux-arm-msm@vger.kernel.org>; Mon, 31 Aug 2026 18:20:57 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.54
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788200258; cv=none; b=GBa4JVhaeNJDXF1uWhlxQN7WLAybifAweTAybvxj4BBjqgUPLepp89k+0/6v/dbVdiRzThXycYbsFgP2BsUv3b2YB5L21KrbUodLKiGEQgeBaeIFNg1SBQQRYB68JX2FvcM/z2JeP9f6752GBpj+9dFgPGYmaxSsrEWe+xIuocc=
+	t=1788200459; cv=none; b=pk9uvKXfHnMKl6KytewYIHCIAFMth7q4+3uH5Z0Yrp9ABYJUjZJowIBsyFNzGPES/vCH2+JZDGYUIu45KizXvNb0tNzJZv/pEIyAh6NpfUHTyPKq2AWDsSb2nWTJ9zVjs24q5t6KH5TWn8PGrQdCSBvGXh60XqJ5mSKfX0a2QCc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788200258; c=relaxed/simple;
-	bh=PEP7TQkxkQfuISukWgXVA7v768GBhFcwG9ByxxIj2Tg=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=JvX8uPrprwgxxQdk5Tzo1wYHRQv+z47Veb3dn7vRgEHSX4Ir8VIDanl3aun1nWY6qADwtSga59vg8zp3k0yVhEjhVCwPxH85/2ZmEv5Ng5UowEWapZ2KP5CQbXDTMKRxke7gWzzZ6revqhszyX7Nn349bpumuV8S1JrpDSzpKAU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=chromium.org; spf=pass smtp.mailfrom=chromium.org; dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org header.b=JAk9BczK; arc=none smtp.client-ip=209.85.218.41
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=chromium.org
+	s=arc-20240116; t=1788200459; c=relaxed/simple;
+	bh=rb3HKaLLxJzwcBkHRVKkVwDnPxrRHTfCEOty9h/3Dj4=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=Onzzp7/oxTTJRjBheSz20WiyvtXaF5D5fADXTkfCzNJ/vJ0OIPYlCXWoGPsTMpsPww1XGqG/dde9z9B7Wm8Gpylm5Ty0W9sDTYNgBBBtpYu3klJ0vZbP5L2LXGas5NfH/LrGhtZd26aAtpNDsgwJZd60aOaXmz1XfendSsnekdg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=gfFA0NNC; arc=none smtp.client-ip=209.85.128.54
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org header.b="JAk9BczK"
-Received: by mail-ej1-f41.google.com with SMTP id a640c23a62f3a-c15e592da74so461607166b.1
-        for <linux-arm-msm@vger.kernel.org>; Mon, 31 Aug 2026 11:17:36 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="gfFA0NNC"
+Received: by mail-wm1-f54.google.com with SMTP id 5b1f17b1804b1-49b8eeb3ff2so28320635e9.2
+        for <linux-arm-msm@vger.kernel.org>; Mon, 31 Aug 2026 11:20:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=chromium.org; s=google; t=1788200254; x=1788805054; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=Yxans2cK+wuOhbWrIk6+cKJw70uQ8kduizE4DCZb2gc=;
-        b=JAk9BczKg9kJ4jNcJvquBHJGsxV0TUwaoXRR4+OwAe0t3fOa0s78m42P3dLCyCf7VY
-         d89S68aMHazMkMBslixly9VukvuQ+CC4+83pV8J4CEf4dAwE9JpIO1KUlUJVdE6/lXQ2
-         7g7z07ZsXEeuQQFnEdyTNSZ2hCQ/Bu7TPVvTI=
+        d=gmail.com; s=20251104; t=1788200456; x=1788805256; darn=vger.kernel.org;
+        h=cc:to:message-id:content-transfer-encoding:content-type
+         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=OQu21g+jvYzg+hR8nIxI4Zsc1brzVFs3c2vxWfEZwO8=;
+        b=gfFA0NNClt535kbQ/Xd9ftznrAlSMXcdp2NW824ufMZp78w9HO3iafhEBE1AwH7ao4
+         b1oPVNS08Ef85EcgF1xuvAxiLH9O6AK9ZVTfqW4SLX5q6AV1iMduJ9DuvzDWZmLHkBQY
+         Npk8GYlRZo6ST1RjAIjUfaF3fKfa/M3Po5scpDi7YxF1hCRXl1x8zm3jxMQvvtsZd3wv
+         y19QSX6t4aGmL6RXQNaNcjH1UCgB/0fxvsdH+iaDvnikc7eUM2EIKQVVGQjWdxjUDZho
+         zLaggydGcqoSqBPXwgiooqjX2/CapgKPiPT4g+EIfFw2LPqE6XxY1888DtUnks9/blpG
+         3fRQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788200254; x=1788805054;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=Yxans2cK+wuOhbWrIk6+cKJw70uQ8kduizE4DCZb2gc=;
-        b=HWxA/OLtG988OfY0G+FEPrr1O3bOVnfA8GGVRZk8H4TAXPefkAvcjvRBNqSk+QY3ja
-         ey8awrIuAsAsTqd/CrfwBQQw0ZuhFbEkZ6AiWUc72xYDF521MQUDFSutnkb5vSJKQxTR
-         xQ3pCmnkGrRqY/5dcYqVca3vx79jhfmIpTmd+r/4YmSBcwnkhuVqww9Pafr9fyiMCzau
-         sy19H/4Iz0TbjJIDUsu2q0bAt++mVBQcbBSSo03+C+MKNdRW0Ar9AjGtPrtKFxy1M+TF
-         8MVMKVqgGTVtaFRiHSy2lOn+II7f8ecdHLqjaeopKjc0IqiSPTdCfMC0GlPTfMH6BjsM
-         yxeQ==
-X-Forwarded-Encrypted: i=1; AHgh+RoBrPdfGERBzl5Px6qqpJpnSw/r1qfg1RqvNQS9WXYu3rm+E67SPhV7L1gZJIiXXRLuLwdMOkYYTKLRITbf@vger.kernel.org
-X-Gm-Message-State: AFuF++nW6mv6ZLgAuI+GES3vasONylg+SO71Gy/rA9ebBpM/dP1RkIX+
-	FsV1fpvY2Wrk2qz0vVAAqfoNnRTSAT+Ru3ldyoj/FW27GATCYc4rAiovsvow31fH6OyZ1YRwQvL
-	GDoaWuKtE
-X-Gm-Gg: AR+sD11OOr3dFXh27QEYs37e1AlVl/sFHj91V7tIpbZJRVbJelkOkRcH/TQyojwc/uq
-	ErdvxVGpLfhXTu7CXDrQaZyKopvFSAXnTnjSAizGq37iPYIscWlWqQy85n3MYsNvt9We6vnf05I
-	JmBcSsuygyDg08ghx26KDDHeUsoI0rSQ8cK4FG/ocmIIbVBKzDlIHRAGAl1iac3XT3A7lzkiKa1
-	BBDu83tu2sVWmmty1yFuRfv3o74dzEnFmo8A4PYwD95FbeDrl8bnchfv6mDr5srxK75dIJZ3G9M
-	PEJlYcoOIoaWke/eqnj4ylid34bWil+FPH8uMwWrjCqFIKlV/AlPVe/h4CxWzvUYyyMkOYDDS5w
-	Uuk1uO3GnyrZY+XOBSN/Rk3mAbvsztKJfTO3M9Kb4Qds8N37XNgPFfV+fgHYr4NX8wSTZUYDPc7
-	SeVWTAEWOVrb6+PRvShcdjie55Y2lPra62rAoGPjfc4/fMwkxT1BaNtDnbOLm4C3oSYsnGeCVee
-	sE1kz4LYKgmASBwZM+mtQdDtj0=
-X-Received: by 2002:a17:907:6d25:b0:c20:2d38:e518 with SMTP id a640c23a62f3a-c2556c61d72mr1795950866b.2.1788200254445;
-        Mon, 31 Aug 2026 11:17:34 -0700 (PDT)
-Received: from mail-wm1-f53.google.com (mail-wm1-f53.google.com. [209.85.128.53])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c255ee28677sm485165466b.21.2026.08.31.11.17.33
-        for <linux-arm-msm@vger.kernel.org>
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 31 Aug 2026 11:17:33 -0700 (PDT)
-Received: by mail-wm1-f53.google.com with SMTP id 5b1f17b1804b1-490cf322ed0so45034815e9.1
-        for <linux-arm-msm@vger.kernel.org>; Mon, 31 Aug 2026 11:17:33 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AHgh+RqATYLZ9EZNu0QGu5BJNVk+kGIYWoy1oEwM/1Nbri/cP3nsd0xBOesqc3xd81UO8SMkBqB8Cck40g3N5Jnf@vger.kernel.org
-X-Received: by 2002:a05:600c:a03:b0:499:a8bd:1930 with SMTP id
- 5b1f17b1804b1-49b91c20ba0mr403578475e9.5.1788200252252; Mon, 31 Aug 2026
- 11:17:32 -0700 (PDT)
+        d=1e100.net; s=20251104; t=1788200456; x=1788805256;
+        h=cc:to:message-id:content-transfer-encoding:content-type
+         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to:content-type;
+        bh=OQu21g+jvYzg+hR8nIxI4Zsc1brzVFs3c2vxWfEZwO8=;
+        b=o4wPHqMg1GBHRQk9fHIrqS4gKoW3K0EXTbXWlEJ+tudf1eCugEba4PAOP4sHFwc9c/
+         87mTreC+7PKZ1gRt7Whhcg883PeFzNRoicd/Lv1SHQ3n0iMr43n9SKXXSjTWmjz58ZME
+         ArT4U7PGiZIFAXshM5AMbd8kmg4W4tiidUcNiBsZmzJqcdB16ktk1ryPKhE8dnL05nEk
+         2MyaHZk1X99dixbo8JQR1dzfDREiZ8CEg9FouO0gE//Qt5NZoZOilHn+BgirVgrup6Wj
+         OZNChlN/3FourAcRn/WHPw/3Emge8EjuwkRaYyZwqK4Kk2AkWPGMYSjK07T7vccjxMny
+         1sew==
+X-Gm-Message-State: AFuF++kLJ+4XU85pILUKedbqxQCsHjv+AD8JF3vz2qsrjYUCp5JeM9PJ
+	lFCicbuMsxe0Ze4J/hvbXW2Ik3KcXSJxCUxuWS3M5RN16b0lAPU/PPP7
+X-Gm-Gg: AR+sD10lHF+2v8l3KNEr8QWQT80lRQXRwg2Ab5txc78sLbtIWYnhYWeT3u/rm1s+UGT
+	w43xLz2vVEP2ldGwQTd7zZE5QRsHsFvpsIVpEdMT9s7NtjfT1f+v+FNOPyC1oo4/g9NpW/y+N4W
+	TLXvubwAyz+f8oF9LrFXA8v/QJmcaKO882MpwOJOuFGRo/uAf47Qx6UQ5pU3WyeXWVo7Zzuphjr
+	45e0dYGO6ZyClztRwvH34MvsdjPAMBJlZn9uHG4adJfwuQkaWbmxhA+L9YUkdFjZdXCjNCz0sxc
+	EkGPtW74gTtXu0Ca5DMBmZyxUX26r0FtRPoo25DJGkenIgQ4UK3DahcZFMuOrIV+rzKOiSd07Je
+	YE1rAXgf24GP1h/eEeyLQj8Pq9SLgV/RMGz3Mf6WtvHNIF30A5aT8S+CWapqVXaMQvyYxdUOIco
+	VXsDex2wu/UID4afKErOnkkfnVYyN9oNVkgTRSKcmkZ3ILt26wT0bZvniiCoiZX3Q7w+SFkw/9c
+	/+HGxZJozO8+OUODg==
+X-Received: by 2002:a05:600c:1906:b0:499:9240:9a1c with SMTP id 5b1f17b1804b1-49cdc555496mr39483805e9.15.1788200456098;
+        Mon, 31 Aug 2026 11:20:56 -0700 (PDT)
+Received: from [192.168.1.9] ([148.252.128.8])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-49cdce08862sm10721955e9.1.2026.08.31.11.20.54
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 31 Aug 2026 11:20:55 -0700 (PDT)
+From: Dale Whinham <daleyo@gmail.com>
+Date: Mon, 31 Aug 2026 19:20:48 +0100
+Subject: [PATCH] arm64: dts: qcom: x1-denali: Add audio playback over
+ DisplayPort
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260828-qcom-wdt-nmi-series-v2-0-363979fe6b6b@google.com> <20260828-qcom-wdt-nmi-series-v2-5-363979fe6b6b@google.com>
-In-Reply-To: <20260828-qcom-wdt-nmi-series-v2-5-363979fe6b6b@google.com>
-From: Doug Anderson <dianders@chromium.org>
-Date: Mon, 31 Aug 2026 11:17:19 -0700
-X-Gmail-Original-Message-ID: <CAD=FV=UkprU5wLANHrRYmHLmX4UVg-1UW6VRzswv-imF2GeEpQ@mail.gmail.com>
-X-Gm-Features: AcwNN1WgqYHz9yO5Zn6x_Khshnq2JOY9-1BnUBhOPILjjyGKtsa4_xEbIIkQ6bw
-Message-ID: <CAD=FV=UkprU5wLANHrRYmHLmX4UVg-1UW6VRzswv-imF2GeEpQ@mail.gmail.com>
-Subject: Re: [PATCH v2 5/5] watchdog: qcom: Register pretimeout interrupt as NMI
-To: Mayank Rungta <mrungta@google.com>
-Cc: Wim Van Sebroeck <wim@linux-watchdog.org>, Guenter Roeck <linux@roeck-us.net>, 
-	Thomas Gleixner <tglx@kernel.org>, Radu Rendec <radu@rendec.net>, linux-watchdog@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
-	"Kirill A. Shutemov" <kas@kernel.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260831-surface-pro-11-dp-audio-v1-1-fb9c0d3216b7@gmail.com>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXMMQ7CMAxA0atUnrGUNICAqyAGN3HADE1kE4RU9
+ e4NML7h/wWMVdjgMiyg/BaTMnf43QDxQfOdUVI3jG48ulPwaE0zRcaqBb3HVJFakoLhvD+4kB1
+ xJOh1Vc7y+Z2vt7+tTU+Or+8O1nUDVFJ6DXsAAAA=
+X-Change-ID: 20260831-surface-pro-11-dp-audio-394503f0aeca
+To: Bjorn Andersson <andersson@kernel.org>, 
+ Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>, 
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, Dale Whinham <daleyo@gmail.com>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1788200454; l=1386;
+ i=daleyo@gmail.com; s=20251214; h=from:subject:message-id;
+ bh=rb3HKaLLxJzwcBkHRVKkVwDnPxrRHTfCEOty9h/3Dj4=;
+ b=0m34U2jSQLU+yNJSgYdPHWwTU3Re1UwGoq0Ng92diwb5aZgzY1W/jRL26WqpaCM9abGwq3uOF
+ AyIlcCFxtPMAqxFNJre90wdlT2F0oj45p7nbB4XmDXN6oU1x7OZth64
+X-Developer-Key: i=daleyo@gmail.com; a=ed25519;
+ pk=M4mvgx1TB2TniKaedTDsO3PbLKgFosJuegXRXPbn2Ds=
 
-Hi,
+Add the DAI links needed to enable audio playback over the two
+USB/DisplayPort outputs.
 
-On Fri, Aug 28, 2026 at 6:00=E2=80=AFPM Mayank Rungta <mrungta@google.com> =
-wrote:
->
-> When a system is completely unresponsive due to an interrupt storm or
-> deadlocked CPU cores with standard interrupts disabled, a standard
-> watchdog pretimeout bark interrupt will fail to execute, preventing the
-> pretimeout governor from capturing CPU backtraces before the hardware
-> reset bite.
->
-> Attempt to request the Qualcomm watchdog pretimeout bark interrupt as an
-> NMI (or pseudo-NMI) using request_nmi(). If NMI registration is not
-> supported on the platform (e.g. pseudo-NMIs are disabled), gracefully
-> fall back to a standard interrupt via devm_request_irq().
->
-> When NMI is used, register a devres cleanup action to free the NMI upon
-> driver unbind, and use enable_nmi() and disable_nmi() during start and
-> stop.
->
-> Assisted-by: Antigravity:gemini
-> Signed-off-by: Mayank Rungta <mrungta@google.com>
-> ---
->  drivers/watchdog/qcom-wdt.c | 52 +++++++++++++++++++++++++++++++++++++++=
-++----
->  1 file changed, 48 insertions(+), 4 deletions(-)
+Signed-off-by: Dale Whinham <daleyo@gmail.com>
+---
+ arch/arm64/boot/dts/qcom/x1-microsoft-denali.dtsi | 32 +++++++++++++++++++++++
+ 1 file changed, 32 insertions(+)
 
-Sashiko had some feedback here [1]. I think the right resolution is to
-not try to enable/disable the NMI when the watchdog is
-enabled/disabled, just like we do for normal IRQs.
+diff --git a/arch/arm64/boot/dts/qcom/x1-microsoft-denali.dtsi b/arch/arm64/boot/dts/qcom/x1-microsoft-denali.dtsi
+index 7559557610ed..bc8e00e59dc9 100644
+--- a/arch/arm64/boot/dts/qcom/x1-microsoft-denali.dtsi
++++ b/arch/arm64/boot/dts/qcom/x1-microsoft-denali.dtsi
+@@ -314,6 +314,38 @@ sound {
+ 				"VA DMIC0", "vdd-micb",
+ 				"VA DMIC1", "vdd-micb";
+ 
++		displayport-0-dai-link {
++			link-name = "DisplayPort0 Playback";
++
++			codec {
++				sound-dai = <&mdss_dp0>;
++			};
++
++			cpu {
++				sound-dai = <&q6apmbedai DISPLAY_PORT_RX_0>;
++			};
++
++			platform {
++				sound-dai = <&q6apm>;
++			};
++		};
++
++		displayport-1-dai-link {
++			link-name = "DisplayPort1 Playback";
++
++			codec {
++				sound-dai = <&mdss_dp1>;
++			};
++
++			cpu {
++				sound-dai = <&q6apmbedai DISPLAY_PORT_RX_1>;
++			};
++
++			platform {
++				sound-dai = <&q6apm>;
++			};
++		};
++
+ 		wsa-dai-link {
+ 			link-name = "WSA Playback";
+ 
 
-For NMIs:
-* We're forced to start out in "disabled" state (NOAUTOEN).
-* We're forced to disable before we free or we get a WARN_ON.
+---
+base-commit: 8d3ae59288f1e7d58d76558a6ee96d533bc5019f
+change-id: 20260831-surface-pro-11-dp-audio-394503f0aeca
 
-None of those are really problems, though. After we request the NMI,
-there's no problem enabling it right away, is there? Then, if we do
-that, we can make qcom_wdt_free_nmi() unconditionally call
-disable_nmi() before calling free_nmi(). Now everything is nice and
-symmetric and simpler.
+Best regards,
+--  
+Dale Whinham <daleyo@gmail.com>
 
-[1] https://lore.kernel.org/all/20260829011545.3873A1F000E9@smtp.kernel.org=
-/
-
-
--Doug
