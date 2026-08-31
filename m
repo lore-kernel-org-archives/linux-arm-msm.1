@@ -1,188 +1,465 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wm1-f41.google.com (mail-wm1-f41.google.com [209.85.128.41])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A3AB84B7149
-	for <linux-arm-msm@vger.kernel.org>; Mon, 31 Aug 2026 16:08:22 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8BF5547DD42
+	for <linux-arm-msm@vger.kernel.org>; Mon, 31 Aug 2026 16:11:29 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.41
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788192504; cv=none; b=s1fRSrV3rhpoPWzySMjE8puC79Vn6x3VgbZsoX4ptG74xZGOH5p3tkFJYW83FYRhvSCcp/WBB/NTmKLSUIbWyobcyOjJc6ZWKXazbJ1atCxNGi11r1N3oKCrBofZBdA/MTV8KEJfMDVALfIXNS2OMUx7IHy7Q++SiFnkr5ylzdI=
+	t=1788192692; cv=none; b=siI8MWzvZ57Y3abuep3kDHTk38guz54g0cNSk4UyGEw7SPOndL6kpde/VfVPpdF3E2tkPR7MdcHDVjYyNEBUlDb4gCdQO6X2Y8+i7VZguC+inIZhbWhzXGDq6RLZlTpD0Z9uLndD3TLe7ZZyWanKiwQYEB7CGNdDsKlE7l10cDk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788192504; c=relaxed/simple;
-	bh=GIOR13Vau//QjAP6pJ8tBGbxO1q6YYuEw0n2DA0RMB4=;
+	s=arc-20240116; t=1788192692; c=relaxed/simple;
+	bh=JagSOV+iew7LTbLUPUucQYo4WeOv9NMqj17vWep7AlM=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=tanktXtjrTgD9iy1jnYtpVgn86F9aCuuOSoCDYmhjceM4tiiR9kGMjN1FjeHrEqP96B12BTlThRlxRRtBdKK7g7DdLlYEwdAgdYCaowQOHuNbFvTTxqPKcCtTK4zYlyTEVRzUALCZbTGxjiNVUOq+g7fvF2j/ou9OUMXnaRGTHo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=KBIr3F8a; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=cB0xVCzU; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	 Content-Type:Content-Disposition:In-Reply-To; b=Rx0Wnny2jgVqJ51uE6dmID8nQvYggfvj2BnBOqEicVDlatwgGmmW2/DTFrMXoOORXsIs8dN7+WFET0+jGzkEKdmnfoBBALLzf9BJWKhjK+7iYwNgKxla9+zb47mJDPQI6wLnvpWgIUkwzJW7bfA9mGBbLSjD1phxYZu2CODom8k=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=w3/a3Kpn; arc=none smtp.client-ip=209.85.128.41
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="KBIr3F8a";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="cB0xVCzU"
-Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67VFpvh84152602
-	for <linux-arm-msm@vger.kernel.org>; Mon, 31 Aug 2026 16:08:21 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-type:date:from:in-reply-to:message-id:mime-version
-	:references:subject:to; s=qcppdkim1; bh=52UHJM028Rn+QiJdUqrpXvZf
-	vhdocUvIr66ANCnExAg=; b=KBIr3F8a+d6CM7H6mBmIEkMo3Wc3Mu45/cGFFZEA
-	YCv+i0W5n0zNVo2zkvmEw8J4rcafCSLGyav35ZNUZwZkK8B1klCUkASzG2fDyIp9
-	37mcc45bqM0iga7CAIEhTOmtjn0aKWzHTePbo/3cITUKNeZ1FSFbTY6R6RLMbmBB
-	0DszzI0J/q04cF+RRZU6auFF1GoyOtDN0VTZ6f7PGrVxpP3KxqZtDdZVBEU3IE9u
-	Ikj758URRXgfdKA83a40Y4yonGmJWhtDrBOWGkbpygD4g/iWvghNPno63TS/R5/U
-	h6fk91Ecz2nH5y/Qlte25+8W1krKwP5GKYcpZPUTazEyGA==
-Received: from mail-qk1-f200.google.com (mail-qk1-f200.google.com [209.85.222.200])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gd6h91ukt-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Mon, 31 Aug 2026 16:08:21 +0000 (GMT)
-Received: by mail-qk1-f200.google.com with SMTP id af79cd13be357-92e53b8a302so509722785a.1
-        for <linux-arm-msm@vger.kernel.org>; Mon, 31 Aug 2026 09:08:21 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="w3/a3Kpn"
+Received: by mail-wm1-f41.google.com with SMTP id 5b1f17b1804b1-499b2981a7bso41370455e9.3
+        for <linux-arm-msm@vger.kernel.org>; Mon, 31 Aug 2026 09:11:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1788192500; x=1788797300; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=52UHJM028Rn+QiJdUqrpXvZfvhdocUvIr66ANCnExAg=;
-        b=cB0xVCzUyu+b/5PkWWejksqS6kT9U0yGOut8QHjRfFUUG1KzD+a5tz2yPFnr+0ZmdK
-         3j8vZGMREHIhErFSpqvk1liVJrwtPi9U0hutoHTwfhMj2tUkt/nbyAnlT3MPdUw8SBM8
-         ItiXGGd4ZF6XscPo5LZmpcDuInkFrfN+P5a9OiuqXQ3YeI/mDvh/i1tkcy/nVmn1QIz7
-         Q2tZOYoP5JZ0e0dpaBAkpM2Dej+U4OI7L8JwQiyUcldwB5KZPTEnY+XPwJ10ilSZE6Oy
-         2CVhfgUGinYJcBMLSz4JBd2N1yQTTT2z09TGfbIxeZOtf0UhxFMIUKJ5G4rPsCZ8JKsl
-         BA1w==
+        d=linaro.org; s=google; t=1788192688; x=1788797488; darn=vger.kernel.org;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :content-type:mime-version:references:message-id:subject:cc:to:from
+         :date:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=c/vUa6jrSKfv9b260MkvoS0N0rnO/tAMsnWTvLOBSRA=;
+        b=w3/a3KpnREodIMaYR33kZ2AA38FSTV0IXXSxCRWMCG5ODbCubKZvTwzKXC1S1Qmk9v
+         /n0c1+gG0Azm1E6CHQ8HkfkAfrqnKH+nZ3lP1WTF7ojm5JLi1rXPZgEZjxm6T8I5+Z1p
+         omxVQ+vBF55CSd2hK0QGSVllr8SIaB87zuA09FFj2oUR4iP59hU1JPrxdrcDcERCYeo3
+         m+tZ7wToJA1LtkJLiCd0RHXYZs01cx/nwvuv+ga0qNKn/tywpc0VFxdz2npOUBjIebhA
+         VQVdp3niSkKWfzrnjLfBg3ssLLbZVIMUe1iUI/V8kRpHI2e5TMjZLHEvhhxesDnbHYcE
+         09Uw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788192500; x=1788797300;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=52UHJM028Rn+QiJdUqrpXvZfvhdocUvIr66ANCnExAg=;
-        b=F4plGY06awk7Lo0NnaBKB98ilHkSiToKelZbLvAP3mXgO++k7CRjkoYMXUL8Mk2BXJ
-         lzM8m4rabIgCfq7B5lkApy6YF+ML5OjsJMbWSVhROD3b0pHvChpR4Zdc5tIvi/AaTf8z
-         1rXMyFQM0J+/1abzSypqXNKEaDMAx2cQLmQq+UZM75r3A+4MxlRYyQ0wsEu/Nzq1zlpP
-         1eki794AxqPKG1eFmPhjaFBUTumpE19AL2RY5d8WtBvpLYfhXWZDt47rAV6T0U3GuA39
-         fIr08gdhIqcTCAp8NxKyunegJtWogixAg4/Htli94p60ffk+fKy/C/ViG+Fst5gPu66m
-         u4zQ==
-X-Forwarded-Encrypted: i=1; AHgh+RqhIkLaWWdx3TDYqP1ZVWpD9MtNfECaDe7dOzrikzHOic3wVaANw+dIXQsybeGx42cNCGpKZf1wwVTI33nJ@vger.kernel.org
-X-Gm-Message-State: AFuF++nxmEeDTYhntFMcY2xp1RlPOMLTRfTnm5+C1uOhttoKzGK65NtT
-	YBq73+3/imp4DydAVDpjhVGlkLHHpB3LRmHi8xPGofcW4C4gBdIps4saWqyBRTXgKr1vvDU6Wro
-	c145ZOyz2VtiBdderlIZYQCuPkSBQ1Sb3T4GEEXPhaEEsHxDkciGmASwVTWRL/SM76z2b
-X-Gm-Gg: AR+sD11V7h/TSNfHnULFaNnltGStkNCUg/665+Q26BhM4UhutxkdQOBmbDTkigHC63E
-	GvjhuCFDFowjm01odtw4aOF1Ghjx1hIEEntK8jZS1IzsLbIJbaOO74qcnIADzApPxq9s+K+ZORC
-	6o5lZkQ/fTRqQP+kJZ2P0quxaVmbm7Q1CDGwTZBDQ43+raogFLlfz7VIpgogXbpGnzfiKZnIrqj
-	wCmjlRjBjw+u87f4nVIDr9C449ti+Cs1YQ/Fx7bf4bYX6XXdUzHpzp4RxRw0ps+JhTGIT+kY6Ip
-	YcN5hOa+xFXIBHjRnovaxQ9C/CvUQu5S0V4x9Q4cvQe6i5kqi2Z2gBpezlUNssmQ0n7oyhh6lYG
-	oDScFqADh4Ff7Zg==
-X-Received: by 2002:a05:620a:40cb:b0:930:b4f9:f327 with SMTP id af79cd13be357-939138df3d1mr2695991785a.33.1788192500416;
-        Mon, 31 Aug 2026 09:08:20 -0700 (PDT)
-X-Received: by 2002:a05:620a:40cb:b0:930:b4f9:f327 with SMTP id af79cd13be357-939138df3d1mr2695976285a.33.1788192499764;
-        Mon, 31 Aug 2026 09:08:19 -0700 (PDT)
-Received: from oss.qualcomm.com ([86.121.170.13])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-49b9266be71sm632091255e9.2.2026.08.31.09.08.17
+        d=1e100.net; s=20251104; t=1788192688; x=1788797488;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :content-type:mime-version:references:message-id:subject:cc:to:from
+         :date:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=c/vUa6jrSKfv9b260MkvoS0N0rnO/tAMsnWTvLOBSRA=;
+        b=KyVR7EPTjdcTEWyKAen0ZQAeR0xzoyIgt4B5bgbTnWh2c/XC5hhupZRaU8JD47ZeXj
+         ak+Ru6d/oiC40MTZNxDnNC9LCnhyEGJUy59HzUrEza9Jp6cMs7vlBSl1alQS7zfu7XSn
+         wJ8GgEnAs5Yw2wBa9kXLjtAbQtm9ukv/KW9CStKiVmZ6FVYadJHdk0KkpDIMii7DNZH2
+         XGa0mJQ+Hl9DEHQy5IIyYxZInkpZXurom1tWo5PZ3mATgua9kPnQXtplKJ2b/r9ibpU1
+         Gr4sBidRn4LBoZQ0mLudg7DqQhofITWzP7ATIPKLbLxr+DlHTpVz7+zZlGiHfiB8qrKH
+         i+DA==
+X-Forwarded-Encrypted: i=1; AHgh+RpzXhy8TFUz7ApaUrfKKoJpQBiiOimoS30xbKK9D8r+qsxDZ/mHjpC0c5KDeIovgVI1iKMxkK5mmD7+ixeL@vger.kernel.org
+X-Gm-Message-State: AFuF++niBgmwhwSrYrlTCYUjz1OekI4Qcm3ZYS/Va1pW8DVjeRe6OA55
+	v5zFBlpLCqlYvTBMra8gX5IWPOsAW8MlLGLp55Ck3WGkl3OgNgc4fwBv53J3pieno9A=
+X-Gm-Gg: AR+sD12URzCRm4qQPai1XJmPvXow7KBxHA+Hq/aTt3xlqxYIwRrQkH90zPXV3lwlIhI
+	XG+0m4xMaBuKPfCXvIosJ9FAg7p8OGylM2uEqDnnBPpToVJV4mIBkInnD62rZnTtsDvP8rVUOOQ
+	9xymSAZ//BRGw744O/Y5mnad2ug793Y2fobVL4Y0JROQwm7oa/ekngfGMxLBgr3HzQ+3gONKurn
+	qB3A7VGDZEbs75y+M23MNS47FuwUwzgdxUZqvVw/dL7OTQsxGJjg+ZuMCmVqQRa2DsT65lPvA5Z
+	fA3ezxJ8CM5pEEfk42S5V8sGP4mWiX3B7a6dzqkK+oWWCc0CoZv+oCC/pEM/mJIW/m0Lc7DdFM1
+	fZ6IC97tDx2Jt5I+VaZkqCXHdMDgid+A55QQad/V4bmd4yXtSHI7mAJBGTcH/GMgtFrgn7DTbbu
+	QryFFjvmMdx6Vzz+/wzm36/UUIzxzJZ5dDgstynDPPJBOVEZLuTBhK5EmWe/+3oosTAmJKAeZgj
+	g==
+X-Received: by 2002:a05:600c:4fd4:b0:499:83f1:398 with SMTP id 5b1f17b1804b1-49cdc59f62emr33347815e9.9.1788192687604;
+        Mon, 31 Aug 2026 09:11:27 -0700 (PDT)
+Received: from linaro.org ([2a02:2454:ff24:7241:bd4d:644d:33b9:dc56])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-49cdce0d4f3sm2877545e9.5.2026.08.31.09.11.25
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 31 Aug 2026 09:08:18 -0700 (PDT)
-Date: Mon, 31 Aug 2026 19:08:16 +0300
-From: Abel Vesa <abel.vesa@oss.qualcomm.com>
-To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-Cc: Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>,
-        Ulf Hansson <ulfh@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        cros-qcom-dts-watchers@chromium.org, linux-arm-msm@vger.kernel.org,
-        linux-mmc@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org,
-        Neeraj Soni <neeraj.soni@oss.qualcomm.com>
-Subject: Re: [PATCH v8 2/3] arm64: dts: qcom: kodiak: enable inline crypto
- engine for SDHC
-Message-ID: <uwo6mb7tfgir7k7yig3w4ych5rvx6gex5zzaeyvbjf5uv6coga@srxc4jbphri4>
-References: <20260629-ice_emmc_support-v8-0-1a26e1717b85@oss.qualcomm.com>
- <20260629-ice_emmc_support-v8-2-1a26e1717b85@oss.qualcomm.com>
- <ba96f5e3-6b6e-40b6-b6c1-300e862e8ee4@oss.qualcomm.com>
- <d3be45ab-0390-4d0e-8d5b-330a48c529a1@oss.qualcomm.com>
- <1a0b91c6-5e17-4330-a8ab-ac14d3339024@oss.qualcomm.com>
- <ffca92db-a3ac-4345-8477-1f53ec61ef16@oss.qualcomm.com>
- <56ab63c3-4288-45f7-bfea-d40046437a9f@oss.qualcomm.com>
- <mwf5hq3gnkesmccede2sa5ni5lyxg3zfnxvwchts2nxh25zndw@uyn4dqehfdpv>
- <b7658f61-17d2-4788-b635-ff2021d2033b@oss.qualcomm.com>
+        Mon, 31 Aug 2026 09:11:26 -0700 (PDT)
+Date: Mon, 31 Aug 2026 18:11:14 +0200
+From: Stephan Gerhold <stephan.gerhold@linaro.org>
+To: Bjorn Andersson <andersson@kernel.org>
+Cc: Bjorn Andersson <bjorn.andersson@oss.qualcomm.com>,
+	Konrad Dybcio <konradybcio@kernel.org>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>, linux-arm-msm@vger.kernel.org,
+	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH 2/3] arm64: dts: qcom: hamoa-crd: Add thermal control
+Message-ID: <apWnounPP8kRxFeb@linaro.org>
+References: <20260830-hamoa-sys-therm-v1-0-27108c40fba5@oss.qualcomm.com>
+ <20260830-hamoa-sys-therm-v1-2-27108c40fba5@oss.qualcomm.com>
+ <apVCUObyxf8Akbsc@linaro.org>
+ <apWIbtyQQ4mOjZKn@baldur>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
-In-Reply-To: <b7658f61-17d2-4788-b635-ff2021d2033b@oss.qualcomm.com>
-X-Authority-Analysis: v=2.4 cv=W6UIkxWk c=1 sm=1 tr=0 ts=6a95a6f5 cx=c_pps
- a=hnmNkyzTK/kJ09Xio7VxxA==:117 a=clBUptZa5v5FR042Ey+sjA==:17
- a=kj9zAlcOel0A:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
- a=onLGS3NSUnbtietV6iIA:9 a=CjuIK1q_8ugA:10 a=PEH46H7Ffwr30OY-TuGO:22
-X-Proofpoint-ORIG-GUID: O9-wsxs0dE09gIeTiBdtIvrcyUo4ZzVh
-X-Proofpoint-GUID: O9-wsxs0dE09gIeTiBdtIvrcyUo4ZzVh
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODMxMDEzOSBTYWx0ZWRfX39CPJ890sxf/
- mZq/TETB2F4QFJ2uy9q1V8F18MPK/ZafVvvYYx2UBdRxgwz6SgCjMDelJVtpv/II/XVHV3495fV
- SPqlL2ypIFGVtbTzrG4D8DhtNV8Qp3k=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODMxMDEzOSBTYWx0ZWRfX6yl19CIWXD4R
- 5nYro1T74h7PIGY9pKU8gJHDtbptYUcu+QwwKQKU6pmrWuH/dWwqN/KAY+LRZStrRfRi8tzhNHy
- Ho38gFwX3gNnSHO04y27LBHiJNm5JN1Q8d30R5GD4Tul0539QdTqdGecuJqwRvP92mRncwANHlB
- RFuEyiciSB1NcLv9FCE/jZLf/KHiYg0v8KgNkE9OinD2oMUNui5akWJifCl9AKQr9NzP1IijKE+
- pJaKdJdlCktrnRPFaZ6NA2xYWc0+1bYkFkbnejVqAkxSYR7rdV3VbaHPS/bJ+iNkrviRFg5w1BE
- 6OyEqBzMP2DY7GtosJ0B5e72rLKX7Cyrb4c9jzYvaSNxZnRCMmteC1ryRQfRBTewUcqpCleEbrR
- b+dn1qpb34mpBdy2YvFhOyjPb9359lV0mws8QIFxbuaLZFhLorKB2F2/ATbKazZVuJONUyeLsA3
- 6vbwi/FMn2HW2oB0GHg==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-08-31_05,2026-08-31_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 spamscore=0 malwarescore=0 suspectscore=0 bulkscore=0
- clxscore=1015 phishscore=0 lowpriorityscore=0 priorityscore=1501 adultscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608310139
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <apWIbtyQQ4mOjZKn@baldur>
 
-On 26-08-28 21:07:24, Konrad Dybcio wrote:
-> On 8/28/26 2:57 PM, Abel Vesa wrote:
-> > On 26-06-30 13:25:13, Konrad Dybcio wrote:
-> >> On 6/30/26 12:23 PM, Kuldeep Singh wrote:
-> >>>> qcom_ice_probe()
-> >>>>   -> qcom_ice_create()
-> >>>>     -> devm_clk_get_optional_enabled()
-> 
-> [...]
-> 
-> >> On the developer/customer experience side, would you expect having to
-> >> manually enable what's essentially a sub-feature of the storage media
-> >> on every single board?
+On Mon, Aug 31, 2026 at 09:20:14AM -0500, Bjorn Andersson wrote:
+> On Mon, Aug 31, 2026 at 10:58:56AM +0200, Stephan Gerhold wrote:
+> > On Sun, Aug 30, 2026 at 09:02:03PM +0000, Bjorn Andersson wrote:
+> > > The "limits" hardware performs rapid thermal management of the CPU
+> > > cores, but during prolonged CPU usage the system's overall temperature
+> > > need to be further managed by software.
+> > > 
+> > > The reference design provides seven "system thermistors", connected to
+> > > the PMK8550 VADC. Particularly interesting is the "keyboard hotspot
+> > > thermistor", which is wired up to sys_therm1.
+> > > 
+> > > Use this to throttle the CPUs, in the same way that we're throttling
+> > > previous generation laptops based on "skin-temp". The trips are chosen
+> > > from those existing examples, but are comparable with the ACPI thermal
+> > > policy.
+> > > 
 > > 
-> > Wait, don't we do that for display nodes anyway ?
+> > In general, following the ACPI thermal policy as close as possible is
+> > better than following existing examples. Most X1E-based devices use
+> > hybrid active/passive cooling, with the fan controlled independently by
+> > the EC. If you start throttling even just 1-2°C before the EC reaches
+> > its highest fan trip point, it will result in bad performance. Linux
+> > will try to keep the temperature below the specified temperature, and
+> > the EC will never fully ramp up the fan.
 > > 
-> > Also there might be a case where you just don't want the ICE enabled.
 > 
-> I can think of literally none..
+> That's certainly true. On X13s it was a bit easier as it's passively
+> cooled, but these things needs to be taken into consideration.
 > 
-> > So I suggest we disable the ICE by default and enable it only on boards
-> > where there is a consumer.
+> > This is what I determined from the CRD ACPI tables last year:
+> > https://github.com/stephan-gh/linux/commit/24f053436ec2eaf70968803adfa8c17905e53cae.patch
 > > 
-> > We don't normally leave stuff enabled just because runtime PM will
-> > disabled it for us.
 > 
-> We should because the hardware is in a state that's otherwise unknown
-> to Linux, I've been trying to push that forward, but many things
-> currently can't be enabled without side effects.
+> Why don't you post your patches!? Have I missed it?
+>
 
-So interestingly, on Eliza at least, ICE isn't left powered by the
-bootloader. Are you saying that, in general, bootloader leaves things
-enabled on Qualcomm platforms? I'm assuming that would be ABL that does
-that, right?
+No, you haven't missed it. I wanted to send them back when I wrote them
+(early 2025), but unfortunately the PMIC5 Gen3 ADC patches then blocked
+sending it for almost 1.5 years... :/
 
+I lost track of the long ongoing series at some point and nowadays
+I don't even have a CRD to test on anymore, that's why my patch is sadly
+stuck in the archive.
+ 
+> > The fact that GPU is only throttled based on back-thermal is a little
+> > odd, but this is what the ACPI tables specified back then as far as
+> > I could tell (maybe it was fixed since then).
+> > 
+> > Your changes seem close enough to not cause the performance problem
+> > I mentioned above, although I think it would be worth setting a good
+> > examples for others to follow.
+> > 
 > 
-> With the right drivers in place, the hw can be safely powered off or
-> at least parked, instead of letting it spin in whatever state the
-> bootloader has left it in.
+> Sure, I'll compare with ACPI tables and adjust the numbers accordingly.
+> 
 
-I understand that point, however, this kinda makes the ICE a one-off.
-We do not do that for mdss DSI/DP controllers/PHYs on boards without
-display, right?
+Thanks!
 
-Not to mention that, on an end user device, the ICE driver would have
-to be provided as module for the sole purpose of powering it down. It
-doesn't make sense.
+As far as I remember, ACPI has separate thresholds for each of the EC
+fan profiles (see [1]). I don't think we can model dynamic temperature
+thresholds in the DT, so we'll have to pick some default. IIRC the
+default is "best performance without charger", which - back then - was
+the 326 kelvin (~53°C) I used in my patch.
+
+[1]: https://lore.kernel.org/linux-arm-msm/20260728-ec_add_more_commands-v1-3-771abd65ee1a@oss.qualcomm.com/
+
+> > > While not used for cooling/throttling, also add the other thermal zones
+> > > for temperature reporting purposes.
+> > > 
+> > > Enable thermal-monitor mode for all 7 channels in the ADC.
+> > > 
+> > > Signed-off-by: Bjorn Andersson <bjorn.andersson@oss.qualcomm.com>
+> > > ---
+> > >  arch/arm64/boot/dts/qcom/x1e80100-crd.dts | 116 ++++++++++++++++++++++++++++++
+> > >  1 file changed, 116 insertions(+)
+> > > 
+> > > diff --git a/arch/arm64/boot/dts/qcom/x1e80100-crd.dts b/arch/arm64/boot/dts/qcom/x1e80100-crd.dts
+> > > index 429deffcf3e9..065af18357d7 100644
+> > > --- a/arch/arm64/boot/dts/qcom/x1e80100-crd.dts
+> > > +++ b/arch/arm64/boot/dts/qcom/x1e80100-crd.dts
+> > > @@ -11,6 +11,92 @@
+> > >  / {
+> > >  	model = "Qualcomm Technologies, Inc. X1E80100 CRD";
+> > >  	compatible = "qcom,x1e80100-crd", "qcom,x1e80100";
+> > > +
+> > > +	thermal-zones {
+> > > +		soc-thermal {
+> > > +			thermal-sensors = <&pmk8550_vadc ADC5_GEN3_AMUX1_GPIO_100K_PU(1)>;
+> > > +		};
+> > > +
+> > > +		keyboard-thermal {
+> > > +			polling-delay-passive = <250>;
+> > > +
+> > > +			thermal-sensors = <&pmk8550_vadc ADC5_GEN3_AMUX2_GPIO_100K_PU(1)>;
+> > > +
+> > > +			trips {
+> > > +				skin_alert0: trip-point0 {
+> > > +					temperature = <55000>;
+> > > +					hysteresis = <1000>;
+> > > +					type = "passive";
+> > > +				};
+> > > +
+> > > +				skin_alert1: trip-point1 {
+> > > +					temperature = <58000>;
+> > > +					hysteresis = <1000>;
+> > > +					type = "passive";
+> > > +				};
+> > 
+> > What does this second trip point do differently than the first? It has
+> > the same cooling devices. Will it try throttling "harder" than before?
+> > 
+> > I know sc8280xp-lenovo-thinkpad-x13s.dts has the same, but I'm not
+> > entirely sure what it does there either.
+> > 
+> > My experience was if you specify 55°C as one passive trip point, then
+> > Linux will try its best to keep it with the specified cooling devices.
+> > 
+> 
+> I didn't dive into this rabbit hole... I'll review and update
+> accordingly.
+> 
+
+Thanks!
+
+> > > +
+> > > +				skin-crit {
+> > > +					temperature = <73000>;
+> 
+> Your patch has 115C here. That may be what the ACPI tables are saying,
+> but it seems a bit excessive.
+> 
+
+I agree, feel free to change that.
+
+> > > +					hysteresis = <1000>;
+> > > +					type = "critical";
+> > > +				};
+> > > +			};
+> > > +
+> > > +			cooling-maps {
+> > > +				map0 {
+> > > +					trip = <&skin_alert0>;
+> > > +					cooling-device = <&cpu0 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+> > > +							 <&cpu1 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+> > > +							 <&cpu2 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+> > > +							 <&cpu3 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+> > > +							 <&cpu4 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+> > > +							 <&cpu5 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+> > > +							 <&cpu6 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+> > > +							 <&cpu7 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+> > > +							 <&cpu8 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+> > > +							 <&cpu9 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+> > > +							 <&cpu10 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+> > > +							 <&cpu11 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>;
+> > > +				};
+> > > +
+> > > +				map1 {
+> > > +					trip = <&skin_alert1>;
+> > > +					cooling-device = <&cpu0 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+> > > +							 <&cpu1 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+> > > +							 <&cpu2 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+> > > +							 <&cpu3 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+> > > +							 <&cpu4 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+> > > +							 <&cpu5 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+> > > +							 <&cpu6 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+> > > +							 <&cpu7 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+> > > +							 <&cpu8 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+> > > +							 <&cpu9 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+> > > +							 <&cpu10 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+> > > +							 <&cpu11 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>;
+> > > +				};
+> > > +			};
+> > > +		};
+> > > +
+> > > +		backcover-thermal {
+> > > +			thermal-sensors = <&pmk8550_vadc ADC5_GEN3_AMUX1_THM_100K_PU(1)>;
+> > > +		};
+> > 
+> > Should we add throttling here as well to match Windows?
+> > 
+> 
+> Then there are the reports that indicate that we should throttle things
+> when the SMB temperatures reaches something like 80C, which doesn't seem
+> to be something represented in the ACPI tables.
+> 
+
+Windows has quite some extra logic in the PEP driver that does
+additional fine-grained throttling based on PMIC die temperatures,
+battery current, power source / battery percentage and other factors.
+Unfortunately, I never fully understood how that works, but it may be
+handled in there.
+
+> I'll do a respin of this and then we can tweak it from there. The
+> important thing for me is to get some reference in, so we can propagate
+> this to the consumer devices (NB: which doesn't have the same sys_therm
+> mapping).
+> 
+
+Thanks!
+
+I have been working on finishing up my corresponding patch for the T14s
+(which is something I can still test unlike the CRD). That one is
+unfortunately currently stuck because the SYS_THERMx mapping really is
+different from the CRD and even the schematics are not sufficient to
+understand where each sensor is located. The mapping seems to be
+different from the CRD, unfortunately.
+
+The ACPI side is also extra tricky because it takes the thermal
+thresholds for the thermal zones through some lookup table in a random
+firmware memory region, which is also applied depending on the selected
+fan profile (for the T14s: "low power", "balanced", "performance").
+I had some luck with using PowerShell on Windows to obtain the computed
+ACPI values using
+
+  Get-CimInstance -Namespace "root/wmi" -ClassName MSAcpi_ThermalZoneTemperature
+
+With that I could see the thresholds (PassiveTripPoint) changing when I
+change the power profile in Windows.
+
+For fun I had LLM create this PowerShell script that directly outputs DT
+snippets, although unfortunately the missing part is actually mapping
+the thermal zones to their purpose (right now it outputs zones like
+qcom0658-1-0-thermal or even just tz73-0-thermal).
+
+Just sharing it for reference below.
+
+Thanks,
+Stephan
+
+---
+<#
+.SYNOPSIS
+    Exports Windows WMI MSAcpi_ThermalZoneTemperature instances to Linux Devicetree (DTS) format.
+
+.DESCRIPTION
+    Queries the 'root\wmi' namespace for ACPI thermal zone instances and translates
+    temperatures, passive/active/critical trip points, and sampling rates into Linux
+    kernel thermal zone DTS nodes.
+
+.PARAMETER OutputFile
+    Optional file path to save the generated DTS nodes. If omitted, prints directly to stdout.
+
+.EXAMPLE
+    .\Convert-AcpiToDts.ps1
+
+.EXAMPLE
+    .\Convert-AcpiToDts.ps1 -OutputFile "thermal_zones.dtsi"
+#>
+[CmdletBinding()]
+param (
+    [Parameter(Mandatory = $false, Position = 0)]
+    [string]$OutputFile
+)
+
+function ConvertTo-Millicelsius ([uint32]$tenthsKelvin) {
+    # ACPI trip points of 0, >= 65535 (0xFFFF), or <= 2732 (<= 0°C) are uninitialized/disabled
+    if ($tenthsKelvin -le 2732 -or $tenthsKelvin -ge 65535) {
+        return $null
+    }
+    return [long]($tenthsKelvin * 100) - 273150
+}
+
+function Get-DTNames ([string]$instanceName) {
+    # Sanitize instance name (e.g. "ACPI\QCOM0658\0_0" -> "qcom0658-0-0")
+    $parts = $instanceName -split '\\'
+    if ($parts.Count -ge 3) {
+        if ($parts[1] -ieq "ThermalZone") {
+            $raw = $parts[2]
+        } else {
+            $raw = "$($parts[1])-$($parts[2])"
+        }
+    } else {
+        $raw = $parts[-1]
+    }
+
+    $cleanNode = ($raw.ToLower() -replace '_', '-' -replace '[^a-z0-9-]', '') -replace '-thermal$', ''
+    $cleanLabel = $cleanNode -replace '-', '_'
+
+    return @{
+        NodeName  = "${cleanNode}-thermal"
+        BaseName  = $cleanNode
+        LabelName = $cleanLabel
+    }
+}
+
+# Fetch CIM instances safely into an array
+$zones = @(Get-CimInstance -Namespace "root/wmi" -ClassName MSAcpi_ThermalZoneTemperature -ErrorAction SilentlyContinue)
+
+if ($zones.Count -eq 0) {
+    Write-Error "No MSAcpi_ThermalZoneTemperature instances found in root\wmi."
+    return
+}
+
+$dtsNodes = [System.Collections.Generic.List[string]]::new()
+
+foreach ($zone in $zones) {
+    $names     = Get-DTNames $zone.InstanceName
+    $nodeName  = $names.NodeName
+    $baseName  = $names.BaseName
+    $labelName = $names.LabelName
+
+    # Check for passive trip point
+    $psvMC      = ConvertTo-Millicelsius $zone.PassiveTripPoint
+    $hasPassive = ($null -ne $psvMC)
+
+    # Collect valid trip points
+    $tripsList = [System.Collections.Generic.List[string]]::new()
+    $tripIndex = 0
+
+    # 1. Passive Trip Point (_PSV)
+    if ($hasPassive) {
+        $tripsList.Add("        ${labelName}_alert${tripIndex}: trip-point${tripIndex} {")
+        $tripsList.Add("            temperature = <${psvMC}>;")
+        $tripsList.Add("            hysteresis = <1000>;")
+        $tripsList.Add("            type = `"passive`";")
+        $tripsList.Add("        };")
+        $tripIndex++
+    }
+
+    # 2. Active Trip Points (_AC0.._ACx)
+    if ($zone.ActiveTripPointCount -gt 0 -and $zone.ActiveTripPoint) {
+        for ($i = 0; $i -lt $zone.ActiveTripPointCount; $i++) {
+            $acMC = ConvertTo-Millicelsius $zone.ActiveTripPoint[$i]
+            if ($null -ne $acMC) {
+                $tripsList.Add("        ${labelName}_active${i}: trip-point${tripIndex} {")
+                $tripsList.Add("            temperature = <${acMC}>;")
+                $tripsList.Add("            hysteresis = <1000>;")
+                $tripsList.Add("            type = `"active`";")
+                $tripsList.Add("        };")
+                $tripIndex++
+            }
+        }
+    }
+
+    # 3. Critical Trip Point (_CRT)
+    $crtMC = ConvertTo-Millicelsius $zone.CriticalTripPoint
+    if ($null -ne $crtMC) {
+        $tripsList.Add("        ${baseName}-critical {")
+        $tripsList.Add("            temperature = <${crtMC}>;")
+        $tripsList.Add("            hysteresis = <1000>;")
+        $tripsList.Add("            type = `"critical`";")
+        $tripsList.Add("        };")
+    }
+
+    # Assemble thermal zone node
+    $nodeLines = [System.Collections.Generic.List[string]]::new()
+    $nodeLines.Add("${nodeName} {")
+    $nodeLines.Add("    thermal-sensors = <&placeholder_sensor>; /* Replace with target sensor phandle */")
+
+    # Include polling-delay-passive ONLY if a passive trip point exists
+    if ($hasPassive) {
+        $pollingPassiveMs = if ($zone.SamplingPeriod -gt 0) { $zone.SamplingPeriod * 100 } else { 1000 }
+        $nodeLines.Add("    polling-delay-passive = <${pollingPassiveMs}>;")
+    }
+
+    # Include trips {} block ONLY if trip points exist
+    if ($tripsList.Count -gt 0) {
+        $nodeLines.Add("")
+        $nodeLines.Add("    trips {")
+        foreach ($line in $tripsList) {
+            $nodeLines.Add($line)
+        }
+        $nodeLines.Add("    };")
+    }
+
+    $nodeLines.Add("};")
+    $dtsNodes.Add(($nodeLines -join "`n"))
+}
+
+$finalOutput = $dtsNodes -join "`n`n"
+
+if (-not [string]::IsNullOrWhiteSpace($OutputFile)) {
+    $finalOutput | Out-File -FilePath $OutputFile -Encoding utf8
+    Write-Host "Successfully exported Devicetree thermal zones to: $OutputFile" -ForegroundColor Green
+} else {
+    $finalOutput
+}
