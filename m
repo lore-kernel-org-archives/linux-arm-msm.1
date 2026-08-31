@@ -1,80 +1,50 @@
-Received: from mail-wm1-f43.google.com (mail-wm1-f43.google.com [209.85.128.43])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A40704A0EEB
-	for <linux-arm-msm@vger.kernel.org>; Mon, 31 Aug 2026 14:29:27 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.43
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A27AB47207B;
+	Mon, 31 Aug 2026 14:57:15 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788186569; cv=none; b=Vr4PFeA6CpfhnyY9kthwKVeo3z3Bj1QiPgciLnjnyRO+3vIWdu7/Pbw6YZjE1dQmi0cpD8oQ4RbY6rRQT2DlmTXQh4Ff49EMXpEqEgU+XB1SQfX0TUzMahQifP+6wq6GB2VcfpUzpj+uXFYgfqRmq60tg3kZwAKueSVy9IenBCw=
+	t=1788188236; cv=none; b=Hud02LnLVn4h5iicXOFNJg4EMf9Y5WXObn0TIvZiIfKGOEW9K0YssM4hqn32DTpnviX5AjJq/Fa9ByIok48ISUxbIf7Hmjvbm5KW/G+yQXsu7Y1dLa2FbO0A8miNjFaH2mfgGjjHt5HybE3bB6IGrMALAuKcA9rPf0GbCKQJM8o=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788186569; c=relaxed/simple;
-	bh=dYj69jFFjRWn7Sys/t/m3JYBC1fu8Ks5fI5qkXxrx3A=;
-	h=From:To:Cc:In-Reply-To:References:Subject:Message-Id:Date:
-	 MIME-Version:Content-Type; b=cqp8Q4VEy5qekIl4VlSdeM9Yai3cCsgVdoHo/loL3soZ47xTtCzJRJ1ajrNP1Tf2fMZz56/YJU6KeS7rLG1d6HWFeS32m0Oe6KRgpW2yitqP65ScmLfG3Q8gWH8XZFOGTdBHyo3brOQitzQ9bhSY8sc8iDQvNoptwFkpzoxdbxA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=hhysf+AX; arc=none smtp.client-ip=209.85.128.43
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
+	s=arc-20240116; t=1788188236; c=relaxed/simple;
+	bh=cKtt/qXzfNkR64EJuj8cydyuvo2B/WFA8rIgd5APtI4=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=Cj/E4EHcNPkOQ/vZuZAEIY+3Szkg/tzjRUA1Dme7Tk2salH09j+7Z1FkYkZYtzyHx7OcwwwR7iPVHjSB7jEpQBesxZGYFWFws+Rlej78D+XmM3yMRFkJowVBaL/sW88N7MDheiMDDcAg0V1TJjuTt8VKUSJVipngQwjel50t0es=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Vhpzwoly; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="hhysf+AX"
-Received: by mail-wm1-f43.google.com with SMTP id 5b1f17b1804b1-49b8f86c6deso20849215e9.0
-        for <linux-arm-msm@vger.kernel.org>; Mon, 31 Aug 2026 07:29:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1788186566; x=1788791366; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:mime-version:date:message-id
-         :subject:references:in-reply-to:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=6E89hI6dDsHxKquITrLVBigGlAGgfkia7MnsBoaZjOA=;
-        b=hhysf+AX6SaSD38bFEwIGJuZQ3U4y1NxVqT7eg5CxU5iI74lJudY6o74QyhWVS4xqz
-         BkUZAodkqHOONBJ0CDbMfLzizJAH1Zoq+bfuCCXE3UgJ9Tm8yaNoMVww+00hDqF/0Unx
-         6JKeYt/4ABzaHG1S573cuEc6sS8j86r8Za/NfMpUPJgTl/srqLV6jhiL7VAzYAadNNa2
-         VPBfjPZmgUP1fQqGbba75URUKqZraXfBcD4T3Gj947iCkobRKXKdaEzBwmbOap1nSAB+
-         NIHGS8q1jA7r4Yvr1oDtDE9ORUPx8NNofVmuAPtsi8qSPGbCQrJ1iUGJpjrzXKhaiuKU
-         rGvw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788186566; x=1788791366;
-        h=content-transfer-encoding:content-type:mime-version:date:message-id
-         :subject:references:in-reply-to:cc:to:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=6E89hI6dDsHxKquITrLVBigGlAGgfkia7MnsBoaZjOA=;
-        b=FTAuykg5rHPyAy5pgVUyYhP9RMHg11VuDLByXgfeIUE8Si3nF5CT+Ht6V8RfWw1E2X
-         Mda5/3dfvXLZxKs2axw+RfG1HRzFodrE9NW+xoli+h22lodZCesmFah8VDoNuMnSEAGd
-         iUp5T6Tfc+tQ4itrGLF4CdEOaFixsBlGAs9UOqzTgmcn4YLbAaHhGLIsvyyEzdf8GAi4
-         WyXCNBG86Jva7T5yipdqGqtpGXA1vj97nJZBd8PJtdNssjq6Egf2ARGuyISZcuIjyD/5
-         Ghe3yhtGh5nrSmD48u7dARLSXH9QafJE/pjFKGc0wsn0KPi/n8MxMN2kpC7LW7Z9n3bt
-         lVFA==
-X-Forwarded-Encrypted: i=1; AHgh+Rq3KJ1G+IFhAVLC4+DTVG1PefwUjpy+sA+fRf3A8YcEqGuX4/IGt70c5chBPwFKwPzE8SmA5utREdXKIYCa@vger.kernel.org
-X-Gm-Message-State: AFuF++n6dDT5SdvWnCTiEuqs2mU1vwHOWf8d7oraFDrlN8WACoaQXeXJ
-	deH+TdJKoMSOYdORx9JClcuJT2COxvLa8iOmkMES9M7Je5xN1qEqGl67FiqzlwxvQ1c=
-X-Gm-Gg: AR+sD11ghl+kfoYm2XbjhJyeB/h7Sw3Q0s2bdH4DQvg2EsxTYTBzRXMlXf4ZituBo98
-	YEcuTShSRZr81I0uxZFh00mUQcAqphTzrPKIyyQDG9DypIQfiOT0TtBgR1SkUhvdGI3AybUPVAx
-	BNV9Nx7JzLd06DWSFFpzDUeXMjAklz3nBQzDpLJ4wOFz/W09LCSlIZ2v8BmLTd2GG51ws7WaFAf
-	qG94ie/3KZhYgf+HkM6VtPCROvHHoOUqQpTlfiJ3vcS5SG+sd3VgPdNbNmJ35fRrK3dm9dqDzvU
-	6J+KU2cS9hrQTkQAexyq73Q2YbQ/1VVAJJg+MGioXquMfCsQhhO78AgnV5OJiQwAFqLE7iebjMN
-	l0u/U/QHF5V3J6779viVLQ1lYOmVLWeM/z6X51+/je18iAuYQevrx128Xv47krTeC99lnz/P0KZ
-	EeLK80LtGSM6l3STG8sshRhF6KAPkDX8MYXYBUwQrebc8F3xa39n9IViC4NhkmrmMw4kj5Hh8ue
-	MU=
-X-Received: by 2002:a05:600c:1d11:b0:496:c1f3:e8f8 with SMTP id 5b1f17b1804b1-49b91c25414mr366990155e9.7.1788186565847;
-        Mon, 31 Aug 2026 07:29:25 -0700 (PDT)
-Received: from arrakeen-2.home ([2a01:e0e:1005:fa8b:52eb:f6ff:feb3:451a])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-49ccea87e1asm145266605e9.2.2026.08.31.07.29.24
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 31 Aug 2026 07:29:25 -0700 (PDT)
-From: Neil Armstrong <neil.armstrong@linaro.org>
-To: jesszhan0024@gmail.com, maarten.lankhorst@linux.intel.com, 
- mripard@kernel.org, tzimmermann@suse.de, airlied@gmail.com, simona@ffwll.ch, 
- robh@kernel.org, krzk+dt@kernel.org, conor+dt@kernel.org, 
- Junjie Cao <junjie.cao@linux.dev>
-Cc: dmitry.baryshkov@oss.qualcomm.com, konrad.dybcio@oss.qualcomm.com, 
- mitltlatltl@gmail.com, dri-devel@lists.freedesktop.org, 
- devicetree@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
- linux-kernel@vger.kernel.org
-In-Reply-To: <20260804073419.84727-1-junjie.cao@linux.dev>
-References: <20260804073419.84727-1-junjie.cao@linux.dev>
-Subject: Re: [PATCH v3 0/2] drm/panel: Add support for Novatek NT36532
- panel
-Message-Id: <178818656440.2615924.7721380988384497454.b4-ty@b4>
-Date: Mon, 31 Aug 2026 16:29:24 +0200
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Vhpzwoly"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E717A1F000E9;
+	Mon, 31 Aug 2026 14:57:13 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1788188235;
+	bh=8kn1sO0B2pApEMi4uAFueoHD3l30/tgmgtuTGqygbcs=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References;
+	b=VhpzwolyHp9nnxNYB1cbBQJ0hNxBI+iFbYg6KLOvZQWpiM2xJdjCdKTwg4AggpTav
+	 Fnhdcv/roWXY2KXKv6lEjbBrMwZ+0d5lYvMXMWvdjA8lUXtgruOcorsfAILdVBm58h
+	 fJV3PvZokr+W2D5EOA6QR+zDIR3ebfiGa4L270pOuJ2yJcVP7mDHWItRULw75hpwBw
+	 Iwa9VbcJkcXA501eRWmDHES9UEjrN8PPC7uyrxZN2ENbKqc/KSX4SGRiw5uzYsYq0u
+	 yDiZ6x+wuzUnEzxGXTRZOH2b2OFKuHL+7uvF6ms/QfpiVM3DoTGfhH78QiVHkMPe0W
+	 DZSDg1i3Ts+8A==
+From: Bjorn Andersson <andersson@kernel.org>
+To: Konrad Dybcio <konradybcio@kernel.org>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Jyothi Kumar Seerapu <jyothi.seerapu@oss.qualcomm.com>,
+	Kamal Wadhwa <kamal.wadhwa@oss.qualcomm.com>,
+	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+	Abel Vesa <abel.vesa@oss.qualcomm.com>
+Cc: Pankaj Patil <pankaj.patil@oss.qualcomm.com>,
+	linux-arm-msm@vger.kernel.org,
+	devicetree@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Subject: Re: [PATCH] arm64: dts: qcom: glymur-crd: Mark the EC reset gpio as reserved
+Date: Mon, 31 Aug 2026 09:57:08 -0500
+Message-ID: <178818822451.1120617.17208953172489408680.b4-ty@kernel.org>
+X-Mailer: git-send-email 2.53.0
+In-Reply-To: <20260831-dts-qcom-glymur-crd-reserve-ec-reset-gpio-v1-1-4a9da88755d4@oss.qualcomm.com>
+References: <20260831-dts-qcom-glymur-crd-reserve-ec-reset-gpio-v1-1-4a9da88755d4@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -82,29 +52,20 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.15.1
+Content-Transfer-Encoding: 8bit
 
-Hi,
 
-On Tue, 04 Aug 2026 00:34:17 -0700, Junjie Cao wrote:
-> This series adds support for panels using the Novatek NT36532 Display
-> Driver IC, a dual-DSI, dual-DSC controller that requires DPU support
-> for MIPI_DSI_MODE_DSC_ALL_SLICES_IN_PKT.
+On Mon, 31 Aug 2026 12:11:36 +0300, Abel Vesa wrote:
+> GPIO 65 from TLMM is used by the Embedded Controller as its reset line.
+> Reserve it to prevent Linux from requesting or reconfiguring it.
 > 
-> The first user is the CSOT PPC100HB1-1 panel found in the OnePlus Pad 2
-> (OnePlus Pad Pro in China) tablet: 3000x2120, dual-DSI in bonded mode,
-> DSC 1.2 with two slices per line.
 > 
-> [...]
 
-Thanks, Applied to https://gitlab.freedesktop.org/drm/misc/kernel.git (drm-misc-next)
+Applied, thanks!
 
-[1/2] dt-bindings: display: panel: Add Novatek NT36532
-      https://gitlab.freedesktop.org/drm/misc/kernel/-/commit/1c523f0a930107191c95d96340c69a295a086e5a
-[2/2] drm/panel: Add Novatek NT36532 panel driver
-      https://gitlab.freedesktop.org/drm/misc/kernel/-/commit/47b823940e38607dad180eb2f82094ae65565a4b
+[1/1] arm64: dts: qcom: glymur-crd: Mark the EC reset gpio as reserved
+      commit: 8ab228ebf968fe43afa55630fb98f1069828988e
 
+Best regards,
 -- 
-Neil
-
+Bjorn Andersson <andersson@kernel.org>
