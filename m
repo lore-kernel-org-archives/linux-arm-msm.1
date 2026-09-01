@@ -1,54 +1,84 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9741C3FD96B;
-	Tue,  1 Sep 2026 02:10:07 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1046C306B3D
+	for <linux-arm-msm@vger.kernel.org>; Tue,  1 Sep 2026 03:41:18 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788228621; cv=none; b=humI0fBRSSz8NEZktPpzl6TwEAqEY261+ybmZGFlWeq/ytrbp9b5d3tyLTyzMuMiJYdy9vFbnkcpn6JKH29VzZDUP5yXpv4FSixTDGdsPa4ODQ38z4pl+fb7v3NoTx2OaJwDzmf+S1UkETtQUU7cXz0oi26vPB41IObXepCWxdA=
+	t=1788234080; cv=none; b=gr8Sveh6cnEMgTaWEQkmY3v7LWYCLqExKPFm/8ZjaHD+fRPQBIM77OrkLLpCSqHF5namUkTOaL/60tuOfEuVBvtCGP/abyGmBJPREcodjtVFbF22QszX0csfyam8l3DPdAZqvsk4x+x5FTT3KzxJXAsS5VdN10+PIYuPhtDYwfc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788228621; c=relaxed/simple;
-	bh=RsYztL2A3RTDALVXc3ebS0uX2Wy/mYkdp3u045ucYug=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=h0EaRrVEvr206G5fC+WoEVpgMKgGiM3RyxAmHGighMH/H/K05/RRa/ApUvsuXP6ZG5O4X7Hp0Qa9BbgDyqNNHO4A+IT6/HyWHh9a4NrMGP3S4caaeZjUMe0/5sciqrC+4v+s3hCyKnbg9qJdqRe/pwISICtVB8Weri0LMyE8Gz4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=V4zpdbBS; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1788234080; c=relaxed/simple;
+	bh=tu+tiE5Dy+gQ0qmzHr41PsO5oiHuuTlxsXsSJdb4oNk=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=F1Mi+7UsEeHrAMBMPqVKCE7rMNpgIpKuj2QwRkq7Q6N622EX9cB4M2VI6+MI/d0fAAhwLJe6+h51Q/WBm5nusdTXugX8KXfQZKh19281Xmg83HXNZhZalcMo0WzxNqTtHO7OACxWnaJUORZx2s2MJS1xD4B2c2uZ4NurTjIliKQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=LN4yNUmw; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=Fm55LmSZ; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="V4zpdbBS"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 379BD1F0155C;
-	Tue,  1 Sep 2026 02:09:59 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1788228600;
-	bh=Q38ppnsRCg+QgWzcPnKe7cYKeUUIuSpA8ILz1z4F2Wc=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=V4zpdbBS84wfKssNU8dsHMHsmAQFbTa6I5/SdOvJT66phstK8ZOj2CHlE9uCUz292
-	 U1L27c5EGL0D3N0GjpsFu/K0TJtNCbJ5AHiJFF46ykRvLBEPT+kkzbX4NhA5tQ05to
-	 7zQOyP8oAZFoI/6iEkJiwcjnJfjdiwOEMzC6gC6QoRUPB5UPO469OlkjmBF4yT+gKk
-	 P4qZndXQYOyIpWKgzAW9533fbE5ySLjpe47M/NrWLwUNZS92zRsQK/l2/tznNHHvYx
-	 P418ojgi5PhD6cLNWTFkaH0NNYzkrArxdjI4ngifH9DdHl4nkXgzvDvp04W9S9kU0o
-	 qrEHHAbf5nbeg==
-From: Bjorn Andersson <andersson@kernel.org>
-To: Srinivas Kandagatla <srini@kernel.org>,
-	Konrad Dybcio <konradybcio@kernel.org>,
-	=?UTF-8?q?Uwe=20Kleine-K=C3=B6nig=20=28The=20Capable=20Hub=29?= <u.kleine-koenig@baylibre.com>
-Cc: Danilo Krummrich <dakr@kernel.org>,
-	Geert Uytterhoeven <geert@linux-m68k.org>,
-	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
-	Takashi Sakamoto <o-takashi@sakamocchi.jp>,
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-	Dave Hansen <dave.hansen@linux.intel.com>,
-	Sohil Mehta <sohil.mehta@intel.com>,
-	Raag Jadav <raag.jadav@intel.com>,
-	Heiner Kallweit <hkallweit1@gmail.com>,
-	linux-kernel@vger.kernel.org,
-	linux-sound@vger.kernel.org,
-	linux-arm-msm@vger.kernel.org,
-	Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
-Subject: Re: [PATCH v2] soc: qcom: apr: Drop unused apr_device_id
-Date: Mon, 31 Aug 2026 21:09:34 -0500
-Message-ID: <178822856247.1835959.5448297814131514478.b4-ty@kernel.org>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <e8b352f33ae38df3616dc157c1cafd13d49c5e3e.1784554037.git.u.kleine-koenig@baylibre.com>
-References: <e8b352f33ae38df3616dc157c1cafd13d49c5e3e.1784554037.git.u.kleine-koenig@baylibre.com>
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="LN4yNUmw";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Fm55LmSZ"
+Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6811q3VD585563
+	for <linux-arm-msm@vger.kernel.org>; Tue, 1 Sep 2026 03:41:18 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=TGSkA5vy38DcELVchDrIoW
+	vMRB6AuIQXXh4MQUVn5AQ=; b=LN4yNUmw6jxpE64aiU/5fBh73TuRR5bijxesBZ
+	oZXLi+2TD+1j87Lja9RvkCHm0LgwznPdryCSGly1J6r6tp0zr7Zp6DuFLlDVqVGV
+	OHy5W5H8cHDhf9S3WRpysXzfpC9Muu0OHozBlUDwjk4oX+tf/9qTwcxJyCVXd8IE
+	9b2BmNRMHr9udB0+ShggSqvK4B1ZnJfWwCTBjgLrBxolakmhqqb3dKThUdig4baq
+	QZFQEXn1mD6E3EHRDpAaI8mEbZSSB/92ibaQqBgBSwOuKtI3dIQgyJxJWgZRBKhN
+	VkRKMHc2oJZfGPvmcJUOqTY9ohRFVv9tPIRuxpb0KybBIiNQ==
+Received: from mail-pj1-f70.google.com (mail-pj1-f70.google.com [209.85.216.70])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gdndx8bqv-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Tue, 01 Sep 2026 03:41:17 +0000 (GMT)
+Received: by mail-pj1-f70.google.com with SMTP id 98e67ed59e1d1-38e1118e4abso7697297a91.0
+        for <linux-arm-msm@vger.kernel.org>; Mon, 31 Aug 2026 20:41:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1788234077; x=1788838877; darn=vger.kernel.org;
+        h=cc:to:message-id:content-transfer-encoding:content-type
+         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=TGSkA5vy38DcELVchDrIoWvMRB6AuIQXXh4MQUVn5AQ=;
+        b=Fm55LmSZG/sKLDsQP7bmpZPNoICWGkPBlvwLxd3uWkgFlJgacy+C25aeU6/OaZfsrh
+         BHVS5EwV7UD1UX8LWdjVRhb+qF+97v9N6Vr3+9GdlBE7T5Xa/aO7x09wdlkvMopa9cvP
+         211ao+iJ4CNcAlTbpclj8OejSfsbnSgl8emFYyDPuu+X/SdPv57VpgVojUhWEU//F/L7
+         DShz8e5/7qSjQWjQCpfPANrh6jagRK3xO4LC57zfZw1uuAt+AoSkv/G73pvGk/IJArVC
+         0DomIPcyTGWujENlN5IDsF0z7Ye/1jTCk3u6xe3HSw6+zr3rtsidJsux7mzppaPouQNM
+         pphA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1788234077; x=1788838877;
+        h=cc:to:message-id:content-transfer-encoding:content-type
+         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to:content-type;
+        bh=TGSkA5vy38DcELVchDrIoWvMRB6AuIQXXh4MQUVn5AQ=;
+        b=Aq989u2WYgQ6/iADo9vzJ2OyYQluP//5w7wdRBgWGAztXZXFJpCoHhViotTeGvSeSu
+         4LOXOD7J8KQ5C9KPQF6zJJX8eGbDacwFiF7SC2xrdS0D7mXeV9rUW2FB9NewBP9/JhlJ
+         +KIIs+Waxui7OtW21xGxo1Uh5Gz38epMTrH5CWrebSvmUfS32k5h2S4cbhAoy6XgoeH0
+         wIjGnCvmhYCCnVU2QYIzqy0X6CynAxNx1wCW605fa6B4CxRSI/mCBlD7l0XsaKrXWWGE
+         ZK94C+fEaFkrVo+xzOIl7kPg0dkWWvhOjesnLpheRbNIIOT3dmFtEZ52mKlyhH6/xB1A
+         wxKA==
+X-Gm-Message-State: AFuF++mHM4p6ZblAQHkCMAJM50bEOzIbIsx6VmdeVDxyOoSjSkdBYLTR
+	tZAhoX9TSvCrd9lxk99d4BH/9EGcRqxOEXSQSSjec9ZCsDvB+O5HEy7y+vufqIyQXe7jI6KWgl7
+	AXAfSVjYqBdGZn3as413PMasyDZxWomJXmFR4gL3X2hiPhKQNApzR2OJOyP+UWNAtcloP
+X-Gm-Gg: AYBFou2deZCu+UoQd/TJ/jlTYi6GOiBtC0tdOPnV2ldIFKPfWEfAamOzJlaMMizj5aq
+	Zo5yw8C3o1bcikUBTU3n6Ng57yvu1bx1b1SZNpobmpQ9YfWGqfNrgvUNbaxMZ7n02l3XBRkJa77
+	ABzvB87VOxaugrbNnTsee6OvAEBdNooW1odBOF3bLfbbBZ1Tc6jiLxKBphhO9R2K+zvEdhsm3Em
+	GZ8Rv5WQr3/kRhAiZXblGF9DICz9wngvjmguBy2VRgCtgm3MFoEi5mvx6UWGESl2poKTc5SRMXH
+	09r8zocSUf48NO0mvDw+YGC0ddHYL1PBWtVo0kyzMQVeCvBJCNJOAmjlg2M1R9pd5xL+dyVWpoG
+	C695zWM3G2Zgzjb9OB+4txFDc1BgoIb6DyLjuJk/yBn9MWDj7+vg8
+X-Received: by 2002:a17:90b:3c44:b0:398:dcef:c040 with SMTP id 98e67ed59e1d1-398dcefc24amr18581544a91.19.1788234076868;
+        Mon, 31 Aug 2026 20:41:16 -0700 (PDT)
+X-Received: by 2002:a17:90b:3c44:b0:398:dcef:c040 with SMTP id 98e67ed59e1d1-398dcefc24amr18581466a91.19.1788234076407;
+        Mon, 31 Aug 2026 20:41:16 -0700 (PDT)
+Received: from hu-fenglinw-lv.qualcomm.com (Global_NAT1.qualcomm.com. [129.46.96.20])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3286f9595bbsm39128286eec.14.2026.08.31.20.41.15
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 31 Aug 2026 20:41:15 -0700 (PDT)
+From: Fenglin Wu <fenglin.wu@oss.qualcomm.com>
+Date: Mon, 31 Aug 2026 20:40:27 -0700
+Subject: [PATCH RESEND] dt-bindings: spmi: glymur-spmi-pmic-arb: Add
+ compatible for Qualcomm Maili SoC
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -56,26 +86,83 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260831-maili-spmi-binding-v1-1-3c38c4eff7aa@oss.qualcomm.com>
+To: linux-arm-msm@vger.kernel.org, Stephen Boyd <sboyd@kernel.org>,
+        Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>
+Cc: David Collins <david.collins@oss.qualcomm.com>,
+        Subbaraman Narayanamurthy <subbaraman.narayanamurthy@oss.qualcomm.com>,
+        Kamal Wadhwa <kamal.wadhwa@oss.qualcomm.com>, kernel@oss.qualcomm.com,
+        linux-kernel@vger.kernel.org, devicetree@vger.kernel.org,
+        Fenglin Wu <fenglin.wu@oss.qualcomm.com>
+X-Mailer: b4 0.16-dev-17187
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1788234075; l=1265;
+ i=fenglin.wu@oss.qualcomm.com; s=20260324; h=from:subject:message-id;
+ bh=tu+tiE5Dy+gQ0qmzHr41PsO5oiHuuTlxsXsSJdb4oNk=;
+ b=Ce4a1Is98NL1UmdMoYVz5/vI5d9Pa075UFuwZoP841nGkRe5ErdRi/bQxupf0FRrRRex9EuWy
+ MMTGLtdEsNpCNI5YXouamm7B8RUCdi+tslehpSc2X1xFKkK7geC7xza
+X-Developer-Key: i=fenglin.wu@oss.qualcomm.com; a=ed25519;
+ pk=hJdt3E7o54lql+miD2GaxwF74cDyhgNwMbmFOZ46bRU=
+X-Proofpoint-GUID: mICXzSfj7ObMBZzdPv1esy3Jy8XDOUC3
+X-Proofpoint-ORIG-GUID: mICXzSfj7ObMBZzdPv1esy3Jy8XDOUC3
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTAxMDAyOSBTYWx0ZWRfX8A2VRh26U6tF
+ bTC2xuHnAcuJ4mj5Ar15t4qejg4Ar4bDMZrZva9VS9ino9m+1rBTpXcRC6fETcO+3W94lpu34tA
+ OcxIkFG4lXpM5KRT/CGTk1xM7y536Sg=
+X-Authority-Analysis: v=2.4 cv=U8eiy+ru c=1 sm=1 tr=0 ts=6a96495d cx=c_pps
+ a=0uOsjrqzRL749jD1oC5vDA==:117 a=ouPCqIW2jiPt+lZRy3xVPw==:17
+ a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22
+ a=EUspDBNiAAAA:8 a=w-QGtfMo4T9X6HggfYsA:9 a=QEXdDO2ut3YA:10
+ a=mQ_c8vxmzFEMiUWkPHU9:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTAxMDAyOSBTYWx0ZWRfXwb+c8MdrVk1B
+ TqaOiRrMAjOaMgOfzYtfWCYU3+aQqYU381OzvCxQqSJ/kz136r4ODixjv6fPYsKZU4oD9TQuK1I
+ GfZ1/qP9BGXEeX6lORM9HIIt/vC25JmBDB5mLdyZ0LyyFDv+o2uP2ba+2K9CoXGFbWeTiIIc+bh
+ Fmu/oJSLQq3nzGuIHSmevY+jax7TZVas7U3ixTsqDt3nNUaOUkE0GZBS/hhJvbAdI7UUTgvEfjl
+ SgQ6BcU039Iuv4YI7PGu0t87gfTc1UlxeeyqSQU9OsFfLRtq6pH5pK0OcyOy/DnxvffOJGQgdk6
+ sZI9OeF7ni5y3wqBavNyLJQLNSVkCCd9ei+tcbICPIdF5/FfXRAxCeQgMQU9IUKrOEl1InweowF
+ PWWzeZTb1lqjGrXIPZ9BTzC4ZIT5PgIWwkm92ydh9UI2ReOXRCwHyNX7dmL1v+JmhBAKlHCd7Be
+ DGm69mJPZlpWM7ZiWlw==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-09-01_01,2026-08-31_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ malwarescore=0 clxscore=1015 lowpriorityscore=0 impostorscore=0 adultscore=0
+ spamscore=0 priorityscore=1501 suspectscore=0 bulkscore=0 phishscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2609010029
 
+The PMIC arbiter in the Qualcomm Maili SoC is version v8.5, which
+is the same with Hawi and compatible with Glymur. Hence, add a string
+for "qcom,maili-spmi-pmic-arb" as a compatible entry for
+"qcom,glymur-spmi-pmic-arb".
 
-On Mon, 20 Jul 2026 15:33:46 +0200, Uwe Kleine-König (The Capable Hub) wrote:
-> apr_device_id was introduced in commit 6adba21eb434 ("soc: qcom: Add APR
-> bus driver") in 2018, and since then not a single driver made use of it.
-> 
-> So drop the unused id_table pointer from struct apr_driver and move
-> APR_NAME_SIZE to the apr header which still has a usage of it.
-> 
-> Note that with the id_table being NULL apr_device_match() degrades to just
-> of_driver_match_device(), so replace this callback accordingly.
-> 
-> [...]
+Signed-off-by: Fenglin Wu <fenglin.wu@oss.qualcomm.com>
+---
+ Documentation/devicetree/bindings/spmi/qcom,glymur-spmi-pmic-arb.yaml | 1 +
+ 1 file changed, 1 insertion(+)
 
-Applied, thanks!
+diff --git a/Documentation/devicetree/bindings/spmi/qcom,glymur-spmi-pmic-arb.yaml b/Documentation/devicetree/bindings/spmi/qcom,glymur-spmi-pmic-arb.yaml
+index 1593a1183a36..44c864fd5fc7 100644
+--- a/Documentation/devicetree/bindings/spmi/qcom,glymur-spmi-pmic-arb.yaml
++++ b/Documentation/devicetree/bindings/spmi/qcom,glymur-spmi-pmic-arb.yaml
+@@ -27,6 +27,7 @@ properties:
+           - enum:
+               - qcom,hawi-spmi-pmic-arb
+               - qcom,kaanapali-spmi-pmic-arb
++              - qcom,maili-spmi-pmic-arb
+           - const: qcom,glymur-spmi-pmic-arb
+       - enum:
+           - qcom,glymur-spmi-pmic-arb
 
-[1/1] soc: qcom: apr: Drop unused apr_device_id
-      commit: 06cb5c457dd57ad1960f7557c67976de4afa79e4
+---
+base-commit: 3443eec9c55d128064c83225a9111f1a1a37277a
+change-id: 20260609-maili-spmi-binding-dbecf60b498e
 
 Best regards,
+--
+Fenglin Wu <fenglin.wu@oss.qualcomm.com>
 -- 
-Bjorn Andersson <andersson@kernel.org>
+Fenglin Wu <fenglin.wu@oss.qualcomm.com>
+
