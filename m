@@ -1,61 +1,63 @@
-Received: from mail-qk1-f178.google.com (mail-qk1-f178.google.com [209.85.222.178])
+Received: from mail-qk1-f177.google.com (mail-qk1-f177.google.com [209.85.222.177])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A17A025524C
-	for <linux-arm-msm@vger.kernel.org>; Tue,  1 Sep 2026 01:37:00 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.222.178
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9538F3BB104
+	for <linux-arm-msm@vger.kernel.org>; Tue,  1 Sep 2026 01:37:02 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.222.177
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788226623; cv=none; b=HTt7zciIfGSp1Pi2GGBkk5IirJql8sGaf6yTCwUFSIyggMcZ1E3ZVP1YNpGbeKSeHaqNbBk7Kcutj5xZol+nauKjWbbGu+E5pIgg9BDtuC84eU6QEt0MIqv/4fC3JiN4xMWYyFeEIO7PEZ3U9G9vAqB74L+Tpqwzdqa1rKG3oS0=
+	t=1788226625; cv=none; b=ETYTq5QV4cb5/v6Ov7Bk4SYpZDjTTgdrO7BH+a4JieAYp0+u+3N0LLa+gHkROsh6ACnB5zxwUQLmqiJV47VAPtc1ko0nBoUgBD8KcUoeDixzs81MOYH0EHhEDemcDjI9QDJT2kX1F74JPkDcYIC+X+FGNTTCdoAD3NKJ4MSYcjU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788226623; c=relaxed/simple;
-	bh=A3ITwJ3sR+qec2WwQGQ5KPp1IsFncmE7QnQCzTPVg14=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=dpU9CZ/wRBUcpCzkHFrKaWAwDhzIe3oAS7STHrBhtt7/4m1obIl3lPnpY5MXoFTolptYAWy1ZRsRDvzy3ov7ZyX+86xEFbRgTK0AN8IYYnAbn4KfjH14HpNoxLKc45Fqbl6yWm+mEaQZC6lfZC3qToY9F2pCAlECiXYEs8pxN50=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=riscstar.com; spf=pass smtp.mailfrom=riscstar.com; dkim=pass (2048-bit key) header.d=riscstar-com.20251104.gappssmtp.com header.i=@riscstar-com.20251104.gappssmtp.com header.b=alk1BL3k; arc=none smtp.client-ip=209.85.222.178
+	s=arc-20240116; t=1788226625; c=relaxed/simple;
+	bh=gfVPdtumkZbpCiDCZ2WA4Akbi4xrYN5pE0/FfAAiH8A=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=mV/mXlVBukSQdAknNgJN7fGcV4X6k+NWGNumrxio9yXWLhUDzhXVxWzcaj97eiluW7+V111h45AAD8eU6qPZpxW3QyAUIgP8n/f0GRdAETHXwiIPTfu7A13Ms3pYQXTusB9VQor8clWDa6hHqP9iZheJJ2i0AGqAcGglRCPH9bg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=riscstar.com; spf=pass smtp.mailfrom=riscstar.com; dkim=pass (2048-bit key) header.d=riscstar-com.20251104.gappssmtp.com header.i=@riscstar-com.20251104.gappssmtp.com header.b=w39fElDx; arc=none smtp.client-ip=209.85.222.177
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=riscstar.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=riscstar.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=riscstar-com.20251104.gappssmtp.com header.i=@riscstar-com.20251104.gappssmtp.com header.b="alk1BL3k"
-Received: by mail-qk1-f178.google.com with SMTP id af79cd13be357-9371bcf1f8fso295357785a.1
-        for <linux-arm-msm@vger.kernel.org>; Mon, 31 Aug 2026 18:37:00 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=riscstar-com.20251104.gappssmtp.com header.i=@riscstar-com.20251104.gappssmtp.com header.b="w39fElDx"
+Received: by mail-qk1-f177.google.com with SMTP id af79cd13be357-930c0f9c1b1so313356785a.1
+        for <linux-arm-msm@vger.kernel.org>; Mon, 31 Aug 2026 18:37:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=riscstar-com.20251104.gappssmtp.com; s=20251104; t=1788226619; x=1788831419; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=e4YT7BT93vHyyYCSd9nX5alb6pkdBUuB5YMQu5Bqr7w=;
-        b=alk1BL3kjlHyFTFO4J2mUUNDV/1XhjZOcXccJSBnUytM/uZppsPZHUAS0Ayi62OKi4
-         F3XsJQe8SN3c/DKPtTFkmPbLNlDj4mgteLmMXy58e8ho48FUc36NxohHL7mXyRMrxoxx
-         HSZc/pNYytWQ/ZmJvkD+j80izU6VWuWvpgYcffL7TpF+HyshbTdG8zQ0QuQBgRGYd3eV
-         4+SE0PlafZ693c44s7h7u2FEHrtSFSEPM98PxBS0R8JySATOAT6xLwlVrbJ/UDPoYUYV
-         wUKTtuRufbUupw8Li98SRrwbkL5syh0Y4EKQo8rEuLrkBQRSWUBUZA3Un2xHzU7WdlVF
-         hLEA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788226619; x=1788831419;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=riscstar-com.20251104.gappssmtp.com; s=20251104; t=1788226620; x=1788831420; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=e4YT7BT93vHyyYCSd9nX5alb6pkdBUuB5YMQu5Bqr7w=;
-        b=oKd63PeoL68qStfDCx9ziV2CbSY9yg8nVxsXyDwHyyj+wd1T8ptMXRAzDgDTW3l5DX
-         FBMBleTQm+6P6XbWNkLHaRi9555Q0IerOujY28DcW3ZPbCiwnm0kCdhg60fLbOogftvg
-         5Q9wsV3yBIOZ50Sjj1HbHuV8oIaCD/yT7wf079PDHh0cpH9MPutaqpq2VrlzoX7BSwy6
-         LM1XL52KL/mEeh0KKzUdWHoXDP+xauqFQdw5GvJC5/JRghRJrQLHcixLVttAZZIMUvsD
-         w6ZY+8k93fO9mZ90bcLx2j5XM0nywIDgQXTk/AdYUYGUt8OO+9OedA4FZImOeaUXW0S3
-         GyWw==
-X-Forwarded-Encrypted: i=1; AHgh+Rp0mvEZMnauO79+qnd9hGjMN/9pXkZJMKF16FEqwt0jFdgud5BN/087xQguLk/ttMONJEtXq4vVvCgMOzHb@vger.kernel.org
-X-Gm-Message-State: AFuF++nfDh63JI78Ybnr1kVRcWux1EZnuZqwB5G2f5Yl59jSAk3r7dTN
-	EZi7pThCOO/FoyDdPhdLb04xpF4Vcem2L2qw1qbazxwoiYlTf02G3WD2c9bJe9IZou4=
-X-Gm-Gg: AR+sD13275Dv2GT1j4TiJVgbyMTP1w5wN992qq2ARNGZOBSlrTDHTFMLC/uonrOuPZb
-	j2FpbjWAPGkM29PO5Hi7Kp6lzdOn4jS/UC2I0Murzh7MJbVTctwsa0Fs9Gs9fcWuCS1S7EDcc+S
-	jo8JELl+mFzKki0RGDzmKIt8gNFRmzy+9M3XJYjjLP7t/oDu8zddmcmv1DMyGVxzUdvoWReU5rH
-	ddS9hwF6lRAuCWcwciAKs8rbD4X7EqX82MV7QqiXFKFXVzy8SXUelYHtAW3nIFCmB+C3mo/Z19l
-	+InIllbcBS+o68Ce0tIMxRnBK1RPk6HJ51AtvBfzkNFRz6gdBF2q2X9ekTRNcwPYB0z0Qp8mwuL
-	/R1rmkxz0tRKlJbVwCs4mLYLZcFkqx05JNioYWMP+SJBwk+Li/+KcrQcww1ZdY6so83PzgHM1X5
-	xYQXmc+W6B7rczyiGdI3Li2CeXXLpbPJ1RfjVhsUSnIfQ5fjY0svegQzTEyu8c6VCsYg==
-X-Received: by 2002:a05:620a:f04:b0:92e:6a33:7118 with SMTP id af79cd13be357-939138df202mr3269359785a.30.1788226618911;
-        Mon, 31 Aug 2026 18:36:58 -0700 (PDT)
+        bh=bpaBWipm1BW8poaZLaIxjgOiCGLP65h0iesgThD7XGQ=;
+        b=w39fElDx2CLCUmXtZWLD3dROUG58D9jkxtmtMqemoCUiX8Q6Srb/+IR+6pigpZGwvv
+         yaDCyuRlUdzlsdXPkX3PdKC8bAJJvw+GJSV9xfpKr3pknaKhRkQu5h+Qe7tOyFXIIty3
+         A7RSTxCXxRKLsCfpA1eJJpP3AdQGLLE2OkfqSqOIdWNlsnGRgIeiT3WXZfh1avC3n/Ma
+         Y9Z7TCidgtkQGaql7lSUb8ajrqOxBsz4uRyAG1UjuexJ27oPNT3J0xr/tFPT4xmHmSyq
+         UheXR1cwZlHz1MC6E/Zlgagn/F+bHGoivRqaDgGuCOCHlLI8mhWJ5lZwnDn5bHgWLNbJ
+         I88w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1788226620; x=1788831420;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=bpaBWipm1BW8poaZLaIxjgOiCGLP65h0iesgThD7XGQ=;
+        b=lU7wTHo15E4l36HmlTqTt/zL5JFa9SfqoRGp+8ZKladHJMda61zfWPAEhwTok1EbmQ
+         OuI2O03goORMWUrpIR+tFG4oFNXu72JnlixkT/9lAB0IOQJqup/CQolcBsuRZr3zprTw
+         cFw/qW7/bewS0ZIwHIkB2tlib065o54PgZhXeMchQ/rb1uLu+5EqkstV6Wn29/MVsQMQ
+         3hV8z25YPglqizggmPTAEkFZdsPB8FOotNUL8ncYNcegzawSbJrV/SgKgHFddP7NWLbp
+         LiFWZ7nlQq15LJWwvtKoejUEiOhI+X+WQa+MJAqQQyMrUuj8zFYbC3lKOXV0oHCuyyA9
+         tWRA==
+X-Forwarded-Encrypted: i=1; AHgh+Rqw8Ra36StVdevL+w+DdNDTv77UmwYSl0bw6crll12ldxwxJzb7pHcj1FiWq4xbKp76lbfpoiwyu1v+p5m0@vger.kernel.org
+X-Gm-Message-State: AFuF++nWqnP0g7A6aEXxy0eZ87ZXxzuaXO2Lo90IlTjM6iTis+AH486y
+	yEV0iMkwXVcRGH7EzG4/KOWLwy3IqEbf3YvAsZO68wmZup3Sn0vcPFoE2zOfAxYjw/8=
+X-Gm-Gg: AR+sD13DvzTh+vc4g0Fbwy29zpmrPytM/CEVdJUlRpnh1MVv0N4CPx3qFRJi2SZNFSq
+	6o0Xld+EYlBk1QBf/KB2vcji8FOU3RSrU/MBWvPiaM/OSLlfjYAPe9Nl13qnZS44ihdym6gI+Tl
+	EN0/nI+OELXyrDRrV5NwbExxWawlM8EuKovBHs66H6224uYF9JMvA+dv3d9SzhkRGc966KTeOA1
+	PfjeF58Ae/6YHqHRiNl2Y+CUdmCF1up2rceK7+TIewO40UG8Xt0WgJ2Ao1FiY94Cz3wZUMh5/2q
+	oX4VsPHdnnTg4rXo9+Hj4YDf+MinXL0pr1NZrmXDWXZlXI8CsvkfTkRH6v/GOj9MgUd/M+c6g52
+	AKJnHCbcKpjDUTfOTonRiI1vOtBbwyLA+IOkxCT851pAlOMLmUJGTN2LjFxMLx+YZAV9THW32n8
+	/eWQXTjHub4a6sq2HKeK1AMH6Wrg1v6qkggCSe8tvob5ydmr4ucBbs4egqQ4LuaHZW
+X-Received: by 2002:a05:620a:27c7:b0:934:9639:3a4 with SMTP id af79cd13be357-939481a476fmr754012685a.41.1788226620558;
+        Mon, 31 Aug 2026 18:37:00 -0700 (PDT)
 Received: from zippy.localdomain ([73.62.185.64])
-        by smtp.gmail.com with ESMTPSA id af79cd13be357-9391703a918sm919265485a.12.2026.08.31.18.36.57
+        by smtp.gmail.com with ESMTPSA id af79cd13be357-9391703a918sm919265485a.12.2026.08.31.18.36.59
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 31 Aug 2026 18:36:58 -0700 (PDT)
+        Mon, 31 Aug 2026 18:37:00 -0700 (PDT)
 From: Alex Elder <elder@riscstar.com>
 To: andersson@kernel.org,
 	konradybcio@kernel.org,
@@ -74,11 +76,15 @@ Cc: mani@kernel.org,
 	lorenzo.bianconi@oss.qualcomm.com,
 	devicetree@vger.kernel.org,
 	linux-arm-msm@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: [PATCH v2 0/6] arm64: dts: qcom: clean up PCI function nodes
-Date: Mon, 31 Aug 2026 20:36:47 -0500
-Message-ID: <20260901013654.1343537-1-elder@riscstar.com>
+	linux-kernel@vger.kernel.org,
+	Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>,
+	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Subject: [PATCH v2 1/6] arm64: dts: qcom: qcs6490-rb3gen2: clean up PCI function nodes
+Date: Mon, 31 Aug 2026 20:36:48 -0500
+Message-ID: <20260901013654.1343537-2-elder@riscstar.com>
 X-Mailer: git-send-email 2.53.0
+In-Reply-To: <20260901013654.1343537-1-elder@riscstar.com>
+References: <20260901013654.1343537-1-elder@riscstar.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -87,54 +93,57 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-While working on upstream support for the Toshiba TC9564 SoC I
-learned that its PCIe endpoint function nodes included the
-device_type property, indicating each is a "pci" device.  Herve
-Codina pointed out that this is not correct; only a PCI device
-"that implements a PCI bus" should define that property.
+The TC9564 SoC contains a PCIe switch with three downstream ports.
+The third downstream port connects to an embedded PCI endpoint,
+and that endpoint implements two PCI functions.
 
-I looked at other upstream devicetree files and I found four other
-places with this same mistake.  (All are for Qualcomm platforms,
-and all are for platforms using a TC956x SoC.)
+The devicetree node describing those functions incorrectly includes
+this property:
 
-This series removes the device_type property where it is defined
-for a PCI endpoint function.
+    device_type = "pci";
 
-It also removes the #address-cells, #size-cells, and ranges
-properties in these cases, with a plan to restore them only when
-they are known to be needed (to implement pci-ep-bus sub-nodes).
+That property should only be used for a PCI device "that implements
+a PCI bus", but not a PCIe function.  So remove the device_type
+property from the nodes representing the two embedded PCI functions.
 
-					-Alex
+Additionally, those properties contain #address-cells, #size-cells,
+and ranges properties.  And although these properties *will* be
+appropriate for these functions on an RB3gen2, they are not normally
+used for PCI functions.  So remove these properties as well; we'll
+include them in the commit that actually adds the pci-ep-bus sub-node
+to each of these PCI function nodes.
 
-Between version 1 and version 2:
-- Added Reviewed-by from Mani and Konrad
-- Added a patch that updates "qcs8550-rb5gen2.dts" as well
+Reviewed-by: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
+Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Fixes: aa7b4bbcb3a1d ("arm64: dts: qcom: qcs6490-rb3gen2: Add TC9563 PCIe switch node")
+Signed-off-by: Alex Elder <elder@riscstar.com>
+---
+ arch/arm64/boot/dts/qcom/qcs6490-rb3gen2.dts | 8 --------
+ 1 file changed, 8 deletions(-)
 
-Version 1 is available here:
-  https://lore.kernel.org/lkml/20260807195846.456079-1-elder@riscstar.com/
-
-Alex Elder (6):
-  arm64: dts: qcom: qcs6490-rb3gen2: clean up PCI function nodes
-  arm64: dts: qcom: qcs6490-rb3gen2-industrial-mezzanine: clean up PCI
-    function nodes
-  arm64: dts: qcom: lemans-evk-ifp-mezzanine: clean up PCI function
-    nodes
-  arm64: dts: qcom: monaco-evk-ifp-mezzanine: clean up PCI function
-    nodes
-  arm64: dts: qcom: qcs6490-thundercomm-minipc-g1iot: clean up PCI
-    function nodes
-  arm64: dts: qcom: qcs8550-rb5gen2: clean up PCI function nodes
-
- .../boot/dts/qcom/lemans-evk-ifp-mezzanine.dtso  |  8 --------
- .../boot/dts/qcom/monaco-evk-ifp-mezzanine.dtso  |  8 --------
- .../qcs6490-rb3gen2-industrial-mezzanine.dtso    | 16 ----------------
- arch/arm64/boot/dts/qcom/qcs6490-rb3gen2.dts     |  8 --------
- .../qcom/qcs6490-thundercomm-minipc-g1iot.dts    |  8 --------
- arch/arm64/boot/dts/qcom/qcs8550-rb5gen2.dts     |  8 --------
- 6 files changed, 56 deletions(-)
-
-
-base-commit: cee9395acd8043be0644b25c34bfa86623f2b935
+diff --git a/arch/arm64/boot/dts/qcom/qcs6490-rb3gen2.dts b/arch/arm64/boot/dts/qcom/qcs6490-rb3gen2.dts
+index a13315bf0fb07..db6578f7fba51 100644
+--- a/arch/arm64/boot/dts/qcom/qcs6490-rb3gen2.dts
++++ b/arch/arm64/boot/dts/qcom/qcs6490-rb3gen2.dts
+@@ -956,18 +956,10 @@ pcie@3,0 {
+ 
+ 			pcie@0,0 {
+ 				reg = <0x50000 0x0 0x0 0x0 0x0>;
+-				#address-cells = <3>;
+-				#size-cells = <2>;
+-				device_type = "pci";
+-				ranges;
+ 			};
+ 
+ 			pcie@0,1 {
+ 				reg = <0x50100 0x0 0x0 0x0 0x0>;
+-				#address-cells = <3>;
+-				#size-cells = <2>;
+-				device_type = "pci";
+-				ranges;
+ 			};
+ 		};
+ 	};
 -- 
 2.53.0
 
