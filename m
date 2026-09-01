@@ -1,610 +1,304 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5BCC247F774;
-	Tue,  1 Sep 2026 13:46:21 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CA22F2F7EE7;
+	Tue,  1 Sep 2026 13:58:22 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788270384; cv=none; b=sZevVK7IMBJ4J/nNB8q8OIh7n2lT8DpO77f52qH51gl6dA4YRPtTkFspSx6ScdUdVClkFTx0v+qGsY9BARNhy9dPvqaaMeLsjln3mr4eLoXhjuKZJj/q6/yenISC2h42MnjfTzk6L85cL36KUVom57asKErso7C9vYUiMYjmVZs=
+	t=1788271104; cv=none; b=gB/4NQLU1B42/tm87Mh8JXaUGZGlQobzO+45cqI2r3jDog3+B/9BPfI/d7O43sUkBhoa5drapEOh7Hke4OwNTYvne6I7JIA4REVE8QgWHEHfZDADajJy0wPFRmqe0A0G12XNlGTPBuOdFhpRtqYLlsFRcC98KJDK2Fg2GGpavIA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788270384; c=relaxed/simple;
-	bh=Kfs4IGINgfMoEqeRrskcjInH/FLuetnfbTVttMMzGaU=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=NnZcn1P5QvxGeFiEYnEWx+ShWtinIfmy9z7PDJCiS8+wkjDiwdmAYOeYQoF85X9YH/NT6McbFNrg7QVbDxwm6rl1Gm8U7RqnAykd7B1HLYHzdCPNyepaOzvJ0NJ5jlmADNLF3uCz8e6zwTOXQOQyr2NdoNTQgHb1wuZ0Xw+zE+g=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=jiueAZgL; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1788271104; c=relaxed/simple;
+	bh=Uzb9oLzP/M/veRTwQx8O16a2XGVn4c5i03hGnQZaKic=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=pDushV396/6YifvgXeTli+tvHLt7mHIESETzRdDKkmzUJoHzXeYULzTIqHzz1QE/ulPUTZ1uQyIpUtvbV7FnM4lup9E/ywhqhe46uTz5usNC5qHfD4xB5ShGZ+C+KXAU0p/zmnWVdMEybehYBweS3q2TJERd7oX5we2X+I/m/9w=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=NVxWcULt; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="jiueAZgL"
-Received: by smtp.kernel.org (Postfix) with UTF8SMTPSA id 328C91F000E9;
-	Tue,  1 Sep 2026 13:46:21 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="NVxWcULt"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D1AE61F000E9;
+	Tue,  1 Sep 2026 13:58:12 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1788270381;
-	bh=YNqzvMfecN/wUhv7JKOMy+7NSH0F2db1v55mL1/kjQc=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=jiueAZgLw8JY7Et8PDBQux6uFIA6fErBJzTnnkVIdot6J2fDLYX8gUgt7oCb55p7k
-	 htCXaV3Phk/tGc1YQjhbeESV8D6bhYAV+QtJmBUg6w7zFuY5OQwuG4cEwDRM546l2v
-	 DLJVJBpUk6Hw98cbC95r35EriA/mipiw2xBYCziI5g5dLvc4qGAQ8ebmT1jOB5Tf3B
-	 K25Mbg+jazzTrhw+AJvyawbkJc+AO65MmSSYJFVCGfoQ2TsZcxYZS2nhGiBV7uDDEW
-	 N1WXHsi4K67dQcDSfPGS6U/Oq+IYKTlhzo7iq2mPcE/R5+bumDKsyEPp+kwLT9lc8C
-	 iqUjfxGZAcM+w==
-Date: Tue, 1 Sep 2026 16:46:17 +0300
-From: Jarkko Sakkinen <jarkko@kernel.org>
-To: Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>
-Cc: Amirreza Zarrabi <amirreza.zarrabi@oss.qualcomm.com>,
-	Jens Wiklander <jenswi@kernel.org>,
-	Sumit Garg <sumit.garg@kernel.org>, Peter Huewe <peterhuewe@gmx.de>,
-	Jason Gunthorpe <jgg@ziepe.ca>, linux-arm-msm@vger.kernel.org,
-	op-tee@lists.trustedfirmware.org, linux-kernel@vger.kernel.org,
-	linux-integrity@vger.kernel.org
-Subject: Re: [PATCH 2/2] firmware: tpm: Introduce tpm-qcom driver
-Message-ID: <apbXKZrjFdK1vrny@kernel.org>
-References: <20260831-tpm_qcom_driver-v1-0-6f16fa6924fa@oss.qualcomm.com>
- <20260831-tpm_qcom_driver-v1-2-6f16fa6924fa@oss.qualcomm.com>
+	s=k20260515; t=1788271102;
+	bh=v7puyWp/ROQswaeSJtWkmIdn56iY62cBg7FWAYcpIY8=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To;
+	b=NVxWcULtb8vZvibgQJ/A72FOUxIHYDUw2GJXZris9HtuxuyMqpwcbdSNfPO4+THil
+	 zjycOub+YLQEFzY9SEneBsrVF6ZhvhloT6Fi9bt/tJpPTGCyS9eH2AxZemWhJDpvgj
+	 CRikl0X+igBO2+zRbFVaSmAjyIQwfqEhC6jrS3RQrnqVW26Gfz2q6mOE8PGMCz+zGa
+	 oEOlXMcy+fAqIZH8tBgfE42ttP0oVYxCVa2idJK3iXtq+cZz0Dnke++ewDFtBg5jUT
+	 5K5q1RnOa6MPc8l3SCQkLR0AQXEc8EzqDII/3nptXowzoE7r43McL55nkO3SQPEYLz
+	 WQR5IATopGGrQ==
+Message-ID: <38389106-9609-4ec4-bc83-3d1b7fac3698@kernel.org>
+Date: Tue, 1 Sep 2026 15:58:10 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260831-tpm_qcom_driver-v1-2-6f16fa6924fa@oss.qualcomm.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v1 02/11] soc: qcom: add crypto_virt backend for
+ virtio-blk inline crypto
+To: Linlin Zhang <linlin.zhang@oss.qualcomm.com>, ebiggers@kernel.org,
+ axboe@kernel.dk, mst@redhat.com, jasowangio@gmail.com,
+ James.Bottomley@HansenPartnership.com, martin.petersen@oracle.com,
+ robh@kernel.org, krzk+dt@kernel.org, conor+dt@kernel.org,
+ linux-block@vger.kernel.org, linux-crypto@vger.kernel.org,
+ linux-scsi@vger.kernel.org, virtualization@lists.linux.dev,
+ devicetree@vger.kernel.org, linux-arm-msm@vger.kernel.org
+Cc: neeraj.soni@oss.qualcomm.com, gaurav.kashyap@oss.qualcomm.com,
+ mani@kernel.org, andersson@kernel.org, konradybcio@kernel.org,
+ bvanassche@acm.org, alim.akhtar@samsung.com, avri.altman@sandisk.com,
+ stefanha@redhat.com, pbonzini@redhat.com, eperezma@redhat.com,
+ xuanzhuo@linux.alibaba.com, linux-kernel@vger.kernel.org
+References: <20260827160806.1295313-1-linlin.zhang@oss.qualcomm.com>
+ <20260827160806.1295313-3-linlin.zhang@oss.qualcomm.com>
+ <f5915133-ffac-4777-b7d9-cf38ba163d43@kernel.org>
+ <03097984-fded-477e-82b6-f9b31fd2f1d3@oss.qualcomm.com>
+From: Krzysztof Kozlowski <krzk@kernel.org>
+Content-Language: en-US
+Autocrypt: addr=krzk@kernel.org; keydata=
+ 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
+In-Reply-To: <03097984-fded-477e-82b6-f9b31fd2f1d3@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Short summary has a different driver name that is implemented i.e.,
-it should has "tpm_qcom", not "tpm-qcom".
-
-On Mon, Aug 31, 2026 at 03:13:01PM +0530, Kuldeep Singh wrote:
-> Add a TPM chip driver for platforms where a TPM 2.0 instance is
-> implemented by a Trusted Application (TA) running in Qualcomm's Trusted
-> Execution Environment (QTEE), reachable over the QCOMTEE object-IPC
-> transport.
+On 01/09/2026 11:39, Linlin Zhang wrote:
 > 
-> The driver discovers the qcom.tz.tpm TEE-bus device, opens a session
-> with the TPM TA, and register with tpm interface. This exposes the TA
-> through the standard /dev/tpm interface and the existing tpm2 command
-> layer. OS need not be aware underlying TPM instance is dTPM or fTPM.
 > 
-> Signed-off-by: Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>
-> ---
->  MAINTAINERS                 |   7 +
->  drivers/char/tpm/Kconfig    |   9 ++
->  drivers/char/tpm/Makefile   |   1 +
->  drivers/char/tpm/tpm_qcom.c | 371 ++++++++++++++++++++++++++++++++++++++++++++
->  drivers/char/tpm/tpm_qcom.h |  82 ++++++++++
+> On 8/31/2026 2:56 PM, Krzysztof Kozlowski wrote:
+>> On 27/08/2026 18:07, Linlin Zhang wrote:
+>>> From: linlzhan <linlin.zhang@oss.qualcomm.com>
+>>>
+>>> In a Qualcomm GVM environment the ICE hardware is controlled by the
+>>
+>> What is GVM?
 
-Rename it as tpm_qcom_tee just to be aligned on how Microsoft's fTPM
-driver is named.
+There is no such TLA (git grep).
 
->  5 files changed, 470 insertions(+)
+Maybe you meant guest in a virtual machine? Don't use some qcom-specific
+TLA.
+
+
+>>
 > 
-> diff --git a/MAINTAINERS b/MAINTAINERS
-> index 47b04968e79a..cfa5b66823c7 100644
-> --- a/MAINTAINERS
-> +++ b/MAINTAINERS
-> @@ -22636,6 +22636,13 @@ S:	Maintained
->  F:	Documentation/tee/qtee.rst
->  F:	drivers/tee/qcomtee/
->  
-> +QUALCOMM TPM DRIVER
-> +M:	Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>
-> +L:	linux-arm-msm@vger.kernel.org
-> +S:	Maintained
-> +F:	drivers/char/tpm/tpm_qcom.c
-> +F:	drivers/char/tpm/tpm_qcom.h
-> +
->  QUALCOMM TRUST ZONE MEMORY ALLOCATOR
->  M:	Bartosz Golaszewski <brgl@kernel.org>
->  L:	linux-arm-msm@vger.kernel.org
-
-this change should be a separate patch.
-
-> diff --git a/drivers/char/tpm/Kconfig b/drivers/char/tpm/Kconfig
-> index 5f672f2c01b0..05d704ed3632 100644
-> --- a/drivers/char/tpm/Kconfig
-> +++ b/drivers/char/tpm/Kconfig
-> @@ -243,6 +243,15 @@ config TCG_FTPM_TEE
->  	help
->  	  This driver proxies for firmware TPM running in TEE.
->  
-> +config TCG_QCOM
-> +	tristate "Qualcomm TEE based TPM Interface"
-> +	depends on QCOMTEE
-> +	help
-> +	  This driver provides interface to run TPM instances with Trustzone
-> +	  having Qualcomm TPM TA running in Qualcomm TEE.
-> +	  The mechanism uses the object-IPC based transport provided by
-> +	  QCOMTEE.
-> +
->  config TCG_SVSM
->  	tristate "SNP SVSM vTPM interface"
->  	depends on AMD_MEM_ENCRYPT
-> diff --git a/drivers/char/tpm/Makefile b/drivers/char/tpm/Makefile
-> index 5b5cdc0d32e4..471cbf49afd2 100644
-> --- a/drivers/char/tpm/Makefile
-> +++ b/drivers/char/tpm/Makefile
-> @@ -45,5 +45,6 @@ obj-$(CONFIG_TCG_CRB) += tpm_crb.o
->  obj-$(CONFIG_TCG_ARM_CRB_FFA) += tpm_crb_ffa.o
->  obj-$(CONFIG_TCG_VTPM_PROXY) += tpm_vtpm_proxy.o
->  obj-$(CONFIG_TCG_FTPM_TEE) += tpm_ftpm_tee.o
-> +obj-$(CONFIG_TCG_QCOM) += tpm_qcom.o
->  obj-$(CONFIG_TCG_SVSM) += tpm_svsm.o
->  obj-$(CONFIG_TCG_LOONGSON) += tpm_loongson.o
-> diff --git a/drivers/char/tpm/tpm_qcom.c b/drivers/char/tpm/tpm_qcom.c
-> new file mode 100644
-> index 000000000000..00ee61204056
-> --- /dev/null
-> +++ b/drivers/char/tpm/tpm_qcom.c
-> @@ -0,0 +1,371 @@
-> +// SPDX-License-Identifier: GPL-2.0
-> +/*
-> + * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
-> + *
-> + */
-> +
-> +#include <linux/mm.h>
-> +#include <linux/slab.h>
-> +#include <linux/tee.h>
-> +#include <linux/tee_drv.h>
-> +#include <linux/tpm.h>
-> +#include <linux/uuid.h>
-> +
-> +#include "tpm.h"
-> +#include "tpm_qcom.h"
-> +
-> +/* UUID of the QTEE-bus device representing the TPM TA. */
-> +static const uuid_t tpm_qcom_uuid =
-> +	UUID_INIT(0xaabcb593, 0x7083, 0x5536,
-> +		  0xac, 0x27, 0x3d, 0x2d, 0x89, 0x41, 0x9d, 0xdb);
-> +
-> +static void tpm_qcom_release_object(struct tee_context *ctx,
-> +				    struct tee_param_objref object)
-> +{
-> +	struct tee_ioctl_object_invoke_arg inv_arg;
-> +
-> +	memset(&inv_arg, 0, sizeof(inv_arg));
-> +	inv_arg.id = object.id;
-> +	inv_arg.op = QCOMTEE_MSG_OBJECT_OP_RELEASE;
-> +	inv_arg.num_params = 0;
-> +
-> +	tee_client_object_invoke_func(ctx, &inv_arg, NULL);
-> +}
-> +
-> +static int tpm_qcom_get_client_env_obj(struct tee_context *ctx,
-> +				       struct tee_param_objref *client_env_obj)
-> +{
-> +	int ret;
-> +	struct tee_ioctl_object_invoke_arg inv_arg;
-> +	struct tee_param param[2];
-> +
-> +	memset(&inv_arg, 0, sizeof(inv_arg));
-> +	memset(&param, 0, sizeof(param));
-> +
-> +	inv_arg.id = TEE_OBJREF_NULL;
-> +	inv_arg.op = QCOMTEE_ROOT_OP_REG_WITH_CREDENTIALS;
-> +	inv_arg.num_params = 2;
-> +
-> +	param[0].attr = TEE_IOCTL_PARAM_ATTR_TYPE_OBJREF_INPUT;
-> +	param[0].u.objref.id = TEE_OBJREF_NULL;
-> +	param[1].attr = TEE_IOCTL_PARAM_ATTR_TYPE_OBJREF_OUTPUT;
-> +
-> +	ret = tee_client_object_invoke_func(ctx, &inv_arg, param);
-> +	if (ret < 0 || inv_arg.ret != 0)
-> +		return ret ?: inv_arg.ret;
-> +
-> +	*client_env_obj = param[1].u.objref;
-> +	return ret;
-> +}
-> +
-> +static int tpm_qcom_get_svc_obj(struct tee_context *ctx,
-> +				struct tee_param_objref client_env_obj,
-> +				struct tee_param_objref *tpm_svc_obj)
-> +{
-> +	int ret;
-> +	struct tee_ioctl_object_invoke_arg inv_arg;
-> +	struct tee_param param[2];
-> +	u32 tpm_uid = QCOMTEE_TPM_UID;
-> +
-> +	memset(&inv_arg, 0, sizeof(inv_arg));
-> +	memset(&param, 0, sizeof(param));
-> +
-> +	inv_arg.id = client_env_obj.id;
-> +	inv_arg.op = QCOMTEE_OP_CLIENT_ENV_OPEN;
-> +	inv_arg.num_params = 2;
-> +
-> +	param[0].attr = TEE_IOCTL_PARAM_ATTR_TYPE_UBUF_INPUT;
-> +	param[0].u.ubuf = (struct tee_param_ubuf){ .addr = &tpm_uid,
-> +						    .size = sizeof(tpm_uid) };
-> +	param[1].attr = TEE_IOCTL_PARAM_ATTR_TYPE_OBJREF_OUTPUT;
-> +
-> +	ret = tee_client_object_invoke_func(ctx, &inv_arg, param);
-> +	if (ret < 0 || inv_arg.ret != 0)
-> +		return ret ?: inv_arg.ret;
-> +
-> +	*tpm_svc_obj = param[1].u.objref;
-> +	return ret;
-> +}
-> +
-> +static int tpm_qcom_send_command(struct tpm_qcom_private *pvt_data,
-> +				 void *req, size_t req_len,
-> +				 void *rsp, size_t *rsp_len)
-> +{
-> +	int ret;
-> +	struct tee_ioctl_object_invoke_arg inv_arg;
-> +	struct tee_param param[2];
-> +
-> +	memset(&inv_arg, 0, sizeof(inv_arg));
-> +	memset(&param, 0, sizeof(param));
-> +
-> +	inv_arg.id = pvt_data->tpm_svc_obj.id;
-> +	inv_arg.op = QCOMTEE_TPM_OP_SEND_COMMAND;
-> +	inv_arg.num_params = 2;
-> +
-> +	param[0].attr = TEE_IOCTL_PARAM_ATTR_TYPE_UBUF_INPUT;
-> +	param[0].u.ubuf = (struct tee_param_ubuf){ .addr = req, .size = req_len };
-> +	param[1].attr = TEE_IOCTL_PARAM_ATTR_TYPE_UBUF_OUTPUT;
-> +	param[1].u.ubuf = (struct tee_param_ubuf){ .addr = rsp, .size = *rsp_len };
-> +
-> +	print_hex_dump_debug("tpm_qcom req: ", DUMP_PREFIX_OFFSET,
-> +			     16, 1, req, req_len, true);
-
-Please don't do this. It can put production systems at risk.
-
-> +
-> +	ret = tee_client_object_invoke_func(pvt_data->ctx, &inv_arg, param);
-> +	if (ret < 0 || inv_arg.ret != 0) {
-> +		dev_err(pvt_data->dev,
-> +			"send_command invoke ret: %d, err: 0x%x\n",
-> +			ret, inv_arg.ret);
-> +		return ret ?: inv_arg.ret;
-> +	}
-> +
-> +	*rsp_len = param[1].u.ubuf.size;
-> +
-> +	print_hex_dump_debug("tpm_qcom rsp: ", DUMP_PREFIX_OFFSET,
-> +			     16, 1, rsp, *rsp_len, true);
-> +
-> +	return ret;
-> +}
-> +
-> +static int tpm_qcom_get_ta_details(struct tpm_qcom_private *pvt_data)
-> +{
-> +	struct tpm_qcom_ta_version_req ver_req = {
-> +		.command_id = QCOMTEE_TPM_GET_TA_VERSION_ID,
-> +	};
-> +	struct tpm_qcom_ta_version_rsp ver_rsp;
-> +	size_t ver_rsp_len = sizeof(ver_rsp);
-> +	struct tpm_qcom_type_req type_req = {
-> +		.command_id = QCOMTEE_TPM_TYPE_ID,
-> +	};
-> +	struct tpm_qcom_type_rsp type_rsp;
-> +	size_t type_rsp_len = sizeof(type_rsp);
-> +	int ret;
-> +
-> +	ret = tpm_qcom_send_command(pvt_data, &ver_req, sizeof(ver_req),
-> +				    &ver_rsp, &ver_rsp_len);
-> +	if (ret || ver_rsp_len < sizeof(ver_rsp) || ver_rsp.status != 0) {
-> +		dev_err(pvt_data->dev,
-> +			"failed to query TA version: ret=%d, status=%u\n",
-> +			ret, ret ? 0 : ver_rsp.status);
-> +		return ret ?: -EIO;
-> +	}
-> +
-> +	dev_info(pvt_data->dev, "TPM TA version %u.%u\n",
-> +		 QCOMTEE_TPM_TA_VERSION_GET_MAJOR(ver_rsp.version_num),
-> +		 QCOMTEE_TPM_TA_VERSION_GET_MINOR(ver_rsp.version_num));
-> +
-> +	ret = tpm_qcom_send_command(pvt_data, &type_req, sizeof(type_req),
-> +				    &type_rsp, &type_rsp_len);
-> +	if (ret || type_rsp_len < sizeof(type_rsp) || type_rsp.status != 0) {
-> +		dev_err(pvt_data->dev,
-> +			"failed to query TPM type: ret=%d, status=%u\n",
-> +			ret, ret ? 0 : type_rsp.status);
-> +		return ret ?: -EIO;
-> +	}
-> +
-> +	switch (type_rsp.tpm_type) {
-> +	case QCOMTEE_TPM_TYPE_FTPM:
-> +		dev_info(pvt_data->dev, "TPM type: fTPM\n");
-> +		pvt_data->is_dtpm = false;
-> +		break;
-> +	case QCOMTEE_TPM_TYPE_DTPM:
-> +		dev_info(pvt_data->dev, "TPM type: dTPM\n");
-> +		pvt_data->is_dtpm = true;
-> +		break;
-> +	default:
-> +		dev_err(pvt_data->dev, "unsupported TPM type: 0x%08x\n",
-> +			type_rsp.tpm_type);
-> +		return -EIO;
-> +	}
-> +
-> +	return 0;
-> +}
-> +
-> +/*
-> + * fTPM does not implement this command, so this is only ever called in case of
-> + * dtpm only.
-> + */
-> +static void tpm_qcom_transfer(struct tpm_qcom_private *pvt_data,
-> +			      u32 transfer_state)
-> +{
-> +	struct tpm_qcom_transfer_req req = {
-> +		.command_id = QCOMTEE_TPM_TRANSFER_ID,
-> +		.transfer_state = transfer_state,
-> +	};
-> +	struct tpm_qcom_transfer_rsp rsp;
-> +	size_t rsp_len = sizeof(rsp);
-> +	int ret;
-> +
-> +	ret = tpm_qcom_send_command(pvt_data, &req, sizeof(req), &rsp, &rsp_len);
-> +	if (ret || rsp_len < sizeof(rsp) || rsp.status != 0)
-> +		dev_warn(pvt_data->dev,
-> +			 "transfer state=%u hint failed: ret=%d, status=%u\n",
-> +			 transfer_state, ret, ret ? 0 : rsp.status);
-> +}
-> +
-> +static int tpm_qcom_cmd_ready(struct tpm_chip *chip)
-> +{
-> +	struct tpm_qcom_private *pvt_data = dev_get_drvdata(chip->dev.parent);
-> +
-> +	if (pvt_data->is_dtpm)
-> +		tpm_qcom_transfer(pvt_data, QCOMTEE_TPM_TRANSFER_START);
-> +
-> +	return 0;
-> +}
-> +
-> +static int tpm_qcom_go_idle(struct tpm_chip *chip)
-> +{
-> +	struct tpm_qcom_private *pvt_data = dev_get_drvdata(chip->dev.parent);
-> +
-> +	if (pvt_data->is_dtpm)
-> +		tpm_qcom_transfer(pvt_data, QCOMTEE_TPM_TRANSFER_END);
-> +
-> +	return 0;
-> +}
-> +
-> +/*
-> + * The raw TPM2 command in @buf is sent directly as send_command's UBUF-in
-> + * param and the raw TPM2 response is read back from its UBUF-out param.
-> + */
-> +static int tpm_qcom_send(struct tpm_chip *chip, u8 *buf, size_t bufsiz,
-> +			 size_t cmd_len)
-> +{
-> +	struct tpm_qcom_private *pvt_data = dev_get_drvdata(chip->dev.parent);
-> +	size_t rsp_len = PAGE_ALIGN(MAX_RESPONSE_SIZE);
-> +	size_t copy_len;
-> +	int ret;
-> +
-> +	if (cmd_len > MAX_COMMAND_SIZE) {
-> +		dev_err(&chip->dev,
-> +			"%s: len=%zd exceeds MAX_COMMAND_SIZE\n",
-> +			__func__, cmd_len);
-> +		return -EIO;
-> +	}
-> +
-> +	u8 *response __free(kfree) = kzalloc(rsp_len, GFP_KERNEL);
-> +	if (!response)
-> +		return -ENOMEM;
-> +
-> +	ret = tpm_qcom_send_command(pvt_data, buf, cmd_len, response, &rsp_len);
-> +	if (ret < 0) {
-> +		dev_err(&chip->dev, "%s: failed: ret=%d\n", __func__, ret);
-> +		return ret;
-> +	}
-> +
-> +	copy_len = min_t(size_t, bufsiz, rsp_len);
-> +	memcpy(buf, response, copy_len);
-> +
-> +	return copy_len;
-> +}
-> +
-> +static const struct tpm_class_ops tpm_qcom_ops = {
-> +	.flags = TPM_OPS_AUTO_STARTUP,
-> +	.send = tpm_qcom_send,
-> +	.cmd_ready = tpm_qcom_cmd_ready,
-> +	.go_idle = tpm_qcom_go_idle,
-> +};
-> +
-> +static int tpm_qcom_ctx_match(struct tee_ioctl_version_data *ver,
-> +			      const void *data)
-> +{
-> +	return (ver->impl_id == TEE_IMPL_ID_QTEE);
-> +}
-> +
-> +static int tpm_qcom_probe(struct tee_client_device *tee_dev)
-> +{
-> +	struct device *dev = &tee_dev->dev;
-> +	struct tpm_qcom_private *pvt_data;
-> +	struct tee_param_objref client_env_obj;
-> +	struct tee_param_objref tpm_svc_obj;
-> +	struct tpm_chip *chip;
-> +	int rc, err;
-> +
-> +	pvt_data = devm_kzalloc(dev, sizeof(*pvt_data), GFP_KERNEL);
-> +	if (!pvt_data)
-> +		return -ENOMEM;
-> +
-> +	dev_set_drvdata(dev, pvt_data);
-> +
-> +	pvt_data->ctx = tee_client_open_context(NULL, tpm_qcom_ctx_match, NULL,
-> +						NULL);
-> +	if (IS_ERR(pvt_data->ctx))
-> +		return -ENODEV;
-> +
-> +	rc = tpm_qcom_get_client_env_obj(pvt_data->ctx, &client_env_obj);
-> +	if (rc) {
-> +		err = -EINVAL;
-> +		goto out_ctx;
-> +	}
-> +
-> +	rc = tpm_qcom_get_svc_obj(pvt_data->ctx, client_env_obj, &tpm_svc_obj);
-> +	if (rc) {
-> +		err = -EINVAL;
-> +		goto out_client_env;
-> +	}
-> +	pvt_data->tpm_svc_obj = tpm_svc_obj;
-> +	pvt_data->dev = dev;
-> +
-> +	err = tpm_qcom_get_ta_details(pvt_data);
-> +	if (err)
-> +		goto out_svc_obj;
-> +
-> +	chip = tpm_chip_alloc(dev, &tpm_qcom_ops);
-> +	if (IS_ERR(chip)) {
-> +		dev_err(dev, "%s: tpm_chip_alloc failed\n", __func__);
-> +		err = PTR_ERR(chip);
-> +		goto out_svc_obj;
-> +	}
-> +
-> +	pvt_data->chip = chip;
-> +	pvt_data->chip->flags |= TPM_CHIP_FLAG_TPM2 | TPM_CHIP_FLAG_SYNC;
-> +
-> +	err = tpm_chip_register(pvt_data->chip);
-> +	if (err) {
-> +		dev_err(dev, "%s: tpm_chip_register failed with rc=%d\n",
-> +			__func__, err);
-> +		goto out_chip;
-> +	}
-> +
-> +	tpm_qcom_release_object(pvt_data->ctx, client_env_obj);
-> +	return 0;
-> +
-> +out_chip:
-> +	put_device(&pvt_data->chip->dev);
-> +out_svc_obj:
-> +	tpm_qcom_release_object(pvt_data->ctx, tpm_svc_obj);
-> +out_client_env:
-> +	tpm_qcom_release_object(pvt_data->ctx, client_env_obj);
-> +out_ctx:
-> +	tee_client_close_context(pvt_data->ctx);
-> +	return err;
-> +}
-> +
-> +static void tpm_qcom_remove(struct tee_client_device *tee_dev)
-> +{
-> +	struct tpm_qcom_private *pvt_data = dev_get_drvdata(&tee_dev->dev);
-> +
-> +	tpm_chip_unregister(pvt_data->chip);
-> +	put_device(&pvt_data->chip->dev);
-> +	tpm_qcom_release_object(pvt_data->ctx, pvt_data->tpm_svc_obj);
-> +	tee_client_close_context(pvt_data->ctx);
-> +}
-> +
-> +static const struct tee_client_device_id tpm_qcom_id_table[] = {
-> +	{ tpm_qcom_uuid },
-> +	{}
-> +};
-> +MODULE_DEVICE_TABLE(tee, tpm_qcom_id_table);
-> +
-> +static struct tee_client_driver tpm_qcom_driver = {
-> +	.id_table	= tpm_qcom_id_table,
-> +	.probe		= tpm_qcom_probe,
-> +	.remove		= tpm_qcom_remove,
-> +	.driver		= {
-> +		.name	= "tpm-qcom",
-> +	},
-> +};
-> +
-> +module_tee_client_driver(tpm_qcom_driver);
-> +
-> +MODULE_DESCRIPTION("TPM driver for Qualcomm TPM TA");
-> +MODULE_AUTHOR("Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>");
-> +MODULE_LICENSE("GPL");
-> diff --git a/drivers/char/tpm/tpm_qcom.h b/drivers/char/tpm/tpm_qcom.h
-> new file mode 100644
-> index 000000000000..0f3756944768
-> --- /dev/null
-> +++ b/drivers/char/tpm/tpm_qcom.h
-> @@ -0,0 +1,82 @@
-> +/* SPDX-License-Identifier: GPL-2.0 */
-> +/*
-> + * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
-> + */
-> +
-> +#ifndef __TPM_QCOM_H__
-> +#define __TPM_QCOM_H__
-> +
-> +#include <linux/bitfield.h>
-> +#include <linux/tee_drv.h>
-> +#include <linux/tpm.h>
-> +#include <linux/uuid.h>
-> +
-> +#define QCOMTEE_ROOT_OP_REG_WITH_CREDENTIALS	5
-> +#define QCOMTEE_OP_CLIENT_ENV_OPEN		0
-> +#define QCOMTEE_MSG_OBJECT_OP_MASK		GENMASK(15, 0)
-> +#define QCOMTEE_MSG_OBJECT_OP_RELEASE		(QCOMTEE_MSG_OBJECT_OP_MASK - 0)
-> +
-> +#define QCOMTEE_TPM_OP_SEND_COMMAND		0
-> +
-> +/* UID of the "qcom.tz.tpm" service */
-> +#define QCOMTEE_TPM_UID			489
-> +
-> +/* Max buffer size supported by TPM TA */
-> +#define MAX_COMMAND_SIZE	SZ_4K
-> +#define MAX_RESPONSE_SIZE	SZ_4K
-> +
-> +#define QCOMTEE_TPM_GET_TA_VERSION_ID		0x0001000
-> +#define QCOMTEE_TPM_TA_VERSION_GET_MAJOR(ver)	((u32)(ver) >> 16)
-> +#define QCOMTEE_TPM_TA_VERSION_GET_MINOR(ver)	((u32)(ver) & 0x0000ffffU)
-> +
-> +struct tpm_qcom_ta_version_req {
-> +	u32 command_id;
-> +} __packed;
-> +
-> +struct tpm_qcom_ta_version_rsp {
-> +	u32 status;
-> +	u32 command_id;
-> +	u32 version_num;
-> +} __packed;
-> +
-> +#define QCOMTEE_TPM_TYPE_ID		0x0080000
-> +#define QCOMTEE_TPM_TYPE_DTPM		0x6454504dU
-> +#define QCOMTEE_TPM_TYPE_FTPM		0x6654504dU
-> +#define QCOMTEE_TPM_TYPE_NONE		0x4e6f6e65U
-> +
-> +struct tpm_qcom_type_req {
-> +	u32 command_id;
-> +} __packed;
-> +
-> +struct tpm_qcom_type_rsp {
-> +	u32 command_id;
-> +	u32 status;
-> +	u32 tpm_type;
-> +} __packed;
-> +
-> +/* dTPM SPI transfer optimization:
-
-Block comments AFAIK should be
-
-/*
- * <TEXT>
-
-> + * TRANSFER_START before a burst of commands, TRANSFER_END once done.
-> + */
-> +#define QCOMTEE_TPM_TRANSFER_ID		0x0000002
-> +#define QCOMTEE_TPM_TRANSFER_END	0
-> +#define QCOMTEE_TPM_TRANSFER_START	1
-> +
-> +struct tpm_qcom_transfer_req {
-> +	u32 command_id;
-> +	u32 transfer_state;
-> +} __packed;
-> +
-> +struct tpm_qcom_transfer_rsp {
-> +	u32 command_id;
-> +	u32 status;
-> +} __packed;
-> +
-> +struct tpm_qcom_private {
-> +	struct tpm_chip *chip;
-> +	struct device *dev;
-> +	struct tee_context *ctx;
-> +	struct tee_param_objref tpm_svc_obj;
-> +	bool is_dtpm;
-> +};
-> +
-> +#endif /* __TPM_QCOM_H__ */
+> GVM means Guest Virtual Machine. This is designed for the virtualization
+> platform.
 > 
-> -- 
-> 2.34.1
+>>> host, GVM has no direct access to it. So, key operation in GVM is
+>>> done through SCM calls rather than direct register access. In this
+>>> way the access to ICE registers are offloaded to Trust Zone.
+>>>
+>>> Add QCOM_CRYPTO_VIRT, which implements struct virtblk_crypto_variant_ops
+>>> for the virtio_blk_crypto_ext dispatch layer. It maps keyslot
+>>> program/evict to qcom_scm_ice_set_key() and
+>>> qcom_scm_ice_invalidate_key(), and software-secret derivation to
+>>> qcom_scm_derive_sw_secret().
+>>>
+>>> Signed-off-by: linlzhan <linlin.zhang@oss.qualcomm.com>
+>>> ---
+>>>  drivers/soc/qcom/Kconfig       | 12 +++++
+>>>  drivers/soc/qcom/Makefile      |  1 +
+>>>  drivers/soc/qcom/crypto_virt.c | 89 ++++++++++++++++++++++++++++++++++
+>>>  3 files changed, 102 insertions(+)
+>>>  create mode 100644 drivers/soc/qcom/crypto_virt.c
+>>>
+>>> diff --git a/drivers/soc/qcom/Kconfig b/drivers/soc/qcom/Kconfig
+>>> index 2b524154d9fb..6c632d114d45 100644
+>>> --- a/drivers/soc/qcom/Kconfig
+>>> +++ b/drivers/soc/qcom/Kconfig
+>>> @@ -298,6 +298,18 @@ config QCOM_INLINE_CRYPTO_ENGINE
+>>>  	tristate
+>>>  	select QCOM_SCM
+>>>  
+>>> +config QCOM_CRYPTO_VIRT
+>>> +	tristate "Qualcomm Technologies, Inc. Crypto Virt driver"
+>>> +	depends on VIRTBLK_CRYPTO_VIRTUALIZATION
+>>> +	depends on QCOM_SCM
+>>> +	default VIRTBLK_CRYPTO_VIRTUALIZATION if ARCH_QCOM
+>>> +	help
+>>> +	  GVM-side hardware-wrapped-key SCM operations exposed to
+>>> +	  virtio_blk's inline crypto layer: per-slot key programming and
+>>> +	  eviction, and key derive/generate/prepare/import.
+>>> +	  Say Y here to compile the driver as a part of kernel or M to compile
+>>> +	  as a module.
+>>> +
+>>>  config QCOM_KRYO_L2_ACCESSORS
+>>>  	bool
+>>>  	depends on ARM64
+>>> diff --git a/drivers/soc/qcom/Makefile b/drivers/soc/qcom/Makefile
+>>> index 798643be3590..6d4b7546d1fb 100644
+>>> --- a/drivers/soc/qcom/Makefile
+>>> +++ b/drivers/soc/qcom/Makefile
+>>> @@ -39,5 +39,6 @@ obj-$(CONFIG_QCOM_KRYO_L2_ACCESSORS) +=	kryo-l2-accessors.o
+>>>  obj-$(CONFIG_QCOM_ICC_BWMON)	+= icc-bwmon.o
+>>>  qcom_ice-objs			+= ice.o
+>>>  obj-$(CONFIG_QCOM_INLINE_CRYPTO_ENGINE)	+= qcom_ice.o
+>>> +obj-$(CONFIG_QCOM_CRYPTO_VIRT)	+= crypto_virt.o
+>>>  obj-$(CONFIG_QCOM_PBS) +=	qcom-pbs.o
+>>>  obj-$(CONFIG_QCOM_UBWC_CONFIG) += ubwc_config.o
+>>> diff --git a/drivers/soc/qcom/crypto_virt.c b/drivers/soc/qcom/crypto_virt.c
+>>> new file mode 100644
+>>> index 000000000000..4ee2a36af6c1
+>>> --- /dev/null
+>>> +++ b/drivers/soc/qcom/crypto_virt.c
+>>> @@ -0,0 +1,89 @@
+>>> +// SPDX-License-Identifier: GPL-2.0-only
+>>> +
+>>> +#include <linux/module.h>
+>>> +#include <linux/types.h>
+>>> +#include <linux/blk-crypto.h>
+>>> +#include <linux/virtio_blk_crypto_ext.h>
+>>> +#include <linux/firmware/qcom/qcom_scm.h>
+>>> +
+>>> +static int crypto_virt_program_key(const struct blk_crypto_key *key,
+>>> +				   unsigned int slot)
+>>> +{
+>>> +	u32 dus_512_units;
+>>> +	int ret;
+>>> +
+>>> +	if (!key || !key->size) {
+>>> +		pr_err("%s: invalid key\n", __func__);
+>>> +		return -EINVAL;
+>>> +	}
+>>> +
+>>> +	/* Only AES-256-XTS has been tested so far. */
+>>> +	if (key->crypto_cfg.crypto_mode !=
+>>> +	    BLK_ENCRYPTION_MODE_AES_256_XTS) {
+>>> +		pr_err_ratelimited("Unsupported crypto mode: %d\n",
+>>> +				    key->crypto_cfg.crypto_mode);
+>>> +		return -EINVAL;
+>>> +	}
+>>> +
+>>> +	/* qcom_scm_ice_set_key()'s data_unit_size is expressed in 512-byte units */
+>>> +	dus_512_units = key->crypto_cfg.data_unit_size / 512;
+>>> +
+>>> +	ret = qcom_scm_ice_set_key(slot, key->bytes, key->size,
+>>> +		QCOM_SCM_ICE_CIPHER_AES_256_XTS, dus_512_units);
+>>> +	if (ret)
+>>> +		pr_err("%s: slot=%u ret=%d\n", __func__, slot, ret);
+>>> +
+>>> +	return ret;
+>>> +}
+>>> +
+>>> +static int crypto_virt_invalidate_key(unsigned int slot)
+>>> +{
+>>> +	int ret;
+>>> +
+>>> +	ret = qcom_scm_ice_invalidate_key(slot);
+>>> +	if (ret)
+>>> +		pr_err("%s: slot=%u ret=%d\n", __func__, slot, ret);
+>>> +
+>>> +	return ret;
+>>> +}
+>>> +
+>>> +static int crypto_virt_derive_sw_secret_key(const u8 *eph_key, size_t eph_key_size,
+>>> +					    u8 sw_secret[BLK_CRYPTO_SW_SECRET_SIZE])
+>>> +{
+>>> +	int ret;
+>>> +
+>>> +	ret = qcom_scm_derive_sw_secret(eph_key, eph_key_size,
+>>> +					sw_secret, BLK_CRYPTO_SW_SECRET_SIZE);
+>>> +	if (ret == -EIO || ret == -EINVAL)
+>>> +		ret = -EBADMSG; /* probably invalid key */
+>>> +
+>>> +	if (ret)
+>>> +		pr_err("%s: ret=%d\n", __func__, ret);
+>>> +
+>>> +	return ret;
+>>> +}
+>>> +
+>>> +static struct virtblk_crypto_variant_ops virtblk_crypto_qcom_vops = {
+>>
+>> Why is a crypto-handling code in drivers/soc/?
+>>
 > 
+> This driver is a Qualcomm vendor-specific driver, plays the similar role in the
 
-BR, Jarkko
+Not really, there is nothing vendor specific here. Look at this code.
+
+> guest, like the ice driver in the host. so I place it in drivers/soc/.
+> 
+>>> +	.owner = THIS_MODULE,
+>>> +	.program_key = crypto_virt_program_key,
+>>> +	.evict_key = crypto_virt_invalidate_key,
+>>> +	.derive_sw_secret_key = crypto_virt_derive_sw_secret_key,
+>>> +};
+>>> +
+>>> +static int __init crypto_virt_init(void)
+>>> +{
+>>> +	virtblk_set_crypto_ops(&virtblk_crypto_qcom_vops);
+>>> +	return 0;
+>>> +}
+>>> +module_init(crypto_virt_init);
+>>> +
+>>> +#if IS_MODULE(CONFIG_QCOM_CRYPTO_VIRT)
+>>> +static void __exit crypto_virt_exit(void)
+>>> +{
+>>> +	virtblk_set_crypto_ops(NULL);
+>>> +}
+>>> +module_exit(crypto_virt_exit);
+>>> +#endif
+>>
+>> How do you instantiate this driver exactly?
+>>
+> 
+> This driver is not instantiated per device. It acts as a provider of
+> Qualcomm vendor-specific inline crypto operations, which is based on
+> qcom_scm driver, and registers a global virtblk_crypto_ops instance
+> during module initialization. So that, each blk_crypto_ll_ops from
+> virtio block driver in common kernel can be sent via qcom_smc driver.
+
+
+If it is not instantiated, then it is dead code. Drop all this. Or read
+my message again very carefully instead of replying with whatever copy
+of commit msg. I did not ask what is this driver about. I did not ask
+what it is providing. I asked how do you instantiate it or clarifying -
+how do you load and run this code in final system.
+
+This is just dead/unused code, straight from downstream.
+
+NAK.
+
+
+Best regards,
+Krzysztof
