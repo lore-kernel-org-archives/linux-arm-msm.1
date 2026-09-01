@@ -1,160 +1,99 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E44163988F9
-	for <linux-arm-msm@vger.kernel.org>; Tue,  1 Sep 2026 12:20:14 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 22AB247CC75;
+	Tue,  1 Sep 2026 12:20:34 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788265216; cv=none; b=KeO33czZNXyslXPMo9G1zw36/rXpqJZD/jWMLoUKgjIPXgr6HkpEbTpVx0jCX5W7+IOA3kejgshWyY13+a0KY6Myt3e9k4+Bg2QniIZyDwqb+1gM2S9wgqA+H0337RrA4sNkwjGci7bTOFntmtzE+GfKUA1alpas996tVaK3TK8=
+	t=1788265235; cv=none; b=otc9MLVv7Onba48/AHKcQTCbHHeAqnZ6nsCXewGtqm2BnUXbMN3476+QDhffNpQqO+CKnIeWT8LGQ0ikdqiSgoWN235/wij6SCC2/kNcIqDEXF1gf8z4naFA0ZkirVfdoWUnKScnj5dqJeu7+ZrhUC0NPskndoL+4JOcjBw1Ris=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788265216; c=relaxed/simple;
-	bh=qXg8sssEt9Q9EeWhnCnsQ6Z9yvVpjqAAzFP2DSeudrc=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=ZyBla3LO+Duv8dzHi/hWrC0qhKM9chAI8QPsxPuG2sHrG0VFpa1s+y5QgEmwOJ2yO8yb8SdF4ZFBQDdqJaILuFv6kcTB7zFz1wEkiypDLVRfppla80DqJd0CjPOWIWiUdxFzfxASNUL64rjcORfonI04UJa+Q6HJ7eu6X8CNvFI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=lWqn8avk; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=ZRcOQcf7; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1788265235; c=relaxed/simple;
+	bh=Ms5yUYYVIUCMr7+Dx214kheiE7jKpBdWV1rFqMcG+C0=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=BB78j5yoe0zeIy8lEXyA3SXddm03SINcKNt7hOqwkpkPHAOc8Ms68jUL476Ur6L5nbE3t+egElockKeak40cg1tEB00WXlSVBCOOEJJdyKkO1+mMUU8X+rAg30c/Mp0dO3SxYM+nvyrJ6v2KRuTRuWudXVlBvrnWKvlpyy/3EEY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=XzVCDtES; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="lWqn8avk";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="ZRcOQcf7"
-Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 681AJCXQ3406516
-	for <linux-arm-msm@vger.kernel.org>; Tue, 1 Sep 2026 12:20:14 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	kN2kJoz7hO2o7NskE9YevJ8bM5MarrXbwTiIKjarUso=; b=lWqn8avknas80M0G
-	+rPK9sTcfUabALhvPkswOLG5U4wgEa/xDpbFr4/OSbbYdm1/sdLbJ+PWAYYHXcdC
-	LOVA/ADi8OIEXBfoNmGYPRKy8VouuGJqcINCVxuWGoJURicmBa0DTMGUSOm1ZE+1
-	V8wnst+7Qg1T2CX+em6qE3TIabME1mBGSQB4szoe8PYVbDcTQ0ObMT1KUx9sMax/
-	Ez+WD1ampzDU3z2QrLSH2VJEFiMHqN4kk0oVwx0w2EJSGJs5N0SonGfS+4iju9AB
-	UnAINYs+ZRqJGKDKayoum7aJiXLQEI/ICffGTVK2YXL6ZxAbSS7w+AfX47YgeoM2
-	hA+GfA==
-Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com [209.85.222.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gdsnu1fpt-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 01 Sep 2026 12:20:14 +0000 (GMT)
-Received: by mail-qk1-f198.google.com with SMTP id af79cd13be357-9310484c005so72303585a.3
-        for <linux-arm-msm@vger.kernel.org>; Tue, 01 Sep 2026 05:20:13 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1788265213; x=1788870013; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=kN2kJoz7hO2o7NskE9YevJ8bM5MarrXbwTiIKjarUso=;
-        b=ZRcOQcf7byOjReIBQtpzjFZXIaSxr6TUTj+mhwh14Y3yuSnNnvOduZrp6xQglaSnyG
-         3IgIxFxYd880ogejdXlUZ5UYI5K6VTtCVZ81ck2v1vhANNmebLgeY/toDBKxM8haFwcd
-         dXDVkKoYOpLTpXOUkb0F3tSMnDPsXhiTODfO83jj9NlPBNYLnqg1XxzAq8s4X4bzK+WN
-         RvSy6yhe6OlTQ9w4pxMmD0ucNveY0eXbRqTfbUNboTyU+7iLmP9tQe0x/nlr+D1atiTk
-         VbIlyyDS/C1k25dqj/7DHelMdijmMrvqlc2VUwrMV+GLMyxTrmVX1C4WPlYmI5xASltS
-         djeg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788265213; x=1788870013;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=kN2kJoz7hO2o7NskE9YevJ8bM5MarrXbwTiIKjarUso=;
-        b=sDPhrv2ZS+8+fM1IZ74sfWyTa3X3XNtAN/CcPbh5Zcyc33NGbrLVPmjSGhvhhNVQVG
-         PuA7zOhzXWx1QHq1b1qb/tMJzI3pUL3BZyGv/FQIpwLvYinFrt33xGvDey7bhCtkQrHB
-         s+0yxdLphCh3qFK4YXDlLF3nutWaKpjLE148H3adCwMTUYq72I2aXM2EahGJVzlqZujt
-         lEORevyFpJ+XJPnnnBn1D5UHhovzKpHjsWRYRNBoDeA3NkmaKpLB6F8Z9X9VpJwIk/jm
-         s9Z252JVg42dnygp03Y+5TIigVrBLekUDe/EE8iNLSeQinOneevaNb1xAMgQN3de7DyM
-         Eosw==
-X-Forwarded-Encrypted: i=1; AHgh+Rq1aP1fW45MRU4M79F0YREYg+lMQtAG/Y50ROcVWbeZX9e/NDiS4ScjsNn1vSslg/n0LuImNoyuIy2d7z2h@vger.kernel.org
-X-Gm-Message-State: AFuF++nEqv54QhiciANFcdPzm/sWU24c5DGJAcfHYzPlgtWmhFoGpQ73
-	ujEmqbZ3i1oPemc8ZMMjsBcHEkb6rAdBrdw4t6zNMxVNBHRL3iA2u/ndTPfzQtlNIXpn/ihp5+o
-	V0OqY7PM109z34l7wkJeymDQj499QtZjKLHCye/qynnfSk/xfnFFRV7CuiTQy0++GE1VT
-X-Gm-Gg: AR+sD121QBr/J0EN4IpQZb7WIOaU4BcsTA3kO//nO54fLKM1eOWgr+z4pE3kHhNsGaw
-	WSSw5YsgGs7yljwHN1spss7PHEfub/YbqSVgQwChg8h2uOe1De0f0Xd98Lns2v4wsEHdkDbM1Lr
-	L8SODSidlXSxnSA1/xPrVnas5zA77AWQYZxaKvcEn/dJ9NTSiZFl+fYrzn0gxjBUO9uCqSwxblj
-	GFP51JMJkHJ/smWSXWzRE5TH7aSBjsGQ3qhq+FEVftVzrtdJZAjaxDUcfSOg0ZxuTzKWZV7lmHv
-	STYwHd5SBOl8WBsTuRSLQ9RMdjc5ip246pz1GWE7Kb0s2XugqNPijUHhEGaF1Px0Ov9t5qiZ+W/
-	NRBL10/wKG3WAq7N7nL+GBw==
-X-Received: by 2002:a05:620a:46a3:b0:931:23a:83ca with SMTP id af79cd13be357-939287bdc55mr1477161885a.4.1788265212412;
-        Tue, 01 Sep 2026 05:20:12 -0700 (PDT)
-X-Received: by 2002:a05:620a:46a3:b0:931:23a:83ca with SMTP id af79cd13be357-939287bdc55mr1477151785a.4.1788265211504;
-        Tue, 01 Sep 2026 05:20:11 -0700 (PDT)
-Received: from [192.168.202.12] ([178.235.128.140])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c255ee2872dsm590060666b.15.2026.09.01.05.20.08
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 01 Sep 2026 05:20:10 -0700 (PDT)
-Message-ID: <b4dc8702-212e-452d-b0a9-c9816b545066@oss.qualcomm.com>
-Date: Tue, 1 Sep 2026 14:20:07 +0200
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="XzVCDtES"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id DD52B1F000E9;
+	Tue,  1 Sep 2026 12:20:30 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1788265234;
+	bh=knqgEaQ3Nt/j1kgI3GiULCfkTBJyPDx6YekcweuXbC0=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=XzVCDtES9FvYRwTEGc9GrdSsXkl6cVu5UXSDTum7lXO3LWqCLtN+EXaqrgdN6hcuP
+	 3OrxkBXK3RjdrJeeLI/0bMQBaJ+ENpefSMLaVjuocWSFwmZ6GMfxx7oDYWyv8N0zBE
+	 G45G+qxb1zudvuGlCeaVk39PiCS9L2W1Wcgfl5qkR8CtuoJXn906kmVLfHXv1XLXyq
+	 tCGGUrHonlTdH81NrBePv0pYG0mZO3XmPN42ul1VU0dzC8Y8ut+6TaO4jfz0wI1G9a
+	 1Hm3Q4YEeZnZ0BA7vHLJ6seqCgz4sMz34z4XDxfvDIEy5PrHcznAPOfFcyS+RhwLuR
+	 8Lmr/WfajOQFw==
+Date: Tue, 1 Sep 2026 14:20:21 +0200
+From: Manivannan Sadhasivam <mani@kernel.org>
+To: Peter Hunt <peter.hunt@opengear.com>
+Cc: loic.poulain@oss.qualcomm.com, ryazanov.s.a@gmail.com, 
+	johannes@sipsolutions.net, netdev@vger.kernel.org, mhi@lists.linux.dev, 
+	linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH net-next v5 0/3] net: wwan: support DTR/RTS on AT ports
+ via MHI IP_CTRL
+Message-ID: <zjafvc6ndpkmavogxwmqj5gpefpj4ymefn5obed6cvjot7wnwa@pmrfl5tixa72>
+References: <20260819224927.2274790-1-peter.hunt@opengear.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 5/5] arm64: dts: qcom: qcs6490-rb3gen2: enable TC9563
- embedded GPIO controller
-To: Lorenzo Bianconi <lorenzo.bianconi@oss.qualcomm.com>,
-        Bjorn Helgaas <bhelgaas@google.com>,
-        Lorenzo Pieralisi <lpieralisi@kernel.org>,
-        =?UTF-8?Q?Krzysztof_Wilczy=C5=84ski?= <kwilczynski@kernel.org>,
-        Manivannan Sadhasivam <mani@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley
- <conor+dt@kernel.org>,
-        Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>,
-        Linus Walleij <linusw@kernel.org>,
-        Bartosz Golaszewski <brgl@kernel.org>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Michael Walle <mwalle@kernel.org>
-Cc: linux-pci@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-gpio@vger.kernel.org, linux-arm-msm@vger.kernel.org
-References: <20260901-pci-tc9563-aux-v1-0-dd9b80738e70@oss.qualcomm.com>
- <20260901-pci-tc9563-aux-v1-5-dd9b80738e70@oss.qualcomm.com>
-Content-Language: en-US
-From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-In-Reply-To: <20260901-pci-tc9563-aux-v1-5-dd9b80738e70@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTAxMDEwOSBTYWx0ZWRfX4CTYt8OPGSie
- 9pm6TIauJmD+gwjgTj1UMR+8EaXtmUSqIKhtDvJ/MW2OOa6r/i0++hPil6MbA3oh5BrsvhPSaMJ
- eDyRjCijAU+Yc+ZdsYm1P1xS+SfKOHgAkVzkC397LLcHPtGHY/N5fFVQZpoUSXe1Uuc8ciEBMc0
- 406JvsEDclYCtZ+SiXJ+UoYZg7I98qen12uDUj0VjprHxKOiRUpFQGrTJ/th8TBR3gw7JWLsQ4R
- 00aCwyMJg3ZSkIncYSeHz2y1cbDEMJToZydCa0LWmXEel6g5JpEAYWgetYwxmB1m2KKh+jS89D9
- T0flMAj8GURSN43O0N/tzR15+K1ZGG/m1ocPicz2khbYwleK9PX2yyq+VeaEl9Rt19boUUEKGnU
- t1tOOtxsj8/aWRl/pFTMFTKhf3Q/ghp99lSeClmiPQ6cklvsDcLFSqb5qzk5auTU5fj2ptIUzrm
- U93b3i/eS59GIaaWMlw==
-X-Authority-Analysis: v=2.4 cv=L6ItheT8 c=1 sm=1 tr=0 ts=6a96c2fe cx=c_pps
- a=qKBjSQ1v91RyAK45QCPf5w==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
- a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22
- a=EUspDBNiAAAA:8 a=fFHDuP4XVuiI0RsLl8oA:9 a=QEXdDO2ut3YA:10
- a=NFOGd7dJGGMPyQGDc5-O:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTAxMDEwOSBTYWx0ZWRfX2gERQWR0sQB4
- UTBUSllC5bqjc9JrRxzWHKdH8ieOQ78oNclpoF7rPkk1CNUTv8t0RBzV0cJiWZSwpNRMRs++sh5
- GElAaLYqzraJV93H7vlrUpajbrWFYA8=
-X-Proofpoint-ORIG-GUID: QO8UDBWBZYC0gC88jaajBSZ9g2Hrzo7g
-X-Proofpoint-GUID: QO8UDBWBZYC0gC88jaajBSZ9g2Hrzo7g
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-01_03,2026-08-31_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 spamscore=0 phishscore=0 suspectscore=0 priorityscore=1501
- lowpriorityscore=0 impostorscore=0 malwarescore=0 bulkscore=0 adultscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2609010109
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <20260819224927.2274790-1-peter.hunt@opengear.com>
 
-On 9/1/26 12:27 PM, Lorenzo Bianconi wrote:
-> The Toshiba TC9563 PCIe switch embeds a GPIO controller providing 37 GPIO
-> lines.
-> The controller is registered as an auxiliary device by the TC9563 power
-> controller and accessed through the same i2c device.
-> Describe the controller as a "gpio" child node of the switch and use it
-> to control the PERST# reset lines of the two external downstream ports
-> (pcie@1,0 and pcie@2,0), as expected by the TC9563 power controller after
-> switching to the GPIO descriptor API for per-port resets.
+On Thu, Aug 20, 2026 at 08:49:24AM +1000, Peter Hunt wrote:
+> Qualcomm/Sierra SDX55/SDX65 modems (e.g. EM9291) withhold unsolicited AT
+> result codes until the host asserts DTR.  The in-tree mhi_wwan_ctrl driver
+> exposed AT ports but never signalled DTR, so URCs never reached userspace.
 > 
-> Signed-off-by: Lorenzo Bianconi <lorenzo.bianconi@oss.qualcomm.com>
-> ---
+> Patch 1 extends the wwan core with an optional ->dtr_rts(port, mdmbits) port
+> op.  The TIOCM bitmask state is tracked entirely in the wwan core; drivers
+> receive the full bitmask so they can drive DTR and RTS independently.  The
+> core raises DTR/RTS on first open of any AT port whose driver implements
+> ->dtr_rts and drops them on last close, mirroring TTY semantics.  In the
+> ioctl path mdmbits is re-read under data_lock inside ops_lock so the value
+> passed always reflects the committed state and concurrent ioctls are
+> correctly ordered.  wwan_remove_port() also de-asserts on hot-unplug.
+> 
+> Patch 2 enables the IP_CTRL MHI channel in the Sierra PCI table so that
+> the IP_CTRL driver (patch 3) is actually bound on those controllers.
+> 
+> Patch 3 adds a second mhi_driver that binds the IP_CTRL channel and
+> registers a ->dtr_rts op so that the wwan core's open/close DTR raise/drop
+> and userspace TIOCMSET calls both reach the modem.  A single recycled sink
+> buffer keeps the IP_CTRL DL ring live so the modem's transmit path does not
+> stall.  The existing AT/QMI/MBIM data path is untouched.
+> 
+> v4: https://lore.kernel.org/netdev/20260816121705.858013-1-peter.hunt@opengear.com/
+> 
+> v5:
+> - Change ->dtr_rts from bool to unsigned int mdmbits (patch 1 + 3): DTR and
+>   RTS are now driven independently; fixes RTS inversion when TIOCMBIS/BIC
+>   changed RTS with DTR in the opposite state
+> - Re-read mdmbits inside ops_lock in the ioctl path (patch 1): closes a
+>   concurrent-ioctl ordering race where two racing TIOCM ioctls could leave
+>   the modem line state inconsistent with TIOCMGET
+> - Add ->dtr_rts(port, 0) call in wwan_remove_port() (patch 1): ensures
+>   DTR/RTS are de-asserted when a port is removed while an fd is still open
+> - Update kernel-doc to note ->dtr_rts is AT-only and describe mdmbits (patch 1)
+> - Pre-queue RX sink buffer in mhi_wwan_dtr_probe(), requeue in dl_xfer_cb
+>   (patch 3): prevents IP_CTRL DL ring from running empty and stalling the
+>   modem MHI transmit path
+> 
+> Peter Hunt (3):
+>   net: wwan: core: propagate modem control signals to port drivers
+>   bus: mhi: host: pci_generic: enumerate IP_CTRL channel for Sierra
+>     EM919x/EM929x
 
-Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+FYI, this patch got applied to MHI tree.
 
-Konrad
+- Mani
+
+-- 
+மணிவண்ணன் சதாசிவம்
