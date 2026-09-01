@@ -1,45 +1,60 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 96E5D40B6C9;
-	Tue,  1 Sep 2026 02:10:05 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F206340B0E0;
+	Tue,  1 Sep 2026 02:09:55 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788228609; cv=none; b=iACrj6kzThPVCodDEqETKLwKME6KFVTjkJAu+iJFwZm1w9CnsHj5lvfUDUGO1cUd/duhtqS/LjWj+84+AWGkPyZZ+YP15INh16gWVOruy++5Q7gOmWVMPUeMqbSTsXzOqhjgG09cM9/0II7Y1kryf6sANrwcNlyX3xSqSjTBGPE=
+	t=1788228609; cv=none; b=q0k9xsQxaW/iyMVO8YbnfJu/zx2DohrsmqbH1TLIF8ODinev4SJRqO6bLnXSjo0eLA3wSFIB78HH952CTHhvp5yU0dV668cx3ynNa3iqPaSGuFTq0f92zX0M3w4NP3IhWpFSPGd/pW17QeW/0cAk7fYviDgh3885kFCeL/zXXCY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1788228609; c=relaxed/simple;
-	bh=xvaQTj1YwJf5V9NO3LpE3tjG1hU8Jroc60VNDG+eLrI=;
+	bh=rueSU3UK+XcX4HrKxav7mLtPYF40/5m3Gjmp/9ArePs=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=CB/y+fgaOqaznCrC1KGInibt/mtbVFoGipsTWY3agKd2+fgVr+7+2eBXlAmkULRcP1J7fbUE/aWZwjXTh2v7VLK6njJPFlMO250Uly9u+lB+CRX46m11e49vIwibzPvyP5LdrY7jhAYZtab///AsZTI9e66fyuBgYDKYorMySX0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=D0nvx9cl; arc=none smtp.client-ip=100.103.45.18
+	 MIME-Version:Content-Type; b=HzpuIMY66W/JI3huNHfNtMFG8QNDW0EMMHLxc/QX8NWC+C/1kAHYzd+7nfqtb7RhiL/x21oRd0k+A1gSwRLCh/LHCx2XTkn74hUAdjcnT4+AymzXNeaINUuuzYwFSsqFVEB2BFRTu77jyOapIOPh07gZHAnjcxcH0h1qvpRI21k=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=NPcwdzXb; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="D0nvx9cl"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 882781F00ACF;
-	Tue,  1 Sep 2026 02:10:00 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="NPcwdzXb"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id DC8B41F00ADE;
+	Tue,  1 Sep 2026 02:09:45 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1788228601;
-	bh=/ETHjOMoxWmxmsZByUUKeE6TTPkX9y5GbMLcgDSZBUU=;
+	s=k20260515; t=1788228587;
+	bh=vmaAfbWHGwLcti2TlXMDXUq+DvFQ5ZoOFVXxydmhGrI=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=D0nvx9clonYU05ssnfGbyFKZeFaQKO31pVkeKExjZX8wE763uzYyzgLkKuBLuiBmU
-	 SJtGuDw/eHFqXSkNtG7dJkr/PXI5ijMI3iyzjA2QNF583STTVlUXbCKC2WP8S4SoGY
-	 AIqxI9R4WtW3kCoHeG2SsdHUI9cRwKwgicAXy3cSw30gh2UrdtY6rzdgpnMbEe/E9Q
-	 /fw4KoJ4o91ImQYTrHdy5tENUtxhot0NaX7kvz9AacdtZZjMUiM8NPdGaG9B5OzZj7
-	 lAWCGl/f2NMTDDptSCkjjnyglpZe5knIw5RgPKCrLQfwADLaOf3Lq+QNsi60nX9OXk
-	 DBgnYgB0jA9Hg==
+	b=NPcwdzXbFAz7LdV+i8lTfKO3SbL8a239juAaEq0h+Tye0iCXqY+WttUHcy4enekA4
+	 CYaOzgHnESK3eiPFul++hOUuh9vdIlQ+lh8Jshqnu8CqlZJsd7oPOEWPnTugkCC1LL
+	 mS7zxd9U+Y1LGkvQdtfNF7hPewNh25TWfRzPz7PoACNvmQuJTX9l8iKxNzg7f42u5C
+	 QN8JNQRhHoaaut5DFwxOjoZG1efi8l1lHoj+XJoxjopxCOr4wl7SLG0XkzEObCutgv
+	 YBgGFHjh6yysqv3PeoCGRySK4UnWthUfiU4iVhwB2UjBmANMgAWXCPa94p2FSq1b6I
+	 l88z+W2V5iTRg==
 From: Bjorn Andersson <andersson@kernel.org>
-To: Konrad Dybcio <konradybcio@kernel.org>,
-	Mukesh Kumar Savaliya <mukesh.savaliya@oss.qualcomm.com>,
-	Viken Dadhaniya <viken.dadhaniya@oss.qualcomm.com>
-Cc: linux-arm-msm@vger.kernel.org,
+To: Suzuki K Poulose <suzuki.poulose@arm.com>,
+	Mike Leach <mike.leach@arm.com>,
+	James Clark <james.clark@linaro.org>,
+	Leo Yan <leo.yan@arm.com>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Tingwei Zhang <tingwei.zhang@oss.qualcomm.com>,
+	Konrad Dybcio <konradybcio@kernel.org>,
+	Yuanfang Zhang <yuanfang.zhang@oss.qualcomm.com>,
+	Mao Jinlong <jinlong.mao@oss.qualcomm.com>,
+	Paul Walmsley <pjw@kernel.org>,
+	Palmer Dabbelt <palmer@dabbelt.com>,
+	Albert Ou <aou@eecs.berkeley.edu>,
+	Alexandre Ghiti <alex@ghiti.fr>,
+	Jie Gan <jie.gan@oss.qualcomm.com>
+Cc: coresight@lists.linaro.org,
+	linux-arm-kernel@lists.infradead.org,
+	linux-arm-msm@vger.kernel.org,
+	devicetree@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
-	stable@vger.kernel.org,
-	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-Subject: Re: [PATCH v3 0/4] Fix endian, overflow, and write-protection bugs in SE firmware loading
-Date: Mon, 31 Aug 2026 21:09:35 -0500
-Message-ID: <178822856276.1835959.8663134025896190257.b4-ty@kernel.org>
+	linux-riscv@lists.infradead.org
+Subject: Re: (subset) [PATCH v2 0/2] Add CoreSight nodes for Qualcomm Shikra SoC
+Date: Mon, 31 Aug 2026 21:09:23 -0500
+Message-ID: <178822856255.1835959.13014643071629589214.b4-ty@kernel.org>
 X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260821-fix-write-to-read-only-firmware-buffer-v3-0-43e6a3abd651@oss.qualcomm.com>
-References: <20260821-fix-write-to-read-only-firmware-buffer-v3-0-43e6a3abd651@oss.qualcomm.com>
+In-Reply-To: <20260715-add-coresight-nodes-for-shikra-v2-0-ebd485e39a51@oss.qualcomm.com>
+References: <20260715-add-coresight-nodes-for-shikra-v2-0-ebd485e39a51@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -50,28 +65,21 @@ Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 
 
-On Fri, 21 Aug 2026 12:06:16 +0530, Viken Dadhaniya wrote:
-> This series fixes four issues in geni_find_protocol_fw() and
-> geni_load_se_fw(), all introduced by commit d4bf06592ad6 ("soc: qcom:
-> geni-se: Add support to load QUP SE Firmware via Linux subsystem").
+On Wed, 15 Jul 2026 09:16:13 +0800, Jie Gan wrote:
+> This series adds the CoreSight debug and trace subsystem for the
+> Qualcomm Shikra SoC.
 > 
-> The most critical issue (patch 4/4) causes a level-3 permission fault
-> and crashes the kernel during QUP firmware load on CentOS; writing through
-> a non-const cast into a read-only firmware mapping is undefined behavior
-> regardless of whether the fault is raised.
+> The first patch adds a fallback compatible for the Shikra CTCU (CoreSight
+> Trace Control Unit). The CTCU on Shikra shares the same configuration as
+> the one on SA8775p, so "qcom,shikra-ctcu" falls back to the existing
+> "qcom,sa8775p-ctcu" compatible.
 > 
 > [...]
 
 Applied, thanks!
 
-[1/4] soc: qcom: geni-se: Fix endian conversion for serial_protocol comparison
-      commit: 0231382f070df26a8b267f9e68c5440928b87c89
-[2/4] soc: qcom: geni-se: Widen fw_size to u32 to prevent wrap-around
-      commit: e976c865bf31b562ab3908f0f1e2160da77fa156
-[3/4] soc: qcom: geni-se: Fix fw_end computed before round-up; propagate size to caller
-      commit: d1750c530e9b9b75c8d1b29d3c76e052a049f51f
-[4/4] soc: qcom: geni-se: Fix write to read-only firmware buffer
-      commit: 28b9c15f1829fff7b26db0dbbbde1c6b466cb156
+[1/2] dt-bindings: arm: add CTCU device for shikra
+      commit: f0c7f46249b917668851f51c7f6e9297c44d42d4
 
 Best regards,
 -- 
