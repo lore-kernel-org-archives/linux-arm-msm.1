@@ -1,376 +1,211 @@
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pj1-f52.google.com (mail-pj1-f52.google.com [209.85.216.52])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3D4D63B71C6
-	for <linux-arm-msm@vger.kernel.org>; Tue,  1 Sep 2026 07:05:07 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=170.10.133.124
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788246310; cv=pass; b=QwGrjbXx/x8qdbMRQXZ/nPOFrRZ1T9DdRHSbDeThIaLIUe5RA1STZXzu/nsQRj35l6pwRAsn6KF/QTUI2ZjxTPY9+7pfEl2LnbKp0FVp5AM/6YyXj9OWJKflDk+RJfhC89FnnZqPtF28m+9GYi8V9VjY/V5BU8igC2oAEmSNLRU=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788246310; c=relaxed/simple;
-	bh=jjOwg+TCRrFplBxdJCOV+GxjjUmIPQXA8pNbORDwhX8=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=QgfiYi6sa1a/x9/IOnxGtFIjLUPG3J5FY+GFhSeUTqmPZs6t1n5TmSddeZoFsIlvoAwoD7sB1RILLinAsg609vv7tFpcuS1siRfFizgmaToSFl+Ai1hJtXgs+r0wOBywfMYEkat7eNV2G3tSxxS11bry9KHgO/onkJlSKVEPpdE=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=Qu5bejgL; dkim=pass (2048-bit key) header.d=redhat.com header.i=@redhat.com header.b=LhBHLDL8; arc=pass smtp.client-ip=170.10.133.124
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1BA633C0A0D
+	for <linux-arm-msm@vger.kernel.org>; Tue,  1 Sep 2026 07:07:33 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.216.52
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1788246457; cv=none; b=cJyXmYQ+Lq1b3LbR7bkIvSksqwwiorglelVoK8XlHjBGJWx8jtCMWhQoDCsUKMsThVdFuVwkqyPQPaXGCLobx2OE3ZReBF6NPL4X9TV2c7pcj/2vOrwfd0izozXMdFdcCJhNg3lgxFvVxYFotsQ4SWXNaGrOGra0cUF4NmF2cLk=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1788246457; c=relaxed/simple;
+	bh=mRflIR4GNpbeRJMF8YlfXq8NOTxbRGqwlZzrSpH9ooE=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=O3CC0KmRfYFZkDu4j1PShBUyJHoOILriorH+58XEoOB/asfmMWxiD8Nvro8ePF0BfyuKhPtYFpDsfHLre6BK6H7NHRr0kYDSc4hBoQnK8fKvQybNVrWdmnP7YGBYpRpkrH4MvXdrvyyC0dYidV7VClBgI0LjIe9LjrsNcBNATVc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=nWfhbHUN; arc=none smtp.client-ip=209.85.216.52
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="Qu5bejgL";
-	dkim=pass (2048-bit key) header.d=redhat.com header.i=@redhat.com header.b="LhBHLDL8"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1788246306;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=1ii6J4y+VZeyCM2irJ2wKfdpUWZIAn2toGsIw5IdP4I=;
-	b=Qu5bejgLas3OO4aphhihr5NuEh3/yBei+pfEXD3sFTKUc3IJOnRMff4uU5UstwSofDxYdo
-	lhvYqjWH0YnoBj2e++fq0EMbBPzoyFnRs24y545biapwiCkwrn4TEKAfMxNm7SukN7/NT6
-	t4+mLT8ftk7oZZPg7ZK8RNoDHz8X6Jw=
-Received: from mail-yx1-f71.google.com (mail-yx1-f71.google.com
- [74.125.224.71]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-690-9Jp-ZLw3ORWKmZUXG141cQ-1; Tue, 01 Sept 2026 03:05:05 -0400
-X-MC-Unique: 9Jp-ZLw3ORWKmZUXG141cQ-1
-X-Mimecast-MFC-AGG-ID: 9Jp-ZLw3ORWKmZUXG141cQ_1788246305
-Received: by mail-yx1-f71.google.com with SMTP id 956f58d0204a3-66e50de8143so4704642d50.2
-        for <linux-arm-msm@vger.kernel.org>; Tue, 01 Sep 2026 00:05:05 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1788246305; cv=none;
-        d=google.com; s=arc-20260327;
-        b=NuJfeTHvcHUjKCUWyz48Mn4hJYAVCQLWaS4Gfz0b+ss35uLpwuSDK7c6cGN6mHtCBC
-         QA63Mw5amq8dpuQaXtR4YKTZJKXfFSmRNJTTpxfAqtfIdanfzeGZgjBTsGhAjRHYCsrT
-         unSPqFOfT/QmrGzDIMGjKvYjPXUCPrRgHx0f0blhcD8YZWuM6y3hrCvks1HmDOfoIpJy
-         4KcZAw6tp+J6QohWHg9tFZU9Y1Geh53uz86fCbS98Yzv4CCvJTqjTRgGQVFpoDpKKhX4
-         dYLz8xpsPJKU3dtxg6QhfuCIt1YmjK6CVn9rzErE4wsaQrEbSTyPX1JQ/6JThKsPAbqx
-         Kq2g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=1ii6J4y+VZeyCM2irJ2wKfdpUWZIAn2toGsIw5IdP4I=;
-        fh=kUyhVtFqcGujh8Q095CJo4fVAaFef6IIhtUfn5Kv7Gs=;
-        b=KbGkkXl4ljgwvTgzbmx1g8O8Ewof5US1WRekrgv3dmBAbOYEZHFzvkxekGcxJ36XU5
-         gfdf7LcmtKpSYWqfNbQOgFr4+CXx/IphOvrRqNZDPuB+QaBEJxvTA+UfpnnfmenDhzAX
-         4k92gChlFsIqo8ja20JpV2xhRzoDvg0p5Dg6shMJuz7dsh+JU6gfOu27GHbAL8WKbIBx
-         vVeylj8nWeoiDPsJ5/UEvonDQR113zHbm/xdI2g5CGGUiGYOJ8fdI1XGfFmBBhfUkC8X
-         X/Yv/gtVc8R65fVeJ1OVImFuCAA8QiPzAbHMkMFEg2ebTbUoV1kt9rBBq6/Sl6DFYeGy
-         BE3A==;
-        darn=vger.kernel.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="nWfhbHUN"
+Received: by mail-pj1-f52.google.com with SMTP id 98e67ed59e1d1-3969e82ff8fso4675710a91.0
+        for <linux-arm-msm@vger.kernel.org>; Tue, 01 Sep 2026 00:07:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=redhat.com; s=google; t=1788246305; x=1788851105; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=1ii6J4y+VZeyCM2irJ2wKfdpUWZIAn2toGsIw5IdP4I=;
-        b=LhBHLDL8OwceCsTtNTuuDAlMdBD3gvhU/v4YoLSfIijMHIRpw0bK/uXy3vHuRskv1O
-         r3lSvhvUvwzPDJsp8+nRR367k+e+/IVPSGutoWT0gZf5f+DE+/fPoTk90mWUa/JDSTJX
-         tR1oPrWO7bFWp19a/tYdS9XnqIihhOAPcTINvwTfaC/w3hOf3excQLGxjRaUvVUKeFay
-         BQcnA5muZcmA6cKXXXaVe0z4U7bRVWeJFG6EDls65gZt5lkvxCHQrBGdECh/eLDMm+8d
-         I1uiFahIswORlrKF1Lw7FMUg38J5zaZbNhEI+2yCondYVxwfMhVQmtKs7202+CTBwmoK
-         ty+g==
+        d=gmail.com; s=20251104; t=1788246453; x=1788851253; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=GNTRLtdnuOjHKMo/0X9tnXkw4tLD7Gg1xY1MJ7AsLHM=;
+        b=nWfhbHUNRfqrSl6u/ff3JWZg4NfbMA59alAkmqGX0ZRSFWJ4vy/wAybUs1mAffVfU6
+         vW4dAOn8GA0VNRMZD0/y2ak8y9G6ek9otTH9jJqd2PCC6wmY+kq8NNPYmxCj4kcRcTxk
+         WURdqOF88jeTBimJSkcn873dtnn9dfMz5wr6WxkjvtKA8i5Uy1aapCs2A9vWbs2yGEtZ
+         NIwdHF+xxuUF6shbWjRltGrvOD5k8qXcP5DEXndkYwEZERj8xpHyQ4DTttjc5eSL6JfN
+         vDtp5LDmE5QK5uFe0pA7nVYTLwTV0ua109ZtqSFN4sjVyb9UO3i5Xn26kQ9FyCJ2BKP1
+         wjSg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788246305; x=1788851105;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=1ii6J4y+VZeyCM2irJ2wKfdpUWZIAn2toGsIw5IdP4I=;
-        b=dnhk5QgYMwei6AP+ah8FNKXM7LGn+jQk0+hMwa9PtLIkh721GJQG391/NnhlWXV6BK
-         vGVv4Id9XX4XhMz9H2yLYeuqFLfRNBJxls8H+xmyQOgBgPdzSQh3l3FYyukQuOQ/RO7V
-         AWQaYKxdZH5IFDw/Hn9LDLy7lJXggNTLy7hOb6ffWl4XA4IFI3m+5s2oMxoWyOyLrBXN
-         8/oGp5S29T+OX+se24pfjtvs66k4TmABNsDZbTtPQEDYTYh1PY/f0ybjSraHgukbDtPP
-         1j47H3OBtRCgNFXs2/vo28AEAalx3SEC5ghd8/Ld/BtxFs2V2jkEYQp8ZWLi3mSLt4OR
-         s6+A==
-X-Forwarded-Encrypted: i=1; AKwUvByLZe4qNuoxkris7Mpklsztw7+3VrcsIbT5tKZ9V/41OD9ytGiu2GqYgid3R4lGEPDL7iTeNIBgbRzr+/lZ@vger.kernel.org
-X-Gm-Message-State: AFuF++m/r1ektoSwfFRjHOK0o0Nut2HsJVRhGleTfyg7uBzUoR5UyWnS
-	pMC+zs0edOTvlaXV82e/TwPO1rrWf8fxz3TGEXomRK6AsFgXcTcX0RN/ruDrKCpJT7+pI0uJAoq
-	0P8ZjSm2LzXIZqq4ON3waFeIVSa79oq4/lT+S4t16RQS9XHXrIBT3TGgrrH0RxTDIWUAVyOlgda
-	Mo4WOpNCNMN+XpT3wtdmaaX4MaDr3X34e2qJGynP/WDA==
-X-Gm-Gg: AYBFou1I/YGPJuPuuZlsVYInATtXkv3b5ATkblV2ZsgxG343qa4KgUf/26kRljDfxsq
-	bitRDo7ANeD643fFQmVu/xff2TsB5P7ClYyzT03mrhyp7LOp21Ppv7XlXFXskROA9qW73ZpK9nr
-	DICeJghDDM4Vxfv9rASRnVOXlcSuOFeQt/SvkfXaXQssZZBSF8tZU3sMw=
-X-Received: by 2002:a05:690e:d58:b0:66f:8797:8721 with SMTP id 956f58d0204a3-66f8797954fmr1966833d50.10.1788246304653;
-        Tue, 01 Sep 2026 00:05:04 -0700 (PDT)
-X-Received: by 2002:a05:690e:d58:b0:66f:8797:8721 with SMTP id
- 956f58d0204a3-66f8797954fmr1966824d50.10.1788246304228; Tue, 01 Sep 2026
- 00:05:04 -0700 (PDT)
+        d=1e100.net; s=20251104; t=1788246453; x=1788851253;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=GNTRLtdnuOjHKMo/0X9tnXkw4tLD7Gg1xY1MJ7AsLHM=;
+        b=QSp+LTsf+6o+74sa/2PbQOigbvLzjcaP4aNofb4bp3K4g3DyRRsPSMhtDDsfR8Er6/
+         VJ1XK3DYM9GgyKwhbumb0ZbL4YiaCGUQIlWItREuVSXvO8w79gv8pnThAgxE1pCBZE2X
+         6W6zuqiwrmkXLFr5c0G04bkVbLvFdEVAH32B6BwnUMAMx9vneCDyyGyXTlJnx9TDOgYH
+         bd+pOoVuZ90ngJPA5w+bXsaNlwl+NBPNFxVpJT2TpSv9V9cs8yH6QODn+XjUpNZGsLYy
+         nt2f8tYniovKwHynWKiYS/XEYYcVzebcRDXW6ib6hY/HA4lTg/LYSEf39plyPOnP9iOn
+         ECIQ==
+X-Forwarded-Encrypted: i=1; AKwUvBwoVAvIEQghT5r5AY0reYvRwxuHTtPkbHg4qVUpqfO24iuV8LAmuPvY5T86/UgFBY3yyI7nT8TXOCOdUyK6@vger.kernel.org
+X-Gm-Message-State: AFuF++kn54PY1CLdO2Z6NghLix6Kvhl8l9YKN4KWPhhtuVevHyXSZIAw
+	NASBERgWv4ySxj8aWyE58SRMOeXzQhsgFV0QBFmIgiyQ8hoUJ+SRSbGC
+X-Gm-Gg: AYBFou1waSDjs6QgSOYl6r4faFEKq89dmrXm5/Hors7XrQ1Jch85/YKipEFesjvoTln
+	PPUx175oNefZ0f12od7eUqrtsmxd8/DcexcXNxd0G1AleEULmq0epvfqXH910LXEE5IyuWmQ0IK
+	j6uyKdH/7Wdz6XBTn4elx/W3mUX1Bz3HIwUk5XlC01jPqKlF9HRHs9sbSn0ShV9BLEkfOYnQcDd
+	VRE5v1J1A2L5+9gnKpyMdlbvGU9mbZp2rg4esVI1Rl/L9DT/JNTd/EOOi/mjDbG4ea+rfOxvUHq
+	QiWipvlei3MAsNlzJ0yg2VAjdfxDTw8TTavCqZqfQ3FTJE39TmthkCDlVh2OmIDVOGdK9AmBzVo
+	UP7lNQNP/MWCZwS1rDzlujPSpCtgXEZ2ip9UJQTzMsL/8L8skLmf0Ybkmc1Xr3GVyTJwwUaqKei
+	j3YUx43azPr5UWOTnnUQSUrwKm6q1nqRdsdn26Ln82kzpD3ZeDPGt415pZC8faE0YpKNFdB1b4B
+	6RfeNWNXhKd
+X-Received: by 2002:a17:90b:5804:b0:398:9bd5:490f with SMTP id 98e67ed59e1d1-3989bd54c38mr33933621a91.22.1788246452953;
+        Tue, 01 Sep 2026 00:07:32 -0700 (PDT)
+Received: from localhost.localdomain ([157.51.207.128])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-32bdfd03e71sm18274680eec.1.2026.09.01.00.07.23
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 01 Sep 2026 00:07:31 -0700 (PDT)
+From: Sreeshankar K <sreeshankar0910@gmail.com>
+To: andersson@kernel.org,
+	sboyd@kernel.org,
+	bmasney+clk@redhat.com,
+	jbrunet+clk@baylibre.com,
+	robh@kernel.org,
+	krzk+dt@kernel.org,
+	conor+dt@kernel.org,
+	rafael@kernel.org,
+	viresh.kumar@linaro.org,
+	konradybcio@kernel.org,
+	tglx@kernel.org,
+	ulfh@kernel.org
+Cc: radu@rendec.net,
+	abel.vesa@oss.qualcomm.com,
+	taniya.das@oss.qualcomm.com,
+	danila@mainlining.org,
+	davidwronek@gmail.com,
+	mani@kernel.org,
+	robimarko@gmail.com,
+	linux@gurudas.dev,
+	linux-arm-msm@vger.kernel.org,
+	linux-clk@vger.kernel.org,
+	devicetree@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	linux-pm@vger.kernel.org,
+	Sreeshankar K <sreeshankar0910@gmail.com>
+Subject: [PATCH v8 00/12] Add initial support for Qualcomm SM7250 SoC
+Date: Tue,  1 Sep 2026 07:07:05 +0000
+Message-ID: <20260901070717.20513-1-sreeshankar0910@gmail.com>
+X-Mailer: git-send-email 2.43.0
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260820-port-smem-v1-0-d19a45f583bf@redhat.com>
- <20260820-port-smem-v1-1-d19a45f583bf@redhat.com> <apYFPXLD6hLWohz0@baldur>
-In-Reply-To: <apYFPXLD6hLWohz0@baldur>
-From: Albert Esteve <aesteve@redhat.com>
-Date: Tue, 1 Sep 2026 09:04:53 +0200
-X-Gm-Features: AcwNN1WucyQuE6t7XK0wCocc2Ga0r5aeLZMNmgocUFPmv3wGWds0eE4ASWtVcv8
-Message-ID: <CADSE00LeKbGsqd_fBnWhAssiu5yFPH2_FuaY0ZamxK1GYHt+Qg@mail.gmail.com>
-Subject: Re: [PATCH 1/2] soc: qcom: smem: add boundary checks for partitions
-To: Bjorn Andersson <andersson@kernel.org>
-Cc: Konrad Dybcio <konradybcio@kernel.org>, linux-arm-msm@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, Sudeepgoud Patil <quic_sudeepgo@quicinc.com>, 
-	Sarannya S <quic_sarannya@quicinc.com>, 
-	Pranav Mahesh Phansalkar <quic_pphansal@quicinc.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 
-On Tue, Sep 1, 2026 at 12:54=E2=80=AFAM Bjorn Andersson <andersson@kernel.o=
-rg> wrote:
->
-> On Thu, Aug 20, 2026 at 01:34:18PM +0200, Albert Esteve wrote:
-> > From: Sudeepgoud Patil <quic_sudeepgo@quicinc.com>
-> >
-> > Add condition check to make sure that the end address
-> > of private entry does not go out of partition.
-> >
-> > Signed-off-by: Sarannya S <quic_sarannya@quicinc.com>
-> > Signed-off-by: Pranav Mahesh Phansalkar <quic_pphansal@quicinc.com>
-> > Signed-off-by: Sudeepgoud Patil <quic_sudeepgo@quicinc.com>
-> > Signed-off-by: Albert Esteve <aesteve@redhat.com>
->
-> I'm sorry, Albert. Sudeepgoud messed up the authorship vs signed-off-by
-> chain here. The author should be "Sarannya", as that's the first
-> signed-off-by.
->
-> PS. It would also be nice if this was submitted with updated email
-> addresses and copyright statement. But I'd not expect you to fix that.
+This patchset introduces foundational upstream support for the Qualcomm SM7250
+SoC (internally codenamed Lito).
 
-Hi Bjorn,
+SM7250 is an ARMv8.2-A platform manufactured on a 7nm process, featuring an
+octa-core Kryo 475 CPU configuration (1x Prime Cortex-A76, 1x Gold Cortex-A76,
+and 6x Silver Cortex-A55) and Adreno 620 GPU.
 
-I'm happy to address these changes for V2. Do you know where to find
-the updated email addresses?
+This patchset is organized as follows:
+> Document relevant device tree bindings (SoC ID, Kryo 475 CPUs, SCM, PDC,
+RPMh clocks/power domains, GCC and cpufreq hardware).
+> Add driver support for SM7250 in socinfo, rpmh-clk, rpmhpd, and GCC.
+> Add the base SoC DTSI (sm7250.dtsi) defining the cpus, PSCI,
+interrupt controllers, clock providers, power domains, and reserved memory.
 
-BR,
-Albert.
+Dependencies:
+This patchset depends on the following patch:
+> [PATCH] dt-bindings: clock: qcom,sm6375-gcc: Merge SM7150 into SM6375
+Link: https://lore.kernel.org/linux-arm-msm/20260817082457.64797-2-krzysztof.kozlowski@oss.qualcomm.com/T/#t
 
->
-> Regards,
-> Bjorn
->
-> > ---
-> >  drivers/soc/qcom/smem.c | 105 +++++++++++++++++++++++++++++++++-------=
---------
-> >  1 file changed, 72 insertions(+), 33 deletions(-)
-> >
-> > diff --git a/drivers/soc/qcom/smem.c b/drivers/soc/qcom/smem.c
-> > index afb21a778fe7b..194ffb2ac010f 100644
-> > --- a/drivers/soc/qcom/smem.c
-> > +++ b/drivers/soc/qcom/smem.c
-> > @@ -2,6 +2,7 @@
-> >  /*
-> >   * Copyright (c) 2015, Sony Mobile Communications AB.
-> >   * Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
-> > + * Copyright (c) 2023-2024 Qualcomm Innovation Center, Inc. All rights=
- reserved.
-> >   */
-> >
-> >  #include <linux/hwspinlock.h>
-> > @@ -85,6 +86,17 @@
-> >  /* Processor/host identifier for the global partition */
-> >  #define SMEM_GLOBAL_HOST     0xfffe
-> >
-> > +/* Entry range check
-> > + * ptr >=3D start : Checks if ptr is greater than the start of access =
-region
-> > + * ptr + size >=3D ptr: Check for integer overflow (On 32bit system wh=
-ere ptr
-> > + * and size are 32bits, ptr + size can wrap around to be a small integ=
-er)
-> > + * ptr + size <=3D end: Checks if ptr+size is less than the end of acc=
-ess region
-> > + */
-> > +#define IN_PARTITION_RANGE(ptr, size, start, end)            \
-> > +     (((void *)(ptr) >=3D (void *)(start)) &&                  \
-> > +      (((void *)(ptr) + (size)) >=3D (void *)(ptr)) && \
-> > +      (((void *)(ptr) + (size)) <=3D (void *)(end)))
-> > +
-> >  /**
-> >    * struct smem_proc_comm - proc_comm communication struct (legacy)
-> >    * @command:        current command to be executed
-> > @@ -403,6 +415,7 @@ static int qcom_smem_alloc_private(struct qcom_smem=
- *smem,
-> >                                  size_t size)
-> >  {
-> >       struct smem_private_entry *hdr, *end;
-> > +     struct smem_private_entry *next_hdr;
-> >       struct smem_partition_header *phdr;
-> >       size_t alloc_size;
-> >       void *cached;
-> > @@ -415,19 +428,25 @@ static int qcom_smem_alloc_private(struct qcom_sm=
-em *smem,
-> >       end =3D phdr_to_last_uncached_entry(phdr);
-> >       cached =3D phdr_to_last_cached_entry(phdr);
-> >
-> > -     if (WARN_ON((void *)end > p_end || cached > p_end))
-> > +     if (WARN_ON(!IN_PARTITION_RANGE(end, 0, phdr, cached) ||
-> > +                                             cached > p_end))
-> >               return -EINVAL;
-> >
-> > -     while (hdr < end) {
-> > +     while ((hdr < end) && ((hdr + 1) < end)) {
-> >               if (hdr->canary !=3D SMEM_PRIVATE_CANARY)
-> >                       goto bad_canary;
-> >               if (le16_to_cpu(hdr->item) =3D=3D item)
-> >                       return -EEXIST;
-> >
-> > -             hdr =3D uncached_entry_next(hdr);
-> > +             next_hdr =3D uncached_entry_next(hdr);
-> > +
-> > +             if (WARN_ON(next_hdr <=3D hdr))
-> > +                     return -EINVAL;
-> > +
-> > +             hdr =3D next_hdr;
-> >       }
-> >
-> > -     if (WARN_ON((void *)hdr > p_end))
-> > +     if (WARN_ON((void *)hdr > (void *)end))
-> >               return -EINVAL;
-> >
-> >       /* Check that we don't grow into the cached region */
-> > @@ -587,9 +606,11 @@ static void *qcom_smem_get_private(struct qcom_sme=
-m *smem,
-> >                                  unsigned item,
-> >                                  size_t *size)
-> >  {
-> > -     struct smem_private_entry *e, *end;
-> > +     struct smem_private_entry *e, *uncached_end, *cached_end;
-> > +     struct smem_private_entry *next_e;
-> >       struct smem_partition_header *phdr;
-> >       void *item_ptr, *p_end;
-> > +     size_t entry_size =3D 0;
-> >       u32 padding_data;
-> >       u32 e_size;
-> >
-> > @@ -597,67 +618,85 @@ static void *qcom_smem_get_private(struct qcom_sm=
-em *smem,
-> >       p_end =3D (void *)phdr + part->size;
-> >
-> >       e =3D phdr_to_first_uncached_entry(phdr);
-> > -     end =3D phdr_to_last_uncached_entry(phdr);
-> > +     uncached_end =3D phdr_to_last_uncached_entry(phdr);
-> > +     cached_end =3D phdr_to_last_cached_entry(phdr);
-> > +
-> > +     if (WARN_ON(!IN_PARTITION_RANGE(uncached_end, 0, phdr, cached_end=
-)
-> > +                                     || (void *)cached_end > p_end))
-> > +             return ERR_PTR(-EINVAL);
-> >
-> > -     while (e < end) {
-> > +     while ((e < uncached_end) && ((e + 1) < uncached_end)) {
-> >               if (e->canary !=3D SMEM_PRIVATE_CANARY)
-> >                       goto invalid_canary;
-> >
-> >               if (le16_to_cpu(e->item) =3D=3D item) {
-> > -                     if (size !=3D NULL) {
-> > -                             e_size =3D le32_to_cpu(e->size);
-> > -                             padding_data =3D le16_to_cpu(e->padding_d=
-ata);
-> > +                     e_size =3D le32_to_cpu(e->size);
-> > +                     padding_data =3D le16_to_cpu(e->padding_data);
-> >
-> > -                             if (WARN_ON(e_size > part->size || paddin=
-g_data > e_size))
-> > -                                     return ERR_PTR(-EINVAL);
-> > +                     if (e_size < part->size && padding_data < e_size)
-> > +                             entry_size =3D e_size - padding_data;
-> > +                     else
-> > +                             return ERR_PTR(-EINVAL);
-> >
-> > -                             *size =3D e_size - padding_data;
-> > -                     }
-> > +                     item_ptr =3D  uncached_entry_to_item(e);
-> >
-> > -                     item_ptr =3D uncached_entry_to_item(e);
-> > -                     if (WARN_ON(item_ptr > p_end))
-> > +                     if (WARN_ON(!IN_PARTITION_RANGE(item_ptr, entry_s=
-ize, e, uncached_end)))
-> >                               return ERR_PTR(-EINVAL);
-> >
-> > +                     if (size !=3D NULL)
-> > +                             *size =3D entry_size;
-> > +
-> >                       return item_ptr;
-> >               }
-> >
-> > -             e =3D uncached_entry_next(e);
-> > -     }
-> > +             next_e =3D uncached_entry_next(e);
-> > +             if (WARN_ON(next_e <=3D e))
-> > +                     return ERR_PTR(-EINVAL);
-> >
-> > -     if (WARN_ON((void *)e > p_end))
-> > +             e =3D next_e;
-> > +     }
-> > +     if (WARN_ON((void *)e > (void *)uncached_end))
-> >               return ERR_PTR(-EINVAL);
-> >
-> >       /* Item was not found in the uncached list, search the cached lis=
-t */
-> >
-> > +     if (cached_end =3D=3D p_end)
-> > +             return ERR_PTR(-ENOENT);
-> > +
-> >       e =3D phdr_to_first_cached_entry(phdr, part->cacheline);
-> > -     end =3D phdr_to_last_cached_entry(phdr);
-> >
-> > -     if (WARN_ON((void *)e < (void *)phdr || (void *)end > p_end))
-> > +     if (WARN_ON(!IN_PARTITION_RANGE(cached_end, 0, uncached_end, p_en=
-d) ||
-> > +                     !IN_PARTITION_RANGE(e, sizeof(*e), cached_end, p_=
-end)))
-> >               return ERR_PTR(-EINVAL);
-> >
-> > -     while (e > end) {
-> > +     while (e > cached_end) {
-> >               if (e->canary !=3D SMEM_PRIVATE_CANARY)
-> >                       goto invalid_canary;
-> >
-> >               if (le16_to_cpu(e->item) =3D=3D item) {
-> > -                     if (size !=3D NULL) {
-> > -                             e_size =3D le32_to_cpu(e->size);
-> > -                             padding_data =3D le16_to_cpu(e->padding_d=
-ata);
-> > +                     e_size =3D le32_to_cpu(e->size);
-> > +                     padding_data =3D le16_to_cpu(e->padding_data);
-> >
-> > -                             if (WARN_ON(e_size > part->size || paddin=
-g_data > e_size))
-> > -                                     return ERR_PTR(-EINVAL);
-> > -
-> > -                             *size =3D e_size - padding_data;
-> > -                     }
-> > +                     if (e_size < part->size && padding_data < e_size)
-> > +                             entry_size  =3D e_size - padding_data;
-> > +                     else
-> > +                             return ERR_PTR(-EINVAL);
-> >
-> > -                     item_ptr =3D cached_entry_to_item(e);
-> > -                     if (WARN_ON(item_ptr < (void *)phdr))
-> > +                     item_ptr =3D  cached_entry_to_item(e);
-> > +                     if (WARN_ON(!IN_PARTITION_RANGE(item_ptr, entry_s=
-ize, cached_end, e)))
-> >                               return ERR_PTR(-EINVAL);
-> >
-> > +                     if (size !=3D NULL)
-> > +                             *size =3D entry_size;
-> > +
-> >                       return item_ptr;
-> >               }
-> >
-> > -             e =3D cached_entry_next(e, part->cacheline);
-> > +             next_e =3D cached_entry_next(e, part->cacheline);
-> > +             if (WARN_ON(next_e >=3D e))
-> > +                     return ERR_PTR(-EINVAL);
-> > +
-> > +             e =3D next_e;
-> >       }
-> >
-> >       if (WARN_ON((void *)e < (void *)phdr))
-> >
-> > --
-> > 2.55.0
-> >
->
+Changelog [v8]:
+Same as v7. Resending the full patchset as v8 due to a transmission interruption during v7.
+Some patches failed to send.
+
+Link [v7]: https://lore.kernel.org/linux-arm-msm/20260901064357.20055-1-sreeshankar0910@gmail.com/T/#t
+Changelog [v7]:
+> [PATCH v7 04/13]: clk: qcom: Add Global Clock Controller (GCC) driver for SM7250
+Added missing (struct device *dev) in gcc_sm7250_clk_regs_configure
+Fixes: https://lore.kernel.org/linux-arm-msm/apYNXZ9TJEC6rVVf@baldur
+> Drop applied patches
+1) [09/13] dt-bindings: arm: cpus: Document Kryo 475 CPUs (commit: 1c8fe8863780705aba77893fade65f728e82b67a)
+Link: https://lore.kernel.org/linux-arm-msm/178822856275.1835959.3848131517961346933.b4-ty@kernel.org
+
+Link [v6]: https://lore.kernel.org/linux-arm-msm/20260824150156.1310-1-sreeshankar0910@gmail.com/T/#t
+Changelog [v6]:
+[PATCH v6 04/13]: clk: qcom: Add Global Clock Controller (GCC) driver for SM7250
+> Make all clk_init_data instances const across the driver.
+
+Link [v5]: https://lore.kernel.org/linux-arm-msm/20260824130437.2771-1-sreeshankar0910@gmail.com/T/#t
+Changelog [v5]:
+[PATCH v5 13/13]: arm64: dts: qcom: Add SM7250 devicetree file
+> Reformat multi-entry phandle lists (domain-idle-states) to '<&a>, <&b>'.
+> Reformat multi-entry tuples and string lists (qcom,pdc-ranges, qcom,tcs-config, reg-names)
+to one item per line.
+> Enable QUPv3 wrapper globally by dropping 'status = "disabled"'.
+> Move compatible property to first.
+> Remove clock-frequency property for timer.
+
+Link [v4]: https://lore.kernel.org/linux-arm-msm/20260821154030.2514-1-sreeshankar0910@gmail.com/T/#t
+Changelog [v4]:
+[PATCH v4 04/13] clk: qcom: Add Global Clock Controller (GCC) driver for SM7250
+> Update .fw_name with .index
+[PATCH v4 13/13] arm64: dts: qcom: Add SM7250 devicetree file
+> Added missing capacity-dmips-mhz and dynamic-power-coefficient for cpu@300
+> Added power-domains for cpus and apps_rsc
+
+Link [v3]: https://lore.kernel.org/linux-arm-msm/20260821081125.4522-1-sreeshankar0910@gmail.com/T/#t
+Changelog [v3]:
+[PATCH v4 04/13] clk: qcom: Add Global Clock Controller (GCC) driver for SM7250
+> Updated the way of registering critical clocks.
+> Made some more clock critical.
+        GCC_VIDEO_XO_CLK
+        GCC_CAMERA_XO_CLK
+        GCC_DISP_XO_CLK
+        GCC_NPU_CFG_AHB_CLK
+        GCC_CPUSS_AHB_CLK
+        GCC_NPU_BWMON_CFG_AHB_CLK
+These clocks are flagged as critical in gcc-lito.c
+
+Link [v2]: https://lore.kernel.org/linux-arm-msm/20260819152545.3934-1-sreeshankar0910@gmail.com/T/#t
+Changelog [v2]:
+[PATCH v2 12/13] dt-bindings: cpufreq: qcom-hw: Document SM7250 cpufreq hardware
+[PATCH v2 13/13] arm64: dts: qcom: Add SM7250 devicetree file
+> Added SM7250 cpufreq hardware
+
+Link [v1]: https://lore.kernel.org/linux-arm-msm/20260818080754.4362-1-sreeshankar0910@gmail.com/T/#t
+
+Sreeshankar K (12):
+  dt-bindings: arm: qcom,ids: Add SoC ID for SM7250
+  soc: qcom: socinfo: Add SM7250 SoC ID
+  dt-bindings: clock: Add SM7250 global clock controller
+  clk: qcom: Add Global Clock Controller (GCC) driver for SM7250
+  dt-bindings: clock: qcom,rpmhcc: Document RPMHCC compatible for SM7250
+  clk: qcom: rpmh: Add SM7250 rpmh clocks
+  dt-bindings: power: qcom,rpmhpd: Document RPMh power domain for SM7250
+  pmdomain: qcom: rpmhpd: Add RPMh power domains for SM7250
+  dt-bindings: firmware: qcom,scm: Document SM7250 SCM
+  dt-bindings: interrupt-controller: qcom,pdc: Document SM7250 PDC
+  dt-bindings: cpufreq: qcom-hw: Document SM7250 cpufreq hardware
+  arm64: dts: qcom: Add SM7250 devicetree file
+
+ .../bindings/clock/qcom,rpmhcc.yaml           |    1 +
+ .../bindings/clock/qcom,sm6375-gcc.yaml       |    4 +-
+ .../bindings/cpufreq/cpufreq-qcom-hw.yaml     |    1 +
+ .../bindings/firmware/qcom,scm.yaml           |    1 +
+ .../interrupt-controller/qcom,pdc.yaml        |    1 +
+ .../devicetree/bindings/power/qcom,rpmpd.yaml |    1 +
+ arch/arm64/boot/dts/qcom/sm7250.dtsi          |  771 ++++++
+ drivers/clk/qcom/Kconfig                      |    9 +
+ drivers/clk/qcom/Makefile                     |    1 +
+ drivers/clk/qcom/clk-rpmh.c                   |   24 +
+ drivers/clk/qcom/gcc-sm7250.c                 | 2275 +++++++++++++++++
+ drivers/pmdomain/qcom/rpmhpd.c                |   19 +
+ drivers/soc/qcom/socinfo.c                    |    1 +
+ include/dt-bindings/arm/qcom,ids.h            |    1 +
+ include/dt-bindings/clock/qcom,sm7250-gcc.h   |  163 ++
+ 15 files changed, 3272 insertions(+), 1 deletion(-)
+ create mode 100644 arch/arm64/boot/dts/qcom/sm7250.dtsi
+ create mode 100644 drivers/clk/qcom/gcc-sm7250.c
+ create mode 100644 include/dt-bindings/clock/qcom,sm7250-gcc.h
+
+-- 
+2.43.0
 
