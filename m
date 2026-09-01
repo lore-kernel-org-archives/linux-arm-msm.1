@@ -1,63 +1,63 @@
-Received: from mail-qt1-f175.google.com (mail-qt1-f175.google.com [209.85.160.175])
+Received: from mail-qt1-f173.google.com (mail-qt1-f173.google.com [209.85.160.173])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E9B0F48989A
-	for <linux-arm-msm@vger.kernel.org>; Tue,  1 Sep 2026 17:21:07 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.160.175
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id ED051483BF6
+	for <linux-arm-msm@vger.kernel.org>; Tue,  1 Sep 2026 17:21:48 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.160.173
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788283269; cv=none; b=Z9OOuVRN5Ok9+pZ/2+YhOS5FKlkdRwGgPpx05mW7Qxqe1sUzwQ168n5EY50DfBrIcOhe8WbP8LkICiWe5FVITl5tc9k2W5SfSVqLAixJuPz2I8Ij+bvDTczs7V4ZXn96faX50UZa7pBQ8NPtM6tTS6v3wcCRbgQcxo7YBpTUS0w=
+	t=1788283310; cv=none; b=da77NdIjC2Sj2wGgoBDo4vf1U500IO8HvKzw0xpYQLDBOXKhym0RulUM14JVoD+xQYz27kwYuyT7XgwFbo0erXQK0X7GnXo+aYH6UJLHqwpz8wZoXPuAfAwAvPKPSQzQGW+cNkTH1w89IBkm7XO6fvdNG5L8+Q51YNbuL/03PdM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788283269; c=relaxed/simple;
-	bh=00fk2d4bFTlZ83rXDe3waL00PuwEXFQI8b8viicDX8U=;
+	s=arc-20240116; t=1788283310; c=relaxed/simple;
+	bh=Bf3DldYJPkEl5wDXkPPwE+qQIpcMuluvTmCJXkBa3ZE=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=rFrYVEW1bLavqRvyqQ7fdb+alPU1tsdi1ZmRRMwtQRQKwg3RPMPb2XueUikwHxb6//gsW3JwGjBptY+wP+I8T+ZOsvxHlJLqQQTUk6cxQNe9whn7mGqZxU5KHMpC363l5xH7ngMcTHkubC1Kd1pbSNOfBj7QUX+04E8iH3U0lGY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=riscstar.com; spf=pass smtp.mailfrom=riscstar.com; dkim=pass (2048-bit key) header.d=riscstar-com.20251104.gappssmtp.com header.i=@riscstar-com.20251104.gappssmtp.com header.b=T34yi+8L; arc=none smtp.client-ip=209.85.160.175
+	 MIME-Version; b=FLqfkJiSx+e6/KWBHqsydA144qjEhZmTQnX7Enf2dgZjfdkFfygWCFXodMmTeeIjSD3xKK2/b3gFRtQ9EvNo59u2dmMnvb0wou/VOtcdY57lBcBpNVOsblKf7NDcrg+AfI/cgb8R7stxo/3xw4sTr+5D1gXFnAwOp6LGydXKgFM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=riscstar.com; spf=pass smtp.mailfrom=riscstar.com; dkim=pass (2048-bit key) header.d=riscstar-com.20251104.gappssmtp.com header.i=@riscstar-com.20251104.gappssmtp.com header.b=w1PVg66y; arc=none smtp.client-ip=209.85.160.173
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=riscstar.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=riscstar.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=riscstar-com.20251104.gappssmtp.com header.i=@riscstar-com.20251104.gappssmtp.com header.b="T34yi+8L"
-Received: by mail-qt1-f175.google.com with SMTP id d75a77b69052e-5218927884fso286701cf.3
-        for <linux-arm-msm@vger.kernel.org>; Tue, 01 Sep 2026 10:21:07 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=riscstar-com.20251104.gappssmtp.com header.i=@riscstar-com.20251104.gappssmtp.com header.b="w1PVg66y"
+Received: by mail-qt1-f173.google.com with SMTP id d75a77b69052e-51c0006ea8eso369171cf.1
+        for <linux-arm-msm@vger.kernel.org>; Tue, 01 Sep 2026 10:21:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=riscstar-com.20251104.gappssmtp.com; s=20251104; t=1788283267; x=1788888067; darn=vger.kernel.org;
+        d=riscstar-com.20251104.gappssmtp.com; s=20251104; t=1788283308; x=1788888108; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=wPkZSzl2Bkcvu9UW0A3Dp3FDmK7DknZNc63zeKT5t/s=;
-        b=T34yi+8LdpSmXJY4+o/sAXpnvV+fwXSpm2PCmZcLD72LaqVt6dIAAQIUC6/HEMyX25
-         UPFAwkcLxL0HeToMmArCs1EOSEowOPZpfwgWhZhNG3OY15B+EPOK/aNZhZCAr6YElz/F
-         pBV2kG3/Qyv+Pjd5RYZrHuK4/ugrA6wpS6zC9h5Gu+SBnMFFtTxsSb5u3fdQ2/VOxyAT
-         zsYUuIzJ/X59hTkuo7oBI7ZXB+6AT09X5ESfFOp6yBqZYz93JhHuMCLUMWGJYOOIAqop
-         4PNvJiVcBVXaRvTLBO6keA7A7CSqj9RLQ4F1VkcQMgsOb73n9cw9Kg28UzcDy7QnUMW4
-         9BIQ==
+        bh=oFhnWYzUZYC/wvAq/4Lo1J9s4tj77sgPBLg2juwGlsE=;
+        b=w1PVg66yReSX5yg83+AUMHYBJbdEiIxIva72R+qUDOld7CwiDAxGrH92f3G6Fvu8Me
+         oxkrUV0baAy+WiDw7UGF4dohAsK0xkHHoSgJHJYMuGIcfWyAt/68PlIAm/0PaIw+SLzq
+         DJx4IK0MoQuGxT7Rkqde14G1XohjhJv0I1Zr80tVqFQsBfOWH1MobEtfr9MEfjIhOtsj
+         rba9WpXdH3n7Yfxb4b0VgeuOUaOanASIde97c01veIypNlcp8y6uW0y83Q7G92ali9nJ
+         qdaM6QRyW1dvIvtxUkoGG7nBIH4K3gPMd3pOMalIfHKcibmTc8IZaM4OK06e3v/iCbc7
+         K6jg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788283267; x=1788888067;
+        d=1e100.net; s=20251104; t=1788283308; x=1788888108;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=wPkZSzl2Bkcvu9UW0A3Dp3FDmK7DknZNc63zeKT5t/s=;
-        b=j12b71dlcSGYnalSKKW3hA0txN68ZlUDP/Yfj7Es58aRcvpWJgQCDWFEEPAA9PCN/o
-         fcNJJG0s+h7FKjinBOCBoOqJx/WCpsJY2n5ncHTGgnAg7vlss5B9dZ2T3GtgTzhMq24k
-         T1jagzhPDIo3cyZresPI4mPxdeXFlOeZqwJi7Q+SBx2tZZX/o6fbBG7mxUHnraKwV7A0
-         w6uVR9BtVJIqJckRlEoe+ZuigNAw4l6XuMlmcVgTkgeqSp6fQAbnI747plOPV9p/h82e
-         BwXY/HrDjaci/zf++xVQUzA1XAyuH3Jo8eEct06IN3Z1pFALyHqgEv9HLGYp51QYjJe8
-         dmHw==
-X-Forwarded-Encrypted: i=1; AHgh+RocCz6hxA0k47TCRVpTwyiQGUfHKsMrwTcxWoj5O5ReQbAl46pn+Ac+057g/8uJNa/KVzYFbGCPm1tmbYxJ@vger.kernel.org
-X-Gm-Message-State: AFuF++mbYH36+AOlB5xKt05KVvlGagT5rWxHHfCkQWUU6XdF9xNd8hLh
-	EkNOcTt02fVYFUaB7EMj0Nc6ljYJ40tlAiiGpkKW2TNYaS08reBeFd50Niz+K0L1SRo=
-X-Gm-Gg: AR+sD10nUG7ixi5EDDww7ff2G21tyMCmqJh+b2Vz2C74OnaJumIKtT/4+fOQnnDqYJa
-	8T5YSxoRlXCSjMgWXyIt40ozobfllQBAZAqcnj2Eq0qu1MfpAvslsb2TjbSd53mYs2NQ3BeNAkQ
-	ZmznnEA6AGpHHcxoTVTR9q8/RXtK6hfaode0FEU+afH4Ofok34r/uCYLn9sM4o7QgdXKtnXLq22
-	oF5Lo6Xe+r4tURCaiiXrMWbnwY4QssyyTJw7PymmduUCZQilFMaLkiJt6KjrUuOsCkoQCI7b/Qu
-	buop/G1rzw/pjkkhRh3t5PG5Y3TksrDUqFqE2Vx4mJaANYzCm7QWRIXokApL+2zepVxX7wMcrCb
-	0Jl7QOZevCSZW4LYHePEwv+UmEobwhnzEavU0xJpraNJdnU3xL1+d2Mzfhlr7ZplKbmshk8xSrP
-	EYVpwo9LtxwQIK6r1Nwhsl4b8vJiFmYLKmoreh7IkIpd/3xUp2Usmq8a8bFiwFsDSJ
-X-Received: by 2002:a05:622a:c8c:b0:52f:a319:da85 with SMTP id d75a77b69052e-52fb96af1b0mr463638811cf.39.1788283266590;
-        Tue, 01 Sep 2026 10:21:06 -0700 (PDT)
+        bh=oFhnWYzUZYC/wvAq/4Lo1J9s4tj77sgPBLg2juwGlsE=;
+        b=pFe5FucVnfi+B4OpwDuC0iSGylG7yoJ1Js7/zH34o5nxEWVGwB70qupHKJgSxYWDYZ
+         4YSHjW7uj2UvPgcveeQhDYOOjZeWwBdpA4fltuv3tAkAVMyXzrAa5B1ixKBdXFto0+Yj
+         jeErhyvUulEukRMN8eTloJS/gA30ySTvqDxDFgP6R/5bYcgE+/StnpdZAHgiD0/oGWFs
+         0TJUCeDlsJFug6hD/YjoZz8KUsoej6QgIu06teVomnKfhEs0G7AKcL4yMmGBdEeeVoXD
+         QmNtwjLudJHZ2K8JTChPNbLGKxFHRLWY12eBz+oe7yNwigasB3M1C5XMqR4zX8WHCHag
+         fc/A==
+X-Forwarded-Encrypted: i=1; AHgh+RrjhsP9NPQD8KZEdneoXV1DVy6iP6kMi6z4qus5Lq6NmgL9xvPD3rWVDx2TnyXn/ngUIaO8eQTrvOTJe7E5@vger.kernel.org
+X-Gm-Message-State: AFuF++nEBlsgx9onShRgbo4vmYzz0TK4FXPKG8yxy62mgmutX/gudEsT
+	V+UtsLOF988xYRCP7d3g/kPZdQlimG0p1dww7mQqWj/OgHZgfsNM1utbrIOTPhsgGFc=
+X-Gm-Gg: AR+sD11jCyuViy2CWKFEpQZZEAEitmF7p9aO6/dYQcrr4lIHtFRxGK+DGRtwvUfq/dp
+	vMv01b2LH4qPI8M7iUZ84Pd1ZPdZjB3Oa2gEeoU4cF+uL6csSQAKaMQPqamEhE+sqPyvx33NY6V
+	O4TqNN88X4YIua2wY/AqXCLVGwIcpe5Tq40U3/+4TRnB4sJVSIqyr6xpsIjUALrJZregJ4nRSJ7
+	KgsP1EwdrPqSND5NyfAOBsKTupdMzeSDe1dol5e15u6vAMGXTic39jXfkhW8cHpZlwDX19+zz/B
+	ZSHL+0SFjOzTmvHaO21rFrMAIOZyXGqcTkjIXCgx0CBE6mKCPVgEwSMWcYecNhRTt05CB0lmf6b
+	7gvRYtbtnWQ1HR6zaYCG5lT1iK0dgeV3MZYJkHGBxWcHQzWemxHY/Vl40PrqmObv2+2fhKehz2V
+	K3X/IPZLr0emR2gIzebjgRZPPagI3MAqHbZJ0ivjFK9PB/Wg3mI+sVaGZqOKzrAEtfhg==
+X-Received: by 2002:a05:622a:2586:b0:51a:8bc9:2915 with SMTP id d75a77b69052e-52fb93d5098mr461094611cf.8.1788283267690;
+        Tue, 01 Sep 2026 10:21:07 -0700 (PDT)
 Received: from zippy.localdomain ([73.62.185.64])
-        by smtp.gmail.com with ESMTPSA id d75a77b69052e-530331d9cbcsm1423661cf.16.2026.09.01.10.21.05
+        by smtp.gmail.com with ESMTPSA id d75a77b69052e-530331d9cbcsm1423661cf.16.2026.09.01.10.21.06
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 01 Sep 2026 10:21:06 -0700 (PDT)
+        Tue, 01 Sep 2026 10:21:07 -0700 (PDT)
 From: Alex Elder <elder@riscstar.com>
 To: andersson@kernel.org,
 	konradybcio@kernel.org,
@@ -70,9 +70,9 @@ Cc: daniel@riscstar.com,
 	devicetree@vger.kernel.org,
 	linux-arm-msm@vger.kernel.org,
 	linux-kernel@vger.kernel.org
-Subject: [PATCH 4/5] arm64: dts: qcom: monaco-evk-ifp-mezzanine: use dev for device nodes
-Date: Tue,  1 Sep 2026 12:20:56 -0500
-Message-ID: <20260901172058.1512508-5-elder@riscstar.com>
+Subject: [PATCH 5/5] arm64: dts: qcom: qcs6490-thundercomm-minipc-g1iot: use dev for device nodes
+Date: Tue,  1 Sep 2026 12:20:57 -0500
+Message-ID: <20260901172058.1512508-6-elder@riscstar.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260901172058.1512508-1-elder@riscstar.com>
 References: <20260901172058.1512508-1-elder@riscstar.com>
@@ -87,8 +87,8 @@ Content-Transfer-Encoding: 8bit
 A recent change caused the embedded PCIe endpoints on TC9564 SoCs to
 be treated by the devicetree code as PCI buses, which is incorrect.
 
-The Monaco EVK IFP mezzanine has a TC9564 SoC, which includes a
-PCIe switch with one upstream port and two downstream (external)
+The Thundercomm AI Mini PC G1 IoT defines a TC956x SoC, which includes
+a PCIe switch with one upstream port and two downstream (external)
 ports, plus a third downstream port.  The third port has an embedded
 PCIe endpoint with two functions, each providing access to a 10 Gbps
 capable Ethernet interface.
@@ -109,14 +109,14 @@ previous behavior, and allows them to be used for PCI endpoint bus.
 Fixes: e806c63ba51a7 ("arm64: dts: qcom: Rename pci@ nodes to pcie@")
 Signed-off-by: Alex Elder <elder@riscstar.com>
 ---
- arch/arm64/boot/dts/qcom/monaco-evk-ifp-mezzanine.dtso | 4 ++--
+ arch/arm64/boot/dts/qcom/qcs6490-thundercomm-minipc-g1iot.dts | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/arch/arm64/boot/dts/qcom/monaco-evk-ifp-mezzanine.dtso b/arch/arm64/boot/dts/qcom/monaco-evk-ifp-mezzanine.dtso
-index ca5bf0fe5ec6e..a6e57ec8a1e14 100644
---- a/arch/arm64/boot/dts/qcom/monaco-evk-ifp-mezzanine.dtso
-+++ b/arch/arm64/boot/dts/qcom/monaco-evk-ifp-mezzanine.dtso
-@@ -117,7 +117,7 @@ pcie@3,0 {
+diff --git a/arch/arm64/boot/dts/qcom/qcs6490-thundercomm-minipc-g1iot.dts b/arch/arm64/boot/dts/qcom/qcs6490-thundercomm-minipc-g1iot.dts
+index 31bafa2cf51db..183ac59ca7d49 100644
+--- a/arch/arm64/boot/dts/qcom/qcs6490-thundercomm-minipc-g1iot.dts
++++ b/arch/arm64/boot/dts/qcom/qcs6490-thundercomm-minipc-g1iot.dts
+@@ -790,7 +790,7 @@ pcie@3,0 {
  			ranges;
  			bus-range = <0x5 0xff>;
  
@@ -125,7 +125,7 @@ index ca5bf0fe5ec6e..a6e57ec8a1e14 100644
  				reg = <0x50000 0x0 0x0 0x0 0x0>;
  				#address-cells = <3>;
  				#size-cells = <2>;
-@@ -125,7 +125,7 @@ pcie@0,0 {
+@@ -798,7 +798,7 @@ pcie@0,0 {
  				ranges;
  			};
  
