@@ -1,38 +1,38 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B96E93AB283;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B97DD3AB294;
 	Tue,  1 Sep 2026 09:46:49 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788256009; cv=none; b=YkfaFdegnqQ45nKhojlyLf12b/6UUgQwEVsCYkFF1daNGHK7ki9yc6cmjAdpg0+5JzrfIsAQyeymHRkrKe+4pB/ivcBVhQQ/DnxEjCkox2NbnAMD9xIVt6LbbdxFVdAn7yQZ321DL6X/srzfQQ2uA0eiYsIScpmgNrtfnjrJhGg=
+	t=1788256009; cv=none; b=q+AtPFECnWfthTEA1vt0hT4MJOfDpNR3hNPZs8+6TgSTH9DSMKp4VNvrancGdUO/R1pzxeHNf+MwZzWUYznSjmxJhhGtgn1fIqT/0m6zY5SLtQxETVau+WMM0ajmvQyylMDd/hiSidCjlqhDGxGYFISlkg3vaul9r/AW/Ycng6Y=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1788256009; c=relaxed/simple;
-	bh=QJ70/rRqWI5J6lpcr9K41yKXmzCIJOscvBqB/evryFc=;
+	bh=qbgHBFxLenljTBywutJsmXQHyq15tR9y7KdJQsYrmrA=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=PDemCNgPLYW7phNV93TDvmNN2I7ZIjVuqkcAcybxnJTejNvGmNLJ5ImbDGHMzpFBB8BoYgFFyCCtPCTNT4hAuC+dP/U3oIwUcXBNvONk4erzGQbKua92gDO5c+S3eR3jG6kN2a0ax6v6c68xNlZ0pDeZ0EG1nsk8fc0sM8qvnMs=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=IhWqS1ed; arc=none smtp.client-ip=10.30.226.201
+	 In-Reply-To:To:Cc; b=LwsmaLooVKnVq4FA/6mIxQpJcPNxlykqm035AuiuBgA9ZlW/Xx7EEhlhSqlvxI7BDIuEKEtcfxAaZ3h2uYYvJms3iG2cQERGSGEuVMJWEVwo34EgdPb2yElzfbOwctlUfDNEFbPIj0Tqic1wfusqnjK/r5K4DOhGcMxTWFdXCVA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=gVG4NSyx; arc=none smtp.client-ip=10.30.226.201
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="IhWqS1ed"
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 55FEDC2BCF5;
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="gVG4NSyx"
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 47D6AC2BCFA;
 	Tue,  1 Sep 2026 09:46:49 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
 	s=k20201202; t=1788256009;
-	bh=QJ70/rRqWI5J6lpcr9K41yKXmzCIJOscvBqB/evryFc=;
+	bh=qbgHBFxLenljTBywutJsmXQHyq15tR9y7KdJQsYrmrA=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
-	b=IhWqS1edrfE1stsGR1h8EoEypdEpjdSVyFI0wm1EnrbFpIaijBxzK+uyQQylkG4Ar
-	 ApWWbkZYrVXCW28HUhnD38uMs7m5tsArLSfc4/Tlcd5pAGEimhVrcWp42tyxzAeEFN
-	 hGHU45N9s9iBpqLgC9IlDFms1IHBlKqzzloGkPkjjgs0VsxGcKI+PtlyPuWpmwOT6R
-	 V+sUq74N+6rOm/mJw3khd735YqgaJYPyIh781xaXcHGZsRVYWNEF+tCdxnARkI/ZoU
-	 WoLoao1itss8xiAuwS4lFQSagYJ7VIqXUWMiu/x3N9HGCkP0yvvxh2Rhw3A55yQPcy
-	 qFvRO6m1IAc9A==
+	b=gVG4NSyxQ4rVNUWhVXIkKSlkg8e4Zv+HQFCqTL+tt9s8b8TeEZ/3fVHU+zFYnhm9f
+	 vRgZp1kwNiuueBcZ87Xd8rpKD5he0PEgbekFbj9Yp1JIiJgOjGDB5YtWDvXjE/JQyW
+	 LPIFSkjrT4yVJ6BEgs6urboRPTdhPrwX9HSvAZJ6dFEpadod3ajNS+H3If3JcSMhtp
+	 eBny2kzHhdNnUp258Ccay84XUtaqYjYisGXYt9dNQGsixWTYPjE515ZwZWaO0EZFtb
+	 1A2x9J16KPYrNRdcOFLXIhNRv4FsQW3SY5VU5npRrB5WvzqEepKuBBNIQsZHxoYFyV
+	 ARB2YWh+msvQQ==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 40E21C624D0;
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 32014C61DD3;
 	Tue,  1 Sep 2026 09:46:49 +0000 (UTC)
 From: David Heidelberg via B4 Relay <devnull+david.ixit.cz@kernel.org>
-Date: Tue, 01 Sep 2026 11:46:46 +0200
-Subject: [PATCH v8 2/2] arm64: dts: qcom: sdm845-google: Enable PMI8998
- camera flash LEDs
+Date: Tue, 01 Sep 2026 11:46:45 +0200
+Subject: [PATCH v8 1/2] arm64: dts: qcom: sdm845-google: Add dual front
+ IMX355 cameras
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -41,7 +41,7 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260901-pixel3-camera-v8-2-99f159883348@ixit.cz>
+Message-Id: <20260901-pixel3-camera-v8-1-99f159883348@ixit.cz>
 References: <20260901-pixel3-camera-v8-0-99f159883348@ixit.cz>
 In-Reply-To: <20260901-pixel3-camera-v8-0-99f159883348@ixit.cz>
 To: Bjorn Andersson <andersson@kernel.org>, 
@@ -54,21 +54,21 @@ Cc: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
  devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
  phone-devel@vger.kernel.org, David Heidelberg <david@ixit.cz>
 X-Mailer: b4 0.16.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2228; i=david@ixit.cz;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=7104; i=david@ixit.cz;
  h=from:subject:message-id;
- bh=prTj+YvVw1o8d4g7Tl+HH1FctxXrbb97DHabaxSpRN4=;
- b=owEBbQKS/ZANAwAIAWACP8TTSSByAcsmYgBqlp8H0JS9hyifhRSwlIuOsIYEeGMwFiabxbPvS
- uqVf8Ieh9aJAjMEAAEIAB0WIQTXegnP7twrvVOnBHRgAj/E00kgcgUCapafBwAKCRBgAj/E00kg
- cuKcEADQT8OYqJANMbHWK5Z9NGf1W9K3Z2ahdoyDK4UsPMaupYFh12K9xbtfcOkUEZ0JZoUXGap
- XlnHOEKlsleiTHNSc1//UgSm0NCaXs1yapw8hgh/K8+RcM4yMOQo0K6p2sbGpalhgFxQxYpdy+p
- BmVpJ5BVC2P9ZlgJr9HXTVGxhlUAs61g4o7JCuSWcAaPrbQ67fPVGq1+HzeoANw1CWiDEBQ3O+j
- raaA75TZfZ+ELqk195Gq6hIAs/sDunnjdcMceD+oxRDtRPsQqVso9pqn8M6Z+VeIxm15NKHat9x
- vhUZDHRH16Yoru4NXCBnZfWP2JURtaK4QXj8uVxzMcJ27m/RI/ADCr+1RSmdFgrjwKLmltI+854
- DsxQGz4PbgInyuj8RvZuwzfKulWDsQOlwakk58ARtY/IeMu24kwuZdRi6PQ9/ikeBU42xrrD3Aq
- GSnXoYuUEd78NyND7H1/76sk0b/sdQrrOxLN6I9HmYo3ulSNu3yL/E3U9yF2CEULZnJydOj48Cf
- DQQWGEIJuEJHsTnEav80JUUEYHv9y+Lr6fnhlxFSUNY8zXOjQy2cVqITuCAKf9c0kI8/8sSvpOs
- qpDFPtkoWam2AznYdnzRKk2Gb/ASqCbchB3yzRFG/aNvy+2BhbaYEeeRifyfN19Y6rW7i2zDQRv
- 4kh0yZzXNyH9ZTw==
+ bh=NpOqrR482KbbdoTfGzFHNRDac3tLIbg0jFg++wCA3VY=;
+ b=owEBbQKS/ZANAwAIAWACP8TTSSByAcsmYgBqlp8HwNAOYbcrPlWzY9dUUc/B6OxIts/ClqyLG
+ hSGkEtQ7umJAjMEAAEIAB0WIQTXegnP7twrvVOnBHRgAj/E00kgcgUCapafBwAKCRBgAj/E00kg
+ cj6ED/95UNId0kTUcpqnKXkZhQ2jnzASzzpFL42ypOxsCJLCpYfsivrauM5WFRxc8ThGFrR+9RT
+ VdPLu0cOyEAHkleYRrfmH4h9UKGrwSdTTVAYPYCHesehAaCEhwRhhmg4pgr+G3I02/eGk/Z/84E
+ udtVbGx3ZR1T1srci2IRU7urmFwLsRD6I47sumxKWX3c9CYDypgFPwZh1OKLLHIUZKGpv44zeHe
+ YSVbxsj1ebPaWo4W9wxYd2lE80qw+iHo45cb+Y9SMRACr2EU6isU9EuyXGFi2exjc32jYm9OCPS
+ +K13QifptiUeA7+46EBc4H34RwIGAbNy+wJTuU6NFQzFidj24GkUlbY5od0W63aYHm7oOTPwzbu
+ 749oG1mG398vk/sE4rNVaNFLBvaNJ4tB7BbwlhH2qQ62HbcW8XI6Y6vQVyYFARE6zFnbBLhzJGj
+ QSNTIt2KFjQfXNZIun4F9YlTfNYiGrwNLvn64W/NF61Y+cEJ338PRct0H0LCIl4a/bWnsQWhmPe
+ 7uY7YTeBl6/bqdSvgC/tTnMlqW7p7GCwg6QoEbHlNKDMzzn4qEIfc7W4+d/0e+sIhVJ1j0f5QcH
+ c6tiAV3k8Dy+U/Pe4vGT0xFJxjbHbpv0eG55OKoPegzqqAXlx7s5ITK7K5N67CgntjI+w76I3va
+ HK/TpZkrFJforKQ==
 X-Developer-Key: i=david@ixit.cz; a=openpgp;
  fpr=D77A09CFEEDC2BBD53A7047460023FC4D3492072
 X-Endpoint-Received: by B4 Relay for david@ixit.cz/default with auth_id=355
@@ -77,25 +77,24 @@ Reply-To: david@ixit.cz
 
 From: David Heidelberg <david@ixit.cz>
 
-Enable the PMI8998 flash LED block and describe two white flash LEDs
-used for the rear camera.
+The Pixel 3 features two front-facing Sony IMX355 sensors with
+different focal lengths (standard and wide-angle).
 
-Configure the LED in flash mode with hardware limits matching the
-original device configuration, including maximum current and timeout.
+Sensors are connected via CSIPHY port 1 and 2 and controlled over CCI
+I2C1, using MCLK2 as the clock source.
 
-In contrary to downstream, we can control both LEDs separately.
+This enables support for the dual front camera configuration.
 
-Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
 Signed-off-by: David Heidelberg <david@ixit.cz>
 ---
- arch/arm64/boot/dts/qcom/sdm845-google-common.dtsi | 27 ++++++++++++++++++++++
- 1 file changed, 27 insertions(+)
+ arch/arm64/boot/dts/qcom/sdm845-google-common.dtsi | 172 ++++++++++++++++++++-
+ 1 file changed, 171 insertions(+), 1 deletion(-)
 
 diff --git a/arch/arm64/boot/dts/qcom/sdm845-google-common.dtsi b/arch/arm64/boot/dts/qcom/sdm845-google-common.dtsi
-index 913e2032e6472..365fd6d9287e1 100644
+index 9e952f9862f24..913e2032e6472 100644
 --- a/arch/arm64/boot/dts/qcom/sdm845-google-common.dtsi
 +++ b/arch/arm64/boot/dts/qcom/sdm845-google-common.dtsi
-@@ -1,16 +1,17 @@
+@@ -1,16 +1,18 @@
  // SPDX-License-Identifier: GPL-2.0-only
  
  /dts-v1/;
@@ -104,58 +103,261 @@ index 913e2032e6472..365fd6d9287e1 100644
  #include <dt-bindings/dma/qcom-gpi.h>
  #include <dt-bindings/input/linux-event-codes.h>
  #include <dt-bindings/interrupt-controller/irq.h>
-+#include <dt-bindings/leds/common.h>
- #include <dt-bindings/media/video-interface-devices.h>
- #include <dt-bindings/media/video-interfaces.h>
++#include <dt-bindings/media/video-interface-devices.h>
++#include <dt-bindings/media/video-interfaces.h>
  #include <dt-bindings/regulator/qcom,rpmh-regulator.h>
  
  #include "sdm845.dtsi"
  #include "pm8998.dtsi"
  #include "pmi8998.dtsi"
  
-@@ -591,16 +592,42 @@ &pm8998_resin {
- };
+ /delete-node/ &mpss_region;
+ /delete-node/ &venus_mem;
+@@ -108,16 +110,48 @@ gpio-keys {
+ 		key-vol-up {
+ 			label = "Volume Up";
+ 			linux,code = <KEY_VOLUMEUP>;
+ 			gpios = <&pm8998_gpios 6 GPIO_ACTIVE_LOW>;
+ 			debounce-interval = <15>;
+ 		};
+ 	};
  
- &pmi8998_charger {
- 	monitored-battery = <&battery>;
- 
- 	status = "okay";
- };
- 
-+&pmi8998_flash {
-+	status = "okay";
++	camera_front_avdd: regulator-front-cam-avdd {
++		compatible = "regulator-fixed";
++		regulator-name = "front_cam_avdd";
 +
-+	/* upper part of the flash module */
-+	led-0 {
-+		function = LED_FUNCTION_FLASH;
-+		color = <LED_COLOR_ID_WHITE>;
-+		led-sources = <1>;
-+		led-max-microamp = <500000>;
-+		flash-max-microamp = <1500000>;
-+		flash-max-timeout-us = <1280000>;
-+		function-enumerator = <0>;
++		regulator-min-microvolt = <2800000>;
++		regulator-max-microvolt = <2800000>;
++
++		gpios = <&tlmm 8 GPIO_ACTIVE_HIGH>;
++		enable-active-high;
++
++		pinctrl-0 = <&cam_front_avdd_default>;
++		pinctrl-names = "default";
++
++		vin-supply = <&vreg_bob>;
 +	};
 +
-+	/* lower part of the flash module */
-+	led-1 {
-+		function = LED_FUNCTION_FLASH;
-+		color = <LED_COLOR_ID_WHITE>;
-+		led-sources = <2>;
-+		led-max-microamp = <500000>;
-+		flash-max-microamp = <1500000>;
-+		flash-max-timeout-us = <1280000>;
-+		function-enumerator = <1>;
++	camera_front_aux_avdd: regulator-front-cam-aux-avdd {
++		compatible = "regulator-fixed";
++		regulator-name = "front_cam_aux_avdd";
++
++		regulator-min-microvolt = <2800000>;
++		regulator-max-microvolt = <2800000>;
++
++		gpios = <&tlmm 14 GPIO_ACTIVE_HIGH>;
++		enable-active-high;
++
++		pinctrl-0 = <&cam_front_aux_avdd_default>;
++		pinctrl-names = "default";
++
++		vin-supply = <&vreg_bob>;
++	};
++
+ 	vph_pwr: regulator-vph-pwr {
+ 		compatible = "regulator-fixed";
+ 		regulator-name = "vph_pwr";
+ 		regulator-min-microvolt = <3700000>;
+ 		regulator-max-microvolt = <3700000>;
+ 	};
+ 
+ 	vreg_s4a_1p8: regulator-vreg-s4a-1p8 {
+@@ -314,16 +348,21 @@ vreg_l28a_3p0: ldo28 {
+ 			regulator-initial-mode = <RPMH_REGULATOR_MODE_LPM>;
+ 			regulator-boot-on;
+ 			/*
+ 			 * We can't properly bring the panel back if it gets turned off
+ 			 * so keep it's regulators always on for now.
+ 			 */
+ 			regulator-always-on;
+ 		};
++
++		vreg_lvs1_1p8: lvs1 {
++			regulator-min-microvolt = <1800000>;
++			regulator-max-microvolt = <1800000>;
++		};
+ 	};
+ 
+ 	regulators-1 {
+ 		compatible = "qcom,pmi8998-rpmh-regulators";
+ 		qcom,pmic-id = "b";
+ 
+ 		vdd-bob-supply = <&vph_pwr>;
+ 
+@@ -346,24 +385,127 @@ regulators-2 {
+ 
+ 		vreg_s3c_0p6: smps3 {
+ 			regulator-min-microvolt = <600000>;
+ 			regulator-max-microvolt = <600000>;
+ 		};
+ 	};
+ };
+ 
++&camss {
++	vdda-phy-supply = <&vreg_l1a_0p875>;
++	vdda-pll-supply = <&vreg_l26a_1p2>;
++
++	/*
++	 * MCLK2 (GPIO15) is shared between both front camera sensors.
++	 * The clock is generated by CAMCC, therefore the pin is
++	 * configured here rather than in individual sensor nodes.
++	 */
++	pinctrl-0 = <&cam_mclk2_default>;
++	pinctrl-1 = <&cam_mclk2_sleep>;
++	pinctrl-names = "default", "sleep";
++
++	status = "okay";
++
++	ports {
++		#address-cells = <1>;
++		#size-cells = <0>;
++
++		port@1 {
++			reg = <1>;
++
++			camss_endpoint1: endpoint {
++				bus-type = <MEDIA_BUS_TYPE_CSI2_DPHY>;
++				data-lanes = <0 1 2 3>;
++				remote-endpoint = <&cam_aux_front_endpoint>;
++			};
++		};
++
++		port@2 {
++			reg = <2>;
++
++			camss_endpoint2: endpoint {
++				bus-type = <MEDIA_BUS_TYPE_CSI2_DPHY>;
++				data-lanes = <0 1 2 3>;
++				remote-endpoint = <&cam_front_endpoint>;
++			};
++		};
 +	};
 +};
 +
- &qupv3_id_0 {
++&cci0_sleep {
++	/* bus has external pull-up */
++	/delete-property/ bias-pull-down;
++	bias-disable;
++};
++
+ &cci {
  	status = "okay";
  };
  
- &qupv3_id_1 {
- 	status = "okay";
+ &cci_i2c1 {
+ 	/* actuator @0c */
+ 
+-	/* front camera, imx355 @1a */
++	front_cam: camera@10 {
++		compatible = "sony,imx355";
++		reg = <0x10>;
++
++		clocks = <&clock_camcc CAM_CC_MCLK2_CLK>;
++		assigned-clocks = <&clock_camcc CAM_CC_MCLK2_CLK>;
++		assigned-clock-rates = <24000000>;
++
++		reset-gpios = <&tlmm 21 GPIO_ACTIVE_LOW>;
++
++		avdd-supply = <&camera_front_avdd>;
++		dvdd-supply = <&vreg_s3a_1p35>;
++		dovdd-supply = <&vreg_lvs1_1p8>;
++
++		pinctrl-0 = <&cam_front_reset_default>;
++		pinctrl-names = "default";
++
++		rotation = <270>;
++		orientation = <MEDIA_ORIENTATION_FRONT>;
++
++		port {
++			cam_front_endpoint: endpoint {
++				data-lanes = <1 2 3 4>;
++				link-frequencies = /bits/ 64 <360000000>;
++				remote-endpoint = <&camss_endpoint2>;
++			};
++		};
++	};
++
++	front_aux_cam: camera@1a {
++		compatible = "sony,imx355";
++		reg = <0x1a>;
++
++		clocks = <&clock_camcc CAM_CC_MCLK2_CLK>;
++		assigned-clocks = <&clock_camcc CAM_CC_MCLK2_CLK>;
++		assigned-clock-rates = <24000000>;
++
++		reset-gpios = <&tlmm 9 GPIO_ACTIVE_LOW>;
++
++		avdd-supply = <&camera_front_aux_avdd>;
++		dvdd-supply = <&vreg_s3a_1p35>;
++		dovdd-supply = <&vreg_lvs1_1p8>;
++
++		pinctrl-0 = <&cam_front_aux_reset_default>;
++		pinctrl-names = "default";
++
++		rotation = <270>;
++		orientation = <MEDIA_ORIENTATION_FRONT>;
++
++		port {
++			cam_aux_front_endpoint: endpoint {
++				data-lanes = <1 2 3 4>;
++				link-frequencies = /bits/ 64 <360000000>;
++				remote-endpoint = <&camss_endpoint1>;
++			};
++		};
++	};
+ 
+ 	/* eeprom @50, at24 driver says 8K */
  };
  
+ &cdsp_pas {
+ 	firmware-name = "qcom/sdm845/Google/blueline/cdsp.mbn";
+ 
+ 	status = "okay";
+@@ -485,16 +627,44 @@ nfc_int_default: nfc-int-default-state {
+ 
+ 	nfc_enable_default: nfc-enable-default-state {
+ 		pins = "gpio25", "gpio79";
+ 		function = "gpio";
+ 		drive-strength = <2>;
+ 		bias-pull-down;
+ 	};
+ 
++	cam_front_avdd_default: cam-avdd-default-state {
++		pins = "gpio8";
++		function = "gpio";
++		drive-strength = <2>;
++		bias-disable;
++	};
++
++	cam_front_aux_reset_default: cam-front-aux-reset-default-state {
++		pins = "gpio9";
++		function = "gpio";
++		drive-strength = <2>;
++		bias-disable;
++	};
++
++	cam_front_aux_avdd_default: cam-avdd-aux-default-state {
++		pins = "gpio14";
++		function = "gpio";
++		drive-strength = <2>;
++		bias-disable;
++	};
++
++	cam_front_reset_default: cam-front-reset-default-state {
++		pins = "gpio21";
++		function = "gpio";
++		drive-strength = <2>;
++		bias-disable;
++	};
++
+ 	touchscreen_reset: ts-reset-state {
+ 		pins = "gpio99";
+ 		function = "gpio";
+ 		drive-strength = <8>;
+ 		bias-pull-up;
+ 	};
+ 
+ 	touchscreen_pins: ts-pins-gpio-state {
 
 -- 
 2.55.0
