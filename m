@@ -1,90 +1,111 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8E2EC37C911;
-	Tue,  1 Sep 2026 21:08:56 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8D25C4CCDEF;
+	Tue,  1 Sep 2026 21:28:37 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788296938; cv=none; b=itJFih+Enz42FBLNrSkoY2y4q8Wvo3vT1cUsZkja6/l+WrstDhXOehncpi1EUY5wLAvh9rc4Y9xN9j/TIgQ3SrCtianMxmgZ9yGXlzgBKVd1/buRUT8IqAYPWq+iKHajha9M5mVAtybd0vFNAchi67pnKuzG6T2zgxT5SXVWZYg=
+	t=1788298118; cv=none; b=ITyXI8ksgq5tOrGKf4aSWuecgYmgzVbwY2GqeuQM3jMZ51cbXSCIl2hDTV03vK551co/1QvXmvESg1eWUxR6T8QjwUeHt9TygQCEiMvqse2pcBI9lTdizCEj3Xfkdb990tDHDKCLoGvOBJLaW2p2j47pzekNT/NWMlUWml3IKLg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788296938; c=relaxed/simple;
-	bh=RTLE6gZgRbyuxtnnzOrorUSP+uMBRfUHS7j4OjUredA=;
-	h=From:To:Cc:In-Reply-To:References:Subject:Message-Id:Date:
-	 MIME-Version:Content-Type; b=q2T3XKBS7bOCuZtjyC926z4YqrTnEq9uMw1tP7O5TwSgEULfwg06aVreiMh0hNTw9nDH7UQfSDm/7cHuWEuqaIzA505108u+nRGQJDa9X2qHdun981yyRCHEjwXWXrQGx7Hpe5uBN1gMs9qnS3uspglWb0TG6aE+o6rRRjYnXzU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=GJhRkwbz; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1788298118; c=relaxed/simple;
+	bh=OfizP+ptEf1HS0hq6hrXMz1mVvO+FePP1zC3RrlmNNk=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=hTA0b7Ks+SkTnLUFUGEQUmDpXQbGCPJ1QMc767peSqwF/OMTv4e+QuAJL6xZ02TlLBYC4GfaThtFtxp0ghaqjobA5wm0IyzMmSP93wGwwvGC8yPa/JHtDgQWq15XzfU9KtxG8EGwlXS5EW2kw7bsA9Tqp3iFbiWumxSDX/qSYto=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=SpvrTo1U; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="GJhRkwbz"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id F366D1F000E9;
-	Tue,  1 Sep 2026 21:08:55 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="SpvrTo1U"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1B76A1F000E9;
+	Tue,  1 Sep 2026 21:28:36 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1788296936;
-	bh=VybXJ8SD60aPKpFwFoaNuzXTDLb2GQY0/FeQGMpfffk=;
-	h=From:To:Cc:In-Reply-To:References:Subject:Date;
-	b=GJhRkwbzOSwWkHo9JAQKkSG1VdCTDfUm/VWTdD7l6zQlvcclH0xyF0a21NLorCf/o
-	 +957uld5KCt8JfvPKqJXcnvx8ne2prUXwQ48MxhA4r0UhWWRkZaYhKrtetxYzjdQ0+
-	 F5TBZKAkkXslC/9BsnlXM+0IloJ94hb72vVOeP7UmTv50c87RnaScKUXbmSMVnJZuG
-	 El75zUocKGZJHikOX6w/JPqUMkSjhUiZ4iHjaWyo+jBE7tTQ8qU9vZmqXtHSDorATy
-	 nIYXG+WhkkZDanFAnXZtFZc2Kk2EM5LVhO6hci2ZsTRjCl570nk3oS3APkcIrhTTbF
-	 qtYOkQ75glT1Q==
-From: Mark Brown <broonie@kernel.org>
-To: Viken Dadhaniya <viken.dadhaniya@oss.qualcomm.com>
-Cc: linux-arm-msm@vger.kernel.org, linux-spi@vger.kernel.org, 
- linux-kernel@vger.kernel.org
-In-Reply-To: <20260824-spi-qcom-geni-cleanup-setup-fifo-params-v1-1-bdf98ae62953@oss.qualcomm.com>
-References: <20260824-spi-qcom-geni-cleanup-setup-fifo-params-v1-1-bdf98ae62953@oss.qualcomm.com>
-Subject: Re: [PATCH] spi: qcom-geni: rename setup_fifo_params() to
- setup_spi_params() and make it void
-Message-Id: <178819868940.141190.6264743722267135456.b4-ty@b4>
-Date: Mon, 31 Aug 2026 18:51:29 +0100
+	s=k20260515; t=1788298117;
+	bh=bL7+JBUfnj/CnXAsFEDYoa5vYtw0IXTLDYwqfYjz5rM=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=SpvrTo1UeB5IOtS2Nlhf2nW1/jIfzmKphPHiRB7O4omy5YsxgikGxJx86X1y20IBz
+	 Wuzg60RItOiKmh3wicsMoMqUObBSG53pu2fps1gM9c3eioe9qhQgfx+XA5wM/7RqFd
+	 J15c6x6VxecIDwSvmTEd1NfZJ6ZJdRr+pSQY4DVWjWz8RCs735l8vx76QzFVw4gbGv
+	 6hmoiCfPgcyP75pU2DiK606etCbO2ongi1PPxBrLm0zjUM0jhrNRhRnWAXWTsKKeqY
+	 NOLR2gMPzIkKtX7/aGu8A+jXe6lxbpHLB31ioTBfvYV51qtNzGqxUznIkM4Bhs5qZy
+	 Bf7bNjnG13zHg==
+Date: Tue, 1 Sep 2026 21:28:34 +0000
+From: Eric Biggers <ebiggers@kernel.org>
+To: Linlin Zhang <linlin.zhang@oss.qualcomm.com>
+Cc: axboe@kernel.dk, mst@redhat.com, jasowangio@gmail.com,
+	James.Bottomley@hansenpartnership.com, martin.petersen@oracle.com,
+	robh@kernel.org, krzk+dt@kernel.org, conor+dt@kernel.org,
+	linux-block@vger.kernel.org, linux-crypto@vger.kernel.org,
+	linux-scsi@vger.kernel.org, virtualization@lists.linux.dev,
+	devicetree@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+	neeraj.soni@oss.qualcomm.com, gaurav.kashyap@oss.qualcomm.com,
+	mani@kernel.org, andersson@kernel.org, konradybcio@kernel.org,
+	bvanassche@acm.org, alim.akhtar@samsung.com,
+	avri.altman@sandisk.com, stefanha@redhat.com, pbonzini@redhat.com,
+	eperezma@redhat.com, xuanzhuo@linux.alibaba.com,
+	linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v1 00/11] FBE virtualization: inline encryption for
+ virtio-blk guests
+Message-ID: <20260901212834.GA3585187@google.com>
+References: <20260827160806.1295313-1-linlin.zhang@oss.qualcomm.com>
+ <20260827184219.GB2137493@google.com>
+ <d81e347e-8ca7-40a1-a428-5bce6f0d4b02@oss.qualcomm.com>
+ <20260831210759.GE86114@quark>
+ <ca838905-f0f8-4f0a-96aa-2bc05ab6c0a7@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.17-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1179; i=broonie@kernel.org;
- h=from:subject:message-id; bh=RTLE6gZgRbyuxtnnzOrorUSP+uMBRfUHS7j4OjUredA=;
- b=owGbwMvMwMWocq27KDak/QLjabUkhqzpdk8LI9iTpdnf/xHO7b3LfvPn0/+qrnXpPLoTtOJs3
- 7UYNUzvZDRmYWDkYpAVU2RZ+yxjVXq4xNb5j+a/ghnEygQyhYGLUwAmMk2Mg6G5enI0H/dMnreb
- fO4HsbL3JV+zynRM9GN3Y5/ikMIxk7XT86khc3OPoNeOuw0K5uJ7DlwJD2bKE30979DTRYcNdxp
- zCyb/mB591kSD9QnLjvM/8tlPnYqNq4i+sHRjQt2MZtbNjo1Fn/K2+SRVbLYIU/06UWiFEXt1VI
- 3wd7XPOteufVm7aco95wubPb5zO7Wf1r38c4O0gc0U24nzr6pdWGevX6jcf5hpBrMavyr7HkHOD
- XryB5xthV2jBI4ml5h9M9S3c964PTDs0uEnzf+XMT++XjmlpIPNf6PHFCNVs3jd61xe10wCFK8J
- 6qcGvwryj9Hkn8p2JyBf7bjc65SzNmrCJcmFpzi/T90AAA==
-X-Developer-Key: i=broonie@kernel.org; a=openpgp;
- fpr=3F2568AAC26998F9E813A1C5C3F436CA30F5D8EB
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <ca838905-f0f8-4f0a-96aa-2bc05ab6c0a7@oss.qualcomm.com>
 
-On Mon, 24 Aug 2026 15:43:58 +0530, Viken Dadhaniya wrote:
-> spi: qcom-geni: rename setup_fifo_params() to setup_spi_params() and make it void
+On Tue, Sep 01, 2026 at 04:22:33PM +0800, Linlin Zhang wrote:
+> With this design, I believe there would be two VM exits associated with
+> encrypted I/O:
+>   1. Key programming
+>      Before encrypted I/O can be submitted, the guest needs to program a key
+>      into a virtual keyslot:
+>      
+>      Guest virtio-blk driver
+>          -> VM exit
+>          -> virtio-blk backend (e.g. QEMU)
+>          -> ioctl
+>          -> host virtio-blk proxy driver
+>             (stores the blk_crypto_key in a virtual keyslot)
+> 
+>   2. Encrypted I/O submission
+>      The I/O request carries the virtual keyslot number and DUN:
+> 
+>      Guest virtio-blk driver
+>         -> VM exit
+>         -> virtio-blk backend (e.g. QEMU)
+>         -> ioctl
+>         -> host virtio-blk proxy driver
+>            (looks up the blk_crypto_key associated with the virtual keyslot
+>             and submits I/O using bio_crypt_set_ctx())
 
-Applied to
+Most I/O requests only need step (2), since they reuse step (1) from a
+previous I/O request.  The kernel evicts a keyslot only when it is the
+least recently used among all the keyslots and another one is needed.
+(Or when eviction is explicitly requested.)
 
-   https://git.kernel.org/pub/scm/linux/kernel/git/broonie/spi.git for-7.4
+This is especially relevant when only a small number of keys is used,
+like is the case when the per-file key support in fscrypt is disabled.
+Programming keys on Qualcomm ICE has always been very slow even on
+physical hardware, and the kernel was already designed to mitigate that.
 
-Thanks!
+> I have been wondering whether a model similar to the passthrough
+> blk-crypto-profile used by certain dm targets could be applicable here.
+> 
+> In such a design, ownership of keyslot management would effectively and totally
+> move to the host. The guest would no longer manage virtual keyslots, and the
+> host block layer would continue using its existing keyslot manager to allocate,
+> reuse, and evict physical keyslots as needed.
 
-[1/1] spi: qcom-geni: rename setup_fifo_params() to setup_spi_params() and make it void
-      https://git.kernel.org/broonie/spi/c/ed07cdb2b386
+I think the virtual keyslots are still useful so that the key bytes, key
+size, key type, algorithm, and data unit size don't have to be
+transmitted in every I/O request, then all revalidated and processed
+again.  There is a reason that inline encryption hardware uses keyslots,
+and I think the same largely applies to virtio-blk.
 
-All being well this means that it will be integrated into the linux-next
-tree (usually sometime in the next 24 hours) and sent to Linus during
-the next merge window (or sooner if it is a bug fix), however if
-problems are discovered then the patch may be dropped or reverted.
-
-You may get further e-mails resulting from automated or manual testing
-and review of the tree, please engage with people reporting problems and
-send followup patches addressing any issues that are reported if needed.
-
-If any updates are required or you are submitting further changes they
-should be sent as incremental updates against current git, existing
-patches will not be replaced.
-
-Please add any relevant lists and maintainers to the CCs when replying
-to this mail.
-
-Thanks,
-Mark
-
+- Eric
