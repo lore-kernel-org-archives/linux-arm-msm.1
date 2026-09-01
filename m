@@ -1,203 +1,338 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0C89748097B
-	for <linux-arm-msm@vger.kernel.org>; Tue,  1 Sep 2026 16:31:21 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=205.220.168.131
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788280283; cv=pass; b=PVNxKXtCDH+pA5i6/EaNLHuqqDsc6YcRRDROm6jVIvfvQU6qVggB14SK7iSusurfseHp1tSZbuRry9UCrOQMnvRUxAl80YRmZ84lnQac4u7qHG1zNIB4fPUysOBHBWhW7J/MOIZ5dTvB+40yUKQq35vFke2XbQBAP/aDWltV5OE=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788280283; c=relaxed/simple;
-	bh=XW9CfwEeNR2HxevHoBsTeDR+70qKBEmNFf0UXTkk2bU=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=BYDOAqguqwUYcYwOfldOKdUDYSXU68yISfZHfg9ogQBnsZpSuLhIFV1c7kp93U9t5+Edwp5B6nz18UqLjM7bdx61tJ1U8Ni5FBB4Y85YgRvjoKD7J3fF0fi6cJSrjANzhqvpt7+8RJ6WsvG5GitaLjRv5kGpjinwfHOP9CB3t4o=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=C24xkZOB; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=cCeVWJqJ; arc=pass smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 358A247ECE4
+	for <linux-arm-msm@vger.kernel.org>; Tue,  1 Sep 2026 16:32:02 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=217.140.110.172
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1788280324; cv=none; b=R+lXs1dVp5bKrT+DymOfoGXOhlSobzZ4x80aPnZUG9slLWL9VdV6At0GfvGlyCQn+n84ghd3CUQ4YJMRdnT7l0fEdHYl0oX/Ma574efw45khq2Rje+GakkhROZ5eKYgI9miJ6wbalGHwqstm/HNB4xxYAEZF3xGHMKEW0smRRQY=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1788280324; c=relaxed/simple;
+	bh=hLe45cnDUnZxwdK4p4TDAGy82nU9hy3GkuXKLYRaHoU=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=ocZZb/zhD4OEvTEpG/Lp1lhi+zakDUDlsTv3aPYNYdhkTgzQKXYUossfWElPi8O9Crd9yIRUh6mzG3xj92/I17wCv9Wuf3NU72PnVIaIGgnqVNk5pKZ/6PGBvJEys0kzpjNgN2RVsKQrbwaSzzcAJN361/NKaNQvFPuSJcKZsPA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com; spf=pass smtp.mailfrom=arm.com; dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b=qrxm04zy; arc=none smtp.client-ip=217.140.110.172
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=arm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="C24xkZOB";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="cCeVWJqJ"
-Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 681E8YV12145854
-	for <linux-arm-msm@vger.kernel.org>; Tue, 1 Sep 2026 16:31:21 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	XW9CfwEeNR2HxevHoBsTeDR+70qKBEmNFf0UXTkk2bU=; b=C24xkZOBMHghNCgp
-	nyLxCOhToHipUH1POz509VZqjpVdRE55bwYNcA+stjyTmewceb/Ue8tJ2MHHFet4
-	NSQoaOEZiufK0e0j+eUt3MG7B5U72niCsVrQdUaffrj/G2S47sSZPm+9nh4iR72C
-	Kc9hhK+GvWXvpmuY+dfHffN56dLMkW67DRnMx3/wRPws4mZexqIMXD1tfh45j+G1
-	kFg//DMHpAdwnr8y1RADR4UFNcfsg5T+cJibI2rrT49f1opI3DnFSkn++bMs3mhv
-	8CqDT9Mmurfa/d+f2WbsjcbHXOc1VK4pA0IVSVt8BuCSs5wAiIWlRDaT2F2bVVVr
-	XGWg/w==
-Received: from mail-yx1-f70.google.com (mail-yx1-f70.google.com [74.125.224.70])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gdnk8uv4x-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 01 Sep 2026 16:31:21 +0000 (GMT)
-Received: by mail-yx1-f70.google.com with SMTP id 956f58d0204a3-66e509682ccso74773d50.3
-        for <linux-arm-msm@vger.kernel.org>; Tue, 01 Sep 2026 09:31:21 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1788280280; cv=none;
-        d=google.com; s=arc-20260327;
-        b=qJw6Qchqokc7k6c/iKXV4OA9se3fPG4vwMoYVjSf4PWXOyy7p8QGnZt1hL27fD30vh
-         u7lVE2yvY9deC1HsSC0+t6/W87XN/K3MfwHTZyZHhI8j+TnSGl3t7cZ8HiGitx3ByXHJ
-         qx8mR5NvrGoiu27ByuBmJCDDhUX2Q9xs/1okevSsEtG8DCRBs/pFykVw+ZqroidkpmcQ
-         otkA5B+0+8xgHdZdFVpZuOlgED8pbRDuPMSH2FSOiwZ4jDUEGBKcGqBVaj9fqiMwjepv
-         szC0d9oVlmLmlT50/8RudHNETAFjczGStID76z+dAcF6kQB8iKeFd07v37hY4mJaegLZ
-         ryZA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=XW9CfwEeNR2HxevHoBsTeDR+70qKBEmNFf0UXTkk2bU=;
-        fh=cO1/qOkzMWn4phSL0EnBYUlQFsrGm9BytEMvxx5evYQ=;
-        b=YYQR4LjHhPkjmDasyQezWTTnJ+F8/9Law3TtT1Ekzo4sV6lUuYC5NlrkH2rszhg3y6
-         qtUcy++ejrX5K55yjm8sojLexOCgbb43cpQO0bymFqysP98FboWR86XmKdrjAeU8pJyf
-         qGHKSzcuQzZyF3FF+J0iIs+a7+iz/iXu7kCr9WvaQ3/mpAzPLiQhyQu+53nreE67lhG0
-         a5wPJnWQFPS+xzF/3jEcLROXKdP4p7jw2YwKz+28+1vZgG/1QXPU+bJcJYB/y/OnBqAt
-         x7Wvz7VrZxtegvCCjSzxzy02i6wzFgFyDej4DnKTEUStWETJCInoN+w/BlcEH8n0Rusu
-         hMag==;
-        darn=vger.kernel.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1788280280; x=1788885080; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=XW9CfwEeNR2HxevHoBsTeDR+70qKBEmNFf0UXTkk2bU=;
-        b=cCeVWJqJ3TOh6BkJXvLb2exe5SI+1/q6N7yVGwukBTE9080ojXauK+VeLnMeQISI7z
-         weYWuYkFMeRqMUXIjrEEYfVBeEbZg/SYs+knL2xDyRCfjmEPGQ4zgDd1jjzqUpFoIt8h
-         ehTgZ2udZGIkTcDmBt2Bqu/+Z/BHl9nTXG8lvr98Rp8iTB/OOg93YoVFKFgNU6JD4KJX
-         4/vOHVuPNaq3VTsF/dJRxQJf2nhSc1w+Qef1tqHjUkgO89NOY9YDCPNWdvTi/jirJZhU
-         8o1pViX4kybaQYcnHzFxnY8w/Hrvfh11EZs/z7ZprRvT5xlrUPIKt5NEp+dG3EOkVLxc
-         Ihow==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788280280; x=1788885080;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=XW9CfwEeNR2HxevHoBsTeDR+70qKBEmNFf0UXTkk2bU=;
-        b=HZJO/OHp+GCOFeKLMT5qFS5OcS6SATWj+TRxTmV3ciEoMgaKXbpcyjp/XVDy1ZJVjj
-         o10SUec+CxriOC1z2rYpM0/ykTKZKibTtscAnxc6k6wDHPjqPVA371x7GdfHbyrbSovd
-         //XUYmNU27dJx4boIGAgYB41KsblWIG4JNLEa+DY5dDA1UfUYx+ndEpjyE4nexYKfgFF
-         OrEYNOT6tvZ3dkq6M8JLFEzC+UdDnfp5l5V7A0NPDsTkHCZuBtrhfwnLFZNg5Vcx1S5t
-         LJ6A1RgvP2Sfw4X4GxCYHqLAPAImvjV0WqhMEB60GonDjb1QIRFmk2nnZ6wYCJpnIS6d
-         CrpQ==
-X-Forwarded-Encrypted: i=1; AKwUvBxI4b2Q+uFOe9X1VU81Se3bkW4KvckY3i19BxlB2/NtaCUvMmOirdNbOIwbEuS0nBdH8YCABnvL9lnBnnIw@vger.kernel.org
-X-Gm-Message-State: AFuF++kdXSeTwis3kjabf+wjoqNdObqScPOmvWe1kJYWjePYnutY/uVf
-	Jy5Uw/fkHJ+3BEzs/+eH0CXX/dCFVQg+c+PiM6dmOWjNG/P8fhNdW9fguIVWWhoRXKWzdErnJvO
-	f7wS0zXuAVXr9PztSSvC1DjZIa5KyVryq4rmPP432yhwpIoozpQ19P6ZJmdeHIJCq5uulSAjfaQ
-	GNc0uF178BwVXsFzk7r64Y76EGxq++d1bV/aLRjUYp5r0=
-X-Gm-Gg: AYBFou1p8/lu5D5hhdF7e/m8SDg7SGInfnpjLY6h+o7BzbuOOlcs3fxGog6b2iiM9Ko
-	n2quFjD36aqF0OS/KsOXw0B7GSlr/QW0GtbZb2724m8HqfMHX3OPyLYYBS2QlR3NE8WSMdcrMGY
-	sZP3mPXDdJ+98NF/imirbME9Ot7AhvM5WHu3bxUD+yLvS0b6qijy73lqcpfg==
-X-Received: by 2002:a53:b111:0:b0:66c:ba49:1316 with SMTP id 956f58d0204a3-66f87458761mr2635208d50.10.1788280280245;
-        Tue, 01 Sep 2026 09:31:20 -0700 (PDT)
-X-Received: by 2002:a53:b111:0:b0:66c:ba49:1316 with SMTP id
- 956f58d0204a3-66f87458761mr2635174d50.10.1788280279650; Tue, 01 Sep 2026
- 09:31:19 -0700 (PDT)
+	dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b="qrxm04zy"
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id D1AC51BD0
+	for <linux-arm-msm@vger.kernel.org>; Tue,  1 Sep 2026 09:31:57 -0700 (PDT)
+Received: from [192.168.0.1] (usa-sjc-imap-foss1.foss.arm.com [10.121.207.14])
+	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 5A3DD3F85F
+	for <linux-arm-msm@vger.kernel.org>; Tue,  1 Sep 2026 09:32:01 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
+	t=1788280321; bh=hLe45cnDUnZxwdK4p4TDAGy82nU9hy3GkuXKLYRaHoU=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=qrxm04zyd5S4Ec2nIHG0blkDUNT91Xb+w4X8EfgrZRFLQfXU3njq3+9L8SIkhoPi1
+	 iMufUIM5hFq2j0iSqYjc67lFTFQi8VZPMpc5a67tLncXT4BxUId9MWwatPm+PavUkP
+	 /hKUhl5KAFRNMvdrcDi7prEdGvHo3umKlvCpptNo=
+Date: Tue, 1 Sep 2026 17:31:43 +0100
+From: Liviu Dudau <liviu.dudau@arm.com>
+To: Rob Clark <robin.clark@oss.qualcomm.com>
+Cc: dri-devel@lists.freedesktop.org,
+	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+	Maxime Ripard <mripard@kernel.org>,
+	Thomas Zimmermann <tzimmermann@suse.de>,
+	David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+	Dmitry Baryshkov <lumag@kernel.org>,
+	Abhinav Kumar <abhinav.kumar@linux.dev>,
+	Jessica Zhang <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>,
+	Marijn Suijten <marijn.suijten@somainline.org>,
+	Boris Brezillon <boris.brezillon@collabora.com>,
+	Steven Price <steven.price@arm.com>,
+	open list <linux-kernel@vger.kernel.org>,
+	"open list:DRM DRIVER for Qualcomm display hardware" <linux-arm-msm@vger.kernel.org>,
+	"open list:DRM DRIVER for Qualcomm display hardware" <freedreno@lists.freedesktop.org>
+Subject: Re: [PATCH] drm/gem: Drop ticket arg to lru_scan()
+Message-ID: <apb970Ep6EHHKpAq@e142607>
+References: <20260831174409.465181-1-robin.clark@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260824063627.3595610-1-harendra.gautam@oss.qualcomm.com>
- <20260824063627.3595610-2-harendra.gautam@oss.qualcomm.com>
- <2e998f75-bcf9-48b6-b9ac-52627d52d284@oss.qualcomm.com> <CAC-tS8D1Q+Qq_cuwJbc5jU3UiOEe03zqgrvbQ8VAksmPEiZE1A@mail.gmail.com>
- <2dcc0fc1-6e71-41cd-815b-bca5d3517a65@oss.qualcomm.com> <CAC-tS8DcSuhefOMwEzKdcAHrkjh450pG7bFjKkhbdRi0zHgdFQ@mail.gmail.com>
- <b7fd71fa-703d-4508-824d-a9816a1e7494@oss.qualcomm.com>
-In-Reply-To: <b7fd71fa-703d-4508-824d-a9816a1e7494@oss.qualcomm.com>
-From: Harendra Gautam <harendra.gautam@oss.qualcomm.com>
-Date: Tue, 1 Sep 2026 22:01:06 +0530
-X-Gm-Features: AcwNN1Uh9bB4S11ithQu0Q4MNVjip4sbUP9vJMJ7eTGO8R3TYdzVDu8Xors9K5s
-Message-ID: <CAC-tS8DO4Eph+obOU5jxwfX99gZ5Jat0PpD+CcpobJip9rGW2Q@mail.gmail.com>
-Subject: Re: [PATCH v3 1/9] ASoC: dt-bindings: qcom,qaif-cpu: Add binding
-To: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
-Cc: Prasad Kumpatla <prasad.kumpatla@oss.qualcomm.com>,
-        Srinivas Kandagatla <srini@kernel.org>,
-        Mark Brown <broonie@kernel.org>, Liam Girdwood <lgirdwood@gmail.com>,
-        Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>, Jaroslav Kysela <perex@perex.cz>,
-        Takashi Iwai <tiwai@suse.com>, linux-sound@vger.kernel.org,
-        linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org,
-        Sarath Ganapathiraju <sarath.ganapathiraju@oss.qualcomm.com>,
-        Kumar Anurag Singh <kumar.singh@oss.qualcomm.com>,
-        Mohammad Rafi Shaik <mohammad.rafi.shaik@oss.qualcomm.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Authority-Analysis: v=2.4 cv=f6p4wuyM c=1 sm=1 tr=0 ts=6a96fdd9 cx=c_pps
- a=S/uc88zpIJVNbziUnJ6G4Q==:117 a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10
- a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
- a=YMgV9FUhrdKAYTUUvYB2:22 a=EUspDBNiAAAA:8 a=oDxv99porRbPmQQDQpgA:9
- a=QEXdDO2ut3YA:10 a=nd2WpGr1bMy9NW-iytEl:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTAxMDE0NSBTYWx0ZWRfX2Rqo/NmHvIi6
- fvvDq2e+XxMx11fW07qQhQl4hUoMyAd+TYE37VU7ncaBzCIy4E2O3lgPp3PGA3XXReypIvKOL1i
- s3mQ44pi+p2ZG66wMnaeNfHQXxT1HvBwZ/TSpGSfF/d0A/Xcl64HsyFLClZ9/qd8GBA2Uy/NR4+
- OfpzqoSYpKcfe7eVPjQF0fEJEmjc9TXUmwWigITtNyP0CGp5Tu2+5b9GsT0He2KcLsuqgUbfeHQ
- 53pMLQdr6tAb+Tg6sDiIHk2h87gQKzfbamzIMdJsRS1br1269Uuu8zbj9L36JA1ab9TnT6lWp/T
- bIGU6FLv160ux/Il89oDCDsmtqgSMFsSALn2wIsz25JcYodfQlJ2S8AmpcQp2c0pHJHItwkbzlV
- 8jDVJxx0S8jhRqVji/plmqTY8JtgQqAyz9XXHmdC0G65t3j5Pl439HiIZBP9u986B7T/ryBO8Yo
- xgGMlW7+Y/x56ktm6kw==
-X-Proofpoint-ORIG-GUID: k3Lzw23M1aaGXhzI7fQaOzurKZIezVNm
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTAxMDE0NSBTYWx0ZWRfX19o7jcD9iDGA
- K/lOU7oxidTnXXahgbScZ979gBqDDodQTEP9vnpi3Tqp+TaNoQD2ClRE42jQsDrw9k5z3GBvE/A
- L9dCTK6W1nbSa0FDITVOnmvWdwtly3I=
-X-Proofpoint-GUID: k3Lzw23M1aaGXhzI7fQaOzurKZIezVNm
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-01_04,2026-09-01_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 malwarescore=0 priorityscore=1501 suspectscore=0
- impostorscore=0 spamscore=0 phishscore=0 lowpriorityscore=0 bulkscore=0
- adultscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
- definitions=main-2609010145
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <20260831174409.465181-1-robin.clark@oss.qualcomm.com>
 
-On Tue, Sep 1, 2026 at 8:26=E2=80=AFPM Krzysztof Kozlowski
-<krzysztof.kozlowski@oss.qualcomm.com> wrote:
->
-> On 01/09/2026 16:46, Harendra Gautam wrote:
-> >>>> The DT binding filename and compatible string do not match (qcom,qai=
-f-cpu.yaml vs qcom,shikra-qaif-cpu).
-> >>>> Usually DT binding filenames are aligned with the compatible string =
-for clarity.
-> >>>> Is there a reason for the naming mismatch?
-> >>> The filename reflects the controller; the compatible is
-> >>> variant-specific. This follows the same convention as
-> >>> qcom,lpass-cpu.yaml.
-> >>>>
-> >>
-> >> There is no compatible for controller and the only top-level compatibl=
-e
-> >> listed there is "qcom,shikra-qaif-cpu", so that is your filename.
-> >>
-> >> And I already asked about this in v1. Why does this have to be repeate=
-d
-> >> at v3?
-> > The QAIF hardware IP is the same across platforms, only the board
-> > integration details differ. The binding is meant to describe the IP
-> > generically, with board-specific compatibles like qcom,shikra-qaif-cpu
->
-> The binding does not describe the IP generically, because bindings are
-> not generic.
->
-> > used to distinguish variants. I had qcom,qaif-cpu as the generic
-> > compatible in v2 but removed it in v3 as I was not clear about the
-> > guideline. Could you please suggest the right approach for the
-> > compatible and filename in this case?
->
-> Same comment, literally as v1.
->
-> Filename should match compatible, as in this case since it is single
-> compatible, filename should be equal to the compatible. So first you
-> determine what is your compatible and then you copy paste that string
-> into the filename and $id path.
-Understood. Thanks for feedback, The filename should be
-qcom,shikra-qaif-cpu.yaml and the $id path should be updated to match.
-I will fix this in the next version.
--Harendra
->
-> Best regards,
-> Krzysztof
+On Mon, Aug 31, 2026 at 10:44:08AM -0700, Rob Clark wrote:
+> Commit 3392291fc509 ("drm/msm: Fix shrinker deadlock") dropped the only
+> use of the ticket arg, but at the time left drm_gem_lru_scan() unchanged
+> to avoid conflicts with in-flight pathor shrinker support.  This commit
+> is the followup to remove the unused arg.
+> 
+> Signed-off-by: Rob Clark <robin.clark@oss.qualcomm.com>
+
+With the panthor spelling fixed:
+
+Reviewed-by: Liviu Dudau <liviu.dudau@arm.com>
+
+Best regards,
+Liviu
+
+> ---
+>  drivers/gpu/drm/drm_gem.c              | 13 +++----------
+>  drivers/gpu/drm/msm/msm_gem_shrinker.c | 22 ++++++++++------------
+>  drivers/gpu/drm/panthor/panthor_gem.c  | 14 ++++++--------
+>  drivers/gpu/drm/panthor/panthor_mmu.c  |  5 ++---
+>  drivers/gpu/drm/panthor/panthor_mmu.h  |  3 +--
+>  include/drm/drm_gem.h                  |  3 +--
+>  6 files changed, 23 insertions(+), 37 deletions(-)
+> 
+> diff --git a/drivers/gpu/drm/drm_gem.c b/drivers/gpu/drm/drm_gem.c
+> index e3ed684ddcf2..15acb958ecd5 100644
+> --- a/drivers/gpu/drm/drm_gem.c
+> +++ b/drivers/gpu/drm/drm_gem.c
+> @@ -1656,8 +1656,7 @@ drm_gem_lru_scan(struct drm_device *dev,
+>  		 struct drm_gem_lru *lru,
+>  		 unsigned int nr_to_scan,
+>  		 unsigned long *remaining,
+> -		 bool (*shrink)(struct drm_gem_object *obj, struct ww_acquire_ctx *ticket),
+> -		 struct ww_acquire_ctx *ticket)
+> +		 bool (*shrink)(struct drm_gem_object *obj))
+>  {
+>  	struct drm_gem_lru still_in_lru;
+>  	struct drm_gem_object *obj;
+> @@ -1690,20 +1689,17 @@ drm_gem_lru_scan(struct drm_device *dev,
+>  		 */
+>  		mutex_unlock(&dev->gem_lru_mutex);
+>  
+> -		if (ticket)
+> -			ww_acquire_init(ticket, &reservation_ww_class);
+> -
+>  		/*
+>  		 * Note that this still needs to be trylock, since we can
+>  		 * hit shrinker in response to trying to get backing pages
+>  		 * for this obj (ie. while it's lock is already held)
+>  		 */
+> -		if (!ww_mutex_trylock(&obj->resv->lock, ticket)) {
+> +		if (!ww_mutex_trylock(&obj->resv->lock, NULL)) {
+>  			*remaining += obj->size >> PAGE_SHIFT;
+>  			goto tail;
+>  		}
+>  
+> -		if (shrink(obj, ticket)) {
+> +		if (shrink(obj)) {
+>  			freed += obj->size >> PAGE_SHIFT;
+>  
+>  			/*
+> @@ -1727,9 +1723,6 @@ drm_gem_lru_scan(struct drm_device *dev,
+>  
+>  		dma_resv_unlock(obj->resv);
+>  
+> -		if (ticket)
+> -			ww_acquire_fini(ticket);
+> -
+>  tail:
+>  		drm_gem_object_put(obj);
+>  		mutex_lock(&dev->gem_lru_mutex);
+> diff --git a/drivers/gpu/drm/msm/msm_gem_shrinker.c b/drivers/gpu/drm/msm/msm_gem_shrinker.c
+> index 9d2788f79ace..3514d5c84989 100644
+> --- a/drivers/gpu/drm/msm/msm_gem_shrinker.c
+> +++ b/drivers/gpu/drm/msm/msm_gem_shrinker.c
+> @@ -102,7 +102,7 @@ with_vm_locks(void (*fn)(struct drm_gem_object *obj),
+>  }
+>  
+>  static bool
+> -purge(struct drm_gem_object *obj, struct ww_acquire_ctx *unused)
+> +purge(struct drm_gem_object *obj)
+>  {
+>  	if (!is_purgeable(to_msm_bo(obj)))
+>  		return false;
+> @@ -114,7 +114,7 @@ purge(struct drm_gem_object *obj, struct ww_acquire_ctx *unused)
+>  }
+>  
+>  static bool
+> -evict(struct drm_gem_object *obj, struct ww_acquire_ctx *unused)
+> +evict(struct drm_gem_object *obj)
+>  {
+>  	if (is_unevictable(to_msm_bo(obj)))
+>  		return false;
+> @@ -133,21 +133,21 @@ wait_for_idle(struct drm_gem_object *obj)
+>  }
+>  
+>  static bool
+> -active_purge(struct drm_gem_object *obj, struct ww_acquire_ctx *ticket)
+> +active_purge(struct drm_gem_object *obj)
+>  {
+>  	if (!wait_for_idle(obj))
+>  		return false;
+>  
+> -	return purge(obj, ticket);
+> +	return purge(obj);
+>  }
+>  
+>  static bool
+> -active_evict(struct drm_gem_object *obj, struct ww_acquire_ctx *ticket)
+> +active_evict(struct drm_gem_object *obj)
+>  {
+>  	if (!wait_for_idle(obj))
+>  		return false;
+>  
+> -	return evict(obj, ticket);
+> +	return evict(obj);
+>  }
+>  
+>  static unsigned long
+> @@ -156,7 +156,7 @@ msm_gem_shrinker_scan(struct shrinker *shrinker, struct shrink_control *sc)
+>  	struct msm_drm_private *priv = shrinker->private_data;
+>  	struct {
+>  		struct drm_gem_lru *lru;
+> -		bool (*shrink)(struct drm_gem_object *obj, struct ww_acquire_ctx *ticket);
+> +		bool (*shrink)(struct drm_gem_object *obj);
+>  		bool cond;
+>  		unsigned long freed;
+>  		unsigned long remaining;
+> @@ -180,8 +180,7 @@ msm_gem_shrinker_scan(struct shrinker *shrinker, struct shrink_control *sc)
+>  		stages[i].freed =
+>  			drm_gem_lru_scan(priv->dev, stages[i].lru, nr,
+>  					 &stages[i].remaining,
+> -					 stages[i].shrink,
+> -					 NULL);
+> +					 stages[i].shrink);
+>  		nr -= stages[i].freed;
+>  		freed += stages[i].freed;
+>  		remaining += stages[i].remaining;
+> @@ -222,7 +221,7 @@ msm_gem_shrinker_shrink(struct drm_device *dev, unsigned long nr_to_scan)
+>  static const int vmap_shrink_limit = 15;
+>  
+>  static bool
+> -vmap_shrink(struct drm_gem_object *obj, struct ww_acquire_ctx *ticket)
+> +vmap_shrink(struct drm_gem_object *obj)
+>  {
+>  	if (!is_vunmapable(to_msm_bo(obj)))
+>  		return false;
+> @@ -250,8 +249,7 @@ msm_gem_shrinker_vmap(struct notifier_block *nb, unsigned long event, void *ptr)
+>  		unmapped += drm_gem_lru_scan(priv->dev, lrus[idx],
+>  					     vmap_shrink_limit - unmapped,
+>  					     &remaining,
+> -					     vmap_shrink,
+> -					     NULL);
+> +					     vmap_shrink);
+>  	}
+>  
+>  	*(unsigned long *)ptr += unmapped;
+> diff --git a/drivers/gpu/drm/panthor/panthor_gem.c b/drivers/gpu/drm/panthor/panthor_gem.c
+> index 54535bae2b0c..17408f832af3 100644
+> --- a/drivers/gpu/drm/panthor/panthor_gem.c
+> +++ b/drivers/gpu/drm/panthor/panthor_gem.c
+> @@ -1392,8 +1392,7 @@ panthor_gem_shrinker_count(struct shrinker *shrinker, struct shrink_control *sc)
+>  	return count ? count : SHRINK_EMPTY;
+>  }
+>  
+> -static bool panthor_gem_try_evict_no_resv_wait(struct drm_gem_object *obj,
+> -					       struct ww_acquire_ctx *ticket)
+> +static bool panthor_gem_try_evict_no_resv_wait(struct drm_gem_object *obj)
+>  {
+>  	/*
+>  	 * Track last locked entry for unwinding locks in error and
+> @@ -1479,8 +1478,7 @@ static bool panthor_gem_try_evict_no_resv_wait(struct drm_gem_object *obj,
+>  	return ret == 0;
+>  }
+>  
+> -static bool panthor_gem_try_evict(struct drm_gem_object *obj,
+> -				  struct ww_acquire_ctx *ticket)
+> +static bool panthor_gem_try_evict(struct drm_gem_object *obj)
+>  {
+>  	struct panthor_gem_object *bo = to_panthor_bo(obj);
+>  
+> @@ -1488,7 +1486,7 @@ static bool panthor_gem_try_evict(struct drm_gem_object *obj,
+>  	if (dma_resv_wait_timeout(obj->resv, DMA_RESV_USAGE_BOOKKEEP, false, 10) <= 0)
+>  		return false;
+>  
+> -	return panthor_gem_try_evict_no_resv_wait(&bo->base, ticket);
+> +	return panthor_gem_try_evict_no_resv_wait(&bo->base);
+>  }
+>  
+>  static unsigned long
+> @@ -1503,13 +1501,13 @@ panthor_gem_shrinker_scan(struct shrinker *shrinker, struct shrink_control *sc)
+>  
+>  	freed += drm_gem_lru_scan(&ptdev->base, &ptdev->reclaim.unused,
+>  				  sc->nr_to_scan - freed, &remaining,
+> -				  panthor_gem_try_evict_no_resv_wait, NULL);
+> +				  panthor_gem_try_evict_no_resv_wait);
+>  	if (freed >= sc->nr_to_scan)
+>  		goto out;
+>  
+>  	freed += drm_gem_lru_scan(&ptdev->base, &ptdev->reclaim.mmapped,
+>  				  sc->nr_to_scan - freed, &remaining,
+> -				  panthor_gem_try_evict_no_resv_wait, NULL);
+> +				  panthor_gem_try_evict_no_resv_wait);
+>  	if (freed >= sc->nr_to_scan)
+>  		goto out;
+>  
+> @@ -1523,7 +1521,7 @@ panthor_gem_shrinker_scan(struct shrinker *shrinker, struct shrink_control *sc)
+>  
+>  	freed += drm_gem_lru_scan(&ptdev->base, &ptdev->reclaim.gpu_mapped_shared,
+>  				  sc->nr_to_scan - freed, &remaining,
+> -				  panthor_gem_try_evict, NULL);
+> +				  panthor_gem_try_evict);
+>  
+>  out:
+>  #ifdef CONFIG_DEBUG_FS
+> diff --git a/drivers/gpu/drm/panthor/panthor_mmu.c b/drivers/gpu/drm/panthor/panthor_mmu.c
+> index e10dbd18d8cf..ab070bc74857 100644
+> --- a/drivers/gpu/drm/panthor/panthor_mmu.c
+> +++ b/drivers/gpu/drm/panthor/panthor_mmu.c
+> @@ -3133,8 +3133,7 @@ int panthor_vm_prepare_mapped_bos_resvs(struct drm_exec *exec, struct panthor_vm
+>  unsigned long
+>  panthor_mmu_reclaim_priv_bos(struct panthor_device *ptdev,
+>  			     unsigned int nr_to_scan, unsigned long *remaining,
+> -			     bool (*shrink)(struct drm_gem_object *,
+> -					    struct ww_acquire_ctx *))
+> +			     bool (*shrink)(struct drm_gem_object *))
+>  {
+>  	unsigned long freed = 0;
+>  	LIST_HEAD(remaining_vms);
+> @@ -3160,7 +3159,7 @@ panthor_mmu_reclaim_priv_bos(struct panthor_device *ptdev,
+>  
+>  		freed += drm_gem_lru_scan(&ptdev->base, &vm->reclaim.lru,
+>  					  nr_to_scan - freed,
+> -					  remaining, shrink, NULL);
+> +					  remaining, shrink);
+>  
+>  		mutex_lock(&ptdev->base.gem_lru_mutex);
+>  
+> diff --git a/drivers/gpu/drm/panthor/panthor_mmu.h b/drivers/gpu/drm/panthor/panthor_mmu.h
+> index 3522fbbce369..abc36e7204be 100644
+> --- a/drivers/gpu/drm/panthor/panthor_mmu.h
+> +++ b/drivers/gpu/drm/panthor/panthor_mmu.h
+> @@ -52,8 +52,7 @@ int panthor_vm_evict_bo_mappings_locked(struct panthor_gem_object *bo);
+>  unsigned long
+>  panthor_mmu_reclaim_priv_bos(struct panthor_device *ptdev,
+>  			     unsigned int nr_to_scan, unsigned long *remaining,
+> -			     bool (*shrink)(struct drm_gem_object *,
+> -					    struct ww_acquire_ctx *));
+> +			     bool (*shrink)(struct drm_gem_object *));
+>  int panthor_vm_prepare_mapped_bos_resvs(struct drm_exec *exec,
+>  					struct panthor_vm *vm,
+>  					u32 slot_count);
+> diff --git a/include/drm/drm_gem.h b/include/drm/drm_gem.h
+> index 8a704f6a65c1..ffa607c91aa2 100644
+> --- a/include/drm/drm_gem.h
+> +++ b/include/drm/drm_gem.h
+> @@ -616,8 +616,7 @@ drm_gem_lru_scan(struct drm_device *dev,
+>  		 struct drm_gem_lru *lru,
+>  		 unsigned int nr_to_scan,
+>  		 unsigned long *remaining,
+> -		 bool (*shrink)(struct drm_gem_object *obj, struct ww_acquire_ctx *ticket),
+> -		 struct ww_acquire_ctx *ticket);
+> +		 bool (*shrink)(struct drm_gem_object *obj));
+>  
+>  int drm_gem_evict_locked(struct drm_gem_object *obj);
+>  
+> -- 
+> 2.55.0
+> 
+
+-- 
+====================
+| I would like to |
+| fix the world,  |
+| but they're not |
+| giving me the   |
+ \ source code!  /
+  ---------------
+    ¯\_(ツ)_/¯
