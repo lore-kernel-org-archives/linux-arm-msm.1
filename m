@@ -1,48 +1,42 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6F74A2E2DD2;
-	Tue,  1 Sep 2026 08:42:18 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 454203128B6;
+	Tue,  1 Sep 2026 08:45:18 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788252139; cv=none; b=gRYnSx/UEdUP1uOdutojZOj4V6Ndg+10HaGOKRV0EVWNw5JPHrNw4XHV/9VX17zestlG7Gw13KfoXMriMtHl9EmhFxD1rLJwVcu0hpSzRszUNJevr79hAL6/R6OtSMsvzKuSDSWZ9aYd3sg34xJ0qZ1ExaVjVD14zOeM0Fr3SdU=
+	t=1788252322; cv=none; b=HJ7t3sQ8H+E2NtdZMexRdLXVgDOaHTQuFKXhzdB5QipG5FPaq/unb8Nv0FEze6LUezeQZFTlgrAc1ECQUNkatPaSeLFu7DvRx1XM5UnQsp9j/LprTwqoJ0hMo8PMxvgBeBOX0UXMH8Mhf8BDtkJIiId2yYDpH8Z+z2+45Of5Uf8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788252139; c=relaxed/simple;
-	bh=suI7VOOUJ+S8ZmFBV8++cFxT4yO04pkfs1fAeeNMO1E=;
+	s=arc-20240116; t=1788252322; c=relaxed/simple;
+	bh=uQSoVjcK+lMlmoA/C9r/QFPG5Au4WnyAPBA+MTeASWA=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=nJe1xrtdJ8ZaHcSZ9nAfRjnLKlfqKO+wJ7hnXcEwpZo2QOcmPl4EjfQDhOLlXVy4scqpl5Oryzt7SzEnM3OZZMJP+16r5iSQx3WfaeVtTxrkbHBkp21B0S8PhMy/bknD5yrzZp04/7huQWCnH19pHhf534nVRz9cS+aCyycj5Gg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=o3fC9SEb; arc=none smtp.client-ip=100.103.45.18
+	 Content-Type:Content-Disposition:In-Reply-To; b=Ukj0HcI5ceJUnvKCpKPFxKljPEPl2k0ln+ptJH83vd0LgqoaMkUnxa2b2hM9fRiLejfY43YUJxeOGYU8L3xz6FhVD9sW+XZCsy2TljcChc9+HTWMHjjIcKs5BCp8xwfUZyt2JAppyYac75RXb5R7FOEbqmfnvG/xgwr3PDiEoRg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=NqC/HOVX; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="o3fC9SEb"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3B8B41F000E9;
-	Tue,  1 Sep 2026 08:42:16 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="NqC/HOVX"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 079141F000E9;
+	Tue,  1 Sep 2026 08:45:16 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1788252138;
-	bh=R7W+a2UbB22q8xIFgqQ71VC8d3erwcb0D9ctEbZEfvI=;
+	s=k20260515; t=1788252318;
+	bh=ZI6RhrNjelrLJnYNZnIRhgWOUWb2weSr68SncbR1Pzg=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=o3fC9SEb1fgtnpV8N6JwNhkg505uC9y5v+JTfWLjYtch0TFlv/6D1sbp/5jujKDWv
-	 b9PerdM0AV9IdN/aX4l+gj7XO8aAi+teDUY3Jk2vw2X3Lh8w/qeOpn5FmXmsYSgali
-	 EIHkROwuCmpyrXnrMnOWt3//4U7RgzaHtDj6Q/HxHC8iwTJAlUfCO6qKfYVs5chr/6
-	 K/Qe0fkZQq3UfI1iyPar111jKsEh0go7c2COtcIlhFSGF8olqon+Z9EDj1LF19qtlv
-	 rXZiQBt8TlQa9drttHDSSaQVLBe1LBFNUJqL/QK1veEPIpdmaqDXt2/nNhgbNiBlII
-	 uqkfU41pHlEUw==
-Date: Tue, 1 Sep 2026 10:42:14 +0200
+	b=NqC/HOVXbR1yJWMxBgaowTRTVlFL+X2Dhgb6FWn2wedonvxshcgL1w2DikA3S1DWe
+	 59aScJCTYoxx9CAwZ1UaD3jWunwDo9wyt+squEc1HW9s1nwLf3uBFzq7v97XvQUsHw
+	 VH/Bvu5yg1Ia0tB5D6+3x9QGgH1zxRrvhmKpMFD7jwFIeA6KwFVQ+y8nrW/c/OlRT4
+	 CzXdc7ZvmhTfiBPt5gR2iNHIor/Sc07A5KdAL6ZyOJ/aohfu+mVu0v1pu1ZvRP4qUV
+	 P9a/MKwSon924J/nZZaa+FRUMlNlTLPrRt6bazqZikRYnlWvb7AbsRDq4GTVf/oIRW
+	 Kowe33XfVkMSg==
+Date: Tue, 1 Sep 2026 10:45:14 +0200
 From: Krzysztof Kozlowski <krzk@kernel.org>
-To: Sushrut Shree Trivedi <sushrut.trivedi@oss.qualcomm.com>
-Cc: Vinod Koul <vkoul@kernel.org>, 
-	Neil Armstrong <neil.armstrong@linaro.org>, Rob Herring <robh@kernel.org>, 
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
-	Bjorn Helgaas <bhelgaas@google.com>, Lorenzo Pieralisi <lpieralisi@kernel.org>, 
-	Krzysztof =?utf-8?Q?Wilczy=C5=84ski?= <kwilczynski@kernel.org>, Manivannan Sadhasivam <mani@kernel.org>, 
-	Bjorn Andersson <andersson@kernel.org>, Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>, 
-	Bartosz Golaszewski <brgl@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>, 
-	linux-arm-msm@vger.kernel.org, linux-phy@lists.infradead.org, devicetree@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, linux-pci@vger.kernel.org
-Subject: Re: [PATCH v2 2/5] dt-bindings: PCI: qcom,shikra-pcie: Document the
- Shikra PCIe Controller
-Message-ID: <20260901-silent-pearl-shrew-c63a16@quoll>
-References: <20260831-shikra-upstream-v2-0-406661d75afa@oss.qualcomm.com>
- <20260831-shikra-upstream-v2-2-406661d75afa@oss.qualcomm.com>
+To: Zhangfei Gao <zhangfei.gao@oss.qualcomm.com>
+Cc: Georgi Djakov <djakov@kernel.org>, Rob Herring <robh@kernel.org>, 
+	Conor Dooley <conor+dt@kernel.org>, shengchao.guo@oss.qualcomm.com, 
+	bartosz.golaszewski@oss.qualcomm.com, linux-arm-msm@vger.kernel.org, linux-pm@vger.kernel.org, 
+	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH] dt-bindings: interconnect: qcom-bwmon: add nord
+ cpu-bwmon compatible
+Message-ID: <20260901-skilled-frisky-serval-1cadf5@quoll>
+References: <20260831090134.585588-1-zhangfei.gao@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -51,49 +45,16 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
-In-Reply-To: <20260831-shikra-upstream-v2-2-406661d75afa@oss.qualcomm.com>
+In-Reply-To: <20260831090134.585588-1-zhangfei.gao@oss.qualcomm.com>
 
-On Mon, Aug 31, 2026 at 12:56:02PM +0530, Sushrut Shree Trivedi wrote:
-> Add a dedicated schema for the PCIe controller found on the Shikra
-> platform.
+On Mon, Aug 31, 2026 at 05:01:34PM +0800, Zhangfei Gao wrote:
+> Document the qcom,nord-cpu-bwmon fallback compatible used by the
+> CPU bandwidth monitors on Nord.
 > 
-> Shikra controller supports upto PCIe Gen3 but the PHY is
-> only capable of Gen2, hence the max link speed  is limited
-> to Gen2 to avoid link-up failures.
-> 
-> Signed-off-by: Sushrut Shree Trivedi <sushrut.trivedi@oss.qualcomm.com>
+> Signed-off-by: Zhangfei Gao <zhangfei.gao@oss.qualcomm.com>
 > ---
->  .../devicetree/bindings/pci/qcom,shikra-pcie.yaml  | 218 +++++++++++++++++++++
->  1 file changed, 218 insertions(+)
-> 
 
-What is the difference in the binding against Eliza? IOW, why does this
-need a separate file unlike Eliza?
-
-...
-
-> +            reset-names = "pci";
-> +
-> +            power-domains = <&gcc GCC_PCIE_GDSC>;
-> +
-> +            max-link-speed = <2>;
-> +
-> +            operating-points-v2 = <&pcie_opp_table>;
-> +
-> +            pcie_opp_table: opp-table {
-> +                    compatible = "operating-points-v2";
-
-Are you sure dt-check-style does not complain?
-
-> +
-> +                    /* GEN 1 x1 */
-> +                    opp-2500000 {
-> +                            opp-hz = /bits/ 64 <2500000>;
-> +                            required-opps = <&rpmpd_opp_low_svs>;
-> +                            opp-peak-kBps = <250000 1>;
-> +                            opp-level = <1>;
-> +                    };
-> +
+Acked-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
 
 Best regards,
 Krzysztof
