@@ -1,72 +1,143 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 84DBD46C859;
-	Tue,  1 Sep 2026 08:08:49 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 998E542E42F
+	for <linux-arm-msm@vger.kernel.org>; Tue,  1 Sep 2026 08:12:55 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788250130; cv=none; b=DHpDRpMOGurDYw7FpFBr8V1FmmX66m8HMFAFsxwrw4iZ0JabxnuMF1nLE3Tw7FEj/4N3JAWDWtOw0+JrUZJrhfLKBqpU0dm6O9IsgUWtV9d8ojTyYad1XwEXUuEYqAPCR41V+nAoS3FXNqKeWyrMK3C6ACAZacnsClp2DpzAJ5Y=
+	t=1788250376; cv=none; b=K6SWDM0h16fkW7YsvtU6JJckL3zL80Qkgtgd0VewO08Ee3aReSpRavYj/y9uI8dHrHJVo92SY0JxO/kY6QBrxKlwrhcklg1580TAK+WwZitj9G7vibZTp/MYY0WwBB3tL/ZU4lVivOW4G4MpHH9aW1WX05Boq3M/yo5j3RyTBM0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788250130; c=relaxed/simple;
-	bh=xZixmp/hIu40rQ5K9LjhmakmQkvMqsCx6HmvxiWv9zg=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=engrsfCHRkVvDLUDXkfm1WGAroZfyZLfCanv5AV++HRnXEWU1rLXpwyl2NQmhINtqJcu60t4vphnM+ZrheUYcJLUYuzv5yoV2xERcrvWbDeKkwI9D3vl2E6P7EqcPPjget3jRcGfunLVk54/kBcRdXEgKUc9OPn3bScVbVPg9tk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=kWklQy1L; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1788250376; c=relaxed/simple;
+	bh=UKXw3nlhzFxoxJKUzXxgUkHYXWhUvYau+KO/Tskao8Q=;
+	h=From:In-Reply-To:MIME-Version:References:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=kJoUYrndGtsZWpiXRojHVbe9rgDj7IBmbmnAmQgY0wbPbcozvhyLINQ2Ys/hwhchHS+UNhZ0W2djeyPa3ybvyFRZf9fRqm7zmVH6K/A3tYPxk1cRtaguVGZZDhZxnV7wKn5AfRV32xYH113GnJX08c0US2JcbE2mD5rGDu01QCs=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=DGSR4wr7; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="kWklQy1L"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7583B1F000E9;
-	Tue,  1 Sep 2026 08:08:44 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="DGSR4wr7"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 69E9A1F00A3F
+	for <linux-arm-msm@vger.kernel.org>; Tue,  1 Sep 2026 08:12:55 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1788250129;
-	bh=Ohpib62LZWXUeibRpn+IOxerCltjttaZcpi6tQkXmGA=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=kWklQy1LpvHETxUBsg/vGzo+L3C+obYX0PKYmcM6G/9yl6jaG5VV+LLJXQtxrfib6
-	 3qo5Eb6fv814iG/12mc3ZXrQGC+L9R87cv04xtLVl0cyW2TEiuZhJy0Q8WaYdx7j1Y
-	 IORN/J7Y4IBQJMXpHQEu7bkB4Zj5U9wQmcaRpObCVf+T3sDJ4XzFPjIEAMf+/VnMAi
-	 g5lVVDxqzbFFrzaj5+no73rD0uuj97wxAWeeCz3HUikiMI1udf9JxTMwmoH6+hBzY5
-	 dE0SttwOhDpDa+U/nhL8KXAs8XsL3ZZbsCXcRdMBgHnPPtjobZYjtaqz06ZU7DJ7Kd
-	 LoCDJjOj7kbSQ==
-Date: Tue, 1 Sep 2026 10:08:30 +0200
-From: Manivannan Sadhasivam <mani@kernel.org>
-To: Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>
-Cc: Bjorn Helgaas <bhelgaas@google.com>, 
-	Ilpo =?utf-8?B?SsOkcnZpbmVu?= <ilpo.jarvinen@linux.intel.com>, Jingoo Han <jingoohan1@gmail.com>, 
-	Lorenzo Pieralisi <lpieralisi@kernel.org>, Rob Herring <robh@kernel.org>, 
-	Jeff Johnson <jjohnson@kernel.org>, Bartosz Golaszewski <brgl@bgdev.pl>, 
-	Krzysztof =?utf-8?Q?Wilczy=C5=84ski?= <kwilczynski@kernel.org>, linux-pci@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	linux-arm-msm@vger.kernel.org, mhi@lists.linux.dev, linux-wireless@vger.kernel.org, 
-	ath11k@lists.infradead.org, qiang.yu@oss.qualcomm.com, 
-	Krishna Chaitanya Chundru <krishnac@codeaurora.org>
-Subject: Re: [PATCH v5 6/6] PCI: qcom: Enable ASPM disabling during link
- retraining
-Message-ID: <jdch2j3vcjsr2f4u7jhiazuotwqu6pon4xlvhzuhrzpzjhmkkb@7zzy2autzbmo>
-References: <20260819-bwscale-v5-0-6dea79786b37@oss.qualcomm.com>
- <20260819-bwscale-v5-6-6dea79786b37@oss.qualcomm.com>
+	s=k20260515; t=1788250375;
+	bh=HBmpv/kkFlJED2xyi2We3aIip3PLbNhKdHR6adYaq6w=;
+	h=From:In-Reply-To:References:Date:Subject:To:Cc;
+	b=DGSR4wr7vG4DOE5LQp5fXQLm22woEM2CJP7IqR5xydptbatSxoFgcA5Oj+mgGQXkE
+	 0rkMOshXkyt81tVbP8LnOobbQrV00XivAOst3JT66iN0rgiSAYSJ1AfNb4IWnpTf8t
+	 zwZ1F76sH2qxug++ZQSfAPNNEz1xuFsbQwiB0sTmfuRbzD/P4g1ySp7oNaQbdagWXK
+	 l+UEuKr7/avi6Eid6+VbdhZ0Fg+XRzaTCSovd67CWvHWjWyy4uGzWn0YIcIIgtbLw+
+	 WLv/v7b9nwcdctPj+0Yo2yyxIzNnPlPJrYI1Met9lPR6UV9fVYAz1T9CJ2MA4V7lFF
+	 h6lGYmG8CEVgg==
+Received: by mail-lf1-f41.google.com with SMTP id 2adb3069b0e04-5b4ab40d839so4311592e87.3
+        for <linux-arm-msm@vger.kernel.org>; Tue, 01 Sep 2026 01:12:55 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AKwUvBxyv3+V+73wPNqMiSIj7jgj9iyBeWWRvn4Y+tlOv4JuHWf+gkHpjpSDBSLJpTfhSaGOcHO6RYfgieGiQmYV@vger.kernel.org
+X-Gm-Message-State: AFuF++m/le3i8bYp8Y8EUU2bVTCc1RPl0q7L2fiL7EyXuyKyVJNvSnSl
+	Ih79uDRSYY/M1gRAq7STF8U9YerxH+s1p3/d36h24f9ikw1QFEqm9Wv0McGVmKk8Yfld6UDS8xF
+	ZhDDPkE94vEhnguAWRVAxO4hkZPUdXEYrAwq40KlN3Q==
+X-Received: by 2002:a05:6512:234b:b0:5b4:adb1:b25b with SMTP id
+ 2adb3069b0e04-5b5fe0d8420mr2844144e87.14.1788250373694; Tue, 01 Sep 2026
+ 01:12:53 -0700 (PDT)
+Received: from 969154062570 named unknown by gmailapi.google.com with
+ HTTPREST; Tue, 1 Sep 2026 01:12:52 -0700
+Received: from 969154062570 named unknown by gmailapi.google.com with
+ HTTPREST; Tue, 1 Sep 2026 01:12:52 -0700
+From: Bartosz Golaszewski <brgl@kernel.org>
+In-Reply-To: <20260827125906.GJ770273@google.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <20260819-bwscale-v5-6-6dea79786b37@oss.qualcomm.com>
+References: <20260803-arm-psci-system_reset2-vendor-reboots-v24-0-889281373870@oss.qualcomm.com>
+ <20260803-arm-psci-system_reset2-vendor-reboots-v24-4-889281373870@oss.qualcomm.com>
+ <CAPx+jO9QE_KG8BbfnMLTebDpGDj7OSpPDtgc9uTBGZCDJeLu_w@mail.gmail.com>
+ <CAMRc=Mezpj4A7o00C9hhs97kdA5Q+FZKTLRbDM+fR8qr0xCCqw@mail.gmail.com> <20260827125906.GJ770273@google.com>
+Date: Tue, 1 Sep 2026 01:12:52 -0700
+X-Gmail-Original-Message-ID: <CAMRc=MduBgkP4K3yabbDbZicWyb9WWqmF=yUqo+WHocE6hpiLQ@mail.gmail.com>
+X-Gm-Features: AcwNN1URolqPxNp7OBkDyFKCbmiVpB4IqtdYvYItWVcsvGzePxbvMEDVrJj876Q
+Message-ID: <CAMRc=MduBgkP4K3yabbDbZicWyb9WWqmF=yUqo+WHocE6hpiLQ@mail.gmail.com>
+Subject: Re: [PATCH v24 04/12] mfd: psci-mfd: Add PSCI MFD driver for
+ cpuidle-psci-domain cell
+To: Lee Jones <lee@kernel.org>
+Cc: Ulf Hansson <ulf.hansson@oss.qualcomm.com>, Lorenzo Pieralisi <lpieralisi@kernel.org>, 
+	Arnd Bergmann <arnd@arndb.de>, Bjorn Andersson <andersson@kernel.org>, Sebastian Reichel <sre@kernel.org>, 
+	Rob Herring <robh@kernel.org>, Souvik Chakravarty <Souvik.Chakravarty@arm.com>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Andy Yan <andy.yan@rock-chips.com>, 
+	Matthias Brugger <matthias.bgg@gmail.com>, Mark Rutland <mark.rutland@arm.com>, 
+	Conor Dooley <conor+dt@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>, 
+	John Stultz <john.stultz@linaro.org>, Moritz Fischer <moritz.fischer@ettus.com>, 
+	"Rafael J. Wysocki" <rafael@kernel.org>, Daniel Lezcano <daniel.lezcano@kernel.org>, 
+	Christian Loehle <christian.loehle@arm.com>, Ulf Hansson <ulfh@kernel.org>, 
+	Pavan Kondeti <pavan.kondeti@oss.qualcomm.com>, Sudeep Holla <sudeep.holla@kernel.org>, 
+	Florian Fainelli <florian.fainelli@broadcom.com>, Krzysztof Kozlowski <krzk@kernel.org>, 
+	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>, 
+	Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>, Andre Draszik <andre.draszik@linaro.org>, 
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>, 
+	Kathiravan Thirumoorthy <kathiravan.thirumoorthy@oss.qualcomm.com>, linux-pm@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org, 
+	linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
+	mfd@lists.linux.dev, Srinivas Kandagatla <srini@kernel.org>, 
+	Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>, 
+	Shivendra Pratap <shivendra.pratap@oss.qualcomm.com>, Bartosz Golaszewski <brgl@kernel.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On Wed, Aug 19, 2026 at 06:55:57PM +0530, Krishna Chaitanya Chundru wrote:
-> Set the disable_aspm_for_retrain flag in qcom_pcie_host_init() to ensure
-> ASPM is disabled during link retraining operations. This prevents potential
-> issues with link state transitions during bandwidth scaling on Qualcomm
-> PCIe controllers.
-> 
+On Thu, 27 Aug 2026 14:59:06 +0200, Lee Jones <lee@kernel.org> said:
+> On Wed, 26 Aug 2026, Bartosz Golaszewski wrote:
+>
+>> On Fri, 21 Aug 2026 14:59:49 +0200, Ulf Hansson
+>> <ulf.hansson@oss.qualcomm.com> said:
+>> > On Mon, Aug 3, 2026 at 11:45=E2=80=AFAM Shivendra Pratap
+>> > <shivendra.pratap@oss.qualcomm.com> wrote:
+>> >>
+>> >> PSCI has multiple kernel consumers, such as cpuidle-psci-domain.
+>> >> Currently, both the PSCI core driver and cpuidle-psci-domain bind
+>> >> directly to the same PSCI node "arm,psci-1.0". Additional consumers, =
+if
+>> >> introduced, would also need to bind in the same way, leading to sever=
+al
+>> >> drivers attached to a single device node.
+>> >>
+>> >> Introduce a PSCI MFD driver that binds to "arm,psci-1.0" and register=
+s
+>> >> PSCI child cells. As the first user, register cpuidle-psci-domain as =
+a
+>> >> child cell.
+>> >
+>> > I don't think PSCI should be modeled as an MFD device with childrens.
+>> >
+>> > Instead, this looks rather like a better fit for the auxiliary
+>> > bus/driver. Please consider using that instead.
+>> >
+>>
+>> Hi Uffe!
+>>
+>> Since I was the one to suggest MFD - would you mind providing more argum=
+ents
+>> in favor of your preferred option?
+>>
+>> My reasoning for MFD was that it is indeed a device that provides multip=
+le
+>> functionalities, of which cpuidle is not really he main one even though =
+it's
+>> currently the only driver binding to this node.
+>>
+>> In any case, we'd need a "core" driver binding to the psci node and with
+>> multiple auxiliary devices with their own drivers, we'd end up reimpleme=
+nting
+>> MFD.
+>
+> Ulf could be correct.
+>
+> MFD is usually reserved for real devices, whereas the aux is a little
+> more loose.  Please consider it as an option.
+>
 
-Is it really a controller requirement or a device quirk?
+My point is: if you start registering auxiliary devices from a "core" platf=
+orm
+driver based on real child OF nodes then you're basically re-implementing M=
+FD.
 
-> Signed-off-by: Krishna Chaitanya Chundru <krishnac@codeaurora.org>
+At that point you're better off just using the existing MFD infrastructure.
 
-You need to use OSS email.
-
-- Mani
-
--- 
-மணிவண்ணன் சதாசிவம்
+Thanks,
+Bartosz
