@@ -1,63 +1,63 @@
-Received: from mail-qk1-f170.google.com (mail-qk1-f170.google.com [209.85.222.170])
+Received: from mail-qk1-f169.google.com (mail-qk1-f169.google.com [209.85.222.169])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 537CD3C1F46
-	for <linux-arm-msm@vger.kernel.org>; Tue,  1 Sep 2026 01:37:11 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.222.170
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8D8F036F90A
+	for <linux-arm-msm@vger.kernel.org>; Tue,  1 Sep 2026 01:37:12 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.222.169
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788226633; cv=none; b=Y09GEHHP2KDvZ6W0Fxp3k5Fy67xTeHtLgOEezXOWHrQ9U0MmBebeYYeviCTa9uoUqGfcOs3zIaxYmhCXEuOYOsep7ThJJuH8VYBVX5cJC7B1pEBgJ1vumiay472UBwNHDCnTIV1qmMcJhPjuLD8HeDa+g1XvDSPyzT+CgYEirv4=
+	t=1788226635; cv=none; b=KZVQVnjF6L0BrAKkuHqJNVIDXOzULgUADaVuuECeipHS6uabfeP30CJ+aJSTOiIGMd950S3ASrfwdXNLn85JmxwUBokt6/r8GOdpI03mVvpBc9vJ+qgfvAhf0RC6BivUdIddvVTfhc5/DuHvv+lfTYXsr4Xi8X26KRQLPMFIz9Q=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788226633; c=relaxed/simple;
-	bh=QInaDatlwxp7NEj4/bdLBqsC3UrTgGWJ6q0lyU7RRsA=;
+	s=arc-20240116; t=1788226635; c=relaxed/simple;
+	bh=F4uRNuOP+2KFkvrPkqUx+q/oV97b0GVrD9D00eeSPPg=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=YQd/PyLb5/DS+l5f2abcloS1+DqnEnYRko3yIbMiTFVAyfLsrw2qJNX8e18HKX0bMaeFMO97k9yzwYs/RtW1ALvf91lOq5Xn5Pncgo6qv5ICWF1h99dlLYIlIPy5+8U9cuCNZlA9bgNUu8Myqh4By9gL+7WcMYhvgmxbeZk/z44=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=riscstar.com; spf=pass smtp.mailfrom=riscstar.com; dkim=pass (2048-bit key) header.d=riscstar-com.20251104.gappssmtp.com header.i=@riscstar-com.20251104.gappssmtp.com header.b=fk4JzsAM; arc=none smtp.client-ip=209.85.222.170
+	 MIME-Version; b=ZWD9b5VGDooZRjouGO4nDZiUWiWNr1wUavDfSTmU72BtxOwnoublvHFm+Mrf8Gn3rrN70slPp9cjsDsGuIFwR9ujdCHN0w1nxJI8wV10PlDoiXR2kkv0q54AOnvDXlNQ9Qcrt4+GA4rFRWV9qIGvMTgi4A5G7FRlmOO+92NBT2I=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=riscstar.com; spf=pass smtp.mailfrom=riscstar.com; dkim=pass (2048-bit key) header.d=riscstar-com.20251104.gappssmtp.com header.i=@riscstar-com.20251104.gappssmtp.com header.b=wDzHuxLU; arc=none smtp.client-ip=209.85.222.169
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=riscstar.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=riscstar.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=riscstar-com.20251104.gappssmtp.com header.i=@riscstar-com.20251104.gappssmtp.com header.b="fk4JzsAM"
-Received: by mail-qk1-f170.google.com with SMTP id af79cd13be357-936c02e58dfso36379685a.3
-        for <linux-arm-msm@vger.kernel.org>; Mon, 31 Aug 2026 18:37:10 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=riscstar-com.20251104.gappssmtp.com header.i=@riscstar-com.20251104.gappssmtp.com header.b="wDzHuxLU"
+Received: by mail-qk1-f169.google.com with SMTP id af79cd13be357-9391e3b21fbso244484185a.2
+        for <linux-arm-msm@vger.kernel.org>; Mon, 31 Aug 2026 18:37:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=riscstar-com.20251104.gappssmtp.com; s=20251104; t=1788226629; x=1788831429; darn=vger.kernel.org;
+        d=riscstar-com.20251104.gappssmtp.com; s=20251104; t=1788226630; x=1788831430; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=HPcJzHW6TuSLOdHwhvKpqTa7MZ2jOufBeABZfucpX8E=;
-        b=fk4JzsAMDPOlXYxqPBYlfYn7Riq7QYWJ83q7GXFWnrjAz9EViiS9mpHtR1m9iAy+pA
-         gsjNKwqG4aYdfv+ubvkOgQ7hxFlGIDhCxdVAAQbaq3xs63NwTGODQYy1G1bOvNnl1dgc
-         A1X+CeHzM9FzvvtRdpfq5+klzzpxe8p/UVIpixKJCYKLNmdLqAZnOJbEG/pF3Gx5TVs+
-         nUQpFZi3rXQRTRCPCxJbf++dJp9ZgGq+TkArnuDcBSCwHxCS83wd1mo9apGIGoD4YLeW
-         tABfq5Balmhzn3jwgAaIuMfsArcx894aiKediqYwe3Uul+1OdzYZT+oT0a/ZZSliEWFY
-         6wGw==
+        bh=YYcquwxkbINl1+Lmd2DxlHXKbpatPe7WMleZZ+FNZlg=;
+        b=wDzHuxLUAoefo/t1RKoWQOp1IiVx1dfelzbfSxBPUrynU/Mpd0766R19as1KDm0pXh
+         XxGKxlnFVnayAH2CAFuJb+aBnvmssmcAmtjLRaFX6h+WWZ8rI9BfU7/FCjugLBoMfbZx
+         OpaIasbYpWm9d6HPZxQXApm5uBzPmwMFF/Dgp/GOAY8pZL02KR84NwifC7gt5FLqE1Zb
+         1xTM5VVTpOF6MuRXOvleeLC1d7LQw6+YtWVUDASK9XlIgST/alOCs73Ofg0P+J8ddDoU
+         av9iRMqMKmKKNmoa1WVG1dU4bl43aeyhm/cS/xwP7fZrLOp6YT5qJwTSMdFY2rqzlFj2
+         HwYw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788226629; x=1788831429;
+        d=1e100.net; s=20251104; t=1788226630; x=1788831430;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=HPcJzHW6TuSLOdHwhvKpqTa7MZ2jOufBeABZfucpX8E=;
-        b=dFmVadnF5PTnHwFihFjFn30RJz9EFy8fCq1LxnMf5xuvhS2L09tf5HAuTdMFukUHMg
-         llbGSTc1kSnuNLtEYCC+Tv31S8x30+2YXWHXY75/ctoz3XsbwdBIheGGcGbZiYsRjLsP
-         MBw/yWno19c99pI/vUdAMk3/T/dcaTeACUkc00zyzLJFsdyA0EAUXbPwADAfQZEXDM0l
-         15eAISVpUHrJP4m8yQGIzTUbPFS3NuRJNc7hT5n26BBHwpk8ZQbif104YeX16Py4WxTf
-         ZUGnAhoxhLjxm2QDiyfbNzmUNdf4XA9e3hMtIvEYxvvIfXH8FkXzokCo1ciLvKQZ5xAj
-         wMyw==
-X-Forwarded-Encrypted: i=1; AHgh+RoB+B7LCWReCjBT4gnWyI6apWqX33RbCNfcJoHujxbvImvOquvMszJDLI6h+1UjNu9HtpSO4LELqp7FimS5@vger.kernel.org
-X-Gm-Message-State: AFuF++kzK3WDOcRswmvqFk0j18c83PNJFkNyrzlsyue4PZl/ob9L3ksb
-	JgZc6omdsqDNoc1tmDmgT9NuZuBBxZAOyFrNrbpfmQ98qZpPXEOHGXPqCdGpZuhL964=
-X-Gm-Gg: AR+sD10mr8pcZGV4//hyTGmYq3daBtwgypeFOnpN7EDkLpgxOICCAi7WQq2P+u6w/Zu
-	7ZpGTsuWQ8SJsHIdGgOPN/mBwQqWN3ELHpIe9gP1rX9w+bDlYhXr9YbJ73oJd3DQheh80i9bFHR
-	6VMUvuNNqd+UP4JIsT4UdVOkrEzEVhQ5PfDTcowwArRj8t3hxIhy74GtcCki36QAnqeUd2EP166
-	P5RaC6nxYaExSh+Gagyuy0YHJFFE1wzew+cxNhy33CLmLPpAB2R1K6Hxn8CpufJjsJde1U/rb6V
-	4nOx6l/DxIOZlj1iamM+HMreO0uuyWFINmYAb36LC6hXxrm28fBM6F60+rrFKsiHMVuNenfgRQd
-	MAHuAeFU34nriT0WQfxo5WStTtgdFlEmOnjc+nDjNugjqqJb1gG73R8cTq6zNTTNQlQayuolazf
-	AoO3xf/AkBsCLL+q22t4JxF1RXix1PlsGOIeXY28H+ivHeV1X5KqN/+PhoJAVSdKjG
-X-Received: by 2002:a05:620a:269b:b0:92e:e1d1:49dd with SMTP id af79cd13be357-9391390a15cmr3286256985a.21.1788226629067;
-        Mon, 31 Aug 2026 18:37:09 -0700 (PDT)
+        bh=YYcquwxkbINl1+Lmd2DxlHXKbpatPe7WMleZZ+FNZlg=;
+        b=c33TooNSyRMjt7Q2EmYxLeHdlr6JbIrNt5aI3yIxmT2fGu58qfZ8KuTv6AtyhOe3Tp
+         idgdd4GwqmsdjnMj4F3jkdgTWS4yiTsFA/QteeEqkuP8t5bxAzw42tyS1rfgIudADCqh
+         dIppS/C6y0KYYu1Je29zucT9/87YKU+ZZHi3JrajHEp903KzEzDpVw3Re2secswk3DM1
+         zV1DfqI3NFp/39bmZWmnqkclxMxgcQVhdMAs7RTgQOfEYtVl1cYeoGILHQtUZ3IgljRn
+         dKUTNzXhwDI/fYY+93cKqt8OGv+2Eteml4uB/OLyAP09AVUtXeNrhe//t0KfGzmdGQXt
+         b3Jg==
+X-Forwarded-Encrypted: i=1; AHgh+Rqo20KsA/9eIZoXrNv90oc2klWjQSDV83SbLDlj6IIFLTQ2E6BdkrHt5VFkwPB32le8KH2q+V8vKeKKP/4K@vger.kernel.org
+X-Gm-Message-State: AFuF++kGauwWCWUJpOIEkFqjKPiTWo0jHnAo7LD2GTqRVu8cc5iRsDeO
+	/hnf3u570YFSDLNVV1V7MWqOXaHsmAhjQIUib+oByofAeqg39WzYZ9L5Bt/+6Ima9S4=
+X-Gm-Gg: AR+sD11pQWw1nSO/u4fYU8xG19MoUoU+x12VnyLGgsGT+/340ZkVl7XUFBuDOvHRPqq
+	GnyL3VMpUyVr9uj3IrHCaKYkatmy5CLsWe05cEWUvit7MyFuMTmD7uJU5K6G6hugiWWWYYV79JF
+	AaMwUnOVQdSicLYNuh8otPpo6DR9rqfUauLHdGNCZfrG/jP8VJ1rc3rBL27CQxC6wN6j0ET09Mw
+	qUhxCPtI+lhUdauCNOLKU1svH4cnqq3SAiuPhy8VzHLY1z7Je3t2YwSN/xDmy8siZ6wO8QmwuuM
+	Vkcjkqh2wGd3yera2tq3CRUR7v8yTZWGOKtq9IiNacYsVIsf/P1SBzR+vyAn3aXeC9cFNYbRSmZ
+	Vbdom60qg9VItkdaLTnMUpRbjDWLkhDVXAXJmBUGZz8WmAKjVGLD7rA/MJYMg9FRPMrZCBD32x4
+	nLk0IVi/O5tUiR5PXra94xpkzlz69yk96R4GMI20ymFpBrwX+Dmeu6gyH2lzEiwZ3m
+X-Received: by 2002:a05:620a:4686:b0:939:1864:343e with SMTP id af79cd13be357-93918644403mr2684993385a.40.1788226625629;
+        Mon, 31 Aug 2026 18:37:05 -0700 (PDT)
 Received: from zippy.localdomain ([73.62.185.64])
-        by smtp.gmail.com with ESMTPSA id af79cd13be357-9391703a918sm919265485a.12.2026.08.31.18.37.07
+        by smtp.gmail.com with ESMTPSA id af79cd13be357-9391703a918sm919265485a.12.2026.08.31.18.37.04
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 31 Aug 2026 18:37:08 -0700 (PDT)
+        Mon, 31 Aug 2026 18:37:05 -0700 (PDT)
 From: Alex Elder <elder@riscstar.com>
 To: andersson@kernel.org,
 	konradybcio@kernel.org,
@@ -76,10 +76,12 @@ Cc: mani@kernel.org,
 	lorenzo.bianconi@oss.qualcomm.com,
 	devicetree@vger.kernel.org,
 	linux-arm-msm@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: [PATCH v2 6/6] arm64: dts: qcom: qcs8550-rb5gen2: clean up PCI function nodes
-Date: Mon, 31 Aug 2026 20:36:53 -0500
-Message-ID: <20260901013654.1343537-7-elder@riscstar.com>
+	linux-kernel@vger.kernel.org,
+	Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>,
+	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Subject: [PATCH v2 4/6] arm64: dts: qcom: monaco-evk-ifp-mezzanine: clean up PCI function nodes
+Date: Mon, 31 Aug 2026 20:36:51 -0500
+Message-ID: <20260901013654.1343537-5-elder@riscstar.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260901013654.1343537-1-elder@riscstar.com>
 References: <20260901013654.1343537-1-elder@riscstar.com>
@@ -91,9 +93,9 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-The Qualcomm RB5gen2 devicetree source file defines a node representing
-a TC956x chip which contains a PCIe switch and an embedded endpoint that
-implements two PCIe functions.
+The monaco-evk-ifp-mezzanine overlay defines a node representing a
+TC956x chip which contains a PCIe switch and an embedded endpoint
+that implements two PCIe functions.
 
 The devicetree nodes erroneously include a "pci" device_type property
 for the two PCIe functions.  That property should only be used for a
@@ -105,21 +107,21 @@ properties, which are not normally defined for PCIe endpoints.  Remove
 properties as well; they can be added back once they are actually
 needed/used.
 
-Fixes: 33cae252054a6 ("arm64: dts: qcom: qcs8550: add QCS8550 RB5Gen2 board support")
+Reviewed-by: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
+Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Fixes: 5a67924d2fc57 ("arm64: dts: qcom: monaco-evk: Add IFP Mezzanine")
 Signed-off-by: Alex Elder <elder@riscstar.com>
 ---
-v2: - New patch updating DTS that was not present for v1
-
- arch/arm64/boot/dts/qcom/qcs8550-rb5gen2.dts | 8 --------
+ arch/arm64/boot/dts/qcom/monaco-evk-ifp-mezzanine.dtso | 8 --------
  1 file changed, 8 deletions(-)
 
-diff --git a/arch/arm64/boot/dts/qcom/qcs8550-rb5gen2.dts b/arch/arm64/boot/dts/qcom/qcs8550-rb5gen2.dts
-index 9df8dcd6c62b6..2c74a1e242ef8 100644
---- a/arch/arm64/boot/dts/qcom/qcs8550-rb5gen2.dts
-+++ b/arch/arm64/boot/dts/qcom/qcs8550-rb5gen2.dts
-@@ -1128,18 +1128,10 @@ pcie@3,0 {
+diff --git a/arch/arm64/boot/dts/qcom/monaco-evk-ifp-mezzanine.dtso b/arch/arm64/boot/dts/qcom/monaco-evk-ifp-mezzanine.dtso
+index ca5bf0fe5ec6e..9b5e911b83210 100644
+--- a/arch/arm64/boot/dts/qcom/monaco-evk-ifp-mezzanine.dtso
++++ b/arch/arm64/boot/dts/qcom/monaco-evk-ifp-mezzanine.dtso
+@@ -119,18 +119,10 @@ pcie@3,0 {
  
- 			pci@0,0 {
+ 			pcie@0,0 {
  				reg = <0x50000 0x0 0x0 0x0 0x0>;
 -				#address-cells = <3>;
 -				#size-cells = <2>;
@@ -127,7 +129,7 @@ index 9df8dcd6c62b6..2c74a1e242ef8 100644
 -				ranges;
  			};
  
- 			pci@0,1 {
+ 			pcie@0,1 {
  				reg = <0x50100 0x0 0x0 0x0 0x0>;
 -				#address-cells = <3>;
 -				#size-cells = <2>;
