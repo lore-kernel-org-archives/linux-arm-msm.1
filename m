@@ -1,94 +1,67 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 42CF53AEF4E;
-	Tue,  1 Sep 2026 01:41:50 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6511E411661;
+	Tue,  1 Sep 2026 02:09:43 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788226913; cv=none; b=ZUWHhEypgDnhNmzwQPv7Vw6dssYc/K5Jq69ToNunojAzH0RpZv+rtV8eWS6XO8GdFci8mbwMFLwdMkiBK6QVeISiKcnHi1jwDAKMO5SOpm+Lcg453kco6yZLBreuCf4a6DQOay8MYu3pA5uK55nwxEVJ18dCMKXMRrvCj6i8V7k=
+	t=1788228592; cv=none; b=VeHP06vtebq/OrDLfYVwU7cZMZB0at5c9MNt037kS90VSY9VUxNvU+xjBAG1hspZlsJ4taTyhbpxqExtAnSp8MpDEJb9f5vTM/UL9Buc/1qmiGCJNw38MtLTQH6LknM91VDRohUwnq2cr2GH31pWhn//IY3KqwgvLNr9aNSw9qw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788226913; c=relaxed/simple;
-	bh=LrCiT++5mOcKya2DAeDChXnaTBQgsAMo7COwSF6jtc0=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=dvfptSia0GWvD55iU+3xVm60d/AJkQD/PZfLh8ba76dwOj5jRTg3B4pcDMh6O6hAPg9L/oi6vxfFz+ibQ06o5EaH4WTfzuhtfAVTSzmFQjO2YY8k1i3tY3sG2gyMoGAnjhp7XFTdPUkWuahq8XnAgGxKtXyY+/cErxeUNiW/G7A=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=DMsEtGDC; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1788228592; c=relaxed/simple;
+	bh=WsDrjGT4cG1a6t5f5KrqRW4LXNt3VqPAt1EZOGCeCGw=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=BYEmbFPjXpIh6eXRElC0qHRl9FSvz0/sdN9U9/exG6Af9TMvE1E0X2NOLibOwxRosRXVccogQVBmolOKa77Tb6oHXjuchklZf2dI4/h5rg4pj7ubYbofkEJcy3KEn7ANwzSF8jEio/78M0E+iBLIjRKrJMIn39LYmg9Ucqr0mcA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=V+G9R0Qx; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="DMsEtGDC"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id C71621F000E9;
-	Tue,  1 Sep 2026 01:41:49 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="V+G9R0Qx"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6F2E61F00A3D;
+	Tue,  1 Sep 2026 02:09:41 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1788226910;
-	bh=4tccQKCY16goyGLzWPSUt/pWN4uDuOLuqyh4DGb8V+M=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=DMsEtGDCZ9yp0FwxeMPBf68ttCxiQ84jZ3GrvQ9CEo6Wa7QlnchLpitCpQPi/evLb
-	 ekUtzpIcEoqLFDd8FG9WCXoNzt9+XnqxCOsTZNt3NSNLZh4aCNGz1CGITPD/NEY5qA
-	 UCQULaqBEpsi0TL5KIue5IIGf2wk11bnKCyAuprLgYWl/PRWoawkEX+RdgMfiEdUI7
-	 PdcawhKQ6PC23Q3OE9RIeHy7xDxh6eQosnzIuu/mIxVlVOdrGZPkdVqwfUni/cIGL3
-	 SbWK+FX1VnaavdjaptJyjB8uct6ojXqsExApTmKjRVW0KT5JPDhe5InPuyWYTSpYd8
-	 hefBWWDnMmylQ==
-Date: Mon, 31 Aug 2026 20:41:47 -0500
+	s=k20260515; t=1788228582;
+	bh=h/pInpbdC57iv3v+TZYzCPsHAvjHz93T6GB5y4GdRig=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References;
+	b=V+G9R0Qx+Pqd2ZUx79MgGl78clGcN94PFw3Iju3PNhFwsTsOLAsMJHOtLHgjbLGhC
+	 fXe/QH7qF0yMW3NEvSpHJuWOTdWGGslDRBlvREYB2uPrsvTGr96qDt8j9xI/szY3Ki
+	 ld8h/b55Hnug2jOUVtxkaAAXf9CuxJGtLZPdZUhSJ0RHE2Aa9PRZWAJmq5M6eM+/Yx
+	 bdLBND8AcMZjN/dzkBhIScdPF4Tv7eBlY+aVFMdQwJ9E8EFMcxDY93D2CR2MvifUP4
+	 YSzVZy8dWrx7Z4WZb4fs7W3tVu/qvMgRRKm+d/VCF43kDWjwaQ+2WjNFulpYVLxuX5
+	 k3Wj7TtT+Q84g==
 From: Bjorn Andersson <andersson@kernel.org>
-To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-Cc: david@ixit.cz, Konrad Dybcio <konradybcio@kernel.org>, 
-	Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
-	Conor Dooley <conor+dt@kernel.org>, Petr Hodina <petr.hodina@protonmail.com>, 
-	Richard Acayan <mailingradian@gmail.com>, linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, phone-devel@vger.kernel.org
-Subject: Re: [PATCH v7 1/2] arm64: dts: qcom: sdm845-google: Add dual front
- IMX355 cameras
-Message-ID: <apYtQQkrZB5gHqJy@baldur>
-References: <20260721-pixel3-camera-v7-0-82d323c6c5d2@ixit.cz>
- <20260721-pixel3-camera-v7-1-82d323c6c5d2@ixit.cz>
- <a5d6f840-3849-464d-a540-634dc3ec81b7@oss.qualcomm.com>
+To: Konrad Dybcio <konradybcio@kernel.org>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Dale Whinham <daleyo@gmail.com>
+Cc: linux-arm-msm@vger.kernel.org,
+	devicetree@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Subject: Re: [PATCH] arm64: dts: qcom: x1-denali: Add audio playback over DisplayPort
+Date: Mon, 31 Aug 2026 21:09:19 -0500
+Message-ID: <178822856234.1835959.5281479761335285842.b4-ty@kernel.org>
+X-Mailer: git-send-email 2.53.0
+In-Reply-To: <20260831-surface-pro-11-dp-audio-v1-1-fb9c0d3216b7@gmail.com>
+References: <20260831-surface-pro-11-dp-audio-v1-1-fb9c0d3216b7@gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <a5d6f840-3849-464d-a540-634dc3ec81b7@oss.qualcomm.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
 
-On Tue, Jul 21, 2026 at 02:36:49PM +0200, Konrad Dybcio wrote:
-> On 7/21/26 2:33 PM, David Heidelberg via B4 Relay wrote:
-> > From: David Heidelberg <david@ixit.cz>
-> > 
-> > The Pixel 3 features two front-facing Sony IMX355 sensors with
-> > different focal lengths (standard and wide-angle).
-> > 
-> > Sensors are connected via CSIPHY port 1 and 2 and controlled over CCI
-> > I2C1, using MCLK2 as the clock source.
-> > 
-> > This enables support for the dual front camera configuration.
-> > 
-> > Signed-off-by: David Heidelberg <david@ixit.cz>
-> > ---
-> >  arch/arm64/boot/dts/qcom/sdm845-google-common.dtsi | 172 ++++++++++++++++++++-
-> >  1 file changed, 171 insertions(+), 1 deletion(-)
-> > 
-> > diff --git a/arch/arm64/boot/dts/qcom/sdm845-google-common.dtsi b/arch/arm64/boot/dts/qcom/sdm845-google-common.dtsi
-> > index 9368fd6b87515..c8a28133fb38d 100644
-> > --- a/arch/arm64/boot/dts/qcom/sdm845-google-common.dtsi
-> > +++ b/arch/arm64/boot/dts/qcom/sdm845-google-common.dtsi
-> > @@ -1,16 +1,18 @@
-> >  // SPDX-License-Identifier: GPL-2.0-only
-> >  
-> >  /dts-v1/;
-> >  
-> >  #include <dt-bindings/arm/qcom,ids.h>
-> >  #include <dt-bindings/dma/qcom-gpi.h>
-> >  #include <dt-bindings/input/linux-event-codes.h>
-> >  #include <dt-bindings/interrupt-controller/irq.h>
-> > +#include <dt-bindings/media/video-interfaces.h>
-> > +#include <dt-bindings/media/video-interface-devices.h>
+
+On Mon, 31 Aug 2026 19:20:48 +0100, Dale Whinham wrote:
+> Add the DAI links needed to enable audio playback over the two
+> USB/DisplayPort outputs.
 > 
-> These should be flipped to be sorted.. if you smile very nicely,
-> Bjorn could prob fix it up
 > 
 
-Sure can do, but I don't have dt-bindings/media/video-interface-devices.h :(
+Applied, thanks!
 
-> Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-> 
-> Konrad
+[1/1] arm64: dts: qcom: x1-denali: Add audio playback over DisplayPort
+      commit: 420a70ddaf299dadab1fb50492b275c8b54e9c4a
+
+Best regards,
+-- 
+Bjorn Andersson <andersson@kernel.org>
