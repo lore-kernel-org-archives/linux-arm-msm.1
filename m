@@ -1,99 +1,140 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 22AB247CC75;
-	Tue,  1 Sep 2026 12:20:34 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9A1953DCD80
+	for <linux-arm-msm@vger.kernel.org>; Tue,  1 Sep 2026 12:22:47 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788265235; cv=none; b=otc9MLVv7Onba48/AHKcQTCbHHeAqnZ6nsCXewGtqm2BnUXbMN3476+QDhffNpQqO+CKnIeWT8LGQ0ikdqiSgoWN235/wij6SCC2/kNcIqDEXF1gf8z4naFA0ZkirVfdoWUnKScnj5dqJeu7+ZrhUC0NPskndoL+4JOcjBw1Ris=
+	t=1788265369; cv=none; b=fg7ZiL2rmt1+m297OPF7/7fSSJ9z1lrO1I7B68o9YgMUn8kV1tgxSfJ49Dj2MJZlXUNw2UtW3Htz15eAxLJwDHvhUVFRAcWG7Iropf+ZVMQr7WlXiD/Qtq/nYPQkFRJRDvWrZVPQnlh6AJMUz3P/IYy4swlfHqf2/b2EBquDLJU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788265235; c=relaxed/simple;
-	bh=Ms5yUYYVIUCMr7+Dx214kheiE7jKpBdWV1rFqMcG+C0=;
+	s=arc-20240116; t=1788265369; c=relaxed/simple;
+	bh=9Chwd0w2EDIAHB3WrSewTF0LFKue/rO2MaRya1pagTE=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=BB78j5yoe0zeIy8lEXyA3SXddm03SINcKNt7hOqwkpkPHAOc8Ms68jUL476Ur6L5nbE3t+egElockKeak40cg1tEB00WXlSVBCOOEJJdyKkO1+mMUU8X+rAg30c/Mp0dO3SxYM+nvyrJ6v2KRuTRuWudXVlBvrnWKvlpyy/3EEY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=XzVCDtES; arc=none smtp.client-ip=100.103.45.18
+	 Content-Type:Content-Disposition:In-Reply-To; b=pMTweU0DtKHAdXWjoDnPV28ZL8cjGphzK/kkFSOVNSYX3pYKjU98LZ+HQ1wg3UZa/3KQBY59O/t8LAddotDGKYFOhtyghi/gf30UkOk8dN/yCknVQ1rYrVxCNgd/aRRAgtk4DPQ26uthXlA6lcq5gPwa6TtK5wIvOASBQZVMrk4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=lQ4lw1Mr; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=OuHuOJQn; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="XzVCDtES"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id DD52B1F000E9;
-	Tue,  1 Sep 2026 12:20:30 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1788265234;
-	bh=knqgEaQ3Nt/j1kgI3GiULCfkTBJyPDx6YekcweuXbC0=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=XzVCDtES9FvYRwTEGc9GrdSsXkl6cVu5UXSDTum7lXO3LWqCLtN+EXaqrgdN6hcuP
-	 3OrxkBXK3RjdrJeeLI/0bMQBaJ+ENpefSMLaVjuocWSFwmZ6GMfxx7oDYWyv8N0zBE
-	 G45G+qxb1zudvuGlCeaVk39PiCS9L2W1Wcgfl5qkR8CtuoJXn906kmVLfHXv1XLXyq
-	 tCGGUrHonlTdH81NrBePv0pYG0mZO3XmPN42ul1VU0dzC8Y8ut+6TaO4jfz0wI1G9a
-	 1Hm3Q4YEeZnZ0BA7vHLJ6seqCgz4sMz34z4XDxfvDIEy5PrHcznAPOfFcyS+RhwLuR
-	 8Lmr/WfajOQFw==
-Date: Tue, 1 Sep 2026 14:20:21 +0200
-From: Manivannan Sadhasivam <mani@kernel.org>
-To: Peter Hunt <peter.hunt@opengear.com>
-Cc: loic.poulain@oss.qualcomm.com, ryazanov.s.a@gmail.com, 
-	johannes@sipsolutions.net, netdev@vger.kernel.org, mhi@lists.linux.dev, 
-	linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH net-next v5 0/3] net: wwan: support DTR/RTS on AT ports
- via MHI IP_CTRL
-Message-ID: <zjafvc6ndpkmavogxwmqj5gpefpj4ymefn5obed6cvjot7wnwa@pmrfl5tixa72>
-References: <20260819224927.2274790-1-peter.hunt@opengear.com>
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="lQ4lw1Mr";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="OuHuOJQn"
+Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 681AJc9t2406408
+	for <linux-arm-msm@vger.kernel.org>; Tue, 1 Sep 2026 12:22:46 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-type:date:from:in-reply-to:message-id:mime-version
+	:references:subject:to; s=qcppdkim1; bh=u9bhKclenKPG4bSJi3Dfg5sn
+	oNshWyvaPdPox2LBfdw=; b=lQ4lw1Mr/YKKYY6luXGya7LGeGohXeQigDhqPSEC
+	WPAhwC/RwlAzZMVA1usY9JOWSS2fZu7yHHuYd91PX55nGj3eT3SuiLJ+pBP4WJIp
+	LusrB/KHNaVMYsBVT9XMwEHLFNmZ7w06js9O0vDHcI3Lgh3GolkcS8m9pIJPvDsJ
+	lIn29eInHjH2fjgEuULX64946KdhQJ6gSKxpfJZWaW8oGBcItyjh+l06l+TH8Xk9
+	FkrQbm1S8KVld4VwjiGLnt6R0p7ZLSvngsiLYFOvVYtT/lUmfGYDp7QNF82O5VtF
+	Rv+spqI6DfMyKP50CgNrXCWEE0iED9aN/EmU62OpCfXswA==
+Received: from mail-qk1-f200.google.com (mail-qk1-f200.google.com [209.85.222.200])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gdp7r295m-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Tue, 01 Sep 2026 12:22:46 +0000 (GMT)
+Received: by mail-qk1-f200.google.com with SMTP id af79cd13be357-92e52306621so631232185a.1
+        for <linux-arm-msm@vger.kernel.org>; Tue, 01 Sep 2026 05:22:46 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1788265366; x=1788870166; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=u9bhKclenKPG4bSJi3Dfg5snoNshWyvaPdPox2LBfdw=;
+        b=OuHuOJQnrtnQ4NtbMlgXPKMV9dIrEcbwWuYPBzyQytuCA+RrxY+6CeV3YKz2Rx5I68
+         YxU9b41vVKgDD9XW2qE6NA5KyLnIXTeMMpbpCQCBZBHU8+2MfaP2aIzQQ277dsoVc1F7
+         AcqipweMTfZ6mKtSpMvBb35xxQrBcWMxN3BeP25FzXKqep8hFo2d/l3he19aDSrMI8gt
+         6Vja9dG8mxGawSsHc9EO7R6peuSCiYQvlWZXDJ7zLlyzGHf8uPyuNdAyJYDs2+/fprh/
+         FF3pkBLoF0VNnD+dHsSqh+DUJCfCesdIn4T0ceS2XQaGXqwyaa9tVF0SrknIWS50lQH7
+         CrUQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1788265366; x=1788870166;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=u9bhKclenKPG4bSJi3Dfg5snoNshWyvaPdPox2LBfdw=;
+        b=AwOhHttJ7qsJDZ+jFLsikqqCqnuJGPU+QNzHl5gHIcloiGG7mXsH9mJQ9wjM3WKr92
+         T2Fk2zvvfzGsvYaUVf6CghqOzclHdy2Wj5NyAL2Z9yWqARJ5IQIrvU31tboqYTAeTUNW
+         FXyFiwscOsCA9T+KHxY/FMimNgP1oRTD7q03c8za89iG+PFH6bMOYWcyDAqTpJ7s+mHc
+         4KtdmSg5QxHvQH6tujGVrrEhZP1yWKs/dyNrNS/q+b3HWB3kC6Tk1/oHH3H32tpPKu/Y
+         th4URApv5TguGppbR1xAlGqH0FO8nxO9uzFDVTuAJqg54ifE63likA6Y21uJqC86C15r
+         2cnw==
+X-Forwarded-Encrypted: i=1; AHgh+RqhWyG5F4/e/cLXNU7ak3mCib9iwdfEUScUmR4LHMSEzg9eB77ih407AuSy8r/B06clmTC47t6n04SlH6Pm@vger.kernel.org
+X-Gm-Message-State: AFuF++lc3fg7HD9dpks0DtmRdBl98aSzgD0sXKiG28TgJ20a1ZBLkNer
+	lKvjntbI9qEV20zwVHEi8RPpZlZ+FlKBMwqUdwR73VTe2jFKjZkvR36rkQhp0/X3p0KQfFVeKWw
+	8gEsN9huoxMbzZC2R2wgxzjVYKeRTqYgq6Q4ij4urZPQSS9Pu5P8JUN1bbfgrIFD4u9xr
+X-Gm-Gg: AR+sD12xXp4ObJ1O9iDGqiVkFpEE/mSEo25sChgxuCEB98AA8ILxTn+kka/eg13SYvj
+	5gfUqOvfKcw8yGRkp17MwgoMeHHqsP09kstpUfLhWyi+9XybsZUV9wMBRpxN22POt0Xq55rUUps
+	aZbehUuHs6/ubB9aLD1dbpSb6ZPTeDWM6BQ95yN31nrwXk/kkrwk3btgeHxaiDhRO9dlw5N3Tfs
+	mQW0T644GiewSqXEhED1jP5uAMZbMU4SJGNQ6ra7JOcJ0eHlO4IGhx/sD5SIQaGvaYTMMGyFPlh
+	u6wneIdkPh043PGFjY6B3M25AwtIN9+NmQxr9bYk8Nw9yG9B02PnOQQOJLIUcbFOqdFw1IrYGAu
+	JdNwi1pUVIERW4A==
+X-Received: by 2002:a05:620a:319d:b0:937:45fb:6b95 with SMTP id af79cd13be357-93947fe52e2mr1038443485a.17.1788265365772;
+        Tue, 01 Sep 2026 05:22:45 -0700 (PDT)
+X-Received: by 2002:a05:620a:319d:b0:937:45fb:6b95 with SMTP id af79cd13be357-93947fe52e2mr1038429185a.17.1788265364948;
+        Tue, 01 Sep 2026 05:22:44 -0700 (PDT)
+Received: from oss.qualcomm.com ([86.121.170.178])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-49cdce3e04csm57938805e9.10.2026.09.01.05.22.42
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 01 Sep 2026 05:22:43 -0700 (PDT)
+Date: Tue, 1 Sep 2026 15:22:41 +0300
+From: Abel Vesa <abel.vesa@oss.qualcomm.com>
+To: Pengpeng Hou <pengpeng@iscas.ac.cn>
+Cc: Vinod Koul <vkoul@kernel.org>, Neil Armstrong <neil.armstrong@linaro.org>,
+        Manivannan Sadhasivam <mani@kernel.org>,
+        Philipp Zabel <p.zabel@pengutronix.de>, linux-arm-msm@vger.kernel.org,
+        linux-phy@lists.infradead.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH] phy: qcom: m31: propagate reset errors
+Message-ID: <f2jjxkjwmgwxl3fgjlwdpjgjzisj6xweatqu5klvlcjgwstflu@cbxmjvgvejuy>
+References: <20260830131442.3025-1-pengpeng@iscas.ac.cn>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <20260819224927.2274790-1-peter.hunt@opengear.com>
+In-Reply-To: <20260830131442.3025-1-pengpeng@iscas.ac.cn>
+X-Authority-Analysis: v=2.4 cv=beZbluPB c=1 sm=1 tr=0 ts=6a96c396 cx=c_pps
+ a=hnmNkyzTK/kJ09Xio7VxxA==:117 a=G5ilVN+faPP2Ze1SHB4iFQ==:17
+ a=kj9zAlcOel0A:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
+ a=EUspDBNiAAAA:8 a=Eo94fBGS1rxZ-i0BCloA:9 a=CjuIK1q_8ugA:10 a=ZXulRonScM0A:10
+ a=zZCYzV9kfG8A:10 a=PEH46H7Ffwr30OY-TuGO:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTAxMDExMCBTYWx0ZWRfX2acSMy5M9Kz2
+ zejtpCpkxLINcS86pkZG7Z2CbeIMO+K17Y61K9cHW1mPA6Ddie1amryCCHXIEjA2d13Q/WEUFUF
+ i8ooJTSFo0C+hfNppZS11SS8oscqTWrgWIxxNEHoRlePUSY/MgkNefqlRzYsHieBfNjSfwEEYhX
+ rLwAKojadpH6d5yQDW5y0XFDpYQvRtsJoYxoKWgAHbprMuHT68DxKVvyCES2Xkp2+WZHvbk2vZi
+ fQl3RMm7QESnZzbW7s9stDMfTPCl+pJf+oth1Y9VINP9DcI/XzoG8GYaOFTuakP6ZcaaPytsoki
+ pJQJ2WlG7PIN588pGHZooGEqTCTQNFXffCMOqEwcRhPghPxLpj4F0K8sW/En9a1O8jYsEMqO+R4
+ AYH/o8lr2tK0vcRsAoOPyI3hBuR5gnPmXpmeZliWYKNi3pzZuBY932GxoIpkOFgohXd9xWik3aD
+ plqMUtun/4n46kYEGhg==
+X-Proofpoint-GUID: A8KkB-bJPvPsiG3nfd-rie37iQ_8HaUp
+X-Proofpoint-ORIG-GUID: A8KkB-bJPvPsiG3nfd-rie37iQ_8HaUp
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTAxMDExMCBTYWx0ZWRfX/VFAcG2Zj9u5
+ 2iFR7qkf1Nn/viK3YImgqIcRvd70Kw4wzAj2qBRNu08V/m10CqjYpR/PdXYo33TSZTrllLpkJpF
+ wElkUij0eP8l9YNZOVaV+wL156lGMgI=
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-09-01_03,2026-08-31_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ suspectscore=0 lowpriorityscore=0 bulkscore=0 clxscore=1015 impostorscore=0
+ priorityscore=1501 malwarescore=0 spamscore=0 adultscore=0 phishscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2609010110
 
-On Thu, Aug 20, 2026 at 08:49:24AM +1000, Peter Hunt wrote:
-> Qualcomm/Sierra SDX55/SDX65 modems (e.g. EM9291) withhold unsolicited AT
-> result codes until the host asserts DTR.  The in-tree mhi_wwan_ctrl driver
-> exposed AT ports but never signalled DTR, so URCs never reached userspace.
+On 26-08-30 21:14:42, Pengpeng Hou wrote:
+> m31usb_phy_init() enables the regulator and clock, then performs an
+> unchecked
+> reset pulse before reporting that the PHY powered on.
 > 
-> Patch 1 extends the wwan core with an optional ->dtr_rts(port, mdmbits) port
-> op.  The TIOCM bitmask state is tracked entirely in the wwan core; drivers
-> receive the full bitmask so they can drive DTR and RTS independently.  The
-> core raises DTR/RTS on first open of any AT port whose driver implements
-> ->dtr_rts and drops them on last close, mirroring TTY semantics.  In the
-> ioctl path mdmbits is re-read under data_lock inside ops_lock so the value
-> passed always reflects the committed state and concurrent ioctls are
-> correctly ordered.  wwan_remove_port() also de-asserts on hot-unplug.
+> Return reset-controller errors and release the clock and regulator that
+> were
+> enabled for the failed power-on attempt.
 > 
-> Patch 2 enables the IP_CTRL MHI channel in the Sierra PCI table so that
-> the IP_CTRL driver (patch 3) is actually bound on those controllers.
-> 
-> Patch 3 adds a second mhi_driver that binds the IP_CTRL channel and
-> registers a ->dtr_rts op so that the wwan core's open/close DTR raise/drop
-> and userspace TIOCMSET calls both reach the modem.  A single recycled sink
-> buffer keeps the IP_CTRL DL ring live so the modem's transmit path does not
-> stall.  The existing AT/QMI/MBIM data path is untouched.
-> 
-> v4: https://lore.kernel.org/netdev/20260816121705.858013-1-peter.hunt@opengear.com/
-> 
-> v5:
-> - Change ->dtr_rts from bool to unsigned int mdmbits (patch 1 + 3): DTR and
->   RTS are now driven independently; fixes RTS inversion when TIOCMBIS/BIC
->   changed RTS with DTR in the opposite state
-> - Re-read mdmbits inside ops_lock in the ioctl path (patch 1): closes a
->   concurrent-ioctl ordering race where two racing TIOCM ioctls could leave
->   the modem line state inconsistent with TIOCMGET
-> - Add ->dtr_rts(port, 0) call in wwan_remove_port() (patch 1): ensures
->   DTR/RTS are de-asserted when a port is removed while an fd is still open
-> - Update kernel-doc to note ->dtr_rts is AT-only and describe mdmbits (patch 1)
-> - Pre-queue RX sink buffer in mhi_wwan_dtr_probe(), requeue in dl_xfer_cb
->   (patch 3): prevents IP_CTRL DL ring from running empty and stalling the
->   modem MHI transmit path
-> 
-> Peter Hunt (3):
->   net: wwan: core: propagate modem control signals to port drivers
->   bus: mhi: host: pci_generic: enumerate IP_CTRL channel for Sierra
->     EM919x/EM929x
+> Fixes: 08e49af50701 ("phy: qcom: Introduce M31 USB PHY driver")
+> Signed-off-by: Pengpeng Hou <pengpeng@iscas.ac.cn>
 
-FYI, this patch got applied to MHI tree.
-
-- Mani
-
--- 
-மணிவண்ணன் சதாசிவம்
+Reviewed-by: Abel Vesa <abel.vesa@oss.qualcomm.com>
