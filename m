@@ -1,68 +1,69 @@
-Received: from mail-ej1-f50.google.com (mail-ej1-f50.google.com [209.85.218.50])
+Received: from mail-ej1-f46.google.com (mail-ej1-f46.google.com [209.85.218.46])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2EB4636E468
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D2825471D1A
 	for <linux-arm-msm@vger.kernel.org>; Tue,  1 Sep 2026 08:59:02 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.218.50
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.218.46
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788253144; cv=none; b=U3fthKu+zYuWy7YVtwALi3aLWSHWAW43SNz1NE0zAUqD0+z0HR69Qr/mpuOhFc00SzSrfLY0UjLItcca7r36NrYwIURhPr0YI5zXO3xBVR9fXtAuehLiTcrpkkGQ2ZNkcbC98QjZOn6Pu+bhB4CWFiynVM+Q0TQN7L+F4kLPBCA=
+	t=1788253145; cv=none; b=K4cavX6Xue1/cbtyIYRVAZSOVaQcLSaHFQosdQB8bKhfkohmT+MZpTjEU8UkVyEuKTBLsd+YcityFGI4c7rpx2gmsv1BgfSv32yZZYst9t803ZXVOF9i8bbX6ybCP+ugPZCjNpw96wWnLMjmBV2aSrVQwxR+nWP5vLJcwwB12Fg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788253144; c=relaxed/simple;
-	bh=wUOmiA7i2EaKRUV+bEKJTs81gkHvhUOxBuyUyHxqOK4=;
-	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=T2dML6HJX+ZdY/lySS6MO2OzT38GrPdlOM6cEc1IMN8Lr13R9bkRFYRMuhpQ3que0Di6iBC3rt1lWDJitkXUlX9cBaPVpEqsyEkEMzUcUtarhygBP+tuNxVny71nxDhosji9toXuK5qgSB1/k4gEw93l8mxAqvP457ToGvvdeWc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=fairphone.com; spf=pass smtp.mailfrom=fairphone.com; dkim=pass (2048-bit key) header.d=fairphone.com header.i=@fairphone.com header.b=h3aOuCQ1; arc=none smtp.client-ip=209.85.218.50
+	s=arc-20240116; t=1788253145; c=relaxed/simple;
+	bh=pMEbDuBRkVjTzutAX6WB4Uye9UNziOebWD94UCX5+eM=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
+	 In-Reply-To:To:Cc; b=Q1aV2L2HILmOHZHkWjs9lJc6pNCK97avXZjvop3EsP+DD1p0yVZndp/IJyAQf2Z4t/2AygULnvTIDiqS5qAMbvx2gyKJOjRizBP7HtBIfNct/qq3QROZx9PkPeB1mAZlsdqt+QksxbYfZaz6SUKEYT5Iu+mkykdwkfTdIxAWM0s=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=fairphone.com; spf=pass smtp.mailfrom=fairphone.com; dkim=pass (2048-bit key) header.d=fairphone.com header.i=@fairphone.com header.b=qkYkGnc6; arc=none smtp.client-ip=209.85.218.46
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=fairphone.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=fairphone.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=fairphone.com header.i=@fairphone.com header.b="h3aOuCQ1"
-Received: by mail-ej1-f50.google.com with SMTP id a640c23a62f3a-c15e592da74so538728166b.1
-        for <linux-arm-msm@vger.kernel.org>; Tue, 01 Sep 2026 01:59:01 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=fairphone.com header.i=@fairphone.com header.b="qkYkGnc6"
+Received: by mail-ej1-f46.google.com with SMTP id a640c23a62f3a-c1670dad7a8so107046366b.3
+        for <linux-arm-msm@vger.kernel.org>; Tue, 01 Sep 2026 01:59:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=fairphone.com; s=fair; t=1788253140; x=1788857940; darn=vger.kernel.org;
-        h=cc:to:content-transfer-encoding:content-type:mime-version
-         :message-id:date:subject:from:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=o5o+LGs+bBAm+txc6iMYrrNKuZZMfQFh8GU+2rXK/RU=;
-        b=h3aOuCQ1Uu0M0ADm0IWukQ5Q63G0BhhDQXhVYQ4E+hSsQtUgOzqcfqu+uwxj51UaGr
-         RiQe7QNrWUpq39F+gOmmlqHhAH7PF9ESldCUueVkTSf1S22v8xCZOBgOoUMWrnrvALEV
-         KembkfItZcoVOlUP8sCM4qZqb2jwT566bd4eAlHgI1tkUFmNCZ8LZ4Y1s35vMAQt7eFT
-         2HFINOEmb11T3pasU9sF7AsT4iJ9SwdO9LMZwODx0+KnAQgetdKfCtzpwgBGaLYoE8x5
-         iwBUuAdMtjEsyt+xoGuRYp2B4tEccE84j/QmaTGAyXM/dxtlSShxosj+cHt0j6WlLlkW
-         Lq+w==
+        d=fairphone.com; s=fair; t=1788253141; x=1788857941; darn=vger.kernel.org;
+        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=GOwg1HZyXLTOiSDtndwH6Webw2VVu0gCNVdDiokm96s=;
+        b=qkYkGnc6RFOlbPN157AKjXuhGGXSD4QaWrBqPOmGY471JMGRGxwU60hogJnYMTmsJL
+         E/XKDGNZEEHsZs7e92eMZuvPUDOnjmLoAv7VVWxuhRWUaGcZ4R+vL6Q2WCpopD0tgQin
+         Gz6G7f3L/wjgnE2Oyvzv17zINVb/Do2gVPiSUqnImG7pmozgsq6Elc0m2z7yHmbJQStS
+         0UQE03EszSLRi59cqgbuzY/IWemCDw+KL5VrgtN7ybMxogJjyU031g+P1XXDyHgZpWiR
+         uImipb8Gs0tsWl+Rdz45iOLg+h4H0lTQXPvCowgpcUfRRL3hNaEPdTH9wfY63+s+0buI
+         c/mQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788253140; x=1788857940;
-        h=cc:to:content-transfer-encoding:content-type:mime-version
-         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=o5o+LGs+bBAm+txc6iMYrrNKuZZMfQFh8GU+2rXK/RU=;
-        b=XwMbZVpzbua/6ynRy0NKFGmHJJVC/DTrS+RHDTSmR8+XEzKJ5bbLcCT6ZWm2oTqN/7
-         f0Tmpj8dQMVpJxVtoBlmRQ+zyTCQInlUsyYsacmAFA3D9jc/zIqkPtZYIraqp82jTcib
-         7OiAA5MbHLlBn4WNCOd2LY0jqlTcLw5XIqE7+2uj/0uab4NNEbEDfXnos1fvP/uX6C5t
-         1IeWiyW7tPcIVHzQL6EVNq8fR3JioSk9LF24D1JxDDGCYeVG7WQtcjFBsT3+AD2huIfZ
-         xzJXizEBrsgbYb7h5zRsvY+/ENqOY0sg8DZkO+7zMVnNek8006rqOyGZdyir90Ybb8eU
-         EEmQ==
-X-Forwarded-Encrypted: i=1; AHgh+RoHIjEEivzXit6kB47GNYZLo2GFfWkoyCFyRNZyZeOZMfaG+TqBpoKweFuQT+sqE9JfcBXTLsmPcS6nE6WD@vger.kernel.org
-X-Gm-Message-State: AFuF++n/+skAP5nhv4FdGMGJdc8b9ZI9SngXSSFssDEAXY2TcLBFBz1r
-	zyuLYsciFudb5vPwGya8WxV8FPZkwR4cf+RXI34gIyewBED+rsmPkdJZOSpUQ8+SI3k=
-X-Gm-Gg: AYBFou1GhK7XbTHI6guz+t1LdvohszH+vLfbpyQcmhseZLs6G/ayO4rdOSu4kzHfJHe
-	qv+PA/cPRP/Fj2W/suVX/k2QdOkxXfKnWMNFqIWylE1pGEo820vg3L8qLuF5bNcKUS0c+sTtlzt
-	i0T4V2wX6vd/2IjfVZOZTwUmyGzjR9oqny6R5fAMm+8WiXHYfo4iYw8IHhZcJZiklIdf6I7DZFF
-	vHy0ZLQ6dxmhHe/tKuh+ZFDAAKxizsaQjRmeBzgwLquJvYaRf28QXcBMiikzZBJDpoV+iaS4ICd
-	b6YtFREsjm4Bn66HviO7uuFbjr4nC75+Ei+NrUaiA7abzjAHLAKO966xTybPYI21jdn5L8oVnZB
-	2R29dxtuVkQdFl/QrvicSOVBGslkAwfzXB8yyITLqx23eu8P7mAYwWypN/nTdnqeJTTQDmqwSrf
-	OgOiRPOCPYE48/xbHLawcM4aR5tykZnQzteFWc5F90OnuRdw6qwqSf/n5FUdUuEFVks241Er+VX
-	SlhJ0EmY7s2H+Qw3xVJ5ihh4CXlRvy6UEcHTh07y+g=
-X-Received: by 2002:a17:907:728b:b0:c24:680b:3944 with SMTP id a640c23a62f3a-c2557169784mr1987875966b.13.1788253140425;
-        Tue, 01 Sep 2026 01:59:00 -0700 (PDT)
+        d=1e100.net; s=20251104; t=1788253141; x=1788857941;
+        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+         :content-type:mime-version:subject:date:from:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=GOwg1HZyXLTOiSDtndwH6Webw2VVu0gCNVdDiokm96s=;
+        b=Plldn2iwL3G8e9DwgwTZSQn+OYwavXzDfhKGC8nid6jxiVJmzhut9vs9laADqIEeWv
+         nOV+Wlgvk9V5K1O2/Sfa+Q0dDv94qZ/AdKUIX1ACiO7ab1InhMOeMG/hVXIl3h2FHYm0
+         0Wnvqx/7/c5JFGyFk80e8Ak2d81njSPgIY58dkeYN0MqtMzTvHyrUB733L8qE9eaclcW
+         TAo2CvYaVwBxrlQGxFQxLX1LZ2sEH/wz4NIeZ1KvuXjXZ4kbntFgc77nBO8FtRylELCu
+         R9cIrx0fpXNyHrxN451++VOd6ax1AI77KzYaj0eRJc61soCKaHp5OMdcDbd0EnTbWjba
+         R+Pw==
+X-Forwarded-Encrypted: i=1; AHgh+RoUuEvi0lo6EMxIfrwZag93tGpgpGfJI1/9+LPiuG2QBBUueLtlk/I2ZUjEmU7dOCosjCEc6lnRMMDIr5a9@vger.kernel.org
+X-Gm-Message-State: AFuF++lHNC3gKMxjLBFpy2A2Pl78mY2YCVi5H35DbkRaU6/HdBjyaaUA
+	Tk1siaKNVjSKlx/tAW+lHW7zaxAcDjDoUg9d8DXkwVnGIJ4qnyJc8lCUX3dPaEwJbgQ=
+X-Gm-Gg: AR+sD11LFtJL7W2scl66XNKyFaqMAhGyFURJzmrLGji7+paxmdy3MTXl1EwQJZMwdu2
+	+JgX0Arvn6nk3dnahL6wPtAJjFgwFfO361ew7MydeoEamzFvfuI0EoMRtc6BGxhoGpDHN4iPyLl
+	4mIXYkFOTT5ptO9h0GGM+sMNaejv7L5CpdgrVyPf06N2S6O98kkrOo/hIVnJdSzKxmp+8+vEa4m
+	dPqnRJhsBuwlfxJKmP6Kro+BXOQpXenx+JBpd624Rw5Bw9WlG5DMkZ5rC6M7H21/d2cmcRu6pAA
+	wAIEqEwWS3EePswVAYl6Hbba+V1VsTFBPL7kPLCn3KfZtDndjsVvtZnOi8SHuT/eLx0uEGwn0Rv
+	cdTSNkMR/V+qVOlSBqrnL2arYiCfXrk5BKS7XqVstSldERoHdOq3W/6UOX4PhQBT8Zp4fT+oiUD
+	kh6Aww2gOPS7BhMckIQnIgf0Z85uLiWn39FuugHc8xHsHIm9bLeicfTVtRGIu+kVEyCHAy/5vUo
+	Zc54BUsbCqc+XpyuJXuu0DS3ZXaaQMxzwpmQ8xasKA=
+X-Received: by 2002:a17:907:1c09:b0:c21:6f8c:2335 with SMTP id a640c23a62f3a-c2557465a51mr2059911166b.16.1788253141098;
+        Tue, 01 Sep 2026 01:59:01 -0700 (PDT)
 Received: from [172.16.220.101] (144-178-202-138.static.ef-service.nl. [144.178.202.138])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c2564e314a1sm511942566b.42.2026.09.01.01.58.59
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c2564e314a1sm511942566b.42.2026.09.01.01.59.00
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
         Tue, 01 Sep 2026 01:59:00 -0700 (PDT)
 From: Luca Weiss <luca.weiss@fairphone.com>
-Subject: [PATCH 0/4] Add supply names for PM6350 RPMh regulators on
- Fairphone 4
-Date: Tue, 01 Sep 2026 10:58:55 +0200
-Message-Id: <20260901-fp4-regulator-supply-v1-0-68288ab70aee@fairphone.com>
+Date: Tue, 01 Sep 2026 10:58:56 +0200
+Subject: [PATCH 1/4] regulator: dt-bindings: qcom,rpmh: Add supply names
+ for PM6350
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -71,10 +72,9 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXMwQqDMAyA4VeRnBeoRTqyVxk7qEtdRLQkVjbEd
- 1/djt/h/3cwVmGDW7WD8iYmy1xQXyroX+08MMqzGLzzwZGrMaYGlYc8teuiaDml6YPXGDoiYgq
- +gZIm5Sjv3/b++NtyN3K/ni84ji9W4RMUeAAAAA==
-X-Change-ID: 20260901-fp4-regulator-supply-7f6b999e9624
+Message-Id: <20260901-fp4-regulator-supply-v1-1-68288ab70aee@fairphone.com>
+References: <20260901-fp4-regulator-supply-v1-0-68288ab70aee@fairphone.com>
+In-Reply-To: <20260901-fp4-regulator-supply-v1-0-68288ab70aee@fairphone.com>
 To: Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>, 
  Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
  Conor Dooley <conor+dt@kernel.org>, Bjorn Andersson <andersson@kernel.org>, 
@@ -84,34 +84,50 @@ Cc: ~postmarketos/upstreaming@lists.sr.ht, phone-devel@vger.kernel.org,
  linux-kernel@vger.kernel.org, devicetree@vger.kernel.org, 
  Luca Weiss <luca.weiss@fairphone.com>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1788253139; l=899;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1788253139; l=1244;
  i=luca.weiss@fairphone.com; s=20250611; h=from:subject:message-id;
- bh=wUOmiA7i2EaKRUV+bEKJTs81gkHvhUOxBuyUyHxqOK4=;
- b=z2eqSalHbGfQjzg71aMZg7ujz63UIPZr2SrhpswnbsCCa14W27/nIzJt0iuISGhF0S2inwisN
- 7Wb3f10VUziACsCVq2rcq+yvaJ2WQiuMn8q0Cm5JxWtP+/gDDzSxrE1
+ bh=pMEbDuBRkVjTzutAX6WB4Uye9UNziOebWD94UCX5+eM=;
+ b=b+VJg5THX2bwt/KVwFapq/kFH+wKEmslAws6Lc8BPKglYjojvJ9XS5dXePXyG19KNzlNs4P0i
+ imNTyWOu/KzA08qNyb6QtFe5NCQqwpGUnDJ1ALyDd3zp7Q9XphBFPbb
 X-Developer-Key: i=luca.weiss@fairphone.com; a=ed25519;
  pk=O1aw+AAust5lEmgrNJ1Bs7PTY0fEsJm+mdkjExA69q8=
 
-During bringup no parent supply names were added to the RPMh regulator
-driver. Add them now.
+The supply names for the PM6350 regulators were skipped during initial
+bringup. Document them now.
 
 Signed-off-by: Luca Weiss <luca.weiss@fairphone.com>
 ---
-Luca Weiss (4):
-      regulator: dt-bindings: qcom,rpmh: Add supply names for PM6350
-      regulator: qcom-rpmh: Add supply names for PM6350
-      regulator: qcom-rpmh: Add missing regulators in PM6350
-      arm64: dts: qcom: sm7225-fairphone-fp4: Add parent supply for regulators
+ .../bindings/regulator/qcom,rpmh-regulator.yaml          | 16 ++++++++++++++++
+ 1 file changed, 16 insertions(+)
 
- .../bindings/regulator/qcom,rpmh-regulator.yaml    | 16 +++++++
- arch/arm64/boot/dts/qcom/sm7225-fairphone-fp4.dts  | 46 +++++++++++++++++++
- drivers/regulator/qcom-rpmh-regulator.c            | 53 ++++++++++++----------
- 3 files changed, 90 insertions(+), 25 deletions(-)
----
-base-commit: 89c07d98716a13454ec3fd9f97689e812cc71bd4
-change-id: 20260901-fp4-regulator-supply-7f6b999e9624
+diff --git a/Documentation/devicetree/bindings/regulator/qcom,rpmh-regulator.yaml b/Documentation/devicetree/bindings/regulator/qcom,rpmh-regulator.yaml
+index eed2ce7fa861..9115885e7985 100644
+--- a/Documentation/devicetree/bindings/regulator/qcom,rpmh-regulator.yaml
++++ b/Documentation/devicetree/bindings/regulator/qcom,rpmh-regulator.yaml
+@@ -187,6 +187,22 @@ allOf:
+       patternProperties:
+         "^vdd-s[1-8]-supply$": true
+ 
++  - if:
++      properties:
++        compatible:
++          enum:
++            - qcom,pm6350-rpmh-regulators
++    then:
++      properties:
++        vdd-l2-l5-l7-supply: true
++        vdd-l3-l6-l8-l9-l10-supply: true
++        vdd-l12-l14-supply: true
++        vdd-l15-l19-l22-supply: true
++        vdd-l18-l20-l21-supply: true
++      patternProperties:
++        "^vdd-l([14]|1[1367])-supply$": true
++        "^vdd-s[1-6]-supply$": true
++
+   - if:
+       properties:
+         compatible:
 
-Best regards,
---  
-Luca Weiss <luca.weiss@fairphone.com>
+-- 
+2.55.0
 
