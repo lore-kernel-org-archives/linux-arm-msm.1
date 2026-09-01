@@ -1,167 +1,263 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7076838B123
-	for <linux-arm-msm@vger.kernel.org>; Tue,  1 Sep 2026 12:39:55 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 081A037BE70;
+	Tue,  1 Sep 2026 12:44:42 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788266396; cv=none; b=PcOf9GwXvXHCTZGruRXuUEoRgIz+hd0Jo9vIrtCEpZs3gBD+7lasOvdHa7KMbyh/iNBlifcQOwpYgRPvhW+HZLq67ObY2kwy0Ef4LDmnrmuogIKgQcqn3ZUHYJbKKACF1c6tGcBwJQSYsm1qNrbeKA4kc5WzyKkEYWJV0RpFTN8=
+	t=1788266684; cv=none; b=R8Jfk7OcVWFj05SrZWj94FGBoMW6syodukAjlv8dX2OpDIwLo9mjlTqZEtApG3f9UR7xBxaHN6Eba3liP7tXwZbI4GPA0dUaC8VsNH4mH7k0426zqF7X74EY8axO4Ezkqg5hvRNdS2bB0Pe/9ueOJ/DtjvTKu7OO7BouUgwWddQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788266396; c=relaxed/simple;
-	bh=WoB/OmRTJJSpwrFDmSdgZWJFQWCDuGhALHK9eDbmU5Q=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=oxOTqybCmncUPJSHAoKCgvY70kLaXj81qMALV/puPHh1H4TJC6TABr/AKWiLK7GcksSM4KvyXkITQEjWaNWWI41047RRMea9S9nY4SM/FtZjIZ3tKHKaKlddQcPJOiseZeO59k5kktgkplBVTtcPmua9A+xyR+l3PedwEINg9i8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=cC9zX2zh; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=dUY/tBSI; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1788266684; c=relaxed/simple;
+	bh=pCQgaB1R8WJQij1mH+LcW418uXo3VOajA2hIsOFtA/Q=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=LjbV8Vq4qrOd1YCbcz2Y8nG8hjs5b6w21g0RnYd0ZyROsJP1a2KNkTVrrM+2dZrxuz8vUcO9T4AHfEiRiVv9lEjJAqSWQ3bZJBAxw7gPfzWQRd3lmBl0dazeGrlK0acKu4IbmvJqVXHK5lGZQN84ezLaKfkDMTVLm5LOycqElZA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Hc+11UCW; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="cC9zX2zh";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="dUY/tBSI"
-Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 681AJ9vC1641292
-	for <linux-arm-msm@vger.kernel.org>; Tue, 1 Sep 2026 12:39:54 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	N1V5W/dk7uvrao3kIiYVC1yNFS+4miACgUKafvhC/tM=; b=cC9zX2zhsWv/2iHW
-	nJz+YIv6Xhm9qbdp8ujaUqDifYvrkHk+jbv3mGUnOGkGexcckoGlV5jL+W+WO9My
-	WuTbxpzrWVoEOo0RHQYD0xJFqIIebBaB7+TCoRIL/yngwCvk02qzd8oZJO+ba/9C
-	AWvp6HEMqSEI/exf/sO/yAT130uNYmCgnwoBWhzxzuyvJWwEuRL2Buf0y0GfDJ72
-	yV7adgL42wztd+jJ4VRNVozhKBjrhnXXlN8Bgx+s8J7Yr+YRvDrGIZqxEterP5SJ
-	3ZLhu5LsaqX1GaO4nZunfg3lB5oOjQfTcH1pZZFDylLcYXg4oSpQccig+KgU19pf
-	waFzhA==
-Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com [209.85.222.199])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gdnk8tkyt-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 01 Sep 2026 12:39:54 +0000 (GMT)
-Received: by mail-qk1-f199.google.com with SMTP id af79cd13be357-9375d92d0caso99599885a.0
-        for <linux-arm-msm@vger.kernel.org>; Tue, 01 Sep 2026 05:39:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1788266394; x=1788871194; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=N1V5W/dk7uvrao3kIiYVC1yNFS+4miACgUKafvhC/tM=;
-        b=dUY/tBSIbHt2n6FLodAI0LA9yXQrHERH/l7Q4goph9ijFlHFGm42bm8YehiF+0qHTz
-         5LMcyv3//lnmYMs9LVnAUuEcnXHYVTclUgxjs4nOqJXbcaIrNzijLBVNivo92KW6/VIN
-         I1uxOGqNbF0F59+xBJdl9LpE5F1V8Ml2d3CWJ4BIdsjUhTNtKstzBp/cJSu2VECxrDF/
-         X+xmqCmazkA16CilfZWpXPJjZAL7bblTrmU8YIpfaJQ2XcBaYMeD6mGkf6y/G0eBmYbD
-         YluZdGzhD59YlASKcHUPWucXEYwKmneiVjYAuICWJUsjPtyOwG06s40O00h2P5C4hjfB
-         6Bbg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788266394; x=1788871194;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=N1V5W/dk7uvrao3kIiYVC1yNFS+4miACgUKafvhC/tM=;
-        b=Xm4i3vxkdHdbiO7+HfK77aJG5Y5qC53EvZ8s0HVBXj+QzuQwjeSiVtUPfaz/sNZcZ5
-         5QX9NAZ3c8yYdZzoNqkkVTo9N00b3oNfq4wCHPp8Ddn4qyN050H5TALGjgxbR4apAe1w
-         6eilCqozWvgaEvpeGJaKKNr7XJHeLaqBdYI2Yf7GIv4n0N8li3KgBUSi7w7JFFYzdokW
-         uCbo0/0CcpmClqNLiAHVcoMha7aIA596qBdYIJR511p2HwZETvuDC/I+cKTlfwzi5F1Q
-         +vC0wtYxO4Gp5uk4LB2b5ClEJBI+IrPMJUPN50eBaXzQQEVQdKDZ1pAEiKVfEcCVOXZT
-         LHHQ==
-X-Forwarded-Encrypted: i=1; AHgh+RpQc0H1GTFx1vL+Wv6dHsvIc0WYjjJMrD1czhEs2cPISBITDSDMCbxMLS0QSzXRz5mZ2S/1P806ok+GcF+g@vger.kernel.org
-X-Gm-Message-State: AFuF++l0tLiZFFVMOI/mN4GuPRejjEpjIjRaLZnByzlGP6Vh8VcL39ud
-	O8EYfvxf+nsShVZXylYDYtKnN+5XZ8SdhOVpOlaECDG8OrShqG53FmRXt4BvfxphmwzyjW5SteP
-	1j29+crw4ICvHcVH3o2KpLsV61fC1E9vkYrBNNmD+RvmHOCE4BCAU2hvj0wubbN/S4oX9
-X-Gm-Gg: AR+sD10XDxSyDAqHwujUA5unWSxMZxAhzoo6bCzmJiHN+onJdym7+nFlBg+6fJf2ilf
-	lzffEOl17qPFZ5ycBaXIHPzBuAb81kHLboqghYDx7yfaEhJqyWf3WBlTOPYI3oMnCk5GdDBRC1U
-	DQuJqnFpzgV3LhU/Oh8MeWMIsHquGRM0ACrDePfiZOU6z+9Ezd0zXrZQPS0qdN3YWVFIrcp5tMT
-	oOi3d12URnEA566W2PYLGXjdJZxnX/Z5qgzacMCk8FO7EIWk2nJyu5MCBaSunUwZYbL1d4J1XOi
-	NALbfr/L+S+Y7oYYatdToJ1OKUVj9wQaMO7K3Q6uu9BL1DtfkwOY4W2gu9Ml1pdtHoEhwSHrwhX
-	vFrbM8BoJjfkJ83P3Zh0M1Q==
-X-Received: by 2002:a05:620a:f10:b0:939:216c:59dd with SMTP id af79cd13be357-939287b1e3bmr1525534285a.4.1788266393553;
-        Tue, 01 Sep 2026 05:39:53 -0700 (PDT)
-X-Received: by 2002:a05:620a:f10:b0:939:216c:59dd with SMTP id af79cd13be357-939287b1e3bmr1525530885a.4.1788266393064;
-        Tue, 01 Sep 2026 05:39:53 -0700 (PDT)
-Received: from [192.168.202.12] ([178.235.128.140])
-        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-6a66d052d81sm760433a12.23.2026.09.01.05.39.50
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 01 Sep 2026 05:39:52 -0700 (PDT)
-Message-ID: <74c0fc35-a56d-4297-9fcb-23e2df8646c3@oss.qualcomm.com>
-Date: Tue, 1 Sep 2026 14:39:49 +0200
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Hc+11UCW"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 582641F00A3D;
+	Tue,  1 Sep 2026 12:44:34 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1788266682;
+	bh=5sy5zY/kb6Mszn23PmerLizu0NPQqcxXR4E1HaXk7aY=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=Hc+11UCWRpTjNkHjU6A2VNamv/H6pWO1GC6e1GnJQtn9uT60v6yVYa3uUVfVnEu/i
+	 CkM0EP81oCvrHrYXGODijoX6cHrYUmWG0muxyM32OKwWexxqNp0LygPOTheKwHFzRg
+	 pCuJlp+yzmeJLrJw6jkyVGCEXHIxBIduQX55BGDQ29v5D8JttGTFMO8FfCG3oKMT+t
+	 uCMkuApbLCttOv1fnayEn9gTQxiBdiKf7vc56anm+izvWXA2dccYyqB7FNDuRaP6IP
+	 yQPyXlwM0PvPVSdD39Y9rbmjzLLeLMAIsCJvrnYLh5akxx53lie6XibAI56YNztyRa
+	 lp7ENl3SZWIQg==
+Date: Tue, 1 Sep 2026 14:44:20 +0200
+From: Manivannan Sadhasivam <mani@kernel.org>
+To: Konrad Dybcio <konradybcio@kernel.org>
+Cc: Vinod Koul <vkoul@kernel.org>, 
+	Neil Armstrong <neil.armstrong@linaro.org>, Rob Herring <robh@kernel.org>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	Bjorn Andersson <andersson@kernel.org>, linux-kernel@vger.kernel.org, linux-phy@lists.infradead.org, 
+	linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, usb4-upstream@oss.qualcomm.com, 
+	Raghavendra Thoorpu <rthoorpu@qti.qualcomm.com>, Mika Westerberg <westeri@kernel.org>, 
+	Sven Peter <sven@kernel.org>, Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, 
+	Abel Vesa <abel.vesa@oss.qualcomm.com>, Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+Subject: Re: [PATCH v4 3/5] phy: qualcomm: qmp-combo: Add preliminary USB4
+ support
+Message-ID: <iynrogny3didip7cui3ce3yq3woaqzrr7f4aqdzvls4j4mslfn@aww5qjpy3gdx>
+References: <20260820-topic-usb4phy-v4-0-aec9d2cb31f6@oss.qualcomm.com>
+ <20260820-topic-usb4phy-v4-3-aec9d2cb31f6@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] PCI: qcom: Block accesses to downstream devices on
- link down
-To: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>,
-        Manivannan Sadhasivam <mani@kernel.org>,
-        Lorenzo Pieralisi <lpieralisi@kernel.org>,
-        =?UTF-8?Q?Krzysztof_Wilczy=C5=84ski?= <kwilczynski@kernel.org>,
-        Rob Herring <robh@kernel.org>, Bjorn Helgaas <bhelgaas@google.com>,
-        Qiang Yu <qiang.yu@oss.qualcomm.com>, Xilin Wu <sophon@radxa.com>
-Cc: linux-pci@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-References: <20260819-ecam_blocker-v2-1-e7a8fdc1c5cb@oss.qualcomm.com>
- <178826612782.58092.15490835074765422013.b4-ty@b4>
-Content-Language: en-US
-From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-In-Reply-To: <178826612782.58092.15490835074765422013.b4-ty@b4>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Authority-Analysis: v=2.4 cv=f6p4wuyM c=1 sm=1 tr=0 ts=6a96c79a cx=c_pps
- a=HLyN3IcIa5EE8TELMZ618Q==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
- a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22
- a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=AFY7VbZHp1LxXVr_yegA:9 a=QEXdDO2ut3YA:10
- a=bTQJ7kPSJx9SKPbeHEYW:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTAxMDExMiBTYWx0ZWRfXz9Pt6U2Gbrzm
- pLxVcY36lIbjJxZTFKvO2BclrY8LtXiAy078NZA3o26mh1EdtdO+tiyHpKBA0ONjlOTn3BNsRjU
- LIzfGogFLLV/EXxW+vetbovk7eyWyTzwyRiL6gi7QgzvZ+LTDYd9Z6drzNMcB4ZNGz63t0oOnBM
- DqvdIVeaZaUdfiBn9sB3w/Ex7tpbwRUkzqgsmr6RZIboOQkj5yA0sUgoHnkguh2KKZyuBMI447W
- lKW5w52a8GHsVV8cWqNCUEn1d4+ftRH9ZlJouEYXoITBHF28XrIDznGGZjE3+JOfaCxMbAeS+Vp
- OQRy22aDx65g7jMtYW/OjZYlaS3eJWAxgBSj0JlLSyELe55wtOmomv4PvmcTly7PNeJcCu/47+K
- x6hyecY92KHObPNZlJZ+iSkPRuV07yAvIkcKf5Yc73BiK1OyiDGSXBw2ptJXbo8h4XiIeOALjfS
- S7MngE0gi47sUTBWd/A==
-X-Proofpoint-ORIG-GUID: aQWKivWV-VV8TRtMV0W2a058AcKAPI3K
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTAxMDExMiBTYWx0ZWRfX2zgmR4k8IX4S
- 8NWJSqUtmhXswwnoy1duog2L8AC3tdgNSloMGi0h/YMpz1GO+5cFuP169tZvA8vd7fUByUpjCLz
- GcMiiale4wVVyXXwjrVdefWmMo9UCiU=
-X-Proofpoint-GUID: aQWKivWV-VV8TRtMV0W2a058AcKAPI3K
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-01_03,2026-08-31_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 malwarescore=0 priorityscore=1501 suspectscore=0
- impostorscore=0 spamscore=0 phishscore=0 lowpriorityscore=0 bulkscore=0
- adultscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
- definitions=main-2609010112
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <20260820-topic-usb4phy-v4-3-aec9d2cb31f6@oss.qualcomm.com>
 
-On 9/1/26 2:35 PM, Manivannan Sadhasivam wrote:
+On Thu, Aug 20, 2026 at 04:24:12PM +0200, Konrad Dybcio wrote:
+> From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
 > 
-> On Wed, 19 Aug 2026 23:36:54 -0700, Qiang Yu wrote:
->> After a PCIe link goes down, software may still access the BAR (MMIO)
->> space or configuration space of devices behind that link before recovery
->> has run. As the link is down, these accesses never complete, resulting in
->> a storm of Completion Timeout AERs.
->>
->> Use the controller's ECAM blocker to drop these accesses to the PCIe
->> address space as soon as the link-down interrupt fires, so that Completion
->> Timeout AERs are reduced. The blocked range covers the entire address
->> space (base 0x0, all-ones limit), since the Root Port's own DBI/iATU
->> register space remains accessible regardless.
->>
->> [...]
+> Some Combo PHYs (so far only on SC8280XP, X1E80100 and Glymur), come in
+> a flavor called USB43DP, which as the name implies, features USB4, USB3
+> and DP signal processing capabilities. In that architecture, USB3 and
+> USB4 PHYs share the same USB_PLL while featuring separate logic spaces.
+> The DP part is roughly the same as on the instances without USB4.
 > 
-> Applied, thanks!
+> The USB4 and USB3/DP operation modes of the PHY are mutually exclusive.
+> Only one USB protocol (and flavor of pipe clock) can be active at a
+> given moment (not to be confused with USB3 not being able to be
+> tunneled as USB4 packets - that of course remains possible).
+> The DP PLL is still used for clocking tunneled DP links. It may be
+> turned off to save power when no tunnels are active, but that's left as
+> a TODO item for now.
 > 
-> [1/1] PCI: qcom: Block accesses to downstream devices on link down
->       commit: 86624b718f94517b26f96c1d7beb7632e5562afd
+> Due to the nature of USB4, the Type-C handling happens entirely inside
+> the Host Router, and as such the QMPPHY's mux_set() function is
+> nullified for the period when USB4 PHY remains active. This is strictly
+> necessary, as the Host Router driver is going to excercise manual
+> control over the USB4 PHY's power state, which is needed by the suspend
+> and resume flows. Failure to control that synchronously with other
+> parts of the code results in a SoC crash by unlocked access.
+> 
+> Because of that, a new struct phy is spawned to expose the USB4 mode,
+> along with a .set_mode callback to allow toggling between USB4 and TBT3
+> submodes.
+> 
+> Thunderbolt 3, having a number of differences vs USB4, requires a
+> couple specific overrides, pertaining to electrical characteristics,
+> which are easily accommodated for.
+> 
+> Reviewed-by: Abel Vesa <abel.vesa@oss.qualcomm.com>
+> Reviewed-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+> Signed-off-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
 
-Could this be a fix for
+One nit below:
 
-https://lore.kernel.org/linux-arm-msm/b461c125-947b-4e06-b502-abb354e0cba6@oss.qualcomm.com/
+Reviewed-by: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
 
-?
+> ---
+>  drivers/phy/qualcomm/phy-qcom-qmp-combo.c | 399 ++++++++++++++++++++++++------
+>  1 file changed, 329 insertions(+), 70 deletions(-)
+> 
+> diff --git a/drivers/phy/qualcomm/phy-qcom-qmp-combo.c b/drivers/phy/qualcomm/phy-qcom-qmp-combo.c
+> index c39ced168d03..dfdeec3ee4f5 100644
+> --- a/drivers/phy/qualcomm/phy-qcom-qmp-combo.c
+> +++ b/drivers/phy/qualcomm/phy-qcom-qmp-combo.c
+> @@ -22,6 +22,7 @@
+>  #include <linux/usb/typec.h>
+>  #include <linux/usb/typec_dp.h>
+>  #include <linux/usb/typec_mux.h>
+> +#include <linux/usb/typec_tbt.h>
+>  
+>  #include <drm/bridge/aux-bridge.h>
+>  
+> @@ -66,10 +67,14 @@
+>  #define SW_USB3PHY_RESET			BIT(2)
+>  /* mux to select USB3 PHY reset control, 0:HW control, 1: software reset */
+>  #define SW_USB3PHY_RESET_MUX			BIT(3)
+> +#define SW_USB4PHY_RESET			BIT(4)
+> +#define SW_USB4PHY_RESET_MUX			BIT(5)
+>  
+>  /* QPHY_V3_DP_COM_PHY_MODE_CTRL register bits */
+>  #define USB3_MODE				BIT(0) /* enables USB3 mode */
+>  #define DP_MODE					BIT(1) /* enables DP mode */
+> +#define USB4_MODE				BIT(2) /* mutually exclusive with the above */
+> +#define DP_TUNNELING_CLOCK_GEN_EN		BIT(3)
+>  
+>  /* QPHY_V3_DP_COM_TYPEC_CTRL register bits */
+>  #define SW_PORTSELECT_VAL			BIT(0)
+> @@ -82,6 +87,8 @@ enum qmpphy_mode {
+>  	QMPPHY_MODE_USB3DP = 0,
+>  	QMPPHY_MODE_DP_ONLY,
+>  	QMPPHY_MODE_USB3_ONLY,
+> +	/* USB4 QMPPHY mode refers to both USB4 and TBT3 */
+> +	QMPPHY_MODE_USB4,
+>  };
+>  
+>  /* set of registers with offsets different per-PHY */
+> @@ -94,6 +101,7 @@ enum qphy_reg_layout {
+>  	QPHY_PCS_LFPS_RXTERM_IRQ_CLEAR,
+>  	QPHY_PCS_POWER_DOWN_CONTROL,
+>  	QPHY_PCS_CLAMP_ENABLE,
+> +	QPHY_PCS_USB4_CLAMP_ENABLE,
+>  
+>  	QPHY_COM_RESETSM_CNTRL,
+>  	QPHY_COM_C_READY_STATUS,
+> @@ -2489,6 +2497,8 @@ struct qmp_combo_offsets {
+>  	u16 dp_txb;
+>  	u16 dp_dp_phy;
+>  	u16 aon_toggle;
+> +	u16 usb4_serdes;
+> +	u16 usb4_pcs;
+>  };
+>  
+>  struct qmp_phy_cfg {
+> @@ -2536,6 +2546,18 @@ struct qmp_phy_cfg {
+>  	int (*calibrate_dp_phy)(struct qmp_combo *qmp);
+>  	void (*dp_aux_init)(struct qmp_combo *qmp);
+>  
+> +	/* USB4 specifics */
+> +	const struct qmp_phy_init_tbl *usb4_serdes_tbl;
+> +	int usb4_serdes_tbl_num;
+> +	const struct qmp_phy_init_tbl *usb4_serdes_tb3_ovrd_tbl;
+> +	int usb4_serdes_tb3_ovrd_num;
+> +	const struct qmp_phy_init_tbl *usb4_tx_tbl;
+> +	int usb4_tx_tbl_num;
+> +	const struct qmp_phy_init_tbl *usb4_rx_tbl;
+> +	int usb4_rx_tbl_num;
+> +	const struct qmp_phy_init_tbl *usb4_pcs_tbl;
+> +	int usb4_pcs_tbl_num;
+> +
+>  	/* resets to be requested */
+>  	const char * const *reset_list;
+>  	int num_resets;
+> @@ -2578,8 +2600,12 @@ struct qmp_combo {
+>  	void __iomem *dp_tx2;
+>  	void __iomem *dp_dp_phy;
+>  
+> +	void __iomem *usb4_serdes;
+> +	void __iomem *usb4_pcs;
+> +
+>  	struct clk *pipe_clk;
+>  	struct clk_bulk_data *clks;
+> +	struct clk *p2rr2p_pipe_clk;
+>  	int num_clks;
+>  	struct reset_control_bulk_data *resets;
+>  	struct regulator_bulk_data *vregs;
+> @@ -2598,6 +2624,10 @@ struct qmp_combo {
+>  	unsigned int dp_init_count;
+>  	bool dp_powered_on;
+>  
+> +	struct phy *usb4_phy;
+> +	enum tbt_phy_submode usb4_phy_submode;
+> +	unsigned int usb4_init_count;
+> +
+>  	struct clk_fixed_rate pipe_clk_fixed;
+>  	struct clk_hw dp_link_hw;
+>  	struct clk_hw dp_pixel_hw;
+> @@ -4006,6 +4036,9 @@ static int qmp_combo_dp_calibrate(struct phy *phy)
+>  static int qmp_combo_com_init(struct qmp_combo *qmp, bool force)
+>  {
+>  	const struct qmp_phy_cfg *cfg = qmp->cfg;
+> +	u32 dp_reset_val = SW_DPPHY_RESET_MUX | SW_DPPHY_RESET;
+> +	void __iomem *pcs_aon = qmp->pcs_aon;
+> +	void __iomem *pcs = qmp->pcs;
+>  	void __iomem *com = qmp->com;
+>  	void __iomem *aon_toggle;
+>  	int ret;
+> @@ -4019,6 +4052,16 @@ static int qmp_combo_com_init(struct qmp_combo *qmp, bool force)
+>  	else
+>  		aon_toggle = qmp->pcs_aon;
+>  
+> +	if (qmp->qmpphy_mode == QMPPHY_MODE_USB4) {
+> +		pcs = qmp->usb4_pcs;
+> +
+> +		qphy_setbits(pcs_aon, cfg->regs[QPHY_PCS_USB4_CLAMP_ENABLE], CLAMP_EN);
+> +
+> +		/* Do not disturb the DP PLL in case there's an active DP tunnel */
+> +		if (readl(com + QPHY_V3_DP_COM_RESET_OVRD_CTRL) & DP_TUNNELING_CLOCK_GEN_EN)
+> +			dp_reset_val &= ~SW_DPPHY_RESET_MUX;
+> +	}
+> +
+>  	ret = regulator_bulk_enable(cfg->num_vregs, qmp->vregs);
+>  	if (ret) {
+>  		dev_err(qmp->dev, "failed to enable regulators, err=%d\n", ret);
+> @@ -4052,8 +4095,9 @@ static int qmp_combo_com_init(struct qmp_combo *qmp, bool force)
+>  
+>  	/* override hardware control for reset of qmp phy */
+>  	qphy_setbits(com, QPHY_V3_DP_COM_RESET_OVRD_CTRL,
+> -			SW_DPPHY_RESET_MUX | SW_DPPHY_RESET |
+> -			SW_USB3PHY_RESET_MUX | SW_USB3PHY_RESET);
+> +			dp_reset_val |
+> +			SW_USB3PHY_RESET_MUX | SW_USB3PHY_RESET |
+> +			SW_USB4PHY_RESET_MUX | SW_USB4PHY_RESET);
+>  
+>  	/* override hardware control for reset of qmp phy */
+>  	if (aon_toggle && cfg->regs[QPHY_AON_TOGGLE_ENABLE]) {
+> @@ -4069,6 +4113,10 @@ static int qmp_combo_com_init(struct qmp_combo *qmp, bool force)
+>  	if (cfg->invert_cc_polarity)
+>  		val |= INVERT_CC_POLARITY;
+>  
+> +	/*
+> +	 * Note that in USB4 mode, the router controls pin assignments instead
+> +	 * and the values of the PORTSELECT registers are ignored.
+> +	 */
+>  	writel(val, com + QPHY_V3_DP_COM_TYPEC_CTRL);
+>  
+>  	switch (qmp->qmpphy_mode) {
+> @@ -4096,12 +4144,21 @@ static int qmp_combo_com_init(struct qmp_combo *qmp, bool force)
+>  		qphy_clrbits(com, QPHY_V3_DP_COM_RESET_OVRD_CTRL,
+>  				SW_USB3PHY_RESET_MUX | SW_USB3PHY_RESET);
+>  		break;
+> +	case QMPPHY_MODE_USB4:
+> +		writel(USB4_MODE, com + QPHY_V3_DP_COM_PHY_MODE_CTRL);
+> +
+> +		/* bring both QMP USB and QMP DP PHYs PCS block out of reset */
+> +		/* TODO: disable DP PLL if there are no active tunnels after router setup */
 
-(+Xilin)
+100 column width generally applies to code, not comments. Comments should still
+be wrapped to 80 columns.
 
-Konrad
+- Mani
+
+-- 
+மணிவண்ணன் சதாசிவம்
