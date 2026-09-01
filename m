@@ -1,33 +1,33 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1831538A73B;
-	Tue,  1 Sep 2026 11:41:22 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E0F8537E2E5;
+	Tue,  1 Sep 2026 11:50:18 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788262884; cv=none; b=JWHMn9PTEZ6cKQYi0sw4KSAcYujvm+AeS9+O1F7+Mvzu8z+fDZPX2HtDrMAVn5sSBCXqjElRyolXnASOvWG098leq37hBeJXx/OiNcgtGqq13PA2vHEjNVyD2nleonEQWmcC1HLzlRX23CuYrKvmF1nuaqWs8DHP5S/9RJ9P680=
+	t=1788263419; cv=none; b=nyvcb+sZVA8S/FKpzhNZ3ZyZTq+n40MOXW30Ht1I7dXdjm/xx34WRbuWSDrON8oUuQeyJbMRClh0vTuZKDl4zc8eZ3rN9i7SXvolpd2TF2GXuRCRnYfAEp2eh/t6EjyulhSPv46A5KTkt2G1+EG9yIgxEDUw/nPUr6TnAMcbGoE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788262884; c=relaxed/simple;
-	bh=4Sut431OYovyF5XUwRSkO79dLmzo7RfBIAB3ODeNfyI=;
+	s=arc-20240116; t=1788263419; c=relaxed/simple;
+	bh=0cX+SUVEv82lqdnL2PEHhEZ9iSnjtOEad/m3Tmpa8ew=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=bYU0h7ZIw5drTtXjmNIvY7JFO6eOOVo+wdq4CesCtv5Mh4h35mnfBRGfUa/QmEpoHNk1W3xlUS+y0o5rTjWzFrLk+kzNEAUHW9HHTLxeov1b37xcX8bh9iOR5EaBsge0PdxEhqTNgrhDanQL/jhfwSDEW6BsEqXG7XyV0GyrVHQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=DtO4aH6l; arc=none smtp.client-ip=100.103.45.18
+	 In-Reply-To:Content-Type; b=W79oq2TvL3ebyPVBAIAjlC63manqkjUjbUeEs/iGFlGF/y8Nqhr2G1rf8oinbGrQBL5WmwoZtfe9romVuQHwPnJR0gH6FBUjjEYR8NEfFfgbCfDh3KS8kypKR+DTGn7YVDQ5YFHY5QPP8BSdyCn6G0OsercJF3qDs+Rjf9Zuxeo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ia3/pj6T; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="DtO4aH6l"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6240A1F000E9;
-	Tue,  1 Sep 2026 11:41:15 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="ia3/pj6T"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 963091F000E9;
+	Tue,  1 Sep 2026 11:50:14 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1788262882;
-	bh=tqpj4U5RE/8d3gBsnNKQyfPdgEnX0VkseckqDrClN5A=;
+	s=k20260515; t=1788263418;
+	bh=s1Sw3sV6LFWv+rxNtNuZ5K4jc587FYAGi1dw55VmK6o=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=DtO4aH6lyINsTs+9M7+fSYmL77aSjcNeAcoo1RyVj7QpGSBShmSEklzMDrO0ejr/E
-	 xaVCE3SMwEFxN107a60YPXRAaYmpYIPmA6/kyG6HpFGJ3Owu37Ipgv6yYD7H7WLM7k
-	 0rMHm3o7ayaRoIRm6UXil5uamAeeqkCN9NErKuXaRU00Yr9cU5BcuQy7TsQKHwRCyz
-	 LDNZ/92vw7klTg+FLiKOFy38513/ie0ae2vKjrNuAiVmfAqZcZmmsM9Z8+W7W859j+
-	 3U7x8fh/AM3nUyPsWgkEwfh9Qvzg0CgulEFX30qLPuVUkfb1Zc11e0bKuSlf5UiCf0
-	 SPpO37cC9V23w==
-Message-ID: <8caae60a-beb6-4f0d-ae0e-27f1250b9e94@kernel.org>
-Date: Tue, 1 Sep 2026 13:41:12 +0200
+	b=ia3/pj6TKB3oddODZ5p7Tl8MzjUh3BZb87OU/zVoDiqib0cC+6H0lqNXyHsUjWssW
+	 kxk1yYQ137v63PjzOLbLXgdDmYTyLrZtJIeFH/hYuFb2E4yFyJdgiaSehqRKoIe8Dv
+	 kn79XWrHc/etMMrUMmZ5n3HNnJe7fvXTPhKgkDWDwh3c30OSWsxSIQkHZUT7xIOq53
+	 InLa9jIJLmqxiS4M5d1xD8LrwDDjHlKvyh4yeesKc7P27vCeksyZ1uUhLUDBmgYCLT
+	 8gAg1F4SGmnsL2TWNxuQyVe3DWd1fcUjUlNlikTvDC7TRVGFxztG0UaQBZs6mta9Vx
+	 UUHB+dYV6Sl2g==
+Message-ID: <06e15a0c-d87c-4e0d-8f04-9e25dfc5021a@kernel.org>
+Date: Tue, 1 Sep 2026 13:50:12 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -35,26 +35,16 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH RFC 9/9] arm64: dts: qcom: shikra-iqs-evk: Enable both
- ethernet ports
-To: Mohd Ayaan Anwar <mohd.anwar@oss.qualcomm.com>,
- Andrew Lunn <andrew+netdev@lunn.ch>, "David S. Miller"
- <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>,
- Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
- Conor Dooley <conor+dt@kernel.org>,
- Richard Cochran <richardcochran@gmail.com>,
+Subject: Re: [PATCH 3/3] arm64: defconfig: Enable PMIC5 Gen3 ADC thermal
+ monitor
+To: Bjorn Andersson <bjorn.andersson@oss.qualcomm.com>,
  Bjorn Andersson <andersson@kernel.org>,
- Konrad Dybcio <konradybcio@kernel.org>,
- Maxime Coquelin <mcoquelin.stm32@gmail.com>,
- Alexandre Torgue <alexandre.torgue@foss.st.com>,
- Russell King <linux@armlinux.org.uk>
-Cc: linux-arm-msm@vger.kernel.org, netdev@vger.kernel.org,
- devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-stm32@st-md-mailman.stormreply.com,
- linux-arm-kernel@lists.infradead.org
-References: <20260612-shikra_ethernet-v1-0-f0f4a1d19929@oss.qualcomm.com>
- <20260612-shikra_ethernet-v1-9-f0f4a1d19929@oss.qualcomm.com>
+ Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
+ linux-kernel@vger.kernel.org
+References: <20260830-hamoa-sys-therm-v1-0-27108c40fba5@oss.qualcomm.com>
+ <20260830-hamoa-sys-therm-v1-3-27108c40fba5@oss.qualcomm.com>
 From: Krzysztof Kozlowski <krzk@kernel.org>
 Content-Language: en-US
 Autocrypt: addr=krzk@kernel.org; keydata=
@@ -100,22 +90,22 @@ Autocrypt: addr=krzk@kernel.org; keydata=
  K9bCVaboTA2T77QYkRcRJYSsO1alGX0ome/hMLD1daXlkrNUp1HWa3K4iytLRXjCSIorWiGs
  n+q3krnpXu3TFkA8qtOFZMdnIiFuiq1yLT8hptsV5xh1TA2nsVvSYiaCr3q4s4BKjS/KrLDb
  qoxzw8ISjdUp4pA85vb6YLCmb39NgidD+7PmAr65lBNveIFynTgsja1rRQ4=
-In-Reply-To: <20260612-shikra_ethernet-v1-9-f0f4a1d19929@oss.qualcomm.com>
+In-Reply-To: <20260830-hamoa-sys-therm-v1-3-27108c40fba5@oss.qualcomm.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-On 11/06/2026 20:37, Mohd Ayaan Anwar wrote:
-> Enable both Gigabit Ethernet controllers.  Each port has a dedicated
-> PHY with a gpio-hog to assert the power-enable GPIO at boot,
-> pin-control for the RGMII and MDIO bus, and MTL queue configuration.
-> 
-> Signed-off-by: Mohd Ayaan Anwar <mohd.anwar@oss.qualcomm.com>
-> ---
->  arch/arm64/boot/dts/qcom/shikra-iqs-evk.dts | 235 ++++++++++++++++++++++++++++
->  1 file changed, 235 insertions(+)
+On 30/08/2026 23:02, Bjorn Andersson wrote:
+> All Hamoa-based devices uses PMIC5 Gen3 ADC connected to thermistors for
 
-As pointed out in off-line talk, this change is not complete and causes
-failures.
+"All Qualcomm Hamoa-based devices use Qualcomm PMIC5 ..."
+
+> measuring temperature across the system.
+> 
+> Enable the Gen3 ADC, and it's associated ADC_TM auxiliary, drivers to
+
+s/Gen3 ADC/Qualcomm PMIC Gen3 ADC/ or something similar
+
+Acked-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
 
 Best regards,
 Krzysztof
