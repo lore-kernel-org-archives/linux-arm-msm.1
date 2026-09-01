@@ -1,77 +1,140 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-qk1-f178.google.com (mail-qk1-f178.google.com [209.85.222.178])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CADD24052AC;
-	Mon, 31 Aug 2026 23:26:36 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A17A025524C
+	for <linux-arm-msm@vger.kernel.org>; Tue,  1 Sep 2026 01:37:00 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.222.178
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788218798; cv=none; b=dJZd5FABf2fFlkKK9YL7Cs8fpsyT5qiuw3c9r+6NF1PsyT9FUsEW+oflDm6iF6PPTKojht1n2CLqEyQaZ42+Zt74XGABhiJp0dl09Z9ncj4UI89ljkVSEh4nnlwbqq/2Hp7wgVgSc3FDUlw0lAoE5/RlisnsKDOKaBRbvKZYYP8=
+	t=1788226623; cv=none; b=HTt7zciIfGSp1Pi2GGBkk5IirJql8sGaf6yTCwUFSIyggMcZ1E3ZVP1YNpGbeKSeHaqNbBk7Kcutj5xZol+nauKjWbbGu+E5pIgg9BDtuC84eU6QEt0MIqv/4fC3JiN4xMWYyFeEIO7PEZ3U9G9vAqB74L+Tpqwzdqa1rKG3oS0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788218798; c=relaxed/simple;
-	bh=HazZv9uRXn2zDEZ/VNQ6mnD7ecREtVQ840yGapev2aY=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=d9cbg4NQhP18NMiIV3sR/ZTUqRICDE2J3E6k63YeH9tJ44SIHEzMSqhcbBMe//xtpj8abzo+CEfaDBDhoggwHEuiDtpi1rLPFYQA1uffa6y9YXfLXkp8yYcU0AAA3KjjQyis7ld727OgkEMqDDgzESmxJqOr9zFvRfQJQd9w9x4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=f+lkcle7; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1788226623; c=relaxed/simple;
+	bh=A3ITwJ3sR+qec2WwQGQ5KPp1IsFncmE7QnQCzTPVg14=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=dpU9CZ/wRBUcpCzkHFrKaWAwDhzIe3oAS7STHrBhtt7/4m1obIl3lPnpY5MXoFTolptYAWy1ZRsRDvzy3ov7ZyX+86xEFbRgTK0AN8IYYnAbn4KfjH14HpNoxLKc45Fqbl6yWm+mEaQZC6lfZC3qToY9F2pCAlECiXYEs8pxN50=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=riscstar.com; spf=pass smtp.mailfrom=riscstar.com; dkim=pass (2048-bit key) header.d=riscstar-com.20251104.gappssmtp.com header.i=@riscstar-com.20251104.gappssmtp.com header.b=alk1BL3k; arc=none smtp.client-ip=209.85.222.178
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=riscstar.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=riscstar.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="f+lkcle7"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7CAF41F00A3D;
-	Mon, 31 Aug 2026 23:26:34 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1788218796;
-	bh=jiqRW3Eq9poPOC9pat4jZSNSoS4ay2TFyWKMbTiZyfA=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=f+lkcle7OS+KSeoRbbaxsYBWlKYTPYjUt4szEC4U9bRIBAtw9aQb3sVZ/J6klKPPf
-	 eAR5cTjRhQTN8PgH/zaT8rTUGTONvA2suOx7022JtkwCISFFm/1rMlahD6+DwTF9jI
-	 zMjpyWRzCSQ44AgLTpJ+lOquh7vrea21d1rEks9CBkQjU9MFJAUDFW244BlEqDNFdL
-	 6vwCK8pUTcXyko/SdhgLhGiLrYu3rwAGnFoQu/Mm+ogqnK+CN7KXF6YFn9W1TBLA0x
-	 CBRk+niaaZTuOAD/i/vwCC480PzecIrBdix54hNFbE6PUvNyRCPGcEGJ5Jsfs862tM
-	 z1hTOt/ysK9Fw==
-Date: Mon, 31 Aug 2026 18:26:32 -0500
-From: Bjorn Andersson <andersson@kernel.org>
-To: Sreeshankar K <sreeshankar0910@gmail.com>
-Cc: robh@kernel.org, krzk+dt@kernel.org, conor+dt@kernel.org, 
-	mturquette@baylibre.com, sboyd@kernel.org, rafael@kernel.org, viresh.kumar@linaro.org, 
-	konradybcio@kernel.org, tglx@kernel.org, ulfh@kernel.org, bmasney@redhat.com, 
-	radu@rendec.net, abel.vesa@oss.qualcomm.com, lpieralisi@kernel.org, 
-	taniya.das@oss.qualcomm.com, danila@mainlining.org, davidwronek@gmail.com, mani@kernel.org, 
-	robimarko@gmail.com, linux@gurudas.dev, devicetree@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org, 
-	linux-pm@vger.kernel.org
-Subject: Re: [PATCH v6 04/13] clk: qcom: Add Global Clock Controller (GCC)
- driver for SM7250
-Message-ID: <apYNXZ9TJEC6rVVf@baldur>
-References: <20260824150156.1310-1-sreeshankar0910@gmail.com>
- <20260824150156.1310-5-sreeshankar0910@gmail.com>
+	dkim=pass (2048-bit key) header.d=riscstar-com.20251104.gappssmtp.com header.i=@riscstar-com.20251104.gappssmtp.com header.b="alk1BL3k"
+Received: by mail-qk1-f178.google.com with SMTP id af79cd13be357-9371bcf1f8fso295357785a.1
+        for <linux-arm-msm@vger.kernel.org>; Mon, 31 Aug 2026 18:37:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=riscstar-com.20251104.gappssmtp.com; s=20251104; t=1788226619; x=1788831419; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=e4YT7BT93vHyyYCSd9nX5alb6pkdBUuB5YMQu5Bqr7w=;
+        b=alk1BL3kjlHyFTFO4J2mUUNDV/1XhjZOcXccJSBnUytM/uZppsPZHUAS0Ayi62OKi4
+         F3XsJQe8SN3c/DKPtTFkmPbLNlDj4mgteLmMXy58e8ho48FUc36NxohHL7mXyRMrxoxx
+         HSZc/pNYytWQ/ZmJvkD+j80izU6VWuWvpgYcffL7TpF+HyshbTdG8zQ0QuQBgRGYd3eV
+         4+SE0PlafZ693c44s7h7u2FEHrtSFSEPM98PxBS0R8JySATOAT6xLwlVrbJ/UDPoYUYV
+         wUKTtuRufbUupw8Li98SRrwbkL5syh0Y4EKQo8rEuLrkBQRSWUBUZA3Un2xHzU7WdlVF
+         hLEA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1788226619; x=1788831419;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=e4YT7BT93vHyyYCSd9nX5alb6pkdBUuB5YMQu5Bqr7w=;
+        b=oKd63PeoL68qStfDCx9ziV2CbSY9yg8nVxsXyDwHyyj+wd1T8ptMXRAzDgDTW3l5DX
+         FBMBleTQm+6P6XbWNkLHaRi9555Q0IerOujY28DcW3ZPbCiwnm0kCdhg60fLbOogftvg
+         5Q9wsV3yBIOZ50Sjj1HbHuV8oIaCD/yT7wf079PDHh0cpH9MPutaqpq2VrlzoX7BSwy6
+         LM1XL52KL/mEeh0KKzUdWHoXDP+xauqFQdw5GvJC5/JRghRJrQLHcixLVttAZZIMUvsD
+         w6ZY+8k93fO9mZ90bcLx2j5XM0nywIDgQXTk/AdYUYGUt8OO+9OedA4FZImOeaUXW0S3
+         GyWw==
+X-Forwarded-Encrypted: i=1; AHgh+Rp0mvEZMnauO79+qnd9hGjMN/9pXkZJMKF16FEqwt0jFdgud5BN/087xQguLk/ttMONJEtXq4vVvCgMOzHb@vger.kernel.org
+X-Gm-Message-State: AFuF++nfDh63JI78Ybnr1kVRcWux1EZnuZqwB5G2f5Yl59jSAk3r7dTN
+	EZi7pThCOO/FoyDdPhdLb04xpF4Vcem2L2qw1qbazxwoiYlTf02G3WD2c9bJe9IZou4=
+X-Gm-Gg: AR+sD13275Dv2GT1j4TiJVgbyMTP1w5wN992qq2ARNGZOBSlrTDHTFMLC/uonrOuPZb
+	j2FpbjWAPGkM29PO5Hi7Kp6lzdOn4jS/UC2I0Murzh7MJbVTctwsa0Fs9Gs9fcWuCS1S7EDcc+S
+	jo8JELl+mFzKki0RGDzmKIt8gNFRmzy+9M3XJYjjLP7t/oDu8zddmcmv1DMyGVxzUdvoWReU5rH
+	ddS9hwF6lRAuCWcwciAKs8rbD4X7EqX82MV7QqiXFKFXVzy8SXUelYHtAW3nIFCmB+C3mo/Z19l
+	+InIllbcBS+o68Ce0tIMxRnBK1RPk6HJ51AtvBfzkNFRz6gdBF2q2X9ekTRNcwPYB0z0Qp8mwuL
+	/R1rmkxz0tRKlJbVwCs4mLYLZcFkqx05JNioYWMP+SJBwk+Li/+KcrQcww1ZdY6so83PzgHM1X5
+	xYQXmc+W6B7rczyiGdI3Li2CeXXLpbPJ1RfjVhsUSnIfQ5fjY0svegQzTEyu8c6VCsYg==
+X-Received: by 2002:a05:620a:f04:b0:92e:6a33:7118 with SMTP id af79cd13be357-939138df202mr3269359785a.30.1788226618911;
+        Mon, 31 Aug 2026 18:36:58 -0700 (PDT)
+Received: from zippy.localdomain ([73.62.185.64])
+        by smtp.gmail.com with ESMTPSA id af79cd13be357-9391703a918sm919265485a.12.2026.08.31.18.36.57
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 31 Aug 2026 18:36:58 -0700 (PDT)
+From: Alex Elder <elder@riscstar.com>
+To: andersson@kernel.org,
+	konradybcio@kernel.org,
+	robh@kernel.org,
+	krzk+dt@kernel.org,
+	conor+dt@kernel.org
+Cc: mani@kernel.org,
+	krishna.chundru@oss.qualcomm.com,
+	dmitry.baryshkov@oss.qualcomm.com,
+	sushrut.trivedi@oss.qualcomm.com,
+	umang.chheda@oss.qualcomm.com,
+	rosh@debian.org,
+	jsandom@axon.com,
+	daniel@riscstar.com,
+	mohd.anwar@oss.qualcomm.com,
+	lorenzo.bianconi@oss.qualcomm.com,
+	devicetree@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Subject: [PATCH v2 0/6] arm64: dts: qcom: clean up PCI function nodes
+Date: Mon, 31 Aug 2026 20:36:47 -0500
+Message-ID: <20260901013654.1343537-1-elder@riscstar.com>
+X-Mailer: git-send-email 2.53.0
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260824150156.1310-5-sreeshankar0910@gmail.com>
+Content-Transfer-Encoding: 8bit
 
-On Mon, Aug 24, 2026 at 03:01:47PM +0000, Sreeshankar K wrote:
-> Add support for the global clock controller found on SM7250
-> based devices. This should allow most non-multimedia device
-> drivers to probe and control their clocks.
+While working on upstream support for the Toshiba TC9564 SoC I
+learned that its PCIe endpoint function nodes included the
+device_type property, indicating each is a "pci" device.  Herve
+Codina pointed out that this is not correct; only a PCI device
+"that implements a PCI bus" should define that property.
 
-"This should"?
+I looked at other upstream devicetree files and I found four other
+places with this same mistake.  (All are for Qualcomm platforms,
+and all are for platforms using a TC956x SoC.)
 
-> 
-> Signed-off-by: Sreeshankar K <sreeshankar0910@gmail.com>
-[..]
-> diff --git a/drivers/clk/qcom/gcc-sm7250.c b/drivers/clk/qcom/gcc-sm7250.c
-[..]
-> +	.clk_regs_configure = gcc_sm7250_clk_regs_configure,
+This series removes the device_type property where it is defined
+for a PCI endpoint function.
 
-/home/bjorn/sandbox/kernel/workspace/drivers/clk/qcom/gcc-sm7250.c:2228:24: error: incompatible function pointer types initializing 'void (*)(struct device *, struct regmap *)' with an expression of type 'void (struct regmap *)' [-Wincompatible-function-pointer-types]
- 2228 |         .clk_regs_configure = gcc_sm7250_clk_regs_configure,
-      |                               ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-1 error generated.
+It also removes the #address-cells, #size-cells, and ranges
+properties in these cases, with a plan to restore them only when
+they are known to be needed (to implement pci-ep-bus sub-nodes).
 
-Thank you,
-Bjorn
+					-Alex
 
-> +};
+Between version 1 and version 2:
+- Added Reviewed-by from Mani and Konrad
+- Added a patch that updates "qcs8550-rb5gen2.dts" as well
+
+Version 1 is available here:
+  https://lore.kernel.org/lkml/20260807195846.456079-1-elder@riscstar.com/
+
+Alex Elder (6):
+  arm64: dts: qcom: qcs6490-rb3gen2: clean up PCI function nodes
+  arm64: dts: qcom: qcs6490-rb3gen2-industrial-mezzanine: clean up PCI
+    function nodes
+  arm64: dts: qcom: lemans-evk-ifp-mezzanine: clean up PCI function
+    nodes
+  arm64: dts: qcom: monaco-evk-ifp-mezzanine: clean up PCI function
+    nodes
+  arm64: dts: qcom: qcs6490-thundercomm-minipc-g1iot: clean up PCI
+    function nodes
+  arm64: dts: qcom: qcs8550-rb5gen2: clean up PCI function nodes
+
+ .../boot/dts/qcom/lemans-evk-ifp-mezzanine.dtso  |  8 --------
+ .../boot/dts/qcom/monaco-evk-ifp-mezzanine.dtso  |  8 --------
+ .../qcs6490-rb3gen2-industrial-mezzanine.dtso    | 16 ----------------
+ arch/arm64/boot/dts/qcom/qcs6490-rb3gen2.dts     |  8 --------
+ .../qcom/qcs6490-thundercomm-minipc-g1iot.dts    |  8 --------
+ arch/arm64/boot/dts/qcom/qcs8550-rb5gen2.dts     |  8 --------
+ 6 files changed, 56 deletions(-)
+
+
+base-commit: cee9395acd8043be0644b25c34bfa86623f2b935
+-- 
+2.53.0
+
