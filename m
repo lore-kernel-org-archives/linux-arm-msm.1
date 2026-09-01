@@ -1,168 +1,212 @@
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CA32746D577
-	for <linux-arm-msm@vger.kernel.org>; Tue,  1 Sep 2026 10:33:14 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E935C47CA65
+	for <linux-arm-msm@vger.kernel.org>; Tue,  1 Sep 2026 10:40:36 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788258796; cv=none; b=ZMeiaNbED2q9MIBYpALQSGtOxfNctbJ7SHKiRCPzi/xZyL4kGShhUERDDTzFF/ZRBKT/lVpzTwkxFD9un26mAHdS2PB5Uc9vAN/tWUA9yXVvc54acoF4R1cjNZTFxbULRT2LrZYV3zXZ+KyL7xiNy5Z44mHnvEX4AHNdXthAlTw=
+	t=1788259239; cv=none; b=EpKidqiENBs1zEZy9mPKJRYHKOUYjVmxQL9gWsLx0/2kFHqBJR2qu9CNmoMGec069rp+VOHAQaR6mzVsEFHDdPAV0RX3HLdagZ65C22duLgeiI75ob9/ZIorgrD8dYB5Zn3U+HOxcMFdUBU2YD251SaOuG4C+BQlTj1AMVa0SJ8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788258796; c=relaxed/simple;
-	bh=V37AGxiIlCADNfSVQa1EtPvInImMvR59PBciUJmFxDc=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=dAUkWySXZ4dxRH24ORzQBWVMPKWlZRKd33DoYAs8bRlfMWbtmIRKqWwBahsnK0sWt+XrVbF+6oJV3RBCQU/AsDoiNoioR3HubtpGs0YpPEWyvW3QU+xnVGI//SRjoJA8QuInQ4FNMK/DiRwynBduoAkPkSBA9WCsS7hBRFyCKu4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=Wlch6Jr+; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=SE8UK3Q+; arc=none smtp.client-ip=205.220.168.131
+	s=arc-20240116; t=1788259239; c=relaxed/simple;
+	bh=xszAzpPB/8wB2ZU3+7zZIkbSXKAfS6N15bO/2mtZhow=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=kiZpBWTDZvUxM4yo27rRCobVU6BCDjAzcO9/d2+azS3dvV20PgFg1O3RH0Oqr8/WQJ9HgMy5mD23O/8nlfvZYw0aUNRyLha8nfeP3qGUa0G6NGQksAgG30JwEVXAJbgWQIvJbDpxnRoUqhjSmXMNquZ/FJ0MVmL4CC4Y7hWH+qw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=l0Bzk9lI; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=XdZg8kEE; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="Wlch6Jr+";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="SE8UK3Q+"
-Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 681AJJW51136749
-	for <linux-arm-msm@vger.kernel.org>; Tue, 1 Sep 2026 10:33:14 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="l0Bzk9lI";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="XdZg8kEE"
+Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 681AJPsA2993718
+	for <linux-arm-msm@vger.kernel.org>; Tue, 1 Sep 2026 10:40:36 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:date:from:message-id:mime-version
-	:subject:to; s=qcppdkim1; bh=Rps05BzNsJlsNoYV02zDupxVjpxJ2krr4ce
-	Ti6viGmU=; b=Wlch6Jr+g5IKNJhz1JpH9241NrwjccJI7ZSZwBOYU54DTPxPhl6
-	q51cxiBW3fPRgksjDMB5PPg+6HmUEKMlKOkgHW9uNI1tfILLqaWFOSUIXGZ2pr94
-	3Fypro+OBt9oBxo2CjthJxNv6NByGaJpdEkvlBKOpleibCWef8nec1s8SVhH35pS
-	2b7LP4rU7b3IKcA3W7EzNcoMj6xR1QstLaFSfAdYZORGezPwnh1Ql6m2Yowj+yPb
-	o36rIlKPrq0+wCjQnW8FPA5pw3uY0HLJATFwmaQ4XLBGdiac0SQmBv5IsuKYpO3P
-	j3YxnBsS5z1XwDyRdPb8yJor0eOY9uE2zZA==
-Received: from mail-pl1-f198.google.com (mail-pl1-f198.google.com [209.85.214.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gdrcshb7f-1
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	hxDRBSBRVK3WBdeGvq3gY+7hIJoDgMgpm6vjxtzaRS0=; b=l0Bzk9lIegBfmvRN
+	rZKPQjfA6NwTdYst3Dyzpn0f+0GSvY6sIKOx+JcTBR4ed0PrQP+H5Zb1irLgtTcU
+	nORQScvNIMQXWOFpa5ayfOkLBjOvp2eYM9VuZ+YdTzFVHXqaWXEYx7STFakNPh3/
+	zRfhLWNqULuIuXVg55bj+sL1YbilZo07CK7KDjnNl+hvwtKfKWmeVAawWdT8yMZf
+	YnLwTtilfSdCFDPZJPxez4ALEA6R6exAQHrLzkSKfsvM1uWB9Zam4fobq3TjUlF7
+	W0GKZAngaXOqeIWsCUioEQPvVEwbGSobv6uXVQ4V2EIMEslocxCxJj307tDZe89H
+	jrsafA==
+Received: from mail-pj1-f71.google.com (mail-pj1-f71.google.com [209.85.216.71])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gdeg3bwed-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 01 Sep 2026 10:33:13 +0000 (GMT)
-Received: by mail-pl1-f198.google.com with SMTP id d9443c01a7336-2d6f80c76e6so74686975ad.3
-        for <linux-arm-msm@vger.kernel.org>; Tue, 01 Sep 2026 03:33:13 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Tue, 01 Sep 2026 10:40:35 +0000 (GMT)
+Received: by mail-pj1-f71.google.com with SMTP id 98e67ed59e1d1-398dc3d8f0aso1453439a91.0
+        for <linux-arm-msm@vger.kernel.org>; Tue, 01 Sep 2026 03:40:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1788258793; x=1788863593; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=Rps05BzNsJlsNoYV02zDupxVjpxJ2krr4ceTi6viGmU=;
-        b=SE8UK3Q+DzaTFuO0xincUApt6ICLxuhT9QeiBbJf7uOcjVGYFoXrMch6MZJPJtQjJQ
-         5oPV3nTGkHTz8IpwKnNvAt6pt/Jzvhh3jVW001jX5ngPcZHSNz+9LJi/jqs+jzLTk/y5
-         diCXSRuCHFwPRebT4lEcBNILueMaIpWYHZ1DNRYkwxTyzy/Xg2mpPw8CzEShTWF0YoHk
-         bw8aMHeLTzVAdOqrDgdGh8qss5JPFuSeDNKYUWn2mGIiuEOYt/5xJFqCb4eDEPYqQfIv
-         73FrHg+7YZCBWjoReSPkORvm52HTLQVHAvVEtv2iGik6Rj13wFMCV710/ACEAXWeBQCs
-         yNjg==
+        d=oss.qualcomm.com; s=google; t=1788259235; x=1788864035; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=hxDRBSBRVK3WBdeGvq3gY+7hIJoDgMgpm6vjxtzaRS0=;
+        b=XdZg8kEE6+QFbZO1v+EmgHu7Cn3um+8JT+Q1B0mUcBWIfWxQVsXjyO0HD5JusNQttG
+         k/e5j3ZOh5dKNSSkANFdjBQ0yIL5MuRJGAxfysh9PVXjTkmoUlCXhAa78mRAReqN8lWN
+         IPTKODE/z8ceTiKneL9g1j+e+juNJgbz2/XUQb+XLID3e6/26MHpr1A2MI6+S23GlMw9
+         Dp7HK7oV3a2nP5Imca0pQqvG5FPj2F5Y396wz9faF85o97ngvDEtivQ7YpvM4jASecf1
+         aqGVUmnJDX0rdOK7FHvZ/c9BM0TdR6Mchua2MHRsMO9D5GJFOf/DkJSi+Kou6C5fTgAU
+         A4Jg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788258793; x=1788863593;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=1e100.net; s=20251104; t=1788259235; x=1788864035;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=Rps05BzNsJlsNoYV02zDupxVjpxJ2krr4ceTi6viGmU=;
-        b=k8It6cDhYlXU4m6s385AgwAsMSIVuzITj9Jg2MrKPRCCJlkO7rt/HdshRCxV5mCWnA
-         6yum28mNx1Xp9UhBv0ePBmKQalG/xjMWRiZmsGU6OVf98uiGW2boY79Z4Gjamt/TfA+Q
-         iQIGxeYZf31BCo8M0AxN8Kw7BzGN9YLx7bq5WbApcOLkTLBYkQ7qZ461JBjWnjNcQqKt
-         tHzA07iGegiXPHGElPI+BaubXwBKYjgJHqPOqei9OIeATA1oCh3MD57DW9jFx1Xsr6IO
-         iBtP805ZwCukfDAfcgCSAvM4UalNJ0a5WU2dpmHuJV56SO0udNB04tHCYKUgGjP/ePRH
-         OI4g==
-X-Forwarded-Encrypted: i=1; AKwUvBwYKitt+0205aJJz4YFN9Y4Y0bbnw6ADK4PoR0mYd8FUxkHWa/ihitsKdbR/C1gi2qB5a6Otl0ZyOJlb91E@vger.kernel.org
-X-Gm-Message-State: AFuF++m272qJpNU5E87vELEgstMvxb8Mp+Th9Nu52f8VXehtkFSGAyKi
-	L0Em9rfG9+p6PQ+OZH8R36YUd9X1Pi5R36a/3OkODdP8oXMLr1mOiHksgLq9hnNq+aONX0O2VCn
-	UZlAUc6SzFWdFjZpkx1m3WXMBOYsFFczgXRxUwjsGihJCKBOyEfrlOsCQiGSVOx5Ro2xl
-X-Gm-Gg: AYBFou3b+nDusnuf4LJ+LPlE54pHryaGlky9IJ4o5G9qjrvzs8PKo4Xxm5myD6On7Y1
-	PpF3PqjVQbV8PYZSEs7l4AF8mfzS5V1SzbXRm2afXP4MDj5mgSpVodzU2azepWCb+GoY9KyuzZf
-	TNTVBh3cT410oH2ofHl5LRjIscXR2PYp9iaPj7BqzzDN8FwsHAeUtgwYl3E7wozPDkmdBdYhmsR
-	ElX+BroPvZSmWWU9DSiwyav+Ri7y96XOju2Q9g1Uv6+xRY1ZVyU7o6P7865Kwj8AbvOXxk28DWk
-	r6s9pxwRE4A/+EzMIHRq21kG410Psi28zOud9xFaFne97SbtxKaGfj7XkHwtNGi8ykmz2MEnIOa
-	ZLCOzs+LRxKfB4DTG55yl1P9f5VN8uZzkd92p7aoI222xd4amtrWqsIQBMxr1
-X-Received: by 2002:a17:90b:52cc:b0:395:4de4:92be with SMTP id 98e67ed59e1d1-39907e0f90dmr9999018a91.13.1788258793142;
-        Tue, 01 Sep 2026 03:33:13 -0700 (PDT)
-X-Received: by 2002:a17:90b:52cc:b0:395:4de4:92be with SMTP id 98e67ed59e1d1-39907e0f90dmr9998946a91.13.1788258792676;
-        Tue, 01 Sep 2026 03:33:12 -0700 (PDT)
-Received: from QCOM-aGQu4IUr3Y.qualcomm.com (i-global052.qualcomm.com. [199.106.103.52])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3286f9ecaa9sm38719882eec.26.2026.09.01.03.33.08
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 01 Sep 2026 03:33:12 -0700 (PDT)
-From: Shawn Guo <shengchao.guo@oss.qualcomm.com>
-To: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-Cc: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>,
-        Bartosz Golaszewski <brgl@kernel.org>,
-        Krishna Kurapati <krishna.kurapati@oss.qualcomm.com>,
-        linux-arm-msm@vger.kernel.org, linux-usb@vger.kernel.org,
-        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-        Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>,
-        Shawn Guo <shengchao.guo@oss.qualcomm.com>
-Subject: [PATCH] dt-bindings: usb: qcom,snps-dwc3: Document the Nord DWC3 controller
-Date: Tue,  1 Sep 2026 18:33:00 +0800
-Message-ID: <20260901103300.60803-1-shengchao.guo@oss.qualcomm.com>
-X-Mailer: git-send-email 2.43.0
+        bh=hxDRBSBRVK3WBdeGvq3gY+7hIJoDgMgpm6vjxtzaRS0=;
+        b=m9Dfa2FdXgtqF8qPyiXOtbVv4T8Qhuqm+5+hAERZJNe1ynle4mmL8bvZSQZ1zVJa5R
+         XCMfBNWB4yzrSnTUyNA9LCABrYuH79zMaZ05Z9Useb0zdA41fjci+1F2sAUOufGQRlIw
+         Vb3+ngVHMSW67hT9dbSu1p/woXx6e349S8ujjaCzVtuT3owRFuEfiWl0LZQb+Z5M2O6W
+         D6sMQSjHCokLWkydQ86+8UCsYieSfohYKSxdqf8lZbRJkHLvsfYpxDElR5QObit6UKyZ
+         x34sNRDOn6NZyG6I7yd+Ydp65Wa8LnfkgMlA0j3/5Drc3xoKKzKVyM/8WwFW9twh0NQa
+         fLlg==
+X-Forwarded-Encrypted: i=1; AKwUvBwjj5K4ex9D3jA27cCaARo7bz1zbcSYsmbNAcc+jzn8sqQENlHbtOLP5QoGj1A8b0F/8gXEYiQ/3NOxKtT6@vger.kernel.org
+X-Gm-Message-State: AFuF++kqTvLobCD/jhF2NluOfayjOcO1e+yNuYloZq9pEa1KSBd4ADfp
+	qA2mPjfC3Ob1xkvFQpEQ3T+ob/EqD+75ITfGE3dBteGWxfBRgKREIoZDi8G68v9lwOxbE0KnEmf
+	Tj7m/Oswi90U4yRf3naMUbqH10PIvJyYIoP8RE5E/yLCOebYX6Q0mABveJeUT7FpNE/eX
+X-Gm-Gg: AYBFou1q6R88lOULn2R8yidEgU7FBthisl3dGn8dgGjHIizJXc/kM7OpZ8HaidQNxM3
+	jkJz3mquRfRHGJSs8umec45hPe3kFOUZcYkPN+soo/+lWFLA1aADuVjnn7yL90R7V9TuNh9rAWq
+	HfDMdDk3ju+1E2Y0gUXtKno1iesi+M0yfx4V4uOcCc8weT7zxsKIB03NySKFQM6UjzUZFg8vdGH
+	6w8gG6cDAgzKySzElKXSFTF+yVAOo0uhrGgnxMjYEPAQ7IQoqAExwUkmFkUfWSKCpT0NodRHo50
+	pORVMuOnAuDZgXxCrEIVTuWOyuksE3PpHh1OCSinMh9uCVo0M/oJ8q0H4ZQ3EEopi0UIRhhNI1Z
+	hyD5yEbH6+3oKk9wpa/jQaRRmrMxkxwgNW0pPgr+FQMJXn5PmZfdaGW88
+X-Received: by 2002:a17:90b:584f:b0:398:9beb:a2b7 with SMTP id 98e67ed59e1d1-3990f90df1bmr4602628a91.25.1788259235147;
+        Tue, 01 Sep 2026 03:40:35 -0700 (PDT)
+X-Received: by 2002:a17:90b:584f:b0:398:9beb:a2b7 with SMTP id 98e67ed59e1d1-3990f90df1bmr4602571a91.25.1788259234570;
+        Tue, 01 Sep 2026 03:40:34 -0700 (PDT)
+Received: from [10.110.34.210] (i-global254.qualcomm.com. [199.106.103.254])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-32b28ab0571sm30690555eec.4.2026.09.01.03.40.28
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 01 Sep 2026 03:40:33 -0700 (PDT)
+Message-ID: <db1488a2-deb8-461d-b77d-849da2783edb@oss.qualcomm.com>
+Date: Tue, 1 Sep 2026 18:40:26 +0800
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTAxMDA5MyBTYWx0ZWRfX7mRrSHh2GW3J
- 77ZymwBZg81adRd26L4167tdLgOZCNVIW7u2nd4r3GqkUQ7ioaU6dGNkpNDobTL1WTdtgbFJPNB
- 3nsjTviAAsoGy7b7qgpA6L4fGp4JKB4=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTAxMDA5MyBTYWx0ZWRfX1Sjl6RuncjTe
- 4sl+6iyIeKaqbkKj8Ee9W9yb7IF7cy1K2S1K5yqtxmNxSyIF9HX8TXf4/3nKivgfZcmrRikkZmi
- bFtQKQpnG+T3p6J+M9SVzp4jK5dAk1gc4BIq6JZ0z+bqD0IahgjuTPIwdPHhP/h7XET6WVT6mvL
- yO/We9z4lAUgtkTSMQgJTAamJPX7g2gbbB9Fl4vWH9EjuRoaKoNLS+v80ig6aDqxPiJPHldvDe2
- e8M7urYF88VDou11vtStxznVEzmdwgLWMkrfCU7jKjvXEzzrY0DnB/zDOtzPwN9Yfc+Be0VTD7u
- O54/7h+XR4Fl2ahUq4BRj6bewCM7IZao0pEIGqoMaXC+q61v3maDpJQVe3p+MbD5Q81QCyw/d6J
- Id89pIdxRtyUT02CuwUkhNkku5AzraWPK1r9QR3mxXtdPIt3jCLH3WsiMhmGqihU7MuLOlVaVwG
- vbz3WEqcfWkq1NQ32mg==
-X-Proofpoint-GUID: ReyFwvaoFlNhcdSKwnRBP8aBizy8lgxO
-X-Proofpoint-ORIG-GUID: ReyFwvaoFlNhcdSKwnRBP8aBizy8lgxO
-X-Authority-Analysis: v=2.4 cv=QsNuG1yd c=1 sm=1 tr=0 ts=6a96a9e9 cx=c_pps
- a=MTSHoo12Qbhz2p7MsH1ifg==:117 a=b9+bayejhc3NMeqCNyeLQQ==:17
- a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22 a=EUspDBNiAAAA:8
- a=tFf_m68rkw3bL0m7f1YA:9 a=GvdueXVYPmCkWapjIL-Q:22
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v1 04/11] dt-bindings: soc: qcom: add binding for
+ qcom,crypto-virt
+To: Krzysztof Kozlowski <krzk@kernel.org>, ebiggers@kernel.org,
+        axboe@kernel.dk, mst@redhat.com, jasowangio@gmail.com,
+        James.Bottomley@HansenPartnership.com, martin.petersen@oracle.com,
+        robh@kernel.org, krzk+dt@kernel.org, conor+dt@kernel.org,
+        linux-block@vger.kernel.org, linux-crypto@vger.kernel.org,
+        linux-scsi@vger.kernel.org, virtualization@lists.linux.dev,
+        devicetree@vger.kernel.org, linux-arm-msm@vger.kernel.org
+Cc: neeraj.soni@oss.qualcomm.com, gaurav.kashyap@oss.qualcomm.com,
+        mani@kernel.org, andersson@kernel.org, konradybcio@kernel.org,
+        bvanassche@acm.org, alim.akhtar@samsung.com, avri.altman@sandisk.com,
+        stefanha@redhat.com, pbonzini@redhat.com, eperezma@redhat.com,
+        xuanzhuo@linux.alibaba.com, linux-kernel@vger.kernel.org
+References: <20260827160806.1295313-1-linlin.zhang@oss.qualcomm.com>
+ <20260827160806.1295313-5-linlin.zhang@oss.qualcomm.com>
+ <bf36b0b7-d6c3-4731-b00c-c3a4c02ffc76@kernel.org>
+Content-Language: en-US
+From: Linlin Zhang <linlin.zhang@oss.qualcomm.com>
+In-Reply-To: <bf36b0b7-d6c3-4731-b00c-c3a4c02ffc76@kernel.org>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTAxMDA5NCBTYWx0ZWRfX3xeF7idHfM+x
+ grCD1/FEiNLgDoGmb5RS4zSycD7x4HiGGiNHAl4HrkX7GQf5tkwHAdwuUotRbAlk3hDh172uaqP
+ 7++bPJBLIT1UzRPLFSWK8YIkAfhqPJHbAd6qCAWZ1rrWPY+UMGw5fY+6i1WRdJZjIdiKuRqO1hX
+ PFlI7j4u0vj5cBUgZe86WASzt7Bd66hcoOP4ZIITqoxkmr9fF0MedJCkLCgUbmwBzO2JztlZklc
+ RyvUJPSnndMUQRW+RhcNY1Xm2RQHwY8Ddr/ImEI1WYFmxqGgbXoTnjV9Ca9vPupltOOoj4CsLB1
+ vyCC23/ZdeXoEw49t7dyFeQaavEkJ9MxYUBZq1c8ahmFTaOG/HgPUREpPKbhVQvC2Ncc1NN5N0L
+ DcpS/xYuqpl6Mn4eu+Q1iM95eBqwxJTOuHsabfOF1zboaac/JpGu5vUzRCCqTaoEWgjcU8sa2Cs
+ 4t3y1MUArj3Avj+KXiw==
+X-Proofpoint-GUID: pQ5HBL-jKYbEe4zeV-J3bQ-ZY74txroL
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTAxMDA5NCBTYWx0ZWRfXxNnNITkhgGbs
+ +bfi1DyHbk3q+kGYLlubXRRhbtFt7y5BujwAPD1NvnVQs/xcJtSrsGiU58wX6VzUPqhQK13pBZU
+ gIczaW1I5YQ6TrWd7ATdt0evFoF9eoo=
+X-Authority-Analysis: v=2.4 cv=NZnWEWD4 c=1 sm=1 tr=0 ts=6a96aba3 cx=c_pps
+ a=UNFcQwm+pnOIJct1K4W+Mw==:117 a=JYp8KDb2vCoCEuGobkYCKw==:17
+ a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22
+ a=gEfo2CItAAAA:8 a=P-IC7800AAAA:8 a=EUspDBNiAAAA:8 a=s59Ba9DYA-YjRSie7ucA:9
+ a=QEXdDO2ut3YA:10 a=uKXjsCUrEbL0IQVhDsJ9:22 a=sptkURWiP4Gy88Gu7hUp:22
+ a=d3PnA9EDa4IxuAV0gXij:22
+X-Proofpoint-ORIG-GUID: pQ5HBL-jKYbEe4zeV-J3bQ-ZY74txroL
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-09-01_03,2026-08-31_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- bulkscore=0 impostorscore=0 phishscore=0 suspectscore=0 adultscore=0
- lowpriorityscore=0 malwarescore=0 priorityscore=1501 spamscore=0
- clxscore=1015 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
- definitions=main-2609010093
+ impostorscore=0 spamscore=0 phishscore=0 priorityscore=1501 bulkscore=0
+ malwarescore=0 adultscore=0 lowpriorityscore=0 clxscore=1015 suspectscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2609010094
 
-From: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
 
-Add a compatible for the DWC3 USB controller found on the Qualcomm Nord
-SoC.
 
-Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
-Signed-off-by: Shawn Guo <shengchao.guo@oss.qualcomm.com>
----
- Documentation/devicetree/bindings/usb/qcom,snps-dwc3.yaml | 3 +++
- 1 file changed, 3 insertions(+)
+On 8/31/2026 3:01 PM, Krzysztof Kozlowski wrote:
+> On 27/08/2026 18:07, Linlin Zhang wrote:
+>> From: linlzhan <linlin.zhang@oss.qualcomm.com>
+>>
+>> Document the device tree binding for the Qualcomm GVM crypto-virt node,
+>> which provides the wrapped-key buffer size needed by the QCOM_CRYPTO_VIRT
+>> driver to perform hardware-wrapped-key SCM operations backing virtio_blk's
+>> inline crypto layer.
+>>
+>> The host does not report this size over virtio, so it is supplied via DT
+>> through the optional qcom,wrapped-key-size property.
+>>
+>> Signed-off-by: linlzhan <linlin.zhang@oss.qualcomm.com>
+> 
+> Your Git does not look like properly configured.
 
-diff --git a/Documentation/devicetree/bindings/usb/qcom,snps-dwc3.yaml b/Documentation/devicetree/bindings/usb/qcom,snps-dwc3.yaml
-index ea60f7220afe..1830b979bf3e 100644
---- a/Documentation/devicetree/bindings/usb/qcom,snps-dwc3.yaml
-+++ b/Documentation/devicetree/bindings/usb/qcom,snps-dwc3.yaml
-@@ -43,6 +43,7 @@ properties:
-           - qcom,msm8994-dwc3
-           - qcom,msm8996-dwc3
-           - qcom,msm8998-dwc3
-+          - qcom,nord-dwc3
-           - qcom,qcm2290-dwc3
-           - qcom,qcs404-dwc3
-           - qcom,qcs615-dwc3
-@@ -359,6 +360,7 @@ allOf:
-             enum:
-               - qcom,eliza-dwc3
-               - qcom,milos-dwc3
-+              - qcom,nord-dwc3
-               - qcom,qcm2290-dwc3
-               - qcom,qcs615-dwc3
-               - qcom,sar2130p-dwc3
-@@ -526,6 +528,7 @@ allOf:
-             enum:
-               - qcom,glymur-dwc3
-               - qcom,milos-dwc3
-+              - qcom,nord-dwc3
-               - qcom,x1e80100-dwc3
-     then:
-       properties:
--- 
-2.43.0
+ACK
+
+> 
+>> ---
+>>  .../bindings/soc/qcom/qcom,crypto-virt.yaml   | 39 +++++++++++++++++++
+>>  1 file changed, 39 insertions(+)
+>>  create mode 100644 Documentation/devicetree/bindings/soc/qcom/qcom,crypto-virt.yaml
+>>
+>> diff --git a/Documentation/devicetree/bindings/soc/qcom/qcom,crypto-virt.yaml b/Documentation/devicetree/bindings/soc/qcom/qcom,crypto-virt.yaml
+>> new file mode 100644
+>> index 000000000000..5eb204f29762
+>> --- /dev/null
+>> +++ b/Documentation/devicetree/bindings/soc/qcom/qcom,crypto-virt.yaml
+>> @@ -0,0 +1,39 @@
+>> +# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
+>> +%YAML 1.2
+>> +---
+>> +$id: http://devicetree.org/schemas/soc/qcom/qcom,crypto-virt.yaml#
+>> +$schema: http://devicetree.org/meta-schemas/core.yaml#
+>> +
+>> +title: QCOM GVM Crypto Virt driver
+> 
+> We do not take bindings for drivers. Follow standard rules for bindings,
+> e.g. read DTS101 slides.
+> 
+Thanks for your comments!
+
+I understand the concern about introducing a DT binding for a software-only
+driver. The motivation behind this binding is to provide vendor-specific
+wrapped-key information to the guest, since the guest cannot discover it
+directly from the ICE hardware.
+
+I provided more details in my reply on the previous patch and in the cover
+letter. If current out-of-band key operation handling is approved, I'll
+revisit the design and consider whether there is a more appropriate mechanism
+that does not require a DT binding, maybe move the slot mapping table to
+Trust Zone, Linux kernel only need gets them via SMC request, then don't need
+dt-bindings change.
+
+> Also:
+> drop second/last, redundant "binding for". The "dt-bindings" prefix is
+> already stating that these are bindings.
+> See also:
+> https://elixir.bootlin.com/linux/v7.1-rc7/source/Documentation/devicetree/bindings/submitting-patches.rst#L23
+> Just describe the hardware (not drivers)
+
+ACK
+> 
+> 
+> Best regards,
+> Krzysztof
 
