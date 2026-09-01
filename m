@@ -1,333 +1,312 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from mx0b-00128a01.pphosted.com (mx0a-00128a01.pphosted.com [148.163.135.77])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EADBE383300
-	for <linux-arm-msm@vger.kernel.org>; Tue,  1 Sep 2026 08:22:43 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788250965; cv=none; b=FzF+G9yYdQQTavk5keFwTD+bFco/pooOGDXJu7crya62JBcOOYsaoDT2kGqCniWW/+9Ht3atv9Pki7Dq/un61F0ZpBO/xdSs94n1gjXucBP3B2BExZ0yrhcXV3r+NTMw5rJSdNudIl4t/Dt2rKNxlglh2W4/pSGr4ZhwX445alw=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788250965; c=relaxed/simple;
-	bh=BXTkNpotV6+/VKSWvgju9tqFpl9x1Q1iegvZv0jqNiI=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=TbAtWnMGuLslHFjDWPclKQ7QLdanPTZfPQlvVpfISTlHvjvgiK4z1QnuYlTZ9Jj3kHCy1jmSDNns9PJ4JXmiaEPk8qbrnDj99LULsWYQhl0kj/Zn1kQ7YfSu4oArUFRswcYpd02dLkCQfqV1g0fqliNu+WNnckyhMlGjebzee30=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=URygmAr7; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=Pcgmehwq; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 403C046C85D;
+	Tue,  1 Sep 2026 08:25:02 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=148.163.135.77
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1788251105; cv=fail; b=F94+8zWV84K5F+/2xnhE0D+2gFK/EjXFpiNDIyWwA+e/erclH4Yt1N64xFUL1HZkeUWidMA2gvweLGhMJVdlvWgi0NZr9OexK6te5fuSiiH41gUgM0p1xj1MUD6C0Equ+n/lcQnGfmY9ksukVQ4RGfMpAIXgOCZHdRw3Blz7Vos=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1788251105; c=relaxed/simple;
+	bh=rcxVOWV2gO4BAt1EtIkeFpXBrxxtFKYKkOm+7P80sc0=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:Content-Type:
+	 Content-Disposition:In-Reply-To:MIME-Version; b=PZe8M+P0IUAyZP4nfhCs1We1zEdtyKHDDobFLmxG1B02cGiviaEYurGxQLVfx6HQ3g90WXYHOyUGCcXvk/dOCIk/K6IhRcMwgSNVp+sbQ7BwAWSS8E4n6Rhh8OsOgx7lSNRF7mIZPFpfvbD/sjUd2DiNv26qn4Kpq6lMvba50RY=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=analog.com; spf=pass smtp.mailfrom=analog.com; dkim=pass (2048-bit key) header.d=analog.com header.i=@analog.com header.b=dxi9piO2; arc=fail smtp.client-ip=148.163.135.77
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=analog.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=analog.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="URygmAr7";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Pcgmehwq"
-Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68179JwE1335422
-	for <linux-arm-msm@vger.kernel.org>; Tue, 1 Sep 2026 08:22:43 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	meDH//M4fwWFLyQcHxzc/yohRr+DPejzh87T/qXhH2M=; b=URygmAr7Msc4qtmd
-	5tMAXim1HH9OcSmbpUK6/qA30j64y/bQ32fwzGWXud1HEy5IYBoconBger2kvYmd
-	+N+izF0IUKhc0pS3Zz9ya7Jbh7PdcoRZFWiWliIuMnDfSVu2U9rVqOBb5TtlnKaf
-	6ft+iaCeCXQTCGSiQKjlOhYJ9nbW+/8ywTex/rtj7hl7yTsZhIPRYFWNThehZVHy
-	PLAKcjN2wDgbqDXAmegxBsgiNCxKkKTQpKF7oOi+NrElSJVD5elWxw0P1v0zGtXx
-	abh2uwVnJ4pU/aXn8ZT0R463YaCyWlGauznErEWynnUnMuKVQVsuqV3p0FkDvhbN
-	QvGsCA==
-Received: from mail-pj1-f70.google.com (mail-pj1-f70.google.com [209.85.216.70])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gdjtx23gw-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 01 Sep 2026 08:22:43 +0000 (GMT)
-Received: by mail-pj1-f70.google.com with SMTP id 98e67ed59e1d1-38e1118e4abso8111974a91.0
-        for <linux-arm-msm@vger.kernel.org>; Tue, 01 Sep 2026 01:22:42 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1788250962; x=1788855762; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=meDH//M4fwWFLyQcHxzc/yohRr+DPejzh87T/qXhH2M=;
-        b=Pcgmehwqa/LY/uNJ54UYOGQCFLpOSVUvudk1w1s7wpOJj0FecvYcpqvoWX9FvbYuco
-         cg1dcC68HoN512tBX9BWplrWo8OXkdeb3IfGxgCwQ8I8azn1bwY6jb2vp715IsP/DPoy
-         VRDQHCiSqlmuH2eIrf60aGZ7oGa4vNRaoatgpKViZHFKAAXOndN/1vcT6LTbxwZvnCp+
-         KzKxUUjvaRcb9XxExf976rdTY1eL4Kx7gfKHdkMMfjKnx5QCIuiIwGIVRLTGzR/QrYBn
-         TZR8qqjH5cADghung1Mi0xr1sThl+gMOagNpsFea+3ZUscofU+FDd2oOB+0VTbjmW5K5
-         FL8w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788250962; x=1788855762;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=meDH//M4fwWFLyQcHxzc/yohRr+DPejzh87T/qXhH2M=;
-        b=CN69ShZa5NinVFcUFRIcj+oeuFKTUoKoo2r3YBe0wJxJL3rgsXiIp6T+o3BAP2Jb1I
-         xSBC9pOWGkRL8Ha/Fyz1/hsXb0s4cOfxGyNhndJ9SIIOi1AueAOptDeShEBglhbaJiWO
-         vmBF6z7YLIWdy+CxIClWBi8NmF4dJ8P/krtnH5J74CJczmU+skg9T1OJyGachbsXV91l
-         BiUdMv9mVkU80R4JMaghuERg1vvFXBg51Qjx02va9MCLIfdjYTSbBxirKgGBF0ClxiQ7
-         Vm2hRQKwntT7/Zt7sANbjWBFC0AWHp1XUwF0tyBMOLmoF+0M820JYgXMr2uvEcI0IUYv
-         xqew==
-X-Forwarded-Encrypted: i=1; AKwUvByGYZ5aB8KlS9aoGozC43uwpDwcnkJ6OqA0QG5ELEJJYsKiJV3sixZXcGcOHeuO4P4Qn4mnGlHePpItPQID@vger.kernel.org
-X-Gm-Message-State: AFuF++n00aZWQk1u0JZnVGRanmj6+44AzcVwZRuV81keGqgCnLcQOv9i
-	EW9EphVkbeDhFbnU4j5GrwA7x8lw4d0s/veEv9G5F5cnYrfHbynCA+eDHHwmQ02t/x2LQNrXbcs
-	pvovO3GZ4DPaNZ4TD3X2psCEYNaUrckbbfVjW8+TgxEy0F9p10GJMZmmSWNcGX4uJyHOY
-X-Gm-Gg: AYBFou3wErBfRnAtMg97Axffg/pJscBXJ2grHsl4otelKGdKffrHdFKEfuk4AyPY0YC
-	E+K557VPaXZEtnbW3hhS+Jldx3aZqu3DdhEoRfBmgLVCab78ARpvj+BnurajXoRwbYAmSbAIunT
-	KNBytAN6dQtBq1Ikaqb+fs8D6AADZctXFaRjypMee1WgiOiCjPa0d27HjVrbtZnUyRkbC5U3l+Z
-	v+1RTEZc5/snxsuLaC1nkHB+Ka976MRe5MrgphftJ3oA4EchsJ7KO3EgGoHA7+wFBiCgAiBwFj2
-	UKx3UWo849Y84k974FCzl7WxmNuXSdP+KPZst/kUWD1JEJ2sBKSFC+2LAw4bussERSsiQ5eFkSm
-	rQ0TJCZlsfdW1/YcV2/hKkw/6OLXd8iWMrEa2gXdExPdaEDt+4cqSh22o
-X-Received: by 2002:a17:90b:538c:b0:398:d6e6:4671 with SMTP id 98e67ed59e1d1-398d6e68870mr23470139a91.25.1788250962083;
-        Tue, 01 Sep 2026 01:22:42 -0700 (PDT)
-X-Received: by 2002:a17:90b:538c:b0:398:d6e6:4671 with SMTP id 98e67ed59e1d1-398d6e68870mr23470071a91.25.1788250961597;
-        Tue, 01 Sep 2026 01:22:41 -0700 (PDT)
-Received: from [10.110.34.210] (i-global254.qualcomm.com. [199.106.103.254])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-142e0d2e465sm55409570c88.4.2026.09.01.01.22.35
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 01 Sep 2026 01:22:41 -0700 (PDT)
-Message-ID: <ca838905-f0f8-4f0a-96aa-2bc05ab6c0a7@oss.qualcomm.com>
-Date: Tue, 1 Sep 2026 16:22:33 +0800
+	dkim=pass (2048-bit key) header.d=analog.com header.i=@analog.com header.b="dxi9piO2"
+Received: from pps.filterd (m0375855.ppops.net [127.0.0.1])
+	by mx0b-00128a01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6817C1ip2805706;
+	Tue, 1 Sep 2026 04:24:21 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=analog.com; h=cc
+	:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=DKIM; bh=TgNFL
+	yvt0IK2VAnYuI5z5Qhqprmps/QQc7WY6xXK4GM=; b=dxi9piO2U1/BAiMzuOngr
+	s9p0tIE7M59CprJYTlSqMKCSBSS1vDQx8pEcNYkLfm229hq89e9n7GiChMiCG0yt
+	RGSHTKTdeCxJ0mpb0Io54AiP0m2kVgN+oKHMBuVlUjC4lYVrLMcrPSASSXtxRPG0
+	CiwDr1pcWrOAIfYMvJfJVcTd/rDyMarILtE4nxCCBaKnTnMej6ExatfwziueA/YH
+	+oPYQiJYQpqN5bfXoNAak8ogpX3iZgPCNA3pGcavPkRLVLBo2iuaGiI6ha2GTwnZ
+	D6L15N9BywujHSLaPxDdd1LCFDQ2R7RX1eV1w/QZIJyve7iPZ4Uc/l7on8QApZxj
+	Q==
+Received: from cy7pr03cu001.outbound.protection.outlook.com (mail-westcentralusazon11010005.outbound.protection.outlook.com [40.93.198.5])
+	by mx0b-00128a01.pphosted.com (PPS) with ESMTPS id 4gcdrds0pe-2
+	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
+	Tue, 01 Sep 2026 04:24:20 -0400 (EDT)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=puV6G6qWcZIPPaJ1CQgPSPm9Hw0wpouU6RxViBipC0O6cjtztY3k8DT/LOUNQyucmmVJoygAy4i+KFf80ba1GAC4GUKecigD7ZKUKkfRoKRtbPVXpMPFII5H5nhmSEFiJkO233YflOXS21uFJzqt24ob+wTDLrSRicH/is9ofIJOWrC5Y0pz8NQBXuEI0xuJszx3Pr30gPTy41zdmMRH7Sj9Gz7LS/UgN0qxOy5lqB3sVEy5wGG6f9G4RuccPN4O6MSoLfyJy7uII0A7onYcjIMSD88UoJm+iA3WS1p0a5mF3hs8WwUdA0Xtu8sVeET/WL14DssgCEzVnJ7RQiHPFg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=TgNFLyvt0IK2VAnYuI5z5Qhqprmps/QQc7WY6xXK4GM=;
+ b=YJgSBntfcSbiaQfnJlfdyDoTdkfgtqrvyn0NKuQPr+gzTNU4LRu2oBykIt+P0wV/VnJpQBcNGI4UlHj+8OJLBGaJYmuDSLprGl6zQCNTWZkK0ilo8lDm71rLjC9ku5gIYdZAfRUKvhsDjmwvSMH/IKOqgYcTwO9vI3ce2zSy5AKiB/1n83j7tjJKIOXxkSVMrj/3xSuKKzYdy8vAPlF9YIrY3gXbcKjwJurcvigeK41jI+1w4V0SURgSCxo+DwgrpYdQvyYGq8bZXHRkuye1cuSin3BNxKfeskv6pptYJicYvNoFGcgEu6dBMWmLcPHC1GbBRwB9mauaLvqPtRvopg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=analog.com; dmarc=pass action=none header.from=analog.com;
+ dkim=pass header.d=analog.com; arc=none
+Received: from SJ0PR03MB5469.namprd03.prod.outlook.com (2603:10b6:a03:28a::17)
+ by SA1PR03MB989244.namprd03.prod.outlook.com (2603:10b6:806:4f6::18) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.360.13; Tue, 1 Sep
+ 2026 08:24:17 +0000
+Received: from SJ0PR03MB5469.namprd03.prod.outlook.com
+ ([fe80::2a19:76b2:e731:8c5a]) by SJ0PR03MB5469.namprd03.prod.outlook.com
+ ([fe80::2a19:76b2:e731:8c5a%6]) with mapi id 15.21.0360.008; Tue, 1 Sep 2026
+ 08:24:17 +0000
+Date: Tue, 1 Sep 2026 09:25:10 +0100
+From: Nuno =?utf-8?B?U8Oh?= <nuno.sa@analog.com>
+To: Amelie Delaunay <amelie.delaunay@foss.st.com>
+Cc: linux-kernel@vger.kernel.org, dmaengine@vger.kernel.org,
+        linux-arm-msm@vger.kernel.org,
+        linux-stm32@st-md-mailman.stormreply.com,
+        linux-arm-kernel@lists.infradead.org, linux-iio@vger.kernel.org,
+        linux-sound@vger.kernel.org, linux-spi@vger.kernel.org,
+        Vinod Koul <vkoul@kernel.org>, Frank Li <Frank.Li@kernel.org>,
+        Lars-Peter Clausen <lars@metafoo.de>,
+        Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>,
+        Maxime Coquelin <mcoquelin.stm32@gmail.com>,
+        Alexandre Torgue <alexandre.torgue@foss.st.com>,
+        Jonathan Cameron <jic23@kernel.org>,
+        David Lechner <dlechner@baylibre.com>,
+        Andy Shevchenko <andy@kernel.org>, Jaroslav Kysela <perex@perex.cz>,
+        Takashi Iwai <tiwai@suse.com>, Mark Brown <broonie@kernel.org>,
+        Frank Li <Frank.Li@nxp.com>
+Subject: Re: [PATCH v3 5/9] dmaengine: stm32-dma3: Use bus width capability
+ helpers
+Message-ID: <apaKbjer_IZKJ7H9@nsa>
+References: <20260831-dmaengine-support-wider-dma-masks-v3-0-507d97496f2d@analog.com>
+ <20260831-dmaengine-support-wider-dma-masks-v3-5-507d97496f2d@analog.com>
+ <eb9fa2ed-e59d-4ad4-9218-f7473ceb9f9b@foss.st.com>
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <eb9fa2ed-e59d-4ad4-9218-f7473ceb9f9b@foss.st.com>
+X-ClientProxiedBy: MA3P292CA0045.ESPP292.PROD.OUTLOOK.COM
+ (2603:10a6:250:48::10) To SJ0PR03MB5469.namprd03.prod.outlook.com
+ (2603:10b6:a03:28a::17)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 00/11] FBE virtualization: inline encryption for
- virtio-blk guests
-To: Eric Biggers <ebiggers@kernel.org>
-Cc: axboe@kernel.dk, mst@redhat.com, jasowangio@gmail.com,
-        James.Bottomley@hansenpartnership.com, martin.petersen@oracle.com,
-        robh@kernel.org, krzk+dt@kernel.org, conor+dt@kernel.org,
-        linux-block@vger.kernel.org, linux-crypto@vger.kernel.org,
-        linux-scsi@vger.kernel.org, virtualization@lists.linux.dev,
-        devicetree@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-        neeraj.soni@oss.qualcomm.com, gaurav.kashyap@oss.qualcomm.com,
-        mani@kernel.org, andersson@kernel.org, konradybcio@kernel.org,
-        bvanassche@acm.org, alim.akhtar@samsung.com, avri.altman@sandisk.com,
-        stefanha@redhat.com, pbonzini@redhat.com, eperezma@redhat.com,
-        xuanzhuo@linux.alibaba.com, linux-kernel@vger.kernel.org
-References: <20260827160806.1295313-1-linlin.zhang@oss.qualcomm.com>
- <20260827184219.GB2137493@google.com>
- <d81e347e-8ca7-40a1-a428-5bce6f0d4b02@oss.qualcomm.com>
- <20260831210759.GE86114@quark>
-Content-Language: en-US
-From: Linlin Zhang <linlin.zhang@oss.qualcomm.com>
-In-Reply-To: <20260831210759.GE86114@quark>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Authority-Analysis: v=2.4 cv=K78S2SWI c=1 sm=1 tr=0 ts=6a968b53 cx=c_pps
- a=0uOsjrqzRL749jD1oC5vDA==:117 a=JYp8KDb2vCoCEuGobkYCKw==:17
- a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
- a=t1y89GQJVBw50UXK7BcA:9 a=QEXdDO2ut3YA:10 a=mQ_c8vxmzFEMiUWkPHU9:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTAxMDA3MyBTYWx0ZWRfX5U0SeRiX4ksH
- CEuzPCwJyg1lm5bIm2kx9rUthumB00XYg7F5iJRlSwyO0N/yFsWznAZOHXFWCcHPW6+WN/kW5Qd
- 3wfd75rL++3ajU49AqmfYvFEYGMIdb4=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTAxMDA3MyBTYWx0ZWRfX27guqeu4wtlR
- SEoK6ITHOGgdhzSXERKTpYF0/qnlzgzpz4hG8hLgByIT9hAJ6JRkDg0pCRSkFRzKKNFzllqP2Xw
- nqO0TZJfWBKnYHBKAH4Y3KE3IAHV89gOpm92z1dzz+eNB3tIUBOz5bLVj/+/nO2LI3Eue0CMYMy
- mHzbgDFzjOT6ISCf6+UfFyjISg9w135XtD+4pgfZR+zJvO+Pby5G6Dy0DD5/LjyarCtbxl/RFyU
- 5+nduROrOLTY0MIEmcKB3BkgyM6hdHHRQGJ0fbJ+dnDVFr49IDjaCL6Tmn8KOJotcT/IcasrZuO
- Zy/+Dz9WqmHDEf1kWjCE80Q5r05YmsY2FFRJWufRFfvCztntE+9QMFk/AqMt7lwwKtpDcvd9MIF
- NyBVDE+snBSFupUcxDvWNRnQ6ApvRd017JAuRf+Grn+pMUaG9VBCaE+Hlck7y578QxoCeummhyz
- dC+uouUKWZ0rbeNrM0A==
-X-Proofpoint-GUID: gsbZbCJI-OF5zsgi0rlOvGTG9nNpJ_11
-X-Proofpoint-ORIG-GUID: gsbZbCJI-OF5zsgi0rlOvGTG9nNpJ_11
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SJ0PR03MB5469:EE_|SA1PR03MB989244:EE_
+X-MS-Office365-Filtering-Correlation-Id: b238f1e9-e962-4475-cdad-08df08026a32
+X-LD-Processed: eaa689b4-8f87-40e0-9c6f-7228de4d754a,ExtAddr
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+ BCL:0;ARA:13230040|366016|23010399003|7416014|376014|1800799024|6133799003|56012099006|10067099003|4143699003|11063799006|5023799004|22082099003|18002099003;
+X-Microsoft-Antispam-Message-Info:
+ e/lzwW8jyk6Zs/7i2OIJi/vnMr66Z3vjLVv8k1TztPATr4IWBXsDlyAGaaccAONZzcSznHfjzr7ZfwJaeUQPipw0P5D8SBKOtLETTPJ1yuCHHW//szueotPR6c0LmuiTfw0ZCjVTw49/7oONlTKbndMY8Em8gdICQwMg3WymlXy+ZDv9B9TpFZF0o0ic3wlmlj3yNERJDeboD+QnktfM0gtIjUQUfwLo+4jrS8wKq9a3D3v4E3+532Z85DHvO2BvbGBo76N9z7kvFGJvQ2/7dqt5VboHDRofu675WUXjVH5MYRBp+hlTQrsGVcGiYjmExjwMgGZgdiBSEzAWcBB8R9kylyBlc/68b9gDHHoJtkOwR5g27EDt3q5XtK4j+FMFcUsEJm7haC00ET46XL7zPAszKyf2eaORYBB57j1X9vo9hxa/pVm+eBpUiYvMRZEJFqYEU8LIJTjeo8a4ICgN1fy70BIj66i/KlMP5EbuB+S0R+FCR3znbGOvtnTZxVGVSqAf64GGxISFOlObgDCDmA3Ggg+eErpA0IYwzsNwLgddDNKEFyiL5JWmResfTBAJWddyNaCgM7mv3HnOD5+eCYOKRVgsPbncb1lP4HzyiVt2r3Kb7rZNiyordeTD6CIAf1pA8bEzRQaMVWwyWScv4g+iWduWLrFpojY0Es1jUU0=
+X-Forefront-Antispam-Report:
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:SJ0PR03MB5469.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(23010399003)(7416014)(376014)(1800799024)(6133799003)(56012099006)(10067099003)(4143699003)(11063799006)(5023799004)(22082099003)(18002099003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+ =?utf-8?B?UC9ON2pMQzRsTGE3M29Ba0xUTmhhOEdubTZ6Q3FQRjlWWUd3Uk1XWWpqd3ls?=
+ =?utf-8?B?d0p0RHRSRGQ5bEtXY3ZEb1FPb1FJcitQbzhvNUFBSC9Od25BdC9KR0JNZ2Nm?=
+ =?utf-8?B?TWcxQVI3a3ZLT010K3d0V1F3N3h6MldKMHF1WUVyenFndVR3VlVGT0VxNnNo?=
+ =?utf-8?B?UWZ3NGpVVjEzWlFCYWlsb1FVUVhVOGx3Y2tHNk9GNVd6WjVNNXhNLzdtc2hj?=
+ =?utf-8?B?UkxYcjdnamxaV1M0U2xmZDNEeVROd0tNeHloR3kwSVB4b2c1L09MVjhGYmxR?=
+ =?utf-8?B?cjRleCtMZXdCWXpTRXR0ZE95L0V3ZUZnSldGTlVsRG1JRmlzVEh2S3JPUjBn?=
+ =?utf-8?B?VzhpNGNEcUlCbCtLczZ0OGttSU9SeTBsSm5ZTWdiWnpVMnBNZld1dlN5NzE0?=
+ =?utf-8?B?M2FyMGluTktNZWlWeDk2V1VCM2Y0SUtyMDV4UFdtOEc5c3BFQzBRY2lFends?=
+ =?utf-8?B?QXc5ZVZTUlN1WEJIVjFuMWNLUFJzZVE0RzJyY3JKWnFoa1VWanFsM0pHeDNj?=
+ =?utf-8?B?S3hGOVZkUzVnZnExWWIzaDNxY0RPZGM0akxqdnA3OHIwTEFDdFBnbFk4SjZJ?=
+ =?utf-8?B?U201ZmdBSkprbzk4bXFkSmhsekZhVnVBWDl4cUlIbk1xN0lxdkYxSVdMaWxy?=
+ =?utf-8?B?TUk0T1RmWHVVUzJ6MzlkNjB5TFpJVE9YajZzSEFkZDFsb3lWRnZFVEZLeTRR?=
+ =?utf-8?B?ZkdwbXVkTmM3WmlXYUlvR1pYYmdMck5ocDR4SlRpZG00ZzJ6UUlxQTl4V2JR?=
+ =?utf-8?B?ckhtSkMxQVprYlFOTmVxVjc2cjUweFRZY1Qxd2RHMm44TzBrRUV5R3VyTjBG?=
+ =?utf-8?B?R2FIVUZnWHkzZTZpOGpsMjM5bVBNQTg1d1JKWGVjM0hxemtlREhSczVEUjZj?=
+ =?utf-8?B?WlZ4UnlnZnZIc2lPU2pCbmF4WUJJRmRCaUo1ekFDR3lIcjdLcGdpUEVzSlo2?=
+ =?utf-8?B?Y2d3bTk5SUJHL1BwdUFaMFJKYWY4V244TWl4SUxMbXZUNjNDV3R6djVzaVNN?=
+ =?utf-8?B?OHdFY2NqcHh6QmM2T3M2anBvcHVZK3pubmR4eUI0andBTFJ0NGRUeHhxWkxl?=
+ =?utf-8?B?c0N1NERiVFNrWU9vclRXZGxQSnRINStsN01rUkZ4Yk1Bd09BMG1xcjhudnU3?=
+ =?utf-8?B?UjdsSnNTbkJIZnZJY2ROVTUrUWxHK0lwZVgxMDc2dWg2eldicENDaFV2bVJz?=
+ =?utf-8?B?WThhL0ZpMmI3a3M1ZzM2d2lhelg0R0U3SmVNTmhTL3V0UTdidnJZZXA0em1W?=
+ =?utf-8?B?M3g2YkJHakFJQXB2ZjVzREw2SGhkaDRZdlBmQmNSdkJPVmlteFRHcTRTQW5s?=
+ =?utf-8?B?SWVjZnUrK2lmUmRWSVo4M3daUUhvM0NUUTEvNGlVVEk5OXdHQUNLTTVXZE56?=
+ =?utf-8?B?MGVHaWJpYUQrOHRVaHQ0Ri8wcFFLaXNQbkFRTGxrRlpVUW12SWh2VXZBSWFx?=
+ =?utf-8?B?VGtPZWtIM2ZjRU9iU0JlV3Zpa3h3Y29kdit5RXBRcGJWQldNZHJiNXliZFEw?=
+ =?utf-8?B?dzJ3eDBna2M3cjlGdFVEZDQzTCtnU3RBOFB6ZnZVckM3MWxtQW83V0FDQlhG?=
+ =?utf-8?B?cWRpZlpDd0pYM1ZxdHNsVEhibnZlbHltUWVCeTBZdnpqcjJjYnNCUktwNGpV?=
+ =?utf-8?B?bzY3eEsxNER2OVI1ekVQZVY3ajBLMlJqaU5JNTNlaXJHbkpRVkhiY2o2UXRv?=
+ =?utf-8?B?Qjh6U3FvWUloUDF0OFRVY3MrVmsrU0ZhaTc2TXJIKzdJZ3lMWXdvT0l6TWxQ?=
+ =?utf-8?B?TnNibzBsWGIyZHBINUZqbFZnVzVTdjJqaUE1bmRvbDhSbjRodE52Rm1xSy9l?=
+ =?utf-8?B?dHhLNUVzbGtFRUZiTW5BNHpQdC81eEgvOGJEWllCYVhGRXVHbFNsOG9lOGQz?=
+ =?utf-8?B?WmxHU1BmSmtTeUllQmtSeXV3a0R0VzhteGFiaHIwVk5tMVE1ZGo0YjlwMnd6?=
+ =?utf-8?B?OFJEN215TTUwSkx4Vy9FV0Y0S1dUb2ZWOVhIbWVuVFZnanE5VUp2NVhjakpB?=
+ =?utf-8?B?c3p3VmpRckl3ZTY2d3pUUjN4NW9GS1ZWM2M1d3lWd0hhdEI5OHBNcmF0Tnlr?=
+ =?utf-8?B?c3Q2djFJU2tEUWJmbGlENWZQN0Ric0dJNitySzYzTDNSYlFXaTRVZFRUWFFF?=
+ =?utf-8?B?SUNvSnBZRkZrUGc4c0RmUDExNHF6MitSbzc1d1ZTSXNKdTdiTkJiR1Q1NitE?=
+ =?utf-8?B?TkxOcUx2eDc4aThSVnhWK0tiSHR5QVlndkx3d2U4cmh5SDZueTlpRGpYYzYr?=
+ =?utf-8?B?QWxHalJqUWgwdU1PTVdGcXkyUWxHL0tueVBIV2pIa2Z3Z1A0bGNQajI0L0hW?=
+ =?utf-8?B?ZXYyZG9Ta01SOUtETUpkVCtMdTVRMmU0cmFDaEpzNnRnQWZjNDNaUT09?=
+X-Exchange-RoutingPolicyChecked:
+	uepLlXKTZ49q9tpstdN4VPiklCAbums6/SfSWPkmdgn52pT7Yfb5XcvUTaoyrbeGI0FcGcpGdVKo4lOXcXaAhdhkmmpHEAr+2cgSZP991ynUSePVxff9qiPjZVazlwsCW/U5OmjQhtN1EoluTZeaCHNvRmEcAoBMCM03qG2v6c6FbOFFl+jj7JnDoWcG9K0tFVZsUZkXRSmzhoyclnv06ByjWdnOYHUk5Sl7tj+yy+nIpXt/l0O9U4pYTJBE99hQOVOs2EMpSEX/4dXKwl2u+juu35nhdBx/wNCBlpgAUbwlmAexI59tWXhmWRoI1r+3Q2fjaPLqyq9mCx2+UZP/Bw==
+X-OriginatorOrg: analog.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: b238f1e9-e962-4475-cdad-08df08026a32
+X-MS-Exchange-CrossTenant-AuthSource: SJ0PR03MB5469.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Sep 2026 08:24:17.6359
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: eaa689b4-8f87-40e0-9c6f-7228de4d754a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: fglFz+UIv2f5dpK/Y77zKg2N+4y6iXUlgrdZtU/WGQ+ukLJ+V4k9bwTWQRstUdZN7H5R0VnwvmEqtgqy9eKaAg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR03MB989244
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTAxMDA3NCBTYWx0ZWRfX7P81rc5Xuy/Y
+ uhh+Jx8035SuphPED1KLn2XkG7acTec+lmbPlqoLa6cKLY1xjgsjifir2bvBj620yp9diqJVexA
+ FXgS3ZF33xfa7yMIt7kjmIGvDXeP7sKmaDbwFMrbLRuyEIlvNxUo
+X-Authority-Analysis: v=2.4 cv=feSdDUQF c=1 sm=1 tr=0 ts=6a968bb4 cx=c_pps
+ a=bt8r0o3PvT4lvF5YbTRm1A==:117 a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19
+ a=z/mQ4Ysz8XfWz/Q5cLBRGdckG28=:19 a=lCpzRmAYbLLaTzLvsPZ7Mbvzbb8=:19
+ a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=M51BFTxLslgA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=0sLvza09kfJOxVLZPwjg:22 a=N--XFCr6TIEc_64PeIT2:22
+ a=8AirrxEcAAAA:8 a=gAnH3GRIAAAA:8 a=8b9GpE9nAAAA:8 a=b3kx_tIP8Hl93w7_1YYA:9
+ a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10 a=ST-jHhOKWsTCqRlWije3:22
+ a=T3LWEMljR5ZiDmsYVIUa:22
+X-Proofpoint-ORIG-GUID: Z5ffrIhSkICIWS6rXvgtTtB8sVKEtB5-
+X-Proofpoint-GUID: Z5ffrIhSkICIWS6rXvgtTtB8sVKEtB5-
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTAxMDA3NCBTYWx0ZWRfX/+Ggo4dKl3tQ
+ 81GTYgK4uV/TSZ3q6lFFsLFDLXtEAKCiQPNdfEEguFNjgXZ5OOxqVhT4kJ57eGHGblfB4JeZDFt
+ SPmvuCtT6uWDUxMWPb1gYS265DrefEC3kwmjdPusTFSYI7h+ErH+wHFHNANczm6c32ZxPGtnCro
+ tpPGUXKGCpKYt/y3vNdF5kE55T+nDAYma7Wpw4D/ESA5DyESd0ufpgjOVdlqqui2f5mO7ecTLkZ
+ +tpaNwf4+GLfwUtc40wSxG+7wk5kAfmcuzKgBm5MYBLKfxmj+ok7JdXD1SwBrP5ZEDFgp/5hlB2
+ cQx1JbLhN/VJl2zu8FdP5xI7SiLJM3nlpN6vudxK2I038SX6W+zXdxjNh65HVa47qcdZKN7xU6o
+ R8Wi2XdEFRkm6ElcOHLF/Ym9/ZvLNGXzJvQVCTH5rGYygq0iLs1G41P5+jOAdzgzTXRI3BEED/E
+ SryaqaRE3lvKaGL4bXw==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-09-01_02,2026-08-31_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- adultscore=0 lowpriorityscore=0 impostorscore=0 malwarescore=0
- priorityscore=1501 suspectscore=0 clxscore=1015 bulkscore=0 spamscore=0
- phishscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
- definitions=main-2609010073
+ impostorscore=0 lowpriorityscore=0 phishscore=0 suspectscore=0 spamscore=0
+ adultscore=0 bulkscore=0 clxscore=1015 malwarescore=0 priorityscore=1501
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2609010074
 
-
-
-On 9/1/2026 5:07 AM, Eric Biggers wrote:
-> On Fri, Aug 28, 2026 at 11:37:57PM +0800, Linlin Zhang wrote:
->> Thanks for your comments!
->>
->> Not making virtio-blk itself support key programming and eviction is
->> something done deliberately. Based on that HW-wrapped key management
->> operations are also handled in the out-of-band path.
->>
->> There are bellow 2 approaches I investigated to let virtio-blk programming
->> the key.
->>
->>   1. virtio_blk implements blk_crypto_ll_ops interfaces, including program
->>      key and evict key interfaces.(Same to 'the virtio-blk interface standardized
->>      blk_crypto_ll_ops requests' mentioned by Stefan in the virtio SPEC thread)
->>
->>      The guest's block crypto profile manages the keyslot in virtual slot
->>      format in this scenario.
->>
->>       - block crypto key and virt_slot index it passed to the hypervisor's
->>        (EL2) device emulation (QEMU, using QEMU in the following) which
->>        runs in userspace of the host. Besides of transferring the virtual
->>        slot to the physical slot, a programming block crypto key UAPI need
->>        be added. Follow current blk-crypto design, it may be like
->>        BLKCRYPTOGENERATEKEY. I thought this results in a security risk that
->>        allows userspace process a key into a key slot.
->>
->>      - For key eviction, it's similar to above key programming handling, also
->>        need a key eviction in blk IOCTLs, but leads to the security risk
->>        that allow userspace client to evict a key in a key slot.
->>
->>     virt_slot, DUN and DUSize is appended to virtblk request during crypto
->>     I/O.
->>
->>   2. virtio_blk implements blk_crypto_ll_ops interfaces, excluding program
->>      key and evict key interfaces.
->>
->>      The guest's block crypto profile doesn't manage keyslot for the guest,
->>      the host's block crypto profile manages keyslot for both the guest and
->>      the host. The trigger of key programming operation is moved from the
->>      guest to the host.
->>
->>        - The whole block crypto key (key size, key bytes, blk_crypto_config)
->>          and DUN are appended to the virtblk request during IO, a little
->>          high payload.
->>
->>          The backend parses the crypto message in the virtio queue and
->>          construct a block crypto key and DUN for the bio_crypto_ctx
->>          set to the BIO. So that the IO flow in the host can program
->>          the key. 
->>
->>          The question is that the blk-crypto-profile distinguishs the
->>          block crypto key via the key's address. But the host has
->>          different key addresses for the programming and eviction key
->>          operations of the same block crypto key from GVM, because the
->>          key is re-constructed in the host for the key program and
->>          eviction operations. 
->>
->>          To fix it, the approach I thought is maintaining a new key
->>          hash table in the backend, and comparing the block crypto key
->>          content and DUN parsed from virtio queue with that in the key
->>          hash table. 
->>          My major concern is that this need keep the keys synchronization
->>          b/w this new hash table and the blk-crypto-profile's hash table
->>          carefully, avoiding that key is still present in the
->>          blk-crypto-profile's hash table, but removed in backend hash
->>          table. Another point is that the whole block crypto key and
->>          DUN are appended into virtio block request per crypto I/O.
->>
->>        - For key eviction, adding a key eviction in blk IOCTLs allows
->>          userspace client to evict a key in a key slot. I thought this
->>          is a security concern.
->>
->>
->>      This option doesn't need map virt_slot to physical one.
->>
->>
->> Taking all the above into account, I made a compromise to implement
->> blk_crypto_ll_ops interfaces in a out-of-band path, which lets the virtio
->> blk only need focus on the data path. I agree that it is complex than
->> the second option mentioned in the above, but small payload (only
->> virt_slot, DUN, DUSize) in the virtio block request and no security
->> risk of key eviction from userspace.
->>
->>
->> I would like to hear your thoughts about the above and am appreciated
->> if you could share your insights about the design of inline
->> encryption in virtio block.
+On Mon, Aug 31, 2026 at 04:01:24PM +0200, Amelie Delaunay wrote:
+> Hi,
 > 
-> Well, the way it should work is that each virtio-blk device should have
-> its own set of *virtual* keyslots on the host side.  From the guest's
-> perspective it would act very similarly to UFS / eMMC inline encryption,
-> and it would be easy to integrate into the existing stack.
+> Thanks for the updates!
 > 
-> Then to process encrypted I/O, the host would use the keyslot number in
-> the I/O to look up the blk_crypto_key it previously saved, and issue I/O
-> using that key (using bio_crypt_set_ctx()).  The existing keyslot
-> management logic in the block layer would allocate or wait for a
-> physical keyslot as needed, so it should just work.
+> On 8/31/26 13:46, Nuno Sá wrote:
+> > Advertise the controller-wide bus width capabilities through the new
+> > dma_bus_width_set_many() helper and clear the per-channel unsupported
+> > widths through dma_bus_width_clear().
+> > 
+> > While at it, validate the requested transfer bus widths against the new
+> > capability mask instead of the legacy u32 one. Besides not depending on
+> > the legacy field anymore, this also stops BIT() from being fed a bus
+> > width coming from the device tree without any bound check.
+> > 
+> > Reviewed-by: Frank Li <Frank.Li@nxp.com>
+> > Signed-off-by: Nuno Sá <nuno.sa@analog.com>
+> > ---
+> >   drivers/dma/stm32/stm32-dma3.c | 34 +++++++++++++++++++++-------------
+> >   1 file changed, 21 insertions(+), 13 deletions(-)
+> > 
+> > diff --git a/drivers/dma/stm32/stm32-dma3.c b/drivers/dma/stm32/stm32-dma3.c
+> > index 4724e7fa0008..0689aeb7cff5 100644
+> > --- a/drivers/dma/stm32/stm32-dma3.c
+> > +++ b/drivers/dma/stm32/stm32-dma3.c
+> > @@ -9,6 +9,7 @@
+> >   #include <linux/bitfield.h>
+> >   #include <linux/clk.h>
+> >   #include <linux/dma-mapping.h>
+> > +#include <linux/dma/engine/widthmask.h>
+> >   #include <linux/dmaengine.h>
+> >   #include <linux/dmapool.h>
+> >   #include <linux/init.h>
+> > @@ -588,7 +589,8 @@ static int stm32_dma3_chan_prep_hw(struct stm32_dma3_chan *chan, enum dma_transf
+> >   	dbl_max = chan->dma_config.dst_maxburst ? : 1;
+> >   	/* Following conditions would raise User Setting Error interrupt */
+> > -	if (!(dma_device.src_addr_widths & BIT(sdw)) || !(dma_device.dst_addr_widths & BIT(ddw))) {
+> > +	if (!dma_bus_width_test(dma_device.src_bus_widths, sdw) ||
+> > +	    !dma_bus_width_test(dma_device.dst_bus_widths, ddw)) {
 > 
-> Eviction would similarly be passed through to blk_crypto_evict_key().
+> Just to come back to one point you mentioned in your cover letter, "this
+> stops BIT() from being fed an unvalidated device tree bus width". Here, sdw
+> and ddw are set either by dma_config.[src|dst]_addr_width, or forced to
+> DMA_SLAVE_BUSWIDTH_4_BYTES or DMA_SLAVE_BUSWIDTH_8_BYTES depending on the
+> channel capabilities. So, unless I'm missing something, they do not come
+> from an "unvalidated *device tree* bus width".
+
+Yeah, nowadays I let commits and covers be written mainly by AI (I do
+review it though) and I guess that slipped. I mean, it's not wrong but I
+guess it should be not in the cover as it's very focused on the ADI dmac
+controller (and in a legacy path which used to read DT).
+
+I'll probably drop that from the cover.
+
+> Anyway, it's great to see another use of the new API.
 > 
-> Note that with this design, there would be no static partitioning of the
-> physical keyslots.  The host would just allocate and release them as
-> needed, similar to memory allocation.  The total number of virtual
-> keyslots could be greater than the number of physical keyslots.
 > 
-> This design would also work with hardware-wrapped keys.
+> >   		dev_err(chan2dev(chan), "Bus width (src=%u, dst=%u) not supported\n", sdw, ddw);
+> >   		return -EINVAL;
+> >   	}
+> > @@ -1469,14 +1471,14 @@ static void stm32_dma3_caps(struct dma_chan *c, struct dma_slave_caps *caps)
+> >   	if (!chan->fifo_size) {
+> >   		caps->max_burst = 0;
+> > -		caps->src_addr_widths &= ~BIT(DMA_SLAVE_BUSWIDTH_8_BYTES);
+> > -		caps->dst_addr_widths &= ~BIT(DMA_SLAVE_BUSWIDTH_8_BYTES);
+> > +		dma_bus_width_clear(caps->src_bus_widths, DMA_SLAVE_BUSWIDTH_8_BYTES);
+> > +		dma_bus_width_clear(caps->dst_bus_widths, DMA_SLAVE_BUSWIDTH_8_BYTES);
+> >   	} else {
+> >   		/* Burst transfer should not exceed half of the fifo size */
+> >   		caps->max_burst = chan->max_burst;
+> >   		if (caps->max_burst < DMA_SLAVE_BUSWIDTH_8_BYTES) {
+> > -			caps->src_addr_widths &= ~BIT(DMA_SLAVE_BUSWIDTH_8_BYTES);
+> > -			caps->dst_addr_widths &= ~BIT(DMA_SLAVE_BUSWIDTH_8_BYTES);
+> > +			dma_bus_width_clear(caps->src_bus_widths, DMA_SLAVE_BUSWIDTH_8_BYTES);
+> > +			dma_bus_width_clear(caps->dst_bus_widths, DMA_SLAVE_BUSWIDTH_8_BYTES);
+> >   		}
+> >   	}
+> >   }
+> > @@ -1734,6 +1736,12 @@ static int stm32_dma3_probe(struct platform_device *pdev)
+> >   	struct reset_control *reset;
+> >   	struct stm32_dma3_chan *chan;
+> >   	struct dma_device *dma_dev;
+> > +	enum dma_slave_buswidth buswidths[] = {
+> > +		DMA_SLAVE_BUSWIDTH_1_BYTE,
+> > +		DMA_SLAVE_BUSWIDTH_2_BYTES,
+> > +		DMA_SLAVE_BUSWIDTH_4_BYTES,
+> > +		DMA_SLAVE_BUSWIDTH_8_BYTES,
+> > +	};
+> >   	u32 master_ports, chan_reserved, i, verr;
+> >   	u64 hwcfgr;
+> >   	int ret;
+> > @@ -1775,14 +1783,14 @@ static int stm32_dma3_probe(struct platform_device *pdev)
+> >   	 * channel, and can only access address at even boundaries, multiple of the buswidth.
+> >   	 */
+> >   	dma_dev->copy_align = DMAENGINE_ALIGN_8_BYTES;
+> > -	dma_dev->src_addr_widths = BIT(DMA_SLAVE_BUSWIDTH_1_BYTE) |
+> > -				   BIT(DMA_SLAVE_BUSWIDTH_2_BYTES) |
+> > -				   BIT(DMA_SLAVE_BUSWIDTH_4_BYTES) |
+> > -				   BIT(DMA_SLAVE_BUSWIDTH_8_BYTES);
+> > -	dma_dev->dst_addr_widths = BIT(DMA_SLAVE_BUSWIDTH_1_BYTE) |
+> > -				   BIT(DMA_SLAVE_BUSWIDTH_2_BYTES) |
+> > -				   BIT(DMA_SLAVE_BUSWIDTH_4_BYTES) |
+> > -				   BIT(DMA_SLAVE_BUSWIDTH_8_BYTES);
+> > +	ret = dma_bus_width_set_many(dma_dev->src_bus_widths, buswidths, ARRAY_SIZE(buswidths));
+> > +	if (ret)
+> > +		goto err_clk_disable;
+> > +
+> > +	ret = dma_bus_width_set_many(dma_dev->dst_bus_widths, buswidths, ARRAY_SIZE(buswidths));
+> > +	if (ret)
+> > +		goto err_clk_disable;
+> > +
+> >   	dma_dev->directions = BIT(DMA_DEV_TO_MEM) | BIT(DMA_MEM_TO_DEV) | BIT(DMA_MEM_TO_MEM);
+> >   	dma_dev->descriptor_reuse = true;
+> > 
 > 
-> The hardest part is still the UAPIs for the VMM to do what it needs to
-> do (assuming that it even needs to support physical inline encryption
-> hardware at all, and not simply use the AES acceleration on the CPU),
-> but that is the case with any of the proposals.
+> It looks nicer this way. Thanks!
 > 
-> - Eric
+> Reviewed-by: Amelie Delaunay <amelie.delaunay@foss.st.com>
 
-Thanks for your insights and clarification.
+Thx!
 
-This is a very clear architecture for virtio-blk inline encryption support
-and is quite similar to what I referred to as approach 1, with a few notable
-differences:
+- Nuno Sá
 
-  - The host maintains a set of virtual keyslots per virtio-blk device.
-  - Physical keyslots are not statically partitioned.
-  - The virtual-to-physical slot mapping is managed as part of the virtio-blk
-    device implementation rather than being tied to a VM-wide slot table.
-
-With this design, I believe there would be two VM exits associated with
-encrypted I/O:
-  1. Key programming
-     Before encrypted I/O can be submitted, the guest needs to program a key
-     into a virtual keyslot:
-     
-     Guest virtio-blk driver
-         -> VM exit
-         -> virtio-blk backend (e.g. QEMU)
-         -> ioctl
-         -> host virtio-blk proxy driver
-            (stores the blk_crypto_key in a virtual keyslot)
-
-  2. Encrypted I/O submission
-     The I/O request carries the virtual keyslot number and DUN:
-
-     Guest virtio-blk driver
-        -> VM exit
-        -> virtio-blk backend (e.g. QEMU)
-        -> ioctl
-        -> host virtio-blk proxy driver
-           (looks up the blk_crypto_key associated with the virtual keyslot
-            and submits I/O using bio_crypt_set_ctx())
-
-I have been wondering whether a model similar to the passthrough
-blk-crypto-profile used by certain dm targets could be applicable here.
-
-In such a design, ownership of keyslot management would effectively and totally
-move to the host. The guest would no longer manage virtual keyslots, and the
-host block layer would continue using its existing keyslot manager to allocate,
-reuse, and evict physical keyslots as needed.
-
-This corresponds to what I previously described as approach 2.
-With this approach, encrypted I/O would require only a single VM exit:
-  1. Encrypted I/O submission
-     The I/O request carries the blk_crypto_key and DUN:
-
-     Guest virtio-blk driver
-        -> VM exit
-        -> virtio-blk backend (e.g. QEMU)
-        -> ioctl
-        -> host virtio-blk proxy driver
-           (receives the blk_crypto_key and DUN, then submits I/O using
-            bio_crypt_set_ctx())
-
-Regardless of which approach is used, the host would still need to maintain a
-key lookup table so that the host blk-crypto layer consistently sees the same
-blk_crypto_key object for a guest key until that key is evicted.
-
-Note that, the key table format is
-  - approach 1: <virtual_slot, blk_crypto_key>
-  - approach 2: <hash_id of blk_crypto_key, blk_crypto_key>
-
-Therefore, if transferring blk_crypto_key material from the guest to the host
-(and from userspace to kernel space) is considered acceptable, I wonder whether
-approach 2 might be preferable because it avoids virtual keyslots entirely and
-reduces the encrypted I/O path to a single VM exit.
-
-Do you see any major drawbacks with such an approach? In particular, do you
-think reducing the number of VM exits by eliminating virtual keyslots is a
-worthwhile direction for virtio-blk inline encryption support?
-
-- Linlin
+> Regards,
+> Amelie
