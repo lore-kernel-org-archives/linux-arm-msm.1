@@ -1,66 +1,79 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2E7E02BEC4E;
-	Tue,  1 Sep 2026 12:35:31 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 75D023C3789;
+	Tue,  1 Sep 2026 12:38:23 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788266132; cv=none; b=IGlqK9LFkOA18a/ZpzM/wMdkgouYY17JEQoJ0BwiLcK9xEKCw69OIMGTHnclrUx2V1re4+6m3/TfJSkGY2nHl37jv8OJTsH73pGuUCedr4g8Dhh91Cnl6rrwOB4mJQq3bQN/BYwGTY1INi/s2u2DJ6eq1vQa4zM/x1TSYI6wqlc=
+	t=1788266304; cv=none; b=pPEzc2SO84fbrl9I9/EU2WFjBN5CdzJ3TvUGqBkzapQBOWM7A2Ml8+6TQTrkfDhZQtF784C73kxfoL3e8/gr9mkmJOgbyu5MeXENgYqPyGvjexkn489o02mXMtr2gvj0Bv8ZbUv/o4og0MMtep0GY2x6PyLXcUk2XfvdTGIksEM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788266132; c=relaxed/simple;
-	bh=yFYT+bqTTwweJnkbICBzdfNK4ESeSCd97FLzpwSLmUw=;
-	h=From:To:Cc:In-Reply-To:References:Subject:Message-Id:Date:
-	 MIME-Version:Content-Type; b=G7OFQCyIBeX4A0JUXs5l1d9Ds8wdMGw7eOmrvWFgkMFAj9vAe2H3666lANCQecIXt61BKVYIa9kDypGNTio6EyxHrVebyMt1lFYjMkPSTMJYmCVqPFx7Nb/EMCgq0XlcazLmsJAxVKCJxsI46NXs/aDHRyTnh67BDM1XRma64QE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2B7801F000E9;
-	Tue,  1 Sep 2026 12:35:27 +0000 (UTC)
-From: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
-To: Manivannan Sadhasivam <mani@kernel.org>, 
- Lorenzo Pieralisi <lpieralisi@kernel.org>, 
- =?utf-8?q?Krzysztof_Wilczy=C5=84ski?= <kwilczynski@kernel.org>, 
- Rob Herring <robh@kernel.org>, Bjorn Helgaas <bhelgaas@google.com>, 
- Qiang Yu <qiang.yu@oss.qualcomm.com>
-Cc: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, 
- linux-pci@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
- linux-kernel@vger.kernel.org
-In-Reply-To: <20260819-ecam_blocker-v2-1-e7a8fdc1c5cb@oss.qualcomm.com>
-References: <20260819-ecam_blocker-v2-1-e7a8fdc1c5cb@oss.qualcomm.com>
-Subject: Re: [PATCH v2] PCI: qcom: Block accesses to downstream devices on
- link down
-Message-Id: <178826612782.58092.15490835074765422013.b4-ty@b4>
-Date: Tue, 01 Sep 2026 14:35:27 +0200
+	s=arc-20240116; t=1788266304; c=relaxed/simple;
+	bh=Q5TkhrfZaKmpqdMsb6gk+JKzRFg5ICoOJppUWIvbmss=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=ZOSZwHBDlXVmrfyEsc2sKHjeAHoPcORCLxWPWE04l2h4/n6QJ3RlrUn8zJ/sRL3GbOJvbw0zf6tq2bhRXN/Q22hIICM0mpN5JFoPXqkQoHGdHrJzKqKTTxadQtTwGy/Ae3usEUIxQ0xtScJLdwSa0T4bSn03E41IgYG6pUZ1t0s=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Om+/qkcl; arc=none smtp.client-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Om+/qkcl"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id AE1CA1F00A3D;
+	Tue,  1 Sep 2026 12:38:17 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1788266303;
+	bh=VeNGPjKZBwOymK8viHv5YP5uFkAwxTsnF5fOnCaEBp8=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=Om+/qkcle2hsEcibWMtideHU/g+6AD5l2d+o94kh9jtBZJgoqo4rsAYyCa68Xe2Tk
+	 eTa0wpqF4AcXfUIyO1NfiZFy14Me/dyMnY0zm42sOK9WAt6Cnl5u9GNH8ILe4HwAl/
+	 9LDBqRqqSKm2hkzKH2CrfimZCwbh96e0/vcCdVq7CXqxFwzbY5hjLntmCPbryqvKAM
+	 Kja/5PhDfrYFNgYGHy8vDTw2kqSS+x4CIsXNk4UJynGlRrcZx3EHSDdxz51fgNg534
+	 dLjSfJ/d6CKPT6xqdnDwnKUTRphP2mjYhJ27I5BQyAhOeib17BZtVjW5Ja70sqTepg
+	 vj6ZWq8gBrzpA==
+Date: Tue, 1 Sep 2026 14:38:02 +0200
+From: Manivannan Sadhasivam <mani@kernel.org>
+To: Konrad Dybcio <konradybcio@kernel.org>
+Cc: Vinod Koul <vkoul@kernel.org>, 
+	Neil Armstrong <neil.armstrong@linaro.org>, Rob Herring <robh@kernel.org>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	Bjorn Andersson <andersson@kernel.org>, linux-kernel@vger.kernel.org, linux-phy@lists.infradead.org, 
+	linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, usb4-upstream@oss.qualcomm.com, 
+	Raghavendra Thoorpu <rthoorpu@qti.qualcomm.com>, Mika Westerberg <westeri@kernel.org>, 
+	Sven Peter <sven@kernel.org>, Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, 
+	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+Subject: Re: [PATCH v4 2/5] phy: core: Define TBT phy_mode
+Message-ID: <qbzp7sohhokldn5vt5cika77rkqnvqvwadx4bcpyqagyts2cn2@xsdp3gnqiqkk>
+References: <20260820-topic-usb4phy-v4-0-aec9d2cb31f6@oss.qualcomm.com>
+ <20260820-topic-usb4phy-v4-2-aec9d2cb31f6@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-X-Mailer: b4 0.15.2
+In-Reply-To: <20260820-topic-usb4phy-v4-2-aec9d2cb31f6@oss.qualcomm.com>
 
-
-On Wed, 19 Aug 2026 23:36:54 -0700, Qiang Yu wrote:
-> After a PCIe link goes down, software may still access the BAR (MMIO)
-> space or configuration space of devices behind that link before recovery
-> has run. As the link is down, these accesses never complete, resulting in
-> a storm of Completion Timeout AERs.
+On Thu, Aug 20, 2026 at 04:24:11PM +0200, Konrad Dybcio wrote:
+> From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
 > 
-> Use the controller's ECAM blocker to drop these accesses to the PCIe
-> address space as soon as the link-down interrupt fires, so that Completion
-> Timeout AERs are reduced. The blocked range covers the entire address
-> space (base 0x0, all-ones limit), since the Root Port's own DBI/iATU
-> register space remains accessible regardless.
+> There exist OS-accessible USB4 and Thunderbolt PHYs that need specific
+> configuration. Define a new phy_mode for them.
 > 
-> [...]
+> Currently, USB4 and TBT3 are defined as submodes, because they're quite
+> distinct, most visibly in the electrical/analog aspects (slightly
+> different frequencies, timings, etc.). This results in a need to make
+> the PHY aware of the actual mode needed (at least in the Qualcomm
+> implementation, but I believe that'll be a general need).
+> 
+> Newer versions of TBT are basically supersets of USB4 with higher
+> host-side requirements, so these are not defined. This can always be
+> changed as necessary.
+> 
+> Reviewed-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+> Signed-off-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
 
-Applied, thanks!
+Reviewed-by: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
 
-[1/1] PCI: qcom: Block accesses to downstream devices on link down
-      commit: 86624b718f94517b26f96c1d7beb7632e5562afd
+- Mani
 
-Best regards,
 -- 
 மணிவண்ணன் சதாசிவம்
-
-
