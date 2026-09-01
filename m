@@ -1,145 +1,111 @@
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0DAFF44685D
-	for <linux-arm-msm@vger.kernel.org>; Tue,  1 Sep 2026 19:48:31 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.129.124
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3BA13463B91
+	for <linux-arm-msm@vger.kernel.org>; Tue,  1 Sep 2026 20:05:25 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788292114; cv=none; b=SF4lXSOmIrF/X5YlIO0YIiIrFBU29+LSaBatjGhTsIIG5SSMMkuuGgeEbPV2MyS2XFMLsTEeF4DZK3p7A6nl2qFsLu/9nPed1odwvxqg6CdpC1xgNNLF2GVisOKHOao++LYR/u2ChUHDNcduBTk9txbUAP9gpFLBBkJmOiFW/c4=
+	t=1788293126; cv=none; b=eM86Kc5RDXMmpYDGrx/ryKBgrfxDx43AwHZtXppvwiXP2uD0Q9vsjbINxwGNSjUG0rLbpfVg5k/wmI9KAUEOWkMOvvvZ3I5xT1i229GJRcINx7YC4+BubOMkMxVHZ/3ZR+92MowPSI4I9+xVKhLVltiIHFPkA0Yk5BFacfJNW/A=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788292114; c=relaxed/simple;
-	bh=1XA3Iq64Qh5S96yUdeRyZkUWOMJWh2wuTH7qZS7tpF0=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=liP8/eDB/jtQOiT5NGN0ZzBroTF2HOdtOK6HVtj1PJJVDiA9XQgpxxsxHTug4uitSg53ln/6YwmVMEfgMkECSn18yo0AR4Vu1o91oI6ozFPNqEOglJjECCtiqPh+ISnyolmRD+27VHxhAaM2fIc1qguslevcPDTeJ6Y5P2t+Euo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=VVloJsFB; arc=none smtp.client-ip=170.10.129.124
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
+	s=arc-20240116; t=1788293126; c=relaxed/simple;
+	bh=6xHhXi6J06QWcYHT4XAH9JrkYOlqS9Ep7EIrsnfpVm4=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=PFaimMTDwEUQ8LkIoOtv2S0QGFjh2AckubW+twlM30D0Sg9wDnahWTGnjG0EznVvkWOdUFg35Qn3448O9ZgshlbJNx1OKyJEto2YVSyf81nNMKQYgwWS19HyfaWU712WxDbrW1iorqhOyZG3qFQGoYl7Bhufddzos47iOobx4dg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ESp3xSXn; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="VVloJsFB"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1788292110;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=PdHg9I4oGgxBB+BPGUebv8panrT4iRjdZZ8owiahDtA=;
-	b=VVloJsFBtBm936NxOkb5j6y67tfViGqBk+t8tQO+blM/atsDdtkFelcVMg1qhwbQDxQlIq
-	7/bPFVoFCEiiBj/nb4PpDECT/6y5YCT0rcaBSKOc9dNR5fAckwJpZH8nXFqo0/ZhZfowN+
-	0tY0xj0zcPZ2EERn1OMD6cQ2+bQSA8Y=
-Received: from mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
- relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-561-Ydnij9yYPvO9lR82MlwnUQ-1; Tue,
- 01 Sept 2026 15:48:24 -0400
-X-MC-Unique: Ydnij9yYPvO9lR82MlwnUQ-1
-X-Mimecast-MFC-AGG-ID: Ydnij9yYPvO9lR82MlwnUQ_1788292100
-Received: from mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com (mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.17])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS id CE97719539AC;
-	Tue,  1 Sep 2026 19:48:19 +0000 (UTC)
-Received: from localhost (headnet04.pony-001.prod.iad2.dc.redhat.com [10.2.32.116])
-	by mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP id 544051955F70;
-	Tue,  1 Sep 2026 19:48:18 +0000 (UTC)
-Date: Tue, 1 Sep 2026 15:48:17 -0400
-From: Stefan Hajnoczi <stefanha@redhat.com>
-To: Linlin Zhang <linlin.zhang@oss.qualcomm.com>
-Cc: ebiggers@kernel.org, axboe@kernel.dk, mst@redhat.com,
-	jasowangio@gmail.com, James.Bottomley@hansenpartnership.com,
-	martin.petersen@oracle.com, robh@kernel.org, krzk+dt@kernel.org,
-	conor+dt@kernel.org, linux-block@vger.kernel.org,
-	linux-crypto@vger.kernel.org, linux-scsi@vger.kernel.org,
-	virtualization@lists.linux.dev, devicetree@vger.kernel.org,
-	linux-arm-msm@vger.kernel.org, neeraj.soni@oss.qualcomm.com,
-	gaurav.kashyap@oss.qualcomm.com, mani@kernel.org,
-	andersson@kernel.org, konradybcio@kernel.org, bvanassche@acm.org,
-	alim.akhtar@samsung.com, avri.altman@sandisk.com,
-	pbonzini@redhat.com, eperezma@redhat.com,
-	xuanzhuo@linux.alibaba.com, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v1 01/11] virtio_blk: add inline encryption support
-Message-ID: <20260901194817.GE729142@fedora>
-References: <20260827160806.1295313-1-linlin.zhang@oss.qualcomm.com>
- <20260827160806.1295313-2-linlin.zhang@oss.qualcomm.com>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="ESp3xSXn"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1BB991F00A3A
+	for <linux-arm-msm@vger.kernel.org>; Tue,  1 Sep 2026 20:05:25 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1788293125;
+	bh=D/+4brkDHmZ+QnmE/zqdwooG9iS3MJ/5To5lInwHY/A=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc;
+	b=ESp3xSXnO+Ir6sdOu/zjUPGpWtdAlT818jn8nHWQ+HWNEESDwyGm3RqSjsDhw9LC/
+	 pZAfl48pGsx4V0ChSuJdrE//GadW1nvNDNg7UEcD/LdTGG2W49nk408heGghwWAq4v
+	 3PfNZ+4RRzIng7/ISIeYa0ueGN73DjjDqlxugJdOAz6DvD7Wz3gZPhJF6IFqDpZWev
+	 aI6jlaXqcfUP3EKd03SRFGNHPW6C8TrqYt0D6eRXYsW4ftYg/7AYm4HNmwee1pcU3o
+	 xJeQ67Bo4mCRp49YswndXFFy9N1HUC87z3GSkpmpmA4ohYYnc4DTP8Al/qGYxP0G4l
+	 EZLTvYn2yBcdQ==
+Received: by mail-ed1-f48.google.com with SMTP id 4fb4d7f45d1cf-6a6108734d5so384212a12.3
+        for <linux-arm-msm@vger.kernel.org>; Tue, 01 Sep 2026 13:05:25 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AKwUvBxD/OfawUxncpOyQ3Bsw0Zn70MmhIa8IZZFUQxfgENpG3RIJ6PVjGXfE8xZ5wC6j+jxNlFBEYRO1DCOBSZi@vger.kernel.org
+X-Gm-Message-State: AFuF++mnJe5LKwZ6sAJoMnYs/QJDOtwVGn7Etj4cXrXeb6mA8tPqys0D
+	ylV1en0jjIR8xxS0k4hppy/9Sa5aW0g5pvlhAM37qrQpzm/YxzTfu+JrftioAGfioHdl3uzj7yQ
+	bmNTlVQ2xaStyThGE5NWAISYTgNtGkg==
+X-Received: by 2002:a05:6402:388d:b0:6a6:32f5:90b4 with SMTP id
+ 4fb4d7f45d1cf-6a682af9bf3mr137153a12.22.1788293123755; Tue, 01 Sep 2026
+ 13:05:23 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="9aX0ODMiNe3QBG+4"
-Content-Disposition: inline
-In-Reply-To: <20260827160806.1295313-2-linlin.zhang@oss.qualcomm.com>
-X-Scanned-By: MIMEDefang 3.0 on 10.30.177.17
-
---9aX0ODMiNe3QBG+4
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+References: <20260901172058.1512508-1-elder@riscstar.com> <20260901172058.1512508-2-elder@riscstar.com>
+In-Reply-To: <20260901172058.1512508-2-elder@riscstar.com>
+From: Rob Herring <robh@kernel.org>
+Date: Tue, 1 Sep 2026 15:05:12 -0500
+X-Gmail-Original-Message-ID: <CAL_JsqJJPdrYArNhbRPTM=scDghLAWe5=0a2+ACNaHe07h6-tw@mail.gmail.com>
+X-Gm-Features: AcwNN1UgpW6Z9ydTggKrR6I_Vdbck50n7YuEwMJyuJwLKyVB0nahVAUkaTN_zr8
+Message-ID: <CAL_JsqJJPdrYArNhbRPTM=scDghLAWe5=0a2+ACNaHe07h6-tw@mail.gmail.com>
+Subject: Re: [PATCH 1/5] arm64: dts: qcom: qcs6490-rb3gen2: use pci for device nodes
+To: Alex Elder <elder@riscstar.com>
+Cc: andersson@kernel.org, konradybcio@kernel.org, krzk+dt@kernel.org, 
+	conor+dt@kernel.org, daniel@riscstar.com, mohd.anwar@oss.qualcomm.com, 
+	lorenzo.bianconi@oss.qualcomm.com, devicetree@vger.kernel.org, 
+	linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Aug 27, 2026 at 09:07:10AM -0700, Linlin Zhang wrote:
-> From: linlzhan <linlzhan@qti.qualcomm.com>
->=20
-> Negotiate VIRTIO_BLK_F_INLINE_ENCRYPTION with the host and wire it into
-> the block layer's inline-crypto framework to enable inline encryption
-> on virtio block device.
->=20
-> When the feature is present, the driver reads crypto characteristics from
-> virtio config space (key-slot count, DUN size, supported key types) and
-> issues VIRTIO_BLK_T_GET_CRYPTO_MODES to discover supported cipher and
-> data-unit-size combinations.  Encrypted requests use new request types
-> VIRTIO_BLK_T_CRYPTO_IN/OUT, which append a virtio_blk_crypto_msg
-> (keyslot index, DUN, data-unit-size-bits) to the standard outhdr.
->=20
-> A new virtio block crypto extension driver (virtio_blk_crypto_ext),
-> owns the blk_crypto_profile singleton and the blk_crypto_ll_ops dispatch
-> table. Actual key operations are forwarded to a platform-specific
-> backend registered via virtblk_set_crypto_ops(); without one,
-> VIRTIO_BLK_F_INLINE_ENCRYPTION is still negotiated and the
-> profile is registered, but every keyslot operation returns -EOPNOTSUPP.
->=20
-> The shared profile is a singleton as per blk_crypto_profile is
-> corresponding to one ICE hardware: the first device to negotiate the
-> feature initializes it; subsequent devices reuse it only when their
-> negotiated capabilities (slot count, DUN size, key types) match exactly.
->=20
-> Signed-off-by: linlzhan <linlin.zhang@oss.qualcomm.com>
+On Tue, Sep 1, 2026 at 12:21=E2=80=AFPM Alex Elder <elder@riscstar.com> wro=
+te:
+>
+> A recent change caused the embedded PCIe endpoints on TC9564 SoCs to
+> be treated by the devicetree code as PCI buses, which is incorrect.
+>
+> An RB3gen2 system has an "interposer board" that contains a TC9564
+> SoC.  The TC9564 includes a PCIe switch with one upstream port and
+> two downstream (external) ports, plus a third downstream port.  The
+> third port has an embedded PCIe endpoint with two functions, each
+> providing access to a 10 Gbps capable Ethernet interface.
+>
+> The devicetree nodes representing these functions were previously
+> named "pci@" but were renamed in the interest of consistency in
+> commit e806c63ba51a7 ("arm64: dts: qcom: Rename pci@ nodes to pcie@").
+>
+> Unfortunately, of_node_is_pcie() causes nodes named "pcie@" to be
+> treated as PCI bridges, which PCI endpoints are not.  The previous
+> name "pci" matched such nodes as "default-flags" bus type, defined
+> in the of_busses[] array.
+>
+> Rename the PCIe endpoint nodes "pci@" so they are not mistaken for
+> bridge nodes by the devicetree parsing code.  This restores the
+> previous behavior, and allows them to be used for PCI endpoint bus.
+>
+> Fixes: e806c63ba51a7 ("arm64: dts: qcom: Rename pci@ nodes to pcie@")
+> Signed-off-by: Alex Elder <elder@riscstar.com>
 > ---
->  drivers/block/Kconfig                 |  13 ++
->  drivers/block/Makefile                |   2 +
->  drivers/block/virtio_blk.c            | 199 ++++++++++++++++--
->  drivers/block/virtio_blk_crypto_ext.c | 283 ++++++++++++++++++++++++++
->  include/linux/virtio_blk_crypto_ext.h |  78 +++++++
->  include/uapi/linux/virtio_blk.h       |  62 ++++++
->  6 files changed, 623 insertions(+), 14 deletions(-)
->  create mode 100644 drivers/block/virtio_blk_crypto_ext.c
->  create mode 100644 include/linux/virtio_blk_crypto_ext.h
+>  arch/arm64/boot/dts/qcom/qcs6490-rb3gen2.dts | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+>
+> diff --git a/arch/arm64/boot/dts/qcom/qcs6490-rb3gen2.dts b/arch/arm64/bo=
+ot/dts/qcom/qcs6490-rb3gen2.dts
+> index a13315bf0fb07..99a985a177a61 100644
+> --- a/arch/arm64/boot/dts/qcom/qcs6490-rb3gen2.dts
+> +++ b/arch/arm64/boot/dts/qcom/qcs6490-rb3gen2.dts
+> @@ -954,7 +954,7 @@ pcie@3,0 {
+>                         ranges;
+>                         bus-range =3D <0x5 0xff>;
+>
+> -                       pcie@0,0 {
+> +                       pci@0,0 {
 
-Thanks for sending this as we discuss the VIRTIO spec changes.
+The kernel should treat either name the same. There may have been some
+reason 'pci' was not included in checks. It could have been that only
+old things are (parallel, plain) 'pci' and anything new is 'pcie'.
 
-Although it's nice to have all the Linux patches together, there are two
-separate parts: 1. the virtio_blk.ko guest driver changes and 2. the
-hypervisor blk-crypto uapi. I suggest splitting this into two patch
-series to avoid confusion between these parts. It may also make review
-and merging easier if we stay focussed on just the guest or just the
-host parts.
+These are ethernet devices, right? Then the right name is
+'ethernet@0,0'. If not, then pick something that matches what the node
+is. Both pci and pcie mean the node implements a PCI bus.
 
-Stefan
-
---9aX0ODMiNe3QBG+4
-Content-Type: application/pgp-signature; name=signature.asc
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCgAdFiEEhpWov9P5fNqsNXdanKSrs4Grc8gFAmqXLAEACgkQnKSrs4Gr
-c8gA+QgAqDS7OZpv76XEz3ux6y5Md9USN6fgNjmMguv95TrS/+5BA5hTQoo/oRLD
-Tyk3iCHL+q76w6ukHAbFg75WHzYnE/1ylnCcq8Mu0xrXMjWX7/jOe5/EgXv594De
-ZQI/hrpfc8FZ42giSJBp2SWIVxa9ZaKnUL+33Lf57l2HelEsBrK2C8uhm3HBa9gq
-VVwdgoHixN5DIclvKSmI/lCv3sW7AexMGRjBe6dskR08f84Xn0AisTB3OuzyRJMG
-vHjIzGapZrQVw2jubuAhztBcAedmEhuRJKrCt9HtBMheyWwAfxfkb7FTmVmsIbfd
-37a52DGnb2PYe0N70Q8MmaSi/n/kfw==
-=jTU8
------END PGP SIGNATURE-----
-
---9aX0ODMiNe3QBG+4--
-
+Rob
