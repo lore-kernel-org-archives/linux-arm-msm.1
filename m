@@ -1,69 +1,68 @@
-Received: from mail-ej1-f42.google.com (mail-ej1-f42.google.com [209.85.218.42])
+Received: from mail-ej1-f45.google.com (mail-ej1-f45.google.com [209.85.218.45])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 98563476075
-	for <linux-arm-msm@vger.kernel.org>; Tue,  1 Sep 2026 08:59:05 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.218.42
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D30BD476071
+	for <linux-arm-msm@vger.kernel.org>; Tue,  1 Sep 2026 09:06:16 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.218.45
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788253148; cv=none; b=Dx8cR0OmIYGEXHLLa76ipJrm2ChrjfkuhA5WLAaZMuKaZn8dZnOGxC49XMBGEWaNkra9qCa4/NpsKTj7FTGCLBmF2jMJOzTmNzNyM4rrTaXegOPorklkYCwxi3N6fplrWnZ03GQiGmP/PpUqy5vfNVGSWuDf+zBGrcbWlSupBNA=
+	t=1788253580; cv=none; b=o8NElDUq83jgSZgl2almBJVS9uyTvFmsYPy8LpBfHKrCfWgssoQ9XNS+lTbTMiWkQHbwYuNrb5S+iaLYJyz6zkB4gg+vspLrUlQrBoPPQB9zp42ajAGgFynAJzsVc3fOXBNtXIj8Qq5JnfqcIQi2yDYkxApn6bpUV/aE76+kb/w=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788253148; c=relaxed/simple;
-	bh=cxRbQRwKnK9/jN0RVUhydNE5RjUtDPC2KVGVanJYEHg=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=roX8agLPqLq9QePdLquQrJpwo9F3lof/jDucBSIWrAbaArpAtXemCYE9EyiPkpoLMFtAWTmNFrSVid19+AQwiMdohMFQlC8uYGY1sftpxLVomvGbmzHWB43IguW8w+6j0TUyvL0W5e5sY9evz0EfU+W9BuVZNTbtcTE0EusPuxA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=fairphone.com; spf=pass smtp.mailfrom=fairphone.com; dkim=pass (2048-bit key) header.d=fairphone.com header.i=@fairphone.com header.b=tAOxVCfI; arc=none smtp.client-ip=209.85.218.42
+	s=arc-20240116; t=1788253580; c=relaxed/simple;
+	bh=VLMCTblWAmcjvlydjiDQOaM9EY30ui47eVm7HFZNWD0=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=sM9yt9p31AHZ/Ay1ulb4kXOnOc3Nohm4WvF12X3njQgTpK+hWxQGqyRK5vxySfu9Y+aDOoufhmCQpXchEdsi5c4Pn6wv0htEBqOhFt5u+ASEXzWMHXQeVFAguHKIKlIsBOI5nrMUKcXDzeWiStN0DCSHmJqCqc8HBZz8pSLk+28=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=fairphone.com; spf=pass smtp.mailfrom=fairphone.com; dkim=pass (2048-bit key) header.d=fairphone.com header.i=@fairphone.com header.b=zwdczwa3; arc=none smtp.client-ip=209.85.218.45
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=fairphone.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=fairphone.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=fairphone.com header.i=@fairphone.com header.b="tAOxVCfI"
-Received: by mail-ej1-f42.google.com with SMTP id a640c23a62f3a-c2055573c8cso581474666b.3
-        for <linux-arm-msm@vger.kernel.org>; Tue, 01 Sep 2026 01:59:05 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=fairphone.com header.i=@fairphone.com header.b="zwdczwa3"
+Received: by mail-ej1-f45.google.com with SMTP id a640c23a62f3a-c1600d040e4so152120666b.1
+        for <linux-arm-msm@vger.kernel.org>; Tue, 01 Sep 2026 02:06:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=fairphone.com; s=fair; t=1788253143; x=1788857943; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=sJfVt2Jl27L2tiMuCND1n2ucXQNUUhn5LjDWnJ+oCwo=;
-        b=tAOxVCfIIacMpbdLqyMCkJBTjKLT+k/kcOd3c/LwwlyIfcUPaoCAx5G0EWzPatS6Mq
-         i/TDOoD4jo5ZwK/n+8P3h89trVSVPdumjufsx4qfH+WHx/2EDUQfkqPxT2JgTryqFrTs
-         LJvZpPo9c7SE8PIOeMLUpAVCYqAz8AdSkdemFoq25lHJB7KbV1CQa4rIgVJEtkacfRCd
-         RxPbzrZvv+IxTczekii38xqm9AuIXcFWXz/i4J4NmUC2sU/eGvOfLFX/8KaqckkNrYgt
-         tiZWj4WXuejnY/Xk70GTaYbioSuaCict6lHxRTk7oWhyW31An7kxrHHQq0eLzOC/MDMP
-         aWug==
+        d=fairphone.com; s=fair; t=1788253575; x=1788858375; darn=vger.kernel.org;
+        h=cc:to:message-id:content-transfer-encoding:content-type
+         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=4RZfyoM5tD0q7WqcULgsURT8LaR6zOJsyJgPkVRkoT8=;
+        b=zwdczwa3iQSrZKHoSS7DDDQ7f3Stbep0b0Wfmlg1EcCRX6SxYF/9MoNo2WEoq/01zy
+         /PXQNiP2zkkWrAiEovCOABUVNTGVStO7sYtNrDIyWSa4R4UdMvM+0g6LCnriq1vW6PeB
+         NUGGb4hwo72xPuhxuZ66Ni3bPLOeERjb8E9WCr1NBSl/x6a6LF0RR+huuBDHTOiDIDeN
+         +kyHp8LgENnkYZkCXv7OxWlF1z7gzHmPkSYLajmA7T4dI+OMsMdguff9bvHItgxUwjiz
+         5EeBUrRo/EiIvw2yTfB/mo0c5WoB1EBNk3zes/W9Rma5KmPZxvbkfuE2IN/bMN7VA1Qj
+         4/fQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788253143; x=1788857943;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=sJfVt2Jl27L2tiMuCND1n2ucXQNUUhn5LjDWnJ+oCwo=;
-        b=EKetm7uOUMRRLqc+nDtpiyJ+VlNNv8Y8PT+e8VVwdK/FxY9Sutu5j/QHfGfFEhFwdL
-         tqxcWT+62RGibo943MjxSfO3e31DVtGsPms8nwNSnIKVB0t+JRpu+JTyYYyPzQgw0D3R
-         AZ59fKK8fpiNwyVaeBEPyRItm8KKk6wiCbmsFs2ypeaV+Tjt3A7u33cOfhkCx2fgpn7t
-         aRmE9sZ7HDWuPaJBiZElBPE577u3Nl4ryDs3tekPccVBVpCC3O60q1drSnZ6N8JiOvVo
-         EIbRI2O+0iFi5/FhgXnXJtYZ9w/g+UVGKxcPp7GMrkFtj+7/7o3FszCQBVlZ4kKWyJlA
-         4d+Q==
-X-Forwarded-Encrypted: i=1; AHgh+Rp2DAVRtPFmykqUzz7tGDeMZ4xjBNZgbGLbFstWnfevgTkJkNJtjT7XYaYlIk9Y7AeJ4KakxazZWQbOiljD@vger.kernel.org
-X-Gm-Message-State: AFuF++kziBwxT4r1WJ1jxLvj+flXxKk8YJNmvGOmlYk+DsEcNa9iJmIG
-	1hkOtamvYTkyivOt3WlZVdD2wT5DoDQK+kSP4U+kAzxaaQFlN2jj0CQfLMEe2ebSDf0=
-X-Gm-Gg: AR+sD10X2+oCEWhgTA0uhSyaYfA32CSxBCVvzKZmNNRhDRP4j10tNKHnK5LSYr2P/Gu
-	OJBXS0PjEKbdOMw33BvsjfIJq+hO72E9zG6QTULK6s2rCwu/T3YRRtIymK1EoE+H7KEa90Vhwg5
-	ejWYdEiXILS8wSs8x/oGMiXEK9LTWGjiAu97RoDQ9I5ZN9lLLwJ57anRBaJ1+m8d/9MKb2SrEOg
-	/7XMZ1feCDXEoRRfUgFb74WclQrRkLho1ZwC40jnuvlV6k5ZRAX8ALBHLjnnJIp12AQ9wDlEusW
-	dRdnRrZL2ozleRRyDqaFozjnPCV2Agm90mAi4lx60GpW9r/0wgbhWDWxoRCxrhRZV5Z+7O813f/
-	mpN3EtolXVmEZPq8f8uIIQapEasNE/K8I5+m87r2G+v9o2sDRxrAXtnArxVw7WN3GfiZ58G5Dwq
-	1OMMzl5rBQGiJ2YiA9QIno24qklXlk7mHBdU95dbwaNsl4cDQoxIoeSL68BW+NGb1NSeGfBNfkz
-	vSArUm1aRQMpjbk7zaieQmwaecRrlyb4MI4FbXwMq/iXhzHbraVxQ==
-X-Received: by 2002:a05:6938:a086:10b0:c25:b597:60bc with SMTP id a640c23a62f3a-c25b5976156mr270055566b.23.1788253143571;
-        Tue, 01 Sep 2026 01:59:03 -0700 (PDT)
+        d=1e100.net; s=20251104; t=1788253575; x=1788858375;
+        h=cc:to:message-id:content-transfer-encoding:content-type
+         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to:content-type;
+        bh=4RZfyoM5tD0q7WqcULgsURT8LaR6zOJsyJgPkVRkoT8=;
+        b=rsuFzxVZw18ChRGT45ANXosokmQuT9f6mOUvnj1Byem7si/HPotmVXh9MiESI7Jtsx
+         3eFo/DDob8bsEtDtOQwvE8yE9syffItdQd0X7vgglfgikG+JylV8Bp/A/BAeZk9Z806x
+         k8C0QzCFV/zK57JSYWH/u+FIM9ne/4haWUZk4IJ89X1Eb+CMYCH+WlIVAIXZWQUK25W9
+         HlmcFv2IyE+/RbtJ09bQ5oHuQWQkagNRmwiSx/DIjYQ7J1jelR6BCoo7dj85+K36Fdgw
+         WK3vdfN+xaS3U1UR5p8QSzHn7THyXa2gTaJoUNh0H7+9iEzCliqTXokiaC5pJcj29WRg
+         vUHQ==
+X-Forwarded-Encrypted: i=1; AHgh+RoKycA25InD8q11OhAV1pdgioqTawuDDJbaRzzwnFLbn8o8f7NNCTlIX5Zo1IxEHehxck9p0TwcRfi3NlJ7@vger.kernel.org
+X-Gm-Message-State: AFuF++mkbLQcsIKFLhsxkPNQin88PKDVe+WKr72ow/mMkb2qasKJuy36
+	xjX1XEeiKH0gbUEdm+RqFXhFrXHo+LQsWTRxrGikwU2h5sG6dfScaFwH9ygNrhsfgz/1qDwZWvu
+	ThZSj
+X-Gm-Gg: AR+sD12W6GNSkxOvJi+rASCcGAIsN7EmQJPFThkPr6jJg9aeMAz+3zNFqclp4C6fWvk
+	+arlfA/EBlo5/19uqQScpVIbG/P2RV5+6/tSOtcBaelBOaMzTa1VQ2hk3PNx59SVCPjkS0iOc2b
+	rI8mQnRvI3A9jezWGXYIhXkxTEnfva/Lc+JLHTB63gkAIW/okDvxFB83gvbn59UmFl61tTlqNUR
+	g98GFSXSVwzU/WSVMxIG9K6LX1F0pWlwiwTcXppyTc4w+S9rUVV92G+z6/BwllFjQnoMlX7BsO0
+	2lYmDApHNskv7vk5nJd9hnSz71vwLJn+YGG3L8S9P8kdWqqvsXp06DRASoXkCk7tuPVbIlQUljD
+	FNtAWt6goC7Kky5fm9qJq2jOMZZ/HHXSecQ7hlPUFfdgm4J3zyaqd7BWoPc1aA4H2iUhwms97Ii
+	dx3LwOMKDTLiVR8pxywJ0UMP1yrq9WbVeiha5/hOO24fBHEyj6H7bDGyDNW/Z52TcVpKaRQeowA
+	qWlGys15mp1XtTa66Md/pK6Ml18OGQ0INGIOO7O1vE=
+X-Received: by 2002:a17:907:80a:b0:c15:a7b9:2ae1 with SMTP id a640c23a62f3a-c25b917f381mr253265866b.6.1788253574737;
+        Tue, 01 Sep 2026 02:06:14 -0700 (PDT)
 Received: from [172.16.220.101] (144-178-202-138.static.ef-service.nl. [144.178.202.138])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c2564e314a1sm511942566b.42.2026.09.01.01.59.02
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c255ee7335asm525484866b.27.2026.09.01.02.06.14
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 01 Sep 2026 01:59:03 -0700 (PDT)
+        Tue, 01 Sep 2026 02:06:14 -0700 (PDT)
 From: Luca Weiss <luca.weiss@fairphone.com>
-Date: Tue, 01 Sep 2026 10:58:59 +0200
-Subject: [PATCH 4/4] arm64: dts: qcom: sm7225-fairphone-fp4: Add parent
- supply for regulators
+Date: Tue, 01 Sep 2026 11:06:13 +0200
+Subject: [PATCH] arm64: dts: qcom: sm7225-fairphone-fp4: Disable PMK8350
+ PON
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -72,130 +71,58 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260901-fp4-regulator-supply-v1-4-68288ab70aee@fairphone.com>
-References: <20260901-fp4-regulator-supply-v1-0-68288ab70aee@fairphone.com>
-In-Reply-To: <20260901-fp4-regulator-supply-v1-0-68288ab70aee@fairphone.com>
-To: Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>, 
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>, Bjorn Andersson <andersson@kernel.org>, 
- Konrad Dybcio <konradybcio@kernel.org>
+Message-Id: <20260901-fp4-pmk8350-pon-v1-1-e05937e9c860@fairphone.com>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXMQQqDMBBA0avIrB2Ixkj1KuKixpl2FGNIrAji3
+ U3b5Vv8f0KkIBShzU4ItEuU1SUUeQb2/XQvQhmToVRlrRpVIPsK/TI/tFHoV4fGjGybWjMPBlL
+ lA7Ecv2PX/x0/w0R2+27gum5fOokCcwAAAA==
+X-Change-ID: 20260901-fp4-pmk8350-pon-55dfc963ffb5
+To: Bjorn Andersson <andersson@kernel.org>, 
+ Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>, 
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>
 Cc: ~postmarketos/upstreaming@lists.sr.ht, phone-devel@vger.kernel.org, 
- Krzysztof Kozlowski <krzk@kernel.org>, linux-arm-msm@vger.kernel.org, 
- linux-kernel@vger.kernel.org, devicetree@vger.kernel.org, 
- Luca Weiss <luca.weiss@fairphone.com>
+ linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, Luca Weiss <luca.weiss@fairphone.com>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1788253139; l=3168;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1788253574; l=982;
  i=luca.weiss@fairphone.com; s=20250611; h=from:subject:message-id;
- bh=cxRbQRwKnK9/jN0RVUhydNE5RjUtDPC2KVGVanJYEHg=;
- b=XstesESLNKNENI2TMjsB707Xn9JsLhAz+bicy9qI3/avgdac2Y0bfOhZl7UwcuzI48QOO4jPC
- zQ0bbq5ix2aDxGmeLu6TtRf9wsTtQ1NY1OIcW/bo9Kq/awJTzxBFD4c
+ bh=VLMCTblWAmcjvlydjiDQOaM9EY30ui47eVm7HFZNWD0=;
+ b=OLfQFq5Si7pDMICrd4APmwBWRMw+HenJSjX4WknR1Em3H7jb/DuDAJluqkvwR6PHLVY2xqAh3
+ MwA6BCej4YeCiTxRg8BftPuiK9yE6nY0uI3LT7wbnq1CtTKNsD0eubw
 X-Developer-Key: i=luca.weiss@fairphone.com; a=ed25519;
  pk=O1aw+AAust5lEmgrNJ1Bs7PTY0fEsJm+mdkjExA69q8=
 
-Add the vdd-*-supply properties to the rpmh-regulators nodes, so that
-the parent regulators can be enabled when needed.
+Two PMICs on this phone have a PON block, the PM6350 and PMK8350. Only
+one should be enabled at one time, so disable PMK8350 PON and keep the
+PM6350 PON.
 
-The regulators s4a and s6a are a bit special. They feed back into
-PM6350, but are not modelled as regulators (or anything else?), so they
-also can't be added as vdd-*-supply. It would seem to be possible to add
-them with their "Default on booting voltage" from the PM6350 Data Sheet
-in the dts, but I'm not sure this is desired.
-
-And document what the "missing" regulators are used for.
-
+Fixes: 582e7c1026fa ("arm64: dts: qcom: sm7225-fairphone-fp4: Add pmk8350 PMIC")
 Signed-off-by: Luca Weiss <luca.weiss@fairphone.com>
 ---
- arch/arm64/boot/dts/qcom/sm7225-fairphone-fp4.dts | 46 +++++++++++++++++++++++
- 1 file changed, 46 insertions(+)
+ arch/arm64/boot/dts/qcom/sm7225-fairphone-fp4.dts | 4 ++++
+ 1 file changed, 4 insertions(+)
 
 diff --git a/arch/arm64/boot/dts/qcom/sm7225-fairphone-fp4.dts b/arch/arm64/boot/dts/qcom/sm7225-fairphone-fp4.dts
-index 5d20ad93b0c5..a1556d802a8b 100644
+index 5d20ad93b0c5..773304b4759e 100644
 --- a/arch/arm64/boot/dts/qcom/sm7225-fairphone-fp4.dts
 +++ b/arch/arm64/boot/dts/qcom/sm7225-fairphone-fp4.dts
-@@ -78,6 +78,17 @@ lcdb_dummy: regulator-lcdb-dummy {
- 		regulator-max-microvolt = <5500000>;
+@@ -992,6 +992,10 @@ xo-therm@0 {
  	};
+ };
  
-+	vph_pwr: regulator-vph-pwr {
-+		compatible = "regulator-fixed";
++&pmk8350_pon {
++	status = "disabled";
++};
 +
-+		regulator-name = "vph_pwr";
-+		regulator-min-microvolt = <3700000>;
-+		regulator-max-microvolt = <3700000>;
-+
-+		regulator-always-on;
-+		regulator-boot-on;
-+	};
-+
- 	reserved-memory {
- 		/*
- 		 * The rmtfs memory region in downstream is 'dynamically allocated'
-@@ -296,6 +307,15 @@ &adsp {
- &apps_rsc {
- 	regulators-0 {
- 		compatible = "qcom,pm6350-rpmh-regulators";
-+
-+		vdd-l2-l5-l7-supply = <&vreg_s2a>;
-+		vdd-l3-l6-l8-l9-l10-supply = <&vreg_bob>;
-+		vdd-l11-supply = <&vreg_s2a>;
-+		vdd-l12-l14-supply = <&vreg_s2a>;
-+		vdd-l15-l19-l22-supply = <&vreg_s8e>;
-+		vdd-s1-supply = <&vph_pwr>;
-+		vdd-s2-supply = <&vph_pwr>;
-+
- 		qcom,pmic-id = "a";
- 
- 		vreg_s1a: smps1 {
-@@ -310,6 +330,14 @@ vreg_s2a: smps2 {
- 			regulator-max-microvolt = <2048000>;
- 		};
- 
-+		/*
-+		 * s3a (smps3) is gfx.lvl
-+		 * s4a (smps4) is supply for vdd-l4 & vdd-l13
-+		 * s5a (smps5) is mx.lvl
-+		 * s6a (smps6) is supply for vdd-l16 & vdd-l18-l20-l21
-+		 * l1a (ldo1) is lcx.lvl
-+		 */
-+
- 		vreg_l2a: ldo2 {
- 			regulator-name = "vreg_l2a";
- 			regulator-min-microvolt = <1503000>;
-@@ -408,6 +436,8 @@ vreg_l16a: ldo16 {
- 			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
- 		};
- 
-+		/* l17a (ldo17) is lmx.lvl */
-+
- 		vreg_l18a: ldo18 {
- 			regulator-name = "vreg_l18a";
- 			regulator-min-microvolt = <788000>;
-@@ -446,8 +476,24 @@ vreg_l22a: ldo22 {
- 
- 	regulators-1 {
- 		compatible = "qcom,pm6150l-rpmh-regulators";
-+
-+		vdd-bob-supply = <&vph_pwr>;
-+		vdd-l1-l8-supply = <&vreg_s2a>;
-+		vdd-l2-l3-supply = <&vreg_s8e>;
-+		vdd-l4-l5-l6-supply = <&vreg_bob>;
-+		vdd-l7-l11-supply = <&vreg_bob>;
-+		vdd-l9-l10-supply = <&vreg_bob>;
-+		vdd-s8-supply = <&vph_pwr>;
-+
- 		qcom,pmic-id = "e";
- 
-+		/*
-+		 * s1e-s2e (smps1-smps2) is cx.lvl
-+		 * s3e-s4e (smps3-smps4) is VDD_APC1
-+		 * s5e (smps5) is VDD_APC0
-+		 * s6e-s7e (smps6-smps7) is mss.lvl
-+		 */
-+
- 		vreg_s8e: smps8 {
- 			regulator-name = "vreg_s8e";
- 			regulator-min-microvolt = <313000>;
+ &pmk8350_rtc {
+ 	status = "okay";
+ };
 
--- 
-2.55.0
+---
+base-commit: 89c07d98716a13454ec3fd9f97689e812cc71bd4
+change-id: 20260901-fp4-pmk8350-pon-55dfc963ffb5
+
+Best regards,
+--  
+Luca Weiss <luca.weiss@fairphone.com>
 
