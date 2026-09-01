@@ -1,88 +1,87 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 56FB7470EA4
-	for <linux-arm-msm@vger.kernel.org>; Tue,  1 Sep 2026 09:54:24 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 192C5471262
+	for <linux-arm-msm@vger.kernel.org>; Tue,  1 Sep 2026 09:54:59 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788256465; cv=none; b=vFcM8RapR5F2erkMLdN0wco++bRsN4oejh6tfNenF4OaoRuhqsn5AHD7Kzp7oLWreMXfLLVcKWJpXaq2PcfgmuAFRVkK6MBrxfLJnUn6hOr4eJ/BUPDZJTwX1kvfzUiwFLqQM0SZ63A1FVzdVdForBlNVyqEnO+otP4WTv2bvhE=
+	t=1788256501; cv=none; b=BBHsVgX3EMjlme8UlVDYkeIpZS15O373+wNngejcNNSj0VyjUBoxuf1XwIUp83S88rEYUqcwGgVYTWg+UtiLb+73uW0lgoN6bnsUKNmdiDrKXd9YvQIXx63ndfqTpjs62is9coe5uPIZ3VrbuDedt4qiTmeYGD2njf/FAmerM2A=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788256465; c=relaxed/simple;
-	bh=4afiGkcNEeX8WmPB9DJBvWqvGi65/MUDjG1PvDWjfHc=;
+	s=arc-20240116; t=1788256501; c=relaxed/simple;
+	bh=aqTx+S7mshxuBbBdKgQ5CtXuCc2qvNYpagvsr0pk6Mw=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=q3L1ecTPIcO10MzSgZW5kLJulP819xMjaJSSFjaOWdtfl8r6CDNJZ6r7pDHcKxNoCwWAbkkQcGKy7GklZ6vFJLmdpbrFc/LaShlbimbaNQ13+EeqExZrAG346uMjfiEwGokDtGRgdAhNCMDMQ9fmja/oftKzil9Ro+Ed6jahC8w=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=nJfeO3cE; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=biVow5vX; arc=none smtp.client-ip=205.220.168.131
+	 In-Reply-To:Content-Type; b=qgPymthxODBvMCfWCkb7p4E6aGA/WKOsOaj7igfUDJt0XDm4xYyA1qxf3bhpuqRGtn2uUmbs7ZOADyZXBiuXy9C/Nn3lmJc6DQCSvqKnLcllC03c/8WaGC+9Gem/CuGP69/PX8Lc53+pF7+mXDD/16SImR88L+Du/mJ7HEPNBwM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=DFMV54XW; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=SnzA1X6e; arc=none smtp.client-ip=205.220.180.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="nJfeO3cE";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="biVow5vX"
-Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68178nck2973828
-	for <linux-arm-msm@vger.kernel.org>; Tue, 1 Sep 2026 09:54:23 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="DFMV54XW";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="SnzA1X6e"
+Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68179HKY1975448
+	for <linux-arm-msm@vger.kernel.org>; Tue, 1 Sep 2026 09:54:59 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	6UPDyURVG0qLypFDxekoTlpl+By1uFOwQ76rrcLT+Bs=; b=nJfeO3cEXlUVIPo0
-	Jy+RmnXZsLvVBfCvabNofn2k3E3Pq8bkzJNvFBzeJ9pjhrrIcZnyPL3SXqc40UqX
-	9d50f8REiLc/zmV3xwrYCgiE9Rmvl75Ahtrky6OaqVObCwbqaT0y6B/uG8Ti1nFA
-	k+BioNg/xmir0clteotYFL9wQl4FFwOdBggZqS917IDM6bfQ97WxauGSpYNKF7Um
-	E9HOzXMyjaT8jkC4jRzYqEhW0FLa1vLOw/owjWkRbP4zvv3RzoEZOhxvU9q0bi+8
-	hLhbl/5azFA4ocsAXmR07LZtTbR2yAQzDJn6iT2GttB+T4r4VOvc8pd8N9LvMXEh
-	PpaicQ==
-Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com [209.85.222.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gdsnu0u9e-1
+	RLFLzCTnod+0cKWMNOkucUdWpp2/XKB75rkTGpsWY3k=; b=DFMV54XWK56mGXde
+	2ZYukS7rpdABxgRYXB9l1+MCK/QkIvyGVbwkpE7Q/JXBe/7+7BIDLiPVWibp6ujZ
+	EPgO2sHganB/FmWSPsIsvHZ+mzkCCRQjcjjAw7nntXf9DyDZ84atno3qKdeIf64a
+	CHvUrQZLRnVa7Jr5PYSFadNVRFz0o/mETFmbmOcXWCdma87H5sCaPeWtmtMtUhAn
+	KQEQ+hLV4q38GqBL+GVzRyHuIz5/5NkKOilRYs1+4ZUgmZnQmofUGuakww3JXG2u
+	RoqPikhDDqQrqSiGzcZamwaRglpEDChb/Wu/S5c0asY5y12igfIZFoGjlcd2OzTm
+	HqFK0Q==
+Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com [209.85.222.199])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gdp7r1pea-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 01 Sep 2026 09:54:23 +0000 (GMT)
-Received: by mail-qk1-f197.google.com with SMTP id af79cd13be357-9349ba88188so117746985a.2
-        for <linux-arm-msm@vger.kernel.org>; Tue, 01 Sep 2026 02:54:23 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Tue, 01 Sep 2026 09:54:58 +0000 (GMT)
+Received: by mail-qk1-f199.google.com with SMTP id af79cd13be357-93821883e26so93711385a.2
+        for <linux-arm-msm@vger.kernel.org>; Tue, 01 Sep 2026 02:54:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1788256462; x=1788861262; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1788256498; x=1788861298; darn=vger.kernel.org;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=6UPDyURVG0qLypFDxekoTlpl+By1uFOwQ76rrcLT+Bs=;
-        b=biVow5vXVa5rz4615xfOjqlCnGyf6YlekUUf+sdO6S603ut0HktFECSDQOZSnGxHE3
-         sFgoq7VbtKir/rxMBnaXBTablyM3KuH2omIy7pW8QKuFj1yOHf6LPwJwrTD2vMn/j0+C
-         KrdzzbOBhYGS8BapeS0Oi3jtPwzm+Hw68G0Ky30yFNFA5Bs60UoEjw1WBehj1381TEst
-         P0HPUSz0XnO2UBzAtFmd9eoQ3VAwSDBv5S2+30zyOTYNSRcVAsSJWblyf0ktb4RzMNsj
-         Sbf8Ci5cnh0dtFNBgHHghe+WIQlTfcsPtayQTFMnwnNzuDIj7UIEP/LAJ/76ldv+utyf
-         Kd8A==
+        bh=RLFLzCTnod+0cKWMNOkucUdWpp2/XKB75rkTGpsWY3k=;
+        b=SnzA1X6eqvyBr8e1QwwacuzBooND1MiNBqEv1mwlXwJQCnrN6kvhZIjv8SrePhlirT
+         ZQBDUH/85u6s0n6FAoRMoCibnVnrfJD1WuaBT/5IzRy9qKb7W25NpP8Eay6f+KqySWcZ
+         kSEWng51RkOEJXd5CoVyXeGULV95kg534ElLvYtuYmCpInPx+weUglxuym66jIBtDXU/
+         9xK4DZpZ3I/cNZy6NtFvvNjAjVubeZm4t9WZ5ZG/9jJ2/m+oEACwygUDCEcOEqTPCm3b
+         /xGeBJImLGoRXeWGF3i2fOGmE8ocBnF8tuz6qp+dKdCI5UFt/jF+xXdCwgyKAQGRxcut
+         XeuQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788256462; x=1788861262;
+        d=1e100.net; s=20251104; t=1788256498; x=1788861298;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=6UPDyURVG0qLypFDxekoTlpl+By1uFOwQ76rrcLT+Bs=;
-        b=Xes9qzcABOUjWhsBnv83CdO+34DnvOLtqklT/7FEjISkIYYP58mulaCSrXo1e4uLFa
-         kRzqIzKzpmIx+kpbmvQqCrEP69iewYerpJpjlwcjqD257NXuHOp8F/e6OzNiCkiFvpnb
-         rkol5icLYpgDVItGbVM1sH4pNAT85egfcz33I0mgkfSfZ6rTq+BvU0wuthhUgo1tIVgB
-         eH/fOgTjhdMjWcWO6DuYCiavX+KjLv/fdQBXTOy7Mx1Yq1I+HBgK6zNqf5YexIcAswWU
-         /NGYedYyeHZNScu+tf2vBKdGXqxjz6xF/+FMXiu7cX0V8E1t015yO5D2bNjD3fnGpd+6
-         r0Ug==
-X-Forwarded-Encrypted: i=1; AHgh+RpVBZnRlEstlrM58S8kJOI5LDPKnMMk1ZNUCgEgYJPIhe7in8IchcsDGeAA1MNUaqm+C9gUQaigvCQK7wz6@vger.kernel.org
-X-Gm-Message-State: AFuF++lmjiEqvCBEgbUxDsgZmCoSmicSjO+hpPontqO2kagfMduk89kw
-	mCdz2L7crMf+dTSYa8kwj0hXIi3KtWI7skEtxiEqgNbEW2KwrMTiYttkALHraQGl//zjCmy/x+U
-	+mNWcWjyy4qJ15o1PSckw670/mWS5FON237PYDoSP/d9VewAxoR3HSDiy0bbXDdLl+g3LTkKdbp
-	uX
-X-Gm-Gg: AR+sD12eKKViIovajYsb6/W2Dz3QzXd7XC9lpY9EphcUfe9urz8yfaRjxCrZRY1z/ku
-	YUMnKFiPPVOmXjVoHRiLDSLnc7Yqi6l3prYIUKPRHZ2A8CiQdvKxB21yst7+jYo/yoCPFbjbgR4
-	ko+cjn/Q0WfZg8s+owxqvm8OYNWyHy7Miusma6d9wjwMGd1omGEg/FFtyToHN2SjzbJQ93uQbIc
-	dNLOg0Fr0Hq3vd3cwi8kkocoju+Yjrqs15cFLAgdLYs0Pyongxat4XGKjQwg4l+4hQUH3g+Nle3
-	1XV8DMmK6a3QRGNNzje7f0sNORUqGDTWY4sHKCfactbI5DxgnuzSc2oIWv2bJftq51ZBOtA5ySx
-	CBS01pWQEThialIcJ3G9yYw==
-X-Received: by 2002:a05:620a:280b:b0:939:2884:e11 with SMTP id af79cd13be357-9392884109cmr1442798285a.5.1788256462574;
-        Tue, 01 Sep 2026 02:54:22 -0700 (PDT)
-X-Received: by 2002:a05:620a:280b:b0:939:2884:e11 with SMTP id af79cd13be357-9392884109cmr1442793985a.5.1788256461852;
-        Tue, 01 Sep 2026 02:54:21 -0700 (PDT)
+        bh=RLFLzCTnod+0cKWMNOkucUdWpp2/XKB75rkTGpsWY3k=;
+        b=j06MPVr2HB8k6lJi3jalEbHN/0a1Mt9/GE8EiwTjxYDOo9sJzVIpWI4Magdg8g3Zz9
+         BfJzhQHPBxpAcnqRL19rimvTqUX19ZYvueaxH8srfFXWjzUg37vZ+6ubauM414YjzLil
+         nd8kX/Cis+ZQoxzgb5sBECyJgkpkCbeEUllVSoOZvTe219LxnAkApCnFjBSx+dRqjVfB
+         /tS0hvGrZUV7J4nsp02n3ra8ERP0/Hve/yjsk60kRr+bwpOfaxcpGnJWp2shbdKGZJG3
+         RyX8fTAnM++b0384RX4FXKT5KbEEwe1ioLMmOfFyGQcB8jvbmB/n9Yy6g1EMuSBkmGmp
+         WamQ==
+X-Forwarded-Encrypted: i=1; AHgh+RrypC72qDVd0bzuVQutrqALcan4azW9Zta0TJ05UTbUYRLQiuUJj4e33MDwCu1IGanZHNxC7jEnA6TiSDnT@vger.kernel.org
+X-Gm-Message-State: AFuF++m2ZgyG+8lWMGMicdLk7hgIaCVVFRH7jlCxFsJ7w5bAHV3Vg5WI
+	yraMzUXYUZjEji3essQaKBqs4LIoYTOxdaTVEFv9GOFsqDsDG8EBPVZTyTJWNZZbNKXfySqw8oF
+	ggdC4bQDWPkht6Tcr9qYZgLn57IUNSvkk3GEe/cnY1XV9miKWkd92xDEyn0bqT+cvkrPf
+X-Gm-Gg: AR+sD10Bui7nUrIvDeClCyeOSEzl1+Y5UCl5j6sKk/LL87uOzClbM/w6J/+bHYQaYD0
+	xlEV75677VwzCURZ3QYThMO50Ll0wMCiRNpgdH+2YJqzaxhID8SRvkMHpGd5crL5YnCOOOqm6iq
+	xA1q5V4F27hqrs5LUEi/TkmVNkOF503UIBOHrOVGrXbaOmSp6OGQARl+7Vt8Ynk+syqsyZcX90n
+	nZOULoLscLH2oyUXU8pSBVSwZgDTkF/BzXs1ElZdSXEVDhLEnR8ymMGcxTKEECV5ptcXOFl+8Aj
+	HuZG3onayZwBJm09wkZrKFn+SL5WJ/vTVAtZZfd87GqzaI5+7AtbfriIHtyf0yTDjbUe8bJpgXL
+	60l3GcDIVAyYLmJF2JNi5Kw==
+X-Received: by 2002:a05:620a:1a2a:b0:939:17ec:8a81 with SMTP id af79cd13be357-9392879009emr1329689585a.3.1788256498402;
+        Tue, 01 Sep 2026 02:54:58 -0700 (PDT)
+X-Received: by 2002:a05:620a:1a2a:b0:939:17ec:8a81 with SMTP id af79cd13be357-9392879009emr1329686385a.3.1788256497692;
+        Tue, 01 Sep 2026 02:54:57 -0700 (PDT)
 Received: from [192.168.202.12] ([178.235.128.140])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c255f1facbcsm546460666b.44.2026.09.01.02.54.19
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c25ab2f9aa6sm193944666b.35.2026.09.01.02.54.55
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 01 Sep 2026 02:54:21 -0700 (PDT)
-Message-ID: <f6f632b9-cc2a-4966-a43b-c474a05da7ca@oss.qualcomm.com>
-Date: Tue, 1 Sep 2026 11:54:19 +0200
+        Tue, 01 Sep 2026 02:54:56 -0700 (PDT)
+Message-ID: <e1b7e953-2372-41d4-84cf-cd2fbc54f88a@oss.qualcomm.com>
+Date: Tue, 1 Sep 2026 11:54:54 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -90,109 +89,62 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH] phy: qcom: ipq4019-usb: Propagate reset operation
- failures
-To: Pengpeng Hou <pengpeng@iscas.ac.cn>,
-        Robert Marko <robert.marko@sartura.hr>,
-        Luka Perkov <luka.perkov@sartura.hr>
-Cc: Vinod Koul <vkoul@kernel.org>, Neil Armstrong
- <neil.armstrong@linaro.org>,
-        Manivannan Sadhasivam <mani@kernel.org>,
-        Philipp Zabel <p.zabel@pengutronix.de>, linux-arm-msm@vger.kernel.org,
-        linux-phy@lists.infradead.org, linux-kernel@vger.kernel.org
-References: <20260828091857.8581-1-pengpeng@iscas.ac.cn>
+Subject: Re: [PATCH v1] serial: qcom-geni: Avoid double-free of PM domain list
+To: Aniket Randive <aniket.randive@oss.qualcomm.com>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        Jiri Slaby <jirislaby@kernel.org>
+Cc: naresh.maramaina@oss.qualcomm.com, praveen.talari@oss.qualcomm.com,
+        linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-serial@vger.kernel.org
+References: <20260901-probe_cleanup_uart-v1-1-0bc2b00c970e@oss.qualcomm.com>
 Content-Language: en-US
 From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-In-Reply-To: <20260828091857.8581-1-pengpeng@iscas.ac.cn>
+In-Reply-To: <20260901-probe_cleanup_uart-v1-1-0bc2b00c970e@oss.qualcomm.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTAxMDA4NyBTYWx0ZWRfX/K2o7ZawwXQA
- znKTbKRPRUtWBn3MQWA14ltuAdkKoUrQxCA3DU1c979+r9ZqZLLfyUNBHwN1sNi4A1LsOGl4syN
- J9TpdOPyZGBC4xQgNtl3dzLwKHIUbH6ZKzLntLgEaANh2+6ZDqLCqqKZxYIhj8cn7kjcjGNwRsO
- QYWUAD4Dhamh8W75RZGmWVwE6qhVqzqKWrMSmU4yL+Du5y3VaKePQ4IZ9dVgedURRSukTvcSuuo
- slTOl+LBu1LBbErzi7+ZY4a3iIgflNUH0BK8zhTaPI8VBn0yvaX7lSw0ISeiY4/jY6mhAj+sHYC
- GQjRZ+kYHfruAIXkS9IXPB7dFFMB7PIHZtu1OEnZSQmk30v4aeeibOn8UCxxRCJn5KPVTJU7nIu
- sd9RsHJlZfz2WcxNOfhlCiZ+ExQyeho5y81ToWYSdiBgVDfDOsWaEFSm8irLz55JwtvX0GK/D/j
- TWw2dwlDsbvmFplYegg==
-X-Authority-Analysis: v=2.4 cv=L6ItheT8 c=1 sm=1 tr=0 ts=6a96a0cf cx=c_pps
- a=50t2pK5VMbmlHzFWWp8p/g==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
+X-Authority-Analysis: v=2.4 cv=beZbluPB c=1 sm=1 tr=0 ts=6a96a0f3 cx=c_pps
+ a=HLyN3IcIa5EE8TELMZ618Q==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
  a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22
- a=YGK_NnCJ5jihIqQlHZYA:9 a=QEXdDO2ut3YA:10 a=IoWCM6iH3mJn3m4BftBB:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTAxMDA4NyBTYWx0ZWRfX6zPNUUwpaJXC
- zu8ZRwNSa6dXkec7NFqG5P46W1lrkwSH/vRVzRu44x+YKXU2V//9IipOUs5tdXYfdmmWT68nR5P
- tJnPWMXNO2wh0L+11ftpWzpP2alyn6M=
-X-Proofpoint-ORIG-GUID: KeLgJOez_xqJ_bWESQztIy0ybLWZXVxC
-X-Proofpoint-GUID: KeLgJOez_xqJ_bWESQztIy0ybLWZXVxC
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
+ a=EUspDBNiAAAA:8 a=5Qeq7Wt-fVvOjBGoxIkA:9 a=QEXdDO2ut3YA:10
+ a=bTQJ7kPSJx9SKPbeHEYW:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTAxMDA4NyBTYWx0ZWRfX/Ya0BeqjsOLB
+ wxa3ughmEJ8fEKR56QO6A5iGnb5oPRwvkTL3GEAyrv8akB3jJ8wOc+KUjR0KnJhmqfxVQ7W8rjy
+ kbF6fL8SOttPPLxahK2+iqeI9qnSDFRCvSnfxuvvPNxy3zUYcuxOWym5C9qf/+guwY0RTJRnHyw
+ FBdyC6ftBoorr9FfWif/o0XiUtrX+QwsfGTGFkrS0G5WcGC1bBNoh3Xh7skuVHeEoVyuO+5y368
+ c94nEtsQIp8yKfTfgipPp4Gb7zdw04hVkDCuXwkOABOlU2a55veR5XuWVzCP+d9RekA9aAwa6kW
+ TxYasdeCT/YyRuQUQ+SrZkz1FOLkW/kJl8HXUj7B35kwzytEfiwEEQNdEcghVgKt4n++f34E94M
+ X60g7bgX9sYZkCC4pnk8xg8iqnWqp0pQzxr7sO4dhMeDeEyVJxma72Q8mHJoHzQDGHtmsDvEPdA
+ n/AnMyL9dTK8ZCRFixA==
+X-Proofpoint-GUID: 2yqnz3Z5JCzp7fiSpEuiSkyuwe0F9UhY
+X-Proofpoint-ORIG-GUID: 2yqnz3Z5JCzp7fiSpEuiSkyuwe0F9UhY
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTAxMDA4NyBTYWx0ZWRfX6khA2M+f//FZ
+ w8h8KYlzzQqmaEGiSmaO6FDB8FDpWG3pprgDDlvFpVK8XxjqatKSrMyq74WXXjiVlMzksAryj3k
+ HxCapY8kY5Rqnj7Hw3tz+gGV3B4b96s=
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-09-01_02,2026-08-31_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 spamscore=0 phishscore=0 suspectscore=0 priorityscore=1501
- lowpriorityscore=0 impostorscore=0 malwarescore=0 bulkscore=0 adultscore=0
+ suspectscore=0 lowpriorityscore=0 bulkscore=0 clxscore=1015 impostorscore=0
+ priorityscore=1501 malwarescore=0 spamscore=0 adultscore=0 phishscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2609010087
 
-On 8/28/26 11:18 AM, Pengpeng Hou wrote:
-> The IPQ4019 USB PHY power operations ignore reset assertion and
-> deassertion failures.  Their callers can therefore publish a PHY power
-> transition after the reset controller rejected part of it.
+On 9/1/26 11:50 AM, Aniket Randive wrote:
+> The SA8255P UART variants attach PM domains through
+> devm_pm_domain_attach_list(), which registers a devres cleanup action
+> to detach and free the PM domain list automatically on probe failure
+> or device removal.
 > 
-> Propagate each reset error and restore the reset that was changed
-> earlier in the same HS transition where possible.  This is an RFC
-> because a failed reset operation can leave hardware state uncertain;
-> feedback is requested on whether the proposed best-effort rollback
-> matches these PHYs.
-
-[...]
-
+> Remove the manual dev_pm_domain_detach_list() calls from the probe
+> error path and remove callback. These calls can operate on memory
+> that has already been freed by the devres-managed cleanup, resulting
+> in a potential double-free. Also remove the unused pm_domain.h header.
 > 
-> The issue was identified via static analysis and manually reviewed.
-> 
-> Assisted-by: LLM
-> Signed-off-by: Pengpeng Hou <pengpeng@iscas.ac.cn>
+> Suggested-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+> Signed-off-by: Aniket Randive <aniket.randive@oss.qualcomm.com>
 > ---
->  drivers/phy/qualcomm/phy-qcom-ipq4019-usb.c | 46 ++++++++++++++++-----
->  1 file changed, 36 insertions(+), 10 deletions(-)
-> 
-> diff --git a/drivers/phy/qualcomm/phy-qcom-ipq4019-usb.c b/drivers/phy/qualcomm/phy-qcom-ipq4019-usb.c
-> index da6f290af722..8c1834cd6a8e 100644
-> --- a/drivers/phy/qualcomm/phy-qcom-ipq4019-usb.c
-> +++ b/drivers/phy/qualcomm/phy-qcom-ipq4019-usb.c
-> @@ -30,7 +30,12 @@ static int ipq4019_ss_phy_power_off(struct phy *_phy)
->  {
->  	struct ipq4019_usb_phy *phy = phy_get_drvdata(_phy);
->  
-> -	reset_control_assert(phy->por_rst);
-> +	int ret;
 
-Please don't leave the blank lines above 'int ret'
-
-[...]
-
-> @@ -69,14 +86,23 @@ static int ipq4019_hs_phy_power_on(struct phy *_phy)
->  {
->  	struct ipq4019_usb_phy *phy = phy_get_drvdata(_phy);
->  
-> -	ipq4019_hs_phy_power_off(_phy);
-> +	int ret;
-> +
-> +	ret = ipq4019_hs_phy_power_off(_phy);
-> +	if (ret)
-> +		return ret;
-> +
-> +	ret = reset_control_deassert(phy->srif_rst);
-> +	if (ret)
-> +		return ret;
->  
-> -	reset_control_deassert(phy->srif_rst);
->  	msleep(10);
->  
-> -	reset_control_deassert(phy->por_rst);
-> +	ret = reset_control_deassert(phy->por_rst);
-> +	if (ret)
-> +		reset_control_assert(phy->srif_rst);
-
-This return value is silently ignored
+Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
 
 Konrad
