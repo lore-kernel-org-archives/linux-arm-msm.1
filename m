@@ -1,405 +1,267 @@
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A92962F7F0F
-	for <linux-arm-msm@vger.kernel.org>; Tue,  1 Sep 2026 16:45:52 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B8479483803
+	for <linux-arm-msm@vger.kernel.org>; Tue,  1 Sep 2026 16:48:55 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788281154; cv=none; b=aWaBcvCQRugNl5G+hNbX5gu6SkhYS8liunFITExz1EUtStnlE8YZDz5TD7K8vL2Juept0+m0SrA1YIeyLiPt/nHwOAX+go+hbaCG4o0KLCUCKOig2HXgqvg73HPlW6Cxz2hKKrKSFSBWptwK38vQA9f7SGO15DofrStWcPXDU9o=
+	t=1788281338; cv=none; b=LC3Lfl+oruBiyLTh8UU32ds2xqq4TYl7O3GAaZsj1HYH9QpOFP3uWTNwV9hoHlAfhFzsPJqCNxJfueuwhD+aTtK2X/QZVuPpHNvKEVPpEmyv/R2BKp+dgCNxyrrxAMrPZZ+01ZHZCevAkHuf0NXK+ZwjR7Di7+q8fYQBAuGAPNs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788281154; c=relaxed/simple;
-	bh=cOS1bEd1M/SiPxsgNFvMEOu3M8RVaNUUy5WbSBaacdg=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=CZHA4nBLupaTtWD2HSkoyr8hd2Ma+VoD/ZyEnBRYu+MexTqWrJdJIfzms0hzM6A7NSUr2d+XhwMPohfRKZqNZGJPIp6VirC6FurAulCncdNGEt48qV/tXYQkwmrQYuQPelx4TnowjAch/YRKP5dLb27g1UKkppgG+ZI+ywujrn8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=BYbptYnR; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=MJ5clZXh; arc=none smtp.client-ip=205.220.168.131
+	s=arc-20240116; t=1788281338; c=relaxed/simple;
+	bh=CfzWqf5o+3N92HLjtir92933+kWR07XnaDw5BK9jsWQ=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=PaCel6rk4IzA6e6tzbifqIgYMBIZoDfIvk7NWXw2EgOtlwzr0nMCyr/+LfROjdBon6izx42kZymbpePOgNmScplik6mHshD/EJjv8PFyRXE7UGmzGUFubv8j4Px54+pnjY8V68Hz43UWInH/3M7reWMmI+omnwJxi0pdMvyK1YE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=gLNqsggg; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=hI+IV1JF; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="BYbptYnR";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="MJ5clZXh"
-Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 681G4qS52531631
-	for <linux-arm-msm@vger.kernel.org>; Tue, 1 Sep 2026 16:45:52 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="gLNqsggg";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="hI+IV1JF"
+Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 681E8jbC2825155
+	for <linux-arm-msm@vger.kernel.org>; Tue, 1 Sep 2026 16:48:54 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:date:from:message-id:mime-version
-	:subject:to; s=qcppdkim1; bh=F4+C391BtjP1q9S4/6jLnVVE0nXicN8iK+S
-	OD5Ru2jI=; b=BYbptYnRlz12I23yNM1lPLO6n9SI4boNZcLnsP4JGRFxjZw3OFP
-	IHkHaG3RdS1Jkfd9xxDUVULG9ISl+B0T7oQ6mM6/FKXRDWSdzLTykYjlCSEYmv5h
-	zpt1jjZb9776JZIADbsYSsJeBUeUtw64GogK2anQ6gTU+xc8tCNVP+AyEHWHSKrN
-	8J+ERZSsHfV1zYZW0FtbxU/LHSAavrdPMtPlMrp1GZAD1mnKKxKUKTo1ve/9/Qnq
-	DnqKU5PtgSW42gETvRGKuPpO2v01bl05Gyw7OesoGkP6EPk1vDrcFsZBYfde2wHn
-	ylS2ujcj4AVXMIMTqZYCnYGc/+pZo4HuvPg==
-Received: from mail-pf1-f199.google.com (mail-pf1-f199.google.com [209.85.210.199])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ge1wp89pm-1
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	b62TM3b+R7LBBBMdiFoxJotUo5iPVNG6UJ+rLi3xZbw=; b=gLNqsgggpn1u3v7B
+	ihUObr1bhMSg+9eNo6gGT6JwdQ7VCl51Iw1tDlfT4vRHHDM0zHCPu7D0NAMXY0zW
+	AAwHroDHKm4owfTqo/eS9u+jDHHeLbm3JKcUK52z+XGnbU9RvFqJ+1KwRR2L6qJk
+	JVLFPl1EYWSvB0Ua4ajiC5qSdyS0Qg1A3IHBC2SWo8BSj87hAUb7ZPFrDWH/qiP3
+	OCjG5jrZyzgig4exr5ZLAcflW30O/0utbZfTJY3ql5AOlbKCGyvJQ+X+aeyedqW2
+	IulmWho7SXtAee0CvZgQClTNGFS6P8W7Q6rG9pVLPhmpYQp1fQj5rLHqH7AmI4kd
+	rX2J3Q==
+Received: from mail-pj1-f69.google.com (mail-pj1-f69.google.com [209.85.216.69])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gdp7cbtx2-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 01 Sep 2026 16:45:51 +0000 (GMT)
-Received: by mail-pf1-f199.google.com with SMTP id d2e1a72fcca58-8553305b7c7so25823b3a.3
-        for <linux-arm-msm@vger.kernel.org>; Tue, 01 Sep 2026 09:45:51 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Tue, 01 Sep 2026 16:48:53 +0000 (GMT)
+Received: by mail-pj1-f69.google.com with SMTP id 98e67ed59e1d1-398dc3d8f0fso1431295a91.0
+        for <linux-arm-msm@vger.kernel.org>; Tue, 01 Sep 2026 09:48:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1788281151; x=1788885951; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=F4+C391BtjP1q9S4/6jLnVVE0nXicN8iK+SOD5Ru2jI=;
-        b=MJ5clZXhU62COrXRMcTw25kQwAAXNQFn38eiKafZUxDnjuHrwMOo30CcfSjaDJLwVq
-         wVJhu8O2r0Q/FWgnFFF4WRL2BB17edB4Ues+qbt1+C5G9CZcojQ2alOTJMuvymuTfqdp
-         KAjdBt/Gghztu1jPrhEQcwres8i+FhFXsqTXoVdnZIz3s8Bl3XzkYZTmx/0E5leC4653
-         3XQebgublVJcaweQxVEYekesF5BBLEIoByZmw4zoY1/MEJyq6LPrLhonOXM6jeKbVqKD
-         5CRPJA9UgJDJpKbBA2lV99HH8QVBHAIJ1mv25wq0KyAIt//+240pPFXQzhI+5nrylxkm
-         481w==
+        d=oss.qualcomm.com; s=google; t=1788281333; x=1788886133; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=b62TM3b+R7LBBBMdiFoxJotUo5iPVNG6UJ+rLi3xZbw=;
+        b=hI+IV1JFvx2lYKZoDbus3DhNXE0sLMcx/UCUUFDRUWewDOIWaXI7vsMNt2CvH5OyQG
+         dBOLa7aNImfryyC6I/Y2Acy/HZzMBKx+x633xuo+ZTdPTnjexp4i1c/N0w9krP5x65+I
+         YJH5M0R//cQkfQHy9GH+uuwwdIi0D98FD8/FVIqdW3lFnlm9274YYBojKXRQCdkBQ2cj
+         EMXUAkFfW5DFcEcA872tGJYEH5ldLwFfgo9O8bJe6U4rIcBlVIxtJwtoObft0oK6IYYi
+         KwxgdcIo/FS1CInRv9J5RbeZYbKyWo0kl9vwoLqhNsqwczjebAiUK6DsvOeno/pKs65N
+         BBXg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788281151; x=1788885951;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=1e100.net; s=20251104; t=1788281333; x=1788886133;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=F4+C391BtjP1q9S4/6jLnVVE0nXicN8iK+SOD5Ru2jI=;
-        b=TkufNonsB08eXdKt8ml4triqrsFJPpRh3dHHm/GtD38A9kv8IWviYT8IvWp/7sQ66Z
-         08aJmPOvboqFiBDsGNH/CDsFRCwbF3A9t1BwIfCPuBa4ur+e+5ejhE/TuiAacLrlJXkK
-         OdiekMXxgTEu2Edn0mHhs7JrVGNe75tkvfXptAlGIRcozUQfe/A0Mz3RGPPipX2Oz0aP
-         +57Rx7E0d4cesHFO0NRPMQUwJeFA8N2ZNg2v6qDPoRTUk50gzvcUeUCUsCmYjJqQbCeb
-         wvyldb1ZXIrmKEqeJdN38t5oo5jeY3CgWiyfLnslvGaL74YTBZgv2hOi0aXvwo2Cdb37
-         LTCg==
-X-Forwarded-Encrypted: i=1; AHgh+RrWsm6c3sKNrJrF/B7/E4iAz2I/wHDeNZxcxhItNBizY5lEjwMRt25kGVV4wp5IjSW1oDGqmdwjuWorsCWE@vger.kernel.org
-X-Gm-Message-State: AFuF++kQiR+4Nou7iO5cpKPbyicTeZ/0dXWCLWxuQrCGnxKGtOa2szdo
-	iqXoLyWUAoIvWASd0dhgWeaSRq2sSzFFq8a9jhSfb3PJHxO0Zfp48fgmFr4NCJf7eA/861KanIi
-	k+ALhXsqVKPJPd/oJcqmH9KX/R9/sFwYCv7Xv1elEYzXfhzLu8XPiMWLJ16jvZu1RPvHl
-X-Gm-Gg: AR+sD10uURHDEcSMbffr5sunaFNnl1W22e9DDXFnhVR3eD0DdD+NHsPmGYW6sR3CyOS
-	Ro++SDRAZ+JuW0gCMVvm5hAF+uCaul1SjQVljac7UoxZ4zjtDalxKI1Rnr671g47U1NajwGy6Ng
-	q6n+vuY0JpNSigSKmtt3mZTBr+pZfaW/w5EhTHhklUNjwWCFUpgyA4oho5i2XWcOxLan/RIgZwb
-	H7s9aqy3+YtEG7/lmfVb5QRQJ+wtXE5k1teYL/Ad9whKRPL2S1AiaMimDJEd9nCDVsx5i2zb4j3
-	O3KrVfJwOGOL/wALzIbailIkGYOjo+3KLGtU1FY1/4F0dyFDJg4zRf9QiIGRPIkKSHhffsmgPD/
-	XKhzI7/do8ZPxspiWdFKX+LvbXGfSlPs8RJ2QBOQNk3QoHRk=
-X-Received: by 2002:a05:6a00:4649:b0:84e:f90e:492f with SMTP id d2e1a72fcca58-8562a1f6c2cmr52567325b3a.7.1788281150940;
-        Tue, 01 Sep 2026 09:45:50 -0700 (PDT)
-X-Received: by 2002:a05:6a00:4649:b0:84e:f90e:492f with SMTP id d2e1a72fcca58-8562a1f6c2cmr52567209b3a.7.1788281150271;
-        Tue, 01 Sep 2026 09:45:50 -0700 (PDT)
-Received: from localhost (c-73-37-105-206.hsd1.or.comcast.net. [73.37.105.206])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-85dc11fbc41sm163898b3a.60.2026.09.01.09.45.49
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 01 Sep 2026 09:45:49 -0700 (PDT)
-From: Rob Clark <robin.clark@oss.qualcomm.com>
-To: dri-devel@lists.freedesktop.org
-Cc: Rob Clark <robin.clark@oss.qualcomm.com>,
-        Boris Brezillon <boris.brezillon@collabora.com>,
-        Liviu Dudau <liviu.dudau@arm.com>,
-        Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
-        Maxime Ripard <mripard@kernel.org>,
-        Thomas Zimmermann <tzimmermann@suse.de>,
-        David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
-        Dmitry Baryshkov <lumag@kernel.org>,
-        Abhinav Kumar <abhinav.kumar@linux.dev>,
-        Jessica Zhang <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>,
-        Marijn Suijten <marijn.suijten@somainline.org>,
-        Steven Price <steven.price@arm.com>,
-        linux-kernel@vger.kernel.org (open list),
-        linux-arm-msm@vger.kernel.org (open list:DRM DRIVER for Qualcomm display hardware),
-        freedreno@lists.freedesktop.org (open list:DRM DRIVER for Qualcomm display hardware)
-Subject: [PATCH v2] drm/gem: Drop ticket arg to lru_scan()
-Date: Tue,  1 Sep 2026 09:45:43 -0700
-Message-ID: <20260901164544.642985-1-robin.clark@oss.qualcomm.com>
-X-Mailer: git-send-email 2.55.0
+        bh=b62TM3b+R7LBBBMdiFoxJotUo5iPVNG6UJ+rLi3xZbw=;
+        b=Zt0cuxFneFfqb03V/DiS0XOTcaxT7bdXhlKqAwR6Jhp24RPmKXsAQZi7Xrl1oHnCOX
+         +kgCxM38qCdnk2m0lfEeSmcIbwP46riX2UGjd49U0IsxVgNJXWxghIrpwVyd7n4lJ8Ae
+         dHoBJ3L1/d0xcNx8k7qSMeibM7xURkhY4JLLrsk6P2UIzdNeNfusKHsm8ex5WWsehC9M
+         sSn6YvHDDXI4Wg37MSpJII1rU8bDH4eAOe+n8VXTFWtcZBJrv2TGr0dq0LIQ2JCGauzA
+         gSYEJctY5wLYv0qYa4MBwIUfhRpUi7jQHdDvdlJus5Ze+lyjORrclwisF0h3RuPl9u7H
+         6QDQ==
+X-Forwarded-Encrypted: i=1; AKwUvByPGPdL5rzD8ivnwQLzVNe+nvpa8d+KfpWmjAyI2M4Qw5WD8ADH1PK8M5oO3V0rNbOe1QcqgWucC4OQP2Le@vger.kernel.org
+X-Gm-Message-State: AFuF++lpClHo3oSqENVg+RYm60fgAKYRr+XXqNy8BSRUMZzlEbI3VMhN
+	Qh9f8Td6BOH/NPZb6zB2lXDs8QS2Jj5j9zMTGwF2DbHoIeEqJp3+3XxwXzBe3V8RCGbz8ufIWdi
+	JsX9+VDitYj87VqWJoPZSpRpLfvDmoKbuhrYTagQuFZW0WpkpS4+tfKTB3aLjGkzhcGkT
+X-Gm-Gg: AYBFou0pZFfig9womG+ndNtXvKQCK21XLWvkhfimQsW/jL+VoaEyAakeS0ct3ndsut3
+	Yx54gCjjeC9dthzFoB/qlbJvCNolvHHSHKKA+8B7plhIZrbOFjiaXjvum8Lx+vUA61+qDtbOcnl
+	6vr01/8XpCP5LKLiLzVGD/4e9asmLRsO1A07xo0qOmSj/mj+laXVIvFdHd5KLaSYjUUA6PpJ8io
+	FCgVfzUQol61R0bEFUlwUb3rrNkCU6ROvc1F3etwHyI7dnEaeALKJYxhW/jZBU7HynwFNg+XTK3
+	h96ze7he95A4JkIPHd6OHIaqzMpszn8gnSMiREaYDviXtltRn0AJlUiqYzwXAaj69XLu/mtD0xO
+	FTZ+y6bYPfAzsjFnrQP70mMubduLirJW+
+X-Received: by 2002:a17:90b:2247:b0:37f:a913:1554 with SMTP id 98e67ed59e1d1-3990f890861mr6902054a91.16.1788281333021;
+        Tue, 01 Sep 2026 09:48:53 -0700 (PDT)
+X-Received: by 2002:a17:90b:2247:b0:37f:a913:1554 with SMTP id 98e67ed59e1d1-3990f890861mr6901973a91.16.1788281332349;
+        Tue, 01 Sep 2026 09:48:52 -0700 (PDT)
+Received: from [192.168.0.5] ([49.204.111.114])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-328713b944bsm41662284eec.27.2026.09.01.09.48.46
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 01 Sep 2026 09:48:51 -0700 (PDT)
+Message-ID: <177884a8-902f-49be-8fcb-b2bec3ec7d6c@oss.qualcomm.com>
+Date: Tue, 1 Sep 2026 22:18:44 +0530
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 0/9] soc: qcom: geni: Derive SE clock configuration
+ from OPP table on SA8255P
+To: Ulf Hansson <ulf.hansson@oss.qualcomm.com>
+Cc: konrad.dybcio@oss.qualcomm.com, Sudeep Holla <sudeep.holla@kernel.org>,
+        Cristian Marussi <cristian.marussi@arm.com>,
+        Ulf Hansson <ulfh@kernel.org>, Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        Jiri Slaby <jirislaby@kernel.org>, Mark Brown <broonie@kernel.org>,
+        Viken Dadhaniya <viken.dadhaniya@oss.qualcomm.com>,
+        Andi Shyti <andi.shyti@kernel.org>, mukesh.savaliya@oss.qualcomm.com,
+        chandana.chiluveru@oss.qualcomm.com, arm-scmi@vger.kernel.org,
+        linux-arm-kernel@lists.infradead.org, linux-pm@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+        linux-serial@vger.kernel.org, linux-spi@vger.kernel.org,
+        linux-i2c@vger.kernel.org, Abel Vesa <abel.vesa@oss.qualcomm.com>
+References: <20260827-derive_clk_perf_tbl_from_perf_domain_opp_table-v2-0-091697dbeb02@oss.qualcomm.com>
+ <CAPx+jO9fcvBsxe9yx9oK=0EXmpNwub5ba0a-TGk1WRFaRGsqpA@mail.gmail.com>
+Content-Language: en-US
+From: Praveen Talari <praveen.talari@oss.qualcomm.com>
+In-Reply-To: <CAPx+jO9fcvBsxe9yx9oK=0EXmpNwub5ba0a-TGk1WRFaRGsqpA@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Authority-Analysis: v=2.4 cv=F8JnsKhN c=1 sm=1 tr=0 ts=6a97013f cx=c_pps
- a=WW5sKcV1LcKqjgzy2JUPuA==:117 a=19Wyn7e3V/0aNffMjNCMQw==:17
- a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22 a=EUspDBNiAAAA:8
- a=QX4gbG5DAAAA:8 a=7CQSdrXTAAAA:8 a=CpjeYB2KrTrYpFnhXQ0A:9
- a=OpyuDcXvxspvyRM73sMx:22 a=AbAUZ8qAyYyZVLSsDulk:22 a=a-qgeE7W1pNrGK8U0ZQC:22
-X-Proofpoint-GUID: C7EPd7M6drWHrYAV-pXw5rmx8yLngt30
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTAxMDE0NyBTYWx0ZWRfX6LUlqmDAj3Rs
- u0H6BHeml7Z83Morn5ln1nMCj3JjFZVqviJvPHrryxgBdB/kXC4m2/evAE7RoftPabQw1phBEeP
- ea11YrDJeh70Fyf49blXjduIp9PsvwU=
-X-Proofpoint-ORIG-GUID: C7EPd7M6drWHrYAV-pXw5rmx8yLngt30
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTAxMDE0NyBTYWx0ZWRfX65rf+oKYkbrm
- ny4CqMqjzNXE0hFmqwWRnZTpLKf034S6Tgttbo/4v+ugk2R6OPcl7xEE1Vrjo8eMNo+TXpV+Lnv
- MxuiBsRqemkzE6mZ9aHIdH+7dZ1oFUAsRC1W4/Bvmn1HZuZHgtkWlCbvBbgdhcTppqGgajaikTw
- RrL4DUvl4F7lDKemulhw7Ui1pekgHoIPrk5YtXsnpWxa+H7YxrtcYCiAD9tNhRi0sWLvK8x/w8D
- pEMxg/fvlXsL9Q18f02HRPP6o1BKpWVUx27+9lylEjRlgHD6hJisf7YD8tJjomZefq8BRAGGl0I
- r/dKa74RMUdqGn6lRLxnmFkYp/WgkKc4X7Obdys36si/SUqOth4Ucb8Te5nb78fbG5eNB/FD9Bq
- zEOU82FwVIejf8XbRdyNUQXgCT7SIoZNfIaw3TyjiayKQIittTVvfQ0Mehy+p9mJ7zBfCibCLaQ
- HQtNXCQ9x1sZwTVPYsA==
+X-Authority-Analysis: v=2.4 cv=OcyoyBTY c=1 sm=1 tr=0 ts=6a9701f5 cx=c_pps
+ a=vVfyC5vLCtgYJKYeQD43oA==:117 a=Z/g59IqO3Gki/5UUpFMnLg==:17
+ a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22
+ a=bC-a23v3AAAA:8 a=EUspDBNiAAAA:8 a=1OWG-U-0pMjJ1F8qq_YA:9 a=3ZKOabzyN94A:10
+ a=QEXdDO2ut3YA:10 a=rl5im9kqc5Lf4LNbBjHf:22 a=FO4_E8m0qiDe52t0p3_H:22
+X-Proofpoint-ORIG-GUID: 3J1fKjdntFLaoIC-UH4f_taNBtfpz260
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTAxMDE0OCBTYWx0ZWRfX8LEdXD7IyF/9
+ POKN0+cWHTuzup3+bcDFIqZyCD03wv1L0NoBvoJ02hFm6KUpui47lg4t2izx9uSagCscfjEJOnz
+ DNg/Kvyza4fIrOa5ICKQ4NRNGmVCiJs=
+X-Proofpoint-GUID: 3J1fKjdntFLaoIC-UH4f_taNBtfpz260
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTAxMDE0OCBTYWx0ZWRfX67tkoZVRImdV
+ rL8sE88NLIoA0wDGQ+7bzGhmOr+gN00f5BsP0HagkICg+EcH6LfpLHl3A6aPXnKXT+VZF3rbQ0m
+ rJo6mrRiMlkkFL0pQXfYf6bOxQMM6aFcDAZpfNNaXjf0LHcoWKXjOPk+SNHqtXKEHGs8jT8X2UP
+ GmU8bUO0YN+HpIZNtyEWSmv+TVkptkytBDs+Q23IgtMPrwXLjbQJI1g5i4EnjFPg0JH4JNcQl1R
+ RAjynHROagR2ZWqW29psxnPS5CCOuHAnmmOSNwCToNZzJPH3mOvqocy8yqhZuAQK6PtQ3RMpCP6
+ ZfQLZREqZDshjCat/S0Lo/VHb5yeAVrZ4q0dLpzdv4mmfeWVM7kRFFRHiO5vrXmZSXLZtBs5yDn
+ FW8N7CmkSp/moO3OUabrEr4DR/4/GKlFdTg3GKNmTYgGQH/zPWY641eJjK1wxQDN6y+CkbCB37w
+ 7/KI4Ln+KjYjCnZaL5w==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-09-01_04,2026-09-01_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- bulkscore=0 priorityscore=1501 spamscore=0 lowpriorityscore=0 impostorscore=0
- adultscore=0 malwarescore=0 suspectscore=0 clxscore=1015 phishscore=0
+ clxscore=1015 adultscore=0 malwarescore=0 spamscore=0 priorityscore=1501
+ impostorscore=0 bulkscore=0 phishscore=0 lowpriorityscore=0 suspectscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2609010147
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2609010148
 
-Commit 3392291fc509 ("drm/msm: Fix shrinker deadlock") dropped the only
-use of the ticket arg, but at the time left drm_gem_lru_scan() unchanged
-to avoid conflicts with in-flight panthor shrinker support.  This commit
-is the followup to remove the unused arg.
+Hi Ulf,
 
-Signed-off-by: Rob Clark <robin.clark@oss.qualcomm.com>
-Reviewed-by: Boris Brezillon <boris.brezillon@collabora.com>
-Reviewed-by: Liviu Dudau <liviu.dudau@arm.com>
----
+On 01-09-2026 20:22, Ulf Hansson wrote:
+> On Thu, Aug 27, 2026 at 7:59 PM Praveen Talari
+> <praveen.talari@oss.qualcomm.com> wrote:
+>> On firmware-managed platforms such as SA8255P, there is no Linux clock
+>> handler available to determine the appropriate SE source clock, source
+>> clock index, and divider values for a requested protocol frequency.
+>> However, these parameters are required when programming GSI TREs, where
+>> the hardware expects an explicit clock source selection and divider
+>> configuration for the serial engine.
+>>
+>> In contrast, platforms using Linux-managed clocks derive these
+>> parameters through geni_se_clk_freq_match() using the source clock
+>> information stored in clk_perf_tbl. Since the firmware-managed path
+>> lacks equivalent clock information, protocol drivers cannot reuse the
+>> existing frequency matching logic and instead rely on a direct mapping
+>> between protocol-requested frequencies and performance levels. This
+>> creates a separate clock configuration flow and prevents
+>> firmware-managed platforms from deriving the actual SE clock parameters
+>> required for GSI TRE programming.
+> Hmm, this sounds like moving backwards when it comes to keeping
+> drivers as portable as possible.
+>
+> I understand geni_se_clk_freq_match() has been around for a while, but
+> fortunately its use seems limited to only a few qcom specific drivers.
+>
+> Rather than continue down this path, would it not be possible to find
+> a more generic solution for "geni_se_clk_freq_match()"? Can we replace
+> it with a common clock/OPP API? In this way, we would not need to
+> sprinkle drivers with calls to platform specific  code.
+I agree that protocol drivers should not need to know whether GENI resources
+are managed through the clock framework or a firmware-provided 
+performance domain.
 
-v2: Drop left over kerneldoc param description, fix panthor spelling
+The intent of this series is actually to move in that direction rather than
+introduce a separate flow. Today firmware-managed platforms cannot use
+geni_se_clk_freq_match() because clk_perf_tbl is only populated when a 
+Linux clock
+is present. This series derives the same clock-performance 
+information(clk_perf_tbl) from the OPP
+table and populates clk_perf_tbl during geni_se_domain_attach(), 
+allowing both
+resource-management models to reuse the existing 
+geni_se_clk_freq_match() infrastructure.
 
- drivers/gpu/drm/drm_gem.c              | 14 +++-----------
- drivers/gpu/drm/msm/msm_gem_shrinker.c | 22 ++++++++++------------
- drivers/gpu/drm/panthor/panthor_gem.c  | 14 ++++++--------
- drivers/gpu/drm/panthor/panthor_mmu.c  |  5 ++---
- drivers/gpu/drm/panthor/panthor_mmu.h  |  3 +--
- include/drm/drm_gem.h                  |  3 +--
- 6 files changed, 23 insertions(+), 38 deletions(-)
+Likewise, geni_se_set_rate() hides whether the underlying implementation 
+uses
+dev_pm_opp_set_rate() on a perf-domain device or a regular clock-backed 
+device,
+so protocol drivers no longer need platform-specific callbacks. The goal 
+is to
+converge both paths behind common GENI helpers rather than maintain separate
+clock-selection mechanisms.
+>
+>> To address this limitation, the performance-domain OPP table is treated
+>> as the representation of SE-supported source clock frequencies. During
+>> geni_se_domain_attach(), the OPP entries are used to populate
+>> clk_perf_tbl and related clock performance data, allowing
+>> firmware-managed platforms to leverage the same clock frequency matching
+>> infrastructure used by Linux-managed platforms.
+>>
+>> With this change, protocol drivers can use geni_se_clk_freq_match() to
+>> select the closest supported source clock frequency for a requested
+>> protocol rate, derive the corresponding source clock index and divider
+>> values required for GSI TRE programming, and apply the matched clock
+>> through the OPP framework. This removes the dependency on direct
+>> protocol-frequency-to-performance-level mappings and provides a common
+>> clock selection and configuration mechanism across both firmware-managed
+>> and Linux-managed GENI deployments.
+> Rather than adding yet another platform specific method, would it be
+> possible to extend the generic OPP library with the pieces that are
+> missing to make this work in a generic way?
+I agree with the goal of using generic infrastructure. However, 
+geni_se_clk_freq_match()
+derives GENI-specific parameters such as the source clock, clock index, 
+and divider values
+required for GSI TRE programming, which are not represented by the 
+generic OPP interface today.
 
-diff --git a/drivers/gpu/drm/drm_gem.c b/drivers/gpu/drm/drm_gem.c
-index e3ed684ddcf2..3113b4a53b99 100644
---- a/drivers/gpu/drm/drm_gem.c
-+++ b/drivers/gpu/drm/drm_gem.c
-@@ -1649,15 +1649,13 @@ EXPORT_SYMBOL(drm_gem_lru_move_tail);
-  * @nr_to_scan: The number of pages to try to reclaim
-  * @remaining: The number of pages left to reclaim, should be initialized by caller
-  * @shrink: Callback to try to shrink/reclaim the object.
-- * @ticket: Optional ww_acquire_ctx context to use for locking
-  */
- unsigned long
- drm_gem_lru_scan(struct drm_device *dev,
- 		 struct drm_gem_lru *lru,
- 		 unsigned int nr_to_scan,
- 		 unsigned long *remaining,
--		 bool (*shrink)(struct drm_gem_object *obj, struct ww_acquire_ctx *ticket),
--		 struct ww_acquire_ctx *ticket)
-+		 bool (*shrink)(struct drm_gem_object *obj))
- {
- 	struct drm_gem_lru still_in_lru;
- 	struct drm_gem_object *obj;
-@@ -1690,20 +1688,17 @@ drm_gem_lru_scan(struct drm_device *dev,
- 		 */
- 		mutex_unlock(&dev->gem_lru_mutex);
- 
--		if (ticket)
--			ww_acquire_init(ticket, &reservation_ww_class);
--
- 		/*
- 		 * Note that this still needs to be trylock, since we can
- 		 * hit shrinker in response to trying to get backing pages
- 		 * for this obj (ie. while it's lock is already held)
- 		 */
--		if (!ww_mutex_trylock(&obj->resv->lock, ticket)) {
-+		if (!ww_mutex_trylock(&obj->resv->lock, NULL)) {
- 			*remaining += obj->size >> PAGE_SHIFT;
- 			goto tail;
- 		}
- 
--		if (shrink(obj, ticket)) {
-+		if (shrink(obj)) {
- 			freed += obj->size >> PAGE_SHIFT;
- 
- 			/*
-@@ -1727,9 +1722,6 @@ drm_gem_lru_scan(struct drm_device *dev,
- 
- 		dma_resv_unlock(obj->resv);
- 
--		if (ticket)
--			ww_acquire_fini(ticket);
--
- tail:
- 		drm_gem_object_put(obj);
- 		mutex_lock(&dev->gem_lru_mutex);
-diff --git a/drivers/gpu/drm/msm/msm_gem_shrinker.c b/drivers/gpu/drm/msm/msm_gem_shrinker.c
-index 9d2788f79ace..3514d5c84989 100644
---- a/drivers/gpu/drm/msm/msm_gem_shrinker.c
-+++ b/drivers/gpu/drm/msm/msm_gem_shrinker.c
-@@ -102,7 +102,7 @@ with_vm_locks(void (*fn)(struct drm_gem_object *obj),
- }
- 
- static bool
--purge(struct drm_gem_object *obj, struct ww_acquire_ctx *unused)
-+purge(struct drm_gem_object *obj)
- {
- 	if (!is_purgeable(to_msm_bo(obj)))
- 		return false;
-@@ -114,7 +114,7 @@ purge(struct drm_gem_object *obj, struct ww_acquire_ctx *unused)
- }
- 
- static bool
--evict(struct drm_gem_object *obj, struct ww_acquire_ctx *unused)
-+evict(struct drm_gem_object *obj)
- {
- 	if (is_unevictable(to_msm_bo(obj)))
- 		return false;
-@@ -133,21 +133,21 @@ wait_for_idle(struct drm_gem_object *obj)
- }
- 
- static bool
--active_purge(struct drm_gem_object *obj, struct ww_acquire_ctx *ticket)
-+active_purge(struct drm_gem_object *obj)
- {
- 	if (!wait_for_idle(obj))
- 		return false;
- 
--	return purge(obj, ticket);
-+	return purge(obj);
- }
- 
- static bool
--active_evict(struct drm_gem_object *obj, struct ww_acquire_ctx *ticket)
-+active_evict(struct drm_gem_object *obj)
- {
- 	if (!wait_for_idle(obj))
- 		return false;
- 
--	return evict(obj, ticket);
-+	return evict(obj);
- }
- 
- static unsigned long
-@@ -156,7 +156,7 @@ msm_gem_shrinker_scan(struct shrinker *shrinker, struct shrink_control *sc)
- 	struct msm_drm_private *priv = shrinker->private_data;
- 	struct {
- 		struct drm_gem_lru *lru;
--		bool (*shrink)(struct drm_gem_object *obj, struct ww_acquire_ctx *ticket);
-+		bool (*shrink)(struct drm_gem_object *obj);
- 		bool cond;
- 		unsigned long freed;
- 		unsigned long remaining;
-@@ -180,8 +180,7 @@ msm_gem_shrinker_scan(struct shrinker *shrinker, struct shrink_control *sc)
- 		stages[i].freed =
- 			drm_gem_lru_scan(priv->dev, stages[i].lru, nr,
- 					 &stages[i].remaining,
--					 stages[i].shrink,
--					 NULL);
-+					 stages[i].shrink);
- 		nr -= stages[i].freed;
- 		freed += stages[i].freed;
- 		remaining += stages[i].remaining;
-@@ -222,7 +221,7 @@ msm_gem_shrinker_shrink(struct drm_device *dev, unsigned long nr_to_scan)
- static const int vmap_shrink_limit = 15;
- 
- static bool
--vmap_shrink(struct drm_gem_object *obj, struct ww_acquire_ctx *ticket)
-+vmap_shrink(struct drm_gem_object *obj)
- {
- 	if (!is_vunmapable(to_msm_bo(obj)))
- 		return false;
-@@ -250,8 +249,7 @@ msm_gem_shrinker_vmap(struct notifier_block *nb, unsigned long event, void *ptr)
- 		unmapped += drm_gem_lru_scan(priv->dev, lrus[idx],
- 					     vmap_shrink_limit - unmapped,
- 					     &remaining,
--					     vmap_shrink,
--					     NULL);
-+					     vmap_shrink);
- 	}
- 
- 	*(unsigned long *)ptr += unmapped;
-diff --git a/drivers/gpu/drm/panthor/panthor_gem.c b/drivers/gpu/drm/panthor/panthor_gem.c
-index 54535bae2b0c..17408f832af3 100644
---- a/drivers/gpu/drm/panthor/panthor_gem.c
-+++ b/drivers/gpu/drm/panthor/panthor_gem.c
-@@ -1392,8 +1392,7 @@ panthor_gem_shrinker_count(struct shrinker *shrinker, struct shrink_control *sc)
- 	return count ? count : SHRINK_EMPTY;
- }
- 
--static bool panthor_gem_try_evict_no_resv_wait(struct drm_gem_object *obj,
--					       struct ww_acquire_ctx *ticket)
-+static bool panthor_gem_try_evict_no_resv_wait(struct drm_gem_object *obj)
- {
- 	/*
- 	 * Track last locked entry for unwinding locks in error and
-@@ -1479,8 +1478,7 @@ static bool panthor_gem_try_evict_no_resv_wait(struct drm_gem_object *obj,
- 	return ret == 0;
- }
- 
--static bool panthor_gem_try_evict(struct drm_gem_object *obj,
--				  struct ww_acquire_ctx *ticket)
-+static bool panthor_gem_try_evict(struct drm_gem_object *obj)
- {
- 	struct panthor_gem_object *bo = to_panthor_bo(obj);
- 
-@@ -1488,7 +1486,7 @@ static bool panthor_gem_try_evict(struct drm_gem_object *obj,
- 	if (dma_resv_wait_timeout(obj->resv, DMA_RESV_USAGE_BOOKKEEP, false, 10) <= 0)
- 		return false;
- 
--	return panthor_gem_try_evict_no_resv_wait(&bo->base, ticket);
-+	return panthor_gem_try_evict_no_resv_wait(&bo->base);
- }
- 
- static unsigned long
-@@ -1503,13 +1501,13 @@ panthor_gem_shrinker_scan(struct shrinker *shrinker, struct shrink_control *sc)
- 
- 	freed += drm_gem_lru_scan(&ptdev->base, &ptdev->reclaim.unused,
- 				  sc->nr_to_scan - freed, &remaining,
--				  panthor_gem_try_evict_no_resv_wait, NULL);
-+				  panthor_gem_try_evict_no_resv_wait);
- 	if (freed >= sc->nr_to_scan)
- 		goto out;
- 
- 	freed += drm_gem_lru_scan(&ptdev->base, &ptdev->reclaim.mmapped,
- 				  sc->nr_to_scan - freed, &remaining,
--				  panthor_gem_try_evict_no_resv_wait, NULL);
-+				  panthor_gem_try_evict_no_resv_wait);
- 	if (freed >= sc->nr_to_scan)
- 		goto out;
- 
-@@ -1523,7 +1521,7 @@ panthor_gem_shrinker_scan(struct shrinker *shrinker, struct shrink_control *sc)
- 
- 	freed += drm_gem_lru_scan(&ptdev->base, &ptdev->reclaim.gpu_mapped_shared,
- 				  sc->nr_to_scan - freed, &remaining,
--				  panthor_gem_try_evict, NULL);
-+				  panthor_gem_try_evict);
- 
- out:
- #ifdef CONFIG_DEBUG_FS
-diff --git a/drivers/gpu/drm/panthor/panthor_mmu.c b/drivers/gpu/drm/panthor/panthor_mmu.c
-index e10dbd18d8cf..ab070bc74857 100644
---- a/drivers/gpu/drm/panthor/panthor_mmu.c
-+++ b/drivers/gpu/drm/panthor/panthor_mmu.c
-@@ -3133,8 +3133,7 @@ int panthor_vm_prepare_mapped_bos_resvs(struct drm_exec *exec, struct panthor_vm
- unsigned long
- panthor_mmu_reclaim_priv_bos(struct panthor_device *ptdev,
- 			     unsigned int nr_to_scan, unsigned long *remaining,
--			     bool (*shrink)(struct drm_gem_object *,
--					    struct ww_acquire_ctx *))
-+			     bool (*shrink)(struct drm_gem_object *))
- {
- 	unsigned long freed = 0;
- 	LIST_HEAD(remaining_vms);
-@@ -3160,7 +3159,7 @@ panthor_mmu_reclaim_priv_bos(struct panthor_device *ptdev,
- 
- 		freed += drm_gem_lru_scan(&ptdev->base, &vm->reclaim.lru,
- 					  nr_to_scan - freed,
--					  remaining, shrink, NULL);
-+					  remaining, shrink);
- 
- 		mutex_lock(&ptdev->base.gem_lru_mutex);
- 
-diff --git a/drivers/gpu/drm/panthor/panthor_mmu.h b/drivers/gpu/drm/panthor/panthor_mmu.h
-index 3522fbbce369..abc36e7204be 100644
---- a/drivers/gpu/drm/panthor/panthor_mmu.h
-+++ b/drivers/gpu/drm/panthor/panthor_mmu.h
-@@ -52,8 +52,7 @@ int panthor_vm_evict_bo_mappings_locked(struct panthor_gem_object *bo);
- unsigned long
- panthor_mmu_reclaim_priv_bos(struct panthor_device *ptdev,
- 			     unsigned int nr_to_scan, unsigned long *remaining,
--			     bool (*shrink)(struct drm_gem_object *,
--					    struct ww_acquire_ctx *));
-+			     bool (*shrink)(struct drm_gem_object *));
- int panthor_vm_prepare_mapped_bos_resvs(struct drm_exec *exec,
- 					struct panthor_vm *vm,
- 					u32 slot_count);
-diff --git a/include/drm/drm_gem.h b/include/drm/drm_gem.h
-index 8a704f6a65c1..ffa607c91aa2 100644
---- a/include/drm/drm_gem.h
-+++ b/include/drm/drm_gem.h
-@@ -616,8 +616,7 @@ drm_gem_lru_scan(struct drm_device *dev,
- 		 struct drm_gem_lru *lru,
- 		 unsigned int nr_to_scan,
- 		 unsigned long *remaining,
--		 bool (*shrink)(struct drm_gem_object *obj, struct ww_acquire_ctx *ticket),
--		 struct ww_acquire_ctx *ticket);
-+		 bool (*shrink)(struct drm_gem_object *obj));
- 
- int drm_gem_evict_locked(struct drm_gem_object *obj);
- 
--- 
-2.55.0
-
+This series does not introduce a new clock selection path; it reuses the 
+existing
+geni_se_clk_freq_match() flow on firmware-managed platforms by populating
+clk_perf_tbl from OPP data.
+>
+>> Signed-off-by: Praveen Talari <praveen.talari@oss.qualcomm.com>
+> Kind regards
+> Uffe
+>
+>> ---
+>> Changes in v2:
+>> - Add new patch to remove OPP rate reset from resource deactivation
+>> - Add new patch to vote source frequency via OPP for I2C
+>> - Compress the SPI, I2C and serial commit messages per review feedback
+>> - Drop a stray blank line before trace_geni_i2c_bus_setup() in the
+>>    I2C resource-initialization helper commit.
+>> - Link to v1: https://patch.msgid.link/20260805-derive_clk_perf_tbl_from_perf_domain_opp_table-v1-0-61171ab1cdce@oss.qualcomm.com
+>>
+>> ---
+>> Praveen Talari (9):
+>>        pmdomain: arm: Fix -EINVAL from scmi_pd_set_perf_state() on state 0
+>>        soc: qcom: geni-se: Populate clk_perf_tbl with SE source clock frequencies from perf OPP table
+>>        soc: qcom: geni-se: Add helper to set SE clock rate via OPP
+>>        soc: qcom: geni-se: Remove OPP rate reset from resource deactivation
+>>        serial: qcom-geni: Use geni_se_set_rate() for source clock configuration
+>>        spi: qcom-geni: Use geni_se_set_rate() for setting source clock frequency
+>>        i2c: qcom-geni: Vote for SE clock rate using OPP
+>>        i2c: qcom-geni: Use common GENI resource initialization helper
+>>        i2c: qcom-geni: Use geni_se_set_rate() for setting source clock frequency
+>>
+>>   drivers/i2c/busses/i2c-qcom-geni.c      | 72 +++++++++++++++++----------------
+>>   drivers/pmdomain/arm/scmi_perf_domain.c |  2 +-
+>>   drivers/soc/qcom/qcom-geni-se.c         | 62 +++++++++++++++++++++++++---
+>>   drivers/spi/spi-geni-qcom.c             | 24 +++++------
+>>   drivers/tty/serial/qcom_geni_serial.c   | 26 ++++++------
+>>   include/linux/soc/qcom/geni-se.h        |  2 +
+>>   6 files changed, 122 insertions(+), 66 deletions(-)
+>> ---
+>> base-commit: 0f6da28aab51b16762ed82e8fdeaa5042da45b08
+>> change-id: 20260805-derive_clk_perf_tbl_from_perf_domain_opp_table-2f29ad32226a
+>>
+>> Best regards,
+>> --
+>> Praveen Talari <praveen.talari@oss.qualcomm.com>
+>>
