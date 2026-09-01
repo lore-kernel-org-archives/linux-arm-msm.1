@@ -1,161 +1,260 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from lahtoruutu.iki.fi (lahtoruutu.iki.fi [185.185.170.37])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6C837368D74
-	for <linux-arm-msm@vger.kernel.org>; Tue,  1 Sep 2026 13:24:25 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788269066; cv=none; b=d6Rba/qzHkeizkxc5V6YJksCk0LjX2QlchHSTqevp4QqkgU7ldCjtGj+JlicZDOljsU9Df4ohmVgf1wNK91c/ytPKqbWOIzBWXlCfldk37J5TR48KxP3/OQdoY4G2Yl4tUI78Lz1S0fKiBDBkjA99MO6cJkwgdx1j/hPbIze3Cg=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788269066; c=relaxed/simple;
-	bh=doEy6iBYhjWO+1eu+FG4HEPb/8Dq/l4nV0w0yrASPyo=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=r6wnePwvtzU5ES7dvISZIem+jfMERIvYYhs5oDGY8dAX75/W7Mvkqpxh4AxyGQjSRj238KTYuxZjgdU5aAN+nuVffPAbUHAtx0k8f3OiFWScDyd80elhbNlbpCWPLGGQkZZH0VW5lbo3Fk8JFyTmA7hv5WGHKTaKLVeSS7fZ7us=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=BtpLlFVC; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=DrmMa2fr; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 346D347ECC2;
+	Tue,  1 Sep 2026 13:25:46 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=185.185.170.37
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1788269148; cv=pass; b=dCnTtgTAyJTlwvq9UKh1GaocF+lykxpum2ZDjn91StbnD5sqkwyTbuE30+q5z+ELoqmYiS2YkBAwqRp3Fx6vOdJUeOnNKwQWSoJlm/l21ggmNFZCJwuYuo+Jb2xlre02hZGgd1YMjzq5oWFzZPc0Ir9qL+/W832L77U1Nv15WY0=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1788269148; c=relaxed/simple;
+	bh=p5UnzM+3CyPXissVjrfNNF7wPx3GF9eMt//3kM8cW+o=;
+	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=LwyML4gu0bDlCBFtXAnDVTfShJFJcWOAd9SpYKO0D71ZACx8wsdAJLr5BHPa8bidtRn5oglFT37K5PiEfzd2N3gVq1qOOcEmuuBOwXVIcDd3Dl8Eib2RkF5oupIpZPyUC7yQXMFlEBxuzyBCqLaHcEZpEoh5aR9LatwN49B4TIw=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=iki.fi; spf=pass smtp.mailfrom=iki.fi; dkim=pass (2048-bit key) header.d=iki.fi header.i=@iki.fi header.b=rq/UGbeW; arc=pass smtp.client-ip=185.185.170.37
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=iki.fi
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=iki.fi
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="BtpLlFVC";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="DrmMa2fr"
-Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 681AJJjA1136765
-	for <linux-arm-msm@vger.kernel.org>; Tue, 1 Sep 2026 13:24:25 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	fK4hoq5TQDS3XikMTWs0aodegmSjlooccPriMdi6b7Y=; b=BtpLlFVCVUNzxEYI
-	HgGZSJSdQOf5ayDt5hq+IOANbHz0Vn6pG9Vsq58d1AfZTSZiqYiuXyxygNGE3xQc
-	lA+79Bw+n5jXcB4yipulo8IYpZfBSTTw5zcwqGhVdakj/DX98Vmiu3d4z+qO9kE+
-	x2c/SHpr99RlfuLqxuZUCu9rWkkT4kUgd5+u8tfe7G8Jk7t4aWsPvApx3vW45Xba
-	9Xv6iwLE5NUZrhOx52WIGQP0d785Wi7YfJStxsLwNoV5dJrJ6hQXKy1dYCU1dKLV
-	dsx8pCQek6g1+g5gTB2F1gYPp65Rx0zxpVzPtIQxRzQego/2TRvjdA4SCH93liR7
-	ESgwog==
-Received: from mail-vs1-f69.google.com (mail-vs1-f69.google.com [209.85.217.69])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gdrcsj1vn-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 01 Sep 2026 13:24:24 +0000 (GMT)
-Received: by mail-vs1-f69.google.com with SMTP id ada2fe7eead31-784f9401a7dso127618137.2
-        for <linux-arm-msm@vger.kernel.org>; Tue, 01 Sep 2026 06:24:24 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1788269064; x=1788873864; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=fK4hoq5TQDS3XikMTWs0aodegmSjlooccPriMdi6b7Y=;
-        b=DrmMa2frw3EHHahTc1/8EMp2QTmLW0uSh463iIL65jIlJZh5v9W91oMV1gZf+9rbPw
-         0hss4FVaHt5wwGb7+M+YEpWL79pGfTlxyXE1eigLMgjK1lV6FqasBi/PLEkglQ0v+mv4
-         PbYxL8dY5T89ciMYkeIXHhlhTEAryQIVeH9u2UiT7EHUDIQEdjBYbtIyA1kMB9MSvzTT
-         2Uk/FLg9BLiGUqIpui5rYpM3G0IW6lweonc9kR4EGP60JjwOsq1a0QNG6R792Z80yzhy
-         WBLN+kZyxJIiYzH61irCsukKZm9IZZqgtKysqV5bWIqqR6yjvpvvfHN6H8wKit0apNj+
-         kPKA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788269064; x=1788873864;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=fK4hoq5TQDS3XikMTWs0aodegmSjlooccPriMdi6b7Y=;
-        b=XaszxRs+SWjSesHRjl2drY9f5oBbexsf0ZWO1raXe8m3mXSW7ygtEVKUiZVgAjzvtK
-         g+E3sk4ya61xYChexTy98Vn4Zlv56yaYnFMWiOQXf+r3ChZIzXpKu0GZSvLUPY8nWytV
-         DMsO5RKGH0H/bjYDE4JAJqvqHuJg/rGGA5gkRQqud0+Udtvccwhad4vF1olKgJ2TS6ch
-         4jYCGQExOsp96Y/5NRKNci8vC9OXNR8K6A7hVyVra6X45u3kVLmuArppNYbH2b71xbIx
-         02PpsV+X5qxr/JgBlB4H5NAd4LNU2hJfRnQATeEStSREoYzaJkV7n8XdQKUf5p+LWdmU
-         CrxQ==
-X-Gm-Message-State: AFuF++lDv+Tz1JLLFDlA6AOyzTFpkhINnNtEF2V5UehrFLwHX0MtnzIo
-	EKXpo166454oukr59cOZpGce/LcoxGnOA1CwvK5hYUsLpWU04hP+x4E8u1Qdp0PAyGTnj/w+fL7
-	InJ40O/he8ZFt5YwzcV92rdnlG4u+FPRq5ZSkw9sFC2oDZG5WkER8m/hl+Z0ovsCEB2uQ
-X-Gm-Gg: AR+sD11KWONDoETpKp9KlKEWOrby5V6qAfJq+INlgVrbJRtfEzu0u5sruRyKmDx1hEM
-	WAuYfoZraO3Yz/xzUyHCSX/6PDWa+toDznNRJoK0wWsUjXlipZVsoAd5FSgtgbWN3dYqrzlZauU
-	FILFAnwnK15n60FH9LycIKVZU427KA3XVVjsz4Q9SLOtBbk4pcjrUIwUrh4bnhYVVHA3k+j0wgb
-	GCEBlYU+tEC0xh9r3KG5/6GCNW+c6ghC/aOHeneMNxqKd7XTP6WynZh901ZVrgVaGjZG5xvcIU8
-	iPwtkeARA/WGcmSb1S2yd+gIX1clynS6xW77lFxYkp6j8KAAPDWSD0A69baMs6CMgyaRJhoZert
-	mBZBJLGqo8il6eHA9CkrlLw==
-X-Received: by 2002:a05:6102:f84:b0:779:7d3b:1398 with SMTP id ada2fe7eead31-78593425615mr4431828137.0.1788269063572;
-        Tue, 01 Sep 2026 06:24:23 -0700 (PDT)
-X-Received: by 2002:a05:6102:f84:b0:779:7d3b:1398 with SMTP id ada2fe7eead31-78593425615mr4431799137.0.1788269062980;
-        Tue, 01 Sep 2026 06:24:22 -0700 (PDT)
-Received: from [192.168.202.12] ([178.235.128.140])
-        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5b5e89c5a53sm2874355e87.8.2026.09.01.06.24.19
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 01 Sep 2026 06:24:22 -0700 (PDT)
-Message-ID: <3c34164f-08cb-4e33-af8d-c5d19012a1ff@oss.qualcomm.com>
-Date: Tue, 1 Sep 2026 15:24:19 +0200
+	dkim=pass (2048-bit key) header.d=iki.fi header.i=@iki.fi header.b="rq/UGbeW"
+Received: from mandelbrot.. (xdsl-83-150-90-33.nebulazone.fi [83.150.90.33])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange x25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	(Authenticated sender: jmtilli)
+	by lahtoruutu.iki.fi (Postfix) with ESMTPSA id 4hZ61017D5z49Px3;
+	Tue, 01 Sep 2026 16:20:19 +0300 (EEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iki.fi; s=lahtoruutu;
+	t=1788268821;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding;
+	bh=U/5+tF95qlb0i4WOja94VWT0wSoYK/3EZmn5Pucqagk=;
+	b=rq/UGbeW9wsW/o36VwEpcGwXMT0GwuOfHoLO4ohZwLZuttMo6f+lWFe5QpVYzrAqgLf/1H
+	eLaVF92GBxqQDuqRzhY8WCXaFNBz/SaJifHySzXtF0FQZ//sL+JRp5tVvjK5R/xxKPsXTJ
+	I5siDVVyfSHu573LxyD7vIWP/P1RM3LEsaSi5o/DVj7JINsg779cw7NHNhaTEyPsA5Qyeg
+	aaImveoAYByRJfIzgMS2M1AxKSiBJpiYIMckdyToVGCgJ6aDuXxVOzouHuU6CBWPX3ZsYE
+	FbzsBkud1xVDljhteYbjVcUeJ72dUCUSxuAHQ2XuGkQA1fZcGT9antVTDuQ8EQ==
+ARC-Seal: i=1; a=rsa-sha256; d=iki.fi; s=lahtoruutu; cv=none; t=1788268821;
+	b=mIlYlMM/2c8UJLlYkmbZLUyFZdqxIbT8D1Vk+aDS7B3y37d3z5mHHjbFfwzV6g4qLx9fLW
+	qPrGk2aIyDa9p4+ZwLljx25OUUeSEDzghnl8kG2vcMca/U//n8t62rqNdsI9ArdSNh5PkZ
+	sKicN7H2fhaoG7FWIaKrlKg4SyjcMF+EEHzD0AX/mvWxWz4ekVXAIz6NRWcktiGxuGSMZ2
+	STBw07hyw6aSyD4T1i/lUeWPizPNpB3EvoTqNd5hyoe9p5tRTcFXsZasxZYPy3XD0D5dXi
+	5jVOqXGJ+3Z/RsJQZa9NbNo/NwPFIiEEd9VoBbCNfbIwV3L6M74WlhTkfrpg6w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=iki.fi;
+	s=lahtoruutu; t=1788268821;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding;
+	bh=U/5+tF95qlb0i4WOja94VWT0wSoYK/3EZmn5Pucqagk=;
+	b=bEuNfE77WCoKkhklO35kRn2s5oMyxpX6ok0GjyNf8GymPusJ3VCjySgjBL1LDzCzUH7SSF
+	3l7zSXKgzmmgxHfNfqP0eM0JfcfhykHgUvUgTxA0UIxerSUBgzfwle26RlPQcZl37nWakn
+	7t0KbjmnmxmHhADZGEkJHHEh7OJeSy5uFV4QbbZbhyuJKo5pjI0A5Urw/HYpiEp/vFapKj
+	zdka2vEZt+Ml4xUhw8oO+MBcrpGayu7fV5HhIHagSuB5A6V+ZUfXAyz7l9k7BBq4YgRFq0
+	McEWF2nWUpSlGHu/AfvA4khOI1Xdy4LdrI6SFf7iMU3wyE2KEDe1rApW+Ji1Ww==
+ARC-Authentication-Results: i=1;
+	ORIGINATING;
+	auth=pass smtp.auth=jmtilli smtp.mailfrom=juha-matti.tilli@iki.fi
+From: Juha-Matti Tilli <juha-matti.tilli@iki.fi>
+To: linux-arm-msm@vger.kernel.org,
+	Manivannan Sadhasivam <mani@kernel.org>
+Cc: Eric Dumazet <edumazet@google.com>,
+	Kuniyuki Iwashima <kuniyu@google.com>,
+	Paolo Abeni <pabeni@redhat.com>,
+	Willem de Bruijn <willemb@google.com>,
+	"David S . Miller" <davem@davemloft.net>,
+	Jakub Kicinski <kuba@kernel.org>,
+	Simon Horman <horms@kernel.org>,
+	Marcel Holtmann <marcel@holtmann.org>,
+	Andy Gross <agross@kernel.org>,
+	Mihai Moldovan <ionic@ionic.de>,
+	Denis Kenzior <denkenz@gmail.com>,
+	Juha-Matti Tilli <juha-matti.tilli@iki.fi>,
+	linux-kernel@vger.kernel.org,
+	netdev@vger.kernel.org
+Subject: [PATCH v6 00/15] QRTR Multi-endpoint support
+Date: Tue,  1 Sep 2026 16:19:19 +0300
+Message-Id: <20260901131934.225991-1-juha-matti.tilli@iki.fi>
+X-Mailer: git-send-email 2.34.1
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 12/12] arm64: dts: qcom: ipq5018: Enable USB
- Super-Speed PHY
-To: george.moussalem@outlook.com, Vinod Koul <vkoul@kernel.org>,
-        Neil Armstrong <neil.armstrong@linaro.org>,
-        Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley
- <conor+dt@kernel.org>,
-        Praveenkumar I <praveenkumar.i@oss.qualcomm.com>,
-        Philipp Zabel <p.zabel@pengutronix.de>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>,
-        Nitheesh Sekar <quic_nsekar@quicinc.com>,
-        Wesley Cheng <quic_wcheng@quicinc.com>,
-        Manivannan Sadhasivam <mani@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, linux-phy@lists.infradead.org,
-        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-usb@vger.kernel.org
-References: <20260825-ipq5018-usb3-v3-0-39be0955a6aa@outlook.com>
- <20260825-ipq5018-usb3-v3-12-39be0955a6aa@outlook.com>
-Content-Language: en-US
-From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-In-Reply-To: <20260825-ipq5018-usb3-v3-12-39be0955a6aa@outlook.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTAxMDExNyBTYWx0ZWRfXwQqQfR/xBLFS
- gg/xoS+3jIga1aK/wGUBEUU2vG7iS0ALc5PLvz6Jd3UTGIhU9xZTUsWSNe0rvUAayzDwQq2VNqB
- 1z6e+7XCZdlo5rhfMKbuR4/1+Kz8a9w=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTAxMDExNyBTYWx0ZWRfX0ba+zf/1yqOU
- F2Ko0sTvX+wgB32OlBvzGdUcL4b7lrFOhmJbw6EQ7jaY4Vl0iH2Z4suGrtrFgk15WFh3D7O8fHR
- ukJAXoily44V4akwQ0cSonys0hHLz519xKWUH1yLzya31GMPy0gLyILm5wot0LLwrOxmxIkRBzs
- bunqRsLfh1sSDljAjJg8JxrcCj7so8TtChNxGvFXky07a6/M8CW/FObH4eIh9rDeoqL+Sy68qto
- It1Pu3T/Y0w6ppeWu4yGa69M5KDNzc68bw4aCiy7G7hz1A+O4kGKVBeINt2WMmRwHfIbKtmJefs
- rWGgEN+Q7ELTuaOHVIo2At3MNsgqA6GbiseFW79f4zJ7fkI75hfLgvXp+HmmkO9JgqvtjYOhCLH
- reISESbaIrWOBA2EHjooTsPWMAfEdsItIUjzhAtOHM2ayiSZF3lE5PoO/XyRdXLV1LMasTINp53
- 129UuD2K73xIo/Ch4wg==
-X-Proofpoint-GUID: INhXNi78gfJOibUppntiKqthmEbIWe72
-X-Proofpoint-ORIG-GUID: INhXNi78gfJOibUppntiKqthmEbIWe72
-X-Authority-Analysis: v=2.4 cv=QsNuG1yd c=1 sm=1 tr=0 ts=6a96d208 cx=c_pps
- a=5HAIKLe1ejAbszaTRHs9Ug==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
- a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
- a=UqCG9HQmAAAA:8 a=_thwKDryVKp783wjlzwA:9 a=QEXdDO2ut3YA:10
- a=gYDTvv6II1OnSo0itH1n:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-01_03,2026-08-31_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- bulkscore=0 impostorscore=0 phishscore=0 suspectscore=0 adultscore=0
- lowpriorityscore=0 malwarescore=0 priorityscore=1501 spamscore=0
- clxscore=1015 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
- definitions=main-2609010117
+Content-Transfer-Encoding: 8bit
 
-On 8/25/26 2:37 PM, George Moussalem via B4 Relay wrote:
-> From: George Moussalem <george.moussalem@outlook.com>
-> 
-> Add the 5V supply regulator and enable USB Super-Speed PHY support.
-> 
-> Signed-off-by: George Moussalem <george.moussalem@outlook.com>
-> ---
+Hello,
 
-subject:
+First, I would like to thank Denis Kenzior and Mihai Moldovan for
+initially creating this patchset. Without their efforts, there wouldn't
+be any progress towards supporting multiple identical ath11k or ath12k
+modules on a single Linux host.
 
-arm64: dts: qcom: ipq5018-rdp432-c2: ...
+As you may know, if you put two identical Qualcomm Atheros ath11k or
+ath12k WLAN modules on the same Linux host, they will conflict and
+neither works. This is a massive issue in routers, and to solve it, we
+need QRTR multi-endpoint support.
 
-please
+I contacted Mihai Moldovan who posted v5 and he said he's been busy and
+can't provide an estimate of when he'll post v6. So I picked up his
+work, ported it over ath-next and solved the issue of cramming two
+32-bit numbers into an unsigned long that can be 32 bits on a 32-bit
+architecture. Mihai said he doesn't have any corporate backing and
+doesn't care who implements multi-ath11k/ath12k support as long as it
+"just works". Since it's been over a year from the previous activity and
+since Mihai has been and is busy and said he doesn't care who eventually
+implements this, I decided to "steal" the responsibility of posting a v6
+to myself since I fortunately have corporate backing. If Mihai so
+decides, I'm willing to hand over this patchset back to him.
 
-Konrad
+Some of the patches may need dropping/squashing. For example, "fit node
+ID + port number combination into unsigned long" fixes one bug on 32-bit
+architectures but introduces another. This needs careful review. I tried
+to adjust the behavior to my tastes in "use only low 16 bits of
+node/port in 32-bit systems", and this needs careful review, too. Both
+of these are candidates for dropping from this patch series.
+
+Furthermore, "validate msglen before ctrl_pkt use", although it seems to
+fix a real bug, seems to be orthogonal to this patchset, and could be a
+candidate for posting separately.
+
+Also, "limit endpoint range to 16 bits on 32-bit machines", "use nid
+modulo 65536 in 32-bit lookups" and "solve the 32-bit unsafe use in
+endpoints" are candidates for squashing together. I didn't squash them
+yet, since I want to keep my options open at this point, to be able to
+easily adapt to any possible code review comments such as squashing or
+dropping commits.
+
+Someone could complain that using a "radix tree of radix trees" approach
+on 64-bit machines is overkill since a single 64-bit key is enough.
+However, this doesn't work on 32-bit machines, and having entirely
+different code on 32-bit and 64-bit machines would be a testing
+nightmare.
+
+I have tested qrtr with all of these changes, and with Mihai Moldovan's
+patches to actually have two identical ath11k or ath12k modules on the
+same system. Our limited CPU has issues with ath12k, so I have instead
+tested it with two identical ath11k modules. However, Mihai Moldovan
+created the ath11k/ath12k patchset in a somewhat non-optimal way,
+leaking memory in some use cases, with an O(n) algorithm for looking up
+the endpoint id where n is the amount of leaked memory. So I guess I'll
+have to rework that entire patchset which should be doable. That's
+future work, as none of the leaky O(n) stuff is in this patchset.
+
+But first, before merging the multi-ath11k/ath12k patches, this first
+patch set of QRTR multi-endpoint support needs to be merged.
+
+Original description:
+
+The current implementation of QRTR assumes that each entity on the QRTR
+IPC bus is uniquely identifiable by its node/port combination, with
+node/port combinations being used to route messages between entities.
+
+However, this assumption of uniqueness is problematic in scenarios
+where multiple devices with the same node/port combinations are
+connected to the system.  A practical example is a typical consumer PC
+with multiple PCIe-based devices, such as WiFi cards or 5G modems, where
+each device could potentially have the same node identifier set.  In
+such cases, the current QRTR protocol implementation does not provide a
+mechanism to differentiate between these devices, making it impossible
+to support communication with multiple identical devices.
+
+This patch series addresses this limitation by introducing support for
+a concept of an 'endpoint.' Multiple devices with conflicting node/port
+combinations can be supported by assigning a unique endpoint identifier
+to each one.  Such endpoint identifiers can then be used to distinguish
+between devices while sending and receiving messages over QRTR sockets.
+
+The patch series maintains backward compatibility with existing clients:
+the endpoint concept is added using auxiliary data that can be added to
+recvmsg and sendmsg system calls.  The QRTR socket interface is extended
+as follows:
+
+- Adds QRTR_ENDPOINT auxiliary data element that reports which endpoint
+  generated a particular message.  This auxiliary data is only reported
+  if the socket was explicitly opted in using setsockopt, enabling the
+  QRTR_REPORT_ENDPOINT socket option.  SOL_QRTR socket level was added
+  to facilitate this.  This requires QRTR clients to be updated to use
+  recvmsg instead of the more typical recvfrom() or recv() use.
+
+- Similarly, QRTR_ENDPOINT auxiliary data element can be included in
+  sendmsg() requests.  This will allow clients to route QRTR messages
+  to the desired endpoint, even in cases of node/port conflict between
+  multiple endpoints.
+
+- Finally, QRTR_BIND_ENDPOINT socket option is introduced.  This allows
+  clients to bind to a particular endpoint (such as a 5G PCIe modem) if
+  they're only interested in receiving or sending messages to this
+  device.
+
+NOTE: There is 32-bit unsafe use of radix_tree_insert in this patch set.
+This follows the existing usage inside net/qrtr/af_qrtr.c in
+qrtr_tx_wait(), qrtr_tx_resume() and qrtr_tx_flow_failed().  This was
+done deliberately in order to keep the changes as minimal as possible
+until it is known whether the approach outlined is generally acceptable.
+
+v6:
+  - rebased against current ath-next
+  - finally solve the 32-bit unsafe use by "radix tree of radix trees"
+  - remove checks of node/port being in 16-bit range (they may not be)
+  - Link to v5: https://msgid.link/cover.1754962436.git.ionic@ionic.de
+
+v5:
+  - fix typos in commit message
+  - Link to v4: https://msgid.link/cover.1753720934.git.ionic@ionic.de
+
+v4:
+  - fixed issues found in previous review round:
+    o lock without unlock
+    o wrong return value
+  - Link to v3: https://msgid.link/cover.1753312999.git.ionic@ionic.de
+
+v3:
+  - rebased against current master
+  - fix checkpatch.pl warnings
+  - fix overflow issues with unsigned long radix tree keys by using the
+    upper half of the storage space for one element and the lower half
+    of storage for the other element, making sure that the elements fit
+    into their respective storage space
+  - Link to v2: https://msgid.link/cover.1752947108.git.ionic@ionic.de
+
+v2:
+  - rebased against current master
+  - fixed most issues found in first review round (see individual
+    commits), minus the 32-bit long unsafe use
+
+v1 link: https://msgid.link/20241018181842.1368394-1-denkenz@gmail.com
+
+BR, Juha-Matti
+
+Denis Kenzior (10):
+  net: qrtr: ns: validate msglen before ctrl_pkt use
+  net: qrtr: allocate and track endpoint ids
+  net: qrtr: support identical node ids
+  net: qrtr: Report sender endpoint in aux data
+  net: qrtr: Report endpoint for locally generated messages
+  net: qrtr: Allow sendmsg to target an endpoint
+  net: qrtr: allow socket endpoint binding
+  net: qrtr: Drop remote {NEW|DEL}_LOOKUP messages
+  net: qrtr: ns: support multiple endpoints
+  net: qrtr: mhi: Report endpoint id in sysfs
+
+Juha-Matti Tilli (4):
+  net: qrtr: use only low 16 bits of node/port in 32-bit systems
+  net: qrtr: limit endpoint range to 16 bits on 32-bit machines
+  net: qrtr: use nid modulo 65536 in 32-bit lookups
+  net: qrtr: solve the 32-bit unsafe use in endpoints
+
+Mihai Moldovan (1):
+  net: qrtr: fit node ID + port number combination into unsigned long
+
+ include/linux/socket.h    |   1 +
+ include/uapi/linux/qrtr.h |   7 +
+ net/qrtr/af_qrtr.c        | 461 ++++++++++++++++++++++++++++++++------
+ net/qrtr/mhi.c            |  14 ++
+ net/qrtr/ns.c             | 316 ++++++++++++++++----------
+ net/qrtr/qrtr.h           |  14 ++
+ 6 files changed, 627 insertions(+), 186 deletions(-)
+
+-- 
+2.34.1
+
