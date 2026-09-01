@@ -1,58 +1,58 @@
 Received: from lahtoruutu.iki.fi (lahtoruutu.iki.fi [185.185.170.37])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3F7EA472064;
-	Tue,  1 Sep 2026 13:21:03 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 65B7047F2F3;
+	Tue,  1 Sep 2026 13:21:11 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=185.185.170.37
 ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788268864; cv=pass; b=utcStwI13OsdXl+juRflq+j7vZQq6uO2SSQp9o0uqp555S6mO2MSjTRtyvHXJIO9sRSpO9w6WMeOBMXTF0PKpyLDBemSZ11w3pzkPZwj5UVytzh0HofRkg4l6s6SD3GobzMriynEnZRokql6V5MfE+nPLMNyPoMoDG0i5yBlLJQ=
+	t=1788268873; cv=pass; b=mAmCFsO5hVbwL6bHputA3Cbj6ZXnqmAyUv6tLxIbnPSFa+OcAkYakpth2ivDuGFUSt4CX7MGMg1Zvu8BKHTMwIiKTBL7u2tc6WFCUQvxngCB50kuQmyp1JeFLHen2pu16ps1n/LJx7y9Td01UGixzzzpi5TFIjYWNEAokcE5aZc=
 ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788268864; c=relaxed/simple;
-	bh=ePdcpjW/kLvFZnLJetnASTkIonTXjx3cf8nqDnz7rQY=;
+	s=arc-20240116; t=1788268873; c=relaxed/simple;
+	bh=9MTKVHXaWAmpPah6Uzh7zDrZE8DXEn0CDbIpbMZiR8Q=;
 	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
-	 MIME-Version; b=FVWVhgDjeuJOvd/P3xk73hd2iHs69OayLHfjESfrYNsbLFekf9qwcHxUMXufHrbBHsQpVq7O5iVEgtskgm8B98knM70nxLaeDoBRtBXKZyCllH5RclYRq8B4Y+YQB5icjAOMzHWCBvD39RZB8lA1lXxjL2zBVTzfXWhw/yEUFB4=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=iki.fi; spf=pass smtp.mailfrom=iki.fi; dkim=pass (2048-bit key) header.d=iki.fi header.i=@iki.fi header.b=s1So/mBE; arc=pass smtp.client-ip=185.185.170.37
+	 MIME-Version; b=HNAQAjLxLsiylrPqsWZs9P6wDyIqczxW74aMyli4l8CDFZ8j2hetc3y4yZClSSr9kNaIn0lNYmq2/KqASPP2WXz8XooUEt/oB57k20uHcghXexzCQErAF8U9sWt6Q5kurUqaYoLamf/K1xmcijoSYB5TYclTAEr0gxzX4F9xlAY=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=iki.fi; spf=pass smtp.mailfrom=iki.fi; dkim=pass (2048-bit key) header.d=iki.fi header.i=@iki.fi header.b=BKyzhP7Q; arc=pass smtp.client-ip=185.185.170.37
 Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=iki.fi
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=iki.fi
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=iki.fi header.i=@iki.fi header.b="s1So/mBE"
+	dkim=pass (2048-bit key) header.d=iki.fi header.i=@iki.fi header.b="BKyzhP7Q"
 Received: from mandelbrot.. (xdsl-83-150-90-33.nebulazone.fi [83.150.90.33])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange x25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
 	(Authenticated sender: jmtilli)
-	by lahtoruutu.iki.fi (Postfix) with ESMTPSA id 4hZ61j26Xfz49QF7;
-	Tue, 01 Sep 2026 16:20:57 +0300 (EEST)
+	by lahtoruutu.iki.fi (Postfix) with ESMTPSA id 4hZ61s2CWlz49QKq;
+	Tue, 01 Sep 2026 16:21:05 +0300 (EEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iki.fi; s=lahtoruutu;
-	t=1788268857;
+	t=1788268865;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=v6GkYk0HZBFKkX376VoqF+8xKuVMeoSo1m24bvpn9Wg=;
-	b=s1So/mBEfFktHgEtlbB2K6AiVetMyEPXW0DnkIe48kmKj8/iNOD71jVbv7taUrcHsfRpN1
-	8JTQsF2ICx7G9v6sDLKBkxnR6rpT8TZ8odwJjH8ZSE2zRcsEaZqRLScZK3ecN4VdPfme1F
-	OS6/RXxguApV0X9raxaROWU7rghZTgXXuyX+iYwiMt9lSqu/mJgQU4c8KqSyIQ1R9fsC95
-	stRydWO2NHGNg89RAjlE5rBt7anxqjYbPLUPbYSXW91jngNbYQ13qydWpRC37CWy4+3Bfm
-	cQb5Y/I4JAaSPO5O8XTwjXzAe/ZMdBIdAdt3nrHgdoJhcL8FMQxLW6vwfqe9+A==
-ARC-Seal: i=1; a=rsa-sha256; d=iki.fi; s=lahtoruutu; cv=none; t=1788268857;
-	b=eVuCaLrzOVuLtdsu0obT1pky+hLKnSn5sxnVkUFJt6YL5ZbOEgLyHen+CG880kKZmBUqe4
-	Hm+VYakdsPwdmPf4TYVXKSaafEee0M0RgIqiFOh+Dfix/e4r/zVSGkPDJKn7bB6WpleD2h
-	lcwtGt8P7cbcmq75qblFxQ9RxfSNiaKTLka0N85dj6+Hp5JLVfTiNAaR8/PLn6kDT3y19z
-	2gYNiIUH1K7YLTLrAAVqnS6MJasw/huupVFqz3TWpgmuFTcfjMQzdPrbL7PQvXVS9aKCxV
-	W4mKRnld5rgF4lvlenBP414vAezTORlbTqNckImkF78ZbmHt3XCGW9ixS1N1Yw==
+	bh=eQQNkGqsz0DxTiGoA57xy08XjvAtpAjYEEPkpcv0BrA=;
+	b=BKyzhP7QZIe5MlruSWGTVQfB+bfPF0ZOz85j53ztNZa1gfd4u3opoavZ5R7UMaIQ57Hk6D
+	6mrUqhqKGhqwi7x9iqIPO7TGwQPYx/ClMCGLuee6h/o1gW6QryLBowq88S5UrfgwonmBDa
+	J+ugWAlJy6/nvaH2VRi0AzAqMxJI6GkEBgX1V5DNQJaEM/qfDOk5r0Udpk0zK/I4TLHWsB
+	4H3/FmpJ8qMUAtTQcqY1K9QHL68ce9rVAVKMXwujweTHXiBItiVzOMjmoZEBcsYCS8/MAP
+	reMNarmWAUIdGkfirW/lGOv72MSImwGidvqylRcIsXEYf2lvV9UTPs43EXiY6g==
+ARC-Seal: i=1; a=rsa-sha256; d=iki.fi; s=lahtoruutu; cv=none; t=1788268865;
+	b=Lc/0D2fQzLkzqxbNpeJIPHmdq9tTFsppq0MIbYdH1HIpOw8mqiehpibWeC6vti/w1fKpB/
+	M6E1BszflGJujm5iGh+Wka1FywpvsTP1vYqYolIK+sjr1MDCJ45DfpbxzL0x/AYrkr3oFx
+	3IkUXto+qSUcwdnWfV7Lj4u+WHKQxS9GQkQFC71OzKoxxB/DpWxxtQaLAFY2k+fV3DtZ4J
+	ZGNejaF2qu11EZ8Oy3ldTJebR+VxV1DLXcMHBWEU7JPCmZ5JuT82BpfCjyl8gKZL672Rnl
+	DeesKk6aKcaPZC/j7WKSQCO8hIqcUMsq0AiwijSZ1tWphj7j5zhpIhgLAfpB/Q==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=iki.fi;
-	s=lahtoruutu; t=1788268857;
+	s=lahtoruutu; t=1788268865;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=v6GkYk0HZBFKkX376VoqF+8xKuVMeoSo1m24bvpn9Wg=;
-	b=cuScf6M7zWVdcAGGyB/sxa0Vaqx0RiQfqoOvKPiCUoO5WdhnDoY3AihE+nXIIG+RLjYo9Q
-	BCRhWxG0ITW5ClY832T3KWwlYTwXpvDWNBtzTMXOJ/DUB0kSEwYzPnQgo6bt6f4FpX0Nkd
-	44zJFgmq9W8zeQLJ8t42skQ6uRqT9SSCvsxkRadZ+ruR/0CX80j6L4vNX3TK9D2DeypX5C
-	kVieTAT05GCbgtjguvTjebgykN7lgtsPt5V9M8Qhd6YXaiUPJgLZoPBGeYGsqQLRQlcOvb
-	17HjuK8g93d6LEpwJ/6EkOhiwR3VSdldgANZOxupqHrcLD/KF/siRUEUfKYzGA==
+	bh=eQQNkGqsz0DxTiGoA57xy08XjvAtpAjYEEPkpcv0BrA=;
+	b=wQ7Md/jBozcH8nFB5ic3xvoGQICit1q5x21Q3ZI3NHDAhNNlu4zwlIgM6lOdnsNzwNFymO
+	Ob/lJ02ca24TBMB4yyIfUGgEDFi/Bf4jiw+jOpmWWvTY54xIxD4rbM7azU50rjKmV2cKdJ
+	IwgQLI79T6NiwNzOrzl8Fic59hVh4leMR1qrz1fC4KJplRpyfIYTu/Rx0Izw4AtFTUqank
+	Z3nf1vlslZxmRwN8Bhjc7x5ifCwNyk1lhWcpInJQ0zi01M3RB/mQsB/IGQy9IYwQ9y5+ii
+	jqwg3sQU1oBOQebq4I1ThDU7b16viUhLaFVQ1juafWGCrwsSHfocF5ie6JaJBQ==
 ARC-Authentication-Results: i=1;
 	ORIGINATING;
 	auth=pass smtp.auth=jmtilli smtp.mailfrom=juha-matti.tilli@iki.fi
@@ -73,9 +73,9 @@ Cc: Eric Dumazet <edumazet@google.com>,
 	Juha-Matti Tilli <juha-matti.tilli@iki.fi>,
 	linux-kernel@vger.kernel.org,
 	netdev@vger.kernel.org
-Subject: [PATCH v6 04/15] net: qrtr: use only low 16 bits of node/port in 32-bit systems
-Date: Tue,  1 Sep 2026 16:19:23 +0300
-Message-Id: <20260901131934.225991-5-juha-matti.tilli@iki.fi>
+Subject: [PATCH v6 05/15] net: qrtr: support identical node ids
+Date: Tue,  1 Sep 2026 16:19:24 +0300
+Message-Id: <20260901131934.225991-6-juha-matti.tilli@iki.fi>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20260901131934.225991-1-juha-matti.tilli@iki.fi>
 References: <20260901131934.225991-1-juha-matti.tilli@iki.fi>
@@ -87,72 +87,142 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-The node id is generally a single fixed value hardcoded into device
-firmware. If it happens to be larger than 16 bits on a 32-bit system,
-using the value modulo 65536 is enough. It is not necessary to check it
-for being in range. Evidence of this is a prior implementation that fit
-node_id (u32) and port (u32) into unsigned long in 32-bit systems, in a
-manner that completely discarded all bits of node_id. Do the same for
-port: don't check for it being in range.
+From: Denis Kenzior <denkenz@gmail.com>
 
-This arguably creates a bug where node_id could clash with a node_id
-that has the same low-order 16 bits, or a port could clash with a port
-that has the same low-order 16 bits. But it's probably better than
-discarding all bits of node and using only bits from port. It's probably
-also better than failing if either node or port is out-of-range.
+Add support for tracking multiple endpoints that may have conflicting
+node identifiers. This is achieved by using both the node and endpoint
+identifiers as the key inside the radix_tree data structure.
 
+For backward compatibility with existing clients, the previous key
+schema (node identifier only) is preserved. However, this schema will
+only support the first endpoint/node combination.  This is acceptable
+for legacy clients as support for multiple endpoints with conflicting
+node identifiers was not previously possible.
+
+Signed-off-by: Denis Kenzior <denkenz@gmail.com>
+Reviewed-by: Marcel Holtmann <marcel@holtmann.org>
+Reviewed-by: Andy Gross <agross@kernel.org>
+Signed-off-by: Mihai Moldovan <ionic@ionic.de>
 Signed-off-by: Juha-Matti Tilli <juha-matti.tilli@iki.fi>
 ---
- net/qrtr/af_qrtr.c | 22 +++++++++-------------
- 1 file changed, 9 insertions(+), 13 deletions(-)
+ net/qrtr/af_qrtr.c | 57 ++++++++++++++++++++++++++++++++++------------
+ 1 file changed, 42 insertions(+), 15 deletions(-)
 
 diff --git a/net/qrtr/af_qrtr.c b/net/qrtr/af_qrtr.c
-index f2edbd2e9dea9..b2cb05f2480e0 100644
+index b2cb05f2480e0..43e48b89b5cb6 100644
 --- a/net/qrtr/af_qrtr.c
 +++ b/net/qrtr/af_qrtr.c
-@@ -252,9 +252,9 @@ static int qrtr_tx_resume(struct qrtr_node *node, struct sk_buff *skb)
- 	struct qrtr_tx_flow *flow;
- 	unsigned long key = 0;
+@@ -119,14 +119,15 @@ static DEFINE_XARRAY_ALLOC(qrtr_ports);
  
--	if (remote_node > QRTR_INDEX_HALF_UNSIGNED_MAX ||
--	    remote_port > QRTR_INDEX_HALF_UNSIGNED_MAX)
--		return -EINVAL;
-+	/* Don't check node/port for the valid range, use only low
-+	 * 16 bits on 32-bit architectures.
-+	 */
+ /* The xarray API uses fixed unsigned long keys and we will have to make
+  * do with that.
+- * These keys are often a combination of node IDs (currently u32) and
+- * port numbers (also currently u32).
+- * Using the high 32 bits for the node ID and the low 32 bits for the
+- * port number will work fine to create keys on platforms where unsigned long
+- * is 64 bits wide, but obviously is not be possible on platforms where
+- * unsigned long is smaller.
++ * These keys are often a combination of node IDs and port numbers or
++ * endpoint IDs and node IDs (all currently u32).
++ * Using the high 32 bits for the node/endpoint ID and the low 32 bits for the
++ * port number/node ID will work fine to create keys on platforms where
++ * unsigned long is 64 bits wide, but obviously is not be possible on
++ * platforms where unsigned long is smaller.
+  * Virtually split up unsigned long in half and assign the upper bits to
+- * node IDs and the lower bits to the port number, however big that may be.
++ * node/endpoint IDs and the lower bits to the port number/node ID, however
++ * big that may be.
+  */
+ #define QRTR_XARRAY_INDEX_BITS  (8 /* CHAR_BIT */ * sizeof(unsigned long))
+ #define QRTR_INDEX_HALF_BITS (QRTR_XARRAY_INDEX_BITS >> 1)
+@@ -457,19 +458,36 @@ static struct qrtr_node *qrtr_node_lookup(unsigned int nid)
+  *
+  * This is mostly useful for automatic node id assignment, based on
+  * the source id in the incoming packet.
++ *
++ * Return: 0 on success; negative error code on failure
+  */
+-static void qrtr_node_assign(struct qrtr_node *node, unsigned int nid)
++static int qrtr_node_assign(struct qrtr_node *node, unsigned int nid)
+ {
+ 	unsigned long flags;
++	unsigned long key;
  
- 	key = ((unsigned long)(remote_node) << QRTR_INDEX_HALF_BITS) |
- 	      ((unsigned long)(remote_port) & QRTR_INDEX_HALF_UNSIGNED_MAX);
-@@ -295,11 +295,9 @@ static int qrtr_tx_wait(struct qrtr_node *node, int dest_node, int dest_port,
- 	int confirm_rx = 0;
- 	int ret;
+ 	if (nid == QRTR_EP_NID_AUTO)
+-		return;
++		return 0;
++
++	if (node->ep->id > QRTR_INDEX_HALF_UNSIGNED_MAX ||
++	    nid > QRTR_INDEX_HALF_UNSIGNED_MAX)
++		return -EINVAL;
  
--	if (dest_node < QRTR_INDEX_HALF_SIGNED_MIN ||
--	    dest_node > QRTR_INDEX_HALF_SIGNED_MAX ||
--	    dest_port < QRTR_INDEX_HALF_SIGNED_MIN ||
--	    dest_port > QRTR_INDEX_HALF_SIGNED_MAX)
--		return -EINVAL;
-+	/* Don't check node/port for the valid range, use only low
-+	 * 16 bits on 32-bit architectures.
-+	 */
+ 	spin_lock_irqsave(&qrtr_nodes_lock, flags);
+-	radix_tree_insert(&qrtr_nodes, nid, node);
++
++	/* Always insert with the endpoint_id + node_id */
++	key = ((unsigned long)(node->ep->id) << QRTR_INDEX_HALF_BITS) |
++	      ((unsigned long)(nid) & QRTR_INDEX_HALF_UNSIGNED_MAX);
++	radix_tree_insert(&qrtr_nodes, key, node);
++
++	if (!radix_tree_lookup(&qrtr_nodes, nid))
++		radix_tree_insert(&qrtr_nodes, nid, node);
++
+ 	if (node->nid == QRTR_EP_NID_AUTO)
+ 		node->nid = nid;
+ 	spin_unlock_irqrestore(&qrtr_nodes_lock, flags);
++
++	return 0;
+ }
  
- 	key = ((unsigned long)(dest_node) << QRTR_INDEX_HALF_BITS) |
- 	      ((unsigned long)(dest_port) & QRTR_INDEX_HALF_UNSIGNED_MAX);
-@@ -369,11 +367,9 @@ static int qrtr_tx_flow_failed(struct qrtr_node *node, int dest_node,
- 	unsigned long key = 0;
- 	struct qrtr_tx_flow *flow;
+ /**
+@@ -563,14 +581,18 @@ int qrtr_endpoint_post(struct qrtr_endpoint *ep, const void *data, size_t len)
  
--	if (dest_node < QRTR_INDEX_HALF_SIGNED_MIN ||
--	    dest_node > QRTR_INDEX_HALF_SIGNED_MAX ||
--	    dest_port < QRTR_INDEX_HALF_SIGNED_MIN ||
--	    dest_port > QRTR_INDEX_HALF_SIGNED_MAX)
--		return -EINVAL;
-+	/* Don't check node/port for the valid range, use only low
-+	 * 16 bits on 32-bit architectures.
-+	 */
+ 	skb_put_data(skb, data + hdrlen, size);
  
- 	key = ((unsigned long)(dest_node) << QRTR_INDEX_HALF_BITS) |
- 	      ((unsigned long)(dest_port) & QRTR_INDEX_HALF_UNSIGNED_MAX);
+-	qrtr_node_assign(node, cb->src_node);
++	ret = qrtr_node_assign(node, cb->src_node);
++	if (ret)
++		goto err;
+ 
+ 	if (cb->type == QRTR_TYPE_NEW_SERVER) {
+ 		/* Remote node endpoint can bridge other distant nodes */
+ 		const struct qrtr_ctrl_pkt *pkt;
+ 
+ 		pkt = data + hdrlen;
+-		qrtr_node_assign(node, le32_to_cpu(pkt->server.node));
++		ret = qrtr_node_assign(node, le32_to_cpu(pkt->server.node));
++		if (ret)
++			goto err;
+ 	}
+ 
+ 	if (cb->type == QRTR_TYPE_RESUME_TX) {
+@@ -579,10 +601,13 @@ int qrtr_endpoint_post(struct qrtr_endpoint *ep, const void *data, size_t len)
+ 			goto err;
+ 	} else {
+ 		ipc = qrtr_port_lookup(cb->dst_port);
+-		if (!ipc)
++		if (!ipc) {
++			ret = -EINVAL;
+ 			goto err;
++		}
+ 
+-		if (sock_queue_rcv_skb(&ipc->sk, skb)) {
++		ret = sock_queue_rcv_skb(&ipc->sk, skb);
++		if (ret) {
+ 			qrtr_port_put(ipc);
+ 			goto err;
+ 		}
+@@ -662,7 +687,9 @@ int qrtr_endpoint_register(struct qrtr_endpoint *ep, unsigned int nid)
+ 	xa_init(&node->qrtr_tx_flow);
+ 	mutex_init(&node->qrtr_tx_lock);
+ 
+-	qrtr_node_assign(node, nid);
++	rc = qrtr_node_assign(node, nid);
++	if (rc < 0)
++		goto free_node;
+ 
+ 	mutex_lock(&qrtr_node_lock);
+ 	list_add(&node->item, &qrtr_all_nodes);
 -- 
 2.34.1
 
