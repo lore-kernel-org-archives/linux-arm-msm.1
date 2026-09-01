@@ -1,33 +1,33 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 76D503859E6;
-	Tue,  1 Sep 2026 05:58:54 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 581D9367B67;
+	Tue,  1 Sep 2026 06:00:14 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788242335; cv=none; b=BoXqwgUqF9/iyzBhiaEW6eHAEw+zrLlHruyYH+N2ahUI1mXbRLX6j+YXScr/nKnDy+MXQyAhiCUBCPT2RHNvA5YpoTO3P5fxNQYbbI4glOspWaWXHZK9zFXN3h9lhBGRKiF93x7zQ6QrKIyiziPCTKZsbfAcc+l5WpEczyJm5Lc=
+	t=1788242416; cv=none; b=cbPzHjlh6wy+zhzjzHLaiM2oBLv9dEhTzi1UqKUA6eOl2djaf7RdX6kEa0NtOZoFuXKMG7ajXhziGosSalqkQZdzr3Kp0I7T+PXBpJA1AWfK6BfhTYeGrt7KmK/J4B+GRECfhplNwaBUT0vFifjExTy+pmXVab3w8bT4rIh4kVA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788242335; c=relaxed/simple;
-	bh=ha5uBJDzW+l663smlgkgU8HcOxxV1/scGuXavxxx81U=;
+	s=arc-20240116; t=1788242416; c=relaxed/simple;
+	bh=UGJqu37s0ABSWryh5LzvdjoRydwm0KsOzycKf6N2wFc=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=FSiF53aeuAnPs7LIb8nFDvHS7NYXbRloeHjbMHV3bd2qPDI5W/HPgr4G5imQnUuJ4w1d1IfoT4m8UJRskZYq+9WpqxfMnAzAKaNaYfblQUVuezFKnya3+4fOfai4n3Nc7I8AZhceZnEwXu31Yp3kYBsYbU71qOjB9o+71tD4k1c=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Qno9MquK; arc=none smtp.client-ip=100.103.45.18
+	 In-Reply-To:Content-Type; b=sr5CTgnGOVhsSE5jppEJe/n5fPQDnSGNrgIX6i7JjXa4hwJ1I1ULpIKHJUYE2PTBSD5Vr7jIryba1EB0UGuOqTcOA30iqaMcB+OcnLVJAZzWzKbkvTeU+q4Bvzd66BufmG0LKdB6Sc4QPxPgdfj32nTt0bbD8ha5ia3Hjl+Lmus=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=biKabJ8+; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Qno9MquK"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 15BCA1F000E9;
-	Tue,  1 Sep 2026 05:58:43 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="biKabJ8+"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D55D01F000E9;
+	Tue,  1 Sep 2026 06:00:05 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1788242334;
-	bh=92pwlUR5nxiHx1bKa/2Cr5ZRlcqeLT3X+qIkjt03esM=;
+	s=k20260515; t=1788242414;
+	bh=Ah+9JDZKqo0bH0rKB5SjEQ+pIRTmwPatoyuFQfz+WJ8=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=Qno9MquK6iFUp/8b8wfCB+ULlp2/o38ZljfJp+n8CkUYScxNEDLpMmzDMr69fFZkO
-	 p4YwtE0Wnbuw8lskP3DxTSzTehySCGL66oiGmdgwPyY7405s0EgNMGP2nbR88b2tmV
-	 aemEjgO4lpzUusp7QW/wGYBlkEgn95IeDyZwa93WGvOlnPXDF9EFVKo+bmehHm4GnU
-	 UpkLR3HtRzXe6mmyC5+/tQIZV05MpjTP6ypD2C8R1EDhs7eLL8gwc6d2aQL4zCHlRo
-	 gvEb0tyKviH//TwA+xdDjahGDsG+3CkdyZ4jCHJrR6sE4x1CIGkiRdVMhX1OD4BWst
-	 x1vyQ9Z0jpEPw==
-Message-ID: <c1342965-be3a-4b13-9202-c9745e3443c3@kernel.org>
-Date: Tue, 1 Sep 2026 07:58:41 +0200
+	b=biKabJ8+uzE4WvWhzT/xMoiIn7nHC3LtOYw4oWRfmhDIIiB1ReqSveu4rGbmzEk7L
+	 hufwhvo+JiTqCGdOq9s1szrtkLX9a52rawxWpMfAYvn8ltGlRPMu5kb5QrnuzdsJNa
+	 dU9fry808Q8RaY0igB0A6/INBFkZj7XLP+ZD4odv0DFNoDtGpV4mmrOWmuxsrq2Bgi
+	 Ngz3MqC/W27I77HQTT+/AYqHM7hBu5Acgx7mYYqbpaaHeFjeoSI0MeHOE3gzJh2oE6
+	 iiGw2yRpyyihQJDZizaHxChq/Wd4ilGRWlE3Mbr0x4J1VNu3vXeOtVXhdudwF774QS
+	 S9ux4uhdM16Cg==
+Message-ID: <d9b2bbd9-8cd4-4472-aa92-419f8c6d1583@kernel.org>
+Date: Tue, 1 Sep 2026 08:00:02 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -35,8 +35,8 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH RFC/DO NOT MERGE 08/12] drm/msm/hdmi: Add support for PM
- OPP table
+Subject: Re: [PATCH RFC/DO NOT MERGE 09/12] drm/msm/hdmi: Add HDMI for Eliza
+ SoC
 To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
  Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>,
  Rob Clark <robin.clark@oss.qualcomm.com>, Dmitry Baryshkov
@@ -56,8 +56,8 @@ Cc: linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org,
  freedreno@lists.freedesktop.org, linux-kernel@vger.kernel.org,
  devicetree@vger.kernel.org, linux-phy@lists.infradead.org
 References: <20260828-drm-msm-hdmi-eliza-v1-0-67843277de17@oss.qualcomm.com>
- <20260828-drm-msm-hdmi-eliza-v1-8-67843277de17@oss.qualcomm.com>
- <294b2d4c-31d7-42fa-a55a-b57fc7d0ef6f@oss.qualcomm.com>
+ <20260828-drm-msm-hdmi-eliza-v1-9-67843277de17@oss.qualcomm.com>
+ <65f0a137-851f-46a1-a915-bbb2ecfd7f93@oss.qualcomm.com>
 From: Krzysztof Kozlowski <krzk@kernel.org>
 Content-Language: en-US
 Autocrypt: addr=krzk@kernel.org; keydata=
@@ -103,37 +103,35 @@ Autocrypt: addr=krzk@kernel.org; keydata=
  K9bCVaboTA2T77QYkRcRJYSsO1alGX0ome/hMLD1daXlkrNUp1HWa3K4iytLRXjCSIorWiGs
  n+q3krnpXu3TFkA8qtOFZMdnIiFuiq1yLT8hptsV5xh1TA2nsVvSYiaCr3q4s4BKjS/KrLDb
  qoxzw8ISjdUp4pA85vb6YLCmb39NgidD+7PmAr65lBNveIFynTgsja1rRQ4=
-In-Reply-To: <294b2d4c-31d7-42fa-a55a-b57fc7d0ef6f@oss.qualcomm.com>
+In-Reply-To: <65f0a137-851f-46a1-a915-bbb2ecfd7f93@oss.qualcomm.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-On 31/08/2026 18:43, Konrad Dybcio wrote:
+On 31/08/2026 18:45, Konrad Dybcio wrote:
 > On 8/28/26 4:05 PM, Krzysztof Kozlowski wrote:
->> Allow scaling the domain rails with PM OPP, which uses the pixclock
->> ("extp").  This allows proper votes depending on requested HDMI pixel
->> rate.
+>> Qualcomm Eliza SoC with DPU v12.4 comes with HDMI on INTF_11 with
+>> additional INTR registers.  The device clocks look different comparing
+>> to last variant of HDMI from MSM8998.
 >>
 >> Signed-off-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
 >> ---
 > 
 > [...]
 > 
->> -	if (hdmi->extp_clk)
->> +	if (hdmi->extp_clk) {
->>  		clk_disable_unprepare(hdmi->extp_clk);
->> +		dev_pm_opp_set_rate(&hdmi->pdev->dev, 0);
+>> +	hdmi->pixel_src_clk = devm_clk_get_optional(dev, "pixel_src");
+>> +	if (IS_ERR(hdmi->pixel_src_clk)) {
+>> +		ret = dev_err_probe(dev, PTR_ERR(hdmi->pixel_src_clk),
+>> +				    "failed to get pixel src clock\n");
+>> +		goto err_put_bridge;
+>> +	}
 > 
-> FWIW rescinding the vote will happen automatically as the device runtime
-> suspends. If you think this is necessary, let's do
-> 
-> dev_pm_opp_set_opp(dev, NULL);
-> 
-> instead, since dev_pm_opp_set_rate(0) is a ""dark pattern"" that is
-> usually misused, see e.g.:
-> 
-> https://lore.kernel.org/linux-arm-msm/20260728-topic-dpu_power-v1-0-e7783b859a70@oss.qualcomm.com/
+> Why do we need to toggle the source clock directly? Is the clock
+> driver broken?
 
-Ack
+It's getting reference not for toggling - there is no prepare/enable.
+It's getting for reparenting to solve the same problem DSI has -
+assigned-clock-parents are reparenting to PHY PLLL before PHY is on
+leading to stuck RCG.
 
 Best regards,
 Krzysztof
