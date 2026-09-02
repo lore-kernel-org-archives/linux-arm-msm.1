@@ -1,185 +1,103 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 276B54A43E3
-	for <linux-arm-msm@vger.kernel.org>; Wed,  2 Sep 2026 14:45:24 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id C08524A43F3;
+	Wed,  2 Sep 2026 14:50:43 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=217.140.110.172
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788360328; cv=none; b=MwGSgRlaboz3hTehNc7ifkW90rH7OuqcbcB/+Ji/bNnT6bRARF7j3lViSL390GG3xT/p1sBCobfgPH9Pzpe0tC9UYwYAbKwqBl5N8tSNcTG+OqwGlnzHEWdgHVV4SB9Nu8MeLJS1eOTipB+b9fkwUgkW5T4Dlt0iqSBQ/4Uwrx8=
+	t=1788360645; cv=none; b=NaFjjsri+81hJD0p67pbi9iVPdifg49Mg3RXYf2KPzsOxMq28IO/WPRbYcncaSdNvfUSIPb1ZKQ/nz5fhRzvP6VxBRc1WhLCQg+8314Z/P3hPeQP60xosEYdpqkR2qzUB7jIfkny5F88mAJnuMPh1Bl5K7QXpE9yrUKNBG2dRnM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788360328; c=relaxed/simple;
-	bh=2XSYd+uMeH5gLakhM/d5Rj7ofyalwIJWFXM60UvRoyg=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=J1JczfdKojizv73l3KtAyTBwGhWPK87tmOS29XdCpmvigPVG17HodsaTe6SHXOTi7mADXx+9UTHfpqQDg83EMpKK1e8uTTVanBmWSR0sMT1dHGUis51v6qGQrbUEgUiIzY03vsUjUNc3fiQY06sgUMMl4TahY2bogDVR2RKxyuw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=RKLaWNSk; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=CjppTQaL; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1788360645; c=relaxed/simple;
+	bh=m0jny4wcFlIbbROvQ/Pj/W5LQgowElOjxlCFyylSeC8=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=IXXhpwKya3pLlZ0weZ81OVN7VsQK84mDow1H4plPiR3Sb9RH5QVbVqY5guAY9evkg35rvGJ9S782D//87cNCo7c4tMx3Tzf9/O0gYkY27e+rboXmBeXCsIhMrFYJrj4wKjZ+c0NOBlUjQpxaUauiZ8Z9ARsfPB0w4kbyy2LYUDA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com; spf=pass smtp.mailfrom=arm.com; dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b=WqrA6gTO; arc=none smtp.client-ip=217.140.110.172
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=arm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="RKLaWNSk";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="CjppTQaL"
-Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 682CR9do1647742
-	for <linux-arm-msm@vger.kernel.org>; Wed, 2 Sep 2026 14:45:23 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:message-id
-	:mime-version:subject:to; s=qcppdkim1; bh=FCRacwcNCuuftR2uomAhOs
-	TH/tlq0gfZo384jWYVro4=; b=RKLaWNSkFGtMRs9GGg5f+9U6pUEUbPfgikOSKN
-	eOSmiA9uy/EcXwjzZ9oaSVxX3fG2RE44XFotftIw8ogU9s/65A96PAJ80wKy/9Ad
-	5mCBBbzaS8rbmt3TA3XmMWiXuCTl8MotAxEPby7WTb2tNJHNiqCI1VebjLlSfAuy
-	eYhxyOaA6OJ8Dxt9A3pLgtdTqFfW3T40wYuoErBas+MwWjaLAF5GGSmob/Zj+4Kv
-	3cvdW4z6i6nLF/44icmDiHFbH6gukSCPfqtK1Qimc9cMEgspeMrkz0DCyzfJHiLK
-	CL3gh/avw2t0q/Y4s1LB6z/7mO7qsK+kmajXQu8XUJTMNLhA==
-Received: from mail-ot1-f71.google.com (mail-ot1-f71.google.com [209.85.210.71])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gejv88s8m-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 02 Sep 2026 14:45:23 +0000 (GMT)
-Received: by mail-ot1-f71.google.com with SMTP id 46e09a7af769-7f66ceea676so1476078a34.2
-        for <linux-arm-msm@vger.kernel.org>; Wed, 02 Sep 2026 07:45:23 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1788360323; x=1788965123; darn=vger.kernel.org;
-        h=cc:to:message-id:content-transfer-encoding:content-type
-         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=FCRacwcNCuuftR2uomAhOsTH/tlq0gfZo384jWYVro4=;
-        b=CjppTQaLtZimUey+kqzvj3TaQG+9FDdgYW3mnkX718ntn3zUPhjXbVj2x6j34uxzp1
-         nMx3QVHQjM97UhCL3hSnZl64WMqcf8T9lAdtee/lot1YfDjHkJzkVecZa3Xvtl0Onr2t
-         TOE7IG4HaI1heEL7avEirePM9XGb1/VPQMua01I96VUQ6rdwt8Wm3eu1I+wSeHQ1uQCW
-         Hlp4wNFPazj34oSe3YIZkmf31skuN4IDnEAtGDLxqnrcgX/8DhZgnz9DyN12Lzi6RCC2
-         TdpDhFcsawprJC65DPBklZoxHLRkfauPsiI9bhJrJXFQTIWm+1M+Jeo6CRMCifwJDyVO
-         R5dA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788360323; x=1788965123;
-        h=cc:to:message-id:content-transfer-encoding:content-type
-         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to:content-type;
-        bh=FCRacwcNCuuftR2uomAhOsTH/tlq0gfZo384jWYVro4=;
-        b=qanJyQrwIefPoeSJq7yYa5coWs7x8fbGIm1INfikPefvF9AIaasI3i2+pSpiGFYV4T
-         5FXq1LcfbjdkasFPxClFE9rrflFDQscFRJmkUvcPNwXw5rY/3vgBabsq7XevLL+YcXNr
-         NbJUXS/lTCEethsDbgHAi268BXDVIzI7nwXISCD6ZksXmRRS950dHzYjNvtD7HpK0wgK
-         QfP+unYLWbk6FobL6Lx7DJkKMZ3hTtdV+0VrmgYNUXdDgWB4FJ8siwfv4ayI3PRTishb
-         WVKzYC0uqY864VkFtPGkkWAFrt9qXXlVhfxnxI0DZvbgoPUjmCMTjnEC2ldywiylowFZ
-         7+zg==
-X-Forwarded-Encrypted: i=1; AHgh+RpqHmgjv9MyZCFUG7inLNG6Fm6pnBC4ROD7teXYXvhvC5YiSNLvKud0FOP55/8xw+x0hb1E+C+xdlvJSRBE@vger.kernel.org
-X-Gm-Message-State: AFuF++lG+j/N/jy0s6PQa8Ct/Z7TRoob8w9m5pOz5BMRi3bI+EnM+Kir
-	Yzq1+mTwPrVNLE5LUGo/ptLJhHe/Dc0yBsTjFmi0AkvCEelnunXmG2eqOxRRqi98n1XBLZ0WBmV
-	G6pNajMc2qw1uLBbdX8rYLGWJpY3FdNxYNllhcasHd3RnrRib7TvlP3WO4fKje4AgouS1
-X-Gm-Gg: AR+sD11Uds51KsOU1POkwmDyOwbj6TIOwpnXYuC7g9M7IOQEBRFtXO7zcBOimDD0FXi
-	Zn86eKt++nc9E1pH9kbIzoiFNYI9qHyI2dqPG77Lw3gevbmwwBtccSYf/rx+I4AAQ/AFUNLQ46v
-	3PMZSPp+wLrLNj8EjBw6Jc10MV9ARw40t5PElGp/aQmxSnixH0LDBN22DJdJwrTx2w5QSQO4Hig
-	PgTLtJc44/+YoJ6h0Zt1eCAzWSPB/t/JXPtmL8JOgR9B3PyilwEOb1VragAUzHdvQm7j/n8ctL/
-	D/FlvGyc+Fm58c4fVb1bXh0K7vechRG/h5LRhJlW5q0ACeEBc5vbBvGsgzZ1gYtVUuk50ZlTiBu
-	8oLmdDjxVElNJJAIXQo46HSHigWxYTiZfwhI=
-X-Received: by 2002:a05:6830:2644:b0:7f4:bae7:b00d with SMTP id 46e09a7af769-7f77c3d32edmr5060982a34.0.1788360322536;
-        Wed, 02 Sep 2026 07:45:22 -0700 (PDT)
-X-Received: by 2002:a05:6830:2644:b0:7f4:bae7:b00d with SMTP id 46e09a7af769-7f77c3d32edmr5060940a34.0.1788360322056;
-        Wed, 02 Sep 2026 07:45:22 -0700 (PDT)
-Received: from hu-arandive-hyd.qualcomm.com ([202.46.22.19])
-        by smtp.gmail.com with ESMTPSA id 46e09a7af769-7f74caad7d0sm2427286a34.4.2026.09.02.07.45.18
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 02 Sep 2026 07:45:21 -0700 (PDT)
-From: Aniket Randive <aniket.randive@oss.qualcomm.com>
-Date: Wed, 02 Sep 2026 20:15:13 +0530
-Subject: [PATCH v1] i2c: qcom-geni: Clear stale TX/RX buffer pointers after
- GPI cleanup
+	dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b="WqrA6gTO"
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 25E4C165C;
+	Wed,  2 Sep 2026 07:50:39 -0700 (PDT)
+Received: from [192.168.178.24] (usa-sjc-mx-foss1.foss.arm.com [172.31.20.19])
+	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 57F573F882;
+	Wed,  2 Sep 2026 07:50:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
+	t=1788360642; bh=m0jny4wcFlIbbROvQ/Pj/W5LQgowElOjxlCFyylSeC8=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+	b=WqrA6gTOlzJu3CsI2jdMMJr2Zts4so8JmcOtZeyDeE6DL33REl/Qmy2Af7HOUIwQb
+	 IAvjxc2+B0rwmtJM+I6wdqkMb7OPbVx2of9wpdfd1lMW93gQuPBIbPSp7gLa3nQse2
+	 K5GpLsD+hTyvUtDi5zTx8wJnApH8jtGs3Cwp46jE=
+Message-ID: <99e2cbcb-993e-4f83-b7ec-c333407aabf9@arm.com>
+Date: Wed, 2 Sep 2026 16:50:38 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH RFC 07/15] arm_mpam: Fix the RIS index range check in
+ mpam_ris_create_locked
+To: Yin Li <yin.li@oss.qualcomm.com>, "Rafael J. Wysocki"
+ <rafael@kernel.org>, Shanker Donthineni <sdonthineni@nvidia.com>,
+ Conor Dooley <conor+dt@kernel.org>, Fenghua Yu <fenghuay@nvidia.com>,
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, Rob Herring <robh@kernel.org>,
+ Reinette Chatre <reinette.chatre@intel.com>,
+ Konrad Dybcio <konradybcio@kernel.org>, James Morse <james.morse@arm.com>,
+ Ben Horgan <ben.horgan@arm.com>, Bjorn Andersson <andersson@kernel.org>,
+ Danilo Krummrich <dakr@kernel.org>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+Cc: linux-arm-msm@vger.kernel.org, ganapatrao.kulkarni@oss.qualcomm.com,
+ trilok.soni@oss.qualcomm.com, devicetree@vger.kernel.org,
+ driver-core@lists.linux.dev, Srivathsa L Rao
+ <srivathsa.rao@oss.qualcomm.com>, Huang Yiwei
+ <huang.yiwei@oss.qualcomm.com>, aiqun.yu@oss.qualcomm.com,
+ linux-kernel@vger.kernel.org
+References: <20260811-mpam-resctrl-dt-knp-support-v1-0-ea6397bead59@oss.qualcomm.com>
+ <20260811-mpam-resctrl-dt-knp-support-v1-7-ea6397bead59@oss.qualcomm.com>
+Content-Language: en-GB
+From: Andre Przywara <andre.przywara@arm.com>
+In-Reply-To: <20260811-mpam-resctrl-dt-knp-support-v1-7-ea6397bead59@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260902-i2c_double_free-v1-1-0f582ef32e55@oss.qualcomm.com>
-X-B4-Tracking: v=1; b=H4sIAHg2mGoC/yWMQQrCMBQFr1Le2sBPFpV4FZHSJK/1i7SS2CKU3
- t1olzMws6EwKwsuzYbMVYvOUwV7ahDv/TTSaKoMJ64VL9aoi12al/BkN2TSiO+DBH9maxNq9co
- c9PM/XrFa3A5XlvBgfP9W2Pcvh+vTu3cAAAA=
-X-Change-ID: 20260901-i2c_double_free-09ab0b97e61d
-To: Mukesh Kumar Savaliya <mukesh.savaliya@oss.qualcomm.com>,
-        Viken Dadhaniya <viken.dadhaniya@oss.qualcomm.com>,
-        Andi Shyti <andi.shyti@kernel.org>
-Cc: naresh.maramaina@oss.qualcomm.com, linux-arm-msm@vger.kernel.org,
-        linux-i2c@vger.kernel.org, linux-kernel@vger.kernel.org,
-        Aniket Randive <aniket.randive@oss.qualcomm.com>
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1788360318; l=1839;
- i=aniket.randive@oss.qualcomm.com; s=20260325; h=from:subject:message-id;
- bh=2XSYd+uMeH5gLakhM/d5Rj7ofyalwIJWFXM60UvRoyg=;
- b=5h5W2YkcbVmFfnSC4JOb1Q8CMLT5cgcG6+5iN5wnZ4Kjh9MosBoBn34wkyqzQ3tWv++9eOARf
- uqY3rd7vp34B9x4DJT+vvgt3M8GZqgeYsVJDl6p63tPILpAw7dAaf2i
-X-Developer-Key: i=aniket.randive@oss.qualcomm.com; a=ed25519;
- pk=4o37X1ZqGbCO/T2SR8kq/HnWvq0yb1RUlFuNukovbQk=
-X-Proofpoint-GUID: MFIFdW3L03UZsDny6oUhGk9fuMo09AdN
-X-Authority-Analysis: v=2.4 cv=L+wtheT8 c=1 sm=1 tr=0 ts=6a983683 cx=c_pps
- a=OI0sxtj7PyCX9F1bxD/puw==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
- a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
- a=EUspDBNiAAAA:8 a=jmCgmGzY3TN8gweiy70A:9 a=QEXdDO2ut3YA:10
- a=Z1Yy7GAxqfX1iEi80vsk:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTAyMDEzMCBTYWx0ZWRfX6LQL/Hy9XgpP
- NQrbu78c9DQYrHEKgOp3rXxo8qr30hqo59TNJdj5jH7SfKdpVh3/lAQuhmxRli+ebglqgNGc7Vx
- 2RjPQeLoBNIn1U2s8JyRKceILPqeqYCHd86gyyE6fVvIGzpIrk5nBiEbSsehv4swRZWrp+0DkCO
- pxX4c7ucXdPWD7/Zot96IV26WOaCTUParvbMkRDF0Cx0e8cfdTcJiLNJFKvt+8noGq/DxVlA3LR
- 9PkoWthm+enZlZGgR4WRhdB2IH0FJnEeE8TPrEfwgrX+BAqwVZUMP3quqNlvbOP0SKIfY+q8Tdk
- iPY+w/qGE8acXCiOGiciUwPaWpixcGvAnIQIkIouiUZo+kY05C+sf53/PXdLMMWwT/cmN8LzMZ1
- gdZrUaUtHAgtQbePgxEMbBLxP6WEqSi+JUyaC4YbErDGzumpp+ZmkTyM/VcHyq8+rinU84qg+94
- 16kCiLIxQTeeGAViL8Q==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTAyMDEzMCBTYWx0ZWRfXxLSHe3ggK7Wi
- Ul6NRgSQ6GrM4wdmpJf11qcw+pKIFWC2qOEzCGjM2IQXX9IFxdAJfIvDwgvQHEJHIko9J5OsQ3x
- Q54ZppaF7p6wK/k11xCgzZgOq8DoLkY=
-X-Proofpoint-ORIG-GUID: MFIFdW3L03UZsDny6oUhGk9fuMo09AdN
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-02_03,2026-09-01_03,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0 clxscore=1015 bulkscore=0 impostorscore=0 phishscore=0
- spamscore=0 suspectscore=0 adultscore=0 priorityscore=1501 malwarescore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2609020130
 
-The TX and RX buffer pointers are reused across messages in a GPI
-transfer. After a buffer is unmapped and freed, the pointer is left
-unchanged. A later message can reuse the stale pointer in the cleanup
-path, causing a double unmap and double free.
+Hi,
 
-This can happen when a READ message is followed by a WRITE message,
-leaving a stale RX buffer pointer behind. A similar issue can occur for
-the TX buffer when a mapping or allocation failure prevents the pointer
-from being updated before the error path runs.
+On 8/11/26 15:30, Yin Li wrote:
+> The RIS selector field is defined as MPAMCFG_PART_SEL_RIS (bits 27:24),
+> which is 4 bits wide and gives valid indices 0..15. MPAM_MSC_MAX_NUM_RIS
+> is defined as 16, so the check should use >= to reject index 16 and
+> above. The previous > check incorrectly accepted index 16 as valid.
 
-Clear tx_buf and rx_buf after unmapping and freeing them. This ensures
-later iterations and error paths only see a valid buffer pointer or
-NULL, preventing double unmap and double free issues.
+Indeed. Either the maintainers pick this one independently, or put it up 
+front in any repost.
 
-Signed-off-by: Aniket Randive <aniket.randive@oss.qualcomm.com>
----
- drivers/i2c/busses/i2c-qcom-geni.c | 7 +++++--
- 1 file changed, 5 insertions(+), 2 deletions(-)
+And add:
+Fixes: 01fb4b822472 ("arm_mpam: Add the class and component structures 
+for firmware described ris")
 
-diff --git a/drivers/i2c/busses/i2c-qcom-geni.c b/drivers/i2c/busses/i2c-qcom-geni.c
-index 942cfeee99ba..4965872b47d5 100644
---- a/drivers/i2c/busses/i2c-qcom-geni.c
-+++ b/drivers/i2c/busses/i2c-qcom-geni.c
-@@ -911,10 +911,13 @@ static int geni_i2c_gpi_xfer(struct geni_i2c_dev *gi2c, struct i2c_msg msgs[], i
- 			goto err;
- 		}
- 
--		if (!gi2c->is_tx_multi_desc_xfer)
-+		if (!gi2c->is_tx_multi_desc_xfer) {
- 			geni_i2c_gpi_unmap(gi2c, &msgs[i], tx_buf, tx_addr, rx_buf, rx_addr);
--		else if (tx_multi_xfer->unmap_msg_cnt != tx_multi_xfer->irq_cnt)
-+			tx_buf = NULL;
-+			rx_buf = NULL;
-+		} else if (tx_multi_xfer->unmap_msg_cnt != tx_multi_xfer->irq_cnt) {
- 			geni_i2c_gpi_multi_desc_unmap(gi2c, msgs, &peripheral);
-+		}
- 	}
- 
- 	return num;
+> Signed-off-by: Yin Li <yin.li@oss.qualcomm.com>
 
----
-base-commit: 89c07d98716a13454ec3fd9f97689e812cc71bd4
-change-id: 20260901-i2c_double_free-09ab0b97e61d
+Reviewed-by: Andre Przywara <andre.przywara@arm.com>
 
-Best regards,
---  
-Aniket Randive <aniket.randive@oss.qualcomm.com>
+Cheers,
+Andre
+
+> ---
+>   drivers/resctrl/mpam_devices.c | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/drivers/resctrl/mpam_devices.c b/drivers/resctrl/mpam_devices.c
+> index ddc15249ec1e..cc9fa1d78925 100644
+> --- a/drivers/resctrl/mpam_devices.c
+> +++ b/drivers/resctrl/mpam_devices.c
+> @@ -725,7 +725,7 @@ static int mpam_ris_create_locked(struct mpam_msc *msc, u8 ris_idx,
+>   
+>   	lockdep_assert_held(&mpam_list_lock);
+>   
+> -	if (ris_idx > MPAM_MSC_MAX_NUM_RIS)
+> +	if (ris_idx >= MPAM_MSC_MAX_NUM_RIS)
+>   		return -EINVAL;
+>   
+>   	if (test_and_set_bit(ris_idx, &msc->ris_idxs))
+> 
 
