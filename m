@@ -1,139 +1,121 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1ED81449B1A
-	for <linux-arm-msm@vger.kernel.org>; Wed,  2 Sep 2026 13:26:31 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id D30AE4137AE;
+	Wed,  2 Sep 2026 13:29:44 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=217.140.110.172
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788355593; cv=none; b=t7S2DoCnEjF26r/J7sbT9GCRlCAs1hkxBD6jZTHiyX/e/pmd2OBVD1vJ6my6CBQrt+ScxVAuasTtPDicjI2velg0WHDbmUjHm6NzQwh7n7a1JxqolnOInER9bvJBFVU4TLFqCyAshM6hkQ+ZbpK0eneU2XMf/+2PjjPx0OvBSgc=
+	t=1788355786; cv=none; b=ehhdDAcLu431d1luzidcFje/2mti7KF5CUUh07twIe16jjxSNodZRq5aEpsLcXDYkRihEhIg5DXYmIkvHMDLAF4lz93NzpDm2jf5dJ9St+OBHqLcquMJA7ly2Kr6SJl0GIS0BXQp9mw/9Oh1Epk4SscB8WQ1mOZwqwoPBtAwLs4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788355593; c=relaxed/simple;
-	bh=IOYGewLhDOFm4x0hRfNM4AYVD0ENzMjIIDCNxqGXlNA=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=jTraYJ9zuvinAjnt7I0H4sGVzIIYRwx5qQ0kr5R/1RuHx3nXgaNzEc4+ljGW1sUrNHp3tYfAt492IH01YE9v/Py8uM50U4BP0/phKQIOL1xhldLuWFc26hXvje7YDAMVsFmHVzrPxzHMhtZq//l9OKqRI37+l0JEisU54d5Ovx8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=EqQzVKqv; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=RtFJZN2r; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1788355786; c=relaxed/simple;
+	bh=3kzF7itCNI3649Jd2yl6+o37lkdhtqpt1JNljsXi5vg=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=ZHiZYf4JwcD72IppbNwufmYsaEEzrOAiYiYdnkxTuaJtLGQML6LwgsobAwDbq1PhnvCfFUoHqvc61wWFwKxRLLcbGu8kxLfHSjiREuJck7bwhvpsF8TDwmovrudynX4e1IV9BabzRrQMJ+mHvG/Ge+jJFkeRJpJtiO+CXxgqtBU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com; spf=pass smtp.mailfrom=arm.com; dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b=jAI84FJg; arc=none smtp.client-ip=217.140.110.172
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=arm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="EqQzVKqv";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="RtFJZN2r"
-Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 682CRP2x2002273
-	for <linux-arm-msm@vger.kernel.org>; Wed, 2 Sep 2026 13:26:31 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-type:date:from:in-reply-to:message-id:mime-version
-	:references:subject:to; s=qcppdkim1; bh=+fr0qc4FAUTiDXfo042zfsBe
-	8gb47pwHgpFgz0s03Xo=; b=EqQzVKqvMp977hnDfUJoKXWHcl0xIlPx7Sr+CeEi
-	zjic/9f3xzMdGaaJWM7IlK1gG2BWNi7EpJ5+tVvGLhlnE/OsVRcoabhNQq40umMo
-	35t2Nh/JsnmDO41Wk+TUj8NQn+t3IMibAjj6I9XTZv6hiQybJduUEQCrfZibMVPi
-	o5uGj5Aint16kYgkEfYWSwQ3eCpUKff1XS1QjHf51m3LlsbZrisEjKa2aEkMTrYH
-	29Z+o2KPdWgW7/2EHOzgjJ92Z7P0tmwyu1M/wA893S7vba0bjZ0mBnVtBvdFiDtR
-	k6ctWy5xdnXuapB7I15nxd3cxwOXpwkrbropD1d3FZqq7g==
-Received: from mail-qv1-f70.google.com (mail-qv1-f70.google.com [209.85.219.70])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4geguy0yy6-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 02 Sep 2026 13:26:30 +0000 (GMT)
-Received: by mail-qv1-f70.google.com with SMTP id 6a1803df08f44-90e9bc1fb67so20523946d6.2
-        for <linux-arm-msm@vger.kernel.org>; Wed, 02 Sep 2026 06:26:30 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1788355590; x=1788960390; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=+fr0qc4FAUTiDXfo042zfsBe8gb47pwHgpFgz0s03Xo=;
-        b=RtFJZN2rWq6e9eZc+Q/FeUy9sD4VJD00VxSwYj6HIham8vurkdIMBJpInXr7CwqGyA
-         uII/IGrJsmMbGuUKsEJ08rJs9rpAaMf3XTvQzTWTXX2Mt3Hx8hmpMRHoO0hKrOBOyYVG
-         snyZrHkymbIoTr36Q1Yglj6mKieUSNmXb3AxUg9+VkwD3CU/CoFdkdhU3E0o2UMjFgbS
-         ifL9Sj3vha1JSpd9qFAdBd2s/ieX9mlMWNryAMuh6sLovx43CUG6PEWdrbx0Z8mayp5Y
-         OYznsosqD6LkDVWvlZyI4udfEvpGS8y5VJyCGj+g6f2aIsUVjNVaG71xHRZZU48p8NdU
-         Omwg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788355590; x=1788960390;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=+fr0qc4FAUTiDXfo042zfsBe8gb47pwHgpFgz0s03Xo=;
-        b=b2FqCIR8LMY/b+UI9+b1l6/ZHZI1rh4rEVTtKswHLTOrnNrl1BwDIT+D9lHaHZ4Z6p
-         I20z1qQEqq97UJdosS9BkMgrcNuIEsglF1aoSjTpfolqgfTd8ttoCjukp+NCsdJ+zIef
-         uxf2EdvF/T5VF8fxastLVv0slGkYWJThqJ+AuCk3hoCTml3uNaDEmmmFXAilvePuWiR7
-         1KLgIWO9dIUS9nP/lyb1ElFMZi1y/WKe1p+uYSGZm2RtovDv7Vdqp1w3+YBa4ajtE8pJ
-         ZAFYoqPsLLn3bsNCgWMXW0YmZvUCzIV+LFfDzyZSzKtnzhNdDZiOc+2UQJ+2s3emeE9J
-         SLGw==
-X-Forwarded-Encrypted: i=1; AHgh+RqgRUdJycKYaBwKTcHSzxvgQAIbN21motJzGIrgD1rHbiqNPL/CEszvqdtUwq8N3fejyqZvxDjEDMRf8C29@vger.kernel.org
-X-Gm-Message-State: AFuF++n7EkQBPRxHIczI/2G/1YNcZfF0TV6fCyyyqZCNqou2BSjDlYrD
-	D7retq2XfWaox3BhfH3Rh5Qk+LcZj5VNj+P7YXBWrSyR7RHl3NhSEvfrbw9q7UU+rxUUBDLBzsw
-	5ZBlH+gDkl7U3e1ELAHSaPTi7XkhlccuiVGNEEkOYZVwJwGyIk93otzKN+otJg9p3e7vz
-X-Gm-Gg: AR+sD10wlLgfZfMk+hI6XFRXRQKt4qEDsHw0tb1XJJyfMrGpNsbZKQAGl7wk/je9Z83
-	AxW6ZLaUJ5qG8WCmN05dVeYQl2BBZN6TW6VKQZmQKHujy5buU2nnh5XUC58BosSARmFZsFRQ/r4
-	aXhwiP522kx8s+ZuVAJcqfl5/v3xnKsk9iMVjwwxmBFgQa9pGnoO1q+11AN6xysvBcj/IGe1T6V
-	Zj6sXO3nRvhirX6JR7DdixGIihuJfusqeOVcjYe85bRWQ4U36UJ9CGB6cakyDFY/nHIFRd2YbR1
-	/cLW5xfqC5E1fo89RrdLbeolDYffwf5X2Zy+kaBnlSg8G/8RqvdLZi8fLUMqgQBg2qFi3hwzRtJ
-	KPMDBzpk1y+ci2w==
-X-Received: by 2002:a05:620a:a191:10b0:939:2812:8bda with SMTP id af79cd13be357-93960e1dcd2mr457336885a.16.1788355589651;
-        Wed, 02 Sep 2026 06:26:29 -0700 (PDT)
-X-Received: by 2002:a05:620a:a191:10b0:939:2812:8bda with SMTP id af79cd13be357-93960e1dcd2mr457325385a.16.1788355589014;
-        Wed, 02 Sep 2026 06:26:29 -0700 (PDT)
-Received: from oss.qualcomm.com ([86.121.170.178])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48448ed30c0sm6630997f8f.24.2026.09.02.06.26.26
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 02 Sep 2026 06:26:27 -0700 (PDT)
-Date: Wed, 2 Sep 2026 16:26:26 +0300
-From: Abel Vesa <abel.vesa@oss.qualcomm.com>
-To: Dale Whinham <daleyo@gmail.com>
-Cc: Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>, linux-arm-msm@vger.kernel.org,
-        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-        =?utf-8?B?SsOpcsO0bWU=?= de Bretagne <jerome.debretagne@gmail.com>,
-        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-Subject: Re: [PATCH v2] arm64: dts: qcom: x1-denali: Add volume up/down GPIO
- keys
-Message-ID: <whnzjy22lzm6ln7qzzqx5jinmaxaronsafm33cej5ox2aeo2p3@ctegjf3sdmw6>
-References: <20260902-surface-pro-11-volume-buttons-v2-1-1d893c7b5440@gmail.com>
+	dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b="jAI84FJg"
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 610CE165C;
+	Wed,  2 Sep 2026 06:29:40 -0700 (PDT)
+Received: from [192.168.178.24] (usa-sjc-mx-foss1.foss.arm.com [172.31.20.19])
+	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id B00DA3F673;
+	Wed,  2 Sep 2026 06:29:40 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
+	t=1788355784; bh=3kzF7itCNI3649Jd2yl6+o37lkdhtqpt1JNljsXi5vg=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+	b=jAI84FJgJAvnyhbJiH1Pxn7thUuzLd5dcmWWV+5W22olMfH0LkXLMmpwmz0Dk3KR3
+	 5m2gPwMIFrSaptQU5elbNsEPXBlpZKbWjuJZQZYwq7FwXhEQvDN/S+hzOedqTuhDM8
+	 0HIoyrUUju4wL7kqZCcmtszvpBFN2e2KxZjUWK0c=
+Message-ID: <e6d4bb93-66fa-4149-985d-87d895081ea0@arm.com>
+Date: Wed, 2 Sep 2026 15:29:39 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260902-surface-pro-11-volume-buttons-v2-1-1d893c7b5440@gmail.com>
-X-Authority-Analysis: v=2.4 cv=UZthjqSN c=1 sm=1 tr=0 ts=6a982406 cx=c_pps
- a=oc9J++0uMp73DTRD5QyR2A==:117 a=G5ilVN+faPP2Ze1SHB4iFQ==:17
- a=kj9zAlcOel0A:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22
- a=EUspDBNiAAAA:8 a=pGLkceISAAAA:8 a=RsaAdo6knjiJn5qj3ScA:9 a=CjuIK1q_8ugA:10
- a=iYH6xdkBrDN1Jqds4HTS:22
-X-Proofpoint-GUID: pBQJQTGg2hWdOEzVe4ObZ4qFSlKpUcSJ
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTAyMDExOSBTYWx0ZWRfX+iwwHwYlseQC
- kjb0ARV/2cPrXbzSrwB4mFrVMRpgtGM89VRhHb3ibA4G43ey5zLGdJIi7cqguuaUuYd2Taqk8d4
- 8aQMjl4tgLn0Nh6t6ca5yAGJfaFkVs4=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTAyMDExOSBTYWx0ZWRfX8kirdYMAKS0P
- 7/Vp6P2IzabKhnLdyPcLR4ODv7OatIf2G5d8TWF4/bGmenDgRZu0IiaNSoQweFR32MYydm4+kCW
- NDh2wWIKpHx0K/l6l9zMJsncsJ55fAJYePygAm6JB74Y/HsqMM34pnYs5IERLt/20ufmJPqMQJj
- tie4XgiUitpFe3TWVyrhhos3SWkCq17cIDxv8S+hJPk67lL4EnnzTMNAPhefo74tjpZJHsguq20
- h+QUt1c3RfJ7flFwUWa9ifhYFF4loyV9PR8H3v2qCXz+LyFzlYu7Sgyt+AiN73uDFBJHlCmSnT1
- 1UsnJhHLmj3XLyf6q2W/cEWhP0e9b/aZTQWRehOoNQyLUNUe1YG+pKnnpRCahBDgF6X0g8ee/0b
- yLtSXsP7OsfW/+qn5MNvCY+bChCzU7HntN92tMKgcoQyx3lEIjZCSrVKMAyyOU2/aTojClggcF8
- Qx4L0M1bPqEXjp5dF0w==
-X-Proofpoint-ORIG-GUID: pBQJQTGg2hWdOEzVe4ObZ4qFSlKpUcSJ
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-02_03,2026-09-01_03,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- suspectscore=0 bulkscore=0 impostorscore=0 adultscore=0 malwarescore=0
- lowpriorityscore=0 spamscore=0 clxscore=1015 phishscore=0 priorityscore=1501
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2609020119
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH RFC 05/15] arm_mpam: Fix device_node refcount in DT
+ resource parsing
+To: Yin Li <yin.li@oss.qualcomm.com>, "Rafael J. Wysocki"
+ <rafael@kernel.org>, Shanker Donthineni <sdonthineni@nvidia.com>,
+ Conor Dooley <conor+dt@kernel.org>, Fenghua Yu <fenghuay@nvidia.com>,
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, Rob Herring <robh@kernel.org>,
+ Reinette Chatre <reinette.chatre@intel.com>,
+ Konrad Dybcio <konradybcio@kernel.org>, James Morse <james.morse@arm.com>,
+ Ben Horgan <ben.horgan@arm.com>, Bjorn Andersson <andersson@kernel.org>,
+ Danilo Krummrich <dakr@kernel.org>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+Cc: linux-arm-msm@vger.kernel.org, ganapatrao.kulkarni@oss.qualcomm.com,
+ trilok.soni@oss.qualcomm.com, devicetree@vger.kernel.org,
+ driver-core@lists.linux.dev, Srivathsa L Rao
+ <srivathsa.rao@oss.qualcomm.com>, Huang Yiwei
+ <huang.yiwei@oss.qualcomm.com>, aiqun.yu@oss.qualcomm.com,
+ linux-kernel@vger.kernel.org
+References: <20260811-mpam-resctrl-dt-knp-support-v1-0-ea6397bead59@oss.qualcomm.com>
+ <20260811-mpam-resctrl-dt-knp-support-v1-5-ea6397bead59@oss.qualcomm.com>
+Content-Language: en-GB
+From: Andre Przywara <andre.przywara@arm.com>
+In-Reply-To: <20260811-mpam-resctrl-dt-knp-support-v1-5-ea6397bead59@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On 26-09-02 13:52:36, Dale Whinham wrote:
-> Configure gpio6 and gpio8 as volume up and volume down respectively, to
-> enable the volume rocker located at the top of the screen.
+Hi,
+
+On 8/11/26 15:30, Yin Li wrote:
+> When a cache-parented or memory-controller-parented MSC is probed via
+> device tree, the parent node was assigned directly to a
+> __free(device_node) variable without incrementing its reference count.
+> Both the parent and the cache/memory variable are declared with
+> __free(device_node), which causes the compiler to automatically insert
+> an of_node_put() call for each variable when they go out of scope.
+> Since both variables point to the same node but the reference count was
+> only incremented once by of_get_parent(), the node ends up being
+> released twice, causing a refcount underflow.
+
+Yes, looks about right: there is another assignment to both memory and 
+cache, they call of_parse_phandle(), which increments the refcount, so 
+we need to do the same for the direct assignments, to get the free'ing 
+done consistently.
+
+> Use of_node_get() to take an explicit reference so each __free variable
+> holds its own reference.
 > 
-> Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-> Signed-off-by: Dale Whinham <daleyo@gmail.com>
+> Signed-off-by: Yin Li <yin.li@oss.qualcomm.com>
 
-Reviewed-by: Abel Vesa <abel.vesa@oss.qualcomm.com>
+Reviewed-by: Andre Przywara <andre.przywara@arm.com>
+
+... though this should definitely be squashed into the respective DT 
+patches. Feel free to do so.
+
+Cheers,
+Andre
+
+> ---
+>   drivers/resctrl/mpam_devices.c | 4 ++--
+>   1 file changed, 2 insertions(+), 2 deletions(-)
+> 
+> diff --git a/drivers/resctrl/mpam_devices.c b/drivers/resctrl/mpam_devices.c
+> index 975ddab771b4..559fa09128b4 100644
+> --- a/drivers/resctrl/mpam_devices.c
+> +++ b/drivers/resctrl/mpam_devices.c
+> @@ -280,7 +280,7 @@ static int mpam_dt_parse_resource(struct mpam_msc *msc, struct device_node *np,
+>   		type = MPAM_CLASS_CACHE;
+>   
+>   	} else if (of_device_is_compatible(parent, "cache")) {
+> -		cache = parent;
+> +		cache = of_node_get(parent);
+>   		type = MPAM_CLASS_CACHE;
+>   	} else if (of_device_is_compatible(np, "arm,mpam-memory")) {
+>   		memory = of_parse_phandle(np, "arm,mpam-device", 0);
+> @@ -290,7 +290,7 @@ static int mpam_dt_parse_resource(struct mpam_msc *msc, struct device_node *np,
+>   		}
+>   		type = MPAM_CLASS_MEMORY;
+>   	} else if (of_device_is_compatible(np, "arm,mpam-memory-controller-msc")) {
+> -		memory = parent;
+> +		memory = of_node_get(parent);
+>   		type = MPAM_CLASS_MEMORY;
+>   	} else {
+>   		/*
+> 
+
