@@ -1,87 +1,87 @@
 Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 555934A5C52
-	for <linux-arm-msm@vger.kernel.org>; Wed,  2 Sep 2026 15:01:36 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E72C84756BC
+	for <linux-arm-msm@vger.kernel.org>; Wed,  2 Sep 2026 15:02:18 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788361302; cv=none; b=ghfSuBnYTeu1RV3V429djfTG7F/Tt+wQi3++xDXyGo5a8RJMsVAg3dS3EtjXsROzL+IPQr1G5ZBmozLaRhhzBupUsEjQm/gew7zZzJ2zcbni/H10DobSkLMUEenAusXbLiYOqf2wEmH/RogLuZWXvfbFfYV286BXIbqa46SCOJ8=
+	t=1788361341; cv=none; b=M/LhFWu0cCxzLp/GAqOATtU59oUjtTqHDMLHOSOaWkLHgpBGcUWkaZo37AQpK0XzF2IV7I+Zoujo3pd6uGTwyTNmg/8K9+azRr83m6hnWnDUiuHSpRIMz0LjK5280UXO/HcwJn2XI8II7bmoliM06qgsAMYCCMbaFlVlYvsIlgM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788361302; c=relaxed/simple;
-	bh=bZG08AocPFbLDEUxFFmfC5QIhC/V/PzFbcuqhbde558=;
+	s=arc-20240116; t=1788361341; c=relaxed/simple;
+	bh=8ZSjNYTL8Ml6u8jCUwBjbxNKyQONvg0xPIbXWyCmk6k=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=F8yO3JykNo3Lj75PfKLh6OOm9h8t9g68qwsw3l5g/mKd/M52eLPVTXbiuI6QQ4e1Jkt1ZO5gi2nLNvEzIjzWlaC/UECYXxW9bVdWV1/AaQe5KN2P9tqzV8+eXp5pJgr8nDNCZhm1PPyKWygZ7eqpuvgDR6X9EQSbP2hPr09Vrfo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=mnL98ItZ; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=IH8gaSN6; arc=none smtp.client-ip=205.220.180.131
+	 In-Reply-To:Content-Type; b=Ay2702StaYE7sxbeYYkwDIRNZfkAlhxD7NzUS3Xeb3b8x2faJRSooYTZWhrgnXt/oWc6yGimIuyzhAaWay13sbwWtQzT3zJgwcegHQGNRRH2ImPrn2wG/zkdmvGlfMNE+/WnKmQQeVHIKOzU4PUYul13WI7/4W0/TZNhoF9Gsao=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=QqANDGqG; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=i5ytJ/bn; arc=none smtp.client-ip=205.220.180.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="mnL98ItZ";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="IH8gaSN6"
-Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 682Ecn9O1675891
-	for <linux-arm-msm@vger.kernel.org>; Wed, 2 Sep 2026 15:01:34 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="QqANDGqG";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="i5ytJ/bn"
+Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 682CR9Wk1647747
+	for <linux-arm-msm@vger.kernel.org>; Wed, 2 Sep 2026 15:02:14 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	1pxn+AJDlmps3CqVjI1Bkvkq9NQfvaIy9iIccLAqBlY=; b=mnL98ItZ7aKWDYr1
-	JcN9+siYyUBeWKF6y12pt7ags+1xAewv/xSGAw8so9f3U229OKlYvt7Rgu0awVl4
-	KrFasiQRvYbckBUItDK/Moq5I1OrOLqgxhk2LUSJ5rVzdOI+cGw+JW4/4Z36pruz
-	1tg0S1DbhJ4Sy9DX92Tmg52IT3bRPw0TYZPmfeW4k2XbyxxNvkWtxVwWhlQOwlhx
-	qKWGs3ZVrb+Px9rL05kZvul41VgocMSQOk1N/CviHSrxjUJj7IVmeckxjSkN6F7L
-	Euy0gdmwf+AsRbcez7Jv26cnremQE+71TdA+HV5C6jEk2xGmjyR/Nn1ZlPO2QfuW
-	kLLGAw==
-Received: from mail-pj1-f70.google.com (mail-pj1-f70.google.com [209.85.216.70])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4genrdr2sy-1
+	Kt8GHJ5keyTKWhMxN2RQEwwtSHHHEF1wieLuKB/lRZw=; b=QqANDGqGpXjF+DYp
+	IBRL6lfYikbQmTeC7c6WcGbbSL2wYiX9bvWlvwu084h1ED9ywp1Df3FbtmUTNCO/
+	yaZnc7Gzy07aBxyeIzJY59Wg2P75plwEbwzEbodjkNxBWzS1z3Wxf4z+1k11ABV0
+	u0lXx9kx+v/JmGSyJrduX4BrhuKweRfcZKnILKTBbyHVCtjD1kLV+tw37Ie6DXNH
+	PImaCSZ1FaNxN3sdB4ubnLMxCRc+ib1capPrp1HI9iNsTzMVFmNCLEh+RcI//mqp
+	dMglTA5ygllMR0MPjoDhtjgeVep0hlw2LmmQClTOxMK6OkxQx+7opzPBH0ZR7W8Q
+	hO4AqQ==
+Received: from mail-ot1-f70.google.com (mail-ot1-f70.google.com [209.85.210.70])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gejv88ue1-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 02 Sep 2026 15:01:33 +0000 (GMT)
-Received: by mail-pj1-f70.google.com with SMTP id 98e67ed59e1d1-396b9ef3070so2079705a91.3
-        for <linux-arm-msm@vger.kernel.org>; Wed, 02 Sep 2026 08:01:33 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Wed, 02 Sep 2026 15:02:14 +0000 (GMT)
+Received: by mail-ot1-f70.google.com with SMTP id 46e09a7af769-7e6b5741bbcso207401a34.1
+        for <linux-arm-msm@vger.kernel.org>; Wed, 02 Sep 2026 08:02:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1788361293; x=1788966093; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1788361334; x=1788966134; darn=vger.kernel.org;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=1pxn+AJDlmps3CqVjI1Bkvkq9NQfvaIy9iIccLAqBlY=;
-        b=IH8gaSN6wlqm3VnJ/kGc4tYTPFisFpvUq7Z4/L3rEHvHd23vIDgXbecJNu5qGrI5Jv
-         wz4ZirgkFjE6R5qDOchH4CAP8MM1EvFgFJDHmTlqjTadvpnFnogOxDxfCtsl7zT8ekYY
-         Un4EiOtxOxpRvAlFx3vkYjz0tPAPzJCv7StAHmJ+qRHUm/fzOsF4M2iusTSyuOz9wHBL
-         f0N2UPnG+ca6uTcQ6rw7tJzi3PnSF3g6Dm3FmyHVmHZ7co+F7J+glTK6bj8YqKzhPikH
-         9uy2o7+XmwIcP62aS2Uf0jbsbiILhueQbk778CG7eDLXXc9irJ5Ez2JnRagS1Fl23MAL
-         7olQ==
+        bh=Kt8GHJ5keyTKWhMxN2RQEwwtSHHHEF1wieLuKB/lRZw=;
+        b=i5ytJ/bnTUtQLBAn4ejjiY3aTnFDcynTvOvtRE1a545+Rqrb09IaYeqH6uSWpTVZ/M
+         LtjlcJN/9oaXZsunZVURLK/SGkdTQ8VzfKc73aowYByvj3fUf2GsOAqzKNwOAYVeeoe4
+         sB1riHN8QkdSfSxaK+BTF4jhjMZr7zTJt+Cygaw5XkIYCLykSFl8WRkEKv+pnUlkk7u/
+         4ilssEQCiIQDPpsQlsOyGPcWQT1xRm/H83O71dQvqFvUYJRF/7FjnSQVcORsmnTYCueH
+         ojCY7l/EYC1MjR9TfEnV/qoOvxfNwYDCIFqKNwA7AtF0ZPVV4EiPebwr5AKG+wR0FAya
+         Z8vw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788361293; x=1788966093;
+        d=1e100.net; s=20251104; t=1788361334; x=1788966134;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=1pxn+AJDlmps3CqVjI1Bkvkq9NQfvaIy9iIccLAqBlY=;
-        b=JWoXlR52B5YJmZP3M4gzAEF3uwhSTXEBFFa2c5o+LFyE+29wYiJPQ8M4IoWYg0Rm9+
-         khxkmK9otHTBUOGs0Wf2bt+far02Xvpzd839qC2aaz6381QaD3BmG6Xmzl07wJRWtumA
-         BTW5RkLPZodVcCsbVB8GUptaVCtq4iMiboa3b5FzuhGispCyIlGnUqhsIbrS87YALgxO
-         rcJg8rmGdALlth4DvVCxBrw9/W17aDsPfQQklAB49pMILsRTY5Om/AwA6f9d2IVBFBEn
-         eL27o0kB4jtTHaAB19a7X1LTlZE4KMaLvKwEFbyjxHOM9ddSchuomjknfckJBDKceKrZ
-         gV8Q==
-X-Forwarded-Encrypted: i=1; AKwUvBxnRRmTPOXO1a9cFETyLyuNgF04mIrFXIJwRbhaJY46Fo4BWiKowzDd7ur4Hb0fZR1658TS/HUti2sZCpAs@vger.kernel.org
-X-Gm-Message-State: AFuF++l5fP0b8UDX0GnX+qIChsOJqD1jNTY/IMmgH7l747Crt1AEAIAp
-	1fvsIgu8nnA5inuZJocBPG9WD4jN+CztK7GQcSYNFAyqb7FpJRDpCRRg+nooEoKxUm/tqhwx/t5
-	7DqFncRt+EzXWU6Zv9Bk9qPnqYLEeD2wxbINQ9Cp9M4bRmjVm79FUPFt/eu71CfKS0guM
-X-Gm-Gg: AYBFou0VlE46BUKj7NW98efodfo/2nH6ZH8lJo5+fn+RqPKOclnVdiwSgqdtY2gISUI
-	EKUoY/qNbA3FMho0Fl7ORb0xelbp5uCoHZchzjNjE8PMS1qDYUUGTMrKIbbeGfcsEhd4Z/KDdYy
-	EN/rdZHV1ehPrW1yT0tTqRS/3v005ilyRhp41HqeRGFGrX04fBXu9KJZWUBYUCEADft3Fi4ryMH
-	sfSZzCCDEpqex1+3D4DAAdDm9F51no4PooKxNDMvHQf3jMWgSsInRYVWEgpVftYEzw8ijzpjczC
-	8/dz0dvUNRya2Por2nUbou3n4XAyO38xoixs8qX8ft1kf15eNYQFu/ZodJIGLxUrFc2ejk7wPS5
-	9gDbrSvxoMISFpki4edhW/a7gpWa/AhTNk2/yKTIr7ihFzFzuYO9u2T8LeQ==
-X-Received: by 2002:a17:90a:e7c9:b0:398:9bd4:d12 with SMTP id 98e67ed59e1d1-39aee219f45mr7642548a91.17.1788361291814;
-        Wed, 02 Sep 2026 08:01:31 -0700 (PDT)
-X-Received: by 2002:a17:90a:e7c9:b0:398:9bd4:d12 with SMTP id 98e67ed59e1d1-39aee219f45mr7642344a91.17.1788361290870;
-        Wed, 02 Sep 2026 08:01:30 -0700 (PDT)
-Received: from [10.110.114.54] (i-global254.qualcomm.com. [199.106.103.254])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-32f07c02203sm8484464eec.31.2026.09.02.08.01.24
+        bh=Kt8GHJ5keyTKWhMxN2RQEwwtSHHHEF1wieLuKB/lRZw=;
+        b=sZvb3FxEZqACIv4G2EyZ2/PZvHk/fivT/gRIe2MwR1S7XzXUwaBod+3yoxwDW+7iVH
+         cvtE1smxOn79ayZjDT3vYYPWpA/UDeBdrqLW8lFFFbV+61wYHLuM1HipjuI+j50KSfLd
+         W2/Ee7JzSl69Pb47VjrWu5LrZCtHf83SV57bZfNhkRHvC+CUOlycE1nFMamQD90OzTr+
+         c77w7qB5RA5ULDthJWscDckU6nmuRk2USsLi5sRKBXgdPYRpNLJjfJHdWLxQoOQuSh0K
+         fTqjmeht4flrkJ1/7+RFeOaIil0BtoqQXKYlmll2UfNdRo99G+PCykcRcMO2mI8qYmIp
+         s2DQ==
+X-Forwarded-Encrypted: i=1; AHgh+RomkV3fG8epdglnuFxASfQdSP13FVSzAYmF1YNcy5Xrgb+U7FwqvfpOIP+YNb2Xc9U1CeHkl6iUD3yEIQfx@vger.kernel.org
+X-Gm-Message-State: AFuF++kYdR0pg/5dKQryDFCCW7Pykjyq2FITAWTjt5vne1M2n9T0duvz
+	Agc90ervtWiaB9K/uKH9cvHzNYdtCGe5+KhGVvxcdEKF5R05dI2prPNJZKeNm/WkgP/Wnh0svjf
+	KPddb2xrtHmJ8vLyOPicMGwfEc1Zl3lm0nLnZb1CxDLquf9D1YbDH6ZR9jdvePFfX2hqe
+X-Gm-Gg: AR+sD13scGXPWyXrqcwcmaKxv9S7EIC9hBibmpTQmQKWQVjHvAUnc3Gkp8iUlUZLhgl
+	H0gugH3fNtmbAkNU4hYzfWsr1drzC/jChTiytdJpCHk3nmI/SqxxyMbzAfXIn2QNJFkyqlyKgEG
+	HOI2qkX+4K1TLxXCFocKth6ACZla+KaZnVMe4Df41TvcpsID0pPf/7Uyfc46w0IOvwQ3qZP9AEe
+	iF94V3gWBFcOYiuUqH9TAaY9LtOcMu4X9Gueh26ll3t9yMBN2EEofsxupu5Fx223e/dmuAYyYUt
+	e6j421ea2ZJbvgm2x4Du8dlLsDN9vvzL7wFXcuMbtbyQNWYtZelvGiS/OobuSh++Ovoi2gJzZ2s
+	4AzD8p/EmKUhifniNuQbFsw==
+X-Received: by 2002:a05:6830:6d16:b0:7e6:6ced:992f with SMTP id 46e09a7af769-7f781694bfamr2826309a34.2.1788361333579;
+        Wed, 02 Sep 2026 08:02:13 -0700 (PDT)
+X-Received: by 2002:a05:6830:6d16:b0:7e6:6ced:992f with SMTP id 46e09a7af769-7f781694bfamr2826234a34.2.1788361332925;
+        Wed, 02 Sep 2026 08:02:12 -0700 (PDT)
+Received: from [192.168.202.12] ([178.235.128.140])
+        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-6a67f835955sm1260039a12.0.2026.09.02.08.02.11
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 02 Sep 2026 08:01:30 -0700 (PDT)
-Message-ID: <c5aaea57-c9c4-44ca-9bd5-7f09175637b3@oss.qualcomm.com>
-Date: Wed, 2 Sep 2026 23:01:22 +0800
+        Wed, 02 Sep 2026 08:02:12 -0700 (PDT)
+Message-ID: <a2f3de2b-90f6-427d-9994-a8b1ec8cbed6@oss.qualcomm.com>
+Date: Wed, 2 Sep 2026 17:02:10 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -89,273 +89,91 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 02/11] soc: qcom: add crypto_virt backend for
- virtio-blk inline crypto
-To: Krzysztof Kozlowski <krzk@kernel.org>, ebiggers@kernel.org,
-        axboe@kernel.dk, mst@redhat.com, jasowangio@gmail.com,
-        James.Bottomley@HansenPartnership.com, martin.petersen@oracle.com,
-        robh@kernel.org, krzk+dt@kernel.org, conor+dt@kernel.org,
-        linux-block@vger.kernel.org, linux-crypto@vger.kernel.org,
-        linux-scsi@vger.kernel.org, virtualization@lists.linux.dev,
-        devicetree@vger.kernel.org, linux-arm-msm@vger.kernel.org
-Cc: neeraj.soni@oss.qualcomm.com, gaurav.kashyap@oss.qualcomm.com,
-        mani@kernel.org, andersson@kernel.org, konradybcio@kernel.org,
-        bvanassche@acm.org, alim.akhtar@samsung.com, avri.altman@sandisk.com,
-        stefanha@redhat.com, pbonzini@redhat.com, eperezma@redhat.com,
-        xuanzhuo@linux.alibaba.com, linux-kernel@vger.kernel.org
-References: <20260827160806.1295313-1-linlin.zhang@oss.qualcomm.com>
- <20260827160806.1295313-3-linlin.zhang@oss.qualcomm.com>
- <f5915133-ffac-4777-b7d9-cf38ba163d43@kernel.org>
- <03097984-fded-477e-82b6-f9b31fd2f1d3@oss.qualcomm.com>
- <38389106-9609-4ec4-bc83-3d1b7fac3698@kernel.org>
+Subject: Re: [PATCH 2/2] power: supply: qcom_battmgr: expose CHARGE_NOW on
+ SM8350-class firmware
+To: Jan-Michael Brummer <jan.brummer@tabos.org>, sre@kernel.org
+Cc: andersson@kernel.org, neil.armstrong@linaro.org,
+        linux-arm-msm@vger.kernel.org, linux-pm@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+References: <20260829054546.86210-1-jan.brummer@tabos.org>
+ <20260829054546.86210-3-jan.brummer@tabos.org>
 Content-Language: en-US
-From: Linlin Zhang <linlin.zhang@oss.qualcomm.com>
-In-Reply-To: <38389106-9609-4ec4-bc83-3d1b7fac3698@kernel.org>
+From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+In-Reply-To: <20260829054546.86210-3-jan.brummer@tabos.org>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-Authority-Analysis: v=2.4 cv=H4/rBeYi c=1 sm=1 tr=0 ts=6a983a4d cx=c_pps
- a=0uOsjrqzRL749jD1oC5vDA==:117 a=JYp8KDb2vCoCEuGobkYCKw==:17
+X-Proofpoint-GUID: Dnut1SOhtOiOCrNLB1QzEtGvzMgJ3JxX
+X-Authority-Analysis: v=2.4 cv=L+wtheT8 c=1 sm=1 tr=0 ts=6a983a76 cx=c_pps
+ a=7uPEO8VhqeOX8vTJ3z8K6Q==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
  a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
- a=EUspDBNiAAAA:8 a=-WgfA_H36cW_bsA5Db8A:9 a=QEXdDO2ut3YA:10
- a=mQ_c8vxmzFEMiUWkPHU9:22
-X-Proofpoint-GUID: wZORfWmADCT9HI1pM2y4snqboNozt7rp
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTAyMDEzMyBTYWx0ZWRfX5Q9a9MeKzanM
- b+bwwPUB2NdjMyEEZV3fzcuq1vRaWjvIa6JHuVNNB1/jWBYUgr4/wKmMk5E8EcC00g6eNjA+5ZB
- x8DTnIHvA2eFYesPJJ0ji9Zm4cZ0wttBnUvhkvgsQMK9RCTcaNvdye/cq85jD5eHUw3hgtTJ2Id
- eANa8wOuQCk5gdxBOBUWA/PZRyBtfzJmlZuapy1Fk5e6zTgymVFYWaTZj/j4nZA3Wlg0WEeZP4m
- sGY6flZqQSSTzblQF2Ig0YsXC7hujIO59L+p2Df40ZY1gUX71RuxM3lGNiu8K1/ye+5oZcVHJYA
- qF5YzT0PwrAy8Lgq6KGWnjS5b6PRjkh0KDA2kXkcaf7Mkntgqf2Aia32c8giL2TTK/CtN316No5
- DxxVOoyzIDwlT8BHG5lj9Fy3cp9uPX7TL5G/G1sL7CSxWvBNMQLket+EEXoJ+qyXtYNWFE/J+Z4
- atJnM6Cmfx025+peFZw==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTAyMDEzMyBTYWx0ZWRfX3ddTjSFo6QvY
- DYOopeq9efQbLKODXSYtvfb6eLSXEOrftYajoEFltWKp3fn4HGl2q8bM/ONSVY3qMloeaanBery
- FeLlynvfGqLABSLGoY4Gk4+6NCup5mQ=
-X-Proofpoint-ORIG-GUID: wZORfWmADCT9HI1pM2y4snqboNozt7rp
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
+ a=DYa_1O34AAAA:8 a=qAZn5fJD0YA4aXmIaTwA:9 a=QEXdDO2ut3YA:10
+ a=EXS-LbY8YePsIyqnH6vw:22 a=piCpHeHFVjWJlYWd443B:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTAyMDEzMyBTYWx0ZWRfX2mo8jn2voieU
+ qSzEBUp/oTiV0zjTbCBOM1JX24XEOB/yrirbh9mWPxrI9Tskjd7XPAZgXDp+XWmpNmvbUA2/l8n
+ dEz3KUo+3fNz/PJWaF87GdaXSL5Z1AR01JasJup6X7wLBFgdNiarXMJruqf8P4R5Ta/ofZv9ZfE
+ UCJk5R7NpPKqvmd1nMEFtZDfqaKfNNfzve2Wq4hCGU990llEw30D4Ly8jJEaruai37srWbiiAjC
+ EW972VvoDAua9t5J6Pb48Dc+4vryno3gNGhpNAp9lhuNPpJYVIMZEkIbqQUv7DksnEbjBejSXcU
+ WQSh2H6p74TR5FqABgJR6aa/i0DgWh1mvs8TSg0LyjRVbD88ZuSEYrbACqmMaT41qcmrWrPs0oN
+ ES05KRDf8utBD/eLqpqhvwKVRD6fmGLUc2ZcOwRk5nAhTpVr9QVQZwr2D7JocMtWxeyY8Yj/Tff
+ 6WtWLLg2SJxj8l1jpCQ==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTAyMDEzMyBTYWx0ZWRfXyJrvH0HxdfVq
+ isASAUJ5x+5SuIdeBQGVql/2JtnTLiz2/YsYEOP4Ys2qfokQ2fD7GBZlBD6JM5gpiiH1+KQJOwq
+ VVddknWMZyex0oKpfnDTT5ikngEh780=
+X-Proofpoint-ORIG-GUID: Dnut1SOhtOiOCrNLB1QzEtGvzMgJ3JxX
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-09-02_03,2026-09-01_03,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0 priorityscore=1501 adultscore=0 bulkscore=0 clxscore=1015
- malwarescore=0 spamscore=0 phishscore=0 impostorscore=0 suspectscore=0
+ lowpriorityscore=0 clxscore=1015 bulkscore=0 impostorscore=0 phishscore=0
+ spamscore=0 suspectscore=0 adultscore=0 priorityscore=1501 malwarescore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2609020133
 
+On 8/29/26 7:45 AM, Jan-Michael Brummer wrote:
+> The SM8350-class firmware does not implement a dedicated 'charge now'
+> property. It does however report BATT_CHG_COUNTER, and on this class of
+> firmware that value is the remaining charge in uAh rather than a
+> monotonic counter. Measured on a Fairphone 5 with charge_full at
+> 4116000 uAh:
+> 
+>   BATT_CHG_COUNTER   reported capacity   counter / charge_full
+>   2434614            59%                 59.1%
+>   3525354            85%                 85.6%
+> 
+> Map POWER_SUPPLY_PROP_CHARGE_NOW onto the same firmware property and
+> store the value in status.capacity, which the CHARGE_NOW/ENERGY_NOW case
+> of qcom_battmgr_bat_get_property() already reads.
+> 
+> Together with the preceding patch this gives userspace both the full
+> charge and the current charge. UPower now derives an energy level and
+> runtime estimates in both directions:
+> 
+>     state:               discharging      state:               charging
+>     energy:              14.4347 Wh       energy:              15.6003 Wh
+>     energy-full:         16.8807 Wh       energy-full:         18.1505 Wh
+>     energy-rate:         3.39313 W        energy-rate:         7.3492 W
+>     time to empty:       4.3 hours        time to full:        20.8 minutes
+> 
+> Signed-off-by: Jan-Michael Brummer <jan.brummer@tabos.org>
+> ---
 
+Ok this makes more sense now. We should still gate the other property though.
 
-On 9/1/2026 9:58 PM, Krzysztof Kozlowski wrote:
-> On 01/09/2026 11:39, Linlin Zhang wrote:
->>
->>
->> On 8/31/2026 2:56 PM, Krzysztof Kozlowski wrote:
->>> On 27/08/2026 18:07, Linlin Zhang wrote:
->>>> From: linlzhan <linlin.zhang@oss.qualcomm.com>
->>>>
->>>> In a Qualcomm GVM environment the ICE hardware is controlled by the
->>>
->>> What is GVM?
-> 
-> There is no such TLA (git grep).
-> 
-> Maybe you meant guest in a virtual machine? Don't use some qcom-specific
-> TLA.
-> 
+[...]
 
-ACK
-> 
->>>
->>
->> GVM means Guest Virtual Machine. This is designed for the virtualization
->> platform.
->>
->>>> host, GVM has no direct access to it. So, key operation in GVM is
->>>> done through SCM calls rather than direct register access. In this
->>>> way the access to ICE registers are offloaded to Trust Zone.
->>>>
->>>> Add QCOM_CRYPTO_VIRT, which implements struct virtblk_crypto_variant_ops
->>>> for the virtio_blk_crypto_ext dispatch layer. It maps keyslot
->>>> program/evict to qcom_scm_ice_set_key() and
->>>> qcom_scm_ice_invalidate_key(), and software-secret derivation to
->>>> qcom_scm_derive_sw_secret().
->>>>
->>>> Signed-off-by: linlzhan <linlin.zhang@oss.qualcomm.com>
->>>> ---
->>>>  drivers/soc/qcom/Kconfig       | 12 +++++
->>>>  drivers/soc/qcom/Makefile      |  1 +
->>>>  drivers/soc/qcom/crypto_virt.c | 89 ++++++++++++++++++++++++++++++++++
->>>>  3 files changed, 102 insertions(+)
->>>>  create mode 100644 drivers/soc/qcom/crypto_virt.c
->>>>
->>>> diff --git a/drivers/soc/qcom/Kconfig b/drivers/soc/qcom/Kconfig
->>>> index 2b524154d9fb..6c632d114d45 100644
->>>> --- a/drivers/soc/qcom/Kconfig
->>>> +++ b/drivers/soc/qcom/Kconfig
->>>> @@ -298,6 +298,18 @@ config QCOM_INLINE_CRYPTO_ENGINE
->>>>  	tristate
->>>>  	select QCOM_SCM
->>>>  
->>>> +config QCOM_CRYPTO_VIRT
->>>> +	tristate "Qualcomm Technologies, Inc. Crypto Virt driver"
->>>> +	depends on VIRTBLK_CRYPTO_VIRTUALIZATION
->>>> +	depends on QCOM_SCM
->>>> +	default VIRTBLK_CRYPTO_VIRTUALIZATION if ARCH_QCOM
->>>> +	help
->>>> +	  GVM-side hardware-wrapped-key SCM operations exposed to
->>>> +	  virtio_blk's inline crypto layer: per-slot key programming and
->>>> +	  eviction, and key derive/generate/prepare/import.
->>>> +	  Say Y here to compile the driver as a part of kernel or M to compile
->>>> +	  as a module.
->>>> +
->>>>  config QCOM_KRYO_L2_ACCESSORS
->>>>  	bool
->>>>  	depends on ARM64
->>>> diff --git a/drivers/soc/qcom/Makefile b/drivers/soc/qcom/Makefile
->>>> index 798643be3590..6d4b7546d1fb 100644
->>>> --- a/drivers/soc/qcom/Makefile
->>>> +++ b/drivers/soc/qcom/Makefile
->>>> @@ -39,5 +39,6 @@ obj-$(CONFIG_QCOM_KRYO_L2_ACCESSORS) +=	kryo-l2-accessors.o
->>>>  obj-$(CONFIG_QCOM_ICC_BWMON)	+= icc-bwmon.o
->>>>  qcom_ice-objs			+= ice.o
->>>>  obj-$(CONFIG_QCOM_INLINE_CRYPTO_ENGINE)	+= qcom_ice.o
->>>> +obj-$(CONFIG_QCOM_CRYPTO_VIRT)	+= crypto_virt.o
->>>>  obj-$(CONFIG_QCOM_PBS) +=	qcom-pbs.o
->>>>  obj-$(CONFIG_QCOM_UBWC_CONFIG) += ubwc_config.o
->>>> diff --git a/drivers/soc/qcom/crypto_virt.c b/drivers/soc/qcom/crypto_virt.c
->>>> new file mode 100644
->>>> index 000000000000..4ee2a36af6c1
->>>> --- /dev/null
->>>> +++ b/drivers/soc/qcom/crypto_virt.c
->>>> @@ -0,0 +1,89 @@
->>>> +// SPDX-License-Identifier: GPL-2.0-only
->>>> +
->>>> +#include <linux/module.h>
->>>> +#include <linux/types.h>
->>>> +#include <linux/blk-crypto.h>
->>>> +#include <linux/virtio_blk_crypto_ext.h>
->>>> +#include <linux/firmware/qcom/qcom_scm.h>
->>>> +
->>>> +static int crypto_virt_program_key(const struct blk_crypto_key *key,
->>>> +				   unsigned int slot)
->>>> +{
->>>> +	u32 dus_512_units;
->>>> +	int ret;
->>>> +
->>>> +	if (!key || !key->size) {
->>>> +		pr_err("%s: invalid key\n", __func__);
->>>> +		return -EINVAL;
->>>> +	}
->>>> +
->>>> +	/* Only AES-256-XTS has been tested so far. */
->>>> +	if (key->crypto_cfg.crypto_mode !=
->>>> +	    BLK_ENCRYPTION_MODE_AES_256_XTS) {
->>>> +		pr_err_ratelimited("Unsupported crypto mode: %d\n",
->>>> +				    key->crypto_cfg.crypto_mode);
->>>> +		return -EINVAL;
->>>> +	}
->>>> +
->>>> +	/* qcom_scm_ice_set_key()'s data_unit_size is expressed in 512-byte units */
->>>> +	dus_512_units = key->crypto_cfg.data_unit_size / 512;
->>>> +
->>>> +	ret = qcom_scm_ice_set_key(slot, key->bytes, key->size,
->>>> +		QCOM_SCM_ICE_CIPHER_AES_256_XTS, dus_512_units);
->>>> +	if (ret)
->>>> +		pr_err("%s: slot=%u ret=%d\n", __func__, slot, ret);
->>>> +
->>>> +	return ret;
->>>> +}
->>>> +
->>>> +static int crypto_virt_invalidate_key(unsigned int slot)
->>>> +{
->>>> +	int ret;
->>>> +
->>>> +	ret = qcom_scm_ice_invalidate_key(slot);
->>>> +	if (ret)
->>>> +		pr_err("%s: slot=%u ret=%d\n", __func__, slot, ret);
->>>> +
->>>> +	return ret;
->>>> +}
->>>> +
->>>> +static int crypto_virt_derive_sw_secret_key(const u8 *eph_key, size_t eph_key_size,
->>>> +					    u8 sw_secret[BLK_CRYPTO_SW_SECRET_SIZE])
->>>> +{
->>>> +	int ret;
->>>> +
->>>> +	ret = qcom_scm_derive_sw_secret(eph_key, eph_key_size,
->>>> +					sw_secret, BLK_CRYPTO_SW_SECRET_SIZE);
->>>> +	if (ret == -EIO || ret == -EINVAL)
->>>> +		ret = -EBADMSG; /* probably invalid key */
->>>> +
->>>> +	if (ret)
->>>> +		pr_err("%s: ret=%d\n", __func__, ret);
->>>> +
->>>> +	return ret;
->>>> +}
->>>> +
->>>> +static struct virtblk_crypto_variant_ops virtblk_crypto_qcom_vops = {
->>>
->>> Why is a crypto-handling code in drivers/soc/?
->>>
->>
->> This driver is a Qualcomm vendor-specific driver, plays the similar role in the
-> 
-> Not really, there is nothing vendor specific here. Look at this code.
-> 
+> @@ -1442,7 +1445,10 @@ static void qcom_battmgr_sm8350_callback(struct qcom_battmgr *battmgr,
+>  			battmgr->info.technology = le32_to_cpu(resp->intval.value);
+>  			break;
+>  		case BATT_CHG_COUNTER:
+> -			battmgr->info.charge_count = le32_to_cpu(resp->intval.value);
+> +			val = le32_to_cpu(resp->intval.value);
+> +			battmgr->info.charge_count = val;
+> +			/* the firmware reports the remaining charge here */
+> +			battmgr->status.capacity = val;
 
-crypto_virt_program_key calls the interface from qcom_scm driver. Similar to
-crypto_virt_invalidate_key and crypto_virt_derive_sw_secret_key.
+Let me try and find whether we can rely on this - on newer targets
+many properties are more or less just front-ends for vendor
+plumbing (because there's a ton of different chargers etc.)
 
->> guest, like the ice driver in the host. so I place it in drivers/soc/.
->>
->>>> +	.owner = THIS_MODULE,
->>>> +	.program_key = crypto_virt_program_key,
->>>> +	.evict_key = crypto_virt_invalidate_key,
->>>> +	.derive_sw_secret_key = crypto_virt_derive_sw_secret_key,
->>>> +};
->>>> +
->>>> +static int __init crypto_virt_init(void)
->>>> +{
->>>> +	virtblk_set_crypto_ops(&virtblk_crypto_qcom_vops);
->>>> +	return 0;
->>>> +}
->>>> +module_init(crypto_virt_init);
->>>> +
->>>> +#if IS_MODULE(CONFIG_QCOM_CRYPTO_VIRT)
->>>> +static void __exit crypto_virt_exit(void)
->>>> +{
->>>> +	virtblk_set_crypto_ops(NULL);
->>>> +}
->>>> +module_exit(crypto_virt_exit);
->>>> +#endif
->>>
->>> How do you instantiate this driver exactly?
->>>
->>
->> This driver is not instantiated per device. It acts as a provider of
->> Qualcomm vendor-specific inline crypto operations, which is based on
->> qcom_scm driver, and registers a global virtblk_crypto_ops instance
->> during module initialization. So that, each blk_crypto_ll_ops from
->> virtio block driver in common kernel can be sent via qcom_smc driver.
-> 
-> 
-> If it is not instantiated, then it is dead code. Drop all this. Or read
-> my message again very carefully instead of replying with whatever copy
-> of commit msg. I did not ask what is this driver about. I did not ask
-> what it is providing. I asked how do you instantiate it or clarifying -
-> how do you load and run this code in final system.
-> 
-
-I agree this does not fit well with the usual Linux driver model, since
-there is no device instance, probe path, or explicit lifetime
-relationship between virtio-blk and the crypto_virt backend.
-
-Given that, I think the current global registration approach is difficult
-to justify upstream and I will revisit the design.
-
-> This is just dead/unused code, straight from downstream.
-> 
-> NAK.
-> 
-> 
-> Best regards,
-> Krzysztof
-
+Konrad
