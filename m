@@ -1,53 +1,48 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8F7894AF667;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8EAE04AF150;
 	Wed,  2 Sep 2026 21:45:06 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788385520; cv=none; b=c3q8P/gwZSSpQoPT1M3v/lAsXkAy7NZEMxbv+0btGoaiixmIdeNNMhNap2LahggAlX3foxawBPGTeaEw8t07KmxmDJYrn9qhgFHXjEii9RYsBEP2TVVyfiy5Tzc6XQ6HXyUA6ihGeWBVrEqpLrd4OMgzGM/GF/+HP71E4HuW/98=
+	t=1788385531; cv=none; b=UIpw7Ny1NvFYDDWtbCEQOsbgKsJD4iExFmQqxArGvJ7CFDZtv0zJyrS1r7Ba/vUBGL70L7Sfq/ye+LXhATQbgLxS/Pr9EDlDro4gqsJNx8IQEAoe+0kbf9uZi5GeU1lsXeAEqSKW/1j6JH/d2IMW+Ln41A+rnU1Mr32k+CuAHJM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788385520; c=relaxed/simple;
-	bh=q1Tx+BFAn9gHoWn2JWg8Y5O+wTf6C4ZfCt9Li+r6GsE=;
+	s=arc-20240116; t=1788385531; c=relaxed/simple;
+	bh=IiuHrV0iRN81Gq+92V+dx721TXRS0PlkbPLHlF3v8Ps=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=DTBHXnJzWTpSYKH0gQShHwPdIkKqh6oUGLRb9wZxiLXiwQv5Dg6WT+37ji/J0Besh/lqMk4Sv01XrP65ehoORCcf/blmNKE8j7Hr7Gtt5Lvz8xs9g16bpCuuBOO/gf3urDlrpM5OS3lhvfSWLtqFSnTYVeEPx2fsRgnB1+BS9xg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=BRxYclq+; arc=none smtp.client-ip=100.103.45.18
+	 MIME-Version:Content-Type; b=pX/JTGHoAmIhYS7rxt6RtVf5Kn9EMS4c1uwBBog1zaphPXjqM/8RcGH8iDDiWMrZXGdmXjPP31sOFStj0oww/C+YvujCXj1Y2nc2+jfErCkPpuNKCYrHAbyiE3RgGuIo9QoTC2Abqnlx6eiBIuZyMhtNTV8EA5M2EghA3S2n678=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=oV3Hm52m; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="BRxYclq+"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0DB681F00ADB;
-	Wed,  2 Sep 2026 21:45:01 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="oV3Hm52m"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7B56C1F00ACA;
+	Wed,  2 Sep 2026 21:45:00 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1788385503;
-	bh=imuUUCFiKsF+D8VweZLdAB5tEHRZg5l8J7XyyD5i58I=;
+	s=k20260515; t=1788385501;
+	bh=R18D4nnM1fC1oPCYMgfcRgGyfxbjD56ywDI0w+Ju0hY=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=BRxYclq+L2KZk4J3mcWRTYoakDK/JsMS0JfQHJ5FX5wmEi11Im592a0m2qIO2dZSj
-	 HETsC8P75D+flI3NSpHb6ZdTuZc+eIsv9pb4/T3sYJIRulGYr3F2AJJMk5sTUFBsMx
-	 StYfX1ngs6RdGsYBQ3mkY2HLnoLeBgMzW6aL6aeAFYTfL2vRqrkjqU78pB8ajAZ19B
-	 L0uYNGFoTDtr40KnF+6vXRJLaN05hWzcOdGM1hIoKnje2Cnw7OufJ2zuyrkB28i1cI
-	 T+kdw3LL7Vaf3CYiV0pAzEQSO+szmlYsVaXhh9aifZZOZ75+bq9ThdzAE6IihEUClL
-	 0y6osFeLE9BaA==
+	b=oV3Hm52mNcTsJ2f0GdU5xc9D+PSQdQuS63PhsuPghcBcrIyhMEx1sZu0vr+sXKqDo
+	 c3GeoflFaaZEoks3pYMF/YErjdSclYgxCz4j2ymgsIYp2QLUauyvv2eOXe0GdxoHz5
+	 bfq8P0t/OArGYvm+H4Iy62YS4bdJokCHjQFlOrn4IPU5yb1eT+jysK+ymhP0LOaxS6
+	 aszNeBJ3zOXe1osw8LuJ8Xk/m5bnrCfw8bbpnXx9P8ktABqznpOAUjxduJ4E8U6HRs
+	 8pnVGnyAM0fyQYY+m5dykMuOUpycUeVTcCP0ft0P4/cTkBurucZNnK/WPWteyD7rPG
+	 J0sAuoaE6+X0g==
 From: Bjorn Andersson <andersson@kernel.org>
-To: Stephen Boyd <sboyd@kernel.org>,
-	Brian Masney <bmasney+clk@redhat.com>,
-	Jerome Brunet <jbrunet+clk@baylibre.com>,
+To: Konrad Dybcio <konradybcio@kernel.org>,
 	Rob Herring <robh@kernel.org>,
 	Krzysztof Kozlowski <krzk+dt@kernel.org>,
 	Conor Dooley <conor+dt@kernel.org>,
-	Taniya Das <taniya.das@oss.qualcomm.com>,
-	Konrad Dybcio <konradybcio@kernel.org>,
-	Qiang Yu <qiang.yu@oss.qualcomm.com>
+	Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>
 Cc: linux-arm-msm@vger.kernel.org,
-	linux-clk@vger.kernel.org,
 	devicetree@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
-	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
-	Abel Vesa <abel.vesa@oss.qualcomm.com>
-Subject: Re: [PATCH v4 0/4] clk: qcom: Migrate x1e80100 TCSR to clk_ref helper
-Date: Wed,  2 Sep 2026 16:44:48 -0500
-Message-ID: <178838546716.167607.3600451896354681800.b4-ty@kernel.org>
+	Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>,
+	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Subject: Re: [PATCH v5] arm64: dts: qcom: shikra: Add ICE, TRNG and QCE nodes
+Date: Wed,  2 Sep 2026 16:44:47 -0500
+Message-ID: <178838546718.167607.2430723665063990847.b4-ty@kernel.org>
 X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260827-hamoa_tcsr_qref_0826-v4-0-663c9d30468d@oss.qualcomm.com>
-References: <20260827-hamoa_tcsr_qref_0826-v4-0-663c9d30468d@oss.qualcomm.com>
+In-Reply-To: <20260820-b4-shikra_crypto_changse-v5-1-70eb4040fb25@oss.qualcomm.com>
+References: <20260820-b4-shikra_crypto_changse-v5-1-70eb4040fb25@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -58,26 +53,21 @@ Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 
 
-On Thu, 27 Aug 2026 23:00:32 -0700, Qiang Yu wrote:
-> The QREF block on X1E80100 supplies reference clocks to PCIe/USB/UFS
-> PHYs and requires dedicated LDO supplies to operate. The digital
-> control interface for QREF (clkref_en registers) resides in TCSR on
-> X1E80100. This series migrates the x1e80100 TCSR driver to the common
-> clkref_en helper introduced for Glymur/Mahua, and wires up the
-> required regulator supplies.
+On Thu, 20 Aug 2026 16:23:43 +0530, Kuldeep Singh wrote:
+> Add device tree nodes describing the crypto hardware blocks present
+> on the Qualcomm Shikra platform:
+> 
+> - BAM DMA controller used by the Qualcomm crypto engine
+> - QCE (crypto) engine with DMA support
+> - TRNG hardware random number generator
+> - Inline crypto engine (ICE)
 > 
 > [...]
 
 Applied, thanks!
 
-[1/4] dt-bindings: clock: qcom: Move x1e80100 TCSR to own binding
-      commit: fcbd3151c9beffca044ea7a085d7e595ebf34f74
-[2/4] clk: qcom: tcsrcc-x1e80100: Migrate to clk_ref helper
-      commit: 011ed2a61f44b352bda71a82213f621bbfdb40f9
-[3/4] arm64: dts: qcom: hamoa: Drop unused #reset-cells from TCSR node
-      commit: 4d8ff3d92241d9ae4fdd5fed7a810a116e37eb0d
-[4/4] arm64: dts: qcom: hamoa/purwa: Add QREF regulator supplies
-      commit: d9d07e230c45cc11a0046b46354e413f2353bdf8
+[1/1] arm64: dts: qcom: shikra: Add ICE, TRNG and QCE nodes
+      commit: 099cd05d200ba241bcc7497c4384b8d657a5632e
 
 Best regards,
 -- 
