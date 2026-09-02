@@ -1,175 +1,241 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 323CB47F2D3
-	for <linux-arm-msm@vger.kernel.org>; Wed,  2 Sep 2026 14:10:27 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3B61D48AE00
+	for <linux-arm-msm@vger.kernel.org>; Wed,  2 Sep 2026 14:12:56 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788358228; cv=none; b=PeUV14XGvu1pngCWumZLUxsvRaIvrfJ/1trLvarTs30UbATv2cea8pcBMcmsMDj9yG8A/Bnp+hM0jKcepBrvPE4qlsmSElKLbW1hy9EUiGyqYXCLMxp3gAU3VbuX5NcoJJB2FKG62zKKaw86is2baMGjQHdA8cKqIsJJHWKtey8=
+	t=1788358377; cv=none; b=mCAeApX9a+1EgI+K7VoZ5hWUFnXHRt/nQHOmM+XvM1ExIEk73R+YiaNCw6DggPv+wfbhLjTzIA5+rDYgVThgW2vb7/q0vv9ktPn/OaIsqNwz3/Hg2hNZdLjFpBvQZ3fD1baqQX4X2x5leq39Pn9aOCOnxIeMfZu5Bthq/c9nTfA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788358228; c=relaxed/simple;
-	bh=YVhNWY3YTzseoUDSc4+pecJIfHnebROkelxV3G3LVzs=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=Tbm32GWJ2+rjEsToWQuMfOZUrvGLDvQulQQSC5rhlFURVAdiDh4WmLr6eEcP7Qt/EJpVqlFYbShPyFnozZnLMB9CsA5qMXcpNSTJ6F0T3ZCeuknSn83mDyghybu76jBMl8eGU6Db6y18yTEMZlEIY4PdeKIzPSp9ADBODRwrdz8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=oBR/FAQn; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=cvuew6xh; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1788358377; c=relaxed/simple;
+	bh=6RRBOXunsj08FTZ3ncggluNT5gwoaY3pjLUyNt64cHI=;
+	h=From:In-Reply-To:MIME-Version:References:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=X1+4dkrrbzo8qNpS3J7kHcoeYvFKmGYYdL4W2/Ruz3OByGcvF7ke22L0jFYBk+nVsLj4vhTqk0N8M5YoJLHp65FUm7ejx1FJowGhy5kKh6eRT1uyY4nXUzf4op7UDuGQ6dxd0mARd9qMTZHYExKbL5Dk/wZK2lmlDLzrQKnRf7c=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=TeoZIdSD; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="oBR/FAQn";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="cvuew6xh"
-Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 682DHmPh1047667
-	for <linux-arm-msm@vger.kernel.org>; Wed, 2 Sep 2026 14:10:26 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	3JQgfxxt0kxPrE2nrPSq4HoamEoqyDdParOq5552+rI=; b=oBR/FAQnD+5LItQT
-	LjbCa2qPYxknSU6ohWgZBqYjF9UcxUlGY1ofyZI05XiF6eTiUnIWITR8sUKinthj
-	4Sv2JJm1Q2mqegXocxjUOir8dETJaiWYajwoA5rHHZBxxVWtcXZsES/4kT3sdzUz
-	2J5s4Dc4edyhm7eKo9/6uxH1jTQwNpDzfUt2ho14xgPz71EuVyjOXBpQaEyARMmY
-	ckuzw2aFHZxwihnOgz3dxKHrUlLNLRLwSza67CFgpFZLLKfcSy3IJGcCQJqM50Qv
-	D+oLNYrb6V62bhZK5IfJL2CSTJZU7aSmB7IB+DgjMj3Wm3UUyWnpvkC7e5Qi/lde
-	9Rin9A==
-Received: from mail-vs1-f72.google.com (mail-vs1-f72.google.com [209.85.217.72])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gemj4r6gx-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 02 Sep 2026 14:10:26 +0000 (GMT)
-Received: by mail-vs1-f72.google.com with SMTP id ada2fe7eead31-73a1cf1638fso36063137.1
-        for <linux-arm-msm@vger.kernel.org>; Wed, 02 Sep 2026 07:10:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1788358225; x=1788963025; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=3JQgfxxt0kxPrE2nrPSq4HoamEoqyDdParOq5552+rI=;
-        b=cvuew6xhMX4xnKrmd6zUnTZ8A2++kjJpSnyX2v6Wsw4nRzvREuCNhcEVLrKUp01V7m
-         iql/iD9ewQLyvbSeYmy+a3lDZ0sHrnx4kAyi90Firk/Q/yWY1QcuH0XSbi8VSBpHPDnY
-         DptqGcFXNUANG0WHqS/svUArnytPTSRYeidIgnzXCJSnIlmsV5vFEQZDNdfpey0cGy7k
-         oPG2ojI4BP1He2gjnJCtnYW2AXkM9ySF2lFnT+UmAY7kB+nXc0GPAbDK0iwmor9ffmCS
-         7uYVC80ipkeby7ZpmoXTblZoqu81CFcVwiwc5uudkvflLJSyttwJv1ZYoff73Cs30nWU
-         RUtg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788358225; x=1788963025;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=3JQgfxxt0kxPrE2nrPSq4HoamEoqyDdParOq5552+rI=;
-        b=b0wyohMyXDYvfiu0FxoA91gds7aBOkwyY26nZlKyge6vRtt6Zq0aP0UUYGuWj9FuHu
-         czF0sA3EiY2yipkh9VCGF+hMF+20wygXzIynMW/47Rrdu5gpDuZLOMaJSW+wh3+LblNQ
-         mBvmvvCCjsfkgg1DPrwpF+51xSctqnjqtYRWR0amk4Un0HeSMvSDgSGmFz91YKpzWfPr
-         lIe46w3k9qCQJCS7tw1cSVZP+5HtBxdEx+JJDBmHONvkC8lTBEqw8FrAAQRc4L4wjREe
-         g984jdCNIz9vVAZ8AIL7Qx96yHKYEfE4f9Iconj8/mz5nC70t4cz0vbHcrgDyh0dl45i
-         UvBw==
-X-Forwarded-Encrypted: i=1; AKwUvByqtra0kvVSUZUCg0JvkPQCdA2xPriGsvaupyzxDB6/tvGyjg35avYN7ogedWojCyQOQCzq6FUdM4OIq3gG@vger.kernel.org
-X-Gm-Message-State: AFuF++mXDdj+8wh31E4aKjXipAyrqBrPqkAdN7ZvWA8z/bF/Mqx0tKUE
-	r6JnK/GJzLGO+KyQ9Wi7vSa0EVouesIKDUvXpuTmVuDcJ+RBwwSSrEtbw1UfqzvMk9xAzxnw3wI
-	+kqqg7KoHin5OxL9eHcqpNdUvPbHRoSDYFxkb2sPj0kiqHa/BdBvcif11FZ/CXTg21FdQ
-X-Gm-Gg: AYBFou1jt7cr2uGRKLSpn4ZQDC47jETMLh2px2cccgz+ha4qnkQn2l6Gxe8RGbZAyj3
-	XWy5SEb+fB61cUYLFiD8UPSab3ix9IpxWDQ2Q2pM6PEtCbkaqJrGADPk4U/Celfo6QSnvmRbPfk
-	UDUhaevsfA2APeDvdlQUf9EQshTDngTz8wVAyLLSA+1W+LVyXxM+oCXJ7ER7CEMIY4hlyfITcIX
-	MnkHRA981qD9rx2qwgiFjbbcmbSRN1dRGvdvsogItKkbcBElYHZF6IbPgUwOaf2lxGVAcKEDN9b
-	p5sga/RIrT4mLkd6ItiU5qJVlcPbgOUM9foKkDMuQwHYdRspn2oi6eznJAvjyhP+rkDHX5LywOk
-	zc/zjko3LfbEvCsWOTFtVDQ==
-X-Received: by 2002:a05:6102:3a06:b0:786:d38d:f7c2 with SMTP id ada2fe7eead31-78a1f29d57amr650073137.1.1788358224618;
-        Wed, 02 Sep 2026 07:10:24 -0700 (PDT)
-X-Received: by 2002:a05:6102:3a06:b0:786:d38d:f7c2 with SMTP id ada2fe7eead31-78a1f29d57amr650051137.1.1788358223963;
-        Wed, 02 Sep 2026 07:10:23 -0700 (PDT)
-Received: from [192.168.202.12] ([178.235.128.140])
-        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5b606b2627fsm601771e87.37.2026.09.02.07.10.21
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 02 Sep 2026 07:10:22 -0700 (PDT)
-Message-ID: <6af2e860-ba7a-4f86-a0e7-872a312b47e4@oss.qualcomm.com>
-Date: Wed, 2 Sep 2026 16:10:20 +0200
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="TeoZIdSD"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id DDAAD1F00ADE
+	for <linux-arm-msm@vger.kernel.org>; Wed,  2 Sep 2026 14:12:55 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1788358375;
+	bh=rN6sTLCKq1WlxEf3W8MKial3cy5QDz1RxTBBozXpCms=;
+	h=From:In-Reply-To:References:Date:Subject:To:Cc;
+	b=TeoZIdSDEA+nZ7QMx36OyM4F86Hclo+N0RYgBAOHt3ihIsWbvVekuo+A7iWnucMOM
+	 F9Sv1K7QHJ9EKzseeAhF5R/JKNulv/OrWoE/5sy/ovLJNCX5DhYbBTDeKwaVU2Pqaz
+	 hs74I9DB+nvNOJqHN8966Xky+bQKHzYTV32mDAQwtErFzApn1AvTFkmyxTaWdPpwz+
+	 QibfIOKE6nsAoivYrerfgPhREz8EnqbVOwKHMkxVB9COeMcoOKbZsLKEbZQiGFyo1s
+	 e5uJARYJcM32nEa4OC4aRVHgcbMxMSx42PgmVW89AAlLg88ZPEZsRG7RQpy0tcRF2K
+	 dc0tqfmuS9sBQ==
+Received: by mail-lf1-f45.google.com with SMTP id 2adb3069b0e04-5b60bc6b4eeso590568e87.2
+        for <linux-arm-msm@vger.kernel.org>; Wed, 02 Sep 2026 07:12:55 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AKwUvBxkQA4gdmi3L6IHY0bNteCP0G6HfjgFascLqpSuNB8CcTpcIZuj1Lz0nT9KCPzURhHtd1jWfp3YcW+wML0l@vger.kernel.org
+X-Gm-Message-State: AFuF++kwOJEu1SGH8HiPP4PEEfaNvbFBs0FDS+Kx1Dg8NzGTX4qku4kH
+	Jh3Of8uegW1rSbtWVFTS6PxwAsu/8dfrmHPgkwX2nT+j6iL6q5rUon52R3PfhhsYma42e0YEHRO
+	2cdyJoLDXEXS0oCApFDtoSHtllTljbNi3OEvsgxa+Yw==
+X-Received: by 2002:a05:6512:3d89:b0:5b6:421:a8fd with SMTP id
+ 2adb3069b0e04-5b6087b5051mr1993779e87.29.1788358374082; Wed, 02 Sep 2026
+ 07:12:54 -0700 (PDT)
+Received: from 969154062570 named unknown by gmailapi.google.com with
+ HTTPREST; Wed, 2 Sep 2026 07:12:52 -0700
+Received: from 969154062570 named unknown by gmailapi.google.com with
+ HTTPREST; Wed, 2 Sep 2026 07:12:52 -0700
+From: Bartosz Golaszewski <brgl@kernel.org>
+In-Reply-To: <20260901-pci-tc9563-aux-v1-3-dd9b80738e70@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] dt-bindings: usb: qcom,snps-dwc3: Fix glymur binding
- for non-MP controllers
-To: Krzysztof Kozlowski <krzk@kernel.org>,
-        Krishna Kurapati <krishna.kurapati@oss.qualcomm.com>
-Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>,
-        Wesley Cheng <wesley.cheng@oss.qualcomm.com>,
-        linux-arm-msm@vger.kernel.org, linux-usb@vger.kernel.org,
-        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
-References: <20260828081542.52796-1-krishna.kurapati@oss.qualcomm.com>
- <20260831-messy-ebony-warthog-cfd727@quoll>
- <ce5bf06b-8284-4355-94bb-416a8e34bd5b@oss.qualcomm.com>
- <cc52ff33-3da4-492e-80cd-ba2b1711bfed@kernel.org>
-Content-Language: en-US
-From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-In-Reply-To: <cc52ff33-3da4-492e-80cd-ba2b1711bfed@kernel.org>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTAyMDEyNSBTYWx0ZWRfX0r9+xNZwryzE
- mTX3QaF+s830b075Db6JWmUwsMPdde/anR1UCCBlBgwAIlpLkvLGXdWwA+Quc/DJCRtPIv231d8
- NdXCKzWaGVkJ5Be8SPY9jI2gKO5JoitrjcJKlBkWmXhFyhnNhe9aJw+OC50V1OrTj8fqi/zdkC9
- tUsKMZWr+Qi8nyNV/4I66O5zDF1zSplDNmJJ1RV9zncQntubIJWHHg6bblSisHDMX4DLpMKaV5a
- vEhptsRyw3OzVQujU/Ljz0yHUNsKhuT30xr2c2Iv9+wAdH05k7XHTfOT4UbHHh5y3ACF/8F2E1g
- ghlLT61/CzOCobSy29h3WMAB/Wu0S/fD9ywBuW/qYWrG8XAjb7SfhFxeE0mOD7rocE10tC5U7eI
- oJgQX/pjdqLl8OBihhWnDWrOFG5YUkuv68oJIFRK2qNl+lqy6qsMMSgCVvYGJk6887w2tuo8S78
- SIvKjwO/0D4Z6ZRn7IQ==
-X-Proofpoint-ORIG-GUID: hu0mNi-1up1plgncCqldRZFiAbtLpaEK
-X-Authority-Analysis: v=2.4 cv=MdhcfZ/f c=1 sm=1 tr=0 ts=6a982e52 cx=c_pps
- a=DUEm7b3gzWu7BqY5nP7+9g==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
- a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22
- a=l1HXmQewNA_p1I5IbwwA:9 a=QEXdDO2ut3YA:10 a=-aSRE8QhW-JAV6biHavz:22
-X-Proofpoint-GUID: hu0mNi-1up1plgncCqldRZFiAbtLpaEK
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTAyMDEyNSBTYWx0ZWRfX3bCmVbKMs7TT
- YwoTifKlZqzoNhXnY0gbcCTppAm/15K3hziTocHFhQEEgWrko9BiYahXr6ZeD8xZHXYU8Uuhl14
- aOgaOepuWwdVMOqk+ND8bwxKbKCKJb8=
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-02_03,2026-09-01_03,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 bulkscore=0 adultscore=0 suspectscore=0 malwarescore=0
- phishscore=0 clxscore=1015 spamscore=0 lowpriorityscore=0 impostorscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2609020125
+References: <20260901-pci-tc9563-aux-v1-0-dd9b80738e70@oss.qualcomm.com> <20260901-pci-tc9563-aux-v1-3-dd9b80738e70@oss.qualcomm.com>
+Date: Wed, 2 Sep 2026 07:12:52 -0700
+X-Gmail-Original-Message-ID: <CAMRc=Meajb919ZN4QYaW3E=4AktXNs1C7KPRGmkAPMrRSnPQiQ@mail.gmail.com>
+X-Gm-Features: AcwNN1UgHLMd4bA6zzWN-rQnOy4DvPk54i7L8UKWe-_sJVv321EIkRKrSQgl4uA
+Message-ID: <CAMRc=Meajb919ZN4QYaW3E=4AktXNs1C7KPRGmkAPMrRSnPQiQ@mail.gmail.com>
+Subject: Re: [PATCH 3/5] PCI/pwrctrl: tc9563: add GPIO auxiliary device support
+To: Lorenzo Bianconi <lorenzo.bianconi@oss.qualcomm.com>
+Cc: linux-pci@vger.kernel.org, devicetree@vger.kernel.org, 
+	linux-gpio@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
+	Bjorn Helgaas <bhelgaas@google.com>, Lorenzo Pieralisi <lpieralisi@kernel.org>, 
+	=?UTF-8?Q?Krzysztof_Wilczy=C5=84ski?= <kwilczynski@kernel.org>, 
+	Manivannan Sadhasivam <mani@kernel.org>, Rob Herring <robh@kernel.org>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>, Linus Walleij <linusw@kernel.org>, 
+	Bartosz Golaszewski <brgl@kernel.org>, Bjorn Andersson <andersson@kernel.org>, 
+	Konrad Dybcio <konradybcio@kernel.org>, Michael Walle <mwalle@kernel.org>
+Content-Type: text/plain; charset="UTF-8"
 
-On 8/31/26 2:29 PM, Krzysztof Kozlowski wrote:
-> On 31/08/2026 11:03, Krishna Kurapati wrote:
->>
->>
->> On 8/31/2026 2:07 PM, Krzysztof Kozlowski wrote:
->>> On Fri, Aug 28, 2026 at 01:45:42PM +0530, Krishna Kurapati wrote:
->>>> Currently for Glymur non-multiport USB controllers, number of interrupts
->>>> are limited to a maximum of "5". Either hs_phy_irq or ss_phy_irq are to be
->>>> present.
+On Tue, 1 Sep 2026 12:27:55 +0200, Lorenzo Bianconi
+<lorenzo.bianconi@oss.qualcomm.com> said:
+> The TC9563 embeds a GPIO controller used for per-port reset signals.
+> Create an auxiliary device for it so the gpio-tc9563 driver can
+> register the GPIO chip and enable DT-based GPIO lookups. Pass the
+> tc9563 regmap to the auxiliary device as its platform data.
+>
+> The downstream port DT parsing loop gains an of_node_is_type() filter
+> to skip non-PCI child nodes such as the GPIO controller node.
+>
+> The pwrctrl driver does not wait for the GPIO chip to be probed. The
+> per-port reset GPIO lookup, returning -EPROBE_DEFER until the chip is
+> registered, is added in the next patch.
+>
+> Select AUXILIARY_BUS and GPIO_TC9563 in Kconfig.
+>
+> Signed-off-by: Lorenzo Bianconi <lorenzo.bianconi@oss.qualcomm.com>
+> ---
+>  drivers/pci/pwrctrl/Kconfig              |  2 +
+>  drivers/pci/pwrctrl/pci-pwrctrl-tc9563.c | 78 ++++++++++++++++++++++++++++++--
+>  2 files changed, 77 insertions(+), 3 deletions(-)
+>
+> diff --git a/drivers/pci/pwrctrl/Kconfig b/drivers/pci/pwrctrl/Kconfig
+> index 1952ab4f29b6..a07694fae0c9 100644
+> --- a/drivers/pci/pwrctrl/Kconfig
+> +++ b/drivers/pci/pwrctrl/Kconfig
+> @@ -30,6 +30,8 @@ config PCI_PWRCTRL_TC9563
+>  	default m if ARCH_QCOM
+>  	depends on I2C
+>  	select REGMAP_I2C
+> +	select AUXILIARY_BUS
+> +	select GPIO_TC9563
 
-[...]
+I think this should depend on it, not select it?
 
->>>>                 - qcom,eliza-dwc3
->>>> +              - qcom,glymur-dwc3
->>>>                 - qcom,ipq4019-dwc3
->>>>                 - qcom,ipq8064-dwc3
->>>>                 - qcom,kaanapali-dwc3
->>>
->>> This changes the ABI without an explanation.
->>>
->> As per the harware specification, the controllers do have both 
->> hs_phy_irq and ss_phy_irq. Hence wanted the binding to capture that 
->> info. Will update the commit message accordingly.
->>
-> 
-> So the change in 99df63d20dabda8d7ae01bcca7cdb1e92110a555 was
-> incomplete? Lack of context here is not helping.
-> 
-> If they have these IRQs but it does not matter, then it is not a good
-> reason to change ABI and you should just add the clock as optional to
-> the end. Was this binding already released? I think yes.
+>  	help
+>  	  Say Y here to enable the PCI Power Control driver of TC9563 PCIe
+>  	  switch.
+> diff --git a/drivers/pci/pwrctrl/pci-pwrctrl-tc9563.c b/drivers/pci/pwrctrl/pci-pwrctrl-tc9563.c
+> index b0d8912690a2..ee9c26b8f5cb 100644
+> --- a/drivers/pci/pwrctrl/pci-pwrctrl-tc9563.c
+> +++ b/drivers/pci/pwrctrl/pci-pwrctrl-tc9563.c
+> @@ -4,11 +4,13 @@
+>   */
+>
+>  #include <linux/array_size.h>
+> +#include <linux/auxiliary_bus.h>
+>  #include <linux/bitfield.h>
+>  #include <linux/bits.h>
+>  #include <linux/delay.h>
+>  #include <linux/device.h>
+>  #include <linux/gpio/consumer.h>
+> +#include <linux/gpio/driver.h>
+>  #include <linux/i2c.h>
+>  #include <linux/module.h>
+>  #include <linux/of.h>
+> @@ -20,12 +22,10 @@
+>  #include <linux/regulator/consumer.h>
+>  #include <linux/string.h>
+>  #include <linux/types.h>
+> +#include <linux/soc/qcom/tc9563.h>
+>
+>  #include "../pci.h"
+>
+> -#define TC9563_GPIO_CONFIG		0x801208
+> -#define TC9563_RESET_GPIO		0x801210
+> -
+>  #define TC9563_PORT_L0S_DELAY		0x82496c
+>  #define TC9563_PORT_L1_DELAY		0x824970
+>
+> @@ -393,6 +393,71 @@ static int tc9563_pwrctrl_parse_device_dt(struct device_node *node,
+>  	return 0;
+>  }
+>
+> +static void tc9563_pwrctrl_adev_release(struct device *dev)
+> +{
+> +	struct auxiliary_device *adev = to_auxiliary_dev(dev);
+> +
+> +	of_node_put(adev->dev.of_node);
+> +	kfree(adev);
+> +}
+> +
+> +static void tc9563_pwrctrl_adev_remove(void *data)
+> +{
+> +	struct auxiliary_device *adev = data;
+> +
+> +	auxiliary_device_delete(adev);
+> +	auxiliary_device_uninit(adev);
+> +}
+> +
+> +static int tc9563_pwrctrl_adev_add(struct device *dev, const char *name,
+> +				   u32 id, struct device_node *of_node,
+> +				   void *priv_data)
+> +{
+> +	struct auxiliary_device *adev;
+> +	int ret;
+> +
+> +	adev = kzalloc_obj(*adev);
+> +	if (!adev) {
+> +		of_node_put(of_node);
 
-IIUC the intent of the patch is to allow specifying the currently
-missing hs_phy_irq on non-multiport controllers (i.e. usb3_[012]).
-Bundling the DT change would have made that easier.
+This is a bit confusing. You get the node in tc9563_pwrctrl_add_gpio_adev() but
+you put it here. Please either do both here or there.
 
-Konrad
+> +		return -ENOMEM;
+> +	}
+> +
+> +	adev->id = id;
+> +	adev->name = name;
+> +	adev->dev.parent = dev;
+> +	adev->dev.platform_data = priv_data;
+> +	adev->dev.release = tc9563_pwrctrl_adev_release;
+> +	adev->dev.of_node = of_node;
+> +
+> +	ret = auxiliary_device_init(adev);
+> +	if (ret) {
+> +		of_node_put(of_node);
+> +		kfree(adev);
+> +		return ret;
+> +	}
+> +
+> +	ret = auxiliary_device_add(adev);
+> +	if (ret) {
+> +		auxiliary_device_uninit(adev);
+> +		return ret;
+> +	}
+> +
+> +	return devm_add_action_or_reset(dev, tc9563_pwrctrl_adev_remove, adev);
+> +}
+> +
+> +static int tc9563_pwrctrl_add_gpio_adev(struct tc9563_pwrctrl *tc9563)
+> +{
+> +	struct device *dev = tc9563->pwrctrl.dev;
+> +	struct device_node *node;
+> +
+> +	node = to_of_node(gpiochip_node_get_first(dev));
+> +	if (!node)
+> +		return 0;
+> +
+> +	return tc9563_pwrctrl_adev_add(dev, TC9563_GPIO_DEV_NAME, 0, node,
+> +				       tc9563->regmap);
+> +}
+> +
+>  static int tc9563_pwrctrl_power_off(struct pci_pwrctrl *pwrctrl)
+>  {
+>  	struct tc9563_pwrctrl *tc9563 = container_of(pwrctrl,
+> @@ -565,6 +630,9 @@ static int tc9563_pwrctrl_probe(struct platform_device *pdev)
+>  	 */
+>  	port = TC9563_USP;
+>  	for_each_child_of_node_scoped(node, child) {
+> +		if (!of_node_is_type(child, "pci"))
+> +			continue;
+> +
+>  		if (++port >= TC9563_MAX)
+>  			break;
+>
+> @@ -596,6 +664,10 @@ static int tc9563_pwrctrl_probe(struct platform_device *pdev)
+>  	tc9563->pwrctrl.power_on = tc9563_pwrctrl_power_on;
+>  	tc9563->pwrctrl.power_off = tc9563_pwrctrl_power_off;
+>
+> +	ret = tc9563_pwrctrl_add_gpio_adev(tc9563);
+> +	if (ret)
+> +		goto remove_i2c;
+> +
+>  	ret = devm_pci_pwrctrl_device_set_ready(dev, &tc9563->pwrctrl);
+>  	if (ret)
+>  		goto power_off;
+>
+> --
+> 2.55.0
+>
+>
+
+Bart
