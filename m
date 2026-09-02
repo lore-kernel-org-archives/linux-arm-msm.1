@@ -1,217 +1,197 @@
-Received: from mail-qv1-f44.google.com (mail-qv1-f44.google.com [209.85.219.44])
+Received: from mail-wr1-f52.google.com (mail-wr1-f52.google.com [209.85.221.52])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 157613815F0
-	for <linux-arm-msm@vger.kernel.org>; Wed,  2 Sep 2026 18:40:03 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.219.44
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 31B354A92CB
+	for <linux-arm-msm@vger.kernel.org>; Wed,  2 Sep 2026 19:07:29 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.52
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788374406; cv=none; b=X/7Pj3A5/OaqPgovngC6AhsD2Hha9mFq2PbQM8RJfL3RVKRnmg8w61xUY7Pn+oz+OiDJNt54lH0FhB6VSjV5tMnVpL7subfIyqECbOlOKx5op6Xw2EfaRtWJxWZEH0ZueCHrEA1zPqxWZhmm6Rr/7FU/EE/byv4K+jw16cHWPtg=
+	t=1788376050; cv=none; b=BuYc/HAYL5jw6CJJE6HSBmH+fBDns25Y2GTD53nuWa6TWR561k2G4aOA3wHgJhLasz2uXUkZBxkhhudeHfPJrc/ONSnwzIrp3YzYGnxqDeWE+yfHWgRi4u91858cVFCvStEdsbhIfzJiXtlDYhER5IgT1Qv7adYtNK5bAwgxNVk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788374406; c=relaxed/simple;
-	bh=v6L+/uGgvk3APDzEHSqyzzlWR/+pfEbRhnJsGgDsfQg=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=VD20Udge2GKSRSNi2PFZC+VGfRodi/hIpEQZrazVyFwFx7MefU4AP8zLJxBtgLawuvSwtDs6dUC0jVWo1APUdNb1ZdTX5E8oThMSocTFBzgutnt+Rw/DObbDMepEbVWQwVy2v13hjaMaSHGpVJ7MDb5NTwjtS/yuaoNtrDYqsBw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=riscstar.com; spf=pass smtp.mailfrom=riscstar.com; dkim=pass (2048-bit key) header.d=riscstar-com.20251104.gappssmtp.com header.i=@riscstar-com.20251104.gappssmtp.com header.b=OuRxzQvs; arc=none smtp.client-ip=209.85.219.44
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=riscstar.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=riscstar.com
+	s=arc-20240116; t=1788376050; c=relaxed/simple;
+	bh=/GqE7tbYa2dWg0FxwYbCrxOWd45I2GVxpnOL6juTks4=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=PHC61ll3xssztCq4wCcN4QaxPgNRs17b9DF6jIuSaCXyge9g7mMVHhExfnfdvvJnROHap8qydGAIM7cmsLeswq7KYNFOm81nO0H/AdRoUjJ4trCWPpBvdFRDsre1ax0CvRepMepZtxLoD0/8D9AcaiGr/2EJL7NiuJ5yuERNnGU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=G7ifNw4F; arc=none smtp.client-ip=209.85.221.52
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=riscstar-com.20251104.gappssmtp.com header.i=@riscstar-com.20251104.gappssmtp.com header.b="OuRxzQvs"
-Received: by mail-qv1-f44.google.com with SMTP id 6a1803df08f44-90cd8e45460so19078716d6.1
-        for <linux-arm-msm@vger.kernel.org>; Wed, 02 Sep 2026 11:40:03 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="G7ifNw4F"
+Received: by mail-wr1-f52.google.com with SMTP id ffacd0b85a97d-48433fad54aso971620f8f.1
+        for <linux-arm-msm@vger.kernel.org>; Wed, 02 Sep 2026 12:07:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=riscstar-com.20251104.gappssmtp.com; s=20251104; t=1788374403; x=1788979203; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=oNieo4VVBlamLigtLa1PsLwlHcypSQkvEJk+H+7OF08=;
-        b=OuRxzQvsxzENLQox8enZH/NVrngaV5aKZRhdqJV8hjaLsBVNisGMButgXyGhbSxmMb
-         F+7nikPtKNKSrIMvVDx7crJLzHK26ks5cO0ePA4prisxdLJrspA73O6Jcv5P4krduV7T
-         FUINdogZKaGasnD3qw/bSAdhrqbqEWi3rXXMkHhHYT2KHAutsHv/9XA1bAVRvBSqpBtl
-         AUoDDYSKwydL27saxCogm9JhJoAJeNT4byIfauz17MJ4KrWtlD0JjjSawdaWJH94LkPt
-         jhT2mZS3GiaMSbPOiV3Pp2mUaEKA7yHyuOG5KEuIxqxcp07rwcvPpkgAwawO1loDIi1r
-         Gy4g==
+        d=gmail.com; s=20251104; t=1788376047; x=1788980847; darn=vger.kernel.org;
+        h=cc:to:message-id:content-transfer-encoding:content-type
+         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=zwE2z/0B3pciqCcOK64iCEKBwjRy6GchQ2Bx4KSJSo8=;
+        b=G7ifNw4FFa7dTgAGk8gfSlNcC+9QOPIoUvLBs2fu4cpOcDHQ69KI93kKDLzOUh/q1I
+         ujN2HLAsEYQ3B+EtQDHC4gQBi9igQuF1Po8skDnt3w4TbbVImQBSd0+TzW35xy/uRumq
+         mYiucOndnlTHN9k1A98z6lFk+/66VrgE3fUSDRxbToJY3IC5NatIosr8AitCc/cFbHeP
+         gPfGVSo6XMX9+SDEuIRxuHaasVvrq+5+/JEH39KGA3oh8S8Iu8XRS00kKSWBd9jjwi2R
+         6jVjbOI+dsrfumese3ktC8IotjLt5St4lFPk7A51b7FMQc4dIjM9Mnz0VmdX0HO2qiS1
+         wOPQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788374403; x=1788979203;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=oNieo4VVBlamLigtLa1PsLwlHcypSQkvEJk+H+7OF08=;
-        b=IwrqfSD/pchcX98CiVPmqM0UgvQZHazSVEQ+1L5LAhz7QKkSCj6dBFPmY14vuhBYYI
-         COa7CWI5M8VMh/zNWMgrOkDUh2mdyt5VJ4tcemKlsfYORh2hKteU41Voz/V3xD61hUjf
-         ZA9pHQJYYYG4DTO1TPxetMQAuQuSZx/GSVJ5L1Mls2LNTxFfi6RyvMkwJJ1rwDr7Gd4d
-         kAE3+Z7+RAv5CGxjD+ShjYx7aatz5bCQqIkQV4Acwx/MsAN5KpPu/9CNZkFxkAIBQ8Sl
-         9RYOjFffqEW0buIfj5Mzp4vQFMIr5HOza3PsLSxewQgm4QeAzNq2yPHcdD0pYpF7EPvc
-         ZliQ==
-X-Forwarded-Encrypted: i=1; AKwUvBxanvcSx1ILmyvDpGVnY2A78bdk3tq/9Lvcs1AAGIgMi2fEI9zQES8HFgyBTenVtr3E6am9ebx8iVgGsU//@vger.kernel.org
-X-Gm-Message-State: AFuF++lCRIsCQd58P6mpRNkxgutTWTCivPNlB0SwgZMW/TvRdYs3hDYM
-	g7lulKuObl1OlZtKjFATQ7EA5u27KntHTciZ8TqeOInN2+XZY3jdxDgLa2GsDKvlS6w=
-X-Gm-Gg: AYBFou12xLHuCwwdqYN4rrYZcPGFau7Kd/rG4NKmWR958dGYCKg5OS1QTK8IqLcn7HK
-	Fqcw0RZc6uBLXNmAZKzwK+TI8VJJuOaH7YiRWoGryr7kj+yE+y+C+i39A63mHo9tf4aSFUt5vpP
-	FnzqanheM3cRj0gNBF+2qaU7zzBOoLP1Iua1JV1lfMEUqoxKDLzBod9NCgRYtqi5narKzQnsYmN
-	Sc1UzmS5qlqq+rIzW4E+uhdx2LaO7SwPPhoJGAYck3azAm8GqpBo6SW+SaaZz6NIcmD+P9v9YBg
-	Dr4j9I+/EFwmig4n1/ThHBV92IsrLvmedmbgFCn92MmA8rPHhK/kL4a2054FhJx6tCTlRAwonhH
-	Ik9yI86C/UPq/u2jBnArK4gveTkowiYpT8WcYKzd1WRiXO84JQMoy4+zr5SJNgTWwqgJ0NRnG/O
-	wy2Qm/ddU46WnMIp+wJ6WIHKMtDN7sPG3wqAgBMBwGCWQIafcZnHJ/TBgM/Lq+
-X-Received: by 2002:a05:620a:7086:b0:937:631:4dfc with SMTP id af79cd13be357-93960ffaa7cmr731295885a.42.1788374402764;
-        Wed, 02 Sep 2026 11:40:02 -0700 (PDT)
-Received: from [172.22.22.28] ([73.62.185.64])
-        by smtp.gmail.com with ESMTPSA id af79cd13be357-9395f396f2bsm272551685a.33.2026.09.02.11.40.01
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 02 Sep 2026 11:40:02 -0700 (PDT)
-Message-ID: <9cc30f76-1fb7-404a-a6d6-84eb3f825e2a@riscstar.com>
-Date: Wed, 2 Sep 2026 13:40:00 -0500
+        d=1e100.net; s=20251104; t=1788376047; x=1788980847;
+        h=cc:to:message-id:content-transfer-encoding:content-type
+         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to:content-type;
+        bh=zwE2z/0B3pciqCcOK64iCEKBwjRy6GchQ2Bx4KSJSo8=;
+        b=Xubr/dRdfzKkABege+ZTYbekdlaAFzSfYeFP7xruuHAKZ+ACVkmPraclppS3rEaBHX
+         yOepA/Be9dwAvopcJpVFSDjtceZLnLuiryFUSkblPli9VX/g4QdY2teWKieXlVJhZMNC
+         140NujI1+qEP25h1WUl72+h9pcSekixba4bgdLWl6aHiT6jQqI+enJOh+MTHWuLhgqOO
+         1TM8skOCW2tixdJfZ5q/wopEQivGHHUH19U2dpCsN+hGCq1K4LJOTeULqYdoqDFrsKgo
+         1GqdBlS5AW5loRjvRepF4G1/wiIYtpWopBs6GGTHnKTFlEbE0WuKNrAM84C7D3QQCwpl
+         DGnQ==
+X-Gm-Message-State: AFuF++nq2Bnvz+am0EXDOllxL1rdt64qoMR4xGo0aaIzCOI+bETy7o5L
+	MQX993zQb1aX7iDnFA8O1tO+/uzPxSVNZBlGTm1UpnC8KHcf9qTwFNb+
+X-Gm-Gg: AYBFou2Uaqie0oPlg/G1nbclnDYM442NZHKOx5d6SfgkYY5f1OehxYHhu/FHlZWdC9t
+	frygrVEjmqWJ8Y61F459jAW8EmYjUczURnR8rjbsXiBpfvT+EBkP8nw/4Xqj+HLY2yYxFzeMNPn
+	pwvefeIfZMBYWGYjyF4dDCxcHa6ZB5GmlyVlykPpvSNMmqJtwBglDYE3D6Vs6Ql8Z6Qz3zT09fZ
+	SenaIKlS/xxsOxFgl2UeVSCCzlOdcO1vUm3hs4PsLpWJOfJAT7iNv4aU6uQ3A1t9I1p4V/s6TVt
+	q4qsDbgVPc8j4C+jcMjSOmf1pQBqMakber1kB607WYEcdPF8CmLgdRHWVSgVqFzY4nQK+MX20Hn
+	PtUMsgHg4jl12gL0Y4BgVCGthYvsJ+J3IxVfatq0/youas8fKoxVVSaQyVEO3MkiitINdXNVj/h
+	udzpSqaZ7DPSN41KolgMkpKQtr9mlH5upaZ9I+wIywe/eHLeeu83lmOXyAd3GCI4QvUiJx5wtoJ
+	hgXwlhp9zVLxRPwbYnM+p2cKH2q
+X-Received: by 2002:a05:6000:491a:b0:482:ea08:8c97 with SMTP id ffacd0b85a97d-48488e0392dmr13325516f8f.2.1788376047145;
+        Wed, 02 Sep 2026 12:07:27 -0700 (PDT)
+Received: from [192.168.1.9] ([148.252.128.8])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48448e80388sm9518927f8f.14.2026.09.02.12.07.25
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 02 Sep 2026 12:07:26 -0700 (PDT)
+From: Dale Whinham <daleyo@gmail.com>
+Date: Wed, 02 Sep 2026 20:07:16 +0100
+Subject: [PATCH v3] arm64: dts: qcom: x1-denali: Add volume up/down GPIO
+ keys
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/5] arm64: dts: qcom: qcs6490-rb3gen2: use pci for device
- nodes
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260902-surface-pro-11-volume-buttons-v3-1-9d41987bcd75@gmail.com>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/43OQQ6CMBAF0KuQrh3TloLgynsYF7QMUAOUtNBoC
+ He3xYXudPkzP+/PShxajY6ck5VY9NppM4aQHhKiumpsEXQdMuGU57TgJbjFNpVCmKwBxsCbfhk
+ Q5DLPZnTQCCko8kyhkiQYk8VGP3b/entnt8g7qjmisdFpNxv73B/wLPb+3fIMGIRzVpSpSKu8u
+ LRDpfujMgOJW55/tJLyXxoPGquDpU4yE4J+a9u2vQBGFsCFKgEAAA==
+X-Change-ID: 20260829-surface-pro-11-volume-buttons-f4b40e25cecb
+To: Bjorn Andersson <andersson@kernel.org>, 
+ Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>, 
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, 
+ =?utf-8?q?J=C3=A9r=C3=B4me_de_Bretagne?= <jerome.debretagne@gmail.com>, 
+ Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, 
+ Abel Vesa <abel.vesa@oss.qualcomm.com>, Dale Whinham <daleyo@gmail.com>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1788376045; l=3391;
+ i=daleyo@gmail.com; s=20251214; h=from:subject:message-id;
+ bh=/GqE7tbYa2dWg0FxwYbCrxOWd45I2GVxpnOL6juTks4=;
+ b=/L/FiUEdcMYd8AUfzRtemoMmvDtSWlNwWBtH0gnIoq5ej1LFSXauNVyUtRw4Hlr8kOMBuzEzI
+ ELrUwGmIu+GBG2kBrkHsac8kpBUlrrh7+fjgsCYCYQX0r+Eosyuz6PI
+X-Developer-Key: i=daleyo@gmail.com; a=ed25519;
+ pk=M4mvgx1TB2TniKaedTDsO3PbLKgFosJuegXRXPbn2Ds=
+
+Configure gpio6 and gpio8 as volume up and volume down respectively, to
+enable the volume rocker located at the top of the screen.
+
+Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Reviewed-by: Abel Vesa <abel.vesa@oss.qualcomm.com>
+Signed-off-by: Dale Whinham <daleyo@gmail.com>
+---
+Note: the DTS coding style says properties within a group shall use
+natural sort order by name, which for the new pin state nodes would give
+bias-pull-up, function, input-enable, pins, power-source. I've instead
+led with pins and function, matching every other pin configuration group
+in the x1* device trees. Happy to switch to the strict natural sort if
+that's preferred.
+---
+Changes in v3:
+- Sort the child nodes of gpio-keys alphabetically by name, and re-order
+  the pinctrl-0 entries to match (Konrad, DTS style guide).
+- Re-order the properties within the new pin state nodes to lead with
+  pins and function, matching the other x1* pin state nodes.
+- Link to v2: https://patch.msgid.link/20260902-surface-pro-11-volume-buttons-v2-1-1d893c7b5440@gmail.com
+
+Changes in v2:
+- Sort the new pin configuration nodes by controller and GPIO number (Konrad)
+- Link to v1: https://patch.msgid.link/20260829-surface-pro-11-volume-buttons-v1-1-ace589343a68@gmail.com
+
+To: Bjorn Andersson <andersson@kernel.org>
+To: Konrad Dybcio <konradybcio@kernel.org>
 To: Rob Herring <robh@kernel.org>
-Cc: andersson@kernel.org, konradybcio@kernel.org, krzk+dt@kernel.org,
- conor+dt@kernel.org, daniel@riscstar.com, mohd.anwar@oss.qualcomm.com,
- lorenzo.bianconi@oss.qualcomm.com, devicetree@vger.kernel.org,
- linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org
-References: <20260901172058.1512508-1-elder@riscstar.com>
- <20260901172058.1512508-2-elder@riscstar.com>
- <CAL_JsqJJPdrYArNhbRPTM=scDghLAWe5=0a2+ACNaHe07h6-tw@mail.gmail.com>
- <d9071ec7-371f-4896-a023-77a07f01f65e@riscstar.com>
- <20260902165325.GA1440252-robh@kernel.org>
-Content-Language: en-US
-From: Alex Elder <elder@riscstar.com>
-In-Reply-To: <20260902165325.GA1440252-robh@kernel.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+To: Krzysztof Kozlowski <krzk+dt@kernel.org>
+To: Conor Dooley <conor+dt@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org
+Cc: devicetree@vger.kernel.org
+Cc: linux-kernel@vger.kernel.org
+---
+ arch/arm64/boot/dts/qcom/x1-microsoft-denali.dtsi | 36 ++++++++++++++++++++++-
+ 1 file changed, 35 insertions(+), 1 deletion(-)
 
-On 9/2/26 11:53 AM, Rob Herring wrote:
-> On Wed, Sep 02, 2026 at 07:51:54AM -0500, Alex Elder wrote:
->> On 9/1/26 3:05 PM, Rob Herring wrote:
->>> On Tue, Sep 1, 2026 at 12:21 PM Alex Elder <elder@riscstar.com> wrote:
->>>>
->>>> A recent change caused the embedded PCIe endpoints on TC9564 SoCs to
->>>> be treated by the devicetree code as PCI buses, which is incorrect.
+diff --git a/arch/arm64/boot/dts/qcom/x1-microsoft-denali.dtsi b/arch/arm64/boot/dts/qcom/x1-microsoft-denali.dtsi
+index 7559557610ed..c14a1b9b1130 100644
+--- a/arch/arm64/boot/dts/qcom/x1-microsoft-denali.dtsi
++++ b/arch/arm64/boot/dts/qcom/x1-microsoft-denali.dtsi
+@@ -20,9 +20,27 @@ aliases {
+ 	gpio-keys {
+ 		compatible = "gpio-keys";
+ 
+-		pinctrl-0 = <&hall_int_n_default>;
++		pinctrl-0 = <&vol_down_n>, <&vol_up_n>, <&hall_int_n_default>;
+ 		pinctrl-names = "default";
+ 
++		key-vol-down {
++			debounce-interval = <15>;
++			gpios = <&pm8550_gpios 8 GPIO_ACTIVE_LOW>;
++			label = "Volume Down";
++			linux,can-disable;
++			linux,code = <KEY_VOLUMEDOWN>;
++			wakeup-source;
++		};
++
++		key-vol-up {
++			debounce-interval = <15>;
++			gpios = <&pm8550_gpios 6 GPIO_ACTIVE_LOW>;
++			label = "Volume Up";
++			linux,can-disable;
++			linux,code = <KEY_VOLUMEUP>;
++			wakeup-source;
++		};
++
+ 		switch-lid {
+ 			gpios = <&tlmm 2 GPIO_ACTIVE_LOW>;
+ 			linux,input-type = <EV_SW>;
+@@ -984,6 +1002,22 @@ &pcie6a_port0 {
+ };
+ 
+ &pm8550_gpios {
++	vol_up_n: vol-up-n-state {
++		pins = "gpio6";
++		function = "normal";
++		bias-pull-up;
++		input-enable;
++		power-source = <1>; /* 1.8V */
++	};
++
++	vol_down_n: vol-down-n-state {
++		pins = "gpio8";
++		function = "normal";
++		bias-pull-up;
++		input-enable;
++		power-source = <1>; /* 1.8V */
++	};
++
+ 	rtmr0_default: rtmr0-reset-n-active-state {
+ 		pins = "gpio10";
+ 		function = "normal";
 
-I respond below, and have a plan for moving forward.
->>>> An RB3gen2 system has an "interposer board" that contains a TC9564
->>>> SoC.  The TC9564 includes a PCIe switch with one upstream port and
->>>> two downstream (external) ports, plus a third downstream port.  The
->>>> third port has an embedded PCIe endpoint with two functions, each
->>>> providing access to a 10 Gbps capable Ethernet interface.
->>>>
->>>> The devicetree nodes representing these functions were previously
->>>> named "pci@" but were renamed in the interest of consistency in
->>>> commit e806c63ba51a7 ("arm64: dts: qcom: Rename pci@ nodes to pcie@").
->>>>
->>>> Unfortunately, of_node_is_pcie() causes nodes named "pcie@" to be
->>>> treated as PCI bridges, which PCI endpoints are not.  The previous
->>>> name "pci" matched such nodes as "default-flags" bus type, defined
->>>> in the of_busses[] array.
->>>>
->>>> Rename the PCIe endpoint nodes "pci@" so they are not mistaken for
->>>> bridge nodes by the devicetree parsing code.  This restores the
->>>> previous behavior, and allows them to be used for PCI endpoint bus.
->>>>
->>>> Fixes: e806c63ba51a7 ("arm64: dts: qcom: Rename pci@ nodes to pcie@")
->>>> Signed-off-by: Alex Elder <elder@riscstar.com>
->>>> ---
->>>>    arch/arm64/boot/dts/qcom/qcs6490-rb3gen2.dts | 4 ++--
->>>>    1 file changed, 2 insertions(+), 2 deletions(-)
->>>>
->>>> diff --git a/arch/arm64/boot/dts/qcom/qcs6490-rb3gen2.dts b/arch/arm64/boot/dts/qcom/qcs6490-rb3gen2.dts
->>>> index a13315bf0fb07..99a985a177a61 100644
->>>> --- a/arch/arm64/boot/dts/qcom/qcs6490-rb3gen2.dts
->>>> +++ b/arch/arm64/boot/dts/qcom/qcs6490-rb3gen2.dts
->>>> @@ -954,7 +954,7 @@ pcie@3,0 {
->>>>                           ranges;
->>>>                           bus-range = <0x5 0xff>;
->>>>
->>>> -                       pcie@0,0 {
->>>> +                       pci@0,0 {
->>>
->>> The kernel should treat either name the same. There may have been some
->>> reason 'pci' was not included in checks. It could have been that only
->>> old things are (parallel, plain) 'pci' and anything new is 'pcie'.
->>
->> OK.  Does this mean "pci@" and "pcie@" should only represent bridge
->> devices?  (These devices are all endpoints and erroneously had
->> device_type = "pci" properties, among other things, so I'm already
->> fixing that.)
-> 
-> Yes.
+---
+base-commit: 8d3ae59288f1e7d58d76558a6ee96d533bc5019f
+change-id: 20260829-surface-pro-11-volume-buttons-f4b40e25cecb
 
-OK.  This means that these nodes were misnamed, and that should
-be fixed when addressing the broader problem of describing
-these nodes as if they were a PCI bridges rather than endpoints.
-That problem is addressed in this other series:
-
-   https://lore.kernel.org/lkml/20260901013654.1343537-2-elder@riscstar.com/
-
-Lots of reviews on that...  But I'll submit *one more version*
-of it, as described below.
-
->> Do you want me to make a (separate) change to treat "pci" the
->> same as "pcie"?
-> 
-> Only if it fixes something besides consistency.
-
-I have no example of this causing a problem, so I will not
-implement any such change.
-
->>> These are ethernet devices, right? Then the right name is
->>> 'ethernet@0,0'. If not, then pick something that matches what the node
->>> is. Both pci and pcie mean the node implements a PCI bus.
->>
->> They implement Ethernet devices, yes.  But they are used for
->> pci-ep-bus (and the Ethernet devices bind to a sub-node), and
->> that's what's important about these nodes.  What's the right
->> name?  The dynamically-generated node uses "dev@".
-> 
-> I don't love 'dev', but don't have a better suggestion for it.
-
-OK.  The only reason I like "dev" is that it matches what the
-dynamic PCI devicetree nodes are named.
-
->> Is "ethernet@" still right, if it's also used to access a
->> clock and a reset and ... via pci-ep-bus?
-> 
-> "ethernet@" belongs on the node that has ethernet-controller.yaml schema
-> applied.
-
-That makes sense and it's actually how it's done in our code
-currently (not all of it is currently out for review).
-
->> I want to use the right name, I'm just unsure about what that
->> is, given its use for access via pci-ep-bus.
-> 
-> I don't know if there's a right name here. You just can't use a standard
-> name if the node doesn't implement what the standard name defines.
-> Granted we just have a list in the spec and some names (e.g. pci) imply
-> more that other names.
-
-Here is my plan.
-
-First, I will use "dev@" rather than "pci@" for the names of
-these endpoint nodes--in all of the affected Qualcomm DTS
-files.
-
-Second, rather than doing that as a follow-on to *this* series,
-I will instead post version 3 of the series linked to above,
-adding to the changes made that the names of the nodes will
-get changed as well (for the reasons covered here).  I therefore
-retract this series, because it will be merged into the other one.
-
-==> MANI, KONRAD, ABEL:  I am going to keep your
-     Reviewed-by tags on the new version, because I think it's
-     more likely than not you agree with this change.
-
-     Please just ask me to remove it when I post if you
-     disagree.
-
-					-Alex
-> 
-> Rob
+Best regards,
+--  
+Dale Whinham <daleyo@gmail.com>
 
