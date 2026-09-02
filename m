@@ -1,161 +1,71 @@
-Received: from mail-wr1-f50.google.com (mail-wr1-f50.google.com [209.85.221.50])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 790903C10A7
-	for <linux-arm-msm@vger.kernel.org>; Wed,  2 Sep 2026 07:07:39 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.50
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 36BF434CFAB;
+	Wed,  2 Sep 2026 07:49:17 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788332861; cv=none; b=lH1tskFbBuEMAYFFrsBbziB0KWHKXzqRi92Dl9JnTDbIevnX/z439ZlQOFLWlH5K7LauL3AN8OLLWO80uL6ZgHpUiHDvAK2Sk36x1D74UMs61QG7VR17HB1CPLOLo+/YHh0/d0PThjEgEkD1mxvMRSXj7w+OMsJczBhoxULAjuk=
+	t=1788335358; cv=none; b=asGY4N5lr0sAsk7mThzf4Us5QVL5yGAYN1FOQPlnvcduKhJGFUyk994chfDv9yqOO37sAMRJuanJPRPt0zYYEkqQVlPGIutS8lM/cL0WP2iFZrVakeg5HYIGdgX0vAUOTygG6F3ITrQ4BT2XVDKI4nhVpXO6A0Ibn/0bJxCth4w=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788332861; c=relaxed/simple;
-	bh=FedWjQDFkhAuQzFzf4Nf1k2L0r5/SaGP2n+Z680dXvo=;
-	h=Message-ID:Date:MIME-Version:From:Subject:To:Cc:References:
-	 In-Reply-To:Content-Type; b=qPP8OajAeppkfLTHuBiiJnbRV7HJVLDyzlbOw5QuO0WHo6a251G17s0ltj1EY6mJ/R35Neezo+OLQSND+GCIywoEUfk7DQnY86cdyY2Zaamysd9PWOtpcrWmYkQCL75G3Ut+3njbxbD2sn06PRZ/6DbMafTtYsPaQ5PGMGAG7O8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=Lzl98Kbp; arc=none smtp.client-ip=209.85.221.50
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
+	s=arc-20240116; t=1788335358; c=relaxed/simple;
+	bh=03qe3iU0xHajNwJ/JkU7x9IQhvLwEB8ffAtvkb7VM7E=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=Iexy9RdsnFL5I/bdfQ52U/wsQ9L83ahMlI+mLFgd5X0gXYMuk5IlctrAlJITg5I6I2hYx9q3axUNsGNUlxYvQWMR/n/sXSt4UhXtZKf69YusmRiktKX8uU1jWzydHZmJw8SYFYZx5oqp51XcwareEMPmX70hewK8FBXGnM+7jIA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=MSPWSuLF; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="Lzl98Kbp"
-Received: by mail-wr1-f50.google.com with SMTP id ffacd0b85a97d-47fe89fb333so420502f8f.3
-        for <linux-arm-msm@vger.kernel.org>; Wed, 02 Sep 2026 00:07:39 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1788332857; x=1788937657; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:organization
-         :autocrypt:content-language:references:cc:to:subject:reply-to:from
-         :user-agent:mime-version:date:message-id:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=8Vfu72tBiiNU8XcM6XXnBVHaiA2eAANag0f1nJhi2+U=;
-        b=Lzl98KbpqgcNS592TLTSehZ2I5f2PNgBtpeXHG52yr4RiDTtGDw18M7/dzDZuGuOp+
-         eJ88Gwt2Ie5rpbm5wSC3DNj/OtvCN3m03gddAxBCyShumPqz4U0gjLZtUPE2E8R6xlBb
-         o9pP9OeAraM7y2kYO6//pdlYnt2NLKjiaE+SYbzMhV90vz9w4SOfRkOGhclvdu0naaNc
-         EC08+6C1bzBjwwguj26j3UdkngKZN1EEPjKKasII17PpYyZTjxvA6JXy9bytJbNgY1mj
-         0uuM2xdO4KeHVjs8STgUkm7p5aPpIsSDzILe6pj4PgzFq+aD+CUq2CLggCZDPZ45A9ls
-         XHOg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788332857; x=1788937657;
-        h=content-transfer-encoding:content-type:in-reply-to:organization
-         :autocrypt:content-language:references:cc:to:subject:reply-to:from
-         :user-agent:mime-version:date:message-id:x-gm-gg:x-gm-message-state
-         :from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=8Vfu72tBiiNU8XcM6XXnBVHaiA2eAANag0f1nJhi2+U=;
-        b=Ht1Q4p8928BDPNwPMRgT4i6wrrDJVFWRsXt+cBrgvtG8NvUyKtawYxywIhx3cLOSji
-         IKBTa9z+t9MwTaWRefRzRCfYeEP+CuX+6hdi+lviF01giH/PGY1igraJkvxpHTFXNFAC
-         sv+ktVUD3fK6qpxK2zx+68+na2/bJcxQel1KwNRYqP7B/ulqLkhnggidgKa6sxdLRdgf
-         a5J/4o2pZxpmLHK5YLw13g8NJBo65zuPtObWDl62N1mSQUIHsD+N/z7F6WWS0KL1/H7p
-         OvMZaIKW3vdhzt5t7MeBmMP6kTNnELZIeEskSjhXBFcWq3E1xviGAltdRz0rVP2K1+X/
-         IbYQ==
-X-Forwarded-Encrypted: i=1; AKwUvBwH1bvfKGUlNXtSz/Elu+ChyiikDMmqJRTlwU30VQ/ev0lZbgtiQIpqkSFXOgQTcUVwe5DhEDmvUynzYXFS@vger.kernel.org
-X-Gm-Message-State: AFuF++lNaTkLglkaazsKD0tLAuzGi2vkd7mwKuWNHxJIvMzUkeUnbx5H
-	9Hzr0bb+7K7beuZcw//Q13RgPO0c08efwnx19EAY4nDJMgLdYuASiHptJCXQlsGAbrY=
-X-Gm-Gg: AYBFou3FJO4z45lHFbTjDNgq11mE3/hIy6rCU+tN8Zq9Sw/dn1+TuucVQco1n+Gw1aO
-	tYkGG4SQTLrrUjGmEAg2ytkBptsBrlSvJ9oAzT8QNpb92n1l92dahHLGqzvKpfRzHEFOrmicieG
-	X1PM/N9a6VPYWwwXae2bBbIXvcnTuZqKVMLIYnPF9fUOxt3P2cmT6T7ihJ1IZRD6dCZ435Pgbk8
-	6uJahh5vsu+YPI6hho87NdT+KAtG6BBENy75puqYJOcOld2Ye9Cz72bQ0rTKV3THI/n8qy8fgGN
-	25W9uvKo+rTozgVlmlVAUKSfPPNTwSCIbAMrl7xiEDnk7vHyeAwuE7bvjVXxiHiEqv9l31Kl93q
-	72VOViqesPmk7bb4LJ51xXuDK3mbOrfH2J72wNgcEytANCGMM3ZMC0yIxOaz52pf8bK/CabP8tQ
-	nqLbmh3CyoUR+1V8OLPGzDhd/wEwycftThj0zXV3Z70+bEEJmFJPSD5CYapMS8LKJ4EZtEtwyTg
-	tPyjeys1XmxVJY4fiezcNeqozl6g39jP0uMvMz0IWs=
-X-Received: by 2002:a05:6000:4a11:b0:484:3f43:4914 with SMTP id ffacd0b85a97d-484914b7e15mr4452356f8f.20.1788332857515;
-        Wed, 02 Sep 2026 00:07:37 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:106d:1080:526b:98c6:2fb7:c242? ([2a01:e0a:106d:1080:526b:98c6:2fb7:c242])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48448e72df2sm4746752f8f.1.2026.09.02.00.07.36
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 02 Sep 2026 00:07:37 -0700 (PDT)
-Message-ID: <60c230e4-d138-4522-afa5-07d579c8db5b@linaro.org>
-Date: Wed, 2 Sep 2026 09:07:35 +0200
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="MSPWSuLF"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 77D951F000E9;
+	Wed,  2 Sep 2026 07:49:10 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1788335357;
+	bh=s8Eo7ol2MpLclIW3Ma0lRro98Gdwdec1Kmfw5HO+SmE=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=MSPWSuLF0lYksTPJltML1tzWwBvAzoU3G0OLlXcxLHJudeMCYu0pz7AAKTRNFo8P4
+	 dYTbe3ZKOIskvQ/bUCgRa1IvxwEylNKBnDC1CHAINh14B2tNsSYgl1mwtC7XpEP5kR
+	 kfhZg9aG+5KRSN3dPxx0s0S82VRhqqelwRqLujr0sRF9mdh3OxaeacsG24S+GJ7m19
+	 8cCovTzAJz27XGWm8V1YeHiQDdyxLfUn4sk5al0nuXxjpBKg09KQPCZMvqG174J4BI
+	 T5t5Tm3PKlo3OfVlKo4fV38yoPzN/zwAdVfK41k6pZTbcmFGAriexNvfoYlP2bPW81
+	 yoNTW7O4KWm1g==
+Date: Wed, 2 Sep 2026 13:18:51 +0530
+From: Manivannan Sadhasivam <mani@kernel.org>
+To: Saurabh Anand <saurabh.anand@oss.qualcomm.com>
+Cc: Vinod Koul <vkoul@kernel.org>, 
+	Neil Armstrong <neil.armstrong@linaro.org>, Rob Clark <robin.clark@oss.qualcomm.com>, 
+	Dmitry Baryshkov <lumag@kernel.org>, Abhinav Kumar <abhinav.kumar@linux.dev>, 
+	Jessica Zhang <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>, 
+	Marijn Suijten <marijn.suijten@somainline.org>, David Airlie <airlied@gmail.com>, 
+	Simona Vetter <simona@ffwll.ch>, linux-arm-msm@vger.kernel.org, linux-phy@lists.infradead.org, 
+	linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, freedreno@lists.freedesktop.org, 
+	Ritesh Kumar <quic_riteshk@quicinc.com>, Vishnuvardhan Prodduturi <quic_vproddut@quicinc.com>, 
+	Mani Chandana Kuntumalla <quic_mkuntuma@quicinc.com>, Mahadevan P <mahadevan.p@oss.qualcomm.com>
+Subject: Re: [PATCH 1/4] phy: qcom: qmp-combo: delay Type-C mux switch while
+ DP PHY is initializing
+Message-ID: <37cs3ejjaldogjlh3oyhzxgedl2w2s6qk7sercwem5j23vdtb4@2dzhapohcgda>
+References: <20260824-qcom-dp-typec-reconnect-fixes-v1-0-2825e5bf8a96@oss.qualcomm.com>
+ <20260824-qcom-dp-typec-reconnect-fixes-v1-1-2825e5bf8a96@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH v16 2/2] phy: qcom-mipi-csi2: Add a CSI2 MIPI DPHY driver
-To: Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
- Vinod Koul <vkoul@kernel.org>, Kishon Vijay Abraham I <kishon@kernel.org>,
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
- Conor Dooley <conor+dt@kernel.org>
-Cc: Bryan O'Donoghue <bod@kernel.org>,
- Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
- linux-arm-msm@vger.kernel.org, linux-phy@lists.infradead.org,
- linux-media@vger.kernel.org, devicetree@vger.kernel.org,
- linux-kernel@vger.kernel.org
-References: <20260901-x1e-csi2-phy-v16-0-dd863b929080@linaro.org>
- <20260901-x1e-csi2-phy-v16-2-dd863b929080@linaro.org>
-Content-Language: en-US, fr
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro
-In-Reply-To: <20260901-x1e-csi2-phy-v16-2-dd863b929080@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260824-qcom-dp-typec-reconnect-fixes-v1-1-2825e5bf8a96@oss.qualcomm.com>
 
-On 9/1/26 22:15, Bryan O'Donoghue wrote:
-> Add a new MIPI CSI2 driver in DPHY mode initially. The entire set of
-> existing CAMSS CSI PHY init sequences are imported in order to save time
-> and effort in later patches.
+On Mon, Aug 24, 2026 at 04:58:04PM +0530, Saurabh Anand wrote:
+> The Type-C mux switch guard only checked dp_powered_on, which is set in
+> qmp_combo_dp_power_on(). However there is a race window between
+> qmp_combo_dp_init() and qmp_combo_dp_power_on() during which dp_init_count
+> is non-zero but dp_powered_on is still false. A Type-C orientation change
+> arriving in this window would proceed with the mux switch while the DP PHY
+> is mid-initialization, corrupting the PHY state.
 > 
-> The following devices are supported in this drop:
-> "qcom,x1e80100-csi2-phy"
+> Extend the guard to also block the mux switch when dp_init_count is
+> non-zero, covering the full period from dp_init through dp_power_on.
 > 
-> In-line with other PHY drivers the process node is included in the name.
-> Data-lane and clock lane positioning and polarity selection via newly
-> amended struct phy_configure_opts_mipi_dphy{} is supported.
-> 
-> The Qualcomm 3PH class of PHYs can do both DPHY and CPHY mode. For now only
-> DPHY is supported.
-> 
-> In porting some of the logic over from camss-csiphy*.c to here its also
-> possible to rationalise some of the code.
-> 
-> In particular use of regulator_bulk and clk_bulk as well as dropping the
-> seemingly useless and unused interrupt handler.
-> 
-> The PHY sequences and a lot of the logic that goes with them are well
-> proven in CAMSS and mature so the main thing to watch out for here is how
-> to get the right sequencing of regulators, clocks and register-writes.
-> 
-> The register init sequence table is imported verbatim from the existing
-> CAMSS csiphy driver. A follow-up series will rework the table to extract
-> the repetitive per-lane pattern into a loop.
-> 
-> Signed-off-by: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
-> ---
->   MAINTAINERS                                        |  10 +
->   drivers/phy/qualcomm/Kconfig                       |  15 +
->   drivers/phy/qualcomm/Makefile                      |   5 +
->   drivers/phy/qualcomm/phy-qcom-mipi-csi2-3ph-dphy.c | 385 +++++++++++++++++
->   drivers/phy/qualcomm/phy-qcom-mipi-csi2-core.c     | 462 +++++++++++++++++++++
->   drivers/phy/qualcomm/phy-qcom-mipi-csi2.h          |  97 +++++
->   6 files changed, 974 insertions(+)
-> 
-LGTM when bindings are reviewed
+> Signed-off-by: Saurabh Anand <saurabh.anand@oss.qualcomm.com>
 
-Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
+If this patch fixes a race condition, it should have a Fixes tag.
 
-Thanks,
-Neil
+- Mani
