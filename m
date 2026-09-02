@@ -1,265 +1,167 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B24733932D0
-	for <linux-arm-msm@vger.kernel.org>; Wed,  2 Sep 2026 20:43:59 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AF3FD3EC817;
+	Wed,  2 Sep 2026 20:59:19 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788381843; cv=none; b=cXovPG6WLQ+Yn1fW502CKb6yZ2QBkPoVql2pPCX2dIHBMkbUIf0JIKbhYk0TW2tl4EZyfpsQ35c814EGwMZt+UqpeyczYGY3GQa7QIOq0TGqbtKfGrs8/ZADPUX+oPh0Gr8tvB+qltOnBZagy0N3Y3OI0OIyDGawX+rrQ3S5SNM=
+	t=1788382759; cv=none; b=LXGZm0lP1y6469fKrjwQ3Eif2XG0r+LtTtBfMei9cPcic8aofyDFs6sxOBg7iDggizTHTTrXEgM3luyMd0645VvNQqx4mMXCS6cKb4CUTQFhEovsuaX52qL0b4SV6TSN1B/Xz1luH+UaeZfyP2Nn9s9Y5bAkR/p67C4FvvUeKJA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788381843; c=relaxed/simple;
-	bh=1z4hVKzisxhIRAyUw1nUzgWZ8W2mVCExFvXktTWACio=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=GAtm0/mTGGevLuuBua4TNGvdGuUz0BuH1BmUWC/jzlVS39ew6GSIKV8OtOQWGOX/ZSrcqUSiG+nriJesMWYs3H+GNiZxG20n2wXz3Fvdho5RnG43uIp3DDngJOfm8i1fSeeF/2m5e+5g3u6rYwNRtDxOYHL8xF7Ou7kFiwn18Bk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=FV1B1HSm; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=XRXsCEvv; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1788382759; c=relaxed/simple;
+	bh=o6ZMOO1F2veKkIxKQMkgJPH1tbnxOMIvUn/ozfxNnmo=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
+	 In-Reply-To:To:Cc; b=G5vGObms9spFlbEdMjGTC5XYeNsOP6yOwmlO/2UTWPC8br5TCqqcUOLk5ZJgtqobMdy/oAxw47Y42fsLuQm5B79EYiBqs8BaVTFzL98pNQQO2GQd3V/AGgRZEdN1zR3e+9ecjSHx661t6/uMrEhzAjV1KocjZycgfcx011cWpY4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=YRQZJRSD; arc=none smtp.client-ip=10.30.226.201
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="FV1B1HSm";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="XRXsCEvv"
-Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 682KHZ502025826
-	for <linux-arm-msm@vger.kernel.org>; Wed, 2 Sep 2026 20:43:57 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:date:from:in-reply-to:message-id
-	:mime-version:references:subject:to; s=qcppdkim1; bh=anNy8s/uZds
-	UFbHr0PSErFrn5JflynV/wHlQiG06h5o=; b=FV1B1HSm06f0R/HNIafhtB49I5c
-	YN09Aw27Q6EyVsunlo5GvQWhlWrza+Pz/pl1CtiaSy9KFIWjoTDAmXAkLRJroE3W
-	4QZgKDMswho5MH/nsJgXZgjrB63WGYT049TbkZQuNyZ9CDj+flYSDrxgvqsrbLwT
-	glfptu35bZ/mdigTHDmmJ0MI4yF7QgUJ37x0SNwYiDkkr3NW3fUMjVFMwo3eAtud
-	oitv64Y2zOYmE4bcUlJpklm2q32WTy6rvwoB9N0uqR1KVWnpK2ITHlvOAAxV1wwR
-	nQLEKEyukJy4ldCoqrYK97IvIrYrtpDcOqLnZQmgne75bSASPW/YZyhvhsg==
-Received: from mail-pj1-f70.google.com (mail-pj1-f70.google.com [209.85.216.70])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gemcea03m-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 02 Sep 2026 20:43:56 +0000 (GMT)
-Received: by mail-pj1-f70.google.com with SMTP id 98e67ed59e1d1-398e1fafe17so2280406a91.0
-        for <linux-arm-msm@vger.kernel.org>; Wed, 02 Sep 2026 13:43:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1788381836; x=1788986636; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=anNy8s/uZdsUFbHr0PSErFrn5JflynV/wHlQiG06h5o=;
-        b=XRXsCEvvm/Q1EMLZ3zVnlQKcMY5/bOnnxXp4o41W9goBcODfGxP5NZLIta0D5IiUlE
-         +5C8qyJZGfWGkDB9uZmx4lJyaTXX7Rbys7Kfv0vKL9ezcM/A9fQHwAu0LgzXQRpEEGTs
-         bwzh4TaRiGxzHGsAUtPivMARY7WSR1Re8zN2xETx+e159vxEkzw2hUx3s3Tqyj86vWqq
-         rDUWnmwnXoBglAV354EjcWbC58C6EL2MiurdPuxR+uGenKSJ1vA6Mrpog7Qx9UxQoX3y
-         Xx04nnfWYcFeosADRtJssy9k6IPoX2cQzgW/WvOqB0Bvq5+mwrCwRLTPptQEggNRgI2J
-         WUWw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788381836; x=1788986636;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=anNy8s/uZdsUFbHr0PSErFrn5JflynV/wHlQiG06h5o=;
-        b=oVbvLgt2Z58Su60HAXsEaCroK+dSP9VyEH0vtF4EvR/+C07MVUqz3taDMZrsnRAJtY
-         yjnoddsVVdrZJ0a/DNi1kQelJYB4RScIRkuo/nxR4svENTgbdqLzBJZHrGXTUvPUyMSE
-         HQV1NsV/kmUZV9ZLTAX/NOWZCoILQfdlF40McmKbG0632WCrQuXWpndIUzR8kiu8/vuX
-         0lwwBD6A/lMffILeqYeQZVWq4bu0x2hQwEQRqvC3VtfzWvjf/XrH4F7xNeaJ0mce2ps1
-         im7Sp0ZJmiAV+XhcyD3tDGJnIU7i+BiXkUYoNZx2+G+euJSRlVQ8Nm/bk/EaskxagRav
-         dt3w==
-X-Gm-Message-State: AFuF++ld435eQ8y0S2uj9boW4mCvZL7tIdS8wsPteOtrPuGu70hQGxYa
-	4DUCUd8EBy/lD3oMaj3VLIwvEd70ghWIz9tA9oy5oC0P7LSkZF0lMlZi3AqYbHA9RYCFxN7ZC48
-	iVDgj47kHz6ZIyL9pZaNutlNV8KI/mMNSnt8mtOCrQ+a/cdfIs7KVE6SQwtu/SSZrLAz+
-X-Gm-Gg: AYBFou00kz/wJxlNPfGx8T0Ma4azQ0eBv5xdp5uy91eWHMHwMk2Ok9Svxbt0nE0cLm2
-	9stEMSIkkF6MKsidFOsU/xeV2rsx04+l/NZqLJZpN1N4sETLz/lb4Cka3PxR4CyGNjYSWIiqk5f
-	fG6SnPP1mTteIB/EdvOpWntSBGrJtAIjbxx1nEJKnT62o85SisUt05Co0DYKDzA1g8WQyp1rGct
-	QKFRbEMbN3EQmdPBz8nDZHBiFSjS8hTWaSlaMCEItkCfeqyXYkNmRPBGUyI1qkWXSzlIEH2teUt
-	VAlYz7eKy3fmT6fHZdcmMYYl8LAt2WzBvdmiLi4b3eIv3y76sGoTf9Jph2SY/v77hq+VPNgNgWq
-	VsVErX4ffQ1ofYPZmN2mdzHZuiWA=
-X-Received: by 2002:a17:90b:280a:b0:38e:250b:122f with SMTP id 98e67ed59e1d1-39aee085053mr11007115a91.16.1788381835976;
-        Wed, 02 Sep 2026 13:43:55 -0700 (PDT)
-X-Received: by 2002:a17:90b:280a:b0:38e:250b:122f with SMTP id 98e67ed59e1d1-39aee085053mr11007070a91.16.1788381835393;
-        Wed, 02 Sep 2026 13:43:55 -0700 (PDT)
-Received: from hu-mojha-hyd.qualcomm.com ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-33255d39d21sm613338eec.16.2026.09.02.13.43.51
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 02 Sep 2026 13:43:54 -0700 (PDT)
-From: Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>
-To: Bjorn Andersson <andersson@kernel.org>,
-        Mathieu Poirier <mathieu.poirier@linaro.org>,
-        Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>,
-        Manivannan Sadhasivam <mani@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, linux-remoteproc@vger.kernel.org,
-        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-        Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>
-Subject: [PATCH v2 3/3] remoteproc: qcom_q6v5_pas: add per-PD proxy performance states for Hawi CDSP
-Date: Thu,  3 Sep 2026 02:13:34 +0530
-Message-ID: <20260902204334.2061226-4-mukesh.ojha@oss.qualcomm.com>
-X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20260902204334.2061226-1-mukesh.ojha@oss.qualcomm.com>
-References: <20260902204334.2061226-1-mukesh.ojha@oss.qualcomm.com>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="YRQZJRSD"
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 269C9C2BCFB;
+	Wed,  2 Sep 2026 20:59:19 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1788382759;
+	bh=o6ZMOO1F2veKkIxKQMkgJPH1tbnxOMIvUn/ozfxNnmo=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
+	b=YRQZJRSDOPdmBfqSG5imhLnHSKM6Dm6iUvbzoabqvKmKQHMirJowNQupWYaocPdKe
+	 EjUa55gp8Qw/pmEGRoiCDG6tyKkybmVcu5yT5Ar36Oa9NEcyRNoslZYHeSwfLaXm83
+	 YzcaWUNeQtaqNgSw4tWVR84YYJJ8ybNYreDY0dALVL0TuAp25yfVkTgrYPQylzQJOl
+	 gQzooVvynnntAU9P4+EZNnXEHGqLVGFaMUcQzFO/Xh/kgdIstW6RFV6M1SNkHuRHJj
+	 4aiw6ep8ZN+r4SjON+vFu9wVvEPr8weoyGTg880WbwHEHZWEG5FuxLZ4wxE+3ewAm8
+	 Wwl4RDDzj3nhQ==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 09E7EC61DD6;
+	Wed,  2 Sep 2026 20:59:19 +0000 (UTC)
+From: David Heidelberg via B4 Relay <devnull+david.ixit.cz@kernel.org>
+Date: Wed, 02 Sep 2026 22:59:13 +0200
+Subject: [PATCH 2/3] arm64: dts: qcom: sdm845-google: Improve NFC pins
+ description
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTAyMDE4MyBTYWx0ZWRfX1ZPAGCp0aupd
- 9TvisIoIyY4ERbMZt9PWXG7I/2pbpD3wsPJCekgTuXz7+SKUP3LI9cRaZa8qCvgUMR8Sm/dPzwY
- 2Dn/Rs0tdZdJO7kQvZJHb/5RTSjTwdBB32X2rA4fAafbmArULh7JkU6vlss07fWD5VzwWR1qR73
- +OdZlUSGu1rTM1AGX/u0p0p8XwP5yFAKNewzfQgdW+BhOLqgU/Svcw0xE17ADcyjoQ00O5ztwAJ
- jYD/GfValH0OWzvfQXfhKrc5psoDaeO6LSzQ30VWxNighs9ol4+n6EMZuCbOhPCkvcok74l01CS
- 72375wJ0ak0LDRwDhVmEWuoncQS9GOBvMl+4Y+Pp3qYhx9eq2vDgbL9vh2OQypLuSt8EQVPaqhy
- 8l1MzG4vbTc+opCi7JnpvX0EkdQbeP2nVy3+jd+HMN0QCPOtKBpgItNffA4LvhYukh0/EVUfB3a
- EmRRK9PE3kBVHf+NbNg==
-X-Proofpoint-ORIG-GUID: AKvDldps89NmmW-XM7NICMg9cD_C9QER
-X-Authority-Analysis: v=2.4 cv=QfpWeMbv c=1 sm=1 tr=0 ts=6a988a8c cx=c_pps
- a=0uOsjrqzRL749jD1oC5vDA==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
- a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22 a=EUspDBNiAAAA:8
- a=EzEDkhfgfUAEW4_RwPsA:9 a=mQ_c8vxmzFEMiUWkPHU9:22
-X-Proofpoint-GUID: AKvDldps89NmmW-XM7NICMg9cD_C9QER
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTAyMDE4MyBTYWx0ZWRfXwUXGKzINd5yp
- Ia7gjUkEUY/qi5P3vwaot/W0EwxqrivbWU24AfeZnRcCMpp0Gkb2iawuMXV4urXtsbFr9VTHQ6a
- agzyxSEGs1NUOofp6q2xvcViNAn3i2Q=
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-02_05,2026-09-02_04,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 impostorscore=0 bulkscore=0 phishscore=0 suspectscore=0
- lowpriorityscore=0 malwarescore=0 adultscore=0 clxscore=1015 spamscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2609020183
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260902-sdm670-sargo-nfc-v1-2-bed1cbbffc46@ixit.cz>
+References: <20260902-sdm670-sargo-nfc-v1-0-bed1cbbffc46@ixit.cz>
+In-Reply-To: <20260902-sdm670-sargo-nfc-v1-0-bed1cbbffc46@ixit.cz>
+To: Bjorn Andersson <andersson@kernel.org>, 
+ Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>, 
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, 
+ Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>, 
+ Richard Acayan <mailingradian@gmail.com>
+Cc: Marco Mattiolo <marco.mattiolo@hotmail.it>, 
+ linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, phone-devel@vger.kernel.org, 
+ David Heidelberg <david@ixit.cz>
+X-Mailer: b4 0.16.0
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2154; i=david@ixit.cz;
+ h=from:subject:message-id;
+ bh=1g5bzY+HsNyCbevfoHcORR+VD1MfbCn1WfNGutR8+KA=;
+ b=owEBbQKS/ZANAwAIAWACP8TTSSByAcsmYgBqmI4lOhMcUlhuWQwB8IJwJ0OMA0LRE/4ETGGyk
+ 2h/u6PZJoiJAjMEAAEIAB0WIQTXegnP7twrvVOnBHRgAj/E00kgcgUCapiOJQAKCRBgAj/E00kg
+ cjnmD/96ZqcIp7Pv1yb8cSdUWl6kGkV9H7jNxfyUoqFmPEJWYwJKwD88Q6lPnsJety5miI/0mYL
+ B/GAn2NxMheJRMCJlK/58aUTAGekVYWyFbB42vD0IAv5qKMKiBMit/1wkdTvMCOEShthcfwuz86
+ KGGD94K+TFIbJ0wGIkAhfvjCzisGoHJGlRM19T/iUuoH2FwMZLDrDrlxFpAD5ZgJk4UQcA22eMe
+ GLgHtf9nDWt9YwrDXZS3JArqnxhoCFsgN6suaJFB9TUYfcZOtKDMaGHcs9FKmgKS+21lKjKjLlH
+ nEiWin2Yj9A8Kl4Yc7AwdZgZmdHaLdRv9YC6w6zCeA2HfWbabHtpzcbK1wVDVOtc4g3XfaZ1ywK
+ +RAtUfm5SYUFunS59EBkWCQAx1WaqUhLCMuLprbE25dCf0NKyNGz6aJ2kU2x16QNmQaMXKiTnHj
+ StIuCe30NL5JX3x+egXp71wwqjXIJWZL6EowVtxhVj9ROTa0btsOYASGmkvC5czETOjY9kJD4YD
+ HScjpP//QW+jtAiLJ7NxodZQRi11XgxNR1nUMftqAJm/v0CFDyj2oAow3dlZCTWUdtpfdwEb04G
+ UPUJCRsSVco76Sosvffn7Ufl59yATUHRt1uO6JiQFWM/Sne6ZSfdKSQMY7XDDVWB902G310tAa+
+ ZnaHlOFySJSOAyg==
+X-Developer-Key: i=david@ixit.cz; a=openpgp;
+ fpr=D77A09CFEEDC2BBD53A7047460023FC4D3492072
+X-Endpoint-Received: by B4 Relay for david@ixit.cz/default with auth_id=355
+X-Original-From: David Heidelberg <david@ixit.cz>
+Reply-To: david@ixit.cz
 
-The proxy power domain enable path requests INT_MAX performance
-state for every proxy PD. On Hawi, the NSP proxy power domain's
-RPMH power domain has no OPP at INT_MAX, while CX and MXC accept
-INT_MAX, mapping to their maximum supported level.
+From: David Heidelberg <david@ixit.cz>
 
-Introduce a proxy_pd_performance_states array in qcom_pas_data
-to allow per-PD RPMH levels to be declared explicitly. Platforms
-that omit this field retain the existing INT_MAX behaviour.
+Be more clear with pin description and group all of them into one state.
 
-Add Hawi CDSP remoteproc support with the following proxy PD
-performance states:
+No functional changes.
 
-  CX:  RPMH_REGULATOR_LEVEL_TURBO
-  MXC: RPMH_REGULATOR_LEVEL_TURBO
-  NSP: RPMH_REGULATOR_LEVEL_NOM
-
-Signed-off-by: Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>
+Signed-off-by: David Heidelberg <david@ixit.cz>
 ---
- drivers/remoteproc/qcom_q6v5_pas.c | 50 ++++++++++++++++++++++++++++--
- 1 file changed, 48 insertions(+), 2 deletions(-)
+ arch/arm64/boot/dts/qcom/sdm845-google-common.dtsi | 34 ++++++++++++++--------
+ 1 file changed, 22 insertions(+), 12 deletions(-)
 
-diff --git a/drivers/remoteproc/qcom_q6v5_pas.c b/drivers/remoteproc/qcom_q6v5_pas.c
-index 01dc0194e130..c8bba2418d0d 100644
---- a/drivers/remoteproc/qcom_q6v5_pas.c
-+++ b/drivers/remoteproc/qcom_q6v5_pas.c
-@@ -28,6 +28,7 @@
- #include <linux/soc/qcom/mdt_loader.h>
- #include <linux/soc/qcom/smem.h>
- #include <linux/soc/qcom/smem_state.h>
-+#include <dt-bindings/power/qcom,rpmhpd.h>
+diff --git a/arch/arm64/boot/dts/qcom/sdm845-google-common.dtsi b/arch/arm64/boot/dts/qcom/sdm845-google-common.dtsi
+index f73d4ea57705f..f1379857e2742 100644
+--- a/arch/arm64/boot/dts/qcom/sdm845-google-common.dtsi
++++ b/arch/arm64/boot/dts/qcom/sdm845-google-common.dtsi
+@@ -400,17 +400,17 @@ nfc@28 {
+ 		compatible = "nxp,pn557", "nxp,nxp-nci-i2c";
+ 		reg = <0x28>;
  
- #include "qcom_common.h"
- #include "qcom_pil_info.h"
-@@ -51,6 +52,8 @@ struct qcom_pas_data {
- 	bool decrypt_shutdown;
+ 		interrupts-extended = <&tlmm 63 IRQ_TYPE_EDGE_RISING>;
  
- 	char **proxy_pd_names;
-+	const unsigned int *proxy_pd_performance_states;
-+	unsigned int num_proxy_pd_performance_states;
+ 		enable-gpios = <&tlmm 25 GPIO_ACTIVE_HIGH>;
+ 		firmware-gpios = <&tlmm 79 GPIO_ACTIVE_HIGH>;
  
- 	const char *load_state;
- 	const char *ssr_name;
-@@ -79,6 +82,7 @@ struct qcom_pas {
- 	struct regulator *px_supply;
- 
- 	struct device *proxy_pds[3];
-+	const unsigned int *proxy_pd_performance_states;
- 
- 	int proxy_pd_count;
- 
-@@ -167,11 +171,16 @@ static int qcom_pas_pds_enable(struct qcom_pas *pas, struct device **pds,
- 	int i;
- 
- 	for (i = 0; i < pd_count; i++) {
--		ret = dev_pm_genpd_set_performance_state(pds[i], INT_MAX);
-+		unsigned int state = INT_MAX;
-+
-+		if (pas->proxy_pd_performance_states)
-+			state = pas->proxy_pd_performance_states[i];
-+
-+		ret = dev_pm_genpd_set_performance_state(pds[i], state);
- 		if (ret)
- 			dev_warn(pas->dev,
- 				 "failed to set proxy PD %d state %u: %d\n",
--				 i, INT_MAX, ret);
-+				 i, state, ret);
- 		ret = pm_runtime_get_sync(pds[i]);
- 		if (ret < 0) {
- 			pm_runtime_put_noidle(pds[i]);
-@@ -877,6 +886,7 @@ static int qcom_pas_probe(struct platform_device *pdev)
- 	pas->info_name = desc->sysmon_name;
- 	pas->smem_host_id = desc->smem_host_id;
- 	pas->decrypt_shutdown = desc->decrypt_shutdown;
-+	pas->proxy_pd_performance_states = desc->proxy_pd_performance_states;
- 	pas->region_assign_idx = desc->region_assign_idx;
- 	pas->region_assign_count = min_t(int, MAX_ASSIGN_COUNT, desc->region_assign_count);
- 	pas->region_assign_vmid = desc->region_assign_vmid;
-@@ -912,6 +922,14 @@ static int qcom_pas_probe(struct platform_device *pdev)
- 		goto unassign_mem;
- 	pas->proxy_pd_count = ret;
- 
-+	if (WARN(desc->proxy_pd_performance_states &&
-+		 desc->num_proxy_pd_performance_states != pas->proxy_pd_count,
-+		 "proxy_pd_performance_states count %u != pd count %d\n",
-+		 desc->num_proxy_pd_performance_states, pas->proxy_pd_count)) {
-+		ret = -EINVAL;
-+		goto detach_proxy_pds;
-+	}
-+
- 	ret = qcom_q6v5_init(&pas->q6v5, pdev, rproc, desc->crash_reason_smem,
- 			     desc->load_state, qcom_pas_handover);
- 	if (ret)
-@@ -1802,6 +1820,33 @@ static const struct qcom_pas_data glymur_soccp_resource = {
- 	.needs_tzmem = true,
+-		pinctrl-0 = <&nfc_int_default &nfc_enable_default>;
++		pinctrl-0 = <&nfc_default>;
+ 		pinctrl-names = "default";
+ 	};
  };
  
-+static const struct qcom_pas_data hawi_cdsp_resource = {
-+	.crash_reason_smem = 601,
-+	.firmware_name = "cdsp.mdt",
-+	.dtb_firmware_name = "cdsp_dtb.mdt",
-+	.pas_id = 18,
-+	.dtb_pas_id = 0x25,
-+	.minidump_id = 7,
-+	.auto_boot = true,
-+	.proxy_pd_names = (char*[]){
-+		"cx",
-+		"mxc",
-+		"nsp",
-+		NULL
-+	},
-+	.proxy_pd_performance_states = (const unsigned int[]){
-+		RPMH_REGULATOR_LEVEL_TURBO,
-+		RPMH_REGULATOR_LEVEL_TURBO,
-+		RPMH_REGULATOR_LEVEL_NOM,
-+	},
-+	.num_proxy_pd_performance_states = 3,
-+	.load_state = "cdsp",
-+	.ssr_name = "cdsp",
-+	.sysmon_name = "cdsp",
-+	.ssctl_id = 0x17,
-+	.smem_host_id = 5,
-+};
+ &i2c12 {
+ 	/* Bottom spkr (right) CS35L36 @ 40 */
+ 
+ 	/* Top spkr (left) CS35L36 @ 41 */
+@@ -473,28 +473,38 @@ &qup_uart9_tx {
+ 	drive-strength = <2>;
+ 	bias-disable;
+ };
+ 
+ &tlmm {
+ 	gpio-reserved-ranges = < 0 4>, /* SPI (Intel MNH Pixel Visual Core) */
+ 			       <81 4>; /* SPI (most likely Fingerprint Cards FPC1075) */
+ 
+-	nfc_int_default: nfc-int-default-state {
+-		pins = "gpio63";
+-		function = "gpio";
+-		drive-strength = <2>;
+-		bias-pull-down;
+-	};
++	nfc_default: nfc-default-state {
++		enable-pins {
++			pins = "gpio25";
++			function = "gpio";
++			drive-strength = <2>;
++			bias-pull-down;
++		};
 +
- static const struct qcom_pas_data eliza_cdsp_resource = {
- 	.crash_reason_smem = 601,
- 	.firmware_name = "cdsp.mbn",
-@@ -1831,6 +1876,7 @@ static const struct of_device_id qcom_pas_of_match[] = {
- 	{ .compatible = "qcom,eliza-adsp-pas", .data = &sm8550_adsp_resource },
- 	{ .compatible = "qcom,eliza-cdsp-pas", .data = &eliza_cdsp_resource },
- 	{ .compatible = "qcom,glymur-soccp-pas", .data = &glymur_soccp_resource },
-+	{ .compatible = "qcom,hawi-cdsp-pas", .data = &hawi_cdsp_resource },
- 	{ .compatible = "qcom,kaanapali-soccp-pas", .data = &kaanapali_soccp_resource },
- 	{ .compatible = "qcom,milos-adsp-pas", .data = &sm8550_adsp_resource },
- 	{ .compatible = "qcom,milos-cdsp-pas", .data = &milos_cdsp_resource },
++		irq-pins {
++			pins = "gpio63";
++			function = "gpio";
++			drive-strength = <2>;
++			bias-pull-down;
++		};
++
++		firmware-pins {
++			pins = "gpio79";
++			function = "gpio";
++			drive-strength = <2>;
++			bias-pull-down;
++		};
+ 
+-	nfc_enable_default: nfc-enable-default-state {
+-		pins = "gpio25", "gpio79";
+-		function = "gpio";
+-		drive-strength = <2>;
+-		bias-pull-down;
+ 	};
+ 
+ 	touchscreen_reset: ts-reset-state {
+ 		pins = "gpio99";
+ 		function = "gpio";
+ 		drive-strength = <8>;
+ 		bias-pull-up;
+ 	};
+
 -- 
 2.55.0
+
 
