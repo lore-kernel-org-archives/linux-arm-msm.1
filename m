@@ -1,87 +1,81 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.223.130])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 10CFB23EAB4
-	for <linux-arm-msm@vger.kernel.org>; Wed,  2 Sep 2026 06:09:17 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A314F348C52;
+	Wed,  2 Sep 2026 06:57:19 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=195.135.223.130
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788329359; cv=none; b=bv5QSn6fA56XFfMdfcEmeSzg4nScXQruNRM06XXct4116n7TUSBrjLA/MvY7Po1D+pP1ZPVqJjtVpSC8NtM+TlKr4TZTg23kCDXlEMjof4iSGQ2O5mLVNQA4ZXQ1c+WVzQOpjo/j9dt5MHs5fBVMBxAJvBO/agHJf302WhipUiM=
+	t=1788332243; cv=none; b=FdPDjbW8Ns58pm6Fq3StzD6XocbbN6poTQzn6qm/geNC8BLuZwQufUCPMaidIe65mzpHWC9GzQ3UMT3DPlTqPy7nYwwCUkssRIcj1vGEOJZA+q+x0Qichw0N+FZLoe94CP8tLiUdEvnJYSGyKe3IxHjQhdvn0i9PAImROlfj1Xs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788329359; c=relaxed/simple;
-	bh=2O2tLbCSCtHBMYey+e7A3uPt/HONNbOYonSDFLRuS6E=;
+	s=arc-20240116; t=1788332243; c=relaxed/simple;
+	bh=/8D8GI7sA6QjK9hf+ayQELGZql6J95exiXf5ai5uFSk=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=Q2Mpk2EbC6Hfe4hyPnbgIa0SS3z+trUC43vweDQywE7/Kx5vQ5rkK50T/F+pkg4jW3CV2UIOEURwDVef+zbkw/orDiG6dFa2cxDxUvnHDNNKQp9aMdfpG5j1kVLA/Lbzsb9oCle9zfcpfHJrttmPOFPwQ9px7boYQ7HG0Ae1noA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=iY2IK87W; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=aO2f6a0o; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	 In-Reply-To:Content-Type; b=h7fXbgkOlK3LPLMbzzft9GsOJNklJsjb4+czi6Y26NMNQ50j0OJyz/WWBWC1mlkeKGmEDaG5J2dQ6vInPbbgowGFRF42uX/sqPWhF7ggUaSL/zDi3yBn3ttIQKBCVjG7fl1JVr+hsxjvkeC3s2YZKjbvcR7Nf7VBrV6nmuV203Q=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=suse.de; spf=pass smtp.mailfrom=suse.de; dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b=E3/J2U3U; dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b=XItB4gL8; dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b=C5dLl2nT; dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b=DVopmBd5; arc=none smtp.client-ip=195.135.223.130
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=suse.de
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=suse.de
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="iY2IK87W";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="aO2f6a0o"
-Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6825YeKq1323026
-	for <linux-arm-msm@vger.kernel.org>; Wed, 2 Sep 2026 06:09:17 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	rekHoOCBWmiKDF8X232OJC4hGvW2Rl9Y34JGuZYLqzg=; b=iY2IK87Wvd1cPHXj
-	BEIzJxzXQgF5YJUqKc+O0//4SjcTUqNeqWB4IZqatIxHAQUhcdkNe2HuxeGqkQDe
-	AS+DXJdRpQDmiqEGLhR/SiAZ7Aa0iGD2nXTcGkSBcY5EEAv37Xg+YmlgItF8227m
-	I2i7Zl0caFKUTYvLEQ3HsiA+xisvHR/1XNAnGzqoqj9wFWgMzDW/29O7s2Js/s8e
-	3Mq6pKHr+EhWE5WyhB9JDvLKG9mOA13findwrYj8S/figRWE7Fci4zyxyThj9Kod
-	xROgMtRfPZwRJ51q3dUbzh+XdSzSGOtelvkO1/7NQu/LLsI4FnOcRY46bVOzNJOS
-	EBfB5A==
-Received: from mail-pg1-f197.google.com (mail-pg1-f197.google.com [209.85.215.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gebsx0h53-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 02 Sep 2026 06:09:17 +0000 (GMT)
-Received: by mail-pg1-f197.google.com with SMTP id 41be03b00d2f7-cc1cb806660so991614a12.3
-        for <linux-arm-msm@vger.kernel.org>; Tue, 01 Sep 2026 23:09:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1788329357; x=1788934157; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=rekHoOCBWmiKDF8X232OJC4hGvW2Rl9Y34JGuZYLqzg=;
-        b=aO2f6a0oMeu/5b4v2er9puwoGM4kvphKFpAmoQQliEkf02mhNxFHqs7pRI3gWQyx3+
-         Hoat+1BAR8tuJTpwh5AypjilVsTEolw+16odcce5nqK9FckNjij9uLaAgxSfpvPVZMVZ
-         zZONqH0OlbFPgf3ET3gsq6xMp+9G7Ldhyg7xrxsH2r4CwjCXnc5MNVExLLYIEEZf8P1o
-         AX7B2kXUqqyl04+jKImHvVGE0H+19mIOb4K1QbgNQoBw4/IkDheF4KupcXO1L7BvHuSI
-         iLREw88Fau8HjGxiWz3YvGgBfhG0wPUf8aGaE6r99l41UrUCq9e1zzCC6df+kIUrXyiK
-         VK2Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788329357; x=1788934157;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=rekHoOCBWmiKDF8X232OJC4hGvW2Rl9Y34JGuZYLqzg=;
-        b=o1jrkM73mnd+4X4Hjs6stNMXKbXNWO8vLBSiniVG6AFrXJdQlDCCdeHwmN3060zhnr
-         kUCBDKSG8+XUowbDtwOIT08l6hT88D2Ih5CgvLvAA82NpYQtw1rx5J5OeUPfpuIm5y+L
-         8gqHxAsovW9hQGA94llmFNNKRdtWNl+58Vc6CTRPtj983q+j3z+hyUu7BKAlgu5TDQ3H
-         al/dMUDjlo9E4jx5phKbAmau9sQWjZtUwIK1LzgyWyevTCtQeL/0YWTOL4MKf7BoJG3Z
-         Xswt9nYV5H2gR/YkVBv/ZRQUcR8koZ/BfJ6O1N9ImQrrtQUCeA/lnzeXu65I5X8HtcZh
-         F40Q==
-X-Forwarded-Encrypted: i=1; AHgh+RqMY35YJnI4r7djsmWpOtOxRq765pbxZsOcPwdQ/TSuAlPbo5XmQlg7egXx44ZUuQZuoxGtmIsRkv92UrP7@vger.kernel.org
-X-Gm-Message-State: AFuF++malOZaZsjbN821869xEM0GwIuxjP9X/NXLMieu7oWGczSUalcj
-	SiUHPO6UrLR8Rg1P4QZHctWEA94O+4Z202sWSLo86VK+BTR4BqqWiM7ApTGNpxGuV0yO4Oc5P5r
-	2ioE62gnfHcO539QxGZ0hDvVL+yKZ3/SH9wYfpsJa482FXqKGf6mh9r27nEQ/WUMAMLya
-X-Gm-Gg: AR+sD10dNDh+u8AIH//y75EegvejwqMXZKU4KdX9v/40KyNw/O9PFN/UKP6us1F7WVJ
-	oXBsoLkgFz38iqEW3HEGdFsjk7GZOccRRbJBzDx2zryr9F4EDwq7jY/m3D9i34suORRU/xKHB2q
-	6noQaqZR8ID7LST5xqMsBLxZSryf3mBefOK4gKXpkL1Qi3DOeCsLZkHSF0QVu05rCyIzuJxOhmK
-	4EHVGJlTBcXSskdJnZhkpDrdA1zA9pIeRBHosiB+rMwQiopYktbJaNxGJftbUI7c+6WtNAaXDUe
-	c4A+SmcaZC5LRdyR6rf6bq3BhqkfXPlTYR4QVdP/QVF23grRoUzqDPZA+Hxcgr1Al4GhVXMHbud
-	hZ/LH2ip+3A8cfIb5yiPLLbh1iNOv
-X-Received: by 2002:a05:6a21:7a46:b0:3d0:ba81:79b1 with SMTP id adf61e73a8af0-3d9aa9e2184mr4428632637.0.1788329356455;
-        Tue, 01 Sep 2026 23:09:16 -0700 (PDT)
-X-Received: by 2002:a05:6a21:7a46:b0:3d0:ba81:79b1 with SMTP id adf61e73a8af0-3d9aa9e2184mr4428538637.0.1788329355930;
-        Tue, 01 Sep 2026 23:09:15 -0700 (PDT)
-Received: from [10.218.18.193] ([202.46.22.19])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1430ea31f1esm3257660c88.8.2026.09.01.23.09.11
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 01 Sep 2026 23:09:15 -0700 (PDT)
-Message-ID: <942f0a0a-461e-4794-a33a-9c820635eef0@oss.qualcomm.com>
-Date: Wed, 2 Sep 2026 11:39:09 +0530
+	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b="E3/J2U3U";
+	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="XItB4gL8";
+	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b="C5dLl2nT";
+	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="DVopmBd5"
+Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org [IPv6:2a07:de40:b281:104:10:150:64:97])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	(No client certificate requested)
+	by smtp-out1.suse.de (Postfix) with ESMTPS id CED6D21F96;
+	Wed,  2 Sep 2026 06:57:08 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+	t=1788332233; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+	bh=hYWY2F7VOww6yUJfQcfpe/lLBEtZ+1DAKlHF2Nc2H/8=;
+	b=E3/J2U3U27TEcWzv8WUeOq/k6Zif4bPTjT5q2vzeWtutZORc3kFTVi1ngMt3KM1gMpF49Y
+	wA8mwYRzSygUmtD+1+A6w8Q0PHKd0s/v+EgpQA4MwY4K6TVL3cwJ1sq2lCRDLioaQys7rC
+	SlNlU36S4GnhhY+FgvfDYrcmizj2dGE=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+	s=susede2_ed25519; t=1788332233;
+	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+	bh=hYWY2F7VOww6yUJfQcfpe/lLBEtZ+1DAKlHF2Nc2H/8=;
+	b=XItB4gL8d4yiQsfRhYMZk7fdXHMYdapLEh5zeAKu9eku+HTuCD1WPCQPGus/DD5rBe9lDg
+	vBFA6xC2LskW53Aw==
+Authentication-Results: smtp-out1.suse.de;
+	dkim=pass header.d=suse.de header.s=susede2_rsa header.b=C5dLl2nT;
+	dkim=pass header.d=suse.de header.s=susede2_ed25519 header.b=DVopmBd5
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+	t=1788332228; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+	bh=hYWY2F7VOww6yUJfQcfpe/lLBEtZ+1DAKlHF2Nc2H/8=;
+	b=C5dLl2nTD6xGkBlZrUR/TByuEX1EJ5GqhEkS42ru4ixT6IZPVMDblVo4sJH3OrohnuS2U8
+	0vnNURLhTHYHl3Pvr7ESvl7Q/Yr6qQawIVVXDWF6/v9/+wzDq8+OFwq8szCDi6CzmEkh2r
+	3TcCjsKLq7aW6NFCymQpNEAvC+LJzjs=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+	s=susede2_ed25519; t=1788332228;
+	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+	bh=hYWY2F7VOww6yUJfQcfpe/lLBEtZ+1DAKlHF2Nc2H/8=;
+	b=DVopmBd5dLvPmmgJPVsuqMeCrzudgRMF/JWoxcuO0L2Lb+sYefZHrBbPIn2sujssjuW3NW
+	43u0OUFOe73qxuCw==
+Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	(No client certificate requested)
+	by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 4443C136E6;
+	Wed,  2 Sep 2026 06:57:08 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
+	by imap1.dmz-prg2.suse.org with ESMTPSA
+	id rGezDMTIl2q6SQAAD6G6ig
+	(envelope-from <tzimmermann@suse.de>); Wed, 02 Sep 2026 06:57:08 +0000
+Message-ID: <69a37b53-82e1-40bb-8266-206c3bff6af2@suse.de>
+Date: Wed, 2 Sep 2026 08:57:07 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -89,84 +83,366 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/3] ASoC: qcom: q6apm-dai: add VMID-based SCM
- assignment for mDSP buffers
-To: Mark Brown <broonie@kernel.org>
-Cc: Srinivas Kandagatla <srini@kernel.org>,
-        Liam Girdwood <lgirdwood@gmail.com>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley
- <conor+dt@kernel.org>, Jaroslav Kysela <perex@perex.cz>,
-        Takashi Iwai <tiwai@suse.com>, linux-sound@vger.kernel.org,
-        linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org,
-        Mohit Sharma <mohit.sharma@oss.qualcomm.com>
-References: <20260826-a2a-shikra-vmid-v5-v2-0-c3dc62354eee@oss.qualcomm.com>
- <20260826-a2a-shikra-vmid-v5-v2-2-c3dc62354eee@oss.qualcomm.com>
- <948de620-a482-4624-8383-6b65eb28a5e9@sirena.org.uk>
+Subject: Re: [PATCH v2] drm/gem: Drop ticket arg to lru_scan()
+To: Rob Clark <robin.clark@oss.qualcomm.com>, dri-devel@lists.freedesktop.org
+Cc: Boris Brezillon <boris.brezillon@collabora.com>,
+ Liviu Dudau <liviu.dudau@arm.com>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>, David Airlie <airlied@gmail.com>,
+ Simona Vetter <simona@ffwll.ch>, Dmitry Baryshkov <lumag@kernel.org>,
+ Abhinav Kumar <abhinav.kumar@linux.dev>,
+ Jessica Zhang <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>,
+ Marijn Suijten <marijn.suijten@somainline.org>,
+ Steven Price <steven.price@arm.com>, open list
+ <linux-kernel@vger.kernel.org>,
+ "open list:DRM DRIVER for Qualcomm display hardware"
+ <linux-arm-msm@vger.kernel.org>,
+ "open list:DRM DRIVER for Qualcomm display hardware"
+ <freedreno@lists.freedesktop.org>
+References: <20260901164544.642985-1-robin.clark@oss.qualcomm.com>
 Content-Language: en-US
-From: Ajay Kumar Nandam <ajay.nandam@oss.qualcomm.com>
-In-Reply-To: <948de620-a482-4624-8383-6b65eb28a5e9@sirena.org.uk>
+From: Thomas Zimmermann <tzimmermann@suse.de>
+Autocrypt: addr=tzimmermann@suse.de; keydata=
+ xsBNBFs50uABCADEHPidWt974CaxBVbrIBwqcq/WURinJ3+2WlIrKWspiP83vfZKaXhFYsdg
+ XH47fDVbPPj+d6tQrw5lPQCyqjwrCPYnq3WlIBnGPJ4/jreTL6V+qfKRDlGLWFjZcsrPJGE0
+ BeB5BbqP5erN1qylK9i3gPoQjXGhpBpQYwRrEyQyjuvk+Ev0K1Jc5tVDeJAuau3TGNgah4Yc
+ hdHm3bkPjz9EErV85RwvImQ1dptvx6s7xzwXTgGAsaYZsL8WCwDaTuqFa1d1jjlaxg6+tZsB
+ 9GluwvIhSezPgnEmimZDkGnZRRSFiGP8yjqTjjWuf0bSj5rUnTGiyLyRZRNGcXmu6hjlABEB
+ AAHNJ1Rob21hcyBaaW1tZXJtYW5uIDx0emltbWVybWFubkBzdXNlLmRlPsLAjgQTAQgAOAIb
+ AwULCQgHAgYVCgkICwIEFgIDAQIeAQIXgBYhBHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJftODH
+ AAoJEGgNwR1TC3ojx1wH/0hKGWugiqDgLNXLRD/4TfHBEKmxIrmfu9Z5t7vwUKfwhFL6hqvo
+ lXPJJKQpQ2z8+X2vZm/slsLn7J1yjrOsoJhKABDi+3QWWSGkaGwRJAdPVVyJMfJRNNNIKwVb
+ U6B1BkX2XDKDGffF4TxlOpSQzdtNI/9gleOoUA8+jy8knnDYzjBNOZqLG2FuTdicBXblz0Mf
+ vg41gd9kCwYXDnD91rJU8tzylXv03E75NCaTxTM+FBXPmsAVYQ4GYhhgFt8S2UWMoaaABLDe
+ 7l5FdnLdDEcbmd8uLU2CaG4W2cLrUaI4jz2XbkcPQkqTQ3EB67hYkjiEE6Zy3ggOitiQGcqp
+ j//OwE0EWznS4AEIAMYmP4M/V+T5RY5at/g7rUdNsLhWv1APYrh9RQefODYHrNRHUE9eosYb
+ T6XMryR9hT8XlGOYRwKWwiQBoWSDiTMo/Xi29jUnn4BXfI2px2DTXwc22LKtLAgTRjP+qbU6
+ 3Y0xnQN29UGDbYgyyK51DW3H0If2a3JNsheAAK+Xc9baj0LGIc8T9uiEWHBnCH+RdhgATnWW
+ GKdDegUR5BkDfDg5O/FISymJBHx2Dyoklv5g4BzkgqTqwmaYzsl8UxZKvbaxq0zbehDda8lv
+ hFXodNFMAgTLJlLuDYOGLK2AwbrS3Sp0AEbkpdJBb44qVlGm5bApZouHeJ/+n+7r12+lqdsA
+ EQEAAcLAdgQYAQgAIAIbDBYhBHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJftOH6AAoJEGgNwR1T
+ C3ojVSkIALpAPkIJPQoURPb1VWjh34l0HlglmYHvZszJWTXYwavHR8+k6Baa6H7ufXNQtThR
+ yIxJrQLW6rV5lm7TjhffEhxVCn37+cg0zZ3j7zIsSS0rx/aMwi6VhFJA5hfn3T0TtrijKP4A
+ SAQO9xD1Zk9/61JWk8OysuIh7MXkl0fxbRKWE93XeQBhIJHQfnc+YBLprdnxR446Sh8Wn/2D
+ Ya8cavuWf2zrB6cZurs048xe0UbSW5AOSo4V9M0jzYI4nZqTmPxYyXbm30Kvmz0rYVRaitYJ
+ 4kyYYMhuULvrJDMjZRvaNe52tkKAvMevcGdt38H4KSVXAylqyQOW5zvPc4/sq9c=
+In-Reply-To: <20260901164544.642985-1-robin.clark@oss.qualcomm.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-ORIG-GUID: 4RK156jhd9qGvrjrx5ElkCAL5KqPXjEr
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTAyMDA1MyBTYWx0ZWRfX/zn6x99COSan
- 46ZzdeWzHDk89HOdFG0YPRZL6703yKURP7Bkl0yNHpuNejhYGKqnOG2JMDS2JyB7IGDvJ9SNvCa
- 11L5GYWNyaTc0NaIfAMDI2aroCRyyM3Dmwm193U/LslqSb6A/leoVOcaDlxsTxEl4huUMRIqbTi
- gRrbmGw9cQQGumu21/Mx/n9AETSR3naxYxDjXw9/C+gS1m0GiAXPpN38xsFtfFBXlGw0i7xjrgr
- RbHTqBj2TZa6CyMcrjmBAaSML2CTAK9Oc4zGlv7J5xDteIjxp6t1BGxpHu/A5SRnrua++0CfB7Y
- Q1XW4aaasmo2wKxN9FHE2J8jwxi6lJ3N3Bx/DMG45sTyRtPY+Wp4UuciPmhQ6HayDYkcg2djgBA
- JVvE6Wjv3Reo9KYTveW3JYgAXbubIX0bMtRuIASbSiNFVwzZak/psdsmUzmq8T4SsdwowTgA0S4
- he/TsewuhtC3VPj001w==
-X-Proofpoint-GUID: 4RK156jhd9qGvrjrx5ElkCAL5KqPXjEr
-X-Authority-Analysis: v=2.4 cv=AufeGu9P c=1 sm=1 tr=0 ts=6a97bd8d cx=c_pps
- a=rz3CxIlbcmazkYymdCej/Q==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
- a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22
- a=bKA_SWDmMBWY0RPQJBEA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
- a=bFCP_H2QrGi7Okbo017w:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTAyMDA1MyBTYWx0ZWRfX71/4L6/lCzGY
- 2FJ3shYNv/+ROTy7eF1sB9gvitCCHQfN0fzLFWWFxp676+PcKE34w+16YUto9dOR4tBxhPNfkjp
- Yo+Kbvpo9NDfGOH7AVX91qSAjzLo4ME=
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-01_06,2026-09-01_03,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 bulkscore=0 lowpriorityscore=0 impostorscore=0 phishscore=0
- spamscore=0 adultscore=0 suspectscore=0 priorityscore=1501 malwarescore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2609020053
+X-Spam-Level: 
+X-Rspamd-Action: no action
+X-Rspamd-Server: rspamd2.dmz-prg2.suse.org
+X-Rspamd-Queue-Id: CED6D21F96
+X-Spamd-Result: default: False [-4.51 / 50.00];
+	BAYES_HAM(-3.00)[100.00%];
+	NEURAL_HAM_LONG(-1.00)[-1.000];
+	R_DKIM_ALLOW(-0.20)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
+	NEURAL_HAM_SHORT(-0.20)[-1.000];
+	MIME_GOOD(-0.10)[text/plain];
+	MX_GOOD(-0.01)[];
+	RECEIVED_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:106:10:150:64:167:received];
+	FREEMAIL_ENVRCPT(0.00)[gmail.com];
+	ARC_NA(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[17];
+	MIME_TRACE(0.00)[0:+];
+	RCVD_TLS_ALL(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
+	TO_DN_SOME(0.00)[];
+	FROM_EQ_ENVFROM(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	FREEMAIL_CC(0.00)[collabora.com,arm.com,linux.intel.com,kernel.org,gmail.com,ffwll.ch,linux.dev,poorly.run,somainline.org,vger.kernel.org,lists.freedesktop.org];
+	DWL_DNSWL_BLOCKED(0.00)[suse.de:dkim];
+	RCVD_COUNT_TWO(0.00)[2];
+	TO_MATCH_ENVRCPT_ALL(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[arm.com:email,imap1.dmz-prg2.suse.org:rdns,imap1.dmz-prg2.suse.org:helo,suse.com:url,qualcomm.com:email,suse.de:dkim,suse.de:email,suse.de:mid];
+	DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
+	DKIM_TRACE(0.00)[suse.de:+]
+X-Spam-Flag: NO
+X-Spam-Score: -4.51
 
 
 
-On 8/27/2026 4:22 AM, Mark Brown wrote:
-> On Wed, Aug 26, 2026 at 12:10:13AM +0530, Ajay Kumar Nandam wrote:
->> On platforms such as Qualcomm Shikra, audio is served by the modem DSP
->> (mDSP) which runs in a stage-2 protected context. Unlike ADSP targets
->> where SMMU-mapped system RAM is directly accessible, the mDSP cannot
->> reach the PCM buffers unless they are explicitly SCM-assigned to the
->> appropriate Virtual Machine IDs (VMIDs). Without this assignment, audio
->> does not function on these platforms.
-> 
->> -		ret = snd_pcm_set_fixed_buffer_all(pcm, SNDRV_DMA_TYPE_DEV, component->dev, size);
->> +		if (pdata->has_reserved_mem)
->> +			ret = snd_pcm_set_managed_buffer_all(pcm,
->> +							     SNDRV_DMA_TYPE_DEV, component->dev,
->> +							     pdata->reserved_buf_size,
->> +							     pdata->reserved_buf_size);
-> 
-> Does this do the right thing if the ALSA core preallocate_dma module
-> param is set to 0 for some reason?  I'm not clear why you would...
+Am 01.09.26 um 18:45 schrieb Rob Clark:
+> Commit 3392291fc509 ("drm/msm: Fix shrinker deadlock") dropped the only
+> use of the ticket arg, but at the time left drm_gem_lru_scan() unchanged
+> to avoid conflicts with in-flight panthor shrinker support.  This commit
+> is the followup to remove the unused arg.
+>
+> Signed-off-by: Rob Clark <robin.clark@oss.qualcomm.com>
+> Reviewed-by: Boris Brezillon <boris.brezillon@collabora.com>
+> Reviewed-by: Liviu Dudau <liviu.dudau@arm.com>
 
-Good catch.  With preallocate_dma=0 the managed-buffer path defers
-allocation to stream open, but the reserved-memory carveout is a
-fixed-size pool that must always be mapped upfront — lazy allocation
-from the system page allocator would bypass the SCM-assigned region
-entirely.
+Reviewed-by: Thomas Zimmermann <tzimmermann@suse.de>
 
-Will switch back to snd_pcm_set_fixed_buffer_all() for the
-reserved-memory path in v3; the carveout is fixed by nature and
-should not be subject to the preallocate knob.
+> ---
+>
+> v2: Drop left over kerneldoc param description, fix panthor spelling
+>
+>   drivers/gpu/drm/drm_gem.c              | 14 +++-----------
+>   drivers/gpu/drm/msm/msm_gem_shrinker.c | 22 ++++++++++------------
+>   drivers/gpu/drm/panthor/panthor_gem.c  | 14 ++++++--------
+>   drivers/gpu/drm/panthor/panthor_mmu.c  |  5 ++---
+>   drivers/gpu/drm/panthor/panthor_mmu.h  |  3 +--
+>   include/drm/drm_gem.h                  |  3 +--
+>   6 files changed, 23 insertions(+), 38 deletions(-)
+>
+> diff --git a/drivers/gpu/drm/drm_gem.c b/drivers/gpu/drm/drm_gem.c
+> index e3ed684ddcf2..3113b4a53b99 100644
+> --- a/drivers/gpu/drm/drm_gem.c
+> +++ b/drivers/gpu/drm/drm_gem.c
+> @@ -1649,15 +1649,13 @@ EXPORT_SYMBOL(drm_gem_lru_move_tail);
+>    * @nr_to_scan: The number of pages to try to reclaim
+>    * @remaining: The number of pages left to reclaim, should be initialized by caller
+>    * @shrink: Callback to try to shrink/reclaim the object.
+> - * @ticket: Optional ww_acquire_ctx context to use for locking
+>    */
+>   unsigned long
+>   drm_gem_lru_scan(struct drm_device *dev,
+>   		 struct drm_gem_lru *lru,
+>   		 unsigned int nr_to_scan,
+>   		 unsigned long *remaining,
+> -		 bool (*shrink)(struct drm_gem_object *obj, struct ww_acquire_ctx *ticket),
+> -		 struct ww_acquire_ctx *ticket)
+> +		 bool (*shrink)(struct drm_gem_object *obj))
+>   {
+>   	struct drm_gem_lru still_in_lru;
+>   	struct drm_gem_object *obj;
+> @@ -1690,20 +1688,17 @@ drm_gem_lru_scan(struct drm_device *dev,
+>   		 */
+>   		mutex_unlock(&dev->gem_lru_mutex);
+>   
+> -		if (ticket)
+> -			ww_acquire_init(ticket, &reservation_ww_class);
+> -
+>   		/*
+>   		 * Note that this still needs to be trylock, since we can
+>   		 * hit shrinker in response to trying to get backing pages
+>   		 * for this obj (ie. while it's lock is already held)
+>   		 */
+> -		if (!ww_mutex_trylock(&obj->resv->lock, ticket)) {
+> +		if (!ww_mutex_trylock(&obj->resv->lock, NULL)) {
+>   			*remaining += obj->size >> PAGE_SHIFT;
+>   			goto tail;
+>   		}
+>   
+> -		if (shrink(obj, ticket)) {
+> +		if (shrink(obj)) {
+>   			freed += obj->size >> PAGE_SHIFT;
+>   
+>   			/*
+> @@ -1727,9 +1722,6 @@ drm_gem_lru_scan(struct drm_device *dev,
+>   
+>   		dma_resv_unlock(obj->resv);
+>   
+> -		if (ticket)
+> -			ww_acquire_fini(ticket);
+> -
+>   tail:
+>   		drm_gem_object_put(obj);
+>   		mutex_lock(&dev->gem_lru_mutex);
+> diff --git a/drivers/gpu/drm/msm/msm_gem_shrinker.c b/drivers/gpu/drm/msm/msm_gem_shrinker.c
+> index 9d2788f79ace..3514d5c84989 100644
+> --- a/drivers/gpu/drm/msm/msm_gem_shrinker.c
+> +++ b/drivers/gpu/drm/msm/msm_gem_shrinker.c
+> @@ -102,7 +102,7 @@ with_vm_locks(void (*fn)(struct drm_gem_object *obj),
+>   }
+>   
+>   static bool
+> -purge(struct drm_gem_object *obj, struct ww_acquire_ctx *unused)
+> +purge(struct drm_gem_object *obj)
+>   {
+>   	if (!is_purgeable(to_msm_bo(obj)))
+>   		return false;
+> @@ -114,7 +114,7 @@ purge(struct drm_gem_object *obj, struct ww_acquire_ctx *unused)
+>   }
+>   
+>   static bool
+> -evict(struct drm_gem_object *obj, struct ww_acquire_ctx *unused)
+> +evict(struct drm_gem_object *obj)
+>   {
+>   	if (is_unevictable(to_msm_bo(obj)))
+>   		return false;
+> @@ -133,21 +133,21 @@ wait_for_idle(struct drm_gem_object *obj)
+>   }
+>   
+>   static bool
+> -active_purge(struct drm_gem_object *obj, struct ww_acquire_ctx *ticket)
+> +active_purge(struct drm_gem_object *obj)
+>   {
+>   	if (!wait_for_idle(obj))
+>   		return false;
+>   
+> -	return purge(obj, ticket);
+> +	return purge(obj);
+>   }
+>   
+>   static bool
+> -active_evict(struct drm_gem_object *obj, struct ww_acquire_ctx *ticket)
+> +active_evict(struct drm_gem_object *obj)
+>   {
+>   	if (!wait_for_idle(obj))
+>   		return false;
+>   
+> -	return evict(obj, ticket);
+> +	return evict(obj);
+>   }
+>   
+>   static unsigned long
+> @@ -156,7 +156,7 @@ msm_gem_shrinker_scan(struct shrinker *shrinker, struct shrink_control *sc)
+>   	struct msm_drm_private *priv = shrinker->private_data;
+>   	struct {
+>   		struct drm_gem_lru *lru;
+> -		bool (*shrink)(struct drm_gem_object *obj, struct ww_acquire_ctx *ticket);
+> +		bool (*shrink)(struct drm_gem_object *obj);
+>   		bool cond;
+>   		unsigned long freed;
+>   		unsigned long remaining;
+> @@ -180,8 +180,7 @@ msm_gem_shrinker_scan(struct shrinker *shrinker, struct shrink_control *sc)
+>   		stages[i].freed =
+>   			drm_gem_lru_scan(priv->dev, stages[i].lru, nr,
+>   					 &stages[i].remaining,
+> -					 stages[i].shrink,
+> -					 NULL);
+> +					 stages[i].shrink);
+>   		nr -= stages[i].freed;
+>   		freed += stages[i].freed;
+>   		remaining += stages[i].remaining;
+> @@ -222,7 +221,7 @@ msm_gem_shrinker_shrink(struct drm_device *dev, unsigned long nr_to_scan)
+>   static const int vmap_shrink_limit = 15;
+>   
+>   static bool
+> -vmap_shrink(struct drm_gem_object *obj, struct ww_acquire_ctx *ticket)
+> +vmap_shrink(struct drm_gem_object *obj)
+>   {
+>   	if (!is_vunmapable(to_msm_bo(obj)))
+>   		return false;
+> @@ -250,8 +249,7 @@ msm_gem_shrinker_vmap(struct notifier_block *nb, unsigned long event, void *ptr)
+>   		unmapped += drm_gem_lru_scan(priv->dev, lrus[idx],
+>   					     vmap_shrink_limit - unmapped,
+>   					     &remaining,
+> -					     vmap_shrink,
+> -					     NULL);
+> +					     vmap_shrink);
+>   	}
+>   
+>   	*(unsigned long *)ptr += unmapped;
+> diff --git a/drivers/gpu/drm/panthor/panthor_gem.c b/drivers/gpu/drm/panthor/panthor_gem.c
+> index 54535bae2b0c..17408f832af3 100644
+> --- a/drivers/gpu/drm/panthor/panthor_gem.c
+> +++ b/drivers/gpu/drm/panthor/panthor_gem.c
+> @@ -1392,8 +1392,7 @@ panthor_gem_shrinker_count(struct shrinker *shrinker, struct shrink_control *sc)
+>   	return count ? count : SHRINK_EMPTY;
+>   }
+>   
+> -static bool panthor_gem_try_evict_no_resv_wait(struct drm_gem_object *obj,
+> -					       struct ww_acquire_ctx *ticket)
+> +static bool panthor_gem_try_evict_no_resv_wait(struct drm_gem_object *obj)
+>   {
+>   	/*
+>   	 * Track last locked entry for unwinding locks in error and
+> @@ -1479,8 +1478,7 @@ static bool panthor_gem_try_evict_no_resv_wait(struct drm_gem_object *obj,
+>   	return ret == 0;
+>   }
+>   
+> -static bool panthor_gem_try_evict(struct drm_gem_object *obj,
+> -				  struct ww_acquire_ctx *ticket)
+> +static bool panthor_gem_try_evict(struct drm_gem_object *obj)
+>   {
+>   	struct panthor_gem_object *bo = to_panthor_bo(obj);
+>   
+> @@ -1488,7 +1486,7 @@ static bool panthor_gem_try_evict(struct drm_gem_object *obj,
+>   	if (dma_resv_wait_timeout(obj->resv, DMA_RESV_USAGE_BOOKKEEP, false, 10) <= 0)
+>   		return false;
+>   
+> -	return panthor_gem_try_evict_no_resv_wait(&bo->base, ticket);
+> +	return panthor_gem_try_evict_no_resv_wait(&bo->base);
+>   }
+>   
+>   static unsigned long
+> @@ -1503,13 +1501,13 @@ panthor_gem_shrinker_scan(struct shrinker *shrinker, struct shrink_control *sc)
+>   
+>   	freed += drm_gem_lru_scan(&ptdev->base, &ptdev->reclaim.unused,
+>   				  sc->nr_to_scan - freed, &remaining,
+> -				  panthor_gem_try_evict_no_resv_wait, NULL);
+> +				  panthor_gem_try_evict_no_resv_wait);
+>   	if (freed >= sc->nr_to_scan)
+>   		goto out;
+>   
+>   	freed += drm_gem_lru_scan(&ptdev->base, &ptdev->reclaim.mmapped,
+>   				  sc->nr_to_scan - freed, &remaining,
+> -				  panthor_gem_try_evict_no_resv_wait, NULL);
+> +				  panthor_gem_try_evict_no_resv_wait);
+>   	if (freed >= sc->nr_to_scan)
+>   		goto out;
+>   
+> @@ -1523,7 +1521,7 @@ panthor_gem_shrinker_scan(struct shrinker *shrinker, struct shrink_control *sc)
+>   
+>   	freed += drm_gem_lru_scan(&ptdev->base, &ptdev->reclaim.gpu_mapped_shared,
+>   				  sc->nr_to_scan - freed, &remaining,
+> -				  panthor_gem_try_evict, NULL);
+> +				  panthor_gem_try_evict);
+>   
+>   out:
+>   #ifdef CONFIG_DEBUG_FS
+> diff --git a/drivers/gpu/drm/panthor/panthor_mmu.c b/drivers/gpu/drm/panthor/panthor_mmu.c
+> index e10dbd18d8cf..ab070bc74857 100644
+> --- a/drivers/gpu/drm/panthor/panthor_mmu.c
+> +++ b/drivers/gpu/drm/panthor/panthor_mmu.c
+> @@ -3133,8 +3133,7 @@ int panthor_vm_prepare_mapped_bos_resvs(struct drm_exec *exec, struct panthor_vm
+>   unsigned long
+>   panthor_mmu_reclaim_priv_bos(struct panthor_device *ptdev,
+>   			     unsigned int nr_to_scan, unsigned long *remaining,
+> -			     bool (*shrink)(struct drm_gem_object *,
+> -					    struct ww_acquire_ctx *))
+> +			     bool (*shrink)(struct drm_gem_object *))
+>   {
+>   	unsigned long freed = 0;
+>   	LIST_HEAD(remaining_vms);
+> @@ -3160,7 +3159,7 @@ panthor_mmu_reclaim_priv_bos(struct panthor_device *ptdev,
+>   
+>   		freed += drm_gem_lru_scan(&ptdev->base, &vm->reclaim.lru,
+>   					  nr_to_scan - freed,
+> -					  remaining, shrink, NULL);
+> +					  remaining, shrink);
+>   
+>   		mutex_lock(&ptdev->base.gem_lru_mutex);
+>   
+> diff --git a/drivers/gpu/drm/panthor/panthor_mmu.h b/drivers/gpu/drm/panthor/panthor_mmu.h
+> index 3522fbbce369..abc36e7204be 100644
+> --- a/drivers/gpu/drm/panthor/panthor_mmu.h
+> +++ b/drivers/gpu/drm/panthor/panthor_mmu.h
+> @@ -52,8 +52,7 @@ int panthor_vm_evict_bo_mappings_locked(struct panthor_gem_object *bo);
+>   unsigned long
+>   panthor_mmu_reclaim_priv_bos(struct panthor_device *ptdev,
+>   			     unsigned int nr_to_scan, unsigned long *remaining,
+> -			     bool (*shrink)(struct drm_gem_object *,
+> -					    struct ww_acquire_ctx *));
+> +			     bool (*shrink)(struct drm_gem_object *));
+>   int panthor_vm_prepare_mapped_bos_resvs(struct drm_exec *exec,
+>   					struct panthor_vm *vm,
+>   					u32 slot_count);
+> diff --git a/include/drm/drm_gem.h b/include/drm/drm_gem.h
+> index 8a704f6a65c1..ffa607c91aa2 100644
+> --- a/include/drm/drm_gem.h
+> +++ b/include/drm/drm_gem.h
+> @@ -616,8 +616,7 @@ drm_gem_lru_scan(struct drm_device *dev,
+>   		 struct drm_gem_lru *lru,
+>   		 unsigned int nr_to_scan,
+>   		 unsigned long *remaining,
+> -		 bool (*shrink)(struct drm_gem_object *obj, struct ww_acquire_ctx *ticket),
+> -		 struct ww_acquire_ctx *ticket);
+> +		 bool (*shrink)(struct drm_gem_object *obj));
+>   
+>   int drm_gem_evict_locked(struct drm_gem_object *obj);
+>   
 
-Thanks & Regards
-Ajay Kumar Nandam
+-- 
+--
+Thomas Zimmermann
+Graphics Driver Developer
+SUSE Software Solutions Germany GmbH
+Frankenstr. 146, 90461 Nürnberg, Germany, www.suse.com
+GF: Jochen Jaser, Andrew McDonald, (HRB 36809, AG Nürnberg)
+
+
