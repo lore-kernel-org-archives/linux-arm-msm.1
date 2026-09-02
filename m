@@ -1,247 +1,139 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mail-4316.protonmail.ch (mail-4316.protonmail.ch [185.70.43.16])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1C2353E6DF7;
-	Wed,  2 Sep 2026 21:11:23 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 20FC34119F0;
+	Wed,  2 Sep 2026 21:22:30 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.70.43.16
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788383485; cv=none; b=OAUs9CO1DseiyVCQ5BWsZEEov6TvTMhuaoGyZ8j3ZfDaSaC6jYMeLLCX/IcAWQCsjsg0t6WAIYNP6NIBtAIGEIgeSdbV1Idkv0lFHXbeHV4EIWENMHPVgj0D8godLe/K1RV85Hk1xqXsTvUpFJLQOcJT/1VaQ8ekVFI5z8DVjTU=
+	t=1788384159; cv=none; b=jMGnSWckJGr+334HppJGQNOWGlGy+jh6IiItsQ6+YFOxFlBMlfD+fnbWmA7cZpTDrabJg+hIoFq3IRh/FKglRGVElY1KVWvcpzfGQNNZdyoqYNmYQ2DSyi0OQK00jNGrgwKiKwM5F8hy8r1gxXDsQmUC1GXFNl1ZAgkAIIrmCAA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788383485; c=relaxed/simple;
-	bh=1pkVeZoMJT8Hlv5Y2kTvQ9rQzv1D9wp5qa9D+tD5bdY=;
-	h=Subject:From:To:Cc:Date:Message-ID:In-Reply-To:References:
-	 Content-Type:MIME-Version; b=oEP0J4+C7L/XyLJqC78q/TsNG7ZnisTJbx4244Qe+gUlYoelSj+DxCxWpcDAuIefnRiwavabxPd6iA7DUUn9bf3vL9AyNptcyNIu/+NaLqLpBV719hgLSk82sPZPPa5jsdX/4pltg0IE2V6A8WoWz4nefitU+h1nkEX7v/Lmmo8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=UMuXbAsw; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1788384159; c=relaxed/simple;
+	bh=k1lyWfaJP3xU+UHktqeOFB2UIyIAd/PoNQw+0PNA/Q0=;
+	h=Date:To:From:Cc:Subject:Message-ID:MIME-Version:Content-Type; b=V9LDObiKRrOT3goyCitMViniOoxLGhHb8epPdfQ2LeLSxV+8sKznt/6xAYZhXBTG85Aryps0vQ391uanp10PNoBu1Dfwe7a/XHadL01emXFfbmAlQn/HEmV7sFodR0pvL/krcjv78S5+XHMJhGtHXRtw4oqEhk6L+cBjNnSIyi4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=proton.me; spf=pass smtp.mailfrom=proton.me; dkim=pass (2048-bit key) header.d=proton.me header.i=@proton.me header.b=XU4rtfUs; arc=none smtp.client-ip=185.70.43.16
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=proton.me
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=proton.me
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="UMuXbAsw"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D8E0F1F000E9;
-	Wed,  2 Sep 2026 21:11:22 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1788383483;
-	bh=pCZJHKeytEx9moXuPcXu+qxXE/yek+mRpLJWqTDgaDc=;
-	h=Subject:From:To:Cc:Date:In-Reply-To:References;
-	b=UMuXbAsw1NvK5+mJYeorWfGPFnI2sZp+K9aG1JqzuC8wdgCf8YXgTE2aRh0shOfEa
-	 86JKLU7N4Qe3y1Qi79ma14bs2LQjlCjH9TyfpWEB0MLbpBft0x6tuwYgJhig3O/OM4
-	 mLu3jcjsJyexng1/hpQnCmZge5gHBgmNfv2dyMXd1rWsK5m7zXz3E905Bs4ZO/32Ya
-	 9ziOLQI5h8LK1ZMUwSsKaMUY09cPvJfbXqbYPtYo/tp6zgGjQz7P8mqxiCCm2vR3J0
-	 tnSG8JQAAzunfiL+9lWtmSXbZQj/ETi5rDubaFbiYbkXgcSo6iHNJZia9DrhPcRXA1
-	 d+52pM+NuLEFQ==
-Subject: Re: [net,v2] net: wwan: qcom_bam_dmux: account network packets
-From: netdev-bot+sashiko@kernel.org
-To: sinyavin@gmail.com
-Cc: stephan@gerhold.net, stephan.gerhold@linaro.org,
- loic.poulain@oss.qualcomm.com, ryazanov.s.a@gmail.com,
- johannes@sipsolutions.net, andrew+netdev@lunn.ch, davem@davemloft.net,
- edumazet@google.com, kuba@kernel.org, pabeni@redhat.com,
- linux-arm-msm@vger.kernel.org, netdev@vger.kernel.org,
- linux-kernel@vger.kernel.org
-Date: Wed, 02 Sep 2026 21:11:22 +0000
-Message-ID: <178838348238.3394541.9061693826070810058@kernel.org>
-In-Reply-To: <20260831181006.1382372-1-sinyavin@gmail.com>
-References: <20260831181006.1382372-1-sinyavin@gmail.com>
-X-sashiko-severity: High
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
+	dkim=pass (2048-bit key) header.d=proton.me header.i=@proton.me header.b="XU4rtfUs"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=proton.me;
+	s=ohdz7yiisbhrpfbd5oe2n7vs5a.protonmail; t=1788384139; x=1788643339;
+	bh=1WN0P42Ga1UQ2w7ibBx/V/nw/ikQdfeG+Lf+Wqou5iU=;
+	h=Date:To:From:Cc:Subject:Message-ID:Feedback-ID:From:To:Cc:Date:
+	 Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
+	b=XU4rtfUs+3WyvTJQefT2rJK2SpSvi9StMFXRiMXZxoCbhBzHaL4qzdDIX8ysIh+Ot
+	 qmaIeIaZgGtIgZpBnjGhXNWFAHz90NU1uMg22HZgug6lPAiIESxjx5fi6LJw7h6/r4
+	 7QcBR9WaaJhja7SG+MPhsyQxdOAjvnVT3OTtbyJPQVnXK3Td8kJ9wewymLziCHwyUl
+	 Ags8Rl2i+coIFJL+9Ghx7mf2N6cR71W0+0OM2rv10I+AaVL2cxFG2jwLDztt+qQxmn
+	 ep/JwKwkVRvlB17Ze1yPJIFXQfwM8StjvW+vs66LCnYYZobQYUGjUwyGNY3iJCQ0QL
+	 M/FkFwQrXCHaQ==
+Date: Wed, 02 Sep 2026 21:22:14 +0000
+To: David Heidelberg <david@ixit.cz>, Andrew Lunn <andrew+netdev@lunn.ch>, "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, Bjorn Andersson <andersson@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>
+From: Kristian Brox <isyourbrainfoss@proton.me>
+Cc: Krzysztof Kozlowski <krzk@kernel.org>, Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, Luca Weiss <luca.weiss@fairphone.com>, Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>, oe-linux-nfc@lists.linux.dev, netdev@vger.kernel.org, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org, Kristian Brox <isyourbrainfoss@proton.me>
+Subject: [PATCH v4 0/3] nfc: st-nci: Fairphone 5 NFC bring-up (ST21NFCD)
+Message-ID: <20260902-fp5-st21nfcd-v4-v4-0-ded2f1c501be@proton.me>
+Feedback-ID: 203906395:user:proton
+X-Pm-Message-ID: c4c498e7a9dd957ae9757fb03f72e5088d442de4
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-Thank you for your contribution! Sashiko AI review found 1 potential
-issue(s) to consider:
+This adds NFC on the Fairphone 5 (qcm6490). The board uses an ST21NFCD
+on I2C. That part speaks raw NCI; the current st-nci driver always
+wraps NDLC, so using st,st21nfcb-i2c leaves the adapter unusable.
 
-Critical: 0 · High: 1 · Medium: 0 (1) · Low: 0 (1)
+The series adds a st,st21nfcd compatible for the raw-NCI path and the
+Fairphone 5 DT node. Boards that already use st21nfcb / st21nfcc keep
+the NDLC path.
 
-- [High] Use-after-free write of the netdevice's core-allocated per-CPU
-  statistics from the asynchronous BAM TX completion callback.
+Patches are against linux-nfc/for-next (Linux 7.3-rc1). Hardware test
+was on a Fairphone 5 running postmarketOS:
 
-Pre-existing issues:
-- [Medium] The driver allocates netdevs with alloc_netdev() in
-  bam_dmux_register_netdev_work() but bam_dmux_remove() only calls…
-- [Low] Drop paths remain uncounted after the patch: the `drop:` label in
-  bam_dmux_netdev_start_xmit() (drivers/net/wwan/qcom_bam_dmux.c,…
+- 7.1.2 sc7280, earlier raw-NCI modules: nfctool Powered: Yes;
+  initiator poll / neard: NTAG 215, NDEF URI read OK
+- 7.2.0-nfc-test+ (sc7280-mainline), this v4 st-nci as modules:
+  10x initiator poll finds Type 2 in 0.13-0.14 s, no
+  "unsupported ntf opcode 0xf02". Repeat poll with a Type 2 tag
+  in the field stays Powered: Yes. Empty-field poll SIGINT
+  (nfctool -p, no tag) also stays Powered: Yes.
 
---
+The ndlc: hexdumps are pr_debug. SIGINT during CORE_RESET (nfctool -0
+then Ctrl-C during -1) wedges stock nci core; that is not this series.
 
-net: wwan: qcom_bam_dmux: account network packets
+ese-present and uicc-present follow the public schematic (NFC_SWP1/SWP2:
+SWP_SE to SIM1, SWP_UICC to SIM2). SE/HCE is not tested.
 
-The patch makes the BAM-DMUX driver maintain rx/tx packet and byte counters
-using the core per-CPU software statistics (NETDEV_PCPU_STAT_TSTATS plus
-dev_get_tstats64()). TX is accounted in the DMA completion callback and RX
-after the BAM-DMUX header and padding are stripped.
+CLK_REQ (GPIO 39) is omitted, as on Fairphone 6 NFC. VBAT and VDD_TX sit
+on VPH_PWR and are not modelled. VCC_UICC_IN (L4C) is not modelled;
+UICC SWP is untested.
 
-Link: https://lore.kernel.org/netdev/20260830085400.2542956-1-sinyavin@gmail.com/ (v1)
+Signed-off-by: Kristian Brox <isyourbrainfoss@proton.me>
+---
+Link to v3:
+https://lore.kernel.org/oe-linux-nfc/20260820-fp5-st21nfcd-v3-v3-0-5ee0a7f4=
+4d04@proton.me/
 
-> diff --git a/drivers/net/wwan/qcom_bam_dmux.c b/drivers/net/wwan/qcom_bam_dmux.c
-> index cc6ace8d6437..5bcac2ccaabd 100644
-> --- a/drivers/net/wwan/qcom_bam_dmux.c
-> +++ b/drivers/net/wwan/qcom_bam_dmux.c
-> @@ -177,8 +177,12 @@ static void bam_dmux_tx_callback(void *data)
->  {
->  	struct bam_dmux_skb_dma *skb_dma = data;
->  	struct sk_buff *skb = skb_dma->skb;
-> +	struct net_device *netdev = skb->dev;
->  
->  	bam_dmux_tx_done(skb_dma);
-> +	if (netdev)
-> +		dev_sw_netstats_tx_add(netdev, 1,
-> +				       ((struct bam_dmux_hdr *)skb->data)->len);
->  	dev_consume_skb_any(skb);
->  }
+Changes in v4:
+- Driver: consume ST proprietary RF NTF 0xf02 (Luca)
+- Driver: set raw_nci before nci_register_device (Sashiko / David)
+- Driver: enable vdd-io and SYS_CLK before driving reset
+- Driver: keep named i2c/acpi id initializers; do not add trailing
+  commas on existing of_match entries (David)
+- Driver: reset pulse uses gpiod_is_active_low so new DT can be
+  GPIO_ACTIVE_LOW without breaking old nfcb DTS (Krzysztof)
+- Binding: ST21NFCD is not I2C-only (data brief lists SPI); do not
+  put st,st21nfcd in the I2C-only spi-max-frequency:false enum
+- Binding: SPI $ref only in the non-I2C else (not a global allOf item)
+- Binding: clocks/vdd-io-supply on the existing I2C example; drop the
+  extra example (Krzysztof)
+- DTS: reset-gpios GPIO_ACTIVE_LOW (Krzysztof). Physical GPIO 38 HIGH
+  is the run level. Konrad R-b not carried (polarity changed).
 
-[Severity: High]
-Can this write to freed per-CPU memory?  bam_dmux_tx_callback() runs from
-the BAM dmaengine completion (vchan tasklet), and skb->dev is not a
-counted reference.  dev_sw_netstats_tx_add() then does:
+Changes in v3:
+- Binding: new compatible is a different ST part (not a driver-sharing note=
+)
+- Binding: drop NDLC/raw-NCI description on compatible
+- Binding example uses interrupts-extended
+- DTS: one nfc_default pinctrl group, pins sorted, no output-high
+- Fresh series (not a reply to v1/v2)
 
-include/linux/netdevice.h:dev_sw_netstats_tx_add() {
-	struct pcpu_sw_netstats *tstats = this_cpu_ptr(dev->tstats);
+Changes in v2:
+- Compatible is st,st21nfcd (no -i2c suffix)
+- Sent without PGP/MIME
+- DTS: interrupts-extended and pinctrl for IRQ/reset
+- DTS: ese-present / uicc-present (schematic)
+- DTS: SYS_CLK from LN_BB_CLK2, VPS_IO from L18B
+- Binding: optional clocks and vdd-io-supply
+- Driver: optional clk / vdd-io enable
 
-	u64_stats_update_begin(&tstats->syncp);
-	u64_stats_add(&tstats->tx_bytes, len);
-	...
-}
+---
+Kristian Brox (3):
+      dt-bindings: net: nfc: add st,st21nfcd
+      nfc: st-nci: add raw NCI path for ST21NFCD
+      arm64: dts: qcom: qcm6490-fairphone-fp5: add ST21NFCD NFC
 
-With dev->pcpu_stat_type = NETDEV_PCPU_STAT_TSTATS, dev->tstats is
-allocated by register_netdevice() and released at unregistration time,
-independent of needs_free_netdev/free_netdev:
+ .../devicetree/bindings/net/nfc/st,st-nci.yaml     | 49 +++++++++----
+ arch/arm64/boot/dts/qcom/qcm6490-fairphone-fp5.dts | 34 ++++++++-
+ drivers/nfc/st-nci/core.c                          | 22 ++++++
+ drivers/nfc/st-nci/i2c.c                           | 82 ++++++++++++++++++=
+++--
+ drivers/nfc/st-nci/ndlc.c                          | 27 +++++--
+ drivers/nfc/st-nci/ndlc.h                          |  5 +-
+ drivers/nfc/st-nci/se.c                            |  3 +
+ drivers/nfc/st-nci/spi.c                           |  2 +-
+ drivers/nfc/st-nci/st-nci.h                        |  2 +
+ 9 files changed, 197 insertions(+), 29 deletions(-)
+---
+base-commit: cee9395acd8043be0644b25c34bfa86623f2b935
+change-id: 20260902-fp5-st21nfcd-v4-1685be1d7c52
 
-net/core/dev.c:netdev_run_todo() {
-	...
-		netdev_do_free_pcpu_stats(dev);
-		if (dev->priv_destructor)
-			dev->priv_destructor(dev);
-		if (dev->needs_free_netdev)
-			free_netdev(dev);
-	...
-}
+Best regards,
+-- =20
+Kristian Brox <isyourbrainfoss@proton.me>
 
-In bam_dmux_remove() the TX channel is still armed when that happens:
 
-drivers/net/wwan/qcom_bam_dmux.c:bam_dmux_remove() {
-	...
-	unregister_netdevice_many(&list);
-	rtnl_unlock();			/* netdev_run_todo() frees tstats */
-	cancel_work_sync(&dmux->tx_wakeup_work);
-	...
-	if (!wait_event_timeout(dmux->pc_wait, !dmux->rx, BAM_DMUX_REMOTE_TIMEOUT))
-	...
-	disable_irq(dmux->pc_irq);
-	bam_dmux_power_off(dmux);	/* dmaengine_terminate_sync(dmux->tx) */
-	bam_dmux_free_skbs(dmux->tx_skbs, DMA_TO_DEVICE);
-}
-
-The only synchronous TX quiesce point is dmaengine_terminate_sync(dmux->tx)
-inside bam_dmux_power_off(), which is reached after rtnl_unlock(),
-cancel_work_sync(), the pm_runtime teardown and a wait_event_timeout() of
-up to BAM_DMUX_REMOTE_TIMEOUT.  bam_dmux_netdev_stop() only does
-netif_stop_queue() plus a CLOSE command, so it neither terminates nor
-drains outstanding descriptors:
-
-drivers/net/wwan/qcom_bam_dmux.c:bam_dmux_netdev_stop() {
-	netif_stop_queue(netdev);
-	bam_dmux_send_cmd(bndev, BAM_DMUX_CMD_CLOSE);
-	return 0;
-}
-
-Does any TX descriptor still in flight during that window end up doing
-this_cpu_ptr() on an already freed (possibly recycled) tstats pointer?
-
-The "if (netdev)" test only filters the driver's own command skbs, which
-come from alloc_skb() and leave skb->dev NULL, so it does not say anything
-about registration state.
-
-Would accounting TX in bam_dmux_netdev_start_xmit(), where the netdev is
-provably live and hdr->len is already known, avoid this?  Alternatively,
-would terminating/draining the DMA channels and clearing dmux->netdevs[]
-before unregister_netdevice_many() close the window?
-
-[ ... ]
-
-> @@ -421,6 +426,7 @@ static void bam_dmux_netdev_setup(struct net_device *dev)
->  	dev->needed_headroom = sizeof(struct bam_dmux_hdr);
->  	dev->needed_tailroom = sizeof(u32); /* word-aligned */
->  	dev->tx_queue_len = DEFAULT_TX_QUEUE_LEN;
-> +	dev->pcpu_stat_type = NETDEV_PCPU_STAT_TSTATS;
-
-[Severity: Medium]
-This is a pre-existing issue and not introduced by this patch, but it
-interacts with the new stats memory, so it is worth mentioning here.
-bam_dmux_register_netdev_work() allocates the netdev with alloc_netdev(),
-bam_dmux_netdev_setup() never sets dev->needs_free_netdev, and
-bam_dmux_remove() only calls unregister_netdevice_queue() /
-unregister_netdevice_many() with no free_netdev().
-
-net/core/dev.c:netdev_run_todo() {
-	...
-		if (dev->needs_free_netdev)
-			free_netdev(dev);
-
-		cnt++;
-
-		/* Free network device */
-		kobject_put(&dev->dev.kobj);
-	...
-}
-
-The kobject_put() there only balances the kobject_get() taken in
-netdev_unregister_kobject(), so the device_initialize() reference is never
-dropped and netdev_release() (kvfree(dev)) never runs.  Does this leak the
-struct net_device, its private data and its queue arrays on every driver
-removal?
-
-Would setting dev->needs_free_netdev = true here (next to the new
-pcpu_stat_type assignment), or pairing the alloc_netdev() with an explicit
-free_netdev() in bam_dmux_remove(), be the right fix?
-
-Note also that the still-allocated, still-readable net_device is what makes
-the freed dev->tstats access above silent rather than an obvious fault.
-
-> @@ -533,6 +539,7 @@ static void bam_dmux_cmd_data(struct bam_dmux_skb_dma *skb_dma)
->  		break;
->  	}
->  
-> +	dev_sw_netstats_rx_add(netdev, skb->len);
->  	netif_receive_skb(skb);
->  }
-
-[Severity: Low]
-This is a pre-existing gap rather than something this patch introduces, but
-now that rx/tx counters become non-zero the missing drop counters are more
-visible.
-
-The TX error path frees the skb and reports success without any
-tx_dropped/tx_errors accounting:
-
-drivers/net/wwan/qcom_bam_dmux.c:bam_dmux_netdev_start_xmit() {
-	...
-drop:
-	bam_dmux_tx_done(skb_dma);
-	dev_kfree_skb_any(skb);
-	return NETDEV_TX_OK;
-}
-
-and the RX early returns are not counted either:
-
-drivers/net/wwan/qcom_bam_dmux.c:bam_dmux_cmd_data() {
-	...
-	if (!netdev || !netif_running(netdev)) {
-		dev_warn(dmux->dev, "Data for inactive channel %u\n", hdr->ch);
-		return;
-	}
-
-	if (hdr->len > BAM_DMUX_MAX_DATA_SIZE) {
-		...
-		return;
-	}
-	...
-}
-
-Would it make sense to also bump rx_dropped/tx_dropped on these paths, so
-that ip -s link can explain the loss instead of showing traffic counters
-with permanently zero drops?
-
--- 
-Sashiko AI review · https://netdev-ai.bots.linux.dev/sashiko/#/patchset/20260831181006.1382372-1-sinyavin%40gmail.com
