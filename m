@@ -1,87 +1,87 @@
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id ED9A12DB795
-	for <linux-arm-msm@vger.kernel.org>; Wed,  2 Sep 2026 05:31:00 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 485B0387361
+	for <linux-arm-msm@vger.kernel.org>; Wed,  2 Sep 2026 05:58:27 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788327063; cv=none; b=rimHPLSA5Zc0nQJjOLWz6u88oS4W+Plv6TqXZhBXliQTJST7AMB3XNuwHnw7yqA0rTwnBD8B1YBhEv7he0RL63p4fZQcbOsIPqYkFm4OxDbtJ7WNIa8VtL6RDV0DEgxn9QIbDlkj2juckG4tncLdbW7aKrP3cG2bLG432uja8tw=
+	t=1788328709; cv=none; b=ljhugg8gr8ksPoqH1YAbt5o0/PVr2YVoOHPyB8rby3y/PNiDx7PMjSNkURNNKh2eeNYmVU6HarQIxe1UPNjaKRwtLI9JwGfNliJvl95e+C4EzHjIdfbvmw1747rIGt+YPwj9PqfnS4wDseMNeG/B09S1vrCQjId7m+L/kUTc0pE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788327063; c=relaxed/simple;
-	bh=EErxRj9UamHxjL4qovNFexC2eoDhDkme3XwtJu95u6Y=;
+	s=arc-20240116; t=1788328709; c=relaxed/simple;
+	bh=YU8UPMKZ/ySiuNk1+MpS6FNLDJVxn5Pnh3Srux/+E3g=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=hON7f7vU5yX04Ob+XyJgGgZQPBYm0fhXQE2qvZXlNUKg+r0vJ/2wgrjhdGRPbajXqZ6pHEU3ZbRsj/LyNFoFhmSOqGjV4XykodRrwjJGzqOZG1yphUDfEYMjIU5Iec1XuoMe4xpzl/iH+IVd/jD/luTeZeBrfGA5CiiPvq3qrrE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=c2jPeDiT; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=cVUiNyW/; arc=none smtp.client-ip=205.220.168.131
+	 In-Reply-To:Content-Type; b=P4qQjX+yAkAZnGDgFhpPyMvtA0xDG3wfnOohiCc+c7Asygzde2lcqZLa+R5WWMiAX22UHnWMXUHi41rk3Axhv99VRTJSAQFhuCgGW7CF3Yt+M84l5UxVym8r7fkCewyir+z/rz6Iac9Xis1i3IayBZF75utfvFTj21l3pzbapzU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=Z3Cupj4x; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=VvGu/Hbs; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="c2jPeDiT";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="cVUiNyW/"
-Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68202PU91013570
-	for <linux-arm-msm@vger.kernel.org>; Wed, 2 Sep 2026 05:31:00 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="Z3Cupj4x";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="VvGu/Hbs"
+Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6825YF5l1322048
+	for <linux-arm-msm@vger.kernel.org>; Wed, 2 Sep 2026 05:58:26 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	EErxRj9UamHxjL4qovNFexC2eoDhDkme3XwtJu95u6Y=; b=c2jPeDiTCeOUZ+Ms
-	LDfvknHx3w8HS4tzLQFo8FeefuE26hYIfDzmCR63ke5HsTrJhVNRJ4izfpXB0ssw
-	webIHA/6bABWsLA1p/ztDuFgHvg1mkJXMCDTkhmkQP3IGyj7VCPugPCCD+1Oq7Oe
-	GKwl73PE7usS1R0M0BFMgfEmqQwzWrKy2dI0rZbPKedLcZDptd4JdDT+Ap5zr7or
-	Xcj9TYijr4hxx1KlLlOSR1iT/240UHSABpzX0lHN4vfOpdyXfvXJSNYZVlnVAgcA
-	OQaL+qvn/miYq+lTGRaGVsYnHHepG14/UNsfuRW4Uht9HuVYjLcLQQFZ8OMwvjOS
-	GVLutA==
+	1OvAK2FF1tp6tcmLzdukvxlL1CZuIQ6FiGRnYYPcWf4=; b=Z3Cupj4xK0M8m9+n
+	HjPNoKTjeyNo+c+jG+BW7b81ZBszWFE9bGKqqv8VtmKwpjwQmAyzR9DQy6XOEOTn
+	JIik4SxlBmNoATDKXWCRQOhT1fTMHvT+qwulbIt7juSNHHiX/sfhKDwfUPiA/vMp
+	Rb1Lz+1LQuMZlkDq/BmEUf/fRmTSsKks3w9dcB9pHDaM5AZYj6bxXdUhl5/JO6r1
+	qTgIw7Qh7P9izcq01KhGO8WPbBSMNT4QlAB8p2HTuw8skaSvhoN7q0g9q+j71Yfi
+	8nMskBlrvZH0VVkD4Fejfvz5RHKCV/nQCnOGHuDmB3DZXWw5NCwZAfxoUbguo3IS
+	cLMX2g==
 Received: from mail-pj1-f71.google.com (mail-pj1-f71.google.com [209.85.216.71])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ge8whgx2q-1
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gebsx0fsg-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 02 Sep 2026 05:31:00 +0000 (GMT)
-Received: by mail-pj1-f71.google.com with SMTP id 98e67ed59e1d1-38ec0f510a9so1540750a91.2
-        for <linux-arm-msm@vger.kernel.org>; Tue, 01 Sep 2026 22:30:59 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Wed, 02 Sep 2026 05:58:26 +0000 (GMT)
+Received: by mail-pj1-f71.google.com with SMTP id 98e67ed59e1d1-399311947f6so1313730a91.0
+        for <linux-arm-msm@vger.kernel.org>; Tue, 01 Sep 2026 22:58:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1788327059; x=1788931859; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1788328706; x=1788933506; darn=vger.kernel.org;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=EErxRj9UamHxjL4qovNFexC2eoDhDkme3XwtJu95u6Y=;
-        b=cVUiNyW/ohBB+s7jOsi+qnKDuhoqnsuIqqXC6JiO1+cXdWMuegmxe0TrzVCLnvvhc0
-         3tHsxF4IX2c+KjMxnRRUHzHYaUJN252/ubYX0D+7eC8di2GkQc7yjvZu2xPfRFfvGYGy
-         cAFCwd/3XKPHmaWs3X9R98gBKLQBjOu6HkNYGRVwlBULfteYKCGl9p0H3hpq0mvzXzhp
-         i4C2OOjgMk1UYrSeWqa9eCsItFpd3MyP2Zi8WXc+0E2AqcbhKrZogBZiQo4130PR1HRL
-         Dg6gIBTlZ5H8NiVDdww1aWJlRE5D23RVK5VZkkF10at0T93liQCBoDhjDuDdlYLtjG7N
-         qCBw==
+        bh=1OvAK2FF1tp6tcmLzdukvxlL1CZuIQ6FiGRnYYPcWf4=;
+        b=VvGu/HbsQTDRB/ELpMwv5hYLbnia3iQxcd+R0H6MWLsbUYg+8sZW9KzB+VNB+8ay+5
+         c2H6lU/rEFspuzoxYak5vrp5XqtI7dEiT/BNAgX9IDO2YsFSfcqOgR6pFq3fQcsQ7j3V
+         Zp1clPfH3sQ5kAUaZwKCNiCtUbWt9ASnNsAPsAqzDx54ols1X9AzsNnQONorAmrB3oXH
+         VjJGsDm+Q/sorQw3cMA94OjHS2exuguMQTJCT3wl5nJMq93sI8BgM68nJ1HuFEOxkABK
+         /RCNorTM2Hknmm5/1RK0VtQys/jIl6unKerOLfqtATwpsxqOKjrW9JzA9DbzO5TBPuOF
+         +9ow==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788327059; x=1788931859;
+        d=1e100.net; s=20251104; t=1788328706; x=1788933506;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=EErxRj9UamHxjL4qovNFexC2eoDhDkme3XwtJu95u6Y=;
-        b=DxkmaCJVJqjuFOeLWwoIclQdb39XWWtL9Atln1LP0BzdkJPXcEmJBjQkp2OHc0RP4L
-         qnQh2PZzFxchy5QFt9r8F4cuMYUdugnWWE+YSITjHxoiAELE8g45Hig3EH3NI/6qQICq
-         prEc35BO6zUsrQ6X/YK5TYkAhz8Zd57m0zgtnhia+90DILlTzIeYcvqVThEWOjsajrxA
-         hF204RCg29Er30YhkGiYfafjIl/VTVhbC1OCqy0GnddPm/H2bvrTI7slM+TcuAkoLsx2
-         KsaGHcgtB6+1jbRi7hPde0euMeabUdRffeQRN7kiF1yRLMM/ILXfa7AM6TtQlMArzxMV
-         QZ7A==
-X-Forwarded-Encrypted: i=1; AKwUvByMwnEalAdjvS780oOJEyzP0o2m6G6MMP0XKgHeJqqgZEi8HLjDBl+NRDq9ssIp/UD594wWI7KsZ8eRCXr4@vger.kernel.org
-X-Gm-Message-State: AFuF++lS7kru6fEsTtFG0YrguyzF3CkoVERk5lL8pRNBUPt5a2DRM75H
-	yeaQvDKjnC4YufzMRMeIau2d6QOz3rLStgEUKbSPEOi/w2I4/tkr1zsOQ9iJPy68N4XTuG2DvJD
-	QSZA0VG0ptBCCUoF+GdaJ4h25/LEkXSnNxatvFx5on2xxDRrYqLofVuTxcv4c8lRNp40e
-X-Gm-Gg: AYBFou3xezngOLDHWnIYOh2rEdZRBqx9afUT7TYKTQcp/kIZcjjiGPh4eHhoUNenOHi
-	pY6Vdj6qVLhkabXpz1thBfoiBHZYym8/gwT9kEqcGKDEiT1EqAsXSAtHUJ4lCp5lnPTec4Lp/j9
-	kAwl3A4DLUNvSIL9aGqFochbkUmEzKj+CwkWEo8phMvEEEB6ipBBp/xJ5jbrhBho5ClVMoyyPtq
-	8Nvo5pS1nR0AkUfexqCysj1xKjKJaXgcaogZn9BkVfRjhQ5nZdygYaOPmc3555MLdI94hGvN/Y7
-	Y5WbFiiXypO6lVTiFa/917PmATceBFQRHJsZUXhrIlcyxxLd42Q5rzTtrPqJP8LLgBHo6GHThai
-	cM2YlayRBJugAROalDee8nCccHGHMdgbd
-X-Received: by 2002:a17:90b:1c07:b0:398:d8eb:cb2a with SMTP id 98e67ed59e1d1-39aee260bc0mr2726740a91.23.1788327059354;
-        Tue, 01 Sep 2026 22:30:59 -0700 (PDT)
-X-Received: by 2002:a17:90b:1c07:b0:398:d8eb:cb2a with SMTP id 98e67ed59e1d1-39aee260bc0mr2726667a91.23.1788327058905;
-        Tue, 01 Sep 2026 22:30:58 -0700 (PDT)
-Received: from [10.218.35.45] ([202.46.22.19])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1430e8c6fcbsm5163942c88.0.2026.09.01.22.30.53
+        bh=1OvAK2FF1tp6tcmLzdukvxlL1CZuIQ6FiGRnYYPcWf4=;
+        b=n6U3IJLx/sn48hUSoUkHdajSpGDc7M+U5V315J5DR7GV+odNXnCWIe9KMSsVHsOPeA
+         zE4mBDCp2SL/UuQOCNZjPH+bd23VsMjd7RPuwfzidwRzdDxE6U2R2d3t5+Q6cOe/UjMG
+         IrBZgQ/ZBwWI4eAr10gGD+xdxgyyCfaDYnaFjNzHATTi+BlXVdu568h92fR2uPX7FGhi
+         4HFkMK8QbL2QgxrJbeHsGWpZOFfxljHeN4BLBISB+Byn8JMF+uu00zMemYksyl6RXmoe
+         nsI9/+sdQWm6F5wHBW7wIGyPjQub1RBZr2gk91YPyK2oOxRBgKvHjLp0uf52KB8xqw9R
+         uvRQ==
+X-Forwarded-Encrypted: i=1; AKwUvByQRhiCxUqy8ixZ7f5tQ8Ri49vLDWa3jRpvf9DKBiRxVf3gsd5Y94ugVTW168O+3mB5iuHvuNPiGDebMXCQ@vger.kernel.org
+X-Gm-Message-State: AFuF++nysOs7L0DN8yrnGfdJVHad7hpaIFB446B6NmSmw6pexswK6gF3
+	mWaR1wLnrm1zqpDYfAZ0JGmIgtjmCL5Jn0yF4fUyx7NVMYPmLKkJwioWARIeFnusHuyNKHOH846
+	R7e5xoXsJH0PneS/pKoXhLeJSLCxK4vSRZaAaIgYFiqrM4S7ri0kjixwGkVb5qy/+i57d
+X-Gm-Gg: AYBFou3bOYNqzzztsRMjW9enP4qH8ZOMOgfZatmQtthQLH8ogzUuoua530i5MLl9+DO
+	hUFb8Np20jdyaIheD9jZGKp1JV+iXyLm1aaGdAMeBx6kS230BNwcvNS3T9fsmNwij9w9eL/9obH
+	VnI2xGTbtLgpN1yaj6oLTZdrzLLsqpBltLMWNRx9lL1uAwXG8vyeJHFJDJnFvVZPfG24hJhaXwk
+	w+LoCKjpod71ZSV22ZnBfXw6YiBM2kRzyRmJ+ZnXZtpJb7LyjLaBXA7tptSf1A/i402dHbpT9z6
+	vgJGeAJWLqXaMilGtmVTDTMIH3MsckYQ6rUQdMgG919wNVxyXu9fhrD+tIfpIxP/zAnTN0f1oDc
+	eKeSdbfA3IFM0XR7R2HcxRcn8iPuN/X/uERibwQIHNlsbrpgDfV2x/RV5
+X-Received: by 2002:a17:90b:4ac9:b0:398:9bd5:490c with SMTP id 98e67ed59e1d1-39aee0b498dmr2783797a91.19.1788328705721;
+        Tue, 01 Sep 2026 22:58:25 -0700 (PDT)
+X-Received: by 2002:a17:90b:4ac9:b0:398:9bd5:490c with SMTP id 98e67ed59e1d1-39aee0b498dmr2783746a91.19.1788328705240;
+        Tue, 01 Sep 2026 22:58:25 -0700 (PDT)
+Received: from [10.110.50.50] (i-global254.qualcomm.com. [199.106.103.254])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-32f07b79898sm3792600eec.15.2026.09.01.22.58.19
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 01 Sep 2026 22:30:58 -0700 (PDT)
-Message-ID: <774adaa9-55de-4456-9ee2-eb3c5d7ea0a5@oss.qualcomm.com>
-Date: Wed, 2 Sep 2026 11:00:51 +0530
+        Tue, 01 Sep 2026 22:58:24 -0700 (PDT)
+Message-ID: <d7229be4-36f9-4050-8a45-1f89b1283b9a@oss.qualcomm.com>
+Date: Wed, 2 Sep 2026 13:58:17 +0800
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -89,172 +89,109 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 5/6] wifi: ath11k: Add support for MHI bandwidth
- scaling
-To: Neil Armstrong <neil.armstrong@linaro.org>,
-        Bjorn Helgaas <bhelgaas@google.com>,
-        =?UTF-8?Q?Ilpo_J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>,
-        Jingoo Han <jingoohan1@gmail.com>,
-        Lorenzo Pieralisi
- <lpieralisi@kernel.org>,
-        Rob Herring <robh@kernel.org>, Jeff Johnson <jjohnson@kernel.org>,
-        Bartosz Golaszewski <brgl@bgdev.pl>,
-        Manivannan Sadhasivam <mani@kernel.org>,
-        =?UTF-8?Q?Krzysztof_Wilczy=C5=84ski?= <kwilczynski@kernel.org>
-Cc: linux-pci@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-arm-msm@vger.kernel.org, mhi@lists.linux.dev,
-        linux-wireless@vger.kernel.org, ath11k@lists.infradead.org,
-        qiang.yu@oss.qualcomm.com, Miaoqing Pan <quic_miaoqing@quicinc.com>
-References: <20260819-bwscale-v5-0-6dea79786b37@oss.qualcomm.com>
- <20260819-bwscale-v5-5-6dea79786b37@oss.qualcomm.com>
- <5b10cb13-77e6-4754-a885-92c873866ef4@linaro.org>
+Subject: Re: [PATCH v1 01/11] virtio_blk: add inline encryption support
+To: Stefan Hajnoczi <stefanha@redhat.com>
+Cc: ebiggers@kernel.org, axboe@kernel.dk, mst@redhat.com, jasowangio@gmail.com,
+        James.Bottomley@hansenpartnership.com, martin.petersen@oracle.com,
+        robh@kernel.org, krzk+dt@kernel.org, conor+dt@kernel.org,
+        linux-block@vger.kernel.org, linux-crypto@vger.kernel.org,
+        linux-scsi@vger.kernel.org, virtualization@lists.linux.dev,
+        devicetree@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+        neeraj.soni@oss.qualcomm.com, gaurav.kashyap@oss.qualcomm.com,
+        mani@kernel.org, andersson@kernel.org, konradybcio@kernel.org,
+        bvanassche@acm.org, alim.akhtar@samsung.com, avri.altman@sandisk.com,
+        pbonzini@redhat.com, eperezma@redhat.com, xuanzhuo@linux.alibaba.com,
+        linux-kernel@vger.kernel.org
+References: <20260827160806.1295313-1-linlin.zhang@oss.qualcomm.com>
+ <20260827160806.1295313-2-linlin.zhang@oss.qualcomm.com>
+ <20260901194817.GE729142@fedora>
 Content-Language: en-US
-From: Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>
-In-Reply-To: <5b10cb13-77e6-4754-a885-92c873866ef4@linaro.org>
+From: Linlin Zhang <linlin.zhang@oss.qualcomm.com>
+In-Reply-To: <20260901194817.GE729142@fedora>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-Authority-Analysis: v=2.4 cv=fLkJG5ae c=1 sm=1 tr=0 ts=6a97b494 cx=c_pps
- a=UNFcQwm+pnOIJct1K4W+Mw==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-ORIG-GUID: HmtQJIcHKCi_kA_StSj6A9uUESBX8AFz
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTAyMDA1MSBTYWx0ZWRfX/TgMZxU+4244
+ yfEx1na2jb4+KguybDVsA0rUmRs5SbZgRwDLEcc4sHTnT2Ef/gCQHkkB7jlwEfOLHejc1BJzakE
+ w5nn7bSN9LfK6VRMnYSHG2HfOtuQCWJXqAEb+Zo0Kmx1enuLVFjMDd8jVOK9gu4xxCiGrG4wPlq
+ Lhdz+6RwgyhkpRW7HgIX+sRdTpdB7Uf73TU7iUzi+pj7NvRrHafX2VupDno04j/8mgEk3tZ3ft1
+ z3LlCFP7n9mKfWeVwM56hxa3/G3qsknPKYoOwnX1it0rRvfawBz1q7Cv7UQQYWaSv4YmF7Ezoit
+ xzchVDbNAHsm1he486Wwo+iVSBJsmT1/V1Y82odpHvurouTYgIXvp8YHmOSN2cZvq2CLqJnDD2b
+ XpkJbrQVF0kMxE6VNo28O5FrXFjAD9X9FDHwdWFmZjvkznDVUS5xxOe10/DxFzDrD/rAeVT9aJC
+ XLUOU/SWpaS/y7EokSw==
+X-Proofpoint-GUID: HmtQJIcHKCi_kA_StSj6A9uUESBX8AFz
+X-Authority-Analysis: v=2.4 cv=AufeGu9P c=1 sm=1 tr=0 ts=6a97bb02 cx=c_pps
+ a=UNFcQwm+pnOIJct1K4W+Mw==:117 a=JYp8KDb2vCoCEuGobkYCKw==:17
  a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22
- a=COk6AnOGAAAA:8 a=EUspDBNiAAAA:8 a=WikkZxfSKXF9q-dYMVUA:9 a=3ZKOabzyN94A:10
- a=QEXdDO2ut3YA:10 a=uKXjsCUrEbL0IQVhDsJ9:22 a=TjNXssC_j7lpFel5tvFf:22
-X-Proofpoint-ORIG-GUID: KT50_wVYYDkVrAloNip811FxHrgaXdPw
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTAyMDA0NiBTYWx0ZWRfX6KFM2LhSHqNS
- LJDLc0zaOi+JSl74T4BP7A9H/ohtiZw2muV8LpWpEfLoFlNLihzS/Wj5DBzNg1m6yNys8J4toUI
- 8z3dORCPTXpN2b9Rq4tkpAkZAUe0aQasNRJpNZQDXG1R7IazxP3VsLjaYxokj8AfuauMt5CVHj4
- suoZBF/jMDl8k7pJkBaYBX2Ely6NVI4Z/z8b/fNpBeZqWfSSMSlQ4auQpalc66l4LpdwMJpgM+s
- F1JvUNpy9MsGLM7d+cNeAQbgpONpmdOr8xttv2zX178y775+w0s/PTKWjwg/0MwTjjE9k5qTMIU
- PhOG4l0k7Bv1qJbyWqbgaSgMidaoXMAwtLob1qfYu9PmoBxNfQCfucOCM0A5BaxawUxuRinIK1t
- Ndy+VzeAMK0rvSqXXdcVkiLKuqBRpHYp/JCkjzY/I3SoVS7nG03ZmuLJGeaEbcLrzXDA9g7VxkZ
- HPsutTQ9+aiw+Nf6LbA==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTAyMDA0NiBTYWx0ZWRfXx2N48XK2uJqg
- 1EzY2F3k+mt66HEBVJmBHeuz5fPHZJmFE548+MM9wDpBe3vgaNNYAykZeino2K+6SOK8ykdbKWL
- Pw/zMXHbZlc8UPs+1N4kx0ZrWJYkzjI=
-X-Proofpoint-GUID: KT50_wVYYDkVrAloNip811FxHrgaXdPw
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22
+ a=EUspDBNiAAAA:8 a=dlkBk7sggpSz48gVZtEA:9 a=QEXdDO2ut3YA:10
+ a=uKXjsCUrEbL0IQVhDsJ9:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTAyMDA1MSBTYWx0ZWRfX5/2QyZXcP/cF
+ tN/KSsjwF7quBb9pvgOsXXlOvMYMxYqLGAKh3VAB6zQvgqocBBmNblsnTsk35b6o09z9M+HeH0b
+ hTVbaIQQFgM+FFswLTO7K6MN7EpVj7A=
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-09-01_06,2026-09-01_03,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- bulkscore=0 malwarescore=0 impostorscore=0 clxscore=1015 priorityscore=1501
- spamscore=0 phishscore=0 lowpriorityscore=0 adultscore=0 suspectscore=0
+ clxscore=1015 bulkscore=0 lowpriorityscore=0 impostorscore=0 phishscore=0
+ spamscore=0 adultscore=0 suspectscore=0 priorityscore=1501 malwarescore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2609020046
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2609020051
 
 
 
-On 9/1/2026 8:15 PM, Neil Armstrong wrote:
-> Hi,
->
-> On 8/19/26 15:25, Krishna Chaitanya Chundru wrote:
->> From: Miaoqing Pan <quic_miaoqing@quicinc.com>
+On 9/2/2026 3:48 AM, Stefan Hajnoczi wrote:
+> On Thu, Aug 27, 2026 at 09:07:10AM -0700, Linlin Zhang wrote:
+>> From: linlzhan <linlzhan@qti.qualcomm.com>
 >>
->> Add support for MHI bandwidth scaling, which will reduce power consumption
->> if WLAN operates with lower bandwidth. This feature is only enabled for
->> QCA6390.
+>> Negotiate VIRTIO_BLK_F_INLINE_ENCRYPTION with the host and wire it into
+>> the block layer's inline-crypto framework to enable inline encryption
+>> on virtio block device.
 >>
->> Bandwidth scaling is initiated by the endpoint firmware based upon the
->> bandwidth requirements, if there is high bandwidth data endpoint requests
->> for higher data rates or if there is less bandwidth they request for lower
->> data rates to reduce power. Endpoint initiates this through MHI protocol.
+>> When the feature is present, the driver reads crypto characteristics from
+>> virtio config space (key-slot count, DUN size, supported key types) and
+>> issues VIRTIO_BLK_T_GET_CRYPTO_MODES to discover supported cipher and
+>> data-unit-size combinations.  Encrypted requests use new request types
+>> VIRTIO_BLK_T_CRYPTO_IN/OUT, which append a virtio_blk_crypto_msg
+>> (keyslot index, DUN, data-unit-size-bits) to the standard outhdr.
 >>
->> Tested-on: WCN6855 hw2.1 PCI
->> WLAN.HSP.1.1-04546-QCAHSPSWPL_V1_V2_SILICONZ_IOE-1
->
-> Somehow unrelated, but I added this to the ath12k to test on an WCN785x and
-> I just
-> got a single event to set the speed to 5GT/s and no further event whatever
-> the state
-> of the Wireless link is.
->
-> Is there anything required on the ath12k side to allow lowering the speed to
-> 2.5GT/s ? 
-some wifi device has some limitation due to that they will stay in gen2 only.
-
-- Krishna Chaitanya.
->
-> Thanks,
-> Neil
->
+>> A new virtio block crypto extension driver (virtio_blk_crypto_ext),
+>> owns the blk_crypto_profile singleton and the blk_crypto_ll_ops dispatch
+>> table. Actual key operations are forwarded to a platform-specific
+>> backend registered via virtblk_set_crypto_ops(); without one,
+>> VIRTIO_BLK_F_INLINE_ENCRYPTION is still negotiated and the
+>> profile is registered, but every keyslot operation returns -EOPNOTSUPP.
 >>
->> Signed-off-by: Miaoqing Pan <quic_miaoqing@quicinc.com>
->> Signed-off-by: Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>
+>> The shared profile is a singleton as per blk_crypto_profile is
+>> corresponding to one ICE hardware: the first device to negotiate the
+>> feature initializes it; subsequent devices reuse it only when their
+>> negotiated capabilities (slot count, DUN size, key types) match exactly.
+>>
+>> Signed-off-by: linlzhan <linlin.zhang@oss.qualcomm.com>
 >> ---
->>   drivers/net/wireless/ath/ath11k/mhi.c | 38
->> +++++++++++++++++++++++++++++++++++
->>   1 file changed, 38 insertions(+)
->>
->> diff --git a/drivers/net/wireless/ath/ath11k/mhi.c
->> b/drivers/net/wireless/ath/ath11k/mhi.c
->> index a6c9ff112c68..9bff4c4bca3b 100644
->> --- a/drivers/net/wireless/ath/ath11k/mhi.c
->> +++ b/drivers/net/wireless/ath/ath11k/mhi.c
->> @@ -20,6 +20,7 @@
->>   #define MHI_TIMEOUT_DEFAULT_MS    20000
->>   #define RDDM_DUMP_SIZE    0x420000
->>   #define MHI_CB_INVALID    0xff
->> +#define MHI_BW_SCALE_CHAN_DB 126
->>     static const struct mhi_channel_config ath11k_mhi_channels_qca6390[] = {
->>       {
->> @@ -71,6 +72,17 @@ static struct mhi_event_config
->> ath11k_mhi_events_qca6390[] = {
->>           .client_managed = false,
->>           .offload_channel = false,
->>       },
->> +    {
->> +        .num_elements = 8,
->> +        .irq_moderation_ms = 0,
->> +        .irq = 1,
->> +        .mode = MHI_DB_BRST_DISABLE,
->> +        .data_type = MHI_ER_BW_SCALE,
->> +        .priority = 2,
->> +        .hardware_event = false,
->> +        .client_managed = false,
->> +        .offload_channel = false,
->> +    },
->>   };
->>     static const struct mhi_controller_config ath11k_mhi_config_qca6390 = {
->> @@ -311,6 +323,30 @@ static void ath11k_mhi_op_write_reg(struct
->> mhi_controller *mhi_cntrl,
->>       writel(val, addr);
->>   }
->>   +static int ath11k_mhi_op_get_misc_doorbell(struct mhi_controller
->> *mhi_cntrl,
->> +                       enum mhi_er_data_type type)
->> +{
->> +    if (type == MHI_ER_BW_SCALE)
->> +        return MHI_BW_SCALE_CHAN_DB;
->> +
->> +    return -EOPNOTSUPP;
->> +}
->> +
->> +static int ath11k_mhi_op_bw_scale(struct mhi_controller *mhi_cntrl,
->> +                  struct mhi_link_info *link_info)
->> +{
->> +    enum pci_bus_speed speed =
->> pci_lnkctl2_bus_speed(link_info->target_link_speed);
->> +    struct ath11k_base *ab = dev_get_drvdata(mhi_cntrl->cntrl_dev);
->> +    struct pci_dev *pci_dev = to_pci_dev(ab->dev);
->> +    struct pci_dev *pdev;
->> +
->> +    pdev = pci_upstream_bridge(pci_dev);
->> +    if (!pdev)
->> +        return -ENODEV;
->> +
->> +    return pcie_set_target_speed(pdev, speed, true);
->> +}
->> +
->>   static int ath11k_mhi_read_addr_from_dt(struct mhi_controller *mhi_ctrl)
->>   {
->>       struct device_node *np;
->> @@ -387,6 +423,8 @@ int ath11k_mhi_register(struct ath11k_pci *ab_pci)
->>       mhi_ctrl->status_cb = ath11k_mhi_op_status_cb;
->>       mhi_ctrl->read_reg = ath11k_mhi_op_read_reg;
->>       mhi_ctrl->write_reg = ath11k_mhi_op_write_reg;
->> +    mhi_ctrl->bw_scale = ath11k_mhi_op_bw_scale;
->> +    mhi_ctrl->get_misc_doorbell = ath11k_mhi_op_get_misc_doorbell;
->>         switch (ab->hw_rev) {
->>       case ATH11K_HW_QCN9074_HW10:
->>
->
+>>  drivers/block/Kconfig                 |  13 ++
+>>  drivers/block/Makefile                |   2 +
+>>  drivers/block/virtio_blk.c            | 199 ++++++++++++++++--
+>>  drivers/block/virtio_blk_crypto_ext.c | 283 ++++++++++++++++++++++++++
+>>  include/linux/virtio_blk_crypto_ext.h |  78 +++++++
+>>  include/uapi/linux/virtio_blk.h       |  62 ++++++
+>>  6 files changed, 623 insertions(+), 14 deletions(-)
+>>  create mode 100644 drivers/block/virtio_blk_crypto_ext.c
+>>  create mode 100644 include/linux/virtio_blk_crypto_ext.h
+> 
+> Thanks for sending this as we discuss the VIRTIO spec changes.
+> 
+> Although it's nice to have all the Linux patches together, there are two
+> separate parts: 1. the virtio_blk.ko guest driver changes and 2. the
+> hypervisor blk-crypto uapi. I suggest splitting this into two patch
+> series to avoid confusion between these parts. It may also make review
+> and merging easier if we stay focussed on just the guest or just the
+> host parts.
+
+Thanks for the comments!
+
+I can separate them as 2 patch series in next patch.
+
+> 
+> Stefan
 
