@@ -1,164 +1,182 @@
-Received: from mail-qt1-f169.google.com (mail-qt1-f169.google.com [209.85.160.169])
+Received: from mail-wr1-f53.google.com (mail-wr1-f53.google.com [209.85.221.53])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9120149C4A0
-	for <linux-arm-msm@vger.kernel.org>; Wed,  2 Sep 2026 12:51:58 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.160.169
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3AD5B49482C
+	for <linux-arm-msm@vger.kernel.org>; Wed,  2 Sep 2026 12:52:41 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.53
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788353522; cv=none; b=VPpEViBGQmNiUpFA+PO0neDqzVcDhfTkYVxsBL26gxgN9rJlGyyoG2foS1T0nVU5XNT+rD1rlUNk4lywMjMrCDU1QtkdCjLxiw3GXsmhpzkq9lknVdUMssT9ayGWgDQBFym9UPuk4xV5XAAW3VBIjoQWiAw3b/OeJTnz25DIadM=
+	t=1788353562; cv=none; b=bZyqO30tTA0mGzlbI5YydRfMMBfk0MbkSXVHFCdsKWyxEOilYC0O8KCYEatmljsb1ku3h4jxmazF+xoboMmplngSgZ2oJ1LSxRWqaEg4DaNy8B09Wa7oKSDEcfy1GaXlUU+dry+kceqna1xfNpLwbfjbw8CFhlbRML35tcCs7OY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788353522; c=relaxed/simple;
-	bh=mKlEjK/YMQld6vJmwR0/9aKJoS+2zsE2avk1GfXVXeM=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=FJBUolkqFUio1TKRfHK+h09sHnym3mDt4t5D/pNG8a+xlZNp+31a+ADeP1KuLF8kp5kKJhzz2EDuMfXNHZESC3kWWOF6A3IcfPhbBXfgJnW69b7EAfUhbt1K8ZBTIpD5t4SdbZtexNX0FLIll6uZB2Zuc+d9cZWNNu8FpP6Fh4I=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=riscstar.com; spf=pass smtp.mailfrom=riscstar.com; dkim=pass (2048-bit key) header.d=riscstar-com.20251104.gappssmtp.com header.i=@riscstar-com.20251104.gappssmtp.com header.b=a+MHFUdZ; arc=none smtp.client-ip=209.85.160.169
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=riscstar.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=riscstar.com
+	s=arc-20240116; t=1788353562; c=relaxed/simple;
+	bh=P3B9n1ngSJPYECqzlUnSk21jaEUvILK91iJ3Q8IaZOI=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=m9zYb6pFv5sz9NJJO/mNClI/uP/f7cTYlsDbxlqeeIAR2J4Wrm9nEeQ1XfSBu3BVUs9lCwPYrl8KfdF/7V+W3TOsfWrz/m/87NkVphjfo+JwmDOq4zOvAwWacdTmJ1wtqIDaWrH5yMCCVmKASKTtLCkjYeeaXZfj3LIet60GQR0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=aeclux+C; arc=none smtp.client-ip=209.85.221.53
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=riscstar-com.20251104.gappssmtp.com header.i=@riscstar-com.20251104.gappssmtp.com header.b="a+MHFUdZ"
-Received: by mail-qt1-f169.google.com with SMTP id d75a77b69052e-52e2d1bdbc0so6847391cf.0
-        for <linux-arm-msm@vger.kernel.org>; Wed, 02 Sep 2026 05:51:58 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="aeclux+C"
+Received: by mail-wr1-f53.google.com with SMTP id ffacd0b85a97d-47f96c5b722so740281f8f.0
+        for <linux-arm-msm@vger.kernel.org>; Wed, 02 Sep 2026 05:52:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=riscstar-com.20251104.gappssmtp.com; s=20251104; t=1788353516; x=1788958316; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=cBFYRqjj9ZQem2jSgP0xTqH/Yx+DXsxPz53X3PniFy8=;
-        b=a+MHFUdZ6flYrZhivX037uuPPoYhghpxDukqRxHeebP5q7xjyKw/OrawV3VnxJSBlz
-         s9ad78FxrrrJlbWcV4Vios7qOXR6bTRzFhekDv2bQkZO9cObQma8tATetwGRmbRXpe1K
-         cE7vWkWhlicMtwFKJgZ+/Oh4MaxC3V2vkj3MrYDN+Uperp0hMg7Cp2+FU+LPaYD2nKdD
-         mygDm55U5+xhqCDtUuk3PItiIeA2hpWfotakp1IsXUg8XaOe92sN1Zx5Lt6p10md2O8B
-         yqOSZDzjtT3Fsy1RGkYs9xFHutwwRM5kuLNyRAdnDiYE6HsJA5zd7A9JXRsclOE8XiMt
-         BjGw==
+        d=gmail.com; s=20251104; t=1788353559; x=1788958359; darn=vger.kernel.org;
+        h=cc:to:message-id:content-transfer-encoding:content-type
+         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=xdaO6fBuGjaq2cQRe9XXSfpY5l3FVnBSWeRbf2wTLJQ=;
+        b=aeclux+CBPIKVw/lnVDOo0P0c4oVnuQGulcIQ19BqW+vresYMXSo0uTiZ1cSUrFLik
+         8C7tKtTDt2fj5GwAaq5eSEwhzAipPzN8Zt14DoUSVcY1k4EfWDMxNV0U5y3prdRlnLA1
+         ruXdHeORbAnl0ZZC5Zarga11OToRJlN9KyhADnJkqxLHwygEo/M4qXKnixY0TMim71a5
+         5czPE1w4bHjx1RwxBXWOlrePTNYj0qhcf3Ifk+IsqM9uRht4PS/X8XyR7MZBSE70XLYc
+         bSA8Tq0M8Ko3nW4tRShNRZJQlEo3QngBPDDuntPDn/QtMst+AfauRq959UCBoMyNqZhD
+         1gwA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788353516; x=1788958316;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=cBFYRqjj9ZQem2jSgP0xTqH/Yx+DXsxPz53X3PniFy8=;
-        b=HKa/SygI2VkLPs7oP6XaqrtfXRi7HuVVjWmsznYibHRY3B3XKRlhv1C+cpPmH6kLNC
-         hZoEYGveW8Dx2oTW4HvAncx2uXfCjcGVQrN+gcHIa+8pR9K5RGcrZWbkAlcDS8cUuel/
-         U3KWCS8FHxOPpOI7fCRejxxTFUHqR7dtZnqFdii5q3i5u6Lr9XZPupinrpUf+WUXpKJA
-         Mt64rk8V1oVKcGJ52fMpms7gYGCjEN5Y6/GOv41K8501pij0TF6Doz+zSQBZYcSzMmUx
-         mC5gqkos7OcSZND/tBNdTAbkgwd69KvpqVmfY807nSwpK6Um+LPYLkI4lnj9pRFSNHUA
-         TCUg==
-X-Forwarded-Encrypted: i=1; AHgh+RqFJNHVqvHlSf8FHdntf/FnX2MdXPbD0uGvJTeMTNhNot/V8LrLbvclBUPmsyPQYiD2kC0RgPYr2ULGDCIJ@vger.kernel.org
-X-Gm-Message-State: AFuF++n+JtjaOz6A7hixDb08lxd/5+iTVbuVnVId6DI0A2vDTvcVUrb2
-	5+TfudX4FFEDTqS8auNjztjgq2WaF94SSXmHZBF+UMCLnJhayRQ3sdFb5wSHfX3ze28=
-X-Gm-Gg: AR+sD138G3q8xhyiX7zBPd2/FAKHsGt+jztIxLCL77FwF6LccO4ZAq9Vi80o07MTFX9
-	9h37n/8YFMDupo7J52E5yWkVTZsFC2BMuDk7v9X+1TPqNEGnyabKGYk8RbGfauU6a8XNNc8pLH5
-	i1E0yOXgRO2TTuUrykAecGA2TcuneEl8IKFXbloTeq6vUQCqn1aKlw8r5Kpks3h+QKTlbaJl4Ll
-	5TZ1a/RpF9iCfS1PI8ntSKvwoMQlPkBOf/HMmVJYWOY4EW5JYaBQ0sM4KrvQA03YrKBeOKJewUc
-	DNYwD07/E2e2tqb1xvNY5o6yuftwLIg8OlUjpquUi/CxQoY3y/HcU4DGncPP+9hLlkWmDGEScX0
-	bCOKcZB0JjHEjUE+CWvYwItJCrfSHHOqeWqkqaVFr/FrbxKaLyE/PZi/uS7cPRcGwz76PfhKk+o
-	m0I5wP16jiJu622wSuIdPEpPW1gD1tDKbIMzLH7gsmQHk9pvHSxL1VkfgyDdGVyQ==
-X-Received: by 2002:a05:622a:4818:b0:519:8998:661b with SMTP id d75a77b69052e-53036cc568dmr52347051cf.20.1788353516104;
-        Wed, 02 Sep 2026 05:51:56 -0700 (PDT)
-Received: from [172.22.22.28] ([73.62.185.64])
-        by smtp.gmail.com with ESMTPSA id 6a1803df08f44-90e9eec824fsm17365906d6.24.2026.09.02.05.51.55
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 02 Sep 2026 05:51:55 -0700 (PDT)
-Message-ID: <d9071ec7-371f-4896-a023-77a07f01f65e@riscstar.com>
-Date: Wed, 2 Sep 2026 07:51:54 -0500
+        d=1e100.net; s=20251104; t=1788353559; x=1788958359;
+        h=cc:to:message-id:content-transfer-encoding:content-type
+         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to:content-type;
+        bh=xdaO6fBuGjaq2cQRe9XXSfpY5l3FVnBSWeRbf2wTLJQ=;
+        b=gsNTQDmBQz31sltNW6+Jt/mRQal9hGmyOECJlJ3Hx7p9cBLP/8ZrNuKSurF7X5ynTn
+         4MkJeGlN6WWKbhMPbx9hK9dlOwHeJX5kEEK5ndqP5SgtL4oFhJ/SWAZG5LNCNj5NadW+
+         wAJJhV50sUz79jw85f9QF3pJjDxUqtfdS3TS0mSMEhKhsVNQc+ogKpUntmh+fLwBC4SR
+         X2i+YQYY1QhENs1y+FCtn6NZGSQ2szeXo/U7r5lQ08PfgclztqySkOUgQoXCpxmAKMko
+         BlyezoOrtJgvVsqnvsvF2v6FHsscPMiiT6sKJIprfxGzLoP8meMKq8YlN6D9Y/LSDmCZ
+         0ehg==
+X-Gm-Message-State: AFuF++mI8pwNhwg32Reym+W1Xfb5XBEFYkla98wrtNSvNO/L/Y3I+nYg
+	+wVAN0L89rgWRkgekV3jWluUtIUpippWqhuDMWcZxIRQsrlFsL71jACB
+X-Gm-Gg: AYBFou3kFqfXWeTlmAqx8+aI32oL9JvmVobN21nF0tIUxjxs9Xg/co/fKuDN0b7oqBF
+	aPn26VDer66P3ipkTwBzFE5Q5ZEWAIOXnI1eDgmRJGPunEAHEkhmIGp2E4h9MxaR3mVAeevwCxH
+	OCuhIoyJqS2qa+rfRP8CvLkCZz6fWSqpgVgK8H3QvS9rHQg2mODwDqpS6iP/lPXUfQj7hlIobEa
+	u2KnFY73scj1N6uoTxAALakt3gpOunmDbcNoK8t4cHTkzUw1YR+fOpPIH2AfHKxl1On2mz/Ydk3
+	NgLLrKgfP1YB0JUIU65wKWE3DFzVDm8KaftV9O60HpuEfCmmRXYYDuyJ9S0ghIUQIufbovzvXAd
+	SekXa+eOwi1RDzxj497TLwfyQir6QEwrCqR1KnhzZVeyM0bqLjS5WnoyyZ6G2KA62JoMHgliO3e
+	Hiuahpv6hMgLa3hRb0Y3wqyPGlPXY2/GURBo1Py6OlOS2NPODv+eQCEFqu+D/XG1qf3edVC548Q
+	uVvMV0NTSbX1y6o3PeZaf/Ma7Pn
+X-Received: by 2002:a05:6000:2482:b0:484:3d35:5706 with SMTP id ffacd0b85a97d-484914b7e20mr8950452f8f.22.1788353559085;
+        Wed, 02 Sep 2026 05:52:39 -0700 (PDT)
+Received: from [192.168.1.5] ([148.252.128.8])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48448ed3716sm6543253f8f.22.2026.09.02.05.52.37
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 02 Sep 2026 05:52:38 -0700 (PDT)
+From: Dale Whinham <daleyo@gmail.com>
+Date: Wed, 02 Sep 2026 13:52:36 +0100
+Subject: [PATCH v2] arm64: dts: qcom: x1-denali: Add volume up/down GPIO
+ keys
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/5] arm64: dts: qcom: qcs6490-rb3gen2: use pci for device
- nodes
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260902-surface-pro-11-volume-buttons-v2-1-1d893c7b5440@gmail.com>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/42OTQ6DIBSEr2JY9zWCP9Gueo/GBdCn0qgYHpA2x
+ rsX7QW6/DKTb2ZjhM4gsVu2MYfRkLFLAnHJmB7lMiCYZ2ImclHnjWiBguulRlidBc4h2inMCCp
+ 4bxeCvlRljqLSqBVLjtVhb96n/9H9mIJ6ofaH9GiMhrx1n/NA5Efv363IgUOKq6YtykLWzX2Yp
+ Zmu2s6s2/f9C/fpPPbcAAAA
+X-Change-ID: 20260829-surface-pro-11-volume-buttons-f4b40e25cecb
+To: Bjorn Andersson <andersson@kernel.org>, 
+ Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>, 
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, 
+ =?utf-8?q?J=C3=A9r=C3=B4me_de_Bretagne?= <jerome.debretagne@gmail.com>, 
+ Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, 
+ Dale Whinham <daleyo@gmail.com>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1788353557; l=2560;
+ i=daleyo@gmail.com; s=20251214; h=from:subject:message-id;
+ bh=P3B9n1ngSJPYECqzlUnSk21jaEUvILK91iJ3Q8IaZOI=;
+ b=IaqaduQCaxmFfyKqat/Yx4CdX+AosmjnsVzKJdAcszI6FTzzNjK8qNsgOqqD7lxuRfMpnpwU8
+ OusvjmzfxaGA7SSuaA8OSXY8qEipcr8cxUDig8XrvBMz2EJO8GskwIh
+X-Developer-Key: i=daleyo@gmail.com; a=ed25519;
+ pk=M4mvgx1TB2TniKaedTDsO3PbLKgFosJuegXRXPbn2Ds=
+
+Configure gpio6 and gpio8 as volume up and volume down respectively, to
+enable the volume rocker located at the top of the screen.
+
+Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Signed-off-by: Dale Whinham <daleyo@gmail.com>
+---
+Changes in v2:
+- Sort the new pin configuration nodes by controller and GPIO number (Konrad)
+- Link to v1: https://patch.msgid.link/20260829-surface-pro-11-volume-buttons-v1-1-ace589343a68@gmail.com
+
+To: Bjorn Andersson <andersson@kernel.org>
+To: Konrad Dybcio <konradybcio@kernel.org>
 To: Rob Herring <robh@kernel.org>
-Cc: andersson@kernel.org, konradybcio@kernel.org, krzk+dt@kernel.org,
- conor+dt@kernel.org, daniel@riscstar.com, mohd.anwar@oss.qualcomm.com,
- lorenzo.bianconi@oss.qualcomm.com, devicetree@vger.kernel.org,
- linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org
-References: <20260901172058.1512508-1-elder@riscstar.com>
- <20260901172058.1512508-2-elder@riscstar.com>
- <CAL_JsqJJPdrYArNhbRPTM=scDghLAWe5=0a2+ACNaHe07h6-tw@mail.gmail.com>
-Content-Language: en-US
-From: Alex Elder <elder@riscstar.com>
-In-Reply-To: <CAL_JsqJJPdrYArNhbRPTM=scDghLAWe5=0a2+ACNaHe07h6-tw@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+To: Krzysztof Kozlowski <krzk+dt@kernel.org>
+To: Conor Dooley <conor+dt@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org
+Cc: devicetree@vger.kernel.org
+Cc: linux-kernel@vger.kernel.org
+---
+ arch/arm64/boot/dts/qcom/x1-microsoft-denali.dtsi | 36 ++++++++++++++++++++++-
+ 1 file changed, 35 insertions(+), 1 deletion(-)
 
-On 9/1/26 3:05 PM, Rob Herring wrote:
-> On Tue, Sep 1, 2026 at 12:21 PM Alex Elder <elder@riscstar.com> wrote:
->>
->> A recent change caused the embedded PCIe endpoints on TC9564 SoCs to
->> be treated by the devicetree code as PCI buses, which is incorrect.
->>
->> An RB3gen2 system has an "interposer board" that contains a TC9564
->> SoC.  The TC9564 includes a PCIe switch with one upstream port and
->> two downstream (external) ports, plus a third downstream port.  The
->> third port has an embedded PCIe endpoint with two functions, each
->> providing access to a 10 Gbps capable Ethernet interface.
->>
->> The devicetree nodes representing these functions were previously
->> named "pci@" but were renamed in the interest of consistency in
->> commit e806c63ba51a7 ("arm64: dts: qcom: Rename pci@ nodes to pcie@").
->>
->> Unfortunately, of_node_is_pcie() causes nodes named "pcie@" to be
->> treated as PCI bridges, which PCI endpoints are not.  The previous
->> name "pci" matched such nodes as "default-flags" bus type, defined
->> in the of_busses[] array.
->>
->> Rename the PCIe endpoint nodes "pci@" so they are not mistaken for
->> bridge nodes by the devicetree parsing code.  This restores the
->> previous behavior, and allows them to be used for PCI endpoint bus.
->>
->> Fixes: e806c63ba51a7 ("arm64: dts: qcom: Rename pci@ nodes to pcie@")
->> Signed-off-by: Alex Elder <elder@riscstar.com>
->> ---
->>   arch/arm64/boot/dts/qcom/qcs6490-rb3gen2.dts | 4 ++--
->>   1 file changed, 2 insertions(+), 2 deletions(-)
->>
->> diff --git a/arch/arm64/boot/dts/qcom/qcs6490-rb3gen2.dts b/arch/arm64/boot/dts/qcom/qcs6490-rb3gen2.dts
->> index a13315bf0fb07..99a985a177a61 100644
->> --- a/arch/arm64/boot/dts/qcom/qcs6490-rb3gen2.dts
->> +++ b/arch/arm64/boot/dts/qcom/qcs6490-rb3gen2.dts
->> @@ -954,7 +954,7 @@ pcie@3,0 {
->>                          ranges;
->>                          bus-range = <0x5 0xff>;
->>
->> -                       pcie@0,0 {
->> +                       pci@0,0 {
-> 
-> The kernel should treat either name the same. There may have been some
-> reason 'pci' was not included in checks. It could have been that only
-> old things are (parallel, plain) 'pci' and anything new is 'pcie'.
+diff --git a/arch/arm64/boot/dts/qcom/x1-microsoft-denali.dtsi b/arch/arm64/boot/dts/qcom/x1-microsoft-denali.dtsi
+index 7559557610ed..6ed7db0ad53f 100644
+--- a/arch/arm64/boot/dts/qcom/x1-microsoft-denali.dtsi
++++ b/arch/arm64/boot/dts/qcom/x1-microsoft-denali.dtsi
+@@ -20,9 +20,27 @@ aliases {
+ 	gpio-keys {
+ 		compatible = "gpio-keys";
+ 
+-		pinctrl-0 = <&hall_int_n_default>;
++		pinctrl-0 = <&vol_up_n>, <&vol_down_n>, <&hall_int_n_default>;
+ 		pinctrl-names = "default";
+ 
++		key-vol-up {
++			debounce-interval = <15>;
++			gpios = <&pm8550_gpios 6 GPIO_ACTIVE_LOW>;
++			label = "Volume Up";
++			linux,can-disable;
++			linux,code = <KEY_VOLUMEUP>;
++			wakeup-source;
++		};
++
++		key-vol-down {
++			debounce-interval = <15>;
++			gpios = <&pm8550_gpios 8 GPIO_ACTIVE_LOW>;
++			label = "Volume Down";
++			linux,can-disable;
++			linux,code = <KEY_VOLUMEDOWN>;
++			wakeup-source;
++		};
++
+ 		switch-lid {
+ 			gpios = <&tlmm 2 GPIO_ACTIVE_LOW>;
+ 			linux,input-type = <EV_SW>;
+@@ -984,6 +1002,22 @@ &pcie6a_port0 {
+ };
+ 
+ &pm8550_gpios {
++	vol_up_n: vol-up-n-state {
++		bias-pull-up;
++		input-enable;
++		pins = "gpio6";
++		function = "normal";
++		power-source = <1>; /* 1.8V */
++	};
++
++	vol_down_n: vol-down-n-state {
++		bias-pull-up;
++		input-enable;
++		pins = "gpio8";
++		function = "normal";
++		power-source = <1>; /* 1.8V */
++	};
++
+ 	rtmr0_default: rtmr0-reset-n-active-state {
+ 		pins = "gpio10";
+ 		function = "normal";
 
-OK.  Does this mean "pci@" and "pcie@" should only represent bridge
-devices?  (These devices are all endpoints and erroneously had
-device_type = "pci" properties, among other things, so I'm already
-fixing that.)
+---
+base-commit: 8d3ae59288f1e7d58d76558a6ee96d533bc5019f
+change-id: 20260829-surface-pro-11-volume-buttons-f4b40e25cecb
 
-Do you want me to make a (separate) change to treat "pci" the
-same as "pcie"?
-
-> These are ethernet devices, right? Then the right name is
-> 'ethernet@0,0'. If not, then pick something that matches what the node
-> is. Both pci and pcie mean the node implements a PCI bus.
-
-They implement Ethernet devices, yes.  But they are used for
-pci-ep-bus (and the Ethernet devices bind to a sub-node), and
-that's what's important about these nodes.  What's the right
-name?  The dynamically-generated node uses "dev@".
-
-Is "ethernet@" still right, if it's also used to access a
-clock and a reset and ... via pci-ep-bus?
-
-I want to use the right name, I'm just unsure about what that
-is, given its use for access via pci-ep-bus.
-
-Thanks.
-
-					-Alex
-
-
-
-> Rob
+Best regards,
+--  
+Dale Whinham <daleyo@gmail.com>
 
