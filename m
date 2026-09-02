@@ -1,87 +1,88 @@
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 925E84A8A28
-	for <linux-arm-msm@vger.kernel.org>; Wed,  2 Sep 2026 16:24:48 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2A4474A8FD6
+	for <linux-arm-msm@vger.kernel.org>; Wed,  2 Sep 2026 16:25:29 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788366290; cv=none; b=rfvOeGKhNd8JBlQyC82cb3nrXKqAIji1hxxYyNHGMPvfM+sTsTeNsq9RG8xMUU1fyhNK0L88DSw0gJUGjYhYYNWs+zkanmZjbbcd5OEEEXbTlaGnzLbm/GKM5ekujZ/mpqobkBjv8p7OIY5R5PgeXwDwEwfD8YRVQcF9K/ESdfE=
+	t=1788366331; cv=none; b=mk4OcSagLL4rPM/Hzy8uIxnByUb8K8SPTbzeY47TjuU2QzozqsOIDSgphN7CO5vISogJuRh9Ig4c7uVKNPRtlFHyYsDCKEATtJ13wbgm3yHLjY9cFehnpZvL00DsHJyEJAUII6Axtm+PynkitfTga1L+Bf4l1uNQucDwbiD6SUQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788366290; c=relaxed/simple;
-	bh=94m/u68a/RZASpND+pjgfMX8ay3ZB6y2ddThk+0ad3g=;
+	s=arc-20240116; t=1788366331; c=relaxed/simple;
+	bh=qXq2bOvTf7o4sUYP639ubvxv7ythX6GpXy1EZ/ecsVc=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=DeEhGHEkN6jGlzF4HE9fDmzSiCd3yEa4WFMW25c+2wqf0VLW5IkvxAkB9wkOsfwb2K5XA1wbibirkUta3iWU/nWvd1Vg96zjZR5cnj6zrCPXUs7LaIWrs6eYpa8fmp/QgAFxyPKegUv8sR12yJsuUDq5Dj6uitGTrJxUqI4UNLA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=GmHN/oiH; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=iGGYpSVt; arc=none smtp.client-ip=205.220.168.131
+	 In-Reply-To:Content-Type; b=gkUloj9URZE+3/wSXP7LuCU3xf+WkA4ICeRMqXDdF0VaTNxHPIVTT25bWgk9IZfYYZ41KGhTpSeKTJWJyja38hAURgykGE/RIDoe5WcOUPx0iL9uxqiMng9U4CjwUHcTwH5ognU+uNwdUWQ/vuxO7T3lies/axsE23Iw4e/on9E=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=ZYT8mibH; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=GGv6oOXP; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="GmHN/oiH";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="iGGYpSVt"
-Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 682FZjTu1409772
-	for <linux-arm-msm@vger.kernel.org>; Wed, 2 Sep 2026 16:24:48 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="ZYT8mibH";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="GGv6oOXP"
+Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 682FZ9Nw1967757
+	for <linux-arm-msm@vger.kernel.org>; Wed, 2 Sep 2026 16:25:29 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	MLugWH9Lhl9UOk2cvBbi9nTiIoJt3rAYJhuDEazFK+o=; b=GmHN/oiHM1xjEf+k
-	QpbNXMORp7H6+LqmWT1YF1cyAWssb9ajawmNKVygvsRHcqegXWa8SBwfDwgjCWQI
-	hA74CLC/MDV5O3VIOrFVvoWZpMmmr/XQPXyff2TtZa8CpJBFua1roUsJjyD2PgJZ
-	K7FILWcewKR8MynIvcbWXGMgIyKcfQZ5e65F39uesvYSYeJi9xbPqWSeU8vp4bvc
-	PgvxzC32GUZGRj66j410V3waODLqaFz/xDefEaZztLy5FNkF6vj5tBf2/LXR7TEO
-	vSYfTOeNAnhnYrF8hhwDOJ5UqV0oE6vPMq3FtB+750V0hNyvlHxruZ015yunkhpt
-	5EudPw==
-Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com [209.85.222.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gemce8tn5-1
+	vll2VNtgeq6WEC1OJPy99NAYbaOgldOffi/qKXQ4WPU=; b=ZYT8mibHzIlUNHys
+	azPpKyPOYqQUgT2AsSJ/6SiwPkSaxF1AB2D6yu/Ey++VnqPqmSOpoUPCtOi6YLsv
+	eJa3jLMmBmE7lTT1Dk5RYd3zgbMBtIVd/8wVdfke4HchwKvGye2tX9/ECJD+On7h
+	4uJe0WGCQjx0kXru4f1v+gtI+DBOiVPQIpiqcXjm0bYE5zp2e/yG8874tmiCzEMC
+	VsH+HM5Ntx913lytuEcEe3JGHH7OBbTtaOVdJ5CsMJx8l7YZIrJxLVxR06I3W8/H
+	slydq98bv2PUg85lQQ9M9/rPqNuWcY8Ccd5s4i/HcpzuPyK2Tsrb5B2WnpAKKmbG
+	qX/QnA==
+Received: from mail-pj1-f71.google.com (mail-pj1-f71.google.com [209.85.216.71])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gej2c9dh8-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 02 Sep 2026 16:24:47 +0000 (GMT)
-Received: by mail-qk1-f197.google.com with SMTP id af79cd13be357-9392788b3f8so32281385a.2
-        for <linux-arm-msm@vger.kernel.org>; Wed, 02 Sep 2026 09:24:47 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Wed, 02 Sep 2026 16:25:29 +0000 (GMT)
+Received: by mail-pj1-f71.google.com with SMTP id 98e67ed59e1d1-38e7ff7b375so1806104a91.1
+        for <linux-arm-msm@vger.kernel.org>; Wed, 02 Sep 2026 09:25:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1788366287; x=1788971087; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1788366328; x=1788971128; darn=vger.kernel.org;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=MLugWH9Lhl9UOk2cvBbi9nTiIoJt3rAYJhuDEazFK+o=;
-        b=iGGYpSVtHTWOG/N5sg91RH/KuVBTYevSX28naQsVqrw0qvuCgLno94i5uqlXm/ZtUF
-         DzqCpklhoMdeuMhrlxaY8MifCl6s8axbWKRUDgsiHSJxlzEObcdsDjvMSYyV0EpTTHsR
-         oHnS69hWDxKcATv3b4Wp3PvonUjjUQ/hUxBC6QPJD9LVsi7pSux7W5hkzGEa6qS0l5Lw
-         bm2M4jq+8Q215prEPX7oiE+qLg/4vcHTAywsCt8iBLfa2VGTrD689umMMjXGM1AA42aa
-         ytI3X5wjhyxb8FBkbDRnPUjGx1TzO+Yl6WRXGLLsKIT5vhMb1gLDZhzf2dtnDHIHJc0x
-         czOQ==
+        bh=vll2VNtgeq6WEC1OJPy99NAYbaOgldOffi/qKXQ4WPU=;
+        b=GGv6oOXPmeDDZPzBUikwVpwYpKUju70V1rJGv7YCymjgjb6z+HEgnWjWe8yNDefFVG
+         cBSzSbfU2Wr7u+KytUGFujFYBNW7wknEEQcfhKF5ILSlf3aE96JyzTU+0sqh+2LvfK1l
+         sn6okzhNX5bnWY4zefM7CKt/K+/oG+CeqpoNLjhYdBHl62xhHR0z2HtPH6pCNA3ZhTyG
+         RuPj532fegkk4Xe8ktMaXLvLAJ8JZ4fKSGasMftuQXrbuZpYn0u79bdYOwaQCGM7vm14
+         Vaq2VWP1L7lvegeFGsjZkLsLCt7hxknIcrfzm1w9Xvs6/h8BvyBt6mmK9OaevzgiW54p
+         hB6A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788366287; x=1788971087;
+        d=1e100.net; s=20251104; t=1788366328; x=1788971128;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=MLugWH9Lhl9UOk2cvBbi9nTiIoJt3rAYJhuDEazFK+o=;
-        b=rzP6TspA093pqLJW1QDX0bTxdK1udqDHScaUXuRwbv4yF9RCUDpvGSM5dkihLiedpi
-         wDNJmopvFXEOtsXzK1w2lWVGFpFqCRF02ycrQWSaY9TOzFYwccrF0crIQLL4lYGW5NGD
-         EvYdEBiAUzvYONBW0TVbs8vgXimqghXxHf2646b3HqZN/aR7D3bMu7M3afQBZmcJgCX3
-         Sdupa/YCj/drGOJTMlote/HkfrgwZRcTnvX77RJzLX2+0YRskUu4zlDWIkzax0Ck7r1V
-         KZ5A4rGJIhq7XG4Ye08yXvtGXIPRB0iPMbaNes10wVcGHnOmkS8mxm+FWs0qsGXIx3bZ
-         bKqg==
-X-Forwarded-Encrypted: i=1; AHgh+Rpdlyqb20EPcWr0efZP7m/dbFUhmsD/E1VOaH0sdtdn/aK72aRHqv4nLRvenA/HZ2kO7FPfrOVCPrJLUpYh@vger.kernel.org
-X-Gm-Message-State: AFuF++n6nLmqAi9tpDLSpEZYJUtXJYaKP9b6Gg4dB/mHFpk2ffrweFGT
-	lu6zf34NmPgj0jnSTFW60s/bQdiUi+EZdsJ/H3Z+bdRuWZbopSQjUmXDl5ZvsmaWqCJtXS7M+gP
-	ptrWpAX329rkUYCRIKIgrYmutRsY16sSRuQw6EjtpVhp1U3BlrFyGPsspkpGnIRwHxZGV
-X-Gm-Gg: AR+sD120RzCAlElquLTmbm15mI30Ku74yIuRNRJOe6U1QRJuQCyunlQCprDmjofokw7
-	XBmqE9McqbrU1Hh9aUQKuCM3lDizVGO5ooHHGHkZFrcaxVSHZyZ3dHzw4ZTAsihFrj54bb6AMwU
-	htkcpG52vlbEqnDJu5shvCnXHNFsObKpMM8SqmIxDPFxGKOJI9V2KegVIEtK1d95iSyR2+m2S6n
-	lECFv7bGvZcJ9TiwtU2BdgQDqW+sLGNx/gAy9obi2XyN3rpncI2cyvJMKg3mtXNdklv6MNUfLF8
-	xU35rGoFoUZmYTujSa+pROtQaGvxaYRE9l5X3kDf45mcneVKeqWIW2Rp+u47eSE+V8t9s5dU554
-	ac5RHiB8erzo7hu4YFCfvTQ==
-X-Received: by 2002:a05:620a:6492:b0:937:6f83:e80f with SMTP id af79cd13be357-93960cd1505mr400250785a.1.1788366286572;
-        Wed, 02 Sep 2026 09:24:46 -0700 (PDT)
-X-Received: by 2002:a05:620a:6492:b0:937:6f83:e80f with SMTP id af79cd13be357-93960cd1505mr400244785a.1.1788366285891;
-        Wed, 02 Sep 2026 09:24:45 -0700 (PDT)
-Received: from [192.168.202.12] ([178.235.128.140])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c25d03f4d39sm163008266b.47.2026.09.02.09.24.43
+        bh=vll2VNtgeq6WEC1OJPy99NAYbaOgldOffi/qKXQ4WPU=;
+        b=BnPR1HQb2ep/q/ZoKcatsZbMjEDuHWQQCyySMgR6TLFtqwJADtm+wjw6aga7Z7bcxd
+         v1TkbOaSKXgQ7ttKkXVV0q7ZQaSlnR2eq0CB/tkVxM3s7EHAGLBnTddUI5O5YdufnkpL
+         q5zUd9s1tsjkFlu6ldWHvSpnuaTtbmbbey0gixFVOAvG6WlM0593wvN8tUdLPNXen9Am
+         0zbnUNWkLFjck0s0rEReWOaIZY1Skew226NlgcHdosxQUHEszpBHbGkK7DSHGPD6JyFy
+         Ze39Lcn5zmi625fGYV8b0rIIAVHWo1bb41Sx5zrj2VHbmPRjS+96F4HcAfqVtM2/dB/u
+         GN9Q==
+X-Forwarded-Encrypted: i=1; AKwUvBwCRqw9gfkBYkwYMkmVs0eohLyaEJw0jVd79qjYEWCjQopqL1bt+cXLgt065xYTOe8YMY1uvte/BiEXBhji@vger.kernel.org
+X-Gm-Message-State: AFuF++nasfXSYeB+fW3E0a08/HhJKPL93gABdW9Af5mM+lv9o6X2YqKH
+	zE76g1Rcl/3yopRkwzVUOSycVTqKY+wZhti3SZ8gIqBnU/lhKfgS5WubFmfO5bIWPxqEa2bn7ws
+	IjgA7yp81dF0fCYEZJ8TAgEHDo8mz8zFEVmPeZtyZ1vIP5vcR0Zu7QDsiLbvyBoJDD5bXYwnL2Y
+	47
+X-Gm-Gg: AYBFou17y6+0Xzg2LeGa/A5A+PY+j360iYDXywWWZ9wZWVNK+D7dqzPq+nySJpqENgt
+	JKjRPD45zgnwdz5vgEaLKN9gXGHpYWvhksBXLzeZu4J7Qojlk+NJyc08p/3nsRFbgiyVogUlKQh
+	bRiup3J8oSg9jcM5D0UC1oG4GjfICcT6OWXO1mR3Tjaxlzy6CwLLNxQvmLUsPWhVI3xKnDaxaw9
+	Cavv0twjPA8j87fopK1FmY3/sA8UZVWwv0ImNaxASwULlNMKoogxT2g3sqG0yYMF/l8d8jYiW0d
+	jNr6BQGtqqaoXqfCPdr+EYfCRk0KcSm1U8a/KE/DNEXIBbqebeUjRYQkZ5xP78DMFdosua8883h
+	Z9Vjg7AMzQMpFI5LRAgkgFnqitOAMOh6WbmQ=
+X-Received: by 2002:a17:90b:1b47:b0:398:e6b6:acc2 with SMTP id 98e67ed59e1d1-39aee084eddmr8494630a91.12.1788366326739;
+        Wed, 02 Sep 2026 09:25:26 -0700 (PDT)
+X-Received: by 2002:a17:90b:1b47:b0:398:e6b6:acc2 with SMTP id 98e67ed59e1d1-39aee084eddmr8494493a91.12.1788366326062;
+        Wed, 02 Sep 2026 09:25:26 -0700 (PDT)
+Received: from [192.168.29.63] ([49.43.230.111])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-32f077fad2dsm8300330eec.0.2026.09.02.09.25.20
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 02 Sep 2026 09:24:45 -0700 (PDT)
-Message-ID: <364becf5-521f-43a3-91fb-011e10bec998@oss.qualcomm.com>
-Date: Wed, 2 Sep 2026 18:24:43 +0200
+        Wed, 02 Sep 2026 09:25:25 -0700 (PDT)
+Message-ID: <8c882adb-a83f-414a-9fe4-b8f270533df7@oss.qualcomm.com>
+Date: Wed, 2 Sep 2026 21:55:16 +0530
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -89,77 +90,226 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] arm64: dts: qcom: x1-denali: Add volume up/down GPIO keys
-To: Dale Whinham <daleyo@gmail.com>
-Cc: Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley
- <conor+dt@kernel.org>, linux-arm-msm@vger.kernel.org,
-        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-        =?UTF-8?Q?J=C3=A9r=C3=B4me_de_Bretagne?= <jerome.debretagne@gmail.com>
-References: <20260829-surface-pro-11-volume-buttons-v1-1-ace589343a68@gmail.com>
- <6f33aa1f-563a-4ad8-8c81-6f64fb64f6be@oss.qualcomm.com>
- <CAFcmK8j09=tGoEUnFwzY+8Te=dBGPBr=pc9C-3dZGwAEorOi_g@mail.gmail.com>
+Subject: Re: [REGRESSION] PCIe/qcom: on-board WCN7850 link stuck in Polling on
+ X1E80100 (Surface Pro 11)
+To: Thorsten Leemhuis <regressions@leemhuis.info>,
+        franzelverbier <info@humanlearning.ch>
+Cc: Manivannan Sadhasivam <mani@kernel.org>,
+        Bartosz Golaszewski <brgl@kernel.org>,
+        Lorenzo Pieralisi <lpieralisi@kernel.org>,
+        Krzysztof Wilczynski <kwilczynski@kernel.org>,
+        Rob Herring
+ <robh@kernel.org>, Bjorn Helgaas <bhelgaas@google.com>,
+        regressions@lists.linux.dev, linux-pci@vger.kernel.org,
+        linux-arm-msm@vger.kernel.org, linux-pm@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+References: <20260731122233.18345-1-info@humanlearning.ch>
+ <qgol7nv7vrhdwt6sofbxip3dat3kag4xgoamgp6li25rkbn4oa@ie5dhaswmxbt>
+ <f64db45c-63f7-4f2e-aa10-e8ee5fd9accb@leemhuis.info>
+ <0c287133-e866-42db-943f-d6750bc14b44@leemhuis.info>
 Content-Language: en-US
-From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-In-Reply-To: <CAFcmK8j09=tGoEUnFwzY+8Te=dBGPBr=pc9C-3dZGwAEorOi_g@mail.gmail.com>
+From: Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>
+In-Reply-To: <0c287133-e866-42db-943f-d6750bc14b44@leemhuis.info>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTAyMDE0NCBTYWx0ZWRfX9shIYlnwXrAH
- JTXoxcl/NbvwsMJXuQAPVUq68V9tWbiR91w3Tq/vMnYXavLkMK/kHnwFz+Mc9Uioa4izgPSxkor
- WrXY1hUiwHwg5SuYNb5aUJV5QNu9m+9sj461A3svPjzgELHJpw/8aUDYVoJSv2q/qf9F0sQmCDA
- lkT9mECOLRKEMW1hCEAveyX5Hwy6FlU9fhFaGjih+4JNxe0tC5b88adHNN3Z93l3SOKir8w9Rvf
- 0qUjAWdhBQBz6QS4A6JhJI+l2x99DB8DV86zVNSd/quQg7I+bhLE7VHJZ3my1WCQOxOjBJWdnEB
- bkT7JJUxCw4twrb0UO4STzfXal72TcIdXb3oLHgRJsHlZKuppebyWYC2w3cHseamjUwj/LrqYIr
- xHjVkisbHh9ghq55KjUwGlwly+fkcD6VEUhQGBKiiN9MpLqbbQ0iGU+qykGO+dEaXBmknyv2JBM
- 7+ycZk2LnCEpmCu7Mew==
-X-Proofpoint-ORIG-GUID: dGxO-6C4n_kU6_q7Ihinc5d8UnWZI5BV
-X-Authority-Analysis: v=2.4 cv=QfpWeMbv c=1 sm=1 tr=0 ts=6a984dcf cx=c_pps
- a=50t2pK5VMbmlHzFWWp8p/g==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTAyMDE0NCBTYWx0ZWRfXx1xoKgQGBapZ
+ ik8Mm1Pw8dYILdT/L1zjr/eu8Q1ry6Pw8RMD46cxGTrULXskauU2TRAhryeYna8QV0X7gvLBM28
+ CbCN0hRLiQg+Vrm4Sdn7hH1p382jNuY=
+X-Authority-Analysis: v=2.4 cv=G+ss1dk5 c=1 sm=1 tr=0 ts=6a984df9 cx=c_pps
+ a=UNFcQwm+pnOIJct1K4W+Mw==:117 a=nmlP1JGDO1WHMdNil6E2Tw==:17
  a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
- a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=xEYaC59VNbqAa3wHJpAA:9 a=QEXdDO2ut3YA:10
- a=IoWCM6iH3mJn3m4BftBB:22
-X-Proofpoint-GUID: dGxO-6C4n_kU6_q7Ihinc5d8UnWZI5BV
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTAyMDE0NCBTYWx0ZWRfXwG0jgMZXemRs
- 0hVc7/pY+2XcMbo+je84EeZB+998OY1gtonsKPKtTWfqCf9Sr4978f5GKIrf4r0OqxkwgPHWbz5
- ejCDDfAypbMeyQTTHYbfOzwUGJxeQaM=
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22
+ a=MC_tZzTHk6VszvnzAm0A:9 a=QEXdDO2ut3YA:10 a=uKXjsCUrEbL0IQVhDsJ9:22
+X-Proofpoint-GUID: 6QrQKT4O9BDCHAhh__Zx5XzkRmylEhqE
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTAyMDE0NCBTYWx0ZWRfXybFnSSpm0ovK
+ q57gas57ISXr/A6TWLYdR7YE6sLF5yyTUzR9A1C86MCDkZ1TjpNEUsX8yGnbyEOcH0bqefLD4aJ
+ 6Q4EASs7hsE8UPxxBOM3B0AHpRtLwc1OiABv5uoD1p8GQYQysjbtBzQoxJrSFLyAeZkchimknk6
+ 6KvDvsC5TmjJB8KZwYXLCNd/QTmQK0CW1UpGiMC/FJGtyfaIzxTWPcVfjqXXHpF/zU9ajzNuhK3
+ rxfWiZGQWYE/OBIQqzakUIZFPXjLkzeSxjUaxD/Kjgl3dXKmOholfqsFpprJdRMa9rnYrC6/fTX
+ w2aJfw09qrA7nq+eEA+sI8pO98zHu4HoU/65YqxMlnytpBYN5Dj/WScnBTBVBkQetO7cMdgiYES
+ lWIW9Y09x9UDsGe8Y89sHiJZjXui6NXo19+9k51O0fhsMeaVPxx+ogDAk2C9dVc0+m0EzRFg/1S
+ Tt0POIwTCMr+ggty4FA==
+X-Proofpoint-ORIG-GUID: 6QrQKT4O9BDCHAhh__Zx5XzkRmylEhqE
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-09-02_04,2026-09-01_03,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 impostorscore=0 bulkscore=0 phishscore=0 suspectscore=0
- lowpriorityscore=0 malwarescore=0 adultscore=0 clxscore=1015 spamscore=0
+ spamscore=0 priorityscore=1501 malwarescore=0 suspectscore=0 bulkscore=0
+ impostorscore=0 lowpriorityscore=0 phishscore=0 adultscore=0 clxscore=1015
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2609020144
 
-On 8/31/26 5:51 PM, Dale Whinham wrote:
-> On Mon, 31 Aug 2026 at 08:13, Konrad Dybcio
-> <konrad.dybcio@oss.qualcomm.com> wrote:
->> Let's order the pin nodes by their gpio number
+
+
+On 9/2/2026 9:30 PM, Thorsten Leemhuis wrote:
+> On 8/24/26 14:46, Thorsten Leemhuis wrote:
+>> On 8/18/26 13:13, Manivannan Sadhasivam wrote:
+>>> + Krishna
+>> Hmm, nothing happened here. Or did it and I just missed it?
 >>
->> otherwise:
+>> Krishna, it seemed Mani thought you might haven an idea what's wrong. Do
+>> you do by chance?
+> That did help afaics. Happens.
+Sorry, for very late reply here. I totally missed this.
+>> If not, I guess Franzelverbier might need to bisect this.
+> Franzelverbier: looks like we are stuck here. So I guess this is
+> unlikely to go anywhere unless you git bisect this (after verifying if
+> the problem sill happens with latest mainline/-next).
+>
+> Ciao, Thorsten
+>>> On Fri, Jul 31, 2026 at 02:22:25PM +0200, franzelverbier wrote:
+>>>> Hi,
+>>>>
+>>>> On a Microsoft Surface Pro 11 (Snapdragon X Elite, X1E80100, board
+>>>> x1e80100-microsoft-denali-oled), the on-board WCN7850 Wi-Fi PCIe link
+>>>> no longer trains on linux-next. It works on 6.17.
+>>>>
+>>>>   Good: v6.17
+>>>>   Bad:  next-20260721, next-20260723
+>>>>
+>>>> #regzbot introduced: v6.17..next-20260721
+>>>> #regzbot title: PCIe/qcom: WCN7850 link stuck in Polling on X1E80100
+>>>>
+>>>> The device sits behind PCIe controller 1c08000.pci (pcie4,
+>>>> qcom,pcie-x1e80100, gen3x2) and has no PERST# GPIO -- it is
+>>>> power-sequenced via wcn7850-pmu / pwrseq.
+>>>>
+>>>> Symptom
+>>>> =======
+>>>>
+>>>>   qcom-pcie 1c08000.pci: Device found, but not active
+>>>>   qcom-pcie 1c08000.pci: PCI host bridge to bus 0004:00
+>>>>
+>>>> dw_pcie_wait_for_link() finds the LTSSM in POLL_ACTIVE/POLL_COMPLIANCE
+>>>> and returns -EIO. The endpoint 0004:01:00.0 is never enumerated, ath12k
+>>>> never probes, and there is no wlan interface. On 6.17 the same
+>>>> controller trains at ~0.6 s and ath12k probes normally.
+>>>>
+>>>> Ruled out: the chip is powered, and power control is bound
+>>>> ==========================================================
+>>>>
+>>>> - Bluetooth on the same WCN7850 (UART) comes up fine, so the PMU and
+>>>>   regulators are on.
+>>>>
+>>>> - pwrseq_qcom_wcn is loaded, and pci-pwrctrl-pwrseq is bound to the
+>>>>   platform device 1c08000.pci:pcie@0:wifi@0 (compatible pci17cb,1107 is
+>>>>   present in pwrseq_pwrctrl_of_match[]). The vddaon-supply
+>>>>   validate_device() check passes.
+>>>>
+>>>> Ruled out: not a device-tree regression
+>>>> =======================================
+>>>>
+>>>> The wifi@0, &pcie4 and &pcie4_phy nodes are equivalent between the 6.17
+>>>> and 7.2 device trees -- same supplies, same compatibles. The only
+>>>> difference in wifi@0 is "disable-rfkill;" (6.17), which is
+>>>> post-enumeration ath12k behaviour and cannot affect link training.
+>>>>
+>>>> What changed
+>>>> ============
+>>>>
+>>>> qcom_pcie_host_init() was reworked around the pci-pwrctrl framework,
+>>>> and qcom_pcie_start_link() now calls qcom_pcie_common_set_equalization()
+>>>> -- absent in 6.17 -- before enabling the LTSSM.
+>>>>
+>>>> Finding 1: Gen3 equalization prevents link training
+>>>> ===================================================
+>>>>
+>>>> Forcing the port to Gen1 makes the link train and ath12k probe:
+>>>>
+>>>>   &pcie4 { max-link-speed = <1>; status = "okay"; };
+>>>>
+>>>>   qcom-pcie 1c08000.pci: PCIe Gen.1 x2 link up
+>>>>   ath12k_wifi7_pci 0004:01:00.0: Wi-Fi 7 Hardware name: wcn7850 hw2.0
+>>>>
+>>>> qcom_pcie_common_set_equalization() only programs GEN3_EQ_* for speeds
+>>>>> = 8GT, so max-link-speed=<1> skips it entirely, reproducing the 6.17
+>>>> behaviour of no EQ programming.
+>>>>
+>>>> Note this is not a wrong preset value. The presets come from DT via
+>>>> of_pci_get_equalization_presets() and are applied by the DWC host core.
+>>>> In hamoa.dtsi:
+>>>>
+>>>>   pcie4  (pci@1c08000, gen3x2, on-board WCN7850)
+>>>>     eq-presets-8gts = /bits/ 16 <0x5555 0x5555>;
+>>>>
+>>>>   pcie6a (pci@1bf8000, NVMe, gen4x4)
+>>>>     eq-presets-8gts = /bits/ 16 <0x5555 0x5555 0x5555 0x5555>;
+>>>>
+>>>> Both use the same per-lane preset 0x5555. The NVMe port trains at Gen4
+>>>> fine; only the WCN7850 port fails. So the WCN7850 endpoint specifically
+>>>> cannot complete Gen3 equalization with these presets on this
+>>>> controller, while an NVMe SSD on the same SoC can.
+>>>>
+>>>> The board DTS (x1-microsoft-denali.dtsi, also in mainline) leaves
+>>>> &pcie4 as status = "okay" with no per-port override, so it inherits the
+>>>> SoC preset.
+>>>>
+>>>> Finding 2: an LTSSM re-kick does not recover the link
+>>>> =====================================================
+>>>>
+>>>> Even at Gen1, the link does not train on the first attempt at boot
+>>>> (~4 s); in one instance it only came up much later via a pciehp slot
+>>>> event. An experimental retry in qcom_pcie_start_link() toggling
+>>>> PARF_LTSSM.LTSSM_EN (clear/set) for up to 30 s never recovered the
+>>>> link.
+>>>>
+>>>> That suggests the endpoint needs a full power/reset re-sequence
+>>>> (pwrseq) to leave the failed state, not just an LTSSM restart -- i.e.
+>>>> the pwrseq power-on may be racing link bring-up at boot for PERST-less
+>>>> on-board devices.
+>>>>
+>>>> When the link does come up late (fragmented CMA, tight PCI windows),
+>>>> secondary symptoms appear that are absent on a clean boot-time
+>>>> bring-up:
+>>>>
+>>>>   ath12k ... qmi dma allocation failed
+>>>>   BAR 0 ... failed to assign
+>>>>   rfkill ... Hard blocked: yes
+>>>>
+>>>> Questions
+>>>> =========
+>>>>
+>>>> 1. Are the qcom_pcie_common_set_equalization() Gen3 EQ presets expected
+>>>>    to be safe for a gen3x2 PHY driving an on-board WCN7850? They
+>>>>    prevent link training here, and skipping them (Gen1) works.
+equalization settings are applicable from gen3 onwards and can change from
+platform to platform, the EQ presets values
+depends on the pcie trace length, May be in your platform there are different
+presets programmed by OEM.
+Can you remove the eq-presets-8gts from the pcie controller node once and try
+if that solving the issue.
+>>>>
+>>>> 2. Is pci-pwrctrl/pwrseq power-on racing link training at boot for
+>>>>    on-board devices with no PERST# GPIO, such that the endpoint is not
+>>>>    ready on the first LTSSM attempt and cannot be recovered by an LTSSM
+>>>>    re-kick?
+The pci pwrctrl/pwrseq are enabling power to the endpoints before controller
+starts link training.
+So there will not be any race conditions here.
+
+wifi devices has some limitation in gen1 and some times it takes time to link
+up. if there is delay
+in the link training pci sw starts enumerating and it detects root only at
+that time, as the bridge is not
+plug capable pci sw will not allocate sufficient bar memory for the endpoint
+that gets detected little
+late. Due to that you might see bar allocation issue.
+
+I would suggest try to link up in gen 2 by using max-link-speed = <2> instead
+of gen 1 here.
+
+- Krishna Chaitanya.
+>>>> I have not bisected to a single commit yet -- the range above is v6.17
+>>>> to next-20260721. I am happy to bisect, test patches, or dump any
+>>>> register on this hardware; rebuilding is a short loop here.
+>>>>
+>>>> Environment
+>>>> ===========
+>>>>
+>>>> linux-next next-20260723, CONFIG_PCIE_QCOM=y, CONFIG_CMA_SIZE_MBYTES=128,
+>>>> ath12k, board x1e80100-microsoft-denali-oled, Arch Linux ARM (aarch64).
+>>>>
+>>>> Thanks,
+>>>> franzelverbier
 >>
->> Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
->>
->> Konrad
-> 
-> (Resending as plain text, apologies)
-> 
-> Thank you Konrad - how about the gpio-keys { } section, should we
-> re-order them to:
-> 
-> key-vol-up   { pm8550 6 }
-> key-vol-down { pm8850 8 }
-> switch-lid   { tlmm 2 }
 
-Generally if there's not a better criterion, nodes are supposed to be
-ordered by their unit address (the number after '@' - none here) or
-their name
-
-via
-
-https://docs.kernel.org/devicetree/bindings/dts-coding-style.html#order-of-nodes
-
-Konrad
