@@ -1,70 +1,357 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-lf1-f49.google.com (mail-lf1-f49.google.com [209.85.167.49])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4196F4562B1;
-	Thu,  3 Sep 2026 11:35:18 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E104C3F9F3A
+	for <linux-arm-msm@vger.kernel.org>; Thu,  3 Sep 2026 11:53:27 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.167.49
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788435330; cv=none; b=so+pIn+NEf3WZ6gDQDmbjdyB44w5Wf78Jl+QKDw/VLqMPHskxJfzOYJA/K28TSBe2jK/23/ry9iJ+3hMHFQW34qmrZJTuy+H2boyngKsGuUjcDt51lnJ1wX2/SEL2r/6Vy9Yod0SIyWz3H6Fn3aBXs/78Kn7ySr4Z+r9BpFNypc=
+	t=1788436411; cv=none; b=CHgzV9g0TNWYudVO6T4OGkyjHBCm+gw1/HM5ZeS6x3HPYJKf8H2CCq+c5TE+6sF9hfQcY000GUzWBWRxoSN8PvWOfVWeixBMzjZJdD2INcFaJrZNsaVrdul1Nagvm5g8NkHUBvyeHdTF/BTa80zcVvPz7V6iTy3nJ5idUmgVAj0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788435330; c=relaxed/simple;
-	bh=fNLyfR++yFzplglYxdqLQSkkS9XmxQAlZgjL6YMvSmU=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=g+jJjPi0cX4o4kNNHW5iox5WRdJvTbt41TEth//31dJeRCzBQh4lGzdHXLW+sdYIcjNeZALLwnuE485ueA8+yZe+byyriEF/FXQ1k5lUVLGMJ1NgS1EmKpjJJaucZf+T73bN4/1EOM2VPpOOxh5nQjbiZGvr+aCfYy8H+FVqRkE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=XUUh9/MV; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1788436411; c=relaxed/simple;
+	bh=n5ctRfXvrUaJX4olBTeuOGHj+PO5gbXXUrz1f2Frvss=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=RjAkzjy9nyX+omrCg02/2ZB8HkHl/CllFZmJ5Y0EAQErqC3cDQGNSbiVKpwSVLw6CnsQ0+dFiLjInI1Ke4EhkIgmBEail8I/KaJTjVYGQAM7LRu7Yrt4+BoXMG7+rTNWzHr5Fpvw62L4YB+K85Y6b3b2mLxxMvvSU0WEAdT/ryo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=gL73X60l; arc=none smtp.client-ip=209.85.167.49
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="XUUh9/MV"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 156411F000E9;
-	Thu,  3 Sep 2026 11:35:12 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1788435316;
-	bh=hZ1qCrDhJ33OJxxdaEUkt350dBb0FDB8huZWV3p0Hrc=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=XUUh9/MVwvL7W9Tzsn8QpgfiMIKKg4iU5AV28Op3ZBggMrhZ1uJALZ9tGIlv/sIqY
-	 9Z2D1lNgoe7nVOSvWR/OE5fIG7mWpQcPwnGJ3g38jZoXwFqSgIoWXeya2IFAngEfT2
-	 TwYArnbcTcEXEEGWn9Q9Tx+BEEi7G5uP9vUk6UxOMpxB2ipiZc6o4wBqE/m5wVzsdf
-	 tidzUG6l/uaE/J0/+8Fg4JKgXCwoyrLAezbeBesNjrqW+vKZgOetHesBJBC5J1SWKH
-	 N6QZinGaZ03ACUSLd4LHVqwpG+nEdIolH4Y0fuL+/MZZCGJm2NJYa0QM4/+7MP8ZgZ
-	 rsAU8v5IdJS5Q==
-Date: Thu, 3 Sep 2026 13:34:59 +0200
-From: Manivannan Sadhasivam <mani@kernel.org>
-To: Mrinmay Sarkar <mrinmay.sarkar@oss.qualcomm.com>
-Cc: Lorenzo Pieralisi <lpieralisi@kernel.org>, 
-	Krzysztof =?utf-8?Q?Wilczy=C5=84ski?= <kwilczynski@kernel.org>, Bjorn Helgaas <bhelgaas@google.com>, 
-	linux-arm-msm@vger.kernel.org, linux-pci@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>, Rama Krishna <rama.krishna@oss.qualcomm.com>, 
-	Rashmi A N <ayiluri.rashmi@oss.qualcomm.com>
-Subject: Re: [PATCH] PCI: qcom: Skip system suspend/resume for
- firmware-managed PCIe
-Message-ID: <5bsz2arpufrnbglizghlr3ztkjeqhvsc5pr2qmgmkhj3n6l6ia@atgkmc2igd7r>
-References: <20260831-skip_suspend-v1-1-ba2d877e22b1@oss.qualcomm.com>
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="gL73X60l"
+Received: by mail-lf1-f49.google.com with SMTP id 2adb3069b0e04-5b477cb1f0fso237245e87.0
+        for <linux-arm-msm@vger.kernel.org>; Thu, 03 Sep 2026 04:53:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google; t=1788436404; x=1789041204; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from:references
+         :cc:to:subject:user-agent:mime-version:date:message-id:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=YlAxcekko1WzQ9ej7nCP/3I5A9S1XkCyAocKTij2/Qs=;
+        b=gL73X60lhEAN95JgdMhMGAtLsNyJpdOj5nIWnsTUd0mBYojsbW5HfXrMU2ekHbt81H
+         bVKDgJz2mokkmYRMgrZZKQ4XA6C9FPXXgi/zv/03m8s+FQ8T/KXHWw4UTphcnaHsmovQ
+         pyWyb+cU9zRCgEx3F8jdbabaYrJnxeSHld0kjT5HUR4L2nbD97U+bf2+mjJifOLOLMW/
+         KZSFULryGDPt4cdHJYL3305StOthvSIIgjyY4ea+dctVBHPmhpkARO+eyzdreBjDDtHn
+         ULz5JPIzbmYvhYxW09X5v8XmQpQFkTcblGh9f5K4AkpoMXCfDHCG0RuVU8dCVoCpTiHO
+         ELNg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1788436404; x=1789041204;
+        h=content-transfer-encoding:content-type:in-reply-to:from:references
+         :cc:to:subject:user-agent:mime-version:date:message-id:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=YlAxcekko1WzQ9ej7nCP/3I5A9S1XkCyAocKTij2/Qs=;
+        b=LECbXcyHNqvBdp2qgAKYTb7wYvwEXTi6exiDjSdmI2GXrZDCoCLXwVGG0eYPGpH5Fs
+         DF7ga9kyLk/JRTc+R3r99Bk8MoisUG42llwHQS5RI/Q0S0ie3d1EExl7iW2AMJKkMCvr
+         4jXQBTilknxr3YLCl6/2g9FMzM9+WgFyKFWhpuCv2sZp0kleDZlgPplBxnCAOJjSLvaN
+         tluVE5TKVHyNrhgchMQGZ21oh7VnXDAWnFNK6jj7yUJv8Nlajv98sGVR9lIqIotxH8hz
+         CtSxDBEcqvq8LV2BvQGEOfvotoZFHGqKRl9BUoiw1/0H2467nv/ktPjQydQ8RzMH32E0
+         W6HQ==
+X-Forwarded-Encrypted: i=1; AKwUvByoV3H5WEkJF/qA1Qy9hGNKGjTxnnjGWXxeLEURoNzagYYPYzadXLrGETlDsCkQlO9SRlQNvwEvkwzRtKYe@vger.kernel.org
+X-Gm-Message-State: AFuF++mRuw7zyzVWPoeFwafHJ8LQkRODWy/3eg5qjyQ7lRzyQHbcJBwx
+	oIAsB1b0xYNoC1o/Y1dcxJg4igIjmae2rOKudaazsQHce4Y64lbOUt7pqcPYcLgqs1U9A+AvBN7
+	J/eaBp4g=
+X-Gm-Gg: AYBFou1pl4nv/4V9ir6vaMAKZ2SqwPeKFlayGQKjeCPWN+wb5DNQ6wfV6ohcVXEVEmt
+	/6vXSl7Ev2a2KwduiWgdibF/zDzI3bWe1jnE99F7OOt8ji7JCbPtptDktyGaVtBrYBMfjEUl8le
+	fu0fc+fkcyZPGtJ+hFAP9OssWawaPqt+GsVAYcOdX8QIKJiu98e2iIeFaA1iSGzwdPsm+oipq0S
+	V5OrYOvKpYaj6lUvrHTAoYvmWIFjiLvq/sqtge7XB1Ic4s//+2cRbO3IOtl9oZPEAE+BqCR0Ewg
+	3OYU/tkrOwkeELG4o/1ghlNuToQ+6c3/2gnS52neqSGuLOEFxYbnJUTjdeZnXmiryUvZVZnSvY5
+	kkeXsAhqFQ46WLaYtBzwCYU7tCSdhpOFJ35k5vpxAfowz0ZAKstkBGPeMl9yYfHGMSFWlgAbkBy
+	kRn5ri2HPICdGiJkwPD294NbaDLEYL0YQLgOnGL6vVvz4JnewOo8gNVaew/hBaXmi0JOlLmVWU3
+	0IlPZ3d/yNUCrVz1mCvHaH1cQPz9oy3BrF/E1BH6g==
+X-Received: by 2002:a05:6512:2350:b0:5b6:4ae:19ef with SMTP id 2adb3069b0e04-5b608810e61mr1613364e87.5.1788436404014;
+        Thu, 03 Sep 2026 04:53:24 -0700 (PDT)
+Received: from [192.168.1.100] (91-159-24-186.elisa-laajakaista.fi. [91.159.24.186])
+        by smtp.gmail.com with ESMTPSA id 38308e7fff4ca-3a34ad21ef8sm11778701fa.28.2026.09.03.04.53.23
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 03 Sep 2026 04:53:23 -0700 (PDT)
+Message-ID: <9b0ac659-999a-4caa-8578-f34a39a67e4f@linaro.org>
+Date: Thu, 3 Sep 2026 14:53:14 +0300
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <20260831-skip_suspend-v1-1-ba2d877e22b1@oss.qualcomm.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v16 1/2] dt-bindings: phy: qcom: Add CSI2 C-PHY/DPHY
+ schema
+To: Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
+ Vinod Koul <vkoul@kernel.org>, Kishon Vijay Abraham I <kishon@kernel.org>,
+ Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
+ Conor Dooley <conor+dt@kernel.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>
+Cc: Bryan O'Donoghue <bod@kernel.org>, linux-arm-msm@vger.kernel.org,
+ linux-phy@lists.infradead.org, linux-media@vger.kernel.org,
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
+References: <20260901-x1e-csi2-phy-v16-0-dd863b929080@linaro.org>
+ <20260901-x1e-csi2-phy-v16-1-dd863b929080@linaro.org>
+From: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>
+In-Reply-To: <20260901-x1e-csi2-phy-v16-1-dd863b929080@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Mon, Aug 31, 2026 at 07:07:02PM +0530, Mrinmay Sarkar wrote:
-> For firmware-managed PCIe controllers, all resources, including clocks,
-> regulators, resets, PHYs and link state, are owned and managed by
-> firmware. The host driver must not attempt to manage these resources
-> during system suspend or resume.
+On 9/1/26 23:15, Bryan O'Donoghue wrote:
+> Add a base schema for the MIPI CSI2 PHYs on Qualcomm SoCs. This PHY
+> supports both DPHY and CPHY operation. A special mode of DPHY operation -
+> called variously split-mode or combo-mode also allows for two sensors to be
+> connected to one PHY.
 > 
-> Skip the suspend and resume operations for firmware-managed controllers.
-> The associated power domain transitions are handled independently by the
-> genpd framework through its own system suspend/resume callbacks, so no
-> explicit action is required by the PCIe driver.
+> The submitted binding here describes the DPHY modes of operation only. CPHY
+> is left to future work.
+
+Like I've said in v14 review, the statement above is incorrect, and it has
+to be changed, for whatever reason it hasn't happened so far.
+
+ From https://lore.kernel.org/all/1e1bc17a-4c7a-4c08-b0c8-2a2ff31fe870@linaro.org/
+
+>>> C-PHY bus type is also well described by this version of the bindings.
+
+> Suggested-by: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>
+> Signed-off-by: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
+> ---
+>   .../bindings/phy/qcom,x1e80100-csi2-phy.yaml       | 222 +++++++++++++++++++++
+>   1 file changed, 222 insertions(+)
+> 
+> diff --git a/Documentation/devicetree/bindings/phy/qcom,x1e80100-csi2-phy.yaml b/Documentation/devicetree/bindings/phy/qcom,x1e80100-csi2-phy.yaml
+> new file mode 100644
+> index 0000000000000..17de0701eb103
+> --- /dev/null
+> +++ b/Documentation/devicetree/bindings/phy/qcom,x1e80100-csi2-phy.yaml
+> @@ -0,0 +1,222 @@
+> +# SPDX-License-Identifier: (GPL-2.0 OR BSD-2-Clause)
+> +%YAML 1.2
+> +---
+> +$id: http://devicetree.org/schemas/phy/qcom,x1e80100-csi2-phy.yaml#
+> +$schema: http://devicetree.org/meta-schemas/core.yaml#
+> +
+> +title: Qualcomm X1E80100 SoC CSI2 PHY
+> +
+> +maintainers:
+> +  - Bryan O'Donoghue <bod@kernel.org>
+> +
+> +description:
+> +  Qualcomm MIPI CSI2 C-PHY/D-PHY combination PHY. Connects MIPI CSI2 sensors
+> +  to Qualcomm's Camera CSI Decoder. The PHY supports both C-PHY and D-PHY
+> +  modes.
+> +
+> +properties:
+> +  compatible:
+> +    const: qcom,x1e80100-csi2-phy
+> +
+> +  reg:
+> +    maxItems: 1
+> +
+> +  clocks:
+> +    maxItems: 3
+> +
+> +  clock-names:
+> +    items:
+> +      - const: core
+> +      - const: timer
+> +      - const: ahb
+> +
+> +  interrupts:
+> +    maxItems: 1
+> +
+> +  operating-points-v2: true
+> +
+> +  opp-table:
+> +    type: object
+> +
+> +  power-domains:
+> +    items:
+> +      - description: Titan Top GDSC - Titan ISP Block, Global Distributed Switch Controller.
+> +      - description: MMCX voltage rail
+> +      - description: MXC or MXA voltage rail
+> +
+> +  power-domain-names:
+> +    items:
+> +      - const: top
+> +      - const: mmcx
+> +      - const: mx
+> +
+> +  vdda-0p9-supply:
+> +    description: Phandle to a 0.9V regulator supply to a PHY.
+> +
+> +  vdda-1p2-supply:
+> +    description: Phandle to 1.2V regulator supply to a PHY.
+> +
+> +  ports:
+> +    $ref: /schemas/graph.yaml#/properties/ports
+> +
+> +    properties:
+> +      port@0:
+> +        $ref: /schemas/graph.yaml#/$defs/port-base
+> +        description:
+> +          Sensor input. Always present. A single sensor is described by a
+> +          single endpoint with the clock lane at position 0 and one to four
+> +          data lanes.
+> +
+> +          DPHY split mode, where two independent sensors share the same PHY,
+> +          is described by two endpoints, each with its own clock lane position;
+> +          endpoint@0 with clock-lanes = <0> and one or two data-lanes and
+> +          endpoint@1 with clock-lanes = <3> and one data lane.
+> +
+> +        unevaluatedProperties: false
+> +
+> +        patternProperties:
+> +          "^endpoint(@[01])?$":
+> +            $ref: /schemas/media/video-interfaces.yaml#
+> +            unevaluatedProperties: false
+> +            properties:
+> +              bus-type:
+> +                enum:
+> +                  - 1 # MEDIA_BUS_TYPE_CSI2_CPHY
+> +                  - 4 # MEDIA_BUS_TYPE_CSI2_DPHY
+> +
+> +              clock-lanes:
+> +                maxItems: 1
+> +
+> +              data-lanes:
+> +                minItems: 1
+> +                maxItems: 4
+> +                items:
+> +                  minimum: 1
+> +                  maximum: 4
+> +                description:
+> +                  Data lane positions following this endpoint's clock
+> +                  lane. Positions are a per-port logical numbering, not
+> +                  package pad or ball positions.
+> +
+> +            required:
+> +              - bus-type
+
+A review comment given to v14 is still applicable, 'bus-type' property
+should be set as optional with D-PHY mode fallback.
+
+> +              - data-lanes
+> +              - clock-lanes
+
+Here 'clock-lanes' is a truly optional proiperty since its value is
+immutable in each endpoint, it should be removed from the list of
+required properties.
+
+Also 'clock-lanes' are not expected to be found in C-PHY bus type case.
+
+> +              - remote-endpoint
+> +
+> +        allOf:
+> +          - if:
+> +              required:
+> +                - endpoint@1
+> +            then:
+> +              properties:
+> +                endpoint@0:
+> +                  properties:
+> +                    clock-lanes:
+> +                      const: 0
+> +                    data-lanes:
+> +                      maxItems: 2
+> +                endpoint@1:
+> +                  properties:
+> +                    clock-lanes:
+> +                      const: 3
+> +                    data-lanes:
+> +                      items:
+> +                        - const: 4
+> +              required:
+> +                - endpoint@0
+> +            else:
+> +              patternProperties:
+> +                "^endpoint(@0)?$":
+> +                  properties:
+> +                    clock-lanes:
+> +                      const: 0
+> +
+> +      port@1:
+> +        $ref: /schemas/graph.yaml#/properties/port
+> +        description: Output to the CAMSS CSID controller.
+> +
+> +    required:
+> +      - port@0
+> +      - port@1
+> +
+> +required:
+> +  - compatible
+> +  - reg
+> +  - clocks
+> +  - clock-names
+> +  - interrupts
+> +  - operating-points-v2
+> +  - power-domains
+> +  - power-domain-names
+> +  - vdda-0p9-supply
+> +  - vdda-1p2-supply
+> +  - ports
+> +
+> +additionalProperties: false
+> +
+> +examples:
+> +  - |
+> +    #include <dt-bindings/clock/qcom,x1e80100-camcc.h>
+> +    #include <dt-bindings/clock/qcom,x1e80100-gcc.h>
+> +    #include <dt-bindings/interrupt-controller/arm-gic.h>
+> +    #include <dt-bindings/media/video-interfaces.h>
+> +    #include <dt-bindings/power/qcom,rpmhpd.h>
+> +
+> +    phy@ace4000 {
+> +        compatible = "qcom,x1e80100-csi2-phy";
+> +        reg = <0x0ace4000 0x2000>;
+> +
+> +        clocks = <&camcc CAM_CC_CSIPHY0_CLK>,
+> +                 <&camcc CAM_CC_CSI0PHYTIMER_CLK>,
+> +                 <&camcc CAM_CC_CORE_AHB_CLK>;
+> +        clock-names = "core",
+> +                      "timer",
+> +                      "ahb";
+> +
+> +        interrupts = <GIC_SPI 477 IRQ_TYPE_EDGE_RISING>;
+> +
+> +        operating-points-v2 = <&csiphy_opp_table>;
+> +
+> +        power-domains = <&camcc CAM_CC_TITAN_TOP_GDSC>,
+> +                        <&rpmhpd RPMHPD_MMCX>,
+> +                        <&rpmhpd RPMHPD_MX>;
+> +        power-domain-names = "top",
+> +                             "mmcx",
+> +                             "mx";
+> +
+> +        vdda-0p9-supply = <&vreg_l2c_0p9>;
+> +        vdda-1p2-supply = <&vreg_l1c_1p2>;
+> +
+> +        ports {
+> +            #address-cells = <1>;
+> +            #size-cells = <0>;
+> +
+> +            port@0 {
+> +                reg = <0>;
+> +                csiphy0_in: endpoint {
+> +                    bus-type = <MEDIA_BUS_TYPE_CSI2_DPHY>;
+> +                    clock-lanes = <0>;
+> +                    data-lanes = <1 2 3 4>;
+> +                    remote-endpoint = <&sensor_out>;
+> +                };
+> +            };
+> +
+> +            port@1 {
+> +                reg = <1>;
+> +                csiphy0_out: endpoint {
+> +                    remote-endpoint = <&csid_in>;
+> +                };
+> +            };
+> +        };
+> +
+> +        csiphy_opp_table: opp-table {
+> +            compatible = "operating-points-v2";
+> +
+> +            opp-300000000 {
+> +                opp-hz = /bits/ 64 <300000000>;
+> +                required-opps = <&rpmhpd_opp_low_svs_d1>,
+> +                                <&rpmhpd_opp_low_svs_d1>;
+> +            };
+> +        };
+> +    };
 > 
 
-What about the D3Cold sequence like broadcasting PME_Turn_Off? Is it also
-handled by the fw?
-
-- Mani
+Apart of a few minor comments above, everything else looks good to me.
 
 -- 
-மணிவண்ணன் சதாசிவம்
+Best wishes,
+Vladimir
