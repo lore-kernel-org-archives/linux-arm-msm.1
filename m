@@ -1,82 +1,82 @@
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3F50C4E80D7
-	for <linux-arm-msm@vger.kernel.org>; Thu,  3 Sep 2026 15:38:58 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B80664EA39A
+	for <linux-arm-msm@vger.kernel.org>; Thu,  3 Sep 2026 15:39:03 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788449940; cv=none; b=bjoFTVKHCjyhlE9CzPqzWgpBGJAz8ZyKpx4kRpvzcEdkZjQH2cvFzAtjVdkK7ocj8psOyTJ0fv5yXv1r45/h2hMNhAL4oHOwBi+rdfjPPkjtuGFCb+mixWVha40ScJB5uj7lMjzVwFr2uhoUR9vf1SPR0QE6Q+s5guEThpd99FY=
+	t=1788449945; cv=none; b=NRHGFmG9eLBC96t2WaxfHrQONbG9WrAzkbOhSGXLrKYutmK0fHftC1zToAE9ya35c+SHQ5E+IWHKItpofPFoNnVd78J7Fnv2KfSfrlIrFjXoWKkPcUFsaSnFzbF7h5G+VJ7Zbqqb18f3l7129H2kY5Lle7ZdYP0vCGYaIh80Xss=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788449940; c=relaxed/simple;
-	bh=AjrT+2a1V/dFdE8w4G6xJN78eEUrW3q4ENCnkqhARGk=;
+	s=arc-20240116; t=1788449945; c=relaxed/simple;
+	bh=mst0BKwNQI5xzsAgPU0b63vSk4pLGpAaOz+r5wcrQHQ=;
 	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
-	 MIME-Version; b=fTzgu4uki3peVU33jfX6tVoUXIhmG5uNFT74N8MCXxqRIe0T0nG5sXLlPoMwGHViTI4abm2jaL7QW4n/J584SKrElUS0F3hIM3atnqpAxYJgjOHnDbT+vlNY91YD03T3alqKszQvQZiHr/P/AY12U0xEDC4KwmjP02XWt1/PkKc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=CHQoWt93; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=bZyDFoOX; arc=none smtp.client-ip=205.220.168.131
+	 MIME-Version; b=Vug5lCgKJePh4EUzFFK2fTRjxvx9cbZncJGfm9qy86O5AshTAzYSzAYfxPA1jsewYhoNbYTCjT8fBNfGXBaf+bMSNMNIFUKN56otQFVgUaZhYX9mGiL4QDG7xiX3BKRtJAOojSSslUQmVagag0XVldtGzUYsRfS8kQ6zd3rY34U=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=cKu1Kj8h; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=fhY5x19W; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="CHQoWt93";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="bZyDFoOX"
-Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 683DANlh1314609
-	for <linux-arm-msm@vger.kernel.org>; Thu, 3 Sep 2026 15:38:57 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="cKu1Kj8h";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="fhY5x19W"
+Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 683DASo3035605
+	for <linux-arm-msm@vger.kernel.org>; Thu, 3 Sep 2026 15:39:03 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:date:from:in-reply-to:message-id
-	:mime-version:references:subject:to; s=qcppdkim1; bh=h4izH85dY8s
-	43dZbZGemk1SbK5CBZ3ueMd7xLjwebE4=; b=CHQoWt93bSf5i1CuMopCg+AtkSZ
-	np0nNaMAjZq9Lhyf01UtWo+mkipkhjbvnO+Yi3vcbncBI65hCWZFIBQR0cuPtCN1
-	L+zSChXLIx92RG45YnSRq5Qaj11YMMj0bkvQeJzN4ERaeIiIczrEbOb6OrbyAJIX
-	hFDWYHQwtyCK7DZVY5haz/Mw3Go9ePnkYG71zSfb+pLPQKxmqYXgfn6zo5QbORsg
-	YykpkywNktjDXsX3LUPXbU1uXsMe/b1pBFOniruSsGpAvIjLJe8kTkESQe+sjlz5
-	mi/gPbU4eqMp0Wd0FmRcSRuCno79XaIS5umo+P9Oh7yxtofDTfAnAwRz3wg==
+	:mime-version:references:subject:to; s=qcppdkim1; bh=h63WXqFvCbF
+	y3gKLgyxNvCWEvPKYpY2mQIKN7hO7nws=; b=cKu1Kj8hW6VbYnqRIufNTYuaAj5
+	pCFmfEMHXoUljJlOc38xxTGDhXwL5sIEQJJnmzlCXLyfegABjH98HPWawQhrDl/Z
+	3F9VZjCzu03Rqt+vFMUrkDiJ4t6hAfHwQ/sIF/eTNOZ35rS0lC7u6zmrNNb9QLcH
+	08trlMbGPvCpBhP8ipa7pFbdYzjSaJjrctNotK7bNP+9KXDYx+njuaT/UoLUGMbl
+	UM62QqtzCR+FNi9/9i0JtqHLk01dcFEgBe5IhSG8qZXt7iKFUbq3Wi+8QXUWkW7F
+	LljxuGOpj4ydM3+dLQ0y23LeRWo8NYEhz4HZnvZTAnQQsDN7QYuqNCLXrDA==
 Received: from mail-pf1-f198.google.com (mail-pf1-f198.google.com [209.85.210.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gerdnd35g-1
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gf51m1vq8-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Thu, 03 Sep 2026 15:38:57 +0000 (GMT)
-Received: by mail-pf1-f198.google.com with SMTP id d2e1a72fcca58-85722fc5a21so3632873b3a.2
-        for <linux-arm-msm@vger.kernel.org>; Thu, 03 Sep 2026 08:38:57 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 03 Sep 2026 15:39:02 +0000 (GMT)
+Received: by mail-pf1-f198.google.com with SMTP id d2e1a72fcca58-855315ccb64so2118134b3a.3
+        for <linux-arm-msm@vger.kernel.org>; Thu, 03 Sep 2026 08:39:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1788449936; x=1789054736; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1788449942; x=1789054742; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=h4izH85dY8s43dZbZGemk1SbK5CBZ3ueMd7xLjwebE4=;
-        b=bZyDFoOXL5Jdw04dFMqt/tujrzIpjkXVmYagFihDUhxrJ6NDnX5A0QmfXiqMxPR5Gp
-         FfBDlu3nq7zggOtkOm0OOQW+dRpEBsajFyiQIFXfH5V0OaFt1Z6IcYqwKF7aFy0ajOYq
-         3yEOZMsLqUXZW3NJoQiQ50ErapM5ozv0hs2t3UjLv9MlwrwpEJN4Tw2S25jfyJgYGkb2
-         pq+Q40zOjLQS6y3fbvYjGjISdFgFXngIa7LgXRD6YxUHr+VBH+vU5ozZPE72nkBNE3Jj
-         BGTdhzK8wSEHowM4SqrHREkwf65qe1rWnUhvVorlDlpstFRBf3PGdYqsywWbnAcXWnJE
-         yq9Q==
+        bh=h63WXqFvCbFy3gKLgyxNvCWEvPKYpY2mQIKN7hO7nws=;
+        b=fhY5x19WcYuT9lbgwCDUAECybbd8xdLmiNUhqXlwFQtMmg4JziZZJUmWBXwj2Wuiq5
+         R+LjI8oBw5O4+dejuu1/NoXoisd5lB7MfgU52b3mxvhIGPp7ljFqCIbMN89V4O0ftVO4
+         31IvX0m9UAPA6BsiLOxC1flrR/CZIk+nkKWfcVNOINtllMnIcb23JEvl5p6qEFD57rwB
+         2n2+z1ufpQ3M5k7FlqFrmb9KLvDYlizrRKlgtL5VhPK67VI9HhDsOZxIu0/QKcqCfjdf
+         uLqzgj23cixYRE7JwlMy8EBxDMT8gYjzi0Ihga4OiYaPoZnitwsjBWuEBaG6bOTElsb8
+         M3DQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788449936; x=1789054736;
+        d=1e100.net; s=20251104; t=1788449942; x=1789054742;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=h4izH85dY8s43dZbZGemk1SbK5CBZ3ueMd7xLjwebE4=;
-        b=QOKZIAtkz9bwt6LuWFiHVrCl+GceeETxqqYjOtqENjXv7n4eCI8ZZKp8Z79eOQXLtS
-         1z/H8BOSQdC2g/lFeuDbn0y8rUgNvvMBbLRcQIahltlYMEK4MHAokomf+Xs2qCLlXJZ3
-         r2J1qGF0BDH5qycZsoqjCKP6xWneB2+ySIN3mXrUjOUhgaWetdUC0RcRdLoy7c+ELIph
-         3LI7XQn7GxR2Nodi+j3Fykk80LtiWdBChtYfx6v8Xv8BHP9S2Rh+AxAcdqEdkROHWYCn
-         L3THzhrS8kHvNwDvT5oMMzi0KMXUCmhrrMLnCx0iyou6n/kfQqLZmW/2NDOMaXZ6iRlI
-         bKgA==
-X-Forwarded-Encrypted: i=1; AKwUvBwGw/uiiWL16xnWJLUqmp0wSQVnvOCIWo/xYHFhUNBt9U8BHcIZaL0iseHDCUgzy+h5ateTrPrXdW1O+0ny@vger.kernel.org
-X-Gm-Message-State: AFuF++kSBta+uXn4lOcOiU3b9/PVLMeTaUzlJ9JUNghAp0ckj2fBylbY
-	1EhWCBksU+hgEkUyZ5OdfTvNqU7MLlMXqIUEvkzTrHvrFmGQSP7sb5ATnOeQGdFplppXky7cIjI
-	BGpIT0B17UWu4LttdHCUu6YmFoPF1lV082fswk/IlKyOILFhfimZ9cExXEOUseylMUiAC
-X-Gm-Gg: AYBFou1mPi62beJ9vS7NnmxuPljXWXqCkm3R7CclYAoYVH7Xefu+a7fmUO9VC4i21dc
-	iF3EyVxXGFU23+gqjleOnq5150GsEPCkVpRvC8eD4vly3LzCHoEjZNA0nKDr80wDzHSFSss4Lkl
-	1cwQnGMu754bjm+Mk/wkRqW3QnpfgrvRQtHFNndyoycb7cd0KmJRuiQZ3VnysauFOgIYV9Gfk/Y
-	H3Uug8Qc4BpHRglmryLJAE72Qlr+whzN16HQLYslfOoxtUq+X6yFR2tyQplUK0V0rc+xi9YGYtM
-	0cnaEelxauESnNpDVM2aM0L9z6PWQODgNsDjsVfZ+h6SWNbK5J1Mi6Hdu3oA8Clh7tDDDUgNCF/
-	LrZQKzA4sVwHUcqI2gy9m4Z1+IkUV2feR
-X-Received: by 2002:a05:6a00:27a4:b0:855:eb7b:5804 with SMTP id d2e1a72fcca58-85ed5ccc11fmr18834176b3a.4.1788449936515;
-        Thu, 03 Sep 2026 08:38:56 -0700 (PDT)
-X-Received: by 2002:a05:6a00:27a4:b0:855:eb7b:5804 with SMTP id d2e1a72fcca58-85ed5ccc11fmr18834103b3a.4.1788449935994;
-        Thu, 03 Sep 2026 08:38:55 -0700 (PDT)
+        bh=h63WXqFvCbFy3gKLgyxNvCWEvPKYpY2mQIKN7hO7nws=;
+        b=clfkLMBFTbQdrAX0+GlGme3Ww9vFgOnS5urlbhNLCOlitKd9EvNRIhQamHMLH1kj+g
+         FWi1uoYm3lgncCfsJVEGp7aANrEeDm5ELCNVRRhCL+9xq6woFoS+T2Lj1cNlI865Q7p5
+         BIlZY65nSrEnvFCaeooVeGQF/jswdJ/oEfRqEAI76Ng4ftVxB2hrDe/UChhOAPWU6cyA
+         1VaYf7xoU7diW0bOvP62yy6oPylzYoe4zdrcHoX9JgA1LLA9DkefNchbftGpS4hlEOY1
+         bdqJtHofIQJSujbK+J9l1lRk6H3OoZOh5ta0vYWcwQuW+oJag/Vap5GU7OCDgVKnjhwQ
+         QL/g==
+X-Forwarded-Encrypted: i=1; AKwUvBzr5BqAeH7oNwl04CBWPBqQsAMSHYezBCS8+iPTgEfEFPdLzuhf5hTptgqJyuyr5bMvhMcI16aKT9GeuLpt@vger.kernel.org
+X-Gm-Message-State: AFuF++n9G5he8ShRU2rzAkQAm2UxQ50bdB360Zz6KQCiheucKBRr7N4p
+	7sFrr6ldheQDsaU2p640Oy4aFQmWCnW6OcTV2f0OygNjZPy/zILu/6JZ+vTqWQdEnUVY31jzaK9
+	a8t4xtw/DQQrwQA1BHY0vjX7CIRP9iLZly8mGgAZXKrdG+Cdb1FmfEbKjHvY5aPxFpkSj
+X-Gm-Gg: AYBFou07qGkmEdKlPJaBXrPT9xXFPTz777PBsfRWIXng/jRes2EWfy4UuOoN6hNnvoP
+	pXL6YQ4UrTB/9/TdNI51Oyc0y32yC1KCMY86tjfgFddcPPSH3+Hfcd9hc0i+czJLVOBBjDgb70v
+	YNbw33WfEpuzmxkl6GVzATRyl+OTn9wP1Z8qnd0ufoNsDrksxrJjQEJeDk4HHuU6bxzzpEQicoI
+	FninAg+biVY/Udga5EG6+AqExwqgxn1fKUyuOC2NCqV1kVGH99x5rsEcjlM4aDNPF38iN16aoE/
+	5F8TemKyO9aZSDIP3VWy2qcQpP33M5XoAqu9EHxx9hnIFCcw7h44yB2QBj+Zzj9c9ro+SlXF6Qn
+	zebYTkHZer1zXXS4BJJx+s3VC9wR9Pwxd
+X-Received: by 2002:a05:6a00:8e02:b0:857:727c:a1f1 with SMTP id d2e1a72fcca58-8613fc1f0a5mr1326534b3a.19.1788449941834;
+        Thu, 03 Sep 2026 08:39:01 -0700 (PDT)
+X-Received: by 2002:a05:6a00:8e02:b0:857:727c:a1f1 with SMTP id d2e1a72fcca58-8613fc1f0a5mr1326448b3a.19.1788449941199;
+        Thu, 03 Sep 2026 08:39:01 -0700 (PDT)
 Received: from hu-faisalh-hyd.qualcomm.com ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-86153027951sm81069b3a.40.2026.09.03.08.38.51
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-86153027951sm81069b3a.40.2026.09.03.08.38.56
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 03 Sep 2026 08:38:55 -0700 (PDT)
+        Thu, 03 Sep 2026 08:39:00 -0700 (PDT)
 From: Faisal Hassan <faisal.hassan@oss.qualcomm.com>
 To: Thinh Nguyen <Thinh.Nguyen@synopsys.com>,
         Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
@@ -91,9 +91,9 @@ Cc: Sriram Dash <sriram.dash@oss.qualcomm.com>,
         Shazad Hussain <shazad.hussain@oss.qualcomm.com>,
         linux-arm-msm@vger.kernel.org, linux-usb@vger.kernel.org,
         devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: [PATCH v2 4/7] usb: host: xhci-plat: Support XHCI_RESET_ON_RESUME via device property
-Date: Thu,  3 Sep 2026 21:08:24 +0530
-Message-Id: <20260903153827.3463313-5-faisal.hassan@oss.qualcomm.com>
+Subject: [PATCH v2 5/7] usb: dwc3: add xhci-reset-on-resume property for power-loss resume
+Date: Thu,  3 Sep 2026 21:08:25 +0530
+Message-Id: <20260903153827.3463313-6-faisal.hassan@oss.qualcomm.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20260903153827.3463313-1-faisal.hassan@oss.qualcomm.com>
 References: <20260903153827.3463313-1-faisal.hassan@oss.qualcomm.com>
@@ -104,65 +104,116 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Authority-Analysis: v=2.4 cv=YcmNIQRf c=1 sm=1 tr=0 ts=6a999491 cx=c_pps
+X-Proofpoint-GUID: FvtVxoc8Y0iYv6k5NCK62y1t6ZKKpQko
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTAzMDEzNiBTYWx0ZWRfX44Yl5rimm80F
+ KgBN3ed5UU8IiV6StFMiefmtcoJCAXXuwV4wyFGIf+2kVyqXbQ3PeVg85mKd6Cf1ojuGNPIPOIR
+ tcInSJdOuhOCd1RVFCTzB/pDoL6EDlxFvjKZq/SbIyV0LM9MH5AupVtmFDvEjUhC4WviT0p39xk
+ kesxpQ6cKkdxmihHT2i6n4Iqhl4yIkBmTFCaTGoHSyciqxlgrmD5r6nIyN0VeLLPm4OfKWkVRON
+ 76kWbt41srJlWZMr9eLv5oeAArtLCElq0lo9LU8bboYtGVZPeo2En/cEXDHjY1r2HMWt8smLz81
+ +5bXA0aVHw4PGAsfSGXq7VqVH/02mIpWrYfSaTKpU7DwtBWhmFWXPf5xalN4MkKcZ/X3JGVgYuz
+ vIgCuIRE9K5fr0tnP7xlGldLliMXZuTABZBISP5DRMjCkq3HvwptTLK6M74ES1RbrUbHcWMHoz/
+ cXsYopvEqAOepGQEksw==
+X-Authority-Analysis: v=2.4 cv=X8Ji7mTe c=1 sm=1 tr=0 ts=6a999496 cx=c_pps
  a=m5Vt/hrsBiPMCU0y4gIsQw==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
  a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22 a=EUspDBNiAAAA:8
- a=A6Vjp3zFaTA1NjdqV2IA:9 a=IoOABgeZipijB_acs4fv:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTAzMDEzNiBTYWx0ZWRfXyzC3bsUV2OCR
- SKNsGssIIaqQ9n1I4mHy81rXzLumIGcz7ijOkOclTMRS1brPau1rVtIIfYJuHrqVRkVAM3e6irp
- p7oYVrH0gfGks0n4PavqY6zI52iYxqA=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTAzMDEzNiBTYWx0ZWRfXx17yPNGQ2tkV
- tBg0auAwa/mt1zw126Dz1qF1aRVtyBlkMVvhhdBFjym3BC6h4CNqHAONx9tUQwHY9L0wGPZhDPH
- 5yW9EIOl0j062uQzZ5iy5U1ZIbjsydo5y37nG+2X5Yi1V7QPnBPLujVwN+ee+AYLA8KZhGpn1HK
- bUGdOWD9394NsZxABiDkFoDVLoHPFa5BTBT7VfnpULGO45ryBvY+vdPKLifYsNMgOjaXGeX4IW1
- SoxlsIeglrCyarkiyU0xh1I1OWgDeLJ1U73VqFOqzwC0aGZdo+ez8ziwHIpFMQ2uMaFx7UQ2K28
- FhjlrbZDGNn047TJNgBzIXFTZrcFpdccJIushrLDLjNi4RcuyyltwRJPpQa+rj7Sv7BSaE9Dz6s
- 5RMf5uh6k0Z1+I90Oi+p+xXa0fuyh+6iQxDE3JcpAKeDdVpJCaKgoG827qqD/G+tKMgfSl1Jjit
- YFWwTrW18nEsuA9FLCQ==
-X-Proofpoint-GUID: aPNltra4DwyBeZYKvG7PKHDjq4SZN68J
-X-Proofpoint-ORIG-GUID: aPNltra4DwyBeZYKvG7PKHDjq4SZN68J
+ a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22 a=EUspDBNiAAAA:8
+ a=7YzMA-XWCf9gdZAyNeMA:9 a=IoOABgeZipijB_acs4fv:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTAzMDEzNiBTYWx0ZWRfX29rp19GkANWM
+ sntZRDFW3GCYv92aPAHuUiwt//hhQP6fLd6sEKKNew4fWBejq7CbecgrTUfR4cC4aGwh5PkL+Vn
+ Olr0UU01cqvUfh24MIK2d6rlxNpT6SM=
+X-Proofpoint-ORIG-GUID: FvtVxoc8Y0iYv6k5NCK62y1t6ZKKpQko
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-09-03_04,2026-09-03_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1011 malwarescore=0 priorityscore=1501 lowpriorityscore=0
- adultscore=0 phishscore=0 impostorscore=0 spamscore=0 suspectscore=0
- bulkscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
- adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
- definitions=main-2609030136
+ malwarescore=0 spamscore=0 phishscore=0 lowpriorityscore=0 impostorscore=0
+ priorityscore=1501 adultscore=0 bulkscore=0 clxscore=1011 suspectscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2609030136
 
-When the USB controller loses power during PM suspend (as occurs
-on targets like SA8255P that fully power off the controller),
-it generates a Host Controller Error (HCE) on resume requiring
-full reinitialization. This is handled by the XHCI_RESET_ON_RESUME
-quirk (introduced upstream in 8b328f8002bc).
+On platforms where the USB controller loses power during system
+suspend, like SA8255P, resume triggers a Host Controller Error
+requiring full reinitialization.
 
-Read the "xhci-reset-on-resume-quirk" device property to set
-XHCI_RESET_ON_RESUME. This allows parent drivers (e.g., dwc3)
-to enable the quirk via software nodes.
+The xhci driver supports XHCI_RESET_ON_RESUME to handle this,
+but dwc3 previously lacked platform-specific quirk configuration.
+Add a device property "xhci-reset-on-resume" that enables this
+quirk for controllers needing complete reinitialization after
+power loss during suspend.
+
+Let dwc3 manage the quirk for the usb controller using
+software properties.
 
 Co-developed-by: Sriram Dash <sriram.dash@oss.qualcomm.com>
 Signed-off-by: Sriram Dash <sriram.dash@oss.qualcomm.com>
 Signed-off-by: Faisal Hassan <faisal.hassan@oss.qualcomm.com>
 ---
- drivers/usb/host/xhci-plat.c | 3 +++
- 1 file changed, 3 insertions(+)
+ drivers/usb/dwc3/core.c | 4 ++++
+ drivers/usb/dwc3/core.h | 5 +++++
+ drivers/usb/dwc3/host.c | 5 ++++-
+ 3 files changed, 13 insertions(+), 1 deletion(-)
 
-diff --git a/drivers/usb/host/xhci-plat.c b/drivers/usb/host/xhci-plat.c
-index 074d9c731639..7df2947d13dc 100644
---- a/drivers/usb/host/xhci-plat.c
-+++ b/drivers/usb/host/xhci-plat.c
-@@ -277,6 +277,9 @@ int xhci_plat_probe(struct platform_device *pdev, struct device *sysdev, const s
- 		if (device_property_read_bool(tmpdev, "xhci-skip-phy-init-quirk"))
- 			xhci->quirks |= XHCI_SKIP_PHY_INIT;
- 
-+		if (device_property_read_bool(tmpdev, "xhci-reset-on-resume-quirk"))
-+			xhci->quirks |= XHCI_RESET_ON_RESUME;
+diff --git a/drivers/usb/dwc3/core.c b/drivers/usb/dwc3/core.c
+index fd5c2cd36c59..eb6ffd5148a7 100644
+--- a/drivers/usb/dwc3/core.c
++++ b/drivers/usb/dwc3/core.c
+@@ -1712,6 +1712,10 @@ static void dwc3_get_software_properties(struct dwc3 *dwc,
+ 					       &gsbuscfg0_reqinfo);
+ 		if (!ret)
+ 			dwc->gsbuscfg0_reqinfo = gsbuscfg0_reqinfo;
 +
- 		device_property_read_u32(tmpdev, "imod-interval-ns",
- 					 &xhci->imod_interval);
- 		device_property_read_u16(tmpdev, "num-hc-interrupters",
++		if (!dwc->xhci_reset_on_resume &&
++		    device_property_read_bool(tmpdev, "xhci-reset-on-resume"))
++			dwc->xhci_reset_on_resume = true;
+ 	}
+ }
+ 
+diff --git a/drivers/usb/dwc3/core.h b/drivers/usb/dwc3/core.h
+index 608daeb7ef10..0ff23eb217bc 100644
+--- a/drivers/usb/dwc3/core.h
++++ b/drivers/usb/dwc3/core.h
+@@ -1172,6 +1172,10 @@ struct dwc3_glue_ops {
+  * @suspended: set to track suspend event due to U3/L2.
+  * @susphy_state: state of DWC3_GUSB2PHYCFG_SUSPHY + DWC3_GUSB3PIPECTL_SUSPHY
+  *		  before PM suspend.
++ * @xhci_reset_on_resume: Enable XHCI_RESET_ON_RESUME quirk for the xHCI
++ *			  host controller. Set to true for platforms where
++ *			  the USB controller loses power during system suspend,
++ *			  requiring complete reinitialization on resume.
+  * @imod_interval: set the interrupt moderation interval in 250ns
+  *			increments or 0 to disable.
+  * @max_cfg_eps: current max number of IN eps used across all USB configs.
+@@ -1420,6 +1424,7 @@ struct dwc3 {
+ 	unsigned		wakeup_configured:1;
+ 	unsigned		suspended:1;
+ 	unsigned		susphy_state:1;
++	unsigned		xhci_reset_on_resume:1;
+ 
+ 	u16			imod_interval;
+ 
+diff --git a/drivers/usb/dwc3/host.c b/drivers/usb/dwc3/host.c
+index 96b588bd08cd..2170fcafc889 100644
+--- a/drivers/usb/dwc3/host.c
++++ b/drivers/usb/dwc3/host.c
+@@ -129,7 +129,7 @@ static int dwc3_host_get_irq(struct dwc3 *dwc)
+ 
+ int dwc3_host_init(struct dwc3 *dwc)
+ {
+-	struct property_entry	props[6];
++	struct property_entry	props[7];
+ 	struct platform_device	*xhci;
+ 	int			ret, irq;
+ 	int			prop_idx = 0;
+@@ -173,6 +173,9 @@ int dwc3_host_init(struct dwc3 *dwc)
+ 	if (dwc->usb2_lpm_disable)
+ 		props[prop_idx++] = PROPERTY_ENTRY_BOOL("usb2-lpm-disable");
+ 
++	if (dwc->xhci_reset_on_resume)
++		props[prop_idx++] = PROPERTY_ENTRY_BOOL("xhci-reset-on-resume-quirk");
++
+ 	/**
+ 	 * WORKAROUND: dwc3 revisions <=3.00a have a limitation
+ 	 * where Port Disable command doesn't work.
 -- 
 2.34.1
 
