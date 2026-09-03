@@ -1,135 +1,122 @@
-Received: from mail-yw1-f176.google.com (mail-yw1-f176.google.com [209.85.128.176])
+Received: from mail-yw1-f178.google.com (mail-yw1-f178.google.com [209.85.128.178])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3C4C24B337C
-	for <linux-arm-msm@vger.kernel.org>; Thu,  3 Sep 2026 14:39:38 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=209.85.128.176
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2B65B4B7143
+	for <linux-arm-msm@vger.kernel.org>; Thu,  3 Sep 2026 14:40:45 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=209.85.128.178
 ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788446384; cv=pass; b=lFEj+HvZY0ZjYbWnxaph/X4/zTD4Cq9ONGgNjiYUJIrJy8gWmD9jWcFA58+etJUs6y7DiNZaD+gKKvL2sIyDOrmqC1mo6PoypRMFYBDGR8IWHZstx5Xd9kBkfJGMCviFEyxrE7ctZ0OMa/ZId26vsDKrDFp3xoCV2LjkGzNDcZY=
+	t=1788446454; cv=pass; b=QVFy9Z17Rxy4eV8+8DER97bkLsDltlKM/CaCDwVaS3eAv4Fr8iv262jTJ/nAJkmJXmrF0GnPyuqbE/3VCdNwxO6Fa2N+b8QY5T22Huqr9WmOUgqbUg/+SCnFRBii/zU1w8IdzauXNY3yXL9IwNo6EsIFoyXjAXd9HP5bDXYBNqE=
 ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788446384; c=relaxed/simple;
-	bh=GRG7VAW4y3EdB7x7u6hb320P3gD15LYx1LfsViKAjRo=;
+	s=arc-20240116; t=1788446454; c=relaxed/simple;
+	bh=DMcoFPAWdEiA47YKBPP9R2w1Up2IfyxuLdA+slJYpIs=;
 	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 Cc:Content-Type; b=iH3gzJnyTGSckJ4jyd+q0+RKnT1tlchD8JnFqMs/yaGC0102/FO/4O/9ufYxiYzh5Q9Zt4URVWlht+qXmmN2dFAEkRR3xAGod/25mSRYVK8hxh3fXiLbIhxwHI6RWV4Px3vMBOfGxj7/J7zXjrjQZlw0EWJtg4o9kXBXk2iupUM=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=DRbNn70k; arc=pass smtp.client-ip=209.85.128.176
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
+	 To:Cc:Content-Type; b=b1aUgSN3dY/7zXYOBKjMDE2ehtf1c0/08BjK+bRvb0roQIsEFMv5m5dZ91/N4edJWploaCOk1AVhLAndblb5S0QL3n0YohkRaVFvYynlvlTT3F6BNHLUdDpg54RU5OPZSC3KOwTJgTcK+Nd4zh1oIvVWTx3CdBYXpuMyxrfEswc=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=Hvz++bd8; arc=pass smtp.client-ip=209.85.128.178
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="DRbNn70k"
-Received: by mail-yw1-f176.google.com with SMTP id 00721157ae682-861f30636f9so33619927b3.0
-        for <linux-arm-msm@vger.kernel.org>; Thu, 03 Sep 2026 07:39:37 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1788446375; cv=none;
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="Hvz++bd8"
+Received: by mail-yw1-f178.google.com with SMTP id 00721157ae682-867a943b149so38981857b3.1
+        for <linux-arm-msm@vger.kernel.org>; Thu, 03 Sep 2026 07:40:45 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1788446443; cv=none;
         d=google.com; s=arc-20260327;
-        b=iCHz1LfiVc7TinZJn2oLhuO/Uyl+S8UMCP73Dr1TxVi/UtHacaaNGaj/hD0GOYjgGY
-         BODYsYTq3KIwpfnS3aKbfpEeh2miVg3p2CM/Ba40vaOSp3tD0PSdSossEj0QNmwxZk7q
-         vxpACianNnyNIURQjwX9dq3G/hrQH2TyA6rMZONYtCs5hN3IwbWJm9p4zmPdzrMVMND2
-         NrejY0u2uGaIppi/UEx1z48VVPyFKldEagqynQYU6epa53xLxFgFOMXMTRU6TKGSRF5c
-         21Nm7qSysCZVPQVbCKM+jOvNLJp+L1pSofFMWDlSjASMTdfYgZ4PdGLOVExw7gVo3vqt
-         U7Jw==
+        b=pmacXifvTDtdu0d9N/2UtHCotwr6igJDjkGwMwce6XMUSfOHCPZNWE4NUlxsQwbmEJ
+         TwAh149Jx5vw2hMeCQUGbg49qvM1E+kPx52bL/WX+XCrpUCMvRQ01cH2ZsQewQHTRdo2
+         MbIIvtnr7Jr52rOeIXl95lfpIu9B9idX02fYEYE7rIVnF/O/N3elHGsorDVNZpy1NCvz
+         bnkENfkHQmVNY5x/dpslxvpBNr/aoJwEH6X/WbpRylQLTihWjPKNUzbZkSqCyOic5oyM
+         GQtTvErcXYSG7KBpzlJf+XFxCpnVQQrNIAZUlIbgKY6QEn36XP+fNPXjCOg1wLATyxAf
+         MN7A==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=content-transfer-encoding:cc:subject:message-id:date:from
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:dkim-signature;
-        bh=cmlPLJyBSVhdlXIs0gcABkaj2xlIPjqFJYx6h3IxpcE=;
-        fh=5rENlYxDuXWSDAnkNnoZY5WrLD1kkDEYDhHlKBjgsEM=;
-        b=TzprTJqArcpTpFfNDl19DTh/xNl1dKxMLi/EbA8qekox7ANwkiCRFLYbOrMj39kRpG
-         IxxQAsG6jn6YNaGqFgN0PAejT3maGYK1tJYhL8yKgUaeDEhZhLU6KHpAE7jdRdNTWfUb
-         zl3qEvXayqBbM9SrzgQXQAgas2gQ4NYNDogMaZfkke6UNPx8yVDdpOYjS51fVAszX7I0
-         sMIUieIa2zFs6PlyVvG9m4i4nHv/F3X2DH6AqReLS2V1s1lGjTwjDtwCKCsRGm5e0wsP
-         dIDdrQDTHUno0W6vqVopnnmjcUtpv9HWm8iCDa1IkweaubHyuZM4sEwngvSaUZMwfSRW
-         I4tg==;
+        bh=DMcoFPAWdEiA47YKBPP9R2w1Up2IfyxuLdA+slJYpIs=;
+        fh=+YmvdJTR67c52uBOtbosfAOlmxhVHFjavIltatB9dG8=;
+        b=Uax875QWgERABhdJuu1H7gVvH7/X9drIwOJHmKLjTli3h7rupERMB3wWIj4o2redzT
+         djq7/+FTDw04220pjMz7YWCYopnJCt4bWqv7sQGGqZTsojRontPc7L1hQh3hb0ZIvDWs
+         KMfAGtEvGuqw5/hThaJ7Qh0KccwdfPvLICoZaEPDzRNiA9LPALbwBXblK4HY5Tl4mtAi
+         GAF6ylxonyF5EYIO4VxFDEBDp6HnGqmunZ8qGrhVbmTlPg5EFZDqzyTTJtFnAvIH9Ujb
+         zgPF9SEpPzO1GqRsWaHqgMtLX7Li9l0b316UovW5ihrv3+tLy/9I1wdH29M25tyFQu3P
+         X3fg==;
         darn=vger.kernel.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1788446375; x=1789051175; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:cc:subject:message-id:date
-         :from:in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=cmlPLJyBSVhdlXIs0gcABkaj2xlIPjqFJYx6h3IxpcE=;
-        b=DRbNn70k6bjBwzq/69XlK1DKkzE4TZTcMvjla1ycME9l0goStPJ5V1Mf87RQnVjMYl
-         3zRB9hcGBgWrV0o32Vq00EMx80pqHv19h9YRhP8xzRq7peuRot+K4lcVCQ9/qRRz+0Bg
-         wV84qd0a2JEA7ZC/fnqfi9H64zuZ1NVHzq69x9BNjdugNJ73CsF82wkJ8WMOVoF/F/zv
-         yiZsjGtFqmdnadadmJRtgdQqHot/fcgNFFqv8x5VU9oYq6LzsQ+yoLLZvBWvDXWubIL7
-         CBbkRtGMSe28RTbZx1YQ/ndeofRz6rjEftEn05tgZf5rdye5hxaoJzUqRpC9z+XlYwZU
-         ypWw==
+        d=gmail.com; s=20251104; t=1788446443; x=1789051243; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=DMcoFPAWdEiA47YKBPP9R2w1Up2IfyxuLdA+slJYpIs=;
+        b=Hvz++bd8+eYQunNClH2gjduGXicxU7Dxf9RUQf91Lt7mmlCNFJBKNsC5TXFqAX2ksE
+         KwP1DHKm0mpdNGAGNJgcDLmvLxrAf8KvNg2+oUqTjO7nSEKVjyJReCI4gAaHwfbYUSAw
+         IHvyXLBr7UhhT2Q/4PCFEwo61s+0zXpm/p/2pUaMJq0IPc4UM7MZwd3YSqeS2IvhN2GF
+         Cr9xZTW2ewL2WfKNfI85Oi/A3HRcMpQWKz9ST2POrBj7DvX+fQSd9K0WzFyGfhd85tt+
+         eFZnM6vvgMEv1YHJAgHzmOML+iF1b+rgvY6mA3M0wUoEkS1iHy02lpQbNvuYBxYhiDRP
+         X5Lg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788446375; x=1789051175;
-        h=content-transfer-encoding:content-type:cc:subject:message-id:date
-         :from:in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state
-         :from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=cmlPLJyBSVhdlXIs0gcABkaj2xlIPjqFJYx6h3IxpcE=;
-        b=huMkXx2Nx8LO7CwkwW66mTqbmzEXpZv9cK743bBEctHJJKJk5vjYnQmF1flhd97bIZ
-         EY+udbUNr90CW4F4HDKNCEm0w+YMPGRV1udY2+LWVI6HagDVLTzJK8M/rHkeTAgvnrSj
-         ibLNn0zXR3DHkvh1+GcuMFk5LX4LdAhhF9OgI319BIEQuDsK3+ODWkwOzdK7dFXf0lIq
-         6IH5nDSIoOTyNvqJ2oieqjvd6v/7ZGHcw5mwj8vZAZLTT+3SC97eKU78G85UVXhEISzy
-         1+ShMlTAmSp4+1lFKR7/wkolTDIiBqObbJ6NTCVXUYYdCkkBg/9zo1TRLC9r++xrJ1Mx
-         HLlg==
-X-Forwarded-Encrypted: i=1; AKwUvByqD0MKaIXTOS8OGUnBSygN9LixzoIzYtL8VuUvG7dGg1dLc69qnKjfoac+ELOuoj5MezsUbkoYj0IDVYAF@vger.kernel.org
-X-Gm-Message-State: AFuF++lMIj2CW7RMBbQYDWRDtmyqi6q29JmPAGnkcAPSKF5CLke458lQ
-	gYOgC1WlqvB206gpTL4tqAk4FkGCf8phU36MZdNAwCbRbfTpobheQw3DMQkonjOessMBlaV5iR9
-	cR/hlIlZ8z/IsUFqxdiDFPcMAUjsRXAXR3mmxapYQcQ==
-X-Gm-Gg: AYBFou0nA0Zf2uAL756QOIVUsemNIUnQqfryS7G8E8h6yv/uFJN2yAAnFirUjVAzFIE
-	pYiTLARObNxd9iBrLKR082jy/B9D+ecPA0mSArEo0JGyoGJLrl6xPz2iECOj2/UhQYdZdOcd3Fq
-	DpAijFQHKinGgFjGX1a/ziDV7wUzOZXjB9IwEU/06rJn3eOAZoJ7xe58a3usdoNmyPqjfGukWNw
-	oGo4AFxNSLZrndIFuPjcZw7zFUEqxn653bqHzskuZiNII1FbLOtkwqe36jTfJnS/OweIKE997G1
-	1wBa2qyWYyMgs4Y/B7AwSnHThVpJknzJ+o0HS0JTtEhx9Jw33XzKwYq2AQ==
-X-Received: by 2002:a05:690e:1904:b0:66d:1478:189c with SMTP id
- 956f58d0204a3-66f9bf8d234mt5185177d50.40.1788446374768; Thu, 03 Sep 2026
- 07:39:34 -0700 (PDT)
+        d=1e100.net; s=20251104; t=1788446443; x=1789051243;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=DMcoFPAWdEiA47YKBPP9R2w1Up2IfyxuLdA+slJYpIs=;
+        b=g/qVPl/y/ByhCcbc84uytMQug1g4l12o064VHBugG9vWejPgI4IKtT3U7ZwDkNDtM7
+         VCbqs7AZvHvzoI7epF09pa7hb9j3xYIgIcdrG1TfoET5umnrm2LtTVwpyfvDPZj6zfxD
+         FnWFghTMscvCxUyPTwel6/NK3Kl13P8tUQszQsqRmg3IQl+0tu23zLzYQEXID5SSdBf2
+         RefCzR7lX/HF75vb0zEV2XNl8h5Rl6qPjBWvbUdJH+IRilWmldVcHZmg4HwBfpDjoYZX
+         kL5YXX337nAnn7MS00N70FHKbxjy82WWW4jXW6fJgkOz6F0DnctoYQAAcs+0XrvD27Rc
+         AtIw==
+X-Forwarded-Encrypted: i=1; AKwUvBy3VIa40+gTV5rPYCksV4QelcviXkS8ksqguRvGS74NyIEq1RRsiaAAtUK/kIUy8Hci6gt2DTzm5t93i24D@vger.kernel.org
+X-Gm-Message-State: AFuF++mgJWHiEdLnOy8wewlvTr7pEYdK8sLhs5Zzn1qdfx400ArmdR/S
+	FPmKKbGM8oIfp3E7vjXoolT/KZMAJelhJVK1U02n4C00PqLfEGFUEOho9QAy7IsbaTN9z22+yU6
+	fnPVt9Ig+S0JBUnmVVN+C8mRbXajeCk4=
+X-Gm-Gg: AYBFou2t9DSc0wQPb6hamu15Nhty84aZVqD3paq9fln4Ct1fvH7KuO0iIxp2yDRGPhC
+	lPGRKI9gOw6NJwnRV7GEOepcA8p7t24GS7OyUawLX6smbnLo+7DZmEtXF9qgrPlW06ogrbMuuLW
+	dj4VALiTYaTJJtG5qLgye0NZFQHStgS9T9Nd3GVDBolcMBAJOsoyyDNUz+hhj74HwZju9eC0WT8
+	Js+TGYHZ4bKQO6lPjZqYwMoji2+Z3eNtWDjQPaHoa7bpIUToS3Ta3eUd2+S+05iFaUtScMcDkR5
+	SsrkPi4XOQ+tjXRqfM++B64m2AOzhwEpjWIj/D1uvA7rcpOWz6uQArdo+z9Kvi/PtjpzRyf4r0b
+	BaQLpYh8jkd4buh7VTdR7bUvu/qDg/hM=
+X-Received: by 2002:a05:690c:e211:10b0:80c:5ce9:8f1a with SMTP id
+ 00721157ae682-86c54b242fbmr50652107b3.34.1788446442940; Thu, 03 Sep 2026
+ 07:40:42 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260903143004.1026181-1-jun.nie@linaro.org>
-In-Reply-To: <20260903143004.1026181-1-jun.nie@linaro.org>
-From: Jun Nie <jun.nie@linaro.org>
-Date: Thu, 3 Sep 2026 22:39:22 +0800
-X-Gm-Features: AcwNN1V9Sc-XWHIXu60lPfwzYFhzqrxq1vJD2g2K6GQFtNs-hV63HQDDwAGV2Hs
-Message-ID: <CABymUCPzN89G6pSH7hG44hRupeMoyA+54BRW+mW6tT_Y21mXCw@mail.gmail.com>
-Subject: Re: [PATCH] drm/msm/dpu: delete timeout timer when encoder is not busy
-Cc: Rob Clark <robin.clark@oss.qualcomm.com>, Dmitry Baryshkov <lumag@kernel.org>, 
-	Abhinav Kumar <abhinav.kumar@linux.dev>, Jessica Zhang <jesszhan0024@gmail.com>, 
-	Sean Paul <sean@poorly.run>, Marijn Suijten <marijn.suijten@somainline.org>, 
-	David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, 
-	Abel Vesa <abel.vesa@oss.qualcomm.com>, Maxime Ripard <mripard@kernel.org>, 
-	Teguh Sobirin <teguh@sobir.in>, Christophe JAILLET <christophe.jaillet@wanadoo.fr>, 
-	linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org, 
-	freedreno@lists.freedesktop.org, linux-kernel@vger.kernel.org
+References: <5be7vkmpzmizgmvqxyefubgi3epnlo2uf7mabcgsapvia4ckpm@ixwfppk5z5e5> <A4C1EAB3A67613DC+20260903132714.2538118-1-raoxu@uniontech.com>
+In-Reply-To: <A4C1EAB3A67613DC+20260903132714.2538118-1-raoxu@uniontech.com>
+From: Luiz Augusto von Dentz <luiz.dentz@gmail.com>
+Date: Thu, 3 Sep 2026 10:40:31 -0400
+X-Gm-Features: AcwNN1W2_JiObyW5To0IffDILn7tLdHOJXWxugOC4ExywC4Uofa9xPpYfNG3_Bo
+Message-ID: <CABBYNZL2QcodKofLFbHbDJZBcjA+mRDSYi2QFZ_XvyphJYg_yg@mail.gmail.com>
+Subject: Re: [PATCH] Bluetooth: btqcomsmd: destroy RPMsg endpoints before
+ freeing hci_dev
+To: raoxu <raoxu@uniontech.com>
+Cc: dmitry.baryshkov@oss.qualcomm.com, brgl@kernel.org, 
+	linux-arm-msm@vger.kernel.org, linux-bluetooth@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, marcel@holtmann.org, stable@vger.kernel.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-Jun Nie <jun.nie@linaro.org> =E4=BA=8E2026=E5=B9=B49=E6=9C=883=E6=97=A5=E5=
-=91=A8=E5=9B=9B 22:30=E5=86=99=E9=81=93=EF=BC=9A
->
-> There is a spurious timeout error message under the following reproductio=
-n
-> steps:
-> 1. Run "modetest -M msm -r" and press CTRL+Z to pause it.
-> 2. Run "while true; do rtcwake -m mem -s 3 -v; sleep 2; done"
->
-> Resulting error message:
-> [  124.018206] [drm:dpu_encoder_virt_atomic_disable:1425] [dpu error]enc3=
-5 timeout pending
->
-> dpu_crtc_commit_kickoff() calls dpu_encoder_kickoff() to set frame busy
-> bits, and then arms the frame done timer. If the frame done IRQ fires
-> between these two steps, the IRQ handler clears the busy bits before the
-> timer is armed. As a result, the timer runs with busy bits already cleare=
-d
-> and is never cancelled by subsequent IRQ handlers, leading to a false
-> timeout warning.
->
-> Delete the pending timer when all busy bits are cleared in the frame done
-> callback to prevent false timeouts.
->
+Hi Xu,
 
-Another option is to wrap the enc_spinlock lock/unlock pair in dpu_encoder.=
-c
-and expose it to dpu_crtc.c to make the sequence of dpu_encoder_kickoff()
-and dpu_encoder_start_frame_done_timer() atomic against the IRQ handler.
-However, this breaks encoder self-containment to some extent. Furthermore,
-initial testing revealed a deadlock involving additional locks beyond
-dpu_enc->enc_spinlock.
+On Thu, Sep 3, 2026 at 9:27=E2=80=AFAM raoxu <raoxu@uniontech.com> wrote:
+>
+> Hi Luiz, Marcel,
+>
+> A gentle ping on this fix.
+>
+> It has already received:
+>
+> Reviewed-by: Dmitry Baryshkov
+> Acked-by: Bartosz Golaszewski
+>
+> and the Bluetooth CI passed. The original teardown ordering is still
+> present in the current Bluetooth tree.
+>
+> Please let me know if any further changes or testing are needed.
 
-- Jun
+Please resend.
+
+--=20
+Luiz Augusto von Dentz
