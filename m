@@ -1,43 +1,42 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0E5933FD960;
-	Thu,  3 Sep 2026 07:29:26 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 96EBB3FBEBB;
+	Thu,  3 Sep 2026 07:29:27 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788420575; cv=none; b=uU0/3P53/QgL1fqWq3aJCAFndRTSVTFedryIKwfF4qaz4u5h2lHzjmxIr02G9PW7lAzGXIBYJZP7n338S9e5J4HzdkyBQgSzcc/yPR7Qm4SYejVmsQNWOJulUbNzw58+PK8QQ/HZzY1mB2FfV0I4wcCyZpY86FCApMAh1G2r/EU=
+	t=1788420576; cv=none; b=Cf2PDE6bMVEEXYDUrb2hMKasPXtLKOssq2Sl1vPhgcAjNIbLfB72hCP2EZGBhrDEdnApyYg9PYIiZRR0uk+Bj9gYOkS0k3Mo9gCVs1f72O8koZ1RKRt9zYML6nO7YS74yzltVwQaDQXqsmuRp6OrAflFWKAOnbW7IPu92mDvQSE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788420575; c=relaxed/simple;
-	bh=pmSLOzJsXfY87ixjAPf9V898U+nzJCRcG2aRI1MqpKI=;
-	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
-	 MIME-Version; b=MONGnHYYh6s5y/GIxCKhu92pC65NRPouGccv8C/qqb1tCdsI6wgifZwduQWbOW0b5KztMfP8ln6pLwevnAsXnt/bnpbcIBQJESmj6vZ9kdpRMVV3yetClQjdg0Xpr4u6gn7XZ58HgkKzUa8mFnhsY+RGb8aSh/OZ7vOLCRNP5YM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=SQaYY5wR; arc=none smtp.client-ip=205.220.168.131
+	s=arc-20240116; t=1788420576; c=relaxed/simple;
+	bh=B0QqOY6EavMcClIFRByT3dZ6F/jsLpKDQeJgrBbmXRo=;
+	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=JJWq67xvkJvG+7rI4t+akTXulgBLDdZ0twlC9EBhD+lT0CeZh/VYC43IzloUvpZfHXLKbUjxDskYnTA1wUO7G8iCTXmI0sDKMZvq0OBbkGoyw8Mue5ZTUvku8jwcR5Y3pR4pO90BHT6hUODAG2zWV81c+zGqk7JKwdF6ppsUEAU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=VmGZ40Vn; arc=none smtp.client-ip=205.220.180.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="SQaYY5wR"
-Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6835lPxa721803;
-	Thu, 3 Sep 2026 07:29:11 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:date:from:in-reply-to:message-id
-	:mime-version:references:subject:to; s=qcppdkim1; bh=VF9pkGydThF
-	V0y+19WKdUsw9Uq9U+f1UTc5IVPtJRPg=; b=SQaYY5wRMh0rbEby5/uX0vRv8Wz
-	FWgZMs6Tyr0xqu3G0vbdCDscr3j72bOrXyFsNeJSM9ZsRF72caVsKtKCgssYYV2O
-	Gkx0Nd4AZo9v9JoDlS/X2n1b00ObFbvnLStX8dbksAi6/fIrdud2yRjegzXN5e6b
-	Yp+wL8ejQxUvIrYtkWs+r5uTYX17xMv3lh/bdh3khKivopzn53XfZUmwrJkyK1fv
-	9yGlAWKnJF3RKJp65TQ/oZ8aa7gNhYRZa6PTaiqx2Lb1qj1t3ejltiX/53hSL4q1
-	8SA96U5Pbd89c26ZmyXikgRzEcNDL/nVsCPP0RBKmw8vpwzbrUETAcV/LAQ==
-Received: from apblrppmta01.qualcomm.com (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com [103.229.18.19])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4genrnkuc7-1
-	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
-	Thu, 03 Sep 2026 07:29:10 +0000 (GMT)
-Received: from pps.filterd (apblrppmta01.qualcomm.com [127.0.0.1])
-	by APBLRPPMTA01.qualcomm.com (8.18.1.11/8.18.1.11) with ESMTP id 6837T5cZ4174394;
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="VmGZ40Vn"
+Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6835leXC079892;
 	Thu, 3 Sep 2026 07:29:08 GMT
-Received: from hu-hgautam-hyd.qualcomm.com (hu-hgautam-hyd.qualcomm.com [10.147.247.91])
-	by APBLRPPMTA01.qualcomm.com (PPS) with ESMTP id 6837T4OP4174384;
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:date:from:message-id:mime-version
+	:subject:to; s=qcppdkim1; bh=6t+MASLDQ4WBHAltm4GQlgOiWdRa3YI6Cqi
+	I2hsi500=; b=VmGZ40VneHoqVNgd2wI7+P9rz6NTuSeagvncyFOY6qJLiI/ikY/
+	kcPkLsd02dRVEGSOfMzFhZt5qbFbjL8FXHgW3/BwWKy9jb+mG4bEid+zPx/4pkjl
+	EJQ79pdFsyTUrtLTOJTXA9CEKdabtEjSgow/iG+pawHhUlBZ8gGKnun8vqprRIW+
+	APXBGt8Ah9JXBHujEiUrXtJS6rUiwZQdkjQOcmvlFwWM0qr1GdZfNgbzPZq049q+
+	TMqB7z2AoEAd2yXP+HNPoXlTuxJtHGi8CzlzQ0QAM9/NocE83sZcOvRSWadkRwSs
+	zQzukSh5e6pS3GfEx4v4/dbTfi3uV+Ii3fg==
+Received: from apblrppmta01.qualcomm.com (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com [103.229.18.19])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gf1j4gpfc-1
+	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
 	Thu, 03 Sep 2026 07:29:07 +0000 (GMT)
+Received: from pps.filterd (apblrppmta01.qualcomm.com [127.0.0.1])
+	by APBLRPPMTA01.qualcomm.com (8.18.1.11/8.18.1.11) with ESMTP id 6837T5mU4174390;
+	Thu, 3 Sep 2026 07:29:05 GMT
+Received: from hu-hgautam-hyd.qualcomm.com (hu-hgautam-hyd.qualcomm.com [10.147.247.91])
+	by APBLRPPMTA01.qualcomm.com (PPS) with ESMTP id 6837T4ON4174384;
+	Thu, 03 Sep 2026 07:29:04 +0000 (GMT)
 From: Harendra Gautam <harendra.gautam@oss.qualcomm.com>
 To: Srinivas Kandagatla <srini@kernel.org>
 Cc: Mark Brown <broonie@kernel.org>, Liam Girdwood <lgirdwood@gmail.com>,
@@ -53,12 +52,10 @@ Cc: Mark Brown <broonie@kernel.org>, Liam Girdwood <lgirdwood@gmail.com>,
         Sarath Ganapathiraju <sarath.ganapathiraju@oss.qualcomm.com>,
         Kumar Anurag Singh <kumar.singh@oss.qualcomm.com>,
         Mohammad Rafi Shaik <mohammad.rafi.shaik@oss.qualcomm.com>
-Subject: [PATCH v4 02/10] ASoC: qcom: Add QAIF shared data structures and variant interface
-Date: Thu,  3 Sep 2026 12:58:53 +0530
-Message-Id: <20260903072902.3870009-3-harendra.gautam@oss.qualcomm.com>
+Subject: [PATCH v4 00/10] ASoC: qcom: Add QAIF driver for Shikra audio platform
+Date: Thu,  3 Sep 2026 12:58:51 +0530
+Message-Id: <20260903072902.3870009-1-harendra.gautam@oss.qualcomm.com>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20260903072902.3870009-1-harendra.gautam@oss.qualcomm.com>
-References: <20260903072902.3870009-1-harendra.gautam@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -69,379 +66,305 @@ Content-Transfer-Encoding: 8bit
 X-Proofpoint-Reinject: loops=2 maxloops=12
 X-QCInternal: smtphost
 X-QCInternal: smtphost
-X-Proofpoint-GUID: RzAGK8Mm_4M0m_0t1ROnCiZzssIbeep2
-X-Proofpoint-ORIG-GUID: RzAGK8Mm_4M0m_0t1ROnCiZzssIbeep2
-X-Authority-Analysis: v=2.4 cv=YKuvDxGx c=1 sm=1 tr=0 ts=6a9921c7 cx=c_pps
+X-Authority-Analysis: v=2.4 cv=dufrzVg4 c=1 sm=1 tr=0 ts=6a9921c4 cx=c_pps
  a=Ou0eQOY4+eZoSc0qltEV5Q==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
  a=VdqzKS8jKosA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
- a=eoimf2acIAo5FJnRuUoq:22 a=EUspDBNiAAAA:8 a=8qrotg54OhH-pQjW1TwA:9
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTAzMDA2NSBTYWx0ZWRfX0nNMU5CcLgmF
- c440uZkGLFlKyMKaL06OratTKXZYDMY2+n5mKxwiA6vC4SSw8VjakQAwGoObhvBcVmK6styBGHx
- 0jw6GwiyfxczMEW6e93KG86INZ85ZilP8Oc+X4TeeXkPsX+Z+rIlvuKkJL78XXlUdWEnUFKYEHG
- asLZ82IuIq00JfEjD0os8UG2vEitzGTdtvrUfSMcFSrvLI0fgYAzxuIm49OkSAjCt/MZS+ye0t5
- 2kQjbTYuKKdGQyjscrycfvxejI7LaULwnVzkt35J7WSeStYDHYRTn6E9bD0Q3I8aQj1V0NIWveH
- t9eZjY+JJwosrHJHA/8l6vZ+jfA5WuX80qxynLLe9NmSxHDJYAhGU00NJN4mGdPSyvFclpNYTV6
- jlUZ1nJOwfY0VSGsk7c5MUubUEfyHCCOBVM34F4Y62mVmD4jDbuId4buCSgXhMz055jUWYdDHCC
- OgqGNrPIuM7045SGvUA==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTAzMDA2NSBTYWx0ZWRfX0X/aqj8oF2r5
- rfq5Z1bsRv9T2ba791zsggrgXtEH/jLPIdi2ylCBbp6MGeR54zBTNyDelahq4t8QEvK1o6oUqQb
- b1RJVXjHXF8D6NMzh7wq5/2G14WXWlw=
+ a=3WHJM1ZQz_JShphwDgj5:22 a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8
+ a=J0W4MLQvuRnRs0Yz00oA:9 a=Fb7bYR2P3A6y1XGc:21
+X-Proofpoint-GUID: E1bW4Uv51lOc5sZtLkBv_CxoReTJRQON
+X-Proofpoint-ORIG-GUID: E1bW4Uv51lOc5sZtLkBv_CxoReTJRQON
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTAzMDA2NSBTYWx0ZWRfXzlkTuz3fQDca
+ 4KJPwfG3n6Fup4K9WErVzeniJOa3WKAAsuukUliJJhWPOO5ngARBQZeihu30gBqaMitqA+oQFOe
+ VWXiAbLtf9H+CMnamC6DAIZ7OTU0K28=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTAzMDA2NSBTYWx0ZWRfX6/YDWcvw1MLp
+ Dz3biDTxNJfl6RxLIiTTIJbbU9dt07MI9E+iK+2hJIxJE1EgiwlgbMIPRkEyRX3oaQIfmTZWfSE
+ CdRwDpEgoGf8ONYoQZOsPTPSJjbqyEcjJ+blBD8KpjuAVx7Ctp1rGo71sLHpofD7Czfz2QuWtD8
+ 7MI9LCh32nBKQnoIO5EisSKZ5Ry9yGzS3P/4/MXdpRwzoodYxFApT28lX6R7ZQm6AcFDQhzma0o
+ cSx2/0DvrJ7iwd7WD0n1O2XDj9J6lF5Uwb04/LyUayAuoYmkbGt5+3zIMHcSrh4K3eiXZ5ZGMF4
+ nBEdb8IGSx45IrMKqpB0pamhOVfvoqQNKsqHA49Us8WsI/RO/YrZQCXa+sEDy6UsqDQ6FiyBi08
+ xtIXCEGEGmISIeAiJkcWcLXefM6iiMtl5944xOYOQSeEwps7iv6eoFEdG6hB43KV65bBHD1Ova/
+ mtj+0ABExbpZdiAQWiw==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-09-03_02,2026-09-02_04,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- bulkscore=0 spamscore=0 adultscore=0 impostorscore=0 malwarescore=0
- phishscore=0 clxscore=1011 priorityscore=1501 lowpriorityscore=0
- suspectscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
- definitions=main-2609030065
+ priorityscore=1501 phishscore=0 malwarescore=0 bulkscore=0 suspectscore=0
+ clxscore=1011 spamscore=0 lowpriorityscore=0 adultscore=0 impostorscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2609030065
 
 
-Add qaif.h to hold common definitions shared by the QAIF CPU DAI and PCM
-platform drivers. Also update LPASS_MAX_PORT in common.h to cover the
-newly added QAIF DAI ID range.
+This series introduces the Qualcomm Audio Interface (QAIF) driver for
+the Shikra audio platform.
 
-QAIF exposes AIF DMA paths for external audio interfaces and CIF DMA paths
-for the internal codec interface. The two drivers need a common place to
-describe DMA channel allocation, regmap fields, interrupt dispatch, SHRAM
-buffer tracking and per-stream runtime data.
 
-Introduce the QAIF driver data, AIF and CIF register-field descriptions,
-IRQ mapping helpers and SoC variant descriptor. The variant descriptor
-describes the register layout, DMA channel counts, clock names, DAI table
-and platform callbacks used by the QAIF driver code.
+Hardware IP Overview
+====================
+QAIF (Qualcomm Audio Interface) is a fully configurable DMA-based audio
+subsystem used to transmit and receive audio data over serial audio
+interfaces (PCM, TDM, MI2S) and to provide a DMA interface for internal
+codec connections. It manages two independent data paths:
 
-Signed-off-by: Harendra Gautam <harendra.gautam@oss.qualcomm.com>
----
- sound/soc/qcom/common.h |   3 +-
- sound/soc/qcom/qaif.h   | 302 ++++++++++++++++++++++++++++++++++++++++
- 2 files changed, 304 insertions(+), 1 deletion(-)
+  AIF (Audio Interface): multiple multi-lane Unified Audio Interfaces,
+  each supporting up to 8 independent data lanes. Each lane is individually
+  configurable as TX (output/speaker) or RX (input/mic). All lanes of an
+  interface share a single bit clock and frame sync. Supported modes are
+  PCM (short/long sync), TDM, and MI2S (stereo/mono). Per-interface
+  configuration includes sync source (master/slave), sync mode, sync delay,
+  sync inversion, slot width (8/16/24/32-bit), sample width, active slot
+  masks (up to 32 slots), bits-per-lane frame size, lane enable/direction
+  masks, loopback, output-enable control, and full-cycle path support for
+  long chip-to-chip connections.
+
+  CIF (Codec Interface): multiple RDDMA (playback) and WRDMA (capture)
+  channels connecting to an internal codec over a parallel bus. Each channel
+  supports active-channel enable mask (up to 16 channels), frame-sync
+  selection, frame-sync delay, frame-sync output gating, dynamic clock
+  gating, and 16-bit packing/unpacking.
+
+  Note on RX/TX naming convention: in QAIF, TX refers to the output
+  (speaker/playback) direction and RX refers to the input (mic/capture)
+  direction. This applies to both AIF lane directions and CIF slot/mask
+  properties.
+
+  DMA Engine: RDDMA fetches audio from DDR/TCM/LPM into a shared SRAM
+  latency buffer (SHRAM) and drains it to the interface. WRDMA collects
+  data from the interface into SHRAM and writes it to memory. Each DMA
+  owns a private SHRAM region defined by start address and length registers.
+  Burst sizes of 1/2/4/8/16 beats (64-bit) are supported with up to 4
+  outstanding transactions per DMA. Two QSB master ports (QXM0 for TCM,
+  QXM1 for DDR/LPM) provide the memory interface.
+
+  Execution Environments (EE): Resources (DMAs, audio interfaces,
+  interface groups) are partitioned among up to 5 EEs via map registers.
+  Each EE owns a set of DMAs, audio interfaces, and interface groups, and
+  receives its own independent interrupt output. The interrupt hierarchy
+  has a two-level structure: a summary register identifies the event class
+  (DMA period, underflow/overflow, error response, audio interface
+  underflow/overflow, group done, rate detector, VFR), and per-resource
+  status registers identify the specific channel.
+
+  Interface Grouping (Bonding): Multiple AIF and CIF interfaces can be
+  bonded into a group to start synchronously and align their DMA period
+  interrupts within half a frame duration using the RDDMA padding feature.
+  Up to 6 groups are supported.
+
+  Rate Detector: Two rate detector blocks measure the frequency of
+  incoming frame sync or word select signals and generate interrupts on
+  rate change, undetected rate, or sync timeout.
+
+Block Diagram
+=============
+
+  System Memory (DDR / LPM / TCM)
+  +---------------------------------+
+  |  Circular Buffers (ping-pong)   |
+  +----------+----------+-----------+
+             |          ^
+       64-bit AXI  64-bit AXI
+             |          |
+  +----------v----------+-----------+
+  |        QSB Master Ports         |
+  |  +----------+  +----------+     |
+  |  |   QXM0   |  |   QXM1   |     |
+  |  +----+-----+  +-----+----+     |
+  +-------|--------------|----------+
+          |              |
+  +-------v--------------v----------+
+  |         Shared RAM (SHRAM)       |
+  |  +------------+  +------------+ |
+  |  | QXM0 Read  |  | QXM0 Write | |
+  |  | SHRAM      |  | SHRAM      | |
+  |  +------------+  +------------+ |
+  |  +------------+  +------------+ |
+  |  | QXM1 Read  |  | QXM1 Write | |
+  |  | SHRAM      |  | SHRAM      | |
+  |  +------------+  +------------+ |
+  +---+--------+--------+-------+---+
+      |        |        |       |
+  +---v--+  +--v---+ +--v---+ +-v----+
+  |RDDMA |  |RDDMA | |WRDMA | |WRDMA |
+  | AIF  |  | CIF  | | AIF  | | CIF  |
+  |[0..n]|  |[0..n]| |[0..n]| |[0..n]|
+  +--+---+  +--+---+ +--+---+ +-+----+
+     |         |       ^          ^
+     | TX      | TX    | RX       | RX
+     v         v       |          |
+  +--+--------------------+  +----+----------+
+  |  Unified Audio Intf   |  | Codec DMA     |
+  |  (AIF 0..12)          |  | Interface     |
+  |                       |  | (CIF)         |
+  |  AUD_INTFa block:     |  |               |
+  |  - Serializer (TX)    |  | RDDMA: DDR -> |
+  |  - De-serializer (RX) |  |   internal    |
+  |  - Sync gen/detect    |  |   codec       |
+  |  - Up to 8 data lanes |  | WRDMA: codec  |
+  |  - PCM / TDM / MI2S   |  |   -> DDR      |
+  |  - Near Pad Logic     |  | Up to 16 ch   |
+  +--+--------------------+  +----+----------+
+     |  Lane 0..7 (TX/RX)       |  Parallel bus
+     |  Bit clk + Frame sync    |  + Frame sync
+     v                          v
+  +--+--------+          +------+------+
+  | External  |          | Internal    |
+  | Serial    |          | Digital     |
+  | Peripherals|         | Codec       |
+  | (PCM/TDM/ |          | (Bolero/    |
+  |  MI2S)    |          |  WCD)       |
+  +-----------+          +-------------+
+
+Software Design
+===============
+The driver follows the standard ALSA SoC split:
+
+  qaif-cpu.c: CPU DAI component. Manages clocks, implements DAI ops
+  (startup/shutdown/hw_free/hw_params/trigger) for both AIF and CIF
+  paths using direct regmap_update_bits() calls with address macros from
+  qaif-reg.h, registers an of_xlate_dai_name callback so that sound-dai
+  references using non-sequential DAI IDs resolve correctly, and parses
+  per-interface AIF configuration from DT child nodes. AIF child nodes
+  use standard properties (dai-format, dai-tdm-slot-*, qcom,qaif-aif-
+  lane-map) without a compatible string; the protocol is identified by
+  dai-format and set_fmt() is called by the machine driver.
+
+  qaif-platform.c: PCM platform component. Handles DMA buffer allocation
+  (dma_alloc_pages()), PCM ops (open/close/hw_params/prepare/trigger/
+  pointer/mmap/copy), table-driven two-level IRQ dispatch with
+  period-elapsed notification, and component suspend/resume across power
+  collapse.
+
+  qaif-shikra.c: Shikra SoC-specific variant descriptor. Provides
+  register base addresses, DMA channel counts, SHRAM geometry, clock
+  names and the DAI driver array. This abstraction keeps the core driver
+  portable across future QAIF integrations.
+
+  qaif.h / qaif-reg.h: Shared data structures, constants and the complete
+  MMIO register address map consumed by both the CPU and platform drivers.
+
+  soc-core.c: This series adds snd_soc_of_xlate_dai_name() as a generic
+  ASoC helper that resolves a sound-dai phandle argument to a DAI name by
+  searching the component DAI list by ID. Both lpass-cpu.c and qaif-cpu.c
+  assign it directly as .of_xlate_dai_name, removing their private
+  implementations.
+
+The series is split by functionality to aid review -- register map and
+data structures first, then CPU DAI ops with regmap and DT parsing, the
+of_xlate helper, PCM ops, IRQ handling and finally the Shikra variant
+glue.
+
+Link to v3:
+  https://lore.kernel.org/lkml/20260824063627.3595610-1-harendra.gautam@oss.qualcomm.com/
+Link to v2:
+  https://lore.kernel.org/lkml/20260701105757.2779738-1-harendra.gautam@oss.qualcomm.com/
+Link to v1:
+  https://lore.kernel.org/lkml/20260605103739.3557573-1-harendra.gautam@oss.qualcomm.com/
+
+Changes in v4:
+  - binding: rename to qcom,shikra-qaif-cpu (Krzysztof Kozlowski)
+  - qcom,q6dsp-lpass-ports.h: add AIF DAI IDs (153-204) after
+    LPI_MI2S_TX_6 with RX/TX split per port; CIF DAIs reuse existing
+    RX_CODEC_DMA_RX_* and VA_CODEC_DMA_TX_* IDs (Srinivas Kandagatla)
+  - qcom,qaif.h: removed; DAI IDs now in qcom,q6dsp-lpass-ports.h
+  - common.h: update LPASS_MAX_PORT to AIF_TDM_TX_12 + 1
+  - qaif.h: rename helpers to qaif_is_aif_mi2s_port(),
+    qaif_is_aif_tdm_port(), qaif_is_cif_port(); use unsigned int
+  - qaif-cpu.c: remove qaif_cif_intf_reg(); use substream direction to
+    select RDDMA/WRDMA register; move .of_xlate_dai_name to patch 6
+  - qaif-shikra.c: split AIF DAI entries into separate RX/TX per port;
+    use DAI-local stream_name values; merge cif_rx/va_dma_dai_map;
+    update get_dma_idx() and alloc_stream_dma_idx() (Srinivas Kandagatla)
+  - soc-core.c / lpass-cpu.c: split into two patches for easier
+    backporting (Kuninori Morimoto)
+  - qaif-platform.c: unlock stream_lock before stream_dma_idx check,
+    eliminating goto err_unlock; move variant callback validation to
+    platform_register(); remove free_stream_dma_idx null checks
+  - All patches: fix missing blank line between Cc headers and commit
+    body (caused commit message to appear missing on lore)
+
+Changes in v3:
+  - series restructured: replace regmap_field abstraction with direct
+    regmap_update_bits(); merge CIF/AIF DAI ops and regmap/DT/init into
+    single CPU DAI patch; move of_xlate_dai_name to soc-core.c (was
+    qcom/common.c); split Shikra variant into qaif-shikra.c; add
+    Kconfig/Makefile and MAINTAINERS entries
+  - binding: rename aif-interface@N to aif@N; remove compatible from
+    child nodes; replace custom qcom,qaif-aif-sync-*/qcom,qaif-aif-lane-*
+    properties with standard dai-format and dai-tdm-slot-*; fix example
+    to aif@d7/reg=<215>; allow hex unit addresses; fix CIF channel count
+    to 10; clarify QAIF_CDC_DMA_* IDs are sound-dai references only
+  - qcom,qaif.h: replace QAIF_MI2S_TDM_AIF0..12 with separate
+    QAIF_MI2S_AIF* (200-212) and QAIF_TDM_AIF* (213-225); renumber CIF
+    IDs to RX (226-235), TX (236-245), VA_TX (246-255)
+  - qaif.h: add qaif_ prefix to is_cif_dma_port() and new is_mi2s_port(),
+    is_tdm_port(), is_aif_port() helpers; add QAIF_MI2S_SLOTS; add
+    comments on smmu_csid_bits and ee fields
+  - qaif-reg.h: rename CODEC_ prefix to CDC_; rename UF/OF IRQ macros;
+    add _REG suffix to CDC debug/status macros
+  - qaif-cpu.c: fix MI2S sync config per HPG; replace custom sync/lane
+    DT properties with set_fmt()/set_tdm_slot() DAI ops; replace
+    clk_prepare/clk_enable pairs with clk_prepare_enable; remove codec
+    DAI set_tdm_slot/set_sysclk from hw_params(); use devm unwind
+  - qaif-shikra.c: new file; separate MI2S and TDM DMA maps; restrict
+    MI2S formats to S16|S32; widen TDM AIF constraints; rename VA DAI
+    names to "CDC DMA VA_TX*"
+  - soc-core.c: move of_xlate_dai_name helper from qcom/common.c to
+    soc-core.c as snd_soc_of_xlate_dai_name() generic ASoC helper
+  - lpass-cpu.c: remove local xlate wrapper; use snd_soc_of_xlate_dai_name()
+  - qaif-platform.c: move dma_set_mask_and_coherent() to probe; fix IRQ
+    dispatch READ_ONCE() race; add synchronize_irq() via .sync_stop;
+    always proceed to IRQ_DISABLE in trigger(STOP) if dynclk fails
+
+Changes in v2:
+  - Rename YAML file to qcom,qaif-cpu.yaml, add qcom,qaif-cpu compatible
+  - Merge DAI ID header into binding patch, drop _clk suffix from
+    clock-names, add enum constraints, remove status: true (Krzysztof)
+  - Fix dt_binding_check failure in binding example (Rob)
+  - Fix IRQ storm: client status register bitmask missing BIT(16)
+  - Fix race: use test_and_set_bit for DMA bitmap allocation
+  - Fix regmap_config: use non-const with dynamic max_register
+  - Use dev_err_probe() in probe path, sizeof(*var) in kzalloc (Krzysztof)
+  - Add kerneldoc for all EXPORT_SYMBOL_GPL functions (Krzysztof)
+  - Use goto-based error cleanup in pcmops_open()
+  - Move MAINTAINERS entry to last patch (Krzysztof)
+  - Add shared asoc_qcom_of_xlate_dai_name() helper used by lpass-cpu
+    and qaif-cpu
+  - Fix checkpatch --strict warnings and alignment issues
+
+Harendra Gautam (10):
+  ASoC: dt-bindings: qcom,shikra-qaif-cpu: Add binding
+  ASoC: qcom: Add QAIF shared data structures and variant interface
+  ASoC: qcom: Add QAIF hardware register map
+  ASoC: qcom: Add QAIF CPU DAI ops, regmap, DT parsing and platform init
+  ASoC: soc-core: Add snd_soc_of_xlate_dai_name() generic helper
+  ASoC: qcom: Switch lpass-cpu and qaif-cpu to
+    snd_soc_of_xlate_dai_name()
+  ASoC: qcom: Add QAIF PCM operations
+  ASoC: qcom: Add QAIF IRQ handling, suspend/resume and platform
+    register
+  ASoC: qcom: Add Shikra QAIF support
+  MAINTAINERS: Add Qualcomm QAIF driver entry
+
+ .../bindings/sound/qcom,shikra-qaif-cpu.yaml        | 308 ++++++++++++++++++
+ MAINTAINERS                                         |   9 +++++++++
+ include/dt-bindings/sound/qcom,q6dsp-lpass-ports.h |  52 ++++++++++++++++++++
+ include/sound/soc.h                                 |   3 +++
+ sound/soc/qcom/Kconfig                              |  10 ++++++++++
+ sound/soc/qcom/Makefile                             |   3 +++
+ sound/soc/qcom/common.h                             |   3 ++-
+ sound/soc/qcom/lpass-cpu.c                          |  23 +---------------------
+ sound/soc/qcom/qaif-cpu.c                           | 875 ++++++++++++++++++++
+ sound/soc/qcom/qaif-platform.c                      | 928 +++++++++++++++++++++++
+ sound/soc/qcom/qaif-reg.h                           | 458 ++++++++++++++++++++++
+ sound/soc/qcom/qaif-shikra.c                        | 447 ++++++++++++++++++++++
+ sound/soc/qcom/qaif.h                               | 302 +++++++++++++++++++++
+ sound/soc/soc-core.c                                |  33 ++++++++++++++++++++++
+ 14 files changed, 3431 insertions(+), 23 deletions(-)
+ create mode 100644 Documentation/devicetree/bindings/sound/qcom,shikra-qaif-cpu.yaml
+ create mode 100644 sound/soc/qcom/qaif-cpu.c
+ create mode 100644 sound/soc/qcom/qaif-platform.c
+ create mode 100644 sound/soc/qcom/qaif-reg.h
+ create mode 100644 sound/soc/qcom/qaif-shikra.c
  create mode 100644 sound/soc/qcom/qaif.h
-
-diff --git a/sound/soc/qcom/common.h b/sound/soc/qcom/common.h
-index c1deac109f24..3bc45fcfc62e 100644
---- a/sound/soc/qcom/common.h
-+++ b/sound/soc/qcom/common.h
-@@ -5,9 +5,10 @@
- #define __QCOM_SND_COMMON_H__
- 
- #include <dt-bindings/sound/qcom,q6afe.h>
-+#include <dt-bindings/sound/qcom,q6dsp-lpass-ports.h>
- #include <sound/soc.h>
- 
--#define LPASS_MAX_PORT			(LPI_MI2S_TX_6 + 1)
-+#define LPASS_MAX_PORT			(AIF_TDM_TX_12 + 1)
- 
- struct qcom_snd_tdm_slot_cfg {
- 	unsigned int tx_mask;
-diff --git a/sound/soc/qcom/qaif.h b/sound/soc/qcom/qaif.h
-new file mode 100644
-index 000000000000..ba02784771a2
---- /dev/null
-+++ b/sound/soc/qcom/qaif.h
-@@ -0,0 +1,302 @@
-+/* SPDX-License-Identifier: GPL-2.0-only */
-+/*
-+ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
-+ */
-+
-+#ifndef SND_SOC_QCOM_QAIF_H
-+#define SND_SOC_QCOM_QAIF_H
-+
-+#include <linux/bits.h>
-+#include <linux/clk.h>
-+#include <linux/interrupt.h>
-+#include <linux/mutex.h>
-+#include <linux/regmap.h>
-+#include <linux/types.h>
-+#include <sound/pcm.h>
-+#include <dt-bindings/sound/qcom,q6dsp-lpass-ports.h>
-+
-+struct snd_pcm_substream;
-+struct snd_soc_dai_driver;
-+struct snd_soc_dai_ops;
-+struct platform_device;
-+
-+#define QAIF_CIF_DMA_INTF_ONE_CHANNEL		0x01
-+#define QAIF_CIF_DMA_INTF_TWO_CHANNEL		0x03
-+#define QAIF_CIF_DMA_INTF_FOUR_CHANNEL		0x0f
-+#define QAIF_CIF_DMA_INTF_SIX_CHANNEL		0x3f
-+#define QAIF_CIF_DMA_INTF_EIGHT_CHANNEL		0xff
-+
-+#define QAIF_AIF_SLOT_WIDTH(bits)		((bits) - 1)
-+#define QAIF_AIF_SAMPLE_WIDTH(bits)		((bits) - 1)
-+
-+/* Watermark level 5 encoded as N-1: hardware field value = watermark - 1 */
-+#define QAIF_DMACTL_WM_5			4
-+
-+#define QAIF_DMA_BYTES_TO_WORDS_SHIFT		3
-+#define QAIF_DMA_CLOCK_FREQ			38400000
-+
-+#define QAIF_MAX_AIF_CFG_CNT			4
-+#define QAIF_MAX_LANES				8
-+
-+#define QAIF_MAX_MI2S_PORTS			8
-+#define QAIF_MI2S_SLOTS				2
-+#define QAIF_MAX_AIF_DMA_IDX			8
-+#define QAIF_MAX_CIF_DMA_IDX			8
-+
-+/* SID map register CSID field (WRDMA_SID/RDDMA_SID), bits [4:0] */
-+#define QAIF_CSID_MASK				GENMASK(4, 0)
-+
-+static inline bool qaif_is_aif_mi2s_port(unsigned int dai_id)
-+{
-+	return (dai_id >= AIF_MI2S_RX_0 && dai_id <= AIF_MI2S_RX_12) ||
-+	       (dai_id >= AIF_MI2S_TX_0 && dai_id <= AIF_MI2S_TX_12);
-+}
-+
-+static inline bool qaif_is_aif_tdm_port(unsigned int dai_id)
-+{
-+	return (dai_id >= AIF_TDM_RX_0 && dai_id <= AIF_TDM_RX_12) ||
-+	       (dai_id >= AIF_TDM_TX_0 && dai_id <= AIF_TDM_TX_12);
-+}
-+
-+static inline bool qaif_is_aif_port(unsigned int dai_id)
-+{
-+	return qaif_is_aif_mi2s_port(dai_id) || qaif_is_aif_tdm_port(dai_id);
-+}
-+
-+static inline bool qaif_is_cif_port(unsigned int dai_id)
-+{
-+	return (dai_id >= WSA_CODEC_DMA_RX_0 && dai_id <= RX_CODEC_DMA_RX_7);
-+}
-+
-+enum qxm_sel {
-+	QAIF_QXM0 = 0,
-+	QAIF_QXM1 = 1,
-+};
-+
-+enum qaif_irq_type {
-+	QAIF_AIF_IRQ = 0,
-+	QAIF_CIF_IRQ = 1,
-+	QAIF_IRQ_TYPE_MAX,
-+};
-+
-+enum qaif_dma_type {
-+	QAIF_AIF_DMA = 0,
-+	QAIF_CIF_DMA = 1,
-+};
-+
-+struct qaif_aif_config {
-+	u32 sync_mode;
-+	u32 sync_src;
-+	bool invert_sync;
-+	u32 sync_delay;
-+	u32 slot_width;
-+	u32 slot_en_rx_mask;
-+	u32 slot_en_tx_mask;
-+	bool loopback_en;
-+	bool ctrl_data_oe;
-+	u32 lane_en_mask;
-+	u32 lane_dir_mask;
-+	bool full_cycle_en;
-+	u32 slot_num;
-+};
-+
-+struct qaif_pcm_data {
-+	/* Flat slot in aif_substream[]/aif_dma_heap[] (or cif_*) used to track
-+	 * this stream. Direction-encoded: playback uses the raw DMA channel
-+	 * number (0..num_rddma-1), capture adds wrdma_start so playback and
-+	 * capture of the same DAI occupy distinct slots.
-+	 * Set by alloc_stream_dma_idx(); bounded by QAIF_MAX_AIF/CIF_DMA_IDX.
-+	 */
-+	int stream_dma_idx;
-+	/* Hardware channel number (0-based within its DMA bank) passed to
-+	 * register address helpers (e.g. QAIF_RDDMA_CFG_REG(v, chan)).
-+	 * Direction-agnostic: the register helpers select RDDMA or WRDMA bank
-+	 * based on stream direction, so both directions of the same DAI share
-+	 * the same value. Set by get_dma_idx().
-+	 */
-+	int dma_reg_idx;
-+};
-+
-+/* Named 0-based DMA channel indices used as the dma_idx of a
-+ * qaif_dmaidx_dai_map entry, so board tables reference channels by name.
-+ */
-+enum qaif_dma_idx {
-+	QAIF_DMA_IDX0 = 0,
-+	QAIF_DMA_IDX1,
-+	QAIF_DMA_IDX2,
-+	QAIF_DMA_IDX3,
-+	QAIF_DMA_IDX4,
-+	QAIF_DMA_IDX5,
-+	QAIF_DMA_IDX6,
-+	QAIF_DMA_IDX7,
-+};
-+
-+/* Associates a DAI ID with its physical DMA channel index on a given
-+ * board/variant. @dai_id is the DAI to match; @dma_idx (a qaif_dma_idx value)
-+ * is the 0-based hardware channel that get_dma_idx() returns for it.
-+ */
-+struct qaif_dmaidx_dai_map {
-+	unsigned int dai_id;
-+	int dma_idx;
-+};
-+
-+struct qaif_dma_mem_info {
-+	dma_addr_t dma_addr;
-+	size_t alloc_size;
-+	void *vaddr;
-+};
-+
-+struct qaif_drv_data {
-+	struct clk *mi2s_bit_clk[QAIF_MAX_MI2S_PORTS];
-+	struct clk_bulk_data *clks;
-+	int num_clks;
-+	struct clk *aud_dma_clk;
-+	struct clk *aud_dma_mem_clk;
-+	void __iomem *audio_qaif;
-+	struct regmap *audio_qaif_map;
-+	int audio_qaif_irq;
-+	struct mutex stream_lock; /* serializes stream open/close */
-+	bool qaif_hw_configured;
-+	const struct qaif_variant *variant;
-+	struct qaif_aif_config aif_intf_cfg[QAIF_MAX_AIF_CFG_CNT];
-+	unsigned long aif_dma_idx_bit_map;
-+	unsigned long cif_dma_idx_bit_map;
-+	struct snd_pcm_substream *aif_substream[QAIF_MAX_AIF_DMA_IDX];
-+	struct snd_pcm_substream *cif_substream[QAIF_MAX_CIF_DMA_IDX];
-+	u32 smmu_csid_bits;		/* SMMU stream ID bits from DT iommus cell */
-+	struct qaif_dma_mem_info *aif_dma_heap[QAIF_MAX_AIF_DMA_IDX];
-+	struct qaif_dma_mem_info *cif_dma_heap[QAIF_MAX_CIF_DMA_IDX];
-+};
-+
-+enum qaif_summary_irq_bitmask {
-+	QAIF_SUMMARY_BITMASK_AIF_PERIOD_RDDMA		= BIT(0),
-+	QAIF_SUMMARY_BITMASK_AIF_UNDERFLOW_RDDMA	= BIT(1),
-+	QAIF_SUMMARY_BITMASK_AIF_ERR_RSP_RDDMA		= BIT(2),
-+	QAIF_SUMMARY_BITMASK_AIF_PERIOD_WRDMA		= BIT(3),
-+	QAIF_SUMMARY_BITMASK_AIF_OVERFLOW_WRDMA		= BIT(4),
-+	QAIF_SUMMARY_BITMASK_AIF_ERR_RSP_WRDMA		= BIT(5),
-+	QAIF_SUMMARY_BITMASK_CIF_PERIOD_RDDMA		= BIT(18),
-+	QAIF_SUMMARY_BITMASK_CIF_UNDERFLOW_RDDMA	= BIT(19),
-+	QAIF_SUMMARY_BITMASK_CIF_ERR_RSP_RDDMA		= BIT(20),
-+	QAIF_SUMMARY_BITMASK_CIF_PERIOD_WRDMA		= BIT(24),
-+	QAIF_SUMMARY_BITMASK_CIF_OVERFLOW_WRDMA		= BIT(25),
-+	QAIF_SUMMARY_BITMASK_CIF_ERR_RSP_WRDMA		= BIT(26),
-+};
-+
-+enum qaif_client_status_register_bitmask_info {
-+	QAIF_BITMASK_AIF_RDDMA_WRDMA	= GENMASK(5, 0),
-+	QAIF_BITMASK_CIF_RDDMA_WRDMA	= GENMASK(26, 18),
-+};
-+
-+struct qaif_irq_map {
-+	u32 client_id;
-+	u32 mask;
-+	/*
-+	 * Called from the hard IRQ handler (asoc_platform_qaif_irq()) with
-+	 * @status holding the summary interrupt status. Must not sleep.
-+	 */
-+	irqreturn_t (*client_irq_handler)(struct qaif_drv_data *drvdata, u32 status);
-+};
-+
-+enum qaif_dma_dir {
-+	QAIF_DMA_RDDMA = 0,
-+	QAIF_DMA_WRDMA = 1,
-+};
-+
-+enum qaif_irq {
-+	QAIF_IRQ_PERIOD = 0,
-+	QAIF_IRQ_OVERFLOW,
-+	QAIF_IRQ_UNDERFLOW,
-+	QAIF_IRQ_ERROR,
-+};
-+
-+enum qaif_irq_op {
-+	QAIF_IRQ_CLEAR = 0,
-+	QAIF_IRQ_ENABLE,
-+	QAIF_IRQ_DISABLE,
-+};
-+
-+enum qaif_client_info {
-+	QAIF_CLIENT_ID_AIF_DMA = 0,
-+	QAIF_CLIENT_ID_CIF_DMA,
-+};
-+
-+struct qaif_variant {
-+	u32 ee;				/* Hardware EE index assigned to this driver instance */
-+
-+	u32 num_rddma;
-+	u32 num_wrdma;
-+	u32 wrdma_start;
-+	u32 num_codec_rddma;
-+	u32 num_codec_wrdma;
-+	u32 codec_wrdma_start;
-+	u32 num_intf;
-+
-+	u32 rddma_reg_base;
-+	u32 rddma_stride;
-+	u32 codec_rddma_reg_base;
-+	u32 codec_rddma_stride;
-+	u32 wrdma_reg_base;
-+	u32 wrdma_stride;
-+	u32 codec_wrdma_reg_base;
-+	u32 codec_wrdma_stride;
-+
-+	u32 rddma_irq_reg_base;
-+	u32 rddma_irq_stride;
-+	u32 codec_rddma_irq_reg_base;
-+	u32 codec_rddma_irq_stride;
-+	u32 wrdma_irq_reg_base;
-+	u32 wrdma_irq_stride;
-+	u32 codec_wrdma_irq_reg_base;
-+	u32 codec_wrdma_irq_stride;
-+
-+	/* QSB master port selector; only QAIF_QXM0 is supported today */
-+	enum qxm_sel qxm_type;
-+	/* All *_len values below are SHRAM sizes in 64-bit words */
-+	u32 rd_len;
-+	u32 rddma_shram_len;
-+	/* SHRAM start offsets (in 64-bit words), indexed by enum qaif_dma_type */
-+	u32 rddma_shram_start_addr[2];
-+	u32 wr_len;
-+	u32 wrdma_shram_len;
-+	u32 wrdma_shram_start_addr[2];
-+
-+	const char * const *clk_name;
-+	int num_clks;
-+	struct snd_soc_dai_driver *dai_driver;
-+	int num_dai;
-+	const char * const *dai_bit_clk_names;
-+	/*
-+	 * Optional per-AIF configuration tables, indexed by AIF interface
-+	 * index (0..num_intf-1). NULL if the variant does not use them.
-+	 */
-+	const bool *aif_full_cycle_en;
-+	const bool *aif_ctrl_data_oe;
-+	const bool *aif_loopback_en;
-+
-+	/* Returns a direction-encoded flat slot index for use in
-+	 * aif_substream[]/cif_substream[] and the dma_idx_bit_map.
-+	 * Playback returns the raw channel number; capture adds wrdma_start (or
-+	 * codec_wrdma_start) so both directions of the same DAI get distinct
-+	 * slots. Sets the corresponding bit atomically; returns -EBUSY if
-+	 * already open, -EINVAL if @dai_id or the computed index is out of range.
-+	 */
-+	int (*alloc_stream_dma_idx)(struct qaif_drv_data *data, int direction,
-+				    unsigned int dai_id);
-+	/* Clears the bit set by alloc_stream_dma_idx. */
-+	int (*free_stream_dma_idx)(struct qaif_drv_data *data, int chan,
-+				   unsigned int dai_id);
-+	/* Returns the hardware channel number (0-based within its DMA bank)
-+	 * for @dai_id, direction-agnostic. Used as dma_reg_idx.
-+	 */
-+	int (*get_dma_idx)(unsigned int dai_id);
-+};
-+
-+extern const struct snd_soc_dai_ops asoc_qcom_qaif_cif_dai_ops;
-+extern const struct snd_soc_dai_ops asoc_qcom_qaif_aif_cpu_dai_ops;
-+
-+int asoc_qcom_qaif_cpu_platform_probe(struct platform_device *pdev);
-+int asoc_qcom_qaif_platform_register(struct platform_device *pdev);
-+extern const struct dev_pm_ops asoc_qcom_qaif_pm_ops;
-+
-+#endif /* SND_SOC_QCOM_QAIF_H */
--- 
+-- -- 
 2.34.1
 
