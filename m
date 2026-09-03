@@ -1,488 +1,420 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 193064B26FC
-	for <linux-arm-msm@vger.kernel.org>; Thu,  3 Sep 2026 14:10:10 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=205.220.180.131
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788444623; cv=pass; b=K4ElNT9ocS0jMYhAssLUKNIBAawmGVjDkep2BktmlfUOKJAup5FVsNAplUOyc9sduXtuc+Eo9ZpqV0LhAdoKQ17nDYytaX6QBH+vAv+inBzxOS1SiOS629poYughmndIlks4uGGwa2+yrtpEfLwtk3TBb5K87piEPsvf21Dm3d4=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788444623; c=relaxed/simple;
-	bh=bg7JMW9HA7L4LnLHkktmzOdPuphb4WszlBGNru/ZMRg=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=HRAfxiypFkIyaCitabh0nHl7kW7P/8Xcc3HqD/Sb2kKguvlacjSVc3G7MGTDw1PkhbzwPdV1eLA+sDVV7ObYbstInzWFBIJsK/QbcCNJk/+AAO1rDaSqGlhJF8mno6QCiVjv2hUoNPVDJUOyaMfC9RWHRNshpNsyMfx01NLbMdE=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=Uv1jxx6U; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=M9SFgF7A; arc=pass smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6F8A94B1465
+	for <linux-arm-msm@vger.kernel.org>; Thu,  3 Sep 2026 14:19:04 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1788445156; cv=none; b=GKlGv3f/sn3B//+V54q1zTRxpigO4xZ6qWhRX5O/xHkltsyxmyXmC2kUrlTvWqWX9GlwTAn+Mpw69YyT4ZnIz+Df1d/oWF8hGQcuCx6RTSXDYfjkv4rI4qrdBGF4enKdcA6oGDkK2dMzzIu12qt+eq3sX0E/CLJCv54p4DJR+Cg=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1788445156; c=relaxed/simple;
+	bh=aVsxz9DXw9erp/s4chS8cIt9Jc1QDB4z/C35yDdv8bM=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=LIx9FjPfJuNv+lXLyfVXzCUViu0Tftvj7+iYZqgPsIzY6TahEOCRgQl47ViJdPhKKZ2LpnZ2UJpyUUJ3k6tsO9gsYfotPOo539Om4HbtjaBU7tZN8anXATuHHbE6q9GxsIWrJkC+8ZCj8GQJEwI5SFpl3Ii11ojPO1kDhZQCCAQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=dFJG2Q2E; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=W++1KNia; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="Uv1jxx6U";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="M9SFgF7A"
-Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 683DAeE14158201
-	for <linux-arm-msm@vger.kernel.org>; Thu, 3 Sep 2026 14:10:07 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="dFJG2Q2E";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="W++1KNia"
+Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 683DANXI1314609
+	for <linux-arm-msm@vger.kernel.org>; Thu, 3 Sep 2026 14:19:00 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:reply-to:subject:to; s=
-	qcppdkim1; bh=oMUypB84u0QT6Lb2H2QJi89zaKP6tFwAPWUH6jFYujQ=; b=Uv
-	1jxx6Ulq1K5wRT1W7V1lDl2T/5u34FWexjqkKSclN0KIwZ2Y773s3uAm0SXfMilD
-	pGpx1VOmHrhZs2coZEnKTIEL3F9yje8GTAVJqTfQbsgA9f7gTXST3hJ3UcnIvp6G
-	LyUqk7ZsCz5QqferkIAO8/NnbTBprtUnuocu8bPxA9lB8/X3XzYOKB4juUpbYX+I
-	0xCMBwLvABj4OIwWF0wtfO6/67Nkpien4Q/LKlfCuS7qdUFCG4IrDrjL+TLDwHpH
-	OLVUkZg+jCgUoEHTEj19cigsiLPNPHGCFu90wLuhmb0QeEYrBdVbIyAXBZTxMXU7
-	XRrfbF81rKigKCD0HjxA==
-Received: from mail-oa1-f71.google.com (mail-oa1-f71.google.com [209.85.160.71])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gf5pds8x1-1
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	iPDaGFLS/lLjdSaKwQhej7CnULXLtZrtQ6LDHRChrzc=; b=dFJG2Q2Ea3Q/O0uV
+	4VWysPTuNx6UJAoYLkIrMP3BS49zSf5l5cI1wY2ndMVHTnbk9ywEHAz7o2hf/qqt
+	FuQdzmyLMtDOzDMOn02gK03T8P6SsGIksIfhcm3TESWYfvYL9v4/VL5eOaHSVxe5
+	dMemujhyR7aapXljovopp9N/TqCGvxSK+K5E5Qy1VAe0VgzIvptiTBWx8B6AkRqn
+	LI+hDf4kM/dUBCMZta9Bn/DYk4cf8Uk9oe/IZ3oqgH2hR+lE+cjt7SHBVH6L1B2I
+	8QA95ditJbvJZCQxbosyR2Nm6bFFHUv/ZYaBb9tlFld9qdrlySQjg/2vfByijvlo
+	Z+zg7w==
+Received: from mail-vk1-f199.google.com (mail-vk1-f199.google.com [209.85.221.199])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gerdncq05-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Thu, 03 Sep 2026 14:10:07 +0000 (GMT)
-Received: by mail-oa1-f71.google.com with SMTP id 586e51a60fabf-46dade0d7cdso2073346fac.1
-        for <linux-arm-msm@vger.kernel.org>; Thu, 03 Sep 2026 07:10:07 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1788444607; cv=none;
-        d=google.com; s=arc-20260327;
-        b=GPL2zwFsfNPhs/jwwVqHc5duLlRsM2HkZGRWUDUuVa0gNWiQRcGQEeOEIpa6LoT5mZ
-         Ky+bDjMug3SWn7lebeYlmiE3U8ojboCE61v9WQ92zKycFEibncK0VJmN30oa1HNwnscR
-         8dTC6bTF6iGslbJne8NSS3PpABIGzhqjfScks4vn/4D39vAI8J22K3mF+/7fCxsdZnjf
-         /gSXSsmcegOLeRa5U6h2s8kr2C/PaHM13m9Ba729i6VyH4+bC6jcMC4fUdMjVvL85b0R
-         dl4JVcJ4SpjF8AV95vVZ8kqj9tSx0KUeT1/eAAYR6ofJ7uz8HwzrYY+xjXYvhrbcBGPE
-         SU5A==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :reply-to:in-reply-to:references:mime-version:dkim-signature;
-        bh=oMUypB84u0QT6Lb2H2QJi89zaKP6tFwAPWUH6jFYujQ=;
-        fh=+Ffmx67fvaAmXm1EFoBHtdTfQ3oYXEhisOrpVu1mmyQ=;
-        b=TOGdUV8x2rx8i+rPZ4/BiD//DNEkZ/OC2Vj9qnk63fKA/ftetpuy5aai/ZD+f/JVpn
-         EOiif8ggJsPrtEhm5B1cT3JA/yZ7Fsyh/lXbcDXZ3nYStE1EFc8bW9c1ibQmpdf7HdyV
-         avhdr3cd9iA+HK4mpox4jn5jVEfzJQJ+dIzaXwDKt3LnRbegc1efaos2o9Ei4rHvXkXb
-         ptLY8Ryt6eAxeVryMeY3lzLQPb+2A2bqhqi3x22acus63GXb9PVfx4v19VR9CbvWoX/b
-         dyW+cE++lqLHmc+1lz96hRME9xBeESSbj2GBs/qa8AFUcYB9uju3dpYLOiWwjD8xqEu8
-         MkTQ==;
-        darn=vger.kernel.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+	for <linux-arm-msm@vger.kernel.org>; Thu, 03 Sep 2026 14:18:59 +0000 (GMT)
+Received: by mail-vk1-f199.google.com with SMTP id 71dfb90a1353d-5c6645a6ab1so117728e0c.3
+        for <linux-arm-msm@vger.kernel.org>; Thu, 03 Sep 2026 07:18:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1788444607; x=1789049407; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:reply-to:in-reply-to:references:mime-version:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=oMUypB84u0QT6Lb2H2QJi89zaKP6tFwAPWUH6jFYujQ=;
-        b=M9SFgF7ArUJm9reJMC0KGZA4bGPLuYvXEa9Nwhq8ICRq5BMGKFCAlckaF+hD/0MI0y
-         DiNjmIb13h0QIkM+4uPG2wF0/AuSO9wYApIUk+2wO9KXsyMtU4jRNF83JV07rNqxQeUy
-         7MnkSEmzbalUIv2M2kI1gi/fPLblLt6d1QIBghEtTsiWBbRiGsjg0dihRZTUfYHCCqTQ
-         C2UYjXwqSAp3tQcMwMXp8M2KsFbFe8x75XPlmvaOpdrLetj6A/a4o+fo0z0hd4eqZPoA
-         RL/vn0acQj1TBZjbs7jQsvuG+w1lRHWo49tNdHnQmI+/bMT9WNTHfoyPomoMhgYGUD1P
-         hFsA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788444607; x=1789049407;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:reply-to:in-reply-to:references:mime-version:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+        d=oss.qualcomm.com; s=google; t=1788445139; x=1789049939; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=oMUypB84u0QT6Lb2H2QJi89zaKP6tFwAPWUH6jFYujQ=;
-        b=cX13JIt3Qugcp4O87ht+Bo+dfm3w5mnqyi1uYv8ya47WFsFBuuk6ePjeT/sGArpROl
-         LRRYV2EVM+esmE6F6OWDYJ++FDEmUOXPI1ij5zIPIIogAzb7wTQPk/3IzgEC3RrzuRuV
-         HyKin+Hh0iBjwJ1Nln0e7YBocPh7mCMlkFQZXwUlHrQmLhgPiGsp9WoE7Ia3vVyRSQMB
-         0QJwnub8yUOrTPv2Xo9lgQmDqpdKLKWzCcWIif3tk0MV0VQ5/Fy2qoxEAy/6nOaibvZ8
-         fxXx2q7doD3WG28Ow4JvR2PqIY+tM2XcYCl7DHNVf5flFJnbh68V3Q74oL6tgR6LQt6j
-         8stA==
-X-Forwarded-Encrypted: i=1; AKwUvBybnYYerWvZi//EVbkkcP6w9eAjwSU5X4nxcmGjH0X+yTCOrtTsk2TwrsDv7MCq8pEMaHylmm/IbZDi7Jr9@vger.kernel.org
-X-Gm-Message-State: AFuF++k+UOiSVhJykaWUC4ppOIHQCmim2CUegJv4DHOazygxJdkEZzeS
-	H2fUJkASlnUQDXgKInjjYY/0pZhw1lkjryUpWm8LgSCTBwTTf1zX4fjxgQZTfeQ+YrlpBiT8BK0
-	04ne6iQ2/iZgvaaHX9kUkDDzaBDkkc51eOOvbRwCkXAr4fMgkNL/2sktOt81b3P8geXJtDygslf
-	EZkJpdou1GP2pA4y0n3T4K7feOUnYoy4yqpL+GgJVBNtg=
-X-Gm-Gg: AYBFou3utVuYC2oO0EwwY0LQ8xNlQ6PRTZcBea6c5ElMClBTdRk24tnPzD/P29OFbvb
-	ndggt7oy0j5yZLw4ArEeEhYgpU6pnz3/7zbfxypGYS6c1QMNTbF8dis6WNpVnCwBZ2+u/LdKZfC
-	vxxa01bej0MniUc1JH93YUIgCKHQVFO2wJao4rcFqbLAnatL8i19GVDyPg
-X-Received: by 2002:a05:6870:1402:b0:465:8c3f:68e7 with SMTP id 586e51a60fabf-46f88934a51mr11070047fac.18.1788444606332;
-        Thu, 03 Sep 2026 07:10:06 -0700 (PDT)
-X-Received: by 2002:a05:6870:1402:b0:465:8c3f:68e7 with SMTP id
- 586e51a60fabf-46f88934a51mr11069953fac.18.1788444605613; Thu, 03 Sep 2026
- 07:10:05 -0700 (PDT)
+        bh=iPDaGFLS/lLjdSaKwQhej7CnULXLtZrtQ6LDHRChrzc=;
+        b=W++1KNiaYRXToDshu8UNLK4Fc7AMyZfVlXti/tWoGjPh0eO5D4JUrMsisIgKzjL26g
+         GUdfDFsDJBtcgDUkQvv/Gaq4YeRRdGW8FjMpxJK2K07CX+UnBVcfB7dx6goAWLqsLk2j
+         v9qxNz5aKQAs7x8srYdfmZ5ieE6b04vqdCPoOIvGiwBoW4YalLqPnDjzRKjfQuRxofR1
+         cBNW7ZODkaTENbN2Y+qkS5Cd4j6IMWeNGf3QxOE0ZYyUYuHqO+Z+Smw953JQhwqsEXD3
+         AyuFsM/C3UemPlFNnoY8IKx2IVMZtEBlzxWvCkJyaDjYNVNFJrUgmYgtHSDyZg6SIvlq
+         laMA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1788445139; x=1789049939;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=iPDaGFLS/lLjdSaKwQhej7CnULXLtZrtQ6LDHRChrzc=;
+        b=eDx5z61ehNX8yrilbRbFv50rakREZTac3XG4kewh01J8P0hwGNnXCHZDKnpFR0cc1p
+         rwfSuO1qplgOLtPDxgfEzpJ/O2KYA1lMqnSJdUk5q09Stf7VA1C6/aOxY15YwEZogUrj
+         UzgL6TDppbql8bGpVvwr225QCJnYVrCR+FB0fK3uDdEwN5nBd717pBbFWB4trPIr3QDR
+         gJnngRblEfP+zaC/MGjFI1pJknifO7lmGomXDPbQj2jN+EGDQwT2uN4JMA+MjO94ADzO
+         3YwgB1ReV0E3kNuuTeYu2XQ+aKY+7+JNX68eal4bPUyvJ5o8idhWBLy3fReZC7S9dRwK
+         yjeQ==
+X-Forwarded-Encrypted: i=1; AKwUvBwdrUWWUEYmjrhlrrQhqecE9OZ91JJGXqBHwLfUOjFWQOxGIh088HF3BC/JkWyTFpYkzirQjSHKvzJOtuCy@vger.kernel.org
+X-Gm-Message-State: AFuF++ln82CjN8PC3VPmjmDsQDn8BcPchK0sPv/+xXuGjx34iK5gpMBl
+	Yd4FnT/vrXpDA4hke/KAW75oPa3ntezWEU4nO6uzgHho7/EpraKl8hRHrTHMTOKahYm3AOVW13k
+	HQ08q5SGdhBbE5ov5Vvwr1yDDHS8guLWOOt6t9nq9x2iBpXuDYLzDNFDVKUB5COtvZWTk
+X-Gm-Gg: AYBFou2FUYSeIJo3WntZZHEcjj8U9/kd9AMiaQv0VTJWRespBBCCpXx6Gq2zDbp8yd2
+	4YT0Qtf7t3hUkxf1HUT+uMCmhWONb12eJrSjd6d4uqzv7Wa/0gIAKZnP+TmQ9dVksY722v7njHH
+	FgAXqgdVmVmeIQNxetPez5757XZks7TSHEwTzVVtGeMubBAF4sX4nbTpEZNpfFHE6d/K5exqI2x
+	RX0UoA8/uYx4HATokADJYhHJVnz0Z5yfKEaAWD8EeBv1a3zOSWV4AwCEvjK/RN2pc6qwhO7tPiv
+	JUqFm37yWi8O3T1FcW5Qjrw1Yk1ezj9Tlr73+OH+A59JMbjlEvPCcv/cB4OD4FjiFELjKKoU/pQ
+	JRRc5BxxwFMrwoTqtXS/Olg==
+X-Received: by 2002:a05:6102:6884:b0:786:8d84:5aca with SMTP id ada2fe7eead31-78a1f339246mr2199043137.2.1788445138591;
+        Thu, 03 Sep 2026 07:18:58 -0700 (PDT)
+X-Received: by 2002:a05:6102:6884:b0:786:8d84:5aca with SMTP id ada2fe7eead31-78a1f339246mr2199014137.2.1788445137740;
+        Thu, 03 Sep 2026 07:18:57 -0700 (PDT)
+Received: from [192.168.202.12] ([178.235.128.140])
+        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-6a67f895e14sm2261636a12.3.2026.09.03.07.18.53
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 03 Sep 2026 07:18:56 -0700 (PDT)
+Message-ID: <97149d63-4b74-4bd1-a9c5-798088316df9@oss.qualcomm.com>
+Date: Thu, 3 Sep 2026 16:18:52 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260901164544.642985-1-robin.clark@oss.qualcomm.com> <69a37b53-82e1-40bb-8266-206c3bff6af2@suse.de>
-In-Reply-To: <69a37b53-82e1-40bb-8266-206c3bff6af2@suse.de>
-Reply-To: rob.clark@oss.qualcomm.com
-From: Rob Clark <rob.clark@oss.qualcomm.com>
-Date: Thu, 3 Sep 2026 07:09:53 -0700
-X-Gm-Features: AcwNN1WDZnMCsjGX9OWYtrj50YqVbNqx9oHiZ-ljQXjvH1Ps5heYuZz5SI9_-Kg
-Message-ID: <CACSVV03XSo8U+8XR3Z=mQtD_kvHU_G22ne+Mb9yL1VHLc9SLTw@mail.gmail.com>
-Subject: Re: [PATCH v2] drm/gem: Drop ticket arg to lru_scan()
-To: Thomas Zimmermann <tzimmermann@suse.de>
-Cc: dri-devel@lists.freedesktop.org,
-        Boris Brezillon <boris.brezillon@collabora.com>,
-        Liviu Dudau <liviu.dudau@arm.com>,
-        Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
-        Maxime Ripard <mripard@kernel.org>, David Airlie <airlied@gmail.com>,
-        Simona Vetter <simona@ffwll.ch>, Dmitry Baryshkov <lumag@kernel.org>,
-        Abhinav Kumar <abhinav.kumar@linux.dev>,
-        Jessica Zhang <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>,
-        Marijn Suijten <marijn.suijten@somainline.org>,
-        Steven Price <steven.price@arm.com>,
-        open list <linux-kernel@vger.kernel.org>,
-        "open list:DRM DRIVER for Qualcomm display hardware" <linux-arm-msm@vger.kernel.org>,
-        "open list:DRM DRIVER for Qualcomm display hardware" <freedreno@lists.freedesktop.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTAzMDEyMyBTYWx0ZWRfXyBF/mkU50cWq
- Kd383QBcSfjfrik2xEXD9gVFNV2341kqILpzbYyIghyi+uDg+pKHvvNmCNmC6+T5BrREKLgfUVz
- RDkWp/wfWo6GA7yVbKExtTo5RX7bxL4=
-X-Proofpoint-ORIG-GUID: MtzWK8m5HJDSOxHoe69eb_4ASKvpd7Sk
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTAzMDEyMyBTYWx0ZWRfX8q/DI9e3JM7Q
- omsU9RImnHdvSiPSks5wc9/LAWe0I+CWU8nwQy/eyv3mLrCO3FWqE0yzfGvfR2dIg65LSK/oPJ1
- +RhkRejKslQ0hgjb3fZdCAkfcWPB25az0g/GHh5w8IZzM8hDsqQSvwG571FvSp5br6b7SVoPCTZ
- +vBoFDWnjnKGUcge1MZ12pcqAhEj2MujSPSrwgocTjMnYKLBkzJiTt2HFmEaHhCrD3aprB6Z/1M
- EzdtY7kKiyaZvGSEO+DcuaQPg+nhvXjGlfJYCAazgaGpaB29RN8O5zNUvS1+OC6kyC0eDoAHuA0
- HUf2p10qkevtQ5aqfI6MQx02P3lxh5B1Ua+uWb6h4/vZpT1NjUUWz4Yeneh/GPzcokOowNcB8g/
- KA4/8hcsoHqoN2MKIG4zorn4bUPWVS1HgQhwB0UQ6Gsyb5Jgo4IRhJdPGy3TC285KaLgf/wQ15+
- wUq8+MWc1it1FDz1BVQ==
-X-Authority-Analysis: v=2.4 cv=RsL16imK c=1 sm=1 tr=0 ts=6a997fbf cx=c_pps
- a=CWtnpBpaoqyeOyNyJ5EW7Q==:117 a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10
- a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
- a=yx91gb_oNiZeI1HMLzn7:22 a=EUspDBNiAAAA:8 a=QX4gbG5DAAAA:8 a=7CQSdrXTAAAA:8
- a=iox4zFpeAAAA:8 a=ovrPBvbf4G9EXlHTudsA:9 a=QEXdDO2ut3YA:10
- a=vh23qwtRXIYOdz9xvnmn:22 a=AbAUZ8qAyYyZVLSsDulk:22 a=a-qgeE7W1pNrGK8U0ZQC:22
- a=WzC6qhA0u3u7Ye7llzcV:22
-X-Proofpoint-GUID: MtzWK8m5HJDSOxHoe69eb_4ASKvpd7Sk
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 0/4] Fix up QUSB2 PHY description for MSM8996/SM61[12]5
+To: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+Cc: Konrad Dybcio <konradybcio@kernel.org>, Vinod Koul <vkoul@kernel.org>,
+        Neil Armstrong <neil.armstrong@linaro.org>,
+        Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley
+ <conor+dt@kernel.org>,
+        Wesley Cheng <quic_wcheng@quicinc.com>,
+        Iskren Chernev <me@iskren.info>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        Bjorn Andersson <andersson@kernel.org>, linux-arm-msm@vger.kernel.org,
+        linux-phy@lists.infradead.org, devicetree@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+References: <20260610-topic-8996_61x5_qusb2phy-v1-0-d7135980e78f@oss.qualcomm.com>
+ <b05e860e-ace5-4399-bbd9-493f7bbfe74d@oss.qualcomm.com>
+ <cnyhnyoce6v4d5roijrceuzd3ujvvw7ozklulaxkibptvjancm@cqbqu2aa7bz6>
+ <852caded-eacf-4ac1-8fe5-83dd9285ef11@oss.qualcomm.com>
+ <nrdf44ixzjqdyxdjnf54ucotpbncehjxjqygqnrknc66pyqfau@vm3emv662bub>
+Content-Language: en-US
+From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+In-Reply-To: <nrdf44ixzjqdyxdjnf54ucotpbncehjxjqygqnrknc66pyqfau@vm3emv662bub>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Authority-Analysis: v=2.4 cv=YcmNIQRf c=1 sm=1 tr=0 ts=6a9981d3 cx=c_pps
+ a=+D9SDfe9YZWTjADjLiQY5g==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
+ a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22
+ a=EUspDBNiAAAA:8 a=sT_kjUCmaLeEptA-OHkA:9 a=QEXdDO2ut3YA:10
+ a=vmgOmaN-Xu0dpDh8OwbV:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTAzMDEyNCBTYWx0ZWRfX3sC+Z2Z9GiwA
+ bzTNf3cjw24Bfz+po8I/IaXnyCrimrzFp1+AF1y0fZFhA9mIGcabZu0JWyRbzaW2q+icJlalfSJ
+ L0pkk/fKRktEi4MRKXMltLCdWOzI5Nk=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTAzMDEyNCBTYWx0ZWRfXwqTEvP1J15zL
+ kz0n4c6sJ24tsxtXJ4cf4HbBsa7M7XSArlHRSoOQjjfU+mqXGemDXGFDCLnooDQuE3vE7MxorgK
+ pHiCvq1u36CrTyOVx+UIr4sHpkeEwL6Trl8fw+rYaUWAVPwPQqFPWRZsYf/VX42owNtbbJcLQjn
+ OUD+xjR7yhxz1eUekRJi0J71dWcXnLfF06sVpvu9xD05pEjSXQKY5u3nSE7DR0kc7YwJJjaRwfc
+ ZzR5gozRR8iJl5lH8ToIsjUzr7PCB2isYwtNTe2zPymkkCdizFcpkpufICcZKDoMTj6vhFPjUHp
+ ZfWDK9/6arhTLtZWPWO11Q9cafVCY1UU38nLaqVwS8IqcALOri57WvgXSguLDCc3waouX6Oa0y8
+ 2KYbW+odAHBqgy28NEuV5SjFPudkTkPlfQguvZbVFfnE1xM9YMmCapCutsplvOnfr4Ae9MqbMLd
+ B1wuWHgshLyujJP0cFQ==
+X-Proofpoint-GUID: yOvXdzrP6MG1ZBxTMkcGh6CblDPeU74w
+X-Proofpoint-ORIG-GUID: yOvXdzrP6MG1ZBxTMkcGh6CblDPeU74w
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-09-03_04,2026-09-03_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- spamscore=0 phishscore=0 priorityscore=1501 suspectscore=0 clxscore=1015
- lowpriorityscore=0 adultscore=0 bulkscore=0 malwarescore=0 impostorscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2609030123
+ clxscore=1015 malwarescore=0 priorityscore=1501 lowpriorityscore=0
+ adultscore=0 phishscore=0 impostorscore=0 spamscore=0 suspectscore=0
+ bulkscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
+ adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2609030124
 
-On Tue, Sep 1, 2026 at 11:57=E2=80=AFPM Thomas Zimmermann <tzimmermann@suse=
-.de> wrote:
->
->
->
-> Am 01.09.26 um 18:45 schrieb Rob Clark:
-> > Commit 3392291fc509 ("drm/msm: Fix shrinker deadlock") dropped the only
-> > use of the ticket arg, but at the time left drm_gem_lru_scan() unchange=
-d
-> > to avoid conflicts with in-flight panthor shrinker support.  This commi=
-t
-> > is the followup to remove the unused arg.
-> >
-> > Signed-off-by: Rob Clark <robin.clark@oss.qualcomm.com>
-> > Reviewed-by: Boris Brezillon <boris.brezillon@collabora.com>
-> > Reviewed-by: Liviu Dudau <liviu.dudau@arm.com>
->
-> Reviewed-by: Thomas Zimmermann <tzimmermann@suse.de>
+On 6/10/26 3:20 PM, Dmitry Baryshkov wrote:
+> On Wed, Jun 10, 2026 at 03:13:01PM +0200, Konrad Dybcio wrote:
+>> On 6/10/26 3:03 PM, Dmitry Baryshkov wrote:
+>>> On Wed, Jun 10, 2026 at 02:49:31PM +0200, Konrad Dybcio wrote:
+>>>> On 6/10/26 2:04 PM, Konrad Dybcio wrote:
+>>>>> The MSM8996 QUSB2PHY was not being guaranteed a power source.
+>>>>> The SM6125's QUSB2PHY was believed to be idential as the 96 one. It
+>>>>> wasn't. This series tackles that, freeing us of some dt checker
+>>>>> errors about vdd-supply not found on MSM8996 boards.
 
-Could someone take this via drm-misc?
+[...]
 
-BR,
--R
+>> reg   96   pro
+>> 0x80 0xF8  0xD0 [!] QUSB2PHY_PORT_TUNE1
+>> 0x84 0xB3  0xB3
+>> 0x88 0x83  0x83
+>> 0x8C 0xC0  0xC0
+>> 0x90 none  0x02 [!] QUSB2PHY_PORT_TUNE5
+>> 0x08 0x30  0x30
+>> 0x0C 0x79  0x79
+>> 0x10 0x21  0x21
+>> 0x9C 0x14  0x14
+>> 0x1C 0x9F  0x9F
+>> 0x18 0x00  0x00
+>>
+>> apparently this is indeed SoC-specific (via docs) but also apparently
+>> may not be very important (although should be fixed regardless as
+>> some designs may rely on this)
+> 
+> Would you send a patch, please?
 
-> > ---
-> >
-> > v2: Drop left over kerneldoc param description, fix panthor spelling
-> >
-> >   drivers/gpu/drm/drm_gem.c              | 14 +++-----------
-> >   drivers/gpu/drm/msm/msm_gem_shrinker.c | 22 ++++++++++------------
-> >   drivers/gpu/drm/panthor/panthor_gem.c  | 14 ++++++--------
-> >   drivers/gpu/drm/panthor/panthor_mmu.c  |  5 ++---
-> >   drivers/gpu/drm/panthor/panthor_mmu.h  |  3 +--
-> >   include/drm/drm_gem.h                  |  3 +--
-> >   6 files changed, 23 insertions(+), 38 deletions(-)
-> >
-> > diff --git a/drivers/gpu/drm/drm_gem.c b/drivers/gpu/drm/drm_gem.c
-> > index e3ed684ddcf2..3113b4a53b99 100644
-> > --- a/drivers/gpu/drm/drm_gem.c
-> > +++ b/drivers/gpu/drm/drm_gem.c
-> > @@ -1649,15 +1649,13 @@ EXPORT_SYMBOL(drm_gem_lru_move_tail);
-> >    * @nr_to_scan: The number of pages to try to reclaim
-> >    * @remaining: The number of pages left to reclaim, should be initial=
-ized by caller
-> >    * @shrink: Callback to try to shrink/reclaim the object.
-> > - * @ticket: Optional ww_acquire_ctx context to use for locking
-> >    */
-> >   unsigned long
-> >   drm_gem_lru_scan(struct drm_device *dev,
-> >                struct drm_gem_lru *lru,
-> >                unsigned int nr_to_scan,
-> >                unsigned long *remaining,
-> > -              bool (*shrink)(struct drm_gem_object *obj, struct ww_acq=
-uire_ctx *ticket),
-> > -              struct ww_acquire_ctx *ticket)
-> > +              bool (*shrink)(struct drm_gem_object *obj))
-> >   {
-> >       struct drm_gem_lru still_in_lru;
-> >       struct drm_gem_object *obj;
-> > @@ -1690,20 +1688,17 @@ drm_gem_lru_scan(struct drm_device *dev,
-> >                */
-> >               mutex_unlock(&dev->gem_lru_mutex);
-> >
-> > -             if (ticket)
-> > -                     ww_acquire_init(ticket, &reservation_ww_class);
-> > -
-> >               /*
-> >                * Note that this still needs to be trylock, since we can
-> >                * hit shrinker in response to trying to get backing page=
-s
-> >                * for this obj (ie. while it's lock is already held)
-> >                */
-> > -             if (!ww_mutex_trylock(&obj->resv->lock, ticket)) {
-> > +             if (!ww_mutex_trylock(&obj->resv->lock, NULL)) {
-> >                       *remaining +=3D obj->size >> PAGE_SHIFT;
-> >                       goto tail;
-> >               }
-> >
-> > -             if (shrink(obj, ticket)) {
-> > +             if (shrink(obj)) {
-> >                       freed +=3D obj->size >> PAGE_SHIFT;
-> >
-> >                       /*
-> > @@ -1727,9 +1722,6 @@ drm_gem_lru_scan(struct drm_device *dev,
-> >
-> >               dma_resv_unlock(obj->resv);
-> >
-> > -             if (ticket)
-> > -                     ww_acquire_fini(ticket);
-> > -
-> >   tail:
-> >               drm_gem_object_put(obj);
-> >               mutex_lock(&dev->gem_lru_mutex);
-> > diff --git a/drivers/gpu/drm/msm/msm_gem_shrinker.c b/drivers/gpu/drm/m=
-sm/msm_gem_shrinker.c
-> > index 9d2788f79ace..3514d5c84989 100644
-> > --- a/drivers/gpu/drm/msm/msm_gem_shrinker.c
-> > +++ b/drivers/gpu/drm/msm/msm_gem_shrinker.c
-> > @@ -102,7 +102,7 @@ with_vm_locks(void (*fn)(struct drm_gem_object *obj=
-),
-> >   }
-> >
-> >   static bool
-> > -purge(struct drm_gem_object *obj, struct ww_acquire_ctx *unused)
-> > +purge(struct drm_gem_object *obj)
-> >   {
-> >       if (!is_purgeable(to_msm_bo(obj)))
-> >               return false;
-> > @@ -114,7 +114,7 @@ purge(struct drm_gem_object *obj, struct ww_acquire=
-_ctx *unused)
-> >   }
-> >
-> >   static bool
-> > -evict(struct drm_gem_object *obj, struct ww_acquire_ctx *unused)
-> > +evict(struct drm_gem_object *obj)
-> >   {
-> >       if (is_unevictable(to_msm_bo(obj)))
-> >               return false;
-> > @@ -133,21 +133,21 @@ wait_for_idle(struct drm_gem_object *obj)
-> >   }
-> >
-> >   static bool
-> > -active_purge(struct drm_gem_object *obj, struct ww_acquire_ctx *ticket=
-)
-> > +active_purge(struct drm_gem_object *obj)
-> >   {
-> >       if (!wait_for_idle(obj))
-> >               return false;
-> >
-> > -     return purge(obj, ticket);
-> > +     return purge(obj);
-> >   }
-> >
-> >   static bool
-> > -active_evict(struct drm_gem_object *obj, struct ww_acquire_ctx *ticket=
-)
-> > +active_evict(struct drm_gem_object *obj)
-> >   {
-> >       if (!wait_for_idle(obj))
-> >               return false;
-> >
-> > -     return evict(obj, ticket);
-> > +     return evict(obj);
-> >   }
-> >
-> >   static unsigned long
-> > @@ -156,7 +156,7 @@ msm_gem_shrinker_scan(struct shrinker *shrinker, st=
-ruct shrink_control *sc)
-> >       struct msm_drm_private *priv =3D shrinker->private_data;
-> >       struct {
-> >               struct drm_gem_lru *lru;
-> > -             bool (*shrink)(struct drm_gem_object *obj, struct ww_acqu=
-ire_ctx *ticket);
-> > +             bool (*shrink)(struct drm_gem_object *obj);
-> >               bool cond;
-> >               unsigned long freed;
-> >               unsigned long remaining;
-> > @@ -180,8 +180,7 @@ msm_gem_shrinker_scan(struct shrinker *shrinker, st=
-ruct shrink_control *sc)
-> >               stages[i].freed =3D
-> >                       drm_gem_lru_scan(priv->dev, stages[i].lru, nr,
-> >                                        &stages[i].remaining,
-> > -                                      stages[i].shrink,
-> > -                                      NULL);
-> > +                                      stages[i].shrink);
-> >               nr -=3D stages[i].freed;
-> >               freed +=3D stages[i].freed;
-> >               remaining +=3D stages[i].remaining;
-> > @@ -222,7 +221,7 @@ msm_gem_shrinker_shrink(struct drm_device *dev, uns=
-igned long nr_to_scan)
-> >   static const int vmap_shrink_limit =3D 15;
-> >
-> >   static bool
-> > -vmap_shrink(struct drm_gem_object *obj, struct ww_acquire_ctx *ticket)
-> > +vmap_shrink(struct drm_gem_object *obj)
-> >   {
-> >       if (!is_vunmapable(to_msm_bo(obj)))
-> >               return false;
-> > @@ -250,8 +249,7 @@ msm_gem_shrinker_vmap(struct notifier_block *nb, un=
-signed long event, void *ptr)
-> >               unmapped +=3D drm_gem_lru_scan(priv->dev, lrus[idx],
-> >                                            vmap_shrink_limit - unmapped=
-,
-> >                                            &remaining,
-> > -                                          vmap_shrink,
-> > -                                          NULL);
-> > +                                          vmap_shrink);
-> >       }
-> >
-> >       *(unsigned long *)ptr +=3D unmapped;
-> > diff --git a/drivers/gpu/drm/panthor/panthor_gem.c b/drivers/gpu/drm/pa=
-nthor/panthor_gem.c
-> > index 54535bae2b0c..17408f832af3 100644
-> > --- a/drivers/gpu/drm/panthor/panthor_gem.c
-> > +++ b/drivers/gpu/drm/panthor/panthor_gem.c
-> > @@ -1392,8 +1392,7 @@ panthor_gem_shrinker_count(struct shrinker *shrin=
-ker, struct shrink_control *sc)
-> >       return count ? count : SHRINK_EMPTY;
-> >   }
-> >
-> > -static bool panthor_gem_try_evict_no_resv_wait(struct drm_gem_object *=
-obj,
-> > -                                            struct ww_acquire_ctx *tic=
-ket)
-> > +static bool panthor_gem_try_evict_no_resv_wait(struct drm_gem_object *=
-obj)
-> >   {
-> >       /*
-> >        * Track last locked entry for unwinding locks in error and
-> > @@ -1479,8 +1478,7 @@ static bool panthor_gem_try_evict_no_resv_wait(st=
-ruct drm_gem_object *obj,
-> >       return ret =3D=3D 0;
-> >   }
-> >
-> > -static bool panthor_gem_try_evict(struct drm_gem_object *obj,
-> > -                               struct ww_acquire_ctx *ticket)
-> > +static bool panthor_gem_try_evict(struct drm_gem_object *obj)
-> >   {
-> >       struct panthor_gem_object *bo =3D to_panthor_bo(obj);
-> >
-> > @@ -1488,7 +1486,7 @@ static bool panthor_gem_try_evict(struct drm_gem_=
-object *obj,
-> >       if (dma_resv_wait_timeout(obj->resv, DMA_RESV_USAGE_BOOKKEEP, fal=
-se, 10) <=3D 0)
-> >               return false;
-> >
-> > -     return panthor_gem_try_evict_no_resv_wait(&bo->base, ticket);
-> > +     return panthor_gem_try_evict_no_resv_wait(&bo->base);
-> >   }
-> >
-> >   static unsigned long
-> > @@ -1503,13 +1501,13 @@ panthor_gem_shrinker_scan(struct shrinker *shri=
-nker, struct shrink_control *sc)
-> >
-> >       freed +=3D drm_gem_lru_scan(&ptdev->base, &ptdev->reclaim.unused,
-> >                                 sc->nr_to_scan - freed, &remaining,
-> > -                               panthor_gem_try_evict_no_resv_wait, NUL=
-L);
-> > +                               panthor_gem_try_evict_no_resv_wait);
-> >       if (freed >=3D sc->nr_to_scan)
-> >               goto out;
-> >
-> >       freed +=3D drm_gem_lru_scan(&ptdev->base, &ptdev->reclaim.mmapped=
-,
-> >                                 sc->nr_to_scan - freed, &remaining,
-> > -                               panthor_gem_try_evict_no_resv_wait, NUL=
-L);
-> > +                               panthor_gem_try_evict_no_resv_wait);
-> >       if (freed >=3D sc->nr_to_scan)
-> >               goto out;
-> >
-> > @@ -1523,7 +1521,7 @@ panthor_gem_shrinker_scan(struct shrinker *shrink=
-er, struct shrink_control *sc)
-> >
-> >       freed +=3D drm_gem_lru_scan(&ptdev->base, &ptdev->reclaim.gpu_map=
-ped_shared,
-> >                                 sc->nr_to_scan - freed, &remaining,
-> > -                               panthor_gem_try_evict, NULL);
-> > +                               panthor_gem_try_evict);
-> >
-> >   out:
-> >   #ifdef CONFIG_DEBUG_FS
-> > diff --git a/drivers/gpu/drm/panthor/panthor_mmu.c b/drivers/gpu/drm/pa=
-nthor/panthor_mmu.c
-> > index e10dbd18d8cf..ab070bc74857 100644
-> > --- a/drivers/gpu/drm/panthor/panthor_mmu.c
-> > +++ b/drivers/gpu/drm/panthor/panthor_mmu.c
-> > @@ -3133,8 +3133,7 @@ int panthor_vm_prepare_mapped_bos_resvs(struct dr=
-m_exec *exec, struct panthor_vm
-> >   unsigned long
-> >   panthor_mmu_reclaim_priv_bos(struct panthor_device *ptdev,
-> >                            unsigned int nr_to_scan, unsigned long *rema=
-ining,
-> > -                          bool (*shrink)(struct drm_gem_object *,
-> > -                                         struct ww_acquire_ctx *))
-> > +                          bool (*shrink)(struct drm_gem_object *))
-> >   {
-> >       unsigned long freed =3D 0;
-> >       LIST_HEAD(remaining_vms);
-> > @@ -3160,7 +3159,7 @@ panthor_mmu_reclaim_priv_bos(struct panthor_devic=
-e *ptdev,
-> >
-> >               freed +=3D drm_gem_lru_scan(&ptdev->base, &vm->reclaim.lr=
-u,
-> >                                         nr_to_scan - freed,
-> > -                                       remaining, shrink, NULL);
-> > +                                       remaining, shrink);
-> >
-> >               mutex_lock(&ptdev->base.gem_lru_mutex);
-> >
-> > diff --git a/drivers/gpu/drm/panthor/panthor_mmu.h b/drivers/gpu/drm/pa=
-nthor/panthor_mmu.h
-> > index 3522fbbce369..abc36e7204be 100644
-> > --- a/drivers/gpu/drm/panthor/panthor_mmu.h
-> > +++ b/drivers/gpu/drm/panthor/panthor_mmu.h
-> > @@ -52,8 +52,7 @@ int panthor_vm_evict_bo_mappings_locked(struct pantho=
-r_gem_object *bo);
-> >   unsigned long
-> >   panthor_mmu_reclaim_priv_bos(struct panthor_device *ptdev,
-> >                            unsigned int nr_to_scan, unsigned long *rema=
-ining,
-> > -                          bool (*shrink)(struct drm_gem_object *,
-> > -                                         struct ww_acquire_ctx *));
-> > +                          bool (*shrink)(struct drm_gem_object *));
-> >   int panthor_vm_prepare_mapped_bos_resvs(struct drm_exec *exec,
-> >                                       struct panthor_vm *vm,
-> >                                       u32 slot_count);
-> > diff --git a/include/drm/drm_gem.h b/include/drm/drm_gem.h
-> > index 8a704f6a65c1..ffa607c91aa2 100644
-> > --- a/include/drm/drm_gem.h
-> > +++ b/include/drm/drm_gem.h
-> > @@ -616,8 +616,7 @@ drm_gem_lru_scan(struct drm_device *dev,
-> >                struct drm_gem_lru *lru,
-> >                unsigned int nr_to_scan,
-> >                unsigned long *remaining,
-> > -              bool (*shrink)(struct drm_gem_object *obj, struct ww_acq=
-uire_ctx *ticket),
-> > -              struct ww_acquire_ctx *ticket);
-> > +              bool (*shrink)(struct drm_gem_object *obj));
-> >
-> >   int drm_gem_evict_locked(struct drm_gem_object *obj);
-> >
->
-> --
-> --
-> Thomas Zimmermann
-> Graphics Driver Developer
-> SUSE Software Solutions Germany GmbH
-> Frankenstr. 146, 90461 N=C3=BCrnberg, Germany, www.suse.com
-> GF: Jochen Jaser, Andrew McDonald, (HRB 36809, AG N=C3=BCrnberg)
->
->
+So the tuning differences may be taken care of through a separate table,
+or by adding support for overriding parameters for the QUSB2PHYv1 (8996
+-class) devices. Currently the overrides only really work as intended
+for V2/V3 (SDM845-class) PHYs as the register layout changed majorly.
+
+I think the real right solution here is to fix the overrides.
+dt-bindings clearly created by an LLM :)
+
+
+I implemented some of it, but I currently don't have the time
+for finishing it up - feel free to take it further. It would also
+help adjust the specific OnePlus init sequence that was originally
+used for every SM6115 device (patch 2)
+
+I also discovered that the interrupt mask is wrong for V1 PHYs.
+At this point maybe it'd be easier to split off the v1 support to
+a separate driver? Anyway, up to you.
+
+I'll resend this series as-is as it fixes actual issues.
+
+Konrad
+
+commit 792eeeb5d43428cedc72c5778f664a33c4cf2b30
+Author: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Date:   Thu Sep 3 16:10:36 2026 +0200
+
+    [WIP] qusb2phy v1 overrides/tuning/fixups
+    
+    Assisted-by: LLM
+
+diff --git a/Documentation/devicetree/bindings/phy/qcom,qusb2-phy.yaml b/Documentation/devicetree/bindings/phy/qcom,qusb2-phy.yaml
+index 39e796cd5dc6..13a5c08fdb8e 100644
+--- a/Documentation/devicetree/bindings/phy/qcom,qusb2-phy.yaml
++++ b/Documentation/devicetree/bindings/phy/qcom,qusb2-phy.yaml
+@@ -169,6 +169,22 @@ properties:
+     maximum: 3
+     default: 0
+ 
++  qcom,man-sqrx-dis-value:
++    description:
++      It is a 1 bit value that enables manual squelch receiver disable.
++    $ref: /schemas/types.yaml#/definitions/uint32
++    minimum: 0
++    maximum: 1
++    default: 0
++
++  qcom,squelch-eop-delay-value:
++    description:
++      It is a 2 bit value that specifies the squelch end-of-packet delay.
++    $ref: /schemas/types.yaml#/definitions/uint32
++    minimum: 0
++    maximum: 3
++    default: 0
++
+ required:
+   - compatible
+   - reg
+@@ -182,10 +198,17 @@ required:
+ allOf:
+   - if:
+       not:
+-        properties:
+-          compatible:
+-            contains:
+-              const: qcom,qusb2-v2-phy
++        anyOf:
++          - properties:
++              compatible:
++                contains:
++                  const: qcom,qusb2-v2-phy
++          - properties:
++              compatible:
++                contains:
++                  enum:
++                    - qcom,msm8996-qusb2-phy
+     then:
+       properties:
+         qcom,imp-res-offset-value: false
+@@ -196,6 +219,19 @@ allOf:
+         qcom,preemphasis-width: false
+         qcom,hsdisc-trim-value: false
+ 
++  - if:
++      not:
++        properties:
++          compatible:
++            contains:
++              enum:
++                - qcom,msm8996-qusb2-phy
++    then:
++      properties:
++        qcom,man-sqrx-dis-value: false
++        qcom,squelch-eop-delay-value: false
++
+   # On MSM8996, VDD is supplied via the MX power domain
+   - if:
+       properties:
+diff --git a/drivers/phy/qualcomm/phy-qcom-qusb2.c b/drivers/phy/qualcomm/phy-qcom-qusb2.c
+index c34d847b123c..a9435b6e1637 100644
+--- a/drivers/phy/qualcomm/phy-qcom-qusb2.c
++++ b/drivers/phy/qualcomm/phy-qcom-qusb2.c
+@@ -51,7 +51,22 @@
+ 
+ #define PHY_CLK_SCHEME_SEL		BIT(0)
+ 
++/* V1 (MSM8996) register fields */
++
++/* QUSB2PHY_PORT_TUNE2 register bits */
++#define UTM_HSTX_TRIM_V1		GENMASK(7, 4)
++
++/* QUSB2PHY_PORT_TUNE4 register bits */
++#define SQUELCH_EOP_DLY_V1		GENMASK(7, 6)
++#define MAN_SQRX_DIS_V1			BIT(4)
++#define PREEMPH_WIDTH_HALF_BIT_V1	BIT(3)
++#define PREEMPHASIS_EN_MASK_V1		GENMASK(2, 0)
++
++/* V2/V3 (SDM845) register fields */
+ /* QUSB2PHY_INTR_CTRL register bits */
++
++// v1: 4-chg 3-dmse_high 2-dmse 1-dpse_high 0-dpse
++// v3: 4- dmse_high 3-dpse_high 2-chg_det 1-dmse_intr 0-dpse_intr
+ #define DMSE_INTR_HIGH_SEL			BIT(4)
+ #define DPSE_INTR_HIGH_SEL			BIT(3)
+ #define CHG_DET_INTR_EN				BIT(2)
+@@ -443,14 +458,17 @@ struct override_param {
+ 	u8 value;
+ };
+ 
+-/*struct override_params - structure holding qusb2 v2 phy overriding params
++/**
++ * struct override_params - structure holding QUSB2 PHY override parameters
+  * @imp_res_offset: rescode offset to be updated in IMP_CTRL1 register
+- * @hstx_trim: HSTX_TRIM to be updated in TUNE1 register
+- * @preemphasis: Amplitude Pre-Emphasis to be updated in TUNE1 register
+- * @preemphasis_width: half/full-width Pre-Emphasis updated via TUNE1
+- * @bias_ctrl: bias ctrl to be updated in BIAS_CONTROL_2 register
+- * @charge_ctrl: charge ctrl to be updated in CHG_CTRL2 register
+- * @hsdisc_trim: disconnect threshold to be updated in TUNE2 register
++ * @hstx_trim: High-Speed TX trim
++ * @preemphasis: Amplitude Pre-Emphasis
++ * @preemphasis_width: Pre-Emphasis width (half/full)
++ * @bias_ctrl: bias control value
++ * @charge_ctrl: charge control value
++ * @hsdisc_trim: High-Speed disconnect threshold
++ * @man_sqrx_dis: manual squelch receiver disable
++ * @squelch_eop_delay: squelch end-of-packet delay
+  */
+ struct override_params {
+ 	struct override_param imp_res_offset;
+@@ -460,6 +478,9 @@ struct override_params {
+ 	struct override_param bias_ctrl;
+ 	struct override_param charge_ctrl;
+ 	struct override_param hsdisc_trim;
++
++	struct override_param man_sqrx_dis;
++	struct override_param squelch_eop_delay;
+ };
+ 
+ /**
+@@ -558,11 +579,48 @@ void qcom_qusb2_phy_configure(void __iomem *base,
+ 	}
+ }
+ 
+-/*
+- * Update board specific PHY tuning override values if specified from
+- * device tree.
+- */
+-static void qusb2_phy_override_phy_params(struct qusb2_phy *qphy)
++static void qusb2_v1_phy_override_phy_params(struct qusb2_phy *qphy)
++{
++	const struct qusb2_phy_cfg *cfg = qphy->cfg;
++	struct override_params *or = &qphy->overrides;
++
++	if (or->hstx_trim.override) {
++		qusb2_write_mask(qphy->base, cfg->regs[QUSB2PHY_PORT_TUNE2],
++				 FIELD_PREP(UTM_HSTX_TRIM_V1, or->hstx_trim.value),
++				 UTM_HSTX_TRIM_V1);
++	}
++
++	if (or->squelch_eop_delay.override) {
++		qusb2_write_mask(qphy->base, cfg->regs[QUSB2PHY_PORT_TUNE4],
++				 FIELD_PREP(SQUELCH_EOP_DLY_V1, or->squelch_eop_delay.value),
++				 SQUELCH_EOP_DLY_V1);
++	}
++
++	if (or->man_sqrx_dis.override) {
++		qusb2_write_mask(qphy->base, cfg->regs[QUSB2PHY_PORT_TUNE4],
++				 FIELD_PREP(MAN_SQRX_DIS_V1, or->man_sqrx_dis.value),
++				 MAN_SQRX_DIS_V1);
++	}
++
++	if (or->preemphasis.override) {
++		qusb2_write_mask(qphy->base, cfg->regs[QUSB2PHY_PORT_TUNE4],
++				 FIELD_PREP(PREEMPHASIS_EN_MASK_V1, or->preemphasis.value),
++				 PREEMPHASIS_EN_MASK_V1);
++	}
++
++	if (or->preemphasis_width.override) {
++		if (or->preemphasis_width.value == QUSB2_V2_PREEMPHASIS_WIDTH_HALF_BIT)
++			qusb2_setbits(qphy->base,
++				      cfg->regs[QUSB2PHY_PORT_TUNE4],
++				      PREEMPH_WIDTH_HALF_BIT_V1);
++		else
++			qusb2_clrbits(qphy->base,
++				      cfg->regs[QUSB2PHY_PORT_TUNE4],
++				      PREEMPH_WIDTH_HALF_BIT_V1);
++	}
++}
++
++static void qusb2_v3_phy_override_phy_params(struct qusb2_phy *qphy)
+ {
+ 	const struct qusb2_phy_cfg *cfg = qphy->cfg;
+ 	struct override_params *or = &qphy->overrides;
+@@ -840,7 +898,10 @@ static int qusb2_phy_init(struct phy *phy)
+ 				 cfg->tbl_num);
+ 
+ 	/* Override board specific PHY tuning values */
+-	qusb2_phy_override_phy_params(qphy);
++	if (true /* TODO: */)
++		qusb2_v3_phy_override_phy_params(qphy);
++	else
++		qusb2_v1_phy_override_phy_params(qphy);
+ 
+ 	/* Set efuse value for tuning the PHY */
+ 	qusb2_phy_set_tune2_param(qphy);
+@@ -1136,6 +1197,18 @@ static int qusb2_phy_probe(struct platform_device *pdev)
+ 		or->hsdisc_trim.override = true;
+ 	}
+ 
++	if (!of_property_read_u32(dev->of_node, "qcom,man-sqrx-dis-value",
++				  &value)) {
++		or->man_sqrx_dis.value = (u8)value;
++		or->man_sqrx_dis.override = true;
++	}
++
++	if (!of_property_read_u32(dev->of_node,
++				  "qcom,squelch-eop-delay-value", &value)) {
++		or->squelch_eop_delay.value = (u8)value;
++		or->squelch_eop_delay.override = true;
++	}
++
+ 	dev_set_drvdata(dev, qphy);
+ 
+ 	/*
+
