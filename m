@@ -1,420 +1,119 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6F8A94B1465
-	for <linux-arm-msm@vger.kernel.org>; Thu,  3 Sep 2026 14:19:04 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 405D84B66E4;
+	Thu,  3 Sep 2026 14:25:56 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788445156; cv=none; b=GKlGv3f/sn3B//+V54q1zTRxpigO4xZ6qWhRX5O/xHkltsyxmyXmC2kUrlTvWqWX9GlwTAn+Mpw69YyT4ZnIz+Df1d/oWF8hGQcuCx6RTSXDYfjkv4rI4qrdBGF4enKdcA6oGDkK2dMzzIu12qt+eq3sX0E/CLJCv54p4DJR+Cg=
+	t=1788445566; cv=none; b=PzOkdYxCHZ0KQrlI7a2vsK2mv6dnjq845tYazUGMhTAsOqfXDoS2JPX1WRrvUXdI1EHz6gP3XtHLby3B9rhdVr1RdUNhtJXEM7aCvfLrlnD6jwnbPC4iYZm5+DNyBqypcoZUTsjzwkG0P5gDN59NFwvbSD+KgM5W46qHjp9c2IA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788445156; c=relaxed/simple;
-	bh=aVsxz9DXw9erp/s4chS8cIt9Jc1QDB4z/C35yDdv8bM=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=LIx9FjPfJuNv+lXLyfVXzCUViu0Tftvj7+iYZqgPsIzY6TahEOCRgQl47ViJdPhKKZ2LpnZ2UJpyUUJ3k6tsO9gsYfotPOo539Om4HbtjaBU7tZN8anXATuHHbE6q9GxsIWrJkC+8ZCj8GQJEwI5SFpl3Ii11ojPO1kDhZQCCAQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=dFJG2Q2E; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=W++1KNia; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1788445566; c=relaxed/simple;
+	bh=jqqZebTnpEQ1fljwyxW1TH1t9ES5SnJoHG3eYTPQmPE=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=nJMDnseMb/uyvfZuC5GgkFj+vQqGYZunxizTJaqPfnvWhXzFnaX3j6E5qByDaT4flwsAEFIMG1/hBDgIWFq14sZN5I3Oq5bXWLuR5cqR5hSHz5gsHZqmpqcPPfygc3wJZ1Yawv3jzj0P3t7WFOwB0x3pr3BVhVObIAsNo3W/JYE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=MjLn2UBw; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="dFJG2Q2E";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="W++1KNia"
-Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 683DANXI1314609
-	for <linux-arm-msm@vger.kernel.org>; Thu, 3 Sep 2026 14:19:00 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	iPDaGFLS/lLjdSaKwQhej7CnULXLtZrtQ6LDHRChrzc=; b=dFJG2Q2Ea3Q/O0uV
-	4VWysPTuNx6UJAoYLkIrMP3BS49zSf5l5cI1wY2ndMVHTnbk9ywEHAz7o2hf/qqt
-	FuQdzmyLMtDOzDMOn02gK03T8P6SsGIksIfhcm3TESWYfvYL9v4/VL5eOaHSVxe5
-	dMemujhyR7aapXljovopp9N/TqCGvxSK+K5E5Qy1VAe0VgzIvptiTBWx8B6AkRqn
-	LI+hDf4kM/dUBCMZta9Bn/DYk4cf8Uk9oe/IZ3oqgH2hR+lE+cjt7SHBVH6L1B2I
-	8QA95ditJbvJZCQxbosyR2Nm6bFFHUv/ZYaBb9tlFld9qdrlySQjg/2vfByijvlo
-	Z+zg7w==
-Received: from mail-vk1-f199.google.com (mail-vk1-f199.google.com [209.85.221.199])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gerdncq05-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Thu, 03 Sep 2026 14:18:59 +0000 (GMT)
-Received: by mail-vk1-f199.google.com with SMTP id 71dfb90a1353d-5c6645a6ab1so117728e0c.3
-        for <linux-arm-msm@vger.kernel.org>; Thu, 03 Sep 2026 07:18:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1788445139; x=1789049939; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=iPDaGFLS/lLjdSaKwQhej7CnULXLtZrtQ6LDHRChrzc=;
-        b=W++1KNiaYRXToDshu8UNLK4Fc7AMyZfVlXti/tWoGjPh0eO5D4JUrMsisIgKzjL26g
-         GUdfDFsDJBtcgDUkQvv/Gaq4YeRRdGW8FjMpxJK2K07CX+UnBVcfB7dx6goAWLqsLk2j
-         v9qxNz5aKQAs7x8srYdfmZ5ieE6b04vqdCPoOIvGiwBoW4YalLqPnDjzRKjfQuRxofR1
-         cBNW7ZODkaTENbN2Y+qkS5Cd4j6IMWeNGf3QxOE0ZYyUYuHqO+Z+Smw953JQhwqsEXD3
-         AyuFsM/C3UemPlFNnoY8IKx2IVMZtEBlzxWvCkJyaDjYNVNFJrUgmYgtHSDyZg6SIvlq
-         laMA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788445139; x=1789049939;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=iPDaGFLS/lLjdSaKwQhej7CnULXLtZrtQ6LDHRChrzc=;
-        b=eDx5z61ehNX8yrilbRbFv50rakREZTac3XG4kewh01J8P0hwGNnXCHZDKnpFR0cc1p
-         rwfSuO1qplgOLtPDxgfEzpJ/O2KYA1lMqnSJdUk5q09Stf7VA1C6/aOxY15YwEZogUrj
-         UzgL6TDppbql8bGpVvwr225QCJnYVrCR+FB0fK3uDdEwN5nBd717pBbFWB4trPIr3QDR
-         gJnngRblEfP+zaC/MGjFI1pJknifO7lmGomXDPbQj2jN+EGDQwT2uN4JMA+MjO94ADzO
-         3YwgB1ReV0E3kNuuTeYu2XQ+aKY+7+JNX68eal4bPUyvJ5o8idhWBLy3fReZC7S9dRwK
-         yjeQ==
-X-Forwarded-Encrypted: i=1; AKwUvBwdrUWWUEYmjrhlrrQhqecE9OZ91JJGXqBHwLfUOjFWQOxGIh088HF3BC/JkWyTFpYkzirQjSHKvzJOtuCy@vger.kernel.org
-X-Gm-Message-State: AFuF++ln82CjN8PC3VPmjmDsQDn8BcPchK0sPv/+xXuGjx34iK5gpMBl
-	Yd4FnT/vrXpDA4hke/KAW75oPa3ntezWEU4nO6uzgHho7/EpraKl8hRHrTHMTOKahYm3AOVW13k
-	HQ08q5SGdhBbE5ov5Vvwr1yDDHS8guLWOOt6t9nq9x2iBpXuDYLzDNFDVKUB5COtvZWTk
-X-Gm-Gg: AYBFou2FUYSeIJo3WntZZHEcjj8U9/kd9AMiaQv0VTJWRespBBCCpXx6Gq2zDbp8yd2
-	4YT0Qtf7t3hUkxf1HUT+uMCmhWONb12eJrSjd6d4uqzv7Wa/0gIAKZnP+TmQ9dVksY722v7njHH
-	FgAXqgdVmVmeIQNxetPez5757XZks7TSHEwTzVVtGeMubBAF4sX4nbTpEZNpfFHE6d/K5exqI2x
-	RX0UoA8/uYx4HATokADJYhHJVnz0Z5yfKEaAWD8EeBv1a3zOSWV4AwCEvjK/RN2pc6qwhO7tPiv
-	JUqFm37yWi8O3T1FcW5Qjrw1Yk1ezj9Tlr73+OH+A59JMbjlEvPCcv/cB4OD4FjiFELjKKoU/pQ
-	JRRc5BxxwFMrwoTqtXS/Olg==
-X-Received: by 2002:a05:6102:6884:b0:786:8d84:5aca with SMTP id ada2fe7eead31-78a1f339246mr2199043137.2.1788445138591;
-        Thu, 03 Sep 2026 07:18:58 -0700 (PDT)
-X-Received: by 2002:a05:6102:6884:b0:786:8d84:5aca with SMTP id ada2fe7eead31-78a1f339246mr2199014137.2.1788445137740;
-        Thu, 03 Sep 2026 07:18:57 -0700 (PDT)
-Received: from [192.168.202.12] ([178.235.128.140])
-        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-6a67f895e14sm2261636a12.3.2026.09.03.07.18.53
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 03 Sep 2026 07:18:56 -0700 (PDT)
-Message-ID: <97149d63-4b74-4bd1-a9c5-798088316df9@oss.qualcomm.com>
-Date: Thu, 3 Sep 2026 16:18:52 +0200
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="MjLn2UBw"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id DA6981F00A3D;
+	Thu,  3 Sep 2026 14:25:48 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1788445553;
+	bh=YQ/rFL5VnLHnIzTf6yfvW/jeW8RHEfIQjY1lU726wts=;
+	h=From:Subject:Date:To:Cc;
+	b=MjLn2UBw4ASOlLo7rUooqyPA0pevy8UOeoUaj+1OqXNrbrH6Yr9PYnW5gatoF89Zt
+	 ZKMCMR4M74/9OcReDdwZZpctvJ4POLEPmti7eJRF3bKv1eg7jYknrys0ih/aUk0Oe6
+	 +K4w2tGZBKT+tV9Vt6rheJVUfh/DOdSpsK3wbhm0J1nlghDAYcZLVw1iMx9jD2fL8B
+	 yFNXjgyeO1pgTmtoerG/XZ4elfbrkTvDYLV8zMdgyNnKXQ2OKH83ZEasfSvHRBaVjw
+	 ChfI1KnYaXoAAomUddJArpVUKbD8G8W42Lee7ahIhBzTteXkfotF0TnTTa1VAA0tZy
+	 oL2adeWtABEpg==
+From: Konrad Dybcio <konradybcio@kernel.org>
+Subject: [PATCH v2 0/5] Fix up QUSB2 PHY description for MSM8996/SM61[12]5
+Date: Thu, 03 Sep 2026 16:25:27 +0200
+Message-Id: <20260903-topic-8996_61x5_qusb2phy-v2-0-4c3f980a4560@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 0/4] Fix up QUSB2 PHY description for MSM8996/SM61[12]5
-To: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-Cc: Konrad Dybcio <konradybcio@kernel.org>, Vinod Koul <vkoul@kernel.org>,
-        Neil Armstrong <neil.armstrong@linaro.org>,
-        Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley
- <conor+dt@kernel.org>,
-        Wesley Cheng <quic_wcheng@quicinc.com>,
-        Iskren Chernev <me@iskren.info>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        Bjorn Andersson <andersson@kernel.org>, linux-arm-msm@vger.kernel.org,
-        linux-phy@lists.infradead.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-References: <20260610-topic-8996_61x5_qusb2phy-v1-0-d7135980e78f@oss.qualcomm.com>
- <b05e860e-ace5-4399-bbd9-493f7bbfe74d@oss.qualcomm.com>
- <cnyhnyoce6v4d5roijrceuzd3ujvvw7ozklulaxkibptvjancm@cqbqu2aa7bz6>
- <852caded-eacf-4ac1-8fe5-83dd9285ef11@oss.qualcomm.com>
- <nrdf44ixzjqdyxdjnf54ucotpbncehjxjqygqnrknc66pyqfau@vm3emv662bub>
-Content-Language: en-US
-From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-In-Reply-To: <nrdf44ixzjqdyxdjnf54ucotpbncehjxjqygqnrknc66pyqfau@vm3emv662bub>
-Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-Authority-Analysis: v=2.4 cv=YcmNIQRf c=1 sm=1 tr=0 ts=6a9981d3 cx=c_pps
- a=+D9SDfe9YZWTjADjLiQY5g==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
- a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22
- a=EUspDBNiAAAA:8 a=sT_kjUCmaLeEptA-OHkA:9 a=QEXdDO2ut3YA:10
- a=vmgOmaN-Xu0dpDh8OwbV:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTAzMDEyNCBTYWx0ZWRfX3sC+Z2Z9GiwA
- bzTNf3cjw24Bfz+po8I/IaXnyCrimrzFp1+AF1y0fZFhA9mIGcabZu0JWyRbzaW2q+icJlalfSJ
- L0pkk/fKRktEi4MRKXMltLCdWOzI5Nk=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTAzMDEyNCBTYWx0ZWRfXwqTEvP1J15zL
- kz0n4c6sJ24tsxtXJ4cf4HbBsa7M7XSArlHRSoOQjjfU+mqXGemDXGFDCLnooDQuE3vE7MxorgK
- pHiCvq1u36CrTyOVx+UIr4sHpkeEwL6Trl8fw+rYaUWAVPwPQqFPWRZsYf/VX42owNtbbJcLQjn
- OUD+xjR7yhxz1eUekRJi0J71dWcXnLfF06sVpvu9xD05pEjSXQKY5u3nSE7DR0kc7YwJJjaRwfc
- ZzR5gozRR8iJl5lH8ToIsjUzr7PCB2isYwtNTe2zPymkkCdizFcpkpufICcZKDoMTj6vhFPjUHp
- ZfWDK9/6arhTLtZWPWO11Q9cafVCY1UU38nLaqVwS8IqcALOri57WvgXSguLDCc3waouX6Oa0y8
- 2KYbW+odAHBqgy28NEuV5SjFPudkTkPlfQguvZbVFfnE1xM9YMmCapCutsplvOnfr4Ae9MqbMLd
- B1wuWHgshLyujJP0cFQ==
-X-Proofpoint-GUID: yOvXdzrP6MG1ZBxTMkcGh6CblDPeU74w
-X-Proofpoint-ORIG-GUID: yOvXdzrP6MG1ZBxTMkcGh6CblDPeU74w
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-03_04,2026-09-03_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 malwarescore=0 priorityscore=1501 lowpriorityscore=0
- adultscore=0 phishscore=0 impostorscore=0 spamscore=0 suspectscore=0
- bulkscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
- adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
- definitions=main-2609030124
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/42NQQqDMBREryJZN5KkGE1X3qOIaPKtKdVovooi3
+ r3RXqCbgQcz83aC4C0geUQ78bBYtK4PIG4R0W3Vv4BaE5gIJiSTnNHJDVbTTClZSr4m5ThjLYZ
+ 2o5VhiaiVAmWAhPngobHrdf0sfoxz/QY9nX9no7U4Ob9d7oWfvT80C6eMmpTfE5UxSLMmd4jxO
+ Fcf7bouDkGK4zi+6z8mT9kAAAA=
+X-Change-ID: 20260610-topic-8996_61x5_qusb2phy-ad052b99e9de
+To: Vinod Koul <vkoul@kernel.org>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, Rob Herring <robh@kernel.org>, 
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, Wesley Cheng <quic_wcheng@quicinc.com>, 
+ Iskren Chernev <me@iskren.info>, 
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>, 
+ Bjorn Andersson <andersson@kernel.org>, 
+ Konrad Dybcio <konradybcio@kernel.org>, 
+ Manivannan Sadhasivam <mani@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, linux-phy@lists.infradead.org, 
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
+ Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, 
+ Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>, 
+ Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>, 
+ Abel Vesa <abel.vesa@oss.qualcomm.com>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1788445548; l=2016;
+ i=konrad.dybcio@oss.qualcomm.com; s=20230215; h=from:subject:message-id;
+ bh=jqqZebTnpEQ1fljwyxW1TH1t9ES5SnJoHG3eYTPQmPE=;
+ b=+qfgvYG7nUs5HfR2LfR4q4DIDp2auUMorfIwwD6//8hCcmEflj79QIeanjlzIYXpZi36V/Xbd
+ e5igQezEaGcDM2mIpY5r/tTJ4VNG+ghgA1fsYP8myZgBVFjG/g1+L6s
+X-Developer-Key: i=konrad.dybcio@oss.qualcomm.com; a=ed25519;
+ pk=iclgkYvtl2w05SSXO5EjjSYlhFKsJ+5OSZBjOkQuEms=
 
-On 6/10/26 3:20 PM, Dmitry Baryshkov wrote:
-> On Wed, Jun 10, 2026 at 03:13:01PM +0200, Konrad Dybcio wrote:
->> On 6/10/26 3:03 PM, Dmitry Baryshkov wrote:
->>> On Wed, Jun 10, 2026 at 02:49:31PM +0200, Konrad Dybcio wrote:
->>>> On 6/10/26 2:04 PM, Konrad Dybcio wrote:
->>>>> The MSM8996 QUSB2PHY was not being guaranteed a power source.
->>>>> The SM6125's QUSB2PHY was believed to be idential as the 96 one. It
->>>>> wasn't. This series tackles that, freeing us of some dt checker
->>>>> errors about vdd-supply not found on MSM8996 boards.
+The MSM8996 QUSB2PHY was not being guaranteed a power source.
+The SM6125's QUSB2PHY was believed to be idential as the 96 one. It
+wasn't. This series tackles that, freeing us of some dt checker
+errors about vdd-supply not found on MSM8996 boards.
 
-[...]
+Compile-tested only, but docs confirm my findings..
 
->> reg   96   pro
->> 0x80 0xF8  0xD0 [!] QUSB2PHY_PORT_TUNE1
->> 0x84 0xB3  0xB3
->> 0x88 0x83  0x83
->> 0x8C 0xC0  0xC0
->> 0x90 none  0x02 [!] QUSB2PHY_PORT_TUNE5
->> 0x08 0x30  0x30
->> 0x0C 0x79  0x79
->> 0x10 0x21  0x21
->> 0x9C 0x14  0x14
->> 0x1C 0x9F  0x9F
->> 0x18 0x00  0x00
->>
->> apparently this is indeed SoC-specific (via docs) but also apparently
->> may not be very important (although should be fixed regardless as
->> some designs may rely on this)
-> 
-> Would you send a patch, please?
+Signed-off-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+---
+Changes in v2:
+- Pick up tags
+- Add a code-janitory patch ("Remove _SHIFT defines")
+- Link to v1: https://patch.msgid.link/20260610-topic-8996_61x5_qusb2phy-v1-0-d7135980e78f@oss.qualcomm.com
 
-So the tuning differences may be taken care of through a separate table,
-or by adding support for overriding parameters for the QUSB2PHYv1 (8996
--class) devices. Currently the overrides only really work as intended
-for V2/V3 (SDM845-class) PHYs as the register layout changed majorly.
+To: Vinod Koul <vkoul@kernel.org>
+To: Neil Armstrong <neil.armstrong@linaro.org>
+To: Manivannan Sadhasivam <mani@kernel.org>
+To: Rob Herring <robh@kernel.org>
+To: Krzysztof Kozlowski <krzk+dt@kernel.org>
+To: Conor Dooley <conor+dt@kernel.org>
+To: Wesley Cheng <quic_wcheng@quicinc.com>
+To: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+To: Iskren Chernev <me@iskren.info>
+To: Bjorn Andersson <andersson@kernel.org>
+To: Konrad Dybcio <konradybcio@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org
+Cc: linux-phy@lists.infradead.org
+Cc: devicetree@vger.kernel.org
+Cc: linux-kernel@vger.kernel.org
 
-I think the real right solution here is to fix the overrides.
-dt-bindings clearly created by an LLM :)
+---
+Konrad Dybcio (5):
+      dt-bindings: phy: qcom,qusb2: Straighten out SM6125 and MSM8996
+      phy: qcom-qusb2: Fix SM6115 init sequence
+      phy: qcom-qusb2: Remove _SHIFT defines
+      arm64: dts: qcom: msm8996: Add VDD_MX to QUSB2 PHYs
+      arm64: dts: qcom: sm6125: Fix QUSB2 compatible
 
+ .../devicetree/bindings/phy/qcom,qusb2-phy.yaml    | 31 ++++++++++++++++--
+ arch/arm64/boot/dts/qcom/msm8996.dtsi              | 10 ++++++
+ arch/arm64/boot/dts/qcom/sm6125.dtsi               |  3 +-
+ drivers/phy/qualcomm/phy-qcom-qusb2.c              | 37 ++++++++++------------
+ 4 files changed, 58 insertions(+), 23 deletions(-)
+---
+base-commit: 32b6ef9a5d0eca44f9cd91f52f4faa89f145a0de
+change-id: 20260610-topic-8996_61x5_qusb2phy-ad052b99e9de
 
-I implemented some of it, but I currently don't have the time
-for finishing it up - feel free to take it further. It would also
-help adjust the specific OnePlus init sequence that was originally
-used for every SM6115 device (patch 2)
-
-I also discovered that the interrupt mask is wrong for V1 PHYs.
-At this point maybe it'd be easier to split off the v1 support to
-a separate driver? Anyway, up to you.
-
-I'll resend this series as-is as it fixes actual issues.
-
-Konrad
-
-commit 792eeeb5d43428cedc72c5778f664a33c4cf2b30
-Author: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-Date:   Thu Sep 3 16:10:36 2026 +0200
-
-    [WIP] qusb2phy v1 overrides/tuning/fixups
-    
-    Assisted-by: LLM
-
-diff --git a/Documentation/devicetree/bindings/phy/qcom,qusb2-phy.yaml b/Documentation/devicetree/bindings/phy/qcom,qusb2-phy.yaml
-index 39e796cd5dc6..13a5c08fdb8e 100644
---- a/Documentation/devicetree/bindings/phy/qcom,qusb2-phy.yaml
-+++ b/Documentation/devicetree/bindings/phy/qcom,qusb2-phy.yaml
-@@ -169,6 +169,22 @@ properties:
-     maximum: 3
-     default: 0
- 
-+  qcom,man-sqrx-dis-value:
-+    description:
-+      It is a 1 bit value that enables manual squelch receiver disable.
-+    $ref: /schemas/types.yaml#/definitions/uint32
-+    minimum: 0
-+    maximum: 1
-+    default: 0
-+
-+  qcom,squelch-eop-delay-value:
-+    description:
-+      It is a 2 bit value that specifies the squelch end-of-packet delay.
-+    $ref: /schemas/types.yaml#/definitions/uint32
-+    minimum: 0
-+    maximum: 3
-+    default: 0
-+
- required:
-   - compatible
-   - reg
-@@ -182,10 +198,17 @@ required:
- allOf:
-   - if:
-       not:
--        properties:
--          compatible:
--            contains:
--              const: qcom,qusb2-v2-phy
-+        anyOf:
-+          - properties:
-+              compatible:
-+                contains:
-+                  const: qcom,qusb2-v2-phy
-+          - properties:
-+              compatible:
-+                contains:
-+                  enum:
-+                    - qcom,msm8996-qusb2-phy
-     then:
-       properties:
-         qcom,imp-res-offset-value: false
-@@ -196,6 +219,19 @@ allOf:
-         qcom,preemphasis-width: false
-         qcom,hsdisc-trim-value: false
- 
-+  - if:
-+      not:
-+        properties:
-+          compatible:
-+            contains:
-+              enum:
-+                - qcom,msm8996-qusb2-phy
-+    then:
-+      properties:
-+        qcom,man-sqrx-dis-value: false
-+        qcom,squelch-eop-delay-value: false
-+
-   # On MSM8996, VDD is supplied via the MX power domain
-   - if:
-       properties:
-diff --git a/drivers/phy/qualcomm/phy-qcom-qusb2.c b/drivers/phy/qualcomm/phy-qcom-qusb2.c
-index c34d847b123c..a9435b6e1637 100644
---- a/drivers/phy/qualcomm/phy-qcom-qusb2.c
-+++ b/drivers/phy/qualcomm/phy-qcom-qusb2.c
-@@ -51,7 +51,22 @@
- 
- #define PHY_CLK_SCHEME_SEL		BIT(0)
- 
-+/* V1 (MSM8996) register fields */
-+
-+/* QUSB2PHY_PORT_TUNE2 register bits */
-+#define UTM_HSTX_TRIM_V1		GENMASK(7, 4)
-+
-+/* QUSB2PHY_PORT_TUNE4 register bits */
-+#define SQUELCH_EOP_DLY_V1		GENMASK(7, 6)
-+#define MAN_SQRX_DIS_V1			BIT(4)
-+#define PREEMPH_WIDTH_HALF_BIT_V1	BIT(3)
-+#define PREEMPHASIS_EN_MASK_V1		GENMASK(2, 0)
-+
-+/* V2/V3 (SDM845) register fields */
- /* QUSB2PHY_INTR_CTRL register bits */
-+
-+// v1: 4-chg 3-dmse_high 2-dmse 1-dpse_high 0-dpse
-+// v3: 4- dmse_high 3-dpse_high 2-chg_det 1-dmse_intr 0-dpse_intr
- #define DMSE_INTR_HIGH_SEL			BIT(4)
- #define DPSE_INTR_HIGH_SEL			BIT(3)
- #define CHG_DET_INTR_EN				BIT(2)
-@@ -443,14 +458,17 @@ struct override_param {
- 	u8 value;
- };
- 
--/*struct override_params - structure holding qusb2 v2 phy overriding params
-+/**
-+ * struct override_params - structure holding QUSB2 PHY override parameters
-  * @imp_res_offset: rescode offset to be updated in IMP_CTRL1 register
-- * @hstx_trim: HSTX_TRIM to be updated in TUNE1 register
-- * @preemphasis: Amplitude Pre-Emphasis to be updated in TUNE1 register
-- * @preemphasis_width: half/full-width Pre-Emphasis updated via TUNE1
-- * @bias_ctrl: bias ctrl to be updated in BIAS_CONTROL_2 register
-- * @charge_ctrl: charge ctrl to be updated in CHG_CTRL2 register
-- * @hsdisc_trim: disconnect threshold to be updated in TUNE2 register
-+ * @hstx_trim: High-Speed TX trim
-+ * @preemphasis: Amplitude Pre-Emphasis
-+ * @preemphasis_width: Pre-Emphasis width (half/full)
-+ * @bias_ctrl: bias control value
-+ * @charge_ctrl: charge control value
-+ * @hsdisc_trim: High-Speed disconnect threshold
-+ * @man_sqrx_dis: manual squelch receiver disable
-+ * @squelch_eop_delay: squelch end-of-packet delay
-  */
- struct override_params {
- 	struct override_param imp_res_offset;
-@@ -460,6 +478,9 @@ struct override_params {
- 	struct override_param bias_ctrl;
- 	struct override_param charge_ctrl;
- 	struct override_param hsdisc_trim;
-+
-+	struct override_param man_sqrx_dis;
-+	struct override_param squelch_eop_delay;
- };
- 
- /**
-@@ -558,11 +579,48 @@ void qcom_qusb2_phy_configure(void __iomem *base,
- 	}
- }
- 
--/*
-- * Update board specific PHY tuning override values if specified from
-- * device tree.
-- */
--static void qusb2_phy_override_phy_params(struct qusb2_phy *qphy)
-+static void qusb2_v1_phy_override_phy_params(struct qusb2_phy *qphy)
-+{
-+	const struct qusb2_phy_cfg *cfg = qphy->cfg;
-+	struct override_params *or = &qphy->overrides;
-+
-+	if (or->hstx_trim.override) {
-+		qusb2_write_mask(qphy->base, cfg->regs[QUSB2PHY_PORT_TUNE2],
-+				 FIELD_PREP(UTM_HSTX_TRIM_V1, or->hstx_trim.value),
-+				 UTM_HSTX_TRIM_V1);
-+	}
-+
-+	if (or->squelch_eop_delay.override) {
-+		qusb2_write_mask(qphy->base, cfg->regs[QUSB2PHY_PORT_TUNE4],
-+				 FIELD_PREP(SQUELCH_EOP_DLY_V1, or->squelch_eop_delay.value),
-+				 SQUELCH_EOP_DLY_V1);
-+	}
-+
-+	if (or->man_sqrx_dis.override) {
-+		qusb2_write_mask(qphy->base, cfg->regs[QUSB2PHY_PORT_TUNE4],
-+				 FIELD_PREP(MAN_SQRX_DIS_V1, or->man_sqrx_dis.value),
-+				 MAN_SQRX_DIS_V1);
-+	}
-+
-+	if (or->preemphasis.override) {
-+		qusb2_write_mask(qphy->base, cfg->regs[QUSB2PHY_PORT_TUNE4],
-+				 FIELD_PREP(PREEMPHASIS_EN_MASK_V1, or->preemphasis.value),
-+				 PREEMPHASIS_EN_MASK_V1);
-+	}
-+
-+	if (or->preemphasis_width.override) {
-+		if (or->preemphasis_width.value == QUSB2_V2_PREEMPHASIS_WIDTH_HALF_BIT)
-+			qusb2_setbits(qphy->base,
-+				      cfg->regs[QUSB2PHY_PORT_TUNE4],
-+				      PREEMPH_WIDTH_HALF_BIT_V1);
-+		else
-+			qusb2_clrbits(qphy->base,
-+				      cfg->regs[QUSB2PHY_PORT_TUNE4],
-+				      PREEMPH_WIDTH_HALF_BIT_V1);
-+	}
-+}
-+
-+static void qusb2_v3_phy_override_phy_params(struct qusb2_phy *qphy)
- {
- 	const struct qusb2_phy_cfg *cfg = qphy->cfg;
- 	struct override_params *or = &qphy->overrides;
-@@ -840,7 +898,10 @@ static int qusb2_phy_init(struct phy *phy)
- 				 cfg->tbl_num);
- 
- 	/* Override board specific PHY tuning values */
--	qusb2_phy_override_phy_params(qphy);
-+	if (true /* TODO: */)
-+		qusb2_v3_phy_override_phy_params(qphy);
-+	else
-+		qusb2_v1_phy_override_phy_params(qphy);
- 
- 	/* Set efuse value for tuning the PHY */
- 	qusb2_phy_set_tune2_param(qphy);
-@@ -1136,6 +1197,18 @@ static int qusb2_phy_probe(struct platform_device *pdev)
- 		or->hsdisc_trim.override = true;
- 	}
- 
-+	if (!of_property_read_u32(dev->of_node, "qcom,man-sqrx-dis-value",
-+				  &value)) {
-+		or->man_sqrx_dis.value = (u8)value;
-+		or->man_sqrx_dis.override = true;
-+	}
-+
-+	if (!of_property_read_u32(dev->of_node,
-+				  "qcom,squelch-eop-delay-value", &value)) {
-+		or->squelch_eop_delay.value = (u8)value;
-+		or->squelch_eop_delay.override = true;
-+	}
-+
- 	dev_set_drvdata(dev, qphy);
- 
- 	/*
+Best regards,
+--  
+Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
 
