@@ -1,264 +1,79 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F3D7B4A0910
-	for <linux-arm-msm@vger.kernel.org>; Thu,  3 Sep 2026 12:19:14 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9A17238E5FF;
+	Thu,  3 Sep 2026 12:29:37 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788437958; cv=none; b=dFyCFrOhkc/DRO+qz3xnBU7amvlj69wQsmCmI1aA7Qw8PxY8dTMTLkbpx3k+LiuPcxM+EuQqXWDxmV2Vj0jZdr1BIPr/O5hTrC14KuylWiZ1RZs67l0kfF6PtO9+NRvotBfEom/+t/G+9mOHHn5sUWGROe8//zI8aluKghleXGU=
+	t=1788438579; cv=none; b=k5bB8UghUNCP4sGoSK95FFbX3Js9d7BsDPFKRBc2qUnJEGBmM0X/+Z6NyWavLnKlj4OHCnymOldt9/x25zx+9ibVd9O0hFKK7Mdz6ZOYhZZY+vN+jxlT/NEalDdgQfp2UfmWTSTvq9eRel39cY/VqmHyJOBnZnMKfnFJXcUdB00=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788437958; c=relaxed/simple;
-	bh=uz7L8jZC+FRa4iH6HND9+Fq9kcOFbjPiksyeJbgXaOI=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=Cx741B6ra64lpvH7gBWebMdqEzbaHMaA3b0D9Uq7J7p1/DnkVrpaMdqucas7w5/TQkL8Ue7DPlN4jt7tXvGTTcUfUiWR1DYnjOe7wyNaCmPH+yDlxE5lZAmjpwJlZ5xpSmqLI2L1yHAV386bCF2AIzK7W9I9CIepvpQSaqIgExI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=DOzbJSpH; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=EaizgB/b; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1788438579; c=relaxed/simple;
+	bh=taYCNE3A/cg+QcAGbRYXuu/J3YhDCzaw2CbrT8phfwc=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=gn0cgxIfHe6KH1fGUHO8ozMt+Bwpo+xEs3p3QC3EgIEP5QS6vpI4Z2NDrPky18YHt3Q4kG0ejcboM9qpKvJjbpvnV88XTXNRFcMZwejs1es0xeMmb8EC2c7Wwgl/toJ/nkC1R6v4DPwFfYnhc/ei8MP3KfPfqPvw+qwYXkMn/UI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=mgpe7be7; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="DOzbJSpH";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="EaizgB/b"
-Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 683AHEMt440386
-	for <linux-arm-msm@vger.kernel.org>; Thu, 3 Sep 2026 12:19:13 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:message-id
-	:mime-version:subject:to; s=qcppdkim1; bh=d1v+GC8Hhix4s/ZeQXqidP
-	kZI2JR/xI9DRh0/nfz9oc=; b=DOzbJSpH1/bEeTonQSd4JC9BM4dkM5TW7nNiTE
-	lVTSHhmnqKwNBKA5sBCV18eBY/7/OPgLYJ3eyBCULVCsbnu0neVf6+oNIKgn4mm2
-	v+Rsi0GYCfbnLrh+rXxoShHaFo185qWtjabiJpij0SElcWJiv0SkmjcqZ6sZrg8J
-	iDJUwJImDwAJUU5pUOqoyQYZ22/el1lkvPUAD4IrhFnqKoNGDhJNbw63V/CgOOGT
-	nPXvIR/h5a1tQsjOkWynuORRx42upgSNJv2+XoaBzEXkaERDK0FQNpKVLXMgJGm+
-	XGcvbYoHN9fJts6kcLskW7dKTGCg8L9KVmTlhTdpEcRakQKw==
-Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com [209.85.222.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gf6p70ht3-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Thu, 03 Sep 2026 12:19:13 +0000 (GMT)
-Received: by mail-qk1-f197.google.com with SMTP id af79cd13be357-93903622880so173653485a.0
-        for <linux-arm-msm@vger.kernel.org>; Thu, 03 Sep 2026 05:19:13 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1788437953; x=1789042753; darn=vger.kernel.org;
-        h=cc:to:message-id:content-transfer-encoding:content-type
-         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=d1v+GC8Hhix4s/ZeQXqidPkZI2JR/xI9DRh0/nfz9oc=;
-        b=EaizgB/byGWJUl8jwQafnUP7b4SYJv6+oAaE2AmRukoQE9KQVsfhcZEKFlm2sypnk3
-         Av5wANKidykvC3hf7gwTKcMkq9LmZL7Xb+dOA/wAKJCrb++/BKTwyNk4sx0SRJvZG2NS
-         iBs1xGsoy0gcwqnTWBF3fBMZQ2Jna16o0hB9KDxWJ4e3jhtScE+c95P0DdvhoJUAwdlz
-         0uSzuq3rPAIMXK0AVgrQBAMFlosZovW/hw+EOO9TvsgPvvWffJ6r/c9CMG+f8NowBB7R
-         kgdRrnFtUqHI5SGS06zDtZYUrpXLC4BUy/b2gnF5RAcNOwysXc4O0rpe1Aa/q9fI56L0
-         v5GQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788437953; x=1789042753;
-        h=cc:to:message-id:content-transfer-encoding:content-type
-         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to:content-type;
-        bh=d1v+GC8Hhix4s/ZeQXqidPkZI2JR/xI9DRh0/nfz9oc=;
-        b=SM8bmBb6E9WYVWmj3wANGW3OMW8uMKKD7qrov2vhoTUrR1+9ZqJLnwo537asjGnK3i
-         bYx4gSOhkiMMOn4nAIOdTchlmR1ZB65Oyy44iAXyLoGRBygM/WzWUzm/wHAjP5GF1hd0
-         yggQk20L0R2MklFD+mCt14w/bfqW5UFT5BTbIAVf5KGQFEa2mXtoyiXRAJICQHPPyi5o
-         lEQb6eACUdKCB0FuF7zSaiVWSsF4glq7qYVCfrjcZqR66OV2TZmoeCJrjLMMqo6uGRiC
-         Qlgw0zHLpHRrBFaccs82hu6vUcqXvtY/ibauR8PZE4O5FvxBr9P22uUE80xguzrd3pzH
-         06Tg==
-X-Gm-Message-State: AFuF++n/2mOjb2oY5Ub3EkebKyLSujpmX/PNpFXDe/MfxC4edJ/PpnIT
-	gtxpnEF9IUoWrjcjIHf7NMae/8+3YXfjlA1ExNxanOvTokYbM8aKkIPgX0b8MxtxXujOSnkXPGM
-	XqjwZGqKTJChiBKmJqaqCLrOSicV9r3wVYxOEB9ajzrlAScoIWNKf+W2Dc8rGITdV8flx
-X-Gm-Gg: AYBFou2POd8HeBCc+U8jqY6C+Scv/VPiQtChhEPxQG9uJMB6owoHrKtPGKUfMRG1w0j
-	KirGQkDeNKx+MKP07GLIyfUTzQbY3TtS5NK7aqIQit+n0sSAVz2IVWtNRqhXccJ0NsEm0yTJ5C5
-	ELqLhvVoFps/McURBu9IfrvttjOvd/TjR+2QrBvaQ5ypHOcN0wh6Khl94iD3ZSc3fEH6TfMV7wh
-	5DBsNsWNluno7kWsp1Y0PWL8jlZLxTIN6+zcy/cBtYSyW6hu5vuaNRPDkEGT84Kk24Op2BhvFaX
-	AoLAYdH6u8vNPO2X7lcjGN4vxHnerCqVKOP35jFqdUwc2dPm1znR2MmpmeGJ3Ucr6XzEZ/tuIuC
-	ZmiOimoam1K2jkHAVYWK1CLE+QrWl4GLzE7UtKETKmbAib5z4uvGK6RpkQEwpVTx1AqmuKyvePF
-	NOLmH50omhT0lJ
-X-Received: by 2002:a05:620a:3704:b0:939:79c:1104 with SMTP id af79cd13be357-9396df22e93mr542212685a.10.1788437952990;
-        Thu, 03 Sep 2026 05:19:12 -0700 (PDT)
-X-Received: by 2002:a05:620a:3704:b0:939:79c:1104 with SMTP id af79cd13be357-9396df22e93mr542207585a.10.1788437952445;
-        Thu, 03 Sep 2026 05:19:12 -0700 (PDT)
-Received: from umbar.lan (2001-14ba-a073-af00-264b-feff-fe8b-be8a.rev.dnainternet.fi. [2001:14ba:a073:af00:264b:feff:fe8b:be8a])
-        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5b606b0ecdbsm1254298e87.9.2026.09.03.05.19.10
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 03 Sep 2026 05:19:11 -0700 (PDT)
-From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-Date: Thu, 03 Sep 2026 15:19:10 +0300
-Subject: [PATCH] drm/msm/dsi: round the byte clock rate after reparenting
- to the PHY PLL
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="mgpe7be7"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7AFB51F00A3A;
+	Thu,  3 Sep 2026 12:29:36 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1788438577;
+	bh=wCXHOPjY6k6UIQDduJFqwM5ycSoiURySLqPJjkIRPw4=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=mgpe7be7S3WPXQ2VNZ2ZLKyQxx9cz3JZIKYqeWpB3IaUfjc+MJJUZ7prmJnWUctRD
+	 wk4RzXQbRdgIGX7NmilunN8FlQKtB84d/iWs5yYWd9wzatktwIDksrupN5byYEwpfT
+	 EBUkzX2htz59wop0OsmDI761PnMrTx5LNdJbOLvVIW9HsWnuN7XxM+SIArcuvxUgUd
+	 2O+0huu/ag3RREggcw0yOJkj/eAr2WngpMYG+YXdob/Lm9RrVLcPfdwDDRJvXvv4FP
+	 kVVQttiYv3qGGfEy61ze0IgF+YRzo2oqvSZ6/PzGVuyAEbfa9WE9rDddqcuVGTnIyI
+	 sfv3TVWW+WQoA==
+Date: Thu, 3 Sep 2026 14:29:33 +0200
+From: Krzysztof Kozlowski <krzk@kernel.org>
+To: Xilin Wu <sophon@radxa.com>
+Cc: Bjorn Helgaas <bhelgaas@google.com>, 
+	Andrzej Hajda <andrzej.hajda@intel.com>, Neil Armstrong <neil.armstrong@linaro.org>, 
+	Robert Foss <rfoss@kernel.org>, Laurent Pinchart <Laurent.pinchart@ideasonboard.com>, 
+	Jonas Karlman <jonas@kwiboo.se>, Jernej Skrabec <jernej.skrabec@gmail.com>, 
+	Luca Ceresoli <luca.ceresoli@bootlin.com>, David Airlie <airlied@gmail.com>, 
+	Simona Vetter <simona@ffwll.ch>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
+	Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, 
+	Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+	Conor Dooley <conor+dt@kernel.org>, Bjorn Andersson <andersson@kernel.org>, 
+	Konrad Dybcio <konradybcio@kernel.org>, Bartosz Golaszewski <brgl@kernel.org>, 
+	Linus Walleij <linusw@kernel.org>, linux-pci@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	dri-devel@lists.freedesktop.org, devicetree@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
+	linux-gpio@vger.kernel.org, Stephen Chen <stephen@radxa.com>, Junhao Xie <bigfoot@radxa.com>
+Subject: Re: [PATCH 2/6] dt-bindings: display: bridge: simple: document
+ Chrontel CH7218A
+Message-ID: <20260903-petite-charming-echidna-ccfefb@quoll>
+References: <20260901-q8b-dts-v1-0-7de0b6a73d08@radxa.com>
+ <20260901-q8b-dts-v1-2-7de0b6a73d08@radxa.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260903-fix-eliza-dsi-v1-1-3474a6c9f2e0@oss.qualcomm.com>
-X-B4-Tracking: v=1; b=H4sIAL1lmWoC/yXMQQqEMAyF4atI1gZqBFGvMszCtlEj4gyNiije3
- arLD977D1AOwgp1ckDgVVR+U0SWJuD6ZuoYxUcDGSpMZXJsZUMeZW/Qq2BpHbXsyVFlIX7+geP
- g6X2+r3WxA7v5jsB5XjXjCcRxAAAA
-X-Change-ID: 20260903-fix-eliza-dsi-8bc2fed2c29b
-To: Rob Clark <robin.clark@oss.qualcomm.com>,
-        Dmitry Baryshkov <lumag@kernel.org>,
-        Abhinav Kumar <abhinav.kumar@linux.dev>,
-        Jessica Zhang <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>,
-        Marijn Suijten <marijn.suijten@somainline.org>,
-        David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
-        Kavan Smith <kavansmith82@gmail.com>
-Cc: linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org,
-        freedreno@lists.freedesktop.org, linux-kernel@vger.kernel.org,
-        Abel Vesa <abel.vesa@oss.qualcomm.com>,
-        Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=4272;
- i=dmitry.baryshkov@oss.qualcomm.com; h=from:subject:message-id;
- bh=uz7L8jZC+FRa4iH6HND9+Fq9kcOFbjPiksyeJbgXaOI=;
- b=owEBbQGS/pANAwAKAYs8ij4CKSjVAcsmYgBqmWW+wJLWxHequ4iwL3l+6YA4eVuefTeu/unAo
- EV3dXdw19uJATMEAAEKAB0WIQRMcISVXLJjVvC4lX+LPIo+Aiko1QUCapllvgAKCRCLPIo+Aiko
- 1bXzB/4k3Sk7t3WsIolAsFnZopkL7GkMimyro3AHD/0eM3i6vM5oCIE1pOgThrWM2sNbJXk7ERb
- 67KOCDyUQJrcDtgItRcKLFxnxxbXnVO+mMQxfrZQCJ45gDRnbpUxNbCEDWqxRscKleU7Sp7hbvb
- EnvalAlN3LAWXFVhJd8bESdvaFJjmzXozx8rwFZnBzUzc1k/QrNfJ1/GOb14Iuv8BOuEg3XnMVF
- G4lzqU96wEU9KO9sxqupC02/kbWE8jfbjmPQo/0CupEJYwEq6In25Y/zT6YtSsuy3xbrRTulueH
- +LfGn5/m9Sslh3U3PmERfB8EFT+1g+gk+biY+gNuoAt56x0A
-X-Developer-Key: i=dmitry.baryshkov@oss.qualcomm.com; a=openpgp;
- fpr=8F88381DD5C873E4AE487DA5199BF1243632046A
-X-Proofpoint-GUID: kgRqGHHql1NSUa4H_MZfL_9uHEHBSXKK
-X-Proofpoint-ORIG-GUID: kgRqGHHql1NSUa4H_MZfL_9uHEHBSXKK
-X-Authority-Analysis: v=2.4 cv=OZyoyBTY c=1 sm=1 tr=0 ts=6a9965c1 cx=c_pps
- a=50t2pK5VMbmlHzFWWp8p/g==:117 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
- a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=_glEPmIy2e8OvE2BGh3C:22 a=EUspDBNiAAAA:8
- a=hm1qJ70bMNtfgpIXLUgA:9 a=QEXdDO2ut3YA:10 a=IoWCM6iH3mJn3m4BftBB:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTAzMDEwNiBTYWx0ZWRfXzDsTBnLLKYjS
- 2IXwNywk0sKrAkS65nZ+8d7hwTMHt7K53WrY/QHJRomJ0bQfIkurSIoKH7/Hy5V0iAcrCevrXow
- ien3Q6ukuJzJesaE7GydyuswUwCLZIU=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTAzMDEwNiBTYWx0ZWRfX5HBaTCspaVxv
- tEbfRY3Cfy8hmZd0uob4BK7wNpFz0P0UxMdSrj6cn7y+4T5a97aImHkegyMHkBzl98s3rvCPDq5
- Yb1iyI26tfEZRHLF2HT/RH3KkLKwOFQwP5LW1PKZ2/BsC3pp//XmZxQyc9rTH0SftugnabWKXPV
- cgY2eVm6VmwXgGb+4q1LKFucr+4/FFGL5UkFNIRj86HvckNarbNBqkyZf97Lzgisf/UEZCRopNJ
- Dyhry5FCXApu/BPNLP4EzeLumfP4rfmBtyoMYM6cdjD57nMRseC1rh4ypmqDHEx1hHTpCurRRGu
- TuaxuEeEyIKORtNSpIjsHA62OQQF6mOffd5Tyt6woDTI1rPndgesEpOASE7N6TUCEV9a0LWy+Tc
- B5v9DT7i1eBL8p6X1+Etf29i1lytuWmHWLmY2uYRUu1E1ypJgJ9UbAOi3nWrT70QoFMHrhsSnHL
- g4y+qfYwT6A05kElUtg==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-03_03,2026-09-03_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- spamscore=0 lowpriorityscore=0 phishscore=0 priorityscore=1501 bulkscore=0
- suspectscore=0 impostorscore=0 clxscore=1015 malwarescore=0 adultscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2609030106
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <20260901-q8b-dts-v1-2-7de0b6a73d08@radxa.com>
 
-DSI 6G v2.9 hosts (SM8650, SM8750, Kaanapali, etc.) reparent the byte and
-pixel RCGs to the DSI PHY PLL at runtime from
-dsi_link_clk_set_rate_6g_v2_9(), after the PHY has been enabled. However
-dsi_calc_clk_rate_6g() runs earlier, in order to compute the bit clock
-request for the PHY. At that point the byte RCG still has its reset
-parent (XO), so clk_round_rate() returns a bogus rate, which then ends up
-in the PHY bit clock request and the PLL gets programmed to a wrong
-frequency, breaking the panel.
+On Tue, Sep 01, 2026 at 04:47:55PM +0800, Xilin Wu wrote:
+> The Chrontel CH7218A is a DisplayPort 1.4 to HDMI 2.1 protocol converter.
+> 
+> The device contains an embedded microcontroller and on-chip flash. It
+> automatically boots its firmware and requires no host-side configuration
+> for the on-board use case, so it can be represented by the simple bridge
+> binding.
+> 
+> Document the chrontel,ch7218a compatible.
+> 
+> Signed-off-by: Xilin Wu <sophon@radxa.com>
+> ---
+>  Documentation/devicetree/bindings/display/bridge/simple-bridge.yaml | 1 +
+>  1 file changed, 1 insertion(+)
 
-Move the rounding to dsi_link_clk_set_rate_6g(), which is called after
-the RCGs have been reparented to the PLL. Storing the rounded rate at
-this point still makes later link_clk_set_rate() calls no-ops in the
-CCF. Derive the byte interface clock rate from the rounded byte clock
-rate, otherwise it would keep requesting the idealized rate and
-retrigger the PLL on every transfer.
-
-Reported-by: Abel Vesa <abel.vesa@oss.qualcomm.com>
-Reported-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
-Fixes: 6cd33b6f4155 ("drm/msm/dsi: round 6G byte clock rate to the PLL-achievable value")
-Assisted-by: LLM
-Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
----
- drivers/gpu/drm/msm/dsi/dsi_host.c | 36 +++++++++++++++++++-----------------
- 1 file changed, 19 insertions(+), 17 deletions(-)
-
-diff --git a/drivers/gpu/drm/msm/dsi/dsi_host.c b/drivers/gpu/drm/msm/dsi/dsi_host.c
-index 7e4e3718b536..b292dfd266d1 100644
---- a/drivers/gpu/drm/msm/dsi/dsi_host.c
-+++ b/drivers/gpu/drm/msm/dsi/dsi_host.c
-@@ -129,7 +129,7 @@ struct msm_dsi_host {
- 	struct clk *dsi_pll_pixel_clk;
- 
- 	unsigned long byte_clk_rate;
--	unsigned long byte_intf_clk_rate;
-+	bool byte_intf_clk_div_2;
- 	unsigned long pixel_clk_rate;
- 	unsigned long esc_clk_rate;
- 
-@@ -382,8 +382,20 @@ int msm_dsi_runtime_resume(struct device *dev)
- 
- int dsi_link_clk_set_rate_6g(struct msm_dsi_host *msm_host)
- {
-+	unsigned long byte_intf_clk_rate;
-+	long rounded_byte_clk_rate;
- 	int ret;
- 
-+	rounded_byte_clk_rate = clk_round_rate(msm_host->byte_clk,
-+					       msm_host->byte_clk_rate);
-+	if (rounded_byte_clk_rate < 0) {
-+		pr_err("%s: failed to round byte clock rate, %ld\n",
-+		       __func__, rounded_byte_clk_rate);
-+		return rounded_byte_clk_rate;
-+	}
-+
-+	msm_host->byte_clk_rate = rounded_byte_clk_rate;
-+
- 	DBG("Set clk rates: pclk=%lu, byteclk=%lu",
- 	    msm_host->pixel_clk_rate, msm_host->byte_clk_rate);
- 
-@@ -401,7 +413,11 @@ int dsi_link_clk_set_rate_6g(struct msm_dsi_host *msm_host)
- 	}
- 
- 	if (msm_host->byte_intf_clk) {
--		ret = clk_set_rate(msm_host->byte_intf_clk, msm_host->byte_intf_clk_rate);
-+		byte_intf_clk_rate = msm_host->byte_clk_rate;
-+		if (msm_host->byte_intf_clk_div_2)
-+			byte_intf_clk_rate /= 2;
-+
-+		ret = clk_set_rate(msm_host->byte_intf_clk, byte_intf_clk_rate);
- 		if (ret) {
- 			pr_err("%s: Failed to set rate byte intf clk, %d\n",
- 			       __func__, ret);
-@@ -669,24 +685,12 @@ static void dsi_calc_pclk(struct msm_dsi_host *msm_host, bool is_bonded_dsi)
- 
- int dsi_calc_clk_rate_6g(struct msm_dsi_host *msm_host, bool is_bonded_dsi)
- {
--	long rounded_byte_clk_rate;
--
- 	if (!msm_host->mode) {
- 		pr_err("%s: mode not set\n", __func__);
- 		return -EINVAL;
- 	}
- 
- 	dsi_calc_pclk(msm_host, is_bonded_dsi);
--
--	rounded_byte_clk_rate = clk_round_rate(msm_host->byte_clk,
--					       msm_host->byte_clk_rate);
--	if (rounded_byte_clk_rate < 0) {
--		pr_err("%s: failed to round byte clock rate, %ld\n",
--		       __func__, rounded_byte_clk_rate);
--		return rounded_byte_clk_rate;
--	}
--
--	msm_host->byte_clk_rate = rounded_byte_clk_rate;
- 	msm_host->esc_clk_rate = clk_get_rate(msm_host->esc_clk);
- 	return 0;
- }
-@@ -2495,9 +2499,7 @@ int msm_dsi_host_power_on(struct mipi_dsi_host *host,
- 		goto unlock_ret;
- 	}
- 
--	msm_host->byte_intf_clk_rate = msm_host->byte_clk_rate;
--	if (phy_shared_timings->byte_intf_clk_div_2)
--		msm_host->byte_intf_clk_rate /= 2;
-+	msm_host->byte_intf_clk_div_2 = phy_shared_timings->byte_intf_clk_div_2;
- 
- 	msm_dsi_sfpb_config(msm_host, true);
- 
-
----
-base-commit: a9117574de38e27355ded76850df9200ce7870e6
-change-id: 20260903-fix-eliza-dsi-8bc2fed2c29b
+Acked-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
 
 Best regards,
---  
-With best wishes
-Dmitry
+Krzysztof
 
