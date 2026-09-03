@@ -1,39 +1,86 @@
-Received: from ixit.cz (ixit.cz [84.42.129.46])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 68F824CA79B;
-	Thu,  3 Sep 2026 15:16:51 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=84.42.129.46
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 16CC54D8DAC
+	for <linux-arm-msm@vger.kernel.org>; Thu,  3 Sep 2026 15:21:36 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788448613; cv=none; b=aoi0n/8bk7ML7BxCeHkdgwjfdExPSlJH4EEm9AoUDhpP1TQZLFtQST017KvjyCsPcnyRb8JyhG9BsEBc0HNSLXZbEdig0qR9QdF+MreMnkUMfgC2oBbBqfNYN8cl2jP/Ieea4H6yXwlIw+Uq2nfRvXGxvBj81uRoml/Ga6/mSe8=
+	t=1788448898; cv=none; b=jAQH4MrEUhlGgZOJVFZiONNS2aL0wHjLKQp/tGRYsthfoHJLR0buqqM7olcJDdXf9rYJqvXMFZu5J2R5Tgs/HsM5Yi9kxn9S/CAHztcNqpFa6x1Vxn63QEaRL3ombvv7bDLXdhSPe2Shjmf6YaYbBLi8d9nmRs/q+yhyHQbbkMM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788448613; c=relaxed/simple;
-	bh=3QjZsNW3GegBoFeYEVAx1Oqrt2Sw0ac2MiJNC8I4pTI=;
+	s=arc-20240116; t=1788448898; c=relaxed/simple;
+	bh=AJRmnZv8TBL24Tq4Nk/MVvTyAGNJB3SKUgQnbs7iPxY=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=rF9OF+xAmlH6olK4somnSdLH/npGNHDkeeJ2XknZCm4J15KYwrTtOCrTY7gJQvr8seN9IsLe1cFPWW2enggmqGskqOrnIbYlJTQ7PzCJFfc4Y8cL/mU0AWDZOGzkXdmxntI3qmOEEHK9vuh8fscbgAu33r/6rWm6C3xg1Ck3uBo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=ixit.cz; spf=pass smtp.mailfrom=ixit.cz; dkim=pass (1024-bit key) header.d=ixit.cz header.i=@ixit.cz header.b=gwwXz0bY; arc=none smtp.client-ip=84.42.129.46
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=ixit.cz
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ixit.cz
+	 In-Reply-To:Content-Type; b=QJVKyr2hUt7qrQDITsdoEnQui8sklE36qTtGAWD1j29xBERknck1s61iN68hoH+QuM30mV+T5veOdtHLX6CIZLGWPLgt4HjnACHXM/2/b3R+xc8138CyUClmy1E+z8j9hTlW41HungHkpdm2Xbu95Y0DIxY3NBTHSHEsKNZnx1Q=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=VuImJggM; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=ZiDY/CEX; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=ixit.cz header.i=@ixit.cz header.b="gwwXz0bY"
-Received: from [10.0.0.152] (unknown [10.0.0.1])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange x25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by ixit.cz (Postfix) with ESMTPSA id B17F05340233;
-	Thu, 03 Sep 2026 17:16:48 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ixit.cz; s=dkim;
-	t=1788448608;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
-	bh=GXAovTc9YTHtjLoeVbWGg8GE9X9Rna9HT3d4PbtrVuM=;
-	b=gwwXz0bYspQPWjy1N8yvwqlWO6JJdl3jUQ+OdpfsRaNGk6XRRlu83bkAklvTwH6OAcLTgb
-	ord7YjdLVFrY2PbZlE0bT7EFHts3ALko8GZm4VtuunFVDpeXQ64fx25+LYL830ZGeAaae9
-	ViXDdQsqQynpR78SpRyRRCSiOZ9Oyrs=
-Message-ID: <628ad2b7-d509-45d1-a9ab-e3cbedac9a92@ixit.cz>
-Date: Thu, 3 Sep 2026 17:16:48 +0200
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="VuImJggM";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="ZiDY/CEX"
+Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 683DALEp1705133
+	for <linux-arm-msm@vger.kernel.org>; Thu, 3 Sep 2026 15:21:36 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	MDXm9sakiTVow2HHdoD2Gmx3gY3Rs3Pfdamjmd0bvo0=; b=VuImJggMuzKB4UNo
+	4VSWxjGM0gt7Rnn7mxvFDlGUG9Vjfux/uR55j/BDqogQzf7KWKHUgkGkxQDFV7ii
+	EDGnXWpSAsTTwy0gK7N/X39QdokV72HJAawjGkkt2eV9NmN8NbhltQEZQRFImDlJ
+	KdI1CHq4SFfk+9wveFkZq79j5+DHMcPjouWifhq7uTXOu+CR+beoL6JXTuSJC0Mz
+	16kzkMiBVK4GB6XgkCQqBc5vSixcfRPPe+CrXIBYpa3rmNjt8Nu8UDklfqF+wd5b
+	1PB7Nedvp2Ca5bqpSlHTbW/EcdagcwxyZVGTBykfaGXCvT1uv2BOzjVRvhRsVesW
+	EvgsEg==
+Received: from mail-pl1-f199.google.com (mail-pl1-f199.google.com [209.85.214.199])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gf9b18mpx-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 03 Sep 2026 15:21:36 +0000 (GMT)
+Received: by mail-pl1-f199.google.com with SMTP id d9443c01a7336-2d6f75c1219so49976185ad.3
+        for <linux-arm-msm@vger.kernel.org>; Thu, 03 Sep 2026 08:21:36 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1788448895; x=1789053695; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=MDXm9sakiTVow2HHdoD2Gmx3gY3Rs3Pfdamjmd0bvo0=;
+        b=ZiDY/CEXieVktWWnLcOWtpqNcuF7VQBalbR+hLQ6BKG30IkoJCeW8G13jHMmkGleeR
+         H1znJljFJO9MuWbcuoX08vUbD6NDriolInUFAh2znJiq074uaBEVtwU6M/jvpxXuGcCK
+         nmncnxPRyAj29NEQ4sKyPSb4LDOTIUmh5v7ObzwSj6N/WPlNuqhEd9kasrnLiT5TWumM
+         Lp9biusaCqRaJMN7lkAs3bRVJlxrh9+2pEYlWavXKfUYGJlwXGBVmmd7/CjFjEB/TrFp
+         cPC79J90otBkFQotI7nzGawaVLp2OFsMVLSIrcxZE9oK2ZzOOATkkJAT1Sezceg/M/av
+         cboA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1788448895; x=1789053695;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=MDXm9sakiTVow2HHdoD2Gmx3gY3Rs3Pfdamjmd0bvo0=;
+        b=LpEZDP5pnTIG0C3Dp9X2v4pHtKYbTeCO9C/+gSVNXts2VkxMWF2vi3zWam8HuYt+JQ
+         0l2boCE3B9rGclKt1kivlzOu+eULnIsaO5MZj+59sp8mwQaOr80roIxnlwPBHTI8eWd1
+         8ujp757UBoJi89UviODvLFyKmUrimZJU7+ti6Q6r4fcmxZrqWfhpboMqs2wyI0CG5opJ
+         BkYRQqB/UNcmL8xAVy801P9QUTYcOTfwuw/i5skgHK1Lhf1l/VMbQV58A8ujPzBl6GQk
+         BNQkL2mPR1ywLfR2vsIqigumErriGOeUXlUxVOiJ2dFlvOqfG9jUl8OrXjIxkzvfRGjr
+         ogcA==
+X-Gm-Message-State: AFuF++mJsY0HD5MbsjiujXLU2qz1qrZbELzMqq8vZ8elNs8nRxgihNI7
+	fzFMUiGReEqA6l4ZB8dgJixu25VvXBI+Kh10A6KcibCdCvI2lz9xFAEeKTGo5V/L6mur6LXr4wC
+	qcSKRhDqkRUwNNQxruJ57PeeF1Gmx5gNLjCzPoIdJgesOnpLHMNgrHL86uEn9voj6Ly5d
+X-Gm-Gg: AYBFou0DYLV5kxX466FM7WOMu5KnMK0T2K58D36Du+U50nj3elxhrepXYo1ffg4TN8n
+	BZUod97NG9BASCoyWLl8CmmcFkT4I2Cfm01xTIpX6+dozlRjJ6Sr67yimFC3GQI+LL4449vntmR
+	r+SxUp1EgUv30zdXBgj0JESBMumv0o9WWloHzIrva1tnsaqZwI5gGVl7PHILYJ2fKhcAAD6iik9
+	DFLUDMG2o0ikaTkONS9Y5NmJ4Yu+EYXbMyPSdpkYaWyFHEsIxdORlNB3ZF4LBf2IaziklWL7T8L
+	hsq8U5oTA5WULIlC7tJScQQxm7+0I8/UTpLoEhNsHgYUTrKMxMX/TacLmcDrUrx0VXRc7wuI0vN
+	cOzf8DlU9UJtEylZYGcufl+OAsEcfjunDg8uAgf3Cp6nkwyS38GhAy4PRbtkhsxy7
+X-Received: by 2002:a17:903:22c5:b0:2da:eba4:b640 with SMTP id d9443c01a7336-2db10518c67mr5530995ad.6.1788448895641;
+        Thu, 03 Sep 2026 08:21:35 -0700 (PDT)
+X-Received: by 2002:a17:903:22c5:b0:2da:eba4:b640 with SMTP id d9443c01a7336-2db10518c67mr5530325ad.6.1788448895091;
+        Thu, 03 Sep 2026 08:21:35 -0700 (PDT)
+Received: from [10.133.33.96] (tpe-colo-wan-fw-bordernet.qualcomm.com. [103.229.16.4])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2dafe62d8dcsm11883625ad.26.2026.09.03.08.21.29
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 03 Sep 2026 08:21:33 -0700 (PDT)
+Message-ID: <75246b2d-4787-4748-831c-d66e3b42faa6@oss.qualcomm.com>
+Date: Thu, 3 Sep 2026 23:21:27 +0800
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -41,107 +88,92 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] mfd: wcd934x: Unroll regmap and irqchip on removal
-To: Bjorn Andersson <bjorn.andersson@oss.qualcomm.com>,
- Lee Jones <lee@kernel.org>, Srinivas Kandagatla <srini@kernel.org>,
- Pierre-Louis Bossart <pierre-louis.bossart@linux.dev>
-Cc: linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org
-References: <20260309-wcd934x-unroll-regmap-v1-1-9a5fb305540e@oss.qualcomm.com>
-Content-Language: en-US, cs-CZ
-From: David Heidelberg <david@ixit.cz>
-Autocrypt: addr=david@ixit.cz; keydata=
- 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
-In-Reply-To: <20260309-wcd934x-unroll-regmap-v1-1-9a5fb305540e@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Subject: Re: [PATCH v3 07/12] clk: qcom: ipq-cmn-pll: Add PON reference clock
+ support
+To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Michael Turquette <mturquette@baylibre.com>,
+        Stephen Boyd
+ <sboyd@kernel.org>, Brian Masney <bmasney@redhat.com>,
+        Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org,
+        linux-kernel@vger.kernel.org, devicetree@vger.kernel.org,
+        quic_kkumarcs@quicinc.com, quic_linchen@quicinc.com,
+        quic_leiwei@quicinc.com, quic_suruchia@quicinc.com
+References: <20260814-qcom_ipq5210_cmnpll-v3-0-21c3db378611@oss.qualcomm.com>
+ <20260814-qcom_ipq5210_cmnpll-v3-7-21c3db378611@oss.qualcomm.com>
+ <7e32b791-b27a-4b0d-8143-ff4eadd11fa2@oss.qualcomm.com>
+Content-Language: en-US
+From: Jie Luo <jie.luo@oss.qualcomm.com>
+In-Reply-To: <7e32b791-b27a-4b0d-8143-ff4eadd11fa2@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-ORIG-GUID: GruO9l6oKItQ_VA8U9okOIMIl68cKY6u
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTAzMDEzNCBTYWx0ZWRfXyextNS7Rry4e
+ ZF/8MOGHxBAsjbDqFXWUw9oQmaQrlkg+vw+Vb4JejjULbXkYXehgfBHQIb35zUxaFVrYuD3cqrM
+ QjPrSufetwt2bxOcEJH8WIjNktKRVPA=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTAzMDEzNCBTYWx0ZWRfXx3SrS6KvPMMC
+ xfUO49ejP97VBPzJ7u6oc6E6bHS+KCs8awpFmMhgR6/zT8DX9h9NhDVbs+QZ7ygonc4jE8EJ4Uk
+ 8ix9c1iwhybUvsDBSKsoYhOJr2mGxN9rBN5nIoEHFvVMtWSK2DHvbecUOzf35MIvdvd96OQXCbt
+ aKkNLT3D/VsSbg2hV8d33wLpIzW11gdwKaUkz03M9Sr4Npg7I1YFxuZhtEIN08SKw5nDzvBvHY3
+ i7RUUs5kdL/w2Qrg1VNf7EA5oweUGrkRdsmm27demB5QothKXP+IR+L30/6qqFRRIRAMb4XHXLl
+ tuRI4rhnEdXq+MjCboBps0tXh1jDw0Kd5O3nb/531RTstijPWu3rET4rd2vgqkOXVX6zdsIMsuo
+ dNyV2ezTEOT5GnqJyelSQhKnUBEQCzHvYzA8Gnsd6Mt5Q65xQPU0D2CU/5krLiUFplF62Qx+Ami
+ lBOATBUrnxiAWGyuFpg==
+X-Authority-Analysis: v=2.4 cv=NNTlPU6g c=1 sm=1 tr=0 ts=6a999080 cx=c_pps
+ a=JL+w9abYAAE89/QcEU+0QA==:117 a=nuhDOHQX5FNHPW3J6Bj6AA==:17
+ a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22
+ a=eyD6XQoqffRT7lHHdTUA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+ a=324X-CrmTo6CU4MGRt3R:22
+X-Proofpoint-GUID: GruO9l6oKItQ_VA8U9okOIMIl68cKY6u
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-09-03_04,2026-09-03_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ phishscore=0 lowpriorityscore=0 spamscore=0 bulkscore=0 adultscore=0
+ malwarescore=0 clxscore=1015 suspectscore=0 impostorscore=0
+ priorityscore=1501 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2609030134
 
-On 10/03/2026 04:53, Bjorn Andersson wrote:
-> When the slimbus-up event is handled a new regmap is created, an IRQ
-> chip is registered on this regmap and then the MFD devices are added.
+
+
+On 9/3/2026 7:57 PM, Konrad Dybcio wrote:
+> On 8/14/26 2:48 PM, Luo Jie wrote:
+>> The PON (Passive Optical Network) reference clock's parent is
+>> cmn_pll_div2 (CMN PLL rate / 2); it is then further divided by a
+>> configurable 8-bit divider (1-255). The clock supports two modes:
 > 
-> But the regmap is left dangling if either any of those operations are
-> failing or if the slimbus-down event ever comes. Which manifest itself
-> as an error print from debugfs once the next slimbus-up event happens.
+> [...]
 > 
-> Likewise, if for some reason a slimbus-down event would be followed by
-> a slimbus-up event without the MFD being torn down by the slimbus
-> controller inbetween, we're going to have a dangling irq_chip.
+>> +static const struct clk_ops clk_pon_clk_ops = {
+>> +	.enable = clk_pon_clk_enable,
 > 
-> Add cleanup of the registered resources on failure and on removal.
+> clk_enable_regmap
+>> +	.disable = clk_pon_clk_disable,
 > 
-> Fixes: 6ac7e4d7ad70 ("mfd: wcd934x: Add support to wcd9340/wcd9341 codec")
-> Signed-off-by: Bjorn Andersson <bjorn.andersson@oss.qualcomm.com>
-> ---
->   drivers/mfd/wcd934x.c | 49 ++++++++++++++++++++++++++++++++++++++-----------
->   1 file changed, 38 insertions(+), 11 deletions(-)
+> clk_disable_regmap
 > 
-What is final thought on this series?
+>> +	.is_enabled = clk_pon_clk_is_enabled,
+> 
+> clk_is_enabled_regmap
+> 
+>> +	.recalc_rate = clk_pon_clk_recalc_rate,
+>> +	.determine_rate = clk_pon_clk_determine_rate,
+>> +	.set_rate = clk_pon_clk_set_rate,
+> 
+> These seem genuinely new
+> 
+> Konrad
 
-I have feeling Sashiko pointed the problem with devm double registration still 
-exist, see below:
+Thanks. I’ll fix this by converting the PON clock to struct clk_regmap,
+setting enable_reg and enable_mask, and using clk_enable_regmap,
+clk_disable_regmap, and clk_is_enabled_regmap for the corresponding
+operations. I’ll retain the custom recalc_rate, determine_rate, and
+set_rate implementations as suggested.
 
-[Severity: High]
-This is a pre-existing issue, but does the use of managed devres functions in
-wcd934x_slim_status_up() cause memory leaks and double registrations?
 
-drivers/mfd/wcd934x.c:wcd934x_slim_status_up() {
-     ...
-	ret = devm_regmap_add_irq_chip(dev, ddata->regmap, ddata->irq,
-				       IRQF_TRIGGER_HIGH, 0,
-				       &wcd934x_regmap_irq_chip,
-				       &ddata->irq_data);
-     ...
-}
-
-wcd934x_slim_status_up() is called when the SLIMbus transitions to
-SLIM_DEVICE_STATUS_UP. If the bus goes DOWN, mfd_remove_devices() is called,
-but the IRQ chip added via devm_regmap_add_irq_chip() is not removed because
-devres cleanup only happens on driver unbind, not on bus status changes.
-
-When the bus transitions UP again, wouldn't the driver attempt to re-register
-the IRQ chip and fail with -EBUSY, leaving the device in an unusable state?
-
-https://lore.kernel.org/mfd/20260903145651.AC1311F00ACA@smtp.kernel.org/
-
-David
