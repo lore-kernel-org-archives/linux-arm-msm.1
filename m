@@ -1,86 +1,66 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-lj1-f169.google.com (mail-lj1-f169.google.com [209.85.208.169])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AE9294BAA1B
-	for <linux-arm-msm@vger.kernel.org>; Thu,  3 Sep 2026 16:14:42 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 62E534E8DF7
+	for <linux-arm-msm@vger.kernel.org>; Thu,  3 Sep 2026 16:17:01 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.208.169
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788452084; cv=none; b=nffWZsRY4q/gaShIIplZSxx8hEeu/jln2FlA0dEbPl7+oSbGnw4X2pghRLT2qJPZgys9UgzZebKvuSgvgj+NMJ9YXHmNdz8k3nQriMxR/utDQoZdGkGantLcQ4wAVBB/8s/qs76TRvjS1RBZlzgqIdqkmXmJYKNppVN3a3IPbOc=
+	t=1788452223; cv=none; b=SJOZP07zWRUdswC4RxptIKaHRYtg0hVaQimH/aQgu34mllAVdzqxjGHxeMHzX0Pvyx7NHSixR1E/fbFHf4pVJh4azKUBNuRyjVXv75H8aCXLcZ53nAvSvoEBZ/t9Zeuv3xJgCVaCp+XsiGcDr9X4iJ2Hi3qI+jUPCwbu+n+8G5o=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788452084; c=relaxed/simple;
-	bh=KpUgVbJEJhauXlCo2ElxjoeTHrdPvZ44Y93fb41JCkg=;
+	s=arc-20240116; t=1788452223; c=relaxed/simple;
+	bh=oXOvVfQx48pkiCnSTyly0SxfeaW66Tond0/xVvTUv6g=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=fSbM61E7vb9oBMggYkDQJmE06GJwjUJg4B1yvzJjVpQWyVKGGrphNOcXsW+cms9+4GQc7fDJWGkvvDXwOg4bn6cAbLCYi92JrwygngSbSOuZ84pVJTlhfkwRt7GodMnzR7RHCP9ixpiL/yDkj7AxwsUuWOn4JFBs5ADvJHSpN3I=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=X6q5atdo; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=axqo3y6K; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	 In-Reply-To:Content-Type; b=mkLvts7OYWvjxqBM4uQ9m1AiPJHMGg5J0HW0rkNEKflqwBBKh6VoxT9JcEAE08iIYc1fQ5SPDjeMLKm2JlXeyITNakGjG+IQ1xoBhk6mq2yiuvhzo1jzLAJyssrdN5Hgxr3XZ1dX7S8982KZP8bED2lNj1Oajjm1HF3mlwVMODw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=AbYDgrBW; arc=none smtp.client-ip=209.85.208.169
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="X6q5atdo";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="axqo3y6K"
-Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 683G39rA346140
-	for <linux-arm-msm@vger.kernel.org>; Thu, 3 Sep 2026 16:14:41 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	dUUQa3IhWuf5ncDuuq5tVYRMx6lHsZYcTMpZH45yYcI=; b=X6q5atdo043c0aI3
-	fl5u/axFQrGR5VP6gXKytSsYT5MFMQj5S/iZxd47gAQzx97F6jypceq/WY19jvEh
-	PnnonKOGoWaCgZowS4Ky25PNwuDbU3RTWVZDmrpebzvpXGUumm/pzmwtO16LLj+x
-	3eVoUh5JwWlVry+toGcevuiOtc7ejFAWL9DP0+P2gSTWQDv76uhhMscouti/G++4
-	6or19FaGOSNfPR9dgwV65VekJY4hO8ZqLjK2jZMo4NSHnGWE6+tIn/EtBlKOz39X
-	5A7vIB0NhkRILL7P89fwwYEBl14X68er5lW9Wc3Zaz7xi+OroYdIEEQx7A/kSKRB
-	y0anSA==
-Received: from mail-pj1-f71.google.com (mail-pj1-f71.google.com [209.85.216.71])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gf5pdsy5r-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Thu, 03 Sep 2026 16:14:41 +0000 (GMT)
-Received: by mail-pj1-f71.google.com with SMTP id 98e67ed59e1d1-3968bb86fb7so3333442a91.2
-        for <linux-arm-msm@vger.kernel.org>; Thu, 03 Sep 2026 09:14:41 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="AbYDgrBW"
+Received: by mail-lj1-f169.google.com with SMTP id 38308e7fff4ca-3a34f16714dso113021fa.3
+        for <linux-arm-msm@vger.kernel.org>; Thu, 03 Sep 2026 09:17:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1788452081; x=1789056881; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=dUUQa3IhWuf5ncDuuq5tVYRMx6lHsZYcTMpZH45yYcI=;
-        b=axqo3y6K9HXnKVjTbb8aRF3SiUqmoz/8audQt2JHIu+FNUGWiCiIcNg/u619GMdAxB
-         V6ysqT58UwUb52yuvNbx8iw1CQak2c+KUa11wQt75DaEizXRdgVNu0L5KEO7F0sMIUNK
-         DAsLJIvWZHwpg+n6gMHNGLxNjMQR/olFtTG90O8Z0bYmYqdy6sRn3MKOHJmMJ7Cgz790
-         smAEEN/qmsPezZsc5q9QxDc386Xrb0UUgllxidSsWrVggdSpUD7sSYPKLmmzlprH/kHD
-         nVMQG0Y8sQ3OxKo8cUDmtxGZDd4bgXbrW2DFlpZohM83jOtD00+IaY/OoDvt8mzKvRV5
-         tzzg==
+        d=linaro.org; s=google; t=1788452219; x=1789057019; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from:references
+         :cc:to:content-language:subject:user-agent:mime-version:date
+         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=igQxfgp7/0QiUpGltOrm94v15geXiIvSoDekjF5iba4=;
+        b=AbYDgrBWhJveGv6k3LlstrFXNjqiRzZkJweE1wsitx6tq2GeCujkPNZTR6O020WpW9
+         z1NhDbuMYRCQnIAuKmt5VnOkrWMxKSU6D3jzNTt/X9mo2rtnHGW9XNOSY0JDu+me/ayO
+         KPDRXn0CbEXmm8HThkzDUaQ6ZIdTbEdTB7RIWrZc1oLK7P3CNgb342OCoX/OdPlTQWA/
+         PrKALKCrQ5QQ5xSJ1H1Lk0i5jkViW1rruXvl6NZCDQslMIVRM+vyA5+MCoLv4uzvCXWE
+         HWRkLtLjD4F9QkSdHgEkw2OnfaQNuU4TJWUJNObLAAbpVvttmBrLe9SCHlUyECJm69SP
+         sdTQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788452081; x=1789056881;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=1e100.net; s=20251104; t=1788452219; x=1789057019;
+        h=content-transfer-encoding:content-type:in-reply-to:from:references
+         :cc:to:content-language:subject:user-agent:mime-version:date
+         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=dUUQa3IhWuf5ncDuuq5tVYRMx6lHsZYcTMpZH45yYcI=;
-        b=I5YFQfaiDei841ZSjnaLXTNFksDVdGSM6l/jALI9DgEEhU1XoyNEfq6Z0Ab21Hpx50
-         row1C+JIP2myLUiYRkdge1nGG/4pWwQ0y8e5vmdN/Ftlh/PtFvIbgUqYQnso1U8UeYGU
-         zkg8i20B/N84wbSS11IpdUS9TMrnsDl7cFMLRtTeOyTBK9Mlkt9PRuToevAvgFGiDfzD
-         ooSefKNG1Wbu0vHZMys8vUbm/7cFB6POjNXAL5FUHCP18TcuMCXqgA/TrVJqnshVgMui
-         2KiMox4ZKNoMkUJ1W6cXtrz12GXw1jbdYuz1+gQVcyOzLvRCBZ+wcdBTV2VQagc+3jD0
-         s8jg==
-X-Gm-Message-State: AFuF++ltGyXF98T1NlkN8QKFZO53/ch2u9x46ZX4S5hRrfApj90cV5ci
-	5usVi6y7lNEyudC3wirkhOc7US9Sw6LrpKnMj8TgSzHPrUwLE9xuTxaDPD5BieptQyQT8ds/xuO
-	Dm0qwZLVLtfiFpl/hc+emQMoHb7CBfCOJN3Tp1WyI4Zga+8uelAMDv9HxOBd9qUtnqsiH
-X-Gm-Gg: AYBFou0ZDoZ3h3RyvHLvcj6Xhg9fFlMrlqcfw0+HK2ZlMe92hPVJxg3j+4QFjcDhEQB
-	VCYRYc1KSxn7N6z7VeWFHOCVYC7pCmnwkI3lQ9ZGkeFM0dvQIqesONGMco5C2tuCg/cA02Mt9Sb
-	q2VcFABk+/YieJkzQKfkPz34mOWivCR5qXx08Ex9ibuslWdpYgpF4KGoeIdTUP6ubMDTTxTaHUG
-	IszG4T78qF6c15cxuoOKi1mCdKj3/UP7cEA+g7/OauDXtrU4Ndgdw323LdMZb3vpKfgs5+4RkQF
-	vZKbCVIep+mAmRhHkyUF/sM6f5vjyT/l9ZidUUGB9ejDcQ5WHOlou1dgDxKfH0QG3IhAGZc3Gh9
-	sBJDvI9aVgTxV8L2ptYnw4P05ufOt9L4zRojCFB5m4EZb
-X-Received: by 2002:a17:90b:134f:b0:396:41d1:cbc7 with SMTP id 98e67ed59e1d1-39b22c5ae4dmr1137796a91.3.1788452080444;
-        Thu, 03 Sep 2026 09:14:40 -0700 (PDT)
-X-Received: by 2002:a17:90b:134f:b0:396:41d1:cbc7 with SMTP id 98e67ed59e1d1-39b22c5ae4dmr1137690a91.3.1788452079818;
-        Thu, 03 Sep 2026 09:14:39 -0700 (PDT)
-Received: from [192.168.1.66] ([103.172.4.43])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-39b08d0d845sm6255076a91.17.2026.09.03.09.14.35
+        bh=igQxfgp7/0QiUpGltOrm94v15geXiIvSoDekjF5iba4=;
+        b=abTWp4U1/twkJDBW+5IGcWoCpYEXOaNBjoBzhh8Yotub40sLm8rgI6ptI6QMx9ZxgY
+         vyqhHAkk7EhLgfTpae/DQ64iN7bP6ErcXASSIN2pW2kWW00YY0sKdtCU51zWLbyby5zC
+         NlA76IvipGCsHVDFq6m3OOXeh56NwtDuWe7MzhcSt9kSlS9yuC8BjY+GEm6fsx7jXs38
+         2yQsI5I99ZsbfUz9ve6aDdtFYAi/sMaWlh39tIMmXV8NzPw5GbF6Ii6yXGDcDGZP0EOA
+         C5cOdMCU/hpLmMsvlcntX0mz/ssgXB6GszBfSFdjfcdltuwGQ36AbZu5NZVG2ag5Sydw
+         Bwww==
+X-Gm-Message-State: AFuF++mqgSIQy5tbg/ICKVBnrFS0DxRbHDNvunXumQP2e1S2B/Lk4+12
+	hbEGe/0pp4VXlOPhhKC3BRZ9WDgOt2QcFLXzfd0v1eGDSO2fSxuljSC4UqW9Nwb2CQ0=
+X-Gm-Gg: AYBFou0zc8RzIT/KWufF1+ptYwINkJIYMUHZDJJAlH6RLV0C1ZGFD5I7GDmp68Qq3TP
+	VjZq407PPYT9qB1/qndabEIPr6esg02eqnEYcNJbCW18G3JnwKRa66+zMz0QUy+AVdZXypVBW/H
+	AaUnY3kha0TyvCGQqyFpYj42rNV45YaBJLrb2bVCmfpJAWOHfv2nA5XL53z6YobpiePs4ltaJTj
+	w9jn/Q0NDufQAYClxecLXMqz+8G7hUFgj6JYFgwDi079U0zqo3MsivT2JXEUVILlxRJaMmHMXp5
+	U/m5klH4mkeXPM4SjFCzKtp6HH6cmj0knYd0glik+oq0gHcJiz6Bq1guPIvr2OD7LNNQkhDHPWU
+	Gb8dR+APktPkJ6R1yBcZf+51PTLBCexn5TfUMbHMcq+ytZGjW0X88VFbUkI4EjVAFtM4LJfgmhN
+	lQjZ6/QOBd+gC0Jduzl+h4eZtNHo/QITsADfWObEmFknn09eL/LmZhDnZ22u6BHzDVGWEThxMkQ
+	ZrqUCveCR5rqadMAcj4iH3t/2XfKYoLbuTVOlCc4A6kZCcPzAjQcjo=
+X-Received: by 2002:a2e:bcc3:0:b0:3a2:fc47:4c1f with SMTP id 38308e7fff4ca-3a34fcd002dmr15579741fa.1.1788452219071;
+        Thu, 03 Sep 2026 09:16:59 -0700 (PDT)
+Received: from [192.168.1.100] (91-159-24-186.elisa-laajakaista.fi. [91.159.24.186])
+        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5b606b0ebedsm1499193e87.5.2026.09.03.09.16.58
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 03 Sep 2026 09:14:39 -0700 (PDT)
-Message-ID: <7cc05c51-811f-4949-9fe6-10580ff90eea@oss.qualcomm.com>
-Date: Thu, 3 Sep 2026 21:44:32 +0530
+        Thu, 03 Sep 2026 09:16:58 -0700 (PDT)
+Message-ID: <65ef2024-4f5e-4df3-881c-50d5a72b655b@linaro.org>
+Date: Thu, 3 Sep 2026 19:16:57 +0300
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -88,225 +68,217 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 3/3] i2c: qcom-geni: Add bus recovery support for GPI
- DMA mode
-To: Aniket Randive <aniket.randive@oss.qualcomm.com>,
-        Vinod Koul <vkoul@kernel.org>, Frank Li <Frank.Li@kernel.org>,
-        Mukesh Kumar Savaliya <mukesh.savaliya@oss.qualcomm.com>,
-        Viken Dadhaniya <viken.dadhaniya@oss.qualcomm.com>,
-        Andi Shyti <andi.shyti@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, dmaengine@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-i2c@vger.kernel.org
-References: <20260826-i2c_bus_recovery-v1-0-203f0ec76f84@oss.qualcomm.com>
- <20260826-i2c_bus_recovery-v1-3-203f0ec76f84@oss.qualcomm.com>
-Content-Language: en-US
-From: Jyothi Kumar Seerapu <jyothi.seerapu@oss.qualcomm.com>
-In-Reply-To: <20260826-i2c_bus_recovery-v1-3-203f0ec76f84@oss.qualcomm.com>
+Subject: Re: [PATCH v16 1/2] dt-bindings: phy: qcom: Add CSI2 C-PHY/DPHY
+ schema
+Content-Language: ru-RU
+To: Bryan O'Donoghue <bod@kernel.org>,
+ Bryan O'Donoghue <bryan.odonoghue@linaro.org>, Vinod Koul
+ <vkoul@kernel.org>, Kishon Vijay Abraham I <kishon@kernel.org>,
+ Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
+ Conor Dooley <conor+dt@kernel.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>
+Cc: linux-arm-msm@vger.kernel.org, linux-phy@lists.infradead.org,
+ linux-media@vger.kernel.org, devicetree@vger.kernel.org,
+ linux-kernel@vger.kernel.org
+References: <20260901-x1e-csi2-phy-v16-0-dd863b929080@linaro.org>
+ <20260901-x1e-csi2-phy-v16-1-dd863b929080@linaro.org>
+ <RXmjC1LUSR46nHPlGyexr-0HTUa9z8BZY8CabY4J7P4YM9_ntzOucrOnanQBTZlD1jH69cHJEmPb_Xw7dRuqKA==@protonmail.internalid>
+ <9b0ac659-999a-4caa-8578-f34a39a67e4f@linaro.org>
+ <faa755f7-e5cc-46c0-b838-8d015a481edb@kernel.org>
+From: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>
+In-Reply-To: <faa755f7-e5cc-46c0-b838-8d015a481edb@kernel.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTAzMDE0MSBTYWx0ZWRfXwRNyxZWzemLJ
- eRo3sYQSoJmPyF0lxyvPv67/1YMzD6b+Wh+DKkWq02Jf0eiTSE5X6qdGchN1FXqJFUpzqSgzPhG
- 2qRpzamKDUtM4/SRR6otxeeqJ7qIEpU=
-X-Proofpoint-ORIG-GUID: weFJ7XP3aqf9k1-UGtq7W8KzKimrtDXr
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTAzMDE0MSBTYWx0ZWRfX9fqEUNNyXW7C
- pZud6EdFdV6NrUlc5bgMA3r50V7x9yV7SPdwIZIUrpwji49CNjsbwHsmJlD7EBOndTjBk9enUMp
- GCrLYoknkSC1SRKIhZV1ZFWQS0cKkMsVhyRJcYui1X2MEoooUQQyDh8UERT+W88ybVb9okbCbNl
- vZ9csR6dSEs36F4zoKxDywYlaWtV2tXYkeOT2vE2aGNwqgW3O/l7ZH8zvt3qcbnkPxi2WihH8J1
- IkRK68mS6aDzMDluDWJRb0DCv/6DF+oTmcRs7SIj0WUG6OGmQVCoWp/NE0HXbQRbMgY4bqfV9Ia
- 7OA+/YwIpZ8I8mF4muI1czypgqBB8VmOCgg2THAf03hQBTU2RzBH1iKQBHxdJVjtvxtG/AIBf4p
- iZm/UB4b6jd2v3xRMGqYlbAOB8Z7LoE5kzWVWByraySf/3WcfX8OrUEY6qQGvfAogf4MQHNwBxQ
- RnbjKXUftXF4bI/zJsQ==
-X-Authority-Analysis: v=2.4 cv=RsL16imK c=1 sm=1 tr=0 ts=6a999cf1 cx=c_pps
- a=UNFcQwm+pnOIJct1K4W+Mw==:117 a=EcXJGs5vVKLEW0aY/poVLA==:17
- a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22
- a=EUspDBNiAAAA:8 a=84XQMU3cwwySlwIbdQEA:9 a=QEXdDO2ut3YA:10
- a=uKXjsCUrEbL0IQVhDsJ9:22
-X-Proofpoint-GUID: weFJ7XP3aqf9k1-UGtq7W8KzKimrtDXr
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-03_05,2026-09-03_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- spamscore=0 phishscore=0 priorityscore=1501 suspectscore=0 clxscore=1015
- lowpriorityscore=0 adultscore=0 bulkscore=0 malwarescore=0 impostorscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2609030141
 
+On 9/3/26 15:32, Bryan O'Donoghue wrote:
+> On 03/09/2026 12:53, Vladimir Zapolskiy wrote:
+>> On 9/1/26 23:15, Bryan O'Donoghue wrote:
+>>> Add a base schema for the MIPI CSI2 PHYs on Qualcomm SoCs. This PHY
+>>> supports both DPHY and CPHY operation. A special mode of DPHY operation -
+>>> called variously split-mode or combo-mode also allows for two sensors to be
+>>> connected to one PHY.
+>>>
+>>> The submitted binding here describes the DPHY modes of operation only. CPHY
+>>> is left to future work.
+>>
+>> Like I've said in v14 review, the statement above is incorrect, and it has
+>> to be changed, for whatever reason it hasn't happened so far.
+>>
+>>    From https://lore.kernel.org/all/1e1bc17a-4c7a-4c08-b0c8-2a2ff31fe870@linaro.org/
+> Well, I'm not trying to describe CPHY here so I'm not claiming it is
+> adequately described.
 
+The CSIPHY IP supports C-PHY bus type, and it should be represented in
+the documentation.
 
-On 8/26/2026 3:21 PM, Aniket Randive wrote:
-> I2C transfers in GPI DMA mode can fail with -EIO when a target holds
-> SDA low, leaving the bus stuck and preventing subsequent transactions.
-> The GPI completion callback reports a NACK and a genuine bus error
-> alike as -EIO, and the existing recovery path switches the SE to FIFO
-> mode which is not valid in GPI DMA mode.
-> 
-> Add bus recovery support using the I2C_BUS_CLEAR and I2C_STOP_ON_BUS
-> opcodes issued via the GPI TX DMA channel. Guard the -EIO recovery
-> trigger with a SE_GENI_IOS RX_DATA_IN check to skip recovery when SDA
-> is already released. Extend the recovery callback to dispatch through
-> the GPI DMA path when gi2c->gpi_mode is set.
-> 
-> Signed-off-by: Aniket Randive <aniket.randive@oss.qualcomm.com>
-> ---
->   drivers/i2c/busses/i2c-qcom-geni.c | 104 +++++++++++++++++++++++++++++++------
->   1 file changed, 88 insertions(+), 16 deletions(-)
-> 
-> diff --git a/drivers/i2c/busses/i2c-qcom-geni.c b/drivers/i2c/busses/i2c-qcom-geni.c
-> index 9fa1a8ac400c..85cb1367958c 100644
-> --- a/drivers/i2c/busses/i2c-qcom-geni.c
-> +++ b/drivers/i2c/busses/i2c-qcom-geni.c
-> @@ -34,8 +34,6 @@
->   #define I2C_READ		0x2
->   #define I2C_WRITE_READ		0x3
->   #define I2C_ADDR_ONLY		0x4
-> -#define I2C_BUS_CLEAR		0x6
-> -#define I2C_STOP_ON_BUS		0x7
->   /* M_CMD params for I2C */
->   #define PRE_CMD_DELAY		BIT(0)
->   #define TIMESTAMP_BEFORE	BIT(1)
-> @@ -1003,6 +1001,70 @@ static int geni_i2c_fifo_bus_cmd(struct geni_i2c_dev *gi2c, u32 cmd)
->   	return gi2c->err;
->   }
->   
-> +static int geni_i2c_gpi_bus_cmd(struct geni_i2c_dev *gi2c, enum i2c_op cmd)
-> +{
-> +	const struct geni_i2c_clk_fld *itr = gi2c->clk_fld;
-> +	struct dma_async_tx_descriptor *desc;
-> +	struct gpi_i2c_config peripheral = {};
-> +	struct dma_slave_config config = {};
-> +	unsigned long time_left;
-> +	unsigned long flags;
-> +	dma_cookie_t cookie;
-> +
-> +	config.peripheral_config = &peripheral;
-> +	config.peripheral_size = sizeof(peripheral);
-> +
-> +	peripheral.set_config  = 1;
-> +	peripheral.pack_enable = I2C_PACK_TX | I2C_PACK_RX;
-> +	peripheral.cycle_count = itr->t_cycle_cnt;
-> +	peripheral.high_count  = itr->t_high_cnt;
-> +	peripheral.low_count   = itr->t_low_cnt;
-> +	peripheral.clk_div     = itr->clk_div;
-> +	peripheral.op          = cmd;
-> +
-> +	if (dmaengine_slave_config(gi2c->tx_c, &config)) {
-> +		dev_err(gi2c->se.dev, "dma config error for bus cmd %u\n", cmd);
-> +		return -EIO;
-> +	}
-> +
-> +	desc = dmaengine_prep_slave_single(gi2c->tx_c, 0, 0, DMA_MEM_TO_DEV,
-> +					   DMA_PREP_INTERRUPT | DMA_CTRL_ACK);
-> +	if (!desc)
-> +		return -EIO;
-> +
-> +	desc->callback_result = i2c_gpi_cb_result;
-> +	desc->callback_param = gi2c;
-> +
-> +	cookie = dmaengine_submit(desc);
-> +	if (dma_submit_error(cookie))
-> +		return -EIO;
-> +
-> +	/*
-> +	 * cur and err are shared with geni_i2c_irq() and the GPI callback
-> +	 * i2c_gpi_cb_result(); both write err (the IRQ handler under
-> +	 * gi2c->lock). Reset them under the lock before issuing the transfer.
-> +	 */
-> +	spin_lock_irqsave(&gi2c->lock, flags);
-> +	gi2c->cur = NULL;
-> +	gi2c->err = 0;
-> +	spin_unlock_irqrestore(&gi2c->lock, flags);
-> +	reinit_completion(&gi2c->done);
-> +	dma_async_issue_pending(gi2c->tx_c);
-> +
-> +	time_left = wait_for_completion_timeout(&gi2c->done, XFER_TIMEOUT);
-> +	if (!time_left) {
-> +		dev_err(gi2c->se.dev, "timeout waiting for GPI bus cmd %u\n", cmd);
-> +		dmaengine_terminate_sync(gi2c->tx_c);
-> +		return -ETIMEDOUT;
-> +	}
-> +
-> +	/* ARB_LOST and BUS_PROTO may be expected during recovery; treat as success */
-> +	if (gi2c->err == -EAGAIN || gi2c->err == -EPROTO)
-> +		return 0;
-> +
-> +	return gi2c->err;
-> +}
-> +
->   static int geni_i2c_recover_bus(struct i2c_adapter *adap)
->   {
->   	struct geni_i2c_dev *gi2c = i2c_get_adapdata(adap);
-> @@ -1021,15 +1083,23 @@ static int geni_i2c_recover_bus(struct i2c_adapter *adap)
->   		return 0;
->   	}
->   
-> -	ret = geni_i2c_fifo_bus_cmd(gi2c, I2C_BUS_CLEAR);
-> -	if (!ret)
-> -		ret = geni_i2c_fifo_bus_cmd(gi2c, I2C_STOP_ON_BUS);
-> +	if (gi2c->gpi_mode) {
-> +		ret = geni_i2c_gpi_bus_cmd(gi2c, I2C_BUS_CLEAR);
-> +		if (ret)
-> +			dev_dbg(gi2c->se.dev, "GPI bus clear returned %d, issuing stop anyway\n",
-> +				ret);
-> +
-> +		ret = geni_i2c_gpi_bus_cmd(gi2c, I2C_STOP_ON_BUS);
-> +	} else {
-> +		ret = geni_i2c_fifo_bus_cmd(gi2c, I2C_BUS_CLEAR);
-> +		if (!ret)
-> +			ret = geni_i2c_fifo_bus_cmd(gi2c, I2C_STOP_ON_BUS);
-> +	}
->   
->   	/*
-> -	 * Recovery succeeds only once the slave releases SDA, so the bus
-> -	 * state is the authority: RX_DATA_IN high means the bus is free,
-> -	 * while a clean opcode status with SDA still low is a failed
-> -	 * recovery.
-> +	 * Recovery succeeds when SDA is released. RX_DATA_IN high means the
-> +	 * bus is free; trust this over the opcode return path, which cannot
-> +	 * flag a benign recovery event in GPI mode.
->   	 */
->   	if (readl_relaxed(gi2c->se.base + SE_GENI_IOS) & RX_DATA_IN)
->   		ret = 0;
-> @@ -1066,14 +1136,18 @@ static int geni_i2c_xfer(struct i2c_adapter *adap,
->   	else
->   		ret = geni_i2c_fifo_xfer(gi2c, msgs, num);
->   
-> -	if (!gi2c->gpi_mode &&
-> -	    (ret == -EPROTO || ret == -ETIMEDOUT || ret == -EAGAIN)) {
-> +	if (ret == -EPROTO || ret == -ETIMEDOUT || ret == -EAGAIN ||
-> +	    (gi2c->gpi_mode && ret == -EIO)) {
->   		/*
->   		 * Only attempt recovery if SDA is stuck low. -EPROTO and
->   		 * -ETIMEDOUT indicate bus errors where the target may be
->   		 * holding SDA low. ARB_LOST (-EAGAIN) on a single-controller
->   		 * bus indicates a stuck target, not a real arbitration loss.
-> -		 * GPI DMA mode extends this trigger separately.
-> +		 * In GPI DMA mode the completion callback reports NACK,
-> +		 * BUS_PROTO and ARB_LOST alike as -EIO, so the SE_GENI_IOS
-> +		 * RX_DATA_IN check below is what distinguishes a genuinely
-> +		 * stuck bus from a benign NACK: a NACK leaves SDA released
-> +		 * (high) after the STOP, so recovery is skipped.
->   		 */
->   		if (!(readl_relaxed(gi2c->se.base + SE_GENI_IOS) & RX_DATA_IN)) {
->   			int recovery_ret = i2c_recover_bus(adap);
-This does not appear to handle scenarios such as an I2C multi-message 
-transfer where the stretch bit is set during the first message, but an 
-error occurs while preparing the second message (for example, during 
-memory allocation or DMA descriptor preparation). In such cases, the SCL 
-line may remain asserted low and impact subsequent transfers.
-  > @@ -1292,10 +1366,8 @@ static int geni_i2c_probe(struct 
-platform_device *pdev)
->   	if (ret < 0)
->   		return ret;
->   
-> -	if (!gi2c->gpi_mode) {
-> -		gi2c->rinfo.recover_bus = geni_i2c_recover_bus;
-> -		gi2c->adap.bus_recovery_info = &gi2c->rinfo;
-> -	}
-> +	gi2c->rinfo.recover_bus = geni_i2c_recover_bus;
-> +	gi2c->adap.bus_recovery_info = &gi2c->rinfo;
->   
->   	ret = i2c_add_adapter(&gi2c->adap);
->   	if (ret)
-> 
+Right in this presented change 'bus-type' property value can be either D-PHY
+or C-PHY, so even if there is no intention to describe C-PHY, it's done.
 
+> I'll reword this.
+> 
+>>>>> C-PHY bus type is also well described by this version of the bindings.
+>>
+>>> Suggested-by: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>
+>>> Signed-off-by: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
+>>> ---
+>>>     .../bindings/phy/qcom,x1e80100-csi2-phy.yaml       | 222 +++++++++++++++++++++
+>>>     1 file changed, 222 insertions(+)
+>>>
+>>> diff --git a/Documentation/devicetree/bindings/phy/qcom,x1e80100-csi2-phy.yaml b/Documentation/devicetree/bindings/phy/qcom,x1e80100-csi2-phy.yaml
+>>> new file mode 100644
+>>> index 0000000000000..17de0701eb103
+>>> --- /dev/null
+>>> +++ b/Documentation/devicetree/bindings/phy/qcom,x1e80100-csi2-phy.yaml
+>>> @@ -0,0 +1,222 @@
+>>> +# SPDX-License-Identifier: (GPL-2.0 OR BSD-2-Clause)
+>>> +%YAML 1.2
+>>> +---
+>>> +$id: http://devicetree.org/schemas/phy/qcom,x1e80100-csi2-phy.yaml#
+>>> +$schema: http://devicetree.org/meta-schemas/core.yaml#
+>>> +
+>>> +title: Qualcomm X1E80100 SoC CSI2 PHY
+>>> +
+>>> +maintainers:
+>>> +  - Bryan O'Donoghue <bod@kernel.org>
+>>> +
+>>> +description:
+>>> +  Qualcomm MIPI CSI2 C-PHY/D-PHY combination PHY. Connects MIPI CSI2 sensors
+>>> +  to Qualcomm's Camera CSI Decoder. The PHY supports both C-PHY and D-PHY
+>>> +  modes.
+>>> +
+>>> +properties:
+>>> +  compatible:
+>>> +    const: qcom,x1e80100-csi2-phy
+>>> +
+>>> +  reg:
+>>> +    maxItems: 1
+>>> +
+>>> +  clocks:
+>>> +    maxItems: 3
+>>> +
+>>> +  clock-names:
+>>> +    items:
+>>> +      - const: core
+>>> +      - const: timer
+>>> +      - const: ahb
+>>> +
+>>> +  interrupts:
+>>> +    maxItems: 1
+>>> +
+>>> +  operating-points-v2: true
+>>> +
+>>> +  opp-table:
+>>> +    type: object
+>>> +
+>>> +  power-domains:
+>>> +    items:
+>>> +      - description: Titan Top GDSC - Titan ISP Block, Global Distributed Switch Controller.
+>>> +      - description: MMCX voltage rail
+>>> +      - description: MXC or MXA voltage rail
+>>> +
+>>> +  power-domain-names:
+>>> +    items:
+>>> +      - const: top
+>>> +      - const: mmcx
+>>> +      - const: mx
+>>> +
+>>> +  vdda-0p9-supply:
+>>> +    description: Phandle to a 0.9V regulator supply to a PHY.
+>>> +
+>>> +  vdda-1p2-supply:
+>>> +    description: Phandle to 1.2V regulator supply to a PHY.
+>>> +
+>>> +  ports:
+>>> +    $ref: /schemas/graph.yaml#/properties/ports
+>>> +
+>>> +    properties:
+>>> +      port@0:
+>>> +        $ref: /schemas/graph.yaml#/$defs/port-base
+>>> +        description:
+>>> +          Sensor input. Always present. A single sensor is described by a
+>>> +          single endpoint with the clock lane at position 0 and one to four
+>>> +          data lanes.
+>>> +
+>>> +          DPHY split mode, where two independent sensors share the same PHY,
+>>> +          is described by two endpoints, each with its own clock lane position;
+>>> +          endpoint@0 with clock-lanes = <0> and one or two data-lanes and
+>>> +          endpoint@1 with clock-lanes = <3> and one data lane.
+>>> +
+>>> +        unevaluatedProperties: false
+>>> +
+>>> +        patternProperties:
+>>> +          "^endpoint(@[01])?$":
+>>> +            $ref: /schemas/media/video-interfaces.yaml#
+>>> +            unevaluatedProperties: false
+>>> +            properties:
+>>> +              bus-type:
+>>> +                enum:
+>>> +                  - 1 # MEDIA_BUS_TYPE_CSI2_CPHY
+>>> +                  - 4 # MEDIA_BUS_TYPE_CSI2_DPHY
+>>> +
+>>> +              clock-lanes:
+>>> +                maxItems: 1
+>>> +
+>>> +              data-lanes:
+>>> +                minItems: 1
+>>> +                maxItems: 4
+>>> +                items:
+>>> +                  minimum: 1
+>>> +                  maximum: 4
+>>> +                description:
+>>> +                  Data lane positions following this endpoint's clock
+>>> +                  lane. Positions are a per-port logical numbering, not
+>>> +                  package pad or ball positions.
+>>> +
+>>> +            required:
+>>> +              - bus-type
+>>
+>> A review comment given to v14 is still applicable, 'bus-type' property
+>> should be set as optional with D-PHY mode fallback.
+> 
+> I believe you said "could" be optional in v14 but, if you actually
+> _want_ it optional, I'll update this to reflect, np.
+
+Sure, thank you.
+
+>>
+>>> +              - data-lanes
+>>> +              - clock-lanes
+>>
+>> Here 'clock-lanes' is a truly optional proiperty since its value is
+>> immutable in each endpoint, it should be removed from the list of
+>> required properties.
+> 
+> Hmm.
+> 
+> I want to make sure clock-lanes is defined and set to the correct value.
+
+It's not needed, the mutable properties make sense, the immutable ones
+can be removed without any loss. The correctness of the propertly value
+is checked by the driver in runtime.
+
+> For example clock-lanes = <2> for split mode is wrong.
+
+If there is a wrong value of 'clock-lanes' property given, the driver will
+complain, because it knows the proper value.
+
+And if there is no 'clock-lanes' property given, the driver knows the proper
+value and it reuses it rightfully.
+
+So, there is nothing got missed, if 'clock-lanes' becomes an optional
+property, as I request. A comment in the documentation can be left though.
+
+>>
+>> Also 'clock-lanes' are not expected to be found in C-PHY bus type case.
+> 
+> Right so to both verify the property and not require it from CPHY I will
+> make it required only for DPHY.
+
+By making 'clock-lanes' optional both bus type cases will be well described.
+
+For clarity, the property is not required for D-PHY bus type mode also,
+please make it optional in the next version, thank you.
+
+-- 
+Best wishes,
+Vladimir
