@@ -1,45 +1,104 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5DD974C681C;
-	Thu,  3 Sep 2026 15:01:46 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 018894C77AA
+	for <linux-arm-msm@vger.kernel.org>; Thu,  3 Sep 2026 15:02:31 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788447708; cv=none; b=joCWnjheFa8OAvmyUV39/xjGBG4CWdExnBEWa15mDLhDEsfLtmw7GxAVVuFccL+5Sa7cMBhzUf9CIKW+MR5ez7O9foqdIa/fOEpF5XcO3fyUH62d0XUzPZzu+/FmdoxQeFLKOQOYjqHI1ayngEaHwSXzJWgQlHkJwnBqOiUC5yk=
+	t=1788447753; cv=none; b=d+EYGAMjk7QDFWgrSCt8gLgta8+yCGNzRKVhyqKELlLegezFK0NrFSiCi3IRkY89dj3XwPGfoi0Uu7p8h7I3fg4JA3ho1jSXJpe/LE3kzK2FgqRErUBsuVscAqc7NVT6tODtTL0nMMit0HZh2c6x9ZNpblc1FKPdtqFabVM8US8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788447708; c=relaxed/simple;
-	bh=YcfeFDNO0Y5VfaPsx59OQeI0g2enu4ZxgxDoVbgIHhM=;
+	s=arc-20240116; t=1788447753; c=relaxed/simple;
+	bh=6OXN9ZSxOHsFSiWwE84thZW4F6t6pwiSkpDKU/qF3l8=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=VsGAKDeBJh+pUQO5oZxB8Jpjm/0H4Qjtm0NaDMI7VrJuFzvXyAZVsf2PCKnrtYtG+4tMxbzXEEst3ROGFa9iSHY+LAkgAWWBehsTWhsg4F4f58ncgZPjY8C4UQeTDhMeXN9IeYCHZr1oCQHsWOWHRYMGoH+nYQxf5WCLSbJnWwo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=KscKu99S; arc=none smtp.client-ip=100.103.45.18
+	 Content-Type:Content-Disposition:In-Reply-To; b=S1pJLegg8c8sqdqQXEBQcTIzRMwk1uVESkfZTdrJICktPl54gEiixsXz0R76T+J9vPFqnhc+s3nBKGqFOx8hld/eNZYmOxyAKyPa2VLO9ExlN7ik9x3wBkceGToOZXF84iYT1aTIoLlMe1nTqIrpFCzzdifSZQbjdGjRfqCtX0Y=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=V60kDtss; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=RiswnK4L; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="KscKu99S"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id DB9E11F000E9;
-	Thu,  3 Sep 2026 15:01:44 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1788447706;
-	bh=2sEPcsksdfxmQZhCNsW8OtFfleaAGT/TwUXbEEQQtjI=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=KscKu99ShQiwCg6Oxyu8AGSgaypsdwNSsFGlNFGhUyfhgOOnYNhkxMsyBskOvPQeW
-	 j+uTwOaekHqZ4xjDI7WMyIX3251JEcApRjJoZccWJDIcLWB68Wt72toIYzzLC8xT9v
-	 tzWRvp3F2fW7aK4EoMth1554Gv70oZwPr+5JGUyyQlP7skvLuV8+2f8Jd4ZXQyJ6Bf
-	 SjsQiUwL7CgllMo5C9E71ymIDEv2t9h7MhzEEqW99d7A6BP6KUCVKQKoT08UqIn4rc
-	 4lR6egDHQmtJq4k3MGPPFmPCYANULMqZSdQ64V/1pBjuHQT0c6HHDIONdY2kkm5tTb
-	 yb65+2X+H0mTQ==
-Date: Thu, 3 Sep 2026 10:01:42 -0500
-From: Bjorn Andersson <andersson@kernel.org>
-To: Luca Weiss <luca.weiss@fairphone.com>
-Cc: Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>, 
-	Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
-	Conor Dooley <conor+dt@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>, 
-	~postmarketos/upstreaming@lists.sr.ht, phone-devel@vger.kernel.org, 
-	Krzysztof Kozlowski <krzk@kernel.org>, linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	devicetree@vger.kernel.org
-Subject: Re: [PATCH 4/4] arm64: dts: qcom: sm7225-fairphone-fp4: Add parent
- supply for regulators
-Message-ID: <apmLYmMgGZVhqU8o@baldur>
-References: <20260901-fp4-regulator-supply-v1-0-68288ab70aee@fairphone.com>
- <20260901-fp4-regulator-supply-v1-4-68288ab70aee@fairphone.com>
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="V60kDtss";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="RiswnK4L"
+Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 683DAhQn589130
+	for <linux-arm-msm@vger.kernel.org>; Thu, 3 Sep 2026 15:02:31 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-type:date:from:in-reply-to:message-id:mime-version
+	:references:subject:to; s=qcppdkim1; bh=OtNsvJ5bduzzTnr9siqKTCYg
+	n2DujhWtW1+E2PvYXZg=; b=V60kDtssY7nUG6oGUFHPc07gc7wNiTtxIizC7ZZA
+	toTkvrAs8Em/KabPWX9zHKv7HxZf8l1IrqG1eBFyBJVQAEihBt38QmP+WFRvZYEA
+	dJbrj+LObAQW75o0vSKveICAw+qfVTn/Gzrr27PCtr2QEfJ4CR0RyQrn5w9zxTo1
+	y0aCbjX8GuXpUsrZeWY0gb0cynmL5GDQo2gDvd3E4P5hwFuxL5/YYbmaF3MhTsUy
+	f5ATe7yp63kpwkfw+U72eG7WcSLKDGEA5KQdTwJYHZjVUfnnzu79f8dsT0luuo0r
+	c35sIeYkGa2JabR5hxdQujqIWJO49n2MCHJ6bGqv5nlUqg==
+Received: from mail-ua1-f72.google.com (mail-ua1-f72.google.com [209.85.222.72])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gf1pyjh5q-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 03 Sep 2026 15:02:30 +0000 (GMT)
+Received: by mail-ua1-f72.google.com with SMTP id a1e0cc1a2514c-97e9909eeeaso217241.3
+        for <linux-arm-msm@vger.kernel.org>; Thu, 03 Sep 2026 08:02:30 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1788447750; x=1789052550; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=OtNsvJ5bduzzTnr9siqKTCYgn2DujhWtW1+E2PvYXZg=;
+        b=RiswnK4LmN7RzixLccoJpbknFWSqjfufjFCoUYAP4eh0032uToNslyYVIStgRACJ9K
+         S2ZXUXjMt2BigdJgo0Bdk3SsEFtjIsANFVtYBvWSQH5T12w0IE6isI9tWSWxH45S1/5y
+         Pc/PQklQwFFNAQugOkZDUaNoGDH4EDVwxXdgHpDp2+rhfxbsWXwnJzlmYxpU4xnbZK1E
+         IhMTxHEH7mJWyBRqT0XLohwxucZFClCzTxnBHIUajzGhgaOV6EGgiQPdjmuI5opHpivV
+         t1sNPl4jNDlaBMr4L7X+k7y5MwzVq5SYdnn4mp20sHuAjNZvP7/5w5R1Ts55291HXu8L
+         RNEQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1788447750; x=1789052550;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=OtNsvJ5bduzzTnr9siqKTCYgn2DujhWtW1+E2PvYXZg=;
+        b=lXs8/TEn8/Wd9DqAUHHQTuIEE8JFHSj1b5XxKazEm/S7DUXS9CZO60hI0nRhbPP2qT
+         mxUqelipmA3wcrhm+R9CqlCFGEmSpdXPADLuCJ+I0j06L12DPA4qtKpVCoxpuKeq5ZCu
+         OfFrReoLHzEgyJRJ0EMQB8a7PLgBgnFiW4Db4wu4+l6S2FFFrDtt4Z4i8tEZI5rdE/E3
+         pay5uBV2Tv0H7ELi+g8m0PTCndxHkItetAnaNpjrxm3esvLNMekBVEuFIglIP/Vo3KJJ
+         xxahlSj5uuvhQ+9bWpvefUHDWeIcwoyKBzEJs+trtob8/Gu9RMLn6T4XPfMLjzOaOyro
+         +hug==
+X-Forwarded-Encrypted: i=1; AKwUvBylhh1qEEu3ERbopfCDBAC7wVj6CdKcvvU2y+RmLeFGm/Mt4i6WkU/ctSpmlb+kZjeqhGGADqwwVKls0o8s@vger.kernel.org
+X-Gm-Message-State: AFuF++mvZqtkvyi3EBBGw3ShwZlqJo5EA4XY4yHKDsQXueH0IMscLoyR
+	zkhJJ0F4FpIepJyWmg885CASO7KdWDa+V4l96onbcLLHc7E+cNHU9zduRIvYC7JOoUt1ylNLW/t
+	CWP9jCD4wUvhGckKvVHNQfugXOBi3onyOTunih3onyC99CKY9HZ00jwWLyB2iXdlOqJuR
+X-Gm-Gg: AYBFou138AOMScxPrsmFKn7UkdUmWZLYDwEMRRL0q7BrSR2/XFCdqEheGKJyBV4vWBC
+	VHVP20sILKfjXZtoEOfmne6z7w/WW/18HL0GDehScJk6I5wuInZ24YuSeKQShX1nBbS9X3aZerF
+	JMorLue9lOUKp4fm1zKcgVzxQROXrPd6fcy3f8kOORgPT2cgGeEXqbX1rgyeOQOrN6lU5WCFkrG
+	IXWvfa9+lupHDUGb4NdIYoJbAZSE/K05cGJnYUaZ0YCEdTbWpBWjEMTvQEpezWiiGiXoSznNlDE
+	PZyk0Nz0yoxxISiUFB7guN1poiPG26R+2C28c8uCUHYEyvM0T5+BeXD6+BIfIoFoMT4BpMTF5Qn
+	tdK9ZKKXngUPx6g==
+X-Received: by 2002:a05:6102:3fa1:b0:77a:2268:9fdb with SMTP id ada2fe7eead31-78a1f23df59mr3873528137.7.1788447749830;
+        Thu, 03 Sep 2026 08:02:29 -0700 (PDT)
+X-Received: by 2002:a05:6102:3fa1:b0:77a:2268:9fdb with SMTP id ada2fe7eead31-78a1f23df59mr3873476137.7.1788447749277;
+        Thu, 03 Sep 2026 08:02:29 -0700 (PDT)
+Received: from oss.qualcomm.com ([86.121.170.36])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-49ce831af89sm74128345e9.1.2026.09.03.08.02.27
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 03 Sep 2026 08:02:28 -0700 (PDT)
+Date: Thu, 3 Sep 2026 18:02:26 +0300
+From: Abel Vesa <abel.vesa@oss.qualcomm.com>
+To: Konrad Dybcio <konradybcio@kernel.org>
+Cc: Vinod Koul <vkoul@kernel.org>, Neil Armstrong <neil.armstrong@linaro.org>,
+        Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>,
+        Wesley Cheng <quic_wcheng@quicinc.com>,
+        Iskren Chernev <me@iskren.info>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Manivannan Sadhasivam <mani@kernel.org>, linux-arm-msm@vger.kernel.org,
+        linux-phy@lists.infradead.org, devicetree@vger.kernel.org,
+        linux-kernel@vger.kernel.org,
+        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+Subject: Re: [PATCH v2 4/5] arm64: dts: qcom: msm8996: Add VDD_MX to QUSB2
+ PHYs
+Message-ID: <hnvngqgtesfyojftxfuqcsc6ajf7prrlxmdk34j2pgtjmhse5w@vo57k4jmlgtx>
+References: <20260903-topic-8996_61x5_qusb2phy-v2-0-4c3f980a4560@oss.qualcomm.com>
+ <20260903-topic-8996_61x5_qusb2phy-v2-4-4c3f980a4560@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -48,123 +107,42 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20260901-fp4-regulator-supply-v1-4-68288ab70aee@fairphone.com>
+In-Reply-To: <20260903-topic-8996_61x5_qusb2phy-v2-4-4c3f980a4560@oss.qualcomm.com>
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTAzMDEzMCBTYWx0ZWRfX00HAmoDd/f/i
+ OIbppeUMorcdZRLmyRWGZqNGl7dPvPf7whmzan9ycCrKafMVcQlGqD9mYWLJWuuxkltfUd8NTqF
+ XreelY5u2WF1XsdLRE79hoAgrzn7215rJvwx07znOxH2S2H6CcTxgztnJxWEthIhRQgplpRh+2q
+ JpJPls2kLp8aXdziBJbo3wgnVt9eUdtkMhat6wk/mhVJuRIIqg147GQrUeQi17vA6L0jEWrIy0J
+ zBbhbCJ/tCznfRJth7dAU/PC/VfE/yoJQ2a5OuDIMomLfvJbqK6gDiezpLURKQ9wBAX+2uC6a+8
+ QhciSKhmNo84Zb8Eb/UQY4vFtP7q14KRr86ps6z6mR0Pkzcq55govb347mq8czOYaPOuUU17s/u
+ XIx/0emwV9W7Eiik1nMUfmshqL66yiKohFLjkPByQ8MZ48FF4R22Qgth1o1QaIEkfLN3zVGyNaf
+ Q3D9z5F9Vb+ka9TwZQA==
+X-Proofpoint-ORIG-GUID: snmnOwwARtnJW1igaxhhsdpf1hmce6Cw
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTAzMDEzMCBTYWx0ZWRfXyYFzmBnEnrJl
+ otFuC6JCYNOig5f2qH4y0wcIgBFznVc5AMWuHqvqPkBOwWVEbIAcJPyOPtTHaLpHmPRZU2zf0EO
+ KivI3Wy2bUPm7siFgEM8zjlD0+FhblI=
+X-Proofpoint-GUID: snmnOwwARtnJW1igaxhhsdpf1hmce6Cw
+X-Authority-Analysis: v=2.4 cv=DMO/JSNb c=1 sm=1 tr=0 ts=6a998c06 cx=c_pps
+ a=ULNsgckmlI/WJG3HAyAuOQ==:117 a=q7XEBjOi5DRkXzmV0jSBjQ==:17
+ a=kj9zAlcOel0A:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22
+ a=EUspDBNiAAAA:8 a=DCX93tUFo-QliEHFFTUA:9 a=CjuIK1q_8ugA:10
+ a=1WsBpfsz9X-RYQiigVTh:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-09-03_04,2026-09-03_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ malwarescore=0 spamscore=0 bulkscore=0 priorityscore=1501 clxscore=1015
+ lowpriorityscore=0 suspectscore=0 adultscore=0 impostorscore=0 phishscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2609030130
 
-On Tue, Sep 01, 2026 at 10:58:59AM +0200, Luca Weiss wrote:
-> Add the vdd-*-supply properties to the rpmh-regulators nodes, so that
-> the parent regulators can be enabled when needed.
+On 26-09-03 16:25:31, Konrad Dybcio wrote:
+> From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
 > 
+> The QUSB2 PHYs are powered by (among others) the VDD_MX power rail.
+> Describe that in the DT.
+> 
+> Reviewed-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+> Signed-off-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
 
-https://docs.kernel.org/process/submitting-patches.html#describe-your-changes
-starts with "Describe your problem.". Is there an actual problem observed?
-
-I've been told that rpmh will have your back here, so you should not
-need to explicitly vote for these resources from Linux.
-
-Regards,
-Bjorn
-
-> The regulators s4a and s6a are a bit special. They feed back into
-> PM6350, but are not modelled as regulators (or anything else?), so they
-> also can't be added as vdd-*-supply. It would seem to be possible to add
-> them with their "Default on booting voltage" from the PM6350 Data Sheet
-> in the dts, but I'm not sure this is desired.
-> 
-> And document what the "missing" regulators are used for.
-> 
-> Signed-off-by: Luca Weiss <luca.weiss@fairphone.com>
-> ---
->  arch/arm64/boot/dts/qcom/sm7225-fairphone-fp4.dts | 46 +++++++++++++++++++++++
->  1 file changed, 46 insertions(+)
-> 
-> diff --git a/arch/arm64/boot/dts/qcom/sm7225-fairphone-fp4.dts b/arch/arm64/boot/dts/qcom/sm7225-fairphone-fp4.dts
-> index 5d20ad93b0c5..a1556d802a8b 100644
-> --- a/arch/arm64/boot/dts/qcom/sm7225-fairphone-fp4.dts
-> +++ b/arch/arm64/boot/dts/qcom/sm7225-fairphone-fp4.dts
-> @@ -78,6 +78,17 @@ lcdb_dummy: regulator-lcdb-dummy {
->  		regulator-max-microvolt = <5500000>;
->  	};
->  
-> +	vph_pwr: regulator-vph-pwr {
-> +		compatible = "regulator-fixed";
-> +
-> +		regulator-name = "vph_pwr";
-> +		regulator-min-microvolt = <3700000>;
-> +		regulator-max-microvolt = <3700000>;
-> +
-> +		regulator-always-on;
-> +		regulator-boot-on;
-> +	};
-> +
->  	reserved-memory {
->  		/*
->  		 * The rmtfs memory region in downstream is 'dynamically allocated'
-> @@ -296,6 +307,15 @@ &adsp {
->  &apps_rsc {
->  	regulators-0 {
->  		compatible = "qcom,pm6350-rpmh-regulators";
-> +
-> +		vdd-l2-l5-l7-supply = <&vreg_s2a>;
-> +		vdd-l3-l6-l8-l9-l10-supply = <&vreg_bob>;
-> +		vdd-l11-supply = <&vreg_s2a>;
-> +		vdd-l12-l14-supply = <&vreg_s2a>;
-> +		vdd-l15-l19-l22-supply = <&vreg_s8e>;
-> +		vdd-s1-supply = <&vph_pwr>;
-> +		vdd-s2-supply = <&vph_pwr>;
-> +
->  		qcom,pmic-id = "a";
->  
->  		vreg_s1a: smps1 {
-> @@ -310,6 +330,14 @@ vreg_s2a: smps2 {
->  			regulator-max-microvolt = <2048000>;
->  		};
->  
-> +		/*
-> +		 * s3a (smps3) is gfx.lvl
-> +		 * s4a (smps4) is supply for vdd-l4 & vdd-l13
-> +		 * s5a (smps5) is mx.lvl
-> +		 * s6a (smps6) is supply for vdd-l16 & vdd-l18-l20-l21
-> +		 * l1a (ldo1) is lcx.lvl
-> +		 */
-> +
->  		vreg_l2a: ldo2 {
->  			regulator-name = "vreg_l2a";
->  			regulator-min-microvolt = <1503000>;
-> @@ -408,6 +436,8 @@ vreg_l16a: ldo16 {
->  			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
->  		};
->  
-> +		/* l17a (ldo17) is lmx.lvl */
-> +
->  		vreg_l18a: ldo18 {
->  			regulator-name = "vreg_l18a";
->  			regulator-min-microvolt = <788000>;
-> @@ -446,8 +476,24 @@ vreg_l22a: ldo22 {
->  
->  	regulators-1 {
->  		compatible = "qcom,pm6150l-rpmh-regulators";
-> +
-> +		vdd-bob-supply = <&vph_pwr>;
-> +		vdd-l1-l8-supply = <&vreg_s2a>;
-> +		vdd-l2-l3-supply = <&vreg_s8e>;
-> +		vdd-l4-l5-l6-supply = <&vreg_bob>;
-> +		vdd-l7-l11-supply = <&vreg_bob>;
-> +		vdd-l9-l10-supply = <&vreg_bob>;
-> +		vdd-s8-supply = <&vph_pwr>;
-> +
->  		qcom,pmic-id = "e";
->  
-> +		/*
-> +		 * s1e-s2e (smps1-smps2) is cx.lvl
-> +		 * s3e-s4e (smps3-smps4) is VDD_APC1
-> +		 * s5e (smps5) is VDD_APC0
-> +		 * s6e-s7e (smps6-smps7) is mss.lvl
-> +		 */
-> +
->  		vreg_s8e: smps8 {
->  			regulator-name = "vreg_s8e";
->  			regulator-min-microvolt = <313000>;
-> 
-> -- 
-> 2.55.0
-> 
+Reviewed-by: Abel Vesa <abel.vesa@oss.qualcomm.com>
