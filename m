@@ -1,82 +1,82 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 481474E66BC
-	for <linux-arm-msm@vger.kernel.org>; Thu,  3 Sep 2026 15:38:53 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3F50C4E80D7
+	for <linux-arm-msm@vger.kernel.org>; Thu,  3 Sep 2026 15:38:58 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788449936; cv=none; b=U56Mq+mjBfyrYxwBO9QLtUmmlMuYbvWOEK4VpVropSfQsNa2aBRUJTWi7n8Lb2/ZX6UGpt31Jdjd8z/P14vdbO2to984JURc4Qc6jPU7RQx/Zb7epq+JpB4cmLTZ4aBqvXhvAlFiXtH66V0zKo/Bve4BK3vHuAW3ps5bThHNtHE=
+	t=1788449940; cv=none; b=bjoFTVKHCjyhlE9CzPqzWgpBGJAz8ZyKpx4kRpvzcEdkZjQH2cvFzAtjVdkK7ocj8psOyTJ0fv5yXv1r45/h2hMNhAL4oHOwBi+rdfjPPkjtuGFCb+mixWVha40ScJB5uj7lMjzVwFr2uhoUR9vf1SPR0QE6Q+s5guEThpd99FY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788449936; c=relaxed/simple;
-	bh=RQEdq61Vdn/o+GWlDrjCXx8XW0FGNdrwBRRRrc0lBxA=;
+	s=arc-20240116; t=1788449940; c=relaxed/simple;
+	bh=AjrT+2a1V/dFdE8w4G6xJN78eEUrW3q4ENCnkqhARGk=;
 	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
-	 MIME-Version; b=H1CnpSdDULIe1oONoNuBvjstoJ5OEAL1CVXILcCT8tC7cRHvQBcqQcM1L1U772xewoy/YqtIN4+Afdq3wlLV2C6b8ck2iO13E7/Ge5xkDcvqZZey3YCrxyM5TwBqvjC+c6IreH5H3YeDtnpijZgrcQI4+xXF7l4sfQUTbdSXfy0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=ClDr0Ue7; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=QqOcObVL; arc=none smtp.client-ip=205.220.180.131
+	 MIME-Version; b=fTzgu4uki3peVU33jfX6tVoUXIhmG5uNFT74N8MCXxqRIe0T0nG5sXLlPoMwGHViTI4abm2jaL7QW4n/J584SKrElUS0F3hIM3atnqpAxYJgjOHnDbT+vlNY91YD03T3alqKszQvQZiHr/P/AY12U0xEDC4KwmjP02XWt1/PkKc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=CHQoWt93; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=bZyDFoOX; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="ClDr0Ue7";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="QqOcObVL"
-Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 683DAheX707756
-	for <linux-arm-msm@vger.kernel.org>; Thu, 3 Sep 2026 15:38:52 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="CHQoWt93";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="bZyDFoOX"
+Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 683DANlh1314609
+	for <linux-arm-msm@vger.kernel.org>; Thu, 3 Sep 2026 15:38:57 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:date:from:in-reply-to:message-id
-	:mime-version:references:subject:to; s=qcppdkim1; bh=/Yyb6SfNxf5
-	UrztU26ZfRXa88f6Zm1ZntKgsLSKgarw=; b=ClDr0Ue7WdQ37SGzjXYbzK/TGGd
-	WWS5Z+t13MxB1lc8sknSASSzuXfSmF5hGXNHY5F0bI46gFmInq+yATE8fLp6skay
-	l/KQ6arrkCgBSjBJiK59XbTdcH/H8dhsaQodNURqXYPWha2hHK1AwNx/e9JyaSUb
-	I4SPGvQ1GVpkHTcPHXxT640sOvkDRfIhP1s0HAGTRFkdnyac5b5+vm2EPFTeyp3m
-	37E6P2Q6k9FHpittw3mr3lc37Mg9NmqmIXc44Op/yxjS9/9xYRghyM+JYiKa2o2g
-	mUP+YCrE3gtI5pDRl5XqCayGW4IJ001ltNNn7Xa+NLH6UWdN/ZeHSo0oCjA==
-Received: from mail-pf1-f197.google.com (mail-pf1-f197.google.com [209.85.210.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gf4ekj3a5-1
+	:mime-version:references:subject:to; s=qcppdkim1; bh=h4izH85dY8s
+	43dZbZGemk1SbK5CBZ3ueMd7xLjwebE4=; b=CHQoWt93bSf5i1CuMopCg+AtkSZ
+	np0nNaMAjZq9Lhyf01UtWo+mkipkhjbvnO+Yi3vcbncBI65hCWZFIBQR0cuPtCN1
+	L+zSChXLIx92RG45YnSRq5Qaj11YMMj0bkvQeJzN4ERaeIiIczrEbOb6OrbyAJIX
+	hFDWYHQwtyCK7DZVY5haz/Mw3Go9ePnkYG71zSfb+pLPQKxmqYXgfn6zo5QbORsg
+	YykpkywNktjDXsX3LUPXbU1uXsMe/b1pBFOniruSsGpAvIjLJe8kTkESQe+sjlz5
+	mi/gPbU4eqMp0Wd0FmRcSRuCno79XaIS5umo+P9Oh7yxtofDTfAnAwRz3wg==
+Received: from mail-pf1-f198.google.com (mail-pf1-f198.google.com [209.85.210.198])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gerdnd35g-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Thu, 03 Sep 2026 15:38:52 +0000 (GMT)
-Received: by mail-pf1-f197.google.com with SMTP id d2e1a72fcca58-84e4ef486c7so1159612b3a.1
-        for <linux-arm-msm@vger.kernel.org>; Thu, 03 Sep 2026 08:38:52 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 03 Sep 2026 15:38:57 +0000 (GMT)
+Received: by mail-pf1-f198.google.com with SMTP id d2e1a72fcca58-85722fc5a21so3632873b3a.2
+        for <linux-arm-msm@vger.kernel.org>; Thu, 03 Sep 2026 08:38:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1788449932; x=1789054732; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1788449936; x=1789054736; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=/Yyb6SfNxf5UrztU26ZfRXa88f6Zm1ZntKgsLSKgarw=;
-        b=QqOcObVLLjZqIwmQH2a9vVsXBqqWHr0VrPNasmx5nUuyVdj8ShP+97k/HxfEeEMLgC
-         V1wgzKP3RVrw4QNvKh5L2MS8gBb0WJshtuoz6fZpQZIgVoLNlwq5QwQ81MRhkwEmsjEF
-         Q0k22dBZdG21j0PK19oizqgnqLMJILTBPPkbQLAnXrnpmhhCVy/fgjnabAV7I0Sq+Foy
-         rgp4ZWxdonVF3dISP2OSBvRSZB4DKJW4HKFh1QHUoov20R/UhkIgQyj3SU5TLLrm5DsI
-         rDl0h6bRfgqQk4xm8padC9O4XDU3X7tROw5jQweKk/7q68L8PrwORBFfBOjRgSn/lnc5
-         qljg==
+        bh=h4izH85dY8s43dZbZGemk1SbK5CBZ3ueMd7xLjwebE4=;
+        b=bZyDFoOXL5Jdw04dFMqt/tujrzIpjkXVmYagFihDUhxrJ6NDnX5A0QmfXiqMxPR5Gp
+         FfBDlu3nq7zggOtkOm0OOQW+dRpEBsajFyiQIFXfH5V0OaFt1Z6IcYqwKF7aFy0ajOYq
+         3yEOZMsLqUXZW3NJoQiQ50ErapM5ozv0hs2t3UjLv9MlwrwpEJN4Tw2S25jfyJgYGkb2
+         pq+Q40zOjLQS6y3fbvYjGjISdFgFXngIa7LgXRD6YxUHr+VBH+vU5ozZPE72nkBNE3Jj
+         BGTdhzK8wSEHowM4SqrHREkwf65qe1rWnUhvVorlDlpstFRBf3PGdYqsywWbnAcXWnJE
+         yq9Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788449932; x=1789054732;
+        d=1e100.net; s=20251104; t=1788449936; x=1789054736;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=/Yyb6SfNxf5UrztU26ZfRXa88f6Zm1ZntKgsLSKgarw=;
-        b=b1IG70l+sIgmycV32CKkQ80dCW3oZUi2G0Hb72881ZRmXaqmmN7UxALXgNnoN1iQUA
-         PTvelj1fFiYLA90WDjmMC6NdYB+SXc/z2UfFi+gVcCf1ScH/ha93UuIxyyYiX6nzhUwz
-         X/2Lzzi/WQczc0xYiC4cVrUR7et3zuCxBEtQSrcBC3oQrnqMnDDKrcaSoE4TZJ6hHZ4K
-         h9u9zQMRu1IK7gvsvKcAow0xVjgOZj6+OXxWnF1wgzdXIu6thc6bAbrEarERt5STPAvN
-         bV+TnY9lAxjSfqfBRUFeGNdZYFY7b1bM6Z0F8KUguF6HsFn6CWRNACUGrmzW4d+8BASS
-         +oJg==
-X-Forwarded-Encrypted: i=1; AKwUvByc1UENO26JsUvOvz2TfhMtw9WZ3bfwT4ohKKvpqVL+4iaYDWyH2ElzxUNYlqfct0WioUOppw7c2eruYsuA@vger.kernel.org
-X-Gm-Message-State: AFuF++kk0MyaA4eY0r+oHVv0ObVk0OeolYNrHv8R4Exn+O284P81bAWG
-	otsbT7OpCpyvMwIEy6UGq7xfRcQUOlbc/+IuXNoEEIm00K1wDCiaxch9Cgzh7pMrnJIp/weBaEb
-	ko39t8XA+weQbe84i77fQPKwextz8K890EwP/yqKlTb3crbRRI93tYMFbAt5Am/+UNAxL
-X-Gm-Gg: AYBFou33jKRIiXjs4PwWOXoIFv8v6hJmHmXpKoNcEXGltVxVVtwQqVrXiCKjnYtFod1
-	b2RJLoJ3vYgiEhKZkqd0UxdlkB2Bgj6h6BRPoz9WEG8jSvZykxDPIpla8ovlW9Jl+3YgzEfaH6X
-	Z85CwCLgfo9bUZYHXP7TD0cJOfz91kB7YetOgHqyQOhP+LBezGsSZ0zNsHcNAhPGQAPoJI6Pyzp
-	RJbRpEWhPo6D6DQ6zP0VTusz+/fLSMswCGtKxE6BVQPcckugjcbcu0sCQrGdJsuoDO2+fq4KZ0e
-	Evzl99TalskFeufljxWRwJGBkEcTWPNGLPyNj40W7+dPphqmKNY/jakmSy7rm7ap/lnewUb8/XR
-	v2aHci1wVOxNNWds0tOAW7RXC3bSeGHsf
-X-Received: by 2002:a05:6a00:2e1f:b0:857:73c3:4466 with SMTP id d2e1a72fcca58-85ffeadd0dfmr5735136b3a.21.1788449931411;
-        Thu, 03 Sep 2026 08:38:51 -0700 (PDT)
-X-Received: by 2002:a05:6a00:2e1f:b0:857:73c3:4466 with SMTP id d2e1a72fcca58-85ffeadd0dfmr5735074b3a.21.1788449930921;
-        Thu, 03 Sep 2026 08:38:50 -0700 (PDT)
+        bh=h4izH85dY8s43dZbZGemk1SbK5CBZ3ueMd7xLjwebE4=;
+        b=QOKZIAtkz9bwt6LuWFiHVrCl+GceeETxqqYjOtqENjXv7n4eCI8ZZKp8Z79eOQXLtS
+         1z/H8BOSQdC2g/lFeuDbn0y8rUgNvvMBbLRcQIahltlYMEK4MHAokomf+Xs2qCLlXJZ3
+         r2J1qGF0BDH5qycZsoqjCKP6xWneB2+ySIN3mXrUjOUhgaWetdUC0RcRdLoy7c+ELIph
+         3LI7XQn7GxR2Nodi+j3Fykk80LtiWdBChtYfx6v8Xv8BHP9S2Rh+AxAcdqEdkROHWYCn
+         L3THzhrS8kHvNwDvT5oMMzi0KMXUCmhrrMLnCx0iyou6n/kfQqLZmW/2NDOMaXZ6iRlI
+         bKgA==
+X-Forwarded-Encrypted: i=1; AKwUvBwGw/uiiWL16xnWJLUqmp0wSQVnvOCIWo/xYHFhUNBt9U8BHcIZaL0iseHDCUgzy+h5ateTrPrXdW1O+0ny@vger.kernel.org
+X-Gm-Message-State: AFuF++kSBta+uXn4lOcOiU3b9/PVLMeTaUzlJ9JUNghAp0ckj2fBylbY
+	1EhWCBksU+hgEkUyZ5OdfTvNqU7MLlMXqIUEvkzTrHvrFmGQSP7sb5ATnOeQGdFplppXky7cIjI
+	BGpIT0B17UWu4LttdHCUu6YmFoPF1lV082fswk/IlKyOILFhfimZ9cExXEOUseylMUiAC
+X-Gm-Gg: AYBFou1mPi62beJ9vS7NnmxuPljXWXqCkm3R7CclYAoYVH7Xefu+a7fmUO9VC4i21dc
+	iF3EyVxXGFU23+gqjleOnq5150GsEPCkVpRvC8eD4vly3LzCHoEjZNA0nKDr80wDzHSFSss4Lkl
+	1cwQnGMu754bjm+Mk/wkRqW3QnpfgrvRQtHFNndyoycb7cd0KmJRuiQZ3VnysauFOgIYV9Gfk/Y
+	H3Uug8Qc4BpHRglmryLJAE72Qlr+whzN16HQLYslfOoxtUq+X6yFR2tyQplUK0V0rc+xi9YGYtM
+	0cnaEelxauESnNpDVM2aM0L9z6PWQODgNsDjsVfZ+h6SWNbK5J1Mi6Hdu3oA8Clh7tDDDUgNCF/
+	LrZQKzA4sVwHUcqI2gy9m4Z1+IkUV2feR
+X-Received: by 2002:a05:6a00:27a4:b0:855:eb7b:5804 with SMTP id d2e1a72fcca58-85ed5ccc11fmr18834176b3a.4.1788449936515;
+        Thu, 03 Sep 2026 08:38:56 -0700 (PDT)
+X-Received: by 2002:a05:6a00:27a4:b0:855:eb7b:5804 with SMTP id d2e1a72fcca58-85ed5ccc11fmr18834103b3a.4.1788449935994;
+        Thu, 03 Sep 2026 08:38:55 -0700 (PDT)
 Received: from hu-faisalh-hyd.qualcomm.com ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-86153027951sm81069b3a.40.2026.09.03.08.38.46
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-86153027951sm81069b3a.40.2026.09.03.08.38.51
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 03 Sep 2026 08:38:50 -0700 (PDT)
+        Thu, 03 Sep 2026 08:38:55 -0700 (PDT)
 From: Faisal Hassan <faisal.hassan@oss.qualcomm.com>
 To: Thinh Nguyen <Thinh.Nguyen@synopsys.com>,
         Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
@@ -91,9 +91,9 @@ Cc: Sriram Dash <sriram.dash@oss.qualcomm.com>,
         Shazad Hussain <shazad.hussain@oss.qualcomm.com>,
         linux-arm-msm@vger.kernel.org, linux-usb@vger.kernel.org,
         devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: [PATCH v2 3/7] dt-bindings: usb: Add qcom,sa8255p-dwc3 for firmware-managed resources
-Date: Thu,  3 Sep 2026 21:08:23 +0530
-Message-Id: <20260903153827.3463313-4-faisal.hassan@oss.qualcomm.com>
+Subject: [PATCH v2 4/7] usb: host: xhci-plat: Support XHCI_RESET_ON_RESUME via device property
+Date: Thu,  3 Sep 2026 21:08:24 +0530
+Message-Id: <20260903153827.3463313-5-faisal.hassan@oss.qualcomm.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20260903153827.3463313-1-faisal.hassan@oss.qualcomm.com>
 References: <20260903153827.3463313-1-faisal.hassan@oss.qualcomm.com>
@@ -104,184 +104,65 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-ORIG-GUID: wpoRDVKS1D3kNQz6Te8WwpzTI_muVdsG
-X-Proofpoint-GUID: wpoRDVKS1D3kNQz6Te8WwpzTI_muVdsG
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTAzMDEzNiBTYWx0ZWRfXxRaU4noJn9KU
- hvVI+N7nqHO8Lp/NOb0ix/pRCPYhvMkNZNoPl960DIhuDzYNkSDz+N8yQoukk4YA8jrSpC8kKdA
- gJsJwlKJVKkzCOtRLs4T8v3s4GDNNLpf2ZAmZT+f4mRnnGSt5sG/o/oq2OKDyGGL/HN6UiQUOZG
- BfI+knsg9/C3DII9ZTGd/4WGvvhlp6EBB1MALTeSPKkJWMLd/b296AWkBaLwj1J4lTdigHaRjWT
- ne4j2lZNBjCavU5UalYDhxqCx1qqID2yBW9aYb+4Y7HsMteB7b+CnYE92ve9QmL4NNC//6Pglns
- l7oyac9yD+Ward4QDUoT0SH0cqM/pq0L4eL2DvzvYgzrBxbgxcrWmWt/eoVOU3/IwdDUTBFmgFk
- z8lo451YB2UhNRfPXOCuVPAZ0brQvp8zOvVmCpAOY7P7k1QgfRqrgUIUS7Cy2Y9BNmkUuro8pJB
- wP4zX/1B4NvUcbzx/cQ==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTAzMDEzNiBTYWx0ZWRfX0MTfcEN3S7qp
- llJPbbmxlQgfRwmTa8XttskIUUawKoB5eRa7UNlQMotwj89ObBxrHX+Y7bGDlyM2X6EHQx221TN
- NFFCmtn4wXMG2AE1X5s+vHTLS0/J6fs=
-X-Authority-Analysis: v=2.4 cv=PKc/P/qC c=1 sm=1 tr=0 ts=6a99948c cx=c_pps
- a=rEQLjTOiSrHUhVqRoksmgQ==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
+X-Authority-Analysis: v=2.4 cv=YcmNIQRf c=1 sm=1 tr=0 ts=6a999491 cx=c_pps
+ a=m5Vt/hrsBiPMCU0y4gIsQw==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
  a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22 a=gEfo2CItAAAA:8
- a=EUspDBNiAAAA:8 a=HmkRj0nT5UQon3SBszkA:9 a=2VI0MkxyNR6bbpdq8BZq:22
- a=sptkURWiP4Gy88Gu7hUp:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22 a=EUspDBNiAAAA:8
+ a=A6Vjp3zFaTA1NjdqV2IA:9 a=IoOABgeZipijB_acs4fv:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTAzMDEzNiBTYWx0ZWRfXyzC3bsUV2OCR
+ SKNsGssIIaqQ9n1I4mHy81rXzLumIGcz7ijOkOclTMRS1brPau1rVtIIfYJuHrqVRkVAM3e6irp
+ p7oYVrH0gfGks0n4PavqY6zI52iYxqA=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTAzMDEzNiBTYWx0ZWRfXx17yPNGQ2tkV
+ tBg0auAwa/mt1zw126Dz1qF1aRVtyBlkMVvhhdBFjym3BC6h4CNqHAONx9tUQwHY9L0wGPZhDPH
+ 5yW9EIOl0j062uQzZ5iy5U1ZIbjsydo5y37nG+2X5Yi1V7QPnBPLujVwN+ee+AYLA8KZhGpn1HK
+ bUGdOWD9394NsZxABiDkFoDVLoHPFa5BTBT7VfnpULGO45ryBvY+vdPKLifYsNMgOjaXGeX4IW1
+ SoxlsIeglrCyarkiyU0xh1I1OWgDeLJ1U73VqFOqzwC0aGZdo+ez8ziwHIpFMQ2uMaFx7UQ2K28
+ FhjlrbZDGNn047TJNgBzIXFTZrcFpdccJIushrLDLjNi4RcuyyltwRJPpQa+rj7Sv7BSaE9Dz6s
+ 5RMf5uh6k0Z1+I90Oi+p+xXa0fuyh+6iQxDE3JcpAKeDdVpJCaKgoG827qqD/G+tKMgfSl1Jjit
+ YFWwTrW18nEsuA9FLCQ==
+X-Proofpoint-GUID: aPNltra4DwyBeZYKvG7PKHDjq4SZN68J
+X-Proofpoint-ORIG-GUID: aPNltra4DwyBeZYKvG7PKHDjq4SZN68J
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-09-03_04,2026-09-03_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0 adultscore=0 bulkscore=0 clxscore=1015 phishscore=0
- suspectscore=0 priorityscore=1501 spamscore=0 impostorscore=0 malwarescore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2609030136
+ clxscore=1011 malwarescore=0 priorityscore=1501 lowpriorityscore=0
+ adultscore=0 phishscore=0 impostorscore=0 spamscore=0 suspectscore=0
+ bulkscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
+ adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2609030136
 
-On Qualcomm automotive SoC sa8255p, platform resources like clocks,
-interconnects, resets, regulators and GDSC are abstracted and managed
-collectively by firmware.
+When the USB controller loses power during PM suspend (as occurs
+on targets like SA8255P that fully power off the controller),
+it generates a Host Controller Error (HCE) on resume requiring
+full reinitialization. This is handled by the XHCI_RESET_ON_RESUME
+quirk (introduced upstream in 8b328f8002bc).
 
-Add a new binding file for firmware-managed USB controllers where
-access to these resources is exposed as two power domains:
-- Power domain: Controls power supply (GDSC) to the USB controller
-- Bus domain: Controls clocks and interconnects for data transfer
-
-The binding makes power-domains and power-domain-names properties mandatory
-for firmware-managed platforms, while excluding the clocks property since
-clocks are managed through the power domains.
+Read the "xhci-reset-on-resume-quirk" device property to set
+XHCI_RESET_ON_RESUME. This allows parent drivers (e.g., dwc3)
+to enable the quirk via software nodes.
 
 Co-developed-by: Sriram Dash <sriram.dash@oss.qualcomm.com>
 Signed-off-by: Sriram Dash <sriram.dash@oss.qualcomm.com>
 Signed-off-by: Faisal Hassan <faisal.hassan@oss.qualcomm.com>
 ---
- .../bindings/usb/qcom,sa8255p-dwc3.yaml       | 123 ++++++++++++++++++
- 1 file changed, 123 insertions(+)
- create mode 100644 Documentation/devicetree/bindings/usb/qcom,sa8255p-dwc3.yaml
+ drivers/usb/host/xhci-plat.c | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/Documentation/devicetree/bindings/usb/qcom,sa8255p-dwc3.yaml b/Documentation/devicetree/bindings/usb/qcom,sa8255p-dwc3.yaml
-new file mode 100644
-index 000000000000..c6db7bcf4981
---- /dev/null
-+++ b/Documentation/devicetree/bindings/usb/qcom,sa8255p-dwc3.yaml
-@@ -0,0 +1,123 @@
-+# SPDX-License-Identifier: (GPL-2.0 OR BSD-2-Clause)
-+%YAML 1.2
-+---
-+$id: http://devicetree.org/schemas/usb/qcom,sa8255p-dwc3.yaml#
-+$schema: http://devicetree.org/meta-schemas/core.yaml#
+diff --git a/drivers/usb/host/xhci-plat.c b/drivers/usb/host/xhci-plat.c
+index 074d9c731639..7df2947d13dc 100644
+--- a/drivers/usb/host/xhci-plat.c
++++ b/drivers/usb/host/xhci-plat.c
+@@ -277,6 +277,9 @@ int xhci_plat_probe(struct platform_device *pdev, struct device *sysdev, const s
+ 		if (device_property_read_bool(tmpdev, "xhci-skip-phy-init-quirk"))
+ 			xhci->quirks |= XHCI_SKIP_PHY_INIT;
+ 
++		if (device_property_read_bool(tmpdev, "xhci-reset-on-resume-quirk"))
++			xhci->quirks |= XHCI_RESET_ON_RESUME;
 +
-+title: Qualcomm SA8255P USB3 Controller with Firmware-Managed Resources
-+
-+maintainers:
-+  - Wesley Cheng <wesley.cheng@oss.qualcomm.com>
-+  - Faisal Hassan <faisal.hassan@oss.qualcomm.com>
-+
-+description:
-+  USB controller on Qualcomm SA8255P automotive SoC where platform resources
-+  such as clocks, interconnects, resets, regulators and the GDSC are
-+  abstracted and managed collectively by firmware through SCMI (System
-+  Control and Management Interface).
-+
-+  Access to these firmware-managed resources is exposed as two power
-+  domains, one gating the power supply (GDSC) to the controller, and one
-+  gating the clocks and interconnects used for data transfer.
-+
-+properties:
-+  compatible:
-+    const: qcom,sa8255p-dwc3
-+
-+  reg:
-+    maxItems: 1
-+
-+  interrupts:
-+    minItems: 1
-+    maxItems: 6
-+
-+  interrupt-names:
-+    minItems: 1
-+    maxItems: 6
-+
-+  power-domains:
-+    description: |
-+      Power domains are provided by SCMI (System Control and Management
-+      Interface). See Documentation/devicetree/bindings/firmware/arm,scmi.yaml
-+      for details.
-+
-+      Exactly two power domains must be specified:
-+        - "power": controls power supply (GDSC) to the USB controller
-+        - "bus": controls clocks and interconnects used for data transfer
-+    minItems: 2
-+    maxItems: 2
-+
-+  power-domain-names:
-+    description: Names for the power domains specified in the power-domains property.
-+    items:
-+      - const: power
-+      - const: bus
-+
-+  resets:
-+    description: |
-+      Reset provided by SCMI firmware. See
-+      Documentation/devicetree/bindings/firmware/arm,scmi.yaml for details.
-+    maxItems: 1
-+
-+  iommus:
-+    maxItems: 1
-+
-+  phys:
-+    minItems: 1
-+    maxItems: 2
-+
-+  phy-names:
-+    minItems: 1
-+    maxItems: 2
-+
-+  # Firmware-managed platforms do not use direct clock/interconnect control
-+  clocks: false
-+  clock-names: false
-+  interconnects: false
-+  interconnect-names: false
-+
-+required:
-+  - compatible
-+  - reg
-+  - interrupts
-+  - interrupt-names
-+  - power-domains
-+  - power-domain-names
-+  - resets
-+
-+allOf:
-+  - $ref: snps,dwc3-common.yaml#
-+
-+unevaluatedProperties: false
-+
-+examples:
-+  - |
-+    #include <dt-bindings/interrupt-controller/arm-gic.h>
-+    #include <dt-bindings/interrupt-controller/irq.h>
-+
-+    usb@a800000 {
-+        compatible = "qcom,sa8255p-dwc3";
-+        reg = <0x0a800000 0x10000>;
-+
-+        interrupts-extended = <&intc GIC_SPI 349 IRQ_TYPE_LEVEL_HIGH>,
-+                              <&intc GIC_SPI 352 IRQ_TYPE_LEVEL_HIGH>,
-+                              <&intc GIC_SPI 351 IRQ_TYPE_LEVEL_HIGH>,
-+                              <&pdc 8 IRQ_TYPE_EDGE_BOTH>,
-+                              <&pdc 7 IRQ_TYPE_EDGE_BOTH>,
-+                              <&pdc 13 IRQ_TYPE_LEVEL_HIGH>;
-+        interrupt-names = "dwc_usb3",
-+                          "pwr_event",
-+                          "hs_phy_irq",
-+                          "dp_hs_phy_irq",
-+                          "dm_hs_phy_irq",
-+                          "ss_phy_irq";
-+
-+        power-domains = <&scmi_pd 1>, <&scmi_pd 2>;
-+        power-domain-names = "power", "bus";
-+        resets = <&scmi_rst 0>;
-+
-+        iommus = <&apps_smmu 0x0a0 0x0>;
-+        phys = <&usb_1_hsphy>, <&usb_1_qmpphy>;
-+        phy-names = "usb2-phy", "usb3-phy";
-+    };
-+...
+ 		device_property_read_u32(tmpdev, "imod-interval-ns",
+ 					 &xhci->imod_interval);
+ 		device_property_read_u16(tmpdev, "num-hc-interrupters",
 -- 
 2.34.1
 
