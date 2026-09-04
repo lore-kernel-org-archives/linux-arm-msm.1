@@ -1,133 +1,146 @@
-Received: from mail-lf1-f42.google.com (mail-lf1-f42.google.com [209.85.167.42])
+Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com [209.85.128.44])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3C8B33F44C5
-	for <linux-arm-msm@vger.kernel.org>; Fri,  4 Sep 2026 14:07:48 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.167.42
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 66A0C4A8FD9
+	for <linux-arm-msm@vger.kernel.org>; Fri,  4 Sep 2026 14:10:46 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.44
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788530870; cv=none; b=kQHyzZ095FUKf04coXbK6TsaqW6sxT+9oW4WP9sjDC+L6vPplNt1Pa3+fKQtg48ZMmQvFXqYCqL64dlezwjv1Uno0YKPz1srgZdUcyWZS1+k9zT2Bg7hQs94E8cr2AtZHR1iqBllmx6Laf6BiIA3Ej7JoVEzYE1AHLSXzF8N+ao=
+	t=1788531048; cv=none; b=TXbLz8w7I2tgIeD4/EoRAtuxTREUwc+X0TnIiKiNZ+qFcPbDTnztyFCEHOziTchTFBapxI/51KYnMOLzTM1Gj7klDJrXSxmYQBsb31U/XjrRzTxroHcXehqO449Su4SWtJcpSrU8QM/a16K9Lnd5RQ8RMkgHroMMECF7DI01Jsg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788530870; c=relaxed/simple;
-	bh=UR+ZEsUUsBBDR6H3J4SrQikXuAGz4zSkD4hPrqvWIrE=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=p9+g1uR+dZ1UquRyARcymhs6X2QbGWh4TuCqv2QFuXECtdHtNcINbzL2r9nTb8j/mbHU22XlWLXb1fNOisMmIB0gombWovzUTfY0eZyfEx3TryeRTfdDA7x/UKvVIjYveVYkzj/NY9odsPYQvrGy6PV5HHb5Sny1xuSH0kj5M/8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=chromium.org; spf=pass smtp.mailfrom=chromium.org; dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org header.b=Mda2Leqx; arc=none smtp.client-ip=209.85.167.42
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=chromium.org
+	s=arc-20240116; t=1788531048; c=relaxed/simple;
+	bh=WoGxKQtaMdpz6ytvKsd+KXI4ZRtFdZIJSYBDoyqhR+M=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=rdqqBmjAzJ6vBCqXBvgUjzdO6lLHMldVALiGNpRYPmZvYE0eru1pNYlSNhboYala2lRWhwR8EKNiAzbI6p0h06k28d/rj89kQfx0S0ed28VmXp2fACQ5gmM+sk6Yzh67ARwmiu2kTH9VJcmV0mJHvi5dU92f44G1/LgVYSQ8BZQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=thegoodpenguin.co.uk; spf=pass smtp.mailfrom=thegoodpenguin.co.uk; dkim=pass (2048-bit key) header.d=thegoodpenguin-co-uk.20251104.gappssmtp.com header.i=@thegoodpenguin-co-uk.20251104.gappssmtp.com header.b=sEp8BPTT; arc=none smtp.client-ip=209.85.128.44
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=thegoodpenguin.co.uk
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=thegoodpenguin.co.uk
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org header.b="Mda2Leqx"
-Received: by mail-lf1-f42.google.com with SMTP id 2adb3069b0e04-5b4af4be667so1034251e87.0
-        for <linux-arm-msm@vger.kernel.org>; Fri, 04 Sep 2026 07:07:47 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=thegoodpenguin-co-uk.20251104.gappssmtp.com header.i=@thegoodpenguin-co-uk.20251104.gappssmtp.com header.b="sEp8BPTT"
+Received: by mail-wm1-f44.google.com with SMTP id 5b1f17b1804b1-49b8eeb3ff2so9719835e9.2
+        for <linux-arm-msm@vger.kernel.org>; Fri, 04 Sep 2026 07:10:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=chromium.org; s=google; t=1788530866; x=1789135666; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=UR+ZEsUUsBBDR6H3J4SrQikXuAGz4zSkD4hPrqvWIrE=;
-        b=Mda2Leqx1xayI3nEyVKfmDtKJxrEnmSlRru2wdvZbWZpBZgmvXwciUBykcAH+YGyVu
-         1mM/IStHY/BDENLX+OCeUjFnot643DqdzqLmcQ76UGw+UrQ88hJkFZBLHS3R8Cqjsyyj
-         WmlHPOhVlaY/AC0nL59kVEw71Tf3zz2VG8pj8=
+        d=thegoodpenguin-co-uk.20251104.gappssmtp.com; s=20251104; t=1788531044; x=1789135844; darn=vger.kernel.org;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=+rs87giGtrtA7Nu//5GihDsoyXZxcEFLrmWczq7+IcM=;
+        b=sEp8BPTToNul3s4/bYtaP/+f/kyW/TEkdpIwxXWZGKcqptFctefAAj5Hc2kOIr0UMS
+         ADvDB/llBn5oKVHVyZz33cBoI2LJOsovUrTFFpc9OPoVvgJo5Mumy0TGD/iltzrIbgMC
+         NtjJk4cN7fplxHn83P3ctOAVYWpTwpEuOCUDQQxbhdRFV/15q6m+CM7MmLXOO/mwbaOy
+         /luLphLQt58qMIYwmTb0Ass8vu9gE4LV8x6QdSTG0OrTaaBrcWwrqondTZDnBVBFDps0
+         OJfB841NT+R9lrpQb7Ns0Q/UwVCtMip9hzZUFc9JRXK+8H7KVaFwutSYXVWJa7Y7Dlqv
+         tLyw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788530866; x=1789135666;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=UR+ZEsUUsBBDR6H3J4SrQikXuAGz4zSkD4hPrqvWIrE=;
-        b=Ydc5tdwu7a6goPX9oMAa4X5XRevTOHJ7EQjtwf56XqGZ+OHc36yBi/Beu7XLnK304N
-         VDjoVavhdizFUQHMj/WBAANs3O0hV303nobj66OecL6vDX9qzzui21dUdyGsLt5iJXG3
-         yp0E/Okibyf3kMYrHfHpsHgZE/tmPB2Z6FSZeXRktIqe7OktKhKuspr53u6au+Jtm1W+
-         XbO0tHx7ZPaI3xx7a43p+xfzdXyuLUL/aC8WAGPefw3B11mKqXKIcKgdbMjQgc4ZgwQv
-         TOC/W7dDL358ne+JHXU8+qeIBBJOViTlwM1hwZkPwJxCnUvyhq55UnKv1Dh/MJJ6CPEP
-         CJrA==
-X-Forwarded-Encrypted: i=1; AKwUvBxQeGFkDUj0CtHAWkvbGttIOFklElmtj3+bOKA3zHNTHabvX4i+bWxPOLOt2QLK/qzEU8dbfHoZ4KUd4jFc@vger.kernel.org
-X-Gm-Message-State: AFuF++mKdXkZ9IG9PCW3D2EzP3Ky3xt2h9ix+H4Bp54uPSYXeezP07s3
-	xqQtuup8yFihg/j+qg64eIRLL2iZbYuWC0renOBePUtmB5e7cTLknltakSMluq/D6sU4jMqDKO4
-	VGOY=
-X-Gm-Gg: AYBFou3xyv56RKCrKYb4unhfidxAlu0N7iVNWiV+83127iwurUSNx+quUA6bFsM+u79
-	DAIomZY+WwomNS4pIwaGCE7QUGabO4YGrpzGHCw1B1xych6y7fKbZTwPlK6P6Su1VPaFK153JiB
-	M2mIULelk2S1dAkpeXKoxsjjPAoDfkh2W3HJTDxhhp/AgO0HcJaR8IJ2ae1YA2rmgu9ipMNNfvj
-	NznDpDQC9HUultL89f7ZZ+xCM/+ZV7O0szNnJe3XgvLaHwuumc0qmGLRCZrroD84uGha58jXAtQ
-	PIXX478LCRJv1LxX/Cu4K9bFtEwbYP1AifQXYVak5Pv7PNsb1+xP3yfRIAQokx8rgc+YczcWlF9
-	Bm0Y4ZqZ4gcsgP5UFuR0OQlkidGwga61Nu1+Zn1GLzF2SsZCSuHKZ04U7TlF+rLHpZJDAN/yBmh
-	GBwVJdE9y4Joso85hpe61epphKwGqz5FLSNUhjLPVNIaSxzFXxbMOo7PlR/GIp9EZ/GaVgHnKml
-	rYc0rwIsnCLDjIYyhgi/yF9OzM=
-X-Received: by 2002:a05:6512:130b:b0:5b6:183c:5c90 with SMTP id 2adb3069b0e04-5b6183c5d6amr810546e87.46.1788530865991;
-        Fri, 04 Sep 2026 07:07:45 -0700 (PDT)
-Received: from mail-wr1-f47.google.com (mail-wr1-f47.google.com. [209.85.221.47])
-        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5b6166fe8besm537118e87.50.2026.09.04.07.07.44
-        for <linux-arm-msm@vger.kernel.org>
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 04 Sep 2026 07:07:44 -0700 (PDT)
-Received: by mail-wr1-f47.google.com with SMTP id ffacd0b85a97d-48584dc164fso995004f8f.0
-        for <linux-arm-msm@vger.kernel.org>; Fri, 04 Sep 2026 07:07:44 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AKwUvBw5sUyO9DvVS6NH9XQDnbGNq8/PXdT8a2y+/E4ZNG5vffba0qFZNZ8zxNeh2JpyTlXViR1WFy/3RNTCM14y@vger.kernel.org
-X-Received: by 2002:a05:6000:25e7:b0:485:8920:cada with SMTP id
- ffacd0b85a97d-4858920cb46mr5715992f8f.18.1788530863620; Fri, 04 Sep 2026
- 07:07:43 -0700 (PDT)
+        d=1e100.net; s=20251104; t=1788531044; x=1789135844;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=+rs87giGtrtA7Nu//5GihDsoyXZxcEFLrmWczq7+IcM=;
+        b=FbCkv8EmYFdz3n9/3X/CfcExUmJ4qa3bhxclC/z2l5R7dRN6djDO082EHhNs0QUO/i
+         +9TYRqX4rYNkWLXq8nQsDLisy6XYASPlnKJfwEE0aMWYRTLA+Hln12/35RpzPcVJFIS8
+         LDhl6DFFBD5Dzr47JzS2WmWBQqAKRIkrkrITBC9ok3smsjeQGcaT9TQcD5kOiee0pH9k
+         G2Rt5E5yXG4GH7iRwHzjlV0qArT9Y8NZ4hzKw3zQW6YDYfCu9o0+9LsDGOp2Az/NR5bn
+         X251LQq2FhP4/3ey0rujmTjqvvr/na0HiHD+Cvg3cuOwjJc8X7G+1P9CkBJMapYp6xw4
+         6ItQ==
+X-Forwarded-Encrypted: i=1; AKwUvBxP6jpfoajrU4P1SafmESBPQzy+566hfL3n5/yxk6u3AXzEhCvErO2nC54oGa8GzSwPmbrFEVynClCIBQku@vger.kernel.org
+X-Gm-Message-State: AFuF++kNw4kmhurteD8yae6IipUj15AmLYYVKo6fvC7gtoLq8v+B6mEO
+	bSidXH8elAOEph9Zue/q00Q1qJbjJweoSfhzqhW35N3OBxUXkfSxWC0m+9Lxbd5xAtQ=
+X-Gm-Gg: AYBFou2XyAsMYS5URUMQjj7p7JvcQtBIn6hgJVjPeaBKnMOvFjSGXZJ+lDn0vmcM1vQ
+	rrWz8N81qjwq+w179G7cgT6mhuKK4cIRAlWCCuJg39ONP4r9uLYkuW+WRPNWUHL6k7NOJOK/fP9
+	9Z/UqLz1DQ283FRYSs6gHMWV8YxKPv68jWoJQDaaeCPnN9z1L0h68/tehC6UCeUNuNuNTq5ObdF
+	qAKxtN6GWLJBYru4/yZ04e1IIklUHBhBYT+UEYsqH25qnHkyTKb+VcrZTT3TrQzuP5qrKTuZwXg
+	3MjRcgnauWJ55BbwL1Po2fLSy0kWbzFfTWZe9nssCqt0FmjgnbLOk7kpNDbLzQRmjICfnNRz4+0
+	q5V0at6+KwtRhKS6aSi3DnxG2iuohiYXWeVFv+STidRL1p+jl/yXK9UWGhuFVzGy30ULddgj+uf
+	8tXY0mY/GP4knzod/9n8hVp6+NoF7v/NhEJ7jPxQKW6v4XO6aZCCksP1dAd+5UlZjGSHvbC49Bj
+	geNrYBTJCR6lo5/Jw==
+X-Received: by 2002:a05:600d:4444:20b0:49c:fa21:e74a with SMTP id 5b1f17b1804b1-49cfa21e8c9mr34503535e9.32.1788531044605;
+        Fri, 04 Sep 2026 07:10:44 -0700 (PDT)
+Received: from [10.42.0.1] ([2a00:23c7:1d1a:9c01:2568:24c4:f44a:8310])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-49ce46696e8sm138287045e9.0.2026.09.04.07.10.42
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 04 Sep 2026 07:10:43 -0700 (PDT)
+From: Pawel Zalewski <pzalewski@thegoodpenguin.co.uk>
+Subject: [PATCH 0/4] dma: use designated initializers for acpi_device_id
+Date: Fri, 04 Sep 2026 15:10:39 +0100
+Message-Id: <20260904-acpi-dma-v1-0-0fcc63d65d4b@thegoodpenguin.co.uk>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260902-qcom-wdt-nmi-series-v3-0-f3999362a9ea@google.com>
- <20260902-qcom-wdt-nmi-series-v3-3-f3999362a9ea@google.com> <87ecf98ivn.ffs@fw13>
-In-Reply-To: <87ecf98ivn.ffs@fw13>
-From: Doug Anderson <dianders@chromium.org>
-Date: Fri, 4 Sep 2026 07:07:31 -0700
-X-Gmail-Original-Message-ID: <CAD=FV=VMExH-K68aDfNsFBnQRSaYSNwbHo7hLhpzhpWN+r+Fsw@mail.gmail.com>
-X-Gm-Features: AcwNN1XtHwZHgy5raT8AjWbFs0kW9c54GiCuQWnPlGop-re52BRNMJq1xExF-CI
-Message-ID: <CAD=FV=VMExH-K68aDfNsFBnQRSaYSNwbHo7hLhpzhpWN+r+Fsw@mail.gmail.com>
-Subject: Re: [PATCH v3 3/5] genirq: Export NMI APIs
-To: Thomas Gleixner <tglx@kernel.org>
-Cc: Mayank Rungta <mrungta@google.com>, Wim Van Sebroeck <wim@linux-watchdog.org>, 
-	Guenter Roeck <linux@roeck-us.net>, Radu Rendec <radu@rendec.net>, linux-watchdog@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
-	"Kirill A. Shutemov" <kas@kernel.org>, Marc Zyngier <maz@kernel.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAF/RmmoC/yXM2wpAQBSF4VfRvjY1NCleRS62mYWtHJpBSt7d4
+ PKrf62LArwgUJVc5HFIkGWOyNKE7MBzDyUumnKdF7rURrFdRbmJFZCxc6ZlGFDMV49Ozu+qbn6
+ HvR1ht3dP9/0AT8D1+2wAAAA=
+X-Change-ID: 20260904-acpi-dma-ee1add4bae4e
+To: Viresh Kumar <vireshk@kernel.org>, 
+ Andy Shevchenko <andriy.shevchenko@linux.intel.com>, 
+ Vinod Koul <vkoul@kernel.org>, Frank Li <Frank.Li@kernel.org>, 
+ Binbin Zhou <zhoubinbin@loongson.cn>, Sinan Kaya <okaya@kernel.org>
+Cc: dmaengine@vger.kernel.org, linux-kernel@vger.kernel.org, 
+ linux-arm-kernel@lists.infradead.org, linux-arm-msm@vger.kernel.org, 
+ Pawel Zalewski <pzalewski@thegoodpenguin.co.uk>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1788531042; l=2276;
+ i=pzalewski@thegoodpenguin.co.uk; s=20260430; h=from:subject:message-id;
+ bh=WoGxKQtaMdpz6ytvKsd+KXI4ZRtFdZIJSYBDoyqhR+M=;
+ b=7A+R3AT74CdIvV1dVbqRguBpZmTmoVxmQ3VzvPDqtx7Rgu1sy2KY0B/p5GEqsanSBi/OemXWT
+ gPNFVt+YWucCtkXDg3whdE9X+aqYResolXCQOxp3GmS3ZORWGf25gjd
+X-Developer-Key: i=pzalewski@thegoodpenguin.co.uk; a=ed25519;
+ pk=vHq4n9IonORH2GTzLv8r6CWAFHzgfBuNkQPXA8NSly0=
 
-Hi,
+This series is converting lists that contain the acpi_device_id
+struct, which is defined in the include/linux/device-id/acpi.h
+to make use of named initializers (which they do not use currently).
+This work is part of the on going effort in the kernel associated
+with device-ids [1]
 
-On Fri, Sep 4, 2026 at 2:29=E2=80=AFAM Thomas Gleixner <tglx@kernel.org> wr=
-ote:
->
-> On Wed, Sep 02 2026 at 18:54, Mayank Rungta wrote:
-> > Currently, request_nmi(), free_nmi(), enable_nmi(), disable_nmi_nosync(=
-),
-> > and disable_nmi() are restricted to built-in kernel code because they a=
-re
-> > not exported.
-> >
-> > Export these symbols with EXPORT_SYMBOL_GPL so loadable kernel modules =
-can
-> > register and manage NMIs.
->
-> I'm not really fond of that.
+The plan is to convert acpi_device_id::driver_data to have an anonymous
+union, similarly to what was introduced for PCI and I2C device ID tables.
+The goal is to increase type-safety (as most of the existing casts are gone),
+to improve readability and to make use intent a bit more clear:
 
-Is this to be taken a NAK on the whole idea, then?
+```
+union {
+	kernel_ulong_t driver_data;
+	const void *driver_data_ptr;
+}
+```
 
-The last patch in the series [1] wants to promote a HW watchdog bark
-interrupt to NMI. This seems like a pretty useful thing to do and an
-appropriate use of NMI, but the HW watchdog driver is a kernel module.
-Do you have another suggestion for solving that?
+But for that to work all lists containing the structs need to use named
+initializers first to avoid triggering -Wmissing-braces. I already have
+patches that implement this and touching a lot of kernel subsystmes that
+use the acpi_device_id struct and that list keeps on growing. Therefore,
+I have decided to split the series per every subsystem into:
+- pre-clean-ups that convert the lists to use named initializers (this series)
+- actual implementations that make some of the modules use the new driver_data_ptr
 
-[1] https://lore.kernel.org/all/20260902-qcom-wdt-nmi-series-v3-5-f3999362a=
-9ea@google.com/
+That way the task can be fragmented into manageable and independent
+chunks of work and makes this effort easier to review.
 
+Tested builds on x86-64 and a64 in Yocto using 7.3-rc1.
 
-> Funny enough there is already a driver which claims it can be built as
-> module which uses these interfaces. Oh well...
->
-> > Assisted-by: Antigravity:gemini
->
-> I'm impressed that AI is required to add four EXPORT_SYMBOL_GPL()
-> instances.
+[1] https://lore.kernel.org/all/cover.1780048925.git.u.kleine-koenig@baylibre.com/
 
-Hmm, I guess it's hard to figure out the guidance here. I think Mayank
-is only adding this tag to try match what's documented in
-`coding-assistants.rst`. If you've got an AI helping you with a
-series, it's pretty much touching all the patches. I guess you're
-suggesting that, even if AI touched it, trivial patches should remove
-the tag?
+Signed-off-by: Pawel Zalewski <pzalewski@thegoodpenguin.co.uk>
+---
+Pawel Zalewski (4):
+      dma: dw: use designated initializers for acpi_device_id
+      dma: loongson:  use named initializers for acpi_device_id
+      dma: qcom: use named initializers for acpi_device_id
+      dma: xgene-dmac: use named initializers for acpi_device_id
+
+ drivers/dma/dw/platform.c                    | 12 ++++++------
+ drivers/dma/loongson/loongson2-apb-cmc-dma.c |  4 ++--
+ drivers/dma/qcom/hidma.c                     |  8 ++++----
+ drivers/dma/xgene-dma.c                      |  4 ++--
+ 4 files changed, 14 insertions(+), 14 deletions(-)
+---
+base-commit: bc35965f6940a9bf834d54187b6088b8eb09206d
+change-id: 20260904-acpi-dma-ee1add4bae4e
+
+Best regards,
+--  
+Pawel Zalewski <pzalewski@thegoodpenguin.co.uk>
+
