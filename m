@@ -1,534 +1,200 @@
-Received: from ixit.cz (ixit.cz [84.42.129.46])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 260A649364E;
-	Fri,  4 Sep 2026 20:37:39 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=84.42.129.46
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 45A6B4CC293
+	for <linux-arm-msm@vger.kernel.org>; Fri,  4 Sep 2026 21:06:08 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788554264; cv=none; b=LA+W4gxglGCOPc9oJPEFpgJ2eO+GztiI/yd6c/uJX16/LMSu8HBNt80faGgJu/OmmjgmkWzWGsAYaXqR5QYvFUEFxYu59qi9wO4NUeDEDL6Ro7qBd7NJ8/8VB2FselBMqHcapJ7e7yvLZkcArWEWaHPI3PeTRWqe6nAYDC+Rpnw=
+	t=1788555973; cv=none; b=KRVmlaXlmqO9JClqLXUl1m+RIpvzh9EcnizHCKfIGnJgCwdo1KgW6qbD7qPX4Ay5Va/UD27eaM4bci8wB1fb11C8PhYDmc2Cd8mnkjHNHPM+biv9+uKDa5xr1pI+cN2y1JrwwrhN+bQZy8nCR+PjDqHRk7F69TA4dhpRh3kqVlM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788554264; c=relaxed/simple;
-	bh=7SElf+ReQ8IcEttoBIW+44bFrHA464bH9fv1c19QZW4=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=mo+ZSIZYvk3fvbVxStON4uO/y428Q4HTDl7iYXGlnMmzOPeookI+chLVRVmo0bIH0yOatxln29k32azJt70wnon8QCr8EyBWDmdLdE6YiNZCjBsls0fj6LWyY/8PXtzm1F5E4dhhkyPyQdKbgrQDEcP0Vjz9Z0xyoeALHzK9Zio=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=ixit.cz; spf=pass smtp.mailfrom=ixit.cz; dkim=pass (1024-bit key) header.d=ixit.cz header.i=@ixit.cz header.b=a1M15yVV; arc=none smtp.client-ip=84.42.129.46
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=ixit.cz
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ixit.cz
+	s=arc-20240116; t=1788555973; c=relaxed/simple;
+	bh=FAC+Zj7qwKqYw7fFM0u215FoV5ND4YX8fjub2SpnxsM=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=ko0aoL4XYcDe+hwkZjdwe+QOOGbpsx4TCNzCT1tJPJ+N+doYY+IZYJe8u+fnSCOeBtMZldDwPx73BX+EBl4fX3wBopNnCLIskuGhiT6+e65f7sf6F18Gx+lmTyrvtR7Ltf+EbyMWe4wbn3hy3VkQZ3yXnQERtUp5LGT4H53dYSU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=f6tqP/YF; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=LfFUcfXD; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=ixit.cz header.i=@ixit.cz header.b="a1M15yVV"
-Received: from [10.0.0.152] (unknown [10.0.0.1])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange x25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by ixit.cz (Postfix) with ESMTPSA id 81CA65340619;
-	Fri, 04 Sep 2026 22:37:36 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ixit.cz; s=dkim;
-	t=1788554256;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
-	bh=Tc/uP77MaqbAnIfYkM9ZpItzzwpaVJcgRLtGIvi2hxk=;
-	b=a1M15yVV2Pb7mu1w4Gn8NC4gd3U6CzxZ4u6t5VyUgNA1t/6AjDRRWyp+QfBr8hpfHJqnaW
-	DuHKydrgNg0Z94apK7o5GuIe0+Lzy3GAlmmWSodYgSWyHqkbADmS24nFWyOih/WJFC/SHL
-	9U7BrXvxUCqXKS0KPVwM9np9gzpyxAw=
-Message-ID: <44d4db6f-6b84-4cec-9e85-cb7b437bb7f9@ixit.cz>
-Date: Fri, 4 Sep 2026 22:37:36 +0200
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="f6tqP/YF";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="LfFUcfXD"
+Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 684KbaBk1225801
+	for <linux-arm-msm@vger.kernel.org>; Fri, 4 Sep 2026 21:06:05 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-type:date:from:in-reply-to:message-id:mime-version
+	:references:subject:to; s=qcppdkim1; bh=pmKN2/HQZks0tpmHaapx54nu
+	pIE8cyQNKHSbzgNzJiQ=; b=f6tqP/YFyo1lXLN2qbefS6WAXA3eHAq623fvow1m
+	GSNGrPJZg5nEgTLReHGhb2yx4uLZTnrbVXNl0kXlLZMhTuhA5yJ9hvnDZplw7nXj
+	Kz4i8xIo3AGWJhWSEFIoDJNio5RbhzAFoBCnAXJQep6LcAClfkDmd3i3ZSAmXg1F
+	qSpPZv42f5QJ2mLUzoa3mQyMvAy2c35UCAG12UgfnfGGFuQ0s34wvxW4rUCGiKfr
+	ajgOY+nOGJvkz44ft2VqlxQtvdPf6QkZvjuuMybFBebozZfh37kVd4XrNPDe4L4g
+	4p+ZPYHvsfN9QKUhKNqkGWuPklMZI+r7Y5pkwjoAL8EzVQ==
+Received: from mail-oo1-f70.google.com (mail-oo1-f70.google.com [209.85.161.70])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gg0109p40-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 04 Sep 2026 21:06:04 +0000 (GMT)
+Received: by mail-oo1-f70.google.com with SMTP id 006d021491bc7-6b361b477f1so1049746eaf.2
+        for <linux-arm-msm@vger.kernel.org>; Fri, 04 Sep 2026 14:06:04 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1788555964; x=1789160764; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=pmKN2/HQZks0tpmHaapx54nupIE8cyQNKHSbzgNzJiQ=;
+        b=LfFUcfXDFJwi+5YkT4M52caniwHL/bYpQlNdu0PsAVz3e4/1W/XhsIJYAOSUBOZrw2
+         Nn0gYT1Dc64DlYR5WK2N2tdI/hWPyvPultb/+KtMmKvQdjscArhy9dLPXdlsBMxaiaxH
+         xfoNL3Gway+KKGIaL4E4G1YaDrv+QlkNuxNr0s1SCxV/IMtG3xfzGJusnF4i6NroTSwF
+         /HsXxs+bnM+MLaDWTWP9RdC2k0OdCKlzSvw89+kXdFKqIQnyPh/2Ma3PU8cmF1Uiqdgk
+         UhSCL09wfFNMu4wVzak1s0GJkBzQaH0r1tUGDN67v3oWbN+47Kp48B+dYNcizhHk651V
+         Ealw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1788555964; x=1789160764;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=pmKN2/HQZks0tpmHaapx54nupIE8cyQNKHSbzgNzJiQ=;
+        b=LWcWv94NZeaq+zDFUbW0y9S3vJZZjZGhLRhCMQOQEfZX/etSjTljHHL7/0PjlBQd8c
+         QDkchlLfIjQ8L0NR4E9T4JfzSoZtG0Ekl8K0s0ME+eLy3jKpBquvdORTPbVaUDKn8hnW
+         vUtNVcUml3Gq0xDMvWT0dv8H2ttxfCokJEhSU8t/cFqGW5TZUrR4rncfZKDOldqQFI/w
+         TexhbcaHytfXtbYABgeYNdbwT6esFfUhqy4XDHc7y1rP65RIiH5qyouzslYCEHS7THeq
+         rAWSgIl07m+Hj+BuoBtMfmQ4x9fCJG3bFHQ+/IuMUEgcsSj5uYSIayoPh3+RGIfHvpEI
+         0YZg==
+X-Forwarded-Encrypted: i=1; AKwUvBx1ohkrD7/wCTJIWyJotNqpZ6sAA8VtGRPf/h8dSZjHYovkWSGXkcBhR8t4r1+DfOJfdDY98EkcSg3OUPee@vger.kernel.org
+X-Gm-Message-State: AFuF++khVo+a1GFRo1vzpZYuK9kQ7sSANn10A8r366+bsve1kaj72KJH
+	nndAaLi9PpQOEYEoNwEzFTEnn6GCVGk5URMuT3oqXwJJnqCbgtnpjsA8tzYy1y9bFS/sJU9zAvg
+	xfndXg9K3wL64cbCBY6+S3n/c78rMXzKc+e+Sc8BskRmTSomPDyqkbKDvVW8/JTjOGRCo
+X-Gm-Gg: AYBFou3u1T0m+ajAemQviJ/Dy1S7HT1iFzyO3Zj5xHH/UjSUpuzXUw81zPaLffrJvlv
+	9d6AHUowgfTFtSXXdTap3ajOUbLfib4ns6+LLfnyNj3eQcatOzNUBsLGws5y4Hb8NPB3QrLG+o3
+	Ovm55ubfgOu5xKF8CsShUpgMxUt4D7jb+hnp26GeHU4hDF81Q6zgRnYRvjhIi62+SeaYM6089iL
+	ciE3OC+Z9sBkc0bm5LmCSiQKXFZxDP9XY4EC1O514y8kZ5YeXul5kbLV4krM9TgCicrsv2iulat
+	zUUAC/viZnbgNY3886wQoPzs7GkujD9RjIV4XVcRGYBJ7XluF8aNmOpC8PkirJZ7hq67IhVgYp+
+	C+6P5tD82qxixZw==
+X-Received: by 2002:a05:6820:4b88:b0:6b1:bf3a:ed8a with SMTP id 006d021491bc7-6b6fb4d7bffmr5403503eaf.14.1788555964101;
+        Fri, 04 Sep 2026 14:06:04 -0700 (PDT)
+X-Received: by 2002:a05:6820:4b88:b0:6b1:bf3a:ed8a with SMTP id 006d021491bc7-6b6fb4d7bffmr5403371eaf.14.1788555962494;
+        Fri, 04 Sep 2026 14:06:02 -0700 (PDT)
+Received: from oss.qualcomm.com ([202.46.23.25])
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-143243f780csm8692399c88.13.2026.09.04.14.05.54
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 04 Sep 2026 14:06:01 -0700 (PDT)
+Date: Sat, 5 Sep 2026 02:35:52 +0530
+From: Mohd Ayaan Anwar <mohd.anwar@oss.qualcomm.com>
+To: Andrew Lunn <andrew+netdev@lunn.ch>,
+        "David S. Miller" <davem@davemloft.net>,
+        Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>,
+        Paolo Abeni <pabeni@redhat.com>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>, Andrew Davis <afd@ti.com>,
+        Andrew Lunn <andrew@lunn.ch>, Heiner Kallweit <hkallweit1@gmail.com>,
+        Russell King <linux@armlinux.org.uk>,
+        Richard Cochran <richardcochran@gmail.com>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        Alexandre Torgue <alexandre.torgue@foss.st.com>,
+        Giuseppe Cavallaro <peppe.cavallaro@st.com>,
+        Jose Abreu <joabreu@synopsys.com>,
+        Maxime Chevallier <maxime.chevallier@bootlin.com>,
+        Maxime Coquelin <mcoquelin.stm32@gmail.com>
+Cc: netdev@vger.kernel.org, devicetree@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+        linux-stm32@st-md-mailman.stormreply.com,
+        linux-arm-kernel@lists.infradead.org
+Subject: Re: [PATCH net-next 0/9] net: stmmac: qcom-ethqos: add Shikra EMAC
+ support
+Message-ID: <apsysH9ia4x96a2g@oss.qualcomm.com>
+References: <20260904-shikra_ethernet-v1-0-a50765996035@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 2/2] power: supply: qcom_smbx: add SMB5 support
-To: robin@snyders.xyz, Casey Connolly <casey.connolly@linaro.org>,
- Sebastian Reichel <sre@kernel.org>, Rob Herring <robh@kernel.org>,
- Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, linux-pm@vger.kernel.org,
- devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
- Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
- Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
- Joel Selvaraj <foss@joelselvaraj.com>
-References: <20260820-submit-qcom-smbx-send-v1-v4-0-818dabb2771e@snyders.xyz>
- <20260820-submit-qcom-smbx-send-v1-v4-2-818dabb2771e@snyders.xyz>
-Content-Language: en-US, cs-CZ
-From: David Heidelberg <david@ixit.cz>
-Autocrypt: addr=david@ixit.cz; keydata=
- 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
-In-Reply-To: <20260820-submit-qcom-smbx-send-v1-v4-2-818dabb2771e@snyders.xyz>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260904-shikra_ethernet-v1-0-a50765996035@oss.qualcomm.com>
+X-Proofpoint-ORIG-GUID: OCahd7y9dPKhZV0kfb-lj5zI0lWUkbI1
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTA0MDE5NSBTYWx0ZWRfX8Gp6+YpdNPu+
+ nex2X/GGxUNHpmoJjLgFFLyHNFiJWh0jRUim32Z5J7gA+fGOjZtU2PClnoJYz3zZj3TgVFZi9rj
+ 4/Xg+y7/dC3MEANcPiGRyYsAC4+wL5o=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTA0MDE5NSBTYWx0ZWRfX3FKBq1lUOzx8
+ JzVocp+kDEaXQG+Ssi8gPmfa4IrzjGkxnkCIKs9KPVzZOtqyxP1+nWxSei1Dh8HWAPZeM5ncfqF
+ CeE4Eua1aXqz7KmqIrCDW0SZNO388w7k2oBQG9wHvYLAB1qn8Lj5G8OVDfZMFIj/bMQq9NdwbVN
+ i1gkIBILLGc4mMTgMJ9s+vTQiExR5DfSDLdd/QVAiYHUvsgBn0P1JinC/R6eAU39Y07/YFp67dJ
+ /kJrBPLY75rUJtn8pVsFyjFcddXAuglopaZ5sNIXKE5nHc+nAhPXDdzXWJhFuncmn3Bm7BZpcQO
+ vLuphS/G3sRZNZLtkjtDPmoBdhd6S0IQNvTX7xEl0ILHRRTDIBV23JW53Xv9QbsYKnmg5JLi7Av
+ 99U8XPXmgoKOnuyon4yLHj+BwV4nwyA6slPF6PzNGdhze9RW1UrdG++aDGkcRjP1mrxQ9vEv/0e
+ CAOeurk0YY0woh86NVg==
+X-Authority-Analysis: v=2.4 cv=Zp7d7d7G c=1 sm=1 tr=0 ts=6a9b32bc cx=c_pps
+ a=lkkFf9KBb43tY3aOjL++dA==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
+ a=kj9zAlcOel0A:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22
+ a=VwQbUJbxAAAA:8 a=ee_2aqc6AAAA:8 a=EUspDBNiAAAA:8 a=T3LL355Ksxp6dEOEn3QA:9
+ a=CjuIK1q_8ugA:10 a=k4UEASGLJojhI9HsvVT1:22 a=VOpmJXOdbJOWo2YY3GeN:22
+X-Proofpoint-GUID: OCahd7y9dPKhZV0kfb-lj5zI0lWUkbI1
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-09-04_06,2026-09-03_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ clxscore=1015 adultscore=0 spamscore=0 impostorscore=0 malwarescore=0
+ bulkscore=0 lowpriorityscore=0 priorityscore=1501 suspectscore=0 phishscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2609040195
 
-On 20/08/2026 12:03, Robin Snyders via B4 Relay wrote:
-> From: Casey Connolly <casey.connolly@linaro.org>
+On Fri, Sep 04, 2026 at 12:13:42AM +0530, Mohd Ayaan Anwar wrote:
+> This series incorporates feedback from the RFC and adds the dt-bindings
+> and driver changes required to enable Gigabit Ethernet support on the
+> Qualcomm Shikra SoC. DTS changes will be sent out separately.
 > 
-> Introduce support for the SMB5 charger found on PM7250B, PM8150B and
-> related Qualcomm PMICs.
+> The series has grown from the RFC and can be broadly divided into three
+> areas: PHY power supply management, proper support for RGMII ID mode in
+> the Qualcomm ETHQOS driver, and Shikra specific clock dependencies
+> required for NOC access.
 > 
-> SMB5 uses different DCDC status offsets, charger-state encodings and
-> electrical ranges. Select these from per-PMIC match data, with PM7250B
-> using the PM8150B compatible fallback and parameter block. Read
-> overvoltage from the SMB5 status bit, use the already-prescaled IIO
-> voltage reading, and convert the SMB5 current-sense voltage to microamps.
-> Use battery-info property presence when selecting voltage and current
-> targets.
+> 1. Shikra EVK boards use a GPIO-gated regulator for the DP83867 PHY
+> power supply. Patches 1 and 2 add supply management to the DP83867
+> driver so the PHY driver holds the regulator vote at probe. These
+> changes are largely inspired by similar work done for the QCA8081 PHY:
+> https://lore.kernel.org/netdev/20260605010022.968612-3-elder@riscstar.com/
 > 
-> Keep Type-C power-role and VBUS control with the dedicated TCPM and
-> regulator drivers. Clear the unsupported HVDCP negotiation modes so stale
-> firmware settings cannot raise VBUS. Leave the firmware recharge policy
-> unchanged and match the downstream default of ADC-based AICL disabled,
-> while enabling periodic hardware AICL with its twelve-second SMB5 rerun
-> interval. Preserve the existing three-second SMB2 interval.
+> 2. The generic RGMII fixes from the RFC remain. As suggested, an
+> additional patch now emits a warning (patch 6) when the legacy "rgmii"
+> or "rgmii-txid" modes are detected. A new change (patch 7) now
+> initialises the RGMII link clock at SPEED_10 on probe instead of
+> SPEED_1000, dropping the unnecessary 250 MHz source before link up.
 > 
-> PM8150B places the charger and VBUS regulator in the same DCDC peripheral,
-> but the SMB5 path does not write the regulator registers. qcom_smbx reads
-> 0x1108 and 0x110b, while qcom_usb_vbus-regulator writes 0x1140, 0x1152
-> and 0x1153. The SMB2-only OTG configuration write to 0x1153 is not part
-> of the SMB5 initialization sequence. The TCPM port and PD PHY use the
-> separate 0x15xx and 0x17xx peripherals. Name the USBIN BC1.2 integration
-> register and SMB2-only OTG definitions accordingly to make this ownership
-> boundary explicit.
+> 3. NOC clock voting (patch 8) now uses dev_pm_opp_set_rate() so the
+> required VDD_CX performance state can be propagated through the clock
+> controller. The Shikra binding (patch 3) is updated accordingly: an
+> if/else block constrains Shikra to exactly six clocks and requires
+> operating-points-v2.
 > 
-> Program the battery limits and complete SMB5 input and charging setup
-> from the power-supply registration init callback before device_add
-> publishes the properties. This makes all public callbacks safe without
-> driver-specific probe synchronization.
+> Testing:
+> The following boards have been tested with this new (proper) handling
+> for RGMII ID:
+>   - Shikra CQ/IQ variants (with the TI DP83867 PHY)
+>   - QCS615 Ride (with the Micrel KSZ9031 PHY)
+>   - Talos EVK (again with the Micrel KSZ9031 PHY)
+>   - Talos Lyra EVK (TI DP83867 PHY, this board also has a GPIO-gated
+>     regulator for the PHY power supply)
 > 
-> Suspend USB input and charging before SMB5 initialization. On a later
-> failure, restore the original charging-enable state before the
-> input-suspend state; leave the input suspended if charging cannot be
-> restored. Cancel status work before unregistering the power supply during
-> managed teardown. Update the Kconfig description to cover both charger
-> generations.
+> Changes since RFC:
+>   - Two new patches add supply management for the DP83867, replacing
+>     the gpio-hog approach for PHY power -- Konrad, Andrew.
+>   - Use dev_pm_opp_set_rate() for the NOC AXI clock and require
+>     operating-points-v2 for Shikra -- Konrad.
+>   - Warn on legacy "rgmii"/"rgmii-txid" to encourage DTB migration --
+>     Andrew, Maxime.
+>   - Updated binding document for qcom,ethqos and snps,dwmac.
+>   - Drop the duplicate "axi" clock from Shikra's DT; use "axi-noc" and
+>     "pcie-tile-axi-noc" as the only additional clock-names.
+>   - Initialise RGMII link clock at SPEED_10 rather than SPEED_1000 on
+>     probe.
+>   - Link to RFC: https://lore.kernel.org/netdev/20260612-shikra_ethernet-v1-0-f0f4a1d19929@oss.qualcomm.com/
 > 
-> On a OnePlus 7T Pro, register reads from the initial implementation
-> confirmed the programmed 4.40 V, 1.50 A and 500 mA limits. A 180-second
-> guarded charging trace and a subsequent 600-second runtime trace
-> completed without crossing the voltage guard.
-> 
-> Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
-> Co-developed-by: Joel Selvaraj <foss@joelselvaraj.com>
-> Signed-off-by: Joel Selvaraj <foss@joelselvaraj.com>
-> Co-developed-by: Robin Snyders <robin@snyders.xyz>
-> Signed-off-by: Robin Snyders <robin@snyders.xyz>
-> ---
->   drivers/power/supply/Kconfig     |   8 +-
->   drivers/power/supply/qcom_smbx.c | 757 ++++++++++++++++++++++++++++++---------
->   2 files changed, 598 insertions(+), 167 deletions(-)
-> 
+> Signed-off-by: Mohd Ayaan Anwar <mohd.anwar@oss.qualcomm.com>
 
-[...]
+Sashiko raised some valid concerns, I will update the series and send
+out v2 shortly.
 
->   
-> +/* Return 1 when in overvoltage state, else 0 or -errno */
-> +static int smbx_ov_status(struct smb_chip *chip)
-> +{
-> +	u8 mask;
-> +	int rc;
-> +	u32 val;
-> +
-> +	switch (chip->gen) {
-> +	case SMB2:
-> +		mask = SMB2_CHARGER_ERROR_STATUS_BAT_OV_BIT;
-> +		break;
-> +	case SMB5:
-> +		mask = SMB5_CHARGER_ERROR_STATUS_BAT_OV_BIT;
-> +		break;
-> +	default:
-> +		return -EINVAL;
-> +	}
-> +
-> +	rc = regmap_read(chip->regmap,
-> +			 chip->base + BATTERY_CHARGER_STATUS_2, &val);
-> +	if (rc)
-> +		return rc;
-> +
-> +	return !!(val & mask);
-> +}
-> +
-> +static int smb_map_charge_status(struct smb_chip *chip, u32 stat, int *val)
-
-would it make sense to split into smb{2,5}_map_charge_status and pass as .data 
-and call match_data->map_charge_status(chip, stat, val)?
-
-> +{
-> +	switch (chip->gen) {
-> +	case SMB2:
-> +		switch (stat) {
-> +		case SMB2_TRICKLE_CHARGE:
-> +		case SMB2_PRE_CHARGE:
-> +		case SMB2_FAST_CHARGE:
-> +		case SMB2_FULLON_CHARGE:
-> +		case SMB2_TAPER_CHARGE:
-> +			*val = POWER_SUPPLY_STATUS_CHARGING;
-> +			return 0;
-> +		case SMB2_TERMINATE_CHARGE:
-> +		case SMB2_INHIBIT_CHARGE:
-> +			*val = POWER_SUPPLY_STATUS_FULL;
-> +			return 0;
-> +		case SMB2_DISABLE_CHARGE:
-> +			*val = POWER_SUPPLY_STATUS_NOT_CHARGING;
-> +			return 0;
-> +		}
-> +		break;
-> +	case SMB5:
-> +		switch (stat) {
-> +		case SMB5_TRICKLE_CHARGE:
-> +		case SMB5_PRE_CHARGE:
-> +		case SMB5_FULLON_CHARGE:
-> +		case SMB5_TAPER_CHARGE:
-> +			*val = POWER_SUPPLY_STATUS_CHARGING;
-> +			return 0;
-> +		case SMB5_TERMINATE_CHARGE:
-> +		case SMB5_INHIBIT_CHARGE:
-> +			*val = POWER_SUPPLY_STATUS_FULL;
-> +			return 0;
-> +		case SMB5_PAUSE_CHARGE:
-> +		case SMB5_DISABLE_CHARGE:
-> +			*val = POWER_SUPPLY_STATUS_NOT_CHARGING;
-> +			return 0;
-> +		}
-> +		break;
-> +	}
-> +
-> +	*val = POWER_SUPPLY_STATUS_UNKNOWN;
-> +	return 0;
-> +}
-> +
->   static int smb_get_prop_status(struct smb_chip *chip, int *val)
->   {
-> -	unsigned char stat[2];
-> +	u32 stat;
->   	int usb_online = 0;
->   	int rc;
->   
-> @@ -491,49 +619,36 @@ static int smb_get_prop_status(struct smb_chip *chip, int *val)
->   		return rc;
->   	}
->   
-> -	rc = regmap_bulk_read(chip->regmap,
-> -			      chip->base + BATTERY_CHARGER_STATUS_1, &stat, 2);
-> +	rc = regmap_read(chip->regmap,
-> +			 chip->base + BATTERY_CHARGER_STATUS_1, &stat);
->   	if (rc < 0) {
->   		dev_err(chip->dev, "Failed to read charging status ret=%d\n",
->   			rc);
->   		return rc;
->   	}
->   
-> -	if (stat[1] & CHARGER_ERROR_STATUS_BAT_OV_BIT) {
-> +	rc = smbx_ov_status(chip);
-> +	if (rc < 0)
-> +		return rc;
-> +
-> +	/* In overvoltage state */
-> +	if (rc == 1) {
->   		*val = POWER_SUPPLY_STATUS_NOT_CHARGING;
->   		return 0;
->   	}
->   
-> -	stat[0] = stat[0] & BATTERY_CHARGER_STATUS_MASK;
-> +	stat &= BATTERY_CHARGER_STATUS_MASK;
->   
-> -	switch (stat[0]) {
-> -	case TRICKLE_CHARGE:
-> -	case PRE_CHARGE:
-> -	case FAST_CHARGE:
-> -	case FULLON_CHARGE:
-> -	case TAPER_CHARGE:
-> -		*val = POWER_SUPPLY_STATUS_CHARGING;
-> -		return rc;
-> -	case DISABLE_CHARGE:
-> -		*val = POWER_SUPPLY_STATUS_NOT_CHARGING;
-> -		return rc;
-> -	case TERMINATE_CHARGE:
-> -	case INHIBIT_CHARGE:
-> -		*val = POWER_SUPPLY_STATUS_FULL;
-> -		return rc;
-> -	default:
-> -		*val = POWER_SUPPLY_STATUS_UNKNOWN;
-> -		return rc;
-> -	}
-> +	return smb_map_charge_status(chip, stat, val);
->   }
->   
->   static inline int smb_get_current_limit(struct smb_chip *chip,
->   					 unsigned int *val)
->   {
-> -	int rc = regmap_read(chip->regmap, chip->base + ICL_STATUS, val);
-> +	int rc = regmap_read(chip->regmap, chip->base + chip->icl_status, val);
->   
->   	if (rc >= 0)
-> -		*val *= CURRENT_SCALE_FACTOR;
-> +		*val *= chip->icl_step_ua;
->   	return rc;
->   }
->   
-> @@ -541,12 +656,13 @@ static int smb_set_current_limit(struct smb_chip *chip, unsigned int val)
->   {
->   	unsigned char val_raw;
->   
-> -	if (val > 4800000) {
-> +	if (val > chip->icl_max_ua) {
->   		dev_err(chip->dev,
-> -			"Can't set current limit higher than 4800000uA");
-> +			"Can't set current limit higher than %uuA",
-> +			chip->icl_max_ua);
->   		return -EINVAL;
->   	}
-> -	val_raw = val / CURRENT_SCALE_FACTOR;
-> +	val_raw = val / chip->icl_step_ua;
->   
->   	return regmap_write(chip->regmap, chip->base + USBIN_CURRENT_LIMIT_CFG,
->   			    val_raw);
-> @@ -607,12 +723,10 @@ static void smb_status_change_work(struct work_struct *work)
->   static int smb_get_iio_chan(struct smb_chip *chip, struct iio_channel *chan,
->   			     int *val)
->   {
-> -	int rc;
-> -	union power_supply_propval status;
-> +	int rc, status;
->   
-> -	rc = power_supply_get_property(chip->chg_psy, POWER_SUPPLY_PROP_STATUS,
-> -				       &status);
-> -	if (rc < 0 || status.intval != POWER_SUPPLY_STATUS_CHARGING) {
-> +	rc = smb_get_prop_status(chip, &status);
-> +	if (rc < 0 || status != POWER_SUPPLY_STATUS_CHARGING) {
->   		*val = 0;
->   		return 0;
->   	}
-> @@ -625,7 +739,61 @@ static int smb_get_iio_chan(struct smb_chip *chip, struct iio_channel *chan,
->   	return iio_read_channel_processed(chan, val);
->   }
->   
-> -static int smb_get_prop_health(struct smb_chip *chip, int *val)
-> +static int smb_get_prop_current_now(struct smb_chip *chip, int *val)
-> +{
-> +	s64 current_ua;
-> +	int rc;
-> +
-> +	rc = smb_get_iio_chan(chip, chip->usb_in_i_chan, val);
-> +	if (rc < 0)
-> +		return rc;
-> +
-> +	current_ua = (s64)*val * chip->usbin_current_scale;
-> +	if (current_ua < INT_MIN || current_ua > INT_MAX)
-> +		return -ERANGE;
-> +
-> +	*val = (int)current_ua;
-> +	return 0;
-> +}
-> +
-> +static int smb5_get_prop_health(struct smb_chip *chip, int *val)
-> +{
-> +	int rc;
-> +	unsigned int stat;
-> +
-> +	rc = smbx_ov_status(chip);
-> +	if (rc < 0) {
-> +		dev_err(chip->dev,
-> +			"Couldn't determine overvoltage status: %d\n", rc);
-> +		return rc;
-> +	}
-> +	if (rc) {
-> +		*val = POWER_SUPPLY_HEALTH_OVERVOLTAGE;
-> +		return 0;
-> +	}
-> +
-> +	rc = regmap_read(chip->regmap, chip->base + BATTERY_CHARGER_STATUS_7,
-> +			 &stat);
-> +	if (rc < 0) {
-> +		dev_err(chip->dev, "Couldn't read charger status 7 rc=%d\n", rc);
-> +		return rc;
-> +	}
-> +
-> +	if (stat & SMB5_BAT_TEMP_STATUS_TOO_COLD_BIT)
-> +		*val = POWER_SUPPLY_HEALTH_COLD;
-> +	else if (stat & SMB5_BAT_TEMP_STATUS_TOO_HOT_BIT)
-> +		*val = POWER_SUPPLY_HEALTH_OVERHEAT;
-> +	else if (stat & SMB5_BAT_TEMP_STATUS_COLD_SOFT_BIT)
-> +		*val = POWER_SUPPLY_HEALTH_COOL;
-> +	else if (stat & SMB5_BAT_TEMP_STATUS_HOT_SOFT_BIT)
-> +		*val = POWER_SUPPLY_HEALTH_WARM;
-> +	else
-> +		*val = POWER_SUPPLY_HEALTH_GOOD;
-> +
-> +	return 0;
-> +}
-> +
-> +static int smb2_get_prop_health(struct smb_chip *chip, int *val)
->   {
->   	int rc;
->   	unsigned int stat;
-> @@ -637,15 +805,15 @@ static int smb_get_prop_health(struct smb_chip *chip, int *val)
->   		return rc;
->   	}
->   
-> -	if (stat & CHARGER_ERROR_STATUS_BAT_OV_BIT)
-> +	if (stat & SMB2_CHARGER_ERROR_STATUS_BAT_OV_BIT)
->   		*val = POWER_SUPPLY_HEALTH_OVERVOLTAGE;
-> -	else if (stat & BAT_TEMP_STATUS_TOO_COLD_BIT)
-> +	else if (stat & SMB2_BAT_TEMP_STATUS_TOO_COLD_BIT)
->   		*val = POWER_SUPPLY_HEALTH_COLD;
-> -	else if (stat & BAT_TEMP_STATUS_TOO_HOT_BIT)
-> +	else if (stat & SMB2_BAT_TEMP_STATUS_TOO_HOT_BIT)
->   		*val = POWER_SUPPLY_HEALTH_OVERHEAT;
-> -	else if (stat & BAT_TEMP_STATUS_COLD_SOFT_LIMIT_BIT)
-> +	else if (stat & SMB2_BAT_TEMP_STATUS_COLD_SOFT_LIMIT_BIT)
->   		*val = POWER_SUPPLY_HEALTH_COOL;
-> -	else if (stat & BAT_TEMP_STATUS_HOT_SOFT_LIMIT_BIT)
-> +	else if (stat & SMB2_BAT_TEMP_STATUS_HOT_SOFT_LIMIT_BIT)
->   		*val = POWER_SUPPLY_HEALTH_WARM;
->   	else
->   		*val = POWER_SUPPLY_HEALTH_GOOD;
-> @@ -653,6 +821,19 @@ static int smb_get_prop_health(struct smb_chip *chip, int *val)
->   	return 0;
->   }
->   
-> +static int smb_get_prop_health(struct smb_chip *chip, int *val)
-
-I would drop this function and just called
-smb{2,5}_get_prop_health directly with
-
-match_data->get_prop_health(chip, val)
-
-> +{
-> +	switch (chip->gen) {
-> +	case SMB2:
-> +		return smb2_get_prop_health(chip, val);
-> +	case SMB5:
-> +		return smb5_get_prop_health(chip, val);
-> +	default:
-> +		dev_err(chip->dev, "unsupported SMB chip generation\n");
-> +		return -EINVAL;
-> +	}
-> +}
-> +
->   static int smb_get_property(struct power_supply *psy,
->   			     enum power_supply_property psp,
->   			     union power_supply_propval *val)
-> @@ -669,8 +850,7 @@ static int smb_get_property(struct power_supply *psy,
->   	case POWER_SUPPLY_PROP_CURRENT_MAX:
->   		return smb_get_current_limit(chip, &val->intval);
->   	case POWER_SUPPLY_PROP_CURRENT_NOW:
-> -		return smb_get_iio_chan(chip, chip->usb_in_i_chan,
-> -					 &val->intval);
-> +		return smb_get_prop_current_now(chip, &val->intval);
->   	case POWER_SUPPLY_PROP_VOLTAGE_NOW:
->   		return smb_get_iio_chan(chip, chip->usb_in_v_chan,
->   					 &val->intval);
-
-[...]
-
-> +static const struct smb_match_data pmi8998_match_data = {
-> +	.init_seq = smb2_init_seq,
-> +	.init_seq_len = ARRAY_SIZE(smb2_init_seq),
-> +	.name = "pmi8998",
-> +	.gen = SMB2,
-> +	.fv_min_uv = 3487500,
-> +	.fv_max_uv = 4920000,
-> +	.fv_step_uv = 7500,
-> +	.fcc_max_ua = 4500000,
-> +	.fcc_step_ua = 25000,
-> +	.icl_max_ua = 4800000,
-> +	.icl_step_ua = 25000,
-> +	.icl_status = SMB2_ICL_STATUS,
-> +	.usbin_current_scale = 1,
-> +};
-> +
-> +static const struct smb_match_data pm660_match_data = {
-> +	.init_seq = smb2_init_seq,
-> +	.init_seq_len = ARRAY_SIZE(smb2_init_seq),
-> +	.name = "pm660",
-> +	.gen = SMB2,
-> +	.fv_min_uv = 3487500,
-> +	.fv_max_uv = 4920000,
-> +	.fv_step_uv = 7500,
-> +	.fcc_max_ua = 4500000,
-> +	.fcc_step_ua = 25000,
-> +	.icl_max_ua = 4800000,
-> +	.icl_step_ua = 25000,
-> +	.icl_status = SMB2_ICL_STATUS,
-> +	.usbin_current_scale = 1,
->   };
-
-I don't see any difference between pmi8998 and pm660 (which applies for many 
-parts between these chips usually). Maybe would be worth it just to ruse the 
-pmi8998 for the pm660 and only set the name?
-
->   
-> -static int smb_init_hw(struct smb_chip *chip)
-> +static const struct smb_match_data pm8150b_match_data = {
-> +	.init_seq = smb5_init_seq,
-> +	.init_seq_len = ARRAY_SIZE(smb5_init_seq),
-> +	.name = "pm8150b",
-> +	.gen = SMB5,
-> +	.fv_min_uv = 3600000,
-> +	.fv_max_uv = 4790000,
-> +	.fv_step_uv = 10000,
-> +	.fcc_max_ua = 8000000,
-> +	.fcc_step_ua = 50000,
-> +	.icl_max_ua = 5000000,
-> +	.icl_step_ua = 50000,
-> +	.icl_status = SMB5_AICL_ICL_STATUS,
-> +	.usbin_current_scale = 5,
-> +};
-> +
-> +static int smb_init_hw(struct smb_chip *chip,
-> +		       const struct smb_init_register *init_seq, size_t len)
->   {
->   	int rc, i;
->   
-> -	for (i = 0; i < ARRAY_SIZE(smb_init_seq); i++) {
-> +	for (i = 0; i < len; i++) {
-
-since you touching this - C99 would be nice:
-for (int i = ...
-
-So far running these patches on Pixel 3 since yesterday, so far looks ok. I 
-still need debug some crashes, but these usually happen regardless to charging, 
-so likely not issue of this driver :))
-
-David
+	Ayaan
