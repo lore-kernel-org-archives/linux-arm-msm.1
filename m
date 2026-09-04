@@ -1,376 +1,392 @@
-Received: from mail-pj1-f41.google.com (mail-pj1-f41.google.com [209.85.216.41])
+Received: from mail-wr1-f41.google.com (mail-wr1-f41.google.com [209.85.221.41])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BD845450402
-	for <linux-arm-msm@vger.kernel.org>; Fri,  4 Sep 2026 11:43:55 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.216.41
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 954C442124D
+	for <linux-arm-msm@vger.kernel.org>; Fri,  4 Sep 2026 11:53:06 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.41
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788522237; cv=none; b=n/2buR733ViEuUT06QKU2DeLOv1gE9lUNK7riAw7XV/P2btF8ALs7ObKEaCIHwkK2c+lP0cpZm9y86NLzuyuC6A0fJf5pWqdQeJiMjUQNGUYIEPgBU+SC2jF7q9D0yPwuvXC7gx+iK5uQQEzucx0qdhCHsT9M+dmOI6fNUr9VYs=
+	t=1788522792; cv=none; b=q7kZH5q5+22s2EbS404T4cvfseEkYaJwB50k/zTiRc+dHVR6pegg00M2a4JsEBsA2Cgf0LkPBtioE5MO7OpVv5VHqvQ3yP/pMzq2boZqRYMIIbMAxwDgwJGBDWK8/Ea4UoLyOpLUhRP9KCsOkYMcyf4ONWmWBpxvW+1uRuljaOE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788522237; c=relaxed/simple;
-	bh=fIMuzBUE4Zj1EFjD63EIb19sNc/ePv1J5PzlECDI6rs=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=XP35bVI+jMFjaoh8y+Y743yO/4eYZ2r5HaeA1L4x+P3W6yuXzLw9CL2MSMRG68WMbbSgt121enfpCGxVlYZnFIMK3kXaAn9kNaLIkFauqKbg9PIXSugZejP/lgvMNErG7hrS/jKuECdr0K9VlQaRkjzJ3NgYTacBPfzX9nkImCE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=MRIYvUAC; arc=none smtp.client-ip=209.85.216.41
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	s=arc-20240116; t=1788522792; c=relaxed/simple;
+	bh=kPtDu4ylGYaECbaz62p5y8RwerJ0u/9YinvPJgM2jeg=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=f8g00TRxi46TAXTd76evVTwrQtDJ+dAuwewEOlh/o9yh9Tc+HtSwgrrIQs8rBX8E0bcHXNeTg2WMP+/1pegHgf0QiUWG9Pqj5Jo9w6pu6WStToaBbYB0P3c28Bov/PGreq5XQ52KaBbINR3l8rbDzTXWlnUyVNXiRuv+N275M7Q=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=apTvZDki; arc=none smtp.client-ip=209.85.221.41
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="MRIYvUAC"
-Received: by mail-pj1-f41.google.com with SMTP id 98e67ed59e1d1-38759bcd877so860030a91.2
-        for <linux-arm-msm@vger.kernel.org>; Fri, 04 Sep 2026 04:43:55 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="apTvZDki"
+Received: by mail-wr1-f41.google.com with SMTP id ffacd0b85a97d-47f96c5b722so611370f8f.0
+        for <linux-arm-msm@vger.kernel.org>; Fri, 04 Sep 2026 04:53:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1788522235; x=1789127035; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=eHXljnuOo7jmxlWanqN7JoMXcPtjZ3FAb8iBM6xDPOo=;
-        b=MRIYvUAC9yd6Lp9vkFJRIkL5l5RNf7uXYZgFBR7nVgmgsX2GqjwC9A5JoO+ytWu0fP
-         bh9F/hPkCvNV5col+YdkwCEgHD5SgevBsp0546ocDAiY0HjMpueFpS1+5goaK3IXHa7Q
-         PU13Rm9muUmkPcH2LXjsn2x4Ny7NgGCHj0+1+A37ulfIhyB0W+pRgZXWOnmbbstjaiiz
-         3yAFpUdSsPNOiqWvHe7XTmnhi4V7TgcSgNiYgdzvVrAqLfS95e//MTr837jAmWTq100i
-         VUYGmc66VPmMBn8LIYm+KvZq5qhiG0bsLUjL7wH6QdBfSY6GWGBK5WCTATlJkRaw9l6M
-         PQGA==
+        d=linaro.org; s=google; t=1788522784; x=1789127584; darn=vger.kernel.org;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=UCy6y9keo10Y4rv/6l8mYMuFmdO4ZB3IBDCXthGc0eI=;
+        b=apTvZDkiOxFCSMuaniMmE6/Lq6GNxHmkKLE0lytDkab8SfYlup/XuMbF/cuEdCq56y
+         KJFUmzdP8pnM+f5w/HM+OLo/NwcO8TAPAsdWGau9zjCTmYQCv51h4at/HJ7ib2E2WxVW
+         YgBDuKbXy7cykLM3LCE0thMHrMB7qkQ0SUiHFlkyQGmngGyR8ptLMHkE7UxH7rpEL0Lf
+         uBlr9t2d1FV1F8a21jjmxCV3SSX/XWvuUuHQo83lLyLlrLxsfFnSRU5bYE5mehKq6mnl
+         6iza8NeMbaqJ++dXBCZAeO5HQeF0D9AkZZDrFmvkJdS5zDX7Yi8E6cF1Uq+MoGgvP5kd
+         hIHQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788522235; x=1789127035;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=eHXljnuOo7jmxlWanqN7JoMXcPtjZ3FAb8iBM6xDPOo=;
-        b=bliZRkRib/RVsxOID7mISzs9eX8D3yXcsbHYkJsohwcU1zAm4ENKsX6WCIdYBOQGJ6
-         NSXuplqlG6TqoLJ9EANx4xD5V0RibARbsNFbqBgZN7b9/0wDoOUI4CeMfa6n04+XAoE0
-         +6ODY7qkpRh+TmMgbffwL59C6KQ63IAuJFR+VX5mVQufhw1O9BuEuVm+/800i+2Bm+eY
-         YswEXKXGRdUS1Cl8z8yNnx7O95jYK9HAlzDSsn+X3tWiRSLg3Jr0lROFbOwZcwwiZW01
-         7n8yw8aD3bw6lvmmw4DYKpBiZOZWGMMvurGRPhZcB5e7pDISbih9K8vQqX9coiiQg/3x
-         b0nA==
-X-Forwarded-Encrypted: i=1; AKwUvBydU39hokXCEonRGXQ4Xq4dKcp4NoxypFUVjDoEesPYFUaYIoEnM520H2zQLIVru3T0a8X1XDdxtqEiUBEY@vger.kernel.org
-X-Gm-Message-State: AFuF++l6nhd+q9G3uSMfk7beoQ0p8wP5d0KjFI/PSMD+lCHQBp6oaUfA
-	K8DcgvqutGatvMqvRdPgKXFls1sWK6kKKNFWam+fgaGsmgyGAt6CxDTw
-X-Gm-Gg: AYBFou1Jy2fHjgfsXfc64+wd0rhW+e6R0GfBXgIggP46VzVtOcLs0azz/RYzujOA4Nq
-	OjlLHKetbzLMLS71hX7c1ET8YJUQazGPA+25zs010GNPaFNsd4QdmlN4oWL0X7REGX0T+GQbK+B
-	vUxHp26LyDps4udA8pxA50Yk8FlbdyMPUUDr5SYV9FuE2bzTr5e18HyOFr+qApzpzZ6gXus6iNr
-	D084JR0FvCUojXo7Zmrjj7il50zOXgKkAicMXLkzlDEIbPPX8EbIrOa76p+3awTGWzyl7foaTHv
-	4Y86jqzSWsXtHynDZPgUPl7Bohmj2xf11NScKDC7+FhWJM5zNewhVV+prJ9X56LKiRN9WjBIp2j
-	JWXzNUR56wxQrF25VLPcH5pm1YTPPfPkimQExGuKLR8hUG1iihX77eCIV+vmrU8xbz2dg09i+6t
-	5uGdChRZfkbTclmTS57PQdnOYi1jpHNASrqbSvR5k2q44a62ODFUPCmvxcSIIZ/egUknWdc5pCj
-	Q55hz1EzVKnVv4=
-X-Received: by 2002:a17:90b:4d87:b0:380:540:d499 with SMTP id 98e67ed59e1d1-39b26100bfdmr7413763a91.6.1788522234956;
-        Fri, 04 Sep 2026 04:43:54 -0700 (PDT)
-Received: from volcano9f6e-hostos.amd.com ([165.204.217.251])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3339a62be87sm5576999eec.6.2026.09.04.04.43.48
+        d=1e100.net; s=20251104; t=1788522784; x=1789127584;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=UCy6y9keo10Y4rv/6l8mYMuFmdO4ZB3IBDCXthGc0eI=;
+        b=hJMRKxSNzj1Dgl43he83FHHGbjJTJYpO8252icXgj31gMNE6CabBm3Ig3IssCuaA13
+         QeUTXZOtvT2GzNmt2vjHN19BdZ0mopprVN56J6APdx1D02GfXAzvMHm11FaA6AUiPr7P
+         RyFzTHzNtdJLDGMoS4znWE3GjM9K5izTGWd7gxusoCSd5CRWipqHLkd4lJt8jGFr1ywW
+         sMKvCG5scyPCv1uWFPt6fBQm95kU+vv5GaRVPKYJvfWg7oodh1ODLyk3g++/ESATiQ0T
+         rQiUKIRzTdkgdcbAKPvmolp4Ftq1GG7is6ev4yCodrc+OfG6W1WzXUoaLRFXCYvpr9GT
+         +84Q==
+X-Gm-Message-State: AFuF++nPAOPjQDd5gGV8MYcQBhwdrQDHH+PKFXJzOVroJ9YKZa6zCLT9
+	NkcOO6QGTW/H6SjASUZiraQ0Y2cToiSELNZRAUilnzIHOLD29CIsZ9IBXS5jwRi57jBBSuBOGRA
+	V/oGU/yI=
+X-Gm-Gg: AYBFou0x2EETXp+vyII5MYbn/poPtYp+Oc0PyinkiiAP+AywV2hdRSfE5otr4WrVs2h
+	o5aP1952/DKI87ny1NI1EYAcD+/JZNCoUBKFecCM1suGkT8vR6ITo2oJBW6oD4iPYofWSs84jnm
+	Ohh0Dp3srZX822MfhLxj9bF1bQ2nWqNessNWwj3LFNSU77Sbclbw8thufxxgKIGr9m8i8sjkjwQ
+	qWT5Za7PUEEFVcPgEcRj/Sja25Gd5QV/3YWSA/KOaN435Gj0EKF5fyV68xo03FwOhG+YTfR+gEv
+	kPqw/ot+lvAJB4DHTSG50t2ZyNNg22S2Wu+XQJu35RRc+1G49qmSDIh5IRDudPuljEqxtYPU98L
+	DnNLvTC3RteJsVVkzemLPi40nccoIbTP3TRVRE+/8+63/0oZ5kMeyqQT0SFryy4Ei8fwO5ci2tP
+	x9jkKBLiuQYt2UPFvRob9/wlouWtlQ1BsuC/Zsxp7wkkkGasi60GKQzZ1YTMOFoqx6jeIXAjXA+
+	pRHrQIn5DE=
+X-Received: by 2002:a5d:6f08:0:b0:485:8a47:5b8e with SMTP id ffacd0b85a97d-4858a475d4cmr3952020f8f.43.1788522783371;
+        Fri, 04 Sep 2026 04:53:03 -0700 (PDT)
+Received: from [192.168.0.35] ([109.76.237.179])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-485885c5bbdsm5474207f8f.36.2026.09.04.04.53.01
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 04 Sep 2026 04:43:54 -0700 (PDT)
-From: Hemanth Selam <hemanth.selam@gmail.com>
-To: Herbert Xu <herbert@gondor.apana.org.au>,
-	"David S. Miller" <davem@davemloft.net>,
-	Nicolas Ferre <nicolas.ferre@microchip.com>,
-	Alexandre Belloni <alexandre.belloni@bootlin.com>,
-	Claudiu Beznea <claudiu.beznea@tuxon.dev>,
-	George Cherian <gcherian@marvell.com>,
-	Tom Lendacky <thomas.lendacky@amd.com>,
-	John Allen <john.allen@amd.com>,
-	Gilad Ben-Yossef <gilad@benyossef.com>,
-	Ayush Sawal <ayush.sawal@chelsio.com>,
-	Srujana Challa <schalla@marvell.com>,
-	Bharat Bhushan <bbhushan2@marvell.com>,
-	Bartosz Golaszewski <brgl@kernel.org>,
-	Krzysztof Kozlowski <krzk@kernel.org>,
-	Vladimir Zapolskiy <vz@mleia.com>
-Cc: linux-kernel@vger.kernel.org,
-	linux-crypto@vger.kernel.org,
-	linux-arm-kernel@lists.infradead.org,
-	linux-arm-msm@vger.kernel.org,
-	linux-samsung-soc@vger.kernel.org
-Subject: [PATCH] crypto: fix typos in comments
-Date: Fri,  4 Sep 2026 17:13:39 +0530
-Message-ID: <20260904114345.27509-1-hemanth.selam@gmail.com>
-X-Mailer: git-send-email 2.48.1
+        Fri, 04 Sep 2026 04:53:02 -0700 (PDT)
+From: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
+Subject: [PATCH v15 0/4] Add phy_get_by_of_node and devm helper
+Date: Fri, 04 Sep 2026 12:52:57 +0100
+Message-Id: <20260904-b4-linux-next-25-03-13-dtsi-x1e80100-camss-v15-0-68b7916e7a3f@linaro.org>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/53TzUrEMBAA4FeRno3M5D+efA/xkN/dgrbSrqWy7
+ Ls7XZBWcoqXQCbkm2GGuXZznvo8d88P127KSz/340AXVI8PXTz74ZRZnyjQceAKBAoWJHvvh6+
+ VDXm9MK4YCEbhdJl7tmK2gAAs+o95ZqhAFyNDSMJ3BH5OufTrPdvrG93P/XwZp+978kVt0X+lW
+ eiRWamj81o64e0L/fTT+DROp27Ls+ijLZtsTXZOMfBYokDOK9vstkFssg3ZEKJK3vKiuK5s+2t
+ r4ES12JZspxQa4USg8ivbHW3dZDuyvXJRFBAmQahshB0X2IYj9YSVVLKzkg6JtY4HvbF0mhAwF
+ ZyQqELWKdU633UDtk3nW+1WWZu8xIL1RFEcdN6oi63v2SJmXsA4V+ty1x20LRHtBXUec8EccwK
+ j/ui32+0HYdP7SiwEAAA=
+X-Change-ID: 20250313-b4-linux-next-25-03-13-dtsi-x1e80100-camss-1506f74bbd3a
+To: Bjorn Andersson <andersson@kernel.org>, 
+ Michael Turquette <mturquette@baylibre.com>, 
+ Stephen Boyd <sboyd@kernel.org>, Rob Herring <robh@kernel.org>, 
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, Robert Foss <rfoss@kernel.org>, 
+ Todor Tomov <todor.too@gmail.com>, 
+ Mauro Carvalho Chehab <mchehab@kernel.org>, 
+ Konrad Dybcio <konradybcio@kernel.org>, 
+ Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>, 
+ Bryan O'Donoghue <bod@kernel.org>, 
+ Loic Poulain <loic.poulain@oss.qualcomm.com>, Vinod Koul <vkoul@kernel.org>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>, 
+ Kishon Vijay Abraham I <kishon@kernel.org>, Felipe Balbi <balbi@ti.com>
+Cc: linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org, 
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
+ linux-media@vger.kernel.org, linux-phy@lists.infradead.org, 
+ Bryan O'Donoghue <bryan.odonoghue@linaro.org>, 
+ Krzysztof Kozlowski <krzk@kernel.org>, stable@vger.kernel.org, 
+ Nihal Kumar Gupta <nihal.gupta@oss.qualcomm.com>, 
+ Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=openpgp-sha256; l=12648;
+ i=bryan.odonoghue@linaro.org; h=from:subject:message-id;
+ bh=kPtDu4ylGYaECbaz62p5y8RwerJ0u/9YinvPJgM2jeg=;
+ b=owEBbQKS/ZANAwAKASJxO7Ohjcg6AcsmYgBqmrEbPgEOK/OQ+IS7Q2r3YucyWDh2Gl1p8wy7k
+ oegz8F5yBaJAjMEAAEKAB0WIQTmk/sqq6Nt4Rerb7QicTuzoY3IOgUCapqxGwAKCRAicTuzoY3I
+ Oqf0D/47LkGe5TjykW9xnfjPaZ7wus25q8WzSgJ2k2kY3CZxDFeWX018QJ/lFbMy4pCWR6A5LF3
+ SrTWL+YItcvcQeM52S/UZ2OohU3umVzC5ZR7PEPaNGz0fnSW1BKk/Qxi/Z17iWUzV341ocZx/ns
+ 9Uyx9Y6AYBjQa7bX7ywIvMTQfxfNiPTNAFHzOYN4A8uO/HQ0obWnLi2umJFnkgyOd/9DF/BP/Nn
+ lHMN3uz3VEro7xPQ+aiOheRHKWAxzGpG8Ck/0KjO6i9j0CTWsMrFI0B6CS09PC4ADh7k7ZaeO9V
+ EGo/C2LRrzxr+KFFPgdWLPp9xTDwe4ycBf0SJlAxK9ncLhZf3C4g4MhcOYwNdonE+gCOunllwOv
+ czhuYE43HGtTwG7cm+bdn71LvXbeggjFOZcNoaC7ANFqyXMSQzAJF+V7CRCq3MIGIKel+zABU6k
+ cgkzcRp8PYydLlbz0paYDksuEQSVbTpyRNZy77NcB2B+0heVHKTzEeSqDKv4yDNmCIfDw9iOo1N
+ H2SptSs30KQq+MZuMNM8CaD4+PgL/Xc0Ys/IXA42ulOoZsM+LJ6qm04cJE1Kmw84Xquw9nbDhBq
+ dLgah1Asa6pqVGnQSKnT+ggwIjp6miu3+IhH/CoekkRft3U3OUqrXLwNCv8aYrHG4vzjROPBf/j
+ FKvqlBiNonNt8hw==
+X-Developer-Key: i=bryan.odonoghue@linaro.org; a=openpgp;
+ fpr=E693FB2AABA36DE117AB6FB422713BB3A18DC83A
 
-Fix typos in comments, reported by scripts/checkpatch.pl using the
-misspelling list in scripts/spelling.txt.  Only touches comments, no code
-changes.
+This series has evolved from a CAMSS standalone series to a series that is
+mostly on the PHY side now, so I've split the series up to reflect that
+fact.
 
-Assisted-by: Cursor:claude-opus-5
-Signed-off-by: Hemanth Selam <hemanth.selam@gmail.com>
+Starting off by fixing a long-standing use-after-free race-condition in the
+phy core flagged by Sashiko in v13. While my series doesn't introduce the
+bug it seems appropriate to address it anyway once flagged.
+
+Once addressed two new helper functions are introduced to the PHY core to
+enable finding of a PHY using the media graph.
+
+Finally the usage of that new API is shown with CAMSS.
+
+Changes in v15:
+- Adds lockdep_assert - Loic 
+- Depends-on: https://lore.kernel.org/r/20260903-x1e-csi2-phy-v17-0-26606fa9a039@linaro.org
+- Link to v14: https://patch.msgid.link/20260903-b4-linux-next-25-03-13-dtsi-x1e80100-camss-v14-0-01ef1eced075@linaro.org
+
+Changes in v14:
+- Fixes existing bug highlited by Sashiko in v13.
+  The bug has appropriate Fixes: tags applied for back-porting.
+- RB accumulated from v13 for the now standalone CAMSS patch.
+- YAML changes carried thus far will instead be posted with dtsi changes
+  where they 'feel' more logical.
+- Depends-on: https://lore.kernel.org/r/20260903-x1e-csi2-phy-v17-0-26606fa9a039@linaro.org
+- Link to v13: https://patch.msgid.link/20260728-b4-linux-next-25-03-13-dtsi-x1e80100-camss-v13-0-ae811e2f0799@linaro.org
+
+Changes in v13:
+- Introduces struct device_node phy helper lookup.
+  This allows for finding a phy from a device_node entry.
+- Uses media-graph exclusively to reference phys. - Neil, Vlad, Vinod
+- Performs runtime check for legacy v non-legacy phys - Krzysztof
+- Link to v12: https://patch.msgid.link/20260708-b4-linux-next-25-03-13-dtsi-x1e80100-camss-v12-0-f8588da41f16@linaro.org
+
+Changes in v12:
+- Updates camss sensor find method to find the sensor in the CSIPHY port. -
+  Neil, Vlad, Bryan
+- Drops dependency on passing polarities and positions. Moved into CSIPHY
+  port as agreed. Neil, Vlad, Bryan
+- Omitted mux to CSID as discussed this will be done when splitting CSID
+  out as its own individual node. Neil, Bryan
+- Updated Reviewed-by: - Loic
+- Link to v11: https://lore.kernel.org/r/20260326-b4-linux-next-25-03-13-dtsi-x1e80100-camss-v11-0-5b93415be6dd@linaro.org
+
+Changes in v11:
+- Dropped simple-mfd in dts for devm_of_platform_populate() - Krzysztof
+- Pass polarity and position for data and clock lanes - bod
+- Remove check for PHY_TYPE_DPHY - PHY driver validates its own mode - bod
+- Depends-on: https://lore.kernel.org/r/20260325-dphy-params-extension-v1-0-c6df5599284a@linaro.org
+- Depends-on: https://lore.kernel.org/r/20260326-x1e-csi2-phy-v5-0-0c0fc7f5c01b@linaro.org
+- Link to v10: https://lore.kernel.org/r/20260316-b4-linux-next-25-03-13-dtsi-x1e80100-camss-v10-0-fdfe984fe941@linaro.org
+
+Changes in v10:
+- compat simple-mfd added to CAMSS allows probing sub-nodes.
+  The other way to do this would be simple-bus however, CAMSS
+  is really a collection of devices in a block as opposed to a
+  discoverable bus.
+- csiphy nodes are sub-nodes of CAMSS.
+  Sub-nodes as pointed out by Dmitry will allow us to show some love to
+  older platforms.
+- Depends-on: https://lore.kernel.org/r/20260315-x1e-csi2-phy-v4-0-90c09203888d@linaro.org
+- Link to v9: https://lore.kernel.org/r/20260226-b4-linux-next-25-03-13-dtsi-x1e80100-camss-v9-0-a59c3f037d0b@linaro.org
+
+v9:
+- Adds phy handles as optional nodes
+- Adds minItems: 5 for iommu entries
+  I believe this should be acceptable as maxItems: 8 continues
+  to be valid
+- Makes CAMSS-level rails optional for x1e
+  Similarly I think this should be OK as the legacy binding
+  is still valid it is simply optional instead of mandatory now
+- Supports CSIPHY nodes adjacent to CAMSS while leaving
+  csiphy regs intact.
+- Pushes dtsi drop to another series everything in this series
+  can go through linux-media
+- Depends-on: https://lore.kernel.org/r/20260226-x1e-csi2-phy-v3-0-11e608759410@linaro.org
+- Link to v8: https://lore.kernel.org/r/20260225-b4-linux-next-25-03-13-dtsi-x1e80100-camss-v8-0-95517393bcb2@linaro.org
+
+v8:
+
+- This version rebases on latest media-committers/next - bod
+- Adds support for "combo-mode" PHYs in the YAML.
+  It will be possible to build out the code to support this later - Vlad
+- Maintains the upstream model of connecting sensors to CSI decoders.
+  Every other upstream implementation does it this way so
+  CAMSS will do it this way too.
+- Reduces the number of IOMMU entires in CAMSS to those required for
+  CSID, VFE/RDI/PIX respectively.
+  Including all of the IOMMUs implies we will also "stuff" CAMSS
+  with ever increasing lists of registers but a better approach
+  is to have individual nodes for functional blocks.
+  For example this series supports CSIPHy as a separate block
+  CCI is already a separate block - and we will add ICP, BPS, IPE
+  etc as additional standalone nodes.
+  camss@someaddr {
+        //existing bindings vfe, csid, csiphy go here
+        iommus = <just what's needed for this>;
+  };
+  bps@some_other_address {
+        iommus = <bps specific iommus>;
+  }
+  In particular this model will save us from going down the same
+  path as the vpu which has ended up tripping over the total size
+  an iommu entry may span.
+
+  Nobody really likes the legacy binding much so instead of
+  continuing to bludgeon more entries into it, I've conciously
+  not included BPS, IPE, ICP etc.
+
+Depends-on: https://lore.kernel.org/r/20260225-x1e-csi2-phy-v2-0-7756edb67ea9@linaro.org
+Link to v7: https://lore.kernel.org/r/20250711-b4-linux-next-25-03-13-dtsi-x1e80100-camss-v7-0-0bc5da82f526@linaro.org
+Working tree: https://gitlab.com/Linaro/arm64-laptops/linux/-/tree/qcom-laptops-v6.19-rc8-camss?ref_type=heads
+
+v7:
+
+- Reimagine the PHYs as individual nodes.
+  A v1 of the schmea and driver for the CSI PHY has been published with
+  some review feedback from Rob Herring and Konrad Dybcio
+
+  https://lore.kernel.org/r/20250710-x1e-csi2-phy-v1-0-74acbb5b162b@linaro.org
+
+  Both the clock name changes from Rob and OPP changes suggested by Konrad
+  are _not_ yet present in this submission however stipulating to those
+  changes, I think publishing this v7 of the CAMSS/DT changes is warranted.
+
+  Its important to publish a whole view of changes for reviewers without
+  necessarily munging everything together in one sprawling series.
+
+  TL;DR I moved the PHY driver to its own series review comments there
+  are not reflected here yet but "shouldn't" have a big impact here.
+
+- Having separate nodes in the DT for the PHYS allows for switching on PHYs
+  as we do for just about every other PHYs.
+  &csiphyX {
+      status = "okay";
+  };
+
+  We just list phys = <> in the core dtsi and enable the PHYs we want in
+  the platform dts.
+
+- The level of code change in CAMSS itself turns out to be quite small.
+  Adding the PHY structure to the CSIPHY device
+  Differentiating the existing camss.c -> camss-csiphy.c init functions
+  A few new function pointers to facilitate parallel support of legacy
+  and new PHY interfaces.
+
+- A key goal of this updated series is both to introduce a new PHY method
+  to CAMSS but to do it _only_ for a new SoC while taking care to ensure
+  that legacy CAMSS-PHY and legacy DT ABI continues to work.
+
+  This is a key point coming from the DT people which I've slowly imbibed
+  and hopefully succeeded in implementing.
+
+- In addition to the CRD both T14s and Slim7x are supported.
+  I have the Inspirion14 working and the XPS but since we haven't landed
+  the Inspirion upstream yet, I've chosen to hold off on the XPS too.
+
+- There is another proposal on the list to make PHY devices as sub-devices
+
+  I believe having those separate like most of our other PHYs
+  is the more appropriate way to go.
+
+  Similarly there is less code change to the CAMSS driver with this change.
+
+  Finally I believe we should contine to have endpoints go from the sensor
+  to CAMSS not the PHY as CAMSS' CSI decoder is the consumer of the data
+  not the PHY.
+
+- Working tree: https://git.codelinaro.org/bryan.odonoghue/kernel/-/tree/x1e80100-6.16-rcX-dell-inspiron14-camss-ov02c10-ov02e10-audio-iris-phy-v3
+- Link to v6: https://lore.kernel.org/r/20250314-b4-linux-next-25-03-13-dtsi-x1e80100-camss-v6-0-edcb2cfc3122@linaro.org
+
+v6:
+- Removes 'A phandle to an OPP node describing' per Krzysztof's comment
+  on patch #1
+- Drops Fixes: from patch #1 - Krzysztof
+- The ordering of opp description MXC and MMXC is kept as it matches the
+  power-domain ordering - Krzysztof/bod
+- Link to v5: https://lore.kernel.org/r/20250313-b4-linux-next-25-03-13-dtsi-x1e80100-camss-v5-0-846c9a6493a8@linaro.org
+
+v5:
+- Picks up a Fixes: that is a valid precursor for this series - Vlad
+- Applies RB from Vlad
+- Drops "cam" prefix in interconnect names - Krzysztof/Vlad
+- Amends sorting of regs, clocks consistent with recent 8550 - Depeng/Vlad
+- Link to v4: https://lore.kernel.org/r/20250119-b4-linux-next-24-11-18-dtsi-x1e80100-camss-v4-0-c2964504131c@linaro.org
+
+v4:
+- Applies RB from Konrad
+- Adds the second CCI I2C bus to CCI commit log description.
+  I previously considered leaving out the always on pins but, decided
+  to include them in the end and forgot to align the commit log.
+- Alphabetises the camcc.h included in the dtsi. - Vlad
+- Link to v3: https://lore.kernel.org/r/20250102-b4-linux-next-24-11-18-dtsi-x1e80100-camss-v3-0-cb66d55d20cc@linaro.org
+
+v3:
+- Fixes ordering of headers in dtsi - Vlad
+- Changes camcc to always on - Vlad
+- Applies RB as indicated - Krzysztof, Konrad
+- Link to v2: https://lore.kernel.org/r/20241227-b4-linux-next-24-11-18-dtsi-x1e80100-camss-v2-0-06fdd5a7d5bb@linaro.org
+
+v2:
+
+I've gone through each comment and implemented each suggestion since IMO
+they were all good/correct comments.
+
+Detail:
+
+- Moves x1e80100 camcc to its own yaml - Krzysztof
+- csid_wrapper comes first because it is the most relevant
+  register set - configuring all CSID blocks subordinate to it - bod, Krzysztof
+- Fixes missing commit log - Krz
+- Updates to latest format established @ sc7280 - bod
+- Includes CSID lite which I forgot to add @ v1 - Konrad, bod
+- Replaces static ICC parameters with defines - Konrad
+- Drops newlines between x and x-name - Konrad
+- Drops redundant iommu extents - Konrad
+- Leaves CAMERA_AHB_CLK as-is - Kronrad, Dmitry
+  Link: https://lore.kernel.org/r/3f1a960f-062e-4c29-ae7d-126192f35a8b@oss.qualcomm.com
+- Interrupt EDGE_RISING - Vladimir
+- Implements suggested regulator names pending refactor to PHY API - Vladimir
+- Drop slow_ahb_src clock - Vladimir
+
+Link to v1:
+https://lore.kernel.org/r/20241119-b4-linux-next-24-11-18-dtsi-x1e80100-camss-v1-0-54075d75f654@linaro.org
+
+Working tree:
+https://git.codelinaro.org/bryan.odonoghue/kernel/-/tree/arm-laptop/wip/x1e80100-6.13-rc3
+
+v1:
+
+This series adds dt-bindings and dtsi for CAMSS on x1e80100.
+
+The primary difference between x1e80100 and other platforms is a new VFE
+and CSID pair at version 680.
+
+Some minor driver churn will be required to support outside of the new VFE
+and CSID blocks but nothing too major.
+
+The CAMCC in this silicon requires two, not one power-domain requiring
+either this fix I've proposed here or something similar:
+
+https://lore.kernel.org/linux-arm-msm/bad60452-41b3-42fb-acba-5b7226226d2d@linaro.org/T/#t
+
+That doesn't gate adoption of the binding description though.
+
+A working tree in progress can be found here:
+https://git.codelinaro.org/bryan.odonoghue/kernel/-/tree/x1e80100-6.12-rc7+camss?ref_type=heads
+
+Signed-off-by: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
 ---
- drivers/crypto/atmel-sha.c                       |  4 ++--
- drivers/crypto/cavium/cpt/cptpf_main.c           | 12 ++++++------
- drivers/crypto/cavium/cpt/cptvf_main.c           |  4 ++--
- drivers/crypto/cavium/cpt/cptvf_mbox.c           |  4 ++--
- drivers/crypto/cavium/nitrox/nitrox_main.c       |  2 +-
- drivers/crypto/ccp/ccp-dev.c                     |  2 +-
- drivers/crypto/ccree/cc_buffer_mgr.c             |  4 ++--
- drivers/crypto/chelsio/chcr_algo.c               |  2 +-
- drivers/crypto/hisilicon/sec/sec_algs.c          |  2 +-
- drivers/crypto/marvell/octeontx/otx_cptvf_mbox.c |  4 ++--
- drivers/crypto/omap-sham.c                       |  4 ++--
- drivers/crypto/qce/aead.c                        |  2 +-
- drivers/crypto/s5p-sss.c                         |  2 +-
- 13 files changed, 24 insertions(+), 24 deletions(-)
+Bryan O'Donoghue (4):
+      phy: core: Fix use-after-free in phy_get paths
+      phy: core: Add phy_get_by_of_node()
+      phy: core: Add devm_phy_get_by_of_node()
+      media: qcom: camss: Add support for PHY API devices
 
-diff --git a/drivers/crypto/atmel-sha.c b/drivers/crypto/atmel-sha.c
-index 48f54b615504..89c0a3bdf4e0 100644
---- a/drivers/crypto/atmel-sha.c
-+++ b/drivers/crypto/atmel-sha.c
-@@ -1203,7 +1203,7 @@ static int atmel_sha_finup(struct ahash_request *req)
- 
- 	/*
- 	 * final() has to be always called to cleanup resources
--	 * even if udpate() failed, except EINPROGRESS
-+	 * even if update() failed, except EINPROGRESS
- 	 */
- 	err2 = atmel_sha_final(req);
- 
-@@ -1338,7 +1338,7 @@ static int atmel_sha_done(struct atmel_sha_dev *dd)
- 	return err;
- 
- finish:
--	/* finish curent request */
-+	/* finish current request */
- 	atmel_sha_finish_req(dd->req, err);
- 
- 	return err;
-diff --git a/drivers/crypto/cavium/cpt/cptpf_main.c b/drivers/crypto/cavium/cpt/cptpf_main.c
-index 9358c1c041d4..4234f9f156a3 100644
---- a/drivers/crypto/cavium/cpt/cptpf_main.c
-+++ b/drivers/crypto/cavium/cpt/cptpf_main.c
-@@ -90,19 +90,19 @@ static void cpt_configure_group(struct cpt_device *cpt, u8 grp,
- 
- static void cpt_disable_mbox_interrupts(struct cpt_device *cpt)
- {
--	/* Clear mbox(0) interupts for all vfs */
-+	/* Clear mbox(0) interrupts for all vfs */
- 	cpt_write_csr64(cpt->reg_base, CPTX_PF_MBOX_ENA_W1CX(0, 0), ~0ull);
- }
- 
- static void cpt_disable_ecc_interrupts(struct cpt_device *cpt)
- {
--	/* Clear ecc(0) interupts for all vfs */
-+	/* Clear ecc(0) interrupts for all vfs */
- 	cpt_write_csr64(cpt->reg_base, CPTX_PF_ECC0_ENA_W1C(0), ~0ull);
- }
- 
- static void cpt_disable_exec_interrupts(struct cpt_device *cpt)
- {
--	/* Clear exec interupts for all vfs */
-+	/* Clear exec interrupts for all vfs */
- 	cpt_write_csr64(cpt->reg_base, CPTX_PF_EXEC_ENA_W1C(0), ~0ull);
- }
- 
-@@ -115,7 +115,7 @@ static void cpt_disable_all_interrupts(struct cpt_device *cpt)
- 
- static void cpt_enable_mbox_interrupts(struct cpt_device *cpt)
- {
--	/* Set mbox(0) interupts for all vfs */
-+	/* Set mbox(0) interrupts for all vfs */
- 	cpt_write_csr64(cpt->reg_base, CPTX_PF_MBOX_ENA_W1SX(0, 0), ~0ull);
- }
- 
-@@ -140,10 +140,10 @@ static int cpt_load_microcode(struct cpt_device *cpt, struct microcode *mcode)
- 	 */
- 	if (mcode->is_ae) {
- 		core = CPT_MAX_SE_CORES; /* start couting from 10 */
--		total_cores = CPT_MAX_TOTAL_CORES; /* upto 15 */
-+		total_cores = CPT_MAX_TOTAL_CORES; /* up to 15 */
- 	} else {
- 		core = 0; /* start couting from 0 */
--		total_cores = CPT_MAX_SE_CORES; /* upto 9 */
-+		total_cores = CPT_MAX_SE_CORES; /* up to 9 */
- 	}
- 
- 	/* Point to microcode for each core of the group */
-diff --git a/drivers/crypto/cavium/cpt/cptvf_main.c b/drivers/crypto/cavium/cpt/cptvf_main.c
-index db76df14c4a0..e07448098ac0 100644
---- a/drivers/crypto/cavium/cpt/cptvf_main.c
-+++ b/drivers/crypto/cavium/cpt/cptvf_main.c
-@@ -417,7 +417,7 @@ static void cptvf_enable_swerr_interrupts(struct cpt_vf *cptvf)
- 
- 	vqx_misc_ena.u = cpt_read_csr64(cptvf->reg_base,
- 					CPTX_VQX_MISC_ENA_W1S(0, 0));
--	/* Set mbox(0) interupts for the requested vf */
-+	/* Set mbox(0) interrupts for the requested vf */
- 	vqx_misc_ena.s.swerr = 1;
- 	cpt_write_csr64(cptvf->reg_base, CPTX_VQX_MISC_ENA_W1S(0, 0),
- 			vqx_misc_ena.u);
-@@ -429,7 +429,7 @@ static void cptvf_enable_mbox_interrupts(struct cpt_vf *cptvf)
- 
- 	vqx_misc_ena.u = cpt_read_csr64(cptvf->reg_base,
- 					CPTX_VQX_MISC_ENA_W1S(0, 0));
--	/* Set mbox(0) interupts for the requested vf */
-+	/* Set mbox(0) interrupts for the requested vf */
- 	vqx_misc_ena.s.mbox = 1;
- 	cpt_write_csr64(cptvf->reg_base, CPTX_VQX_MISC_ENA_W1S(0, 0),
- 			vqx_misc_ena.u);
-diff --git a/drivers/crypto/cavium/cpt/cptvf_mbox.c b/drivers/crypto/cavium/cpt/cptvf_mbox.c
-index 1267e1eba7e9..9f2ae10bbd60 100644
---- a/drivers/crypto/cavium/cpt/cptvf_mbox.c
-+++ b/drivers/crypto/cavium/cpt/cptvf_mbox.c
-@@ -120,7 +120,7 @@ int cptvf_send_vq_size_msg(struct cpt_vf *cptvf)
- }
- 
- /*
-- * Communicate VF group required to PF and get the VQ binded to that group
-+ * Communicate VF group required to PF and get the VQ bound to that group
-  */
- int cptvf_send_vf_to_grp_msg(struct cpt_vf *cptvf)
- {
-@@ -139,7 +139,7 @@ int cptvf_send_vf_to_grp_msg(struct cpt_vf *cptvf)
- }
- 
- /*
-- * Communicate VF group required to PF and get the VQ binded to that group
-+ * Communicate VF group required to PF and get the VQ bound to that group
-  */
- int cptvf_send_vf_priority_msg(struct cpt_vf *cptvf)
- {
-diff --git a/drivers/crypto/cavium/nitrox/nitrox_main.c b/drivers/crypto/cavium/nitrox/nitrox_main.c
-index e474c84d8d38..54b2db6bb5d0 100644
---- a/drivers/crypto/cavium/nitrox/nitrox_main.c
-+++ b/drivers/crypto/cavium/nitrox/nitrox_main.c
-@@ -468,7 +468,7 @@ static int nitrox_probe(struct pci_dev *pdev,
- 		err = -EIO;
- 		goto ioremap_err;
- 	}
--	/* allocate command queus based on cpus, max queues are 64 */
-+	/* allocate command queues based on cpus, max queues are 64 */
- 	ndev->nr_queues = min_t(u32, MAX_PF_QUEUES, num_online_cpus());
- 	ndev->qlen = qlen;
- 
-diff --git a/drivers/crypto/ccp/ccp-dev.c b/drivers/crypto/ccp/ccp-dev.c
-index 246801912e1a..aff3348b8351 100644
---- a/drivers/crypto/ccp/ccp-dev.c
-+++ b/drivers/crypto/ccp/ccp-dev.c
-@@ -30,7 +30,7 @@
- 
- #define MAX_CCPS 32
- 
--/* Limit CCP use to a specifed number of queues per device */
-+/* Limit CCP use to a specified number of queues per device */
- static unsigned int nqueues;
- module_param(nqueues, uint, 0444);
- MODULE_PARM_DESC(nqueues, "Number of queues per CCP (minimum 1; default: all available)");
-diff --git a/drivers/crypto/ccree/cc_buffer_mgr.c b/drivers/crypto/ccree/cc_buffer_mgr.c
-index dc7e0cd51c25..a592f5ec1b6a 100644
---- a/drivers/crypto/ccree/cc_buffer_mgr.c
-+++ b/drivers/crypto/ccree/cc_buffer_mgr.c
-@@ -717,7 +717,7 @@ static void cc_prepare_aead_data_mlli(struct cc_drvdata *drvdata,
- 			}
- 		} else { /* Contig. ICV */
- 			sg = &areq_ctx->src_sgl[areq_ctx->src.nents - 1];
--			/*Should hanlde if the sg is not contig.*/
-+			/*Should handle if the sg is not contig.*/
- 			areq_ctx->icv_dma_addr = sg_dma_address(sg) +
- 				(*src_last_bytes - authsize);
- 			areq_ctx->icv_virt_addr = sg_virt(sg) +
-@@ -749,7 +749,7 @@ static void cc_prepare_aead_data_mlli(struct cc_drvdata *drvdata,
- 
- 		} else { /* Contig. ICV */
- 			sg = &areq_ctx->src_sgl[areq_ctx->src.nents - 1];
--			/*Should hanlde if the sg is not contig.*/
-+			/*Should handle if the sg is not contig.*/
- 			areq_ctx->icv_dma_addr = sg_dma_address(sg) +
- 				(*src_last_bytes - authsize);
- 			areq_ctx->icv_virt_addr = sg_virt(sg) +
-diff --git a/drivers/crypto/chelsio/chcr_algo.c b/drivers/crypto/chelsio/chcr_algo.c
-index 6dec42282768..e2f2b2a6200e 100644
---- a/drivers/crypto/chelsio/chcr_algo.c
-+++ b/drivers/crypto/chelsio/chcr_algo.c
-@@ -1605,7 +1605,7 @@ static struct sk_buff *create_hash_wr(struct ahash_request *req,
- 		req_ctx->hctx_wr.dma_addr = 0;
- 	}
- 	chcr_add_hash_src_ent(req, ulptx, param);
--	/* Request upto max wr size */
-+	/* Request up to max wr size */
- 	temp = param->kctx_len + DUMMY_BYTES + (req_ctx->hctx_wr.imm ?
- 				(param->sg_len + param->bfr_len) : 0);
- 	atomic_inc(&adap->chcr_stats.digest_rqst);
-diff --git a/drivers/crypto/hisilicon/sec/sec_algs.c b/drivers/crypto/hisilicon/sec/sec_algs.c
-index 85eecbb40e7e..995aa598a1ed 100644
---- a/drivers/crypto/hisilicon/sec/sec_algs.c
-+++ b/drivers/crypto/hisilicon/sec/sec_algs.c
-@@ -790,7 +790,7 @@ static int sec_alg_skcipher_crypto(struct skcipher_request *skreq,
- 
- 	/*
- 	 * Only attempt to queue if the whole lot can fit in the queue -
--	 * we can't successfully cleanup after a partial queing so this
-+	 * we can't successfully cleanup after a partial queuing so this
- 	 * must succeed or fail atomically.
- 	 *
- 	 * Big hammer test of both software and hardware queues - could be
-diff --git a/drivers/crypto/marvell/octeontx/otx_cptvf_mbox.c b/drivers/crypto/marvell/octeontx/otx_cptvf_mbox.c
-index 90fdafb7c468..38d1de24652b 100644
---- a/drivers/crypto/marvell/octeontx/otx_cptvf_mbox.c
-+++ b/drivers/crypto/marvell/octeontx/otx_cptvf_mbox.c
-@@ -180,7 +180,7 @@ int otx_cptvf_send_vq_size_msg(struct otx_cptvf *cptvf)
- }
- 
- /*
-- * Communicate VF group required to PF and get the VQ binded to that group
-+ * Communicate VF group required to PF and get the VQ bound to that group
-  */
- int otx_cptvf_send_vf_to_grp_msg(struct otx_cptvf *cptvf, int group)
- {
-@@ -199,7 +199,7 @@ int otx_cptvf_send_vf_to_grp_msg(struct otx_cptvf *cptvf, int group)
- }
- 
- /*
-- * Communicate VF group required to PF and get the VQ binded to that group
-+ * Communicate VF group required to PF and get the VQ bound to that group
-  */
- int otx_cptvf_send_vf_priority_msg(struct otx_cptvf *cptvf)
- {
-diff --git a/drivers/crypto/omap-sham.c b/drivers/crypto/omap-sham.c
-index 6d2dd0b88f15..12d6dc68438a 100644
---- a/drivers/crypto/omap-sham.c
-+++ b/drivers/crypto/omap-sham.c
-@@ -1265,7 +1265,7 @@ static int omap_sham_finup(struct ahash_request *req)
- 		return err1;
- 	/*
- 	 * final() has to be always called to cleanup resources
--	 * even if udpate() failed, except EINPROGRESS
-+	 * even if update() failed, except EINPROGRESS
- 	 */
- 	err2 = omap_sham_final(req);
- 
-@@ -1732,7 +1732,7 @@ static void omap_sham_done_task(struct work_struct *t)
- 
- finish:
- 	dev_dbg(dd->dev, "update done: err: %d\n", err);
--	/* finish curent request */
-+	/* finish current request */
- 	omap_sham_finish_req(dd->req, err);
- }
- 
-diff --git a/drivers/crypto/qce/aead.c b/drivers/crypto/qce/aead.c
-index a9642c67f476..a6b446bbb499 100644
---- a/drivers/crypto/qce/aead.c
-+++ b/drivers/crypto/qce/aead.c
-@@ -379,7 +379,7 @@ static int qce_aead_create_ccm_nonce(struct qce_aead_reqctx *rctx, struct qce_ae
- 
- 	/*
- 	 * The crypto framework encodes cryptlen as unsigned int. Thus, even though
--	 * spec allows for upto 8 bytes to encode msg_len only 4 bytes are needed.
-+	 * spec allows for up to 8 bytes to encode msg_len only 4 bytes are needed.
- 	 */
- 	if (msglen_size > 4)
- 		msglen_size = 4;
-diff --git a/drivers/crypto/s5p-sss.c b/drivers/crypto/s5p-sss.c
-index bdda7b39af85..60547fa89ac4 100644
---- a/drivers/crypto/s5p-sss.c
-+++ b/drivers/crypto/s5p-sss.c
-@@ -1446,7 +1446,7 @@ static void s5p_hash_tasklet_cb(unsigned long data)
- 	return;
- 
- finish:
--	/* finish curent request */
-+	/* finish current request */
- 	s5p_hash_finish_req(dd->hash_req, 0);
- 
- 	/* If we are not busy, process next req */
--- 
-2.48.1
+ drivers/media/platform/qcom/camss/Kconfig        |   1 +
+ drivers/media/platform/qcom/camss/camss-csiphy.c | 177 +++++++++++++++++++++--
+ drivers/media/platform/qcom/camss/camss-csiphy.h |  11 +-
+ drivers/media/platform/qcom/camss/camss.c        | 104 +++++++++++--
+ drivers/media/platform/qcom/camss/camss.h        |   1 +
+ drivers/phy/phy-core.c                           | 172 +++++++++++++++++-----
+ include/linux/phy/phy.h                          |  13 ++
+ 7 files changed, 411 insertions(+), 68 deletions(-)
+---
+base-commit: 2e41fb778334db3d260c52c6be4c4d44fbed87ac
+change-id: 20250313-b4-linux-next-25-03-13-dtsi-x1e80100-camss-1506f74bbd3a
+
+Best regards,
+--  
+Bryan O'Donoghue <bryan.odonoghue@linaro.org>
 
