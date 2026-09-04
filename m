@@ -1,160 +1,103 @@
-Received: from mail-wm1-f52.google.com (mail-wm1-f52.google.com [209.85.128.52])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 955CB3793DF
-	for <linux-arm-msm@vger.kernel.org>; Fri,  4 Sep 2026 08:04:38 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.52
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 419083793DF;
+	Fri,  4 Sep 2026 08:05:09 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788509080; cv=none; b=KSmPxn/hII3K0PBALRyMYSWqJkLaoCGz6RcKUa9l6iyzvjm7zLaioUX1MxzUARro+pxnEv9WgD2UVFb5yMgQGLD1aD9Ye+t/3KplDJUgnS3j4tBSsFYQ92iUrj2Vo+BoOgsWEfv9ahPJ8rr9iXjg67ptmvZO0yJoS36oQeyeJAY=
+	t=1788509111; cv=none; b=eEsVCieAChe+rEFBaVQacg3H1cvnG77QLuJ6YXspreM+bg2nInX5MWZWQ/5Un8qGaWkSOZHASDgNXta1GMAhZdnyGK5nN2K+8DnoXX0UCScvwwXYaSdxKZVRusEBvaZqyg6ev4jz4qMB0cP5tFdDB/WQCnnBM48674zC8QAv9fQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788509080; c=relaxed/simple;
-	bh=Isg76J8xIN6ceva9gEqN+Pm24lXNgllN3sdT5qg8GFE=;
-	h=Message-ID:Date:MIME-Version:From:Subject:To:Cc:References:
-	 In-Reply-To:Content-Type; b=U/fKODVkWIagv+yVjin6v9QfdTraFvKzzQaeSHQdGP4eOPTrA3UTarLD5QXdzmBkStXD3Gt8Xpky1E56H844Mkv7BA2ohbVT9Qbgb4Zzfc42bNGMF8GXXHffpXNMzpMtQzMTpZHepP1NQMoiY1tjAfRpSvU3ybddC4GFyrBtWO0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=SPQr4bW2; arc=none smtp.client-ip=209.85.128.52
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
+	s=arc-20240116; t=1788509111; c=relaxed/simple;
+	bh=1Kc5Qzb9ZE6Unv1qjDSqEpoERMdsTLHhrTZXiAxSiwE=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=B3+AhlNNfHl+5+vZd53we4YDshUGRMZ58wV9KHiOPjSJlEvcLDgkUir+tIZMHD6AcqFcdHG5ysqcsq5Jbya7KLDU0CsW2jQMF3Usrf57qFq9ahT2VzsxHLu4KncncghqLVG86oqK1mgXxwJ3jgSJQlvx6Lahw/BvYiMtDwyac6g=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=L+wJVPa0; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="SPQr4bW2"
-Received: by mail-wm1-f52.google.com with SMTP id 5b1f17b1804b1-499ac87c92bso7892505e9.1
-        for <linux-arm-msm@vger.kernel.org>; Fri, 04 Sep 2026 01:04:38 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1788509077; x=1789113877; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:organization
-         :autocrypt:content-language:references:cc:to:subject:reply-to:from
-         :user-agent:mime-version:date:message-id:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=rruwEAEh9lhIYAVfPHIlPTge7FNWYPLlI4FxCfMGXMA=;
-        b=SPQr4bW2Oj6yw/4MZ4UlNVcBFNPVf+hK53D+wmP/RDJaHzuuGYqiLlD2XFm2YKZX3p
-         V9qdcy2NyqSzNdfT8jV7x3npNBCw/ck3NN+bflPzsQDJxc8z+b0Op3sSgQcEUsgzVdS1
-         AniWBaw+p9t7+eIhAJAkpki51Ew6mgdcbuvEkW2bk9FfES0tpyKfXCx7uy5BnxSxxAGj
-         JLc0RoUVFG4lYJ+7boJQSFjQpizK6FSyPB6pwcR3sS12EiNHw1QibFQKAQuZkno/tvTz
-         ldMnGpFCP/ahnLkmcOVKV4Y8Tbq5i6FRY6QTAV5drUncpqTlDUvGckyi7VHHxzjGu0XO
-         zzPQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788509077; x=1789113877;
-        h=content-transfer-encoding:content-type:in-reply-to:organization
-         :autocrypt:content-language:references:cc:to:subject:reply-to:from
-         :user-agent:mime-version:date:message-id:x-gm-gg:x-gm-message-state
-         :from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=rruwEAEh9lhIYAVfPHIlPTge7FNWYPLlI4FxCfMGXMA=;
-        b=Uv99Paoj1CESP5ZhTt6qb9ocps8kdgGaS2k3NDMzQR+7pWFNBngRtzYvq5DDspiQps
-         RqiKTAV+/g+oRmo+3LyAA2kWSfTucvuElB7uWEdCwozwRc+03SxbFJ1tW97/I0dnguos
-         VGPKcEIb+paESrsi+MXt0Szo+TP8qqG+dW1O6YZylhIFp41vRvszyS4bcM62ZvMm0c6Y
-         k8TX6tsbV1xx0Crjlblk3AgphZOC1PyBN6KzNJXfu5clMJFRCZQirPXA/j6ovurQypXK
-         g4pgFFeeAHYy0u6UFyor7ZOy5O6Ls0paWpYA2r3XIuKZx/l5Tzi3f2twJuVcTu0uuaqJ
-         bZYg==
-X-Gm-Message-State: AFuF++mnQ9bvYxceAVm3JFPrFkaRQQlMfW9GWR23aIcsPnrsYg3Cx/2o
-	SFlwKpw7OqyaEK2MhJ1Ize+gC6gFYaFsXbk4+88NXZN0uNDOP5dcfygxMFaelKt63QI=
-X-Gm-Gg: AYBFou3s8kud3fglo22WGOGEN9SV6mQAHD6JhRX2Jw+zH+uZ8/hr/E4x+1W/6jjeTPE
-	tF7zkeSoTm0xMy9GgJOIyvJj6oeqsQPaFmIAfCQswix8v1jJftUzkamG4Qq5i6W+W7yRyUBp0r9
-	J1S+PgMd/lmVX34cWftDJ1zWLoQWfT4jVNBN3g9j5C7p1xr7w+UIN2eB2V2nrWB17RbXz6cVjQn
-	8Shy8GHI9ceYYsLGOL+pKBGMqwSWGWQ8ms3bmK2tcoOrQSjGH9o353kk3TRO2MiIN8pZEvrYu9F
-	Bp4GGkMHROwhpBjFPhrMpFxpxz30EfNhAABa8oR1Rcp+wH7MPDhuELsRJgzS2mSLvEl8NU2r4hM
-	frTHee//nvGmYcsWo9Pw7bPQNz7OA6jLXBSGZhQHv48jeZmGMGiFxJhHUxz+ycV3P2X8t6ge78e
-	cOYyi6E3ZxEirMz4m1Ad9So8e5hptJO3Sgi6kC5KiAIkdg8IFTN06/xJ140fH/bJtbmeK2hzsLd
-	lDdWqsLj/4gQDsQOLlkBFEGJWjgGE05ab2cohazAIY=
-X-Received: by 2002:a05:600c:3b17:b0:49c:fc6e:8cb1 with SMTP id 5b1f17b1804b1-49cfc6e8db3mr13159185e9.21.1788509076654;
-        Fri, 04 Sep 2026 01:04:36 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:106d:1080:e8f4:b358:2087:5bd3? ([2a01:e0a:106d:1080:e8f4:b358:2087:5bd3])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-49cf772692dsm59072445e9.10.2026.09.04.01.04.35
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 04 Sep 2026 01:04:36 -0700 (PDT)
-Message-ID: <d5b4c085-f5e2-418b-9b51-7cf47c064644@linaro.org>
-Date: Fri, 4 Sep 2026 10:04:35 +0200
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="L+wJVPa0"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B88C81F00A3D;
+	Fri,  4 Sep 2026 08:05:09 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1788509109;
+	bh=TqNLCesX2SNrm7Jswp+E1v9760B2VFDRX1NjrjFhDbA=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=L+wJVPa01ltnhm6yS8sGMmIdlggoMUkPoGV2isQtt9tvcl8J6ZiNou1NCbED3W601
+	 /SNBM0RgYXMNQ0BldNLlX1oZb51HBrlFbSyDsQ67bB2xnFysO8saIZ3cGyuVEPPj6X
+	 Jgg/704ElwA675dE66f5Gl7Jhglkk5VA72jhZXjLjsHlzWvzXOfNUTmGlSxX0vGsGa
+	 C/QqIQDWhpp3FzHk7r++EU4BYM4rXIyFL4Kx1DVh4GmBGFuIa1up6fkZs3Yw+S/b4o
+	 6LlG7ST1AnUFhD1YTgZMltJY6g82y+5yqxj22KKe97tTes2MiUwRWEviVk8QI+96ib
+	 Uu39LctKoYFtg==
+Received: from johan by xi.lan with local (Exim 4.99.4)
+	(envelope-from <johan@kernel.org>)
+	id 1x2Ov5-00000006jvW-0Kia;
+	Fri, 04 Sep 2026 10:05:07 +0200
+Date: Fri, 4 Sep 2026 10:05:07 +0200
+From: Johan Hovold <johan@kernel.org>
+To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Cc: Manivannan Sadhasivam <mani@kernel.org>,
+	Konrad Dybcio <konradybcio@kernel.org>,
+	Vinod Koul <vkoul@kernel.org>,
+	Neil Armstrong <neil.armstrong@linaro.org>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Bjorn Andersson <andersson@kernel.org>,
+	linux-kernel@vger.kernel.org, linux-phy@lists.infradead.org,
+	linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
+	usb4-upstream@oss.qualcomm.com,
+	Raghavendra Thoorpu <rthoorpu@qti.qualcomm.com>,
+	Mika Westerberg <westeri@kernel.org>, Sven Peter <sven@kernel.org>,
+	Abel Vesa <abel.vesa@oss.qualcomm.com>,
+	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+Subject: Re: [PATCH v4 3/5] phy: qualcomm: qmp-combo: Add preliminary USB4
+ support
+Message-ID: <app7s9GZySBj7Mzs@hovoldconsulting.com>
+References: <20260820-topic-usb4phy-v4-0-aec9d2cb31f6@oss.qualcomm.com>
+ <20260820-topic-usb4phy-v4-3-aec9d2cb31f6@oss.qualcomm.com>
+ <iynrogny3didip7cui3ce3yq3woaqzrr7f4aqdzvls4j4mslfn@aww5qjpy3gdx>
+ <b326edbf-fe34-426b-af19-912edc18ba84@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH] tty: serial: qcom_geni: don't ida_free() the console port
- line
-To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- Jiri Slaby <jirislaby@kernel.org>,
- Viken Dadhaniya <quic_vdadhani@quicinc.com>
-Cc: linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-serial@vger.kernel.org
-References: <20260904-topic-sm8x50-upstream-tty-serial-geni-fix-ida-free-v1-1-02e18c31aeba@linaro.org>
- <bbd0216d-8b50-424b-be1b-06453118a61b@oss.qualcomm.com>
- <53b0b91c-6ca6-48a5-b93c-ca2ae9680ad0@oss.qualcomm.com>
-Content-Language: en-US, fr
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro
-In-Reply-To: <53b0b91c-6ca6-48a5-b93c-ca2ae9680ad0@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <b326edbf-fe34-426b-af19-912edc18ba84@oss.qualcomm.com>
 
-On 9/4/26 10:03, Konrad Dybcio wrote:
-> On 9/4/26 10:02 AM, Konrad Dybcio wrote:
->> On 9/4/26 9:09 AM, Neil Armstrong wrote:
->>> The console port (qcom_geni_console_port) is a static instance whose
->>> uport.line is hardcoded to 0 and is never allocated from port_ida.
->>> Only the non-console path in get_port_from_line() calls ida_alloc_range().
->>>
->>> Fix the qcom_geni_serial_remove() and the matching probe() error path
->>> so unbinding the console device doesn't hit:
->>>
->>>    WARNING: ida_free called for id=0 which is not allocated
->>>    <snip>
->>>    qcom_geni_serial_remove+0x58/0x80
->>>
->>> Fixes: a53be6945f51 ("serial: qcom-geni: Remove alias dependency from qcom serial driver")
->>> Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
->>> ---
->>
->>
->>>   drivers/tty/serial/qcom_geni_serial.c | 6 ++++--
->>>   1 file changed, 4 insertions(+), 2 deletions(-)
->>>
->>> diff --git a/drivers/tty/serial/qcom_geni_serial.c b/drivers/tty/serial/qcom_geni_serial.c
->>> index 3633723acef8..bdbdfd7dfaac 100644
->>> --- a/drivers/tty/serial/qcom_geni_serial.c
->>> +++ b/drivers/tty/serial/qcom_geni_serial.c
->>> @@ -1979,7 +1979,8 @@ static int qcom_geni_serial_probe(struct platform_device *pdev)
->>>   						port->wakeup_irq);
->>>   		if (ret) {
->>>   			device_init_wakeup(&pdev->dev, false);
->>> -			ida_free(&port_ida, uport->line);
->>> +			if (!uart_console(uport))
->>> +				ida_free(&port_ida, uport->line);
->>
->> GPT points out this will always return false before uart_add_one_port()
->> is called
+On Fri, Sep 04, 2026 at 09:36:04AM +0200, Konrad Dybcio wrote:
+> On 9/1/26 2:44 PM, Manivannan Sadhasivam wrote:
+> > On Thu, Aug 20, 2026 at 04:24:12PM +0200, Konrad Dybcio wrote:
+> >> From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+> >>
+> >> Some Combo PHYs (so far only on SC8280XP, X1E80100 and Glymur), come in
+> >> a flavor called USB43DP, which as the name implies, features USB4, USB3
+> >> and DP signal processing capabilities. In that architecture, USB3 and
+> >> USB4 PHYs share the same USB_PLL while featuring separate logic spaces.
+> >> The DP part is roughly the same as on the instances without USB4.
 > 
-> You can use if (data->console) instead
-
-Yep will do
-
-Thanks
-
+> [...]
 > 
-> Konrad
+> >> +	case QMPPHY_MODE_USB4:
+> >> +		writel(USB4_MODE, com + QPHY_V3_DP_COM_PHY_MODE_CTRL);
+> >> +
+> >> +		/* bring both QMP USB and QMP DP PHYs PCS block out of reset */
+> >> +		/* TODO: disable DP PLL if there are no active tunnels after router setup */
+> > 
+> > 100 column width generally applies to code, not comments. Comments should still
+> > be wrapped to 80 columns.
+> 
+> I believe this isn't a real concern.. checkpatch certainly doesn't care:
+> 
+> # LONG_LINE_COMMENT     a comment starts before but extends beyond $max_line_length
+> # LONG_LINE_STRING      a string starts before but extends beyond $max_line_length
+> # LONG_LINE             all other lines longer than $max_line_length
+> 
+> (all take the same value, preset to 100 at the top of the file)
 
+Checkpatch is just a dumb tool. The coding style says the preferred
+limit is 80 chars unless breaking it improves readability. And that
+exception generally does not apply to comments (e.g. unless it contains
+a URL or similar).
+
+Johan
