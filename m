@@ -1,324 +1,187 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-ed1-f49.google.com (mail-ed1-f49.google.com [209.85.208.49])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 016F8481FD9
-	for <linux-arm-msm@vger.kernel.org>; Fri,  4 Sep 2026 14:23:32 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 17E73389DF0
+	for <linux-arm-msm@vger.kernel.org>; Fri,  4 Sep 2026 14:34:32 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.208.49
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788531814; cv=none; b=QbCKpWWFMNd4costn9cnnx9Empu1UillYNBAqSwg/6CTXQwk6SsSY98Cwk/InY8FlTBi8bi/NrIQTSZupIRMgdeF0ObjZRQoBTwMkxYGX7nkqa5RWBe0UAmwEsg0Ekq50PbFeRdeqdZNXc8pg8TkYHpsAlSYJd/F41EwXj2unf4=
+	t=1788532475; cv=none; b=D0hXkHNBP8Do2RyVRHYitlzwOWgA+uHp6on+AAm8oG0/S4tXpYEtVy84Meh3nz5MYU8zw9ZqFhl3dWWirEsULWxi/+ImFipMXmM7Z9bbHUiXY16mJSJcaA/cRhRp+QnKEhxf6tc1CkxZFkTDb7It3QOjhUzBAnF8ua3cDy+d+m0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788531814; c=relaxed/simple;
-	bh=iV4AOOckQrMa+16TI4AAiuMKqvEKPVYiWTmkQUDyLEU=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=Ko4xnxN9epGkRwxEuwufO37GKpLVEnwkHyeClXU0bJf7WkuRQQExogXUF5qM0tbLiEOzezuasHc99w6XIjlqvia3JEdvgxMBbLHgIbfjm3mvDxzC/WTUIb0IuQsVVHoVRWEAebq18tuhZ4aZAM91u6Qj+zBXDvh9sDReVlb2e4o=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=nXjXBa+z; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=V6uAV8Uh; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1788532475; c=relaxed/simple;
+	bh=iwANdAqzga+zM/yuSu0exzs6VE5a7yEytpMIJzjLBcQ=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=HIhKWUfd9IELKZrFYO+5T3iDO5l9sr1bDnH4J1vmelLIPdauk3uVbWhQ08eElhrV2tCs1AYrkSWEIxWGQ15i7e6/T0NYjVTaZJzdaJ/XaHWQRxnlADCrV+YUxfqWIKRHlHQfd8bQDlzisANZT0UGr8PNAJWghI50Lnw0YCmUc8M=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=chromium.org; spf=pass smtp.mailfrom=chromium.org; dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org header.b=oXRqdZEO; arc=none smtp.client-ip=209.85.208.49
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=chromium.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="nXjXBa+z";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="V6uAV8Uh"
-Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 684Dga7M311198
-	for <linux-arm-msm@vger.kernel.org>; Fri, 4 Sep 2026 14:23:32 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:message-id
-	:mime-version:subject:to; s=qcppdkim1; bh=yjXrqaQjmS+eh4R1mRT3Kc
-	AvoxLvfqvHUHfLmQH7Xf4=; b=nXjXBa+zbBXsXFvI624X5jFhEbAm7PHtN02Vw5
-	Ix8k1sYuxIoznR0HeGeaA+3Gml1y77xGJ2YKgIS3Nx8X58PVqsoZBXEsbQpvT39z
-	t5pkoVhf2Tx7UldEEdpFeekrZZbQZLgTRPM0x+I0TkazwfGQeoxc6v3WUywGJRBc
-	JMnYXOMEMY+HpLmkYfIRLMFUK2JUmrhmBLhnBvTjwOTlX2r6pb+tSf3O1foG4Y0h
-	nErxAr3Ro9i0yp6ubO7G3kD20INh+7THkMdUio3LBYMSn6bTwiksVKmeA1kpgXz4
-	wnZRgHbwVOjpmwArganWrO5MkrmpcSwN2dH7e3ZeyOw4t2Yg==
-Received: from mail-pj1-f71.google.com (mail-pj1-f71.google.com [209.85.216.71])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gfbyvn3gy-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Fri, 04 Sep 2026 14:23:32 +0000 (GMT)
-Received: by mail-pj1-f71.google.com with SMTP id 98e67ed59e1d1-38e8e864ef0so1927855a91.0
-        for <linux-arm-msm@vger.kernel.org>; Fri, 04 Sep 2026 07:23:32 -0700 (PDT)
+	dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org header.b="oXRqdZEO"
+Received: by mail-ed1-f49.google.com with SMTP id 4fb4d7f45d1cf-6a082b3671fso1410406a12.3
+        for <linux-arm-msm@vger.kernel.org>; Fri, 04 Sep 2026 07:34:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1788531811; x=1789136611; darn=vger.kernel.org;
-        h=cc:to:message-id:content-transfer-encoding:content-type
-         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=yjXrqaQjmS+eh4R1mRT3KcAvoxLvfqvHUHfLmQH7Xf4=;
-        b=V6uAV8UhptO86umNXDVAi7u8RZAQ83wMYUKtRdYPWqt8UC/w0MEuzSwCxqpfa2yFSr
-         vifPdDF9lQyK5Hy84DwFfwA/Xw6SyGfjyjkFV7pY4hq4Z+ZmJD23P1TQQIC0s2er3xgG
-         pDKVqr8Joiev3ouluSMQPz7AT/ktKWcivw+DYNCmaVGdZuvkY0WiFBTcQxqJSlt4gBrB
-         H4MWAkA0iFXLq9PYz6fWeNxBRg5OGkpXjAjxywjRanbBgzs5CZMr5jCGejr4BLTbTXW/
-         qno0IV1j3v7mbJH7bkFVqSo1ICJv0AsoPUwQnzFuwFwayDpjGnFq+9bS32JGfj5VbuFU
-         caEQ==
+        d=chromium.org; s=google; t=1788532471; x=1789137271; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=1ck7BSWkkXwWvroZN1jbW0sU0ReXY/y4Y6ENpLqokqE=;
+        b=oXRqdZEOfYyYPi2iKjTa4er9gO4ge2Og0W6LYjns9thRKGBFYkSxp2fYL0ns239gAc
+         URPTTb0FIuR08wioB4QUj6AfVZlUqUHpN6A2P6VxWT9Gk+c7FEK3+I/2mExILpYGz12h
+         v1iGZh6aD6pQHjMo5xe3u2bhLSQS8mXPW/YXE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788531811; x=1789136611;
-        h=cc:to:message-id:content-transfer-encoding:content-type
-         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to:content-type;
-        bh=yjXrqaQjmS+eh4R1mRT3KcAvoxLvfqvHUHfLmQH7Xf4=;
-        b=owI/I55NyrFb86GqcCqsON8F45zlGXBsBhPydjHGHoII+0fu0CXN7TkuOSrv88cLgl
-         jZiyXUym4nl1We7kUFbwJ4TSc7adpoyz0UWi6STVQcqzVo7jyreKtBz5roim+4Hc9NZS
-         XIDDjTf/dFdRUgTSxzvuUuyZugUU2YpWLCMrXXA8PjsbddK5bU1XFtNGsQyD5rxGsff7
-         O9zeL8tXL8sisVAg3M9kT8u0iBU5zFNEMvDUxYOWVctiPLlmEHAmheODpibPMaR2kD9Z
-         dOegrDhTlC8kzunM+mPQtUyzJS4k8swbMN1wWspqbIoEtNLRk9djLzJ5R3Pz8RFW2Lnk
-         iHGQ==
-X-Forwarded-Encrypted: i=1; AKwUvBwyvvYSQdY7hXIpWYKTE1LtBTu+jkHMjgm17XSM5LeCzEtdHkgCe/gwgk7jNo8YvqTHE83dxg5XpMIwzASQ@vger.kernel.org
-X-Gm-Message-State: AFuF++m5Ojy4RSc387+Qxg5GDU1IQOhAKCsrw++231UnHrudw0PfP5rM
-	a+QzBAToND51TaSem772P33L39FqUWL/PycFsGmvt+XOJIPHtHFUNYghsBgmwCn/AOoF8Fv3XNE
-	C6lZL/cENE2N/YS9ENJOTIbBr9YgK1Nl7P29UqaXS+4NNH21zPcqv9SAMiGANAPaQ0Jlm
-X-Gm-Gg: AYBFou1/t/wms/MLivA4sj3L8a4zIQXuLKyOKOoenPZbu0Z7oy3jw7Nk0hLLW9Tjaxo
-	SgH3zCh2Lzbm9uLaQYkgiVJI/oE74vlM5OVRAabM483BGpu31WiPeMx//ZmuSnfYA56cp23H+Mw
-	yJkaFWDfJStBcPm/5yGEuR3RPRrHBSOBy+Pp2F6eqoddJ1puQpkuGNIMDOo99b0OyFCXZosi124
-	PgzetT4y8bXcjgLwjBazlq4Qjs9bSrr6aKhbTo+zh/B6w72n4/OEnIS9KzHdkM3SbXbpKl00g/f
-	J/OSHhPsp+3rfIyAhj4jNUJe7dQEEoOZuVgoXPCQ0v/v4Th99rXgnLWRRBmnVeQ0LxbCiOmW0VY
-	Vv5YGBKERhGJjpZlmCWXlz4z85pOo
-X-Received: by 2002:a17:90b:3b88:b0:398:dcfe:968e with SMTP id 98e67ed59e1d1-39b261da746mr8847308a91.20.1788531811366;
-        Fri, 04 Sep 2026 07:23:31 -0700 (PDT)
-X-Received: by 2002:a17:90b:3b88:b0:398:dcfe:968e with SMTP id 98e67ed59e1d1-39b261da746mr8847137a91.20.1788531810538;
-        Fri, 04 Sep 2026 07:23:30 -0700 (PDT)
-Received: from hu-mkshah-hyd.qualcomm.com ([202.46.22.19])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3339b8f44d7sm7122450eec.22.2026.09.04.07.23.28
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 04 Sep 2026 07:23:29 -0700 (PDT)
-From: Maulik Shah <maulik.shah@oss.qualcomm.com>
-Date: Fri, 04 Sep 2026 19:53:10 +0530
-Subject: [PATCH] soc: qcom: smd-rpm: Add trace events for SMD-RPM messages
+        d=1e100.net; s=20251104; t=1788532471; x=1789137271;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=1ck7BSWkkXwWvroZN1jbW0sU0ReXY/y4Y6ENpLqokqE=;
+        b=fEQv8cBDg0/3ykuNiVl1eX5QFoV6rnRs6+gHLdd6nLo1GmprzZvvDkfn+7oNKXR4cK
+         3cepkJU+kqWji8VoHUn51WH2Z1xjWsKHCTzu5vdyyWH0cvB/3c/P1vTrbFTU5iXbfupI
+         oPRHJj88orXrU1NlRm3UYPMmpoGkhe+2t5T81aZDzptOCSDnu8e21yOEPBBc2eXKUrT0
+         PY0ufuk20Snl5/t+fEpc8V6ng1NnSfD8xmEFlDfaI1aspKdbnSYl/eJTCi8f3Wvs4XRw
+         ttnV9srcr57OXsBcKr9p0dMocU0urUNn1jArgm8mFKOE/sZAJ6qbMfwP6GkEVQ8sftfb
+         E6/g==
+X-Forwarded-Encrypted: i=1; AKwUvBwxyggh+oTHPXVE3rBynuKikeP2Y2AkNIUTk1CCZ6m5CrM4GlAru6V7OJSXgtW/bBN8xGXOIENPAL49bqhe@vger.kernel.org
+X-Gm-Message-State: AFuF++nhlxIgdXQ4j4h3zeSU3n/HmBWBFM5VuMrCrUxSy9ybiutOOC9m
+	HxgYE1O7UPOCl4ZvDizfEAcekWyQFQQVjNm5Q9/NXg6nky+jDLnT6uHFaHsq5NyfiAsQ4FV/uI9
+	emvw=
+X-Gm-Gg: AYBFou2XQwXnDElpdDKYAK10VuHoIiSO4Tfb/HguSdWCLPtEVXvfaWvUSnL3R/mS0Y0
+	VzYcG88kqP97tqwweM9pcVfH7cPu1xWB0ZW4f3xAYgwGXASmEsPlF/qF+Lww1K+RyUng0VIBHRN
+	Qi3rY6U7BICc/KXXVizHNverGWYBvTrxg7cB/ZnLhMs/Z+M8eYXZcdC6b9NBYk7jMbteRzzDiHy
+	0Jc88FJpaXTObNcvpMjvL98AKSs3QGSJtESzxQ7ZxqP81+Zdczc2MadZvBqQ8WX2YbCQ2wgTrvc
+	39F4NJobcworwZ0VDXtg6/WNOQFt1fDd27dOXfYKY6ehFnO+wMxsMDUdCL4yALdwJasNejMQ5ZN
+	KlvOn6AGcaxYM5soTmah8t6fMOuZBg1qIXjPFc8dp5rvAxeNB1zVmUJyrRjjDoOe5Mm5/OozkTZ
+	pO0BqEQgBU4GHVo3VLp4BleqGHqFUsa/n7YFSo8FboytHJxZOLCT2SPwboJoUNTTC0lPs3d+NJt
+	0L5trYz9j9IF/AI2UDn7NWiEts=
+X-Received: by 2002:a05:6402:3554:b0:6a6:21d9:541f with SMTP id 4fb4d7f45d1cf-6a7e8d4d131mr4178665a12.6.1788532471022;
+        Fri, 04 Sep 2026 07:34:31 -0700 (PDT)
+Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com. [209.85.128.44])
+        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-6a7e6bee8e8sm1354855a12.23.2026.09.04.07.34.29
+        for <linux-arm-msm@vger.kernel.org>
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Fri, 04 Sep 2026 07:34:30 -0700 (PDT)
+Received: by mail-wm1-f44.google.com with SMTP id 5b1f17b1804b1-49b9320423cso11637215e9.0
+        for <linux-arm-msm@vger.kernel.org>; Fri, 04 Sep 2026 07:34:29 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AKwUvBzaOS2NIeJe9SpUZ1YQ74JLNIs2YL1hJ8AU0K+y2giBf7R0nHNQmRzrc2VrrUyY4j+3I5Eipl4bR6mzAj3R@vger.kernel.org
+X-Received: by 2002:a05:600c:6087:b0:49c:d52e:d0ea with SMTP id
+ 5b1f17b1804b1-49cf81e3454mr116251535e9.4.1788532464702; Fri, 04 Sep 2026
+ 07:34:24 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260904-smd-rpm-trace-v1-1-8c1cbdfea82e@oss.qualcomm.com>
-X-B4-Tracking: v=1; b=H4sIAE3UmmoC/yXMTQqDQAxA4atI1g1MBhH1KtLFdCatEfwhUSmId
- 3dsl9/ivQOMVdigLQ5Q3sVknjLoUUDsw/RhlJQN3vnKNY7QxoS6jLhqiIx1IvIxENWlg9wsym/
- 5/n7d82/bXgPH9Z7AeV4K8yg6cQAAAA==
-X-Change-ID: 20260901-smd-rpm-trace-8d112ca11840
-To: Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>
-Cc: linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-        Maulik Shah <maulik.shah@oss.qualcomm.com>
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1788531807; l=5798;
- i=maulik.shah@oss.qualcomm.com; s=20240109; h=from:subject:message-id;
- bh=iV4AOOckQrMa+16TI4AAiuMKqvEKPVYiWTmkQUDyLEU=;
- b=Wsm4hTGTyu7OUh4uy2ZtcIQjvYzsqK6ToEUFBZ55ThesUx/aiiB9lZsbj35ClSgBy8Y77zxBC
- P0Lmf12kvqJBFIjPQMDoNl1Lq+RxUQyWvsoJEecTxAyZl6NReqtTPwy
-X-Developer-Key: i=maulik.shah@oss.qualcomm.com; a=ed25519;
- pk=bd9h5FIIliUddIk8p3BlQWBlzKEQ/YW5V+fe759hTWQ=
-X-Proofpoint-ORIG-GUID: cwT1cDyvAvNQ_y1kh42iBuM36cKOkdXh
-X-Proofpoint-GUID: cwT1cDyvAvNQ_y1kh42iBuM36cKOkdXh
-X-Authority-Analysis: v=2.4 cv=C8vZDwP+ c=1 sm=1 tr=0 ts=6a9ad464 cx=c_pps
- a=UNFcQwm+pnOIJct1K4W+Mw==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
- a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22
- a=EUspDBNiAAAA:8 a=iiYCWuvKVlUSTFT6mewA:9 a=QEXdDO2ut3YA:10
- a=uKXjsCUrEbL0IQVhDsJ9:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTA0MDEzMSBTYWx0ZWRfXxl/KPx8AFnVO
- kTobBXAKQaUVfT9jTqpooznlcmsnwlDWWagskVT+p4uE6zM/BhnwWKSyXEKDlW4zpShks8vZ8Ay
- dDPVNXxuiHy5y6qcbtQGFplaX6qUjFBGA5A8ySjWJYEEKIv0h3koUwdRQFmXzWJ19UQJ5Iq2Xbd
- vbyLPW/QSjrhamKFBh0WmzUEWNN7eRdX+BwNv0ebH5abfRM+bPeeJ4RLx86fDBdQoq/oHjjjDTY
- b9Fr12dr07fAGZVifrF+/9NUnzBTarIBc1pV5ZncLGzwryD8zL//Srd3M1T/MZ2Z2wfLPzgn7L0
- 0DbiXnze6S7diz8UM+Ctwum4l3xgcahn3AfSQvx5cEjtSg0nsOoepPDy57bHZGMfM0Z5xXqPGaW
- rhdkmO4p5ahu8RhW325dCIPIek18xjX7y5mHT4l4j+3Qv+7sM1AwfRb2sRdwawitrjn5cCVwUnW
- edndAD9lJ2XY0Zrvhkg==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTA0MDEzMSBTYWx0ZWRfX2WSskw2ol7EV
- xOYRI7+9VUGK+scaDd35OrVy3/ycvpe7WqQwdcwJOyrnTEvOMHsfmqxYXM7SgY/Ucpl3amlPa01
- jsdAkkb18qkw3MVqy3O8RXmpsBQFC9Y=
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-04_04,2026-09-03_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 priorityscore=1501 bulkscore=0 adultscore=0 suspectscore=0
- lowpriorityscore=0 impostorscore=0 malwarescore=0 spamscore=0 phishscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2609040131
+References: <20260902-qcom-wdt-nmi-series-v3-0-f3999362a9ea@google.com>
+ <20260902-qcom-wdt-nmi-series-v3-1-f3999362a9ea@google.com>
+ <87fqzp8jex.ffs@fw13> <87wlt13zj1.wl-maz@kernel.org>
+In-Reply-To: <87wlt13zj1.wl-maz@kernel.org>
+From: Doug Anderson <dianders@chromium.org>
+Date: Fri, 4 Sep 2026 07:34:12 -0700
+X-Gmail-Original-Message-ID: <CAD=FV=ULeHqEZE-a9vV9F6vVMLVBPDTeXTgnmU_Bqui8sc1ZZA@mail.gmail.com>
+X-Gm-Features: AcwNN1VrCYtMK0FuxIEwY-YB8TuqCWsz3J5Ntif2-4hFkWwShLrXdtkOdhxnO4s
+Message-ID: <CAD=FV=ULeHqEZE-a9vV9F6vVMLVBPDTeXTgnmU_Bqui8sc1ZZA@mail.gmail.com>
+Subject: Re: [PATCH v3 1/5] genirq: Synchronize in-flight handlers during NMI teardown
+To: Marc Zyngier <maz@kernel.org>
+Cc: Thomas Gleixner <tglx@kernel.org>, Mayank Rungta <mrungta@google.com>, 
+	Wim Van Sebroeck <wim@linux-watchdog.org>, Guenter Roeck <linux@roeck-us.net>, 
+	Radu Rendec <radu@rendec.net>, linux-watchdog@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
+	"Kirill A. Shutemov" <kas@kernel.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-There is no visibility on what resource votes are placed via SMD RPM making
-it difficult to identify clients that do either under voting via active set
-impacting the device functions or fail to send sleep set votes and thereby
-prevent the SoC from reaching low power modes such as vmin or vlow.
+Hi,
 
-Add trace events for SMD RPM requests and acknowledgment to make RPM votes
-for various resources visible through ftrace.
+On Fri, Sep 4, 2026 at 6:38=E2=80=AFAM Marc Zyngier <maz@kernel.org> wrote:
+>
+> On Fri, 04 Sep 2026 10:17:42 +0100,
+> Thomas Gleixner <tglx@kernel.org> wrote:
+> >
+> > On Wed, Sep 02 2026 at 18:54, Mayank Rungta wrote:
+> > > diff --git a/kernel/irq/manage.c b/kernel/irq/manage.c
+> > > index 2fbff2618a1e..a9973b61163a 100644
+> > > --- a/kernel/irq/manage.c
+> > > +++ b/kernel/irq/manage.c
+> > > @@ -1379,6 +1379,14 @@ static bool irq_supports_nmi(struct irq_desc *=
+desc)
+> > >     if (d->chip->irq_bus_lock || d->chip->irq_bus_sync_unlock)
+> > >             return false;
+> > >
+> > > +   /*
+> > > +    * NMIs cannot set IRQD_IRQ_INPROGRESS because they cannot acquir=
+e
+> > > +    * spinlocks. Synchronous disable and teardown require querying t=
+he
+> > > +    * hardware state via ->irq_get_irqchip_state().
+> > > +    */
+> > > +   if (!d->chip->irq_get_irqchip_state)
+> > > +           return false;
+> > > +
+> > >     return d->chip->flags & IRQCHIP_SUPPORTS_NMI;
+> > >  }
+> > >
+> > > @@ -2034,11 +2042,20 @@ static const void *__cleanup_nmi(unsigned int=
+ irq, struct irq_desc *desc)
+> > >     struct irqaction *action =3D NULL;
+> > >     const char *devname =3D NULL;
+> > >
+> > > +   guard(mutex)(&desc->request_mutex);
+> > > +
+> > >     scoped_guard(raw_spinlock_irqsave, &desc->lock) {
+> > > -           irq_nmi_teardown(desc);
+> > > +           irq_settings_clr_disable_unlazy(desc);
+> > > +           irq_shutdown(desc);
+> > > +   }
+> > >
+> > > -           desc->istate &=3D ~IRQS_NMI;
+> > > +   /*
+> > > +    * Ensure all in-flight NMI handlers on other CPUs complete befor=
+e
+> > > +    * clearing desc->action or tearing down NMI state.
+> > > +    */
+> > > +   __synchronize_hardirq(desc, true);
+> >
+> > NMIs are strictly per CPU interrupts. So how is this supposed to work
+> > correctly when looking at irqchip_state(ACTIVE) ?
+> >
+> > Marc?
+>
+> I have no idea what this is trying to achieve.
+>
+> This can only work for a global interrupt, not for a CPU-private
+> interrupt, since in general you can't observe the state of the
+> interrupt on another CPU.
+>
+> My guess is that the OP is trying to trigger an NMI using a global
+> interrupt, which we never intended to be supported. That's not to say
+> that it cannot be supported, but this patch seems to be breaking the
+> core use case...
 
-Signed-off-by: Maulik Shah <maulik.shah@oss.qualcomm.com>
----
-Output from newly added ftrace on shikra SoC,
-rpm_smd_send_msg: msg_id:807 ctx:active rsc_type:ldoa rsc_id:0xe key:swen nbytes:4 value:1
-rpm_smd_ack_recvd: msg_id:807 errno:00000000
-..
-..
-rpm_smd_send_msg: msg_id:1106 ctx:active rsc_type:clk2 rsc_id:0x0 key:KHz nbytes:4 value:19200
-rpm_smd_ack_recvd: msg_id:1106 errno:00000000
-rpm_smd_send_msg: msg_id:1107 ctx:sleep rsc_type:clk2 rsc_id:0x0 key:KHz nbytes:4 value:0
-rpm_smd_ack_recvd: msg_id:1107 errno:00000000
----
- drivers/soc/qcom/Makefile        |  1 +
- drivers/soc/qcom/smd-rpm.c       | 10 +++++
- drivers/soc/qcom/trace-smd-rpm.h | 83 ++++++++++++++++++++++++++++++++++++++++
- 3 files changed, 94 insertions(+)
+The overall goal is to take the watchdog bark interrupt (which is a
+GIC Shared Peripheral Interrupt) and promote it to NMI. An example of
+that interrupt in the device tree for one Qualcomm board:
 
-diff --git a/drivers/soc/qcom/Makefile b/drivers/soc/qcom/Makefile
-index 798643be3590..839e7875ec1b 100644
---- a/drivers/soc/qcom/Makefile
-+++ b/drivers/soc/qcom/Makefile
-@@ -1,5 +1,6 @@
- # SPDX-License-Identifier: GPL-2.0
- CFLAGS_rpmh-rsc.o := -I$(src)
-+CFLAGS_smd-rpm.o := -I$(src)
- CFLAGS_qcom_aoss.o := -I$(src)
- obj-$(CONFIG_QCOM_AOSS_QMP) +=	qcom_aoss.o
- obj-$(CONFIG_QCOM_GENI_SE) +=	qcom-geni-se.o
-diff --git a/drivers/soc/qcom/smd-rpm.c b/drivers/soc/qcom/smd-rpm.c
-index f2b3e02abdf1..04b3f7789ab7 100644
---- a/drivers/soc/qcom/smd-rpm.c
-+++ b/drivers/soc/qcom/smd-rpm.c
-@@ -14,6 +14,9 @@
- #include <linux/rpmsg.h>
- #include <linux/soc/qcom/smd-rpm.h>
- 
-+#define CREATE_TRACE_POINTS
-+#include "trace-smd-rpm.h"
-+
- #define RPM_REQUEST_TIMEOUT     (5 * HZ)
- 
- /**
-@@ -106,6 +109,7 @@ int qcom_rpm_smd_write(struct qcom_smd_rpm *rpm,
- 		u8 payload[];
- 	} *pkt;
- 	size_t size = sizeof(*pkt) + count;
-+	const struct clk_smd_rpm_req *req = buf;
- 
- 	/* SMD packets to the RPM may not exceed 256 bytes */
- 	if (WARN_ON(size >= 256))
-@@ -131,6 +135,8 @@ int qcom_rpm_smd_write(struct qcom_smd_rpm *rpm,
- 	if (ret)
- 		goto out;
- 
-+	trace_rpm_smd_send_msg(pkt->req.msg_id, state, type, id, req);
-+
- 	left = wait_for_completion_timeout(&rpm->ack, RPM_REQUEST_TIMEOUT);
- 	if (!left)
- 		ret = -ETIMEDOUT;
-@@ -158,6 +164,7 @@ static int qcom_smd_rpm_callback(struct rpmsg_device *rpdev,
- 	const u8 *end = buf + hdr_length;
- 	char msgbuf[32];
- 	int status = 0;
-+	__le32 msg_id = 0;
- 	u32 len, msg_length;
- 
- 	if (le32_to_cpu(hdr->service_type) != RPM_SERVICE_TYPE_REQUEST ||
-@@ -171,6 +178,7 @@ static int qcom_smd_rpm_callback(struct rpmsg_device *rpdev,
- 		msg_length = le32_to_cpu(msg->length);
- 		switch (le32_to_cpu(msg->msg_type)) {
- 		case RPM_MSG_TYPE_MSG_ID:
-+			msg_id = msg->msg_id;
- 			break;
- 		case RPM_MSG_TYPE_ERR:
- 			len = min_t(u32, ALIGN(msg_length, 4), sizeof(msgbuf));
-@@ -187,6 +195,8 @@ static int qcom_smd_rpm_callback(struct rpmsg_device *rpdev,
- 		buf = PTR_ALIGN(buf + 2 * sizeof(u32) + msg_length, 4);
- 	}
- 
-+	trace_rpm_smd_ack_recvd(msg_id, status);
-+
- 	rpm->ack_status = status;
- 	complete(&rpm->ack);
- 	return 0;
-diff --git a/drivers/soc/qcom/trace-smd-rpm.h b/drivers/soc/qcom/trace-smd-rpm.h
-new file mode 100644
-index 000000000000..b17fe5d5e306
---- /dev/null
-+++ b/drivers/soc/qcom/trace-smd-rpm.h
-@@ -0,0 +1,83 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
-+/*
-+ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
-+ */
-+
-+#if !defined(_TRACE_SMD_RPM_H) || defined(TRACE_HEADER_MULTI_READ)
-+#define _TRACE_SMD_RPM_H
-+
-+#undef TRACE_SYSTEM
-+#define TRACE_SYSTEM rpm_smd
-+
-+#include <linux/tracepoint.h>
-+#include <linux/soc/qcom/smd-rpm.h>
-+
-+TRACE_EVENT(rpm_smd_ack_recvd,
-+
-+	TP_PROTO(__le32 msg_id, int errno),
-+
-+	TP_ARGS(msg_id, errno),
-+
-+	TP_STRUCT__entry(
-+		__field(u32, msg_id)
-+		__field(int, errno)
-+	),
-+
-+	TP_fast_assign(
-+		__entry->msg_id = le32_to_cpu(msg_id);
-+		__entry->errno = errno;
-+	),
-+
-+	TP_printk("msg_id:%u errno:%08x",
-+		__entry->msg_id,
-+		__entry->errno)
-+);
-+
-+TRACE_EVENT(rpm_smd_send_msg,
-+
-+	TP_PROTO(__le32 msg_id, u32 state, u32 rsc_type, u32 rsc_id,
-+		 const struct clk_smd_rpm_req *req),
-+
-+	TP_ARGS(msg_id, state, rsc_type, rsc_id, req),
-+
-+	TP_STRUCT__entry(
-+		__field(u32, msg_id)
-+		__field(u32, state)
-+		__field(u32, rsc_type)
-+		__field(u32, rsc_id)
-+		__field(u32, key)
-+		__field(u32, nbytes)
-+		__field(u32, value)
-+	),
-+
-+	TP_fast_assign(
-+		__entry->msg_id = le32_to_cpu(msg_id);
-+		__entry->state = state;
-+		__entry->rsc_type = rsc_type;
-+		__entry->rsc_id = rsc_id;
-+		__entry->key = le32_to_cpu(req->key);
-+		__entry->nbytes = le32_to_cpu(req->nbytes);
-+		__entry->value = le32_to_cpu(req->value);
-+	),
-+
-+	TP_printk("msg_id:%u ctx:%s rsc_type:%.4s rsc_id:0x%x key:%.4s nbytes:%u value:%u",
-+		  __entry->msg_id,
-+		  __print_symbolic(__entry->state,
-+				   { QCOM_SMD_RPM_ACTIVE_STATE, "active" },
-+				   { QCOM_SMD_RPM_SLEEP_STATE, "sleep" }),
-+		  (const char *)&__entry->rsc_type,
-+		  __entry->rsc_id,
-+		  (const char *)&__entry->key,
-+		  __entry->nbytes,
-+		  __entry->value)
-+);
-+
-+#endif /* _TRACE_SMD_RPM_H */
-+
-+#undef TRACE_INCLUDE_PATH
-+#define TRACE_INCLUDE_PATH .
-+
-+#undef TRACE_INCLUDE_FILE
-+#define TRACE_INCLUDE_FILE trace-smd-rpm
-+
-+#include <trace/define_trace.h>
+interrupts =3D <GIC_SPI 0 IRQ_TYPE_EDGE_RISING>;
 
----
-base-commit: 89c07d98716a13454ec3fd9f97689e812cc71bd4
-change-id: 20260901-smd-rpm-trace-8d112ca11840
+The patches in this series seem to accomplish that. With the current
+arm64 pseudo-NMI implemnttion, requesting as NMI just bumps up the
+priority of an interrupt to "NMI" level and that works fine on SPIs as
+well. On arm64/GIC interrupts are routed to a single CPU anyway, so
+requesting it with `IRQF_PERCPU | IRQF_NOBALANCING` didn't seem
+absurd.
 
-Best regards,
---  
-Maulik Shah <maulik.shah@oss.qualcomm.com>
+The biggest problem we had was properly cleaning up the NMI at module
+"unload" time. To make that work, we needed a way to synchronize the
+NMIs to ensure they were quiescent before the module was unloaded.
+That's what this patch is attempting, and is mostly attempting to
+respond to Sashiko feedback on earlier patches.
 
+I don't think Mayank is tied to any particular implementation and the
+overall goal here is to allow the watchdog bark interrupt to run at an
+elevated level so it can produce good backtraces even if all the CPUs
+in the system are locked up and the buddy lockup detector doesn't
+fire. Is this something you think should be doable? If so, what's the
+best way for Mayank to go about doing it?
+
+
+-Doug
