@@ -1,101 +1,126 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9D3303ED3CF;
-	Fri,  4 Sep 2026 15:11:16 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 863934A263A
+	for <linux-arm-msm@vger.kernel.org>; Fri,  4 Sep 2026 15:19:01 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.129.124
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788534678; cv=none; b=PtarvxeGLTOJ5IilooSs40U2+Hatvniacr8sCJLH3dlHpW/1x+xKCZSozAiYQMd5hXN2edGNQHD/xTQ3XwRtBQ27xyv/32uTsEzsjzF9Y5zYRmYwF9WAgGvUdec+a7XxJNEiTA2NlagcYFybU0zPYWegYt1bPv5SeCAwQMWnaj4=
+	t=1788535143; cv=none; b=Fk8wpPcaKLG5XicYURlAOt3Q8PggMOScABAplDmD5Dpqq0Yj0SQB3EOk6lcHLoKgBbSfTzuxvCEjPd75A22RiScQW/t3xbZm+QPFlVhNA0jHJ3tNh+jbOVLhKSMgInPDj4j9egaCGSxnffPSNz88IOxipCACsWhIhN9Tui0dYK8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788534678; c=relaxed/simple;
-	bh=8WXoHefCCOA8cyPmIt4SvEJFrte10UTxwMpUKQ1O5BM=;
-	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
-	 MIME-Version:Content-Type; b=XLYuJIDx5NUNG0XffwBTbPssWX74YOkAt3Zhu+O3Cs+nGc1xQrpiXCY7PTOx08Z2eqQxA5NQ3mR2ope8h3UgM2Ad7zsoYlFZtmBbCL0unc6tPzFg8fRc8lRRf3yqEKOxgM9PdKghlbB19TxzVIMc3zsU+xNDyfHCBl4Mnm3RNoM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=UEJI7Z3+; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1788535143; c=relaxed/simple;
+	bh=M56rSLJGvaOXD4jhTd2P8Kl7lC/ZDGHt0GhIAa+6uNE=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=msAr6CERmRvx5N48AbbE4sLA6edeTQJSnCZ8S0E+M0yao1aQzuxT7nZYs25X4WpuQvKkY/+qXHDXQWgr7PMK28tM4fiJU5y7H3/Op6Ubz+XOh7CyJxsdt8tUH3uYJninV2kkRBnXxQTn0RQMX+vSjYlw7+rUQFN53N9MK4meE+I=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=clcyKNpV; arc=none smtp.client-ip=170.10.129.124
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="UEJI7Z3+"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 73B4A1F00A3E;
-	Fri,  4 Sep 2026 15:11:15 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1788534676;
-	bh=ZTV0LaeA0CYHV/fZB/N3Mj/Fum8NrBkKL1TKPD6RsnE=;
-	h=From:To:Cc:Subject:In-Reply-To:References:Date;
-	b=UEJI7Z3+2SMo48IiUF7yIzKrDpYR4s3HiXCILHwXi4F39Ty4ufGZztKehJGbGGqjK
-	 16YIaqFh/mdQ0//uTp35P6naTOJMZ5eTVoBkQnQTU9te2Bun/unFgdfzzARKnHysKL
-	 nD+MFFFBkhB74pW9mr7/rAjrnVmnalbqFjaA5f/Xxi8m+I4xdgLDzBeDUsqiJwoEst
-	 B1s0jz4LdSvxc/B3BxuZpBu5c2+XmbYSLprBjsuIUIXStHQTpVtDJCAGyxgZB/2ykG
-	 Ehqs7W121+hmseSJU0Ma4L4aotxKzQRHXrC6malmGrXXOVRj0NBFzaejGLOu+LPCXB
-	 ExotZVHOR54gw==
-From: Thomas Gleixner <tglx@kernel.org>
-To: Marc Zyngier <maz@kernel.org>
-Cc: Mayank Rungta <mrungta@google.com>, Wim Van Sebroeck
- <wim@linux-watchdog.org>, Guenter Roeck <linux@roeck-us.net>, Radu Rendec
- <radu@rendec.net>, linux-watchdog@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org, "Kirill A.
- Shutemov" <kas@kernel.org>, Douglas Anderson <dianders@chromium.org>
-Subject: Re: [PATCH v3 1/5] genirq: Synchronize in-flight handlers during
- NMI teardown
-In-Reply-To: <87wlt13zj1.wl-maz@kernel.org>
-References: <20260902-qcom-wdt-nmi-series-v3-0-f3999362a9ea@google.com>
- <20260902-qcom-wdt-nmi-series-v3-1-f3999362a9ea@google.com>
- <87fqzp8jex.ffs@fw13> <87wlt13zj1.wl-maz@kernel.org>
-Date: Fri, 04 Sep 2026 17:11:13 +0200
-Message-ID: <87v78l6oha.ffs@fw13>
+	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="clcyKNpV"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1788535140;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding;
+	bh=wimpPQPc2l+rFv+WyXy4r7ufkipxJCeYkKOmyYXKdOc=;
+	b=clcyKNpVUCRUn9DfUfFbMglRaK6R8Q2fcXLFJ0DDT8MnwisKXnOlbdOP0KgLfA6BsmlkFJ
+	KMYt1ubgn94pcDBly3OmXgSR2rK0DWeo4zJYwPpT67jie7Z03oEzUnkk8cqNasvs0IBftF
+	40dSua4oc9kZIdBKzyf+/t9X/hXq0P4=
+Received: from mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
+ relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-643-SIAK51tANpyujlKRgMVKaA-1; Fri,
+ 04 Sep 2026 11:18:57 -0400
+X-MC-Unique: SIAK51tANpyujlKRgMVKaA-1
+X-Mimecast-MFC-AGG-ID: SIAK51tANpyujlKRgMVKaA_1788535135
+Received: from mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com (mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.93])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS id 8EC3C1855175;
+	Fri,  4 Sep 2026 15:18:55 +0000 (UTC)
+Received: from aesteve-thinkpadp1gen8.rmtes.csb (headnet04.pony-001.prod.iad2.dc.redhat.com [10.2.32.116])
+	by mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS id 747BD18005AD;
+	Fri,  4 Sep 2026 15:18:53 +0000 (UTC)
+From: Albert Esteve <aesteve@redhat.com>
+Subject: [PATCH v2 0/2] Add automotive SMEM hardening for Qualcomm
+ platforms
+Date: Fri, 04 Sep 2026 17:18:46 +0200
+Message-Id: <20260904-port-smem-v2-0-bb497dd3c48b@redhat.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/03MQQ6CMBCF4auQWVvTqVQKK+9hWGAZZBalZEqIh
+ nB3K3Hh8n95+TZIJEwJmmIDoZUTxymHORXgx256kuI+NxhtrtphreYoi0qBgqosOl9Vvi7RQv7
+ PQgO/Duve5h45LVHeB73id/0pRv8pKyqteqy70g7WXR7DTagfu+XsY4B23/cPOVe7BaMAAAA=
+X-Change-ID: 20260819-port-smem-7518c77c9415
+To: Bjorn Andersson <andersson@kernel.org>, 
+ Konrad Dybcio <konradybcio@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org, 
+ Albert Esteve <aesteve@redhat.com>, 
+ Sarannya S <quic_sarannya@oss.qualcomm.com>, 
+ Pranav Mahesh Phansalkar <quic_pphansal@oss.qualcomm.com>, 
+ Sudeepgoud Patil <quic_sudeepgo@oss.qualcomm.com>, 
+ Tony Truong <quic_truong@oss.qualcomm.com>
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1788535133; l=1957;
+ i=aesteve@redhat.com; s=20260827; h=from:subject:message-id;
+ bh=M56rSLJGvaOXD4jhTd2P8Kl7lC/ZDGHt0GhIAa+6uNE=;
+ b=AjZiqyFLQ+U2qnbLm1yfowflVoIYJIiDL2YtMJlLcRtfyOd5dkm7YvypVzMVmMisY18//lvlJ
+ RVfeZaQb1FuAERXm6C8HmrnuFOJPI32k38yScSbsgb8lT8OmlMY4tyt
+X-Developer-Key: i=aesteve@redhat.com; a=ed25519;
+ pk=zI2RBeZgocwYm3AkJW4CtjoJnKoDZrfBl1xe5Ed6h+U=
+X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.93
 
-On Fri, Sep 04 2026 at 14:40, Marc Zyngier wrote:
-> On Fri, 04 Sep 2026 10:17:42 +0100,
-> Thomas Gleixner <tglx@kernel.org> wrote:
->> > +	/*
->> > +	 * Ensure all in-flight NMI handlers on other CPUs complete before
->> > +	 * clearing desc->action or tearing down NMI state.
->> > +	 */
->> > +	__synchronize_hardirq(desc, true);
->> 
->> NMIs are strictly per CPU interrupts. So how is this supposed to work
->> correctly when looking at irqchip_state(ACTIVE) ?
->> 
->> Marc?
->
-> I have no idea what this is trying to achieve.
->
-> This can only work for a global interrupt, not for a CPU-private
-> interrupt, since in general you can't observe the state of the
-> interrupt on another CPU.
->
-> My guess is that the OP is trying to trigger an NMI using a global
-> interrupt, which we never intended to be supported. That's not to say
-> that it cannot be supported, but this patch seems to be breaking the
-> core use case...
+The Qualcomm SMEM driver manages shared memory partitions used for
+inter-processor communication on Qualcomm SoCs, including the
+automotive SA8775P platform. Vendor trees carry additional validation
+and partition-enumeration logic that is not yet present in master.
 
-As I suspected.
+Patch 1 adds boundary checks when walking private SMEM partition
+entries, ensuring traversal does not read past the end of a partition.
 
-The driver change is here:
+Patch 2 skips multi-remote-host partitions during enumeration. SMEM
+now supports partitions involving more than one remote host, but the
+driver does not implement that case yet.
 
-   [1] https://lore.kernel.org/all/20260902-qcom-wdt-nmi-series-v3-5-f3999362a9ea@google.com/
+Both patches are based on public vendor patches from Qualcomm [1][2].
+Adapted for master. In particular:
 
->  @@ -311,10 +321,25 @@ static int qcom_wdt_probe(struct platform_device *pdev)
-> 		 if (irq < 0 && irq != -ENXIO)
-> 			 return irq;
-> 		 if (irq > 0) {
->  -			ret = devm_request_irq(dev, irq, qcom_wdt_isr, 0,
->  -					       "wdt_bark", &wdt->wdd);
->  -			if (ret)
->  -				return ret;
->  +			wdt->irq = irq;
->  +			irq_flags = IRQF_PERCPU | IRQF_NOBALANCING |
->  +				    IRQF_NO_AUTOEN | IRQF_NO_THREAD;
->  +
->  +			ret = request_nmi(irq, qcom_wdt_isr, irq_flags,
->  +					  "wdt_bark", &wdt->wdd);
+ - Dropped the xarray partition rework, which is already present in
+   master (79602b750b96c, "soc: qcom: smem: Switch partitions to
+   xarray")
 
-Of course this is a regular global interrupt otherwise it couldn't be
-requested normally. So this sets IRQF_PERCPU (it has to otherwise
-request_nmi() would fail), but that looks like a hack to me.
+Built on master (Linux 7.2.0-rc6+), and tested on Qualcomm SA8775P
+Ride V3 board. SMEM platform device binds and initializes successfully.
+
+[1] https://git.codelinaro.org/clo/la/kernel/qcom/-/commit/3e521f2641c8f01f00fd74a088206942ce23d6d4
+[2] https://git.codelinaro.org/clo/la/kernel/qcom/-/commit/842dd28b0276b3824a607e067b3c20e266bcf230
+
+Signed-off-by: Albert Esteve <aesteve@redhat.com>
+---
+Changes in v2:
+- Update patch 1 authorship to Sarannya
+- Update all emails from @quicinc.com to @oss.qualcomm.com
+- Make smem.c copyright yearless
+- Link to v1: https://lore.kernel.org/r/20260820-port-smem-v1-0-d19a45f583bf@redhat.com
+
+---
+Sarannya S (1):
+      soc: qcom: smem: add boundary checks for partitions
+
+Tony Truong (1):
+      soc: qcom: smem: ignore multi remote host partitions
+
+ drivers/soc/qcom/smem.c | 111 ++++++++++++++++++++++++++++++++++--------------
+ 1 file changed, 78 insertions(+), 33 deletions(-)
+---
+base-commit: bc35965f6940a9bf834d54187b6088b8eb09206d
+change-id: 20260819-port-smem-7518c77c9415
+
+Best regards,
+-- 
+Albert Esteve <aesteve@redhat.com>
 
