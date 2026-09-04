@@ -1,358 +1,153 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-ed1-f50.google.com (mail-ed1-f50.google.com [209.85.208.50])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 22EFA388394
-	for <linux-arm-msm@vger.kernel.org>; Fri,  4 Sep 2026 14:35:20 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 17C71397930
+	for <linux-arm-msm@vger.kernel.org>; Fri,  4 Sep 2026 14:38:11 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.208.50
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788532522; cv=none; b=NaACOiYkjLKNtGI6iMRiBrSssI8Txj/tBdz3pUEJFzxNQzJVqXD0AhHfiXJvigsoPdVeAnoSIvrlIQQyong8ajgb+/s+37Z4KAiXv2IAsT2G3sjqr/bENY/Z87z9v3qWuqMUBwMaKC6bbHcp/YcKnjcbm6a6dtRjqFKiHJP4Vu8=
+	t=1788532693; cv=none; b=n54N4xqe3bVqtV2Vl2UppfQF/1PNpwLQc2r/qhI7PLzYO/x0p/jTlDpKHG3/4WO58z7WC0qTAdWy7bdD38FJ8AI+9s1WalVVZ68Wy+r3l/s64aOLE4P/Jew5wtbirlrR7KIyWxKGKW2bCgbmwci0rN2CYK+JMZcuG9aNmG49cSQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788532522; c=relaxed/simple;
-	bh=pZKTVhTO93s4fP8/iVQrlhUlfkTSYeUnRbwVzDjw/80=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=Ke/bxL8pEqQ1coObZ1p1hL3QWmHx7+sBrJsqhVxfWc5kWT1AhJGtYTJeF+kxL5wGXLZU/AOldJ5BjrfeLAqFLwUqf0VSaRy1YGfnE1hZEgm3c+u/nmXpqNYCnbU/H9n8YYWmkjtWnhbfEuyqxSUeNG93QhQIuXauHYVUsOjPvpY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=Y7RgH7tY; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=Thti4ZZJ; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1788532693; c=relaxed/simple;
+	bh=JH7KvzgDb3hj1YazwEjzQhCEGqKDsL5tuzoEKmOZ7Kc=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=Bc6Ajj0D0vxBOsCHM8ECcSBnWN6RMkal9NKc8lXQVT97K9hsoht9kBgBCckJPkjYGxIFYnEU8gDKWVYlaqpnrwcLfDdS1y6TaaXEYAuEDSiHEPAzWsrYRQtp6U62dOj+SLlB5JY10Rsc/NGBxbpPJDV9CjNCNRpTn0EPNPJa8Dc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=chromium.org; spf=pass smtp.mailfrom=chromium.org; dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org header.b=oF4Qok5p; arc=none smtp.client-ip=209.85.208.50
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=chromium.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="Y7RgH7tY";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Thti4ZZJ"
-Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 684Dgs5B2537350
-	for <linux-arm-msm@vger.kernel.org>; Fri, 4 Sep 2026 14:35:20 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-type:date:from:in-reply-to:message-id:mime-version
-	:references:subject:to; s=qcppdkim1; bh=BWwUUTVbhJgNNGfDPzA8/VcC
-	f/cj3xiJQEj61y8nqeQ=; b=Y7RgH7tY1fnJXfokcyRO8TfKGpA7XpNETPsPiZNS
-	EeMakQl6WruaUpXgK2spSsSWTDdaVOWzujzSRbvls2HHXYa89k7cEE5v8ARpzLUb
-	fI5ggBAGLbMKzUDXDGg0n9aMIFsQnHhJpfC77BWjgSZY9CSxNNHvREH71k+IdljT
-	3oYwRmFV9xwmnShn7wFFNPg/amWW5r0nZs/taAa2AuUOUFEuLbQ6fKCrWI7GyZBA
-	pbqYNGxElvbI3ojADYEPcy8r99BPJw6EO1fNPmPpBXcTZ2I4eoVcQeF9/6vOdicy
-	8OY/xhPjt1oRxcDITswFrxLYJFbuFT57qKQH9KZ+1MQI9g==
-Received: from mail-vs1-f69.google.com (mail-vs1-f69.google.com [209.85.217.69])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gfpmqt3sp-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Fri, 04 Sep 2026 14:35:20 +0000 (GMT)
-Received: by mail-vs1-f69.google.com with SMTP id ada2fe7eead31-785c40b6318so678468137.2
-        for <linux-arm-msm@vger.kernel.org>; Fri, 04 Sep 2026 07:35:20 -0700 (PDT)
+	dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org header.b="oF4Qok5p"
+Received: by mail-ed1-f50.google.com with SMTP id 4fb4d7f45d1cf-69fab5a852cso1669983a12.0
+        for <linux-arm-msm@vger.kernel.org>; Fri, 04 Sep 2026 07:38:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1788532519; x=1789137319; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+        d=chromium.org; s=google; t=1788532690; x=1789137490; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
          :date:message-id:reply-to:content-type;
-        bh=BWwUUTVbhJgNNGfDPzA8/VcCf/cj3xiJQEj61y8nqeQ=;
-        b=Thti4ZZJPTD7WKyGgrGhAx7qUoT3k3atf9tr1f0HqA2nGbKrF7oHWiO/ln8qXVnPsv
-         UjzNLK2iWCy4eZV/3pW81C4cPGNzaYB+86nsOVQATB8EVtTjIDYEMsUb+PzOoKIRLEzE
-         ic8AnmvjodgQb7YA2YRgU021CugajVnLupjAy0ZCtnrl+iEkdmDixfSYvCSn8jNocGbQ
-         BbI1eL4sjuNs1n4qIzIKP2a2guMU0QtsVNez/VqqmacLaxngyheBxRmofKk/UvesvYTg
-         7cG/NFWF4Nt64yZdL5EJJ7fpFURRjQHxnNMv09OquBBBYPqrXJ81UQzNS92jRs06ctlm
-         LMmA==
+        bh=17oI+rSj+VUBq1gOiNZqYe2TLy7jpSRVJ40pUTx77t8=;
+        b=oF4Qok5pjgnBOfFC0D38//kmSrl5iV8MHKBhnx/eiP5vKb2QcEFdtJN4M7+mK7el66
+         36O7HGC3UAV6IsmfNepVlnbhoyiDBS7Rr+4HaP75Fa1QsoJRC0C7YYPHQcFKet25Hxzg
+         gkMjD5c3hEZZQtj1dMxoGsMpLcIbjkZgdlSjk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788532519; x=1789137319;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:x-gm-gg
+        d=1e100.net; s=20251104; t=1788532690; x=1789137490;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=BWwUUTVbhJgNNGfDPzA8/VcCf/cj3xiJQEj61y8nqeQ=;
-        b=ju6Zqz0wORn7Ffmta5n2TRXXx48DccFCgAZzmcX8/rK0WFucAS7o4cwcHdeWOav8ZI
-         xO2WhuJ8jJaguhYDMTiWP5HCXraSXf8igmWq852jfMvlabfoxnFVvEX8tCnIoQLRm2Dz
-         baoAms+rQ0h/cWR1+SUuZliuM10ZdiZPCiX8MVMDYcTSYJIsKGj3ehzIEtYSsP0TE46/
-         7tftXnm8tQvRKjerIFHX0IHm1QnhRZuBoGjtIg3KOjpjKglAB56sOsdAjscJAd0SkVeB
-         FMwMdntvI3VTNY0vR7hgaArjLCqCCyAHywQafxdULGKNOOvXmj3Gfa7BZvXXqbiqcpmF
-         ThfQ==
-X-Forwarded-Encrypted: i=1; AKwUvBy0LY4sfSH+eOY6B58oNiMK76LnRbJvUiBKn+GxH8yFsCSdsL4UsebT12xf5mrNIUtEOhmf7F7mws3dZBzC@vger.kernel.org
-X-Gm-Message-State: AFuF++nkzTaLfC/HlovBUVROckH1MkvcJbyMwOBXIiivelHEmVLYGwhx
-	s2nPIyfZfN2uCfdn5VhEmQdSPvI5NcFI0SW7yRGBD5SvFVZzJtTv8+65mMxqQJU3WorK1/OIDHG
-	agJuEL3sEXr8wWJPcq4UkQc66V875FXjmIYmiOUP4QWVP24P2aAR6yhu8caza4Ttl/7NS
-X-Gm-Gg: AYBFou20rC1pXOnqW4kw5//NxHQ3DJ7adO4m0zp6SUD9lfGUQAjwk3aiEGbCytLz7Bh
-	HSwiEQCmv2wznNwKOrpjSRuWy3AOkk4CKScxO6ErB9enOVMmMwjO5vnmm2P8bk4FXmXmuuJt1WB
-	mp2q5/xF9mCiC/lp1TF4No9Wkg1e7daLftqGXSWVgPBJLfyByFdaiXApIH2p81WzHbDguiG016e
-	5lL5QrRb0fZFjS5aaSAOD0H5twXhaXRtWev4FiyCn95tBIYiBvmgclYCIptdDml0CBf+mtR8z+F
-	O6eEbdGVKCwu++ZT6BeVOCXxH49zC7yIh+QdtrvS5CVnVXiFHffcJkp75h8RdHCEtJEfwbDqzuD
-	ChaS/BSF2wlZhaQ==
-X-Received: by 2002:a05:6102:f9b:b0:786:8a7:92e3 with SMTP id ada2fe7eead31-78a4a72db1emr2699106137.2.1788532519067;
-        Fri, 04 Sep 2026 07:35:19 -0700 (PDT)
-X-Received: by 2002:a05:6102:f9b:b0:786:8a7:92e3 with SMTP id ada2fe7eead31-78a4a72db1emr2699029137.2.1788532517344;
-        Fri, 04 Sep 2026 07:35:17 -0700 (PDT)
-Received: from localhost ([188.216.77.92])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c260d55b306sm117302366b.36.2026.09.04.07.35.16
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 04 Sep 2026 07:35:16 -0700 (PDT)
-Date: Fri, 4 Sep 2026 16:35:15 +0200
-From: Lorenzo Bianconi <lorenzo.bianconi@oss.qualcomm.com>
-To: Bjorn Helgaas <helgaas@kernel.org>
-Cc: Bjorn Helgaas <bhelgaas@google.com>,
-        Lorenzo Pieralisi <lpieralisi@kernel.org>,
-        Krzysztof =?utf-8?Q?Wilczy=C5=84ski?= <kwilczynski@kernel.org>,
-        Manivannan Sadhasivam <mani@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>,
-        Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>,
-        Linus Walleij <linusw@kernel.org>,
-        Bartosz Golaszewski <brgl@kernel.org>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Michael Walle <mwalle@kernel.org>, Alex Elder <elder@riscstar.com>,
-        Daniel Thompson <daniel@riscstar.com>, linux-pci@vger.kernel.org,
-        devicetree@vger.kernel.org, linux-gpio@vger.kernel.org,
-        linux-arm-msm@vger.kernel.org
-Subject: Re: [PATCH v2 4/5] PCI/pwrctrl: tc9563: switch per-port reset to
- GPIO descriptor API
-Message-ID: <aprXI4UUaIk_bMFc@lore-desk>
-References: <20260903-pci-tc9563-aux-v2-4-34c625b542c1@oss.qualcomm.com>
- <20260903220311.GA2250435@bhelgaas>
+        bh=17oI+rSj+VUBq1gOiNZqYe2TLy7jpSRVJ40pUTx77t8=;
+        b=LlYbyfK0ARCutHnAKgxhcqwm3xhIvwtGrVvoovNLZVDVtHRQO3hkxT3CjuD4o8fYhx
+         tBxlNMOTg6rEyNl7AnUHOQCL9uVrpJ6SazvuXk0mEbEPlQ1vdJZuzEwasg2eaN/U3lSZ
+         PfFaJiPZqSbvdywz2B9MOaOuvezsULlxcIywMflqpTO7oyi4onyh+/NgRNZBQOYoGLuz
+         dLN0yF3yG5lhwbRKdRiNc+yFVNl4PShJWgeEelrNT1KLMsGx3oiIaXHY4YNGWDFw5aw8
+         K43hRQgVbt8/ofIR8jk1vaZNoOMhnzeWHE1ZxbCikToQT+LlpEM9Ra0jf+nSr6i+/rwz
+         lBtQ==
+X-Forwarded-Encrypted: i=1; AKwUvBxTANa0Vjh0CU9E9OHNLe+VQIxfrZ25mtWdX5RpnSc6Kdf842Pi27Nq1nX1mpCh+4THt9GyXlayLV+NQayq@vger.kernel.org
+X-Gm-Message-State: AFuF++kg5OG/1JYW7cDiQ/fmh/McrPuzmiUGa7ZeNwzSvJ/GIiTWplSo
+	eGWajve0YEMvbyNI9GK2gUuA7OXCmuN3Eq0PHIa1WyjpCUzrmjNE3A6/wBsLPMLU/9KcMsAdI7e
+	czAo=
+X-Gm-Gg: AYBFou1SAuab1wF0Ay/EaVg86oQB2ZCOIVsmhzK/pocHM5ZSVCMdI2qLdlbB9a6P8L3
+	0zax1X3KYdmT75mrgJg6MwgatcDaho3cOkLplHW8iJRvAn6EpGwVx85ycbSZlP5Dq1NVyOPIFGg
+	zj6GTN8m6W2foX76r39jHd3VycP720BtT3SaAbG+2w5t3Z408Ww960LndTFB3WHS1WH2WNw+Jxh
+	4PkjPPRuZddbShobZdBJAaRxmWC9+KFLtA/Gvldyh8AL2jie+QNg8cmn7JqxnWEnWp5cXyG0M2t
+	jH+9whBRYRpmhfKuxop/3hJzBJVRiAFU3nwX6psPSBzq9FhxRAQwly/1QiFydcBQ1YU+7jYgNXV
+	2tHczVTRCkNrX9MolHEZDYVPQ1HxXlbdZ8tWfh1/S4efIfhD0aPOIv4eO9Zhi5hkNXZJkBSoYbw
+	Q0stySigRLXhVGr3/hQoPKx75BrBDqJSkN+KqMgS5GKo29LI79RA/i8vIjWfb5vwQzR7Knaeu3V
+	fiqMbCQIf73tQB3kjBqaERm/IE=
+X-Received: by 2002:a17:907:9405:b0:c25:5344:43cd with SMTP id a640c23a62f3a-c260c7aaa69mr280462066b.7.1788532690170;
+        Fri, 04 Sep 2026 07:38:10 -0700 (PDT)
+Received: from mail-wr1-f42.google.com (mail-wr1-f42.google.com. [209.85.221.42])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c261f673000sm40618866b.24.2026.09.04.07.38.08
+        for <linux-arm-msm@vger.kernel.org>
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Fri, 04 Sep 2026 07:38:09 -0700 (PDT)
+Received: by mail-wr1-f42.google.com with SMTP id ffacd0b85a97d-4858303de5dso1347541f8f.2
+        for <linux-arm-msm@vger.kernel.org>; Fri, 04 Sep 2026 07:38:08 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AKwUvBz4tU39BTL4XfEI5CJLKv/cKGHxvkgw8tLE0pGeHGFD9ERX1FwOZR0Xxu9NWo+uFknGSmwTjSE+nCAqeyal@vger.kernel.org
+X-Received: by 2002:a05:6000:4a0b:b0:485:8c16:a32e with SMTP id
+ ffacd0b85a97d-4858c16a585mr3711212f8f.35.1788532686831; Fri, 04 Sep 2026
+ 07:38:06 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="lE5DYGO/JfD+FQa1"
-Content-Disposition: inline
-In-Reply-To: <20260903220311.GA2250435@bhelgaas>
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTA0MDEzMiBTYWx0ZWRfX+YQmoFNFBAe1
- e46hotCNfRqkrxIF51VPYcZbwO2uXiLjtoJMiqIqPPhISzxjIKzX0bpO6I2Xd3QwGMzUSIzelvh
- IrYQlMdY5l58ZuIQXysRlyc+0SxYh1Q=
-X-Authority-Analysis: v=2.4 cv=eovvCIpX c=1 sm=1 tr=0 ts=6a9ad728 cx=c_pps
- a=5HAIKLe1ejAbszaTRHs9Ug==:117 a=WpTaRW6qxYHRGzLzQsVYzg==:17
- a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22 a=EUspDBNiAAAA:8
- a=OhhHAVtvP0aG5I1CcfYA:9 a=CjuIK1q_8ugA:10 a=wkYq-V80zuO17UhYMvoA:9
- a=gYDTvv6II1OnSo0itH1n:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTA0MDEzMiBTYWx0ZWRfX8VmhDXL5yDKZ
- ynJ2ved1a8GZqhRoe55Pb4Quz9lLPzv1tT6Fg8YO+bUps17SjQMtSlXlJ3pUumLn11N25PyPopN
- 05wtyLMOL/oOgAkpOPx35kWJ6JM+AnMXUC+YslmHGvaZNUbLv5ZZS/t7YwjZFMvkJ90iEc0l0I2
- FqNFJ+sLLRiLGIkLau3YY0/ShW16iC6c/zoZDMyndi7Rx9OIOvZe/Z99x15MQAUl2zYh7Jjr8+J
- 7FGX1bvQCGpLBEYjZ8s9ESBp1iqsaOMTNszsx2KG0EM9Kl+bWLKvviIsQAFtfIUEtVLuXpnnK51
- KIz5P+9g3iedM5mQcnGEfdpJYbHAkpIolFo+fVz64WQN778MuNEPDMQ3F8rt35fms3JLwVAydeh
- VT33ruXVKJkBPKUDgEWVYeiXsYYgV2kSb9XbkGd9z4Y2W5qqqvNqH8HUTzyCV1fiNZfHxyIwnWx
- ACvj+62pBv5il4LRZig==
-X-Proofpoint-ORIG-GUID: LcxfQRpCsEj1Rl6FtYLSumB-H2Ox_aIu
-X-Proofpoint-GUID: LcxfQRpCsEj1Rl6FtYLSumB-H2Ox_aIu
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-04_04,2026-09-03_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 phishscore=0 impostorscore=0 spamscore=0 adultscore=0
- lowpriorityscore=0 bulkscore=0 suspectscore=0 clxscore=1015 malwarescore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2609040132
-
---lE5DYGO/JfD+FQa1
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+References: <20260902-qcom-wdt-nmi-series-v3-0-f3999362a9ea@google.com>
+ <20260902-qcom-wdt-nmi-series-v3-5-f3999362a9ea@google.com>
+ <3de593de-6851-4a53-8309-a6bf13e9a8f7@oss.qualcomm.com> <CABz7rdBv74pZe6jDRifTKRAKzGZB6L08n81_0gCqF0g=s+FEcw@mail.gmail.com>
+In-Reply-To: <CABz7rdBv74pZe6jDRifTKRAKzGZB6L08n81_0gCqF0g=s+FEcw@mail.gmail.com>
+From: Doug Anderson <dianders@chromium.org>
+Date: Fri, 4 Sep 2026 07:37:55 -0700
+X-Gmail-Original-Message-ID: <CAD=FV=VUyQ4F-HC=cmD9Ay-JHcWJCVDc5BSWRax7a6FRJ_v0bQ@mail.gmail.com>
+X-Gm-Features: AcwNN1Wo5IR-SJM2QYyqYIK33CmEpWmvlDIs54NEnTFP7obdj1kaNXFucZN0GAE
+Message-ID: <CAD=FV=VUyQ4F-HC=cmD9Ay-JHcWJCVDc5BSWRax7a6FRJ_v0bQ@mail.gmail.com>
+Subject: Re: [PATCH v3 5/5] watchdog: qcom: Register pretimeout interrupt as NMI
+To: Mayank Rungta <mrungta@google.com>
+Cc: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, 
+	Wim Van Sebroeck <wim@linux-watchdog.org>, Guenter Roeck <linux@roeck-us.net>, 
+	Thomas Gleixner <tglx@kernel.org>, Radu Rendec <radu@rendec.net>, linux-watchdog@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
+	"Kirill A. Shutemov" <kas@kernel.org>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-> On Thu, Sep 03, 2026 at 09:53:00AM +0200, Lorenzo Bianconi wrote:
-> > Remove the local TC9563_GPIO_MASK and TC9563_GPIO_DEASSERT_BITS
-> > definitions, which are no longer used after switching to the GPIO
-> > descriptor API.
-> >=20
-> > Replace the direct regmap-based per-port reset logic in
-> > assert_deassert_reset() with gpiod_direction_output() calls, falling
-> > back to the legacy regmap approach only when no reset-gpios DT
-> > property is present for a given port.
-> >=20
-> > Add the reset GPIO pointer to struct tc9563_pwrctrl_cfg and introduce
-> > tc9563_pwrctrl_parse_reset_line() to look up reset-gpios from each
-> > PCI downstream port child node. The lookup is done lazily at the
-> > beginning of power_on(), returning -EPROBE_DEFER until the GPIO chip
-> > is registered.
-> >=20
-> > Signed-off-by: Lorenzo Bianconi <lorenzo.bianconi@oss.qualcomm.com>
->=20
-> Capitalize "Switch per-port ..." in subject.
+Hi,
 
-ack, I will fix it in v2.
+On Thu, Sep 3, 2026 at 1:58=E2=80=AFPM Mayank Rungta <mrungta@google.com> w=
+rote:
+>
+> Hi,
+>
+> > > When a system is completely unresponsive due to an interrupt storm or
+> > > deadlocked CPU cores with standard interrupts disabled, a standard
+> > > watchdog pretimeout bark interrupt will fail to execute, preventing t=
+he
+> > > pretimeout governor from capturing CPU backtraces before the hardware
+> > > reset bite.
+> >
+> > [...]
+> >
+> > > -                     ret =3D devm_request_irq(dev, irq, qcom_wdt_isr=
+, 0,
+> > > -                                            "wdt_bark", &wdt->wdd);
+> > > -                     if (ret)
+> > > -                             return ret;
+> > > +                     wdt->irq =3D irq;
+> > > +                     irq_flags =3D IRQF_PERCPU | IRQF_NOBALANCING |
+> > > +                                 IRQF_NO_AUTOEN | IRQF_NO_THREAD;
+> > > +
+> > > +                     ret =3D request_nmi(irq, qcom_wdt_isr, irq_flag=
+s,
+> > > +                                       "wdt_bark", &wdt->wdd);
+> > > +                     if (ret) {
+> > > +                             /* Fallback to normal interrupt if NMI =
+not supported */
+> > > +                             ret =3D devm_request_irq(dev, irq, qcom=
+_wdt_isr, 0,
+> > > +                                                    "wdt_bark", &wdt=
+->wdd);
+> >
+> > GPT noticed this IRQ is requested but never enabled (NO_AUTOEN)
+>
+> For the NMI path: request_nmi() requires IRQF_NO_AUTOEN. To balance
+> this, enable_nmi(irq) is called immediately upon successful
+> registration in the probe function:
+>
+> For the IRQ fallback: devm_request_irq() passes 0 (not irq_flags). In
+> __setup_irq(), when IRQF_NO_AUTOEN is absent, the core calls
+> irq_startup(), automatically enabling the interrupt line as it has
+> always done in mainline.
+>
+> Both paths are therefore enabled upon probe.
 
->=20
-> Question below.
->=20
-> > ---
-> >  drivers/pci/pwrctrl/pci-pwrctrl-tc9563.c | 85 ++++++++++++++++++++++++=
-+++-----
-> >  1 file changed, 73 insertions(+), 12 deletions(-)
-> >=20
-> > diff --git a/drivers/pci/pwrctrl/pci-pwrctrl-tc9563.c b/drivers/pci/pwr=
-ctrl/pci-pwrctrl-tc9563.c
-> > index 6df512d78b54..09ab4718db8a 100644
-> > --- a/drivers/pci/pwrctrl/pci-pwrctrl-tc9563.c
-> > +++ b/drivers/pci/pwrctrl/pci-pwrctrl-tc9563.c
-> > @@ -57,9 +57,6 @@
-> >  #define TC9563_POWER_CONTROL		0x82b09c
-> >  #define TC9563_POWER_CONTROL_OVREN	0x82b2c8
-> > =20
-> > -#define TC9563_GPIO_MASK		0xfffffff3
-> > -#define TC9563_GPIO_DEASSERT_BITS	0xc  /* Clear to deassert GPIO */
-> > -
-> >  #define TC9563_TX_MARGIN_MIN_UA		400000
-> > =20
-> >  /*
-> > @@ -85,6 +82,7 @@ struct tc9563_pwrctrl_cfg {
-> >  	u8 nfts[2]; /* GEN1 & GEN2 */
-> >  	bool disable_dfe;
-> >  	bool disable_port;
-> > +	struct gpio_desc *reset;
-> >  };
-> > =20
-> >  #define TC9563_PWRCTL_MAX_SUPPLY	6
-> > @@ -349,16 +347,40 @@ static int tc9563_pwrctrl_set_nfts(struct tc9563_=
-pwrctrl *tc9563,
-> >  static int tc9563_pwrctrl_assert_deassert_reset(struct tc9563_pwrctrl =
-*tc9563,
-> >  						bool deassert)
-> >  {
-> > -	int ret, val;
-> > -
-> > -	ret =3D regmap_write(tc9563->regmap, TC9563_GPIO_CONFIG,
-> > -			   TC9563_GPIO_MASK);
-> > -	if (ret)
-> > -		return ret;
-> > -
-> > -	val =3D deassert ? TC9563_GPIO_DEASSERT_BITS : 0;
-> > +	int i;
-> > +
-> > +	for (i =3D 0; i < ARRAY_SIZE(tc9563->cfg); i++) {
-> > +		int err;
-> > +
-> > +		if (tc9563->cfg[i].reset) {
-> > +			err =3D gpiod_direction_output(tc9563->cfg[i].reset,
-> > +						     !deassert);
-> > +			if (err)
-> > +				return err;
-> > +		} else {
-> > +			/* Fallback: legacy DTS without reset-gpios */
-> > +			switch (i) {
-> > +			case TC9563_DSP1:
-> > +			case TC9563_DSP2:
-> > +				err =3D regmap_clear_bits(tc9563->regmap,
-> > +							TC9563_GPIO_CONFIG,
-> > +							BIT(i + 1));
-> > +				if (err)
-> > +					return err;
-> > +
-> > +				err =3D regmap_assign_bits(tc9563->regmap,
-> > +							 TC9563_RESET_GPIO,
-> > +							 BIT(i + 1), deassert);
-> > +				if (err)
-> > +					return err;
-> > +				break;
-> > +			default:
-> > +				break;
-> > +			}
-> > +		}
-> > +	}
-> > =20
-> > -	return regmap_write(tc9563->regmap, TC9563_RESET_GPIO, val);
-> > +	return 0;
-> >  }
-> > =20
-> >  static int tc9563_pwrctrl_parse_device_dt(struct device_node *node,
-> > @@ -393,6 +415,41 @@ static int tc9563_pwrctrl_parse_device_dt(struct d=
-evice_node *node,
-> >  	return 0;
-> >  }
-> > =20
-> > +static int tc9563_pwrctrl_parse_reset_line(struct tc9563_pwrctrl *tc95=
-63)
-> > +{
-> > +	enum tc9563_pwrctrl_ports port =3D TC9563_USP;
-> > +	struct device *dev =3D tc9563->pwrctrl.dev;
-> > +	struct device_node *node =3D dev->of_node;
-> > +
-> > +	for_each_child_of_node_scoped(node, child) {
-> > +		struct tc9563_pwrctrl_cfg *cfg;
-> > +
-> > +		if (!of_node_is_type(child, "pci"))
-> > +			continue;
-> > +
-> > +		if (++port >=3D TC9563_MAX)
-> > +			break;
-> > +
-> > +		cfg =3D &tc9563->cfg[port];
-> > +		if (cfg->reset) /* Already discovered */
-> > +			continue;
-> > +
-> > +		cfg->reset =3D devm_fwnode_gpiod_get(dev, of_fwnode_handle(child),
-> > +						   "reset", GPIOD_ASIS,
-> > +						   NULL);
-> > +		if (IS_ERR(cfg->reset)) {
-> > +			int err =3D PTR_ERR(cfg->reset);
-> > +
-> > +			cfg->reset =3D NULL;
-> > +			if (err !=3D -ENOENT)
-> > +				return dev_err_probe(dev, err,
-> > +						     "failed to get reset\n");
-> > +		}
-> > +	}
-> > +
-> > +	return 0;
-> > +}
-> > +
-> >  static void tc9563_pwrctrl_adev_release(struct device *dev)
-> >  {
-> >  	struct auxiliary_device *adev =3D to_auxiliary_dev(dev);
-> > @@ -480,6 +537,10 @@ static int tc9563_pwrctrl_power_on(struct pci_pwrc=
-trl *pwrctrl)
-> >  	struct tc9563_pwrctrl_cfg *cfg;
-> >  	int ret, i;
-> > =20
-> > +	ret =3D tc9563_pwrctrl_parse_reset_line(tc9563);
-> > +	if (ret)
-> > +		return ret;
->=20
-> Seems like this call would fit better in
-> tc9563_pwrctrl_parse_device_dt() since it already handles similar
-> properties and nothing in DT is changing.
->=20
-> But I guess this is because the GPIO chip may not be registered at
-> tc9563_pwrctrl_probe() time.  Could tc9563_pwrctrl_probe() itself
-> return -EPROBE_DEFER?  Returning it from tc9563_pwrctrl_power_on()
-> seems a little weird.
+I wonder if it would make sense to either:
 
-Correct, I am not running tc9563_pwrctrl_parse_reset_line() in
-tc9563_pwrctrl_parse_device_dt() since GPIO chip may not be registered at
-moment (we need to run tc9563_pwrctrl_add_gpio_adev() first).
-Moreover, pwrctrl power_on() callback is running during PCI host bridge
-driver probe:
+1. Rename the variable to 'nmi_flags'?
 
-	qcom_pcie_probe()
-	-> dw_pcie_host_init()
-	   -> qcom_pcie_host_init()
-	      -> pci_pwrctrl_power_on_devices()
-	         -> tc9563_pwrctrl_power_on()
+2. Get rid of the variable and just directly pass the flags to the request_=
+nmi()
 
-But this approach will allow us to avoid running pci_pwrctrl_destroy_device=
-s()
-in qcom_pcie_host_init() if tc9563_pwrctrl_power_on() returns -EPROBE_DEFER
-(e.g. if the GPIO controller has not fully probed yet).
-If we return -EPROBE_DEFER in tc9563_pwrctrl_probe() this kernel will destr=
-oy
-even the GPIO aux device and we need to create it again during the next
-attempt.
+That would avoid the confusion. While I agree that your code now is
+correct, I can understand why GPT (and humans) would get confused...
 
-Regards,
-Lorenzo
 
->=20
-> >  	ret =3D regulator_bulk_enable(ARRAY_SIZE(tc9563->supplies),
-> >  				    tc9563->supplies);
-> >  	if (ret < 0)
-> >=20
-> > --=20
-> > 2.55.0
-> >=20
-
---lE5DYGO/JfD+FQa1
-Content-Type: application/pgp-signature; name=signature.asc
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTquNwa3Txd3rGGn7Y6cBh0uS2trAUCaprXIwAKCRA6cBh0uS2t
-rLQRAP9h8FPk+nSsMHWkRCkWQxLxy19w/oaZm98nYS2DUsfO8gEAihDrXGRAJoSr
-716TKsf6Kj3T47+gwSkA8yhu9t+pOAg=
-=zJQP
------END PGP SIGNATURE-----
-
---lE5DYGO/JfD+FQa1--
+-Doug
