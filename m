@@ -1,51 +1,67 @@
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wr1-f54.google.com (mail-wr1-f54.google.com [209.85.221.54])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8BB3A4EE862
-	for <linux-arm-msm@vger.kernel.org>; Fri,  4 Sep 2026 15:19:11 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.133.124
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 21B414DF4AD
+	for <linux-arm-msm@vger.kernel.org>; Fri,  4 Sep 2026 15:19:43 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.54
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788535153; cv=none; b=jEjjjRY5+U394OVYDEl8NuUuGY4ZVduf+6JfmkacDJfdjlEhIHENb8K5jL4vP0vCUX+matTd/kBoSnx2WxwdZV+z5BxxxSnGgphxt7cSogdyk9qnoueH/8I5sCtO26pUfXuLFmgnYUNpiNwsS31oC1cJtr8ZQSGjlu6upNCFfFk=
+	t=1788535185; cv=none; b=nCJwrp+Q8YHc4WdxtBUlWnYFsbrBgN+IoDQMkQMr1FsEHHpCMardKdn6A3o8m84Q//vg8lJ+ayJb/Sd4TCBjcp+/OXsxW+Xbf69gEgaeUkyDX1gu7g8H0JZcGnoinFGj8pbHDVD329mwnDxYS6oWw57bxoFciGMAE9HRw4pgLCc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788535153; c=relaxed/simple;
-	bh=YZazT4oZjVEcdtqEOh2rjHMVg3XbWfyLZ1BTcqpcZJ8=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=ZOrEqumPeK2Z+KjMPNaO674ppYcfku6oBy3URGt+QZG+jefvuZvbyeJ5yAPzy+x/1gyCyro2IONtmaBLprTHwp1qDM0T8Oattb4zSgzw1C04PRvKp1I4YYSz6NFjFj7leZDB61Rly52Ctz5rusBwmsVDFVC8ZM0bF9CTg3HgrWo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=c7Fxhb2u; arc=none smtp.client-ip=170.10.133.124
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
+	s=arc-20240116; t=1788535185; c=relaxed/simple;
+	bh=P6usuYnYXMY+lUKUrNREdDxz5CBWnzz3JutftfeRACM=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=YURFMrFi9wyXVykZHkzGwpXNaEVZx9NBaG0fHAYquy6Wdn4meSTNkkgCUGNffmzuGqUoKNt4nQNhhdZBVImt3tadleyaLDsizftyUvaAcpZfhslOvgVTm8Tu5DvuKUMnFWJCqgTVy61uQfLvw3awFsv9kOei784wC0oCqomL1jg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=ypB/pPGL; arc=none smtp.client-ip=209.85.221.54
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="c7Fxhb2u"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1788535150;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=B4EvanRHS6J3ohripixRgJnTJuSPOhK6F9EanOjwirY=;
-	b=c7Fxhb2ukLVQIzwC5MrXkbshdZnoUDBl1DU4BTvDyiztmVcWziU8Y0B1Y6gYNQ6sZYGUM+
-	oc1NqppfpnHMbPooUmC1esRm6+ukf5G/O6xD3VHqBJ5XGjzkYykz06dAXKHob1SivceBCP
-	pGMZt/hvQW7HaXEpPv5oHtLH+OcrvZc=
-Received: from mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
- relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-44-Qcwl6sO1PkynxBkbeiipeQ-1; Fri,
- 04 Sep 2026 11:19:03 -0400
-X-MC-Unique: Qcwl6sO1PkynxBkbeiipeQ-1
-X-Mimecast-MFC-AGG-ID: Qcwl6sO1PkynxBkbeiipeQ_1788535139
-Received: from mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com (mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.93])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS id 89EEA195FE03;
-	Fri,  4 Sep 2026 15:18:59 +0000 (UTC)
-Received: from aesteve-thinkpadp1gen8.rmtes.csb (headnet04.pony-001.prod.iad2.dc.redhat.com [10.2.32.116])
-	by mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS id 3F1F118005B2;
-	Fri,  4 Sep 2026 15:18:58 +0000 (UTC)
-From: Albert Esteve <aesteve@redhat.com>
-Date: Fri, 04 Sep 2026 17:18:48 +0200
-Subject: [PATCH v2 2/2] soc: qcom: smem: ignore multi remote host
- partitions
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="ypB/pPGL"
+Received: by mail-wr1-f54.google.com with SMTP id ffacd0b85a97d-485888b3c3dso1051819f8f.2
+        for <linux-arm-msm@vger.kernel.org>; Fri, 04 Sep 2026 08:19:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google; t=1788535182; x=1789139982; darn=vger.kernel.org;
+        h=cc:to:message-id:content-transfer-encoding:content-type
+         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=EClKw2P25D0a1RVoGnFlThEd3iOKLQoxQmhQa7uzg8Q=;
+        b=ypB/pPGL8Fc+P7mV+MJnowyoI5KfmYRJgG/C4Ge60cW4Y/jdZW/DHo2u+sZmNiBZcI
+         iVJr854bjdySrNaeCQ+8bhHuBRT/KU7fGJHn/gHeEyQj8/igXbT8AUIxBY3m3WMM9m6C
+         I2DUYZjLmsxG0fimeyWmJVjkE2FnS3Ye0JW3o6yiOoH5OZNKr7YGR8SjbXZqjoKeYxwR
+         VlISiCYPJLsUtgP2w2Ghr78KCRMxLGdrUTUPj5rr+k6LGfBEcgg0AXDuIjg6s1B6tHIx
+         4Q9VJjB/TNHN/nDGInqSRzhxuoni9RPgJCAbAs14lkNweBRE1vd8fEwP//kVL/L3ZiAN
+         7RCA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1788535182; x=1789139982;
+        h=cc:to:message-id:content-transfer-encoding:content-type
+         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to:content-type;
+        bh=EClKw2P25D0a1RVoGnFlThEd3iOKLQoxQmhQa7uzg8Q=;
+        b=dS7JbWcLn/BPiuof+Bw/xpVHA8qQEMCNCNo6oZ8KQ5M9xQUVavQ/KhAoQl+K/Lxhp8
+         FUSr7fiPXzw6PcVMjW+t9PbYKbn05NjM0ubODcJ+n2OesivEMrMF5vPHnfxzWlHMA2iM
+         F9s1WJR4dbi9vz8p+SW2xe0r4xDmsSJ/yFrKWmYiLFzMtOcBtXJTYzFEp3/LplN8CHkE
+         P8gcsN1yH85bi83VFQ64nsu5uLGoLb1mOy9EO3DZmVXvb9d1fluFQchGJGDvqtTCkh+a
+         8LA2CuGuLBDGrw8B4zyI140hXZOOMXRQYy7u7KipR1JCpf1IDbRqOO0esA7uvhdJ4WM9
+         raoQ==
+X-Gm-Message-State: AFuF++nXpcA4AcvfgV8M40iAeShCk6qMBSBRPsRGMzGqH5+YCcvRyXbx
+	ZOyNh7WvPPC+/qRbkLkICUKYPcpvgCLJg7wVAYsHMhlFL9SMqt1vXuvBLK69Y6WdX1bUHOB8FYX
+	QJtDrq4k=
+X-Gm-Gg: AYBFou3v7DOse/QA8QBWJB5UUPUf1UCadSC4cWnCiJ6jLoinTAFAAX4cWUqMXXm+xPV
+	xsoSNZx76wia3++FyyiIlgMS4wThjOQJMkhT/o4fwPS2VVLO/PzEu6hkBJIHUwDfj29R1e/J1vK
+	gBy18xFgK9DoC1sVkOpDpIoG42OJHwuEvG2VvxG1/+KqBIMGdlIjR/U1qeZ+Hzne7hXbhNPxU2Q
+	Y5HAw/FRPM1OxnYeAl/hKO4SBqb+qG/9OTzGkJLYhtoCGg+AqsbvIF7OtfXdJZcxQA/8YdCotjf
+	5Bc+8bj9iRtLKGeZcwZtNgFpe6z1/8rwfP3JMhruuu9ChCxDu5NzdgIJKkXr/IA0e1faQt+yaN1
+	In/VxlcspEzpD6xZYdeQgQz3eIpr5R4v5aFJ+Un5bmKZHddhzJsjBhfx5Kh6FspsL6DWyq3YwQ/
+	nmz+pNRQLhMh0Eoh+2LOBvteMvS0QAEEwkEGtWIS0Ly1VrqhKu+axws+U0R9BBpnOQKQN3YMjJC
+	aH13+8sKuNb50+wvtxm
+X-Received: by 2002:a05:6000:2584:b0:485:8c16:5efa with SMTP id ffacd0b85a97d-4858c16617emr4578538f8f.52.1788535182108;
+        Fri, 04 Sep 2026 08:19:42 -0700 (PDT)
+Received: from arrakeen.starnux.net ([2a01:e0a:106d:1080:8261:5fff:fe11:bdda])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-485885bf3f0sm8026663f8f.33.2026.09.04.08.19.38
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 04 Sep 2026 08:19:40 -0700 (PDT)
+From: Neil Armstrong <neil.armstrong@linaro.org>
+Date: Fri, 04 Sep 2026 17:19:37 +0200
+Subject: [PATCH v3] tty: serial: qcom_geni: don't ida_free() the console
+ port line
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -54,61 +70,98 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260904-port-smem-v2-2-bb497dd3c48b@redhat.com>
-References: <20260904-port-smem-v2-0-bb497dd3c48b@redhat.com>
-In-Reply-To: <20260904-port-smem-v2-0-bb497dd3c48b@redhat.com>
-To: Bjorn Andersson <andersson@kernel.org>, 
- Konrad Dybcio <konradybcio@kernel.org>
+Message-Id: <20260904-topic-sm8x50-upstream-tty-serial-geni-fix-ida-free-v3-1-541757ec8a95@linaro.org>
+X-B4-Tracking: v=1; b=H4sIAIjhmmoC/6WOQQ6CMBBFr0K6dkxbwBRX3sO4qGXAMUhJWxqI4
+ e62uHLt8mX+/PffzKMj9OxcvJnDSJ7smKA8FMw89NgjUJuYSS5PvOEVBDuRAf9SS81hnnxwqF8
+ Qwgq5SQ/Q40jQ0ZIeNXQOESotmsbIumtVxVLx5DDdd+n19mU/359oQjblxIN8sG7dV0WRc38Ni
+ AIEcIlCmVJovOvLQKN29mhdz/KCKP93yOxAVbaq7SrBzY9j27YPnVpDNmsBAAA=
+X-Change-ID: 20260904-topic-sm8x50-upstream-tty-serial-geni-fix-ida-free-4a199c25fd84
+To: Greg Kroah-Hartman <gregkh@linuxfoundation.org>, 
+ Jiri Slaby <jirislaby@kernel.org>, 
+ Viken Dadhaniya <quic_vdadhani@quicinc.com>
 Cc: linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org, 
- Albert Esteve <aesteve@redhat.com>, 
- Tony Truong <quic_truong@oss.qualcomm.com>
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1788535133; l=1296;
- i=aesteve@redhat.com; s=20260827; h=from:subject:message-id;
- bh=cdDVa0xgpM9uyB7LE+x2F1bNpsmjlD7ehAPULbKbtP8=;
- b=o68sOhK8wCTeNniQDA2swgYAbvu/N9nqEpA5HWuIRWAoHdLHVEpRjpQyCVHR/lzIlImAXUHAC
- 9yeErdQ+B9iDuLigCCi+vZvK2YKtPI/cIvzhFb49ALOeCc0JMcU/jS2
-X-Developer-Key: i=aesteve@redhat.com; a=ed25519;
- pk=zI2RBeZgocwYm3AkJW4CtjoJnKoDZrfBl1xe5Ed6h+U=
-X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.93
+ linux-serial@vger.kernel.org, Neil Armstrong <neil.armstrong@linaro.org>
+X-Mailer: b4 0.15.1
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2717;
+ i=neil.armstrong@linaro.org; h=from:subject:message-id;
+ bh=P6usuYnYXMY+lUKUrNREdDxz5CBWnzz3JutftfeRACM=;
+ b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBqmuGKflVLqbR9bLN3qKodFe1pGUkr4HK/19hrR+SV
+ QcCHJQqJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCaprhigAKCRB33NvayMhJ0Xl5EA
+ C9tH5rgY/NKfN1CytzbbzmoycanIKnMeI1dFNqQ/P/5WdF/CoV9V3GAsTGqWGzYFEHjh01MEo2Nxic
+ UIDyup7NXmp01DiIky8U9WQa/GQWU/WiXKgq6Gt8n1ULKUDTPGY0n8rJTYspyCXDvnjUu7gCaQcGas
+ y/Ja6Ws0ENZgPkX0xWDKiZxmYIXPzUuTZfUxD1ASM6b8lOr4QNIttg8k3Gs4yuH+l6K1kuKFNbqUwy
+ eVR8sUJjJen5BIrQtETpbxFWja+lyGEe890lrCQP56fXjYx5NTR1M3o1tnqa6QOkk4/248KyvI8iSZ
+ v0L+6wsxGpS1AKP94o36ck0FhYxfO8KW8p4eotVInyz34HqSdEyjZ0hiGOrnynOi5Hv73SWiQn4tHV
+ SRMuclfT1SLi8VXLhRMPGxowbrNhte3xj2RdnsKBKBqoD/BucqXvZLt5P/n/yUui6vzJnlfgN4nbAw
+ 4myfdDopBDwYb+SVntwOW/gVxyUzKAkr/p7a/P7UoGTAUL5g1sKu2g+V+1wCRQLaOggS9xAs5uYT19
+ LmP7xIQf40oF4xN6YRZo0nJpPIyLQSlzyD/BR5rMk/5L2mpghiGZHrLaijnL81gvG9C9hH7G1eoLCh
+ jGitOnDC9JLX+8bcIIXZVXqw5ElMzTEyn2+4Ip1C8thsEpAdAYisnUON4xiQ==
+X-Developer-Key: i=neil.armstrong@linaro.org; a=openpgp;
+ fpr=89EC3D058446217450F22848169AB7B1A4CFF8AE
 
-From: Tony Truong <quic_truong@oss.qualcomm.com>
+The console port (qcom_geni_console_port) is a static instance whose
+uport.line is hardcoded to 0 and is never allocated from port_ida.
+Only the non-console path in get_port_from_line() calls ida_alloc_range().
 
-SMEM now supports more than just 1-to-1 partitions. It is possible for
-a partition to have multiple remote host and the logic to handle that
-does not exist. For now, skip all partitions which has multiple remote
-hosts.
+Fix the qcom_geni_serial_remove() and the matching probe() error path
+so unbinding the console device doesn't hit:
 
-Signed-off-by: Tony Truong <quic_truong@oss.qualcomm.com>
-Signed-off-by: Albert Esteve <aesteve@redhat.com>
+  WARNING: ida_free called for id=0 which is not allocated
+  <snip>
+  qcom_geni_serial_remove+0x58/0x80
+
+Fixes: a53be6945f51 ("serial: qcom-geni: Remove alias dependency from qcom serial driver")
+Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
 ---
- drivers/soc/qcom/smem.c | 6 ++++++
- 1 file changed, 6 insertions(+)
+Changes in v3:
+- Also use data->console in remove() because it oly return true if it's the main system console (Konrad)
+- Link to v2: https://patch.msgid.link/20260904-topic-sm8x50-upstream-tty-serial-geni-fix-ida-free-v2-1-0e83d8df410c@linaro.org
 
-diff --git a/drivers/soc/qcom/smem.c b/drivers/soc/qcom/smem.c
-index 1456ff6df293..6c59eef6015e 100644
---- a/drivers/soc/qcom/smem.c
-+++ b/drivers/soc/qcom/smem.c
-@@ -89,6 +89,9 @@
- /* Processor/host identifier for the global partition */
- #define SMEM_GLOBAL_HOST	0xfffe
- 
-+/* Processor/host identifier for multi host partition */
-+#define SMEM_MULTI_HOST		0xfffc
-+
- /* Entry range check
-  * ptr >= start : Checks if ptr is greater than the start of access region
-  * ptr + size >= ptr: Check for integer overflow (On 32bit system where ptr
-@@ -1091,6 +1094,9 @@ qcom_smem_enumerate_partitions(struct qcom_smem *smem, u16 local_host)
- 		else
- 			continue;
- 
-+		if (remote_host == SMEM_MULTI_HOST)
-+			continue;
-+
- 		if (xa_load(&smem->partitions, remote_host)) {
- 			dev_err(smem->dev, "duplicate host %u\n", remote_host);
- 			return -EINVAL;
+Changes in v2:
+- use data->console in probe() because uart_console() return false before uart_add_one_port() (Konrad)
+- Link to v1: https://patch.msgid.link/20260904-topic-sm8x50-upstream-tty-serial-geni-fix-ida-free-v1-1-02e18c31aeba@linaro.org
+---
+ drivers/tty/serial/qcom_geni_serial.c | 7 +++++--
+ 1 file changed, 5 insertions(+), 2 deletions(-)
 
--- 
-2.55.0
+diff --git a/drivers/tty/serial/qcom_geni_serial.c b/drivers/tty/serial/qcom_geni_serial.c
+index 3633723acef8..1a36e9fad976 100644
+--- a/drivers/tty/serial/qcom_geni_serial.c
++++ b/drivers/tty/serial/qcom_geni_serial.c
+@@ -1979,7 +1979,8 @@ static int qcom_geni_serial_probe(struct platform_device *pdev)
+ 						port->wakeup_irq);
+ 		if (ret) {
+ 			device_init_wakeup(&pdev->dev, false);
+-			ida_free(&port_ida, uport->line);
++			if (!data->console)
++				ida_free(&port_ida, uport->line);
+ 			goto error;
+ 		}
+ 	}
+@@ -2015,6 +2016,7 @@ static int qcom_geni_serial_probe(struct platform_device *pdev)
+ static void qcom_geni_serial_remove(struct platform_device *pdev)
+ {
+ 	struct qcom_geni_serial_port *port = platform_get_drvdata(pdev);
++	const struct qcom_geni_device_data *data = port->dev_data;
+ 	struct uart_port *uport = &port->uport;
+ 	struct uart_driver *drv = port->private_data.drv;
+ 
+@@ -2024,7 +2026,8 @@ static void qcom_geni_serial_remove(struct platform_device *pdev)
+ 	irq_work_sync(&port->tx_kick);
+ 	dev_pm_clear_wake_irq(&pdev->dev);
+ 	device_init_wakeup(&pdev->dev, false);
+-	ida_free(&port_ida, uport->line);
++	if (!data->console)
++		ida_free(&port_ida, uport->line);
+ 	uart_remove_one_port(drv, &port->uport);
+ 
+ 	if (port->rx_dma_addr) {
+
+---
+base-commit: cee9395acd8043be0644b25c34bfa86623f2b935
+change-id: 20260904-topic-sm8x50-upstream-tty-serial-geni-fix-ida-free-4a199c25fd84
+
+Best regards,
+--  
+Neil Armstrong <neil.armstrong@linaro.org>
 
