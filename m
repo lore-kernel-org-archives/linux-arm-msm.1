@@ -1,103 +1,233 @@
-Received: from mail-pj1-f47.google.com (mail-pj1-f47.google.com [209.85.216.47])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 787D7449B06
-	for <linux-arm-msm@vger.kernel.org>; Fri,  4 Sep 2026 12:47:37 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.216.47
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AC8E449483F;
+	Fri,  4 Sep 2026 12:55:12 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788526058; cv=none; b=dt189+ww0JJavs1xwE3wcECU+jhjv2LQa4d1Iba0rVak1OgND8982pQf4DVavytG/ujC0lHqTl7Epnp+QFInV6xeenAz0Sd098aKGjkW9+/wHAVdMdVUgO9i6Bl1SjjuPlDDwiiCK/H6DwciLFzL8HriohgLEn9MMvEz0lAz9gc=
+	t=1788526512; cv=none; b=MnqW24Ck6qi8LjstAlWzIskUAOAE/rzOfCaF2OFVejzXPOMtjcYN/oHrBEeBVr97DCeAAoc2T4XZ3vaqcmIC9xR/O0QMN2fKUbbWqpvqUbJG69+y7wP1EwGmYa39R2AyyyfUszD4GNMZLSt9xOd69y2zBAb2BuOhypc1sZ24gBQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788526058; c=relaxed/simple;
-	bh=2dgeFU4dMXanVlsum2W2x7rzNpqIqmTbXZG1r/qGXIA=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=D7R29T9hDrZXw/8IiuBtjo8M+SAgnJOEuNi3sAUVLm0zsydB+qezSTH9ulZ83Gs38KT+EZcBef1geHYABW4kTImxKkJcD7RpooGWO5LIleNAkWYCPNBbMn3J55Np8avA9Q5p8plCWHBNEwLY3pjT9OPNTMls20O1oYBTVpY+pt0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=sd6w1H/V; arc=none smtp.client-ip=209.85.216.47
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	s=arc-20240116; t=1788526512; c=relaxed/simple;
+	bh=KHkDBsPVsQ5j7R1knzYomfkJJV2X/Gy6OlFk5gywL6U=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
+	 In-Reply-To:To:Cc; b=giZjHedRwxpHe6rsyxWTv53O78/+s/Ea/ighDy9dvYo122Vkq5mi+Ju588anpYTC1Dilf3aSDS8D5IAVxH/xwP2KSpv9EQ3O2PEQ4S+I0f+7ErXqR5lMYqk67hntbMPzVTXQsffAUPGu1rG33LiYE8iMWWkzRO9lki7xt4NNy/s=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=F0TRprKB; arc=none smtp.client-ip=10.30.226.201
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="sd6w1H/V"
-Received: by mail-pj1-f47.google.com with SMTP id 98e67ed59e1d1-38ea87caafeso737235a91.3
-        for <linux-arm-msm@vger.kernel.org>; Fri, 04 Sep 2026 05:47:37 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1788526057; x=1789130857; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=x5ZNcdofv1xmkEiwkoEej12YoH5SbNFwYgfq+H2c2UI=;
-        b=sd6w1H/VKf5LBrTm5ZCvgYA2nQVnxhEmxDiPWzMiQY+4pakC2A3iq9DXypPw+UWp86
-         Wy3uOKICPUgHzu/HWTAKcGoAkS65R6KcRu+Ernhul0zjx3prMQhAavSvMpCCN9snYRrA
-         6aSrlYykNLQqGrQXcgXPdy31Ygx1GJPdwRN7f4ItuiP7JzTmsyidAhXO/WpwtRuWlTw0
-         pw6NkejJY/2LX2UhU6C7GjP5plv0mIYKtSGxBG2Y9cF5WjMhBB3asxKoQn+Er99BJxZi
-         naaGtmYylZ1YMg5I+7jxk0jwZh+xUBI7H3o/17KfUgg6AfWGkwVdH/OI72QkMB9OjlpM
-         opcQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788526057; x=1789130857;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=x5ZNcdofv1xmkEiwkoEej12YoH5SbNFwYgfq+H2c2UI=;
-        b=hsoGKRof5ExUMSP5i8WjQpAs+JFNsuYz0MfE+qJeleJJzp3kuYUbOL6HmLab9ODvlM
-         WZQ7CvK3xfCPLs0nv0r3xmlAucN3orBNXT3+VQZdlJm3e40+bvFv4bbWGTFOymKVsSaW
-         /nKPeGtwnsmV2wE+6HSYnGW8T2IGpk9CLJMNBw4fhdSXilxPv48nX+412jgmeCrX8LfU
-         f9uhJ4jHFGVt79Mc7ImR+nLlEcfx7YYaClMqgDRTZFaarhCsTWtYAwn5jIzhfuQknpch
-         S6OVa5NlP0vmQy4c0/9Jrp/p/e67ohERWdjJWZ/XEDubL4oK4Mrn2LgLNueShZlNPG7m
-         bCbg==
-X-Forwarded-Encrypted: i=1; AKwUvBwOMgzFxw7Po0xd0Mn+EMmEga94N5vRKb2eZz6NCNQmJ/xb0Fpj8wDbldqGSThBYjJtmOmVEaQNZ0izmsRU@vger.kernel.org
-X-Gm-Message-State: AFuF++nnzC0NpLnLfrw7tKerWIZydYNrDBc5sT3Uhz2H5C8o+4DXuBzo
-	y41L9kuYdAOF6L5qF+S1Zas3FtJI4mgcHyd6JufAsKiMOem54GLaeZe7
-X-Gm-Gg: AYBFou292YcawBcYqG7sEMaswGV78zv0uygrVbagv2bWbdbhVDSBBIkGhZLaCZU4rtz
-	TM6OuwCcNhytT4zRUwBbs7PluYZMeN7lJj1L74YAY7/GW0wa5teS2TlgPGm3Yw6CsZGI0YTRBKU
-	Jqht42kWJ4Y5Rfeg3xLiWcWiir8gVRX8YzpShm+2q8x5WCyKGMEBuNxceDVUXHQqa1wEC96LCA6
-	OF2g+dE0L00F5njRt6VTYlNz9bUd1EZEIgjyC8DX5VFoCS6QnVL+Ts7JhWS/x59vOKuO4C6qGOB
-	SgliCZxKA/U8twTFofZik93QFyaUv9fUa5pNqYUZ7m1mxDbAieOW8ZKDez5uP4QpU4oDj5Q8rML
-	rV8KUqGtPueKjEq9so4i8yuXVImQJ1zmxx6aYHyoyEkLstZB6y7fDE2ypK+wmeXCteJNdG2qgvJ
-	ThFiu9UhTG/DPS4tFZ2RQQEnEG4nN8gvUdQmT5D8wHrLhDbLLuSTXtMULQ9Qh31+nw+UARPY9Jo
-	2OmVag1Lyol9bQ=
-X-Received: by 2002:a17:90a:d003:b0:398:ba9e:75ff with SMTP id 98e67ed59e1d1-39b26273a40mr9681789a91.21.1788526056610;
-        Fri, 04 Sep 2026 05:47:36 -0700 (PDT)
-Received: from volcano9f6e-hostos.amd.com ([165.204.217.251])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3342af0bc08sm4553800eec.17.2026.09.04.05.47.34
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 04 Sep 2026 05:47:36 -0700 (PDT)
-From: Hemanth Selam <hemanth.selam@gmail.com>
-To: Manivannan Sadhasivam <mani@kernel.org>,
-	Jeff Hugo <jeff.hugo@oss.qualcomm.com>
-Cc: linux-kernel@vger.kernel.org,
-	mhi@lists.linux.dev,
-	linux-arm-msm@vger.kernel.org
-Subject: [PATCH] mhi: fix typo "intented" in comment
-Date: Fri,  4 Sep 2026 18:17:30 +0530
-Message-ID: <20260904124731.9011-1-hemanth.selam@gmail.com>
-X-Mailer: git-send-email 2.48.1
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="F0TRprKB"
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 56A03C2BCF7;
+	Fri,  4 Sep 2026 12:55:12 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1788526512;
+	bh=KHkDBsPVsQ5j7R1knzYomfkJJV2X/Gy6OlFk5gywL6U=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
+	b=F0TRprKB1Ec+iZtzIgZY7M4qF9+BGAoCCeSdhIxE2h3ocCrU1I9+8zrGiSOl+FfNl
+	 oEKIJ2sAmKWimBHUz7nBI0fPGEW7ZSXdx+rDl6asKT6Fz3JFbOht1/TsH4iucNKfBO
+	 XccLU4B+9Y/vU9oWYBI5XrSZvK92GWbW9WACG1OCWpLlfJIDTkePknldEEN75Xrqq1
+	 S41snkUS6eWgfmoTey066qE8IZoo6aCkZHPy6ocRvvn8/lIYOrn89mfidjK7LFRBD/
+	 RDXdz3TrEHOkjmdMcQ+3rQwCQIwfIhOTyFE++V0+S+3zEBuzHwKIrBo5qCtdyPSCEB
+	 nO+Ta1WONAuHQ==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2AA8AC61DD6;
+	Fri,  4 Sep 2026 12:55:12 +0000 (UTC)
+From: Muzaffer Kadir via B4 Relay <devnull+muzafferkadir.mainlining.org@kernel.org>
+Date: Fri, 04 Sep 2026 15:55:08 +0300
+Subject: [PATCH v4 1/2] dt-bindings: pinctrl: qcom: Add MSM8952 pinctrl
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260904-msm8952-pinctrl-v4-1-671475ed1397@mainlining.org>
+References: <20260904-msm8952-pinctrl-v4-0-671475ed1397@mainlining.org>
+In-Reply-To: <20260904-msm8952-pinctrl-v4-0-671475ed1397@mainlining.org>
+To: Bartosz Golaszewski <brgl@kernel.org>, 
+ Bjorn Andersson <andersson@kernel.org>, Linus Walleij <linusw@kernel.org>, 
+ Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>
+Cc: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, 
+ linux-arm-msm@vger.kernel.org, linux-gpio@vger.kernel.org, 
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
+ Muzaffer Kadir <muzafferkadir@mainlining.org>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1788526510; l=6036;
+ i=muzafferkadir@mainlining.org; s=20260816; h=from:subject:message-id;
+ bh=PTy1IAb7nzaSy4xC8ME8hdyOaAedYm1UpImwgyv4O/A=;
+ b=tGswtm6ZnuaCeedExOYN/r8oViahba9Q9n/evEnqq90ull80EzHuWXjyAlPuRil2NndKuOj2s
+ /aNG2OaiemsBCf4WnTNFe75RKMvUzC86nrDXG0bXiruvB/rypAaRYAo
+X-Developer-Key: i=muzafferkadir@mainlining.org; a=ed25519;
+ pk=4zkv4suQ3cYcO4Z7CrV8JSSjEGLBGepUtvQCFjgnYIU=
+X-Endpoint-Received: by B4 Relay for muzafferkadir@mainlining.org/20260816
+ with auth_id=954
+X-Original-From: Muzaffer Kadir <muzafferkadir@mainlining.org>
+Reply-To: muzafferkadir@mainlining.org
 
-Correct "intented" to "intended", reported by scripts/checkpatch.pl using
-the misspelling list in scripts/spelling.txt.  Only touches comments, no
-code changes.
+From: Muzaffer Kadir <muzafferkadir@mainlining.org>
 
-Assisted-by: Cursor:claude-opus-5
-Signed-off-by: Hemanth Selam <hemanth.selam@gmail.com>
+Add device tree bindings for the TLMM pin controller
+found on the Qualcomm MSM8952 platform.
+
+Signed-off-by: Muzaffer Kadir <muzafferkadir@mainlining.org>
 ---
- include/linux/mhi.h | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../bindings/pinctrl/qcom,msm8952-pinctrl.yaml     | 146 +++++++++++++++++++++
+ 1 file changed, 146 insertions(+)
 
-diff --git a/include/linux/mhi.h b/include/linux/mhi.h
-index 8616bacd8675..65e8a397cc50 100644
---- a/include/linux/mhi.h
-+++ b/include/linux/mhi.h
-@@ -687,7 +687,7 @@ int mhi_pm_resume(struct mhi_controller *mhi_cntrl);
-  * Resume the device irrespective of its MHI state. As per the MHI spec, devices
-  * has to be in M3 state during resume. But some devices seem to be in a
-  * different MHI state other than M3 but they continue working fine if allowed.
-- * This API is intented to be used for such devices.
-+ * This API is intended to be used for such devices.
-  *
-  * Return: 0 if the resume succeeds, a negative error code otherwise
-  */
+diff --git a/Documentation/devicetree/bindings/pinctrl/qcom,msm8952-pinctrl.yaml b/Documentation/devicetree/bindings/pinctrl/qcom,msm8952-pinctrl.yaml
+new file mode 100644
+index 000000000000..d367bb078aff
+--- /dev/null
++++ b/Documentation/devicetree/bindings/pinctrl/qcom,msm8952-pinctrl.yaml
+@@ -0,0 +1,146 @@
++# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
++%YAML 1.2
++---
++$id: http://devicetree.org/schemas/pinctrl/qcom,msm8952-pinctrl.yaml#
++$schema: http://devicetree.org/meta-schemas/core.yaml#
++
++title: Qualcomm MSM8952 TLMM pin controller
++
++maintainers:
++  - Muzaffer Kadir <muzafferkadir@mainlining.org>
++
++description:
++  Top Level Mode Multiplexer pin controller in Qualcomm MSM8952 SoC.
++
++properties:
++  compatible:
++    const: qcom,msm8952-pinctrl
++
++  reg:
++    maxItems: 1
++
++  interrupts:
++    maxItems: 1
++
++  gpio-reserved-ranges:
++    minItems: 1
++    maxItems: 66
++
++  gpio-line-names:
++    maxItems: 134
++
++patternProperties:
++  "-state$":
++    oneOf:
++      - $ref: "#/$defs/qcom-msm8952-tlmm-state"
++      - patternProperties:
++          "-pins$":
++            $ref: "#/$defs/qcom-msm8952-tlmm-state"
++        additionalProperties: false
++
++$defs:
++  qcom-msm8952-tlmm-state:
++    type: object
++    description:
++      Pinctrl node's client devices use subnodes for desired pin configuration.
++      Client device subnodes use below standard properties.
++    $ref: qcom,tlmm-common.yaml#/$defs/qcom-tlmm-state
++    unevaluatedProperties: false
++
++    properties:
++      pins:
++        description:
++          List of gpio pins affected by the properties specified in this
++          subnode.
++        items:
++          oneOf:
++            - pattern: "^gpio([0-9]|[1-9][0-9]|1[0-2][0-9]|13[0-3])$"
++            - enum: [ qdsd_clk, qdsd_cmd, qdsd_data0, qdsd_data1, qdsd_data2,
++                      qdsd_data3, sdc1_clk, sdc1_cmd, sdc1_data, sdc1_rclk,
++                      sdc2_clk, sdc2_cmd, sdc2_data ]
++        minItems: 1
++        maxItems: 36
++
++      function:
++        description:
++          Specify the alternative function to be configured for the specified
++          pins.
++
++        enum: [ gpio, blsp_uart1, blsp_spi1, adsp_ext, blsp_i2c1, prng_rosc, qdss_cti_trig_out_b0,
++                qdss_cti_trig_out_a1, blsp_spi2, blsp_uart2, ldo_update, qdss_tracedata_b,
++                pbs1, pwr_modem_enabled_b, blsp_i2c3, gcc_gp2_clk_b, atest_combodac_to_gpio_native,
++                ldo_en, blsp_i2c2, gcc_gp1_clk_b, atest_gpsadc_dtest0_native, blsp_spi3,
++                blsp_uart3, sec_mi2s, pbs0, gcc_gp3_clk_b, blsp_spi4, blsp_uart4, pbs2,
++                pwr_nav_enabled_b, pwr_crypto_enabled_b, blsp_i2c4, blsp_spi5, blsp_uart5,
++                qdss_traceclk_a, atest_bbrx1, qdss_tracectl_b, qdss_cti_trig_in_b0, blsp_i2c6,
++                qdss_traceclk_b, atest_wlan0, m_voc, qdss_cti_trig_in_a0, atest_bbrx0, blsp_i2c5,
++                qdss_tracectl_a, atest_gpsadc_dtest1_native, qdss_tracedata_a, blsp_spi6,
++                blsp_uart6, atest_wlan1, mdp_vsync, pri_mi2s_mclk_a, sec_mi2s_mclk_a,
++                cam_mclk, cci_i2c, pwr_modem_enabled_a, cci_timer0, cci_timer1, pwr_nav_enabled_a,
++                pwr_crypto_enabled_a, cci_async, sd_write, qdss_cti_trig_out_a0, gcc_gp1_clk_a,
++                gcc_gp2_clk_a, gcc_gp3_clk_a, blsp6_spi, qdss_cti_trig_in_b1, uim_batt,
++                qdss_cti_trig_out_b1, uim1_data, uim1_clk, uim1_reset, uim1_present, uim2_data,
++                uim2_clk, uim2_reset, uim2_present, uim3_data, usb_fs, uim3_clk, uim3_reset,
++                uim3_present, atest_char3, dbg_out, bimc_dte0, sec_mi2s_mclk_b, pri_mi2s,
++                atest_char1, ebi_cdc, atest_char0, cdc_pdm0, pri_mi2s_mclk_b, lpass_slimbus,
++                lpass_slimbus0, lpass_slimbus1, wcss_bt, atest_char2, ebi_ch0, wcss_wlan2,
++                wcss_wlan1, wcss_wlan0, wcss_wlan, wcss_fm, ext_lpass, gcc_tlmm, dmic0_clk,
++                dmic0_data, qdss_cti_trig_in_a1, blsp_spi7, blsp_uart7, pri_mi2s_ws, wsa_io,
++                blsp_i2c7, blsp_spi8, blsp_uart8, blsp_i2c8, gcc_plltest, nav_pps_in_a,
++                pa_indicator, nav_pps_in_b, nav_pps, modem_tsync, nav_tsync, ssbi_wtr1,
++                gsm1_tx, gsm0_tx, atest_char, atest_tsens, bimc_dte1,
++                gp_mn, gp_pdm_0a, gp_pdm_0b, gp_pdm_1a, gp_pdm_1b,
++                gp_pdm_2a, gp_pdm_2b, gp0_clk, gp1_clk]
++
++    required:
++      - pins
++
++allOf:
++  - $ref: /schemas/pinctrl/qcom,tlmm-common.yaml#
++
++required:
++  - compatible
++  - reg
++
++unevaluatedProperties: false
++
++examples:
++  - |
++    #include <dt-bindings/interrupt-controller/arm-gic.h>
++
++    msmgpio: pinctrl@1000000 {
++        compatible = "qcom,msm8952-pinctrl";
++        reg = <0x01000000 0x300000>;
++        interrupts = <GIC_SPI 208 IRQ_TYPE_LEVEL_HIGH>;
++        gpio-controller;
++        gpio-ranges = <&msmgpio 0 0 134>;
++        #gpio-cells = <2>;
++        interrupt-controller;
++        #interrupt-cells = <2>;
++
++        blsp1-uart2-sleep-state {
++            pins = "gpio4", "gpio5";
++            function = "gpio";
++
++            drive-strength = <2>;
++            bias-pull-down;
++        };
++
++        spi1-default-state {
++            spi-pins {
++                pins = "gpio0", "gpio1", "gpio3";
++                function = "blsp_spi1";
++
++                drive-strength = <12>;
++                bias-disable;
++            };
++
++            cs-pins {
++                pins = "gpio2";
++                function = "blsp_spi1";
++
++                drive-strength = <2>;
++                bias-disable;
++            };
++        };
++    };
+
 -- 
-2.48.1
+2.54.0
+
 
