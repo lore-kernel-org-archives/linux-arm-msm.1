@@ -1,102 +1,144 @@
-Received: from relay02.th.seeweb.it (relay02.th.seeweb.it [5.144.164.163])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 71A2C3A0E8D;
-	Fri,  4 Sep 2026 14:52:22 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=5.144.164.163
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E26C0393DF1;
+	Fri,  4 Sep 2026 14:54:39 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788533545; cv=none; b=k/X2lKOTji0VvQqwl21xGWfTrSPzhc0v19mCFKWfYzjItBU7Qd7lNavD3paA26MmdvUdWssbyTBKsVC5vpzrIAaNo46RdsHvM2I+lV+F9i0K6L8tEx68DwUsg+ra+FC92XTSMnSjX5Py83B0JONbT4dvBdmyN0rd0xMXcB368i4=
+	t=1788533682; cv=none; b=Hty5Btyg9oFM2NsaiH4+NblTYKW4/T0BAHE9wmxBRlJpQr/RYoPVbvbd79yZtNzmhnNbEYHG3+InVwObHDB7k+kRA6vwudZinrWYfytTsUEyOvzebqTZL0mqfmB1yC90b9/i6WwlA3xj5LiZkQteX9UD49lrezdFF9teVN9E+uY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788533545; c=relaxed/simple;
-	bh=sJ0E2Ers6nk/UT6ZPempThR91Gkq2iNGULZdT4GDs/A=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=rg94PcTNk9jMMTNkI+DXj6Z+v0wtUmH9obaKgxOlLhuH6jrrjx7vrOW3cPZgFXwniB5P0C86sKraRk8IJFgFewiNfaDelODqPF3NqfZhSlaW2AJfQgSFDkYBCGzcTfu4EWftpjn/rpze89jCbz6o6tJHH7EVNsuQqYzVuW7bl7Y=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=somainline.org; spf=pass smtp.mailfrom=somainline.org; arc=none smtp.client-ip=5.144.164.163
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=somainline.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=somainline.org
-Received: from SoMainline.org (94-211-6-86.cable.dynamic.v4.ziggo.nl [94.211.6.86])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange ECDHE (prime256v1) server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by m-r1.th.seeweb.it (Postfix) with ESMTPSA id 24E12201F5;
-	Fri,  4 Sep 2026 16:33:56 +0200 (CEST)
-Date: Fri, 4 Sep 2026 16:33:54 +0200
-From: Marijn Suijten <marijn.suijten@somainline.org>
-To: Linus Walleij <linusw@kernel.org>
-Cc: Neil Armstrong <neil.armstrong@linaro.org>, 
-	Sam Ravnborg <sam@ravnborg.org>, David Airlie <airlied@gmail.com>, 
-	Rob Herring <robh+dt@kernel.org>, Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>, 
-	Conor Dooley <conor+dt@kernel.org>, Andy Gross <agross@kernel.org>, 
-	Bjorn Andersson <andersson@kernel.org>, Jessica Zhang <jesszhan0024@gmail.com>, 
-	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, 
-	Thomas Zimmermann <tzimmermann@suse.de>, Simona Vetter <simona@ffwll.ch>, 
-	Casey Connolly <casey.connolly@linaro.org>, Rob Herring <robh@kernel.org>, 
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, Simona Vetter <simona.vetter@ffwll.ch>, 
-	~postmarketos/upstreaming@lists.sr.ht, 
-	AngeloGioacchino Del Regno <angelogioacchino.delregno@somainline.org>, Martin Botka <martin.botka@somainline.org>, 
-	Jami Kettunen <jami.kettunen@somainline.org>, dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, 
-	devicetree@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
-	Abhinav Kumar <quic_abhinavk@quicinc.com>, Kuogee Hsieh <quic_khsieh@quicinc.com>, 
-	Jessica Zhang <quic_jesszhan@quicinc.com>, 
-	AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>, Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, 
-	Konrad Dybcio <konradybcio@kernel.org>, Dmitry Baryshkov <lumag@kernel.org>
-Subject: Re: [PATCH v2 00/11] drm/panel: Add 5 DDIC panel drivers for 14 Sony
- phones
-Message-ID: <aprT7A2w0TWrfcdn@SoMainline.org>
-References: <20251222-drm-panels-sony-v2-0-82a87465d163@somainline.org>
- <CAD++jL=A5QWEfNXnmpKFMju8X1BQ8CsxMuqhia7mfMFbUaFfHg@mail.gmail.com>
+	s=arc-20240116; t=1788533682; c=relaxed/simple;
+	bh=Q+JDnlRSCW0BDvMmKpcvy7dgiXBS7TsdLb3fKiuLZow=;
+	h=Date:Message-ID:From:To:Cc:Subject:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=qGA84cQ7FaOQe2Ndky2A2JIpACA+fUcemzIn3hVAPJZ9gZeIIV0JUpFgW1cPHOoXQ2R1B7Qshq869VA7U33nptUSjZAz28G6CO3bGBFLwYx341SzHNYJCEmp/FxgrZb1D0tCaSmP40rLvQjvwx3PrGRLXUJJgO8e0MLLEh1sSgk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=U2s7Ycjf; arc=none smtp.client-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="U2s7Ycjf"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 264BC1F00A3D;
+	Fri,  4 Sep 2026 14:54:39 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1788533679;
+	bh=jWj3uM89dGfcaIeOwT5pkyubX8JmIb1Dz9DYUSqygQo=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References;
+	b=U2s7Ycjf+yMmOw6OYlIb2odTik+RSEfcf5loRPcFZ6Av1OeuuAar2RcnDm809qkyL
+	 ItL9iYMNOp+ZDDt0EwHcVYhO2VwowaACExuztAl7cIP0r46/FFIim3IfZMq5vkdhp7
+	 Fu3q7zclqvYBbk1KsQ99nWei31ydMjgl0EgjXxIXec2PWrDgqDsGdlZXgpIERR9bud
+	 HtrcnSezcf8GRO0cFCeEsmcy5l3zW0W9qC2qBmOpT6Cs6R3hcSnUiPSfNjuL2ihJz1
+	 KjMpWYCHDDa2/9y9DjvlOb4ENEcnWygZ2u5cZRx9xtMITIo9UV4XPYN2TWY0fz7H9n
+	 7oFZnH81XQ8LA==
+Received: from sofa.misterjones.org ([185.219.108.64] helo=lobster-girl.misterjones.org)
+	by disco-boy.misterjones.org with esmtpsa  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+	(Exim 4.98.2)
+	(envelope-from <maz@kernel.org>)
+	id 1x2VJN-00000004uLv-137C;
+	Fri, 04 Sep 2026 14:54:37 +0000
+Date: Fri, 04 Sep 2026 15:57:11 +0100
+Message-ID: <87se3p3vzs.wl-maz@kernel.org>
+From: Marc Zyngier <maz@kernel.org>
+To: Doug Anderson <dianders@chromium.org>
+Cc: Thomas Gleixner <tglx@kernel.org>,
+	Mayank Rungta <mrungta@google.com>,
+	Wim Van Sebroeck <wim@linux-watchdog.org>,
+	Guenter Roeck <linux@roeck-us.net>,
+	Radu Rendec <radu@rendec.net>,
+	linux-watchdog@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org,
+	"Kirill A. Shutemov" <kas@kernel.org>
+Subject: Re: [PATCH v3 1/5] genirq: Synchronize in-flight handlers during NMI teardown
+In-Reply-To: <CAD=FV=ULeHqEZE-a9vV9F6vVMLVBPDTeXTgnmU_Bqui8sc1ZZA@mail.gmail.com>
+References: <20260902-qcom-wdt-nmi-series-v3-0-f3999362a9ea@google.com>
+	<20260902-qcom-wdt-nmi-series-v3-1-f3999362a9ea@google.com>
+	<87fqzp8jex.ffs@fw13>
+	<87wlt13zj1.wl-maz@kernel.org>
+	<CAD=FV=ULeHqEZE-a9vV9F6vVMLVBPDTeXTgnmU_Bqui8sc1ZZA@mail.gmail.com>
+User-Agent: Wanderlust/2.15.9 (Almost Unreal) SEMI-EPG/1.14.7 (Harue)
+ FLIM-LB/1.14.9 (=?UTF-8?B?R29qxY0=?=) APEL-LB/10.8 EasyPG/1.0.0 Emacs/30.1
+ (aarch64-unknown-linux-gnu) MULE/6.0 (HANACHIRUSATO)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <CAD++jL=A5QWEfNXnmpKFMju8X1BQ8CsxMuqhia7mfMFbUaFfHg@mail.gmail.com>
+MIME-Version: 1.0 (generated by SEMI-EPG 1.14.7 - "Harue")
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+X-SA-Exim-Connect-IP: 185.219.108.64
+X-SA-Exim-Rcpt-To: dianders@chromium.org, tglx@kernel.org, mrungta@google.com, wim@linux-watchdog.org, linux@roeck-us.net, radu@rendec.net, linux-watchdog@vger.kernel.org, linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org, kas@kernel.org
+X-SA-Exim-Mail-From: maz@kernel.org
+X-SA-Exim-Scanned: No (on disco-boy.misterjones.org); SAEximRunCond expanded to false
 
-Hi Linus,
+Hey Doug,
 
-On 2026-09-03 00:22:41, Linus Walleij wrote:
-> Hi Marijn,
-> 
-> On Mon, Dec 22, 2025 at 12:32 AM Marijn Suijten
-> <marijn.suijten@somainline.org> wrote:
-> 
-> > This is the second version of a largely reshaped series that brings 5
-> > new DDIC panel drivers (4 Samsung, 1 LGD) that are compatible with 14
-> > Sony phones:
-> 
-> What's up with this series?
+On Fri, 04 Sep 2026 15:34:12 +0100,
+Doug Anderson <dianders@chromium.org> wrote:
+>=20
+> Hi,
+>=20
+> On Fri, Sep 4, 2026 at 6:38=E2=80=AFAM Marc Zyngier <maz@kernel.org> wrot=
+e:
+> >
+> > On Fri, 04 Sep 2026 10:17:42 +0100,
+> > Thomas Gleixner <tglx@kernel.org> wrote:
+> > >
+> > > NMIs are strictly per CPU interrupts. So how is this supposed to work
+> > > correctly when looking at irqchip_state(ACTIVE) ?
+> > >
+> > > Marc?
+> >
+> > I have no idea what this is trying to achieve.
+> >
+> > This can only work for a global interrupt, not for a CPU-private
+> > interrupt, since in general you can't observe the state of the
+> > interrupt on another CPU.
+> >
+> > My guess is that the OP is trying to trigger an NMI using a global
+> > interrupt, which we never intended to be supported. That's not to say
+> > that it cannot be supported, but this patch seems to be breaking the
+> > core use case...
+>=20
+> The overall goal is to take the watchdog bark interrupt (which is a
+> GIC Shared Peripheral Interrupt) and promote it to NMI. An example of
+> that interrupt in the device tree for one Qualcomm board:
+>=20
+> interrupts =3D <GIC_SPI 0 IRQ_TYPE_EDGE_RISING>;
+>=20
+> The patches in this series seem to accomplish that. With the current
+> arm64 pseudo-NMI implemnttion, requesting as NMI just bumps up the
+> priority of an interrupt to "NMI" level and that works fine on SPIs as
+> well. On arm64/GIC interrupts are routed to a single CPU anyway, so
+> requesting it with `IRQF_PERCPU | IRQF_NOBALANCING` didn't seem
+> absurd.
 
-This is repeatedly blocked on the request to factor out a generic Samsung panel
-library.  While commands look very similar across drivers, the same commands
-are given (sometimes) different names [1] and without spec I simply don't feel
-comfortable writing such a library as that'd sound like claiming I definitively
-know exactly what each of those commands mean / are named.  I don't.
+Not absurd, but the implementation as suggested has the potential to
+break per-CPU NMIs if you check for the active state on the wrong CPU.
 
-[1]: https://lore.kernel.org/linux-arm-msm/aU6XXi2HmgjZY8CY@SoMainline.org/
+Also, checking for that state doesn't mean the kernel is free of
+reference on this interrupt, as you look at the HW state, not the
+kernel's.
 
-And I'd argue that DRM/MSM has seen a lot of breakage especially around the
-DSC and dual-DSI paths that my panels/devices rely on [2], turning a simple
-rebase-and-test in a multi-evening debug session.
+> The biggest problem we had was properly cleaning up the NMI at module
+> "unload" time. To make that work, we needed a way to synchronize the
+> NMIs to ensure they were quiescent before the module was unloaded.
+> That's what this patch is attempting, and is mostly attempting to
+> respond to Sashiko feedback on earlier patches.
+>
+> I don't think Mayank is tied to any particular implementation and the
+> overall goal here is to allow the watchdog bark interrupt to run at an
+> elevated level so it can produce good backtraces even if all the CPUs
+> in the system are locked up and the buddy lockup detector doesn't
+> fire. Is this something you think should be doable? If so, what's the
+> best way for Mayank to go about doing it?
 
-[2]: https://lore.kernel.org/linux-arm-msm/?q=f%3Amarijn+fixes+dsc
+The only thing I can think of right now is some equivalent to
+IRQD_IRQ_INPROGRESS done in a lockless manner. It doesn't have to be
+atomic if you can guarantee that it is checked on the target CPU only,
+after having disabled the interrupt.
 
-> I am officially a fan of these drivers and I liked the work done so far
-> a lot, is there something in particular stalling these from rebasing
-> and merging?
+But this is rather ugly, and I'm pretty sure Thomas will haete this
+just as much.
 
-And there have been many small comments left and right - including my own
-observations and self-review - that all need to get addressed.  Not a lot of
-work, but they add up and it's easy enough to miss something which will make a
-reviewer "unhappy" ;)
+	M.
 
-Coincidentally I submitted 10 of the 14 Sony devices to postmarketOS just last
-week, specifically as an extra motivator to show the world that we can truly
-run all these devices with completely functional panels straight from mainline.
-I'll definitely be submitting a (rebased) v3 to drive that, but it might take a
-little more time.
-
-- Marijn
+--=20
+Jazz isn't dead. It just smells funny.
