@@ -1,103 +1,179 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 419083793DF;
-	Fri,  4 Sep 2026 08:05:09 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BC67E3E0C59
+	for <linux-arm-msm@vger.kernel.org>; Fri,  4 Sep 2026 08:16:39 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788509111; cv=none; b=eEsVCieAChe+rEFBaVQacg3H1cvnG77QLuJ6YXspreM+bg2nInX5MWZWQ/5Un8qGaWkSOZHASDgNXta1GMAhZdnyGK5nN2K+8DnoXX0UCScvwwXYaSdxKZVRusEBvaZqyg6ev4jz4qMB0cP5tFdDB/WQCnnBM48674zC8QAv9fQ=
+	t=1788509801; cv=none; b=i8Rs/UWdVjSWfZQksQcJV7UQrLuerTNNpxTYs6Wo3gOVXmWGbcKpk6492KLqf5Kbzr5oqm2s90RzNhD/0zrO2UpnvEy4COMdj6n7tXmOcTp2B5WZZGHeUryEr6F0ifVuPjoGqR3jkeIl/1g9x6x05fDzxNNbc2pdibr+MXK0crA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788509111; c=relaxed/simple;
-	bh=1Kc5Qzb9ZE6Unv1qjDSqEpoERMdsTLHhrTZXiAxSiwE=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=B3+AhlNNfHl+5+vZd53we4YDshUGRMZ58wV9KHiOPjSJlEvcLDgkUir+tIZMHD6AcqFcdHG5ysqcsq5Jbya7KLDU0CsW2jQMF3Usrf57qFq9ahT2VzsxHLu4KncncghqLVG86oqK1mgXxwJ3jgSJQlvx6Lahw/BvYiMtDwyac6g=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=L+wJVPa0; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1788509801; c=relaxed/simple;
+	bh=Vj8cNY9hLGLIYW344ii8bg9ebs+OjeRiEG4ftZ+zaho=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=K0Zr4MYdM4lfHFE6Rf+uEFIkLBXJqCgR17I436AZE3r+Qer+ZQl5NWexVhdAbGfBFYZK2iwIcqLP+9VE4GVNi2KRvtIUnxaGszWve8O7w+euYH2eqEhcOxFlnHCH5RgEK34IhMW3H6RSKD0ZYyZnQHD9whI/46AYuolF1AOJuLk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=d9FVNFE/; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=SXCgvs9b; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="L+wJVPa0"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B88C81F00A3D;
-	Fri,  4 Sep 2026 08:05:09 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1788509109;
-	bh=TqNLCesX2SNrm7Jswp+E1v9760B2VFDRX1NjrjFhDbA=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=L+wJVPa01ltnhm6yS8sGMmIdlggoMUkPoGV2isQtt9tvcl8J6ZiNou1NCbED3W601
-	 /SNBM0RgYXMNQ0BldNLlX1oZb51HBrlFbSyDsQ67bB2xnFysO8saIZ3cGyuVEPPj6X
-	 Jgg/704ElwA675dE66f5Gl7Jhglkk5VA72jhZXjLjsHlzWvzXOfNUTmGlSxX0vGsGa
-	 C/QqIQDWhpp3FzHk7r++EU4BYM4rXIyFL4Kx1DVh4GmBGFuIa1up6fkZs3Yw+S/b4o
-	 6LlG7ST1AnUFhD1YTgZMltJY6g82y+5yqxj22KKe97tTes2MiUwRWEviVk8QI+96ib
-	 Uu39LctKoYFtg==
-Received: from johan by xi.lan with local (Exim 4.99.4)
-	(envelope-from <johan@kernel.org>)
-	id 1x2Ov5-00000006jvW-0Kia;
-	Fri, 04 Sep 2026 10:05:07 +0200
-Date: Fri, 4 Sep 2026 10:05:07 +0200
-From: Johan Hovold <johan@kernel.org>
-To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-Cc: Manivannan Sadhasivam <mani@kernel.org>,
-	Konrad Dybcio <konradybcio@kernel.org>,
-	Vinod Koul <vkoul@kernel.org>,
-	Neil Armstrong <neil.armstrong@linaro.org>,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Bjorn Andersson <andersson@kernel.org>,
-	linux-kernel@vger.kernel.org, linux-phy@lists.infradead.org,
-	linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
-	usb4-upstream@oss.qualcomm.com,
-	Raghavendra Thoorpu <rthoorpu@qti.qualcomm.com>,
-	Mika Westerberg <westeri@kernel.org>, Sven Peter <sven@kernel.org>,
-	Abel Vesa <abel.vesa@oss.qualcomm.com>,
-	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-Subject: Re: [PATCH v4 3/5] phy: qualcomm: qmp-combo: Add preliminary USB4
- support
-Message-ID: <app7s9GZySBj7Mzs@hovoldconsulting.com>
-References: <20260820-topic-usb4phy-v4-0-aec9d2cb31f6@oss.qualcomm.com>
- <20260820-topic-usb4phy-v4-3-aec9d2cb31f6@oss.qualcomm.com>
- <iynrogny3didip7cui3ce3yq3woaqzrr7f4aqdzvls4j4mslfn@aww5qjpy3gdx>
- <b326edbf-fe34-426b-af19-912edc18ba84@oss.qualcomm.com>
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="d9FVNFE/";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="SXCgvs9b"
+Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6847mWbr2838236
+	for <linux-arm-msm@vger.kernel.org>; Fri, 4 Sep 2026 08:16:38 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:date:from:message-id:mime-version
+	:subject:to; s=qcppdkim1; bh=KECliQdzWf8wnsMTgExACtctd8PBA/vkv6f
+	+iGR52+g=; b=d9FVNFE/jkjc1BXQdQvXeV0PoHSR9KzcOEUA6P19Rrxblx/1wKL
+	Zx4aVo7Ebiwgn0oqOrdW+XGpID6gseWkXfz8U1fefdOXo0vZoMlT1jxSu2+UZT0l
+	OcRZYvW405WoyyZ9tmvUaEzI5MgdPxMCNc+zFCtOrc35T2Oen0qIqhW1oF4k/TqW
+	D9YN0gpK34weh9gm5l2ofIFJudUFAXjMYFSouDkJEcX2v8fxpdSiXNQhsDhlvD4C
+	QwUa7IWB740WX0+xoTkfXUU3qVdYMxkNzGTOedzz+2kfpO3BC0SS8ig7MksvNG8G
+	eSn8SBDYjmpt6GquUJq89dNWDYRcoSPnbiA==
+Received: from mail-pg1-f199.google.com (mail-pg1-f199.google.com [209.85.215.199])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gfqqtrhs7-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 04 Sep 2026 08:16:38 +0000 (GMT)
+Received: by mail-pg1-f199.google.com with SMTP id 41be03b00d2f7-cbedbd182f5so733702a12.1
+        for <linux-arm-msm@vger.kernel.org>; Fri, 04 Sep 2026 01:16:38 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1788509797; x=1789114597; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=KECliQdzWf8wnsMTgExACtctd8PBA/vkv6f+iGR52+g=;
+        b=SXCgvs9bBeUqjPVoMEqA/pPPl4IdFkXhoW/+BLJVjInWGH176DeteOpa/x4qafOa9m
+         37PmGJ98vQ8wWMHtSxQzYWNqXi9uqMVICStuoByqmfsZW34eUKTtwHL+vKKyRIHokn+u
+         wikMNoxz3AbGVEUZ1Sc07F2tcTZXaGgD9XAvAp/CtETI7ZC9+zh4vRHATKCl71xOjgNs
+         D7HKHxsVV6ULlDgUuJKUBh1+0tTUg+l82ghj3JP7e8A9mVBuWh9brA13ddikLH1achc0
+         UMGjVwHkJMh9HLr0tAaL0sH/KYYW5PeNzH/hvSUiIzUK80upo8/rUtf2K5F9zOsiVdRH
+         i3rw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1788509797; x=1789114597;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=KECliQdzWf8wnsMTgExACtctd8PBA/vkv6f+iGR52+g=;
+        b=Fg6fgrUn8g1Kwv79DJuSb0Ietr3BAYogP/fXtcZy+adcc8ey7tnLVdTwErqNDrNT7T
+         4ScNO+WFxY+rEJuMf7XWMnKYhk+OlvgY/cRvo2aWf9vBFjV6BtxhgjXv/O4tP19tzBxB
+         ank0PK7K8HcP2w8lEdtnSqQ4BxFk+y3HVceWwpB/HaUzFE1PxhfTEsmRZtwPCMP/UCc4
+         MxdjBL04ZzC+M/qSCygA604krSXR9Zg46TGweR6I4xdUGctwhglVtbAG9e8NE/r3HaZm
+         YgGuZgL6VcI1wckY4WcQ/IB7SjrBJYNIt6QBA02DklYqDEwdFFNt0JNJu18K+A7tZo9u
+         4cSg==
+X-Forwarded-Encrypted: i=1; AKwUvBweOXDlFt2l5Ut93acKbPiJC9lgjCe0Ci8N1RCnn8IC9vGrUAdx44pbmWTtp7uLeAHDoaroSCnbdZWX8AK2@vger.kernel.org
+X-Gm-Message-State: AFuF++m2mK86Bgqyw/NNy2FscJl+ZBCwROMkXUD9ZqsVgZaRM6jnDKzu
+	pR4xxz3uJn2XT7Lpq4YwgFx5wJqogY7qXEb/x3dS+mFAuT6bC2tV0j3dvh97ie/w29YqLE4Depy
+	zeTxraYQJ9UzJeB7uXFhyZ7MJXdtV4L70YmvPfXy5LhWz/5snGLeX6idHBDBvKrrvRiUR
+X-Gm-Gg: AYBFou1Nh9gOcaJBeojAuzPP/st3jp7hNde6Rp9LDP89vlcMLgAWGx3B1SIXnZd57jH
+	WR+qDRjBX9cTQRyZrYAfU9x+MIo6BNQPD9JoRAeHrKZ/3qZQ1QiRK+g0UAIwgKivEA8gat8aXHO
+	LvfTRIqxAENYSH7n6f6+/vwO5e95HAECIz1O7bsXuaNx3ziIcJ9IsJR5MnhuEJiPmFgXb+fH/YK
+	7+Ka2GKn+ozLwSmbaY1P9qiUZxLSWNXizBCEJW6HaC0ry+Jl9NB6iT4pD0jSzHKLR9rPnZsWrL8
+	Z5W1bGTS24gcjyfHWVFyifHN5vTWWOM+Sbce9EEKz0K83f1KIxWOvFu9wnLaX96Zsdo0I1ajqtC
+	Sdv4urQcWzxN3Ay6CQ/UQHcNW6gA4V2VyK0+ehZjB8e4LWb04oug/mTRjQTnD
+X-Received: by 2002:a17:90b:1d44:b0:38f:cab0:9aa9 with SMTP id 98e67ed59e1d1-39b0803b0efmr12099898a91.13.1788509797470;
+        Fri, 04 Sep 2026 01:16:37 -0700 (PDT)
+X-Received: by 2002:a17:90b:1d44:b0:38f:cab0:9aa9 with SMTP id 98e67ed59e1d1-39b0803b0efmr12099862a91.13.1788509796963;
+        Fri, 04 Sep 2026 01:16:36 -0700 (PDT)
+Received: from QCOM-aGQu4IUr3Y.qualcomm.com (i-global052.qualcomm.com. [199.106.103.52])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3339a534df1sm5466648eec.7.2026.09.04.01.16.33
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 04 Sep 2026 01:16:36 -0700 (PDT)
+From: Shawn Guo <shengchao.guo@oss.qualcomm.com>
+To: Bjorn Andersson <andersson@kernel.org>
+Cc: Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>,
+        Bartosz Golaszewski <brgl@kernel.org>,
+        Dhruvin Rajpura <dhruvin.rajpura@oss.qualcomm.com>,
+        Anandu Krishnan E <anandu.e@oss.qualcomm.com>,
+        linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
+        linux-kernel@vger.kernel.org,
+        Shawn Guo <shengchao.guo@oss.qualcomm.com>
+Subject: [PATCH v2 0/6] arm64: dts: qcom: nord: Add remoteproc and PMIC support
+Date: Fri,  4 Sep 2026 16:16:13 +0800
+Message-ID: <20260904081619.593602-1-shengchao.guo@oss.qualcomm.com>
+X-Mailer: git-send-email 2.43.0
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <b326edbf-fe34-426b-af19-912edc18ba84@oss.qualcomm.com>
+Content-Transfer-Encoding: 8bit
+X-Authority-Analysis: v=2.4 cv=YtA/gYYX c=1 sm=1 tr=0 ts=6a9a7e66 cx=c_pps
+ a=Oh5Dbbf/trHjhBongsHeRQ==:117 a=b9+bayejhc3NMeqCNyeLQQ==:17
+ a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22 a=VwQbUJbxAAAA:8
+ a=EUspDBNiAAAA:8 a=1H_KamcDzeWEUM87CZ8A:9 a=_Vgx9l1VpLgwpw_dHYaR:22
+X-Proofpoint-ORIG-GUID: qHbEzq8NzBtO1YCMiqXOOdS34osH_PkS
+X-Proofpoint-GUID: qHbEzq8NzBtO1YCMiqXOOdS34osH_PkS
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTA0MDA3NSBTYWx0ZWRfXyBSDBavVW1Av
+ /+9H674DYNVQRrV4wZQzTPekDbojU9+Dq0rEkyMJn6XL/O+w4OyKlplo2JDFqNT3KoPW1D4bE80
+ uzWKMSn5GHc9ltIXba3r5AvTgWJ0v3I=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTA0MDA3NSBTYWx0ZWRfX+ou+IXtcF+Oo
+ 5hTOOgqpoayTak0Ke6Yt8JsF9G3QAlZ+73IkfC/bcw/z9e+RTt5LE9cO5K0Yg3oqp7pt0AvwX6K
+ nN0fv+m6ONF5Lm8ws8hIVZxhAgtXW/8Vwe5Ys8anyc/ByWKll4N+pNPdI8OPA30uBPXMHlase08
+ C+22fiU14DnRNerZOFiWDk66KpREYUcLMUgt0Zpv6tWoZJqwVSsKvp4aBkAVikCaHStYt0Rv86R
+ lovQ6DUKM5KGVdAx+YX3E0Ao6wHmWpKFEoipftiPQ9Hvck5krAnNV9MJ2R9lQxTxo2RWSX8jFKz
+ Wvd7h79r4vt2eBC9BFXH7+gcjQZUxPG4RIY8/bHDebBddxIV3cQb6w2FXzOCBPhePLnqmMFtUUJ
+ QHMmd44WUtt1RvEwRLR1Jzn4H9FzL6vJV9+EIfieG5HwpL2wX80HDlNLxavKji/XOkdbx9RO4nn
+ Ik5fQw7fJf9oYigxPvQ==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-09-04_02,2026-09-03_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ clxscore=1015 priorityscore=1501 malwarescore=0 impostorscore=0 phishscore=0
+ suspectscore=0 lowpriorityscore=0 bulkscore=0 adultscore=0 spamscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2609040075
 
-On Fri, Sep 04, 2026 at 09:36:04AM +0200, Konrad Dybcio wrote:
-> On 9/1/26 2:44 PM, Manivannan Sadhasivam wrote:
-> > On Thu, Aug 20, 2026 at 04:24:12PM +0200, Konrad Dybcio wrote:
-> >> From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-> >>
-> >> Some Combo PHYs (so far only on SC8280XP, X1E80100 and Glymur), come in
-> >> a flavor called USB43DP, which as the name implies, features USB4, USB3
-> >> and DP signal processing capabilities. In that architecture, USB3 and
-> >> USB4 PHYs share the same USB_PLL while featuring separate logic spaces.
-> >> The DP part is roughly the same as on the instances without USB4.
-> 
-> [...]
-> 
-> >> +	case QMPPHY_MODE_USB4:
-> >> +		writel(USB4_MODE, com + QPHY_V3_DP_COM_PHY_MODE_CTRL);
-> >> +
-> >> +		/* bring both QMP USB and QMP DP PHYs PCS block out of reset */
-> >> +		/* TODO: disable DP PLL if there are no active tunnels after router setup */
-> > 
-> > 100 column width generally applies to code, not comments. Comments should still
-> > be wrapped to 80 columns.
-> 
-> I believe this isn't a real concern.. checkpatch certainly doesn't care:
-> 
-> # LONG_LINE_COMMENT     a comment starts before but extends beyond $max_line_length
-> # LONG_LINE_STRING      a string starts before but extends beyond $max_line_length
-> # LONG_LINE             all other lines longer than $max_line_length
-> 
-> (all take the same value, preset to 100 at the top of the file)
+This series adds ADSP and CDSP remoteproc support, the SPMI PMIC arbiter
+and the PMIC descriptions for the Qualcomm Nord platform, and adds the
+initial device tree for the Nord Ride Embedded board.
 
-Checkpatch is just a dumb tool. The coding style says the preferred
-limit is 80 chars unless breaking it improves readability. And that
-exception generally does not apply to comments (e.g. unless it contains
-a URL or similar).
+Tested on next-20260903
 
-Johan
+Dependencies:
+- NMXC define: commit e484a765f543 ("dt-bindings: power: qcom,rpmhpd: Add NMXC power domain index")
+  from git://git.kernel.org/pub/scm/linux/kernel/git/ulfh/linux-pm.git dt
+- Base DTS: https://lore.kernel.org/all/20260903140617.441111-1-shengchao.guo@oss.qualcomm.com/
+- PMAU0102 MFD: https://lore.kernel.org/all/20260830034719.140213-1-shengchao.guo@oss.qualcomm.com/
+- PMAU0102 thermal: https://lore.kernel.org/all/20260830101025.191697-1-shengchao.guo@oss.qualcomm.com/
+- PMM8654AU RTC: https://lore.kernel.org/all/20260904074541.590485-1-shengchao.guo@oss.qualcomm.com/
+
+Changes for v2:
+- Align PMIC comments in nord-ride-embedded.dts with nord-rrd.dts
+- Drop unneeded regulator-always-on and regulator-boot-on from RPMh
+  regulators
+- Drop SMPS regulators as the resources are already managed by rpmhpd
+- Use pmm8654au compatible with fallback on pmk8350 for pon, pwrkey,
+  resin and rtc
+- Link to v1: https://lore.kernel.org/all/20260831032103.341633-1-shengchao.guo@oss.qualcomm.com/
+
+Bartosz Golaszewski (3):
+  arm64: dts: qcom: nord: Add the SPMI PMIC arbiter
+  dt-bindings: arm: qcom: Document Nord Ride Embedded board
+  arm64: dts: qcom: Add initial support for Nord Ride Embedded board
+
+Dhruvin Rajpura (1):
+  arm64: dts: qcom: nord: Add PMAU0102 and PMM8650AU PMIC support
+
+Shawn Guo (2):
+  arm64: dts: qcom: nord: Add support for ADSP and CDSPs
+  arm64: dts: qcom: nord-rrd: Enable ADSP and CDSPs
+
+ .../devicetree/bindings/arm/qcom.yaml         |   1 +
+ arch/arm64/boot/dts/qcom/Makefile             |   1 +
+ arch/arm64/boot/dts/qcom/nord-embedded.dtsi   |  63 ++
+ arch/arm64/boot/dts/qcom/nord-ipcc.h          | 144 +++
+ .../boot/dts/qcom/nord-ride-embedded.dts      | 442 +++++++++
+ arch/arm64/boot/dts/qcom/nord-rrd.dts         |  37 +
+ arch/arm64/boot/dts/qcom/nord.dtsi            | 906 ++++++++++++++++++
+ arch/arm64/boot/dts/qcom/pmau0102-nord.dtsi   | 543 +++++++++++
+ arch/arm64/boot/dts/qcom/pmm8650au-nord.dtsi  |  54 ++
+ 9 files changed, 2191 insertions(+)
+ create mode 100644 arch/arm64/boot/dts/qcom/nord-ipcc.h
+ create mode 100644 arch/arm64/boot/dts/qcom/nord-ride-embedded.dts
+ create mode 100644 arch/arm64/boot/dts/qcom/pmau0102-nord.dtsi
+ create mode 100644 arch/arm64/boot/dts/qcom/pmm8650au-nord.dtsi
+
+-- 
+2.43.0
+
