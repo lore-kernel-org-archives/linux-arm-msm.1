@@ -1,103 +1,193 @@
-Received: from m16.mail.163.com (m16.mail.163.com [220.197.31.3])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DCC683F65FB;
-	Fri,  4 Sep 2026 04:46:52 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=220.197.31.3
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 40CB1339872
+	for <linux-arm-msm@vger.kernel.org>; Fri,  4 Sep 2026 06:09:55 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788497224; cv=none; b=q/GXbUw+UF+R0L9ZWKF4QmAksIIOiWKZhROEMbMgHL/rhAQyHqBMoCMmmmL/OPPehvRZ5sQe2PTNco9tWxsoxu+DM28+fmmsmDDhY0YaOh5AUBgeUcO3LMKiAwH7m4S5JHogQQDcGBbhBza67E1UJ3O8khNjoGNGHiTNsdzDPbQ=
+	t=1788502196; cv=none; b=jcoxiyKohnu+JaDhzAOPOAEjSa+CC8lyUuwqHpqi0fcCnW1tZb6X/05hpPdNuvJIwpbgQ/9ViRJykNS81XSNStNIUztgZkqGmzzbRoqQ9plukN36leADOrG0sFxNobtQEbAmsd+DpkYL2uccP0Bv7R+BGwc1laKOqI56/TucinA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788497224; c=relaxed/simple;
-	bh=0cyuRZsyRV7fMePzuvBukVQhmVKtfIgdktFzaCqwNNY=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=aJJvvZW5qg70YqJV5T51PNuZ3u5VQ8bdJferGNAqiWERQrFLlmQrAwo9W63oWWOWs1q9JB/M0t80hywP0mRxNRSsP3HoPhxyl8+WIaiSwT3J2TiOTYqDJ6OZOUkhrrEIXSltKTlQ6tQtf/iSdOz8+Z8fXMaVaqGE4tprIr9Z0nk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com; spf=pass smtp.mailfrom=163.com; dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b=jqvDXjPs; arc=none smtp.client-ip=220.197.31.3
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=163.com
+	s=arc-20240116; t=1788502196; c=relaxed/simple;
+	bh=6i1H7/7wQUtpbrY5xzX/0W4P8TBzBKtLRiVT/SoT7ls=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=tjx1pceVsTRI15n9gzyxfJa+Qh/BwDdvEJnG+cFZmLQO61TdL9U5c3aF8gO10rwi6O/8TE9g8t/SCX4vxoyzcLl78uAOnFmbKzzBN4o/p4Du59SH7Cki7WdF5Lh64I2lJNZXzDClGunRWN1YiQmMD8xLYi1B8ICB6LRqqV0bSC4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=AJ0VNFv1; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=a09VwbJS; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b="jqvDXjPs"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
-	s=s110527; h=From:To:Subject:Date:Message-ID:MIME-Version; bh=zQ
-	kM+HCnejKRi2E1h7auxIKz9fYZA8hTgLrL70LmJWI=; b=jqvDXjPstp7jAKMmf0
-	eqQLqSgofHkQxwyz+mYXHnuIefu4jT87Op5XsE6HiGt+hWishkHWdlopjZIDl76M
-	oL1Sr5qdj1kPXRRCt+YjjTTn0RV8k6Nd0rRau0nSkTIpuU1lzrzVRoFNSjuv2iLp
-	Lr47HwBZcwuDnon8CTb0pr60o=
-Received: from GHT-5854251031.localdomain (unknown [])
-	by gzga-smtp-mtada-g0-2 (Coremail) with SMTP id _____wDXFvIXTZpqIV87Ag--.5396S2;
-	Fri, 04 Sep 2026 12:46:16 +0800 (CST)
-From: zwq2226404116@163.com
-To: mhi@lists.linux.dev,
-	linux-arm-msm@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Cc: mani@kernel.org,
-	quic_vpernami@quicinc.com,
-	krishna.chundru@oss.qualcomm.com,
-	jeff.hugo@oss.qualcomm.com,
-	zwq2226404116@163.com,
-	Wanquan Zhong <wanquan.zhong@fibocom.com>
-Subject: [PATCH v5 1/1] bus: mhi: pci_generic: add Rolling Wireless RW151 1501/1502 PCI IDs
-Date: Fri,  4 Sep 2026 12:42:44 +0800
-Message-ID: <20260904044612.6334-1-zwq2226404116@163.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260702100013.545593-1-zwq2226404116@163.com>
-References: <20260702100013.545593-1-zwq2226404116@163.com>
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="AJ0VNFv1";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="a09VwbJS"
+Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68462cMV2203347
+	for <linux-arm-msm@vger.kernel.org>; Fri, 4 Sep 2026 06:09:54 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	toQXcTH0dbYcAFdl5EjWItBSNnEY93ZM4mZFCsTYmHY=; b=AJ0VNFv1xDVDBSVz
+	KoJgiGxblWZQ+uOGSLDeYQVFq2t7yCAGXUj+JrgF7dNtbZDzKoae0nCEEahBXe2w
+	500aUGcmg+LO3TM4dk2PXc+4kwAsa7yLQkTIp8o3ezwYQc5/MY6yADr7c0coirIq
+	eb/63gLiiFUK47FHiWw5AbJWsdb7X5O3V2gtyXt6eSJIHutneQ7v0ytvPZYfJh3P
+	/e96YI1wiXkogsbivyr9UUs7T4yv29wZHooCp4irattsRDS9a/DCyq35ZcniqV4q
+	pjeDbA+B5jxlE1R3XeF16anijzr0BYV6aV+APFWInfuJBmNXIQIFU5uj1HKMsgK2
+	IhjPlw==
+Received: from mail-pj1-f70.google.com (mail-pj1-f70.google.com [209.85.216.70])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gfk920yau-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 04 Sep 2026 06:09:54 +0000 (GMT)
+Received: by mail-pj1-f70.google.com with SMTP id 98e67ed59e1d1-398ba5404d2so1105832a91.1
+        for <linux-arm-msm@vger.kernel.org>; Thu, 03 Sep 2026 23:09:54 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1788502194; x=1789106994; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=toQXcTH0dbYcAFdl5EjWItBSNnEY93ZM4mZFCsTYmHY=;
+        b=a09VwbJSpxWqNoGZu/bBtNKK38qIMIMuuQAfofT+fCulQO+EMY1LuUgTrOVn+iw2lX
+         ggD+9VgQRMIinkI+IBM4fTHt52Yx1LpDcrO5K2dpg29WYYfIxGJ6726tNljNK0YHEjfs
+         NYAbouzTuTZDCgq5dme+klnZMcCSroYR3twAQFjPv0xfCpNJH4gfgxCMuG/aW4IpYR/h
+         ib3Ln5LwFSHZsuVAOHzayOUZfkwiW+8AgSiOhAYhlN0gTzF5B+m/kXCmMH+h2YoktjJG
+         xWkaeOKlVtR+Z9mWFPbeN+DLSpbPERu5BynBjgo2/VD2jcYB0Ckd9ISmMTwBiY86RhNQ
+         3nxA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1788502194; x=1789106994;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=toQXcTH0dbYcAFdl5EjWItBSNnEY93ZM4mZFCsTYmHY=;
+        b=TrkJ7gZwaraC7akhtY7+y9ccMwbtfVtZ29bkozVtOU6dte/KS0F0kwuPIsX3nqh2BJ
+         DXaqX+4s4T7qJ9YEFXVWWAzOg6YRwyTeFG9cCvmDqXCbdlUTibL/XJc2vpT2HS/TtD+X
+         ZsQk6XMYKy++LnZbNaQtEebgtjo0sq2mnMn9OsB7aMTSJQxwB/nf4dIkQlUVOz3/DzkX
+         /qE3vlDFIx4kjFtJtYqDP3egbEStgv7kbwULD4fwqj9SKI7edaDfUqmN7hLCevWnRMxS
+         Mz04uGSbQTBHNsK/6Yif5bBb8SJlaux5P85lic0+IXzw1Sp8QgSYClq/Zk3V2QuaNdA8
+         /4uw==
+X-Forwarded-Encrypted: i=1; AKwUvBxytuFCRDAUtDv+QqgrbcBIasGFdln8aCrZKShvlyUULQrLch7qpFCi2XPzI5hCd3JVoGlTJM2+22o6VJVO@vger.kernel.org
+X-Gm-Message-State: AFuF++nRDI+5YolT0e/oaCUhAapMwyoY9VY3qwB4Atyu9xWj72nZPIpl
+	qY/fZsCgPKndRogEzmOzgG+vokiA4teVjZnfwTyYTb2HsWfsrHUrvRgfQHntA+ZEYVDqusbY7MX
+	aGOghlSMzQTz3AXwxrBXJt1oKI1J6rqkl9PThRJz2QdfW2GG2Y7bXhUenZG7h61kFpfzz
+X-Gm-Gg: AYBFou1FajGILreQ6/TeiPjSChpjE5tW6bE16HhOJ3Bp6Vu/FbiUXAnx28YIJYxhkGp
+	IDNo9Z9J46TQarvOIK8sdSbZZpkmobWP5ALZOXDOMSVL9ihppL7ZnuH9bRuxoZDljlOYyehg1v5
+	s5SHcOTNJD2sKTAnsDaiFtzZkdoq6nV4aVY8uj9yk6JUCD4eVOHVbchqYDFo1hdrAlm8Yui9ap0
+	aC4rHyj/Vu7jgW2BQTRa64fOmYQ+e2V0GRuo4A7frC4YiTtH5TleDFfV48TUEtnty4cNNABprrn
+	PCgi8keyJTocYjRbhcE3dSrJmSyQ7iBvUSQKhB1j3mCh54LOANlAeIm8SXcancuh2wV/jwOW4bg
+	Yzqs1BEAh710MlAZeKlKjJwgKbBlZne153MSRpUD35UCC3yCF4fwCcKDQF783mf5Z5EFT
+X-Received: by 2002:a17:90b:5606:b0:398:9be6:f997 with SMTP id 98e67ed59e1d1-39b262dfaeamr6332339a91.22.1788502193736;
+        Thu, 03 Sep 2026 23:09:53 -0700 (PDT)
+X-Received: by 2002:a17:90b:5606:b0:398:9be6:f997 with SMTP id 98e67ed59e1d1-39b262dfaeamr6332268a91.22.1788502193296;
+        Thu, 03 Sep 2026 23:09:53 -0700 (PDT)
+Received: from [192.168.1.5] ([122.177.244.184])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-39b08c3a526sm8911619a91.10.2026.09.03.23.09.47
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 03 Sep 2026 23:09:52 -0700 (PDT)
+Message-ID: <fd9f1fac-e4e7-453e-a830-a32e8be2f965@oss.qualcomm.com>
+Date: Fri, 4 Sep 2026 11:39:46 +0530
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-CM-TRANSID:_____wDXFvIXTZpqIV87Ag--.5396S2
-X-Coremail-Antispam: 1Uf129KBjvJXoW7Cw43tFWfJF1DAF4rXry5Arb_yoW8CFy8pF
-	4Skr4rCr4DZrWjkayjqFykJF9Y9anakryDKrZ2k3yag34DtFyjqryvgr1Ygw4Yqa18WFya
-	vFyDuryDW3WUJa7anT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-	9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x0pRlALiUUUUU=
-X-CM-SenderInfo: h2ztjjaswuikqrrwqiywtou0bp/xtbC0hia8WqaTRg3dwAA3E
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 5/7] usb: dwc3: add xhci-reset-on-resume property for
+ power-loss resume
+To: Faisal Hassan <faisal.hassan@oss.qualcomm.com>,
+        Thinh Nguyen <Thinh.Nguyen@synopsys.com>
+Cc: Sriram Dash <sriram.dash@oss.qualcomm.com>,
+        Jack Pham <jack.pham@oss.qualcomm.com>,
+        Shazad Hussain <shazad.hussain@oss.qualcomm.com>,
+        linux-arm-msm@vger.kernel.org, linux-usb@vger.kernel.org,
+        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        Mathias Nyman <mathias.nyman@intel.com>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley
+ <conor+dt@kernel.org>,
+        Philipp Zabel <p.zabel@pengutronix.de>,
+        Wesley Cheng <wesley.cheng@oss.qualcomm.com>
+References: <20260903153827.3463313-1-faisal.hassan@oss.qualcomm.com>
+ <20260903153827.3463313-6-faisal.hassan@oss.qualcomm.com>
+Content-Language: en-US
+From: Krishna Kurapati <krishna.kurapati@oss.qualcomm.com>
+In-Reply-To: <20260903153827.3463313-6-faisal.hassan@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTA0MDA1NSBTYWx0ZWRfX3DnvDFOnYYIA
+ BTme045RRePGl6xqpBr6YW0RcQkUJZkhP73xb0ORNWXYfq0D7M9XkqfPcgwQvTS8w+UFWhrGYzc
+ FCTZYCKg/uGyFWExi2n2omrarJzTx2snqiHmU98iMLA2Xhti+6EBNce7r4yachTXgyGiB+6ejO5
+ ApgELsoJx0Jbugp2Vfz5efNqtW+2/3onQ8flKubwzUzfmqvi4DL3XSB2L3pnvmwt3PIVTLcXpjH
+ qvJhH4hnuJqpIJpPSjbpbd82ZHXu1sSls++oEE6Wvjw4z2vmMQzH5Et8izeCKLizMNuA+UNWe55
+ KUXMMYl4hqJ+ncz0O155b6GQykLpBE/LAVttdilbP+Hg3R1xvbIzQq3PwAEy61vx8YjpDbJ9Qjg
+ 3e8uA43uc5z/SG3qzpI4upZG3q8/jMhtQzF3Vfe07HQTE9OueGMjqHsUmlp40IwbI4Z3YXZ7EDn
+ il8rRNu12IepMW1SdKg==
+X-Authority-Analysis: v=2.4 cv=Oc2oyBTY c=1 sm=1 tr=0 ts=6a9a60b2 cx=c_pps
+ a=0uOsjrqzRL749jD1oC5vDA==:117 a=oP200lxkGh9fc4MeAAR85Q==:17
+ a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
+ a=EUspDBNiAAAA:8 a=UW7aF9AyQ5xqPRIsElAA:9 a=QEXdDO2ut3YA:10
+ a=mQ_c8vxmzFEMiUWkPHU9:22
+X-Proofpoint-ORIG-GUID: M9_ylajGl4DYDHl6BaLxM4RKbnC-eJsz
+X-Proofpoint-GUID: M9_ylajGl4DYDHl6BaLxM4RKbnC-eJsz
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTA0MDA1NSBTYWx0ZWRfX2/mS3rner8qw
+ 1Xq3w0orzNXdtLsRGQylgRtkpr+msyyutvqa0YimKgcwM+/RmUqzfvCoNizPCy5CZa0vzJS2xXb
+ IQPsuK+joXTPpCihG1BF8d3uP4dbEeo=
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-09-04_02,2026-09-03_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ lowpriorityscore=0 adultscore=0 impostorscore=0 bulkscore=0 suspectscore=0
+ priorityscore=1501 spamscore=0 clxscore=1015 phishscore=0 malwarescore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2609040055
 
-From: Wanquan Zhong <wanquan.zhong@fibocom.com>
 
-Hi,
-Please find v5 on top of v1/v2/v3/v4. It adds PCI_DEVICE_SUB entries for
-RW151 sub-vendor 0x2099, sub-device 0x1501 and 0x1502 on QCOM 0x0309,
-continuing the 1500 series.
-If you have any comments on v4 and before, I am happy to address
-them. Please also let me know whether you prefer incremental follow-ups
-like this or a single squashed series before merge.
-Thanks,
-Wanquan Zhong
 
-bus: mhi: pci_generic: add Rolling Wireless RW151 1501/1502 PCI IDs
+On 9/3/2026 9:08 PM, Faisal Hassan wrote:
+> On platforms where the USB controller loses power during system
+> suspend, like SA8255P, resume triggers a Host Controller Error
+> requiring full reinitialization.
+> 
+> The xhci driver supports XHCI_RESET_ON_RESUME to handle this,
+> but dwc3 previously lacked platform-specific quirk configuration.
+> Add a device property "xhci-reset-on-resume" that enables this
+> quirk for controllers needing complete reinitialization after
+> power loss during suspend.
+> 
+> Let dwc3 manage the quirk for the usb controller using
+> software properties.
+> 
+> Co-developed-by: Sriram Dash <sriram.dash@oss.qualcomm.com>
+> Signed-off-by: Sriram Dash <sriram.dash@oss.qualcomm.com>
+> Signed-off-by: Faisal Hassan <faisal.hassan@oss.qualcomm.com>
+> ---
+>   drivers/usb/dwc3/core.c | 4 ++++
+>   drivers/usb/dwc3/core.h | 5 +++++
+>   drivers/usb/dwc3/host.c | 5 ++++-
+>   3 files changed, 13 insertions(+), 1 deletion(-)
+> 
+> diff --git a/drivers/usb/dwc3/core.c b/drivers/usb/dwc3/core.c
+> index fd5c2cd36c59..eb6ffd5148a7 100644
+> --- a/drivers/usb/dwc3/core.c
+> +++ b/drivers/usb/dwc3/core.c
+> @@ -1712,6 +1712,10 @@ static void dwc3_get_software_properties(struct dwc3 *dwc,
+>   					       &gsbuscfg0_reqinfo);
+>   		if (!ret)
+>   			dwc->gsbuscfg0_reqinfo = gsbuscfg0_reqinfo;
+> +
+> +		if (!dwc->xhci_reset_on_resume &&
+> +		    device_property_read_bool(tmpdev, "xhci-reset-on-resume"))
+> +			dwc->xhci_reset_on_resume = true;
+>   	}
 
-Add PCI_DEVICE_SUB entries for sub-vendor 0x2099, sub-device 0x1501 and
-0x1502 on QCOM 0x0309 (sdx75). These are additional RW151 variants in the
-same ID series as 0x1500.
+xHCI plat does look for properties in xhci device node as well as the 
+ones above it in the parent chain:
 
-Signed-off-by: Wanquan Zhong <wanquan.zhong@fibocom.com>
+"
+	/* Iterate over all parent nodes for finding quirks */
+	for (tmpdev = &pdev->dev; tmpdev; tmpdev = tmpdev->parent) {
+"
 
----
-v4 -> v5: Add RW151 PCI subsystem IDs 2099:1501 and 2099:1502
- drivers/bus/mhi/host/pci_generic.c | 6 ++++++
- 1 file changed, 6 insertions(+)
+So adding device_add_software_node in dwc3_qcom must be sufficient.
 
-diff --git a/drivers/bus/mhi/host/pci_generic.c b/drivers/bus/mhi/host/pci_generic.c
-index d686aef6e158..af76ce57ce10 100644
---- a/drivers/bus/mhi/host/pci_generic.c
-+++ b/drivers/bus/mhi/host/pci_generic.c
-@@ -1039,6 +1039,12 @@ static const struct pci_device_id mhi_pci_id_table[] = {
- 	{ PCI_DEVICE_SUB(PCI_VENDOR_ID_QCOM, 0x0309, 0x2099, 0x1500),
- 		.driver_data = (kernel_ulong_t) &mhi_rolling_rw151_info },
- 	/* Rolling RW151 (sdx75) */
-+	{ PCI_DEVICE_SUB(PCI_VENDOR_ID_QCOM, 0x0309, 0x2099, 0x1501),
-+		.driver_data = (kernel_ulong_t) &mhi_rolling_rw151_info },
-+	/* Rolling RW151 (sdx75) */
-+	{ PCI_DEVICE_SUB(PCI_VENDOR_ID_QCOM, 0x0309, 0x2099, 0x1502),
-+		.driver_data = (kernel_ulong_t) &mhi_rolling_rw151_info },
-+	/* Rolling RW151 (sdx75) */
- 	{ PCI_DEVICE_SUB(PCI_VENDOR_ID_QCOM, 0x0309, 0x103c, 0x8fb8),
- 		.driver_data = (kernel_ulong_t) &mhi_rolling_rw151_info },
- 	/* Rolling RW151 (sdx75) */
-
---
-2.50.0
-
+Regards,
+Krishna,
