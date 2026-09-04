@@ -1,85 +1,67 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wm1-f52.google.com (mail-wm1-f52.google.com [209.85.128.52])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AC6DF28D8D0
-	for <linux-arm-msm@vger.kernel.org>; Fri,  4 Sep 2026 08:03:05 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 955CB3793DF
+	for <linux-arm-msm@vger.kernel.org>; Fri,  4 Sep 2026 08:04:38 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.52
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788508987; cv=none; b=lrhVV3zDCuFoOZW2/L1PUqNV/Snlktksz3Et8MC5iZpm5brNzkNHwcpWlJrppk8s4/8t0ysbJLFk+R7qowzrWjwWuRHxsxap+UmP77bT3jppf3W02dIt0RduZ+Gz5Ikk8MEh7QaMVzlYE4pAqnu4vpeNkBBc7tICWd14Zpdwgx8=
+	t=1788509080; cv=none; b=KSmPxn/hII3K0PBALRyMYSWqJkLaoCGz6RcKUa9l6iyzvjm7zLaioUX1MxzUARro+pxnEv9WgD2UVFb5yMgQGLD1aD9Ye+t/3KplDJUgnS3j4tBSsFYQ92iUrj2Vo+BoOgsWEfv9ahPJ8rr9iXjg67ptmvZO0yJoS36oQeyeJAY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788508987; c=relaxed/simple;
-	bh=/JxoYyZw8rvXwU7G/U87fprDVpjKUZ0WgJD9uCb5TZk=;
-	h=Message-ID:Date:MIME-Version:Subject:From:To:Cc:References:
-	 In-Reply-To:Content-Type; b=Bnw3oIZ3Ov1cbAZdmHtEPdkU75NV9Rw8XCfQ+o3G9snV7uJDkoGrsMSnky4wVlrKC7wurAOBDgd23MZ0GqozC4+V2Zcl3ZLiUh9C0Eye1MGScVoIvNeA8kVzPBcQpLnkvD6IOgwHUVTWOZ5DNLEUcVNjwgoo1bkZHUyeEbbPzNU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=QoNwALlq; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=U/kj58Mi; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1788509080; c=relaxed/simple;
+	bh=Isg76J8xIN6ceva9gEqN+Pm24lXNgllN3sdT5qg8GFE=;
+	h=Message-ID:Date:MIME-Version:From:Subject:To:Cc:References:
+	 In-Reply-To:Content-Type; b=U/fKODVkWIagv+yVjin6v9QfdTraFvKzzQaeSHQdGP4eOPTrA3UTarLD5QXdzmBkStXD3Gt8Xpky1E56H844Mkv7BA2ohbVT9Qbgb4Zzfc42bNGMF8GXXHffpXNMzpMtQzMTpZHepP1NQMoiY1tjAfRpSvU3ybddC4GFyrBtWO0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=SPQr4bW2; arc=none smtp.client-ip=209.85.128.52
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="QoNwALlq";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="U/kj58Mi"
-Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6847mnlD4111308
-	for <linux-arm-msm@vger.kernel.org>; Fri, 4 Sep 2026 08:03:05 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	eSPnEJt/utJLJrcQDxoCun9VKVut8jjz7U4CayigJTo=; b=QoNwALlqKiwEJowk
-	Wz60dx7FmUxaSQvGYxtVxsFkKtHK3FVHGWifqXW8aTQ4XOSCZQHAqI9E16vtbf79
-	FQxva20Rj3BPwoA1cbbdSDEKHHlmGVR7Cxd+5ouIK4fWA9tmMbO9K/zCd6OFCCKh
-	BEd9z0wGbwX2fqBByT7edi6CapE7KEDZKwRtHRlMYoYxGxg77Rk/bgkcvU5qSy0X
-	kB8Rsel0koS3cbYyU/H/X4OZwPwGaTJqnb40qzlqZSpyRLz9VsebjvPHdHO7Q083
-	2We48NFHcTV9qG7lqrnCCujks1BdKlL9hn2T8sZ+3FmN/stx3ZB0hlqznabB8Hm8
-	2eZt5Q==
-Received: from mail-qk1-f200.google.com (mail-qk1-f200.google.com [209.85.222.200])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gf9b1c7s6-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Fri, 04 Sep 2026 08:03:04 +0000 (GMT)
-Received: by mail-qk1-f200.google.com with SMTP id af79cd13be357-92e661ce1dcso13212785a.0
-        for <linux-arm-msm@vger.kernel.org>; Fri, 04 Sep 2026 01:03:04 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="SPQr4bW2"
+Received: by mail-wm1-f52.google.com with SMTP id 5b1f17b1804b1-499ac87c92bso7892505e9.1
+        for <linux-arm-msm@vger.kernel.org>; Fri, 04 Sep 2026 01:04:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1788508984; x=1789113784; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:content-language
-         :references:cc:to:from:subject:user-agent:mime-version:date
-         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=eSPnEJt/utJLJrcQDxoCun9VKVut8jjz7U4CayigJTo=;
-        b=U/kj58Mi3iifLfPN1c6AHCY1oL6Q3HejLzY/swzjdpWRgMkHMXIvMEsyCW1Ctm4kZ1
-         nqZGKDG8P0oapYfhqicIUYY4fKRq5VSlOAr3US3PJifPs/IiUuBB5aidTnjXbqV2bcCu
-         tDjOLkAp0WATHQmCrl90t4Ehv0EwrXezlKSLpmRW21NKU8ipILdpbzmtbTTzq8UlCpa/
-         InWTUR9cwv3KOd7jDmrJQ4okDjNt4kr13xKDdloEH69t9EyOVAR/6uG12S7evRQDhMlW
-         At1eLzcxnDY/zqzvMcGmDlCg+GjWeI6uDwZqBHj1C+son6RxWQsPaKUW47z4pB8aAQNw
-         FLDA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788508984; x=1789113784;
-        h=content-transfer-encoding:content-type:in-reply-to:content-language
-         :references:cc:to:from:subject:user-agent:mime-version:date
-         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=linaro.org; s=google; t=1788509077; x=1789113877; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:organization
+         :autocrypt:content-language:references:cc:to:subject:reply-to:from
+         :user-agent:mime-version:date:message-id:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=eSPnEJt/utJLJrcQDxoCun9VKVut8jjz7U4CayigJTo=;
-        b=H2lS5XVDBu+J22lC0yxntTRh0bixXKmntCQZkQWRK73ySufhDBrvKX11OA6bA9OCJ/
-         cBlfxh0XQXn8Qa3qRWGMNjqAlk0+nPln2tK08AAwtq1ZWylB+3u7j1FQxyst/ZUYUFkY
-         pQ4ytA2C/3hZKmzW/y9qmeijPxW3c1yIesx300IbqeCKWuhYNriB9f57BYOAavTsQ7mD
-         k9ex8h08LDtDkfe6WPXDx36YfVZpGa4ElrZBfhdaw4CNf5+dY7vMTV1Y515P2sqgFKF0
-         JgQJx41bmzpPh77Se9Bq6Lx2Jxv/Gnr94zsqZI5//vspgx21UFWSu8EW3IKrW8bIwCzS
-         6VYA==
-X-Gm-Message-State: AFuF++mTJ4oIgfmjXBI0yaft3YJjq6p/KhlORBEswYCYxUHMauCKYEUC
-	u4FcIgylJvzVD7LbKtKKUMH9k59lpEfcM1nu23hrQ9F0tVRQ6Axl72ljrRi2Ka6rfIPomuEea1w
-	p4PwGTXC53rqrAAAPLYz1WsUyV9BOPIeLl2gGTkSmY+UXtdG6yocR6/0yjfZIsb1PlcsN
-X-Gm-Gg: AYBFou0jPFYpLNB78BXLk3I79WqdQySTYoNq33kCS7pTbFMzINIAb8SX1dVOnqP0cH/
-	N1xS9HbcAc4vmPhtQvEW+I7wnB+jBwBSRu8+sA8LDJqxTFSwZRBaprC/gEDCF8bct2/aFnD8bo8
-	OfCTg92QqaFp8c3hBdS1o6jFNfEWg3v3yFu0vHdnJsojLcg4CDTERy+Lu5g4z/tLwaUnMuB2q96
-	7AXOM2BfHThw+HxGu38J0Nlu9lc6RP+r9MWLFxLC752Ao62pgnyww64FyzK8Xxicxmdin7+Fe8b
-	YXDW6O+cMVdkWw+7JBHNXUhxQ25lxK+dgrCFGxSTgq4zJJC/Ejla5k46g6bGPbhdOEFgS6XneHN
-	Qp510jR0WTON8iaqMEPDY1g==
-X-Received: by 2002:a05:620a:4444:b0:939:6c63:a7da with SMTP id af79cd13be357-93980358fe1mr312045385a.0.1788508983621;
-        Fri, 04 Sep 2026 01:03:03 -0700 (PDT)
-X-Received: by 2002:a05:620a:4444:b0:939:6c63:a7da with SMTP id af79cd13be357-93980358fe1mr312040985a.0.1788508982948;
-        Fri, 04 Sep 2026 01:03:02 -0700 (PDT)
-Received: from [192.168.202.12] ([178.235.128.140])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c260d4aa0c7sm69797766b.20.2026.09.04.01.03.01
+        bh=rruwEAEh9lhIYAVfPHIlPTge7FNWYPLlI4FxCfMGXMA=;
+        b=SPQr4bW2Oj6yw/4MZ4UlNVcBFNPVf+hK53D+wmP/RDJaHzuuGYqiLlD2XFm2YKZX3p
+         V9qdcy2NyqSzNdfT8jV7x3npNBCw/ck3NN+bflPzsQDJxc8z+b0Op3sSgQcEUsgzVdS1
+         AniWBaw+p9t7+eIhAJAkpki51Ew6mgdcbuvEkW2bk9FfES0tpyKfXCx7uy5BnxSxxAGj
+         JLc0RoUVFG4lYJ+7boJQSFjQpizK6FSyPB6pwcR3sS12EiNHw1QibFQKAQuZkno/tvTz
+         ldMnGpFCP/ahnLkmcOVKV4Y8Tbq5i6FRY6QTAV5drUncpqTlDUvGckyi7VHHxzjGu0XO
+         zzPQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1788509077; x=1789113877;
+        h=content-transfer-encoding:content-type:in-reply-to:organization
+         :autocrypt:content-language:references:cc:to:subject:reply-to:from
+         :user-agent:mime-version:date:message-id:x-gm-gg:x-gm-message-state
+         :from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=rruwEAEh9lhIYAVfPHIlPTge7FNWYPLlI4FxCfMGXMA=;
+        b=Uv99Paoj1CESP5ZhTt6qb9ocps8kdgGaS2k3NDMzQR+7pWFNBngRtzYvq5DDspiQps
+         RqiKTAV+/g+oRmo+3LyAA2kWSfTucvuElB7uWEdCwozwRc+03SxbFJ1tW97/I0dnguos
+         VGPKcEIb+paESrsi+MXt0Szo+TP8qqG+dW1O6YZylhIFp41vRvszyS4bcM62ZvMm0c6Y
+         k8TX6tsbV1xx0Crjlblk3AgphZOC1PyBN6KzNJXfu5clMJFRCZQirPXA/j6ovurQypXK
+         g4pgFFeeAHYy0u6UFyor7ZOy5O6Ls0paWpYA2r3XIuKZx/l5Tzi3f2twJuVcTu0uuaqJ
+         bZYg==
+X-Gm-Message-State: AFuF++mnQ9bvYxceAVm3JFPrFkaRQQlMfW9GWR23aIcsPnrsYg3Cx/2o
+	SFlwKpw7OqyaEK2MhJ1Ize+gC6gFYaFsXbk4+88NXZN0uNDOP5dcfygxMFaelKt63QI=
+X-Gm-Gg: AYBFou3s8kud3fglo22WGOGEN9SV6mQAHD6JhRX2Jw+zH+uZ8/hr/E4x+1W/6jjeTPE
+	tF7zkeSoTm0xMy9GgJOIyvJj6oeqsQPaFmIAfCQswix8v1jJftUzkamG4Qq5i6W+W7yRyUBp0r9
+	J1S+PgMd/lmVX34cWftDJ1zWLoQWfT4jVNBN3g9j5C7p1xr7w+UIN2eB2V2nrWB17RbXz6cVjQn
+	8Shy8GHI9ceYYsLGOL+pKBGMqwSWGWQ8ms3bmK2tcoOrQSjGH9o353kk3TRO2MiIN8pZEvrYu9F
+	Bp4GGkMHROwhpBjFPhrMpFxpxz30EfNhAABa8oR1Rcp+wH7MPDhuELsRJgzS2mSLvEl8NU2r4hM
+	frTHee//nvGmYcsWo9Pw7bPQNz7OA6jLXBSGZhQHv48jeZmGMGiFxJhHUxz+ycV3P2X8t6ge78e
+	cOYyi6E3ZxEirMz4m1Ad9So8e5hptJO3Sgi6kC5KiAIkdg8IFTN06/xJ140fH/bJtbmeK2hzsLd
+	lDdWqsLj/4gQDsQOLlkBFEGJWjgGE05ab2cohazAIY=
+X-Received: by 2002:a05:600c:3b17:b0:49c:fc6e:8cb1 with SMTP id 5b1f17b1804b1-49cfc6e8db3mr13159185e9.21.1788509076654;
+        Fri, 04 Sep 2026 01:04:36 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:106d:1080:e8f4:b358:2087:5bd3? ([2a01:e0a:106d:1080:e8f4:b358:2087:5bd3])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-49cf772692dsm59072445e9.10.2026.09.04.01.04.35
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 04 Sep 2026 01:03:01 -0700 (PDT)
-Message-ID: <53b0b91c-6ca6-48a5-b93c-ca2ae9680ad0@oss.qualcomm.com>
-Date: Fri, 4 Sep 2026 10:03:00 +0200
+        Fri, 04 Sep 2026 01:04:36 -0700 (PDT)
+Message-ID: <d5b4c085-f5e2-418b-9b51-7cf47c064644@linaro.org>
+Date: Fri, 4 Sep 2026 10:04:35 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -87,86 +69,92 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
+From: Neil Armstrong <neil.armstrong@linaro.org>
+Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
 Subject: Re: [PATCH] tty: serial: qcom_geni: don't ida_free() the console port
  line
-From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-To: Neil Armstrong <neil.armstrong@linaro.org>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        Jiri Slaby <jirislaby@kernel.org>,
-        Viken Dadhaniya <quic_vdadhani@quicinc.com>
+To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+ Jiri Slaby <jirislaby@kernel.org>,
+ Viken Dadhaniya <quic_vdadhani@quicinc.com>
 Cc: linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-serial@vger.kernel.org
+ linux-serial@vger.kernel.org
 References: <20260904-topic-sm8x50-upstream-tty-serial-geni-fix-ida-free-v1-1-02e18c31aeba@linaro.org>
  <bbd0216d-8b50-424b-be1b-06453118a61b@oss.qualcomm.com>
-Content-Language: en-US
-In-Reply-To: <bbd0216d-8b50-424b-be1b-06453118a61b@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8
+ <53b0b91c-6ca6-48a5-b93c-ca2ae9680ad0@oss.qualcomm.com>
+Content-Language: en-US, fr
+Autocrypt: addr=neil.armstrong@linaro.org; keydata=
+ xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
+ GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
+ BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
+ qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
+ 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
+ AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
+ OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
+ Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
+ YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
+ GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
+ UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
+ GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
+ yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
+ QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
+ SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
+ 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
+ Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
+ oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
+ M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
+ 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
+ KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
+ 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
+ QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
+Organization: Linaro
+In-Reply-To: <53b0b91c-6ca6-48a5-b93c-ca2ae9680ad0@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Proofpoint-ORIG-GUID: pOtWj2Q8c083wMPJ_hvsxM4yj8dVrSlm
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTA0MDA3MyBTYWx0ZWRfX7lEduxdyC6qC
- +y1iVxRCwLE8LwWJkr6XV78oT/SBwYnWV5AMacxvis1nvrYPibmGFwjAbF468MCVJczG5BP3HMX
- BkEaHOj76WyZcjdIMfZi6UO7sJx3UCk=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTA0MDA3MyBTYWx0ZWRfX3E8nUYxLmN62
- 5H8liOBEdiC0ZWC1vOPB9OCA1eUxGwf1eWrc+kSutO81/AWGbk0dFJH0f/+MNPEnbdZoWTHeZOV
- uFSjzrdkm+I9xps6Xtka1XNFLR0bl3U8I+m7Em7Uqo9dIKUFY8G8VvL0X5tinpGdU/uEJDGzD56
- hfmzBvW7Ou6UF2WZoKprcw3lE69YQR9T5lIufauUc8HuvwJyvghiypPtzC0fjoYovJ767bG6RHS
- /glGyhSrvq+JfHwp3VsQdhfkYKs1SPm4lpTayuTZcADB0IRxOPTi7N7t3rHkLKJMLnvuwNWp2JX
- YgRp7KtBnSS2jbbJrpe6TB1ywoKDFyJy/w7xPr/ICMQgcAjX3Eg/yyZjpgrt7n5ojTPKngfAWIV
- gdXMIJMvHJN8ngMbM/bN2Ids1NPFL+IHQfv/jxTBmENNGIBfDq7Xrv86VS+5/1mgzmCMxDDUMhy
- RFTxUjhQF5uHZSGHc3A==
-X-Authority-Analysis: v=2.4 cv=NNTlPU6g c=1 sm=1 tr=0 ts=6a9a7b38 cx=c_pps
- a=hnmNkyzTK/kJ09Xio7VxxA==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
- a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22
- a=KKAkSRfTAAAA:8 a=oCYrDJX_Fzh7Vr1zKUEA:9 a=QEXdDO2ut3YA:10
- a=PEH46H7Ffwr30OY-TuGO:22 a=cvBusfyB2V15izCimMoJ:22
-X-Proofpoint-GUID: pOtWj2Q8c083wMPJ_hvsxM4yj8dVrSlm
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-04_02,2026-09-03_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 lowpriorityscore=0 spamscore=0 bulkscore=0 adultscore=0
- malwarescore=0 clxscore=1015 suspectscore=0 impostorscore=0
- priorityscore=1501 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
- definitions=main-2609040073
 
-On 9/4/26 10:02 AM, Konrad Dybcio wrote:
-> On 9/4/26 9:09 AM, Neil Armstrong wrote:
->> The console port (qcom_geni_console_port) is a static instance whose
->> uport.line is hardcoded to 0 and is never allocated from port_ida.
->> Only the non-console path in get_port_from_line() calls ida_alloc_range().
+On 9/4/26 10:03, Konrad Dybcio wrote:
+> On 9/4/26 10:02 AM, Konrad Dybcio wrote:
+>> On 9/4/26 9:09 AM, Neil Armstrong wrote:
+>>> The console port (qcom_geni_console_port) is a static instance whose
+>>> uport.line is hardcoded to 0 and is never allocated from port_ida.
+>>> Only the non-console path in get_port_from_line() calls ida_alloc_range().
+>>>
+>>> Fix the qcom_geni_serial_remove() and the matching probe() error path
+>>> so unbinding the console device doesn't hit:
+>>>
+>>>    WARNING: ida_free called for id=0 which is not allocated
+>>>    <snip>
+>>>    qcom_geni_serial_remove+0x58/0x80
+>>>
+>>> Fixes: a53be6945f51 ("serial: qcom-geni: Remove alias dependency from qcom serial driver")
+>>> Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
+>>> ---
 >>
->> Fix the qcom_geni_serial_remove() and the matching probe() error path
->> so unbinding the console device doesn't hit:
 >>
->>   WARNING: ida_free called for id=0 which is not allocated
->>   <snip>
->>   qcom_geni_serial_remove+0x58/0x80
+>>>   drivers/tty/serial/qcom_geni_serial.c | 6 ++++--
+>>>   1 file changed, 4 insertions(+), 2 deletions(-)
+>>>
+>>> diff --git a/drivers/tty/serial/qcom_geni_serial.c b/drivers/tty/serial/qcom_geni_serial.c
+>>> index 3633723acef8..bdbdfd7dfaac 100644
+>>> --- a/drivers/tty/serial/qcom_geni_serial.c
+>>> +++ b/drivers/tty/serial/qcom_geni_serial.c
+>>> @@ -1979,7 +1979,8 @@ static int qcom_geni_serial_probe(struct platform_device *pdev)
+>>>   						port->wakeup_irq);
+>>>   		if (ret) {
+>>>   			device_init_wakeup(&pdev->dev, false);
+>>> -			ida_free(&port_ida, uport->line);
+>>> +			if (!uart_console(uport))
+>>> +				ida_free(&port_ida, uport->line);
 >>
->> Fixes: a53be6945f51 ("serial: qcom-geni: Remove alias dependency from qcom serial driver")
->> Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
->> ---
+>> GPT points out this will always return false before uart_add_one_port()
+>> is called
 > 
-> 
->>  drivers/tty/serial/qcom_geni_serial.c | 6 ++++--
->>  1 file changed, 4 insertions(+), 2 deletions(-)
->>
->> diff --git a/drivers/tty/serial/qcom_geni_serial.c b/drivers/tty/serial/qcom_geni_serial.c
->> index 3633723acef8..bdbdfd7dfaac 100644
->> --- a/drivers/tty/serial/qcom_geni_serial.c
->> +++ b/drivers/tty/serial/qcom_geni_serial.c
->> @@ -1979,7 +1979,8 @@ static int qcom_geni_serial_probe(struct platform_device *pdev)
->>  						port->wakeup_irq);
->>  		if (ret) {
->>  			device_init_wakeup(&pdev->dev, false);
->> -			ida_free(&port_ida, uport->line);
->> +			if (!uart_console(uport))
->> +				ida_free(&port_ida, uport->line);
-> 
-> GPT points out this will always return false before uart_add_one_port()
-> is called
+> You can use if (data->console) instead
 
-You can use if (data->console) instead
+Yep will do
 
-Konrad
+Thanks
+
+> 
+> Konrad
+
