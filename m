@@ -1,187 +1,358 @@
-Received: from mail-ed1-f49.google.com (mail-ed1-f49.google.com [209.85.208.49])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 17E73389DF0
-	for <linux-arm-msm@vger.kernel.org>; Fri,  4 Sep 2026 14:34:32 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.208.49
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 22EFA388394
+	for <linux-arm-msm@vger.kernel.org>; Fri,  4 Sep 2026 14:35:20 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788532475; cv=none; b=D0hXkHNBP8Do2RyVRHYitlzwOWgA+uHp6on+AAm8oG0/S4tXpYEtVy84Meh3nz5MYU8zw9ZqFhl3dWWirEsULWxi/+ImFipMXmM7Z9bbHUiXY16mJSJcaA/cRhRp+QnKEhxf6tc1CkxZFkTDb7It3QOjhUzBAnF8ua3cDy+d+m0=
+	t=1788532522; cv=none; b=NaACOiYkjLKNtGI6iMRiBrSssI8Txj/tBdz3pUEJFzxNQzJVqXD0AhHfiXJvigsoPdVeAnoSIvrlIQQyong8ajgb+/s+37Z4KAiXv2IAsT2G3sjqr/bENY/Z87z9v3qWuqMUBwMaKC6bbHcp/YcKnjcbm6a6dtRjqFKiHJP4Vu8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788532475; c=relaxed/simple;
-	bh=iwANdAqzga+zM/yuSu0exzs6VE5a7yEytpMIJzjLBcQ=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=HIhKWUfd9IELKZrFYO+5T3iDO5l9sr1bDnH4J1vmelLIPdauk3uVbWhQ08eElhrV2tCs1AYrkSWEIxWGQ15i7e6/T0NYjVTaZJzdaJ/XaHWQRxnlADCrV+YUxfqWIKRHlHQfd8bQDlzisANZT0UGr8PNAJWghI50Lnw0YCmUc8M=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=chromium.org; spf=pass smtp.mailfrom=chromium.org; dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org header.b=oXRqdZEO; arc=none smtp.client-ip=209.85.208.49
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=chromium.org
+	s=arc-20240116; t=1788532522; c=relaxed/simple;
+	bh=pZKTVhTO93s4fP8/iVQrlhUlfkTSYeUnRbwVzDjw/80=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=Ke/bxL8pEqQ1coObZ1p1hL3QWmHx7+sBrJsqhVxfWc5kWT1AhJGtYTJeF+kxL5wGXLZU/AOldJ5BjrfeLAqFLwUqf0VSaRy1YGfnE1hZEgm3c+u/nmXpqNYCnbU/H9n8YYWmkjtWnhbfEuyqxSUeNG93QhQIuXauHYVUsOjPvpY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=Y7RgH7tY; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=Thti4ZZJ; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org header.b="oXRqdZEO"
-Received: by mail-ed1-f49.google.com with SMTP id 4fb4d7f45d1cf-6a082b3671fso1410406a12.3
-        for <linux-arm-msm@vger.kernel.org>; Fri, 04 Sep 2026 07:34:32 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="Y7RgH7tY";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Thti4ZZJ"
+Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 684Dgs5B2537350
+	for <linux-arm-msm@vger.kernel.org>; Fri, 4 Sep 2026 14:35:20 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-type:date:from:in-reply-to:message-id:mime-version
+	:references:subject:to; s=qcppdkim1; bh=BWwUUTVbhJgNNGfDPzA8/VcC
+	f/cj3xiJQEj61y8nqeQ=; b=Y7RgH7tY1fnJXfokcyRO8TfKGpA7XpNETPsPiZNS
+	EeMakQl6WruaUpXgK2spSsSWTDdaVOWzujzSRbvls2HHXYa89k7cEE5v8ARpzLUb
+	fI5ggBAGLbMKzUDXDGg0n9aMIFsQnHhJpfC77BWjgSZY9CSxNNHvREH71k+IdljT
+	3oYwRmFV9xwmnShn7wFFNPg/amWW5r0nZs/taAa2AuUOUFEuLbQ6fKCrWI7GyZBA
+	pbqYNGxElvbI3ojADYEPcy8r99BPJw6EO1fNPmPpBXcTZ2I4eoVcQeF9/6vOdicy
+	8OY/xhPjt1oRxcDITswFrxLYJFbuFT57qKQH9KZ+1MQI9g==
+Received: from mail-vs1-f69.google.com (mail-vs1-f69.google.com [209.85.217.69])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gfpmqt3sp-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 04 Sep 2026 14:35:20 +0000 (GMT)
+Received: by mail-vs1-f69.google.com with SMTP id ada2fe7eead31-785c40b6318so678468137.2
+        for <linux-arm-msm@vger.kernel.org>; Fri, 04 Sep 2026 07:35:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=chromium.org; s=google; t=1788532471; x=1789137271; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+        d=oss.qualcomm.com; s=google; t=1788532519; x=1789137319; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
          :date:message-id:reply-to:content-type;
-        bh=1ck7BSWkkXwWvroZN1jbW0sU0ReXY/y4Y6ENpLqokqE=;
-        b=oXRqdZEOfYyYPi2iKjTa4er9gO4ge2Og0W6LYjns9thRKGBFYkSxp2fYL0ns239gAc
-         URPTTb0FIuR08wioB4QUj6AfVZlUqUHpN6A2P6VxWT9Gk+c7FEK3+I/2mExILpYGz12h
-         v1iGZh6aD6pQHjMo5xe3u2bhLSQS8mXPW/YXE=
+        bh=BWwUUTVbhJgNNGfDPzA8/VcCf/cj3xiJQEj61y8nqeQ=;
+        b=Thti4ZZJPTD7WKyGgrGhAx7qUoT3k3atf9tr1f0HqA2nGbKrF7oHWiO/ln8qXVnPsv
+         UjzNLK2iWCy4eZV/3pW81C4cPGNzaYB+86nsOVQATB8EVtTjIDYEMsUb+PzOoKIRLEzE
+         ic8AnmvjodgQb7YA2YRgU021CugajVnLupjAy0ZCtnrl+iEkdmDixfSYvCSn8jNocGbQ
+         BbI1eL4sjuNs1n4qIzIKP2a2guMU0QtsVNez/VqqmacLaxngyheBxRmofKk/UvesvYTg
+         7cG/NFWF4Nt64yZdL5EJJ7fpFURRjQHxnNMv09OquBBBYPqrXJ81UQzNS92jRs06ctlm
+         LMmA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788532471; x=1789137271;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:x-gm-gg
+        d=1e100.net; s=20251104; t=1788532519; x=1789137319;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=1ck7BSWkkXwWvroZN1jbW0sU0ReXY/y4Y6ENpLqokqE=;
-        b=fEQv8cBDg0/3ykuNiVl1eX5QFoV6rnRs6+gHLdd6nLo1GmprzZvvDkfn+7oNKXR4cK
-         3cepkJU+kqWji8VoHUn51WH2Z1xjWsKHCTzu5vdyyWH0cvB/3c/P1vTrbFTU5iXbfupI
-         oPRHJj88orXrU1NlRm3UYPMmpoGkhe+2t5T81aZDzptOCSDnu8e21yOEPBBc2eXKUrT0
-         PY0ufuk20Snl5/t+fEpc8V6ng1NnSfD8xmEFlDfaI1aspKdbnSYl/eJTCi8f3Wvs4XRw
-         ttnV9srcr57OXsBcKr9p0dMocU0urUNn1jArgm8mFKOE/sZAJ6qbMfwP6GkEVQ8sftfb
-         E6/g==
-X-Forwarded-Encrypted: i=1; AKwUvBwxyggh+oTHPXVE3rBynuKikeP2Y2AkNIUTk1CCZ6m5CrM4GlAru6V7OJSXgtW/bBN8xGXOIENPAL49bqhe@vger.kernel.org
-X-Gm-Message-State: AFuF++nhlxIgdXQ4j4h3zeSU3n/HmBWBFM5VuMrCrUxSy9ybiutOOC9m
-	HxgYE1O7UPOCl4ZvDizfEAcekWyQFQQVjNm5Q9/NXg6nky+jDLnT6uHFaHsq5NyfiAsQ4FV/uI9
-	emvw=
-X-Gm-Gg: AYBFou2XQwXnDElpdDKYAK10VuHoIiSO4Tfb/HguSdWCLPtEVXvfaWvUSnL3R/mS0Y0
-	VzYcG88kqP97tqwweM9pcVfH7cPu1xWB0ZW4f3xAYgwGXASmEsPlF/qF+Lww1K+RyUng0VIBHRN
-	Qi3rY6U7BICc/KXXVizHNverGWYBvTrxg7cB/ZnLhMs/Z+M8eYXZcdC6b9NBYk7jMbteRzzDiHy
-	0Jc88FJpaXTObNcvpMjvL98AKSs3QGSJtESzxQ7ZxqP81+Zdczc2MadZvBqQ8WX2YbCQ2wgTrvc
-	39F4NJobcworwZ0VDXtg6/WNOQFt1fDd27dOXfYKY6ehFnO+wMxsMDUdCL4yALdwJasNejMQ5ZN
-	KlvOn6AGcaxYM5soTmah8t6fMOuZBg1qIXjPFc8dp5rvAxeNB1zVmUJyrRjjDoOe5Mm5/OozkTZ
-	pO0BqEQgBU4GHVo3VLp4BleqGHqFUsa/n7YFSo8FboytHJxZOLCT2SPwboJoUNTTC0lPs3d+NJt
-	0L5trYz9j9IF/AI2UDn7NWiEts=
-X-Received: by 2002:a05:6402:3554:b0:6a6:21d9:541f with SMTP id 4fb4d7f45d1cf-6a7e8d4d131mr4178665a12.6.1788532471022;
-        Fri, 04 Sep 2026 07:34:31 -0700 (PDT)
-Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com. [209.85.128.44])
-        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-6a7e6bee8e8sm1354855a12.23.2026.09.04.07.34.29
-        for <linux-arm-msm@vger.kernel.org>
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 04 Sep 2026 07:34:30 -0700 (PDT)
-Received: by mail-wm1-f44.google.com with SMTP id 5b1f17b1804b1-49b9320423cso11637215e9.0
-        for <linux-arm-msm@vger.kernel.org>; Fri, 04 Sep 2026 07:34:29 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AKwUvBzaOS2NIeJe9SpUZ1YQ74JLNIs2YL1hJ8AU0K+y2giBf7R0nHNQmRzrc2VrrUyY4j+3I5Eipl4bR6mzAj3R@vger.kernel.org
-X-Received: by 2002:a05:600c:6087:b0:49c:d52e:d0ea with SMTP id
- 5b1f17b1804b1-49cf81e3454mr116251535e9.4.1788532464702; Fri, 04 Sep 2026
- 07:34:24 -0700 (PDT)
+        bh=BWwUUTVbhJgNNGfDPzA8/VcCf/cj3xiJQEj61y8nqeQ=;
+        b=ju6Zqz0wORn7Ffmta5n2TRXXx48DccFCgAZzmcX8/rK0WFucAS7o4cwcHdeWOav8ZI
+         xO2WhuJ8jJaguhYDMTiWP5HCXraSXf8igmWq852jfMvlabfoxnFVvEX8tCnIoQLRm2Dz
+         baoAms+rQ0h/cWR1+SUuZliuM10ZdiZPCiX8MVMDYcTSYJIsKGj3ehzIEtYSsP0TE46/
+         7tftXnm8tQvRKjerIFHX0IHm1QnhRZuBoGjtIg3KOjpjKglAB56sOsdAjscJAd0SkVeB
+         FMwMdntvI3VTNY0vR7hgaArjLCqCCyAHywQafxdULGKNOOvXmj3Gfa7BZvXXqbiqcpmF
+         ThfQ==
+X-Forwarded-Encrypted: i=1; AKwUvBy0LY4sfSH+eOY6B58oNiMK76LnRbJvUiBKn+GxH8yFsCSdsL4UsebT12xf5mrNIUtEOhmf7F7mws3dZBzC@vger.kernel.org
+X-Gm-Message-State: AFuF++nkzTaLfC/HlovBUVROckH1MkvcJbyMwOBXIiivelHEmVLYGwhx
+	s2nPIyfZfN2uCfdn5VhEmQdSPvI5NcFI0SW7yRGBD5SvFVZzJtTv8+65mMxqQJU3WorK1/OIDHG
+	agJuEL3sEXr8wWJPcq4UkQc66V875FXjmIYmiOUP4QWVP24P2aAR6yhu8caza4Ttl/7NS
+X-Gm-Gg: AYBFou20rC1pXOnqW4kw5//NxHQ3DJ7adO4m0zp6SUD9lfGUQAjwk3aiEGbCytLz7Bh
+	HSwiEQCmv2wznNwKOrpjSRuWy3AOkk4CKScxO6ErB9enOVMmMwjO5vnmm2P8bk4FXmXmuuJt1WB
+	mp2q5/xF9mCiC/lp1TF4No9Wkg1e7daLftqGXSWVgPBJLfyByFdaiXApIH2p81WzHbDguiG016e
+	5lL5QrRb0fZFjS5aaSAOD0H5twXhaXRtWev4FiyCn95tBIYiBvmgclYCIptdDml0CBf+mtR8z+F
+	O6eEbdGVKCwu++ZT6BeVOCXxH49zC7yIh+QdtrvS5CVnVXiFHffcJkp75h8RdHCEtJEfwbDqzuD
+	ChaS/BSF2wlZhaQ==
+X-Received: by 2002:a05:6102:f9b:b0:786:8a7:92e3 with SMTP id ada2fe7eead31-78a4a72db1emr2699106137.2.1788532519067;
+        Fri, 04 Sep 2026 07:35:19 -0700 (PDT)
+X-Received: by 2002:a05:6102:f9b:b0:786:8a7:92e3 with SMTP id ada2fe7eead31-78a4a72db1emr2699029137.2.1788532517344;
+        Fri, 04 Sep 2026 07:35:17 -0700 (PDT)
+Received: from localhost ([188.216.77.92])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c260d55b306sm117302366b.36.2026.09.04.07.35.16
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 04 Sep 2026 07:35:16 -0700 (PDT)
+Date: Fri, 4 Sep 2026 16:35:15 +0200
+From: Lorenzo Bianconi <lorenzo.bianconi@oss.qualcomm.com>
+To: Bjorn Helgaas <helgaas@kernel.org>
+Cc: Bjorn Helgaas <bhelgaas@google.com>,
+        Lorenzo Pieralisi <lpieralisi@kernel.org>,
+        Krzysztof =?utf-8?Q?Wilczy=C5=84ski?= <kwilczynski@kernel.org>,
+        Manivannan Sadhasivam <mani@kernel.org>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>,
+        Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>,
+        Linus Walleij <linusw@kernel.org>,
+        Bartosz Golaszewski <brgl@kernel.org>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        Michael Walle <mwalle@kernel.org>, Alex Elder <elder@riscstar.com>,
+        Daniel Thompson <daniel@riscstar.com>, linux-pci@vger.kernel.org,
+        devicetree@vger.kernel.org, linux-gpio@vger.kernel.org,
+        linux-arm-msm@vger.kernel.org
+Subject: Re: [PATCH v2 4/5] PCI/pwrctrl: tc9563: switch per-port reset to
+ GPIO descriptor API
+Message-ID: <aprXI4UUaIk_bMFc@lore-desk>
+References: <20260903-pci-tc9563-aux-v2-4-34c625b542c1@oss.qualcomm.com>
+ <20260903220311.GA2250435@bhelgaas>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260902-qcom-wdt-nmi-series-v3-0-f3999362a9ea@google.com>
- <20260902-qcom-wdt-nmi-series-v3-1-f3999362a9ea@google.com>
- <87fqzp8jex.ffs@fw13> <87wlt13zj1.wl-maz@kernel.org>
-In-Reply-To: <87wlt13zj1.wl-maz@kernel.org>
-From: Doug Anderson <dianders@chromium.org>
-Date: Fri, 4 Sep 2026 07:34:12 -0700
-X-Gmail-Original-Message-ID: <CAD=FV=ULeHqEZE-a9vV9F6vVMLVBPDTeXTgnmU_Bqui8sc1ZZA@mail.gmail.com>
-X-Gm-Features: AcwNN1VrCYtMK0FuxIEwY-YB8TuqCWsz3J5Ntif2-4hFkWwShLrXdtkOdhxnO4s
-Message-ID: <CAD=FV=ULeHqEZE-a9vV9F6vVMLVBPDTeXTgnmU_Bqui8sc1ZZA@mail.gmail.com>
-Subject: Re: [PATCH v3 1/5] genirq: Synchronize in-flight handlers during NMI teardown
-To: Marc Zyngier <maz@kernel.org>
-Cc: Thomas Gleixner <tglx@kernel.org>, Mayank Rungta <mrungta@google.com>, 
-	Wim Van Sebroeck <wim@linux-watchdog.org>, Guenter Roeck <linux@roeck-us.net>, 
-	Radu Rendec <radu@rendec.net>, linux-watchdog@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
-	"Kirill A. Shutemov" <kas@kernel.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="lE5DYGO/JfD+FQa1"
+Content-Disposition: inline
+In-Reply-To: <20260903220311.GA2250435@bhelgaas>
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTA0MDEzMiBTYWx0ZWRfX+YQmoFNFBAe1
+ e46hotCNfRqkrxIF51VPYcZbwO2uXiLjtoJMiqIqPPhISzxjIKzX0bpO6I2Xd3QwGMzUSIzelvh
+ IrYQlMdY5l58ZuIQXysRlyc+0SxYh1Q=
+X-Authority-Analysis: v=2.4 cv=eovvCIpX c=1 sm=1 tr=0 ts=6a9ad728 cx=c_pps
+ a=5HAIKLe1ejAbszaTRHs9Ug==:117 a=WpTaRW6qxYHRGzLzQsVYzg==:17
+ a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22 a=EUspDBNiAAAA:8
+ a=OhhHAVtvP0aG5I1CcfYA:9 a=CjuIK1q_8ugA:10 a=wkYq-V80zuO17UhYMvoA:9
+ a=gYDTvv6II1OnSo0itH1n:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTA0MDEzMiBTYWx0ZWRfX8VmhDXL5yDKZ
+ ynJ2ved1a8GZqhRoe55Pb4Quz9lLPzv1tT6Fg8YO+bUps17SjQMtSlXlJ3pUumLn11N25PyPopN
+ 05wtyLMOL/oOgAkpOPx35kWJ6JM+AnMXUC+YslmHGvaZNUbLv5ZZS/t7YwjZFMvkJ90iEc0l0I2
+ FqNFJ+sLLRiLGIkLau3YY0/ShW16iC6c/zoZDMyndi7Rx9OIOvZe/Z99x15MQAUl2zYh7Jjr8+J
+ 7FGX1bvQCGpLBEYjZ8s9ESBp1iqsaOMTNszsx2KG0EM9Kl+bWLKvviIsQAFtfIUEtVLuXpnnK51
+ KIz5P+9g3iedM5mQcnGEfdpJYbHAkpIolFo+fVz64WQN778MuNEPDMQ3F8rt35fms3JLwVAydeh
+ VT33ruXVKJkBPKUDgEWVYeiXsYYgV2kSb9XbkGd9z4Y2W5qqqvNqH8HUTzyCV1fiNZfHxyIwnWx
+ ACvj+62pBv5il4LRZig==
+X-Proofpoint-ORIG-GUID: LcxfQRpCsEj1Rl6FtYLSumB-H2Ox_aIu
+X-Proofpoint-GUID: LcxfQRpCsEj1Rl6FtYLSumB-H2Ox_aIu
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-09-04_04,2026-09-03_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ priorityscore=1501 phishscore=0 impostorscore=0 spamscore=0 adultscore=0
+ lowpriorityscore=0 bulkscore=0 suspectscore=0 clxscore=1015 malwarescore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2609040132
+
+--lE5DYGO/JfD+FQa1
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-Hi,
+> On Thu, Sep 03, 2026 at 09:53:00AM +0200, Lorenzo Bianconi wrote:
+> > Remove the local TC9563_GPIO_MASK and TC9563_GPIO_DEASSERT_BITS
+> > definitions, which are no longer used after switching to the GPIO
+> > descriptor API.
+> >=20
+> > Replace the direct regmap-based per-port reset logic in
+> > assert_deassert_reset() with gpiod_direction_output() calls, falling
+> > back to the legacy regmap approach only when no reset-gpios DT
+> > property is present for a given port.
+> >=20
+> > Add the reset GPIO pointer to struct tc9563_pwrctrl_cfg and introduce
+> > tc9563_pwrctrl_parse_reset_line() to look up reset-gpios from each
+> > PCI downstream port child node. The lookup is done lazily at the
+> > beginning of power_on(), returning -EPROBE_DEFER until the GPIO chip
+> > is registered.
+> >=20
+> > Signed-off-by: Lorenzo Bianconi <lorenzo.bianconi@oss.qualcomm.com>
+>=20
+> Capitalize "Switch per-port ..." in subject.
 
-On Fri, Sep 4, 2026 at 6:38=E2=80=AFAM Marc Zyngier <maz@kernel.org> wrote:
->
-> On Fri, 04 Sep 2026 10:17:42 +0100,
-> Thomas Gleixner <tglx@kernel.org> wrote:
-> >
-> > On Wed, Sep 02 2026 at 18:54, Mayank Rungta wrote:
-> > > diff --git a/kernel/irq/manage.c b/kernel/irq/manage.c
-> > > index 2fbff2618a1e..a9973b61163a 100644
-> > > --- a/kernel/irq/manage.c
-> > > +++ b/kernel/irq/manage.c
-> > > @@ -1379,6 +1379,14 @@ static bool irq_supports_nmi(struct irq_desc *=
-desc)
-> > >     if (d->chip->irq_bus_lock || d->chip->irq_bus_sync_unlock)
-> > >             return false;
-> > >
-> > > +   /*
-> > > +    * NMIs cannot set IRQD_IRQ_INPROGRESS because they cannot acquir=
-e
-> > > +    * spinlocks. Synchronous disable and teardown require querying t=
-he
-> > > +    * hardware state via ->irq_get_irqchip_state().
-> > > +    */
-> > > +   if (!d->chip->irq_get_irqchip_state)
-> > > +           return false;
-> > > +
-> > >     return d->chip->flags & IRQCHIP_SUPPORTS_NMI;
-> > >  }
-> > >
-> > > @@ -2034,11 +2042,20 @@ static const void *__cleanup_nmi(unsigned int=
- irq, struct irq_desc *desc)
-> > >     struct irqaction *action =3D NULL;
-> > >     const char *devname =3D NULL;
-> > >
-> > > +   guard(mutex)(&desc->request_mutex);
-> > > +
-> > >     scoped_guard(raw_spinlock_irqsave, &desc->lock) {
-> > > -           irq_nmi_teardown(desc);
-> > > +           irq_settings_clr_disable_unlazy(desc);
-> > > +           irq_shutdown(desc);
-> > > +   }
-> > >
-> > > -           desc->istate &=3D ~IRQS_NMI;
-> > > +   /*
-> > > +    * Ensure all in-flight NMI handlers on other CPUs complete befor=
-e
-> > > +    * clearing desc->action or tearing down NMI state.
-> > > +    */
-> > > +   __synchronize_hardirq(desc, true);
-> >
-> > NMIs are strictly per CPU interrupts. So how is this supposed to work
-> > correctly when looking at irqchip_state(ACTIVE) ?
-> >
-> > Marc?
->
-> I have no idea what this is trying to achieve.
->
-> This can only work for a global interrupt, not for a CPU-private
-> interrupt, since in general you can't observe the state of the
-> interrupt on another CPU.
->
-> My guess is that the OP is trying to trigger an NMI using a global
-> interrupt, which we never intended to be supported. That's not to say
-> that it cannot be supported, but this patch seems to be breaking the
-> core use case...
+ack, I will fix it in v2.
 
-The overall goal is to take the watchdog bark interrupt (which is a
-GIC Shared Peripheral Interrupt) and promote it to NMI. An example of
-that interrupt in the device tree for one Qualcomm board:
+>=20
+> Question below.
+>=20
+> > ---
+> >  drivers/pci/pwrctrl/pci-pwrctrl-tc9563.c | 85 ++++++++++++++++++++++++=
++++-----
+> >  1 file changed, 73 insertions(+), 12 deletions(-)
+> >=20
+> > diff --git a/drivers/pci/pwrctrl/pci-pwrctrl-tc9563.c b/drivers/pci/pwr=
+ctrl/pci-pwrctrl-tc9563.c
+> > index 6df512d78b54..09ab4718db8a 100644
+> > --- a/drivers/pci/pwrctrl/pci-pwrctrl-tc9563.c
+> > +++ b/drivers/pci/pwrctrl/pci-pwrctrl-tc9563.c
+> > @@ -57,9 +57,6 @@
+> >  #define TC9563_POWER_CONTROL		0x82b09c
+> >  #define TC9563_POWER_CONTROL_OVREN	0x82b2c8
+> > =20
+> > -#define TC9563_GPIO_MASK		0xfffffff3
+> > -#define TC9563_GPIO_DEASSERT_BITS	0xc  /* Clear to deassert GPIO */
+> > -
+> >  #define TC9563_TX_MARGIN_MIN_UA		400000
+> > =20
+> >  /*
+> > @@ -85,6 +82,7 @@ struct tc9563_pwrctrl_cfg {
+> >  	u8 nfts[2]; /* GEN1 & GEN2 */
+> >  	bool disable_dfe;
+> >  	bool disable_port;
+> > +	struct gpio_desc *reset;
+> >  };
+> > =20
+> >  #define TC9563_PWRCTL_MAX_SUPPLY	6
+> > @@ -349,16 +347,40 @@ static int tc9563_pwrctrl_set_nfts(struct tc9563_=
+pwrctrl *tc9563,
+> >  static int tc9563_pwrctrl_assert_deassert_reset(struct tc9563_pwrctrl =
+*tc9563,
+> >  						bool deassert)
+> >  {
+> > -	int ret, val;
+> > -
+> > -	ret =3D regmap_write(tc9563->regmap, TC9563_GPIO_CONFIG,
+> > -			   TC9563_GPIO_MASK);
+> > -	if (ret)
+> > -		return ret;
+> > -
+> > -	val =3D deassert ? TC9563_GPIO_DEASSERT_BITS : 0;
+> > +	int i;
+> > +
+> > +	for (i =3D 0; i < ARRAY_SIZE(tc9563->cfg); i++) {
+> > +		int err;
+> > +
+> > +		if (tc9563->cfg[i].reset) {
+> > +			err =3D gpiod_direction_output(tc9563->cfg[i].reset,
+> > +						     !deassert);
+> > +			if (err)
+> > +				return err;
+> > +		} else {
+> > +			/* Fallback: legacy DTS without reset-gpios */
+> > +			switch (i) {
+> > +			case TC9563_DSP1:
+> > +			case TC9563_DSP2:
+> > +				err =3D regmap_clear_bits(tc9563->regmap,
+> > +							TC9563_GPIO_CONFIG,
+> > +							BIT(i + 1));
+> > +				if (err)
+> > +					return err;
+> > +
+> > +				err =3D regmap_assign_bits(tc9563->regmap,
+> > +							 TC9563_RESET_GPIO,
+> > +							 BIT(i + 1), deassert);
+> > +				if (err)
+> > +					return err;
+> > +				break;
+> > +			default:
+> > +				break;
+> > +			}
+> > +		}
+> > +	}
+> > =20
+> > -	return regmap_write(tc9563->regmap, TC9563_RESET_GPIO, val);
+> > +	return 0;
+> >  }
+> > =20
+> >  static int tc9563_pwrctrl_parse_device_dt(struct device_node *node,
+> > @@ -393,6 +415,41 @@ static int tc9563_pwrctrl_parse_device_dt(struct d=
+evice_node *node,
+> >  	return 0;
+> >  }
+> > =20
+> > +static int tc9563_pwrctrl_parse_reset_line(struct tc9563_pwrctrl *tc95=
+63)
+> > +{
+> > +	enum tc9563_pwrctrl_ports port =3D TC9563_USP;
+> > +	struct device *dev =3D tc9563->pwrctrl.dev;
+> > +	struct device_node *node =3D dev->of_node;
+> > +
+> > +	for_each_child_of_node_scoped(node, child) {
+> > +		struct tc9563_pwrctrl_cfg *cfg;
+> > +
+> > +		if (!of_node_is_type(child, "pci"))
+> > +			continue;
+> > +
+> > +		if (++port >=3D TC9563_MAX)
+> > +			break;
+> > +
+> > +		cfg =3D &tc9563->cfg[port];
+> > +		if (cfg->reset) /* Already discovered */
+> > +			continue;
+> > +
+> > +		cfg->reset =3D devm_fwnode_gpiod_get(dev, of_fwnode_handle(child),
+> > +						   "reset", GPIOD_ASIS,
+> > +						   NULL);
+> > +		if (IS_ERR(cfg->reset)) {
+> > +			int err =3D PTR_ERR(cfg->reset);
+> > +
+> > +			cfg->reset =3D NULL;
+> > +			if (err !=3D -ENOENT)
+> > +				return dev_err_probe(dev, err,
+> > +						     "failed to get reset\n");
+> > +		}
+> > +	}
+> > +
+> > +	return 0;
+> > +}
+> > +
+> >  static void tc9563_pwrctrl_adev_release(struct device *dev)
+> >  {
+> >  	struct auxiliary_device *adev =3D to_auxiliary_dev(dev);
+> > @@ -480,6 +537,10 @@ static int tc9563_pwrctrl_power_on(struct pci_pwrc=
+trl *pwrctrl)
+> >  	struct tc9563_pwrctrl_cfg *cfg;
+> >  	int ret, i;
+> > =20
+> > +	ret =3D tc9563_pwrctrl_parse_reset_line(tc9563);
+> > +	if (ret)
+> > +		return ret;
+>=20
+> Seems like this call would fit better in
+> tc9563_pwrctrl_parse_device_dt() since it already handles similar
+> properties and nothing in DT is changing.
+>=20
+> But I guess this is because the GPIO chip may not be registered at
+> tc9563_pwrctrl_probe() time.  Could tc9563_pwrctrl_probe() itself
+> return -EPROBE_DEFER?  Returning it from tc9563_pwrctrl_power_on()
+> seems a little weird.
 
-interrupts =3D <GIC_SPI 0 IRQ_TYPE_EDGE_RISING>;
+Correct, I am not running tc9563_pwrctrl_parse_reset_line() in
+tc9563_pwrctrl_parse_device_dt() since GPIO chip may not be registered at
+moment (we need to run tc9563_pwrctrl_add_gpio_adev() first).
+Moreover, pwrctrl power_on() callback is running during PCI host bridge
+driver probe:
 
-The patches in this series seem to accomplish that. With the current
-arm64 pseudo-NMI implemnttion, requesting as NMI just bumps up the
-priority of an interrupt to "NMI" level and that works fine on SPIs as
-well. On arm64/GIC interrupts are routed to a single CPU anyway, so
-requesting it with `IRQF_PERCPU | IRQF_NOBALANCING` didn't seem
-absurd.
+	qcom_pcie_probe()
+	-> dw_pcie_host_init()
+	   -> qcom_pcie_host_init()
+	      -> pci_pwrctrl_power_on_devices()
+	         -> tc9563_pwrctrl_power_on()
 
-The biggest problem we had was properly cleaning up the NMI at module
-"unload" time. To make that work, we needed a way to synchronize the
-NMIs to ensure they were quiescent before the module was unloaded.
-That's what this patch is attempting, and is mostly attempting to
-respond to Sashiko feedback on earlier patches.
+But this approach will allow us to avoid running pci_pwrctrl_destroy_device=
+s()
+in qcom_pcie_host_init() if tc9563_pwrctrl_power_on() returns -EPROBE_DEFER
+(e.g. if the GPIO controller has not fully probed yet).
+If we return -EPROBE_DEFER in tc9563_pwrctrl_probe() this kernel will destr=
+oy
+even the GPIO aux device and we need to create it again during the next
+attempt.
 
-I don't think Mayank is tied to any particular implementation and the
-overall goal here is to allow the watchdog bark interrupt to run at an
-elevated level so it can produce good backtraces even if all the CPUs
-in the system are locked up and the buddy lockup detector doesn't
-fire. Is this something you think should be doable? If so, what's the
-best way for Mayank to go about doing it?
+Regards,
+Lorenzo
 
+>=20
+> >  	ret =3D regulator_bulk_enable(ARRAY_SIZE(tc9563->supplies),
+> >  				    tc9563->supplies);
+> >  	if (ret < 0)
+> >=20
+> > --=20
+> > 2.55.0
+> >=20
 
--Doug
+--lE5DYGO/JfD+FQa1
+Content-Type: application/pgp-signature; name=signature.asc
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTquNwa3Txd3rGGn7Y6cBh0uS2trAUCaprXIwAKCRA6cBh0uS2t
+rLQRAP9h8FPk+nSsMHWkRCkWQxLxy19w/oaZm98nYS2DUsfO8gEAihDrXGRAJoSr
+716TKsf6Kj3T47+gwSkA8yhu9t+pOAg=
+=zJQP
+-----END PGP SIGNATURE-----
+
+--lE5DYGO/JfD+FQa1--
