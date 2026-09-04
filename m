@@ -1,68 +1,84 @@
-Received: from mail-wm1-f43.google.com (mail-wm1-f43.google.com [209.85.128.43])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CC4A14AEBCA
-	for <linux-arm-msm@vger.kernel.org>; Fri,  4 Sep 2026 14:11:07 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.43
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 016F8481FD9
+	for <linux-arm-msm@vger.kernel.org>; Fri,  4 Sep 2026 14:23:32 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788531069; cv=none; b=bErxTrTjxkkVnPzf/56PdEihLBiHWlij0S18FVv1TA/32sNgY22xew8C4QRW9D9YGX7yeNh/Q3GRT5MsBBlhFPZB6BShRMY5LLUsq9MPFakJyU9iHK/7xoTA1V8zoWx7DNP6LRJ/FJ79ucq8kieXEm1FkDxfo4oabec48tdm89g=
+	t=1788531814; cv=none; b=QbCKpWWFMNd4costn9cnnx9Empu1UillYNBAqSwg/6CTXQwk6SsSY98Cwk/InY8FlTBi8bi/NrIQTSZupIRMgdeF0ObjZRQoBTwMkxYGX7nkqa5RWBe0UAmwEsg0Ekq50PbFeRdeqdZNXc8pg8TkYHpsAlSYJd/F41EwXj2unf4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788531069; c=relaxed/simple;
-	bh=HLpKxIaKGd7G1q0JMJ/3LmoPDegXjEccp9RbG0O8P0Y=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=CT9AgZyUdgh7cfg9iwqL/QNAZUvDjwnUqzhu7bKVzfaf7Lg59GOiTOaCVB7hdThBBzxw73cxw4qeh2XRpgtX8wSzntLXoGiPTC1ynJ8rj+Q1VsF4AK3xncwxFqZMcaZMniakc7aGwfyOCPiUVDY9WuAOVacuVgBRpMkIpV72kL0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=thegoodpenguin.co.uk; spf=pass smtp.mailfrom=thegoodpenguin.co.uk; dkim=pass (2048-bit key) header.d=thegoodpenguin-co-uk.20251104.gappssmtp.com header.i=@thegoodpenguin-co-uk.20251104.gappssmtp.com header.b=Nq+VBNJG; arc=none smtp.client-ip=209.85.128.43
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=thegoodpenguin.co.uk
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=thegoodpenguin.co.uk
+	s=arc-20240116; t=1788531814; c=relaxed/simple;
+	bh=iV4AOOckQrMa+16TI4AAiuMKqvEKPVYiWTmkQUDyLEU=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=Ko4xnxN9epGkRwxEuwufO37GKpLVEnwkHyeClXU0bJf7WkuRQQExogXUF5qM0tbLiEOzezuasHc99w6XIjlqvia3JEdvgxMBbLHgIbfjm3mvDxzC/WTUIb0IuQsVVHoVRWEAebq18tuhZ4aZAM91u6Qj+zBXDvh9sDReVlb2e4o=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=nXjXBa+z; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=V6uAV8Uh; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=thegoodpenguin-co-uk.20251104.gappssmtp.com header.i=@thegoodpenguin-co-uk.20251104.gappssmtp.com header.b="Nq+VBNJG"
-Received: by mail-wm1-f43.google.com with SMTP id 5b1f17b1804b1-4956869750eso7929415e9.2
-        for <linux-arm-msm@vger.kernel.org>; Fri, 04 Sep 2026 07:11:07 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="nXjXBa+z";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="V6uAV8Uh"
+Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 684Dga7M311198
+	for <linux-arm-msm@vger.kernel.org>; Fri, 4 Sep 2026 14:23:32 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=yjXrqaQjmS+eh4R1mRT3Kc
+	AvoxLvfqvHUHfLmQH7Xf4=; b=nXjXBa+zbBXsXFvI624X5jFhEbAm7PHtN02Vw5
+	Ix8k1sYuxIoznR0HeGeaA+3Gml1y77xGJ2YKgIS3Nx8X58PVqsoZBXEsbQpvT39z
+	t5pkoVhf2Tx7UldEEdpFeekrZZbQZLgTRPM0x+I0TkazwfGQeoxc6v3WUywGJRBc
+	JMnYXOMEMY+HpLmkYfIRLMFUK2JUmrhmBLhnBvTjwOTlX2r6pb+tSf3O1foG4Y0h
+	nErxAr3Ro9i0yp6ubO7G3kD20INh+7THkMdUio3LBYMSn6bTwiksVKmeA1kpgXz4
+	wnZRgHbwVOjpmwArganWrO5MkrmpcSwN2dH7e3ZeyOw4t2Yg==
+Received: from mail-pj1-f71.google.com (mail-pj1-f71.google.com [209.85.216.71])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gfbyvn3gy-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 04 Sep 2026 14:23:32 +0000 (GMT)
+Received: by mail-pj1-f71.google.com with SMTP id 98e67ed59e1d1-38e8e864ef0so1927855a91.0
+        for <linux-arm-msm@vger.kernel.org>; Fri, 04 Sep 2026 07:23:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=thegoodpenguin-co-uk.20251104.gappssmtp.com; s=20251104; t=1788531066; x=1789135866; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=aEqUQC0KLTMrpqR3R5TYtWC0wMSU2dt7BIPd9pMyARM=;
-        b=Nq+VBNJGF3Mgkl+YXFgKDMirc4NXRm3su8RxPlJLeDyhGTTV3PSaz0qKrAD4y71RiU
-         3R1EtrJcW8mrsdW3lw5sTrV6TF0oniuqHcqALv18yY1f7Jd7AcqtCxTVvEIYFBFnXze6
-         v3yANxZ71qQ8NAcOPzQK1loPvIL1F0Lx/uVjJpH7AZSONjR2tJR4bbVu9NZVJW7uHi/5
-         C2IuWjdXVd08fnvotHJU3x1beK+4PZOibQ8sAvbFNtpiCat7gMETkQNnhWAlaM0IfrdP
-         eCtdL1o9fpSZCBqJq4u6RO1oGSxWBwmMDUAC5hAuYQNTAE34t1G9Jcvsu3QtTMSaKMAA
-         9dEg==
+        d=oss.qualcomm.com; s=google; t=1788531811; x=1789136611; darn=vger.kernel.org;
+        h=cc:to:message-id:content-transfer-encoding:content-type
+         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=yjXrqaQjmS+eh4R1mRT3KcAvoxLvfqvHUHfLmQH7Xf4=;
+        b=V6uAV8UhptO86umNXDVAi7u8RZAQ83wMYUKtRdYPWqt8UC/w0MEuzSwCxqpfa2yFSr
+         vifPdDF9lQyK5Hy84DwFfwA/Xw6SyGfjyjkFV7pY4hq4Z+ZmJD23P1TQQIC0s2er3xgG
+         pDKVqr8Joiev3ouluSMQPz7AT/ktKWcivw+DYNCmaVGdZuvkY0WiFBTcQxqJSlt4gBrB
+         H4MWAkA0iFXLq9PYz6fWeNxBRg5OGkpXjAjxywjRanbBgzs5CZMr5jCGejr4BLTbTXW/
+         qno0IV1j3v7mbJH7bkFVqSo1ICJv0AsoPUwQnzFuwFwayDpjGnFq+9bS32JGfj5VbuFU
+         caEQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788531066; x=1789135866;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=aEqUQC0KLTMrpqR3R5TYtWC0wMSU2dt7BIPd9pMyARM=;
-        b=YUlI2hDW7pnXpxSMF59kRYSBIOtbx3gRUu9K8ftr05vxfRK8mZewpsghUMkv8PZV7a
-         RCVkZOz6qg0PsGiha4vY5rLq4rpGQlP1CjyDqKNaeK897Okw0O0VJeO+GMxbE7lTG1bQ
-         fpDgXktOqshxFQPhEXXZ86nAzueiQ4SIQWEyALvWDlEjf4yFPyCUhECbwKFBfoT8FYIV
-         +Gh3Rc21dhoxbvZcc4hCKzp2RnShZEmG9Ix9zVV1OKQjWzXwNDZjkDaIlMNwSw75SUZe
-         PEoPUhJvSHaEsmiEJ5FPG3ssYwREfjlEDRuGnHhMGzvctbtd/qxn1wGeoyCoi8vtQzqF
-         +Ekg==
-X-Forwarded-Encrypted: i=1; AKwUvBxnshKDdKv2r3xN2PvUIYW45+V6ScrNZf741HazWP4i2KSw+JLzUvWKZbPjNqvdVa+I5/Kqvu9wGmx3Fll+@vger.kernel.org
-X-Gm-Message-State: AFuF++lwxMP+gMl05VFq3rJz5muimj+rhKsuox7ffXrkheKSkKyZziVh
-	4S0c/KNAjqAKYvudQxQfz4X+vluBZFrwaNA2m9KkoItlCqN2S+Ha3ySZl00LNU4DqXs=
-X-Gm-Gg: AYBFou1qS4+aN3Ff525unmBpqoFTriPaYbd/w+7WSbimbLfHpJl8/VLv7nYgjzbBHb0
-	QjeHw4oNVpWdPckOA3zLwa8yDREbkR2qnzDmqMCHFC4hD57kshG/W1wHB36dAWlKv/vYicay/fT
-	JjXjEDR45rvK93wytX0PQCrhkubVBx7tqzICj024ttDr/lBPlM3WfRguNMODpHnsHOBNoEZzvXD
-	WuGXwQxyuGaRAdha+Df0IYjD0F03X5yjVmFQSv1Nx96kSgYj8W3ElgK0avJ2tH7YQ//z9UZstIZ
-	a9cCLir79OHPkicajmzjR4ZYURU59lWQu5LWVAq1hs6CkXll+Pc7EY5p199+jo6ukVhmD0SncDH
-	jTJLtU2iZK+NZgcpChD4tS/wBZ8ezP0gu2i/krDdlFYnNsvwtqmBiKk/sYm90uUslS0SUX4cbav
-	0T/vNtKTGSrM9ZUX9sMyrh43YdtepCm2AnU197OoaSl7kHSbqsMynA3nyljAwlrpI=
-X-Received: by 2002:a05:600c:a087:b0:49c:f467:7ce0 with SMTP id 5b1f17b1804b1-49cf81dc377mr57050405e9.3.1788531047704;
-        Fri, 04 Sep 2026 07:10:47 -0700 (PDT)
-Received: from [10.42.0.1] ([2a00:23c7:1d1a:9c01:2568:24c4:f44a:8310])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-49ce46696e8sm138287045e9.0.2026.09.04.07.10.46
+        d=1e100.net; s=20251104; t=1788531811; x=1789136611;
+        h=cc:to:message-id:content-transfer-encoding:content-type
+         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to:content-type;
+        bh=yjXrqaQjmS+eh4R1mRT3KcAvoxLvfqvHUHfLmQH7Xf4=;
+        b=owI/I55NyrFb86GqcCqsON8F45zlGXBsBhPydjHGHoII+0fu0CXN7TkuOSrv88cLgl
+         jZiyXUym4nl1We7kUFbwJ4TSc7adpoyz0UWi6STVQcqzVo7jyreKtBz5roim+4Hc9NZS
+         XIDDjTf/dFdRUgTSxzvuUuyZugUU2YpWLCMrXXA8PjsbddK5bU1XFtNGsQyD5rxGsff7
+         O9zeL8tXL8sisVAg3M9kT8u0iBU5zFNEMvDUxYOWVctiPLlmEHAmheODpibPMaR2kD9Z
+         dOegrDhTlC8kzunM+mPQtUyzJS4k8swbMN1wWspqbIoEtNLRk9djLzJ5R3Pz8RFW2Lnk
+         iHGQ==
+X-Forwarded-Encrypted: i=1; AKwUvBwyvvYSQdY7hXIpWYKTE1LtBTu+jkHMjgm17XSM5LeCzEtdHkgCe/gwgk7jNo8YvqTHE83dxg5XpMIwzASQ@vger.kernel.org
+X-Gm-Message-State: AFuF++m5Ojy4RSc387+Qxg5GDU1IQOhAKCsrw++231UnHrudw0PfP5rM
+	a+QzBAToND51TaSem772P33L39FqUWL/PycFsGmvt+XOJIPHtHFUNYghsBgmwCn/AOoF8Fv3XNE
+	C6lZL/cENE2N/YS9ENJOTIbBr9YgK1Nl7P29UqaXS+4NNH21zPcqv9SAMiGANAPaQ0Jlm
+X-Gm-Gg: AYBFou1/t/wms/MLivA4sj3L8a4zIQXuLKyOKOoenPZbu0Z7oy3jw7Nk0hLLW9Tjaxo
+	SgH3zCh2Lzbm9uLaQYkgiVJI/oE74vlM5OVRAabM483BGpu31WiPeMx//ZmuSnfYA56cp23H+Mw
+	yJkaFWDfJStBcPm/5yGEuR3RPRrHBSOBy+Pp2F6eqoddJ1puQpkuGNIMDOo99b0OyFCXZosi124
+	PgzetT4y8bXcjgLwjBazlq4Qjs9bSrr6aKhbTo+zh/B6w72n4/OEnIS9KzHdkM3SbXbpKl00g/f
+	J/OSHhPsp+3rfIyAhj4jNUJe7dQEEoOZuVgoXPCQ0v/v4Th99rXgnLWRRBmnVeQ0LxbCiOmW0VY
+	Vv5YGBKERhGJjpZlmCWXlz4z85pOo
+X-Received: by 2002:a17:90b:3b88:b0:398:dcfe:968e with SMTP id 98e67ed59e1d1-39b261da746mr8847308a91.20.1788531811366;
+        Fri, 04 Sep 2026 07:23:31 -0700 (PDT)
+X-Received: by 2002:a17:90b:3b88:b0:398:dcfe:968e with SMTP id 98e67ed59e1d1-39b261da746mr8847137a91.20.1788531810538;
+        Fri, 04 Sep 2026 07:23:30 -0700 (PDT)
+Received: from hu-mkshah-hyd.qualcomm.com ([202.46.22.19])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3339b8f44d7sm7122450eec.22.2026.09.04.07.23.28
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 04 Sep 2026 07:10:46 -0700 (PDT)
-From: Pawel Zalewski <pzalewski@thegoodpenguin.co.uk>
-Date: Fri, 04 Sep 2026 15:10:41 +0100
-Subject: [PATCH 2/4] dma: loongson: use named initializers for
- acpi_device_id
+        Fri, 04 Sep 2026 07:23:29 -0700 (PDT)
+From: Maulik Shah <maulik.shah@oss.qualcomm.com>
+Date: Fri, 04 Sep 2026 19:53:10 +0530
+Subject: [PATCH] soc: qcom: smd-rpm: Add trace events for SMD-RPM messages
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -71,54 +87,238 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260904-acpi-dma-v1-2-0fcc63d65d4b@thegoodpenguin.co.uk>
-References: <20260904-acpi-dma-v1-0-0fcc63d65d4b@thegoodpenguin.co.uk>
-In-Reply-To: <20260904-acpi-dma-v1-0-0fcc63d65d4b@thegoodpenguin.co.uk>
-To: Viresh Kumar <vireshk@kernel.org>, 
- Andy Shevchenko <andriy.shevchenko@linux.intel.com>, 
- Vinod Koul <vkoul@kernel.org>, Frank Li <Frank.Li@kernel.org>, 
- Binbin Zhou <zhoubinbin@loongson.cn>, Sinan Kaya <okaya@kernel.org>
-Cc: dmaengine@vger.kernel.org, linux-kernel@vger.kernel.org, 
- linux-arm-kernel@lists.infradead.org, linux-arm-msm@vger.kernel.org, 
- Pawel Zalewski <pzalewski@thegoodpenguin.co.uk>
+Message-Id: <20260904-smd-rpm-trace-v1-1-8c1cbdfea82e@oss.qualcomm.com>
+X-B4-Tracking: v=1; b=H4sIAE3UmmoC/yXMTQqDQAxA4atI1g1MBhH1KtLFdCatEfwhUSmId
+ 3dsl9/ivQOMVdigLQ5Q3sVknjLoUUDsw/RhlJQN3vnKNY7QxoS6jLhqiIx1IvIxENWlg9wsym/
+ 5/n7d82/bXgPH9Z7AeV4K8yg6cQAAAA==
+X-Change-ID: 20260901-smd-rpm-trace-8d112ca11840
+To: Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>
+Cc: linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+        Maulik Shah <maulik.shah@oss.qualcomm.com>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1788531042; l=1212;
- i=pzalewski@thegoodpenguin.co.uk; s=20260430; h=from:subject:message-id;
- bh=HLpKxIaKGd7G1q0JMJ/3LmoPDegXjEccp9RbG0O8P0Y=;
- b=VUi6AEMzf8WJnaEudtuz0IHlOiaxvFSP7LnEodkr0pKvhd111g4p3/8O+pPvejHm0kaaH4H8x
- WiqccCXL8MxC2XW3/g1uTW9wN47IBEzG2Ky43NlIT+FvWjMpNrO6Ilx
-X-Developer-Key: i=pzalewski@thegoodpenguin.co.uk; a=ed25519;
- pk=vHq4n9IonORH2GTzLv8r6CWAFHzgfBuNkQPXA8NSly0=
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1788531807; l=5798;
+ i=maulik.shah@oss.qualcomm.com; s=20240109; h=from:subject:message-id;
+ bh=iV4AOOckQrMa+16TI4AAiuMKqvEKPVYiWTmkQUDyLEU=;
+ b=Wsm4hTGTyu7OUh4uy2ZtcIQjvYzsqK6ToEUFBZ55ThesUx/aiiB9lZsbj35ClSgBy8Y77zxBC
+ P0Lmf12kvqJBFIjPQMDoNl1Lq+RxUQyWvsoJEecTxAyZl6NReqtTPwy
+X-Developer-Key: i=maulik.shah@oss.qualcomm.com; a=ed25519;
+ pk=bd9h5FIIliUddIk8p3BlQWBlzKEQ/YW5V+fe759hTWQ=
+X-Proofpoint-ORIG-GUID: cwT1cDyvAvNQ_y1kh42iBuM36cKOkdXh
+X-Proofpoint-GUID: cwT1cDyvAvNQ_y1kh42iBuM36cKOkdXh
+X-Authority-Analysis: v=2.4 cv=C8vZDwP+ c=1 sm=1 tr=0 ts=6a9ad464 cx=c_pps
+ a=UNFcQwm+pnOIJct1K4W+Mw==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
+ a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22
+ a=EUspDBNiAAAA:8 a=iiYCWuvKVlUSTFT6mewA:9 a=QEXdDO2ut3YA:10
+ a=uKXjsCUrEbL0IQVhDsJ9:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTA0MDEzMSBTYWx0ZWRfXxl/KPx8AFnVO
+ kTobBXAKQaUVfT9jTqpooznlcmsnwlDWWagskVT+p4uE6zM/BhnwWKSyXEKDlW4zpShks8vZ8Ay
+ dDPVNXxuiHy5y6qcbtQGFplaX6qUjFBGA5A8ySjWJYEEKIv0h3koUwdRQFmXzWJ19UQJ5Iq2Xbd
+ vbyLPW/QSjrhamKFBh0WmzUEWNN7eRdX+BwNv0ebH5abfRM+bPeeJ4RLx86fDBdQoq/oHjjjDTY
+ b9Fr12dr07fAGZVifrF+/9NUnzBTarIBc1pV5ZncLGzwryD8zL//Srd3M1T/MZ2Z2wfLPzgn7L0
+ 0DbiXnze6S7diz8UM+Ctwum4l3xgcahn3AfSQvx5cEjtSg0nsOoepPDy57bHZGMfM0Z5xXqPGaW
+ rhdkmO4p5ahu8RhW325dCIPIek18xjX7y5mHT4l4j+3Qv+7sM1AwfRb2sRdwawitrjn5cCVwUnW
+ edndAD9lJ2XY0Zrvhkg==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTA0MDEzMSBTYWx0ZWRfX2WSskw2ol7EV
+ xOYRI7+9VUGK+scaDd35OrVy3/ycvpe7WqQwdcwJOyrnTEvOMHsfmqxYXM7SgY/Ucpl3amlPa01
+ jsdAkkb18qkw3MVqy3O8RXmpsBQFC9Y=
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-09-04_04,2026-09-03_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ clxscore=1015 priorityscore=1501 bulkscore=0 adultscore=0 suspectscore=0
+ lowpriorityscore=0 impostorscore=0 malwarescore=0 spamscore=0 phishscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2609040131
 
-Use a named initializer for the acpi_device_id fields which
-makes the code more readable and consistent with how lists
-are initialized in the rest of the kernel code base.
+There is no visibility on what resource votes are placed via SMD RPM making
+it difficult to identify clients that do either under voting via active set
+impacting the device functions or fail to send sleep set votes and thereby
+prevent the SoC from reaching low power modes such as vmin or vlow.
 
-While we are at it - unify the list terminator to have
-a single space between the brackets and no trailing
-comma.
+Add trace events for SMD RPM requests and acknowledgment to make RPM votes
+for various resources visible through ftrace.
 
-Signed-off-by: Pawel Zalewski <pzalewski@thegoodpenguin.co.uk>
+Signed-off-by: Maulik Shah <maulik.shah@oss.qualcomm.com>
 ---
- drivers/dma/loongson/loongson2-apb-cmc-dma.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+Output from newly added ftrace on shikra SoC,
+rpm_smd_send_msg: msg_id:807 ctx:active rsc_type:ldoa rsc_id:0xe key:swen nbytes:4 value:1
+rpm_smd_ack_recvd: msg_id:807 errno:00000000
+..
+..
+rpm_smd_send_msg: msg_id:1106 ctx:active rsc_type:clk2 rsc_id:0x0 key:KHz nbytes:4 value:19200
+rpm_smd_ack_recvd: msg_id:1106 errno:00000000
+rpm_smd_send_msg: msg_id:1107 ctx:sleep rsc_type:clk2 rsc_id:0x0 key:KHz nbytes:4 value:0
+rpm_smd_ack_recvd: msg_id:1107 errno:00000000
+---
+ drivers/soc/qcom/Makefile        |  1 +
+ drivers/soc/qcom/smd-rpm.c       | 10 +++++
+ drivers/soc/qcom/trace-smd-rpm.h | 83 ++++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 94 insertions(+)
 
-diff --git a/drivers/dma/loongson/loongson2-apb-cmc-dma.c b/drivers/dma/loongson/loongson2-apb-cmc-dma.c
-index 1c9a542edc859..70880625c6e92 100644
---- a/drivers/dma/loongson/loongson2-apb-cmc-dma.c
-+++ b/drivers/dma/loongson/loongson2-apb-cmc-dma.c
-@@ -709,8 +709,8 @@ static const struct of_device_id loongson2_cmc_dma_of_match[] = {
- MODULE_DEVICE_TABLE(of, loongson2_cmc_dma_of_match);
+diff --git a/drivers/soc/qcom/Makefile b/drivers/soc/qcom/Makefile
+index 798643be3590..839e7875ec1b 100644
+--- a/drivers/soc/qcom/Makefile
++++ b/drivers/soc/qcom/Makefile
+@@ -1,5 +1,6 @@
+ # SPDX-License-Identifier: GPL-2.0
+ CFLAGS_rpmh-rsc.o := -I$(src)
++CFLAGS_smd-rpm.o := -I$(src)
+ CFLAGS_qcom_aoss.o := -I$(src)
+ obj-$(CONFIG_QCOM_AOSS_QMP) +=	qcom_aoss.o
+ obj-$(CONFIG_QCOM_GENI_SE) +=	qcom-geni-se.o
+diff --git a/drivers/soc/qcom/smd-rpm.c b/drivers/soc/qcom/smd-rpm.c
+index f2b3e02abdf1..04b3f7789ab7 100644
+--- a/drivers/soc/qcom/smd-rpm.c
++++ b/drivers/soc/qcom/smd-rpm.c
+@@ -14,6 +14,9 @@
+ #include <linux/rpmsg.h>
+ #include <linux/soc/qcom/smd-rpm.h>
  
- static const struct acpi_device_id loongson2_cmc_dma_acpi_match[] = {
--	{ "LOON0014", .driver_data = (kernel_ulong_t)&ls2k3000_cmc_dma_config },
--	{ /* sentinel */ }
-+	{ .id = "LOON0014", .driver_data = (kernel_ulong_t)&ls2k3000_cmc_dma_config },
-+	{ }
- };
- MODULE_DEVICE_TABLE(acpi, loongson2_cmc_dma_acpi_match);
++#define CREATE_TRACE_POINTS
++#include "trace-smd-rpm.h"
++
+ #define RPM_REQUEST_TIMEOUT     (5 * HZ)
  
+ /**
+@@ -106,6 +109,7 @@ int qcom_rpm_smd_write(struct qcom_smd_rpm *rpm,
+ 		u8 payload[];
+ 	} *pkt;
+ 	size_t size = sizeof(*pkt) + count;
++	const struct clk_smd_rpm_req *req = buf;
+ 
+ 	/* SMD packets to the RPM may not exceed 256 bytes */
+ 	if (WARN_ON(size >= 256))
+@@ -131,6 +135,8 @@ int qcom_rpm_smd_write(struct qcom_smd_rpm *rpm,
+ 	if (ret)
+ 		goto out;
+ 
++	trace_rpm_smd_send_msg(pkt->req.msg_id, state, type, id, req);
++
+ 	left = wait_for_completion_timeout(&rpm->ack, RPM_REQUEST_TIMEOUT);
+ 	if (!left)
+ 		ret = -ETIMEDOUT;
+@@ -158,6 +164,7 @@ static int qcom_smd_rpm_callback(struct rpmsg_device *rpdev,
+ 	const u8 *end = buf + hdr_length;
+ 	char msgbuf[32];
+ 	int status = 0;
++	__le32 msg_id = 0;
+ 	u32 len, msg_length;
+ 
+ 	if (le32_to_cpu(hdr->service_type) != RPM_SERVICE_TYPE_REQUEST ||
+@@ -171,6 +178,7 @@ static int qcom_smd_rpm_callback(struct rpmsg_device *rpdev,
+ 		msg_length = le32_to_cpu(msg->length);
+ 		switch (le32_to_cpu(msg->msg_type)) {
+ 		case RPM_MSG_TYPE_MSG_ID:
++			msg_id = msg->msg_id;
+ 			break;
+ 		case RPM_MSG_TYPE_ERR:
+ 			len = min_t(u32, ALIGN(msg_length, 4), sizeof(msgbuf));
+@@ -187,6 +195,8 @@ static int qcom_smd_rpm_callback(struct rpmsg_device *rpdev,
+ 		buf = PTR_ALIGN(buf + 2 * sizeof(u32) + msg_length, 4);
+ 	}
+ 
++	trace_rpm_smd_ack_recvd(msg_id, status);
++
+ 	rpm->ack_status = status;
+ 	complete(&rpm->ack);
+ 	return 0;
+diff --git a/drivers/soc/qcom/trace-smd-rpm.h b/drivers/soc/qcom/trace-smd-rpm.h
+new file mode 100644
+index 000000000000..b17fe5d5e306
+--- /dev/null
++++ b/drivers/soc/qcom/trace-smd-rpm.h
+@@ -0,0 +1,83 @@
++/* SPDX-License-Identifier: GPL-2.0 */
++/*
++ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
++ */
++
++#if !defined(_TRACE_SMD_RPM_H) || defined(TRACE_HEADER_MULTI_READ)
++#define _TRACE_SMD_RPM_H
++
++#undef TRACE_SYSTEM
++#define TRACE_SYSTEM rpm_smd
++
++#include <linux/tracepoint.h>
++#include <linux/soc/qcom/smd-rpm.h>
++
++TRACE_EVENT(rpm_smd_ack_recvd,
++
++	TP_PROTO(__le32 msg_id, int errno),
++
++	TP_ARGS(msg_id, errno),
++
++	TP_STRUCT__entry(
++		__field(u32, msg_id)
++		__field(int, errno)
++	),
++
++	TP_fast_assign(
++		__entry->msg_id = le32_to_cpu(msg_id);
++		__entry->errno = errno;
++	),
++
++	TP_printk("msg_id:%u errno:%08x",
++		__entry->msg_id,
++		__entry->errno)
++);
++
++TRACE_EVENT(rpm_smd_send_msg,
++
++	TP_PROTO(__le32 msg_id, u32 state, u32 rsc_type, u32 rsc_id,
++		 const struct clk_smd_rpm_req *req),
++
++	TP_ARGS(msg_id, state, rsc_type, rsc_id, req),
++
++	TP_STRUCT__entry(
++		__field(u32, msg_id)
++		__field(u32, state)
++		__field(u32, rsc_type)
++		__field(u32, rsc_id)
++		__field(u32, key)
++		__field(u32, nbytes)
++		__field(u32, value)
++	),
++
++	TP_fast_assign(
++		__entry->msg_id = le32_to_cpu(msg_id);
++		__entry->state = state;
++		__entry->rsc_type = rsc_type;
++		__entry->rsc_id = rsc_id;
++		__entry->key = le32_to_cpu(req->key);
++		__entry->nbytes = le32_to_cpu(req->nbytes);
++		__entry->value = le32_to_cpu(req->value);
++	),
++
++	TP_printk("msg_id:%u ctx:%s rsc_type:%.4s rsc_id:0x%x key:%.4s nbytes:%u value:%u",
++		  __entry->msg_id,
++		  __print_symbolic(__entry->state,
++				   { QCOM_SMD_RPM_ACTIVE_STATE, "active" },
++				   { QCOM_SMD_RPM_SLEEP_STATE, "sleep" }),
++		  (const char *)&__entry->rsc_type,
++		  __entry->rsc_id,
++		  (const char *)&__entry->key,
++		  __entry->nbytes,
++		  __entry->value)
++);
++
++#endif /* _TRACE_SMD_RPM_H */
++
++#undef TRACE_INCLUDE_PATH
++#define TRACE_INCLUDE_PATH .
++
++#undef TRACE_INCLUDE_FILE
++#define TRACE_INCLUDE_FILE trace-smd-rpm
++
++#include <trace/define_trace.h>
 
--- 
-2.43.0
+---
+base-commit: 89c07d98716a13454ec3fd9f97689e812cc71bd4
+change-id: 20260901-smd-rpm-trace-8d112ca11840
+
+Best regards,
+--  
+Maulik Shah <maulik.shah@oss.qualcomm.com>
 
