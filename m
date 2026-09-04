@@ -1,136 +1,214 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-oo1-f53.google.com (mail-oo1-f53.google.com [209.85.161.53])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id ABE3F433E9D;
-	Fri,  4 Sep 2026 11:55:45 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7E60533939D
+	for <linux-arm-msm@vger.kernel.org>; Fri,  4 Sep 2026 12:06:13 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.161.53
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788522946; cv=none; b=e4sO3Qvh4DzZpExFlF0CE8mJUJ1Rb4v4IVXePnWcQ1RXMJjnLpGOI8rMeqDRhd8lPNwRq8Pqbw83HffddqoHJlPOpMeSWqSgXh74BTdrqx9c6WMAp/p6KoEcj7e3NTYnQfJ+gPyk+RPaCAAAMkr2QyDoPTNvmux7pMzqZgPFNPM=
+	t=1788523575; cv=none; b=k0gSY40DPjefhxBh1eNQ2nl/iPF74ecdcA9IJGQuipthLizyZqDEdF433hyJK/QA1Bx2eYvkE2rn4+7PBe/HQ2/vDGrlW1t/aj1Klm7FzRTChazjrxd/a7AgxZprYU7ArK5RW1FAKPV5toO3Bdhi5gRXEdp5GrY4J56hmu9wiO8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788522946; c=relaxed/simple;
-	bh=78sqk5H7Lxmz4BUyx1zh85KTEGpS399Pnj9Wdvf2OjI=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=tD7frjCfjQgmvHvsyQDm4AbkZ5hH104YgY1KMTgW2un+BQvPIlBr/K90PDQTaWdpdSd1btdxMLJMIv9MMaQEUax+Jyth5bfgp2lhNde7Koc2xYvSMTJcm9/Oj+fzfzvxNQt/EjSLj8APbdDPczgkqI8NasJ1PC4cLD8Yih/T1L8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=YPDfrjd6; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1788523575; c=relaxed/simple;
+	bh=O/ZeYLolTcCfV0GvkpQQktrGnB00dKmW9lHeT4GOfjI=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=d4FqIcKp3H7L7H1PdJIjyYvGgMUyy4J6IxNmsjdWt0E5X7rk4DuyUfB8zlXJ7jiXIuXo6U3C8jml3RRk/p/+Z1SgdRr/WnJeserg2hTBQufLVe6Axo2nDTGXl+e6A5l3NYTufBasQ67HepBtBxpJMVygGtaXN0S01TfzjaoWoGI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=P0c35STP; arc=none smtp.client-ip=209.85.161.53
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="YPDfrjd6"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id CCAB21F00A3E;
-	Fri,  4 Sep 2026 11:55:43 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1788522945;
-	bh=i1e+iVX92LAvk1+uOyCaklFwP113Nslf61WHHfDzMFI=;
-	h=From:Date:Subject:To:Cc;
-	b=YPDfrjd6cCvKL4bZ8j7f6ofqLLZIp8sjSygASv7D7g0fK1z8nLZSXzcGU7TnC8ffo
-	 SpfV73WEmOB32l1OF40iSQFLx4+uLTJDeyv4CTVnjoAewMlfdbUUNjVtT+U/nrlPgi
-	 lWW+7BRdczIhFRhHgl4kNoO7vJNn8K9/aFtJ2xiXuB2ih92tmrkskOb+iLRNdjtwZY
-	 IKDzMVPrT64A6bypGUmDKX3GLdNAEzFGt96nPS7na2VIL4rOyrGiEwjKDzXOueY3Lt
-	 YEMBOBtFTF4XIS/g5DNkjc8dcpToOHqY+OAOUwF5eYonQFe6FXSIEBGmYxUEOhArxY
-	 jOy3WVag8LILg==
-From: Konrad Dybcio <konradybcio@kernel.org>
-Date: Fri, 04 Sep 2026 13:55:37 +0200
-Subject: [PATCH] interconnect: qcom: use 64-bit SMD RPM bus votes
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="P0c35STP"
+Received: by mail-oo1-f53.google.com with SMTP id 006d021491bc7-6b12d146e6fso438709eaf.0
+        for <linux-arm-msm@vger.kernel.org>; Fri, 04 Sep 2026 05:06:13 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1788523572; x=1789128372; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=mUnqZgZG6/HByiIclaEltYHSMp4tHK+7pXJmI++LxBc=;
+        b=P0c35STPXPt3j5o3eoPvy1d3b0J6TzjYOrWKKDW81YQ+MBNHsszAB9TNiLfaLv7IRD
+         HC7jLMKR3T6rf+qU10PuT4rg2xSlnMUZX3KDQWWBwI+ayE2s5PU/GABq9Kv/ryv/T9SE
+         7IABuegaA6Rrt7xY3DDYUh1sl465+96Fx00w9yk4MPiiQPETDBwAwFCO4O5aWWm1lMLq
+         NHPh3AyJv2+cV6LJDPXUxnQisfceIWDu0Tkbdw7OJMve6JSeXAtg+utI0EqCMu5wzQlE
+         PzowV6Th4F4sOqfFmvKuq7VBKjKJE+KG5Lrr4vG7ZVMYN6BqMPQCrNG9/od9mKoRTSRB
+         Zf2g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1788523572; x=1789128372;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=mUnqZgZG6/HByiIclaEltYHSMp4tHK+7pXJmI++LxBc=;
+        b=MQkHSbK3ZqL+Fjsh2UVZkKbJ/9GmEvamgyrEtqvNdqh/qEdxPp/XDtdcksztBzbNji
+         nxxKnSxujanE5p5fmwRNOxbKSaS8dCrcoWL4WuxnYyY3GT113y3dzo6VuQ7BOYeitG32
+         4PCCucEIg90ZloKR8xGWP819vcJS9tgC7DEQRrVBpPaEWHtY50Q6PrPawrldNWzLnlsv
+         LENfGPoensl8Fso1QT5Qhe19SwECmBbghgxziYfCCpp6QsJqIAppqRIWLMPGUMqL1rZx
+         KsZb3FKpSjCSA8ZAWZtmYdome/ux2yDBrgsn0i6rrB2IOcDZUrc/838XVAf/HUpEaGxA
+         MqSw==
+X-Forwarded-Encrypted: i=1; AKwUvBwzzvyx8VvKg66erETMpPMH2qPhtMddKVnEp+iOjjrLdMIxPiFC0hPlWZNDVDEGSudekgpVfLzKctsG9FID@vger.kernel.org
+X-Gm-Message-State: AFuF++mrIT2WHUcuMI42GSNzvabJeKXfBqLOR9W8/K13O0znCrSZeh9e
+	4YDqfn7IlxGO2TagX+gtbh5cdbPyoi8RfAQpq/Aywh/dWIxUbhyJROVI
+X-Gm-Gg: AYBFou3h3avADpn+pUxk06ljya4zN0x2YR5Xcwv6EcGX/HfOI+iH/St9t3slQ1hBoFv
+	e980dId2aOTghQpp7yIUC903OHw/1f9rhJ1YkCofInvCTnFa7pgvmLQmyKlNlOGYTemk83DeuAl
+	nRVpil6JS0I6viYNIpzIdGCyBrwxqp1kJ5eqJYm6liy7+8/pAsUSARtske41GyJGmSTaFML5+VO
+	cNyyW8B/5wpoOCFRVHRh5/wqP3wmertGVClkAW3NmS869OIHDwLmQ9m/+MiIxNfh3IQni3a/D0h
+	33TwFv/GBwBXbQdNqLB3f3n/QM7qbpYhC8PqoC12CYgpCKmoX+UOtAxuu0RVc2CX5Yp+qxtv8GO
+	Mc7efiz4A4stNDEYkQ/PPUBAzNEd0wqMqYtWqspKNlwwrJS8pO9FI2njERkve++jFDXeIzKOn9e
+	pqdZlyOpD2q27LNyN9KmuNoXX+Tda3I8he/Y4ClFrQ+m0EnVYchPilDJJCR5a8LcaGKjpjD3YDO
+	rP6Fr63lGk2Ibw=
+X-Received: by 2002:a05:6820:1992:b0:6b1:4173:ca4a with SMTP id 006d021491bc7-6b6fafe071emr3681918eaf.11.1788523572254;
+        Fri, 04 Sep 2026 05:06:12 -0700 (PDT)
+Received: from volcano9f6e-hostos.amd.com ([165.204.217.251])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3339b8f44d7sm6321674eec.22.2026.09.04.05.06.07
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 04 Sep 2026 05:06:11 -0700 (PDT)
+From: Hemanth Selam <hemanth.selam@gmail.com>
+To: Rob Clark <robin.clark@oss.qualcomm.com>,
+	Sean Paul <sean@poorly.run>,
+	Konrad Dybcio <konradybcio@kernel.org>,
+	Akhil P Oommen <akhilpo@oss.qualcomm.com>,
+	Dmitry Baryshkov <lumag@kernel.org>,
+	Abhinav Kumar <abhinav.kumar@linux.dev>,
+	Jessica Zhang <jesszhan0024@gmail.com>,
+	Marijn Suijten <marijn.suijten@somainline.org>,
+	David Airlie <airlied@gmail.com>,
+	Simona Vetter <simona@ffwll.ch>
+Cc: linux-kernel@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org,
+	dri-devel@lists.freedesktop.org,
+	freedreno@lists.freedesktop.org
+Subject: [PATCH 1/2] drm/msm: fix typos in comments
+Date: Fri,  4 Sep 2026 17:35:56 +0530
+Message-ID: <20260904120601.18363-2-hemanth.selam@gmail.com>
+X-Mailer: git-send-email 2.48.1
+In-Reply-To: <20260904120601.18363-1-hemanth.selam@gmail.com>
+References: <20260904120601.18363-1-hemanth.selam@gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260904-topic-icc_rpm_64b_req-v1-1-37e24f1991a3@oss.qualcomm.com>
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXMQQqDMBBA0avIrBsYRSPxKqUEnY7tFNR0olIQ7
- 260y7f4f4PIKhyhyTZQXiXKNCbktwzo3Y4vNvJMhgILiw5LM09ByAiR1zB4W3Ze+Wtam2NvK4e
- VqyG1QbmX3/W9P/6OS/dhms8Z7PsB1bCR5HkAAAA=
-X-Change-ID: 20260904-topic-icc_rpm_64b_req-a610f6590597
-To: Georgi Djakov <djakov@kernel.org>, 
- Bjorn Andersson <andersson@kernel.org>
-Cc: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>, 
- linux-arm-msm@vger.kernel.org, linux-pm@vger.kernel.org, 
- linux-kernel@vger.kernel.org, 
- Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1788522943; l=2752;
- i=konrad.dybcio@oss.qualcomm.com; s=20230215; h=from:subject:message-id;
- bh=OkDSUi/LdA4pTBLQ7ya43ShjOBq9ARa4CWM0ri2JlmI=;
- b=HMp9bpuBIpTptLljnU3iP37MMC8bObxtvy8Dk30GhpS/Dw7FV+TxklD2g7rDixnqvl7WFkd+m
- pFM/8P5WPz3DQmnyLy7U/arRMx9H2VkfPQsQvU55WoQ0pGrOhtP6BD6
-X-Developer-Key: i=konrad.dybcio@oss.qualcomm.com; a=ed25519;
- pk=iclgkYvtl2w05SSXO5EjjSYlhFKsJ+5OSZBjOkQuEms=
+Content-Transfer-Encoding: 8bit
 
-From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Fix typos in comments, reported by scripts/checkpatch.pl using the
+misspelling list in scripts/spelling.txt.  Only touches comments, no code
+changes.
 
-SMD RPM bus bandwidth requests carry a 64-bit bandwidth value.
-The interconnect proxy declared the KVP payload as u32, truncating
-votes above 4 GiB/s and advertising the wrong payload size to RPM.
-
-Use a little-endian 64-bit payload and accept a u64 value in the proxy
-API. This has always been the right behavior, even on msm-3.10 and
-32-bit SoCs.
-
-Fixes: be06f8e7425d ("interconnect: qcom: Add interconnect RPM over SMD driver")
-Assisted-by: LLM
-Signed-off-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Assisted-by: Cursor:claude-opus-5
+Signed-off-by: Hemanth Selam <hemanth.selam@gmail.com>
 ---
- drivers/interconnect/qcom/icc-rpm.h | 4 ++--
- drivers/interconnect/qcom/smd-rpm.c | 8 ++++----
- 2 files changed, 6 insertions(+), 6 deletions(-)
+ drivers/gpu/drm/msm/adreno/a5xx_power.c     | 2 +-
+ drivers/gpu/drm/msm/adreno/adreno_gpu.c     | 2 +-
+ drivers/gpu/drm/msm/disp/mdp5/mdp5_plane.c  | 2 +-
+ drivers/gpu/drm/msm/dsi/dsi.c               | 2 +-
+ drivers/gpu/drm/msm/dsi/dsi_manager.c       | 2 +-
+ drivers/gpu/drm/msm/msm_gem.h               | 2 +-
+ drivers/gpu/drm/msm/msm_ringbuffer.h        | 2 +-
+ drivers/gpu/drm/msm/registers/gen_header.py | 2 +-
+ 8 files changed, 8 insertions(+), 8 deletions(-)
 
-diff --git a/drivers/interconnect/qcom/icc-rpm.h b/drivers/interconnect/qcom/icc-rpm.h
-index cdd5f444b152..b8fa786d3bfd 100644
---- a/drivers/interconnect/qcom/icc-rpm.h
-+++ b/drivers/interconnect/qcom/icc-rpm.h
-@@ -30,7 +30,7 @@ enum qcom_icc_type {
-  * @resource_type: RPM resource type of the clock resource
-  * @clock_id: index of the clock resource of a specific resource type
-  * @branch: whether the resource represents a branch clock
--*/
-+ */
- struct rpm_clk_resource {
- 	u32 resource_type;
- 	u32 clock_id;
-@@ -167,7 +167,7 @@ int qnoc_probe(struct platform_device *pdev);
- void qnoc_remove(struct platform_device *pdev);
+diff --git a/drivers/gpu/drm/msm/adreno/a5xx_power.c b/drivers/gpu/drm/msm/adreno/a5xx_power.c
+index d6da7351cfbb..95f432de2bcc 100644
+--- a/drivers/gpu/drm/msm/adreno/a5xx_power.c
++++ b/drivers/gpu/drm/msm/adreno/a5xx_power.c
+@@ -8,7 +8,7 @@
+ /*
+  * The GPMU data block is a block of shared registers that can be used to
+  * communicate back and forth. These "registers" are by convention with the GPMU
+- * firwmare and not bound to any specific hardware design
++ * firmware and not bound to any specific hardware design
+  */
  
- bool qcom_icc_rpm_smd_available(void);
--int qcom_icc_rpm_smd_send(int ctx, int rsc_type, int id, u32 val);
-+int qcom_icc_rpm_smd_send(int ctx, int rsc_type, int id, u64 val);
- int qcom_icc_rpm_set_bus_rate(const struct rpm_clk_resource *clk, int ctx, u32 rate);
+ #define AGC_INIT_BASE REG_A5XX_GPMU_DATA_RAM_BASE
+diff --git a/drivers/gpu/drm/msm/adreno/adreno_gpu.c b/drivers/gpu/drm/msm/adreno/adreno_gpu.c
+index 8cd2020d4b7e..667ed411076d 100644
+--- a/drivers/gpu/drm/msm/adreno/adreno_gpu.c
++++ b/drivers/gpu/drm/msm/adreno/adreno_gpu.c
+@@ -518,7 +518,7 @@ int adreno_set_param(struct msm_gpu *gpu, struct msm_context *ctx,
+ 			return UERR(EINVAL, drm, "requires per-process pgtables");
  
- #endif
-diff --git a/drivers/interconnect/qcom/smd-rpm.c b/drivers/interconnect/qcom/smd-rpm.c
-index dbc7ae50b02b..6ac9aef942ad 100644
---- a/drivers/interconnect/qcom/smd-rpm.c
-+++ b/drivers/interconnect/qcom/smd-rpm.c
-@@ -20,7 +20,7 @@ static struct qcom_smd_rpm *icc_smd_rpm;
- struct icc_rpm_smd_req {
- 	__le32 key;
- 	__le32 nbytes;
--	__le32 value;
-+	__le64 value;
- };
+ 		/*
+-		 * We can only swtich to VM_BIND mode if the VM has not yet
++		 * We can only switch to VM_BIND mode if the VM has not yet
+ 		 * been created:
+ 		 */
+ 		if (ctx->vm)
+diff --git a/drivers/gpu/drm/msm/disp/mdp5/mdp5_plane.c b/drivers/gpu/drm/msm/disp/mdp5/mdp5_plane.c
+index 841f444a8d68..cb9606c21ba2 100644
+--- a/drivers/gpu/drm/msm/disp/mdp5/mdp5_plane.c
++++ b/drivers/gpu/drm/msm/disp/mdp5/mdp5_plane.c
+@@ -245,7 +245,7 @@ static int mdp5_plane_atomic_check_with_state(struct drm_crtc_state *crtc_state,
+ 			new_hwpipe = true;
  
- bool qcom_icc_rpm_smd_available(void)
-@@ -29,12 +29,12 @@ bool qcom_icc_rpm_smd_available(void)
- }
- EXPORT_SYMBOL_GPL(qcom_icc_rpm_smd_available);
+ 		/*
+-		 * (re)allocte hw pipe if we're either requesting for 2 hw pipes
++		 * (re)allocate hw pipe if we're either requesting for 2 hw pipes
+ 		 * or we're switching from 2 hw pipes to 1 hw pipe because the
+ 		 * new src_w can be supported by 1 hw pipe itself.
+ 		 */
+diff --git a/drivers/gpu/drm/msm/dsi/dsi.c b/drivers/gpu/drm/msm/dsi/dsi.c
+index 3c9f01ed6271..1a1a59151e5c 100644
+--- a/drivers/gpu/drm/msm/dsi/dsi.c
++++ b/drivers/gpu/drm/msm/dsi/dsi.c
+@@ -246,7 +246,7 @@ int msm_dsi_modeset_init(struct msm_dsi *msm_dsi, struct drm_device *dev,
+ 	if (msm_dsi_is_bonded_dsi(msm_dsi) &&
+ 	    !msm_dsi_is_master_dsi(msm_dsi)) {
+ 		/*
+-		 * Do not return an eror here,
++		 * Do not return an error here,
+ 		 * Just skip creating encoder/connector for the slave-DSI.
+ 		 */
+ 		return 0;
+diff --git a/drivers/gpu/drm/msm/dsi/dsi_manager.c b/drivers/gpu/drm/msm/dsi/dsi_manager.c
+index 959daa88b1d0..36c7ae94b1c8 100644
+--- a/drivers/gpu/drm/msm/dsi/dsi_manager.c
++++ b/drivers/gpu/drm/msm/dsi/dsi_manager.c
+@@ -347,7 +347,7 @@ static void dsi_mgr_bridge_post_disable(struct drm_bridge *bridge,
+ 	/*
+ 	 * Do nothing with the host if it is slave-DSI in case of bonded DSI.
+ 	 * It is safe to call dsi_mgr_phy_disable() here because a single PHY
+-	 * won't be diabled until both PHYs request disable.
++	 * won't be disabled until both PHYs request disable.
+ 	 */
+ 	if (is_bonded_dsi && !IS_MASTER_DSI_LINK(id))
+ 		goto disable_phy;
+diff --git a/drivers/gpu/drm/msm/msm_gem.h b/drivers/gpu/drm/msm/msm_gem.h
+index dff60cbc9d95..a8e983b243b8 100644
+--- a/drivers/gpu/drm/msm/msm_gem.h
++++ b/drivers/gpu/drm/msm/msm_gem.h
+@@ -346,7 +346,7 @@ msm_gem_unlock(struct drm_gem_object *obj)
  
--int qcom_icc_rpm_smd_send(int ctx, int rsc_type, int id, u32 val)
-+int qcom_icc_rpm_smd_send(int ctx, int rsc_type, int id, u64 val)
- {
- 	struct icc_rpm_smd_req req = {
- 		.key = cpu_to_le32(RPM_KEY_BW),
--		.nbytes = cpu_to_le32(sizeof(u32)),
--		.value = cpu_to_le32(val),
-+		.nbytes = cpu_to_le32(sizeof(u64)),
-+		.value = cpu_to_le64(val),
- 	};
+ /**
+  * msm_gem_lock_vm_and_obj() - Helper to lock an obj + VM
+- * @exec: the exec context helper which will be initalized
++ * @exec: the exec context helper which will be initialized
+  * @obj: the GEM object to lock
+  * @vm: the VM to lock
+  *
+diff --git a/drivers/gpu/drm/msm/msm_ringbuffer.h b/drivers/gpu/drm/msm/msm_ringbuffer.h
+index 3631ec283c6e..486280ca478e 100644
+--- a/drivers/gpu/drm/msm/msm_ringbuffer.h
++++ b/drivers/gpu/drm/msm/msm_ringbuffer.h
+@@ -101,7 +101,7 @@ struct msm_ringbuffer {
  
- 	return qcom_rpm_smd_write(icc_smd_rpm, ctx, rsc_type, id, &req,
-
----
-base-commit: 32b6ef9a5d0eca44f9cd91f52f4faa89f145a0de
-change-id: 20260904-topic-icc_rpm_64b_req-a610f6590597
-
-Best regards,
---  
-Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+ 	/*
+ 	 * preempt_lock protects preemption and serializes wptr updates against
+-	 * preemption.  Can be aquired from irq context.
++	 * preemption.  Can be acquired from irq context.
+ 	 */
+ 	spinlock_t preempt_lock;
+ 
+diff --git a/drivers/gpu/drm/msm/registers/gen_header.py b/drivers/gpu/drm/msm/registers/gen_header.py
+index d3b56a9d84fb..d6bfb7b7d7b3 100644
+--- a/drivers/gpu/drm/msm/registers/gen_header.py
++++ b/drivers/gpu/drm/msm/registers/gen_header.py
+@@ -576,7 +576,7 @@ class Parser(object):
+             raise self.error(e)
+ 
+     def parse_varset(self, attrs):
+-        # Inherit the varset from the enclosing domain if not overriden:
++        # Inherit the varset from the enclosing domain if not overridden:
+         varset = self.current_varset
+         if "varset" in attrs:
+             varset = self.enums[attrs["varset"]]
+-- 
+2.48.1
 
