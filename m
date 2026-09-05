@@ -1,118 +1,139 @@
-Received: from mail-pj1-f51.google.com (mail-pj1-f51.google.com [209.85.216.51])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from meesny.iki.fi (meesny.iki.fi [195.140.195.201])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3F70C31ED81
-	for <linux-arm-msm@vger.kernel.org>; Sat,  5 Sep 2026 03:40:34 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.216.51
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788579635; cv=none; b=gOQ3McfKeKpp5xs9PM0MXb8BuCJuzMncpoO96ZuiV+/aZyPlbqsK/6nB6vwSUfjcFpSUa2nGVN5NP33KJBzPGqBU+hc1p53+SyhSQD+J6wQG9dAkDST+T5hIvtiPuIblyBCmm5vxEGI980agkKC6K6y5TJFawD+0CF0RJUWIS1Q=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788579635; c=relaxed/simple;
-	bh=h58rRfgQOT1BFyheD9hG5lpbczY7NlBk2zXRfllj/ew=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=r9BvQs9cFlmabzqLYb51ZCPS22+0oF5i+kiYp8/SkmpKMsJt+z6DdIv7/hRAjT3k8u+tlWxjJ32zLmBY7gfN2zbUm51MrACCx4Rpue2CZ15B8YoCM6UJV/3+991ANiRNGdMsU7Tjx0V1FNyFoRwb3P3S6ixkdZUDMPCk043P/1Y=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=quora.org; spf=pass smtp.mailfrom=quora.org; dkim=pass (1024-bit key) header.d=quora.org header.i=@quora.org header.b=qifJ7q3F; arc=none smtp.client-ip=209.85.216.51
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=quora.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=quora.org
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BA66D284B4F;
+	Sat,  5 Sep 2026 04:22:12 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=195.140.195.201
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1788582135; cv=pass; b=P4loAe1iyOJid2L94eJ4+94F/2gScvgCw1bVDmya2BkWhopYIDBzMzYcX2qKJqR1RHfgBEqoxtJSA4LB9WhFBM9DoSNXRNR2XiL7GwmoE8hFz64DPBY6CCYt1Ul0dME/1LC1quC+Rr8I1xkrwv5bef20JDdxHwVwW1tNw/KSLRw=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1788582135; c=relaxed/simple;
+	bh=g+C84RLk8fAVr0FAD/3eGHy3iHfn5lM+pPwezj8cgeA=;
+	h=MIME-Version:Date:From:To:Cc:Message-Id:In-Reply-To:References:
+	 Subject:Content-Type; b=uw8wBE8kKFhkMvhrxRILKZzYRMPW9QYI4dAO+bqNmu6BIhgVvillk7mz5O+AN4+lXT+rgLeJMB8xJawncH204I3ll7PlOGHDEfGsOHy60fyVm3jEhOnSCEoKMEOc8e3htrWC+OnmjJe6BWnHwO0CzvpzSHZXshF0xzFQwbXrnMU=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=iki.fi; spf=pass smtp.mailfrom=iki.fi; dkim=pass (1024-bit key) header.d=iki.fi header.i=@iki.fi header.b=Uk56HlTR; arc=pass smtp.client-ip=195.140.195.201
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=iki.fi
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=iki.fi
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=quora.org header.i=@quora.org header.b="qifJ7q3F"
-Received: by mail-pj1-f51.google.com with SMTP id 98e67ed59e1d1-398a5aad413so1282395a91.3
-        for <linux-arm-msm@vger.kernel.org>; Fri, 04 Sep 2026 20:40:34 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=quora.org; s=google; t=1788579633; x=1789184433; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=TEg9KwaHVCx+xXyU3Ht7Kg/Y6eHD9fATek7hVNpbXCg=;
-        b=qifJ7q3FemsdrK1TtoF1WrPgYMusWAqbgpKtOPEA3DiiOjCqEaxtxop3Owp1w9LrKJ
-         cjp0ulI91m15doPi+VzuvEtQM1jRQoLEwM8laG8M15VB3V0O94yaDNTUbIeQbujku9oW
-         s9lG6vRq8fTgrJRBr+jijS1vkfHfEJYvZd7YQ=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788579633; x=1789184433;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=TEg9KwaHVCx+xXyU3Ht7Kg/Y6eHD9fATek7hVNpbXCg=;
-        b=hZ7QbrKGuVsgUQMGcRynIBS+MnPmKeTHCdh/e7rVEaBere0IMNSnhgN+yXApRLYp2a
-         KKrB0V6gzqkMD/2NO4L3ij2en5hNwUwqAH5JdQO/sgOrBaVNR+a9r30ZsZLe/8Q0/mWX
-         YvmWQiU8FIrM3BFvc0G1nz2BJXzNtYEHUA00fnDGh09ssExoQ+AqIAca7HD1q/x5x8u1
-         oc7+2cPvM7k9dpnb1fcFMtEMkvk6oJ19LlHzuQhOPepi8WVOrufK3iNk+5reBIh+Bwhe
-         4fdNzwlHy9/4H9sAeup49+i3kptc2JHERk51Hx708RPUF/dYkrWBwUi30gLh2ew/aamT
-         /vHw==
-X-Forwarded-Encrypted: i=1; AKwUvBx3f9q1HzrPIJw2P6oJzp5FJjc39vqCQcKAGgPBGGv8enwtzpXC6REGGOjdHbFEAilVkhFcL9BfiGClM2Ug@vger.kernel.org
-X-Gm-Message-State: AFuF++l461eKh5WlwVl8roMzDTj6DE667Ww7uGs+qz9uNWIelW36BNl2
-	DhN23/BxAnvsJ5ftz3aYQoWpeKQQZlbFscmg0entPit28eXlTH31thkLWqC1usxESAE=
-X-Gm-Gg: AYBFou2TJOTS2Gvb9yiFzU6blixWK8WGDHEfTANjszAcm7J3jbo2fRvvt+2A3xkndSB
-	d6AfvA139o2X+rBWtU98X/2NN4eaHNWS/HqnEkW1aq2z4VjUDG4wTxkqqxXcqu7PRGuJXfiTe+Y
-	4ZxPAA61KwTeI0uM0lo7zgh8JCo0W7cPif4tRW1zbLepoqVqk73OAhmBd410h3psH1batFuomrZ
-	iywDXgNndR7CBCdbRHB01iv/1qhOYbgk6JjZAfDC7LeEmjuNvGLG4D+zSyPPVsBIZiPUHd3J49j
-	gWo+UdkM481Dy7vIvKnqzqA8u0Z32phLKVWTB//wP8Mf3+BSHiqKNnKQEbVpCPLvwM0h5/kwtxN
-	Fs6ywq/nPu5M/MitUpSEdHhUy6THqBW3BmEIt7mc/ESkC1NJUtaaoB/IiOA6eEIDkJ22zogDFBT
-	zjEi37vHwUsrkf9YNCu2WEOXa4Iw+0AlaGouK3+SFE1FJyvm6Sa2K44nbvUX0nOSv9y9/BFh3Kl
-	XAc0e6OTOh+e9vWWEBWjsua1gK8UUNt2KUyVz4WExevCPb6dYGwUsVfhmN5co5YGpvrpN+zTay6
-	ZBUhQrfV2zEkiBk46IovEb+/sI7zc5u9KqABY5XELZCAY0Y0vKG6x768jk2VM2Hc373mowcokwl
-	ksyJlLn0MSnDwVOIkjx1SpVDWEA==
-X-Received: by 2002:a17:90b:2c87:b0:398:990e:1587 with SMTP id 98e67ed59e1d1-39b26191cf2mr15056485a91.9.1788579633576;
-        Fri, 04 Sep 2026 20:40:33 -0700 (PDT)
-Received: from aegis ([2001:fd8:4d02:cd00:fe3b:5611:12cf:6ca5])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-39b06cea473sm4210052a91.2.2026.09.04.20.40.31
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 04 Sep 2026 20:40:33 -0700 (PDT)
-From: Daniel J Blueman <daniel@quora.org>
-To: Bjorn Andersson <andersson@kernel.org>
-Cc: Bartosz Golaszewski <brgl@kernel.org>,
-	Konrad Dybcio <konradybcio@kernel.org>,
-	Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>,
-	linux-arm-msm@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	Daniel J Blueman <daniel@quora.org>
-Subject: [PATCH] firmware: qcom: tzmem: use sleepable variant of DO_ONCE()
-Date: Sat,  5 Sep 2026 11:04:41 +0800
-Message-ID: <20260905030450.34800-1-daniel@quora.org>
-X-Mailer: git-send-email 2.53.0
+	dkim=pass (1024-bit key) header.d=iki.fi header.i=@iki.fi header.b="Uk56HlTR"
+Received: from fauth-c2-smtp.messagingengine.com (fauth-c2-smtp.messagingengine.com [204.75.18.201])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange x25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	(Authenticated sender: jmtilli)
+	by meesny.iki.fi (Postfix) with ESMTPSA id 4hcKsy6DGMzyQZ;
+	Sat, 05 Sep 2026 07:21:58 +0300 (EEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iki.fi; s=meesny;
+	t=1788582119;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=y3uwQYhWWHu/wXddzFOmjJgjqHenok1Flg+cIe9gNoc=;
+	b=Uk56HlTR8wK4D/lDls4bECAlHpHe4D4OOJ60ZOCTkRpFQDQE4cjAsVPfzJTxfELbijSCkV
+	Jc7DGmcOG5YJ3wXA3Z04LmJyjSr02xTZTRrW8HSD40i46y+4zquoEIQQY9Mii2hcgHnHQH
+	WucWLp0ghwq/9xgLBrCl4l+F4EvTu1o=
+ARC-Seal: i=1; a=rsa-sha256; d=iki.fi; s=meesny; cv=none; t=1788582119;
+	b=O5LqXldh02WrDNdfZgndC0C6JHuuKruhZeff8oi1zV6C6WJqBbT5Y/QQZZF3BMTalZSxSU
+	OzzppoLdgPhHOCwBcplwryrGPatg4rTpRmgcyYr5UB1uhgIyEMZf+uOGgzY82iW4LNuA+M
+	K+EhG3cHqDgOoOL4SIgnYVEu/Eg147A=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=iki.fi;
+	s=meesny; t=1788582119;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=y3uwQYhWWHu/wXddzFOmjJgjqHenok1Flg+cIe9gNoc=;
+	b=w3s1/sWdjdtlBp90blsBaKov32/HyC9Y9L0VBpL98ZVA92t4/BOkf9/zcpOwysYc5ilOQr
+	A+7WVzNSiqpRRrbDbThWiuGwENUs0CE5dtzOrVlkb3Lseh/1iR1RygTH2BFFx4IZRAU6pM
+	prLnue942Zf2aKwuaiCkm2Lh+VZdKQY=
+ARC-Authentication-Results: i=1;
+	ORIGINATING;
+	auth=pass smtp.auth=jmtilli smtp.mailfrom=juha-matti.tilli@iki.fi
+Received: from ams-compute-02.internal (ams-compute-02.internal [10.64.2.62])
+	by mailfauth.ams.internal (Postfix) with ESMTP id D1776198006E;
+	Sat,  5 Sep 2026 00:21:57 -0400 (EDT)
+Received: from ams-imap-13 ([10.64.2.33])
+  by ams-compute-02.internal (MEProxy); Sat, 05 Sep 2026 00:21:57 -0400
+X-ME-Sender: <xms:45ibaoQddBuqZTXNYUhi583YWnz41jhPsvLFN43v87NQ8PJJuiCs5A>
+    <xme:45ibagn9M4yGmu-Uid_tbN8Gs6-0iO9-rNyZc4awMlkV24KGV_RFffHAM86OmUPy8
+    4wqlNt5nbF4mTIdDxOE0CCwr9vDooUHevCqCd1lPL2khODTxk4q3_M>
+X-ME-Proxy-Cause: dmFkZTGoFIH3WITUQMH9wWS9ETTwWD3+gSemNpKRVvzkQC1ebGQhg56hbbZ58t6gSLllbl
+    GjkRcBKvgO9sIYW5ScfUiR2nqTwRuOOAdTOyPlNDAuAj9CNoyoI+5tQ5rmyOcWm8D1oUi+
+    QTD6fp4jKtwuuiCXywcTKguAh/YuhPSw4ax/bqSY8msvgSyR7EA4nUxPUTX9SO4GpbDwBa
+    e8b4mAWVFrPxtgaR2BSoUYmW4me53zgAaruWmBkkWiWXE1FrzvNc/s8Bdlb46FRg2hF/65
+    bEtTWZiBnnkjfwglSeCsNJpe7oa0tTXW55ePRzJMsxrgHiJJIrIfPk89Ro1fE1KdCsXNgA
+    UR/PSBXJe/mrkw1ZOBOS8He1J0AkpB3cNE/OCifxSFwR47/pm/EbS+JXJNgZb8HmVjzgdC
+    93UjIsoVvzFO0giv7jL4kXm9WQZEd46sUpZAKu8SQt9h3Jfge4UyyTFR/XoKmorKx9thys
+    TFvSlQdVMTQL4Djf5VZy79F46jvk4lwbtvqJUaR9/+elbQqHA8c9jj1idTnZosp67r1J4a
+    2YDZi+RQmQUf3Vo27tX1ykU5wOMLtjSnOPiGUz3JB3QL8GmYwxeiVlajfxw2YcCm2rTT2W
+    hxOvtb1OKizLEX7vFJ/DpVMq/WtwOedW1x4GMKTMbTFbDTYet/bwE0cnONog
+X-ME-Proxy: <xmx:5ZibasWXBqGcIYiBvStlhat0eJCRMFo16Xo74UBxP_QsVx0PAmNOvw>
+    <xmx:5ZibahAQcG-4Zr9jn6be9XPJMZO5oPb-0s5AxF2zEnkw6kPp1Hiqfg>
+    <xmx:5ZibagKnyDCO02nGwGWTJIyhXdUGNnc1_K8tVr8tMV_9jHAw26fUsg>
+    <xmx:5Zibanu35BPNaZurdNGMvOJmMWrnnVWNe5fAqcdJDUCET8u3GLLHkw>
+    <xmx:5ZibagWsSd_VLD63S3qMWc0u2I8gd24ZR5pAXnOzkLvXoGhMomDb9GKw>
+Feedback-ID: i02414972:Fastmail
+Received: by mailuser.ams.internal (Postfix, from userid 501)
+	id 27CC2F80082; Sat,  5 Sep 2026 00:21:55 -0400 (EDT)
+X-Mailer: MessagingEngine.com Webmail Interface
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-ThreadId: AWdxuz6OZDWw
+Date: Sat, 05 Sep 2026 07:21:33 +0300
+From: "Juha-Matti Tilli" <juha-matti.tilli@iki.fi>
+To: "Jakub Kicinski" <kuba@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, "Manivannan Sadhasivam" <mani@kernel.org>,
+ "Eric Dumazet" <edumazet@google.com>,
+ "Kuniyuki Iwashima" <kuniyu@google.com>, "Paolo Abeni" <pabeni@redhat.com>,
+ "Willem de Bruijn" <willemb@google.com>,
+ "David S . Miller" <davem@davemloft.net>, "Simon Horman" <horms@kernel.org>,
+ "Marcel Holtmann" <marcel@holtmann.org>, "Andy Gross" <agross@kernel.org>,
+ "Mihai Moldovan" <ionic@ionic.de>, "Denis Kenzior" <denkenz@gmail.com>,
+ linux-kernel@vger.kernel.org, netdev@vger.kernel.org
+Message-Id: <0cc80b04-1bf0-419a-809c-e16be3f6a933@app.fastmail.com>
+In-Reply-To: <20260904184038.5c1e673a@kernel.org>
+References: <20260901131934.225991-1-juha-matti.tilli@iki.fi>
+ <20260901131934.225991-14-juha-matti.tilli@iki.fi>
+ <20260904184038.5c1e673a@kernel.org>
+Subject: Re: [PATCH v6 13/15] net: qrtr: limit endpoint range to 16 bits on 32-bit
+ machines
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-qcom_tzmem_enable() runs qcom_tzmem_init() using DO_ONCE(), taking
-the once_lock spinlock. qcom_tzmem_init() subsequently takes the
-qcom_scm_lock mutex, potentially sleeping holding the spinlock,
-triggering:
 
-  BUG: sleeping function called from invalid context at drivers/firmware/qcom/qcom_scm.c:334
-  in_atomic(): 1, irqs_disabled(): 1, non_block: 0, pid: 112, name: kworker/u49:4
-  Call trace:
-   __might_resched+0x378/0x698
-   __might_sleep+0x9c/0x220
-   qcom_scm_call+0x3c/0xf0
-   __qcom_scm_is_call_available+0xec/0x198
-   qcom_scm_shm_bridge_enable+0xc4/0x158
-   qcom_tzmem_enable+0x178/0x218
-   qcom_scm_probe+0x4d4/0xcb8
 
-Fix this by using DO_ONCE_SLEEPABLE().
+On Sat, Sep 5, 2026, at 04:40, Jakub Kicinski wrote:
+> On Tue,  1 Sep 2026 16:19:32 +0300 Juha-Matti Tilli wrote:
+> > On 64-bit machines, use the full range for endpoint ids, but on 32-b=
+it
+> > machines, use only 16 bits. This gives plenty of endpoints, 65534 to
+> > be specific, apart from the invalid zero value and the local endpoin=
+t.
+> >=20
+> > [snip]
+>=20
+> Doesn't build on 32bit x86:
+>=20
+> ../net/qrtr/af_qrtr.c: In function =E2=80=98qrtr_endpoint_register=E2=80=
+=99:
+> ../net/qrtr/af_qrtr.c:28:58: error: =E2=80=98UINT16_MAX=E2=80=99 undec=
+lared (first use in this function)
+>    28 | #define QRTR_ENDPOINT_RANGE XA_LIMIT(qrtr_local_nid + 1, UINT1=
+6_MAX)
+> [snip]
 
-Fixes: 9941fe8a04f3 ("firmware: qcom: scm: Fix tzmem state on probe retry")
-Signed-off-by: Daniel J Blueman <daniel@quora.org>
----
- drivers/firmware/qcom/qcom_tzmem.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Indeed, I will later post a new version with UINT16_MAX replaced by
+65535.
 
-diff --git a/drivers/firmware/qcom/qcom_tzmem.c b/drivers/firmware/qcom/qcom_tzmem.c
-index 0fd9581275f1..ebcdee3c5975 100644
---- a/drivers/firmware/qcom/qcom_tzmem.c
-+++ b/drivers/firmware/qcom/qcom_tzmem.c
-@@ -518,7 +518,7 @@ int qcom_tzmem_enable(struct device *dev)
- 	static int result;
- 
- 	qcom_tzmem_dev = dev;
--	DO_ONCE(qcom_tzmem_do_init, &result);
-+	DO_ONCE_SLEEPABLE(qcom_tzmem_do_init, &result);
- 	return result;
- }
- EXPORT_SYMBOL_GPL(qcom_tzmem_enable);
--- 
-2.53.0
+I thought I was careful testing these, but now I recall that the
+individual patches were test-compiled on 64-bit and only the branch
+head with all patches was tested on 32-bit.
 
+Thanks for noticing!
+
+BR, Juha-Matti
