@@ -1,228 +1,144 @@
-Received: from mail-wr1-f49.google.com (mail-wr1-f49.google.com [209.85.221.49])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from meesny.iki.fi (meesny.iki.fi [195.140.195.201])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0F9C1395AE2
-	for <linux-arm-msm@vger.kernel.org>; Sat,  5 Sep 2026 10:25:25 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.49
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788603927; cv=none; b=ExfAfO1YZJf9BuHxVaQ175O1Zlm0x6qJlQZPfpJO6sAQc3BKSHTa1RpeZWqptq/VJ/zj7ot8PAinjakYH/f70zccgRpKoTxspUZZoPLrX/+fwjMIE+1f5+OS7iZUtnhWAGQ00EMYpmOm74NuMi6NyRm6asSY0fh08k0dkzWAnAo=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788603927; c=relaxed/simple;
-	bh=eGXgx+hcAKyGmp8q0icQVJnjuGTfMBxz2LgfdEs2BLo=;
-	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=GSbG1MaE4qp0qA7dw1VM46uo4yUiNh8aB1g3x5h172dUcUI88RFk78buX3wB9zw+f4zJ9AKXA8RarZHV0HGA2kxLMoYy1QYQXs78LxIXSsANRZ0Tf1X6zBUZqWK96h4eOc+9K2Qxi6o9V0d2Su1whXR2sBBdQA6+uNSetr8I70Y=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=sT7mj5hv; arc=none smtp.client-ip=209.85.221.49
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DE38F3DC856;
+	Sat,  5 Sep 2026 10:58:09 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=195.140.195.201
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1788605891; cv=pass; b=N9GcAlTwwxbGNi/mcZXgncjYNNtEWiREbIfl86BLAym60hlutVtYEBZP5Je8zndM6IuQTVqbdql+OSP84PgGVJqGt4fCkJTL+8DrZCW3pph7SyKgLZUbM2FeOhCxWQmQprY9skTcFsdy+gRce/c9T5HacviSvuWsrnHa1hETH9Q=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1788605891; c=relaxed/simple;
+	bh=8/LRCf2d/Vb8yj1T6vOnmEEE07PqtOSZJGPqAQuSuiQ=;
+	h=MIME-Version:Date:From:To:Cc:Message-Id:In-Reply-To:References:
+	 Subject:Content-Type; b=RaSmIaBaDiBdpfSv2Rk4WjTqn16HtoOvGvtZZ+79/7FADImgCeAjWNo4WOTxBY1Lyb6vV1+2RfAl1sM6TnPy1q9zPNU4aAik9I8C9q5SLODbZGrut5JcKmSVQjSosOXT+NyFK2NKoU8OKlepWduV8RxyZPWHWP203aGCHdGceAw=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=iki.fi; spf=pass smtp.mailfrom=iki.fi; dkim=pass (1024-bit key) header.d=iki.fi header.i=@iki.fi header.b=eqv17CtE; arc=pass smtp.client-ip=195.140.195.201
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=iki.fi
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=iki.fi
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="sT7mj5hv"
-Received: by mail-wr1-f49.google.com with SMTP id ffacd0b85a97d-482e257a23aso1295648f8f.0
-        for <linux-arm-msm@vger.kernel.org>; Sat, 05 Sep 2026 03:25:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1788603924; x=1789208724; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=D3akeHPjtNJgVs2eeVfuYjm/Liw9l2u5Y7OVSBtrpu4=;
-        b=sT7mj5hvoNhjcWtYnWHsfwvrx8n8MtF0Sq+tYYFDQfVWBw8a7HbJi9AU0NukafFZ+6
-         T0PXTW94l4I6nwDn3RaT9+jEzTJwGPawMyBUYhbQP9pHd2fXnZJa0F2F0fyMa+jk4Ylr
-         sNQJwPUUBEGprgGyMsAVRsOl5k3AdCl2I8Pa8Gb+A9oLTG3KTDWEPelfwFzoCOekilq0
-         FTjdu0+/P/qsaiT8wawyCwuR5GkAY8poFMpiv7UDIoOwIkhhEWs0zkb6MP8LQUNzCQg2
-         xyaPFOEtSiryofeTZS8Vbyv2e1tTzLVkXgV8ik+eAHy+lby2IoO5xKnzXGhljZ43w+Zh
-         Le1w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788603924; x=1789208724;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=D3akeHPjtNJgVs2eeVfuYjm/Liw9l2u5Y7OVSBtrpu4=;
-        b=X1efTfJ7Y1Mgk7ia0u28fozspMpUVWRTXd5pPE8E8O8vxGU1kf8WX+zKWnMe6W0T2L
-         NqN8wd3h/a4365zDpbzFGpGyPiKQ0d6PaCck6wr0dBBZWfA+5K1muDVK9Q5bMWAK/Oz/
-         ZlZVPqmSmTp9FwRaSRXuUA8Sv4Q9IpUL2PpYO5cttKTIWaEtv6I4cU1KnfYwsKIWoLU2
-         h85dxsPprQRlLkleZWJYCneeAoqSucj3NnpKWyWN1MJa6sBenlK5S6GgL2ShHD4F3yx2
-         l204+t4Ey9gGz4D19zonYp3/EP6wtYs9UttBXknXgU3/sz+zXYFWp5x0j/aPUYMaFg9f
-         +1cQ==
-X-Forwarded-Encrypted: i=1; AKwUvBwV7zHTSTP1QsNYRlHi/vxmwPegmKMH0RFA1WbDDNJSqS94LvOto/dec6z/zEipbsqPOuKqhrzP32g17K1I@vger.kernel.org
-X-Gm-Message-State: AFuF++m+am59+jO0VJo+g2Faz70NJGr4bXH6zOU4qMsSkzjZrsxrS6zl
-	E8DAEmkTRlswPFSOUUDavmY18YKu8eVXI+ht7Wo3uAfwq1MC9j5UYOm0Qux6yBpa
-X-Gm-Gg: AYBFou0ZIBHInhrycfnnIB1m9qn3uXJHCQfuirFDrSRDYFemnE1Mngh5qZvInEnqg87
-	UFn59B6IBhJfxpH+S9XMOzHOeLBtKv8I4aI6Nvj0kVko6oDHdKbTUZz2+H5pLc267IPF73zExSO
-	J6Q0y2R5vm14KGqPDcf9g2l2XVItXM7VXN27sIL8xpM7AbjyYchstXTWYjpho96/X6f7LQa8Tsm
-	b8N99QBXG2PWP+MEm7ld/xXX6WDXjuL9SM40RzD3C8yls3L3CtKT8nmdGsYLG20HZt6LSaQJmmY
-	GeU6M3tLF4Y2Tli7UACSxn2rYYl+bitBXSMaA7JVZwPXY+DE647DMGj00z9tcidWoc+7nW/Axnj
-	HWfjThwK9CbhSaajyHoDABVFDgOtkavc9LsEXH2+eL34EE6sxsWGLCuIqbbvpjWtlRN0DHVqDYu
-	swYMWCVOhnRlXtn08jyb3lhJNV1K6hxHJgW6NDhUwPPQEhIc64T7FwesNtjUploReKz2db9li5e
-	84FPqLEWb/5vqT7/3eF93Mw5j2YIvLkO9/fde23dLvT+qoaZOFvtF6P1MRBcNS9V3/iDiPAsfGF
-	WFVfJ9E99bqhAIi1MsLDU4AReD6FcjpjiYzYVoTYMxYfupKJYiwWaiyoXIBz8DXp498=
-X-Received: by 2002:a7b:cc91:0:b0:49c:ff9f:f6b6 with SMTP id 5b1f17b1804b1-49cffa00196mr48321255e9.6.1788603923899;
-        Sat, 05 Sep 2026 03:25:23 -0700 (PDT)
-Received: from localhost.localdomain (dynamic-2a02-3100-a4eb-3001-c06d-af27-9fa2-ea53.310.pool.telefonica.de. [2a02:3100:a4eb:3001:c06d:af27:9fa2:ea53])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-49cf7740d44sm295147235e9.15.2026.09.05.03.25.22
-        (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
-        Sat, 05 Sep 2026 03:25:23 -0700 (PDT)
-From: Karl Mehltretter <kmehltretter@gmail.com>
-To: Bjorn Andersson <andersson@kernel.org>,
-	Konrad Dybcio <konradybcio@kernel.org>
-Cc: Karl Mehltretter <kmehltretter@gmail.com>,
-	linux-arm-msm@vger.kernel.org
-Subject: [PATCH] soc: qcom: dcc: Remove the debugfs ABI document left behind by the driver removal
-Date: Sat,  5 Sep 2026 12:25:19 +0200
-Message-Id: <20260905102519.43066-1-kmehltretter@gmail.com>
-X-Mailer: git-send-email 2.39.5 (Apple Git-154)
+	dkim=pass (1024-bit key) header.d=iki.fi header.i=@iki.fi header.b="eqv17CtE"
+Received: from fauth-c2-smtp.messagingengine.com (fauth-c2-smtp.messagingengine.com [204.75.18.201])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange x25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	(Authenticated sender: jmtilli)
+	by meesny.iki.fi (Postfix) with ESMTPSA id 4hcVfx6zmwzyTZ;
+	Sat, 05 Sep 2026 13:58:01 +0300 (EEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iki.fi; s=meesny;
+	t=1788605882;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=qGf3EGNvMC+tCJO1atmXj/XjW6IrJkfyCoTSb8aqIhk=;
+	b=eqv17CtEASYM38q8/zb1i35g50Q3asRS8pGm6zfhVbGkS+W2Cj3stf7lXP8qHbVl+4sOjq
+	cbS9R9wh+83hyj6up0IAgT48lHf6tYPnRY64cnqzi4qFHA6Z3fQBd7e/DiNnKgfczyqrAx
+	qRLs9ZGFgafsFmPUjAMQW07VHiJW/hg=
+ARC-Seal: i=1; a=rsa-sha256; d=iki.fi; s=meesny; cv=none; t=1788605882;
+	b=FLP5bVagObojUp0yV8P76bAIi9YKKxgBIh/j2EKh2I6SVeM/nSB6lXrj+v8rQRO35nLTFL
+	hZio94dbw+xI2MSRDbUN3YLzU7AwcDamB0ONHD/8S6CkKN/XX9EsvM4AToHwW+thZs62N3
+	2wFX6eR9Q4UdySPpf8fdhswXEYotCx8=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=iki.fi;
+	s=meesny; t=1788605882;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=qGf3EGNvMC+tCJO1atmXj/XjW6IrJkfyCoTSb8aqIhk=;
+	b=DtlXJAyLnN+HykwaaGU6x+dSlcdqz/kqHRDwA2PEU3CniToYb8ma+vxPVoe2iuqYQtdTu+
+	qUPKaFZErlZP1vc+N57yDBQlmKCDbjRxfl0vEFwcUfvo4RZiL41hFAKtiy5Q8ilZ8+nFGg
+	yffEpoQeshWyEjWi4K4hPoMKgo4Fbsc=
+ARC-Authentication-Results: i=1;
+	ORIGINATING;
+	auth=pass smtp.auth=jmtilli smtp.mailfrom=juha-matti.tilli@iki.fi
+Received: from ams-compute-02.internal (ams-compute-02.internal [10.64.2.62])
+	by mailfauth.ams.internal (Postfix) with ESMTP id 65FAD198005C;
+	Sat,  5 Sep 2026 06:58:00 -0400 (EDT)
+Received: from ams-imap-13 ([10.64.2.33])
+  by ams-compute-02.internal (MEProxy); Sat, 05 Sep 2026 06:58:00 -0400
+X-ME-Sender: <xms:tfWbah5TQKB-Q050Xvn_LROh9Yc8w52AZAVvShIfr_av3nmO5oN5kg>
+    <xme:tfWbapsrR4UUjK9IvN5y_dgOz889aeYtLr_YFn4YGhsqRhmXRO7zxj1Nf5GFKpqP_
+    xqe1O0snu9rdOlg14bjmXZjcwYZ9N2oZO-_Cq00oJTe4rgSTBEhC5WF>
+X-ME-Proxy-Cause: dmFkZTELQ3SQvWgUATuEy9cPGDpMSwyORhxHL5EyoGz4mQ0tjQ2VPPRI6D26AhuGC/0AlV
+    PTPBEW281iUHFAgAuTVVxwrMqFHVCaSkNf6L9X9DVaqneok3ZOj4gmKcKzzSYV0zwsCQK4
+    0N6ZNJAKd9220k8PgxwyxGgq+k4BSZ6tkjoq9r4I19hOpZH/YaX/bmNv968AAL1ZEazzQR
+    +IJajjO7UQ8nxqioRXnLoRC1ZEK45qIefKf9Ip/e3CZi3nusUN+EDKAmXLAGl3lOfBjeBX
+    wWBJvIvI0XW85xldtqP8CuySRyaOv3HcXLCl5cP2hscci3cpL2plESjUb7vzGPdYhPYFTx
+    YsAKLuxNXqufHJVULMh+mZLF1XqVh5ZvkcCe9hyc/m2CJuuKsYeayV0nrKkgVnqgIKAE2P
+    9LIgaoYcrpULe9pdHKC9pNJ9JkJzG/07we+ME8tFz5SGgTGM8RN8DzTK12BQtfe8QeNQIh
+    PDCPJAozcP+QnALOm/FakGthLxFq1rUyMTWOwy4UIvcFwMvd6g+jn5hf7OSKRb1BjuFwiV
+    MhN+yYtqJ7iTgUgzcAAFFugSVFwQlC9xJp6+2uS7pjvtwHClDtgGrez3iXEy/VyMdPEWWV
+    JJuqURugfQ84mhYBud1YZgJ4y5jnkddqafsYjlGfZERcakTQoJkJTTrjnxNA
+X-ME-Proxy: <xmx:uPWbarlFvTiNKzKyU7_YbABY3FgBrPbj1Ux2wT4SfLUvMT6iJCes7g>
+    <xmx:uPWbatUjTckt8OLHq_AR6bJcvib65sm9Xmwm44VUhLG3w4hAognx1A>
+    <xmx:uPWbaoe7YThptqpQ-GxxnXfsWnEQuVJM48SlgiuuDkPK8wttGFdCRw>
+    <xmx:uPWbajlu8pOVaDvDHAstuMT1LiVTEVBiFhVkcesroMDA4sEluUTmlA>
+    <xmx:uPWbaiBiy6eKwjQm9U55aZnbvOdluy1tzwAJ6qOwYbpnaQ1b8uSf0Hy7>
+Feedback-ID: i02414972:Fastmail
+Received: by mailuser.ams.internal (Postfix, from userid 501)
+	id 997CFF80083; Sat,  5 Sep 2026 06:57:57 -0400 (EDT)
+X-Mailer: MessagingEngine.com Webmail Interface
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-ThreadId: AWdxuz6OZDWw
+Date: Sat, 05 Sep 2026 13:55:43 +0300
+From: "Juha-Matti Tilli" <juha-matti.tilli@iki.fi>
+To: "David Laight" <david.laight.linux@gmail.com>
+Cc: "Jakub Kicinski" <kuba@kernel.org>, linux-arm-msm@vger.kernel.org,
+ "Manivannan Sadhasivam" <mani@kernel.org>,
+ "Eric Dumazet" <edumazet@google.com>,
+ "Kuniyuki Iwashima" <kuniyu@google.com>, "Paolo Abeni" <pabeni@redhat.com>,
+ "Willem de Bruijn" <willemb@google.com>,
+ "David S . Miller" <davem@davemloft.net>, "Simon Horman" <horms@kernel.org>,
+ "Marcel Holtmann" <marcel@holtmann.org>, "Andy Gross" <agross@kernel.org>,
+ "Mihai Moldovan" <ionic@ionic.de>, "Denis Kenzior" <denkenz@gmail.com>,
+ linux-kernel@vger.kernel.org, netdev@vger.kernel.org
+Message-Id: <4531eba0-e44c-462d-8fcc-b189f6df1f31@app.fastmail.com>
+In-Reply-To: <20260905110727.0ff502e4@pumpkin>
+References: <20260901131934.225991-1-juha-matti.tilli@iki.fi>
+ <20260901131934.225991-14-juha-matti.tilli@iki.fi>
+ <20260904184038.5c1e673a@kernel.org>
+ <0cc80b04-1bf0-419a-809c-e16be3f6a933@app.fastmail.com>
+ <20260905110727.0ff502e4@pumpkin>
+Subject: Re: [PATCH v6 13/15] net: qrtr: limit endpoint range to 16 bits on 32-bit
+ machines
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-Commit c5d52d7bf241 ("soc: qcom: dcc: Drop driver for now") removed the
-DCC driver before its first release, but left its debugfs ABI
-description in place. There is no driver behind
-/sys/kernel/debug/dcc in the tree.
 
-Remove the file.
 
-Fixes: c5d52d7bf241 ("soc: qcom: dcc: Drop driver for now")
-Assisted-by: LLM
-Signed-off-by: Karl Mehltretter <kmehltretter@gmail.com>
----
- Documentation/ABI/testing/debugfs-driver-dcc | 127 -------------------
- 1 file changed, 127 deletions(-)
- delete mode 100644 Documentation/ABI/testing/debugfs-driver-dcc
+On Sat, Sep 5, 2026, at 13:07, David Laight wrote:
+> On Sat, 05 Sep 2026 07:21:33 +0300
+> "Juha-Matti Tilli" <juha-matti.tilli@iki.fi> wrote:
+> > Indeed, I will later post a new version with UINT16_MAX replaced by
+> > 65535.
+> 
+> Makes more sense anyway because it is an arbitrary bound (rather than
+> ensuring the result will fit in 16 bits.
+> Indeed, it might be better to use a different limit.
 
-diff --git a/Documentation/ABI/testing/debugfs-driver-dcc b/Documentation/ABI/testing/debugfs-driver-dcc
-deleted file mode 100644
-index 27ed5919d21b..000000000000
---- a/Documentation/ABI/testing/debugfs-driver-dcc
-+++ /dev/null
-@@ -1,127 +0,0 @@
--What:           /sys/kernel/debug/dcc/.../ready
--Date:           December 2022
--Contact:        Souradeep Chowdhury <quic_schowdhu@quicinc.com>
--Description:
--		This file is used to check the status of the dcc
--		hardware if it's ready to receive user configurations.
--		A 'Y' here indicates dcc is ready.
--
--What:           /sys/kernel/debug/dcc/.../trigger
--Date:           December 2022
--Contact:        Souradeep Chowdhury <quic_schowdhu@quicinc.com>
--Description:
--		This is the debugfs interface for manual software
--		triggers. The trigger can be invoked by writing '1'
--		to the file.
--
--What:           /sys/kernel/debug/dcc/.../config_reset
--Date:           December 2022
--Contact:        Souradeep Chowdhury <quic_schowdhu@quicinc.com>
--Description:
--		This file is used to reset the configuration of
--		a dcc driver to the default configuration. When '1'
--		is written to the file, all the previous addresses
--		stored in the driver gets removed and users need to
--		reconfigure addresses again.
--
--What:           /sys/kernel/debug/dcc/.../[list-number]/config
--Date:		 December 2022
--Contact:        Souradeep Chowdhury <quic_schowdhu@quicinc.com>
--Description:
--		This stores the addresses of the registers which
--		can be read in case of a hardware crash or manual
--		software triggers. The input addresses type
--		can be one of following dcc instructions: read,
--		write, read-write, and loop type. The lists need to
--		be configured sequentially and not in a overlapping
--		manner; e.g. users can jump to list x only after
--		list y is configured and enabled. The input format for
--		each type is as follows:
--
--	        i) Read instruction
--
--		   ::
--
--		     echo R <addr> <n> <bus> >/sys/kernel/debug/dcc/../[list-number]/config
--
--		   where:
--
--		   <addr>
--			The address to be read.
--
--		   <n>
--			The addresses word count, starting from address <1>.
--			Each word is 32 bits (4 bytes). If omitted, defaulted
--			to 1.
--
--		   <bus type>
--			The bus type, which can be either 'apb' or 'ahb'.
--			The default is 'ahb' if leaved out.
--
--		ii) Write instruction
--
--		    ::
--
--		      echo W <addr> <n> <bus type> > /sys/kernel/debug/dcc/../[list-number]/config
--
--		    where:
--
--		    <addr>
--			The address to be written.
--
--		    <n>
--			The value to be written at <addr>.
--
--		    <bus type>
--			The bus type, which can be either 'apb' or 'ahb'.
--
--	        iii) Read-write instruction
--
--		     ::
--
--		       echo RW <addr> <n> <mask> > /sys/kernel/debug/dcc/../[list-number]/config
--
--		     where:
--
--		     <addr>
--			The address to be read and written.
--
--		     <n>
--		        The value to be written at <addr>.
--
--		     <mask>
--			The value mask.
--
--		iv) Loop instruction
--
--		    ::
--
--		      echo L <loop count> <address count> <address>... > /sys/kernel/debug/dcc/../[list-number]/config
--
--		    where:
--
--		    <loop count>
--			Number of iterations
--
--		    <address count>
--			total number of addresses to be written
--
--		    <address>
--			Space-separated list of addresses.
--
--What:           /sys/kernel/debug/dcc/.../[list-number]/enable
--Date:           December 2022
--Contact:        Souradeep Chowdhury <quic_schowdhu@quicinc.com>
--Description:
--		This debugfs interface is used for enabling the
--		the dcc hardware. A file named "enable" is in the
--		directory list number where users can enable/disable
--		the specific list by writing boolean (1 or 0) to the
--		file.
--
--		On enabling the dcc, all the addresses specified
--		by the user for the corresponding list is written
--		into dcc sram which is read by the dcc hardware
--		on manual or crash induced triggers. Lists must
--		be configured and enabled sequentially, e.g. list
--		2 can only be enabled when list 1 have so.
--- 
-2.53.0
+Well, on that I might disagree. As of this commit, the code will have to 
+cram that into 16 bits on 32-bit platforms. Only the later commit will 
+remove the restriction that lookups are limited to 32 bits total.
 
+Node ids are 32-bit by definition, so 32+16=48 > 32, so u16 won't help.
+
+Of course, there's the possibility that if the later commit is what we
+want, that this will be squashed with the later commit.
+
+I looked at most XA_LIMIT users and they seem to follow the policy that 
+allocations are limited to usually 16, 31 or 32 bits. And I found
+USHRT_MAX -- that's what I was looking for instead of UINT16_MAX.
+
+So I still think that "limited by kernel memory" is the best here. While 
+I can't envision a system with more than 65534 QRTR endpoints, I'm still
+uncomfortable with setting the limit to a low value.
+
+So, the next patchset will have USHRT_MAX. Soon my patchset of actually
+having multiple ath11k/ath12k is ready for review so I'll post that too.
+It fixes the memory leak in Mihai's original set.
+
+BR, Juha-Matti
