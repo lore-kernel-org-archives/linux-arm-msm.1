@@ -1,61 +1,63 @@
-Received: from mail-pg1-f172.google.com (mail-pg1-f172.google.com [209.85.215.172])
+Received: from mail-pl1-f175.google.com (mail-pl1-f175.google.com [209.85.214.175])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DF72D222597
-	for <linux-arm-msm@vger.kernel.org>; Sun,  6 Sep 2026 06:18:12 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.215.172
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2EFA9360ED0
+	for <linux-arm-msm@vger.kernel.org>; Sun,  6 Sep 2026 06:18:26 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.175
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788675495; cv=none; b=KZjiMU7v0WSLYJeg8n8uPNqoT62RsvrNC8Div6iPVqRqX1/4RNVnFKei/LrkXOurO5fFSWl1XaDO/LrkSO0AdzzjRfLBlYz/8/Ous2klWx1p0Z9iWWt22yWFVn91d9HZLhlnLvARYsyLJmxTd0udowqOQaWR89XXhc76/SxHzrs=
+	t=1788675508; cv=none; b=bY5VbA1GieWmPTKbVwMZtOn6EYB5vq1QZ8Pl+UXQ2nfQlU9mXoearnJbHPZSTK/NmnJxLggFNHCdoOKd/OE5ndDfkmrUFrGplyPsXx39WPcofiBU8Ty0IOau/KCxY+7lyhfda6VWNzsV5VfJEX1AzUbXWqwM36HsvfVEMRWPs2g=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788675495; c=relaxed/simple;
-	bh=xJ/1fdf2VHcAZoRO8dB70h+8smMnxhwjaZxtxBrqS3Y=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=g5Xlbr4mxWHqBPptys4fm38rKMNuj0573mjJ80OhtxaVuA/7oSAKF85NHEaJTNuOei1Lj+tqQjx1e9vA32hTuYYVydODRr6TLxo5kXCDHe4aOtn51/fpFPSfIP8JfQjBSpn7/lqoDX84IJRLTE80kvFP10lwm6iG7snPAxmotS8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=mOlv7tS2; arc=none smtp.client-ip=209.85.215.172
+	s=arc-20240116; t=1788675508; c=relaxed/simple;
+	bh=wQGtAlE1eynbFj/BV0uC5lWh+rlGyN0+AtVzgyTUZpQ=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=oDG38OmNx4Vy+hig8NcOZpWYWbXbefEAS+4Z113EaO+HdehKws5a3AiCaUI+KH3m+4emAOPLEPUb8hXO3cke4bAe5OHPNAyzXykp0/2YaRBMErDv5IAn+nzGwIOSr/FYVnP9TGSKMWKh5nwoWrRp/UvUImD1Ge+cSVEWgGt80mg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=BmYj+KXu; arc=none smtp.client-ip=209.85.214.175
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="mOlv7tS2"
-Received: by mail-pg1-f172.google.com with SMTP id 41be03b00d2f7-cbe827e3cb4so2621102a12.3
-        for <linux-arm-msm@vger.kernel.org>; Sat, 05 Sep 2026 23:18:12 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="BmYj+KXu"
+Received: by mail-pl1-f175.google.com with SMTP id d9443c01a7336-2d53197d8b5so21307605ad.3
+        for <linux-arm-msm@vger.kernel.org>; Sat, 05 Sep 2026 23:18:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1788675492; x=1789280292; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=6LOZ87VM/gxx5gotZR4qRLft5D8wWY/6G46t9t21bw8=;
-        b=mOlv7tS2XWt/kbXh5VhCrrMHo6JgR+ck5xw3sp52fmgmhltGg3VahV+VZyR9HMKVmO
-         QQTmBgWCfFLkKCx7QuBhYWHMVO1yE2EqD8aLOLRgiFEABeV5vVUn/Drn/0AvhspxYuii
-         Vxua7AHD/G8JR9YwSPdm4AGdFxO7CS4SuQ8nV8Zp3Zq9uWK9P43qHNPc77vdpyW5Ef6K
-         DnTJgo1ScEMvHycfTy1fB1C6whkzVy+Tb31OPeSYseF7cp3G8czQG/APEKSll5BMJ7Cw
-         Wcozx4+jbOqNUaLpN2f0g36VrmuGd1NZkJ8bhCSbvS+JgoZAhiRTNZkx+qYMrHLYhw8b
-         rEOA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788675492; x=1789280292;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=gmail.com; s=20251104; t=1788675506; x=1789280306; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=6LOZ87VM/gxx5gotZR4qRLft5D8wWY/6G46t9t21bw8=;
-        b=c1JzGPk8ii03xgQwdKkzwLaL9PYpkG8ntELxbu97KIcLv6zWREgqylklIFcbnbSzLU
-         5Ydgx8OwZx/yqgjRNFvWJlN+V0acqPbzI1Tn3UHU4s8Xthq+928nCEaVhL4Zty1TgpLq
-         of46rGJ5vqZkMTGVr0+7k5eKpX+EeMObEw4kfjbL/7Lo1VVqv+9KVBFDO7yXiQdYJ5n1
-         Ct780YHxt1gVYvK4T/TqRASAmitjhc6p0w1oeC84vbZLMs/WjiM2lDmytbfhUh2Mmntz
-         xzjWOfgbvGIrVoEgSNUTxlRW1zHfZkc9pqJ4XOAJ8cK+uh0mvHhzxzIhvC5lqB6Pp0Ji
-         1DDQ==
-X-Forwarded-Encrypted: i=1; AKwUvBzEkEDq5LPKUylyS/W2JkokArBV1xwWJgZqOgWO+DOnSGJVotMeeHzm3UNkyRxFSF6plUsT0nE5jtuDbcXT@vger.kernel.org
-X-Gm-Message-State: AFuF++nnGktFJ8Ma7p0aoY16pj6/eMx7KeuKQTvKvR6ytXR7/CpTU2bl
-	myehIzwzq/yvNtlW42ppvUEg4a1zj98vbqsJi+MtJby4SE46so8N+0cH
-X-Gm-Gg: AYBFou3WSoZ3rAynaFt6gdlaVqZ+EcQLeQj6T9rppj57ekC4Dbqrgh1e16RDAThYG3d
-	jIAbPJnQE6zbyilIVm/W3GE1LkHgyFNMLicH+dnV3qyS9VIEqj3uotTF9KKpZl8CtQudBZNZ5tt
-	x57EV2cNSe1E34G6DCBHCuMGo9PV2TRPictrlNI7oZBuahi1d1hLILcgZkCu+fOU8HMUhE0OKxp
-	/1hqSGI7lYRSeX+Muhx7VQDQgyqXV01dqSa0EmxvLq4arDq+0YUEpgpMYI4C1NYtJzoHZuyDkLo
-	7RQVKHEgyaeNz9J0MDdKxFcMURCDZT+hz8OU6y1IM5P+xNmysMa3Dq8bRaS4fZVXYgv6ACrGZ/U
-	AGo1ZpeYxw+q14diSyW8eRrPlcSCY/2EFynpd21lh1c/G26SImsYAATe7nCp4tMoUlaM+llR6Cb
-	ZQ3YykEA3yUhQHR5TGv+mP0xf6eaHneQnkXxyzH0SET0NyyMP0KqXejFnpieN/
-X-Received: by 2002:a05:6a20:9c11:b0:3d2:3e73:29eb with SMTP id adf61e73a8af0-3da39bb596fmr24951780637.1.1788675491987;
-        Sat, 05 Sep 2026 23:18:11 -0700 (PDT)
+        bh=86ZMXQ7rWbd5+Kz4WmVDnIj3yBwaLGUiWHIv6rRn9PQ=;
+        b=BmYj+KXurujfeMDwlPFtGWG8R++55PN0009DYykfTE5fxMVbSRxczg2OHjc2vd9nEs
+         1AnBB0nETR2cftdZubSn8lX8b7BU4A8FwruK5JLMC0Z4f4KOHbW8W6HNPMydLHYILQXD
+         iY/OQ0mda+5B4mPvH/lS12NCaTNN8phGqT3p43twP9ABWHxQ/NAcaIouVy0e56vq/5PV
+         rY5P4XYgHJPnrSqVod3W3Zgoh3W+6+M910lG8avn6X9rCFP3bb77LxEk3/vRUynlUo57
+         g+5s63ag8YpJ0ngLzImSdBCA+E4L0rNtU1yKnxSNWieZk1NE0AWRoRgbAee51kmLpojM
+         29dw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1788675506; x=1789280306;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=86ZMXQ7rWbd5+Kz4WmVDnIj3yBwaLGUiWHIv6rRn9PQ=;
+        b=iAxL9Qm8IimLhOxEBZ1STjQ2QtwhKH8SoJaTxJLwF6WbW34KLHa/l2Y+UIq8JdIrT6
+         27FF6yk+jlRvS1rFJCU+T6hUnTxMT+ij/WU/f/C1zOaLgF9M7QOFEKT0hwKl4pqTjA8Y
+         UdwI0OpZ+oZv89sNDJW99RmO9huFCvl5+VcIp7eYWxSXNvLQYFCwdnmju8uhe8WDoEgT
+         kVsh1pxWJc0tD096Zg0gXumR+nga/dFFAAo+XeIBCUvW+QGXxQ68rqbYYn68CXmrFUqr
+         63BB8owE2qadlKvAhCek5p/E9WDgflHphSaVfpBOcq1Gr6mb5VlhKfp3Iyxg7VBSCmta
+         HW7g==
+X-Forwarded-Encrypted: i=1; AKwUvBwHpFedTfeJupk0de+ntpcZPcsIDJuKx09TQ1XPG5E/CsYNIwMuk8DuuZwN6YcCqo/gZfKjaE7XzdjdhKIu@vger.kernel.org
+X-Gm-Message-State: AFuF++knWHVH1gA/oOOB+6sKb3p2iqLNT7Oc/H6zp+gKz5tRjgpNltSa
+	1mbJHJqwG4coeH2UrPHM5v6d0Pl5fOwAGKWYe3m53Ukn+ERz7PFWvDgl
+X-Gm-Gg: AYBFou223MG2zx72fox+j6c69GuzxjlQ9N0vEVqnnwIZ6ALE0QEvVQ0TUMu9vJoUEl7
+	VoL/u5fj/G/xnEyTdXAyvJ63CQwYpZfJdzBcBAjGkwfXS/KLsxQpGZ6pLV0BuCDvBdh1+P+g3fG
+	zex9QnqERLIrYp3z+POOMQODOJdURxTJo7tZxZhJ1wOsQAatQ66qTUONcJqyQTHTKeBtMDe5oPV
+	AX06+XoBkx2x/TGotykmzxMUtG4ew2MrV7UKQVuOuU/gOYd3KiNJOG9WWUCMqzUv1o3/N0/YTjj
+	H0RvOHr/Ed09xnSpsm9Jm15TmUQPJK02jUKUqjBOfX8NxyTLdIbdzgQvTilKT05pbETdtrZlG8c
+	6WMSykCmu5v9p5ZC7jpXaVq4LT0b5wpN885E00du0/Bvql3+xvM94BDxiBH62ceXWdgkxjJq36e
+	Sd420c5TxuPBCUyM77kqw6RINSh1MxAuipE684tKZz8g9SvWJVM0ypQ8x3To0=
+X-Received: by 2002:a17:90b:4c4a:b0:398:bc52:825b with SMTP id 98e67ed59e1d1-39b2624c32amr22181806a91.21.1788675506361;
+        Sat, 05 Sep 2026 23:18:26 -0700 (PDT)
 Received: from gmail.com ([58.84.62.227])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3339aa33e96sm18280405eec.12.2026.09.05.23.18.00
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3339aa33e96sm18280405eec.12.2026.09.05.23.18.16
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 05 Sep 2026 23:18:11 -0700 (PDT)
+        Sat, 05 Sep 2026 23:18:25 -0700 (PDT)
 From: Sumeet Pawnikar <sumeet4linux@gmail.com>
 To: rafael@kernel.org,
 	amit.kachhap@gmail.com,
@@ -93,10 +95,12 @@ Cc: bcm-kernel-feedback-list@broadcom.com,
 	linux-pm@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
 	sumeet4linux@gmail.com
-Subject: [PATCH 0/5] PM: Use %pe to print error pointers symbolically
-Date: Sun,  6 Sep 2026 11:47:49 +0530
-Message-ID: <20260906061755.5103-1-sumeet4linux@gmail.com>
+Subject: [PATCH 1/5] powercap: intel_rapl: Use %pe to print error pointers symbolically
+Date: Sun,  6 Sep 2026 11:47:50 +0530
+Message-ID: <20260906061755.5103-2-sumeet4linux@gmail.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260906061755.5103-1-sumeet4linux@gmail.com>
+References: <20260906061755.5103-1-sumeet4linux@gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -105,59 +109,48 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-This patch series is a cleanup for subsystems under power management
-(linux-pm) that converts several instances of error pointer printing
-to use the `%pe` format specifier instead of explicitly casting with
-`PTR_ERR()`.
+Replace PTR_ERR() and %ld with %pe and pass the original pointer directly
+to pr_debug() and dev_err(). The %pe format specifier prints a symbolic
+error name (e.g. -ENOMEM) when CONFIG_SYMBOLIC_ERRNAME is enabled,
+otherwise it falls back gracefully and prints the raw integer value.
+This makes messages more readable without any functional change.
 
-Currently, many drivers use `PTR_ERR()` paired with `%ld` or `%li` to
-print error codes returned as pointers. By switching to `%pe` and passing
-the error pointer directly, the logging subsystem will automatically
-print the symbolic error name (e.g., `-ENOMEM`, `-EPROBE_DEFER`) when
-`CONFIG_SYMBOLIC_ERRNAME` is enabled, and gracefully fall back to the
-numeric value otherwise.
+Signed-off-by: Sumeet Pawnikar <sumeet4linux@gmail.com>
+---
+ drivers/powercap/intel_rapl_msr.c  | 4 ++--
+ drivers/powercap/intel_rapl_tpmi.c | 4 ++--
+ 2 files changed, 4 insertions(+), 4 deletions(-)
 
-This change significantly improves the readability of kernel logs and
-dmesg traces during debugging, without introducing any functional changes
-or side effects.
-
-The cleanup has been applied across the following PM subsystems/drivers:
-* powercap (intel_rapl_msr, intel_rapl_tpmi)
-* thermal (core, cpufreq_cooling, devfreq_cooling, mmio, etc.)
-* cpufreq (bmips, cppc, qoriq, s3c64xx)
-* devfreq (imx-bus, imx8m-ddrc, mtk-cci)
-* power/supply (various battery and charger drivers)
-
-
-Sumeet Pawnikar (5):
-  powercap: intel_rapl: Use %pe to print error pointers symbolically
-  thermal: Use %pe to print error pointers symbolically
-  cpufreq: Use %pe to print error pointers symbolically
-  devfreq: Use %pe to print error pointers symbolically
-  power: Use %pe to print error pointers symbolically
-
- drivers/cpufreq/bmips-cpufreq.c            | 4 ++--
- drivers/cpufreq/cppc_cpufreq.c             | 4 ++--
- drivers/cpufreq/qoriq-cpufreq.c            | 4 ++--
- drivers/cpufreq/s3c64xx-cpufreq.c          | 5 ++---
- drivers/devfreq/imx-bus.c                  | 4 ++--
- drivers/devfreq/imx8m-ddrc.c               | 3 +--
- drivers/devfreq/mtk-cci-devfreq.c          | 4 ++--
- drivers/power/reset/macsmc-reboot.c        | 4 ++--
- drivers/power/supply/axp20x_battery.c      | 4 ++--
- drivers/power/supply/cpcap-charger.c       | 4 ++--
- drivers/power/supply/cw2015_battery.c      | 4 ++--
- drivers/power/supply/intel_dc_ti_battery.c | 2 +-
- drivers/power/supply/qcom_smbx.c           | 2 +-
- drivers/powercap/intel_rapl_msr.c          | 4 ++--
- drivers/powercap/intel_rapl_tpmi.c         | 4 ++--
- drivers/thermal/cpufreq_cooling.c          | 4 ++--
- drivers/thermal/devfreq_cooling.c          | 4 ++--
- drivers/thermal/qcom/qcom-spmi-adc-tm5.c   | 4 ++--
- drivers/thermal/thermal_mmio.c             | 3 +--
- drivers/thermal/uniphier_thermal.c         | 3 +--
- 20 files changed, 35 insertions(+), 39 deletions(-)
-
+diff --git a/drivers/powercap/intel_rapl_msr.c b/drivers/powercap/intel_rapl_msr.c
+index a34543e66446..46972ee1ff84 100644
+--- a/drivers/powercap/intel_rapl_msr.c
++++ b/drivers/powercap/intel_rapl_msr.c
+@@ -582,8 +582,8 @@ static int intel_rapl_msr_init(void)
+ 	rapl_msr_platdev = platform_device_register_data(NULL, "intel_rapl_msr", 0, def,
+ 							 sizeof(*def));
+ 	if (IS_ERR(rapl_msr_platdev))
+-		pr_debug("intel_rapl_msr device register failed, ret:%ld\n",
+-			 PTR_ERR(rapl_msr_platdev));
++		pr_debug("intel_rapl_msr device register failed, ret:%pe\n",
++			 rapl_msr_platdev);
+ 
+ 	return 0;
+ }
+diff --git a/drivers/powercap/intel_rapl_tpmi.c b/drivers/powercap/intel_rapl_tpmi.c
+index 73f36d9c09b1..6baaad3c59ef 100644
+--- a/drivers/powercap/intel_rapl_tpmi.c
++++ b/drivers/powercap/intel_rapl_tpmi.c
+@@ -408,8 +408,8 @@ static int intel_rapl_tpmi_probe(struct auxiliary_device *auxdev,
+ 
+ 	trp->rp = rapl_add_package(info->package_id, &trp->priv, false);
+ 	if (IS_ERR(trp->rp)) {
+-		dev_err(&auxdev->dev, "Failed to add RAPL Domain for Package%d, %ld\n",
+-			info->package_id, PTR_ERR(trp->rp));
++		dev_err(&auxdev->dev, "Failed to add RAPL Domain for Package%d, %pe\n",
++			info->package_id, trp->rp);
+ 		ret = PTR_ERR(trp->rp);
+ 		goto err;
+ 	}
 -- 
 2.43.0
 
