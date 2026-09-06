@@ -1,87 +1,85 @@
 Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3B1D13D668B
-	for <linux-arm-msm@vger.kernel.org>; Sun,  6 Sep 2026 14:18:14 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 733673D1CB5
+	for <linux-arm-msm@vger.kernel.org>; Sun,  6 Sep 2026 14:18:13 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788704295; cv=none; b=Jd7vsjrdZahuCV6WMGziidTTlFY90QS63ryy7Apn2a3tle1gWqelscplbXcjJZn/ASxuQCq5xoK7cUL81OUFMWIO0dJhMk8eKnUXJOjQG1oggAfOY/C3MvPW6KCCmAv0Ry8lb0aagwcA0bC0TNW5vZVcpqhFJYruRpPAcmEZpGc=
+	t=1788704296; cv=none; b=V58c/9JeMwuJW7/eFK0h8CbnjvGiK6arcW07dEtGjan5A8/W5TBBbzEv4ZzLuS5KDN6bULTY/m8B3z/qeoeYjy/bHx3giHL14AOHtHuJbqSY61wZKd3jDQKjNnqnFVYeR0s18cGF3k5qTZHoMezvO5/RPa80Pf1+uFATeLLV2p4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788704295; c=relaxed/simple;
-	bh=hmsI2AA/Q+IIKEXrHu60oCsUSSUt50BoFHeX0KSPKAo=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=OiBElbGfIN240/Pm4DHkn7Yz6t8GiEKgNL9TgziI4+xzjF2ep7js7Ca3Lc1LIJR1keaFvclST4s4iI6vrE4nPHLrL1qmzxcKfcBXjQFfMGiTntYS788FafZvdWKWOkO7VXV/JjyQSzCGwu99a+tssC3qDS8ShU1WL3pyMBfevQg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=YtQGRpbF; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=PyEEKZtx; arc=none smtp.client-ip=205.220.180.131
+	s=arc-20240116; t=1788704296; c=relaxed/simple;
+	bh=vStjqaB+Nqw92WBortmBbUZB1pNyr7BWWqyGcO0GRT8=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=XQSWCvJKnUNo4903Nz9mpJMqpmLQ7Ovb21oG1tKqZP2jrZaK+0/cUb1AiYHXAtv6lCCoAQs9NhELdmILz2+0zRXSiXTh5gBw+JoOZCldJE/a5QZk52Eo2sMmF+UoE4wknB+X0QDpOHNIdKOuJabDI8xs8jX/e2oYj7R/DyWLXdA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=foxwZ7kZ; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=ZMfd0R6s; arc=none smtp.client-ip=205.220.180.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="YtQGRpbF";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="PyEEKZtx"
-Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6868G63P451537
-	for <linux-arm-msm@vger.kernel.org>; Sun, 6 Sep 2026 14:18:13 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="foxwZ7kZ";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="ZMfd0R6s"
+Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68600aje3741893
+	for <linux-arm-msm@vger.kernel.org>; Sun, 6 Sep 2026 14:18:12 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	2uBMf6ZTgeGi7HQhCTtYT90K6zChfXeTy7AGUqgO/O8=; b=YtQGRpbFsno0ZHaW
-	0TtpDBPt/RP3BYMlJXz1YxF6Ev7/YmCmEf+i3aR7C9iwM2ZEn7JPDjXLg2Ht6pTf
-	YwRBQaVd+bac00PyVebfWPiFQFSjC7vVOPWLYgwFc1nWzZZuW23JlhTcYUG9Zx12
-	a0aOmKibPoBkHPN1xB27IAKyPt9oS/RKT/Fk1ZjUCgBPuV0QHKyrMSxnzSpNmQAU
-	mHz7HUkPykmyg1NSfIrd5zYAzYfcgmXuNktYrrzSKa/yhuFmt/Bx+6nHyOpE6c8t
-	qVVdUkyUSjssS3Anj98XJLvmy+xKbW2bCpHg58cf4E6JNTyZ1LEPVBPd0r0c5WIV
-	JhkKKw==
-Received: from mail-pj1-f72.google.com (mail-pj1-f72.google.com [209.85.216.72])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ggadhkjby-1
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=l53u6UKvPGM2TSWpb1Vkl9
+	V8N5ihswLqkEnQwa/MwAk=; b=foxwZ7kZkRw4B8DYtv4GuS/TCQ1RjqM+yp+rBG
+	xTdzKGVQRiv8kGujRQma/omErYBUGDX7uAwOAgSt8u2JhUWT+2rV22U9ogpPHjcp
+	V5pKlBOHvWEpCWPIU0MZkrH20/KtlIwHoycWMRKK1Pqp8MAtqg6oWkZVX5dAi+w5
+	m+RD4WcP5YSAZZuEbXKTaqDpO4tYmIgIB2sbNV/YgLPkzYd+szoo4B15TJeLl9sM
+	TPx1zs0J0nAQr7JvZJ1cR0G7bq0fSIFCYhbwjDDs/9bXHza/UEHnAhLEu7Cjfmzh
+	FiiLP1DP/TODj8Zsuk/qSCc6RejwhCY9RAmW0r5E1ggk4uJQ==
+Received: from mail-pj1-f71.google.com (mail-pj1-f71.google.com [209.85.216.71])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gg8eq42g1-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Sun, 06 Sep 2026 14:18:13 +0000 (GMT)
-Received: by mail-pj1-f72.google.com with SMTP id 98e67ed59e1d1-39533bb224cso3640254a91.3
+	for <linux-arm-msm@vger.kernel.org>; Sun, 06 Sep 2026 14:18:12 +0000 (GMT)
+Received: by mail-pj1-f71.google.com with SMTP id 98e67ed59e1d1-38f5ac7416eso3259267a91.3
         for <linux-arm-msm@vger.kernel.org>; Sun, 06 Sep 2026 07:18:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1788704292; x=1789309092; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=2uBMf6ZTgeGi7HQhCTtYT90K6zChfXeTy7AGUqgO/O8=;
-        b=PyEEKZtxd8G0dD51ivYhCnXYV9xJhNKoT1fUOFsV/5TnTOXfjrGystk6pe/8/dwePK
-         GR8hLx+8T5Qitc10KGgAlB2O0LBOEJyALn28xeVnTLpUCNxdGWu8o1jdoqmgXYsODko4
-         Ux+reyeiLfvMhltyRrQoOvQpYN/On0HkMTjgOrTiZFLrMHFCmjd1LaC6t2ccDxAivYh1
-         0lNjTpBHfBSprrN/O4DZtgp1hybP0zq5N8Rhzs5PUJrN203NZmBN906o3CfKGWkrJ9nG
-         JD8tQ/xsecrjbnlm0mElycCSx8Y5HBvuNQbqO5PONkAfBw4JbKQ5mHfcGF2Ay1lt/1O7
-         ZMtg==
+        d=oss.qualcomm.com; s=google; t=1788704291; x=1789309091; darn=vger.kernel.org;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=l53u6UKvPGM2TSWpb1Vkl9V8N5ihswLqkEnQwa/MwAk=;
+        b=ZMfd0R6sbnNvLuGF558iKFNMLb1L8OqsoNZ3qMb2xqnmDdQ3oefO7nW/DcsVUFhY2u
+         xGi+T16tYbONy8Df+TJWhLDQ6cPmNoz3dPfKpXSZPwllioCPhG0uDrL263M8EeaH5DF4
+         sfP7lHg6R+xKgFjxk3xWt7IbHD92a8rryRe5a1ZgmhaLan1yeQ95FqlB9knigtthwGKP
+         YbZO4oFiyQm5HdroGP09LX9JoTxtZy4c3BuGzPBjimt8dXrW93ltUraiTr82Suwd8tH+
+         xZ8gXEsB6h396owLnAVEerFXeEDul1Mfv8mpVWDXqXwN924LmjsMIMHhdUSPiJLrZ9f/
+         MeCw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788704292; x=1789309092;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=2uBMf6ZTgeGi7HQhCTtYT90K6zChfXeTy7AGUqgO/O8=;
-        b=Ya97B/vqKekzXArh8xD0SntvE5qMwZr6dJmej3prBTD8n8uTPtFBi24tjnV2fRFMVo
-         yXtSaoAP5h1vAlwf4dgiyNjlQaFDaYiYs4BT7cJjXS4D5kMO9aFgdLVihjdpflTPhnUq
-         k8I8gof2UFTaruSwhj7TlBqZvJwq/q8KrJ9bFFy1YgPEHIkj7XJ0EMRvkR2laZ3JVQPN
-         bEkaaT6S8gZaNrUhkCptnAnqbmy4NpkGm/lOElh9kCawuVXPC2DR9OBd0DbPp7OozgNS
-         IqXX8op1S7zyHyo/IYQNeVYRrCCat6WUX4Ox+lerqPo9L5O3Jv3+oYtHy9j6mtRwsnXu
-         JzNA==
-X-Gm-Message-State: AFuF++mT9wmj9WMh15CXB0v7juBR5bzEOjd3w6nAQgrowQLZmmvtmhXH
-	zBDfze6tVnCSk0ITJkeuAzDLv4hdawA4pZQC/VsIhsBprV6S78j/po0yE9bexQzP6UapOXl1u2X
-	fSwwg3h0SnA9J8pLZzZv0M0ghMu+KdV9TT7IIL2GyxfRKfdv/Y2IynloG3zjEsKOddxjb
-X-Gm-Gg: AYBFou2d6Ih+ZPcWp0/L2TX9tYxYBxQsF4mVlnkNaHAfS/G0b0gZ2s3wsL33KzGmsjr
-	WqqkThkKw3YDssqFB4YhFcPr8YNkHzaxwoWwhjvBnS2AKvsQJciHQGIeo3cSQe7EutNXpeGADve
-	cp6guxNZoQ9pb36JCC3hp8lPZGMnwPlSD4jEUrV1khiKrku3DaRCqSroFL+65vKZ/ID2YmU1A3A
-	GMNOQABHJzVWqb3KtNkdUJN2uqC14KKvpEzxgvWxQh8cxbnjd2A75qlvPuuAjGVUZVGSUDkil2e
-	FZpLkILZpqqeajTCxNAMsFj6H6vEbJyvatjar8rKU5VpF6um0ZFaKFcP7XrX4HmWn6AtUlwixxl
-	QjtaUr/cI8RpSS5Ii4BvqqiuzCQZEN5Z9mWWA0uwN2kA=
-X-Received: by 2002:a17:90b:3b8d:b0:398:b426:ca4b with SMTP id 98e67ed59e1d1-39b2624f10amr26208827a91.22.1788704292063;
-        Sun, 06 Sep 2026 07:18:12 -0700 (PDT)
-X-Received: by 2002:a17:90b:3b8d:b0:398:b426:ca4b with SMTP id 98e67ed59e1d1-39b2624f10amr26208752a91.22.1788704291600;
+        d=1e100.net; s=20251104; t=1788704291; x=1789309091;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=l53u6UKvPGM2TSWpb1Vkl9V8N5ihswLqkEnQwa/MwAk=;
+        b=XNdTAp7hA8X3V/bBoSDqYEl3kMhsaHZefK0c6jaUNoOXFL/p+NuC/ni4pfPuJZVCLi
+         esSCTkvuj7e88jPlVZVJJ9WyRxIvbt5lI9qZzgXjgGYucyGC8r3Kt4gwZOW9A7PUJZdu
+         LO7tGTmPiVYpnzRVnUil/fC4eeWQRqYBvR6xkP2LsOcCZN1+JGzkniYtgyodkwm1RPM1
+         SGkqHNjy3JJ0WFQCr1IITzpo2p4RukwN8YV/J0bSabT37W0+Cu8TJJwEuf8ubE6s590w
+         vzyfl/fJcBOZQdup9OIjhxBJB72sVno9LPedtdN/nniW3sO4X33qoRFzM4sqcTZJa5yO
+         iVtQ==
+X-Gm-Message-State: AFuF++leTnzUrdwx9q8TulyEOvK5ryjCjDoxHSsE8SfQp/ZSm9okweAA
+	z1wVpeUvbUJYekLIVpRv6jw0Jn3/GSTVR+l8q4Oqv3L2y+QCn5n31yJh1XAPTqqaTWZnnMIiMtH
+	MtQUEO4PwZLW6N9jP/MO2f1WhEtd1ViMuWDLUBT13BLNz/h0KspOH4CAHvW7iIUye6K8m
+X-Gm-Gg: AYBFou1Q5ziR7q23yXc6yBQeOxYsH3i4l7vSwtfR+/mPnrUUtiF9gtsdwPMLjKN444I
+	sC1apg0bdAHVTZpz/cN0X4zaufE3aq+4531Yd5rNmrVjS9So8YpNbLJIRN6MD5/A2Yc13+cWHNw
+	xiZ+nUMnDhWLijRKmTIu1N/hEMYabXr3CUNZksyb11dcl1ZOD1ZLlAwNaa0zNuofEwhXGZ4vj7u
+	SjZHaJOg5XihBw1IhX0f1HIWIkr/LjjMyPE3GKHVF4xSdTjjnz1cQGG4hvDM65a3lShekwI495s
+	ALPuYWufa5rT/2NR0E0TFxIWvQ+dDblx6tEEHi+POl5ub684efZck7FqLJCUystBJaj/cJM0Wb8
+	oTBIa7qc73+ZsVhPeOE9qOS8YkFN+iZYZmKAdd9NuWI8=
+X-Received: by 2002:a17:90b:1b05:b0:398:9bd1:3210 with SMTP id 98e67ed59e1d1-39b262a89d4mr24705017a91.17.1788704291093;
         Sun, 06 Sep 2026 07:18:11 -0700 (PDT)
+X-Received: by 2002:a17:90b:1b05:b0:398:9bd1:3210 with SMTP id 98e67ed59e1d1-39b262a89d4mr24704942a91.17.1788704290497;
+        Sun, 06 Sep 2026 07:18:10 -0700 (PDT)
 Received: from hu-luoj-lv.qualcomm.com (Global_NAT1.qualcomm.com. [129.46.96.20])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1432435ec2bsm17904550c88.3.2026.09.06.07.18.10
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1432435ec2bsm17904550c88.3.2026.09.06.07.18.09
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 06 Sep 2026 07:18:11 -0700 (PDT)
+        Sun, 06 Sep 2026 07:18:10 -0700 (PDT)
 From: Luo Jie <jie.luo@oss.qualcomm.com>
-Date: Sun, 06 Sep 2026 07:18:07 -0700
-Subject: [PATCH v4 01/12] clk: qcom: ipq-cmn-pll: Use
- devm_clk_hw_register_fixed_rate_parent_data
+Subject: [PATCH v4 00/12] clk: qcom: ipq-cmn-pll: Add IPQ5210 CMN PLL
+ support
+Date: Sun, 06 Sep 2026 07:18:06 -0700
+Message-Id: <20260906-qcom_ipq5210_cmnpll-v4-0-aec5ed642f4f@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -90,9 +88,12 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260906-qcom_ipq5210_cmnpll-v4-1-aec5ed642f4f@oss.qualcomm.com>
-References: <20260906-qcom_ipq5210_cmnpll-v4-0-aec5ed642f4f@oss.qualcomm.com>
-In-Reply-To: <20260906-qcom_ipq5210_cmnpll-v4-0-aec5ed642f4f@oss.qualcomm.com>
+X-B4-Tracking: v=1; b=H4sIAB52nWoC/33OTQ6CMBAF4KuQri3pFGjBlfcwhkAZpIb/AtEQ7
+ m7BhS7ATZOXvPleZ2Kw12jI2ZlJj5M2uqlt8E8OUUVS35HqzGbCGRdMcp92qqli3XYBBxarqm7
+ LkjJMoyQSEGR5Tuxl22Oun5t6vX2yGdMHqmGl1kahzdD0r212grX3f2ECymgSpqGQUcYhyC+NM
+ W43JqUtV659yDo08S8VMrFPcUsphRIshwrkAeX9UHDwK89SHJSXpZ4MBcAOtSzLGwWwj+hlAQA
+ A
+X-Change-ID: 20260724-qcom_ipq5210_cmnpll-0eb9a9615dff
 To: Bjorn Andersson <andersson@kernel.org>, Stephen Boyd <sboyd@kernel.org>,
         Brian Masney <bmasney+clk@redhat.com>,
         Jerome Brunet <jbrunet+clk@baylibre.com>,
@@ -107,133 +108,153 @@ Cc: linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org,
         Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
         Abel Vesa <abel.vesa@oss.qualcomm.com>
 X-Mailer: b4 0.17-dev
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1788704288; l=2969;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1788704288; l=5989;
  i=jie.luo@oss.qualcomm.com; s=20251128; h=from:subject:message-id;
- bh=hmsI2AA/Q+IIKEXrHu60oCsUSSUt50BoFHeX0KSPKAo=;
- b=oNS4TE7Xx2oMQ0HeLwT0ND/rbxLQj2FG1cKdqmoi7yc2yxyoHgv5/JBGtLC1ld6tqvcrVaLvy
- /IW3/ij+M7UA7Zh7ibEPRO2tNGWGpooE4dcXGdUrPf1exZHCCY6MTLJ
+ bh=vStjqaB+Nqw92WBortmBbUZB1pNyr7BWWqyGcO0GRT8=;
+ b=wV4tEyHa1+AU0gXj039QgbKwuOGzpOHcoBK3bElVW8INsOrKh3EnPGADiuNc2ccftlWz/SWWB
+ HJKPjbWbrKAD0PUsibNMqOC8aDTZLHmR8HsQESLR8QTXIb3s9BdzwPJ
 X-Developer-Key: i=jie.luo@oss.qualcomm.com; a=ed25519;
  pk=gSsYMDakxtd6UDFYDdA9y9yjIs5Etp5GK/3DoXWPyS0=
-X-Proofpoint-ORIG-GUID: fj93zGGcylkfGAfF3Jy4C9I6yrOiXlpQ
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTA2MDE1OSBTYWx0ZWRfX8nzv6EWbHYu4
- 0ryKYMaSaVWrAF6PUi/NrLOtYu1fCT5O+9Z4HXTqtH9EEDbX/UxCcdDqibOsB6bzLEkFDEDoEvj
- t6gt8hBP6likd/sxFJ55eKCGNUwx0touXZK4+2h9OMEACcEPtN1A6Vy+JGwJPHhe+vhz7VUnbNS
- 3MIAlJL/lvUKm6d0jiXEKQHMqnxytIW6z1IrE6npBlLt5R/x8x8wHOxtV0bPuciWNi7AfXV7Yac
- Odmi8fig/R3VWNwcu6Vykd/WpE6qrXFALVaqb7maRKTyAhtQaV5ntmO2x1lStW20iNH2yNBlNg4
- W9wibeGki6tNOQypNMQRB/0dT8O2FmdfsXOdqq6US2hwEkA5q3cVj4K2uOS91w0lveG85AIApbK
- HpFBbV/TsZhT53GuyyVWPNwHrgHUL/JMt3VMHQ9cpdUQN3W6EkkIziigOi+PqD/K9NxlIbgVR+j
- OLngi9bEgDwEiNXf4tQ==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTA2MDE1OSBTYWx0ZWRfXy6OqcvTbYa5d
- pC0Dor4faW3PxTH33d7H1wmSD8pRkV1P2/vY5+nNeETo2sGxz1ZgTlESL2gjtAvhxWGPcbgK9hV
- U+CMMNeEa/bEO1pvyE9E52Ihgzwmc7Q=
-X-Authority-Analysis: v=2.4 cv=OceoyBTY c=1 sm=1 tr=0 ts=6a9d7625 cx=c_pps
- a=RP+M6JBNLl+fLTcSJhASfg==:117 a=ouPCqIW2jiPt+lZRy3xVPw==:17
+X-Authority-Analysis: v=2.4 cv=F61nsKhN c=1 sm=1 tr=0 ts=6a9d7624 cx=c_pps
+ a=UNFcQwm+pnOIJct1K4W+Mw==:117 a=ouPCqIW2jiPt+lZRy3xVPw==:17
  a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
- a=EUspDBNiAAAA:8 a=abD0O5-mJzoiGkpUKuEA:9 a=QEXdDO2ut3YA:10
- a=iS9zxrgQBfv6-_F4QbHw:22
-X-Proofpoint-GUID: fj93zGGcylkfGAfF3Jy4C9I6yrOiXlpQ
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
+ a=bC-a23v3AAAA:8 a=EUspDBNiAAAA:8 a=_tJmgOXO7FCaeRF5PkUA:9 a=QEXdDO2ut3YA:10
+ a=uKXjsCUrEbL0IQVhDsJ9:22 a=FO4_E8m0qiDe52t0p3_H:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTA2MDE1OSBTYWx0ZWRfX9ys1sm7zuu4v
+ Wb5medZoHO7zli34U8fdR5DEJx6H2WuORNgGqO10rcha7Wfam5B/QslDfwXbDObCQ065YNyNI+2
+ 0uue5tCunv1odn9u0DmO3tWSBRSorgA=
+X-Proofpoint-ORIG-GUID: zUEfUM-BtEi32o42Iq0_DeuttxhCy56_
+X-Proofpoint-GUID: zUEfUM-BtEi32o42Iq0_DeuttxhCy56_
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTA2MDE1OSBTYWx0ZWRfX/+YXoobjYTyM
+ 8y4gKDHxeywhtA7tB4EyLhn/JMnyBg0DM6gzv9wWBWxikEqhKq4ADPLxwW3+LgNvGjvALVquKP1
+ N4ZGiJjvhpwCACDgrZzT0/O2vMtNBhDT1InGWYWlPJq7nqMJsypvjxs0yxRvPIjxuS/ek2aKcGb
+ qi7MzQ3OBKrZ3e9VRRTgMp0kfz6EdTakhj+Bj/2o74tD/x9J6mlL4fPbesP4hTtqag5KOIqfHEm
+ FOun2qPFbqYs4HcYEIJ84C4W4Ax4qT9qkqYdC+4fvlnCvM6DE9YN4na8wG58ZTOpUSjAduWjiUs
+ Ulo7e266Jr7YL838vEREoHP+OPyiq5mdfC4lg7fKDqxNZqTPD/yGEBRSgOOdq4BUeVM8qnOfSyD
+ mafMk2BJ6xfxCdZ3Lxow+siA5Atuck5KigKiyzmqzyNCMwQOdNlYOxH+8p4mwO+AoRXomwIiaBT
+ Yc/kshVZDYkgrTapS5w==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-09-05_08,2026-09-03_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0 bulkscore=0 priorityscore=1501 suspectscore=0 phishscore=0
- malwarescore=0 impostorscore=0 adultscore=0 spamscore=0 clxscore=1015
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2609060159
+ lowpriorityscore=0 adultscore=0 priorityscore=1501 phishscore=0
+ impostorscore=0 bulkscore=0 suspectscore=0 clxscore=1015 malwarescore=0
+ spamscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
+ adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2609060159
 
-Replace clk_hw_register_fixed_rate_parent_hw() with the managed
-devm_clk_hw_register_fixed_rate_parent_data() so the fixed-rate output
-clocks are automatically unregistered when the device is unbound.
+The CMN (Common) PLL block of IPQ5210 is almost same as that of IPQ9574
+which is currently supported by the driver. It accepts a 48 MHz reference
+clock from the on-board Wi-Fi block and is configured to run at 12 GHz.
+The difference is in the output clocks.
 
-Since all clocks in the driver are now registered via devm_ variants,
-the remove callback 'ipq_cmn_pll_clk_remove()' and the manual
-'unregister_fixed_clk' error-path loop are no longer needed and are
-removed.
+This patch series adds support for IPQ5210 into the CMN PLL clock driver.
+On the IPQ5210, the CMN PLL block supplies a broad set of output clocks
+to the networking hardware and GCC:
 
-Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-Reviewed-by: Abel Vesa <abel.vesa@oss.qualcomm.com>
-Signed-off-by: Luo Jie <jie.luo@oss.qualcomm.com>
+  - NSS (network subsystem): configurable rate via 6-bit divider
+  - PPE (packet process engine): configurable rate via 6-bit divider
+  - PON (passive optical network): configurable rate via 8-bit divider,
+    plus a fixed 31.25 MHz UNIPHY mode
+  - EPHY-RAW: 125 MHz or 312.5 MHz for the SoC-integrated Ethernet PHY
+    (EPHY), which supports up to 2.5G link speed:
+      125 MHz for 1G/100M/10M, 312.5 MHz for 2.5G
+  - Gated fixed-rate outputs: PCS 31.25 MHz, ETH0/1/2 50 MHz,
+    EPHY 50 MHz, ETH 25 MHz
+  - Fixed-rate outputs: XO 24 MHz, sleep 32 kHz
+
+The patch series is organised as follows:
+
+   1/12  clk: convert fixed-rate registration to devm, remove remove callback
+   2/12  dt-bindings + clock ID header for IPQ5210
+   3/12  clk-regmap-divider support for CLK_DIVIDER_* flags
+   4/12  Register a shared cmn_pll_div2 fixed-factor clock
+   5/12  NSS configurable divider clock
+   6/12  PPE configurable divider clock
+   7/12  PON reference clock with enable/disable and divider
+   8/12  EPHY-RAW 125/312.5 MHz select clock
+   9/12  clk_fixed_gate gate clock type for gated fixed-rate outputs
+  10/12  IPQ5210 output clock array and device match table entry
+  11/12  DTS node in ipq5210.dtsi
+  12/12  Update IPQ5210 xo_board to use fixed-factor-clock
+
+Changes in v4:
+  - Convert the PON reference clock's and clk_fixed_gate's hand-rolled
+    enable/disable/is_enabled ops to the clk framework's
+    clk_enable_regmap()/clk_disable_regmap()/clk_is_enabled_regmap()
+    helpers.
+  - Convert the EPHY-RAW clock's registration and ops from the
+    CMN-PLL-specific struct clk_cmn_pll to struct clk_regmap and
+    devm_clk_register_regmap(),
+  - Drop the comment above the cmn_pll_div2 fixed-factor clock
+    registration call; the call itself is self-explanatory.
+  - Sort the ref_48mhz_clk node alphabetically by label.
+  - Collect the Reviewed-by tags.
+- Link to v3: https://patch.msgid.link/20260814-qcom_ipq5210_cmnpll-v3-0-21c3db378611@oss.qualcomm.com
+
+Changes in v3:
+  - Drop the new CLK_DIVIDER_EVEN_INTEGERS_NO_OFFSET flag per review
+    feedback; add a dedicated patch registering a shared cmn_pll_div2
+    fixed-factor clock (this /2 stage exists on every supported SoC's
+    CMN PLL block, so the clock is registered unconditionally (Only
+    IPQ5210's output clocks currently parent on it). Reparent every
+    IPQ5210 output clock except the plain fixed-rate xo-24mhz/
+    sleep-32khz taps (NSS, PPE, PON, EPHY-RAW, and the gated fixed-rate
+    clocks) onto it, using the existing CLK_DIVIDER_ONE_BASED flag for
+    NSS/PPE. Same output rates throughout; more accurately models the
+    hardware's real shared /2 stage.
+  - Remove PON's now-redundant internal /2 math to match, and rename its
+    pon_refclk-suffixed identifiers to pon_clk for consistency with the
+    other per-clock-type helpers.
+  - Reword the clk-regmap-divider flags patch to cite CLK_DIVIDER_ONE_BASED
+    as the motivating flag.
+  - Collect the Reviewed-by tag.
+- Link to v2: https://patch.msgid.link/20260806-qcom_ipq5210_cmnpll-v2-0-cce718b8ec17@oss.qualcomm.com
+
+Changes in v2:
+  - Introduce a new CLK_DIVIDER_EVEN_INTEGERS_NO_OFFSET flag in the
+    generic clk divider framework and re-register the NSS/PPE clocks
+    as plain clk_regmap_div instances instead of hand-rolled ops.
+  - Replace the composite clk_fixed_rate + clk_gate implementation for
+    gated fixed clocks with a dedicated clk_fixed_gate type that reads/
+    modifies the shared gate register through regmap.
+  - Replace the rate/enable_bit/strcmp(name, ...) runtime inference in
+    ipq_cmn_pll_register_clks() with an explicit enum cmn_pll_clk_type
+    field, making each output clock's registration path self-describing
+    instead of implicit in its rate/name/enable_bit fields.
+  - Update the EPHY-RAW clock's determine_rate() to pick the nearest of
+    the two supported rates (125 MHz / 312.5 MHz) using the same abs_diff()
+- Link to v1: https://patch.msgid.link/20260724-qcom_ipq5210_cmnpll-v1-0-a8b8679d215f@oss.qualcomm.com
+
 ---
- drivers/clk/qcom/ipq-cmn-pll.c | 39 +++++++++------------------------------
- 1 file changed, 9 insertions(+), 30 deletions(-)
+Luo Jie (12):
+      clk: qcom: ipq-cmn-pll: Use devm_clk_hw_register_fixed_rate_parent_data
+      dt-bindings: clock: qcom: Add CMN PLL support for IPQ5210 SoC
+      clk: qcom: clk-regmap-divider: Support CLK_DIVIDER_* flags
+      clk: qcom: ipq-cmn-pll: Register CMN PLL /2 clock
+      clk: qcom: ipq-cmn-pll: Add NSS clock support
+      clk: qcom: ipq-cmn-pll: Add PPE clock support
+      clk: qcom: ipq-cmn-pll: Add PON reference clock support
+      clk: qcom: ipq-cmn-pll: Add EPHY-RAW clock support
+      clk: qcom: ipq-cmn-pll: Add clock gate support for fixed clocks
+      clk: qcom: ipq-cmn-pll: Add all output clocks for IPQ5210
+      arm64: dts: qcom: ipq5210: Add CMN PLL device node
+      arm64: dts: qcom: Update IPQ5210 xo_board to use fixed factor clock
 
-diff --git a/drivers/clk/qcom/ipq-cmn-pll.c b/drivers/clk/qcom/ipq-cmn-pll.c
-index dafe8c1738df..4fdf78f6829e 100644
---- a/drivers/clk/qcom/ipq-cmn-pll.c
-+++ b/drivers/clk/qcom/ipq-cmn-pll.c
-@@ -390,13 +390,14 @@ static int ipq_cmn_pll_register_clks(struct platform_device *pdev)
- 
- 	/* Register the fixed rate output clocks. */
- 	for (i = 0; i < num_clks; i++) {
--		hw = clk_hw_register_fixed_rate_parent_hw(dev, fixed_clk[i].name,
--							  cmn_pll_hw, 0,
--							  fixed_clk[i].rate);
--		if (IS_ERR(hw)) {
--			ret = PTR_ERR(hw);
--			goto unregister_fixed_clk;
--		}
-+		struct clk_parent_data pdata = { .hw = cmn_pll_hw };
-+
-+		hw = devm_clk_hw_register_fixed_rate_parent_data(dev,
-+								 fixed_clk[i].name,
-+								 &pdata, 0,
-+								 fixed_clk[i].rate);
-+		if (IS_ERR(hw))
-+			return PTR_ERR(hw);
- 
- 		hw_data->hws[fixed_clk[i].id] = hw;
- 	}
-@@ -410,17 +411,11 @@ static int ipq_cmn_pll_register_clks(struct platform_device *pdev)
- 
- 	ret = devm_of_clk_add_hw_provider(dev, of_clk_hw_onecell_get, hw_data);
- 	if (ret)
--		goto unregister_fixed_clk;
-+		return ret;
- 
- 	platform_set_drvdata(pdev, hw_data);
- 
- 	return 0;
--
--unregister_fixed_clk:
--	while (i > 0)
--		clk_hw_unregister(hw_data->hws[fixed_clk[--i].id]);
--
--	return ret;
- }
- 
- static int ipq_cmn_pll_clk_probe(struct platform_device *pdev)
-@@ -462,21 +457,6 @@ static int ipq_cmn_pll_clk_probe(struct platform_device *pdev)
- 	return 0;
- }
- 
--static void ipq_cmn_pll_clk_remove(struct platform_device *pdev)
--{
--	struct clk_hw_onecell_data *hw_data = platform_get_drvdata(pdev);
--	int i;
--
--	/*
--	 * The clock with index CMN_PLL_CLK is unregistered by
--	 * device management.
--	 */
--	for (i = 0; i < hw_data->num; i++) {
--		if (i != CMN_PLL_CLK)
--			clk_hw_unregister(hw_data->hws[i]);
--	}
--}
--
- static const struct dev_pm_ops ipq_cmn_pll_pm_ops = {
- 	SET_RUNTIME_PM_OPS(pm_clk_suspend, pm_clk_resume, NULL)
- };
-@@ -494,7 +474,6 @@ MODULE_DEVICE_TABLE(of, ipq_cmn_pll_clk_ids);
- 
- static struct platform_driver ipq_cmn_pll_clk_driver = {
- 	.probe = ipq_cmn_pll_clk_probe,
--	.remove = ipq_cmn_pll_clk_remove,
- 	.driver = {
- 		.name = "ipq_cmn_pll",
- 		.of_match_table = ipq_cmn_pll_clk_ids,
+ .../bindings/clock/qcom,ipq9574-cmn-pll.yaml       |   1 +
+ arch/arm64/boot/dts/qcom/ipq5210-rdp504.dts        |  22 +-
+ arch/arm64/boot/dts/qcom/ipq5210.dtsi              |  27 +-
+ drivers/clk/qcom/clk-regmap-divider.c              |  16 +-
+ drivers/clk/qcom/clk-regmap-divider.h              |   1 +
+ drivers/clk/qcom/ipq-cmn-pll.c                     | 535 +++++++++++++++++++--
+ include/dt-bindings/clock/qcom,ipq5210-cmn-pll.h   |  30 ++
+ 7 files changed, 591 insertions(+), 41 deletions(-)
+---
+base-commit: af5f12805e5cefa4fe68d6127c7e1fb78cd5535c
+change-id: 20260724-qcom_ipq5210_cmnpll-0eb9a9615dff
 
--- 
-2.43.0
+Best regards,
+--  
+Luo Jie <jie.luo@oss.qualcomm.com>
 
