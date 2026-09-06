@@ -1,77 +1,261 @@
-Received: from mail-244117.protonmail.ch (mail-244117.protonmail.ch [109.224.244.117])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BBCB43B27C6;
-	Sat,  5 Sep 2026 21:48:23 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=109.224.244.117
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4760912FF69;
+	Sun,  6 Sep 2026 00:41:21 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788644907; cv=none; b=XPk+p/Rs1nk+7JaLMQKJqRNVqw3BAfK6VOc5WJNB2V2qvOwZQgrRjsXjJ7+T7lSKGX3whSHU7Gm6NArTP+LQvY9m6THJUKC4OPfSrCqh1PJnOqzkiMb7KwNqA6cItnOe45lNIlxNOOt9xV2RfDklxILYvz94t+80WQtMrBpO8iw=
+	t=1788655281; cv=none; b=rKrViatO55p7qX+ctsLKn1bsYqZaKsSDlGOSFXSe5uk2M4V9kozTikFqJyLlqk6L1ZYI3P+TgETRZ3gg8Fdic1HrTHPZhhGxbdSaqdAOQMEFab6PxIQsOG9H/d4vE2PAkpuofterFpyqaQTGBcMhwgCGMK2SrkWP8i/BUiFLI8s=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788644907; c=relaxed/simple;
-	bh=P9hwRrRYyg+oS+IK/yluG4pfKNXTMsQDn5knIgkzfW4=;
-	h=Date:To:From:Cc:Subject:Message-ID:MIME-Version:Content-Type; b=YRk9lu/wkKihwdfT4UU6Cq5MZfDRHyHkYSgd18e6m0bFbNrwBd6++UAso8nPxkgTQQFUzeGov/Pgn+IqPjZBxxCISQwQ1gphVV8wIHkwvjXjgYKFlpSbdT7HbVj7ley4SdzN2WWRHCciLmPY5SfrGxBblK5N6c1jdIm2MIsN7Ic=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=pouliot.me; spf=pass smtp.mailfrom=pouliot.me; dkim=pass (2048-bit key) header.d=pouliot.me header.i=@pouliot.me header.b=Ugfw1d9Z; arc=none smtp.client-ip=109.224.244.117
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=pouliot.me
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=pouliot.me
+	s=arc-20240116; t=1788655281; c=relaxed/simple;
+	bh=o/WyUyf4jvICxk5jGtw9AdvO2qYEBQNB5DrhLsd+ZX8=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
+	 In-Reply-To:To:Cc; b=VRlCPO63vtyWYW5o2xE0aRfdZzqtklQlmKp4uQq+1k4FAXvwTjz68qZaMCZKGIfdPVhxOATDKhlhGP2eNNRmfe+2ETYXLIfEe+i2bSvvVUZwhc4Lr2HyNG3eP9xt7bQrV0gwbl1AJS9cWU6DyC/Mgu178coRaDudPedjMBlvdto=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=JSKNBd/z; arc=none smtp.client-ip=10.30.226.201
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=pouliot.me header.i=@pouliot.me header.b="Ugfw1d9Z"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=pouliot.me;
-	s=protonmail; t=1788644895; x=1788904095;
-	bh=P9hwRrRYyg+oS+IK/yluG4pfKNXTMsQDn5knIgkzfW4=;
-	h=Date:To:From:Cc:Subject:Message-ID:Feedback-ID:From:To:Cc:Date:
-	 Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
-	b=Ugfw1d9Zdt9U4RzTQsC7zjCiq6I7dEQmBfJbqp15U/M7NR7K5TieBJtplFrPHKM57
-	 wO8POpeFV60HovNLCYcApHS2mRBB8PvcI7zuGkZm/Q3eE4aeEkiZjL1TCu4LLt/ACK
-	 ZPcO4wA6ieHgbBwIdytFYADjDG29RJg0RW/BPYpfLje2UGBl2S3CKJzmJtCp7/rY2t
-	 HOMV7vc+Ffpo+yqBcXy7Y6ehr2Mp7UmHe+bIvvtlfPZnozl6cm1Dt57PZzePdKhHb9
-	 7feBa2WjkE++/y/K9xjNf0gh//+BHEFvtYrvdkTc2f/ONJvXr8gbNmnaI3/kfnPKUE
-	 HB0fCjrI+FFHw==
-Date: Sat, 05 Sep 2026 21:48:12 +0000
-To: "linux-arm-msm@vger.kernel.org" <linux-arm-msm@vger.kernel.org>
-From: Chris Pouliot <chris@pouliot.me>
-Cc: "arm-scmi@vger.kernel.org" <arm-scmi@vger.kernel.org>, "sibi.sankar@oss.qualcomm.com" <sibi.sankar@oss.qualcomm.com>
-Subject: [BUG] ASUS UX3407NA / Glymur: CPU6 performance does not follow SCMI frequency requests
-Message-ID: <uRKznjYXnWIYd6NxkpJjmLKZfw5gc8lTsAu2Is_Z7XAyYcZwj6fJdKmVjpzUsXFc2JYL1oWux7dXVKQR0KAz3HFcXcYb7Bm4VELFCWykEg8=@pouliot.me>
-Feedback-ID: 216858851:user:proton
-X-Pm-Message-ID: 8022a61aaadb89566e8e53347bf517d62a6534b2
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="JSKNBd/z"
+Received: by smtp.kernel.org (Postfix) with ESMTPS id DA6DBC2BCFB;
+	Sun,  6 Sep 2026 00:41:20 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1788655281;
+	bh=o/WyUyf4jvICxk5jGtw9AdvO2qYEBQNB5DrhLsd+ZX8=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
+	b=JSKNBd/zOYeeAK1h9g42W3hFKB9ff4svv7nm6b838yw7HrV7fB13tK4jGP4JD9DPZ
+	 ty8mfgYb+87cXOshOyevPIV68QnXrNNr7MExMwcJQqjuU5QNakxMAdUO1QPT/S3/qL
+	 56lxPOyBIpXEj15KZgxMTZSBYwEnYoz1K7rv12zrFLyd6TVKbMoLn6u01Hm3pPKWbP
+	 gj/ygRnFJZqXHGxFbTbRG0YUVUlTjTayzFDAmIwQYKCtmei9nVMTJx0Wgdo5Cm72na
+	 e2fip0EApOeI6//+z08hzzrwZke4l3UuzuxUwjzB6Lcc59tuAIqUd2FwllkT991Bgk
+	 vzjJrp9Jgur3A==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BBC43C79F8B;
+	Sun,  6 Sep 2026 00:41:20 +0000 (UTC)
+From: David Heidelberg via B4 Relay <devnull+david.ixit.cz@kernel.org>
+Date: Sun, 06 Sep 2026 02:41:13 +0200
+Subject: [PATCH RFC 2/4] soc: qcom: Add modemsmem for Google phones
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260906-modemsmem-v1-2-a3634b553841@ixit.cz>
+References: <20260906-modemsmem-v1-0-a3634b553841@ixit.cz>
+In-Reply-To: <20260906-modemsmem-v1-0-a3634b553841@ixit.cz>
+To: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, 
+ Richard Acayan <mailingradian@gmail.com>, Petr Vorel <petr.vorel@gmail.com>, 
+ Bjorn Andersson <andersson@kernel.org>, 
+ Konrad Dybcio <konradybcio@kernel.org>
+Cc: devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
+ linux-arm-msm@vger.kernel.org, phone-devel@vger.kernel.org, 
+ David Heidelberg <david@ixit.cz>
+X-Mailer: b4 0.16.0
+X-Developer-Signature: v=1; a=openpgp-sha256; l=5934; i=david@ixit.cz;
+ h=from:subject:message-id;
+ bh=4BeR5PJTB/rdJa2OMEM7EGRFcjX2yhiQzjQLRvb1iqg=;
+ b=owEBbQKS/ZANAwAIAWACP8TTSSByAcsmYgBqnLav2gKlA3kSeorPevUXt3YQ3EyrkEXAHyTfE
+ P++nUVs12qJAjMEAAEIAB0WIQTXegnP7twrvVOnBHRgAj/E00kgcgUCapy2rwAKCRBgAj/E00kg
+ coGAEACZ/VDp9XlxiaS+lS+Ic1xZjjonNPT6R59xnKObkmDNucb4CHRTAQl/yInfhCXc/7FLGj5
+ 67NCn8xQiVIbQ9whDZRcDTa3Xmeh/0vIymS/7PBJcEtb4ij/g21QxU+7qRvKxZWZvycUJBY3ttF
+ Jre+MdgJ+HJH4+YRK7KpYEesREoIvSoZe0tvCfKBBKjU8OAak1o8CW+145Q9N+srUUV0D4xlOa6
+ JBoNpQfzO9GvK/purzqvutUSb9LmyQkzYsQlPR4TWLYqSHPkmoX8tBirBOOtuOI9E36xcZl0SaU
+ qBk6m7KfX6PdygODd+pvD7DssU28ICBc5kYn1siCNTCv3vmUsLzcGYQ0VLRDxFpR5Y+li9LDX8m
+ fPyC2QhcCRPpJKeXTJ2QYD+YwlieQhv99l2Xo+9+1vTDKcL+05tZPFiYdwQlYNOufepFW3Zd0Wc
+ vT201rRu3e5TEnDGrUkxgeDzLo/cD5eQ9sUq8UVnCPnX7yVH6nbjVEyJG+sm70ejA9ogdawdW8a
+ 4H43NUCOB+qGi8tmwuWDxMG93nAyUQcEAo8wBs1042fut/QD+/Xnjwum97onBArDoV9UZEAa0Ny
+ tUfj3WFP2Rk2BcaU6WBVUygSzphz4FzllwoMqwPysUcH2WFqtUFBei/XWGvMeyhXzaZLXx8jEnO
+ EN0JgfJxtn+g8RQ==
+X-Developer-Key: i=david@ixit.cz; a=openpgp;
+ fpr=D77A09CFEEDC2BBD53A7047460023FC4D3492072
+X-Endpoint-Received: by B4 Relay for david@ixit.cz/default with auth_id=355
+X-Original-From: David Heidelberg <david@ixit.cz>
+Reply-To: david@ixit.cz
 
-Hello,
+From: Richard Acayan <mailingradian@gmail.com>
 
-I hope this is the appropriate place to report this. I am investigating low=
-er single-core performance on an ASUS Zenbook A14 UX3407NA ARM X2E running =
-NixOS with the linux-msm Glymur kernel (7.2.0-rc5-next-20260731 commit=
-=C2=A051231839d5ef007638bd1c3500e6a76b337a66f3) and local patches.
+Modems on Google Pixel devices require extra information about the
+SoC to be passed through a vendor-controlled Shared Memory (SMEM)
+channel. This driver provides this information.
 
-Geekbench 7 scores around 2400 single-core on Linux versus 3000 on Windows,=
- while multicore is around 19000 on both. Enabling boost and switching from=
- schedutil to performance didn=E2=80=99t resolve the issue.
+Skimming through the device tree overlays, modemsmem seems to be used by
+every Pixel chronologically between the Pixel 3 and Pixel 5a, inclusive.
 
-With a diagnostic patch routing SCMI performance-level writes through mailb=
-ox messages, a fixed workload pinned to CPU0 takes roughly half as long whe=
-n its requested frequency doubles. The same workload pinned to CPU6 takes a=
-bout 1.80 seconds at both 1.594 and 4.032 GHz requests (low/high/low freque=
-ncy test). The SCMI writes return success.
+The modem_flag field is not being initialized yet because the bootloader
+doesn't always add the property in dtb (so it might not be necessary)
+and because there are problems with how the proper value is being
+retrieved in the original downstream driver.
 
-I also tested a firmware maximum-limit change on CPU6=E2=80=99s domain. Tha=
-t returned success, but the limits readback stayed unchanged.=C2=A0
+Downstream kernels have this driver in:
+drivers/soc/qcom/modemsmem/modemsmem.c
 
-Frequency reporting also looks inconsistent. With boost enabled, policies 6=
- and 12 expose a 4.723 GHz maximum, and Linux=E2=80=99s requested frequency=
- reaches that value. However, I never observed 4.723 GHz in the firmware-re=
-ported or averaged frequency readings I captured. The fast-channel readback=
- repeatedly reports 3.437 GHz, while averaged readings sometimes differ sub=
-stantially. Mailbox current-level queries return index 0 even with a worklo=
-ad pinned to CPU6, so I=E2=80=99m unsure which readings accurately reflect =
-the running clock.
+Assisted-by: LLM
+Signed-off-by: Richard Acayan <mailingradian@gmail.com>
+Co-developed-by: David Heidelberg <david@ixit.cz>
+Signed-off-by: David Heidelberg <david@ixit.cz>
+---
+ drivers/soc/qcom/Kconfig     | 14 +++++++
+ drivers/soc/qcom/Makefile    |  1 +
+ drivers/soc/qcom/modemsmem.c | 98 ++++++++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 113 insertions(+)
 
-Does this suggest a missing initialization step or a known firmware limitat=
-ion on Glymur? I have the traces, test scripts, and kernel patches availabl=
-e.
+diff --git a/drivers/soc/qcom/Kconfig b/drivers/soc/qcom/Kconfig
+index 2b524154d9fb3..32975f90bd63f 100644
+--- a/drivers/soc/qcom/Kconfig
++++ b/drivers/soc/qcom/Kconfig
+@@ -284,16 +284,30 @@ config QCOM_PBS
+ 	depends on SPMI
+ 	default m if ARCH_QCOM
+ 	help
+ 	  This driver supports configuring software programmable boot sequencer (PBS)
+ 	  trigger event through PBS RAM on Qualcomm Technologies, Inc. PMICs.
+ 	  This module provides the APIs to the client drivers that wants to send the
+ 	  PBS trigger event to the PBS RAM.
+ 
++config QCOM_MODEMSMEM
++	tristate "Google Pixel modem SMEM information"
++	depends on ARCH_QCOM || COMPILE_TEST
++	depends on OF
++	depends on QCOM_SMEM
++	help
++	  The modem firmware on Google Pixel 3 through Pixel 5a devices expects
++	  the application processor to publish SoC platform type and revision
++	  in a vendor-defined SMEM item before the modem is started. This
++	  driver fills in that item from the socinfo SMEM data.
++
++	  Say Y or M if you want a working modem on one of those phones.
++	  If unsure, say N.
++
+ endif
+ 
+ # Options selected by other drivers from different subsystems must be outside
+ # of the menuconfig if-block:
+ 
+ config QCOM_INLINE_CRYPTO_ENGINE
+ 	tristate
+ 	select QCOM_SCM
+diff --git a/drivers/soc/qcom/Makefile b/drivers/soc/qcom/Makefile
+index 798643be3590c..4a04cd6e497d1 100644
+--- a/drivers/soc/qcom/Makefile
++++ b/drivers/soc/qcom/Makefile
+@@ -35,9 +35,10 @@ obj-$(CONFIG_QCOM_STATS)	+= qcom_stats.o
+ obj-$(CONFIG_QCOM_WCNSS_CTRL) += wcnss_ctrl.o
+ obj-$(CONFIG_QCOM_APR) += apr.o
+ obj-$(CONFIG_QCOM_LLCC) += llcc-qcom.o
+ obj-$(CONFIG_QCOM_KRYO_L2_ACCESSORS) +=	kryo-l2-accessors.o
+ obj-$(CONFIG_QCOM_ICC_BWMON)	+= icc-bwmon.o
+ qcom_ice-objs			+= ice.o
+ obj-$(CONFIG_QCOM_INLINE_CRYPTO_ENGINE)	+= qcom_ice.o
+ obj-$(CONFIG_QCOM_PBS) +=	qcom-pbs.o
++obj-$(CONFIG_QCOM_MODEMSMEM)	+= modemsmem.o
+ obj-$(CONFIG_QCOM_UBWC_CONFIG) += ubwc_config.o
+diff --git a/drivers/soc/qcom/modemsmem.c b/drivers/soc/qcom/modemsmem.c
+new file mode 100644
+index 0000000000000..7a733422ff7c1
+--- /dev/null
++++ b/drivers/soc/qcom/modemsmem.c
+@@ -0,0 +1,98 @@
++// SPDX-License-Identifier: GPL-2.0-only
++/*
++ * SoC Information over Shared Memory.
++ *
++ * Copyright 2022-2024, Richard Acayan.
++ */
++
++#include <linux/err.h>
++#include <linux/module.h>
++#include <linux/of.h>
++#include <linux/platform_device.h>
++#include <linux/soc/qcom/smem.h>
++#include <linux/soc/qcom/socinfo.h>
++
++#define MODEM_SMEM_VERSION 0
++
++#define PLAT_VER_TO_MAJOR_ID(v) (((v) >> 16) & 0xff)
++#define PLAT_VER_TO_MINOR_ID(v) ((v) & 0xff)
++
++struct modem_smem_info {
++	__le32 version;
++	__le32 modem_flag;
++	__le32 major_id;
++	__le32 minor_id;
++	__le32 subtype;
++	__le32 platform;
++	__le32 efs_magic;
++	__le32 ftm_magic;
++};
++
++static int write_socinfo(struct modem_smem_info *target)
++{
++	struct socinfo *socinfo;
++	u32 plat_ver;
++
++	socinfo = qcom_smem_get(QCOM_SMEM_HOST_ANY, SMEM_HW_SW_BUILD_ID, NULL);
++	if (IS_ERR(socinfo))
++		return PTR_ERR(socinfo);
++
++	/* hw_plat_subtype was added in socinfo format 0.6 */
++	if (le32_to_cpu(socinfo->fmt) < SOCINFO_VERSION(0, 6))
++		return -EOPNOTSUPP;
++
++	plat_ver = le32_to_cpu(socinfo->plat_ver);
++
++	target->version = cpu_to_le32(MODEM_SMEM_VERSION);
++	target->major_id = cpu_to_le32(PLAT_VER_TO_MAJOR_ID(plat_ver));
++	target->minor_id = cpu_to_le32(PLAT_VER_TO_MINOR_ID(plat_ver));
++	target->platform = socinfo->hw_plat;
++	target->subtype = socinfo->hw_plat_subtype;
++
++	return 0;
++}
++
++static int modemsmem_probe(struct platform_device *pdev)
++{
++	struct device *dev = &pdev->dev;
++	struct modem_smem_info *info;
++	u32 smem_id;
++	int ret;
++
++	ret = of_property_read_u32(dev->of_node, "qcom,smem-id", &smem_id);
++	if (ret)
++		return dev_err_probe(dev, ret, "Could not read smem id\n");
++
++	ret = qcom_smem_alloc(QCOM_SMEM_HOST_ANY, smem_id, sizeof(*info));
++	if (ret)
++		return dev_err_probe(dev, ret, "Could not allocate modem smem\n");
++
++	info = qcom_smem_get(QCOM_SMEM_HOST_ANY, smem_id, NULL);
++	if (IS_ERR(info))
++		return dev_err_probe(dev, PTR_ERR(info), "Could not get modem smem\n");
++
++	ret = write_socinfo(info);
++	if (ret)
++		return dev_err_probe(dev, ret, "Could not submit info to modemsmem\n");
++
++	return 0;
++}
++
++static const struct of_device_id modemsmem_of_match[] = {
++	{ .compatible = "google,modemsmem" },
++	{ }
++};
++MODULE_DEVICE_TABLE(of, modemsmem_of_match);
++
++static struct platform_driver modemsmem_driver = {
++	.probe = modemsmem_probe,
++	.driver = {
++		.name = "modemsmem",
++		.of_match_table = modemsmem_of_match,
++	},
++};
++module_platform_driver(modemsmem_driver);
++
++MODULE_AUTHOR("Richard Acayan <mailingradian@gmail.com>");
++MODULE_DESCRIPTION("SoC Information over SMEM driver");
++MODULE_LICENSE("GPL");
+
+-- 
+2.55.0
+
+
