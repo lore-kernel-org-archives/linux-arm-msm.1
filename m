@@ -1,190 +1,192 @@
-Received: from ixit.cz (ixit.cz [84.42.129.46])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-qk1-f171.google.com (mail-qk1-f171.google.com [209.85.222.171])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0DD59346E43;
-	Sun,  6 Sep 2026 21:32:12 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=84.42.129.46
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9BE6F349CD1
+	for <linux-arm-msm@vger.kernel.org>; Sun,  6 Sep 2026 22:52:09 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.222.171
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788730334; cv=none; b=CYUKJOS00/OQk9CtVjUagGYqIT1eQRFyXTVn/wVvYKfyGX1PicaPkoQ9GsYCnU4IBGnYkudL+rIlVyNEGIQ7XkxoY+RCSBMmb+G7ZUDEG1acKUiIbt3LCVzrropxP4t7BKQw+yAhFid0b4cMMVtXDtbNdULjF7xo+YcVj4JdT3Y=
+	t=1788735131; cv=none; b=M5gRNWg/hJn7upqdH+n6bxCAKaSeKvoiZ+Hxggf8d9YxjKT7tcucRLa5/K8iieHR/QSFDZM3qXmRBAT4inUL3oWTrFRigxMpnuW7pQqDnBXJOBIX7Igmrj0FnLrE8OnEdiFkowTP2qeyleIZNnLbA2b27ydvi54J2g7bIZfztNs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788730334; c=relaxed/simple;
-	bh=9xBCvEOIZEHDfq7VP9jQvArZps1bDFIyNj4XdifO+EU=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=SXv5bMXjTJdKVepw7shW2GO7TQiaLJJ7oIUsk9NRY1ryWfQQqgwj1y76z9IS/pqDo9OCDAipbBfrlPm/jfQ9g5Pgn8chpiljlLghzihi1U9fDyiRNW8KX0T52BVsyUV3aeI9Ly1L2ZNrgxjoc86TSnK1cjOM8ctQ/n4HVhiaq+Y=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=ixit.cz; spf=pass smtp.mailfrom=ixit.cz; dkim=pass (1024-bit key) header.d=ixit.cz header.i=@ixit.cz header.b=pX1TsPMS; arc=none smtp.client-ip=84.42.129.46
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=ixit.cz
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ixit.cz
+	s=arc-20240116; t=1788735131; c=relaxed/simple;
+	bh=aAPHS2opfYawikamztQMMQNDJgEVw0HzpkRM5MM8ZRo=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=o9XCOm6cWBe+AjLLIyVCBc0VfPwtB5LsaMX1XZmEaiGY0hdV84aPSfgoG3hnlQMPnTWtzKg74qrCsXRmV5kMH/CK0Dva7+2NhOiLGeW807NSn1PgqsIf0dJ6Ylx0SRtSCOJYt1Mi+Is7O/F49pe1rTBx5DgHeiyxuqgcCVWeOFg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=Raq7jy7N; arc=none smtp.client-ip=209.85.222.171
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=ixit.cz header.i=@ixit.cz header.b="pX1TsPMS"
-Received: from [10.0.0.152] (unknown [10.0.0.1])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange x25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by ixit.cz (Postfix) with ESMTPSA id 3344B5340736;
-	Sun, 06 Sep 2026 23:32:10 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ixit.cz; s=dkim;
-	t=1788730330;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
-	bh=ywu0HVMs2UTCAROTw3iWE+Ohkzj8oh/ZNprFOl07sZA=;
-	b=pX1TsPMSDXYaoQLBzSABrO0AnROnaXad4UszKoP7dgLOpo4Za2GyzFlzWo+byU0AZA7vRs
-	XPUTXY6B2vOE8zpqEuyzvsrQt0aY0VgEQm+cZhSsKaSjCYYtuuqMBD52lbXyCF6ogTsGg4
-	6UYThD/mJirEIyOn1HfAjJQx9b8ZafE=
-Message-ID: <28fb606b-8631-483a-a02e-ecd16e9cc238@ixit.cz>
-Date: Sun, 6 Sep 2026 23:32:09 +0200
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="Raq7jy7N"
+Received: by mail-qk1-f171.google.com with SMTP id af79cd13be357-930f618435cso338460285a.3
+        for <linux-arm-msm@vger.kernel.org>; Sun, 06 Sep 2026 15:52:09 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1788735128; x=1789339928; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=mIJN/sAwYOGsx4KiLS2BjZwfic1XFdCFhhrLHJS/Pvk=;
+        b=Raq7jy7NoiNm6DWMNAbmSu43KXlbMXFer11S1pUP1Lqv5l1FdIWEQYwV1OHmWLkjLt
+         lGMibQrLMmIwDjj2P6yV82kv1+GlwWJYxLqLb5HTaXblgqmQWz3vUT4zLbvuGO17jpWT
+         6WY7QzhhtOtbGgMt/IYA0iBQD1iT/kEmcEoPztUOZYbQzQwVeTXA0QSXy/b94wIvTBiM
+         dvHqdNJjw4lU3LJ4H7VTMzH1pKnHs9mcvHf459jOZW+eVRM8FO3+IFm8dnG3A+ATVH3y
+         WJ4+7ZK2T0KZFauXMD5zlPzuLf4Z90Md8JJV/pNxkIWIjBlLVezheUk+2UnuAeCvxICc
+         j9eQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1788735128; x=1789339928;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=mIJN/sAwYOGsx4KiLS2BjZwfic1XFdCFhhrLHJS/Pvk=;
+        b=Im/H9HC+gQUmqzIwIBsXpl2GcbFYuWsrlBqVQDWMTxRZEcrCsZSqO9TK2kZMym1b4E
+         igBEDlnLzk6Et5YV7LO6HPo/4EDbjawTzTY+r2N/0SpsbVb4jRSkAHjbnmkv1HttOszA
+         Bhs0dixkluhQRJ9ZtyfqB6o0ar9RrTuliM0pxuYPN9VNWZYmGX9RkJf/VAiGibnSo4Hm
+         82R2lyumGjZG/e8Ker+63KtS5yovxx67mAVEeEEu9O6sQVCaO/HWm1dFX27htNlmykQG
+         LFy2fNT7qUg8LP8nsSFah7UPQgVWyjc773i6xe8Y1su6bE+O6qiF28JzWM9D50tBY9sR
+         tssg==
+X-Gm-Message-State: AFuF++lrgf+eCo7tkVMP+Q1TS67cuWjlnClIlX9Uw1G4ZXClvBNv20wm
+	uFHAhE4L+eCEERxCentzTQqU6Ioq05jijW1YiPOvlRRmz8b5BcucY2U8
+X-Gm-Gg: AYBFou3fAUmWDXrQlyyiNszsTrWl0b9LJ9C9Ziqe3z7c08e7r4EFRI+msG1evp2Z5oz
+	mXOVtDxJuMHfjRctllSobkoONZYhiBmI8A4ENnk0vxK6iP9m1vNXaiJfeIAaD96B/RExqLK/TQZ
+	oypRBSrSnnOaSv6Ed445GBdeNGYLnrdeSOVWAs68khkQiE8JHafyku9aCQcvKmGUttEMWJVXVtu
+	2QUBC8QHXV8HtnrFqgReVkbEtCDc4VKZgdhy6xycdmTxkgR2PE6LFsc+TuZXjgXoCdCfKk27wv1
+	fCZLJYgQ0A2m3Vf2wPLGegpyaErIF0cB+DCmoRYmA7Gklrx2F/BcVj291RgOGdTqHZPXySxzdHA
+	JK8Fyy9+4qnueO0Ful3kFHRqPE6Ay+Sj2Uytfezy+mS3ntGJ+/UyloyNMplOupBjpncGmz1VMLR
+	WPBbxkUNOXSfHRWNn2+our9EWuy3W4AlpCnWnIbSzDMXvgar/fmq7X5laD2TZt9+9y6iayEykVm
+	xUfSg==
+X-Received: by 2002:a05:620a:d48:b0:939:6dea:3749 with SMTP id af79cd13be357-939804a747amr1501625985a.45.1788735127989;
+        Sun, 06 Sep 2026 15:52:07 -0700 (PDT)
+Received: from localhost ([35.11.35.209])
+        by smtp.gmail.com with ESMTPSA id af79cd13be357-9399429b97esm444434285a.29.2026.09.06.15.52.07
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 06 Sep 2026 15:52:07 -0700 (PDT)
+From: BurningHoryd <sjunhyuk1@gmail.com>
+To: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
+Cc: linux-arm-msm@vger.kernel.org,
+	linux-phy@lists.infradead.org,
+	dri-devel@lists.freedesktop.org,
+	freedreno@lists.freedesktop.org,
+	Neil Armstrong <neil.armstrong@linaro.org>,
+	Vinod Koul <vkoul@kernel.org>,
+	Abhinav Kumar <quic_abhinavk@quicinc.com>,
+	Heikki Krogerus <heikki.krogerus@linux.intel.com>
+Subject: SM8250 USB-C DP alt mode: DP AUX times out in reversed (CC2) cable orientation
+Date: Sun,  6 Sep 2026 18:52:06 -0400
+Message-ID: <20260906225206.2994952-1-sjunhyuk1@gmail.com>
+X-Mailer: git-send-email 2.55.0
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] arm64: dts: qcom: sdm845-lg: Enable NFC
-To: Paul Sajna <sajattack@postmarketos.org>,
- Bjorn Andersson <andersson@kernel.org>,
- Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
- Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
- linux-kernel@vger.kernel.org, phone-devel@vger.kernel.org,
- ~postmarketos/upstreaming@lists.sr.ht
-References: <20260906-sdm845-lg-judy-nfc-v2-1-63aeb7b1a5f6@postmarketos.org>
-Content-Language: en-US, cs-CZ
-From: David Heidelberg <david@ixit.cz>
-Autocrypt: addr=david@ixit.cz; keydata=
- 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
-In-Reply-To: <20260906-sdm845-lg-judy-nfc-v2-1-63aeb7b1a5f6@postmarketos.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-On 06/09/2026 23:11, Paul Sajna wrote:
-> Add the i2c and tlmm nodes to support the NXP PN547 NFC chip
-> 
-> Downstream dtsi for reference:
-> https://github.com/LineageOS/android_kernel_lge_sdm845/blob/lineage-22.2/arch/arm64/boot/dts/lge/sdm845-judy/sdm845-judyln_lao_com/sdm845-judyln_lao_com-nfc.dtsi
-> 
-> Signed-off-by: Paul Sajna <sajattack@postmarketos.org>
-> ---
-> Changes in v2:
-> - correct drive-strength
-> - add gpio116
-> - Link to v1: https://lore.kernel.org/r/20260902-sdm845-lg-judy-nfc-v1-1-282173900569@postmarketos.org
-> ---
->   arch/arm64/boot/dts/qcom/sdm845-lg-common.dtsi | 31 ++++++++++++++++++++++++++
->   1 file changed, 31 insertions(+)
-> 
-> diff --git a/arch/arm64/boot/dts/qcom/sdm845-lg-common.dtsi b/arch/arm64/boot/dts/qcom/sdm845-lg-common.dtsi
-> index b030a10009c5..c77da1b0d57d 100644
-> --- a/arch/arm64/boot/dts/qcom/sdm845-lg-common.dtsi
-> +++ b/arch/arm64/boot/dts/qcom/sdm845-lg-common.dtsi
-> @@ -471,6 +471,25 @@ &gpu {
->   	status = "okay";
->   };
->   
-> +&i2c3 {
-> +	clock-frequency = <1000000>;
-> +
-> +	status = "okay";
-> +
-> +	nfc@28 {
-> +		compatible = "nxp,pn547", "nxp,nxp-nci-i2c";
-> +		reg = <0x28>;
-> +
-> +		interrupts-extended = <&tlmm 63 IRQ_TYPE_EDGE_RISING>;
-> +
-> +		enable-gpios = <&tlmm 12 GPIO_ACTIVE_HIGH>;
-> +		firmware-gpios = <&tlmm 62 GPIO_ACTIVE_HIGH>;
-> +
-> +		pinctrl-0 = <&nfc_default>;
-> +		pinctrl-names = "default";
-> +	};
-> +};
-> +
->   &ipa {
->   	status = "okay";
->   };
-> @@ -551,6 +570,11 @@ &qupv3_id_1 {
->   	status = "okay";
->   };
->   
-> +&qup_i2c3_default {
-> +	drive-strength = <2>;
-> +	bias-disable;
-> +};
-> +
->   &qup_uart9_rx {
->   	drive-strength = <2>;
->   	bias-pull-up;
-> @@ -609,6 +633,13 @@ sd_card_det_n: sd-card-det-n-state {
->   		function = "gpio";
->   		bias-pull-up;
->   	};
-> +
-> +	nfc_default: nfc-default-state {
-> +		pins = "gpio12", "gpio62", "gpio63", "gpio116";
+Hi,
 
-here the verbosity may not be bad (device-tree functions as documentation too)
-gpio116 is associated with eSE NFC part (just guessing, but... it worked before, 
-so), and generally the pn547 doesn't need it at all to work.
+I'm chasing a DisplayPort-over-USB-C alt mode bug on an SM8250 (Retroid
+Pocket 5) board and would appreciate a pointer, as it looks like it may
+be in the nb7vpq904m redriver or the qmp-combo DP AUX path.
 
-TBH not sure if there or what consensus is here about this. The eSE needs it, 
-but we don't have the driver thus also no integration with NFC part.
+Hardware / software
+-------------------
+- SoC: SM8250, qcom,sm8250-qmp-usb3-dp-phy combo PHY (88e8000.phy)
+- USB-C redriver: onnn,nb7vpq904m (i2c, typec mux/switch)
+- External sink: VITURE Beast XR glasses, 4-lane DP-only (pin assignment
+  C, TYPEC_DP_STATE_C), HBR2, 1920x1200@120
+- Kernel: v7.2 base, plus three local qmp-combo patches that are the
+  subject of a separate downstream review (keep usb_init_count across the
+  DP-only mux switch / skip USB3 power on/off while already in DP-only /
+  the residual pipe_clk-in-common timeout hunk). The AUX failure below
+  reproduces with those applied; I have not been able to bisect against
+  pristine v7.2 because plain v7.2 has an unrelated regression on this
+  board (qcom_pmic_typec now requires connector/vbus-supply, which the
+  board DT lacks, so DP alt mode never powers up at all without a
+  separate DT fix).
 
-David
+Symptom
+-------
+Normal cable orientation: DP alt mode works perfectly - link trains,
+1920x1200@120, stable.
 
-> +		function = "gpio";
-> +		drive-strength = <2>;
-> +		bias-pull-up;
-> +	};
->   };
->   
->   &uart6 {
-> 
-> ---
-> base-commit: 32b6ef9a5d0eca44f9cd91f52f4faa89f145a0de
-> change-id: 20260902-sdm845-lg-judy-nfc-5f9e5775393d
-> 
-> Best regards,
+Reversed cable orientation (Type-C orientation = reverse / CC2): DP never
+comes up. The DP alt mode HPD notification reaches msm_dp
+(msm_dp_bridge_hpd_notify status=1), msm_dp starts bring-up
+(msm_dp_display_host_phy_init, phy_init OK), but the very first DPCD read
+- SINK_COUNT at 0x200 in msm_dp_hpd_plug_handle - polls for ~4 seconds
+and never gets a reply:
 
+  [drm:msm_dp_hpd_plug_handle] Before, sink_count=0
+  [drm:msm_dp_display_host_phy_init] core_init=1 phy_init=1
+  ... ~4 s ...
+  [drm:msm_dp_hpd_plug_handle] After, sink_count=0
+  [drm:msm_dp_bridge_detect] aux link status: 0
+  [drm:msm_dp_bridge_detect] failed to read caps
+
+msm_dp then gives up and the connector stays disconnected. Link training
+is never reached. Stock Android on the exact same hardware works in both
+orientations, so this is a driver-side issue, not a board/silicon limit.
+
+What I've verified (instrumented kernel, dev_info in the phy + nb7 set
+paths)
+------------------------------------------------------------------------
+- It is NOT a state / refcount / mux ordering artifact: a clean
+  reverse-first plug (fresh boot, reversed cable plugged before any
+  normal plug) fails identically.
+- On the reversed plug, in order:
+  * qmp_combo_typec_switch_set(REVERSE) runs, qmp_combo_com_init(force)
+    writes QPHY_V3_DP_COM_TYPEC_CTRL = SW_PORTSELECT_MUX|SW_PORTSELECT_VAL
+    (0x3).
+  * nb7vpq904m_set() runs for TYPEC_DP_STATE_C with reverse=1, writes
+    AUX_CC_REG (0x09) = 0x1.
+  * qmp_combo_typec_mux_set() does the DP-only transition, com_init(force)
+    again (mode=DP_ONLY, TYPEC_CTRL=0x3) - this happens AFTER the nb7 DP
+    config.
+  * qmp_combo_dp_init() -> qmp_v4_dp_aux_init() runs.
+  So the PHY and the redriver are both configured for reverse, in a sane
+  order, before msm_dp attempts AUX. And AUX still times out.
+- qmp-combo has no DP-AUX orientation register that I can find - AUX
+  orientation on this design is entirely nb7vpq904m AUX_CC_REG.
+- Inverting SW_PORTSELECT_VAL and/or nb7 AUX_CC (making the registers
+  bit-identical to the working normal-orientation case) does not help -
+  reverse still fails.
+- Forcing repeated full qmp_combo_com_exit/com_init cycles during the
+  DPCD poll window does not help.
+
+The one thing that changes anything
+-----------------------------------
+I added a knob to override GEN_DEV_SETTINGS OP_MODE in the nb7
+TYPEC_DP_STATE_C branch (it normally hard-codes
+GEN_DEV_SET_OP_MODE_DP_4LANE):
+
+  OP_MODE = DP_4LANE (2)      -> DPCD read: 0 successes (many tries)
+  OP_MODE = DP_CC1   (1)      -> DPCD read: 0 successes
+  OP_MODE = DP_CC2   (0)      -> DPCD read succeeds intermittently
+                                 (~1 in 4 plugs, sink_count 0->1,
+                                 connector goes connected briefly).
+                                 Link training then fails, which is
+                                 expected since DP_CC2 is a 2-lane
+                                 op-mode and the source is driving 4.
+  OP_MODE = 3, 4             -> 0 successes
+
+DP_CC2 is the "flipped orientation" op-mode. It is the only setting that
+ever gets an AUX transaction through in reversed orientation. That
+strongly suggests the nb7vpq904m SBU/AUX switch is not being put into the
+flipped routing for a 4-lane DP session - AUX_CC_REG alone does not seem
+to do it in DP_4LANE op-mode - but I don't have the full NB7VPQ904M
+register map to confirm (the public datasheets are image-only).
+
+Questions
+---------
+1. Is nb7vpq904m's DP_4LANE path missing SBU/AUX orientation handling
+   that the DP_CC1/DP_CC2 paths get implicitly from the op-mode? Should
+   AUX_CC_REG be sufficient in DP_4LANE mode, or is another
+   GEN_DEV_SETTINGS / AUX register bit needed for CC2?
+2. Is there an SM8250 qmp-combo DP-AUX orientation step that mainline is
+   missing (something the downstream PHY driver does for a reversed
+   4-lane DP session)?
+3. Any known-good reference for reversed-orientation 4-lane DP on an
+   SM8250 + nb7vpq904m board?
+
+I can share the full instrumented traces (normal vs reverse) and test the
+register map if someone can point at the right bits. Happy to turn a fix
+into a proper patch.
+
+Thanks,
+BurningHoryd
