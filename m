@@ -1,68 +1,38 @@
-Received: from mail-wr1-f45.google.com (mail-wr1-f45.google.com [209.85.221.45])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E507E42640C
-	for <linux-arm-msm@vger.kernel.org>; Sun,  6 Sep 2026 11:52:17 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.45
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8193021A42D;
+	Sun,  6 Sep 2026 12:22:47 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788695540; cv=none; b=WNW7cXiQG9cooycUhk2fq4h36omDmsGcMbBOfxRVy32/naiPiwBkh5Cc/aHxUNKLeozRUaQ26ocZmQ8wezH/DapMkT73Aus/IoMS/tMYnJVHXSv42mvGCWUhVwLo9Ck8Ha0V8L/x3b7MYM3oIVLnKO05rQgxEhnVxMmdpjjPqI0=
+	t=1788697367; cv=none; b=XU6bjLtQBdw08vhyO7zmsN2Sh+t80hJazGmz0zJ13CISzyVQnFvON0SKVp9m1r2zo5qvWDyuiQyvP/xCGr0JCVrDaHDz0VHXAMcK5HOUgKn8jujLUEX0ZVgdhkJ5Y/NJ2xT+mZn8fdqbUTtL9QKdKl8X2BhtTWnx9d/9MjFFjAQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788695540; c=relaxed/simple;
-	bh=vw3X+c53CUkT8miKrkdFIh6bJI27fiNryef+k/oCD1M=;
+	s=arc-20240116; t=1788697367; c=relaxed/simple;
+	bh=rirg4RbJMaNw/xyRM9MWShgHab1xsYrkfVgbAiLL/MA=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=hmZCPWr5Zq8Eif/RtaYCcWAdaVgXXMLbiWbzN8lvuV8/jIIAZ8jhzCqHiA+33ZV9bE3eTr6owJZ00SShfwAxdiuw2FSUKfDOGgjHY+rOJb/YLqHOsa/8X18egTvVgd8NaU4AZxNFS+w5T18L4LBlBEA6x8NwVWIEib9G6GR+rRo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=vLd1z52c; arc=none smtp.client-ip=209.85.221.45
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
+	 In-Reply-To:To:Cc; b=Btw5wq2GZScgo3UcCxYHz32PjMBVgbh3Anf3zxivURvY0CFgX9LqytKqtpinBEtMOZ9aU+HSF8n2Yabzl0THpwyo6/QyYSL4PSv2WNxSAFdVN91HMz5tVFfy3pBY5KBkpiUjwP9PEaMFR1+Pyob+QWQAVUyDLuhBZhTsTCYzHPM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=V0b8Jv4A; arc=none smtp.client-ip=10.30.226.201
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="vLd1z52c"
-Received: by mail-wr1-f45.google.com with SMTP id ffacd0b85a97d-4859245e493so733197f8f.1
-        for <linux-arm-msm@vger.kernel.org>; Sun, 06 Sep 2026 04:52:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1788695536; x=1789300336; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=xfe6v37XEfqVF54o6+6rBHCGP0kTxzOn5cAUGy6eP4k=;
-        b=vLd1z52cllkn8e3Cf8H8yrTOkqe6Ws78vlKj3P+1qoqKdsGLj2WDYVLqC2XUdAMLya
-         4B9LgnPrTFLG/LZzOcFQnCqyzirNEFzWr61gQ5txFmlbQrDg+KXL/YXdxb+zPWiTYAoN
-         IoHt60I4ovyS33ZEGulPpcF1n6PIoG8fJxnLR+2ePMSxXneWxgcoIj7jOgKL3EOuNaNc
-         lG2YEikUrqev7UeAxHKEQVrrvBr1XHS3N83nmg5ribr3nM0uhOOkHizgJ6cAtMKihFUN
-         GTMR66/SObHnJ88D8ha+Z6soJ8Ce5iu0xi7LFCKYNomUAjBwW3qMn9SaoZfRuq9o7v6M
-         qplA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788695536; x=1789300336;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=xfe6v37XEfqVF54o6+6rBHCGP0kTxzOn5cAUGy6eP4k=;
-        b=c7h1nNmAtypO74qsJVBILzYiZsoWf32NXbh9Hmuzpd0Q9tCLvYdUIktZv5358uQuR9
-         p5YqtQr3/GjY6btlvonpVyagCKi2P70DgYOLTSGkoU+/UmWkMWWPm2+oR1aq0SBYAfLU
-         qpF1un8LZYH+5tHjQVGABqHdxEAgFhnK3E0rG1bcz8Lq98XbZhQAwVKGyhvs5wf9obdE
-         zOpTBZoDq0dXf8EExFvf2P2lOlH4tVfG1Nc6nNv1hqczRBiwVl1y1eWQUeUGVwHKfxiL
-         sUDeykZfg8fcfVI668t6OtFYPiqGd2v3K8BHvVP71VW/kv6GlK4fSfKayfGdaJYHhHZZ
-         3oKw==
-X-Gm-Message-State: AFuF++m8olny+BNd4k9FbroKX7DnxYsg7dho93fbd+N6wgvBi8AE6HaN
-	ZjuDuBKSWNhyTHcMv1U+6MFgsI6eyPYazZe4uFEvQW0mdm5OyokCNw2KwwawALRd9a4=
-X-Gm-Gg: AYBFou3ercO0RXORChAm4C7wKMn4uwT1mjs57mcszFF43y8xov3fygq1Y7h9DWIOZmc
-	JhcE8v/h/5itoqSud5nGBMmW5SUwa7+wkx8QMEhekgCG4ruhkO1hg+lxjEnjyrjsa5hBQ3b6djK
-	aqMkB0y4YgNr3Q7xI2AFW+iDJqes8UU5Msdvrhf7Pa84pHomR9xKYFwnSg596/UCXwof3mjN0/f
-	O5zoRBPQqNooRBEByk7g0c0owvNU9aCfxeZw99aynwcDpquw5T/f8nhBYcRNdiBw3NOPCBtgrlM
-	6TT822G+bd8N8TvrbekZ9HEQ8XIlph9B05op7lvymzF90RjN2LLcymtZi2WVJz5qNSndhAyQt6J
-	zWDBNFVJj/mad+fQQnFg8kTNzZRh5UL3dZFO2P7UEWSvs6Dccuyk8W69oZsLRdb1xnSf1BYvcht
-	B/mQL+th8ASBC68XJEekqpiN2IkznhWgZiRIOuBHXzylxyUCFpmEbRMQQjVGm10R6LaPmaoKzYD
-	rpNb3pHe2k=
-X-Received: by 2002:a05:6000:2c09:b0:484:3621:6341 with SMTP id ffacd0b85a97d-4858729b772mr18779546f8f.15.1788695535665;
-        Sun, 06 Sep 2026 04:52:15 -0700 (PDT)
-Received: from [192.168.0.35] ([109.76.250.151])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4858d2693e8sm19337821f8f.3.2026.09.06.04.52.14
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 06 Sep 2026 04:52:15 -0700 (PDT)
-From: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
-Date: Sun, 06 Sep 2026 12:52:06 +0100
-Subject: [PATCH v16 5/5] media: qcom: camss: Use data-lanes starting at 1
- for new CSIPHY mode
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="V0b8Jv4A"
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 36304C2BD00;
+	Sun,  6 Sep 2026 12:22:47 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1788697367;
+	bh=rirg4RbJMaNw/xyRM9MWShgHab1xsYrkfVgbAiLL/MA=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
+	b=V0b8Jv4AiU1oYE8Gs1qfpvJR/gHRXWeCOWaI96q+HkziBZl/x7jQGYroq5ZzH9OE+
+	 MmECrU2pC+Tz7Foglo6MN3WgQbyPqs5eM/F3S8QT7UMGV+d7lzrkAbXPirruTsfGCP
+	 jmAL1Rw4wT4ty04DJzNT9VW/WunoXY2z1yUp7gvHOKsBKGJThnyjKCxKH/iU34twqx
+	 LidKP4QUoee2wiEnAJ0CUcwRXGaFmHXMmGriXoq2KbM8Iccojd+RPRALNiQM1BPeOE
+	 V0+vS2wqwC+dDvJqL2qAKVZoW5qR1FOT8QtLZjlcSOhDz9Xj/7UJRpMMI1vOSrGExH
+	 fuaV0fMmcBjmQ==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 18570C79F85;
+	Sun,  6 Sep 2026 12:22:47 +0000 (UTC)
+From: Jens Glathe via B4 Relay <devnull+jens.glathe.oldschoolsolutions.biz@kernel.org>
+Date: Sun, 06 Sep 2026 14:22:37 +0200
+Subject: [PATCH 2/3] firmware: qcom: scm: Allow QSEECOM on Lenovo IdeaPad 5
+ models
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -71,114 +41,56 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260906-b4-linux-next-25-03-13-dtsi-x1e80100-camss-v16-5-f7bd68b5369f@linaro.org>
-References: <20260906-b4-linux-next-25-03-13-dtsi-x1e80100-camss-v16-0-f7bd68b5369f@linaro.org>
-In-Reply-To: <20260906-b4-linux-next-25-03-13-dtsi-x1e80100-camss-v16-0-f7bd68b5369f@linaro.org>
+Message-Id: <20260906-x1-ideapad-slim5x-v1-2-7ccffbe6bc4a@oldschoolsolutions.biz>
+References: <20260906-x1-ideapad-slim5x-v1-0-7ccffbe6bc4a@oldschoolsolutions.biz>
+In-Reply-To: <20260906-x1-ideapad-slim5x-v1-0-7ccffbe6bc4a@oldschoolsolutions.biz>
 To: Bjorn Andersson <andersson@kernel.org>, 
- Michael Turquette <mturquette@baylibre.com>, 
- Stephen Boyd <sboyd@kernel.org>, Rob Herring <robh@kernel.org>, 
+ Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>, 
  Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>, Robert Foss <rfoss@kernel.org>, 
- Todor Tomov <todor.too@gmail.com>, 
- Mauro Carvalho Chehab <mchehab@kernel.org>, 
- Konrad Dybcio <konradybcio@kernel.org>, 
- Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>, 
- Bryan O'Donoghue <bod@kernel.org>, 
- Loic Poulain <loic.poulain@oss.qualcomm.com>, Vinod Koul <vkoul@kernel.org>, 
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>, 
- Kishon Vijay Abraham I <kishon@kernel.org>, Felipe Balbi <balbi@ti.com>
-Cc: linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org, 
- devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
- linux-media@vger.kernel.org, linux-phy@lists.infradead.org, 
- Bryan O'Donoghue <bryan.odonoghue@linaro.org>, 
- Krzysztof Kozlowski <krzk@kernel.org>
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2514;
- i=bryan.odonoghue@linaro.org; h=from:subject:message-id;
- bh=vw3X+c53CUkT8miKrkdFIh6bJI27fiNryef+k/oCD1M=;
- b=owEBbQKS/ZANAwAKASJxO7Ohjcg6AcsmYgBqnVPlTxwbVbuAhh1qf9XNxhb5EZKW1nacY10O/
- CUPOuQqRd2JAjMEAAEKAB0WIQTmk/sqq6Nt4Rerb7QicTuzoY3IOgUCap1T5QAKCRAicTuzoY3I
- OpDSD/414qRMqOhoAHiZjQ6lw3TJsUKLlE9mo0ZHC+WePHuCBqEPLbkr9OAWWXuhFnuttqil2uz
- DDA/pFBCS1uyY+lwA20HSegLL9nVZVCf2zUB+UT0p93RB3/NW5/3Z0wsaWUoczZ+1ek2oB+3C0I
- 0/mubBecrUgfaSxWQQP3No6r0HaSO5tTj9mhPNbFY2qvDLj0txVmSMs88wy95pJ6pMmN9bOAZ2A
- cv3sdMe80S5eh/+lDY2aw7MNmoOfztpskg55zeRGqeVUfluXPPJGlCZ/glaWCg98ZfSGgPyXtrU
- JgK0taM4gvoC7X3Xamn9kYvfHXCQZFzih4mC/aDnhflzYIx08GQSA3+Jv8qFnxLSDLWtMk73j7n
- CeGp5Ght75xVbZW0C8UxNZFe9ghjVZkqk6Q13rQNGNA2puGB+pQB7d1mokm8fGHBZbB2JY+nzSb
- 5nYQpWWfQVnzmY/Rxbtzd6VGRKRMlzF4uZQoQA6BvXobGvianomi4OZLG4vx8BdPY6wdCQjYdKg
- y/js5oFmtuiMXk2IX4+Z/6xEtje/TSXtt+NMZDv1Qd6zG7HTubjfyvh4Vbj6OKk6FSt3lUJaKY2
- V82ZoymVn7rbILKEuf7xoXBYzEzy97vhWDCe0AaJhvv6y/O0GovVBiAaAvc6VY5kjp2Q3GGduVr
- mOr933r4FoY4heA==
-X-Developer-Key: i=bryan.odonoghue@linaro.org; a=openpgp;
- fpr=E693FB2AABA36DE117AB6FB422713BB3A18DC83A
+ Conor Dooley <conor+dt@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, 
+ Jens Glathe <jens.glathe@oldschoolsolutions.biz>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1788697362; l=1000;
+ i=jens.glathe@oldschoolsolutions.biz; s=20240919;
+ h=from:subject:message-id;
+ bh=HV6obzoJQYZkI0vGnV/Lh7ePRT9GR5xSbdXa52p1wu8=;
+ b=m8Z7Cyp6fYI2Nz1xWm0aPrBchpnVZQtFM57i7sZxvzH+cAvvFggOq8flWa/8r9xgbzMUIK38J
+ 4lU2AlvjMfhA8PJfCFNiQBSDEhWMwAyBqqUlz02y8GLBHKdcaYedzsn
+X-Developer-Key: i=jens.glathe@oldschoolsolutions.biz; a=ed25519;
+ pk=JcRJqJc/y8LsxOlPakALD3juGfOKmFBWtO+GfELMJVg=
+X-Endpoint-Received: by B4 Relay for
+ jens.glathe@oldschoolsolutions.biz/20240919 with auth_id=216
+X-Original-From: Jens Glathe <jens.glathe@oldschoolsolutions.biz>
+Reply-To: jens.glathe@oldschoolsolutions.biz
 
-Introducing a dedicated CSIPHY driver community feedback was both to move
-to data-lanes starting at index 1 on the PHY side and also to match that
-indexing scheme in the CSI decoder - CSID.
+From: Jens Glathe <jens.glathe@oldschoolsolutions.biz>
 
-CSID consumes the data-lanes property to determine which CSID lanes to
-switch on. For indexes starting at 1 we need to amend the logic somewhere.
-The PHY side code normalises the input data to register level meanings so,
-replicate that logic on the CSID side.
+QSEECOM is required for EFI variables on these machines. Match
+the generic "lenovo,ideapad-5" fallback so both the LCD and
+OLED IdeaPad Slim 5x 14Q8X9 device trees are covered without
+duplicating allowlist entries.
 
-Introduce a simple flag to differentiate between legacy indexing @ 0 and
-new indexing @ 1.
-
-Existing bindings are not affected.
-
-Signed-off-by: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
+Signed-off-by: Jens Glathe <jens.glathe@oldschoolsolutions.biz>
 ---
- drivers/media/platform/qcom/camss/camss.c | 15 ++++++++++++---
- 1 file changed, 12 insertions(+), 3 deletions(-)
+ drivers/firmware/qcom/qcom_scm.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/drivers/media/platform/qcom/camss/camss.c b/drivers/media/platform/qcom/camss/camss.c
-index 84097d82d99c9..8a4d8a206cf0d 100644
---- a/drivers/media/platform/qcom/camss/camss.c
-+++ b/drivers/media/platform/qcom/camss/camss.c
-@@ -4742,7 +4742,8 @@ static const struct parent_dev_ops vfe_parent_dev_ops = {
-  */
- static int camss_parse_endpoint_node(struct device *dev,
- 				     struct fwnode_handle *ep,
--				     struct camss_async_subdev *csd)
-+				     struct camss_async_subdev *csd,
-+				     u8 lane_base)
- {
- 	struct csiphy_lanes_cfg *lncfg = &csd->interface.csi2.lane_cfg;
- 	struct v4l2_mbus_config_mipi_csi2 *mipi_csi2;
-@@ -4777,7 +4778,14 @@ static int camss_parse_endpoint_node(struct device *dev,
- 		return -ENOMEM;
- 
- 	for (i = 0; i < lncfg->num_data; i++) {
--		lncfg->data[i].pos = mipi_csi2->data_lanes[i];
-+		u8 lane = mipi_csi2->data_lanes[i];
-+
-+		if (lane < lane_base || lane - lane_base >= CSI2_MAX_DATA_LANES) {
-+			dev_err(dev, "invalid data-lane %u\n", lane);
-+			return -EINVAL;
-+		}
-+
-+		lncfg->data[i].pos = mipi_csi2->data_lanes[i] - lane_base;
- 		lncfg->data[i].pol = mipi_csi2->lane_polarities[i + 1];
- 	}
- 
-@@ -4794,6 +4802,7 @@ static int camss_parse_ports(struct camss *camss)
- {
- 	struct device *dev = camss->dev;
- 	struct fwnode_handle *fwnode = dev_fwnode(dev), *ep;
-+	u8 lane_base = camss->legacy_phy ? 0 : 1;
- 	int ret;
- 
- 	fwnode_graph_for_each_endpoint(fwnode, ep) {
-@@ -4841,7 +4850,7 @@ static int camss_parse_ports(struct camss *camss)
- 			goto err_cleanup;
- 		}
- 
--		ret = camss_parse_endpoint_node(dev, ep, csd);
-+		ret = camss_parse_endpoint_node(dev, ep, csd, lane_base);
- 		if (ret < 0)
- 			goto err_cleanup;
- 	}
+diff --git a/drivers/firmware/qcom/qcom_scm.c b/drivers/firmware/qcom/qcom_scm.c
+index 882d1865f3a4a..a5f19c5dc089c 100644
+--- a/drivers/firmware/qcom/qcom_scm.c
++++ b/drivers/firmware/qcom/qcom_scm.c
+@@ -2231,6 +2231,7 @@ static const struct of_device_id qcom_scm_qseecom_allowlist[] __maybe_unused = {
+ 	{ .compatible = "huawei,gaokun3" },
+ 	{ .compatible = "lenovo,flex-5g" },
+ 	{ .compatible = "lenovo,ideacentre-mini-01q8x10" },
++	{ .compatible = "lenovo,ideapad-5" },
+ 	{ .compatible = "lenovo,thinkbook-16" },
+ 	{ .compatible = "lenovo,thinkpad-t14s" },
+ 	{ .compatible = "lenovo,thinkpad-x13s", },
 
 -- 
-2.55.0
+2.53.0
+
 
