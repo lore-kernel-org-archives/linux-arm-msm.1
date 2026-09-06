@@ -1,63 +1,63 @@
-Received: from mail-pg1-f174.google.com (mail-pg1-f174.google.com [209.85.215.174])
+Received: from mail-pj1-f43.google.com (mail-pj1-f43.google.com [209.85.216.43])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B79763911C3
-	for <linux-arm-msm@vger.kernel.org>; Sun,  6 Sep 2026 06:18:51 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.215.174
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 55CB7392828
+	for <linux-arm-msm@vger.kernel.org>; Sun,  6 Sep 2026 06:19:03 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.216.43
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788675533; cv=none; b=FoWTkviq4qinTIBuwqag9gxsxRJTbjt5bT/yqPg+uCri4/UcpKuQJy3iTNKPk7fb1oi3zuKswBBDbAkAvaR/tRbiKIzd4sai+RvNPeo6T1+ETI+6intVYEn+llio2bsp2QxRp/r5yTXTLyV8yeGulxxFB69oYcSv4ufQExRQPOw=
+	t=1788675544; cv=none; b=suaGm9VD2zxnaHXGlCNsz/dX/hFYtPNJlMWXPmZFIw+NNS01Mv+56lPmefu3rRfZz3yq48mxQ1+i4Rb4konomdfejVn/vlfa+i7mIUBOiyq3xug525OaVdg+FIjuxkmjKkqCTOQyC/A4hlRkNRBdFaIS1xizlapV1eQjngWCW5M=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788675533; c=relaxed/simple;
-	bh=Ix38TazmjpNN8K8bcbbXrymOYyLkk4HmlfbglpAUeqw=;
+	s=arc-20240116; t=1788675544; c=relaxed/simple;
+	bh=YrTo+zdkKpV5+yJvFwK8zA6/u2dpSvDVFjumOIdiThw=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=gwRnq4ZzRISK+g53BsxBFnrDX33OC64+ydyPRhC4oLC4s4cJfz49vtTfX1pCKoqkn1VFtx3SwQwtJz1TAJrDBWGDsHyji1gI3+CYFre1WuldTNp6+w7Hu9woXz/GlgBekmHU+6GkhS86pRQjXZ5GUWN+ChcKP2hmm9+GuFb2NLk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=Fi+95+Sa; arc=none smtp.client-ip=209.85.215.174
+	 MIME-Version; b=nE/i6IEtH27gEE1x6fSZrOMUdRj6Nmzq6G6LYmsveIsGZj9m8aqSyHKzSt7YiYBizGLjvUPqm3JpBDF/Hj2cIWy7f9xtgT2W1Fn6tCu3Qo1x0CAQ2RtUfaXuSo7GjHC16JClR2IJtFeuh+X9sBp8AksN4fw/1K72jAW9+MsEiqM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=Gsb0OBvW; arc=none smtp.client-ip=209.85.216.43
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="Fi+95+Sa"
-Received: by mail-pg1-f174.google.com with SMTP id 41be03b00d2f7-cc1bcdb3c4cso1650983a12.2
-        for <linux-arm-msm@vger.kernel.org>; Sat, 05 Sep 2026 23:18:51 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="Gsb0OBvW"
+Received: by mail-pj1-f43.google.com with SMTP id 98e67ed59e1d1-38ea87caafeso1921771a91.3
+        for <linux-arm-msm@vger.kernel.org>; Sat, 05 Sep 2026 23:19:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1788675531; x=1789280331; darn=vger.kernel.org;
+        d=gmail.com; s=20251104; t=1788675542; x=1789280342; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=mUZ0W7BgdhCNDmsYtUGV+m5Ja5WSQeyPJ2CLwoaFY60=;
-        b=Fi+95+Sand3OXap342C/SixOxVwWyQiP7epFTzx01onRuZ6xVgXs3mwShv4aox9Riw
-         CpUf1IxM4Og9czIrhwF5/6J72pSxOr++IG4KeLdnUkoERqgNppTpHTwKuIeP28bF+S2k
-         TrymEIEXs1+ud629fyYSv08cqYgiX5qlIAOiZEvxUplEOrb/+dosNC1kMC+7+76zUXnO
-         MmswtktGClimZf2r6G8Ziwuog9IC48EuMkIcdhU3TPbIGHTSnk0UgJwu9ArnA1ZzWsdh
-         ZX0Ft0wLMY2Lj38sHtNP9x4/IYP0+TKLBXSv8TpmoVX070zU6QLCJ/DXHC6Z/QnlC5Ol
-         t9jw==
+        bh=P29HLotgsQWEFXe03chzciCUSFMzhS7FgdZp0wCdfRQ=;
+        b=Gsb0OBvWZG5hgVnCleCwk7SOind03/0P5yIBjOZlwk3tdqZ9VRFGrw5VNEYXB7D8lo
+         S+eZ3CZKusS1w6z2fZwAHgeG/fHZOS94pjpjrXVlSjtGHMnl2fMnKmDGW0KIXgAAyr+V
+         kh6OQ4TY1DzFWgAusyAyzsJa39WE85etLpowMGs/01n3Ay1hiV/yLyQbnaE51C+G0+we
+         W6xhQpvByD+UoNlaPDZ6x7IPjgVljha/1KWJngM/bcqoignSu7uzO/C5VQkUK7bH7GFY
+         iiQ6ulUOy1b8vzIevMETXYSsLrFNYRFYHHD84km2AI3j95iPlQY5/q/ZCiEz3HwJhXYi
+         E3UA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788675531; x=1789280331;
+        d=1e100.net; s=20251104; t=1788675542; x=1789280342;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=mUZ0W7BgdhCNDmsYtUGV+m5Ja5WSQeyPJ2CLwoaFY60=;
-        b=diW7LhiQglG0hfeaWSNxOJgZWVFMOVm6QlGsMf5sizfZ6vj673y/8TiGw2jorraypH
-         dDomzbQZHIiIQrC0bPnFYydhaYuceKJqoCpyElahC5BDwlaEZ8RVab7CXCGMyjus9L6u
-         tMc1ix2IuxHsgaB9qGuxMkuw4YgZ3pOqs1JpgFIyZDWwZctU0mg7TSM3DYfNeVi2GssG
-         4MAKIivqveF7glKsHnr2tZafB9SnEAmPXSIZg3RKRWQhAWXkBJiBA+/hZduwQ9C7fDU2
-         hynql1LMLhqTevaRqozjyhZ5c6zfa1tOpb9Dj/Rzm9r83zWIjVxQ6Pwsn5Rlc/P/kbv5
-         YKSA==
-X-Forwarded-Encrypted: i=1; AKwUvBzSNJJzBbxHj9Q4LAeYRk2u3wOyzvsJ055WjaflNxD8VSvUlKPCN8kyi7GO3xBIbkc1ZpmOvhXWyUi1Mrhd@vger.kernel.org
-X-Gm-Message-State: AFuF++lCpr8QByjhwjUaEFdJcBZTGALXyeisuMH4bNMaYC36ASq+wPYV
-	7EAJB579Gn8qXWXWEIfJ/sdUix5IzrAf8Rfo6vih6bQMl340osM+vbH0
-X-Gm-Gg: AYBFou3uxhM0/N5wqXk6BHxuVFJ7Fqm+1TKcO8UT8bfQcEjLhSDXgCVdv8baTQSOGKU
-	mFa3dKJ4XRvT59UcMdrbFbNfu69qcIE1/7247y/aC5dWaEIF27cbabTaiW5SKhaCLNTVvlpu9qI
-	KpBaLdrrgMlDh/1iW9Hp3VJ45SRZSGboE05XVvlXo1S1qOVtohlxBVt/NU002JQ+ABAvM48R1tL
-	X0rRRVIiBnKh6rPDemEiCLshM+60++Yi9O0LFLferR3xkFl+/uJV9hRzZZ/PKTuxtgSRFdjADQQ
-	uOEKwtanJ7mTPC5wQtOfSuYeTIiucUch+LxKuocFI1gV2iQEYiz7fbDIocXd9ICWx9+fZ3BhkL/
-	AY2jSsA3ijU3YJMFHnNGiMnZxH2PXJRpaStBkADE9wAo/edCnHasfL6iU55jwJPm1PrzgufoOuL
-	QYIi9YxsjyW+nzX54asijYoy/SXhpeep5onaH1H8HPg4Qced/GtATfDRUAJl3inX+IlZsXdQ==
-X-Received: by 2002:a05:6a21:6003:b0:3d3:adbf:7780 with SMTP id adf61e73a8af0-3da3a16a4e9mr27908167637.21.1788675531001;
-        Sat, 05 Sep 2026 23:18:51 -0700 (PDT)
+        bh=P29HLotgsQWEFXe03chzciCUSFMzhS7FgdZp0wCdfRQ=;
+        b=LuLjNoXl3NsyIKqCH2fxlHxkDbV7cMn20+TgHE1c69bU2YRS+w7s4dyOROCm17AzAZ
+         JYbrvLZCwbsHbX2Mi67D0CoxTB45D+lC/0wEsfaMXXgXCaRUM5yxs7BNgZ5jiQfekbeC
+         YE2DEcRcsWfxusqhKRgAYDrZX1j5uc6DKf4m3bnC4M2v8u0lncrhhsOBtv9yEAmZtPMo
+         xhNGexY75OhGRgMud2Ffe8bkLlotRCDGrgZSq/C3qwWI6QERmiuErcIJPxNr9d8MBZgY
+         ZdCkk4cLxSN/wluN2g6wuMLCBxEz3zzQcikTFwiHmPRMKOB3aucbbSvWTLw4e2vc56Hv
+         f2PQ==
+X-Forwarded-Encrypted: i=1; AKwUvBxXEvp4t0j1XQ3fFnoEq0+WqeU1PSBxopZ8iAk344NcXfNmxt+IFLdjsllMiDoCEbA47hLd330sozu6QTJR@vger.kernel.org
+X-Gm-Message-State: AFuF++kFrXiqzlIXRh1ZeIrmxFyMa11IeuKDX9a/f8s8G2sE+zjsr6b8
+	yNuQSi2dbKx4OVx+4UiAnWHpPA4yc2Cj1paSfJHNZIRJluC4XniJPU4e
+X-Gm-Gg: AYBFou3Dq+NZ+hyfhJ8k2j3A4EY/BzE50hcr5DIrzQyciRuz5hiphveSJBnONz1WJmb
+	ex75U28P6lXKmLr8u/qR13e+ZAztep9eo/K7+jsDVdMBl5niA0AYTVChkhaf3sZKMQpfYF93AUK
+	UJTMkvxX7PeUXtHid3/CvXwqAjNYW7UyxmVJCgRrGes52h7CvCXBJPxKtnZeSGEtcs9M+3pOF3D
+	siSfu+Zl9L9g+hVulg8wgfMtbx1CKyEc4dtgfs6rVnZu3g/lT1h7HbDA2hjVHJtNxErBFasT3GE
+	kiIFWYZGM08PXzBXYQt6R2/Vi+CyzPVz2Fh1Xn4vvZnzl4mQ/W7O/WWbo/CSfbrnULHdr0EV6sX
+	tWUOrfF5j13hVV0muHm7B1meERkdkXy+wgKCrRHZHB5TtaOgORSyJ3QY909i4yyCjd7+A2yPAV2
+	K/1nzvxD5XouyA3KKfPL7hkH/Z18N8bzUlrSKvm+TaV0XjSnhNZP8Dqut99rs=
+X-Received: by 2002:a17:90b:2f87:b0:38e:250b:122f with SMTP id 98e67ed59e1d1-39b261e75femr24578243a91.16.1788675542370;
+        Sat, 05 Sep 2026 23:19:02 -0700 (PDT)
 Received: from gmail.com ([58.84.62.227])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3339aa33e96sm18280405eec.12.2026.09.05.23.18.41
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3339aa33e96sm18280405eec.12.2026.09.05.23.18.52
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 05 Sep 2026 23:18:50 -0700 (PDT)
+        Sat, 05 Sep 2026 23:19:02 -0700 (PDT)
 From: Sumeet Pawnikar <sumeet4linux@gmail.com>
 To: rafael@kernel.org,
 	amit.kachhap@gmail.com,
@@ -95,9 +95,9 @@ Cc: bcm-kernel-feedback-list@broadcom.com,
 	linux-pm@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
 	sumeet4linux@gmail.com
-Subject: [PATCH 3/5] cpufreq: Use %pe to print error pointers symbolically
-Date: Sun,  6 Sep 2026 11:47:52 +0530
-Message-ID: <20260906061755.5103-4-sumeet4linux@gmail.com>
+Subject: [PATCH 4/5] devfreq: Use %pe to print error pointers symbolically
+Date: Sun,  6 Sep 2026 11:47:53 +0530
+Message-ID: <20260906061755.5103-5-sumeet4linux@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260906061755.5103-1-sumeet4linux@gmail.com>
 References: <20260906061755.5103-1-sumeet4linux@gmail.com>
@@ -110,86 +110,62 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
 Replace PTR_ERR() and %ld with %pe and pass the original pointer directly
-to pr_err() and pr_warn(). The %pe format specifier prints a symbolic error
-name (e.g. -ENOMEM) when CONFIG_SYMBOLIC_ERRNAME is enabled, otherwise it
-falls back gracefully and prints the raw integer value. This makes messages
-more readable without any functional change.
+to dev_err(). The %pe format specifier prints a symbolic error name (e.g.
+-ENOMEM) when CONFIG_SYMBOLIC_ERRNAME is enabled, otherwise it falls back
+gracefully and prints the raw integer value. This makes messages more
+readable without any functional change.
 
 Signed-off-by: Sumeet Pawnikar <sumeet4linux@gmail.com>
 ---
- drivers/cpufreq/bmips-cpufreq.c   | 4 ++--
- drivers/cpufreq/cppc_cpufreq.c    | 4 ++--
- drivers/cpufreq/qoriq-cpufreq.c   | 4 ++--
- drivers/cpufreq/s3c64xx-cpufreq.c | 5 ++---
- 4 files changed, 8 insertions(+), 9 deletions(-)
+ drivers/devfreq/imx-bus.c         | 4 ++--
+ drivers/devfreq/imx8m-ddrc.c      | 3 +--
+ drivers/devfreq/mtk-cci-devfreq.c | 4 ++--
+ 3 files changed, 5 insertions(+), 6 deletions(-)
 
-diff --git a/drivers/cpufreq/bmips-cpufreq.c b/drivers/cpufreq/bmips-cpufreq.c
-index a8e35bc75fb2..389fff5e6f65 100644
---- a/drivers/cpufreq/bmips-cpufreq.c
-+++ b/drivers/cpufreq/bmips-cpufreq.c
-@@ -132,8 +132,8 @@ static int bmips_cpufreq_init(struct cpufreq_policy *policy)
- 
- 	freq_table = bmips_cpufreq_get_freq_table(policy);
- 	if (IS_ERR(freq_table)) {
--		pr_err("%s: couldn't determine frequency table (%ld).\n",
--			BMIPS_CPUFREQ_NAME, PTR_ERR(freq_table));
-+		pr_err("%s: couldn't determine frequency table (%pe).\n",
-+			BMIPS_CPUFREQ_NAME, freq_table);
- 		return PTR_ERR(freq_table);
+diff --git a/drivers/devfreq/imx-bus.c b/drivers/devfreq/imx-bus.c
+index 49798f542d68..dba76d8b9e5a 100644
+--- a/drivers/devfreq/imx-bus.c
++++ b/drivers/devfreq/imx-bus.c
+@@ -75,8 +75,8 @@ static int imx_bus_init_icc(struct device *dev)
+ 	priv->icc_pdev = platform_device_register_data(
+ 			dev, icc_driver_name, -1, NULL, 0);
+ 	if (IS_ERR(priv->icc_pdev)) {
+-		dev_err(dev, "failed to register icc provider %s: %ld\n",
+-				icc_driver_name, PTR_ERR(priv->icc_pdev));
++		dev_err(dev, "failed to register icc provider %s: %pe\n",
++				icc_driver_name, priv->icc_pdev);
+ 		return PTR_ERR(priv->icc_pdev);
  	}
  
-diff --git a/drivers/cpufreq/cppc_cpufreq.c b/drivers/cpufreq/cppc_cpufreq.c
-index 80893844353c..f767898ebfb5 100644
---- a/drivers/cpufreq/cppc_cpufreq.c
-+++ b/drivers/cpufreq/cppc_cpufreq.c
-@@ -230,8 +230,8 @@ static void cppc_fie_kworker_init(void)
- 
- 	kworker_fie = kthread_run_worker(0, "cppc_fie");
- 	if (IS_ERR(kworker_fie)) {
--		pr_warn("%s: failed to create kworker_fie: %ld\n", __func__,
--			PTR_ERR(kworker_fie));
-+		pr_warn("%s: failed to create kworker_fie: %pe\n", __func__,
-+			kworker_fie);
- 		fie_disabled = FIE_DISABLED;
- 		kworker_fie = NULL;
- 		return;
-diff --git a/drivers/cpufreq/qoriq-cpufreq.c b/drivers/cpufreq/qoriq-cpufreq.c
-index 42edb41ad459..0652e5df0278 100644
---- a/drivers/cpufreq/qoriq-cpufreq.c
-+++ b/drivers/cpufreq/qoriq-cpufreq.c
-@@ -57,8 +57,8 @@ static u32 get_bus_freq(void)
- 	/* get platform freq by its clock name */
- 	pltclk = clk_get(NULL, "cg-pll0-div1");
- 	if (IS_ERR(pltclk)) {
--		pr_err("%s: can't get bus frequency %ld\n",
--		       __func__, PTR_ERR(pltclk));
-+		pr_err("%s: can't get bus frequency %pe\n",
-+		       __func__, pltclk);
- 		return PTR_ERR(pltclk);
+diff --git a/drivers/devfreq/imx8m-ddrc.c b/drivers/devfreq/imx8m-ddrc.c
+index 52beeb5b7d65..28d7c595fa17 100644
+--- a/drivers/devfreq/imx8m-ddrc.c
++++ b/drivers/devfreq/imx8m-ddrc.c
+@@ -340,8 +340,7 @@ static int imx8m_ddrc_check_opps(struct device *dev)
+ 	for (i = 0, freq = 0; i < opp_count; ++i, ++freq) {
+ 		opp = dev_pm_opp_find_freq_ceil(dev, &freq);
+ 		if (IS_ERR(opp)) {
+-			dev_err(dev, "Failed enumerating OPPs: %ld\n",
+-				PTR_ERR(opp));
++			dev_err(dev, "Failed enumerating OPPs: %pe\n", opp);
+ 			return PTR_ERR(opp);
+ 		}
+ 		dev_pm_opp_put(opp);
+diff --git a/drivers/devfreq/mtk-cci-devfreq.c b/drivers/devfreq/mtk-cci-devfreq.c
+index 4c22be728f6a..bda788909887 100644
+--- a/drivers/devfreq/mtk-cci-devfreq.c
++++ b/drivers/devfreq/mtk-cci-devfreq.c
+@@ -364,8 +364,8 @@ static int mtk_ccifreq_probe(struct platform_device *pdev)
+ 					       passive_data);
+ 	if (IS_ERR(drv->devfreq)) {
+ 		ret = -EPROBE_DEFER;
+-		dev_err(dev, "failed to add devfreq device: %ld\n",
+-			PTR_ERR(drv->devfreq));
++		dev_err(dev, "failed to add devfreq device: %pe\n",
++			drv->devfreq);
+ 		goto out_remove_opp_table;
  	}
  
-diff --git a/drivers/cpufreq/s3c64xx-cpufreq.c b/drivers/cpufreq/s3c64xx-cpufreq.c
-index 9cef71528076..9a01592425ee 100644
---- a/drivers/cpufreq/s3c64xx-cpufreq.c
-+++ b/drivers/cpufreq/s3c64xx-cpufreq.c
-@@ -152,15 +152,14 @@ static int s3c64xx_cpufreq_driver_init(struct cpufreq_policy *policy)
- 
- 	policy->clk = clk_get(NULL, "armclk");
- 	if (IS_ERR(policy->clk)) {
--		pr_err("Unable to obtain ARMCLK: %ld\n",
--		       PTR_ERR(policy->clk));
-+		pr_err("Unable to obtain ARMCLK: %pe\n", policy->clk);
- 		return PTR_ERR(policy->clk);
- 	}
- 
- #ifdef CONFIG_REGULATOR
- 	vddarm = regulator_get(NULL, "vddarm");
- 	if (IS_ERR(vddarm)) {
--		pr_err("Failed to obtain VDDARM: %ld\n", PTR_ERR(vddarm));
-+		pr_err("Failed to obtain VDDARM: %pe\n", vddarm);
- 		pr_err("Only frequency scaling available\n");
- 		vddarm = NULL;
- 	} else {
 -- 
 2.43.0
 
