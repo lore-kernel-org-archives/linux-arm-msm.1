@@ -1,129 +1,116 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 65958473C9D;
-	Mon,  7 Sep 2026 11:05:32 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4BBE5424D46;
+	Mon,  7 Sep 2026 11:09:04 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788779133; cv=none; b=lQ8RAlZM2/G2tPtV+7/SEucm8sEqUk5JCjmhM+iCVPUizCp98QNGL04DlnAyKrk76qdNtnerjJ7W90QqMGSPRHE4FIeIzyZrT7g1iik+jdeTmUx38dA4gNcx2o9PPfZTeM3EKvr69BILeeAuRJbIKKr2cGx+BHJa8y4+EOMrY0k=
+	t=1788779346; cv=none; b=njIPotEYtHhz/y0kduXr+s2d4Wsk8RUr72jaeydMqowhe7iEuhWRCoAzAVoPxWJZrHxKOBO2F4GQCKbb2W6M15YUm94P/SnceQxKevJEMy7bx3LMUNtvX07bUXbQku4VqT3WYu6U9dT9E9ZLvztCAMXbBsUyZX2BWu0BMcbDwXA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788779133; c=relaxed/simple;
-	bh=bxSnFx7BSKtGJ8Ahnkmwr18K2E77ghQWFDTSjmPlswg=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=cw4gYQ213VLvMe6nYZVWZwF9WcaCnkNeHdxhG8qyruC/Mw/06C+w14bSWZVMoDp+5ktVaF3AwFmzQWrJSP/RTvqWL9umb3aRH1rEiu3Y+f2A3oC0RkLS58Xx0oq3GwxVL/MYprnmPLh5mWTpsxndU2JyquYewpF33pJbTWuKCRM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=lRKNfjaP; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1788779346; c=relaxed/simple;
+	bh=ZSVTuPs4tOQ6MilLZ/YlpwF9UnTmn1TqPf1+uC0eVrk=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=fO208fhJOiihainGRbwFmxw23SumHzG7H0QjJS3EaZuuKa+ePYBXa+/dDJ4uXj5VGtHNMb31uzpCMiqOfjZs+85ae5T17sDcg0H+lRNiTa512lsc9Mz1ahzvKnfFxAi4y+fLZCz5kTHxLQMdV/Y7NHNa5watYmiPeCoELyn48xI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=QFRA5riB; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="lRKNfjaP"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1866D1F00A3D;
-	Mon,  7 Sep 2026 11:05:26 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="QFRA5riB"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 168EA1F00AC4;
+	Mon,  7 Sep 2026 11:08:58 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1788779132;
-	bh=9w+yezYlK7U311raSgrzFh4bSQ3Pq/lnodM4AqaFq8M=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=lRKNfjaP0TSM+C6Z51ZvaSdSJSuU3udU6ZtvHKuaZh1LmhTJFmwc9czlT6e+bHddE
-	 nOKNS811YQISDkiheK+jJZz2Dp6kUnWWYdwu+r+jQ7WLDEVYvxF8QP6mvRn3AirpMZ
-	 LwBi2j2XJte1cMRpVvZZy9OuMhNVsLnnKbUCQ8xkEWR4fxYQ1NKTaBJhCpAlhoUe13
-	 ZQ0oEcGzZCgqKe8tlGZX2pI+57IhkXQuPdU+I/K5A4PYpoQLcIUdCQfpWB97CmznYI
-	 h0/CFESMTVAiWzH2mJAkcXuNAQqLNm2swTnZb1uJVyBetZVKPbTWnSwmkgtaxfH3v5
-	 MS4xOroj2zC0g==
-Message-ID: <f798b003-4661-4cb9-8a3e-7579d0595904@kernel.org>
-Date: Mon, 7 Sep 2026 12:05:25 +0100
+	s=k20260515; t=1788779344;
+	bh=MKOffp+QRUepLWRx3cEKj7QDgchxuXLg4xrZKZeAQ5g=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=QFRA5riBpCuv+vbNl+CkpgU7Oa5X4VL7v9uTgFdKCsZE/uRkdgQ3Xchga9OTq1Wac
+	 YtiFJ2aLjhWoWSpxJe1p+HuSMe64AiMJdr5UYfe5taeKhqkFCTr8NYZ3l8EbjIgieI
+	 UKRM5G447uSAfGKO5u7Vknv3OzaY9BoPPzSDXhqs/87j5yu2OOyPTonxZ1tAjdoseK
+	 lp+qd5YdoqFJTo5mkQGrlRPG7iZdm96qK5N07Zd0mnEab/NNYUCcZ5XgmfuX/bID1Z
+	 ANOIT+jvFy2SbnggH+HKeVdecXy86Vxptl34doTAGx/RbrLBWbzmU0PY3kbhbw5/ER
+	 VkXRpyZvpaQzg==
+Date: Mon, 7 Sep 2026 13:08:55 +0200
+From: Manivannan Sadhasivam <mani@kernel.org>
+To: george.moussalem@outlook.com
+Cc: Vinod Koul <vkoul@kernel.org>, 
+	Neil Armstrong <neil.armstrong@linaro.org>, Rob Herring <robh@kernel.org>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	Praveenkumar I <praveenkumar.i@oss.qualcomm.com>, Philipp Zabel <p.zabel@pengutronix.de>, 
+	Bjorn Andersson <andersson@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>, 
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>, 
+	Nitheesh Sekar <quic_nsekar@quicinc.com>, Wesley Cheng <quic_wcheng@quicinc.com>, 
+	linux-arm-msm@vger.kernel.org, linux-phy@lists.infradead.org, devicetree@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, linux-usb@vger.kernel.org
+Subject: Re: [PATCH v3 02/12] dt-bindings: phy:
+ qcom,ipq5332-uniphy-pcie-usb3: Document the IPQ5018 USB3 PHY
+Message-ID: <fkbmx5yyp65mp2qknnd2lbde5scfmr5dpbox5x4j4fu6uahtnl@mxx45aqojrg6>
+References: <20260825-ipq5018-usb3-v3-0-39be0955a6aa@outlook.com>
+ <20260825-ipq5018-usb3-v3-2-39be0955a6aa@outlook.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/6] dt-bindings: media: qcom,glymur-camss: Add Glymur
- CAMSS
-To: Nihal Kumar Gupta <nihal.gupta@oss.qualcomm.com>,
- Vinod Koul <vkoul@kernel.org>, Neil Armstrong <neil.armstrong@linaro.org>,
- Manivannan Sadhasivam <mani@kernel.org>, Rob Herring <robh@kernel.org>,
- Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
- <conor+dt@kernel.org>, Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
- Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
- Loic Poulain <loic.poulain@oss.qualcomm.com>,
- Mauro Carvalho Chehab <mchehab@kernel.org>, Lee Jones <lee@kernel.org>,
- Guru Das Srinagesh <linux@gurudas.dev>, Liam Girdwood <lgirdwood@gmail.com>,
- Mark Brown <broonie@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, linux-phy@lists.infradead.org,
- linux-media@vger.kernel.org, devicetree@vger.kernel.org,
- linux-kernel@vger.kernel.org, mfd@lists.linux.dev,
- Suresh Vankadara <svankada@qti.qualcomm.com>,
- Vikram Sharma <vikram.sharma@oss.qualcomm.com>
-References: <20260907-glymur_camss-v2-0-75f7982dc983@oss.qualcomm.com>
- <iIEI9RqdlqSAwrBGxsv48s_r9QoTRP_IPoifu8PCol261xGqyCULXGQaaMYndhNAFA7YAzraXTr-UzZhguWz3g==@protonmail.internalid>
- <20260907-glymur_camss-v2-2-75f7982dc983@oss.qualcomm.com>
- <3e619085-3311-4acd-9493-e849875563d7@kernel.org>
- <HMhSsbIuGgGqeuA5WMqtACmlFgoNgQBLsfBFZfnuCmLfXfbUtwOV1sM1eDF762HX1aTqREbCfWm72IeQWTAUvA==@protonmail.internalid>
- <9ebc94f1-3ed8-4a21-a84e-ccd46f044927@oss.qualcomm.com>
-From: Bryan O'Donoghue <bod@kernel.org>
-Content-Language: en-GB
-Autocrypt: addr=bod@kernel.org; keydata=
- xsFNBGRJNSgBEADD7Vm2ZFa+v+JGJ2QYTJqQAkqis/uOHkhdFNXqpBarVBd47QU/DMNU5Rxg
- jedMQEmHoeDbJ6UOpjbrUQ63c5sgG1JbroHJJctwsEI75OOlekMuebEbjIJBLfgENGwPBMHv
- piv5TgCWr0VgYaXfp2eh2LINFywzqj823HiDPibQAXDrjzvF1ogksi/6cQZs8d4if8YQkLOr
- YISFouG+eR0nN1I7mUfIddXOWu6lJeTyqbWVurv58k2ekIXKaOC9ixLHFbcfYV0hOgRaTwQC
- B8CYF9nfqZla19iItfsN9QxN+ZdQjcRoYipp6HPCMfJlKH7GfaFcW93LKc4DKJ2lVL+pg/OQ
- lythZbjRPY492NG9kZ65aYstCs90uhMUEVVPuGUw7wBEku+6IEwZfrbMVKeWzLlPyM4Hv9hM
- 8ktxSmxWsPTPqpBC8eyeAQLalMELAyVcZlkaCtEcbj7w4l/JkYz+4l37obG8ZD+B34udBUUz
- MsAJ8foDFrBh2MOFA3hxD6G90D23mmWsri7pnKA2tZs92aQX7Ee+FbCyg6g5ln62Sq83ZDbf
- 53DdBs55EVpBadeInWmXhzCHPQx06H+CwTEjShTYIaMmBfrewvYUDKvFTC5iKQhAEUgt6i94
- JsbG7NoeqcxkUMcBOEUQ3uCQG1D70ugspgXc0wd3Rimiq6535wARAQABzSFCcnlhbiBPJ0Rv
- bm9naHVlIDxib2RAa2VybmVsLm9yZz7CwZEEEwEIADsWIQTmk/sqq6Nt4Rerb7QicTuzoY3I
- OgUCZ+R+mwIbAwULCQgHAgIiAgYVCgkICwIEFgIDAQIeBwIXgAAKCRAicTuzoY3IOimUD/94
- BwVEJX31JRe2sxbB/e1w2p8x1bxvTw5AeIzpV3ox7coJg1bSU2mnGuj1V4o0Yxf/3zmcJzCN
- VfVjwRF8Ii3GnC7uUXk2t+87piQfKTyJAYQABhZUKgoVJbjJq/S+C3XCKIyBA+EiezoUsgsA
- jTzwU+FzV7zVWIXFPJNtBERLwboE9w9U3KjAExOa1kSY8eLrsg6kOwlOHWy5UsQqYOjrS96M
- mzm2xuc1+RCjrndAyYhCnrOKvJ67HsPnBeJCjw7ImGD/U1GchwYbX8o3DO3JNHm3qfC86ZqX
- 2sCouENg4OzgPTtLKUrueM6xsu6KMM7gj17vxsiR3KQEoJnnMB8D1xtBofN3mFZE0wD9M24m
- 8yGunZbtntMCUHzIrlJgAPwKWKuGOYtA8UgMTFkccnUJtQrg9KotKtEF/FuftG9zLG9XEkt4
- 5ZdNgbSoLWgelu3T47mbOJ8LHhiLaCWP7yrovtVAvLUQ1BsiA42u8ECrFCFvQj9nrejE/ICv
- kP+uqcKtdDvP9HrIGycF1WZyfZLp0RvopKW92FLvI4I1QFWJ+wenk6+LGyJ5bzlrWzevjxmf
- nHcXE6sJBHrE7eijlbbImDAi3uLYN8Nd9Dm11IDAy4GAIQxSiQn0yblDhPiyGtchy80EVkCm
- g9k17Wol+2E2mC4DKgVdCkyUtTRSLgsJCs7BTQRkSTUoARAAuTnmWHBS6izRcEE93ajpzI7h
- dgQO4U3IRvOEsvIKR5NGcNEs0ngGebwsZ/lVULjN4vYU0LleqVhPBidNXUoZCN3A0F0Z2Ov8
- NZdef+2EhQPBVWxFO7JBzhe8Z3ALj+wFtlg8akJjBzU56azW/iJzAobqHVrudzKoO2b1/CMg
- VbiAQ+RXjgfN5kY/HqYDU7mw+hXuUV9PbtX1L8xqQQac95oM9rHzKHHpiVwxTeJnGQsa+THi
- Kze+YET3rCoGHMvOQEJhdrucTv5FpAakKdkOFNel9FFckLRKEuWgCzhpFsjQ7xbirQgFUxG9
- vlk1+q4hMRGNyEqoD6svYEeqbiUSd0oPUJeioiC3rNMRCNHLVrfZ2J6SCPkxfda08uzSdDQU
- 1/YPjOh8ZtQDMu7WctZ3XO288Z1gyBR49V7fbFs2w4sQxG+h/enlxqP7fdw1mjUlZjU5huCJ
- ielS0oEaIpmUpkugli7x4WhwLnhK2EbSoz7nLBC0y+ALUOdMlz/Y1l9xRt+bkDhpmf4O4IcI
- MxgZ0QMLq8rHDkGaEbsgZZHQPS58T0XE3IP30Q9SNxsruCMXtd2hYtBssf/wohc6JVsTtMg2
- VYTPDPIFNZFSXupEJB7jlqpDWJ8ooJfJRLBatbjT5+mVQaMYB7Hs/t+zWYWaJKHyc8O6WLEC
- NUV5Tdt5EkkAEQEAAcLBdgQYAQoAIBYhBOaT+yqro23hF6tvtCJxO7Ohjcg6BQJkSTUoAhsM
- AAoJECJxO7Ohjcg6LuIQALnXt36OUuK43wqw6UYt0cnN6EbUqJHApAF5eNFn0jCCB2XELjSz
- JKJwuNAweowBdabiBniJ+501WIW+ewEsz1uby5fUQjZuCEsIkuaIluyfUFPb73qrQyAGuusd
- 7teA4WT+/jUku9g7lX5sVoRCrKQPkd16f6Bzfztyqyjcn43/X5yQI+wlboQ6HuKe/3I3yiOx
- OgmCHzOawpC9PvhEcKj79RLM3Zz5Ts5AuHpRX70Jz8Be76LwVFLp5Msx3S24ZTU1lBo2uiJ3
- xSkay2lTpyVWRPx9vgcwzxGguOPJQJwsQeLb7wpoJMPpD3ERoaRii7Q7hvmxklpZjhKYWB3d
- t6nQ497Ek9loCrp3MIjRCSDN5xEGffiHks9yTeGMUQwO4tX8RE04uOJPkUY7uCFzFqN6/qey
- X3oFfPgkULMdiHofPAL1OskZSTzGPSfTYRE46NCJw8yoZBQ/oOyWeqaUQbK0wmW/g81wm8p7
- LKSGEglMpiX07M1AotgvylN5C8fjbouoK+/RAMsXkk8jba6rPfuuXPaDjCyyKn6zSVHETnHW
- 3AJbgVY50T8STpnxayBQvWbCvu+6NOEjXCbyaOJig+5l0zlGN9XHjdANXC5HnwmyaGRL9YDq
- Jh2nVXVJDincOdQRdKcJjYLqaOAoWrYWSDi1iZGspHBTDrnOvfMQzzHY
-In-Reply-To: <9ebc94f1-3ed8-4a21-a84e-ccd46f044927@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
+In-Reply-To: <20260825-ipq5018-usb3-v3-2-39be0955a6aa@outlook.com>
 
-On 07/09/2026 11:42, Nihal Kumar Gupta wrote:
->>> X1E80100 supports both the legacy CSIPHY resources and the new PHY API;
->>> Glymur uses only the new PHY API via standalone phy@ child nodes,
->>> so per-CSIPHY clocks, interrupts and supplies are absent here.
->> What's up with the commit log here ? There is no legacy CSIPHY in this.. ?
->>
-> Right, Glymur has none — that's the point. X1E80100 supports both;
-> camss_detect_legacy_phy() picks the path at runtime by checking if
-> the remote endpoint is a phy@ node. Glymur is new-path only, hence
-> a dedicated binding without those legacy properties.
+On Tue, Aug 25, 2026 at 04:37:19PM +0400, George Moussalem via B4 Relay wrote:
+> From: George Moussalem <george.moussalem@outlook.com>
+> 
+> Describe the USB3 PHY found in the IPQ5018 SoC so add the compatible
+> string for it as well as the required resources (clocks and resets).
+> 
+> The PCIe and USB physical pads are muxed and selection is done via a
+> control register in TCSR. By default, PCIe mode is selected, hence make
+> the property for USB mux selection required.
+> 
+> In addition, the PHY requires a 5V supply for USB3 mode operation.
+> 
+> Signed-off-by: George Moussalem <george.moussalem@outlook.com>
+> ---
+>  .../phy/qcom,ipq5332-uniphy-pcie-usb3-phy.yaml     | 24 ++++++++++++++++++++++
+>  1 file changed, 24 insertions(+)
+> 
+> diff --git a/Documentation/devicetree/bindings/phy/qcom,ipq5332-uniphy-pcie-usb3-phy.yaml b/Documentation/devicetree/bindings/phy/qcom,ipq5332-uniphy-pcie-usb3-phy.yaml
+> index 0d9d0fb405b6..1cd5392a1a0f 100644
+> --- a/Documentation/devicetree/bindings/phy/qcom,ipq5332-uniphy-pcie-usb3-phy.yaml
+> +++ b/Documentation/devicetree/bindings/phy/qcom,ipq5332-uniphy-pcie-usb3-phy.yaml
+> @@ -18,6 +18,7 @@ properties:
+>    compatible:
+>      enum:
+>        - qcom,ipq5018-uniphy-pcie-phy
+> +      - qcom,ipq5018-uniphy-usb3-phy
+>        - qcom,ipq5332-uniphy-pcie-phy
+>  
+>    reg:
+> @@ -93,6 +94,29 @@ allOf:
+>        required:
+>          - num-lanes
+>  
+> +  - if:
+> +      properties:
+> +        compatible:
+> +          contains:
+> +            enum:
+> +              - qcom,ipq5018-uniphy-usb3-phy
+> +    then:
+> +      properties:
+> +        clocks:
+> +          items:
+> +            - description: usb3 pipe clock
+> +            - description: usb3 cfg ahb clock
+> +        resets:
+> +          items:
+> +            - description: usb3 phy reset
+> +        "#clock-cells":
+> +          const: 0
+> +        "#phy-cells":
+> +          const: 0
 
-Yes OK I see.
+clock-cells and phy-cells are already part of the top level 'required'
+constraint.
 
-Do you really need to mention Hamoa here ? I'd just drop that from the 
-commit log.
+- Mani
 
-Describe Glymur - Hamoa is irrelevant to this file.
-
----
-bod
+-- 
+மணிவண்ணன் சதாசிவம்
