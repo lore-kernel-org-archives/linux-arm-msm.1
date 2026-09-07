@@ -1,197 +1,161 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2BC63230BD5;
-	Mon,  7 Sep 2026 07:48:16 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 71FEF37E5DE
+	for <linux-arm-msm@vger.kernel.org>; Mon,  7 Sep 2026 07:56:43 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788767298; cv=none; b=E+J/WANhdChrNz0AVnU7v9zUOoBzWmUCszVVmL7PTWgPDcDh0EQVnGUpBstEaHnyfayiX2E60grMGzeLHvuJJHtZNxCXOAYzl0c2Xc1HRCS/YoxqYjgRwpfz543KZv3U5NoATeu7Vk9tMfBezJmSu/oao4Y0/zd4iG2S6ujpYTw=
+	t=1788767806; cv=none; b=EUIfiya18a8IC2EEJHZ1HtZCuaETWofZcr2IRHiIeTpf47dFYk0YniXNkaXEozwfYbzcQmWRB4Z4xgS5rWCCB8vryjgIgR+wGKHTBmMLNNC3UEtnzCDO/5flRKmpijPCz4j0ftlf6UWSaP7AK+bjT+H68ehwCZCr/C/6abxSivw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788767298; c=relaxed/simple;
-	bh=KOp+QtWtbUbIIqYHKz3EJxPwXJ9JVokEksQXuYBJOcA=;
-	h=Message-ID:Date:MIME-Version:Subject:From:To:Cc:References:
-	 In-Reply-To:Content-Type; b=NctFoC+Zr8krpua+O/COfQ6jJ0dWx71NOhfP2v33ekStGLN0MrC2nSNipvxIJ9D5MlY7NXP/9GnC49cAKyd1y2xAP3ighF/3u2onVsUDEUeKF/G5YGCxHtbvBJr3t99lwRp/DZ7xq8ZyBl4UMK6WRsZlksfjjuKp4QIW9iC5QH4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=LH0YlKVC; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1788767806; c=relaxed/simple;
+	bh=t1sRj01fICR9PTKM3e8VF0BZ2GNG+YU4LIOK3q2fTZI=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=o1zMHuKQKOJyEdYrh+oess6kiDB1aLsi93H9jUR9nKjoiyOfo/mCEnbAxuqXmljJ5vS3eJrXSr+cFserNfBXogd+LjT2YXQEfX8ARdY90bzyO6eWlNXzwAKYOmugQa9Ct7o30e3re8PYfGFBewpVqvARRGvKN6vAqW0B+blYvp8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=olddQH2u; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=jUG06H5w; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="LH0YlKVC"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id BEFFF1F00A3A;
-	Mon,  7 Sep 2026 07:48:11 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1788767296;
-	bh=7xw1YjXu3NsISpbAsCe3ks3f4YjdNeeUrtEKLcKFtA4=;
-	h=Date:Subject:From:To:Cc:References:In-Reply-To;
-	b=LH0YlKVCPrnK7MTi2G1cu1ltPl2UuFvrSAfMD6jjEh9kF4GE79w2CNfRiMr6vUfk1
-	 ru95sYEsVP7QdClnQpVDBEXMaUEDRG3d1GyV/jaaIiolbE5KeMGaDd1K6xAB2osOWJ
-	 IIHPyVLQ7kaxjb4ji6LVUQgmSM2FYl56/EhRVTVi8B+cBp/wRBaJ/5/1IltxczLyYf
-	 dp41Ss5PvBL72JTMnoTnwPSbcHpsmk+tHDMLPwQcncSqQfeOr0pLrTWXlNM8r+L0fI
-	 UYNDhKc4RgaukPphQJ2N8J9FKgEsZSEo48LoD02xfjkK66GthU0tUNIqUAWOO+eHmZ
-	 GQnHn9UVismsw==
-Message-ID: <23d6166f-50f7-4d23-a700-ab738c1e872f@kernel.org>
-Date: Mon, 7 Sep 2026 09:48:09 +0200
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="olddQH2u";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="jUG06H5w"
+Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68777M1d2838814
+	for <linux-arm-msm@vger.kernel.org>; Mon, 7 Sep 2026 07:56:42 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	1zEULqD5p5OmpS7F9A/Wf6D4me7rYx1jl5DbOPGYsCk=; b=olddQH2uqwbvwxbZ
+	BHxnjnTmLIbz6oPVv2fKB2iebAjj21+P9B0m3RKzXvxgpPDxN+gurQ3AloEmngvq
+	svXIyKw9gVnItHdlgPo8r0RtunBu1Xyi3L7vvF/uvDYscjGMaWLiVLGpGHsLWAu3
+	eU5UlFqe9BEJoROQFcDjIYUHU0W9jXfjVfhpp/PDg3sa8QTvhmqWRq/ukR2YK8EL
+	b/Akb5jx3i804ej+T3teCvcEVuA4cokUJDzr858KFzNKx1jcVJPU29fMG55nr3rL
+	fR3iFdA6MudVxKxqjcbZG0wskYQWO/RZ3xQHFXcroMfC3k1K9ffz/h/QhXSloupg
+	EyBDZw==
+Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com [209.85.222.198])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ggbuentja-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Mon, 07 Sep 2026 07:56:42 +0000 (GMT)
+Received: by mail-qk1-f198.google.com with SMTP id af79cd13be357-9393ac4961fso297439485a.2
+        for <linux-arm-msm@vger.kernel.org>; Mon, 07 Sep 2026 00:56:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1788767801; x=1789372601; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:mime-version:references
+         :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=1zEULqD5p5OmpS7F9A/Wf6D4me7rYx1jl5DbOPGYsCk=;
+        b=jUG06H5wib9gL5CMPwBNGSr1Y8t2IMhbqj6DD2q1Rh8Ctt7o531yb7LHOgLofWTqSn
+         uekNrW41Y/+NChavf9FtBa/uVVYtzrjhhYCJW3Lpr9DQMpfoze4C1qTK1+juQe9MuPva
+         3LHv3hRBBREJYxIIN3ttn58tu2eEq4QxqdGkeBwBnxzHehX397rg6RdLUQmsCP4/ALC4
+         1AqAXtUS1TwRht58lH2jIq8XFroocrop6205TF4dKQFBmO+FDrYk+NO+tmq2pgcBBXgs
+         kZqn9tJ+yXzgfb9CwwUTFNBmeh/RH6BGjHkzeFuM5Jw/3+Nv9JfK9YE+6feT4fXmeevT
+         wOaw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1788767801; x=1789372601;
+        h=content-transfer-encoding:content-type:mime-version:references
+         :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=1zEULqD5p5OmpS7F9A/Wf6D4me7rYx1jl5DbOPGYsCk=;
+        b=H4iy061CUw5gYUSXM53gkB8HbgANj22wHmLXLG7SFnlii5kMi6FVcZEG5eT+DOOi6O
+         WS2mZHpoeNoFW1iGwO/FP7PSvls2ctfAlecJrsjjAmyzHqWeouh0BVEQzW8K25VvuDOu
+         2dCBo78ksnU+YNSi4O+oyETuQyeKVQiaPGzWDmCwERxGgaEotIfNUFQdLOUEMIkp2zFE
+         TpxouRFTO8kN+Bm6TvJB/NMEbqBnuREeuzCK7C/nGaxwtfTvmutWBsItwB9Pkznzugtr
+         8CoofUp/4m8k5NeNavsMfW+V1u1DnOHIFWrWeps4kl7OgNawHDLVuU5bmYbIphP9uPDn
+         IB5g==
+X-Forwarded-Encrypted: i=1; AKwUvBzxT6FBRSrr5Pg/W/QAut8A8bFG1y1lje02uaRd7sap7O4ggqLfvORPh1PgnCgQ1Q8TQIiHH8h/4VsrwjE5@vger.kernel.org
+X-Gm-Message-State: AFuF++l5tQOqfrK+Xn631pqr4zOs1Pydu6nS1Y9X7Sa3preopwBFnRqo
+	RPVZNe5NkjgTMpLZkszdznJTGJgriln7FUaj6bC/3CNpBejgBk+/aGTEmC8jOH8jb4SpY2L/a2c
+	+cnzK26J3l7U9uBKyaaG9GahNxfNDCWsMExZGBw3TxmAgY2O2giv5ApLo4CMtvA8m+qEf
+X-Gm-Gg: AYBFou08+zd1SOQ4fSehohCPKLtMh7WM52bWzcDd1JcOw9XKn2Oc6CJQzMNZmiiJQvl
+	rTJSqHmJW8V1zJwP0JqcsOTAJgLT8Ihepn5L4MbvCDxL31wuJTbKEVrXNrJdQWzWl43QHsgwGrH
+	uAlioQ8M2IZkPc8tmdbQCINoBJZem8TUjdKPjxb4/gQjnkMKr6BrwLxKvYeVlPynnkSOGm97oKr
+	MGjiGtFdJXm9EBgylzecvW/uzBQOnxRxOaE/t511W81sV22XmdYhUpWzwkl2ZR912kRPdsGYx2E
+	MeILW9Sk6fyPVNRhK3uvOPFUh9CVtQiThPKRoqN0KMJcsTWJs52LWP1AWpuOWZNe+CUwv76914e
+	zDVF2m7p1+zTtThncW2G5nL9JFw==
+X-Received: by 2002:a05:620a:454b:b0:939:93a1:1383 with SMTP id af79cd13be357-93993a115d6mr1276042985a.32.1788767801577;
+        Mon, 07 Sep 2026 00:56:41 -0700 (PDT)
+X-Received: by 2002:a05:620a:454b:b0:939:93a1:1383 with SMTP id af79cd13be357-93993a115d6mr1276040385a.32.1788767801095;
+        Mon, 07 Sep 2026 00:56:41 -0700 (PDT)
+Received: from brgl-qcom.home ([2a01:cb1d:dc:7e00:48dd:b57:9236:95f2])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-485885b7bfasm27297590f8f.29.2026.09.07.00.56.39
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 07 Sep 2026 00:56:40 -0700 (PDT)
+From: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+To: Bartosz Golaszewski <brgl@kernel.org>,
+        Shawn Guo <shengchao.guo@oss.qualcomm.com>
+Cc: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Linus Walleij <linusw@kernel.org>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>,
+        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+        linux-arm-msm@vger.kernel.org, linux-gpio@vger.kernel.org,
+        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+        stable@vger.kernel.org
+Subject: Re: [PATCH v2] pinctrl: qcom: nord: Split QUP1 SE2/SE3 into lane-pair functions
+Date: Mon,  7 Sep 2026 09:56:37 +0200
+Message-ID: <178876776172.5819.17556246625173968095.b4-ty@oss.qualcomm.com>
+X-Mailer: git-send-email 2.47.3
+In-Reply-To: <20260830030201.135637-1-shengchao.guo@oss.qualcomm.com>
+References: <20260830030201.135637-1-shengchao.guo@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/3] dt-bindings: sound: qcom,q6apm-dai: add stage-2
- (SCM/VMID) access model
-From: Krzysztof Kozlowski <krzk@kernel.org>
-To: Ajay Kumar Nandam <ajay.nandam@oss.qualcomm.com>,
- Srinivas Kandagatla <srini@kernel.org>, Liam Girdwood <lgirdwood@gmail.com>,
- Mark Brown <broonie@kernel.org>, Rob Herring <robh@kernel.org>,
- Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
- <conor+dt@kernel.org>, Jaroslav Kysela <perex@perex.cz>,
- Takashi Iwai <tiwai@suse.com>
-Cc: linux-sound@vger.kernel.org, linux-arm-msm@vger.kernel.org,
- devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
-References: <20260826-a2a-shikra-vmid-v5-v2-0-c3dc62354eee@oss.qualcomm.com>
- <20260826-a2a-shikra-vmid-v5-v2-1-c3dc62354eee@oss.qualcomm.com>
- <006617c6-e3b0-4a3b-85e5-6b5af8f11879@kernel.org>
- <51413da4-eed6-4251-b2eb-5d2ad8cb36ec@oss.qualcomm.com>
- <c97d0871-0c89-4590-9ad3-4d3859d0522a@kernel.org>
-Content-Language: en-US
-Autocrypt: addr=krzk@kernel.org; keydata=
- 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
-In-Reply-To: <c97d0871-0c89-4590-9ad3-4d3859d0522a@kernel.org>
-Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-
-On 03/09/2026 11:39, Krzysztof Kozlowski wrote:
-> On 02/09/2026 08:07, Ajay Kumar Nandam wrote:
->>
->>
->> On 8/27/2026 11:33 AM, Krzysztof Kozlowski wrote:
->>> On 25/08/2026 20:40, Ajay Kumar Nandam wrote:
->>>> The APM DAIs expose PCM buffers that the backing DSP must be able to
->>>> reach. On existing targets the DSP runs in a stage-1 context and the
->>>> buffers are described to the SMMU via the iommus property.
->>>>
->>>> On platforms such as Qualcomm Shikra, where audio is served by the modem
->>>> DSP (mDSP) rather than the ADSP, the DSP runs in a stage-2 protected
->>>> context and cannot use the SMMU. The buffers are reachable only after
->>>> hypervisor (SCM) memory assignment to the fixed set of consumer Virtual
->>>> Machine IDs (VMIDs) that own that protected context. Describe those
->>>> consumers with a new qcom,vmids property.
->>>>
->>>> The two access models are mutually exclusive: a node carries either
->>>> iommus (stage-1/SMMU) or qcom,vmids (stage-2/SCM), expressed with a
->>>> oneOf constraint. iommus is therefore no longer unconditionally required.
->>>> SCM assignment replaces the buffer's current owners with the supplied
->>>> destination set, so the driver always adds HLOS to that set itself to
->>>> retain host access; HLOS must not be listed in qcom,vmids.
->>>>
->>>> When qcom,vmids is present the PCM buffers must reside in reserved-memory
->>>> carveouts that are SCM-assigned to the consumer VMIDs. Add an optional
->>>> memory-region property listing those carveouts. The first entry is the
->>>> control-path buffer and subsequent entries are data-path buffers.
->>>> memory-region is only meaningful alongside qcom,vmids, enforced via
->>>> dependentRequired.
->>>>
->>>> Signed-off-by: Ajay Kumar Nandam <ajay.nandam@oss.qualcomm.com>
->>>> ---
->>>>   .../devicetree/bindings/sound/qcom,q6apm-dai.yaml  | 72 +++++++++++++++++++++-
->>>>   1 file changed, 70 insertions(+), 2 deletions(-)
->>>>
->>>> diff --git a/Documentation/devicetree/bindings/sound/qcom,q6apm-dai.yaml b/Documentation/devicetree/bindings/sound/qcom,q6apm-dai.yaml
->>>> index 9e5b30d9c6e6..d9a6bc4a14f2 100644
->>>> --- a/Documentation/devicetree/bindings/sound/qcom,q6apm-dai.yaml
->>>> +++ b/Documentation/devicetree/bindings/sound/qcom,q6apm-dai.yaml
->>>> @@ -10,7 +10,15 @@ maintainers:
->>>>     - Srinivas Kandagatla <srinivas.kandagatla@linaro.org>
->>>>   
->>>>   description: |
->>>> -  This binding describes the Qualcomm APM DAIs in DSP
->>>> +  This binding describes the Qualcomm APM DAIs in DSP.
->>>> +
->>>> +  The DSP that runs the APM must be able to reach the PCM buffers. On
->>>> +  existing targets the DSP runs in a stage-1 context and the buffers are
->>>> +  described to the SMMU via iommus. On targets whose APM DSP runs in a
->>>> +  stage-2 protected context that cannot use the SMMU, the buffers are
->>>> +  reachable only after hypervisor (SCM) memory assignment to the fixed
->>>> +  set of consumer VMIDs that own that protected context, described by
->>>> +  qcom,vmids. The two access models are mutually exclusive.
->>>>   
->>>>   properties:
->>>>     compatible:
->>>> @@ -20,9 +28,42 @@ properties:
->>>>       minItems: 1
->>>>       maxItems: 2
->>>
->>> As I said last time, different hardware, different programming
->>> interface, different features, so a different compatible.
->>
->>
->> The APM DAI block is the same packet format.  The driver uses a single 
->> of_device_id entry with no match data; there is no code path dispatched 
->> by the compatible string.
->>
->> The iommu vs VMID distinction is a property of the memory topology,
->> not the DAI hardware, and is already described by the mutually exclusive
->> iommus / qcom,vmids properties.  The DSP identity (ADSP vs mDSP) is
->> carried by the GPR node's qcom,domain property and read at the send
->> layer — the DAI node itself does not need to know which DSP it talks to.
-> 
-> I am still trying to grasp it. You have a device "APM" and it accesses
-> PCM buffers or other memory in some way needing IOMMU for that.
-> 
-> Now you add something which you call EXACTLY the same device, no
-> difference at all, same "APM", but this time this device operates
-> completely different, because it does not use IOMMU, but talks with
-> firmware via SCM.
-> 
-> Well, I really do not see how is this still exactly the same or even
-> compatible device.
-> 
-> The way device accesses its data is part of the programming model and
-> different programming models have different compatibles.
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTA3MDA4NSBTYWx0ZWRfX5actb5jTi++S
+ Jiw5Nn2gQiFanK0mjsD0MOcjc305iBbIoncS2gVZuZ9bQ73aJeNye0tCMe09JWTd1jOqbPX1Vg9
+ A3W4i6GVwELwoppEvaCUGY3mnccHlNykx807DYQlVdSUSyqnBh9FvUTr9sqM3Vx2ciedNxaGmkQ
+ oe5ohiaczmSpTybEcbu5w3ZTqcYr9sHIQi6tZFWLSUZG/wL88ySm/xSQU4cBcVTsR7G+vg4I2Zt
+ ngVjJzCUGvb3ewUQLfSR8hgpaCtL4aSIxuhmPZdyaNn9q/cHFVNaPIA/e5GOenRv2gthTjRBNE9
+ 8VSLeDq9kbxkmM/u0eRx2a3ZQUSHs4CKcWl5NoDf2Qt/m49Ud7jegUP+6esUte8ukMPfL/m/zAP
+ FRuzbvv781LcjDIQoyC7z1gJUbv595+iXEL3RpIT2CJwPoUucEGqRZENa1VWxIkb0iMNvbtGbf8
+ IA9xREYal3PskDOZstw==
+X-Authority-Analysis: v=2.4 cv=P8AKQCAu c=1 sm=1 tr=0 ts=6a9e6e3a cx=c_pps
+ a=qKBjSQ1v91RyAK45QCPf5w==:117 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
+ a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22 a=VwQbUJbxAAAA:8
+ a=EUspDBNiAAAA:8 a=2HO_7AbmPCLmE9qJQqQA:9 a=QEXdDO2ut3YA:10
+ a=NFOGd7dJGGMPyQGDc5-O:22
+X-Proofpoint-GUID: f1Ztq85V4YUK4Vq92v11oqGNxyMvYpo7
+X-Proofpoint-ORIG-GUID: f1Ztq85V4YUK4Vq92v11oqGNxyMvYpo7
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTA3MDA4NSBTYWx0ZWRfXw55YRfhDZ4Cf
+ ypBvWphvVevwLW0ljBq8Ujq8vFv4CkmAqZsQspEDbYZ7aUpmsc8XQa1HoN1dnM0ISXJhjO4xm6s
+ LgFGiUlJeT9uohwlbmEcZzYSDki/VtE=
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-09-07_02,2026-09-03_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ phishscore=0 impostorscore=0 bulkscore=0 clxscore=1015 adultscore=0
+ spamscore=0 lowpriorityscore=0 suspectscore=0 priorityscore=1501
+ malwarescore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2609070085
 
 
-Additionally, as explained to me in off-list channel, the qcom,vmids is
-not a hardware property at all (because hardware is the same), thus does
-not look suitable for DT.
+On Sun, 30 Aug 2026 11:02:01 +0800, Shawn Guo wrote:
+> QUP1 SE2 and SE3 pack all four of their lanes pair-wise onto only two
+> pins each: lanes 0/1 (I2C SDA/SCL) at mux value 2 and lanes 2/3 (UART
+> TX/RX) at mux value 1, on gpio127/gpio128 and gpio129/gpio130
+> respectively.
+> 
+> Both mux values were named "qup1_se2" (respectively "qup1_se3"), so the
+> two distinct lane pairs became indistinguishable. msm_pinmux_set_mux()
+> stops at the first entry matching the requested function, which means
+> mux value 1 was always selected and the I2C lanes could never be muxed
+> out. In practice i2c9 and i2c10 got the UART lanes and did not work,
+> while uart9 and uart10 happened to be muxed correctly.
+> 
+> [...]
+
+There were no objections from DT maintainers and this is needed to fix QUPv3
+on nord so I'm queueing it for v7.3.
+
+[1/1] pinctrl: qcom: nord: Split QUP1 SE2/SE3 into lane-pair functions
+      https://git.kernel.org/brgl/c/fbfd6d0d3596d072f7546b25228e4eb599f68a95
 
 Best regards,
-Krzysztof
+-- 
+Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
