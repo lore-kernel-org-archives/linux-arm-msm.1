@@ -1,216 +1,269 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pl1-f172.google.com (mail-pl1-f172.google.com [209.85.214.172])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0F009372071
-	for <linux-arm-msm@vger.kernel.org>; Mon,  7 Sep 2026 06:46:24 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 02762400963
+	for <linux-arm-msm@vger.kernel.org>; Mon,  7 Sep 2026 06:46:40 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.172
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788763586; cv=none; b=nTqciaiqLuedfyPvbat9SuGEp0LXOXt/T85YPnuRHRhNO9JkM+6EAKvBSVGCfCvdJzeZAfC7TqVMf4RmIDRKePBzso8leUVLr4WwkZwSkhRhoMf2Ki7OVCG4iwzp0NTAuRI/tJLSqzMvMdB+1Rj+PdU6srKZzocjQ/X1QP+KYIg=
+	t=1788763603; cv=none; b=tsL+pFUdHP6B2FumyjD90kKpa8FwI4BDt1hUsrjihEl1mFyqnaV3oUX4OaK1/X2RrPTj9cY2USRQ8ZGOqnFhTy/ARrl4kW8DBaf7Wd2lKufxp4Y7gX/8TXngFANlGtUxDtMZN9kKQBs9kg8su73J4qsIbfk1zK5Kq/3tLXHFz8k=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788763586; c=relaxed/simple;
-	bh=fM7fhcx6hqGG/yvwRQZw/AW5oiBbcnxITrr2S1uzF5s=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=Qhka5jjD3VIo2B9inF6N6HGVFNH5baYIozFYCLKGNs4S9Kjf9jo3zqmZJBzQHdTtIzMHeR0MrEyW/ft1EYqKv2gr+KDeOwkVE2kVpVB3DeC7hqFrGBEoR5YbsFkq8DKMiWubXC0wH25SwH2Ws6+OosTOJZ0MZ2qDHr685tXY4sg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=nNGA1Bi0; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=GEUOXMa9; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1788763603; c=relaxed/simple;
+	bh=a1FgZIJL9r7HJKSoF3sI7X0CpF9ived6+Iq8iJsTZK0=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=Wdx8Xi6JRqHcMKFZGEapRNTJWVOOiMegqiLoA0AMjIy1rNpzB82BvX5lPPlGcTu59uT0pEIVbZW07ymrxcXldEP2u+iKrmE3px4RKzWtplrtmNPPtA2WySYyICXxzOo+9ZI6ubsa+h0GV20378HLoRHAeVqT/yp5yl17OorPBro=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=JJpbRPnn; arc=none smtp.client-ip=209.85.214.172
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="nNGA1Bi0";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="GEUOXMa9"
-Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6873ko824041567
-	for <linux-arm-msm@vger.kernel.org>; Mon, 7 Sep 2026 06:46:24 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	Z1/b/ciKiZaldA0A18HpPcagbdf5bHqmr0JAuiX+snw=; b=nNGA1Bi0LAfAWnrd
-	B1FUg1B7QBvr1h6DQuPVLG4uSWJQJqqu4mAt11fA6uWIzf+w1ddfXoVf3JAXwjbX
-	jcCZ61aUIY5p5/enVlUgtfwvXlzunAhm2CdgsKW+JI/8AKaAoSH0M5WOcl9VjoQa
-	7/x/S9Wp9duN7svVM2e6KsFojdP0/v4Wl1jRNYc3UyczRj1QIbQoyEjdNmMjl3Za
-	dqIM/7x2twDHY4Oe2ZH9gNuyIiF7RTCDOUd5N+okwcx4zZsvfC3KSJli61+G99x/
-	dX1fkDoq5sftDFjCpLht91IYgl6/FT0nxjkxgvmruoic+bLs+52ouWEjeShfvFYS
-	WpuHAA==
-Received: from mail-pj1-f71.google.com (mail-pj1-f71.google.com [209.85.216.71])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gg8sd5vun-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Mon, 07 Sep 2026 06:46:24 +0000 (GMT)
-Received: by mail-pj1-f71.google.com with SMTP id 98e67ed59e1d1-398d7e0f3b4so4022983a91.3
-        for <linux-arm-msm@vger.kernel.org>; Sun, 06 Sep 2026 23:46:24 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="JJpbRPnn"
+Received: by mail-pl1-f172.google.com with SMTP id d9443c01a7336-2d7200b2e15so33031475ad.3
+        for <linux-arm-msm@vger.kernel.org>; Sun, 06 Sep 2026 23:46:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1788763583; x=1789368383; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=Z1/b/ciKiZaldA0A18HpPcagbdf5bHqmr0JAuiX+snw=;
-        b=GEUOXMa91M4Xp5ZNLeVDIOxf9HP88ant+fuLixw2bPdJeMU9SlUBW1PhNil3EQRloh
-         +FwANFI/PPS6Tet75mf/ZlxbUql8EZWGw8jTm7YXWfk9JiFYXwd7mQjSs1ooCvkCPsuG
-         wSGxzyqz5KVDtwPin/STz41HkZBAwntOg2kzZbIknOwMu/dkazcGAK9GtaCwv6mc3lhj
-         +JdceQ5Ju455J7gZjwqJKY4ViEFGkw4Iy2p9SfUN5Uq0C4M6sF+YUkPJVcdKNFCisg9y
-         0K6iHVkMrSGtMiixqVKaabf5vQQGgyQlcHW01/2168mTv1vNpNQZ0OAfg+r7xXa4khm/
-         rQNQ==
+        d=gmail.com; s=20251104; t=1788763600; x=1789368400; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=PloKXYxQeao5LyBqd6CNUwy0u74eRsiezTlXOqTheC8=;
+        b=JJpbRPnnZCJmNtSN1GS7zzUJk0MQTzcMm/u4fvg96A4FWWNHfq9w5bd/8zzoegnmNJ
+         gP+EU122ax6AMhjkcNuolScDSFwtP+jUyTepjR92Y6x7jtSQxxIys12JV/i6jAZ/bpp/
+         zhkYk9/Bg9XvCYQ7IwldspSGqK+V8sYfwyIUUPYnUpT7uXY/r9Zwpguj0wXECenSEk5u
+         cufuNsLgQf18Sn6f/T3i4k+LkwXPaQzuZH9p8nmIaEii5hrk6RwexqUx0WO8mFWF8i9B
+         2oqmjAGc6duyU1ApZexfp22jqakAuJR37/yXbFYUCJxoH/GHeYZyjwue4yupyPHXM2ZH
+         uchw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788763583; x=1789368383;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=1e100.net; s=20251104; t=1788763600; x=1789368400;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=Z1/b/ciKiZaldA0A18HpPcagbdf5bHqmr0JAuiX+snw=;
-        b=oPcaFZGnfabipxwrw3ih+2w/NWPmrbvH6fCBdoGLFmECXurtDQChxmbFieuswJCbkY
-         VlTvjED14S1HNMHjFLJJ0fgdaUT3XTjJ48nfpXhqhvUYmojbDtGO3yZrK9hkNHgQeCs6
-         gMo4SMCFsxvCigNS1+tpgqfuWalYg41wiDXxGUXomK0S9cR6sWRx1vhl3k23MTQWIU/x
-         beHCXIWEH9Lys0EKn1HRIziX5WWn+eijfXJbsoXeIL83WJAm4ZsxfuEUubX/QWLe8uF4
-         5/mcjR18HpZZNgJ1SSYibja9OnTRH9VF9XoLo0G9xuckutJ9At/ptsakkaraziDLDFC7
-         QZxQ==
-X-Gm-Message-State: AFuF++lgmaameu1jOyghAOMQNaA1I4pffDp8B82eFzFWAOHHaXpEP8RL
-	+6BLihEVnFAsJaISTl8du7QpihSksv6RQypXdelacWYAyjfKJCc0bK30nweevpKOFj0kDE37BdB
-	F6mHw3svCjLc2h80R7XOdedkfB+2j3BDeuN39KS4UrXwB21mTArZ65164lfO5iCDmwZQTvMob+F
-	Pg
-X-Gm-Gg: AYBFou3/Sv5Vx41/68YuctRqfz3MsjJDulVzjUEPs40Vuvp422Q6qRg1tYoQW8rK7kc
-	xFnW53IzeD3tc8Pzn7yYrxgdiFgKkAxqMmYn/iqTdPyvUTCllkpKR8Xgw1jUJM7hzCZBQD/1rgO
-	iI9Y8X4CDfwiUMolC0Gu3rW2QLCkSjIpsSK974YyHD6ZP8TS79TGeRTiZSN+cHpF2YleebgrRN2
-	v55D2p5Zvlx2oM1OgVPKMeC1lD4UI3WJsSsSXGvpcJ3Mw+ePE+gJuDSJjyaX3X/bJdexwt3OsB5
-	WQNgem/HbUr3eqDZKFRc2CC6FEPBITY1pyKrLFTJV+YumNnJ/nA4ZpEZ7uCS96oXXIlZpKakFLr
-	gwVNi4P7BNNnq0vLJDcIb0avCyvgAZhZ4tg==
-X-Received: by 2002:a17:90b:4d85:b0:37d:f206:a2ac with SMTP id 98e67ed59e1d1-39b2617abf0mr32619188a91.7.1788763583420;
-        Sun, 06 Sep 2026 23:46:23 -0700 (PDT)
-X-Received: by 2002:a17:90b:4d85:b0:37d:f206:a2ac with SMTP id 98e67ed59e1d1-39b2617abf0mr32619152a91.7.1788763583023;
-        Sun, 06 Sep 2026 23:46:23 -0700 (PDT)
-Received: from [10.217.219.15] ([202.46.22.19])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-14332405e92sm17219997c88.8.2026.09.06.23.46.19
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Sun, 06 Sep 2026 23:46:22 -0700 (PDT)
-Message-ID: <bcf5b148-d4d0-434d-a020-deca2381f5a3@oss.qualcomm.com>
-Date: Mon, 7 Sep 2026 12:16:18 +0530
+        bh=PloKXYxQeao5LyBqd6CNUwy0u74eRsiezTlXOqTheC8=;
+        b=WkNqMjA61Nt+slMUT+IZdy6b7pFZuRpYkJkrtxhtUHVnlUl/Uw0aBuVoATyTY8YyPK
+         kpMfbHVZQw+N/GTM1SlAdHTTO58GbqpUVk1Tc3w5pAr0S4E8wAonM3SAr+TNB9TxPcPQ
+         lRw+wERIfKnR1kO4Vd0473p5k1S3BlzOuqX3brXSVHA0CjiKt6xXsgM7BjGBQVb7V0xI
+         UnqzNpa9V1fwVvat1zLx3bd3njnTXNF2VpeaO+woFxUSMOCFae7YGRBsXFetoSsPzKAD
+         48LPP+YNFSD+mMTwfflLPzBDf1+OdRLGlZwEUV2BeqVo2khMwqdwEOPKGw9BjmclHbdw
+         wksA==
+X-Forwarded-Encrypted: i=1; AKwUvBzTtu+p7gA7XKUWEwn3MxEC+GzVF4Ad87kb1iWPl6J/cWC33IW6x5fVk0HtEkdifVAjf6Ef+tL+g/7aDPzH@vger.kernel.org
+X-Gm-Message-State: AFuF++ljlYMaOzY/GYIepolhAgqwzSjDhhmU2wIlgk2MkjibKLzk8XBb
+	DYfqWZX/S7L8MshiuHIs+JdGy2Y3Qzv1vR5wMmfuj/d9nhnklAgEGfJY
+X-Gm-Gg: AYBFou12pgHED+/mWMtSdhBZW2kGoDYmTm9spGrMgn9KgXgnZTTd9yLkOU6kdz2hBxB
+	ozdvv68rC4t4KsCEQwx16m9wVDChoLIzA8wUET+TacDoXPiYY887qzzoxjEb53eOjfSjHbwGPMC
+	Ys5NoY/cySB3aFCyb4c5PLqoPWAEp5Qfdd1xHbuId0biHu0cKdZcEVTDnGfBS0rpEzxR6fLAwbh
+	iZ0e8ptY6cK0WFnbDEEYC3StXa+XPKKc11qjXsZ/Q1ZKeCmLIAudoGHRgqpwQRKzAoq+OA7nz0w
+	wJFjzY33PoTdg0UT2xUD4M9en1V/7326xbsGpzz51eLO6KPblPsfDFRWKc2ccMAFPNQ7wHa050B
+	FFYxHkQYVvIzUwXIO2gWH/msq0cYGp7dbiHIg6FMb6Gl/8mNC9njIfx7zjikxhuD7Qt1xyzPe41
+	hYBOgFDijNcXtqog0EJW9Ew++oGK/Z6fEGkDXn6z8yMKT83MjyOtHy5q74DVeCGcO6t2VmkVzmh
+	qkT10bVSOrzdw==
+X-Received: by 2002:a17:90b:57cd:b0:398:c150:e7b3 with SMTP id 98e67ed59e1d1-39b2609f356mr34710524a91.4.1788763600149;
+        Sun, 06 Sep 2026 23:46:40 -0700 (PDT)
+Received: from volcano9f6e-hostos.amd.com ([165.204.217.251])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3339b314cfcsm25401130eec.19.2026.09.06.23.46.34
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 06 Sep 2026 23:46:39 -0700 (PDT)
+From: Hemanth Selam <hemanth.selam@gmail.com>
+To: Maxim Levitsky <maximlevitsky@gmail.com>,
+	Alex Dubov <oakad@yahoo.com>,
+	Ulf Hansson <ulfh@kernel.org>,
+	Florian Fainelli <florian.fainelli@broadcom.com>,
+	Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>,
+	Ray Jui <rjui@broadcom.com>,
+	Scott Branden <sbranden@broadcom.com>,
+	Jaehoon Chung <jh80.chung@samsung.com>,
+	Shawn Lin <shawn.lin@rock-chips.com>,
+	Nicolas Pitre <nico@fluxnic.net>,
+	Adrian Hunter <adrian.hunter@intel.com>,
+	Vignesh Raghavendra <vigneshr@ti.com>
+Cc: linux-mmc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	linux-rpi-kernel@lists.infradead.org,
+	linux-arm-kernel@lists.infradead.org,
+	linux-arm-msm@vger.kernel.org
+Subject: [PATCH] mmc: fix typos in comments
+Date: Mon,  7 Sep 2026 12:16:32 +0530
+Message-ID: <20260907064632.8926-1-hemanth.selam@gmail.com>
+X-Mailer: git-send-email 2.48.1
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 3/3] i2c: qcom-geni: Add bus recovery support for GPI
- DMA mode
-To: Jyothi Kumar Seerapu <jyothi.seerapu@oss.qualcomm.com>,
-        Aniket Randive <aniket.randive@oss.qualcomm.com>,
-        Vinod Koul <vkoul@kernel.org>, Frank Li <Frank.Li@kernel.org>,
-        Viken Dadhaniya <viken.dadhaniya@oss.qualcomm.com>,
-        Andi Shyti <andi.shyti@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, dmaengine@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-i2c@vger.kernel.org
-References: <20260826-i2c_bus_recovery-v1-0-203f0ec76f84@oss.qualcomm.com>
- <20260826-i2c_bus_recovery-v1-3-203f0ec76f84@oss.qualcomm.com>
- <7cc05c51-811f-4949-9fe6-10580ff90eea@oss.qualcomm.com>
-Content-Language: en-US
-From: Mukesh Savaliya <mukesh.savaliya@oss.qualcomm.com>
-In-Reply-To: <7cc05c51-811f-4949-9fe6-10580ff90eea@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-GUID: FYvHMtlyk6-72BYZnUT1yyMASgkcdOUO
-X-Proofpoint-ORIG-GUID: FYvHMtlyk6-72BYZnUT1yyMASgkcdOUO
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTA3MDA3MCBTYWx0ZWRfX5AcU6tOYqFOq
- ntblxR9Xg5sW9OuWs5rbPO0/924ahwcIaZx/LfYOBmRlEo3A7QrMZpenEAzdojTazamD1oObIZJ
- qPLY/N9Et5z16Yhz4PBx39nxN/ybcTQ=
-X-Authority-Analysis: v=2.4 cv=dfmwG3Xe c=1 sm=1 tr=0 ts=6a9e5dc0 cx=c_pps
- a=UNFcQwm+pnOIJct1K4W+Mw==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
- a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22
- a=8PfKY5Vedw5zlJPuvQQA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
- a=uKXjsCUrEbL0IQVhDsJ9:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTA3MDA3MCBTYWx0ZWRfX1PAzxcoHBq9E
- F2hsSuD3PYUFWuu/DRW3z7LaZN6AVef5XFWN8LEKoVhmVaG1TShuoVPhrEdLTpMsTsx4MoWEDpX
- UE3OutQPysAWp/DGers/0aOu+npbnNcBZqjteSnYnoyoIQH7VxmRCXHcx+/98ccVSw2jaQRTFH5
- 6f1QC8m0YiYQYubd6AA0am7D43z0998KJjXUY7FWhDz8kzw2EYGshN+dl6M7QzWkt5bfJBz9V7Y
- 3bO1l0zV+kTADM2m8c4q4Z0JIjZ0lPXhP/xxMDTp+hDLqQOZvwuCM4TvBzZmhLd4owOB5CTPX4T
- suOau9xxf7wjxnoagBmM0MXBleaIAqK8XpCLDSry4Pue4SVZTzwjkjvmh4uW4odKx8WI4PZYQC9
- T7BTXi+lRXM8VAYAQdST5prB5gsR/kd0Mt39YKGlGx/kQibE1Kl4Lnm2IWNE/kJUF7dh5qI/TQq
- X9qVQrJ7O3RDtMe42ZA==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-07_01,2026-09-03_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 adultscore=0 priorityscore=1501 spamscore=0 malwarescore=0
- lowpriorityscore=0 bulkscore=0 phishscore=0 suspectscore=0 clxscore=1015
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2609070070
 
+Fix typos in comments, reported by scripts/checkpatch.pl using the
+misspelling list in scripts/spelling.txt.  Only touches comments, no code
+changes.
 
+Assisted-by: Cursor:claude-opus-5
+Signed-off-by: Hemanth Selam <hemanth.selam@gmail.com>
+---
+ drivers/memstick/core/ms_block.c  | 2 +-
+ drivers/memstick/host/r592.c      | 2 +-
+ drivers/mmc/core/block.c          | 2 +-
+ drivers/mmc/core/core.c           | 2 +-
+ drivers/mmc/core/mmc.c            | 2 +-
+ drivers/mmc/host/bcm2835.c        | 2 +-
+ drivers/mmc/host/dw_mmc.h         | 2 +-
+ drivers/mmc/host/mvsdio.c         | 2 +-
+ drivers/mmc/host/sdhci-msm.c      | 2 +-
+ drivers/mmc/host/sdhci-of-esdhc.c | 2 +-
+ drivers/mmc/host/sdhci-omap.c     | 2 +-
+ drivers/mmc/host/sdhci.h          | 2 +-
+ 12 files changed, 12 insertions(+), 12 deletions(-)
 
-On 9/3/2026 9:44 PM, Jyothi Kumar Seerapu wrote:
-[...]
-
->> +static int geni_i2c_gpi_bus_cmd(struct geni_i2c_dev *gi2c, enum 
->> i2c_op cmd)
->> +{
->> +    const struct geni_i2c_clk_fld *itr = gi2c->clk_fld;
->> +    struct dma_async_tx_descriptor *desc;
->> +    struct gpi_i2c_config peripheral = {};
->> +    struct dma_slave_config config = {};
->> +    unsigned long time_left;
->> +    unsigned long flags;
->> +    dma_cookie_t cookie;
->> +
->> +    config.peripheral_config = &peripheral;
->> +    config.peripheral_size = sizeof(peripheral);
->> +
->> +    peripheral.set_config  = 1;
->> +    peripheral.pack_enable = I2C_PACK_TX | I2C_PACK_RX;
->> +    peripheral.cycle_count = itr->t_cycle_cnt;
->> +    peripheral.high_count  = itr->t_high_cnt;
->> +    peripheral.low_count   = itr->t_low_cnt;
->> +    peripheral.clk_div     = itr->clk_div;
->> +    peripheral.op          = cmd;
->> +
->> +    if (dmaengine_slave_config(gi2c->tx_c, &config)) {
-should capture the return value and print, as it returns specific error 
-code.>> +        dev_err(gi2c->se.dev, "dma config error for bus cmd 
-%u\n", cmd);
->> +        return -EIO;
->> +    }
->> +
-
-[...]
-
->> @@ -1066,14 +1136,18 @@ static int geni_i2c_xfer(struct i2c_adapter 
->> *adap,
->>       else
->>           ret = geni_i2c_fifo_xfer(gi2c, msgs, num);
->> -    if (!gi2c->gpi_mode &&
->> -        (ret == -EPROTO || ret == -ETIMEDOUT || ret == -EAGAIN)) {
->> +    if (ret == -EPROTO || ret == -ETIMEDOUT || ret == -EAGAIN ||
->> +        (gi2c->gpi_mode && ret == -EIO)) {
->>           /*
->>            * Only attempt recovery if SDA is stuck low. -EPROTO and
->>            * -ETIMEDOUT indicate bus errors where the target may be
->>            * holding SDA low. ARB_LOST (-EAGAIN) on a single-controller
->>            * bus indicates a stuck target, not a real arbitration loss.
->> -         * GPI DMA mode extends this trigger separately.
->> +         * In GPI DMA mode the completion callback reports NACK,
->> +         * BUS_PROTO and ARB_LOST alike as -EIO, so the SE_GENI_IOS
->> +         * RX_DATA_IN check below is what distinguishes a genuinely
->> +         * stuck bus from a benign NACK: a NACK leaves SDA released
->> +         * (high) after the STOP, so recovery is skipped.
-after the STOP, indicating i2c bus is in idle state, so.....>>            */
->>           if (!(readl_relaxed(gi2c->se.base + SE_GENI_IOS) & 
->> RX_DATA_IN)) {
->>               int recovery_ret = i2c_recover_bus(adap);
-> This does not appear to handle scenarios such as an I2C multi-message 
-> transfer where the stretch bit is set during the first message, but an 
-> error occurs while preparing the second message (for example, during 
-> memory allocation or DMA descriptor preparation). In such cases, the SCL 
-> line may remain asserted low and impact subsequent transfers.
->   > @@ -1292,10 +1366,8 @@ static int geni_i2c_probe(struct 
-> platform_device *pdev)
->>       if (ret < 0)
->>           return ret;
->> -    if (!gi2c->gpi_mode) {
->> -        gi2c->rinfo.recover_bus = geni_i2c_recover_bus;
->> -        gi2c->adap.bus_recovery_info = &gi2c->rinfo;
->> -    }
->> +    gi2c->rinfo.recover_bus = geni_i2c_recover_bus;
->> +    gi2c->adap.bus_recovery_info = &gi2c->rinfo;
->>       ret = i2c_add_adapter(&gi2c->adap);
->>       if (ret)
->>
-> 
+diff --git a/drivers/memstick/core/ms_block.c b/drivers/memstick/core/ms_block.c
+index ce33907bfc24..e2bf563ccbe1 100644
+--- a/drivers/memstick/core/ms_block.c
++++ b/drivers/memstick/core/ms_block.c
+@@ -720,7 +720,7 @@ static int h_msb_parallel_switch(struct memstick_dev *card,
+ 
+ static int msb_switch_to_parallel(struct msb_data *msb);
+ 
+-/* Reset the card, to guard against hw errors beeing treated as bad blocks */
++/* Reset the card, to guard against hw errors being treated as bad blocks */
+ static int msb_reset(struct msb_data *msb, bool full)
+ {
+ 
+diff --git a/drivers/memstick/host/r592.c b/drivers/memstick/host/r592.c
+index 605b2265536f..dc3de63901be 100644
+--- a/drivers/memstick/host/r592.c
++++ b/drivers/memstick/host/r592.c
+@@ -289,7 +289,7 @@ static int r592_transfer_fifo_dma(struct r592_device *dev)
+ 	dev->dma_error = 0;
+ 	reinit_completion(&dev->dma_done);
+ 
+-	/* TODO: hidden assumption about nenth beeing always 1 */
++	/* TODO: hidden assumption about nenth being always 1 */
+ 	sg_count = dma_map_sg(&dev->pci_dev->dev, &dev->req->sg, 1, is_write ?
+ 			      DMA_TO_DEVICE : DMA_FROM_DEVICE);
+ 
+diff --git a/drivers/mmc/core/block.c b/drivers/mmc/core/block.c
+index e760d13ee325..a02bb2fee874 100644
+--- a/drivers/mmc/core/block.c
++++ b/drivers/mmc/core/block.c
+@@ -86,7 +86,7 @@ MODULE_ALIAS("mmc:block");
+ static DEFINE_MUTEX(block_mutex);
+ 
+ /*
+- * The defaults come from config options but can be overriden by module
++ * The defaults come from config options but can be overridden by module
+  * or bootarg options.
+  */
+ static int perdev_minors = CONFIG_MMC_BLOCK_MINORS;
+diff --git a/drivers/mmc/core/core.c b/drivers/mmc/core/core.c
+index 29e80e5f928e..08d41f0996de 100644
+--- a/drivers/mmc/core/core.c
++++ b/drivers/mmc/core/core.c
+@@ -2004,7 +2004,7 @@ unsigned int mmc_calc_max_discard(struct mmc_card *card)
+ 
+ 	/*
+ 	 * Without erase_group_def set, MMC erase timeout depends on clock
+-	 * frequence which can change.  In that case, the best choice is
++	 * frequency which can change.  In that case, the best choice is
+ 	 * just the preferred erase size.
+ 	 */
+ 	if (mmc_card_mmc(card) && !(card->ext_csd.erase_group_def & 1))
+diff --git a/drivers/mmc/core/mmc.c b/drivers/mmc/core/mmc.c
+index 05444ecf3909..a02b04938e1a 100644
+--- a/drivers/mmc/core/mmc.c
++++ b/drivers/mmc/core/mmc.c
+@@ -1015,7 +1015,7 @@ static void mmc_set_bus_speed(struct mmc_card *card)
+ }
+ 
+ /*
+- * Select the bus width amoung 4-bit and 8-bit(SDR).
++ * Select the bus width among 4-bit and 8-bit(SDR).
+  * If the bus width is changed successfully, return the selected width value.
+  * Zero is returned instead of error value if the wide width is not supported.
+  */
+diff --git a/drivers/mmc/host/bcm2835.c b/drivers/mmc/host/bcm2835.c
+index c949a3eaae79..efd1903c3ccd 100644
+--- a/drivers/mmc/host/bcm2835.c
++++ b/drivers/mmc/host/bcm2835.c
+@@ -1095,7 +1095,7 @@ static void bcm2835_set_clock(struct bcm2835_host *host, unsigned int clock)
+ 	int div;
+ 
+ 	/* The SDCDIV register has 11 bits, and holds (div - 2).  But
+-	 * in data mode the max is 50MHz wihout a minimum, and only
++	 * in data mode the max is 50MHz without a minimum, and only
+ 	 * the bottom 3 bits are used. Since the switch over is
+ 	 * automatic (unless we have marked the card as slow...),
+ 	 * chosen values have to make sense in both modes.  Ident mode
+diff --git a/drivers/mmc/host/dw_mmc.h b/drivers/mmc/host/dw_mmc.h
+index 38610c89d54a..d500a419e2cf 100644
+--- a/drivers/mmc/host/dw_mmc.h
++++ b/drivers/mmc/host/dw_mmc.h
+@@ -69,7 +69,7 @@ struct dw_mci_dma_slave {
+  * @cmd: The command currently being sent to the card, or NULL.
+  * @data: The data currently being transferred, or NULL if no data
+  *	transfer is in progress.
+- * @stop_abort: The command currently prepared for stoping transfer.
++ * @stop_abort: The command currently prepared for stopping transfer.
+  * @prev_blksz: The former transfer blksz record.
+  * @timing: Record of current ios timing.
+  * @use_dma: Which DMA channel is in use for the current transfer, zero
+diff --git a/drivers/mmc/host/mvsdio.c b/drivers/mmc/host/mvsdio.c
+index cf705b265e21..7d86426c6001 100644
+--- a/drivers/mmc/host/mvsdio.c
++++ b/drivers/mmc/host/mvsdio.c
+@@ -717,7 +717,7 @@ static int mvsd_probe(struct platform_device *pdev)
+ 	/*
+ 	 * Some non-DT platforms do not pass a clock, and the clock
+ 	 * frequency is passed through platform_data. On DT platforms,
+-	 * a clock must always be passed, even if there is no gatable
++	 * a clock must always be passed, even if there is no gateable
+ 	 * clock associated to the SDIO interface (it can simply be a
+ 	 * fixed rate clock).
+ 	 */
+diff --git a/drivers/mmc/host/sdhci-msm.c b/drivers/mmc/host/sdhci-msm.c
+index 4aff965f0e2e..b229545d9db5 100644
+--- a/drivers/mmc/host/sdhci-msm.c
++++ b/drivers/mmc/host/sdhci-msm.c
+@@ -1770,7 +1770,7 @@ static void sdhci_msm_handle_pwr_irq(struct sdhci_host *host, int irq)
+ 
+ 	/*
+ 	 * The driver has to acknowledge the interrupt, switch voltages and
+-	 * report back if it succeded or not to this register. The voltage
++	 * report back if it succeeded or not to this register. The voltage
+ 	 * switches are handled by the sdhci core, so just report success.
+ 	 */
+ 	msm_host_writel(msm_host, irq_ack, host,
+diff --git a/drivers/mmc/host/sdhci-of-esdhc.c b/drivers/mmc/host/sdhci-of-esdhc.c
+index 8345e2c5a034..1ca3562d8f73 100644
+--- a/drivers/mmc/host/sdhci-of-esdhc.c
++++ b/drivers/mmc/host/sdhci-of-esdhc.c
+@@ -1381,7 +1381,7 @@ static void esdhc_init(struct platform_device *pdev, struct sdhci_host *host)
+ 	if (!IS_ERR(clk)) {
+ 		/*
+ 		 * esdhc->peripheral_clock would be assigned with a value
+-		 * which is eSDHC base clock when use periperal clock.
++		 * which is eSDHC base clock when use peripheral clock.
+ 		 * For some platforms, the clock value got by common clk
+ 		 * API is peripheral clock while the eSDHC base clock is
+ 		 * 1/2 peripheral clock.
+diff --git a/drivers/mmc/host/sdhci-omap.c b/drivers/mmc/host/sdhci-omap.c
+index b5d7c1a80a92..7a198fb26628 100644
+--- a/drivers/mmc/host/sdhci-omap.c
++++ b/drivers/mmc/host/sdhci-omap.c
+@@ -332,7 +332,7 @@ static int sdhci_omap_execute_tuning(struct mmc_host *mmc, u32 opcode)
+ 	u32 reg;
+ 	int i;
+ 
+-	/* clock tuning is not needed for upto 52MHz */
++	/* clock tuning is not needed for up to 52MHz */
+ 	if (ios->clock <= 52000000)
+ 		return 0;
+ 
+diff --git a/drivers/mmc/host/sdhci.h b/drivers/mmc/host/sdhci.h
+index f0fd81409a86..98c1fe20bfcd 100644
+--- a/drivers/mmc/host/sdhci.h
++++ b/drivers/mmc/host/sdhci.h
+@@ -409,7 +409,7 @@ struct sdhci_adma2_64_desc {
+ #define SDHCI_MAX_MRQS		2
+ 
+ /*
+- * 48bit command and 136 bit response in 100KHz clock could take upto 2.48ms.
++ * 48bit command and 136 bit response in 100KHz clock could take up to 2.48ms.
+  * However since the start time of the command, the time between
+  * command and response, and the time between response and start of data is
+  * not known, set the command transfer time to 10ms.
+-- 
+2.48.1
 
