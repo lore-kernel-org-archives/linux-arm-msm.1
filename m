@@ -1,291 +1,153 @@
-Received: from mail-wm1-f46.google.com (mail-wm1-f46.google.com [209.85.128.46])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4DB85364934
-	for <linux-arm-msm@vger.kernel.org>; Mon,  7 Sep 2026 15:46:52 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.46
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 207543EAC80;
+	Mon,  7 Sep 2026 15:58:13 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788796014; cv=none; b=UVkLLFX9xSyN8U1HSbS/Cc7TbQ96YHpfBanDhg5nS9rHTD5Pa/FATkeRi/IuJ+OHTxw1j7bGMIWMCfq4CYFWrn8pGAJ/dzSS+keyVK/9Mvi8dcLM5zzDrkAIAoIEwqwqU+09UPyK41fUJyolrIFi0+TOZvmg1GsgvZ8aCmGUIy4=
+	t=1788796694; cv=none; b=VQg5F7UxrgsymoI9vYPkYm1RmVL2rEi4xyN1bl5MIicJpruT0+Fv7ku+btj5PZdHzNVp1THSaivOsf3qUNYc9A81L8oUZ4mx/ZY2zcTYK3PYFtTsm9aoqPFgq6w32ffl3ZiQwOKNsZkiYWMeNQtfFDnSqF9QbLadauM12YC7JHE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788796014; c=relaxed/simple;
-	bh=+p2wxhGX5nM0ZplC1iTxNQsIkNWZxeDpFxjC2VLhC2U=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=JchaCFw96gLLpxJ/T+gVmfVUB6hDqhWmBzolV7JpuDptw2JrB+znj3oG3U7DYPkllrL3jefTWcv4K8m3eyUpVbgC9YceoBGufL0uMQABTmmaoEBsmxg8HVZOm6fnzeEHlKJbNYAFvrKNUMH4tQ/H1xRzxGNApxgeEU6tQvQkUFE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=pNnDW100; arc=none smtp.client-ip=209.85.128.46
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
+	s=arc-20240116; t=1788796694; c=relaxed/simple;
+	bh=izYpDFcedIv5VF1QLbBfUUUj17Afor//XCv5m/lJmRA=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=Zi0ppueLu1mvkVxyYGq3d5lMBJid+m20eS16xNH0WliIy5C1ShGGA+SIJjlUyrRl1mmhyfL3vAAWn4OsV6qS65bgWFaJ1aibiwAvWaTbC4RRwqZDwhrmzIcMpcaaZDerk2+tho9oKHFI/uw2gAYr49mpDcHmO8NqdixWeBU/mU8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=hzf1tx/S; arc=none smtp.client-ip=10.30.226.201
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="pNnDW100"
-Received: by mail-wm1-f46.google.com with SMTP id 5b1f17b1804b1-4957eefd361so29161525e9.1
-        for <linux-arm-msm@vger.kernel.org>; Mon, 07 Sep 2026 08:46:52 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1788796010; x=1789400810; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:organization
-         :autocrypt:content-language:from:references:cc:to:subject:reply-to
-         :user-agent:mime-version:date:message-id:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=9NIT1FwG6Cf62/avBGQMVMZG3cECtHFx23mol9pUcno=;
-        b=pNnDW100kEg1If1sHAERsxI4dZsAnTFQVtYxnT7QAQLLXwsPTlubgyPyI3lmvj2Dey
-         zysKoC/of3N1f/rrWiRGpGrNqcJlVMl0wAfisAtY6o9PASiUpfz+FahOYiNUpvlGhkEG
-         bbWVrJJLKaRuF85KBqCx1qV0yqGoQcCd0vBiauHy5R4wk9W66h1IhWOC+metXBeEu+zC
-         QOfhXS5v3g2kgU2KzO79Hb4x1KeHrd9k372qp28GuVMuhKxEYbHU8M1/YglkrrkMFXbl
-         T7y9bNG480lzcTM251C4UVkZABmIh673xrJq9dodI4jYUTi17eJU+zfpUiQM1z50Xx0R
-         IEAA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788796010; x=1789400810;
-        h=content-transfer-encoding:content-type:in-reply-to:organization
-         :autocrypt:content-language:from:references:cc:to:subject:reply-to
-         :user-agent:mime-version:date:message-id:x-gm-gg:x-gm-message-state
-         :from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=9NIT1FwG6Cf62/avBGQMVMZG3cECtHFx23mol9pUcno=;
-        b=pNzOhgsNLDAaUZu6BW48Br+i9GcocqHYIxlijj+5nUti1KHArD/yC1bUj9NyEZ5Vnj
-         +gGzI6A8kbei7tJBlASWyHYxTwSyezBmcOa9rnivESXY6DvxaudQ8EH3rWdF2u8fSn7I
-         XKRcpQ+1U69VzzuKdKjNb9s2PdbpnijuRwAIelot1Kc93Aa/vKbS99du62IQPGYa6kIG
-         TRhxmEKn5ZgvGzAYjpiy3cddvccWPeA73szpmcl0GD+cupVD5TX5sOZnGhFL1rYHIazO
-         +0boDTeb5i7o6FG5MKZG75XEWxQkRKfjRfH7vgqHDozTm01JfldIz+TiNygsh/+3gcXR
-         YVHQ==
-X-Forwarded-Encrypted: i=1; AKwUvBzQ+5U7W9BYcOVI0mipz/69xeKC5QazX+g7q38o/fwQunIITzqmPeCqSByrlkr20KiyYoSRCpX8crIWo1Oo@vger.kernel.org
-X-Gm-Message-State: AFuF++lQalCLJN4CJApmR4+y0VHUe5mwk2xxq+tXGE53j60a7nDfEwfO
-	KbEkiXgKb5DJC97NWIZvoGGQ/kfELkn2RlNGa3r3SfIxkbBI4WOT4XBbE41nnfik2nA=
-X-Gm-Gg: AYBFou2y18HlVAoneFgp/sqj8o898BPf8sEBYH6adyNBJ6N5ZO9ydwA+xf2imFWkU2Y
-	dTfvbdZlbJ0vJVdjpAlleg04FQLwI5N4YEbssZVHwZZZDNZ9fIHLCY80ao3X63mLlQiX/i7bMAm
-	U4UP2yU0it2GRoHRMNV2ojeuD+R6hAx+wfcPbzuG20EfDwrU6IGhbsWsXHda+oPX7GQShzPrVEa
-	Ly5qQJuc1fsqmnQ8r+sbijw1EbxWT0sl/BfTWzVVo4ruGz5bPCksyQ7Ue3PP2qFzkknKxFnGXe0
-	dZbHHnp/c3EM7L8H1cwQjZR1k2BpfxTzSo2tSV/TrjU4hyEd6JSmCL7uYFYhVcCGperd+YJbDfU
-	AbzdfPu+g8cgq0/FR0pzsYn9JVQWKrs0gw8LRogBepc/IxPYFRQrBO9nJGk4/MFecmuPJKJ+ylv
-	M8cFm7mCqGFX3yFLbYutn2oNyaxqxzcLrxhhkQqJ5f9zt9tydhWA443s9jXKUChdTjaiaafIhyu
-	qI3jCF3sSNQGPPbkIE0VRnjDERVV8O6/Wnx9tzFIfI=
-X-Received: by 2002:a05:600c:46d1:b0:493:bd2a:93be with SMTP id 5b1f17b1804b1-49cf820c992mr246008895e9.6.1788796010330;
-        Mon, 07 Sep 2026 08:46:50 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:106d:1080:74d7:9035:e283:b480? ([2a01:e0a:106d:1080:74d7:9035:e283:b480])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-49cf772692dsm379629685e9.10.2026.09.07.08.46.49
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 07 Sep 2026 08:46:49 -0700 (PDT)
-Message-ID: <e04b2fc0-710c-4cd3-8f38-e528d57b4487@linaro.org>
-Date: Mon, 7 Sep 2026 17:46:49 +0200
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="hzf1tx/S"
+Received: by smtp.kernel.org (Postfix) with ESMTPS id A3216C2BCC7;
+	Mon,  7 Sep 2026 15:58:13 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1788796693;
+	bh=izYpDFcedIv5VF1QLbBfUUUj17Afor//XCv5m/lJmRA=;
+	h=From:Subject:Date:To:Cc:Reply-To:From;
+	b=hzf1tx/SZ4hTn1ZmqYC8s+K4qM6Y2wD7FvU3+vyE+rBHRPIcQVNy0rfpc3L5ahI1s
+	 TH9uelBkwD4MYNlHyrU3mEeZo4OJJz3Ac7gDkJmSNpShiE29UWCtjng+Ra6g123g6G
+	 xHJoDktf0BB5TqWHSS73pb3cOWcVws+ZZQ38wuTJg8GKBTPVlj270p3bfbSZhXeB8D
+	 iMEumGQRM6Qc85g5f9A2RZ5agrFEHT5Cj+Cf7uTaH1ep1JtiBhBNUOQi4WmgSURVGL
+	 z0kiuu7/4hFbadwlw8QblhQWDPhWL5OSGAw1BjOnUnRh1jB7i7bYSW6Nu4X5t1v2DC
+	 6dh5v8PCvvOXA==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7C179C79F99;
+	Mon,  7 Sep 2026 15:58:13 +0000 (UTC)
+From: David Heidelberg via B4 Relay <devnull+david.ixit.cz@kernel.org>
+Subject: [PATCH v9 0/2] Add initial dual front camera and rear flash
+ support for Pixel 3 / 3 XL
+Date: Mon, 07 Sep 2026 17:58:08 +0200
+Message-Id: <20260907-pixel3-camera-v9-0-b1981f2d3291@ixit.cz>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH] PCI: qcom: Honor IOMMU provider's #iommu-cells in
- qcom_pcie_config_sid_1_9_0()
-To: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>,
- mani@kernel.org, lpieralisi@kernel.org, kwilczynski@kernel.org,
- robh@kernel.org, bhelgaas@google.com
-Cc: linux-pci@vger.kernel.org, linux-arm-msm@vger.kernel.org,
- linux-kernel@vger.kernel.org, Loic Poulain <loic.poulain@oss.qualcomm.com>
-References: <20260907143349.317495-1-mani@kernel.org>
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Content-Language: en-US, fr
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro
-In-Reply-To: <20260907143349.317495-1-mani@kernel.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/33SzU7DMAwH8FeZcqYozlftnXgPxCFJXRYJttGWa
+ jD13Uk3pHaZtKOj/P6xHJ9Fz13iXmw3Z9HxmPp02OeCnjYi7vz+navU5FooqZzUYKtjOvGHrqL
+ /5M5XnggptBaJWWRz7LjNF+a817dc71I/HLqfS/wI8+k1yQAUSSNUslK1rZ10FmxwL+mUhuf4K
+ +acUT20KlsDAZF8CGDirdVrq0qrs2XlgiTpHYC8tWaxNVBpzfwuRh9AaYdW3Vr70NpsiSzpFkK
+ DXPTsVlbJ0rpsfcsGKHBr6mJW9drezarOFlWjlY4u2qboGRdL8s7ipecWLCFqbXCx0/XzO/76z
+ js0/G/ANP0BYhA+QmECAAA=
+X-Change-ID: 20260315-pixel3-camera-a9989bf589ee
+To: Bjorn Andersson <andersson@kernel.org>, 
+ Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>, 
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>
+Cc: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, 
+ Petr Hodina <petr.hodina@protonmail.com>, 
+ Richard Acayan <mailingradian@gmail.com>, linux-arm-msm@vger.kernel.org, 
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
+ phone-devel@vger.kernel.org, David Heidelberg <david@ixit.cz>
+X-Mailer: b4 0.16.0
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2870; i=david@ixit.cz;
+ h=from:subject:message-id;
+ bh=izYpDFcedIv5VF1QLbBfUUUj17Afor//XCv5m/lJmRA=;
+ b=owEBbQKS/ZANAwAIAWACP8TTSSByAcsmYgBqnt8TRklC8ZXMii3+CfbWksF6uiZYCnV9mpcvT
+ nQbqrdTYWiJAjMEAAEIAB0WIQTXegnP7twrvVOnBHRgAj/E00kgcgUCap7fEwAKCRBgAj/E00kg
+ cscjEACAO54PjNxZG/RO9TuBsV895kdUM1WkYyB5ahVDpWrg26MYkQs/argrYIibSQUI8gmUel8
+ LbS+kjX7nAdIdMTYLukoxsMjpAtO9nptZAO+EaMHFa48Rn0rjzpxK05QBtXmlP8PuL6tgm8ccl7
+ Lz2b3GDO5uIGsE+vud8HAVuFbgRDLb7MB21IqbCaQrG/wzhy0Jz1nLVvr2J/Zt7dnzNfBZyf9+D
+ z/OBxk0fHUbH8/xervUFFDR/qa14nc/ABcbskvLL1jI0hAneWh1Kn211rdrPVTl+jYkIY+kqUQw
+ /aWxLvEJ+ClPEF+jUkr9fwUclJnx8/931eKHz9wEsF3sacgugnUUeItU1pQt8uSKEl/2nPZjA+W
+ 3uCLMPAsWiuxh6IcGG8GzIkhdnFBDtQI2fDSIZqK/hqFGuJ8q04hALheiPfIggJEZjvxuwogmCX
+ qYTUq7TyAelFmGsCWsyyeK2/7ZBq80PseobYpRcZdx8bi1jTnQjPBhfeUjGNfp79DevCUagEM2W
+ LTlOMZ2rzXq+Q/mpbWksIhRASg7CZvcS2/bRd8Ne83Vxu432o2FbyXT29suCI+zmJ0ULfrc0QB4
+ xgI5i2N0QbNSXeoyaNBJCSnK3Jt/eUz2buXp8up1GQpwFQESMP9NfMLcRjLLHTqFexNsic6Kgpu
+ Q9joSWQcEjsc8ww==
+X-Developer-Key: i=david@ixit.cz; a=openpgp;
+ fpr=D77A09CFEEDC2BBD53A7047460023FC4D3492072
+X-Endpoint-Received: by B4 Relay for david@ixit.cz/default with auth_id=355
+X-Original-From: David Heidelberg <david@ixit.cz>
+Reply-To: david@ixit.cz
 
-On 9/7/26 16:33, Manivannan Sadhasivam wrote:
-> From: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
-> 
-> qcom_pcie_config_sid_1_9_0() reads the "iommu-map" property as an array
-> of fixed four-word {rid-base, phandle, sid, rid-len} entries to program
-> the BDF to SID translation table. But that layout only holds for an
-> IOMMU with '#iommu-cells = <1>'. The PCIe SMMUs on these SoCs use
-> '#iommu-cells = <2>' (SID and mask), so per the pci-iommu binding each
-> entry is really five cells long.
-> 
-> This used to work only because the DTs were themselves broken. They
-> described iommu-map with four-cell entries that omitted the SID mask,
-> which of_map_id() tolerated via its of_check_bad_map() fallback, and the
-> four-word parsing coincidentally matched that malformed shape.
-> 
-> Since commit ccb2fd725d41 ("of: Respect #{iommu,msi}-cells in maps") the
-> OF core parses such maps correctly, so the device trees were converted
-> to proper five-cell entries, e.g. commit c41749e9554d ("arm64: dts:
-> qcom: sm8250: Fix the PCIe iommu-map entries"). With five-cell entries
-> the fixed four-word stride slips by one cell for each entry after the
-> first, so qcom_pcie_config_sid_1_9_0() reads the endpoint mapping's RID
-> from the preceding entry's length cell and its SID from the phandle cell.
-> As the RID is the hash key, the endpoint's real RID is never programmed
-> into the BDF to SID table. Its DMA then hashes to an unprogrammed slot,
-> gets tagged with SID 0 and the SMMU faults like below on QCS8300:
-> 
->    arm-smmu 15200000.iommu: Unhandled context fault: fsr=0x402, iova=0xffa00000, cbfrsynra=0x0, cb=1
-> 
-> To fix this, walk the map with a stride of 3 + '#iommu-cells' of the
-> referenced IOMMU and take the SID from the first specifier cell, which is
-> all the BDF to SID table needs. Validate the layout instead of trusting
-> the array size. Also, preserve the legacy behavior of the old DTs by
-> detecting the same pattern that of_check_bad_map() recognizes and
-> falling back to a stride of four.
-> 
-> Fixes: 4c9398822106 ("PCI: qcom: Add support for configuring BDF to SID mapping for SM8250")
-> Reported-by: Loic Poulain <loic.poulain@oss.qualcomm.com>
-> Signed-off-by: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
-> ---
->   drivers/pci/controller/dwc/pcie-qcom.c | 90 ++++++++++++++++++--------
->   1 file changed, 64 insertions(+), 26 deletions(-)
-> 
-> diff --git a/drivers/pci/controller/dwc/pcie-qcom.c b/drivers/pci/controller/dwc/pcie-qcom.c
-> index b58a607b713f..42cbeef083ca 100644
-> --- a/drivers/pci/controller/dwc/pcie-qcom.c
-> +++ b/drivers/pci/controller/dwc/pcie-qcom.c
-> @@ -1143,50 +1143,90 @@ static void qcom_pcie_deinit_2_7_0(struct qcom_pcie *pcie)
->   
->   static int qcom_pcie_config_sid_1_9_0(struct qcom_pcie *pcie)
->   {
-> -	/* iommu map structure */
-> -	struct {
-> -		u32 bdf;
-> -		u32 phandle;
-> -		u32 smmu_sid;
-> -		u32 smmu_sid_len;
-> -	} *map;
->   	void __iomem *bdf_to_sid_base = pcie->parf + PARF_BDF_TO_SID_TABLE_N;
->   	struct device *dev = pcie->pci->dev;
-> +	struct device_node *iommu_np;
->   	u8 qcom_pcie_crc8_table[CRC8_TABLE_SIZE];
-> -	int i, nr_map, size = 0;
-> -	u32 smmu_sid_base;
-> +	const __be32 *map;
-> +	u32 iommu_cells, entry_cells, phandle, smmu_sid_base;
-> +	int i, nr_cells, nr_map, size = 0;
->   	u32 val;
->   
-> -	of_get_property(dev->of_node, "iommu-map", &size);
-> -	if (!size)
-> +	map = of_get_property(dev->of_node, "iommu-map", &size);
-> +	if (!map || !size)
->   		return 0;
->   
-> +	if (size % sizeof(*map)) {
-> +		dev_err(dev, "Malformed iommu-map property\n");
-> +		return -EINVAL;
-> +	}
-> +	nr_cells = size / sizeof(*map);
-> +
-> +	/*
-> +	 * Each iommu-map entry is: rid-base (1 cell), phandle (1 cell),
-> +	 * IOMMU specifier (#iommu-cells cells), length (1 cell). Read
-> +	 * #iommu-cells from the IOMMU provider referenced by the first
-> +	 * entry to compute the per-entry stride.
-> +	 */
-> +	phandle = be32_to_cpu(map[1]);
-> +	iommu_np = of_find_node_by_phandle(phandle);
-> +	if (!iommu_np) {
-> +		dev_err(dev, "Failed to find IOMMU node in iommu-map\n");
-> +		return -ENODEV;
-> +	}
-> +
-> +	if (of_property_read_u32(iommu_np, "#iommu-cells", &iommu_cells))
-> +		iommu_cells = 1;
-> +	of_node_put(iommu_np);
-> +
-> +	entry_cells = 3 + iommu_cells;
-> +
-> +	/*
-> +	 * Retain backward compatibility with DTs that describe iommu-map
-> +	 * with 4-cell entries against an IOMMU declaring #iommu-cells = 2,
-> +	 * matching the fallback in drivers/of/base.c::of_check_bad_map().
-> +	 */
-> +	if (iommu_cells == 2 && !(nr_cells % 4)) {
-> +		bool legacy = true;
-> +
-> +		for (i = 0; i < nr_cells; i += 4) {
-> +			if (be32_to_cpu(map[i + 1]) != phandle ||
-> +			    be32_to_cpu(map[i + 3]) != 1) {
-> +				legacy = false;
-> +				break;
-> +			}
-> +		}
-> +
-> +		if (legacy) {
-> +			dev_warn_once(dev, "iommu-map has 1-cell entries targeting 2-cell #iommu-cells, treating as 1-cell output\n");
-> +			entry_cells = 4;
-> +		}
-> +	}
-> +
-> +	if (nr_cells % entry_cells) {
-> +		dev_err(dev, "Malformed iommu-map property\n");
-> +		return -EINVAL;
-> +	}
-> +	nr_map = nr_cells / entry_cells;
-> +
->   	/* Enable BDF to SID translation by disabling bypass mode (default) */
->   	val = readl(pcie->parf + PARF_BDF_TO_SID_CFG);
->   	val &= ~BDF_TO_SID_BYPASS;
->   	writel(val, pcie->parf + PARF_BDF_TO_SID_CFG);
->   
-> -	map = kzalloc(size, GFP_KERNEL);
-> -	if (!map)
-> -		return -ENOMEM;
-> -
-> -	of_property_read_u32_array(dev->of_node, "iommu-map", (u32 *)map,
-> -				   size / sizeof(u32));
-> -
-> -	nr_map = size / (sizeof(*map));
-> -
->   	crc8_populate_msb(qcom_pcie_crc8_table, QCOM_PCIE_CRC8_POLYNOMIAL);
->   
->   	/* Registers need to be zero out first */
->   	memset_io(bdf_to_sid_base, 0, CRC8_TABLE_SIZE * sizeof(u32));
->   
->   	/* Extract the SMMU SID base from the first entry of iommu-map */
-> -	smmu_sid_base = map[0].smmu_sid;
-> +	smmu_sid_base = be32_to_cpu(map[2]);
->   
->   	/* Look for an available entry to hold the mapping */
->   	for (i = 0; i < nr_map; i++) {
-> -		__be16 bdf_be = cpu_to_be16(map[i].bdf);
-> -		u32 val;
-> +		u32 bdf = be32_to_cpu(map[i * entry_cells]);
-> +		u32 sid = be32_to_cpu(map[i * entry_cells + 2]);
-> +		__be16 bdf_be = cpu_to_be16(bdf);
->   		u8 hash;
->   
->   		hash = crc8(qcom_pcie_crc8_table, (u8 *)&bdf_be, sizeof(bdf_be), 0);
-> @@ -1208,12 +1248,10 @@ static int qcom_pcie_config_sid_1_9_0(struct qcom_pcie *pcie)
->   		}
->   
->   		/* BDF [31:16] | SID [15:8] | NEXT [7:0] */
-> -		val = map[i].bdf << 16 | (map[i].smmu_sid - smmu_sid_base) << 8 | 0;
-> +		val = bdf << 16 | (sid - smmu_sid_base) << 8 | 0;
->   		writel(val, bdf_to_sid_base + hash * sizeof(u32));
->   	}
->   
-> -	kfree(map);
-> -
->   	return 0;
->   }
->   
+Describe the dual front-facing IMX355 sensors (standard and wide)
+and enable the PMI8998 flash LED with hardware-accurate limits.
 
-Tested-by: Neil Armstrong <neil.armstrong@linaro.org> # on SM8650-HDK
+This brings up the basic camera topology and flash support in DT.
 
-Thanks,
-Neil
+Signed-off-by: David Heidelberg <david@ixit.cz>
+---
+Changes in v9:
+- Dependency merged, no longer depends on anything.
+- Link to v8: https://patch.msgid.link/20260901-pixel3-camera-v8-0-99f159883348@ixit.cz
+
+Changes in v8:
+- Fix ordering of includes. (Konrad)
+- Link to v7: https://lore.kernel.org/r/20260721-pixel3-camera-v7-0-82d323c6c5d2@ixit.cz
+
+Changes in v7:
+- Depend on the
+  https://lore.kernel.org/all/20260628-kbingham-orientation-v3-0-4ed92968aff8@ideasonboard.com/
+  (Konrad)
+- Sort the renamed regulators. Why Mr. Anderson, why. (Konrad)
+- Link to v6: https://lore.kernel.org/r/20260720-pixel3-camera-v6-0-afe419bef476@ixit.cz
+
+Changes in v6:
+- Remove forgotten bias-pull-down property from cci0_sleep node.
+  (dtbs_check)
+- ..-regulator -> regulator-.. (Konrad)
+- Rename camera -pin to -state and remove _pin from the labes. (Konrad,
+  dtbs_check)
+- Link to v5: https://lore.kernel.org/r/20260719-pixel3-camera-v5-0-99593f1bd8ec@ixit.cz
+
+Changes in v5:
+- Added function-enumarator to flash LEDs. (Sashiko)
+- Dropped l22a regulator needed only for NFOV actuator. (Sashiko)
+- Dropped vdda-csi[0-2]-supply, as it was unused. (Sashiko).
+- Added previously omited cam_mclk2_sleep sleep state.
+- Link to v4: https://lore.kernel.org/r/20260719-pixel3-camera-v4-0-48cab1236852@ixit.cz
+
+Changes in v4:
+- Use 24 MHz ext clock for the cameras, as the downstream does, since
+  the upstream driver can now support it.
+- Added additional LED, as the phone contains two separately controlled
+  white LEDs flash (upper and bottom, in one module).
+- Increase flash-max-microamp, as I took wrong "flash" from the
+  downstream sources and dropped Dmitry R-b.
+- Address formatting issues. (Konrad)
+- Link to v3: https://lore.kernel.org/r/20260412-pixel3-camera-v3-0-e26b090a6110@ixit.cz
+
+Changes in v3:
+- Dropped cam_vio label. (Dmitry)
+- Move the MCLK2 pinctrl from cameras to common camss. (Dmitry)
+- Link to v2: https://lore.kernel.org/r/20260411-pixel3-camera-v2-0-41b889abb14c@ixit.cz
+
+Changes in v2:
+- leds.h include escaped the initial submission. Fixed.
+- Link to v1: https://lore.kernel.org/r/20260411-pixel3-camera-v1-0-2757606515b6@ixit.cz
+
+---
+David Heidelberg (2):
+      arm64: dts: qcom: sdm845-google: Add dual front IMX355 cameras
+      arm64: dts: qcom: sdm845-google: Enable PMI8998 camera flash LEDs
+
+ arch/arm64/boot/dts/qcom/sdm845-google-common.dtsi | 199 ++++++++++++++++++++-
+ 1 file changed, 198 insertions(+), 1 deletion(-)
+---
+base-commit: 944a035ecca915ae947905dcfb03f2b9dc6d032c
+change-id: 20260315-pixel3-camera-a9989bf589ee
+
+Best regards,
+--  
+David Heidelberg <david@ixit.cz>
+
+
