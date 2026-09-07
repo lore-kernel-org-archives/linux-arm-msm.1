@@ -1,201 +1,97 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3C5ED43CE7B
-	for <linux-arm-msm@vger.kernel.org>; Mon,  7 Sep 2026 08:22:06 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0D3C943BDB4
+	for <linux-arm-msm@vger.kernel.org>; Mon,  7 Sep 2026 08:24:26 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788769328; cv=none; b=OMB0DVJ5ZoCQDA/7KtBuCfeHF/zQgmo/KF4PTRu6+MaXxm8fyIGB5d7zNQ9rWfYV2duWf0CbpfEDQdRJARo8xzoBoeODHAcYSVLgZuhfjEmpxle2zFNCHr+Hkm+Fk6/QaKPsWzg1pCVxj6JI2Kyr5SlW9LVBfQgvXznqz/Aa58c=
+	t=1788769468; cv=none; b=ZdMKh+km8N5hDfCLl0PM+irIdbztAexjqsLYYB01/LPqFOpBXeoN+ofVvWnvMHhCAimA5weCC5bpcGNoVb9ZlbRkrnn/UYjCmqpDF5vnPkSfsmTbze6qfotk7Q3uX5kWwE+iz5rCIUWXPRGSZglvPdh9QrX/u1st4pbmvUxMZRI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788769328; c=relaxed/simple;
-	bh=nS4ZwDxmZPpwlOqyJVI+H+ZD9IUH+6rel58IpJ18Sp8=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=Am5wP75yp9vGIx171HvcxEZDccRc3Zk1Gn/jCtHLgWf/YXT4zTvXeRv4yTk091Cjb7heWqBOFSRVP2Saj+8yo4Fi/tIOfVTLmKy/0XuNHiodO35H6hG2EjNs/QIHlHbTtCD9E2JWhtUrT34x9VjbWPwLmKrCb6fVgVZO6XOF9GU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=kegTr5Ys; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=Qa5xCl3Q; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1788769468; c=relaxed/simple;
+	bh=f9D/f9/Msk2r3HptDaE/nYy9oLfZ4kQYJeWBm/OXe9o=;
+	h=From:In-Reply-To:MIME-Version:References:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=dIWdrnuppYjr4vC8WvFd9AUEk+m8fpV0vm9vFQLe3oT12nlE/KpfxCYW+u/0Iosdl8OQ+z0I10Zl9ofCQGxPHTWaMkV8VsbCw0RkXOaQJtmITFTLH+QPzrsJsglVa5c33/kY3kYbuZ7YyXpgj+5AnV6tgyKJxhcFBwe6zlWoS7U=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ECtwvZ/t; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="kegTr5Ys";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Qa5xCl3Q"
-Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68787S1X3411488
-	for <linux-arm-msm@vger.kernel.org>; Mon, 7 Sep 2026 08:22:06 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	sCzd7Netj+psNd0RcniDmQeJOKyMFTF+YpDvix9/mcE=; b=kegTr5YsDG1Uvu5b
-	CeycJ1HV/+PrbIbaBsdxUrdwIEYgk4TBgYCpcZpwNfiv3pzVGNiJ3XN144HSwgAN
-	Uox5S1UOPSdBPpNVgVq3AHxe68busLVbsdDA2A1V6IoNy3BwojsZTf/9IWrMhsLi
-	7XOD1Dj4cC1tRvbR6JgdSPEu5TBZo1dPCxNGe00RrWJy4D8Z0PsStYsBGrLXN9hH
-	a5XLc9rmejWkq0AC/N/v6S2+YAYGCtXG+eVlxZ3cmx9ZS2Tvul9AOmAmy8QJIyW4
-	LfQsBr5C0mM2DOUu5fr5QR3g5KjLGzW47qky2kubiwQi4hjfpm6eKOPM2XfkVzpE
-	kg9jLQ==
-Received: from mail-qt1-f197.google.com (mail-qt1-f197.google.com [209.85.160.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ghsfyg1s4-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Mon, 07 Sep 2026 08:22:05 +0000 (GMT)
-Received: by mail-qt1-f197.google.com with SMTP id d75a77b69052e-51c9e97b626so4660061cf.1
-        for <linux-arm-msm@vger.kernel.org>; Mon, 07 Sep 2026 01:22:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1788769325; x=1789374125; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=sCzd7Netj+psNd0RcniDmQeJOKyMFTF+YpDvix9/mcE=;
-        b=Qa5xCl3Q5RSzfVMzaAqGX0BTXnbJxZ/jie5qz3NUXxuu8TQXD2mssihyV3Vmi7SM/c
-         UpnTLQE41NC2hYD/dkX/vYpBIABNLcAj4+p61Td6SqX/MUsu8I+HzfT8CoIqI7n0M3Qn
-         HIejkGBuwiiWqGSDyb4HYfqS5U0FETwCXyAz2BzwN7XmR7lrd9mbE6trODLqyiD0Ebak
-         kO1DfD6pmpBQqZZPmbLEHP5u6HB0DPcxTDjp/76iZKxt1n/e65d1muTivutjXMiH39Xd
-         0RUJpQkRzL3TK7Xz6HLkzwl3Ehg6ZCu6Afd3vPLst67oW3uZ7XfNziHirppdHrEI6mgr
-         1gAg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788769325; x=1789374125;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=sCzd7Netj+psNd0RcniDmQeJOKyMFTF+YpDvix9/mcE=;
-        b=gfQgHfzrrCWcy64KE4yYPk5yPSO+x0x+7Bdcb06agG2vuq5+A5Prw1zg7jAjgiXMdn
-         z8habJrFEPA+/9ZD+NXj2CkJqLkE9q5YfjF03NW4z02xbCVk/Pw9w2I82IqSzPhGyzCQ
-         G0IH9uBmIEP1QU2re99cWrLey/hHA+xOeiUXHRbd6U2dkVcP1ZVmZTLal12z4kVemay8
-         IyS85CXx3F2n1hpDCKDwIJYunT70dOAMclbyD1XCfQXiT5TWs1x00BlUVQOGDWrxplmp
-         TM0/i+q7qtGD0jfz5F8G40EkeAW1uVuS2ym34QlWW7zafeytI/1nQha3DS/Hti7JvG00
-         oncw==
-X-Forwarded-Encrypted: i=1; AKwUvBxEKLGdufyFoopgJyO/65YCtWvxipzMagK9wO7xfasTDPRxjxKSsCODDj1HxsAWdg76KdNiEcW9LcxzD/h0@vger.kernel.org
-X-Gm-Message-State: AFuF++maYVz2mSK8dWm8lixIucgEC7Ay1c2VcLD48KlSCB7RdXJNlM3f
-	vv/X6pf1DrndO1MFdmnjsyX/QPv7arSCXG94P6EqDLqBY0SjmA8GeT10/1QG+Qx8oBfNC62lRb2
-	FW+xWFh4pwvYdoei9riK65cDKmy4tUQ40ZrV0EOMUn/UXMtz4FFyQSQ4W8ILDcN1mOhSb
-X-Gm-Gg: AYBFou1vx/e45whqxKem9G/D/kTC+TbU9Jbn5+n+/TnZxTOBoJvAFK8PUnVwiKYW992
-	imuYI5TRTsvYExe95GZfPWQj+DcAgj10E3aK0accxXiWW9TBFxeOZeDdwg0ugnmnatESmSubkIq
-	8lDjethhSy5Gs9OJCp/TBajFgCMcog2QQdtSN6IOvcbnypbAi+ZbVEjqbgJ6L840FnzW99qM067
-	JzPV4jrU5RbQmQLShjrW/yeqbYn/ihIeKhjMwOlGAAO8G4fXdkwAfc9rvEcwVmJNp1/J62/uc9T
-	wvyO7HqI42p59XGSZ/wkg3K6KuU3OQXoGwh2qh30bshoHZRspwbOQ58vLJpU/1ZWBM9I1chJSrM
-	McjLlcyOwQ5fQK4fRRn+nmA==
-X-Received: by 2002:a05:620a:4409:b0:939:8bc:8826 with SMTP id af79cd13be357-93991702d25mr1151883485a.2.1788769325417;
-        Mon, 07 Sep 2026 01:22:05 -0700 (PDT)
-X-Received: by 2002:a05:620a:4409:b0:939:8bc:8826 with SMTP id af79cd13be357-93991702d25mr1151880585a.2.1788769324988;
-        Mon, 07 Sep 2026 01:22:04 -0700 (PDT)
-Received: from [192.168.202.12] ([178.235.128.140])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c260d4a8b7dsm427903566b.21.2026.09.07.01.22.03
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 07 Sep 2026 01:22:04 -0700 (PDT)
-Message-ID: <2b18d1d7-200a-458f-ac6e-bea5fb5e7d54@oss.qualcomm.com>
-Date: Mon, 7 Sep 2026 10:22:02 +0200
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="ECtwvZ/t"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id AA2A81F00A3E
+	for <linux-arm-msm@vger.kernel.org>; Mon,  7 Sep 2026 08:24:26 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1788769466;
+	bh=f9D/f9/Msk2r3HptDaE/nYy9oLfZ4kQYJeWBm/OXe9o=;
+	h=From:In-Reply-To:References:Date:Subject:To:Cc;
+	b=ECtwvZ/tPqqe9+tvbVr0SV9LwqeLgiQcCQS5GRkPTBfceXDOkJx1iSebbRb4uBlbu
+	 tZqKnjYUdn2p579pqxzrCFDZ/5duq5PYIrUiEPl55638z3QD3c9HHoxy2+O+W2Yf2c
+	 niJjuGEiIrXdNyBmndjHX8jREMTUsnnje1+XmILONi23tM4lA+3U0veIQTvC6q/Sca
+	 b5GawXaBbhbrTzWTUcb9x6pKR67/8ppopbupgaDqiQmcPDRyAg84xMDFisvAbRXlT7
+	 wuVSDjZG/p+ge/77iHAdR8bL8t3DhdYIhnwQ6kg6NaF4tfefjJMDU/fD+YLPifxRSW
+	 IO3J4bC8EHhuQ==
+Received: by mail-lf1-f44.google.com with SMTP id 2adb3069b0e04-5aec201b582so1098561e87.1
+        for <linux-arm-msm@vger.kernel.org>; Mon, 07 Sep 2026 01:24:26 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AKwUvBwbVfMvpnGU0LeQnFAyZXD2qh+GXVCP/8pIEPSwwSLKCIkGr9zWw/aVIKDFapfD3jTgOWJbvLPb3FFwP+Y8@vger.kernel.org
+X-Gm-Message-State: AFuF++lpchyjGxrkJSM9z0/yz/T/F/AghXP3hmid/LL7/29nIT8jfUvL
+	KYP/ZOU9EYRxlh0b3EkogwVqjYIZfySzBRB0ucseB+Lf4oKD7W3azak0JkIqFlcrXy1G7uwZQsu
+	lAjmclZ6Pwx8VIRen+8aiqenHZWTho466ws9/PvYaYQ==
+X-Received: by 2002:a05:6512:3a93:b0:5b7:518a:fe57 with SMTP id
+ 2adb3069b0e04-5b7518afebfmr1598087e87.39.1788769465277; Mon, 07 Sep 2026
+ 01:24:25 -0700 (PDT)
+Received: from 969154062570 named unknown by gmailapi.google.com with
+ HTTPREST; Mon, 7 Sep 2026 01:24:23 -0700
+Received: from 969154062570 named unknown by gmailapi.google.com with
+ HTTPREST; Mon, 7 Sep 2026 01:24:23 -0700
+From: Bartosz Golaszewski <brgl@kernel.org>
+In-Reply-To: <20260904-monza-wireless-v6-0-d8c5042b3efd@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] soc: qcom: smd-rpm: Add trace events for SMD-RPM messages
-To: Maulik Shah <maulik.shah@oss.qualcomm.com>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>
-Cc: linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org
-References: <20260904-smd-rpm-trace-v1-1-8c1cbdfea82e@oss.qualcomm.com>
-Content-Language: en-US
-From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-In-Reply-To: <20260904-smd-rpm-trace-v1-1-8c1cbdfea82e@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Proofpoint-ORIG-GUID: OrqWNms_E_aAT3-FiuSBxlrVoXzD-ALi
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTA3MDA5MCBTYWx0ZWRfX6mx9fd53BpIX
- Sj6MgBaZ5vxrD/wGb+Hcsx6CJG/slC/ELxr9W6121y/IwDeP6oXDDDFRR9PlHhJB2/Ngco4t7cP
- /ZSR0XGLQkMP8AmoHOOG/ChTsldE3gCJG+t3S4T9nHf6jH/2Zpn7kyxarMNMwqdYtcegOZ88p3l
- 1Rm6CsnrxPVmda31a7HuZnQFPc4706Fm4+70cPQbD3rf5wykAuaS9OUQ/v3TU8nu5oc+qUcd0pk
- +6TfjonEfeXGHXO93PoXk81M4GO/gZieeo4hxszRJORkrMOqjrJCET5scTB3HrMsFDcJF7yDMix
- HtoD4yQJpeBDv6kL8AzZc3wzz7pXdU7STMFi500IgLiH7hr1t8qgX03++HV07+gu774zMpk1Hbd
- LT30rcyl9iQlk+x1GBIXEa2wI27QBJriGa5BsamKI3/FgCqY/J9Lny0RtjvL3Nhfnugv4CEYYlb
- gyH+ccqUcq+KQqneBMQ==
-X-Proofpoint-GUID: OrqWNms_E_aAT3-FiuSBxlrVoXzD-ALi
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTA3MDA5MCBTYWx0ZWRfX9xd5P637JPQG
- wuBHvCcm3dDul3BIVRoWa96aZPi+foDRSRquIDuGVcVM7ZLs94v1PgGQNmDeQpNAzt7ZBRvDeD+
- qBcXzqrrZaCFd6hDbtc9HJOFeInYsdM=
-X-Authority-Analysis: v=2.4 cv=AduB2XXG c=1 sm=1 tr=0 ts=6a9e742d cx=c_pps
- a=EVbN6Ke/fEF3bsl7X48z0g==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
- a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
- a=MhiFez8Sv_XCqzlnK4YA:9 a=QEXdDO2ut3YA:10 a=a_PwQJl-kcHnX1M80qC6:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-07_02,2026-09-03_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 lowpriorityscore=0 spamscore=0 bulkscore=0 adultscore=0
- phishscore=0 clxscore=1015 suspectscore=0 priorityscore=1501 malwarescore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2609070090
+References: <20260904-monza-wireless-v6-0-d8c5042b3efd@oss.qualcomm.com>
+Date: Mon, 7 Sep 2026 01:24:23 -0700
+X-Gmail-Original-Message-ID: <CAMRc=MfDAiUMzOYRWioK2NDM37=yQqb4pQ5ETZz1PVOKQhhdug@mail.gmail.com>
+X-Gm-Features: AcwNN1VYTolJaulJOWI5brRRYqQCVvQ9onzb1Qz2nu8b0jNsz6dPp5Ss9rumQy0
+Message-ID: <CAMRc=MfDAiUMzOYRWioK2NDM37=yQqb4pQ5ETZz1PVOKQhhdug@mail.gmail.com>
+Subject: Re: [PATCH v6 00/11] arm64: dts: monaco-arduino-monza: Add support
+ for LGA WiFi/BT module
+To: Loic Poulain <loic.poulain@oss.qualcomm.com>
+Cc: linux-pci@vger.kernel.org, linux-pm@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
+	linux-bluetooth@vger.kernel.org, devicetree@vger.kernel.org, 
+	Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>, 
+	Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>, 
+	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>, Wei Deng <wei.deng@oss.qualcomm.com>, 
+	Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>, 
+	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, Manivannan Sadhasivam <mani@kernel.org>, 
+	Bartosz Golaszewski <brgl@kernel.org>, Marcel Holtmann <marcel@holtmann.org>, 
+	Luiz Augusto von Dentz <luiz.dentz@gmail.com>, Bjorn Andersson <andersson@kernel.org>, 
+	Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>
+Content-Type: text/plain; charset="UTF-8"
 
-On 9/4/26 4:23 PM, Maulik Shah wrote:
-> There is no visibility on what resource votes are placed via SMD RPM making
-> it difficult to identify clients that do either under voting via active set
-> impacting the device functions or fail to send sleep set votes and thereby
-> prevent the SoC from reaching low power modes such as vmin or vlow.
+On Fri, 4 Sep 2026 17:42:15 +0200, Loic Poulain
+<loic.poulain@oss.qualcomm.com> said:
+> This series describes support for the onboard WiFi/Bluetooth module
+> present on the Arduino VENTUNO Q (monaco) platform.
+>
+> The board provides LGA pads for a wireless module. On the VENTUNO Q
+> these pads are populated with an NFA725B module featuring the
+> QCA2066 WiFi/BT combo chip. While implemented as an LGA footprint,
+> the design is functionally compatible with the M.2 Key E.
+>
+> The NFA725B exposes WiFi over PCIe and Bluetooth over a UART.
+> Both interfaces are gated through the W_DISABLE1# and W_DISABLE2#
+> signals, as defined by the M.2 specification and handled here via
+> the pcie-m2 power sequencer.
+>
+> This series models the hardware using the existing pwrseq framework
+> and connector bindings, allowing coordinated PCIe and UART bring-up.
+>
+> Signed-off-by: Loic Poulain <loic.poulain@oss.qualcomm.com>
+> ---
 
-[...]
+What is the merge strategy? Do the pwrseq changes depend on first two bluetooth
+patches (I don't think so)? Can they go onto an immutable branch shared with
+the BT tree?
 
-> @@ -106,6 +109,7 @@ int qcom_rpm_smd_write(struct qcom_smd_rpm *rpm,
->  		u8 payload[];
->  	} *pkt;
->  	size_t size = sizeof(*pkt) + count;
-> +	const struct clk_smd_rpm_req *req = buf;
-
-This struct is called clk_smd_rpm_req, but it seems like at least for
-the current in-kernel users, everything that's passed to
-qcom_rpm_smd_write() (rpmpd, regulator) is a renamed version of this
-one. We should probably rename it.
-
-Or are there requests that differ in structure that we should be
-mindful of?
-
->  	if (le32_to_cpu(hdr->service_type) != RPM_SERVICE_TYPE_REQUEST ||
-> @@ -171,6 +178,7 @@ static int qcom_smd_rpm_callback(struct rpmsg_device *rpdev,
->  		msg_length = le32_to_cpu(msg->length);
->  		switch (le32_to_cpu(msg->msg_type)) {
->  		case RPM_MSG_TYPE_MSG_ID:
-> +			msg_id = msg->msg_id;
->  			break;
->  		case RPM_MSG_TYPE_ERR:
->  			len = min_t(u32, ALIGN(msg_length, 4), sizeof(msgbuf));
-> @@ -187,6 +195,8 @@ static int qcom_smd_rpm_callback(struct rpmsg_device *rpdev,
->  		buf = PTR_ALIGN(buf + 2 * sizeof(u32) + msg_length, 4);
->  	}
->  
-> +	trace_rpm_smd_ack_recvd(msg_id, status);
-
-This way only the last ack/err will be traced, is that the desired behavior?
-
-[...]
-
-> +TRACE_EVENT(rpm_smd_send_msg,
-> +
-> +	TP_PROTO(__le32 msg_id, u32 state, u32 rsc_type, u32 rsc_id,
-> +		 const struct clk_smd_rpm_req *req),
-> +
-> +	TP_ARGS(msg_id, state, rsc_type, rsc_id, req),
-> +
-> +	TP_STRUCT__entry(
-> +		__field(u32, msg_id)
-> +		__field(u32, state)
-> +		__field(u32, rsc_type)
-> +		__field(u32, rsc_id)
-> +		__field(u32, key)
-> +		__field(u32, nbytes)
-> +		__field(u32, value)
-> +	),
-> +
-> +	TP_fast_assign(
-> +		__entry->msg_id = le32_to_cpu(msg_id);
-> +		__entry->state = state;
-> +		__entry->rsc_type = rsc_type;
-> +		__entry->rsc_id = rsc_id;
-> +		__entry->key = le32_to_cpu(req->key);
-> +		__entry->nbytes = le32_to_cpu(req->nbytes);
-> +		__entry->value = le32_to_cpu(req->value);
-
-GPT points out `value` can be more than just a single u32
-(via nbytes)
-
-Konrad
-
+Bartosz
