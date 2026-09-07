@@ -1,269 +1,176 @@
-Received: from mail-pl1-f172.google.com (mail-pl1-f172.google.com [209.85.214.172])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 02762400963
-	for <linux-arm-msm@vger.kernel.org>; Mon,  7 Sep 2026 06:46:40 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.172
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 51F333FF1D0
+	for <linux-arm-msm@vger.kernel.org>; Mon,  7 Sep 2026 06:56:03 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788763603; cv=none; b=tsL+pFUdHP6B2FumyjD90kKpa8FwI4BDt1hUsrjihEl1mFyqnaV3oUX4OaK1/X2RrPTj9cY2USRQ8ZGOqnFhTy/ARrl4kW8DBaf7Wd2lKufxp4Y7gX/8TXngFANlGtUxDtMZN9kKQBs9kg8su73J4qsIbfk1zK5Kq/3tLXHFz8k=
+	t=1788764164; cv=none; b=HcCMLhuR6VfBmsibJA8HZg9W8ZlbSClAv5y/bM42sJfeJbsWrY4X//FnUUsSVWlwrDbSGbO6lpGy6Ryv6Rvg5OunFA9kfTLuRNKQ/03UCIHwlV4p0Uih3MujQ+elmKmGdGtHZqdkaS7zoOAfZ4jjL7lTq0C+w9gedcaeOxrZ9ok=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788763603; c=relaxed/simple;
-	bh=a1FgZIJL9r7HJKSoF3sI7X0CpF9ived6+Iq8iJsTZK0=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=Wdx8Xi6JRqHcMKFZGEapRNTJWVOOiMegqiLoA0AMjIy1rNpzB82BvX5lPPlGcTu59uT0pEIVbZW07ymrxcXldEP2u+iKrmE3px4RKzWtplrtmNPPtA2WySYyICXxzOo+9ZI6ubsa+h0GV20378HLoRHAeVqT/yp5yl17OorPBro=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=JJpbRPnn; arc=none smtp.client-ip=209.85.214.172
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	s=arc-20240116; t=1788764164; c=relaxed/simple;
+	bh=IUdf14I4+jWE+TfxtC/gC9l4ctJDVAQisE6B1hm+Uzk=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=FqLI1vUHNcHcvLIKbn64AoGqJmC2OMt1ZCAXyi5MOPMV/zPDQtcCqhhmMYZkb0K2/ydGE9lmy14+L/hxbutDtgOPWzASa5hG/5FsBZp2c3QOiKGUuRMv6Gsda/PSrWcTrUKK5abGuAmbHIMk5A6PrldzOa1GEd54E/b2NZLgz70=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=NFWQW/OD; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=UGURjKRD; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="JJpbRPnn"
-Received: by mail-pl1-f172.google.com with SMTP id d9443c01a7336-2d7200b2e15so33031475ad.3
-        for <linux-arm-msm@vger.kernel.org>; Sun, 06 Sep 2026 23:46:40 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="NFWQW/OD";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="UGURjKRD"
+Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6873lAw12916920
+	for <linux-arm-msm@vger.kernel.org>; Mon, 7 Sep 2026 06:56:02 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	DrnuhHe7eYsauWd62qNHEpZHKwgT1SJIFquJMZsSrug=; b=NFWQW/ODQjFFJ/1T
+	evIckK4mIyUHyRRabJbjJjWGs5miQtVkmMpGiVpB3H1mJCfDZH78rg1fbUI4Hr7m
+	5e0w2r+9MbWOnvKI3kxdDCpzDJFtFKGEZP8r61eaaRfNUaW/b9AXW0+sBLhOCSff
+	8NeYRXj+T4PopOFJ0yapmMlszoR3S+cr7HYf5ou4EE9YzEHpq03APnqe4ASO1GuO
+	Zr3ZpyxkASTZLvHSGPJIFQs4Er0g+k4D/XG2oWpqtfpfF+8SThKY+2o6uwXg+KUH
+	OkS0B9SpI2QcUa9pTEULiqI/EaSguswIlgmZOsdFiHbSxNwayop3oSylc9vj7CxH
+	AJIF2g==
+Received: from mail-pj1-f70.google.com (mail-pj1-f70.google.com [209.85.216.70])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ghnmj0kjq-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Mon, 07 Sep 2026 06:56:01 +0000 (GMT)
+Received: by mail-pj1-f70.google.com with SMTP id 98e67ed59e1d1-398d7e0f3b4so4032164a91.3
+        for <linux-arm-msm@vger.kernel.org>; Sun, 06 Sep 2026 23:56:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1788763600; x=1789368400; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=PloKXYxQeao5LyBqd6CNUwy0u74eRsiezTlXOqTheC8=;
-        b=JJpbRPnnZCJmNtSN1GS7zzUJk0MQTzcMm/u4fvg96A4FWWNHfq9w5bd/8zzoegnmNJ
-         gP+EU122ax6AMhjkcNuolScDSFwtP+jUyTepjR92Y6x7jtSQxxIys12JV/i6jAZ/bpp/
-         zhkYk9/Bg9XvCYQ7IwldspSGqK+V8sYfwyIUUPYnUpT7uXY/r9Zwpguj0wXECenSEk5u
-         cufuNsLgQf18Sn6f/T3i4k+LkwXPaQzuZH9p8nmIaEii5hrk6RwexqUx0WO8mFWF8i9B
-         2oqmjAGc6duyU1ApZexfp22jqakAuJR37/yXbFYUCJxoH/GHeYZyjwue4yupyPHXM2ZH
-         uchw==
+        d=oss.qualcomm.com; s=google; t=1788764155; x=1789368955; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=DrnuhHe7eYsauWd62qNHEpZHKwgT1SJIFquJMZsSrug=;
+        b=UGURjKRDFBgKioeHBZ2SCBmYK0CrQ2vWW+Iao8fLw6+zbQakVJ/pPFuVlH8q0kgUM/
+         BSlT1BdlvNqaNxx+LHWQA4FWsL0SI7qFC6S2DZrGj0Coxmf1ZN0fvcVCdqSSOwenmh/u
+         FL3xS1MoANBSq6ylXzgd50joqL2DMdRAy+LAPM/3Jo/71+CxtIi+1zQBeeUEDsOyo5wW
+         3KtWgtwJ8JVuuYAf5o50ZspFjcYkUJggyoaHDAeTyzB+MoWxVDiDHRYqMa+KPd0+WzWI
+         AehW9o+VRQSMZEenFsjF+O7AMTzZVfN6mSDpDCyMr/okbvM9ORGHbT4znZu0QmQRx1eL
+         GEEA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788763600; x=1789368400;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=1e100.net; s=20251104; t=1788764155; x=1789368955;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=PloKXYxQeao5LyBqd6CNUwy0u74eRsiezTlXOqTheC8=;
-        b=WkNqMjA61Nt+slMUT+IZdy6b7pFZuRpYkJkrtxhtUHVnlUl/Uw0aBuVoATyTY8YyPK
-         kpMfbHVZQw+N/GTM1SlAdHTTO58GbqpUVk1Tc3w5pAr0S4E8wAonM3SAr+TNB9TxPcPQ
-         lRw+wERIfKnR1kO4Vd0473p5k1S3BlzOuqX3brXSVHA0CjiKt6xXsgM7BjGBQVb7V0xI
-         UnqzNpa9V1fwVvat1zLx3bd3njnTXNF2VpeaO+woFxUSMOCFae7YGRBsXFetoSsPzKAD
-         48LPP+YNFSD+mMTwfflLPzBDf1+OdRLGlZwEUV2BeqVo2khMwqdwEOPKGw9BjmclHbdw
-         wksA==
-X-Forwarded-Encrypted: i=1; AKwUvBzTtu+p7gA7XKUWEwn3MxEC+GzVF4Ad87kb1iWPl6J/cWC33IW6x5fVk0HtEkdifVAjf6Ef+tL+g/7aDPzH@vger.kernel.org
-X-Gm-Message-State: AFuF++ljlYMaOzY/GYIepolhAgqwzSjDhhmU2wIlgk2MkjibKLzk8XBb
-	DYfqWZX/S7L8MshiuHIs+JdGy2Y3Qzv1vR5wMmfuj/d9nhnklAgEGfJY
-X-Gm-Gg: AYBFou12pgHED+/mWMtSdhBZW2kGoDYmTm9spGrMgn9KgXgnZTTd9yLkOU6kdz2hBxB
-	ozdvv68rC4t4KsCEQwx16m9wVDChoLIzA8wUET+TacDoXPiYY887qzzoxjEb53eOjfSjHbwGPMC
-	Ys5NoY/cySB3aFCyb4c5PLqoPWAEp5Qfdd1xHbuId0biHu0cKdZcEVTDnGfBS0rpEzxR6fLAwbh
-	iZ0e8ptY6cK0WFnbDEEYC3StXa+XPKKc11qjXsZ/Q1ZKeCmLIAudoGHRgqpwQRKzAoq+OA7nz0w
-	wJFjzY33PoTdg0UT2xUD4M9en1V/7326xbsGpzz51eLO6KPblPsfDFRWKc2ccMAFPNQ7wHa050B
-	FFYxHkQYVvIzUwXIO2gWH/msq0cYGp7dbiHIg6FMb6Gl/8mNC9njIfx7zjikxhuD7Qt1xyzPe41
-	hYBOgFDijNcXtqog0EJW9Ew++oGK/Z6fEGkDXn6z8yMKT83MjyOtHy5q74DVeCGcO6t2VmkVzmh
-	qkT10bVSOrzdw==
-X-Received: by 2002:a17:90b:57cd:b0:398:c150:e7b3 with SMTP id 98e67ed59e1d1-39b2609f356mr34710524a91.4.1788763600149;
-        Sun, 06 Sep 2026 23:46:40 -0700 (PDT)
-Received: from volcano9f6e-hostos.amd.com ([165.204.217.251])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3339b314cfcsm25401130eec.19.2026.09.06.23.46.34
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 06 Sep 2026 23:46:39 -0700 (PDT)
-From: Hemanth Selam <hemanth.selam@gmail.com>
-To: Maxim Levitsky <maximlevitsky@gmail.com>,
-	Alex Dubov <oakad@yahoo.com>,
-	Ulf Hansson <ulfh@kernel.org>,
-	Florian Fainelli <florian.fainelli@broadcom.com>,
-	Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>,
-	Ray Jui <rjui@broadcom.com>,
-	Scott Branden <sbranden@broadcom.com>,
-	Jaehoon Chung <jh80.chung@samsung.com>,
-	Shawn Lin <shawn.lin@rock-chips.com>,
-	Nicolas Pitre <nico@fluxnic.net>,
-	Adrian Hunter <adrian.hunter@intel.com>,
-	Vignesh Raghavendra <vigneshr@ti.com>
-Cc: linux-mmc@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	linux-rpi-kernel@lists.infradead.org,
-	linux-arm-kernel@lists.infradead.org,
-	linux-arm-msm@vger.kernel.org
-Subject: [PATCH] mmc: fix typos in comments
-Date: Mon,  7 Sep 2026 12:16:32 +0530
-Message-ID: <20260907064632.8926-1-hemanth.selam@gmail.com>
-X-Mailer: git-send-email 2.48.1
+        bh=DrnuhHe7eYsauWd62qNHEpZHKwgT1SJIFquJMZsSrug=;
+        b=D3DK666w7SFC6E2weOjn+OYFsydxw/N5c0/3Sy2c8v5zm3eg4XLCx4cXpmrsGwZ6AW
+         7lrzRz4XAMFnzBRs996Pmi7n+9LjbTWkHjIGbwTyzPaojclYpbPRtIAO9EDgWAPae05G
+         nUiLFbJI+A3lanGcNrYyCFOMRNma98cbRQXbaMsIwHX1KkhXsadet1hYfGhyrr3iMDXX
+         uVYIoF1IFj70zmCUq5dXZZBacBy55lvWAzC1/1sVzAGKtXv16Sh41t6SnCHcTEQmS5nM
+         +DqWHIde3N21MD5cRRbFO1sehjal8gcYUtIqefXEMueb/mNQvqdO7ZIXaNMQTWpqgCG6
+         s2MA==
+X-Gm-Message-State: AFuF++nd20ziwYXyojrw0+lOYDsBXOJK1EAdhKQzTbk7VyJP9UyWwRRN
+	765mwhDTP1cswGUS0XNRStvHtMhMwPsJhtecmomLGb57i2+9GF7Sbs2UrZqTY4xxgxPanHbJYIz
+	HUZRnRiLiyxL4OvFSDUH1TOW8k4/Cwb7j8O7WO9Csn2pkzuc6AXVDxDpjR1P4FPLm5wAc
+X-Gm-Gg: AYBFou3YidrUDJTsXbSATg7Paj6MSkAa3kv0GYhQ3y+jOv+5/tWXkuS1claPqM4FKvn
+	TN4XfuhTpHHoY8rZd3sIDTCJWfOZD7PrV5T1SWRNVHzNSuDaDe76OI9CKIA35szH2wmXwnnBF4j
+	hQcqN5XI/LEwBq+3ktoxuRVU/Tj8rNvyZVtdw6EZ54u6+6xEpv2Hw/FBFO1GTVaY/khpuAh40J4
+	G5WgZ2/ORqi+w902N5cp5ndTMYGXaRY6S29FjH1WJ7jgZnX28cpN3FrgBiUAEgiDKcSaAoqTMkg
+	Jq+EG24P5DFhsG4Yz98CsgHtF11JxSkGm6mt5BSlrdP59W9LXKKYloA3fTufYlX1dGFt0p+vEEt
+	X8gnLjEotTy7ZeLcxS+KsKE7Yv8NQng==
+X-Received: by 2002:a17:90b:3804:b0:366:3517:1aa2 with SMTP id 98e67ed59e1d1-39b25f4397emr32298929a91.0.1788764154658;
+        Sun, 06 Sep 2026 23:55:54 -0700 (PDT)
+X-Received: by 2002:a17:90b:3804:b0:366:3517:1aa2 with SMTP id 98e67ed59e1d1-39b25f4397emr32298879a91.0.1788764154092;
+        Sun, 06 Sep 2026 23:55:54 -0700 (PDT)
+Received: from [10.92.167.32] ([202.46.23.19])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-33825669695sm2656767eec.3.2026.09.06.23.55.49
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Sun, 06 Sep 2026 23:55:53 -0700 (PDT)
+Message-ID: <581a1f3b-1883-462c-96bb-06b2e7b727f0@oss.qualcomm.com>
+Date: Mon, 7 Sep 2026 12:25:47 +0530
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v5] arm64: dts: qcom: shikra: Add ICE, TRNG and QCE nodes
+To: Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley
+ <conor+dt@kernel.org>,
+        Herbert Xu <herbert@gondor.apana.org.au>
+Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
+        linux-kernel@vger.kernel.org,
+        Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>,
+        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+References: <20260820-b4-shikra_crypto_changse-v5-1-70eb4040fb25@oss.qualcomm.com>
+Content-Language: en-US
+From: Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>
+In-Reply-To: <20260820-b4-shikra_crypto_changse-v5-1-70eb4040fb25@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTA3MDA3MiBTYWx0ZWRfXw6ChwMgdBzmV
+ oV8kIH41znLsl6SrRq/CFkEqgCPjwMKg4ocWcxqpn8a4B4ExV2GMUbmv1qHGjmrjQhoxgwBIeok
+ WdTy3ktf+8U2r+VXzXiOxX6uEy7tQyRtFCWNrvzBG/G7z+B2hm1g69I4mguseYtyehn8ZBXdl46
+ xtwBLIOvFecy65oLFjeiyKByTSctnUaUq0rOzPIM43S1jXOBylirzu5srPchnJ0FryQrxJJEWkH
+ 6D2EvwCkjdSql7uS+6I6BXl4Zwrk+2oPFXt9nBEbb/cPshR78iGxJYvOua63e35+yDM66IF+NUV
+ OzH+5nyZFDNunt81VlF3Jpk7Z3B/6R54TKR13PL7So87yOP19YS0e1LQdmuYe7pTdEhRJnZkOxP
+ AQ+WbglI3y3zEgaOa22X51SkOdmE8MT5wFfdqzL4INpQumrKnu6FqTrXl/xblftACkIIOeMn6V9
+ JB39fKQOTKlLQJjjGyQ==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTA3MDA3MiBTYWx0ZWRfX0cxrAOPMyei7
+ I7sKO5BIS42mM3OeAvPXk5V4WN/dw6vHFPc7pjx95W4UjOW1z5hspgXqJnqgkJ5xQK8bXZEP6u7
+ ZSzMnLadio4P8Ch+ca0J4iBv4MZgYug=
+X-Proofpoint-ORIG-GUID: ZQ36iEqejV2nj8R8wSj194HmBIWNKbQx
+X-Proofpoint-GUID: ZQ36iEqejV2nj8R8wSj194HmBIWNKbQx
+X-Authority-Analysis: v=2.4 cv=LZYMLDfi c=1 sm=1 tr=0 ts=6a9e6001 cx=c_pps
+ a=0uOsjrqzRL749jD1oC5vDA==:117 a=j4ogTh8yFefVWWEFDRgCtg==:17
+ a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22
+ a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=eVVSAIOIRSDSNroG8R0A:9 a=QEXdDO2ut3YA:10
+ a=mQ_c8vxmzFEMiUWkPHU9:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-09-07_01,2026-09-03_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ spamscore=0 priorityscore=1501 malwarescore=0 suspectscore=0 impostorscore=0
+ lowpriorityscore=0 phishscore=0 bulkscore=0 clxscore=1015 adultscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2609070072
 
-Fix typos in comments, reported by scripts/checkpatch.pl using the
-misspelling list in scripts/spelling.txt.  Only touches comments, no code
-changes.
+On 20-08-2026 16:23, Kuldeep Singh wrote:
+> Add device tree nodes describing the crypto hardware blocks present
+> on the Qualcomm Shikra platform:
+> 
+> - BAM DMA controller used by the Qualcomm crypto engine
+> - QCE (crypto) engine with DMA support
+> - TRNG hardware random number generator
+> - Inline crypto engine (ICE)
+> 
+> Also connect the SDHC controller to ICE via "qcom,ice" property to
+> support inline encryption.
+> 
+> On Shikra, different BAM pipe pairs (for example 0x84/0x94 and
+> 0x86/0x96) may still resolve to the same resulting SID due SMMU-side
+> optimization. They are still distinct pipe pairs and therefore require
+> separate DT IOMMU entries.
+> 
+> Signed-off-by: Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>
+> Reviewed-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+> Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>-- 
 
-Assisted-by: Cursor:claude-opus-5
-Signed-off-by: Hemanth Selam <hemanth.selam@gmail.com>
----
- drivers/memstick/core/ms_block.c  | 2 +-
- drivers/memstick/host/r592.c      | 2 +-
- drivers/mmc/core/block.c          | 2 +-
- drivers/mmc/core/core.c           | 2 +-
- drivers/mmc/core/mmc.c            | 2 +-
- drivers/mmc/host/bcm2835.c        | 2 +-
- drivers/mmc/host/dw_mmc.h         | 2 +-
- drivers/mmc/host/mvsdio.c         | 2 +-
- drivers/mmc/host/sdhci-msm.c      | 2 +-
- drivers/mmc/host/sdhci-of-esdhc.c | 2 +-
- drivers/mmc/host/sdhci-omap.c     | 2 +-
- drivers/mmc/host/sdhci.h          | 2 +-
- 12 files changed, 12 insertions(+), 12 deletions(-)
+Hi Bjorn/Herbert,
 
-diff --git a/drivers/memstick/core/ms_block.c b/drivers/memstick/core/ms_block.c
-index ce33907bfc24..e2bf563ccbe1 100644
---- a/drivers/memstick/core/ms_block.c
-+++ b/drivers/memstick/core/ms_block.c
-@@ -720,7 +720,7 @@ static int h_msb_parallel_switch(struct memstick_dev *card,
- 
- static int msb_switch_to_parallel(struct msb_data *msb);
- 
--/* Reset the card, to guard against hw errors beeing treated as bad blocks */
-+/* Reset the card, to guard against hw errors being treated as bad blocks */
- static int msb_reset(struct msb_data *msb, bool full)
- {
- 
-diff --git a/drivers/memstick/host/r592.c b/drivers/memstick/host/r592.c
-index 605b2265536f..dc3de63901be 100644
---- a/drivers/memstick/host/r592.c
-+++ b/drivers/memstick/host/r592.c
-@@ -289,7 +289,7 @@ static int r592_transfer_fifo_dma(struct r592_device *dev)
- 	dev->dma_error = 0;
- 	reinit_completion(&dev->dma_done);
- 
--	/* TODO: hidden assumption about nenth beeing always 1 */
-+	/* TODO: hidden assumption about nenth being always 1 */
- 	sg_count = dma_map_sg(&dev->pci_dev->dev, &dev->req->sg, 1, is_write ?
- 			      DMA_TO_DEVICE : DMA_FROM_DEVICE);
- 
-diff --git a/drivers/mmc/core/block.c b/drivers/mmc/core/block.c
-index e760d13ee325..a02bb2fee874 100644
---- a/drivers/mmc/core/block.c
-+++ b/drivers/mmc/core/block.c
-@@ -86,7 +86,7 @@ MODULE_ALIAS("mmc:block");
- static DEFINE_MUTEX(block_mutex);
- 
- /*
-- * The defaults come from config options but can be overriden by module
-+ * The defaults come from config options but can be overridden by module
-  * or bootarg options.
-  */
- static int perdev_minors = CONFIG_MMC_BLOCK_MINORS;
-diff --git a/drivers/mmc/core/core.c b/drivers/mmc/core/core.c
-index 29e80e5f928e..08d41f0996de 100644
---- a/drivers/mmc/core/core.c
-+++ b/drivers/mmc/core/core.c
-@@ -2004,7 +2004,7 @@ unsigned int mmc_calc_max_discard(struct mmc_card *card)
- 
- 	/*
- 	 * Without erase_group_def set, MMC erase timeout depends on clock
--	 * frequence which can change.  In that case, the best choice is
-+	 * frequency which can change.  In that case, the best choice is
- 	 * just the preferred erase size.
- 	 */
- 	if (mmc_card_mmc(card) && !(card->ext_csd.erase_group_def & 1))
-diff --git a/drivers/mmc/core/mmc.c b/drivers/mmc/core/mmc.c
-index 05444ecf3909..a02b04938e1a 100644
---- a/drivers/mmc/core/mmc.c
-+++ b/drivers/mmc/core/mmc.c
-@@ -1015,7 +1015,7 @@ static void mmc_set_bus_speed(struct mmc_card *card)
- }
- 
- /*
-- * Select the bus width amoung 4-bit and 8-bit(SDR).
-+ * Select the bus width among 4-bit and 8-bit(SDR).
-  * If the bus width is changed successfully, return the selected width value.
-  * Zero is returned instead of error value if the wide width is not supported.
-  */
-diff --git a/drivers/mmc/host/bcm2835.c b/drivers/mmc/host/bcm2835.c
-index c949a3eaae79..efd1903c3ccd 100644
---- a/drivers/mmc/host/bcm2835.c
-+++ b/drivers/mmc/host/bcm2835.c
-@@ -1095,7 +1095,7 @@ static void bcm2835_set_clock(struct bcm2835_host *host, unsigned int clock)
- 	int div;
- 
- 	/* The SDCDIV register has 11 bits, and holds (div - 2).  But
--	 * in data mode the max is 50MHz wihout a minimum, and only
-+	 * in data mode the max is 50MHz without a minimum, and only
- 	 * the bottom 3 bits are used. Since the switch over is
- 	 * automatic (unless we have marked the card as slow...),
- 	 * chosen values have to make sense in both modes.  Ident mode
-diff --git a/drivers/mmc/host/dw_mmc.h b/drivers/mmc/host/dw_mmc.h
-index 38610c89d54a..d500a419e2cf 100644
---- a/drivers/mmc/host/dw_mmc.h
-+++ b/drivers/mmc/host/dw_mmc.h
-@@ -69,7 +69,7 @@ struct dw_mci_dma_slave {
-  * @cmd: The command currently being sent to the card, or NULL.
-  * @data: The data currently being transferred, or NULL if no data
-  *	transfer is in progress.
-- * @stop_abort: The command currently prepared for stoping transfer.
-+ * @stop_abort: The command currently prepared for stopping transfer.
-  * @prev_blksz: The former transfer blksz record.
-  * @timing: Record of current ios timing.
-  * @use_dma: Which DMA channel is in use for the current transfer, zero
-diff --git a/drivers/mmc/host/mvsdio.c b/drivers/mmc/host/mvsdio.c
-index cf705b265e21..7d86426c6001 100644
---- a/drivers/mmc/host/mvsdio.c
-+++ b/drivers/mmc/host/mvsdio.c
-@@ -717,7 +717,7 @@ static int mvsd_probe(struct platform_device *pdev)
- 	/*
- 	 * Some non-DT platforms do not pass a clock, and the clock
- 	 * frequency is passed through platform_data. On DT platforms,
--	 * a clock must always be passed, even if there is no gatable
-+	 * a clock must always be passed, even if there is no gateable
- 	 * clock associated to the SDIO interface (it can simply be a
- 	 * fixed rate clock).
- 	 */
-diff --git a/drivers/mmc/host/sdhci-msm.c b/drivers/mmc/host/sdhci-msm.c
-index 4aff965f0e2e..b229545d9db5 100644
---- a/drivers/mmc/host/sdhci-msm.c
-+++ b/drivers/mmc/host/sdhci-msm.c
-@@ -1770,7 +1770,7 @@ static void sdhci_msm_handle_pwr_irq(struct sdhci_host *host, int irq)
- 
- 	/*
- 	 * The driver has to acknowledge the interrupt, switch voltages and
--	 * report back if it succeded or not to this register. The voltage
-+	 * report back if it succeeded or not to this register. The voltage
- 	 * switches are handled by the sdhci core, so just report success.
- 	 */
- 	msm_host_writel(msm_host, irq_ack, host,
-diff --git a/drivers/mmc/host/sdhci-of-esdhc.c b/drivers/mmc/host/sdhci-of-esdhc.c
-index 8345e2c5a034..1ca3562d8f73 100644
---- a/drivers/mmc/host/sdhci-of-esdhc.c
-+++ b/drivers/mmc/host/sdhci-of-esdhc.c
-@@ -1381,7 +1381,7 @@ static void esdhc_init(struct platform_device *pdev, struct sdhci_host *host)
- 	if (!IS_ERR(clk)) {
- 		/*
- 		 * esdhc->peripheral_clock would be assigned with a value
--		 * which is eSDHC base clock when use periperal clock.
-+		 * which is eSDHC base clock when use peripheral clock.
- 		 * For some platforms, the clock value got by common clk
- 		 * API is peripheral clock while the eSDHC base clock is
- 		 * 1/2 peripheral clock.
-diff --git a/drivers/mmc/host/sdhci-omap.c b/drivers/mmc/host/sdhci-omap.c
-index b5d7c1a80a92..7a198fb26628 100644
---- a/drivers/mmc/host/sdhci-omap.c
-+++ b/drivers/mmc/host/sdhci-omap.c
-@@ -332,7 +332,7 @@ static int sdhci_omap_execute_tuning(struct mmc_host *mmc, u32 opcode)
- 	u32 reg;
- 	int i;
- 
--	/* clock tuning is not needed for upto 52MHz */
-+	/* clock tuning is not needed for up to 52MHz */
- 	if (ios->clock <= 52000000)
- 		return 0;
- 
-diff --git a/drivers/mmc/host/sdhci.h b/drivers/mmc/host/sdhci.h
-index f0fd81409a86..98c1fe20bfcd 100644
---- a/drivers/mmc/host/sdhci.h
-+++ b/drivers/mmc/host/sdhci.h
-@@ -409,7 +409,7 @@ struct sdhci_adma2_64_desc {
- #define SDHCI_MAX_MRQS		2
- 
- /*
-- * 48bit command and 136 bit response in 100KHz clock could take upto 2.48ms.
-+ * 48bit command and 136 bit response in 100KHz clock could take up to 2.48ms.
-  * However since the start time of the command, the time between
-  * command and response, and the time between response and start of data is
-  * not known, set the command transfer time to 10ms.
--- 
-2.48.1
+Shikra is actually derivative of agatti which is following a different
+crypto(qce) configuration different from other targets.
+https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git/tree/Documentation/devicetree/bindings/crypto/qcom-qce.yaml#n40
+
+The current qce _is_ still working by not voting for the clocks as
+clk-smd-rpm driver was doing proxy voting.
+In recent discussion with clocks team, it's identified that clk-smd-rpm
+driver will drop proxy voting and recommendation for qce is to vote for
+clocks explicitly.
+
+I'll be sending v6 with the change ASAP follwing agatti's convention.
+https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git/tree/arch/arm64/boot/dts/qcom/agatti.dtsi#n889
+
+Sorry for inconvenience!! as I see patches are applied in the tree.
+
+Regards
+Kuldeep
 
