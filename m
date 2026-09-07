@@ -1,259 +1,235 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wr1-f48.google.com (mail-wr1-f48.google.com [209.85.221.48])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C7D5E401A08
-	for <linux-arm-msm@vger.kernel.org>; Mon,  7 Sep 2026 06:34:18 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 55692211A09
+	for <linux-arm-msm@vger.kernel.org>; Mon,  7 Sep 2026 06:40:29 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.48
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788762860; cv=none; b=fO8A74qNcoU2EqdJ81ai5ux089HRqveCPwRsaQqB0a//LhefjdR3xI+3FjLaTdKM1sEz/1Qq+n/WbxjuaAaJ3hvSxoNCREDMGw8yEoc+LxEtrYe1AnmID4NBXOx7d5yCIn0F7bE5ucfcmJMnb7t4viCQ6dnwEoiCeodVEcgLAI4=
+	t=1788763231; cv=none; b=OherTCwbadnvKRlfkahf3INnSdvQNNmsfCC4UM+atnMb0CyYvVkvv1bRuleVbIFxlWFqH+o8daoYydaoUJQTRsrvzREKx8vktXU6C5NTxzF77q1fzq1OiIfi0ioPfOambtw+Muth0lK8VsgkpXv0qNDy/M+f4xDZPPnlZ94dXKM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788762860; c=relaxed/simple;
-	bh=sTcoJe5DoruJGaJbA+mDYOnpK2K4WQXqyShMTozDpQY=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=O3RqzTItGRJUmcfdV/mJTTEEZG5Jxd6m6un/ZJMsM9aivFHguXIXU29IGQE3PT0baqlnSMd3OlVdBGjzPJqMNonxkoemvy54w4GXRmGWzMAaoK9ALpnNFhAHjv0dta0KG0feFbIj0DzLmzsshKG/Ubpx6MAEn13qzxYb34V23PA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=HeYIGvy2; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=V9FWa0Ey; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1788763231; c=relaxed/simple;
+	bh=KZG4CZdqqlc2ZfNiTN6smnfyx8nbzSO0sz8KTKaKBGw=;
+	h=Message-ID:Date:MIME-Version:From:Subject:To:Cc:References:
+	 In-Reply-To:Content-Type; b=cstDrk/b3uS2yaYVWfZ8r1uUM+xtUXI1IxAq2R38DnaCh2JUlMMgt6kDQAP19JsseNlg+oQZP7gp+qbFnzV/8Smv+rSY1d+RAsS0qlTEf7nAf/LBKq0ttQgRFQhiJCUVMQ5sGd7VZnje8t3+130QUcbFAhg4trp0vb0yhaYWZu4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=aXssTUcc; arc=none smtp.client-ip=209.85.221.48
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="HeYIGvy2";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="V9FWa0Ey"
-Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6873kpwc2219070
-	for <linux-arm-msm@vger.kernel.org>; Mon, 7 Sep 2026 06:34:17 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	CPyvDLh+aC0OEcv55eKGy0rZjUEKC9UNKb9SvdGhdZM=; b=HeYIGvy2mWNdAiSI
-	czcoNGOVG16mlrKAjqWWXvdtiWT82LUzhM+PUYwNTuQ55vGZncGJOGsoM47ot/Y3
-	qZ8T6PsshokVl4Og34dHL03eYAOo0hDvZS7klwIrh3XFe3jI0SNgOMk1C6nDgTPs
-	7zyX4lTXTzi9Sfx5+/N1UIxeAnCXN1nwif51kQsNN7/LRBDiLg0kH7o4glY7SGp4
-	rWwsFIa7eevkRuKVv1ZLf/o1M5rd5FMuzj/Sxe+7hxxpiwiTFldbHKURjnlHFZu4
-	+S72GDxVIctHvs8dJLdyiSugk5CZfYdCaN36lebvMVXDp7OIpRG07y6phaRFGocu
-	PtMkng==
-Received: from mail-pj1-f72.google.com (mail-pj1-f72.google.com [209.85.216.72])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ggcca56rs-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Mon, 07 Sep 2026 06:34:17 +0000 (GMT)
-Received: by mail-pj1-f72.google.com with SMTP id 98e67ed59e1d1-39af92138f9so4990897a91.0
-        for <linux-arm-msm@vger.kernel.org>; Sun, 06 Sep 2026 23:34:17 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="aXssTUcc"
+Received: by mail-wr1-f48.google.com with SMTP id ffacd0b85a97d-4858303de5dso3875054f8f.2
+        for <linux-arm-msm@vger.kernel.org>; Sun, 06 Sep 2026 23:40:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1788762857; x=1789367657; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
+        d=linaro.org; s=google; t=1788763227; x=1789368027; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:organization
+         :autocrypt:content-language:references:cc:to:subject:reply-to:from
+         :user-agent:mime-version:date:message-id:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=CPyvDLh+aC0OEcv55eKGy0rZjUEKC9UNKb9SvdGhdZM=;
-        b=V9FWa0EyNVSH48CUsyXH1f+SikfRMt5s+Ejc98Is7mk3hsjXz5NPbmDKWQXJ4qdlvm
-         iTDxeb3SqvnhxEFA9KW3J/kUTU4EoV5REcCVlad3lfDK2SQDtIIpRgBhd/bwSTD9cdYG
-         tMAMGR+W8o8G2YwJtyZj3Ki8diF++Iz8X6JazmTt5QOimTvJsazaehho2vlr+4vyKhkt
-         U4BVZvOAcLClCYtYLViX5NFPCiHV/6fAVpzjXmQ2jPBUMZBwn3ZNacMng/iuem9K/ZCI
-         LGj2j9bj1cv7RVj3pN9UBl1cFWEZ/ABk6cAYWJE9vW5FbtlXJXwq+VnkByD6jQHZjbgP
-         kouA==
+        bh=SU9/kaGiibd6mGhjdwN2A8ofGPaPGTIVHRIR2UuuB8I=;
+        b=aXssTUccpPNs/WwG5O8siJjd+kumLoO3u17gTyftZKtqpPFerJqR5Bxi8hw5YsycSc
+         9mzKnT+o5Jppf5S3SBQxf1aHUSE/GjY7GIS7XkPiyiRGQ9om/EXbhvNfSCo7ajlW3LsE
+         3NYoZamkScTQUx13DHDHWo2wVS9Lq4hyJekgXz7qiNJrMsichIqhvSbBaJet1VQwtyQx
+         BhzoVz5dfS7TvHSbXPhII7lBtiSNNwp4EV7Y+bBiv3N5KSErvQCvugzAkJG27zVDPXex
+         FR5e+QUzexg0PVnXRRGcwcXMd3p9nHNfmmM0r0glxAnoHcCJzvi3r/K4vBY+zsS3iB0h
+         +UnQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788762857; x=1789367657;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=CPyvDLh+aC0OEcv55eKGy0rZjUEKC9UNKb9SvdGhdZM=;
-        b=rJvr3yBnS6pwvFXMwPApYOl/Hiz82fV2xzQJcspbmMhAXNYL4ln/ZmUsdXJ5M/VJAO
-         9aSOMrT8Og1+y4JlvzNz08KIMNoWuBAZzH/4GcPAkHxnS7jwbVmma8F352pgwOxNYVb4
-         6f9O6FT9bGls7yZ8aZ5wAs5U5QGvLstAUe6DK71KYGtLodkb1mlYyec7mbXYENEZjGNt
-         +ckUopKjuw2vB7g+WEbVpFqsiflgJ7xb7EgzRCXiTA2ZtP5pHIz5toItf8UM/ygNytRT
-         OQ7abHD7nHTymjEHSH3/m9bJHcJeYskNxVKiIO/nuD6p63yvLhd4u/BdW6Fe9sSvL8J2
-         wizA==
-X-Gm-Message-State: AFuF++m1Mcm48j7q/RNYDbhc4oeQbFBhiem19fyt5i2KoctTim92A9wd
-	+qasyzFZk4qnfnMiNSFeuz3l0y4MlCBzh5XBAlJ/7i387/zUEEZ5ZBhZPPz93ab/aQRIqHFSrcX
-	0l+OTuu4YB6YRJ1S1xAVbtl8L4lrok38yl6ADxKyZVDlZPi9lv0XjXnlAiZ+ZSMMrEFMt
-X-Gm-Gg: AYBFou2lBXdgAOb9QK5o1oAU6nQ8LdSwoIaj12Kk/A7Zl5k6mQNdpgqXu8o32DjoCit
-	7iwysobX57NZix03Z66VhMvQeT2IyC9pIOOf49gBMkQqSZirqvzMKI2BaRPsLR2RMHKBW58sFmg
-	JwWWDn+3hO0WfIFJbKgRU4aXc2kf93wCfIM8xsLcOVIgMzxghBDjlfrw6Xqi8Bb3YOEoioRWGw0
-	QWnggAjLM2Su+iQHvhkQl0peevGrMKWYw0XhopSMqaGQkmZjObRn/tbe0Qrg5tA9eALr6H84JQk
-	TIcFMTNoXNWDpgjjpn8SgZJaYbJ83Je2IPkJN8Zm4DudurAutdkjtZ3JQacgEH5t9sEmGnI7k1o
-	H2YQEe/CIqbYKjDWHmJB1AYeZgJHkyyshFWOh
-X-Received: by 2002:a17:90b:2244:b0:380:86d8:8162 with SMTP id 98e67ed59e1d1-39b0865353bmr29029567a91.18.1788762856785;
-        Sun, 06 Sep 2026 23:34:16 -0700 (PDT)
-X-Received: by 2002:a17:90b:2244:b0:380:86d8:8162 with SMTP id 98e67ed59e1d1-39b0865353bmr29029512a91.18.1788762856305;
-        Sun, 06 Sep 2026 23:34:16 -0700 (PDT)
-Received: from hu-ssmaurya-hyd.qualcomm.com ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-33808be8fb2sm2440549eec.14.2026.09.06.23.34.11
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 06 Sep 2026 23:34:15 -0700 (PDT)
-From: Shashank Maurya <shashank.maurya@oss.qualcomm.com>
-Date: Mon, 07 Sep 2026 12:03:54 +0530
-Subject: [PATCH v2 2/2] arm64: dts: qcom: lemans-evk: Add Raspberry Pi
- 7-inch DSI panel overlay
+        d=1e100.net; s=20251104; t=1788763227; x=1789368027;
+        h=content-transfer-encoding:content-type:in-reply-to:organization
+         :autocrypt:content-language:references:cc:to:subject:reply-to:from
+         :user-agent:mime-version:date:message-id:x-gm-gg:x-gm-message-state
+         :from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=SU9/kaGiibd6mGhjdwN2A8ofGPaPGTIVHRIR2UuuB8I=;
+        b=dxtovk9md5DRV5ofG55YSqFuqTBxyenWycMrL0GyAR5PVGSQ5PGxwcgoqdYxb+NZYR
+         EVKHJgtdIZjNRS8FtFmcgxXD9oSi1XSutFlNIbgbA3/UgmFawo9NpcnK2OQy3daJ6Ieu
+         w+AZ3Z2vEXrSKC5FXJ2AEub+cVSVhYvaZCS2IrW/4bam1ZoyWHA6Q+QA+XM6SCzw9Vsd
+         gp9epEaHzrslFXw74Tpjg2OoEQT0vc2dqhE4vmQDCkrAFpXR6uf/Cu8xBeekLwzl/ses
+         Ya7UOX74JpTldz53ts2mGR/LDW+sbc4/o8AfxFn2I54ZnuOtFD0D7T5B3rGA1xln2pw4
+         1b0Q==
+X-Gm-Message-State: AFuF++kPLvijjQJtcuMvI8FyM519NdGyEkZcq1FbGdkgSEE8K2GFaEqO
+	/bOXK59i/WAkVDK+6GahAd1lZJSW6mTE4OQaYZ3M7McvWp6Med26pWG4Dk7p4a+tM+w=
+X-Gm-Gg: AYBFou0JB6jycAok5Tsvds2rBHfpZvY2DNSFUusXvCCOoOGMK94zFJMvQoOLIVCkLl3
+	Ht7hF/TY6n+5g3eXHQaVPARTCwtsjXrdzvireVHu3JIjWCW/vMqbpzI3TaADhOtziJKJA50eGux
+	RjPlUbJUOiFa1sz7i4WKOmCmtlEaN2toyiWbBv06zmS/ZrLowpCVy+7f3cX4ootjA/4QxeHkCpv
+	2miwkrgFP2YOZw2SUERybjTvv08TzQpFjGMMjltTyTsQ+ZzyH6qAfsftT9ZE4QN2VgJ2Is713XX
+	9tvPeAlSMe0d4uN6ChM0MztSpLdxkdChLdIGWzz+1+ZqLSJdvEgVGq8G4DrnJtahrlZyClxCXsK
+	N9S69/fDSiu4C0im8ou/kXWaVcw+EX6k3qWCzNwkeb+rDnBDtqyZqrXhAY74nx/bGU9W0R9CfKe
+	wcmyJ6nlmLypt09xDGZJS+THFJOpR3ZV9E1eDuPwv2XyqIHPYpNtWIR+rjPgCbT30O/Gj8DdqzU
+	H2kWOwIV75Kk4DkWzgAVC4k+fzVIDkG3KWTO5tCWoc=
+X-Received: by 2002:a05:6000:1a8d:b0:485:8c16:a32f with SMTP id ffacd0b85a97d-4858c16a6cemr17808883f8f.36.1788763227160;
+        Sun, 06 Sep 2026 23:40:27 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:106d:1080:74d7:9035:e283:b480? ([2a01:e0a:106d:1080:74d7:9035:e283:b480])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-485883be709sm26981837f8f.21.2026.09.06.23.40.26
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Sun, 06 Sep 2026 23:40:26 -0700 (PDT)
+Message-ID: <f0fc4211-2040-4115-9847-6e5cc3fe8161@linaro.org>
+Date: Mon, 7 Sep 2026 08:40:25 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+From: Neil Armstrong <neil.armstrong@linaro.org>
+Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
+Subject: Re: SM8250 USB-C DP alt mode: DP AUX times out in reversed (CC2)
+ cable orientation
+To: BurningHoryd <sjunhyuk1@gmail.com>,
+ Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
+Cc: linux-arm-msm@vger.kernel.org, linux-phy@lists.infradead.org,
+ dri-devel@lists.freedesktop.org, freedreno@lists.freedesktop.org,
+ Vinod Koul <vkoul@kernel.org>, Abhinav Kumar <quic_abhinavk@quicinc.com>,
+ Heikki Krogerus <heikki.krogerus@linux.intel.com>
+References: <20260906225206.2994952-1-sjunhyuk1@gmail.com>
+Content-Language: en-US, fr
+Autocrypt: addr=neil.armstrong@linaro.org; keydata=
+ xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
+ GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
+ BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
+ qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
+ 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
+ AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
+ OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
+ Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
+ YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
+ GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
+ UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
+ GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
+ yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
+ QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
+ SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
+ 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
+ Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
+ oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
+ M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
+ 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
+ KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
+ 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
+ QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
+Organization: Linaro
+In-Reply-To: <20260906225206.2994952-1-sjunhyuk1@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260907-rpi_dts_overlay-v2-2-a4989322ce00@oss.qualcomm.com>
-References: <20260907-rpi_dts_overlay-v2-0-a4989322ce00@oss.qualcomm.com>
-In-Reply-To: <20260907-rpi_dts_overlay-v2-0-a4989322ce00@oss.qualcomm.com>
-To: Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>,
-        Florian Fainelli <florian.fainelli@broadcom.com>,
-        Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>
-Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-rpi-kernel@lists.infradead.org,
-        linux-arm-kernel@lists.infradead.org, venkata.valluru@oss.qualcomm.com,
-        Jessica Zhang <jesszhan0024@gmail.com>,
-        Shashank Maurya <shashank.maurya@oss.qualcomm.com>
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1788762840; l=3162;
- i=shashank.maurya@oss.qualcomm.com; s=20260828; h=from:subject:message-id;
- bh=sTcoJe5DoruJGaJbA+mDYOnpK2K4WQXqyShMTozDpQY=;
- b=fEgoxoRnGmVyJ0qWPpbfbKMOuFe4N1ntb4b3AYDYqiFdqYmnaSWD3jyxDIcciSE0KZwneZsiw
- gsKe+tASmBqDVINlicgjMfUodvTloj/VgUx2Lt6ZWZU0IY+byNutA4c
-X-Developer-Key: i=shashank.maurya@oss.qualcomm.com; a=ed25519;
- pk=xld72d+QYBwDMDcn3+QLCb5AUsj/D0j8klGIuxWd860=
-X-Proofpoint-GUID: 7xKeGFs9REaHN4-xJuLmxuJqtrX5P9da
-X-Authority-Analysis: v=2.4 cv=EJo2FVZC c=1 sm=1 tr=0 ts=6a9e5ae9 cx=c_pps
- a=RP+M6JBNLl+fLTcSJhASfg==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
- a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22
- a=EUspDBNiAAAA:8 a=rHGbxVKOk4E_Aj177jYA:9 a=QEXdDO2ut3YA:10
- a=iS9zxrgQBfv6-_F4QbHw:22
-X-Proofpoint-ORIG-GUID: 7xKeGFs9REaHN4-xJuLmxuJqtrX5P9da
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTA3MDA2OCBTYWx0ZWRfXzT9+QujQS9PF
- DT8Qy9rMpIEYDB+RDDU7pw6wqAlb0K3hcg4iJaQzBi35EhKZlbMFMakAKo2IAWtYJ73GPkEuaVJ
- Ke3vUQUdlz+QbeMg4gTWpNjsLYFjrrD9+Yig8SHSRp70UPaaVZkq+HHB1hgQ+a0hT+5LJ0dv2kQ
- BYilbEOyx/H85Cg800F1aApHLbJfbIIl9V5WRpYrL+w23eCiZrW3wkurq+kvTb+foqeWqkXt5EL
- myDHkUk8SmwxVX2h1uFaTadYOy1nShRjqVqY9glZg6EjtsjHkeAa0Vd5LgQY0uaM6Aog4OvwLRy
- S1xi01kqFPIi2F4FYC2MnNY+SOfjfGad4bjZi0WB/+5Mv29qmO7yvZRuuhRW8FlSyJJMGkagWAz
- 668BQOQQYIH/eg1ikR+NDiyrK5hP9cvshKjI3vt6hvYOFHsrRy9MH7YPRJ03foXBnSuP4eC6Qpj
- awZyQDn55X0/8SpFyww==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTA3MDA2OCBTYWx0ZWRfX6Z5vTWh0bps/
- pagLHqar6Zwb/Zo4DZh/jB/ctjjgDZSBWzc429f1BhM9kCI2D07BWlQaRNvAWDDQGs4+xOhA5wZ
- GBDB0MwXDN5lGHPXS+uDvz7KkfhyNUk=
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-07_01,2026-09-03_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 phishscore=0 impostorscore=0 lowpriorityscore=0
- adultscore=0 suspectscore=0 clxscore=1011 bulkscore=0 malwarescore=0
- spamscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
- adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
- definitions=main-2609070068
 
-Add a DT overlay for the Raspberry Pi 7" DSI touchscreen panel on
-Lemans EVK, using mdss0_dsi0 with 2 data lanes and the panel MCU on
-I2C1.
+On 9/7/26 00:52, BurningHoryd wrote:
+> Hi,
+> 
+> I'm chasing a DisplayPort-over-USB-C alt mode bug on an SM8250 (Retroid
+> Pocket 5) board and would appreciate a pointer, as it looks like it may
+> be in the nb7vpq904m redriver or the qmp-combo DP AUX path.
+> 
+> Hardware / software
+> -------------------
+> - SoC: SM8250, qcom,sm8250-qmp-usb3-dp-phy combo PHY (88e8000.phy)
+> - USB-C redriver: onnn,nb7vpq904m (i2c, typec mux/switch)
+> - External sink: VITURE Beast XR glasses, 4-lane DP-only (pin assignment
+>    C, TYPEC_DP_STATE_C), HBR2, 1920x1200@120
+> - Kernel: v7.2 base, plus three local qmp-combo patches that are the
+>    subject of a separate downstream review (keep usb_init_count across the
+>    DP-only mux switch / skip USB3 power on/off while already in DP-only /
+>    the residual pipe_clk-in-common timeout hunk). The AUX failure below
+>    reproduces with those applied; I have not been able to bisect against
+>    pristine v7.2 because plain v7.2 has an unrelated regression on this
+>    board (qcom_pmic_typec now requires connector/vbus-supply, which the
+>    board DT lacks, so DP alt mode never powers up at all without a
+>    separate DT fix).
+> 
+> Symptom
+> -------
+> Normal cable orientation: DP alt mode works perfectly - link trains,
+> 1920x1200@120, stable.
+> 
+> Reversed cable orientation (Type-C orientation = reverse / CC2): DP never
+> comes up. The DP alt mode HPD notification reaches msm_dp
+> (msm_dp_bridge_hpd_notify status=1), msm_dp starts bring-up
+> (msm_dp_display_host_phy_init, phy_init OK), but the very first DPCD read
+> - SINK_COUNT at 0x200 in msm_dp_hpd_plug_handle - polls for ~4 seconds
+> and never gets a reply:
+> 
+>    [drm:msm_dp_hpd_plug_handle] Before, sink_count=0
+>    [drm:msm_dp_display_host_phy_init] core_init=1 phy_init=1
+>    ... ~4 s ...
+>    [drm:msm_dp_hpd_plug_handle] After, sink_count=0
+>    [drm:msm_dp_bridge_detect] aux link status: 0
+>    [drm:msm_dp_bridge_detect] failed to read caps
+> 
+> msm_dp then gives up and the connector stays disconnected. Link training
+> is never reached. Stock Android on the exact same hardware works in both
+> orientations, so this is a driver-side issue, not a board/silicon limit.
+> 
+> What I've verified (instrumented kernel, dev_info in the phy + nb7 set
+> paths)
+> ------------------------------------------------------------------------
+> - It is NOT a state / refcount / mux ordering artifact: a clean
+>    reverse-first plug (fresh boot, reversed cable plugged before any
+>    normal plug) fails identically.
+> - On the reversed plug, in order:
+>    * qmp_combo_typec_switch_set(REVERSE) runs, qmp_combo_com_init(force)
+>      writes QPHY_V3_DP_COM_TYPEC_CTRL = SW_PORTSELECT_MUX|SW_PORTSELECT_VAL
+>      (0x3).
+>    * nb7vpq904m_set() runs for TYPEC_DP_STATE_C with reverse=1, writes
+>      AUX_CC_REG (0x09) = 0x1.
+>    * qmp_combo_typec_mux_set() does the DP-only transition, com_init(force)
+>      again (mode=DP_ONLY, TYPEC_CTRL=0x3) - this happens AFTER the nb7 DP
+>      config.
+>    * qmp_combo_dp_init() -> qmp_v4_dp_aux_init() runs.
+>    So the PHY and the redriver are both configured for reverse, in a sane
+>    order, before msm_dp attempts AUX. And AUX still times out.
+> - qmp-combo has no DP-AUX orientation register that I can find - AUX
+>    orientation on this design is entirely nb7vpq904m AUX_CC_REG.
+> - Inverting SW_PORTSELECT_VAL and/or nb7 AUX_CC (making the registers
+>    bit-identical to the working normal-orientation case) does not help -
+>    reverse still fails.
+> - Forcing repeated full qmp_combo_com_exit/com_init cycles during the
+>    DPCD poll window does not help.
+> 
+> The one thing that changes anything
+> -----------------------------------
+> I added a knob to override GEN_DEV_SETTINGS OP_MODE in the nb7
+> TYPEC_DP_STATE_C branch (it normally hard-codes
+> GEN_DEV_SET_OP_MODE_DP_4LANE):
+> 
+>    OP_MODE = DP_4LANE (2)      -> DPCD read: 0 successes (many tries)
+>    OP_MODE = DP_CC1   (1)      -> DPCD read: 0 successes
+>    OP_MODE = DP_CC2   (0)      -> DPCD read succeeds intermittently
+>                                   (~1 in 4 plugs, sink_count 0->1,
+>                                   connector goes connected briefly).
+>                                   Link training then fails, which is
+>                                   expected since DP_CC2 is a 2-lane
+>                                   op-mode and the source is driving 4.
+>    OP_MODE = 3, 4             -> 0 successes
+> 
+> DP_CC2 is the "flipped orientation" op-mode. It is the only setting that
+> ever gets an AUX transaction through in reversed orientation. That
+> strongly suggests the nb7vpq904m SBU/AUX switch is not being put into the
+> flipped routing for a 4-lane DP session - AUX_CC_REG alone does not seem
+> to do it in DP_4LANE op-mode - but I don't have the full NB7VPQ904M
+> register map to confirm (the public datasheets are image-only).
+> 
+> Questions
+> ---------
+> 1. Is nb7vpq904m's DP_4LANE path missing SBU/AUX orientation handling
+>     that the DP_CC1/DP_CC2 paths get implicitly from the op-mode? Should
+>     AUX_CC_REG be sufficient in DP_4LANE mode, or is another
+>     GEN_DEV_SETTINGS / AUX register bit needed for CC2?
+> 2. Is there an SM8250 qmp-combo DP-AUX orientation step that mainline is
+>     missing (something the downstream PHY driver does for a reversed
+>     4-lane DP session)?
+> 3. Any known-good reference for reversed-orientation 4-lane DP on an
+>     SM8250 + nb7vpq904m board?
 
-Signed-off-by: Shashank Maurya <shashank.maurya@oss.qualcomm.com>
----
- arch/arm64/boot/dts/qcom/Makefile                  |  2 +
- .../dts/qcom/lemans-evk-raspberrypi-dsi-7inch.dtso | 83 ++++++++++++++++++++++
- 2 files changed, 85 insertions(+)
+This means the nb7vpq904m is _not_ responsible for the AUX swapping, other
+boards have the wcd9395 or the fsa4480 in the middle to use the AUX line
+for the USB-C Alternate Audio support, and does the swap.
 
-diff --git a/arch/arm64/boot/dts/qcom/Makefile b/arch/arm64/boot/dts/qcom/Makefile
-index 38554195fc98..d17b46a043ad 100644
---- a/arch/arm64/boot/dts/qcom/Makefile
-+++ b/arch/arm64/boot/dts/qcom/Makefile
-@@ -57,6 +57,8 @@ lemans-evk-el2-dtbs := lemans-evk.dtb lemans-el2.dtbo
- dtb-$(CONFIG_ARCH_QCOM)	+= lemans-evk-el2.dtb
- lemans-evk-ifp-mezzanine-dtbs	:= lemans-evk.dtb lemans-evk-ifp-mezzanine.dtbo
- dtb-$(CONFIG_ARCH_QCOM)	+= lemans-evk-ifp-mezzanine.dtb
-+lemans-evk-raspberrypi-dsi-7inch-dtbs	:= lemans-evk.dtb lemans-evk-raspberrypi-dsi-7inch.dtbo
-+dtb-$(CONFIG_ARCH_QCOM)	+= lemans-evk-raspberrypi-dsi-7inch.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= mahua-crd.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= milos-fairphone-fp6.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= milos-nothing-asteroids.dtb
-diff --git a/arch/arm64/boot/dts/qcom/lemans-evk-raspberrypi-dsi-7inch.dtso b/arch/arm64/boot/dts/qcom/lemans-evk-raspberrypi-dsi-7inch.dtso
-new file mode 100644
-index 000000000000..14743b3c3863
---- /dev/null
-+++ b/arch/arm64/boot/dts/qcom/lemans-evk-raspberrypi-dsi-7inch.dtso
-@@ -0,0 +1,83 @@
-+// SPDX-License-Identifier: BSD-3-Clause
-+/*
-+ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
-+ */
-+/dts-v1/;
-+/plugin/;
-+
-+#include <dt-bindings/gpio/gpio.h>
-+
-+&{/} {
-+	display_bl: backlight {
-+		compatible = "pwm-backlight";
-+		power-supply = <&reg_dsi_touch>;
-+		pwms = <&reg_backlight 0 255 0>;
-+	};
-+
-+	reg_dsi_touch: regulator-touch {
-+		compatible = "regulator-fixed";
-+		regulator-name = "rpi-dsi-touch";
-+		regulator-min-microvolt = <3300000>;
-+		regulator-max-microvolt = <3300000>;
-+		gpio = <&expander3 1 GPIO_ACTIVE_HIGH>;
-+		enable-active-high;
-+		regulator-boot-on;
-+		regulator-always-on;
-+	};
-+};
-+
-+&i2c1 {
-+	qcom,load-firmware;
-+	qcom,xfer-mode = <1>;
-+
-+	status = "okay";
-+
-+	#address-cells = <1>;
-+	#size-cells = <0>;
-+
-+	reg_backlight: reg_backlight@45 {
-+		compatible = "raspberrypi,touchscreen-panel-regulator-v2";
-+		reg = <0x45>;
-+
-+		vcc-supply = <&reg_dsi_touch>;
-+		gpio-controller;
-+		#gpio-cells = <2>;
-+		#pwm-cells = <3>;
-+	};
-+};
-+
-+&mdss0_dsi0 {
-+	vdda-supply = <&vreg_l1c>;
-+
-+	status = "okay";
-+
-+	#address-cells = <1>;
-+	#size-cells = <0>;
-+
-+	panel@0 {
-+		compatible = "raspberrypi,dsi-7inch";
-+		reg = <0>;
-+
-+		reset-gpios = <&reg_backlight 0 GPIO_ACTIVE_LOW>;
-+		power-supply = <&reg_dsi_touch>;
-+		iovcc-supply = <&reg_dsi_touch>;
-+		backlight = <&display_bl>;
-+
-+		port {
-+			panel0_in: endpoint {
-+				remote-endpoint = <&mdss0_dsi0_out>;
-+			};
-+		};
-+	};
-+};
-+
-+&mdss0_dsi0_out {
-+	remote-endpoint = <&panel0_in>;
-+	data-lanes = <0 1>;
-+};
-+
-+&mdss0_dsi0_phy {
-+	vdds-supply = <&vreg_l4a>;
-+
-+	status = "okay";
-+};
+Could you check in the vendor tree if there's any reference to those ?
 
--- 
-2.34.1
+Neil
+
+> 
+> I can share the full instrumented traces (normal vs reverse) and test the
+> register map if someone can point at the right bits. Happy to turn a fix
+> into a proper patch.
+> 
+> Thanks,
+> BurningHoryd
 
