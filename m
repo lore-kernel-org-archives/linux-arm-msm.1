@@ -1,223 +1,105 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3785951E44D
-	for <linux-arm-msm@vger.kernel.org>; Mon,  7 Sep 2026 20:25:03 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7E49C39EF0C;
+	Mon,  7 Sep 2026 21:26:47 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788812710; cv=none; b=MUgarM2oJNoYEHkp2XerVN06ICx6nQo+5gtjjsOxwzl0CDsZqzQv8az/tt5NeZvOEIZViOFEzpgmDUFQ6MP4aebHeexpK6TdYXF3deS4t0V1elYhze1ldkPTK11D6jrN5jnksMQfZKlVIFUmBmJdiIm774MRAlBcqQGtIoTtHDQ=
+	t=1788816408; cv=none; b=RHcwKrjQDe42BwhlOQJaLtTL0IG3V5pYKOoDIcXko6PxC7ZVS8wEPpgZIh9KPlr9mfBNS4MzyEdowTnfnfftbMB0BCylFLVZwB2R+Kj9bT1eZ5H7YskhftYhwmErgqL89HBG6tFslwRtoxpoR5NRQ716nRftrwQCmo3e/zHIwDI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788812710; c=relaxed/simple;
-	bh=KsLk75r2w7Y7Td996D/f1RY9lIMY3ClaAGPh1T4xOuA=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=IQcdbE1sBerxal+yAVOVfFv2N+JyUHDh9/Lxl2EBGuWHpDPmYBBE0A0nr6gVltia3xQTBvNfxZxKWePgw8U+sBBqEuM5hMUcvjsBg+l7otqwvoVDXlwD5GYUDm5zynw1XF8d4Iap7phoaVfLG2qYrG+8DhCHTQnVScYpTBl5uIY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=T4PlL33X; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=RHdNhOIG; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1788816408; c=relaxed/simple;
+	bh=qxma2K6DKoFEVy/ut0woTLk7TkpNMnVQBtgJ+T5bxQs=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=aodxPzSc3j1q5gGCjSz2Uqiyko7O/fyBGrjRgB1s+cNY56Z7Z+frxQvWeM61sKfPx+lygrcBk0xoY/ynWbgyVxphuYyw17mxFPYOZtaCR6KK3vlu9GPM08YDrQVRrQEmi0uZ4EkPtsJOa+X3f9LQj9Xbxo6i3odI7UY5tEErNjk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=KaCJC7wm; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="T4PlL33X";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="RHdNhOIG"
-Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 687H7kmW4061909
-	for <linux-arm-msm@vger.kernel.org>; Mon, 7 Sep 2026 20:25:01 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	Hrvy+QoVG0RLYoH5IBz54YMeR8SjZQtO5lp7S4xTaVc=; b=T4PlL33Xk5zjDyxh
-	BUlto0g8F5GJA1rMWVho56/UPhEgBpa/mWZ44L0nFhxxBesK6Q1CrjnoQPzPXzG4
-	UN4i5ePBHUpBptW4fo6NEjAkgiSt4uVx/YIu2NvRuGbLfUkv2V0x/K/Sds2kOS7u
-	XzgMUGLwY8gRY5IpTY0kI0T8F3bdc/b+zXXIA2p6sXl6alBn4YeRtHuMeUQnSCMW
-	xpzRJeCeuZB8wvrroUJpamTu7CwvU10JlSQyvjTaEK5dqC0M4QZUt32wSAuBnX/6
-	HyNGUiWay4EnOU5H4Roy50/BdILONCtYj5A30283rnN/EEO3mK0sNZqvI1xY+2ID
-	rdPFCQ==
-Received: from mail-pl1-f198.google.com (mail-pl1-f198.google.com [209.85.214.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gj077gsq1-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Mon, 07 Sep 2026 20:25:01 +0000 (GMT)
-Received: by mail-pl1-f198.google.com with SMTP id d9443c01a7336-2db3b126c9fso27800575ad.0
-        for <linux-arm-msm@vger.kernel.org>; Mon, 07 Sep 2026 13:25:01 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1788812701; x=1789417501; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=Hrvy+QoVG0RLYoH5IBz54YMeR8SjZQtO5lp7S4xTaVc=;
-        b=RHdNhOIG1Lsa2l4RsJoBmURkL3+B1A/rf7gGu9aaD9un4N73SfPgYpgJHJ1ROdlqRU
-         l3DILlfI60grNpvrlEIw0jxcBUVzZ+SxWJWDSodRGYHPnsR7IVCUFjIZUX4L1cO35AMw
-         RA7rsJAHikqfYJZM40FBYR5tKSiJy1BAGlKPS7h7IEwgE5E7oFiBsNn2Buf2IkXD/uMA
-         4biQFLZ2/0/zYPQIKdKrsKRcEssrxyrCxxidM5v2VTIGMN4J2+B+E4yZwXwifpBrFe8r
-         LB2Z0RTayFMKoJ2kLAlrZ8FBL7+dyiH6b2bryT1FQAaMzJSP30OoLo0JybppqKWQbr6y
-         HuYw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788812701; x=1789417501;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=Hrvy+QoVG0RLYoH5IBz54YMeR8SjZQtO5lp7S4xTaVc=;
-        b=sJ80fo15O2VOaHyPsgNS8Wk9Sk4njcTm3XTH+NRfwkageNvsP6YtHnRPlm71vfzN+U
-         LTOTd59rQ9kGuZpbkqP6JsFNxeuxPO9FHp0hG+QnpHxKCO8gfPJLZelLyxO6iQnBCRPw
-         5GneVOJEWvHvVt/pPyagXlriPIsUtmJua/IibDijwwvZ5edagkN4d9QChOTAfgsJYfws
-         NoXC9Q68s3CIvoE2FoGfXYf0UXNFdVG3fFv9dxQfHCb0zIUR3dHWzizH+TBn/thfaDP6
-         OOLd+reknXqvWlRkuBw0FuRjrKbySjZoBywSeddR5CrHZcFS3tS9xwe303KcetE3uZkS
-         FcNA==
-X-Forwarded-Encrypted: i=1; AKwUvBzJvnuJOuQ14nKvxKg36XPv2ynSacaCi8sLuAeTd5sHlOZRXduRk8MHVYmOLSvSU+/OatuP/0Izv8idZmZA@vger.kernel.org
-X-Gm-Message-State: AFuF++mUpeSgf2us4G9OhRlXc/GOS3BeUbnOnSZPgISnOQd8QhcN/s9D
-	KIYEDu5idMU94kjenYt4aTB/SCNJv/WLwkz1oRaqf2TOQ/op1BehRm15A+pskRwj7ZpJv2m0YPr
-	t8+e+wKKCqlBO7sc1dmsn0dmmi7I/bnpYcPtnPF+L/rMg1gJmde6TGoxPZdWTyeJtmwMJ
-X-Gm-Gg: AYBFou3n0DKEJnxFJncNe4B5I8lC+DOCm0wjmXvDjcB1hvlFWxElQht5Cic96yJIUWz
-	tY4xjGd6tm7/TTyd11k9by2s7u+g1SxbPCLNKGjv1Z6+1N5gQByHIvits+cV1C1klgH7T+DMZyc
-	uoGpqgIY1sTl+C8GJiIbwNJ3iFRP4w4n64mJu2Lb+/Ieh65tmpyBR00g2PihHgroVcFbB6NtG1m
-	QBVPqRgoW0NHMk5zflIFI8kvQgLX1iNTRv+kLDkLeMaxOw9yvsW11wDqjbpfC8TX3SZJqSQ6/4i
-	4fsLS57XDCXYPX+jEA6mEyrPiFCAJnwRKIVk1q2KK/oLcg4diENqu9GVBI7Er70x7KYcLaEe/8C
-	hT37ANhw5diauAs+k5tZt7NbNcFhfvw==
-X-Received: by 2002:a17:903:4b04:b0:2d3:160b:c01f with SMTP id d9443c01a7336-2db124b1ae2mr337578445ad.6.1788812700526;
-        Mon, 07 Sep 2026 13:25:00 -0700 (PDT)
-X-Received: by 2002:a17:903:4b04:b0:2d3:160b:c01f with SMTP id d9443c01a7336-2db124b1ae2mr337577745ad.6.1788812700084;
-        Mon, 07 Sep 2026 13:25:00 -0700 (PDT)
-Received: from hu-mohdayaa-hyd.qualcomm.com ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3339b314cfcsm30482259eec.19.2026.09.07.13.24.52
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 07 Sep 2026 13:24:59 -0700 (PDT)
-From: Mohd Ayaan Anwar <mohd.anwar@oss.qualcomm.com>
-Date: Tue, 08 Sep 2026 01:53:21 +0530
-Subject: [PATCH net-next v2 9/9] net: stmmac: qcom-ethqos: add Shikra EMAC
- support
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="KaCJC7wm"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id DEB8A1F00A3A;
+	Mon,  7 Sep 2026 21:26:43 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1788816407;
+	bh=0Yesz9ak27Awy9F1+4UB5DYHc25JWpLLj+kYcrTZJWA=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=KaCJC7wmACljfo/XuFGU2qrmvfdqj3RVjfbFZTt+sQmCUtxZf03KMk6tddtkhU9gR
+	 Bx7RIYUCx1gLVbOw6EhSjWLuX3sd8OYEhHwgFChKjJaRInQGbwE5uWvMLu7UECobcG
+	 v0+zSAAaPo9WjDOjMyI9k0i9aEfBsClfDrIAcK6r+yBpESgpW04gYR15t3PAzm4Kdz
+	 m3RTOFyi1Z6zbtDPDtglX5sg8KkcacYr9FZ2LRSoxqnKRJfEpehdq0Fq/rh9ZBv5nF
+	 3Ks7TkUFitZBjs91ULTuZtCEnRqNmnpMBpiu1TzqmYs5+3IBr5NOu7+BHFfv9SVuul
+	 PWCDPfqNd6gOw==
+Date: Mon, 7 Sep 2026 22:26:41 +0100
+From: Mark Brown <broonie@kernel.org>
+To: Pierre-Louis Bossart <pierre-louis.bossart@linux.dev>
+Cc: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>,
+	Rob Herring <robh@kernel.org>,
+	Charles Keepax <ckeepax@opensource.cirrus.com>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Bard Liao <yung-chuan.liao@linux.intel.com>,
+	Jaroslav Kysela <perex@perex.cz>,
+	Liam Girdwood <lgirdwood@gmail.com>,
+	Maciej Strozek <mstrozek@opensource.cirrus.com>,
+	Takashi Iwai <tiwai@suse.com>,
+	Faiz Nabi Kuchay <fkuchay@oss.qualcomm.com>,
+	Jorijn van der Graaf <jorijnvdgraaf@catcrafts.net>,
+	patches@opensource.cirrus.com, linux-sound@vger.kernel.org,
+	devicetree@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v2 11/11] ASoC: codecs: add Qualcomm Tambora (WCD9378)
+ SDCA codec
+Message-ID: <d17b7928-d2ce-4640-a704-9cba2910aa1f@sirena.org.uk>
+References: <20260907083727.733705-1-srinivas.kandagatla@oss.qualcomm.com>
+ <20260907083727.733705-12-srinivas.kandagatla@oss.qualcomm.com>
+ <525f887e-cb3b-4e74-8b93-30c3baeb8018@linux.dev>
+ <7006ad74-334c-41cb-bcc8-9ef5e75dde7e@oss.qualcomm.com>
+ <005e3c81-778a-47bc-a8ae-fb5c38ea2e2c@linux.dev>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260908-shikra_ethernet-v2-9-bbe3389d0652@oss.qualcomm.com>
-References: <20260908-shikra_ethernet-v2-0-bbe3389d0652@oss.qualcomm.com>
-In-Reply-To: <20260908-shikra_ethernet-v2-0-bbe3389d0652@oss.qualcomm.com>
-To: Andrew Lunn <andrew+netdev@lunn.ch>,
-        "David S. Miller" <davem@davemloft.net>,
-        Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>,
-        Paolo Abeni <pabeni@redhat.com>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>, Andrew Davis <afd@ti.com>,
-        Andrew Lunn <andrew@lunn.ch>, Heiner Kallweit <hkallweit1@gmail.com>,
-        Russell King <linux@armlinux.org.uk>,
-        Richard Cochran <richardcochran@gmail.com>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Alexandre Torgue <alexandre.torgue@foss.st.com>,
-        Giuseppe Cavallaro <peppe.cavallaro@st.com>,
-        Jose Abreu <joabreu@synopsys.com>,
-        Maxime Chevallier <maxime.chevallier@bootlin.com>,
-        Maxime Coquelin <mcoquelin.stm32@gmail.com>
-Cc: netdev@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-        linux-stm32@st-md-mailman.stormreply.com,
-        linux-arm-kernel@lists.infradead.org,
-        Mohd Ayaan Anwar <mohd.anwar@oss.qualcomm.com>
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1788812616; l=2805;
- i=mohd.anwar@oss.qualcomm.com; s=20250907; h=from:subject:message-id;
- bh=KsLk75r2w7Y7Td996D/f1RY9lIMY3ClaAGPh1T4xOuA=;
- b=dBBGlbQ+PXRK8wV2RTj9A9/IfrTUGHY9GlnPObuNyviClmSFJez2HMSBuIgjBJYSaU6yfzIKP
- OhRIpYexXv8CIc9lrWT634bEjV/CIGTmd+QQsDzMWwxUsfQ4OwMfErw
-X-Developer-Key: i=mohd.anwar@oss.qualcomm.com; a=ed25519;
- pk=7JNY72mz7r6hQstsamPYlUbLhQ5+W64pY4LgfSh9DJU=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTA3MDIyNCBTYWx0ZWRfX2FREJM9s5aJP
- G0IkCPCkkZOZLDjFHbVdweCbGoU41qubHqA1dR4Mz7FUl97cxet3DQTyHY2AZIfOYtRnksU2n6S
- UQ7369qYmcbcDywQ7UrcXKiF+KEL5xlepZ43T2tk2oGIPZTvVPRQuwxjxVgwJH/WN0DIJPFAL1+
- 3AGeIvwv3HV+ffx0nyh+xKpDWKPd27+0Grkos5/y7aixKPEn5RDIZsgztq1eCbuL3P11cens/ts
- /cPoPCGBmyuwOu5XW+wpewz6L9xQg9t2aruc4eRAXJuOTzXRJz2VTIY0+n1CM5Ir4ep3MrkdXH6
- zKZQs3wH//DI3y7nZTbAFQp+Yej8IqFtkqkED2YdkLOgvPwD7PlUFSA1FJgfsESETfE9zxonOac
- xvG+b6euJyfnFjOSTiY47qsicBKWGZ8+RyTxA95GeUMUEZ3/gi93BMF9F4m8VDzB9LES/5rceem
- l8/T7SxfXu1z94RRNIw==
-X-Authority-Analysis: v=2.4 cv=Xbe5Co55 c=1 sm=1 tr=0 ts=6a9f1d9d cx=c_pps
- a=MTSHoo12Qbhz2p7MsH1ifg==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
- a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22
- a=EUspDBNiAAAA:8 a=8IO8aBILldGQKMPJy6sA:9 a=QEXdDO2ut3YA:10
- a=GvdueXVYPmCkWapjIL-Q:22
-X-Proofpoint-ORIG-GUID: FD2FF2w_8cF0ujsBgznXKs4nfjLoBWKz
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTA3MDIyNCBTYWx0ZWRfX8bkHZg1yEOoY
- KFLL016Kaxw1cPgPfTTJZh944r4bYgGsibcaQw4Pn09J6XFMehsKjl6K/lBepteMpdZX9BtTsOU
- bR1Ijpv53MZdoGUCA6SYlbV/sVMP7DQ=
-X-Proofpoint-GUID: FD2FF2w_8cF0ujsBgznXKs4nfjLoBWKz
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-07_05,2026-09-07_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0 impostorscore=0 lowpriorityscore=0 clxscore=1015 adultscore=0
- suspectscore=0 priorityscore=1501 spamscore=0 bulkscore=0 phishscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2609070224
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="lrQNR57Kvrwt1iZs"
+Content-Disposition: inline
+In-Reply-To: <005e3c81-778a-47bc-a8ae-fb5c38ea2e2c@linux.dev>
+X-Cookie: Who's on first?
 
-Shikra integrates two Qualcomm ETHQOS controllers based on the Synopsys
-GMAC IP, similar to previous platforms.  Register qcom,shikra-ethqos
-backed by a new shikra_data descriptor that enables the three NOC clocks
-required for DMA memory access (axi-noc, pcie-tile-axi-noc, stmmaceth)
-all at 120 MHz, and the 36-bit DMA address width.
 
-As part of the NOC clock voting logic, the qcom-ethqos glue driver takes
-a second enable reference on the "stmmaceth" clock, which is already
-enabled by the stmmac core. All three clocks in shikra_noc_clks[] must
-run at 120 MHz for NOC access, and managing "stmmaceth" through the same
-clk_bulk path keeps the rate-setting and enable/disable together.
+--lrQNR57Kvrwt1iZs
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Signed-off-by: Mohd Ayaan Anwar <mohd.anwar@oss.qualcomm.com>
----
- .../ethernet/stmicro/stmmac/dwmac-qcom-ethqos.c    | 31 ++++++++++++++++++++++
- 1 file changed, 31 insertions(+)
+On Mon, Sep 07, 2026 at 09:47:42PM +0200, Pierre-Louis Bossart wrote:
 
-diff --git a/drivers/net/ethernet/stmicro/stmmac/dwmac-qcom-ethqos.c b/drivers/net/ethernet/stmicro/stmmac/dwmac-qcom-ethqos.c
-index 8871d285941162c72e2a8f79d2eef915d9283796..c474f1e5a043777a52bcbff8a488640f6dbdca30 100644
---- a/drivers/net/ethernet/stmicro/stmmac/dwmac-qcom-ethqos.c
-+++ b/drivers/net/ethernet/stmicro/stmmac/dwmac-qcom-ethqos.c
-@@ -328,6 +328,36 @@ static const struct ethqos_emac_driver_data emac_v4_0_0_data = {
- 	},
- };
- 
-+static const struct ethqos_noc_clk_cfg shikra_noc_clks[] = {
-+	{ "axi-noc", 120000000 },
-+	{ "pcie-tile-axi-noc", 120000000 },
-+	{ "stmmaceth", 120000000 },
-+};
-+
-+static const struct ethqos_emac_driver_data shikra_data = {
-+	.dma_addr_width = 36,
-+	.has_emac_ge_3 = true,
-+	.noc_clk_cfg = shikra_noc_clks,
-+	.num_noc_clks = ARRAY_SIZE(shikra_noc_clks),
-+	.rgmii_config_loopback_en = false,
-+	.dwmac4_addrs = {
-+		.dma_chan = 0x00008100,
-+		.dma_chan_offset = 0x1000,
-+		.mtl_chan = 0x00008000,
-+		.mtl_chan_offset = 0x1000,
-+		.mtl_ets_ctrl = 0x00008010,
-+		.mtl_ets_ctrl_offset = 0x1000,
-+		.mtl_txq_weight = 0x00008018,
-+		.mtl_txq_weight_offset = 0x1000,
-+		.mtl_send_slp_cred = 0x0000801c,
-+		.mtl_send_slp_cred_offset = 0x1000,
-+		.mtl_high_cred = 0x00008020,
-+		.mtl_high_cred_offset = 0x1000,
-+		.mtl_low_cred = 0x00008024,
-+		.mtl_low_cred_offset = 0x1000,
-+	},
-+};
-+
- static int ethqos_dll_configure(struct qcom_ethqos *ethqos)
- {
- 	struct device *dev = &ethqos->pdev->dev;
-@@ -962,6 +992,7 @@ static const struct of_device_id qcom_ethqos_match[] = {
- 	{ .compatible = "qcom,qcs404-ethqos", .data = &emac_v2_3_0_data},
- 	{ .compatible = "qcom,sa8775p-ethqos", .data = &emac_v4_0_0_data},
- 	{ .compatible = "qcom,sc8280xp-ethqos", .data = &emac_v3_0_0_data},
-+	{ .compatible = "qcom,shikra-ethqos", .data = &shikra_data},
- 	{ .compatible = "qcom,sm8150-ethqos", .data = &emac_v2_1_0_data},
- 	{ }
- };
+> My take is that rather than encode all properties in C, it's probably
+> worth exploring a DT representation of the concepts that *can* be used
+> fairly easily and make the life of codec vendors easier - not as a
+> literal translation of ACPI.
 
--- 
-2.34.1
+> Putting everything in C seems like a code management nightmare to me.
 
+I think one of the issues they have here is that there's two cases that
+need handling.  There's the case of DT native platforms where the vendor
+can write a sensible DT, but there's also the case of platforms that are
+ACPI native with ACPI that is basically unusable by Linux since it
+relies very heavily on being supplimented by a platform specific driver
+blob.  On those platforms there is little to no vendor support for
+writing DT and you're stuck with some combination of reverse engineering
+and reusing the ACPI data.
+
+--lrQNR57Kvrwt1iZs
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAABCgAdFiEEreZoqmdXGLWf4p/qJNaLcl1Uh9AFAmqfLBAACgkQJNaLcl1U
+h9CHXAf+JsNZcretzfv674Tfmsm6exRMwWLj+6jECAru0EGWV1q5+YJeeuEL2OO5
+GrLPW5k7anE8aAzwBF53DUZD06LYt9/+SxwTmjaR8iMJjJ5qLSCI7K7AZP2jlp8t
+4UMWSIxSZrmbmEI2kFsgLOVcprVcVOgm5A7WD/fk/4AoNYoREzdlRhg6FU/fcVGN
+LTtq3qnUTNnoDM97Tdd48TrsJx64ZOvBi3W0DbwxscaszGFH2QFTgBXSSmv49Cdr
+BCKsqiJ3WsQZIa7/pSkEM8oKldxrWGBfw7V+bymoJmwKgixAzCnN7AYwrxIh7xCS
+UbBUKIuQNiOPLxLwC2E7cJ4RP6s4YQ==
+=DfvH
+-----END PGP SIGNATURE-----
+
+--lrQNR57Kvrwt1iZs--
