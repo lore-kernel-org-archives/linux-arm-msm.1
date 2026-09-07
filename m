@@ -1,175 +1,186 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AD98D38228A;
-	Mon,  7 Sep 2026 16:50:17 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D6F06517BC6
+	for <linux-arm-msm@vger.kernel.org>; Mon,  7 Sep 2026 18:10:10 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788799818; cv=none; b=I8zBmP6B/401/BS1ZvS6cQwd+RBj7KdvPMt0rmaS7NQo/0BZbad0u68XoqO7IpYEcyEqF7NaKj+f3j3VUgRB9tTxNiRJed1ZSa6Arbch0nJ32pNGTZ1Wg/78SQTaDgeYkghx/2Wgd+jE8aEK23cmXgw/61NByCRtdqVXuTcOqlA=
+	t=1788804612; cv=none; b=CFiPE/ok7A0Xn8fOreQ+GpV/xhcyAzDtW+ZIBCCwKOCwVK7l3hMuTQey9a8HJm9fUbyMQiXDtxKneMcANrtU5nBnHeWZIsdcS19fjS9TIldJ3n2quJNDM5ZB7ltq1QileDH80fbAr5Powz3wOEsZ7Ld2jf3pDqxcUlCSa6TmBwM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788799818; c=relaxed/simple;
-	bh=pus3OIMvtAdqCN5lzcybKiNDZT2pHkfTRO5wGwjEElE=;
-	h=Date:Message-ID:From:To:Cc:Subject:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=KiOfQcFOREPILec14BmPpTeajzd0Q07kX44SBf6fPSh1gJgf090oySRHaJ6OK2QS0DaTMV4jRxb+tdTt05/w8Ia6Lq7ECtJCNkJEuhe8I7LaYMNi2Vt2LeCyNPhvbpTQPLbYCPNSpiWO399la08hhlxLwDhVI2nL0SXpuwBpmPk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=XLRazJML; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1788804612; c=relaxed/simple;
+	bh=CVrEVnwNk+Us7cfjRj/Zz0hY36WdkjOwnysyX0mfQ0I=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=sTXJYPHfNRnEJ+5yjTwnfqU5yrZBpNYAUIlSlrHb/X9OiyqExLm0MTtxnVSXpbMeGRSLFx+1KxiDemToLfrhSvgldG4rg4RqH3IOnWeYezEI7xr5IN1ifRGJw/3WjImsZUR4nrbLaM7cLN0mYxwgvNR4ks7JCLiHxaAbdSX/ZeU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=ZeWiOt2x; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=eQJ4bLPo; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="XLRazJML"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5EBC31F00A3D;
-	Mon,  7 Sep 2026 16:50:17 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1788799817;
-	bh=QTFb/7AYKIYAJJpoTYlFHRzy0v+TkzM5XPwWHm7OcRE=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References;
-	b=XLRazJML7yVxacnO8lm1nOLPHjZv0NzBkvPqtmJ1Y/Q+4X/8vj37vxTjKeAanUhz6
-	 EPbeM2qkidzho26HsF/jPGwkzGKkN7ieKunIc8UZthcMgsKVfz3mSdiNDLjq0Bglb5
-	 su1cZzxyXM9iepayC8dD6d4U0bwjPtIpJDgxi6EzMvTx/2UNzMhCUXjBXMQVZX0YMo
-	 RU+49T+a4+2AowZJDQrk0Hjj8mKeIZ+fOX81erLawEMwIAkFG6JtnQHh5VwPDamb+U
-	 iaYz94lrWtDIx6/0/ItrbZfLo5jT7Gbgzg+t5p/vtovWCQp0Oyu1u10rNtnfpd7YLJ
-	 uPILftTgUhQhA==
-Received: from sofa.misterjones.org ([185.219.108.64] helo=goblin-girl.misterjones.org)
-	by disco-boy.misterjones.org with esmtpsa  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
-	(Exim 4.98.2)
-	(envelope-from <maz@kernel.org>)
-	id 1x3cXv-00000005sFE-1cop;
-	Mon, 07 Sep 2026 16:50:15 +0000
-Date: Mon, 07 Sep 2026 17:50:14 +0100
-Message-ID: <86a4pt3t15.wl-maz@kernel.org>
-From: Marc Zyngier <maz@kernel.org>
-To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-Cc: Raviteja Laggyshetty <raviteja.laggyshetty@oss.qualcomm.com>,
-	Mostafa Saleh <smostafa@google.com>,
-	Georgi Djakov <djakov@kernel.org>,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Rajendra Nayak
- <quic_rjendra@quicinc.com>,
-	Abel Vesa <abelvesa@kernel.org>,
-	Bjorn Andersson <andersson@kernel.org>,
-	Konrad Dybcio <konradybcio@kernel.org>,
-	linux-arm-msm@vger.kernel.org,
-	linux-pm@vger.kernel.org,
-	devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
-	Odelu Kukatla <odelu.kukatla@oss.qualcomm.com>
-Subject: Re: [PATCH v2 2/3] interconnect: qcom: x1e80100: enable QoS configuration
-In-Reply-To: <0916741e-442e-431a-9831-9457e3af1cf0@oss.qualcomm.com>
-References: <20260527-x1e80100_qos-v2-0-305c6539e6d2@oss.qualcomm.com>
-	<20260527-x1e80100_qos-v2-2-305c6539e6d2@oss.qualcomm.com>
-	<apgeBNSiP01YfNcs@google.com>
-	<86ld9d4h4n.wl-maz@kernel.org>
-	<f58bd978-ca45-48b9-a928-45a2878fb54a@oss.qualcomm.com>
-	<86jyox4fas.wl-maz@kernel.org>
-	<ca962589-3b6c-4e5d-a11e-b49cf20dc262@oss.qualcomm.com>
-	<86bja94234.wl-maz@kernel.org>
-	<0916741e-442e-431a-9831-9457e3af1cf0@oss.qualcomm.com>
-User-Agent: Wanderlust/2.15.9 (Almost Unreal) SEMI-EPG/1.14.7 (Harue)
- FLIM-LB/1.14.9 (=?UTF-8?B?R29qxY0=?=) APEL-LB/10.8 EasyPG/1.0.0 Emacs/30.1
- (aarch64-unknown-linux-gnu) MULE/6.0 (HANACHIRUSATO)
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="ZeWiOt2x";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="eQJ4bLPo"
+Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 687H7n191314402
+	for <linux-arm-msm@vger.kernel.org>; Mon, 7 Sep 2026 18:10:10 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=mRiByXxuwAggEWwz8GmTmy
+	VSiYkyHqy75fQn32SH/c4=; b=ZeWiOt2xPu2E7VHcz1o0k1DmhfCOzGmv18fmHb
+	y/UFcw8Gj3MBdCXdP+sd06tz2BC/w42eF+bcBYkPmjwJyp97rLRkwcEopiRJXyEF
+	FrboCc5qsMZdXBE7BpgZdtmfHtrLoMNNVMIkndzlG4vc2VzUlroM5PfzWb8UOer2
+	IsZVk/RvfKX2dnfCQ5MzpD5bhql+5SAr7ssHNRoj222lTQcS2t6A/Z4P0uzqW8AX
+	Pcw7iMi7cbPcTHsxxn4TU9hY1aLc5BcgO2cXGWzMlLu8dj+OPoisNxR/VSwHjTFL
+	whala7rv3fbP7m4rxIAazeknqZXxnzNwO7VlFo5nRmLegKWA==
+Received: from mail-pf1-f199.google.com (mail-pf1-f199.google.com [209.85.210.199])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ghuyk9gsn-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Mon, 07 Sep 2026 18:10:10 +0000 (GMT)
+Received: by mail-pf1-f199.google.com with SMTP id d2e1a72fcca58-8623e5d4279so2933240b3a.1
+        for <linux-arm-msm@vger.kernel.org>; Mon, 07 Sep 2026 11:10:09 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1788804609; x=1789409409; darn=vger.kernel.org;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=mRiByXxuwAggEWwz8GmTmyVSiYkyHqy75fQn32SH/c4=;
+        b=eQJ4bLPo5zFfxPXSErCnG0l1VB0YmHDuo3FkNP1UtGYWGUtciHfsGHU88O3Ce481/+
+         IfGTr3twaVS9YKQH+uL7fy3A781YKBa9QB51Qn/T0gVaA4+TjqkudIOtnxtypHU7j8JM
+         kkBVgf15oW8mpLxfZuOmFmXI+ur13YtE7G8kQkyI5d7wi4EU/yzwIC9tnh5zicICV8XG
+         BFYmNsF1oVj7wVnN8OYnoyDfggB6TTirlnwHqRw5UAZktFwZq4HDEMOWEo+Cb2y3lau1
+         XY5Fvkh0S7tqZBNda+zTTkAX3gk/5nUJq3cHeVKsEy5cDGV224uJh6qAN6Yrx2Wx/YhY
+         J3hA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1788804609; x=1789409409;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=mRiByXxuwAggEWwz8GmTmyVSiYkyHqy75fQn32SH/c4=;
+        b=VdEDWLaVsrnBzYckw7oHPrGRhO7lYQV+npEZ1WUTWDFouaTNpoeaEdDenUZP1WFTUO
+         XKcqanVoteu/aJC5/FufBw10DruQsNoBSeGltUyvJCI3ORbj1X295twR5sN36t9XW9nL
+         DSYVCxa+qJzCSnTJ1elGljw7UxEBR3x/h/2n+dTtOvnccehOYOYlgn+szS8eSxMeUCoj
+         1auXsjBNZTUcFJCm8L+GBbeA8AIGnfuV3bgnim1GZsM9I1Vh5eoVzp5kREmHrmKXy/7u
+         fJXvgd7HJh1cX8dVdXlmS9R6ZWoahMabIwvQ3TO222MYILMDqdn1X0NUNuzlZX0nCGmu
+         xuxA==
+X-Forwarded-Encrypted: i=1; AKwUvBz8CZ+chZhQuylUNFDn/NM6NTEYz/CtBkgkd+EaV+t/+m4omZ0/QLPgfz7K+uDVFhMN+QuQkJTlj8Nc4A4t@vger.kernel.org
+X-Gm-Message-State: AFuF++k1UgcTNqCwrDmE1YY5Ed2qYdt8+rvF1OezFOotrbLcwI78yOj/
+	mFLQlj+W/h65Xjin9aJl+aLrYdpgXZQtN4MsB/Pik6CKCJM47bnZwyqjtomNCj36MKYlIgpK6zv
+	QDVeidXxUhlbRLtuuMLr9UJ0seKqlikrLqO+TGNI19ZDzwafqDHvpcE+EFXhaz0c4r4f1
+X-Gm-Gg: AYBFou1yNpxVh3iDoKFuQlNiLpIdllh/yozdteRp+VeSpy6eR2cN3NiI3AiGJxW6wXB
+	5C9PUs9tJ7IW44++lmLNs6jngZbnXs2+xNB04yobSLRdAMB6HtVBiA/V57KBLFyxN7+AcGghBpI
+	sqVzBE2TwfhZBF1HKGyi0WmCQPDrY9zhmBZmhW5PQb5SHQhWuH6/028HBpGGpGGjpKf2KRKJgmZ
+	R5hYb5Uh4JLgEOYG5xRwQ1ExyCTul2/JGqI9dP70O299SXhfxCN/Mzffpd2XNj2STIa32RMHe1W
+	lIW08jfogdax6eYbiv8L/pDeA5Dju3YyKWb8+QMFcEm43i3iRKR0TJcCwd7LArzb6/BknuW/xOy
+	jKzaAl5oYhCEcBBQEMdI57J2pKM3usjYtz0xz
+X-Received: by 2002:a05:6a21:7117:b0:3d8:5a37:549c with SMTP id adf61e73a8af0-3da39eb8acbmr42596714637.7.1788804609232;
+        Mon, 07 Sep 2026 11:10:09 -0700 (PDT)
+X-Received: by 2002:a05:6a21:7117:b0:3d8:5a37:549c with SMTP id adf61e73a8af0-3da39eb8acbmr42596634637.7.1788804608738;
+        Mon, 07 Sep 2026 11:10:08 -0700 (PDT)
+Received: from hu-mohs-hyd.qualcomm.com ([202.46.23.25])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3339b608409sm33961954eec.21.2026.09.07.11.10.02
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 07 Sep 2026 11:10:08 -0700 (PDT)
+From: Mohammad Rafi Shaik <mohammad.rafi.shaik@oss.qualcomm.com>
+Subject: [PATCH 0/5] ASoC: qcom: Add Nord Ride audio support
+Date: Mon, 07 Sep 2026 23:39:41 +0530
+Message-Id: <20260907-nord-asoc-driver-support-v1-0-997d3b20cf43@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
-MIME-Version: 1.0 (generated by SEMI-EPG 1.14.7 - "Harue")
-Content-Type: text/plain; charset=US-ASCII
-X-SA-Exim-Connect-IP: 185.219.108.64
-X-SA-Exim-Rcpt-To: konrad.dybcio@oss.qualcomm.com, raviteja.laggyshetty@oss.qualcomm.com, smostafa@google.com, djakov@kernel.org, robh@kernel.org, krzk+dt@kernel.org, conor+dt@kernel.org, quic_rjendra@quicinc.com, abelvesa@kernel.org, andersson@kernel.org, konradybcio@kernel.org, linux-arm-msm@vger.kernel.org, linux-pm@vger.kernel.org, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, dmitry.baryshkov@oss.qualcomm.com, odelu.kukatla@oss.qualcomm.com
-X-SA-Exim-Mail-From: maz@kernel.org
-X-SA-Exim-Scanned: No (on disco-boy.misterjones.org); SAEximRunCond expanded to false
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAOX9nmoC/yWMywrCMBAAf6Xs2YU0iq9fkR7azUbXQxJ22yCU/
+ nujHmdgZgVjFTa4dysoVzHJqUF/6IBeY3oySmgM3vmzu7kLpqwBR8uEQaWyoi2lZJ2RKbp4vHp
+ 3CgQtL8pRPr/1A2oPw9/ZMr2Z5u8Ttm0HVCY7T4AAAAA=
+X-Change-ID: 20260907-nord-asoc-driver-support-ecf0f38204dc
+To: Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>,
+        Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>,
+        Lars-Peter Clausen <lars@metafoo.de>,
+        =?utf-8?q?Nuno_S=C3=A1?= <nuno.sa@analog.com>,
+        Shenghao Ding <shenghao-ding@ti.com>, Kevin Lu <kevin-lu@ti.com>,
+        Baojun Xu <baojun.xu@ti.com>, Sen Wang <sen@ti.com>,
+        Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>,
+        Srinivas Kandagatla <srini@kernel.org>
+Cc: linux-sound@vger.kernel.org, linux-kernel@vger.kernel.org,
+        devicetree@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+        Mohammad Rafi Shaik <mohammad.rafi.shaik@oss.qualcomm.com>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1788804602; l=1988;
+ i=mohammad.rafi.shaik@oss.qualcomm.com; s=20260424;
+ h=from:subject:message-id; bh=CVrEVnwNk+Us7cfjRj/Zz0hY36WdkjOwnysyX0mfQ0I=;
+ b=PzhpfTInjhz7/sBOknsQJ9Eu7ojed/7KVihrqNId652Qnf4yIeNjX48DscQBXfR0J8oF2yjXr
+ ekqiI+p90AZCxy2S85/7xQWhUoOpiYcvC6fXSpeClE9Vxj8Yh/O/z0K
+X-Developer-Key: i=mohammad.rafi.shaik@oss.qualcomm.com; a=ed25519;
+ pk=KZedmYgMGYOzuTpLGv56tdrL+pTLDP8pdmfQ91xemiA=
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTA3MDIwMSBTYWx0ZWRfX+6oiq0aA8QEY
+ FQhLt+ZHD3DVZj7QCoA1dEGt38Mg35l5fV1hEjnM5JwCvzviySTjv2Cow6gr/31DkPAGjaUNgb9
+ F9tSA/rgPbjHEq1ahg5YFFWDoueoHgw=
+X-Proofpoint-GUID: o5iMO-NeBKkds13rXgbjJSA1Iua4HIAC
+X-Authority-Analysis: v=2.4 cv=ObSoyBTY c=1 sm=1 tr=0 ts=6a9efe02 cx=c_pps
+ a=WW5sKcV1LcKqjgzy2JUPuA==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
+ a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22
+ a=EUspDBNiAAAA:8 a=m7YXckNPeSMwoeayZyUA:9 a=QEXdDO2ut3YA:10
+ a=OpyuDcXvxspvyRM73sMx:22
+X-Proofpoint-ORIG-GUID: o5iMO-NeBKkds13rXgbjJSA1Iua4HIAC
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTA3MDIwMSBTYWx0ZWRfX30OQw/6FN0Y0
+ hpdPICQocZXNTVUPgmNbsA+LHp1PQd1C2HYVWcvSqooH3TJMZRrl9/Cs2NbqL8u5mwB2+SgcuY8
+ qeIBz6oQXQ6/3R/7CaZzAEMOeofh69rPJP4CIINzEYBVnz9slVyUZhDtfMj08uiMCSaBY/2C7ZZ
+ a8CxttgbftGeCP7hnZzFGUgof2e6t7mNEMkoSC8mFQ6KFicFH/+haX408b95CWfq0+IgcVzkyux
+ 9mw3K9Vxof+74k56ez33nsVogU9ELs0uU4FGPlrsnStZUIMthaPj9g9CENHjag0YoWOX2WvqCZp
+ dfFskVfphY9xk+6CcpuMuRpDaHSJ2ZKxBfM0lgIkxyTuUO4AxtWzpopwn6JA5tmmHzTDFhQHtgP
+ 030ttO9ng27CpxMMMIyT2C1OQ3Sv6IToWNPxuJ0QoLCiMngjkBLen/4Ft0+N/HRj5kZjB3aqKuP
+ OFzboIpJL2v1MDXAHYA==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-09-07_05,2026-09-07_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ suspectscore=0 lowpriorityscore=0 impostorscore=0 adultscore=0 phishscore=0
+ priorityscore=1501 malwarescore=0 clxscore=1015 bulkscore=0 spamscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2609070201
 
-On Mon, 07 Sep 2026 15:34:35 +0100,
-Konrad Dybcio <konrad.dybcio@oss.qualcomm.com> wrote:
-> 
-> On 9/7/26 3:34 PM, Marc Zyngier wrote:
-> > On Mon, 07 Sep 2026 14:20:26 +0100,
-> > Konrad Dybcio <konrad.dybcio@oss.qualcomm.com> wrote:
-> >>
-> >> On 9/7/26 10:49 AM, Marc Zyngier wrote:
-> >>> On Mon, 07 Sep 2026 09:18:38 +0100,
-> >>> Raviteja Laggyshetty <raviteja.laggyshetty@oss.qualcomm.com> wrote:
-> 
-> [...]
-> 
-> >>>> The current patch enable QoS for Hamoa SoC, which get programmed only during
-> >>>> driver probe. This shouldn't impact or cause any spurious resets once the 
-> >>>> device is booted up and probe is successful.
-> >>>
-> >>> And yet it absolutely does break things.
-> >>>
-> >>> With this patch applied, the box resets within 5GB of heavy network
-> >>> traffic, probably because some transaction get delayed, and a watchdog
-> >>> fires. With the patch reverted, the box keeps receiving packets, and
-> >>> everything is hunky dory (100GB+ so far).
-> >>>
-> >>> Which makes me think that the set of hardcoded parameters in this
-> >>> patch is not universal at all.
-> >>
-> >> They are, provided the configuration is for the right SoC..
-> > 
-> > Is x1e001de different from x1e80100? AFAIK, it is only a binned
-> > version of the same SoC. How do you explain the above regression?
-> 
-> I somehow skimmed over the fact you said it's on the devkit and not
-> on the mini-x mentioned before.
-> 
-> I pulled the Hamoa settings I could find, there are some updates but
-> none seem particularly related (maybe the PCIe one? I don't know how
-> the network card is connected), please give the attached patch a try.
+This series adds audio support for the Qualcomm Nord Ride platform and
+includes the required machine driver, device tree binding updates, and
+codec improvements needed for the board's external audio codec
+configuration.
 
-I cherry-picked the Hamoa-specific patch, and gave it a go. Same
-result (hard reset while synchronising a bunch of files), but this
-time with a nice little message:
+Nord Ride uses a PCM1681 DAC for playback and an ADAU1979 ADC for capture.
+Compared to other SC8280XP based platforms, Nord Ride requires
+board-specific DAI format and codec clock configuration to support
+the external PCM1681 DAC and ADAU1979 ADC.
 
-[  272.468031] nvme nvme0: controller is down; will reset: CSTS=0xffffffff, PCI_STATUS=0xffff
-[  272.468039] nvme nvme0: Does your device have a faulty power saving mode enabled?
-[  272.468039] nvme nvme0: Try "nvme_core.default_ps_max_latency_us=0 pcie_aspm=off pcie_port_pm=off" and report a bug
+The series includes:
+ - Adding OF device matching support to the ADAU1977/78/79 I2C driver,
+   enabling Device Tree based instantiation.
+ - Adding optional SCK clock support to the PCM1681 codec driver and
+   documenting the corresponding DT binding.
+ - Adding Nord Ride sound card support to the SC8280XP machine driver
+   with board-specific audio configuration.
+ - Adding DT bindings for the Nord Ride sound card.
 
-indicating that PCIe has died.
+Signed-off-by: Mohammad Rafi Shaik <mohammad.rafi.shaik@oss.qualcomm.com>
+---
+Mohammad Rafi Shaik (5):
+      ASoC: codec: adau1977-i2c: Add OF device match table
+      ASoC: dt-bindings: ti,pcm1681: Document the optional SCK clock
+      ASoC: codec: pcm1681: Enable system clock before regmap access
+      ASoC: dt-bindings: qcom,sm8250: Add Nord Ride sound card
+      ASoC: qcom: sc8280xp: Add Nord Ride sound card support
 
-None of that happens without the QoS stuff.
+ .../devicetree/bindings/sound/qcom,sm8250.yaml     |  1 +
+ .../devicetree/bindings/sound/ti,pcm1681.yaml      |  7 +++
+ sound/soc/codecs/Kconfig                           |  4 +-
+ sound/soc/codecs/adau1977-i2c.c                    |  9 ++++
+ sound/soc/codecs/pcm1681.c                         | 18 +++++++
+ sound/soc/qcom/sc8280xp.c                          | 57 ++++++++++++++++++++++
+ 6 files changed, 94 insertions(+), 2 deletions(-)
+---
+base-commit: 944a035ecca915ae947905dcfb03f2b9dc6d032c
+change-id: 20260907-nord-asoc-driver-support-ecf0f38204dc
 
-> If nothing else, please "bisect" the QoS additions until it stops
-> crashing. Although perhaps applying only some of the settings may
-> have its own set of dragons..
+Best regards,
+--  
+Mohammad Rafi Shaik <mohammad.rafi.shaik@oss.qualcomm.com>
 
-That's not exactly encouraging, is it? And if the "recommended" set of
-tunables is not up to scratch, surely there should be a way to opt-out
-until someone figures out what's wrong. Something like this:
-
-diff --git a/drivers/interconnect/qcom/icc-rpmh.c b/drivers/interconnect/qcom/icc-rpmh.c
-index 3b445acefece7..3a4743c364dac 100644
---- a/drivers/interconnect/qcom/icc-rpmh.c
-+++ b/drivers/interconnect/qcom/icc-rpmh.c
-@@ -224,6 +224,9 @@ static int qcom_icc_rpmh_configure_qos(struct qcom_icc_provider *qp)
- 	return ret;
- }
- 
-+static bool enable_qos = true;
-+module_param(enable_qos, bool, 0660);
-+
- int qcom_icc_rpmh_probe(struct platform_device *pdev)
- {
- 	const struct qcom_icc_desc *desc;
-@@ -308,6 +311,11 @@ int qcom_icc_rpmh_probe(struct platform_device *pdev)
- 		struct resource *res;
- 		void __iomem *base;
- 
-+		if (!enable_qos) {
-+			dev_info(dev, "Skipping QoS (command line)\n");
-+			goto skip_qos_config;
-+		}
-+
- 		/* Try parent's regmap first */
- 		qp->regmap = dev_get_regmap(dev->parent, NULL);
- 		if (!qp->regmap) {
-
-At least people stuck with Purwa or other abandonware (such as the
-devkit) would still have a usable machine.
-
-	M.
-
-
--- 
-Without deviation from the norm, progress is not possible.
