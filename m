@@ -1,34 +1,84 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C377742E8E6;
-	Mon,  7 Sep 2026 08:11:37 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 247A4431A50
+	for <linux-arm-msm@vger.kernel.org>; Mon,  7 Sep 2026 08:13:56 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788768700; cv=none; b=u6H4cVXmFAwl4Sa3VCrW9u3zfadmDrNHhg2YYX/5pXoxxCXdME7FkMcrrw0xuv4keMyLo/UX1To1M5zB0DPeFN0PQmG8YsN7UhFfFZNaIwMOQm/ClA5NlxL0nJKtTOfpf4phESibAbvfHkXTgxNQhn72jq4fYRQlFzmIH2AI+MI=
+	t=1788768838; cv=none; b=qh2Af8BUVk4NrGtR5MLrSQJf+fEfaLnxYtVDNvJZw8t0cMkFo9O62Q18GjGd008uy1tlK81XS6XIRy/s1JiWDz/veQTlQykzmQvkneoidUSOHcrKicPc/sQElehphz4o9Zb9sIxUQGMC6y0F1UiEtRHq810+b+TsLhzhGdkW2P4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788768700; c=relaxed/simple;
-	bh=/PYRSzlxMbQAc4wDtRZvxWzphKtQQWT+RY2aHzimyPw=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=Xqcj2AAPFt7ZrAW0zcfa6/9FFovnF8khpSnuj5wHjIPuL/AbUJgOKPOc1om7NENAJoUrMgC2yHgE9ZlHWGj4SB7ySrRcntaTJkSwOWZDlvhl/zFcAHhs6PbMBaokEziNhS9N/wDsZQ6oP1L4A2gnpBjayA+dWHr74ws5xTkiLpc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Wf2yGERY; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1788768838; c=relaxed/simple;
+	bh=2PkCrrkmsu4vMoHSdZZ8ByoR89oUBJOzMlHa3i0gMqs=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=rlCu+cvxJKgjocqk4b1FexMPMkIvpbsY4p8Gv5MAHoB4+hjvf4hBsXX7Q9zC05Wn5Cgy5pKnav/ufrHbLuLQnkfoQofZ5fu0YIgz2qqz3a19DdZfsqVVtbyTnTCbVXTC3ngLVVGko7d9DuDBwZyTfh7MdxG/Li0wFyaPqRNH2gE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=kio9fiZP; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=VMSJ0OCO; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Wf2yGERY"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id EBE0A1F00A3A;
-	Mon,  7 Sep 2026 08:11:34 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1788768697;
-	bh=Zuk6ehicVaUkj55bmfVMmSBzto6h0WLuvaTT7MXDg7U=;
-	h=From:Date:Subject:To:Cc;
-	b=Wf2yGERYeGsGAN/jBSDW9pit86qlaumW6Hkxdh92L9hUPWi+11F755l3B7Aa0TATo
-	 buobyEu+QCJ46ulp3DFTHkO/t9RY6vDw0s3F/yY8bWcLsscEic+yEtLkYdKywm6+Do
-	 mPl0xjiXhX/9s6Njw0wtrpg84eCVkVuraf6Qj/1sYpae9laxCasnF4mBp1AZ/4cUfZ
-	 605+87FeMtjWT9A2U/JSLtAHjaBfStOKUYXW2ogV1jctqFJbdWOy1ZAiOCsp34B8jR
-	 5d/A7EhK+cwz4wzMRPg0/BNgPi8f+T6XY8stzuXX68KbovGhfRfDrLte3AC90nZhqo
-	 G6PDsVrq5+MYA==
-From: Konrad Dybcio <konradybcio@kernel.org>
-Date: Mon, 07 Sep 2026 10:11:31 +0200
-Subject: [PATCH] pinctrl: qcom: Drop marketing name-prefixed duplicate
- defines
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="kio9fiZP";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="VMSJ0OCO"
+Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68777dPl3903330
+	for <linux-arm-msm@vger.kernel.org>; Mon, 7 Sep 2026 08:13:56 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=iKZhBtC4xoReMl+ODu3+f4
+	AYAN3pz02drrC1yYmG534=; b=kio9fiZPu65AWftNbSVpceSef6yf29QCmGAPGX
+	wufKP6iDNfcecZe5LeRBsgRVNtC46T7qsb2cyfmc2PRJrFYL6S1Fo9kbeOG0MHU+
+	VzfmNRiqW0ybbcPjVrPN0N4F/LpLhvXa92d//6NrAElUrmjo79vLn+nPsecIzrj3
+	MaNzJDfy4buguaMJlGyfKd1Zg9U/C0agwJewIW0HtBX74IUVKc2v/XxlRGkSC4fK
+	+o2VX1qGk3KMalDOmjPJsmKI5trgJkuvhHeKNSNhEIUFfe20RPQKBg7R4cv8cvdP
+	X3DkyEHRs9CdL58rEYFwiDk969uRonT6NeYetNq56MRdRZFg==
+Received: from mail-ot1-f72.google.com (mail-ot1-f72.google.com [209.85.210.72])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ggany5u8s-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Mon, 07 Sep 2026 08:13:55 +0000 (GMT)
+Received: by mail-ot1-f72.google.com with SMTP id 46e09a7af769-7e9e0e71e05so5804736a34.2
+        for <linux-arm-msm@vger.kernel.org>; Mon, 07 Sep 2026 01:13:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1788768835; x=1789373635; darn=vger.kernel.org;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=iKZhBtC4xoReMl+ODu3+f4AYAN3pz02drrC1yYmG534=;
+        b=VMSJ0OCOd3ytWlYltAEQIlVyNF74Lb7LQwKmpSlgDAeG4J6fRKibzuAgINradZxdJ+
+         NhR90HMj0xI4gqk4PqNrJmDMnSKeYVxlX77NoL4uVbP+4Bi9x9zmS/e8m4CUiTHhxAG/
+         3PvQVPwn12deB1c0XBYz9TneKo5+9kXRk8NM9LZB9EE6cyc4Qy5hVW1qJ2bFqGW9t7ih
+         EGFJSvLSDxVpqkOKPfBvSzuQLdfNIg3JKXvUXuFBNS4ieBmeJ0Ap19JGgnT+0s6xH4nG
+         J9EQsrjR2BOL5Gimq0X7aLCQV++YRncBtyRGrdEFWH/RRzT/AFjKozCt1ir+t6FbRRuw
+         2P6A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1788768835; x=1789373635;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=iKZhBtC4xoReMl+ODu3+f4AYAN3pz02drrC1yYmG534=;
+        b=mV+o4JUBTbEw5EeEcfHzBww7srTRZxEqzLKUssUfCQBKhZCd5+tFusJOpkcFfWtscF
+         zKVJ/sc04/J8n2QhnzOjyKFtZRwUE13fgahJDHrWjbce6kjvDeDr41tA2hrTLeAopsEw
+         21/x2KrgIErj9rhqTMM9wFlm48oKoZTUjcHydRMZzcJya4sAdPPDPzmpSIl9OH0vIss4
+         lDsTHlLH8fz/l6KMfRYBB8txt76fvGqkD6L5+ZrxZI5nPrV43IrWMC6HmhLh6qLq1HEe
+         eiQFzF/MQDnebBy2NOkO/dmAJqyzWrTOD1w+mTtTyJfXhHOzCZp0X7smQP0hd8TJR7KY
+         K7Qw==
+X-Gm-Message-State: AFuF++lFxteBVPtbXAdoFM2Ryir6X7BWBEn6X3HVcJce5eE1QXCxzzUc
+	DbmOcJE4Ah16rnzBzDU2je8+3oDGJUVOPRlzgrTjxOUhZv0RhoKAeIwBmEbPcOJzWi5BxNJTwIP
+	+ga2SMz/joBBHWd+xMLSGIIb7ZLXlV66gEmWyve6eBy+maN1wd0CeLr2VYcB41eCY6M+2
+X-Gm-Gg: AYBFou2o9pcabhmHQS8yJkSf/2fJuf9P5YSewReYtutAoyozrjhj2XhQHhWjNiPYv/X
+	aPTtHl5+2kpa1LM7x1KIWZ9tTotfJVK49VaW+oR60GusW2NoSsMlGRF+nAcOMnnc1V3qTeaEvWd
+	+3hW8a0jYBpH6WeseY4hIKHdB2BZnTH+IfQ2juYCrOYv3ehNc+3pR8HvfSNJY4j9DJXsmgb9Fal
+	rrXegGb/zlqBh61ix9hDdZQnYLDy8CzbFYKbwLIVaKsPydlkIJFBM6st/N6Hy0G5uM+48nzBBXs
+	JZRwVjm2zvAfmmido9CLz6oA104gh1Xft2AcrUyHNlmdPGGFrrcvOJwrJoK7JAVs2WW4eXia5U0
+	90LfGyvvs/pdjGkiV9HekDm6kIoZLnp4=
+X-Received: by 2002:a4a:ec49:0:b0:6b8:d957:2803 with SMTP id 006d021491bc7-6b8d9572e0bmr6704671eaf.20.1788768835150;
+        Mon, 07 Sep 2026 01:13:55 -0700 (PDT)
+X-Received: by 2002:a4a:ec49:0:b0:6b8:d957:2803 with SMTP id 006d021491bc7-6b8d9572e0bmr6704610eaf.20.1788768834288;
+        Mon, 07 Sep 2026 01:13:54 -0700 (PDT)
+Received: from hu-nihalkum-hyd.qualcomm.com ([202.46.23.25])
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-143243767e1sm21724220c88.6.2026.09.07.01.13.46
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 07 Sep 2026 01:13:53 -0700 (PDT)
+From: Nihal Kumar Gupta <nihal.gupta@oss.qualcomm.com>
+Subject: [PATCH v2 0/6] Add CAMSS support for Qualcomm Glymur
+Date: Mon, 07 Sep 2026 13:43:36 +0530
+Message-Id: <20260907-glymur_camss-v2-0-75f7982dc983@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -37,1297 +87,140 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260907-topic-tlmm_define_cleanup-v1-1-accdf7859e4b@oss.qualcomm.com>
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXMWwqDMBCF4a3IPBuI8Za6FRGJcWynaAxJFEHcu
- 7F9/Dic/wSPjtBDk5zgcCdPq4nI0gT0R5k3MhqjQXBR8RevWVgtaRbmZelHnMhgr2dUZrNM5aI
- caplJWeQQ/9bF/fi12+5vvw1f1OEJwnXdQH/ccH0AAAA=
-X-Change-ID: 20260907-topic-tlmm_define_cleanup-a325b7818843
-To: Bjorn Andersson <andersson@kernel.org>, 
- Bartosz Golaszewski <brgl@kernel.org>, Linus Walleij <linusw@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, linux-gpio@vger.kernel.org, 
- linux-kernel@vger.kernel.org, 
- Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1788768694; l=34314;
- i=konrad.dybcio@oss.qualcomm.com; s=20230215; h=from:subject:message-id;
- bh=yggpLdW3jmmSclL97c/ZfTXilpMEsG8E+Qy5uoGPwak=;
- b=fofjf3Fb1GeC7V8Tc/KpAwK2bERKKaq+wV7LQkPfvZsTKhVwJK4S+xE1HCMcOmHxSIBUYJbab
- k1sXik4kyCTBbybwUGJUCBCHG7/jChY/btXUa1fbKd8jUMYRShGlv6H
-X-Developer-Key: i=konrad.dybcio@oss.qualcomm.com; a=ed25519;
- pk=iclgkYvtl2w05SSXO5EjjSYlhFKsJ+5OSZBjOkQuEms=
+X-B4-Tracking: v=1; b=H4sIADBynmoC/22P3YqDMBBGX0VyvZEkajRSlr7HUpb8jDagpk1UK
+ sV33xivFnoz8A18Z868UQBvIaA2eyMPqw3WTTGwrwzpu5x6wNbEjBhhnFRM4H7YxsX/ajmGgFk
+ tu5oqagpToFh5eOjsK+F+bmf28FwidT6XSMkAWLtxtHObCVlqo0XVGFOLTnNdKEZURSUlBhTEh
+ SSiA32gRwhBJp02uyQbQQr8opEWLMOP+4ZXWmOCGeeEd1JIUojrYCfpXe58/40OobsNs/Nbend
+ lySixGsL/f7ayiIqnGWjQJXB6dSHkz0UOh3wexyF1dtmnbtlo1XBaNsJ86N72ff8De8lzDnwBA
+ AA=
+X-Change-ID: 20260529-glymur_camss-27af71b1d3d3
+To: Bryan O'Donoghue <bod@kernel.org>, Vinod Koul <vkoul@kernel.org>,
+        Neil Armstrong <neil.armstrong@linaro.org>,
+        Manivannan Sadhasivam <mani@kernel.org>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>,
+        Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
+        Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
+        Loic Poulain <loic.poulain@oss.qualcomm.com>,
+        Mauro Carvalho Chehab <mchehab@kernel.org>, Lee Jones <lee@kernel.org>,
+        Guru Das Srinagesh <linux@gurudas.dev>,
+        Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, linux-phy@lists.infradead.org,
+        linux-media@vger.kernel.org, devicetree@vger.kernel.org,
+        linux-kernel@vger.kernel.org, mfd@lists.linux.dev,
+        Suresh Vankadara <svankada@qti.qualcomm.com>,
+        Vikram Sharma <vikram.sharma@oss.qualcomm.com>,
+        Nihal Kumar Gupta <nihal.gupta@oss.qualcomm.com>,
+        Dhruvin Rajpura <drajpura@qti.qualcomm.com>,
+        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+        Jishnu Prakash <jishnu.prakash@oss.qualcomm.com>
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1788768826; l=3428;
+ i=nihal.gupta@oss.qualcomm.com; s=20260608; h=from:subject:message-id;
+ bh=2PkCrrkmsu4vMoHSdZZ8ByoR89oUBJOzMlHa3i0gMqs=;
+ b=9rJF2OhCoF4yzMGqRFpBhRxrc+m1Cgcpt1ZSFaxPjzplyHFawOMqlIngtIB3UeUTJ+XPQqVai
+ BBLhERQOSfiCXHWG4EgyyEzTUQSfdQP6zW6VYNIIFDE0QeoM7B1Uxlr
+X-Developer-Key: i=nihal.gupta@oss.qualcomm.com; a=ed25519;
+ pk=DIbyFMNwqU/iMvU/0pCQp2wmRVgtHFBT3PcSu+A+Ncw=
+X-Authority-Analysis: v=2.4 cv=X45i7mTe c=1 sm=1 tr=0 ts=6a9e7243 cx=c_pps
+ a=+3WqYijBVYhDct2f5Fivkw==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
+ a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22
+ a=VwQbUJbxAAAA:8 a=KKAkSRfTAAAA:8 a=EUspDBNiAAAA:8 a=0ARVRLQPdUDne_cnrioA:9
+ a=QEXdDO2ut3YA:10 a=eYe2g0i6gJ5uXG_o6N4q:22 a=cvBusfyB2V15izCimMoJ:22
+X-Proofpoint-ORIG-GUID: 8U4swSi7eTDwiK_WpEp3kvTGq0AXgXaj
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTA3MDA4OCBTYWx0ZWRfX6/pG4SKoo1sS
+ +YDDqyJP96lwyASXeBRmTYhi9G/Cc+DMeAp+I4LAcUJb0lQ/3HrUQ9PfGE2FGuaYmpMc5O+L7ey
+ KyTZ99vP4JQ/DdDxIDKWxL/i1pdAls00XFkT/jqqovp1t2D6oV2SlscnvzScBXFS5u9h5nGCF98
+ NUzasxLX4PHoHKX45isAKqjvzGiw9qQKbh9+7QSD+7vW3joef9xSUOLHXhIt3Al3vcvgQPq76Sn
+ 1GLkcXx/4t2qQxQhbWGGD5HRzZMbhZkcZBCyFjd87RhzdI38vJuRaSuU6YN07mJ5t6ZAsblmJQg
+ 5Y0SlNmH77Uh/ODO2c13uyaqivZTm8NFK5IIECyysVFYjXj/rTCIApeu49N6yJnlMoK0uNp/Y0h
+ w5QMVTwUWwvYxPIxf/ST+Hn0y3ttbg0iDQAHlRUTvVUhUN8En/CUnGGSoRPuHRL78sQhKWyS32/
+ cKwskniOnya8pRP3qIg==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTA3MDA4OCBTYWx0ZWRfX+Q1sz6lbSAOp
+ Xm8KhIDcEIm/2o3Nwg0t8NdJbBaG34cLka0KvN762N4rGuvkMlzqPTkZlo5SZMP8cmTRX9pBLVO
+ sU58kQHEZIw4e0nJFh5ZeCjwjl7knYA=
+X-Proofpoint-GUID: 8U4swSi7eTDwiK_WpEp3kvTGq0AXgXaj
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-09-07_02,2026-09-03_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ priorityscore=1501 bulkscore=0 suspectscore=0 clxscore=1015 adultscore=0
+ impostorscore=0 malwarescore=0 lowpriorityscore=0 spamscore=0 phishscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2609070088
 
-From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+This series adds Camera Subsystem (CAMSS) support for the Qualcomm
+Glymur SoC.
 
-They are identical and of no use. Drop them and use the common MSM
-prefix.
+Glymur's camera hardware topology:
+- 3x CSIPHY (CSI Physical Layer)
+- 3x CSID + 2x CSID Lite (CSI Decoder)
+- 3x TPG (Test Pattern Generator)
+- 2x VFE + 2x VFE Lite (Video Front End)
 
-Assisted-by: LLM
-Signed-off-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+The CSIPHY block is the same hardware version as x1e80100 (3ph-1-0),
+differing only in instance count (3 vs 4). TPG, CSID, VFE, CSID wrapper,
+and ICC resources are fully shared with x1e80100.
+
+Used following tools for the sanity check of these changes.
+- make -j32 W=1
+- checkpatch.pl
+- make DT_CHECKER_FLAGS=-m W=1 DT_SCHEMA_FILES=i2c/qcom,i2c-cci.yaml dt_binding_check
+- make DT_CHECKER_FLAGS=-m DT_SCHEMA_FILES=media/qcom,glymur-camss.yaml dt_binding_check W=1
+
+Patch 1 depends on the following dt-bindings series:
+[1] https://lore.kernel.org/all/20260903-x1e-csi2-phy-v17-0-26606fa9a039@linaro.org
+
+Functional dependency:
+[2] https://lore.kernel.org/all/20260906-b4-linux-next-25-03-13-dtsi-x1e80100-camss-v17-0-e2197a3e2551@linaro.org
+
+Changes in v2:
+- Glymur is now defined exclusively with the new PHY API architecture.
+  CSIPHYs are standalone qcom,glymur-csi2-phy nodes falling back to
+  qcom,x1e80100-csi2-phy. The CSIPHY supplies and register regions are
+  removed from the CAMSS binding; they live in the PHY nodes.
+- CAMSS_GLYMUR enum is dropped. Glymur wires directly to
+  x1e80100_resources in the OF match table. The CSIPHY instance
+  difference (3 vs 4) is expressed entirely in DT - Bryan
+- The incomplete compatible + resource enumeration from v1 are collapsed
+  into a single self-contained patch. The pointless VFE enum patch is
+  dropped - Krzysztof, Bryan
+- Add dt-bindings, MFD and regulator support for PM8010 I2C PMIC with
+  qcom,pm8010-i2c compatible; qcom,pm8008 is not equivalent - Konrad
+- Drop dt-bindings: i2c: qcom-cci: Document Glymur compatible; already picked
+  by Andi Shyti into her i2c tree (now in linux-next as 7c9474bd4a8d)
+- Link to v1: https://lore.kernel.org/all/20260529-glymur_camss-v1-0-bee535396d22@oss.qualcomm.com/
+
+Signed-off-by: Nihal Kumar Gupta <nihal.gupta@oss.qualcomm.com>
 ---
-Compile-tested only.
----
- drivers/pinctrl/qcom/pinctrl-apq8064.c | 188 ++++++------
- drivers/pinctrl/qcom/pinctrl-apq8084.c | 502 ++++++++++++++++-----------------
- drivers/pinctrl/qcom/pinctrl-ipq4019.c | 208 +++++++-------
- drivers/pinctrl/qcom/pinctrl-ipq8064.c | 208 +++++++-------
- drivers/pinctrl/qcom/pinctrl-msm.h     |  25 --
- 5 files changed, 553 insertions(+), 578 deletions(-)
+Dhruvin Rajpura (1):
+      dt-bindings: mfd: pm8008: Add PM8010 I2C support
 
-diff --git a/drivers/pinctrl/qcom/pinctrl-apq8064.c b/drivers/pinctrl/qcom/pinctrl-apq8064.c
-index a47f3d4f1ea5..acfe1c554162 100644
---- a/drivers/pinctrl/qcom/pinctrl-apq8064.c
-+++ b/drivers/pinctrl/qcom/pinctrl-apq8064.c
-@@ -214,17 +214,17 @@ static const unsigned int sdc3_data_pins[] = { 95 };
- 			gpio##id##_pins, 		\
- 			ARRAY_SIZE(gpio##id##_pins)),	\
- 		.funcs = (int[]){			\
--			APQ_MUX_gpio,			\
--			APQ_MUX_##f1,			\
--			APQ_MUX_##f2,			\
--			APQ_MUX_##f3,			\
--			APQ_MUX_##f4,			\
--			APQ_MUX_##f5,			\
--			APQ_MUX_##f6,			\
--			APQ_MUX_##f7,			\
--			APQ_MUX_##f8,			\
--			APQ_MUX_##f9,			\
--			APQ_MUX_##f10,			\
-+			msm_mux_gpio,			\
-+			msm_mux_##f1,			\
-+			msm_mux_##f2,			\
-+			msm_mux_##f3,			\
-+			msm_mux_##f4,			\
-+			msm_mux_##f5,			\
-+			msm_mux_##f6,			\
-+			msm_mux_##f7,			\
-+			msm_mux_##f8,			\
-+			msm_mux_##f9,			\
-+			msm_mux_##f10,			\
- 		},					\
- 		.nfuncs = 11,				\
- 		.ctl_reg = 0x1000 + 0x10 * id,		\
-@@ -276,48 +276,48 @@ static const unsigned int sdc3_data_pins[] = { 95 };
- 	}
- 
- enum apq8064_functions {
--	APQ_MUX_cam_mclk,
--	APQ_MUX_codec_mic_i2s,
--	APQ_MUX_codec_spkr_i2s,
--	APQ_MUX_gp_clk_0a,
--	APQ_MUX_gp_clk_0b,
--	APQ_MUX_gp_clk_1a,
--	APQ_MUX_gp_clk_1b,
--	APQ_MUX_gp_clk_2a,
--	APQ_MUX_gp_clk_2b,
--	APQ_MUX_gpio,
--	APQ_MUX_gsbi1,
--	APQ_MUX_gsbi2,
--	APQ_MUX_gsbi3,
--	APQ_MUX_gsbi4,
--	APQ_MUX_gsbi4_cam_i2c,
--	APQ_MUX_gsbi5,
--	APQ_MUX_gsbi5_spi_cs1,
--	APQ_MUX_gsbi5_spi_cs2,
--	APQ_MUX_gsbi5_spi_cs3,
--	APQ_MUX_gsbi6,
--	APQ_MUX_gsbi6_spi_cs1,
--	APQ_MUX_gsbi6_spi_cs2,
--	APQ_MUX_gsbi6_spi_cs3,
--	APQ_MUX_gsbi7,
--	APQ_MUX_gsbi7_spi_cs1,
--	APQ_MUX_gsbi7_spi_cs2,
--	APQ_MUX_gsbi7_spi_cs3,
--	APQ_MUX_gsbi_cam_i2c,
--	APQ_MUX_hdmi,
--	APQ_MUX_mi2s,
--	APQ_MUX_riva_bt,
--	APQ_MUX_riva_fm,
--	APQ_MUX_riva_wlan,
--	APQ_MUX_sdc2,
--	APQ_MUX_sdc4,
--	APQ_MUX_slimbus,
--	APQ_MUX_spkr_i2s,
--	APQ_MUX_tsif1,
--	APQ_MUX_tsif2,
--	APQ_MUX_usb2_hsic,
--	APQ_MUX_ps_hold,
--	APQ_MUX_NA,
-+	msm_mux_cam_mclk,
-+	msm_mux_codec_mic_i2s,
-+	msm_mux_codec_spkr_i2s,
-+	msm_mux_gp_clk_0a,
-+	msm_mux_gp_clk_0b,
-+	msm_mux_gp_clk_1a,
-+	msm_mux_gp_clk_1b,
-+	msm_mux_gp_clk_2a,
-+	msm_mux_gp_clk_2b,
-+	msm_mux_gpio,
-+	msm_mux_gsbi1,
-+	msm_mux_gsbi2,
-+	msm_mux_gsbi3,
-+	msm_mux_gsbi4,
-+	msm_mux_gsbi4_cam_i2c,
-+	msm_mux_gsbi5,
-+	msm_mux_gsbi5_spi_cs1,
-+	msm_mux_gsbi5_spi_cs2,
-+	msm_mux_gsbi5_spi_cs3,
-+	msm_mux_gsbi6,
-+	msm_mux_gsbi6_spi_cs1,
-+	msm_mux_gsbi6_spi_cs2,
-+	msm_mux_gsbi6_spi_cs3,
-+	msm_mux_gsbi7,
-+	msm_mux_gsbi7_spi_cs1,
-+	msm_mux_gsbi7_spi_cs2,
-+	msm_mux_gsbi7_spi_cs3,
-+	msm_mux_gsbi_cam_i2c,
-+	msm_mux_hdmi,
-+	msm_mux_mi2s,
-+	msm_mux_riva_bt,
-+	msm_mux_riva_fm,
-+	msm_mux_riva_wlan,
-+	msm_mux_sdc2,
-+	msm_mux_sdc4,
-+	msm_mux_slimbus,
-+	msm_mux_spkr_i2s,
-+	msm_mux_tsif1,
-+	msm_mux_tsif2,
-+	msm_mux_usb2_hsic,
-+	msm_mux_ps_hold,
-+	msm_mux_NA,
- };
- 
- static const char * const cam_mclk_groups[] = {
-@@ -457,47 +457,47 @@ static const char * const usb2_hsic_groups[] = {
- };
- 
- static const struct pinfunction apq8064_functions[] = {
--	APQ_PIN_FUNCTION(cam_mclk),
--	APQ_PIN_FUNCTION(codec_mic_i2s),
--	APQ_PIN_FUNCTION(codec_spkr_i2s),
--	APQ_PIN_FUNCTION(gp_clk_0a),
--	APQ_PIN_FUNCTION(gp_clk_0b),
--	APQ_PIN_FUNCTION(gp_clk_1a),
--	APQ_PIN_FUNCTION(gp_clk_1b),
--	APQ_PIN_FUNCTION(gp_clk_2a),
--	APQ_PIN_FUNCTION(gp_clk_2b),
--	APQ_PIN_FUNCTION(gpio),
--	APQ_PIN_FUNCTION(gsbi1),
--	APQ_PIN_FUNCTION(gsbi2),
--	APQ_PIN_FUNCTION(gsbi3),
--	APQ_PIN_FUNCTION(gsbi4),
--	APQ_PIN_FUNCTION(gsbi4_cam_i2c),
--	APQ_PIN_FUNCTION(gsbi5),
--	APQ_PIN_FUNCTION(gsbi5_spi_cs1),
--	APQ_PIN_FUNCTION(gsbi5_spi_cs2),
--	APQ_PIN_FUNCTION(gsbi5_spi_cs3),
--	APQ_PIN_FUNCTION(gsbi6),
--	APQ_PIN_FUNCTION(gsbi6_spi_cs1),
--	APQ_PIN_FUNCTION(gsbi6_spi_cs2),
--	APQ_PIN_FUNCTION(gsbi6_spi_cs3),
--	APQ_PIN_FUNCTION(gsbi7),
--	APQ_PIN_FUNCTION(gsbi7_spi_cs1),
--	APQ_PIN_FUNCTION(gsbi7_spi_cs2),
--	APQ_PIN_FUNCTION(gsbi7_spi_cs3),
--	APQ_PIN_FUNCTION(gsbi_cam_i2c),
--	APQ_PIN_FUNCTION(hdmi),
--	APQ_PIN_FUNCTION(mi2s),
--	APQ_PIN_FUNCTION(riva_bt),
--	APQ_PIN_FUNCTION(riva_fm),
--	APQ_PIN_FUNCTION(riva_wlan),
--	APQ_PIN_FUNCTION(sdc2),
--	APQ_PIN_FUNCTION(sdc4),
--	APQ_PIN_FUNCTION(slimbus),
--	APQ_PIN_FUNCTION(spkr_i2s),
--	APQ_PIN_FUNCTION(tsif1),
--	APQ_PIN_FUNCTION(tsif2),
--	APQ_PIN_FUNCTION(usb2_hsic),
--	APQ_PIN_FUNCTION(ps_hold),
-+	MSM_PIN_FUNCTION(cam_mclk),
-+	MSM_PIN_FUNCTION(codec_mic_i2s),
-+	MSM_PIN_FUNCTION(codec_spkr_i2s),
-+	MSM_PIN_FUNCTION(gp_clk_0a),
-+	MSM_PIN_FUNCTION(gp_clk_0b),
-+	MSM_PIN_FUNCTION(gp_clk_1a),
-+	MSM_PIN_FUNCTION(gp_clk_1b),
-+	MSM_PIN_FUNCTION(gp_clk_2a),
-+	MSM_PIN_FUNCTION(gp_clk_2b),
-+	MSM_PIN_FUNCTION(gpio),
-+	MSM_PIN_FUNCTION(gsbi1),
-+	MSM_PIN_FUNCTION(gsbi2),
-+	MSM_PIN_FUNCTION(gsbi3),
-+	MSM_PIN_FUNCTION(gsbi4),
-+	MSM_PIN_FUNCTION(gsbi4_cam_i2c),
-+	MSM_PIN_FUNCTION(gsbi5),
-+	MSM_PIN_FUNCTION(gsbi5_spi_cs1),
-+	MSM_PIN_FUNCTION(gsbi5_spi_cs2),
-+	MSM_PIN_FUNCTION(gsbi5_spi_cs3),
-+	MSM_PIN_FUNCTION(gsbi6),
-+	MSM_PIN_FUNCTION(gsbi6_spi_cs1),
-+	MSM_PIN_FUNCTION(gsbi6_spi_cs2),
-+	MSM_PIN_FUNCTION(gsbi6_spi_cs3),
-+	MSM_PIN_FUNCTION(gsbi7),
-+	MSM_PIN_FUNCTION(gsbi7_spi_cs1),
-+	MSM_PIN_FUNCTION(gsbi7_spi_cs2),
-+	MSM_PIN_FUNCTION(gsbi7_spi_cs3),
-+	MSM_PIN_FUNCTION(gsbi_cam_i2c),
-+	MSM_PIN_FUNCTION(hdmi),
-+	MSM_PIN_FUNCTION(mi2s),
-+	MSM_PIN_FUNCTION(riva_bt),
-+	MSM_PIN_FUNCTION(riva_fm),
-+	MSM_PIN_FUNCTION(riva_wlan),
-+	MSM_PIN_FUNCTION(sdc2),
-+	MSM_PIN_FUNCTION(sdc4),
-+	MSM_PIN_FUNCTION(slimbus),
-+	MSM_PIN_FUNCTION(spkr_i2s),
-+	MSM_PIN_FUNCTION(tsif1),
-+	MSM_PIN_FUNCTION(tsif2),
-+	MSM_PIN_FUNCTION(usb2_hsic),
-+	MSM_PIN_FUNCTION(ps_hold),
- };
- 
- static const struct msm_pingroup apq8064_groups[] = {
-diff --git a/drivers/pinctrl/qcom/pinctrl-apq8084.c b/drivers/pinctrl/qcom/pinctrl-apq8084.c
-index e3c1f86aba7d..67d06f6988ef 100644
---- a/drivers/pinctrl/qcom/pinctrl-apq8084.c
-+++ b/drivers/pinctrl/qcom/pinctrl-apq8084.c
-@@ -329,14 +329,14 @@ static const unsigned int sdc2_data_pins[] = { 152 };
- 			gpio##id##_pins, 		\
- 			ARRAY_SIZE(gpio##id##_pins)),	\
- 		.funcs = (int[]){			\
--			APQ_MUX_gpio,			\
--			APQ_MUX_##f1,			\
--			APQ_MUX_##f2,			\
--			APQ_MUX_##f3,			\
--			APQ_MUX_##f4,			\
--			APQ_MUX_##f5,			\
--			APQ_MUX_##f6,			\
--			APQ_MUX_##f7			\
-+			msm_mux_gpio,			\
-+			msm_mux_##f1,			\
-+			msm_mux_##f2,			\
-+			msm_mux_##f3,			\
-+			msm_mux_##f4,			\
-+			msm_mux_##f5,			\
-+			msm_mux_##f6,			\
-+			msm_mux_##f7			\
- 		},					\
- 		.nfuncs = 8,				\
- 		.ctl_reg = 0x1000 + 0x10 * id,		\
-@@ -386,128 +386,128 @@ static const unsigned int sdc2_data_pins[] = { 152 };
- 	}
- 
- enum apq8084_functions {
--	APQ_MUX_adsp_ext,
--	APQ_MUX_audio_ref,
--	APQ_MUX_blsp_i2c1,
--	APQ_MUX_blsp_i2c2,
--	APQ_MUX_blsp_i2c3,
--	APQ_MUX_blsp_i2c4,
--	APQ_MUX_blsp_i2c5,
--	APQ_MUX_blsp_i2c6,
--	APQ_MUX_blsp_i2c7,
--	APQ_MUX_blsp_i2c8,
--	APQ_MUX_blsp_i2c9,
--	APQ_MUX_blsp_i2c10,
--	APQ_MUX_blsp_i2c11,
--	APQ_MUX_blsp_i2c12,
--	APQ_MUX_blsp_spi1,
--	APQ_MUX_blsp_spi1_cs1,
--	APQ_MUX_blsp_spi1_cs2,
--	APQ_MUX_blsp_spi1_cs3,
--	APQ_MUX_blsp_spi2,
--	APQ_MUX_blsp_spi3,
--	APQ_MUX_blsp_spi3_cs1,
--	APQ_MUX_blsp_spi3_cs2,
--	APQ_MUX_blsp_spi3_cs3,
--	APQ_MUX_blsp_spi4,
--	APQ_MUX_blsp_spi5,
--	APQ_MUX_blsp_spi6,
--	APQ_MUX_blsp_spi7,
--	APQ_MUX_blsp_spi8,
--	APQ_MUX_blsp_spi9,
--	APQ_MUX_blsp_spi10,
--	APQ_MUX_blsp_spi10_cs1,
--	APQ_MUX_blsp_spi10_cs2,
--	APQ_MUX_blsp_spi10_cs3,
--	APQ_MUX_blsp_spi11,
--	APQ_MUX_blsp_spi12,
--	APQ_MUX_blsp_uart1,
--	APQ_MUX_blsp_uart2,
--	APQ_MUX_blsp_uart3,
--	APQ_MUX_blsp_uart4,
--	APQ_MUX_blsp_uart5,
--	APQ_MUX_blsp_uart6,
--	APQ_MUX_blsp_uart7,
--	APQ_MUX_blsp_uart8,
--	APQ_MUX_blsp_uart9,
--	APQ_MUX_blsp_uart10,
--	APQ_MUX_blsp_uart11,
--	APQ_MUX_blsp_uart12,
--	APQ_MUX_blsp_uim1,
--	APQ_MUX_blsp_uim2,
--	APQ_MUX_blsp_uim3,
--	APQ_MUX_blsp_uim4,
--	APQ_MUX_blsp_uim5,
--	APQ_MUX_blsp_uim6,
--	APQ_MUX_blsp_uim7,
--	APQ_MUX_blsp_uim8,
--	APQ_MUX_blsp_uim9,
--	APQ_MUX_blsp_uim10,
--	APQ_MUX_blsp_uim11,
--	APQ_MUX_blsp_uim12,
--	APQ_MUX_cam_mclk0,
--	APQ_MUX_cam_mclk1,
--	APQ_MUX_cam_mclk2,
--	APQ_MUX_cam_mclk3,
--	APQ_MUX_cci_async,
--	APQ_MUX_cci_async_in0,
--	APQ_MUX_cci_i2c0,
--	APQ_MUX_cci_i2c1,
--	APQ_MUX_cci_timer0,
--	APQ_MUX_cci_timer1,
--	APQ_MUX_cci_timer2,
--	APQ_MUX_cci_timer3,
--	APQ_MUX_cci_timer4,
--	APQ_MUX_edp_hpd,
--	APQ_MUX_gcc_gp1,
--	APQ_MUX_gcc_gp2,
--	APQ_MUX_gcc_gp3,
--	APQ_MUX_gcc_obt,
--	APQ_MUX_gcc_vtt,
--	APQ_MUX_gp_mn,
--	APQ_MUX_gp_pdm0,
--	APQ_MUX_gp_pdm1,
--	APQ_MUX_gp_pdm2,
--	APQ_MUX_gp0_clk,
--	APQ_MUX_gp1_clk,
--	APQ_MUX_gpio,
--	APQ_MUX_hdmi_cec,
--	APQ_MUX_hdmi_ddc,
--	APQ_MUX_hdmi_dtest,
--	APQ_MUX_hdmi_hpd,
--	APQ_MUX_hdmi_rcv,
--	APQ_MUX_hsic,
--	APQ_MUX_ldo_en,
--	APQ_MUX_ldo_update,
--	APQ_MUX_mdp_vsync,
--	APQ_MUX_pci_e0,
--	APQ_MUX_pci_e0_n,
--	APQ_MUX_pci_e0_rst,
--	APQ_MUX_pci_e1,
--	APQ_MUX_pci_e1_rst,
--	APQ_MUX_pci_e1_rst_n,
--	APQ_MUX_pci_e1_clkreq_n,
--	APQ_MUX_pri_mi2s,
--	APQ_MUX_qua_mi2s,
--	APQ_MUX_sata_act,
--	APQ_MUX_sata_devsleep,
--	APQ_MUX_sata_devsleep_n,
--	APQ_MUX_sd_write,
--	APQ_MUX_sdc_emmc_mode,
--	APQ_MUX_sdc3,
--	APQ_MUX_sdc4,
--	APQ_MUX_sec_mi2s,
--	APQ_MUX_slimbus,
--	APQ_MUX_spdif_tx,
--	APQ_MUX_spkr_i2s,
--	APQ_MUX_spkr_i2s_ws,
--	APQ_MUX_spss_geni,
--	APQ_MUX_ter_mi2s,
--	APQ_MUX_tsif1,
--	APQ_MUX_tsif2,
--	APQ_MUX_uim,
--	APQ_MUX_uim_batt_alarm,
--	APQ_MUX_NA,
-+	msm_mux_adsp_ext,
-+	msm_mux_audio_ref,
-+	msm_mux_blsp_i2c1,
-+	msm_mux_blsp_i2c2,
-+	msm_mux_blsp_i2c3,
-+	msm_mux_blsp_i2c4,
-+	msm_mux_blsp_i2c5,
-+	msm_mux_blsp_i2c6,
-+	msm_mux_blsp_i2c7,
-+	msm_mux_blsp_i2c8,
-+	msm_mux_blsp_i2c9,
-+	msm_mux_blsp_i2c10,
-+	msm_mux_blsp_i2c11,
-+	msm_mux_blsp_i2c12,
-+	msm_mux_blsp_spi1,
-+	msm_mux_blsp_spi1_cs1,
-+	msm_mux_blsp_spi1_cs2,
-+	msm_mux_blsp_spi1_cs3,
-+	msm_mux_blsp_spi2,
-+	msm_mux_blsp_spi3,
-+	msm_mux_blsp_spi3_cs1,
-+	msm_mux_blsp_spi3_cs2,
-+	msm_mux_blsp_spi3_cs3,
-+	msm_mux_blsp_spi4,
-+	msm_mux_blsp_spi5,
-+	msm_mux_blsp_spi6,
-+	msm_mux_blsp_spi7,
-+	msm_mux_blsp_spi8,
-+	msm_mux_blsp_spi9,
-+	msm_mux_blsp_spi10,
-+	msm_mux_blsp_spi10_cs1,
-+	msm_mux_blsp_spi10_cs2,
-+	msm_mux_blsp_spi10_cs3,
-+	msm_mux_blsp_spi11,
-+	msm_mux_blsp_spi12,
-+	msm_mux_blsp_uart1,
-+	msm_mux_blsp_uart2,
-+	msm_mux_blsp_uart3,
-+	msm_mux_blsp_uart4,
-+	msm_mux_blsp_uart5,
-+	msm_mux_blsp_uart6,
-+	msm_mux_blsp_uart7,
-+	msm_mux_blsp_uart8,
-+	msm_mux_blsp_uart9,
-+	msm_mux_blsp_uart10,
-+	msm_mux_blsp_uart11,
-+	msm_mux_blsp_uart12,
-+	msm_mux_blsp_uim1,
-+	msm_mux_blsp_uim2,
-+	msm_mux_blsp_uim3,
-+	msm_mux_blsp_uim4,
-+	msm_mux_blsp_uim5,
-+	msm_mux_blsp_uim6,
-+	msm_mux_blsp_uim7,
-+	msm_mux_blsp_uim8,
-+	msm_mux_blsp_uim9,
-+	msm_mux_blsp_uim10,
-+	msm_mux_blsp_uim11,
-+	msm_mux_blsp_uim12,
-+	msm_mux_cam_mclk0,
-+	msm_mux_cam_mclk1,
-+	msm_mux_cam_mclk2,
-+	msm_mux_cam_mclk3,
-+	msm_mux_cci_async,
-+	msm_mux_cci_async_in0,
-+	msm_mux_cci_i2c0,
-+	msm_mux_cci_i2c1,
-+	msm_mux_cci_timer0,
-+	msm_mux_cci_timer1,
-+	msm_mux_cci_timer2,
-+	msm_mux_cci_timer3,
-+	msm_mux_cci_timer4,
-+	msm_mux_edp_hpd,
-+	msm_mux_gcc_gp1,
-+	msm_mux_gcc_gp2,
-+	msm_mux_gcc_gp3,
-+	msm_mux_gcc_obt,
-+	msm_mux_gcc_vtt,
-+	msm_mux_gp_mn,
-+	msm_mux_gp_pdm0,
-+	msm_mux_gp_pdm1,
-+	msm_mux_gp_pdm2,
-+	msm_mux_gp0_clk,
-+	msm_mux_gp1_clk,
-+	msm_mux_gpio,
-+	msm_mux_hdmi_cec,
-+	msm_mux_hdmi_ddc,
-+	msm_mux_hdmi_dtest,
-+	msm_mux_hdmi_hpd,
-+	msm_mux_hdmi_rcv,
-+	msm_mux_hsic,
-+	msm_mux_ldo_en,
-+	msm_mux_ldo_update,
-+	msm_mux_mdp_vsync,
-+	msm_mux_pci_e0,
-+	msm_mux_pci_e0_n,
-+	msm_mux_pci_e0_rst,
-+	msm_mux_pci_e1,
-+	msm_mux_pci_e1_rst,
-+	msm_mux_pci_e1_rst_n,
-+	msm_mux_pci_e1_clkreq_n,
-+	msm_mux_pri_mi2s,
-+	msm_mux_qua_mi2s,
-+	msm_mux_sata_act,
-+	msm_mux_sata_devsleep,
-+	msm_mux_sata_devsleep_n,
-+	msm_mux_sd_write,
-+	msm_mux_sdc_emmc_mode,
-+	msm_mux_sdc3,
-+	msm_mux_sdc4,
-+	msm_mux_sec_mi2s,
-+	msm_mux_slimbus,
-+	msm_mux_spdif_tx,
-+	msm_mux_spkr_i2s,
-+	msm_mux_spkr_i2s_ws,
-+	msm_mux_spss_geni,
-+	msm_mux_ter_mi2s,
-+	msm_mux_tsif1,
-+	msm_mux_tsif2,
-+	msm_mux_uim,
-+	msm_mux_uim_batt_alarm,
-+	msm_mux_NA,
- };
- 
- static const char * const gpio_groups[] = {
-@@ -897,127 +897,127 @@ static const char * const uim_batt_alarm_groups[] = {
- 	"gpio102"
- };
- static const struct pinfunction apq8084_functions[] = {
--	APQ_PIN_FUNCTION(adsp_ext),
--	APQ_PIN_FUNCTION(audio_ref),
--	APQ_PIN_FUNCTION(blsp_i2c1),
--	APQ_PIN_FUNCTION(blsp_i2c2),
--	APQ_PIN_FUNCTION(blsp_i2c3),
--	APQ_PIN_FUNCTION(blsp_i2c4),
--	APQ_PIN_FUNCTION(blsp_i2c5),
--	APQ_PIN_FUNCTION(blsp_i2c6),
--	APQ_PIN_FUNCTION(blsp_i2c7),
--	APQ_PIN_FUNCTION(blsp_i2c8),
--	APQ_PIN_FUNCTION(blsp_i2c9),
--	APQ_PIN_FUNCTION(blsp_i2c10),
--	APQ_PIN_FUNCTION(blsp_i2c11),
--	APQ_PIN_FUNCTION(blsp_i2c12),
--	APQ_PIN_FUNCTION(blsp_spi1),
--	APQ_PIN_FUNCTION(blsp_spi1_cs1),
--	APQ_PIN_FUNCTION(blsp_spi1_cs2),
--	APQ_PIN_FUNCTION(blsp_spi1_cs3),
--	APQ_PIN_FUNCTION(blsp_spi2),
--	APQ_PIN_FUNCTION(blsp_spi3),
--	APQ_PIN_FUNCTION(blsp_spi3_cs1),
--	APQ_PIN_FUNCTION(blsp_spi3_cs2),
--	APQ_PIN_FUNCTION(blsp_spi3_cs3),
--	APQ_PIN_FUNCTION(blsp_spi4),
--	APQ_PIN_FUNCTION(blsp_spi5),
--	APQ_PIN_FUNCTION(blsp_spi6),
--	APQ_PIN_FUNCTION(blsp_spi7),
--	APQ_PIN_FUNCTION(blsp_spi8),
--	APQ_PIN_FUNCTION(blsp_spi9),
--	APQ_PIN_FUNCTION(blsp_spi10),
--	APQ_PIN_FUNCTION(blsp_spi10_cs1),
--	APQ_PIN_FUNCTION(blsp_spi10_cs2),
--	APQ_PIN_FUNCTION(blsp_spi10_cs3),
--	APQ_PIN_FUNCTION(blsp_spi11),
--	APQ_PIN_FUNCTION(blsp_spi12),
--	APQ_PIN_FUNCTION(blsp_uart1),
--	APQ_PIN_FUNCTION(blsp_uart2),
--	APQ_PIN_FUNCTION(blsp_uart3),
--	APQ_PIN_FUNCTION(blsp_uart4),
--	APQ_PIN_FUNCTION(blsp_uart5),
--	APQ_PIN_FUNCTION(blsp_uart6),
--	APQ_PIN_FUNCTION(blsp_uart7),
--	APQ_PIN_FUNCTION(blsp_uart8),
--	APQ_PIN_FUNCTION(blsp_uart9),
--	APQ_PIN_FUNCTION(blsp_uart10),
--	APQ_PIN_FUNCTION(blsp_uart11),
--	APQ_PIN_FUNCTION(blsp_uart12),
--	APQ_PIN_FUNCTION(blsp_uim1),
--	APQ_PIN_FUNCTION(blsp_uim2),
--	APQ_PIN_FUNCTION(blsp_uim3),
--	APQ_PIN_FUNCTION(blsp_uim4),
--	APQ_PIN_FUNCTION(blsp_uim5),
--	APQ_PIN_FUNCTION(blsp_uim6),
--	APQ_PIN_FUNCTION(blsp_uim7),
--	APQ_PIN_FUNCTION(blsp_uim8),
--	APQ_PIN_FUNCTION(blsp_uim9),
--	APQ_PIN_FUNCTION(blsp_uim10),
--	APQ_PIN_FUNCTION(blsp_uim11),
--	APQ_PIN_FUNCTION(blsp_uim12),
--	APQ_PIN_FUNCTION(cam_mclk0),
--	APQ_PIN_FUNCTION(cam_mclk1),
--	APQ_PIN_FUNCTION(cam_mclk2),
--	APQ_PIN_FUNCTION(cam_mclk3),
--	APQ_PIN_FUNCTION(cci_async),
--	APQ_PIN_FUNCTION(cci_async_in0),
--	APQ_PIN_FUNCTION(cci_i2c0),
--	APQ_PIN_FUNCTION(cci_i2c1),
--	APQ_PIN_FUNCTION(cci_timer0),
--	APQ_PIN_FUNCTION(cci_timer1),
--	APQ_PIN_FUNCTION(cci_timer2),
--	APQ_PIN_FUNCTION(cci_timer3),
--	APQ_PIN_FUNCTION(cci_timer4),
--	APQ_PIN_FUNCTION(edp_hpd),
--	APQ_PIN_FUNCTION(gcc_gp1),
--	APQ_PIN_FUNCTION(gcc_gp2),
--	APQ_PIN_FUNCTION(gcc_gp3),
--	APQ_PIN_FUNCTION(gcc_obt),
--	APQ_PIN_FUNCTION(gcc_vtt),
--	APQ_PIN_FUNCTION(gp_mn),
--	APQ_PIN_FUNCTION(gp_pdm0),
--	APQ_PIN_FUNCTION(gp_pdm1),
--	APQ_PIN_FUNCTION(gp_pdm2),
--	APQ_PIN_FUNCTION(gp0_clk),
--	APQ_PIN_FUNCTION(gp1_clk),
--	APQ_PIN_FUNCTION(gpio),
--	APQ_PIN_FUNCTION(hdmi_cec),
--	APQ_PIN_FUNCTION(hdmi_ddc),
--	APQ_PIN_FUNCTION(hdmi_dtest),
--	APQ_PIN_FUNCTION(hdmi_hpd),
--	APQ_PIN_FUNCTION(hdmi_rcv),
--	APQ_PIN_FUNCTION(hsic),
--	APQ_PIN_FUNCTION(ldo_en),
--	APQ_PIN_FUNCTION(ldo_update),
--	APQ_PIN_FUNCTION(mdp_vsync),
--	APQ_PIN_FUNCTION(pci_e0),
--	APQ_PIN_FUNCTION(pci_e0_n),
--	APQ_PIN_FUNCTION(pci_e0_rst),
--	APQ_PIN_FUNCTION(pci_e1),
--	APQ_PIN_FUNCTION(pci_e1_rst),
--	APQ_PIN_FUNCTION(pci_e1_rst_n),
--	APQ_PIN_FUNCTION(pci_e1_clkreq_n),
--	APQ_PIN_FUNCTION(pri_mi2s),
--	APQ_PIN_FUNCTION(qua_mi2s),
--	APQ_PIN_FUNCTION(sata_act),
--	APQ_PIN_FUNCTION(sata_devsleep),
--	APQ_PIN_FUNCTION(sata_devsleep_n),
--	APQ_PIN_FUNCTION(sd_write),
--	APQ_PIN_FUNCTION(sdc_emmc_mode),
--	APQ_PIN_FUNCTION(sdc3),
--	APQ_PIN_FUNCTION(sdc4),
--	APQ_PIN_FUNCTION(sec_mi2s),
--	APQ_PIN_FUNCTION(slimbus),
--	APQ_PIN_FUNCTION(spdif_tx),
--	APQ_PIN_FUNCTION(spkr_i2s),
--	APQ_PIN_FUNCTION(spkr_i2s_ws),
--	APQ_PIN_FUNCTION(spss_geni),
--	APQ_PIN_FUNCTION(ter_mi2s),
--	APQ_PIN_FUNCTION(tsif1),
--	APQ_PIN_FUNCTION(tsif2),
--	APQ_PIN_FUNCTION(uim),
--	APQ_PIN_FUNCTION(uim_batt_alarm),
-+	MSM_PIN_FUNCTION(adsp_ext),
-+	MSM_PIN_FUNCTION(audio_ref),
-+	MSM_PIN_FUNCTION(blsp_i2c1),
-+	MSM_PIN_FUNCTION(blsp_i2c2),
-+	MSM_PIN_FUNCTION(blsp_i2c3),
-+	MSM_PIN_FUNCTION(blsp_i2c4),
-+	MSM_PIN_FUNCTION(blsp_i2c5),
-+	MSM_PIN_FUNCTION(blsp_i2c6),
-+	MSM_PIN_FUNCTION(blsp_i2c7),
-+	MSM_PIN_FUNCTION(blsp_i2c8),
-+	MSM_PIN_FUNCTION(blsp_i2c9),
-+	MSM_PIN_FUNCTION(blsp_i2c10),
-+	MSM_PIN_FUNCTION(blsp_i2c11),
-+	MSM_PIN_FUNCTION(blsp_i2c12),
-+	MSM_PIN_FUNCTION(blsp_spi1),
-+	MSM_PIN_FUNCTION(blsp_spi1_cs1),
-+	MSM_PIN_FUNCTION(blsp_spi1_cs2),
-+	MSM_PIN_FUNCTION(blsp_spi1_cs3),
-+	MSM_PIN_FUNCTION(blsp_spi2),
-+	MSM_PIN_FUNCTION(blsp_spi3),
-+	MSM_PIN_FUNCTION(blsp_spi3_cs1),
-+	MSM_PIN_FUNCTION(blsp_spi3_cs2),
-+	MSM_PIN_FUNCTION(blsp_spi3_cs3),
-+	MSM_PIN_FUNCTION(blsp_spi4),
-+	MSM_PIN_FUNCTION(blsp_spi5),
-+	MSM_PIN_FUNCTION(blsp_spi6),
-+	MSM_PIN_FUNCTION(blsp_spi7),
-+	MSM_PIN_FUNCTION(blsp_spi8),
-+	MSM_PIN_FUNCTION(blsp_spi9),
-+	MSM_PIN_FUNCTION(blsp_spi10),
-+	MSM_PIN_FUNCTION(blsp_spi10_cs1),
-+	MSM_PIN_FUNCTION(blsp_spi10_cs2),
-+	MSM_PIN_FUNCTION(blsp_spi10_cs3),
-+	MSM_PIN_FUNCTION(blsp_spi11),
-+	MSM_PIN_FUNCTION(blsp_spi12),
-+	MSM_PIN_FUNCTION(blsp_uart1),
-+	MSM_PIN_FUNCTION(blsp_uart2),
-+	MSM_PIN_FUNCTION(blsp_uart3),
-+	MSM_PIN_FUNCTION(blsp_uart4),
-+	MSM_PIN_FUNCTION(blsp_uart5),
-+	MSM_PIN_FUNCTION(blsp_uart6),
-+	MSM_PIN_FUNCTION(blsp_uart7),
-+	MSM_PIN_FUNCTION(blsp_uart8),
-+	MSM_PIN_FUNCTION(blsp_uart9),
-+	MSM_PIN_FUNCTION(blsp_uart10),
-+	MSM_PIN_FUNCTION(blsp_uart11),
-+	MSM_PIN_FUNCTION(blsp_uart12),
-+	MSM_PIN_FUNCTION(blsp_uim1),
-+	MSM_PIN_FUNCTION(blsp_uim2),
-+	MSM_PIN_FUNCTION(blsp_uim3),
-+	MSM_PIN_FUNCTION(blsp_uim4),
-+	MSM_PIN_FUNCTION(blsp_uim5),
-+	MSM_PIN_FUNCTION(blsp_uim6),
-+	MSM_PIN_FUNCTION(blsp_uim7),
-+	MSM_PIN_FUNCTION(blsp_uim8),
-+	MSM_PIN_FUNCTION(blsp_uim9),
-+	MSM_PIN_FUNCTION(blsp_uim10),
-+	MSM_PIN_FUNCTION(blsp_uim11),
-+	MSM_PIN_FUNCTION(blsp_uim12),
-+	MSM_PIN_FUNCTION(cam_mclk0),
-+	MSM_PIN_FUNCTION(cam_mclk1),
-+	MSM_PIN_FUNCTION(cam_mclk2),
-+	MSM_PIN_FUNCTION(cam_mclk3),
-+	MSM_PIN_FUNCTION(cci_async),
-+	MSM_PIN_FUNCTION(cci_async_in0),
-+	MSM_PIN_FUNCTION(cci_i2c0),
-+	MSM_PIN_FUNCTION(cci_i2c1),
-+	MSM_PIN_FUNCTION(cci_timer0),
-+	MSM_PIN_FUNCTION(cci_timer1),
-+	MSM_PIN_FUNCTION(cci_timer2),
-+	MSM_PIN_FUNCTION(cci_timer3),
-+	MSM_PIN_FUNCTION(cci_timer4),
-+	MSM_PIN_FUNCTION(edp_hpd),
-+	MSM_PIN_FUNCTION(gcc_gp1),
-+	MSM_PIN_FUNCTION(gcc_gp2),
-+	MSM_PIN_FUNCTION(gcc_gp3),
-+	MSM_PIN_FUNCTION(gcc_obt),
-+	MSM_PIN_FUNCTION(gcc_vtt),
-+	MSM_PIN_FUNCTION(gp_mn),
-+	MSM_PIN_FUNCTION(gp_pdm0),
-+	MSM_PIN_FUNCTION(gp_pdm1),
-+	MSM_PIN_FUNCTION(gp_pdm2),
-+	MSM_PIN_FUNCTION(gp0_clk),
-+	MSM_PIN_FUNCTION(gp1_clk),
-+	MSM_PIN_FUNCTION(gpio),
-+	MSM_PIN_FUNCTION(hdmi_cec),
-+	MSM_PIN_FUNCTION(hdmi_ddc),
-+	MSM_PIN_FUNCTION(hdmi_dtest),
-+	MSM_PIN_FUNCTION(hdmi_hpd),
-+	MSM_PIN_FUNCTION(hdmi_rcv),
-+	MSM_PIN_FUNCTION(hsic),
-+	MSM_PIN_FUNCTION(ldo_en),
-+	MSM_PIN_FUNCTION(ldo_update),
-+	MSM_PIN_FUNCTION(mdp_vsync),
-+	MSM_PIN_FUNCTION(pci_e0),
-+	MSM_PIN_FUNCTION(pci_e0_n),
-+	MSM_PIN_FUNCTION(pci_e0_rst),
-+	MSM_PIN_FUNCTION(pci_e1),
-+	MSM_PIN_FUNCTION(pci_e1_rst),
-+	MSM_PIN_FUNCTION(pci_e1_rst_n),
-+	MSM_PIN_FUNCTION(pci_e1_clkreq_n),
-+	MSM_PIN_FUNCTION(pri_mi2s),
-+	MSM_PIN_FUNCTION(qua_mi2s),
-+	MSM_PIN_FUNCTION(sata_act),
-+	MSM_PIN_FUNCTION(sata_devsleep),
-+	MSM_PIN_FUNCTION(sata_devsleep_n),
-+	MSM_PIN_FUNCTION(sd_write),
-+	MSM_PIN_FUNCTION(sdc_emmc_mode),
-+	MSM_PIN_FUNCTION(sdc3),
-+	MSM_PIN_FUNCTION(sdc4),
-+	MSM_PIN_FUNCTION(sec_mi2s),
-+	MSM_PIN_FUNCTION(slimbus),
-+	MSM_PIN_FUNCTION(spdif_tx),
-+	MSM_PIN_FUNCTION(spkr_i2s),
-+	MSM_PIN_FUNCTION(spkr_i2s_ws),
-+	MSM_PIN_FUNCTION(spss_geni),
-+	MSM_PIN_FUNCTION(ter_mi2s),
-+	MSM_PIN_FUNCTION(tsif1),
-+	MSM_PIN_FUNCTION(tsif2),
-+	MSM_PIN_FUNCTION(uim),
-+	MSM_PIN_FUNCTION(uim_batt_alarm),
- };
- 
- static const struct msm_pingroup apq8084_groups[] = {
-diff --git a/drivers/pinctrl/qcom/pinctrl-ipq4019.c b/drivers/pinctrl/qcom/pinctrl-ipq4019.c
-index adf7c8631f72..ea407e426bba 100644
---- a/drivers/pinctrl/qcom/pinctrl-ipq4019.c
-+++ b/drivers/pinctrl/qcom/pinctrl-ipq4019.c
-@@ -221,21 +221,21 @@ DECLARE_QCA_GPIO_PINS(99);
- 			gpio##id##_pins, 		\
- 			ARRAY_SIZE(gpio##id##_pins)),	\
- 		.funcs = (int[]){			\
--			qca_mux_gpio, /* gpio mode */	\
--			qca_mux_##f1,			\
--			qca_mux_##f2,			\
--			qca_mux_##f3,			\
--			qca_mux_##f4,			\
--			qca_mux_##f5,			\
--			qca_mux_##f6,			\
--			qca_mux_##f7,			\
--			qca_mux_##f8,			\
--			qca_mux_##f9,			\
--			qca_mux_##f10,			\
--			qca_mux_##f11,			\
--			qca_mux_##f12,			\
--			qca_mux_##f13,			\
--			qca_mux_##f14			\
-+			msm_mux_gpio, /* gpio mode */	\
-+			msm_mux_##f1,			\
-+			msm_mux_##f2,			\
-+			msm_mux_##f3,			\
-+			msm_mux_##f4,			\
-+			msm_mux_##f5,			\
-+			msm_mux_##f6,			\
-+			msm_mux_##f7,			\
-+			msm_mux_##f8,			\
-+			msm_mux_##f9,			\
-+			msm_mux_##f10,			\
-+			msm_mux_##f11,			\
-+			msm_mux_##f12,			\
-+			msm_mux_##f13,			\
-+			msm_mux_##f14			\
- 		},				        \
- 		.nfuncs = 15,				\
- 		.ctl_reg = 0x0 + 0x1000 * id,		\
-@@ -260,51 +260,51 @@ DECLARE_QCA_GPIO_PINS(99);
- 
- 
- enum ipq4019_functions {
--	qca_mux_gpio,
--	qca_mux_aud_pin,
--	qca_mux_audio_pwm,
--	qca_mux_blsp_i2c0,
--	qca_mux_blsp_i2c1,
--	qca_mux_blsp_spi0,
--	qca_mux_blsp_spi1,
--	qca_mux_blsp_uart0,
--	qca_mux_blsp_uart1,
--	qca_mux_chip_rst,
--	qca_mux_i2s_rx,
--	qca_mux_i2s_spdif_in,
--	qca_mux_i2s_spdif_out,
--	qca_mux_i2s_td,
--	qca_mux_i2s_tx,
--	qca_mux_jtag,
--	qca_mux_led0,
--	qca_mux_led1,
--	qca_mux_led2,
--	qca_mux_led3,
--	qca_mux_led4,
--	qca_mux_led5,
--	qca_mux_led6,
--	qca_mux_led7,
--	qca_mux_led8,
--	qca_mux_led9,
--	qca_mux_led10,
--	qca_mux_led11,
--	qca_mux_mdc,
--	qca_mux_mdio,
--	qca_mux_pcie,
--	qca_mux_pmu,
--	qca_mux_prng_rosc,
--	qca_mux_qpic,
--	qca_mux_rgmii,
--	qca_mux_rmii,
--	qca_mux_sdio,
--	qca_mux_smart0,
--	qca_mux_smart1,
--	qca_mux_smart2,
--	qca_mux_smart3,
--	qca_mux_tm,
--	qca_mux_wifi0,
--	qca_mux_wifi1,
--	qca_mux_NA,
-+	msm_mux_gpio,
-+	msm_mux_aud_pin,
-+	msm_mux_audio_pwm,
-+	msm_mux_blsp_i2c0,
-+	msm_mux_blsp_i2c1,
-+	msm_mux_blsp_spi0,
-+	msm_mux_blsp_spi1,
-+	msm_mux_blsp_uart0,
-+	msm_mux_blsp_uart1,
-+	msm_mux_chip_rst,
-+	msm_mux_i2s_rx,
-+	msm_mux_i2s_spdif_in,
-+	msm_mux_i2s_spdif_out,
-+	msm_mux_i2s_td,
-+	msm_mux_i2s_tx,
-+	msm_mux_jtag,
-+	msm_mux_led0,
-+	msm_mux_led1,
-+	msm_mux_led2,
-+	msm_mux_led3,
-+	msm_mux_led4,
-+	msm_mux_led5,
-+	msm_mux_led6,
-+	msm_mux_led7,
-+	msm_mux_led8,
-+	msm_mux_led9,
-+	msm_mux_led10,
-+	msm_mux_led11,
-+	msm_mux_mdc,
-+	msm_mux_mdio,
-+	msm_mux_pcie,
-+	msm_mux_pmu,
-+	msm_mux_prng_rosc,
-+	msm_mux_qpic,
-+	msm_mux_rgmii,
-+	msm_mux_rmii,
-+	msm_mux_sdio,
-+	msm_mux_smart0,
-+	msm_mux_smart1,
-+	msm_mux_smart2,
-+	msm_mux_smart3,
-+	msm_mux_tm,
-+	msm_mux_wifi0,
-+	msm_mux_wifi1,
-+	msm_mux_NA,
- };
- 
- static const char * const gpio_groups[] = {
-@@ -470,50 +470,50 @@ static const char * const wifi1_groups[] = {
- };
- 
- static const struct pinfunction ipq4019_functions[] = {
--	QCA_PIN_FUNCTION(aud_pin),
--	QCA_PIN_FUNCTION(audio_pwm),
--	QCA_PIN_FUNCTION(blsp_i2c0),
--	QCA_PIN_FUNCTION(blsp_i2c1),
--	QCA_PIN_FUNCTION(blsp_spi0),
--	QCA_PIN_FUNCTION(blsp_spi1),
--	QCA_PIN_FUNCTION(blsp_uart0),
--	QCA_PIN_FUNCTION(blsp_uart1),
--	QCA_PIN_FUNCTION(chip_rst),
--	QCA_GPIO_PIN_FUNCTION(gpio),
--	QCA_PIN_FUNCTION(i2s_rx),
--	QCA_PIN_FUNCTION(i2s_spdif_in),
--	QCA_PIN_FUNCTION(i2s_spdif_out),
--	QCA_PIN_FUNCTION(i2s_td),
--	QCA_PIN_FUNCTION(i2s_tx),
--	QCA_PIN_FUNCTION(jtag),
--	QCA_PIN_FUNCTION(led0),
--	QCA_PIN_FUNCTION(led1),
--	QCA_PIN_FUNCTION(led2),
--	QCA_PIN_FUNCTION(led3),
--	QCA_PIN_FUNCTION(led4),
--	QCA_PIN_FUNCTION(led5),
--	QCA_PIN_FUNCTION(led6),
--	QCA_PIN_FUNCTION(led7),
--	QCA_PIN_FUNCTION(led8),
--	QCA_PIN_FUNCTION(led9),
--	QCA_PIN_FUNCTION(led10),
--	QCA_PIN_FUNCTION(led11),
--	QCA_PIN_FUNCTION(mdc),
--	QCA_PIN_FUNCTION(mdio),
--	QCA_PIN_FUNCTION(pcie),
--	QCA_PIN_FUNCTION(pmu),
--	QCA_PIN_FUNCTION(prng_rosc),
--	QCA_PIN_FUNCTION(qpic),
--	QCA_PIN_FUNCTION(rgmii),
--	QCA_PIN_FUNCTION(rmii),
--	QCA_PIN_FUNCTION(sdio),
--	QCA_PIN_FUNCTION(smart0),
--	QCA_PIN_FUNCTION(smart1),
--	QCA_PIN_FUNCTION(smart2),
--	QCA_PIN_FUNCTION(smart3),
--	QCA_PIN_FUNCTION(tm),
--	QCA_PIN_FUNCTION(wifi0),
--	QCA_PIN_FUNCTION(wifi1),
-+	MSM_PIN_FUNCTION(aud_pin),
-+	MSM_PIN_FUNCTION(audio_pwm),
-+	MSM_PIN_FUNCTION(blsp_i2c0),
-+	MSM_PIN_FUNCTION(blsp_i2c1),
-+	MSM_PIN_FUNCTION(blsp_spi0),
-+	MSM_PIN_FUNCTION(blsp_spi1),
-+	MSM_PIN_FUNCTION(blsp_uart0),
-+	MSM_PIN_FUNCTION(blsp_uart1),
-+	MSM_PIN_FUNCTION(chip_rst),
-+	MSM_GPIO_PIN_FUNCTION(gpio),
-+	MSM_PIN_FUNCTION(i2s_rx),
-+	MSM_PIN_FUNCTION(i2s_spdif_in),
-+	MSM_PIN_FUNCTION(i2s_spdif_out),
-+	MSM_PIN_FUNCTION(i2s_td),
-+	MSM_PIN_FUNCTION(i2s_tx),
-+	MSM_PIN_FUNCTION(jtag),
-+	MSM_PIN_FUNCTION(led0),
-+	MSM_PIN_FUNCTION(led1),
-+	MSM_PIN_FUNCTION(led2),
-+	MSM_PIN_FUNCTION(led3),
-+	MSM_PIN_FUNCTION(led4),
-+	MSM_PIN_FUNCTION(led5),
-+	MSM_PIN_FUNCTION(led6),
-+	MSM_PIN_FUNCTION(led7),
-+	MSM_PIN_FUNCTION(led8),
-+	MSM_PIN_FUNCTION(led9),
-+	MSM_PIN_FUNCTION(led10),
-+	MSM_PIN_FUNCTION(led11),
-+	MSM_PIN_FUNCTION(mdc),
-+	MSM_PIN_FUNCTION(mdio),
-+	MSM_PIN_FUNCTION(pcie),
-+	MSM_PIN_FUNCTION(pmu),
-+	MSM_PIN_FUNCTION(prng_rosc),
-+	MSM_PIN_FUNCTION(qpic),
-+	MSM_PIN_FUNCTION(rgmii),
-+	MSM_PIN_FUNCTION(rmii),
-+	MSM_PIN_FUNCTION(sdio),
-+	MSM_PIN_FUNCTION(smart0),
-+	MSM_PIN_FUNCTION(smart1),
-+	MSM_PIN_FUNCTION(smart2),
-+	MSM_PIN_FUNCTION(smart3),
-+	MSM_PIN_FUNCTION(tm),
-+	MSM_PIN_FUNCTION(wifi0),
-+	MSM_PIN_FUNCTION(wifi1),
- };
- 
- static const struct msm_pingroup ipq4019_groups[] = {
-diff --git a/drivers/pinctrl/qcom/pinctrl-ipq8064.c b/drivers/pinctrl/qcom/pinctrl-ipq8064.c
-index 0a50486337d3..02682eb82be1 100644
---- a/drivers/pinctrl/qcom/pinctrl-ipq8064.c
-+++ b/drivers/pinctrl/qcom/pinctrl-ipq8064.c
-@@ -166,17 +166,17 @@ static const unsigned int sdc3_data_pins[] = { 71 };
- 			gpio##id##_pins, 		\
- 			ARRAY_SIZE(gpio##id##_pins)),	\
- 		.funcs = (int[]){			\
--			IPQ_MUX_gpio,			\
--			IPQ_MUX_##f1,			\
--			IPQ_MUX_##f2,			\
--			IPQ_MUX_##f3,			\
--			IPQ_MUX_##f4,			\
--			IPQ_MUX_##f5,			\
--			IPQ_MUX_##f6,			\
--			IPQ_MUX_##f7,			\
--			IPQ_MUX_##f8,			\
--			IPQ_MUX_##f9,			\
--			IPQ_MUX_##f10,			\
-+			msm_mux_gpio,			\
-+			msm_mux_##f1,			\
-+			msm_mux_##f2,			\
-+			msm_mux_##f3,			\
-+			msm_mux_##f4,			\
-+			msm_mux_##f5,			\
-+			msm_mux_##f6,			\
-+			msm_mux_##f7,			\
-+			msm_mux_##f8,			\
-+			msm_mux_##f9,			\
-+			msm_mux_##f10,			\
- 		},					\
- 		.nfuncs = 11,				\
- 		.ctl_reg = 0x1000 + 0x10 * id,		\
-@@ -228,53 +228,53 @@ static const unsigned int sdc3_data_pins[] = { 71 };
- 	}
- 
- enum ipq8064_functions {
--	IPQ_MUX_gpio,
--	IPQ_MUX_mdio,
--	IPQ_MUX_mi2s,
--	IPQ_MUX_pdm,
--	IPQ_MUX_ssbi,
--	IPQ_MUX_spmi,
--	IPQ_MUX_audio_pcm,
--	IPQ_MUX_gsbi1,
--	IPQ_MUX_gsbi2,
--	IPQ_MUX_gsbi4,
--	IPQ_MUX_gsbi5,
--	IPQ_MUX_gsbi5_spi_cs1,
--	IPQ_MUX_gsbi5_spi_cs2,
--	IPQ_MUX_gsbi5_spi_cs3,
--	IPQ_MUX_gsbi6,
--	IPQ_MUX_gsbi7,
--	IPQ_MUX_nss_spi,
--	IPQ_MUX_sdc1,
--	IPQ_MUX_spdif,
--	IPQ_MUX_nand,
--	IPQ_MUX_tsif1,
--	IPQ_MUX_tsif2,
--	IPQ_MUX_usb_fs_n,
--	IPQ_MUX_usb_fs,
--	IPQ_MUX_usb2_hsic,
--	IPQ_MUX_rgmii2,
--	IPQ_MUX_sata,
--	IPQ_MUX_pcie1_rst,
--	IPQ_MUX_pcie1_prsnt,
--	IPQ_MUX_pcie1_pwrflt,
--	IPQ_MUX_pcie1_pwren_n,
--	IPQ_MUX_pcie1_pwren,
--	IPQ_MUX_pcie1_clk_req,
--	IPQ_MUX_pcie2_rst,
--	IPQ_MUX_pcie2_prsnt,
--	IPQ_MUX_pcie2_pwrflt,
--	IPQ_MUX_pcie2_pwren_n,
--	IPQ_MUX_pcie2_pwren,
--	IPQ_MUX_pcie2_clk_req,
--	IPQ_MUX_pcie3_rst,
--	IPQ_MUX_pcie3_prsnt,
--	IPQ_MUX_pcie3_pwrflt,
--	IPQ_MUX_pcie3_pwren_n,
--	IPQ_MUX_pcie3_pwren,
--	IPQ_MUX_pcie3_clk_req,
--	IPQ_MUX_ps_hold,
--	IPQ_MUX_NA,
-+	msm_mux_gpio,
-+	msm_mux_mdio,
-+	msm_mux_mi2s,
-+	msm_mux_pdm,
-+	msm_mux_ssbi,
-+	msm_mux_spmi,
-+	msm_mux_audio_pcm,
-+	msm_mux_gsbi1,
-+	msm_mux_gsbi2,
-+	msm_mux_gsbi4,
-+	msm_mux_gsbi5,
-+	msm_mux_gsbi5_spi_cs1,
-+	msm_mux_gsbi5_spi_cs2,
-+	msm_mux_gsbi5_spi_cs3,
-+	msm_mux_gsbi6,
-+	msm_mux_gsbi7,
-+	msm_mux_nss_spi,
-+	msm_mux_sdc1,
-+	msm_mux_spdif,
-+	msm_mux_nand,
-+	msm_mux_tsif1,
-+	msm_mux_tsif2,
-+	msm_mux_usb_fs_n,
-+	msm_mux_usb_fs,
-+	msm_mux_usb2_hsic,
-+	msm_mux_rgmii2,
-+	msm_mux_sata,
-+	msm_mux_pcie1_rst,
-+	msm_mux_pcie1_prsnt,
-+	msm_mux_pcie1_pwrflt,
-+	msm_mux_pcie1_pwren_n,
-+	msm_mux_pcie1_pwren,
-+	msm_mux_pcie1_clk_req,
-+	msm_mux_pcie2_rst,
-+	msm_mux_pcie2_prsnt,
-+	msm_mux_pcie2_pwrflt,
-+	msm_mux_pcie2_pwren_n,
-+	msm_mux_pcie2_pwren,
-+	msm_mux_pcie2_clk_req,
-+	msm_mux_pcie3_rst,
-+	msm_mux_pcie3_prsnt,
-+	msm_mux_pcie3_pwrflt,
-+	msm_mux_pcie3_pwren_n,
-+	msm_mux_pcie3_pwren,
-+	msm_mux_pcie3_clk_req,
-+	msm_mux_ps_hold,
-+	msm_mux_NA,
- };
- 
- static const char * const gpio_groups[] = {
-@@ -480,52 +480,52 @@ static const char * const ps_hold_groups[] = {
- };
- 
- static const struct pinfunction ipq8064_functions[] = {
--	IPQ_GPIO_PIN_FUNCTION(gpio),
--	IPQ_PIN_FUNCTION(mdio),
--	IPQ_PIN_FUNCTION(ssbi),
--	IPQ_PIN_FUNCTION(spmi),
--	IPQ_PIN_FUNCTION(mi2s),
--	IPQ_PIN_FUNCTION(pdm),
--	IPQ_PIN_FUNCTION(audio_pcm),
--	IPQ_PIN_FUNCTION(gsbi1),
--	IPQ_PIN_FUNCTION(gsbi2),
--	IPQ_PIN_FUNCTION(gsbi4),
--	IPQ_PIN_FUNCTION(gsbi5),
--	IPQ_PIN_FUNCTION(gsbi5_spi_cs1),
--	IPQ_PIN_FUNCTION(gsbi5_spi_cs2),
--	IPQ_PIN_FUNCTION(gsbi5_spi_cs3),
--	IPQ_PIN_FUNCTION(gsbi6),
--	IPQ_PIN_FUNCTION(gsbi7),
--	IPQ_PIN_FUNCTION(nss_spi),
--	IPQ_PIN_FUNCTION(sdc1),
--	IPQ_PIN_FUNCTION(spdif),
--	IPQ_PIN_FUNCTION(nand),
--	IPQ_PIN_FUNCTION(tsif1),
--	IPQ_PIN_FUNCTION(tsif2),
--	IPQ_PIN_FUNCTION(usb_fs_n),
--	IPQ_PIN_FUNCTION(usb_fs),
--	IPQ_PIN_FUNCTION(usb2_hsic),
--	IPQ_PIN_FUNCTION(rgmii2),
--	IPQ_PIN_FUNCTION(sata),
--	IPQ_GPIO_PIN_FUNCTION(pcie1_rst),
--	IPQ_PIN_FUNCTION(pcie1_prsnt),
--	IPQ_PIN_FUNCTION(pcie1_pwren_n),
--	IPQ_PIN_FUNCTION(pcie1_pwren),
--	IPQ_PIN_FUNCTION(pcie1_pwrflt),
--	IPQ_PIN_FUNCTION(pcie1_clk_req),
--	IPQ_GPIO_PIN_FUNCTION(pcie2_rst),
--	IPQ_PIN_FUNCTION(pcie2_prsnt),
--	IPQ_PIN_FUNCTION(pcie2_pwren_n),
--	IPQ_PIN_FUNCTION(pcie2_pwren),
--	IPQ_PIN_FUNCTION(pcie2_pwrflt),
--	IPQ_PIN_FUNCTION(pcie2_clk_req),
--	IPQ_GPIO_PIN_FUNCTION(pcie3_rst),
--	IPQ_PIN_FUNCTION(pcie3_prsnt),
--	IPQ_PIN_FUNCTION(pcie3_pwren_n),
--	IPQ_PIN_FUNCTION(pcie3_pwren),
--	IPQ_PIN_FUNCTION(pcie3_pwrflt),
--	IPQ_PIN_FUNCTION(pcie3_clk_req),
--	IPQ_PIN_FUNCTION(ps_hold),
-+	MSM_GPIO_PIN_FUNCTION(gpio),
-+	MSM_PIN_FUNCTION(mdio),
-+	MSM_PIN_FUNCTION(ssbi),
-+	MSM_PIN_FUNCTION(spmi),
-+	MSM_PIN_FUNCTION(mi2s),
-+	MSM_PIN_FUNCTION(pdm),
-+	MSM_PIN_FUNCTION(audio_pcm),
-+	MSM_PIN_FUNCTION(gsbi1),
-+	MSM_PIN_FUNCTION(gsbi2),
-+	MSM_PIN_FUNCTION(gsbi4),
-+	MSM_PIN_FUNCTION(gsbi5),
-+	MSM_PIN_FUNCTION(gsbi5_spi_cs1),
-+	MSM_PIN_FUNCTION(gsbi5_spi_cs2),
-+	MSM_PIN_FUNCTION(gsbi5_spi_cs3),
-+	MSM_PIN_FUNCTION(gsbi6),
-+	MSM_PIN_FUNCTION(gsbi7),
-+	MSM_PIN_FUNCTION(nss_spi),
-+	MSM_PIN_FUNCTION(sdc1),
-+	MSM_PIN_FUNCTION(spdif),
-+	MSM_PIN_FUNCTION(nand),
-+	MSM_PIN_FUNCTION(tsif1),
-+	MSM_PIN_FUNCTION(tsif2),
-+	MSM_PIN_FUNCTION(usb_fs_n),
-+	MSM_PIN_FUNCTION(usb_fs),
-+	MSM_PIN_FUNCTION(usb2_hsic),
-+	MSM_PIN_FUNCTION(rgmii2),
-+	MSM_PIN_FUNCTION(sata),
-+	MSM_GPIO_PIN_FUNCTION(pcie1_rst),
-+	MSM_PIN_FUNCTION(pcie1_prsnt),
-+	MSM_PIN_FUNCTION(pcie1_pwren_n),
-+	MSM_PIN_FUNCTION(pcie1_pwren),
-+	MSM_PIN_FUNCTION(pcie1_pwrflt),
-+	MSM_PIN_FUNCTION(pcie1_clk_req),
-+	MSM_GPIO_PIN_FUNCTION(pcie2_rst),
-+	MSM_PIN_FUNCTION(pcie2_prsnt),
-+	MSM_PIN_FUNCTION(pcie2_pwren_n),
-+	MSM_PIN_FUNCTION(pcie2_pwren),
-+	MSM_PIN_FUNCTION(pcie2_pwrflt),
-+	MSM_PIN_FUNCTION(pcie2_clk_req),
-+	MSM_GPIO_PIN_FUNCTION(pcie3_rst),
-+	MSM_PIN_FUNCTION(pcie3_prsnt),
-+	MSM_PIN_FUNCTION(pcie3_pwren_n),
-+	MSM_PIN_FUNCTION(pcie3_pwren),
-+	MSM_PIN_FUNCTION(pcie3_pwrflt),
-+	MSM_PIN_FUNCTION(pcie3_clk_req),
-+	MSM_PIN_FUNCTION(ps_hold),
- };
- 
- static const struct msm_pingroup ipq8064_groups[] = {
-diff --git a/drivers/pinctrl/qcom/pinctrl-msm.h b/drivers/pinctrl/qcom/pinctrl-msm.h
-index b94ba1a4177e..342bf306e9be 100644
---- a/drivers/pinctrl/qcom/pinctrl-msm.h
-+++ b/drivers/pinctrl/qcom/pinctrl-msm.h
-@@ -14,21 +14,6 @@ struct platform_device;
- 
- struct pinctrl_pin_desc;
- 
--#define APQ_PIN_FUNCTION(fname)					\
--	[APQ_MUX_##fname] = PINCTRL_PINFUNCTION(#fname,		\
--					fname##_groups,		\
--					ARRAY_SIZE(fname##_groups))
--
--#define IPQ_PIN_FUNCTION(fname)					\
--	[IPQ_MUX_##fname] = PINCTRL_PINFUNCTION(#fname,		\
--					fname##_groups,		\
--					ARRAY_SIZE(fname##_groups))
--
--#define IPQ_GPIO_PIN_FUNCTION(fname)					\
--	[IPQ_MUX_##fname] = PINCTRL_GPIO_PINFUNCTION(#fname,		\
--					fname##_groups,		\
--					ARRAY_SIZE(fname##_groups))
--
- #define MSM_PIN_FUNCTION(fname) 				\
- 	[msm_mux_##fname] = PINCTRL_PINFUNCTION(#fname,		\
- 					fname##_groups,		\
-@@ -39,16 +24,6 @@ struct pinctrl_pin_desc;
- 					fname##_groups,		\
- 					ARRAY_SIZE(fname##_groups))
- 
--#define QCA_PIN_FUNCTION(fname)					\
--	[qca_mux_##fname] = PINCTRL_PINFUNCTION(#fname,		\
--					fname##_groups,		\
--					ARRAY_SIZE(fname##_groups))
--
--#define QCA_GPIO_PIN_FUNCTION(fname)				\
--	[qca_mux_##fname] = PINCTRL_GPIO_PINFUNCTION(#fname,	\
--					fname##_groups,		\
--					ARRAY_SIZE(fname##_groups))
--
- /**
-  * struct msm_pingroup - Qualcomm pingroup definition
-  * @grp:                  Generic data of the pin group (name and pins)
+Jishnu Prakash (2):
+      mfd: qcom-pm8008: Add support for PM8010 PMIC
+      regulator: qcom-pm8008-regulator: Add support for PM8010 PMIC
 
+Nihal Kumar Gupta (3):
+      dt-bindings: phy: qcom,x1e80100-csi2-phy: Add Glymur compatible
+      dt-bindings: media: qcom,glymur-camss: Add Glymur CAMSS
+      media: qcom: camss: Add Glymur compatible
+
+ .../bindings/media/qcom,glymur-camss.yaml          | 300 +++++++++++++++++++++
+ .../devicetree/bindings/mfd/qcom,pm8008.yaml       |  14 +-
+ .../bindings/phy/qcom,x1e80100-csi2-phy.yaml       |   6 +-
+ drivers/media/platform/qcom/camss/camss.c          |   1 +
+ drivers/mfd/qcom-pm8008.c                          | 140 ++++++++--
+ drivers/regulator/qcom-pm8008-regulator.c          | 184 +++++++++++--
+ 6 files changed, 583 insertions(+), 62 deletions(-)
 ---
-base-commit: 9d80aa4617b32f5054c5aa471d06b66704854935
-change-id: 20260907-topic-tlmm_define_cleanup-a325b7818843
+base-commit: 9a4cdc958dd79fc6c3b20b51a10debec6ca09fec
+change-id: 20260529-glymur_camss-27af71b1d3d3
+prerequisite-message-id: <20260903-x1e-csi2-phy-v17-0-26606fa9a039@linaro.org>
+prerequisite-patch-id: 4a27a90c3a55c1f9ef46e9b941576309242f75f8
+prerequisite-patch-id: ec5e059c23defd7db6c47bb17d70d01c9c6cc31b
 
 Best regards,
---  
-Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+-- 
+Nihal Kumar Gupta <nihal.gupta@oss.qualcomm.com>
 
