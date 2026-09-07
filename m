@@ -1,192 +1,200 @@
-Received: from mail-qk1-f171.google.com (mail-qk1-f171.google.com [209.85.222.171])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9BE6F349CD1
-	for <linux-arm-msm@vger.kernel.org>; Sun,  6 Sep 2026 22:52:09 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.222.171
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4643B3DEAFA
+	for <linux-arm-msm@vger.kernel.org>; Mon,  7 Sep 2026 02:10:41 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788735131; cv=none; b=M5gRNWg/hJn7upqdH+n6bxCAKaSeKvoiZ+Hxggf8d9YxjKT7tcucRLa5/K8iieHR/QSFDZM3qXmRBAT4inUL3oWTrFRigxMpnuW7pQqDnBXJOBIX7Igmrj0FnLrE8OnEdiFkowTP2qeyleIZNnLbA2b27ydvi54J2g7bIZfztNs=
+	t=1788747042; cv=none; b=FAzprEUF1im6/1769gJuAeDquhB8uQyQN8Wa9JaIIyCylvJ3var99GPaqJAfiAt5R5Foa27UUV8w5HaSeVmRrj5wESLwRxza3LNkHgoc0F0XbB63cinQxuRfBeCHVVg8wJWt1wtwECq4xg68GcwS6uiiBxCEb/65ugLGUceuZds=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788735131; c=relaxed/simple;
-	bh=aAPHS2opfYawikamztQMMQNDJgEVw0HzpkRM5MM8ZRo=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=o9XCOm6cWBe+AjLLIyVCBc0VfPwtB5LsaMX1XZmEaiGY0hdV84aPSfgoG3hnlQMPnTWtzKg74qrCsXRmV5kMH/CK0Dva7+2NhOiLGeW807NSn1PgqsIf0dJ6Ylx0SRtSCOJYt1Mi+Is7O/F49pe1rTBx5DgHeiyxuqgcCVWeOFg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=Raq7jy7N; arc=none smtp.client-ip=209.85.222.171
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	s=arc-20240116; t=1788747042; c=relaxed/simple;
+	bh=wEnBgqajFXXRvu6hDveGCvMCgI6kKQeUz4dTbvlLUH8=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=PiFzJhTteFMqgsVxtXRvgwBrE7QfsXrZGbseJQT2tCRTmDDxs6oXJplVygY1fOzyilJPwC+aeWZUZvIiZv67H37j7PNuXBUwutCP0dqvGt6IoOARzDfQaNASreSlDp9BddsuSsI8IeYudLFGln+Cnc5WV/K3d+Ps9GfkQWs8hNs=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=EwV1cAiY; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=IJF9XH5e; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="Raq7jy7N"
-Received: by mail-qk1-f171.google.com with SMTP id af79cd13be357-930f618435cso338460285a.3
-        for <linux-arm-msm@vger.kernel.org>; Sun, 06 Sep 2026 15:52:09 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="EwV1cAiY";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="IJF9XH5e"
+Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6870ALr71935660
+	for <linux-arm-msm@vger.kernel.org>; Mon, 7 Sep 2026 02:10:40 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-type:date:from:in-reply-to:message-id:mime-version
+	:references:subject:to; s=qcppdkim1; bh=bTyP/MvIhEcB00GtGlwFZRJ3
+	HfiGKPUUykKM88tlr4o=; b=EwV1cAiYNtR37fAGV5NJsbSxWObPEArI73hyhrc6
+	bW4Dgmyo7vG1Jm15BtcriqK/gUeIL2eUFhBeWtGhF826/zzqkLzTj0IBiXdmMKJN
+	gvIVf9Bpi4PhxiJQ3tLJxXq+u8jfBzqb/e3LSgekdvgSCSpst0lsip/9pvrfXsnC
+	QvBjHmz+tb0xFuDhrv9+3bOM4x1vddD07gt8IZAgDK3vGxawJOxUa38LZ5+KtG05
+	9Fjp7f7c35D0XWdV1JvWmW6rXWdzm9+otvCLBL3xpo8WpVrK+cs91EhdckpnIQX1
+	GOoMARvSKn1+qEtSO5tzmllgFAkZ1RIFRbvRhEuUK+uZGg==
+Received: from mail-pj1-f71.google.com (mail-pj1-f71.google.com [209.85.216.71])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ggbuemnq8-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Mon, 07 Sep 2026 02:10:40 +0000 (GMT)
+Received: by mail-pj1-f71.google.com with SMTP id 98e67ed59e1d1-38dbf293831so6501181a91.3
+        for <linux-arm-msm@vger.kernel.org>; Sun, 06 Sep 2026 19:10:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1788735128; x=1789339928; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=mIJN/sAwYOGsx4KiLS2BjZwfic1XFdCFhhrLHJS/Pvk=;
-        b=Raq7jy7NoiNm6DWMNAbmSu43KXlbMXFer11S1pUP1Lqv5l1FdIWEQYwV1OHmWLkjLt
-         lGMibQrLMmIwDjj2P6yV82kv1+GlwWJYxLqLb5HTaXblgqmQWz3vUT4zLbvuGO17jpWT
-         6WY7QzhhtOtbGgMt/IYA0iBQD1iT/kEmcEoPztUOZYbQzQwVeTXA0QSXy/b94wIvTBiM
-         dvHqdNJjw4lU3LJ4H7VTMzH1pKnHs9mcvHf459jOZW+eVRM8FO3+IFm8dnG3A+ATVH3y
-         WJ4+7ZK2T0KZFauXMD5zlPzuLf4Z90Md8JJV/pNxkIWIjBlLVezheUk+2UnuAeCvxICc
-         j9eQ==
+        d=oss.qualcomm.com; s=google; t=1788747040; x=1789351840; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=bTyP/MvIhEcB00GtGlwFZRJ3HfiGKPUUykKM88tlr4o=;
+        b=IJF9XH5eOeE+gwyIXsABTKBchMFkkKrekvl7LCGBfyNa30dXU7oqBaZ460YTsqI7gA
+         E+vxaVqLaZ5iRuWZUg1qtCNKO9Pv/LBe/YDQpuycttVcJIU5emL8UFNyiD+P1Fk8YPcG
+         HAfrBY6Nx+Xt8yihDuuHSIIoZKry2xCKgFUbBGsJ3DCWDsGk5MyTKBaXTA+/riUUmxwN
+         1LbnPs8+3GKU0fI4D0/2Tlvt6S/svEL7gdmirWa1ngLSo7c156HfWI3vBTsPf1KVO3HD
+         S7qCt/EachUIPkLrepDvKgosFLUkQDAMUtA+j6Q/qp2Yy2E6FumPHTM2JvN8w0SpaL65
+         d1uQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788735128; x=1789339928;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=mIJN/sAwYOGsx4KiLS2BjZwfic1XFdCFhhrLHJS/Pvk=;
-        b=Im/H9HC+gQUmqzIwIBsXpl2GcbFYuWsrlBqVQDWMTxRZEcrCsZSqO9TK2kZMym1b4E
-         igBEDlnLzk6Et5YV7LO6HPo/4EDbjawTzTY+r2N/0SpsbVb4jRSkAHjbnmkv1HttOszA
-         Bhs0dixkluhQRJ9ZtyfqB6o0ar9RrTuliM0pxuYPN9VNWZYmGX9RkJf/VAiGibnSo4Hm
-         82R2lyumGjZG/e8Ker+63KtS5yovxx67mAVEeEEu9O6sQVCaO/HWm1dFX27htNlmykQG
-         LFy2fNT7qUg8LP8nsSFah7UPQgVWyjc773i6xe8Y1su6bE+O6qiF28JzWM9D50tBY9sR
-         tssg==
-X-Gm-Message-State: AFuF++lrgf+eCo7tkVMP+Q1TS67cuWjlnClIlX9Uw1G4ZXClvBNv20wm
-	uFHAhE4L+eCEERxCentzTQqU6Ioq05jijW1YiPOvlRRmz8b5BcucY2U8
-X-Gm-Gg: AYBFou3fAUmWDXrQlyyiNszsTrWl0b9LJ9C9Ziqe3z7c08e7r4EFRI+msG1evp2Z5oz
-	mXOVtDxJuMHfjRctllSobkoONZYhiBmI8A4ENnk0vxK6iP9m1vNXaiJfeIAaD96B/RExqLK/TQZ
-	oypRBSrSnnOaSv6Ed445GBdeNGYLnrdeSOVWAs68khkQiE8JHafyku9aCQcvKmGUttEMWJVXVtu
-	2QUBC8QHXV8HtnrFqgReVkbEtCDc4VKZgdhy6xycdmTxkgR2PE6LFsc+TuZXjgXoCdCfKk27wv1
-	fCZLJYgQ0A2m3Vf2wPLGegpyaErIF0cB+DCmoRYmA7Gklrx2F/BcVj291RgOGdTqHZPXySxzdHA
-	JK8Fyy9+4qnueO0Ful3kFHRqPE6Ay+Sj2Uytfezy+mS3ntGJ+/UyloyNMplOupBjpncGmz1VMLR
-	WPBbxkUNOXSfHRWNn2+our9EWuy3W4AlpCnWnIbSzDMXvgar/fmq7X5laD2TZt9+9y6iayEykVm
-	xUfSg==
-X-Received: by 2002:a05:620a:d48:b0:939:6dea:3749 with SMTP id af79cd13be357-939804a747amr1501625985a.45.1788735127989;
-        Sun, 06 Sep 2026 15:52:07 -0700 (PDT)
-Received: from localhost ([35.11.35.209])
-        by smtp.gmail.com with ESMTPSA id af79cd13be357-9399429b97esm444434285a.29.2026.09.06.15.52.07
+        d=1e100.net; s=20251104; t=1788747040; x=1789351840;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=bTyP/MvIhEcB00GtGlwFZRJ3HfiGKPUUykKM88tlr4o=;
+        b=X6cgt5ECEjIRTrehM32UU6vk9RdXQdQCRMUmSSG/j/1OSU1+t5nBULGAa0NzoUpq5J
+         fc2bdRHokmdcI4EMQWoKOcUI2utrEHWJycXcvlkfdHyD/E5soHxaUKBIMUMQr9jv/PUt
+         KxPCCzbMnTBgzKi4XrTouDRsdreMjVbjHm/NwJ/w9aGHCxHIuylux+vRrmBApBNQSp9q
+         wudPAmmgeUSfL5FEZ0RfPKU0pebHFRVSaxXKXwFhjt8XElPNe19nRZrNJ+sHeUD9q+8O
+         k44XBfIyv3qWH0CjmpA6OP77MtZ802/3HgVUXNKnaoPMp1p6u7Zlm62BSYOeCtJlReLF
+         zzeA==
+X-Gm-Message-State: AFuF++no8B70EQEh/aaOomlkJd2RhJf6gUX0616I48qt+D4WkfHj5UWf
+	Bc8cw58cGF6ut2xL+QhLznSSngyx105QIo1gMG3nJt8bQ9h2Ey+xQcPHti4cpLfbdPSIue+8bJ8
+	ntG6kqCiQEFcHzHeDxVG1UR2bq0C5BL44MtBmR31l65YKBnq5SFC8pmsi//eDiwAh47ox
+X-Gm-Gg: AYBFou3sp5GmowTr/xk5gTFLnFhI/u+FfVFb1JMaXRm/e5C3OsfC+CwsaOrto0mX78w
+	GrE3y/Ygu3SGSfZprrcpDNma4G2lccrYR4Kc/UV0X6AB14eIBlHYxX26mOVIVq9b61zTHD8xEYd
+	20i9lSBtO7ZHpOrUIw7tVCi9QO+dNeyUSG9nTCGZ08Pb/GCd217EIaDOm5VpjSwPnttPzwOabiF
+	lR8vqB/LcM8DG7N11LpdRLK5ln8is+BKgIVmcjWETZIIodsMAhRYa3d2OPF4v0cNZtq+2jiRiEJ
+	WX9ZukDYNEj9tT1mniEbspgfdbNrv58jXxn1kn5qvUCmYsZyUJ/mIx3whHQUOd8h3VtQcFmBND7
+	2jL8xwubKsWp9hnoIRBqvmfsFUSEeYW/O3Wyd+eQJ5gPqIcg3w0ZOnmVi
+X-Received: by 2002:a17:90b:1d4f:b0:398:9be5:b417 with SMTP id 98e67ed59e1d1-39b26221eb1mr29653945a91.18.1788747039762;
+        Sun, 06 Sep 2026 19:10:39 -0700 (PDT)
+X-Received: by 2002:a17:90b:1d4f:b0:398:9be5:b417 with SMTP id 98e67ed59e1d1-39b26221eb1mr29653876a91.18.1788747039277;
+        Sun, 06 Sep 2026 19:10:39 -0700 (PDT)
+Received: from YUANJIEY2.ap.qualcomm.com (i-global254.qualcomm.com. [199.106.103.254])
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-143243767e1sm19652821c88.6.2026.09.06.19.10.34
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 06 Sep 2026 15:52:07 -0700 (PDT)
-From: BurningHoryd <sjunhyuk1@gmail.com>
-To: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
-Cc: linux-arm-msm@vger.kernel.org,
-	linux-phy@lists.infradead.org,
-	dri-devel@lists.freedesktop.org,
-	freedreno@lists.freedesktop.org,
-	Neil Armstrong <neil.armstrong@linaro.org>,
-	Vinod Koul <vkoul@kernel.org>,
-	Abhinav Kumar <quic_abhinavk@quicinc.com>,
-	Heikki Krogerus <heikki.krogerus@linux.intel.com>
-Subject: SM8250 USB-C DP alt mode: DP AUX times out in reversed (CC2) cable orientation
-Date: Sun,  6 Sep 2026 18:52:06 -0400
-Message-ID: <20260906225206.2994952-1-sjunhyuk1@gmail.com>
-X-Mailer: git-send-email 2.55.0
+        Sun, 06 Sep 2026 19:10:38 -0700 (PDT)
+Date: Mon, 7 Sep 2026 10:10:30 +0800
+From: yuanjiey <yuanjie.yang@oss.qualcomm.com>
+To: andersson@kernel.org, konradybcio@kernel.org, robh@kernel.org,
+        krzk+dt@kernel.org, conor+dt@kernel.org, yijie.yang@oss.qualcomm.com,
+        dmitry.baryshkov@oss.qualcomm.com, abel.vesa@oss.qualcomm.com,
+        krzysztof.kozlowski@oss.qualcomm.com
+Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
+        linux-kernel@vger.kernel.org, tingwei.zhang@oss.qualcomm.com,
+        Gaurav Kohli <gaurav.kohli@oss.qualcomm.com>,
+        Ziyue zhang <ziyue.zhang@oss.qualcomm.com>
+Subject: Re: [PATCH v4 0/2] Initial support for Advantech SOM-DB5830 board
+Message-ID: <ap4dFma4K_ONEwrC@YUANJIEY2.ap.qualcomm.com>
+References: <20260806-hamoa-come-v4-v4-0-706021d4bc8c@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260806-hamoa-come-v4-v4-0-706021d4bc8c@oss.qualcomm.com>
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTA3MDAxOCBTYWx0ZWRfXzfZjkiOGRr7O
+ MpRGRYkoNQaMJ3OlYtd409XTFaBY5RqjzZ14ZNllcQoH9ABj/PDd9cy3vSs0Fed/DniTKuLu9Xh
+ 6MJL7PJuFRkgHxO23fEv3guhd0EJ11Esd1JkfGZ3g4AeDBe9s8W1+51l0coAp0FZPiGSx8zZBw2
+ 8lHyevmH+dpsDdn2vjgHJEepFzuZ8M7px32kLAVbV2TrsU9tyNo1xPlXzJFZ3IbtPyJmhochKAF
+ BcVICtjELxpk8Agg69GdncHUOi3G87BDtmvjZwcz4qn8SrX04IAq1eFebwGeL23RNmrR1s7NBqc
+ fMcFEY+iCHJUUjL5A0C2W6e5M5XYK8bpQ02xJ64DOEEtM74URoM+Cso4a6ZijzohVBsd7UztoMU
+ ZRU38g1Bmt6hYhWGU7qmbZPz43gn1+40zDSiC5/HqB/znRIC09tPnLDwTk+caucW7iC8hN4AGJk
+ gLs7ih2ZI4RoKcBh5Sw==
+X-Authority-Analysis: v=2.4 cv=P8AKQCAu c=1 sm=1 tr=0 ts=6a9e1d20 cx=c_pps
+ a=UNFcQwm+pnOIJct1K4W+Mw==:117 a=JYp8KDb2vCoCEuGobkYCKw==:17
+ a=kj9zAlcOel0A:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
+ a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=nkr-iKa30n4xwhtGuzAA:9 a=CjuIK1q_8ugA:10
+ a=uKXjsCUrEbL0IQVhDsJ9:22
+X-Proofpoint-GUID: UJ7Ida-qZU_y9bwlne94QDtQjaigttPd
+X-Proofpoint-ORIG-GUID: UJ7Ida-qZU_y9bwlne94QDtQjaigttPd
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTA3MDAxOCBTYWx0ZWRfX8KlnvmYFGwDq
+ vCW12iWWnF+YBD1GKqAWi44RrPjbXUSX0YHRBcS/Ky+PAMSoZGDgEOWacBOxNCqC7ASu4mz4Tom
+ zD3aKLLwstC4Qo0lQtZBPwNWV1tHXEc=
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-09-06_04,2026-09-03_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ phishscore=0 impostorscore=0 bulkscore=0 clxscore=1015 adultscore=0
+ spamscore=0 lowpriorityscore=0 suspectscore=0 priorityscore=1501
+ malwarescore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2609070018
 
-Hi,
+On Thu, Aug 06, 2026 at 05:44:45PM +0800, Yuanjie Yang wrote:
+> Board layout:
+> +--------------------------------------------------+
+> |               SoM (Advantech SOM-6820)           |
+> |                                                  |
+> |   +------------------------------------------+   |
+> |   |     SiP (IQ X7181 EVK SiP)               |   |
+> |   |                                          |   |
+> |   |   +----------------------------------+   |   |
+> |   |   |   SoC (X1E80100)                 |   |   |
+> |   |   +----------------------------------+   |   |
+> |   |                                          |   |
+> |   +------------------------------------------+   |
+> |                                                  |
+> +------------------------+-------------------------+
+>                          |
+>                          |  Plugs into
+>                          v
+> +--------------------------------------------------+
+> |         Carrier Board (Advantech SOM-DB5830)     |
+> +--------------------------------------------------+
+> 
+> Introduce the device tree, DT bindings for Advantech SOM-DB5830 board.
+> And fix HAMOA/PURWA IOT EVK compatibles.
 
-I'm chasing a DisplayPort-over-USB-C alt mode bug on an SM8250 (Retroid
-Pocket 5) board and would appreciate a pointer, as it looks like it may
-be in the nb7vpq904m redriver or the qmp-combo DP AUX path.
-
-Hardware / software
--------------------
-- SoC: SM8250, qcom,sm8250-qmp-usb3-dp-phy combo PHY (88e8000.phy)
-- USB-C redriver: onnn,nb7vpq904m (i2c, typec mux/switch)
-- External sink: VITURE Beast XR glasses, 4-lane DP-only (pin assignment
-  C, TYPEC_DP_STATE_C), HBR2, 1920x1200@120
-- Kernel: v7.2 base, plus three local qmp-combo patches that are the
-  subject of a separate downstream review (keep usb_init_count across the
-  DP-only mux switch / skip USB3 power on/off while already in DP-only /
-  the residual pipe_clk-in-common timeout hunk). The AUX failure below
-  reproduces with those applied; I have not been able to bisect against
-  pristine v7.2 because plain v7.2 has an unrelated regression on this
-  board (qcom_pmic_typec now requires connector/vbus-supply, which the
-  board DT lacks, so DP alt mode never powers up at all without a
-  separate DT fix).
-
-Symptom
--------
-Normal cable orientation: DP alt mode works perfectly - link trains,
-1920x1200@120, stable.
-
-Reversed cable orientation (Type-C orientation = reverse / CC2): DP never
-comes up. The DP alt mode HPD notification reaches msm_dp
-(msm_dp_bridge_hpd_notify status=1), msm_dp starts bring-up
-(msm_dp_display_host_phy_init, phy_init OK), but the very first DPCD read
-- SINK_COUNT at 0x200 in msm_dp_hpd_plug_handle - polls for ~4 seconds
-and never gets a reply:
-
-  [drm:msm_dp_hpd_plug_handle] Before, sink_count=0
-  [drm:msm_dp_display_host_phy_init] core_init=1 phy_init=1
-  ... ~4 s ...
-  [drm:msm_dp_hpd_plug_handle] After, sink_count=0
-  [drm:msm_dp_bridge_detect] aux link status: 0
-  [drm:msm_dp_bridge_detect] failed to read caps
-
-msm_dp then gives up and the connector stays disconnected. Link training
-is never reached. Stock Android on the exact same hardware works in both
-orientations, so this is a driver-side issue, not a board/silicon limit.
-
-What I've verified (instrumented kernel, dev_info in the phy + nb7 set
-paths)
-------------------------------------------------------------------------
-- It is NOT a state / refcount / mux ordering artifact: a clean
-  reverse-first plug (fresh boot, reversed cable plugged before any
-  normal plug) fails identically.
-- On the reversed plug, in order:
-  * qmp_combo_typec_switch_set(REVERSE) runs, qmp_combo_com_init(force)
-    writes QPHY_V3_DP_COM_TYPEC_CTRL = SW_PORTSELECT_MUX|SW_PORTSELECT_VAL
-    (0x3).
-  * nb7vpq904m_set() runs for TYPEC_DP_STATE_C with reverse=1, writes
-    AUX_CC_REG (0x09) = 0x1.
-  * qmp_combo_typec_mux_set() does the DP-only transition, com_init(force)
-    again (mode=DP_ONLY, TYPEC_CTRL=0x3) - this happens AFTER the nb7 DP
-    config.
-  * qmp_combo_dp_init() -> qmp_v4_dp_aux_init() runs.
-  So the PHY and the redriver are both configured for reverse, in a sane
-  order, before msm_dp attempts AUX. And AUX still times out.
-- qmp-combo has no DP-AUX orientation register that I can find - AUX
-  orientation on this design is entirely nb7vpq904m AUX_CC_REG.
-- Inverting SW_PORTSELECT_VAL and/or nb7 AUX_CC (making the registers
-  bit-identical to the working normal-orientation case) does not help -
-  reverse still fails.
-- Forcing repeated full qmp_combo_com_exit/com_init cycles during the
-  DPCD poll window does not help.
-
-The one thing that changes anything
------------------------------------
-I added a knob to override GEN_DEV_SETTINGS OP_MODE in the nb7
-TYPEC_DP_STATE_C branch (it normally hard-codes
-GEN_DEV_SET_OP_MODE_DP_4LANE):
-
-  OP_MODE = DP_4LANE (2)      -> DPCD read: 0 successes (many tries)
-  OP_MODE = DP_CC1   (1)      -> DPCD read: 0 successes
-  OP_MODE = DP_CC2   (0)      -> DPCD read succeeds intermittently
-                                 (~1 in 4 plugs, sink_count 0->1,
-                                 connector goes connected briefly).
-                                 Link training then fails, which is
-                                 expected since DP_CC2 is a 2-lane
-                                 op-mode and the source is driving 4.
-  OP_MODE = 3, 4             -> 0 successes
-
-DP_CC2 is the "flipped orientation" op-mode. It is the only setting that
-ever gets an AUX transaction through in reversed orientation. That
-strongly suggests the nb7vpq904m SBU/AUX switch is not being put into the
-flipped routing for a 4-lane DP session - AUX_CC_REG alone does not seem
-to do it in DP_4LANE op-mode - but I don't have the full NB7VPQ904M
-register map to confirm (the public datasheets are image-only).
-
-Questions
----------
-1. Is nb7vpq904m's DP_4LANE path missing SBU/AUX orientation handling
-   that the DP_CC1/DP_CC2 paths get implicitly from the op-mode? Should
-   AUX_CC_REG be sufficient in DP_4LANE mode, or is another
-   GEN_DEV_SETTINGS / AUX register bit needed for CC2?
-2. Is there an SM8250 qmp-combo DP-AUX orientation step that mainline is
-   missing (something the downstream PHY driver does for a reversed
-   4-lane DP session)?
-3. Any known-good reference for reversed-orientation 4-lane DP on an
-   SM8250 + nb7vpq904m board?
-
-I can share the full instrumented traces (normal vs reverse) and test the
-register map if someone can point at the right bits. Happy to turn a fix
-into a proper patch.
+Gentle reminder.
 
 Thanks,
-BurningHoryd
+Yuanjie
+
+> Co-developed-by: Gaurav Kohli <gaurav.kohli@oss.qualcomm.com>
+> Signed-off-by: Gaurav Kohli <gaurav.kohli@oss.qualcomm.com>
+> Co-developed-by: Ziyue zhang <ziyue.zhang@oss.qualcomm.com>
+> Signed-off-by: Ziyue zhang <ziyue.zhang@oss.qualcomm.com>
+> Signed-off-by: Yuanjie Yang <yuanjie.yang@oss.qualcomm.com>
+> ---
+> Changes in v4
+> - drop fix HAMOA/PURWA IOT EVK SOM compatibles patch
+> - rebase on next-20260805
+> - Link to v3: https://lore.kernel.org/all/20260805-hamoa-come-v3-v3-0-20463c43eae1@oss.qualcomm.com/
+> 
+> Changes in v3
+> - add patch to fix HAMOA/PURWA IOT EVK SOM compatibles
+> - update Advantech SOM-DB5830 binding and dts
+> - rebase on next-20260804
+> - Link to v2: https://lore.kernel.org/all/20260727070758.528-1-yuanjie.yang@oss.qualcomm.com/
+> 
+> Changes in v2:
+> - update commit msg
+> - fix binding error
+> - update pcie and usb DT
+> - Link to v1: https://lore.kernel.org/all/20260630071022.3256-1-yuanjie.yang@oss.qualcomm.com/
+> 
+> ---
+> Yuanjie Yang (2):
+>       dt-bindings: arm: qcom: Add Advantech SOM-DB5830
+>       arm64: dts: qcom: Add Advantech SOM-DB5830
+> 
+>  Documentation/devicetree/bindings/arm/qcom.yaml |   7 ++
+>  arch/arm64/boot/dts/qcom/Makefile               |   1 +
+>  arch/arm64/boot/dts/qcom/hamoa-som-6820.dtsi    |  54 +++++++++++
+>  arch/arm64/boot/dts/qcom/hamoa-som-db5830.dts   | 119 ++++++++++++++++++++++++
+>  4 files changed, 181 insertions(+)
+> ---
+> base-commit: 1701fda2f58e345c050f4309971bdc07cd6146ba
+> change-id: 20260806-hamoa-come-v4-f7033c4204e7
+> 
+> Best regards,
+> --  
+> Yuanjie Yang <yuanjie.yang@oss.qualcomm.com>
