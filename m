@@ -1,375 +1,146 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 529AA4EBAED
-	for <linux-arm-msm@vger.kernel.org>; Mon,  7 Sep 2026 13:29:29 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9AC844EA396
+	for <linux-arm-msm@vger.kernel.org>; Mon,  7 Sep 2026 13:31:41 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788787773; cv=none; b=Ok+gpVvebLYd24OdvMmQrG9ETCQo+KSWRouJq/wZ1MaAyAv1SgTXooI8Lme/C3kQ06SFCnK1dg4dc7UeS1ROfHrjZCMqv3B2k6dxz5ZzXuqy8qbGYcplPOcm+GnB0/Mi3Fi0/NUMwNBL61z/JcmrRSjKRb9LDfxPgY3Bw1zfsPI=
+	t=1788787904; cv=none; b=TfOYsrR8lvcXhuOG50WQU+hLxODhjL13ny1EQhq5ZwfKL9ysrVRJT6WlgUCXTSIgRoWUHC3vH501hO7MeDHhjuNo4MFsSeT2eYpOve/yDJ5fbvBvlRZns8TgcE8N4TSeEOn2lAqqZxhOkDSUPYX477/B94MKoPoIWYTMTrKPINk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788787773; c=relaxed/simple;
-	bh=jA0VsMUUavJKtE9n5wNLQVqTwGtt9aIsR/LRrizujh8=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=pVYJ2KE7rYsEgX/iP6C/Y3Tq56UL861jb4teKoIQCzStxom3baue2X8QRM99c2RQ/x7x/f/26GPc/tvTDQk69pQzO8ccp0Gn4t9jqkEG+VjZw0IzU7+vVYMnEEWTIy7We2yCcb/dC/0z2jMaD9Svsu4Pch5XgxCHlo7cGkoayHk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=cRHA0+ZE; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=ThZ5zI+L; arc=none smtp.client-ip=205.220.180.131
+	s=arc-20240116; t=1788787904; c=relaxed/simple;
+	bh=8ZGAGHOr7NVN0KR3XdeIRqRmKRqrF5dgUOgIMwdgrbk=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=g1i4kV9w2eN2ra43PzK62QMuxl6V9l0Z8FCPidp5Fkybrf0IM8uhD6d1N0DbE4EWAiaJlRVAa4op5K53aCA6cB1Imo5VTkHEtQOYRoAfGmYQatoCiindZOea4bpcMm1VatANCBGDajfTV9lrkUKpWMlQiF2ApSZI0Zk3ZPpWEss=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=cE0ww8yr; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=dHFMzpqi; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="cRHA0+ZE";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="ThZ5zI+L"
-Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 687AnLis3777121
-	for <linux-arm-msm@vger.kernel.org>; Mon, 7 Sep 2026 13:29:27 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="cE0ww8yr";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="dHFMzpqi"
+Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 687An1Xk3180953
+	for <linux-arm-msm@vger.kernel.org>; Mon, 7 Sep 2026 13:31:41 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	KPabHJe2uEoaLCJGTNSlEHvoZ5WHakoD59v+reCVI7s=; b=cRHA0+ZEovS8bpvM
-	X8CixLyXCQDok88Mg3xZCWnHCHSVI1liJrNNYoZ0OtSqRjJQeCFHQGhUyJQBeUSU
-	q9rELWYXdcoN4TDZoMa/z7meJQypuGDrNp8u2Rh+6yzAeQNw4djBeOPVkhU/gGZJ
-	sUo5MdZvBpChqAlXKQyvYK212NPEk3/XaoH1N9gwoYb9LUc5aJ+FtIHpSvwaf6Ak
-	ttmDggYOn6gZQz97SmcDODZfuqvcgtOhfptXB7Pnm2wrsn7RTqHMrtVFTEdrPXE8
-	6Q2cRLb0Xodg0gzzKMS4kYHF4TaMi0obWiKHy2cMp+XNDFSImt+PSWqBfqjmgND7
-	wm0Fxw==
-Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com [209.85.222.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ghsfyh94q-1
+	cc:content-type:date:from:in-reply-to:message-id:mime-version
+	:references:subject:to; s=qcppdkim1; bh=3kkNuPRvUTyM+QmSb6oELf+9
+	QvK3eykU5arY9ibysLY=; b=cE0ww8yrah27Sy5bFMJJ85wijy/lNSSTsb2q731+
+	wvxtVR1xfQzd2TFBxLD8XRxIujzFD329MsQS2N14EbaFalOozGYaaGqr3Xe0G0Xf
+	QOlqqBMOxdoHo0RKmF/U81n3jZD8PA+raWYfj9pPQySYsWYNA6J+BouhHEH2PrHx
+	HYx4ZMXpL1j3c8Bv9DXNSveTaD8Hmuo+3MNtb4YValJ0AlWF9MFZMOGh+N8fI44L
+	lcmLKfIOF3jGivuHgOYlvMxCQlW38PRFex1FprNSJ4dVGwq3lExaLflnfzOwSQdF
+	m3xNbsa+ToXqq1v8Khtkn8rY3ANdnYpYSi3AOeRL/OYR2g==
+Received: from mail-vs1-f69.google.com (mail-vs1-f69.google.com [209.85.217.69])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ghsw215aq-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Mon, 07 Sep 2026 13:29:26 +0000 (GMT)
-Received: by mail-qk1-f197.google.com with SMTP id af79cd13be357-93903622880so753053185a.0
-        for <linux-arm-msm@vger.kernel.org>; Mon, 07 Sep 2026 06:29:26 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Mon, 07 Sep 2026 13:31:40 +0000 (GMT)
+Received: by mail-vs1-f69.google.com with SMTP id ada2fe7eead31-738b76cfe03so2951318137.2
+        for <linux-arm-msm@vger.kernel.org>; Mon, 07 Sep 2026 06:31:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1788787766; x=1789392566; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=KPabHJe2uEoaLCJGTNSlEHvoZ5WHakoD59v+reCVI7s=;
-        b=ThZ5zI+LibFFqqTJXdiw5dUTUJ4ANYqXWr737ZwSLShi4lppRN+i2vjLL7n5AtTkTi
-         vp7B+jv4Q9cksqFJUvKPCowFXJb/gDF8fc8bl8mfseBHtMjsY2okcmP6fgYXtrh2BxTf
-         WqqgYM8e3hRMcFDtsuxNFnahZXWY3mTpjs7+G05afHBFCP/Btbx/OWN66u9fpG+nYdqc
-         Arj2tsm1iL2mj3FYgt8By6NeQnCo1P6kE+1B5DgMWDh9oBF7JJs8NGDT9FMlMBRaoVCB
-         IQFuZds3rS/WQ1G8zm6cO0ZGNi6Ki0tGBHZzndiuAF7qzxbCfvoZCfJRzvhJBjmcIaZZ
-         k5eg==
+        d=oss.qualcomm.com; s=google; t=1788787899; x=1789392699; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=3kkNuPRvUTyM+QmSb6oELf+9QvK3eykU5arY9ibysLY=;
+        b=dHFMzpqiJD5zzL4IEgeM93W7GuqPWhxrP97/gWXKdujdNd5dsHDl9F6l8AFOergRZ/
+         a+6mf2D2k7pkG8WHf8Opz9N0qqb+eV0ZrLsUkaiSXiWTdNJEd6dCyjjBzpQT9AIN4Jab
+         95uxIvFphd+6alHDz/yEaOtIZi7zeB1syzGOe25mWgB2FPR0b+DZIFUf0faflqfnfuVQ
+         c74EeHnviS/0Z6tJm3m4qo04OFPFCkV6WqClLuK1ER4OaL5va7u4arpPcfgKttP85PZo
+         jyUxJ5oaU4dim3CYQ+B+7TgoSMuC/QOZCksh9VArJZaI2WGvM//ugdnX8uMBXEtFf8kW
+         CMsw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788787766; x=1789392566;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=KPabHJe2uEoaLCJGTNSlEHvoZ5WHakoD59v+reCVI7s=;
-        b=ZWYfPyrUUyV6FToq5yIBSB+B3SU8S+aZRomuV2mTtJbOPvp2GwhZXHk7Om9fsPFsFt
-         gHREHHF0vwLm5k8CN8hiL9bEHDzctsWtW5lvSqhXpzjCCQ4r33gBorZM8jBpeImav6tR
-         CkdTTbWZj2QokwOQDk5bQe+f8eE18hQPTtmHwlrjgcIMlsNKUunwy+txzNwZYW386Gty
-         JPNLjYwPDxILHVeuh5gc7L8YfEV0dockDCf1l14fW2MEHksP+bxNl/AKfVdU5Rt638Bh
-         HlrmDq0g5EUoBdZ3CH2YTAlW6VLxw2ha/vztC48d5ROHs8m5UPZqciicC75F/Re+Sq3v
-         +2LA==
-X-Forwarded-Encrypted: i=1; AKwUvBzaohiqq3ZI7dJiaqQOHTbzKpe7yfH+YNq4Kl7xrVRzKPObXc3+1HpDbaI9Kj5A7hpkIKGd3ZRHQVQetOlU@vger.kernel.org
-X-Gm-Message-State: AFuF++kJWFquew0ioy0wzTrTOVms4HE3Y9TeBKGrdQlErod+jdbfQrJA
-	AqlsVV+n3bhlbbsXdIXqPy0Jeoat03wg9dzpYLQuEfucLK4L1AGD1hb6Wiwnum9+8dlFVCBEUTr
-	IqFASDmnwHhFc2K4UC7MNdPzzbB2kS7HhPtwztceWtcxB+MAfz7bHBWV8NNhEGwQOgMPP
-X-Gm-Gg: AYBFou0BDYiXKFWO/wZTkioHENmcXYWMrmSpTnEr4NuFDXWfP1yN5FQdi6s5+0Ophch
-	NrrT+swGwUTs1aTl2AaSOslrxoItDCahc7RV1uj2rwzmTyBp+t6D3ioR4nEvJruTfJs5XgbHETo
-	tijNcz4SoE7Z7RWbQhdXh2UNzmp16EmDQMGk3TOUutXRymAtn7rTGTPZ8l0ksqv5Cw7rF/zN/Zl
-	Fel4UqOEb9YXcT18y1SsndGxrb0HPm2WZVIyCeaH+M7izz+t+pfwHXNNs/qR/jmUHQu/Unumqr6
-	0dejhJtpguMV4t+i6aqiLYmcLSmENQEG9lRIcjfAEEkeEaFaf+Pktz7AXpkhJkkQ8wL0/mFd/A0
-	WwQ0CA4MUGguSjqasqxkO0AG0yOk=
-X-Received: by 2002:a05:620a:711c:b0:939:a8b1:3696 with SMTP id af79cd13be357-939a8b13b38mr523974185a.27.1788787766173;
-        Mon, 07 Sep 2026 06:29:26 -0700 (PDT)
-X-Received: by 2002:a05:620a:711c:b0:939:a8b1:3696 with SMTP id af79cd13be357-939a8b13b38mr523943585a.27.1788787762788;
-        Mon, 07 Sep 2026 06:29:22 -0700 (PDT)
-Received: from [192.168.68.120] ([5.133.47.210])
-        by smtp.googlemail.com with ESMTPSA id 4fb4d7f45d1cf-6a7e6bf337bsm4257821a12.26.2026.09.07.06.29.21
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 07 Sep 2026 06:29:22 -0700 (PDT)
-Message-ID: <0fb5ce44-9a47-4566-bd74-20be928ad554@oss.qualcomm.com>
-Date: Mon, 7 Sep 2026 14:29:21 +0100
+        d=1e100.net; s=20251104; t=1788787899; x=1789392699;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=3kkNuPRvUTyM+QmSb6oELf+9QvK3eykU5arY9ibysLY=;
+        b=n2y6wDyb1RqpBH0rBokgHFQwOx8N7O/sHZeskN5q1BiYNgHrC2ShA3IkpLFpXHxzqD
+         W9ngbB0P89/IucJyRX/4gwFvwzXgImgpI1ATQWZYbncIpzMVwwmZjk/j2HMlHWcW2SLj
+         ARZP9u5rbLtTnvQtSZXU2Nl0tZakuUKlRwQQrzQWJnAqRUlGOr3KJab5E2GbdilJxxMy
+         cvo/QKe72dEtSSnIiI3UuqMCCo2SYcQwduiCQPws1rUAM51nEutUZxjwa6ryviOydte+
+         CRVWxbscNtB0mbkiiGCS3YQJgKebr/Mvz1hqdhCHr5I0rEmuAEpk4XYpFSNw74d9S1X9
+         YClA==
+X-Forwarded-Encrypted: i=1; AKwUvBxz0A7bUryK9Z4hX9mv8wOHvDEU8QoPLWZ4LLy91iNnkjud7MUskW/8EL6JVXdc9uPOfb8154xEx6Euligg@vger.kernel.org
+X-Gm-Message-State: AFuF++lPjxMgWKMSsb6lqvifxI5VwqvyJ9LfAnk3jLmFEWc3N8tCYgCi
+	562hIcDx4r4K2NPYzza9hf2FMp6AHBT41p4kDvAJC/qHWEU/Ot5JgG4Z5LuOpCtadqd7t/2TQe6
+	t5QbNsT/k2ugo9ztQofL+NDb7mcn8zvUWW3CGqE0cJWcOBOA1SZGG69VtMxfA1Jdw5TvC
+X-Gm-Gg: AYBFou1+iBa2kfLrnK0EFyLPSrGjVVC/YdKZaYA9vlHESx8Ks1VMg0ua7R+lqWpMEd6
+	sn6CegRT76fC+4lZg75TqXsuRSgxfE5jx1cCdhPwh4Ji/aE33kECamFRHzrl9n59cbXtgGSDlPa
+	CvdpW5B49QtXOIdg7rb6NcgGTXfWxnBVnspIkkPWK+teqWHZxtpY467zXTuV2grzjj4IjQhGtVI
+	f9xp8xh4jFGGPo3BNFdJ0zEoV4rf/v36Fw3PBRog1v4BSqZsHC9k7T0SGU0ZIMUKNIuCh9odM2P
+	RVZLIPDbkV31Kd0/GwwR44n2+RYiFsrv3646L5umQYmgHCmpLkMDq5oBR6NYylRA+0M93XoBCSX
+	mR7vRDwlc3yGW
+X-Received: by 2002:a05:6102:3a06:b0:77c:6bdc:824f with SMTP id ada2fe7eead31-78a4a90fc19mr9086709137.1.1788787899558;
+        Mon, 07 Sep 2026 06:31:39 -0700 (PDT)
+X-Received: by 2002:a05:6102:3a06:b0:77c:6bdc:824f with SMTP id ada2fe7eead31-78a4a90fc19mr9086644137.1.1788787899009;
+        Mon, 07 Sep 2026 06:31:39 -0700 (PDT)
+Received: from oss.qualcomm.com ([86.121.170.36])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-49d084d62b0sm124378275e9.2.2026.09.07.06.31.36
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 07 Sep 2026 06:31:37 -0700 (PDT)
+Date: Mon, 7 Sep 2026 16:31:36 +0300
+From: Abel Vesa <abel.vesa@oss.qualcomm.com>
+To: Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>
+Cc: Bartosz Golaszewski <brgl@kernel.org>,
+        Herbert Xu <herbert@gondor.apana.org.au>,
+        "David S. Miller" <davem@davemloft.net>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>,
+        Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>,
+        linux-arm-msm@vger.kernel.org, linux-crypto@vger.kernel.org,
+        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v6 2/2] arm64: dts: qcom: shikra: Correct QCE node
+ configuration
+Message-ID: <iow4xf2uflvjduax55tkbhaw2r4436uqvys22u6pbm3ry2gryw@g777gu46cgin>
+References: <20260907-b4-shikra_crypto_changse-v6-0-0676f61894b3@oss.qualcomm.com>
+ <20260907-b4-shikra_crypto_changse-v6-2-0676f61894b3@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 03/11] ASoC: SDCA: expose class SoundWire
- probe/remove/read_prop as library
-To: Pierre-Louis Bossart <pierre-louis.bossart@linux.dev>,
-        Mark Brown <broonie@kernel.org>, Rob Herring <robh@kernel.org>,
-        Charles Keepax <ckeepax@opensource.cirrus.com>
-Cc: Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>,
-        Bard Liao <yung-chuan.liao@linux.intel.com>,
-        Jaroslav Kysela
- <perex@perex.cz>, Liam Girdwood <lgirdwood@gmail.com>,
-        Maciej Strozek <mstrozek@opensource.cirrus.com>,
-        Takashi Iwai <tiwai@suse.com>,
-        Faiz Nabi Kuchay <fkuchay@oss.qualcomm.com>,
-        Jorijn van der Graaf <jorijnvdgraaf@catcrafts.net>,
-        patches@opensource.cirrus.com, linux-sound@vger.kernel.org,
-        devicetree@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-References: <20260907083727.733705-1-srinivas.kandagatla@oss.qualcomm.com>
- <20260907083727.733705-4-srinivas.kandagatla@oss.qualcomm.com>
- <836db10c-8d0e-4882-b0be-3add5069566b@linux.dev>
-Content-Language: en-US
-From: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
-In-Reply-To: <836db10c-8d0e-4882-b0be-3add5069566b@linux.dev>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Proofpoint-ORIG-GUID: y2otNf4ToyIO-DSu8-t1tj3cr5o8VuyL
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTA3MDE0OSBTYWx0ZWRfX0e+sfPy3mHLO
- ucmkTCmffzJPnpKEYpSP21qhF8wcGh73h/giMt7c48/d6Ly2uDcojzxH2P/T9RIR2El1I6o0BCH
- GoexqDzqAzrQxAsfbaad0aL6r6ONzxCWEZ+bo7m21/hyRmYjU37AH+CM7emkKocnTGERkIFJH3S
- 1S/1zisspXG6sNB4MZsmg5d0DKQXJt6M5B6uUYU0PEtTULuWSzE1cZVWXLSHBCpKl/VEc8ZDG5i
- /BKyvssYfXXOwGyWrhF4EdcZggJVx4ZJIQXdWzcEQVRPC06qpgLfY0h+sP1uKc63f4vcPvIALzU
- EpvcWpJ0ld5wNtwIWHYnLIrtzxRXTAHThQMmd/IdtigJmXeHnGuzii1Nb2NUiJD89QHnpRUWeFr
- 3CeuoUe3vYwnriaDd91hqs2dNlf/X/lhpM/6lUUymxAI5Tqt/VmJVmXVpBZ+mht1UoQEA9uDLqS
- ev620y55EKqxRyegZ+g==
-X-Proofpoint-GUID: y2otNf4ToyIO-DSu8-t1tj3cr5o8VuyL
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTA3MDE0OSBTYWx0ZWRfX2nvMi+IHx7+V
- 5FICCOCQg+LqO1BbWe88xluMjZDFwL9S3CTmpR3q31+sp/pzskEizBl0h8bMG0/SXSiAjsb1U51
- Altoas7cDEZ3wbnDp1r7gKl9zQpnGtQ=
-X-Authority-Analysis: v=2.4 cv=AduB2XXG c=1 sm=1 tr=0 ts=6a9ebc36 cx=c_pps
- a=50t2pK5VMbmlHzFWWp8p/g==:117 a=ZsC4DHZuhs/kKio7QBcDoQ==:17
- a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
- a=EUspDBNiAAAA:8 a=30GPOdLKL6Ocfv1y0QQA:9 a=QEXdDO2ut3YA:10
- a=IoWCM6iH3mJn3m4BftBB:22
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260907-b4-shikra_crypto_changse-v6-2-0676f61894b3@oss.qualcomm.com>
+X-Proofpoint-ORIG-GUID: r2Hgm3u1OsbSpwzy8in8ksF7xQ16QHx9
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTA3MDE1MCBTYWx0ZWRfX29/kqG2IFzly
+ dd0rZV/awXqZzYDOglxvkAJm0Hrwz1X7kOjQqSRWpc7IrucIKftwiOP8lNRwdX0Laa8ssV2M2m+
+ a/tNvwwddUsjGvXhbzhyGe2rxkQcMQs=
+X-Authority-Analysis: v=2.4 cv=eKwjSnp1 c=1 sm=1 tr=0 ts=6a9ebcbc cx=c_pps
+ a=5HAIKLe1ejAbszaTRHs9Ug==:117 a=q7XEBjOi5DRkXzmV0jSBjQ==:17
+ a=kj9zAlcOel0A:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22
+ a=EUspDBNiAAAA:8 a=mSLAci9PSNYu4dxlomoA:9 a=CjuIK1q_8ugA:10
+ a=gYDTvv6II1OnSo0itH1n:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTA3MDE1MCBTYWx0ZWRfX0sW5qYUjNVNH
+ CWYEggTqgbk0lZ4VElZJL6zG7ESCPpq4Na2K5bWz2/WqSsIK9JP9udOw1++kQA90HIcvVCT8I/c
+ oXj+qLOBNRLc/qCLL++G3j8671Od9SIx4jzlRVzbwkqVBTTvSHkNwgu+YN9L8WsSgHUG4Kn8qaO
+ wEzr9bUuAOk88yCQsIrQnUppgU0aGMK+9aCSJm1/xAndmc/spDkyUwMliACni8Rsm4QF2ucYkq6
+ smIJTJInrfYus2oGGYPumzI3vX266P8VioVkBEx9cSF1ftQWHlPg8Key2BBI2VAHcj/5Oi/Rye2
+ nbqq/Tem+pshncdMXaquccfrg6d+lV8ep888UcVrq2dw6NwwzAPVhMHpr+tL6TxYEdBO/iaRSYh
+ A5PVWLsylgl5HvThV9OmcYweRrvMa/VdZzP9er2488uMjo48NvbbP7rEn4TCJ2XXnse1y5KBSCV
+ mMSmHrPCJIbF3qi/nrQ==
+X-Proofpoint-GUID: r2Hgm3u1OsbSpwzy8in8ksF7xQ16QHx9
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-09-07_03,2026-09-07_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 lowpriorityscore=0 spamscore=0 bulkscore=0 adultscore=0
- phishscore=0 clxscore=1015 suspectscore=0 priorityscore=1501 malwarescore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2609070149
+ bulkscore=0 lowpriorityscore=0 malwarescore=0 priorityscore=1501
+ suspectscore=0 clxscore=1015 adultscore=0 spamscore=0 phishscore=0
+ impostorscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2609070150
 
-On 9/7/26 12:31 PM, Pierre-Louis Bossart wrote:
-> On 9/7/26 10:37, Srinivas Kandagatla wrote:
->> Split the internal class_sdw_probe/class_sdw_remove/class_read_prop
->> functions into caller-friendly library helpers:
->>
->>   sdca_class_read_prop(sdw)
->>   sdca_class_probe(sdw, drv)
->>   sdca_class_remove(drv)
->>
->> The class_sdw_probe/class_sdw_remove callbacks of the built-in
->> class_sdw_driver are now thin wrappers that allocate a bare
->> sdca_class_drv, stash it in drvdata, and defer to the exported
->> helpers.
->>
->> The exported sdca_class_probe() takes a caller-owned struct
->> sdca_class_drv * so codec-specific SoundWire drivers can embed the
->> class state in their own priv struct, own dev_set_drvdata() themselves,
->> and avoid a second allocation.  No functional change for the built-in
->> driver.
->>
->> This lays the groundwork for codec-specific SDCA SoundWire drivers
->> that want to compose the class-side probe with their own quirks; the
->> next patches add the hw_ops mechanism on top.
+On 26-09-07 17:33:37, Kuldeep Singh wrote:
+> Shikra is derived from Agatti and uses the same QCE integration.
+> Update the QCE node to match the underlying hardware implementation by
+> adjusting the fallback compatible and related properties, including
+> clocks and clock-names.
 > 
-> I am not sure I fully understand what you mean by "compose the
-> class-side probe with their own quirks".
-> 
+> Signed-off-by: Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>
 
-I meant having their own probe and callback functions to add platform
-specific quirks if any, before sending it to sdca core.
-
-> The existing SDCA mechanism is that there's a top-level SoundWire
-> device, whose driver creates auxiliary subdevices for each function. We
-> currently probe drivers for those function devices based on naming. So
-> how would the 'composing' work then?
-> 
-> I guess part of the confusion is also the recurring 'codec specific'
-I agree, I will try to be bit more clear on the comments in next version.
-> term used in several patch, but we are talking about functions which are
-> subsets of a codec, no? maybe use hardware specific.
-> 
-those function drivers will never be touched, all the hardware specific
-bits will be in the respective codec drivers.
-
-
-> Note that if you need customization to the base class mechanism, there's
-> another option that's currently in use in the other OS that shall not be
-> named. Codec providers are not allowed to change the class drivers,
-> which are owned and distributed as part of the base OS. Codec vendors
-> can however provide extension drivers. The premise was that the sound
-> would be 'acceptable' with class drivers, and the extensions would
-> unlock the secret sauce algorithms for the best audio quality. If we are
-> talking about 'composing class-side probe with quirks', it'd be good to
-> clarify the rationale and objectives...
-
-The intention is to use generic class drivers as it is and not modify
-it, which is what the the whole series is attempting to do tbh.
-
-There are no such quirks as of today atleast with two Qualcomm SDCA
-codecs that I have tried (simple Jack and simple amp).
-
-But infuture if we require either quirks or some vendor hooks these
-could be easily handled within the callback hooks.
-
-> 
-> edit: I think the idea is really to use the class function drivers as
-> is, but with the function data provided to and used by the subdevice
-> driver probe. But the hw_init doesn't seem required to me, you already
-> have the .status callback that can be used to perform device-level
-> initializations.
-
-Now that all the callback functions from core are gone except populate
-on, only static table is passed to the core.
-
---srini
-> 
-> 
-> 
->> Signed-off-by: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
->> ---
->>  include/sound/sdca_class.h  |  5 +++
->>  sound/soc/sdca/sdca_class.c | 75 +++++++++++++++++++++++++++++++------
->>  2 files changed, 69 insertions(+), 11 deletions(-)
->>
->> diff --git a/include/sound/sdca_class.h b/include/sound/sdca_class.h
->> index 15a180385202..c6063f22be7a 100644
->> --- a/include/sound/sdca_class.h
->> +++ b/include/sound/sdca_class.h
->> @@ -33,6 +33,11 @@ struct sdca_class_drv {
->>  	struct work_struct boot_work;
->>  };
->>  
->> +/* Library helpers used by codec-specific SDCA SoundWire drivers. */
->> +int sdca_class_read_prop(struct sdw_slave *sdw);
->> +int sdca_class_probe(struct sdw_slave *sdw, struct sdca_class_drv *drv);
->> +void sdca_class_remove(struct sdca_class_drv *drv);
->> +
->>  /*
->>   * PM helpers.  Codec drivers embed sdca_class_drv in their own priv,
->>   * own dev_set_drvdata(), and compose these into their own dev_pm_ops:
->> diff --git a/sound/soc/sdca/sdca_class.c b/sound/soc/sdca/sdca_class.c
->> index 88a29116a334..b952fa6eb802 100644
->> --- a/sound/soc/sdca/sdca_class.c
->> +++ b/sound/soc/sdca/sdca_class.c
->> @@ -24,7 +24,15 @@
->>  
->>  #define CLASS_SDW_ATTACH_TIMEOUT_MS	5000
->>  
->> -static int class_read_prop(struct sdw_slave *sdw)
->> +/**
->> + * sdca_class_read_prop - fill SDCA-common SoundWire slave properties
->> + * @sdw: SoundWire slave
->> + *
->> + * Exported so codec-specific SoundWire drivers can invoke the SDCA
->> + * common property setup from their own sdw_slave_ops.read_prop, and
->> + * then apply codec-specific overrides inline.
->> + */
->> +int sdca_class_read_prop(struct sdw_slave *sdw)
->>  {
->>  	struct sdw_slave_prop *prop = &sdw->prop;
->>  
->> @@ -36,9 +44,10 @@ static int class_read_prop(struct sdw_slave *sdw)
->>  
->>  	return 0;
->>  }
->> +EXPORT_SYMBOL_NS_GPL(sdca_class_read_prop, "SND_SOC_SDCA_CLASS");
->>  
->>  static const struct sdw_slave_ops class_sdw_ops = {
->> -	.read_prop	= class_read_prop,
->> +	.read_prop	= sdca_class_read_prop,
->>  };
->>  
->>  static void class_regmap_lock(void *data)
->> @@ -136,18 +145,31 @@ static void class_boot_work(struct work_struct *work)
->>  	pm_runtime_put_sync(drv->dev);
->>  }
->>  
->> -static int class_sdw_probe(struct sdw_slave *sdw, const struct sdw_device_id *id)
->> +/**
->> + * sdca_class_probe - SDCA class SoundWire slave probe helper
->> + * @sdw: SoundWire slave
->> + * @drv: caller-allocated sdca_class_drv storage.  The caller (a codec
->> + *       driver, or the built-in class_sdw_driver in this file) owns the
->> + *       allocation and sets its own dev_set_drvdata() -- the framework
->> + *       does not touch drvdata.  Typically embedded in the codec's own
->> + *       priv struct so codec drivers can keep per-slave state.
->> + *
->> + * Codec-specific SoundWire drivers call this from their .probe after
->> + * allocating a struct sdca_class_drv (usually embedded in their own
->> + * priv) and setting drvdata to their priv.  The framework fills in the
->> + * sdca_class_drv fields, sets up the class regmap, and queues the
->> + * deferred boot work.
->> + */
->> +int sdca_class_probe(struct sdw_slave *sdw, struct sdca_class_drv *drv)
->>  {
->>  	struct device *dev = &sdw->dev;
->>  	struct regmap_config *dev_config;
->> -	struct sdca_class_drv *drv;
->>  	int ret;
->>  
->>  	sdca_lookup_swft(sdw);
->>  
->> -	drv = devm_kzalloc(dev, sizeof(*drv), GFP_KERNEL);
->>  	if (!drv)
->> -		return -ENOMEM;
->> +		return -EINVAL;
->>  
->>  	dev_config = devm_kmemdup(dev, &class_dev_regmap_config,
->>  				  sizeof(*dev_config), GFP_KERNEL);
->> @@ -159,8 +181,6 @@ static int class_sdw_probe(struct sdw_slave *sdw, const struct sdw_device_id *id
->>  	mutex_init(&drv->regmap_lock);
->>  	mutex_init(&drv->init_lock);
->>  
->> -	dev_set_drvdata(drv->dev, drv);
->> -
->>  	INIT_WORK(&drv->boot_work, class_boot_work);
->>  
->>  	dev_config->lock_arg = &drv->regmap_lock;
->> @@ -185,14 +205,47 @@ static int class_sdw_probe(struct sdw_slave *sdw, const struct sdw_device_id *id
->>  
->>  	return 0;
->>  }
->> +EXPORT_SYMBOL_NS_GPL(sdca_class_probe, "SND_SOC_SDCA_CLASS");
->>  
->> -static void class_sdw_remove(struct sdw_slave *sdw)
->> +static int class_sdw_probe(struct sdw_slave *sdw, const struct sdw_device_id *id)
->>  {
->> -	struct device *dev = &sdw->dev;
->> -	struct sdca_class_drv *drv = dev_get_drvdata(dev);
->> +	struct sdca_class_drv *drv;
->>  
->> +	/*
->> +	 * Pure-generic SDCA parts: no codec priv to embed, so allocate a
->> +	 * bare sdca_class_drv here and stash it in drvdata for the
->> +	 * built-in PM ops to fetch.
->> +	 */
->> +	drv = devm_kzalloc(&sdw->dev, sizeof(*drv), GFP_KERNEL);
->> +	if (!drv)
->> +		return -ENOMEM;
->> +
->> +	dev_set_drvdata(&sdw->dev, drv);
->> +
->> +	return sdca_class_probe(sdw, drv);
->> +}
->> +
->> +/**
->> + * sdca_class_remove - SDCA class SoundWire slave remove helper
->> + * @drv: caller-owned sdca_class_drv (the one handed to sdca_class_probe()).
->> + *
->> + * Cancels the deferred boot work so devres can safely free @drv and the
->> + * embedding codec priv without racing class_boot_work.  Codec-specific
->> + * SoundWire drivers that call sdca_class_probe() must call this from
->> + * their .remove with the same drv pointer they passed to probe.
->> + */
->> +void sdca_class_remove(struct sdca_class_drv *drv)
->> +{
->>  	cancel_work_sync(&drv->boot_work);
->>  }
->> +EXPORT_SYMBOL_NS_GPL(sdca_class_remove, "SND_SOC_SDCA_CLASS");
->> +
->> +static void class_sdw_remove(struct sdw_slave *sdw)
->> +{
->> +	struct sdca_class_drv *drv = dev_get_drvdata(&sdw->dev);
->> +
->> +	sdca_class_remove(drv);
->> +}
->>  
->>  /**
->>   * sdca_class_system_suspend - SDCA class system suspend helper
-> 
-
+No fixes tag ?
