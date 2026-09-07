@@ -1,445 +1,235 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C417E43DA2C
-	for <linux-arm-msm@vger.kernel.org>; Mon,  7 Sep 2026 08:14:42 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 657C243C05B
+	for <linux-arm-msm@vger.kernel.org>; Mon,  7 Sep 2026 08:19:28 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788768884; cv=none; b=G6P/XgRJWL3ljbumPCyv8RGGW4G1C4T37DD7/+f1oRdOEJ03lrUuuupz/BOcMFkpgngHDHmwyFNkAdNk4Iq5KSIxRA9Sr6Iqu/t2OlWfri6Y2LXcFZUraILNfwp0Es2SlQjm1sRF8Zipjlh6DVwQOnwdyTfAw4Cc6IJFZa0Px7I=
+	t=1788769170; cv=none; b=dJSPfVakxyXe6OsDyzCFcoJ1FmXVTq+qSbeThGJT/kZqj/cW1TTagZYI6f9MwmrEOuziBBtMdWgoBOXq/anZom0nPpDCJj+KR5wdSc8UzRy6GZZirxS98ynHayH3S2+XqA/68ffbFZIHWWuMB5mcKsz8ZwFZBvfDPUHEg1iYVVI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788768884; c=relaxed/simple;
-	bh=TgC/RkbhJ7vKUyUL9N0dsXA90G09kSlE8ntHvVa5CC8=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=bPd6WyENLLUeB/uMlehCf8f29BUNyQtbo6rZK402O27IvJ2/lvItQk21qNaaiTFSKg6P7xwS6UvShG0uOHStrZm+YbFCHm9UScJnTnkkZv1TeuqduShVwuASZlSCY92ekSBrg+UCySX1XTITjKYxfQH51Tk3eWJqQu6nUK/X2Fw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=S2gUVCD8; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=McHf76uv; arc=none smtp.client-ip=205.220.180.131
+	s=arc-20240116; t=1788769170; c=relaxed/simple;
+	bh=Cc7dj/sRhx7BFv/3UmS1z+1pGdS2VypC/st1bCdYeGA=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=RC7xz2pKs3DjLHmBmz/uLrtZNzEhhvOQpSjmu9gWBGchogGXXmQ+r5u3tAoJPIgC8aUjN2+9Fd5MuWO9f+1BNpn6rhocuMvfga/WxsTNiZ64L/TMyG0+Vfz5HrYwXRWbj221qyRRqQ4XpGJwairXxafrIfOHOwih39FWrwv09hs=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=RDS0Ibmp; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=ExZnwcH4; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="S2gUVCD8";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="McHf76uv"
-Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68777aSQ2724317
-	for <linux-arm-msm@vger.kernel.org>; Mon, 7 Sep 2026 08:14:41 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="RDS0Ibmp";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="ExZnwcH4"
+Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68777Jvo4161134
+	for <linux-arm-msm@vger.kernel.org>; Mon, 7 Sep 2026 08:19:27 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	6n4aVS99yYRnFm88ofoKkQ5lAy+OyD29BpZxJOtYUs0=; b=S2gUVCD8btN9U+Tc
-	h3EXNpuzRHINosHnW62tGU2xaXMO5MW92qqAnkrEXwGI6iU8fE8ykbI3WNrnyI/g
-	w975sFt/13Kxy0bifDNb+2qrB+nrnCMUP9joEIXA0GPwKYLdit+IdWrMB5WdJ+AS
-	i6/lBfReGg9ARXxaZ+ZWH0fhpFKXKmWDQzSwVkNxgSU9Zh70dvwvtcmQkJ57TfOR
-	39XGrEHoMVApOQtCGmMDk9+KhrIX7F1nrZZLy7V8DFeK8M+4OIZMWKDBx07QHRw2
-	m7Ta0xResrQlIWw1X1PIZde+fBG4jKbY7ObKl3jfQgyZHT2ikpq4eespgWyA2Flq
-	pGX0UA==
-Received: from mail-oo1-f70.google.com (mail-oo1-f70.google.com [209.85.161.70])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ghfxksn4d-1
+	dhN42oEPCAxcCBPQS4z3rBBRj3rpOiaQuFNeu+Dnbpo=; b=RDS0Ibmp91GyCd1r
+	INksPi7bdhi4Hd/CY84R+hzcyuQGil0Jxqg5NYeyC6B7eCWHd1wa08QriI0CwTWB
+	3hyV1sX0TbQ07wNDzphI9gc3QOVmgtwW0Po4EUZxem8wGQCViQoQfhdomzCkBhQt
+	+oVflQd9XEpt4die8hICjWwEcpyYafzXUWQsC6uwVcJe1A5srleAzbB0hmK3rhaC
+	mjHjZVYUXyAl1aZ52/Sv5WWop2n1fsQlF99ljAxNsZT07aYfowMthN4agKZUluBK
+	Ho4vn9e6+paYxucfp6vDXlWeMjCyNygqjvZed5+xiFDvBktyh/XZmrVOR4YEDYvD
+	+EowYQ==
+Received: from mail-pj1-f70.google.com (mail-pj1-f70.google.com [209.85.216.70])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ghfwjhp7a-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Mon, 07 Sep 2026 08:14:41 +0000 (GMT)
-Received: by mail-oo1-f70.google.com with SMTP id 006d021491bc7-6b1b6df25efso3678848eaf.3
-        for <linux-arm-msm@vger.kernel.org>; Mon, 07 Sep 2026 01:14:41 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Mon, 07 Sep 2026 08:19:27 +0000 (GMT)
+Received: by mail-pj1-f70.google.com with SMTP id 98e67ed59e1d1-398d292eac1so7187561a91.1
+        for <linux-arm-msm@vger.kernel.org>; Mon, 07 Sep 2026 01:19:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1788768881; x=1789373681; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=6n4aVS99yYRnFm88ofoKkQ5lAy+OyD29BpZxJOtYUs0=;
-        b=McHf76uv0RHyV2VQeLQ3/1zjdXiNcpzlwvAz/qpPJ/N8lOnQwLw0JK/NEhfY45KmK2
-         i7G62qjH11dHyuoQkoFM312T0aug9luJk5Y1eyHcKbf9LHX04GS6SALO5dkno7n0u2qq
-         iGatRIRfm1Z0y9MrN1tB2d3XigBcv4XVz57I8/MTxMid86Bx1rH1k1aKJBibbLIV9EHL
-         GPQYOV5Q0o5zZu35mzQkMq1eYdIFWkJgVwhsdV1owXRRBwvjM47SKkK9TC6pitOoNGr4
-         wMB7aFgRm5peyQIQJUVrD0wpOMgJhDdx5qbWj+B8Xkf6sxot5+J7yFajOVRSPCa+BaP9
-         YWmA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788768881; x=1789373681;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+        d=oss.qualcomm.com; s=google; t=1788769166; x=1789373966; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=6n4aVS99yYRnFm88ofoKkQ5lAy+OyD29BpZxJOtYUs0=;
-        b=sy0PPu3MaKCep7L0+4v2dF1TqqEthyw+EmpoAYRdBRnzX/1QtInC8P1EI5iyfKwshZ
-         EgR7BrBJ0lI0WPWZOLvXIxn/Lk7JHktiFUhdmZKUDCnb8Hqz/8pNbNIKogpb+lLTNG6E
-         5aKm+Y0vR/WumlXuM+drvvNXNNMDuMvSL6K540MuUSb0hdMxQ9ACTGVY4SB+Z2foK4Mi
-         5d/IFWYw7wDdop3lBdqWucTuAYTcTDyGAh6d+vzkzP2a3F3TOuk/CZg8EWbf6eYpYyYA
-         l6zXN9ldrIOPdd/XDhHtSw0KqG8IobGy96//3XbAp0q5UBW42NxlDU1kupVwE02GkSNk
-         DeDQ==
-X-Gm-Message-State: AFuF++lfvMNR+d7mOFHwrpRfA7uyPltwVSMKKJ5mNK7WyF3eoI574dWA
-	t1eb8PWJymfkKOYSQCOim2e3C/hA7pZ7QhZ70o+9+7Ol3lskKi0eTWL+Wrjao1OE6I58UnpFokF
-	vpxAab/m4XaEmfS5T8Kx5/SwY0PN6jNJhen7VUKMAUZlvVQEhWie134tLItG3x2loEAcV
-X-Gm-Gg: AYBFou2x64p/vaVIqbh0U/RDO09GEJjnh3vSMFU1CqZiuDWt23SWrgaLRr+cpHJKqiV
-	c8560usRANH7uewZ2Qc8xhhEZNwQ/XDPImf0oh1/6OzzEc8VM+K8hNK0bnD8LW8EgzWy8LYVbJS
-	sVU4wFQmrw6viBUXOR3teOQrMzkQ7FAjuvaFFONUlfVELYlirG5ntpCjj+4tmP92E09u/cqE5pi
-	GfWql9ieJlLq/G2vYIGdlNEyeFYHCO4N+wxxi36m6oVY+oN8oUZf3rBTsBSukI/Y2i5d5bLbina
-	U9+nIdifdeM6gw4CVFJ3fdbKgYpwIKjP0os9Ti0BHPJnshan68lmaux//50dPM+ynbmckYaGCp3
-	HvgUUlXYO/1CYSfKioB0yQkw0Wdv2eN8=
-X-Received: by 2002:a05:6820:4c16:b0:6b7:83d6:2933 with SMTP id 006d021491bc7-6b783d62fb5mr9684812eaf.54.1788768880889;
-        Mon, 07 Sep 2026 01:14:40 -0700 (PDT)
-X-Received: by 2002:a05:6820:4c16:b0:6b7:83d6:2933 with SMTP id 006d021491bc7-6b783d62fb5mr9684786eaf.54.1788768880464;
-        Mon, 07 Sep 2026 01:14:40 -0700 (PDT)
-Received: from hu-nihalkum-hyd.qualcomm.com ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-143243767e1sm21724220c88.6.2026.09.07.01.14.32
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 07 Sep 2026 01:14:40 -0700 (PDT)
-From: Nihal Kumar Gupta <nihal.gupta@oss.qualcomm.com>
-Date: Mon, 07 Sep 2026 13:43:42 +0530
-Subject: [PATCH v2 6/6] regulator: qcom-pm8008-regulator: Add support for
- PM8010 PMIC
+        bh=dhN42oEPCAxcCBPQS4z3rBBRj3rpOiaQuFNeu+Dnbpo=;
+        b=ExZnwcH43Jo/8jtzmMgvYvrQesxNcifoululqVaOUx+MVdd7anaV6bmTslvPNB6p9R
+         FnLvtYNnbxAJdFlO5JPYXxI+s6atkT1lUZrNOmJXqPygVEhAX9a9Rf2LELLUtERSiQga
+         EtBmdhXKMavmucxtfHHRzrdH/Ki0vCfCApc1oo8oTDM5uDWUvvngRuXM0CO6oD+gyycr
+         W375YudxHd3J6SdvHJGYTVJL9CFRD1Qora90KC31CKIZQGCLEriYw+oyQo6M0euW5EOI
+         w55s2KO9bvFMHhOoe25TI1MOOvMA7LxYbffNq+1gpCb+fDzlRRYBdOqP3tnafRDD9D8x
+         P3GA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1788769166; x=1789373966;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=dhN42oEPCAxcCBPQS4z3rBBRj3rpOiaQuFNeu+Dnbpo=;
+        b=pMLfberfHns7BvHZLVjlr6AvuoIpcz6XWowPZ4JEjJv0wVplfImiA2rfdzcs3zs5Ir
+         leL8hQkAUmcFTsaBzlprUNqwDTrBhllw9r4Ybn0rIaKqQwdGlcPXfVUO8jw3iKsbF6Tq
+         ysVVr32aTl+DHxL5nDQ8AeqtnEEogv8rIz85q+ux/wnyiuGyV1YdLd+JBI7BUCwMMNvv
+         sfa2QCKzvPVC2jzjX5i9v9GXMMG+9eJvEXQdkrFCooVYpKwCfdlzBtS4AB/tYAyyCxbx
+         Hb2XTGBbMeCypR4E9DuwWSKo0iCC5a+DEuNMjkCCuBoBE3moWFNr1xWNW/C8Zydgvfz7
+         k3sQ==
+X-Forwarded-Encrypted: i=1; AKwUvBzBUB0kkyK3nsWg6UcsEvIOJ/GDJDOb6HhZ+vNQdNXiFCeAdsrm0op5EXL2J4MPtg9lako+c5JptD8jULFH@vger.kernel.org
+X-Gm-Message-State: AFuF++kFWJZ0jiXNaBCeJqUpdLREjyqmkUoppIpYwP/V8gIbPAWKhNRe
+	xWINUhCKjq4jzFbcAqwci8GawfNXT8FjHCZiKleRFeP3qd+wPNLCBlVUt4aHYR3cL0m+WCH3BQp
+	x5hYs4yqo0wWOYZrXlcQtHKwKpMpNL406cJYGM79g6Yomuwj9RbPjOci8D5yWJAFGrEsj
+X-Gm-Gg: AYBFou0QqZCgL5zMj79zbixotJm129dagbDIyZmm5ycei4uc+qFWBQQzic93t3RClCm
+	LuHngxE18PfQLdkKwCXLXRAB/zO7rHDxuETPu81fDyKJfV7EXF/aMluQHmp9ox0EKDvwRuJVJ/N
+	rwNEVJx+Lx0Hoyo2LEWe9gqE2m+pyo+g4nopr0MlbybKXRYcttKaU0xvRA84YtPgiraQLzRZS2k
+	W3LA3QOvzSHDMCAcYVVmh+wCBd+FIFh8/xxBOWQ8cTMOs1yUQOnJ3n+UcqcVZkffCQpVoAPe3QP
+	glviYNDAF3Hn+HnuA3Z9TmTRl+hyhNX/W3phqC7J2jp1QThciuK6OFauGCEkeEvcfNnNZ/bmnzr
+	e5TO1MAqYXJGWu7ny7fb/TkUO4Es47hWp8kpXqKci8g==
+X-Received: by 2002:a17:90a:d00e:b0:399:221d:63c0 with SMTP id 98e67ed59e1d1-39b262409e5mr34110692a91.25.1788769166462;
+        Mon, 07 Sep 2026 01:19:26 -0700 (PDT)
+X-Received: by 2002:a17:90a:d00e:b0:399:221d:63c0 with SMTP id 98e67ed59e1d1-39b262409e5mr34110638a91.25.1788769165936;
+        Mon, 07 Sep 2026 01:19:25 -0700 (PDT)
+Received: from [10.217.217.129] ([202.46.22.19])
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-143240d86c3sm23134424c88.0.2026.09.07.01.19.20
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 07 Sep 2026 01:19:25 -0700 (PDT)
+Message-ID: <f58bd978-ca45-48b9-a928-45a2878fb54a@oss.qualcomm.com>
+Date: Mon, 7 Sep 2026 13:48:38 +0530
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260907-glymur_camss-v2-6-75f7982dc983@oss.qualcomm.com>
-References: <20260907-glymur_camss-v2-0-75f7982dc983@oss.qualcomm.com>
-In-Reply-To: <20260907-glymur_camss-v2-0-75f7982dc983@oss.qualcomm.com>
-To: Bryan O'Donoghue <bod@kernel.org>, Vinod Koul <vkoul@kernel.org>,
-        Neil Armstrong <neil.armstrong@linaro.org>,
-        Manivannan Sadhasivam <mani@kernel.org>, Rob Herring <robh@kernel.org>,
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 2/3] interconnect: qcom: x1e80100: enable QoS
+ configuration
+To: Marc Zyngier <maz@kernel.org>, Mostafa Saleh <smostafa@google.com>
+Cc: Georgi Djakov <djakov@kernel.org>, Rob Herring <robh@kernel.org>,
         Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>,
-        Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
-        Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
-        Loic Poulain <loic.poulain@oss.qualcomm.com>,
-        Mauro Carvalho Chehab <mchehab@kernel.org>, Lee Jones <lee@kernel.org>,
-        Guru Das Srinagesh <linux@gurudas.dev>,
-        Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, linux-phy@lists.infradead.org,
-        linux-media@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org, mfd@lists.linux.dev,
-        Suresh Vankadara <svankada@qti.qualcomm.com>,
-        Vikram Sharma <vikram.sharma@oss.qualcomm.com>,
-        Nihal Kumar Gupta <nihal.gupta@oss.qualcomm.com>,
-        Jishnu Prakash <jishnu.prakash@oss.qualcomm.com>,
-        Dhruvin Rajpura <drajpura@qti.qualcomm.com>,
-        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1788768826; l=10721;
- i=nihal.gupta@oss.qualcomm.com; s=20260608; h=from:subject:message-id;
- bh=yixS+paItpbPG3dnBLS1VUcjAcCmN8R25JH8onqgK0M=;
- b=AshxnNJuhZqt/olXhrP/gDHUkv4390f/hueQU2nS0RTBb+OYBxulCEwtpLNI/q7lr/RKkziFm
- vQDe1xFl4/lBXtix2UFTzuaMZtkbCKguXrjMj36aKBp4GG65X++6dtG
-X-Developer-Key: i=nihal.gupta@oss.qualcomm.com; a=ed25519;
- pk=DIbyFMNwqU/iMvU/0pCQp2wmRVgtHFBT3PcSu+A+Ncw=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTA3MDA4OCBTYWx0ZWRfXwFqkqeAZCRR2
- QQzNMPIEePqekxiDT2hjY/YdvDtpkcPcB6B9778ZoSsvYhqbcKYqdMRDySI98ibUAYUIH9GUzT+
- /G7rasTE8l3hc9AUc+Qe7ws9Og+lGqcc9J0gVFG+TIxxOmiDGj+r+d49ZEWUwInILdeLl6FRDP9
- e3Yy74reJJTpZcMwtexZqfq31h2hb5F9GSejey0L+XvBUqqKd50E66P1iri3FtkCXIhm1fiGvsN
- WwFdl2azNDPG2GOZCvnL09Ul2gCmNeyEtM/i2G5ZcwoIZBrUeBOWMfr208gIe4wtweyuc0S4CsI
- 0Lvu/PYC1Zi6zd381/woJlNGh19pdfyl4RF14xr4st7cY5bMUfVg8Un6xdAv9t/NLnKr3MqWELn
- 4MskEcFHmuU7+rQQFQd5omXlYWfsvX2WCThkOBRlqE+ztVRoKTFfhgPqOxcqrH/cbpYMPcHcnP+
- ZWNu0FqtBzIhcBbs/JQ==
-X-Proofpoint-GUID: JybuJ4xYGVzadvbh57dUmxQdUJWQ3oM1
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTA3MDA4OCBTYWx0ZWRfX8CwR/32YB8nc
- Pdf6xWLfvmTnR+3fnwCTY1FC6YskjinkyW/gF4ppsHXU+8AirXFO9A3jyt5ZvhfMc4l6S5z9+k3
- 0xhceZ0Y3eFTK4j3abW0Dghb7kBtZo8=
-X-Authority-Analysis: v=2.4 cv=daOwG3Xe c=1 sm=1 tr=0 ts=6a9e7271 cx=c_pps
- a=lkkFf9KBb43tY3aOjL++dA==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
+        Conor Dooley
+ <conor+dt@kernel.org>,
+        Rajendra Nayak <quic_rjendra@quicinc.com>,
+        Abel Vesa <abelvesa@kernel.org>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>, linux-arm-msm@vger.kernel.org,
+        linux-pm@vger.kernel.org, devicetree@vger.kernel.org,
+        linux-kernel@vger.kernel.org,
+        Konrad Dybcio
+ <konrad.dybcio@oss.qualcomm.com>,
+        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+        Odelu Kukatla <odelu.kukatla@oss.qualcomm.com>
+References: <20260527-x1e80100_qos-v2-0-305c6539e6d2@oss.qualcomm.com>
+ <20260527-x1e80100_qos-v2-2-305c6539e6d2@oss.qualcomm.com>
+ <apgeBNSiP01YfNcs@google.com> <86ld9d4h4n.wl-maz@kernel.org>
+Content-Language: en-US
+From: Raviteja Laggyshetty <raviteja.laggyshetty@oss.qualcomm.com>
+In-Reply-To: <86ld9d4h4n.wl-maz@kernel.org>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTA3MDA4OSBTYWx0ZWRfXwe5h/WLQz5RO
+ R1+VrPPw1U9dolnsHFsCARnaww6vV9ALtYkoZXzRWjr71gSToTxAyGIkek+WstaOkKhQAJY5oD+
+ RxgoD1l7l5YOGLz1nT/aD08e+qlLof4=
+X-Authority-Analysis: v=2.4 cv=NanWEWD4 c=1 sm=1 tr=0 ts=6a9e738f cx=c_pps
+ a=0uOsjrqzRL749jD1oC5vDA==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
  a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22
- a=EUspDBNiAAAA:8 a=AkqyrZD3AtcrQouKZzQA:9 a=QEXdDO2ut3YA:10
- a=k4UEASGLJojhI9HsvVT1:22
-X-Proofpoint-ORIG-GUID: JybuJ4xYGVzadvbh57dUmxQdUJWQ3oM1
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22
+ a=VwQbUJbxAAAA:8 a=1XWaLZrsAAAA:8 a=EUspDBNiAAAA:8 a=Mjzv1QJRJk8zmdB66akA:9
+ a=QEXdDO2ut3YA:10 a=mQ_c8vxmzFEMiUWkPHU9:22
+X-Proofpoint-GUID: 1VJ9XIFnZ8dduj8GPjhSAZ-kwGd5iFxa
+X-Proofpoint-ORIG-GUID: 1VJ9XIFnZ8dduj8GPjhSAZ-kwGd5iFxa
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTA3MDA4OSBTYWx0ZWRfXyjXTHdAk0bzu
+ /mnUu3gpFZZ/Rv0OrS6BFdxAgLRV8uzADhEx8TN8LtHhRRgK3lhCPLoN09Mzzsru61ui3A8uXXw
+ x1CaiGtbvdWbLOpfcqrrAjCkuxxF6cy1ui75bspJxRm6oWvzPWqYMP/siptmou7grul+0LcFZ7h
+ NF216NOi6VOunavxzF2sVlwX4qJFNfo+HPNKfx6VoM7/+lEN7OSD5qL1yyeCHqznXYTO8dhcbu5
+ I2giPAUwZdTFAziDLiRwFE6RJoAA+ebZfvPHk7zIBpTdGiOU5WNgU7TADa9g1B56iEd3tlCcCrf
+ 5ZSSLGWdd0a2FZH88Vo/1Ed/vuU3Dpn+fJs5faIezCCwml+0r2Sb3PAKdkr7c5+5uDqfY5rxyIY
+ WJcPB2+1HHzjT3VaAnxYLVF5cOWUQunSIgO9VfOv8wRExV10KFfpMRQyL8+7uP73z/qSCHq1xrW
+ 2vXTSNSSX1YwOIgxqvg==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-09-07_02,2026-09-03_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- suspectscore=0 priorityscore=1501 bulkscore=0 spamscore=0 phishscore=0
- lowpriorityscore=0 adultscore=0 malwarescore=0 impostorscore=0 clxscore=1015
+ clxscore=1011 spamscore=0 impostorscore=0 suspectscore=0 adultscore=0
+ priorityscore=1501 lowpriorityscore=0 phishscore=0 bulkscore=0 malwarescore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2609070088
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2609070089
 
-From: Jishnu Prakash <jishnu.prakash@oss.qualcomm.com>
 
-The PM8010 is a variant of the PM8008 PMIC with additional LDO
-regulators, a wider voltage range on some LDOs, and LPM/NPM mode
-support. Add PM8010 regulator data tables and voltage ranges, and
-implement set_mode()/get_mode() for switching between LPM and NPM.
 
-Detect PM8010 via the parent I2C client's compatible string and
-select the matching regulator_ops and register data accordingly.
+On 9/7/2026 1:39 PM, Marc Zyngier wrote:
+> On Wed, 02 Sep 2026 14:00:52 +0100,
+> Mostafa Saleh <smostafa@google.com> wrote:
+>>
+>> On Wed, May 27, 2026 at 05:37:10AM +0000, Raviteja Laggyshetty wrote:
+>>> Enable QoS configuration for master ports with predefined priority
+>>> and urgency forwarding.
+>>>
+>>> Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+>>> Reviewed-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+>>> Signed-off-by: Raviteja Laggyshetty <raviteja.laggyshetty@oss.qualcomm.com>
+>>
+>> Testing with Linus's tree, this patch broke my Lenovo IdeaCenter Mini X
+>> booting, the board resets very early during boot.
+>> I see that the last patch (device tree) is missing from the tree, I
+>> included it, but that doesn't fix it, disabling the driver also
+>> doesn't help. I can boot again by reverting this patch.
+>>
+>> I have my own device tree as my device is Purwa based [1]
+>>
+>> [1] https://lore.kernel.org/all/20260429141815.827157-1-smostafa@google.com/
+> 
+> Same here. My Mini-X hard reboots after 2.45s in the kernel. Example
+> from the serial console:
 
-Signed-off-by: Jishnu Prakash <jishnu.prakash@oss.qualcomm.com>
-Signed-off-by: Dhruvin Rajpura <drajpura@qti.qualcomm.com>
-Signed-off-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-Signed-off-by: Nihal Kumar Gupta <nihal.gupta@oss.qualcomm.com>
----
- drivers/regulator/qcom-pm8008-regulator.c | 184 ++++++++++++++++++++++++++----
- 1 file changed, 159 insertions(+), 25 deletions(-)
+Is the Mini-X based on Purwa ? 
 
-diff --git a/drivers/regulator/qcom-pm8008-regulator.c b/drivers/regulator/qcom-pm8008-regulator.c
-index 9c9b8be2e15a499fa61a05cc9650338d0bbcd122..87807d5d9e8fdbbe422202156bcbf1d0e3fbc155 100644
---- a/drivers/regulator/qcom-pm8008-regulator.c
-+++ b/drivers/regulator/qcom-pm8008-regulator.c
-@@ -8,6 +8,7 @@
- #include <linux/array_size.h>
- #include <linux/bits.h>
- #include <linux/device.h>
-+#include <linux/i2c.h>
- #include <linux/math.h>
- #include <linux/module.h>
- #include <linux/of.h>
-@@ -24,9 +25,19 @@
+> 
+> <quote>
+> [    2.280289] VFIO - User Level meta-driver version: 0.3
+> [    2.286872] usbcore: registered new interface driver usb-storage
+> [    2.307218] i2c_dev: i2c /dev entries driver
+> [    2.316386] efifb: probing for efifb
+> [    2.320065] efifb: framebuffer at 0xe4800000, using 8100k, total 8100k
+> [    2.326768] efifb: mode is 1920x1080x32, linelength=7680, pages=1
+> [    2.333026] efifb: scrolling: redraw
+> [    2.336704] efifb: Truecolor: size=8:8:8:8, shift=24:16:8:0
+> [    2.346518] Console: switching to colour frame buffer device 240x67
+> [    2.356787] fb0: EFI VGA frame buffer device
+> [    2.361793] clocksource: arch_mmio_counter: mask: 0xffffffffffffff max_cycles: 0x46d987e47, max_idle_ns: 440795202767 ns
+> [    2.372947] arch-timer-mmio 17800000.timer: mmio timer running at 19.20MHz (virt)
+> [    2.380860] usbcore: registered new interface driver usbhid
+> [    2.386577] usbhid: USB HID core driver
+> [    2.391899] hw perfevents: enabled with armv8_pmuv3 PMU driver, 13 (0,80000fff) counters available
+> [    2.403182] NET: Registered PF_INET6 protocol family
+> [    2.408516] Segment Routing with IPv6
+> [    2.412289] In-situ OAM (IOAM) with IPv6
+> [    2.416326] NET: Registered PF_PACKET protocol family
+> [    2.421533] 9pnet: Installing 9P2000 support
+> [    2.425923] Key type dns_resolver registered
+> [    2.430357] NET: Registered PF_VSOCK protocol family
+> [    2.440369] registered taskstats version 1
+> [    2.444633] Loading compiled-in X.509 certificates
+> [    2.451480] Demotion targets for Node 0: null
+> Format: Log Type - Time(microsec) - Message - Optional Info
+> Log Type: B - Since Boot(Power On Reset),  D - Delta,  S - Statistic
+> S - QC_IMAGE_VERSION_STRING=BOOT.MXF.2.4-00541-HAMOA-1
+> S - IMAGE_VARIANT_STRING=SocHamoaWP
+> S - OEM_IMAGE_VERSION_STRING=ip-10-195-202-30
+> S - Boot Interface: SPI
+> S - Secure Boot: On
+> S - Boot Config @ 0x221c8600 = 0x00000001
+> S - JTAG ID @ 0x221c8744 = 0x002ad0e1
+> S - OEM ID @ 0x221c8700 = 0x00000040
+> S - Serial Number @ 0x221c8610 = 0x00000460d5171bbb
+> S - Feature Config Row 0 @ 0x221c21e0 = 0x0000000000000000
+> S - Feature Config Row 1 @ 0x221c21e8 = 0x0000000000000000
+> S - Core 0 Frequency, 1363 MHz
+> S - PBL Patch Ver: 0
+> S - PBL freq: 600 MHZ
+> S - Cluster: 0, Core: 0
+> </quote>
+> 
+> I'm also seeing spurious resets on my "X1E001DE Snapdragon Devkit for
+> Windows" when doing large file transfers over the network (30GB+).
+> With this patch reverted on top of 7.3-rc1, both machines are as solid
+> as they were before it.
+>
+The current patch enable QoS for Hamoa SoC, which get programmed only during
+driver probe. This shouldn't impact or cause any spurious resets once the 
+device is booted up and probe is successful.
  
- #define LDO_VSET_LB_REG			0x40
- 
-+#define LDO_MODE_CTL1_REG		0x45
-+#define MODE_PRIMARY_MASK		GENMASK(2, 0)
-+#define LDO_MODE_NPM			7
-+#define LDO_MODE_LPM			4
-+
- #define LDO_ENABLE_REG			0x46
- #define ENABLE_BIT			BIT(7)
- 
-+#define LDO_STATUS1_REG		0x08
-+#define MODE_STATE_MASK		GENMASK(1, 0)
-+#define MODE_STATE_NPM			3
-+#define MODE_STATE_LPM			2
-+
- struct pm8008_regulator {
- 	struct regmap		*regmap;
- 	struct regulator_desc	desc;
-@@ -39,24 +50,59 @@ struct pm8008_regulator_data {
- 	unsigned int			base;
- 	int				min_dropout_uV;
- 	const struct linear_range	*voltage_range;
-+	int				n_linear_ranges;
-+};
-+
-+struct pm8008_match_data {
-+	const bool has_stepper_ctl_reg;
-+	const struct pm8008_regulator_data *regulator_data;
-+	const int num_regulators;
- };
- 
--static const struct linear_range nldo_ranges[] = {
-+static const struct linear_range pm8008_nldo_ranges[] = {
- 	REGULATOR_LINEAR_RANGE(528000, 0, 122, 8000),
- };
- 
--static const struct linear_range pldo_ranges[] = {
-+static const struct linear_range pm8008_pldo_ranges[] = {
- 	REGULATOR_LINEAR_RANGE(1504000, 0, 237, 8000),
- };
- 
-+static const struct linear_range pm8010_nldo_ranges[] = {
-+	REGULATOR_LINEAR_RANGE(528000, 0, 127, 8000),
-+};
-+
-+static const struct linear_range pm8010_pldo_ranges[] = {
-+	REGULATOR_LINEAR_RANGE(1504000, 0, 255, 8000),
-+};
-+
-+static const struct linear_range pm8010_pldo_lv_ranges[] = {
-+	REGULATOR_LINEAR_RANGE(1800000, 0,  2,  200000),
-+	REGULATOR_LINEAR_RANGE(2608000, 3,  28, 16000),
-+	REGULATOR_LINEAR_RANGE(3104000, 29, 30, 96000),
-+	REGULATOR_LINEAR_RANGE(3312000, 31, 31, 0),
-+};
-+
-+#define PM8008_REGULATOR(_name, _supply, _base, _dropout, _range)	\
-+	{ _name, _supply, _base, _dropout, _range, ARRAY_SIZE(_range) }
-+
- static const struct pm8008_regulator_data pm8008_reg_data[] = {
--	{ "ldo1", "vdd-l1-l2", 0x4000, 225000, nldo_ranges, },
--	{ "ldo2", "vdd-l1-l2", 0x4100, 225000, nldo_ranges, },
--	{ "ldo3", "vdd-l3-l4", 0x4200, 300000, pldo_ranges, },
--	{ "ldo4", "vdd-l3-l4", 0x4300, 300000, pldo_ranges, },
--	{ "ldo5", "vdd-l5",    0x4400, 200000, pldo_ranges, },
--	{ "ldo6", "vdd-l6",    0x4500, 200000, pldo_ranges, },
--	{ "ldo7", "vdd-l7",    0x4600, 200000, pldo_ranges, },
-+	PM8008_REGULATOR("ldo1", "vdd-l1-l2", 0x4000, 225000, pm8008_nldo_ranges),
-+	PM8008_REGULATOR("ldo2", "vdd-l1-l2", 0x4100, 225000, pm8008_nldo_ranges),
-+	PM8008_REGULATOR("ldo3", "vdd-l3-l4", 0x4200, 300000, pm8008_pldo_ranges),
-+	PM8008_REGULATOR("ldo4", "vdd-l3-l4", 0x4300, 300000, pm8008_pldo_ranges),
-+	PM8008_REGULATOR("ldo5", "vdd-l5",    0x4400, 200000, pm8008_pldo_ranges),
-+	PM8008_REGULATOR("ldo6", "vdd-l6",    0x4500, 200000, pm8008_pldo_ranges),
-+	PM8008_REGULATOR("ldo7", "vdd-l7",    0x4600, 200000, pm8008_pldo_ranges),
-+};
-+
-+static const struct pm8008_regulator_data pm8010_reg_data[] = {
-+	PM8008_REGULATOR("ldo1", "vdd-l1-l2", 0x4000, 172000, pm8010_nldo_ranges),
-+	PM8008_REGULATOR("ldo2", "vdd-l1-l2", 0x4100, 172000, pm8010_nldo_ranges),
-+	PM8008_REGULATOR("ldo3", "vdd-l3-l4", 0x4200, 80000, pm8010_pldo_lv_ranges),
-+	PM8008_REGULATOR("ldo4", "vdd-l3-l4", 0x4300, 80000, pm8010_pldo_lv_ranges),
-+	PM8008_REGULATOR("ldo5", "vdd-l5",    0x4400, 296000, pm8010_pldo_ranges),
-+	PM8008_REGULATOR("ldo6", "vdd-l6",    0x4500, 80000, pm8010_pldo_lv_ranges),
-+	PM8008_REGULATOR("ldo7", "vdd-l7",    0x4600, 296000, pm8010_pldo_ranges),
- };
- 
- static int pm8008_regulator_set_voltage_sel(struct regulator_dev *rdev, unsigned int sel)
-@@ -99,8 +145,53 @@ static int pm8008_regulator_get_voltage_sel(struct regulator_dev *rdev)
- 	return regulator_map_voltage_linear_range(rdev, uV, INT_MAX);
- }
- 
-+static int pm8010_regulator_set_mode(struct regulator_dev *rdev, unsigned int mode)
-+{
-+	struct pm8008_regulator *preg = rdev_get_drvdata(rdev);
-+	unsigned int val;
-+
-+	switch (mode) {
-+	case REGULATOR_MODE_NORMAL:
-+		val = LDO_MODE_NPM;
-+		break;
-+	case REGULATOR_MODE_IDLE:
-+		val = LDO_MODE_LPM;
-+		break;
-+	default:
-+		return -EINVAL;
-+	}
-+
-+	return regmap_update_bits(preg->regmap, preg->base + LDO_MODE_CTL1_REG,
-+				   MODE_PRIMARY_MASK, val);
-+}
-+
-+static unsigned int pm8010_regulator_get_mode(struct regulator_dev *rdev)
-+{
-+	struct pm8008_regulator *preg = rdev_get_drvdata(rdev);
-+	unsigned int val;
-+	int ret;
-+
-+	ret = regmap_read(preg->regmap, preg->base + LDO_STATUS1_REG, &val);
-+	if (ret < 0)
-+		return REGULATOR_MODE_INVALID;
-+
-+	return (val & MODE_STATE_MASK) == MODE_STATE_NPM ?
-+		REGULATOR_MODE_NORMAL : REGULATOR_MODE_IDLE;
-+}
-+
-+static unsigned int pm8010_regulator_of_map_mode(unsigned int mode)
-+{
-+	switch (mode) {
-+	case REGULATOR_MODE_NORMAL:
-+	case REGULATOR_MODE_IDLE:
-+		return mode;
-+	default:
-+		return REGULATOR_MODE_INVALID;
-+	}
-+}
-+
- static const struct regulator_ops pm8008_regulator_ops = {
--	.list_voltage		= regulator_list_voltage_linear,
-+	.list_voltage		= regulator_list_voltage_linear_range,
- 	.set_voltage_sel	= pm8008_regulator_set_voltage_sel,
- 	.get_voltage_sel	= pm8008_regulator_get_voltage_sel,
- 	.enable			= regulator_enable_regmap,
-@@ -108,8 +199,20 @@ static const struct regulator_ops pm8008_regulator_ops = {
- 	.is_enabled		= regulator_is_enabled_regmap,
- };
- 
-+static const struct regulator_ops pm8010_regulator_ops = {
-+	.list_voltage		= regulator_list_voltage_linear_range,
-+	.set_voltage_sel	= pm8008_regulator_set_voltage_sel,
-+	.get_voltage_sel	= pm8008_regulator_get_voltage_sel,
-+	.enable			= regulator_enable_regmap,
-+	.disable		= regulator_disable_regmap,
-+	.is_enabled		= regulator_is_enabled_regmap,
-+	.set_mode		= pm8010_regulator_set_mode,
-+	.get_mode		= pm8010_regulator_get_mode,
-+};
-+
- static int pm8008_regulator_probe(struct platform_device *pdev)
- {
-+	const struct pm8008_match_data *match_data;
- 	const struct pm8008_regulator_data *data;
- 	struct regulator_config config = {};
- 	struct device *dev = &pdev->dev;
-@@ -117,15 +220,28 @@ static int pm8008_regulator_probe(struct platform_device *pdev)
- 	struct regulator_desc *desc;
- 	struct regulator_dev *rdev;
- 	struct regmap *regmap;
-+	const struct platform_device_id *id;
- 	unsigned int val;
-+	bool is_pm8010;
- 	int ret, i;
- 
-+	id = platform_get_device_id(pdev);
-+	if (!id)
-+		return dev_err_probe(dev, -ENODEV, "Missing platform device id\n");
-+
-+	match_data = (const struct pm8008_match_data *)id->driver_data;
-+	if (!match_data)
-+		return dev_err_probe(dev, -ENODATA, "Missing driver match data\n");
-+
- 	regmap = dev_get_regmap(dev->parent, "secondary");
- 	if (!regmap)
- 		return -EINVAL;
- 
--	for (i = 0; i < ARRAY_SIZE(pm8008_reg_data); i++) {
--		data = &pm8008_reg_data[i];
-+	is_pm8010 = of_device_is_compatible(to_i2c_client(dev->parent)->dev.of_node,
-+					    "qcom,pm8010-i2c");
-+
-+	for (i = 0; i < match_data->num_regulators; i++) {
-+		data = &match_data->regulator_data[i];
- 
- 		preg = devm_kzalloc(dev, sizeof(*preg), GFP_KERNEL);
- 		if (!preg)
-@@ -140,23 +256,28 @@ static int pm8008_regulator_probe(struct platform_device *pdev)
- 		desc->supply_name = data->supply_name;
- 		desc->of_match = data->name;
- 		desc->regulators_node = of_match_ptr("regulators");
--		desc->ops = &pm8008_regulator_ops;
-+		desc->ops = is_pm8010 ? &pm8010_regulator_ops : &pm8008_regulator_ops;
-+		if (is_pm8010)
-+			desc->of_map_mode = pm8010_regulator_of_map_mode;
- 		desc->type = REGULATOR_VOLTAGE;
- 		desc->owner = THIS_MODULE;
- 
- 		desc->linear_ranges = data->voltage_range;
--		desc->n_linear_ranges = 1;
--		desc->uV_step = desc->linear_ranges[0].step;
--		desc->min_uV = desc->linear_ranges[0].min;
--		desc->n_voltages = linear_range_values_in_range(&desc->linear_ranges[0]);
--
--		ret = regmap_read(regmap, preg->base + LDO_STEPPER_CTL_REG, &val);
--		if (ret < 0) {
--			dev_err(dev, "failed to read step rate: %d\n", ret);
--			return ret;
-+		desc->n_linear_ranges = data->n_linear_ranges;
-+		desc->n_voltages = linear_range_values_in_range_array(desc->linear_ranges,
-+						      desc->n_linear_ranges);
-+
-+		if (match_data->has_stepper_ctl_reg) {
-+			ret = regmap_read(regmap, preg->base + LDO_STEPPER_CTL_REG, &val);
-+			if (ret < 0) {
-+				dev_err(dev, "failed to read step rate: %d\n", ret);
-+				return ret;
-+			}
-+			val &= STEP_RATE_MASK;
-+			desc->ramp_delay = DEFAULT_VOLTAGE_STEPPER_RATE >> val;
-+		} else {
-+			desc->ramp_delay = DEFAULT_VOLTAGE_STEPPER_RATE;
- 		}
--		val &= STEP_RATE_MASK;
--		desc->ramp_delay = DEFAULT_VOLTAGE_STEPPER_RATE >> val;
- 
- 		desc->min_dropout_uV = data->min_dropout_uV;
- 
-@@ -179,8 +300,21 @@ static int pm8008_regulator_probe(struct platform_device *pdev)
- 	return 0;
- }
- 
-+static const struct pm8008_match_data pm8008_data = {
-+	.has_stepper_ctl_reg = true,
-+	.regulator_data = pm8008_reg_data,
-+	.num_regulators = ARRAY_SIZE(pm8008_reg_data),
-+};
-+
-+static const struct pm8008_match_data pm8010_data = {
-+	.has_stepper_ctl_reg = false,
-+	.regulator_data = pm8010_reg_data,
-+	.num_regulators = ARRAY_SIZE(pm8010_reg_data),
-+};
-+
- static const struct platform_device_id pm8008_regulator_id_table[] = {
--	{ .name = "pm8008-regulator" },
-+	{ .name = "pm8008-regulator", .driver_data = (kernel_ulong_t)&pm8008_data },
-+	{ .name = "pm8010-regulator", .driver_data = (kernel_ulong_t)&pm8010_data },
- 	{ }
- };
- MODULE_DEVICE_TABLE(platform, pm8008_regulator_id_table);
 
--- 
-2.34.1
+> It appears that the Surface Pro 12" is equally affected (IRC reports),
+> so something is amiss with this particular patch.
+> 
+> 	M.
+> 
 
