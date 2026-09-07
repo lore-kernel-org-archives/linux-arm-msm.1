@@ -1,82 +1,82 @@
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1CAA8446BF5
-	for <linux-arm-msm@vger.kernel.org>; Mon,  7 Sep 2026 08:38:37 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 434A4443E2F
+	for <linux-arm-msm@vger.kernel.org>; Mon,  7 Sep 2026 08:38:39 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788770320; cv=none; b=diSFi8POp06Ijfo24UGIusaKq7h2bpevuTkSYocSCdpdqouL68WjKUPYHjqHEXU1jtT8hBqcol/9c1w8XFIdbl/Tydp7+pWqo0X3Cu1/ptjc3GW+8bjhvOCXU8kYEu68Iicf1V9zNQS+QN13tvIIOCXCzxu82LbhRLS2S/A2e+M=
+	t=1788770321; cv=none; b=SZML8VkC7lXiVbnKsVFaFRr911zl3emMUl3CB3wuuZDuyOQhhEQyqezyLQl/Grdu4/oPc5/+JuUsC+rOmZpBwHhb9rrMKI9R0ggUbklqdiigri28nF+OJYxXgFwOfdlkdQHuKp5CFyM6V03K4fTwpGn+p+ylaFFmHhlvzdSat5M=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788770320; c=relaxed/simple;
-	bh=DgNygwjQW1S4gERxv8XXOx2YJrza1CSfHMZkNg6qCgo=;
+	s=arc-20240116; t=1788770321; c=relaxed/simple;
+	bh=KSMNo8g9EzvzwyGzuw9rT37GzWc3bg5wEFNUMeWd3m4=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=DXzsL65TOwptqqGgG0+W8OxrgLp9Dp3//c3Qx1oTaPR26GqcxAwu15wGxpFVjs6y43uRFohOEV5kZSeWdKxKvrKlD+W7d4wyMgH9E2nOxHsQS7gjWTcmTC5VOui9qxWHIaU3rOi8d/2SmVvGBwfrl0YMJz/axgsQHair3VfImJI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=O1BcE7H0; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=TW+e1maM; arc=none smtp.client-ip=205.220.168.131
+	 MIME-Version; b=KGP93SNyJWZijxQ/kmQq5+YdfMsmG8VTSy7zSC2tnhwEa8bQeKIXqDdvDfTcCukL+jlVGjqZJZ33dIxgtMwJqSRaGQN3SirJ4HpAr3JapLsE6YD3vIGXSfgIV/B2q7SAkZJXWy7DeWFlcN9qS+m3IIgk4UVtLs5gY+TWY22w1RI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=V5Xu8pKf; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=gKjnsxOp; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="O1BcE7H0";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="TW+e1maM"
-Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6878Znsj2879067
-	for <linux-arm-msm@vger.kernel.org>; Mon, 7 Sep 2026 08:38:36 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="V5Xu8pKf";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="gKjnsxOp"
+Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68777f2G2146290
+	for <linux-arm-msm@vger.kernel.org>; Mon, 7 Sep 2026 08:38:38 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:date:from:in-reply-to:message-id
-	:mime-version:references:subject:to; s=qcppdkim1; bh=AiIpEIEQZ4E
-	IiKlUje19hDPydG7qbYBZVrWugQnhc24=; b=O1BcE7H07hA/E8X4Ke6ZC51W6EL
-	JXB9T1CcoEbIS2uQp/76XoB4zlRJJUrNEfCluZnQREdn3Mp/eQZK1nenAFsGFide
-	s+gN1NR9QvSojOak4yBNowyeO5ueTqOokjVTmMFyILqu9ZpGegRLG7/heMc+eY7t
-	9Soqr8bXRFM0t0wG/Xpjuvxv3I46TbIpxHlgyObieJJpAgvShK64bcDf4O32TSSw
-	rxLTqTt5EymSsxmDmOVyqETFFyC5vqvoYmxNf8vadf9hUNGUyzSL2GgUgGd2EgFU
-	4TOyYy1/Ygo/lf3UzCEk0dEe2BCkU2PCiGK0bDcTnD5kun0slgVYNzZakTg==
+	:mime-version:references:subject:to; s=qcppdkim1; bh=Ip+eqAI2Rmw
+	ja7TOAXqTLr12NGGvPjVQ2o1ftxzlnKw=; b=V5Xu8pKfscCanne5RdqZbZbv202
+	ETrilp+J6RiBrhsE6t8prwrm9uPVAUL5WMoGIcsPXThNk0zh1xoFpbXldBW1wJNt
+	wrOR0PORIlees9NixTlZ7jOT6DFkOjGkxB8Zi9+mZViE80XZHVucKyalIrQ7i0S7
+	HDBF2BhbAb3gqqciPNfbD5qhIei/ZSXoErEZO/0HpPifloasjh5kY+B2szIlLrJd
+	HIuZn4nZ+lMLfo/NYTudOA548nRtIqUYQoX6HYSxT2OB3tej2Tgw7AsbzoEVj87y
+	3HPm6S1+biQww5SOcUV8kyPnp9b8KkU0bcOEHiZeSzvHo/q0zTPVLmz8ZkA==
 Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com [209.85.222.199])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ghsw200dv-1
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ggc8jdvxx-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Mon, 07 Sep 2026 08:38:36 +0000 (GMT)
-Received: by mail-qk1-f199.google.com with SMTP id af79cd13be357-92e5e38fbc5so561654985a.2
-        for <linux-arm-msm@vger.kernel.org>; Mon, 07 Sep 2026 01:38:36 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Mon, 07 Sep 2026 08:38:37 +0000 (GMT)
+Received: by mail-qk1-f199.google.com with SMTP id af79cd13be357-92e52306621so449601085a.1
+        for <linux-arm-msm@vger.kernel.org>; Mon, 07 Sep 2026 01:38:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1788770316; x=1789375116; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1788770317; x=1789375117; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=AiIpEIEQZ4EIiKlUje19hDPydG7qbYBZVrWugQnhc24=;
-        b=TW+e1maMacdVNvtM8priGH9abkMQzXcFz2MdO+yTNgg/5xnmYzuHmr8u43kJ835RQe
-         mGIlHuf6udtk9JnkZGh8jAPhO1yKc0gGYeLddmddRfmah8fQJTEzG/xGHGumota2E6FB
-         byqIW8BNf1DjaNvtMwsgHNgao7FYGpcauTILgCNbGSFHA2xpplDCu4VaowHSU7xXPoKc
-         tuBADkspISO1jQIG8muNSLz7oPmgWnii1+Tki4uDrZMXsc6obcTqSGMGaejZcVCFTDeO
-         GDday1Te9K8h5eGTEydhNTK6ResOB1fXFUDvd6VvYX4M+SM8AivFQVMEhMguyevo7Ly4
-         l+Yw==
+        bh=Ip+eqAI2Rmwja7TOAXqTLr12NGGvPjVQ2o1ftxzlnKw=;
+        b=gKjnsxOpiHXM5tUTgXzj3U5s1N7LS2oPP/SUZgUuEzhyzG7p56PJcEMsRsmR83ChQ+
+         hOkXhxxmEYJL9NARhvRtrQDdY3KgJ3cHi7iuRC8O3SRor0tQbCi+cjE4H6wubfeUqLG5
+         m/0QWW+MhsAwNtgy8Nb00+jNZTN3FvVETigT+SH0K0dqkT+Vs8YLfEj1ZUAqJ68yKDnR
+         IEHkhFQEdNXgGhcS+6d6+OI4LiCZpGCVxi1cwiMEhw3w7gXTtvlzpco10VQheUzjFq9x
+         eMgjIhObOROa0lO3WRSpPjZGi1GJF9am/4zHsl4KRDYXP4rskFBm0PrIv1pNgBubsYCh
+         PtCg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788770316; x=1789375116;
+        d=1e100.net; s=20251104; t=1788770317; x=1789375117;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=AiIpEIEQZ4EIiKlUje19hDPydG7qbYBZVrWugQnhc24=;
-        b=GEYWjhe3yhXFy4B20YMzTlX1skexJwkeuDnKUzbAlsQ9+/MhC+/CY6lG+c5aRzEKl0
-         //FSAE5uDdTXfI2TouCYz2ur6A7nI5H5QugWl+dVV3IkId/8BoxcDF1joXbQG3zObq7+
-         D0keqko7pgydfI+WlOcwIRwrvqlY6DrjwSGdBVFAjVUpvaPd5JDywGh7GCSmsmSOGtfV
-         eE5J0JJkb0guaQa7tHecMNMJ8ONeHW3H1upvt3S5LK53MdurmO08/FtWkNZEoYeE+VCQ
-         4ujXOAPGawLG++OkxEY0e9cj4NlJjMeY0vvlTe2JVwJIdW9cH8DDYaddwJ+o0lfkhYzg
-         vQ8Q==
-X-Forwarded-Encrypted: i=1; AKwUvBxdF0D5UrUzOf1tO3wmOpIgd+HyyPhqpWQJD2/WyFZfBBd976MV30R22VaOjYpE20HQHkRAdXK1FXNfJtcF@vger.kernel.org
-X-Gm-Message-State: AFuF++mTSAZuJYd69KHxoR/3R+6re9OYsYCz2fw0DkOo2bwD6tnqf9M4
-	DfmY48ZryWUC97xsRnh57lqOhLDx5VWWWJfPeE+6iPs663xvxViYp97xv50343k8mq4ZXWQYET/
-	YrUC3hCHpx+2AAUbjYZNRg71hUQZARLDMtYQvbyujM/12SRunnUpNUlmvR5+VNm/vhdzf
-X-Gm-Gg: AYBFou35IghWSWkAop2FYCUKCBVaTaN9P9mBWHrmS5FtSH0utOH7UuQc0lqkLujIfTJ
-	AbvKuBVM7uhdp2ju0Zbj94DZK65FthUSHIta5DQ0Ac04MAlojFYzzIFXz18gsfOU5mubc/PVfW5
-	gsz3ygk5Qmpw2234DLvz4f0yiDT29piVyybK1igJ6/5pWCM2fnk7ejv13TTES+8QhwgmKBMNb31
-	x487CSWP6PmiYCmivk/nuNS1NpOoqGXsU5g7YvFjSizqVQG3wTos2GBAEbTmGvJRg1/X5+ZKll0
-	owcqs3cFCcmFmlYSrVEZ2fZbLGVxuiCKIdzxiS1zdgN8ZglI9TeCN5PGUnXw1FHuubvX29ibkMo
-	sSVYNS08OYrQxNw==
-X-Received: by 2002:a05:620a:5642:b0:939:34c6:a333 with SMTP id af79cd13be357-939804a4609mr1838515385a.40.1788770315559;
-        Mon, 07 Sep 2026 01:38:35 -0700 (PDT)
-X-Received: by 2002:a05:620a:5642:b0:939:34c6:a333 with SMTP id af79cd13be357-939804a4609mr1838512185a.40.1788770315103;
-        Mon, 07 Sep 2026 01:38:35 -0700 (PDT)
+        bh=Ip+eqAI2Rmwja7TOAXqTLr12NGGvPjVQ2o1ftxzlnKw=;
+        b=o5MqZZto8n9REA3Tcmzz0tL8LxK4BsfBT9LVzB9DobL0Tkb4WAQ7A80gdcWf4Ry6+x
+         qJbMd29U4yBip+PQSD5onN2IaF1gN42dze26KLvFtR/zUu1kTu2ax4N3AgPK6ouBFRnD
+         i4uVp4b7J+LwgEH22PN/MfdCqv9O9bnHWTQHaA+1cp0HYdzZSX8SPePIUTBsAxD2Gr5f
+         iwkX/pwXNScgTmcUL3kSeLmxcU9GpyZClX9/xpCCoOAnIbHVotMhZ0wFp9n2AOpZjI0l
+         528S4jNw0Lt+td5Ty3J+wP4ejoq0Q8Y8TtGlk1TDA2EV4sPuDf6Sqn/tbA3/FF0Cs6vw
+         lEng==
+X-Forwarded-Encrypted: i=1; AKwUvBzr2qHqPg4gPPhJ+BrGIxwaUHsr+hCbQdAPApTaDT4utlcuTtOjAjlIz+tCQhxwfAGve4puGRSRsrXKeZkb@vger.kernel.org
+X-Gm-Message-State: AFuF++lIkZXSZ899b/kPJmZC7nPnAIchOoG2J+bO12BBNe40MuenlMGo
+	w2AM3TH/IAZFMAg8SZmPpmKWDIyUcCDfduygB58+vuy4zzgDHjkJtt10IS91f3YBmEKIklWjPjs
+	ImH6ipA1sKOppyr8fg+hRYSHGikfQ2W7lgPpt4AK4pn3R7iMD1XoVDQg+cx5YROF9iWM8
+X-Gm-Gg: AYBFou1yqSj7DJomo8WYyPLCJ2D8as6T7i3j6w1/ePDkom5/ia+w0S3KgIpDyamLvJg
+	4L+fD+7HW2m9aXPWFe4PmQy7sOYk0P/3QEf4L8hR6pTeLuICdYoRsnD8DX57phzxqhsxJLCHJgw
+	pU7EIOB0LVbQ6R6rs0HeF/4BAHhxUOVA/68SNu5/yKF7t284RKFz+NTrOxgf3jZ1k5wXyKh8VHs
+	hFqruCjjFfkuywSh5J36cgaQKa8Db9ehRY4ShuMsX4bGSouWTmGh0waWQPaqv8VZM+AtBe6vUcv
+	QFS7mr/IiHMjRt/bJTmBGy7fqqepUgxscAJh/H1n7bOPX3PwPm6olkUR0KGhnyPLuP5G5McY6//
+	+qbmt5K+yyNPD6A==
+X-Received: by 2002:a05:620a:3d02:b0:936:ea3d:9313 with SMTP id af79cd13be357-9398037be5dmr1382138685a.20.1788770316943;
+        Mon, 07 Sep 2026 01:38:36 -0700 (PDT)
+X-Received: by 2002:a05:620a:3d02:b0:936:ea3d:9313 with SMTP id af79cd13be357-9398037be5dmr1382134685a.20.1788770316450;
+        Mon, 07 Sep 2026 01:38:36 -0700 (PDT)
 Received: from debian ([5.133.47.210])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-485883c6ba4sm30852179f8f.25.2026.09.07.01.38.33
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-485883c6ba4sm30852179f8f.25.2026.09.07.01.38.35
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 07 Sep 2026 01:38:34 -0700 (PDT)
+        Mon, 07 Sep 2026 01:38:35 -0700 (PDT)
 From: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
 To: Mark Brown <broonie@kernel.org>, Rob Herring <robh@kernel.org>,
         Charles Keepax <ckeepax@opensource.cirrus.com>
@@ -93,9 +93,9 @@ Cc: Krzysztof Kozlowski <krzk+dt@kernel.org>,
         devicetree@vger.kernel.org, linux-arm-msm@vger.kernel.org,
         linux-kernel@vger.kernel.org,
         Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
-Subject: [PATCH v2 06/11] ASoC: SDCA: class_function: xlate sound-dai cell by entity index
-Date: Mon,  7 Sep 2026 09:37:20 +0100
-Message-ID: <20260907083727.733705-7-srinivas.kandagatla@oss.qualcomm.com>
+Subject: [PATCH v2 07/11] ASoC: SDCA: register SDCA_FUNCTION_TYPE_SIMPLE_JACK in class function driver
+Date: Mon,  7 Sep 2026 09:37:21 +0100
+Message-ID: <20260907083727.733705-8-srinivas.kandagatla@oss.qualcomm.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260907083727.733705-1-srinivas.kandagatla@oss.qualcomm.com>
 References: <20260907083727.733705-1-srinivas.kandagatla@oss.qualcomm.com>
@@ -106,96 +106,82 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-ORIG-GUID: ln0701W1pKwYHKvu09fhPynMhvpALMET
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTA3MDA5MiBTYWx0ZWRfX0d+JazMubH99
- IF3aG4QbHcA6eQntkudh2rNp5nfXcqilb5iE0ylGvYN8G5HLmdSmEMKQLm4bx8t/cOHIAE4Sf/a
- ZrWnoTImpew7FWgPj5uaduFCbkh9Wsc=
-X-Authority-Analysis: v=2.4 cv=eKwjSnp1 c=1 sm=1 tr=0 ts=6a9e780c cx=c_pps
+X-Proofpoint-GUID: K_8xX035VdS1nySf4bw2EeobpK4QvsTP
+X-Proofpoint-ORIG-GUID: K_8xX035VdS1nySf4bw2EeobpK4QvsTP
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTA3MDA5MyBTYWx0ZWRfX5rGHjtj4FECo
+ 8O2Fiq3PbN3cG0oe9akeiAURVDBPj3Idm2LN65EnmIeWRVAZiiZf+7f47Z/anPSeq24VnzW4iCK
+ 46R1SYqhRxVnEZNB1Kbrva/PFRJV5+SX3nrJSYKpii97Wx3Nlq01ZT2EF8io+EFb5znntR6w0HR
+ kHnXYMcScPiONWqEvc/vnsb+T3B3OdJVQYuu8VYReWfe5D/zl4JXYV1Ig5jDnsYTm9l4h6xiGDT
+ EKFWaFU5o7rcJTntAumQA1fV0NC+eaJd7jpwuEeU1C6D8lul0JD9lKS42MPftEGGeGfj9r+KPtO
+ 3hQ8GRhoImxNaoBqREPpzBsXRxjrDADWCEwIeXNpOCYMkUy4TWkbgQkqPa4/rRuS4QtjEJh5zvl
+ BpUNtTw/1przhp4BUqImlR5RQH7bUeO/IEIX24SLZBKcxWSmKwo7x4LT0/y3df8skrzyfABl4xO
+ hSJ0oqCwNNQPXyv/H8w==
+X-Authority-Analysis: v=2.4 cv=DYgnbPtW c=1 sm=1 tr=0 ts=6a9e780d cx=c_pps
  a=HLyN3IcIa5EE8TELMZ618Q==:117 a=ZsC4DHZuhs/kKio7QBcDoQ==:17
  a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22 a=EUspDBNiAAAA:8
- a=D7LRd5SpCY7MsyqoJ6wA:9 a=bTQJ7kPSJx9SKPbeHEYW:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTA3MDA5MiBTYWx0ZWRfXy9ryqj3GG/jQ
- q+zvSyuVe9Q6/S74k7hP5DDCKuzDlTqxynPnnNn/6agzSJrEcecOwQA4CG1lnURO0h0Dh/1TNiI
- UPm4ifhAru34vOI6rCEiXTKYe/FdfcruFcj7Rzm2yxBar5WP7w42Y9quFsock0swdUazWhgT9GE
- oy+P8em9XkAVKE9AYHvtiVncMK1MULimesMQwx3k31PMGwYVOaJpF+6E2KNsbUscixiZM05oAnS
- Wq/hXgyrgXP2bPVxBHDJcHWbychvdWOKQVoyGuIQYDUVcHoAMu/WrpbxN/2RA7khRuW6wFeDr1n
- AZo8v+ua05DXzpvZG5LzXL0SGYeI7ZAbB9bz8qWCADW8hqKPbDvnUif7VOvuOcbE5QndPq73TUG
- prHMBc1JOKikmmX9msa+FvjKc7eEfudIxKoMzv7j+gk3Nx1kYbR9zXhyPFOVHvgItCtUvuwJY6v
- uMWB+CCjzyihksG8d+w==
-X-Proofpoint-GUID: ln0701W1pKwYHKvu09fhPynMhvpALMET
+ a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22 a=EUspDBNiAAAA:8
+ a=w1d2syhTAAAA:8 a=IEwj7ntJ1M3WgPGe5dsA:9 a=bTQJ7kPSJx9SKPbeHEYW:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTA3MDA5MyBTYWx0ZWRfX594ChkGKtQ+R
+ e+Qo/HAEx7EMT7vVKRSCmd298o7hP4RlyDj0sUWCx8Qu+NyNQswZ+0lGpGWApwdQA4Z+zpyuzJw
+ 6amK/X1I45OB8as5ixduCQW6mYLf1YY=
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-09-07_02,2026-09-03_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- bulkscore=0 lowpriorityscore=0 malwarescore=0 priorityscore=1501
- suspectscore=0 clxscore=1015 adultscore=0 spamscore=0 phishscore=0
- impostorscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
- definitions=main-2609070092
+ phishscore=0 clxscore=1015 bulkscore=0 suspectscore=0 malwarescore=0
+ adultscore=0 lowpriorityscore=0 priorityscore=1501 impostorscore=0
+ spamscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
+ adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2609070093
 
-sdca_asoc_populate_dais() sets each DAI id from the SDCA Function's
-entity array index.  ASoC's default of_xlate_dai_name treats the
-phandle cell as a positional index into the DAI list, so on a Function
-with non-DAI entries between dataport entities a sound-dai phandle
-resolves to the wrong DAI.
-
-Register a custom of_xlate_dai_name that walks the entity array and
-returns the dataport entity whose array index matches the cell value.
+Add SDCA_FUNCTION_TYPE_SIMPLE_JACK to the class function driver's
+auxiliary id table so a SimpleJack auxdev is bound and enumerated as
+an ASoC component.  Wire set_jack for this function type so the machine
+driver can register an ASoC jack against it.
 
 Signed-off-by: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
+Reviewed-by: Charles Keepax <ckeepax@opensource.cirrus.com>
 ---
- sound/soc/sdca/sdca_class_function.c | 34 ++++++++++++++++++++++++++++
- 1 file changed, 34 insertions(+)
+ sound/soc/sdca/sdca_class_function.c | 5 +++++
+ sound/soc/sdca/sdca_functions.c      | 2 ++
+ 2 files changed, 7 insertions(+)
 
 diff --git a/sound/soc/sdca/sdca_class_function.c b/sound/soc/sdca/sdca_class_function.c
-index 8bca88865a4d..ab043e23878e 100644
+index ab043e23878e..713a34d5954a 100644
 --- a/sound/soc/sdca/sdca_class_function.c
 +++ b/sound/soc/sdca/sdca_class_function.c
-@@ -216,9 +216,43 @@ static int class_function_set_jack(struct snd_soc_component *component,
- 	return sdca_jack_set_jack(core->irq_info, jack);
- }
- 
-+/*
-+ * DT phandle cell is the SDCA entity index (matches dais[].id), not the
-+ * positional DAI index the default xlate assumes.
-+ */
-+static int class_function_of_xlate_dai_name(struct snd_soc_component *component,
-+					    const struct of_phandle_args *args,
-+					    const char **dai_name)
-+{
-+	struct class_function_drv *drv = snd_soc_component_get_drvdata(component);
-+	struct sdca_function_data *function = drv->function;
-+	struct sdca_entity *entity;
-+	u32 target;
-+
-+	if (args->args_count != 1)
-+		return -EINVAL;
-+
-+	target = args->args[0];
-+	if (target >= function->num_entities)
-+		goto err;
-+
-+	entity = &function->entities[target];
-+	if ((entity->type != SDCA_ENTITY_TYPE_IT &&
-+	     entity->type != SDCA_ENTITY_TYPE_OT) || !entity->iot.is_dataport)
-+		goto err;
-+
-+	*dai_name = entity->label;
-+	return 0;
-+err:
-+	dev_err(component->dev, "xlate: no dataport entity at index %u (num_entities=%d)\n",
-+		target, function->num_entities);
-+	return -EINVAL;
-+}
-+
- static const struct snd_soc_component_driver class_function_component_drv = {
- 	.fixup_controls		= class_function_component_fixup_controls,
- 	.remove			= class_function_component_remove,
-+	.of_xlate_dai_name	= class_function_of_xlate_dai_name,
- 	.endianness		= 1,
+@@ -408,6 +408,7 @@ static int class_function_probe(struct auxiliary_device *auxdev,
+ 	switch (drv->function->desc->type) {
+ 	case SDCA_FUNCTION_TYPE_UAJ:
+ 	case SDCA_FUNCTION_TYPE_RJ:
++	case SDCA_FUNCTION_TYPE_SIMPLE_JACK:
+ 		cmp_drv->set_jack = class_function_set_jack;
+ 		break;
+ 	default:
+@@ -593,6 +594,10 @@ static const struct auxiliary_device_id class_function_id_table[] = {
+ 		.name = "snd_soc_sdca." SDCA_FUNCTION_TYPE_RJ_NAME,
+ 		.driver_data = SDCA_FUNCTION_TYPE_RJ,
+ 	},
++	{
++		.name = "snd_soc_sdca." SDCA_FUNCTION_TYPE_SIMPLE_NAME,
++		.driver_data = SDCA_FUNCTION_TYPE_SIMPLE_JACK,
++	},
+ 	{},
  };
- 
+ MODULE_DEVICE_TABLE(auxiliary, class_function_id_table);
+diff --git a/sound/soc/sdca/sdca_functions.c b/sound/soc/sdca/sdca_functions.c
+index 47dedb62c24c..25f95575c731 100644
+--- a/sound/soc/sdca/sdca_functions.c
++++ b/sound/soc/sdca/sdca_functions.c
+@@ -79,6 +79,8 @@ static const char *get_sdca_function_name(u32 function_type)
+ 		return SDCA_FUNCTION_TYPE_SPEAKER_MIC_NAME;
+ 	case SDCA_FUNCTION_TYPE_RJ:
+ 		return SDCA_FUNCTION_TYPE_RJ_NAME;
++	case SDCA_FUNCTION_TYPE_SIMPLE_JACK:
++		return SDCA_FUNCTION_TYPE_SIMPLE_NAME;
+ 	case SDCA_FUNCTION_TYPE_COMPANION_AMP:
+ 		return SDCA_FUNCTION_TYPE_COMPANION_AMP_NAME;
+ 	case SDCA_FUNCTION_TYPE_IMP_DEF:
 -- 
 2.53.0
 
