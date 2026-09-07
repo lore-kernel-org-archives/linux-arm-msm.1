@@ -1,100 +1,100 @@
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9AA0F4734CC
-	for <linux-arm-msm@vger.kernel.org>; Mon,  7 Sep 2026 11:43:26 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8BDA048CD55
+	for <linux-arm-msm@vger.kernel.org>; Mon,  7 Sep 2026 11:47:32 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=205.220.168.131
 ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788781408; cv=pass; b=WkseW+ZhBeg6q5uUagI00r13vISTwVR2sPtnSnOU6e86/ZmUqhxs1eLTI85qADdInoSGguJuIR5J02kD6VM8AwMoV5IUvF42X94xhxVcs5CQZEneiHdB6CW8fug/XIJjk5SwkVQDjK4/rQUIw5nz8zlTBVR2XdcRp+nrtqOq2Us=
+	t=1788781654; cv=pass; b=GEaFaZKcCc/D4fmsJUuP+841zaYWoExysGyH/j+pOwkJxCCBSNDGn85qhDU0OU2Dj8vIhR1UTndbHAE3QTO6ggdgIvmaStkkBELc/VCRJz87poUsbbVFNULQ7KKwev/4IfXvrU2br9NWXFKcDEyHB0aNNvcIJc7Bx4Ou8K1JwMI=
 ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788781408; c=relaxed/simple;
-	bh=Lk0NwkKaKa03nRe9RqScZ5iUpg+oUlAZMRhghfaW/nc=;
+	s=arc-20240116; t=1788781654; c=relaxed/simple;
+	bh=Wer6SSG/uDE6Ee8Fljcjhj1Fc9lWtsOpuA414gbFytM=;
 	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=P+ozU6gAcEtRkkkYCMo6xI1cexhfoJ4ySqXnTdxXYyLKWBqLai5yFMJVYS615+WJV3eLgJ7dxAVhJeb1aKg8AKhiPsek4KJJ4vxhJlaLyu6BwGOp2jUhky1oV+qVIlvZe5x3jzF4RgTSMUPpvelrOZm9e1Qa4a3kD+ClOwk/E7o=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=bNnNMXoO; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=i7Al/KpY; arc=pass smtp.client-ip=205.220.168.131
+	 To:Cc:Content-Type; b=T5y870W2MVvAqkt+yoEc6GxqT5qebOF5rPMOHTjTEwJmf7DbBbH2Z9j3DLUMsWh9mCvmJZXuNgBf8ewF5ZS67C09nkvDTjs4KevPztgsLOWZGwii1Z/3d9rhyVjVnDzfMPD4EzEabltjIdxkXEoAZaEQEQWcGgRGvhE8yUCpSnU=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=KVh+6URp; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=TMEAMZuI; arc=pass smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="bNnNMXoO";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="i7Al/KpY"
-Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 687AnKB03873703
-	for <linux-arm-msm@vger.kernel.org>; Mon, 7 Sep 2026 11:43:25 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="KVh+6URp";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="TMEAMZuI"
+Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 687AmwPE810024
+	for <linux-arm-msm@vger.kernel.org>; Mon, 7 Sep 2026 11:47:31 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	NrZIDbiaSjZjt2eseMzh7EbAr3X9sRZOrE3kigeE+gM=; b=bNnNMXoOqdD7JNwG
-	cqCY3/9uRIX7PheA1DVl6gy3R3mwkEtb1MlRcUfo66B/mNz14ZL/VZlbf2juIhnI
-	RisqNH5VH+7qX3IuMfvrJRSGWQCUxqGeJzoTK3afmL+uEyz7ZM2TD8zbh0sQ5wPX
-	LeVUAUWqVSLBMsQexiYIs4fYruL5LI2/OB6Y2M9kzCMxDL4XsEL/SIM/17dYL4Y0
-	ZGtV0+ZJ48lwDBMtoynXMFK5aKzhCvHguw+YHsLPe+ginpCKw2ZEEIaLa/mudGMi
-	ie/6FMtu2vNKg4fA9WH/qOFSSxF7AiT6BMct1l0stZnfhRtD8Aka4qm9O/RNZXde
-	Mxs3fw==
-Received: from mail-yw1-f200.google.com (mail-yw1-f200.google.com [209.85.128.200])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ghnmj1u93-1
+	nyr2Dn/TQ2r0AHguZSfEcPQuWVOImDyOiCZxPv9gNbc=; b=KVh+6URpAkw9KsmP
+	irbg8XvFBh9A6eBx989QXAL13WlV1Jrh0mmYPZdj5c01TfzI5xEL674WJwhfe/jb
+	OUAF1Vr19KYwnmcSyjRMXKsxQSN8Eki9ZmSKwly25d8wWP0yCrnERjKfhU+9MroU
+	prIf7hQRZvLYIqHCoodMOd3xbVg3LhDZ7fdV3HctW0nwhRcCI28jcWO10KUi7QDo
+	zwJEogawHXaLyFiJgy+m3QvGGkIIyLD96we8/PazWpLwlWmaAo7pC0I++u9MsEmW
+	CT/UDrMsb34cZOdGk0moA5xFjihWv1A2af3GDOcLHXLBRxtFA09DbYaL3fVux8C6
+	i03mMg==
+Received: from mail-yx1-f69.google.com (mail-yx1-f69.google.com [74.125.224.69])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ghrua97u3-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Mon, 07 Sep 2026 11:43:25 +0000 (GMT)
-Received: by mail-yw1-f200.google.com with SMTP id 00721157ae682-81eddfe28b4so63115837b3.3
-        for <linux-arm-msm@vger.kernel.org>; Mon, 07 Sep 2026 04:43:25 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1788781405; cv=none;
+	for <linux-arm-msm@vger.kernel.org>; Mon, 07 Sep 2026 11:47:31 +0000 (GMT)
+Received: by mail-yx1-f69.google.com with SMTP id 956f58d0204a3-66f7d131b55so4777993d50.0
+        for <linux-arm-msm@vger.kernel.org>; Mon, 07 Sep 2026 04:47:31 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1788781651; cv=none;
         d=google.com; s=arc-20260327;
-        b=sLPc65NYELf3+oJs63vmCJvTedCTR4O97AGQ5cPYvyIvrXuhiB08+TKeyTwQ6luWTu
-         a1OBnUcNt2MH1eBf/fWApzsBgGu4iI3tsjsWx4j+KsR+rmCszdCrjKPqQWEE+oXwhJK/
-         V2NHxWbxgMtCn+w2nYL+zmZa4tDLaTB/Vlxfhp5h7P/CPoIFETM4miluES02BhdTsUd3
-         lswxP4rsiUTnjL53DevkWfF4puY3778+3uxZhM+o9wZHgP2LIphzTrkM3RhTmJAz+utw
-         rLtRPnH7kU3do6BxViD1Bk0hgz/K0YA5Pum7Xuj5gC7NdJQh1zOvoNVtVqLE9oQMte47
-         k3Og==
+        b=gCR6/xGO2wLoroU4QeTeYP3u7rYX0JaQb/ABfV06PCEMZO6o8/cCjrBZyR68qh5GcE
+         GLmaGzAKlIu/A1cDe1TRs7Qhse2OQgymJnCqv0DFJnM17snvgDCdfov9V2RLgwB2gx2r
+         dW6fklTMBsIQ5AWCygA7R9iHtRhWQsjNbHRZEDlxNMlC662JyYF9nSzKcizn6uQhFvQs
+         PZ+QuswrL8WVbLRvg3uZd9AOBZELwdW/i26O7f2Is+t/KZAqANB+zSrNL0UDJzGOKg3g
+         is3QMHqFvaO9EpsbGmY5ubp9jfoC8pj7cXmRJDSld1WbEWQar9OwocDBzX58W3HWKmBU
+         okQA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:dkim-signature;
-        bh=NrZIDbiaSjZjt2eseMzh7EbAr3X9sRZOrE3kigeE+gM=;
-        fh=EvSji7UVS70OQQCumFy0eKtP2n3QyqWkT+RqB7TH4rU=;
-        b=Ju+6YQCHceFPw9ZtgytlQcfjbrIq2QerJU+zOpRjVj0HAo1gKccoci3ElIa9Ktd8kb
-         Az6vF3XujtmXBOdtNTAZMUukIvTXdi8SfpbYrijFDxww5f7e9Xx7PHRezEAyq8GfQxvO
-         kx4C3q1pFhHQT9jStyU/BVjmwDE4FzlwfsCdZOlE9omGAT+JPWjr57dyQRUvUWZ2BTk1
-         OMRSsiBRwbQipcY7EUSWkcyk2L8KC822dcm9HqYx/AylWZX6osbECNlRoiNZ3gU4HfQg
-         v94Tggnsn8htmc7VWllOW2x4XegFWz3+JBly1hFi10LYvMpMmC1mpzCLMMRhoXAzHXmA
-         W0DA==;
+        bh=nyr2Dn/TQ2r0AHguZSfEcPQuWVOImDyOiCZxPv9gNbc=;
+        fh=RVd9u7f3RTBzLsLAn/T0qxM47DawBemhpE0wXnNpcYk=;
+        b=jMUQDXwtxESfkdydAySnRBcZHbZ3vCAhCRynCSdNoiY394DxboOVTwj18DV4uuRhVF
+         5OQ+LablMWRUSb/b5kFjD5d2fhO7EyCJ3EyKKjc2ZRJ6//TAj69DoOngDPgNP3fOxo2b
+         8JuBgF5IbtMlEGYjBkkD8aghRUZK2F9p9Az+qlW6F03tkZ+FBoF/VIxeVmCB5XQH420C
+         Zt+uf8IVshPJR8gwLF+Axzb6PnpKYr9FBqt4uKHUsf2EYphotC5O3PCSrc085i+YlSHC
+         j2KQrpclvrngsBbfrKe6aTqfp35ujHiuFSG8J4U29zW7uhGYyfC5v4veygrx3ilUYeUv
+         zINw==;
         darn=vger.kernel.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1788781405; x=1789386205; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1788781651; x=1789386451; darn=vger.kernel.org;
         h=content-transfer-encoding:content-type:cc:to:subject:message-id
          :date:from:in-reply-to:references:mime-version:from:to:cc:subject
          :date:message-id:reply-to:content-type;
-        bh=NrZIDbiaSjZjt2eseMzh7EbAr3X9sRZOrE3kigeE+gM=;
-        b=i7Al/KpYwLsH8EjWccZ0SiN6mFdWjVD+yXb5MNW4Q8VfSl5De/CFLFRjDf8GnjrBA6
-         jwHWkv+6pbRZE9BBCZb7xnkVJrXNwv7PWWPKimJxRUDVAT+bcwbWk2TX9N8EOaOjOuwW
-         SGJ0kL/hn4neuucB2Nqyk0gf51+0KjaalKKnOXvOY6JPEGUKLFcgV5Fc+oZhggznm3eF
-         BGTmKIDZLTuvUTPCRu53Gj93uzu3MeI/vtIsjQWi3IFU+TMhJp6A8hqR02Pn85Dnf5yF
-         A8W9QQaWuSOzjQqkXjZ15v8V69IwXv2CBrKni+yy4sos3fG7fBj1NDy90VLN1yN1Yc3C
-         Ufmw==
+        bh=nyr2Dn/TQ2r0AHguZSfEcPQuWVOImDyOiCZxPv9gNbc=;
+        b=TMEAMZuIT+LoJN2NefwoKobwwgz8IHx3Pz9ypLAlt+KzOSO+WWA5SKIbwPGvQFaIiz
+         EuV5z6NhFwed8jM4Fo0DazGqrALOTk8XTL79OveVX3CZxDvBhJO/RaEvgc0kUSxhe5Rn
+         ZseR4Rt/50I++/hiVAuv4sY5agcEjGx9GV4UGkasgt3b8gm4IV+jjqeSsorzO1Mv69fG
+         Dyk26GmTx3IWJ0qB5OvlsgqF6uqrv0x/D3EqdeAEQblrTqwlELVOdhexUWwDjzE6FC/m
+         sEuKq2ObZAYVOusjDTp34dhKn8pzx2gRyWeM1e2bHxKpmv5HmUS1+xiDB9FTRL1Iy5Mn
+         qEqg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788781405; x=1789386205;
+        d=1e100.net; s=20251104; t=1788781651; x=1789386451;
         h=content-transfer-encoding:content-type:cc:to:subject:message-id
          :date:from:in-reply-to:references:mime-version:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=NrZIDbiaSjZjt2eseMzh7EbAr3X9sRZOrE3kigeE+gM=;
-        b=fKbkZS8zjzMMo1NhBleZX/oDqB0Bd3xFvVCNzepmnOleK3W8u9YpF3bK9fg67lL0Yb
-         ZsHhNpUvG6Cg+mGpcbQN8OZVFGFmqsrrQ43QSsrL61xyPDKARQF0wRC+wjqD+nDlN4aj
-         z/QyFVlPU+U6PCq+PLDMirWZHTI6+sqpNBbfyfPyr/M+P5YLPUIMgNcManwJ4hxBh+g/
-         GskARn/jhMbXvz1MAVkcBRsE40knUGWr2hzOEHGNthTQuJcimJ8E3W8qgbHzzizoylj1
-         VKAO83pg59dFmxdMRlsIxQ3Uijhmgqwft28V3JhPmrU1bzTIvngkh0+yH8idZOFReIl3
-         4odw==
-X-Forwarded-Encrypted: i=1; AKwUvBy46LR3EUfvVoYgKmw93PU8CF8KykPsye1dfm32WEk97fyicnoSCHuZNjWr8ZdrgSiPeOgkdOCE2laPdeoW@vger.kernel.org
-X-Gm-Message-State: AFuF++nJEL0t7kUKS4XEYgfGNMbtnpPq0Zh1YhWOnctPuaDhlx0llgbc
-	bYxbdcMUcG6Nx4iZkhrWWCwlWxdY5VPtMwXcuOaczKM995Cq2yuExxBjUTn3N/E4ZEkIpC99MgE
-	16To33VC92mlh06N6BR9HnJxZDWUcwZOKHCAHpphJ86u2klcyubkdliog7mAvB/mNbqtxtZctJR
-	uFa61KY4AWXAH+l9diLVrKCR4Nkzms92wI3PEbS8YNZoVdu87u9i9XXw==
-X-Gm-Gg: AYBFou0EJEffYaQBCiiDLGaq+cc2Cm2ZYL9R/2lH/xWtFhSXik1rbmdTEetUk92Opfq
-	iFhdGUA8ZkwJyxEmO+LBhB3HhfCi+Q6jTVebk4ULQN0MBxGMvRgPX7qWvffHHO6SSAjFVjPsUFR
-	KpTdulDSHm35yYn22WQaUla90KSL2uGxDpe/K8QZGQjSfuOAyn/tEke3tqLA==
-X-Received: by 2002:a05:690e:b8d:b0:66f:c774:5b4 with SMTP id 956f58d0204a3-66fc77411b8mr2509005d50.78.1788781404686;
-        Mon, 07 Sep 2026 04:43:24 -0700 (PDT)
-X-Received: by 2002:a05:690e:b8d:b0:66f:c774:5b4 with SMTP id
- 956f58d0204a3-66fc77411b8mr2508986d50.78.1788781404250; Mon, 07 Sep 2026
- 04:43:24 -0700 (PDT)
+        bh=nyr2Dn/TQ2r0AHguZSfEcPQuWVOImDyOiCZxPv9gNbc=;
+        b=az1t1L1lQiEmtsQttojixn/yTx12ZKwc6VP/fwgvlpw++Nzw44gjNygBrd1y/a/U4d
+         9lixzyshroml0/iavfSOyWmOP4vjKDHj9mypV0PfFEkveroq3o6AWb8Tu+UhxwbwXyZj
+         8084qcYlkgByuF+84Ko51n2hsRuXglo6TD7HSnfFsDPwKdhOSbjwuukiHCHb5XPvn5cv
+         SuQKJDBXHHMVtGEKmJdx2oCDjaXGxvHBGJDgpxV2/aL751Zau3/z5uP5t+a120VzxNzB
+         r2Yc6tAm3V3/bvOMI1vthhfh4/bNwEPNpJ6Hrmug6FUEhcVrFdjk+BV8dRXGglt126ET
+         uIRw==
+X-Forwarded-Encrypted: i=1; AKwUvBwVNNloghXnUMVX+BSEjbS4qZT8anSPe8qeZtLtoGSCsCJo/RIvSqqJUYdgfKbUCzqHTNzvBhvOrIRUYsrU@vger.kernel.org
+X-Gm-Message-State: AFuF++lcaMMBW1qM9GyIcpsxUqdoFnWHRdXgN3nZth76uHTVFmp9uzuZ
+	fssu/X7hzDEKOU0sU/aHS6SJ0J1wvM06Xs87CQKxC+vPuhj7Ty4INN0zyNShYdTUucKSGrxnoxf
+	wqLUzYBs6/5qbd9lR5pkiXjp8AnwlAFhOV0HrhIBxzeyAnDziecr4CdtBhHxfja0LtQbp+ryYTR
+	ar+ombvNMgPiWY4V+11pEnJnP2TQ+qEWusVv4F8VtzDkw=
+X-Gm-Gg: AYBFou3JkYowLBqH1i5HuL0PaJh4jNjLsA6GIJSE7Ebw0ucKjdubqspgCYwxTOacPrJ
+	LYJEaw4+bty0F64On2gCFgcFeyOBlonk4kZfofLq9Y5ph4CN+Qf0YFUBCjNBlGv+BHN7bfx1/Le
+	9PYXomHH5B/iWRV7ro59tK1CvkbDO9lKdTHxx+Kyv7FAK8eBvbnQpHDxrNkw==
+X-Received: by 2002:a05:690e:b8d:b0:66d:2276:bea with SMTP id 956f58d0204a3-66fb5abc685mr5954562d50.35.1788781650711;
+        Mon, 07 Sep 2026 04:47:30 -0700 (PDT)
+X-Received: by 2002:a05:690e:b8d:b0:66d:2276:bea with SMTP id
+ 956f58d0204a3-66fb5abc685mr5954550d50.35.1788781650223; Mon, 07 Sep 2026
+ 04:47:30 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -102,12 +102,13 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 References: <20260903072902.3870009-1-harendra.gautam@oss.qualcomm.com>
- <20260903072902.3870009-2-harendra.gautam@oss.qualcomm.com> <20260907-arcane-sassy-fennec-afc02a@quoll>
-In-Reply-To: <20260907-arcane-sassy-fennec-afc02a@quoll>
+ <20260903072902.3870009-2-harendra.gautam@oss.qualcomm.com>
+ <20260907-arcane-sassy-fennec-afc02a@quoll> <58e186c1-d199-40ec-a165-2d3e4f36c623@kernel.org>
+In-Reply-To: <58e186c1-d199-40ec-a165-2d3e4f36c623@kernel.org>
 From: Harendra Gautam <harendra.gautam@oss.qualcomm.com>
-Date: Mon, 7 Sep 2026 17:13:13 +0530
-X-Gm-Features: AcwNN1UsMX1CNea8QLmw-zNjeOqK5GIDMUAZZugJotv0LufOcAuy7HqcbyW2-Jo
-Message-ID: <CAC-tS8BVw6hbgA82V1mYL_3CG4Jdodr-DQbGfM4FzMMdCLbc0g@mail.gmail.com>
+Date: Mon, 7 Sep 2026 17:17:19 +0530
+X-Gm-Features: AcwNN1XXb0eVO7BU5GwO2TvIzIj99UoYsYsbFLmLlnq_kiZvskMwYXQlzc44yys
+Message-ID: <CAC-tS8ANBcNatz4LO781zT_4XKwE7TkHrDaQ4N8JFr5x_vFvFw@mail.gmail.com>
 Subject: Re: [PATCH v4 01/10] ASoC: dt-bindings: qcom,shikra-qaif-cpu: Add binding
 To: Krzysztof Kozlowski <krzk@kernel.org>
 Cc: Srinivas Kandagatla <srini@kernel.org>, Mark Brown <broonie@kernel.org>,
@@ -125,320 +126,63 @@ Cc: Srinivas Kandagatla <srini@kernel.org>, Mark Brown <broonie@kernel.org>,
         Mohammad Rafi Shaik <mohammad.rafi.shaik@oss.qualcomm.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTA3MDEyOSBTYWx0ZWRfX8kMDgXAQ9iJq
- RkqsT1FwBTru6Hlj+j+ARsLrnbdmti3HqeRwqDBQNPfhpKkCiTQRwm1hdW6K4DDXS4X1Z8gEpei
- Xcg/nBOu7VHVWEJsCoIrqtqbshgS1R2VWhRVuucNEQyicXUqQNOW6c7YzpQiTi7RxSd/nrwdqIk
- FUSz9a/AefQgcYvDRSSnOQZP/XJRAHPQLpAkb/j6EQ3se1kDkrRvIRzrYiA4WrWgjNCGpw+GPwj
- oapWLfskpRByHj1Ore9zD9FyGwWqBKhXrHonk8pYLWcJ9mmD7doMvF9d76Pv/lHYmidtyKSXtoj
- p+5Ac2Is5QQxlxajQGrE4LSTH/FFsw+Oa/J75Eb5TqYEX74/koCZRmQDk/SRm4tq9G+2WRbQs0s
- 3kHnWCKcDUnKH+w/WE2B7COK8WsUmTK34tMbHRJJYnZWtXcygFZvJWKDpnrYkXAHWAQjLMV/rHB
- oI6RhE0I8YyTAdqB5Kw==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTA3MDEyOSBTYWx0ZWRfX6cwFtL8rvCHC
- xZ43NiSJ0m2D/faH2SZgRZQInLcEIpIf4qNf2MpSabGfq6FVx27vHrQGtB/vDLDfN/gRO4KK3se
- zAgRZ6BFRQbNVFbYDP6D/IoKJTRE0hI=
-X-Proofpoint-ORIG-GUID: KcybcR_64AqItarbZ0wpuGmw4E1IbQWU
-X-Proofpoint-GUID: KcybcR_64AqItarbZ0wpuGmw4E1IbQWU
-X-Authority-Analysis: v=2.4 cv=LZYMLDfi c=1 sm=1 tr=0 ts=6a9ea35d cx=c_pps
- a=NMvoxGxYzVyQPkMeJjVPKg==:117 a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10
+X-Proofpoint-ORIG-GUID: qw24sfV6vgFlDprxtcRftgdfsgLDJjry
+X-Authority-Analysis: v=2.4 cv=U+aiy+ru c=1 sm=1 tr=0 ts=6a9ea453 cx=c_pps
+ a=J+5FMm3BkXb42VdG8aMU9w==:117 a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10
  a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
- a=yOCtJkima9RkubShWh1s:22 a=gEfo2CItAAAA:8 a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8
- a=OIiAh5qXnb9EFUsBO6EA:9 a=QEXdDO2ut3YA:10 a=kLokIza1BN8a-hAJ3hfR:22
- a=sptkURWiP4Gy88Gu7hUp:22
+ a=eoimf2acIAo5FJnRuUoq:22 a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8
+ a=jnI5DnPC5xRnza1bqQQA:9 a=QEXdDO2ut3YA:10 a=Epx66wHExT0cjJnnR-oj:22
+X-Proofpoint-GUID: qw24sfV6vgFlDprxtcRftgdfsgLDJjry
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTA3MDEzMCBTYWx0ZWRfX3tZiusxYHl8r
+ KdBLiSux7k/JhVeSzbkJnQdyhA+imghapq+mubrEOJyBAhyLMaRVtzXix2owyAFj1ys7niXPwUC
+ u3ZdEDHr9EdDEV3rIT/XADFQw05dyl8=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTA3MDEzMCBTYWx0ZWRfX3NqvIwh9MDnm
+ uAPc9QiRKv9HoqHZAiByJI/i3DP7kUP3CjAXs92tWa7sJhE+UWRKaFmjZ4ycRXvh1oeUbaDmceJ
+ pjhiuw0Wk6hT9YpHpDKl3cPhODA+4uEAwlyVdl3Tsdtj6UEeQByxQ5vPsAlLFY9omrpVlGczxKL
+ UJ0TzUEMmeSEuFXFSvam3IX3Ls+ykgsMUbNkrtyJy5voaR+GVDoOfq31JkG0vqLup/h137aq6eF
+ hbaao4wDOXeisF1+AoeZ0cuH8qM+IHHEQJxK23MArcuV9DEzFsxPlahNnjyqcFdPP7JWSGGsMgt
+ JpQXH83YmttKxdoodke5G56XdFuoPWwuGwGlKhiE8PMqGrT24sCs4lpc8SCIqDRaOGaf+a8BQCg
+ pV5tWNn6nxBIE6imAvTXlMfPwvAoqrhmrt1xVnTM7AbPcCckRIt5/Juuk/qz5IJhfb0QUoSWQJ/
+ JSvyfimeZ1n2Dxoa2VQ==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-09-07_03,2026-09-07_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- spamscore=0 priorityscore=1501 malwarescore=0 suspectscore=0 impostorscore=0
- lowpriorityscore=0 phishscore=0 bulkscore=0 clxscore=1015 adultscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2609070129
+ phishscore=0 suspectscore=0 priorityscore=1501 lowpriorityscore=0
+ clxscore=1015 impostorscore=0 adultscore=0 bulkscore=0 spamscore=0
+ malwarescore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2609070130
 
-On Mon, Sep 7, 2026 at 2:00=E2=80=AFPM Krzysztof Kozlowski <krzk@kernel.org=
+On Mon, Sep 7, 2026 at 2:04=E2=80=AFPM Krzysztof Kozlowski <krzk@kernel.org=
 > wrote:
 >
-> On Thu, Sep 03, 2026 at 12:58:52PM +0530, Harendra Gautam wrote:
+> On 07/09/2026 10:30, Krzysztof Kozlowski wrote:
+> > On Thu, Sep 03, 2026 at 12:58:52PM +0530, Harendra Gautam wrote:
+> >>
+> >> Add the Devicetree binding for the Qualcomm Audio Interface (QAIF) CPU=
+ DAI
 > >
-> > Add the Devicetree binding for the Qualcomm Audio Interface (QAIF) CPU =
-DAI
->
-> Why do your commits have leading blank line? I mean, really, how is it
-> possible to create such commit?
->
-> Additionally, way you send your work is making this unnecessarily
-> difficult for us. Look, does this work?
->
->         b4 diff '20260903072902.3870009-2-harendra.gautam@oss.qualcomm.co=
+> > Why do your commits have leading blank line? I mean, really, how is it
+> > possible to create such commit?
+> >
+> > Additionally, way you send your work is making this unnecessarily
+> > difficult for us. Look, does this work?
+> >
+> >       b4 diff '20260903072902.3870009-2-harendra.gautam@oss.qualcomm.co=
 m'
->
-> ? No, it does not:
->
-> Looking up 20260903072902.3870009-2-harendra.gautam@oss.qualcomm.com
-> Checking for older revisions
-> Grabbing search results from lore.kernel.org
->   Added from v3: 10 patches
-> ---
-> Analyzing 112 messages in the thread
-> WARNING: duplicate messages found at index 1
->    Subject 1: MAINTAINERS: Add Qualcomm QAIF driver entry
->    Subject 2: ASoC: dt-bindings: qcom,shikra-qaif-cpu: Add binding
->   2 is not a reply... assume additional patch
-> WARNING: duplicate messages found at index 2
->    Subject 1: ASoC: qcom: Add QAIF shared data structures and variant int=
-erface
->    Subject 2: ASoC: dt-bindings: qcom,shikra-qaif-cpu: Add binding
->   2 is not a reply... assume additional patch
-> Looking for additional code-review trailers on lore.kernel.org
-> Analyzing 0 code-review messages
-> Preparing fake-am for v3: ASoC: qcom: Add QAIF driver for Shikra audio pl=
-atform
->   range: d7fead291383..a37de53198ea
-> Preparing fake-am for v4: MAINTAINERS: Add Qualcomm QAIF driver entry
-> ERROR: v4 series incomplete; unable to create a fake-am range
->
->
-> You are sending big patchset, with big/complex new driver, so if the
-> process things are not done right, we are not going to spend time top
-> look at it. There are other patches waiting where we do not need to
-> struggle with such obstacles.
->
->
-> > controller used on the Shikra audio platform, together with a dt-bindin=
-gs
-> > header for QAIF DAI and AIF interface IDs.
 > >
-> > QAIF routes audio between system memory, external PCM/TDM/MI2S serial
-> > interfaces and the internal Bolero/WCD codec. Platform Devicetree files
-> > need a binding to describe the controller resources, DAI cells and per-
-> > interface AIF configuration, and named constants to avoid raw numeric I=
-Ds
-> > in sound-dai references and child-node reg values.
+> > ? No, it does not:
 > >
-> > Describe the MMIO region, interrupt, clocks, DMA IOMMU mapping and
-> > aif-interface child nodes required by the controller.
-> >
-> > Signed-off-by: Harendra Gautam <harendra.gautam@oss.qualcomm.com>
-> > ---
-> >  .../bindings/sound/qcom,shikra-qaif-cpu.yaml  | 308 ++++++++++++++++++
-> >  .../sound/qcom,q6dsp-lpass-ports.h            |  52 +++
-> >  2 files changed, 360 insertions(+)
-> >  create mode 100644 Documentation/devicetree/bindings/sound/qcom,shikra=
--qaif-cpu.yaml
-> >
-> > diff --git a/Documentation/devicetree/bindings/sound/qcom,shikra-qaif-c=
-pu.yaml b/Documentation/devicetree/bindings/sound/qcom,shikra-qaif-cpu.yaml
-> > new file mode 100644
-> > index 000000000000..9d0616ac7554
-> > --- /dev/null
-> > +++ b/Documentation/devicetree/bindings/sound/qcom,shikra-qaif-cpu.yaml
-> > @@ -0,0 +1,308 @@
-> > +# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
-> > +%YAML 1.2
-> > +---
-> > +$id: http://devicetree.org/schemas/sound/qcom,shikra-qaif-cpu.yaml#
-> > +$schema: http://devicetree.org/meta-schemas/core.yaml#
-> > +
-> > +title: Qualcomm Audio Interface (QAIF) CPU DAI Controller
-> > +
-> > +maintainers:
-> > +  - Harendra Gautam <harendra.gautam@oss.qualcomm.com>
-> > +
-> > +description: |
-> > +  The Qualcomm Audio Interface (QAIF) is a fully configurable DMA-base=
-d
-> > +  audio subsystem controller. It serialises and deserialises PCM audio
-> > +  between system memory and external serial audio peripherals (PCM, TD=
-M,
-> > +  I2S, MI2S) through the AIF path, and transfers parallel audio betwee=
-n
-> > +  memory and an internal WCD codec through the CIF path.
-> > +
-> > +  AIF (Audio Interface): up to 13 multi-lane Unified Audio Interfaces,
-> > +  each supporting up to 8 independent data lanes. Each lane is individ=
-ually
-> > +  configurable as TX (output/speaker) or RX (input/mic). All lanes of =
-an
-> > +  interface share a single bit clock and frame sync. Supported modes a=
-re
-> > +  PCM (short/long sync), TDM, and MI2S (stereo/mono). Per-interface
-> > +  configuration includes sync source (master/slave), sync mode, sync d=
-elay,
-> > +  sync inversion, slot width (8/16/24/32-bit), sample width, active sl=
-ot
-> > +  masks (up to 32 slots), bits-per-lane frame size, lane enable/direct=
-ion
-> > +  masks, loopback, output-enable control, and full-cycle path support =
-for
-> > +  long chip-to-chip connections.
-> > +
-> > +  CIF (Codec Interface): up to 10 RDDMA (playback) and 10 WRDMA (captu=
-re)
-> > +  channels connecting to an internal codec over a parallel bus. Each c=
-hannel
-> > +  supports active-channel enable mask (up to 16 channels), frame-sync
-> > +  selection, frame-sync delay, frame-sync output gating, dynamic clock
-> > +  gating, and 16-bit packing/unpacking.
-> > +
-> > +  Note on RX/TX naming convention: in QAIF, TX refers to the output
-> > +  (speaker/playback) direction and RX refers to the input (mic/capture=
-)
-> > +  direction. This applies to both AIF lane directions and CIF slot/mas=
-k
-> > +  properties.
-> > +
-> > +  DMA engine: RDDMA fetches audio from DDR/TCM/LPM into a shared SRAM
-> > +  latency buffer (SHRAM) and drains it to the interface. WRDMA collect=
-s
-> > +  data from the interface into SHRAM and writes it to memory. Each DMA
-> > +  owns a private SHRAM region defined by start address and length regi=
-sters.
-> > +  Burst sizes of 1/2/4/8/16 beats (64-bit) are supported with up to 4
-> > +  outstanding transactions per DMA. Two QSB master ports (QXM0 for TCM=
-,
-> > +  QXM1 for DDR/LPM) provide the memory interface.
-> > +
-> > +  Resources are partitioned among up to 5 Execution Engines (EEs) via
-> > +  EE map registers. Each EE owns a set of DMAs, audio interfaces, and
-> > +  interface groups, and receives its own independent interrupt output.
-> > +  The interrupt hierarchy has a two-level structure: a summary registe=
-r
-> > +  identifies the event class (DMA period, underflow/overflow, error
-> > +  response, audio interface underflow/overflow, group done, rate detec=
-tor,
-> > +  VFR), and per-resource status registers identify the specific channe=
-l.
-> > +
-> > +  Interface grouping (bonding) allows up to 6 groups of audio and code=
-c
-> > +  interfaces to start synchronously and align their DMA period interru=
-pts
-> > +  within half a frame duration using the RDDMA padding feature.
-> > +
-> > +  Two rate detector blocks measure the frequency of incoming frame syn=
-c or
-> > +  word select signals and generate interrupts on rate change, undetect=
-ed
-> > +  rate, or sync timeout.
-> > +
-> > +  Block diagram::
-> > +
-> > +    System Memory (DDR / LPM / TCM)
-> > +    +---------------------------------+
-> > +    |  Circular Buffers (ping-pong)   |
-> > +    +----------+----------+-----------+
-> > +               |          ^
-> > +         64-bit AXI  64-bit AXI
-> > +               |          |
-> > +    +----------v----------+-----------+
-> > +    |        QSB Master Ports         |
-> > +    |  +----------+  +----------+     |
-> > +    |  |   QXM0   |  |   QXM1   |     |
-> > +    |  +----+-----+  +-----+----+     |
-> > +    +-------|--------------|----------+
-> > +            |              |
-> > +    +-------v--------------v----------+
-> > +    |         Shared RAM (SHRAM)       |
-> > +    |  +------------+  +------------+ |
-> > +    |  | QXM0 Read  |  | QXM0 Write | |
-> > +    |  | SHRAM      |  | SHRAM      | |
-> > +    |  +------------+  +------------+ |
-> > +    |  +------------+  +------------+ |
-> > +    |  | QXM1 Read  |  | QXM1 Write | |
-> > +    |  | SHRAM      |  | SHRAM      | |
-> > +    |  +------------+  +------------+ |
-> > +    +---+--------+--------+-------+---+
-> > +        |        |        |       |
-> > +    +---v--+  +--v---+ +--v---+ +-v----+
-> > +    |RDDMA |  |RDDMA | |WRDMA | |WRDMA |
-> > +    | AIF  |  | CIF  | | AIF  | | CIF  |
-> > +    |[0..n]|  |[0..n]| |[0..n]| |[0..n]|
-> > +    +--+---+  +--+---+ +--+---+ +-+----+
-> > +       |         |       ^          ^
-> > +       | TX      | TX    | RX       | RX
-> > +       v         v       |          |
-> > +    +--+--------------------+  +----+----------+
-> > +    |  Unified Audio Intf   |  | Codec DMA     |
-> > +    |  (AIF 0..12)          |  | Interface     |
-> > +    |                       |  | (CIF)         |
-> > +    |  AUD_INTFa block:     |  |               |
-> > +    |  - Serializer (TX)    |  | RDDMA: DDR -> |
-> > +    |  - De-serializer (RX) |  |   internal    |
-> > +    |  - Sync gen/detect    |  |   codec       |
-> > +    |  - Up to 8 data lanes |  | WRDMA: codec  |
-> > +    |  - PCM / TDM / MI2S   |  |   -> DDR      |
-> > +    |  - Near Pad Logic     |  | Up to 16 ch   |
-> > +    +--+--------------------+  +----+----------+
-> > +       |  Lane 0..7 (TX/RX)       |  Parallel bus
-> > +       |  Bit clk + Frame sync    |  + Frame sync
-> > +       v                          v
-> > +    +--+--------+          +------+------+
-> > +    | External  |          | Internal    |
-> > +    | Serial    |          | Digital     |
-> > +    | Peripherals|         | Codec       |
-> > +    | (PCM/TDM/ |          | (Bolero/    |
-> > +    |  MI2S)    |          |  WCD)       |
-> > +    +-----------+          +-------------+
-> > +
-> > +allOf:
-> > +  - $ref: dai-common.yaml#
-> > +
-> > +properties:
-> > +  compatible:
-> > +    const: qcom,shikra-qaif-cpu
-> > +
-> > +  reg:
-> > +    maxItems: 1
-> > +    description: QAIF core registers
-> > +
-> > +  interrupts:
-> > +    maxItems: 1
-> > +    description:
-> > +      QAIF summary interrupt for this Execution Engine. Signals DMA pe=
-riod
-> > +      completion, buffer underflow/overflow, error response, audio int=
-erface
-> > +      underflow/overflow, interface-group done, rate detector and VFR =
-events.
-> > +
-> > +  iommus:
-> > +    maxItems: 1
-> > +    description: Phandle to apps_smmu node with sid mask
-> > +
-> > +  dma-coherent: true
-> > +
-> > +  clocks:
-> > +    minItems: 5
-> > +    maxItems: 9
-> > +
-> > +  clock-names:
-> > +    description:
-> > +      The first five clocks are always required. Any further entries a=
-re the
-> > +      per-AIF bit clocks (aif_if<N>_ibit), supplied in order starting =
-from
-> > +      AIF interface 0 for as many serial AIF interfaces as the board u=
-ses.
 >
-> Who provides these clocks? Your example DTS suggests that another SoC
-> block, so how these clocks could be optional? Either they are in the
-> hardware or they are not. Hardware is not really flexible.
-The clocks are provided by the GCC/LPASS clock controller, referenced
-via phandles in the DTS example. The distinction between required and
-optional is based on usage, not hardware presence. The 5 required
-clocks (lpass_config, lpass_core_axim, bus, dma, dma_mem) are needed
-for any register access and DMA operation, the hardware block cannot
-function without them. The per-interface bit clocks
-(aif_if0_ibit..aif_if3_ibit) are only needed when the corresponding
-AIF interface is actually used; a board may instantiate QAIF with
-fewer than 4 active interfaces, in which case the unused interface
-clocks need not be enabled. All four Shikra AIF interface clocks are
-listed in the example because Shikra has 4 physical interfaces, but
-the binding intentionally allows subsets for future SoCs or board
-configurations where not all interfaces are wired up.
+> And now I checked... and you did not even use b4 to send v3 and v4. I
+> mean, really... why? All internal guides, all external presentations
+> EVERYWHERE we say this is expected and even almost a must for bigger work=
+.
+Apologies for that. This is my first upstream series and I was not
+aware of the b4 send requirement at the time. v3 and v4 were sent via
+git send-email. v5 will be sent via b4 send.
 -Harendra
->
-> I actually finished here, since b4 diff does not work, I have no time to
-> review it further. I might get back to it later.
 >
 > Best regards,
 > Krzysztof
->
