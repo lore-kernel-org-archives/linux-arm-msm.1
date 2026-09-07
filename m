@@ -1,221 +1,242 @@
 Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id ABFB743F4A1
-	for <linux-arm-msm@vger.kernel.org>; Mon,  7 Sep 2026 08:37:29 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 325B9440654
+	for <linux-arm-msm@vger.kernel.org>; Mon,  7 Sep 2026 08:38:28 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788770251; cv=none; b=MXdnceP03f1ai9Zz73IzYaL7eO0eJy8wglsiU7L8q4BYISfzjCh3p9iMux6EoBjMWXLSTn9fKUX95gTxEX+qNKN+CbNBHhN466G4lmCbVNhaEsua0Q+el719bdzu9zLYPCDxtAz7NiCXWNVILf8PqtCCGu1ORucOhVcvbo8fB9Q=
+	t=1788770310; cv=none; b=hSHPq+A1Co3S+fQB7acpsUMZ4IShFUIgwgcGBc3sx2WnLa+jlKhllw/UW3RuLTbAn+Y3WYlTbNjBjeYwAIYqP3zxjpLHzoAsjWi0aURj3y8Kg3fgqnzzF7PvgZUKW/cHy4a9sdXuIrK5028g9p4QGpgf5hiaeeIIqZSEyM2K2sA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788770251; c=relaxed/simple;
-	bh=qnytY6z2HDy95k2PwTmM5yjp5P2y6T3afodhcc7jnY0=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=QSnt3U7BTeml++HWI/vJZekIovamHDqzwrb8HmxIjLbvjn06mLFiAhT1ndJNzx7I4Xku4g9dwfUXIYC65UiN7+LWqpg5i27HO/xHWkm6+PXn+fr818dmbGKsr7UGNwQ9O2FDYFf5xJzKetOxqvAhyqiwLj1w+bawRfdz59lVIjg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=kXElBDHr; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=AcN/m2yH; arc=none smtp.client-ip=205.220.180.131
+	s=arc-20240116; t=1788770310; c=relaxed/simple;
+	bh=d2waHw5hQQta9KrXqkbQ0UYe80riPkC+jSg91Kafgk0=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=mSzlQKcaXhY5D5+TMcStvXguHfiIVRJBcqY5ZouYEZF0GHjr3aI6j8Awg2txbewd4qGCDjlwjQ5xDDWgdwnyUdx+mtKyi7g5/WhJjIrBch9YydXpXLDKU5k5xGH9Id6SbmHbWSMDnZ1NDI+8bhmGXkO7c5NNmljeISiF0qJ47nM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=Omqbr3UD; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=V+kF6qeX; arc=none smtp.client-ip=205.220.180.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="kXElBDHr";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="AcN/m2yH"
-Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68777eG62724532
-	for <linux-arm-msm@vger.kernel.org>; Mon, 7 Sep 2026 08:37:28 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="Omqbr3UD";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="V+kF6qeX"
+Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68777Ou13352539
+	for <linux-arm-msm@vger.kernel.org>; Mon, 7 Sep 2026 08:38:28 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:message-id
-	:mime-version:subject:to; s=qcppdkim1; bh=hp43nu0lcflbC1poEHaJtM
-	iG/tIWITlAFlzgkXo77Ak=; b=kXElBDHrPGDNzQd+sohq6kPXA2jILHe7tUDODN
-	yaTK92YheKS3jJrqqM3ZBSB3t1AWdObO/J2tYMp+gV5Ah1AaB7aq81gtQtIDWzEb
-	FIajPkmEZpy8zWTojL7OrZ93Rrj9NTqeFxpfP9VHS+F93YELFnZ/YXjEFj0RkrwP
-	auHOP3rdDbxf+JKuzXmGbPSHump5WaGEmKDr+CAjPSizWyNNgy8RV+7cmezkvHMJ
-	4GFmHRNUisUP8bQ464HGXWlQilYH2picoBzfGtrPo/toCszGMPKPIZfBtIz12UaT
-	Fk+k4+/SB8TfFXL7r7iJtGJES8Hs56v1OfFWoxNzh8ZHQwKg==
-Received: from mail-pg1-f200.google.com (mail-pg1-f200.google.com [209.85.215.200])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ghfxksrky-1
+	cc:content-transfer-encoding:date:from:message-id:mime-version
+	:subject:to; s=qcppdkim1; bh=Se+7L1HVUggxXbgDO2sx71Qt+rECVPAGxv+
+	lE2vxgMo=; b=Omqbr3UDO4uxIFeOOl8zCnENtx3bz63xnmqq/1j7Px99A5f1n1E
+	agreXF1xPYNEJCQvoabjJ+4LcSP6Eft4NDFsvftoFpyUsDV5oHNldCH1aazdR3wU
+	DXFlAzgcrKX5I/fseFphP6hzYwEJ2xRQGxv5aulwIYqiovo75eoPDtxpUc3p3j4H
+	2RulUzmzmLJ2pkSEk4sCXsdAUfl/utJ0xW4za+wWI+rPwbl+Hl78kKrfav38H6hc
+	Ej29WjKRp3Zv/ivpoh2Fihn/O1gpskvSVNWb5XIRJ0c34NoCwUPudYMEzeTQNqTF
+	gAwCyNzk7+3WZ2ScwMlTNeT3VNVOEpgZ9qg==
+Received: from mail-qk1-f200.google.com (mail-qk1-f200.google.com [209.85.222.200])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ghq66guys-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Mon, 07 Sep 2026 08:37:28 +0000 (GMT)
-Received: by mail-pg1-f200.google.com with SMTP id 41be03b00d2f7-cc1c62f0d60so4513015a12.1
-        for <linux-arm-msm@vger.kernel.org>; Mon, 07 Sep 2026 01:37:28 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Mon, 07 Sep 2026 08:38:27 +0000 (GMT)
+Received: by mail-qk1-f200.google.com with SMTP id af79cd13be357-930b571432fso515184285a.0
+        for <linux-arm-msm@vger.kernel.org>; Mon, 07 Sep 2026 01:38:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1788770248; x=1789375048; darn=vger.kernel.org;
-        h=cc:to:message-id:content-transfer-encoding:content-type
-         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=hp43nu0lcflbC1poEHaJtMiG/tIWITlAFlzgkXo77Ak=;
-        b=AcN/m2yHFFF33nC0zzEZCgkse2jgUgaMIAyQnS8dhSyvYBPPx3ficgB9Nurg/UPmiS
-         UNmw7LjKHKhJxzvGC6RkfYoVfQ2P2/1HISo7pmN+RGu1UAqYTH0MTOHqP2GINiVw1jqZ
-         VeAr+7jVRqiFXNb+6BSbqWGogUyxZ9zesrQvxfLDRXyJhYzqZ/5RgW1i4syzSSSxFkyw
-         xDRPrOdtuE1qRCCNskoK4lifXzcRW+F15gALkYEPF/xgM0mBTGNh5ATGP0bpiWhtGoPY
-         pDCSE+6B0TfXLloTCu8MbGyXpkN9KrmUHW9ULGTMOzsYnJScQZBwcGFh8m5dELgIOW/B
-         sq2A==
+        d=oss.qualcomm.com; s=google; t=1788770307; x=1789375107; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=Se+7L1HVUggxXbgDO2sx71Qt+rECVPAGxv+lE2vxgMo=;
+        b=V+kF6qeX4Z7CXP07da0Gp/PE/IqH1S7ExGnGWzcWAgrW+iF6vorj0y9l4KvBF0Kn8c
+         JFExqXhO5zox9iti/rCP4Wh1T9JkUW/OyIbl3URGfRgL5z4kq32SfcTBk5wZXyirSuGR
+         SAVumDp8LTyQtPcoe29W4NECUzwH3yXe7DXU7jo09AhJ1/beFTlRPAddkqXP662nUm8X
+         OUaIBmSedi0omYfnj6xsDXuP3mXMkFF2bkDNC6GuCBORBj7EeqgSaSsj8DVCR7zOcZfC
+         IVvwm1jy7dByLPjKRQAVAcY3RsrZwWtIrEtI/2jo1ecwoNJH4clpCDFvACB/TsR7eD+M
+         e+Ew==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788770248; x=1789375048;
-        h=cc:to:message-id:content-transfer-encoding:content-type
-         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to:content-type;
-        bh=hp43nu0lcflbC1poEHaJtMiG/tIWITlAFlzgkXo77Ak=;
-        b=HaCNVnJctG/aH0U+hDm4oU5MS08yHH3aWLlTQhnIGKtJmEI7IolYgiUPcV/hApZkXT
-         714m7eND4OrFfUPePpyFLdNz3SB4LnXuJUndBrOULA/9UJ4Pm1yjQE1aCg5rpBcDmurv
-         vhB/x33zLPA3at0CRVWl/WO9UnxK/EBKW6Vbc0xWxEAUuZQ/i9wSwBR5gfev/ATnnMp6
-         6ak544hsbVx4lrcJ+3Cyo5RgFocwl2Tt7u+hf8JZrb9SBx1SdMPkW0/hHxwUktcOWs3S
-         aOfs9VtnFxBimg54TXliDgy4jWn0ja/o1hZhfC9OsMWOzogJFl1AFNt0Ts05JoawEC3e
-         85NA==
-X-Forwarded-Encrypted: i=1; AKwUvBxunqewuQFHweHkP7UcPjqJLignKmgSNSpLM1h2i29KytAq5xUY0qiHVEGRNFKCA2zfoWc7xajyVeIYNQfs@vger.kernel.org
-X-Gm-Message-State: AFuF++kH/+68vorb+7mvPch+WVGhhJet+8m70Ui1xuQLvvILQkNc2ts5
-	SvoW7mRutYgyOR6zfJVyn9iT8aiHRk2ZhwtA1lOmv9ScWtwFtJGUvVRYcKJtx7Ji4Zv/mWgZhQM
-	WR73Q0NSS96R8L88UTc7DSnPlRsQ/FrJvMetJ4+KaIaKvJqnpDqLYRwGeGWtwfdC7588f
-X-Gm-Gg: AYBFou0rYC/AD5NMxHaxseOvqy53UmOBuwamwnLTEMZYCLf1Pind+yXwfufkSJSiyDF
-	pHovyvwJWNu2zvctvOCcVZxFUu8bMCPsX28Y1whD88PRZvS0JqKFnb39OE+vYQhIeJrUOZ34561
-	SpfhvYxXUeK4ejAUN2P9OFAMQ1hVVjrawwUebj6sodbfRrZvELzYXWUWzsAFtVSBxuRuIzDSXa5
-	h+kOVgvTzCVo/3nor98I9pBpvSsjG9P1q4Ya9d5yarziPrtMHDogrm+dceKOvPxIyfp/JE/sRUb
-	zlyDxcFkvOlFr4jUSEaUpncJlUAgykn/va+cEHPxfKxO4UBUT/W0Cw4qmmp01L4SpdNpeq/PlvZ
-	usJkhozIKc6bJSdVDK7ataNE0
-X-Received: by 2002:a05:6372:a711:b0:3da:5f91:4b37 with SMTP id adf61e73a8af0-3da5f914d66mr15341878637.23.1788770247600;
-        Mon, 07 Sep 2026 01:37:27 -0700 (PDT)
-X-Received: by 2002:a05:6372:a711:b0:3da:5f91:4b37 with SMTP id adf61e73a8af0-3da5f914d66mr15341846637.23.1788770247137;
-        Mon, 07 Sep 2026 01:37:27 -0700 (PDT)
-Received: from hu-tdas-hyd.qualcomm.com ([202.46.22.19])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-334fbd5e6f6sm19057078eec.23.2026.09.07.01.37.21
+        d=1e100.net; s=20251104; t=1788770307; x=1789375107;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=Se+7L1HVUggxXbgDO2sx71Qt+rECVPAGxv+lE2vxgMo=;
+        b=NEamzDBuF7BMbIJWanw8ZNR9Tc/xWF0b/56XeFb7vKTb1nKodngowGCJrUYLJ5ZbE9
+         q3H6Xk4oIiCRLIb8zpubDYxrBg37jTVlAGKe/lpCxRH2+rlINDjSQaovz2PQTLTrgMdA
+         aSfKntzBXWMd+5vIxRKJzWpLgiURe10wIL5BFFjLLz3ThK49XgRXymAR1ViAS9F/H6vq
+         Lu1raNmgQ0D/6WIQhNBwbFlD+dw7JgmlgBd1uRWw9yyGV4lZ3I6SQikHk2eCUErg6aiH
+         /EiJglGEwt2FwdiFIGztw4+F/ZkBwD/kFAlSLEFVnmKyGf8PLQaWVtNJsYl0NFtWC2wy
+         qLLQ==
+X-Forwarded-Encrypted: i=1; AKwUvBzngpJYQB4hQZm9I5uEe1st3oLDS4/Zz/B8KhZ/SjC/IlekZwL8ksC80u5bTM2aCfi8Ql+y+fHXvtbgOUWP@vger.kernel.org
+X-Gm-Message-State: AFuF++n2uRp5MrO/8loet6w9DPlx5+2J8gB1xzPPXNSuYxlSmHd40bAo
+	iM+yChgaXvVtbx5G/cij5eJkY+HFtg7QYH/kHWdIFsdSoOS9dIWD97ibbQxeN+eMRcCO/bhOFAT
+	XGSZ96Vp6c48iWeQKIEcR7JKVbrRO9RF55twwfYd73opjwX308bwlduaveSogEi6WwCH+
+X-Gm-Gg: AYBFou0l82SxMujzArVm2dXY/VEtzfP+2icam3bfN8qZdHDZcXoCBks09IMZrou+zoe
+	eF12p6ek9cD9HbFlOKDF+M8t/zmfVyQzkyjDpU9JYy+T166QoGeio9ux+87kXi3eugvvC91qg/T
+	4Vupxn5JNpSIZgQFmKlLdUpbvMINg4mBo5s3l7cM8bv0aVVVcBhRBrJtXfZWyYWlEFFTGoa4dSV
+	d4N3/l6YJxs4M7sJT1iAr2ZoroBm0zAoE6QLdpufULKRGN2RwsG6Dd55rUp5SmEL2OtL5m8KjOR
+	F8tGilF/h2f1oNA2ClHfmjQ8fRjTwQnMbIu3WVASWwbiyzp/Ckj3O/cFW+Ayani1ulUvHn0Xr3E
+	FK/ShiB+/yHLifg==
+X-Received: by 2002:a05:620a:2990:b0:939:a5a0:4a08 with SMTP id af79cd13be357-939a5a0627dmr450366185a.8.1788770307269;
+        Mon, 07 Sep 2026 01:38:27 -0700 (PDT)
+X-Received: by 2002:a05:620a:2990:b0:939:a5a0:4a08 with SMTP id af79cd13be357-939a5a0627dmr450363085a.8.1788770306687;
+        Mon, 07 Sep 2026 01:38:26 -0700 (PDT)
+Received: from debian ([5.133.47.210])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-485883c6ba4sm30852179f8f.25.2026.09.07.01.38.25
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 07 Sep 2026 01:37:26 -0700 (PDT)
-From: Taniya Das <taniya.das@oss.qualcomm.com>
-Date: Mon, 07 Sep 2026 14:07:18 +0530
-Subject: [PATCH v5] dt-bindings: mailbox: qcom: Document Maili CPUCP
- mailbox controller
+        Mon, 07 Sep 2026 01:38:25 -0700 (PDT)
+From: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
+To: Mark Brown <broonie@kernel.org>, Rob Herring <robh@kernel.org>,
+        Charles Keepax <ckeepax@opensource.cirrus.com>
+Cc: Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>,
+        Bard Liao <yung-chuan.liao@linux.intel.com>,
+        Jaroslav Kysela <perex@perex.cz>, Liam Girdwood <lgirdwood@gmail.com>,
+        Maciej Strozek <mstrozek@opensource.cirrus.com>,
+        Pierre-Louis Bossart <pierre-louis.bossart@linux.dev>,
+        Takashi Iwai <tiwai@suse.com>,
+        Faiz Nabi Kuchay <fkuchay@oss.qualcomm.com>,
+        Jorijn van der Graaf <jorijnvdgraaf@catcrafts.net>,
+        patches@opensource.cirrus.com, linux-sound@vger.kernel.org,
+        devicetree@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+        linux-kernel@vger.kernel.org,
+        Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
+Subject: [PATCH v2 00/11] ASoC: SDCA: enable on DT platforms and add Qualcomm WCD9378 (Tambora) codec
+Date: Mon,  7 Sep 2026 09:37:14 +0100
+Message-ID: <20260907083727.733705-1-srinivas.kandagatla@oss.qualcomm.com>
+X-Mailer: git-send-email 2.53.0
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-Message-Id: <20260907-maili_initial_clock-v5-1-e79bb6b93a49@oss.qualcomm.com>
-X-B4-Tracking: v=1; b=H4sIAL13nmoC/3XN3WrDMAwF4Fcpvp6L/Benvdp7jFIcW1nFkniL2
- 7BR8u5TC2O9cG8ERxx9uoqCM2ER+81VzLhQoTxxcC8bEU9hekdJibPQoBtolJdjoIGONNGZwnC
- MQ44fMnrUnXUGUguCLz9n7On7rr4dOJ+onPP8c3+yqNv2z2ur3qIkyNRgQjBOK2Vecynbr0sYY
- h7HLQ9xYxf9T3ll6pRmyu+cbXvoOtf2TyjzQGlbpwxT1nXOc0PFnXpC2QfKQJ2yTGFyOiTUje2
- hQq3r+gsNCf9fngEAAA==
-X-Change-ID: 20260617-maili_initial_clock-c7e2b4530d80
-To: Bjorn Andersson <andersson@kernel.org>,
-        Michael Turquette <mturquette@baylibre.com>,
-        Stephen Boyd <sboyd@kernel.org>, Brian Masney <bmasney@redhat.com>,
-        Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>,
-        Taniya Das <taniya.das@oss.qualcomm.com>,
-        Vivek Aknurwar <vivek.aknurwar@oss.qualcomm.com>
-Cc: Ajit Pandey <ajit.pandey@oss.qualcomm.com>,
-        Imran Shaik <imran.shaik@oss.qualcomm.com>,
-        Jagadeesh Kona <jagadeesh.kona@oss.qualcomm.com>,
-        linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org,
-        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-        Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
-X-Mailer: b4 0.15-dev-aa3f6
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTA3MDA5MyBTYWx0ZWRfX8kEPTBtIa/GO
- NQV61gkTRyxNMebKSLfZOG8MWbXPEfsHKdRhHposU4gHFQHUD9//20twpaRIBRDwMa+ib4izZuI
- JHIgT7gPb0t4DcmmvribbdM1NkHlmshOdmd6SWjHUM87cCy4G0dvH4mSFxY7KhEeT9DrHOetQPG
- Q0fa8AoqLhW4+NZJ7ha3gM3Wg0T+BcxwzX/81ez18C/HfidBQQSFYQo7JQrVnmkkDtr+KlXCnxQ
- K8jGFuZFjrlviQrivEa53jDIU19hKYnO56f8y/8buRjzFzFPOmJa7I2GbFi61wpOgSPqEP2xj3t
- sHyxgB4diy8JcCXv7vVuocBMczYEQg3syptzO43LZZiqScSGWIATVQ5tQSlBXfUvuFw/1HKBIGS
- 79uTqmV4yfLPmrQd3gAAlV4Ag0ilH3Q7qhCkqGD76xkh+O941isEoXqnrAnVvRr6Qr9Uazc36jY
- blr5ycznOMnmGO/UfMA==
-X-Proofpoint-GUID: jXcHEZyWX4bwA6qHQc9f_OXeeN5XKU8z
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTA3MDA5MyBTYWx0ZWRfX3Pf0hW3bUNmP
- FtVgmwJQ00j0fn8NVK4ldJDAf9ljxKSYKfasuFuORJopln8NU+YhI4eH2nXV/0G4fqBclp4d6g1
- RNzb8ApoAzwQUCzPotrC3Hb46kGBVo8=
-X-Authority-Analysis: v=2.4 cv=daOwG3Xe c=1 sm=1 tr=0 ts=6a9e77c8 cx=c_pps
- a=oF/VQ+ItUULfLr/lQ2/icg==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
- a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22
- a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=ejcyFZ-kiPiluOC7xQcA:9 a=3ZKOabzyN94A:10
- a=QEXdDO2ut3YA:10 a=3WC7DwWrALyhR5TkjVHa:22
-X-Proofpoint-ORIG-GUID: jXcHEZyWX4bwA6qHQc9f_OXeeN5XKU8z
+X-Authority-Analysis: v=2.4 cv=QPhYgALL c=1 sm=1 tr=0 ts=6a9e7804 cx=c_pps
+ a=hnmNkyzTK/kJ09Xio7VxxA==:117 a=ZsC4DHZuhs/kKio7QBcDoQ==:17
+ a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22 a=VwQbUJbxAAAA:8
+ a=w1d2syhTAAAA:8 a=X2GpltJzu40BM-42fCkA:9 a=O8hF6Hzn-FEA:10
+ a=PEH46H7Ffwr30OY-TuGO:22
+X-Proofpoint-GUID: OXTcMfV2yl7hsN-QuMXsMhVwANKgGH-A
+X-Proofpoint-ORIG-GUID: OXTcMfV2yl7hsN-QuMXsMhVwANKgGH-A
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTA3MDA5MyBTYWx0ZWRfX4MtYgLLwc2eV
+ xEorLxFxbwV/a8JQyL3k2PMQRzyO7JnoDacCYVt3dXm34rme48+V1oldaymkd+gHNqpbRzc9Mz4
+ E0DPJW+atOfctQrNLPfe6oGUMbzQauw=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTA3MDA5MyBTYWx0ZWRfX0EnFlrHXJfiO
+ b/lpHXCS47JREdmO0Z2QAyMG8xDwGYaJy/u+YCFFYvfty+dydfKUQ2DOGkP7W+DTiSM4ImX0h7e
+ YEUjSQ5KG45+G54449e0DsaVPp3zQ3evGFjcCLYTgTyl1QDwwqRzl7g0jeXavigAbRBxrPGIBo8
+ AcaYGSytE/M5V2e3K7okHvThqErM8HsZxEQEu1RnsjYWeBpiwDl9L30mFU2IDsgBXSEPf2FVWXO
+ unsUkbtlBunYD+rqxB/Z6RaIBAbKlvOb5BM9UYP2irwwi7aVfra1I6B+GhLSmtGq0fxIjKuhgdS
+ VDdD/X5V+ZXIMWLopTglPolcUM9dBW3K7fktaLo73nWw0btMvqHdn4XuHJbnEhnSKY9o+4UbEd8
+ 1nUMTHCvitsHNPP0LD/YVJR86GAih2LpOfQQB9Ba9zewCU4UOy87LoxsO5/TEiyeJSPeD1pMTOL
+ DX9lW9hMY36KW4V9jBA==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-09-07_02,2026-09-03_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- suspectscore=0 priorityscore=1501 bulkscore=0 spamscore=0 phishscore=0
- lowpriorityscore=0 adultscore=0 malwarescore=0 impostorscore=0 clxscore=1011
+ phishscore=0 suspectscore=0 adultscore=0 spamscore=0 priorityscore=1501
+ bulkscore=0 lowpriorityscore=0 impostorscore=0 malwarescore=0 clxscore=1015
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2609070093
 
-Document the CPU Control Processor (CPUCP) mailbox controller for the
-Qualcomm Maili SoC. It is software compatible with the X1E80100 CPUCP
-mailbox controller and uses it as a fallback compatible string.
+This series extends the SDCA class driver to work on DT / non-ACPI
+platforms via a codec-provided static topology, and adds the Qualcomm
+WCD9378 (Tambora) codec as the first user driven in SDCA / compute
+mode.  Tested on the Snapdragon X2 Elite Glymur CRD.
 
-Reviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
-Signed-off-by: Taniya Das <taniya.das@oss.qualcomm.com>
----
-Changes in v5:
-- The RPMH, TCSR and GCC bindings and the Hawi GCC driver extension
-  were picked up from v4 and merged; only the CPUCP mailbox controller
-  binding remains in this revision.
-- No functional changes to the remaining CPUCP mailbox binding.
-- Link to v4: https://lore.kernel.org/r/20260730-maili_initial_clock-v4-0-ed52ade264f0@oss.qualcomm.com
+Patches 1-9 extend the SDCA class helpers:
 
-clk: qcom: Introduce initial clock controllers for Maili SoC
+  - Kconfig gate to build the class without ACPI enabled.
+  - PM helpers keyed on a codec-embedded struct sdca_class_drv, so
+    codec drivers can build their own dev_pm_ops.
+  - Class SoundWire probe/remove/read_prop exposed as library
+    functions callable from codec-specific SDW slave drivers.
+  - hw_ops with hw_init (supplies/reset/SCP init) and
+    populate_function (DT-supplied SDCA function data) hooks.
+  - Class function driver registers SDCA_FUNCTION_TYPE_SIMPLE_JACK,
+    and resolves sound-dai cells by entity index.
+  - sdca_apply_default_control_classifiers() applies the same
+    is_volatile / has_reset flags that the DisCo/ACPI parser would.
 
-Introduce the initial set of clock controller bindings and driver
-support for the upcoming Qualcomm Maili SoC.
+Note:
+None of these are functional changes in sdca core, all of these are
+helper functions to allow non-ACPI users to use sdca core.
 
-Maili is a new mobile SoC from Qualcomm. It is a derivative of the
-Hawi SoC and shares most of its clock topology. Where the hardware is
-identical, Maili reuses the existing Hawi drivers via fallback
-compatible strings. Where Maili diverges — specifically in the Global
-Clock Controller (GCC), which carries an additional QUPv3 wrapper
-(WRAP5) — the Hawi GCC driver is extended to handle both SoCs.
+Patches 10-11 add the WCD9378 SDCA / compute-mode codec:
 
-The series covers the following clock controllers:
+  - dt-bindings for the SoundWire slave in compute mode, using the
+    qcom,wcd9378c variant compatible alongside the SoundWire
+    class-ID compatible sdw20217011000.
+  - Codec driver split across wcd9378-sdw.c (SoundWire slave driver
+    plumbing) and wcd9378-sdca.c (SDCA topology + hw_ops) with a
+    shared wcd9378-sdca.h header.  A future mobile-mode driver can
+    plug into the same module (single MODULE_DEVICE_TABLE, single
+    modalias) by adding its own files and hooking into
+    wcd9378-sdw.c.
 
-  - RPMH clock controller: identical to Hawi; uses qcom,hawi-rpmh-clk
-    as fallback.
-  - TCSR clock controller: identical to Hawi; uses qcom,hawi-tcsrcc
-    as fallback.
-  - Global Clock Controller (GCC): extends the Hawi GCC driver with
-    eight additional QUPV3 WRAP5 clocks present only on Maili.
-  - CPUCP mailbox controller: software-compatible with X1E80100; uses
-    qcom,x1e80100-cpucp-mbox as fallback.
+Testing: HPH playback and headset-mic capture confirmed on the
+Snapdragon X2 Elite Glymur CRD.
 
-The devicetree for Maili will be upstreamed later.
+Jack detection is not wired up in this series.  GE 35 / MBHC stays
+armed by the transcribed init table but is not consumed; the mode
+0/1 aliasing in range_ge35_mode_data is a defensive fallback and
+has not been tested.
 
-Changes in v4:
-  - Rebase the binding of tcsr to linux-next.
-  - Add RB-by from Konrad Dybcio on the GCC driver patch.
-  - Link to v3: https://lore.kernel.org/r/20260724-maili_initial_clock-v3-0-45b577241c91@oss.qualcomm.com
+Changes since RFC v1 [1]:
 
-Changes in v3:
-  - Update the comment for extending the array appropriately size.
-  - Add RB-by [Krzysztof] from v2
-  - Link to v2: https://lore.kernel.org/r/20260713-maili_initial_clock-v2-0-79548f0bb58f@oss.qualcomm.com
+  - Compute-mode identified by qcom,wcd9378c variant compatible
+    instead of the qcom,compute-mode boolean property.
+  - qcom,micbias2-microvolt dropped; MICB2 fixed at 2.75 V by the
+    SimpleJack topology.
+  - Codec split into wcd9378-sdw.c (SDW plumbing) and
+    wcd9378-sdca.c (SDCA topology); module renamed to
+    snd-soc-wcd9378 as preparatory for mobile driver.
+  - Binding is compute-only; qcom,wcd9378 mobile-mode variant will
+    land with the mobile-mode driver.
+  - MODULE_IMPORT_NS("SND_SOC_SDCA") added.
+  - sdca_class.h moved from sound/soc/sdca/ to include/sound/.
+  - qcom,port-mapping missing now returns -EINVAL via
+    dev_err_probe().
+  - init_table sync up with CRD asl and the T14s DSDT; 8 stray writes dropped.
+  - Six fake IRQ-anchor Controls on PDE 47 dropped; HPH
+    OCP/CNP/SURGE stay codec-local until an SDCA framework
+    interface for standalone status-bit IRQs lands.
+  - .is_volatile dropped from FU 6 CHANNEL_VOLUME (matches MUTE).
+  - dropped pre post pde callbacks, and all of the mixers and mute are
+    exposed as mixer controls.
+  - added sdca_apply_default_control_classifiers, inline with acpi
+    iparsing.
 
-Changes in v2:
-  - Split the new Maili-only QUPv3 WRAP5 clock IDs out of
-    qcom,hawi-gcc.h into a new qcom,maili-gcc.h header (which includes
-    qcom,hawi-gcc.h), instead of adding them directly to the Hawi
-    header. [Krzysztof]
-  - Update the GCC driver to include the maili-gcc header.
-  - Link to v1: https://lore.kernel.org/r/20260618-maili_initial_clock-v1-0-d6ede0352113@oss.qualcomm.com
----
- Documentation/devicetree/bindings/mailbox/qcom,cpucp-mbox.yaml | 1 +
- 1 file changed, 1 insertion(+)
+[1] https://lore.kernel.org/all/amHqO5pMFmKRNYTT@opensource.cirrus.com/
 
-diff --git a/Documentation/devicetree/bindings/mailbox/qcom,cpucp-mbox.yaml b/Documentation/devicetree/bindings/mailbox/qcom,cpucp-mbox.yaml
-index 03359479d926a623c467f1b8ba857d787366d411..2185920e1b5d2154a23b67905106f35e0b71eee9 100644
---- a/Documentation/devicetree/bindings/mailbox/qcom,cpucp-mbox.yaml
-+++ b/Documentation/devicetree/bindings/mailbox/qcom,cpucp-mbox.yaml
-@@ -21,6 +21,7 @@ properties:
-               - qcom,glymur-cpucp-mbox
-               - qcom,hawi-cpucp-mbox
-               - qcom,kaanapali-cpucp-mbox
-+              - qcom,maili-cpucp-mbox
-               - qcom,nord-cpucp-mbox
-               - qcom,sm8750-cpucp-mbox
-           - const: qcom,x1e80100-cpucp-mbox
+Srinivas Kandagatla (11):
+  ASoC: SDCA: allow building without ACPI
+  ASoC: SDCA: export PM helpers keyed on sdca_class_drv
+  ASoC: SDCA: expose class SoundWire probe/remove/read_prop as library
+  ASoC: SDCA: add hw_ops with hw_init hook
+  ASoC: SDCA: add populate_function hw_op for DT function data
+  ASoC: SDCA: class_function: xlate sound-dai cell by entity index
+  ASoC: SDCA: register SDCA_FUNCTION_TYPE_SIMPLE_JACK in class function
+    driver
+  ASoC: SDCA: make find_sdca_control_reset() return void
+  ASoC: SDCA: add sdca_apply_default_control_classifiers() helper
+  dt-bindings: sound: qcom: add Tambora WCD9378 SDCA codec
+  ASoC: codecs: add Qualcomm Tambora (WCD9378) SDCA codec
 
----
-base-commit: af5f12805e5cefa4fe68d6127c7e1fb78cd5535c
-change-id: 20260617-maili_initial_clock-c7e2b4530d80
+ .../bindings/sound/qcom,wcd9378-sdw.yaml      |   91 ++
+ include/sound/sdca.h                          |   23 +-
+ include/sound/sdca_class.h                    |   80 ++
+ include/sound/sdca_function.h                 |    2 +
+ sound/soc/codecs/Kconfig                      |   11 +
+ sound/soc/codecs/Makefile                     |    2 +
+ sound/soc/codecs/wcd9378-sdca.c               | 1010 +++++++++++++++++
+ sound/soc/codecs/wcd9378-sdca.h               |   20 +
+ sound/soc/codecs/wcd9378-sdw.c                |   52 +
+ sound/soc/sdca/Kconfig                        |    6 +-
+ sound/soc/sdca/sdca_class.c                   |  166 ++-
+ sound/soc/sdca/sdca_class.h                   |   35 -
+ sound/soc/sdca/sdca_class_function.c          |   50 +-
+ sound/soc/sdca/sdca_device.c                  |    4 +
+ sound/soc/sdca/sdca_functions.c               |   43 +-
+ 15 files changed, 1516 insertions(+), 79 deletions(-)
+ create mode 100644 Documentation/devicetree/bindings/sound/qcom,wcd9378-sdw.yaml
+ create mode 100644 include/sound/sdca_class.h
+ create mode 100644 sound/soc/codecs/wcd9378-sdca.c
+ create mode 100644 sound/soc/codecs/wcd9378-sdca.h
+ create mode 100644 sound/soc/codecs/wcd9378-sdw.c
+ delete mode 100644 sound/soc/sdca/sdca_class.h
 
-Best regards,
 -- 
-Taniya Das <taniya.das@oss.qualcomm.com>
+2.53.0
 
