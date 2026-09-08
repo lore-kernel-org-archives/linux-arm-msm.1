@@ -1,52 +1,87 @@
-Received: from omta34.uswest2.a.cloudfilter.net (omta34.uswest2.a.cloudfilter.net [35.89.44.33])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9BA302620DE
-	for <linux-arm-msm@vger.kernel.org>; Tue,  8 Sep 2026 03:04:23 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=35.89.44.33
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BF26F245005
+	for <linux-arm-msm@vger.kernel.org>; Tue,  8 Sep 2026 05:01:27 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788836665; cv=none; b=uHj9M0JGlc1GHo/5Z/OxjD7AGvM59k6cr2N9biSPahbIDK4VeilH7NWwod4VDwgZJ9pD4b7nQtaNuShBew/B8e4MiWunZP8eXA6WRV/MZMtuGq/Xdkk1vTq5QYq52Nn1V93xv2uw5F2bH14ma1eq+XngpxnFCeqL861sa4Do50g=
+	t=1788843689; cv=none; b=QhSwcd5X9UoziRc2VKQyZoFweUffJOCwbKNGu0TGayRoa++z7lYR9S980THSPFjkGbqdwjbfqg1n3B/x6Qqd76IAmntAz219ea70vMa3WSxEkwYhNsHDNIBe+4YBfoYIJuQ05enZGpOP+GMR0hjFv4TdkaCxz3Bj+asaEqknrpQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788836665; c=relaxed/simple;
-	bh=1qe/woO8zybzb2TQkYQIHvFXXqzfTTIqj6TrnoCsGjk=;
+	s=arc-20240116; t=1788843689; c=relaxed/simple;
+	bh=V+6ScvaiLo3JPN0wkVRmkS7bOLe8c075r83hcHldHlo=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=MmaPP1GJ0l13g23U9hJLkH7Wz3YB8HcQF9rlATYo4aDzK5zrtmMjoPO+cKGk5O/WRwyPRPuXmLPeFrrwumuciXX7JLSRJ+TYt32U1YKj+xrkTFXHHwUMMRLQ2DHN+YBC5wzrE05xhbq51/eUkhET8ZaOr5oYHsYGMGYjEy+r2u4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=embeddedor.com; spf=pass smtp.mailfrom=embeddedor.com; dkim=pass (2048-bit key) header.d=embeddedor.com header.i=@embeddedor.com header.b=B2cmRG0j; arc=none smtp.client-ip=35.89.44.33
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=embeddedor.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=embeddedor.com
+	 In-Reply-To:Content-Type; b=I+eWghnVOSvQq6UOAllqMm3Jut7/rPwo9hT4mNeVxHAiqbBLUwhcaQf/tKyV34sVDUt+gNrB/ej779nMcnCRk/+qlifjezU6bFzwzI1XU6yexNCI46XLkHcuyvmTkqDmdOwWqs9tOUaZD9ycOCkUX0wsNMsqw/aHdRuAzbfPcz4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=E4dze73v; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=TPYhT8Xl; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=embeddedor.com header.i=@embeddedor.com header.b="B2cmRG0j"
-Received: from eig-obgw-5001b.ext.cloudfilter.net ([10.0.29.181])
-	by cmsmtp with ESMTPS
-	id 3lGVxLjk9aC0U3m8Fx710f; Tue, 08 Sep 2026 03:04:23 +0000
-Received: from gator4166.hostgator.com ([108.167.190.91])
-	by cmsmtp with ESMTPS
-	id 3m8ExASPnfDqY3m8ExMVQK; Tue, 08 Sep 2026 03:04:22 +0000
-X-Authority-Analysis: v=2.4 cv=HKbDFptv c=1 sm=1 tr=0 ts=6a9f7b36
- a=vY9Mjuda9oMEc2E4Cx1x2A==:117 a=vY9Mjuda9oMEc2E4Cx1x2A==:17
- a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=7T7KSl7uo7wA:10 a=VwQbUJbxAAAA:8
- a=Zo5euW2OAAAA:8 a=n92-qV7Ugmv0IUIatOIA:9 a=QEXdDO2ut3YA:10
- a=2aFnImwKRvkU0tJ3nQRT:22
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=embeddedor.com; s=default; h=Content-Transfer-Encoding:Content-Type:
-	In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender
-	:Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:
-	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:
-	List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
-	bh=ROkla2LJMX0VNuCHtg9QFZ/+ccIHOqOJ+aiWXH5j+Wc=; b=B2cmRG0jj/RpW8XaSFuEKy3O89
-	piPvZVZNJ+5qzM4fhvfgTASBPxFXrgRhnANgg9Or4iCoBqgmsfVS4Nk3nhJKkXUKgiun44WJzMFIt
-	KQLiAb9fGxWE45Y1Y4PZIqANCLUE6eoeB5qjpqOxeSL2U5xXz5M/hnsX4LNL9AHIISasRxRIcmpW+
-	WL96KXpF+GDNeo7pYhjxrpremSG+vnR0i7e08dMpP4PaDWgcCuIttot/Sf1fR4BxwHihWglIo5GMo
-	qq2CldcCkowHLiQkqm5VPCqOBurtUmre+eeJBKXzO16BydJJKYRzwU6avRuBaH1qc32UwnXMOJCs0
-	29VUuOnA==;
-Received: from flh4-125-195-69-90.tky.mesh.ad.jp ([125.195.69.90]:57288 helo=[10.203.100.33])
-	by gator4166.hostgator.com with esmtpsa  (TLS1.3) tls TLS_AES_128_GCM_SHA256
-	(Exim 4.99.5)
-	(envelope-from <gustavo@embeddedor.com>)
-	id 1x3m8D-0000000257t-2CoX;
-	Mon, 07 Sep 2026 22:04:21 -0500
-Message-ID: <b5f44a35-52d8-4197-ac85-73bb9dd0d11c@embeddedor.com>
-Date: Tue, 8 Sep 2026 12:04:16 +0900
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="E4dze73v";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="TPYhT8Xl"
+Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 687NlH362132512
+	for <linux-arm-msm@vger.kernel.org>; Tue, 8 Sep 2026 05:01:27 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	jhTD6XyG06zkUFyhXjqwJP5PsLsMnHTDifmAKJrZVq0=; b=E4dze73vOYcJmOsl
+	DoBhJt7JXDTrf8nHORTblhEjWf2q6NL8sxbveTvIMT4cqs+rUw8a5bEuoiXX27Sr
+	W6bb8aZcPZz75aoXjrgzBhoYvzmF/rgafPNg94rV8taMk1KGD+ucg7juWJeQ40oy
+	EKlSa54PXcVCT026h4+KhyQWdh1AOxb8WXUO9tKXGdEI6GfbGBUq6eMISiUk/FIQ
+	cx9hZDTniJYRjgfb6JcwWdk+KcTeGUapdZGta25uYfXoDWjl1TVrp0/3NJoUCDPD
+	4Hw70Di0CoDAkQDQD050+1kP9Xuzvr+9iEeag9yUCEt2whrQcQ/uGB5ZkkRsXmYW
+	+F0f3A==
+Received: from mail-pj1-f69.google.com (mail-pj1-f69.google.com [209.85.216.69])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ghuykb32p-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Tue, 08 Sep 2026 05:01:26 +0000 (GMT)
+Received: by mail-pj1-f69.google.com with SMTP id 98e67ed59e1d1-39aee9b4cf2so6566224a91.0
+        for <linux-arm-msm@vger.kernel.org>; Mon, 07 Sep 2026 22:01:26 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1788843686; x=1789448486; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=jhTD6XyG06zkUFyhXjqwJP5PsLsMnHTDifmAKJrZVq0=;
+        b=TPYhT8XlYZbvqikfYpE1lCA7N5IquVMh+naq5JRKnFqwcUHgj4bAyS2dbhbJ1nt+tU
+         XV4dw7d2oCRCVXvWiTlTHIxKVOjPQTjDVs1cy8MdelR0L60JYOO8afX43GQFSUz5jMMT
+         /w9dEaYLv3jtqFqT9Xb+6rhWKGmy4rwsAxPe6y2B2rqvqSVWodlhpaCTk53j1ksqaRRb
+         qNqyYvri13Nuqd4LgzLJ4AW/1ArwpG4O0cwki9V6SRHswFP1sBUlUtu/M05iEf0aPzKn
+         YKRKdzluUjEEpeCJGRHJL3XdizcF8d4NENN+AHrZ88mXju9VyjIqOgl+lIecBjEi4Tvr
+         GvIw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1788843686; x=1789448486;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=jhTD6XyG06zkUFyhXjqwJP5PsLsMnHTDifmAKJrZVq0=;
+        b=e1J2yVJX7BiCtQPOTvsZmyDoO6OO6L1gPA972W50KPEulvvDh7pM2HQXd4rXjGw8jj
+         mIA//ocqGcbZtqERj0gPTGKRejpK71+Plfzc8xxOVnbuy9sMIpc+mVVtvRMIQ+D09Hq9
+         p6nyKTpy5ond02yRyD35rHjKIvMiYOeiGucSWtUI1lMWnTR7scwY/jsdCHLeKcMTQ4sj
+         geprIZIHsiPeO9eM0djHMt24GGwlzqR16skxwEccJuMxkgSfG7pd8Y337SpMOAAbVY6J
+         NHTQnbomolEC2+lC26IxDZTm2GvCLuwHjjPNkaHrL4beLf5xCDbFtSmda0xCYX/41k1Q
+         wu5w==
+X-Forwarded-Encrypted: i=1; AKwUvBzgSxgYBEevxHI4KWyIWTgEqkxOGsgj+AQNGipW1lBjiXJjxutvom1Zd8lz57cUkxCycbYvbNC3VeAcU5XH@vger.kernel.org
+X-Gm-Message-State: AFuF++l8rKfWdoPn823DgI4J4UidlkzaxHGWVTHPIEPmoseWw+qNO6T1
+	76igGOphalCebWfjPyus0KKhmFhC/Ks6/iuZkItfb6+A4j8dIj4htw7Ka/on5Big3JA5+SgmEez
+	7/iTLuJI354MwAmc58NsxOps23CmM+wWvFdACwmwS+BkB0kDK4D58SxsZkLFAZv5/AQhJ
+X-Gm-Gg: AYBFou1LScKd7FxWbkxXcTWE44JO29eDoDCUUQDfElVHDwqdGLEjKQ/SwrWdw1WkVFR
+	k7SM1sa5BoTlGY+P313IHuDxSl6/K8Of8lhCkOoSVLQ4TwZzFDM5LaHwfvv2DCVxuDLcg1qDgwK
+	4yMdMgOyaauTvNkwTULl/NF9/Bg1MGd9hD5DFGbm+SWuF7FpgGkExagtdZn7YBxA2TA0gtTzMmL
+	bh/S3AdfYPGXcLYf6+1bERhcP+3b6GnuFxIT+SdF0Cg1qAE4HflLaIut0h7r7cB9ZzADJSfOeYi
+	3KP/Dcsscs5wNuaLIUOR/SRM8vBo67PvUCwFjoN7S/6ZNFhYTvDZve38be71lsVYjva72yHzVwy
+	Bp9KUOJ3NQY/VVKOMWWcqw7QNtOGeTv4kML+5VC/2/A==
+X-Received: by 2002:a17:90b:1a8f:b0:398:d2a0:87ff with SMTP id 98e67ed59e1d1-39b26101029mr40141200a91.1.1788843686087;
+        Mon, 07 Sep 2026 22:01:26 -0700 (PDT)
+X-Received: by 2002:a17:90b:1a8f:b0:398:d2a0:87ff with SMTP id 98e67ed59e1d1-39b26101029mr40141162a91.1.1788843685573;
+        Mon, 07 Sep 2026 22:01:25 -0700 (PDT)
+Received: from [10.217.217.129] ([202.46.22.19])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-39b25f8d2c5sm24555583a91.2.2026.09.07.22.01.19
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 07 Sep 2026 22:01:24 -0700 (PDT)
+Message-ID: <a08e64a3-d5d9-4568-a795-6c5ed355ae05@oss.qualcomm.com>
+Date: Tue, 8 Sep 2026 10:30:53 +0530
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -54,117 +89,161 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] clk: qcom: ipq-cmn-pll: Assign .num before accessing .hws
-To: Aamir Ahmed <elb12345@hotmail.co.uk>,
- Bjorn Andersson <andersson@kernel.org>, Stephen Boyd <sboyd@kernel.org>,
- Brian Masney <bmasney+clk@redhat.com>,
- Jerome Brunet <jbrunet+clk@baylibre.com>
-Cc: linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org,
- linux-kernel@vger.kernel.org, Luo Jie <jie.luo@oss.qualcomm.com>,
- Kees Cook <kees@kernel.org>, linux-hardening@vger.kernel.org,
- stable@vger.kernel.org
-References: <AS8P251MB0001B905088748016A0965F1C8B42@AS8P251MB0001.EURP251.PROD.OUTLOOK.COM>
+Subject: Re: [PATCH v2 2/3] interconnect: qcom: x1e80100: enable QoS
+ configuration
+To: Marc Zyngier <maz@kernel.org>,
+        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Cc: Mostafa Saleh <smostafa@google.com>, Georgi Djakov <djakov@kernel.org>,
+        Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>,
+        Rajendra Nayak
+ <quic_rjendra@quicinc.com>,
+        Abel Vesa <abelvesa@kernel.org>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>, linux-arm-msm@vger.kernel.org,
+        linux-pm@vger.kernel.org, devicetree@vger.kernel.org,
+        linux-kernel@vger.kernel.org,
+        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+        Odelu Kukatla <odelu.kukatla@oss.qualcomm.com>
+References: <20260527-x1e80100_qos-v2-0-305c6539e6d2@oss.qualcomm.com>
+ <20260527-x1e80100_qos-v2-2-305c6539e6d2@oss.qualcomm.com>
+ <apgeBNSiP01YfNcs@google.com> <86ld9d4h4n.wl-maz@kernel.org>
+ <f58bd978-ca45-48b9-a928-45a2878fb54a@oss.qualcomm.com>
+ <86jyox4fas.wl-maz@kernel.org>
+ <ca962589-3b6c-4e5d-a11e-b49cf20dc262@oss.qualcomm.com>
+ <86bja94234.wl-maz@kernel.org>
+ <0916741e-442e-431a-9831-9457e3af1cf0@oss.qualcomm.com>
+ <86a4pt3t15.wl-maz@kernel.org>
 Content-Language: en-US
-From: "Gustavo A. R. Silva" <gustavo@embeddedor.com>
-In-Reply-To: <AS8P251MB0001B905088748016A0965F1C8B42@AS8P251MB0001.EURP251.PROD.OUTLOOK.COM>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+From: Raviteja Laggyshetty <raviteja.laggyshetty@oss.qualcomm.com>
+In-Reply-To: <86a4pt3t15.wl-maz@kernel.org>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
-X-AntiAbuse: Primary Hostname - gator4166.hostgator.com
-X-AntiAbuse: Original Domain - vger.kernel.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - embeddedor.com
-X-BWhitelist: no
-X-Source-IP: 125.195.69.90
-X-Source-L: No
-X-Exim-ID: 1x3m8D-0000000257t-2CoX
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-X-Source-Sender: flh4-125-195-69-90.tky.mesh.ad.jp ([10.203.100.33]) [125.195.69.90]:57288
-X-Source-Auth: gustavo@embeddedor.com
-X-Email-Count: 7
-X-Org: HG=hgshared;ORG=hostgator;
-X-Source-Cap: Z3V6aWRpbmU7Z3V6aWRpbmU7Z2F0b3I0MTY2Lmhvc3RnYXRvci5jb20=
-X-Local-Domain: yes
-X-CMAE-Envelope: MS4xfEqwBEcR/wAAmbzBriuaRnwz0p06QO20sX/zzE4L9QC8/XokjvqANTcXQRDP3h2T1Mw1dfaORQs9XHzPEiJEHKk/UIaIiCc4AylgH+EKwnzY3qXjvSsV
- FIFiKcgCy51TfmjDZWO+wB6DWGhNi44B73a5Zo7I0hILwb3WFPrhLuih3D15xbdCrQXqkt0m/M7EhqTHjeiAS43cIaRcrlBtqUbAqu1dlG+3TDyUNwIfZ5+i
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTA4MDA1MSBTYWx0ZWRfX06tJMASY+tip
+ RS8pNoxZXG2c4mI5FhM8MJKOrgUsNVQ6A55pR4JXc9+xOKNqaD1qDxqYU0M88dcEul/pfj8KV61
+ uxzLzpxufS2hWBG/t3CwXsWG0Yx3lkA=
+X-Proofpoint-GUID: X9Ypd6L1s82RWlxkq-EjA-jMTtRE3U7u
+X-Authority-Analysis: v=2.4 cv=ObSoyBTY c=1 sm=1 tr=0 ts=6a9f96a6 cx=c_pps
+ a=vVfyC5vLCtgYJKYeQD43oA==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
+ a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22
+ a=EUspDBNiAAAA:8 a=sWLy_TsMIpJ6H1EfkIsA:9 a=QEXdDO2ut3YA:10
+ a=rl5im9kqc5Lf4LNbBjHf:22
+X-Proofpoint-ORIG-GUID: X9Ypd6L1s82RWlxkq-EjA-jMTtRE3U7u
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTA4MDA1MSBTYWx0ZWRfXyClssKnI1XbV
+ fJkC6JJarK3dMvnbnSKxpJsDVBnQ4rc+FnR23R57tS+44v1Y9JVVFZN6v7Mgm/lxwIhIxGCmpVE
+ sKl7s97dS3HQ2Fn7ZafxJEQHFDc1hdAWIY1cdVCSa5hs8WK/SB0gvO5fXNS8y8QPB94TxLuAqQG
+ 9a93pD2psfIVtS47uDo25egCGygDHRHbBd9XkMaVWy0rbj3conr9vuy2xyBbAl9XPw0/CpL7Odf
+ x+8PtwMDq/Rs/XG7Af8Y4pRc/UMI3aW5fng98KUEf1QcYBTOJ6SgBVQowE2kdogspMGXmYt6GAt
+ 9RIoSj6rX0jSDBtgy6hsR5rg8WCRGl/RawliyTxAhQ2sFvGV9LfuqvN9Q0b4rZ80J7z/P2hUuLr
+ uAoKVxztrqbEp56lqw0a7kp3ILkOUIyyE+O6wfSfDk2GMDkaMbkYKHuWvqt9gEyofeC5/PaO5CA
+ SJ7/zNkm6mbXn1/cdLw==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-09-07_07,2026-09-07_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ suspectscore=0 lowpriorityscore=0 impostorscore=0 adultscore=0 phishscore=0
+ priorityscore=1501 malwarescore=0 clxscore=1015 bulkscore=0 spamscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2609080051
 
 
 
-On 9/6/26 05:48, Aamir Ahmed wrote:
-> Commit f316cdff8d67 ("clk: Annotate struct clk_hw_onecell_data with
-> __counted_by") annotated the hws member of 'struct clk_hw_onecell_data'
-> with __counted_by, which informs the bounds sanitizer (UBSAN_BOUNDS)
-> about the number of elements in .hws[], so that it can warn when .hws[]
-> is accessed out of bounds. As noted in that change, the __counted_by
-> member must be initialized with the number of elements before the first
-> array access happens, otherwise there will be a warning from each access
-> prior to the initialization because the number of elements is zero.
-> This occurs in ipq_cmn_pll_register_clks() due to .num being assigned
-> only after the fixed rate output clocks and the CMN PLL clock have been
-> stored in .hws[]. If registering one of the fixed rate clocks fails, the
-> unwind loop under unregister_fixed_clk reads .hws[] while .num is still
-> zero as well. With CONFIG_UBSAN_BOUNDS and a compiler that implements
-> __counted_by (GCC 15.1+ or Clang 20.1+), this triggers an
-> array-index-out-of-bounds report during probe, and with
-> CONFIG_UBSAN_TRAP the first store traps so the CMN PLL clocks are never
-> provided.
+On 9/7/2026 10:20 PM, Marc Zyngier wrote:
+> On Mon, 07 Sep 2026 15:34:35 +0100,
+> Konrad Dybcio <konrad.dybcio@oss.qualcomm.com> wrote:
+>>
+>> On 9/7/26 3:34 PM, Marc Zyngier wrote:
+>>> On Mon, 07 Sep 2026 14:20:26 +0100,
+>>> Konrad Dybcio <konrad.dybcio@oss.qualcomm.com> wrote:
+>>>>
+>>>> On 9/7/26 10:49 AM, Marc Zyngier wrote:
+>>>>> On Mon, 07 Sep 2026 09:18:38 +0100,
+>>>>> Raviteja Laggyshetty <raviteja.laggyshetty@oss.qualcomm.com> wrote:
+>>
+>> [...]
+>>
+>>>>>> The current patch enable QoS for Hamoa SoC, which get programmed only during
+>>>>>> driver probe. This shouldn't impact or cause any spurious resets once the 
+>>>>>> device is booted up and probe is successful.
+>>>>>
+>>>>> And yet it absolutely does break things.
+>>>>>
+>>>>> With this patch applied, the box resets within 5GB of heavy network
+>>>>> traffic, probably because some transaction get delayed, and a watchdog
+>>>>> fires. With the patch reverted, the box keeps receiving packets, and
+>>>>> everything is hunky dory (100GB+ so far).
+>>>>>
+>>>>> Which makes me think that the set of hardcoded parameters in this
+>>>>> patch is not universal at all.
+>>>>
+>>>> They are, provided the configuration is for the right SoC..
+>>>
+>>> Is x1e001de different from x1e80100? AFAIK, it is only a binned
+>>> version of the same SoC. How do you explain the above regression?
+>>
+>> I somehow skimmed over the fact you said it's on the devkit and not
+>> on the mini-x mentioned before.
+>>
+>> I pulled the Hamoa settings I could find, there are some updates but
+>> none seem particularly related (maybe the PCIe one? I don't know how
+>> the network card is connected), please give the attached patch a try.
 > 
-> Move the .num initialization to right after the allocation.
+> I cherry-picked the Hamoa-specific patch, and gave it a go. Same
+> result (hard reset while synchronising a bunch of files), but this
+> time with a nice little message:
 > 
-> Cc: stable@vger.kernel.org
-> Fixes: f81715a4c87c ("clk: qcom: Add CMN PLL clock controller driver for IPQ SoC")
-> Assisted-by: LLM
-> Signed-off-by: Aamir Ahmed <elb12345@hotmail.co.uk>
+> [  272.468031] nvme nvme0: controller is down; will reset: CSTS=0xffffffff, PCI_STATUS=0xffff
+> [  272.468039] nvme nvme0: Does your device have a faulty power saving mode enabled?
+> [  272.468039] nvme nvme0: Try "nvme_core.default_ps_max_latency_us=0 pcie_aspm=off pcie_port_pm=off" and report a bug
+> 
+> indicating that PCIe has died.
+> 
+> None of that happens without the QoS stuff.
+> 
+>> If nothing else, please "bisect" the QoS additions until it stops
+>> crashing. Although perhaps applying only some of the settings may
+>> have its own set of dragons..
+> 
+> That's not exactly encouraging, is it? And if the "recommended" set of
+> tunables is not up to scratch, surely there should be a way to opt-out
+> until someone figures out what's wrong. Something like this:
+> 
+Compared to Hamoa, some PCIe ports are removed on Purwa.
+Let me share you an updated patch to try.
 
-Reviewed-by: Gustavo A. R. Silva <gustavoars@kernel.org>
-
-Thanks
--Gustavo
-
-> ---
-> Found while auditing the remaining clk_hw_onecell_data users that assign
-> .num only after touching .hws[], following the fixes already merged for
-> clk-s2mps11 (3e14c7207a97), exynos-clkout (cf33f0b7df13) and
-> clk-raspberrypi (6dc445c19050). The audit, the fix and this changelog
-> were drafted with an LLM assistant and reviewed by hand.
-> 
-> Compile-tested only (W=1, no warnings) on x86_64 with GCC 13.3, via
-> COMPILE_TEST with CONFIG_IPQ_CMN_PLL=m. GCC 13.3 does not implement
-> __counted_by (CC_HAS_COUNTED_BY needs GCC 15.1+ or Clang 20.1+), so the
-> build only confirms that the change compiles; the sanitizer path was not
-> exercised. I do not have the hardware, so this is not runtime-tested and
-> no UBSAN report was captured.
-> 
-> Based on v7.3-rc1. Checked against the pending IPQ5210 CMN PLL series
-> (v3, 2026-08-14): no changed lines overlap, and the fix is still needed
-> after its first patch removes the unwind path.
-> 
->   drivers/clk/qcom/ipq-cmn-pll.c | 3 ++-
->   1 file changed, 2 insertions(+), 1 deletion(-)
-> 
-> diff --git a/drivers/clk/qcom/ipq-cmn-pll.c b/drivers/clk/qcom/ipq-cmn-pll.c
-> index dafe8c1738d..a9abad9ff4e 100644
-> --- a/drivers/clk/qcom/ipq-cmn-pll.c
-> +++ b/drivers/clk/qcom/ipq-cmn-pll.c
-> @@ -380,6 +380,8 @@ static int ipq_cmn_pll_register_clks(struct platform_device *pdev)
->   	if (!hw_data)
->   		return -ENOMEM;
->   
-> +	hw_data->num = num_clks + 1;
+> diff --git a/drivers/interconnect/qcom/icc-rpmh.c b/drivers/interconnect/qcom/icc-rpmh.c
+> index 3b445acefece7..3a4743c364dac 100644
+> --- a/drivers/interconnect/qcom/icc-rpmh.c
+> +++ b/drivers/interconnect/qcom/icc-rpmh.c
+> @@ -224,6 +224,9 @@ static int qcom_icc_rpmh_configure_qos(struct qcom_icc_provider *qp)
+>  	return ret;
+>  }
+>  
+> +static bool enable_qos = true;
+> +module_param(enable_qos, bool, 0660);
 > +
->   	/*
->   	 * Register the CMN PLL clock, which is the parent clock of
->   	 * the fixed rate output clocks.
-> @@ -406,7 +408,6 @@ static int ipq_cmn_pll_register_clks(struct platform_device *pdev)
->   	 * is configured to 12 GHZ by DT property assigned-clock-rates-u64.
->   	 */
->   	hw_data->hws[CMN_PLL_CLK] = cmn_pll_hw;
-> -	hw_data->num = num_clks + 1;
->   
->   	ret = devm_of_clk_add_hw_provider(dev, of_clk_hw_onecell_get, hw_data);
->   	if (ret)
+>  int qcom_icc_rpmh_probe(struct platform_device *pdev)
+>  {
+>  	const struct qcom_icc_desc *desc;
+> @@ -308,6 +311,11 @@ int qcom_icc_rpmh_probe(struct platform_device *pdev)
+>  		struct resource *res;
+>  		void __iomem *base;
+>  
+> +		if (!enable_qos) {
+> +			dev_info(dev, "Skipping QoS (command line)\n");
+> +			goto skip_qos_config;
+> +		}
+> +
+>  		/* Try parent's regmap first */
+>  		qp->regmap = dev_get_regmap(dev->parent, NULL);
+>  		if (!qp->regmap) {
 > 
-> base-commit: 654ae5d73c05bd2943d65636ce6cd0aa46e62f18
+> At least people stuck with Purwa or other abandonware (such as the
+> devkit) would still have a usable machine.
+> 
+> 	M.
+> 
+> 
 
