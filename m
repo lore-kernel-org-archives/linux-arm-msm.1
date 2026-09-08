@@ -1,269 +1,233 @@
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D2960556B97
-	for <linux-arm-msm@vger.kernel.org>; Tue,  8 Sep 2026 13:32:47 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.129.124
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 98A272F3614
+	for <linux-arm-msm@vger.kernel.org>; Tue,  8 Sep 2026 13:34:09 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788874376; cv=none; b=S7fMhk8sIEhehbJVq5r/wWEhQ3ovKYQWO7qiyMK8o7+9BrVximdZO1p4IJKRXXrsFTdfHzzPm4igO4OyUF+yPlIDJUd6nIYCBdkQu8kQovY/paW/S/r+sD8BsYy325ZifNlMEySdWgMxyVdHsUO6kbbbL8uMzuCG6XpNBdXhWdE=
+	t=1788874457; cv=none; b=F4pqwI2FNZWullwMQhGUQyKc0S8i8B4NSnPDP6YKEH+QX9hLIdui3Ib/yMCys/8fDqGEaTXTQ37nlFpC9huB8IVM41R87bpO0jkxlIu2hUDGJM8weYQmEINadzrqt6U6wGK7ouvA3fn3/7lov9De19C1rjL4hxwvf+5VE1iiOxo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788874376; c=relaxed/simple;
-	bh=dV1zMZO7EmGOw2erf3pdS0/4kjvUBr+2XLiFaFWCCzE=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=eqYv8BDInKW55TclypTIrefu5972A/zjE8Nx2UJCTtg7bH277jeVuHckjSVspcKaSakCA+V+wz+uzTdk9jZQCGuYgctCko8oCPivfMHO8/Vp8Wo3xeR/crhoGubmI9t9AcgSL+bom60F9sHg20KmxEOra7MFg8CtFcM5W5ugTPc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=HjfSf6IM; dkim=pass (2048-bit key) header.d=redhat.com header.i=@redhat.com header.b=QD0zPwNd; arc=none smtp.client-ip=170.10.129.124
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
+	s=arc-20240116; t=1788874457; c=relaxed/simple;
+	bh=FjvrtXgSJzrkNWDSJewmiNLwdxNXgytWznHFxUzyG/o=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=Ar8Di5NlM+aTorrTWzkjrkgGud8Zuh2T/jxDkRX/mheNLVTuoItqJDWMk5E1h90bcd3K8wzL8ZglCEy9Ee9+0taTtLV8D9VOHb+ryItB2LA2MeYYreHnfPwG7BHVCXZNztD0gqBYTNgsh6R1Q3v7ixTPWi15+82ItAor78GzljQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=jUm4DZ9U; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=VKdKRbeL; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="HjfSf6IM";
-	dkim=pass (2048-bit key) header.d=redhat.com header.i=@redhat.com header.b="QD0zPwNd"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1788874365;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=NLHhVOGygbZejqC5i8njqwFC1rrqYhIiaH4rSU/x68s=;
-	b=HjfSf6IMOsajdqPuJKQWR1su50gzb7bx1mMCsBgDZTXKrgj2qKF39bblk4617x56mb0T1v
-	eWiAi5RMSFX5Z28KOCUaM1fjq55gj7RZqHbqnOYkFGRldPVssHCzTtmkNSsaJkaylHUpLd
-	zMWj/Pg+nYVmCDNRiTFNhPr3d0AF20A=
-Received: from mail-yw1-f198.google.com (mail-yw1-f198.google.com
- [209.85.128.198]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-611-K5wg7ewCNY2eWw59rcASig-1; Tue, 08 Sep 2026 09:32:42 -0400
-X-MC-Unique: K5wg7ewCNY2eWw59rcASig-1
-X-Mimecast-MFC-AGG-ID: K5wg7ewCNY2eWw59rcASig_1788874361
-Received: by mail-yw1-f198.google.com with SMTP id 00721157ae682-853a9c4c99eso40924637b3.0
-        for <linux-arm-msm@vger.kernel.org>; Tue, 08 Sep 2026 06:32:41 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="jUm4DZ9U";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="VKdKRbeL"
+Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 688CkjFA2343363
+	for <linux-arm-msm@vger.kernel.org>; Tue, 8 Sep 2026 13:34:06 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	EGBQTQwqiJYHaFi2riUHM9ZZfmyJuOH5IDkuXvGXM5w=; b=jUm4DZ9U5YqaYH4W
+	zT1OlWHlCdHRli+yw5AWuoZzV5g9k5LC6er0QBDPVWEpRoS4o9yGViLzI7AtQ6O3
+	9yBLck5AKW48h3gVXXUSMAm/FHOQgd17GzoZHt4xpgBqwvlbfSzc7K9r/EQSVRBm
+	nPZCSKaH3AG+T/PWDYfTfadyw7IWTEbcPdX6iQssy/+FFIgXJgdCxIm3mHr8zlHK
+	1QC+QEoPOXPsbDlPSXrCtYba5ZvW57t48IyW3H8RkgMKXvOE7ZvNcOpYamK7ki7S
+	ulOuB5ijO82rVFDfbJGm+4AWParJ/A7TbEiMTdaXUHqp6ElDYCo73s+/dusKYMYI
+	wtcprQ==
+Received: from mail-vs1-f70.google.com (mail-vs1-f70.google.com [209.85.217.70])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gjatjj7nu-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Tue, 08 Sep 2026 13:34:05 +0000 (GMT)
+Received: by mail-vs1-f70.google.com with SMTP id ada2fe7eead31-7800607543dso3934096137.0
+        for <linux-arm-msm@vger.kernel.org>; Tue, 08 Sep 2026 06:34:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=redhat.com; s=google; t=1788874361; x=1789479161; darn=vger.kernel.org;
-        h=user-agent:in-reply-to:content-transfer-encoding
-         :content-disposition:content-type:mime-version:references:message-id
-         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to
+        d=oss.qualcomm.com; s=google; t=1788874445; x=1789479245; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=NLHhVOGygbZejqC5i8njqwFC1rrqYhIiaH4rSU/x68s=;
-        b=QD0zPwNd3+J/p0qoqlYOYP8/8fFX9+HUivUcTuwp/Icyy9fvdUz4ZDtRP45w/jKA+m
-         xlMFTSE2rrBrHQI+DrgBe5/gtlMbbgH0QVpQwIxLQJr7e7VCoMgiuZSGDOn6aNKkJ1n1
-         kxcquzNCvUmSWLZ3/YwYRJhnBWOQqveVwEjTmKZpltzgp+HQ711rVNncmSPhXUqQMrjr
-         WfcD5zzFMqS7xuv+RBoVTweRK6t3PdBRFKDIyGZBCmdTQXvhXVAMZ+S6z3KBPZCxCrQl
-         +LVGZy+/0YHnz8khtNaXepcwnncOQjXC67juwFa/DgiGZ2db9mtWEUHNG2/PX5eE/ril
-         Tf2A==
+        bh=EGBQTQwqiJYHaFi2riUHM9ZZfmyJuOH5IDkuXvGXM5w=;
+        b=VKdKRbeLp0Np5CTIH1jMgDGP/Mrmq/LSmCrt88LgGkz95H5zvJuiAORW5DJP13qrxq
+         ynzAQnq0K+CNVg3+gYQ5i8JZrKowFJPrOnmAdPxBnpzt2QxTshOk98KuCl/IF0M5/Jdi
+         P5SPSBlufDea3V3bUFoiM9Jsa9fkGvOC1JtCvNWpVtLr22wYS4k7SWFwK0+5tRzO5wE2
+         v7KIK30no6biYZQfH5mkroDcJRIaMAn3p5QUCcZgaMNtdOWfnBnOmAJKWXtyNPTQZWJ3
+         G2NCD/ubQrrpqPcOsYMV0yD2AXdAbXNBIMWopjJu1XIyt77ZgttmQNrSvWdQkmS0itGF
+         kFLQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788874361; x=1789479161;
-        h=user-agent:in-reply-to:content-transfer-encoding
-         :content-disposition:content-type:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=NLHhVOGygbZejqC5i8njqwFC1rrqYhIiaH4rSU/x68s=;
-        b=dATqvoPVrE0Gb3nGyOzFLOaZKAZr/isiJqv7XIQvFsIhCFkmPW5XNsU9lcplIIbh2i
-         hTWNE5B0ov9kTcROra1SW+CdklnQyW3ZKGPQB0b19DbEIT8C9a9eUd7ryaDZMFK5glvo
-         g5zC3N5eADwVPasbhmDinF8+wN+eTiIs7cI/Uf6nuF0io0e7ALeWgmnW9jnmYI/dx0JH
-         b/jHRfhQ2pDBBBXdn02nYA0lB8vLyqSAC1glje0E+tEsviiHdMcstgJCE++a+GxxzNWe
-         gLasn2YpLVBBF9YTXgAFUINupazaWkgq8khp0IsNiEjiqSW/vhWnHHpElGlxUfhRPykK
-         G5mw==
-X-Forwarded-Encrypted: i=1; AKwUvBxyAYK2L8Zd3G1qAFXQSAS8WER3mrTIWZlR87oY55ef3Gtf5MIgrmP8qKIjnRF8DRC2f/R3tWp+hyiNLI+h@vger.kernel.org
-X-Gm-Message-State: AFuF++m5JGC9kgWINLidqxSYduEZEKAEjUsZ88z9FbbIL/x1LiItYki5
-	ZjgxGp4gahpiHJCXuwCKrItvwjXyEc4EbwKbBzHdvWHttEmXI4tXYRD6k5pTPHEy5GRuuS+epoY
-	yhp3rWzESoE7qfdGT3BA3I37khTH3UAMS+86FApkbqRCy+G5XnTn4qaos+YsqrkQ4IXiVLcbf/I
-	c=
-X-Gm-Gg: AYBFou2NAM/BLMQ9i4Z9jDCAkpLo4N6chSGPpKO4wP7/Vi8iki1SpItpYiPE1vdCqRL
-	6bJhS4aNwKWIO8kAt35z0ANh92gxSplx3V1rnWM6OcYeQ9OZ3YBIa1yNi2I8TRQzYTAIp4RvvPv
-	VCq3XKD7R1RwF8qKMM1vMdGxghqRdJvDT8y2mm1WtFxsA8op9rxsIrxz87vbNVOv1RggCmMPzw9
-	16ylQGU0B3+HxGzZemZxwHJSh7324ySDgRwmbVEh9igTtIQEjjzsANPmf7uOniWDD+lEU8pJvW0
-	jo73xjxmOcBtUucg+t8piSd8ofI1iu5eLsWFUzLW/57xKpk0A46zM8aDwEKtoYzfiAau3BIXGZc
-	CxqemJyHxomqn6UG18voSYWWjuguBZY4KCK4=
-X-Received: by 2002:a05:690c:dd6:b0:873:5c0f:284 with SMTP id 00721157ae682-8735c0f0419mr84208067b3.46.1788874361305;
-        Tue, 08 Sep 2026 06:32:41 -0700 (PDT)
-X-Received: by 2002:a05:690c:dd6:b0:873:5c0f:284 with SMTP id 00721157ae682-8735c0f0419mr84207477b3.46.1788874360744;
-        Tue, 08 Sep 2026 06:32:40 -0700 (PDT)
-Received: from redhat.com (c-73-183-53-213.hsd1.pa.comcast.net. [73.183.53.213])
-        by smtp.gmail.com with ESMTPSA id d75a77b69052e-5305413d7f8sm111769461cf.14.2026.09.08.06.32.38
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 08 Sep 2026 06:32:39 -0700 (PDT)
-Date: Tue, 8 Sep 2026 09:32:37 -0400
-From: Brian Masney <bmasney@redhat.com>
-To: Kieran Bingham <kieran.bingham@ideasonboard.com>
-Cc: Bjorn Andersson <andersson@kernel.org>,
-	Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
-	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
-	Michael Turquette <mturquette@baylibre.com>,
-	Stephen Boyd <sboyd@kernel.org>, linux-arm-msm@vger.kernel.org,
-	linux-clk@vger.kernel.org, linux-kernel@vger.kernel.org,
-	Jagadeesh Kona <jagadeesh.kona@oss.qualcomm.com>
-Subject: Re: [PATCH] clk: qcom: camcc-sc8280xp: unregister CAMCC_GDSC_CLK
-Message-ID: <aqAOdSmt3JY4R7uo@redhat.com>
-References: <20260708-camcc-sc8280xp-remove-gdsc-v1-1-dfaab98a3bf5@redhat.com>
- <178817257850.3929813.16300278876629611104@ping.linuxembedded.co.uk>
+        d=1e100.net; s=20251104; t=1788874445; x=1789479245;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=EGBQTQwqiJYHaFi2riUHM9ZZfmyJuOH5IDkuXvGXM5w=;
+        b=FwO3RnYEf7U9NsBD1f0TnyjnJuRjcXtPvdICGyUUWu8AAHhCM7ZU3KDtYcfMVjR8O7
+         8vm6h5PfzX2rqZrIX2cC1AfpQjRlH7HrGr7b79HeJxv2wCwhUdaX3f0tm/mqC9F8GoOA
+         ua+ZUeVr7Fc2uB3+CdtoJVG/y2Ey2nypJRrm0Wj3RZdzMo3UitbfOY6uZb+GEtNALQmq
+         IO1qgg14S6NE6JLKNZU3vM8oEZHCOgaZv1rW/F9UXsSPRzewddtMmJdMyDdKB/Bxo+O2
+         HH3GtkzIkNn3OHXn8X23JFmhRRbqtAj0klueev1J8TiTEYOTkYMra1uak+a7d5qxKKHs
+         3CFg==
+X-Forwarded-Encrypted: i=1; AKwUvBweefFFz8t9bAt41yyF0VUNzH2vrWgW6C+2Fiep8K80NM4GPm8vSqAHHvjFXt1EPhj5oh9rcpWB8kdJK4OV@vger.kernel.org
+X-Gm-Message-State: AFuF++kgvg+qe1uXzoYtjPQ8H7Q63JEN4ry+bkrzFUp/B4uwRXYIeXm4
+	TPyl3QWIc6w8OE3AmGUmfp4nVwW+3KUb5SxStvYrB/Tkyfpkk/KOfv6FNy4qzXRTRr2THFlC44a
+	rqkErHvhPH8kUQ88/X4WbC0yX5QaScr/bamCbzRmwhZm0aFLxRwyExvfyAeLV6hC0Yw8K
+X-Gm-Gg: AYBFou3mJZnfwFzImG80WCAwzJ/36V+7GbdddjX2hJKxdX/f3zOAD5CyVJyWYszR4i5
+	LM7++2dAThWbXWaJXp+kmQWl53p8Zfuu4MihAKejqizmUja6m4xPZ0m9LiKDfgQZUPkdR+d0F3I
+	csD9YCy6PRu6nsZvgmCdX585Bpap59qis7h29O1EOZkP2ujyNrttj8KEL+w+uZAAwi2XYCPtZ2x
+	G57hgRBAPfKuidLWx5Ev1tQyjRcFoz8DZbi7g9DFAuq0qwiPtmj6+QtLnV5vQwDK7bxBUPPwanu
+	pfP0L2KBZ0pG8tcA0NCBMAxfFZNvVIAuGyPb2OZzUCNK8Uwyp9MI3i2imEH+qQ8niRk8vpBZ3ED
+	jSbx+K1zvNG+uTv+B2Rg1Hgnrzpk=
+X-Received: by 2002:a05:6102:5487:b0:738:1ef6:51b9 with SMTP id ada2fe7eead31-78a4a96d8c3mr12122014137.5.1788874444876;
+        Tue, 08 Sep 2026 06:34:04 -0700 (PDT)
+X-Received: by 2002:a05:6102:5487:b0:738:1ef6:51b9 with SMTP id ada2fe7eead31-78a4a96d8c3mr12121978137.5.1788874444393;
+        Tue, 08 Sep 2026 06:34:04 -0700 (PDT)
+Received: from [192.168.68.120] ([5.133.47.210])
+        by smtp.googlemail.com with ESMTPSA id a640c23a62f3a-c262f97f1a3sm454448166b.19.2026.09.08.06.34.02
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 08 Sep 2026 06:34:03 -0700 (PDT)
+Message-ID: <9ed5d56c-9231-407c-ae7b-9c608c603254@oss.qualcomm.com>
+Date: Tue, 8 Sep 2026 14:34:02 +0100
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-In-Reply-To: <178817257850.3929813.16300278876629611104@ping.linuxembedded.co.uk>
-User-Agent: Mutt/2.4.0 (2026-06-19)
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 11/11] ASoC: codecs: add Qualcomm Tambora (WCD9378)
+ SDCA codec
+To: Charles Keepax <ckeepax@opensource.cirrus.com>
+Cc: Richard Fitzgerald <rf@opensource.cirrus.com>,
+        Pierre-Louis Bossart <pierre-louis.bossart@linux.dev>,
+        Mark Brown <broonie@kernel.org>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley
+ <conor+dt@kernel.org>,
+        Bard Liao <yung-chuan.liao@linux.intel.com>,
+        Jaroslav Kysela <perex@perex.cz>, Liam Girdwood <lgirdwood@gmail.com>,
+        Maciej Strozek <mstrozek@opensource.cirrus.com>,
+        Takashi Iwai <tiwai@suse.com>,
+        Faiz Nabi Kuchay <fkuchay@oss.qualcomm.com>,
+        Jorijn van der Graaf <jorijnvdgraaf@catcrafts.net>,
+        patches@opensource.cirrus.com, linux-sound@vger.kernel.org,
+        devicetree@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+References: <20260907083727.733705-1-srinivas.kandagatla@oss.qualcomm.com>
+ <20260907083727.733705-12-srinivas.kandagatla@oss.qualcomm.com>
+ <525f887e-cb3b-4e74-8b93-30c3baeb8018@linux.dev>
+ <7006ad74-334c-41cb-bcc8-9ef5e75dde7e@oss.qualcomm.com>
+ <005e3c81-778a-47bc-a8ae-fb5c38ea2e2c@linux.dev>
+ <c7fec9d0-b79f-437c-ba8b-37858842c545@oss.qualcomm.com>
+ <ap/MFVMHG2Hej8k/@opensource.cirrus.com>
+ <a6ae0ad4-6fb4-48f7-9636-7c0e266b6940@oss.qualcomm.com>
+ <a6d1f575-2431-4951-ab5b-e5bce5ecc63a@opensource.cirrus.com>
+ <af9a7339-1e21-435a-9d58-b29977195520@oss.qualcomm.com>
+ <aqALjdlyZfUb5fDu@opensource.cirrus.com>
+Content-Language: en-US
+From: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
+In-Reply-To: <aqALjdlyZfUb5fDu@opensource.cirrus.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTA4MDE0NSBTYWx0ZWRfX+glCXyu1vC21
+ M3GVLUWLX97G3atKIWvntSEBd5RSEHE4DqYBH+IXXh5vjjiWuyedF5Gh9W7Q07Wnrj/7wEO70Hb
+ /kMhBHsk0v9a4ie9ZayzV3ZoGqRS4GU=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTA4MDE0NSBTYWx0ZWRfX3I9/7QuViD9o
+ lEoxz4JsbYpgVCc4g1a1Aq5W5wPcAcTm5NAAt8vGBmK1EgO+7VHzkMe+iQoZlaFuLuP54ynBouX
+ J9fOSFZaTe8bEXepF6RSK68otaw7gIA01CkjyqazbZFJiW+wvqU66NKHlD80Gf8s0o54xtpjT+G
+ RmM8kMp13JzaDjlAd611+Sq+1fyWG10TmvF8sfQVkeREzoQrKMt+Uk/4SrSuxD1cxI+V5poCeVY
+ sYqfCOjs3v0VzNw3yzvTnTtHoFUbiVUozzB6iW7PKjp7xRm8FlJnPp8tiz+ZdCM3TnHtp6JtCvc
+ rEkYlyDvpzKIu6nQdK4COkDLnSc/k81qbo1akApnj0R5JPFq0MLF10KDl3pthQwK2/aNjzJrwQS
+ qgnurABrR8DbDThohzTXENgFkqUTSV0UmAsPhlo9eafw1EYx6jYJwISNqMTZ/thZzf/yHT2Rp9M
+ WpRGZIu15NqePJER3Fw==
+X-Proofpoint-ORIG-GUID: JWt0yR1xlj5TzVT7Tzdg-YgCKSGUPC90
+X-Authority-Analysis: v=2.4 cv=QrduG1yd c=1 sm=1 tr=0 ts=6aa00ecd cx=c_pps
+ a=N1BjEkVkxJi3uNfLdpvX3g==:117 a=ZsC4DHZuhs/kKio7QBcDoQ==:17
+ a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22
+ a=_BpqGgUEnCmz7QHiTJEA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+ a=crWF4MFLhNY0qMRaF8an:22
+X-Proofpoint-GUID: JWt0yR1xlj5TzVT7Tzdg-YgCKSGUPC90
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-09-08_02,2026-09-08_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ clxscore=1015 bulkscore=0 adultscore=0 malwarescore=0 lowpriorityscore=0
+ impostorscore=0 spamscore=0 priorityscore=1501 phishscore=0 suspectscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2609080145
 
-Hi Kieran,
+On 9/8/26 2:20 PM, Charles Keepax wrote:
+> On Tue, Sep 08, 2026 at 01:31:37PM +0100, Srinivas Kandagatla wrote:
+>> On 9/8/26 11:37 AM, Richard Fitzgerald wrote:
+>>> On 08/09/2026 10:09 am, Srinivas Kandagatla wrote:
+>>>> On 9/8/26 9:49 AM, Charles Keepax wrote:
+>>>>> On Mon, Sep 07, 2026 at 11:37:49PM +0100, Srinivas Kandagatla wrote:
+>>>>>> On 9/7/26 8:47 PM, Pierre-Louis Bossart wrote:
+>>>>>>> My take is that rather than encode all properties in C, it's probably
+>>>>>>> worth exploring a DT representation of the concepts that *can* be used
+>>>>>>> fairly easily and make the life of codec vendors easier - not as a>
+>>>>>>> literal translation of ACPI.
+>>>>>>
+>>>>>> I agree a DT expression of the *concepts*  not a literal DisCo
+>>>>>> mirror would be a better A.  I want to bring that back to LPC 2026
+>>>>>> DT MC as a concrete proposal grounded in the earlier DT-maintainer
+>>>>>> feedback rather than re-litigating it inline on this series.  Because
+>>>>>> B stays put, switching A later is a change inside populate_function,
+>>>>>> not an ABI break. so landing this series does not close the door on
+>>>>>> the representation you're asking for.
+>>>>>
+>>>>> I am still not sure I really see what the value is in a
+>>>>> completely different DT representation of the DisCo information,
+>>>>> all it does is give us potential issues with future spec versions
+>>>>> and create a whole bunch of new code than needs maintained. The
+>>>>> ACPI representation translates perfectly well to DT, should work
+>>>>> perfectly fine using the existing code.
+>>>>
+>>>> I totally agree with both of your comments, there is no way we can
+>>>> replicate MiPi spec into an different DT representation, this brings
+>>>> both maintenance overhead and is fragile. This a very big effort.
+>>>
+>>> But in your previous message in this thread you said the opposite:
+>>
+>> Yes I did say that, and I still think an intermediate DT
+>> representation would be a better A in principle.  What I'm
+>> highlighting is the cost side, any intermediate representation, by
+>> definition, deviates from the original MIPI representation.  That
+>> deviation has to be kept in sync with the SDCA spec, tracked across
+>> spec revisions, and translated back to struct sdca_function_data at
+>> runtime.  It's a real overhead, not a blocker, just something to
+>> weigh against the "concepts read cleaner in DT" benefit.
+> 
+> I am very sorry but this reads quite strangely and I am really
+> struggling to understand your position. I think I am reading it
+> as you are happy to go with the group concensus on how the DT is
+> represented and don't favour either approach.
 
-On Mon, Aug 31, 2026 at 11:36:18AM +0100, Kieran Bingham wrote:
-> Hi Brian, Bryan,
->=20
-> Quoting Brian Masney (2026-07-08 23:30:06)
-> > With the introduction of sync_state support in the clk and pmdomain
-> > subsystems, the following warning happens when the unused clocks are
-> > shutdown in camcc-sc8280xp:
->=20
->=20
-> I've recently switched my Lenovo X13s to Ubuntu 26.04. That's providing
-> a Linux 7.0 kernel.
->=20
-> Unfortunately - the camera can only run once. On successive attempts I
-> get a kernel WARN log like this.
->=20
-> Bryan pointed me at this patch, which I see is already in mainline.
->=20
-> So I've booted v7.2-16202-g08dbfad3f504 from yesterdays torvalds/master
-> which I believe incorporates the patch in this thread and I get the
-> following trace:
->=20
->=20
-> [11525.260456] ------------[ cut here ]------------
-> [11525.260463] titan_top_gdsc status stuck at 'off'
-> [11525.260475] WARNING: drivers/clk/qcom/gdsc.c:192 at gdsc_toggle_logic+=
-0x20c/0x220, CPU#5: CameraManager/26167
-> [11525.260486] Modules linked in: btrfs xor libblake2b raid6_pq ufs qnx4 =
-hfsplus hfs minix ntfs msdos jfs nls_ucs2_utils xfs usbhid xt_connmark xt_c=
-onntrack xt_MASQUERADE xt_tcpudp xt_mark nft_compat x_tables nft_chain_nat =
-nf_nat nf_conntrack nf_defrag_ipv6 nf_defrag_ipv4 rfcomm algif_hash algif_s=
-kcipher af_alg snd_seq_dummy snd_hrtimer nf_tables bnep snd_soc_wsa883x q6p=
-rm_clocks q6apm_dai q6apm_lpass_dais snd_q6dsp_common q6prm qrtr_mhi ath11k=
-_pci ath11k mac80211 cfg80211 mhi libarc4 qcom_spmi_adc_tm5 qcom_spmi_adc5 =
-qcom_vadc_common qcom_spmi_temp_alarm pm8941_pwrkey industrialio snd_soc_sc=
-8280xp snd_soc_wcd938x snd_soc_wcd938x_sdw snd_soc_qcom_sdw snd_soc_wcd_cla=
-ssh snd_soc_qcom_common snd_soc_wcd_common snd_soc_wcd_mbhc regmap_sdw snd_=
-seq_midi snd_seq_midi_event qcom_iris snd_rawmidi qcom_camss v4l2_mem2mem s=
-oundwire_qcom videobuf2_dma_contig hci_uart videobuf2_dma_sg snd_seq videob=
-uf2_memops btqca videobuf2_v4l2 btrtl snd_soc_lpass_va_macro snd_soc_lpass_=
-tx_macro snd_soc_lpass_wsa_macro slimbus snd_soc_lpass_rx_macro
-> [11525.260552]  btbcm soundwire_bus ov5675 snd_soc_lpass_macro_common vid=
-eobuf2_common snd_q6apm btintel qcomtee v4l2_fwnode snd_seq_device binfmt_m=
-isc snd_soc_hdmi_codec v4l2_async bluetooth videodev qcom_tsens qcom_edac m=
-c snd_soc_core snd_compress ac97_bus snd_pcm_dmaengine snd_pcm fastrpc snd_=
-timer tee qcom_cpufreq_hw pci_pwrctrl_pwrseq snd soundcore leds_gpio nls_is=
-o8859_1 joydev input_leds sch_fq_codel efi_pstore dm_crypt leds_qcom_lpg xh=
-ci_plat_hcd panel_edp hid_multitouch hid_generic led_class_multicolor qcom_=
-pbs qcom_pon reboot_mode pinctrl_spmi_gpio rtc_pm8xxx qcom_pm8008_regulator=
- nvme nvme_core i2c_hid_of nvme_keyring nvme_auth i2c_hid_of_elan i2c_hid_a=
-cpi_prp0001 apr qcom_spmi_pmic i2c_hid qcom_pm8008 regmap_spmi hid rpmsg_ct=
-rl dwc3 rpmsg_char qrtr_smd ulpi qcom_pd_mapper udc_core msm ucsi_glink pmi=
-c_glink_altmode typec_ucsi aux_hpd_bridge qcom_battmgr socinfo ubwc_config =
-ocmem drm_gpuvm drm_exec gpu_sched spmi_pmic_arb spmi_devres drm_display_he=
-lper qcom_stats spmi cec dispcc_sc8280xp camcc_sc8280xp
-> [11525.260623]  phy_qcom_edp rc_core i2c_qcom_cci videocc_sm8350 i2c_qcom=
-_geni phy_qcom_qmp_combo llcc_qcom gpi phy_qcom_qmp_usb gpucc_sc8280xp icc_=
-bwmon aux_bridge drm_dp_aux_bus dwc3_qcom_legacy qcom_refgen_regulator nvme=
-m_qfprom phy_qcom_snps_femto_v2 qcom_q6v5_pas qcom_pil_info qcom_common qco=
-m_glink_smem qcom_glink qcom_q6v5 qcom_sysmon aes_ce_blk mdt_loader qrtr gh=
-ash_ce pinctrl_sc8280xp_lpass_lpi pmic_glink qcom_aoss gpio_sbu_mux pinctrl=
-_lpass_lpi qcom_rpmh_regulator gf128mul lpasscc_sc8280xp qcom_smd phy_qcom_=
-qmp_pcie pdr_interface qcom_hwspinlock icc_osm_l3 typec qcom_pdr_msg pwrseq=
-_qcom_wcn qmi_helpers gpio_keys sm4 rpmsg_core thunderbolt pwm_bl smp2p qco=
-m_smem fixed dm_mirror dm_region_hash dm_log dmi_sysfs autofs4
-> [11525.260673] CPU: 5 UID: 1000 PID: 26167 Comm: CameraManager Kdump: loa=
-ded Tainted: G        W           7.2.0+ #6 PREEMPT(lazy)
-> [11525.260676] Tainted: [W]=3DWARN
-> [11525.260677] Hardware name: LENOVO 21BX000WUK/21BX000WUK, BIOS N3HET88W=
- (1.60 ) 03/14/2024
-> [11525.260678] pstate: 60400005 (nZCv daif +PAN -UAO -TCO -DIT -SSBS BTYP=
-E=3D--)
-> [11525.260680] pc : gdsc_toggle_logic+0x20c/0x220
-> [11525.260682] lr : gdsc_toggle_logic+0x20c/0x220
-> [11525.260685] sp : ffff80009157b5e0
-> [11525.260685] x29: ffff80009157b5e0 x28: ffffc78a55f6fd28 x27: ffff00008=
-83bd130
-> [11525.260688] x26: 0000000000000001 x25: 0000000000000000 x24: ffffc78a5=
-535bab0
-> [11525.260691] x23: 0000000000000000 x22: 0000000000000000 x21: 000000000=
-0000001
-> [11525.260693] x20: 00000000ffffff92 x19: ffffc78a5535b690 x18: ffff80008=
-ddc5108
-> [11525.260696] x17: 0000000000000000 x16: 0000000000000000 x15: 0000fe3dc=
-40ab158
-> [11525.260699] x14: ffffffffffffffff x13: 0000000000000028 x12: 010101010=
-1010101
-> [11525.260701] x11: 7f7f7f7f7f7f7f7f x10: 0000000000000000 x9 : 000000000=
-0000000
-> [11525.260704] x8 : 0000000000000000 x7 : 0000000000000000 x6 : 000000000=
-0000000
-> [11525.260706] x5 : 0000000000000000 x4 : 0000000000000000 x3 : 000000000=
-0000000
-> [11525.260708] x2 : 0000000000000000 x1 : 0000000000000000 x0 : 000000000=
-0000000
-> [11525.260712] Call trace:
-> [11525.260713]  gdsc_toggle_logic+0x20c/0x220 (P)
-> [11525.260716]  gdsc_enable+0x6c/0x2a8
-> [11525.260718]  _genpd_power_on+0xc0/0x208
-> [11525.260721]  genpd_power_on+0x10c/0x280
-> [11525.260723]  genpd_runtime_resume+0x154/0x358
-> [11525.260726]  __rpm_callback+0x54/0x210
-> [11525.260729]  rpm_callback+0x78/0x90
-> [11525.260731]  rpm_resume+0x588/0x768
-> [11525.260734]  __pm_runtime_resume+0x68/0xd8
-> [11525.260736]  rpm_get_suppliers+0x4c/0x1a8
-> [11525.260739]  __rpm_callback+0x180/0x210
-> [11525.260741]  rpm_callback+0x78/0x90
-> [11525.260744]  rpm_resume+0x588/0x768
-> [11525.260746]  __pm_runtime_resume+0x68/0xd8
-> [11525.260748]  csiphy_set_power+0x50/0x3a8 [qcom_camss]
-> [11525.260760]  pipeline_pm_power_one+0x16c/0x188 [videodev]
-> [11525.260777]  pipeline_pm_power+0x94/0x138 [videodev]
-> [11525.260787]  v4l2_pipeline_pm_use+0x60/0xb8 [videodev]
-> [11525.260796]  v4l2_pipeline_pm_get+0x20/0x48 [videodev]
-> [11525.260805]  video_prepare_streaming+0x28/0xa0 [qcom_camss]
-> [11525.260813]  vb2_core_streamon+0x60/0x1f0 [videobuf2_common]
-> [11525.260819]  vb2_ioctl_streamon+0x58/0xb8 [videobuf2_v4l2]
-> [11525.260823]  v4l_streamon+0x30/0x60 [videodev]
-> [11525.260833]  __video_do_ioctl+0x330/0x4c8 [videodev]
-> [11525.260843]  video_usercopy+0x374/0x898 [videodev]
-> [11525.260853]  video_ioctl2+0x24/0xb8 [videodev]
-> [11525.260862]  v4l2_ioctl+0x70/0xc8 [videodev]
-> [11525.260872]  __arm64_sys_ioctl+0xd4/0x168
-> [11525.260875]  invoke_syscall+0xa8/0x138
-> [11525.260878]  el0_svc_common.constprop.0+0x4c/0x140
-> [11525.260880]  do_el0_svc+0x28/0x58
-> [11525.260881]  el0_svc+0x48/0x310
-> [11525.260885]  el0t_64_sync_handler+0xc0/0x108
-> [11525.260888]  el0t_64_sync+0x1b8/0x1c0
-> [11525.260890] ---[ end trace 0000000000000000 ]---
-> [11525.260901] qcom-camss ac5a000.camss: Failed to power up pipeline: -110
->=20
->=20
-> Slightly different trace, but it's the same WARN except:
->=20
->  [11525.260463] titan_top_gdsc status stuck at 'off'
->=20
-> instead of
->=20
->  [   15.408367] titan_top_gdsc status stuck at 'on'
->=20
-> Does anyone have any insights to debugging this, or is anyone else
-> testing on a Lenovo x13s recently?
->=20
-> Before putting Ubuntu on this laptop, I used to run a branch from
-> Jhovald (https://github.com/jhovold/linux/tree/wip/sc8280xp-6.16), which
-> I always had success with, and I think at that point all the camera
-> support was mainline, so I can likely go back to that and then bisect to
-> master if that's worth the time.
+Apologies for not being clear.
 
-I'll be honest that I'm not sure. Does reverting this patch fix the
-issue? If so, leave it reverted, and check to see if adding the
-CLK_IGNORE_UNUSED flag works for you via this patch?
+I do favor the C-style one that is submitted given the discussions that
+we had so far.
 
-https://lore.kernel.org/linux-arm-msm/20260701-sc8280xp-camcc-gdsc-clk-v1-1=
--ee28be1e8508@redhat.com/
+You also seems to be ok with that approach, I will wait for Pierre to
+comment and stay with it.
 
-Brian
+Am happy to fix any changes as required.
+> 
+>> That's why the current series takes the lower-overhead path
+>> (mechanical transcription in C) rather than proposing an intermediate
+>> DT format as part of this submission.  If the concept-DT direction
+>> gets traction at LPC 2026 DT MC, we can revisit.
+> 
+> This part I follow slightly better, I would be happy to proceed,
+> pending reviews with the current approach, although if Pierre
+> is or not probably remains to be seen.
+
+@Pierre
+Please let us know if you are okay with this approach of C structures.
+
+--srini
+> 
+> I would assume the DT guys would be happy with a completely
+> different representation that was more idiomatic DT, that is
+> essentially what they have already said. The question I was
+> aiming for was less whether they will be on board with that
+> and more if it is a good idea.
+> 
+> Thanks,
+> Charles
 
