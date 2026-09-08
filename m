@@ -1,130 +1,97 @@
-Received: from mail-wm1-f42.google.com (mail-wm1-f42.google.com [209.85.128.42])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CD2E754937A
-	for <linux-arm-msm@vger.kernel.org>; Tue,  8 Sep 2026 13:24:26 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.42
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8A181560AA3;
+	Tue,  8 Sep 2026 13:26:35 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788873877; cv=none; b=LGWY9gISxC6ZnpvdOfqJAPT03AF+inqH3pyTlKOqGxJhQoKCC929GlT/i61SCMU4eV0DU55VO3oyJOYWw1As1FIn2ZIraSDFWFwnYE4wbaVpHv86uoOYfOT1XcVYNPxBjmmhcmLbMBuxxjOZ/35eYITIsLQxH+2vqZJuejc5TWE=
+	t=1788874004; cv=none; b=BcmJ1ElEmCJsYYRV/sPXB3dJPa+nGRh9yuzDWiWAT+mWjsniplyGJZ2nG/J7ywCC5DXr6kcEZ/dxUPckZg6OMgxDKOl7DQerLUR2/+sHZDHfFA1ouYIDGNv37Ak00LBdQl1GNeCC9vskcR5XwtJhE/MXuxJxU097XlsQwfXQ4Js=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788873877; c=relaxed/simple;
-	bh=yYvWPIkjUnOSxNsW0N2YuVeYUdVZYIlPEps6riY11G0=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=DuCDu4YZHOW/osLPSm7Ik6mqlYiHVEvDuahpK/9OGqzxMM6sBmjxFBflyJNTrGpjqWexRcF4R2sZu6C1825gfkrdkMTQxwaGkS+ALyZwvup7EoUv6XQuR6/oUHGhCeANX55lGT95hUPCh/BnpNzUGGgLB5VZMm5S52426zCRPfg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=XjvBXIy3; arc=none smtp.client-ip=209.85.128.42
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
+	s=arc-20240116; t=1788874004; c=relaxed/simple;
+	bh=kkCW25mTBC6D6EOM8A27Os9PxNPMAbNEV5hiQ10NpKY=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=W7dxCkZllbQW2zM9/2kHolercSxfG3jG0DZToX71Wg75Kh5EXFuMQDcD7/ViCdaCfR/2WT0/EAHTbzKFMwSk5RE3wn/jK4p5Nw0yq+OaUVDmZgnw4A42/7R/38U9RUNsHk2oJMWmLlSX0rWVb7MfOlpQ/0/Nk3oHbVEG15Ni254=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=HY+Lyj6I; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="XjvBXIy3"
-Received: by mail-wm1-f42.google.com with SMTP id 5b1f17b1804b1-49b965570d7so53095185e9.0
-        for <linux-arm-msm@vger.kernel.org>; Tue, 08 Sep 2026 06:24:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1788873863; x=1789478663; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=RUOCLyyP/3BZIr82/UOzgNVAzirKVjkOzIoxcnIj0kg=;
-        b=XjvBXIy3nUzW/LD57qPZUkxprg9jvzCF8s1iFAf/iMimPncXyagvf+sIGPZt9hdkSM
-         kNrpZ7a66QeruuRy0QCCvm2aJF4oJEjZa/6kpHTm7mJGlxAAM9v9jnVjh7zkZ3eF+WqT
-         VodHCYCoNM3svrSECPBib+Of49gKiNXyC+FCXzCf+tux29nx8/oD2OnNHR9rMba+VmMB
-         tvXe4DzLJfVagLBZma9TNxrhcCJn32PmK9/uwhVq4j19ez/+y7HY3tWVnk95THuj4KJt
-         LOuTpwLxW0Zm16PrylF9+YJmHlbP0oYbVuT/xuIcEQLCXvbF6/mLqzkkiImYwluaETAC
-         K+kw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788873863; x=1789478663;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=RUOCLyyP/3BZIr82/UOzgNVAzirKVjkOzIoxcnIj0kg=;
-        b=e/uTQ15DbsSChSG/wZyYdiO4K+HWXsDdBIDSeB6ACT/EvysPMvF3TWtHhTdmxak7lK
-         xcbalbCsp47J6x9pS+5FD8l1/pIxgMj4PxGRlqLZRWiK80p9nMxkwEHJKmGZ7LRKQowo
-         S5Cme60RlrLDGOgdR70IWT4ySphAphlyAofDh+SjlJOjYK54Ha8lFehf/vJJsZ+JNW3s
-         opxuLRBy7EDBnseBf8JsxtwMhMoINpWubeQueRxKntBucH5GertTpepBHPuv5Bc08LsY
-         vCR20MW7SSH31ckfKAbDaDepT3Yv5jzHwA/s2pUViOLy2gBvWAEfLVe/bqbmV25cRItk
-         aKmA==
-X-Gm-Message-State: AFuF++lejdybT6+vHY4P8BCSrhQy63kywM8f6VvEFQhDtYGImbO0zEdw
-	W5Z90EIcV40a9sUEE5a43zzpmskgNpXBuVdTKngBBOsJ4knMwmcww2vkfU5tyT+F2BY=
-X-Gm-Gg: AYBFou2svWhSWkuTrElOU/onGqiBkGc2CnzDpWvt+vDa9aLuVW/CXyywhVoC1FY+Jej
-	aDb7mdSwDYGuRXNP5Le9juvYzrT7Lhqrbqyt9jf2TaZqW01qY1s55QVLqqQKqta9Ji6vCgY0qQ/
-	7h4h3GHmUMAOGYR8iZTD4ecjnB28gVfiZXzJEmm9a8pFPDqmIpnrCLfk+VhuT0VK3LRj3hB3YHW
-	M5L/plnErSvwp+9Ju9qvjz+0x6t2xFMZwYcGyRhRwnSIBN/vqCQBiVw2Okb4mxnj2GoWF02OadJ
-	T17CtQw81hoWaMet5UAVt68D9bit6Ss/dfWSHer9geSL5wmUVHSwfaZ6TLmQ3dGkMjevHk2NdjS
-	CJaKzlb9ayvWMHU1zGfQo6WT7iyQya80307jEBRgnlySWKMdg8ism1jGvsS5vasovp1b7/FEw8D
-	lhxNfHmMmPI45E7x2lA0ewUn8j/9whS1jTIIPHCKpYLrf+Tl7VoIjHLLHrhZtc+lAlHkccJnrfc
-	R2pHRem
-X-Received: by 2002:a05:600c:4e46:b0:49c:fc6e:8cb4 with SMTP id 5b1f17b1804b1-49cfc6e8e51mr249810395e9.24.1788873862925;
-        Tue, 08 Sep 2026 06:24:22 -0700 (PDT)
-Received: from arrakeen.starnux.net ([2a01:e0a:106d:1080:8261:5fff:fe11:bdda])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-49d07b371afsm298959475e9.9.2026.09.08.06.24.21
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 08 Sep 2026 06:24:21 -0700 (PDT)
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Date: Tue, 08 Sep 2026 15:24:13 +0200
-Subject: [PATCH 1/2] drm/msm/a6xx: Add CX AO Counter registers used for
- a750 GPUs
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="HY+Lyj6I"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 11A111F00A3A;
+	Tue,  8 Sep 2026 13:26:25 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1788873988;
+	bh=q04zxj00YAVHVF+Y7P5cma6NzSCR12O+/Gqj/zD7dkw=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=HY+Lyj6IGR96zyT1qsYCwOJAHIyn5hCfupkAzuvfru0PDM+N5dpWX6zFCjnfOGn6i
+	 tVQ1YJvsY6jjM92UHvYU/acV6trLMJn3hkLbc1E1immJ4BXulpmsztWugpgNhL7/Ha
+	 V19XmH9Za03TpyfGzHd/RFYbQE952PGFoybuIkP5CisLHNylBlDy71fGOMoJ1kCGSt
+	 MPDn4/gTi6CnLFi5qoj2BLbTXX8uDofg5CSFDMwUd/x/CDbMYcFk1BHHptKQtIdxuu
+	 QwGxtPT+SfARx0kFZJ9/wRzu03zr1bDN2spuSmFRhcLfj5hYhHk3+LF2mlPabYJid+
+	 zrdApXJlXJ+BA==
+Date: Tue, 8 Sep 2026 14:26:23 +0100
+From: Mark Brown <broonie@kernel.org>
+To: Kamal Wadhwa <kamal.wadhwa@oss.qualcomm.com>
+Cc: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, robh@kernel.org,
+	Saikiran <bjsaikiran@gmail.com>, monish.chunara@oss.qualcomm.com,
+	jishnu.prakash@oss.qualcomm.com, nitin.rawat@oss.qualcomm.com,
+	Bjorn Andersson <bjorn.andersson@oss.qualcomm.com>,
+	lgirdwood@gmail.com, andersson@kernel.org,
+	linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
+	krzk+dt@kernel.org, devicetree@vger.kernel.org
+Subject: Re: [PATCH v3 0/2] regulator: qcom-rpmh: Add off-on-delay support
+Message-ID: <086f8e7c-0afa-45d5-bdb2-54ac5f79eefa@sirena.org.uk>
+References: <20260127190211.14312-1-bjsaikiran@gmail.com>
+ <20260515111647.qg75thdvcbvvjpoi@hu-kamalw-hyd.qualcomm.com>
+ <06a264d0-6a14-4b71-b783-82b771f04411@oss.qualcomm.com>
+ <oa3okt7mdhoqmrebwim5yswarbcacbmhpwfvqbhtv6ib3cwrwi@ddox6mw3uhmy>
+ <0d4fa333-df22-42b9-b9c2-ccb43ac4fac3@oss.qualcomm.com>
+ <3pybhkqdvve2ct6burnhav3utis6nljz7ncheqcrs7v55ullz4@nek57empeoca>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260908-topic-sm8650-gmu-a750-timestamp-reg-v1-1-284880d6e68b@linaro.org>
-References: <20260908-topic-sm8650-gmu-a750-timestamp-reg-v1-0-284880d6e68b@linaro.org>
-In-Reply-To: <20260908-topic-sm8650-gmu-a750-timestamp-reg-v1-0-284880d6e68b@linaro.org>
-To: Rob Clark <robin.clark@oss.qualcomm.com>, Sean Paul <sean@poorly.run>, 
- Konrad Dybcio <konradybcio@kernel.org>, 
- Akhil P Oommen <akhilpo@oss.qualcomm.com>, 
- Dmitry Baryshkov <lumag@kernel.org>, 
- Abhinav Kumar <abhinav.kumar@linux.dev>, 
- Jessica Zhang <jesszhan0024@gmail.com>, 
- Marijn Suijten <marijn.suijten@somainline.org>, 
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>
-Cc: linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org, 
- freedreno@lists.freedesktop.org, linux-kernel@vger.kernel.org, 
- Neil Armstrong <neil.armstrong@linaro.org>
-X-Mailer: b4 0.15.1
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1220;
- i=neil.armstrong@linaro.org; h=from:subject:message-id;
- bh=yYvWPIkjUnOSxNsW0N2YuVeYUdVZYIlPEps6riY11G0=;
- b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBqoAyAvByARiXpF/WkqKGE4OSrNQy1qbMA0R+Bxpif
- 6NCOXWWJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCaqAMgAAKCRB33NvayMhJ0bvwEA
- CtKuYZJw+MpFqDcZ/vp5yplaR9VEFBLXXkirgGqhNVptMv0sDDn1j/yRXTnGDhVIK5Bg+zP9C9eysJ
- T3n8rkEhg0/bz2wXTxHsOrK2xMr1Wuvg22XAJ5KQFI3Ba3+9/pRJU4jF4DM8x1puKpFt5u2I48CucI
- 6G095COra/sqM/3Qq/FyTpE0qGsMN9XptEnla9MDq+VS6TqPy+t4xUB2fBVjlhNPITo+WzVblYN2w4
- 6XeDENjqlENTlVdIYrMoAYbTZEtq2jvVJOik8g8RuMZaZZZHEo/Jp8RsSd1BmxwNP5fMwNtdXxZliB
- ytWq7FByzX6DytKetUWiy6NfjuoWv7Fa1NWbJE+ubLcd9apF/sO0avrZEnhgAbf4846JUoKROsPTDf
- QqER6w7io/mfIeFzoLyuwwQPzykcgTnWEcPm3sXy+3Qd0UkflAhgiKMzIgtVRdDrWIy6HJuAVDScVD
- TIku4croTpsNMhw5vrtYG4AFKjF2xZqy0x/QrD1zzdANlGBXlPPubaivOU3zcHQHj+pmMMijYRMuLL
- 6Z7jaIJ1sqJbtHIeCcDqpePVuL//BC7aV5Kc51SwBFh1PvSUOjUC6cVYFQbaLn10S/PSp/xP5qHH3X
- zY80z89nnKkUUWYClwRa02wAmeU3DX+C521L6rkiZ+nVW2ps92FvS0NgMPRQ==
-X-Developer-Key: i=neil.armstrong@linaro.org; a=openpgp;
- fpr=89EC3D058446217450F22848169AB7B1A4CFF8AE
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="9VW76fA+11sgbf3o"
+Content-Disposition: inline
+In-Reply-To: <3pybhkqdvve2ct6burnhav3utis6nljz7ncheqcrs7v55ullz4@nek57empeoca>
+X-Cookie: The world is not octal despite DEC.
 
-The a750 uses the CX AO Counters instead of the GMU_ALWAYS_ON_COUNTER
-register on A6xx and other A7xx GPUs.
 
-Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
----
- drivers/gpu/drm/msm/registers/adreno/a6xx_gmu.xml | 2 ++
- 1 file changed, 2 insertions(+)
+--9VW76fA+11sgbf3o
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-diff --git a/drivers/gpu/drm/msm/registers/adreno/a6xx_gmu.xml b/drivers/gpu/drm/msm/registers/adreno/a6xx_gmu.xml
-index 33404eb18fd0..3fe7bc3ea93d 100644
---- a/drivers/gpu/drm/msm/registers/adreno/a6xx_gmu.xml
-+++ b/drivers/gpu/drm/msm/registers/adreno/a6xx_gmu.xml
-@@ -141,6 +141,8 @@ xsi:schemaLocation="https://gitlab.freedesktop.org/freedreno/ rules-fd.xsd">
- 	<reg32 offset="0x1f9f0" name="GMU_BOOT_KMD_LM_HANDSHAKE"/>
- 	<reg32 offset="0x1f957" name="GMU_LLM_GLM_SLEEP_CTRL"/>
- 	<reg32 offset="0x1f958" name="GMU_LLM_GLM_SLEEP_STATUS"/>
-+	<reg32 offset="0x1f880" name="GMU_CX_AO_COUNTER_H" variants="A7XX"/>
-+	<reg32 offset="0x1f881" name="GMU_CX_AO_COUNTER_L" variants="A7XX"/>
- 	<reg32 offset="0x1f888" name="GMU_ALWAYS_ON_COUNTER_L" variants="A6XX-A7XX"/>
- 	<reg32 offset="0x1f840" name="GMU_ALWAYS_ON_COUNTER_L" variants="A8XX-"/>
- 	<reg32 offset="0x1f889" name="GMU_ALWAYS_ON_COUNTER_H" variants="A6XX-A7XX"/>
+On Tue, Sep 08, 2026 at 06:43:09PM +0530, Kamal Wadhwa wrote:
+> On Mon, Jun 29, 2026 at 02:13:00PM +0200, Konrad Dybcio wrote:
 
--- 
-2.34.1
+> > In that case, I see no real downside in allowing that, especially given
+> > it would/should be used sparingly and only in cases like you mentioned
+> > where the board has some quirks
 
+> yes. we can use this sparingly for such board issues.
+
+> @Mark, @Rob - can you please comment if you think this is acceptable?
+
+Could you please ask a specific question?  What is "this" here?  There
+is an large amount of quoted material in the message and referencs to
+some property but I'm not clear which one.
+
+Please also do not add random extra characters to my name, and also
+you've CCed konrad.dybcio@kernel.org which appears invalid.
+
+--9VW76fA+11sgbf3o
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAABCgAdFiEEreZoqmdXGLWf4p/qJNaLcl1Uh9AFAmqgDP4ACgkQJNaLcl1U
+h9APVAgAgq+stEwEc/8U6SjPxakkpGCjCDA/SXo7iDLCsUVsVlArF0X9xby1ke8j
+MYXZ/4StflzSrvE4jca2Pxpznzc1L1GwitqsmVQxGrTZRlchaZV4X8pHknbJJA8v
+BbZTb0JZKHiYpjPu5boA3jCYQq4GBVsffU2DN+JJJy/jmTSsiLXzFvEiAZdSxmI5
+iYQ6k1owEM7QgVcqbivuKSKMNio8XmC1OP4EQ8hdeq1BcGMYLPkT6/uBMZTiAAUy
+/7RIH7PqhGAU8ePnPK0TRoj+NUpknydYc1esMX4HZ2N7u7HJ4ug0Xmj7h/26KUT9
+k7oZNP2t1WSU+ZbUSNgT9OQ7mWBypg==
+=bqAj
+-----END PGP SIGNATURE-----
+
+--9VW76fA+11sgbf3o--
