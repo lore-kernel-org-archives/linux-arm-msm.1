@@ -1,33 +1,21 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 595B44D2ED7;
-	Tue,  8 Sep 2026 09:04:55 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8A1E04A99D9;
+	Tue,  8 Sep 2026 09:05:41 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788858297; cv=none; b=QHLlWPEmLTYuwgxipA9HTrb607zDzx7WDOX2Z/7KLvoGqEXQHGNfXaXFKwpO2lheoSNPRm+fDdkwP7E8+XRDq1lHhNTgNWvy8PXvxVmTN+3x/9n+FDMLKixPeotWfLFoXuroW82aKLpvTs+yacUp8dE3KrbqtCN9RbtC4fFGLUA=
+	t=1788858342; cv=none; b=XYf0q33+py/0FvUkE/QKsA7UXuJSwrHX1ywDO2dSoIv8JHr3akDrZDiyhZB9EtNYWiErxvrFm0wZlzufVPA8g7RCxMg3W8aPw/CXbTBRoTZjsUiVCRzjxnmq6eSFWi2jgo3pw4QlpKysq/tr1lUAFnM0lPAWzDxJ9Zw9gdtHNgk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788858297; c=relaxed/simple;
-	bh=Vx1+49obiewOl79639DZmF1wkibxkyCTID+ViVIiLj4=;
+	s=arc-20240116; t=1788858342; c=relaxed/simple;
+	bh=m5Z0dnOwtdaj+Ji9M30PnHmJ4+TlyYI0QV2127NqB7k=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=T9ySsi252c2+5Km1VPaJSL3NLIcI7PUUdOPwG024Vnd75rDPFnDygCK2bp9OBlQKWsvZUCK1I0HX1BIhOLYOIjjibfdo5ioWWV1qcQpFirhRQj1AupfjlqPPR7mn4OwRn1yLYL+cbW1Wkz4zNypQFM1fnS8ZbJt6I9AiyK+5Kp0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=CFYpoiSP; arc=none smtp.client-ip=100.103.45.18
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="CFYpoiSP"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5B39E1F00A3A;
-	Tue,  8 Sep 2026 09:04:51 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1788858295;
-	bh=c6uWSG7TONdZIgB8zJx1aIyc4MlIdIcgiOHUki77mf0=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=CFYpoiSPQy2NDLOjj8XnhJAYn0T2smT3Snkl/DiwvG+nMXd0D8xDfu/KSZMYoobY/
-	 5nCwJWkTMWFbAQoSnC5sYoNX/S+ZOVOcnsRh74CrLBxEhcr3FmjL2/r8H3yEygETx2
-	 OibZHemzsRvYIXc7OKvAtcNFdCfLGZuNmc9Q5NmTmBykzAOxAOqXMTuzZVSlq8vpfI
-	 DAJaEwDHT0ntAcWGHnhzwGKtwigyCPjILr0D0E+e3IE9HwjtuXWKU1tEB8s0pA3ssX
-	 FmAcotCs69g6VOtQkHBss2PuR/dzVmTq4M4luJU9Rb1OShlDYlJin6Xaa31einVSZ5
-	 e7xsfn/SWjFJA==
-Message-ID: <9a0bd113-56c2-47ce-89b7-64afa8453f79@kernel.org>
-Date: Tue, 8 Sep 2026 11:04:49 +0200
+	 In-Reply-To:Content-Type; b=i/BT0xkXENFFbOntfeYCkZ5K4EgSA/aFazc/yo1NdFiK69F92JLB3mkV8PZnbAckORETvhb7myLzyIjYSPt8bxUvv4T13cEZUzKgzk+8z9gaPGMmWbq5EOQs1zHHsg7UId5T96XwPeHkAlaSd9Myb3VW7ys4y7MoYE0xj2NMTH8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4536C1F00A3A;
+	Tue,  8 Sep 2026 09:05:37 +0000 (UTC)
+Message-ID: <799c3128-cf43-4a64-a8c8-3f6695bbf424@kernel.org>
+Date: Tue, 8 Sep 2026 11:05:34 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -35,16 +23,16 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/7] dt-bindings: arm: qcom: Distinguish IdeaCentre Mini
- 01Q8X10 SKUs
-To: jens.glathe@oldschoolsolutions.biz, Bjorn Andersson
- <andersson@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>,
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
- Conor Dooley <conor+dt@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
- linux-kernel@vger.kernel.org
+Subject: Re: [PATCH 0/7] arm64: dts: qcom: IdeaCentre Mini 01Q8X10 Hamoa +
+ Purwa
+To: Mostafa Saleh <smostafa@google.com>, jens.glathe@oldschoolsolutions.biz
+Cc: Bjorn Andersson <andersson@kernel.org>,
+ Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
+ <conor+dt@kernel.org>, linux-arm-msm@vger.kernel.org,
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
 References: <20260905-x1-ideacentre-mini-prettify-v1-0-9a87882973bb@oldschoolsolutions.biz>
- <20260905-x1-ideacentre-mini-prettify-v1-1-9a87882973bb@oldschoolsolutions.biz>
+ <ap_PdUrwLIVGJ3oG@google.com>
 From: Krzysztof Kozlowski <krzk@kernel.org>
 Content-Language: en-US
 Autocrypt: addr=krzk@kernel.org; keydata=
@@ -90,32 +78,80 @@ Autocrypt: addr=krzk@kernel.org; keydata=
  K9bCVaboTA2T77QYkRcRJYSsO1alGX0ome/hMLD1daXlkrNUp1HWa3K4iytLRXjCSIorWiGs
  n+q3krnpXu3TFkA8qtOFZMdnIiFuiq1yLT8hptsV5xh1TA2nsVvSYiaCr3q4s4BKjS/KrLDb
  qoxzw8ISjdUp4pA85vb6YLCmb39NgidD+7PmAr65lBNveIFynTgsja1rRQ4=
-In-Reply-To: <20260905-x1-ideacentre-mini-prettify-v1-1-9a87882973bb@oldschoolsolutions.biz>
+In-Reply-To: <ap_PdUrwLIVGJ3oG@google.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-On 05/09/2026 11:28, Jens Glathe via B4 Relay wrote:
-> From: Jens Glathe <jens.glathe@oldschoolsolutions.biz>
+On 08/09/2026 11:03, Mostafa Saleh wrote:
+> Hi Jens,
 > 
-> The Lenovo IdeaCentre Mini 01Q8X10 exists on both X1E80100 (Hamoa) and
-> X1P42100 (Purwa). A single two-entry compatible cannot tell those
-> device trees apart.
+> On Sat, Sep 05, 2026 at 11:28:55AM +0200, Jens Glathe via B4 Relay wrote:
+>> The IdeaCentre Mini 01Q8X10 (board 91B6) ships with two SoCs: Hamoa
+>> (X1E80100), already upstream, and Purwa (X1P42100 / X1-26-100). Same
+>> chassis, different silicon. Stubble and the DTB loader need distinct
+>> compatibles.
+>>
+>> This series splits the board description into
+>> x1-lenovo-ideacentre-mini-01q8x10.dtsi and adds thin leaves. Each SKU
+>> keeps lenovo,ideacentre-mini-01q8x10 as fallback:
+>>
+>>   lenovo,hamoa-ideacentre-mini-01q8x10, lenovo,ideacentre-mini-01q8x10,
+>>   qcom,x1e80100
+>>
+>>   lenovo,purwa-ideacentre-mini-01q8x10, lenovo,ideacentre-mini-01q8x10,
+>>   qcom,x1p42100
+>>
+>> No qcom_scm change; the fallback is already on the allowlist.
+>>
+>> The remaining patches fix the common DTSI for both boxes:
+>>
+>> - Build the Hamoa EL2 DTB like the other Hamoa boards.
+>> - Second M.2 3V3 is PMC8380_3 GPIO5, not TLMM18. A 2 s startup delay
+>>   is required or pcie3 fails to probe. always-on is a hack until there
+>>   is a real M.2 power sequencer.
+>> - sound-name-prefix on the three DP ports. Enable lpass_vamacro: no
+>>   onboard mics, but it provides fsgen for tx_macro and rx_macro.
+>> - usb_mp port 1 is not populated (no PTN3222 @ 0x4f). USB-C is
+>>   usb_1_ss0; rear Type-A is usb_mp port 0 behind a Genesys hub.
+>>
+>> The Genesys hub is left undescribed.
+>>
+>> UCM [1] and AudioReach [2] topology for these devices are online, too.
+>>
+>> Tested on:
+>> - IdeaCentre Mini 01Q8X10, Purwa (X1-26-100), 91B6
+>> - Hamoa: compile-tested only
+>>
+>> [1]: https://github.com/alsa-project/alsa-ucm-conf/pull/843
+>> [2]: https://github.com/linux-msm/audioreach-topology/pull/74
+>>
+>> Assisted-by: Grok 4.5 (xAI)
+>> Signed-off-by: Jens Glathe <jens.glathe@oldschoolsolutions.biz>
+>> ---
+>> Jens Glathe (7):
+>>       dt-bindings: arm: qcom: Distinguish IdeaCentre Mini 01Q8X10 SKUs
+>>       arm64: dts: qcom: Split IdeaCentre Mini into a common DTSI
+>>       arm64: dts: qcom: Add Purwa IdeaCentre Mini 01Q8X10
+>>       arm64: dts: qcom: ideacentre-mini: Build the Hamoa EL2 DTB
+>>       arm64: dts: qcom: ideacentre-mini: Fix the second M.2 3V3 rail
+>>       arm64: dts: qcom: ideacentre-mini: Wire up DP sound names and VA macro
+>>       arm64: dts: qcom: ideacentre-mini: Drop the unused USB MP port
+>>
+>>  Documentation/devicetree/bindings/arm/qcom.yaml    |   11 +-
+>>  arch/arm64/boot/dts/qcom/Makefile                  |    8 +-
+>>  .../qcom/hamoa-lenovo-ideacentre-mini-01q8x10.dts  | 1188 +-------------------
+>>  .../qcom/purwa-lenovo-ideacentre-mini-01q8x10.dts  |   42 +
+>>  .../qcom/x1-lenovo-ideacentre-mini-01q8x10.dtsi    | 1185 +++++++++++++++++++
+>>  5 files changed, 1246 insertions(+), 1188 deletions(-)
+>> ---
+>> base-commit: af5f12805e5cefa4fe68d6127c7e1fb78cd5535c
 > 
-> Move the board out of the generic X1E80100 enum and document two
-> three-entry lists:
-> 
->   lenovo,hamoa-ideacentre-mini-01q8x10, lenovo,ideacentre-mini-01q8x10,
->   qcom,x1e80100
-> 
->   lenovo,purwa-ideacentre-mini-01q8x10, lenovo,ideacentre-mini-01q8x10,
->   qcom,x1p42100
-> 
-> Assisted-by: Grok 4.5 (xAI)
-> Signed-off-by: Jens Glathe <jens.glathe@oldschoolsolutions.biz>
-> ---
+> This series does not apply to ToT nor I can find this base-commit
+> in it.
 
+It's a public/standard commit, next.
 
-Acked-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+What is ToT in upstream development?
 
 Best regards,
 Krzysztof
