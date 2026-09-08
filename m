@@ -1,177 +1,247 @@
-Received: from mail-wr1-f43.google.com (mail-wr1-f43.google.com [209.85.221.43])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A4FAF357CE0
-	for <linux-arm-msm@vger.kernel.org>; Tue,  8 Sep 2026 19:31:26 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.43
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A30213812FE;
+	Tue,  8 Sep 2026 19:37:58 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788895888; cv=none; b=YqUXYyCPGWwt74BYFiYqlY9mubyaTXAn8rAo6OHmMPi5vYr2HwPNhq0TQG7Bob0CxJ2uJUtpXEedbiZhpOe50KelSCWQaGNZ88tGMfo3NH6Sw9N+aMpRzPrtDjNtWl4uJAjOAP7CeCpVnGjN2/w61Wctd6ra68XV2wd7dWOu32k=
+	t=1788896280; cv=none; b=Ymk4GvWpspdDvSEN6jQb10VVmxu5AAiwRjEda5aeXKcGEX//Sset70s1+3MfsSgIojZ0LrBSQFWZfOmtD+UIicc3WBiEJfJAB0blx5NAxgITK1V4XVxQAOkl+/bcBvPREMtdg8KwRyEhw3pTIY3BAbwAK1EQICjBo0ZgaNY2Ksw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788895888; c=relaxed/simple;
-	bh=/1pXjrR9cuOnK2vYyqHrGZFoJSq2pPsJGh6P1fXARuw=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=CO128i5D4cj8y4rHe1uA+Xa3DkuJoUP71fLGINGBdJzf+c71yw5DkMRGXw4OUPGyxpufy/ZYLFQJH1y7+fAUnuDi106xZFC9/3AZnHEvU0wJN9ERAa7aleldVZTmabZArDlxDHAlpy6ysPBGNJWs3kTZ/8xNcAKgSbUTZGwv0B0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=gPCgwmXa; arc=none smtp.client-ip=209.85.221.43
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	s=arc-20240116; t=1788896280; c=relaxed/simple;
+	bh=2qk0fy8BaA5H2eULjkDkeUiAjpBmUTLpUODBkGZ+mHk=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=SA4oLx0HWBuecTMZ/i9PQf+mAVkcLaDdMSk0eMzjjxW6NDXzmGPZxmy/MMQVN+/ytJmjk70v5deFBqCpN2MqqQAruVBYq0FlKPGey1yxATr0aqI3x0dNKHicuGSuMRTD5oavAiGab9Y6w33XTHo2Ced77h+fP38O6oXQHW8/iVk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=LxLO7Ylh; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="gPCgwmXa"
-Received: by mail-wr1-f43.google.com with SMTP id ffacd0b85a97d-4843efcbdb2so2976613f8f.2
-        for <linux-arm-msm@vger.kernel.org>; Tue, 08 Sep 2026 12:31:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1788895885; x=1789500685; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from:references
-         :cc:to:content-language:subject:user-agent:mime-version:date
-         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=bnI1itulTesLodw5EkiLefmn13ex/6XxibeK3IHMIsk=;
-        b=gPCgwmXaZQyhbKMsqvImGNlqtpeofWtuLoruBIuXOp3auRsbNRieGVYGt+QHCfzB+E
-         CLpv6dkW/BK6s14ZkRtAsFUnire1joEjp9pRttPo2+nePhDNky3X+VAmVz1rXq6dDdZo
-         nxNKzZEhlfskxuMnk7k002jNwHYRVzMlp8liuxpH/UrHsmt2FLGrrP/0vamt4j/jkSrW
-         HeBaAHKfRxNEKzSu4OS8uWd0IEPOMfc+ugXhJ/05fEtDYos59W0s7G8vlgIxsi7o2vUS
-         N2YrppmffQJZEoew4ixzAZFdeYFfcCPRZhuHbKGqZ6/Tf8QN5DXrN0y9h0zfcWuqOO1Y
-         pqCg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788895885; x=1789500685;
-        h=content-transfer-encoding:content-type:in-reply-to:from:references
-         :cc:to:content-language:subject:user-agent:mime-version:date
-         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=bnI1itulTesLodw5EkiLefmn13ex/6XxibeK3IHMIsk=;
-        b=iXhXAeI4YazNHU+hvRNsuNoW9k1WaTSdcXavYHGxRqCzRLcWkJsNkAxr83l4vSiJAr
-         mMMUrPS/AKPd7jpLN3zt27MScQ20GB51yVtFdSokW5Hs3a7iNYeK5ama/r9Ln+c6Ht7o
-         dxPJzcq8LrxXsJ/17gh/dIiNjy+zcNdlSZmH2vWQ1lO80s8mNZYlKEUP7+pNu7SzgzYX
-         JJHYgbgnIwgd4Ckuvq2LvMQdzXUpWrP77uz4LetY5Jxg+iwcv2qh/oZhhI4pNv2Ujax1
-         RBh7uN35ILoZdJKTDRo0W+ZYYfMOzCPda945m4VMte5t4Ae+vDHr1ypt4zKaJ5eKMJrH
-         4N4Q==
-X-Forwarded-Encrypted: i=1; AKwUvBxV9ZATLiM+/2lvncWMMdFKsEa4dkil10aKKUsro8a0vDopKIxFNETvsyExlcsjH25HYGz2wXQ0GFbWW5S5@vger.kernel.org
-X-Gm-Message-State: AFuF++kwTZoI5i9dnfek6xzkQOJJPZlY7+MA/UI/JlAB6eG7L7X2j/z1
-	vhFxX8QZah5w/sLf2ypwIxW9FFkK0VbTntgxZyHD/U/wylQR4Ax89gm3
-X-Gm-Gg: AYBFou0xDQvHweec7kq2o6xvgM5bpfcqJ3U+Yw4LaFg+pzB4kxZWVN9/Qd8yiHHxDQn
-	+4l7Hwm0soNveuXnhEdc7HZLSOpR0d9uOnu+76Y4TX3f4ubiHiu7Rh2FrFLZGj7AhugqcXfYa6w
-	HnhjhbFsXw5/dFVv7fLwmHxSA2f8Os5De34pC350Ty0Cx10VSe2wX69MZ0fR3G4NkPzu/xAVq/z
-	iEp+qg3cYQHwMuS0InFHhzIYuBoGkw2RXZa4v/lDvt4LDg9XclSTG4S6uBP2BjGdOTUfZmuzVNY
-	VwSw+skYXKbuYxWYOHzddj1sI6QVtDlhqsMhMrkOew3v3wZWcfEeks5wrgvZ4tWkKBly3yuSIlT
-	eyK27/Yf8qENZRIOeg7567yEKO+a6+rNxu1d9wA0jMeoqbi4kU7owtgngQZXvW72dKfsqDoLJkn
-	ITUQBppw+xuHuO2veQ5sHaKuNSBKKH7RhPbbaYYLged1ZqXox8WnLnroOe3XHo/Cq0FfP9wVqH0
-	waVtKhk+v/fBA5Ht0ROwJi0ogeEYkweJn6u8g==
-X-Received: by 2002:a05:6000:470a:b0:47f:4919:d5b2 with SMTP id ffacd0b85a97d-4858707f262mr33763744f8f.1.1788895884671;
-        Tue, 08 Sep 2026 12:31:24 -0700 (PDT)
-Received: from [192.168.20.170] (5403F394.catv.pool.telekom.hu. [84.3.243.148])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-485aa2c9acasm2597169f8f.36.2026.09.08.12.31.23
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 08 Sep 2026 12:31:24 -0700 (PDT)
-Message-ID: <5231553f-c24d-4bae-a73e-1f2af8c13636@gmail.com>
-Date: Tue, 8 Sep 2026 21:31:21 +0200
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="LxLO7Ylh"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6FEFD1F00A3F;
+	Tue,  8 Sep 2026 19:37:54 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1788896278;
+	bh=dqsuwEOibNCoxL+MY+KJcXPDxVwv27f/BtLbRZm4oLA=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=LxLO7YlhfkJ6kIOGDGZ5nSoikZlhH+iKssK96nrIO7LPlq5q0K2Xj6+A/pa9/a+RX
+	 MwPsws+1FTtge8362AgmAZRufc0hEQRFbUOUzwWcXHmJoIGnTqVfoWQPyV0JRvyvOs
+	 VmHenITvMjztqR/lCdFgSN/laLJDqebEOreLQId8H6kDq8mW2kpJlDTe+W6KqaHwWZ
+	 p+rR+msrIozKsAIdEu/QhUHnJKjr+snX2BjbUYougfQxRLPy6wTgLdGNR0Kn7VbpER
+	 Up1n5Q6hbMAqpZj1QlHWmyJkUyZ97Ej44ohBwdTHv5XiCehhhnrnKV33ex8bzFWzEm
+	 ddml7G1VkX4Cg==
+Date: Tue, 8 Sep 2026 20:37:52 +0100
+From: Sudeep Holla <sudeep.holla@kernel.org>
+To: Sibi Sankar <sibi.sankar@oss.qualcomm.com>
+Cc: Pragnesh Papaniya <pragnesh.papaniya@oss.qualcomm.com>,
+	Sudeep Holla <sudeep.holla@kernel.org>,
+	Cristian Marussi <cristian.marussi@arm.com>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	MyungJoo Ham <myungjoo.ham@samsung.com>,
+	Kyungmin Park <kyungmin.park@samsung.com>,
+	Chanwoo Choi <cw00.choi@samsung.com>,
+	Dmitry Osipenko <digetx@gmail.com>,
+	Thierry Reding <thierry.reding@kernel.org>,
+	Jonathan Hunter <jonathanh@nvidia.com>,
+	Bjorn Andersson <andersson@kernel.org>,
+	Konrad Dybcio <konradybcio@kernel.org>,
+	Rajendra Nayak <rajendra.nayak@oss.qualcomm.com>,
+	Pankaj Patil <pankaj.patil@oss.qualcomm.com>,
+	linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
+	arm-scmi@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
+	devicetree@vger.kernel.org, linux-pm@vger.kernel.org,
+	linux-tegra@vger.kernel.org
+Subject: Re: [PATCH RFC 01/10] firmware: arm_scmi: Add SCMI QCOM Generic
+ Extension Protocol documentation
+Message-ID: <20260908-optimal-alpaca-of-justice-f55bba@sudeepholla>
+References: <20260724-rfc_v8_scmi_memlat-v1-0-cb732bcff1f4@oss.qualcomm.com>
+ <20260724-rfc_v8_scmi_memlat-v1-1-cb732bcff1f4@oss.qualcomm.com>
+ <20260724-crouching-starfish-of-apotheosis-d1cdf8@sudeepholla>
+ <f39b2be0-b6d6-43a6-a412-44ff433c51f6@oss.qualcomm.com>
+ <20260813-remarkable-handsome-heron-e99e78@sudeepholla>
+ <fb0ad185-8989-48a9-86b4-9c765788febf@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] spi: spi-qpic-snand: publish the ECC context to
- snandc->qspi
-Content-Language: hu
-To: Johan Alvarado <contact@c127.dev>, broonie@kernel.org,
- md.alam@oss.qualcomm.com
-Cc: konradybcio@kernel.org, pengpeng@iscas.ac.cn, miquel.raynal@bootlin.com,
- quic_varada@quicinc.com, quic_srichara@quicinc.com,
- linux-spi@vger.kernel.org, linux-mtd@lists.infradead.org,
- linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org
-References: <20260825013848.1056946-1-contact@c127.dev>
-From: Gabor Juhos <j4g8y7@gmail.com>
-In-Reply-To: <20260825013848.1056946-1-contact@c127.dev>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <fb0ad185-8989-48a9-86b4-9c765788febf@oss.qualcomm.com>
 
-Hi Johan,
+On Thu, Aug 20, 2026 at 01:26:57AM +0530, Sibi Sankar wrote:
+> 
+> On 8/13/2026 12:48 PM, Sudeep Holla wrote:
 
-2026. 08. 25. 3:38 keltezéssel, Johan Alvarado írta:
-> qcom_spi_ooblayout_ecc() and qcom_spi_ooblayout_free() read the ECC
-> configuration through snandc->qspi->ecc. qcom_spi_probe() points it at a
-> zeroed scratch struct and only qcom_spi_ecc_prepare_io_req_pipelined(),
-> which runs on page I/O, ever updates it. qcom_spi_ecc_init_ctx_pipelined()
-> installs the ooblayout but does not publish the context it just
-> allocated, and qcom_spi_ecc_cleanup_ctx_pipelined() frees that context
-> without clearing the pointer.
-> 
-> spinand_init() calls mtd_ooblayout_count_freebytes() right after the ECC
-> context is created and before any page I/O, so the ooblayout always runs
-> against a pointer that does not describe the current context:
-> 
->   - On a first probe it reads the zeroed struct from qcom_spi_probe(),
->     so steps, bytes and bbm_size are 0. The count then returns 0 rather
->     than an error, so the probe continues with mtd->oobavail set to 0.
-> 
->   - On a probe retry it reads the ecc_cfg the previous attempt freed.
-> 
-> A retry is easy to hit. On IPQ5018 with the qcom,smem-part parser the
-> partition parse returns -EPROBE_DEFER until SMEM has probed, so the
-> first spi-nand probe defers. It defers inside
-> mtd_device_parse_register(), after mtd_otp_nvmem_add() has already read
-> the factory OTP - that read goes through prepare_io_req and leaves
-> snandc->qspi->ecc pointing at the context that spinand_cleanup() then
-> frees. The second probe allocates a new context, never publishes it, and
-> computes the OOB layout from the freed one. Once the slab has been
-> reused, qecc->steps holds garbage and
-> 
->   oobregion->length = qecc->steps * 4;
-> 
-> goes negative. qcom_spi_ooblayout_free() only reports -ERANGE for
-> section 1 and later, so mtd_ooblayout_count_bytes() sums the regions and
-> returns that negative length as the byte count. The -512 below is
-> steps * 4 with steps == -128. It is a byte count that happens to
-> collide with -ERESTARTSYS, not an error the driver returned.
-> spinand_init() takes it as an error, and because it is not
-> -EPROBE_DEFER the driver core never retries and the NAND never appears:
-> 
->   spi-nand spi0.0: ESMT SPI NAND was found.
->   spi-nand spi0.0: probe with driver spi-nand failed with error -512
->   UBI error: cannot open mtd rootfs, error -2
->   Waiting for root device /dev/ubiblock0_1...
-> 
-> On a Mercusys MR80X (IPQ5018, ESMT F50D1G41LB) about half of the boots
-> failed to mount the rootfs, the outcome depending on whether the freed
-> memory had been overwritten yet.
-> 
-> Publish the context when it is created and clear the pointer when it is
-> destroyed. Clearing leaves snandc->qspi->ecc NULL after cleanup, which
-> is safe: the mtd is unregistered before cleanup_ctx runs, so no
-> ooblayout callback can follow.
-> 
-> Fixes: 7304d1909080 ("spi: spi-qpic: add driver for QCOM SPI NAND flash Interface")
-> Cc: stable@vger.kernel.org
-> Signed-off-by: Johan Alvarado <contact@c127.dev>
-> ---
-> Tested on a Mercusys MR80X (IPQ5018, ESMT F50D1G41LB) running 6.18.44
-> with the equivalent change; mainline build-tested with W=1, no warnings.
+[...]
 
-Tested-by: Gabor Juhos <j4g8y7@gmail.com>
-
-Tested on top of v7.3-rc2, running on the Tp-Link Archer AX55 v1. It works as
-expected, yet I have some comments, see below.
-
+> > The current rationale isn't entirely clear to me. Windows historically favors
+> > ACPI over native SCMI, meaning that supporting a proprietary vendor protocol
+> > would require non-native workarounds potentially hidden within interfaces like
+> > PEP. I am skeptical of this architectural direction. Since Android leverages
 > 
->  drivers/spi/spi-qpic-snand.c | 3 +++
->  1 file changed, 3 insertions(+)
+> In an ideal world maybe but transition for all SoC capabilities to ACPI is
+> rarely that smooth and they do use the PEP interface.
 > 
-> diff --git a/drivers/spi/spi-qpic-snand.c b/drivers/spi/spi-qpic-snand.c
-> index 61b1f2eb19ce..0d0ae93ad4bf 100644
-> --- a/drivers/spi/spi-qpic-snand.c
-> +++ b/drivers/spi/spi-qpic-snand.c
-> @@ -411,6 +411,8 @@ static int qcom_spi_ecc_init_ctx_pipelined(struct nand_device *nand)
->  	dev_dbg(snandc->dev, "ECC strength: %u bits per %u bytes\n",
->  		ecc_cfg->strength, ecc_cfg->step_size);
->  
-> +	snandc->qspi->ecc = ecc_cfg;
 
-For the sake of completeness we should remove the identical assignment from the
-qcom_spi_ecc_prepare_io_req_pipelined() function as it gets redundant after the
-change.
+Well I agree, then we shouldn't be bringing up the topic of OS agnostic
+firmware as that is not a reality on the platforms we are talking about
+then ?
 
-Additionally, the zeroed ecc_cfg instance allocated in qcom_spi_probe() become
-unused so the allocation can be dropped. However, since this is not strictly
-required for fixing the use-after-free issue, it could be done in a separate patch.
+> > the Linux kernel and already manages this through vendor modules, maintaining
+> > those as modules seems like the optimal path until we agree on the interface
+> > that can be merged.
+> > 
+> > Given that this patch series has been under discussion for nearly two years,
+> > please provide a summary of the feedback that has already been incorporated
+> > to address these concerns just for sake of argument and in your defence.
+> > 
+> > To clarify, the vendor protocol space is strictly intended for
+> > platform-specific functionalities that cannot be standardized; it should not
+> > be used to bypass standardization for convenience. It appears no evaluation
+> > was done to determine if or why the standard performance protocol was
+> > insufficient. Had that assessment occurred, I would expect the proposed
+> > interface to align much more closely with the standard definitions as I
+> > previously mentioned.
+> 
+> The design might seem contrived at the moment but it was still largely
+> shaped by the SCMI specification. There is a literally a 6-7 year window between
+> SCMI landing in mainline and the first mention of the vendor protocol identifiers
+> being re-useable between SoC vendors [1]. This largely shaped how Qualcomm
 
+[1] shows the date as 2024, so 6-7 years is bit of exaggeration IMO.
+
+> used vendor protocol. The first instance of vendor protocol was a straight
+> forward vendor protcol implementing just MEMLAT [2] but the sudden rise in
+> the number of protocol eating up vendor protocol space made them club
+> together the class of devfreq algorithms into a singular generic extension
+> protocol.
+>
+
+I fully understand that this interface is already deployed in firmware and
+that changing that firmware ABI may no longer be practical. However, I
+think we need to separate two things: supporting an existing firmware ABI
+and accepting that ABI as the abstraction exposed through the upstream SCMI
+framework.
+
+The former is a compatibility constraint for Qualcomm platforms. The latter
+is an upstream interface and maintainability decision, and the existence of
+deployed firmware cannot by itself determine that decision.
+
+> "deliberated attempt to circumvent the standard SCMI protocol template"
+
+This was specifically targeted for having performance related tunables
+outside of PERF protocol. If that is not possible, then I take back that
+statement.
+
+> "expectation of immediate acceptance without modification"
+> 
+> I gather that ^^ are the major objections to the current series landing but
+> sadly none of these were raised during this 2 year period and this protocol
+> even had a "Reviewed-by" from the only other reviewer listed [3]. We
+> promised to fix all the concerns raised [4] in the next major/minor version upgrade
+> [5].
+
+It is common for intermediate versions to receive Reviewed-by tags, but those
+do not necessarily imply final acceptance of the entire series. If there is an
+instance where I provided a Reviewed-by and later withdrew it without
+providing a technical justification, please point it out.
+
+Also, with code alone, please do not expect me to review these series
+effectively. It took more than a year and half for the documentation to reach
+a state where the design and implementation could be reasonably understood.
+Now that we have sufficient improved documentation and a clearer understanding
+of the approach, a proper and detailed review has just begun.
+
+Therefore, I do not think it is fair to claim that these issues should have
+been identified during reviews over the past two years. The lack of clear and
+adequate documentation made meaningful review difficult, and I have repeatedly
+requested improvements to the documentation for precisely this reason.
+
+> The current version works as is on Hamoa/Purwa/Glymur/Mahua/Kaanapali
+> maintaining the same ABI (that should count for something) and it would only
+> need a major/minor version update when a new algorithm string gets added
+> or a new param-ids gets added. Both of these are yet to happen.
+> 
+
+My concern with the generic extension protocol remains the multiplexing
+model. SCMI protocol IDs are themselves the mechanism by which
+independently defined functionality is identified, discovered and
+versioned. Introducing another namespace underneath a single vendor
+protocol, where an algorithm string selects effectively independent
+interfaces with their own sets of param_ids, duplicates that mechanism and
+makes protocol 0x80 a container for potentially unrelated functionality.
+
+> Given that we put out the pseudo code of what the MEMLAT algorithm does
+> and spent the past several revisions trying to explain why generic perf nor
+> mpam would work for us we keep getting hit with the blanket "It appears
+> no evaluation was done to determine if or why the standard performance
+> protocol was insufficient". The only recommendation I see from your side
+> is move MEMLAT to it's own protocol. With the documentation/code
+> available to you can please let us know how current perf protocol or MPAM
+> can be used as a standin replacement?
+> 
+
+This is also why I suggested treating MEMLAT as a distinct vendor protocol.
+I am not suggesting that MEMLAT can necessarily be replaced by the standard
+Performance protocol or MPAM. Those are separate questions. If MEMLAT
+semantics do not map to either of those, then that is a perfectly valid
+reason for having a vendor protocol. But "this functionality requires a
+vendor protocol" does not imply that the generic SET/GET/START/STOP
+multiplexing protocol is the right upstream representation of it. I am
+completely against such generalisation which will end up being ambiguous
+sooner or later.
+
+> [1] - https://lore.kernel.org/lkml/Zag5L9j8-oCebKFm@pluto/
+> [2] - https://lore.kernel.org/lkml/1667451512-9655-1-git-send-email-quic_sibis@quicinc.com/#t
+> [3] - https://lore.kernel.org/lkml/Zo14-rQ1Jaxh5Idi@pluto/
+> [4] - https://lore.kernel.org/lkml/Z1GfGk0yQAVQKEVL@pluto/
+> [5] - https://lore.kernel.org/lkml/55fd0c34-c52c-95c5-5cd0-16fd66a4baa2@quicinc.com/
+> 
+> > 
+> > The core issue here is that the proposed vendor protocol interface has been
+> > presented as a finished product without open discussion or a willingness to
+> > iterate based on upstream feedback. This approach bypasses standard
+> > development processes.
+> 
+> It would be way easier for us to re-design this but it would mean that we
+> are abandoning the current users stuck with this firmware version and that's the
+> only reason for trying to land this in a form that is maintainable. Either
+> way  please do take the call to decisively NAK the series (even if it's coming 9
+> revisions late and at the cost of 2 years). That way we can give up on this
+> and go about upstreaming using the standard development process.
+>
+
+I also don't think the fact that this has gone through several revisions
+means that architectural concerns can no longer be raised. I appreciate the
+amount of work that has gone into the series and the changes made in
+response to previous reviews, but neither elapsed time nor deployed
+non-standard vendor firmware can make an upstream interface immutable
+before it is merged. This series is not even properly versioned, carries
+RFC still without version if it is no the first RFC. Anyways, there are
+series that go through 15-20 versions before it get merged. See SCMI
+telemetry itself at v11 already. So, I don't understand your complaint and
+all I can say is welcome to the kernel development process if its still a
+for you.
+
+So I don't see this as a choice between accepting the current generic
+protocol or abandoning users of existing firmware. Sorry!
+
+If it is easier as you mentioned, yes please re-design MEMLAT and any other
+algorithm as a separate vendor protocol. If it helps take this as NACK for
+the current interface. Hopefully this helps you in making proper progress
+on upstreaming using the standard development process.
+
+This is not the only or first firmware ABI Qualcomm has failed to upstream
+because it was all baked and couldn't be changed. So nothing new/surprise
+at that end.
+
+> That said please do consider expanding your reviewer/maintainer count
+> in a way that gives you the capability to review series from all SoC
+> vendors.
+> 
+
+I don't quite understand this. Please elaborate.
+
+-- 
 Regards,
-Gabor
+Sudeep
