@@ -1,220 +1,196 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BCA21560ACF
-	for <linux-arm-msm@vger.kernel.org>; Tue,  8 Sep 2026 15:26:31 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E184055C31C
+	for <linux-arm-msm@vger.kernel.org>; Tue,  8 Sep 2026 15:29:10 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788881194; cv=none; b=aK8HdIihNSw7Z4d5PfeLlfLazeSGeeI44XxykeRY93T7E7LQOded59Na3Wa5keAhD/N1lsvrV6hDfyG/AvZd5jrIfOscVyt2eXegWoMxQ71zsyPa2MMcfuF4voxcydyPraMhtjFFpVbIFMYLdlfWHr8L0o6gr0nZ/15Rsyv5NMc=
+	t=1788881360; cv=none; b=X/c4rokT3d7Xwv9hYQgA9viS0kbHstKT3edcUwp+/cfqYKCuP1wvlV8cup4pWJoM1Ll6gmIyiF171SF/CpjQpMZOcxN5HtXk+VeV1EVNYEzo/VqyNWX6aASVPNxSMr6XqFQA8xjwe7pnNx7cEKT5/UWyWItg7W1H95lLt6nUm6M=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788881194; c=relaxed/simple;
-	bh=Gcw+0Dax0TmNRVBGfPPNzmLlUj5k84LOZKb7biIrQDE=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=EnrUO/tHJihJp+IZvh15ro5Ks9OiLlW5sA3kRoiSvwXMezqvN5MsnAX19Y0bYS4f1o26hXovtI/6mW498qEKlHSG9V+XPigNvHGkWW4wnPEDgtkwWpgqSO+rVHDYBv/ZEcXi8k1w6BHbMu2FdJVg4wA0J+v+qKEq3BzGD0hUoSM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=XgpGuMTX; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=ZEJog3Nl; arc=none smtp.client-ip=205.220.180.131
+	s=arc-20240116; t=1788881360; c=relaxed/simple;
+	bh=fhRlWff7YHTXSkrUExvk0YCc9hzfoEf+q8AvJaGChWA=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=JJJd+6Dh2aBCOiAyB8kUqEgjEzKUF/H7XgbO/y0dQQ/A4SBM+Ol3RyhhM/yVsRIj9ZecT/H+gD5jWTQ7/lSWItSN/C2xKjm2jZ4oOBbszz4jlO2c+7i3AqqvVpIlWJPi93t4A0ZMCfsM6H3ZHW51WZlEsf74uoN93Hofn+hjSTc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=m8A4mDMl; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=Gu+2Pabx; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="XgpGuMTX";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="ZEJog3Nl"
-Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 688FObsf3930836
-	for <linux-arm-msm@vger.kernel.org>; Tue, 8 Sep 2026 15:26:27 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="m8A4mDMl";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Gu+2Pabx"
+Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 688FOZwX2703994
+	for <linux-arm-msm@vger.kernel.org>; Tue, 8 Sep 2026 15:29:07 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	Z1k3p4OIFm+h9nzyCxBdy+R7myG1VF21hu//4us9owU=; b=XgpGuMTX/3XUUqln
-	BUJSH69miBAkjwPYpjg4EH/4H0o5zdOYwgXBmzf4rIo89zE2dHRziqzqHu2bwgfM
-	tJrk3mJgKF5OpjDAFu3wnklpB91zlVE02Ijs+VfEvGurk67Bg1WNgxsGPxtYiH/e
-	qxKdEHThOhz9uYWKpjqiqOJUjn3VZMrVtSjufQsiSHegx6jMczakq14pNUXOAh13
-	47ccPLRLhGZeLX4DRyc/9+Y0EXgU30LDezjNTZHty/Esheh+qUMUF2FP60vvOn3g
-	QxCT8qwHakXhNX3O7KskPSvUAE4rIa0jZ+KVLRW9GUVKZPTFcDgqlbmYk/t2kP+o
-	E8kl9Q==
-Received: from mail-ua1-f71.google.com (mail-ua1-f71.google.com [209.85.222.71])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gjfp49gh1-1
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=VwABaUz9+GReDShA/Kw8DM
+	wbIPameg7P5vllF5tztWs=; b=m8A4mDMlX/Sk88xWElsHuCzQ9x3CXxwCTYL8RP
+	0EfXo3YYR56p6AVSCV2Jr8kMKiGS3LEdj5uoban/y++W11WIh/COS+VyoSgmh2CN
+	EYaRMLaCzXGdikgrmjhg83P0UeApuDyqsts1QqxgHigo2bJXe0lVD3JSR4b5HMT+
+	/ceEBVhXyhCAasxq9pASK2UEdvYa9S/3l7lOKJnoTHQwuvufXNRW3PQ9ZwwoSf1l
+	tVikoVFftpXA40Nxup/yl2BqtJdx6UINSD2PJq9rSp8bIMNxe/qmHbRKt6eoET+h
+	8bV3lftANawORZ+QH9e4NJN+OI7wWXUQW8Px9kwOEbB+x8VQ==
+Received: from mail-vs1-f71.google.com (mail-vs1-f71.google.com [209.85.217.71])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gjatjjucu-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 08 Sep 2026 15:26:27 +0000 (GMT)
-Received: by mail-ua1-f71.google.com with SMTP id a1e0cc1a2514c-97cb32961e3so2738454241.2
-        for <linux-arm-msm@vger.kernel.org>; Tue, 08 Sep 2026 08:26:27 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Tue, 08 Sep 2026 15:29:06 +0000 (GMT)
+Received: by mail-vs1-f71.google.com with SMTP id ada2fe7eead31-785827e6073so620615137.1
+        for <linux-arm-msm@vger.kernel.org>; Tue, 08 Sep 2026 08:29:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1788881187; x=1789485987; darn=vger.kernel.org;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :content-type:mime-version:references:message-id:subject:cc:to:from
-         :date:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=Z1k3p4OIFm+h9nzyCxBdy+R7myG1VF21hu//4us9owU=;
-        b=ZEJog3Nlc/cYWapLhsXo0/y0lvndDgIJ3pSx9jSQCto172Aj8oEjN/6mBanGYFSwdv
-         S17tA739eeinI+nUTnFntFyIa8U2uh7b6XHlWhhAFqOVWEMGBb2g+J6ZkWrCNy5FND0Y
-         8H37MULTqA4w85eC3TR6CAhYiwk8VJdSC8nwzFZl12AB+WpUnAg2j0I2PVq+4IzhEMmC
-         ldqSdBmM+R/uc6HDGP3gL276wz9Qn16ZdRh6lyGNfSNPUI533jU+NN4nmXzXay7Gnuh2
-         xtU7NGZ+2bxr0bJMRVSVDhm0awm1Ya3Vdxxo/7AC36wryzj874gXGn6m1/sPWS5yMasP
-         xD+w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788881187; x=1789485987;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :content-type:mime-version:references:message-id:subject:cc:to:from
-         :date:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+        d=oss.qualcomm.com; s=google; t=1788881346; x=1789486146; darn=vger.kernel.org;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:from:to:cc:subject:date:message-id
          :reply-to:content-type;
-        bh=Z1k3p4OIFm+h9nzyCxBdy+R7myG1VF21hu//4us9owU=;
-        b=jqNeta39grhWekf5ulJJLZ5uEJqfEl5vvmTqRnsEAUhR/7WyCNT3fooDUsgOoY/YUJ
-         bygvzIYgCmUGOuGm1RsQWgY8+aCQkxs4GvTO9K7pO+BDAy6YzipOhLCUWO8nmk2t6lG9
-         t7jlW5iSetNBBIkBJou6D35vr1vhkLwxCEFHeF1BCVsfoh0BXyQziup5Ys5nyN4uiQLQ
-         OfFfU+W68U1D0LrgEbnjL8xe8TN5wDZY6dkCOt21X+UeClROQmATcjNODE2NiJ9NeKmP
-         W1KLAau2twVlQ1/A6fSpg0NAufjFfI1TO+v7XJi5euTlKmiLFI5yjDwASu8BNwZ+aXGT
-         Pr1g==
-X-Forwarded-Encrypted: i=1; AKwUvByZo5D4aUvl/nXNf8M4mhN5XOpf5hCmNPwkj5MCcKnrsontbhoK/WP9WR4jbegGcRkfqvUZ9mGR4bdOXdOP@vger.kernel.org
-X-Gm-Message-State: AFuF++nvnOqCz0FvKKCXE1BWR9PqBFKMcZJwHS81T3cFFDxvfed600cI
-	Vk8/uX/q2Wpto0NCN/zBFuAyULppZyMOma/h3uRiULbC8WZMfh/4Q6AUGzo9FKPbY3MdQ+EpNEX
-	QUM70aAokycdtQUYcj4sVgfgZVh7oVoUUuq6YQw18Q+0qlSGO7vAR+rqvXxkglnG9HE3q
-X-Gm-Gg: AYBFou1W9xhPK7/ia7Iw1yKj3pR/JEFME63OlAe4Ng5X9mnkUwcVRlXbcXDmWOoX+p6
-	6Ig0Nq996X8KYS9jrXcH3dVfNZ3blHHZnpst3kbb3uDeNoz5DPTCUFRNFk8pMsq18X3EcNZvm97
-	JSHqZgcDW95lpzD9++qw9eex4K1J+XZeFW7thajhynBOOnUBbC/J7rueneu7VVxskwBz4sxr+f6
-	hyO3FRsKM8TVWSVGDn1wAI8Q3qb5uVCNVoNKHFyq5L+J3K3X+AACBoTqQ0lzGNnmiVjAz0nat64
-	ilfKLwE1C8/QYyp/wpLtiODAN+uNR0Eznp3XWj54kvazvrCgAq6ICum23tOHV5nl3oKkuzA94Ri
-	g6DlIPEKMlJ4ag8HHqR1daez6EmM0X07gGStO8WY31P2L01PLfg6/tBKE9OPSNYs6XmibwR5v1m
-	Xmq9yhG1/9x7IC
-X-Received: by 2002:a05:6102:5e87:b0:77f:7df:ddd2 with SMTP id ada2fe7eead31-78a4a823596mr14049010137.1.1788881186692;
-        Tue, 08 Sep 2026 08:26:26 -0700 (PDT)
-X-Received: by 2002:a05:6102:5e87:b0:77f:7df:ddd2 with SMTP id ada2fe7eead31-78a4a823596mr14048884137.1.1788881185420;
-        Tue, 08 Sep 2026 08:26:25 -0700 (PDT)
-Received: from umbar.lan (2001-14ba-a073-af00-264b-feff-fe8b-be8a.rev.dnainternet.fi. [2001:14ba:a073:af00:264b:feff:fe8b:be8a])
-        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5b616705bedsm3124430e87.67.2026.09.08.08.26.24
+        bh=VwABaUz9+GReDShA/Kw8DMwbIPameg7P5vllF5tztWs=;
+        b=Gu+2PabxyYf1VhR/d1/ISGi/fPsFwdhLvJfGtB5suXnbdQC6cp0g9DJt4K/bgOzp/C
+         fmKMiR67GUN1c44A7Nmsej5AUFxPEPF8XV8RDldJyl+dKgNeuCLX6OptyvcM71XfduI7
+         2JZgpijYnJf+A3Kb5b5sDf/rQjxvfueo8wJD+jLNikJozjuWtdYAD/Gnm5VBRcnxsX6P
+         w+DVCoXFm8UBXmFpsdiH/w6/Y54hMCh55dA7t1UTFm5jXHDNcdV01LigFWaUt1y2FIxA
+         yXps/0wsJEjTcisKzl9EYNW1dyUmjOBy+VpqEkLrjGxvhtGNFi+oeIbkLSJU6z1EZckJ
+         eHjQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1788881346; x=1789486146;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=VwABaUz9+GReDShA/Kw8DMwbIPameg7P5vllF5tztWs=;
+        b=oBzGvJ8a/O+hHjlzIe+uMtJV/EabIp+XU5szFJEBTgDuohe9ezVPYpkIOG6AoHn3Yf
+         /WRiyR2NWzwMKQsaLJF+4Ajjaho0Fd8mWefueBjDplQV1thhfw83KgGnhPChdTJ3w+wV
+         TaOR9faeDQUt61jwlNuxNmKacdhr10leQRx8iDbzuFXxCo7P2ki5N/z8pzcCS5sA/DNz
+         I9JfuNhCa4GVSAQP+Jr6Rpoa0Txec5hyFjSjMgrBRAQWsNCGHG4dMwPY7nvpsHVJ0nG1
+         IapjOx3d5D1zaHmk3flZJPGJsrk3QjKf3Gl4/Is/up5k/IchHlFTTVZD1dPUNpF3aqOW
+         GzSQ==
+X-Forwarded-Encrypted: i=1; AKwUvBzbQbP1l7vXX3u09awW5CYXr20ez/1QcEjEB/5GUYVEMdthbMIRiL5tTtC+ebegPRR2oGjviXQMcbUZF5pQ@vger.kernel.org
+X-Gm-Message-State: AFuF++kjxiLwLgW7DmuWlc6qOroVrVyoqT4TtR9TciOeh3JbGQE57zQ6
+	FJCIs9V4Ga1P51cxqDHjZXrTUMNiKv2tYG/qi4B9JjID5bxOX5YPjtALZP/gxBik2RpYknORtxg
+	JzrXqB5Kgi1dwbV9rrDnM69FuNc1rOmx4xz115JlDchYgwt3cL1DuO4T1O5KBS/wjhczn
+X-Gm-Gg: AYBFou2riFyMUGqdSLhRgkG07fmGrrt2xFHu6V76WX1VtJde8MRTHsVcpyBTubtuukJ
+	itZV1GO4H6wFdS7acpsmzmTWKF+VosIUxPyEqfahQFBpqqsVpsjN2cVvTbySP7dh8ytf/6f4Q4D
+	WdAEPNKdUFglsck+g9s9TQnPrzt21ZMGPioA/SFdMI9zNm5GfpRLFichiGbAuoWRAfDNqejy3gg
+	hbu8gmcCBecUvDKewFOmkPS34bq0i9LXI+7DaNVSokuKX/WNMAxa8mAr9KC6Ki09O/FeC5vVHD8
+	LynEzhIp9YGjaDIZuL2l5xUzuwPbfDQkZtigXkkFkZaNzRdc9H/Y39tSaInTw0AUv8GtSMbVrTV
+	uGLXH5fQ8pMWTaA==
+X-Received: by 2002:a05:6102:5493:b0:789:5f54:2367 with SMTP id ada2fe7eead31-78a4a718223mr10621274137.4.1788881345836;
+        Tue, 08 Sep 2026 08:29:05 -0700 (PDT)
+X-Received: by 2002:a05:6102:5493:b0:789:5f54:2367 with SMTP id ada2fe7eead31-78a4a718223mr10621233137.4.1788881345273;
+        Tue, 08 Sep 2026 08:29:05 -0700 (PDT)
+Received: from localhost ([188.216.77.92])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-49d03543064sm308584595e9.13.2026.09.08.08.29.04
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 08 Sep 2026 08:26:24 -0700 (PDT)
-Date: Tue, 8 Sep 2026 18:26:22 +0300
-From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-To: Connor Abbott <cwabbott0@gmail.com>
-Cc: rob.clark@oss.qualcomm.com, Sean Paul <sean@poorly.run>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Akhil P Oommen <akhilpo@oss.qualcomm.com>,
-        Dmitry Baryshkov <lumag@kernel.org>,
-        Abhinav Kumar <abhinav.kumar@linux.dev>,
-        Jessica Zhang <jesszhan0024@gmail.com>,
-        Marijn Suijten <marijn.suijten@somainline.org>,
-        David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
-        linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org,
-        freedreno@lists.freedesktop.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH] drm/msm/adreno: keep the GPU timestamp monotonic across
- power collapse
-Message-ID: <xq2q6jazk2a5atfthzwktn7qhrinxg4duhdxg22qrutgdycbwb@47nosxhcqloz>
-References: <20260828-b4-adreno-timestamp-v1-1-273525da144c@oss.qualcomm.com>
- <CACu1E7GGdxTOsn+MRDT+7Guhjs-DDkZVx0Yet=RTxgQ4CNCKhw@mail.gmail.com>
- <CACSVV00BtmA0CotRucd8jG=cQLQw0YmLKEkTOV70qHBx=sG0sA@mail.gmail.com>
- <fl5uoffoh3gyod3f6jxgze33ut4jj4ttmgivtyoa5oykbt2aqp@rkktjz4yh4ll>
- <CACSVV03ShOw8D8d-5gDPYdzH3_Hp7EMz2CdfA3x08pCKAtw57g@mail.gmail.com>
- <CACu1E7H9KsUU=dV+iwQPOOX62+V8S5xstFf2LXhzeE7oSb3V4A@mail.gmail.com>
+        Tue, 08 Sep 2026 08:29:04 -0700 (PDT)
+From: Lorenzo Bianconi <lorenzo.bianconi@oss.qualcomm.com>
+Subject: [PATCH v4 0/5] PCI/pwrctrl: tc9563: Introduce support for embedded
+ GPIO controller
+Date: Tue, 08 Sep 2026 17:28:33 +0200
+Message-Id: <20260908-pci-tc9563-aux-v4-0-c7fc7778292b@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <CACu1E7H9KsUU=dV+iwQPOOX62+V8S5xstFf2LXhzeE7oSb3V4A@mail.gmail.com>
-X-Authority-Analysis: v=2.4 cv=Qu9uG1yd c=1 sm=1 tr=0 ts=6aa02923 cx=c_pps
- a=KB4UBwrhAZV1kjiGHFQexw==:117 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
- a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22 a=EUspDBNiAAAA:8
- a=pGLkceISAAAA:8 a=oaW757hXQP8N7nSf2eoA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
- a=o1xkdb1NAhiiM49bd1HK:22
-X-Proofpoint-ORIG-GUID: b1DxsAEucdOgYIBztsdu3ZoC0RmwVgfJ
-X-Proofpoint-GUID: b1DxsAEucdOgYIBztsdu3ZoC0RmwVgfJ
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTA4MDE2NyBTYWx0ZWRfX0n4wOgBDHi2Y
- nIoZOWa8tYabl5ojz+Rghwm7XSJaciRGWaVVEeBG40tWqSUp6wuUn1n/8ya6A+WGIYqxMDEHhQV
- SsQ+q0MuP8OZd5ksNPN+qtF0hKcYlCUvb9AXWk02qTNqMApe3jxT8EC0Zbv/Fu5oYnhrLyyKAzP
- mXzCQ7XEOtI+vl7zi7eGLtAZGywQwZiHHbtuI4spPKJI5OTr+meYpx8K+OMfWWd37uQBRUSBGtw
- TzoRIpoZAaoxMUzrFnEgaJxMf/zfLgYD+cRCkRt5rFZ5NQ8tuO0TiKMlnG2WszpZ/vLM7JhySqt
- chgX5XGrrIRVmRJCtFxgnLDkqEwH9W/vyD2X6BSeOApf9Rzugza0kRTPqV2BY0sGMtN+W1UkX7r
- Vht1Rl68YKZEayibjH/DbWRyNg1kV9SbcVnnCEb1EKSrB1F0YPEWPk6m9loNr23at7tM5OysjUA
- IgvFMPW2iQ7l/rqYD6w==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTA4MDE2NyBTYWx0ZWRfX/w9RmtRgx3hZ
- VshXRTcnIip8SlR/uWDFBnkJp+/ptBqA0vtiOFjOJzbD/e4zMHgUTvxp8JDdYj2Hx/8TTXQPOLH
- gHECnKkczepoJ7CRhRCQHsTUK38nVeY=
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/3XNQQ6DIBBA0as0rIuBAVG66j2aLhCwklSxosbGe
+ Pei3ZjYbib5k8ybGQXbORvQ5TSjzo4uON/E4OcT0pVqHhY7ExsBAUEyRnGrHe61TAXDapiwEAq
+ k4SwvBUHxqO1s6aYNvN1jVy70vntv/kjX7ZeS5ECNFBNsjCzy+Ci3Gbn6EJLXoJ7a13USB1rFE
+ fYKOygQFca1gLRIOWj6R2F7hR8UFpW0oJxLI6BQ8ENZluUDF8t+AD8BAAA=
+X-Change-ID: 20260731-pci-tc9563-aux-66a29d438f60
+To: Bjorn Helgaas <bhelgaas@google.com>,
+        Lorenzo Pieralisi <lpieralisi@kernel.org>,
+        =?utf-8?q?Krzysztof_Wilczy=C5=84ski?= <kwilczynski@kernel.org>,
+        Manivannan Sadhasivam <mani@kernel.org>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>,
+        Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>,
+        Linus Walleij <linusw@kernel.org>,
+        Bartosz Golaszewski <brgl@kernel.org>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        Michael Walle <mwalle@kernel.org>
+Cc: Alex Elder <elder@riscstar.com>, Daniel Thompson <daniel@riscstar.com>,
+        Sushrut Shree Trivedi <sushrut.trivedi@oss.qualcomm.com>,
+        linux-pci@vger.kernel.org, devicetree@vger.kernel.org,
+        linux-gpio@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+        Lorenzo Bianconi <lorenzo.bianconi@oss.qualcomm.com>,
+        Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>,
+        Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>,
+        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+        Abel Vesa <abel.vesa@oss.qualcomm.com>
+X-Mailer: b4 0.14.3
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTA4MDE2NyBTYWx0ZWRfX3sQsSOiCU2PQ
+ XIHs2TuB9OlrQI+aUyHN1LG6gqUfCSOrwKJWU6iBTHo3isszsieVEPle5BdS9JYWMSjyuJunJKQ
+ GCsUdaXFpJ20v5boSvUIb9VnpCWXjd8=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTA4MDE2NyBTYWx0ZWRfX/OHG1AGNgkgn
+ bwr3HHsViYOCvCeOyFauWpR0VpxaEvtH9WkfCJehtCSkO8Lhon5fscRgwHo9H3o9UWvT4Q2mRid
+ Zv4N3bHMUY53u+V5FjVot+BtUyNv171r3dH/s+WhjDq5maJDLrsrC1YI/Gf3/BOsHxqVOelR4Ac
+ Ju12pXykQRbOPNtPbNBDZ5MEV9s5DqjcVUTBEHsb6qj/EuIHq50OAW1bqQH1owv9WIzOPHPskTK
+ pcmNjNVfKnSkatfT/veQFrknRSK8CuA6egrc5f9Fj0iQxLlDzywj9moDMJ/G8CWThzPvLk+eBI7
+ dAoR3reKIKuxna1WTckHoJf7Y3fDFGl1AD8yBC2kR3UFf7ZdeSpazjZbS1ueeV/NwrmsEN/EpAj
+ TN+Mkhgq27Fk4oalmSFHhipktdvWdUNldYAefcZ1AZQhTLgzYihXYrCUPZJE0eswKsXCDIClz7D
+ PGHOg6Hf/Vd84fGjFrg==
+X-Proofpoint-ORIG-GUID: VxTkvLgY2bjE4WZofceRF78-JGEyuECA
+X-Authority-Analysis: v=2.4 cv=QrduG1yd c=1 sm=1 tr=0 ts=6aa029c3 cx=c_pps
+ a=P2rfLEam3zuxRRdjJWA2cw==:117 a=WpTaRW6qxYHRGzLzQsVYzg==:17
+ a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22
+ a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=m0QktR8YAgtX1DuhF7UA:9 a=QEXdDO2ut3YA:10
+ a=ODZdjJIeia2B_SHc_B0f:22
+X-Proofpoint-GUID: VxTkvLgY2bjE4WZofceRF78-JGEyuECA
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-09-08_03,2026-09-08_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 priorityscore=1501 adultscore=0 spamscore=0 bulkscore=0
- lowpriorityscore=0 impostorscore=0 malwarescore=0 phishscore=0 suspectscore=0
+ clxscore=1015 bulkscore=0 adultscore=0 malwarescore=0 lowpriorityscore=0
+ impostorscore=0 spamscore=0 priorityscore=1501 phishscore=0 suspectscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2609080167
 
-On Tue, Sep 08, 2026 at 11:09:17AM -0400, Connor Abbott wrote:
-> On Tue, Sep 8, 2026 at 10:51 AM Rob Clark <rob.clark@oss.qualcomm.com> wrote:
-> >
-> > On Tue, Sep 8, 2026 at 4:41 AM Dmitry Baryshkov
-> > <dmitry.baryshkov@oss.qualcomm.com> wrote:
-> > >
-> > > On Mon, Sep 07, 2026 at 04:20:43PM -0700, Rob Clark wrote:
-> > > > On Thu, Aug 27, 2026 at 9:07 PM Connor Abbott <cwabbott0@gmail.com> wrote:
-> > > > >
-> > > > > On Thu, Aug 27, 2026 at 7:13 PM Dmitry Baryshkov
-> > > > > <dmitry.baryshkov@oss.qualcomm.com> wrote:
-> > > > > >
-> > > > > > The always-on counter behind MSM_PARAM_TIMESTAMP sits in the GPU power
-> > > > > > domain on a4xx, a5xx and the GMU-less a6xx parts, so it restarts from
-> > > > > > zero whenever the GPU is powered up again and the timestamp reported to
-> > > > > > userspace jumps backwards. On an a702 six reads three seconds apart all
-> > > > > > land in the 500..1200 tick range, stepping backwards twice, and on an
-> > > > > > a530 the OpenCL device timer conformance test fails because
-> > > > > > clGetDeviceAndHostTimer() returns an end time below the start time.
-> > > > > >
-> > > > > > Save the counter in the suspend path of the affected generations, while
-> > > > > > the GPU is still powered, and add the accumulated ticks to the value
-> > > > > > reported to userspace.
-> > > > >
-> > > > > This is useless because the entire point of clGetDeviceAndHostTimer()
-> > > > > (and the similar thing in Vulkan) is to match what the GPU itself
-> > > > > returns, and now you've broken that by adding an offset.
-> > > >
-> > > > Just to clarify, the timestamp needs to match what UMD reads directly
-> > > > from hw in various different ways (timestamp queries, shader_clock,
-> > > > etc)..
-> > > >
-> > > > If we can _restore_ the value (ie. write the hw reg) on resume, that
-> > > > would be ok.. but it doesn't look possible.
-> > >
-> > > Yes, a quick check shows that all relevant registers are write-ignore.
-> > >
-> > > > Otherwise I guess we need
-> > > > some scheme where an offset value is stored in memory somewhere, and
-> > > > some coordination with userspace to add the offset in various
-> > > > different paths.  But the kernel shouldn't be adding the offset to
-> > > > what it returns to userspace itself.
-> > >
-> > > Ack, thanks for the explanation. I tried to match what kgsl was doing.
-> > > It reads the GPU timers directly from the GPU, but for the CPU timers it
-> > > reads the value from KGSL driver which accumulates the offset.
-> > >
-> > > If I understand you correctly, we need to export the offset to the
-> > > userspace via some extra page (like vdso) and let Mesa read it. Correct?
-> >
-> > Yeah, it doesn't look like there is an existing GPU_READONLY && !APRIV
-> > BO we could re-use, so I think we need to create a new global (TTBR1)
-> > "vdso" BO which is read-only to the GPU but otherwise accessible to
-> > IB1+, along w/ MSM_PARAM_VDSO for UMD to query the address of this BO.
-> > (And update msm_mapping test in igt to validate that it is read-only.)
-> >
-> > (I'm not married to the name "vdso" but not creative enough this
-> > morning to think of something better)
-> >
-> > I'm a bit curious if kgsl handles this differently.. maybe there is
-> > something I'm missing.  But somehow timestamps need to agree between
-> > what is read on the GPU and what is read on CPU.
-> >
-> > BR,
-> > -R
-> 
-> I think the kgsl timestamp offset stuff was only added for the new
-> A750+ CX GMU counter which is not read-only. We do need to port that
-> over to drm/msm. If the offset is applied for older GPUs, it's
-> probably another case of kgsl not bothering to keep support for older
-> GPUs in newer branches.
+The TC9563 embeds a GPIO controller currently used for per-port reset
+signals.
+Add a driver for the GPIO controller embedded in the Toshiba TC9563 PCIe
+switch providing 37 GPIO lines. The controller is registered as an auxiliary
+device by the TC9563 power controller driver and accessed through the same
+i2c device.
+Please note this series is based on pwrctrl upstream branch.
 
-I've been looking at the kgsl drivers from msm-3.18 / 4.4 as those
-kernels targeted MSM8996/98.
+---
+Changes in v4:
+- Do not always use 0 as aux device id.
+- Link to v3: https://lore.kernel.org/r/20260904-pci-tc9563-aux-v3-0-5b1449d62ba2@oss.qualcomm.com
 
+Changes in v3:
+- Describe gpio-controller support in TC9563 binding instead of defining
+  a gpio child node.
+- Link to v2: https://lore.kernel.org/r/20260903-pci-tc9563-aux-v2-0-34c625b542c1@oss.qualcomm.com
+
+Changes in v2:
+- Fix PCI_PWRCTRL_TC9563 Kconfig dependency
+- Move of_node refcounting management in tc9563_pwrctrl_adev_add().
+- Link to v1: https://lore.kernel.org/r/20260901-pci-tc9563-aux-v1-0-dd9b80738e70@oss.qualcomm.com
+
+---
+Alex Elder (1):
+      gpio: tc9563: Add support for the embedded GPIO controller
+
+Lorenzo Bianconi (4):
+      dt-bindings: PCI: toshiba,tc9563: Document embedded GPIO controller
+      PCI/pwrctrl: tc9563: Add GPIO auxiliary device support
+      PCI/pwrctrl: tc9563: Switch per-port reset to GPIO descriptor API
+      arm64: dts: qcom: qcs6490-rb3gen2: Enable TC9563 embedded GPIO controller
+
+ .../devicetree/bindings/pci/toshiba,tc9563.yaml    |  19 ++-
+ arch/arm64/boot/dts/qcom/qcs6490-rb3gen2.dts       |   7 +-
+ drivers/gpio/Kconfig                               |  11 ++
+ drivers/gpio/Makefile                              |   1 +
+ drivers/gpio/gpio-tc9563.c                         |  99 +++++++++++++
+ drivers/pci/pwrctrl/Kconfig                        |   1 +
+ drivers/pci/pwrctrl/pci-pwrctrl-tc9563.c           | 165 +++++++++++++++++++--
+ include/linux/soc/qcom/tc9563.h                    |  19 +++
+ 8 files changed, 305 insertions(+), 17 deletions(-)
+---
+base-commit: 028f86457e822ab9de5b0d6d23efddc1b8b54ae1
+change-id: 20260731-pci-tc9563-aux-66a29d438f60
+
+Best regards,
 -- 
-With best wishes
-Dmitry
+Lorenzo Bianconi <lorenzo.bianconi@oss.qualcomm.com>
+
