@@ -1,87 +1,62 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from sonic312-23.consmr.mail.ne1.yahoo.com (sonic312-23.consmr.mail.ne1.yahoo.com [66.163.191.204])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C8243530E0B
-	for <linux-arm-msm@vger.kernel.org>; Tue,  8 Sep 2026 11:45:08 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EF39B52B1D6
+	for <linux-arm-msm@vger.kernel.org>; Tue,  8 Sep 2026 11:52:24 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=66.163.191.204
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788867911; cv=none; b=IN9prS8oV66Jd66NWWx8BdvG8M+9gdWgnMCFL0WP5BKI/zo81vqIj2I/spx5l7YpKjcXr1rPr04bNy6xLJkpiE5xGdOYHSqsrwohFxEdHz1vFl7gYZDrY7uK6r8sLCCnhXBqf6IQDJRXGBkQc7h5Q5zzq8/aAWwwrqRKbIT3qeE=
+	t=1788868348; cv=none; b=ZA8o860R6gPLOGkUJm0Ro64cjJcHxF4f4yGtx1SX4/xAdqC0ex6Rw+CEYJWzCBrnt3w2uIgA/WeKOpt4VdACBDfLF5DVEGlMSAkYk5ytG8ahyCepD0EulbqiEHAwWRtYUvIoOLaNOQ9PgSd1YD7EITyWYNo0wh2+jGEye/48oCE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788867911; c=relaxed/simple;
-	bh=2lnjyG2aLgNkVEo3+hRGXnG+fNvKoY1z3nKcScXSgms=;
+	s=arc-20240116; t=1788868348; c=relaxed/simple;
+	bh=LjH1faTnVVN5uMetA4uwbCmCsTumX7kxFH0HtObW7RY=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=Df0X9bTd7TnCNZkxUQKgR8MbWxxbSvMK6hSfQWmfW3bRCxiUJx+dd3SB8Slv9HuwALipcYDfXiSm4HJsb9TYG5d5y1k5Ykbi1r95r0r3PBC40nG2tpahEEkU1h/d8scO9rGMOy3+jCCDtRGEiaqq4yPOs9ixFJPLmZ6MmPxDcz8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=J8btow6Z; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=IBJlZDlB; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	 In-Reply-To:Content-Type; b=VaCI6LR+E8YcU6Zkx3ShrEtR9FaNa8W0F3PadA2WU4hpC/lMDjynLpmybfnBEhDxjbnpYtD8BZwfuDwqzsp0BiQr3BA75SU4Zu4whD8pK885RZ0RZr2YAw6XKxPKK8kahBqxy9Nlx21omlJHdTnf2S4JTfFLOBkEsRKvjHAb39I=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=yahoo.com; spf=pass smtp.mailfrom=yahoo.com; dkim=pass (2048-bit key) header.d=yahoo.com header.i=@yahoo.com header.b=ngLsa98S; arc=none smtp.client-ip=66.163.191.204
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=yahoo.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=yahoo.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="J8btow6Z";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="IBJlZDlB"
-Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 688ADEgj3506440
-	for <linux-arm-msm@vger.kernel.org>; Tue, 8 Sep 2026 11:45:06 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	0R6HxB4xS9P0kh2KTlln0CaPw4s9m8YTu+2xy9jIJP0=; b=J8btow6ZiPSUMTeN
-	pH5cTdqQgZKjwde99Cx+EoaafbitcoLF6mH6IY0Au81AQJaHYkiBoOep8n8kJNXR
-	yEnGxTlxfWs0h+PkmY8eVMrXg4f6z8Fyo2zE317iMDEey2EKq81fXMB5p4P+Ycf0
-	3Z73DMWD9q3sNpcDynKiwOdfVJEBpp/j/OfL19M19bS8Y6uqNlrbrX+aiy8mP0xZ
-	Arb9FgZxHm0dLrC56ArXCIhul7mXczfIIF9h25cPlbTpH/4sHMkV9Gs3Qb4R6Rua
-	RzWgDvrfjkstrijxEjJP0DKuoPBeJ5rLqDRolzCm19NylJc1cL8qHir6WkRSnymh
-	pbcpzw==
-Received: from mail-qt1-f199.google.com (mail-qt1-f199.google.com [209.85.160.199])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gjg8xrch8-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 08 Sep 2026 11:45:06 +0000 (GMT)
-Received: by mail-qt1-f199.google.com with SMTP id d75a77b69052e-530a0a18108so117041cf.1
-        for <linux-arm-msm@vger.kernel.org>; Tue, 08 Sep 2026 04:45:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1788867905; x=1789472705; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=0R6HxB4xS9P0kh2KTlln0CaPw4s9m8YTu+2xy9jIJP0=;
-        b=IBJlZDlBUK1V5cMC1UHJv/0Vy9yICyMXUyRY1a8zzoVInjARunhTyTk4sznYQw9s/0
-         UDuNu+tq2XUUdFJWAf7V88MHpQKOyclCkeDeHpfADZFVMT7KSS/px2l8ieiXJxoTfIEC
-         L4wriGYiP3ZefnFV2lnG30MYDTU4+g2WXxCZPVeg4hPhLMcOt3fouDoIHWlLdW6GwZ6R
-         QVN1qXyd7Oo82UY9ot5hc6+4hiAcwk5McXVAxa4xTccAOoDx7WYAAUVtge65qqfK66NE
-         gxKcMpx5x1SRavS+9c6dgyQespnxrTX0Wm1LOnrDeHBDjTt9B1rVSb8G82njpWmQothx
-         xYQw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788867905; x=1789472705;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=0R6HxB4xS9P0kh2KTlln0CaPw4s9m8YTu+2xy9jIJP0=;
-        b=C7Nt/Y+HAaeatOdSg412Q5pcTrG3lINsLw+j4VDTgV124qDkv8IBaOw4CO67p4mlU3
-         cMr4w080ZkpdI6UN+Rw7DAXi5iwxFFIIZAQv1mt5K3X8BFhAaMbaaFdFJueJtCDKm6BY
-         jQe4Q4EncVefJVqdXUdD+YnhDltaizC6sd//SSWA04kjjT+C1qwxK1Nu3XUyZgOzP+4U
-         SKODm1PtEaC1JIwt/fylSnxiwPZfuhCgjZ1ofJTA5TPKgcea619S6WmhhxMrPOaztHk7
-         fj8rd6CsK+dH9pfxS/8ga6Ke7pHaSURZACsggZVnwppzRpu6B6n5hbOGATAWMyuyfOWR
-         i1XQ==
-X-Forwarded-Encrypted: i=1; AKwUvBzddnqMdTSmeAfHI7MNixnXtDhlJujtZmpGtj4xHqamTeRKyuVJado6IBLp7I423GGeHRb2Nw7W8MeI4ERJ@vger.kernel.org
-X-Gm-Message-State: AFuF++mcpsawk/xZxGdA87ejUpSewVd083fvY6uIApgd9qt+/c4FGD00
-	Qp/vCCeCEq9Kdd4ONyYWF2NooyTsE5864qcEjrpQgsoOeWvA0dtuY4vVBkjLvp6y613y93XAP7J
-	JoksQMAm9auHpZIXh2nTjzxRHonXwmtQEn4EQAjxYnFcviDwDAIT1/n8XlPCn6hg6bwGr
-X-Gm-Gg: AYBFou23rEhIKbUARGIGaIAOn8Bprt0tyRT/Cwt8iq3yFdGIbjNaUjhaR9qS7tRo/+R
-	8m1JZ0kSV7P/7IdhCBaqzsOzYlO9U1I52uMKRs/p13vfNbCXP3uYjDF9jsjX+2CXrhGiUOSBj3N
-	SM5yK4wED/tY8rrdrv+5eKIVCmsaxVi4LtLU0wrDkYEEFCG6udLtg/9cR4hoJmo026CjHLayu7C
-	LNDRxZd+iw5AUOKav5aoyDDlpzf/Mhuc1xP/yO2gzy72iw9qv8ioNkIbEXlZ2EAznd8XTnZ8tZy
-	LLw69f4b94pyPJmfMzrB2MGzzNtr4ly0nMVxNkb6kx+J92YNIVNK+UnRVOdditxpuHWeiAFCrus
-	3edFmIiMknnUN5fe42wXQzw==
-X-Received: by 2002:a05:622a:609:b0:517:6162:daf5 with SMTP id d75a77b69052e-5306468ebaemr205196281cf.3.1788867905034;
-        Tue, 08 Sep 2026 04:45:05 -0700 (PDT)
-X-Received: by 2002:a05:622a:609:b0:517:6162:daf5 with SMTP id d75a77b69052e-5306468ebaemr205195761cf.3.1788867904645;
-        Tue, 08 Sep 2026 04:45:04 -0700 (PDT)
-Received: from [192.168.202.12] ([178.235.128.140])
-        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-6a7e68c3b2esm5717235a12.11.2026.09.08.04.45.01
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 08 Sep 2026 04:45:03 -0700 (PDT)
-Message-ID: <1f881a4e-3536-482c-8fa3-4e141f633a8c@oss.qualcomm.com>
-Date: Tue, 8 Sep 2026 13:45:01 +0200
+	dkim=pass (2048-bit key) header.d=yahoo.com header.i=@yahoo.com header.b="ngLsa98S"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048; t=1788868341; bh=YRUBlZ8dLqp9JSfEYU3LqyguQG5ZgeUgfnh64Fsjygs=; h=Date:Subject:To:Cc:References:From:In-Reply-To:From:Subject:Reply-To; b=ngLsa98S9ohzjHFjVXlP3Pw5OqigOrqV2M/2EnqBQo2Lod7lFLwR2s/tbGwRil3jAQy4zJDBggqTM82E0UhsFTLHfXff+G/retxgSdagoNm266qep0g4WwZoOq/QmaVs9rBaqJ6XjBna7AjdAsGDa31PTW8XqTC04dqym3D15hP8tA+FZCPSXsQjmT6p+FbT3HvTBEVpYcKL2ZxSf0ukS+WQ/WrB0usrVw/GDTyZ9FKXHrzw35nuPg2zBaipiUhlhnb3TUJHg6TdnL5Ld9qbODyzpx585obxk+P5uKbWFh/lO/61y2Oqhudw3XUcpCTOB5pjcSemke+kcFTVl5o3vQ==
+X-SONIC-DKIM-SIGN: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048; t=1788868341; bh=bysn2EbP3zzWXXCmQOeOa6DkW9JhwrOUg2IxwdYRbtR=; h=X-Sonic-MF:Date:Subject:To:From:From:Subject; b=iynNPbwbWEeCh9i5PoClhiM9SYwPPrtFJWCxXpQLcz6rV0wBYKm25TsZwDMNfpARv7RC9y/bnd06bTCxjmXPGWnDYRLnkvkvNs7MmvOAWZIoGd5HLALhQsjcD7g+nM0WJZrJiQMLq8weUe2QdJ0xHBW5fpf6fZCeGqk+6TK0LxI+V6sjKyxIAPpeexNv6dQWQlGQAh5hyylrZNoFgMvOeDgnzawBQ6kuLaVm9yAsrl/0tkBk/ocyfT75qBbrh6EkR/fkJQ+8Ox8CwqbcF3V340GqJNo2v7waanJe2vw+bzaM/g5vVFVIdof1TDR4ql03PwzmIw25ZQfq8HtA2r9nsg==
+X-YMail-OSG: gmPyFQoVM1kc06WG4qbxndFv7A0iv9Zvs3kCG56zD6fXv0_RPErM.KJ2_Y03wTK
+ P2DhEW7IyNdWPB1oZZUSd30nh9bY18etlCM7_76lo4eQPD8pRW5GjFvkb43LVq5L9xej2o7xEFuW
+ GEJfkZ9aSs8Ze_o3MZXQ3oiGd9K6q7WrFgqp8HdYS8ka2aPZhu9Zhu.l8SCSETpSuI_GwXLa4sel
+ Hc932i4trMUWVfSNlsIjRqNgiJ6k71EiWKqRMh5jR.1lilDP4hK00_t_rgl7wHlY3r98SjxxpfwY
+ Z_yTwWje_ia9mdz11bFrFPlDWVoomvIF0c80uMZTlytwRcgKQIX9u1H0k.bI3SLPL1Y1L6mvRM8y
+ 7BT16SikZrVBBTOZSehD6E4AIRN6NfpSIhDHq24VgqJtEr7nhQxIqJjmDekQb0pbOHu8HquYI.8O
+ eoAv3HW8HuHBSSlc7n2xrUbZY1d05D1lOmaJfTNzr3eqUHt00Fcuq47BsgwVZgn.riCUy4oHxvU9
+ 6EKJAnfT0Jggz2tW7wSZb167xC9ENpm0xe72ti3bfMEqcj7rekZHcsHN3Jo9M15f5dyq5Fv3Lvx5
+ fNbNLjN0OTAvmO2j3yx1lB1R7d.BrM3m7Jp4I42SFt.H_8JkCBGP7vk_MXPSma72HOWbMb2w8TAH
+ Z0xKYGUK9iNFY6422ZnUCERqA8PpFjpgj53A1KZ5t_zBw_6yF3tTbMYP1GtX122zluBJBuRBiYxm
+ kFzpCl5drZcwBBrHFb9nkOr20KJv105U2HKaGzGVVEjsF3Qp.l8VbHdxACFzNk4n7Ei0exRs97S7
+ hKLUywdg__q0dy3xOF9geMZwOn.PdntHq2dRweZ_vA3XH1FhpXD_qnVXAy3imyiX4v8D_QhUa9Vs
+ JmwhrOeCAzS5joDHI0ZbJOzaOQsz617LirTFoWCdJYZWMaCMCXAKXzRpqLHvYvBrxL04g0ib9NU8
+ AVMbAkttrVustmuJjLpDX3b0627711vkp0s_KRb5Q3vJW1GMNPYl9ls8YilSTeAZVlB5i_sny3Uo
+ RNNbzC_jfjwcPdhjMo.j7ffSnXG0rI1zqgNPZ1AJHyU6Tg16Hf9Z4IR0m6T1irvaUG..TlnOFvkZ
+ XkVpajROJxhPGUPaEemA5paAzCfrPUPrzmmgo4zAn631YjykEMjibnOBFqfTQ9_xm5wnA2FbvKVn
+ AtCmAGmyV0KExIcv28plPUwH6OkeJG.oxIK2S6n5pMHD5g6ZGWzdYkYt9TyhrnD1KCV0c0UOtiDR
+ qFsjLTFDAfqZgzEzDOHh8Ev9L06Kd8XDanoUqHsT1WQuQfbMAo68yLRUrT_IHQTbrDMj8mUp.rBz
+ oc4V8jP6AlsMWNmjBUu.wPgIWB.whZ0O0yJ_0rn2ALs_IICsK_twRzlZspNETtapVUhv13kZSiwO
+ tuPptpvjkGSHKLGkrdHiFi_ftp3TH9NU0PKabUa8FsHj0u3amhnh2LFyw0BWz937Efd2xoRsm._t
+ Xp71I.OaC2y_nGRNuRng0kUgU5a9kWZnXdOXj9klDGAf6mb81d1fnnq_kE6T24HTjyjukjDdhFHf
+ 34ZzZb4ZPENmfrXtc6w9hVA4bL_WDWxDEynJFaQnJxsgCV0VVHGl4pCJb0JdGH79JH0XWoRN8q7.
+ hY_8ClVK.xU1wbwdNEA3LiRlIXpTmM9PeaGScduhnqJSgaPU8XT0bNjQ7UhYQqCk39WDWwitK9bl
+ l4QG1VCdv6G0BCk1v9JQdayL69rN02EX8DColnqBHh5xA_dLyqQEc3MkDMEjLLr7VmUAeMC8lb6V
+ _euX37AQEbeLinN4OMz5v6SdK8p8lPQLgln12ezgahZQTVstRdtVwVQDCTF8rmxJMOrWwu_C8TId
+ J1_Og3za0k4VKJaB2HGi0hdkifQ9.DiG3RtwFGYNfCpHX4aZ6tnXjOBX2.CVagHMW5pJ_HYMI_gX
+ s.WSVbRBOOILhzoJM.bx0sdRJlchiadweeK2Rh7NR9HstKOlqc0gab4IuHa8Tgk62Nx7ULVrA2pj
+ 0mf0Zohdr5O1ngPpkdhyAs1DOjschcAoJu69OdFeX2VXok.kQSICNl3yJxSS06mNcV9d0XRnn0PB
+ vJi87.4yCkaqBkGqNAnl7xV60IXjwEpdq4qyNlmoQexBx28vlR90idZvj5QlaRR2ZsFdFh.Fz8Br
+ GSuQTtxRTzFjrdPWQGubTiBKCVio0UQlsxCBN8NIhZkBC33EvWRqzhIi.ccyJYO_1gB64i7TPYHo
+ 3_6rOZxWP0Nnj08CpC0uyxC.vLi5Av8mtXvDQ6SH.lgEqLDwumzsCWrV.uxkoBup8dr8zcgH8_7r
+ 0WL4eaSR.
+X-Sonic-MF: <namiltd@yahoo.com>
+X-Sonic-ID: a489773e-6412-4553-977e-0a5fc5d1ab86
+Received: from sonic.gate.mail.ne1.yahoo.com by sonic312.consmr.mail.ne1.yahoo.com with HTTP; Tue, 8 Sep 2026 11:52:21 +0000
+Received: by hermes--production-ir2-cddf86dcf-rk2hx (Yahoo Inc. Hermes SMTP Server) with ESMTPA ID 0f3422411e7bf53728402e6080428f01;
+          Tue, 08 Sep 2026 10:57:34 +0000 (UTC)
+Message-ID: <11b0c7d4-4e77-42a8-9528-6dacafd3e251@yahoo.com>
+Date: Tue, 8 Sep 2026 12:57:34 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -89,90 +64,33 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] drm/msm/adreno: keep the GPU timestamp monotonic across
- power collapse
-To: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-Cc: Rob Clark <robin.clark@oss.qualcomm.com>, Sean Paul <sean@poorly.run>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Akhil P Oommen <akhilpo@oss.qualcomm.com>,
-        Dmitry Baryshkov <lumag@kernel.org>,
-        Abhinav Kumar
- <abhinav.kumar@linux.dev>,
-        Jessica Zhang <jesszhan0024@gmail.com>,
-        Marijn Suijten <marijn.suijten@somainline.org>,
-        David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
-        linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org,
-        freedreno@lists.freedesktop.org, linux-kernel@vger.kernel.org
-References: <20260828-b4-adreno-timestamp-v1-1-273525da144c@oss.qualcomm.com>
- <80eb9f51-9cff-4c07-822a-759360617cbf@oss.qualcomm.com>
- <le7zslxe27qauz7duczbxl4rrd3kbekg5cwxzg5tmsy77r2t2z@7gdoif3yfkgg>
-Content-Language: en-US
-From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-In-Reply-To: <le7zslxe27qauz7duczbxl4rrd3kbekg5cwxzg5tmsy77r2t2z@7gdoif3yfkgg>
-Content-Type: text/plain; charset=UTF-8
+Subject: Re: [PATCH v4] clk: qcom: ipq-cmn-pll: keep the CMN block bus clocks
+ enabled
+To: Stanislaw Pal <kuncy7@gmail.com>, Bjorn Andersson <andersson@kernel.org>,
+ Stephen Boyd <sboyd@kernel.org>, Michael Turquette <mturquette@baylibre.com>
+Cc: Jie Luo <jie.luo@oss.qualcomm.com>, Georg Seema <georgseema@gmail.com>,
+ Brian Masney <bmasney@redhat.com>, linux-arm-msm@vger.kernel.org,
+ linux-clk@vger.kernel.org, linux-kernel@vger.kernel.org,
+ stable@vger.kernel.org
+References: <20260805193638.15327-1-kuncy7@gmail.com>
+ <20260813093351.178419-1-kuncy7@gmail.com>
+Content-Language: pl
+From: Mieczyslaw Nalewaj <namiltd@yahoo.com>
+In-Reply-To: <20260813093351.178419-1-kuncy7@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Authority-Analysis: v=2.4 cv=J7GaKgnS c=1 sm=1 tr=0 ts=6a9ff542 cx=c_pps
- a=WeENfcodrlLV9YRTxbY/uA==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
- a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22
- a=EUspDBNiAAAA:8 a=yFWfLQOVxOdxj_LqjH4A:9 a=QEXdDO2ut3YA:10
- a=kacYvNCVWA4VmyqE58fU:22
-X-Proofpoint-ORIG-GUID: 1UgOcJd4xfY0vnl4V2HNqIAJgPQPWCQb
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTA4MDEyNSBTYWx0ZWRfXzyYJhN+eV8vR
- Uu8xh5I01IScTpaE04Nsx16cgegZbz2ZngxoiHVbTVcOQ3uJqe01soxPfN+pB+hpF2ezkDM8XTa
- MJPM3xdTTifbBa7ifWCU/xh5VnX+uxI7OphtScIpXpMXEEtKuR6fyb8b/aTPj0OUzsObX1s6SJQ
- BisN6MpoI/liYHVyE0uHyO4RFv/Zdx0u4AX6t0+Enw9cSkr2kkbTy3J5n/qEDLz9K5qT/pAs9fv
- cYiaKiwbKRTbxBvZMHS9TSR4QyCHr8ZUkQrq0C5Fb6bZubTFFvkgQwFDXy/SuB21wuY5V5W8fZi
- bfIVcLWMw0anK+LkoDvd6LJEVYnEqdeQP8KEsxWMiehXCZVIHJ4D33fUNAnf3ePBPfdIYJsGnmU
- H89NGLAvkVRWlcPjKbHhV/aK3WaMSzIlVdSlaRqoTIToZ51D6Ua3Mvb0Aa1eKVQcETsdxl5ezLF
- BY3VVvn38gRZq2x8jCw==
-X-Proofpoint-GUID: 1UgOcJd4xfY0vnl4V2HNqIAJgPQPWCQb
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTA4MDEyNSBTYWx0ZWRfX5ndog5+R8YEl
- REO0/Eha4G+Te9K7agen/eIUon0F/jvq8L6HAcaeAZGfnfPrRSCzuJoZQrafkuH/wz+bCjlkoks
- MZwAsngH5WWt74jnflnxOntGYONg8Mc=
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-08_02,2026-09-07_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- bulkscore=0 adultscore=0 suspectscore=0 clxscore=1015 spamscore=0
- priorityscore=1501 impostorscore=0 lowpriorityscore=0 phishscore=0
- malwarescore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
- definitions=main-2609080125
+X-Mailer: WebService/1.1.26460 mail.backend.jedi.jws.acl:role.jedi.acl.token.atz.jws.hermes.yahoo
 
-On 9/8/26 1:43 PM, Dmitry Baryshkov wrote:
-> On Tue, Sep 08, 2026 at 09:03:55AM +0200, Konrad Dybcio wrote:
->> On 8/28/26 1:13 AM, Dmitry Baryshkov wrote:
->>> The always-on counter behind MSM_PARAM_TIMESTAMP sits in the GPU power
->>> domain on a4xx, a5xx and the GMU-less a6xx parts, so it restarts from
->>> zero whenever the GPU is powered up again and the timestamp reported to
->>> userspace jumps backwards. On an a702 six reads three seconds apart all
->>> land in the 500..1200 tick range, stepping backwards twice, and on an
->>> a530 the OpenCL device timer conformance test fails because
->>> clGetDeviceAndHostTimer() returns an end time below the start time.
->>>
->>> Save the counter in the suspend path of the affected generations, while
->>> the GPU is still powered, and add the accumulated ticks to the value
->>> reported to userspace.
->>>
->>> Assisted-by: LLM
->>> Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
->>> ---
->>> The always-on counter behind MSM_PARAM_TIMESTAMP sits in the GPU power
->>> domain on a4xx, a5xx and the GMU-less a6xx parts, so it restarts from zero
->>> whenever the GPU is powered up again and the timestamp userspace reads
->>> jumps backwards.  Accumulate what the counter reached before each suspend
->>> and add it to what is reported afterwards.
->>
->> Could (some) a5xx parts use A5XX_GPMU_ALWAYS_ON_COUNTER/0xa879?
->> msm-3.x defines it as KGSL_PERFCOUNTER_NOT_USED fwiw..
-> 
-> It seems it also restarts on power collapse (so always on is not
-> actually always). Also if it worked, it would have helped only a530 and
-> a540 (MSM8996 and MSM8998), leaving SDM630/660 and all MSM8956/76/53/37
-> without the fix.
+Hi Stephen, Bjorn,
 
-Yeah, that's why I said "some". Is there a chance that's because we
-mistreat the cx/gx split on a5xx?
+Just a quick ping regarding this series. The discussion between 
+Stanislaw and Qualcomm (Jie Luo) has been fully settled in late August. 
+It was proven that handling this on the UNIPHY side is not possible due 
+to the early stage of the watchdog reset.
 
-Konrad
+Are there any remaining concerns, or can this v4 be picked up for the 
+next cycle?
+
+Mieczyslaw Nalewaj<namiltd@yahoo.com>
+
+
