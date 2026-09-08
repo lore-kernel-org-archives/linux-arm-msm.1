@@ -1,281 +1,112 @@
-Received: from mail-wm1-f49.google.com (mail-wm1-f49.google.com [209.85.128.49])
+Received: from mail-ej1-f46.google.com (mail-ej1-f46.google.com [209.85.218.46])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5DDA53B05A1
-	for <linux-arm-msm@vger.kernel.org>; Tue,  8 Sep 2026 08:09:19 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.49
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7B4583A9D8B
+	for <linux-arm-msm@vger.kernel.org>; Tue,  8 Sep 2026 08:12:02 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.218.46
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788854961; cv=none; b=m7aIlk5mJ3AuC7AE5LxKxer/+/71R8IP9MLUS9Cbv8UOWcFlN9p6s6+T01OGAFBdjvRIJIhQF99yDB2TeqvK1MdPow60wiNahPy0HgJiXHdy49VPOKFFtjXxT0hCaYqidaAnCNHwVMlhrosLD+OKVaHMGMqAn2njQ6XqGNy7RKI=
+	t=1788855124; cv=none; b=Bk9RMj2CxSm9u2tvqcIJowsNqQ3OkOOI8dGlhNuf8Z+8E670XghTB5dVS6QDZpb8zlDg+fm09h154fprD9qy+t9zV3BoV+BIjW1bfSOfNjqts5nc0M9lkagdOQZ10ZL3u3Jj4XGENQMdn+LqizrCvw7MNq0njvDWjiCSurBJFL8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788854961; c=relaxed/simple;
-	bh=jZb9VWJNn//9UIfodFEP6WLVk3CPMdRNJNrNhBck1Wc=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=N55Byknv7e8UvjLbtFQb2DTJpGHpkd72krvgLagNWDKZHCMggCkGHeEuA3A1R1iOS2HV9v+t9iRgj0JUtARh7PzEbDIS+KkLHErD/3Kf+l/BvrhRsCWjFddwd+KpTWrdXHhvIZrWoOyNQHa/cNm53WS2nD6Ov6glMkkKKyPWBFY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=PwLWY19U; arc=none smtp.client-ip=209.85.128.49
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
+	s=arc-20240116; t=1788855124; c=relaxed/simple;
+	bh=Ob8WeoXxpLEJOGu3oc5akP43eFgM38Bg5bmqR1LkHEY=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=pdPtSS6v2bOZGusPdelrrW6LNvsZQNyNAWyq98K8pnMdkZKZme4LwnbOS5CpPEh9q6HJpziEihNa0NxyJgVaZvAHlgPNiDrtaOgLyuzdxLPzzAAlL2BS9EotZkeN2I5A1ityhct+bHr2nyg+pYaeU3da1mExbKVOA9njFx3zh/c=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=cy8iBNSr; arc=none smtp.client-ip=209.85.218.46
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="PwLWY19U"
-Received: by mail-wm1-f49.google.com with SMTP id 5b1f17b1804b1-495590dde14so61588625e9.0
-        for <linux-arm-msm@vger.kernel.org>; Tue, 08 Sep 2026 01:09:19 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="cy8iBNSr"
+Received: by mail-ej1-f46.google.com with SMTP id a640c23a62f3a-c2531f453eeso598142266b.3
+        for <linux-arm-msm@vger.kernel.org>; Tue, 08 Sep 2026 01:12:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1788854957; x=1789459757; darn=vger.kernel.org;
-        h=cc:to:message-id:content-transfer-encoding:content-type
-         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=FrMPA2gnzNAOST949OYokgJZDYzOdtAOrWkmN+04YvM=;
-        b=PwLWY19UjoVYyzrYJoYrYSSoK4ilGu5k/wRS/A8NXEPDZC57msuWKy2SYy3JqjZWQQ
-         yKnkn2KytgG1icUJWPkx41ZmMkFIXPQBjUgOfv+Qj/8NPLpgAxn78k+ox3DaVvbIoLJL
-         cN6l1WyVqFW/5PkFhZOGqJpXihl/0E8k19BkpyRfL8uDHdhUVw4+MtDRK8osSVTYCdGR
-         85l6t4LNooUfsxHb/BY1UVOGUO5P+5vwTDZM8tKBG5AOB35ivCB0TNwTLglhowYwMOdN
-         r3Ud/PP5RtAA56+dolP/EoByUTScHOs/ksbSaAptnRvkqDqV826TkqLDE2xreQGVFJcM
-         WKzg==
+        d=gmail.com; s=20251104; t=1788855120; x=1789459920; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=tc3w/tswhYMPPzbx1rKOX62Vnkfmu3CgvOLefEoDV8o=;
+        b=cy8iBNSrktXaSI1ITftqan858dQSCsj5a/cA97C696Jxe/BJOYbKBb896pblayp7hF
+         raYQuoXuORLM0HjSL89Ox/ikKBB+XNUY6yS1xNLxti1KLKGEJrCNREkpsk0aKeCJf87y
+         41nCVN/yH0WTGSa/C2oPrmUOFXCvfAyxaGKl++7Y9xYiEmR5nlPpfne2rOuky7Y/QbgL
+         oQMIvcVZztSZMGmO5QTL9yVhn0Zd2aS42nev5sNl0d/lKRWU3WVG1UOmfS7WwsMXtFY/
+         qytrOw62T4vScQG2SJbAnzR+3Ah/nSvDWEmF6rEob5SPv068sQbRoXLaXALtcQKArppd
+         La/A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788854957; x=1789459757;
-        h=cc:to:message-id:content-transfer-encoding:content-type
-         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to:content-type;
-        bh=FrMPA2gnzNAOST949OYokgJZDYzOdtAOrWkmN+04YvM=;
-        b=C4YAqAOlZifSfkNOc6F2FGHvUlj+1S0rSbNgn3SVbIkXkYQX5DyNCQmMw6yJQTu6+1
-         NfzV7yB0Ji5s1CZTs0JV5drIvHC7SzHjhBaLYm+QeWhA2z2xADV3DgcqBZL88pkNR0cV
-         bwxAG5oxiUfS5lAxkfNLQPX2U3rhQuxN3mSabq+9a+v2Webvvau5GudNgesVRqtT/WdC
-         e1Te99/7OYTdjnq5JikJX5SWHZpuwtAaCR5j72mHm9XY8wsR9H5I3x/EpmcGPMflmG9c
-         hG6DddwFPxa5N0z9HAFO0eCtWYutpz8KrEqTt/JcJgH2ufQAWa/4V3a1wSUqzQq0YOYz
-         OZFw==
-X-Gm-Message-State: AFuF++mc/Pdsh4xLGa5zTwa6bLV7FednXU7uwRpDfRbjr5TJFSgTBxtP
-	xskNJw38PbE7uTZQ1WfCMYoUY1n431+As3i/Ak7YNXpUkdwIHdmYpFNBQ3h1cj3iAd0=
-X-Gm-Gg: AYBFou1t9zbJqvdH84fynesBe6oU7Ozf/F/pVMoPXwoSVdoBd/9E0YVu50T37cDDyxF
-	e7eIxs2V+bpvKST9/sqKB8pm3c47A7h8Rzih+ikK1vxN3w8Qw23Aq20CilxkZKMEZvZjEH/lt8C
-	9XTJozE0cffSOD2j+1oKsbfacPo88TmnMuRdzppzNumCX/kgG7LF/iYFfduaP8SX5GjXQo+xv4a
-	Ct09/3kPETLrmQVcW9MnfxcVdJlGi3WHnlzBpDIkol/37l8AHYVjdF41+mRGIqbaq4f/aaGhnZf
-	6w86JiTqPLJxZ7x0DAzsWdhzNmkzzHFWiWq6tfb6ZDjFcXK3yigrfbCsRm2bH8/xpe6H/pHqYkt
-	UyzjjN+Ckfs5E7hBpD9glLc9UpVMcygAoyXRCcMEDUagxYjcsJg7cuXZn0GOBh2HfY7Wgi6H30b
-	ysKJr2xQFn+W2gTAhNkjUgs1tf8or4PwSsPZgk+OgcS/oED7jjZFC5a3Drwe5yPDDFwfxW6rcSJ
-	dXaYYFSFBnrXJ3tXhI=
-X-Received: by 2002:a05:600c:3507:b0:499:a5c8:c6f3 with SMTP id 5b1f17b1804b1-49cf7fe6900mr509106715e9.3.1788854957231;
-        Tue, 08 Sep 2026 01:09:17 -0700 (PDT)
-Received: from arrakeen.starnux.net ([2a01:e0a:106d:1080:52eb:f6ff:feb3:451a])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-49cee6023edsm441847955e9.7.2026.09.08.01.09.16
+        d=1e100.net; s=20251104; t=1788855120; x=1789459920;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=tc3w/tswhYMPPzbx1rKOX62Vnkfmu3CgvOLefEoDV8o=;
+        b=RF/luDjkWvM24ATQbKBzNkRHZhtlQT/d4bKueR5LbDILqbaJpwNXDebdzuL7j+yPp9
+         jiUzekdEjbU076iaaPw70c7Uo4Hm/k3Dn7X79tersoRoMBkrj2GpaFwN1MI7eVbMpTQd
+         kpZd54VT5UlSxOVar9k7jEbYxR/4sVMqY98ZfNjvUtYMdBG9jwEnGwR8ARfnlEHdqFNT
+         OYkYWURDxx7vwkoQwc0m3dhH99RqsOnYRl5T5c/vt8FohWlnNEd1G+eDFbU6KKGsBpRI
+         Q9LbbrBL9CjJhZYJpQCVt/VagpWqvdVtQldoit5xYLsYCaQ9hbd9qAQGxb1Esjo1pKCe
+         H/+w==
+X-Forwarded-Encrypted: i=1; AKwUvBz4Olc4YbXEZzXHxbz9/wx4JIgMK14RBXY6MKxRvDIQ3UxR4yW8kQAesyWrDs3vLdlTm/z4lc8xPZTJZRZd@vger.kernel.org
+X-Gm-Message-State: AFuF++kJbZGCNHBcMKlsWGGyn19FvILUciiHKQsVhXtlyxous7zVsxhr
+	GOBG9OtQ4Xlnu+w8ou39CqUjPOQJP+CL9Azf0m7WGTnkEKONInjsFvgT
+X-Gm-Gg: AYBFou1MI6icrR8Lwyhe4BuIJ8NrGdamtL7A3VoXYB6fKJVb6nUUWYBNTU/9KkMYWFt
+	g87/SVwnHrbyQkvDewGd87VVMuSN7EhGFOhETYa9gN9sGDvfTR/4vp/VCVuHD7YVXOXv1dvwsYt
+	jPgXrmEpGHaj4c0TQJKX4tCC3soaOsGlfeI3NVMaQmw7qkbhKPpubipITdWpPzn+kIEyTORUo8t
+	qjXz+zbNZaMlNmjCkLqMiw21a0NQWbPd+B7Vtwn6TD7pF3ZFugnGxFsP619nIRn+bx01Gw/maI3
+	4mqk0DkltpuZPRoICyQj5pYWJu5Cp/WDVEvpixQSRfZpLlJ0jiov5KIo1km3xxcjRVY+vwPWwyl
+	vanpA+LLqQP4gJg76EjFQDCP/NbG2ogojzCdAlCR+6wDkoYpuknmUe4KvfZ+KpMLKVr7SLeqkyT
+	6kYZ3mVrcM3AskkFFw194Ad1beUXHUsjrC/V5ZzU1wp3ex25IfVU48CC/zFwwVawaSCuuLKu+NU
+	sWiIv1WsA==
+X-Received: by 2002:a17:906:7308:b0:c20:9447:bd5e with SMTP id a640c23a62f3a-c260c8e77fcmr2227127366b.9.1788855120150;
+        Tue, 08 Sep 2026 01:12:00 -0700 (PDT)
+Received: from localhost (78-3-21-163.adsl.net.t-com.hr. [78.3.21.163])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c261f673000sm490389566b.24.2026.09.08.01.11.59
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 08 Sep 2026 01:09:16 -0700 (PDT)
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Date: Tue, 08 Sep 2026 10:09:15 +0200
-Subject: [PATCH v2] interconnect: qcom: implement get_bw with rpmh_read
+        Tue, 08 Sep 2026 01:11:59 -0700 (PDT)
+From: Dmitry Sinyavin <sinyavin@gmail.com>
+To: Jassi Brar <jassisinghbrar@gmail.com>
+Cc: Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	devicetree@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Subject: [PATCH] dt-bindings: mailbox: qcom: Add MDM9607 APCS IPC
+Date: Tue,  8 Sep 2026 10:11:58 +0200
+Message-ID: <20260908081158.2399852-1-sinyavin@gmail.com>
+X-Mailer: git-send-email 2.53.0
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260908-topic-sm8x50-icc-read-rpmh-v2-1-b6f1c4205450@linaro.org>
-X-B4-Tracking: v=1; b=H4sIAKrCn2oC/43NQQ6CMBCF4auQWTumrRSMK+9hWIxlgEmUkikhG
- MLdrZzA5fcW/9sgsQonuBUbKC+SJI4Z7lRAGGjsGaXNBmect9ZUOMdJAqb3dfUGJQRUphZ1eg/
- ITyorS6V3XEMOTMqdrEf80WQPkuaon+Nrsb/1r+xi0WJrLuTYB/JdfX/JSBrPUXto9n3/AvsdJ
- EPFAAAA
-X-Change-ID: 20251106-topic-sm8x50-icc-read-rpmh-eba461a452e7
-To: Georgi Djakov <djakov@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, linux-pm@vger.kernel.org, 
- linux-kernel@vger.kernel.org, Neil Armstrong <neil.armstrong@linaro.org>
-X-Mailer: b4 0.15.1
-X-Developer-Signature: v=1; a=openpgp-sha256; l=5677;
- i=neil.armstrong@linaro.org; h=from:subject:message-id;
- bh=jZb9VWJNn//9UIfodFEP6WLVk3CPMdRNJNrNhBck1Wc=;
- b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBqn8Ksz1kMm9xb8PHeWR1wLddduvjg2l+f7eAh8u3c
- DKXmp7iJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCap/CrAAKCRB33NvayMhJ0XMTD/
- 91K0ue88uHmTaeWrOynq8j9LBjh95zKukeZmm4kmiCSawdwjnhYsQwd+Flr5NoQaBFCoYNWNeQEMmv
- EdUHzsyTDHdDeCWA6LTfo+68pRXFx7Bm4eljjSL4iiWEjeHNe0OmSaWb2Bs5jS3X/p9VoQ0xtIQlxC
- bQe9DyAqwKLuKQNAZf6fnTLNSJpfEEtw5OMhLU/2GJKFFpko4MwhhlnTfsQcuw4iF1SfSjENhawUBb
- tF0geqZxpAqvrkQt9D6D+43FMFeH2L5+JAmqa4a5saUy3wMRNgZ1No/G8FBxV5RlU39C61w9rMaXWU
- /rQDFFEhK+15QDBgZe+U3hNjOJVbGOrxysWhKrLTddx1DWl6aGomzyMfR21FaHzkeDfmgq5cmGmO2d
- b1EdVIJusxe4mzChwS1eDoiFc7FulzplyhUzgx9XNU5mp5KdXRoLAkXYxwiw7v5ZNiNOrN1hNDvbI/
- Bmv9M6dUhUtjyNh8bZzsKRD7PUJPMTu+Xi3WTg+xIhjbf8CwXI7fcSP8vJW/qES6cGZzLskT8O5fyl
- dYuObc/SFlYiNpAj/fHtgLqlZPqxY7hnFqesxWgKjFSq6lcBk9EaQuHlpD5SK7KGEtfclFp9DFcWna
- 0h17RZaAAVQurKjJxJQI8iVX8L39PRTo8O8FissVmBsoPtRE7SmsuS986oyg==
-X-Developer-Key: i=neil.armstrong@linaro.org; a=openpgp;
- fpr=89EC3D058446217450F22848169AB7B1A4CFF8AE
+Content-Transfer-Encoding: 8bit
 
-Since we can actually read back the APPS rpmh interconnect
-BCM votes we can actually implement the get_bw() callback
-and provide a coherent average and peak bandwidth at probe time.
+The MDM9607 APCS IPC register is at offset 0x8 in the KPSS global block.
+Its CPU clock controller is in a separate block, so the existing MSM8994
+APCS match data can be used without registering a clock device.
 
-The benefits of that are:
-- keep disabled BCMs disabled
-- avoid voting unused BCMs to INT_MAX
+Document the MDM9607 compatible with the MSM8994 fallback so the existing
+driver match data can be reused.
 
-If the interconnects are correctly described for a platform,
-all the required BCMs would be voted to the maximum bandwidth
-until sync_state is reached.
-
-Since we only get the BCM vote, we need to redistribute
-the vote values to the associated nodes. The initial BCM
-votes are read back at probe time in order to be ready when
-the get_bw() is called when a node is added.
-
-Tested-by: Georgi Djakov <djakov@kernel.org> #db845c
-Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
+Signed-off-by: Dmitry Sinyavin <sinyavin@gmail.com>
 ---
-Changes in v2:
-- Added tested-by
-- Rebased on v7.3-rc1 now the rpmh_read() is merged
-- Link to v1: https://patch.msgid.link/20251106-topic-sm8x50-icc-read-rpmh-v1-1-d03a2e5ca5f7@linaro.org
----
- drivers/interconnect/qcom/bcm-voter.c | 36 +++++++++++++++++++++
- drivers/interconnect/qcom/bcm-voter.h |  1 +
- drivers/interconnect/qcom/icc-rpmh.c  | 60 ++++++++++++++++++++++++++++++++++-
- 3 files changed, 96 insertions(+), 1 deletion(-)
+Validated with dt_binding_check, including yamllint, and positive and
+negative DTB tests for the compatible string combination. Existing
+MSM8974, MSM8976 and MSM8994 APCS nodes also pass schema validation.
 
-diff --git a/drivers/interconnect/qcom/bcm-voter.c b/drivers/interconnect/qcom/bcm-voter.c
-index a2d437a05a11..9014bf20adad 100644
---- a/drivers/interconnect/qcom/bcm-voter.c
-+++ b/drivers/interconnect/qcom/bcm-voter.c
-@@ -261,6 +261,42 @@ void qcom_icc_bcm_voter_add(struct bcm_voter *voter, struct qcom_icc_bcm *bcm)
- }
- EXPORT_SYMBOL_GPL(qcom_icc_bcm_voter_add);
- 
-+/**
-+ * qcom_icc_bcm_get_bw - get current bcm vote
-+ * @voter: voter used to query bcm
-+ * @bcm: bcm to get current vote from
-+ */
-+void qcom_icc_bcm_get_bw(struct bcm_voter *voter,
-+			 struct qcom_icc_bcm *bcm)
-+{
-+	struct tcs_cmd cmd = { .addr = bcm->addr };
-+	int ret, i;
-+	u64 x, y;
-+
-+	mutex_lock(&voter->lock);
-+
-+	rpmh_invalidate(voter->dev);
-+
-+	ret = rpmh_read(voter->dev, &cmd);
-+	if (ret) {
-+		pr_err("Error sending AMC RPMH requests (%d)\n", ret);
-+		goto out;
-+	}
-+
-+	x = FIELD_GET(BCM_TCS_CMD_VOTE_X_MASK, cmd.data);
-+	y = FIELD_GET(BCM_TCS_CMD_VOTE_Y_MASK, cmd.data);
-+
-+	/* For boot-up, fill the AMC vote in all buckets */
-+	for (i = 0; i < QCOM_ICC_NUM_BUCKETS; i++) {
-+		bcm->vote_x[i] = x;
-+		bcm->vote_y[i] = y;
-+	}
-+
-+out:
-+	mutex_unlock(&voter->lock);
-+}
-+EXPORT_SYMBOL_GPL(qcom_icc_bcm_get_bw);
-+
- /**
-  * qcom_icc_bcm_voter_commit - generates and commits tcs cmds based on bcms
-  * @voter: voter that needs flushing
-diff --git a/drivers/interconnect/qcom/bcm-voter.h b/drivers/interconnect/qcom/bcm-voter.h
-index b4d36e349f3c..fc75d457dcc7 100644
---- a/drivers/interconnect/qcom/bcm-voter.h
-+++ b/drivers/interconnect/qcom/bcm-voter.h
-@@ -13,6 +13,7 @@
- #include "icc-rpmh.h"
- 
- struct bcm_voter *of_bcm_voter_get(struct device *dev, const char *name);
-+void qcom_icc_bcm_get_bw(struct bcm_voter *voter, struct qcom_icc_bcm *bcm);
- void qcom_icc_bcm_voter_add(struct bcm_voter *voter, struct qcom_icc_bcm *bcm);
- int qcom_icc_bcm_voter_commit(struct bcm_voter *voter);
- 
-diff --git a/drivers/interconnect/qcom/icc-rpmh.c b/drivers/interconnect/qcom/icc-rpmh.c
-index 3b445acefece..7f2b5673629b 100644
---- a/drivers/interconnect/qcom/icc-rpmh.c
-+++ b/drivers/interconnect/qcom/icc-rpmh.c
-@@ -136,6 +136,61 @@ int qcom_icc_set(struct icc_node *src, struct icc_node *dst)
- }
- EXPORT_SYMBOL_GPL(qcom_icc_set);
- 
-+static int qcom_icc_get_bw(struct icc_node *node, u32 *avg, u32 *peak)
-+{
-+	struct qcom_icc_node *qn = node->data;
-+	u32 avg_max = 0;
-+	u32 peak_max = 0;
-+	u64 x, y;
-+	int i;
-+
-+	if (!qn->num_bcms) {
-+		*avg = INT_MAX;
-+		*peak = INT_MAX;
-+
-+		return 0;
-+	}
-+
-+	for (i = 0; i < qn->num_bcms; ++i) {
-+		struct qcom_icc_bcm *bcm = qn->bcms[i];
-+
-+		/* Use AMC vote for boot-up */
-+		x = bcm->vote_x[QCOM_ICC_BUCKET_AMC];
-+		y = bcm->vote_y[QCOM_ICC_BUCKET_AMC];
-+
-+		/* Consider enable mask and convert to INT_MAX */
-+		if (bcm->enable_mask) {
-+			if (x & bcm->enable_mask)
-+				avg_max = INT_MAX;
-+			if (y & bcm->enable_mask)
-+				peak_max = INT_MAX;
-+		} else {
-+			if (x) {
-+				x *= bcm->aux_data.unit;
-+				do_div(x, bcm->vote_scale);
-+				x *= qn->buswidth * qn->channels;
-+				do_div(x, bcm->aux_data.width);
-+
-+				avg_max = max(avg_max, x);
-+			}
-+
-+			if (y) {
-+				y *= bcm->aux_data.unit;
-+				do_div(y, bcm->vote_scale);
-+				y *= qn->buswidth;
-+				do_div(y, bcm->aux_data.width);
-+
-+				peak_max = max(peak_max, y);
-+			}
-+		}
-+	}
-+
-+	*avg = avg_max;
-+	*peak = peak_max;
-+
-+	return 0;
-+}
-+
- /**
-  * qcom_icc_bcm_init - populates bcm aux data and connect qnodes
-  * @bcm: bcm to be initialized
-@@ -255,6 +310,7 @@ int qcom_icc_rpmh_probe(struct platform_device *pdev)
- 	provider = &qp->provider;
- 	provider->dev = dev;
- 	provider->set = qcom_icc_set;
-+	provider->get_bw = qcom_icc_get_bw;
- 	provider->pre_aggregate = qcom_icc_pre_aggregate;
- 	provider->aggregate = qcom_icc_aggregate;
- 	provider->xlate_extended = qcom_icc_xlate_extended;
-@@ -272,8 +328,10 @@ int qcom_icc_rpmh_probe(struct platform_device *pdev)
- 	if (IS_ERR(qp->voter))
- 		return PTR_ERR(qp->voter);
- 
--	for (i = 0; i < qp->num_bcms; i++)
-+	for (i = 0; i < qp->num_bcms; i++) {
- 		qcom_icc_bcm_init(qp->bcms[i], dev);
-+		qcom_icc_bcm_get_bw(qp->voter, qp->bcms[i]);
-+	}
- 
- 	for (i = 0; i < num_nodes; i++) {
- 		qn = qnodes[i];
+Built the APCS IPC driver for ARM (multi_v7_defconfig) and arm64 (defconfig)
+with Clang and W=1.
 
----
-base-commit: cee9395acd8043be0644b25c34bfa86623f2b935
-change-id: 20251106-topic-sm8x50-icc-read-rpmh-eba461a452e7
+ .../devicetree/bindings/mailbox/qcom,apcs-kpss-global.yaml       | 1 +
+ 1 file changed, 1 insertion(+)
 
-Best regards,
---  
-Neil Armstrong <neil.armstrong@linaro.org>
+diff --git a/Documentation/devicetree/bindings/mailbox/qcom,apcs-kpss-global.yaml b/Documentation/devicetree/bindings/mailbox/qcom,apcs-kpss-global.yaml
+index 39bc374300c3..e87373054d76 100644
+--- a/Documentation/devicetree/bindings/mailbox/qcom,apcs-kpss-global.yaml
++++ b/Documentation/devicetree/bindings/mailbox/qcom,apcs-kpss-global.yaml
+@@ -33,6 +33,7 @@ properties:
+           - const: syscon
+       - items:
+           - enum:
++              - qcom,mdm9607-apcs-kpss-global
+               - qcom,msm8974-apcs-kpss-global
+               - qcom,msm8976-apcs-kpss-global
+           - const: qcom,msm8994-apcs-kpss-global
 
+base-commit: 14af7a96afa39f4f3c1972705489b9ba15c01857
