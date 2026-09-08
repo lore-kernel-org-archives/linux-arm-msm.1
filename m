@@ -1,227 +1,147 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D06CD529412
-	for <linux-arm-msm@vger.kernel.org>; Tue,  8 Sep 2026 15:49:15 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3069C56B849
+	for <linux-arm-msm@vger.kernel.org>; Tue,  8 Sep 2026 15:51:10 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788882557; cv=none; b=b1Y/lPDMF9lBJLxwI61sN13hcqVRcZeTl+bEmPUExx3lgHXvx6epz3F8vOAeQsEhrNyexS6YMlBN+K6gcqNrakPMIN/g9s8WAee7ugEiaKttmd1sRUmRrxTtkSn2BpRP9Ka5QG6ObHl4oT2U4w80+Bg2JWFPLWhWa+Hd/gjIufk=
+	t=1788882672; cv=none; b=O5A3UxZr0GzjP68CWfoy0INsEcfAGqnYM1Y/jjoj69CzcvBPVnBi3ylFMBH9TdXv5Zd37ntll2GV9xz/0BZSV9YJI5J45sby8SdAy9jQB+IogPoFiabJ6P04Hjxx00//GPLsJx/qiLKe7Rr7iAGPJUwUhyhLi3t8pv4nDINpUoo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788882557; c=relaxed/simple;
-	bh=oLRRWVQaJunuo2Pn1JyDUPmY5bk9k09Er8msNBqYKr4=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=h5L30sGG6FDdEXvrrpsVZIGk6Eeq65l6hovuEqvvNReRou6wWnM62nVSek86GdhuEVVB/niNlWX5vUDEqVXPqzSaWYnQZrMwyWdaC7ZPv5oo2nWhHg4myFi7rTALrjeGQhgO8RBjSvpqPmHLmIjbb+7deq94Vj/ovREfKzuwCWY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=MNWX1qtY; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=czjfzEr+; arc=none smtp.client-ip=205.220.168.131
+	s=arc-20240116; t=1788882672; c=relaxed/simple;
+	bh=XSPete4kA8gcLf3/xZdNmlyaz442sDN/1+dtmpWZ2KE=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=Y/+wjXpSEALy7wvPWkZhrsnepegn1P4i0xyXwGuEOZA1vC4XFPlZU+EF3ZYxu7Lr/qeB7TuDFytiMjOE6OsKRFF4Ve8VEsAZLVALzJ+bNbi2KPmEFUYM5jTsXoij01EDCX51tU7XY1c2iESOADBxu5oKdZypUyu+U/MfPc7y0OQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=F9QMxGdT; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=eewXynS8; arc=none smtp.client-ip=205.220.180.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="MNWX1qtY";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="czjfzEr+"
-Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 688FdWhu2737445
-	for <linux-arm-msm@vger.kernel.org>; Tue, 8 Sep 2026 15:49:15 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="F9QMxGdT";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="eewXynS8"
+Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 688FdaYe2769665
+	for <linux-arm-msm@vger.kernel.org>; Tue, 8 Sep 2026 15:51:09 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	uL3C6X92i3vnucRFu6eOOeXdI3jvIqfwUfDfb0dF6jE=; b=MNWX1qtY6ooLU0Kz
-	yUoaIGny/nQtxaIuLcdFZcplNomrPDveZVAEa2EoAwYpGegeWrC+UDyX8UyqhGru
-	yJqv/wlimM3IdBlFPrqHvGr2Ywd1keoyWgSI/6Rkrq5vGBS6NUeyDJgbx86mGypz
-	f/1F2sQjjvwkiA+PnQ1cJZie2vKhTku8Fd0rboSF8i+o/BPSUPkPi2Xys2665QMo
-	Vu6/wvWNm9SiYCFZyTTHbjlagH/XQs4Jjit8GnXeXelskYQlDFu6RoUGnAdEIIYs
-	5V3Le4DH/mparl9K61MzAuq5SBuH3yqFEgLtWTAPD4Jbb74QJBDgTdFREZYv3JK6
-	EKOvng==
-Received: from mail-ua1-f71.google.com (mail-ua1-f71.google.com [209.85.222.71])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gjatjjxe9-1
+	cc:content-transfer-encoding:date:from:message-id:mime-version
+	:subject:to; s=qcppdkim1; bh=adDtYGI97VusfpxJEE5tInx5u7GwKzmvoOx
+	LzTA7bYU=; b=F9QMxGdTT4VuSmIdhRsOW6CEzx4M54wecNMKimvIA7KQiq1eGZf
+	2RNuJ1rHWvQ88hC87CoYIn0W1tFphCVv8ULzOHu/pUyivfLyouuew2rxWGnog9IK
+	SzOXbRgztFPdZVy/KtDvFm09I9NevqVsUA/hJws289Mh4KmJ8F7DHZo2JmHTTauL
+	P+6pGKz9R1m7DsVawenBsk6ziOfNkF+gg6tS4ir6UXJbKeX1MP4X2buMlwvFVDZX
+	LIf0frH4Q4EXhzrrgMbwDrNkBwM2aVSyhI02XLhde0IGzLKRrWR4KNLj9xwbxG36
+	GGFzuqzdqczAQcUCdLATIIhEAMe40H9JA4Q==
+Received: from mail-pj1-f69.google.com (mail-pj1-f69.google.com [209.85.216.69])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gjjvugtt3-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 08 Sep 2026 15:49:14 +0000 (GMT)
-Received: by mail-ua1-f71.google.com with SMTP id a1e0cc1a2514c-97cb8d1b032so339798241.0
-        for <linux-arm-msm@vger.kernel.org>; Tue, 08 Sep 2026 08:49:14 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Tue, 08 Sep 2026 15:51:09 +0000 (GMT)
+Received: by mail-pj1-f69.google.com with SMTP id 98e67ed59e1d1-381250979d5so5871881a91.0
+        for <linux-arm-msm@vger.kernel.org>; Tue, 08 Sep 2026 08:51:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1788882549; x=1789487349; darn=vger.kernel.org;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :content-type:mime-version:references:message-id:subject:cc:to:from
-         :date:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=uL3C6X92i3vnucRFu6eOOeXdI3jvIqfwUfDfb0dF6jE=;
-        b=czjfzEr+JRP2VLTw38wnaVZufdK7UNyZjh19NH38iW2u02rd3B0SYnC3StGgs4qyoF
-         CYuJQ3TfhpvGYA/ftjdmNAyDLSD8C9Mm9oBx+3vAnsdW3foaPJ+vpIOSnS8hMLkfJXvS
-         J9NPhVPAnyDT86xnp2PI0D7P+SknBkk/kChnUUPUkxWojiYUheVt+tKECijjVMncsxdF
-         cs8AW++/1cNaf/+wtCt1qE3e91+y92dx6F7gP8kuUQK7ZKyQaD8fvx4bBKBn7VOLi3Gg
-         3n2qA2syV3fJnnKWBvytdO1kyMcRMZ1aK2hVgJ2zqbsxCGQRDsAtbtaFpTFOrx2nBrXq
-         oeNA==
+        d=oss.qualcomm.com; s=google; t=1788882669; x=1789487469; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=adDtYGI97VusfpxJEE5tInx5u7GwKzmvoOxLzTA7bYU=;
+        b=eewXynS8cvZPMr4l8xQMsoScx1Rhxn7+/6A8ZEawwKuFZeUCH7Qe9fz8U7nFHuXuMF
+         zVVtd9cRRqCKiEraipw9LYXXdrRIU1i3296VpwbOdk2dLq0u6IMeLndNaS+iKPw3YwFt
+         sIhOXrE43iab8/xNpioQ5oi7hwakBMBukek8QOoFL3duxAwXq/psn6l+eMmXRES1fYD6
+         eAMaxG03QNm0UfEZcNNlEaQPbngYtCX5K4U+lpk7ZAmbPqjpdvsR/HTWwFIkcGd9nF4e
+         3x9shLiNQ7w2k01/GScF+krhAv797vfONX3XtIQ588ri/usOGUR/Mt7yhp34oeZVrMhi
+         NcoQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788882549; x=1789487349;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :content-type:mime-version:references:message-id:subject:cc:to:from
-         :date:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=uL3C6X92i3vnucRFu6eOOeXdI3jvIqfwUfDfb0dF6jE=;
-        b=OPFfgrkt6EZFd+qhmw5vvBHcWxX7GoMmGMLHegpc5uokjB4vQ8kzH1mg10SKGoNmiv
-         J6Xh3wDo+OvlSwIOMfs9BWI3UATFxY08mdiB9yIT0MM8NnVIa5biAnXHXYXhYmJp1zJv
-         rZcM6MeLzzoETKxOYdeC33JWpL/lqcr50a6r+3EiEb6BktHY5GWcWSR1tMMGEUwwHwDa
-         wkTw9c8YCW5PtfpXYyTh663kKE6ghm0J7wOooBCfh36sczjLm3x1b7Rel98X6jMJr0s1
-         H1DgJg8pp/xjgodYgF6b8aDqAOOlE7XZ2IVDm0igvfRcfpAPpUrj6UesrxprLwZhi17n
-         0u1g==
-X-Forwarded-Encrypted: i=1; AKwUvBxc+GlWl6QF7+74QXjzej5h8N4IWKhEK43/fB8OjqCuQXjqgpeGoXG5vRH0whlzO3pv0b/zw4NtmEDrtiIi@vger.kernel.org
-X-Gm-Message-State: AFuF++ny0wZ5bChq16q4Foiv6bK+Hxrys0/Y9KQkqMtFeAqjVR+/Cy9T
-	KtLVyCmOFkfsug5DGrhdYSbM+LLmzadlX6qYSVpz2TJTQsHiUHGZ0T06u58OGKbTp0OIHi2XDdT
-	AzcGfj7M9/svnWgt1xBaEoLBbcFRUyNWiAdg9lgMd2XmJ2+++LQxt8bZgGqzQst6ET/F7
-X-Gm-Gg: AYBFou3C6okxBDHKLn+gPwzJ872BSJsoq71IizP5BSde9eyNNweM1S9se7i/v4LqyKg
-	D+ku51EvwP8Qsh9fyLrf3DVbMm/tjDQCm8wwLyPFS9zV+dKSU//Dj5dTv+LPfG1JJpJr/iYQPbC
-	s8ky47STa3Os7n4Oz6C2hMHqTOuLjK4E2FmQGQHongNVRSPRi9swnDCwRjgMh4JGVAJEnpLmly9
-	lBbMZr7AKEWrGSfduJzDPIlcfjU23z18WiHNbxvxwgWoOhFdkCFnaGTt+b62UnuA6BMgQybkGey
-	L7XB9Ltkxy02Qp/cBrx6TX23ZDSAP5yWsZxOXWtlgFLyXxNfFuZhocsP8g7ggL4A+865tTPAu2P
-	n5orX+Ia32i1QAcraa80FNCQX6qTBZy9P+aYMiPuKIUWKTcRz5GXRaHBCQ1pgqTWtGWJQlcSvVO
-	NpaT6+PHaybnjo
-X-Received: by 2002:a05:6102:8697:10b0:784:5883:9cc4 with SMTP id ada2fe7eead31-78f75e026b4mr32264137.11.1788882548607;
-        Tue, 08 Sep 2026 08:49:08 -0700 (PDT)
-X-Received: by 2002:a05:6102:8697:10b0:784:5883:9cc4 with SMTP id ada2fe7eead31-78f75e026b4mr32251137.11.1788882548074;
-        Tue, 08 Sep 2026 08:49:08 -0700 (PDT)
-Received: from umbar.lan (2001-14ba-a073-af00-264b-feff-fe8b-be8a.rev.dnainternet.fi. [2001:14ba:a073:af00:264b:feff:fe8b:be8a])
-        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5b74cbfdfd7sm2648080e87.75.2026.09.08.08.49.04
+        d=1e100.net; s=20251104; t=1788882669; x=1789487469;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=adDtYGI97VusfpxJEE5tInx5u7GwKzmvoOxLzTA7bYU=;
+        b=TYRgieod/NcPAWVG4//bE2A0bkwDBbbxfOv5uYsRVRnlZhH4AK8A+UQlJlIEOLeQIg
+         qIzynhxJG8uBPYdWutanSkLDPnsWrxzYI7RiVlEKmumRumsywjx0+9LX1rEGRuzkm/70
+         FoemOBoMqqoyf9ptEWtyI22d35LwB0Ez2XG0i/gIPUjfqVV76tZN0PCKoton3IYvhYCS
+         bUTca4SNbgu+PrPSw861RXvuvJtRjhJ92LerfibtPU7mH3pPjJPzMCJ8rEv/PD9H+axH
+         D5A1pCAW5n4XNLAVq3RpuViPXa0gIJnnoc5IprcvWq77/bhrrfGKjPH4Ou+lFARronXO
+         WRGg==
+X-Forwarded-Encrypted: i=1; AKwUvBwXT2hzCDkj2IOpSqZHWJkc1GRvDJMC8dBVgfCzHNvGTQmjnOVRMsqCqzz1hH5R8YYBQAtSQtxNhtS2xCWO@vger.kernel.org
+X-Gm-Message-State: AFuF++l3t7P3wc90pBFjhTNkxWhI2yLha6YqbNCvpi3L3ASC6MVKYr8p
+	3tVGqehbVRcFXC+y7GDN9A+XwkWdKQpzkg1ibcVUFqDT7fEJC1eZbEXg9NzxUb2CAMYmTx5xf2H
+	NAAAzQM40nCWslMP+/yOUbXHu6B1RV2GVJZI3EdltcPHRikkf41ir9WWdXUFhzc25n/wq
+X-Gm-Gg: AYBFou1T6C5936NSNX/a520jurQl8ePrJE4uh40P0Ox4aFuCi6YuczRovzj9ZMk4+RW
+	kx4aOVYEzvQ9jnFOT34MsSVrUbSnrJUOANt4De2c0yalbL1bNyjd5pzMTH6aEl9XoutFSQFXVb4
+	yXs7FT0NMjoT/T10vjVP0dSV9ZYH9X3Bv1zX4zC5HhbLlZ+vhjvluVGWsX6T5H8fXQF+lt6fHnF
+	CIDejCUFdbLDzk0c2JfTCLaT5ppOfp0kbJZDWElzqGf+IYe2VlzorxFx3d3q6f9xBpyr+AkgkNf
+	7AvKGE+ZXezU+IvNFI4hNDe2RofiA24nxwm7qNbKMMoWLLVQVRj6fCnLsMDY4a+BRZCZdkaKt68
+	lSeUFb4N8whnbxLJiodRLObGhsL+OmElFXxlsh25C4LzcAuRwC2nrbiJkYwrZ1CMppW1sRAwnWD
+	eoe7jdElLzslAlUMeO3T36dg==
+X-Received: by 2002:a17:90b:1643:b0:380:21b7:e727 with SMTP id 98e67ed59e1d1-39b26272f04mr43264075a91.14.1788882668513;
+        Tue, 08 Sep 2026 08:51:08 -0700 (PDT)
+X-Received: by 2002:a17:90b:1643:b0:380:21b7:e727 with SMTP id 98e67ed59e1d1-39b26272f04mr43264017a91.14.1788882667899;
+        Tue, 08 Sep 2026 08:51:07 -0700 (PDT)
+Received: from hu-sivagupt-blr.qualcomm.com (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3339af25062sm58606342eec.16.2026.09.08.08.51.05
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 08 Sep 2026 08:49:06 -0700 (PDT)
-Date: Tue, 8 Sep 2026 18:49:03 +0300
-From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-To: Connor Abbott <cwabbott0@gmail.com>
-Cc: rob.clark@oss.qualcomm.com, Sean Paul <sean@poorly.run>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Akhil P Oommen <akhilpo@oss.qualcomm.com>,
-        Dmitry Baryshkov <lumag@kernel.org>,
-        Abhinav Kumar <abhinav.kumar@linux.dev>,
-        Jessica Zhang <jesszhan0024@gmail.com>,
-        Marijn Suijten <marijn.suijten@somainline.org>,
-        David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
-        linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org,
-        freedreno@lists.freedesktop.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH] drm/msm/adreno: keep the GPU timestamp monotonic across
- power collapse
-Message-ID: <6s7mwjzglv5slukj73glmshe4gwfyh6cvimxyeyn6l4r46lkpv@74mpfroj23xi>
-References: <20260828-b4-adreno-timestamp-v1-1-273525da144c@oss.qualcomm.com>
- <CACu1E7GGdxTOsn+MRDT+7Guhjs-DDkZVx0Yet=RTxgQ4CNCKhw@mail.gmail.com>
- <CACSVV00BtmA0CotRucd8jG=cQLQw0YmLKEkTOV70qHBx=sG0sA@mail.gmail.com>
- <fl5uoffoh3gyod3f6jxgze33ut4jj4ttmgivtyoa5oykbt2aqp@rkktjz4yh4ll>
- <CACSVV03ShOw8D8d-5gDPYdzH3_Hp7EMz2CdfA3x08pCKAtw57g@mail.gmail.com>
- <CACu1E7H9KsUU=dV+iwQPOOX62+V8S5xstFf2LXhzeE7oSb3V4A@mail.gmail.com>
- <xq2q6jazk2a5atfthzwktn7qhrinxg4duhdxg22qrutgdycbwb@47nosxhcqloz>
+        Tue, 08 Sep 2026 08:51:07 -0700 (PDT)
+From: Sivansh Gupta <sivansh.gupta@oss.qualcomm.com>
+To: Sibi Sankar <sibi.sankar@oss.qualcomm.com>
+Cc: Jassi Brar <jassisinghbrar@gmail.com>, linux-arm-msm@vger.kernel.org,
+        linux-kernel@vger.kernel.org,
+        Sivansh Gupta <sivansh.gupta@oss.qualcomm.com>
+Subject: [PATCH] mailbox: qcom-cpucp: read mbox hardware register using readq()
+Date: Tue,  8 Sep 2026 21:20:39 +0530
+Message-ID: <20260908155039.1203344-1-sivansh.gupta@oss.qualcomm.com>
+X-Mailer: git-send-email 2.43.0
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <xq2q6jazk2a5atfthzwktn7qhrinxg4duhdxg22qrutgdycbwb@47nosxhcqloz>
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTA4MDE3MCBTYWx0ZWRfX5DludxCY6rgE
- QqGM7ae8TtGjx836GnxjMtTBSwvU5VYNBQbunQAik10d9JPuUBlI/NkOVWJUWHgfdLvPgqWh+Nc
- H3N2I9gR1XtnkRsvPp1Cf8C98si/2Kc=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTA4MDE3MCBTYWx0ZWRfX3mKSnQeZ3lNG
- GA62PyRTBHVq8wIOywTiNf1plGRXWdA8vKn+52a+6+IEvhx7dSrylYLjYkD6dWwDZ+aQPAam7nn
- NvAP/Wxuhj12PTX8WD7O0DoYgNTIe4iaKRDj9C1f0h3dVn1BaouvCb0HBxGBiOY2UFxQxJ6sNOJ
- 6+faT2V9gJSo4Qrr9wgMMk4btdhxEfzt4y6db5M6HeOtvgk/fBQ1fNLbRkO+lrfg67PZ4jep3Br
- E1dtsFU0LqfaHaS/02aUqTDovWbh+10YMkL0t2eXRNLNJQwmHK/n3/nRN0Eabs57d9jy4yR5uvy
- E19zxlGCoH/WXAgr/JXDl0nhPBjh1PYZRnaUf5mjUXvJPYNTavgBfg5X0w01xbYgL7NEEptJcYS
- PlaawrjHpvTM2/vNeip6+Unbz8IeiXqIbCIq+6HGEbMUHZ0XiZpp0zuZHPAO/K8ycpZWpupMjAt
- a20xLhURbcZAPsygMfw==
-X-Proofpoint-ORIG-GUID: QQv3Q0-gPBp_2R3r7eLF70F8YIZ58p_J
-X-Authority-Analysis: v=2.4 cv=QrduG1yd c=1 sm=1 tr=0 ts=6aa02e7a cx=c_pps
- a=KB4UBwrhAZV1kjiGHFQexw==:117 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
+X-Proofpoint-GUID: 91gNNS1flcFY7xKoooFxZruk32wegf99
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTA4MDE3MCBTYWx0ZWRfX/FZMv7IR0Yor
+ aKB+k/dBxlQsiVa9m8litDdpyQi5iXq9PI91VMg66NlrEJgUOuc9/w9+Wjyv3+IgBigZLAfcaBj
+ FdhmVdUXpOddHXiZjtfCQwSfCC6oklClfc704rX4CYXD3+LxGAVRm8LXAt/MtNjpWAKINrVy933
+ xLOWk7iXabOUcQP3kzuMPIUcpj26ZXlIVax55So7iR3p9e9DdZ+PwC4nFT5dQyhDV4BmmEZeSrB
+ 8hb2PB+6wItY8RUozpXMd85M6IyudmO9O+ciF0qOmGGBJ3nCdg59b05nN+rt4iHKzj8SGnmklyH
+ k+P60B2ejUvsPd6dg1l7mmGkz8vDVYcaIB44wT3eYqKjxLdycSY1+jO1bKHM71bvEduvQqBAZeB
+ NS0a3rS5CkiTAFsM8vvoqfXjO1aQ8ra1tLlBSchZnGUCq7ERrxNBu9wuw4Ocj0B5jPypJJ/3rZ5
+ gnFHhJHOihRrDAaEa0A==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTA4MDE3MCBTYWx0ZWRfX8WnAwPRYq79J
+ lzGcW+hBt+nicOgXcjjJgsAdXFfdwaSkwNUBYzwX6hys0Nok7v5V1BT4fImG/whGRSS005C9OjV
+ xGylwxJjtV2L1+C1nVQNELkL5n7iw0s=
+X-Proofpoint-ORIG-GUID: 91gNNS1flcFY7xKoooFxZruk32wegf99
+X-Authority-Analysis: v=2.4 cv=X8hi7mTe c=1 sm=1 tr=0 ts=6aa02eed cx=c_pps
+ a=vVfyC5vLCtgYJKYeQD43oA==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
  a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22 a=EUspDBNiAAAA:8
- a=pGLkceISAAAA:8 a=hDB9YrpZ_UtSDjAhP4kA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
- a=o1xkdb1NAhiiM49bd1HK:22
-X-Proofpoint-GUID: QQv3Q0-gPBp_2R3r7eLF70F8YIZ58p_J
+ a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22 a=EUspDBNiAAAA:8
+ a=zVvgFSUyQItoBg7ASCAA:9 a=rl5im9kqc5Lf4LNbBjHf:22
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-09-08_03,2026-09-08_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 bulkscore=0 adultscore=0 malwarescore=0 lowpriorityscore=0
- impostorscore=0 spamscore=0 priorityscore=1501 phishscore=0 suspectscore=0
+ bulkscore=0 adultscore=0 spamscore=0 clxscore=1015 priorityscore=1501
+ suspectscore=0 impostorscore=0 phishscore=0 malwarescore=0 lowpriorityscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2609080170
 
-On Tue, Sep 08, 2026 at 06:26:22PM +0300, Dmitry Baryshkov wrote:
-> On Tue, Sep 08, 2026 at 11:09:17AM -0400, Connor Abbott wrote:
-> > On Tue, Sep 8, 2026 at 10:51 AM Rob Clark <rob.clark@oss.qualcomm.com> wrote:
-> > >
-> > > On Tue, Sep 8, 2026 at 4:41 AM Dmitry Baryshkov
-> > > <dmitry.baryshkov@oss.qualcomm.com> wrote:
-> > > >
-> > > > On Mon, Sep 07, 2026 at 04:20:43PM -0700, Rob Clark wrote:
-> > > > > On Thu, Aug 27, 2026 at 9:07 PM Connor Abbott <cwabbott0@gmail.com> wrote:
-> > > > > >
-> > > > > > On Thu, Aug 27, 2026 at 7:13 PM Dmitry Baryshkov
-> > > > > > <dmitry.baryshkov@oss.qualcomm.com> wrote:
-> > > > > > >
-> > > > > > > The always-on counter behind MSM_PARAM_TIMESTAMP sits in the GPU power
-> > > > > > > domain on a4xx, a5xx and the GMU-less a6xx parts, so it restarts from
-> > > > > > > zero whenever the GPU is powered up again and the timestamp reported to
-> > > > > > > userspace jumps backwards. On an a702 six reads three seconds apart all
-> > > > > > > land in the 500..1200 tick range, stepping backwards twice, and on an
-> > > > > > > a530 the OpenCL device timer conformance test fails because
-> > > > > > > clGetDeviceAndHostTimer() returns an end time below the start time.
-> > > > > > >
-> > > > > > > Save the counter in the suspend path of the affected generations, while
-> > > > > > > the GPU is still powered, and add the accumulated ticks to the value
-> > > > > > > reported to userspace.
-> > > > > >
-> > > > > > This is useless because the entire point of clGetDeviceAndHostTimer()
-> > > > > > (and the similar thing in Vulkan) is to match what the GPU itself
-> > > > > > returns, and now you've broken that by adding an offset.
-> > > > >
-> > > > > Just to clarify, the timestamp needs to match what UMD reads directly
-> > > > > from hw in various different ways (timestamp queries, shader_clock,
-> > > > > etc)..
-> > > > >
-> > > > > If we can _restore_ the value (ie. write the hw reg) on resume, that
-> > > > > would be ok.. but it doesn't look possible.
-> > > >
-> > > > Yes, a quick check shows that all relevant registers are write-ignore.
-> > > >
-> > > > > Otherwise I guess we need
-> > > > > some scheme where an offset value is stored in memory somewhere, and
-> > > > > some coordination with userspace to add the offset in various
-> > > > > different paths.  But the kernel shouldn't be adding the offset to
-> > > > > what it returns to userspace itself.
-> > > >
-> > > > Ack, thanks for the explanation. I tried to match what kgsl was doing.
-> > > > It reads the GPU timers directly from the GPU, but for the CPU timers it
-> > > > reads the value from KGSL driver which accumulates the offset.
-> > > >
-> > > > If I understand you correctly, we need to export the offset to the
-> > > > userspace via some extra page (like vdso) and let Mesa read it. Correct?
-> > >
-> > > Yeah, it doesn't look like there is an existing GPU_READONLY && !APRIV
-> > > BO we could re-use, so I think we need to create a new global (TTBR1)
-> > > "vdso" BO which is read-only to the GPU but otherwise accessible to
-> > > IB1+, along w/ MSM_PARAM_VDSO for UMD to query the address of this BO.
-> > > (And update msm_mapping test in igt to validate that it is read-only.)
-> > >
-> > > (I'm not married to the name "vdso" but not creative enough this
-> > > morning to think of something better)
-> > >
-> > > I'm a bit curious if kgsl handles this differently.. maybe there is
-> > > something I'm missing.  But somehow timestamps need to agree between
-> > > what is read on the GPU and what is read on CPU.
-> > >
-> > > BR,
-> > > -R
-> > 
-> > I think the kgsl timestamp offset stuff was only added for the new
-> > A750+ CX GMU counter which is not read-only. We do need to port that
-> > over to drm/msm. If the offset is applied for older GPUs, it's
-> > probably another case of kgsl not bothering to keep support for older
-> > GPUs in newer branches.
-> 
-> I've been looking at the kgsl drivers from msm-3.18 / 4.4 as those
-> kernels targeted MSM8996/98.
+Mailbox hardware registers are 64 bit but the interrupt handler
+currently reads only 32 bits with readl(). Use readq() to read
+the complete register value and pass it to the mailbox client.
 
-If I understand correctly, for those GPUs glGetInteger64v(GL_TIMESTAMP)
-reads the ALWAYSON perf counter through IOCTL_KGSL_PERFCOUNTER_READ. The
-perfcounters are all saved on suspend and summed towards the current
-value read from HW.
+Fixes: 0e2a9a03106c ("mailbox: Add support for QTI CPUCP mailbox controller")
+Signed-off-by: Sivansh Gupta <sivansh.gupta@oss.qualcomm.com>
+---
+ drivers/mailbox/qcom-cpucp-mbox.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
+diff --git a/drivers/mailbox/qcom-cpucp-mbox.c b/drivers/mailbox/qcom-cpucp-mbox.c
+index 7ffc40acea9b..f56a05149281 100644
+--- a/drivers/mailbox/qcom-cpucp-mbox.c
++++ b/drivers/mailbox/qcom-cpucp-mbox.c
+@@ -61,7 +61,7 @@ static irqreturn_t qcom_cpucp_mbox_irq_fn(int irq, void *data)
+ 	status = readq(cpucp->rx_base + APSS_CPUCP_RX_MBOX_STAT);
+ 
+ 	for_each_set_bit(i, (unsigned long *)&status, cpucp->mbox.num_chans) {
+-		u32 val = readl(cpucp->rx_base + APSS_CPUCP_RX_MBOX_CMD(i) + APSS_CPUCP_MBOX_CMD_OFF);
++		u64 val = readq(cpucp->rx_base + APSS_CPUCP_RX_MBOX_CMD(i));
+ 		struct mbox_chan *chan = &cpucp->chans[i];
+ 		unsigned long flags;
+ 
 -- 
-With best wishes
-Dmitry
+2.43.0
+
