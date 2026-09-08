@@ -1,126 +1,183 @@
-Received: from mout.kundenserver.de (mout.kundenserver.de [212.227.126.187])
+Received: from lahtoruutu.iki.fi (lahtoruutu.iki.fi [185.185.170.37])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 63F594D8DA9;
-	Tue,  8 Sep 2026 09:34:28 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=212.227.126.187
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788860071; cv=none; b=eHXChunZwM0psIfpu6Nmbvxm7ppekXyxb5uxt7+MaKARzL2Oo58I4Ea1mliHMgG0mbsjHWf3oYBbjGwmtA3au9ceS01mAA0M+Lpx1EAAj8C7561TjLn/MGoG3wA4d2MVSlafOXGmo5lhrVaiFCCe84UvXk5Ukg8WdxOpPyiKL4g=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788860071; c=relaxed/simple;
-	bh=hZCNiaMsNa2UncySgR1wa0NX/XH9wMn4ysNd3Mjs368=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=fj1fL0k4Yl7Maj8/dqUb3A/KSy6QL5SJVtrlkZ2JonxKy9KBeu/IpogpMYL/ajAVe8upW3RcdsOdPRD8ZW1XuLP0On1akQwDqvJw1bSKfBi0MNEN0e3XYnqGTkaUH9FgLlrPSzgz5gBLrbvEBgo7Nm9z27yaYYsD/ilZHQ0jKb0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oldschoolsolutions.biz; spf=pass smtp.mailfrom=oldschoolsolutions.biz; dkim=pass (2048-bit key) header.d=oldschoolsolutions.biz header.i=jens.glathe@oldschoolsolutions.biz header.b=QXhWQoGD; arc=none smtp.client-ip=212.227.126.187
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oldschoolsolutions.biz
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oldschoolsolutions.biz
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CFBAA4FC8CB;
+	Tue,  8 Sep 2026 09:34:58 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=185.185.170.37
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1788860100; cv=pass; b=qt5tBSkiQmGqEqfVBWTRfTQZX3bbZ6sIbEkTRodM7V+GLAZHDZKmCH1auF6/S7lM/9m9m8QPehoYU7WrgJb+a/34gD2atbk0bk2qO0GXsUmxcee3YGiPFRt6vaTByHNZjrGuovk6776tLdGPK8Q7ZDuD4zX36G9n2UXIVOiKxTA=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1788860100; c=relaxed/simple;
+	bh=enV2kS1MIwHjXbYjHjRD3HBW9Nc1XOK61bJzzLEmGds=;
+	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=mIAWMI38Mudw7sFUwbUFiJW6/qzxsJJjQKVG0Afk3SQ1Ffi6OPJQnNudfpsKWvvGIrh42ImJDsGYkT3KxlG1pfxvhBJW5v2bjBN2a/tCInSd9VgomiFd5ZdQ4gLSs6yW7LElBW7ZbpV8aI0UJLc3PKXDuTy8zVHD87KjPgmlK4M=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=iki.fi; spf=pass smtp.mailfrom=iki.fi; dkim=pass (2048-bit key) header.d=iki.fi header.i=@iki.fi header.b=VXjEG8Ph; arc=pass smtp.client-ip=185.185.170.37
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=iki.fi
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=iki.fi
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=oldschoolsolutions.biz header.i=jens.glathe@oldschoolsolutions.biz header.b="QXhWQoGD"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=oldschoolsolutions.biz; s=s1-ionos; t=1788860062; x=1789464862;
-	i=jens.glathe@oldschoolsolutions.biz;
-	bh=hZCNiaMsNa2UncySgR1wa0NX/XH9wMn4ysNd3Mjs368=;
-	h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
-	 References:From:In-Reply-To:Content-Type:
-	 Content-Transfer-Encoding:cc:content-transfer-encoding:
-	 content-type:date:from:message-id:mime-version:reply-to:subject:
-	 to;
-	b=QXhWQoGDBj4CO0XeHZDYaBxhebvQ/d3RnRYBhfqaKZEq1IOATnYaPaRG/FW6hO8W
-	 b3YGg8GB7hcpHr4DkSVNq78JZvlR/L9YXoherR7hmEJTqBUp29B2U2QP7Ig9HgJys
-	 HOkzgwPfZ+/Gl4S90MjaF0vKThSKSuO/82Yfo5hGum4eHtGYlQqDtZhk3gQc6uUtX
-	 d1rNQsBYclH/vKQlW2++wtPGehP+LIGanVelsF4OSEZQNBBeGxBu/YaiijSSF3kdi
-	 kxN9CL/GmQbJeJJhmT15FMcdOW+kg3EGwRVKRqyvJXZLroW9dZGZo3C/DLqvO8iGg
-	 1EgxwjFX13G3slSiWA==
-X-UI-Sender-Class: 55c96926-9e95-11ee-ae09-1f7a4046a0f6
-Received: from client.hidden.invalid by mrelayeu.kundenserver.de (mreue010
- [212.227.15.167]) with ESMTPSA (Nemesis) id 1N7Qkv-1wmupc3ipB-00vp1z; Tue, 08
- Sep 2026 11:34:21 +0200
-Message-ID: <7a135d39-282f-48e2-b20b-742a85485619@oldschoolsolutions.biz>
-Date: Tue, 8 Sep 2026 11:34:21 +0200
+	dkim=pass (2048-bit key) header.d=iki.fi header.i=@iki.fi header.b="VXjEG8Ph"
+Received: from mandelbrot.. (xdsl-83-150-90-33.nebulazone.fi [83.150.90.33])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange x25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	(Authenticated sender: jmtilli)
+	by lahtoruutu.iki.fi (Postfix) with ESMTPSA id 4hfJgc1kNTz49Q5T;
+	Tue, 08 Sep 2026 12:34:52 +0300 (EEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iki.fi; s=lahtoruutu;
+	t=1788860092;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding;
+	bh=dMiUD8CXxFO5/POyjEVKFLNmf5/jxdGfzIul6o7WvA0=;
+	b=VXjEG8PhTpo/Q51+H9fHF7FH5GOZXiiFcGN8TmdXeiYJW6oIV/OBg0Ew1zaQsjf7zYuGFW
+	4gsOV2bUcXUsX1RZq0SCrD3y5pis56efzanry7ciOgb5j3406KRCLdnurQ4LstCb6dF5L3
+	o436l9gTA+sRDWXoHN8vdEDGpBz6vCuvA2zqDSisjv3aRYBAtdjjCnYiGD5T0lPmfw91ON
+	sVQ+Tz1k81122mlAZziiRfeySZG76jPH6SRY97UQgNna0qB5Ll3aiRtLfdy8NYRVHfDSMQ
+	DDL89f9wvidXwvlUHISK+rlGYm+ar+0fBS80XNf5OqsuKM1OoWg/mwbE2kspeQ==
+ARC-Seal: i=1; a=rsa-sha256; d=iki.fi; s=lahtoruutu; cv=none; t=1788860092;
+	b=c2Mi5Drvv9/uXUnQ3yphwJF2J8xEuLJT1EQWQevg5CS67OyLdwbq5I/Ha9mKwBEUKU63vF
+	EIvs99u+XHPolHwjFZOoZgDK5xAict6nIpnZ/ko8ODbb8jPySgqusDHzEUcMj9StoPDSB8
+	VqAp0G8fvAz00TtM7eD2alAyavQWkr0q2CC79xRXi0A3f7LE+Z88GScAThXtu915697aps
+	/0PjahmvMcAmGCTam61bKtnGeDnr+C9tymxwjYblZ5kfHMDGLKkVdmmgK8EMFpzfPPDP0f
+	Qo9+RhCrIxC41wTVQa1PjDbPRZJIHpq4Gp1kWxF9FAoIkbt6jALCwRIA2v1LpQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=iki.fi;
+	s=lahtoruutu; t=1788860092;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding;
+	bh=dMiUD8CXxFO5/POyjEVKFLNmf5/jxdGfzIul6o7WvA0=;
+	b=sdE6EVLqgEBAt7ATM8O5/rpHyFG9APH+ZDEdEuuPDtzqX+zsSXRid3uNzI1/zvQMB77BXH
+	MCV+AAX5VzEIiVQ2/J50uhFlbK3TTfydPWMdi5pLsj3C4/k3k/5m9EUFlLvjNrEgRZWjUF
+	kmIZ9XiSKWZWdB0T/yUt4/zNLwxx40syvlhs4V7I5lEBw/uDq8XTorZWpOQOu8oIBjjQ+9
+	aril2sps1wGv285d2lau9yDZ5ltRFo6xFrPYQfn/PrLS9IDSKV9vPR+HsjNZ/5ei0Ukqoc
+	HtsBhi5eCw6PJVXz9r2mTgID2Ybv3BfWVIomyfG3rgU/fmlrUVesjqXbpHsvZQ==
+ARC-Authentication-Results: i=1;
+	ORIGINATING;
+	auth=pass smtp.auth=jmtilli smtp.mailfrom=juha-matti.tilli@iki.fi
+From: Juha-Matti Tilli <juha-matti.tilli@iki.fi>
+To: ath11k@lists.infradead.org,
+	ath12k@lists.infradead.org,
+	Kalle Valo <kvalo@kernel.org>,
+	Jeff Johnson <jjohnson@kernel.org>,
+	Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>
+Cc: Bjorn Andersson <andersson@kernel.org>,
+	Konrad Dybcio <konradybcio@kernel.org>,
+	"David S . Miller" <davem@davemloft.net>,
+	Eric Dumazet <edumazet@google.com>,
+	Jakub Kicinski <kuba@kernel.org>,
+	Paolo Abeni <pabeni@redhat.com>,
+	Simon Horman <horms@kernel.org>,
+	Mihai Moldovan <ionic@ionic.de>,
+	Juha-Matti Tilli <juha-matti.tilli@iki.fi>,
+	linux-wireless@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org,
+	netdev@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Subject: [PATCH v3 08/12] wifi: ath11k: implement QRTR endpoint ID fetching for PCI
+Date: Tue,  8 Sep 2026 12:34:33 +0300
+Message-Id: <20260908093437.2493698-1-juha-matti.tilli@iki.fi>
+X-Mailer: git-send-email 2.34.1
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird Beta
-Subject: Re: [PATCH 0/7] arm64: dts: qcom: IdeaCentre Mini 01Q8X10 Hamoa +
- Purwa
-To: Krzysztof Kozlowski <krzk@kernel.org>, Mostafa Saleh <smostafa@google.com>
-Cc: Bjorn Andersson <andersson@kernel.org>,
- Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
- Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
- <conor+dt@kernel.org>, linux-arm-msm@vger.kernel.org,
- devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
-References: <20260905-x1-ideacentre-mini-prettify-v1-0-9a87882973bb@oldschoolsolutions.biz>
- <ap_PdUrwLIVGJ3oG@google.com>
- <799c3128-cf43-4a64-a8c8-3f6695bbf424@kernel.org>
-Content-Language: en-US
-From: Jens Glathe <jens.glathe@oldschoolsolutions.biz>
-In-Reply-To: <799c3128-cf43-4a64-a8c8-3f6695bbf424@kernel.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:cEcxvcrFkLCdoQIdwjjCSLnEsOUoO3tG4IQg60y8YNRxZjrxFXK
- Y1/qlWnlyIfAs/AsbhC5bZY6cAxZuqAyjlyCyYBkmzahXFY9i8QDnnUgDPp3Vd3WNnJ1gaH
- wzlYz/TArjr2oLSE8ZhQowCgZxSiF4Qfmky/AW90Dg9LTnGKqoY3nmgMEeLDWing6garTXs
- DdsTyKR7ZoVB+z4ArFjOA==
-X-Spam-Flag: NO
-UI-OutboundReport: notjunk:1;M01:P0:+plAFsiW0V4=;iD9nxjt94ztL0QqojuASGO7iQ/o
- 519gix+qK5elwgCjRNK/+km1xsZSRBIkhLoRQYnhu2PrTqjdv7U/wxliuOEz6nhzLlToQTW4+
- bzIxcpr1/PY0efoEOpOdd3dK0PDDthztslXLwDgYdPfPlJ++LrFaEGVilCcmjR2g6VjFElewP
- LCCKXSi3bhWLSh3BbAX+PFZQ7kClxaG27fEr/Nf6aQmWG1JVqfwnKBLkd02phpIRYnsOMREEo
- 16qt6zQLqmHvwQUzAEfT+7eqL9hMOsGj3BH9oEelYIeMABMlVVlEKxVhbS4ekJRgw33Evaj39
- V2yg2aZKvCJ7IoxOE1GCxMUeIcWpYPQCPPcYP9pJHXzg9CJPEupdZtSNfzYcruyVw54BzjZ5i
- coDnUHYohskMNM7CKDnxStNGl+i9y57+Q2tp39dJ26Q489glLeMMKfPvRb526zRq7n12PMjA9
- ChqDYD3gttOWadZAkdmADXuPWr0rFLx5rFqRIJg8xeoMGDINiZdjBwlMAhDbQrBCvwMbQzemO
- gpqVhZxxLngD2mAZSmpJ3BkYksTRP1DPLlQY9YYEYA7MkCcrznTOBtusV9k0ZZhExLp5DHMzv
- fjIujZ+bISur6eDW3QoKV1lAknpSF9jjSZ2g28gMf6F3TqIxAxI6NTcfIGc5FGXlZWm4Y/Vxy
- vmdjGsWc7SN99vlf+sFmG7Qiq+W7cB9aM38w0qtZlY8gx6wuDFXNtMYP6phlk9DBHT4X27mtE
- vDWaxpolXkpE3XfQs0AJYUzspPwKvfUOkN31sv+Lm0G13+4wsL6ZEhlxvG8giRN5IpY6ju1km
- HKprQgAFGh6P+lcDdAxGVhx4FonIbecM0UFzSUqv4SGs9nOdis5w7jMKElshlO11EP9LAodDf
- cvnVRqtnDbyTxs5mTfLQf3z8vNd/TKkrGtSsV2g+WBI98lwJ62CWJfwIfWz4FfidQN9AR5Jo+
- EueCh/6e/2jXO2AKojCMVjEGo2wO9Xi10aCbsAgxgJ5dxGI2XGdCd9fcNC5l2AkeNXiSAyvsL
- oClgUy1olQIpMjd/a9cgUmJXQk71npOGAN5BSRWfcbzmoZLXtls+ITiceH14Rs3BfPQkmPHf1
- fZKTgtnd0RO/WeElzF3EzCpttmdEBeBqRqInHY4Rj3c0Ajhpd+uLe8AyCpv3w6fNs/oelp6/u
- Pg9MzcSzUyJhA0YjKqzOyFlTJGrT2Q2As3Y25JC4jQkbQxMNPQUiu2TNiUVsuzR7XhEj7Zc+Z
- NDW9DXq4zKG+PYd++65J3Im1Ktxw2AZSvweEVN8YMMBJUg5JFXQMx8wuRTEnaNE+Mkv7wUOIu
- suQV0ytrEQo8mNRNHziljFn/0VmGIbZurIjDBusvc8ACC3Mb1myL2pxuzCLYf/CyCM0m51mWF
- U6CMxMyxiKjVshe1Z0ZsNgo9rRnItx9/m6W2Oldd2a12PD5qx0uJe1kOHaEjhJeTNpR3+Voz3
- 80vxY78rxRDl5sCBqOkhtXKok+vRnQcmBDj4s/yT/7e9IR+mxRv4ihrvdJ8sMwx1igrEAzLBm
- nmiyFcKI4T6jacYsHR4WRwKly4psSQ8rlAc8bjSMt4jhb6tvPUFgq6eIGx+9ETcu09ylLPW2y
- eCwuMnJghH7S8xPMRIIJMJuSkJrkC+tUA2TmCNGH7eFbkhqTyLzLat6cgA3UR+xHwaackaei1
- 8rJWyuRQcDjBqqLesFf3Ppm7c2v0Fk5zlOY3kF1f3HskaNd+VdDVAPo5VG+rwS2/UvM9Q4WF6
- hm9RAcHHC/6CUdK8Hq4kBblziehGfJYFyQ6lIwGAeu+M3y3VI/6EFctzvEa99UJQ/uZdIEJcw
- XUMSS0zgz43IYLaqBJr9w1+8zT8YN0egAuysUrsf0qlHGO3vTs14HY4mnQMVDYY9mzpygTmC7
- dBwXVTbHM2BtbBotS/11WQn+Zz1/USycQ3p+Hn4sPas+TpjwNFyQijYaF4VHl6OdVZRyW/Iv5
- odndheO1vHLjV1sC0Gp2whXfvSZo7JKUWC3/xqszHC1A+mvW8vnoHnZix5y7vzpCsflIwPwfJ
- 56YZy3frIO5FQLt0i1biGWUIsZFLxms11ZlorD25OK2khomMSnmn17pBomPLsYs9pRblMg3mF
- NDhnvdeXwft98UrNkYCSbVcdYWGGy5diAEogI9Nu4wulkVGxO71ypIinOXhsJ0wOfVBh/NR/l
- Kp/8RXFCgny1UbI4GjBvA/8EWSbFzjQMxWbyxtufMuugbm7w/KnMveQEQYw+4nmn/i74Ag3WO
- yVUIkduzmOSYgbOsVp3yHPxj+8vzn+7Ca7ASFrM6FQ/BeQ+JHE6+ItrtB7TTlY51mFN5XzB9E
- WYMaJxzgYy2cuin5ao1XZAaOs2ao3VbabvnmCG+BEyHjz0yFz/wAQifv2EcR/jW2le/5h
+Content-Transfer-Encoding: 8bit
 
-Hi,
+QRTR endpoint ID fetching for PCIe devices will use MHI.
 
-On 9/8/26 11:05, Krzysztof Kozlowski wrote:
-> On 08/09/2026 11:03, Mostafa Saleh wrote:
->> Hi Jens,
->>
->> On Sat, Sep 05, 2026 at 11:28:55AM +0200, Jens Glathe via B4 Relay wrot=
-e:
-[...]
->>> ---
->>> base-commit: af5f12805e5cefa4fe68d6127c7e1fb78cd5535c
->> This series does not apply to ToT nor I can find this base-commit
->> in it.
-> It's a public/standard commit, next.
->
-> What is ToT in upstream development?
+Originally-by: Mihai Moldovan <ionic@ionic.de>
+Signed-off-by: Mihai Moldovan <ionic@ionic.de>
+Signed-off-by: Juha-Matti Tilli <juha-matti.tilli@iki.fi>
+---
+ drivers/net/wireless/ath/ath11k/mhi.c | 46 +++++++++++++++++++++++++++
+ drivers/net/wireless/ath/ath11k/mhi.h |  1 +
+ drivers/net/wireless/ath/ath11k/pci.c |  1 +
+ 3 files changed, 48 insertions(+)
 
-Tip of Tree (of torvalds/master) would be my guess. I have used=20
-linux-next/2026-09-04.
-
-with best regards
-
-Jens
+diff --git a/drivers/net/wireless/ath/ath11k/mhi.c b/drivers/net/wireless/ath/ath11k/mhi.c
+index a6c9ff112c68f..755a57b6058a1 100644
+--- a/drivers/net/wireless/ath/ath11k/mhi.c
++++ b/drivers/net/wireless/ath/ath11k/mhi.c
+@@ -11,6 +11,8 @@
+ #include <linux/of_address.h>
+ #include <linux/ioport.h>
+ 
++#include <net/qrtr.h>
++
+ #include "core.h"
+ #include "debug.h"
+ #include "mhi.h"
+@@ -502,3 +504,47 @@ void ath11k_mhi_coredump(struct mhi_controller *mhi_ctrl, bool in_panic)
+ {
+ 	mhi_download_rddm_image(mhi_ctrl, in_panic);
+ }
++
++static void ath11k_mhi_qrtr_free_mhi_id(void *mhi_cntrl_void)
++{
++	struct mhi_controller *mhi_cntrl = mhi_cntrl_void;
++	u32 id = mhi_cntrl->qrtr_endpoint_id;
++
++	if (id != 0)
++		qrtr_endpoint_free_data_id(id);
++	mhi_cntrl->qrtr_endpoint_id = 0;
++	mhi_cntrl->free_qrtr_endpoint_id = NULL;
++}
++
++int ath11k_mhi_set_qrtr_endpoint_id(struct ath11k_base *ab)
++{
++	struct ath11k_pci *ab_pci = ath11k_pci_priv(ab);
++	struct ath11k_qmi *qmi = &ab->qmi;
++	int ret;
++
++	spin_lock(&ab_pci->mhi_ctrl->qrtr_endpoint_lock);
++
++	if (ab_pci->mhi_ctrl->qrtr_endpoint_id) {
++		qmi->handle.endpoint_id = ab_pci->mhi_ctrl->qrtr_endpoint_id;
++	} else {
++		ret = qrtr_endpoint_get_data_id(&qmi->handle.endpoint_id);
++		if (!ret) {
++			ab_pci->mhi_ctrl->qrtr_endpoint_id =
++				qmi->handle.endpoint_id;
++			ab_pci->mhi_ctrl->free_qrtr_endpoint_id =
++				ath11k_mhi_qrtr_free_mhi_id;
++		}
++	}
++
++	spin_unlock(&ab_pci->mhi_ctrl->qrtr_endpoint_lock);
++
++	ath11k_dbg(ab, ATH11K_DBG_PCI,
++		   "queried mhi_ctrl QRTR endpoint ID: %u\n",
++		   qmi->handle.endpoint_id);
++	if (ret) {
++		ath11k_warn(ab, "failed to query QRTR endpoint ID: %d\n", ret);
++		return ret;
++	}
++
++	return 0;
++}
+diff --git a/drivers/net/wireless/ath/ath11k/mhi.h b/drivers/net/wireless/ath/ath11k/mhi.h
+index 7e7561ce883cb..46a9c978b30d1 100644
+--- a/drivers/net/wireless/ath/ath11k/mhi.h
++++ b/drivers/net/wireless/ath/ath11k/mhi.h
+@@ -28,4 +28,5 @@ int ath11k_mhi_suspend(struct ath11k_pci *ar_pci);
+ int ath11k_mhi_resume(struct ath11k_pci *ar_pci);
+ void ath11k_mhi_coredump(struct mhi_controller *mhi_ctrl, bool in_panic);
+ 
++int ath11k_mhi_set_qrtr_endpoint_id(struct ath11k_base *ab);
+ #endif
+diff --git a/drivers/net/wireless/ath/ath11k/pci.c b/drivers/net/wireless/ath/ath11k/pci.c
+index a163168f36176..56490a21964a3 100644
+--- a/drivers/net/wireless/ath/ath11k/pci.c
++++ b/drivers/net/wireless/ath/ath11k/pci.c
+@@ -918,6 +918,7 @@ static const struct ath11k_hif_ops ath11k_pci_hif_ops = {
+ 	.ce_irq_enable = ath11k_pci_hif_ce_irq_enable,
+ 	.ce_irq_disable = ath11k_pci_hif_ce_irq_disable,
+ 	.get_ce_msi_idx = ath11k_pcic_get_ce_msi_idx,
++	.set_qrtr_endpoint_id = ath11k_mhi_set_qrtr_endpoint_id,
+ #ifdef CONFIG_DEV_COREDUMP
+ 	.coredump_download = ath11k_pci_coredump_download,
+ #endif
+-- 
+2.34.1
 
