@@ -1,21 +1,87 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8A1E04A99D9;
-	Tue,  8 Sep 2026 09:05:41 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E04D749C4D0
+	for <linux-arm-msm@vger.kernel.org>; Tue,  8 Sep 2026 09:10:02 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788858342; cv=none; b=XYf0q33+py/0FvUkE/QKsA7UXuJSwrHX1ywDO2dSoIv8JHr3akDrZDiyhZB9EtNYWiErxvrFm0wZlzufVPA8g7RCxMg3W8aPw/CXbTBRoTZjsUiVCRzjxnmq6eSFWi2jgo3pw4QlpKysq/tr1lUAFnM0lPAWzDxJ9Zw9gdtHNgk=
+	t=1788858604; cv=none; b=h6GitsAkJ1nYBkthq4ANlmEFG4t/ZBf9tShTIjsPduHYLJAyCYzn722uMaS6Q0nVejJ+aU8ghnOOyCxadi73Exn6/YmH2Z8DmogXlKxl9mhkI3gh/hccwGaaclQTnQBs2Gi0562xwqfYwpMS9JN3V5cvVHfh3HCrNRiBSz7oVrQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788858342; c=relaxed/simple;
-	bh=m5Z0dnOwtdaj+Ji9M30PnHmJ4+TlyYI0QV2127NqB7k=;
+	s=arc-20240116; t=1788858604; c=relaxed/simple;
+	bh=0lbcg30VfbDEHabWYRQfygaolUEEcg4i8tSmHoWaMJM=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=i/BT0xkXENFFbOntfeYCkZ5K4EgSA/aFazc/yo1NdFiK69F92JLB3mkV8PZnbAckORETvhb7myLzyIjYSPt8bxUvv4T13cEZUzKgzk+8z9gaPGMmWbq5EOQs1zHHsg7UId5T96XwPeHkAlaSd9Myb3VW7ys4y7MoYE0xj2NMTH8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4536C1F00A3A;
-	Tue,  8 Sep 2026 09:05:37 +0000 (UTC)
-Message-ID: <799c3128-cf43-4a64-a8c8-3f6695bbf424@kernel.org>
-Date: Tue, 8 Sep 2026 11:05:34 +0200
+	 In-Reply-To:Content-Type; b=hPsX9Sr++2XFts+c9nPxaRcQr1/MzzRqKJdP5XMtSjdLw8+Hw4eRsjQfx4oGJwCx0Pmp56+sbctVnmib0ScwJGSY2Z2tnGVjacuCEmElAqT/5TwB/YFra1kPimwC+T4DPL9My++uC6MssAJ0bPYohj2PjvHbidYNpZJJbZ3rDKc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=PdV7IlSw; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=TAroz1Ek; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="PdV7IlSw";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="TAroz1Ek"
+Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6886Lr622154194
+	for <linux-arm-msm@vger.kernel.org>; Tue, 8 Sep 2026 09:10:01 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	66IdAPMFdrF+3AsnysbQZd4DS6/AZH+7mP7W5M9PJSU=; b=PdV7IlSwPCmo0l4S
+	lwhkgzdU3x4ysNJvqdFp8ZbOspWe8r80dj7MrHr6TaZbNkgj5X6/0b6/B9P2P7Wy
+	JCxZwq6i//pyAUmYGFQZcfAwINc3XEshKOs5BMvqY2u9c2RpBBsnzJ6APCU/06ye
+	hUiaEt1wabfdgIeSq0XP/0pj66yCNo/Hjkn63K688GteAgfDsn4fcN8GR6l1BF1n
+	MH+FVmoKYyHdYAh87Wtmvkd2t5pmbJiviAz8D0DJb8Gbm6MYaKbY0lcxV0kBY57F
+	dF5w56mxtP3d/x8ZmDqMtbObgJV/27+CSMzagfKN9w0GGKzLEK3WKT7norFpyvfP
+	FapYPw==
+Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com [209.85.222.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gj1rwjnex-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Tue, 08 Sep 2026 09:10:01 +0000 (GMT)
+Received: by mail-qk1-f197.google.com with SMTP id af79cd13be357-936aa34873bso578127685a.3
+        for <linux-arm-msm@vger.kernel.org>; Tue, 08 Sep 2026 02:10:01 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1788858601; x=1789463401; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=66IdAPMFdrF+3AsnysbQZd4DS6/AZH+7mP7W5M9PJSU=;
+        b=TAroz1EkcpBHufYIBoFetkWySIia7GRa9JfnjM/n/vyfY5DQQmWZ5iUWXDfFEOVnNp
+         RYmWTDv+LDSpwxj4vkBhMX2wYaOGsNWQU2mWYz/DWY4lNRDUEmQrGRrABy7IXkKLZMx9
+         cvtccGkkDU5vm2TD3cZVRjzWpMj8kZrvwpk+mvV6jAmOPx0J3F8j8WF0Gk62y2PVQy2f
+         MS58fG2Zy7H0n84crCSOSQ0nK2AjmEOF0EHLPPZUnyFTeUSsNghFRFhsNzivZ4oIM18i
+         wf4bfInKABeHCPZPYCicuBqzKZ/dzn8voyDeBTKjhCCkwTMnuCRFlLGLmp9dwR5owGJa
+         i5aA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1788858601; x=1789463401;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=66IdAPMFdrF+3AsnysbQZd4DS6/AZH+7mP7W5M9PJSU=;
+        b=mAi9cGMUuixNZcYWui/GrkxbR9sI1AOHGw/BZXiu5gSvcJgOLOXXWr0835VUlJI95h
+         W1hsyyAO0DboUyISBXdWFjJCdh0xlxy3Ad95heTSqXnIhP9MkP9uf2nuFPLC+Zq09cJc
+         ZtXhtDLhamxQY3BMO9Yla3Uf2wTPDGCullpXc7a1HUPR8mCSNRAxSONyM2mqqCgRiWzh
+         PLhw40FaRCPEma4fzyGs3PRZgxklUt8zAo/p2xn0DQSOoTbEQSi/NqtFeTMqMYKEyg2d
+         Us04m92zsS2O5Z0+3/GWGuGwWivliywQj+Ds86uT+qKSYMf8wK4xJfg+NrKZUnnFRSSN
+         zE5Q==
+X-Forwarded-Encrypted: i=1; AKwUvBwxF1uLo5r+mmIWSGn1KynFzG0TlvX0CkGjkdxEc5rFcrhgmlNKnmd+CzKb6tCHVtClVvzbVgcz+aYu4opt@vger.kernel.org
+X-Gm-Message-State: AFuF++kfSOb9W/QjqCCSy7zxLF4D+7v+BTzcCw5SGakCL2c9P6WaPJ0f
+	+iFqh8Tif5gIbJkyLrO6m0kod7hXdov5XWolgT9PuMibZqW3qmXrHbGy8IGOdfRSsaSEk4WreHt
+	TojwzPvMSj20yugzEMTym/ov/uj6JTj/nF1dR4nZNJ4OzTHFvCCdcOPp3mBc6fjV+LIEI
+X-Gm-Gg: AYBFou19Ecfp9YvC8f+4AhNUS23fVS8xZg8eqEELChi8SESs+v+wgVbixlM1tGDvzFf
+	Ye1/X9hrWpejSoBa7BRRzLlGP59Oja8dRY7KWAtcnzyjGr1NtHnm5x8pHITEStpaRsNP4X+3dgM
+	rsoDF0SSm13RfhRbiY9r2ZpKChPVPJuXXyxIhtHN8WhmIOLCAciYzFaSSG6+ELl7h4mShMGMvIb
+	pkYEvILNeV78xFp7gp9+l3dWZbxZDfSZbueYO5bvtAGW3juy8LH3V5J5+KfzKwQFGB1x2PJMNjd
+	6K9VdIGDp6jBejlK+2jDADU9fQs2TB3P3HWUzbafwGpLWN0tWNWhpaQpZ/gbyFPJ4BzpWdMlw+W
+	1pytl3Nc8v1LiCPAcQZKJ9fWzRic=
+X-Received: by 2002:a05:620a:7087:b0:939:7f87:ff22 with SMTP id af79cd13be357-9398045fd75mr2996919385a.36.1788858601041;
+        Tue, 08 Sep 2026 02:10:01 -0700 (PDT)
+X-Received: by 2002:a05:620a:7087:b0:939:7f87:ff22 with SMTP id af79cd13be357-9398045fd75mr2996914585a.36.1788858600581;
+        Tue, 08 Sep 2026 02:10:00 -0700 (PDT)
+Received: from [192.168.68.120] ([5.133.47.210])
+        by smtp.googlemail.com with ESMTPSA id a640c23a62f3a-c261e24a9e0sm523030366b.4.2026.09.08.02.09.59
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 08 Sep 2026 02:09:59 -0700 (PDT)
+Message-ID: <a6ae0ad4-6fb4-48f7-9636-7c0e266b6940@oss.qualcomm.com>
+Date: Tue, 8 Sep 2026 10:09:58 +0100
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -23,135 +89,116 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 0/7] arm64: dts: qcom: IdeaCentre Mini 01Q8X10 Hamoa +
- Purwa
-To: Mostafa Saleh <smostafa@google.com>, jens.glathe@oldschoolsolutions.biz
-Cc: Bjorn Andersson <andersson@kernel.org>,
- Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
- Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
- <conor+dt@kernel.org>, linux-arm-msm@vger.kernel.org,
- devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
-References: <20260905-x1-ideacentre-mini-prettify-v1-0-9a87882973bb@oldschoolsolutions.biz>
- <ap_PdUrwLIVGJ3oG@google.com>
-From: Krzysztof Kozlowski <krzk@kernel.org>
+Subject: Re: [PATCH v2 11/11] ASoC: codecs: add Qualcomm Tambora (WCD9378)
+ SDCA codec
+To: Charles Keepax <ckeepax@opensource.cirrus.com>
+Cc: Pierre-Louis Bossart <pierre-louis.bossart@linux.dev>,
+        Mark Brown <broonie@kernel.org>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley
+ <conor+dt@kernel.org>,
+        Bard Liao <yung-chuan.liao@linux.intel.com>,
+        Jaroslav Kysela <perex@perex.cz>, Liam Girdwood <lgirdwood@gmail.com>,
+        Maciej Strozek <mstrozek@opensource.cirrus.com>,
+        Takashi Iwai <tiwai@suse.com>,
+        Faiz Nabi Kuchay <fkuchay@oss.qualcomm.com>,
+        Jorijn van der Graaf <jorijnvdgraaf@catcrafts.net>,
+        patches@opensource.cirrus.com, linux-sound@vger.kernel.org,
+        devicetree@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+References: <20260907083727.733705-1-srinivas.kandagatla@oss.qualcomm.com>
+ <20260907083727.733705-12-srinivas.kandagatla@oss.qualcomm.com>
+ <525f887e-cb3b-4e74-8b93-30c3baeb8018@linux.dev>
+ <7006ad74-334c-41cb-bcc8-9ef5e75dde7e@oss.qualcomm.com>
+ <005e3c81-778a-47bc-a8ae-fb5c38ea2e2c@linux.dev>
+ <c7fec9d0-b79f-437c-ba8b-37858842c545@oss.qualcomm.com>
+ <ap/MFVMHG2Hej8k/@opensource.cirrus.com>
 Content-Language: en-US
-Autocrypt: addr=krzk@kernel.org; keydata=
- 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
-In-Reply-To: <ap_PdUrwLIVGJ3oG@google.com>
+From: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
+In-Reply-To: <ap/MFVMHG2Hej8k/@opensource.cirrus.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
+X-Authority-Analysis: v=2.4 cv=Ga8nWwXL c=1 sm=1 tr=0 ts=6a9fd0e9 cx=c_pps
+ a=50t2pK5VMbmlHzFWWp8p/g==:117 a=ZsC4DHZuhs/kKio7QBcDoQ==:17
+ a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
+ a=RmElXddC3YRLYRTwZzMA:9 a=QEXdDO2ut3YA:10 a=IoWCM6iH3mJn3m4BftBB:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTA4MDA5NSBTYWx0ZWRfX62GhG0i5SIyL
+ dGp81r2ap+vcixJSAALiwancl1t2bIf6Nm36LwPPVKMVXyFmCx8dBoM1TAsT0YJRaYsVMEBftO1
+ WEqovR6HZasGul7FxyfIFKd3Efcmh2T4ZZ6NjMmPjoSzZXzoqZr23QdATm2B7yiwZjpy9ZQG/5+
+ K/ytQ1ERYnz00C6YuvDbvwnAlFel6DyoTfwH/pP04U8F1obGREkUwIMWVdsspG7JSuEwq+dOnrY
+ w0Jna0R+k73zhQFzcRwHuer+zJ9RmZhcDcUmodhrZdg7d9xB+ovvjF3CTck5V6izI+jPv6Jo9cF
+ GAnAYWQT4es9XZdCOLLho99wg7bKDj4Of35FClau2HZ/32mFLgHixdMEqppov6k1+mOq9VTaATo
+ ByLtK4+F3yOk5iB5R2cHI2M741pUSjdL9PqID8Fk5DoGfDk2g/6HbmhFNTpqgCeNifwHSpn6OJe
+ UumMvDdazNKKVBo3KzA==
+X-Proofpoint-ORIG-GUID: RrJYOAoPt_eLJbAxKUY5vNmLIVpbViIW
+X-Proofpoint-GUID: RrJYOAoPt_eLJbAxKUY5vNmLIVpbViIW
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTA4MDA5NSBTYWx0ZWRfXwgyoOxY/jCnl
+ wqe8t2CSEYwQ5fBoWQeXzRPj2sBvnu8VH+/VbW0lVm6J3zn59IJJY7HdWVuZl7kh12hl0UMwe5q
+ pgFaSs/tFn0vNngzDvfhfafqHqBJ2TI=
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-09-08_01,2026-09-07_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ malwarescore=0 phishscore=0 suspectscore=0 clxscore=1015 impostorscore=0
+ bulkscore=0 spamscore=0 lowpriorityscore=0 priorityscore=1501 adultscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2609080095
 
-On 08/09/2026 11:03, Mostafa Saleh wrote:
-> Hi Jens,
+On 9/8/26 9:49 AM, Charles Keepax wrote:
+> On Mon, Sep 07, 2026 at 11:37:49PM +0100, Srinivas Kandagatla wrote:
+>> On 9/7/26 8:47 PM, Pierre-Louis Bossart wrote:
+>>> My take is that rather than encode all properties in C, it's probably
+>>> worth exploring a DT representation of the concepts that *can* be used
+>>> fairly easily and make the life of codec vendors easier - not as a> literal translation of ACPI.
+>>
+>> I agree a DT expression of the *concepts*  not a literal DisCo
+>> mirror would be a better A.  I want to bring that back to LPC 2026
+>> DT MC as a concrete proposal grounded in the earlier DT-maintainer
+>> feedback rather than re-litigating it inline on this series.  Because
+>> B stays put, switching A later is a change inside populate_function,
+>> not an ABI break. so landing this series does not close the door on
+>> the representation you're asking for.
 > 
-> On Sat, Sep 05, 2026 at 11:28:55AM +0200, Jens Glathe via B4 Relay wrote:
->> The IdeaCentre Mini 01Q8X10 (board 91B6) ships with two SoCs: Hamoa
->> (X1E80100), already upstream, and Purwa (X1P42100 / X1-26-100). Same
->> chassis, different silicon. Stubble and the DTB loader need distinct
->> compatibles.
->>
->> This series splits the board description into
->> x1-lenovo-ideacentre-mini-01q8x10.dtsi and adds thin leaves. Each SKU
->> keeps lenovo,ideacentre-mini-01q8x10 as fallback:
->>
->>   lenovo,hamoa-ideacentre-mini-01q8x10, lenovo,ideacentre-mini-01q8x10,
->>   qcom,x1e80100
->>
->>   lenovo,purwa-ideacentre-mini-01q8x10, lenovo,ideacentre-mini-01q8x10,
->>   qcom,x1p42100
->>
->> No qcom_scm change; the fallback is already on the allowlist.
->>
->> The remaining patches fix the common DTSI for both boxes:
->>
->> - Build the Hamoa EL2 DTB like the other Hamoa boards.
->> - Second M.2 3V3 is PMC8380_3 GPIO5, not TLMM18. A 2 s startup delay
->>   is required or pcie3 fails to probe. always-on is a hack until there
->>   is a real M.2 power sequencer.
->> - sound-name-prefix on the three DP ports. Enable lpass_vamacro: no
->>   onboard mics, but it provides fsgen for tx_macro and rx_macro.
->> - usb_mp port 1 is not populated (no PTN3222 @ 0x4f). USB-C is
->>   usb_1_ss0; rear Type-A is usb_mp port 0 behind a Genesys hub.
->>
->> The Genesys hub is left undescribed.
->>
->> UCM [1] and AudioReach [2] topology for these devices are online, too.
->>
->> Tested on:
->> - IdeaCentre Mini 01Q8X10, Purwa (X1-26-100), 91B6
->> - Hamoa: compile-tested only
->>
->> [1]: https://github.com/alsa-project/alsa-ucm-conf/pull/843
->> [2]: https://github.com/linux-msm/audioreach-topology/pull/74
->>
->> Assisted-by: Grok 4.5 (xAI)
->> Signed-off-by: Jens Glathe <jens.glathe@oldschoolsolutions.biz>
->> ---
->> Jens Glathe (7):
->>       dt-bindings: arm: qcom: Distinguish IdeaCentre Mini 01Q8X10 SKUs
->>       arm64: dts: qcom: Split IdeaCentre Mini into a common DTSI
->>       arm64: dts: qcom: Add Purwa IdeaCentre Mini 01Q8X10
->>       arm64: dts: qcom: ideacentre-mini: Build the Hamoa EL2 DTB
->>       arm64: dts: qcom: ideacentre-mini: Fix the second M.2 3V3 rail
->>       arm64: dts: qcom: ideacentre-mini: Wire up DP sound names and VA macro
->>       arm64: dts: qcom: ideacentre-mini: Drop the unused USB MP port
->>
->>  Documentation/devicetree/bindings/arm/qcom.yaml    |   11 +-
->>  arch/arm64/boot/dts/qcom/Makefile                  |    8 +-
->>  .../qcom/hamoa-lenovo-ideacentre-mini-01q8x10.dts  | 1188 +-------------------
->>  .../qcom/purwa-lenovo-ideacentre-mini-01q8x10.dts  |   42 +
->>  .../qcom/x1-lenovo-ideacentre-mini-01q8x10.dtsi    | 1185 +++++++++++++++++++
->>  5 files changed, 1246 insertions(+), 1188 deletions(-)
->> ---
->> base-commit: af5f12805e5cefa4fe68d6127c7e1fb78cd5535c
+> I am still not sure I really see what the value is in a
+> completely different DT representation of the DisCo information,
+> all it does is give us potential issues with future spec versions
+> and create a whole bunch of new code than needs maintained. The
+> ACPI representation translates perfectly well to DT, should work
+> perfectly fine using the existing code.
+
+I totally agree with both of your comments, there is no way we can
+replicate MiPi spec into an different DT representation, this brings
+both maintenance overhead and is fragile. This a very big effort.
+
+Either we represent full ACPI into DT or use some know representation
+that linux understands and is maintained along with ACPI which is the C
+structure.
+
 > 
-> This series does not apply to ToT nor I can find this base-commit
-> in it.
+> However, that said if people want to work on doing so I am not
+> going to stand in the way. It does have the advantage it might
+> unblock things with the DT maintainers, since we can focus on
+> doing stuff in a more traditional DT style.
 
-It's a public/standard commit, next.
+This is really going to be a very very long shot, but as of today the
+need for this is slim, unless we see some platforms which have SDCA
+compliant codecs without a reference ACPI fw entires.
 
-What is ToT in upstream development?
+> 
+> I would also agree that this is reasonable as a half way house,
+> it seems like a good fallback mechanism to have for emergency
+> work arounds as well. If we can't reuse the existing parser then
+> there is a lot of work to define a new representation for DT.
++1
 
-Best regards,
-Krzysztof
+> Ideally that would be worked through with the MIPI group as well
+> to avoid future specs causing catastrophic issues. But all that
+> will take significant time so we probably need an interim
+> solution.
+> 
+
+--srini
+> Thanks,
+> Charles
+
