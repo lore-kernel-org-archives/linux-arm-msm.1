@@ -1,204 +1,169 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-ed2-f12.google.com (mail-ed2-f12.google.com [74.125.228.76])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E04D749C4D0
-	for <linux-arm-msm@vger.kernel.org>; Tue,  8 Sep 2026 09:10:02 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C112C4A2E17
+	for <linux-arm-msm@vger.kernel.org>; Tue,  8 Sep 2026 09:11:11 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.228.76
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788858604; cv=none; b=h6GitsAkJ1nYBkthq4ANlmEFG4t/ZBf9tShTIjsPduHYLJAyCYzn722uMaS6Q0nVejJ+aU8ghnOOyCxadi73Exn6/YmH2Z8DmogXlKxl9mhkI3gh/hccwGaaclQTnQBs2Gi0562xwqfYwpMS9JN3V5cvVHfh3HCrNRiBSz7oVrQ=
+	t=1788858673; cv=none; b=Wueu4PjUXPb97dZGojyCcDFYlJ2UdaKayu8MwE9EoLmd1Q5QfgT4PjbU27CeA3kGP24gqITR3XhYoXPqZQ8jus5f8GoqQLo3FoX/vDT8MI621UFpz1Yw5tG3eXuUKDYlbjnOdH9TbhWUQ/sb8lstTEYu59pinH2iVQxLigFGUxQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788858604; c=relaxed/simple;
-	bh=0lbcg30VfbDEHabWYRQfygaolUEEcg4i8tSmHoWaMJM=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=hPsX9Sr++2XFts+c9nPxaRcQr1/MzzRqKJdP5XMtSjdLw8+Hw4eRsjQfx4oGJwCx0Pmp56+sbctVnmib0ScwJGSY2Z2tnGVjacuCEmElAqT/5TwB/YFra1kPimwC+T4DPL9My++uC6MssAJ0bPYohj2PjvHbidYNpZJJbZ3rDKc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=PdV7IlSw; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=TAroz1Ek; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1788858673; c=relaxed/simple;
+	bh=TmzzV+fM1QSXib/KcubYMEqzdh2Oyo//gEQU5hpWWs0=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=WyfS+t2q7hWFZNGR/IgkvqeLWjuB5JWTRTuWKPgoldSMOpQXL+Jlpy8IhpyOIwDaYFwUm5uJVkm6Nc5RJLI/xjBe8PlZO2wIej7wZmEu3i2IiVwATpTjQpQdRkhH3nXHJCwe9NnyIo4ZqvaDNjz4Bfggv04Q/NI5cBUeyGwhc4Y=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=FSQzD4Uk; arc=none smtp.client-ip=74.125.228.76
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=google.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="PdV7IlSw";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="TAroz1Ek"
-Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6886Lr622154194
-	for <linux-arm-msm@vger.kernel.org>; Tue, 8 Sep 2026 09:10:01 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	66IdAPMFdrF+3AsnysbQZd4DS6/AZH+7mP7W5M9PJSU=; b=PdV7IlSwPCmo0l4S
-	lwhkgzdU3x4ysNJvqdFp8ZbOspWe8r80dj7MrHr6TaZbNkgj5X6/0b6/B9P2P7Wy
-	JCxZwq6i//pyAUmYGFQZcfAwINc3XEshKOs5BMvqY2u9c2RpBBsnzJ6APCU/06ye
-	hUiaEt1wabfdgIeSq0XP/0pj66yCNo/Hjkn63K688GteAgfDsn4fcN8GR6l1BF1n
-	MH+FVmoKYyHdYAh87Wtmvkd2t5pmbJiviAz8D0DJb8Gbm6MYaKbY0lcxV0kBY57F
-	dF5w56mxtP3d/x8ZmDqMtbObgJV/27+CSMzagfKN9w0GGKzLEK3WKT7norFpyvfP
-	FapYPw==
-Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com [209.85.222.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gj1rwjnex-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 08 Sep 2026 09:10:01 +0000 (GMT)
-Received: by mail-qk1-f197.google.com with SMTP id af79cd13be357-936aa34873bso578127685a.3
-        for <linux-arm-msm@vger.kernel.org>; Tue, 08 Sep 2026 02:10:01 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="FSQzD4Uk"
+Received: by mail-ed2-f12.google.com with SMTP id 4fb4d7f45d1cf-6a613a6bcd8so20213a12.0
+        for <linux-arm-msm@vger.kernel.org>; Tue, 08 Sep 2026 02:11:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1788858601; x=1789463401; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=66IdAPMFdrF+3AsnysbQZd4DS6/AZH+7mP7W5M9PJSU=;
-        b=TAroz1EkcpBHufYIBoFetkWySIia7GRa9JfnjM/n/vyfY5DQQmWZ5iUWXDfFEOVnNp
-         RYmWTDv+LDSpwxj4vkBhMX2wYaOGsNWQU2mWYz/DWY4lNRDUEmQrGRrABy7IXkKLZMx9
-         cvtccGkkDU5vm2TD3cZVRjzWpMj8kZrvwpk+mvV6jAmOPx0J3F8j8WF0Gk62y2PVQy2f
-         MS58fG2Zy7H0n84crCSOSQ0nK2AjmEOF0EHLPPZUnyFTeUSsNghFRFhsNzivZ4oIM18i
-         wf4bfInKABeHCPZPYCicuBqzKZ/dzn8voyDeBTKjhCCkwTMnuCRFlLGLmp9dwR5owGJa
-         i5aA==
+        d=google.com; s=20251104; t=1788858670; x=1789463470; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=IrpwdRZwJHUrRXfsJpygnheg0Tk5qU692FixuJGcKnA=;
+        b=FSQzD4UkKoH7nFV+7KtLqMVKXnWrx07dj06vGUF5qCMJuLbG4ZrPfKi5C0/XT1Rjt1
+         9sv96NRQrCD6n3IF62sOlQXXt5aWCepfhPvy2JcVAv9/wsJowp5T1wumjdrvAK8lecox
+         hYhinp0BbxOtUGVOLK3yDeutdbeN3zTI4V7c/Pc+l6EhslrDgVdxFcSVvFMtp8c9JuDA
+         pONAT0BtkPv0SczblcxKsa1WYOqoEOpAP2qMtKbV1Jwp7t9hgo8ckoPS01M++h28tuZO
+         imoO/WnAZ6aKT5PbPhXTILmkPxkMDxzftbNjDdyS3hige91wbGrWvH348nwiuycEB8CN
+         IZlQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788858601; x=1789463401;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=66IdAPMFdrF+3AsnysbQZd4DS6/AZH+7mP7W5M9PJSU=;
-        b=mAi9cGMUuixNZcYWui/GrkxbR9sI1AOHGw/BZXiu5gSvcJgOLOXXWr0835VUlJI95h
-         W1hsyyAO0DboUyISBXdWFjJCdh0xlxy3Ad95heTSqXnIhP9MkP9uf2nuFPLC+Zq09cJc
-         ZtXhtDLhamxQY3BMO9Yla3Uf2wTPDGCullpXc7a1HUPR8mCSNRAxSONyM2mqqCgRiWzh
-         PLhw40FaRCPEma4fzyGs3PRZgxklUt8zAo/p2xn0DQSOoTbEQSi/NqtFeTMqMYKEyg2d
-         Us04m92zsS2O5Z0+3/GWGuGwWivliywQj+Ds86uT+qKSYMf8wK4xJfg+NrKZUnnFRSSN
-         zE5Q==
-X-Forwarded-Encrypted: i=1; AKwUvBwxF1uLo5r+mmIWSGn1KynFzG0TlvX0CkGjkdxEc5rFcrhgmlNKnmd+CzKb6tCHVtClVvzbVgcz+aYu4opt@vger.kernel.org
-X-Gm-Message-State: AFuF++kfSOb9W/QjqCCSy7zxLF4D+7v+BTzcCw5SGakCL2c9P6WaPJ0f
-	+iFqh8Tif5gIbJkyLrO6m0kod7hXdov5XWolgT9PuMibZqW3qmXrHbGy8IGOdfRSsaSEk4WreHt
-	TojwzPvMSj20yugzEMTym/ov/uj6JTj/nF1dR4nZNJ4OzTHFvCCdcOPp3mBc6fjV+LIEI
-X-Gm-Gg: AYBFou19Ecfp9YvC8f+4AhNUS23fVS8xZg8eqEELChi8SESs+v+wgVbixlM1tGDvzFf
-	Ye1/X9hrWpejSoBa7BRRzLlGP59Oja8dRY7KWAtcnzyjGr1NtHnm5x8pHITEStpaRsNP4X+3dgM
-	rsoDF0SSm13RfhRbiY9r2ZpKChPVPJuXXyxIhtHN8WhmIOLCAciYzFaSSG6+ELl7h4mShMGMvIb
-	pkYEvILNeV78xFp7gp9+l3dWZbxZDfSZbueYO5bvtAGW3juy8LH3V5J5+KfzKwQFGB1x2PJMNjd
-	6K9VdIGDp6jBejlK+2jDADU9fQs2TB3P3HWUzbafwGpLWN0tWNWhpaQpZ/gbyFPJ4BzpWdMlw+W
-	1pytl3Nc8v1LiCPAcQZKJ9fWzRic=
-X-Received: by 2002:a05:620a:7087:b0:939:7f87:ff22 with SMTP id af79cd13be357-9398045fd75mr2996919385a.36.1788858601041;
-        Tue, 08 Sep 2026 02:10:01 -0700 (PDT)
-X-Received: by 2002:a05:620a:7087:b0:939:7f87:ff22 with SMTP id af79cd13be357-9398045fd75mr2996914585a.36.1788858600581;
-        Tue, 08 Sep 2026 02:10:00 -0700 (PDT)
-Received: from [192.168.68.120] ([5.133.47.210])
-        by smtp.googlemail.com with ESMTPSA id a640c23a62f3a-c261e24a9e0sm523030366b.4.2026.09.08.02.09.59
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 08 Sep 2026 02:09:59 -0700 (PDT)
-Message-ID: <a6ae0ad4-6fb4-48f7-9636-7c0e266b6940@oss.qualcomm.com>
-Date: Tue, 8 Sep 2026 10:09:58 +0100
+        d=1e100.net; s=20251104; t=1788858670; x=1789463470;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=IrpwdRZwJHUrRXfsJpygnheg0Tk5qU692FixuJGcKnA=;
+        b=Gp3QcpG7kTl1Lvr4Pw6iOQKqIedMG55WgXCkgU63wsVvWnWnhwwTJ45T++dgcO7Iru
+         JARAV9rJp68LqqGffdrrpAowthEUdO2qJkZW4KPRdv96L2Lf/StRvU730U1A5q7Ow6mw
+         M4qQp7cCLDDTJ0pFhUn+LhYT5ZObhtg66XIfKRIrJEQayCdNqorsE85zexDJ68yAE05c
+         uvHG4udw70ghs4gjFuZI7so6edtw73qplkUa1TanStwjNgu2tSKMZNnmyfaVlVO/ZDxW
+         z8IUC6sN5OB+goRB09XAx6j3LjcMhPg7edaXhA2ZR8etVt8cy2LWQDu2r+s5Y+yzzSj8
+         YMTA==
+X-Forwarded-Encrypted: i=1; AKwUvBzxfiwdRfoOwglU/7zeMDdh6SjBn9QIJjtxAhLN/zop5I3CWr9dvjwop17w1dngpboJh5TdUajGzCDc6xHQ@vger.kernel.org
+X-Gm-Message-State: AFuF++nunaSa06GIoJHvSwGGo8lPP27JlTf5K7HSnACuCMRuGhyk966e
+	YSfHwNlGN90oRljmvdeeJ5cMTD+Vau/di6MCLPjaiEG+vPQgXpE22+AzJ0JybGP5Dw==
+X-Gm-Gg: AYBFou2dmDx6pUoSJ4fmI4xBC/lVcYGgInMvdx3hSdampF5ayFGbEChU2/CgxWl7chm
+	M5ANN+ffJFz3Z+ZMn6mLFKtKeirYehPckjr/pYOLY24mvVWX+JE4XkwusL3OG3U3HGw5HQu/xoJ
+	xqMlxxmtOB+k0+z8xGVZrLZGubE9UagYnbMG9+rTrl7TSBa/Cb2jf184k4PYVk0wSq+7r5RSCiD
+	1XJYdcfZUkSwYXogL00wJ8EWodrHTzZfPD3corFw/qDHfJECIdXi/PNufV5gkW7Gjl952i2ooXL
+	lgCwFcTao5Eo2XOQ65TgqCDwRIX/g3X+jpUojF10K8KKXQu7ED204rq7EFL0++8qG6kGh7KNaND
+	zYuETCsFnwCwQcTch9UW3XTS13u3d04XlrA7leKyqqoLdMWyZQ6atlFIR52oiMg72vUN4AxNz58
+	zS9DvYih0/dA0vTeFNKNtbaGdKjAnZYsQObsndTWLa1Vnqd50uFU+cmYV9FFXbTYY2jDh5heet9
+	zB8FWG75uU9xR7Tth837I9xZjaM1w==
+X-Received: by 2002:a05:6402:a5cb:20b0:6a1:f088:9486 with SMTP id 4fb4d7f45d1cf-6a7f67b5d76mr50415a12.4.1788858669454;
+        Tue, 08 Sep 2026 02:11:09 -0700 (PDT)
+Received: from google.com (250.192.189.35.bc.googleusercontent.com. [35.189.192.250])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c260d5921e2sm581052366b.46.2026.09.08.02.11.08
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 08 Sep 2026 02:11:08 -0700 (PDT)
+Date: Tue, 8 Sep 2026 09:11:05 +0000
+From: Mostafa Saleh <smostafa@google.com>
+To: Krzysztof Kozlowski <krzk@kernel.org>
+Cc: jens.glathe@oldschoolsolutions.biz,
+	Bjorn Andersson <andersson@kernel.org>,
+	Konrad Dybcio <konradybcio@kernel.org>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>, linux-arm-msm@vger.kernel.org,
+	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH 0/7] arm64: dts: qcom: IdeaCentre Mini 01Q8X10 Hamoa +
+ Purwa
+Message-ID: <ap_RKfCbXAVBRtSY@google.com>
+References: <20260905-x1-ideacentre-mini-prettify-v1-0-9a87882973bb@oldschoolsolutions.biz>
+ <ap_PdUrwLIVGJ3oG@google.com>
+ <799c3128-cf43-4a64-a8c8-3f6695bbf424@kernel.org>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 11/11] ASoC: codecs: add Qualcomm Tambora (WCD9378)
- SDCA codec
-To: Charles Keepax <ckeepax@opensource.cirrus.com>
-Cc: Pierre-Louis Bossart <pierre-louis.bossart@linux.dev>,
-        Mark Brown <broonie@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley
- <conor+dt@kernel.org>,
-        Bard Liao <yung-chuan.liao@linux.intel.com>,
-        Jaroslav Kysela <perex@perex.cz>, Liam Girdwood <lgirdwood@gmail.com>,
-        Maciej Strozek <mstrozek@opensource.cirrus.com>,
-        Takashi Iwai <tiwai@suse.com>,
-        Faiz Nabi Kuchay <fkuchay@oss.qualcomm.com>,
-        Jorijn van der Graaf <jorijnvdgraaf@catcrafts.net>,
-        patches@opensource.cirrus.com, linux-sound@vger.kernel.org,
-        devicetree@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-References: <20260907083727.733705-1-srinivas.kandagatla@oss.qualcomm.com>
- <20260907083727.733705-12-srinivas.kandagatla@oss.qualcomm.com>
- <525f887e-cb3b-4e74-8b93-30c3baeb8018@linux.dev>
- <7006ad74-334c-41cb-bcc8-9ef5e75dde7e@oss.qualcomm.com>
- <005e3c81-778a-47bc-a8ae-fb5c38ea2e2c@linux.dev>
- <c7fec9d0-b79f-437c-ba8b-37858842c545@oss.qualcomm.com>
- <ap/MFVMHG2Hej8k/@opensource.cirrus.com>
-Content-Language: en-US
-From: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
-In-Reply-To: <ap/MFVMHG2Hej8k/@opensource.cirrus.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Authority-Analysis: v=2.4 cv=Ga8nWwXL c=1 sm=1 tr=0 ts=6a9fd0e9 cx=c_pps
- a=50t2pK5VMbmlHzFWWp8p/g==:117 a=ZsC4DHZuhs/kKio7QBcDoQ==:17
- a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
- a=RmElXddC3YRLYRTwZzMA:9 a=QEXdDO2ut3YA:10 a=IoWCM6iH3mJn3m4BftBB:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTA4MDA5NSBTYWx0ZWRfX62GhG0i5SIyL
- dGp81r2ap+vcixJSAALiwancl1t2bIf6Nm36LwPPVKMVXyFmCx8dBoM1TAsT0YJRaYsVMEBftO1
- WEqovR6HZasGul7FxyfIFKd3Efcmh2T4ZZ6NjMmPjoSzZXzoqZr23QdATm2B7yiwZjpy9ZQG/5+
- K/ytQ1ERYnz00C6YuvDbvwnAlFel6DyoTfwH/pP04U8F1obGREkUwIMWVdsspG7JSuEwq+dOnrY
- w0Jna0R+k73zhQFzcRwHuer+zJ9RmZhcDcUmodhrZdg7d9xB+ovvjF3CTck5V6izI+jPv6Jo9cF
- GAnAYWQT4es9XZdCOLLho99wg7bKDj4Of35FClau2HZ/32mFLgHixdMEqppov6k1+mOq9VTaATo
- ByLtK4+F3yOk5iB5R2cHI2M741pUSjdL9PqID8Fk5DoGfDk2g/6HbmhFNTpqgCeNifwHSpn6OJe
- UumMvDdazNKKVBo3KzA==
-X-Proofpoint-ORIG-GUID: RrJYOAoPt_eLJbAxKUY5vNmLIVpbViIW
-X-Proofpoint-GUID: RrJYOAoPt_eLJbAxKUY5vNmLIVpbViIW
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTA4MDA5NSBTYWx0ZWRfXwgyoOxY/jCnl
- wqe8t2CSEYwQ5fBoWQeXzRPj2sBvnu8VH+/VbW0lVm6J3zn59IJJY7HdWVuZl7kh12hl0UMwe5q
- pgFaSs/tFn0vNngzDvfhfafqHqBJ2TI=
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-08_01,2026-09-07_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0 phishscore=0 suspectscore=0 clxscore=1015 impostorscore=0
- bulkscore=0 spamscore=0 lowpriorityscore=0 priorityscore=1501 adultscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2609080095
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <799c3128-cf43-4a64-a8c8-3f6695bbf424@kernel.org>
 
-On 9/8/26 9:49 AM, Charles Keepax wrote:
-> On Mon, Sep 07, 2026 at 11:37:49PM +0100, Srinivas Kandagatla wrote:
->> On 9/7/26 8:47 PM, Pierre-Louis Bossart wrote:
->>> My take is that rather than encode all properties in C, it's probably
->>> worth exploring a DT representation of the concepts that *can* be used
->>> fairly easily and make the life of codec vendors easier - not as a> literal translation of ACPI.
->>
->> I agree a DT expression of the *concepts*  not a literal DisCo
->> mirror would be a better A.  I want to bring that back to LPC 2026
->> DT MC as a concrete proposal grounded in the earlier DT-maintainer
->> feedback rather than re-litigating it inline on this series.  Because
->> B stays put, switching A later is a change inside populate_function,
->> not an ABI break. so landing this series does not close the door on
->> the representation you're asking for.
+On Tue, Sep 08, 2026 at 11:05:34AM +0200, Krzysztof Kozlowski wrote:
+> On 08/09/2026 11:03, Mostafa Saleh wrote:
+> > Hi Jens,
+> > 
+> > On Sat, Sep 05, 2026 at 11:28:55AM +0200, Jens Glathe via B4 Relay wrote:
+> >> The IdeaCentre Mini 01Q8X10 (board 91B6) ships with two SoCs: Hamoa
+> >> (X1E80100), already upstream, and Purwa (X1P42100 / X1-26-100). Same
+> >> chassis, different silicon. Stubble and the DTB loader need distinct
+> >> compatibles.
+> >>
+> >> This series splits the board description into
+> >> x1-lenovo-ideacentre-mini-01q8x10.dtsi and adds thin leaves. Each SKU
+> >> keeps lenovo,ideacentre-mini-01q8x10 as fallback:
+> >>
+> >>   lenovo,hamoa-ideacentre-mini-01q8x10, lenovo,ideacentre-mini-01q8x10,
+> >>   qcom,x1e80100
+> >>
+> >>   lenovo,purwa-ideacentre-mini-01q8x10, lenovo,ideacentre-mini-01q8x10,
+> >>   qcom,x1p42100
+> >>
+> >> No qcom_scm change; the fallback is already on the allowlist.
+> >>
+> >> The remaining patches fix the common DTSI for both boxes:
+> >>
+> >> - Build the Hamoa EL2 DTB like the other Hamoa boards.
+> >> - Second M.2 3V3 is PMC8380_3 GPIO5, not TLMM18. A 2 s startup delay
+> >>   is required or pcie3 fails to probe. always-on is a hack until there
+> >>   is a real M.2 power sequencer.
+> >> - sound-name-prefix on the three DP ports. Enable lpass_vamacro: no
+> >>   onboard mics, but it provides fsgen for tx_macro and rx_macro.
+> >> - usb_mp port 1 is not populated (no PTN3222 @ 0x4f). USB-C is
+> >>   usb_1_ss0; rear Type-A is usb_mp port 0 behind a Genesys hub.
+> >>
+> >> The Genesys hub is left undescribed.
+> >>
+> >> UCM [1] and AudioReach [2] topology for these devices are online, too.
+> >>
+> >> Tested on:
+> >> - IdeaCentre Mini 01Q8X10, Purwa (X1-26-100), 91B6
+> >> - Hamoa: compile-tested only
+> >>
+> >> [1]: https://github.com/alsa-project/alsa-ucm-conf/pull/843
+> >> [2]: https://github.com/linux-msm/audioreach-topology/pull/74
+> >>
+> >> Assisted-by: Grok 4.5 (xAI)
+> >> Signed-off-by: Jens Glathe <jens.glathe@oldschoolsolutions.biz>
+> >> ---
+> >> Jens Glathe (7):
+> >>       dt-bindings: arm: qcom: Distinguish IdeaCentre Mini 01Q8X10 SKUs
+> >>       arm64: dts: qcom: Split IdeaCentre Mini into a common DTSI
+> >>       arm64: dts: qcom: Add Purwa IdeaCentre Mini 01Q8X10
+> >>       arm64: dts: qcom: ideacentre-mini: Build the Hamoa EL2 DTB
+> >>       arm64: dts: qcom: ideacentre-mini: Fix the second M.2 3V3 rail
+> >>       arm64: dts: qcom: ideacentre-mini: Wire up DP sound names and VA macro
+> >>       arm64: dts: qcom: ideacentre-mini: Drop the unused USB MP port
+> >>
+> >>  Documentation/devicetree/bindings/arm/qcom.yaml    |   11 +-
+> >>  arch/arm64/boot/dts/qcom/Makefile                  |    8 +-
+> >>  .../qcom/hamoa-lenovo-ideacentre-mini-01q8x10.dts  | 1188 +-------------------
+> >>  .../qcom/purwa-lenovo-ideacentre-mini-01q8x10.dts  |   42 +
+> >>  .../qcom/x1-lenovo-ideacentre-mini-01q8x10.dtsi    | 1185 +++++++++++++++++++
+> >>  5 files changed, 1246 insertions(+), 1188 deletions(-)
+> >> ---
+> >> base-commit: af5f12805e5cefa4fe68d6127c7e1fb78cd5535c
+> > 
+> > This series does not apply to ToT nor I can find this base-commit
+> > in it.
 > 
-> I am still not sure I really see what the value is in a
-> completely different DT representation of the DisCo information,
-> all it does is give us potential issues with future spec versions
-> and create a whole bunch of new code than needs maintained. The
-> ACPI representation translates perfectly well to DT, should work
-> perfectly fine using the existing code.
+> It's a public/standard commit, next.
+> 
+> What is ToT in upstream development?
 
-I totally agree with both of your comments, there is no way we can
-replicate MiPi spec into an different DT representation, this brings
-both maintenance overhead and is fragile. This a very big effort.
+I am using Linus's Tree:
+https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/log/
 
-Either we represent full ACPI into DT or use some know representation
-that linux understands and is maintained along with ACPI which is the C
-structure.
+Thanks,
+Mostafa
 
 > 
-> However, that said if people want to work on doing so I am not
-> going to stand in the way. It does have the advantage it might
-> unblock things with the DT maintainers, since we can focus on
-> doing stuff in a more traditional DT style.
-
-This is really going to be a very very long shot, but as of today the
-need for this is slim, unless we see some platforms which have SDCA
-compliant codecs without a reference ACPI fw entires.
-
-> 
-> I would also agree that this is reasonable as a half way house,
-> it seems like a good fallback mechanism to have for emergency
-> work arounds as well. If we can't reuse the existing parser then
-> there is a lot of work to define a new representation for DT.
-+1
-
-> Ideally that would be worked through with the MIPI group as well
-> to avoid future specs causing catastrophic issues. But all that
-> will take significant time so we probably need an interim
-> solution.
-> 
-
---srini
-> Thanks,
-> Charles
-
+> Best regards,
+> Krzysztof
