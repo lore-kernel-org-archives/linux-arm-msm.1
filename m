@@ -1,74 +1,206 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 955DE595741;
-	Tue,  8 Sep 2026 17:55:50 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 790242C21D0
+	for <linux-arm-msm@vger.kernel.org>; Tue,  8 Sep 2026 18:00:28 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788890151; cv=none; b=g3MjabnamNW2pBxlCBzwH7Yomf0z3ZJfA/VAvM1MrC725ia1zgAXClIj3xAGWNXvfABXxjLgQDjKkvJITAyJ7gpI7ScrPOgielbbM1402F4XkZtzOlw4SlOlZQDHRn/g/cJ8n4ptX66tq6xbAOCHVfxeuOwMKqqcYI6ZDJB4f8U=
+	t=1788890430; cv=none; b=bOFU0Rg5uqhdGWHjSDBy1qoAQZElgEi77gB5oPjOSIZQOOYSPtBOWhv5ywRgFOAF5MU5NzB+NIKQ9bSuZl9JaX1sg2d8UuvcVg6b2vRRrLzROrh2hComeVsR6QToqrQ5KKjc8qgGrG9kaOfcz/NmfSFxyjdhg0ZRgVAjW810DFg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788890151; c=relaxed/simple;
-	bh=pL6X4+H1HRTFmUzZquYoWA+vA8llL1b++q+IS0wt0WI=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=d74ad904+97IJlOLl2ra3XGilB561OxR3DXzWXAKOfIw8aOAX+LIPE/7SYU40ZRf66OQOaad/crFdFsvBPhFDxjTmWuv0tWW2bZR4Saq+SBOXV0XCHrvbaybuj9ya0//hXAAhojxvZHEQvjuXvITY/ylfJyRClHggZPej07mrPY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=g+V0cbt5; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1788890430; c=relaxed/simple;
+	bh=u6wdLrwyQiDIzovivnZzvX58qPuV0kVPxqekCK0IXbI=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=sVaXf3ZIPO/ud0Z4iRtVGNd+Z0o3BqPsjZVmQc/G2Ny8QT/VOKqAKv81j4T4IXV/0ngF2UfP3yL8nuD80zUVGkB9s65wCRqIrlupliuo+rwlUSReJDq2+v0GQE5+cLDcCQwWyGCoNlWqS6DzyDeIszZ4U/W8xn6dPTEDdSmfLKk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=kW8Trzvj; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=NxME9Uuu; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="g+V0cbt5"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1401F1F00A3F;
-	Tue,  8 Sep 2026 17:55:47 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1788890150;
-	bh=pL6X4+H1HRTFmUzZquYoWA+vA8llL1b++q+IS0wt0WI=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=g+V0cbt5sBZBlmAMr/pNoSfTcKuLf+bTaAO0EfRVEahoujoy8PKW/BitkIQUOEn2G
-	 UYfRIzngOCn1suV4qvSncou5CbW6Zo2ybdumlrzt5vTxMUuB1s9/kqSvizee/YGa+t
-	 KhJxtOEhsmnEgOlAakGffdhU2IT7ntzv/F38kXl+0YjfoH1kCQBtnCxJwvJwxNN0eO
-	 avONiEJ12MWbYNOO6fz9kmg+sVtIap1T/xnSch91mADPah6LbTLiZZqNQA5cFlYZRz
-	 OG9MtTBdsdNany5CxlAXqYdSgbYwtq7dZ93r0GnnN2PMSVkHZ9jHhoxTUSBJSXwn0i
-	 nSZk762E2rzAg==
-Date: Tue, 8 Sep 2026 18:55:46 +0100
-From: Conor Dooley <conor@kernel.org>
-To: Oleg Keri <okerixx@gmail.com>
-Cc: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Hans de Goede <hansg@kernel.org>,
-	Ilpo =?iso-8859-1?Q?J=E4rvinen?= <ilpo.jarvinen@linux.intel.com>,
-	Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
-	Guenter Roeck <linux@roeck-us.net>, linux-arm-msm@vger.kernel.org,
-	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-	platform-driver-x86@vger.kernel.org, linux-hwmon@vger.kernel.org
-Subject: Re: [PATCH 1/2] dt-bindings: embedded-controller: add Lenovo Yoga
- Slim 7x Gen 11 EC
-Message-ID: <20260908-duke-carry-344cf89b213b@spud>
-References: <20260908091752.5508-1-okerixx@gmail.com>
- <20260908091752.5508-2-okerixx@gmail.com>
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="kW8Trzvj";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="NxME9Uuu"
+Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 688FdWlK360007
+	for <linux-arm-msm@vger.kernel.org>; Tue, 8 Sep 2026 18:00:27 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	vhI9rygEQ39zKq79+luFBhgAUw/Dcbm5V35+xL/RCJA=; b=kW8TrzvjT2qUPcfu
+	rNaAwgnSOWf4omgbMnL0JcwwaNJk2ib3IuRgaJMbQot9CDtjlPRQ7KiE+mPkLChI
+	bTeWO13CACG/B9zSVPWyU7xVJpcP7KEgo9HJ5WX5sezviZwANh1RWjYHJWvyG7U3
+	F6n0hyqeaq6G8JrSPe6wXKuLygTtreblbatOSxIPmbX9RaZmOfvj75aKv/OoIzXP
+	tCVdULIUNuu7GATTgTrWY+lnG92ki36k+vDWXIurtQQR5gudaMmAlgYk6zbuZn1v
+	ekCUkWg27fyzJWbcH7EleOYOsEjJFTo4jWQaP4Jwil8IjSk4wGv7/8QnutLq7aVX
+	Y3bAQg==
+Received: from mail-oo1-f69.google.com (mail-oo1-f69.google.com [209.85.161.69])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gjb0pbfs4-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Tue, 08 Sep 2026 18:00:27 +0000 (GMT)
+Received: by mail-oo1-f69.google.com with SMTP id 006d021491bc7-6a313ec13ceso5997222eaf.2
+        for <linux-arm-msm@vger.kernel.org>; Tue, 08 Sep 2026 11:00:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1788890427; x=1789495227; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=vhI9rygEQ39zKq79+luFBhgAUw/Dcbm5V35+xL/RCJA=;
+        b=NxME9Uuubk1j9FgEiklZu/0KeL0SFgb1/GXHOrIxfcc1mVzo3cJ45azEW2dPqHTRPj
+         zNpHoIam2mIPQUwaETCA0mYJXYGrnfDOJFv+6XFVGoS4RUUqXVqzJFTVGvWRCYoV/qee
+         UxG1Oz32YiCEgvuAtd5raKlqTXjVZssdNdEe2l9ZB+b5QXeEndguNNDBJezgSNRcSIG3
+         ceTVjdiwuFjHCFZcxvQhaSxMMvmOecaNfl+RaUIdFmKoGVRZU7t2WqdKQhnwgzhKZVXf
+         Z98Y6G3/QNJnX+y/j6kkX5fRkVDT64slzbJ4Z0p3yxjEJt1W5iGiD1zRLMVc3yaTr71M
+         fbeQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1788890427; x=1789495227;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=vhI9rygEQ39zKq79+luFBhgAUw/Dcbm5V35+xL/RCJA=;
+        b=ZGtqKdTjkiLR0z1oxQyfQwrpeE9y5r3Z2uNy+4qfD1kC/79J52FifisTtTVhU9SQ1n
+         4rbMa7E6JCjZv9QynhZlIvo39GagBQF9Arf2W3jZDc3pGtnyM3O7MwbY7ZUU3qTJR+Tx
+         N27YdIxCYd2TxwjjVv5iqHHV3CUKpbX7dNYSaHbw8hLMh2isl3realhBLhzylVLd9rrs
+         nAL5NfkU7gSa7ghZ7+KeltHHYB//XCY7+C98LechMUg3+huErPhHSQmgNTd/VuItmNuA
+         Ge84KMGmWlHmrZeF0w5Gcrx9WBDVuA70+Xxl/3oQ4MTbF/dzXCXvcq14QbJ2/vczbxAH
+         7fJQ==
+X-Forwarded-Encrypted: i=1; AKwUvBxrQw4lyWRzWMjWCBsMm7QD54rE1KpGIBVs2NcoSU9unZuT6QPh+8P76oC/ttAclR3c1KokASJ8z8X+fl5b@vger.kernel.org
+X-Gm-Message-State: AFuF++mrf8DD53H7kGMF5ALjE0MZTuiJejfpstGsnUdeYPcb0F68G9X2
+	4+bFOHYQ+CpogPd048NKly2n5wj4g1BmyYVxeOn0rhUzBAoskVuq1C0jzqGe2EYnR3tvfo+OpB/
+	shCfV8zGzucco4wJshIYlFD20BkIBUqPVpw11mBJs/kAk+6iF16D2TtD+ptA5IMmAOEFL
+X-Gm-Gg: AYBFou3grZoFgtbQza3zmr+1hn4hGTNLnNf+AQE5dTxxNTt3Qwo2PhjlfhJRU6M/wjr
+	EVxm+jZdoAecnmSuE8Rphuqs7V/uytpRKD//rB9K69DkIjhXXqIpbfrp0b5PwQzHwTdQRrcs9Bv
+	f+95N/ZbKi16+C8T86uI5B/BaP9GBSrELPovntOJ/3nqO10Ddgyi9YBve/p99Wr6UT+4pQAMKlI
+	pXSOg69cbCAWyYYjj5UK7v0TotnMVeBvWopInbBEL3gf3a2NXMxSYJHyK1wg0cEQws7Y4mN8zoc
+	VB/M02aP7cUjSS7gY3zVzkf6Gki0nN3DJ9hlHYJpgrjQjcJ+FQDOexf4LTEk+0wPFuRHzXrpA+0
+	FIFb4lu/0deaxSH08CsJx66V+jZw=
+X-Received: by 2002:a05:6820:81f:b0:6b3:697f:9f1c with SMTP id 006d021491bc7-6b6fc7d2ba9mr29068686eaf.8.1788890426724;
+        Tue, 08 Sep 2026 11:00:26 -0700 (PDT)
+X-Received: by 2002:a05:6820:81f:b0:6b3:697f:9f1c with SMTP id 006d021491bc7-6b6fc7d2ba9mr29068622eaf.8.1788890426281;
+        Tue, 08 Sep 2026 11:00:26 -0700 (PDT)
+Received: from [192.168.68.120] ([5.133.47.210])
+        by smtp.googlemail.com with ESMTPSA id 586e51a60fabf-4760cec8679sm10736429fac.5.2026.09.08.11.00.23
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 08 Sep 2026 11:00:26 -0700 (PDT)
+Message-ID: <f1e80aa7-2d92-455c-b7d6-484fb353e01f@oss.qualcomm.com>
+Date: Tue, 8 Sep 2026 19:00:22 +0100
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="xXLwQtLx5yICgUWa"
-Content-Disposition: inline
-In-Reply-To: <20260908091752.5508-2-okerixx@gmail.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 05/11] ASoC: SDCA: add populate_function hw_op for DT
+ function data
+To: Charles Keepax <ckeepax@opensource.cirrus.com>
+Cc: Mark Brown <broonie@kernel.org>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley
+ <conor+dt@kernel.org>,
+        Bard Liao <yung-chuan.liao@linux.intel.com>,
+        Jaroslav Kysela <perex@perex.cz>, Liam Girdwood <lgirdwood@gmail.com>,
+        Maciej Strozek <mstrozek@opensource.cirrus.com>,
+        Pierre-Louis Bossart <pierre-louis.bossart@linux.dev>,
+        Takashi Iwai <tiwai@suse.com>,
+        Faiz Nabi Kuchay <fkuchay@oss.qualcomm.com>,
+        Jorijn van der Graaf <jorijnvdgraaf@catcrafts.net>,
+        patches@opensource.cirrus.com, linux-sound@vger.kernel.org,
+        devicetree@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+References: <20260907083727.733705-1-srinivas.kandagatla@oss.qualcomm.com>
+ <20260907083727.733705-6-srinivas.kandagatla@oss.qualcomm.com>
+ <aqA29pv18mXzTR0G@opensource.cirrus.com>
+Content-Language: en-US
+From: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
+In-Reply-To: <aqA29pv18mXzTR0G@opensource.cirrus.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-ORIG-GUID: PWdM0O_72imag0x6fd6RjXnC_pYQmRbq
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTA4MDE5NSBTYWx0ZWRfX6Wly/yUQPMZo
+ i6bQL8TpBor1s5ugQVD4v6I8KBJULEDzbx0DcogvJCGiWSve2ep6xwiFbUx6QcD2EIcFM7tmQC3
+ R6LQpAZGIsmL1/zDkxMbIB/rl642y8s=
+X-Authority-Analysis: v=2.4 cv=HL3z0Itv c=1 sm=1 tr=0 ts=6aa04d3b cx=c_pps
+ a=lVi5GcDxkcJcfCmEjVJoaw==:117 a=ZsC4DHZuhs/kKio7QBcDoQ==:17
+ a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22
+ a=EUspDBNiAAAA:8 a=VczNHz_CLEaalHvbfdcA:9 a=QEXdDO2ut3YA:10 a=O8hF6Hzn-FEA:10
+ a=rBiNkAWo9uy_4UTK5NWh:22
+X-Proofpoint-GUID: PWdM0O_72imag0x6fd6RjXnC_pYQmRbq
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTA4MDE5NSBTYWx0ZWRfX/bbFywq1wuhM
+ gn//UKYpN9X720h/eTkHcOFjA2DncEAUNrWBDDK9n50n2+1n6BUFgUWEdVfF1uhwNMJ7lGHGJqo
+ sLE3nGL7ZrE2WrnkOXy67hcANYRNBgBZ0MNNmo5hXoTMzb+tBH/o0n0xrTdUNkhRxlrMrlCjwpt
+ eIK2A4UNGG92LCRU3eMW0/a/lt3Q0VaLHm5z/DNq53+4oTWFcby4NtZA4qHN7mPhFEyys9eOGfe
+ 0V21TgRwLwKkwOuLAmJ/8p2rkbHJzscEPjjz2/fidOEqkEnT8cw9j8hQLAAQQWUvX4SNV0rkDXf
+ YanPi9MzixCKcMwONuaH3H9lWWIno42AtAHH5qLkxHs0Ssabi9NHMThcTmkpwJU9M0KlSZ8asBT
+ XrnkweXT/zTcUvA+ExpcOnjsoepYcOPZJ05pIxxks4fab4waaha9yKOd9WtIQBycMN6iSDNK4NJ
+ e4FOKDe8xe2tpfxKA4g==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-09-08_03,2026-09-08_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ priorityscore=1501 lowpriorityscore=0 clxscore=1015 suspectscore=0
+ impostorscore=0 spamscore=0 phishscore=0 malwarescore=0 bulkscore=0
+ adultscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2609080195
 
---xXLwQtLx5yICgUWa
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+On 9/8/26 5:25 PM, Charles Keepax wrote:
+> On Mon, Sep 07, 2026 at 09:37:19AM +0100, Srinivas Kandagatla wrote:
+>> sdca_parse_function() walks a firmware node, but on DT there is no
+>> DisCo node -- sdca_lookup_functions() is a no-op and the SDCA
+>> function descriptors come with a NULL fwnode.
+>>
+>> Add a populate_function hw_op that the class function driver falls
+>> back to when @function->desc->node is NULL: it fills the caller-owned
+>> sdca_function_data (entities, clusters, init_table, delays) from the
+>> codec's static tables, matching by function type.  Leave
+>> @function->desc alone -- the framework owns the per-instance
+>> descriptor, so devices with more than one function of the same type
+>> keep their per-instance SoundWire address.
+>>
+>> Signed-off-by: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
+>> ---
+>> diff --git a/sound/soc/sdca/sdca_class_function.c b/sound/soc/sdca/sdca_class_function.c
+>> index 10a2b031b572..8bca88865a4d 100644
+>> --- a/sound/soc/sdca/sdca_class_function.c
+>> +++ b/sound/soc/sdca/sdca_class_function.c
+>> @@ -329,7 +329,14 @@ static int class_function_probe(struct auxiliary_device *auxdev,
+>>  	drv->core = core;
+>>  	drv->function = &sdev->function;
+>>  
+>> -	ret = sdca_parse_function(dev, drv->function);
+>> +	if (drv->function->desc->node) {
+>> +		ret = sdca_parse_function(dev, drv->function);
+>> +	} else if (core->hw_ops && core->hw_ops->populate_function) {
+>> +		ret = core->hw_ops->populate_function(core->sdw, drv->function);
+>> +	} else {
+>> +		dev_err(dev, "no firmware node and no populate_function hook\n");
+>> +		return -ENOENT;
+>> +	}
+> 
+> Is this the right logic here? I feel like if we have a
+> populate_function() callback we should call it regardless of if we
 
-Acked-by: Conor Dooley <conor.dooley@microchip.com>
-pw-bot: not-applicable
+something like this?
+-------------------->cut<---------------------------------
+if (drv->function->desc->node)
+	ret = sdca_parse_function(dev, drv->function);
 
---xXLwQtLx5yICgUWa
-Content-Type: application/pgp-signature; name=signature.asc
+if (core->hw_ops && core->hw_ops->populate_function)
+	ret = core->hw_ops->populate_function(core->sdw, drv->function);
 
------BEGIN PGP SIGNATURE-----
+if (ret)
+	return ret;
 
-iHQEABYKAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCaqBMIgAKCRB4tDGHoIJi
-0ubLAP9ImlOvimLhhhAqHp+sx/Yi9jZkYeJ8jkhv0ewec/8hNgD45RIi2wUn4YuM
-Q6YZq3Y5ScDe8nCvyjC+EtD7gYSCCQ==
-=oUob
------END PGP SIGNATURE-----
+-------------------->cut<---------------------------------
 
---xXLwQtLx5yICgUWa--
+> have a node. That would help with the use-case where this is
+> being used to work around bugs in the firmware, and
+> populate_function() can always call sdca_parse_function() if it
+> wants too.
++1
+
+--srini
+> 
+> Thanks,
+> Charles
+
