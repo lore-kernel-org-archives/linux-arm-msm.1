@@ -1,459 +1,206 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CEC98379991;
-	Tue,  8 Sep 2026 05:52:56 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 85A0C374E73
+	for <linux-arm-msm@vger.kernel.org>; Tue,  8 Sep 2026 06:23:45 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788846778; cv=none; b=cq89gUYGvygljHl5ZD+JTnyGi75/9gBCFf1xNzXc8+dZGewIYwOD+EHNv+Ho3UTZ6/1l5rU+YzS+8CZQUgUCOsVmbAlgy2NlX1V7AzfnoTWLCfa/nGMXzHm5AtfKEv8FQgvKd59ukFdoGumRcA7yGzS0tKTsWCsx/LV4uH8fDX8=
+	t=1788848626; cv=none; b=XObB/3wa9+iWpZMG/GAusfcIhl8aROHD9E7DQBpDuVqF6o3AY7ADkMZjkYa7nSTGmmvIFvUus/dtbVvTyRrEUqsv+GxSGnGiWMJWXKtkekPOjkLL/vCw7PozQPQkEhsstq6Mf0H1sefRBDFGT8OTFcwiaX0Sr6EacHEU/QAsZJo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788846778; c=relaxed/simple;
-	bh=bpn29dM1RpvP78dt0kFS+7aUPnEmrnjFfSl9Ev5Vxak=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=L/6UzRiBnJKyIhumKg99lxYPsQHN3x5cZ9MesOPvrej0DglPEcEbO06VghdsiO7OuPpW3iEGcHvXhz7uq6eSgMn7gHQaDS6MvdUUS7ZNpwMgq933tLGWEyuszvBBJG+GITHuTE+DNr6OzMKJ1SAvb7vhLntS6fKA3vPjx8y6O50=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=nziJ3+3J; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1788848626; c=relaxed/simple;
+	bh=9gpvYZiiK++7fxFQKJTx+k6/ozmAgJ952XedouNhT/o=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=LFIT/UXrob0JS84BXnt3H5O3gCxbWBwVqz2LPamCARkD/uSQl7gderxsZ5lXNgnUNPVm7XfRvoPRB0a9xW73fwosw9Ovw6mPKqD00Ev9vbdA35f2IYOZLWB0k8qw3ZQaesq+3NBKAeB1epWhGrlbKwtHoUM+Q3WyndIhx++RTWc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=o0HMIsTW; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=JVOeiEcD; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="nziJ3+3J"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 912621F00A3A;
-	Tue,  8 Sep 2026 05:52:53 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1788846776;
-	bh=k2bR/c4GM/ySV2j0leXsVuY5uTeC/80l6laMZtJuRbQ=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=nziJ3+3JfY7lyxjfeSUudMYTPbHTYYwxDFA4bDgXcBGa1jIzC42mq+EJJnJTxiBZX
-	 LA4Nh4hxwhFjr870jhsbsbptnpfq93KBOUTUwz8PoqKClveGNpl5WFUo6xkXOnw9uD
-	 YK4QCJ7gLP2hiou95vp/yfg/+c6g5aSSrf9HldYWD8F3EDwi8o2rfc0Gq2nLAKcQ2Q
-	 ZNO2yMpG2Bi+x0YZh1wjq4uN54hYnDgRGtWt6RaSSkL7Iec7+uMVCxNcbu2uFEpfvC
-	 G5wfC1s4Bl2t8TgYCnTst5X0JHBzSqutAIvZ0skdqzf8UsOn5z72KBy+rqM9JyZK1h
-	 pTANfxxjPKneA==
-Date: Tue, 8 Sep 2026 07:52:48 +0200
-From: Manivannan Sadhasivam <mani@kernel.org>
-To: Nabige Aala <nabige.aala@oss.qualcomm.com>
-Cc: Vinod Koul <vkoul@kernel.org>, 
-	Neil Armstrong <neil.armstrong@linaro.org>, linux-arm-msm@vger.kernel.org, linux-phy@lists.infradead.org, 
-	linux-kernel@vger.kernel.org, Ritesh Kumar <ritesh.kumar@oss.qualcomm.com>, 
-	Mahadevan P <mahadevan.p@oss.qualcomm.com>
-Subject: Re: [PATCH v3 4/4] phy: qualcomm: qmp-combo: Rework DP PHY runtime
- configuration
-Message-ID: <3xhkrauvdx6drzoegm3p3jwy7qbvukpo6xcqh7a6c5otqncbtl@esdhdsz47fft>
-References: <20260828-glymur-phy-v3-v3-0-8e73ce7c4636@oss.qualcomm.com>
- <20260828-glymur-phy-v3-v3-4-8e73ce7c4636@oss.qualcomm.com>
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="o0HMIsTW";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="JVOeiEcD"
+Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6886Lq2k2154179
+	for <linux-arm-msm@vger.kernel.org>; Tue, 8 Sep 2026 06:23:44 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=5LkBz/6+6EbGMarTpjWjMr
+	IiSvDbCV1mNMUZslHPIt0=; b=o0HMIsTWgg/AOpgaCl4VuHQB/5sa833g4xyNVa
+	prCMDlvSRJi6jgZ+9peM1zoFVbhv2W8NSjh6DGYQQjkNvyrB08fCzGbM5WUXrD9y
+	HiREqBAC6d83XM4u4Oq3QFTd9JOq8O83uBW2XAuni/Qb5EewsEsFhkLfn55L5dMA
+	ZzOOQVgHG0IfBMccPLa2PC5gwG72S8R3Tg2q7Kgmmh33cYw+AYqmhpq/k7K5HR4r
+	XY2cO1KKstv4baq+CtLhFqDpZvOpYy/xuhv2NSsG4oYYMRQahxfyQoFMft+MfjA/
+	b7UfiNJtj6SwYHhTUJwTbhJ2GkFAVGFT3wAoTX0uzLapsY+Q==
+Received: from mail-pj1-f70.google.com (mail-pj1-f70.google.com [209.85.216.70])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gj1rwhy58-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Tue, 08 Sep 2026 06:23:44 +0000 (GMT)
+Received: by mail-pj1-f70.google.com with SMTP id 98e67ed59e1d1-38e7ff7b375so5297360a91.1
+        for <linux-arm-msm@vger.kernel.org>; Mon, 07 Sep 2026 23:23:44 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1788848623; x=1789453423; darn=vger.kernel.org;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=5LkBz/6+6EbGMarTpjWjMrIiSvDbCV1mNMUZslHPIt0=;
+        b=JVOeiEcD3/zSNbNl7uYA9gyz5J35B/MR6HpFiPU79hEZonwpdkVZaVJmp51zlpqfY+
+         867PhQ2l/NxdK+dKa93ssa8YklCKIrhxzp/DoQfJf4F8Cj9sirPP/iT4kBi1bTBOlRBf
+         DCT+QTeR8YLAuvEvCFY3qDnGMQ8aomBIT3VcU/4Tx+54MOOJ8yZpEqGQOxJpFnUpdspC
+         509cg7Rvz+WZJgRUmc+CB9IInZUkTscKRbiYKK6z2ikbM2CQW71pTEAILPeCIDp9AKvD
+         +wVKah9ALzgrsbZgpAex6m5yFk43arxbu9xndEop8VxpqKYCAYxFR9RPqKgRHfSEeOHp
+         cgvw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1788848623; x=1789453423;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=5LkBz/6+6EbGMarTpjWjMrIiSvDbCV1mNMUZslHPIt0=;
+        b=igLJ+xDyUddecz4kB6Rq3gUMysw+UsTLVVu9OSFPYGu4FqjVrO4rxysr4UECgMBYaZ
+         w8lMUMtBTp2yvsRe8I1/Sz6qrsJyduZqF5lwdic3FXcHblH1LuphqFKVo4+NpAT54tzN
+         h2M+xtS5gSMU8TDTEde398+4w/kTHHsOvvSv6r5hnp1+DbD428ORV0LKgZp5nOMqqG4G
+         +KQhHqPc3pJIXgp4BE1RjxEgPLTY3Kh4gZT/HBuTvcr3+bnUyuRVTmseNhkjtYzr0hih
+         LI+/UymRoCK4gstMjPbf1WdTtSmPsFwGFVG6j07GalOkP60SMwg/PuefUI/cSMOXAG3u
+         h9/A==
+X-Forwarded-Encrypted: i=1; AKwUvBzk8CZzEEPSOKhri7D9gS1gEAAxq+qxGcqC9hyxlk25MJQnD35tnXTfpWdxea0qDwqT2Emf0N3hbB+plAFr@vger.kernel.org
+X-Gm-Message-State: AFuF++kJmTYCqVI7sUuxW1gw5ZEu1sumXJcYZV2F9pHNmJqfmt6qlale
+	zeuSA3m+Igw3R+ZPyo6HnveBvWfbdo/NJKr5r7PJLr3CG80oHKL8y6A5nA3SPH7aSQQ0Mp1/ImJ
+	5gHXLoG0N8oMDDWs3W/vDSALWDLW4oq7ZsFNPYPZ5J/V3Wip5pG/nnVJrbUfN+DSmQwZe
+X-Gm-Gg: AYBFou3taA2ykmXMd30TkuU7B4pt6mwFI0foKtOpedfn+Agd16RmetVKCZLbtSHVWqd
+	YzgOxuqIn+xhJ7ADcZkEXmzm6LXZE2uKDbbARG7xkMQWWY9VX8oL4YHTp3NktxDDODH30ik/n3p
+	Gbhxp4QKSh39eOHG8eMQOv80/autgSCzux/G2DzAHCgkR0XZBBOQmNKrZr8L6vFTCdt9tn5CbS8
+	JzpYmudd32yJf6dag3aZzDhw25m1vGjiuLfg/oGarTkfs5pKwOv4prR87qe8mPHN+9Z1oyYWWxB
+	Ee0Sjd+TbqEunTH8jkKHZT4SjkR0qaSKdiAE77N8DEiSRv8M5izdbYwRRHAJgdWlE5XbF9FvxuJ
+	s/YNPzlr0EgacqtUUKWgSA8/3zowcYQ==
+X-Received: by 2002:a05:6a20:e607:b0:3d3:ae51:181e with SMTP id adf61e73a8af0-3da3a16ab56mr42582347637.26.1788848623186;
+        Mon, 07 Sep 2026 23:23:43 -0700 (PDT)
+X-Received: by 2002:a05:6a20:e607:b0:3d3:ae51:181e with SMTP id adf61e73a8af0-3da3a16ab56mr42582205637.26.1788848622316;
+        Mon, 07 Sep 2026 23:23:42 -0700 (PDT)
+Received: from hu-mohdayaa-hyd.qualcomm.com ([202.46.23.25])
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-14332405e92sm26266297c88.8.2026.09.07.23.23.36
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 07 Sep 2026 23:23:41 -0700 (PDT)
+From: Mohd Ayaan Anwar <mohd.anwar@oss.qualcomm.com>
+Subject: [PATCH PRELIMINARY 0/5] arm64: dts: qcom: shikra: add Ethernet
+ support
+Date: Tue, 08 Sep 2026 11:53:29 +0530
+Message-Id: <20260908-shikra_ethernet_dts-v1-0-69c0c5c7c124@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <20260828-glymur-phy-v3-v3-4-8e73ce7c4636@oss.qualcomm.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAOGpn2oC/13NzWrDMBAE4Fcxe65gLTmW5FsPOQTaUnIrIQRJn
+ saixGklNRRC3j3ODzn0OMzsfkfKSBGZuupICYeY436cQv1UURjcuIWI/ZRJsmzZshF5iF/JbVA
+ GpBFl05csmLWGaXRvLdN0+Z3wGf+uX1f0vpy/LF4Xb8/LD1rfyoSf30kq98UD6qo7o/4zwkF7Y
+ AbDDbqDvCjeZYiw3+1i6SrNjQwm1FZh1reqqa3xOui29V45roOBAhiS1qfTGfdTAav1AAAA
+X-Change-ID: 20260908-shikra_ethernet_dts-0077e847d990
+To: Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>,
+        Komal Bajaj <komal.bajaj@oss.qualcomm.com>,
+        Anurag Pateriya <apateriy@qti.qualcomm.com>,
+        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+        Richard Cochran <richardcochran@gmail.com>,
+        Andrew Lunn <andrew+netdev@lunn.ch>,
+        Maxime Chevallier <maxime.chevallier@bootlin.com>
+Cc: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+        linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
+        linux-kernel@vger.kernel.org, netdev@vger.kernel.org,
+        Mohd Ayaan Anwar <mohd.anwar@oss.qualcomm.com>
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1788848616; l=2801;
+ i=mohd.anwar@oss.qualcomm.com; s=20250907; h=from:subject:message-id;
+ bh=9gpvYZiiK++7fxFQKJTx+k6/ozmAgJ952XedouNhT/o=;
+ b=BWNdle9xwzgMQXU+Fng3OrQQKVZCffhPMemmrtLubzjbmjkz1Qo9DHZLLqp+1B7NDbw1dJ/c6
+ Feg3lLCRwFQAYAmzRzDFnUFWV/RhMGTbsx0iWkLz4EqTDUTslssilHA
+X-Developer-Key: i=mohd.anwar@oss.qualcomm.com; a=ed25519;
+ pk=7JNY72mz7r6hQstsamPYlUbLhQ5+W64pY4LgfSh9DJU=
+X-Authority-Analysis: v=2.4 cv=Ga8nWwXL c=1 sm=1 tr=0 ts=6a9fa9f0 cx=c_pps
+ a=0uOsjrqzRL749jD1oC5vDA==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
+ a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
+ a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=EtmUyxdyGpvgt5L2qVsA:9 a=QEXdDO2ut3YA:10
+ a=mQ_c8vxmzFEMiUWkPHU9:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTA4MDA2OCBTYWx0ZWRfXxpkij701W3lV
+ +97vGax5jcr1pQavEhoQc1GxpNIUlJEmcGkAS4kU7oMTMzaj0bTIvW/q846lkyWuSlPXzNz0bTi
+ 0EtL7tZNjqawAeBiyzQ8NHmD0G5xnjU/Jnsk3mhCV2DEiQxGmR4Gf0TUYyG5qwkIIxGp3CkGDEB
+ 4oBS99J6LjXUTxi91I5tUfJxiZlDV8Ggh7hQSJ/M/tAAaNZULXpZYQoUF73sutW6+PvfTB1bdZB
+ jWtOTJ/lZMPVh7gjAEX74KwC/BtvNVtLV+MXUN8dZqa6KDSnQShC3FasSJU/47Av5mZwuJGvujV
+ QW6Hu3RBxmxH1WJD3oVJn3RO20GkFMmmIpxk+M7zDYVGNxQtaaPgrqKU+GrcMpcMkAwvpHoOmfA
+ YUYfaNP04WiCb1pmKqu9Lfa7Hlp8s1OZFVhkrnTmonE4Vy8QvzB9bnbBSQepu5GRbR0iAfcqu9Q
+ x9DzCulSkYE1t/rueUg==
+X-Proofpoint-ORIG-GUID: zlzHVjWc6wsoZ69fDEUAASLDhqpHsRNj
+X-Proofpoint-GUID: zlzHVjWc6wsoZ69fDEUAASLDhqpHsRNj
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTA4MDA2OCBTYWx0ZWRfX17Elu0YDQNS4
+ LURUpuIOwbrpyKiTVqUNJwyNK4mH54hDXprxXi/z/wB6B+fkcQrvXqkOhBn3XmIUnBND075kPyq
+ y6ExU5e+AjcDfwbMgL00nXNrLr0vIN8=
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-09-08_01,2026-09-07_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ malwarescore=0 phishscore=0 suspectscore=0 clxscore=1015 impostorscore=0
+ bulkscore=0 spamscore=0 lowpriorityscore=0 priorityscore=1501 adultscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2609080068
 
-On Fri, Aug 28, 2026 at 03:13:16PM +0530, Nabige Aala wrote:
-> From: Ritesh Kumar <ritesh.kumar@oss.qualcomm.com>
-> 
-> Rework the DP PHY runtime configuration by:
-> - Extracting common DP PHY initialization sequence into
->   qmp_combo_configure_dp_phy_common() function that is shared
->   between qmp_v456_configure_dp_phy() and qmp_v8_configure_dp_phy()
-> - Adding dp_aux_cfg2 field to qmp_phy_cfg structure to store the
->   hardware-specific AUX_CFG2 register value
-> - Defining named constants (QSERDES_DP_PHY_AUX_CFG2_V456 and
->   QSERDES_DP_PHY_AUX_CFG2_V8) for better code readability
->   and maintainability
-> - Adding validation check to ensure dp_aux_cfg2 is properly
->   configured for all hardware variants
-> - Updating qmp_v8_dp_aux_init() with corrected power-down control and
->   bias enable settings
-> - Modifying qmp_v8_configure_dp_clocks() to add VCO divider programming
->   and update auxless/LFPS timing parameters
-> - Refining qmp_v8_configure_dp_phy() with updated driver enable values,
->   TSYNC override sequence, and additional status checks for proper
->   PHY lock verification
-> 
+Hi,
 
-This summary makes it clear that you've clubbed multiple fixes in a single
-patch. Please split them logically.
+This preliminary series adds the DTS changes required to enable
+Ethernet on the Qualcomm Shikra CQM, CQS, and IQS EVKs.
 
-> Signed-off-by: Ritesh Kumar <ritesh.kumar@oss.qualcomm.com>
-> Signed-off-by: Mahadevan P <mahadevan.p@oss.qualcomm.com>
-> Signed-off-by: Nabige Aala <nabige.aala@oss.qualcomm.com>
-> ---
->  drivers/phy/qualcomm/phy-qcom-qmp-combo.c | 185 +++++++++++++++++++-----------
->  1 file changed, 118 insertions(+), 67 deletions(-)
-> 
-> diff --git a/drivers/phy/qualcomm/phy-qcom-qmp-combo.c b/drivers/phy/qualcomm/phy-qcom-qmp-combo.c
-> index 16ccabd945f7..5630627dc85e 100644
-> --- a/drivers/phy/qualcomm/phy-qcom-qmp-combo.c
-> +++ b/drivers/phy/qualcomm/phy-qcom-qmp-combo.c
-> @@ -2478,6 +2478,10 @@ static const struct qmp_combo_lane_mapping dp_data_lanes[] = {
->  
->  struct qmp_combo;
->  
-> +/* DP PHY AUX_CFG2 register values for different hardware versions */
-> +#define QSERDES_DP_PHY_AUX_CFG2_V456		0xa4
-> +#define QSERDES_DP_PHY_AUX_CFG2_V8		0x06
-> +
->  struct qmp_combo_offsets {
->  	u16 com;
->  	u16 txa;
-> @@ -2541,6 +2545,9 @@ struct qmp_phy_cfg {
->  	int (*calibrate_dp_phy)(struct qmp_combo *qmp);
->  	void (*dp_aux_init)(struct qmp_combo *qmp);
->  
-> +	/* DP PHY AUX_CFG2 register value (hardware-specific) */
-> +	unsigned int dp_aux_cfg2;
-> +
->  	/* resets to be requested */
->  	const char * const *reset_list;
->  	int num_resets;
-> @@ -2780,6 +2787,7 @@ static const struct qmp_phy_cfg sar2130p_usb3dpphy_cfg = {
->  	.configure_dp_tx	= qmp_v4_configure_dp_tx,
->  	.configure_dp_clocks	= qmp_v3_configure_dp_clocks,
->  	.configure_dp_phy	= qmp_v4_configure_dp_phy,
-> +	.dp_aux_cfg2		= QSERDES_DP_PHY_AUX_CFG2_V456,
->  
->  	.regs			= qmp_v6_usb3phy_regs_layout,
->  	.reset_list		= msm8996_usb3phy_reset_l,
-> @@ -2916,6 +2924,7 @@ static const struct qmp_phy_cfg sc8180x_usb3dpphy_cfg = {
->  	.configure_dp_tx	= qmp_v4_configure_dp_tx,
->  	.configure_dp_clocks	= qmp_v3_configure_dp_clocks,
->  	.configure_dp_phy	= qmp_v4_configure_dp_phy,
-> +	.dp_aux_cfg2		= QSERDES_DP_PHY_AUX_CFG2_V456,
->  
->  	.reset_list		= msm8996_usb3phy_reset_l,
->  	.num_resets		= ARRAY_SIZE(msm8996_usb3phy_reset_l),
-> @@ -2962,6 +2971,7 @@ static const struct qmp_phy_cfg sc8280xp_usb43dpphy_cfg = {
->  	.configure_dp_tx	= qmp_v4_configure_dp_tx,
->  	.configure_dp_clocks	= qmp_v3_configure_dp_clocks,
->  	.configure_dp_phy	= qmp_v4_configure_dp_phy,
-> +	.dp_aux_cfg2		= QSERDES_DP_PHY_AUX_CFG2_V456,
->  
->  	.reset_list		= msm8996_usb3phy_reset_l,
->  	.num_resets		= ARRAY_SIZE(msm8996_usb3phy_reset_l),
-> @@ -3007,6 +3017,7 @@ static const struct qmp_phy_cfg x1e80100_usb3dpphy_cfg = {
->  	.configure_dp_tx	= qmp_v4_configure_dp_tx,
->  	.configure_dp_clocks	= qmp_v3_configure_dp_clocks,
->  	.configure_dp_phy	= qmp_v4_configure_dp_phy,
-> +	.dp_aux_cfg2		= QSERDES_DP_PHY_AUX_CFG2_V456,
->  
->  	.reset_list		= msm8996_usb3phy_reset_l,
->  	.num_resets		= ARRAY_SIZE(msm8996_usb3phy_reset_l),
-> @@ -3116,6 +3127,7 @@ static const struct qmp_phy_cfg sm8250_usb3dpphy_cfg = {
->  	.configure_dp_tx	= qmp_v4_configure_dp_tx,
->  	.configure_dp_clocks	= qmp_v3_configure_dp_clocks,
->  	.configure_dp_phy	= qmp_v4_configure_dp_phy,
-> +	.dp_aux_cfg2		= QSERDES_DP_PHY_AUX_CFG2_V456,
->  
->  	.reset_list		= msm8996_usb3phy_reset_l,
->  	.num_resets		= ARRAY_SIZE(msm8996_usb3phy_reset_l),
-> @@ -3164,6 +3176,7 @@ static const struct qmp_phy_cfg sm8350_usb3dpphy_cfg = {
->  	.configure_dp_tx	= qmp_v4_configure_dp_tx,
->  	.configure_dp_clocks	= qmp_v3_configure_dp_clocks,
->  	.configure_dp_phy	= qmp_v4_configure_dp_phy,
-> +	.dp_aux_cfg2		= QSERDES_DP_PHY_AUX_CFG2_V456,
->  
->  	.reset_list		= msm8996_usb3phy_reset_l,
->  	.num_resets		= ARRAY_SIZE(msm8996_usb3phy_reset_l),
-> @@ -3211,6 +3224,7 @@ static const struct qmp_phy_cfg sm8475_usb3dpphy_cfg = {
->  	.configure_dp_tx	= qmp_v4_configure_dp_tx,
->  	.configure_dp_clocks	= qmp_v3_configure_dp_clocks,
->  	.configure_dp_phy	= qmp_v4_configure_dp_phy,
-> +	.dp_aux_cfg2		= QSERDES_DP_PHY_AUX_CFG2_V456,
->  
->  	.regs			= qmp_v6_usb3phy_regs_layout,
->  	.reset_list		= msm8996_usb3phy_reset_l,
-> @@ -3256,6 +3270,7 @@ static const struct qmp_phy_cfg sm8550_usb3dpphy_cfg = {
->  	.configure_dp_tx	= qmp_v4_configure_dp_tx,
->  	.configure_dp_clocks	= qmp_v3_configure_dp_clocks,
->  	.configure_dp_phy	= qmp_v4_configure_dp_phy,
-> +	.dp_aux_cfg2		= QSERDES_DP_PHY_AUX_CFG2_V456,
->  
->  	.regs			= qmp_v6_usb3phy_regs_layout,
->  	.reset_list		= msm8996_usb3phy_reset_l,
-> @@ -3301,6 +3316,7 @@ static const struct qmp_phy_cfg sm8650_usb3dpphy_cfg = {
->  	.configure_dp_tx	= qmp_v4_configure_dp_tx,
->  	.configure_dp_clocks	= qmp_v3_configure_dp_clocks,
->  	.configure_dp_phy	= qmp_v4_configure_dp_phy,
-> +	.dp_aux_cfg2		= QSERDES_DP_PHY_AUX_CFG2_V456,
->  
->  	.regs			= qmp_v6_usb3phy_regs_layout,
->  	.reset_list		= msm8996_usb3phy_reset_l,
-> @@ -3346,6 +3362,7 @@ static const struct qmp_phy_cfg sm8750_usb3dpphy_cfg = {
->  	.configure_dp_tx	= qmp_v4_configure_dp_tx,
->  	.configure_dp_clocks	= qmp_v3_configure_dp_clocks,
->  	.configure_dp_phy	= qmp_v4_configure_dp_phy,
-> +	.dp_aux_cfg2		= QSERDES_DP_PHY_AUX_CFG2_V456,
->  
->  	.regs			= qmp_v8_usb3phy_regs_layout,
->  	.reset_list		= msm8996_usb3phy_reset_l,
-> @@ -3392,6 +3409,8 @@ static const struct qmp_phy_cfg glymur_usb3dpphy_cfg = {
->  	.configure_dp_clocks	= qmp_v8_configure_dp_clocks,
->  	.configure_dp_phy	= qmp_v8_configure_dp_phy,
->  
-> +	.dp_aux_cfg2		= QSERDES_DP_PHY_AUX_CFG2_V8,
-> +
->  	.regs			= qmp_v8_n3_usb43dpphy_regs_layout,
->  	.reset_list		= msm8996_usb3phy_reset_l,
->  	.num_resets		= ARRAY_SIZE(msm8996_usb3phy_reset_l),
-> @@ -3693,16 +3712,75 @@ static void qmp_v4_dp_aux_init(struct qmp_combo *qmp)
->  	       qmp->dp_dp_phy + QSERDES_V4_DP_PHY_AUX_INTERRUPT_MASK);
->  }
->  
-> +static int qmp_combo_configure_dp_phy_common(struct qmp_combo *qmp)
-> +{
-> +	const struct qmp_phy_cfg *cfg = qmp->cfg;
-> +	u32 status;
-> +	int ret;
-> +
-> +	if (!cfg->dp_aux_cfg2) {
-> +		dev_err(qmp->dev, "DP AUX CFG2 value not configured\n");
-> +		return -EINVAL;
-> +	}
-> +
-> +	writel(0x0f, qmp->dp_dp_phy + QSERDES_DP_PHY_CFG_1);
+It adds the two Shikra EMAC controller nodes, enables the first
+Ethernet port on the CQM and CQS EVKs, enables both ports on the IQS
+EVK, describes the DP83867 PHYs and their GPIO-controlled 2.5 V
+supplies, and fixes an incorrect GPIO reservation on the IQS SoM.
 
-Is it possible to add definitions for these magic values?
+This series is functionally dependent on the driver and binding changes
+posted here:
 
-> +
-> +	qmp_combo_configure_dp_mode(qmp);
-> +
-> +	writel(0x13, qmp->dp_dp_phy + QSERDES_DP_PHY_AUX_CFG1);
-> +	writel(cfg->dp_aux_cfg2, qmp->dp_dp_phy + QSERDES_DP_PHY_AUX_CFG2);
-> +
-> +	writel(0x05, qmp->dp_dp_phy + QSERDES_V4_DP_PHY_TX0_TX1_LANE_CTL);
-> +	writel(0x05, qmp->dp_dp_phy + QSERDES_V4_DP_PHY_TX2_TX3_LANE_CTL);
-> +
-> +	ret = qmp->cfg->configure_dp_clocks(qmp);
-> +	if (ret)
-> +		return ret;
-> +
-> +	writel(0x01, qmp->dp_dp_phy + QSERDES_DP_PHY_CFG);
-> +	writel(0x05, qmp->dp_dp_phy + QSERDES_DP_PHY_CFG);
-> +	writel(0x01, qmp->dp_dp_phy + QSERDES_DP_PHY_CFG);
-> +	writel(0x09, qmp->dp_dp_phy + QSERDES_DP_PHY_CFG);
-> +
-> +	writel(0x20, qmp->dp_serdes + cfg->regs[QPHY_COM_RESETSM_CNTRL]);
-> +
-> +	if (readl_poll_timeout(qmp->dp_serdes + cfg->regs[QPHY_COM_C_READY_STATUS],
-> +			status,
-> +			((status & BIT(0)) > 0),
-> +			500,
-> +			10000))
-> +		return -ETIMEDOUT;
+https://lore.kernel.org/netdev/20260908-shikra_ethernet-v2-0-bbe3389d0652@oss.qualcomm.com/
 
-readl_poll_timeout() will return -ETIMEDOUT upon timeout.
+I am hoping that a preliminary DTS series makes the review of the
+driver, dt-bindings, and board-description changes easier.
 
-> +
-> +	if (readl_poll_timeout(qmp->dp_serdes + cfg->regs[QPHY_COM_CMN_STATUS],
-> +			status,
-> +			((status & BIT(0)) > 0),
-> +			500,
-> +			10000))
-> +		return -ETIMEDOUT;
-> +
-> +	if (readl_poll_timeout(qmp->dp_serdes + cfg->regs[QPHY_COM_CMN_STATUS],
-> +			status,
-> +			((status & BIT(1)) > 0),
-> +			500,
-> +			10000))
-> +		return -ETIMEDOUT;
-> +
-> +	return 0;
-> +}
-> +
->  static void qmp_v8_dp_aux_init(struct qmp_combo *qmp)
->  {
->  	const struct qmp_phy_cfg *cfg = qmp->cfg;
->  
-> -	writel(DP_PHY_PD_CTL_PWRDN | DP_PHY_PD_CTL_PSR_PWRDN | DP_PHY_PD_CTL_AUX_PWRDN |
-> -	       DP_PHY_PD_CTL_PLL_PWRDN | DP_PHY_PD_CTL_DP_CLAMP_EN,
-> -	       qmp->dp_dp_phy + QSERDES_DP_PHY_PD_CTL);
-> +	writel(0x3f, qmp->dp_serdes + QSERDES_V8_USB43_COM_CLK_FWD_CONFIG_1);
-> +
-> +	writel(DP_PHY_PD_CTL_PWRDN | DP_PHY_PD_CTL_AUX_PWRDN |
-> +			DP_PHY_PD_CTL_LANE_0_1_PWRDN | DP_PHY_PD_CTL_LANE_2_3_PWRDN |
-> +			DP_PHY_PD_CTL_PLL_PWRDN | DP_PHY_PD_CTL_DP_CLAMP_EN,
-> +			qmp->dp_dp_phy + QSERDES_DP_PHY_PD_CTL);
->  
->  	/* Turn on BIAS current for PHY/PLL */
-> -	writel(0x1c, qmp->dp_serdes + cfg->regs[QPHY_COM_BIAS_EN_CLKBUFLR_EN]);
-> +	writel(0x17, qmp->dp_serdes + cfg->regs[QPHY_COM_BIAS_EN_CLKBUFLR_EN]);
+Changes since RFC:
+  - Model the PHY supplies as fixed regulators controlled by the PHY
+    driver -- Konrad, Andrew.
+  - Add the IQS GPIO reservation fix as the first patch -- Krzysztof.
+  - Move the Ethernet pinctrl default states to shikra.dtsi -- Konrad.
+  - Resolve property-ordering issues and add missing final newlines --
+    Konrad.
+  - Link to RFC: https://lore.kernel.org/netdev/20260612-shikra_ethernet-v1-0-f0f4a1d19929@oss.qualcomm.com/
 
-These regval changes are supposed to be in a separate patch with proper Fixes
-tag.
+Signed-off-by: Mohd Ayaan Anwar <mohd.anwar@oss.qualcomm.com>
+---
+Mohd Ayaan Anwar (5):
+      arm64: dts: qcom: shikra-iqs-som: fix GPIO138 reservation
+      arm64: dts: qcom: shikra: add ethernet nodes
+      arm64: dts: qcom: shikra-cqm-evk: enable the first Ethernet port
+      arm64: dts: qcom: shikra-cqs-evk: enable the first Ethernet port
+      arm64: dts: qcom: shikra-iqs-evk: enable both Ethernet ports
 
->  
->  	writel(0x00, qmp->dp_dp_phy + QSERDES_DP_PHY_AUX_CFG0);
->  	writel(0x13, qmp->dp_dp_phy + QSERDES_DP_PHY_AUX_CFG1);
-> @@ -3729,8 +3807,8 @@ static void qmp_v4_configure_dp_tx(struct qmp_combo *qmp)
->  	writel(0x27, qmp->dp_tx + cfg->regs[QPHY_TX_TX_DRV_LVL]);
->  	writel(0x27, qmp->dp_tx2 + cfg->regs[QPHY_TX_TX_DRV_LVL]);
->  
-> -	writel(0x20, qmp->dp_tx + cfg->regs[QPHY_TX_TX_EMP_POST1_LVL]);
-> -	writel(0x20, qmp->dp_tx2 + cfg->regs[QPHY_TX_TX_EMP_POST1_LVL]);
-> +	writel(0x2b, qmp->dp_tx + cfg->regs[QPHY_TX_TX_EMP_POST1_LVL]);
-> +	writel(0x2b, qmp->dp_tx2 + cfg->regs[QPHY_TX_TX_EMP_POST1_LVL]);
->  
->  	qmp_combo_configure_dp_swing(qmp);
->  }
-> @@ -3738,48 +3816,41 @@ static void qmp_v4_configure_dp_tx(struct qmp_combo *qmp)
->  static int qmp_v8_configure_dp_clocks(struct qmp_combo *qmp)
->  {
->  	const struct phy_configure_opts_dp *dp_opts = &qmp->dp_opts;
-> -	u32 phy_vco_div;
->  	unsigned long pixel_freq;
-> -	const struct qmp_phy_cfg *cfg = qmp->cfg;
->  
->  	switch (dp_opts->link_rate) {
->  	case 1620:
-> -		phy_vco_div = 0x4;
->  		pixel_freq = 1620000000UL / 2;
->  		break;
->  	case 2700:
-> -		phy_vco_div = 0x2;
->  		pixel_freq = 2700000000UL / 2;
->  		break;
->  	case 5400:
-> -		phy_vco_div = 0x4;
->  		pixel_freq = 5400000000UL / 4;
->  		break;
->  	case 8100:
-> -		phy_vco_div = 0x3;
->  		pixel_freq = 8100000000UL / 6;
->  		break;
->  	default:
->  		/* Other link rates aren't supported */
->  		return -EINVAL;
->  	}
-> -	writel(phy_vco_div, qmp->dp_dp_phy + cfg->regs[QPHY_DP_PHY_VCO_DIV]);
->  
->  	/* disable core reset tsync */
->  	writel(0x09, qmp->dp_dp_phy + QSERDES_DP_PHY_CFG);
->  
-> -	writel(0x04, qmp->dp_dp_phy + QSERDES_V8_DP_PHY_AUXLESS_SETUP_CYC);
-> -	writel(0x08, qmp->dp_dp_phy + QSERDES_V8_DP_PHY_AUXLESS_SILENCE_CYC);
-> +	writel(0x09, qmp->dp_dp_phy + QSERDES_V8_DP_PHY_AUXLESS_SETUP_CYC);
-> +	writel(0x11, qmp->dp_dp_phy + QSERDES_V8_DP_PHY_AUXLESS_SILENCE_CYC);
->  	writel(0x08, qmp->dp_dp_phy + QSERDES_V8_DP_PHY_LFPS_CYC);
-> -	writel(0x11, qmp->dp_dp_phy + QSERDES_V8_DP_PHY_LFPS_PERIOD);
-> +	writel(0x33, qmp->dp_dp_phy + QSERDES_V8_DP_PHY_LFPS_PERIOD);
->  
->  	writel(0x3e, qmp->dp_dp_phy + QSERDES_V8_DP_PHY_TSYNC_OVRD);
->  	writel(0x05, qmp->dp_dp_phy + QSERDES_V8_DP_PHY_TX2_TX3_LANE_CTL);
->  	writel(0x05, qmp->dp_dp_phy + QSERDES_V8_DP_PHY_TX0_TX1_LANE_CTL);
->  	writel(0x01, qmp->dp_dp_phy + QSERDES_V8_DP_PHY_AUXLESS_CFG1);
-> -	writel(0x11, qmp->dp_dp_phy + QSERDES_V8_DP_PHY_LFPS_PERIOD);
-> +	writel(0x33, qmp->dp_dp_phy + QSERDES_V8_DP_PHY_LFPS_PERIOD);
->  	writel(0x1f, qmp->dp_dp_phy + QSERDES_V8_DP_PHY_LN0_DRV_LVL);
-> -	writel(0x1f, qmp->dp_dp_phy + QSERDES_V8_DP_PHY_LN1_DRV_LVL);
-> +	writel(0x02, qmp->dp_dp_phy + QSERDES_V8_DP_PHY_LN1_DRV_LVL);
->  
->  	clk_set_rate(qmp->dp_link_hw.clk, dp_opts->link_rate * 100000);
->  	clk_set_rate(qmp->dp_pixel_hw.clk, pixel_freq);
-> @@ -3793,48 +3864,10 @@ static int qmp_v456_configure_dp_phy(struct qmp_combo *qmp)
->  	u32 status;
->  	int ret;
->  
-> -	writel(0x0f, qmp->dp_dp_phy + QSERDES_DP_PHY_CFG_1);
-> -
-> -	qmp_combo_configure_dp_mode(qmp);
-> -
-> -	writel(0x13, qmp->dp_dp_phy + QSERDES_DP_PHY_AUX_CFG1);
-> -	writel(0xa4, qmp->dp_dp_phy + QSERDES_DP_PHY_AUX_CFG2);
-> -
-> -	writel(0x05, qmp->dp_dp_phy + QSERDES_V4_DP_PHY_TX0_TX1_LANE_CTL);
-> -	writel(0x05, qmp->dp_dp_phy + QSERDES_V4_DP_PHY_TX2_TX3_LANE_CTL);
-> -
-> -	ret = qmp->cfg->configure_dp_clocks(qmp);
-> +	ret = qmp_combo_configure_dp_phy_common(qmp);
->  	if (ret)
->  		return ret;
->  
-> -	writel(0x01, qmp->dp_dp_phy + QSERDES_DP_PHY_CFG);
-> -	writel(0x05, qmp->dp_dp_phy + QSERDES_DP_PHY_CFG);
-> -	writel(0x01, qmp->dp_dp_phy + QSERDES_DP_PHY_CFG);
-> -	writel(0x09, qmp->dp_dp_phy + QSERDES_DP_PHY_CFG);
-> -
-> -	writel(0x20, qmp->dp_serdes + cfg->regs[QPHY_COM_RESETSM_CNTRL]);
-> -
-> -	if (readl_poll_timeout(qmp->dp_serdes + cfg->regs[QPHY_COM_C_READY_STATUS],
-> -			status,
-> -			((status & BIT(0)) > 0),
-> -			500,
-> -			10000))
-> -		return -ETIMEDOUT;
-> -
-> -	if (readl_poll_timeout(qmp->dp_serdes + cfg->regs[QPHY_COM_CMN_STATUS],
-> -			status,
-> -			((status & BIT(0)) > 0),
-> -			500,
-> -			10000))
-> -		return -ETIMEDOUT;
-> -
-> -	if (readl_poll_timeout(qmp->dp_serdes + cfg->regs[QPHY_COM_CMN_STATUS],
-> -			status,
-> -			((status & BIT(1)) > 0),
-> -			500,
-> -			10000))
-> -		return -ETIMEDOUT;
-> -
->  	writel(0x19, qmp->dp_dp_phy + QSERDES_DP_PHY_CFG);
->  
->  	if (readl_poll_timeout(qmp->dp_dp_phy + cfg->regs[QPHY_DP_PHY_STATUS],
-> @@ -3926,7 +3959,7 @@ static int qmp_v8_configure_dp_phy(struct qmp_combo *qmp)
->  	u32 status;
->  	int ret;
->  
-> -	ret = qmp_v456_configure_dp_phy(qmp);
-> +	ret = qmp_combo_configure_dp_phy_common(qmp);
->  	if (ret < 0)
->  		return ret;
->  
-> @@ -3938,13 +3971,13 @@ static int qmp_v8_configure_dp_phy(struct qmp_combo *qmp)
->  	} else if (dp_opts->lanes == 2) {
->  		bias0_en = reverse ? 0x3f : 0x15;
->  		bias1_en = reverse ? 0x15 : 0x3f;
-> -		drvr0_en = 0x10;
-> -		drvr1_en = 0x10;
-> +		drvr0_en = 0x30;
-> +		drvr1_en = 0x30;
->  	} else {
->  		bias0_en = 0x3f;
->  		bias1_en = 0x3f;
-> -		drvr0_en = 0x34;
-> -		drvr1_en = 0x34;
-> +		drvr0_en = 0x30;
-> +		drvr1_en = 0x30;
->  	}
->  
->  	writel(drvr0_en, qmp->dp_tx + cfg->regs[QPHY_TX_HIGHZ_DRVR_EN]);
-> @@ -3952,6 +3985,15 @@ static int qmp_v8_configure_dp_phy(struct qmp_combo *qmp)
->  	writel(drvr1_en, qmp->dp_tx2 + cfg->regs[QPHY_TX_HIGHZ_DRVR_EN]);
->  	writel(bias1_en, qmp->dp_tx2 + cfg->regs[QPHY_TX_TRANSCEIVER_BIAS_EN]);
->  
-> +	writel(0x03, qmp->dp_dp_phy + QSERDES_V8_DP_PHY_TSYNC_OVRD);
-> +	writel(0x23, qmp->dp_dp_phy + QSERDES_V8_DP_PHY_TSYNC_OVRD);
-> +	writel(0x22, qmp->dp_dp_phy + QSERDES_V8_DP_PHY_TSYNC_OVRD);
-> +
-> +	writel(0x0a, qmp->dp_tx + QSERDES_V8_LALB_RESET_TSYNC_EN_CTRL);
-> +	writel(0x0a, qmp->dp_tx2 + QSERDES_V8_LALB_RESET_TSYNC_EN_CTRL);
-> +
-> +	writel(0x3e, qmp->dp_dp_phy + QSERDES_V8_DP_PHY_TSYNC_OVRD);
-> +
->  	writel(0x08, qmp->dp_dp_phy + QSERDES_DP_PHY_CFG);
->  	udelay(100);
->  	writel(0x09, qmp->dp_dp_phy + QSERDES_DP_PHY_CFG);
-> @@ -3959,16 +4001,25 @@ static int qmp_v8_configure_dp_phy(struct qmp_combo *qmp)
->  
->  	if (readl_poll_timeout(qmp->dp_dp_phy + cfg->regs[QPHY_DP_PHY_STATUS],
->  			status,
-> -			((status & BIT(1)) > 0),
-> +			((status & BIT(0)) > 0),
+ arch/arm64/boot/dts/qcom/shikra-cqm-evk.dts  |  46 +++++
+ arch/arm64/boot/dts/qcom/shikra-cqs-evk.dts  |  46 +++++
+ arch/arm64/boot/dts/qcom/shikra-iqs-evk.dts  |  90 +++++++++
+ arch/arm64/boot/dts/qcom/shikra-iqs-som.dtsi |   2 +-
+ arch/arm64/boot/dts/qcom/shikra.dtsi         | 266 +++++++++++++++++++++++++++
+ 5 files changed, 449 insertions(+), 1 deletion(-)
+---
+base-commit: 7042c8c193e5d634198b7c766bb3a01c8e3ee0e2
+change-id: 20260908-shikra_ethernet_dts-0077e847d990
+prerequisite-change-id: 20260903-shikra_ethernet-ae7bee5e804e:v2
+prerequisite-patch-id: 218773849d643c66166408f849566323f3d466c2
+prerequisite-patch-id: 8973e6e7fa7b09e09705913a37035c1bff8ad385
+prerequisite-patch-id: 6686a8aef5f4f729892d0b3ce2e75816fe874f82
+prerequisite-patch-id: 2ba77f9b01c8bf2f22589361e005805c28353f6e
+prerequisite-patch-id: bf25cc81677cccb0740f26a4fb3ed8fdd2e240d8
+prerequisite-patch-id: 5333cc3ebc07361084298168344d230b234e8795
+prerequisite-patch-id: c1ef6e429b44f3227554e8c50cc2dc9baaa54cb7
+prerequisite-patch-id: 0b2817da8c502234bf2867f9985f488389c519fa
+prerequisite-patch-id: f5716827eca798a78fea6a40b3097e52c14c1e81
 
-Wow, isn't this a critical fix?
-
-- Mani
-
+Best regards,
 -- 
-மணிவண்ணன் சதாசிவம்
+Mohd Ayaan Anwar <mohd.anwar@oss.qualcomm.com>
+
