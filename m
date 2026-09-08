@@ -1,180 +1,319 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from lahtoruutu.iki.fi (lahtoruutu.iki.fi [185.185.170.37])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6EA8051356F
-	for <linux-arm-msm@vger.kernel.org>; Tue,  8 Sep 2026 09:31:45 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788859906; cv=none; b=BvB4nt59YuRoCyrnKjLZunK1ENQ08zSPYaUq5L3WhA+34092ZYapPkV6fVFBtfrbmJCAI3DKQN4w2qHDZyjzFqQ5MbHF76PAJJ0xvnXGKWMUJsKsf27XrNwQkzpe9JLJQnie+9Qn1s/9RciKcuiHLu1OqPh8UxVFj+EbCi9+NRA=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788859906; c=relaxed/simple;
-	bh=NtWIdZwWcBMt/vTHkLK/bNAMKB0wwpukukTBna3f/Oo=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=STUP8w/w4Oe48lOaTO9b11AqfUgSB+XqAWH5LRqVOuZhds0qiKn2XdgRS3Y/8dp3sLPCBfsXtyfuu4G+VcrauetGWu1Dc8r4Sr6I/NYMGeKC7/YLyak78pCiiKfJ9AvJbzhc+g+4CVMLzeAoeFQ/Vz6Ye+9MGX0T28axAfpFqgg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=eGwJ8llX; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=Hn9abTrm; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BD00D525A93;
+	Tue,  8 Sep 2026 09:32:27 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=185.185.170.37
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1788859950; cv=pass; b=HswWLNGjBX2ecdKXEAQRIGBf4TW2df0i7shvOWbolonk5JfYOF9e8Wl2oOzaNveK6Wh7hCrAwXDyWCOK88PG5V9bz0Y3KdF27jQP3RirjN+JPyx8IdmBaaGI7UYdb+I3OeRE3V909PjEN/hAVzAh792Xm6tEcJCN0Z3etfhYuzQ=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1788859950; c=relaxed/simple;
+	bh=e/tS4IYaWTz6b0JHLBGP9RajnWOLNurMfYyouhZ7WY4=;
+	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=a1+xH6Y/AQOn4o5AgJ5wNKdyXjgvejhkkSipJKNKJ5w43pFyxrxvyRwfL6UOu+eYBDX/6LgebnGZ/yuiEhKLIvooUxuqWvl3qvQuV5Q6A3INf815P1OA2WvROPNkG+4YhTdCaoIw9tTyrQ0GLp8IwnfPF7sNZk7I8rMTajpjkY8=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=iki.fi; spf=pass smtp.mailfrom=iki.fi; dkim=pass (2048-bit key) header.d=iki.fi header.i=@iki.fi header.b=sLXcsBUT; arc=pass smtp.client-ip=185.185.170.37
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=iki.fi
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=iki.fi
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="eGwJ8llX";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Hn9abTrm"
-Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6889MtT53121254
-	for <linux-arm-msm@vger.kernel.org>; Tue, 8 Sep 2026 09:31:44 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-type:date:from:in-reply-to:message-id:mime-version
-	:references:subject:to; s=qcppdkim1; bh=pFQuRhixWFDDoRatZnflwom3
-	l9EKIkxU8GYrNZNTb/A=; b=eGwJ8llXiMuCqx3KHD8pVIrj1nhM4g13dzAKg9v9
-	GLK0xeHqgc551xVatJtTI5IOplramD5HkVvlljigI1z96VwZDSkQmokw+dMpz+aS
-	CKqEg6f5dcXc62tEofYxdzUPD9pPMPo6nYRuglWDTeTAm6FlZh9pQuFqnPVaovjk
-	gE+hcVAK2+8FTNQbxRQzOG5SRLT6Kuy8k1q9wgk6Bub+fMMz3cCHXvzLvY3qiG93
-	GQ1qu3/uN4Ze2bb7/j2fPQVu1aVYEaJ74KtH5Us2gheObhD4LKjxMO0vgSEfl5HB
-	TrLFdfm/53jR5ohC/+F/Zn8ox0AejtuHF7tCucl6aVDDcA==
-Received: from mail-oo1-f70.google.com (mail-oo1-f70.google.com [209.85.161.70])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gjfp4819b-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 08 Sep 2026 09:31:44 +0000 (GMT)
-Received: by mail-oo1-f70.google.com with SMTP id 006d021491bc7-6b1abf73d1fso2238138eaf.3
-        for <linux-arm-msm@vger.kernel.org>; Tue, 08 Sep 2026 02:31:44 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1788859903; x=1789464703; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=pFQuRhixWFDDoRatZnflwom3l9EKIkxU8GYrNZNTb/A=;
-        b=Hn9abTrmdA22Q9S0oT101b0vashHwCIy3Qerln5C8rcoipyMoemv2T1CtNxnAY0ynr
-         iG8U/LnVmac5nyDAWJ5agmY6RVcjTbmsHyIOJWrgzMfqlI3BtVp/tWDokZOYAv1PPHEr
-         cgRFogfHpDzD9+7gcxIkg8v1pgmf4oyQgitijY4ocal07P2HN1dV22qm4LalNLPycGmm
-         GtSoFgBBfEjaRN6vYbnHoPllBBe2Cjehp4atZVlz+CeQe2haoZkw3uu3CD0/h5YLWEQf
-         SK85zcAUe+djzuNdDYmi8YYKoaemsSUhyOrQ9Ykhn1hRtsOiBvKu6ZnDhyz8sjZMy35O
-         k64g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788859903; x=1789464703;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=pFQuRhixWFDDoRatZnflwom3l9EKIkxU8GYrNZNTb/A=;
-        b=gT26X39guWAhJJjCfueRRIyN+uMAjRyNiLaYENlKJ5OuZxaQrEUC1AS1SpwZWH57+D
-         APhR0dO83v//1Ted0iysbEtvs5QpGT0URRS8h6GgSV7egPI3PVdx8TlDppRcmoiTgQU8
-         UQs7dJMBNydM8hGfudSAC1RBPhH07/jPY16trybqequhImah8XeCUf9FCcfc03Dutmaq
-         Ml4XWGuzm5o81PzpOmeBoVOfgj7lEjt7ueMMwVhy7Hwm30xDKDGPxV5W4d6ILL5RBYkd
-         NRp5Anfr5Gil2hhNmsEg6zYv6GAbtjrLlFEoIGNLixdFkS5qA7fTd9OTcJO48o7blqha
-         k9yQ==
-X-Forwarded-Encrypted: i=1; AKwUvBzSH2MWBQYJ7+MTJwIn2Ex9G7NNBQs8Z6D0RcbqZoWLrsZjH2PLzMVcs+4Fq/QKgYgkyuMEm2N36UYvO0xZ@vger.kernel.org
-X-Gm-Message-State: AFuF++lOTZHJQiPO/OND9cuHp66qVzc3X/Tn86bKk7Nf2jSv/avD74Cp
-	FOO5b2oRb5Mja7p8DA+WcFUlhAnFdnOhQt9Ce8lCR567LZX5T+Fb6t6/MD0Y4VJhsgg5Ru5u7C1
-	Z1jHmklinY4F41xUjQNlcmwVJNZzBhTYZd6yhYCuf5Y25KJ8rE0YlozmnyGka4yGdVjle
-X-Gm-Gg: AYBFou1X7gHrYOGqM+9RMAsMBYmsmVzBi5HKtqpBuo8AaaD5511TwgDgiV3NdFXeHdM
-	1c7dXLT013XK1XKc3af/r35M9P432AcEtyOR48SObL8rNsyhvplUE0TYFGbeYM06+0NrK+0TVRV
-	BHFatCXaPPX4i16IegKFNLLhA6u1bWHSSyY8o+aZryyH62a9oy0y6K1tt0PGvP/RKtgX3KF/e4q
-	hOF3eVCPukaUx4A6YtfIJm2Mo2MOU+8SLIsxBhbSvDczxsVlcvppq2eekELd4rJC55wZAtV4F+r
-	RAZni3lTnl2DoActZcjGBgmgMZSYzUOBEl+I5iky7uUe5qzDx0fsltCZbxop+3AZdcFD8AtUEfj
-	X5J++XEk35c6fUw==
-X-Received: by 2002:a05:6820:16a2:b0:6b1:4280:9e18 with SMTP id 006d021491bc7-6b6fb8d26c1mr16621488eaf.13.1788859903177;
-        Tue, 08 Sep 2026 02:31:43 -0700 (PDT)
-X-Received: by 2002:a05:6820:16a2:b0:6b1:4280:9e18 with SMTP id 006d021491bc7-6b6fb8d26c1mr16621437eaf.13.1788859902560;
-        Tue, 08 Sep 2026 02:31:42 -0700 (PDT)
-Received: from oss.qualcomm.com ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3339af25062sm54654325eec.16.2026.09.08.02.31.37
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 08 Sep 2026 02:31:42 -0700 (PDT)
-Date: Tue, 8 Sep 2026 15:01:34 +0530
-From: Mohd Ayaan Anwar <mohd.anwar@oss.qualcomm.com>
-To: Krzysztof Kozlowski <krzk@kernel.org>
+	dkim=pass (2048-bit key) header.d=iki.fi header.i=@iki.fi header.b="sLXcsBUT"
+Received: from mandelbrot.. (xdsl-83-150-90-33.nebulazone.fi [83.150.90.33])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange x25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	(Authenticated sender: jmtilli)
+	by lahtoruutu.iki.fi (Postfix) with ESMTPSA id 4hfJcZ2bGYz49QLK;
+	Tue, 08 Sep 2026 12:32:14 +0300 (EEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iki.fi; s=lahtoruutu;
+	t=1788859935;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding;
+	bh=KU7T9rrLnRPGuXimR1ZtKY1YrPNVYhdSRP+SJOymFKI=;
+	b=sLXcsBUTn4Rzs/8qPIHdluG6etj4XGBrN46y9+cb76JhtFXK2E99z5TVWagYqHYSADw9eu
+	P1Fy6eet/Zca2pNeZ4SkkYTRBBe7WC+RaiPhWYumbJxwKLmMCZtWDn5o3dTKHglX1MFEsO
+	wgTbTlUj5y9KBZxbWNnHFGUKcWFqWI7WKrwXfYvFVWXDm/nalTUzUgbwnqKMdi1BP1H4wv
+	2xkriiexblb4XoThVCk3ygx6Yl8CrDtpcq6WT/70CIvnvgmT4hw2T+sNrNFruJdF0Qk7pd
+	HWwS7GKN8Vgzh9beEHcNKHmNbJx2HB9GavnqUux60BVD/qSt0Xs8/oULhFL9EQ==
+ARC-Seal: i=1; a=rsa-sha256; d=iki.fi; s=lahtoruutu; cv=none; t=1788859935;
+	b=uMRPCehmmHmMwWflY1Qz3qjtDyWeG9o715Qk2OKIcmOxMNq2YwPG7SNUJrmu44tvBNsJ5m
+	n+gnuA5dJPVlJ3IcXdelQ7pBFXoV2uyBvS1mp1POjjDZ1y01lOG/pbE4zzoiOz1aeUbkjf
+	hjLyxI7H2/YjLvyctlfZL3gI1InDuai5mExC4QBYH0YddLO4KTti7ooCk9nDn3ca1+kFwP
+	UOWCE0Z8rK5tV8bykW7E0daO+ugsCYwZd8sikdxogWZ0p5zps7S5P/9st01dlLafAXO71P
+	4V8t69/iAX35cp4Ybh/8GE1/rNQtEwQjF9qy8NBHiWuGLMcavUfrdNRvboy/Lg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=iki.fi;
+	s=lahtoruutu; t=1788859935;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding;
+	bh=KU7T9rrLnRPGuXimR1ZtKY1YrPNVYhdSRP+SJOymFKI=;
+	b=CMBJv8mqGo0AjHs+OiW8DBLwxEjnQJ5EpD/f81ES5Punos/bBG6s/yZFnTk4tqx8516mze
+	eXZ1QWe8RCRo2VqcygD3H/2SD0J8NE8SqBfVdDSCUFSgSj2wqWQLcN16vCaBJlsobsyQZx
+	kBkOeDa5W2WLwzVJGpJTtXhTgIYhXNEDPrjUaeCMFYkewqWkOqIsYlRkHEJBKlzshVa7TW
+	UwBVzM4hohzsOBSNNoi3ZWyboP4UNBxw54kR30ILRXp+keYdKVJCCfS3lBwmwacoHXv+S+
+	OAsnidp1+aTaANu1PQYf3mK0lYglWAVYohTB9ayVkNVL6PBXuT+o2IFQsvHzmw==
+ARC-Authentication-Results: i=1;
+	ORIGINATING;
+	auth=pass smtp.auth=jmtilli smtp.mailfrom=juha-matti.tilli@iki.fi
+From: Juha-Matti Tilli <juha-matti.tilli@iki.fi>
+To: ath11k@lists.infradead.org,
+	ath12k@lists.infradead.org,
+	Kalle Valo <kvalo@kernel.org>,
+	Jeff Johnson <jjohnson@kernel.org>,
+	Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>
 Cc: Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>,
-        Komal Bajaj <komal.bajaj@oss.qualcomm.com>,
-        Anurag Pateriya <apateriy@qti.qualcomm.com>,
-        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
-        Richard Cochran <richardcochran@gmail.com>,
-        Andrew Lunn <andrew+netdev@lunn.ch>,
-        Maxime Chevallier <maxime.chevallier@bootlin.com>,
-        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
-        linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org, netdev@vger.kernel.org
-Subject: Re: [PATCH PRELIMINARY 0/5] arm64: dts: qcom: shikra: add Ethernet
- support
-Message-ID: <ap/V9mzGUA5lIbLi@oss.qualcomm.com>
-References: <20260908-shikra_ethernet_dts-v1-0-69c0c5c7c124@oss.qualcomm.com>
- <e9388ffc-ddc8-456f-ad7f-1d185d35ab69@kernel.org>
- <ap+zd/2QmerMwi0o@oss.qualcomm.com>
- <c23369fc-84ff-4881-8327-c18fc3692306@kernel.org>
- <ap+3+Xhq6ygnPzQ7@oss.qualcomm.com>
- <fd428d1c-646f-47f1-9fbb-91f3b50760dd@kernel.org>
+	Konrad Dybcio <konradybcio@kernel.org>,
+	"David S . Miller" <davem@davemloft.net>,
+	Eric Dumazet <edumazet@google.com>,
+	Jakub Kicinski <kuba@kernel.org>,
+	Paolo Abeni <pabeni@redhat.com>,
+	Simon Horman <horms@kernel.org>,
+	Mihai Moldovan <ionic@ionic.de>,
+	Juha-Matti Tilli <juha-matti.tilli@iki.fi>,
+	linux-wireless@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org,
+	netdev@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Subject: [PATCH v3 00/12] ath1{1,2}k: support multiple PCI devices in one system
+Date: Tue,  8 Sep 2026 12:31:33 +0300
+Message-Id: <20260908093145.2492666-1-juha-matti.tilli@iki.fi>
+X-Mailer: git-send-email 2.34.1
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <fd428d1c-646f-47f1-9fbb-91f3b50760dd@kernel.org>
-X-Authority-Analysis: v=2.4 cv=Qu9uG1yd c=1 sm=1 tr=0 ts=6a9fd600 cx=c_pps
- a=lkkFf9KBb43tY3aOjL++dA==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
- a=kj9zAlcOel0A:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22
- a=VwQbUJbxAAAA:8 a=H1_jG3o4hEjZ8bdWLZ8A:9 a=CjuIK1q_8ugA:10
- a=k4UEASGLJojhI9HsvVT1:22
-X-Proofpoint-ORIG-GUID: ZKQ1WaqQWQveeRYmm2hqjcKP9KoivSuZ
-X-Proofpoint-GUID: ZKQ1WaqQWQveeRYmm2hqjcKP9KoivSuZ
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTA4MDEwMCBTYWx0ZWRfX1+QQMm9ClzoW
- SdaKWa9mk0RtwQf2SIyGY0DhIlUfSnqW6Rw0hu16VuDaMNGfNVMxom69RRW2auAyo/Anc0BJbWg
- lL+w66L6sUcRtAoYxSDz/sz0AGFVkxAuze2DMg36ei1FroRSj5E1Mgd4tBo0CTFOIyJFnMeJDs/
- y2g8URFi6eV94f9mpxjukyvAgBQ8CiCSdYRvXh9Cwp7yWna2TSUOQLQIl//34updTXwoTmMzeCo
- 0Vqacm7mOMQk0+gViwj/Lxk3cgSpkwbh2d1pCuLx3v4oXMoWNO7Uxpx75winmONgaBNOc5Xo+en
- YG8cQ0rnCaholIc/cOkcSncdLfNBKvd+OkQgvA0F3OMf6jQ7QfoMSlTjoJbfMz6RfpoG9MREYY7
- 0DtgZFiMGtMG3OIT/ShUV+jeUkWLtcJFbR2VKnj+2r3Cnj4c9oFGxYRROE0avA03NOBwwQBgn1D
- QEwEi0wMxbJer0QJcUw==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTA4MDEwMCBTYWx0ZWRfX8kQmd2NzTqMj
- qQdLKxFP585qx84jX6GvwjAyX9eY9SF/pcFUjFldBJyNDfK0X4TyHoU46qcsipIHE58KyJGJIlS
- rMAWEXOuvI+sYD51azVJPH+27XTvUm8=
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-08_01,2026-09-07_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 priorityscore=1501 adultscore=0 spamscore=0 bulkscore=0
- lowpriorityscore=0 impostorscore=0 malwarescore=0 phishscore=0 suspectscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2609080100
+Content-Transfer-Encoding: 8bit
 
-On Tue, Sep 08, 2026 at 10:40:45AM +0200, Krzysztof Kozlowski wrote:
-> On 08/09/2026 09:23, Mohd Ayaan Anwar wrote:
-> > On Tue, Sep 08, 2026 at 09:14:45AM +0200, Krzysztof Kozlowski wrote:
-> >> On 08/09/2026 09:04, Mohd Ayaan Anwar wrote:
-> >>> On Tue, Sep 08, 2026 at 08:56:39AM +0200, Krzysztof Kozlowski wrote:
-> >>>> On 08/09/2026 08:23, Mohd Ayaan Anwar wrote:
-> >>>>> Hi,
-> >>>>>
-> >>>>> This preliminary series adds the DTS changes required to enable
-> >>>>> Ethernet on the Qualcomm Shikra CQM, CQS, and IQS EVKs.
-> >>>>
-> >>>> What is "PRELIMINARY" patch in upstream? Where is this process
-> >>>> documented or expressed?
-> >>>>
-> >>>
-> >>> My apologies. The code is ready, and I was hoping that sharing the DTS
-> >>> changes would make reviewing the driver and dt-bindings a bit easier.
-> >>> The original RFC had them together, and I split it out for net-next
-> >>> and linux-next.
-> >>
-> >> Yeah, but why calling it completely different than every other patchset?
-> >> Why coming with different style? Why this cannot be RFC?
-> > 
-> > Agreed. In hindsight, this should probably have been an RFC v2. I saw
-> > some recent series using a PRELIMINARY tag, but I see that its
-> 
-> Where?
-> https://lore.kernel.org/all/?q=s%3APRELIMINARY
-> 
+Hello,
 
-Please ignore me, I should have labelled it as an RFC. I mixed up two
-very different things (some off-list patch I was CC'd to and LKML
-patches).
+As you may well know, multiple identical ath11k and ath12k devices are
+not supported in a single Linux host because they use conflicting QRTR
+node IDs. Fortunately, Denis Kenzior created a patchset to support
+multiple QRTR endpoints with identical node IDs, and Mihai Moldovan
+refined it, after which I took over the patchset and refined it more.
 
-I should have waited for my morning cup of coffee before hitting send,
-sorry for wasting your time.
+Mihai Moldovan also created a patchset for actually adding the support
+for this QRTR multi-endpoint feature to ath11k and ath12k drivers.
+Unfortunately, the code of Mihai was not merge-quality, since it leaked
+memory if you ran rmmod and modprobe inside a loop. Mihai mentioned this
+drawback, without providing an API for deleting endpoints or usage of
+such API in code that's responsible for freeing resources. Also Mihai's
+patchset had a race condition.
 
-	Ayaan
+Since Mihai has been busy recently and the previous iteration of this
+patchset is nearly 2 years old, I decided to "steal" the patchset from
+him since he said he doesn't care who eventually implements this, as
+long as it "just works". I am willing to give the responsibility of this
+patchset back to Mihai if he so wants.
+
+I reverted back to the approach where MHI knows the QRTR endpoint id.
+This is somewhat ugly, but really the only way resources can be freed
+(unless you resort to some kind of reference counting which would be
+doable in kernel, or garbage-collection which wouldn't be doable). It
+does create some extra memory usage in the mhi_controller data
+structure, but a large fraction of the time, the data there is useful,
+since a large fraction of MHI devices actually use QRTR. So this is not
+as bad as making every PCI device know its QRTR endpoint ID (which a
+vast majority don't have), even though MHI can be compiled in without
+QRTR so we have to do the freeing via a function pointer.
+
+I think the code is mostly merge-quality now. It does require the QRTR
+multi-endpoint support, such as this v6 (I'm soon going to post v7 --
+note that in v6 one intermediate commit doesn't compile on 32-bit
+although the tip of the branch does compile):
+
+https://msgid.link/all/20260901131934.225991-1-juha-matti.tilli@iki.fi
+
+I tested it on dual ath11k setup, but more testers would be good. If you
+only have a single ath11k card, your testing is useful too ("given
+enough races, all race conditions are shallow").
+
+Link to Github if you don't want to apply patches manually from mails:
+
+https://github.com/jmtilli/linux/tree/athnext_multi_qrtr_v7_multi_ath11k_ath12k_v3
+
+Bugzilla: https://bugzilla.kernel.org/show_bug.cgi?id=218480
+
+Mihai mentioned in Bugzilla in comment 21 that there was a hardware
+crash he couldn't reproduce and he believed it's a race condition. I
+could reproduce it in older Mihai's patchset version by treating -EEXIST
+as an error, which indeed points to it being a race condition. I believe
+the source was qrtr_endpoint_id_get_or_assign that tried to get an ID
+and then assign an ID if it couldn't get one, while not holding a
+spinlock. In my newest patchset, my belief is this race condition is
+gone (the entire offending function is gone), but any kind of review
+about thread-safety of my code would be good input.
+
+Original description:
+
+ath11k and ath12k suffer from a long-standing issue that is partly
+caused by the QRTR implementation, which only supports one device per
+node/port combination and partly caused by the fact that the
+QMI instance ID of the devices are statically set to 1.
+
+P Praneesh <quic_ppranees at quicinc.com> submitted a patch[0] that fixes
+this issue generating a unique QMI instance ID based on the PCI bus data
+for the device and passing that information to the QMI subsystem and the
+device's firmware via a special PCI register.
+
+However, it quickly turned out that this approach works for the hardware
+he tested, but fails for other ath11k-based devices, including the
+popular QCA6930, since its firmware just ignores the special register
+being used.
+
+Since we need QMI (and, for matter, QRTR) to work for the initial
+firmware upload, this approach will not work generically.
+
+Fortunately, Denis Kenzior <denkenz at gmail.com> cooked up a patch set for
+QRTR[1] that introduces the concept of endpoint IDs, which are
+dynamically allocated and can be used to distinguish different devices
+even though they use the same node/port combination. Using this patch
+set, endpoint IDs can be reported as part of auxiliary data in the QRTR
+socket and bound to for client sockets, which will automatically filter
+messages from other endpoints and also make sure that client messages
+are routed to the correct endpoint.
+
+This looked promising, and with that functionality, the only challenge
+is to find out the correct endpoint IDs and bind to them in drivers to
+finally support multiple devices in a generic way.
+
+This patch set implements exactly that, and it WORKSFORME, but
+unfortunately it turns out that "the only challenge" is very difficult
+to overcome due to the socket-based architecture.
+
+ath1{1,2}k and QRTR are at opposite sides of the socket, with QRTR
+assigning endpoint IDs and ath1{1,2}k needing a way to fetch and operate
+on them.
+
+The endpoint reporting feature in QRTR is not helpful in this case,
+because drivers do not generally know which endpoint belongs to the
+device they currently handle (i.e., there is no central registry) and
+even if we were to snoop on the socket and take the first endpoint ID we
+are unaware of, this might not be the correct one, because it might be
+in use by a different driver for instance, or correspond to a different
+device.
+
+The first iteration of this patch set[2] extended struct mhi_device with
+a qrtr_endpoint_id field that was initialized to zero and populated by
+the QRTR MHI driver as soon as it was loaded. Drivers could then query
+this field through an mhi_device->mhi_cntrl->mhi_device chain (if they
+also use the MHI bus, of course). This, however, was an incredibly ugly
+hack because QRTR data should not be part of MHI device structures in
+the first place, timing is critical (drivers querying the endpoint ID
+must do so after the QRTR MHI module initialized, which is typically
+only the case after QRTR socket was created) and it was not possible to
+query or pre-assign an endpoint ID before creating a socket and directly
+bind to it (which might lead to races such as seeing messages over the
+socket that are not meant for the endpoint ID drivers are actually
+interested in).
+
+Since that was not elegant at all, and due to the other mentioned
+issues, this iteration uses a different approach: endpoint IDs can now
+be associated with (private) backend endpoint-specific data, which
+allows us to identify which endpoint ID is being used with what backend,
+and additionally new API is introduced so that other parts in the kernel
+can either get an endpoint ID for given endpoint-specific data or even
+attach endpoint-specific data to a new endpoint ID generated by the QRTR
+driver. The QRTR system will try to use endpoint-specific data if
+possible, but falls back to generating endpoint IDs without
+endpoint-specific data (as in, NULL pointer) if that did not work.
+
+Crucially, the endpoint-specific data pointer is used as an opaque void
+pointer and at most compared with data stored in the endpoints XArray.
+
+In the QRTR MHI backend, we use the MHI controller's structure pointer
+as endpoint-specific data, and since the MHI controller is also the bus
+master and responsible for the physical link, clients (drivers) can
+pre-register an endpoint ID for their MHI controllers and directly tell
+QMI to bind to the endpoint ID at socket creation time.
+
+The QRTR SMD backend uses its rpmsg_device pointer and the TUN backend
+uses the inode pointer as their respective endpoint-specific data
+pointers.
+
+This approach is cleaner and works better, because it is not prone to
+races (although it requires coordination between QRTR backends and
+clients/drivers because both must use the same endpoint-specific data
+for the scheme to work).
+
+There are, however, also issues with this approach:
+  - Any kernel part can generate an unlimited number of endpoint IDs
+    with arbitrary pointers. The amount of endpoint IDs that can be
+    tracked is limited, though, so there is potential for exhaustion of ID
+    space.
+  - Since previously endpoint IDs were only generated by the QRTR
+    subsystem, there was no need to use any kind of life cycle management
+    for the endpoint IDs: they were created at node creation time and
+    also deleted at node deletion time. Since other subsystems can now
+    create endpoint IDs, it would probably be good to have a way to
+    reclaim created but unused endpoint IDs. No such implementation is
+    provided here.
+  - Multiple PCI/MHI devices will work, but no AHB + PCI/MHI interaction
+    has been tested. Since PCI/MHI devices bind to their endpoint ID,
+    these will likely work, but the AHB devices might still see messages
+    for all endpoints and fail to work correctly. AHB devices seem to be
+    using QMI and thus also QRTR, but without a specific QRTR backend
+    driver (going through REMOTEPROC instead?), so this approach might
+    not be viable for AHB devices.
+
+I am much more comfortable with this patch set, even if it has some
+rough edges and might not fix the situation for AHB devices.
+
+[0] https://patch.msgid.link/20230111170033.32454-1-kvalo@kernel.org
+[1] https://patch.msgid.link/20241018181842.1368394-1-denkenz@gmail.com
+[2] https://msgid.link/cover.1730790058.git.ionic@ionic.de
+
+v3:
+  - rebase against current ath-next
+  - solved a major memory leak
+  - replaced O(N) algorithm by O(1) where N is the leaked memory
+  - solved all known race condition issues
+  - Link to v2: https://msgid.link/cover.1732506261.git.ionic@ionic.de
+
+v2: code and metadata cleanup (checkpatch.pl), no functional changes
+
+BR, Juha-Matti
+
+Juha-Matti Tilli (5):
+  net: qrtr: support getting new endpoint ids externally
+  bus: mhi: allow mhi to know about its qrtr endpoint id and free it
+  net: qrtr: mhi: register new qrtr endpoint id for mhi
+  wifi: ath11k: implement QRTR endpoint ID fetching for PCI
+  wifi: ath12k: implement QRTR endpoint ID fetching for PCI
+
+Mihai Moldovan (7):
+  soc: qcom: qmi_helpers: add QRTR endpoint ID to qmi_handle
+  soc: qcom: qmi_helpers: optionally bind to QRTR endpoint ID in
+    qmi_sock_create
+  wifi: ath11k: add QRTR endpoint ID hif feature
+  wifi: ath11k: stub QRTR endpoint ID fetching
+  wifi: ath11k: bind to QRTR endpoint ID in ath11k_qmi_init_service
+  wifi: ath12k: add QRTR endpoint ID hif feature
+  wifi: ath12k: bind to QRTR endpoint ID in ath12k_qmi_init_service
+
+ MAINTAINERS                           |  1 +
+ drivers/bus/mhi/host/init.c           |  8 +++++
+ drivers/net/wireless/ath/ath11k/ahb.c |  7 ++++
+ drivers/net/wireless/ath/ath11k/hif.h |  9 ++++++
+ drivers/net/wireless/ath/ath11k/mhi.c | 46 +++++++++++++++++++++++++++
+ drivers/net/wireless/ath/ath11k/mhi.h |  1 +
+ drivers/net/wireless/ath/ath11k/pci.c |  1 +
+ drivers/net/wireless/ath/ath11k/qmi.c |  8 +++++
+ drivers/net/wireless/ath/ath12k/hif.h | 10 ++++++
+ drivers/net/wireless/ath/ath12k/mhi.c | 46 +++++++++++++++++++++++++++
+ drivers/net/wireless/ath/ath12k/mhi.h |  3 ++
+ drivers/net/wireless/ath/ath12k/pci.c |  1 +
+ drivers/net/wireless/ath/ath12k/qmi.c |  9 ++++++
+ drivers/soc/qcom/qmi_interface.c      | 28 ++++++++++++++++
+ include/linux/mhi.h                   |  5 +++
+ include/linux/soc/qcom/qmi.h          |  3 ++
+ include/net/qrtr.h                    | 10 ++++++
+ net/qrtr/af_qrtr.c                    | 42 ++++++++++++++++++++----
+ net/qrtr/mhi.c                        | 31 ++++++++++++++++++
+ net/qrtr/qrtr.h                       |  5 +++
+ 20 files changed, 268 insertions(+), 6 deletions(-)
+ create mode 100644 include/net/qrtr.h
+
+-- 
+2.34.1
+
