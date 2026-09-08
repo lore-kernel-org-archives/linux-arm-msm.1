@@ -1,69 +1,42 @@
-Received: from mail-pj1-f41.google.com (mail-pj1-f41.google.com [209.85.216.41])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mout.kundenserver.de (mout.kundenserver.de [212.227.126.134])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E711E377A8B
-	for <linux-arm-msm@vger.kernel.org>; Tue,  8 Sep 2026 05:26:54 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.216.41
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BF92329B228;
+	Tue,  8 Sep 2026 05:34:49 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=212.227.126.134
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788845216; cv=none; b=lj7P7Z8MRaZzjMBElOpK6rnXStG/ZgNv9G4Z8lJgBoo/VHLQuUc71nsmGCodoPk6koxQciX3g+Mxnk1wIQNnCGAl7vy5l1mEPtnrwFgTWxClAtw0KvvlUSA4bZf0amdKAGrwIBr3AGVg65waj2n2dbNd9AWCqqNKQ3GMU8eDI1o=
+	t=1788845691; cv=none; b=lx9Ffhua1heHJrnbeewYvks09EqiOSZT1KJSxZESQNge3wGZoftjr7CEbzOARDNKHbaNYmNYjr5I9V/uhjEqn24ICB6J1jXBYnTyULySvxvCteg/WwxrTh6iUmj9H63IQL+2GFPSWGrXpxtp8VzeVY1g98HLSR0mvSV1gzgb6sQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788845216; c=relaxed/simple;
-	bh=ZIRVEqjxXGVRKDzZh1TGbLw59T9G6VckCt7458JkZCw=;
+	s=arc-20240116; t=1788845691; c=relaxed/simple;
+	bh=wbOlDwSsYz7wK5NlJvIkB5Bp3Raxeb/RoPIVkyDiwJ8=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=pUoYp3TlCguD6LDk3NpbrQabgz2MrnUqSQfiPE/xX2q0D4HYj5Nk4l4Ts1vurIbhj6qKAzsfQg8Sn1ftwppDTIrISI9C+J4FiBz3VVBz1IoSjWwIR8d1o81cvk4u4vV6uz5FNfyuAQpJQ5RGHg11aFIbD8AjTrRZ3yEB7qXzrmo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=roeck-us.net; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=UkMuKH5D; arc=none smtp.client-ip=209.85.216.41
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=roeck-us.net
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	 In-Reply-To:Content-Type; b=FpuwxNTTi8QrgSKuSrcjc9MTx9Gmq+w+ejhvoFQNleHmdfArtUuKBdyk+4DblCBmMpAKyH6d5R/P/2COc20rVsBmHZwchUPQYd/zJcg5VzyptwBayX1iOuGKjK0GckIlBk0HBpYKV5KqGzXYj68C1RZVZukbRXxNy+yVHpU9Nek=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oldschoolsolutions.biz; spf=pass smtp.mailfrom=oldschoolsolutions.biz; dkim=pass (2048-bit key) header.d=oldschoolsolutions.biz header.i=jens.glathe@oldschoolsolutions.biz header.b=M0eSpha9; arc=none smtp.client-ip=212.227.126.134
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oldschoolsolutions.biz
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oldschoolsolutions.biz
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="UkMuKH5D"
-Received: by mail-pj1-f41.google.com with SMTP id 98e67ed59e1d1-398e9698a70so3651782a91.0
-        for <linux-arm-msm@vger.kernel.org>; Mon, 07 Sep 2026 22:26:54 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=oldschoolsolutions.biz header.i=jens.glathe@oldschoolsolutions.biz header.b="M0eSpha9"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1788845214; x=1789450014; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:sender:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=1W+fM/Wuxfg9AV61/48GxXECYU1wlppMPQetunuyOIs=;
-        b=UkMuKH5DLx1QhBCXQL0ADKpiw6NCr49GIdGMliXZKWyFc30tkMZ/Y9z1qanozXWTOR
-         YNlfYX6iZPh5J9Jx6UL6nGotIMa/c11eUgg0oibIIR2XZSXVPgLWWFsZUINvByi7VQBY
-         W5tsAMUGJ0SohkHxTmvyDlF6DrtNAmRo+EZMCh4LfDHfYJqNA+JGeTOeSKaVcDMquCbd
-         QyvmLgP0zqLrTb3pay0yYn0jMT8uJLn9uzZ9tj0dT2YF7VbHeaNbY+QzjmbERiEUMIVZ
-         ohIQrbrXRIDeRDlQx/6BK/zyrkFcbf+xzzJFFGXLOUJLi8ye5eIhAMgnoHxX+wZMAa6U
-         ONjg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788845214; x=1789450014;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:sender:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=1W+fM/Wuxfg9AV61/48GxXECYU1wlppMPQetunuyOIs=;
-        b=DECzhlGkNCGWGBO8TRjO6ITaTeMvuKrhoK0UDrBmt7Iu98BJGw5KJqq5LbDHDWl7qq
-         2IQM0qtqlD2IzvG7+k/pdbFn5mziadr4XrLUh4mjUd8HSUJdYcOKJHhvSnN1OQJpsIAI
-         HYcoEvzpRmQkcF+8C+c8PtyM8n9R1+zBvPCQdaH67ZicxAs3jQzHVXoyHMv+2rcxAhhr
-         cvMA7FIBHMFMqSgaT9wVqPsFOQQ0kdaIlREl6PTYnrdTh4xKQYUlHbSyQrbQQGckZzwk
-         s+tBVC4tbfjcMNiubggqrY5RTd+FCwG2FqUKRd/+ns9MsZlBXZt7YeTOU0U7P43vJzgD
-         K/yg==
-X-Forwarded-Encrypted: i=1; AKwUvByxf1e/B3s2rWubs8ZdN1T4mshpvA9KWXCZRN7kDcIzR8ujiMulfrSMV47MCBcY3vtT5rS/g2shuSZ4qQ9k@vger.kernel.org
-X-Gm-Message-State: AFuF++kQ7ejOA+s7rIlL/28RoUpfqZg6JI11jk9KP4ZRz/0+oUvB4ysP
-	1dQNwCS1CUImZk5m/R8DAKeWJ8XoAwjsRwi/IZAoklGJX2wDEDKYMAzt
-X-Gm-Gg: AYBFou0doFtEc8nsf1GfTlNloOxhs6MU+HYZ+J2fLNy6ZC4RjA0skqNsxEnFITEzzff
-	/zVc0PI1m1ITlkvhl2vywx4OGfkHTNS/ej9mIreHDFe6iQwlHXTzoZJ4F+r2xJL0Icd55wdtubc
-	T/s/cRcN98k08jQJGgQyopMvT05ETm64PeLVsgYVEWSRjNrUkE/JVuyyKYuZkJIE9VVNripD4P7
-	TkNHnN9mp9f1ejdJFl7b/hrM6ljJqLzsP0f7wouVLzA9bEozuwQLKJwbaqCcOJjSmCeY1uHDrmF
-	aFS77izFzH6kbfHd9Q2mhgO5fbnYKLxxomVm4GJXXKEwFIcN1ruNBMoi+2cqN9Uh+Lkpa9rrYKC
-	mlfMaq5sQoI6YTZqkDvo2vu+s+Ufmlo4lJHwC5tjuVKAa+fqPOa1CBAtlT+8twXp6Secs1fw6pi
-	LbNX2tFIW4UVWgAzCNflEBwK29byI7/40XObHsKcsQSDYGlbqJtSsq4fD2o2RpE+oF4bEAE/uuc
-	qRMUXpwKZPEP+3fm+KlscSqhkWkdSRHbVjU1A==
-X-Received: by 2002:a17:90a:d004:b0:392:6638:2e6a with SMTP id 98e67ed59e1d1-39b26273267mr41950559a91.13.1788845214308;
-        Mon, 07 Sep 2026 22:26:54 -0700 (PDT)
-Received: from ?IPV6:2600:1700:e321:62f0:da43:aeff:fecc:bfd5? ([2600:1700:e321:62f0:da43:aeff:fecc:bfd5])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-39b58187a9fsm4339012a91.3.2026.09.07.22.26.52
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 07 Sep 2026 22:26:53 -0700 (PDT)
-Sender: Guenter Roeck <groeck7@gmail.com>
-Message-ID: <1b2d3cca-09a6-42f7-93b3-ac1a2934d301@roeck-us.net>
-Date: Mon, 7 Sep 2026 22:26:52 -0700
+	d=oldschoolsolutions.biz; s=s1-ionos; t=1788845681; x=1789450481;
+	i=jens.glathe@oldschoolsolutions.biz;
+	bh=wbOlDwSsYz7wK5NlJvIkB5Bp3Raxeb/RoPIVkyDiwJ8=;
+	h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+	 References:From:In-Reply-To:Content-Type:
+	 Content-Transfer-Encoding:cc:content-transfer-encoding:
+	 content-type:date:from:message-id:mime-version:reply-to:subject:
+	 to;
+	b=M0eSpha9fzmcS6aR6XIon0KZUi8Nh/HIWDWrJBHLWc+vS0qrt66KgCjzOjQabq3m
+	 mFdIM0d+37lSHMZPcaG9QL8m1zQ28gE1NIcLI0XlxzefnqrE8ExSNPqL69kslbBqm
+	 aGV1BbTnI+wmAD4bfbN8C8ugI7GEW/D1fL+U/tc4Edg1p/+8BE8HqWqLqtX6xCIiw
+	 8VC6sYYfFga5CD8Wnt90NwZItqNMuMXmtu4jPmT+e0CqW8Y+1Ow6DCzFvEbNi9WtC
+	 HUeXv/jxYHJiK76GxOJ7CJhdiyCGA1VexHpEr4xMSo4xsZX2s5A+p2sjpAItiNkjK
+	 VnirmXSDaULwyRRfVA==
+X-UI-Sender-Class: 55c96926-9e95-11ee-ae09-1f7a4046a0f6
+Received: from client.hidden.invalid by mrelayeu.kundenserver.de (mreue011
+ [212.227.15.167]) with ESMTPSA (Nemesis) id 1MLAF0-1xKvWn1ycc-00S1FK; Tue, 08
+ Sep 2026 07:09:27 +0200
+Message-ID: <3204c334-b77c-4c6e-9224-2c104cf50603@oldschoolsolutions.biz>
+Date: Tue, 8 Sep 2026 07:09:26 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -71,93 +44,77 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH 2/2] platform: arm64: qcom-hamoa-ec: test sensor and
- variant handling
-To: Birk Skyum <birk.skyum@pm.me>, sashiko-bot@kernel.org
-Cc: Anvesh Jain P <anvesh.p@oss.qualcomm.com>,
- Sibi Sankar <sibi.sankar@oss.qualcomm.com>, Hans de Goede
- <hansg@kernel.org>, =?UTF-8?Q?Ilpo_J=C3=A4rvinen?=
- <ilpo.jarvinen@linux.intel.com>,
- Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
- Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>,
- Randy Dunlap <rdunlap@infradead.org>, Daniel J Blueman <daniel@quora.org>,
- Maya Matuszczyk <maccraft123mc@gmail.com>, linux-arm-msm@vger.kernel.org,
- platform-driver-x86@vger.kernel.org, linux-hwmon@vger.kernel.org,
- linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-References: <20260908015650.84401-1-birk.skyum@pm.me>
- <20260908015650.84401-3-birk.skyum@pm.me>
- <20260908020711.ED17B1F00A3A@smtp.kernel.org>
- <20260908021844.42118-1-birk.skyum@pm.me>
+Subject: Re: [PATCH 6/7] arm64: dts: qcom: ideacentre-mini: Wire up DP sound
+ names and VA macro
+To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+ Bjorn Andersson <andersson@kernel.org>,
+ Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
+ linux-kernel@vger.kernel.org
+References: <20260905-x1-ideacentre-mini-prettify-v1-0-9a87882973bb@oldschoolsolutions.biz>
+ <20260905-x1-ideacentre-mini-prettify-v1-6-9a87882973bb@oldschoolsolutions.biz>
+ <1db9a798-4935-4fe7-a2a7-a66791e75a6a@oss.qualcomm.com>
 Content-Language: en-US
-From: Guenter Roeck <linux@roeck-us.net>
-Autocrypt: addr=linux@roeck-us.net; keydata=
- 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
- np3900V20aS7eD9K8GTU0TGC1pyz6IVJwIE=
-In-Reply-To: <20260908021844.42118-1-birk.skyum@pm.me>
+From: Jens Glathe <jens.glathe@oldschoolsolutions.biz>
+In-Reply-To: <1db9a798-4935-4fe7-a2a7-a66791e75a6a@oss.qualcomm.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
+X-Provags-ID: V03:K1:zK8eiaehOx1zjkSQ3F8oJRXCTdDQZTTJ2q47idY9bzqvwlmdtjs
+ G4y6rnlRimx4pB+E1YTe3GonurcycN3Ie4s8kuDob1PUb9fu5nCOeGTCvZfAselLwaYbrlK
+ XxdV3z3AdobTLIseuH7FtEv2F01teGqQ2azsZZwv9WPOj4WhTE2//WE93iqd1GgS/r9sowU
+ BaryehvCLaFbPZnQQsDEQ==
+X-Spam-Flag: NO
+UI-OutboundReport: notjunk:1;M01:P0:YQ3x6XVUFvg=;qLc4m/+1dNAT8fbByxqwW4fK/wH
+ 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
 
-On 9/7/26 19:18, Birk Skyum wrote:
-> Thanks for checking this.
-> 
-> The test client is bound to the I2C core's dummy driver by
-> i2c_new_dummy_device(). Unregistering it unbinds that driver and releases
-> the managed hwmon child before the adapter is deleted. I reran the arm64
-> KUnit image on the stated 7.3-rc2 base; all seven cases completed and the
-> guest rebooted normally, including cleanup after the sensor-probe test.
-> 
-> The dummy-driver binding is also documented here:
-> https://docs.kernel.org/driver-api/i2c.html#c.i2c_new_dummy_device
-> 
-> For the hwmon placement, I kept the small read-only sensor path in the
-> existing EC driver, as huawei-gaokun-ec does. Guenter and linux-hwmon are
-> already copied. Would an auxiliary driver under drivers/hwmon be preferred
-> here? I'm happy to split it if that is the preferred direction.
+Hi Konrad,
 
+On 07.09.26 10:55, Konrad Dybcio wrote:
+> On 9/5/26 11:29 AM, Jens Glathe via B4 Relay wrote:
+>> From: Jens Glathe <jens.glathe@oldschoolsolutions.biz>
+>>
+>> mdss_dp0/1/2 had no sound-name-prefix, so the three DisplayPort
+>> backends were not distinct DAIs on the card. Add the prefixes.
+> That's now part of the SoC DTSI
+>
+> Konrad
 
-Your call, really, but it is all or nothing as mentioned
-in the other patch. Platform drivers are not documented in
-Documentation/hwmon/.
+Yep. Will be reduced to vamacro only in V2.
 
-Guenter
+with best regards
+
+Jens
 
