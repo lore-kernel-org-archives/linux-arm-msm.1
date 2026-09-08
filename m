@@ -1,172 +1,281 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wm1-f49.google.com (mail-wm1-f49.google.com [209.85.128.49])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C16EA3769E6
-	for <linux-arm-msm@vger.kernel.org>; Tue,  8 Sep 2026 08:02:15 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5DDA53B05A1
+	for <linux-arm-msm@vger.kernel.org>; Tue,  8 Sep 2026 08:09:19 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.49
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788854537; cv=none; b=X3eAyR6hItGgIPruM24D6vLr1qR6wmXdO6NURnNWRzHadPZUgXyU0tx7U4i45X3YL3rF0x+Lr479SQFGKjoHTo36AP/Xl7u8GDZbkjRErty6z2dnMGNXXB58jIbUIIz1z339cxFvZMIE/mCKolGoVVCBmYdTteaOFv+UCVkn0qM=
+	t=1788854961; cv=none; b=m7aIlk5mJ3AuC7AE5LxKxer/+/71R8IP9MLUS9Cbv8UOWcFlN9p6s6+T01OGAFBdjvRIJIhQF99yDB2TeqvK1MdPow60wiNahPy0HgJiXHdy49VPOKFFtjXxT0hCaYqidaAnCNHwVMlhrosLD+OKVaHMGMqAn2njQ6XqGNy7RKI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788854537; c=relaxed/simple;
-	bh=SBgXFYdNYEUPVWubdVb9unTaNhEgBh6xGV7DWi4TnQQ=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=e+yi5w0VkiqeCafSqO++u0GmHCzV5uDOQKsXQclS1OUJ54nPve+YyksYt7y6+z6ADpPkOHj8c5meFB4q85DFNgN1tUZXAhTqpHb4WA66e5hqPcKFhUSccT38I9TNM9z/5Q8MTvNphYKBwcVmM5vZ1TR+w9tQYihDa+at8rjwOA4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=arIuAESW; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=ZXI7+1KO; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1788854961; c=relaxed/simple;
+	bh=jZb9VWJNn//9UIfodFEP6WLVk3CPMdRNJNrNhBck1Wc=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=N55Byknv7e8UvjLbtFQb2DTJpGHpkd72krvgLagNWDKZHCMggCkGHeEuA3A1R1iOS2HV9v+t9iRgj0JUtARh7PzEbDIS+KkLHErD/3Kf+l/BvrhRsCWjFddwd+KpTWrdXHhvIZrWoOyNQHa/cNm53WS2nD6Ov6glMkkKKyPWBFY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=PwLWY19U; arc=none smtp.client-ip=209.85.128.49
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="arIuAESW";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="ZXI7+1KO"
-Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6886M1RG2979250
-	for <linux-arm-msm@vger.kernel.org>; Tue, 8 Sep 2026 08:02:15 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	WozNudziLKgBxiX08uWyerO5nuWlCikb2YN/NDCsgqM=; b=arIuAESWcUWwrGI2
-	pjqkoOyJNILtKK2cq6jHIw1appcqCWGaIrfPiN9hHaHs8t++cmtKy3CztvswBNVD
-	t/6GjjGovrE5VKW00dJhb7Di5oG4pOLrSRwr8G6SqWWHV1FuFCfZmy4YkB9ya1+K
-	ocMxPyWERANVyf/04rKh2xg5jPmZiBXA5WaefWlk1WEX21EhXsYBQ3zNmjkhImXz
-	/7lfYFr6uGGQjS4gm+sKQ6MLV5ExzzAtYG7G/n3z9v55eWrDxNxZ/2IDzXUQUCDa
-	O6gJ401SKTb7APWF/bnEwrDYZif3Ao/9o7AHNWUmW0JvheanXxCTexjM44ZEqwbO
-	cpWkFQ==
-Received: from mail-vs1-f70.google.com (mail-vs1-f70.google.com [209.85.217.70])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ghuykbt5e-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 08 Sep 2026 08:02:14 +0000 (GMT)
-Received: by mail-vs1-f70.google.com with SMTP id ada2fe7eead31-74ab6065f97so55038137.2
-        for <linux-arm-msm@vger.kernel.org>; Tue, 08 Sep 2026 01:02:14 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="PwLWY19U"
+Received: by mail-wm1-f49.google.com with SMTP id 5b1f17b1804b1-495590dde14so61588625e9.0
+        for <linux-arm-msm@vger.kernel.org>; Tue, 08 Sep 2026 01:09:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1788854534; x=1789459334; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=WozNudziLKgBxiX08uWyerO5nuWlCikb2YN/NDCsgqM=;
-        b=ZXI7+1KOnex1vLq3oiTv+pwnS1arKhYcdBlEO9ktZHE6iIo6tSvOMFLZeT8feAMV7Q
-         0vHutoax6xqfJQ6zYPJNoHe5u0z73dpc5xuqLwqe3gnhA5PLoAcnBZbbCPlstNpuVuNG
-         2x6nuk2CMwElwJ2LNcvnJKrWg3mBzorMexyOdP8UWYNqmU1zobZyOxDthjR2ZlPlmWFt
-         yC8SUShCqI5IEbg49qKmPa+7/H11ukYUWkrHGd0rDTqtR+fjUnE1DGiN1Cet8MkvRHjV
-         0r3MGQuX5OftvJfyQtBHg+kCWKc9bDn+t+Z6Cpcc699pP71BqpI1rhepjSSBTyuoub36
-         lPzQ==
+        d=linaro.org; s=google; t=1788854957; x=1789459757; darn=vger.kernel.org;
+        h=cc:to:message-id:content-transfer-encoding:content-type
+         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=FrMPA2gnzNAOST949OYokgJZDYzOdtAOrWkmN+04YvM=;
+        b=PwLWY19UjoVYyzrYJoYrYSSoK4ilGu5k/wRS/A8NXEPDZC57msuWKy2SYy3JqjZWQQ
+         yKnkn2KytgG1icUJWPkx41ZmMkFIXPQBjUgOfv+Qj/8NPLpgAxn78k+ox3DaVvbIoLJL
+         cN6l1WyVqFW/5PkFhZOGqJpXihl/0E8k19BkpyRfL8uDHdhUVw4+MtDRK8osSVTYCdGR
+         85l6t4LNooUfsxHb/BY1UVOGUO5P+5vwTDZM8tKBG5AOB35ivCB0TNwTLglhowYwMOdN
+         r3Ud/PP5RtAA56+dolP/EoByUTScHOs/ksbSaAptnRvkqDqV826TkqLDE2xreQGVFJcM
+         WKzg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788854534; x=1789459334;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=WozNudziLKgBxiX08uWyerO5nuWlCikb2YN/NDCsgqM=;
-        b=OeFDOOLAzCjE/IHRof4Mk6dkYIPYzzq4sdSITWVyUaM965jEG+ti8YSR9PqjPitlPr
-         Ja7zpqItrTpw+I9Kk1NiDP1zbWlIrbv+ZgTnlpIROcdx955dUnkj1XKVN0Y95sWjmb1j
-         4l1Pfmc9W6Xp6VOrZtmjmxMrfQGt4n4rTBRq5rDIV7RyCiFnumPifMATKjED5AgskNQA
-         72zEHSJT9sz9+5LHpBHs6nbL1HQxzt5ejQYPN8rlpuw26GUeldW2yjI/Gkuvd6ZQ9WcY
-         5Ak9moRLPlw9sqFPaglbZ3PSOTy1BgH61/nfcSz/sKRTtWwugRvwNNAhIVHxw/XIDzm5
-         WPiQ==
-X-Gm-Message-State: AFuF++mJuSJJalOJl/cTQrnKGS2s+/Og1z1DGr8rJyDx6jBchNkYWLBB
-	r3Mxk9cQjXc70a6IjWcCf6B32Lv9T+iDtZ/tL/9cjgqCfFbpaxxaqwMPB1Sw1/RnAFB4Zs/uIsX
-	z+7cuvR8McnhZhOaTuPDd64dRtLGXigN/wr4zJrUMIXJ7ZSeN4wu54GDqGgUaqMo/p+JA
-X-Gm-Gg: AYBFou1moW1aUv7mjvQuPg9o/nMEl7cVSCCUm5vOFK80HMX6Ocitf14J548Hf079a9Q
-	R7VCg+s3eyeyuiyXd9pZzRJeV6DIun17pp5JrfTUuX4m7+rXOXOcKTnN5T6g+VzBwKRRMcuGcQ3
-	oc/PiYvBjVufHlQ3T/b5RppgSaZsGin6EPVKhH9HYy046+EAK545EyCQj05KwhngxY6eVA9CFqo
-	5fldWFUwKqpE9WCzPo6/kZAuPQ1rJJ3aZzN722wsoDzQLvL3qN/P0dsxnQQi/EF7V3yq6PZ6q5u
-	BEH03U9pD/pQXFe+vfR6bugTS8qXGzXYPdpp4uc/qUpQAPf8IZjp/TEhipW08zcg88wAFbIcjob
-	DXDLSyVY3I3ldSHw9DWIo/Q==
-X-Received: by 2002:a05:6102:b03:b0:781:9922:78f3 with SMTP id ada2fe7eead31-78a60e5b62amr2664041137.2.1788854533916;
-        Tue, 08 Sep 2026 01:02:13 -0700 (PDT)
-X-Received: by 2002:a05:6102:b03:b0:781:9922:78f3 with SMTP id ada2fe7eead31-78a60e5b62amr2664022137.2.1788854533373;
-        Tue, 08 Sep 2026 01:02:13 -0700 (PDT)
-Received: from [192.168.202.12] ([178.235.128.140])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c260d559364sm565451966b.35.2026.09.08.01.02.10
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 08 Sep 2026 01:02:12 -0700 (PDT)
-Message-ID: <06bb2b19-bdb0-4dcc-a6e2-6805edd9084e@oss.qualcomm.com>
-Date: Tue, 8 Sep 2026 10:02:09 +0200
+        d=1e100.net; s=20251104; t=1788854957; x=1789459757;
+        h=cc:to:message-id:content-transfer-encoding:content-type
+         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to:content-type;
+        bh=FrMPA2gnzNAOST949OYokgJZDYzOdtAOrWkmN+04YvM=;
+        b=C4YAqAOlZifSfkNOc6F2FGHvUlj+1S0rSbNgn3SVbIkXkYQX5DyNCQmMw6yJQTu6+1
+         NfzV7yB0Ji5s1CZTs0JV5drIvHC7SzHjhBaLYm+QeWhA2z2xADV3DgcqBZL88pkNR0cV
+         bwxAG5oxiUfS5lAxkfNLQPX2U3rhQuxN3mSabq+9a+v2Webvvau5GudNgesVRqtT/WdC
+         e1Te99/7OYTdjnq5JikJX5SWHZpuwtAaCR5j72mHm9XY8wsR9H5I3x/EpmcGPMflmG9c
+         hG6DddwFPxa5N0z9HAFO0eCtWYutpz8KrEqTt/JcJgH2ufQAWa/4V3a1wSUqzQq0YOYz
+         OZFw==
+X-Gm-Message-State: AFuF++mc/Pdsh4xLGa5zTwa6bLV7FednXU7uwRpDfRbjr5TJFSgTBxtP
+	xskNJw38PbE7uTZQ1WfCMYoUY1n431+As3i/Ak7YNXpUkdwIHdmYpFNBQ3h1cj3iAd0=
+X-Gm-Gg: AYBFou1t9zbJqvdH84fynesBe6oU7Ozf/F/pVMoPXwoSVdoBd/9E0YVu50T37cDDyxF
+	e7eIxs2V+bpvKST9/sqKB8pm3c47A7h8Rzih+ikK1vxN3w8Qw23Aq20CilxkZKMEZvZjEH/lt8C
+	9XTJozE0cffSOD2j+1oKsbfacPo88TmnMuRdzppzNumCX/kgG7LF/iYFfduaP8SX5GjXQo+xv4a
+	Ct09/3kPETLrmQVcW9MnfxcVdJlGi3WHnlzBpDIkol/37l8AHYVjdF41+mRGIqbaq4f/aaGhnZf
+	6w86JiTqPLJxZ7x0DAzsWdhzNmkzzHFWiWq6tfb6ZDjFcXK3yigrfbCsRm2bH8/xpe6H/pHqYkt
+	UyzjjN+Ckfs5E7hBpD9glLc9UpVMcygAoyXRCcMEDUagxYjcsJg7cuXZn0GOBh2HfY7Wgi6H30b
+	ysKJr2xQFn+W2gTAhNkjUgs1tf8or4PwSsPZgk+OgcS/oED7jjZFC5a3Drwe5yPDDFwfxW6rcSJ
+	dXaYYFSFBnrXJ3tXhI=
+X-Received: by 2002:a05:600c:3507:b0:499:a5c8:c6f3 with SMTP id 5b1f17b1804b1-49cf7fe6900mr509106715e9.3.1788854957231;
+        Tue, 08 Sep 2026 01:09:17 -0700 (PDT)
+Received: from arrakeen.starnux.net ([2a01:e0a:106d:1080:52eb:f6ff:feb3:451a])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-49cee6023edsm441847955e9.7.2026.09.08.01.09.16
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 08 Sep 2026 01:09:16 -0700 (PDT)
+From: Neil Armstrong <neil.armstrong@linaro.org>
+Date: Tue, 08 Sep 2026 10:09:15 +0200
+Subject: [PATCH v2] interconnect: qcom: implement get_bw with rpmh_read
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 1/7] drm/msm/hdmi_phy: Cleanup after
- msm_hdmi_phy_resource_enable() failure
-To: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>,
-        Rob Clark <robin.clark@oss.qualcomm.com>,
-        Dmitry Baryshkov
- <lumag@kernel.org>,
-        Abhinav Kumar <abhinav.kumar@linux.dev>,
-        Jessica Zhang <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>,
-        Marijn Suijten <marijn.suijten@somainline.org>,
-        David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
-        Archit Taneja <architt@codeaurora.org>,
-        Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
-        Maxime Ripard <mripard@kernel.org>,
-        Thomas Zimmermann <tzimmermann@suse.de>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org,
-        freedreno@lists.freedesktop.org, linux-kernel@vger.kernel.org,
-        devicetree@vger.kernel.org, stable@vger.kernel.org
-References: <20260908-drm-msm-hdmi-fixes-before-eliza-v3-0-dcf8956878ca@oss.qualcomm.com>
- <20260908-drm-msm-hdmi-fixes-before-eliza-v3-1-dcf8956878ca@oss.qualcomm.com>
-Content-Language: en-US
-From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-In-Reply-To: <20260908-drm-msm-hdmi-fixes-before-eliza-v3-1-dcf8956878ca@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTA4MDA4MiBTYWx0ZWRfX9S39U34AETVa
- ODQKUFOt+7LTMKyIgtPmidq4coqydKiw+JgkfinekzprpWDVDXugEEufg5mFbrF7zntH57DgH4j
- dCKOZNgd1qg5bwLN5IT/hgdzS5rZjG0=
-X-Proofpoint-GUID: rHeLuhbxb0ooMtkQmZCKSiAKtX5yJVc-
-X-Authority-Analysis: v=2.4 cv=ObSoyBTY c=1 sm=1 tr=0 ts=6a9fc106 cx=c_pps
- a=N1BjEkVkxJi3uNfLdpvX3g==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
- a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22
- a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=dCp4QOuT8fr3gmi_UlEA:9 a=QEXdDO2ut3YA:10
- a=crWF4MFLhNY0qMRaF8an:22
-X-Proofpoint-ORIG-GUID: rHeLuhbxb0ooMtkQmZCKSiAKtX5yJVc-
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTA4MDA4MiBTYWx0ZWRfX1xrJKjw+eCRv
- K+/8IQH5QR7JzF8ZHj/DQVRxZhlZt28rgx20mKGWaSJhClV8VgmxaAoZ56JsyqmPfA7PuFx4hi0
- o432FLZ7JcCLV9iOqFt4NjpyfXns6HOWaNhfKg/fX69TKYT22rqY8yzOabL92sDUFmQWZn8KnaC
- 3p4zLh5yG//B980F6R5CZEj8MkWHOcPNIkGOqwSmitck1jyUyRqEFevu8GZZNuNF7WRqswnuwZ2
- Mpeh2vVwslJXHebF6irEVPbgdbWT908lZMPNAca6LnP/ieQHtDigfH1+8rkGZLD3K/tJXT2zgsp
- iAJm8rsqErA/Sr2kbdU1XdgBMoTchxMX0GW8sNcw65Fkl2vHxPo3tnSq/VFZBjN2tLDTsN8nIAR
- lMF6q63S836gk0uQYNUSdvNPEWQbX7kc0ny8qCatMmUP5i4WGL5vZAo/MizOZT9G54NX/DaRure
- WeDwviXesgptKj14deA==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-08_01,2026-09-07_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- suspectscore=0 lowpriorityscore=0 impostorscore=0 adultscore=0 phishscore=0
- priorityscore=1501 malwarescore=0 clxscore=1015 bulkscore=0 spamscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2609080082
+Message-Id: <20260908-topic-sm8x50-icc-read-rpmh-v2-1-b6f1c4205450@linaro.org>
+X-B4-Tracking: v=1; b=H4sIAKrCn2oC/43NQQ6CMBCF4auQWTumrRSMK+9hWIxlgEmUkikhG
+ MLdrZzA5fcW/9sgsQonuBUbKC+SJI4Z7lRAGGjsGaXNBmect9ZUOMdJAqb3dfUGJQRUphZ1eg/
+ ITyorS6V3XEMOTMqdrEf80WQPkuaon+Nrsb/1r+xi0WJrLuTYB/JdfX/JSBrPUXto9n3/AvsdJ
+ EPFAAAA
+X-Change-ID: 20251106-topic-sm8x50-icc-read-rpmh-eba461a452e7
+To: Georgi Djakov <djakov@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, linux-pm@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, Neil Armstrong <neil.armstrong@linaro.org>
+X-Mailer: b4 0.15.1
+X-Developer-Signature: v=1; a=openpgp-sha256; l=5677;
+ i=neil.armstrong@linaro.org; h=from:subject:message-id;
+ bh=jZb9VWJNn//9UIfodFEP6WLVk3CPMdRNJNrNhBck1Wc=;
+ b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBqn8Ksz1kMm9xb8PHeWR1wLddduvjg2l+f7eAh8u3c
+ DKXmp7iJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCap/CrAAKCRB33NvayMhJ0XMTD/
+ 91K0ue88uHmTaeWrOynq8j9LBjh95zKukeZmm4kmiCSawdwjnhYsQwd+Flr5NoQaBFCoYNWNeQEMmv
+ EdUHzsyTDHdDeCWA6LTfo+68pRXFx7Bm4eljjSL4iiWEjeHNe0OmSaWb2Bs5jS3X/p9VoQ0xtIQlxC
+ bQe9DyAqwKLuKQNAZf6fnTLNSJpfEEtw5OMhLU/2GJKFFpko4MwhhlnTfsQcuw4iF1SfSjENhawUBb
+ tF0geqZxpAqvrkQt9D6D+43FMFeH2L5+JAmqa4a5saUy3wMRNgZ1No/G8FBxV5RlU39C61w9rMaXWU
+ /rQDFFEhK+15QDBgZe+U3hNjOJVbGOrxysWhKrLTddx1DWl6aGomzyMfR21FaHzkeDfmgq5cmGmO2d
+ b1EdVIJusxe4mzChwS1eDoiFc7FulzplyhUzgx9XNU5mp5KdXRoLAkXYxwiw7v5ZNiNOrN1hNDvbI/
+ Bmv9M6dUhUtjyNh8bZzsKRD7PUJPMTu+Xi3WTg+xIhjbf8CwXI7fcSP8vJW/qES6cGZzLskT8O5fyl
+ dYuObc/SFlYiNpAj/fHtgLqlZPqxY7hnFqesxWgKjFSq6lcBk9EaQuHlpD5SK7KGEtfclFp9DFcWna
+ 0h17RZaAAVQurKjJxJQI8iVX8L39PRTo8O8FissVmBsoPtRE7SmsuS986oyg==
+X-Developer-Key: i=neil.armstrong@linaro.org; a=openpgp;
+ fpr=89EC3D058446217450F22848169AB7B1A4CFF8AE
 
-On 9/8/26 9:10 AM, Krzysztof Kozlowski wrote:
-> If msm_hdmi_phy_resource_enable() fails, e.g. when enabling regulators,
-> it should reverse the state of things already changed.
-> msm_hdmi_phy_resource_enable() is used also in probe path, thus such
-> failure, which could be simple deferred probe, would leave these
-> resources permanently enabled for the rest of the runtime.
-> 
-> Cc: <stable@vger.kernel.org>
-> Fixes: 15b4a4523859 ("drm/msm/hdmi: Create a separate HDMI PHY driver")
-> Signed-off-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
-> ---
->  drivers/gpu/drm/msm/hdmi/hdmi_phy.c | 16 ++++++++++++++--
->  1 file changed, 14 insertions(+), 2 deletions(-)
-> 
-> diff --git a/drivers/gpu/drm/msm/hdmi/hdmi_phy.c b/drivers/gpu/drm/msm/hdmi/hdmi_phy.c
-> index eb1088755cb3..15e37596bdb1 100644
-> --- a/drivers/gpu/drm/msm/hdmi/hdmi_phy.c
-> +++ b/drivers/gpu/drm/msm/hdmi/hdmi_phy.c
-> @@ -67,16 +67,28 @@ int msm_hdmi_phy_resource_enable(struct hdmi_phy *phy)
->  	ret = regulator_bulk_enable(cfg->num_regs, phy->regs);
->  	if (ret) {
->  		DRM_DEV_ERROR(dev, "failed to enable regulators: (%d)\n", ret);
-> -		return ret;
-> +		goto err_pm_put;
+Since we can actually read back the APPS rpmh interconnect
+BCM votes we can actually implement the get_bw() callback
+and provide a coherent average and peak bandwidth at probe time.
 
-If you're a fan, there's PM_RUNTIME_ACQUIRE_xxx in cleanup.h
+The benefits of that are:
+- keep disabled BCMs disabled
+- avoid voting unused BCMs to INT_MAX
 
-Konrad
+If the interconnects are correctly described for a platform,
+all the required BCMs would be voted to the maximum bandwidth
+until sync_state is reached.
+
+Since we only get the BCM vote, we need to redistribute
+the vote values to the associated nodes. The initial BCM
+votes are read back at probe time in order to be ready when
+the get_bw() is called when a node is added.
+
+Tested-by: Georgi Djakov <djakov@kernel.org> #db845c
+Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
+---
+Changes in v2:
+- Added tested-by
+- Rebased on v7.3-rc1 now the rpmh_read() is merged
+- Link to v1: https://patch.msgid.link/20251106-topic-sm8x50-icc-read-rpmh-v1-1-d03a2e5ca5f7@linaro.org
+---
+ drivers/interconnect/qcom/bcm-voter.c | 36 +++++++++++++++++++++
+ drivers/interconnect/qcom/bcm-voter.h |  1 +
+ drivers/interconnect/qcom/icc-rpmh.c  | 60 ++++++++++++++++++++++++++++++++++-
+ 3 files changed, 96 insertions(+), 1 deletion(-)
+
+diff --git a/drivers/interconnect/qcom/bcm-voter.c b/drivers/interconnect/qcom/bcm-voter.c
+index a2d437a05a11..9014bf20adad 100644
+--- a/drivers/interconnect/qcom/bcm-voter.c
++++ b/drivers/interconnect/qcom/bcm-voter.c
+@@ -261,6 +261,42 @@ void qcom_icc_bcm_voter_add(struct bcm_voter *voter, struct qcom_icc_bcm *bcm)
+ }
+ EXPORT_SYMBOL_GPL(qcom_icc_bcm_voter_add);
+ 
++/**
++ * qcom_icc_bcm_get_bw - get current bcm vote
++ * @voter: voter used to query bcm
++ * @bcm: bcm to get current vote from
++ */
++void qcom_icc_bcm_get_bw(struct bcm_voter *voter,
++			 struct qcom_icc_bcm *bcm)
++{
++	struct tcs_cmd cmd = { .addr = bcm->addr };
++	int ret, i;
++	u64 x, y;
++
++	mutex_lock(&voter->lock);
++
++	rpmh_invalidate(voter->dev);
++
++	ret = rpmh_read(voter->dev, &cmd);
++	if (ret) {
++		pr_err("Error sending AMC RPMH requests (%d)\n", ret);
++		goto out;
++	}
++
++	x = FIELD_GET(BCM_TCS_CMD_VOTE_X_MASK, cmd.data);
++	y = FIELD_GET(BCM_TCS_CMD_VOTE_Y_MASK, cmd.data);
++
++	/* For boot-up, fill the AMC vote in all buckets */
++	for (i = 0; i < QCOM_ICC_NUM_BUCKETS; i++) {
++		bcm->vote_x[i] = x;
++		bcm->vote_y[i] = y;
++	}
++
++out:
++	mutex_unlock(&voter->lock);
++}
++EXPORT_SYMBOL_GPL(qcom_icc_bcm_get_bw);
++
+ /**
+  * qcom_icc_bcm_voter_commit - generates and commits tcs cmds based on bcms
+  * @voter: voter that needs flushing
+diff --git a/drivers/interconnect/qcom/bcm-voter.h b/drivers/interconnect/qcom/bcm-voter.h
+index b4d36e349f3c..fc75d457dcc7 100644
+--- a/drivers/interconnect/qcom/bcm-voter.h
++++ b/drivers/interconnect/qcom/bcm-voter.h
+@@ -13,6 +13,7 @@
+ #include "icc-rpmh.h"
+ 
+ struct bcm_voter *of_bcm_voter_get(struct device *dev, const char *name);
++void qcom_icc_bcm_get_bw(struct bcm_voter *voter, struct qcom_icc_bcm *bcm);
+ void qcom_icc_bcm_voter_add(struct bcm_voter *voter, struct qcom_icc_bcm *bcm);
+ int qcom_icc_bcm_voter_commit(struct bcm_voter *voter);
+ 
+diff --git a/drivers/interconnect/qcom/icc-rpmh.c b/drivers/interconnect/qcom/icc-rpmh.c
+index 3b445acefece..7f2b5673629b 100644
+--- a/drivers/interconnect/qcom/icc-rpmh.c
++++ b/drivers/interconnect/qcom/icc-rpmh.c
+@@ -136,6 +136,61 @@ int qcom_icc_set(struct icc_node *src, struct icc_node *dst)
+ }
+ EXPORT_SYMBOL_GPL(qcom_icc_set);
+ 
++static int qcom_icc_get_bw(struct icc_node *node, u32 *avg, u32 *peak)
++{
++	struct qcom_icc_node *qn = node->data;
++	u32 avg_max = 0;
++	u32 peak_max = 0;
++	u64 x, y;
++	int i;
++
++	if (!qn->num_bcms) {
++		*avg = INT_MAX;
++		*peak = INT_MAX;
++
++		return 0;
++	}
++
++	for (i = 0; i < qn->num_bcms; ++i) {
++		struct qcom_icc_bcm *bcm = qn->bcms[i];
++
++		/* Use AMC vote for boot-up */
++		x = bcm->vote_x[QCOM_ICC_BUCKET_AMC];
++		y = bcm->vote_y[QCOM_ICC_BUCKET_AMC];
++
++		/* Consider enable mask and convert to INT_MAX */
++		if (bcm->enable_mask) {
++			if (x & bcm->enable_mask)
++				avg_max = INT_MAX;
++			if (y & bcm->enable_mask)
++				peak_max = INT_MAX;
++		} else {
++			if (x) {
++				x *= bcm->aux_data.unit;
++				do_div(x, bcm->vote_scale);
++				x *= qn->buswidth * qn->channels;
++				do_div(x, bcm->aux_data.width);
++
++				avg_max = max(avg_max, x);
++			}
++
++			if (y) {
++				y *= bcm->aux_data.unit;
++				do_div(y, bcm->vote_scale);
++				y *= qn->buswidth;
++				do_div(y, bcm->aux_data.width);
++
++				peak_max = max(peak_max, y);
++			}
++		}
++	}
++
++	*avg = avg_max;
++	*peak = peak_max;
++
++	return 0;
++}
++
+ /**
+  * qcom_icc_bcm_init - populates bcm aux data and connect qnodes
+  * @bcm: bcm to be initialized
+@@ -255,6 +310,7 @@ int qcom_icc_rpmh_probe(struct platform_device *pdev)
+ 	provider = &qp->provider;
+ 	provider->dev = dev;
+ 	provider->set = qcom_icc_set;
++	provider->get_bw = qcom_icc_get_bw;
+ 	provider->pre_aggregate = qcom_icc_pre_aggregate;
+ 	provider->aggregate = qcom_icc_aggregate;
+ 	provider->xlate_extended = qcom_icc_xlate_extended;
+@@ -272,8 +328,10 @@ int qcom_icc_rpmh_probe(struct platform_device *pdev)
+ 	if (IS_ERR(qp->voter))
+ 		return PTR_ERR(qp->voter);
+ 
+-	for (i = 0; i < qp->num_bcms; i++)
++	for (i = 0; i < qp->num_bcms; i++) {
+ 		qcom_icc_bcm_init(qp->bcms[i], dev);
++		qcom_icc_bcm_get_bw(qp->voter, qp->bcms[i]);
++	}
+ 
+ 	for (i = 0; i < num_nodes; i++) {
+ 		qn = qnodes[i];
+
+---
+base-commit: cee9395acd8043be0644b25c34bfa86623f2b935
+change-id: 20251106-topic-sm8x50-icc-read-rpmh-eba461a452e7
+
+Best regards,
+--  
+Neil Armstrong <neil.armstrong@linaro.org>
+
