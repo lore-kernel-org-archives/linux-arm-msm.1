@@ -1,124 +1,158 @@
-Received: from mail-wm1-f43.google.com (mail-wm1-f43.google.com [209.85.128.43])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 34B7156C620
-	for <linux-arm-msm@vger.kernel.org>; Tue,  8 Sep 2026 15:53:16 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.43
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8183257EDAE;
+	Tue,  8 Sep 2026 15:57:10 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788882798; cv=none; b=P3GBJl2eD01DDG2wEUWob+SkAs969oTSLeG/GmWPtp/IqTtF8v9w2PTyrGWtBMX+ZY0e+T9T9GkWp9bzvUUsovb3ffdITXKb/lyrx37PkT53+T+zmZrxXLa3wkq37pbIDntYHKd5rW8PRJZtD5Oqcr5wT8NwNbcIfvWpfUkClkI=
+	t=1788883030; cv=none; b=cclY4qoHMiax5U90FWv0bj9818SNEJseUnvgqc0Q0ytLr4SaiCK1wEy4Du7r5tTFJUyKrw+CZ8Qu6qj7fEcc8mAsRtIpZb7BWUN7PO6VspBtwmxzynqHfsy2LOpT8p6JxVRx0EKHq3p+CsuoxvkGgmPijPFLr4m+EwiEswmQfOU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788882798; c=relaxed/simple;
-	bh=E7n7efcL+FU6GvjK4ZDItRGo1F3p6DAx/2ZzkiPlhkg=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=I3MHiuGUhWuKM+PM2a2lOXOMDyaSp8KV43e/RQcPJEYA5r1aRs3lVvCUvL5Y4T88q5pnapO2Be0DVpuRJ9lgomxqKG4AtMguTOT5Jmnos2cIR/M8VG5rzt6s+XZRSRyzxhJzwN6yqfWedmF0BlkSp95/r/4U935vRa1jFU72as8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com; spf=pass smtp.mailfrom=baylibre.com; dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b=ifjNbn5W; arc=none smtp.client-ip=209.85.128.43
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=baylibre.com
+	s=arc-20240116; t=1788883030; c=relaxed/simple;
+	bh=ip+IpCmoBvVS9h9FdcjcfhqPGvlYkU27E5KbC/vmW3U=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
+	 In-Reply-To:To:Cc; b=FlUzAWG8ZZXqHOuRmPSMrfjI+nFrI5//e/9djXLt8JCNCyotS9l01XtPoX0vY3o07kP4UyU1xbbFeFJKm3TFx0LaQMGosAo1CDKj2Df/LhM/tKwE9vKErifgshfCe7Ldz1AOSmBT3suY3Ufj9pvdleTw1Ons6+jvf0GVBdvCESE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=OdaG1UPd; arc=none smtp.client-ip=10.30.226.201
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b="ifjNbn5W"
-Received: by mail-wm1-f43.google.com with SMTP id 5b1f17b1804b1-49d036e0e99so19006065e9.1
-        for <linux-arm-msm@vger.kernel.org>; Tue, 08 Sep 2026 08:53:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=baylibre.com; s=google; t=1788882794; x=1789487594; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=E7n7efcL+FU6GvjK4ZDItRGo1F3p6DAx/2ZzkiPlhkg=;
-        b=ifjNbn5W8oNZglsJKy9U9h1GN6fKrlziiakA/PftoOJqD0TytlC0GkA1oy0/3/goNS
-         IWl6J44WxuVhXOGhIFaUeW1ZP0CHlypTWEdTT1btCeEmsIzPFEExhWpDmzowiBpBhL+w
-         M6uoj0hUL61ywwxEEX1T5E8+VXD6Sdm1U4TO7PCZTlu4VHd11UXpR+eHANAFedx8Rkc+
-         Viot/xkn3xN25B5BDjNwjufh3W1pBUQQsi+dbD3mIDjAcjeaWUB1aWxJ9e95sE6kMDS8
-         do9zkBgWi4HcaSkC4ivsba1Y83dZS8FvzoXe9hodT0wXNe4zs04o8MmVw6S0k6yqt/MG
-         dO7A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788882794; x=1789487594;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=E7n7efcL+FU6GvjK4ZDItRGo1F3p6DAx/2ZzkiPlhkg=;
-        b=kb8WyJVQNLUmu2R+PDvIV5HkIqR0dXi5lfTfM9wJe4bwCth4q6bl9EMlR9LtHJMTS0
-         1+dZ55VVl0bVjbzBJkeObrCU57JoZu87SScOHgldncTX5qOv0o31M8DBXSSbFSg1g7vS
-         zrdv1ect2TOQ+ZbmTP2QU4YA0osPBva6JUf/01pWf4XpwZZZkONQjJPr7dVbED7iM3fT
-         u3LqxZaFkefF4yU3JEE5iIGVp1lzLALUuT2yY0JP2nvjmGvX3KsZKJTfFR2rcYU7M1w1
-         tSdSNa8YYXRHM9WQ6y/3Ab/4H2LQ3LFB60DFgD7bj69tsw8nHUauRTotPsXMBybqJHbO
-         JhgQ==
-X-Forwarded-Encrypted: i=1; AKwUvBw5+hOiwledIRC8if2f9tBTiVcDkaVr0+mMca9XcDnqhNCKMq0nWxPukCPzTgtAWraov0e6XSiLvHYe2myI@vger.kernel.org
-X-Gm-Message-State: AFuF++lfIR9txw2o/zGFcUS9gm/Gn3LEp+LGgnTK4CVznqR0Z1J7XqQ+
-	iCCuTh2dm3hckKHUbHkOEdKhRLZO7MMtqQWYO5BAl8R8IZ1tEI8Fs06qw2xTz0pzLAE=
-X-Gm-Gg: AYBFou2wcYGJsf0kiKgK+/NvqCO11UGqTTPqUgWjpdUxysiYxPjkTDfqvRrcrAZdybs
-	alN2GONfX/jXLVdbRRy0PGgK4H+9wdu3A9t2+JMFFRXCQ0pI9U8E5RcVF4GGjdmDnbgrFWkUzDA
-	NevL50FjJ5S6g4z+GbEfR+Ha+udUorXxb9tHJfyw0vFM+gl5jjpzz1jcEfL2IRJHpX68e17VUSF
-	C4IESwZ6MmCP+xP33flCpl1Sb3LrFtqwmv2Lu3sLorkWcuvjxIIGyv+X7a2prQdEjt6xOUx/p61
-	YX6v14DY492QXaeUdYnLiQLuH1LzEfepVk4WN79EKcfWczUOSw+vHLtieONRGbx1K3aF2Gr3z1z
-	qW1J2VGh6xRVJh+zhXzZdQdgXvCHmtHTHmMylfiNVyS2WtVJrN8/MYCDpkOXzVS3hVWKPUh646R
-	e1oIc7mP4ds9a3xINaqprBPFQxMHxwiybaXZL1H4IPwwqrC0h1+y9KNJiAUm6g4lZnTdYDgLkzs
-	1yiCCiYK15Varv2yHlFALZw+IvdojHzOss1tg+uiFOU2pDbLkQ=
-X-Received: by 2002:a05:600c:6098:b0:49c:fc6c:be05 with SMTP id 5b1f17b1804b1-49cfc6cbfdbmr310435145e9.28.1788882793168;
-        Tue, 08 Sep 2026 08:53:13 -0700 (PDT)
-Received: from localhost (p200300f65f19a9042cc2680c1f1bf2f5.dip0.t-ipconnect.de. [2003:f6:5f19:a904:2cc2:680c:1f1b:f2f5])
-        by smtp.gmail.com with UTF8SMTPSA id 5b1f17b1804b1-49cf7740d44sm881111065e9.15.2026.09.08.08.53.12
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 08 Sep 2026 08:53:12 -0700 (PDT)
-Date: Tue, 8 Sep 2026 17:53:11 +0200
-From: Uwe =?utf-8?Q?Kleine-K=C3=B6nig?= <u.kleine-koenig@baylibre.com>
-To: Oleg Keri <okerixx@gmail.com>
-Cc: Rob Herring <robh@kernel.org>, 
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
-	Hans de Goede <hansg@kernel.org>, Ilpo =?utf-8?B?SsOkcnZpbmVu?= <ilpo.jarvinen@linux.intel.com>, 
-	Bryan O'Donoghue <bryan.odonoghue@linaro.org>, Guenter Roeck <linux@roeck-us.net>, 
-	linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	platform-driver-x86@vger.kernel.org, linux-hwmon@vger.kernel.org
-Subject: Re: [PATCH 2/2] platform/arm64: add Lenovo Yoga Slim 7x Gen 11 EC
- driver
-Message-ID: <aqAvALulXKtsQQnc@monoceros>
-References: <20260908091752.5508-1-okerixx@gmail.com>
- <20260908091752.5508-3-okerixx@gmail.com>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="OdaG1UPd"
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 441ECC2BD05;
+	Tue,  8 Sep 2026 15:57:10 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1788883030;
+	bh=ip+IpCmoBvVS9h9FdcjcfhqPGvlYkU27E5KbC/vmW3U=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
+	b=OdaG1UPdcLRYSWQt1C08Y3BcLHxZgQRdjstO6DV1f8RqHwJkxme7Klqrq6TvhYhqg
+	 mxHgmyIvKDZGGodq6TuK19rnZ0AqtMZuk8Sn7SSxhcqpFfOF4TR3To7y2uleHTPts1
+	 gSycEmcCHStq3IglTjTSSHRaPIvm+xzinLqSc2QgFEFrv/+6Qz24OUiYjM1zyrxCW5
+	 c3p12fZ0TephifZreL3S41a12h8TdP4IS7+FHSgDpo6IbSq4lbl3zFJMXJsqMDdMvC
+	 gXdUSDHoj00Ziz5UGgAImqAHb7rvei8l+Q1cETkD8F9O5VrTSKZHt6yI6pIPvyJyxn
+	 ItuSSEE8d4kvg==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2A922C79FAF;
+	Tue,  8 Sep 2026 15:57:10 +0000 (UTC)
+From: =?utf-8?q?Dawid_Wr=C3=B3bel_via_B4_Relay?= <devnull+me.dawidwrobel.com@kernel.org>
+Date: Tue, 08 Sep 2026 17:57:01 +0200
+Subject: [PATCH v3 3/3] arm64: dts: qcom: sm8250: add device tree for the
+ Xiaomi Mi Pad 5 Pro 5G
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="27nkzeturjw7lglz"
-Content-Disposition: inline
-In-Reply-To: <20260908091752.5508-3-okerixx@gmail.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+Message-Id: <20260908-sm8250-xiaomi-enuma-v3-3-0198c3bf954a@dawidwrobel.com>
+References: <20260908-sm8250-xiaomi-enuma-v3-0-0198c3bf954a@dawidwrobel.com>
+In-Reply-To: <20260908-sm8250-xiaomi-enuma-v3-0-0198c3bf954a@dawidwrobel.com>
+To: Jianhua Lu <lujianhua000@gmail.com>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Jessica Zhang <jesszhan0024@gmail.com>, David Airlie <airlied@gmail.com>, 
+ Simona Vetter <simona@ffwll.ch>, 
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, 
+ Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, Bjorn Andersson <andersson@kernel.org>, 
+ Konrad Dybcio <konradybcio@kernel.org>
+Cc: dri-devel@lists.freedesktop.org, devicetree@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
+ =?utf-8?q?Dawid_Wr=C3=B3bel?= <me@dawidwrobel.com>, 
+ Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2890; i=me@dawidwrobel.com;
+ h=from:subject:message-id;
+ bh=WjYBVrEZzP3ExAdg6WDhwCT+UwHmbXt9I8SNxESJ/BU=;
+ b=owGbwMvMwCV2qrTGfeXVd28ZT6slMWQtMAiJPyGz9fSSzfH2R1vMX/KtE9EQK30gVfKTb+2Ok
+ uK1sUUsHaUsDGJcDLJiiix6aUF7rIJffn/34nc4zBxWJpAhDFycAjCRvo8M/5Prfb86hXeUfvKI
+ T/+ndmv3ZHmFKTumuTzN02Y/fVNaV5qR4fNdycKTqu1OzVXfb5iqla3fZ9NgW7fmzgaNxdND/s5
+ ayAEA
+X-Developer-Key: i=me@dawidwrobel.com; a=openpgp;
+ fpr=B64A778E0E64049A70C831C8B7B81FA12B282A92
+X-Endpoint-Received: by B4 Relay for me@dawidwrobel.com/default with
+ auth_id=901
+X-Original-From: =?utf-8?q?Dawid_Wr=C3=B3bel?= <me@dawidwrobel.com>
+Reply-To: me@dawidwrobel.com
+
+From: Dawid Wróbel <me@dawidwrobel.com>
+
+The Mi Pad 5 Pro 5G (enuma, 2021) is the modem-equipped variant of the
+Mi Pad 5 Pro. The board is otherwise the elish design, so describe it as
+the common device tree plus its own board ID, panel compatible and WiFi
+board data variant.
+
+Unlike elish, this model shipped with a single display variant, so there
+is one device tree rather than a per-panel pair.
+
+The WiFi node in the common device tree gains a label, so this board can
+override its calibration variant.
+
+Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Signed-off-by: Dawid Wróbel <me@dawidwrobel.com>
+---
+ arch/arm64/boot/dts/qcom/Makefile                  |  1 +
+ .../boot/dts/qcom/sm8250-xiaomi-elish-common.dtsi  |  2 +-
+ arch/arm64/boot/dts/qcom/sm8250-xiaomi-enuma.dts   | 27 ++++++++++++++++++++++
+ 3 files changed, 29 insertions(+), 1 deletion(-)
+
+diff --git a/arch/arm64/boot/dts/qcom/Makefile b/arch/arm64/boot/dts/qcom/Makefile
+index e05414290d8e..529e29ffb25a 100644
+--- a/arch/arm64/boot/dts/qcom/Makefile
++++ b/arch/arm64/boot/dts/qcom/Makefile
+@@ -369,6 +369,7 @@ dtb-$(CONFIG_ARCH_QCOM)	+= sm8250-sony-xperia-edo-pdx203.dtb
+ dtb-$(CONFIG_ARCH_QCOM)	+= sm8250-sony-xperia-edo-pdx206.dtb
+ dtb-$(CONFIG_ARCH_QCOM)	+= sm8250-xiaomi-elish-boe.dtb
+ dtb-$(CONFIG_ARCH_QCOM)	+= sm8250-xiaomi-elish-csot.dtb
++dtb-$(CONFIG_ARCH_QCOM)	+= sm8250-xiaomi-enuma.dtb
+ dtb-$(CONFIG_ARCH_QCOM)	+= sm8250-xiaomi-pipa.dtb
+ dtb-$(CONFIG_ARCH_QCOM)	+= sm8350-hdk.dtb
+ dtb-$(CONFIG_ARCH_QCOM)	+= sm8350-microsoft-surface-duo2.dtb
+diff --git a/arch/arm64/boot/dts/qcom/sm8250-xiaomi-elish-common.dtsi b/arch/arm64/boot/dts/qcom/sm8250-xiaomi-elish-common.dtsi
+index 19aff83ecf7b..12a2ba48340f 100644
+--- a/arch/arm64/boot/dts/qcom/sm8250-xiaomi-elish-common.dtsi
++++ b/arch/arm64/boot/dts/qcom/sm8250-xiaomi-elish-common.dtsi
+@@ -817,7 +817,7 @@ &pcie0_phy {
+ };
+ 
+ &pcieport0 {
+-	wifi@0 {
++	wifi_0: wifi@0 {
+ 		compatible = "pci17cb,1101";
+ 		reg = <0x10000 0x0 0x0 0x0 0x0>;
+ 
+diff --git a/arch/arm64/boot/dts/qcom/sm8250-xiaomi-enuma.dts b/arch/arm64/boot/dts/qcom/sm8250-xiaomi-enuma.dts
+new file mode 100644
+index 000000000000..45bcc0438138
+--- /dev/null
++++ b/arch/arm64/boot/dts/qcom/sm8250-xiaomi-enuma.dts
+@@ -0,0 +1,27 @@
++// SPDX-License-Identifier: BSD-3-Clause
++/*
++ * Copyright (c) 2025-2026 Dawid Wróbel <me@dawidwrobel.com>
++ */
++
++/dts-v1/;
++
++#include "sm8250-xiaomi-elish-common.dtsi"
++
++/ {
++	model = "Xiaomi Mi Pad 5 Pro 5G";
++	compatible = "xiaomi,enuma", "xiaomi,elish", "qcom,sm8250";
++
++	/* Platform type differs from elish; msm-id is inherited unchanged. */
++	qcom,board-id = <0x2e 0>;
++};
++
++&display_panel {
++	compatible = "xiaomi,enuma-csot-nt36523", "xiaomi,elish-csot-nt36523",
++		     "novatek,nt36523";
++
++	status = "okay";
++};
++
++&wifi_0 {
++	qcom,calibration-variant = "Xiaomi_Pad_5Pro_5G";
++};
+
+-- 
+2.55.0
 
 
---27nkzeturjw7lglz
-Content-Type: text/plain; protected-headers=v1; charset=us-ascii
-Content-Disposition: inline
-Subject: Re: [PATCH 2/2] platform/arm64: add Lenovo Yoga Slim 7x Gen 11 EC
- driver
-MIME-Version: 1.0
-
-On Tue, Sep 08, 2026 at 11:17:52AM +0200, Oleg Keri wrote:
-> +#include <linux/i2c.h>
-> [...]
-> +#include <linux/mod_devicetable.h>
-
-Please don't include <linux/mod_devicetable.h>, this header should go
-away soon. To get a definition of of_device_id and i2c_device_id
-<linux/i2c.h> is enough. (Or if you want to go the full iwyu way,
-include <linux/device-id/of.h> and <linux/device-id/i2c.h>.)
-
-Best regards
-Uwe
-
---27nkzeturjw7lglz
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAABCgAdFiEEP4GsaTp6HlmJrf7Tj4D7WH0S/k4FAmqgL2UACgkQj4D7WH0S
-/k7CwAgAnPntIvnHC0kMw1/QQBqCS3Vp07x/cj5/X3i2U07bGMvno27pCqx+dt5k
-NmyHEYA6GG1TzZ+fTlIBrP80JJBOlITt5D2bCVpqzWZfmVRP9lqEMTNzlPwHyID7
-WrxJ8AiL6IYplgPdSNo7ma4EjworEEjyrTfkzSFUAbLkPFKv6y4kreCZ3LaiMSk0
-b+inF4QOHKm+ZRqpaB/3QvOpt8ZM6m+RDrcqS+8dwblVR5kf2OVbxaHbhby0Wcta
-kgf1MkOpTASnGDan1SR1YSYKNHtu/Hwo+9TGnWITgb6MRZC/lBYdfysuLmhFrXMC
-hJ/3zZkWmanAcK1NoI3uKrIY4n84eg==
-=8Ft8
------END PGP SIGNATURE-----
-
---27nkzeturjw7lglz--
