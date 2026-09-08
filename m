@@ -1,508 +1,198 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from mx0b-001ae601.pphosted.com (mx0b-001ae601.pphosted.com [67.231.152.168])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DB4774A0910
-	for <linux-arm-msm@vger.kernel.org>; Tue,  8 Sep 2026 08:46:23 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788857185; cv=none; b=cS/+eMvHpmSrCvUtHwKN4G46yMDLTtoI0TLxuhRig1IEm6I75WsAYlvvgnLPlbPQdse05EwqQch6aaWChTh3HKFBz1JZtb22j8TbamS5HfYN2ZTC3caTYZazDT8557bq88HEEnsDWO/Ldjug8wHP2B2hAJLDSQkZpSdslZBBIQE=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788857185; c=relaxed/simple;
-	bh=utzLf/vlmEQYRrCUTZYwl9rhKpbvMCOBl0vcW5bvdaQ=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=J8nJEo1pFUGVgfKfzkqoTSRbo5Uk25GHfzAfRmsf+rniyl9brOjwgMhXb2z2hjOuE0XKs08Rb0iW6X+GzA58OD5PMVnNWIB4Bdi9D0LtoICTtlMSR+0D6fvpGPK8YJ+bjgipg32cU49G6Hvl3Y9BgLBSO+ek3gSbqLcmZe1ernY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=SFHyii2m; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=Oa7UIqAH; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D2A794AA1DE;
+	Tue,  8 Sep 2026 08:50:10 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=67.231.152.168
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1788857436; cv=fail; b=IwYyBDmAK05UU5PWRdhx4JSxQBiUq4G1ylED9rZcl+CTopvQNOzQnwLxRXje4HfYFi50797wp8gpWUWTb7ZnTtimfq8QBJ1YQ1SRHG11ZzDMawMs7Ex3q3FWLQrft3i/cgljo50Txm3qOa2l9TbjPjQBkEaga15ZzygVJfjTItE=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1788857436; c=relaxed/simple;
+	bh=OGjNk7STDeyzh8pkqvrHao/cBXIA9vcUFIio8LrkNrk=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=BdZ2Sk51+05c8F9jjzLLH0AM0ZTRgoKGDL7SxkCqziagDkTNXDCMOoB0mgUnZBIBAbDTDHQIoiRJcF/03OR2VEkJKJrV0UEwbkYLSrg4ktFooGj86L+dTN5Bmcohg5xMf0k4JSuwuWmLcsBEDu2m7L5wK5ybqoPH2U1L/wAWcyA=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=opensource.cirrus.com; spf=pass smtp.mailfrom=opensource.cirrus.com; dkim=pass (2048-bit key) header.d=cirrus.com header.i=@cirrus.com header.b=jh/UyfwO; dkim=pass (1024-bit key) header.d=cirrus4.onmicrosoft.com header.i=@cirrus4.onmicrosoft.com header.b=zVio74kn; arc=fail smtp.client-ip=67.231.152.168
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=opensource.cirrus.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=opensource.cirrus.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="SFHyii2m";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Oa7UIqAH"
-Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6886MA8j2363469
-	for <linux-arm-msm@vger.kernel.org>; Tue, 8 Sep 2026 08:46:22 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	XMMJeXnoAXfYPiF6XqiCcv6X6ah8mxOOiGGLqHEPM48=; b=SFHyii2mUS1mS5CG
-	AbIXKddF/qLIqvEzIQz3z8iMsRlk4jbOW+I/ossub8eSxWP0acO8c1jqvSfCDgFE
-	CnPMc9FhHBZ3YBFShUGzjV36BC+vNK1PUBDYapx2yftc9/tb14uW27eM8QrCZJ/I
-	Inb/QqBweCtF8+U743u43gVOYauI9XDgq1g43C89ZzqmohdhEzR7NrDLkmVY/dxx
-	Yk9wEF7XNhoRT26LTTMC+tHqX7eMnEaboQx8OSXOw46pr6TsH8HR1+ESZBjjwaI3
-	0Vf4Xxq0M+70XAGWbBbg8RoaMZp38TxRHV7FenCp96+lSOsOMIiETiRPy632+OU5
-	7pyvKg==
-Received: from mail-qt1-f198.google.com (mail-qt1-f198.google.com [209.85.160.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gjaguh4dw-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 08 Sep 2026 08:46:22 +0000 (GMT)
-Received: by mail-qt1-f198.google.com with SMTP id d75a77b69052e-52fc0097865so114822941cf.2
-        for <linux-arm-msm@vger.kernel.org>; Tue, 08 Sep 2026 01:46:22 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=cirrus.com header.i=@cirrus.com header.b="jh/UyfwO";
+	dkim=pass (1024-bit key) header.d=cirrus4.onmicrosoft.com header.i=@cirrus4.onmicrosoft.com header.b="zVio74kn"
+Received: from pps.filterd (m0077474.ppops.net [127.0.0.1])
+	by mx0b-001ae601.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6884pEHN2435247;
+	Tue, 8 Sep 2026 03:49:33 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cirrus.com; h=cc
+	:content-type:date:from:in-reply-to:message-id:mime-version
+	:references:subject:to; s=PODMain02222019; bh=bn4h78Fhd3Eh+CqkN4
+	MvlyD5r39/+ISsk552u/bQMAk=; b=jh/UyfwO3qGXF26CyPb98hsAsdr8URfvxS
+	NaQKT2ZZ20VTVbEodJdYfpkMt1UnzHTeSK0FDZ69sP/4ocW1611t6P2quSr0liXL
+	dWtg7OciwYR9ecjVKJi/+H0uHhi8I1S1uKlgydjqZDdRInN5k4OoDYREipWKt5u5
+	A7iuK+z+DBAv1QfHXirGvOaIol18JO7/XDdvwY0hSuNct5ocYKLdM1EJUlVmuqYj
+	TjA1TTboVnYiA5yxcdGNebsN0A6eMId+cWi5FR5AJ9Myint76ocoGdKAmWEEFXEP
+	rN34qVNP/cSyzcuTNqMynL7wmRpvcnKwV4aJ1SvLWUGRZ3a65KTA==
+Received: from cy3pr05cu001.outbound.protection.outlook.com (mail-westcentralusazhn15013062.outbound.protection.outlook.com [52.102.133.62])
+	by mx0b-001ae601.pphosted.com (PPS) with ESMTPS id 4ggfgju322-1
+	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
+	Tue, 08 Sep 2026 03:49:33 -0500 (CDT)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=T2lT/RFHkzI92Avd4ic1t1T0SpEjqQxzEevn36bFdkOOHVy7ATBYdx4tr0BQUua8ni+tE19eqODnedI/5AgcQcTKc5k62Nwp4qr8LAjEJRvPCdWJYaK53MJJ4Qxvisp/Gn0aS8+dsEKvGmJ+iE0257XD3fTNXFQ/hZPtCoyDwiyJ85Duf+3w6ygG8nX7Dt65Bq/NabRtpCwHxD+SRpvSMHZtmJbh/PX8P2iamc9Y5f9H37OHWumbdwtKw/1eRzUWuDOKRG5uzKa2r1d/7IFgzywj4VmjKA/l5Yw0uxuYJd6NEzdj00LJxglFJcq+Xbwx/2GBDCurEB+IKfWBHn4NPA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=bn4h78Fhd3Eh+CqkN4MvlyD5r39/+ISsk552u/bQMAk=;
+ b=MZwz+esAn4UPPFNgU1Q9NWZSmQjOd6di4UTzy0iIcdIHmgP2nN5taIc8K1GcgA0iP5Lxv/DgytFEEdUgEGUsAwmpjH08jEaecSLxIaQT2/r5dgmhg+XaXa58tQZRRfWONE+qurn6sZPXXmuRHs4/FcEeJWf2jmqQVPFbWhJJK6iIBLwtNszVa8aDQQ7B+Vs5o3hdhkX8okAbz669lGn0gMSwPdCqJTN1z980fCeyPYUdZGwkj8pRiwF8vvXsbrUB35sBgPSLn2vNZOcJRpGqFTo0lTcFijob40FNKawcmd/6JAjQKdK6S9jgMm0hskpRSDDnBivsJGHns9b1/JSGUg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=softfail (sender ip
+ is 84.19.233.75) smtp.rcpttodomain=catcrafts.net
+ smtp.mailfrom=opensource.cirrus.com; dmarc=fail (p=reject sp=reject pct=100)
+ action=oreject header.from=opensource.cirrus.com; dkim=none (message not
+ signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1788857182; x=1789461982; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from:references
-         :cc:to:subject:user-agent:mime-version:date:message-id:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=XMMJeXnoAXfYPiF6XqiCcv6X6ah8mxOOiGGLqHEPM48=;
-        b=Oa7UIqAHRZU02+KNpV3kqpX7iOBVsQegpDhAP/sAcgQgOGyWj9v2+Ow1BpKWUXDT0x
-         G0l1qUe9PYqVoOkN2/TYCjiV+LKcTSS3LqmbLPF7b0nJ6vYfErnDHRog6ObToYOdNB2z
-         s2/utIws3s5JSgkB/73sHsTCFUDBgEXJWhkkGI+K5wQlgs61pBDLsW4wy5JyfONCPDQQ
-         nqI2FH9k39RIMhZqar+zYAGHnOcPoJL53M9YIyzgPdoogTR5n0ow8wjIlKUqsLw5rewC
-         dp9BxQauvWSfELrbQTedvZuQQuu72vjCUlqgBvbWTlEg0GpIOfI0epcWPCisdRSJzsL7
-         RPNA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788857182; x=1789461982;
-        h=content-transfer-encoding:content-type:in-reply-to:from:references
-         :cc:to:subject:user-agent:mime-version:date:message-id:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=XMMJeXnoAXfYPiF6XqiCcv6X6ah8mxOOiGGLqHEPM48=;
-        b=U+Du7p/bV9LWarHY0HdfWr8V8aPGhCKivxsMtz+K6Y3JmAPTG2m4BkkTOkDdrO0HCV
-         zcff9gzcDiG2pvx66K4FIV+0XSVlxfH2PMzh1RRARB15ij7T8P/XqnvX6rFDKGCKs+t8
-         x+ebhqE0JMBdZ2TdaYJKb8tg+sN1285gDblarLdMQYzqOjvggx+SMb629hgpaK95AScM
-         R0rcIQtdHpeGf/eHaCeQ6J7woImFam+3PbBmsL816kN+nGLUxN7xR5mAM3/TAItWyffi
-         aPFcP7WgxSYbsoAaNMgFuu9W331VPUL9Gnv8CTuZaxmUteh/NyBiN8+tqb0flk4g5HFu
-         eC3A==
-X-Gm-Message-State: AFuF++m3sucSSeYsNE4ui/YZeIYFplWgkTtXaE36UCz4meVzXAUS6T8r
-	nsO2vQ27hRERBf4HAjc+MpzAEpku1X0wpRCyMBB2SjxMsOGZwIMlfxoaD9SWCg5YhCx+Fuw1Iba
-	ljiDBDFM7swb9z2RU/3CX7ALifz0kPQu4X8btyY3MTxueNaXZpgkgX34nrPe5jlZzvVQb
-X-Gm-Gg: AYBFou36gYOkqhYpdTmMNG6BzDXHXAt5lwbBjDtyAf4Wp3TK01P4J6l8GLLE7on063R
-	cAKd1hA64zooRQEZRKsNH84SNv+K7xcRxZRtozc79vX8+ZzDl3l0amNNr1DPPIUXiJ207hV6Bhc
-	fmQ1zu27KZxGIQnoyayEg94puq5Diq1HSN5+jhXjyjWseAwdy2yC7YvVAh5J2ytZP1owaiCrARC
-	jZkpA6BVCvel+ukly+dw9CBoL+QQDgph1IaNM9InYZpFNtBCToERExgr/eKvFMfgQJ+SkL67i0d
-	XFGe+KkFdGmUXCVD5QdtfprIlviDkYEp2N584zmId50nruV3+O4TiFw6zlNhDso6jHWZeUuOTEb
-	FQQyk6Sxj3GCfiRVW3EKZ6e3ubu1q2tFT+2u68TLoHxxYZxzLnn+iMRawCFuRLlQ=
-X-Received: by 2002:a05:620a:f0b:b0:939:a1cc:f234 with SMTP id af79cd13be357-939a1ccf31fmr1467895785a.5.1788857182051;
-        Tue, 08 Sep 2026 01:46:22 -0700 (PDT)
-X-Received: by 2002:a05:620a:f0b:b0:939:a1cc:f234 with SMTP id af79cd13be357-939a1ccf31fmr1467892285a.5.1788857181484;
-        Tue, 08 Sep 2026 01:46:21 -0700 (PDT)
-Received: from [10.38.244.120] (Global_NAT1_IAD_FW.qualcomm.com. [129.46.232.65])
-        by smtp.gmail.com with ESMTPSA id af79cd13be357-9397fb62710sm1098621985a.28.2026.09.08.01.46.16
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 08 Sep 2026 01:46:20 -0700 (PDT)
-Message-ID: <4c43c80c-d8c3-4738-9a5f-0b3e1c19679d@oss.qualcomm.com>
-Date: Tue, 8 Sep 2026 16:46:14 +0800
+ d=cirrus4.onmicrosoft.com; s=selector2-cirrus4-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=bn4h78Fhd3Eh+CqkN4MvlyD5r39/+ISsk552u/bQMAk=;
+ b=zVio74kn313UCoIXLay0lkdjOcupjNJXvavMGkRYREEYUXk7X3BF7naeVQAXGOo9la2JpTSr7D561ZqXZ0fUcg7/PGzoEjumMKn+OKuTB+qDzt6u0pkgdkBo9Zz8lh7XshyGLUtCf9Ven6Tco4wbRuQMgL91FSMgp8B9X2x0nTM=
+Received: from MN0P223CA0017.NAMP223.PROD.OUTLOOK.COM (2603:10b6:208:52b::8)
+ by SA0PR19MB4489.namprd19.prod.outlook.com (2603:10b6:806:c1::15) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.382.15; Tue, 8 Sep
+ 2026 08:49:28 +0000
+Received: from BN3PEPF0000B06F.namprd21.prod.outlook.com
+ (2603:10b6:208:52b:cafe::2b) by MN0P223CA0017.outlook.office365.com
+ (2603:10b6:208:52b::8) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.382.15 via Frontend Transport; Tue, 8
+ Sep 2026 08:49:28 +0000
+X-MS-Exchange-Authentication-Results: mx.microsoft.com 1; spf=softfail (sender
+ IP is 84.19.233.75) smtp.mailfrom=opensource.cirrus.com; dkim=none (message
+ not signed) header.d=none;dmarc=fail action=oreject
+ header.from=opensource.cirrus.com;
+Received-SPF: SoftFail (protection.outlook.com: domain of transitioning
+ opensource.cirrus.com discourages use of 84.19.233.75 as permitted sender)
+Received: from edirelay1.ad.cirrus.com (84.19.233.75) by
+ BN3PEPF0000B06F.mail.protection.outlook.com (10.167.243.74) with Microsoft
+ SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.21.406.1
+ via Frontend Transport; Tue, 8 Sep 2026 08:49:27 +0000
+Received: from ediswmail9.ad.cirrus.com (ediswmail9.ad.cirrus.com [198.61.86.93])
+	by edirelay1.ad.cirrus.com (Postfix) with ESMTPS id 59B66406543;
+	Tue,  8 Sep 2026 08:49:26 +0000 (UTC)
+Received: from opensource.cirrus.com (ediswmail9.ad.cirrus.com [198.61.86.93])
+	by ediswmail9.ad.cirrus.com (Postfix) with ESMTPSA id 393B2822543;
+	Tue,  8 Sep 2026 08:49:26 +0000 (UTC)
+Date: Tue, 8 Sep 2026 09:49:25 +0100
+From: Charles Keepax <ckeepax@opensource.cirrus.com>
+To: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
+Cc: Pierre-Louis Bossart <pierre-louis.bossart@linux.dev>,
+        Mark Brown <broonie@kernel.org>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>,
+        Bard Liao <yung-chuan.liao@linux.intel.com>,
+        Jaroslav Kysela <perex@perex.cz>, Liam Girdwood <lgirdwood@gmail.com>,
+        Maciej Strozek <mstrozek@opensource.cirrus.com>,
+        Takashi Iwai <tiwai@suse.com>,
+        Faiz Nabi Kuchay <fkuchay@oss.qualcomm.com>,
+        Jorijn van der Graaf <jorijnvdgraaf@catcrafts.net>,
+        patches@opensource.cirrus.com, linux-sound@vger.kernel.org,
+        devicetree@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v2 11/11] ASoC: codecs: add Qualcomm Tambora (WCD9378)
+ SDCA codec
+Message-ID: <ap/MFVMHG2Hej8k/@opensource.cirrus.com>
+References: <20260907083727.733705-1-srinivas.kandagatla@oss.qualcomm.com>
+ <20260907083727.733705-12-srinivas.kandagatla@oss.qualcomm.com>
+ <525f887e-cb3b-4e74-8b93-30c3baeb8018@linux.dev>
+ <7006ad74-334c-41cb-bcc8-9ef5e75dde7e@oss.qualcomm.com>
+ <005e3c81-778a-47bc-a8ae-fb5c38ea2e2c@linux.dev>
+ <c7fec9d0-b79f-437c-ba8b-37858842c545@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v6 05/13] arm64: dts: qcom: x1e80100: Add CAMSS block
- definition
-To: Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley
- <conor+dt@kernel.org>, Bryan O'Donoghue <bod@kernel.org>,
-        Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
-        Loic Poulain <loic.poulain@oss.qualcomm.com>,
-        Mauro Carvalho Chehab <mchehab@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-media@vger.kernel.org
-References: <20260906-x1e-camss-csi2-phy-dtsi-v6-0-067f2ecc4630@linaro.org>
- <20260906-x1e-camss-csi2-phy-dtsi-v6-5-067f2ecc4630@linaro.org>
-From: Wenmeng Liu <wenmeng.liu@oss.qualcomm.com>
-In-Reply-To: <20260906-x1e-camss-csi2-phy-dtsi-v6-5-067f2ecc4630@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Authority-Analysis: v=2.4 cv=TqLWQjXh c=1 sm=1 tr=0 ts=6a9fcb5e cx=c_pps
- a=mPf7EqFMSY9/WdsSgAYMbA==:117 a=C3Dk8TwHQYyIj7nOf9RCJw==:17
- a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
- a=KKAkSRfTAAAA:8 a=-P7vb124-MV0i9wHP64A:9 a=QEXdDO2ut3YA:10
- a=dawVfQjAaf238kedN5IG:22 a=cvBusfyB2V15izCimMoJ:22
-X-Proofpoint-GUID: nxKa_oXZSn7Ip7KvyeWOOj9EFXy1prIX
-X-Proofpoint-ORIG-GUID: nxKa_oXZSn7Ip7KvyeWOOj9EFXy1prIX
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTA4MDA5MSBTYWx0ZWRfXxyDhk5so423w
- fxmtLB4CfT+kRTfPjP0rT1Nt1iuSYuEg4aAmsqf39ytQAApmgaUWsy/vtK+uEZt31cPv2vRedT/
- 1QfCvmZJxlEskz5gRsafVO2OFoRQaHM=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTA4MDA5MSBTYWx0ZWRfX4eVXfdzepE4G
- ckes05S/Hd4DPHb4myZJsS4uxnDVxsPTG/L1VrZOnY08AH0jZdibQDi4Wmons439pg2ceX2GYY5
- EWtYiBGvbsv/JlSCcIR7gSenMODYE+tx3q+h4CbLZ0d+ZQqf+wpwUXagQgPJ7gwyLMCJ+iCj8Zx
- 2zoqmqk1s4IOIypVdqcPkAUa4WzTKZxp8mANdXgSA5B1i5QuE+9aA6MzFROCZwWBVPqE76vKbZM
- Db6fMz74s/GEMzAx0QjgamZrlw5A47iAu4tv1hhDkvkMq+bayLlChgLHUmd+VgTEuL3o31dIjn3
- Ixf0f91ko+j6D2M1lICM8LcVgsN0Zuq4Mi6GSwZpY0QdX2a88nSPwNgmo3OXajU2bVJQu5slgSb
- mA0HMe8jsi2pDKR6+L38NYQKLZmUZjQuNqu9QUG7+wSIBmXi6NEUJy7V3aYqh7fPzIkf3Ycv9v+
- eQ/jbtZM3rWk+VOwBxQ==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-08_01,2026-09-07_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 adultscore=0 bulkscore=0 lowpriorityscore=0 spamscore=0
- phishscore=0 malwarescore=0 clxscore=1015 impostorscore=0 suspectscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2609080091
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <c7fec9d0-b79f-437c-ba8b-37858842c545@oss.qualcomm.com>
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BN3PEPF0000B06F:EE_|SA0PR19MB4489:EE_
+X-MS-Office365-Filtering-Correlation-Id: 91a1e70b-8d63-4bd9-49e1-08df0d861765
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|34020700016|23010399003|82310400026|36860700016|7416014|61400799027|376014|10067099003|18002099003|16102099003|22082099003|56012099006|11063799006|4143699003|12100799066;
+X-Microsoft-Antispam-Message-Info:
+	EL7LLyx4jvWn88b0WDWBFyzgLvo5w+RHLk4GNu9FEQzG6juLt1e84gUw9qgH770dgRUQ+z4/2JQOSUsFQ1BSNqrHD1qGxBJ/UTE1NonJ86IW/vj6Mn8tq15H0VhvTlToucGXrdjmAq5Bc7f8DwTaPyzmm4NmN3rjK8QbY7VLTWTB8lCJdb8+l/DIbaGHus+q61P3iEaD0oX0ToLs5bZip8yodlAdEufrAEscqKHaR/pPe94bvDI9WhKstAHHxOHB0kGq0ghTNhqTX6Xxk5nJg7fi6EzPuuTIWAbj5CyTA7xCyn5ZWJo3adLvTKFlasjnRJsVW4t4sHbn407PCl5KBT94tUlbB8QweDxyNyuTk0DiCu8acUoktzRQ3QMz5f6K07hJMyDCtJ6vGSw5BByVUWQTVM1peUR5WrmOGy8JizRssFkC0bZAgdfY01xg8MJ85nqabCNLtYxuLFVrUuC12I4C/WEdSgcuERW+aFqoMb681T0R4BQM+qq48ohg4cKVqR3k2fT6H+qJpOgAbQv/vO+11axrNbreMjfXvaaCQ/dnqDglp7jvMGo6dMuzwVyyl7NzxaHiMfDCnIaukzLliZ3uItHz4x8/HBNEmQKzPuZVYtoYL/G2aXv1/MQQMiXICMuLzez3brhkFKHhi24BjsN0VWO9HGS21TqVbcCiO0A4Rl3xz1JmYY4yh2AUEe4HrJ2YrLQ41oxgIYknWINb/w==
+X-Forefront-Antispam-Report:
+	CIP:84.19.233.75;CTRY:GB;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:edirelay1.ad.cirrus.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(34020700016)(23010399003)(82310400026)(36860700016)(7416014)(61400799027)(376014)(10067099003)(18002099003)(16102099003)(22082099003)(56012099006)(11063799006)(4143699003)(12100799066);DIR:OUT;SFP:1501;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	08YnfUPWETga0ryyUBzN2pSNDAlXjhssuTeny70vzos2pQESG2QdnMYatO7SND+VdJlqnUuml/amava0BvaDo5u+ubVa7zBeGMDt4J/z0YMV5FcubtTDF1vEKfUusZdkpqhoU1OS+OOAq+VDkCG5weIh9tfjWRoaCCxGB52WGBMDwJXbVBJk1oBlgRGpq9Nqws2drqPZj+2FKSZKW5vsDmxnxrWI54sgDk/JsA6GAytA9Uh+W20PcmdJE4hrI753twYqNhf6Crew90Yj5c2U49m4/AtLneYkAoP988SNZFGWQpt+nsnOQ5HeKkKZPCS+tbxF30QQCnzT7nlQyAgpYdYonuGZsO11rF3EV5zEzLOb5cqNgnBOvp+4UctfgRXtUmIba8nEk+6KpokUGIGj5/tw1GjQx9e8fyX7kv8pvscN4gN8R4vWX1Dj5kZdiV1T
+X-Exchange-RoutingPolicyChecked:
+	VddhUqycCXo+kO/ukWMZ2LAf5Hqa9Jbd+qpJBuO4Ldo+ctIwcEobtVeBOf1B5ZS9SAgsqEVRgtcnZM6GrvITejY/tEgP5pCBQuOq4MinuLlhPcIXejcX/pvWH2z/kzJgocqMc9OrIn34H50/6Tx3V/5s260T9uB4kcX4/seNkd5CZ71ilet/2ARgsMCoWvRO1jtnFILTTorx4OzbareCUUUZq9x+WUXJgP1jr1CRe4j6gLTFj3H+CH9duNMtS/pBdmLCHhAPPumvSL+1+58w0w3s/atkjDcK3P4dk1nHKMQ24NrB7URxfAKg16YNGFj6XoL2XhZ8S5tpu42cPH4IxQ==
+X-OriginatorOrg: opensource.cirrus.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Sep 2026 08:49:27.7062
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 91a1e70b-8d63-4bd9-49e1-08df0d861765
+X-MS-Exchange-CrossTenant-Id: bec09025-e5bc-40d1-a355-8e955c307de8
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=bec09025-e5bc-40d1-a355-8e955c307de8;Ip=[84.19.233.75];Helo=[edirelay1.ad.cirrus.com]
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: TreatMessagesAsInternal-BN3PEPF0000B06F.namprd21.prod.outlook.com
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA0PR19MB4489
+X-Authority-Analysis: v=2.4 cv=bpd8wkai c=1 sm=1 tr=0 ts=6a9fcc1d cx=c_pps
+ a=VqolhKNzGRpeuY5667+sOg==:117 a=h1hSm8JtM9GN1ddwPAif2w==:17
+ a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=z/mQ4Ysz8XfWz/Q5cLBRGdckG28=:19
+ a=kj9zAlcOel0A:10 a=VdqzKS8jKosA:10 a=s63m1ICgrNkA:10 a=RWc_ulEos4gA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=iX4cTi3TZMoOKdANLEfx:22 a=KfkQE9S9VqCBgivYGm0O:22
+ a=78B32pUPY0lhFY_OrVoA:9 a=CjuIK1q_8ugA:10 a=jZz-an6Pvt0H8_Yc_ROU:22
+ a=VlVynqX4KLlZR1Cn4-IV:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTA4MDA5MiBTYWx0ZWRfX4N8GxPgR8aRW
+ muMGTnNVUoPJtCQ5dNX1ZkrXQgHCt15VuA6Z78R08qUpiDo88UMg9zpXuIksnfWOQQuoo9el4co
+ aD+kRdDA3hHVZH1VEUr2EviZBrrtmRX1r/RatbWZgbcoVBmjiUkZijmBdRPfPzOvQjn3DQBiW0s
+ hVt37lyjfnZjnhzVKgjrvYNobnFotRiqrUWl18jk0pMasROQ/F5h2qlhIcl608Z1QjDv3nii1fG
+ 2JQhM+/MKploW9RSidCy8GfqerG/I0oo+Lfy1Xyx7u/7OoqSof6Z+e4EovjytnS1lXPqV+gPE0+
+ OwLKkKIvhzfwPXdJU8v2D7iKuK+u/L/vDujt3J6zo/ZYSFT78nYG1fr8VEgz77UUCvWd3iX5e6S
+ elZ1b9iBSlvnLjVQfNyLVrxtgEjpss29f4daDSsHMQVmCFBDRWqSfLxzqO22P2W60Cr31qwy6hu
+ I6HNpY4+DcSh+sRPUSw==
+X-Proofpoint-ORIG-GUID: RRKhfFRlcTgzp9ew5ErZ4PKzAJ6kBvfJ
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTA4MDA5MiBTYWx0ZWRfX7kM+fpSED2qd
+ 9JQP8fYL0w2bzxbOUPaoQqu7nNyysMXq2m9brI0ZeKDeX0/cgny3rbOHjlLWc7MHk89Yx3BCNYj
+ fh7m2R1Fvcy7PF0KhBDsB/qIQco/LPQ=
+X-Proofpoint-GUID: RRKhfFRlcTgzp9ew5ErZ4PKzAJ6kBvfJ
+X-Proofpoint-Spam-Reason: safe
 
-
-
-On 9/6/2026 10:20 PM, Bryan O'Donoghue wrote:
-> Add dtsi to describe the xe180100 CAMSS block
+On Mon, Sep 07, 2026 at 11:37:49PM +0100, Srinivas Kandagatla wrote:
+> On 9/7/26 8:47 PM, Pierre-Louis Bossart wrote:
+> > My take is that rather than encode all properties in C, it's probably
+> > worth exploring a DT representation of the concepts that *can* be used
+> > fairly easily and make the life of codec vendors easier - not as a> literal translation of ACPI.
 > 
-> 4 x CSIPHY
-> 3 x TPG
-> 2 x CSID
-> 2 x CSID Lite
-> 2 x IFE
-> 2 x IFE Lite
-> 
-> Signed-off-by: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
-> ---
->   arch/arm64/boot/dts/qcom/hamoa.dtsi | 322 ++++++++++++++++++++++++++++++++++++
->   1 file changed, 322 insertions(+)
-> 
-> diff --git a/arch/arm64/boot/dts/qcom/hamoa.dtsi b/arch/arm64/boot/dts/qcom/hamoa.dtsi
-> index 9a854da9550c3..75366afd1b5b2 100644
-> --- a/arch/arm64/boot/dts/qcom/hamoa.dtsi
-> +++ b/arch/arm64/boot/dts/qcom/hamoa.dtsi
-> @@ -16,6 +16,7 @@
->   #include <dt-bindings/interconnect/qcom,x1e80100-rpmh.h>
->   #include <dt-bindings/interrupt-controller/arm-gic.h>
->   #include <dt-bindings/mailbox/qcom-ipcc.h>
-> +#include <dt-bindings/phy/phy.h>
->   #include <dt-bindings/phy/phy-qcom-qmp.h>
->   #include <dt-bindings/power/qcom,rpmhpd.h>
->   #include <dt-bindings/power/qcom-rpmpd.h>
-> @@ -719,6 +720,50 @@ smem_mem: smem@ffe00000 {
->   		};
->   	};
->   
-> +	csiphy_mxc_opp_table: opp-table-mxc {
-> +		compatible = "operating-points-v2";
-> +
-> +		opp-300000000 {
-> +			opp-hz = /bits/ 64 <300000000>;
-> +			required-opps = <&rpmhpd_opp_low_svs_d1>,
-> +					<&rpmhpd_opp_low_svs_d1>;
-> +		};
-> +
-> +		opp-400000000 {
-> +			opp-hz = /bits/ 64 <400000000>;
-> +			required-opps = <&rpmhpd_opp_low_svs>,
-> +					<&rpmhpd_opp_low_svs>;
-> +		};
-> +
-> +		opp-480000000 {
-> +			opp-hz = /bits/ 64 <480000000>;
-> +			required-opps = <&rpmhpd_opp_low_svs>,
-> +					<&rpmhpd_opp_low_svs>;
-> +		};
-> +	};
-> +
-> +	csiphy_mxa_opp_table: opp-table-mxa {
-> +		compatible = "operating-points-v2";
-> +
-> +		opp-300000000 {
-> +			opp-hz = /bits/ 64 <300000000>;
-> +			required-opps = <&rpmhpd_opp_low_svs_d1>,
-> +					<&rpmhpd_opp_low_svs_d1>;
-> +		};
-> +
-> +		opp-400000000 {
-> +			opp-hz = /bits/ 64 <400000000>;
-> +			required-opps = <&rpmhpd_opp_low_svs>,
-> +					<&rpmhpd_opp_low_svs_d1>;
-> +		};
-> +
-> +		opp-480000000 {
-> +			opp-hz = /bits/ 64 <480000000>;
-> +			required-opps = <&rpmhpd_opp_low_svs>,
-> +					<&rpmhpd_opp_low_svs_d1>;
-> +		};
-> +	};
-> +
->   	qup_opp_table_100mhz: opp-table-qup100mhz {
->   		compatible = "operating-points-v2";
->   
-> @@ -5629,6 +5674,283 @@ cci1_i2c1: i2c-bus@1 {
->   			};
->   		};
->   
-> +		camss: isp@acb7000 {
-> +			compatible = "qcom,x1e80100-camss";
-> +
-> +			reg = <0 0x0acb7000 0 0x2000>,
-> +			      <0 0x0acb9000 0 0x2000>,
-> +			      <0 0x0acbb000 0 0x2000>,
-> +			      <0 0x0acc6000 0 0x1000>,
-> +			      <0 0x0acca000 0 0x1000>,
-> +			      <0 0x0acb6000 0 0x1000>,
-> +			      <0 0x0ace4000 0 0x1000>,
-> +			      <0 0x0ace6000 0 0x1000>,
-> +			      <0 0x0ace8000 0 0x1000>,
-> +			      <0 0x0acec000 0 0x4000>,
-> +			      <0 0x0acf6000 0 0x1000>,
-> +			      <0 0x0acf7000 0 0x1000>,
-> +			      <0 0x0acf8000 0 0x1000>,
-> +			      <0 0x0ac62000 0 0xf000>,
-> +			      <0 0x0ac71000 0 0xf000>,
-> +			      <0 0x0acc7000 0 0x2000>,
-> +			      <0 0x0accb000 0 0x2000>;
-> +
-> +			reg-names = "csid0",
-> +				    "csid1",
-> +				    "csid2",
-> +				    "csid_lite0",
-> +				    "csid_lite1",
-> +				    "csid_wrapper",
-> +				    "csiphy0",
-> +				    "csiphy1",
-> +				    "csiphy2",
-> +				    "csiphy4",
-> +				    "csitpg0",
-> +				    "csitpg1",
-> +				    "csitpg2",
-> +				    "vfe0",
-> +				    "vfe1",
-> +				    "vfe_lite0",
-> +				    "vfe_lite1";
-> +
-> +			clocks = <&camcc CAM_CC_CAMNOC_AXI_NRT_CLK>,
-> +				 <&camcc CAM_CC_CAMNOC_AXI_RT_CLK>,
-> +				 <&camcc CAM_CC_CORE_AHB_CLK>,
-> +				 <&camcc CAM_CC_CPAS_AHB_CLK>,
-> +				 <&camcc CAM_CC_CPAS_FAST_AHB_CLK>,
-> +				 <&camcc CAM_CC_CPAS_IFE_0_CLK>,
-> +				 <&camcc CAM_CC_CPAS_IFE_1_CLK>,
-> +				 <&camcc CAM_CC_CPAS_IFE_LITE_CLK>,
-> +				 <&camcc CAM_CC_CPHY_RX_CLK_SRC>,
+> I agree a DT expression of the *concepts*  not a literal DisCo
+> mirror would be a better A.  I want to bring that back to LPC 2026
+> DT MC as a concrete proposal grounded in the earlier DT-maintainer
+> feedback rather than re-litigating it inline on this series.  Because
+> B stays put, switching A later is a change inside populate_function,
+> not an ABI break. so landing this series does not close the door on
+> the representation you're asking for.
 
-I think we should remove the SRC clock.
+I am still not sure I really see what the value is in a
+completely different DT representation of the DisCo information,
+all it does is give us potential issues with future spec versions
+and create a whole bunch of new code than needs maintained. The
+ACPI representation translates perfectly well to DT, should work
+perfectly fine using the existing code.
+
+However, that said if people want to work on doing so I am not
+going to stand in the way. It does have the advantage it might
+unblock things with the DT maintainers, since we can focus on
+doing stuff in a more traditional DT style.
+
+I would also agree that this is reasonable as a half way house,
+it seems like a good fallback mechanism to have for emergency
+work arounds as well. If we can't reuse the existing parser then
+there is a lot of work to define a new representation for DT.
+Ideally that would be worked through with the MIPI group as well
+to avoid future specs causing catastrophic issues. But all that
+will take significant time so we probably need an interim
+solution.
 
 Thanks,
-Wenmeng
-
-> +				 <&camcc CAM_CC_CSID_CLK>,
-> +				 <&camcc CAM_CC_CSID_CSIPHY_RX_CLK>,
-> +				 <&camcc CAM_CC_CSIPHY0_CLK>,
-> +				 <&camcc CAM_CC_CSI0PHYTIMER_CLK>,
-> +				 <&camcc CAM_CC_CSIPHY1_CLK>,
-> +				 <&camcc CAM_CC_CSI1PHYTIMER_CLK>,
-> +				 <&camcc CAM_CC_CSIPHY2_CLK>,
-> +				 <&camcc CAM_CC_CSI2PHYTIMER_CLK>,
-> +				 <&camcc CAM_CC_CSIPHY4_CLK>,
-> +				 <&camcc CAM_CC_CSI4PHYTIMER_CLK>,
-> +				 <&gcc GCC_CAMERA_HF_AXI_CLK>,
-> +				 <&gcc GCC_CAMERA_SF_AXI_CLK>,
-> +				 <&camcc CAM_CC_IFE_0_CLK>,
-> +				 <&camcc CAM_CC_IFE_0_FAST_AHB_CLK>,
-> +				 <&camcc CAM_CC_IFE_1_CLK>,
-> +				 <&camcc CAM_CC_IFE_1_FAST_AHB_CLK>,
-> +				 <&camcc CAM_CC_IFE_LITE_CLK>,
-> +				 <&camcc CAM_CC_IFE_LITE_AHB_CLK>,
-> +				 <&camcc CAM_CC_IFE_LITE_CPHY_RX_CLK>,
-> +				 <&camcc CAM_CC_IFE_LITE_CSID_CLK>;
-> +
-> +			clock-names = "camnoc_nrt_axi",
-> +				      "camnoc_rt_axi",
-> +				      "core_ahb",
-> +				      "cpas_ahb",
-> +				      "cpas_fast_ahb",
-> +				      "cpas_vfe0",
-> +				      "cpas_vfe1",
-> +				      "cpas_vfe_lite",
-> +				      "cphy_rx_clk_src",
-> +				      "csid",
-> +				      "csid_csiphy_rx",
-> +				      "csiphy0",
-> +				      "csiphy0_timer",
-> +				      "csiphy1",
-> +				      "csiphy1_timer",
-> +				      "csiphy2",
-> +				      "csiphy2_timer",
-> +				      "csiphy4",
-> +				      "csiphy4_timer",
-> +				      "gcc_axi_hf",
-> +				      "gcc_axi_sf",
-> +				      "vfe0",
-> +				      "vfe0_fast_ahb",
-> +				      "vfe1",
-> +				      "vfe1_fast_ahb",
-> +				      "vfe_lite",
-> +				      "vfe_lite_ahb",
-> +				      "vfe_lite_cphy_rx",
-> +				      "vfe_lite_csid";
-> +
-> +			interrupts = <GIC_SPI 464 IRQ_TYPE_EDGE_RISING>,
-> +				     <GIC_SPI 466 IRQ_TYPE_EDGE_RISING>,
-> +				     <GIC_SPI 431 IRQ_TYPE_EDGE_RISING>,
-> +				     <GIC_SPI 468 IRQ_TYPE_EDGE_RISING>,
-> +				     <GIC_SPI 359 IRQ_TYPE_EDGE_RISING>,
-> +				     <GIC_SPI 477 IRQ_TYPE_EDGE_RISING>,
-> +				     <GIC_SPI 478 IRQ_TYPE_EDGE_RISING>,
-> +				     <GIC_SPI 479 IRQ_TYPE_EDGE_RISING>,
-> +				     <GIC_SPI 122 IRQ_TYPE_EDGE_RISING>,
-> +				     <GIC_SPI 465 IRQ_TYPE_EDGE_RISING>,
-> +				     <GIC_SPI 467 IRQ_TYPE_EDGE_RISING>,
-> +				     <GIC_SPI 469 IRQ_TYPE_EDGE_RISING>,
-> +				     <GIC_SPI 360 IRQ_TYPE_EDGE_RISING>;
-> +
-> +			interrupt-names = "csid0",
-> +					  "csid1",
-> +					  "csid2",
-> +					  "csid_lite0",
-> +					  "csid_lite1",
-> +					  "csiphy0",
-> +					  "csiphy1",
-> +					  "csiphy2",
-> +					  "csiphy4",
-> +					  "vfe0",
-> +					  "vfe1",
-> +					  "vfe_lite0",
-> +					  "vfe_lite1";
-> +
-> +			interconnects = <&gem_noc MASTER_APPSS_PROC QCOM_ICC_TAG_ACTIVE_ONLY
-> +					 &config_noc SLAVE_CAMERA_CFG QCOM_ICC_TAG_ACTIVE_ONLY>,
-> +					<&mmss_noc MASTER_CAMNOC_HF QCOM_ICC_TAG_ALWAYS
-> +					 &mc_virt SLAVE_EBI1 QCOM_ICC_TAG_ALWAYS>,
-> +					<&mmss_noc MASTER_CAMNOC_SF QCOM_ICC_TAG_ALWAYS
-> +					 &mc_virt SLAVE_EBI1 QCOM_ICC_TAG_ALWAYS>,
-> +					<&mmss_noc MASTER_CAMNOC_ICP QCOM_ICC_TAG_ALWAYS
-> +					 &mc_virt SLAVE_EBI1 QCOM_ICC_TAG_ALWAYS>;
-> +			interconnect-names = "ahb",
-> +					     "hf_mnoc",
-> +					     "sf_mnoc",
-> +					     "sf_icp_mnoc";
-> +
-> +			iommus = <&apps_smmu 0x800 0x60>,
-> +				 <&apps_smmu 0x820 0x60>,
-> +				 <&apps_smmu 0x840 0x60>,
-> +				 <&apps_smmu 0x860 0x60>,
-> +				 <&apps_smmu 0x18a0 0x0>;
-> +
-> +			power-domains = <&camcc CAM_CC_IFE_0_GDSC>,
-> +					<&camcc CAM_CC_IFE_1_GDSC>,
-> +					<&camcc CAM_CC_TITAN_TOP_GDSC>;
-> +			power-domain-names = "ife0",
-> +					     "ife1",
-> +					     "top";
-> +
-> +			status = "disabled";
-> +
-> +			ports {
-> +				#address-cells = <1>;
-> +				#size-cells = <0>;
-> +
-> +				port@0 {
-> +					reg = <0>;
-> +				};
-> +
-> +				port@1 {
-> +					reg = <1>;
-> +				};
-> +
-> +				port@2 {
-> +					reg = <2>;
-> +				};
-> +
-> +				port@3 {
-> +					reg = <3>;
-> +				};
-> +			};
-> +		};
-> +
-> +		csiphy0: phy@ace4000 {
-> +			compatible = "qcom,x1e80100-csi2-phy";
-> +			reg = <0 0x0ace4000 0 0x2000>;
-> +
-> +			clocks = <&camcc CAM_CC_CSIPHY0_CLK>,
-> +				 <&camcc CAM_CC_CSI0PHYTIMER_CLK>,
-> +				 <&camcc CAM_CC_CORE_AHB_CLK>;
-> +			clock-names = "core",
-> +				      "timer",
-> +				      "ahb";
-> +
-> +			operating-points-v2 = <&csiphy_mxc_opp_table>;
-> +
-> +			interrupts = <GIC_SPI 477 IRQ_TYPE_EDGE_RISING>;
-> +
-> +			power-domains = <&camcc CAM_CC_TITAN_TOP_GDSC>,
-> +					<&rpmhpd RPMHPD_MMCX>,
-> +					<&rpmhpd RPMHPD_MXC>;
-> +			power-domain-names = "top",
-> +					     "mmcx",
-> +					     "mx";
-> +
-> +			status = "disabled";
-> +		};
-> +
-> +		csiphy1: phy@ace6000 {
-> +			compatible = "qcom,x1e80100-csi2-phy";
-> +			reg = <0 0x0ace6000 0 0x2000>;
-> +
-> +			clocks = <&camcc CAM_CC_CSIPHY1_CLK>,
-> +				 <&camcc CAM_CC_CSI1PHYTIMER_CLK>,
-> +				 <&camcc CAM_CC_CORE_AHB_CLK>;
-> +			clock-names = "core",
-> +				      "timer",
-> +				      "ahb";
-> +
-> +			operating-points-v2 = <&csiphy_mxc_opp_table>;
-> +
-> +			interrupts = <GIC_SPI 478 IRQ_TYPE_EDGE_RISING>;
-> +
-> +			power-domains = <&camcc CAM_CC_TITAN_TOP_GDSC>,
-> +					<&rpmhpd RPMHPD_MMCX>,
-> +					<&rpmhpd RPMHPD_MXC>;
-> +			power-domain-names = "top",
-> +					     "mmcx",
-> +					     "mx";
-> +
-> +			status = "disabled";
-> +		};
-> +
-> +		csiphy2: phy@ace8000 {
-> +			compatible = "qcom,x1e80100-csi2-phy";
-> +			reg = <0 0x0ace8000 0 0x2000>;
-> +
-> +			clocks = <&camcc CAM_CC_CSIPHY2_CLK>,
-> +				 <&camcc CAM_CC_CSI2PHYTIMER_CLK>,
-> +				 <&camcc CAM_CC_CORE_AHB_CLK>;
-> +			clock-names = "core",
-> +				      "timer",
-> +				      "ahb";
-> +
-> +			operating-points-v2 = <&csiphy_mxc_opp_table>;
-> +
-> +			interrupts = <GIC_SPI 479 IRQ_TYPE_EDGE_RISING>;
-> +
-> +			power-domains = <&camcc CAM_CC_TITAN_TOP_GDSC>,
-> +					<&rpmhpd RPMHPD_MMCX>,
-> +					<&rpmhpd RPMHPD_MXC>;
-> +			power-domain-names = "top",
-> +					     "mmcx",
-> +					     "mx";
-> +
-> +			status = "disabled";
-> +		};
-> +
-> +		csiphy4: phy@acec000 {
-> +			compatible = "qcom,x1e80100-csi2-phy";
-> +			reg = <0 0x0acec000 0 0x2000>;
-> +
-> +			clocks = <&camcc CAM_CC_CSIPHY4_CLK>,
-> +				 <&camcc CAM_CC_CSI4PHYTIMER_CLK>,
-> +				 <&camcc CAM_CC_CORE_AHB_CLK>;
-> +			clock-names = "core",
-> +				      "timer",
-> +				      "ahb";
-> +
-> +			operating-points-v2 = <&csiphy_mxa_opp_table>;
-> +
-> +			interrupts = <GIC_SPI 122 IRQ_TYPE_EDGE_RISING>;
-> +
-> +			power-domains = <&camcc CAM_CC_TITAN_TOP_GDSC>,
-> +					<&rpmhpd RPMHPD_MMCX>,
-> +					<&rpmhpd RPMHPD_MXC>;
-> +			power-domain-names = "top",
-> +					     "mmcx",
-> +					     "mx";
-> +
-> +			status = "disabled";
-> +		};
-> +
->   		camcc: clock-controller@ade0000 {
->   			compatible = "qcom,x1e80100-camcc";
->   			reg = <0 0x0ade0000 0 0x20000>;
-> 
-
+Charles
