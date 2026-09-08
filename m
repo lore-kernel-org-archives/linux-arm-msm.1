@@ -1,211 +1,129 @@
-Received: from mail-qk2-f12.google.com (mail-qk2-f12.google.com [74.125.230.204])
+Received: from mail-qt1-f180.google.com (mail-qt1-f180.google.com [209.85.160.180])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 50421583AAD
-	for <linux-arm-msm@vger.kernel.org>; Tue,  8 Sep 2026 16:36:48 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=74.125.230.204
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788885410; cv=pass; b=QsYsWbuuRyMkS1rtvLphl8zDZjNXKopDEyTK7N6PYIukHJFitoPzZOtQZf7g0SaNO7fJ7FvFfN7N7k0ZD4CZkbYAiq6370vkV0GYD2deOrdDtdF5W+qEuTgf3EpZf2WDVEwYzdvyHjLXSsPz3jx9Uik6JOOcKpKUQXgxx9WC92A=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788885410; c=relaxed/simple;
-	bh=2kpYBWl0KXefWYLIcQZz0qWhIXBa2vP5xaDAEBMBTgk=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=kl1lZ/pmvyWkcV2gnHMqU/UTxzN7Gll81pk0Vgluo4WZZRYpAk1R78WXdSQ+WNU6kBjD4TCsgxa+oVzOZ5ZIQRg9jWh1SYwpHQQaie8OP084trbKNVFqjKN33FqOccLG/sT+vZuPbIsI4rPTV0Xf/haFrnaNIFs+FKQ+jXW0Ix8=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=C4xhjiBY; arc=pass smtp.client-ip=74.125.230.204
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=google.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 064D458B6A8
+	for <linux-arm-msm@vger.kernel.org>; Tue,  8 Sep 2026 16:47:50 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.160.180
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1788886073; cv=none; b=YQ236tFOFmtGRuT7oHFModdOqdWywyB80ZpwKSZLAAJe93Ojc8jmVDMqEqTqP1F0MSnD18TpLd8w8jFGd/mXNJP0bkbjNJLwB0O8qyhddTmlpT8129Ag5O2loq28n+XeBZIJGQduOke9BSoHJXCplmzmXX7CbvVvtwmdqRTuePg=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1788886073; c=relaxed/simple;
+	bh=LWKICpFS9xFvsp69obCht2UQnb78KG0Es2im+ByJTVk=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=fHbb6JHkCF6oJDJy1oaS+ZPEb8yVrlFJwo0ZpDjCuw/VccbuJcm4Lo0L52iHbeYD6DscubgH9TKIcS4zp/fAgaGsdv79xqlq7VOWqo3XQcAziGYlmGNdJRB5+zEOSaXh8zabCzMYwzsX+AFuOTPIUF9oy6E2jBquNVJXFYDlwdA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=ziepe.ca; spf=pass smtp.mailfrom=ziepe.ca; dkim=pass (2048-bit key) header.d=ziepe.ca header.i=@ziepe.ca header.b=DW7IfjVh; arc=none smtp.client-ip=209.85.160.180
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=ziepe.ca
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ziepe.ca
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="C4xhjiBY"
-Received: by mail-qk2-f12.google.com with SMTP id d75a77b69052e-5306706e89dso737021cf.1
-        for <linux-arm-msm@vger.kernel.org>; Tue, 08 Sep 2026 09:36:48 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1788885407; cv=none;
-        d=google.com; s=arc-20260327;
-        b=Q7IywUd1sccSc6qWsh94LxLTGxilmvktIRQrNs8Dgshbhm9Az5YtqMCTavId0x9crb
-         vvSe55IeNzGallTOe6Vt8bw0lQNqz9q1JtoV+3SdFVWEQNQvJ0QdoKsxDD7A+FubFKHX
-         j9nyd4SbYFuYh7nzOz0rKeonTVIlvfVZXmfwVfwJBkFOIFq/Kt6lC60F+HGF/zM/OtUe
-         IUW027m4q02HZ7AbM3Hv/khUg4uZUThf25O7+KU1/2p3VMEZY17tMS43p6ZFfLaRGxUW
-         ylBso2owdINY+a6BM2Y2gIYBTtV2nF9wnUr70L1i6BabOaDXdhUiN+uq0dAkDd+UwMPe
-         5XbA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=Ar1cqiUGIhblAbeFXXUvhYbgZ/09secUyh9OrIqbTXI=;
-        fh=X1sh0qR1IiTqr2nh8bKLHghlBzPE7XIcmMMymYmONmQ=;
-        b=WhS4MCQfVvIBy/PpgUugGD+RS0a7mjXt/SlrAb41nOxQ56FiXe5NvLuuThf8mHLo4k
-         xohlQxL2WcXdslQc2mgqWrr7TIC6JGAV0+B3QJiRbnyxnjlp3Cnv9eVyC+KhnkQkhncq
-         x9zKCPUhLwmF1joD7zimi4TjkiVnj7yScGOSRP+kwht6e8fU/8JTEw9khTkDbWX2lgTh
-         Dpk5nmn0vgx3Ds0eiLOYR/cguV7mfNul+RGiZF++kRXXnzVxxBK0WvQ3GSy4BvwmYyHm
-         mnibj0pjoXRi7WgL+DuMmUgSeSlk2sM4PrtlPpFdNb0zCFUZ7xhxUfnpIFA6aMeqErM+
-         ls9w==;
-        darn=vger.kernel.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+	dkim=pass (2048-bit key) header.d=ziepe.ca header.i=@ziepe.ca header.b="DW7IfjVh"
+Received: by mail-qt1-f180.google.com with SMTP id d75a77b69052e-52ff0b7c98aso45751231cf.0
+        for <linux-arm-msm@vger.kernel.org>; Tue, 08 Sep 2026 09:47:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20251104; t=1788885407; x=1789490207; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+        d=ziepe.ca; s=google; t=1788886070; x=1789490870; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
          :date:message-id:reply-to:content-type;
-        bh=Ar1cqiUGIhblAbeFXXUvhYbgZ/09secUyh9OrIqbTXI=;
-        b=C4xhjiBYgKl9K81hDkpHxRIhzR5h83VFZfBokdaj1GKk65AvCzVRyZ3VF3C/3pITdE
-         yIVji7wgw4F0Ko5/7TJd6LzuuX69+vsspxNPO+NuAMzIoa0YZTI+5wUSiMCxUDRPN5Nm
-         4FPaCwS1wSe6D7dnYZl1x53GtP2byurVFrSp8Rx2cEB0XMnxlRDF0vetgmYDDQv/Q4aM
-         zJZMLqG5f2hEQBVTL3s46hZ2nwQq7HUVg4872hoe7J481ViNfVxr4ER2Jt99viIiD2CQ
-         gYc2/VDKAIJfC3QwT/3c4jbfhPoGVS35JeNYbEOMzU6rdqBKIHJ+M+7sl2SJsudmI+3w
-         rtwg==
+        bh=wg7dqcSt6yfLp94UU5Cr+hhthqJWmJ7c1cnnv4D4Hxg=;
+        b=DW7IfjVhTQ51PgWrBUWPGF61LQIrGaA2ldRaIn/x1iBlSc9P72hMYLV3KmSqd6heL9
+         Qs/nwRt/L2yPl3zcmPvNdgOpFhB1YXOmC0FdXzSTIQZxOYBMQzedF7ia/mIWS5eSOdPf
+         LWNYx7ooVS2bMQKRxEfg0IEEAuD9QpWRopSN9EI0FOC/6+IH3PFQE5rXNb73OHOK6uMh
+         O/XmWr4UocGZWhkhFLSWuNySW25vhQfmXw3xWrZ9AVwtvcWXyc+KNfCo4lIMQ2QgeC9r
+         qhgTNY7wsngaAMlY/VbnSFi3MRA5uAyXGwUyOHVetub4WcsrhPyMbe5k+p8bWRbK++yk
+         kEVQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788885407; x=1789490207;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:x-gm-gg
+        d=1e100.net; s=20251104; t=1788886070; x=1789490870;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=Ar1cqiUGIhblAbeFXXUvhYbgZ/09secUyh9OrIqbTXI=;
-        b=DLtsF4qg00JZClNab8ULPbViSf87qQDG04A7urkYUJxbuyOQ6Z3U0cnuMNaI0u3azW
-         Gn8EzfiAVtwmkgD7XXC0YvS6NqhchmI01fSV8vp+n9QgwANR69iDIM54RlsvGZpuigcz
-         twmjMsS+Tyr5NeI5JOFy5OzycZx36AqSlPJ7V8+2Lg/6CQ9Mqw0ucz7c0G/6mYuA23Vg
-         8o8iOkv4ty17pyvSYl/1dETSB1qJs+hfr9iF/rHK4BrZRku3qmg9ppztILqAuGjGdlEG
-         OAGEITCu+68lmqbOP9A9m19UjwkKxM98ml0HC1PmQgOF+HlHyir1a462EEugVDvBSXYv
-         cmQQ==
-X-Forwarded-Encrypted: i=1; AKwUvBx1oaQJ4woNFYUjk/d7qMXl7m9rNrjBz324s8rRejXAoCnn34HT6jwtFHsOAMjvJ2z1zbKozgKCYzLwYp2C@vger.kernel.org
-X-Gm-Message-State: AFuF++mCfDCQOxB0EfsumdZ3LdNcJw1ajmstqKS+F1uXbpkjqVkxU9wg
-	3eWTL8wfbH0uy71QPgg5C+pXAFbrNhuJs2O4JJLX8rol9iV/yqeQgLFC03+fxEHGjZOXEx+pU/t
-	2u7qA0J+xkZHQTXWI79VhPDrQuI6dCnaVNP6dcvRv/LJQQr2j1Pya/ThuPFg=
-X-Gm-Gg: AYBFou12lrWXLMoTi/S8/5CNwI/yRXV+XciXyJpDgUDbDkXcsKLu3lcDx9avLyuiATn
-	n9IH2Jowv6i+zzwO12SZ4g64NoNGX3VkY8QZdxLjqokA+SPe5DIRkYA93kJ4rQCJFlgAEmHe5lK
-	rYfntTscUctoPtXuhjYTmPcASPjUIqNBHPbIgdTb57X+EobhsoFawD2lNYwlUC9LkqmwwqYoqiE
-	sql2MKydMoz2ndfCvgF0gJYId41jo73PvOZUazB2tKb1REAUvEB4OjgLNCgpxYZavinIZvQVjlN
-	EbjoVb4n1JR/lV1sb3sVwuuXVZkNlEIoqBlI7znoYQ==
-X-Received: by 2002:ac8:6544:0:b0:52f:4a75:f840 with SMTP id
- d75a77b69052e-530a3b5e4d4mr956091cf.9.1788885406535; Tue, 08 Sep 2026
- 09:36:46 -0700 (PDT)
+        bh=wg7dqcSt6yfLp94UU5Cr+hhthqJWmJ7c1cnnv4D4Hxg=;
+        b=FYFI3rC+Hp6cRevC1GEbW4AtQ/042dvBu6ASULXIGMf03VZ8u+H+HVL5G9jEo81WKI
+         5eQB/+oT9+dIM6jlFjV0r1qWKfijz2KGGYN8GfVwPzmzdS+rSZTU/E3msZjJciaEVygI
+         GRu9sGYHNYzKB36ZnY11yOB5JwpOVqXGa5BQdiY3ebSHgB3z/gUbkVZY4RuddMbYqFYO
+         kbxYh3tqUBss6Xbqq2URT4aCpZoLjpdccMyEJSHVhkXHZQj04RK7sDaD4LdQm73i2BMk
+         j+CMbwCkSQwROglkLa7IY/sWCmc/pibiS+VwdfaoQIKHs8WneViPzisyt2SvrFXFra/Y
+         1Gow==
+X-Forwarded-Encrypted: i=1; AKwUvByY1sEPqNn6K0mWGLdoDFZEMa2Bk6HF+Iq22yVQE65rMfDnufOhy14pJrAEaGV7nEWSROaQDM4+yw8HKYSh@vger.kernel.org
+X-Gm-Message-State: AFuF++kfTbObv5lGHdPfyYie9t29Ck192umncshx2ojmvocfnsvddY4S
+	OTfPzv57Woe+bleFE6xaAzIR+d1YZVsxWriUl21ciIyRMtXCHlAlUQZmgBm2ldATWw0=
+X-Gm-Gg: AYBFou1PgueLFsQht5QtCYb9MUcL3YK1iD42sp12jZPeWoEqL9AesJPv3gIukLe8U2O
+	VW3QVS0JoI9CmiOJkYsUl9aOHTeWXyHt3s+qCW9QMiMCEqDOR7wbmnhQhuA9Yan7KbI3AO2Y32j
+	Eg2PQo0nryqq/I2pxm/sm0ss/LB19wT4PzFDobsucrdsEPLTpYf353CQZ4IczR8/20WnpUsgxnI
+	3NBfrHTFrd1lZ9MHzGtymz8KtQ47O6Jzifr70h/pFAWgR6E2bwoK5Uf3TmiaMNEyNG2tQD1AR1j
+	KKoHDdTKY141P2h8bVOzxhQkKEIQtca+1Qz5m4SVHseS8ScK+DjAfiS2K4YjwJtV8rY4hUjcmtE
+	YTs1u0I7kyZYi429NNRQ1ubnvXMhwN8lD3AQmr2BP0K77EOt37VndueSNjZ2hzQt1nCgrikCcAr
+	EaMlPiCxifAs30T8Tpw7sOShe5xMJzw9U8jKUVMliBQnbJG2ObnfJKfP270Wh/FsNf/OQx55OxJ
+	BjzF1uj8QVn1KKw2u8Lw02I9YCT8eWi5cuZ0aWrSSTDAA==
+X-Received: by 2002:a05:622a:258a:b0:530:430f:630a with SMTP id d75a77b69052e-53054a1f457mr350385211cf.48.1788886069109;
+        Tue, 08 Sep 2026 09:47:49 -0700 (PDT)
+Received: from ziepe.ca (hlfxns010zw-159-2-239-150.pppoe-dynamic.high-speed.ns.bellaliant.net. [159.2.239.150])
+        by smtp.gmail.com with ESMTPSA id d75a77b69052e-5305402a908sm117296241cf.4.2026.09.08.09.47.47
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 08 Sep 2026 09:47:47 -0700 (PDT)
+Received: from jgg by wakko with local (Exim 4.97)
+	(envelope-from <jgg@ziepe.ca>)
+	id 1x3yz5-0000000ECD9-00Dk;
+	Tue, 08 Sep 2026 13:47:47 -0300
+Date: Tue, 8 Sep 2026 13:47:46 -0300
+From: Jason Gunthorpe <jgg@ziepe.ca>
+To: Daniel Mentz <danielmentz@google.com>
+Cc: Vijayanand Jitta <vijayanand.jitta@oss.qualcomm.com>,
+	Prakash Gupta <prakash.gupta@oss.qualcomm.com>,
+	Will Deacon <will@kernel.org>, Robin Murphy <robin.murphy@arm.com>,
+	"Joerg Roedel (AMD)" <joro@8bytes.org>,
+	linux-arm-msm@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
+	iommu@lists.linux.dev, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v4] iommu/io-pgtable-arm: Add support for contiguous hint
+ bit
+Message-ID: <20260908164746.GC2543240@ziepe.ca>
+References: <20260804-iommu_contig_hint-v4-1-d7a47ed5db98@oss.qualcomm.com>
+ <CAE2F3rBQQEHsksOyE2ojQPbMd_vvFqaFMC2RzT0B6KkxMB5YgQ@mail.gmail.com>
+ <c84e61b1-785e-4a47-9082-c5111bf35fd4@oss.qualcomm.com>
+ <CAE2F3rC80=ZpiHVtmRDU6f8g4AwV_RrJ-Zqr0Xi7zbUc0fsQog@mail.gmail.com>
+ <9c28300b-a17f-4324-b9d5-8fc800e4d794@oss.qualcomm.com>
+ <CAE2F3rDdogf1jGsD2ekGqT7X692fFyqv=H-8iM5OTu8AdHHoJg@mail.gmail.com>
+ <CAE2F3rAeq_CPeaDxuh40v41v2f=68oD2TqK9DYSPKz9F74kqeg@mail.gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260804-iommu_contig_hint-v4-1-d7a47ed5db98@oss.qualcomm.com>
- <CAE2F3rBQQEHsksOyE2ojQPbMd_vvFqaFMC2RzT0B6KkxMB5YgQ@mail.gmail.com>
- <c84e61b1-785e-4a47-9082-c5111bf35fd4@oss.qualcomm.com> <CAE2F3rC80=ZpiHVtmRDU6f8g4AwV_RrJ-Zqr0Xi7zbUc0fsQog@mail.gmail.com>
- <9c28300b-a17f-4324-b9d5-8fc800e4d794@oss.qualcomm.com> <CAE2F3rDdogf1jGsD2ekGqT7X692fFyqv=H-8iM5OTu8AdHHoJg@mail.gmail.com>
-In-Reply-To: <CAE2F3rDdogf1jGsD2ekGqT7X692fFyqv=H-8iM5OTu8AdHHoJg@mail.gmail.com>
-From: Daniel Mentz <danielmentz@google.com>
-Date: Tue, 8 Sep 2026 09:36:35 -0700
-X-Gm-Features: AcwNN1XrNENRtIESxOS2O_pA2bNb7D6VHVKhEtTbgLjPfFAgl7jg-nWJ8NnPV2M
-Message-ID: <CAE2F3rAeq_CPeaDxuh40v41v2f=68oD2TqK9DYSPKz9F74kqeg@mail.gmail.com>
-Subject: Re: [PATCH v4] iommu/io-pgtable-arm: Add support for contiguous hint bit
-To: Vijayanand Jitta <vijayanand.jitta@oss.qualcomm.com>, Jason Gunthorpe <jgg@ziepe.ca>
-Cc: Prakash Gupta <prakash.gupta@oss.qualcomm.com>, Will Deacon <will@kernel.org>, 
-	Robin Murphy <robin.murphy@arm.com>, "Joerg Roedel (AMD)" <joro@8bytes.org>, linux-arm-msm@vger.kernel.org, 
-	linux-arm-kernel@lists.infradead.org, iommu@lists.linux.dev, 
-	linux-kernel@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <CAE2F3rAeq_CPeaDxuh40v41v2f=68oD2TqK9DYSPKz9F74kqeg@mail.gmail.com>
 
-On Sun, Aug 30, 2026 at 12:43=E2=80=AFPM Daniel Mentz <danielmentz@google.c=
-om> wrote:
-> > >>>> +/*
-> > >>>> + * Install num_entries leaf entries starting at ptep (index map_i=
-dx_start
-> > >>>> + * within the current table), tagging arm_lpae_num_cont()-sized g=
-roups with
-> > >>>> + * the contiguous hint where both idx and paddr are aligned to th=
-e group
-> > >>>> + * size. Entries in a misaligned group are installed without the =
-hint.
-> > >>>> + *
-> > >>>> + * idx and paddr both advance by block_size per entry, so their a=
-lignment
-> > >>>> + * relative to the group size is invariant across a run of entrie=
-s within
-> > >>>> + * this call: once a group qualifies (or fails to), every later w=
-hole group
-> > >>>> + * does too, up to num_entries. This merges each such run into a =
-single
-> > >>>> + * arm_lpae_init_pte() call instead of one call per group.
-> > >>>> + */
-> > >>>
-> > >>> Can you provide an example for when this function installs descript=
-ors
-> > >>> where the contiguous bit is only set on a subset of them. I would
-> > >>> assume that the contiguous bit is either set for all descriptors or
-> > >>> none of them.
-> > >>>
-> > >>
-> > >> That assumption doesn't hold in general -- it's only true when the
-> > >> map request happens to start and end on a cont_size boundary. For an
-> > >> arbitrary map_pages() call it usually doesn't.
-> > >
-> > > I believe you won't see arbitrary map_pages() calls. I understand tha=
-t
-> > > these calls are exclusively coming from __iommu_map_domain_pgtbl()
-> > > which uses iommu_pgsize() to determine optimal page sizes.
-> > >
-> > >> Example, 4K granule (num_cont =3D 16, cont_size =3D 64K),
-> > >> iova =3D paddr =3D 0x1000, pgcount =3D 34:
-> > >>
-> > >>    - idx 1..15  (off !=3D 0, misaligned prefix):        installed pl=
-ain
-> > >>    - idx 16..31 (off =3D=3D 0, paddr now 64K-aligned):     installed=
- w/ CONT
-> > >>    - idx 32..34 (off =3D=3D 0, remaining < num_cont):      installed=
- plain
-> > >
-> > > In the example you provided, I expect that you'll receive three
-> > > separate calls from __iommu_map_domain_pgtbl:
-> > >  * idx 1..15 with pgsize 4KB
-> > >  * one call with pgsize 64KB
-> > >  * idx 32..34 with pgsize 4KB
-> > >
-> > > If I took your argument further, I could argue that we'd also have to
-> > > check if we can put down a block mapping if iova =3D paddr =3D 0x0 an=
-d
-> > > pgcount =3D 512, but we're not doing that either.
-> > >
-> > > Could you provide the input parameters to the iommu_map() call that
-> > > resulted in the parameters you provided i.e. iova =3D paddr =3D 0x100=
-0,
-> > > pgcount =3D 34:
-> > >
+On Tue, Sep 08, 2026 at 09:36:35AM -0700, Daniel Mentz wrote:
+> > > That said, install_leaf() is shared by other callers that reach it through
+> > > ops->map_pages() directly, without going through iommu_pgsize(). panthor_vm_map_pages()
+> > > (drivers/gpu/drm/panthor/panthor_mmu.c) is one -- it allocates its io_pgtable_ops via
+> > > alloc_io_pgtable_ops(ARM_64_LPAE_S1, ...), same as any other LPAE consumer, but does its
+> > > own chunking with a local get_pgsize() that only ever returns SZ_4K or SZ_2M, with no
+> > > notion of the 64K/32M CONT boundaries. That can hand install_leaf() exactly the mixed
+> > > iova=paddr=0x1000, pgcount=34 shape in a single call (panfrost's map loop uses the same
+> > > get_pgsize() and hits the same case). So the prefix/aligned-group/suffix handling in
+> > > install_leaf() is still needed for that path.
 > >
-> > You're right -- for the iommu_map()/__iommu_map_domain_pgtbl() path, io=
-mmu_pgsize()
-> > already splits the request at the boundaries you describe before instal=
-l_leaf() ever
-> > sees it, so install_leaf() doesn't need to handle a mixed prefix/CONT-g=
-roup/suffix
-> > chunk for that caller.
-> >
-> > That said, install_leaf() is shared by other callers that reach it thro=
-ugh
-> > ops->map_pages() directly, without going through iommu_pgsize(). pantho=
-r_vm_map_pages()
-> > (drivers/gpu/drm/panthor/panthor_mmu.c) is one -- it allocates its io_p=
-gtable_ops via
-> > alloc_io_pgtable_ops(ARM_64_LPAE_S1, ...), same as any other LPAE consu=
-mer, but does its
-> > own chunking with a local get_pgsize() that only ever returns SZ_4K or =
-SZ_2M, with no
-> > notion of the 64K/32M CONT boundaries. That can hand install_leaf() exa=
-ctly the mixed
-> > iova=3Dpaddr=3D0x1000, pgcount=3D34 shape in a single call (panfrost's =
-map loop uses the same
-> > get_pgsize() and hits the same case). So the prefix/aligned-group/suffi=
-x handling in
-> > install_leaf() is still needed for that path.
->
-> Maybe other people can chime in here, but I feel, from an API
-> perspective, we should have only one way to make of use iopgtable. I
-> think we should just mandate that users honor the updated value for
-> pgtbl_cfg.pgsize_bitmap (and pgtbl_cfg.ias) after the
-> alloc_io_pgtable_ops() call and then choose page sizes appropriately.
-> Otherwise, we end up with two pieces of code in the kernel solving the
-> same problem. panthor_mmu won't be able to take advantage of the
-> contiguous bit until it gets updated accordingly, and that's ok.
+> > Maybe other people can chime in here, but I feel, from an API
+> > perspective, we should have only one way to make of use iopgtable. I
+> > think we should just mandate that users honor the updated value for
+> > pgtbl_cfg.pgsize_bitmap (and pgtbl_cfg.ias) after the
+> > alloc_io_pgtable_ops() call and then choose page sizes appropriately.
+> > Otherwise, we end up with two pieces of code in the kernel solving the
+> > same problem. panthor_mmu won't be able to take advantage of the
+> > contiguous bit until it gets updated accordingly, and that's ok.
+> 
+> On this note, I want to point out that I tried something similar in
+> 2025 (see https://lore.kernel.org/linux-iommu/20250430231924.1481493-1-danielmentz@google.com/).
+> The feedback I received from Jason at the time was:
+> 
+> "Wouldn't it be better to use the pgsize_bitmap and rely on the core
+> code to indicate that a contiguous page size is being used, so it can
+> trivially set the PTE bit without doing all this extra work?"
 
-On this note, I want to point out that I tried something similar in
-2025 (see https://lore.kernel.org/linux-iommu/20250430231924.1481493-1-dani=
-elmentz@google.com/).
-The feedback I received from Jason at the time was:
+Still think this is right, Panthor is not using it well if it doesn't
+jump through all the hoops. Probably there should be an general entry
+point for map/unmap that does the right stuff for the DRM drivers to
+call.
 
-"Wouldn't it be better to use the pgsize_bitmap and rely on the core
-code to indicate that a contiguous page size is being used, so it can
-trivially set the PTE bit without doing all this extra work?"
+Jason
