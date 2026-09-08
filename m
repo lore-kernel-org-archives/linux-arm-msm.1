@@ -1,1134 +1,201 @@
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7642E5921EF
-	for <linux-arm-msm@vger.kernel.org>; Tue,  8 Sep 2026 17:47:59 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.133.124
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D16202F8E9E
+	for <linux-arm-msm@vger.kernel.org>; Tue,  8 Sep 2026 17:49:24 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788889683; cv=none; b=ghA7fnz+3edWhyCi2v8vyX+TRlhwQ7GKaEux7qUNAL/MIeTGJNa9pIlJ4zaMQ4VR6XYWhL/1KmguzU/uQWyb12aY5OfqndLqxIYT6OUxsS2BwEORiso+NByqsyZVq0S7EShiBai7JQ9pJbrDw4rszOFQ8w/RANOOaENsRcaiWwM=
+	t=1788889767; cv=none; b=fibsu9l2WAekkqXPloQ0jotSIZHAkKDi6RDcdq5brhYZrrE2VVffxn8MGAtQxsgxnQYcPkmR2oPpGM4VwSp5Ou7qPTXJH2xQRtxOidDNB7n3709R3zk+ynFtlTYY2CtwpSXOYFCezyzJOKk6GatlDKDuIE+U2qTktUjywGa7dQc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788889683; c=relaxed/simple;
-	bh=tacI9m1MslX9y61QR1VhLpeyfq84AgyzmglYCONMaCY=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=LVEuFPV/cHdun24jVko2sThxe0itKfa3RQTYCcu1laeGGc5O18zCHSZF0xlIupi3pdmhbFnZ7wFTVaR+xHSUL7f4yAKcJimSFa5M/9AwgVfWkuGRVth8yeNxXj2mr0fBBGDzPn2FrsnVawxUo4FVLrnHXk7gHzK/Z0PPmrjjNlY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=XIugPw0L; dkim=pass (2048-bit key) header.d=redhat.com header.i=@redhat.com header.b=tCbhf1ye; arc=none smtp.client-ip=170.10.133.124
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
+	s=arc-20240116; t=1788889767; c=relaxed/simple;
+	bh=mWaxN87JC2EDFezne34c7EaHfBw90oiDI4rQKPLfvvU=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=e7SvJgYOH/50IQ2DHjWlgYz0eCfCd3uj0lY5sFXLPaLGplx+SgpMRzsPhcMBULou6A3VFpjyvzYe6JnFIirEjXItreg7HCbTlbKln4d6NZpGwpnn3Cn299d1eUfbP2Cy/E+En98QeSvzloVRP2NKCoMMTRqPxQmUP5o5md8Zaac=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=kcvmtLm+; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=KSo7tkNW; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="XIugPw0L";
-	dkim=pass (2048-bit key) header.d=redhat.com header.i=@redhat.com header.b="tCbhf1ye"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1788889677;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=oPKIqdvvTIVk8Ctx84tr0wEUgwsrKq1F194NqBriiB4=;
-	b=XIugPw0LhETbRT5qiI9DhEfQ88Xwp07iMZMdVndfe/Tomq3aTc6MmaEDq6nQ9oDfrPlS8L
-	GmZsHVzd5Dy2BvnB7PL6dWzmTJXmcmscpa2k9Pok0sefVEPHQRuv4/VC80oH3ECEsWzsMh
-	ymBsdbqk83+c894v7NNbSzrJFrwHWhk=
-Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com
- [209.85.222.197]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-6-1jHml9rxPJ6Wu3ffKtedCg-1; Tue, 08 Sep 2026 13:47:56 -0400
-X-MC-Unique: 1jHml9rxPJ6Wu3ffKtedCg-1
-X-Mimecast-MFC-AGG-ID: 1jHml9rxPJ6Wu3ffKtedCg_1788889676
-Received: by mail-qk1-f197.google.com with SMTP id af79cd13be357-92e820609d9so778009985a.2
-        for <linux-arm-msm@vger.kernel.org>; Tue, 08 Sep 2026 10:47:56 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="kcvmtLm+";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="KSo7tkNW"
+Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 688FdXvp3322625
+	for <linux-arm-msm@vger.kernel.org>; Tue, 8 Sep 2026 17:49:23 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	vXpB3HjGCxpveG5hbmpDHm8SjVKdHjWqdRtp8+xhDXg=; b=kcvmtLm+rk8tRsVG
+	EO/cUkorf9R8iho59kOuEkIxzUHpyBJbJ2uUFEbPkKRNSoXGMnjVJwQ/YgBWuv2R
+	aHV91uZn+k5kRwSWofrb0Z8nv0KhVmrBqbs8R85Rp1fKzqasOuoqngI66qY2Faox
+	mYTkaMutXs/qSuBE9ZCkwovTKdLdkciH1oEVlrRIsHGe7oxPgZG2hbP2/whgIgWC
+	hAWlWdlpxz6baK9YlsoTO7naq7iFryvmJIZhMIA9LrU+fCw7EvkoMLFWSsD8prkH
+	sxLrO40KxsAn1IHpGVPDrt5oKPM7OhwnAA4Wt5wJmt3LK8y9v98nG2LdmFtK1+pL
+	ejm9ig==
+Received: from mail-vs1-f72.google.com (mail-vs1-f72.google.com [209.85.217.72])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gjf1cjf15-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Tue, 08 Sep 2026 17:49:23 +0000 (GMT)
+Received: by mail-vs1-f72.google.com with SMTP id ada2fe7eead31-73858d44c8aso1073839137.0
+        for <linux-arm-msm@vger.kernel.org>; Tue, 08 Sep 2026 10:49:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=redhat.com; s=google; t=1788889676; x=1789494476; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=oPKIqdvvTIVk8Ctx84tr0wEUgwsrKq1F194NqBriiB4=;
-        b=tCbhf1ye3POH9U8qL3LFiju5zhy8ttk+8kCL48BTfHkWa/xZm2o968m/inpYhsvrh0
-         B/wed48ZGYqNIkgTbu4xMcAcGAIp8M8NQXiJ5OMrAvnPvZ0lfe9TBE4bQwSaMOrD9Jp2
-         KuoDeGJhIoiJnfv81mIx1vWMSD8+/xAvbjfu8pfmAXXBoGgQS1FVs3es2WQTJURNItcN
-         7PEO7kEDANqKbAl50dhDNkP9nroR9wsSuMsC142thJ5aANIe/JcloZOt4cGTlfyhfbm8
-         HAagi4f0muSDB8KorNF1JBASSWLw10ooE79S40J6Y1FZzP5VaUnpMZm826c7+CtNcTOF
-         PO/g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788889676; x=1789494476;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+        d=oss.qualcomm.com; s=google; t=1788889763; x=1789494563; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=oPKIqdvvTIVk8Ctx84tr0wEUgwsrKq1F194NqBriiB4=;
-        b=MQ/uTqJwFiXjP2JHajVqhrpw4+EY/lJuT6F7o/Sm0/pEkrR25Jpu6C1PSQj1Id0xoy
-         tYEp1U/0E2mE2XFV7k+Fqoc4WvU7z4s9ZZEUqxKt9AcmtKHrNoBm3BBLpDv4wQK4RmS5
-         tMV5TMqFH1AFxIH6RTRD2+S96/BN03SJxynoE8+WTWR0f+nJU+sNDRa0uHR0Y3h2q+tN
-         WyQDi+Uzx5pXYO+td2GMtB1NZlo6PZFYgouYA+Ys6IjZJb1swxf6ag2RMDLyfoCc4A1N
-         jIH3NQ8Mun3ILT5wqwTA72nHWMfJPUAMGf49Sxmct57Acp0ADPGw0sSWVx2ms95q5BHb
-         L7Iw==
-X-Forwarded-Encrypted: i=1; AKwUvBzhGd2aCxYrt8V042nn4rxBrNBEa2gNFZscHB67ZLm3QuPWyh5SKTWek5zFCWplfcqpyU0SqVN6CFJlUQ97@vger.kernel.org
-X-Gm-Message-State: AFuF++k12iY5Z6j7Mr45q8oMB39uG9i+pEfteUywH0MQ9CUkCac9lu4m
-	k9ToWzfgZU+9gIF/z04OvlDdPhmGuprlzE/SndUVOdixm+vZ7Y7ckHSGGX9Zy0QMKMu026pWhVj
-	HxL56iyw+palNc1dvVApOon42W4N05aECcbCWRLFDjQzZ+omJLQoYPIhE4JDUZfqwCPU=
-X-Gm-Gg: AYBFou3HIMTXpKAhADib0Rj9CupiCcqqW6DwOzTD4pc4ewyNWiyKiz4ztlHACwqeVgv
-	BNfhtRmJuNAwEmN7n9mLbyzHG9xR8irfczzvHtOhN+u69fBeqFkHD3jX1WOVIq5zHCULPUTHTM9
-	eqhx6J1NPuCsP1tOvXFy3cRQQYOshm3RdWB41/G/2KuzDKixGnOXWP6ZDIIHN34L+S8tpbKZlVH
-	CnRr2BRwNm01dCO5usfX8WZr4Lr1MfypCbOiQcirD03LBG2Gy8OD+MTKlqmEL0dPahBsuJ8BtEc
-	ksLrRvKMODfaFqNwrV7pLS+Eobaak8FukBAzr7xO9cSvi/U2Mad2wEgiuR6yrL/PGBwFoU5YYJT
-	nIdyYcUWQBVXyVEy9zMrzMVGF+hKoN5IAcu3eZi0=
-X-Received: by 2002:a05:620a:1982:b0:933:aa0:bb83 with SMTP id af79cd13be357-93980400a22mr3419734685a.34.1788889675309;
-        Tue, 08 Sep 2026 10:47:55 -0700 (PDT)
-X-Received: by 2002:a05:620a:1982:b0:933:aa0:bb83 with SMTP id af79cd13be357-93980400a22mr3419673685a.34.1788889670067;
-        Tue, 08 Sep 2026 10:47:50 -0700 (PDT)
-Received: from [192.168.1.3] (c-73-183-53-213.hsd1.pa.comcast.net. [73.183.53.213])
-        by smtp.gmail.com with ESMTPSA id af79cd13be357-9397fb9bac1sm1194093685a.35.2026.09.08.10.47.48
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 08 Sep 2026 10:47:49 -0700 (PDT)
-From: Brian Masney <bmasney@redhat.com>
-Date: Tue, 08 Sep 2026 13:47:20 -0400
-Subject: [PATCH 3/4] clk: qcom: convert drivers over to use
- subsys_platform_driver()
+        bh=vXpB3HjGCxpveG5hbmpDHm8SjVKdHjWqdRtp8+xhDXg=;
+        b=KSo7tkNW5WJKzMJHyMLdrf9bUEpI4LHpPAnVo5LcG/UgdNU308mI8IEJOoeGnkgXLf
+         8iKxnJ06YT+rE1b+2AWSw9cU+0RhFe3MQgRrm+cp9M1VhZHdhw3EDrzRiCqjK3JmFQzs
+         KI9nl94W6fV7q+7HJVx1h7ETBeYHDRx2pVSei3DWuTzkJVKzPOvNu+jIEd/eLXsYAY7b
+         4sGo5r6Kg2+GOWsNNt1QS3z2OjcPnCVwH/6VBjKjHiFSM9yRsK8JHBnwxenBTYEz8cRg
+         w00q5LvExKv3KON6j4VnimYMxiDEEy8zwC6EQRQM5lhSM+sH6a9cg9Fn/pDQcRlvlqrv
+         zXNA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1788889763; x=1789494563;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=vXpB3HjGCxpveG5hbmpDHm8SjVKdHjWqdRtp8+xhDXg=;
+        b=Ok6PZn0+iwtt1j8MO9/xtv5SofJkqlW0/LQ/JPLix9QwKI20h3srYOTGKb83fkxg86
+         FnzFb0s0R8iikVGYzk/Tll7WOOWyqHxm223vofYut9qyEkIitLL8es0uJ0wR/JgcVIpz
+         +lIiESlLo2dZD6f5tiLaAGDcnhMaUL3DQ7nlflRthfKMu537iXhl8huUow6Bavzy4ALf
+         6LurqrB0WxPhio1JxNdWbPN+ZH+krBzJubbYY6d7vggDnDhZdK1K0GwJmBJQdkCZ6u/H
+         zyHXnEniVUVq2SvJoC7LJs/0GkyQlod8iz9bv0lP1IwiWma8AgRdhDYv8j6PB9rCa9xq
+         mb5A==
+X-Forwarded-Encrypted: i=1; AKwUvBybgTHnI7XNFfBPY0DJ+UNQObblokVcjx5Fg1nfhddLkvJf7ymXjnFnUvgVDKQ5F0QQpkRPFjAJZmBr0XC+@vger.kernel.org
+X-Gm-Message-State: AFuF++mHt9zQCA3gn48yYMJNHUJMAs14pMFp/RfvfXb8Gzv5R8xAlF4t
+	VVccRYOZXBdaqyPaS+uuPxsBg4F2sb8E3CF/KJauqJzrxShSiLpkXaKw0T1gL6pBSm0XyAuSbOH
+	Roq6CbC/VqFmw5mR5TJ7f2Gku6b1yg89veARL+bSlHDlJVtoW5kvdu5kYtjJy1tkVYap8
+X-Gm-Gg: AYBFou2BPqNLkLK5S+XvD9eCyXqsSGlnB0/kocb4iGcwtzmWtVHyveAoGDf5MlWN0Pd
+	4vBK0hX0vh4V90E3tdOMBoyo93HLeYXVBh3awHK8iXNiopCx3FQNOOpOtJai7oUjOOJReGSl5jB
+	VMVkCg4RZpHcsFwQ8r/CBl2Mxk/ZkeE7/AgcRrJ51ftWOqRcZKABMB5NNNhFbL1jQaWPOe0/FMN
+	y8mwSF69YGTvThzbGGYN4RZOEFCFqa1kyjoShJslq4JB/YayTYuL2xkNXuUhJBvDzpsEqDo4WyO
+	u51k/JrshkL6QgC2TEWctddIkihoLVoQhmZ7eBEZ+Ie4NvN+NkVSQjvX+uOHzQf5nSYhow7LOeF
+	GaEaV4GD2bKAAuIhnDHxewKgn7Dc=
+X-Received: by 2002:a05:6102:38c7:b0:779:e75e:63c6 with SMTP id ada2fe7eead31-78a4a99f93emr11680311137.12.1788889762916;
+        Tue, 08 Sep 2026 10:49:22 -0700 (PDT)
+X-Received: by 2002:a05:6102:38c7:b0:779:e75e:63c6 with SMTP id ada2fe7eead31-78a4a99f93emr11680279137.12.1788889762354;
+        Tue, 08 Sep 2026 10:49:22 -0700 (PDT)
+Received: from [192.168.68.120] ([5.133.47.210])
+        by smtp.googlemail.com with ESMTPSA id 5b1f17b1804b1-49ce5563c6csm413124815e9.4.2026.09.08.10.49.21
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 08 Sep 2026 10:49:21 -0700 (PDT)
+Message-ID: <1b0b1079-2646-41e2-a513-6513934e8ba6@oss.qualcomm.com>
+Date: Tue, 8 Sep 2026 18:49:20 +0100
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 02/11] ASoC: SDCA: export PM helpers keyed on
+ sdca_class_drv
+To: Charles Keepax <ckeepax@opensource.cirrus.com>
+Cc: Mark Brown <broonie@kernel.org>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley
+ <conor+dt@kernel.org>,
+        Bard Liao <yung-chuan.liao@linux.intel.com>,
+        Jaroslav Kysela <perex@perex.cz>, Liam Girdwood <lgirdwood@gmail.com>,
+        Maciej Strozek <mstrozek@opensource.cirrus.com>,
+        Pierre-Louis Bossart <pierre-louis.bossart@linux.dev>,
+        Takashi Iwai <tiwai@suse.com>,
+        Faiz Nabi Kuchay <fkuchay@oss.qualcomm.com>,
+        Jorijn van der Graaf <jorijnvdgraaf@catcrafts.net>,
+        patches@opensource.cirrus.com, linux-sound@vger.kernel.org,
+        devicetree@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+References: <20260907083727.733705-1-srinivas.kandagatla@oss.qualcomm.com>
+ <20260907083727.733705-3-srinivas.kandagatla@oss.qualcomm.com>
+ <aqA2W+hSCjLVIa2m@opensource.cirrus.com>
+Content-Language: en-US
+From: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
+In-Reply-To: <aqA2W+hSCjLVIa2m@opensource.cirrus.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260908-subsys_initcall-v1-3-cbccf4cd4288@redhat.com>
-References: <20260908-subsys_initcall-v1-0-cbccf4cd4288@redhat.com>
-In-Reply-To: <20260908-subsys_initcall-v1-0-cbccf4cd4288@redhat.com>
-To: Greg Kroah-Hartman <gregkh@linuxfoundation.org>, 
- "Rafael J. Wysocki" <rafael@kernel.org>, Danilo Krummrich <dakr@kernel.org>, 
- Bjorn Andersson <andersson@kernel.org>, Stephen Boyd <sboyd@kernel.org>, 
- Jerome Brunet <jbrunet+clk@baylibre.com>, 
- Geert Uytterhoeven <geert+renesas@glider.be>
-Cc: driver-core@lists.linux.dev, linux-kernel@vger.kernel.org, 
- linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org, 
- linux-renesas-soc@vger.kernel.org, Brian Masney <bmasney@redhat.com>
-X-Mailer: b4 0.16.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=31919; i=bmasney@redhat.com;
- s=20250903; h=from:subject:message-id;
- bh=tacI9m1MslX9y61QR1VhLpeyfq84AgyzmglYCONMaCY=;
- b=kA0DAAoWt9LdJ11+wIcByyZiAGqgSj7IDYiWKxmxdkfNfcWEWMkMGAY6ZIsvvSm5yVOdwmFiv
- Yh1BAAWCgAdFiEEpG0ycFhlqj3e3CkEt9LdJ11+wIcFAmqgSj4ACgkQt9LdJ11+wIdEyAEAyoi+
- xjlnOw08stYMFdEyQ7F81bMKfeinPXAGot+qh3EBALVPBlp0ANCD1TMGDbkkORyVbiPy88uwlbW
- sy0cb3eIF
-X-Developer-Key: i=bmasney@redhat.com; a=openpgp;
- fpr=A46D32705865AA3DDEDC2904B7D2DD275D7EC087
+X-Authority-Analysis: v=2.4 cv=VN3tWdPX c=1 sm=1 tr=0 ts=6aa04aa3 cx=c_pps
+ a=DUEm7b3gzWu7BqY5nP7+9g==:117 a=ZsC4DHZuhs/kKio7QBcDoQ==:17
+ a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
+ a=EUspDBNiAAAA:8 a=tyrENRfuTtrdjV8_xjIA:9 a=QEXdDO2ut3YA:10
+ a=-aSRE8QhW-JAV6biHavz:22
+X-Proofpoint-ORIG-GUID: i5FC0dhrQ-JXFoUhAI2BOExET8-aJ-8E
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTA4MDE5MyBTYWx0ZWRfX3UvSNeklZ/0M
+ aLxfI1mgnNT0lORLJTjakfUYkpGHzfxLd3beZh67i/gKxJlx38l+MLWF6ZAMaDHqXhL0oYl1dOD
+ Bx3mLDBFfFp0p4ctTtpG7hj2v7G/vrI=
+X-Proofpoint-GUID: i5FC0dhrQ-JXFoUhAI2BOExET8-aJ-8E
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTA4MDE5MyBTYWx0ZWRfX3WUBDk3QR1ta
+ iI0u+rfaADgy2AoMs02Ivvk3/vwfG2bG+f0Oegp98OnSlZ4H9hJ418t+rMZJVUoOL+PbBEnpgRc
+ lqPDRnPB9eeHtPe8ozRGrIIlCZt4GcNiC56CUjD5+llm++AevkMWyDfCDQ7MpQoGfoHNXRPICEH
+ e6aotNChITFq+ZSRs0W54AAHnCZDH95Vhd87XVAthkFsk6CvTBARxRUghsYOv9EE9DQ+hKKf84s
+ rD1sVbUXElgj7JLsdwCCxZUC4B973g1pdZIxw0dEd0V3SiY0TlZjd/CoyKb+1xf/BjK1uA5K5JY
+ R7ATDoMdjDL80DLIrF0z9kVxoI8yQg/n3JMV9gHoqREiKYEWn5qaW0ZvafrwcG8sTW+og4goEYM
+ Gutshay5hoTegsmyknxr3QaPUySJIMuXXHLmCqdvZrJRftykFhzYrtmmP7jM0kryFqf0BJdcr/j
+ qL0Q0ECsND5PIu0WFsQ==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-09-08_03,2026-09-08_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ phishscore=0 malwarescore=0 priorityscore=1501 lowpriorityscore=0 spamscore=0
+ suspectscore=0 clxscore=1015 impostorscore=0 bulkscore=0 adultscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2609080193
 
-Reduce boilerplate code in the drivers and convert them over to use
-subsys_platform_driver().
+On 9/8/26 5:22 PM, Charles Keepax wrote:
+> On Mon, Sep 07, 2026 at 09:37:16AM +0100, Srinivas Kandagatla wrote:
+>> The class PM callbacks pull sdca_class_drv out of drvdata, so the
+>> built-in class_sdw_driver owns the drvdata slot.  That works for the
+>> generic case but blocks codec drivers that want to embed
+>> sdca_class_drv in their own private struct -- they need drvdata for
+>> their codec priv.
+>>
+>> Split the four callbacks into exported helpers that take a
+>> struct sdca_class_drv * directly:
+>>
+>>   sdca_class_system_suspend()
+>>   sdca_class_system_resume()
+>>   sdca_class_runtime_suspend()
+>>   sdca_class_runtime_resume()
+>>
+>> Codec drivers can now compose these into their own dev_pm_ops without
+>> going through drvdata.
+>>
+>> For the built-in class_sdw_driver, add small dev_pm_ops wrappers that
+>> fetch drv from drvdata, wire them into sdca_class_pm_ops, and export
+>> the ops so any generic SDCA slave can pick them up as-is.
+>>
+>> No functional change: the built-in class_sdw_driver keeps the same PM
+>> semantics; only the internal plumbing shifts to operate on
+>> sdca_class_drv instead of struct device *dev.
+>>
+>> Signed-off-by: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
+>> ---
+>> +/*
+>> + * PM helpers.  Codec drivers embed sdca_class_drv in their own priv,
+>> + * own dev_set_drvdata(), and compose these into their own dev_pm_ops:
+>> + *
+>> + *	static int wcd_runtime_suspend(struct device *dev) {
+>> + *		struct wcd_priv *priv = dev_get_drvdata(dev);
+>> + *		return sdca_class_runtime_suspend(&priv->class);
+>> + *	}
+>> + *
+>> + * The built-in class_sdw_driver in sdca_class.c uses sdca_class_pm_ops
+>> + * directly because it stashes the sdca_class_drv in drvdata itself.
+>> + */
+>> +int sdca_class_runtime_suspend(struct sdca_class_drv *drv);
+>> +int sdca_class_runtime_resume(struct sdca_class_drv *drv);
+>> +int sdca_class_system_suspend(struct sdca_class_drv *drv);
+>> +int sdca_class_system_resume(struct sdca_class_drv *drv);
+>> +extern const struct dev_pm_ops sdca_class_pm_ops;
+> 
+> I don't think we use sdca_class_pm_ops outside the class driver
+> here, I would leave that internal unless we have a need for it.
+You are right, I will remove this in v3.
 
-Signed-off-by: Brian Masney <bmasney@redhat.com>
-Assisted-by: Claude:claude-opus-4-8
----
- drivers/clk/qcom/dispcc-x1e80100.c  | 12 +-----------
- drivers/clk/qcom/gcc-eliza.c        | 12 +-----------
- drivers/clk/qcom/gcc-glymur.c       | 12 +-----------
- drivers/clk/qcom/gcc-hawi.c         | 12 +-----------
- drivers/clk/qcom/gcc-kaanapali.c    | 12 +-----------
- drivers/clk/qcom/gcc-kuno.c         | 12 +-----------
- drivers/clk/qcom/gcc-milos.c        | 12 +-----------
- drivers/clk/qcom/gcc-nord.c         | 12 +-----------
- drivers/clk/qcom/gcc-qcm2290.c      | 12 +-----------
- drivers/clk/qcom/gcc-qcs615.c       | 12 +-----------
- drivers/clk/qcom/gcc-qcs8300.c      | 12 +-----------
- drivers/clk/qcom/gcc-qdu1000.c      | 12 +-----------
- drivers/clk/qcom/gcc-sar2130p.c     | 12 +-----------
- drivers/clk/qcom/gcc-sc7280.c       | 12 +-----------
- drivers/clk/qcom/gcc-sc8280xp.c     | 12 +-----------
- drivers/clk/qcom/gcc-sdx55.c        | 12 +-----------
- drivers/clk/qcom/gcc-sdx65.c        | 12 +-----------
- drivers/clk/qcom/gcc-sdx75.c        | 12 +-----------
- drivers/clk/qcom/gcc-shikra.c       | 12 +-----------
- drivers/clk/qcom/gcc-sm4450.c       | 12 +-----------
- drivers/clk/qcom/gcc-sm6115.c       | 12 +-----------
- drivers/clk/qcom/gcc-sm6125.c       | 12 +-----------
- drivers/clk/qcom/gcc-sm6375.c       | 12 +-----------
- drivers/clk/qcom/gcc-sm7150.c       | 12 +-----------
- drivers/clk/qcom/gcc-sm8150.c       | 12 +-----------
- drivers/clk/qcom/gcc-sm8250.c       | 12 +-----------
- drivers/clk/qcom/gcc-sm8350.c       | 12 +-----------
- drivers/clk/qcom/gcc-sm8450.c       | 12 +-----------
- drivers/clk/qcom/gcc-sm8550.c       | 12 +-----------
- drivers/clk/qcom/gcc-sm8650.c       | 12 +-----------
- drivers/clk/qcom/gcc-sm8750.c       | 12 +-----------
- drivers/clk/qcom/gcc-x1e80100.c     | 12 +-----------
- drivers/clk/qcom/lpasscc-sc7280.c   | 12 +-----------
- drivers/clk/qcom/lpasscc-sdm845.c   | 12 +-----------
- drivers/clk/qcom/tcsrcc-eliza.c     | 12 +-----------
- drivers/clk/qcom/tcsrcc-glymur.c    | 12 +-----------
- drivers/clk/qcom/tcsrcc-kaanapali.c | 12 +-----------
- drivers/clk/qcom/tcsrcc-sm8550.c    | 12 +-----------
- drivers/clk/qcom/tcsrcc-sm8650.c    | 12 +-----------
- drivers/clk/qcom/tcsrcc-sm8750.c    | 12 +-----------
- drivers/clk/qcom/tcsrcc-x1e80100.c  | 12 +-----------
- drivers/clk/qcom/videocc-sm8750.c   | 12 +-----------
- 42 files changed, 42 insertions(+), 462 deletions(-)
+--srini
 
-diff --git a/drivers/clk/qcom/dispcc-x1e80100.c b/drivers/clk/qcom/dispcc-x1e80100.c
-index 795279609c0b..d3dc678a298d 100644
---- a/drivers/clk/qcom/dispcc-x1e80100.c
-+++ b/drivers/clk/qcom/dispcc-x1e80100.c
-@@ -1704,17 +1704,7 @@ static struct platform_driver disp_cc_x1e80100_driver = {
- 	},
- };
- 
--static int __init disp_cc_x1e80100_init(void)
--{
--	return platform_driver_register(&disp_cc_x1e80100_driver);
--}
--subsys_initcall(disp_cc_x1e80100_init);
--
--static void __exit disp_cc_x1e80100_exit(void)
--{
--	platform_driver_unregister(&disp_cc_x1e80100_driver);
--}
--module_exit(disp_cc_x1e80100_exit);
-+subsys_platform_driver(disp_cc_x1e80100_driver);
- 
- MODULE_DESCRIPTION("QTI Display Clock Controller X1E80100 Driver");
- MODULE_LICENSE("GPL");
-diff --git a/drivers/clk/qcom/gcc-eliza.c b/drivers/clk/qcom/gcc-eliza.c
-index fe18942a59ac..ee486c24fe66 100644
---- a/drivers/clk/qcom/gcc-eliza.c
-+++ b/drivers/clk/qcom/gcc-eliza.c
-@@ -3090,17 +3090,7 @@ static struct platform_driver gcc_eliza_driver = {
- 	},
- };
- 
--static int __init gcc_eliza_init(void)
--{
--	return platform_driver_register(&gcc_eliza_driver);
--}
--subsys_initcall(gcc_eliza_init);
--
--static void __exit gcc_eliza_exit(void)
--{
--	platform_driver_unregister(&gcc_eliza_driver);
--}
--module_exit(gcc_eliza_exit);
-+subsys_platform_driver(gcc_eliza_driver);
- 
- MODULE_DESCRIPTION("QTI GCC Eliza Driver");
- MODULE_LICENSE("GPL");
-diff --git a/drivers/clk/qcom/gcc-glymur.c b/drivers/clk/qcom/gcc-glymur.c
-index 2ee4820b6fdf..9fdf76d0f692 100644
---- a/drivers/clk/qcom/gcc-glymur.c
-+++ b/drivers/clk/qcom/gcc-glymur.c
-@@ -8571,17 +8571,7 @@ static struct platform_driver gcc_glymur_driver = {
- 	},
- };
- 
--static int __init gcc_glymur_init(void)
--{
--	return platform_driver_register(&gcc_glymur_driver);
--}
--subsys_initcall(gcc_glymur_init);
--
--static void __exit gcc_glymur_exit(void)
--{
--	platform_driver_unregister(&gcc_glymur_driver);
--}
--module_exit(gcc_glymur_exit);
-+subsys_platform_driver(gcc_glymur_driver);
- 
- MODULE_DESCRIPTION("QTI GCC Glymur Driver");
- MODULE_LICENSE("GPL");
-diff --git a/drivers/clk/qcom/gcc-hawi.c b/drivers/clk/qcom/gcc-hawi.c
-index f1b95753c3a3..39fd5f56ca61 100644
---- a/drivers/clk/qcom/gcc-hawi.c
-+++ b/drivers/clk/qcom/gcc-hawi.c
-@@ -3843,17 +3843,7 @@ static struct platform_driver gcc_hawi_driver = {
- 	},
- };
- 
--static int __init gcc_hawi_init(void)
--{
--	return platform_driver_register(&gcc_hawi_driver);
--}
--subsys_initcall(gcc_hawi_init);
--
--static void __exit gcc_hawi_exit(void)
--{
--	platform_driver_unregister(&gcc_hawi_driver);
--}
--module_exit(gcc_hawi_exit);
-+subsys_platform_driver(gcc_hawi_driver);
- 
- MODULE_DESCRIPTION("QTI GCC HAWI Driver");
- MODULE_LICENSE("GPL");
-diff --git a/drivers/clk/qcom/gcc-kaanapali.c b/drivers/clk/qcom/gcc-kaanapali.c
-index 5bcbcd178657..e310b5c9b5c7 100644
---- a/drivers/clk/qcom/gcc-kaanapali.c
-+++ b/drivers/clk/qcom/gcc-kaanapali.c
-@@ -3524,17 +3524,7 @@ static struct platform_driver gcc_kaanapali_driver = {
- 	},
- };
- 
--static int __init gcc_kaanapali_init(void)
--{
--	return platform_driver_register(&gcc_kaanapali_driver);
--}
--subsys_initcall(gcc_kaanapali_init);
--
--static void __exit gcc_kaanapali_exit(void)
--{
--	platform_driver_unregister(&gcc_kaanapali_driver);
--}
--module_exit(gcc_kaanapali_exit);
-+subsys_platform_driver(gcc_kaanapali_driver);
- 
- MODULE_DESCRIPTION("QTI GCC Kaanapali Driver");
- MODULE_LICENSE("GPL");
-diff --git a/drivers/clk/qcom/gcc-kuno.c b/drivers/clk/qcom/gcc-kuno.c
-index 787111397df9..55a2fbc74268 100644
---- a/drivers/clk/qcom/gcc-kuno.c
-+++ b/drivers/clk/qcom/gcc-kuno.c
-@@ -1467,17 +1467,7 @@ static struct platform_driver gcc_kuno_driver = {
- 	},
- };
- 
--static int __init gcc_kuno_init(void)
--{
--	return platform_driver_register(&gcc_kuno_driver);
--}
--subsys_initcall(gcc_kuno_init);
--
--static void __exit gcc_kuno_exit(void)
--{
--	platform_driver_unregister(&gcc_kuno_driver);
--}
--module_exit(gcc_kuno_exit);
-+subsys_platform_driver(gcc_kuno_driver);
- 
- MODULE_DESCRIPTION("QTI GCC Kuno Driver");
- MODULE_LICENSE("GPL");
-diff --git a/drivers/clk/qcom/gcc-milos.c b/drivers/clk/qcom/gcc-milos.c
-index 4219af2879d9..10a5f3ab0d42 100644
---- a/drivers/clk/qcom/gcc-milos.c
-+++ b/drivers/clk/qcom/gcc-milos.c
-@@ -3208,17 +3208,7 @@ static struct platform_driver gcc_milos_driver = {
- 	},
- };
- 
--static int __init gcc_milos_init(void)
--{
--	return platform_driver_register(&gcc_milos_driver);
--}
--subsys_initcall(gcc_milos_init);
--
--static void __exit gcc_milos_exit(void)
--{
--	platform_driver_unregister(&gcc_milos_driver);
--}
--module_exit(gcc_milos_exit);
-+subsys_platform_driver(gcc_milos_driver);
- 
- MODULE_DESCRIPTION("QTI GCC Milos Driver");
- MODULE_LICENSE("GPL");
-diff --git a/drivers/clk/qcom/gcc-nord.c b/drivers/clk/qcom/gcc-nord.c
-index 5c9d25f53a6d..4f87e06b33ab 100644
---- a/drivers/clk/qcom/gcc-nord.c
-+++ b/drivers/clk/qcom/gcc-nord.c
-@@ -1862,17 +1862,7 @@ static struct platform_driver gcc_nord_driver = {
- 	},
- };
- 
--static int __init gcc_nord_init(void)
--{
--	return platform_driver_register(&gcc_nord_driver);
--}
--subsys_initcall(gcc_nord_init);
--
--static void __exit gcc_nord_exit(void)
--{
--	platform_driver_unregister(&gcc_nord_driver);
--}
--module_exit(gcc_nord_exit);
-+subsys_platform_driver(gcc_nord_driver);
- 
- MODULE_DESCRIPTION("QTI GCC NORD Driver");
- MODULE_LICENSE("GPL");
-diff --git a/drivers/clk/qcom/gcc-qcm2290.c b/drivers/clk/qcom/gcc-qcm2290.c
-index 2532c0b36bc5..cf7d05558be9 100644
---- a/drivers/clk/qcom/gcc-qcm2290.c
-+++ b/drivers/clk/qcom/gcc-qcm2290.c
-@@ -2923,17 +2923,7 @@ static struct platform_driver gcc_qcm2290_driver = {
- 	},
- };
- 
--static int __init gcc_qcm2290_init(void)
--{
--	return platform_driver_register(&gcc_qcm2290_driver);
--}
--subsys_initcall(gcc_qcm2290_init);
--
--static void __exit gcc_qcm2290_exit(void)
--{
--	platform_driver_unregister(&gcc_qcm2290_driver);
--}
--module_exit(gcc_qcm2290_exit);
-+subsys_platform_driver(gcc_qcm2290_driver);
- 
- MODULE_DESCRIPTION("QTI GCC QCM2290 Driver");
- MODULE_LICENSE("GPL v2");
-diff --git a/drivers/clk/qcom/gcc-qcs615.c b/drivers/clk/qcom/gcc-qcs615.c
-index 57f8c80c6f32..d19792027cd9 100644
---- a/drivers/clk/qcom/gcc-qcs615.c
-+++ b/drivers/clk/qcom/gcc-qcs615.c
-@@ -3017,17 +3017,7 @@ static struct platform_driver gcc_qcs615_driver = {
- 	},
- };
- 
--static int __init gcc_qcs615_init(void)
--{
--	return platform_driver_register(&gcc_qcs615_driver);
--}
--subsys_initcall(gcc_qcs615_init);
--
--static void __exit gcc_qcs615_exit(void)
--{
--	platform_driver_unregister(&gcc_qcs615_driver);
--}
--module_exit(gcc_qcs615_exit);
-+subsys_platform_driver(gcc_qcs615_driver);
- 
- MODULE_DESCRIPTION("QTI GCC QCS615 Driver");
- MODULE_LICENSE("GPL");
-diff --git a/drivers/clk/qcom/gcc-qcs8300.c b/drivers/clk/qcom/gcc-qcs8300.c
-index 146b3b5dfead..57014c4f8c6d 100644
---- a/drivers/clk/qcom/gcc-qcs8300.c
-+++ b/drivers/clk/qcom/gcc-qcs8300.c
-@@ -3726,17 +3726,7 @@ static struct platform_driver gcc_qcs8300_driver = {
- 	},
- };
- 
--static int __init gcc_qcs8300_init(void)
--{
--	return platform_driver_register(&gcc_qcs8300_driver);
--}
--subsys_initcall(gcc_qcs8300_init);
--
--static void __exit gcc_qcs8300_exit(void)
--{
--	platform_driver_unregister(&gcc_qcs8300_driver);
--}
--module_exit(gcc_qcs8300_exit);
-+subsys_platform_driver(gcc_qcs8300_driver);
- 
- MODULE_DESCRIPTION("QTI GCC QCS8300 Driver");
- MODULE_LICENSE("GPL");
-diff --git a/drivers/clk/qcom/gcc-qdu1000.c b/drivers/clk/qcom/gcc-qdu1000.c
-index 915bb9b4ff81..a139fd8f722d 100644
---- a/drivers/clk/qcom/gcc-qdu1000.c
-+++ b/drivers/clk/qcom/gcc-qdu1000.c
-@@ -2689,17 +2689,7 @@ static struct platform_driver gcc_qdu1000_driver = {
- 	},
- };
- 
--static int __init gcc_qdu1000_init(void)
--{
--	return platform_driver_register(&gcc_qdu1000_driver);
--}
--subsys_initcall(gcc_qdu1000_init);
--
--static void __exit gcc_qdu1000_exit(void)
--{
--	platform_driver_unregister(&gcc_qdu1000_driver);
--}
--module_exit(gcc_qdu1000_exit);
-+subsys_platform_driver(gcc_qdu1000_driver);
- 
- MODULE_DESCRIPTION("QTI GCC QDU1000 Driver");
- MODULE_LICENSE("GPL");
-diff --git a/drivers/clk/qcom/gcc-sar2130p.c b/drivers/clk/qcom/gcc-sar2130p.c
-index 475e2cda3618..7456001cf25e 100644
---- a/drivers/clk/qcom/gcc-sar2130p.c
-+++ b/drivers/clk/qcom/gcc-sar2130p.c
-@@ -2350,17 +2350,7 @@ static struct platform_driver gcc_sar2130p_driver = {
- 	},
- };
- 
--static int __init gcc_sar2130p_init(void)
--{
--	return platform_driver_register(&gcc_sar2130p_driver);
--}
--subsys_initcall(gcc_sar2130p_init);
--
--static void __exit gcc_sar2130p_exit(void)
--{
--	platform_driver_unregister(&gcc_sar2130p_driver);
--}
--module_exit(gcc_sar2130p_exit);
-+subsys_platform_driver(gcc_sar2130p_driver);
- 
- MODULE_DESCRIPTION("QTI GCC SAR2130P Driver");
- MODULE_LICENSE("GPL");
-diff --git a/drivers/clk/qcom/gcc-sc7280.c b/drivers/clk/qcom/gcc-sc7280.c
-index 4502926a2691..e1fe64463de6 100644
---- a/drivers/clk/qcom/gcc-sc7280.c
-+++ b/drivers/clk/qcom/gcc-sc7280.c
-@@ -3492,17 +3492,7 @@ static struct platform_driver gcc_sc7280_driver = {
- 	},
- };
- 
--static int __init gcc_sc7280_init(void)
--{
--	return platform_driver_register(&gcc_sc7280_driver);
--}
--subsys_initcall(gcc_sc7280_init);
--
--static void __exit gcc_sc7280_exit(void)
--{
--	platform_driver_unregister(&gcc_sc7280_driver);
--}
--module_exit(gcc_sc7280_exit);
-+subsys_platform_driver(gcc_sc7280_driver);
- 
- MODULE_DESCRIPTION("QTI GCC SC7280 Driver");
- MODULE_LICENSE("GPL v2");
-diff --git a/drivers/clk/qcom/gcc-sc8280xp.c b/drivers/clk/qcom/gcc-sc8280xp.c
-index 2ab111585d7f..81533e71e7ef 100644
---- a/drivers/clk/qcom/gcc-sc8280xp.c
-+++ b/drivers/clk/qcom/gcc-sc8280xp.c
-@@ -7581,17 +7581,7 @@ static struct platform_driver gcc_sc8280xp_driver = {
- 	},
- };
- 
--static int __init gcc_sc8280xp_init(void)
--{
--	return platform_driver_register(&gcc_sc8280xp_driver);
--}
--subsys_initcall(gcc_sc8280xp_init);
--
--static void __exit gcc_sc8280xp_exit(void)
--{
--	platform_driver_unregister(&gcc_sc8280xp_driver);
--}
--module_exit(gcc_sc8280xp_exit);
-+subsys_platform_driver(gcc_sc8280xp_driver);
- 
- MODULE_DESCRIPTION("Qualcomm SC8280XP GCC driver");
- MODULE_LICENSE("GPL");
-diff --git a/drivers/clk/qcom/gcc-sdx55.c b/drivers/clk/qcom/gcc-sdx55.c
-index 84c507656e8f..13d6c9e8183b 100644
---- a/drivers/clk/qcom/gcc-sdx55.c
-+++ b/drivers/clk/qcom/gcc-sdx55.c
-@@ -1627,17 +1627,7 @@ static struct platform_driver gcc_sdx55_driver = {
- 	},
- };
- 
--static int __init gcc_sdx55_init(void)
--{
--	return platform_driver_register(&gcc_sdx55_driver);
--}
--subsys_initcall(gcc_sdx55_init);
--
--static void __exit gcc_sdx55_exit(void)
--{
--	platform_driver_unregister(&gcc_sdx55_driver);
--}
--module_exit(gcc_sdx55_exit);
-+subsys_platform_driver(gcc_sdx55_driver);
- 
- MODULE_DESCRIPTION("QTI GCC SDX55 Driver");
- MODULE_LICENSE("GPL v2");
-diff --git a/drivers/clk/qcom/gcc-sdx65.c b/drivers/clk/qcom/gcc-sdx65.c
-index fe297c606f97..8cae11a0b2c0 100644
---- a/drivers/clk/qcom/gcc-sdx65.c
-+++ b/drivers/clk/qcom/gcc-sdx65.c
-@@ -1591,17 +1591,7 @@ static struct platform_driver gcc_sdx65_driver = {
- 	},
- };
- 
--static int __init gcc_sdx65_init(void)
--{
--	return platform_driver_register(&gcc_sdx65_driver);
--}
--subsys_initcall(gcc_sdx65_init);
--
--static void __exit gcc_sdx65_exit(void)
--{
--	platform_driver_unregister(&gcc_sdx65_driver);
--}
--module_exit(gcc_sdx65_exit);
-+subsys_platform_driver(gcc_sdx65_driver);
- 
- MODULE_DESCRIPTION("QTI GCC SDX65 Driver");
- MODULE_LICENSE("GPL v2");
-diff --git a/drivers/clk/qcom/gcc-sdx75.c b/drivers/clk/qcom/gcc-sdx75.c
-index 6712e76f875c..ce9f19655d6d 100644
---- a/drivers/clk/qcom/gcc-sdx75.c
-+++ b/drivers/clk/qcom/gcc-sdx75.c
-@@ -2950,17 +2950,7 @@ static struct platform_driver gcc_sdx75_driver = {
- 	},
- };
- 
--static int __init gcc_sdx75_init(void)
--{
--	return platform_driver_register(&gcc_sdx75_driver);
--}
--subsys_initcall(gcc_sdx75_init);
--
--static void __exit gcc_sdx75_exit(void)
--{
--	platform_driver_unregister(&gcc_sdx75_driver);
--}
--module_exit(gcc_sdx75_exit);
-+subsys_platform_driver(gcc_sdx75_driver);
- 
- MODULE_DESCRIPTION("QTI GCC SDX75 Driver");
- MODULE_LICENSE("GPL");
-diff --git a/drivers/clk/qcom/gcc-shikra.c b/drivers/clk/qcom/gcc-shikra.c
-index 2a1c1fc253aa..13c99a883e29 100644
---- a/drivers/clk/qcom/gcc-shikra.c
-+++ b/drivers/clk/qcom/gcc-shikra.c
-@@ -4416,17 +4416,7 @@ static struct platform_driver gcc_shikra_driver = {
- 	},
- };
- 
--static int __init gcc_shikra_init(void)
--{
--	return platform_driver_register(&gcc_shikra_driver);
--}
--subsys_initcall(gcc_shikra_init);
--
--static void __exit gcc_shikra_exit(void)
--{
--	platform_driver_unregister(&gcc_shikra_driver);
--}
--module_exit(gcc_shikra_exit);
-+subsys_platform_driver(gcc_shikra_driver);
- 
- MODULE_DESCRIPTION("QTI GCC Shikra Driver");
- MODULE_LICENSE("GPL");
-diff --git a/drivers/clk/qcom/gcc-sm4450.c b/drivers/clk/qcom/gcc-sm4450.c
-index 30fc7af09930..4fb4d43e8582 100644
---- a/drivers/clk/qcom/gcc-sm4450.c
-+++ b/drivers/clk/qcom/gcc-sm4450.c
-@@ -2871,17 +2871,7 @@ static struct platform_driver gcc_sm4450_driver = {
- 	},
- };
- 
--static int __init gcc_sm4450_init(void)
--{
--	return platform_driver_register(&gcc_sm4450_driver);
--}
--subsys_initcall(gcc_sm4450_init);
--
--static void __exit gcc_sm4450_exit(void)
--{
--	platform_driver_unregister(&gcc_sm4450_driver);
--}
--module_exit(gcc_sm4450_exit);
-+subsys_platform_driver(gcc_sm4450_driver);
- 
- MODULE_DESCRIPTION("QTI GCC SM4450 Driver");
- MODULE_LICENSE("GPL");
-diff --git a/drivers/clk/qcom/gcc-sm6115.c b/drivers/clk/qcom/gcc-sm6115.c
-index a3c9dbe3a48a..5736e59d76ce 100644
---- a/drivers/clk/qcom/gcc-sm6115.c
-+++ b/drivers/clk/qcom/gcc-sm6115.c
-@@ -3525,17 +3525,7 @@ static struct platform_driver gcc_sm6115_driver = {
- 	},
- };
- 
--static int __init gcc_sm6115_init(void)
--{
--	return platform_driver_register(&gcc_sm6115_driver);
--}
--subsys_initcall(gcc_sm6115_init);
--
--static void __exit gcc_sm6115_exit(void)
--{
--	platform_driver_unregister(&gcc_sm6115_driver);
--}
--module_exit(gcc_sm6115_exit);
-+subsys_platform_driver(gcc_sm6115_driver);
- 
- MODULE_DESCRIPTION("QTI GCC SM6115 and SM4250 Driver");
- MODULE_LICENSE("GPL v2");
-diff --git a/drivers/clk/qcom/gcc-sm6125.c b/drivers/clk/qcom/gcc-sm6125.c
-index 07bb1e5c4a30..ee3cd0b00fc5 100644
---- a/drivers/clk/qcom/gcc-sm6125.c
-+++ b/drivers/clk/qcom/gcc-sm6125.c
-@@ -4172,17 +4172,7 @@ static struct platform_driver gcc_sm6125_driver = {
- 	},
- };
- 
--static int __init gcc_sm6125_init(void)
--{
--	return platform_driver_register(&gcc_sm6125_driver);
--}
--subsys_initcall(gcc_sm6125_init);
--
--static void __exit gcc_sm6125_exit(void)
--{
--	platform_driver_unregister(&gcc_sm6125_driver);
--}
--module_exit(gcc_sm6125_exit);
-+subsys_platform_driver(gcc_sm6125_driver);
- 
- MODULE_DESCRIPTION("QTI GCC SM6125 Driver");
- MODULE_LICENSE("GPL v2");
-diff --git a/drivers/clk/qcom/gcc-sm6375.c b/drivers/clk/qcom/gcc-sm6375.c
-index f47dc2808095..9c2acf8dc4b7 100644
---- a/drivers/clk/qcom/gcc-sm6375.c
-+++ b/drivers/clk/qcom/gcc-sm6375.c
-@@ -3903,17 +3903,7 @@ static struct platform_driver gcc_sm6375_driver = {
- 	},
- };
- 
--static int __init gcc_sm6375_init(void)
--{
--	return platform_driver_register(&gcc_sm6375_driver);
--}
--subsys_initcall(gcc_sm6375_init);
--
--static void __exit gcc_sm6375_exit(void)
--{
--	platform_driver_unregister(&gcc_sm6375_driver);
--}
--module_exit(gcc_sm6375_exit);
-+subsys_platform_driver(gcc_sm6375_driver);
- 
- MODULE_DESCRIPTION("QTI GCC SM6375 Driver");
- MODULE_LICENSE("GPL");
-diff --git a/drivers/clk/qcom/gcc-sm7150.c b/drivers/clk/qcom/gcc-sm7150.c
-index dcb5d82a1a31..2ab3e92eb3c7 100644
---- a/drivers/clk/qcom/gcc-sm7150.c
-+++ b/drivers/clk/qcom/gcc-sm7150.c
-@@ -3027,17 +3027,7 @@ static struct platform_driver gcc_sm7150_driver = {
- 	},
- };
- 
--static int __init gcc_sm7150_init(void)
--{
--	return platform_driver_register(&gcc_sm7150_driver);
--}
--subsys_initcall(gcc_sm7150_init);
--
--static void __exit gcc_sm7150_exit(void)
--{
--	platform_driver_unregister(&gcc_sm7150_driver);
--}
--module_exit(gcc_sm7150_exit);
-+subsys_platform_driver(gcc_sm7150_driver);
- 
- MODULE_DESCRIPTION("Qualcomm SM7150 Global Clock Controller");
- MODULE_LICENSE("GPL");
-diff --git a/drivers/clk/qcom/gcc-sm8150.c b/drivers/clk/qcom/gcc-sm8150.c
-index a93d1f412a7b..b38a44842686 100644
---- a/drivers/clk/qcom/gcc-sm8150.c
-+++ b/drivers/clk/qcom/gcc-sm8150.c
-@@ -3808,17 +3808,7 @@ static struct platform_driver gcc_sm8150_driver = {
- 	},
- };
- 
--static int __init gcc_sm8150_init(void)
--{
--	return platform_driver_register(&gcc_sm8150_driver);
--}
--subsys_initcall(gcc_sm8150_init);
--
--static void __exit gcc_sm8150_exit(void)
--{
--	platform_driver_unregister(&gcc_sm8150_driver);
--}
--module_exit(gcc_sm8150_exit);
-+subsys_platform_driver(gcc_sm8150_driver);
- 
- MODULE_DESCRIPTION("QTI GCC SM8150 Driver");
- MODULE_LICENSE("GPL v2");
-diff --git a/drivers/clk/qcom/gcc-sm8250.c b/drivers/clk/qcom/gcc-sm8250.c
-index 1c59d70e0f96..93c1beacee01 100644
---- a/drivers/clk/qcom/gcc-sm8250.c
-+++ b/drivers/clk/qcom/gcc-sm8250.c
-@@ -3667,17 +3667,7 @@ static struct platform_driver gcc_sm8250_driver = {
- 	},
- };
- 
--static int __init gcc_sm8250_init(void)
--{
--	return platform_driver_register(&gcc_sm8250_driver);
--}
--subsys_initcall(gcc_sm8250_init);
--
--static void __exit gcc_sm8250_exit(void)
--{
--	platform_driver_unregister(&gcc_sm8250_driver);
--}
--module_exit(gcc_sm8250_exit);
-+subsys_platform_driver(gcc_sm8250_driver);
- 
- MODULE_DESCRIPTION("QTI GCC SM8250 Driver");
- MODULE_LICENSE("GPL v2");
-diff --git a/drivers/clk/qcom/gcc-sm8350.c b/drivers/clk/qcom/gcc-sm8350.c
-index 2d94f3046b71..cc6eb7ca9c03 100644
---- a/drivers/clk/qcom/gcc-sm8350.c
-+++ b/drivers/clk/qcom/gcc-sm8350.c
-@@ -3833,17 +3833,7 @@ static struct platform_driver gcc_sm8350_driver = {
- 	},
- };
- 
--static int __init gcc_sm8350_init(void)
--{
--	return platform_driver_register(&gcc_sm8350_driver);
--}
--subsys_initcall(gcc_sm8350_init);
--
--static void __exit gcc_sm8350_exit(void)
--{
--	platform_driver_unregister(&gcc_sm8350_driver);
--}
--module_exit(gcc_sm8350_exit);
-+subsys_platform_driver(gcc_sm8350_driver);
- 
- MODULE_DESCRIPTION("QTI GCC SM8350 Driver");
- MODULE_LICENSE("GPL v2");
-diff --git a/drivers/clk/qcom/gcc-sm8450.c b/drivers/clk/qcom/gcc-sm8450.c
-index b18bb34889ab..d473a95bef92 100644
---- a/drivers/clk/qcom/gcc-sm8450.c
-+++ b/drivers/clk/qcom/gcc-sm8450.c
-@@ -3479,17 +3479,7 @@ static struct platform_driver gcc_sm8450_driver = {
- 	},
- };
- 
--static int __init gcc_sm8450_init(void)
--{
--	return platform_driver_register(&gcc_sm8450_driver);
--}
--subsys_initcall(gcc_sm8450_init);
--
--static void __exit gcc_sm8450_exit(void)
--{
--	platform_driver_unregister(&gcc_sm8450_driver);
--}
--module_exit(gcc_sm8450_exit);
-+subsys_platform_driver(gcc_sm8450_driver);
- 
- MODULE_DESCRIPTION("QTI GCC SM8450 / SM8475 Driver");
- MODULE_LICENSE("GPL v2");
-diff --git a/drivers/clk/qcom/gcc-sm8550.c b/drivers/clk/qcom/gcc-sm8550.c
-index 36a5b7de5b55..d83a7bb5356b 100644
---- a/drivers/clk/qcom/gcc-sm8550.c
-+++ b/drivers/clk/qcom/gcc-sm8550.c
-@@ -3375,17 +3375,7 @@ static struct platform_driver gcc_sm8550_driver = {
- 	},
- };
- 
--static int __init gcc_sm8550_init(void)
--{
--	return platform_driver_register(&gcc_sm8550_driver);
--}
--subsys_initcall(gcc_sm8550_init);
--
--static void __exit gcc_sm8550_exit(void)
--{
--	platform_driver_unregister(&gcc_sm8550_driver);
--}
--module_exit(gcc_sm8550_exit);
-+subsys_platform_driver(gcc_sm8550_driver);
- 
- MODULE_DESCRIPTION("QTI GCC SM8550 Driver");
- MODULE_LICENSE("GPL");
-diff --git a/drivers/clk/qcom/gcc-sm8650.c b/drivers/clk/qcom/gcc-sm8650.c
-index f7e2d7ec60c9..9fa362f0c447 100644
---- a/drivers/clk/qcom/gcc-sm8650.c
-+++ b/drivers/clk/qcom/gcc-sm8650.c
-@@ -3834,17 +3834,7 @@ static struct platform_driver gcc_sm8650_driver = {
- 	},
- };
- 
--static int __init gcc_sm8650_init(void)
--{
--	return platform_driver_register(&gcc_sm8650_driver);
--}
--subsys_initcall(gcc_sm8650_init);
--
--static void __exit gcc_sm8650_exit(void)
--{
--	platform_driver_unregister(&gcc_sm8650_driver);
--}
--module_exit(gcc_sm8650_exit);
-+subsys_platform_driver(gcc_sm8650_driver);
- 
- MODULE_DESCRIPTION("QTI GCC SM8650 Driver");
- MODULE_LICENSE("GPL");
-diff --git a/drivers/clk/qcom/gcc-sm8750.c b/drivers/clk/qcom/gcc-sm8750.c
-index 6cfe90122268..c08130218efe 100644
---- a/drivers/clk/qcom/gcc-sm8750.c
-+++ b/drivers/clk/qcom/gcc-sm8750.c
-@@ -3259,17 +3259,7 @@ static struct platform_driver gcc_sm8750_driver = {
- 	},
- };
- 
--static int __init gcc_sm8750_init(void)
--{
--	return platform_driver_register(&gcc_sm8750_driver);
--}
--subsys_initcall(gcc_sm8750_init);
--
--static void __exit gcc_sm8750_exit(void)
--{
--	platform_driver_unregister(&gcc_sm8750_driver);
--}
--module_exit(gcc_sm8750_exit);
-+subsys_platform_driver(gcc_sm8750_driver);
- 
- MODULE_DESCRIPTION("QTI GCC SM8750 Driver");
- MODULE_LICENSE("GPL");
-diff --git a/drivers/clk/qcom/gcc-x1e80100.c b/drivers/clk/qcom/gcc-x1e80100.c
-index 8c146d62c077..9402fd7fddb8 100644
---- a/drivers/clk/qcom/gcc-x1e80100.c
-+++ b/drivers/clk/qcom/gcc-x1e80100.c
-@@ -7499,17 +7499,7 @@ static struct platform_driver gcc_x1e80100_driver = {
- 	},
- };
- 
--static int __init gcc_x1e80100_init(void)
--{
--	return platform_driver_register(&gcc_x1e80100_driver);
--}
--subsys_initcall(gcc_x1e80100_init);
--
--static void __exit gcc_x1e80100_exit(void)
--{
--	platform_driver_unregister(&gcc_x1e80100_driver);
--}
--module_exit(gcc_x1e80100_exit);
-+subsys_platform_driver(gcc_x1e80100_driver);
- 
- MODULE_DESCRIPTION("QTI GCC X1E80100 Driver");
- MODULE_LICENSE("GPL");
-diff --git a/drivers/clk/qcom/lpasscc-sc7280.c b/drivers/clk/qcom/lpasscc-sc7280.c
-index e6b815aec46a..3789a7b37bdd 100644
---- a/drivers/clk/qcom/lpasscc-sc7280.c
-+++ b/drivers/clk/qcom/lpasscc-sc7280.c
-@@ -169,17 +169,7 @@ static struct platform_driver lpass_cc_sc7280_driver = {
- 	},
- };
- 
--static int __init lpass_cc_sc7280_init(void)
--{
--	return platform_driver_register(&lpass_cc_sc7280_driver);
--}
--subsys_initcall(lpass_cc_sc7280_init);
--
--static void __exit lpass_cc_sc7280_exit(void)
--{
--	platform_driver_unregister(&lpass_cc_sc7280_driver);
--}
--module_exit(lpass_cc_sc7280_exit);
-+subsys_platform_driver(lpass_cc_sc7280_driver);
- 
- MODULE_DESCRIPTION("QTI LPASS_CC SC7280 Driver");
- MODULE_LICENSE("GPL v2");
-diff --git a/drivers/clk/qcom/lpasscc-sdm845.c b/drivers/clk/qcom/lpasscc-sdm845.c
-index 5c1ea75f9ba8..1d7e78dd6015 100644
---- a/drivers/clk/qcom/lpasscc-sdm845.c
-+++ b/drivers/clk/qcom/lpasscc-sdm845.c
-@@ -144,17 +144,7 @@ static struct platform_driver lpass_cc_sdm845_driver = {
- 	},
- };
- 
--static int __init lpass_cc_sdm845_init(void)
--{
--	return platform_driver_register(&lpass_cc_sdm845_driver);
--}
--subsys_initcall(lpass_cc_sdm845_init);
--
--static void __exit lpass_cc_sdm845_exit(void)
--{
--	platform_driver_unregister(&lpass_cc_sdm845_driver);
--}
--module_exit(lpass_cc_sdm845_exit);
-+subsys_platform_driver(lpass_cc_sdm845_driver);
- 
- MODULE_DESCRIPTION("QTI LPASS_CC SDM845 Driver");
- MODULE_LICENSE("GPL v2");
-diff --git a/drivers/clk/qcom/tcsrcc-eliza.c b/drivers/clk/qcom/tcsrcc-eliza.c
-index 127d1f0a1442..daab9a620490 100644
---- a/drivers/clk/qcom/tcsrcc-eliza.c
-+++ b/drivers/clk/qcom/tcsrcc-eliza.c
-@@ -162,17 +162,7 @@ static struct platform_driver tcsr_cc_eliza_driver = {
- 	},
- };
- 
--static int __init tcsr_cc_eliza_init(void)
--{
--	return platform_driver_register(&tcsr_cc_eliza_driver);
--}
--subsys_initcall(tcsr_cc_eliza_init);
--
--static void __exit tcsr_cc_eliza_exit(void)
--{
--	platform_driver_unregister(&tcsr_cc_eliza_driver);
--}
--module_exit(tcsr_cc_eliza_exit);
-+subsys_platform_driver(tcsr_cc_eliza_driver);
- 
- MODULE_DESCRIPTION("QTI TCSR_CC Eliza Driver");
- MODULE_LICENSE("GPL");
-diff --git a/drivers/clk/qcom/tcsrcc-glymur.c b/drivers/clk/qcom/tcsrcc-glymur.c
-index 1791e23739ed..8ac60052fb14 100644
---- a/drivers/clk/qcom/tcsrcc-glymur.c
-+++ b/drivers/clk/qcom/tcsrcc-glymur.c
-@@ -296,17 +296,7 @@ static struct platform_driver tcsr_cc_glymur_driver = {
- 	},
- };
- 
--static int __init tcsr_cc_glymur_init(void)
--{
--	return platform_driver_register(&tcsr_cc_glymur_driver);
--}
--subsys_initcall(tcsr_cc_glymur_init);
--
--static void __exit tcsr_cc_glymur_exit(void)
--{
--	platform_driver_unregister(&tcsr_cc_glymur_driver);
--}
--module_exit(tcsr_cc_glymur_exit);
-+subsys_platform_driver(tcsr_cc_glymur_driver);
- 
- MODULE_DESCRIPTION("QTI TCSRCC Glymur Driver");
- MODULE_LICENSE("GPL");
-diff --git a/drivers/clk/qcom/tcsrcc-kaanapali.c b/drivers/clk/qcom/tcsrcc-kaanapali.c
-index db46d639edb8..78b77e7cd396 100644
---- a/drivers/clk/qcom/tcsrcc-kaanapali.c
-+++ b/drivers/clk/qcom/tcsrcc-kaanapali.c
-@@ -124,17 +124,7 @@ static struct platform_driver tcsr_cc_kaanapali_driver = {
- 	},
- };
- 
--static int __init tcsr_cc_kaanapali_init(void)
--{
--	return platform_driver_register(&tcsr_cc_kaanapali_driver);
--}
--subsys_initcall(tcsr_cc_kaanapali_init);
--
--static void __exit tcsr_cc_kaanapali_exit(void)
--{
--	platform_driver_unregister(&tcsr_cc_kaanapali_driver);
--}
--module_exit(tcsr_cc_kaanapali_exit);
-+subsys_platform_driver(tcsr_cc_kaanapali_driver);
- 
- MODULE_DESCRIPTION("QTI TCSR_CC Kaanapali Driver");
- MODULE_LICENSE("GPL");
-diff --git a/drivers/clk/qcom/tcsrcc-sm8550.c b/drivers/clk/qcom/tcsrcc-sm8550.c
-index 41d73f92a000..6cac619dd959 100644
---- a/drivers/clk/qcom/tcsrcc-sm8550.c
-+++ b/drivers/clk/qcom/tcsrcc-sm8550.c
-@@ -191,17 +191,7 @@ static struct platform_driver tcsr_cc_sm8550_driver = {
- 	},
- };
- 
--static int __init tcsr_cc_sm8550_init(void)
--{
--	return platform_driver_register(&tcsr_cc_sm8550_driver);
--}
--subsys_initcall(tcsr_cc_sm8550_init);
--
--static void __exit tcsr_cc_sm8550_exit(void)
--{
--	platform_driver_unregister(&tcsr_cc_sm8550_driver);
--}
--module_exit(tcsr_cc_sm8550_exit);
-+subsys_platform_driver(tcsr_cc_sm8550_driver);
- 
- MODULE_DESCRIPTION("QTI TCSRCC SM8550 Driver");
- MODULE_LICENSE("GPL");
-diff --git a/drivers/clk/qcom/tcsrcc-sm8650.c b/drivers/clk/qcom/tcsrcc-sm8650.c
-index 651e28067954..194aea6ec43a 100644
---- a/drivers/clk/qcom/tcsrcc-sm8650.c
-+++ b/drivers/clk/qcom/tcsrcc-sm8650.c
-@@ -173,17 +173,7 @@ static struct platform_driver tcsr_cc_sm8650_driver = {
- 	},
- };
- 
--static int __init tcsr_cc_sm8650_init(void)
--{
--	return platform_driver_register(&tcsr_cc_sm8650_driver);
--}
--subsys_initcall(tcsr_cc_sm8650_init);
--
--static void __exit tcsr_cc_sm8650_exit(void)
--{
--	platform_driver_unregister(&tcsr_cc_sm8650_driver);
--}
--module_exit(tcsr_cc_sm8650_exit);
-+subsys_platform_driver(tcsr_cc_sm8650_driver);
- 
- MODULE_DESCRIPTION("QTI TCSRCC SM8650 Driver");
- MODULE_LICENSE("GPL");
-diff --git a/drivers/clk/qcom/tcsrcc-sm8750.c b/drivers/clk/qcom/tcsrcc-sm8750.c
-index 9fe840a448bf..b11ec403bb32 100644
---- a/drivers/clk/qcom/tcsrcc-sm8750.c
-+++ b/drivers/clk/qcom/tcsrcc-sm8750.c
-@@ -124,17 +124,7 @@ static struct platform_driver tcsr_cc_sm8750_driver = {
- 	},
- };
- 
--static int __init tcsr_cc_sm8750_init(void)
--{
--	return platform_driver_register(&tcsr_cc_sm8750_driver);
--}
--subsys_initcall(tcsr_cc_sm8750_init);
--
--static void __exit tcsr_cc_sm8750_exit(void)
--{
--	platform_driver_unregister(&tcsr_cc_sm8750_driver);
--}
--module_exit(tcsr_cc_sm8750_exit);
-+subsys_platform_driver(tcsr_cc_sm8750_driver);
- 
- MODULE_DESCRIPTION("QTI TCSR_CC SM8750 Driver");
- MODULE_LICENSE("GPL");
-diff --git a/drivers/clk/qcom/tcsrcc-x1e80100.c b/drivers/clk/qcom/tcsrcc-x1e80100.c
-index ad1f6be83a53..7dbeff419f99 100644
---- a/drivers/clk/qcom/tcsrcc-x1e80100.c
-+++ b/drivers/clk/qcom/tcsrcc-x1e80100.c
-@@ -163,17 +163,7 @@ static struct platform_driver tcsr_cc_x1e80100_driver = {
- 	},
- };
- 
--static int __init tcsr_cc_x1e80100_init(void)
--{
--	return platform_driver_register(&tcsr_cc_x1e80100_driver);
--}
--subsys_initcall(tcsr_cc_x1e80100_init);
--
--static void __exit tcsr_cc_x1e80100_exit(void)
--{
--	platform_driver_unregister(&tcsr_cc_x1e80100_driver);
--}
--module_exit(tcsr_cc_x1e80100_exit);
-+subsys_platform_driver(tcsr_cc_x1e80100_driver);
- 
- MODULE_DESCRIPTION("QTI TCSR Clock Controller X1E80100 Driver");
- MODULE_LICENSE("GPL");
-diff --git a/drivers/clk/qcom/videocc-sm8750.c b/drivers/clk/qcom/videocc-sm8750.c
-index b62271a7dac6..91d18a90b84f 100644
---- a/drivers/clk/qcom/videocc-sm8750.c
-+++ b/drivers/clk/qcom/videocc-sm8750.c
-@@ -445,17 +445,7 @@ static struct platform_driver video_cc_sm8750_driver = {
- 	},
- };
- 
--static int __init video_cc_sm8750_init(void)
--{
--	return platform_driver_register(&video_cc_sm8750_driver);
--}
--subsys_initcall(video_cc_sm8750_init);
--
--static void __exit video_cc_sm8750_exit(void)
--{
--	platform_driver_unregister(&video_cc_sm8750_driver);
--}
--module_exit(video_cc_sm8750_exit);
-+subsys_platform_driver(video_cc_sm8750_driver);
- 
- MODULE_DESCRIPTION("QTI VIDEO_CC SM8750 Driver");
- MODULE_LICENSE("GPL");
-
--- 
-2.55.0
+> 
+> Thanks,
+> Charles
 
