@@ -1,103 +1,99 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6DFE4562617
-	for <linux-arm-msm@vger.kernel.org>; Tue,  8 Sep 2026 13:29:02 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D2960556B97
+	for <linux-arm-msm@vger.kernel.org>; Tue,  8 Sep 2026 13:32:47 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.129.124
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788874152; cv=none; b=Xm3pIB8cCL2S2Epk7cLfCZaEnK5Qp6vTuUIkZgi4SJQl+91+m/+kgTVDwfQekMTlu3ndk9K8LfgClAKOklqmKGPYQk85faN2xr7S+wv9apIrBE06BwB+s5shFJJzqWvIymYeQkNsliElaBb1WRCx3RDyDEFXO835bw1VNzWV8mA=
+	t=1788874376; cv=none; b=S7fMhk8sIEhehbJVq5r/wWEhQ3ovKYQWO7qiyMK8o7+9BrVximdZO1p4IJKRXXrsFTdfHzzPm4igO4OyUF+yPlIDJUd6nIYCBdkQu8kQovY/paW/S/r+sD8BsYy325ZifNlMEySdWgMxyVdHsUO6kbbbL8uMzuCG6XpNBdXhWdE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788874152; c=relaxed/simple;
-	bh=k5HCTeqFbMi57vKLkj2X7I2avf2P/QWPZAnpsRan1nY=;
+	s=arc-20240116; t=1788874376; c=relaxed/simple;
+	bh=dV1zMZO7EmGOw2erf3pdS0/4kjvUBr+2XLiFaFWCCzE=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=SCHsSBm+epZ+N9EXoIiuZbCRPzBrtOQQhxhjwKMpgCPWNaElrnMCQVNlUpEnWkzSRwhBCwaGOI3VV+iYP1A4uCeclPN5KYOHwQd3NfhNT4m0AAO8CKzHRnrUxT2h+GTeen7XQa7f4omZi1JYHr623RJCm+PosgLN6D6vhCC9ScY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=NTivlwwr; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=LVk0e8TU; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	 Content-Type:Content-Disposition:In-Reply-To; b=eqYv8BDInKW55TclypTIrefu5972A/zjE8Nx2UJCTtg7bH277jeVuHckjSVspcKaSakCA+V+wz+uzTdk9jZQCGuYgctCko8oCPivfMHO8/Vp8Wo3xeR/crhoGubmI9t9AcgSL+bom60F9sHg20KmxEOra7MFg8CtFcM5W5ugTPc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=HjfSf6IM; dkim=pass (2048-bit key) header.d=redhat.com header.i=@redhat.com header.b=QD0zPwNd; arc=none smtp.client-ip=170.10.129.124
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="NTivlwwr";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="LVk0e8TU"
-Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 688CkjnS4162864
-	for <linux-arm-msm@vger.kernel.org>; Tue, 8 Sep 2026 13:28:57 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-type:date:from:in-reply-to:message-id:mime-version
-	:references:subject:to; s=qcppdkim1; bh=LvFFq7I3YnVJDfVFV9SMgv5R
-	NwImgPOEhF+SmMTxkq8=; b=NTivlwwrnwlzxFRnUFxldBN/eOUOXanZpJrDmPEi
-	PwFbeBqjwtJ3WRLAj5OqONcO+mFxHFzzc5RmULIGhNTcKj7vCGvIMZvQEIoqSQyH
-	XnqzHAyH7vLlzZz6u0lpYeCuuYq+mkpv/8zdEzG4FlEH4hHLORky7EqyC8Tjrvuj
-	cUz39Om5GnyznOOx91XC3O0rEx5ygfwg8oHCYsl1Eu6SowI+pxlq8tuSjJZmFlYU
-	WQCPirjuiZra+4zo1RYOMB6VcbJtagVF7dVfLjRYUrXOtt3j8wPyXqmGA6e1u7YP
-	zTFAMt0hNT9nCtx9AEXYZbwNCiKkhIOgkfNOdGqYWvr/1Q==
-Received: from mail-vs1-f71.google.com (mail-vs1-f71.google.com [209.85.217.71])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gjb0pa4vm-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 08 Sep 2026 13:28:57 +0000 (GMT)
-Received: by mail-vs1-f71.google.com with SMTP id ada2fe7eead31-785827e6073so574731137.1
-        for <linux-arm-msm@vger.kernel.org>; Tue, 08 Sep 2026 06:28:57 -0700 (PDT)
+	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="HjfSf6IM";
+	dkim=pass (2048-bit key) header.d=redhat.com header.i=@redhat.com header.b="QD0zPwNd"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1788874365;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=NLHhVOGygbZejqC5i8njqwFC1rrqYhIiaH4rSU/x68s=;
+	b=HjfSf6IMOsajdqPuJKQWR1su50gzb7bx1mMCsBgDZTXKrgj2qKF39bblk4617x56mb0T1v
+	eWiAi5RMSFX5Z28KOCUaM1fjq55gj7RZqHbqnOYkFGRldPVssHCzTtmkNSsaJkaylHUpLd
+	zMWj/Pg+nYVmCDNRiTFNhPr3d0AF20A=
+Received: from mail-yw1-f198.google.com (mail-yw1-f198.google.com
+ [209.85.128.198]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-611-K5wg7ewCNY2eWw59rcASig-1; Tue, 08 Sep 2026 09:32:42 -0400
+X-MC-Unique: K5wg7ewCNY2eWw59rcASig-1
+X-Mimecast-MFC-AGG-ID: K5wg7ewCNY2eWw59rcASig_1788874361
+Received: by mail-yw1-f198.google.com with SMTP id 00721157ae682-853a9c4c99eso40924637b3.0
+        for <linux-arm-msm@vger.kernel.org>; Tue, 08 Sep 2026 06:32:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1788874136; x=1789478936; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=LvFFq7I3YnVJDfVFV9SMgv5RNwImgPOEhF+SmMTxkq8=;
-        b=LVk0e8TUm8nVGLXngBKGcMQc7diKv9+wrncdxwpc6iMu5bKFTocOAUPAcAJqjpitqS
-         TAij3P7Jz2iAko95bk8ghh96rS3atLhbQefiF4sKoFMxxWjiHcHccTceJYIy6GH2dDLt
-         ujXdqMdZkca8ANk65TabJzGEgGJul7nP74o5pFRtnb25DR0+CGnKD9Pjc5GN3LLbcRnl
-         nfrM590P6iJMAE7DlqwDCqHMT60IjeiKsaAG0runJ29wfKrvBue5mi67wCZQbhXpLsNy
-         W4ISjrJYlPu3kt4SKK1D53eItIh1lH5VwGTYavGdF4/NRFigr8NaoOmSq3AJvuuHJ8jY
-         BRag==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788874136; x=1789478936;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+        d=redhat.com; s=google; t=1788874361; x=1789479161; darn=vger.kernel.org;
+        h=user-agent:in-reply-to:content-transfer-encoding
+         :content-disposition:content-type:mime-version:references:message-id
+         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=LvFFq7I3YnVJDfVFV9SMgv5RNwImgPOEhF+SmMTxkq8=;
-        b=fbBXdZQ8J3JWPj0ZdmK0vHPt6MQDxCbnRPB4VzTu87L0UioUsIWa1KDLkVruSvBns0
-         UnceNxGQmti7CP2Ky/Y/oX9RWpf9gM1EWqER9FZQnh/sB0uI5otGckvkqTEF+HFxLI1k
-         ySdj0DJVlj0CPA1CHYFBNBrthhrjeLS9URKcAc8jQ5+Vpw8RQTUdVExJPLkcqeUJNAuK
-         SjacjbBuGA/+lOMn/QdlTQqYob+AsOhC1Iw5rcGdtKM/I5/JkKkR/lf7cb8xDKu7QETT
-         n2v1ogG5PnJUajlw7NYic+VZU+XTpkNmphznRLZIQ7xQbu5oTGReaNiP7VFuoyjlBI9Q
-         bQWw==
-X-Forwarded-Encrypted: i=1; AKwUvBxs0W+3H3fpH9xy0TdemZcBx77NGWOarrOFfAByOigOwfP6LR3aNO6olHttU7RP1DDkF+Op02RLiku0XzeX@vger.kernel.org
-X-Gm-Message-State: AFuF++kLVbqS253BFq9pwUSyxyoL0Bti8pK7HOqketp+jKCeMXjvFknv
-	Tsio4HhOl6KWfnE0T+M88ApXN9aLPq1FjOu35DyypYdLL2CCChInvsrfjQQo5vqb5IW0wkH9ytp
-	u9HlnSPBZCWNle4+3y7blS6wLhYiI5z3sZqdt6cqZNQdwUrTRWHXMNcTn0Je6MyXKbesL
-X-Gm-Gg: AYBFou0I0QA9eT5KQxdWHnvWmvEapD8Xao0No9KCTyXyEJ6S1+KIDNDO5q6hAlo9EiL
-	cZqCllhzLBqAHoSeQrDDNZOC6/3g2T8BX5NjDlGjUZurYe6myD0r5VYb5g83K6alSAKYUX/OEQa
-	+mTog63rGtP2W9Sk3MT6zoVgM8IPzsc3h4NsDfW8vlr/ua+L1VvDh+7E6nkEw61EXi3Vo2Alfs3
-	27Tm0zpW7v/T0GhdMfLjF1N3HMnJnj05V4HUjiIXTGZUehg80hQD9/QJv+mSmWZ+wNgqolIOcnG
-	fjQvvPKEUy9KBXPKXEVPzsL4UYBhX5xFCtcruWFoGyas66zgz96W5cdUw/P8f0LeD7/T02fk8qb
-	bi5MyZEUc1PcZqlAWCGR/unkBUadW+TjelQS1J27uUIDukoq5hHbOiyK73PKzxgNupYGDrM3EjU
-	BG3ezCoVhjiS6F
-X-Received: by 2002:a05:6102:4409:b0:789:56eb:39a5 with SMTP id ada2fe7eead31-78a4a836e1amr8346224137.5.1788874136299;
-        Tue, 08 Sep 2026 06:28:56 -0700 (PDT)
-X-Received: by 2002:a05:6102:4409:b0:789:56eb:39a5 with SMTP id ada2fe7eead31-78a4a836e1amr8346200137.5.1788874135747;
-        Tue, 08 Sep 2026 06:28:55 -0700 (PDT)
-Received: from umbar.lan (2001-14ba-a073-af00-264b-feff-fe8b-be8a.rev.dnainternet.fi. [2001:14ba:a073:af00:264b:feff:fe8b:be8a])
-        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5b6166ed043sm3118098e87.24.2026.09.08.06.28.53
+        bh=NLHhVOGygbZejqC5i8njqwFC1rrqYhIiaH4rSU/x68s=;
+        b=QD0zPwNd3+J/p0qoqlYOYP8/8fFX9+HUivUcTuwp/Icyy9fvdUz4ZDtRP45w/jKA+m
+         xlMFTSE2rrBrHQI+DrgBe5/gtlMbbgH0QVpQwIxLQJr7e7VCoMgiuZSGDOn6aNKkJ1n1
+         kxcquzNCvUmSWLZ3/YwYRJhnBWOQqveVwEjTmKZpltzgp+HQ711rVNncmSPhXUqQMrjr
+         WfcD5zzFMqS7xuv+RBoVTweRK6t3PdBRFKDIyGZBCmdTQXvhXVAMZ+S6z3KBPZCxCrQl
+         +LVGZy+/0YHnz8khtNaXepcwnncOQjXC67juwFa/DgiGZ2db9mtWEUHNG2/PX5eE/ril
+         Tf2A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1788874361; x=1789479161;
+        h=user-agent:in-reply-to:content-transfer-encoding
+         :content-disposition:content-type:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=NLHhVOGygbZejqC5i8njqwFC1rrqYhIiaH4rSU/x68s=;
+        b=dATqvoPVrE0Gb3nGyOzFLOaZKAZr/isiJqv7XIQvFsIhCFkmPW5XNsU9lcplIIbh2i
+         hTWNE5B0ov9kTcROra1SW+CdklnQyW3ZKGPQB0b19DbEIT8C9a9eUd7ryaDZMFK5glvo
+         g5zC3N5eADwVPasbhmDinF8+wN+eTiIs7cI/Uf6nuF0io0e7ALeWgmnW9jnmYI/dx0JH
+         b/jHRfhQ2pDBBBXdn02nYA0lB8vLyqSAC1glje0E+tEsviiHdMcstgJCE++a+GxxzNWe
+         gLasn2YpLVBBF9YTXgAFUINupazaWkgq8khp0IsNiEjiqSW/vhWnHHpElGlxUfhRPykK
+         G5mw==
+X-Forwarded-Encrypted: i=1; AKwUvBxyAYK2L8Zd3G1qAFXQSAS8WER3mrTIWZlR87oY55ef3Gtf5MIgrmP8qKIjnRF8DRC2f/R3tWp+hyiNLI+h@vger.kernel.org
+X-Gm-Message-State: AFuF++m5JGC9kgWINLidqxSYduEZEKAEjUsZ88z9FbbIL/x1LiItYki5
+	ZjgxGp4gahpiHJCXuwCKrItvwjXyEc4EbwKbBzHdvWHttEmXI4tXYRD6k5pTPHEy5GRuuS+epoY
+	yhp3rWzESoE7qfdGT3BA3I37khTH3UAMS+86FApkbqRCy+G5XnTn4qaos+YsqrkQ4IXiVLcbf/I
+	c=
+X-Gm-Gg: AYBFou2NAM/BLMQ9i4Z9jDCAkpLo4N6chSGPpKO4wP7/Vi8iki1SpItpYiPE1vdCqRL
+	6bJhS4aNwKWIO8kAt35z0ANh92gxSplx3V1rnWM6OcYeQ9OZ3YBIa1yNi2I8TRQzYTAIp4RvvPv
+	VCq3XKD7R1RwF8qKMM1vMdGxghqRdJvDT8y2mm1WtFxsA8op9rxsIrxz87vbNVOv1RggCmMPzw9
+	16ylQGU0B3+HxGzZemZxwHJSh7324ySDgRwmbVEh9igTtIQEjjzsANPmf7uOniWDD+lEU8pJvW0
+	jo73xjxmOcBtUucg+t8piSd8ofI1iu5eLsWFUzLW/57xKpk0A46zM8aDwEKtoYzfiAau3BIXGZc
+	CxqemJyHxomqn6UG18voSYWWjuguBZY4KCK4=
+X-Received: by 2002:a05:690c:dd6:b0:873:5c0f:284 with SMTP id 00721157ae682-8735c0f0419mr84208067b3.46.1788874361305;
+        Tue, 08 Sep 2026 06:32:41 -0700 (PDT)
+X-Received: by 2002:a05:690c:dd6:b0:873:5c0f:284 with SMTP id 00721157ae682-8735c0f0419mr84207477b3.46.1788874360744;
+        Tue, 08 Sep 2026 06:32:40 -0700 (PDT)
+Received: from redhat.com (c-73-183-53-213.hsd1.pa.comcast.net. [73.183.53.213])
+        by smtp.gmail.com with ESMTPSA id d75a77b69052e-5305413d7f8sm111769461cf.14.2026.09.08.06.32.38
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 08 Sep 2026 06:28:54 -0700 (PDT)
-Date: Tue, 8 Sep 2026 16:28:52 +0300
-From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-To: Luca Weiss <luca.weiss@fairphone.com>
-Cc: "Joerg Roedel (AMD)" <joro@8bytes.org>, Will Deacon <will@kernel.org>,
-        Robin Murphy <robin.murphy@arm.com>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Rob Clark <robin.clark@oss.qualcomm.com>,
-        Bjorn Andersson <andersson@kernel.org>, linux-arm-msm@vger.kernel.org,
-        iommu@lists.linux.dev, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org
-Subject: Re: [PATCH 00/12] iommu: qcom_iommu: implement support for instances
- on MSM8974
-Message-ID: <ssleznoahzs4wgf5irjiagss2rjwl2s2jjnqrrnlpp74rdkgfs@au6x63ykyjfs>
-References: <20260809-msm8974-iommu-upstream-v1-0-87f5cd492560@oss.qualcomm.com>
- <DKL6P7G0WTM7.UJ6KZERQZDFK@fairphone.com>
- <iv5radfllym2bjvkrdu4ffs25bqixyos7k3ymncpcdtc2uobn2@zlhsybrj3pwz>
- <DKX384NK76OS.3NNOMAH72PV2P@fairphone.com>
+        Tue, 08 Sep 2026 06:32:39 -0700 (PDT)
+Date: Tue, 8 Sep 2026 09:32:37 -0400
+From: Brian Masney <bmasney@redhat.com>
+To: Kieran Bingham <kieran.bingham@ideasonboard.com>
+Cc: Bjorn Andersson <andersson@kernel.org>,
+	Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
+	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+	Michael Turquette <mturquette@baylibre.com>,
+	Stephen Boyd <sboyd@kernel.org>, linux-arm-msm@vger.kernel.org,
+	linux-clk@vger.kernel.org, linux-kernel@vger.kernel.org,
+	Jagadeesh Kona <jagadeesh.kona@oss.qualcomm.com>
+Subject: Re: [PATCH] clk: qcom: camcc-sc8280xp: unregister CAMCC_GDSC_CLK
+Message-ID: <aqAOdSmt3JY4R7uo@redhat.com>
+References: <20260708-camcc-sc8280xp-remove-gdsc-v1-1-dfaab98a3bf5@redhat.com>
+ <178817257850.3929813.16300278876629611104@ping.linuxembedded.co.uk>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -106,93 +102,168 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <DKX384NK76OS.3NNOMAH72PV2P@fairphone.com>
-X-Proofpoint-ORIG-GUID: wr4yV4Bv6PCgbFXf9GksQGxFs1EOXjhM
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTA4MDE0NCBTYWx0ZWRfX2H/EnlEHQSnB
- M6GG2cjMMlTomWHiJHo97mG3hiBZvA4GHlm54kYpgoyp9fLmnDQT8NOIGkriUZeWQS15czSTvP8
- UI667u9ukwUnVXdo7blOGZb01+mRTqw=
-X-Authority-Analysis: v=2.4 cv=HL3z0Itv c=1 sm=1 tr=0 ts=6aa00d99 cx=c_pps
- a=P2rfLEam3zuxRRdjJWA2cw==:117 a=xqWC_Br6kY4A:10 a=kj9zAlcOel0A:10
- a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22 a=bC-a23v3AAAA:8
- a=EUspDBNiAAAA:8 a=uEsHIfJi1mZuTdkiAjUA:9 a=CjuIK1q_8ugA:10
- a=ODZdjJIeia2B_SHc_B0f:22 a=FO4_E8m0qiDe52t0p3_H:22
-X-Proofpoint-GUID: wr4yV4Bv6PCgbFXf9GksQGxFs1EOXjhM
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTA4MDE0NCBTYWx0ZWRfXzZoICN+m8Z6E
- 5Yj1qvySkKYS16NsoeXdvWIoQJD4fGCJHqx1h1b6m49u4MtjIrbCyBEzT3/ArsYnmMOrSh+H+cm
- mm2ClcScj9xx3C1vzq8Ym6f6AJMgfzPNrV0CamGWT2MHam5uj1al6fVRY1Tkwq1v0WD5uLDUoCy
- NbeRoLam5UvNpLo7vuP7QHqU07S1QH+x75FB0TMpybW3agJOQR2fzCOFBW0Z65ElYNmc1bKgWr7
- 0S/Rkkzd9adY5i5NXcDl56FEB7OZxfeCcZP2PIy0/oCmMopZ3cLCCurDBZvNC5wp47v9i0vxnmB
- v+er30q0Ctu5ZRFxSapGVcmzGRUeUZJjqDxDP8X9NDdvGiFvjutTGG+eZSSn0wI+rDpA9mpC69L
- aXexamXH+JnACB70F2ZWZP/EUu2PdbFeNJfPJbOvWZEs7wDiWbqxH/9KKMsX9SIkoH4+DD6WAGv
- TuDNsXSi0+Q5UK7gXvw==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-08_02,2026-09-08_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 lowpriorityscore=0 clxscore=1015 suspectscore=0
- impostorscore=0 spamscore=0 phishscore=0 malwarescore=0 bulkscore=0
- adultscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
- definitions=main-2609080144
+Content-Transfer-Encoding: quoted-printable
+In-Reply-To: <178817257850.3929813.16300278876629611104@ping.linuxembedded.co.uk>
+User-Agent: Mutt/2.4.0 (2026-06-19)
 
-On Mon, Aug 24, 2026 at 12:04:57PM +0200, Luca Weiss wrote:
-> Hi Dmitry,
-> 
-> On Tue Aug 11, 2026 at 2:43 PM CEST, Dmitry Baryshkov wrote:
-> > On Mon, Aug 10, 2026 at 12:16:19PM +0200, Luca Weiss wrote:
-> >> Hi Dmitry,
-> >> 
-> >> Many thanks for working on this and sending this patch series!
-> >> 
-> >> On Sun Aug 9, 2026 at 10:15 PM CEST, Dmitry Baryshkov wrote:
-> >> > Qualcomm MSM8974 platform has five SMMU instances, used by display, GPU,
-> >> > Venus, VFE (camera) and JPEG encoder. Each of them follows ARM SMMU v1
-> >> > spec, however they differ from other Qualcomm platforms in the
-> >> > implementation-specific registers and also in interaction with TZ.
-> >> > Venus, MDP and VFE SMMUs are secured and require programming only of
-> >> > CBs, while GPU and JPEG require full programming.
-> >> >
-> >> > This series skips IOMMUs which can't be tested right now (VFE and JPEG),
-> >> > and adds only MDP, GPU and Venus (although untested, it is required for
-> >> > display to work) SMMU instances.
-> >> 
-> >> I do have a patch series (sent years ago to the mailing lists as well)
-> >> for CAMSS so I can definitely test this in the future.
-> >
-> > Ok, let's land these first, unless VFE IOMMU blocks display on your
-> > platform (Venus was blocking display on APQ8074 DragonBoard).
-> >
-> >> > Note, to get display to work properly one fix is necessary, [1]
-> >> >
-> >> > [1] https://patch.msgid.link/20260809-msm8974-mmcc-fix-v1-1-50f2dcf18d2e@oss.qualcomm.com
-> >> 
-> >> I've applied this series on v7.2-rc7, with the extra commits between
-> >> that and linux-next for qcom_iommu.c backported so that your series
-> >> applies without conflicts.
-> >> 
-> >> So far I'm stuck with the GPU not being able to probe, adding some
-> >> printk's shows that in msm_iommu_new() the call for
-> >> iommu_attach_device() is failing.
-> >> 
-> >> [    5.971154] msm_mdp fd900100.display-controller: failed to load adreno gpu
-> >> [    5.972991] msm_mdp fd900100.display-controller: failed to bind fdb00000.gpu (ops a3xx_ops [msm]): -16
-> >> [    5.974073] msm_mdp fd900100.display-controller: adev bind failed: -16
-> >> [    5.974152] panel-s6d6fa1 fd922800.dsi.0: error -EBUSY: Failed to attach to DSI host
-> >> [    5.974230] panel-s6d6fa1 fd922800.dsi.0: probe with driver panel-s6d6fa1 failed with error -16
-> >
-> > See the patch [1], it's picked up for 7.3
-> 
-> I missed replying to you, with this patch the display lights up again!
-> 
-> Unfortunately the GPU still seems to have issues, I don't have a log
-> right now (I think even SSH was dropping then with a bunch of log lines
-> appearing in kernel log on screen). I assume kmscube + more complex
-> workloads worked fine for you?
+Hi Kieran,
 
-I was mostly using kmscube, but I can try running the CTS once I get
-back to it, sorry for the delays.
+On Mon, Aug 31, 2026 at 11:36:18AM +0100, Kieran Bingham wrote:
+> Hi Brian, Bryan,
+>=20
+> Quoting Brian Masney (2026-07-08 23:30:06)
+> > With the introduction of sync_state support in the clk and pmdomain
+> > subsystems, the following warning happens when the unused clocks are
+> > shutdown in camcc-sc8280xp:
+>=20
+>=20
+> I've recently switched my Lenovo X13s to Ubuntu 26.04. That's providing
+> a Linux 7.0 kernel.
+>=20
+> Unfortunately - the camera can only run once. On successive attempts I
+> get a kernel WARN log like this.
+>=20
+> Bryan pointed me at this patch, which I see is already in mainline.
+>=20
+> So I've booted v7.2-16202-g08dbfad3f504 from yesterdays torvalds/master
+> which I believe incorporates the patch in this thread and I get the
+> following trace:
+>=20
+>=20
+> [11525.260456] ------------[ cut here ]------------
+> [11525.260463] titan_top_gdsc status stuck at 'off'
+> [11525.260475] WARNING: drivers/clk/qcom/gdsc.c:192 at gdsc_toggle_logic+=
+0x20c/0x220, CPU#5: CameraManager/26167
+> [11525.260486] Modules linked in: btrfs xor libblake2b raid6_pq ufs qnx4 =
+hfsplus hfs minix ntfs msdos jfs nls_ucs2_utils xfs usbhid xt_connmark xt_c=
+onntrack xt_MASQUERADE xt_tcpudp xt_mark nft_compat x_tables nft_chain_nat =
+nf_nat nf_conntrack nf_defrag_ipv6 nf_defrag_ipv4 rfcomm algif_hash algif_s=
+kcipher af_alg snd_seq_dummy snd_hrtimer nf_tables bnep snd_soc_wsa883x q6p=
+rm_clocks q6apm_dai q6apm_lpass_dais snd_q6dsp_common q6prm qrtr_mhi ath11k=
+_pci ath11k mac80211 cfg80211 mhi libarc4 qcom_spmi_adc_tm5 qcom_spmi_adc5 =
+qcom_vadc_common qcom_spmi_temp_alarm pm8941_pwrkey industrialio snd_soc_sc=
+8280xp snd_soc_wcd938x snd_soc_wcd938x_sdw snd_soc_qcom_sdw snd_soc_wcd_cla=
+ssh snd_soc_qcom_common snd_soc_wcd_common snd_soc_wcd_mbhc regmap_sdw snd_=
+seq_midi snd_seq_midi_event qcom_iris snd_rawmidi qcom_camss v4l2_mem2mem s=
+oundwire_qcom videobuf2_dma_contig hci_uart videobuf2_dma_sg snd_seq videob=
+uf2_memops btqca videobuf2_v4l2 btrtl snd_soc_lpass_va_macro snd_soc_lpass_=
+tx_macro snd_soc_lpass_wsa_macro slimbus snd_soc_lpass_rx_macro
+> [11525.260552]  btbcm soundwire_bus ov5675 snd_soc_lpass_macro_common vid=
+eobuf2_common snd_q6apm btintel qcomtee v4l2_fwnode snd_seq_device binfmt_m=
+isc snd_soc_hdmi_codec v4l2_async bluetooth videodev qcom_tsens qcom_edac m=
+c snd_soc_core snd_compress ac97_bus snd_pcm_dmaengine snd_pcm fastrpc snd_=
+timer tee qcom_cpufreq_hw pci_pwrctrl_pwrseq snd soundcore leds_gpio nls_is=
+o8859_1 joydev input_leds sch_fq_codel efi_pstore dm_crypt leds_qcom_lpg xh=
+ci_plat_hcd panel_edp hid_multitouch hid_generic led_class_multicolor qcom_=
+pbs qcom_pon reboot_mode pinctrl_spmi_gpio rtc_pm8xxx qcom_pm8008_regulator=
+ nvme nvme_core i2c_hid_of nvme_keyring nvme_auth i2c_hid_of_elan i2c_hid_a=
+cpi_prp0001 apr qcom_spmi_pmic i2c_hid qcom_pm8008 regmap_spmi hid rpmsg_ct=
+rl dwc3 rpmsg_char qrtr_smd ulpi qcom_pd_mapper udc_core msm ucsi_glink pmi=
+c_glink_altmode typec_ucsi aux_hpd_bridge qcom_battmgr socinfo ubwc_config =
+ocmem drm_gpuvm drm_exec gpu_sched spmi_pmic_arb spmi_devres drm_display_he=
+lper qcom_stats spmi cec dispcc_sc8280xp camcc_sc8280xp
+> [11525.260623]  phy_qcom_edp rc_core i2c_qcom_cci videocc_sm8350 i2c_qcom=
+_geni phy_qcom_qmp_combo llcc_qcom gpi phy_qcom_qmp_usb gpucc_sc8280xp icc_=
+bwmon aux_bridge drm_dp_aux_bus dwc3_qcom_legacy qcom_refgen_regulator nvme=
+m_qfprom phy_qcom_snps_femto_v2 qcom_q6v5_pas qcom_pil_info qcom_common qco=
+m_glink_smem qcom_glink qcom_q6v5 qcom_sysmon aes_ce_blk mdt_loader qrtr gh=
+ash_ce pinctrl_sc8280xp_lpass_lpi pmic_glink qcom_aoss gpio_sbu_mux pinctrl=
+_lpass_lpi qcom_rpmh_regulator gf128mul lpasscc_sc8280xp qcom_smd phy_qcom_=
+qmp_pcie pdr_interface qcom_hwspinlock icc_osm_l3 typec qcom_pdr_msg pwrseq=
+_qcom_wcn qmi_helpers gpio_keys sm4 rpmsg_core thunderbolt pwm_bl smp2p qco=
+m_smem fixed dm_mirror dm_region_hash dm_log dmi_sysfs autofs4
+> [11525.260673] CPU: 5 UID: 1000 PID: 26167 Comm: CameraManager Kdump: loa=
+ded Tainted: G        W           7.2.0+ #6 PREEMPT(lazy)
+> [11525.260676] Tainted: [W]=3DWARN
+> [11525.260677] Hardware name: LENOVO 21BX000WUK/21BX000WUK, BIOS N3HET88W=
+ (1.60 ) 03/14/2024
+> [11525.260678] pstate: 60400005 (nZCv daif +PAN -UAO -TCO -DIT -SSBS BTYP=
+E=3D--)
+> [11525.260680] pc : gdsc_toggle_logic+0x20c/0x220
+> [11525.260682] lr : gdsc_toggle_logic+0x20c/0x220
+> [11525.260685] sp : ffff80009157b5e0
+> [11525.260685] x29: ffff80009157b5e0 x28: ffffc78a55f6fd28 x27: ffff00008=
+83bd130
+> [11525.260688] x26: 0000000000000001 x25: 0000000000000000 x24: ffffc78a5=
+535bab0
+> [11525.260691] x23: 0000000000000000 x22: 0000000000000000 x21: 000000000=
+0000001
+> [11525.260693] x20: 00000000ffffff92 x19: ffffc78a5535b690 x18: ffff80008=
+ddc5108
+> [11525.260696] x17: 0000000000000000 x16: 0000000000000000 x15: 0000fe3dc=
+40ab158
+> [11525.260699] x14: ffffffffffffffff x13: 0000000000000028 x12: 010101010=
+1010101
+> [11525.260701] x11: 7f7f7f7f7f7f7f7f x10: 0000000000000000 x9 : 000000000=
+0000000
+> [11525.260704] x8 : 0000000000000000 x7 : 0000000000000000 x6 : 000000000=
+0000000
+> [11525.260706] x5 : 0000000000000000 x4 : 0000000000000000 x3 : 000000000=
+0000000
+> [11525.260708] x2 : 0000000000000000 x1 : 0000000000000000 x0 : 000000000=
+0000000
+> [11525.260712] Call trace:
+> [11525.260713]  gdsc_toggle_logic+0x20c/0x220 (P)
+> [11525.260716]  gdsc_enable+0x6c/0x2a8
+> [11525.260718]  _genpd_power_on+0xc0/0x208
+> [11525.260721]  genpd_power_on+0x10c/0x280
+> [11525.260723]  genpd_runtime_resume+0x154/0x358
+> [11525.260726]  __rpm_callback+0x54/0x210
+> [11525.260729]  rpm_callback+0x78/0x90
+> [11525.260731]  rpm_resume+0x588/0x768
+> [11525.260734]  __pm_runtime_resume+0x68/0xd8
+> [11525.260736]  rpm_get_suppliers+0x4c/0x1a8
+> [11525.260739]  __rpm_callback+0x180/0x210
+> [11525.260741]  rpm_callback+0x78/0x90
+> [11525.260744]  rpm_resume+0x588/0x768
+> [11525.260746]  __pm_runtime_resume+0x68/0xd8
+> [11525.260748]  csiphy_set_power+0x50/0x3a8 [qcom_camss]
+> [11525.260760]  pipeline_pm_power_one+0x16c/0x188 [videodev]
+> [11525.260777]  pipeline_pm_power+0x94/0x138 [videodev]
+> [11525.260787]  v4l2_pipeline_pm_use+0x60/0xb8 [videodev]
+> [11525.260796]  v4l2_pipeline_pm_get+0x20/0x48 [videodev]
+> [11525.260805]  video_prepare_streaming+0x28/0xa0 [qcom_camss]
+> [11525.260813]  vb2_core_streamon+0x60/0x1f0 [videobuf2_common]
+> [11525.260819]  vb2_ioctl_streamon+0x58/0xb8 [videobuf2_v4l2]
+> [11525.260823]  v4l_streamon+0x30/0x60 [videodev]
+> [11525.260833]  __video_do_ioctl+0x330/0x4c8 [videodev]
+> [11525.260843]  video_usercopy+0x374/0x898 [videodev]
+> [11525.260853]  video_ioctl2+0x24/0xb8 [videodev]
+> [11525.260862]  v4l2_ioctl+0x70/0xc8 [videodev]
+> [11525.260872]  __arm64_sys_ioctl+0xd4/0x168
+> [11525.260875]  invoke_syscall+0xa8/0x138
+> [11525.260878]  el0_svc_common.constprop.0+0x4c/0x140
+> [11525.260880]  do_el0_svc+0x28/0x58
+> [11525.260881]  el0_svc+0x48/0x310
+> [11525.260885]  el0t_64_sync_handler+0xc0/0x108
+> [11525.260888]  el0t_64_sync+0x1b8/0x1c0
+> [11525.260890] ---[ end trace 0000000000000000 ]---
+> [11525.260901] qcom-camss ac5a000.camss: Failed to power up pipeline: -110
+>=20
+>=20
+> Slightly different trace, but it's the same WARN except:
+>=20
+>  [11525.260463] titan_top_gdsc status stuck at 'off'
+>=20
+> instead of
+>=20
+>  [   15.408367] titan_top_gdsc status stuck at 'on'
+>=20
+> Does anyone have any insights to debugging this, or is anyone else
+> testing on a Lenovo x13s recently?
+>=20
+> Before putting Ubuntu on this laptop, I used to run a branch from
+> Jhovald (https://github.com/jhovold/linux/tree/wip/sc8280xp-6.16), which
+> I always had success with, and I think at that point all the camera
+> support was mainline, so I can likely go back to that and then bisect to
+> master if that's worth the time.
 
--- 
-With best wishes
-Dmitry
+I'll be honest that I'm not sure. Does reverting this patch fix the
+issue? If so, leave it reverted, and check to see if adding the
+CLK_IGNORE_UNUSED flag works for you via this patch?
+
+https://lore.kernel.org/linux-arm-msm/20260701-sc8280xp-camcc-gdsc-clk-v1-1=
+-ee28be1e8508@redhat.com/
+
+Brian
+
