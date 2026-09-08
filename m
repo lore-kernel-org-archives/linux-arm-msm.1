@@ -1,86 +1,52 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from omta34.uswest2.a.cloudfilter.net (omta34.uswest2.a.cloudfilter.net [35.89.44.33])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E5AA11B4138
-	for <linux-arm-msm@vger.kernel.org>; Tue,  8 Sep 2026 02:51:26 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9BA302620DE
+	for <linux-arm-msm@vger.kernel.org>; Tue,  8 Sep 2026 03:04:23 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=35.89.44.33
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788835888; cv=none; b=XMsLl12UHK9LZFSvzOiBxR9597/PzhNgMbpnWdxNOOARKVCNouQ+W+n1f1DO3UgtyBdkDtGWoU+Otv51dQI7M8xf/+ZxlooizpVxVw7BHGLNvr7i0DCtUpdgWOiBUdDBhyudMxj4ypghcGKg0rS10mWrntgdYtTX2uSuSAKm7lc=
+	t=1788836665; cv=none; b=uHj9M0JGlc1GHo/5Z/OxjD7AGvM59k6cr2N9biSPahbIDK4VeilH7NWwod4VDwgZJ9pD4b7nQtaNuShBew/B8e4MiWunZP8eXA6WRV/MZMtuGq/Xdkk1vTq5QYq52Nn1V93xv2uw5F2bH14ma1eq+XngpxnFCeqL861sa4Do50g=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788835888; c=relaxed/simple;
-	bh=VjVgSIEHErlpVkc7eq+UEEYEg/iQEcRtAbhlLZ5+dpU=;
+	s=arc-20240116; t=1788836665; c=relaxed/simple;
+	bh=1qe/woO8zybzb2TQkYQIHvFXXqzfTTIqj6TrnoCsGjk=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=JGIKzcu/mE8fxJMmQFWzWV20dsChMiSuNYFww9Tx17e8cPxncoX8GW1FYKGU2P68gH6P/o/aDoKUbFHXJTIF9sCJHqq/c6XS4q5Az6n4jRD5Ry8FvqL4TSExbHuM1JpBiFgaXWb89sHlEy8RDmbi+AFqy5X4Yf4iZ9rgaIx99Ao=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=Bzdc7Ao7; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=WOLFY3nx; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	 In-Reply-To:Content-Type; b=MmaPP1GJ0l13g23U9hJLkH7Wz3YB8HcQF9rlATYo4aDzK5zrtmMjoPO+cKGk5O/WRwyPRPuXmLPeFrrwumuciXX7JLSRJ+TYt32U1YKj+xrkTFXHHwUMMRLQ2DHN+YBC5wzrE05xhbq51/eUkhET8ZaOr5oYHsYGMGYjEy+r2u4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=embeddedor.com; spf=pass smtp.mailfrom=embeddedor.com; dkim=pass (2048-bit key) header.d=embeddedor.com header.i=@embeddedor.com header.b=B2cmRG0j; arc=none smtp.client-ip=35.89.44.33
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=embeddedor.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=embeddedor.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="Bzdc7Ao7";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="WOLFY3nx"
-Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 687NlKWc1311817
-	for <linux-arm-msm@vger.kernel.org>; Tue, 8 Sep 2026 02:51:26 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	SXX73wHDy3wDhoXCZ7H3cw2yZLyFvFtSWJ5lStmdwDM=; b=Bzdc7Ao7GOAstmBH
-	S7HFlU1yWBfnLbEY4k/ZaL+NvsGTCKgkzEZE37B8HrHk8jF7kjsFkOgUAt9Mxk64
-	sI6Yh2mkHqYzuSomdl3Ha38vgSNUjtdB2wmjKYLuH9OKIfYPLB2LQUN+dDJZfKz8
-	MDdJh7h3Q4gDy1d/VJsabaaqhQqd4YoLL9CKJlpH9qbUz64gisueNnVIxLU7pOlj
-	ccWhCi608AC1BkgsIx+9CpkQYGTsvqB8o9JYkE4iFgUY4BISXQeLWDvwtfm5vc4P
-	9cibFlMdPABs1Iv3w1YLhmbkY53GaE2+QaCJlk4hEMwEG2AWQ2Eikemov2pcsUm3
-	HkF2Fw==
-Received: from mail-pl1-f199.google.com (mail-pl1-f199.google.com [209.85.214.199])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gj1rwh9xc-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 08 Sep 2026 02:51:25 +0000 (GMT)
-Received: by mail-pl1-f199.google.com with SMTP id d9443c01a7336-2d6df0a1e18so80183635ad.1
-        for <linux-arm-msm@vger.kernel.org>; Mon, 07 Sep 2026 19:51:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1788835885; x=1789440685; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from:references
-         :cc:to:subject:user-agent:mime-version:date:message-id:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=SXX73wHDy3wDhoXCZ7H3cw2yZLyFvFtSWJ5lStmdwDM=;
-        b=WOLFY3nxeaz03Wiz+L6Jo6OH0fITHngZU6Vy+wxnOPGmBMddKAdybM49epSflyM2up
-         YwEpMokkuKYqbrrDqtUaehbr0ZZZXlHodVvL52Aqr44fQxWGRFHaLp3hjFNPhtoUiWlz
-         MHFsIBaZ7a1vMGgdG6ifgkeGi6wo5Z1prpO6hMtpaSbt8kKutl9YJrrYtD0L8dPtXbTf
-         VrpcaohyZQWngTKPBpQzVYTtEtM+TXHJ0i7ehgTnYm/S73yV4xwcAXjQ/Ve7FQJNfJBp
-         lHOclsQG2l3uBNtzHQUHXJvClS1gd2Y5qwcZMU8J5M+nc05elc4TMn0tdXKTnWY2M5uV
-         t9AA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788835885; x=1789440685;
-        h=content-transfer-encoding:content-type:in-reply-to:from:references
-         :cc:to:subject:user-agent:mime-version:date:message-id:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=SXX73wHDy3wDhoXCZ7H3cw2yZLyFvFtSWJ5lStmdwDM=;
-        b=Sd/y5tqTn6GZPdmgn0+R6ZfNpCP+XR7aQBbRmjVWWZYUtK+b4FuvDrJpmq+O5QAOZU
-         rtNWYGK0ixOMohwnBpEaZSF/HpdxobCh1SIvJhGKtRJKU0Ih5TPIx1LwYKhDOnt1ihPJ
-         cYR+Hd6C2dBNT6viyWlpNf2Rm8GqhL2eqMDHOtzo+xBOMP1ufvy4iKDGGzLUBWazHpfr
-         8wse33f7TOwUTk8gkPx8BLzoQghtS81eLwGzpdd6bb7XH1OfByVNXriLbPH5qxzn/JpL
-         U+Z4AUEL2EHHGrlh+k8k32RHjItAfnFxRARac+o+oOdClAgc5FF/9Obq6utWehCQp7l9
-         mDlQ==
-X-Forwarded-Encrypted: i=1; AKwUvBx3MOKiJ3T2d9bgnHqoOQGpVw3CGRBpuWZeVTQY4C2nY4r/kVkhc0Bupdjhb3A9PwaFaI22idkWAF8e20yk@vger.kernel.org
-X-Gm-Message-State: AFuF++nudK8LuPDVPszhA4hO6ZV+k/g7425G+gZwjizJD9ftAEj/AvNy
-	D+KQNzmuMphN9Up4CnYhOLPgXkIJcUY6kGu3wFbfYKJriJ2qeBMpFV3UsDeicPIqs7vYKfX1I0h
-	7NCWstujOsAGt6YI6rSgQt8I1KKPldqasuoaj225ezVtv/gE3TJuIb3lL4rhvKBr+7oGT
-X-Gm-Gg: AYBFou1xL+Tqc4m/nyBKeHlPOdggx9bhQCW44g8smFCLZl3D2qdMby94VbOpoECFe9J
-	HbMuQmVWGttth2EGMZN5XXOPSCYiXDdwXn6/Be/4ByM7oelxYSZGoegVj+89wpIXv5Jnrn2BLtA
-	K7ICU5mewHNylCoUEuS3Oy0Da5Vz/lmV6A/B7e6rEIGrOP5+BCzv3/awUAfZpkqwUlavd3JnexB
-	XNtDI7jZZCsjVBxL+vyvS/pmlUt6K8gU2GoqYvfJmD7ug+z/3Rvow4KzNCfFC2Gxrs6CQxbnsYD
-	r3lvGSByfkBPm7kizmku7EUarIBeDBjJFDTTNzRU/fUQMJu4Fs6SWqC2uCV+bUcR5Jjd/FZLdSp
-	SK41N+3OC9mkPQ9f2zFnAg3Pcl9zN/QTuFjY7RBb1/CvTge0hy1FcslQyqg2EwRAHihNCoQ0=
-X-Received: by 2002:a17:90b:39ab:b0:398:9be8:ea68 with SMTP id 98e67ed59e1d1-39b261da75cmr40560630a91.21.1788835884812;
-        Mon, 07 Sep 2026 19:51:24 -0700 (PDT)
-X-Received: by 2002:a17:90b:39ab:b0:398:9be8:ea68 with SMTP id 98e67ed59e1d1-39b261da75cmr40560573a91.21.1788835884354;
-        Mon, 07 Sep 2026 19:51:24 -0700 (PDT)
-Received: from [10.133.33.68] (tpe-colo-wan-fw-bordernet.qualcomm.com. [103.229.16.4])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-39b25f88475sm23459473a91.1.2026.09.07.19.51.20
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 07 Sep 2026 19:51:23 -0700 (PDT)
-Message-ID: <062ea84e-07ee-41be-82a5-20600693a219@oss.qualcomm.com>
-Date: Tue, 8 Sep 2026 10:51:18 +0800
+	dkim=pass (2048-bit key) header.d=embeddedor.com header.i=@embeddedor.com header.b="B2cmRG0j"
+Received: from eig-obgw-5001b.ext.cloudfilter.net ([10.0.29.181])
+	by cmsmtp with ESMTPS
+	id 3lGVxLjk9aC0U3m8Fx710f; Tue, 08 Sep 2026 03:04:23 +0000
+Received: from gator4166.hostgator.com ([108.167.190.91])
+	by cmsmtp with ESMTPS
+	id 3m8ExASPnfDqY3m8ExMVQK; Tue, 08 Sep 2026 03:04:22 +0000
+X-Authority-Analysis: v=2.4 cv=HKbDFptv c=1 sm=1 tr=0 ts=6a9f7b36
+ a=vY9Mjuda9oMEc2E4Cx1x2A==:117 a=vY9Mjuda9oMEc2E4Cx1x2A==:17
+ a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=7T7KSl7uo7wA:10 a=VwQbUJbxAAAA:8
+ a=Zo5euW2OAAAA:8 a=n92-qV7Ugmv0IUIatOIA:9 a=QEXdDO2ut3YA:10
+ a=2aFnImwKRvkU0tJ3nQRT:22
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=embeddedor.com; s=default; h=Content-Transfer-Encoding:Content-Type:
+	In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender
+	:Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:
+	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:
+	List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+	bh=ROkla2LJMX0VNuCHtg9QFZ/+ccIHOqOJ+aiWXH5j+Wc=; b=B2cmRG0jj/RpW8XaSFuEKy3O89
+	piPvZVZNJ+5qzM4fhvfgTASBPxFXrgRhnANgg9Or4iCoBqgmsfVS4Nk3nhJKkXUKgiun44WJzMFIt
+	KQLiAb9fGxWE45Y1Y4PZIqANCLUE6eoeB5qjpqOxeSL2U5xXz5M/hnsX4LNL9AHIISasRxRIcmpW+
+	WL96KXpF+GDNeo7pYhjxrpremSG+vnR0i7e08dMpP4PaDWgcCuIttot/Sf1fR4BxwHihWglIo5GMo
+	qq2CldcCkowHLiQkqm5VPCqOBurtUmre+eeJBKXzO16BydJJKYRzwU6avRuBaH1qc32UwnXMOJCs0
+	29VUuOnA==;
+Received: from flh4-125-195-69-90.tky.mesh.ad.jp ([125.195.69.90]:57288 helo=[10.203.100.33])
+	by gator4166.hostgator.com with esmtpsa  (TLS1.3) tls TLS_AES_128_GCM_SHA256
+	(Exim 4.99.5)
+	(envelope-from <gustavo@embeddedor.com>)
+	id 1x3m8D-0000000257t-2CoX;
+	Mon, 07 Sep 2026 22:04:21 -0500
+Message-ID: <b5f44a35-52d8-4197-ac85-73bb9dd0d11c@embeddedor.com>
+Date: Tue, 8 Sep 2026 12:04:16 +0900
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -88,95 +54,117 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v6 2/2] arm64: dts: qcom: shikra: Correct QCE node
- configuration
-To: Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>,
-        Bartosz Golaszewski <brgl@kernel.org>,
-        Herbert Xu <herbert@gondor.apana.org.au>,
-        "David S. Miller" <davem@davemloft.net>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley
- <conor+dt@kernel.org>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>
-Cc: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>,
-        Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>,
-        linux-arm-msm@vger.kernel.org, linux-crypto@vger.kernel.org,
-        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
-References: <20260907-b4-shikra_crypto_changse-v6-0-0676f61894b3@oss.qualcomm.com>
- <20260907-b4-shikra_crypto_changse-v6-2-0676f61894b3@oss.qualcomm.com>
-From: Wenjia Zhang <wenjia.zhang@oss.qualcomm.com>
-In-Reply-To: <20260907-b4-shikra_crypto_changse-v6-2-0676f61894b3@oss.qualcomm.com>
+Subject: Re: [PATCH] clk: qcom: ipq-cmn-pll: Assign .num before accessing .hws
+To: Aamir Ahmed <elb12345@hotmail.co.uk>,
+ Bjorn Andersson <andersson@kernel.org>, Stephen Boyd <sboyd@kernel.org>,
+ Brian Masney <bmasney+clk@redhat.com>,
+ Jerome Brunet <jbrunet+clk@baylibre.com>
+Cc: linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org,
+ linux-kernel@vger.kernel.org, Luo Jie <jie.luo@oss.qualcomm.com>,
+ Kees Cook <kees@kernel.org>, linux-hardening@vger.kernel.org,
+ stable@vger.kernel.org
+References: <AS8P251MB0001B905088748016A0965F1C8B42@AS8P251MB0001.EURP251.PROD.OUTLOOK.COM>
+Content-Language: en-US
+From: "Gustavo A. R. Silva" <gustavo@embeddedor.com>
+In-Reply-To: <AS8P251MB0001B905088748016A0965F1C8B42@AS8P251MB0001.EURP251.PROD.OUTLOOK.COM>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Authority-Analysis: v=2.4 cv=Ga8nWwXL c=1 sm=1 tr=0 ts=6a9f782d cx=c_pps
- a=JL+w9abYAAE89/QcEU+0QA==:117 a=nuhDOHQX5FNHPW3J6Bj6AA==:17
- a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
- a=EUspDBNiAAAA:8 a=JBeEZWaBV44c9fYEBTwA:9 a=QEXdDO2ut3YA:10
- a=324X-CrmTo6CU4MGRt3R:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTA4MDAyOSBTYWx0ZWRfX93MjsbDo0cOR
- GaLOsYFv+h+3yOSWC/sIMZ5qUGPHo/f4u1vamVGe4TVdp8zt7vXgL8KX8pQUDwaoxDqzAfEtAg3
- y5fugnuIlaFD09yls7L3isfstUCOfs3gGmsDDzhaP6KdSEkTqqdeP/Nv2aWtMdGW7Bi01LQ/iZE
- pKlin31OjK2k08IFAAM3nYjWewt0tG1/Cqp3XUmBnvKW96NRl1FWSVA4hvxblBtRd8HjGPqIBrR
- zMPI0gGjxgMIvF6+DBZ5PbTKRn2Hh03umQ18Zgx8wSXfdlwX2VSnKHn+Yuqg6jAB1XOokPYjN55
- E2pzT751gQyGodq17Rdn0vmrtduecb8BjUVatnvZ58MNRjDlBJktII4NEPCiczriciO2trbxyo4
- l0r6MaEQKaqIzg44tq6dY+pYsDo9V/0erV7uhAxxd6ssd9czR9DdCSr61HEXNu/h194/j7Sfjfs
- cbfxPCo/Y9IfIMzGDjg==
-X-Proofpoint-ORIG-GUID: H1vzMMZLUm8_zLB7XkbmhwFlqi_Y1B6j
-X-Proofpoint-GUID: H1vzMMZLUm8_zLB7XkbmhwFlqi_Y1B6j
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTA4MDAyOSBTYWx0ZWRfX71l1cFHKdUce
- ULXjWMIa9JKCHAUplo//ZBsXudYPTKVVXLLSUgOiAxnIDvE7Acj+r3NkMXf7s20AmVcdCHu/OZh
- D1HOLsg6K0tS2X+6Uj8ADYYETIdafss=
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-07_07,2026-09-07_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0 phishscore=0 suspectscore=0 clxscore=1015 impostorscore=0
- bulkscore=0 spamscore=0 lowpriorityscore=0 priorityscore=1501 adultscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2609080029
+X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
+X-AntiAbuse: Primary Hostname - gator4166.hostgator.com
+X-AntiAbuse: Original Domain - vger.kernel.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - embeddedor.com
+X-BWhitelist: no
+X-Source-IP: 125.195.69.90
+X-Source-L: No
+X-Exim-ID: 1x3m8D-0000000257t-2CoX
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+X-Source-Sender: flh4-125-195-69-90.tky.mesh.ad.jp ([10.203.100.33]) [125.195.69.90]:57288
+X-Source-Auth: gustavo@embeddedor.com
+X-Email-Count: 7
+X-Org: HG=hgshared;ORG=hostgator;
+X-Source-Cap: Z3V6aWRpbmU7Z3V6aWRpbmU7Z2F0b3I0MTY2Lmhvc3RnYXRvci5jb20=
+X-Local-Domain: yes
+X-CMAE-Envelope: MS4xfEqwBEcR/wAAmbzBriuaRnwz0p06QO20sX/zzE4L9QC8/XokjvqANTcXQRDP3h2T1Mw1dfaORQs9XHzPEiJEHKk/UIaIiCc4AylgH+EKwnzY3qXjvSsV
+ FIFiKcgCy51TfmjDZWO+wB6DWGhNi44B73a5Zo7I0hILwb3WFPrhLuih3D15xbdCrQXqkt0m/M7EhqTHjeiAS43cIaRcrlBtqUbAqu1dlG+3TDyUNwIfZ5+i
 
 
-On 9/7/2026 8:03 PM, Kuldeep Singh wrote:
-> Shikra is derived from Agatti and uses the same QCE integration.
-> Update the QCE node to match the underlying hardware implementation by
-> adjusting the fallback compatible and related properties, including
-> clocks and clock-names.
->
-> Signed-off-by: Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>
+
+On 9/6/26 05:48, Aamir Ahmed wrote:
+> Commit f316cdff8d67 ("clk: Annotate struct clk_hw_onecell_data with
+> __counted_by") annotated the hws member of 'struct clk_hw_onecell_data'
+> with __counted_by, which informs the bounds sanitizer (UBSAN_BOUNDS)
+> about the number of elements in .hws[], so that it can warn when .hws[]
+> is accessed out of bounds. As noted in that change, the __counted_by
+> member must be initialized with the number of elements before the first
+> array access happens, otherwise there will be a warning from each access
+> prior to the initialization because the number of elements is zero.
+> This occurs in ipq_cmn_pll_register_clks() due to .num being assigned
+> only after the fixed rate output clocks and the CMN PLL clock have been
+> stored in .hws[]. If registering one of the fixed rate clocks fails, the
+> unwind loop under unregister_fixed_clk reads .hws[] while .num is still
+> zero as well. With CONFIG_UBSAN_BOUNDS and a compiler that implements
+> __counted_by (GCC 15.1+ or Clang 20.1+), this triggers an
+> array-index-out-of-bounds report during probe, and with
+> CONFIG_UBSAN_TRAP the first store traps so the CMN PLL clocks are never
+> provided.
+> 
+> Move the .num initialization to right after the allocation.
+> 
+> Cc: stable@vger.kernel.org
+> Fixes: f81715a4c87c ("clk: qcom: Add CMN PLL clock controller driver for IPQ SoC")
+> Assisted-by: LLM
+> Signed-off-by: Aamir Ahmed <elb12345@hotmail.co.uk>
+
+Reviewed-by: Gustavo A. R. Silva <gustavoars@kernel.org>
+
+Thanks
+-Gustavo
+
 > ---
->   arch/arm64/boot/dts/qcom/shikra.dtsi | 9 +++++----
->   1 file changed, 5 insertions(+), 4 deletions(-)
->
-> diff --git a/arch/arm64/boot/dts/qcom/shikra.dtsi b/arch/arm64/boot/dts/qcom/shikra.dtsi
-> index c1f06f692f66..30c7cabc058a 100644
-> --- a/arch/arm64/boot/dts/qcom/shikra.dtsi
-> +++ b/arch/arm64/boot/dts/qcom/shikra.dtsi
-> @@ -1075,10 +1075,12 @@ cryptobam: dma-controller@1b04000 {
->   			qcom,controlled-remotely;
->   			num-channels = <16>;
->   			qcom,num-ees = <4>;
-> +			clocks = <&rpmcc RPM_SMD_CE1_CLK>;
-> +			clock-names = "bam_clk";
->   		};
+> Found while auditing the remaining clk_hw_onecell_data users that assign
+> .num only after touching .hws[], following the fixes already merged for
+> clk-s2mps11 (3e14c7207a97), exynos-clkout (cf33f0b7df13) and
+> clk-raspberrypi (6dc445c19050). The audit, the fix and this changelog
+> were drafted with an LLM assistant and reviewed by hand.
+> 
+> Compile-tested only (W=1, no warnings) on x86_64 with GCC 13.3, via
+> COMPILE_TEST with CONFIG_IPQ_CMN_PLL=m. GCC 13.3 does not implement
+> __counted_by (CC_HAS_COUNTED_BY needs GCC 15.1+ or Clang 20.1+), so the
+> build only confirms that the change compiles; the sanitizer path was not
+> exercised. I do not have the hardware, so this is not runtime-tested and
+> no UBSAN report was captured.
+> 
+> Based on v7.3-rc1. Checked against the pending IPQ5210 CMN PLL series
+> (v3, 2026-08-14): no changed lines overlap, and the fix is still needed
+> after its first patch removes the unwind path.
+> 
+>   drivers/clk/qcom/ipq-cmn-pll.c | 3 ++-
+>   1 file changed, 2 insertions(+), 1 deletion(-)
+> 
+> diff --git a/drivers/clk/qcom/ipq-cmn-pll.c b/drivers/clk/qcom/ipq-cmn-pll.c
+> index dafe8c1738d..a9abad9ff4e 100644
+> --- a/drivers/clk/qcom/ipq-cmn-pll.c
+> +++ b/drivers/clk/qcom/ipq-cmn-pll.c
+> @@ -380,6 +380,8 @@ static int ipq_cmn_pll_register_clks(struct platform_device *pdev)
+>   	if (!hw_data)
+>   		return -ENOMEM;
 >   
->   		crypto: crypto@1b3a000 {
-> -			compatible = "qcom,shikra-qce", "qcom,sm8150-qce", "qcom,qce";
-> +			compatible = "qcom,shikra-qce", "qcom,ipq4019-qce", "qcom,qce";
->   			reg = <0x0 0x01b3a000 0x0 0x6000>;
->   			dmas = <&cryptobam 4>, <&cryptobam 5>;
->   			dma-names = "rx", "tx";
-> @@ -1089,9 +1091,8 @@ crypto: crypto@1b3a000 {
->   				 <&apps_smmu 0x96 0x0011>,
->   				 <&apps_smmu 0x98 0x0001>,
->   				 <&apps_smmu 0x9f 0x0>;
-> -			interconnects = <&system_noc MASTER_CRYPTO_CORE0 0
-> -					 &mc_virt SLAVE_EBI_CH0 0>;
-> -			interconnect-names = "memory";
-> +			clocks = <&rpmcc RPM_SMD_CE1_CLK>;
-> +			clock-names = "core";
->   		};
+> +	hw_data->num = num_clks + 1;
+> +
+>   	/*
+>   	 * Register the CMN PLL clock, which is the parent clock of
+>   	 * the fixed rate output clocks.
+> @@ -406,7 +408,6 @@ static int ipq_cmn_pll_register_clks(struct platform_device *pdev)
+>   	 * is configured to 12 GHZ by DT property assigned-clock-rates-u64.
+>   	 */
+>   	hw_data->hws[CMN_PLL_CLK] = cmn_pll_hw;
+> -	hw_data->num = num_clks + 1;
 >   
->   		qfprom: efuse@1b44000 {
-Tested-by: Wanjia Zhang <wenjia.zhang@oss.qualcomm.com> #on shikra device
+>   	ret = devm_of_clk_add_hw_provider(dev, of_clk_hw_onecell_get, hw_data);
+>   	if (ret)
+> 
+> base-commit: 654ae5d73c05bd2943d65636ce6cd0aa46e62f18
+
