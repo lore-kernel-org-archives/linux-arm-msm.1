@@ -1,195 +1,211 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-qk2-f12.google.com (mail-qk2-f12.google.com [74.125.230.204])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 54F3633DEFE
-	for <linux-arm-msm@vger.kernel.org>; Tue,  8 Sep 2026 16:33:21 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788885203; cv=none; b=HsQqnpA5zjofbM501jJS/ESqe3qmZPJQkBldexHs9/EX8PMh0VDsvHNVdmn/CSjIIibOOFZoT/nPPVNgZUAHT/yJAKjIQ9gnS7WwMet4oY9PstRFbEVbPDpxN/pVcIqTNC/UzkW5kKuFWjd/OYO6409aSJ4qH/xBQVTIpZYuYJc=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788885203; c=relaxed/simple;
-	bh=jd9ZQ3vft6U3NWY6w8MBNL6oLN6MjNOIO3EqXQ36VmM=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=FRx8d2Gz1t+ieSSO4x8j507qDaKjOC+e/obwqULBBOF99KU0iAWWcvy56f1qPoPYvB5shlS9axMeIOzGn9da5Fqz9Z1/vrfU6aOKzp9mpPJVrafDo9KWb1lA8q/drGBXHsK2qCIu9JLeFiTi4FP5FWvI+2X8il05CsCy3uSeDyo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=l4oKYS8J; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=aGU3LK/A; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 50421583AAD
+	for <linux-arm-msm@vger.kernel.org>; Tue,  8 Sep 2026 16:36:48 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=74.125.230.204
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1788885410; cv=pass; b=QsYsWbuuRyMkS1rtvLphl8zDZjNXKopDEyTK7N6PYIukHJFitoPzZOtQZf7g0SaNO7fJ7FvFfN7N7k0ZD4CZkbYAiq6370vkV0GYD2deOrdDtdF5W+qEuTgf3EpZf2WDVEwYzdvyHjLXSsPz3jx9Uik6JOOcKpKUQXgxx9WC92A=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1788885410; c=relaxed/simple;
+	bh=2kpYBWl0KXefWYLIcQZz0qWhIXBa2vP5xaDAEBMBTgk=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=kl1lZ/pmvyWkcV2gnHMqU/UTxzN7Gll81pk0Vgluo4WZZRYpAk1R78WXdSQ+WNU6kBjD4TCsgxa+oVzOZ5ZIQRg9jWh1SYwpHQQaie8OP084trbKNVFqjKN33FqOccLG/sT+vZuPbIsI4rPTV0Xf/haFrnaNIFs+FKQ+jXW0Ix8=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=C4xhjiBY; arc=pass smtp.client-ip=74.125.230.204
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=google.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="l4oKYS8J";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="aGU3LK/A"
-Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 688Fe0kw3613886
-	for <linux-arm-msm@vger.kernel.org>; Tue, 8 Sep 2026 16:33:20 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-type:date:from:in-reply-to:message-id:mime-version
-	:references:subject:to; s=qcppdkim1; bh=Qqk8M3irSEHsxsm6zyDtTCOD
-	y4klo+uYgHanr3V9UbY=; b=l4oKYS8Jx2zzLlHFXuWZyyHfh7nNxZj0MhHNr3oE
-	tm5siVvkwJekE/nkUc8yBCzpMvoNTt9e7mVMZWnTE7dYuefPvBFLrVYF2zFtJegs
-	/MtMuI4tW05PHC5svbA7kKCO4BnfyXxqd5p6eMA57dppaQrfN01nP6P6fIR/6amU
-	6WBGJ4QbWESW4JcZ/BeAMigexN1FmMIv3iL2j0WqfSBiv1uKbgblkbdDwgL6iOBn
-	LWmxsn8bREeW4EEEXE3auYNE97TqxeZdaICPXChl9afRVgfGysFE1JSSFcoVbUOd
-	cBq/N8lwIW5DAnvZGLMTJwGoM4nsV2+eRQPIyNccrXIs3A==
-Received: from mail-pg1-f198.google.com (mail-pg1-f198.google.com [209.85.215.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gjaguk6gy-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 08 Sep 2026 16:33:19 +0000 (GMT)
-Received: by mail-pg1-f198.google.com with SMTP id 41be03b00d2f7-cbee162355fso699620a12.3
-        for <linux-arm-msm@vger.kernel.org>; Tue, 08 Sep 2026 09:33:19 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="C4xhjiBY"
+Received: by mail-qk2-f12.google.com with SMTP id d75a77b69052e-5306706e89dso737021cf.1
+        for <linux-arm-msm@vger.kernel.org>; Tue, 08 Sep 2026 09:36:48 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1788885407; cv=none;
+        d=google.com; s=arc-20260327;
+        b=Q7IywUd1sccSc6qWsh94LxLTGxilmvktIRQrNs8Dgshbhm9Az5YtqMCTavId0x9crb
+         vvSe55IeNzGallTOe6Vt8bw0lQNqz9q1JtoV+3SdFVWEQNQvJ0QdoKsxDD7A+FubFKHX
+         j9nyd4SbYFuYh7nzOz0rKeonTVIlvfVZXmfwVfwJBkFOIFq/Kt6lC60F+HGF/zM/OtUe
+         IUW027m4q02HZ7AbM3Hv/khUg4uZUThf25O7+KU1/2p3VMEZY17tMS43p6ZFfLaRGxUW
+         ylBso2owdINY+a6BM2Y2gIYBTtV2nF9wnUr70L1i6BabOaDXdhUiN+uq0dAkDd+UwMPe
+         5XbA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:dkim-signature;
+        bh=Ar1cqiUGIhblAbeFXXUvhYbgZ/09secUyh9OrIqbTXI=;
+        fh=X1sh0qR1IiTqr2nh8bKLHghlBzPE7XIcmMMymYmONmQ=;
+        b=WhS4MCQfVvIBy/PpgUugGD+RS0a7mjXt/SlrAb41nOxQ56FiXe5NvLuuThf8mHLo4k
+         xohlQxL2WcXdslQc2mgqWrr7TIC6JGAV0+B3QJiRbnyxnjlp3Cnv9eVyC+KhnkQkhncq
+         x9zKCPUhLwmF1joD7zimi4TjkiVnj7yScGOSRP+kwht6e8fU/8JTEw9khTkDbWX2lgTh
+         Dpk5nmn0vgx3Ds0eiLOYR/cguV7mfNul+RGiZF++kRXXnzVxxBK0WvQ3GSy4BvwmYyHm
+         mnibj0pjoXRi7WgL+DuMmUgSeSlk2sM4PrtlPpFdNb0zCFUZ7xhxUfnpIFA6aMeqErM+
+         ls9w==;
+        darn=vger.kernel.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1788885199; x=1789489999; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+        d=google.com; s=20251104; t=1788885407; x=1789490207; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
          :date:message-id:reply-to:content-type;
-        bh=Qqk8M3irSEHsxsm6zyDtTCODy4klo+uYgHanr3V9UbY=;
-        b=aGU3LK/AqIaW2jng6sSCnLaPT0rnq+70T0yWZuh1mSYmLBwDa3Os+xqCSmFnqnP6ph
-         RD6dpctPeZQaVxG7+vQiYA8GKPiO9uwfukwR/BuI3xf1O3mDGWmIsU3vXk3tD2HtwdCY
-         B6Z4cvwnC81m3Pv0AoXHBWQcxWexIN2OOsuGubN5By02/ghZnHXGG/whKg7TMnUWn8O2
-         P+QEOZEs5DitmoInoF+n+n8EWgJ/h8S5VxoiwGsqI/Mva/HPrHrjPUk0gi4ClQ825sCJ
-         OLQ3faBPzMYRsIw/YHmTMOgr4NR1y4qxFD7wLWRSJJUBHKsMTLvZtjfBDDu3TTUw/w2e
-         XGeA==
+        bh=Ar1cqiUGIhblAbeFXXUvhYbgZ/09secUyh9OrIqbTXI=;
+        b=C4xhjiBYgKl9K81hDkpHxRIhzR5h83VFZfBokdaj1GKk65AvCzVRyZ3VF3C/3pITdE
+         yIVji7wgw4F0Ko5/7TJd6LzuuX69+vsspxNPO+NuAMzIoa0YZTI+5wUSiMCxUDRPN5Nm
+         4FPaCwS1wSe6D7dnYZl1x53GtP2byurVFrSp8Rx2cEB0XMnxlRDF0vetgmYDDQv/Q4aM
+         zJZMLqG5f2hEQBVTL3s46hZ2nwQq7HUVg4872hoe7J481ViNfVxr4ER2Jt99viIiD2CQ
+         gYc2/VDKAIJfC3QwT/3c4jbfhPoGVS35JeNYbEOMzU6rdqBKIHJ+M+7sl2SJsudmI+3w
+         rtwg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788885199; x=1789489999;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:x-gm-gg
+        d=1e100.net; s=20251104; t=1788885407; x=1789490207;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=Qqk8M3irSEHsxsm6zyDtTCODy4klo+uYgHanr3V9UbY=;
-        b=NELwowhZXDRmeqHDi9kD3VT0AjUL9HGRnO+yA9+Mr51ukT9rETOMDggN2Er2QjjABJ
-         EZQsKvyutgKwZxN/T+Z0bjN9xlN9UfLsrTFzWebsCGv30AbV92opmDW57Fvd/Dk3vKQc
-         JzNh+dL2lyEodYyB14skzwlmLb7xe6wdHc+RnULWAL+yZSzL1lic1kN4Lo3YFAFr9b1U
-         XWgd9cvqfAs3PWHiT49iwXSzzIgcHbfd9IP1UV+Js400oIIWcTk7SEw4XJUM29OpNahS
-         flVTRK0cjnFErsWBiq3ROpYdEs3ablwndkUehba+fJE5wVQCymfGWIwUebFVl/2eUmHm
-         S6WQ==
-X-Forwarded-Encrypted: i=1; AKwUvByFLAMQ8DsJq4XSx9LV2IezSjeneiBVuVMusrjGmyUmdjPsTzstX7kjWTxOGpZHJWpgdK7BAOBGOHnRKR+n@vger.kernel.org
-X-Gm-Message-State: AFuF++l2pOMJjE5wpCfGYmxC5Tbbk4pYGjBTSL3fGt6xkNtPGNLGEEyf
-	epad7KwbC2C7lsbua6mWIUeYxl49n6W95ImHVyHTnoIYYSogDDtbWKfSy3yMltJiFzWoE3Df9rW
-	wVKYAWcHN+PHSTcgvdp/NDUF7+wC+173FYDQ9c3g5Ayy9QcCQbv2OGnFq/aGQnMvEgLqx
-X-Gm-Gg: AYBFou0b5Lqc927SVqEHjEXXDtP7EnT98UbVIvN24sdYbyz4yR+n/yOgta5X80X5cfx
-	GRkSd3S8xYJDXO6uYKZxctl9rsUIEeTC7P3zArqFRD8sDwz2kaHkQfwmMu49r+Bbda1kyYkaDda
-	zRgvRWZNvicmVUcsr9ul4yZ70sw1G0NZ1t6pTC6LXSnfLolYjlWUhDsdhDJbFEXdy5CYq7ELIpl
-	IGNVMn+5BVipZdur9vRpxMiehVi8WeiD1Nb9i30G3F3Dx9l6D8Oy3/jBuHWMHcQhnHDy6UGA4G6
-	wM1xtVDNDr6MByZgZgNIKzYTn2s8U3fI/QubD8ijz5OtSyQBnQl8R2px4ORBvHXU1g2tMLaLLNV
-	2Vty+VJdQj6k6JvbVhDDj9VxuN1XzSZi5nww4pNWUZi5ezqhqRcS40W/WTZQypGtkumkMdmn2sB
-	YuSI4OsPQ49d4XR8e9f/J+
-X-Received: by 2002:a17:90b:4c03:b0:398:bac7:72d0 with SMTP id 98e67ed59e1d1-39b3d86acf2mr21418224a91.5.1788885198889;
-        Tue, 08 Sep 2026 09:33:18 -0700 (PDT)
-X-Received: by 2002:a17:90b:4c03:b0:398:bac7:72d0 with SMTP id 98e67ed59e1d1-39b3d86acf2mr21418181a91.5.1788885198329;
-        Tue, 08 Sep 2026 09:33:18 -0700 (PDT)
-Received: from hu-vishsain-blr.qualcomm.com (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-14324356931sm57343694c88.4.2026.09.08.09.33.13
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 08 Sep 2026 09:33:17 -0700 (PDT)
-Date: Tue, 8 Sep 2026 22:03:11 +0530
-From: Vishnu Saini <vishnu.saini@oss.qualcomm.com>
-To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-Cc: Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>, linux-arm-msm@vger.kernel.org,
-        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-        venkata.valluru@oss.qualcomm.com,
-        Jessica Zhang <jesszhan0024@gmail.com>
-Subject: Re: [PATCH v3 1/3] arm64: dts: qcom: lemans-evk: Add LVDS display
- overlay
-Message-ID: <aqA4xy0XoXjLrgNN@hu-vishsain-blr.qualcomm.com>
-References: <20260905-lvds-support-v3-0-b40a1b03f63c@oss.qualcomm.com>
- <20260905-lvds-support-v3-1-b40a1b03f63c@oss.qualcomm.com>
- <5954fbc2-08c2-4509-8703-ab20d57be309@oss.qualcomm.com>
+        bh=Ar1cqiUGIhblAbeFXXUvhYbgZ/09secUyh9OrIqbTXI=;
+        b=DLtsF4qg00JZClNab8ULPbViSf87qQDG04A7urkYUJxbuyOQ6Z3U0cnuMNaI0u3azW
+         Gn8EzfiAVtwmkgD7XXC0YvS6NqhchmI01fSV8vp+n9QgwANR69iDIM54RlsvGZpuigcz
+         twmjMsS+Tyr5NeI5JOFy5OzycZx36AqSlPJ7V8+2Lg/6CQ9Mqw0ucz7c0G/6mYuA23Vg
+         8o8iOkv4ty17pyvSYl/1dETSB1qJs+hfr9iF/rHK4BrZRku3qmg9ppztILqAuGjGdlEG
+         OAGEITCu+68lmqbOP9A9m19UjwkKxM98ml0HC1PmQgOF+HlHyir1a462EEugVDvBSXYv
+         cmQQ==
+X-Forwarded-Encrypted: i=1; AKwUvBx1oaQJ4woNFYUjk/d7qMXl7m9rNrjBz324s8rRejXAoCnn34HT6jwtFHsOAMjvJ2z1zbKozgKCYzLwYp2C@vger.kernel.org
+X-Gm-Message-State: AFuF++mCfDCQOxB0EfsumdZ3LdNcJw1ajmstqKS+F1uXbpkjqVkxU9wg
+	3eWTL8wfbH0uy71QPgg5C+pXAFbrNhuJs2O4JJLX8rol9iV/yqeQgLFC03+fxEHGjZOXEx+pU/t
+	2u7qA0J+xkZHQTXWI79VhPDrQuI6dCnaVNP6dcvRv/LJQQr2j1Pya/ThuPFg=
+X-Gm-Gg: AYBFou12lrWXLMoTi/S8/5CNwI/yRXV+XciXyJpDgUDbDkXcsKLu3lcDx9avLyuiATn
+	n9IH2Jowv6i+zzwO12SZ4g64NoNGX3VkY8QZdxLjqokA+SPe5DIRkYA93kJ4rQCJFlgAEmHe5lK
+	rYfntTscUctoPtXuhjYTmPcASPjUIqNBHPbIgdTb57X+EobhsoFawD2lNYwlUC9LkqmwwqYoqiE
+	sql2MKydMoz2ndfCvgF0gJYId41jo73PvOZUazB2tKb1REAUvEB4OjgLNCgpxYZavinIZvQVjlN
+	EbjoVb4n1JR/lV1sb3sVwuuXVZkNlEIoqBlI7znoYQ==
+X-Received: by 2002:ac8:6544:0:b0:52f:4a75:f840 with SMTP id
+ d75a77b69052e-530a3b5e4d4mr956091cf.9.1788885406535; Tue, 08 Sep 2026
+ 09:36:46 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <5954fbc2-08c2-4509-8703-ab20d57be309@oss.qualcomm.com>
-X-Authority-Analysis: v=2.4 cv=TqLWQjXh c=1 sm=1 tr=0 ts=6aa038cf cx=c_pps
- a=Qgeoaf8Lrialg5Z894R3/Q==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
- a=kj9zAlcOel0A:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
- a=1ApGdNfS97-kAfUPohsA:9 a=CjuIK1q_8ugA:10 a=x9snwWr2DeNwDh03kgHS:22
-X-Proofpoint-GUID: bEA4_HbmLxMJxVbIdk75lyKolbkW5HzN
-X-Proofpoint-ORIG-GUID: bEA4_HbmLxMJxVbIdk75lyKolbkW5HzN
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTA4MDE3OCBTYWx0ZWRfX+G6eOySzwx3r
- yeidWf+zpyMf7T/LfXCJESWVmrqzT1mo6nlEwv5YrjNlhGOd3sKZc5dJjfTFrx3NaOZznevLyUx
- R+uuftGuMl7vqlUEq6E0C+mV+Vu+qEY=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTA4MDE3OCBTYWx0ZWRfX74rQ2M/20Yl+
- X3Y9TXII+ay9fGivCVUic032Jp7BincknzN18IaI3ROya5DiRfkEFYaiX2QxU1IltEmJRlWFZqY
- a1FsjE+jHZAdCA9lUL1025mSUm3Yz4IPgGKtGHHyh2uEczI1RdLq1Uj5ZKbNMMO2+LqNm6nzD2q
- 7J+BIFkrjgjUuHhwEI12NV+BJlPM7vwpQIGDbBH7hEt7SmkH2DcEoC/Unka6+zwiNsViLWvSOtY
- nc9VN20nyQ9jB/c2KfZ9onGIuEJRyMV+KlhQ5Dcz/8Jxak7Uccj5XsjZCSthMjOV17RX9MlEEpu
- PkbwEjBDhuQm1zG+aJu8DgtZxyv4Kyc5iVxu4+SZg+YWpBfd4GoXDxsoH24PxjlPes5skns0D9L
- ELgUOI3fIZ8q5X7aeEu/zJF6WKL1lXLL871HuIxcpNcSwiPbkatHmWr/29tXeUZNFsyn6Xk7UR2
- JbKxxoAyV1q/AS7Qy6Q==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-08_03,2026-09-08_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 adultscore=0 bulkscore=0 lowpriorityscore=0 spamscore=0
- phishscore=0 malwarescore=0 clxscore=1015 impostorscore=0 suspectscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2609080178
+References: <20260804-iommu_contig_hint-v4-1-d7a47ed5db98@oss.qualcomm.com>
+ <CAE2F3rBQQEHsksOyE2ojQPbMd_vvFqaFMC2RzT0B6KkxMB5YgQ@mail.gmail.com>
+ <c84e61b1-785e-4a47-9082-c5111bf35fd4@oss.qualcomm.com> <CAE2F3rC80=ZpiHVtmRDU6f8g4AwV_RrJ-Zqr0Xi7zbUc0fsQog@mail.gmail.com>
+ <9c28300b-a17f-4324-b9d5-8fc800e4d794@oss.qualcomm.com> <CAE2F3rDdogf1jGsD2ekGqT7X692fFyqv=H-8iM5OTu8AdHHoJg@mail.gmail.com>
+In-Reply-To: <CAE2F3rDdogf1jGsD2ekGqT7X692fFyqv=H-8iM5OTu8AdHHoJg@mail.gmail.com>
+From: Daniel Mentz <danielmentz@google.com>
+Date: Tue, 8 Sep 2026 09:36:35 -0700
+X-Gm-Features: AcwNN1XrNENRtIESxOS2O_pA2bNb7D6VHVKhEtTbgLjPfFAgl7jg-nWJ8NnPV2M
+Message-ID: <CAE2F3rAeq_CPeaDxuh40v41v2f=68oD2TqK9DYSPKz9F74kqeg@mail.gmail.com>
+Subject: Re: [PATCH v4] iommu/io-pgtable-arm: Add support for contiguous hint bit
+To: Vijayanand Jitta <vijayanand.jitta@oss.qualcomm.com>, Jason Gunthorpe <jgg@ziepe.ca>
+Cc: Prakash Gupta <prakash.gupta@oss.qualcomm.com>, Will Deacon <will@kernel.org>, 
+	Robin Murphy <robin.murphy@arm.com>, "Joerg Roedel (AMD)" <joro@8bytes.org>, linux-arm-msm@vger.kernel.org, 
+	linux-arm-kernel@lists.infradead.org, iommu@lists.linux.dev, 
+	linux-kernel@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On Mon, Sep 07, 2026 at 01:40:52PM +0200, Konrad Dybcio wrote:
-> On 9/5/26 3:30 AM, Vishnu Saini wrote:
-> > The Lemans EVK IFP mezzanine supports LVDS display output using the
-> > Lontium LT9211C DSI-to-LVDS bridge. The bridge is connected to the
-> > DSI0 output and drives a dual-channel 1920x1080 LVDS panel in
-> > VESA-24 mapping.
-> > 
-> > Add a DTBO overlay, lemans-evk-lvds-boe,dv215fhm-r01.dtso, that wires
-> > up the LT9211C bridge on I2C1 (address 0x2d) with reset on GPIO37,
-> > a panel-lvds node for the boe,dv215fhm-r01 panel (matched against the
-> > panel-simple-lvds-dual-ports binding, which supplies the panel's size
-> > and timing internally), and an LCD display bias regulator supplied
-> > through the GPIO expander. DSI power is provided by vreg_s4a.
-> 
-> [...]
-> 
-> > --- a/arch/arm64/boot/dts/qcom/Makefile
-> > +++ b/arch/arm64/boot/dts/qcom/Makefile
-> > @@ -58,6 +58,10 @@ lemans-evk-el2-dtbs := lemans-evk.dtb lemans-el2.dtbo
-> >  dtb-$(CONFIG_ARCH_QCOM)	+= lemans-evk-el2.dtb
-> >  lemans-evk-ifp-mezzanine-dtbs	:= lemans-evk.dtb lemans-evk-ifp-mezzanine.dtbo
-> >  dtb-$(CONFIG_ARCH_QCOM)	+= lemans-evk-ifp-mezzanine.dtb
-> > +
-> > +lemans-evk-lvds-boe,dv215fhm-r01-dtbs := lemans-evk.dtb lemans-evk-ifp-mezzanine.dtbo lemans-evk-lvds-boe,dv215fhm-r01.dtbo
-> > +dtb-$(CONFIG_ARCH_QCOM)	+= lemans-evk-lvds-boe,dv215fhm-r01.dtb
-> 
-> I have very mixed feelings regarding putting a comma in the
-> filename..
+On Sun, Aug 30, 2026 at 12:43=E2=80=AFPM Daniel Mentz <danielmentz@google.c=
+om> wrote:
+> > >>>> +/*
+> > >>>> + * Install num_entries leaf entries starting at ptep (index map_i=
+dx_start
+> > >>>> + * within the current table), tagging arm_lpae_num_cont()-sized g=
+roups with
+> > >>>> + * the contiguous hint where both idx and paddr are aligned to th=
+e group
+> > >>>> + * size. Entries in a misaligned group are installed without the =
+hint.
+> > >>>> + *
+> > >>>> + * idx and paddr both advance by block_size per entry, so their a=
+lignment
+> > >>>> + * relative to the group size is invariant across a run of entrie=
+s within
+> > >>>> + * this call: once a group qualifies (or fails to), every later w=
+hole group
+> > >>>> + * does too, up to num_entries. This merges each such run into a =
+single
+> > >>>> + * arm_lpae_init_pte() call instead of one call per group.
+> > >>>> + */
+> > >>>
+> > >>> Can you provide an example for when this function installs descript=
+ors
+> > >>> where the contiguous bit is only set on a subset of them. I would
+> > >>> assume that the contiguous bit is either set for all descriptors or
+> > >>> none of them.
+> > >>>
+> > >>
+> > >> That assumption doesn't hold in general -- it's only true when the
+> > >> map request happens to start and end on a cont_size boundary. For an
+> > >> arbitrary map_pages() call it usually doesn't.
+> > >
+> > > I believe you won't see arbitrary map_pages() calls. I understand tha=
+t
+> > > these calls are exclusively coming from __iommu_map_domain_pgtbl()
+> > > which uses iommu_pgsize() to determine optimal page sizes.
+> > >
+> > >> Example, 4K granule (num_cont =3D 16, cont_size =3D 64K),
+> > >> iova =3D paddr =3D 0x1000, pgcount =3D 34:
+> > >>
+> > >>    - idx 1..15  (off !=3D 0, misaligned prefix):        installed pl=
+ain
+> > >>    - idx 16..31 (off =3D=3D 0, paddr now 64K-aligned):     installed=
+ w/ CONT
+> > >>    - idx 32..34 (off =3D=3D 0, remaining < num_cont):      installed=
+ plain
+> > >
+> > > In the example you provided, I expect that you'll receive three
+> > > separate calls from __iommu_map_domain_pgtbl:
+> > >  * idx 1..15 with pgsize 4KB
+> > >  * one call with pgsize 64KB
+> > >  * idx 32..34 with pgsize 4KB
+> > >
+> > > If I took your argument further, I could argue that we'd also have to
+> > > check if we can put down a block mapping if iova =3D paddr =3D 0x0 an=
+d
+> > > pgcount =3D 512, but we're not doing that either.
+> > >
+> > > Could you provide the input parameters to the iommu_map() call that
+> > > resulted in the parameters you provided i.e. iova =3D paddr =3D 0x100=
+0,
+> > > pgcount =3D 34:
+> > >
+> >
+> > You're right -- for the iommu_map()/__iommu_map_domain_pgtbl() path, io=
+mmu_pgsize()
+> > already splits the request at the boundaries you describe before instal=
+l_leaf() ever
+> > sees it, so install_leaf() doesn't need to handle a mixed prefix/CONT-g=
+roup/suffix
+> > chunk for that caller.
+> >
+> > That said, install_leaf() is shared by other callers that reach it thro=
+ugh
+> > ops->map_pages() directly, without going through iommu_pgsize(). pantho=
+r_vm_map_pages()
+> > (drivers/gpu/drm/panthor/panthor_mmu.c) is one -- it allocates its io_p=
+gtable_ops via
+> > alloc_io_pgtable_ops(ARM_64_LPAE_S1, ...), same as any other LPAE consu=
+mer, but does its
+> > own chunking with a local get_pgsize() that only ever returns SZ_4K or =
+SZ_2M, with no
+> > notion of the 64K/32M CONT boundaries. That can hand install_leaf() exa=
+ctly the mixed
+> > iova=3Dpaddr=3D0x1000, pgcount=3D34 shape in a single call (panfrost's =
+map loop uses the same
+> > get_pgsize() and hits the same case). So the prefix/aligned-group/suffi=
+x handling in
+> > install_leaf() is still needed for that path.
+>
+> Maybe other people can chime in here, but I feel, from an API
+> perspective, we should have only one way to make of use iopgtable. I
+> think we should just mandate that users honor the updated value for
+> pgtbl_cfg.pgsize_bitmap (and pgtbl_cfg.ias) after the
+> alloc_io_pgtable_ops() call and then choose page sizes appropriately.
+> Otherwise, we end up with two pieces of code in the kernel solving the
+> same problem. panthor_mmu won't be able to take advantage of the
+> contiguous bit until it gets updated accordingly, and that's ok.
 
-I named it similar to "talos-evk-lvds-auo,g133han01.dtb", but let know if i need to remove comma.
- 
-> 
-> > +
-> >  dtb-$(CONFIG_ARCH_QCOM)	+= mahua-crd.dtb
-> >  dtb-$(CONFIG_ARCH_QCOM)	+= milos-fairphone-fp6.dtb
-> >  dtb-$(CONFIG_ARCH_QCOM)	+= milos-nothing-asteroids.dtb
-> > diff --git a/arch/arm64/boot/dts/qcom/lemans-evk-lvds-boe,dv215fhm-r01.dtso b/arch/arm64/boot/dts/qcom/lemans-evk-lvds-boe,dv215fhm-r01.dtso
-> > new file mode 100644
-> > index 000000000000..bd3e13c46a1e
-> > --- /dev/null
-> > +++ b/arch/arm64/boot/dts/qcom/lemans-evk-lvds-boe,dv215fhm-r01.dtso
-> > @@ -0,0 +1,113 @@
-> > +// SPDX-License-Identifier: BSD-3-Clause
-> > +/*
-> > + * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
-> > + */
-> > +
-> > +/dts-v1/;
-> > +/plugin/;
-> > +
-> > +#include <dt-bindings/gpio/gpio.h>
-> > +
-> > +&{/} {
-> > +	model = "Qualcomm Technologies, Inc. Lemans EVK LVDS";
-> > +
-> > +	panel_lvds: panel-lvds {
-> 
-> nit: this label is unused
-I will remove the unused labels, in next revision.
+On this note, I want to point out that I tried something similar in
+2025 (see https://lore.kernel.org/linux-iommu/20250430231924.1481493-1-dani=
+elmentz@google.com/).
+The feedback I received from Jason at the time was:
 
-> Konrad
-> 
+"Wouldn't it be better to use the pgsize_bitmap and rely on the core
+code to indicate that a contiguous page size is being used, so it can
+trivially set the PTE bit without doing all this extra work?"
