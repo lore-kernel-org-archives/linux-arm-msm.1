@@ -1,186 +1,202 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.13])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E202C30567F
-	for <linux-arm-msm@vger.kernel.org>; Wed,  9 Sep 2026 04:58:27 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788929909; cv=none; b=p3/J+5kFJSaE3zYdAaF17voFYAPg8jcinpEqiW84NKr90dJtLoN4fZz3QvRq4jbcoVHQ+flrCSfGLt0kS71NG2uFWhviDbk58y2bRXQgBkXm6tc9FyiabmfK15RZ0cTwpewQhLzZU+WwqRz+pzJkxX1rz0kPJ8g4NRr7nlwiwRo=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788929909; c=relaxed/simple;
-	bh=5lrHC0k2zcfllWc2Fvzf1mTjEPO+aONQ1+R2c0DuGn8=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=MXLckWn7OhmC7MnvEFw2xN3sa17YQBfMMzjOXrG0jco9kTBob0nWrLP7hfjXB5XSPOSWyN0b2uIEE9oo0n2w9ayKGQKgk4aSoGARZeYBqSU22X3XqnN3yh/jCruCFV5pIjKJS/yBfeqokau3ydNrAw2eaG8P3S9n4hyP67QpE4I=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=MzR4Fa4t; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=SB1kfPL1; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 160CC1A680B;
+	Wed,  9 Sep 2026 05:04:35 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=198.175.65.13
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1788930279; cv=fail; b=dzQ4DXwZf6y03jmp8FIU+dscoCUJvCI6NUl6S4QhXZB+u+uULVnmX6nZWQYNhOrHUVCkWyy8L1oh24H22K2gEWrMIHVW3CZslJtiMOmr6YpZn7L7QQ3lMqZwc11YMj3dlE7qEmt6AUiMFL7N0lVuXK0YS5DJOOtnCAa5xJ63Cc0=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1788930279; c=relaxed/simple;
+	bh=v78tphpm5pkEKuQo8WLcEa7oRDKMIRetYrdWwmqlv/4=;
+	h=Date:From:To:CC:Subject:Message-ID:Content-Type:
+	 Content-Disposition:In-Reply-To:MIME-Version; b=jnWqb6pV+aAO7SCeybfwq0MUZctMfCSG9UL8MEuGgmEYze5HwD7F6RilZIn6u0UkYU+KBseLp1z8Ko8Z2M6jgXtkWMlHGg7OeUsUtDqKZoFzAFiZxulH2Wfi5uA3aFW21vIKRJ2iu7m7KOR2vzK7cLznvSkrjImg6vI5lvqEzjs=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=be9x2+zq; arc=fail smtp.client-ip=198.175.65.13
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="MzR4Fa4t";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="SB1kfPL1"
-Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 688MgAxj129691
-	for <linux-arm-msm@vger.kernel.org>; Wed, 9 Sep 2026 04:58:26 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	LUlpyw9W+HelyIeeXNtDQKDxjhNyFJhI6vx7P1VkvH4=; b=MzR4Fa4tvrEypJdp
-	5oeZIRoUMBphKCPDdOMZC4FblmXs+klvJnyllfroRzgHObNTr7t74xwm9cdbq+lD
-	DXCosvY58OTUnVVMhEKi/QEsdLYOTe56LwHZLTX7jrw7n8233tr+hfUQ6KxMmzf3
-	HDuWJJrBPsLJ8VUJUfYQTzxBic78Tk7q7oaOP9BVnrUOIQgY2rSdud3r9WRsN1yZ
-	PiYLiFS5WbFQEB4m571+IUK123v1BmcadMcmW3Qc4ZhVPMvvYzr/Tfkn9GgqIaCq
-	em7yPjxkCxTrZ3xH5vK84qtNGuQKIlDzlMqILsEV8Mhs4H+wRLk9n12KLN2NuwPP
-	7Z4jSQ==
-Received: from mail-pg1-f199.google.com (mail-pg1-f199.google.com [209.85.215.199])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gjntpjqkr-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 09 Sep 2026 04:58:26 +0000 (GMT)
-Received: by mail-pg1-f199.google.com with SMTP id 41be03b00d2f7-cc2229450b4so5408332a12.1
-        for <linux-arm-msm@vger.kernel.org>; Tue, 08 Sep 2026 21:58:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1788929906; x=1789534706; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=LUlpyw9W+HelyIeeXNtDQKDxjhNyFJhI6vx7P1VkvH4=;
-        b=SB1kfPL1j4nwK7UtVR3mln//J540/PONUqJTDvjxc1n4Sd++JuC9BSSI7lLFiiEDWU
-         EzU7Yuuy3+OdfSMXtv1SRWGqZDUbAFXHOq+aCEJireBFMdtntA86PLnZQWusDFMoY8r+
-         U8nCVfEQRNvy7xELSM1SesthlXD16JsY4a3taD6m3QTgTrWagSgt+1YwD9NIDgla6+gl
-         z6iOkucMHAqfZwTDyz46inXT6oikD7WyrGDgwZl+NxSKMxoWpydzgnfLwGSeOWvjz68U
-         ropDcvhIjomL7MzR9S0CNKgPzkl5tjKXl5u+sHPlAIyjZinbjcvcsCrJmPunAlK92JqN
-         eKWw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788929906; x=1789534706;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=LUlpyw9W+HelyIeeXNtDQKDxjhNyFJhI6vx7P1VkvH4=;
-        b=moD3CvB66FwvGUQp6ZuQA5ePL7Zlcmi469MvS2iWRUfCPMLjGrN9RtpDIpqnnBq4vS
-         RAtMr9TccKBqydlWIwB21K1E5wkV3nCtHha0aKTvyqSMy3A838GJj5QcyTLaT1zvYcjb
-         aPXzwkp86/321fsB8yV5/rKVfka0MqLd1KWplxENXA5h7vlVvCn6UdUb2WMPPi5NFpiX
-         IBy5YD9HIpjbG1w9+/t/tXCNCEqftQ+azOwiGdEiY5Y+XnIGr4vlIPZZeFjCPU+bwVT6
-         Mr67wVrv8wMw2A6rDokEs4bgQy8XlyqOM2hF9zasjbc0aJG66GiDWQM6DnuVdYIcFlSf
-         XJXg==
-X-Forwarded-Encrypted: i=1; AKwUvBwEI4PLXkP9ris+7LQE4ohnNVG4dmo7hKhM/kpHhmWuJTmN0bJwM2xZYGaQB6DhssEtSfDrjNU+SsCdJwqg@vger.kernel.org
-X-Gm-Message-State: AFuF++m+bcKIAgXWcG57AkfDkjlL4PbRokKjkOuMs5XejkE0PROPU8dw
-	yNGUxZmhqT5qwlzA1IE6OknHJNoiubDhi45E+qdZjDvvdYTMA55FWah5TkLIxc03Xwk9i1Nd/yq
-	PdJX8kxiPAse2NfHDnC5KNhy0YVGStcc1UAUpSy7pyqr/h3DmOuNFYYr3zwkdNtYAEOsg
-X-Gm-Gg: AYBFou0jYgC2VYNmEM7rpTw76hfQtCPLtdIJBnkri/I89A6pGhXwt3c91F9BorhiO9n
-	htkJ43jrHsgcA3nF/7GH2W9FyX0NJTeWVxA/nX9GFrWnDIAHedc3rDrJCCgve+Yk4lk+NhYw9rO
-	OfznPAtM+FVhgLoFIizhXDgck+x3TindWrn33C5KIgfXdKdzjNYrqYrdOkuScrG2empPRJJ69RB
-	mDslvK9MpKNNhYabCQ2KWls9Ow+ZkCx+/XgWF9+uV/C+0nR0zFqInPmZYlmpEJiF56WitbD8+eL
-	2Cwe+XPevSIhDjQBGLg9tu0uawtsDC4jaP0LpKpMF4mWZWOmVjtFzTGiqA+U3EB5p5ESCYTyuQa
-	nNyPBX//7YS+t+3dZW92Ko6pxxHaJT9iv0Sz3OWvg7TsPVK1lAS4AMj1LdVlBW7fCWQ7p2DKVEe
-	7wK9P3gZ5equdf
-X-Received: by 2002:a05:6a20:a108:b0:3cc:45cc:c401 with SMTP id adf61e73a8af0-3da39ff4c0amr44295609637.13.1788929905772;
-        Tue, 08 Sep 2026 21:58:25 -0700 (PDT)
-X-Received: by 2002:a05:6a20:a108:b0:3cc:45cc:c401 with SMTP id adf61e73a8af0-3da39ff4c0amr44295553637.13.1788929905334;
-        Tue, 08 Sep 2026 21:58:25 -0700 (PDT)
-Received: from [10.79.117.175] (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-334fbd5e6f6sm33551065eec.23.2026.09.08.21.58.19
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 08 Sep 2026 21:58:24 -0700 (PDT)
-Message-ID: <695a5c15-9028-4b7e-8e37-b2e08ad1fb93@oss.qualcomm.com>
-Date: Wed, 9 Sep 2026 10:28:18 +0530
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="be9x2+zq"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1788930277; x=1820466277;
+  h=date:from:to:cc:subject:message-id:in-reply-to:
+   mime-version;
+  bh=v78tphpm5pkEKuQo8WLcEa7oRDKMIRetYrdWwmqlv/4=;
+  b=be9x2+zqYbL8+R2aupoa5rGq4Q2ev8u8JR8XYzYXzuLunYDUJAYf4bb/
+   15LvN7Yve0NSRxXgZEWUGN5y2hzZHpl3Cxho46Asjt819iqhqkDZua/qf
+   qw8hUbm5VteLhMYT9NdsvidyiCoGDZmVddXgdCPUZKDSt8lGnkm1eHMIH
+   NPkRm0T9Dlirokvct38fvAXrbmcVuyF264p0DdbEdCye/iVZ4w9AFuZ6a
+   dEoG6lLGk1Q6AOmzJL3a/RaBVenJM+N+b2/vUaLPJ+Kk2FrXXNi8REHH9
+   Z00Whsk/eMQL2xIXc4oAtklWN9aPSVeoyi8VgAiqneLxzrX45mv0N+yUj
+   Q==;
+X-CSE-ConnectionGUID: i3kcAo/xSWyrWfKutdP2Jw==
+X-CSE-MsgGUID: 8hL5FCHiSBS9W6J1YZMRgg==
+X-IronPort-AV: E=McAfee;i="6800,10657,11900"; a="100503221"
+X-IronPort-AV: E=Sophos;i="6.25,270,1779174000"; 
+   d="scan'208";a="100503221"
+Received: from orviesa005.jf.intel.com ([10.64.159.145])
+  by orvoesa105.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 08 Sep 2026 22:04:36 -0700
+X-CSE-ConnectionGUID: hGXu+8VHSjWwY7RpspG/hA==
+X-CSE-MsgGUID: qzhR9BukT/WInAt/zgK/Rw==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.25,270,1779174000"; 
+   d="scan'208";a="275340896"
+Received: from fmsmsx902.amr.corp.intel.com ([10.18.126.91])
+  by orviesa005.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 08 Sep 2026 22:04:35 -0700
+Received: from FMSMSX903.amr.corp.intel.com (10.18.126.92) by
+ fmsmsx902.amr.corp.intel.com (10.18.126.91) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.2562.46; Tue, 8 Sep 2026 22:04:34 -0700
+Received: from fmsedg903.ED.cps.intel.com (10.1.192.145) by
+ FMSMSX903.amr.corp.intel.com (10.18.126.92) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.2562.46 via Frontend Transport; Tue, 8 Sep 2026 22:04:34 -0700
+Received: from SA9PR02CU001.outbound.protection.outlook.com (40.93.196.10) by
+ edgegateway.intel.com (192.55.55.83) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.2562.46; Tue, 8 Sep 2026 22:04:34 -0700
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=bBrjhRQZ1cuF5wCzUPvFTxryQATWn+lZ7Ochsauz2NT4JVLiADoJqLAIYZlM0iRgUILs4iMse1GdcmyDAKum0LmoZ9bnFFkLneclrptutIgZ0CqspeCTaFCaielHhNLAt2eCyEriIsbvn729mYvOQARHRN3uJIkv/i8/5pxQmWwMFjACyiI0HicCaOMD25qdwyUgA0TUXH6S6NigCS25pw78S3QIuLhC9OEq3/mAicdCGqpgJpiEvdxcj7gxbp9kxeCCbvyg7noXNzcTzKd/srAaGSQ0xhhbDMHcavg/ROPrX7N4REkk61fMkLIsWeqbDz1ybbSlmWJAWZIXFB/U+w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=TYdzPplgxGtroBp/y1YEc0iSspRD4rVXXEwCeQP+zYo=;
+ b=rycl3K+P99tg5aoHh7LJkj9NbFaVsaq5ad+rZfdKd7bwXSbHxogyj+aBqFB4OmuqHKlAicEbJ34RdJw+PgWXm4AhjSwX0B5/sUHNFfeuZr8/+z4uo1FVAvhVW+iofbdhrLpHZdeoHlNqNXTUOCLGlHhKvOOmo9mC4pp5ebs6a6HWAdFnZsvR5SMcFT+4Bj1LTx3urUj0FBLzI6TFdBrHDi7AL8jBQsf3oLvmfwiKLFj5nw3k8DAMdqCXY5i5SVNXtFoRHxH8A6NGC8wq1RBItXW0obN/QDI1E3uwhKLwIjXYAEyszLwrwf9AnBirBME8Ta+uQ8el6xMplh1xDpU4Vg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=intel.com; dmarc=pass action=none header.from=intel.com;
+ dkim=pass header.d=intel.com; arc=none
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=intel.com;
+Received: from PH3PPF4E874A00C.namprd11.prod.outlook.com
+ (2603:10b6:518:1::d1e) by CY8PR11MB6915.namprd11.prod.outlook.com
+ (2603:10b6:930:59::6) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.406.7; Wed, 9 Sep 2026
+ 05:04:26 +0000
+Received: from PH3PPF4E874A00C.namprd11.prod.outlook.com
+ ([fe80::1c3e:8202:fe9b:8ae]) by PH3PPF4E874A00C.namprd11.prod.outlook.com
+ ([fe80::1c3e:8202:fe9b:8ae%6]) with mapi id 15.21.0382.014; Wed, 9 Sep 2026
+ 05:04:25 +0000
+Date: Wed, 9 Sep 2026 13:04:13 +0800
+From: kernel test robot <lkp@intel.com>
+To: Harendra Gautam <harendra.gautam@oss.qualcomm.com>, Srinivas Kandagatla
+	<srini@kernel.org>
+CC: <oe-kbuild-all@lists.linux.dev>, Mark Brown <broonie@kernel.org>, "Liam
+ Girdwood" <lgirdwood@gmail.com>, Rob Herring <robh@kernel.org>, "Krzysztof
+ Kozlowski" <krzk@kernel.org>, Conor Dooley <conor+dt@kernel.org>, "Jaroslav
+ Kysela" <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>, Kuninori Morimoto
+	<kuninori.morimoto.gx@renesas.com>, <linux-sound@vger.kernel.org>,
+	<linux-arm-msm@vger.kernel.org>, <devicetree@vger.kernel.org>,
+	<linux-kernel@vger.kernel.org>, Prasad Kumpatla
+	<prasad.kumpatla@oss.qualcomm.com>, Sarath Ganapathiraju
+	<sarath.ganapathiraju@oss.qualcomm.com>, Kumar Anurag Singh
+	<kumar.singh@oss.qualcomm.com>, Mohammad Rafi Shaik
+	<mohammad.rafi.shaik@oss.qualcomm.com>
+Subject: Re: [PATCH v4] MAINTAINERS: Add Qualcomm QAIF driver entry
+Message-ID: <aqDozWDTAkUewTSA@rli9-mobl>
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <20260903072902.3870009-11-harendra.gautam@oss.qualcomm.com>
+X-ClientProxiedBy: TPYP295CA0056.TWNP295.PROD.OUTLOOK.COM (2603:1096:7d0:8::7)
+ To PH3PPF4E874A00C.namprd11.prod.outlook.com (2603:10b6:518:1::d1e)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH v2 1/2] platform: arm64: qcom-hamoa-ec: monitor Slim
- 7x legacy sensors
-To: Birk Skyum <birk.skyum@pm.me>
-Cc: sashiko-bot@kernel.org, Sibi Sankar <sibi.sankar@oss.qualcomm.com>,
-        Hans de Goede <hansg@kernel.org>,
-        =?UTF-8?Q?Ilpo_J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>,
-        Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
-        Guenter Roeck <linux@roeck-us.net>, Jonathan Corbet <corbet@lwn.net>,
-        Shuah Khan <skhan@linuxfoundation.org>,
-        Randy Dunlap
- <rdunlap@infradead.org>,
-        Daniel J Blueman <daniel@quora.org>,
-        Maya Matuszczyk <maccraft123mc@gmail.com>,
-        linux-arm-msm@vger.kernel.org, platform-driver-x86@vger.kernel.org,
-        linux-hwmon@vger.kernel.org, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-References: <20260908135801.81436-1-birk.skyum@pm.me>
- <20260908135801.81436-2-birk.skyum@pm.me>
- <20260908140849.229ED1F00A3A@smtp.kernel.org>
- <20260908143650.30134-1-birk.skyum@pm.me>
-Content-Language: en-US
-From: Anvesh Jain P <anvesh.p@oss.qualcomm.com>
-In-Reply-To: <20260908143650.30134-1-birk.skyum@pm.me>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTA5MDA1NCBTYWx0ZWRfX6rUZGbh0vmE/
- ikWmLSXLxi0aNQdgFc9d43EQp+xLMG1wcFjk3+cdsGupPzXAlgJEnmL8La8mOeR1mdkG0TeShcI
- CHKOgWEK4ihlaslBDAEWCSmYCejn4vuEvILzQuICDzoQhjpiodIYRuLEB+WunrkGz6eUWyJja17
- jLaKa2BsiMFVPoo/6mLA7PEIBMXUowCv2lX1Oo9ZTkfoylYoNlB1igREXD9NzuBsbCmLEydwtzs
- PwMpzfOLEVBFkj3NDXggJDTjtnwDzaOH3v6ZJC80nc9ZsS9mNNa0QvW1GRw7Mm+wv4DxQ65rMqm
- cUCgylYmZ+G6aYIFxLI75AaebVsH+vZqLoGI9ZM5gl0pgeq4DdGsZ7V0+3pvfQf1fVPZOsX75Gr
- txddwacQX7w8uxs8VGc9GcCaEcPb+kQ4hctXDDzlnYAiDhV1nMdv/5OSx/dtypcObkoW4Uz7fRk
- +ys0fowB31lFgjoz2vA==
-X-Authority-Analysis: v=2.4 cv=N+AZ0W9B c=1 sm=1 tr=0 ts=6aa0e772 cx=c_pps
- a=Oh5Dbbf/trHjhBongsHeRQ==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
- a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
- a=IA0wh2spAAAA:8 a=2NzAWjCmuF5XDdBpOFkA:9 a=QEXdDO2ut3YA:10
- a=_Vgx9l1VpLgwpw_dHYaR:22
-X-Proofpoint-ORIG-GUID: -Mk66EFLXHDKanVHSRllOgRKqisCS94u
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTA5MDA1NCBTYWx0ZWRfX/E1ReAIf0CVx
- GZojmAByGSEUXhABQuWRdDqHkExXR7Kra0MB+pMx7tpb7vCZxXc1RROfgUvU48B/hoEwxuj7hq/
- yrdZn5ovD+di7dQl3zADwG2DDH/FY/g=
-X-Proofpoint-GUID: -Mk66EFLXHDKanVHSRllOgRKqisCS94u
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-08_03,2026-09-08_03,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 lowpriorityscore=0 priorityscore=1501 suspectscore=0
- clxscore=1015 impostorscore=0 bulkscore=0 malwarescore=0 spamscore=0
- adultscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
- definitions=main-2609090054
+X-MS-Exchange-MessageSentRepresentingType: 1
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PH3PPF4E874A00C:EE_|CY8PR11MB6915:EE_
+X-MS-Office365-Filtering-Correlation-Id: 3840074c-b3d0-4727-9aff-08df0e2fd0e2
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|366016|376014|23010399003|7416014|6133799003|22082099003|18002099003|56012099006|10067099003|11063799006;
+X-Microsoft-Antispam-Message-Info: mxh3VD0RSNqFELaBMYOVYlpgLZBjHstm/idEvyfKHkVCv3PUkNAtaiu1w/MBlWgfwoEy0wdsMGtr8yHLx/swTDmsEaRytwirHT6gDwnzIFrn47GNt5++r++agV26jLnBTwnZ80nBalTI35MkjubqjbJWxaaOBlQjSNI7qvEjE1ZrZnS0otpvh3WejR6Q67liBCpeHh5a1A/uT16AVVrNYzn9ppuMk6vZgFtogTc2QFF+B/uHgwLqBq1LG/Nd+OWheZPPLj+lJn+IT4IloIekI/A97hK/1pb9X4PxPD3Qw8J5S4oIvVzQ3ghgMGRMqOZwHGuOBAebHxwqSv0fiU5Ec5t0RdBBieT4xrikvMEHpCNcpz/LdeeBvmvXs5EYwpltzlsI69wsJpd9dB75UJH2ntrly19eFBN5veTq9reOwMFjfAlEjpnNNE37iw9aJot8nOWmQdeAdgmdrUGy91J5Pwv2Ie5fo2KYPT8gkqTOhDZ30IsgBDCqRTMfW1HbOqSZ+c81W/v+2mYl9fg8PmacOOeLim/VNPZ3VLaFpzqH1bBZIO0IrLH0Cn5WUq4ZLEbQMgbKn32MHhxkmEDBzVLSgJkxUzX4f7VTuLYc6UbzRNVJAMM6dDYJKp55x0d5KI7s
+X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PH3PPF4E874A00C.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(366016)(376014)(23010399003)(7416014)(6133799003)(22082099003)(18002099003)(56012099006)(10067099003)(11063799006);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?ZqqUWFrzG4zzHdpA5CuKuedn2K1iarSFx3LABCMTS7JG2c9gVhmMCjmA98YH?=
+ =?us-ascii?Q?aTVByReFgWMKKBOa1yufGbuGVCVePLpQrSAxGy4KnknxYMXgpvqu0fzA580g?=
+ =?us-ascii?Q?SkzyHpGPxHNwJLSr9SGtR5DMv6Nq4dyzhQ+iai3kAXQFXsPUCWgGnwYoPCXi?=
+ =?us-ascii?Q?SudCfmCfNRfXA2ZnGlBZQ+zVN/a3xFQF1I1xs78eL8QBnW9LRzNL9h/pq2om?=
+ =?us-ascii?Q?+P/yq9OOAGo2xCgSw7LP8ChcKGEgW/OV4tjspfvwHHOoMXy2KuHs3tdzgD01?=
+ =?us-ascii?Q?TsClNoBYg/QcTJHuUBWEH2Rp4jQCZv0Cyp038RKjkr1BkEPsbGUTb314212z?=
+ =?us-ascii?Q?Ss6/AcFze7g5c3jShukp4fagYJcyWGCAzMK86yU08b1QA2fAoohSLqDA9WDz?=
+ =?us-ascii?Q?YCzfxVUcKQOHsUcoZwKM1kx2VWAQl3+axwhu4HVutgVwbcyIkvZLGCcAwF8j?=
+ =?us-ascii?Q?G8Hc9eIAh89NDqf7hc9NpTswtNdnACN1BZH9n0A6oqeJffIYNQvj1bHezxX2?=
+ =?us-ascii?Q?qRVLLvWYcKqd5J+SwHrFFEmTkGdP9VZcWxYZIH5Amosd7w6vSm/YLV2nNsoX?=
+ =?us-ascii?Q?3GEmPAWcQHUckWvig97CzNg2hH/6OGBGW7IEAUawvhN89EqnPQS1wo8X7Yud?=
+ =?us-ascii?Q?XGnjFEFVPPDRDSNp3vLac0IRPhyMAe+qOaP+2nW185B7EOUmPi4ijetsWggV?=
+ =?us-ascii?Q?0rgb4d+g+V7eoh4maZnWdp9Oam99XXI3B3HpT8JEzf/G9zKgGaPVHQkORl6C?=
+ =?us-ascii?Q?iIzX5JJBuK1iPQbCYGtAanWrASDfScl3eO7nCWmLA7txeRtswzjf8dOtAH7d?=
+ =?us-ascii?Q?oqA1D6aAkvn5y6fP94yFCIr8/o9iPlEX91dVuAttCSGLkt4cwxPBYVZLFfdm?=
+ =?us-ascii?Q?r0QXQRfqe89Ildl3HZ2IXYPhGqmDhquWIqhJuLtMepgHp9sk3mDDkyoeg2Jy?=
+ =?us-ascii?Q?YK649p98mfOY9zupoyMuj+wyjY3XpnEXRI/+TMnuFCvHAHIiYNApMRocDSIU?=
+ =?us-ascii?Q?u5Op81HKQMlVdRV7mxR51zzzJV5wGVfl9OhLRo0lfe7BfigRu+Vql/UeQKPU?=
+ =?us-ascii?Q?oa1KF3Mw/FnjzBLsbbI7tJ4KQYLaRC1HwYzsjXcYz9GgT4RxA0wuSjLrPGWz?=
+ =?us-ascii?Q?BuyNvYhRdXFaEIV3tZC9IBlH140KL1lgNRfgCZqVi05EUm7xOLuUuoqn3M98?=
+ =?us-ascii?Q?Pidlx4aVhnsSB5lQyaGh0+RNmLw+4CohCHIFhuFwAR6SoppkCEQAkQZIJFSx?=
+ =?us-ascii?Q?CVRZRB5VCcaqjGH7jmoMisofrG6DXKdtX1rchXBPYElEDN/6xXNeiOzIn3BI?=
+ =?us-ascii?Q?KMW0QBTE2Tl5J219HhPw0CenZBx72HiDHy6TgjpOdS1fv4bzIJ0WUEJPky+S?=
+ =?us-ascii?Q?vqo7M8juttRrgcumz8IYl7Hz8+JWfdpFblgwSEBdoFgV2r+v/VmN51kh8jbQ?=
+ =?us-ascii?Q?64K6XC5gIB19eb07bGIVh/VUQyfEisF8DvzUliSaXE5hnaVNBdzY9/0dVHHk?=
+ =?us-ascii?Q?cGvUV/zhRs02cRQam9ghk5KGvF7QeZFPW7sE9wyOiQJGhp50gBazgGp0j3zX?=
+ =?us-ascii?Q?igLplUD5tL0xl8f9dkE/RP/7/0DRZeXgkY3CwKEg/sBuNBJ0orL04vfulfaA?=
+ =?us-ascii?Q?exffvLTfMEblyoTJVLL4TYTzQuhoN5hcjruSTI3RGysKOVReF1OGXK/H2ag1?=
+ =?us-ascii?Q?2vOlhuBACluLfXh7PiGd0XErD47DGi90HmnNzr2NfBrK1nU7gFvUw/OV4ZC/?=
+ =?us-ascii?Q?gyE1HtpzjQ=3D=3D?=
+X-Exchange-RoutingPolicyChecked: aNZT+C7GL+NtmzelGVHkjAdXNtkyKMYNFIZlRsB1mqUC/Yg/RZvYv9wXB3D9mhG97LgizmCwa14DdJZXVQb4931VG3OH0q5U9SEgcw/Au1/4mjk34vbOWkc+tQdnjvrSv5CN5iWAdRreN/4cmP4Fg/FbkLJiqdBG0lLEwQIOVsObnEEesEf1qu9qldm6LBEm6g8XttR9bnD3erfB4a1cWsM3DUZqBbE4KW2HH8NnLYZoR6SANkGrDUIqH0L+a943ollMWA8VLwiDNHvzewzJgmXG3GvVC1pOzE6l3H21lZhtdVSusqQ6TivNbdast1cVo4m9yhFGoa8hR55CX9oTPA==
+X-MS-Exchange-CrossTenant-Network-Message-Id: 3840074c-b3d0-4727-9aff-08df0e2fd0e2
+X-MS-Exchange-CrossTenant-AuthSource: PH3PPF4E874A00C.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Sep 2026 05:04:25.0124
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 46c98d88-e344-4ed4-8496-4ed7712e255d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 13ORbTySPhz5czEkkbe5SkRzh4vVCWI8hEh9AqE22YdgOwf2B9/EsFTCX3lGkAKPigoV5xlqzbTWUClb0OWGog==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY8PR11MB6915
+X-OriginatorOrg: intel.com
 
+Hi Harendra,
 
+kernel test robot noticed the following build warnings:
 
-On 9/8/2026 8:06 PM, Birk Skyum wrote:
-> Hi Anvesh,
-> 
-> Sashiko flagged the pre-existing SCI cleanup gap on the reference-board
-> probe path. I reproduced it in KUnit with simulated I2C and IRQ devices:
-> when the thermal-capability read fails, SCI remains enabled after the
-> driver core releases the interrupt.
-> 
-> I noticed you already proposed the devm_add_action_or_reset() conversion
-> and agreed to split it out after Konrad's review:
-> https://lkml.iu.edu/hypermail/linux/kernel/2607.3/10628.html
-> 
-> With that conversion applied locally, the failure-path and removal tests
-> pass. Is there a standalone version available to test? Happy to share the
-> reproducer if useful. I'll keep this separate from the Yoga sensor RFC.
-> 
-> For the other v2 findings, I've queued the named I2C initializers for the
-> next revision. Guenter left the driver split to me, and v2 already moved
-> the documentation out of Documentation/hwmon as requested.
-> 
-> Thanks,
-> Birk
+[auto build test WARNING on linus/master]
+[also build test WARNING on v7.3-rc2 next-20260908]
+[If your patch is applied to the wrong git tree, kindly drop us a note.
+And when submitting patch, we suggest to use '--base' as documented in
+https://git-scm.com/docs/git-format-patch#_base_tree_information]
 
-Hi Birk,
+url:    https://github.com/intel-lab-lkp/linux/commits/Harendra-Gautam/MAINTAINERS-Add-Qualcomm-QAIF-driver-entry/20260903-125901
+base:   linus/master
+patch link:    https://lore.kernel.org/r/20260903072902.3870009-11-harendra.gautam%40oss.qualcomm.com
+patch subject: [PATCH v4] MAINTAINERS: Add Qualcomm QAIF driver entry
+:::::: branch date: 6 days ago
+:::::: commit date: 6 days ago
+compiler: clang version 22.1.8 (https://github.com/llvm/llvm-project ca7933e47d3a3451d81e72ac174dcb5aa28b59d1)
+docutils: docutils (Docutils 0.21.2, Python 3.13.5, on linux)
+reproduce: (https://download.01.org/0day-ci/archive/20260909/202609090624.axJcwPv7-lkp@intel.com/reproduce)
 
-Yes, we already have that fix, SCI disable is now registered as a devm
-action right after it's enabled in probe, so it unwinds on any probe
-failure, not just on remove(). Same for the i2c_device_id
-named-initializer thing bot flagged.
+If you fix the issue in a separate patch/commit (i.e. not just a new version of
+the same patch/commit), kindly add following tags
+| Reported-by: kernel test robot <lkp@intel.com>
+| Closes: https://lore.kernel.org/r/202609090624.axJcwPv7-lkp@intel.com/
 
-I'm working on v2 right now. Once I get consensus on all the review
-comments, I'll post it with these fixes included very soon, once it's
-out so you can test against your reproducer.
+All warnings (new ones prefixed by >>):
 
--- 
-Best Regards,
-Anvesh
+   Warning: Documentation/translations/zh_CN/how-to.rst references a file that doesn't exist: Documentation/translations/zh_CN/xxx.rst
+   Warning: Documentation/translations/zh_CN/networking/xfrm_proc.rst references a file that doesn't exist: Documentation/networking/xfrm_proc.rst
+   Warning: Documentation/translations/zh_CN/scsi/scsi_mid_low_api.rst references a file that doesn't exist: Documentation/Configure.help
+   Warning: MAINTAINERS references a file that doesn't exist: Documentation/ABI/testing/sysfs-platform-ayaneo
+   Warning: MAINTAINERS references a file that doesn't exist: Documentation/devicetree/bindings/display/bridge/megachips-stdpxxxx-ge-b850v3-fw.txt
+>> Warning: MAINTAINERS references a file that doesn't exist: Documentation/devicetree/bindings/sound/qcom,shikra-qaif-cpu.yaml
+   Warning: arch/arm/xen/enlighten.c references a file that doesn't exist: Documentation/devicetree/bindings/arm/xen.txt
+   Warning: arch/powerpc/sysdev/mpic.c references a file that doesn't exist: Documentation/devicetree/bindings/powerpc/fsl/mpic.txt
+   Warning: drivers/net/ethernet/smsc/Kconfig references a file that doesn't exist: file:Documentation/networking/device_drivers/ethernet/smsc/smc9.rst
+   Warning: rust/kernel/sync/atomic/ordering.rs references a file that doesn't exist: srctree/tools/memory-model/Documentation/explanation.txt
+   Warning: tools/docs/documentation-file-ref-check references a file that doesn't exist: Documentation/virtual/lguest/lguest.c
+
+--
+0-DAY CI Kernel Test Service
+https://github.com/intel/lkp-tests/wiki
 
