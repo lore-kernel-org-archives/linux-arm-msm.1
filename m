@@ -1,85 +1,88 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AB38C4A3D54
-	for <linux-arm-msm@vger.kernel.org>; Wed,  9 Sep 2026 11:48:36 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E3098538D91
+	for <linux-arm-msm@vger.kernel.org>; Wed,  9 Sep 2026 11:48:42 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788954518; cv=none; b=S18+6Ja9wXP5GcpEtYyk8uci9j5A8hgAI0IS9SXjm/gpVYe3kFMV2q0Gy0+H0+O/5DDmmtO4UFiAWLZHOVOttTuxaukPzvqTZz23ReU9sBi5lLIFeAo0r3U2cn7Rtd5UNxfIojaOJOewtS9QLfABjW0Yt8sbC9iCxCItJnWLZjc=
+	t=1788954524; cv=none; b=QKgfzRC0jHiRBCrOaQy09gj3MApF123cr3MRtQ0JA1X1ivk53783xgOaWcFaxkLGnn9HMcFgeY3LZsgiISgqPlMI7RGvOU4QJV6xY1IXEi8OoBXPn37rrY005Np20eKpl0GszE7ZBw84E1NEyOCy7RFLqaQHjPx3SR4lycFo+xQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788954518; c=relaxed/simple;
-	bh=QOH9VKcTjY4fR2PU9QKFwEi3IrUNdtI6tTSaKUmMsSE=;
-	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=LsioAwIrqKXJLIBOxOaHJ+GVxjblBGWHHPNI0w25naHzRP1HgFj0Dht8Bbm1H71V8vZaalBvWmQVluNEsfCqNI7QLGHFP4w34WMGZGtnBr27g5x34nynUiMUdmzOt3zNvOTdUoBtJO6WiEQWqeOPgsZdXqTa/DthdObvr7kMhpI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=c28PXU+9; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=Zp2mu7zt; arc=none smtp.client-ip=205.220.168.131
+	s=arc-20240116; t=1788954524; c=relaxed/simple;
+	bh=tq6kqbkpCdidmkaLsFLYxnNBeo6MYS4dPofmRONO/Ts=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
+	 In-Reply-To:To:Cc; b=hE2FXFr9HnYQdov/U14hV8VvzH/7kFW3Jl26fDxL9lMRCAoEEk1HeNBbCXTJp5Onz0LB1DxhonGfQ41q7l0h+gWQP+SFPMiekIQILwVz8nfDVUphsKewtmtZ7eIJP+She1s7tJmiURCngSKDlkSHF+DjFSWiqbRUKdh4ofO9OoA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=StMl/WT0; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=LXoh7utX; arc=none smtp.client-ip=205.220.180.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="c28PXU+9";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Zp2mu7zt"
-Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 689BU9qs2959505
-	for <linux-arm-msm@vger.kernel.org>; Wed, 9 Sep 2026 11:48:35 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="StMl/WT0";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="LXoh7utX"
+Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 689BU19u1810006
+	for <linux-arm-msm@vger.kernel.org>; Wed, 9 Sep 2026 11:48:41 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:message-id
-	:mime-version:subject:to; s=qcppdkim1; bh=Mquv4bvtnPno64YDX0x59O
-	34H98rzwKzFq0G//K2ahY=; b=c28PXU+9BHslQ80MzI50lJD6r16ZlkoABtsPeC
-	7btrNYS4ihawUS2vMZpNXjg3CYrrICdbyFt5n2dAt2LIoE/3gy+cdFcCPcGrkbEF
-	RNV6qMILYQI2Bk9OUD90SS2uXDMzOBo/5oUxikt+0jLv3Kgji+O+u7bxxvTjk6ZI
-	vjis3Uotyvfk3lsUtpe4hdFwVhdEsPFpsjB4iR8fgXTAunPNMTCRLOwsx+WHm5Sn
-	qxVSLp9C/h6KA/HzhzsBrANuzAHPner+eEfEy40cZSuc7QvbBplLnjI7xIgZt3A3
-	utMAYcmXJxKrsuSOSBr4Ej+zFDn7aZTRQPFyK+g/zuU4H/lA==
-Received: from mail-pj1-f72.google.com (mail-pj1-f72.google.com [209.85.216.72])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gjqdw3wqw-1
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	vMa7ORjXWjlP9/Hfh2XD0CxuSOOnt4VZkP/bquOsk34=; b=StMl/WT0SP7m9Vt0
+	g0oHBvfGc2OPKhiufcJzhuycLZtBPePW5be43RN8BbrTeLJwJMxRmS8tWaHR0X2x
+	AyNc8/jXjDBp/2HtYJzhEDMcNzjwcd+8pSxFI1qOUyDJh8OaLF/jeGjMhg0Fv1is
+	ny0LwInW54rHM1tCGRnyOjtPakLw5Bxo7ovgTQC9FpfKnN7srwpEr2M5UWNqYzip
+	L0GRrjfadbcH5dR/dKjuk9qcd2lC6vkGwrnb+jGUz+m3pgkzHENje4FCnAjTagCl
+	hK/jg18VOwAk6fQTB3dJCUcJdveMRkL+q5jK1RmWE3BsjAm6/FRHSA1GJNgf5rVg
+	xqBiFw==
+Received: from mail-pl1-f197.google.com (mail-pl1-f197.google.com [209.85.214.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gk4xj0fsv-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 09 Sep 2026 11:48:35 +0000 (GMT)
-Received: by mail-pj1-f72.google.com with SMTP id 98e67ed59e1d1-38e7ff7b375so7309516a91.1
-        for <linux-arm-msm@vger.kernel.org>; Wed, 09 Sep 2026 04:48:35 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Wed, 09 Sep 2026 11:48:41 +0000 (GMT)
+Received: by mail-pl1-f197.google.com with SMTP id d9443c01a7336-2dc7337e2a7so12887895ad.0
+        for <linux-arm-msm@vger.kernel.org>; Wed, 09 Sep 2026 04:48:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1788954514; x=1789559314; darn=vger.kernel.org;
-        h=cc:to:content-transfer-encoding:content-type:mime-version
-         :message-id:date:subject:from:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=Mquv4bvtnPno64YDX0x59O34H98rzwKzFq0G//K2ahY=;
-        b=Zp2mu7ztCeBQp9X2oP5KsU8kn0n5DXpjtkqcbuXNBzmh6ePrrZ/Lb/JG7xtPHPXjlE
-         rrbSauVhr/Huav0vhZ2jSL+SbDMWtr6eoCkM2WLHz+M7T2ms9JBLwzMewnjB1yHkUQEv
-         OSJvycC+CKyJYi7ScutujS0aIPac/ukuLl2WeOQdxnfwQv7O5pkMM2Hzbec6t5VfalU+
-         q8iGRHmldsWYQA6UVNNAPp9x0JBGj/DKbl0Dl/BaN/XYEXYWgOpgV/on39YryWN191wv
-         NQlRd2TIZ2afOHn0WOBteS3BGy7j17rkxjQzCBSNUoxVbP/8SZ2VNddxQHJHV+j0pXNe
-         Pzaw==
+        d=oss.qualcomm.com; s=google; t=1788954521; x=1789559321; darn=vger.kernel.org;
+        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=vMa7ORjXWjlP9/Hfh2XD0CxuSOOnt4VZkP/bquOsk34=;
+        b=LXoh7utXWS8Y9SWZekf+/HP4AhgSImD4U09IibFJJ+LdNwTjJ/ovF5IyyZTq7QrEer
+         Xw5J1biq0ivnaa319qzez24SCIc0M42Gr/loRC2oZVQXBlZomNuXUVF/3oRg79R3spuH
+         HFK/xxu8IAXo6xoehjwX7nd1Id0W+w7sMNgCQMK/sbY8pwPkeGlQ8uYRcfkT/HCKolzb
+         UXTbsasVDQdqruidNfcdo9c39hu7woME7FQdTAdWwnFdf41CAn72iuJl9ekT6VXHYDcd
+         G6MhscCzmO0fu5Lk8ylNZSXEv4u3IlXPVmn2Q42+NiNeiN3GzD8PBlDuLVlQRZeAFV1e
+         mfFw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788954514; x=1789559314;
-        h=cc:to:content-transfer-encoding:content-type:mime-version
-         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=Mquv4bvtnPno64YDX0x59O34H98rzwKzFq0G//K2ahY=;
-        b=nqWLg1rZwBDaZyRL6FbGy2jAKCjWKKzhuWpj9Vg6y5oFvlE+3CQYkq5PaKlshjmJy8
-         afSqnNmt3Zx37Y1JtZM2+D7fBVgddkzqOEQV/Xk5J5CkukJ4V3dNo09H6VOgZfgdLyHn
-         LkeyeIz/JrS7Hz+RuLtZNx4YpWZbT8y+wtaAhV0DocVYHjlqMwfUoOzjP0b982lOAsvX
-         rSthZh7ur+3w17Mq+jDOT93NnQnc/L92Dhf3abdRXPgjHd1v3B/SXy/bRPBPjngpQpAL
-         ShJpX3HhULXRjYS0pH1Nksq+ISs8awu6vaSmItb1XaqM+UX/6SEqLIOjDlP9qmJGEt8Y
-         oMxw==
-X-Forwarded-Encrypted: i=1; AKwUvBxdJgIIGaM4Na+CQ6bnyx5yfRizezPV/8SFODeGggp/pFisfr7MU/3uz+9+82g4MKZ94B0b3N11rwlriT5A@vger.kernel.org
-X-Gm-Message-State: AFuF++nBbLeeVMF5vJKDssbY2RYxVrgdCzaot7/En3RV4QDcdz7rb7Ld
-	t+b9lPVtc9B/Ob/so89CTSWk7yE10KGlV7VQHHyhM2pO9E/wRRJ3WdtVfEi/w9Qt3/ajyuAv/Sb
-	T1Kb6HRv5T2Q0GUZqI8Za1DPgp9gl/BhIgEPzDieEHsVX+Dx9Kw5YhNotcqRX71X4OXoa
-X-Gm-Gg: AYBFou35EaMAmLyY4pZLDdd6AzGW8AGIh9EJ4ZE6y+auVPknxO3MWYzxmzEeMjUKRgt
-	ktus7smDlBzbsi+1gI2eZYcOm3eZ+PS4x0xo73ddfjeUS6rMlcyhHByWNmOKrbVPZlPdsZik9EY
-	8J638dhaaDXivBM5zZ2bzagPyntIFyN5SOzMQ/4fup18Pa7nZHCvBaMoEPZ8bWodwaZDT8s55FR
-	DoX9lFkaGf12wC+WHFfROSPTixjJm9NJTUqaFG7mKu7wtV8n06sUu6WzpcBRfcJ+CCCwCoxDmv+
-	IYwbRF380UGs7T5dKjO+FBt6oCeNjgGr996TABrXLrNrICKQGapfO7t4I5E9nupLWw91N4wRofm
-	pYiqOGW8Rc8BNqUDoy9CgmnoKqgZ9evbIM8Y=
-X-Received: by 2002:a17:90b:2d07:b0:398:ceed:6d44 with SMTP id 98e67ed59e1d1-39b262abd26mr51142942a91.25.1788954514281;
-        Wed, 09 Sep 2026 04:48:34 -0700 (PDT)
-X-Received: by 2002:a17:90b:2d07:b0:398:ceed:6d44 with SMTP id 98e67ed59e1d1-39b262abd26mr51142876a91.25.1788954513683;
-        Wed, 09 Sep 2026 04:48:33 -0700 (PDT)
+        d=1e100.net; s=20251104; t=1788954521; x=1789559321;
+        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+         :content-type:mime-version:subject:date:from:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=vMa7ORjXWjlP9/Hfh2XD0CxuSOOnt4VZkP/bquOsk34=;
+        b=Q0qQ29cT/K6K8aMgwmZvoamDNtrj597KyTm2WHSTMk2xrYXqww/PGdMeTbrNlEUJYa
+         nD9zZrnJxrjFZqPr0+8/zl0+y9h8c2SgjLcKNKCvoRtIxUOsDLq7KCe17b9saNwtergn
+         MezqNSSXxDcIh+VvI75qjKtrkuORBU9xY+UCB3I4cnSHOynW+eubm6iQx74Tv+4kNUG4
+         2vBEVi6N5tEbr853PkZBGKDYrtI2V4qSuyE7EftAqkme2P4bKuddReZuR/nXJx8oeJKz
+         mFgfLcMWO60HF3d+Af4NS60kQOYlOmQLvAgelM50+oHBZ67Nv57xT95/fYGGiCD4JXeF
+         MN1w==
+X-Forwarded-Encrypted: i=1; AKwUvBxXVz9o1Su+FvAWuUuYRz56YtyskTl1z0Si/TXInIcGwER/8/wF6FJzajUu/Fsv5u4cdmO7gDDvkCUWWFuB@vger.kernel.org
+X-Gm-Message-State: AFuF++nrf/PC6YmsW270sTqJzL9VQEgjtutFUz+dPHiMOGgUxQat8FTg
+	oH4mH6WviZVWXB4sfoZ0fZ7zMvN/yns+4o2aXNoKRPVnzDbxhJiSoWshzBPZFFteJ1DJh8SIezv
+	kKXxbO0l2nz/J7vmhwaEA1A6Y1k/9LeDaaRHFEZ0k+1iZ5T1ifX89dMSCoMJCnMZQViBU
+X-Gm-Gg: AYBFou31GaX95U3sqQXeMVRpvzq85T60ncEnqtxcOmCbpiMQTCi2d6utIlfkcU2miBX
+	yrD0pLsCAQVAuKz7yZWe0go3HfUqaxQix8XUJKJD5+UiOnJbvVjFWBLd8SnvPJA0Dr1HbGH7rUp
+	wIu3/8Hv4xg3XujgtVSdSpRBOr4bCYpsNW52fNOzEH+y2/4hDQLyXUGZ0C9JwSNEkvWvOAdQv1j
+	rJ60/N5GkNhFB11hb59wUNkrujpE2QKxMygLPvDcVWOdFdxJH7AQXmGGxsKWmd9DtnSK8fEy2Zx
+	WjNgAa7EwbbMZBeFDU8vbSbDaJNcgqCIoDlXBh7aqZMmUexJqtCMcazEnJrjRQngIjrtZ7l7JwU
+	Lii1RJpdd/A6jReCiETjZlMXtnQ5ewxZ557g=
+X-Received: by 2002:a17:903:2383:b0:2d8:d4ce:9f35 with SMTP id d9443c01a7336-2db12757af4mr475006365ad.19.1788954520233;
+        Wed, 09 Sep 2026 04:48:40 -0700 (PDT)
+X-Received: by 2002:a17:903:2383:b0:2d8:d4ce:9f35 with SMTP id d9443c01a7336-2db12757af4mr475005575ad.19.1788954519698;
+        Wed, 09 Sep 2026 04:48:39 -0700 (PDT)
 Received: from hu-krichai-hyd.qualcomm.com ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3339b608409sm50156857eec.21.2026.09.09.04.48.27
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3339b608409sm50156857eec.21.2026.09.09.04.48.34
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 09 Sep 2026 04:48:33 -0700 (PDT)
+        Wed, 09 Sep 2026 04:48:39 -0700 (PDT)
 From: Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>
-Subject: [PATCH v3 0/5] Add PCIe support for Qualcomm Nord platform
-Date: Wed, 09 Sep 2026 17:18:15 +0530
-Message-Id: <20260909-nord-v3-0-b0a82721c547@oss.qualcomm.com>
+Date: Wed, 09 Sep 2026 17:18:16 +0530
+Subject: [PATCH v3 1/5] dt-bindings: phy: qcom: add Nord QMP PCIe PHY
+ binding
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -88,11 +91,9 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-X-B4-Tracking: v=1; b=H4sIAH9HoWoC/22OSw6CMBRFt0I6tqQt0I8j92EcUNpKjVJtgWgIe
- 7cFBiQ6eclN7jn3TSBob3UAx2wCXo82WNfFUBwy0LR1d9XQqpgBQYQijhHsnFewpJgjYbCqag1
- i9em1se9Fc76sOQzypps+sanR2tA7/1l2Rpx6m5KUq3LEEEFBhSwYk4gVxcmFkL+G+t64xyOPJ
- 2k2ptoxrEHEEMkZrepfJn0zkv0e31gSWcylqYTCQlHzh53n+QsrnqtZIQEAAA==
-X-Change-ID: 20260810-nord-461809f1d5ae
+Message-Id: <20260909-nord-v3-1-b0a82721c547@oss.qualcomm.com>
+References: <20260909-nord-v3-0-b0a82721c547@oss.qualcomm.com>
+In-Reply-To: <20260909-nord-v3-0-b0a82721c547@oss.qualcomm.com>
 To: Vinod Koul <vkoul@kernel.org>, Neil Armstrong <neil.armstrong@linaro.org>,
         Rob Herring <robh@kernel.org>,
         Krzysztof Kozlowski <krzk+dt@kernel.org>,
@@ -107,132 +108,340 @@ To: Vinod Koul <vkoul@kernel.org>, Neil Armstrong <neil.armstrong@linaro.org>,
 Cc: Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>,
         linux-arm-msm@vger.kernel.org, linux-phy@lists.infradead.org,
         devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-pci@vger.kernel.org, shengchao.guo@oss.qualcomm.com,
-        Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>,
-        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
-        Qiang Yu <qiang.yu@oss.qualcomm.com>
+        linux-pci@vger.kernel.org, shengchao.guo@oss.qualcomm.com
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1788954507; l=4014;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1788954507; l=10022;
  i=krishna.chundru@oss.qualcomm.com; s=20230907; h=from:subject:message-id;
- bh=QOH9VKcTjY4fR2PU9QKFwEi3IrUNdtI6tTSaKUmMsSE=;
- b=auKGTwrVv5IN7itNtVlGJ1e8h5srMRxNRaR4A0lEnaQrxsFjIB3M/XkPmP3CFE1mOItWGseV9
- LouQTPgNx61AkZAiSmXHVZ/ulkKoCvm/xdTjk0yknOiZrgOO3xhEO+K
+ bh=tq6kqbkpCdidmkaLsFLYxnNBeo6MYS4dPofmRONO/Ts=;
+ b=2tJ5vO1vJxKToeNA+nvNwqheAVYptY9/Vf/RWam4ZGj7rfgn8a5Rc/TaQRjr4FKNataPcoI3z
+ liZIzRsQzQ6Dxruettah3BSIkiKGkKaO8wJ+f4XskH754CU83dSPY66
 X-Developer-Key: i=krishna.chundru@oss.qualcomm.com; a=ed25519;
  pk=10CL2pdAKFyzyOHbfSWHCD0X0my7CXxj8gJScmn1FAg=
-X-Proofpoint-ORIG-GUID: XEwJ2Md_o_5QHoZnEj_Sh700wlnD0JUu
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTA5MDEzMSBTYWx0ZWRfX2MyTohZf0NCE
- 0fSFOM4keOqel622o147OCwXur2oMNUVG602Bsx9xyZI3k0NTe/1UnCQUYo3Vd1JpfnTvVuOza4
- /irWF4LD1UJXSYVgCfEeM7c+ZRgI/Dg=
-X-Proofpoint-GUID: XEwJ2Md_o_5QHoZnEj_Sh700wlnD0JUu
-X-Authority-Analysis: v=2.4 cv=Bo2tB4X5 c=1 sm=1 tr=0 ts=6aa14793 cx=c_pps
- a=RP+M6JBNLl+fLTcSJhASfg==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTA5MDEzMSBTYWx0ZWRfX3sFDTPY2TK9K
+ Cp7dVSXYD/84wDEJdDTGlEbUHi9BAeoKf1dEfs9PL3DKvxKrqMhLuH45yUkZ+Tjv6XyG/WR+vKu
+ /Rni3TPygJuEwd/nLFElqdUwKXXObyU=
+X-Authority-Analysis: v=2.4 cv=J52aKgnS c=1 sm=1 tr=0 ts=6aa14799 cx=c_pps
+ a=cmESyDAEBpBGqyK7t0alAg==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
  a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22
- a=bC-a23v3AAAA:8 a=EUspDBNiAAAA:8 a=VwQbUJbxAAAA:8 a=KKAkSRfTAAAA:8
- a=1XWaLZrsAAAA:8 a=P-IC7800AAAA:8 a=JfrnYn6hAAAA:8 a=_HC7VgZuvUK4spJUPywA:9
- a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10 a=iS9zxrgQBfv6-_F4QbHw:22
- a=FO4_E8m0qiDe52t0p3_H:22 a=cvBusfyB2V15izCimMoJ:22 a=d3PnA9EDa4IxuAV0gXij:22
- a=1CNFftbPRP8L7MoqJWF3:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTA5MDEzMSBTYWx0ZWRfX9+oKyOX97krq
- BROrEAC8O1N8KtsnExIYOJuq6CQ7fuR3yBqm5YuJgZtEIz15jHifmgXMuexjBzTYE7F9m03kk1j
- jh4qqieZQZlgznVrEiOcCDJ3/nXqJoFyGOp6UKNNOE42iG8mprBjiTmz8dfnKHbViVkQpveg/Kr
- ll6MEwuJvqej5wUBLwvPNT2S8Sj+24h88FQX1GteggRTmvl8X31ad7FvRAlbVwqPLdC7dk3L5Hv
- RzRtPCL+zAhu0o27L2FeyUXYz5dr5JioQZf8cjSyiCNqWgTSSlcDCU3snstQdP0WHs99oFwciaE
- SX+oXXRw47qiRfHdd2niNZUloytMCHzonqYCkLaHXswlZ0Jc6MriTjzJRrs3Vp2Vj4bm6iKUSsO
- xj5CWVJr9DODDLXFEGjHNVyWLk4165u4KWN3AS9wm+gjaL3JzMlFTCtCX2eF0YDJDKOZMneJtvF
- tHmL8DBw4YnMVFxJKGw==
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
+ a=gEfo2CItAAAA:8 a=EUspDBNiAAAA:8 a=m1JAq1APDOtiVc4_LWMA:9 a=3ZKOabzyN94A:10
+ a=QEXdDO2ut3YA:10 a=1OuFwYUASf3TG4hYMiVC:22 a=sptkURWiP4Gy88Gu7hUp:22
+X-Proofpoint-ORIG-GUID: yvwUCWI3NnSL_S7gM7z6roaH4bU5eK03
+X-Proofpoint-GUID: yvwUCWI3NnSL_S7gM7z6roaH4bU5eK03
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTA5MDEzMSBTYWx0ZWRfX7IJsoC3B0scI
+ VQUWwopeCw2R2bPYQLtGhApycQUg5RG2QJK6qYqr6K0CumtEAyx7YCYf+HEe/4v2S/57JQ8aEfx
+ COhyC969KSrwxMNIaYq1GZNrUJRI3pbq8EIYiLwJqC1IluHdZ2tfX/vlo1avV3HAADpDmf70y03
+ GFRnm+yjDciXD6xecYgZXesQZJoAjoAeqtziEt58y7ic5Q42lJWda/N2FyvHvccucsv/HnOEu3g
+ w3N4NIHRxUZjTcrrghJlnH1gumVXyxuWHEsCY+ZnTZhuqVCJEJOgyNsOt1NOgA6A8PKUIi/1wy5
+ 77tZUlf/xPeZMf6kd/ba1sQT/+Cof9QGVbh/7nsBiFr5b4t4BqUvc+ukLtz+cg87TFSTteRs9gY
+ OyUOWaV/MDi1dye2kAI0x9kF0vz1a6MSH+Dtfn6DncZo6sRBWKnczoUY4CuSRJfskL7hWJ8RCV9
+ iNJn6Tkgo+96Yj69pjQ==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-09-08_03,2026-09-09_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 suspectscore=0 bulkscore=0 impostorscore=0 adultscore=0
- malwarescore=0 spamscore=0 priorityscore=1501 lowpriorityscore=0 phishscore=0
+ lowpriorityscore=0 priorityscore=1501 spamscore=0 adultscore=0 malwarescore=0
+ suspectscore=0 impostorscore=0 bulkscore=0 clxscore=1015 phishscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2609090131
 
-This series adds PCIe support for the Qualcomm Nord (SA8797P) platform.
+Document the PCIe PHY found on the Qualcomm Nord platform.
 
-Nord has a single Gen5-capable QMP PCIe PHY block split into four
-independently-clocked and independently-resettable ports (A/B/C/D).
-Firmware selects the active lane topology at boot via a TCSR
-configuration register, and the same PHY block can appear as a single
-x16 port, x8+x8, x8+x4+x4, or x8+x4+x2+x2 depending on that mode. This
-is similar in spirit to the Glymur multi-PHY support already posted,
-except Nord's PHY registers are programmed by Linux rather than by
-firmware, so this series adds the PLL, TXRXZ, PCS and PCS-lane init
-tables along with the power-up/power-down/soft-reset sequencing needed
-to bring each port up.
+Nord has a Gen5-capable QMP PCIe PHY that can operate in multiple
+lane configurations using four PHY segments (A/B/C/D). The active
+topology is selected by firmware through a TCSR configuration
+register and may be configured as x16, x8+x8, x8+x4+x4, or
+x8+x4+x2+x2.
 
-The series also documents and wires up the qcom,nord-pcie compatible
-(reusing the existing SA8775P PCIe controller binding), and adds a
-CORE_CLK_CGC_DIS/AUX_PWR_DET workaround required to avoid a timing
-convergence issue in the PCIe power domain.
+The binding describes the register regions, clocks, resets, power
+domains, regulators, PHY provider interface, clock provider interface,
+and the qcom,link-mode property used by the driver to discover the
+active lane configuration programmed by firmware.
 
 Signed-off-by: Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>
 ---
-To: Vinod Koul <vkoul@kernel.org>
-To: Neil Armstrong <neil.armstrong@linaro.org>
-To: Rob Herring <robh@kernel.org>
-To: Krzysztof Kozlowski <krzk+dt@kernel.org>
-To: Conor Dooley <conor+dt@kernel.org>
-To: Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>
-To: Lorenzo Pieralisi <lpieralisi@kernel.org>
-To: Krzysztof Wilczyński <kwilczynski@kernel.org>
-To: Manivannan Sadhasivam <mani@kernel.org>
-To: Bjorn Helgaas <bhelgaas@google.com>
-To: Bjorn Andersson <andersson@kernel.org>
-To: Maxime Chevallier <maxime.chevallier@bootlin.com>
-To: Philipp Zabel <p.zabel@pengutronix.de>
-Cc: linux-arm-msm@vger.kernel.org
-Cc: linux-phy@lists.infradead.org
-Cc: devicetree@vger.kernel.org
-Cc: linux-kernel@vger.kernel.org
-Cc: linux-pci@vger.kernel.org
-Cc: shengchao.guo@oss.qualcomm.com
+ .../phy/qcom,nord-qmp-gen5x16-pcie-phy.yaml        | 272 +++++++++++++++++++++
+ 1 file changed, 272 insertions(+)
 
----
-Changes in v3:
-- change the name to quadfurcated phy (Konrad).
-- remove min items and change clocks order (Krzysztof).
-- Factor out the common config and create overlays & try to use common
-  symbols for glymur and nord (Konrad).
-- create  qphy_setbit and qphy_clrbit (Qiang Yu).
-- and in qmp_pcie_exit() apply settings only when nocsr is present (Qiang Yu).
-- Link to v2: https://patch.msgid.link/20260828-nord-v2-0-18bf59d19d6f@oss.qualcomm.com
+diff --git a/Documentation/devicetree/bindings/phy/qcom,nord-qmp-gen5x16-pcie-phy.yaml b/Documentation/devicetree/bindings/phy/qcom,nord-qmp-gen5x16-pcie-phy.yaml
+new file mode 100644
+index 000000000000..624ad7e7d13e
+--- /dev/null
++++ b/Documentation/devicetree/bindings/phy/qcom,nord-qmp-gen5x16-pcie-phy.yaml
+@@ -0,0 +1,272 @@
++# SPDX-License-Identifier: (GPL-2.0 OR BSD-2-Clause)
++%YAML 1.2
++---
++$id: http://devicetree.org/schemas/phy/qcom,nord-qmp-gen5x16-pcie-phy.yaml#
++$schema: http://devicetree.org/meta-schemas/core.yaml#
++
++title: Qualcomm Nord QMP Quadfurcated PCIe multiple link-mode PHY
++
++maintainers:
++  - Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>
++
++description: |
++  The Qualcomm Nord PCIe PHY is a Gen5-capable QMP PCIe PHY composed
++  of four PHY ports (A/B/C/D). The ports can be combined to support
++  multiple lane topologies, including x16, x8+x8, x8+x4+x4 and
++  x8+x4+x2+x2 configurations.
++
++  The selected topology is determined by the PCIe link configuration mode
++  programmed in TCSR registers. Depending on the selected mode, PHY ports
++  may operate independently or be grouped together to form wider PCIe links.
++
++  Each port provides dedicated register space, clocks, resets and power
++  resources required for PHY operation.
++
++properties:
++  compatible:
++    enum:
++      - qcom,nord-qmp-gen5x16-pcie-phy
++
++  reg:
++    maxItems: 4
++
++  reg-names:
++    items:
++      - const: port_a
++      - const: port_b
++      - const: port_c
++      - const: port_d
++
++  clocks:
++    maxItems: 17
++
++  clock-names:
++    items:
++      - const: aux_a
++      - const: cfg_ahb_a
++      - const: ref
++      - const: rchng_a
++      - const: pipe_a
++      - const: aux_b
++      - const: cfg_ahb_b
++      - const: rchng_b
++      - const: pipe_b
++      - const: aux_c
++      - const: cfg_ahb_c
++      - const: rchng_c
++      - const: pipe_c
++      - const: aux_d
++      - const: cfg_ahb_d
++      - const: rchng_d
++      - const: pipe_d
++
++  power-domains:
++    maxItems: 4
++
++  power-domain-names:
++    items:
++      - const: port_a
++      - const: port_b
++      - const: port_c
++      - const: port_d
++
++  resets:
++    maxItems: 8
++
++  reset-names:
++    items:
++      - const: port_a
++      - const: port_a_nocsr
++      - const: port_b
++      - const: port_b_nocsr
++      - const: port_c
++      - const: port_c_nocsr
++      - const: port_d
++      - const: port_d_nocsr
++
++  vdda-phy-a-supply: true
++
++  vdda-phy-b-supply: true
++
++  vdda-phy-c-supply: true
++
++  vdda-phy-d-supply: true
++
++  vdda-pll-a-supply: true
++
++  vdda-pll-b-supply: true
++
++  vdda-pll-c-supply: true
++
++  vdda-pll-d-supply: true
++
++  qcom,link-mode:
++    description: |
++      Reference to the TCSR syscon and the offset of the
++      TCSR_PCIE_LINK_CONFIG_MODE register.
++        0 (QMP_PCIE_NORD_MODE_X16)        — all ports ganged as x16
++        1 (QMP_PCIE_NORD_MODE_X8_X8)      — x8 (port A) + x8 (port B+C+D)
++        2 (QMP_PCIE_NORD_MODE_X8_X4_X4)   — x8 (A) + x4 (B) + x4 (C+D)
++        3 (QMP_PCIE_NORD_MODE_X8_X4_X2_X2)— x8 (A) + x4 (B) + x2 (C) + x2 (D)
++    $ref: /schemas/types.yaml#/definitions/phandle-array
++    items:
++      - items:
++          - description: Phandle of the TCSR syscon
++          - description: Offset of TCSR_PCIE_LINK_CONFIG_MODE register
++
++  "#clock-cells":
++    const: 1
++    description:
++      Selects the pipe clock output by port index (0=A, 1=B, 2=C, 3=D).
++      GCC pipe-clock mux parents reference this provider.
++
++  clock-output-names:
++    items:
++      - description: Name of the PHY A pipe clock output.
++      - description: Name of the PHY B pipe clock output.
++      - description: Name of the PHY C pipe clock output.
++      - description: Name of the PHY D pipe clock output.
++
++  "#phy-cells":
++    const: 1
++    description: |
++      Selects the PHY instance by index:
++        0 — port A (up to Gen5 x8; anchor in x16 mode)
++        1 — port B (up to Gen5 x4)
++        2 — port C (up to Gen5 x2)
++        3 — port D (up to Gen5 x2)
++
++required:
++  - compatible
++  - reg
++  - reg-names
++  - clocks
++  - clock-names
++  - power-domains
++  - power-domain-names
++  - resets
++  - reset-names
++  - vdda-phy-a-supply
++  - vdda-phy-b-supply
++  - vdda-phy-c-supply
++  - vdda-phy-d-supply
++  - vdda-pll-a-supply
++  - vdda-pll-b-supply
++  - vdda-pll-c-supply
++  - vdda-pll-d-supply
++  - qcom,link-mode
++  - "#clock-cells"
++  - clock-output-names
++  - "#phy-cells"
++
++additionalProperties: false
++
++examples:
++  - |
++    #include <dt-bindings/clock/qcom,nord-gcc.h>
++    #include <dt-bindings/clock/qcom,nord-tcsrcc.h>
++
++    soc {
++        #address-cells = <2>;
++        #size-cells = <2>;
++
++        phy@1b00000 {
++            compatible = "qcom,nord-qmp-gen5x16-pcie-phy";
++
++            reg = <0x0 0x01b00000 0x0 0x10000>,
++                  <0x0 0x01b10000 0x0 0x10000>,
++                  <0x0 0x01b20000 0x0 0x10000>,
++                  <0x0 0x01b30000 0x0 0x10000>;
++            reg-names = "port_a",
++                        "port_b",
++                        "port_c",
++                        "port_d";
++
++            clocks = <&gcc GCC_PCIE_A_PHY_AUX_CLK>,
++                     <&gcc GCC_PCIE_A_CFG_AHB_CLK>,
++                     <&tcsrcc TCSR_PCIE_CLKREF_EN>,
++                     <&gcc GCC_PCIE_A_PHY_RCHNG_CLK>,
++                     <&gcc GCC_PCIE_A_PIPE_CLK>,
++                     <&gcc GCC_PCIE_B_PHY_AUX_CLK>,
++                     <&gcc GCC_PCIE_B_CFG_AHB_CLK>,
++                     <&gcc GCC_PCIE_B_PHY_RCHNG_CLK>,
++                     <&gcc GCC_PCIE_B_PIPE_CLK>,
++                     <&gcc GCC_PCIE_C_PHY_AUX_CLK>,
++                     <&gcc GCC_PCIE_C_CFG_AHB_CLK>,
++                     <&gcc GCC_PCIE_C_PHY_RCHNG_CLK>,
++                     <&gcc GCC_PCIE_C_PIPE_CLK>,
++                     <&gcc GCC_PCIE_D_PHY_AUX_CLK>,
++                     <&gcc GCC_PCIE_D_CFG_AHB_CLK>,
++                     <&gcc GCC_PCIE_D_PHY_RCHNG_CLK>,
++                     <&gcc GCC_PCIE_D_PIPE_CLK>;
++            clock-names = "aux_a",
++                          "cfg_ahb_a",
++                          "ref",
++                          "rchng_a",
++                          "pipe_a",
++                          "aux_b",
++                          "cfg_ahb_b",
++                          "rchng_b",
++                          "pipe_b",
++                          "aux_c",
++                          "cfg_ahb_c",
++                          "rchng_c",
++                          "pipe_c",
++                          "aux_d",
++                          "cfg_ahb_d",
++                          "rchng_d",
++                          "pipe_d";
++
++            assigned-clocks = <&gcc GCC_PCIE_A_PHY_RCHNG_CLK>,
++                              <&gcc GCC_PCIE_B_PHY_RCHNG_CLK>,
++                              <&gcc GCC_PCIE_C_PHY_RCHNG_CLK>,
++                              <&gcc GCC_PCIE_D_PHY_RCHNG_CLK>;
++            assigned-clock-rates = <100000000>, <100000000>,
++                                   <100000000>, <100000000>;
++
++            power-domains = <&gcc GCC_PCIE_A_PHY_GDSC>,
++                            <&gcc GCC_PCIE_B_PHY_GDSC>,
++                            <&gcc GCC_PCIE_C_PHY_GDSC>,
++                            <&gcc GCC_PCIE_D_PHY_GDSC>;
++            power-domain-names = "port_a",
++                                 "port_b",
++                                 "port_c",
++                                 "port_d";
++
++            resets = <&gcc GCC_PCIE_A_PHY_COM_BCR>,
++                     <&gcc GCC_PCIE_A_NOCSR_COM_PHY_BCR>,
++                     <&gcc GCC_PCIE_B_PHY_COM_BCR>,
++                     <&gcc GCC_PCIE_B_NOCSR_COM_PHY_BCR>,
++                     <&gcc GCC_PCIE_C_PHY_COM_BCR>,
++                     <&gcc GCC_PCIE_C_NOCSR_COM_PHY_BCR>,
++                     <&gcc GCC_PCIE_D_PHY_COM_BCR>,
++                     <&gcc GCC_PCIE_D_NOCSR_COM_PHY_BCR>;
++            reset-names = "port_a",
++                          "port_a_nocsr",
++                          "port_b",
++                          "port_b_nocsr",
++                          "port_c",
++                          "port_c_nocsr",
++                          "port_d",
++                          "port_d_nocsr";
++
++            vdda-phy-a-supply = <&vreg_l6a_1p2>;
++            vdda-phy-b-supply = <&vreg_l4a_1p2>;
++            vdda-phy-c-supply = <&vreg_l4a_1p2>;
++            vdda-phy-d-supply = <&vreg_l4a_1p2>;
++            vdda-pll-a-supply = <&vreg_l1e_0p9>;
++            vdda-pll-b-supply = <&vreg_l1e_0p9>;
++            vdda-pll-c-supply = <&vreg_l1e_0p9>;
++            vdda-pll-d-supply = <&vreg_l1e_0p9>;
++
++            qcom,link-mode = <&tcsr 0x71050>;
++
++            #clock-cells = <1>;
++            clock-output-names = "pcie_a_pipe_clk",
++                                 "pcie_b_pipe_clk",
++                                 "pcie_c_pipe_clk",
++                                 "pcie_d_pipe_clk";
++
++            #phy-cells = <1>;
++        };
++    };
 
-Changes in v2:
-- Fix dtbinding errors (Krzysztof)
-- Link to v1: https://patch.msgid.link/20260825-nord-v1-0-7c02f2b8765a@oss.qualcomm.com
-
----
-Krishna Chaitanya Chundru (5):
-      dt-bindings: phy: qcom: add Nord QMP PCIe PHY binding
-      dt-bindings: pci: qcom: add Nord PCIe controller compatible
-      PCI: qcom: Add CGC disable workaround for Nord PCIe
-      phy: qcom: qmp: Move qphy_setbits/clrbits/checkbits to common header
-      phy: qcom: qmp-pcie: Add Nord Gen5x16 PCIe multi-PHY support
-
- .../devicetree/bindings/pci/qcom,pcie-sa8775p.yaml |   1 +
- .../phy/qcom,nord-qmp-gen5x16-pcie-phy.yaml        | 272 ++++++
- drivers/pci/controller/dwc/pcie-qcom.c             |  16 +
- drivers/phy/qualcomm/phy-qcom-qmp-combo.c          |  24 -
- drivers/phy/qualcomm/phy-qcom-qmp-common.h         |  32 +
- drivers/phy/qualcomm/phy-qcom-qmp-pcie-msm8996.c   |  24 -
- drivers/phy/qualcomm/phy-qcom-qmp-pcie-multiphy.c  | 938 +++++++++++++++++++--
- drivers/phy/qualcomm/phy-qcom-qmp-pcie.c           |  32 -
- drivers/phy/qualcomm/phy-qcom-qmp-pcs-pcie-v6_40.h |  56 ++
- drivers/phy/qualcomm/phy-qcom-qmp-pcs-v6_40.h      |  14 +
- .../qualcomm/phy-qcom-qmp-qserdes-com-pcie-v6_40.h |  94 +++
- .../phy-qcom-qmp-qserdes-txrxz-pcie-v6_40.h        | 194 +++++
- drivers/phy/qualcomm/phy-qcom-qmp-ufs.c            |  24 -
- drivers/phy/qualcomm/phy-qcom-qmp-usb.c            |  24 -
- drivers/phy/qualcomm/phy-qcom-qmp-usbc.c           |  24 -
- 15 files changed, 1543 insertions(+), 226 deletions(-)
----
-base-commit: 1550287484d29e68055ae4acf52d9324835ef9c1
-change-id: 20260810-nord-461809f1d5ae
-
-Best regards,
---  
-Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>
+-- 
+2.34.1
 
