@@ -1,276 +1,153 @@
-Received: from mail-wm2-f12.google.com (mail-wm2-f12.google.com [74.125.225.140])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0FB8F559CA1
-	for <linux-arm-msm@vger.kernel.org>; Wed,  9 Sep 2026 12:47:29 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.225.140
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D82F05592E8
+	for <linux-arm-msm@vger.kernel.org>; Wed,  9 Sep 2026 12:52:32 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788958053; cv=none; b=XyPQpPKaaG/VHD+sCuMLEIEVfkiZupiH3dTnK+xKyTQowELuTx4agHkN/ICBWkNH2lc9lYLjxKeNcJP8Vwu/yC3pelYSFqUCigZKlkNsGS0E01Gx/GttllTx4dW1PRNVJoqKswO5Y9tnwKh9oV8qMrMbpv+nBPxm4CQLvS25vWU=
+	t=1788958355; cv=none; b=A9uqk+tyWxLfVLfi5Vs4ze9UgWtsRGih9D2ruKRGMbJbd4gQZnt7NofA1aAgjwGe5NxUsS8/is+M4y3Mj+kGQFxkcGAde+syKaZKD48+vWXH6WjRv25I69SrR1M+Jgmz1pCAFIjBfk0/eENTpXnAr2lsxD0D2SFKPXcx3Jfxn3w=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788958053; c=relaxed/simple;
-	bh=3UKaD4rM4go22sDUpsRlvjUXuf+J3aOuz77zwirxZX8=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=agc7Acd9wF2nl76qdxVL21NBeAjVDRDRp6xB529nzszkvkPvk+DRLMdTx9q6xH1y1AF50infee5DBZhT44tzRA0PQHtvImaYOPi7xQqkUbUujbOJxznmXR/LFScMkaWnTGQuCqpqiYMjGRkCrsdSN33Bo6DsVyeOu+kOdP4UoGw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=cOaxcO+l; arc=none smtp.client-ip=74.125.225.140
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=google.com
+	s=arc-20240116; t=1788958355; c=relaxed/simple;
+	bh=cXvKb72H0RorSkYji2BUaKKOmRWzyLka5DqCZ/QXA5U=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=NILORjf1al3yLeHPpV7itnOO2MjBaTT8tWU+3AIRsQer9d2nx3D2WvAGuhpl+axa1oYIxz3bQF0D2VG/pIlFE8uRoSCJ7lfsCzOKSmssyBrXKFMyGL5UCR5L9Clcyx7qByzz/Wxp1+5IH2iei7n2EWGSMDjS/76XU6kIEBw9Lac=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=BTmkYS9R; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=kCEhywbP; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="cOaxcO+l"
-Received: by mail-wm2-f12.google.com with SMTP id 5b1f17b1804b1-49ccf3bc34cso46725e9.0
-        for <linux-arm-msm@vger.kernel.org>; Wed, 09 Sep 2026 05:47:29 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="BTmkYS9R";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="kCEhywbP"
+Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 689BoXKs2698601
+	for <linux-arm-msm@vger.kernel.org>; Wed, 9 Sep 2026 12:52:30 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	w73lEZrZCbtXfUA5AKv61bGeGDgAyCOfith5TyGHEmw=; b=BTmkYS9RPRLzZtgg
+	ydHh+ZUEKk15dXcGuRmGDIihvg+taWZBQvfLY+5f7DckGqs1bGfAIC79VUAxI2k3
+	byuF2VDQWyiQRrk90F9SoXxf4oehlVnNkTZFj6l2L045As7ghMagDyYWQMUWlp4G
+	NxVONX7F6B0aLi+v+rlzgKoO4zAJgokh+C1BNd9uMSVl269ACmk5f20a2XwjQ2Rp
+	KYExKvu8bKvrUDELdWewxi/nvMa3nMH1smsYZXu7ltenxCvX2FrEmc/aid7/W5zu
+	hgYwe8cEUKa9pqzRlI77lBLFrQa/4MI23w3ADSQ0YMUcRsworkxNUpxCAP4En4au
+	lT5KKw==
+Received: from mail-qt1-f197.google.com (mail-qt1-f197.google.com [209.85.160.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gk6xh06um-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Wed, 09 Sep 2026 12:52:30 +0000 (GMT)
+Received: by mail-qt1-f197.google.com with SMTP id d75a77b69052e-52dcf1bb6e9so108560741cf.1
+        for <linux-arm-msm@vger.kernel.org>; Wed, 09 Sep 2026 05:52:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20251104; t=1788958047; x=1789562847; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+        d=oss.qualcomm.com; s=google; t=1788958349; x=1789563149; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:mime-version:references
+         :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
          :date:message-id:reply-to:content-type;
-        bh=wuHyN6zqAofLWB78jkKtomccACb9bxHB5O8GjC+eKe8=;
-        b=cOaxcO+lLAbSrEBVKS7D3TTS+6Bafd+2+fXxwdt+2UTrjFEHK7Yk/pw/eOVcJVkXjn
-         /ikOalI/49Bz/pSZjyaHAI6ATg8ZJ2i8MbVl3LZbh/BO2ixOeldGb85Cz0dcpb7+cnx5
-         DCl+Uz5dPeM8u398jxtEjRefu9n/+fPUHDM+zyGtDMEYvK/MTgD09elP8bEqEi55+fHB
-         qz7XUoyNFOUr4YaWW0TrO+TaFfepjaAt7bUNAQU1AyMaF2uBivO1vr80tGeNuOT+dQax
-         r4Uuk6XU7FwidqepE2uZ/yQXcBAH9Jh4Y8LTFYJ4aqqRgse8Kzh4Bzy/0Z82vsQ3aXCS
-         ZMLQ==
+        bh=w73lEZrZCbtXfUA5AKv61bGeGDgAyCOfith5TyGHEmw=;
+        b=kCEhywbPrGoVj/HMoKOXauZv/9wy8B0dZHx12vW9LYa7J0KSiLBxCizNN76HBh7Hwu
+         ET6yB5pD04Iic301RX4HV2BmaqFJQZ+97HilIydTpIeICl5lq8arWuQcCkiYCOH5qNsz
+         3V+puWcvK2lIZfM/CiEb01ZRqGw/HeNVPp6FSyODdVYlrIf2XaZY+7RkMegXc6RTINcw
+         FJlYWjbAz9CbVjgIOhG8nUAoO7Kb1KtWkgzJXKU7gK0cHEHfSomfQ98OWvdL+UhIyjAV
+         Lb/ld+HbuEnnVZBKPFzXmh6WlOerP71sebq+YX/r7Jpu9IGhqwj/xXPwo6kYlmnBNWqb
+         AKhQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788958047; x=1789562847;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:x-gm-gg
+        d=1e100.net; s=20251104; t=1788958349; x=1789563149;
+        h=content-transfer-encoding:content-type:mime-version:references
+         :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=wuHyN6zqAofLWB78jkKtomccACb9bxHB5O8GjC+eKe8=;
-        b=iSPTCXSSFVyQrjzAKVdK9ojDiG/bPUQXqPuvfrs5I6Q9OFr0JbHW1vB7FOPMNSHnp4
-         VZwq8USuG1/FABVdWC0Q/imoaKvBlXFnCrpJcpqCfDaSc9lqaX1MQaeEX8UhBCmBa2pb
-         qECi0Ql6gB0XpnOJDoFDfNTcTN9zDbz9TGqyli7YSXepqeLwvBFgX/hFFfDmikfGkJ79
-         pJpuBnhV9XQ69EnO5hRBv2wrnJpN7KQjINwwvzk6Chd0Tpl3PC06Z50qz/J8TM7GYUKH
-         B4q1UyW04SE6fOzZ/qsrMA30C/cyOngdJMuHjp25TXMt+CsA5V/xKGJBD6TfZZjOgZus
-         cjCw==
-X-Forwarded-Encrypted: i=1; AKwUvBwU0kLZNIYQ8Bm/XgKGvSLJHMUHCwwJ+ud0PPl5e1+CeVXGBTMuYtm/p5tnp6J2vH+ntT5sbFi9cZAkUjT7@vger.kernel.org
-X-Gm-Message-State: AFuF++lzt1BtO+6+u8AP2iaCPhwyhrL4Z82MLQPbx5CYOYUdZTi7QBTA
-	5sNbTwhsuhOP2lHGubqVDvPXAja11LSKY0XeirEyZG0KdmCFp2QT0FGjTRUH9F/WTA==
-X-Gm-Gg: AYBFou0IPs1ADV1VhCOtJVmw/6eUgZmsy/N+Fu7cIJCyairghRj3H2mi4D1RBwRLuXJ
-	zDmlKzgx1ya01H04jABBguuG6pEu3f3xZS+n/YEIKMiuPHdoz9g+OUAcdKDcZdepjX71erVgIjH
-	EOEuaGjfszb0sez2WM+Vxlv7lYBTRAg7VW/7iEANbwj7lfBoizXV00NnFv08Ehmtah8TxGf5GHj
-	+ydpbHMnd2SwJvgBPAeMQ6lMgiWkGLkGPbzs79cLCqG28tVYrvvG4nTkUsB75LRxSTM2LIRwtky
-	b6ee+Zdcp8pSvrpU7PR69Y0sqJIkf99cuvH1643S6WtGGbVs7Lw97PigZaAH8xbF00quiSLL5zb
-	YkfYoWhLjNsle0EGiArjaCLLIBoKzITSoOY4BPfnod600XY9BokI45Jp54hLGvz+hyXltBnHCeT
-	xOYpeJHceC4cjERf1hs5MaBTxYI8NV1UX1BBNuHnVAKbi/jJUHmUCS3m3PcxpxHFG3BR1xV9Q1J
-	b1ws3fquIRvlYblyIemeoSVSckiDpdyM5DgKsIf25qQ2kOOQpE=
-X-Received: by 2002:a05:600c:c3ce:10b0:49d:3:4a29 with SMTP id 5b1f17b1804b1-49d2163e1f0mr507365e9.7.1788958046662;
-        Wed, 09 Sep 2026 05:47:26 -0700 (PDT)
-Received: from google.com (250.192.189.35.bc.googleusercontent.com. [35.189.192.250])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-49d20fb2b95sm36271305e9.4.2026.09.09.05.47.25
+        bh=w73lEZrZCbtXfUA5AKv61bGeGDgAyCOfith5TyGHEmw=;
+        b=NXt/70c1Y998CR5B5XY6oOpdXlkA6/Kng4Y2CRNT1BgCL90aSbk36SCwvSUfF9n1AB
+         uXfj/SsX3j9SAqvsKdGOrGsd3lledRjWeWljaAlXyFp5ZMpf8IFlE6E0nNiD6rlSKe2s
+         rIM+9ZWw7T1qU7v7g7OSmqM9gqCLCVvxQXpDXrMDa6n7kNlqKrInanRUpAWYdvFAvQja
+         1BCPGS+0Iz5u2YWeTlHN9XEs8IatPHUDdN3dOC4o4zW4g9ad68izPAL4vybpoWKmw/LL
+         BfgJ3OQ/t6y86AnJ0hmxgPf3XVHS5j4cor4PSsIbcvXuDSCXLEXmXN4w7Z2tJ3oRsdQ4
+         UBdg==
+X-Forwarded-Encrypted: i=1; AKwUvBzffiQhHIO7rifTXPIHDhrwn45fLwbRCX/QLHdKFykjbI7WoCHX6PsYhOEw6Y1TAwcUHXKZ38AdPsguiajX@vger.kernel.org
+X-Gm-Message-State: AFuF++kcH5GUbf6btn/GasXgyCv7KVrqJimTHVvUy6on3SUHoiy6B9Py
+	KttPmEZpIkgQdtar+6Kas7wwxzILe/d+zuNQVsm9hbIKIgdYtSn038SnYQFwh+phz/iMu6XP4gi
+	UmyRMTaNrVbWTeAkzmD9r1wxuWaMEv2Nyq83SnNrGWNIK2lTth43YJ6lDI6d276bbcYRH
+X-Gm-Gg: AYBFou2bkdJy+gvIfTszt84t7t9x/rCBvkN2doaqsBXYu7f82rwuh2uQhE30PvPiN0m
+	zlHe2yEMMfz81B0tulFe2NK6HJeOytc5sx2PODTv0ezxTisObT5KdMh6VbKofEVJRlJgPZwjnJa
+	/l1y9S82DyCuSvv4ue05erMEm40iOoBAbSjIMCmg6xj2QV+S87FAh/61TKmcJndI9R+sXzQ+OEp
+	xX/tKJdauHQTyiu4bvJGdkFGshD9jnruu7l5Z5hu4MfxPzGq5f9SgFWZNfCdBhE3gcuNBIUxg+L
+	yzIrcv+NaMLinnW4DioRT+EPpb/1WLG1OYNIY/srgo+v516YN228ackr12NcotAStCNh4Relr1B
+	c0wNzr/kqXrzeFPYzbrguLWgC1sc=
+X-Received: by 2002:a05:620a:28d0:b0:939:72cb:bae6 with SMTP id af79cd13be357-93972cbbcc3mr1268674685a.29.1788958349630;
+        Wed, 09 Sep 2026 05:52:29 -0700 (PDT)
+X-Received: by 2002:a05:620a:28d0:b0:939:72cb:bae6 with SMTP id af79cd13be357-93972cbbcc3mr1268627385a.29.1788958344263;
+        Wed, 09 Sep 2026 05:52:24 -0700 (PDT)
+Received: from brgl-qcom.home ([2a01:cb1d:dc:7e00:de8b:7fd5:2738:cc2a])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c260d4aa0b9sm768027666b.11.2026.09.09.05.52.22
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 09 Sep 2026 05:47:26 -0700 (PDT)
-Date: Wed, 9 Sep 2026 12:47:21 +0000
-From: Mostafa Saleh <smostafa@google.com>
-To: Jens Glathe <jens.glathe@oldschoolsolutions.biz>
-Cc: Bjorn Andersson <andersson@kernel.org>,
-	Konrad Dybcio <konradybcio@kernel.org>,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>, linux-arm-msm@vger.kernel.org,
-	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH 0/7] arm64: dts: qcom: IdeaCentre Mini 01Q8X10 Hamoa +
- Purwa
-Message-ID: <aqFVWedkcb6PY-oh@google.com>
-References: <20260905-x1-ideacentre-mini-prettify-v1-0-9a87882973bb@oldschoolsolutions.biz>
- <ap_PdUrwLIVGJ3oG@google.com>
- <dcae935c-ccbb-4cb5-a184-eb5dc2cc84b8@oldschoolsolutions.biz>
- <ap_qwdz-3WibXRjq@google.com>
- <364326dc-9715-4e77-bf25-4d0a30179826@oldschoolsolutions.biz>
- <ap_69OsnAOwQyo50@google.com>
- <9762659c-fbde-4887-8da8-200db7dfad09@oldschoolsolutions.biz>
- <aqBKI0Fg3ZqYPOJh@google.com>
- <6eaa70f3-4d76-4271-b12d-75e063c9f869@oldschoolsolutions.biz>
+        Wed, 09 Sep 2026 05:52:23 -0700 (PDT)
+From: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+To: Bartosz Golaszewski <brgl@kernel.org>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Linus Walleij <linusw@kernel.org>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>,
+        Muzaffer Kadir <muzafferkadir@mainlining.org>
+Cc: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>,
+        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+        linux-arm-msm@vger.kernel.org, linux-gpio@vger.kernel.org,
+        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+        Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+Subject: Re: [PATCH v5 0/2] Add pinctrl support for MSM8952
+Date: Wed,  9 Sep 2026 14:52:20 +0200
+Message-ID: <178895833828.30492.93870770541896598.b4-ty@oss.qualcomm.com>
+X-Mailer: git-send-email 2.47.3
+In-Reply-To: <20260907-msm8952-pinctrl-v5-0-9a2d8d72ffdb@mainlining.org>
+References: <20260907-msm8952-pinctrl-v5-0-9a2d8d72ffdb@mainlining.org>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <6eaa70f3-4d76-4271-b12d-75e063c9f869@oldschoolsolutions.biz>
-
-On Tue, Sep 08, 2026 at 08:15:27PM +0200, Jens Glathe wrote:
-> Hi Mostafa,
-> 
-> On 08.09.26 19:47, Mostafa Saleh wrote:
-> > On Tue, Sep 08, 2026 at 05:04:44PM +0200, Jens Glathe wrote:
-> > > Hi Mostafa,
-> > > 
-> > > This is my .config [1].
-> > > 
-> > > [1]: https://pastebin.com/QhDizqCB
-> > Thanks! I tested with your config plus
-> > - CONFIG_EFI_ARMSTUB_DTB_LOADER=y otherwise I can't load my device
-> >    tree from UEFI shell
-> > - CONFIG_SERIAL_QCOM_GENI=y, otherwise I can't see the console.
-> > 
-> > Booting in EL2 is similar to before with SMMUv2 errors.
-> 
-> For that you would need the patch as listed before: [2]
-> 
-> [2]: https://github.com/jglathe/linux_ms_dev_kit/tree/b4/x1-el2-unfuck
-> 
-> This should give you boot on EL2.
-> 
-> > Booting in EL1 hangs with timeouts and missing suppliers:
-> > [    0.000000] Booting Linux on physical CPU 0x0000000000 [0x512f0011]
-> > [    0.000000] Linux version 7.3.0-rc1-next-20260904+ (smostafa@mostafa1.c.googlers.com) (Debian clang version 21.1.8 (3), Debian LLD 21.1.8) #2 SMP PREEMPT_DYNAMIC Tu6
-> > [    0.000000] KASLR enabled
-> > [    0.000000] Machine model: Lenovo IdeaCentre Mini 01Q8X10 (Purwa)
-> > [    0.000000] earlycon: qcom_geni0 MMIO:0x0000000000894000 (options '')
-> > [    0.000000] printk: legacy bootconsole [qcom_geni0] enabled
-> > [    0.000000] CPU features: SYS_ID_AA64MMFR0_EL1[63:60]: forced to 1
-> > [    0.000000] ITS@0x0000000017040000: Devices Table too large, reduce ids 32->19
-> > [    0.000000] ITS@0x0000000017040000: Devices too large, reduce ITS pages 1024->256
-> > [    0.163152] qcom-pcie 1c00000.pcie: supply vdda not found, using dummy regulator
-> > [    0.163313] qcom-pcie 1c08000.pcie: supply vdda not found, using dummy regulator
-> > [    0.168334] clk: Not disabling unused clocks
-> > [    0.168336] PM: genpd: Not disabling unused power domains
-> > [    0.170770] qcom-pcie 1c00000.pcie: supply vddpe-3v3 not found, using dummy regulator
-> > [    0.178347] qcom-pcie 1c08000.pcie: supply vddpe-3v3 not found, using dummy regulator
-> > [    0.184718] qcom-pcie 1c00000.pcie: supply vdda not found, using dummy regulator
-> > [    0.211932] Warning: unable to open an initial console.
-> > [    0.212057] qcom-pcie 1c00000.pcie: supply vddpe-3v3 not found, using dummy regulator
-> > [    0.213907] qcom-pcie 1c08000.pcie: supply vdda not found, using dummy regulator
-> > [    0.213928] qcom-pcie 1c08000.pcie: supply vddpe-3v3 not found, using dummy regulator
-> > [    0.244210] qcom-pcie 1c08000.pcie: supply vdda not found, using dummy regulator
-> > [    0.244275] qcom-pcie 1c00000.pcie: supply vdda not found, using dummy regulator
-> > [    0.251833] qcom-pcie 1c08000.pcie: supply vddpe-3v3 not found, using dummy regulator
-> > [    0.259418] qcom-pcie 1c00000.pcie: supply vddpe-3v3 not found, using dummy regulator
-> > [   10.213618] qcom-pcie 1bf8000.pcie: supply vdda not found, using dummy regulator
-> > [   10.214873] arm-smmu 3da0000.iommu: deferred probe timeout, ignoring dependency
-> > [   10.228713] arm-smmu 3da0000.iommu: probe with driver arm-smmu failed with error -110
-> 
-> Since you don't load firmwares, maybe try these? However, I was able to boot
-> and install with the Ubuntu Resolute ISO by providing the dtb, without the
-> firmwares. Odd.
-> 
-> > I believe we are testing on different SoCs from your fastfetch:
-> > CPU: Qualcomm Snapdragon X Elite 1E80100 (8) @ 2.96 GHz
-> > 
-> > While mine:
-> > CPU: Qualcomm Snapdragon X Elite 1P42100 (8) @ 2.96 GHz
-> > 
-> > I enabled CONFIG_QCOM_SOCINFO which shows:
-> > [root@alarm ~]# cat /sys/devices/soc0/soc_id
-> > 635 # which does not exist in qcom,ids.h
-> > [root@alarm ~]# cat /sys/devices/soc0/revision
-> > 1.0
-> Looks like nope:
-> 
-> root@mini-x-jg:~# cat /sys/devices/soc0/soc_id
-> 635
-> root@mini-x-jg:~# cat /sys/devices/soc0/revision
-> 1.0
-> 
-> We have the same SoC, maybe different binning. You could try to boot up with
-> the extended Resolute ISO to boot without firmwares [3]. It contains the
-> same dtb.
-> 
-> [3]:
-> https://drive.google.com/drive/folders/1sc_CpqOMTJNljfvRyLG-xdwB0yduje_O
-> 
-
-Thanks! I can boot ubuntu with:
-resolute-desktop-arm64+x1e-20260831_extended_jg.iso
-
-I figured out the issue, the problem is that I am using the console
-which is missing. And all the warnings in the logs were just a red
-herring.
-
-With that patch on top of your device tree I can fully boot:
-diff --git a/arch/arm64/boot/dts/qcom/x1-lenovo-ideacentre-mini-01q8x10.dtsi b/arch/arm64/boot/dts/qcom/x1-lenovo-ideacentre-mini-01q8x10.dtsi
-index b720622c5d90..973e603bbb6a 100644
---- a/arch/arm64/boot/dts/qcom/x1-lenovo-ideacentre-mini-01q8x10.dtsi
-+++ b/arch/arm64/boot/dts/qcom/x1-lenovo-ideacentre-mini-01q8x10.dtsi
-@@ -13,7 +13,7 @@ / {
- 	chassis-type = "desktop";
- 
- 	aliases {
--		serial0 = &uart14;
-+		serial0 = &uart21;
- 	};
- 
- 	wcd938x: audio-codec {
-@@ -1183,3 +1183,8 @@ &usb_mp_qmpphy0 {
- 
- 	status = "okay";
- };
-+
-+&uart21 {
-+	compatible = "qcom,geni-debug-uart";
-+	status = "okay";
-+};
-
-However, the kernel logs are extremely verbose (I have 39 warnings)
-
-Disabling MDSS makes it cleaner:
-diff --git a/arch/arm64/boot/dts/qcom/purwa-lenovo-ideacentre-mini-01q8x10.dts b/arch/arm64/boot/dts/qcom/purwa-lenovo-ideacentre-mini-01q8x10.dts
-index 9813a570cf69..8dc038566f93 100644
---- a/arch/arm64/boot/dts/qcom/purwa-lenovo-ideacentre-mini-01q8x10.dts
-+++ b/arch/arm64/boot/dts/qcom/purwa-lenovo-ideacentre-mini-01q8x10.dts
-@@ -40,3 +40,34 @@ &remoteproc_cdsp {
- 
- 	status = "okay";
- };
-+
-+
-+&mdss {
-+	status = "disabled";
-+};
-+
-+&mdss_dp0 {
-+	status = "disabled";
-+
-+};
-+
-+&mdss_dp0_out {
-+	status = "disabled";
-+};
-+
-+&mdss_dp1 {
-+	status = "disabled";
-+
-+};
-+
-+&mdss_dp1_out {
-+	status = "disabled";
-+};
-+
-+&mdss_dp2 {
-+	status = "disabled";
-+};
-+
-+&mdss_dp2_out {
-+	status = "disabled";
-+};
-
-I do not have any media attached nor drivers enabled, but that
-shouldn't make the logs that verbose, I can dig more into it.
-
-One other problem, is that there is a missing a PCI bus with the WIFI
-card:
-
-0005:00:00.0 PCI bridge: Qualcomm Technologies, Inc SC8380XP PCIe Root Complex [Snapdragon X / X Plus / X Elite]
-0005:01:00.0 Ethernet controller: Realtek Semiconductor Co., Ltd. RTL8111/8168/8211/8411 PCI Express Gigabit Ethernet Controller (rev 1b)
-0006:00:00.0 PCI bridge: Qualcomm Technologies, Inc SC8380XP PCIe Root Complex [Snapdragon X / X Plus / X Elite]
-0006:01:00.0 Non-Volatile memory controller: SK hynix Platinum P41/PC801 NVMe Solid State Drive
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTA5MDE0NCBTYWx0ZWRfX7kzNv57rReD0
+ tVbajsgWB/kyXTI4rg/rphMivihkgiBkwp1Yn1sdBpWYlAWNZ7ViJWwy5ZwEk8HhQoi5aKGByLU
+ DBChkrxnd5BNP6F2B7sz5O2/VTL27AqUoQ2fbIx31KM+QHah6j7SW8h3510ONvufDWF8pkPZfq0
+ HGEodb2f/TMM3kfkyPj/jR7/J7wIE3W9PGSq4iDvWv8qrzrwcfwhn2ur4DELs+2K9323Df/NLXs
+ X7gwD7XWGiyI4EdBXg2KrhWYUl6l9QQ1OVsLIh2joTlQSc589iatLQ6cDSae0okd2GRNFDQTiD9
+ MWcIJiSCIHu2SlKlda9EqOXAjHdH02ywroXvJcyW/0uRYuGereHXIOfgEBvAhyQTOZXFGETVAZ9
+ gUoNrsN39ZZ8GIpIkcB5UpwK0As6H9GrGPCP2przH2FqXr/V9cQYVHkwqch+LMTGtzDT+8gEmS+
+ QbCNriVDl9wOQtg6LfQ==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTA5MDE0NCBTYWx0ZWRfX3fzPeu4EpUXZ
+ khlK4YRsf5Vt3kGo+YlQsuH49Dhj5/yX8YDQegPKl56uojU8bBhBPDwhy8ZVnRNSn0h/qc9I3cn
+ GKONiGA2zJTag89PQ11fD0kAIBrXwBU=
+X-Proofpoint-GUID: Y_dwzUsJmfOTnQ7gj1CVGVjdazMk4skx
+X-Authority-Analysis: v=2.4 cv=KOlqylFo c=1 sm=1 tr=0 ts=6aa1568e cx=c_pps
+ a=EVbN6Ke/fEF3bsl7X48z0g==:117 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
+ a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22 a=VwQbUJbxAAAA:8
+ a=EUspDBNiAAAA:8 a=mPusQoNMmh5jHkL4POYA:9 a=QEXdDO2ut3YA:10
+ a=a_PwQJl-kcHnX1M80qC6:22
+X-Proofpoint-ORIG-GUID: Y_dwzUsJmfOTnQ7gj1CVGVjdazMk4skx
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-09-08_03,2026-09-09_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ adultscore=0 priorityscore=1501 spamscore=0 impostorscore=0 phishscore=0
+ lowpriorityscore=0 bulkscore=0 suspectscore=0 clxscore=1015 malwarescore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2609090144
 
 
-Compared to with my device tree:
-0004:00:00.0 PCI bridge: Qualcomm Technologies, Inc SC8380XP PCIe Root Complex [Snapdragon X / X Plus / X Elite]
-0004:01:00.0 Network controller: Qualcomm Technologies, Inc WCN785x Wi-Fi 7(802.11be) 320MHz 2x2 [FastConnect 7800] (rev 01)
-0005:00:00.0 PCI bridge: Qualcomm Technologies, Inc SC8380XP PCIe Root Complex [Snapdragon X / X Plus / X Elite]
-0005:01:00.0 Ethernet controller: Realtek Semiconductor Co., Ltd. RTL8111/8168/8211/8411 PCI Express Gigabit Ethernet Controller (rev 1b)
-0006:00:00.0 PCI bridge: Qualcomm Technologies, Inc SC8380XP PCIe Root Complex [Snapdragon X / X Plus / X Elite]
-0006:01:00.0 Non-Volatile memory controller: SK hynix Platinum P41/PC801 NVMe Solid State Drive
-
-Thanks,
-Mostafa
-
-> with best regards
+On Mon, 07 Sep 2026 19:05:23 +0300, Muzaffer Kadir wrote:
+> MSM8952 has pinctrl system that is similar to MSM8917 pinctrl, but it
+> has some differences in some of the pins and their functions.
+> This driver tested on General Mobile GM 5 Plus.
 > 
-> Jens
 > 
+
+Applied, thanks!
+
+[1/2] dt-bindings: pinctrl: qcom: Add MSM8952 pinctrl
+      https://git.kernel.org/brgl/c/2f006f5c617a56afe7683b607727349e0aea7814
+[2/2] pinctrl: qcom: Add MSM8952 tlmm pinctrl driver
+      https://git.kernel.org/brgl/c/b53a6210af0fe559670e298349968beae2c7448b
+
+Best regards,
+-- 
+Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
