@@ -1,45 +1,50 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7F8543C3C16;
-	Wed,  9 Sep 2026 21:40:16 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BCDC23BFACC;
+	Wed,  9 Sep 2026 21:47:05 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788990026; cv=none; b=pwR83zqRgbvY3a4hDuwBydhw+PH7PAOzXUlSdtgoMk0r6XGn86pL61aZ9iBTL7Txv8rnO6v7IxT4LAjnMaXIE0S5KsQZ6QwalQg4A+elcZ6RNeB4TcJ6IypWqEywD4s5B5SwGD8WAA+EX8GrTzsjbXprhydxzj7E2xRwSqqp11k=
+	t=1788990434; cv=none; b=nkg7eJ6NsJymBdCl/FgQi2aYoxD7wTVb5khjLrnfKo108qS5lXiN9bsA/9bKnNAGmB+BmLIZWZcVnqCxXklyUGSvX7zKexsXpX5SLCMSuPUxYqPfJRtpZ4+cDajQKVjv8vLx4PmlxBRXRmU2xAgr2ex/aGJBFkbN2TFha+6OVDg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788990026; c=relaxed/simple;
-	bh=xfVJea4uY5edbVA/Kqv7Xt2stEqupQMgz6KCOci0o0g=;
+	s=arc-20240116; t=1788990434; c=relaxed/simple;
+	bh=PttVx/ZUCS3iUKjrDv7JX04JrZYSS5c4PkRppv3kF7k=;
 	h=Subject:From:To:Cc:Date:Message-ID:In-Reply-To:References:
-	 Content-Type:MIME-Version; b=RRCz0zXAhvmv91nn0Ff9pn7XguS1Ughb63OOpaEzc097NePUeAJE78G18SjMo7DrptzFPE11QgxTx/WH6deV9Tse85ZUQigzoGV5jcZaVSibISrQg1pxb7YwCWENesBojDB4VcTPQqAhaKVZq2Cp0aXwnoWsFror0ijOc2ESkj0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=EkSeHm9N; arc=none smtp.client-ip=100.103.45.18
+	 Content-Type:MIME-Version; b=Ee7ySi+jR+Q7iwRDJLQYLDscrf+mwN82eoS2qIcGuD3wRof3+arusb13Avukt67XKWp/WM8mYBLLLHbfARTslDsv41b++nznxgAYsxUctBe4Le/fnVJdP5c0oZjR8dS073TyYPfioe32Rvv5f6Rz/OC2nzL1W77BXCpxPzag4FQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=CM1jE2ki; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="EkSeHm9N"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5F61F1F000FF;
-	Wed,  9 Sep 2026 21:40:12 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="CM1jE2ki"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 389131F00893;
+	Wed,  9 Sep 2026 21:47:02 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1788990013;
-	bh=Q65d2+vKaeIvv1aFsZlNeZwHA/AqvMGseC0yWChkYPw=;
+	s=k20260515; t=1788990423;
+	bh=uuFvVYJoHxWOPg4L2VXKOq9qm6k3RQC4qvQt29QFY6E=;
 	h=Subject:From:To:Cc:Date:In-Reply-To:References;
-	b=EkSeHm9NrHRF4EN0XUN3SyzkBkhH7n4ABKoVlOWsi3M9NiEqoKQkXqqZRuQiVYHff
-	 d6zAdSXr3JeNlhG3Y0ea2feamIG1tXlNG9MW+YEIc5Es/vBnjDuL3sOFtIm0FRRkD0
-	 uZh9XRm6rbRDEONCDe700aC8EVotLENpOF/Mw8qmjILDtELBqX532Gt9C+qUfOQv9H
-	 Kw4tGt+mAGZzJXus6Yn0WGWc7itSMXNdSho94OElCwhll98YTE1rNHTC4WRNtTcvpu
-	 0lDscfq8PUx96tphDiFuuQcAla0PEysd7OrusMSYayZhEpmcuk8Ddh0Kk0KBePdems
-	 fn2ux5Z6gQnLg==
-Subject: Re: [PATCH net v4] net: wwan: qcom_bam_dmux: account network packets
+	b=CM1jE2kirabr4C5dOeOZ2560aTwcLVhyPTUAHRsttFxvpRgkVWzRJ9Ekh/hNoxcvL
+	 UxgjS6Co3KYEAQMzM2d29g7h2SWKs9UZc9/r9jnE5R6gPI14ZrBut/+j4UiOKVlhfT
+	 2a37wMtyuEgP3ewBAOYQ3rNo6Jbz67ELGlwrBOIXTDilIInXMREvA/rv+8wLA0+tUV
+	 RV13YFofjVRsKQ00NMBDSMnQiY8EcuLoyo1gcQfxzhixL2cU4RXUy9J2fftU440S34
+	 ++fflDx0zFlF3qFA3DkY/R7voVNK9CG7XqyAUVpSEWS/uDUT6FSOmYWCFg023yUhZx
+	 WGZek9RmvVrNA==
+Subject:
+ Re: [PATCH net-next 1/9] dt-bindings: net: ti,dp83867: add supply properties
 From: netdev-bot+sashiko@kernel.org
-To: sinyavin@gmail.com
-Cc: stephan@gerhold.net, stephan.gerhold@linaro.org,
- loic.poulain@oss.qualcomm.com, ryazanov.s.a@gmail.com,
- johannes@sipsolutions.net, andrew+netdev@lunn.ch, davem@davemloft.net,
- edumazet@google.com, kuba@kernel.org, pabeni@redhat.com,
- linux-arm-msm@vger.kernel.org, netdev@vger.kernel.org,
- linux-kernel@vger.kernel.org
-Date: Wed, 09 Sep 2026 21:40:11 +0000
-Message-ID: <178899001185.219967.6678486297703743680@kernel.org>
-In-Reply-To: <20260904183737.2994139-1-sinyavin@gmail.com>
-References: <20260904183737.2994139-1-sinyavin@gmail.com>
-X-sashiko-severity: Medium
+To: mohd.anwar@oss.qualcomm.com
+Cc: andrew+netdev@lunn.ch, davem@davemloft.net, edumazet@google.com,
+ kuba@kernel.org, pabeni@redhat.com, robh@kernel.org, krzk+dt@kernel.org,
+ conor+dt@kernel.org, afd@ti.com, andrew@lunn.ch, hkallweit1@gmail.com,
+ linux@armlinux.org.uk, richardcochran@gmail.com, andersson@kernel.org,
+ konradybcio@kernel.org, alexandre.torgue@foss.st.com, peppe.cavallaro@st.com,
+ joabreu@synopsys.com, maxime.chevallier@bootlin.com,
+ mcoquelin.stm32@gmail.com, netdev@vger.kernel.org, devicetree@vger.kernel.org,
+ linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+ linux-stm32@st-md-mailman.stormreply.com,
+ linux-arm-kernel@lists.infradead.org
+Date: Wed, 09 Sep 2026 21:47:01 +0000
+Message-ID: <178899042172.219967.3850665440981574441@kernel.org>
+In-Reply-To: <20260904-shikra_ethernet-v1-1-a50765996035@oss.qualcomm.com>
+References: <20260904-shikra_ethernet-v1-1-a50765996035@oss.qualcomm.com>
+X-sashiko-severity: Low
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 Precedence: bulk
@@ -52,106 +57,73 @@ MIME-Version: 1.0
 Thank you for your contribution! Sashiko AI review found 1 potential
 issue(s) to consider:
 
-Critical: 0 · High: 0 · Medium: 1 · Low: 0
+Critical: 0 · High: 0 · Medium: 0 · Low: 1
 
-- [Medium] In `bam_dmux_netdev_start_xmit()` the new
-  `dev_sw_netstats_tx_add(netdev, 1, len)`…
+- [Low] Concern (invalidated): the four newly documented supply
+  properties (vdda-2p5-supply, vdd-1p0-supply, vdda-1p8-supply, vddio-…
 
 --
 
-net: wwan: qcom_bam_dmux: account network packets
+dt-bindings: net: ti,dp83867: add supply properties
 
-The BAM-DMUX data path did not update the netdev packet and byte counters,
-so userspace saw zero traffic.  This adds per-CPU software statistics with
-NETDEV_PCPU_STAT_TSTATS and dev_get_tstats64(), counting TX in
-bam_dmux_netdev_start_xmit() and RX in bam_dmux_cmd_data().
+This documents four power supply properties for the DP83867 PHY
+(vdda-2p5-supply, vdd-1p0-supply, vdda-1p8-supply and vddio-supply),
+matching the two-supply and three-supply configurations described in the
+datasheet plus the separate VDDIO rail.
 
-> diff --git a/drivers/net/wwan/qcom_bam_dmux.c b/drivers/net/wwan/qcom_bam_dmux.c
-> index cc6ace8d64371..03360301c8ee5 100644
-> --- a/drivers/net/wwan/qcom_bam_dmux.c
-> +++ b/drivers/net/wwan/qcom_bam_dmux.c
-
-[ ... ]
-
-> @@ -357,17 +358,19 @@ static netdev_tx_t bam_dmux_netdev_start_xmit(struct sk_buff *skb,
->  		if (!atomic_long_fetch_or(BIT(skb_dma - dmux->tx_skbs),
->  					  &dmux->tx_deferred_skb))
->  			queue_pm_work(&dmux->tx_wakeup_work);
-> -		return NETDEV_TX_OK;
-> -	}
-> +	} else {
-> +		if (!bam_dmux_skb_dma_submit_tx(skb_dma))
-> +			goto drop;
+> diff --git a/Documentation/devicetree/bindings/net/ti,dp83867.yaml b/Documentation/devicetree/bindings/net/ti,dp83867.yaml
+> index 4bc1f98fd9fe5..e78f08ded3d0d 100644
+> --- a/Documentation/devicetree/bindings/net/ti,dp83867.yaml
+> +++ b/Documentation/devicetree/bindings/net/ti,dp83867.yaml
+> @@ -118,6 +118,20 @@ properties:
+>        Transmitt FIFO depth- see dt-bindings/net/ti-dp83867.h for applicable
+>        values.
 >  
-> -	if (!bam_dmux_skb_dma_submit_tx(skb_dma))
-> -		goto drop;
-> +		dma_async_issue_pending(dmux->tx);
-> +	}
->  
-> -	dma_async_issue_pending(dmux->tx);
-> +	dev_sw_netstats_tx_add(netdev, 1, len);
->  	return NETDEV_TX_OK;
+> +  vdda-2p5-supply:
+> +    description: 2.5V analog supply (connected to the VDDA2P5 pins).
+> +
+> +  vdd-1p0-supply:
+> +    description: 1.0V digital core supply (connected to the VDD1P0 pins).
+> +
+> +  vdda-1p8-supply:
+> +    description: 1.8V analog supply (connected to the VDDA1P8 pins).
+> +
+> +  vddio-supply:
+> +    description: |
+> +      I/O supply (connected to the VDDIO pins). The supply can be 1.8V,
+> +      2.5V or 3.3V.
+> +
 
-[Severity: Medium]
-Is it intended that dev_sw_netstats_tx_add() now also covers the deferred
-branch, where nothing has been submitted to the DMA engine yet?
+[Severity: Low]
+One question came up while reviewing this in isolation: do these four
+property names have a consumer anywhere?
 
-In the active <= 0 case the skb is only marked in dmux->tx_deferred_skb and
-bam_dmux_tx_wakeup_work() is queued.  The descriptor is prepared later in
-that worker, which can bail out before submitting anything:
+Looking at the rest of the series, they do. The following patch,
+"net: phy: dp83867: add regulator supply management", adds
+dp83867_power_on() in drivers/net/phy/dp83867.c, which walks exactly
+these names:
 
-drivers/net/wwan/qcom_bam_dmux.c:bam_dmux_tx_wakeup_work() {
-	ret = pm_runtime_resume_and_get(dmux->dev);
-	if (ret < 0) {
-		dev_err(dmux->dev, "Failed to resume: %d\n", ret);
-		return;
-	}
-	...
-	for_each_set_bit(i, &pending, BAM_DMUX_NUM_SKB) {
-		bam_dmux_skb_dma_submit_tx(&dmux->tx_skbs[i]);
-	}
-	...
-}
+  static const char * const supply_names[] = {
+          "vdda-2p5", "vdd-1p0", "vdda-1p8", "vddio",
+  };
+  ...
+          ret = devm_regulator_get_enable_optional(dev, supply_names[i]);
 
-bam_dmux_runtime_resume() can return -ETIMEDOUT from any of its three 2
-second waits on the remote modem, or -ENXIO when the TX channel cannot be
-requested, for example after a modem crash or power collapse.  In that case
-the worker returns with the packet still sitting in dmux->tx_skbs[], while
-tx_packets/tx_bytes have already been incremented for it and tx_dropped is
-never touched.
+and dp83867_probe() calls it:
 
-The other failure mode is the return value of the same helper being ignored
-in the worker:
+          ret = dp83867_power_on(phydev);
+          if (ret)
+                  return ret;
 
-drivers/net/wwan/qcom_bam_dmux.c:bam_dmux_skb_dma_submit_tx() {
-	desc = dmaengine_prep_slave_single(dmux->tx, skb_dma->addr,
-					   skb_dma->skb->len, DMA_MEM_TO_DEV,
-					   DMA_PREP_INTERRUPT);
-	if (!desc) {
-		dev_err(dmux->dev, "Failed to prepare TX DMA buffer\n");
-		return false;
-	}
-	...
-}
+So the names match and devm_regulator_get_enable_optional() handles the
+disable/put on teardown. No change requested here; noting it only so the
+binding-only patch is not read as documenting unused properties.
 
-So the two callers of bam_dmux_skb_dma_submit_tx() end up with opposite
-accounting: start_xmit() counts a drop via dev_core_stats_tx_dropped_inc(),
-the worker counts nothing at all.
-
-The commit message says the counters are updated "after the driver has
-prepared and accepted them", which explains counting at accept time, but
-would it be better to account the deferred packets from
-bam_dmux_tx_wakeup_work() once submission succeeds, and to increment
-tx_dropped there when it does not?
-
-> drop:
->  	bam_dmux_tx_done(skb_dma);
-> +	dev_core_stats_tx_dropped_inc(netdev);
->  	dev_kfree_skb_any(skb);
->  	return NETDEV_TX_OK;
->  }
-
-[ ... ]
+One remaining observation, and it belongs to the driver patch rather than
+this one: a rail such as VDDIO that gates the MDIO interface itself cannot
+be brought up from a PHY probe callback, since probe only runs after the
+PHY ID has already been read over MDIO. Is that ordering expected to be
+handled by the MDIO bus or board regulator-always-on instead?
 
 -- 
-Sashiko AI review · https://netdev-ai.bots.linux.dev/sashiko/#/patchset/20260904183737.2994139-1-sinyavin%40gmail.com
+Sashiko AI review · https://netdev-ai.bots.linux.dev/sashiko/#/patchset/20260904-shikra_ethernet-v1-0-a50765996035%40oss.qualcomm.com
