@@ -1,384 +1,1097 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 47C3C357D09;
-	Wed,  9 Sep 2026 09:03:06 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7BB7C481FD0
+	for <linux-arm-msm@vger.kernel.org>; Wed,  9 Sep 2026 09:06:14 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788944588; cv=none; b=bZ3KKvI8mrBmu45xz5YbHqlGmhM8jSYalbOp/KBF6kx17YkYq5OchD335kR9olzaSbj9rOfSZKikTSQ6DV2EEMyNmyMMfSWiDVoz1GyhP8xLBLCo6mBe9G/hFlzfuCduUsLU30h6GnpZtgzdVPh1daFzSW7LRCRZJShMWYkOATs=
+	t=1788944783; cv=none; b=CbBqgaD6G/zgHMFvEWDMeSQFfDOMh3EPebknGCVceN92mY5TTSyBaS9fUvYY6NkTRhC20sQYhXUhwSoY5/1RJWfvaj8H1aE3hEDMgeWBNp1B46oU2eA0LYODXjg2Gx8YorIxexyt62+TBOGzyf05Wv7yUaZeCcBB9TplRr4YozI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788944588; c=relaxed/simple;
-	bh=w1N1zPkQ9mGPXQZD3zwD2xR1mRDu14CBGKK8vaPJxRo=;
-	h=Subject:From:To:Cc:Date:Message-ID:In-Reply-To:References:
-	 Content-Type:MIME-Version; b=Vlys+kHcD5nSdt9RydewXSRVQF2AfuaGXogztr1fAj3ToIysoLJ52gCq9IQmQgUhxJ4PAaxaMn4pCBlLZbax5iODDUjlBIgBNMRF+6PVVmLCsp7RbZFxCcfQ6kn9Xf+jiGikUaZSnV+nKl0elg3L02+SdRYd2XTNO9Ec4A3KpAI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=UxvJre/d; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1788944783; c=relaxed/simple;
+	bh=Eyr5OqRjprNlL76K5w1bPL8pRmKgTjZ85wV1wXgFVCs=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=EfJfI0sgP1WXTmPmSnfQqRydQv5YAyFlWHaGY7VK1nKJxSdutetzXdE9dcD4ugFQKHFuW1bktgb2UNf4NsR1B549D/9hphOhlFzGtDFmgqlN8QamO7MZ96gCEV0daLOPgdpGgC+ta3WNRt4fj1oE6oGGa+qAWcUVU5EgOpOK0lM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=TSbJ5lfV; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=V59pI6Ox; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="UxvJre/d"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id C759D1F00A3A;
-	Wed,  9 Sep 2026 09:03:05 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1788944586;
-	bh=AdhICVDd3XeO9TrCmQEOzxpFVAahhrpfNkZGct+poOg=;
-	h=Subject:From:To:Cc:Date:In-Reply-To:References;
-	b=UxvJre/dJstmYmqqKLLe7aEntPNoqZpVbxvA2jWRZNV/Pf9rWqZFoYom3wLXDJWi0
-	 m2uTDCL8PRCRWxjVBL58zKwL/mAlhx0f2Gket4Al7sD0a0JvAo537fGpfgbHTtKjD8
-	 dtARbgWiywnd78DybldGxX0kn62Hx0ornJ6RuzM3shxFcgxNXheDnS9dg0Z0RB/1Af
-	 DBr18u3iG8icamiIWeiyuQ2uVqqQlMBajWV1eB8LGWQiPVNa3VUBjJyUU0oua1IlKB
-	 Ss8wjqHa3vz5L2iuY7h074Mh7+ypcvmyZ3oYYg7pp6VDgnIiQavmMwtkBHc3PlDVGP
-	 YAaEi1upTid3Q==
-Subject: Re: [PATCH net v5] net: wwan: qcom_bam_dmux: fix TX DMA channel
- use-after-free
-From: netdev-bot+sashiko@kernel.org
-To: getshell@seu.edu.cn
-Cc: stephan@gerhold.net, loic.poulain@oss.qualcomm.com, ryazanov.s.a@gmail.com,
- johannes@sipsolutions.net, andrew+netdev@lunn.ch, davem@davemloft.net,
- edumazet@google.com, kuba@kernel.org, pabeni@redhat.com,
- netdev@vger.kernel.org, linux-arm-msm@vger.kernel.org, stable@vger.kernel.org
-Date: Wed, 09 Sep 2026 09:03:05 +0000
-Message-ID: <178894458529.219967.3874306151542640489@kernel.org>
-In-Reply-To: <20260903180057.1437-1-getshell@seu.edu.cn>
-References: <20260903180057.1437-1-getshell@seu.edu.cn>
-X-sashiko-severity: High
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="TSbJ5lfV";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="V59pI6Ox"
+Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6896DdT1483366
+	for <linux-arm-msm@vger.kernel.org>; Wed, 9 Sep 2026 09:06:10 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	lW40KngNn6O0mLiyMZI/6xt1ruUd0a8URqI66rTSlAg=; b=TSbJ5lfVLwBJhUFp
+	5ezcHn7DuTZC/9cw4uvhcSZBvnHjPKEhKKih+94qv6S5yrKSi5pX2/Zlr7hUewqR
+	KqlYcE6ZyVqcdf35OaK6++cCWecapGcFfC1WSK1fa+UHyvy6wQws2GcKQlF8xSGc
+	dmaIONj4870qOYU2GWQBCoIt1VRhylRr2bcgUWnqHXTQxRBu2AUMZ2ThQU3nuJQK
+	8/XJpQ2eJTHd/UH9E21gN4vcB16nV5y+r3bMI87OvXJz29OaBAtW/Xi6TypdoMVD
+	7Q1Sq5HAnX+X2Wv8C0pZ+zsz8lpSbd0DT17tP5qs7XgeDb1rqeM7+MRgLRQ/xxvN
+	dFM2xg==
+Received: from mail-oo1-f70.google.com (mail-oo1-f70.google.com [209.85.161.70])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gjqf1k4yc-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Wed, 09 Sep 2026 09:06:10 +0000 (GMT)
+Received: by mail-oo1-f70.google.com with SMTP id 006d021491bc7-6b1a220dfc7so2305531eaf.3
+        for <linux-arm-msm@vger.kernel.org>; Wed, 09 Sep 2026 02:06:10 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1788944770; x=1789549570; darn=vger.kernel.org;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :content-type:mime-version:references:message-id:subject:cc:to:from
+         :date:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=lW40KngNn6O0mLiyMZI/6xt1ruUd0a8URqI66rTSlAg=;
+        b=V59pI6Ox2E+rWrwpiN3VVAuvs9hXHaRtI8mtb/quESGU4Z3g7rCyBEDvTxC5Mveyrt
+         0Rb4zDBv/8NDgnPWvnS/CCIdpvXejIzzb9AiksMu34pWpLL/wVuyvShvKsRROGfuR2Ko
+         7r+KGdF8rHgATzZuJq970DitzrjV8yETBAAMC/m2Yv3Hgce9yZwvlGgbOQAhZO19HFWR
+         d5saZpY++oPNNdA0re8w2unqAV5or0AvTE6baEL2q3T+8KBt59VpJGENEkkiEMKrRplj
+         ZJOuO7NiYMh/W3R7itPdfV+rgOvsFBShELgrjkGIuPhcGIDj2uoBt+6w2dEbac/NN6uz
+         WSSQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1788944770; x=1789549570;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :content-type:mime-version:references:message-id:subject:cc:to:from
+         :date:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=lW40KngNn6O0mLiyMZI/6xt1ruUd0a8URqI66rTSlAg=;
+        b=kbZ35tpfZReGPV00/06cPRpHI8yaBmnk3FFtdmfDUZlMMmuNfk3SrLzHT/GdaKfGSh
+         qb7u8eBgSRZRiWrBowYECN7tcpdOMarjqvSwo1+7Snt6WO5MGdU69BJjlDx5jOavllEw
+         KNoiSDOSzv2/3AOOREbkRRKXoMTTgIT6+FneGZVgu6kov6c00zZn0E7t/6jsYYiXx0HV
+         nKVnl7PasKVgbX3u3RwWja5Qml1IGpg6LNVZhhly2WrYQ2fpLk4D44LcYtTkkUD3m9Xm
+         uZUbYroikLeeLGkAkXyGVRbDdzHLBbYJJV/Mmi0e3uoKsMIOV+x5FsV/MD2hcC5vr85Z
+         iLCA==
+X-Forwarded-Encrypted: i=1; AKwUvByPa7HVAGGrewp2dVgRxRDAobztcuxiLW/6EB2ub9TH2PFe4Bb/1RXE+jwVWrTAJHtqoax5GHwN3z3OqYnW@vger.kernel.org
+X-Gm-Message-State: AFuF++konA5wxa2G/kK/PK8PwOcXQQqXn1GmRXj3+08bq+7WlepA2Lx5
+	MqigLyvMWUI68pVDkZSBFxXlA9wydZo8E5FxnTKwTFVdF2REcQeFKu/EdFSS0X7qg1M0QUIrs3+
+	ldk2Pu55w0kekCZiDelrhN/ppwRcA+Vag6bu4cw4rj8ucmup5/8fkr9ftpbcT9x+xEsbu
+X-Gm-Gg: AYBFou3bWroNvQ8WvSvopxCCBw8nPDLhS22ZjlNgg86Gb5MqyO9jYHcQbZV61hZYTlG
+	1FQex/ig4UEzy1zSR+69SbTc+uaLmm/sXm/wW/u5RpzGtQZEMFOKY/Zj7kJU/Jl6ILhtqypZtzq
+	ncRwsixkV+FLvVEaYHGr/YdlIdHzKz8nb4NedM8r3ipG98IiliNvgN2IJ/4jOHKNT3sWdlvafww
+	YRV/vNo2Xj8YHHXfJr8EsALjCIw6pe+wg4z9jchjdUvR+7qDgujIwrI65KCd73d0d3YT7dprptQ
+	JsOhp3Ed9CVPotpRu6SNDFJoE3E050644GD0Ei6KeblKSBeF7JOzGpcQWiYJ7O21t4/yQk30LKU
+	vzVBlokUpj1bJOEbWAVB9AS1UwnU2qAcZzcMG9TyUJCc=
+X-Received: by 2002:a05:6820:2916:b0:6b7:46e9:970c with SMTP id 006d021491bc7-6b746e9a2f0mr15556661eaf.60.1788944769656;
+        Wed, 09 Sep 2026 02:06:09 -0700 (PDT)
+X-Received: by 2002:a05:6820:2916:b0:6b7:46e9:970c with SMTP id 006d021491bc7-6b746e9a2f0mr15556623eaf.60.1788944769044;
+        Wed, 09 Sep 2026 02:06:09 -0700 (PDT)
+Received: from QCOM-aGQu4IUr3Y (i-global052.qualcomm.com. [199.106.103.52])
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1434c745a09sm10719342c88.7.2026.09.09.02.06.03
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 09 Sep 2026 02:06:07 -0700 (PDT)
+Date: Wed, 9 Sep 2026 17:06:01 +0800
+From: Shawn Guo <shengchao.guo@oss.qualcomm.com>
+To: Taniya Das <taniya.das@oss.qualcomm.com>
+Cc: Bjorn Andersson <andersson@kernel.org>, Stephen Boyd <sboyd@kernel.org>,
+        Brian Masney <bmasney+clk@redhat.com>,
+        Jerome Brunet <jbrunet+clk@baylibre.com>,
+        Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>,
+        Ajit Pandey <ajit.pandey@oss.qualcomm.com>,
+        Imran Shaik <imran.shaik@oss.qualcomm.com>,
+        Jagadeesh Kona <jagadeesh.kona@oss.qualcomm.com>,
+        linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org,
+        linux-kernel@vger.kernel.org, devicetree@vger.kernel.org
+Subject: Re: [PATCH 3/3] clk: qcom: dprxcc: Add Nord DPRX clock controller
+ support
+Message-ID: <aqEheWi6OaJtJfDu@QCOM-aGQu4IUr3Y>
+References: <20260907-nords_dprx-v1-0-d472af3f01b1@oss.qualcomm.com>
+ <20260907-nords_dprx-v1-3-d472af3f01b1@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <20260907-nords_dprx-v1-3-d472af3f01b1@oss.qualcomm.com>
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTA5MDEwMCBTYWx0ZWRfXyQmKrPHs+B8a
+ BZhqgXfANwrJGlC9YGPoI2HCyqbn+zX8OS9ySqvxrqo9LOknm1HNiG/rBxCfdzhXWqUP4WG1E+W
+ DpCzywgCnavJE6tNqT6XGzv4DDMhRYbPH+1aULvtckhZjvglQMbjRIgnlAZ8VH+kumWfGsSx1D1
+ lQVrdJrlaKZpUy8GUztxhx0cCcHrazrVN6D418HhLiYlrij2nCQ1BLA8EvxuTxFDNLr1tK2bqqg
+ smWEOk3zWELfS2i4NKh727HTRAneJFeZyIHBj0EjcqRooqiyA+W1HZk16PWX5H7IKVn1OfWnLaf
+ t1fVxJjgGmMZqlNmTt3+bwMZhkt/Xl3EnX2eXHhebh74sYUO/ouh0WK1BzeU0iFWnRPI3rIvC29
+ 3DBwXnlMSjKgVNKFtLALUi2XMq37Bn8/c/hRmNbm/GxL+wbP65RYNlTDVEoek79iqm9qvFmCm+c
+ X8JVDeM49HfxOjvAe6g==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTA5MDEwMCBTYWx0ZWRfX5JgIQ97rGj8A
+ +TZRigk8+/HjIxZll9pD951Ng+0ShVwcGH0XEdFidbfZEEUXjp6wHV1pwWkfB7W0jXqKUNzo5cT
+ Nw38dRZoCc9YndJBFLoGqJADz0IYKis=
+X-Proofpoint-GUID: KZjH4VZp0VivTVRQ7iCD_l-hWMRv5dx8
+X-Authority-Analysis: v=2.4 cv=JY2Ma0KV c=1 sm=1 tr=0 ts=6aa12182 cx=c_pps
+ a=lkkFf9KBb43tY3aOjL++dA==:117 a=b9+bayejhc3NMeqCNyeLQQ==:17
+ a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_glEPmIy2e8OvE2BGh3C:22
+ a=EUspDBNiAAAA:8 a=XO64WZ8hu4nR4CtHWZEA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+ a=k4UEASGLJojhI9HsvVT1:22
+X-Proofpoint-ORIG-GUID: KZjH4VZp0VivTVRQ7iCD_l-hWMRv5dx8
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-09-08_03,2026-09-08_03,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ impostorscore=0 clxscore=1015 malwarescore=0 lowpriorityscore=0 phishscore=0
+ suspectscore=0 adultscore=0 priorityscore=1501 spamscore=0 bulkscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2609090100
 
-Thank you for your contribution! Sashiko AI review found 2 potential
-issue(s) to consider:
-
-Critical: 0 · High: 1 (2) · Medium: 1 · Low: 0
-
-- [High] The new design (live level re-read via
-  irq_get_irqchip_state(IRQCHIP_STATE_LINE_LEVEL) as the only state…
-- [Medium] bam_dmux_runtime_suspend() turns a possibly stale
-  BAM_DMUX_PC_VOTE_DOWN_PENDING into an irreversible power-down…
-
-Pre-existing issues:
-- [High] bam_dmux_remove() cancels register_netdev_work and unregisters
-  all netdevs while the RX DMA producer and the pc IRQ are still live;…
-- [High] bam_dmux_rx_callback() can run concurrently with
-  bam_dmux_power_off() and dereference a released/NULL RX channel.
-
---
-
-net: wwan: qcom_bam_dmux: fix TX DMA channel use-after-free
-
-This adds a power_lock mutex to serialize the modem power-control state,
-re-reads the pc line level at each decision point instead of toggling a
-cached bool, defers a pc=false transition while the host vote is active and
-TX is allocated, and keeps both state IRQs masked with IRQF_NO_AUTOEN until
-probe has committed the initial state.
-
-Link: https://lore.kernel.org/netdev/20260822085308.1089-1-getshell@seu.edu.cn/
-
-> diff --git a/drivers/net/wwan/qcom_bam_dmux.c b/drivers/net/wwan/qcom_bam_dmux.c
-> index cc6ace8d64371..429d34a3cfa07 100644
-> --- a/drivers/net/wwan/qcom_bam_dmux.c
-> +++ b/drivers/net/wwan/qcom_bam_dmux.c
-
-[ ... ]
-
-> @@ -655,6 +683,8 @@ static void bam_dmux_free_skbs(struct bam_dmux_skb_dma skbs[],
+On Mon, Sep 07, 2026 at 01:56:15PM +0530, Taniya Das wrote:
+> Add support for the DisplayPort Receiver (DPRX) clock controllers on
+> Nord devices. There are two identical DPRX clock controller
+> instances (DPRX0 and DPRX1), each providing clocks for the DPRX core,
+> audio, AHB and video memory paths, along with core PLLs.
+> 
+> Signed-off-by: Taniya Das <taniya.das@oss.qualcomm.com>
+> ---
+>  drivers/clk/qcom/Kconfig        |  11 +
+>  drivers/clk/qcom/Makefile       |   1 +
+>  drivers/clk/qcom/dprxcc0-nord.c | 436 ++++++++++++++++++++++++++++++++++++++++
+>  drivers/clk/qcom/dprxcc1-nord.c | 436 ++++++++++++++++++++++++++++++++++++++++
+>  4 files changed, 884 insertions(+)
+> 
+> diff --git a/drivers/clk/qcom/Kconfig b/drivers/clk/qcom/Kconfig
+> index 6ef083f5d9e251d2d2c5592a3f3dd51845dc743b..07685cd1f65e20a4110fe301501bcad5060c7665 100644
+> --- a/drivers/clk/qcom/Kconfig
+> +++ b/drivers/clk/qcom/Kconfig
+> @@ -244,6 +244,17 @@ config CLK_NORD_DISPCC
+>  	  Say Y if you want to support display devices and functionality such as
+>  	  splash screen.
 >  
->  static void bam_dmux_power_off(struct bam_dmux *dmux)
->  {
-> +	lockdep_assert_held(&dmux->power_lock);
+> +config CLK_NORD_DPRXCC
+> +	tristate "Nord DPRX Clock Controller"
+> +	depends on ARM64 || COMPILE_TEST
+> +	select CLK_NORD_GCC
+> +	default m if ARCH_QCOM
+> +	help
+> +	  Support for the Display Port Receiver (DPRX) clock controller on
+> +	  Nord devices. The DPRX clock controller provides clocks for the
+> +	  DPRX core, audio, AHB and video memory paths.
+> +	  Say Y if you want to support DPRX functionality.
 > +
->  	if (dmux->tx) {
->  		dmaengine_terminate_sync(dmux->tx);
->  		dma_release_channel(dmux->tx);
-
-[Severity: High]
-This isn't a bug introduced by this patch, but now that power_lock
-serializes the power-control paths, is the RX completion callback still
-left outside that serialization?
-
-bam_dmux_rx_callback() ends with an unconditional refill:
-
-drivers/net/wwan/qcom_bam_dmux.c:bam_dmux_rx_callback() {
-	...
-out:
-	if (bam_dmux_skb_dma_queue_rx(skb_dma, GFP_ATOMIC))
-		dma_async_issue_pending(dmux->rx);
-}
-
-while bam_dmux_power_off() does:
-
-	if (dmux->rx) {
-		dmaengine_terminate_sync(dmux->rx);
-		dma_release_channel(dmux->rx);
-		dmux->rx = NULL;
-	}
-
-Can the refill see dmux->rx == NULL and oops? dmaengine_prep_config_single()
-dereferences chan with no NULL check:
-
-include/linux/dmaengine.h:
-	if (chan->device->device_prep_config_sg)
-
-Qualcomm BAM registers device_terminate_all but no device_synchronize:
-
-drivers/dma/qcom/bam_dma.c:
-	bdev->common.device_terminate_all = bam_dma_terminate_all;
-
-so dmaengine_terminate_sync() -> dmaengine_synchronize() cannot wait for a
-callback that vchan_complete() has already spliced off and started. Should
-the RX callback also take power_lock, or check a shutdown flag, before
-requeueing?
-
-> @@ -670,10 +700,24 @@ static void bam_dmux_free_skbs(struct bam_dmux_skb_dma skbs[],
->  	bam_dmux_free_skbs(dmux->rx_skbs, DMA_FROM_DEVICE);
->  }
->  
-> -static irqreturn_t bam_dmux_pc_irq(int irq, void *data)
-> +static void bam_dmux_complete_pc_down(struct bam_dmux *dmux)
->  {
-> -	struct bam_dmux *dmux = data;
-> -	bool new_state = !dmux->pc_state;
-> +	lockdep_assert_held(&dmux->power_lock);
+>  config CLK_NORD_CAMCC
+>  	tristate "Nord Camera Clock Controller"
+>  	depends on ARM64 || COMPILE_TEST
+> diff --git a/drivers/clk/qcom/Makefile b/drivers/clk/qcom/Makefile
+> index a6c676f68b79e4dc5928dc4cd7101c35e2e84787..69ce7c2c2e4dfe0924da8ae4979f2cae900ccc84 100644
+> --- a/drivers/clk/qcom/Makefile
+> +++ b/drivers/clk/qcom/Makefile
+> @@ -49,6 +49,7 @@ obj-$(CONFIG_CLK_KUNO_GCC) += gcc-kuno.o
+>  obj-$(CONFIG_CLK_MAILI_VIDEOCC) += videocc-maili.o
+>  obj-$(CONFIG_CLK_NORD_CAMCC) += camcc-nord.o
+>  obj-$(CONFIG_CLK_NORD_DISPCC) += dispcc0-nord.o dispcc1-nord.o
+> +obj-$(CONFIG_CLK_NORD_DPRXCC) += dprxcc0-nord.o dprxcc1-nord.o
+>  obj-$(CONFIG_CLK_NORD_GCC) += gcc-nord.o negcc-nord.o nwgcc-nord.o segcc-nord.o
+>  obj-$(CONFIG_CLK_NORD_GPUCC) += gpucc-nord.o gpu2cc-nord.o
+>  obj-$(CONFIG_CLK_NORD_TCSRCC) += tcsrcc-nord.o
+> diff --git a/drivers/clk/qcom/dprxcc0-nord.c b/drivers/clk/qcom/dprxcc0-nord.c
+> new file mode 100644
+> index 0000000000000000000000000000000000000000..85cfa8f3be26b16fb8e49c1745b69574b26e66aa
+> --- /dev/null
+> +++ b/drivers/clk/qcom/dprxcc0-nord.c
+> @@ -0,0 +1,436 @@
+> +// SPDX-License-Identifier: GPL-2.0-only
+> +/*
+> + * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+> + */
 > +
-> +	bam_dmux_power_off(dmux);
-> +	bam_dmux_pc_ack(dmux);
-> +	WRITE_ONCE(dmux->pc_state, false);
+> +#include <linux/clk-provider.h>
+> +#include <linux/module.h>
+> +#include <linux/of.h>
+
+This include can be dropped.
+
+> +#include <linux/platform_device.h>
+> +#include <linux/regmap.h>
+> +
+> +#include <dt-bindings/clock/qcom,nord-dprxcc.h>
+> +
+> +#include "clk-alpha-pll.h"
+> +#include "clk-branch.h"
+> +#include "clk-pll.h"
+
+This include doesn't seem to be needed.
+
+> +#include "clk-rcg.h"
+> +#include "clk-regmap.h"
+> +#include "clk-regmap-divider.h"
+> +#include "clk-regmap-mux.h"
+
+Ditto
+
+> +#include "common.h"
+> +#include "reset.h"
+> +
+> +enum {
+> +	DT_BI_TCXO,
+> +	DT_AHB_CLK,
+
+The binding requires the DPRX CFG AHB clock in clocks.
+
+      - description: DPRX CFG AHB clock from NWGCC
+
+But nothing in the driver references index 1 — not in any parent_data,
+not via devm_clk_get_enabled().
+
+> +	DT_SLEEP_CLK,
+> +};
+> +
+> +enum {
+> +	P_BI_TCXO,
+> +	P_DPRX_0_DPRX_CC_PLL0_OUT_EVEN,
+> +	P_DPRX_0_DPRX_CC_PLL0_OUT_MAIN,
+> +	P_DPRX_0_DPRX_CC_PLL0_OUT_ODD,
+> +	P_DPRX_0_DPRX_CC_PLL1_OUT_EVEN,
+> +	P_DPRX_0_DPRX_CC_PLL1_OUT_MAIN,
+> +	P_SLEEP_CLK,
+> +};
+> +
+> +static const struct pll_vco lucid_ole_vco[] = {
+> +	{ 249600000, 2300000000, 0 },
+> +};
+> +
+> +static const struct pll_vco zonda_ole_vco[] = {
+> +	{ 700000000, 3600000000, 0 },
+> +};
+> +
+> +/* 550.0 MHz Configuration */
+> +static const struct alpha_pll_config dprx_0_dprx_cc_pll0_config = {
+> +	.l = 0x1c,
+> +	.alpha = 0xa555,
+> +	.config_ctl_val = 0x20485699,
+> +	.config_ctl_hi_val = 0x00182261,
+> +	.config_ctl_hi1_val = 0x82aa299c,
+> +	.test_ctl_val = 0x00000000,
+> +	.test_ctl_hi_val = 0x00000003,
+> +	.test_ctl_hi1_val = 0x00009000,
+> +	.test_ctl_hi2_val = 0x00000034,
+> +	.user_ctl_val = 0x00000000,
+> +	.user_ctl_hi_val = 0x00400005,
+> +};
+> +
+> +static struct clk_alpha_pll dprx_0_dprx_cc_pll0 = {
+> +	.offset = 0x0,
+> +	.config = &dprx_0_dprx_cc_pll0_config,
+> +	.vco_table = lucid_ole_vco,
+> +	.num_vco = ARRAY_SIZE(lucid_ole_vco),
+> +	.regs = clk_alpha_pll_regs[CLK_ALPHA_PLL_TYPE_LUCID_OLE],
+> +	.clkr = {
+> +		.hw.init = &(const struct clk_init_data) {
+> +			.name = "dprx_0_dprx_cc_pll0",
+> +			.parent_data = &(const struct clk_parent_data) {
+> +				.index = DT_BI_TCXO,
+> +			},
+> +			.num_parents = 1,
+> +			.ops = &clk_alpha_pll_lucid_evo_ops,
+> +		},
+> +	},
+> +};
+> +
+> +/* 1080.0 MHz Configuration */
+> +static const struct alpha_pll_config dprx_0_dprx_cc_pll1_config = {
+> +	.l = 0x38,
+> +	.alpha = 0x4000000,
+> +	.config_ctl_val = 0x08240800,
+> +	.config_ctl_hi_val = 0x05008001,
+> +	.config_ctl_hi1_val = 0x00000000,
+> +	.config_ctl_hi2_val = 0x00000000,
+> +	.user_ctl_val = 0x00000000,
+> +	.user_ctl_hi_val = 0x02000080,
+> +};
+> +
+> +static struct clk_alpha_pll dprx_0_dprx_cc_pll1 = {
+> +	.offset = 0x1000,
+> +	.alpha_width = 28,
+> +	.config = &dprx_0_dprx_cc_pll1_config,
+> +	.vco_table = zonda_ole_vco,
+> +	.num_vco = ARRAY_SIZE(zonda_ole_vco),
+> +	.regs = clk_alpha_pll_regs[CLK_ALPHA_PLL_TYPE_ZONDA_OLE],
+> +	.clkr = {
+> +		.hw.init = &(const struct clk_init_data) {
+> +			.name = "dprx_0_dprx_cc_pll1",
+> +			.parent_data = &(const struct clk_parent_data) {
+> +				.index = DT_BI_TCXO,
+> +			},
+> +			.num_parents = 1,
+> +			.ops = &clk_alpha_pll_zonda_ole_ops,
+> +		},
+> +	},
+> +};
+> +
+> +static const struct parent_map dprx_cc_0_parent_map_0[] = {
+> +	{ P_BI_TCXO, 0 },
+> +	{ P_DPRX_0_DPRX_CC_PLL0_OUT_EVEN, 1 },
+> +	{ P_DPRX_0_DPRX_CC_PLL0_OUT_ODD, 2 },
+> +	{ P_DPRX_0_DPRX_CC_PLL0_OUT_MAIN, 4 },
+> +	{ P_SLEEP_CLK, 5 },
+> +};
+> +
+> +static const struct clk_parent_data dprx_cc_0_parent_data_0[] = {
+> +	{ .index = DT_BI_TCXO },
+> +	{ .hw = &dprx_0_dprx_cc_pll0.clkr.hw },
+> +	{ .hw = &dprx_0_dprx_cc_pll0.clkr.hw },
+> +	{ .hw = &dprx_0_dprx_cc_pll0.clkr.hw },
+> +	{ .index = DT_SLEEP_CLK },
+> +};
+> +
+> +static const struct parent_map dprx_cc_0_parent_map_1[] = {
+> +	{ P_BI_TCXO, 0 },
+> +	{ P_DPRX_0_DPRX_CC_PLL1_OUT_EVEN, 3 },
+> +	{ P_SLEEP_CLK, 5 },
+> +	{ P_DPRX_0_DPRX_CC_PLL1_OUT_MAIN, 6 },
+> +};
+> +
+> +static const struct clk_parent_data dprx_cc_0_parent_data_1[] = {
+> +	{ .index = DT_BI_TCXO },
+> +	{ .hw = &dprx_0_dprx_cc_pll1.clkr.hw },
+> +	{ .index = DT_SLEEP_CLK },
+> +	{ .hw = &dprx_0_dprx_cc_pll1.clkr.hw },
+> +};
+> +
+> +static const struct freq_tbl ftbl_dprx_0_dprx_cc_audio_clk_src[] = {
+> +	F(216000000, P_DPRX_0_DPRX_CC_PLL1_OUT_MAIN, 5, 0, 0),
+> +	F(300000000, P_DPRX_0_DPRX_CC_PLL1_OUT_MAIN, 5, 0, 0),
+> +	F(360000000, P_DPRX_0_DPRX_CC_PLL1_OUT_MAIN, 5, 0, 0),
+> +	{ }
+> +};
+> +
+> +static struct clk_rcg2 dprx_0_dprx_cc_audio_clk_src = {
+> +	.cmd_rcgr = 0x80c8,
+> +	.mnd_width = 0,
+> +	.hid_width = 5,
+> +	.parent_map = dprx_cc_0_parent_map_1,
+> +	.freq_tbl = ftbl_dprx_0_dprx_cc_audio_clk_src,
+> +	.hw_clk_ctrl = true,
+> +	.clkr.hw.init = &(const struct clk_init_data) {
+> +		.name = "dprx_0_dprx_cc_audio_clk_src",
+> +		.parent_data = dprx_cc_0_parent_data_1,
+> +		.num_parents = ARRAY_SIZE(dprx_cc_0_parent_data_1),
+> +		.flags = CLK_SET_RATE_PARENT,
+> +		.ops = &clk_rcg2_shared_ops,
+> +	},
+> +};
+> +
+> +static const struct freq_tbl ftbl_dprx_0_dprx_cc_core_rcg0_clk_src[] = {
+> +	F(220000000, P_DPRX_0_DPRX_CC_PLL0_OUT_MAIN, 2.5, 0, 0),
+> +	F(440000000, P_DPRX_0_DPRX_CC_PLL0_OUT_MAIN, 2.5, 0, 0),
+> +	{ }
+> +};
+> +
+> +static struct clk_rcg2 dprx_0_dprx_cc_core_rcg0_clk_src = {
+> +	.cmd_rcgr = 0x8004,
+> +	.mnd_width = 0,
+> +	.hid_width = 5,
+> +	.parent_map = dprx_cc_0_parent_map_0,
+> +	.freq_tbl = ftbl_dprx_0_dprx_cc_core_rcg0_clk_src,
+> +	.hw_clk_ctrl = true,
+> +	.clkr.hw.init = &(const struct clk_init_data) {
+> +		.name = "dprx_0_dprx_cc_core_rcg0_clk_src",
+> +		.parent_data = dprx_cc_0_parent_data_0,
+> +		.num_parents = ARRAY_SIZE(dprx_cc_0_parent_data_0),
+> +		.flags = CLK_SET_RATE_PARENT,
+> +		.ops = &clk_rcg2_shared_ops,
+> +	},
+> +};
+> +
+> +static const struct freq_tbl ftbl_dprx_0_dprx_cc_core_rcg2_clk_src[] = {
+> +	F(275000000, P_DPRX_0_DPRX_CC_PLL0_OUT_MAIN, 2, 0, 0),
+> +	F(440000000, P_DPRX_0_DPRX_CC_PLL0_OUT_MAIN, 2.5, 0, 0),
+> +	F(550000000, P_DPRX_0_DPRX_CC_PLL0_OUT_MAIN, 2, 0, 0),
+> +	{ }
+> +};
+> +
+> +static struct clk_rcg2 dprx_0_dprx_cc_core_rcg2_clk_src = {
+> +	.cmd_rcgr = 0x8068,
+> +	.mnd_width = 0,
+> +	.hid_width = 5,
+> +	.parent_map = dprx_cc_0_parent_map_0,
+> +	.freq_tbl = ftbl_dprx_0_dprx_cc_core_rcg2_clk_src,
+> +	.hw_clk_ctrl = true,
+> +	.clkr.hw.init = &(const struct clk_init_data) {
+> +		.name = "dprx_0_dprx_cc_core_rcg2_clk_src",
+> +		.parent_data = dprx_cc_0_parent_data_0,
+> +		.num_parents = ARRAY_SIZE(dprx_cc_0_parent_data_0),
+> +		.flags = CLK_SET_RATE_PARENT,
+> +		.ops = &clk_rcg2_shared_ops,
+> +	},
+> +};
+> +
+> +static const struct freq_tbl ftbl_dprx_0_dprx_cc_core_rcg3_clk_src[] = {
+> +	F(275000000, P_DPRX_0_DPRX_CC_PLL0_OUT_MAIN, 2, 0, 0),
+> +	F(550000000, P_DPRX_0_DPRX_CC_PLL0_OUT_MAIN, 2, 0, 0),
+> +	{ }
+> +};
+> +
+> +static struct clk_rcg2 dprx_0_dprx_cc_core_rcg3_clk_src = {
+> +	.cmd_rcgr = 0x8098,
+> +	.mnd_width = 0,
+> +	.hid_width = 5,
+> +	.parent_map = dprx_cc_0_parent_map_0,
+> +	.freq_tbl = ftbl_dprx_0_dprx_cc_core_rcg3_clk_src,
+> +	.hw_clk_ctrl = true,
+> +	.clkr.hw.init = &(const struct clk_init_data) {
+> +		.name = "dprx_0_dprx_cc_core_rcg3_clk_src",
+> +		.parent_data = dprx_cc_0_parent_data_0,
+> +		.num_parents = ARRAY_SIZE(dprx_cc_0_parent_data_0),
+> +		.flags = CLK_SET_RATE_PARENT,
+> +		.ops = &clk_rcg2_shared_ops,
+> +	},
+> +};
+> +
+> +static struct clk_regmap_div dprx_0_dprx_cc_core_ahb_div_clk_src = {
+> +	.reg = 0x80b0,
+> +	.shift = 0,
+> +	.width = 4,
+> +	.clkr.hw.init = &(const struct clk_init_data) {
+> +		.name = "dprx_0_dprx_cc_core_ahb_div_clk_src",
+> +		.parent_hws = (const struct clk_hw*[]) {
+> +			&dprx_0_dprx_cc_core_rcg3_clk_src.clkr.hw,
+> +		},
+> +		.num_parents = 1,
+> +		.flags = CLK_SET_RATE_PARENT,
+> +		.ops = &clk_regmap_div_ro_ops,
+> +	},
+> +};
+> +
+> +static struct clk_regmap_div dprx_0_dprx_cc_core_aud_div_clk_src = {
+> +	.reg = 0x80d0,
+> +	.shift = 0,
+> +	.width = 9,
+> +	.clkr.hw.init = &(const struct clk_init_data) {
+> +		.name = "dprx_0_dprx_cc_core_aud_div_clk_src",
+> +		.parent_hws = (const struct clk_hw*[]) {
+> +			&dprx_0_dprx_cc_audio_clk_src.clkr.hw,
+> +		},
+> +		.num_parents = 1,
+> +		.flags = CLK_SET_RATE_PARENT,
+> +		.ops = &clk_regmap_div_ro_ops,
+> +	},
+> +};
+> +
+> +static struct clk_branch dprx_0_dprx_cc_ahb_clk = {
+> +	.halt_reg = 0x80b4,
+> +	.halt_check = BRANCH_HALT_VOTED,
+> +	.hwcg_reg = 0x80b4,
+> +	.hwcg_bit = 1,
+> +	.clkr = {
+> +		.enable_reg = 0x80b4,
+> +		.enable_mask = BIT(0),
+> +		.hw.init = &(const struct clk_init_data) {
+> +			.name = "dprx_0_dprx_cc_ahb_clk",
+> +			.parent_hws = (const struct clk_hw*[]) {
+> +				&dprx_0_dprx_cc_core_ahb_div_clk_src.clkr.hw,
+> +			},
+> +			.num_parents = 1,
+> +			.flags = CLK_SET_RATE_PARENT,
+> +			.ops = &clk_branch2_ops,
+> +		},
+> +	},
+> +};
+> +
+> +static struct clk_branch dprx_0_dprx_cc_aud_clk = {
+> +	.halt_reg = 0x80d4,
+> +	.halt_check = BRANCH_HALT_VOTED,
+> +	.hwcg_reg = 0x80d4,
+> +	.hwcg_bit = 1,
+> +	.clkr = {
+> +		.enable_reg = 0x80d4,
+> +		.enable_mask = BIT(0),
+> +		.hw.init = &(const struct clk_init_data) {
+> +			.name = "dprx_0_dprx_cc_aud_clk",
+> +			.parent_hws = (const struct clk_hw*[]) {
+> +				&dprx_0_dprx_cc_core_aud_div_clk_src.clkr.hw,
+> +			},
+> +			.num_parents = 1,
+> +			.flags = CLK_SET_RATE_PARENT,
+> +			.ops = &clk_branch2_ops,
+> +		},
+> +	},
+> +};
+> +
+> +static struct clk_branch dprx_0_dprx_cc_mdp_mem_clk = {
+> +	.halt_reg = 0x8088,
+> +	.halt_check = BRANCH_HALT_VOTED,
+> +	.hwcg_reg = 0x8088,
+> +	.hwcg_bit = 1,
+> +	.clkr = {
+> +		.enable_reg = 0x8088,
+> +		.enable_mask = BIT(0),
+> +		.hw.init = &(const struct clk_init_data) {
+> +			.name = "dprx_0_dprx_cc_mdp_mem_clk",
+> +			.parent_hws = (const struct clk_hw*[]) {
+> +				&dprx_0_dprx_cc_core_rcg2_clk_src.clkr.hw,
+> +			},
+> +			.num_parents = 1,
+> +			.flags = CLK_SET_RATE_PARENT,
+> +			.ops = &clk_branch2_ops,
+> +		},
+> +	},
+> +};
+> +
+> +static struct clk_branch dprx_0_dprx_cc_mmcx_xo_clk = {
+> +	.halt_reg = 0x80d8,
+> +	.halt_check = BRANCH_HALT_VOTED,
+> +	.hwcg_reg = 0x80d8,
+> +	.hwcg_bit = 1,
+> +	.clkr = {
+> +		.enable_reg = 0x80d8,
+> +		.enable_mask = BIT(0),
+> +		.hw.init = &(const struct clk_init_data) {
+> +			.name = "dprx_0_dprx_cc_mmcx_xo_clk",
+> +			.ops = &clk_branch2_ops,
+> +		},
+> +	},
+> +};
+> +
+> +static struct clk_branch dprx_0_dprx_cc_vid_mem_clk = {
+> +	.halt_reg = 0x8028,
+> +	.halt_check = BRANCH_HALT_VOTED,
+> +	.hwcg_reg = 0x8028,
+> +	.hwcg_bit = 1,
+> +	.clkr = {
+> +		.enable_reg = 0x8028,
+> +		.enable_mask = BIT(0),
+> +		.hw.init = &(const struct clk_init_data) {
+> +			.name = "dprx_0_dprx_cc_vid_mem_clk",
+> +			.parent_hws = (const struct clk_hw*[]) {
+> +				&dprx_0_dprx_cc_core_rcg0_clk_src.clkr.hw,
+> +			},
+> +			.num_parents = 1,
+> +			.flags = CLK_SET_RATE_PARENT,
+> +			.ops = &clk_branch2_ops,
+> +		},
+> +	},
+> +};
+> +
+> +static struct clk_regmap *dprx_cc_0_nord_clocks[] = {
+> +	[DPRX_CC_AHB_CLK] = &dprx_0_dprx_cc_ahb_clk.clkr,
+> +	[DPRX_CC_AUD_CLK] = &dprx_0_dprx_cc_aud_clk.clkr,
+> +	[DPRX_CC_AUDIO_CLK_SRC] = &dprx_0_dprx_cc_audio_clk_src.clkr,
+> +	[DPRX_CC_CORE_AHB_DIV_CLK_SRC] = &dprx_0_dprx_cc_core_ahb_div_clk_src.clkr,
+> +	[DPRX_CC_CORE_AUD_DIV_CLK_SRC] = &dprx_0_dprx_cc_core_aud_div_clk_src.clkr,
+> +	[DPRX_CC_CORE_RCG0_CLK_SRC] = &dprx_0_dprx_cc_core_rcg0_clk_src.clkr,
+> +	[DPRX_CC_CORE_RCG2_CLK_SRC] = &dprx_0_dprx_cc_core_rcg2_clk_src.clkr,
+> +	[DPRX_CC_CORE_RCG3_CLK_SRC] = &dprx_0_dprx_cc_core_rcg3_clk_src.clkr,
+> +	[DPRX_CC_MDP_MEM_CLK] = &dprx_0_dprx_cc_mdp_mem_clk.clkr,
+> +	[DPRX_CC_MMCX_XO_CLK] = &dprx_0_dprx_cc_mmcx_xo_clk.clkr,
+> +	[DPRX_CC_PLL0] = &dprx_0_dprx_cc_pll0.clkr,
+> +	[DPRX_CC_PLL1] = &dprx_0_dprx_cc_pll1.clkr,
+> +	[DPRX_CC_VID_MEM_CLK] = &dprx_0_dprx_cc_vid_mem_clk.clkr,
+> +};
+> +
+> +static const struct qcom_reset_map dprx_cc_0_nord_resets[] = {
+> +	[DPRX_CC_DPRX_BLK_BCR] = { 0x8000 },
+> +};
+> +
+> +static struct clk_alpha_pll *dprx_cc_0_nord_plls[] = {
+> +	&dprx_0_dprx_cc_pll0,
+> +	&dprx_0_dprx_cc_pll1,
+> +};
+> +
+> +static const struct regmap_config dprx_cc_0_nord_regmap_config = {
+> +	.reg_bits = 32,
+> +	.reg_stride = 4,
+> +	.val_bits = 32,
+> +	.max_register = 0x8104,
+> +	.fast_io = true,
+> +};
+> +
+> +static void dprx_cc_0_nord_regs_configure(struct device *dev, struct regmap *regmap)
+> +{
+> +	/*
+> +	 * Configure cdiv 20 for core aud and 11 for core ahb clks of DPRX CC
+> +	 */
+> +	regmap_write(regmap, dprx_0_dprx_cc_core_aud_div_clk_src.reg, 0x13);
+> +	regmap_write(regmap, dprx_0_dprx_cc_core_ahb_div_clk_src.reg, 0x0A);
+
+Nit: can we use lowercase?
+
+Shawn
+
 > +}
 > +
-> +static bool bam_dmux_handle_pc(struct bam_dmux *dmux, bool new_state)
+> +static const struct qcom_cc_driver_data dprx_cc_0_nord_driver_data = {
+> +	.alpha_plls = dprx_cc_0_nord_plls,
+> +	.num_alpha_plls = ARRAY_SIZE(dprx_cc_0_nord_plls),
+> +	.clk_regs_configure = dprx_cc_0_nord_regs_configure,
+> +};
+> +
+> +static const struct qcom_cc_desc dprx_cc_0_nord_desc = {
+> +	.config = &dprx_cc_0_nord_regmap_config,
+> +	.clks = dprx_cc_0_nord_clocks,
+> +	.num_clks = ARRAY_SIZE(dprx_cc_0_nord_clocks),
+> +	.resets = dprx_cc_0_nord_resets,
+> +	.num_resets = ARRAY_SIZE(dprx_cc_0_nord_resets),
+> +	.driver_data = &dprx_cc_0_nord_driver_data,
+> +};
+> +
+> +static const struct of_device_id dprx_cc_0_nord_match_table[] = {
+> +	{ .compatible = "qcom,nord-dprxcc0" },
+> +	{ }
+> +};
+> +MODULE_DEVICE_TABLE(of, dprx_cc_0_nord_match_table);
+> +
+> +static int dprx_cc_0_nord_probe(struct platform_device *pdev)
 > +{
-> +	lockdep_assert_held(&dmux->power_lock);
+> +	return qcom_cc_probe(pdev, &dprx_cc_0_nord_desc);
+> +}
 > +
-> +	if (new_state == dmux->pc_state) {
-> +		if (new_state && dmux->pc_vote == BAM_DMUX_PC_VOTE_DOWN_PENDING)
-> +			dmux->pc_vote = BAM_DMUX_PC_VOTE_ACTIVE;
-> +		return false;
-> +	}
->  
->  	dev_dbg(dmux->dev, "pc: %u\n", new_state);
->  
-
-[ ... ]
-
-> @@ -706,9 +795,47 @@ static irqreturn_t bam_dmux_pc_ack_irq(int irq, void *data)
->  static int bam_dmux_runtime_suspend(struct device *dev)
->  {
->  	struct bam_dmux *dmux = dev_get_drvdata(dev);
-> +	bool wake = false;
->  
->  	dev_dbg(dev, "runtime suspend\n");
-> -	bam_dmux_pc_vote(dmux, false);
+> +static struct platform_driver dprx_cc_0_nord_driver = {
+> +	.probe = dprx_cc_0_nord_probe,
+> +	.driver = {
+> +		.name = "dprxcc0-nord",
+> +		.of_match_table = dprx_cc_0_nord_match_table,
+> +	},
+> +};
 > +
-> +	scoped_guard(mutex, &dmux->power_lock) {
-> +		bam_dmux_pc_vote_locked(dmux, false);
-> +		if (dmux->pc_vote == BAM_DMUX_PC_VOTE_DOWN_PENDING) {
-> +			dmux->pc_vote = BAM_DMUX_PC_VOTE_INACTIVE;
-> +			bam_dmux_complete_pc_down(dmux);
-> +			wake = true;
-> +		} else if (!dmux->pc_state) {
-> +			bam_dmux_power_off(dmux);
-> +		}
-> +	}
-
-[Severity: Medium]
-Is it safe for this to act on the cached BAM_DMUX_PC_VOTE_DOWN_PENDING
-without re-sampling the pc line?
-
-Every other new decision point in the patch calls
-irq_get_irqchip_state(IRQCHIP_STATE_LINE_LEVEL) first, but this one
-converts the cached flag straight into bam_dmux_complete_pc_down(), which
-releases both channels, frees the RX skbs and toggles pc-ack:
-
-	bam_dmux_power_off(dmux);
-	bam_dmux_pc_ack(dmux);
-	WRITE_ONCE(dmux->pc_state, false);
-
-DOWN_PENDING is only cancelled from bam_dmux_handle_pc() when a later
-invocation observes new_state == dmux->pc_state == true:
-
-	if (new_state == dmux->pc_state) {
-		if (new_state && dmux->pc_vote == BAM_DMUX_PC_VOTE_DOWN_PENDING)
-			dmux->pc_vote = BAM_DMUX_PC_VOTE_ACTIVE;
-
-So if the modem re-raises pc and the rising-edge handler is still blocked on
-mutex_lock(&dmux->power_lock) when the autosuspend timer fires:
-
-bam_dmux_runtime_suspend()
-   scoped_guard(mutex, &dmux->power_lock)
-      bam_dmux_complete_pc_down()   /* pc line is high again */
-
-does the driver then acknowledge a pc=false transition the modem has already
-revoked, and tear down RX while the peer believes the link is up? The commit
-message describes this as the case to avoid:
-
-    "acknowledging a new pc=false transition while the host vote remains
-    active lets the modem power down the DMA engine underneath the driver"
-
-Would reading the line level here before calling
-bam_dmux_complete_pc_down() close that window?
-
-[ ... ]
-
-> @@ -817,31 +939,40 @@ static int bam_dmux_probe(struct platform_device *pdev)
->  	pm_runtime_use_autosuspend(dev);
->  	pm_runtime_enable(dev);
->  
-> -	ret = devm_request_threaded_irq(dev, pc_ack_irq, NULL, bam_dmux_pc_ack_irq,
-> -					IRQF_ONESHOT, NULL, dmux);
-> +	ret = devm_request_threaded_irq(dev, dmux->pc_ack_irq, NULL,
-> +					bam_dmux_pc_ack_irq,
-> +					IRQF_ONESHOT | IRQF_NO_AUTOEN,
-> +					NULL, dmux);
->  	if (ret)
->  		goto err_disable_pm;
->  
->  	ret = devm_request_threaded_irq(dev, dmux->pc_irq, NULL, bam_dmux_pc_irq,
-> -					IRQF_ONESHOT, NULL, dmux);
-> +					IRQF_ONESHOT | IRQF_NO_AUTOEN, NULL, dmux);
->  	if (ret)
-> -		goto err_disable_pm;
-> +		goto err_power_off;
->  
-> +	mutex_lock(&dmux->power_lock);
->  	ret = irq_get_irqchip_state(dmux->pc_irq, IRQCHIP_STATE_LINE_LEVEL,
-> -				    &dmux->pc_state);
-> -	if (ret)
-> -		goto err_disable_pm;
-> +				    &pc_state);
-> +	if (ret) {
-> +		mutex_unlock(&dmux->power_lock);
-> +		goto err_power_off;
-> +	}
->  
->  	/* Check if remote finished initialization before us */
-> -	if (dmux->pc_state) {
-> -		if (bam_dmux_power_on(dmux))
-> -			bam_dmux_pc_ack(dmux);
-> -		else
-> -			bam_dmux_power_off(dmux);
-> -	}
-> +	bam_dmux_handle_pc(dmux, pc_state);
-> +	mutex_unlock(&dmux->power_lock);
+> +module_platform_driver(dprx_cc_0_nord_driver);
 > +
-> +	/* Start handling state changes after the initial state is processed. */
-> +	enable_irq(dmux->pc_ack_irq);
-> +	enable_irq(dmux->pc_irq);
-
-[Severity: High]
-Can a pc transition be lost in the window created here between the level
-snapshot and enable_irq(dmux->pc_irq)?
-
-The in-tree DTs for qcom,bam-dmux (msm8916.dtsi, msm8939.dtsi) parent these
-interrupts on SMSM:
-
-	interrupt-parent = <&hexagon_smsm>;
-	interrupts = <1 IRQ_TYPE_EDGE_BOTH>, <11 IRQ_TYPE_EDGE_BOTH>;
-
-and smsm_intr() advances the cached level for all bits but only dispatches
-the enabled ones:
-
-drivers/soc/qcom/smsm.c:smsm_intr() {
-	val = readl(entry->remote_state);
-	changed = val ^ xchg(&entry->last_value, val);
-
-	for_each_set_bit(i, entry->irq_enabled, 32) {
-	...
-}
-
-and on unmask the cache is re-synced to the live line rather than replaying
-the missed edge:
-
-drivers/soc/qcom/smsm.c:smsm_unmask_irq() {
-	/* Make sure our last cached state is up-to-date */
-	if (readl(entry->remote_state) & BIT(irq))
-		set_bit(irq, &entry->last_value);
-	else
-		clear_bit(irq, &entry->last_value);
-}
-
-The smp2p provider does the same thing in qcom_smp2p_notify_in().
-
-So if the modem raises pc after irq_get_irqchip_state() but before
-enable_irq(), is that edge simply consumed?  bam_dmux_power_on() would never
-run, no pc-ack would be toggled, and the following falling edge would land in
-bam_dmux_handle_pc() with new_state == dmux->pc_state == false:
-
-	if (new_state == dmux->pc_state) {
-		...
-		return false;
-	}
-
-after which every bam_dmux_runtime_resume() would time out in
-
-	wait_event_timeout(dmux->pc_wait, READ_ONCE(dmux->pc_state),
-			   BAM_DMUX_REMOTE_TIMEOUT)
-
-because the modem has no reason to produce another rising edge. Given that
-probe already has a "Check if remote finished initialization before us" path,
-a pc rising edge concurrent with probe looks like expected timing. Is there a
-recovery path for that case, or does relying on a re-read of the line level
-while the child IRQ is masked need a different approach?
-
->  
->  	return 0;
->  
-> +err_power_off:
-> +	mutex_lock(&dmux->power_lock);
-> +	bam_dmux_power_off(dmux);
-> +	mutex_unlock(&dmux->power_lock);
->  err_disable_pm:
->  	pm_runtime_disable(dev);
->  	pm_runtime_dont_use_autosuspend(dev);
-> @@ -872,12 +1003,16 @@ static void bam_dmux_remove(struct platform_device *pdev)
->  	pm_runtime_set_suspended(dev);
->  
->  	/* Try to wait for remote side to drop power vote */
-> -	if (!wait_event_timeout(dmux->pc_wait, !dmux->rx, BAM_DMUX_REMOTE_TIMEOUT))
-> +	if (!wait_event_timeout(dmux->pc_wait, !READ_ONCE(dmux->rx),
-> +				BAM_DMUX_REMOTE_TIMEOUT))
->  		dev_err(dev, "Timed out waiting for remote side to suspend\n");
->  
->  	/* Make sure everything is cleaned up before we return */
-> +	disable_irq(dmux->pc_ack_irq);
->  	disable_irq(dmux->pc_irq);
-> +	mutex_lock(&dmux->power_lock);
->  	bam_dmux_power_off(dmux);
-> +	mutex_unlock(&dmux->power_lock);
->  	bam_dmux_free_skbs(dmux->tx_skbs, DMA_TO_DEVICE);
->  }
-
-[Severity: High]
-This is a pre-existing ordering issue rather than something the patch
-introduces, but since the remove path is being touched here: can
-register_netdev_work be re-queued after its only cancellation?
-
-bam_dmux_remove() runs cancel_work_sync(&dmux->register_netdev_work) and
-unregister_netdevice_many() at the top, while the RX channel is still armed
-and the pc IRQ is still enabled. Only afterwards does it reach
-disable_irq()/bam_dmux_power_off().
-
-A remote OPEN command arriving in that window does:
-
-bam_dmux_rx_callback()
-  bam_dmux_cmd_open()
-     /* Cannot sleep here, schedule work to register the netdev */
-     schedule_work(&dmux->register_netdev_work);
-
-and there is no second cancel_work_sync() after the IRQs are disabled and the
-DMA is terminated. bam_dmux_register_netdev_work() would then dereference the
-devm-allocated dmux and publish a fresh netdev holding it:
-
-	bndev = netdev_priv(netdev);
-	bndev->dmux = dmux;
-	...
-	ret = register_netdev(netdev);
-
-Once remove() returns, devm frees dmux, so any xmit on that interface would
-touch freed memory. Would moving the cancel_work_sync() after
-disable_irq()/bam_dmux_power_off(), or adding a second one there, be
-appropriate?
-
--- 
-Sashiko AI review · https://netdev-ai.bots.linux.dev/sashiko/#/patchset/20260903180057.1437-1-getshell%40seu.edu.cn
+> +MODULE_DESCRIPTION("QTI DPRXCC0 NORD Driver");
+> +MODULE_LICENSE("GPL");
+> diff --git a/drivers/clk/qcom/dprxcc1-nord.c b/drivers/clk/qcom/dprxcc1-nord.c
+> new file mode 100644
+> index 0000000000000000000000000000000000000000..573d66bb97c90dfc16d5d6ae2c4bbcfaff3aace9
+> --- /dev/null
+> +++ b/drivers/clk/qcom/dprxcc1-nord.c
+> @@ -0,0 +1,436 @@
+> +// SPDX-License-Identifier: GPL-2.0-only
+> +/*
+> + * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+> + */
+> +
+> +#include <linux/clk-provider.h>
+> +#include <linux/module.h>
+> +#include <linux/of.h>
+> +#include <linux/platform_device.h>
+> +#include <linux/regmap.h>
+> +
+> +#include <dt-bindings/clock/qcom,nord-dprxcc.h>
+> +
+> +#include "clk-alpha-pll.h"
+> +#include "clk-branch.h"
+> +#include "clk-pll.h"
+> +#include "clk-rcg.h"
+> +#include "clk-regmap.h"
+> +#include "clk-regmap-divider.h"
+> +#include "clk-regmap-mux.h"
+> +#include "common.h"
+> +#include "reset.h"
+> +
+> +enum {
+> +	DT_BI_TCXO,
+> +	DT_AHB_CLK,
+> +	DT_SLEEP_CLK,
+> +};
+> +
+> +enum {
+> +	P_BI_TCXO,
+> +	P_DPRX_1_DPRX_CC_PLL0_OUT_EVEN,
+> +	P_DPRX_1_DPRX_CC_PLL0_OUT_MAIN,
+> +	P_DPRX_1_DPRX_CC_PLL0_OUT_ODD,
+> +	P_DPRX_1_DPRX_CC_PLL1_OUT_EVEN,
+> +	P_DPRX_1_DPRX_CC_PLL1_OUT_MAIN,
+> +	P_SLEEP_CLK,
+> +};
+> +
+> +static const struct pll_vco lucid_ole_vco[] = {
+> +	{ 249600000, 2300000000, 0 },
+> +};
+> +
+> +static const struct pll_vco zonda_ole_vco[] = {
+> +	{ 700000000, 3600000000, 0 },
+> +};
+> +
+> +/* 550.0 MHz Configuration */
+> +static const struct alpha_pll_config dprx_1_dprx_cc_pll0_config = {
+> +	.l = 0x1c,
+> +	.alpha = 0xa555,
+> +	.config_ctl_val = 0x20485699,
+> +	.config_ctl_hi_val = 0x00182261,
+> +	.config_ctl_hi1_val = 0x82aa299c,
+> +	.test_ctl_val = 0x00000000,
+> +	.test_ctl_hi_val = 0x00000003,
+> +	.test_ctl_hi1_val = 0x00009000,
+> +	.test_ctl_hi2_val = 0x00000034,
+> +	.user_ctl_val = 0x00000000,
+> +	.user_ctl_hi_val = 0x00400005,
+> +};
+> +
+> +static struct clk_alpha_pll dprx_1_dprx_cc_pll0 = {
+> +	.offset = 0x0,
+> +	.config = &dprx_1_dprx_cc_pll0_config,
+> +	.vco_table = lucid_ole_vco,
+> +	.num_vco = ARRAY_SIZE(lucid_ole_vco),
+> +	.regs = clk_alpha_pll_regs[CLK_ALPHA_PLL_TYPE_LUCID_OLE],
+> +	.clkr = {
+> +		.hw.init = &(const struct clk_init_data) {
+> +			.name = "dprx_1_dprx_cc_pll0",
+> +			.parent_data = &(const struct clk_parent_data) {
+> +				.index = DT_BI_TCXO,
+> +			},
+> +			.num_parents = 1,
+> +			.ops = &clk_alpha_pll_lucid_evo_ops,
+> +		},
+> +	},
+> +};
+> +
+> +/* 1080.0 MHz Configuration */
+> +static const struct alpha_pll_config dprx_1_dprx_cc_pll1_config = {
+> +	.l = 0x38,
+> +	.alpha = 0x4000000,
+> +	.config_ctl_val = 0x08240800,
+> +	.config_ctl_hi_val = 0x05008001,
+> +	.config_ctl_hi1_val = 0x00000000,
+> +	.config_ctl_hi2_val = 0x00000000,
+> +	.user_ctl_val = 0x00000000,
+> +	.user_ctl_hi_val = 0x02000080,
+> +};
+> +
+> +static struct clk_alpha_pll dprx_1_dprx_cc_pll1 = {
+> +	.offset = 0x1000,
+> +	.alpha_width = 28,
+> +	.config = &dprx_1_dprx_cc_pll1_config,
+> +	.vco_table = zonda_ole_vco,
+> +	.num_vco = ARRAY_SIZE(zonda_ole_vco),
+> +	.regs = clk_alpha_pll_regs[CLK_ALPHA_PLL_TYPE_ZONDA_OLE],
+> +	.clkr = {
+> +		.hw.init = &(const struct clk_init_data) {
+> +			.name = "dprx_1_dprx_cc_pll1",
+> +			.parent_data = &(const struct clk_parent_data) {
+> +				.index = DT_BI_TCXO,
+> +			},
+> +			.num_parents = 1,
+> +			.ops = &clk_alpha_pll_zonda_ole_ops,
+> +		},
+> +	},
+> +};
+> +
+> +static const struct parent_map dprx_cc_1_parent_map_0[] = {
+> +	{ P_BI_TCXO, 0 },
+> +	{ P_DPRX_1_DPRX_CC_PLL0_OUT_EVEN, 1 },
+> +	{ P_DPRX_1_DPRX_CC_PLL0_OUT_ODD, 2 },
+> +	{ P_DPRX_1_DPRX_CC_PLL0_OUT_MAIN, 4 },
+> +	{ P_SLEEP_CLK, 5 },
+> +};
+> +
+> +static const struct clk_parent_data dprx_cc_1_parent_data_0[] = {
+> +	{ .index = DT_BI_TCXO },
+> +	{ .hw = &dprx_1_dprx_cc_pll0.clkr.hw },
+> +	{ .hw = &dprx_1_dprx_cc_pll0.clkr.hw },
+> +	{ .hw = &dprx_1_dprx_cc_pll0.clkr.hw },
+> +	{ .index = DT_SLEEP_CLK },
+> +};
+> +
+> +static const struct parent_map dprx_cc_1_parent_map_1[] = {
+> +	{ P_BI_TCXO, 0 },
+> +	{ P_DPRX_1_DPRX_CC_PLL1_OUT_EVEN, 3 },
+> +	{ P_SLEEP_CLK, 5 },
+> +	{ P_DPRX_1_DPRX_CC_PLL1_OUT_MAIN, 6 },
+> +};
+> +
+> +static const struct clk_parent_data dprx_cc_1_parent_data_1[] = {
+> +	{ .index = DT_BI_TCXO },
+> +	{ .hw = &dprx_1_dprx_cc_pll1.clkr.hw },
+> +	{ .index = DT_SLEEP_CLK },
+> +	{ .hw = &dprx_1_dprx_cc_pll1.clkr.hw },
+> +};
+> +
+> +static const struct freq_tbl ftbl_dprx_1_dprx_cc_audio_clk_src[] = {
+> +	F(216000000, P_DPRX_1_DPRX_CC_PLL1_OUT_MAIN, 5, 0, 0),
+> +	F(300000000, P_DPRX_1_DPRX_CC_PLL1_OUT_MAIN, 5, 0, 0),
+> +	F(360000000, P_DPRX_1_DPRX_CC_PLL1_OUT_MAIN, 5, 0, 0),
+> +	{ }
+> +};
+> +
+> +static struct clk_rcg2 dprx_1_dprx_cc_audio_clk_src = {
+> +	.cmd_rcgr = 0x80c8,
+> +	.mnd_width = 0,
+> +	.hid_width = 5,
+> +	.parent_map = dprx_cc_1_parent_map_1,
+> +	.freq_tbl = ftbl_dprx_1_dprx_cc_audio_clk_src,
+> +	.hw_clk_ctrl = true,
+> +	.clkr.hw.init = &(const struct clk_init_data) {
+> +		.name = "dprx_1_dprx_cc_audio_clk_src",
+> +		.parent_data = dprx_cc_1_parent_data_1,
+> +		.num_parents = ARRAY_SIZE(dprx_cc_1_parent_data_1),
+> +		.flags = CLK_SET_RATE_PARENT,
+> +		.ops = &clk_rcg2_shared_ops,
+> +	},
+> +};
+> +
+> +static const struct freq_tbl ftbl_dprx_1_dprx_cc_core_rcg0_clk_src[] = {
+> +	F(220000000, P_DPRX_1_DPRX_CC_PLL0_OUT_MAIN, 2.5, 0, 0),
+> +	F(440000000, P_DPRX_1_DPRX_CC_PLL0_OUT_MAIN, 2.5, 0, 0),
+> +	{ }
+> +};
+> +
+> +static struct clk_rcg2 dprx_1_dprx_cc_core_rcg0_clk_src = {
+> +	.cmd_rcgr = 0x8004,
+> +	.mnd_width = 0,
+> +	.hid_width = 5,
+> +	.parent_map = dprx_cc_1_parent_map_0,
+> +	.freq_tbl = ftbl_dprx_1_dprx_cc_core_rcg0_clk_src,
+> +	.hw_clk_ctrl = true,
+> +	.clkr.hw.init = &(const struct clk_init_data) {
+> +		.name = "dprx_1_dprx_cc_core_rcg0_clk_src",
+> +		.parent_data = dprx_cc_1_parent_data_0,
+> +		.num_parents = ARRAY_SIZE(dprx_cc_1_parent_data_0),
+> +		.flags = CLK_SET_RATE_PARENT,
+> +		.ops = &clk_rcg2_shared_ops,
+> +	},
+> +};
+> +
+> +static const struct freq_tbl ftbl_dprx_1_dprx_cc_core_rcg2_clk_src[] = {
+> +	F(275000000, P_DPRX_1_DPRX_CC_PLL0_OUT_MAIN, 2, 0, 0),
+> +	F(440000000, P_DPRX_1_DPRX_CC_PLL0_OUT_MAIN, 2.5, 0, 0),
+> +	F(550000000, P_DPRX_1_DPRX_CC_PLL0_OUT_MAIN, 2, 0, 0),
+> +	{ }
+> +};
+> +
+> +static struct clk_rcg2 dprx_1_dprx_cc_core_rcg2_clk_src = {
+> +	.cmd_rcgr = 0x8068,
+> +	.mnd_width = 0,
+> +	.hid_width = 5,
+> +	.parent_map = dprx_cc_1_parent_map_0,
+> +	.freq_tbl = ftbl_dprx_1_dprx_cc_core_rcg2_clk_src,
+> +	.hw_clk_ctrl = true,
+> +	.clkr.hw.init = &(const struct clk_init_data) {
+> +		.name = "dprx_1_dprx_cc_core_rcg2_clk_src",
+> +		.parent_data = dprx_cc_1_parent_data_0,
+> +		.num_parents = ARRAY_SIZE(dprx_cc_1_parent_data_0),
+> +		.flags = CLK_SET_RATE_PARENT,
+> +		.ops = &clk_rcg2_shared_ops,
+> +	},
+> +};
+> +
+> +static const struct freq_tbl ftbl_dprx_1_dprx_cc_core_rcg3_clk_src[] = {
+> +	F(275000000, P_DPRX_1_DPRX_CC_PLL0_OUT_MAIN, 2, 0, 0),
+> +	F(550000000, P_DPRX_1_DPRX_CC_PLL0_OUT_MAIN, 2, 0, 0),
+> +	{ }
+> +};
+> +
+> +static struct clk_rcg2 dprx_1_dprx_cc_core_rcg3_clk_src = {
+> +	.cmd_rcgr = 0x8098,
+> +	.mnd_width = 0,
+> +	.hid_width = 5,
+> +	.parent_map = dprx_cc_1_parent_map_0,
+> +	.freq_tbl = ftbl_dprx_1_dprx_cc_core_rcg3_clk_src,
+> +	.hw_clk_ctrl = true,
+> +	.clkr.hw.init = &(const struct clk_init_data) {
+> +		.name = "dprx_1_dprx_cc_core_rcg3_clk_src",
+> +		.parent_data = dprx_cc_1_parent_data_0,
+> +		.num_parents = ARRAY_SIZE(dprx_cc_1_parent_data_0),
+> +		.flags = CLK_SET_RATE_PARENT,
+> +		.ops = &clk_rcg2_shared_ops,
+> +	},
+> +};
+> +
+> +static struct clk_regmap_div dprx_1_dprx_cc_core_ahb_div_clk_src = {
+> +	.reg = 0x80b0,
+> +	.shift = 0,
+> +	.width = 4,
+> +	.clkr.hw.init = &(const struct clk_init_data) {
+> +		.name = "dprx_1_dprx_cc_core_ahb_div_clk_src",
+> +		.parent_hws = (const struct clk_hw*[]) {
+> +			&dprx_1_dprx_cc_core_rcg3_clk_src.clkr.hw,
+> +		},
+> +		.num_parents = 1,
+> +		.flags = CLK_SET_RATE_PARENT,
+> +		.ops = &clk_regmap_div_ro_ops,
+> +	},
+> +};
+> +
+> +static struct clk_regmap_div dprx_1_dprx_cc_core_aud_div_clk_src = {
+> +	.reg = 0x80d0,
+> +	.shift = 0,
+> +	.width = 9,
+> +	.clkr.hw.init = &(const struct clk_init_data) {
+> +		.name = "dprx_1_dprx_cc_core_aud_div_clk_src",
+> +		.parent_hws = (const struct clk_hw*[]) {
+> +			&dprx_1_dprx_cc_audio_clk_src.clkr.hw,
+> +		},
+> +		.num_parents = 1,
+> +		.flags = CLK_SET_RATE_PARENT,
+> +		.ops = &clk_regmap_div_ro_ops,
+> +	},
+> +};
+> +
+> +static struct clk_branch dprx_1_dprx_cc_ahb_clk = {
+> +	.halt_reg = 0x80b4,
+> +	.halt_check = BRANCH_HALT_VOTED,
+> +	.hwcg_reg = 0x80b4,
+> +	.hwcg_bit = 1,
+> +	.clkr = {
+> +		.enable_reg = 0x80b4,
+> +		.enable_mask = BIT(0),
+> +		.hw.init = &(const struct clk_init_data) {
+> +			.name = "dprx_1_dprx_cc_ahb_clk",
+> +			.parent_hws = (const struct clk_hw*[]) {
+> +				&dprx_1_dprx_cc_core_ahb_div_clk_src.clkr.hw,
+> +			},
+> +			.num_parents = 1,
+> +			.flags = CLK_SET_RATE_PARENT,
+> +			.ops = &clk_branch2_ops,
+> +		},
+> +	},
+> +};
+> +
+> +static struct clk_branch dprx_1_dprx_cc_aud_clk = {
+> +	.halt_reg = 0x80d4,
+> +	.halt_check = BRANCH_HALT_VOTED,
+> +	.hwcg_reg = 0x80d4,
+> +	.hwcg_bit = 1,
+> +	.clkr = {
+> +		.enable_reg = 0x80d4,
+> +		.enable_mask = BIT(0),
+> +		.hw.init = &(const struct clk_init_data) {
+> +			.name = "dprx_1_dprx_cc_aud_clk",
+> +			.parent_hws = (const struct clk_hw*[]) {
+> +				&dprx_1_dprx_cc_core_aud_div_clk_src.clkr.hw,
+> +			},
+> +			.num_parents = 1,
+> +			.flags = CLK_SET_RATE_PARENT,
+> +			.ops = &clk_branch2_ops,
+> +		},
+> +	},
+> +};
+> +
+> +static struct clk_branch dprx_1_dprx_cc_mdp_mem_clk = {
+> +	.halt_reg = 0x8088,
+> +	.halt_check = BRANCH_HALT_VOTED,
+> +	.hwcg_reg = 0x8088,
+> +	.hwcg_bit = 1,
+> +	.clkr = {
+> +		.enable_reg = 0x8088,
+> +		.enable_mask = BIT(0),
+> +		.hw.init = &(const struct clk_init_data) {
+> +			.name = "dprx_1_dprx_cc_mdp_mem_clk",
+> +			.parent_hws = (const struct clk_hw*[]) {
+> +				&dprx_1_dprx_cc_core_rcg2_clk_src.clkr.hw,
+> +			},
+> +			.num_parents = 1,
+> +			.flags = CLK_SET_RATE_PARENT,
+> +			.ops = &clk_branch2_ops,
+> +		},
+> +	},
+> +};
+> +
+> +static struct clk_branch dprx_1_dprx_cc_mmcx_xo_clk = {
+> +	.halt_reg = 0x80d8,
+> +	.halt_check = BRANCH_HALT_VOTED,
+> +	.hwcg_reg = 0x80d8,
+> +	.hwcg_bit = 1,
+> +	.clkr = {
+> +		.enable_reg = 0x80d8,
+> +		.enable_mask = BIT(0),
+> +		.hw.init = &(const struct clk_init_data) {
+> +			.name = "dprx_1_dprx_cc_mmcx_xo_clk",
+> +			.ops = &clk_branch2_ops,
+> +		},
+> +	},
+> +};
+> +
+> +static struct clk_branch dprx_1_dprx_cc_vid_mem_clk = {
+> +	.halt_reg = 0x8028,
+> +	.halt_check = BRANCH_HALT_VOTED,
+> +	.hwcg_reg = 0x8028,
+> +	.hwcg_bit = 1,
+> +	.clkr = {
+> +		.enable_reg = 0x8028,
+> +		.enable_mask = BIT(0),
+> +		.hw.init = &(const struct clk_init_data) {
+> +			.name = "dprx_1_dprx_cc_vid_mem_clk",
+> +			.parent_hws = (const struct clk_hw*[]) {
+> +				&dprx_1_dprx_cc_core_rcg0_clk_src.clkr.hw,
+> +			},
+> +			.num_parents = 1,
+> +			.flags = CLK_SET_RATE_PARENT,
+> +			.ops = &clk_branch2_ops,
+> +		},
+> +	},
+> +};
+> +
+> +static struct clk_regmap *dprx_cc_1_nord_clocks[] = {
+> +	[DPRX_CC_AHB_CLK] = &dprx_1_dprx_cc_ahb_clk.clkr,
+> +	[DPRX_CC_AUD_CLK] = &dprx_1_dprx_cc_aud_clk.clkr,
+> +	[DPRX_CC_AUDIO_CLK_SRC] = &dprx_1_dprx_cc_audio_clk_src.clkr,
+> +	[DPRX_CC_CORE_AHB_DIV_CLK_SRC] = &dprx_1_dprx_cc_core_ahb_div_clk_src.clkr,
+> +	[DPRX_CC_CORE_AUD_DIV_CLK_SRC] = &dprx_1_dprx_cc_core_aud_div_clk_src.clkr,
+> +	[DPRX_CC_CORE_RCG0_CLK_SRC] = &dprx_1_dprx_cc_core_rcg0_clk_src.clkr,
+> +	[DPRX_CC_CORE_RCG2_CLK_SRC] = &dprx_1_dprx_cc_core_rcg2_clk_src.clkr,
+> +	[DPRX_CC_CORE_RCG3_CLK_SRC] = &dprx_1_dprx_cc_core_rcg3_clk_src.clkr,
+> +	[DPRX_CC_MDP_MEM_CLK] = &dprx_1_dprx_cc_mdp_mem_clk.clkr,
+> +	[DPRX_CC_MMCX_XO_CLK] = &dprx_1_dprx_cc_mmcx_xo_clk.clkr,
+> +	[DPRX_CC_PLL0] = &dprx_1_dprx_cc_pll0.clkr,
+> +	[DPRX_CC_PLL1] = &dprx_1_dprx_cc_pll1.clkr,
+> +	[DPRX_CC_VID_MEM_CLK] = &dprx_1_dprx_cc_vid_mem_clk.clkr,
+> +};
+> +
+> +static const struct qcom_reset_map dprx_cc_1_nord_resets[] = {
+> +	[DPRX_CC_DPRX_BLK_BCR] = { 0x8000 },
+> +};
+> +
+> +static struct clk_alpha_pll *dprx_cc_1_nord_plls[] = {
+> +	&dprx_1_dprx_cc_pll0,
+> +	&dprx_1_dprx_cc_pll1,
+> +};
+> +
+> +static const struct regmap_config dprx_cc_1_nord_regmap_config = {
+> +	.reg_bits = 32,
+> +	.reg_stride = 4,
+> +	.val_bits = 32,
+> +	.max_register = 0x8104,
+> +	.fast_io = true,
+> +};
+> +
+> +static void dprx_cc_1_nord_regs_configure(struct device *dev, struct regmap *regmap)
+> +{
+> +	/*
+> +	 * Configure cdiv 20 for core aud and 11 for core ahb clks of DPRX CC
+> +	 */
+> +	regmap_write(regmap, dprx_1_dprx_cc_core_aud_div_clk_src.reg, 0x13);
+> +	regmap_write(regmap, dprx_1_dprx_cc_core_ahb_div_clk_src.reg, 0x0A);
+> +}
+> +
+> +static const struct qcom_cc_driver_data dprx_cc_1_nord_driver_data = {
+> +	.alpha_plls = dprx_cc_1_nord_plls,
+> +	.num_alpha_plls = ARRAY_SIZE(dprx_cc_1_nord_plls),
+> +	.clk_regs_configure = dprx_cc_1_nord_regs_configure,
+> +};
+> +
+> +static const struct qcom_cc_desc dprx_cc_1_nord_desc = {
+> +	.config = &dprx_cc_1_nord_regmap_config,
+> +	.clks = dprx_cc_1_nord_clocks,
+> +	.num_clks = ARRAY_SIZE(dprx_cc_1_nord_clocks),
+> +	.resets = dprx_cc_1_nord_resets,
+> +	.num_resets = ARRAY_SIZE(dprx_cc_1_nord_resets),
+> +	.driver_data = &dprx_cc_1_nord_driver_data,
+> +};
+> +
+> +static const struct of_device_id dprx_cc_1_nord_match_table[] = {
+> +	{ .compatible = "qcom,nord-dprxcc1" },
+> +	{ }
+> +};
+> +MODULE_DEVICE_TABLE(of, dprx_cc_1_nord_match_table);
+> +
+> +static int dprx_cc_1_nord_probe(struct platform_device *pdev)
+> +{
+> +	return qcom_cc_probe(pdev, &dprx_cc_1_nord_desc);
+> +}
+> +
+> +static struct platform_driver dprx_cc_1_nord_driver = {
+> +	.probe = dprx_cc_1_nord_probe,
+> +	.driver = {
+> +		.name = "dprxcc1-nord",
+> +		.of_match_table = dprx_cc_1_nord_match_table,
+> +	},
+> +};
+> +
+> +module_platform_driver(dprx_cc_1_nord_driver);
+> +
+> +MODULE_DESCRIPTION("QTI DPRXCC1 NORD Driver");
+> +MODULE_LICENSE("GPL");
+> 
+> -- 
+> 2.34.1
+> 
+> 
