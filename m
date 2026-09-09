@@ -1,166 +1,384 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2290049CF36
-	for <linux-arm-msm@vger.kernel.org>; Wed,  9 Sep 2026 08:55:50 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 47C3C357D09;
+	Wed,  9 Sep 2026 09:03:06 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788944152; cv=none; b=FEYAGI8JeMnx0Y66vFtP4qRnjrpDSlFWxySH4/wqF53MjfoaSwDEhVAB9Oyqjs0VS18NB7xgXPM9rp1vNolL4a2dO5IkLooQQkzYvEDaO5g+umlXqF2FpQy5CCeu8akZqc5bTUH+GvuShKNQB9fmxXpT/3EB/EQFKrVq9mRFX/U=
+	t=1788944588; cv=none; b=bZ3KKvI8mrBmu45xz5YbHqlGmhM8jSYalbOp/KBF6kx17YkYq5OchD335kR9olzaSbj9rOfSZKikTSQ6DV2EEMyNmyMMfSWiDVoz1GyhP8xLBLCo6mBe9G/hFlzfuCduUsLU30h6GnpZtgzdVPh1daFzSW7LRCRZJShMWYkOATs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788944152; c=relaxed/simple;
-	bh=ekfTgZTjlFd+mQavQaOQcGDH0Ikp6wpgcl0VhN4s9PI=;
-	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
-	 MIME-Version; b=aHMpMSnl4eQkpXRwz7EKz+5ntXNri2R2D7yAnkT6W2a5G4ACcGcl9xQ1oxOCyiOWgKZeZMYQCpYEdf4llQmJX32BgsVXquuLvTtfGtu+W7vQduFB8qbG8jCXf2YNjzc4TfY2TWa4cH9MkaUShqJv4TbgbxGI1VaZvFFtu9hZwUA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=B8HdMo6p; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=DfcaeGMN; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1788944588; c=relaxed/simple;
+	bh=w1N1zPkQ9mGPXQZD3zwD2xR1mRDu14CBGKK8vaPJxRo=;
+	h=Subject:From:To:Cc:Date:Message-ID:In-Reply-To:References:
+	 Content-Type:MIME-Version; b=Vlys+kHcD5nSdt9RydewXSRVQF2AfuaGXogztr1fAj3ToIysoLJ52gCq9IQmQgUhxJ4PAaxaMn4pCBlLZbax5iODDUjlBIgBNMRF+6PVVmLCsp7RbZFxCcfQ6kn9Xf+jiGikUaZSnV+nKl0elg3L02+SdRYd2XTNO9Ec4A3KpAI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=UxvJre/d; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="B8HdMo6p";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="DfcaeGMN"
-Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6896MTF0129581
-	for <linux-arm-msm@vger.kernel.org>; Wed, 9 Sep 2026 08:55:49 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:date:from:in-reply-to:message-id
-	:mime-version:references:subject:to; s=qcppdkim1; bh=ekfTgZTjlFd
-	+mQavQaOQcGDH0Ikp6wpgcl0VhN4s9PI=; b=B8HdMo6pPM0FfsNcfA8zJmmRqGb
-	kbM4F7xoNOmGXMjMKFTCyqnG6RRkLjF5MjcgR4BD2hvj9+khw1nprsuKVfBCzPEm
-	/nglfqdnXrGmhxFntGw0u/kOxJzj8cImy+91NUsyGnq8xZzK3sjKLbf2lwCdgC85
-	/ypfr067+Uk8bjZjI+9TvOqikjql5Cnfg/UoBlDOBWaTNjio08hiLS+MKnUXacBz
-	VjTaNp2aO/nYOYmuzStR9iE2418uCM3+STfXUcdcKBEa3x5833qpJW/8Rg2jSLxe
-	ltWp+GEFlWopLfFqXvdwHsVFaeY7y3GXxAnu4UHZI6kfn3CjueGupOfxe8w==
-Received: from mail-pj1-f71.google.com (mail-pj1-f71.google.com [209.85.216.71])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gjntpknhe-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 09 Sep 2026 08:55:49 +0000 (GMT)
-Received: by mail-pj1-f71.google.com with SMTP id 98e67ed59e1d1-384d033f7f5so1377929a91.1
-        for <linux-arm-msm@vger.kernel.org>; Wed, 09 Sep 2026 01:55:49 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1788944148; x=1789548948; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=ekfTgZTjlFd+mQavQaOQcGDH0Ikp6wpgcl0VhN4s9PI=;
-        b=DfcaeGMNBY6z0YtXJx4y1uftIud8zt27liHIbHrjMdnTQjqhn0GQdzt6p1Za+IU4sa
-         omf+Zl4ILMyJlKumKrxbhtvTJh5JPhV+cSiHCxVPCZkZQyr1WKWWI6lJfK/rAsI2kne8
-         YX5DwBfSjWeHfCgA1uCQYDG6arIAIrNHByTPwHilghiGMUP5k9YVjrHgiqmnwr+8iPRA
-         BjasthnRVoSLPSQeawwYl+46DHRDTKyzXDmN7Kp5jMRmCVaazD7JtMogipm++VZ8VlUy
-         PzfvSgzkmkM9kRE80/fwDzy79ad0tPb1h8Y9rGwsDj5u2nlPC28VCtJ5HjwXsjUkfA1L
-         YcVw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788944148; x=1789548948;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=ekfTgZTjlFd+mQavQaOQcGDH0Ikp6wpgcl0VhN4s9PI=;
-        b=qyW6tUoMXQFh/A6u9JFD3RKNWPNR/jw78mvRgotk2cwA8E/ytBt2Uo93BxRKO45jrh
-         TWRWWute7F4eOfGzZgQuL6hSN+zDv1xP7zonfNUZpdhDWPmCFmi7ZStIdenTYzINNGFa
-         V5amY4ysHKU6PFElyOkzxyc25T9iZA5tBSTYTv5HVrqzl7FE25c2x+o74hhvOSBuQQ3u
-         LB7vAqSYsS30d0cX0AqnQArYoUCWTjdp98lhUEsIlmgXNCv2tForq7V2oRjQK0zhk1Jk
-         PDJJJ5mys0tSrB28UqPq1hkZhIsjxdiibFZUVj7937Tgvv7uxT9zBJVHOQxRcAtipzbA
-         XvfQ==
-X-Forwarded-Encrypted: i=1; AKwUvByf0wNmxO2v21+MuIBTX8b2kJwk7jUNPeRT50+c4q/xUg+zwHlzUMDB+QH0yi8KBCi6bQaOifVWrQO3Nne0@vger.kernel.org
-X-Gm-Message-State: AFuF++lb0iYjQoS02fs3wd+iah99hwdh2+XZTSIieP4g8a62n0vc3yDk
-	kYpcAgSUUELmzY5jN/erIXTFPd8tqDpzPmhI6zEuZ18MNmFiNiXlAkE8budTwfIZOXpzhf7Ak5z
-	VLE8KABh6+4KEzG7NOBf2qvvoC69xopfURaBlHmUiPQnE2lb8S3oQ71TvCgQgj6Xr1oYm
-X-Gm-Gg: AYBFou14zuAbLf8w0ElhstCdT5y0kr6sjb+AVsJO2plsk993cHiVe1Xtocy49C7ueoR
-	Yl6m1GX84Qu+F2dbfmXca02awNEHNspLQ/n8B2iKfItwqKDTCl73UifcsHBxsyyxoQq2L40VjhC
-	wj8CS3X2pCmqwPpaiKIWRsOT94OCs1xO2nksoKVCF6u9DqkWuNHwTZfyoQEjH7ZAxfANFb6HtqF
-	Buz1DwKBop/jC/3hh5dY1WmPI2/cMnDPgDGjuoX4lZot5FSF4+cUSZfSyyV6GMks0xQVbnY1ovw
-	Sgx3vJJvJ7Ab8b+M6oeFd2liCmalGYQ+JGUtG+WD4J+LeTrIxn2Wx0z4c2H1XbhsMjytNbVtJ2e
-	mofK6PTx20GSQOtcxLXhLYgk=
-X-Received: by 2002:a17:90b:1e04:b0:396:463e:2eeb with SMTP id 98e67ed59e1d1-39b264b24e2mr31740160a91.0.1788944148285;
-        Wed, 09 Sep 2026 01:55:48 -0700 (PDT)
-X-Received: by 2002:a17:90b:1e04:b0:396:463e:2eeb with SMTP id 98e67ed59e1d1-39b264b24e2mr31740125a91.0.1788944147853;
-        Wed, 09 Sep 2026 01:55:47 -0700 (PDT)
-Received: from hu-weiden-sha.qualcomm.com ([114.94.8.21])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3397d6d1c16sm4496919eec.13.2026.09.09.01.55.42
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 09 Sep 2026 01:55:46 -0700 (PDT)
-From: Wei Deng <wei.deng@oss.qualcomm.com>
-To: Konrad Dybcio <konradybcio@kernel.org>
-Cc: Bjorn Andersson <andersson@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>,
-        Manivannan Sadhasivam <mani@kernel.org>, quic_chezhou@quicinc.com,
-        cheng.jiang@oss.qualcomm.com, shuai.zhang@oss.qualcomm.com,
-        jinwang.li@oss.qualcomm.com, xiuzhuo.shang@oss.qualcomm.com,
-        mengshi.wu@oss.qualcomm.com, linux-arm-msm@vger.kernel.org,
-        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
-        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-Subject: Re: [PATCH v3 0/4] arm64: dts: qcom: Describe the PCIe M.2 Key E connector for Monaco EVK
-Date: Wed,  9 Sep 2026 14:25:40 +0530
-Message-Id: <20260909085540.185221-1-wei.deng@oss.qualcomm.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20260819-b4-monaco-evk-m2-v1-v3-0-988145ef65cd@oss.qualcomm.com>
-References: <20260819-b4-monaco-evk-m2-v1-v3-0-988145ef65cd@oss.qualcomm.com>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="UxvJre/d"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C759D1F00A3A;
+	Wed,  9 Sep 2026 09:03:05 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1788944586;
+	bh=AdhICVDd3XeO9TrCmQEOzxpFVAahhrpfNkZGct+poOg=;
+	h=Subject:From:To:Cc:Date:In-Reply-To:References;
+	b=UxvJre/dJstmYmqqKLLe7aEntPNoqZpVbxvA2jWRZNV/Pf9rWqZFoYom3wLXDJWi0
+	 m2uTDCL8PRCRWxjVBL58zKwL/mAlhx0f2Gket4Al7sD0a0JvAo537fGpfgbHTtKjD8
+	 dtARbgWiywnd78DybldGxX0kn62Hx0ornJ6RuzM3shxFcgxNXheDnS9dg0Z0RB/1Af
+	 DBr18u3iG8icamiIWeiyuQ2uVqqQlMBajWV1eB8LGWQiPVNa3VUBjJyUU0oua1IlKB
+	 Ss8wjqHa3vz5L2iuY7h074Mh7+ypcvmyZ3oYYg7pp6VDgnIiQavmMwtkBHc3PlDVGP
+	 YAaEi1upTid3Q==
+Subject: Re: [PATCH net v5] net: wwan: qcom_bam_dmux: fix TX DMA channel
+ use-after-free
+From: netdev-bot+sashiko@kernel.org
+To: getshell@seu.edu.cn
+Cc: stephan@gerhold.net, loic.poulain@oss.qualcomm.com, ryazanov.s.a@gmail.com,
+ johannes@sipsolutions.net, andrew+netdev@lunn.ch, davem@davemloft.net,
+ edumazet@google.com, kuba@kernel.org, pabeni@redhat.com,
+ netdev@vger.kernel.org, linux-arm-msm@vger.kernel.org, stable@vger.kernel.org
+Date: Wed, 09 Sep 2026 09:03:05 +0000
+Message-ID: <178894458529.219967.3874306151542640489@kernel.org>
+In-Reply-To: <20260903180057.1437-1-getshell@seu.edu.cn>
+References: <20260903180057.1437-1-getshell@seu.edu.cn>
+X-sashiko-severity: High
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTA5MDA5NyBTYWx0ZWRfXx5Q5rjY2pEm6
- JY4C6cby+bMWXXlFE0/9L2LebjgRqF/3ThlGKlsFnCYFqbfESn8PkyZuZd9TWGqHj/m3SyIHnGP
- 7VFSK1CrCzzPFw1R3R6yqEm8VtoWr72PTz/mILHTQ2XqP6p6xQFS9SHyD5/nkd59UhIxaTpP8hx
- fRKrg42/LtPhzdONK4rKIy0eZrRAcE7jdPhqo0AcdIAHQcs49p3VSgy9ScIa+LcLOnazuTTcxRx
- 0UHQJ3A8rK0lq2ITmc8+kVPhJ3T1w1vAW7xdZ//ED40ytXWha7gQyjoRClXUKFMSLFe0fsoc/24
- +npru295X3/mdQS1iZZv7+s/quxcgosQqxMTt/YZeJF/N/L5tMiXjB/pPoWyp/x0nPTFbHuW4Tb
- b5Af2RME0z+2Xt7S3xlkTdwAVS56yxxEWzvz+tcbM0oIPoC+LGshGqQKmpmi08SmVo15164sEpj
- 5sYXifxYw6oapNAWrnQ==
-X-Authority-Analysis: v=2.4 cv=N+AZ0W9B c=1 sm=1 tr=0 ts=6aa11f15 cx=c_pps
- a=UNFcQwm+pnOIJct1K4W+Mw==:117 a=Uz3yg00KUFJ2y2WijEJ4bw==:17
- a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22 a=VwQbUJbxAAAA:8
- a=_XwftgCmqnCmiCopI18A:9 a=uKXjsCUrEbL0IQVhDsJ9:22
-X-Proofpoint-ORIG-GUID: 6h8xFPoxCeXCXKDZ19HDXrzLA3ZldAs1
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTA5MDA5NyBTYWx0ZWRfX4c8jkZlfQdDQ
- TJK2va8NlJUSK49/FKz9oYBKSBnq0HotxK+AMfdLyxD+FQNqc2OycjBdWlsRXOF8UpcFX1Xu4Dv
- /KuD1X0Y/p0PXQP0tJCuNOa+otRAjBQ=
-X-Proofpoint-GUID: 6h8xFPoxCeXCXKDZ19HDXrzLA3ZldAs1
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-08_03,2026-09-08_03,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 lowpriorityscore=0 priorityscore=1501 suspectscore=0
- clxscore=1015 impostorscore=0 bulkscore=0 malwarescore=0 spamscore=0
- adultscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
- definitions=main-2609090097
 
-Hi Konrad,
+Thank you for your contribution! Sashiko AI review found 2 potential
+issue(s) to consider:
 
-On Wed, 19 Aug 2026 19:27:31 +0530, Wei Deng wrote:
-> Patch 4/4 moves the graph port/endpoint anchors from monaco.dtsi to
-> monaco-evk.dts. This ensures of_graph_is_present() only returns true
-> for boards that have an M.2 Key E connector present, preventing
-> unintended pwrseq probe on boards with soldered wireless chips
-> (e.g. qcs8300-ride).
+Critical: 0 · High: 1 (2) · Medium: 1 · Low: 0
 
-I reached out to Manivannan to ask whether it would be acceptable to
-change the M.2 detection in hci_qca.c from of_graph_is_present() to
-of_graph_get_remote_endpoint(). His reply [1]:
+- [High] The new design (live level re-read via
+  irq_get_irqchip_state(IRQCHIP_STATE_LINE_LEVEL) as the only state…
+- [Medium] bam_dmux_runtime_suspend() turns a possibly stale
+  BAM_DMUX_PC_VOTE_DOWN_PENDING into an irreversible power-down…
 
-> This means, the dummy port/endpoint node will always be present even
-> when the M.2 connector is not used. I don't see a compelling reason
-> to do so.
->
-> - Mani
-
-Given that feedback, the DTSI anchor approach (which you originally
-suggested and reviewed) cannot proceed without the hci_qca.c detection
-change, and that change is not something Mani finds compelling.
-
-I'm therefore planning to drop the DTSI anchor patch in v4 and go with
-board-file-only port/endpoint nodes. The series would shrink to 3 patches
-and no DTSI anchors would be added.
-
-Could you confirm whether this approach is acceptable before I send v4?
-
-[1] https://lore.kernel.org/all/isbrpaztfrgwfcleujrn4w26cshbi2mgn57tbh5bubvsegn6lc@jh3ab6htvd24/
+Pre-existing issues:
+- [High] bam_dmux_remove() cancels register_netdev_work and unregisters
+  all netdevs while the RX DMA producer and the pc IRQ are still live;…
+- [High] bam_dmux_rx_callback() can run concurrently with
+  bam_dmux_power_off() and dereference a released/NULL RX channel.
 
 --
-Best Regards,
-Wei Deng
+
+net: wwan: qcom_bam_dmux: fix TX DMA channel use-after-free
+
+This adds a power_lock mutex to serialize the modem power-control state,
+re-reads the pc line level at each decision point instead of toggling a
+cached bool, defers a pc=false transition while the host vote is active and
+TX is allocated, and keeps both state IRQs masked with IRQF_NO_AUTOEN until
+probe has committed the initial state.
+
+Link: https://lore.kernel.org/netdev/20260822085308.1089-1-getshell@seu.edu.cn/
+
+> diff --git a/drivers/net/wwan/qcom_bam_dmux.c b/drivers/net/wwan/qcom_bam_dmux.c
+> index cc6ace8d64371..429d34a3cfa07 100644
+> --- a/drivers/net/wwan/qcom_bam_dmux.c
+> +++ b/drivers/net/wwan/qcom_bam_dmux.c
+
+[ ... ]
+
+> @@ -655,6 +683,8 @@ static void bam_dmux_free_skbs(struct bam_dmux_skb_dma skbs[],
+>  
+>  static void bam_dmux_power_off(struct bam_dmux *dmux)
+>  {
+> +	lockdep_assert_held(&dmux->power_lock);
+> +
+>  	if (dmux->tx) {
+>  		dmaengine_terminate_sync(dmux->tx);
+>  		dma_release_channel(dmux->tx);
+
+[Severity: High]
+This isn't a bug introduced by this patch, but now that power_lock
+serializes the power-control paths, is the RX completion callback still
+left outside that serialization?
+
+bam_dmux_rx_callback() ends with an unconditional refill:
+
+drivers/net/wwan/qcom_bam_dmux.c:bam_dmux_rx_callback() {
+	...
+out:
+	if (bam_dmux_skb_dma_queue_rx(skb_dma, GFP_ATOMIC))
+		dma_async_issue_pending(dmux->rx);
+}
+
+while bam_dmux_power_off() does:
+
+	if (dmux->rx) {
+		dmaengine_terminate_sync(dmux->rx);
+		dma_release_channel(dmux->rx);
+		dmux->rx = NULL;
+	}
+
+Can the refill see dmux->rx == NULL and oops? dmaengine_prep_config_single()
+dereferences chan with no NULL check:
+
+include/linux/dmaengine.h:
+	if (chan->device->device_prep_config_sg)
+
+Qualcomm BAM registers device_terminate_all but no device_synchronize:
+
+drivers/dma/qcom/bam_dma.c:
+	bdev->common.device_terminate_all = bam_dma_terminate_all;
+
+so dmaengine_terminate_sync() -> dmaengine_synchronize() cannot wait for a
+callback that vchan_complete() has already spliced off and started. Should
+the RX callback also take power_lock, or check a shutdown flag, before
+requeueing?
+
+> @@ -670,10 +700,24 @@ static void bam_dmux_free_skbs(struct bam_dmux_skb_dma skbs[],
+>  	bam_dmux_free_skbs(dmux->rx_skbs, DMA_FROM_DEVICE);
+>  }
+>  
+> -static irqreturn_t bam_dmux_pc_irq(int irq, void *data)
+> +static void bam_dmux_complete_pc_down(struct bam_dmux *dmux)
+>  {
+> -	struct bam_dmux *dmux = data;
+> -	bool new_state = !dmux->pc_state;
+> +	lockdep_assert_held(&dmux->power_lock);
+> +
+> +	bam_dmux_power_off(dmux);
+> +	bam_dmux_pc_ack(dmux);
+> +	WRITE_ONCE(dmux->pc_state, false);
+> +}
+> +
+> +static bool bam_dmux_handle_pc(struct bam_dmux *dmux, bool new_state)
+> +{
+> +	lockdep_assert_held(&dmux->power_lock);
+> +
+> +	if (new_state == dmux->pc_state) {
+> +		if (new_state && dmux->pc_vote == BAM_DMUX_PC_VOTE_DOWN_PENDING)
+> +			dmux->pc_vote = BAM_DMUX_PC_VOTE_ACTIVE;
+> +		return false;
+> +	}
+>  
+>  	dev_dbg(dmux->dev, "pc: %u\n", new_state);
+>  
+
+[ ... ]
+
+> @@ -706,9 +795,47 @@ static irqreturn_t bam_dmux_pc_ack_irq(int irq, void *data)
+>  static int bam_dmux_runtime_suspend(struct device *dev)
+>  {
+>  	struct bam_dmux *dmux = dev_get_drvdata(dev);
+> +	bool wake = false;
+>  
+>  	dev_dbg(dev, "runtime suspend\n");
+> -	bam_dmux_pc_vote(dmux, false);
+> +
+> +	scoped_guard(mutex, &dmux->power_lock) {
+> +		bam_dmux_pc_vote_locked(dmux, false);
+> +		if (dmux->pc_vote == BAM_DMUX_PC_VOTE_DOWN_PENDING) {
+> +			dmux->pc_vote = BAM_DMUX_PC_VOTE_INACTIVE;
+> +			bam_dmux_complete_pc_down(dmux);
+> +			wake = true;
+> +		} else if (!dmux->pc_state) {
+> +			bam_dmux_power_off(dmux);
+> +		}
+> +	}
+
+[Severity: Medium]
+Is it safe for this to act on the cached BAM_DMUX_PC_VOTE_DOWN_PENDING
+without re-sampling the pc line?
+
+Every other new decision point in the patch calls
+irq_get_irqchip_state(IRQCHIP_STATE_LINE_LEVEL) first, but this one
+converts the cached flag straight into bam_dmux_complete_pc_down(), which
+releases both channels, frees the RX skbs and toggles pc-ack:
+
+	bam_dmux_power_off(dmux);
+	bam_dmux_pc_ack(dmux);
+	WRITE_ONCE(dmux->pc_state, false);
+
+DOWN_PENDING is only cancelled from bam_dmux_handle_pc() when a later
+invocation observes new_state == dmux->pc_state == true:
+
+	if (new_state == dmux->pc_state) {
+		if (new_state && dmux->pc_vote == BAM_DMUX_PC_VOTE_DOWN_PENDING)
+			dmux->pc_vote = BAM_DMUX_PC_VOTE_ACTIVE;
+
+So if the modem re-raises pc and the rising-edge handler is still blocked on
+mutex_lock(&dmux->power_lock) when the autosuspend timer fires:
+
+bam_dmux_runtime_suspend()
+   scoped_guard(mutex, &dmux->power_lock)
+      bam_dmux_complete_pc_down()   /* pc line is high again */
+
+does the driver then acknowledge a pc=false transition the modem has already
+revoked, and tear down RX while the peer believes the link is up? The commit
+message describes this as the case to avoid:
+
+    "acknowledging a new pc=false transition while the host vote remains
+    active lets the modem power down the DMA engine underneath the driver"
+
+Would reading the line level here before calling
+bam_dmux_complete_pc_down() close that window?
+
+[ ... ]
+
+> @@ -817,31 +939,40 @@ static int bam_dmux_probe(struct platform_device *pdev)
+>  	pm_runtime_use_autosuspend(dev);
+>  	pm_runtime_enable(dev);
+>  
+> -	ret = devm_request_threaded_irq(dev, pc_ack_irq, NULL, bam_dmux_pc_ack_irq,
+> -					IRQF_ONESHOT, NULL, dmux);
+> +	ret = devm_request_threaded_irq(dev, dmux->pc_ack_irq, NULL,
+> +					bam_dmux_pc_ack_irq,
+> +					IRQF_ONESHOT | IRQF_NO_AUTOEN,
+> +					NULL, dmux);
+>  	if (ret)
+>  		goto err_disable_pm;
+>  
+>  	ret = devm_request_threaded_irq(dev, dmux->pc_irq, NULL, bam_dmux_pc_irq,
+> -					IRQF_ONESHOT, NULL, dmux);
+> +					IRQF_ONESHOT | IRQF_NO_AUTOEN, NULL, dmux);
+>  	if (ret)
+> -		goto err_disable_pm;
+> +		goto err_power_off;
+>  
+> +	mutex_lock(&dmux->power_lock);
+>  	ret = irq_get_irqchip_state(dmux->pc_irq, IRQCHIP_STATE_LINE_LEVEL,
+> -				    &dmux->pc_state);
+> -	if (ret)
+> -		goto err_disable_pm;
+> +				    &pc_state);
+> +	if (ret) {
+> +		mutex_unlock(&dmux->power_lock);
+> +		goto err_power_off;
+> +	}
+>  
+>  	/* Check if remote finished initialization before us */
+> -	if (dmux->pc_state) {
+> -		if (bam_dmux_power_on(dmux))
+> -			bam_dmux_pc_ack(dmux);
+> -		else
+> -			bam_dmux_power_off(dmux);
+> -	}
+> +	bam_dmux_handle_pc(dmux, pc_state);
+> +	mutex_unlock(&dmux->power_lock);
+> +
+> +	/* Start handling state changes after the initial state is processed. */
+> +	enable_irq(dmux->pc_ack_irq);
+> +	enable_irq(dmux->pc_irq);
+
+[Severity: High]
+Can a pc transition be lost in the window created here between the level
+snapshot and enable_irq(dmux->pc_irq)?
+
+The in-tree DTs for qcom,bam-dmux (msm8916.dtsi, msm8939.dtsi) parent these
+interrupts on SMSM:
+
+	interrupt-parent = <&hexagon_smsm>;
+	interrupts = <1 IRQ_TYPE_EDGE_BOTH>, <11 IRQ_TYPE_EDGE_BOTH>;
+
+and smsm_intr() advances the cached level for all bits but only dispatches
+the enabled ones:
+
+drivers/soc/qcom/smsm.c:smsm_intr() {
+	val = readl(entry->remote_state);
+	changed = val ^ xchg(&entry->last_value, val);
+
+	for_each_set_bit(i, entry->irq_enabled, 32) {
+	...
+}
+
+and on unmask the cache is re-synced to the live line rather than replaying
+the missed edge:
+
+drivers/soc/qcom/smsm.c:smsm_unmask_irq() {
+	/* Make sure our last cached state is up-to-date */
+	if (readl(entry->remote_state) & BIT(irq))
+		set_bit(irq, &entry->last_value);
+	else
+		clear_bit(irq, &entry->last_value);
+}
+
+The smp2p provider does the same thing in qcom_smp2p_notify_in().
+
+So if the modem raises pc after irq_get_irqchip_state() but before
+enable_irq(), is that edge simply consumed?  bam_dmux_power_on() would never
+run, no pc-ack would be toggled, and the following falling edge would land in
+bam_dmux_handle_pc() with new_state == dmux->pc_state == false:
+
+	if (new_state == dmux->pc_state) {
+		...
+		return false;
+	}
+
+after which every bam_dmux_runtime_resume() would time out in
+
+	wait_event_timeout(dmux->pc_wait, READ_ONCE(dmux->pc_state),
+			   BAM_DMUX_REMOTE_TIMEOUT)
+
+because the modem has no reason to produce another rising edge. Given that
+probe already has a "Check if remote finished initialization before us" path,
+a pc rising edge concurrent with probe looks like expected timing. Is there a
+recovery path for that case, or does relying on a re-read of the line level
+while the child IRQ is masked need a different approach?
+
+>  
+>  	return 0;
+>  
+> +err_power_off:
+> +	mutex_lock(&dmux->power_lock);
+> +	bam_dmux_power_off(dmux);
+> +	mutex_unlock(&dmux->power_lock);
+>  err_disable_pm:
+>  	pm_runtime_disable(dev);
+>  	pm_runtime_dont_use_autosuspend(dev);
+> @@ -872,12 +1003,16 @@ static void bam_dmux_remove(struct platform_device *pdev)
+>  	pm_runtime_set_suspended(dev);
+>  
+>  	/* Try to wait for remote side to drop power vote */
+> -	if (!wait_event_timeout(dmux->pc_wait, !dmux->rx, BAM_DMUX_REMOTE_TIMEOUT))
+> +	if (!wait_event_timeout(dmux->pc_wait, !READ_ONCE(dmux->rx),
+> +				BAM_DMUX_REMOTE_TIMEOUT))
+>  		dev_err(dev, "Timed out waiting for remote side to suspend\n");
+>  
+>  	/* Make sure everything is cleaned up before we return */
+> +	disable_irq(dmux->pc_ack_irq);
+>  	disable_irq(dmux->pc_irq);
+> +	mutex_lock(&dmux->power_lock);
+>  	bam_dmux_power_off(dmux);
+> +	mutex_unlock(&dmux->power_lock);
+>  	bam_dmux_free_skbs(dmux->tx_skbs, DMA_TO_DEVICE);
+>  }
+
+[Severity: High]
+This is a pre-existing ordering issue rather than something the patch
+introduces, but since the remove path is being touched here: can
+register_netdev_work be re-queued after its only cancellation?
+
+bam_dmux_remove() runs cancel_work_sync(&dmux->register_netdev_work) and
+unregister_netdevice_many() at the top, while the RX channel is still armed
+and the pc IRQ is still enabled. Only afterwards does it reach
+disable_irq()/bam_dmux_power_off().
+
+A remote OPEN command arriving in that window does:
+
+bam_dmux_rx_callback()
+  bam_dmux_cmd_open()
+     /* Cannot sleep here, schedule work to register the netdev */
+     schedule_work(&dmux->register_netdev_work);
+
+and there is no second cancel_work_sync() after the IRQs are disabled and the
+DMA is terminated. bam_dmux_register_netdev_work() would then dereference the
+devm-allocated dmux and publish a fresh netdev holding it:
+
+	bndev = netdev_priv(netdev);
+	bndev->dmux = dmux;
+	...
+	ret = register_netdev(netdev);
+
+Once remove() returns, devm frees dmux, so any xmit on that interface would
+touch freed memory. Would moving the cancel_work_sync() after
+disable_irq()/bam_dmux_power_off(), or adding a second one there, be
+appropriate?
+
+-- 
+Sashiko AI review · https://netdev-ai.bots.linux.dev/sashiko/#/patchset/20260903180057.1437-1-getshell%40seu.edu.cn
