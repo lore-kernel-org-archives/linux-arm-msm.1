@@ -1,87 +1,33 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0C1C354EEB3
-	for <linux-arm-msm@vger.kernel.org>; Wed,  9 Sep 2026 12:10:22 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D984054EEA5;
+	Wed,  9 Sep 2026 12:10:32 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788955824; cv=none; b=Hp+rmSt+P3jBWpLUbH5VMuDS/UmHiJQV3y0kRRKHR0SRfRvx4nxy7/O0rjewk184z9FBmUDachIU6DFBP6wFc4OGcVeYdbHPkC9TQI88O9zO13PPxeBhK3gB12RMrpQZbTQT+LXo+H1K9Vr9eZaawV0GNn5cwznmXRr8zFwq3uY=
+	t=1788955833; cv=none; b=BRBMmrgBYZGfUpMdWBNFylR4Fp0+NLkHkJZHzi/rCMJS8vjmIniMxLTZ+FFSPXJ0lZ9tqcT455AIsT2JVDvGP2ljurXji8X+lWGWfKRDyzzdRTVF/+qL7s70Pc//HOaWqocWJeH1ofTpA8kJLEpPUQwFGn9JJ8cfNzFfN6WDS3A=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788955824; c=relaxed/simple;
-	bh=yKb5Uynka4fpXbxfDYHt31nQ/YVe6uRyGsWovuDWWHY=;
+	s=arc-20240116; t=1788955833; c=relaxed/simple;
+	bh=6Gk9u0oSqBQ7pqeGbTieHQOdGP3n5QrcHyTCokPJ5VM=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=fS000Ja/YxHY/jtNRi8n75fJ1vsElPgKIOS+6EWXzvKXGYdvaO1K7aqN2RiTOoIh1ty+swJgfTkQQ1Bndy2Q0O7CfojPeZwDEfikX3+vdbB9/D02XLOW5Q6UCtwT1xxOVGGD8pXyyHuyYS1JcVPXof7KCjYTvto5z1wXo4kzK5w=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=EVfISfEF; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=T2ygIZXu; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	 In-Reply-To:Content-Type; b=hGcckbeFRECh3Of1DUVIVB1yURvFg/YXbvClS+Q+DRHToJZFphl5fGt7oj1gi6cpyGoOmsD8hT9cytPA//ZwFcwUSYOdEfKvtW5w40Xr1SF8jlqKl58pse5tKBxVQvE3bRlp14m+JPx/4UX/t3RmggjL+Fh5Pxtjnt6eDyZCKPk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=BCNBvIaw; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="EVfISfEF";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="T2ygIZXu"
-Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 689BU9jJ599915
-	for <linux-arm-msm@vger.kernel.org>; Wed, 9 Sep 2026 12:10:22 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	X1iR+eoTd4aOG8iSBLGH4p8K/MxGiEwmmRE3XAFMcXM=; b=EVfISfEFYdWOaQZv
-	3AK88fBo7ZU4/v/vzugoKIqztTn7fV22+ekDtjce9mSTgSnOpHcO0Onwkwjqagso
-	GshwM0COkF6ZNRhJMuKAoqqR0PXqBZTESR564jN6pPhqshIii22H/4FbArdIMQb3
-	p9k6egwIeea5R0TxLi2MG/E5y8XovKGKsQIepuI2KbS4g+daqK9GHOf8OLY9aRR9
-	AT1nKqUfinOQV9YjtIxfUuQCwFa/L55dRx7FA0RZfIt9XwvmaXCiLJPo3nwyT+Nv
-	K0NHapXwSUsQQcaVKkPgcouIZKtJao4sWfNlgmANgFDh1iXN8o1DopumqlgCKQJR
-	e3//ow==
-Received: from mail-vs1-f69.google.com (mail-vs1-f69.google.com [209.85.217.69])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gjywr1unb-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 09 Sep 2026 12:10:22 +0000 (GMT)
-Received: by mail-vs1-f69.google.com with SMTP id ada2fe7eead31-78ff33b2292so15055137.1
-        for <linux-arm-msm@vger.kernel.org>; Wed, 09 Sep 2026 05:10:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1788955821; x=1789560621; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=X1iR+eoTd4aOG8iSBLGH4p8K/MxGiEwmmRE3XAFMcXM=;
-        b=T2ygIZXuaeFxZDdGo4Ts1aBdGADIed8ayCEguGSDn4tQMf6FccOYec1DEZjuWsQOs6
-         IyWm2fkUHAXt30iEGlAa3hnWhNXAfaLHMhIztSf7vL8Pvi/r/e7GIBCd2sfNb85t+IhL
-         byAKvHtjpWKPnR1kfxlpQYSrX8tzhETKE+2Skk4XKAYpBBc99AAqIF4jW7QGWnyAN4dK
-         hrnsXcid4lkxExqn10CH/ZkO5hJKuOz+MS9XjNxL2IPfj8KveKQp7ZtbqUJpaPkFUo95
-         8e2jjyRcQzQpuQbBQB8sTz0DxlEuCLxqFSydrxhmRj4JW7oxziQNGRbwvz4Vgf5aDe2V
-         9hJQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788955821; x=1789560621;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=X1iR+eoTd4aOG8iSBLGH4p8K/MxGiEwmmRE3XAFMcXM=;
-        b=nv8xITUkOkm6YjzWsy+jDmpAkWXbAucKpVaFbS1E6ePhy7E7xFRI5ahC9sF0KwU3+O
-         Y1m3b/DdUPB49zL3bx4b4Tn6D5hDICQC+VmBnkU7XERUPxFTsxU7Gtx+F0w5Vv4zVhlv
-         tqRJdxI91A/r9WbN5d8nWq8+ir8yvZsxFwHAKx6YhdbIfVZgFmeU/oQ1+cCnOvpgmDi3
-         Hrr0vHrjsnoHGSpdAM4RaYI1b0eASsDJ7k4ia6wODvpY405I6Nb638FVtpM6SVOaKq6E
-         efA7lU+PdlJVd9AABTgrixlTl4U0l1SWgMspexsy4Jc9aeKrAGFd14TCM28FujLAjjWa
-         XfOQ==
-X-Forwarded-Encrypted: i=1; AKwUvBzJMtUVO3KcxNuBmlil2/Lq95zWX3rVaaomkaU8743scYVukOoq01OTplqElasgffGYEoLztL7bWzX3iPE/@vger.kernel.org
-X-Gm-Message-State: AFuF++mcOtqksiWM0a8mcbuooNg/ejKNtPYfF9RhyotzZIhqrM2f3Lu+
-	5EBGLjtB50bcNBC4nwA7ptteMpWyeLyIuxPkLwAOK+GZK1V17ifh3JNm2h2YBSJTpLBPlAuGrGU
-	hAn1EM/wwMRO4pSfEzMNic4GOwRqhfpS+PWT50z3l7fNat4MEd6z+m1EXUiGjNMB17QnR
-X-Gm-Gg: AYBFou3IFvIYbXmIA8ieoPKGEo3pstJ5+etZWWUoW1zyELIPgCC6jvePDZEMCk4V0tC
-	P7Jd1hqcZTD1Xupwc3wzQFLpscukNbyc7MwrYgoi7G70q6B86aSOEYBF/1zGCepymLpgH9Lxjmj
-	XNEVXOCRftzNz3tIBEV023AiP2z/zk8FrMp+qazT5WKEnbbsMEt1WcrKUWDls1G6+vFvd2zDmnv
-	mN7p54wZpk5TxBCX/TAwoh8Y+QqHcAtf14Q5JtA+7yqbYMCtVzoheSXnSuu1ehzbn7Wz+lM1X1+
-	eMVOUS5YzUcktic+4O/k8FOYymwNMj72ca0ulUAodVANT3JB+hsBcm79KQuupidnTEiPRqkhxcS
-	nhXDaEKvyLkMphAFeBSR3IQ==
-X-Received: by 2002:a05:6102:534a:b0:780:6fc7:2181 with SMTP id ada2fe7eead31-78a4a6dd842mr4431691137.2.1788955821038;
-        Wed, 09 Sep 2026 05:10:21 -0700 (PDT)
-X-Received: by 2002:a05:6102:534a:b0:780:6fc7:2181 with SMTP id ada2fe7eead31-78a4a6dd842mr4431685137.2.1788955820608;
-        Wed, 09 Sep 2026 05:10:20 -0700 (PDT)
-Received: from [192.168.202.12] ([178.235.128.140])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c28e9aec296sm471566666b.28.2026.09.09.05.10.18
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 09 Sep 2026 05:10:19 -0700 (PDT)
-Message-ID: <5a13b69f-317b-41b4-91e4-4d9f7d85ee2e@oss.qualcomm.com>
-Date: Wed, 9 Sep 2026 14:10:17 +0200
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="BCNBvIaw"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id BD5151F00A3A;
+	Wed,  9 Sep 2026 12:10:29 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1788955832;
+	bh=XJJNXelHGfyOCJIhWPkG86Eo900eGpI89H0jQPU9A4Q=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To;
+	b=BCNBvIaw0Kh0dEDVF+1a+kRtz4UsUrDiXB8o1jjKvXC39dKMRF6W3nLxVzT/axCmz
+	 +w+syaDqTCxCcyRGpjcFIpn7os1f0CMR+M+BvgUS+gbzTbejmqSYYSutw0aDl7Z6DC
+	 7EqAZRmw/JCcF+xBu8gw3m2duYuLYf2Tz1vA3E5IA+oCoDeMB2zb6iHnw7aYqf7ldR
+	 OK1WTZJdNGl7M2S5QMpMYrCKbZCWJSFlEArVfKocL65Wlm54jBL3YH3xU7KlXc9HlE
+	 4H3RRV7LnZXtjQS+I/dTscuvMqAQUz9Q/XEZDOU1B5GJo3q1MIQqADPfL5HI+dUMuq
+	 d5dyuOp0gtylA==
+Message-ID: <f5ac42a1-d24f-40d5-8803-be147491c994@kernel.org>
+Date: Wed, 9 Sep 2026 15:10:26 +0300
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -89,62 +35,48 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4] clk: qcom: ipq-cmn-pll: keep the CMN block bus clocks
- enabled
-To: Mieczyslaw Nalewaj <namiltd@yahoo.com>, Stanislaw Pal <kuncy7@gmail.com>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Stephen Boyd <sboyd@kernel.org>,
-        Michael Turquette <mturquette@baylibre.com>
-Cc: Jie Luo <jie.luo@oss.qualcomm.com>, Georg Seema <georgseema@gmail.com>,
-        Brian Masney <bmasney@redhat.com>, linux-arm-msm@vger.kernel.org,
-        linux-clk@vger.kernel.org, linux-kernel@vger.kernel.org,
-        stable@vger.kernel.org
-References: <20260805193638.15327-1-kuncy7@gmail.com>
- <20260813093351.178419-1-kuncy7@gmail.com>
- <11b0c7d4-4e77-42a8-9528-6dacafd3e251@yahoo.com>
+Subject: Re: [PATCH] dt-bindings: interconnect: qcom-bwmon: add nord cpu-bwmon
+ compatible
+To: Bjorn Andersson <andersson@kernel.org>,
+ Zhangfei Gao <zhangfei.gao@oss.qualcomm.com>,
+ Krzysztof Kozlowski <krzk@kernel.org>, Rob Herring <robh@kernel.org>,
+ Conor Dooley <conor+dt@kernel.org>, shengchao.guo@oss.qualcomm.com,
+ bartosz.golaszewski@oss.qualcomm.com
+Cc: linux-arm-msm@vger.kernel.org, linux-pm@vger.kernel.org,
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
+References: <20260831090134.585588-1-zhangfei.gao@oss.qualcomm.com>
+From: Georgi Djakov <djakov@kernel.org>
 Content-Language: en-US
-From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-In-Reply-To: <11b0c7d4-4e77-42a8-9528-6dacafd3e251@yahoo.com>
-Content-Type: text/plain; charset=UTF-8
+In-Reply-To: <20260831090134.585588-1-zhangfei.gao@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Authority-Analysis: v=2.4 cv=a4YAM0SF c=1 sm=1 tr=0 ts=6aa14cae cx=c_pps
- a=5HAIKLe1ejAbszaTRHs9Ug==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
- a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
- a=EUspDBNiAAAA:8 a=dScmzdbaH-RYzaEnKG4A:9 a=QEXdDO2ut3YA:10
- a=gYDTvv6II1OnSo0itH1n:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTA5MDEzNCBTYWx0ZWRfX+H1uKvI6RpE4
- e9jHySMne394cANluJ/uCMSCzso9ySqqUglYOo7Z70hBS2f3dnABqVAuBzTPzKdpwJ+7tUIDRru
- 41bUEj3QEjsOpJiE59Wa3gMxg6pedt7J9xfYXhgDSxuxwui8xI725NUOe76hPmhp047kRCatJXi
- vWNQBBe4mUGJL06yQ/rRPphj10WFw67lNWccI0sTRQR1UrJkkJNOX8sWfEQHJKlns7xfLV/+vr5
- t3F0ITTpzEGxUfcNjWuf0PRY7o1inBKKCeWcA0qY8CqQ1ATB9o9INKpNxcAFEcNW1y5Pvc2cT0m
- uUlCCrG0ZAr/kdHg9BFd0+Ut4KmmMZGsiFzV2WhaC03u74vvfFCB6diSBDNy0kGsNBelBG7o2Le
- qGbeHrcQ3gb453tOPZyFrXH4NW24nl8IKeACCf0eUvIWvLFVAcDy6Mb+h4iP4poSaIDsvrEVkbr
- 2FxLtea7NAbOgXeKgXQ==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTA5MDEzNCBTYWx0ZWRfX4gxzp+QNqJOb
- dh3t4fRk4+QVRnwPHn/8YjGGxk/pYvNlMvV1cAPCGFj+iTtIE1mnuvqy6S2/6thGwLLBUdLOsc0
- 4Z5hSf6KH7Q2cJZPTytAswB/wbxvQcY=
-X-Proofpoint-ORIG-GUID: T19cT3VmGHGJQ4a5llB7JLaMOvfcZ97L
-X-Proofpoint-GUID: T19cT3VmGHGJQ4a5llB7JLaMOvfcZ97L
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-08_03,2026-09-09_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 malwarescore=0 phishscore=0 lowpriorityscore=0 bulkscore=0
- clxscore=1015 spamscore=0 adultscore=0 impostorscore=0 suspectscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2609090134
 
-On 9/8/26 12:57 PM, Mieczyslaw Nalewaj wrote:
-> Hi Stephen, Bjorn,
+On 8/31/26 12:01 PM, Zhangfei Gao wrote:
+> Document the qcom,nord-cpu-bwmon fallback compatible used by the
+> CPU bandwidth monitors on Nord.
 > 
-> Just a quick ping regarding this series. The discussion between Stanislaw and Qualcomm (Jie Luo) has been fully settled in late August. It was proven that handling this on the UNIPHY side is not possible due to the early stage of the watchdog reset.
+> Signed-off-by: Zhangfei Gao <zhangfei.gao@oss.qualcomm.com>
+
+Acked-by: Georgi Djakov <djakov@kernel.org>
+
+> ---
 > 
-> Are there any remaining concerns, or can this v4 be picked up for the next cycle?
+> This compatible will be consumed by the Nord bwmon device tree nodes,
+> sent separately by Shawn Guo.
+> 
+>   .../devicetree/bindings/interconnect/qcom,msm8998-bwmon.yaml     | 1 +
+>   1 file changed, 1 insertion(+)
+> 
+> diff --git a/Documentation/devicetree/bindings/interconnect/qcom,msm8998-bwmon.yaml b/Documentation/devicetree/bindings/interconnect/qcom,msm8998-bwmon.yaml
+> index 21b4e04727de..8c82103fb86b 100644
+> --- a/Documentation/devicetree/bindings/interconnect/qcom,msm8998-bwmon.yaml
+> +++ b/Documentation/devicetree/bindings/interconnect/qcom,msm8998-bwmon.yaml
+> @@ -30,6 +30,7 @@ properties:
+>                 - qcom,hawi-cpu-bwmon
+>                 - qcom,kaanapali-cpu-bwmon
+>                 - qcom,maili-cpu-bwmon
+> +              - qcom,nord-cpu-bwmon
+>                 - qcom,qcm2290-cpu-bwmon
+>                 - qcom,qcs615-cpu-bwmon
+>                 - qcom,qcs8300-cpu-bwmon
 
-Since it doesn't seem like a proper fix is coming soon, this is
-much better than keeping the platform broken in the meantime
-
-Acked-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-
-Konrad
