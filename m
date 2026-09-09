@@ -1,87 +1,88 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EA21A26ED33
-	for <linux-arm-msm@vger.kernel.org>; Wed,  9 Sep 2026 04:06:04 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E202C30567F
+	for <linux-arm-msm@vger.kernel.org>; Wed,  9 Sep 2026 04:58:27 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788926766; cv=none; b=UCPoxVFyAkW9AuHUT21o1GzDfVDCBdm+4/cqh55Py+9lgBo+mM8s3dn5GoIGvePZNptceM+ER3MnwR3JymIOIfQVv5vMLoO2q+p8YHieq7urDdUjq/mSRibZrTBCvRB9i/6aqNkF7UmuvCYebgM4kL81iHGmDHPLFsdfZ3ERNIw=
+	t=1788929909; cv=none; b=p3/J+5kFJSaE3zYdAaF17voFYAPg8jcinpEqiW84NKr90dJtLoN4fZz3QvRq4jbcoVHQ+flrCSfGLt0kS71NG2uFWhviDbk58y2bRXQgBkXm6tc9FyiabmfK15RZ0cTwpewQhLzZU+WwqRz+pzJkxX1rz0kPJ8g4NRr7nlwiwRo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788926766; c=relaxed/simple;
-	bh=ZRoxIR8iUpuvzhaGrv1RGMVbu3048LD7OcEqrqpEc1c=;
+	s=arc-20240116; t=1788929909; c=relaxed/simple;
+	bh=5lrHC0k2zcfllWc2Fvzf1mTjEPO+aONQ1+R2c0DuGn8=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=EYD0ss6VAKnMxpvoUcepppCIvBjo0ks92lyhLrA4wOaxjJ03CPWxt9lNvOtRkrWepJpf5QoUb3kkab6b8Zpn0X+mOc7JzrIcMyB16AXoMfBxXRlshJuxbN7omxfs+ueOazYgZsdTopBSptVmvNAw+AsD2bO56jpKhhB8kRNRGtA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=KMmpulum; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=UjTMp0T1; arc=none smtp.client-ip=205.220.168.131
+	 In-Reply-To:Content-Type; b=MXLckWn7OhmC7MnvEFw2xN3sa17YQBfMMzjOXrG0jco9kTBob0nWrLP7hfjXB5XSPOSWyN0b2uIEE9oo0n2w9ayKGQKgk4aSoGARZeYBqSU22X3XqnN3yh/jCruCFV5pIjKJS/yBfeqokau3ydNrAw2eaG8P3S9n4hyP67QpE4I=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=MzR4Fa4t; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=SB1kfPL1; arc=none smtp.client-ip=205.220.180.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="KMmpulum";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="UjTMp0T1"
-Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 688Mg5ha1274428
-	for <linux-arm-msm@vger.kernel.org>; Wed, 9 Sep 2026 04:06:04 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="MzR4Fa4t";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="SB1kfPL1"
+Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 688MgAxj129691
+	for <linux-arm-msm@vger.kernel.org>; Wed, 9 Sep 2026 04:58:26 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	d1+atJR6FDQQspxnJlEifDjkb7d3prg4wHIrPk7shYw=; b=KMmpulumqUHxy974
-	LfPhlTuVkXLjKQydr+Jk37/5pYuE/aYqT4tC0rtx0xep6Z5Zc5hGXyE6V9uyi5mI
-	L/V60lpVH2wyw0p2Mlpo4yQ1GB03B1HDEsfLxPszNNFMi7DZk1e9HUT7emg9Z9+U
-	eF4pf8YDJaolfMdnwLk2Ob1sp2FIqKSbWnKarkKJyWBWmndlFso0JGU1WEB8FdBd
-	XQVtgWOwao48Xfz+/PMa8Wz8mhMsX0OMm7QVNVEgUiSagatS+4lNxS8npn2CZD6j
-	2tPNYbq0BQEv+Gkv8oI6hdQcVuQmAs33AnuBsN8FisVBXZ1s3GOeUYeNVpULDJZQ
-	QvTgpA==
-Received: from mail-pj1-f72.google.com (mail-pj1-f72.google.com [209.85.216.72])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gjqdw24k6-1
+	LUlpyw9W+HelyIeeXNtDQKDxjhNyFJhI6vx7P1VkvH4=; b=MzR4Fa4tvrEypJdp
+	5oeZIRoUMBphKCPDdOMZC4FblmXs+klvJnyllfroRzgHObNTr7t74xwm9cdbq+lD
+	DXCosvY58OTUnVVMhEKi/QEsdLYOTe56LwHZLTX7jrw7n8233tr+hfUQ6KxMmzf3
+	HDuWJJrBPsLJ8VUJUfYQTzxBic78Tk7q7oaOP9BVnrUOIQgY2rSdud3r9WRsN1yZ
+	PiYLiFS5WbFQEB4m571+IUK123v1BmcadMcmW3Qc4ZhVPMvvYzr/Tfkn9GgqIaCq
+	em7yPjxkCxTrZ3xH5vK84qtNGuQKIlDzlMqILsEV8Mhs4H+wRLk9n12KLN2NuwPP
+	7Z4jSQ==
+Received: from mail-pg1-f199.google.com (mail-pg1-f199.google.com [209.85.215.199])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gjntpjqkr-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 09 Sep 2026 04:06:04 +0000 (GMT)
-Received: by mail-pj1-f72.google.com with SMTP id 98e67ed59e1d1-38e8fee6af3so7127658a91.1
-        for <linux-arm-msm@vger.kernel.org>; Tue, 08 Sep 2026 21:06:04 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Wed, 09 Sep 2026 04:58:26 +0000 (GMT)
+Received: by mail-pg1-f199.google.com with SMTP id 41be03b00d2f7-cc2229450b4so5408332a12.1
+        for <linux-arm-msm@vger.kernel.org>; Tue, 08 Sep 2026 21:58:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1788926763; x=1789531563; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1788929906; x=1789534706; darn=vger.kernel.org;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=d1+atJR6FDQQspxnJlEifDjkb7d3prg4wHIrPk7shYw=;
-        b=UjTMp0T1j3VVNySwD6yEiRExrCP17XQ2n/pDWHis8LLlP31LfX8yqyL4Z3R4vlyvBQ
-         uUF1496Kc/yWTkIcoTMG3xyQO3rOS+D3neY9p4CGTS39ghr96nI6G2h1p63QgAP82+xn
-         4bcwb5lzGaa3MHfDuxV6QVUBteUIcUfEVRF8K9z33hgOpSsebxqIE7drSY/j4843M1lX
-         oJJL2f+RosiIN38t6oMoaNZ9vCjMUPnoz1kfdXO41Hx8p/vwNXyI+6eq7/ez7rwpHacd
-         0b+fPZP9rQViJmWyevtTKSzKfsoWys3hFdkVKEduEX/fzXfXm2TCjHswXTfruXUv4z+3
-         jp+A==
+        bh=LUlpyw9W+HelyIeeXNtDQKDxjhNyFJhI6vx7P1VkvH4=;
+        b=SB1kfPL1j4nwK7UtVR3mln//J540/PONUqJTDvjxc1n4Sd++JuC9BSSI7lLFiiEDWU
+         EzU7Yuuy3+OdfSMXtv1SRWGqZDUbAFXHOq+aCEJireBFMdtntA86PLnZQWusDFMoY8r+
+         U8nCVfEQRNvy7xELSM1SesthlXD16JsY4a3taD6m3QTgTrWagSgt+1YwD9NIDgla6+gl
+         z6iOkucMHAqfZwTDyz46inXT6oikD7WyrGDgwZl+NxSKMxoWpydzgnfLwGSeOWvjz68U
+         ropDcvhIjomL7MzR9S0CNKgPzkl5tjKXl5u+sHPlAIyjZinbjcvcsCrJmPunAlK92JqN
+         eKWw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788926763; x=1789531563;
+        d=1e100.net; s=20251104; t=1788929906; x=1789534706;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=d1+atJR6FDQQspxnJlEifDjkb7d3prg4wHIrPk7shYw=;
-        b=mKIGCqqB2X8hSIgZaBqVCcrA42NUlWJrkUo4ZdgeoCTR4JCnADdqTnrL0otUgT+pL3
-         x74ANhI8MFogR6kmnFJ4hiPz4UWP6oPkPloi6R1zBSKNdDesCV7+uDbgePgX7mBCm1oG
-         oTQbJk4TQK8PTxk7dsG2sDLISHQ+S2+0muPxCrO3GzgycUuTAgT3poz6LsEnM8vZ6MU+
-         Z7ZAs0LioONVNOKMSQNR1CmhuQokGro34S1FxPurS5PySnctL1M3QZX8bjLjJg73uwfU
-         mHpN/oCUxL54dUYYgalyNwPK4G67pzkJ/nC6U3r1hCJkc3MftJdg8q+vgAtyGq+0YbBd
-         fkZg==
-X-Forwarded-Encrypted: i=1; AKwUvBz1ndzdHa0PMbmIIY7Gnkm9vZmOp2esIcbOXyVouW0FeBtD6TChHT6WzB6NpLwjLs99FDIqODF4Iu5zCvTT@vger.kernel.org
-X-Gm-Message-State: AFuF++n2TBUgvWXLwux+Ej6osMRvN1TJd1dpKeJ65vXQiDYCt6zpF4Tl
-	QSDsuWReqi0HxkbBEGHb9g2l4htZSRx1LqyUhFYMSyaMPHeYduQArasSkWfX5KQrc+AvGpquz+/
-	nnTYXfARdvmjr5XDUcTgjvgPgzGvLQynJvMQTCl5ve+VICiP9rojZ12h2yn/+8w8eZJDA
-X-Gm-Gg: AYBFou3k8HmSaVtG2UHq/fnGcTIwZWKZ9yEFnXgAvlCbF1KE1pyAlRrnHsCWtvl6gu8
-	EdUWF+lft0U8VIgmvXWmI4OvDis3Iuhn5n4k8T6p+h/XFHwWp9ND3T8v1dKtKyw6etfobgL2K0R
-	P4/EkytILwyfuqH42Df8rmEXi6AzbICJ4WnGFuY295e4Behp66apXMnCYk98kj0NMynPf+UgAb9
-	wt/5N1E3jKBLRk1AyerHnO+sODhmJiqIIFeGB27I2En3GRrQ15dcq5JSN6OBYUchf6H1YyZac/i
-	npu/rg6YjDjay/1xa+UUsKSYgVhh0Aha/JSS4Vv9uOtzYq/j6YlsB+YYAedJXozaAkB5bK/UQXF
-	LDUAWCmBghD5NsHAKjlQLooFMbwzamGrhKA==
-X-Received: by 2002:a17:90b:2749:b0:398:d292:e6d5 with SMTP id 98e67ed59e1d1-39b26304385mr50410121a91.24.1788926763196;
-        Tue, 08 Sep 2026 21:06:03 -0700 (PDT)
-X-Received: by 2002:a17:90b:2749:b0:398:d292:e6d5 with SMTP id 98e67ed59e1d1-39b26304385mr50410062a91.24.1788926762690;
-        Tue, 08 Sep 2026 21:06:02 -0700 (PDT)
-Received: from [10.218.39.50] ([202.46.22.19])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3339a534df1sm46654957eec.7.2026.09.08.21.05.59
+        bh=LUlpyw9W+HelyIeeXNtDQKDxjhNyFJhI6vx7P1VkvH4=;
+        b=moD3CvB66FwvGUQp6ZuQA5ePL7Zlcmi469MvS2iWRUfCPMLjGrN9RtpDIpqnnBq4vS
+         RAtMr9TccKBqydlWIwB21K1E5wkV3nCtHha0aKTvyqSMy3A838GJj5QcyTLaT1zvYcjb
+         aPXzwkp86/321fsB8yV5/rKVfka0MqLd1KWplxENXA5h7vlVvCn6UdUb2WMPPi5NFpiX
+         IBy5YD9HIpjbG1w9+/t/tXCNCEqftQ+azOwiGdEiY5Y+XnIGr4vlIPZZeFjCPU+bwVT6
+         Mr67wVrv8wMw2A6rDokEs4bgQy8XlyqOM2hF9zasjbc0aJG66GiDWQM6DnuVdYIcFlSf
+         XJXg==
+X-Forwarded-Encrypted: i=1; AKwUvBwEI4PLXkP9ris+7LQE4ohnNVG4dmo7hKhM/kpHhmWuJTmN0bJwM2xZYGaQB6DhssEtSfDrjNU+SsCdJwqg@vger.kernel.org
+X-Gm-Message-State: AFuF++m+bcKIAgXWcG57AkfDkjlL4PbRokKjkOuMs5XejkE0PROPU8dw
+	yNGUxZmhqT5qwlzA1IE6OknHJNoiubDhi45E+qdZjDvvdYTMA55FWah5TkLIxc03Xwk9i1Nd/yq
+	PdJX8kxiPAse2NfHDnC5KNhy0YVGStcc1UAUpSy7pyqr/h3DmOuNFYYr3zwkdNtYAEOsg
+X-Gm-Gg: AYBFou0jYgC2VYNmEM7rpTw76hfQtCPLtdIJBnkri/I89A6pGhXwt3c91F9BorhiO9n
+	htkJ43jrHsgcA3nF/7GH2W9FyX0NJTeWVxA/nX9GFrWnDIAHedc3rDrJCCgve+Yk4lk+NhYw9rO
+	OfznPAtM+FVhgLoFIizhXDgck+x3TindWrn33C5KIgfXdKdzjNYrqYrdOkuScrG2empPRJJ69RB
+	mDslvK9MpKNNhYabCQ2KWls9Ow+ZkCx+/XgWF9+uV/C+0nR0zFqInPmZYlmpEJiF56WitbD8+eL
+	2Cwe+XPevSIhDjQBGLg9tu0uawtsDC4jaP0LpKpMF4mWZWOmVjtFzTGiqA+U3EB5p5ESCYTyuQa
+	nNyPBX//7YS+t+3dZW92Ko6pxxHaJT9iv0Sz3OWvg7TsPVK1lAS4AMj1LdVlBW7fCWQ7p2DKVEe
+	7wK9P3gZ5equdf
+X-Received: by 2002:a05:6a20:a108:b0:3cc:45cc:c401 with SMTP id adf61e73a8af0-3da39ff4c0amr44295609637.13.1788929905772;
+        Tue, 08 Sep 2026 21:58:25 -0700 (PDT)
+X-Received: by 2002:a05:6a20:a108:b0:3cc:45cc:c401 with SMTP id adf61e73a8af0-3da39ff4c0amr44295553637.13.1788929905334;
+        Tue, 08 Sep 2026 21:58:25 -0700 (PDT)
+Received: from [10.79.117.175] (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-334fbd5e6f6sm33551065eec.23.2026.09.08.21.58.19
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 08 Sep 2026 21:06:02 -0700 (PDT)
-Message-ID: <dfcecd58-d6ec-4694-81b6-fe6d45d4a7d4@oss.qualcomm.com>
-Date: Wed, 9 Sep 2026 09:35:57 +0530
+        Tue, 08 Sep 2026 21:58:24 -0700 (PDT)
+Message-ID: <695a5c15-9028-4b7e-8e37-b2e08ad1fb93@oss.qualcomm.com>
+Date: Wed, 9 Sep 2026 10:28:18 +0530
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -89,106 +90,97 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4] iommu/io-pgtable-arm: Add support for contiguous hint
- bit
-To: Jason Gunthorpe <jgg@ziepe.ca>, Daniel Mentz <danielmentz@google.com>
-Cc: Prakash Gupta <prakash.gupta@oss.qualcomm.com>,
-        Will Deacon <will@kernel.org>, Robin Murphy <robin.murphy@arm.com>,
-        "Joerg Roedel (AMD)" <joro@8bytes.org>, linux-arm-msm@vger.kernel.org,
-        linux-arm-kernel@lists.infradead.org, iommu@lists.linux.dev,
+Subject: Re: [RFC PATCH v2 1/2] platform: arm64: qcom-hamoa-ec: monitor Slim
+ 7x legacy sensors
+To: Birk Skyum <birk.skyum@pm.me>
+Cc: sashiko-bot@kernel.org, Sibi Sankar <sibi.sankar@oss.qualcomm.com>,
+        Hans de Goede <hansg@kernel.org>,
+        =?UTF-8?Q?Ilpo_J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>,
+        Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
+        Guenter Roeck <linux@roeck-us.net>, Jonathan Corbet <corbet@lwn.net>,
+        Shuah Khan <skhan@linuxfoundation.org>,
+        Randy Dunlap
+ <rdunlap@infradead.org>,
+        Daniel J Blueman <daniel@quora.org>,
+        Maya Matuszczyk <maccraft123mc@gmail.com>,
+        linux-arm-msm@vger.kernel.org, platform-driver-x86@vger.kernel.org,
+        linux-hwmon@vger.kernel.org, linux-doc@vger.kernel.org,
         linux-kernel@vger.kernel.org
-References: <20260804-iommu_contig_hint-v4-1-d7a47ed5db98@oss.qualcomm.com>
- <CAE2F3rBQQEHsksOyE2ojQPbMd_vvFqaFMC2RzT0B6KkxMB5YgQ@mail.gmail.com>
- <c84e61b1-785e-4a47-9082-c5111bf35fd4@oss.qualcomm.com>
- <CAE2F3rC80=ZpiHVtmRDU6f8g4AwV_RrJ-Zqr0Xi7zbUc0fsQog@mail.gmail.com>
- <9c28300b-a17f-4324-b9d5-8fc800e4d794@oss.qualcomm.com>
- <CAE2F3rDdogf1jGsD2ekGqT7X692fFyqv=H-8iM5OTu8AdHHoJg@mail.gmail.com>
- <CAE2F3rAeq_CPeaDxuh40v41v2f=68oD2TqK9DYSPKz9F74kqeg@mail.gmail.com>
- <20260908164746.GC2543240@ziepe.ca>
+References: <20260908135801.81436-1-birk.skyum@pm.me>
+ <20260908135801.81436-2-birk.skyum@pm.me>
+ <20260908140849.229ED1F00A3A@smtp.kernel.org>
+ <20260908143650.30134-1-birk.skyum@pm.me>
 Content-Language: en-US
-From: Vijayanand Jitta <vijayanand.jitta@oss.qualcomm.com>
-In-Reply-To: <20260908164746.GC2543240@ziepe.ca>
+From: Anvesh Jain P <anvesh.p@oss.qualcomm.com>
+In-Reply-To: <20260908143650.30134-1-birk.skyum@pm.me>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-Proofpoint-ORIG-GUID: lGefozvYyJeKQBVcMb-_2w58Soo68fHC
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTA5MDA0MyBTYWx0ZWRfX7wOXLojaYoTs
- A4rYNUaRkzW8E49hKDSJS59dy/LLVDGjO7ehKEv9wG9hMqvWkqCJS1DZrlIm/GFwK9L3tRRU3FY
- neuibgvvWtK0aVzRuL6xKlsD2b4HgUY=
-X-Proofpoint-GUID: lGefozvYyJeKQBVcMb-_2w58Soo68fHC
-X-Authority-Analysis: v=2.4 cv=Bo2tB4X5 c=1 sm=1 tr=0 ts=6aa0db2c cx=c_pps
- a=RP+M6JBNLl+fLTcSJhASfg==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTA5MDA1NCBTYWx0ZWRfX6rUZGbh0vmE/
+ ikWmLSXLxi0aNQdgFc9d43EQp+xLMG1wcFjk3+cdsGupPzXAlgJEnmL8La8mOeR1mdkG0TeShcI
+ CHKOgWEK4ihlaslBDAEWCSmYCejn4vuEvILzQuICDzoQhjpiodIYRuLEB+WunrkGz6eUWyJja17
+ jLaKa2BsiMFVPoo/6mLA7PEIBMXUowCv2lX1Oo9ZTkfoylYoNlB1igREXD9NzuBsbCmLEydwtzs
+ PwMpzfOLEVBFkj3NDXggJDTjtnwDzaOH3v6ZJC80nc9ZsS9mNNa0QvW1GRw7Mm+wv4DxQ65rMqm
+ cUCgylYmZ+G6aYIFxLI75AaebVsH+vZqLoGI9ZM5gl0pgeq4DdGsZ7V0+3pvfQf1fVPZOsX75Gr
+ txddwacQX7w8uxs8VGc9GcCaEcPb+kQ4hctXDDzlnYAiDhV1nMdv/5OSx/dtypcObkoW4Uz7fRk
+ +ys0fowB31lFgjoz2vA==
+X-Authority-Analysis: v=2.4 cv=N+AZ0W9B c=1 sm=1 tr=0 ts=6aa0e772 cx=c_pps
+ a=Oh5Dbbf/trHjhBongsHeRQ==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
  a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22
- a=VwQbUJbxAAAA:8 a=1XWaLZrsAAAA:8 a=zcW-mOqCcEHC3mfLxN4A:9 a=QEXdDO2ut3YA:10
- a=iS9zxrgQBfv6-_F4QbHw:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTA5MDA0MyBTYWx0ZWRfX+WxWbsnR27bk
- 5Jo+9AjZX2OiznG7E2xik+tC+dHaezIi4Utu4wMDzWBlK/WgGWr50Wtre0ptmyJqniYDjyUUuIa
- buWrnwGrABB8EvzhkPRzLz05T0jJG5IhzMMq+D6tP8lAcDiWbf1E4SZ5H+W1lmn7j6C/Knt/2xn
- 0nWCQLUocB4GQqDLKc+7HggpSGg7PewiBErAj3egP70nXqFpChEd0Pc/toPCf/qdpJ4K+hRKfvp
- rCNnxYF6hUPUWVS6i1vl12OaJfhsXrLuADPRozRRpH9wG94iog7OrQ2M7NDSRtM90c2CETIkZrE
- n9AtVO11glNuONhtBy4PnfrAJ8RzoUgxy+4d63uX5VeW3CJus+0tfzsXmMY6uWKnMdJ9feWy1zn
- 7kn3zXjrVJBOhO3uEmgxCX0zBJ/rnX+tKwvR7SfKCuwZULsrgJKBevJCcOksWs5IgPSu9a2EUxo
- A94KUbySM1Pr254+JRw==
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
+ a=IA0wh2spAAAA:8 a=2NzAWjCmuF5XDdBpOFkA:9 a=QEXdDO2ut3YA:10
+ a=_Vgx9l1VpLgwpw_dHYaR:22
+X-Proofpoint-ORIG-GUID: -Mk66EFLXHDKanVHSRllOgRKqisCS94u
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTA5MDA1NCBTYWx0ZWRfX/E1ReAIf0CVx
+ GZojmAByGSEUXhABQuWRdDqHkExXR7Kra0MB+pMx7tpb7vCZxXc1RROfgUvU48B/hoEwxuj7hq/
+ yrdZn5ovD+di7dQl3zADwG2DDH/FY/g=
+X-Proofpoint-GUID: -Mk66EFLXHDKanVHSRllOgRKqisCS94u
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-09-08_03,2026-09-08_03,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 suspectscore=0 bulkscore=0 impostorscore=0 adultscore=0
- malwarescore=0 spamscore=0 priorityscore=1501 lowpriorityscore=0 phishscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2609090043
+ phishscore=0 lowpriorityscore=0 priorityscore=1501 suspectscore=0
+ clxscore=1015 impostorscore=0 bulkscore=0 malwarescore=0 spamscore=0
+ adultscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2609090054
 
 
 
-On 9/8/2026 10:17 PM, Jason Gunthorpe wrote:
-> On Tue, Sep 08, 2026 at 09:36:35AM -0700, Daniel Mentz wrote:
->>>> That said, install_leaf() is shared by other callers that reach it through
->>>> ops->map_pages() directly, without going through iommu_pgsize(). panthor_vm_map_pages()
->>>> (drivers/gpu/drm/panthor/panthor_mmu.c) is one -- it allocates its io_pgtable_ops via
->>>> alloc_io_pgtable_ops(ARM_64_LPAE_S1, ...), same as any other LPAE consumer, but does its
->>>> own chunking with a local get_pgsize() that only ever returns SZ_4K or SZ_2M, with no
->>>> notion of the 64K/32M CONT boundaries. That can hand install_leaf() exactly the mixed
->>>> iova=paddr=0x1000, pgcount=34 shape in a single call (panfrost's map loop uses the same
->>>> get_pgsize() and hits the same case). So the prefix/aligned-group/suffix handling in
->>>> install_leaf() is still needed for that path.
->>>
->>> Maybe other people can chime in here, but I feel, from an API
->>> perspective, we should have only one way to make of use iopgtable. I
->>> think we should just mandate that users honor the updated value for
->>> pgtbl_cfg.pgsize_bitmap (and pgtbl_cfg.ias) after the
->>> alloc_io_pgtable_ops() call and then choose page sizes appropriately.
->>> Otherwise, we end up with two pieces of code in the kernel solving the
->>> same problem. panthor_mmu won't be able to take advantage of the
->>> contiguous bit until it gets updated accordingly, and that's ok.
->>
->> On this note, I want to point out that I tried something similar in
->> 2025 (see https://lore.kernel.org/linux-iommu/20250430231924.1481493-1-danielmentz@google.com/).
->> The feedback I received from Jason at the time was:
->>
->> "Wouldn't it be better to use the pgsize_bitmap and rely on the core
->> code to indicate that a contiguous page size is being used, so it can
->> trivially set the PTE bit without doing all this extra work?"
+On 9/8/2026 8:06 PM, Birk Skyum wrote:
+> Hi Anvesh,
 > 
-> Still think this is right, Panthor is not using it well if it doesn't
-> jump through all the hoops. Probably there should be an general entry
-> point for map/unmap that does the right stuff for the DRM drivers to
-> call.
+> Sashiko flagged the pre-existing SCI cleanup gap on the reference-board
+> probe path. I reproduced it in KUnit with simulated I2C and IRQ devices:
+> when the thermal-capability read fails, SCI remains enabled after the
+> driver core releases the interrupt.
 > 
-> Jason
+> I noticed you already proposed the devm_add_action_or_reset() conversion
+> and agreed to split it out after Konrad's review:
+> https://lkml.iu.edu/hypermail/linux/kernel/2607.3/10628.html
+> 
+> With that conversion applied locally, the failure-path and removal tests
+> pass. Is there a standalone version available to test? Happy to share the
+> reproducer if useful. I'll keep this separate from the Yoga sensor RFC.
+> 
+> For the other v2 findings, I've queued the named I2C initializers for the
+> next revision. Guenter left the driver split to me, and v2 already moved
+> the documentation out of Documentation/hwmon as requested.
+> 
+> Thanks,
+> Birk
 
-Thanks Daniel and Jason for the detailed feedback.
+Hi Birk,
 
-I agree that CONT-sized mappings should be selected by the caller using the
-effective pgtbl_cfg.pgsize_bitmap, rather than having io-pgtable-arm perform a
-second round of prefix/group/suffix splitting.
+Yes, we already have that fix, SCI disable is now registered as a devm
+action right after it's enabled in probe, so it unwinds on any probe
+failure, not just on remove(). Same for the i2c_device_id
+named-initializer thing bot flagged.
 
-Based on this, I will remove that logic from arm_lpae_install_leaf(). The only
-effect is that direct io_pgtable_ops users such as Panthor and Panfrost will not
-benefit from the contiguous hint.
+I'm working on v2 right now. Once I get consensus on all the review
+comments, I'll post it with these fixes included very soon, once it's
+out so you can test against your reproducer.
 
-Updating Panthor/Panfrost and adding a common map/unmap entry point for direct
-io_pgtable_ops users are separate API changes, I think this can be taken up
-as a separate follow-up series.
+-- 
+Best Regards,
+Anvesh
 
-Thanks,
-Vijay
