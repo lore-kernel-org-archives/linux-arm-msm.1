@@ -1,67 +1,321 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CE1524FECF7;
-	Wed,  9 Sep 2026 10:27:29 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1374D4F55BE
+	for <linux-arm-msm@vger.kernel.org>; Wed,  9 Sep 2026 10:28:16 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788949651; cv=none; b=gaf8vqibj4YyLl1NZYKoEBqbK7cdSN4jHSQ74IYlwqH0+QSvRJzY3+tMa23I/EK4BOAySQW+FQJuSVQ7UUFQbggZaIVm1tNtcSyXi5kGcCIG7eJ/2W7W4OiUZoivhhsFFYNBMuosnypXj9K8znrVIZXMrE2FySSSUMCHmH5e+lU=
+	t=1788949698; cv=none; b=PwK/jQPl/gwAbeL3uwk5a945CL73S/Cq5v2Az2Y2OVSaxLvD4q3qCLFUOCXbuocS31T3YNYd+zYPqosMQ562BsJVZCCMh1apcABev2agKMdRahkd7cYjfuKes/GMpDHEsxH9U2cRAzWrhaInd6hXwBkZJ9fmWKfn0OG68/TXydY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788949651; c=relaxed/simple;
-	bh=P7m1xreo9JGMJmKvbhgFOIgg8EIMEx6Ym1OUZGwcCx0=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=RMrdq53uohjSKg6+HIRUs1L0d8LIqdA3Pj5mT2Je3CtZWSZADaeMl8LtylNlc1fHzk8+FSuIPU+J3O3/9p5bs1B4lpliNrlQOMiTesUhMj4coL0h2B70cJZgdd4aLEQv3PbNQmjy+qaL6c/hnW1QbfFmX1H2QA2MuT98dJhEhag=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=HWerjKj2; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1788949698; c=relaxed/simple;
+	bh=kGwRs4NcUp0orIRjp0maS3muSlbn5QMvQfdlPtXsTo4=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=R3WBC52UixKz1TDsiNuLURKJiijkFhJyVNCxnPHMtN+bfXF0wIfpcxbPP5sCvtjW+5UYIFc08S8cuPuRF/4tqbWwkzy27JRnUghT3UQLNPAzHEzATHhmvpPiEhatmlV1XIzDD5f1ySjdfENI8zB7sGAa5w9C3V/P/9CWwwtHK6w=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=IxlwAgBg; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=ghSa4JkR; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="HWerjKj2"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8BB731F00A3A;
-	Wed,  9 Sep 2026 10:27:25 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1788949649;
-	bh=IJ+qdNg3MCIzb18kTEgm799ACjNQKIR29M7zlHPbVn8=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=HWerjKj2V/Lwz5KkY95t0kwmt/4BE6TCah1sFrtOLS1iUV3c8aSIyKZ4b3ucEg8gS
-	 ytw1ZgPMbnfHsAjLhWiMu5IYvY3t46t8/PfITy1KSfUa5P0p/uQb+p1s/aezqOQ46V
-	 aQBTD6KF033oqXedFRsff8HShcaR8MxUs3NJzHQuknZv1wbnBNHWKSOL+NwNFCnpIB
-	 2Kce9FGc3s47GupJgPhSo0DWYfe/6SsdU+P3IpZncSvHCqvnKdD27NA4KDyi/VZc/X
-	 IfXs22vxsw6H6CtQJUqrUpfaEAGWFQZBgci6ZCO8Qe/+CaDFQBF3PzRxwSXgL7XIn5
-	 QvRagvWprXv3w==
-Date: Wed, 9 Sep 2026 12:27:21 +0200
-From: Manivannan Sadhasivam <mani@kernel.org>
-To: Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>
-Cc: Bjorn Andersson <andersson@kernel.org>, 
-	Mathieu Poirier <mathieu.poirier@linaro.org>, Rob Herring <robh@kernel.org>, 
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
-	Konrad Dybcio <konradybcio@kernel.org>, linux-arm-msm@vger.kernel.org, linux-remoteproc@vger.kernel.org, 
-	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-Subject: Re: [PATCH v2 3/3] arm64: dts: qcom: sdx75: Use SM8650 MPSS as
- fallback compatible
-Message-ID: <y6mxnp57awwbu4dm2khpch3hbbopgvdap4lrh2ogttgkqjvl43@cqbgagbtgcl6>
-References: <20260805132129.2713174-1-mukesh.ojha@oss.qualcomm.com>
- <20260805132129.2713174-4-mukesh.ojha@oss.qualcomm.com>
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="IxlwAgBg";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="ghSa4JkR"
+Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 689ASGRO1170044
+	for <linux-arm-msm@vger.kernel.org>; Wed, 9 Sep 2026 10:28:16 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	Hg9xakhJtn7/nEdc5P+jKIAjxWSdEcVFkr6a2Adc9B8=; b=IxlwAgBg6HZmX/7F
+	f68ON5Ta2cw8OTXrpwTJAAQKWoUVAVAEOlKfCutmjGftdb6SQyrrAV0qyO8ZgjhU
+	WY24O/v6h9RLSzH6s0ff8HFYwt4CDPj296b+fYM/dGNysq18Xhx4LrsgqxFYAY68
+	8SsRLVtTtbFilLEl7f4txWGjtloSjGuJwQyUIWSCzkIWZG0azQ16BERKnoOtHSh6
+	ApEFw1fT4HJHluPac75IxCRGa3y1wMceHM3AW79JHeaI2UhIb8Zb7XdzcNlMCEF0
+	11H7AuEVOuZUXkejY8qHws8uYAfppy0wToSYkGN4W+N2kLLn34NHdlp/V3DxWobK
+	+T9kGg==
+Received: from mail-pg1-f200.google.com (mail-pg1-f200.google.com [209.85.215.200])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gjstuara1-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Wed, 09 Sep 2026 10:28:15 +0000 (GMT)
+Received: by mail-pg1-f200.google.com with SMTP id 41be03b00d2f7-cc1b8088203so6238957a12.3
+        for <linux-arm-msm@vger.kernel.org>; Wed, 09 Sep 2026 03:28:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1788949690; x=1789554490; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=Hg9xakhJtn7/nEdc5P+jKIAjxWSdEcVFkr6a2Adc9B8=;
+        b=ghSa4JkRxDDfzPQR+Hsl/zucNT60MSnZqU7a/+g1mYjBSwPa20VZFR6ZRF0LUwbQb/
+         CqtNZwsQMb2GZIHAJOa0ni9lLAcEg+aNt14YYwVB6YUumuprg0SntQYydFBRe2nvriRI
+         yc17etIzcNo7N4hw0kftu1HxzHNrhEm0V1W9CGmZzbc6bS+Jcl8chyKne0AsZlhcKlSc
+         SIb3/bdpkJTTaP69dVt5dnWF9uRoGMb2t3yu1yvlzbSXPiDKo8bx7dVv8gFW47VvOqbA
+         TLUkpiWv2cTAdkCIMkJVTLJLG3qbDqAeelfGUWToOMjOYucdF47u0rmQse20NFDqe9Do
+         LkIA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1788949690; x=1789554490;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=Hg9xakhJtn7/nEdc5P+jKIAjxWSdEcVFkr6a2Adc9B8=;
+        b=sr1OIIXWEMdNgxp5yg+D9jH8xBK1YVFrvZJcBnLTcR2plMbRas3azIhpNL8Izj8IaI
+         TWqglJ7C8qbghuxQdoYpix/Hk0N9sUUlE6eP8OcgaWRawB3Qu5CaQXc9SBjIww3IK8hi
+         1gxAbfhPaQwCq/0etOh+tsMLcN+QeJDht9+yNWbmFy3e9VxANb4CHDkvIX/1JD+7+kly
+         4d2QalkVscbr1qPDPEyUftXXit2DNe1dR+7s8uKTfTdfwAjVIwOJ7z28q95zl82jovkN
+         sVr2itpherXzM/a8C7Q+SH2l/yNukrfMjBClLsuFUEU0AB2Nw2IXVSC71nlv3nfOD9I/
+         mH7w==
+X-Gm-Message-State: AFuF++nPLDvvw0qIKhBYX3smiG16LLisZaJE2ttArcM/P4qLpGxYNqLA
+	R6EOgB9pk//9ZoVMWuhDf4Eg+tRfnW6iRR438igG3PUVrStuxh/aDUi2wYXKU44gIZsPYniJqyK
+	dyE5GnuROiTXO/jS4APNlS8gU/nmqO7nWAW/Z5K7J6LbPfBL8AN9ZICyDzwsl0QMsI1S/jxPrt8
+	H+7t4=
+X-Gm-Gg: AYBFou2AAqmTO1P84l91TtC2lqiG+57Mjwiqr98dLoyYfD3XaetbElkHJs5SSK/M4+8
+	BwhEVk98sxCGQNX0JUPagOLofuWy1wufsYE5rdSRPY+Jo5fSPP26n+ASFz04xSLQfdUk7knbcR0
+	+2fyOLXvCMUIqYHTo17Xgav5cCn2jgKAt4qKLZjqULZgwglTtrTiiocBbsqHDHcKSR+Cdy1z+Jh
+	gR1VR3JbWBEgHZrHU1LCRLZAYaz9HnsrAQaFgcD9ikEbhio21IDK28DekDvECUPAylypht0sYXm
+	AtmlpkGVm+YvWaROw0ES1cGP9LW+EInOKgkJ3guGrlpWyD5PFOjP50JyXbyYky3NReP4pXaR3P8
+	tNYWFDAhCYQj8HxKDWfTDeCGmoTPL6iSUYdc+U3XJ5azATd+fXrJPpMPwS0+j3zQ=
+X-Received: by 2002:a17:90b:1c0a:b0:398:d132:ba76 with SMTP id 98e67ed59e1d1-39b2623abfemr49576247a91.21.1788949689499;
+        Wed, 09 Sep 2026 03:28:09 -0700 (PDT)
+X-Received: by 2002:a17:90b:1c0a:b0:398:d132:ba76 with SMTP id 98e67ed59e1d1-39b2623abfemr49576184a91.21.1788949688960;
+        Wed, 09 Sep 2026 03:28:08 -0700 (PDT)
+Received: from [10.133.33.37] (tpe-colo-wan-fw-bordernet.qualcomm.com. [103.229.16.4])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-39b260cd2aasm30979894a91.3.2026.09.09.03.28.02
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 09 Sep 2026 03:28:08 -0700 (PDT)
+Message-ID: <2d1eee2f-31b0-4303-b9f5-8e0c5c598d5a@oss.qualcomm.com>
+Date: Wed, 9 Sep 2026 18:28:01 +0800
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH RFC 09/15] arm_mpam: Fix MSC MMIO window size to use
+ resource_size() instead of end - start
+To: Ben Horgan <ben.horgan@arm.com>, "Rafael J. Wysocki" <rafael@kernel.org>,
+        Shanker Donthineni <sdonthineni@nvidia.com>,
+        Conor Dooley <conor+dt@kernel.org>, Fenghua Yu <fenghuay@nvidia.com>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Rob Herring <robh@kernel.org>,
+        Reinette Chatre <reinette.chatre@intel.com>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        James Morse <james.morse@arm.com>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Danilo Krummrich <dakr@kernel.org>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        =?UTF-8?Q?Ilpo_J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>
+Cc: linux-arm-msm@vger.kernel.org, ganapatrao.kulkarni@oss.qualcomm.com,
+        trilok.soni@oss.qualcomm.com, devicetree@vger.kernel.org,
+        driver-core@lists.linux.dev,
+        Srivathsa L Rao
+ <srivathsa.rao@oss.qualcomm.com>,
+        Huang Yiwei
+ <huang.yiwei@oss.qualcomm.com>, aiqun.yu@oss.qualcomm.com,
+        linux-kernel@vger.kernel.org
+References: <20260811-mpam-resctrl-dt-knp-support-v1-0-ea6397bead59@oss.qualcomm.com>
+ <20260811-mpam-resctrl-dt-knp-support-v1-9-ea6397bead59@oss.qualcomm.com>
+ <93eac14a-5ee5-40c8-accf-f623cf0e76de@arm.com>
+ <74b52fcc-10d0-4d45-8675-4a3431ff4b03@arm.com>
+ <8e418149-bde1-46a8-bc82-6baeceb8b1a1@oss.qualcomm.com>
+ <db6d6420-c06e-46a1-95a9-b7a7084ebd75@oss.qualcomm.com>
+ <4d33f2da-8f56-407c-b0cc-805a3ab1d145@arm.com>
+Content-Language: en-US
+From: Yin Li <yin.li@oss.qualcomm.com>
+In-Reply-To: <4d33f2da-8f56-407c-b0cc-805a3ab1d145@arm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <20260805132129.2713174-4-mukesh.ojha@oss.qualcomm.com>
+X-Authority-Analysis: v=2.4 cv=ItAutr/g c=1 sm=1 tr=0 ts=6aa134c0 cx=c_pps
+ a=oF/VQ+ItUULfLr/lQ2/icg==:117 a=nuhDOHQX5FNHPW3J6Bj6AA==:17
+ a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
+ a=VwQbUJbxAAAA:8 a=QyXUC8HyAAAA:8 a=EUspDBNiAAAA:8 a=7CQSdrXTAAAA:8
+ a=3sz6X1dgABYS5Q3AtFkA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+ a=3WC7DwWrALyhR5TkjVHa:22 a=a-qgeE7W1pNrGK8U0ZQC:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTA5MDExNiBTYWx0ZWRfX0nQ6UKS+YJPr
+ Kw2PJrESydVwlfXxTq2ZdvcDW+STOfJtz90lPlMow2+JUuy0ngUfMYtwJRjxK58e8wl+gkL/NLW
+ SXGeaGgkobgr/nKZeeP6udeMn2UpaUw=
+X-Proofpoint-ORIG-GUID: 8Cfuj9oajjC_tqEo8NWfS3ncK_CRB8Rk
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTA5MDExNiBTYWx0ZWRfX0FYdNB3TTMyY
+ n5j1w165jjKU8dVoE94ewG3HcpzVzjWoBszYyxlnedg1fpLJD2Jqou+cbRxOoYVOzDc13yFs27r
+ 5suAm/kxWG6LcQV31HbmSv1GQp6vqH0qVpIDBAMyyVigko9PftKVew4DxDoica9njjjIJurYwVm
+ h/VqB8rb3y8FJ6v+roFT/m54BNwo2tkXBJmSFNpLiwPYWQR2HGc3FWR6iXw0S6Vr+wql8An/7qN
+ XSx1CUCrLQe2H/ZJodnYFGKQEecXctKMWV+qOT6OHqtHCq0LDDzxsJ8diLxkuJUJKdkX1GUFwg2
+ QMf6vX7b/BG7v/2mHOHjk28SzyeN9h2732/Lyqe1OA0QroYbecwBuQQjU80b3m0K97dv8AJVIPE
+ tHxrLGrvpxvBhmd26wFETpc+vqUZJEr6wPUQGOo47A3DO8HdKfAjEcJjAmpwYYLifdpAczeYWxP
+ J1ai0mS5y/GYGnQRBvw==
+X-Proofpoint-GUID: 8Cfuj9oajjC_tqEo8NWfS3ncK_CRB8Rk
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-09-08_03,2026-09-08_03,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ priorityscore=1501 spamscore=0 clxscore=1015 impostorscore=0 phishscore=0
+ suspectscore=0 adultscore=0 lowpriorityscore=0 bulkscore=0 malwarescore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2609090116
 
-On Wed, Aug 05, 2026 at 06:51:29PM +0530, Mukesh Ojha wrote:
-> Following the dt-bindings change that expresses the SDX75 MPSS PAS as
-> a SM8650 MPSS fallback, list the SM8650 compatible alongside the
-> SDX75 one so the node validates against the updated schema.
+
+
+On 9/9/2026 6:11 PM, Ben Horgan wrote:
+> Hi Yin,
 > 
-> Reviewed-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-> Signed-off-by: Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>
+> On 09/09/2026 10:25, Yin Li wrote:
+>>
+>>
+>> On 9/4/2026 11:05 AM, Yin Li wrote:
+>>>
+>>>
+>>> On 9/3/2026 9:23 PM, Ben Horgan wrote:
+>>>> Hi Yin,
+>>>>
+>>>> On 03/09/2026 11:20, Ben Horgan wrote:
+>>>>> Hi Yin,
+>>>>>
+>>>>> On 11/08/2026 14:30, Yin Li wrote:
+>>>>>> struct resource uses an inclusive end address, so the correct size is
+>>>>>> end - start + 1. The previous calculation of end - start was off by one,
+>>>>>> resulting in a mapped window one byte smaller than the actual resource.
+>>>>>> Use resource_size() which correctly computes end - start + 1.
+>>>>>>
+>>>>>> Signed-off-by: Yin Li <yin.li@oss.qualcomm.com>
+>>>>>
+>>>>> I just got a kernel ci report for this one which asks for tags:
+>>>>>
+>>>>> Reported-by: kernel test robot <lkp@intel.com>
+>>>>> Closes: https://lore.kernel.org/oe-kbuild-all/202609030809.ObirDhR3- lkp@intel.com/
+>>>>>
+>>>>> It doesn't look to give a useful fixes tag though. I'd go with this as that's where the error was
+>>>>> introduced.
+>>>>>
+>>>>> Fixes: f04046f2577a ("arm_mpam: Add probe/remove for mpam msc driver and kbuild boiler plate")
+>>>>>
+>>>>> Looks good to me.
+>>>>>
+>>>>> Reviewed-by: Ben Horgan <ben.horgan@arm.com>
+>>>>
+>>>> Scratch that. As Ilpo points out,[1], there is no functional bug but just some misleading naming
+>>>> which never the less would be good to fix. This does require > in the warnings becoming >= though
+>>>> and there would be no need for fixes tag. Do you agree with this analysis?
+>>>>
+>>>> Thanks,
+>>>>
+>>>> Ben
+>>>>
+>>>> [1]
+>>>> https://lore.kernel.org/ lkml/03055fbc-281f-4ed9-9282-4853d560e17f@arm.com/T/
+>>>> #mdb57d40c888ff4ce656a9d9a00ecf5d99466530c
+>>>>
+>>>>
+>>>
+>>> Hi Ben,
+>>>
+>>> Thanks, and thanks to Ilpo for the detailed analysis.
+>>>
+>>> Agreed — the current code is functionally correct because the off-by-one
+>>> in "end - start" is cancelled out by the ">" checks, since
+>>> mapped_hwpage_sz effectively holds the last mapped byte rather than the
+>>> size. So there's no functional bug and no Fixes tag is needed.
+>>>
+>>> I'll update the patch to switch to resource_size() and change the
+>>> corresponding ">" checks to ">=" together, so the naming becomes
+>>> accurate while keeping the behaviour unchanged. I'll also reword the
+>>> commit message to describe this as a naming/readability cleanup rather
+>>> than a bugfix.
+>>>
+>>>
+>>
+>> Hi Ben,
+>>
+>> I looked into this more closely, and I think the situation is a bit
+>> different from previous analysis — could you and Ilpo double-check?
+>>
+>> All three bounds checks have the access width included on the left-hand
+>> side, e.g.:
+>>
+>>        WARN_ON_ONCE(reg + sizeof(u32) > msc->mapped_hwpage_sz);
+>>
+>> Here "reg + sizeof(u32)" is the one-past-the-end offset of the write, so
+>> a legal access needs "reg + 4 <= size", i.e. the out-of-bounds condition
+>> is correctly "> size".
+>>
+>> Take a 0x1000-sized window (valid offsets 0x000..0xFFF):
+>>
+>>      - With the old value, mapped_hwpage_sz = end - start = 0xFFF (size - 1).
+>>      A write at reg = 0xFFC touches bytes 0xFFC..0xFFF — exactly the last
+>>      4 bytes, which is legal. But the check computes 0xFFC + 4 = 0x1000 >
+>>      0xFFF → true, so it falsely warns on a valid access. That's a real
+>>      off-by-one.
+>>
+>>      - With resource_size() = 0x1000 (true size), the same access gives
+>>      0x1000 > 0x1000 → false, so it correctly passes, while an access at
+>>      reg = 0xFFD (0x1001 > 0x1000 → true) is correctly rejected.
+>>
+>> So resource_size() fixes a genuine off-by-one here, and the ">" checks
+>> should stay as ">". Changing them to ">=" would break the reg = 0xFFC
+>> case (0x1000 >= 0x1000 → true) and wrongly reject a legal access.
+>>
+>> So for the next version I plan to keep the resource_size() change, keep
+>> the ">" checks unchanged, and describe it as an off-by-one fix rather
+>> than a naming cleanup. Does this match what you and Ilpo see?
+> 
+> Yes. Thank you very much for taking the time and looking into this more closely.
+> It looks like I introduced the functional bug whilst upstreaming James' patches.
+>
 
-Reviewed-by: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
+Hi Ben,
 
-- Mani
+Glad we got to the bottom of it. For the next version I'll treat it as a 
+proper off-by-one fix: keep the ">" checks unchanged, use 
+resource_size(), and add the tags:
+
+Fixes: f04046f2577a ("arm_mpam: Add probe/remove for mpam msc driver and 
+kbuild boiler plate")
+Reported-by: kernel test robot <lkp@intel.com>
+Closes: 
+https://lore.kernel.org/oe-kbuild-all/202609030809.ObirDhR3-lkp@intel.com/
+
+Along with your Reviewed-by.
+
+Thanks,
+Yin
+
+> Ben
+> 
+>>
+>> Best regards,
+>> Yin Li
+>>
+>>
+>>
+>>
+>>>>>
+>>>>> Thanks,
+>>>>>
+>>>>> Ben
+>>>>>
+>>>>>> ---
+>>>>>>    drivers/resctrl/mpam_devices.c | 2 +-
+>>>>>>    1 file changed, 1 insertion(+), 1 deletion(-)
+>>>>>>
+>>>>>> diff --git a/drivers/resctrl/mpam_devices.c b/drivers/resctrl/ mpam_devices.c
+>>>>>> index 1e082fb60e30..5d1854d97371 100644
+>>>>>> --- a/drivers/resctrl/mpam_devices.c
+>>>>>> +++ b/drivers/resctrl/mpam_devices.c
+>>>>>> @@ -2296,7 +2296,7 @@ static struct mpam_msc *do_mpam_msc_drv_probe(struct platform_device *pdev)
+>>>>>>                dev_err_once(dev, "Failed to map MSC base address\n");
+>>>>>>                return ERR_CAST(io);
+>>>>>>            }
+>>>>>> -        msc->mapped_hwpage_sz = msc_res->end - msc_res->start;
+>>>>>> +        msc->mapped_hwpage_sz = resource_size(msc_res);
+>>>>>>            msc->mapped_hwpage = io;
+>>>>>>        } else {
+>>>>>>            return ERR_PTR(-EINVAL);
+>>>>>>
+>>>>>
+>>>>
+>>>
+>>
+> 
 
 -- 
-மணிவண்ணன் சதாசிவம்
+Thx and BRs,
+Yin
+
