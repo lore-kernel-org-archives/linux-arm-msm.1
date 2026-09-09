@@ -1,497 +1,182 @@
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1C042492E28
-	for <linux-arm-msm@vger.kernel.org>; Tue,  8 Sep 2026 23:16:28 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CB96A2D12EC
+	for <linux-arm-msm@vger.kernel.org>; Wed,  9 Sep 2026 01:38:52 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788909390; cv=none; b=XPggmNqjUtsWgjB6Uk9aMbWj2Y/U7MzvbBzZtWrhEH3G7VtLRiJV/wfKhOqiHUV+843ONtGRAHTMfHEAoS395V0Oa/m9/8qbpfHVK7MCOHoAfqclLqG05bDykkRJdo4QBct6Uxajqq+LJsKTMjmumN7OsYalWS/CLmFHXveu25I=
+	t=1788917934; cv=none; b=AFEbCm02C727Tau/yQMgCiheV6b9kHsQyUa6HXJO7wkw00HAAWBrIeV4v1fVrEyMqrgbZiHAjp45IM0sWC8MCD8Q8sATArDSc/Ligmz/HCBITSt7YzkqYbpK5EITe3QVSXRE3KXnBijWHm70nWe+EPc5tcJcxFQzXZlCpa4IcFU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788909390; c=relaxed/simple;
-	bh=7gH0DdCcJ8z5QZeIJ8H1KTKklRXXtiA1S6fS/5PxSBY=;
+	s=arc-20240116; t=1788917934; c=relaxed/simple;
+	bh=gUemplhRSJAJzKCTLJsrmo/7lPnTZM3iiNRs9Xdx/h4=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=sfiGL+rY9u8+xs2y3C7k3GnYohY5ioONe9B7e6IOMvbRIqa+4t19Wf0xIrJoSh++4J1qFc1leF+OZXkFyEuzpVADVa2m/FhTX7Emdx5HcN/q1t/kcja3OpFns4tR4B+Ak+1SngN8v6y4ExdZ6ayHCJrm/sXhfwxErtffEoR444E=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=QnRZI6nv; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=Pm5c+K/P; arc=none smtp.client-ip=205.220.168.131
+	 Content-Type:Content-Disposition:In-Reply-To; b=cZm1lcnu/X8Vt/xI2ACr/joBV7ZjRDhW5nS9y6QuKxbfivFkDK4aEYJhXT8ZG8xWWEOvaMNmnC4BZVA2lqgbPe7MWSQ6CPACRHGY9IdVV2RLxX/dsmgNV+Q9Mvt/vLaaqWrR7d+8TBsa1txc/uyGKXGBAdzE6drgQIaxQvFX5Dk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=b4RInRbx; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=WPEgJjqW; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="QnRZI6nv";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Pm5c+K/P"
-Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 688Mg0t23654009
-	for <linux-arm-msm@vger.kernel.org>; Tue, 8 Sep 2026 23:16:28 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="b4RInRbx";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="WPEgJjqW"
+Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 688Mh4Nb3113752
+	for <linux-arm-msm@vger.kernel.org>; Wed, 9 Sep 2026 01:38:52 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-type:date:from:in-reply-to:message-id:mime-version
-	:references:subject:to; s=qcppdkim1; bh=5OpX0FvQVUkIQJtPqzVnZ/Nb
-	Tsx2FqQIdJRRkVKt+og=; b=QnRZI6nvjSo5DsAESsy6xbYDktBxBT2IRdqnBI7X
-	FCnj5oDNDyM/LJZns946y4evuRXzVWe+iXP+dgtfASwlaoTnsB7Uo4HOfjB4ja0M
-	E2dSXKXzXj9whr/narRp2sCBn1GB++SBVDyRZ9kqlI2caj2uPtBUF+QNlTn3yxpU
-	Mf/C/q0alRXIhMWsvH61poIu8Nq49W3EL0SQJbgdcZO/x8K57LklWwR5luwaSAw8
-	KFdAFI78cw8Wws1d0Bk0EDNWh1lh7fwRxzXV0U8TFhyB8/2UMHXnh52+53/+EU0r
-	muLhvJwdgjvL4solreMgpjZiq6ZleDqwQKJkeW6ExeorDw==
-Received: from mail-vs1-f69.google.com (mail-vs1-f69.google.com [209.85.217.69])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gjppp1dye-1
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	12hVyvMp5VWwWi9UH2JEM1r68VsvC3lqeQsWrxP240E=; b=b4RInRbx1BBew7/g
+	B6orKYvjqSpnL16u5jIetYkLxy5mHBzlIguNwVuC9yO+aB90XM6XR9OVq6za9XEV
+	3wcpCh5HsIMYqz7kFxboCyz1Yu/xa8kgPxZuY/Xs1BLw8mPyWyWYDQhV/qU5w66k
+	4B0p3cv+nY/m3mojS3n7hs3NRRF9NVKuCCR2SuxvZv54EgUaDz3SgqOt9P3yGqRu
+	hSpVpXgroSlqhIgxRXlRAEp/XIpg/6ew171QpwtrktF39WrhOC86dHNSQs6q2koi
+	gky/BS8CGYXb8bV6LXetk1iSBjBrbFf5kKA1vfKc0zhvFIrDYmamkgUjc4dsyuTD
+	PA5B5Q==
+Received: from mail-pg1-f197.google.com (mail-pg1-f197.google.com [209.85.215.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gjkshtwvp-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 08 Sep 2026 23:16:28 +0000 (GMT)
-Received: by mail-vs1-f69.google.com with SMTP id ada2fe7eead31-737d2f02d2fso3841658137.1
-        for <linux-arm-msm@vger.kernel.org>; Tue, 08 Sep 2026 16:16:27 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Wed, 09 Sep 2026 01:38:51 +0000 (GMT)
+Received: by mail-pg1-f197.google.com with SMTP id 41be03b00d2f7-cc4216aee8fso7069200a12.1
+        for <linux-arm-msm@vger.kernel.org>; Tue, 08 Sep 2026 18:38:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1788909387; x=1789514187; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=5OpX0FvQVUkIQJtPqzVnZ/NbTsx2FqQIdJRRkVKt+og=;
-        b=Pm5c+K/PLnaZv/17zk9itJf2KdemqftbNap9tEco7AdlGp6dLnJxYQobfRr3UgRLFa
-         beUezsg87QhfCefQfwnUYRm94b8cLHhaTkRKZQex9Do5bDAgPzrIZBgC8R3NNYE6Nx3b
-         ht1ymuz02Dm/ffs9xO4qSAlgf2mNBvjSmNskZYlT5iDbUJ09CHnMAZ12kwOfsF38xvWB
-         E7VnhISXzNCtELdZSzASEIdP4zDutXl45W+Ywk5yBKMEzpBnfkFM9+uGTy3xhEZrw288
-         iVa/+KPNHWrio45lNjc5wPGaLWrMqc2fzCKdEIlcXAbXH87hSkQM95k8mua5Z963KzS3
-         0+pw==
+        d=oss.qualcomm.com; s=google; t=1788917931; x=1789522731; darn=vger.kernel.org;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :content-type:mime-version:references:message-id:subject:cc:to:from
+         :date:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=12hVyvMp5VWwWi9UH2JEM1r68VsvC3lqeQsWrxP240E=;
+        b=WPEgJjqWPi1dPXkJZqGWfb+F6+Q681TcLQez+zid1915bs+3BQNbewFh0iaUGwwEg/
+         qvpMBtkbO86FY7sBeSsoCWYY7LhwtPTiU1Y17OXdC9KffGf0CRsKoZDjv0bHjELXPCst
+         IsuMWTzrEueSX/DvZQgnOIPhOIku+VAoJIwNQq4AJUvsitdbBA0v05O8/S9hY46au8Fy
+         2ckjgZdKRlfkGqZyTHRzIJmMqHNRg7bRyfGwiq62pE+RAGiLt5Rq8Ndu7+Jtx2meNq/p
+         eIvoNAHSc1xEHFq3mvFDET32WRtfmiVnCLrtsaiP+PGSfrzSNz0zwD/vTyzaoAxb0/Th
+         fD/A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788909387; x=1789514187;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=5OpX0FvQVUkIQJtPqzVnZ/NbTsx2FqQIdJRRkVKt+og=;
-        b=SCAvWBJU/myGI1yKph4RP9Nq4rMS66gLVfuLvbvD+cLmABBE2tB6GFe9p+fgqfYuzR
-         oBXVxa4+lp4zl6t0GQUm132ttKO7BziWDc2qEao5ZsROI8HquMk51zrb0fsHlxCA1rpH
-         SjXj+eNbkGNHuX+OjbxEhlFh6yyeZ94RU1zSud9Rl2AvFXgmVio6jFLZ8ZuZyxQ/nV00
-         OLqluskld+6tHabZjjbIU1qzTZVGB6dkokaq7IzWCEMQJJGDwlEaNdcKWPMZnHyM1IHL
-         XP+/n4pYR4zQgQ95qOEIslCxStnS3DRtCT6BVAweGRnyvP11zhzoQ7O+3cYDYCoBXcoZ
-         FI2w==
-X-Forwarded-Encrypted: i=1; AKwUvBz/hUbD/vV+WMOBT2ySOCqXMoTgNjXcgo6mbhRmhwlodnrRUnM7PDWEZXLUbh5AEbyZ3n2KrcyfbFw+tFp/@vger.kernel.org
-X-Gm-Message-State: AFuF++mNqZGWlu0NuDM9j6t+F3STl7i7xYoPtRznOwikpH+QEoc+OP/J
-	5EFTOwswUCP9wbVv5B13FjtS+MKQ0WFGLCaDGVrZw+N3jV61UDuzLqnlBQJ0faCmgCEmW1Y20n8
-	cEogdFaudPcyOo93QW4oIMxvUbqyrgPcJhBOZFh9acXcoVFjIE7OxQK6SxOPrqHvYhiUOTgLT0c
-	e/
-X-Gm-Gg: AYBFou0vketLrjhS7VWwUa04O6a22bH22DOpBCxYoxMQVNBL6zJnKb1uxsgZj1PDlyT
-	A0WNrmqUnrZktlAfRyofRvT2zf2m5eoJ9d0L81J0DfTPe2YANxNL3/Oft0v6NKU/egwT7C4bmhN
-	LTEBBzeu5Vdyfxg20uVYP5ud2h7cHqBntJkJqglOMMMtegidvqvQcSq857ufFKYGS4bSh7PMVnK
-	/BqvjtJI9i2YGvbUnawQWpY/aV0tgzFJUFwkI4TWlY/gaFXitR85tRoxocfp6HPJNYPxpYwCB/S
-	j/uO0w/ev0o7CyRo21yrAo93rsNKMQHRAAgslyF2zY3r7XpkOgzecd9UnljnQwNxc/YwixGXLlv
-	Ip0ZvL02dlFxrx1+7ESWL2vXT5GmlamTwFrcyPyvjHho87oGk9GQ0hrasOBDaI7p3Tq+9KSEGBv
-	UnBgLutgustvRt
-X-Received: by 2002:a05:6102:5126:b0:785:5a17:739b with SMTP id ada2fe7eead31-78a4a4944femr15114472137.0.1788909386861;
-        Tue, 08 Sep 2026 16:16:26 -0700 (PDT)
-X-Received: by 2002:a05:6102:5126:b0:785:5a17:739b with SMTP id ada2fe7eead31-78a4a4944femr15114434137.0.1788909386306;
-        Tue, 08 Sep 2026 16:16:26 -0700 (PDT)
-Received: from umbar.lan (2001-14ba-a073-af00-264b-feff-fe8b-be8a.rev.dnainternet.fi. [2001:14ba:a073:af00:264b:feff:fe8b:be8a])
-        by smtp.gmail.com with ESMTPSA id 38308e7fff4ca-3a3705ed75dsm39469231fa.40.2026.09.08.16.16.24
+        d=1e100.net; s=20251104; t=1788917931; x=1789522731;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :content-type:mime-version:references:message-id:subject:cc:to:from
+         :date:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=12hVyvMp5VWwWi9UH2JEM1r68VsvC3lqeQsWrxP240E=;
+        b=qvikaXSx+R43MJTtRpe3rhcjGwImXkTZbX7phtWtpM6Qrtd9/j9Xtb2eKhqZlqW0ed
+         oEUHMypA5fRzH56sCdsZMjsmUv9pO3B2SSmWXtRrPAdeLtr4XScS0mRXPcXzOvPSYFhj
+         IdF4e4E8xeLWcPsbBaWS+X+CP6WGEo55viJH52PaG3L8ah9cOgj0c/oLGPqyNn0764mb
+         4vxvkvaYtClW4ZwOvrj3Cmu1F5QGSuJ73Oyt3FyXeOId2muNuFtdqBvNZIEvPRoolBXG
+         FF0vwHNhM3ZMwg0wrbu7koBYJbx9ucwqOU+Ce7SdJoLxxZAkFjIwtw/1xzvHT1EnqVGo
+         tp6g==
+X-Forwarded-Encrypted: i=1; AKwUvBzNQNbRQ65Y5/YsKYxq5lklkcw4yuWM8CB7sm4++VdZg9tYIcxz8mM29kUeBOOhReRbh58WfbZrzKoX1WjZ@vger.kernel.org
+X-Gm-Message-State: AFuF++n982kG1ZyUALLVlSFVsJ9pZssLIvaGG3hHbW7TwUas2WnfDyp+
+	/jON8eLcGWrZ6ZA9VUonw/SuzlVe2VRYXP+XSbLkFZkoaVP94S5FEQ8LMl1BAknpV+sjRohCQAj
+	Ls0YIH8xLEkl9Q3RdRZ5JUXhYxOp35VWIhtw1/a5XWYGHatzOvUQTB34Cc3RObvgnGrI4
+X-Gm-Gg: AYBFou00ROuabnpyqim7+t7ZUS9YaeIUWnWv5UEdSgxbjraJ7pHNpSyw444nQfU8oeX
+	AsSkF+DfI/HuPwgRNexzKLhG8t3jfoY21z9WBZLn//2SZf7fINdbzUO9ZJTCK3eOTnVXYc/G8WJ
+	4pxgKwDj0QNBMj66ndpVRnA9Vhd1nDV/K76hHFB0SGw1/9qK+5U8zS7UP4NqZBoeRxBL31Lw6WQ
+	ag1+GtKbWMxx0rbN2d5V4DeGDtXym416BkzvHpMLw1PPsISD0FCkRc+W1nW/OLXaxfLaiCvNbrr
+	W1vWMDHbZXKpt3gzIatls3iXC1JH00/7IJcRdgaj28yixBqhQ0WVwIAJwQ8UteXeBRVXy7X/ADO
+	6hwDs4GTtv9MC/fpuDQPh7gLoBQf8bJQ0GYf6TArffpY=
+X-Received: by 2002:a17:90b:1b44:b0:398:ba96:1afd with SMTP id 98e67ed59e1d1-39b2613249fmr43588074a91.8.1788917931270;
+        Tue, 08 Sep 2026 18:38:51 -0700 (PDT)
+X-Received: by 2002:a17:90b:1b44:b0:398:ba96:1afd with SMTP id 98e67ed59e1d1-39b2613249fmr43588010a91.8.1788917930810;
+        Tue, 08 Sep 2026 18:38:50 -0700 (PDT)
+Received: from QCOM-aGQu4IUr3Y (i-global052.qualcomm.com. [199.106.103.52])
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-143240d86c3sm35410573c88.0.2026.09.08.18.38.46
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 08 Sep 2026 16:16:25 -0700 (PDT)
-Date: Wed, 9 Sep 2026 02:16:23 +0300
-From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-To: Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>
-Cc: Oded Gabbay <ogabbay@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
-        Shuah Khan <skhan@linuxfoundation.org>,
-        Randy Dunlap <rdunlap@infradead.org>,
-        Nathan Chancellor <nathan@kernel.org>,
-        Nick Desaulniers <ndesaulniers@google.com>,
-        Bill Wendling <morbo@google.com>,
-        Justin Stitt <justinstitt@google.com>,
-        "Joerg Roedel (AMD)" <joro@8bytes.org>, Will Deacon <will@kernel.org>,
-        Robin Murphy <robin.murphy@arm.com>,
-        Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
-        Maxime Ripard <mripard@kernel.org>,
-        Thomas Zimmermann <tzimmermann@suse.de>,
-        David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
-        Sumit Semwal <sumit.semwal@linaro.org>,
-        Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>,
-        Bharath Kumar <quic_bkumar@quicinc.com>,
-        Chenna Kesava Raju <quic_chennak@quicinc.com>,
-        srinivas.kandagatla@oss.qualcomm.com, linux-kernel@vger.kernel.org,
-        dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org,
-        linux-arm-msm@vger.kernel.org, llvm@lists.linux.dev,
-        iommu@lists.linux.dev, linux-media@vger.kernel.org,
-        linaro-mm-sig@lists.linaro.org
-Subject: Re: [PATCH v2 12/15] accel/qda: Add FastRPC invocation support
-Message-ID: <ja2usiwasnu2x7lgx2xjsk57mew2nj7szn6ruqo6v7d2cpjcqe@xjpmxfkhxqkn>
-References: <20260817-qda-v2-v2-0-69a02e9090d4@oss.qualcomm.com>
- <20260817-qda-v2-v2-12-69a02e9090d4@oss.qualcomm.com>
- <hbrtbfpmcodd3nkaytihzki56232bws7ubbcth7ewwckwi5y6t@ft4ej4fr7duz>
- <3f644c83-ffd6-452d-aa81-1c13aaa397ac@oss.qualcomm.com>
+        Tue, 08 Sep 2026 18:38:50 -0700 (PDT)
+Date: Wed, 9 Sep 2026 09:38:43 +0800
+From: Shawn Guo <shengchao.guo@oss.qualcomm.com>
+To: Uwe =?iso-8859-1?Q?Kleine-K=F6nig?= <u.kleine-koenig@baylibre.com>
+Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        Heikki Krogerus <heikki.krogerus@linux.intel.com>,
+        Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>,
+        Bartosz Golaszewski <brgl@kernel.org>,
+        Krishna Kurapati <krishna.kurapati@oss.qualcomm.com>,
+        linux-usb@vger.kernel.org, devicetree@vger.kernel.org,
+        linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH 2/2] usb: typec: Add onsemi FUSB15201 driver
+Message-ID: <aqC4oyV4WUdGynv-@QCOM-aGQu4IUr3Y>
+References: <20260902045938.184221-1-shengchao.guo@oss.qualcomm.com>
+ <20260902045938.184221-3-shengchao.guo@oss.qualcomm.com>
+ <ap51p16bSY1Ru9C1@monoceros>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
-In-Reply-To: <3f644c83-ffd6-452d-aa81-1c13aaa397ac@oss.qualcomm.com>
-X-Proofpoint-GUID: VFu2878S9m__qhLNgW_hOzHvBfcudmSq
-X-Proofpoint-ORIG-GUID: VFu2878S9m__qhLNgW_hOzHvBfcudmSq
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTA4MDI1NCBTYWx0ZWRfX13HD90SKPNOS
- T3vQrwlG9cMWEEYFiN2ue3lbNfl1GMXXt0id/Qsp0hcJsE6kvtJmOY/qxnjIgLNCSyeUxIxWaXE
- av+DywELNCf0rqIgRW1qlINq+Khl/YHdBeY6MiNSC12ApIfPTarSQfd0rbspIIKuovm2QWvd3fx
- XO2IVorTeBC1Ql5NOqdSFqtNBDIxQcB0jNaQ8aDL/iNH2Cf1LeoID4aZDwRb56NzSUhMABLzO68
- aPm+U0UJyZ1iIUXK3RwcDtsp6P/4lrvZiUOwhV0uEEB+fMdPaiK6bDPTmPxDDxHK5JO/lpT5krP
- MWBRoRs6PAsI2tEllsbNxTRMxmSFThb9jOW4GnxxUX2mbKacIWRTC+0hcbygsLF2r1+eiyPUSDJ
- q1viykCDy8goWfSZOLE2hZZyw4LvZLRiJ3UB0jGQywX9SCaVWljnL3XezF/hKyu1O7GqiUhT/O5
- LqITrq+Y58TyHyYEpCw==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTA4MDI1NCBTYWx0ZWRfX+Ti1POq0A2Vv
- 9JVaB3vveWHblKQgI0YOkt05DjeMzAjR0c5SHG+NfBBMPzNups4fapsrpc04+gIXAuxbsrv9LUB
- p+4Dscbc/PVvw4YI0HhaEjxPCpxBP7k=
-X-Authority-Analysis: v=2.4 cv=DcInbPtW c=1 sm=1 tr=0 ts=6aa0974c cx=c_pps
- a=5HAIKLe1ejAbszaTRHs9Ug==:117 a=xqWC_Br6kY4A:10 a=kj9zAlcOel0A:10
- a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22 a=EUspDBNiAAAA:8
- a=NJr1yQlnZ1qXxQj-jTwA:9 a=CjuIK1q_8ugA:10 a=gYDTvv6II1OnSo0itH1n:22
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <ap51p16bSY1Ru9C1@monoceros>
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTA5MDAxNiBTYWx0ZWRfXxXDxOuwKwqfl
+ VPhK5IuMAWLuw3OPp8VBV5Z7K8NpMGZ4zeGqid+7FL/2/M2pQfX2X27HhxllmHew7/ZzYS16nl4
+ FMzb2s+D4GXQoPXSNNMPifPU0ol4hzk=
+X-Proofpoint-ORIG-GUID: AEe4l1r8pGWx2qHANkKsbRuJXnQjRR_n
+X-Authority-Analysis: v=2.4 cv=TammcxQh c=1 sm=1 tr=0 ts=6aa0b8ab cx=c_pps
+ a=rz3CxIlbcmazkYymdCej/Q==:117 a=b9+bayejhc3NMeqCNyeLQQ==:17
+ a=8nJEP1OIZ-IA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
+ a=gj5R-QuDH20YKR02NA4A:9 a=3ZKOabzyN94A:10 a=wPNLvfGTeEIA:10
+ a=bFCP_H2QrGi7Okbo017w:22
+X-Proofpoint-GUID: AEe4l1r8pGWx2qHANkKsbRuJXnQjRR_n
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTA5MDAxNiBTYWx0ZWRfX3qQCMZr5biF5
+ u55yIJZ5E7xEhc8YOLWQS0SGW6zr3To8UwX4hlxeDS5cnO/XCxcd5kODGIn5iZ822bOEh1abtOa
+ DE7CllIJ7aO2RAnjcGY64xJtxMDkfF45EuAef3JR0idHBwQP1yAtg0gxtbwczmTMGJRPPFwgrkI
+ vQWCXkb+vGWwnDMpAoQzA2K+BNgFaDoIQfeySbUSa+RaBVOtwLwuyROVd5p5MVxiVAwjIlv3ytc
+ x1ZfwXVYEHp3iovze6D2jQhCk044HpZopVgCh2GlN06fYG7IS+TsimkmC+LJQh4g9dmkshpuide
+ n3Ib26WBBf3tGU+ZLKHoaajes7T6+YMEe10yQxMDHduo8ouLuYk0OJglQ6oo8xbFZzn9Vgkmxlm
+ udMRiAOEUVunDJs9V5T9SY99tw/z/kuye4Jnvx5c7zkVio5cmjYj43kMJ6xfd+TgwLKfPEAfJK9
+ T93ZUbjSPGAB2O5xwRQ==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-09-08_03,2026-09-08_03,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 bulkscore=0 suspectscore=0 phishscore=0 clxscore=1015
- lowpriorityscore=0 adultscore=0 spamscore=0 malwarescore=0 priorityscore=1501
+ clxscore=1015 priorityscore=1501 lowpriorityscore=0 phishscore=0 adultscore=0
+ spamscore=0 suspectscore=0 bulkscore=0 malwarescore=0 impostorscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2609080254
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2609090016
 
-On Thu, Aug 20, 2026 at 02:05:01PM +0530, Ekansh Gupta wrote:
-> On 18-08-2026 09:49, Dmitry Baryshkov wrote:
-> > On Mon, Aug 17, 2026 at 10:17:47AM +0530, Ekansh Gupta wrote:
-> >> Implement the FastRPC remote procedure call path, allowing user-space to
-> >> invoke methods on the DSP via DRM_IOCTL_QDA_REMOTE_INVOKE.
-> >>
-> >> qda_fastrpc.c / qda_fastrpc.h
-> >>   Implements the FastRPC protocol layer: argument marshalling
-> >>   (qda_fastrpc_invoke_pack), response unmarshalling
-> >>   (qda_fastrpc_invoke_unpack), and invocation context lifecycle
-> >>   management. Each invocation allocates a qda_fastrpc_invoke_ctx which
-> >>   tracks buffer descriptors, GEM objects, and the completion used to
-> >>   synchronise with the DSP response.
-> >>
-> >>   Buffer arguments are identified by GEM handles. Userspace imports any
-> >>   DMA-BUF fd to a GEM handle with DRM_IOCTL_PRIME_FD_TO_HANDLE before
-> >>   invoking; the driver never accepts DMA-BUF fds directly. Each argument
-> >>   is described by its GEM handle, the user virtual address of the data
-> >>   and its length, from which the driver derives the offset within the
-> >>   buffer and the page-aligned range to describe to the DSP. Packing
-> >>   several arguments into one buffer, and any overlap handling, is left
-> >>   to user space.
-> >>
-> >> qda_rpmsg.c
-> >>   Implements qda_rpmsg_send_msg() which sends the wire-format
-> >>   fastrpc_msg (embedded as the first member of qda_msg) directly via
-> >>   rpmsg_send(), and qda_rpmsg_wait_for_rsp() which blocks on the context
-> >>   completion. The RPMsg callback dispatches responses to waiting
-> >>   contexts via the ctx_xa XArray.
-> >>
-> >> qda_ioctl.c
-> >>   qda_ioctl_invoke() drives the full invocation lifecycle: it builds the
-> >>   invocation context from the user-supplied arguments, packs the
-> >>   arguments into the message buffer, sends the message to the DSP, waits
-> >>   for the response, unpacks the output arguments back to user space and
-> >>   releases the context.
-> >>
-> >> include/uapi/drm/qda_accel.h
-> >>   Adds DRM_IOCTL_QDA_REMOTE_INVOKE with struct drm_qda_invoke_args and
-> >>   the per-argument descriptor struct drm_qda_fastrpc_invoke_args.
-> >>
-> >> Assisted-by: Claude:claude-sonnet-5
-> >> Signed-off-by: Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>
-> >> ---
-> >> Changes in v2:
-> >> - Drop the DMA-BUF fd argument path. Buffer arguments are now identified
-> >>   by GEM handles only; user space is responsible for importing fds to
-> >>   GEM handles before invoking (Dmitry Baryshkov)
-> >> - Leave argument packing and overlap handling to user space rather than
-> >>   supporting several buffer-passing formats in the driver
-> >>   (Dmitry Baryshkov)
-> >> ---
-> >>  drivers/accel/qda/Makefile      |   1 +
-> >>  drivers/accel/qda/qda_drv.c     |   8 +
-> >>  drivers/accel/qda/qda_drv.h     |   8 +
-> >>  drivers/accel/qda/qda_fastrpc.c | 434 ++++++++++++++++++++++++++++++++++++++++
-> >>  drivers/accel/qda/qda_fastrpc.h | 242 ++++++++++++++++++++++
-> >>  drivers/accel/qda/qda_ioctl.c   |  83 ++++++++
-> >>  drivers/accel/qda/qda_ioctl.h   |   1 +
-> >>  drivers/accel/qda/qda_rpmsg.c   |  91 ++++++++-
-> >>  drivers/accel/qda/qda_rpmsg.h   |  26 +++
-> >>  include/uapi/drm/qda_accel.h    |  42 ++++
-> >>  10 files changed, 934 insertions(+), 2 deletions(-)
-> >>
-> >> diff --git a/drivers/accel/qda/Makefile b/drivers/accel/qda/Makefile
-> >> index fb092e56d7f3..2d10420cd1ec 100644
-> >> --- a/drivers/accel/qda/Makefile
-> >> +++ b/drivers/accel/qda/Makefile
-> >> @@ -8,6 +8,7 @@ obj-$(CONFIG_DRM_ACCEL_QDA)	:= qda.o
-> >>  qda-y := \
-> >>  	qda_cb.o \
-> >>  	qda_drv.o \
-> >> +	qda_fastrpc.o \
-> >>  	qda_gem.o \
-> >>  	qda_ioctl.o \
-> >>  	qda_memory_dma.o \
-> >> diff --git a/drivers/accel/qda/qda_drv.c b/drivers/accel/qda/qda_drv.c
-> >> index a68a07d0ae56..f925bbcfa6e9 100644
-> >> --- a/drivers/accel/qda/qda_drv.c
-> >> +++ b/drivers/accel/qda/qda_drv.c
-> >> @@ -25,6 +25,8 @@ static int qda_open(struct drm_device *dev, struct drm_file *file)
-> >>  
-> >>  	qda_file_priv->pid = current->pid;
-> >>  	qda_file_priv->qda_dev = qda_dev_from_drm(dev);
-> >> +	qda_file_priv->remote_session_id =
-> >> +		atomic_inc_return(&qda_file_priv->qda_dev->remote_session_id_counter);
-> > 
-> > What happens on the wraparound? What if some of those sessions are still
-> > alive?
-> collision would require 2^31 opens without close, is this reachable?
-> Should I add a comment here? Or some how address this?>
+Hi Uwe,
 
-Just address it in the driver, disallowing such collisions. If there is
-a way for the counter to wrap, it will wrap once.
-
-> >>  	file->driver_priv = qda_file_priv;
-> >>  
-> >>  	return 0;
-> > 
+On Mon, Sep 07, 2026 at 10:32:55AM +0200, Uwe Kleine-König wrote:
+> Hello Shawn,
+> 
+> On Wed, Sep 02, 2026 at 12:59:38PM +0800, Shawn Guo wrote:
+> > +#include <linux/i2c.h>
 > > [...]
-
-> >> +
-> >> +/**
-> >> + * struct fastrpc_remote_buf - Remote buffer descriptor
-> >> + */
-> >> +struct fastrpc_remote_buf {
-> >> +	/** @pv: Buffer pointer (user virtual address) */
-> >> +	u64 pv;
-> > 
-> > pv would mean physical something. Also, where do you validate the user's
-> > address? Where do we check that it's ok to access the buffer, that it's
-> > not a garbage?
-> this is inherited from fastrpc(same is also used on DSP firmware) but I
-> can rename it to something more meaningful like addr/va. This `pv` is
-> used for offset calculation which eventually gives address of the page
-> carrying the buffer. I can add checks when this calculation is done to
-> ensure the pv is in proper range of the buffer passed by user.>
-
-Don't inherit bad names. Don't use 'user virtual address' unless you
-really mean __user. In the latter case the address must go through
-access_ok() checks.
-
-> >> +	/** @len: Length of the buffer in bytes */
-> >> +	u64 len;
-> >> +};
-> >> +
-> >> +/**
-> >> + * union fastrpc_remote_arg - Remote argument (buffer or DMA handle)
-> >> + */
-> >> +union fastrpc_remote_arg {
-> >> +	/** @buf: Inline buffer descriptor */
-> >> +	struct fastrpc_remote_buf buf;
-> >> +	/** @dma: DMA-BUF handle descriptor */
-> >> +	struct fastrpc_remote_dmahandle dma;
-> >> +};
-> >> +
-> >> +/**
-> >> + * struct fastrpc_phy_page - Physical page descriptor
-> >> + */
-> >> +struct fastrpc_phy_page {
-> >> +	/** @addr: Physical (IOMMU) address of the page */
-> >> +	u64 addr;
-> >> +	/** @size: Size of the contiguous region in bytes */
-> >> +	u64 size;
-> >> +};
-> >> +
-> >> +/**
-> >> + * struct fastrpc_invoke_buf - Invoke buffer descriptor
-> >> + */
-> >> +struct fastrpc_invoke_buf {
-> >> +	/** @num: Number of contiguous physical regions */
-> >> +	u32 num;
-> >> +	/** @pgidx: Index into the physical page array */
-> >> +	u32 pgidx;
-> >> +};
-> >> +
-> >> +/**
-> >> + * struct fastrpc_msg - FastRPC wire message for remote invocations
-> >> + *
-> >> + * Sent to the remote processor via RPMsg. This is the exact layout
-> >> + * the DSP expects; do not reorder or add fields without DSP firmware
-> >> + * coordination.
-> > 
-> > __packed?
-> I'll check more on this.>
-> >> + */
-> >> +struct fastrpc_msg {
-> >> +	/** @remote_session_id: Session identifier on the remote processor */
-> >> +	int remote_session_id;
-> > 
-> > Is it int or u32?
-> This is again from fastrpc where it's a mix of int and s32. I'll keep it
-> the to actual s32 here in QDA.>
-
-Thanks. Also please stop using fastrpc_ prefix in the QDA driver.
-
-> >> +	/** @tid: Thread ID of the invoking thread */
-> >> +	int tid;
-> >> +	/** @ctx: Context identifier for matching request/response */
-> >> +	u64 ctx;
-> >> +	/** @handle: Handle of the remote method to invoke */
-> >> +	u32 handle;
-> >> +	/** @sc: Scalars value encoding in/out buffer counts */
-> >> +	u32 sc;
-> >> +	/** @addr: Physical address of the message payload buffer */
-> >> +	u64 addr;
-> >> +	/** @size: Size of the message payload in bytes */
-> >> +	u64 size;
-> >> +};
-> >> +
-> >> +/**
-> >> + * struct qda_fastrpc_invoke_ctx - Remote procedure call invocation context
-> >> + *
-> >> + * Maintains all state for a single remote procedure call, including buffer
-> >> + * management, synchronisation, and result handling.
-> >> + */
-> >> +struct qda_fastrpc_invoke_ctx {
-> >> +	/** @node: List node for linking contexts in a queue */
-> >> +	struct list_head node;
-> >> +	/** @qdev: Device owning the XArray this context is registered in */
-> >> +	struct qda_dev *qdev;
-> >> +	/** @ctxid: Unique context identifier (XArray key shifted left by 4) */
-> > 
-> > Why is it shifted by 4? Why not by 3?
-> I'll add the PD encoding comment here.>
-
-So, why?
-
-> >> +	u64 ctxid;
-> >> +	/** @inbufs: Number of input buffers */
-> >> +	int inbufs;
-> >> +	/** @nscalars: Total number of scalar arguments */
-> >> +	int nscalars;
-> >> +	/** @nbufs: Total number of buffer arguments (inbufs + outbufs) */
-> >> +	int nbufs;
-> >> +	/** @pid: Process ID of the calling process */
-> >> +	int pid;
-> >> +	/** @retval: Status code reported by the DSP for this invocation */
-> >> +	int retval;
-> >> +	/** @remote_session_id: Session identifier on the remote processor */
-> >> +	int remote_session_id;
-> > 
-> > is pid linked to remote_session_id?
-> not really, remote_session_id is more of session specific, so in case of
-> multi-session(same PID having multiple sessions) should have different
-> remote_session_id.>
-
-Then drop the pid, please. You already have a session here.
-
-> >> +	/** @pd: Protection domain identifier encoded into the context ID */
-> > 
-> > If it's already encoded, why do you need it here?c
-> it's stores so the packing step can use it, I'll document more on this.
-> Or if I can have both msg->fastrpc.ctx and ctxid same, I'll check that
-> also>
-> >> +	int pd;
-> >> +	/** @type: Invocation type (e.g. FASTRPC_RMID_INVOKE_DYNAMIC) */
-> >> +	u32 type;
-> > 
-> > What other types can exist?
-> I'll add all the types in document or just add FASTRPC_RMID_* and point
-> to qda_fastrpc.h for more details.>
-
-Do we really need to support those in the first iteration? I think you
-should have heart it several times: get the minimal sensible driver in.
-You can add all the features afterwards.
-
-> >> +	/** @sc: Scalars value encoding in/out buffer counts */
-> >> +	u32 sc;
-> > 
-> > Remove it and calculate from in/outbufs above?
-> The source of sc is the auto-generated stub file which passes this to
-> remote_handle_invoke() based on the method requested by the user. This
-> as is as it is passed to DSP where this is used in auto-generated skel.
+> > +#include <linux/mod_devicetable.h>
 > 
-> I think the other way around(in/outbufs from sc) would make more sense.>
+> Please rely on <linux/i2c.h> to provide of_device_id and (see below)
+> i2c_device_id. Alternatively include the needed files below
+> include/linux/device-id/ to not introduce unneeded dependencies.
 
-ok
+Ah, yes! I will drop this include.
 
-> >> +	/** @handle: Handle of the remote method being invoked */
-> >> +	u32 handle;
-> >> +	/** @metalen: Length of the FastRPC metadata header in bytes */
-> >> +	size_t metalen;
-> >> +	/** @pkt_size: Total payload size in bytes */
-> >> +	u64 pkt_size;
-> >> +	/** @aligned_pkt_size: Page-aligned payload size for GEM allocation */
-> > 
-> > ???
-> I'll check and remove this.>
-> >> +	u64 aligned_pkt_size;
-> >> +	/** @list: Array of invoke buffer descriptors */
-> >> +	struct fastrpc_invoke_buf *list;
-> >> +	/** @pages: Array of physical page descriptors for all arguments */
-> >> +	struct fastrpc_phy_page *pages;
-> >> +	/** @input_pages: Array of physical page descriptors for input buffers */
-> >> +	struct fastrpc_phy_page *input_pages;
-> >> +	/** @work: Completion used to synchronise with the DSP response */
-> >> +	struct completion work;
-> >> +	/** @msg: Pointer to the QDA message structure for this invocation */
-> >> +	struct qda_msg *msg;
-> >> +	/** @rpra: Array of remote procedure arguments */
-> >> +	union fastrpc_remote_arg *rpra;
-> >> +	/** @gem_objs: Array of GEM objects imported for argument buffers */
-> >> +	struct drm_gem_object **gem_objs;
-> >> +	/** @args: Invoke argument descriptors */
-> >> +	struct drm_qda_fastrpc_invoke_args *args;
-> >> +	/** @refcount: Reference counter for context lifetime management */
-> > 
-> > What for?
-> just to ensure that the context is not freed in case the
-> wait_for_completion() is interrupted.>
-
-If it's not _interruptible, it can't be interrupted. Or there should be
-a better description of the reasons.
-
-> >> +	struct kref refcount;
-> >> +	/** @msg_gem_obj: GEM object backing the message payload buffer */
-> >> +	struct qda_gem_obj *msg_gem_obj;
-> >> +	/** @file_priv: DRM file private data */
-> >> +	struct drm_file *file_priv;
-> >> +	/**
-> >> +	 * @req: Request buffer for the internal init/map/unmap calls.  Points
-> >> +	 * into a kernel-owned GEM mapping tracked by @gem_objs, so it must
-> >> +	 * never be freed directly.
-> >> +	 */
-> >> +	void *req;
-> > 
-> > Why do you need separate pointers here? Can't you be getting them from
-> > msm_gem_obj?
-> These are typed pointers into different offsets of the kernel GEM
-> mapping. I could compute them each time from `msg_gem_obj->virt +
-> offset`, but caching them avoids repetitive casting. Let me see if
-> removing this looks cleaner.>
-
-Calculate them when necessary. If you use them in a few places, they
-don't need to be cached.
-
-> >> +	/** @rsp: Response buffer, same lifetime rules as @req */
-> >> +	void *rsp;
-> >> +	/** @inbuf: Process-create input buffer, same lifetime rules as @req */
-> >> +	void *inbuf;
-> >> +};
-> >> +
-> >> @@ -84,6 +88,44 @@ struct drm_qda_gem_mmap_offset {
-> >>  	__u32 pad;
-> >>  };
-> >>  
-> >> +/**
-> >> + * struct drm_qda_fastrpc_invoke_args - FastRPC invocation argument descriptor
-> >> + * @ptr: Pointer to argument data (user virtual address)
-> > 
-> > Why do you need it? Is handle + length not enough? If you want, specify
-> > offset inside the GEM BO.
-> The user VA (`ptr`) is needed because userspace mmaps the GEM BO and
-> then passes pointers into it to the DSP. The kernel derives the offset
-> within the BO from the VMA (via `calculate_vma_offset()`).
 > 
-> I can check if just passing handle + offset + length works here but that
-> might require some userspace change.
+> > +static const struct of_device_id fusb15201_of_match[] = {
+> > +	{ .compatible = "onnn,fusb15201" },
+> > +	{ }
+> > +};
+> > +MODULE_DEVICE_TABLE(of, fusb15201_of_match);
+> > +
+> > +static struct i2c_driver fusb15201_driver = {
+> > +	.driver = {
+> > +		.name = "fusb15201",
+> > +		.of_match_table = fusb15201_of_match,
+> > +	},
+> > +	.probe = fusb15201_probe,
+> 
+> Don't you need an i2c_device_id table, too?
 
-You are going to have a different userspace. It must pass only
-handle+offset+length triplets. All the rest must go to the compatibility
-layers.
+I'm not sure. For the DT case the of_match_table handles both matching
+and module autoloading, so nothing is missing there.
 
+The i2c_device_id table would only matter for a client created without a
+fwnode, e.g. from board code, and that is not a case the driver supports
+or has been tested against. probe() walks the child fwnodes of the device
+to find the connectors and fails with -ENODEV when there are none, and
+each port needs its Type-C capabilities and a usb-role-switch reference
+from firmware. So matching by name alone would only turn a "no driver"
+case into a probe failure.  If a platform without DT ever needs this
+driver, it has to describe the connectors first, and the i2c_device_id
+table can come along with that.
 
--- 
-With best wishes
-Dmitry
+Shawn
