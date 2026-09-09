@@ -1,176 +1,70 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 407B813D53C
-	for <linux-arm-msm@vger.kernel.org>; Wed,  9 Sep 2026 19:13:25 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 61C0E476697;
+	Wed,  9 Sep 2026 20:49:38 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788981207; cv=none; b=nFAhVWK92Htz19PNGeA/v01uY0DG9QuhhabMai0xUPtBxM/R+vwFwUlDCBke/qRdIymgXv8rg8cpG32jqZz1/PmloALcKd/PTjWa953oJ3IgcDr5KQrDzauFNmeWeQhcOFgS3L8WkUD5UMpCVVhbaWNIZmfBQKq8HvRvfX5QYXY=
+	t=1788986986; cv=none; b=O5fbNYi+XB0FAz6LNWUDF8Hhaa9fga/Tc+wGcRJGn6zjIhoh0IQT6MkIWFt2A6H4dBD6w/KhQa18/Bi9/eol2uzo6rJ3XdoOLINlDgk3TNwxoSc4pKjSBVQ25234jWKOIhsLcuPvs7kE/CEcy7cQLnic3Ebnr9M29Y1J/nGd1GM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788981207; c=relaxed/simple;
-	bh=VrH+00iPXFzilbQSp/OlOVbtUbGy1K9mPgMOEwjgBvA=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=hFQqOHXRq3RcHOlM796TTYACNnRzwfaOE6183rKvhwDeu7slz9COXJ1C+K672am88DLitYfaEMPV1w9jslLLoe9K/Ad2zlfkffgpUqDI6wNheF4F9KcaGUUTGYi081/Ixn1pfofkCGDhCL3q9jz0Nxqmlhj/IV2x4Fm8Tg7hHqw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=F5J7J56O; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=cDnqvfhN; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="F5J7J56O";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="cDnqvfhN"
-Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 689Ih5oB2282464
-	for <linux-arm-msm@vger.kernel.org>; Wed, 9 Sep 2026 19:13:24 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-type:date:from:in-reply-to:message-id:mime-version
-	:references:subject:to; s=qcppdkim1; bh=MF1vp434/T33eDhqwTtDmkQh
-	9Dqky4UNrblzSAUjYFk=; b=F5J7J56ObCks3lNBuHn4iwjTlTxnrp606lpb8XnP
-	jSaznjpa6IX4NfFtfD91MZ37HQ/t9wFSwLFoyJIaYJ8MAju9vmVt1QDtYiJSQ5bf
-	TFZ+oBEu/bZAfTq6fcJtYpUXBcjNov8V4eJs59pS6nZ+p+WRVPJQpY157FDFRxTo
-	2P4UvJkVyzwP1bMCUYi3Ef1h3B0AHqHVIa2Da1QiZMp1DX4BVo9RPL7QC8ki5xVG
-	pA1TWpQuO1GBXoizA2ARIFwd5UXuVxXvOhsrfVKnhnwTuniE/M0lnP/L3uG7ivf7
-	4EMy/BLVtiB5aEprli83cMTNNrAL+ypvCi1qV7VQSc5kZw==
-Received: from mail-vs1-f70.google.com (mail-vs1-f70.google.com [209.85.217.70])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gkcydr6d0-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 09 Sep 2026 19:13:24 +0000 (GMT)
-Received: by mail-vs1-f70.google.com with SMTP id ada2fe7eead31-78fb21aaad9so173028137.0
-        for <linux-arm-msm@vger.kernel.org>; Wed, 09 Sep 2026 12:13:23 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1788981203; x=1789586003; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=MF1vp434/T33eDhqwTtDmkQh9Dqky4UNrblzSAUjYFk=;
-        b=cDnqvfhNR2h8nhvsia7BdFAKgwqqgVTGN/CLtS7YJQAxmUkMeKVG+3jaQOuOUJ4ZAi
-         OtWxee9pvsnZB4L0EBCYRF2CS1Kdy3QS5vL5E0IUkMqaZWoeIDxFflkuETuBTSRZ9Eyk
-         O2j1jKbqWn0QK99/snTQzXV8cCxZdIpVHttx6XcZ6AsC9Jt1/rnSl3EVUHAvcQeNSoJm
-         G4ggCpltk6lErA1VAxCfKptRMw/QUwzJ+sf7LJQmNNzo4KICLSsmOcx5Zn2rLZuVdcKp
-         7ksxJFEWgZqzlloquD2BDicZHJhsGjWgM5hx4kmJt6U2dDNaWHI5vJE3aXPA6mjNKDB5
-         OqZQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788981203; x=1789586003;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=MF1vp434/T33eDhqwTtDmkQh9Dqky4UNrblzSAUjYFk=;
-        b=PegiwfzR//JYGSBjL0lweuqiuXuDeeN3Jr4LG669tQjEtXMXOMt1rIMEn/+flIl3aj
-         R/kNz3Zm2PO0puFPXgnpTzrBQ1RiEEMTmOPTCz9wTgnKPMgp1gSFjmo7iWWpZDywJ/Be
-         oElp2Vv5y+3oQkjcbPUP7rnh9XgpgpmA8Tc7oXecAncSJRg7FAuOQjX5GYWNbLZEoQAu
-         k9Wm4NQMqBtQMXMd4HLznv8cQGQwqVKMhTsaxJqFjOPpCDbImSokpIhT3EXnIsCKuKXx
-         JaopzZic69gVA8yzOzl8nprfLa9XiQw8nV67EZNW/t/82RgfMm+u5spVfqQqAOk9sDrX
-         zrGg==
-X-Forwarded-Encrypted: i=1; AKwUvBxzENYS9stiajCrrbtBNlItohRbknmxbEx/jJkWXjBBRquasC+C289PaF8uy90HKkRyudSESLoEAkPqD1h6@vger.kernel.org
-X-Gm-Message-State: AFuF++nIOi8HTm649Y6gOdcxLnuz9sanI6Dlt3LGI2CgFZyWrzxV5PhP
-	pJcaRhc9+Ls+qg4ianX4DbQJ8XJ3tZW6cP0VPqzrJTJx1N4LAGZ2NzyTKwrw7+k7YoVqV+Q0e29
-	X8FkXOR+wfPZb45c1nUX3Crdze/m3tI31VSNQ8ueaqWS+byy7dzxTK2kqXhYi6v62+Nk/
-X-Gm-Gg: AYBFou2DCQhA74sk6YyPQs1GFOuPrCkwMTkEQj8YqgG5yMBbQr/5GKmB8UlAtwWAgNT
-	dJbjhaG58yfcpYaXgRjyRqW3+JzrmhPsj/Boi/KZKe0FVkbmHRQP8kKi9RFNu4L5EYLTDLKBWeD
-	QV7oWj0p9z0V/h9KrZ/CwyjnWBI1ZxEiMoznCF06HVe1skCWDhZwA2wjHzDIY6eVjVeyH+ZWNKL
-	dRFg9dJgNfj5NIQ2e5zkQFMqiAf4YOMOLXaMSY3HLZex2euARua8tsPGi7NyOpTDI0zadjjq+2y
-	nY/4QV4sRDRyhFCdijSDjG55vxbNxrNK9jGgBvBQdYAjGotwbdP9O2IdAFVx/SIWiWUmLSC0Cze
-	u4ghWw/erMWQGoKc3VHkw410iF4S+7ULYP7cQ1D3HkGtlNrayAnLptgXGSva7Zcbup87Fu0Ktbp
-	FyihHP8Bl0c/Xk
-X-Received: by 2002:a05:6102:a06:b0:78a:4dff:7b3e with SMTP id ada2fe7eead31-790dabbf9dcmr241390137.15.1788981203111;
-        Wed, 09 Sep 2026 12:13:23 -0700 (PDT)
-X-Received: by 2002:a05:6102:a06:b0:78a:4dff:7b3e with SMTP id ada2fe7eead31-790dabbf9dcmr241378137.15.1788981202584;
-        Wed, 09 Sep 2026 12:13:22 -0700 (PDT)
-Received: from umbar.lan (2001-14ba-a073-af00-264b-feff-fe8b-be8a.rev.dnainternet.fi. [2001:14ba:a073:af00:264b:feff:fe8b:be8a])
-        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5b74f2ec6f6sm3198485e87.44.2026.09.09.12.13.19
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 09 Sep 2026 12:13:20 -0700 (PDT)
-Date: Wed, 9 Sep 2026 22:13:18 +0300
-From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-To: Vsevolod Nevorotov <sevanevorotov29@gmail.com>
-Cc: vkoul@kernel.org, dmaengine@vger.kernel.org, Frank.Li@kernel.org,
-        andi.shyti@kernel.org, mukesh.savaliya@oss.qualcomm.com,
-        naresh.maramaina@oss.qualcomm.com, aniket.randive@oss.qualcomm.com,
-        linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH] dmaengine: qcom: gpi: Set IEOB on linked I2C GO TRE to
- retire TX descriptor
-Message-ID: <gibyui67mjkf6fxgodg2uzwyiio6d75boien64f2fpfjpkvwno@jtmsqwh6zmzx>
-References: <20260909175332.304767-1-sevanevorotov29@gmail.com>
+	s=arc-20240116; t=1788986986; c=relaxed/simple;
+	bh=po+xRNd7Qif7JrgwlJ64ORUxnv3PE97/J5WFJZeru9M=;
+	h=From:To:Cc:In-Reply-To:References:Subject:Message-Id:Date:
+	 MIME-Version:Content-Type; b=t1qvZ3BaT2X3vN1V2dXsEayPX3dUnSMDccrjeTmh0QPAFOAB7f92mjJEtI348fdxFHBKf/2T4CVrHk15OKRj0N8cV0LYA/JWTnF9Mp4a/0sP73DkREjZGEkg5bqsftxeofKke2gs1LTxiYVKG12WXbo9HhywXGGctmEFe7hQ2JI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 700181F0089C;
+	Wed,  9 Sep 2026 20:49:33 +0000 (UTC)
+Received: by venus (Postfix, from userid 1000)
+	id E8A72183379; Wed, 09 Sep 2026 22:49:31 +0200 (CEST)
+From: Sebastian Reichel <sebastian.reichel@collabora.com>
+To: Casey Connolly <casey.connolly@linaro.org>, 
+ Sebastian Reichel <sre@kernel.org>, Robin Snyders <robin@snyders.xyz>
+Cc: linux-arm-msm@vger.kernel.org, linux-pm@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, stable@vger.kernel.org
+In-Reply-To: <20260812-qcom-smbx-fixes-v1-0-eb48246be599@snyders.xyz>
+References: <20260812-qcom-smbx-fixes-v1-0-eb48246be599@snyders.xyz>
+Subject: Re: [PATCH 0/5] power: supply: qcom_smbx: fix watchdog and battery
+ properties
+Message-Id: <178898697194.883277.17587084710310947312.b4-ty@b4>
+Date: Wed, 09 Sep 2026 22:49:31 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260909175332.304767-1-sevanevorotov29@gmail.com>
-X-Authority-Analysis: v=2.4 cv=IfsSymqa c=1 sm=1 tr=0 ts=6aa1afd4
- a=N1BjEkVkxJi3uNfLdpvX3g==:117 a=xqWC_Br6kY4A:10 a=kj9zAlcOel0A:10
- a=VdqzKS8jKosA:10 a=FHrIvcMS070A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
- a=pGLkceISAAAA:8 a=EUspDBNiAAAA:8 a=7ZfXIp-WeeTcKSKqBWEA:9 a=CjuIK1q_8ugA:10
- a=crWF4MFLhNY0qMRaF8an:22
-X-Proofpoint-GUID: N5rcr0hChWrLrObTBGtYPmTJhtjxHxzP
-X-Proofpoint-ORIG-GUID: N5rcr0hChWrLrObTBGtYPmTJhtjxHxzP
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTA5MDIxMyBTYWx0ZWRfXxiKRTxgNMjfg
- DskYS+lrhSFfJeMwuLH6YMPouRQzmqCbiKFiLH8E2RjglWP9iBOpeZKhlUkuq7zwjrTiaitvkMk
- X27GHL3T1pHTU1zwZ4iBgkoU31H0GbM=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTA5MDIxMyBTYWx0ZWRfX2CQJJyWYoy3u
- 7epL6az5BRM6AkvFAksWT+WqW8xhzwHywwQDx0pQUOg8X6NRYW+Iztc8fawa5Et2lGFsLAaa2l3
- F5lk2pxLNXd1nrmj74IfGSjxM4gVi+2TVn+AchIE5JLW0U2Vedv0C+AWhDpk0Cah2W3Fcd8j/LJ
- pAGHh9ZCpgqCmGtRuP36jzLruRsqellG+/VgJUaRpiPoN/GXStrhwm2KA3/cWux6yiCCVPJnnUi
- 4LtdEHO2G/chrxEji49BRVAtUDDPXDnWiai+LitaVC7skenn3ex0yYrQGPHzUPgbLlXg/zjnB8d
- z89ouG/Y6xW5rtOyLqwRmAafFjF0AkA/jRasrHabU5uufYXedDTVJuqW19o9mu0Ee5CwOfc36pi
- 51EVkc/i9m2b9po/kJvWqpCaFLC62LaCyG9WOzDuMpFZnT4qwnwHqiTct+GaapWVr+Gde0Wk/eK
- qq9FxXnmZ+simt2k2Dw==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-08_03,2026-09-09_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 malwarescore=0 priorityscore=1501 lowpriorityscore=0
- impostorscore=0 spamscore=0 adultscore=0 suspectscore=0 bulkscore=0
- clxscore=1015 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2609040000
- definitions=main-2609090213
-
-On Thu, Sep 10, 2026 at 12:53:32AM +0700, Vsevolod Nevorotov wrote:
-> In GPI mode, an I2C read transaction consists of a command phase on the
-> TX channel (issuing CONFIG0 and GO TREs) linked to a data phase on the RX
-> channel (issuing the DMA TRE to receive data).
-> 
-> Commit 656147fb1d4c ("i2c: qcom-geni: Avoid extra TX DMA TRE for single
-> read message in GPI mode") avoided programming a dummy TX DMA TRE for read
-> messages, leaving only the GO TRE on the TX channel with the TRE_FLAGS_LINK
-> flag set.
-> 
-> However, gpi_create_i2c_tre() did not set TRE_FLAGS_IEOB (Interrupt on End
-> of Block) on the linked GO TRE. Because no TRE on the TX channel has an
-> interrupt flag set, GSI hardware never generates a completion event on
-> the TX channel when the GO command finishes. As a result, the TX transfer
-> ring read pointer is never advanced and TX descriptors are never retired.
-> 
-> Under sustained or high-frequency traffic (such as touchscreen controllers
-> operating at 120-240 Hz), the TX transfer ring quickly runs out of slots:
->   gpi 900000.dma-controller: not enough space in ring, avail:1 required:3
->   geni_i2c 990000.i2c: prep_slave_sg failed
->   geni_i2c 990000.i2c: GPI transfer failed: -5
-> 
-> Fix this properly by setting TRE_FLAGS_IEOB on the GO TRE when multi_msg
-> is true (matching Qualcomm's hardware specification and the existing SPI
-> implementation in gpi_create_spi_tre). When the hardware finishes executing
-> the GO command block, it generates an MSM_GPI_TCE_EOB event on the TX
-> channel. In gpi_process_xfer_compl_event(), handle MSM_GPI_TCE_EOB for
-> linked I2C command descriptors without a subsequent TX DMA TRE by
-> retiring the descriptor and updating the cookie without invoking the
-> client callback, allowing the linked RX channel's DMA completion
-> (MSM_GPI_TCE_EOT) to signal final transfer completion to the client.
-> Other EOB events fall through to the default transfer completion path.
-> 
-> Fixes: 656147fb1d4c ("i2c: qcom-geni: Avoid extra TX DMA TRE for single read message in GPI mode")
-> Signed-off-by: Vsevolod Nevorotov <sevanevorotov29@gmail.com>
-> ---
->  drivers/dma/qcom/gpi.c | 13 +++++++++++--
->  1 file changed, 11 insertions(+), 2 deletions(-)
-> 
-
-Reviewed-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.16.0
 
 
+On Wed, 12 Aug 2026 01:29:57 +0200, Robin Snyders wrote:
+> Fix five bugs in the existing Qualcomm SMB2 charger driver.
+> 
+> The watchdog bark handler omits the charger peripheral base and can write
+> an unrelated SPMI register. Battery health handling compares the complete
+> status register instead of testing its independent fault bits. The
+> float-voltage calculation is one selector step too high, and its battery
+> target is neither selected nor validated safely. Finally, the
+> battery-overvoltage IRQ ignores read errors and only publishes assertion,
+> leaving health and status stale after the falling-edge recovery interrupt.
+> 
+> [...]
+
+Applied, thanks!
+
+[1/5] power: supply: qcom_smbx: include base when petting watchdog
+      commit: 2cbea120515bc23416cbf0d811a49dff50692a0c
+[2/5] power: supply: qcom_smbx: test battery health status bits
+      commit: a7749f679da9bd644e0450a58b7f38778a5e3c66
+[3/5] power: supply: qcom_smbx: fix float voltage selector
+      commit: f42b11ed65e8f2f54a403824193986ff28531a26
+[4/5] power: supply: qcom_smbx: validate battery float voltage
+      commit: 04370b7eab3fdfcb7e7d3bf32bc3e62e44769768
+[5/5] power: supply: qcom_smbx: notify battery overvoltage recovery
+      commit: 85ca07e187e1c93e2e5527140815f20bc5f8ac85
+
+Best regards,
 -- 
-With best wishes
-Dmitry
+Sebastian Reichel <sebastian.reichel@collabora.com>
+
