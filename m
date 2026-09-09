@@ -1,50 +1,45 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6152B3CB56C;
-	Wed,  9 Sep 2026 21:47:22 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 07F1A41F7F2;
+	Wed,  9 Sep 2026 23:02:29 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788990466; cv=none; b=b1x9Ljxkwa2hJ7CRmPbe1plc/4Pj6r9l0tKZFA/r1vw3iAScrhkmHKvPcazXszIM8hxYXHxR+AfyY8BS2nqrVdwjP9gMX/AUb0IiY5B6055gSp/HIreWgDNNAJI1bgLSgWrhC7zbOOh3sUOeYIqKQkhgK28shP5ny4jec8XEwC0=
+	t=1788994953; cv=none; b=QNBIIavPD2TIneYOtITvBmu7wTzU9izurcPtGrTeB1nH1l/V3t0P60KMTONkkAN5Dodbvi7J0KlmPLPE7UrNG28vCSs9dbWTUxOFnrvtwUor7W8gMi37m+AY1qTLoWkaZLt115cXaYleRbW+3feb7X34waTb6rYOb6Jv2hROLNo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788990466; c=relaxed/simple;
-	bh=Tz8tOJ1hpLXBu6wtbzVBED1+49xi9UwTmp1d9nIl3sA=;
+	s=arc-20240116; t=1788994953; c=relaxed/simple;
+	bh=VgahomZ0rZ2fr267ydGH5onvLUbsgRWZVvm4gMjOqqI=;
 	h=Subject:From:To:Cc:Date:Message-ID:In-Reply-To:References:
-	 Content-Type:MIME-Version; b=evIEDKFsJIlYLAZHs77OzqDw+RGCWEa3v7wI42sBqRwsiBjLQS+8wRQDc41dy3o957fx7LWAymbySI5ZfM0wVPejwK/qsvPN/0OfZep7KTkXfb/vjMYYl64Sgi8LKDtqoMlWQ7h1TYykhX3m8/mk3l8AI1NTF7+84HqfuL3a7x4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=XAqbmZTx; arc=none smtp.client-ip=100.103.45.18
+	 Content-Type:MIME-Version; b=A4GlpaTpoaT4Nu8z2XbK9cqi3EXMnURUeORU/BkpttHhvc6TJcdFmTx7TbZZJhAd5+1NpJLhfxED5sElRnyF8yfM7xFz3kblZ/+MbUsu1waK8w25eDcxFBE9WD5hIPnQwsnF0iNKfDnkH+2Y0sx1k1Lcd/6YM3lUCggsIydqYIs=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=oPZT/g5m; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="XAqbmZTx"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3D7651F0089D;
-	Wed,  9 Sep 2026 21:47:19 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="oPZT/g5m"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 39D381F000FF;
+	Wed,  9 Sep 2026 23:02:27 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1788990440;
-	bh=Um4PbpNaoB+q7vOWgdXZlGyVbU8hxhqvNDsLIljAtb0=;
+	s=k20260515; t=1788994948;
+	bh=y71zi1x1NLPGISUH5NRTiK/jKpv4ngPapC+STcqAMOk=;
 	h=Subject:From:To:Cc:Date:In-Reply-To:References;
-	b=XAqbmZTxfracJIfJtsVDYiUPyu4P/w3Prkqza/W4Wl55ZmUBFt1rApkdNEx5bktGy
-	 0mJ+USy6+YxqfnbQRpGlIyGWpzuB2lXHqQN5TPxJXztJnG8XCxs1cUsudu4nVvZpOY
-	 8Kqw/eelJU9vasLiz1PRGrvePxBtAHY6WuJ8it9pT1LSOkBMYrn8/PHGpLfGW4/R2y
-	 f4Co+L4axqaPjEzwSfxiw1eXDM1hfFy973ovXJmVYtibKqiIWXE6N2c1nAu6THCU0r
-	 Ys1j96psqh1AHlne7VFUKoD8RKd8+/BqkR+TAwz7DBl2LEcLtbCr16EsvhkgQnof68
-	 /k1srFuwkV//A==
-Subject:
- Re: [PATCH net-next 9/9] net: stmmac: qcom-ethqos: add Shikra EMAC support
+	b=oPZT/g5mxFn4h9/NhGrJaPFz0KWHMUVZvWUsguM/j3BQwcqyfeuADEJm+PWzMon35
+	 Lih6kMfbfI9Y3BNpE9azosplVxpx9nYG9iq5i8lbLnu+tTRQvXQPhPuXgprzmKh4AK
+	 GkSSLwWCdd9ey6sxSGN29goOx5o5K+KMLy+Kq0Y5vuKVGbpUhOWT06ZjK5t07YbW0d
+	 MMtP1j31D/2uL3RqoqE0B5e92YBO3+EZ0tETeRjeiU77gPceprHiPI5r8qcv5UKozv
+	 039F+SVZuyXcyyX2lfBQd67FQP9kTWQnVHkBs6zWcD+2K8CA0b4/bKfFL3+zr+eYMg
+	 HTaACdGlE/Yhg==
+Subject: Re: [PATCH net v3 3/3] net: phy: qca808x: handle the active-high LED
+ polarity mode
 From: netdev-bot+sashiko@kernel.org
-To: mohd.anwar@oss.qualcomm.com
-Cc: andrew+netdev@lunn.ch, davem@davemloft.net, edumazet@google.com,
- kuba@kernel.org, pabeni@redhat.com, robh@kernel.org, krzk+dt@kernel.org,
- conor+dt@kernel.org, afd@ti.com, andrew@lunn.ch, hkallweit1@gmail.com,
- linux@armlinux.org.uk, richardcochran@gmail.com, andersson@kernel.org,
- konradybcio@kernel.org, alexandre.torgue@foss.st.com, peppe.cavallaro@st.com,
- joabreu@synopsys.com, maxime.chevallier@bootlin.com,
- mcoquelin.stm32@gmail.com, netdev@vger.kernel.org, devicetree@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org,
- linux-stm32@st-md-mailman.stormreply.com,
- linux-arm-kernel@lists.infradead.org
-Date: Wed, 09 Sep 2026 21:47:18 +0000
-Message-ID: <178899043882.219967.17727623521559354388@kernel.org>
-In-Reply-To: <20260904-shikra_ethernet-v1-9-a50765996035@oss.qualcomm.com>
-References: <20260904-shikra_ethernet-v1-9-a50765996035@oss.qualcomm.com>
-X-sashiko-severity: Medium
+To: donggeunyoo.kernel@gmail.com
+Cc: andrew@lunn.ch, hkallweit1@gmail.com, davem@davemloft.net,
+ edumazet@google.com, kuba@kernel.org, pabeni@redhat.com,
+ linux@armlinux.org.uk, daniel@makrotopia.org, o.rempel@pengutronix.de,
+ netdev@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+ linux-kernel@vger.kernel.org, stable@vger.kernel.org
+Date: Wed, 09 Sep 2026 23:02:26 +0000
+Message-ID: <178899494670.219967.8563823740478760743@kernel.org>
+In-Reply-To: <20260908105959.70453-4-donggeunyoo.kernel@gmail.com>
+References: <20260908105959.70453-4-donggeunyoo.kernel@gmail.com>
+X-sashiko-severity: High
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 Precedence: bulk
@@ -54,214 +49,112 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 
-Thank you for your contribution! Sashiko AI review found 3 potential
+Thank you for your contribution! Sashiko AI review found 1 potential
 issue(s) to consider:
 
-Critical: 0 · High: 0 · Medium: 3 · Low: 0
+Critical: 0 · High: 1 · Medium: 0 · Low: 0
 
-- [Medium] shikra_data (drivers/net/ethernet/stmicro/stmmac/dwmac-qcom-
-  ethqos.c:337-359) is the only ETHQOS platform descriptor without…
-- [Medium] Shikra is the first compatible with a nonzero num_noc_clks, so
-  qcom_ethqos_probe() now calls qcom_ethqos_init_noc_clks(), which ends…
-- [Medium] The PTP clock rate (`clk_ptp_rate`) is captured from the
-  `stmmaceth` clock before its rate is updated to 120MHz, leading to…
+- [High] Incomplete fix in drivers/net/phy/qcom/qca808x.c: the new `case
+  PHY_LED_ACTIVE_HIGH: active_low = false;` in…
 
 --
 
-net: stmmac: qcom-ethqos: add Shikra EMAC support
+net: phy: qca808x: handle the active-high LED polarity mode
 
-Adds a qcom,shikra-ethqos compatible backed by a new shikra_data
-descriptor.  The descriptor enables three NOC clocks (axi-noc,
-pcie-tile-axi-noc, stmmaceth) at 120 MHz and sets a 36-bit DMA address
-width.
+This adds a PHY_LED_ACTIVE_HIGH case to qca808x_led_polarity_set() so that
+a device tree LED node carrying the 'active-high' property no longer makes
+the switch fall into the default case and return -EINVAL, which previously
+failed phy_probe().
 
-> diff --git a/drivers/net/ethernet/stmicro/stmmac/dwmac-qcom-ethqos.c b/drivers/net/ethernet/stmicro/stmmac/dwmac-qcom-ethqos.c
-> index a31541506a4c9..f96680456472d 100644
-> --- a/drivers/net/ethernet/stmicro/stmmac/dwmac-qcom-ethqos.c
-> +++ b/drivers/net/ethernet/stmicro/stmmac/dwmac-qcom-ethqos.c
-> @@ -328,6 +328,36 @@ static const struct ethqos_emac_driver_data emac_v4_0_0_data = {
->  	},
->  };
->  
-> +static const struct ethqos_noc_clk_cfg shikra_noc_clks[] = {
-> +	{ "axi-noc", 120000000 },
-> +	{ "pcie-tile-axi-noc", 120000000 },
-> +	{ "stmmaceth", 120000000 },
-> +};
-> +
-> +static const struct ethqos_emac_driver_data shikra_data = {
-> +	.dma_addr_width = 36,
-> +	.has_emac_ge_3 = true,
+> diff --git a/drivers/net/phy/qcom/qca808x.c b/drivers/net/phy/qcom/qca808x.c
+> index 8eb51b1a006c..3ba58f14e248 100644
+> --- a/drivers/net/phy/qcom/qca808x.c
+> +++ b/drivers/net/phy/qcom/qca808x.c
+> @@ -603,6 +603,9 @@ static int qca808x_led_polarity_set(struct phy_device *phydev, int index,
+>  		case PHY_LED_ACTIVE_LOW:
+>  			active_low = true;
+>  			break;
+> +		case PHY_LED_ACTIVE_HIGH:
+> +			active_low = false;
+> +			break;
+>  		default:
+>  			return -EINVAL;
+>  		}
 
-[Severity: Medium]
-Note that this list programs the main MAC clock ("stmmaceth") to
-120 MHz, and shikra_data is the first descriptor to do so.  That
-interacts badly with how the PTP reference rate is captured earlier in
-probe.
+[Severity: High]
+Does this new case leave the LED driven active-low, i.e. the inverse of
+what the device tree asked for?
 
-qcom_ethqos_probe() calls devm_stmmac_probe_config_dt() before any of
-the clock rates are touched, and stmmac_probe_config_dt() has the
-fall-back path:
+Before this change priv->led_polarity_mode could only hold -1 (never
+requested) or 1 (active-low requested).  With the new case an explicit
+'active-high' node now stores 0:
 
-	plat->clk_ptp_ref = devm_clk_get(&pdev->dev, "ptp_ref");
-	if (IS_ERR(plat->clk_ptp_ref)) {
-		plat->clk_ptp_rate = clk_get_rate(plat->stmmac_clk);
-		plat->clk_ptp_ref = NULL;
-		dev_info(&pdev->dev, "PTP uses main clock\n");
+drivers/net/phy/qcom/qca808x.c:qca808x_led_polarity_set() {
+	...
+	/* Save the last PHY polarity mode */
+	priv->led_polarity_mode = active_low;
 
-so plat_dat->clk_ptp_rate is a snapshot of whatever rate the bootloader
-left on stmmaceth.  Only afterwards do qcom_ethqos_init_noc_clks() and
-ethqos_clks_config() move that same clock to the 120 MHz requested
-above.  And ethqos_ptp_clk_freq_config() cannot repair the value,
-because it bails out first thing when the fall-back was taken:
+	return phy_modify_mmd(phydev, MDIO_MMD_AN,
+			      QCA808X_MMD7_LED_POLARITY_CTRL,
+			      QCA808X_LED_ACTIVE_HIGH,
+			      active_low ? 0 : QCA808X_LED_ACTIVE_HIGH);
+}
 
-	if (!plat_dat->clk_ptp_ref)
-		return;
+The only other place QCA808X_LED_ACTIVE_HIGH gets programmed tests for -1
+specifically:
 
-Does that leave stmmac using a stale clk_ptp_rate for the sub-second
-increment and addend programming, i.e. PTP timestamps that advance at
-the wrong rate?  If the boot rate happens to be 0, the check in
-stmmac_init_tstamp_counter() rejects it outright ("Invalid PTP clock
-rate") and hwtstamping fails.
+drivers/net/phy/qcom/qca808x.c:qca808x_config_init() {
+	/* Default to LED Active High if active-low not in DT */
+	if (priv->led_polarity_mode == -1) {
+		ret = phy_set_bits_mmd(phydev, MDIO_MMD_AN,
+				       QCA808X_MMD7_LED_POLARITY_CTRL,
+				       QCA808X_LED_ACTIVE_HIGH);
+	...
+}
 
-Admittedly this needs a DT that omits ptp_ref, which the
-qcom,shikra-ethqos binding does not allow, so the window is narrow.
-Still, since the core explicitly supports the fall-back, it would be
-good to know the intent here: is ptp_ref mandatory for Shikra by
-construction, or should the stmmaceth rate be established before
-devm_stmmac_probe_config_dt() runs (or clk_ptp_rate re-read after the
-rate change) so the two cannot disagree?
+so the newly reachable value 0 skips that write.
 
-[Severity: Medium]
-Is the missing .rgmii_por / .num_rgmii_por pair intentional here?  This is
-the only descriptor in the file without a POR table; emac_v2_1_0_data,
-emac_v2_3_0_data, emac_v3_0_0_data and emac_v4_0_0_data all supply a
-six-entry table.
+phy_init_hw() runs drv->soft_reset (qca808x_soft_reset ->
+genphy_soft_reset, BMCR_RESET) before drv->config_init, and it is called
+from phy_attach_direct() and again from mdio_bus_phy_resume().  Since
+BIT(6) has to be set explicitly for active high:
 
-Since .link_clk_name is also unset, qcom_ethqos_probe() asks for the clock
-named "rgmii":
+drivers/net/phy/qcom/qca808x.c:
+/* QSDK sets by default 0x46 to this reg that sets BIT 6 for
+ * LED to active high. It's not clear what BIT 3 and BIT 4 does.
+ */
+#define QCA808X_LED_ACTIVE_HIGH			BIT(6)
 
-	ethqos->link_clk = devm_clk_get(dev, data->link_clk_name ?: "rgmii");
+isn't the single probe-time phy_modify_mmd() write discarded by that reset
+and then never restored, leaving the LED active-low?
 
-so this instance takes the ethqos_fix_mac_speed_rgmii() path, where the
-POR restore loop runs zero times:
+That would make a device tree that explicitly states 'active-high' behave
+worse than one that omits the property entirely, since the omitted case
+keeps led_polarity_mode == -1 and does get the bit re-asserted from
+config_init.
 
-	/* Reset to POR values and enable clk */
-	for (i = 0; i < ethqos->num_rgmii_por; i++)
-		rgmii_writel(ethqos, ethqos->rgmii_por[i].value,
-			     ethqos->rgmii_por[i].offset);
+There is a second effect of the overloaded value: with
+priv->led_polarity_mode == 0 the driver's global-polarity bookkeeping
+records "active high" while the register says active low, so a second LED
+also requesting active-high passes the mismatch check against state that
+does not reflect the hardware.
 
-With num_rgmii_por == 0, RGMII_IO_MACRO_CONFIG, RGMII_IO_MACRO_CONFIG2,
-SDCC_HC_REG_DLL_CONFIG(2), SDCC_HC_REG_DDR_CONFIG and SDCC_USR_CTL are
-never returned to a known baseline before the speed-specific
-read-modify-write sequence runs.
+Should qca808x_config_init() also cover the explicit active-high case, for
+example by re-asserting the bit whenever led_polarity_mode != 1, or by
+using a distinct sentinel for "not requested" rather than overloading -1
+and 0?
 
-Can that leave a stale delay setting across a speed change?  In
-ethqos_rgmii_macro_init(), the non-1000 Mbps branch does:
+Related to this, could the commit message paragraph:
 
-	rgmii_setmask(ethqos, SDCC_DDR_CONFIG_EXT_PRG_RCLK_DLY_EN,
-		      SDCC_HC_REG_DDR_CONFIG);
+  "active_low is already false when no polarity mode is requested, which
+  programs QCA808X_LED_ACTIVE_HIGH, so the request is already satisfied and
+  only the case label is missing."
 
-while the SPEED_1000 branch only programs PRG_RCLK_DLY and sets
-PRG_DLY_EN.  Neither branch clears the other branch's enable bit; on the
-existing ge_3 platforms the POR write (DDR_CONFIG = 0x80040800, with
-EXT_PRG_RCLK_DLY_EN clear) is what clears it.  Does a 10/100 to 1000 Mbps
-renegotiation on Shikra therefore end up with the external RX clock delay
-path enabled together with the 1 G programmed delay?  The first link-up
-would likewise be configured on top of whatever the bootloader left in the
-IO macro and DLL.
-
-Alternatively, if Shikra is not an RGMII part, then the "rgmii" link clock
-name and the absent .needs_sgmii_loopback look inconsistent with
-emac_v4_0_0_data.  The commit message only says "similar to previous
-platforms", which does not say which of the two it is.
-
-> +	.noc_clk_cfg = shikra_noc_clks,
-> +	.num_noc_clks = ARRAY_SIZE(shikra_noc_clks),
-
-[Severity: Medium]
-This is the first descriptor with a nonzero num_noc_clks, so it is also the
-first to activate the NOC/OPP voting path in qcom_ethqos_probe().  Can that
-leave a performance state vote behind on a probe failure?
-
-qcom_ethqos_init_noc_clks() ends with:
-
-	ret = dev_pm_opp_set_rate(dev, data->noc_clk_cfg[0].rate);
-	if (ret)
-		return dev_err_probe(dev, ret, "Failed to set initial NOC OPP rate\n");
-
-which programs axi-noc and, through the required-opps, raises the device's
-genpd performance state.  The paired teardown is only installed later:
-
-	ethqos->link_clk = devm_clk_get(dev, data->link_clk_name ?: "rgmii");
-	if (IS_ERR(ethqos->link_clk))
-		return dev_err_probe(dev, PTR_ERR(ethqos->link_clk),
-				     "Failed to get link_clk\n");
-
-	ret = ethqos_clks_config(ethqos, true);
-	if (ret)
-		return ret;
-
-	ret = devm_add_action_or_reset(dev, ethqos_clks_disable, ethqos);
-
-So if devm_clk_get() returns -EPROBE_DEFER (rgmii clock provider not yet
-registered) or -ENOENT on an incomplete DT, probe returns before
-ethqos_clks_disable is registered and dev_pm_opp_set_rate(dev, 0) is never
-issued.
-
-Does the devm cleanup undo the vote?  _opp_table_kref_release() in
-drivers/opp/core.c drops current_opp, clears the OF table and puts the
-clock, but performs no OPP transition:
-
-	if (opp_table->current_opp)
-		dev_pm_opp_put(opp_table->current_opp);
-	_of_clear_opp_table(opp_table);
-	/* Release automatically acquired single clk */
-	if (!IS_ERR(opp_table->clk))
-		clk_put(opp_table->clk);
-
-And on the genpd side, genpd_dev_pm_detach() only drops the attach-time
-default pstate:
-
-	/* Drop the default performance state */
-	if (dev_gpd_data(dev)->default_pstate) {
-		dev_pm_genpd_set_performance_state(dev, 0);
-		dev_gpd_data(dev)->default_pstate = 0;
-	}
-
-which is 0 here because the required-opps live on the OPP table entries,
-and genpd_remove_device() does not re-evaluate genpd->performance_state.
-Does that mean the elevated VDD_CX and 120 MHz axi-noc vote survives with
-no driver bound?
-
-A narrower variant is the dev_pm_opp_set_rate() failure inside
-ethqos_clks_config(true), which returns the error without lowering the vote
-taken in qcom_ethqos_init_noc_clks().
-
-Would it work to register the cleanup action (or call
-dev_pm_opp_set_rate(dev, 0)) immediately after the initial vote, or to move
-the initial vote into the existing ethqos_clks_config() sequence where
-failures already lower it?
-
-> +	.rgmii_config_loopback_en = false,
-> +	.dwmac4_addrs = {
-
-[ ... ]
-
-> +	},
-> +};
-> +
-
-[ ... ]
-
-> @@ -957,6 +987,7 @@ static const struct of_device_id qcom_ethqos_match[] = {
->  	{ .compatible = "qcom,qcs404-ethqos", .data = &emac_v2_3_0_data},
->  	{ .compatible = "qcom,sa8775p-ethqos", .data = &emac_v4_0_0_data},
->  	{ .compatible = "qcom,sc8280xp-ethqos", .data = &emac_v3_0_0_data},
-> +	{ .compatible = "qcom,shikra-ethqos", .data = &shikra_data},
->  	{ .compatible = "qcom,sm8150-ethqos", .data = &emac_v2_1_0_data},
->  	{ }
->  };
+be revisited?  In the no-property case led_polarity_set is not called at
+all (of_phy_led() only calls it when modes is non-zero), so what programs
+QCA808X_LED_ACTIVE_HIGH there is the led_polarity_mode == -1 branch of
+qca808x_config_init(), which the new case label makes unreachable for an
+explicit active-high request.
 
 -- 
-Sashiko AI review · https://netdev-ai.bots.linux.dev/sashiko/#/patchset/20260904-shikra_ethernet-v1-0-a50765996035%40oss.qualcomm.com
+Sashiko AI review · https://netdev-ai.bots.linux.dev/sashiko/#/patchset/20260908105959.70453-1-donggeunyoo.kernel%40gmail.com
