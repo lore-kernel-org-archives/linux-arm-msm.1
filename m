@@ -1,126 +1,131 @@
-Received: from mail-wr1-f48.google.com (mail-wr1-f48.google.com [209.85.221.48])
+Received: from mail-vs2-f12.google.com (mail-vs2-f12.google.com [74.125.227.12])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 35E5F339365
-	for <linux-arm-msm@vger.kernel.org>; Wed,  9 Sep 2026 15:15:22 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.48
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 395A73DD87F
+	for <linux-arm-msm@vger.kernel.org>; Wed,  9 Sep 2026 15:17:12 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.227.12
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788966923; cv=none; b=ZebVQtwrLuXpXKO40j0QN/nsZRKrRGti23qTg7uLYCbI1bYoAO8svQNBShIXjpyQtttvj/x7+hSW9Pn0L2a4Vs7mOsKMyLjNswHxavR/QkvgguxQmRxGbFxes3lA/vRD3t7VGy6BSwRKf6g+orXuNbHYEPjU3nLU7L9equ3NF7M=
+	t=1788967033; cv=none; b=O569oS3dEeLXpQhkjp6m1Vywc1IYxhTeF2g4c+wpHl7taSVpnUsC6SllelQrMnV3Z2T8H7/RKkXjHZkUXBRFjnfWQ/rGdpT4M4tD9lbbofg5DNctc2SH10+QBZgZbGftCuveUTOel5q4cm71xkpw067mGwBpXEQYVGhxWKQ7yRA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788966923; c=relaxed/simple;
-	bh=ZnIpv8WZvdJ5YJePEA4oRdI/IfL6BywHnZH/XanqGWM=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=jj1rb7inzuDI1H++eSBtbJ5tjYxIoBQjNd1vpumJiRp7mXHpzxiM48wIlUs5AY2VVgxnYPNhztgC/7D2cFID7j9/OjSyEr/ijisl7ZRBPZZjudUHiPJA+ekMKICgUeVAKF/Ua6yvE+JHPnm3ajVdnDONSvXizHKEg0Jj73VTOw0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=LFiXfI50; arc=none smtp.client-ip=209.85.221.48
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+	s=arc-20240116; t=1788967033; c=relaxed/simple;
+	bh=50PWHOPz89VAgzShHbqe1+05LKceXOJguW/0waoh4rs=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=TmAfgF54wuvSGDYw4GLrPPk7OT1nzxEW6jmqJ77OACvffPqZnvTyllBXgZ597xXaffizY9riiYy0VEp2wx/3rOTsDHmplCk4hnXbLH8s1TVebGHUqY8UaHxXNzJyTC0yyFHOMl/ie1wwDtxKbUZYyLLmilCVoAIqAIXUdecPp9U=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=linux-m68k.org; spf=pass smtp.mailfrom=gmail.com; arc=none smtp.client-ip=74.125.227.12
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=linux-m68k.org
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="LFiXfI50"
-Received: by mail-wr1-f48.google.com with SMTP id ffacd0b85a97d-485850cf499so4184427f8f.3
-        for <linux-arm-msm@vger.kernel.org>; Wed, 09 Sep 2026 08:15:21 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1788966920; x=1789571720; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:mime-version:references
-         :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=q7rwmF0hySld2HyOILzYsqpEuhwCI2TFr3jDyI8CRI4=;
-        b=LFiXfI50K3RW7L1N0T1iLQADo8TvXmTg1YkOUm3S8XZnqo3XG6nNzKgqYWhTZ8mmSB
-         JQNbnYMVUHb8gFjvCknxhlp4rET+qtuwiv3d+FxAjnqbjimnOWzNz04leoU/CRTvesQa
-         cYf1OXQ80ofAX1XupIP8iAqpuxCJc7JucTTRjHeVSyRd+Meh4ddbXXGtRenTuTT7tfCi
-         tQJCS4WclobUDkgQhkFrULzOOnCBHM0nI0+C3sKfpr05Mg45SpucX1O4h71bFEPkawpM
-         YNd6IiyP67yf4k+7IjWiIwofJtir2WrB7GfXdnxDBNzd5kbs79XjmT8m2IRqF6e9wBxz
-         PydA==
+Received: by mail-vs2-f12.google.com with SMTP id 71dfb90a1353d-5c67e4d8d8aso264059e0c.1
+        for <linux-arm-msm@vger.kernel.org>; Wed, 09 Sep 2026 08:17:12 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788966920; x=1789571720;
-        h=content-transfer-encoding:content-type:mime-version:references
-         :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=q7rwmF0hySld2HyOILzYsqpEuhwCI2TFr3jDyI8CRI4=;
-        b=c8bd7c3DJzXv83moy6Xy5tJyYYEBa+77hKCsA/pm09EEgcRZ9nknOsKbraBpuEkRo8
-         1k8nfweDqdv2+U6kh56hBBoHMd0/SO4J+tlaEKe6oxZ0E7MOsBGZGLfOiz5sNR6AfbzS
-         El5Y3VKyiGul63DRA1otwX7i27EMBK3PIkb2HUgs0O/H0SXHvPPj0DQZlxwCyE6nmQLK
-         NuwjBykUjn56Syv5fmz4D8Kr4mkuLZPtFfrOZmOPIpOB03EHWc4YbvPp0wF9g0WEZ9lE
-         +0KeRUOEFb/UoJVWOvDDKw/XaK/gVbQaEnLdLOaRMwxt0uIVD+EzK22oSq4dN0mTei0C
-         bJ2g==
-X-Forwarded-Encrypted: i=1; AKwUvBzv8KzghdaZyvQ3hCXvpwsjtTtI8NQzhGDsMZIhosbMYovW+CXJyKSEB1ZkCBonWRBZqeOgRDPl4Ge8rlWI@vger.kernel.org
-X-Gm-Message-State: AFuF++lh2g8PYFD9oSZ/YuxalmnQbKpFc37T4NniMZziY8VzG3YLSlKO
-	FcpT4zUTO8VdmE+eLXjW/KzhDQyG+tJxnpr2Q1EO/9PeB4ZOqlTl+Akt
-X-Gm-Gg: AYBFou0lnVhA0HeZ3EngKZxRrmOt+5fnhncBsoHDNEv68NlYLxf7XK6yQnmkhEqyJHy
-	C5TW6NieAzKM6o/IirVIjPoEb+jLr827lIAlbwlw5NPy8k+MQFbjSZctxLffaIUSqK97jUDF3S0
-	kE7UgGZETH7GnI2jHEx8rOwCMWkfbTY0r05u4/+Kt0N3m9AICLLApzcU66KtGz8gEqsND1yRwjZ
-	g6olqxNI1UHQHG/kYOpfTmTkwWDlsTTl6gGTKgGzMNtD6zFi76cb6pzt+B0VpJk3BcRuw6bbNwo
-	xNmlCvjc/g3h7vBAfHQyAEOfBr43P/RLJfJ+JMO4+mrQTY0e6E2e1CWoOM7WgbGx/hRyXaoxUQz
-	ENmJgknBvE+PmdEG6fGYdVLezeWz30Ov3blAuNRJfu4Wag+K+ufltYg8lTHdm5kDIPMOEDobcOi
-	nGNYnYVX9X7Ro23mZW0TrrwbCDUDTL88nRN/QSk0LRhBSDPiUTLB9cSllcUWfS+Z2Lq46/IOMRQ
-	aWVHWZZMDqzzmCTBrE3s2fxW2IEEf4+A2fU6dUBcvJW
-X-Received: by 2002:a05:6000:2584:b0:482:b813:8315 with SMTP id ffacd0b85a97d-485872ac3b1mr40255536f8f.21.1788966920068;
-        Wed, 09 Sep 2026 08:15:20 -0700 (PDT)
-Received: from localhost.localdomain (mob-31-26-103-238.net.vodafone.it. [31.26.103.238])
-        by smtp.googlemail.com with ESMTPSA id ffacd0b85a97d-48594172546sm36325061f8f.15.2026.09.09.08.15.17
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 09 Sep 2026 08:15:19 -0700 (PDT)
-From: Oleg Keri <okerixx@gmail.com>
-To: Vinod Koul <vkoul@kernel.org>,
-	Neil Armstrong <neil.armstrong@linaro.org>,
-	Manivannan Sadhasivam <mani@kernel.org>,
-	Johan Hovold <johan+linaro@kernel.org>,
-	Bjorn Andersson <quic_bjorande@quicinc.com>
-Cc: linux-phy@lists.infradead.org,
-	linux-arm-msm@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	Michael Scott <mike.scott@oss.qualcomm.com>
-Subject: Re: [PATCH] phy: qcom: qmp-combo: hold a runtime PM reference in the typec callbacks
-Date: Wed,  9 Sep 2026 17:15:08 +0200
-Message-ID: <178896690892.10327.10619929289869883612@gmail.com>
-X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20260909141841.532191F00A3F@smtp.kernel.org>
-References: <20260909141841.532191F00A3F@smtp.kernel.org>
+        d=1e100.net; s=20251104; t=1788967031; x=1789571831;
+        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+         :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=xngvRGlem5QBe9w72ZS3ISg4Zt8dZwRC6gUDQpCph0s=;
+        b=OmBrT7hj/3TWQ3FvBe+GGRNSIod53YYMsaLaSjyG048r1le5OcSjS2zdvjGGSSEmQr
+         9sRGIBobRYkjPommQrQC+qDiSMIxh4J2gnWg0g20i2+gcn6B5KbsTqQTPbJEzx6pLjtY
+         LUOqG0gpxCjvzm5W7/wUXwgNtspAqBw/MP5E3dKOnIIrHdefrNFnXlMPQ6Z8UPCKdiut
+         l9RAmPTxAXZYbHgO3mMhlbEX6BQh/75cnpcwZOJvdHaaaVCZmgIeV+PHsjD1EN1BbRsZ
+         ZR0PXaBpW635/cu55wmKrfJCquo+IEVALqSX1OGZxqk/mszME3uiwBzjpqEXoVe70kHU
+         HY7g==
+X-Forwarded-Encrypted: i=1; AKwUvByUdIuUGxaZtIqwZqnahHuZPoXE+DmRT3y8LyzOf6mgBiXQhk2CPTRQfKaXj2SXqcs68wzrjw5QPQtxoUYv@vger.kernel.org
+X-Gm-Message-State: AFuF++nNu7gig93w0E2M3qbBTrUvD5aM8D/WDy8FVoduBxQU2ZuD6HF2
+	wfDlwfWshHUa0aYv+hshl6/FJIEV0C3er7Vmgd7CpBENx0s/l9dW4oCna79VXbRxgdxpzQ==
+X-Gm-Gg: AYBFou0S6abwJCHeTzXPePz/yEQrKOsu1Du2CO4SULl2gwE6ZMu8krbY4AbcxUI72/G
+	GqksrOYF3f5MGxJt//mDijxPwhfqHpgGKQcg5BakSXugsODDjDTHitnRDxu4iTw986VEAf8Vm2o
+	m8ez4Gowq1EPmJ6cpif2O1ufaDnvJVJGRMALQ1LxLGLwI6d9jLuiCoS7qhHMfTHgJbcFWRN69ls
+	BnX9IXSoytKb5eHjdBLopq+mvpQvZRjICj5QyOeEkERnJnnBwWd20R/E26W84Lrs9PMHPmbgi0b
+	Y3bnMYopKdiBgiSas6+d5c/HNWAnJExM5AIoRb7F1RiOVjRuQsW6j0bB71Cnekbv0MeWbE8VwCx
+	Tozj36shMRRd/3k8XBBraSp/dzLpDwO47WOrozrkgLxURXYVMHNwSEFUx5KkdbtC4RXMB5u71vg
+	4mSWLsm9pEhGyznGVwcHzijaMZbTIpHAcKkIEFQ5zNJFetvpXc3bPgB56gWW4Jx6/9r+Aqky1Sj
+	A3fJBujjeNRC+tAAchqWM4fDeVeASrQ3wSxIVvzT1jI9MSm
+X-Received: by 2002:a05:6122:311b:b0:5bd:71cf:e97e with SMTP id 71dfb90a1353d-5c833635558mr840751e0c.5.1788967030940;
+        Wed, 09 Sep 2026 08:17:10 -0700 (PDT)
+Received: from mail-ua2-f12.google.com (mail-ua2-f12.google.com. [74.125.226.204])
+        by smtp.gmail.com with ESMTPSA id 71dfb90a1353d-5c7ec1eeaf3sm12814687e0c.6.2026.09.09.08.17.10
+        for <linux-arm-msm@vger.kernel.org>
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 09 Sep 2026 08:17:10 -0700 (PDT)
+Received: by mail-ua2-f12.google.com with SMTP id a1e0cc1a2514c-97e7c8c8602so185006241.0
+        for <linux-arm-msm@vger.kernel.org>; Wed, 09 Sep 2026 08:17:10 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AKwUvBwjYGtNjWDyGAh9lPav82tR06HpLF08AxwBQN3iOIQELHKRIDP/e1i5zrqmqsuBlqSreMX1ljrN0qiToXLX@vger.kernel.org
+X-Received: by 2002:a05:6102:159f:b0:77d:e064:2dc1 with SMTP id
+ ada2fe7eead31-79072bd65e5mr1021149137.0.1788967030503; Wed, 09 Sep 2026
+ 08:17:10 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+References: <20260908-subsys_initcall-v1-0-cbccf4cd4288@redhat.com> <20260908-subsys_initcall-v1-2-cbccf4cd4288@redhat.com>
+In-Reply-To: <20260908-subsys_initcall-v1-2-cbccf4cd4288@redhat.com>
+From: Geert Uytterhoeven <geert@linux-m68k.org>
+Date: Wed, 9 Sep 2026 17:16:59 +0200
+X-Gmail-Original-Message-ID: <CAMuHMdUYJ-XSe22QnBREpxJH_hDVfV1CwkVjBqPK9AXTGJE1Aw@mail.gmail.com>
+X-Gm-Features: AcwNN1VLF1S9VM_rAd4lsusMxTGZ8B-oUTaocc800YUq_Bw4xg9-nPCuVEjF4tk
+Message-ID: <CAMuHMdUYJ-XSe22QnBREpxJH_hDVfV1CwkVjBqPK9AXTGJE1Aw@mail.gmail.com>
+Subject: Re: [PATCH 2/4] driver: core: platform: add subsys_platform_driver() macro
+To: Brian Masney <bmasney@redhat.com>
+Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>, "Rafael J. Wysocki" <rafael@kernel.org>, 
+	Danilo Krummrich <dakr@kernel.org>, Bjorn Andersson <andersson@kernel.org>, Stephen Boyd <sboyd@kernel.org>, 
+	Jerome Brunet <jbrunet+clk@baylibre.com>, driver-core@lists.linux.dev, 
+	linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
+	linux-clk@vger.kernel.org, linux-renesas-soc@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
 
-Both findings are real, and I have posted a follow-up series for them:
+Hi Brian,
 
-  [PATCH 0/2] phy: qcom: qmp-combo: fix forced com_init() error handling
+On Tue, 8 Sept 2026 at 19:47, Brian Masney <bmasney@redhat.com> wrote:
+> Add a new macro subsys_platform_driver() to eliminate some boilerplate
+> code in drivers that need to register earlier in the boot at the
+> subsys_initcall level.
+>
+> Signed-off-by: Brian Masney <bmasney@redhat.com>
+> Assisted-by: Claude:claude-opus-4-8
 
-To answer the two questions directly.
+Thanks for your patch!
 
-Yes, the error path has to skip the decrement when force is set.  The
-reference is only taken in
+Reviewed-by: Geert Uytterhoeven <geert+renesas@glider.be>
 
-	if (!force && qmp->init_count++)
-		return 0;
+> --- a/include/linux/platform_device.h
+> +++ b/include/linux/platform_device.h
+> @@ -376,6 +389,23 @@ static int __init __platform_driver##_init(void) \
+>  } \
+>  device_initcall(__platform_driver##_init); \
+>
+> +/*
+> + * subsys_platform_driver_probe() - Helper macro for drivers that don't do
+> + * anything special in device init and have no exit, but need to register
+> + * earlier, at subsys_initcall level.  This eliminates some boilerplate.  Each
+> + * driver may only use this macro once, and using it replaces subsys_initcall.
+> + * This is meant to be a parallel of builtin_platform_driver_probe above, but
+> + * with the init call promoted to subsys_initcall so the provider is available
+> + * earlier during boot.
+> + */
+> +#define subsys_platform_driver_probe(__platform_driver, __platform_probe) \
+> +static int __init __platform_driver##_init(void) \
+> +{ \
+> +       return platform_driver_probe(&(__platform_driver), \
+> +                                    __platform_probe);    \
+> +} \
+> +subsys_initcall(__platform_driver##_init) \
 
-and && short-circuits on !force, so with force set init_count++ is never
-evaluated, while err_decrement_count decrements unconditionally.  A forced
-init that fails therefore drops a reference it never took.  init_count is a
-plain int, so it goes negative rather than wrapping, and the damage lasts
-for the rest of the boot: qmp_combo_com_exit() sees a non-zero value in
+Nit: The backslash is not needed.
+Yeah, builtin_platform_driver_probe() has it, too...
 
-	if (!force && --qmp->init_count)
-		return 0;
+> +
+>  #define platform_create_bundle(driver, probe, res, n_res, data, size) \
+>         __platform_create_bundle(driver, probe, res, n_res, data, size, THIS_MODULE, KBUILD_MODNAME)
+>  extern struct platform_device *__platform_create_bundle(
 
-and returns early every time, so the clocks, resets and regulators are
-never released, while the runtime PM callbacks only bail on exactly zero
-and keep touching hardware that may already be off.
+Gr{oetje,eeting}s,
 
-And yes, on arm64 a read or write to a peripheral whose clock is gated is
-not a benign no-op - it typically raises an imprecise external abort, which
-arrives as an SError.  Whether that reaches the kernel or is taken by
-firmware is platform dependent; either way it is not something to walk into
-after an init failure has already unwound the clocks.
+                        Geert
 
-Both are pre-existing, as you say, and neither depends on the patch you are
-reviewing - that one only stops the teardown re-entering the driver's own
-runtime suspend callback.  The three are independent and can be applied in
-any order.
+-- 
+Geert Uytterhoeven -- There's lots of Linux beyond ia32 -- geert@linux-m68k.org
 
-For the record, the two problems are reached only when
-qmp_combo_com_init() itself fails, so I have not been able to trigger them
-deliberately; they are found by inspection.
+In personal conversations with technical people, I call myself a hacker. But
+when I'm talking to journalists I just say "programmer" or something like that.
+                                -- Linus Torvalds
