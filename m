@@ -1,194 +1,325 @@
 Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D78F047C0E5
-	for <linux-arm-msm@vger.kernel.org>; Wed,  9 Sep 2026 11:47:42 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AEB805328D4
+	for <linux-arm-msm@vger.kernel.org>; Wed,  9 Sep 2026 11:48:32 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788954465; cv=none; b=lfMHS+4X6zTmYTPGqa5jSTaWhclUk2S86/sy1y7HvmxPxLKNdyuPZ0wnK+VIyyZSHhY9op690npyakzVXJL+RuhJz0Uzn8qnd7wqPisP4w9Ktf+IP+HjSinGBZpgq/wL0NWR3x9bnW0k9qCIAGa8P6XYH9tjfSkn/yhNT2h5Eg8=
+	t=1788954514; cv=none; b=QPjT6De//wKhQIjxWcW9HNFDBoplhMcGvwcfYPIJDJDoAueilelizEYMAPQWUoeIWPnJKtWhWWAmhZKpZCvcBVfhFxpa/lExNQpL1AVo3AzRxBUU0M5DLfZvS5aYo5S9VDtiVgJrgU8p+oIl/WbwrydXlT3dD4lBFceRULvW77w=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788954465; c=relaxed/simple;
-	bh=bE7gFNvJpgqAb1CCf/LUtrOOgo9UiCo9vR8xhbQKK7I=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=lFai15zSl2rj2z4qzIYLDaQzuJ0s8JGkEH1jVjVfpmI3GIokfq6ii+eRYerQ1cPFbrjSyeuNQnPHKgsfcoZIA5L+OxI2e5y6fdPYj7FmxCiEitjXn7sX/mFkCEQQv0NCQxVk6z3xnbmFlhcRXdRXn11z0HXKYeegjcJxXilxsdE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=Hc0SLmX0; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=SfTp9v+M; arc=none smtp.client-ip=205.220.180.131
+	s=arc-20240116; t=1788954514; c=relaxed/simple;
+	bh=dLJlSF3ZBqSGM+EH98xrjrLEEm52J5wKUkimSUCNjCc=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=XqLuwk+B3FLY7aC2mBDRUCpIW/L9XvWADwiF5zWIX7bi1T7rGH7nk1GD65hPMpneXViKuRQnRZ+lbkPMvzVphq5Rsl8rQHtWo03OK+qu65UdCAlV6UVD4LGoAPfA3R1XtlYI9zcMDX+PfAfoVFIjOSsAfTCNWXYOAyeSbKVeVaM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=SOlwnT6a; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=GC0vIlbE; arc=none smtp.client-ip=205.220.180.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="Hc0SLmX0";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="SfTp9v+M"
-Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 689BU4eb1183704
-	for <linux-arm-msm@vger.kernel.org>; Wed, 9 Sep 2026 11:47:42 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="SOlwnT6a";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="GC0vIlbE"
+Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 689BU5Gk2019239
+	for <linux-arm-msm@vger.kernel.org>; Wed, 9 Sep 2026 11:48:31 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	5LtEQ/D0fxKgSOw/wwJk623IFAnhoZEdLxvz4TnSVR0=; b=Hc0SLmX0LuMgPx2/
-	s7usEhsEMGxv40BYRumnoi1d+ragd1vSsOAlOEIYhmukDhMvpNUEW3ShpMNJ7tgf
-	N9dGlxVMk+Cni5hkkoLFsyJRsM5lbSyIU+UAY5c3lFGguFMmX+MehFOtIjTvaEvo
-	+BFXKJUG0nj19kr0RTN5wktKr/l3FWfF2dvpEHIhJJZa0OedoGskYHrkOrsPSGa9
-	xTKLsiXsl7iaK4pqL8ZZDTZO2nlzdpipBVvssR4QZtRMQ3KUKUwNcxEsDNs6yIxp
-	3NAFWmkjHiV25v+XHSiF9m1+YpC1SbIRwE1alcPsOCYpUPml0yX8nCME/CNEHAdn
-	34w1KQ==
-Received: from mail-pl1-f199.google.com (mail-pl1-f199.google.com [209.85.214.199])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gk559re39-1
+	Z/IzRDyDMUb5WeBWrbeDr4JRHgfSmmkXO35ZSpjMdXg=; b=SOlwnT6agTOsVW4a
+	mefURN9OqRc+Ls8K8x487MHwuXzShNHtwFaEVgGsTN/jth+bPnCedNHIu0veEYR8
+	fUtqPfTYzAFgWcYIbB0CMoNQf/Ep+b1MjM7q5PXLpKZZ3wbTRqXZsU2WmK3Th6ev
+	tlojy6786k04j4VEEi9OXbkpV8HlBNsOt0ALkZlSwlfHCBN4GscTKtY78i9QU4Ub
+	hhkZHHd8nzNhZ2LbAuXxjOw3Uzbgx16p4YDcrgEqE7tI+jsj4wHKyIc1WvbspENN
+	ULFor86m/7DoGRrVDSSdZ+Ei2kjN+B19bIvEhivc5wdgWCes+FkBXRL3K3xY6dn8
+	k7bVrw==
+Received: from mail-ua1-f71.google.com (mail-ua1-f71.google.com [209.85.222.71])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gk62x8698-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 09 Sep 2026 11:47:41 +0000 (GMT)
-Received: by mail-pl1-f199.google.com with SMTP id d9443c01a7336-2ccb6823efcso59124965ad.0
-        for <linux-arm-msm@vger.kernel.org>; Wed, 09 Sep 2026 04:47:41 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Wed, 09 Sep 2026 11:48:31 +0000 (GMT)
+Received: by mail-ua1-f71.google.com with SMTP id a1e0cc1a2514c-97e9cc5ac86so459743241.1
+        for <linux-arm-msm@vger.kernel.org>; Wed, 09 Sep 2026 04:48:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1788954461; x=1789559261; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=5LtEQ/D0fxKgSOw/wwJk623IFAnhoZEdLxvz4TnSVR0=;
-        b=SfTp9v+MoAN855dcFDV4GOpBAoeSnkO7HFmgdJzwW3nUWhM/++vzKV525gqAzQ+kTv
-         5uIJ62oxzM6XNYQF1+6T9TMqOWurlrxavPEaYgR57+9UabW0cl/y08styhzj3ipt0SHj
-         j/6fO3kiq+ZzhtBYLW1/27eSghFIjBuSQJF77z9OzRu0Gqs9CHA8g6JystdfeyuMzNDc
-         +h+vt1qvVhD5izBR2KIKPVX6xFPvVrL7UX+9ARhGyAmW/12y/DMmkzcs2bym9BtQKVQE
-         tyUFslBN+9fv/PAVg8ofX/Ant52WoI870kYsJsPWG5brKfca8uvtSQwhO2xfBCQfrqrK
-         Z5vA==
+        d=oss.qualcomm.com; s=google; t=1788954511; x=1789559311; darn=vger.kernel.org;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :content-type:mime-version:references:message-id:subject:cc:to:from
+         :date:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=Z/IzRDyDMUb5WeBWrbeDr4JRHgfSmmkXO35ZSpjMdXg=;
+        b=GC0vIlbEYr7k0JPJkvY+o1Xv0BCnukCp2AhcC6EnsfRWMPEYadcQI8+i/TIgpGl0YZ
+         ZcByI3SjgTeXGTsFPI1fAGNTMpZQDGltObHi4X3erR7ZfGvNsRTCYl5YZnJpCnHQZXBv
+         XJ1pE0R+mc+jihNhKGio3G4pcdEW4zzBsZ4WdltI66nU84nErguHG8TIyupZB7i+nIdE
+         IH6SxRCkRvEtB7cgWUDaXaOlRIeyrkSinjp0k8kE/XoPvcJwjE9UhngVP6xcCpcbBk1H
+         Ci0Y0OKYxavD8iQJ1LLhf+beF5uPBjQfSr+8RAtCluu06qguHTtAk0/5PeSswiBVdNkR
+         Pajw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788954461; x=1789559261;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=5LtEQ/D0fxKgSOw/wwJk623IFAnhoZEdLxvz4TnSVR0=;
-        b=sr97Zj2QeXStVN/2BYnWF964qExDpDhTSeBwr+oXSzd9RhhWf8NVFVpQQKFSOKf3lC
-         rSIr09d5B3Oz93QbP5j1TsTyRDBudCd5lIyO0vU2r8aV4/DBNvchxo6gPprcEj8oIij0
-         nqFRnyu8L1h8o8aI2H7FwuFvXMPEzUCjx4vriOOfLRya6QneThwGnUSzkmkoSR5ZFLxk
-         gk32pobQFsB7O4mdvae348iS2mP9fIZKb6l9fIYv8qWz5yhQ6bDaLm3zgGa6kyTHc2Kc
-         Ru2vYuTtBBBbrPB5M3rh32607R/8jmR/vNLTSFBNTb4mGD9PHQCVTymLDSFHSnnbKXMt
-         QuwA==
-X-Forwarded-Encrypted: i=1; AKwUvBwZvW7MMlnViO7aEmD5a3ut7U3Wa8MI17SjcyDMBjtJMC6Nb5UAEFVUYAu17bzLajq7hjG9GrVjDQYxx1HN@vger.kernel.org
-X-Gm-Message-State: AFuF++nn0DemWlzExBlzQJxXjL/0m1XATeSXDOOApXc4QfKaO9PZUoEq
-	YPO5Du6lspkIQTDmd4bWsOqY1ZUNp6r46qUOsh4z+oDZDQXP7v1ysik2a5Dw5+dQKzIhgjWv7Sy
-	FKxvnxOKGqsGkWD2o8biY8WA6WUpbya483xIW1W/q3HthoqNcpTxrcJGE4ShpkMfqA/jm
-X-Gm-Gg: AYBFou0Q6w4qe6EnRBQe+1zxs05ITVPHlDC20ehwuDaeHcyzmFqDX//EO7DcljsyX/b
-	a9gvtYwXwK9iWQSu92UnWDNfo2XyHZLsHCP220SGF7V4tfsfOQNtjaU2W++OMDIHFKy62VcKxeC
-	VfruXHdn9PXwscuk3ak4k3wQv7cyq9TgYOznDV78Xr5wjyJ1vFln2rn9NELb1YwC3LkbSgdLMR6
-	BKJcTrz8n0iQWJXskyfJ6cZr2dXI3iOSfBMST/4mFh/XMKTXeZ2BTaSiAaVggfThcZ3a4dpQsKq
-	kSC60OII9hjP6H1DP9+SeYcfaZbkG2+qtSFg3PBUzqfRg/GMhzD3oJADzFCwo3JxORG2Z1/n+yu
-	FWSvFr2Tl6R5aIBTCneU2O/CctE4OvzGM
-X-Received: by 2002:a17:903:1aec:b0:2d9:6db:9fcb with SMTP id d9443c01a7336-2db125ca3bbmr502542075ad.11.1788954458801;
-        Wed, 09 Sep 2026 04:47:38 -0700 (PDT)
-X-Received: by 2002:a17:903:1aec:b0:2d9:6db:9fcb with SMTP id d9443c01a7336-2db125ca3bbmr502541325ad.11.1788954458215;
-        Wed, 09 Sep 2026 04:47:38 -0700 (PDT)
-Received: from [10.218.35.45] ([202.46.22.19])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-33825669695sm20505746eec.3.2026.09.09.04.47.34
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 09 Sep 2026 04:47:37 -0700 (PDT)
-Message-ID: <86e53b35-b096-41d9-b15e-e029ac59d84c@oss.qualcomm.com>
-Date: Wed, 9 Sep 2026 17:17:32 +0530
+        d=1e100.net; s=20251104; t=1788954511; x=1789559311;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :content-type:mime-version:references:message-id:subject:cc:to:from
+         :date:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=Z/IzRDyDMUb5WeBWrbeDr4JRHgfSmmkXO35ZSpjMdXg=;
+        b=Ll+D383oGKRaeXTPvG2Qw47FneCyPOJsD8d8ofa52oEQYXPWwEZeIVmhoyphLmFW7S
+         KMBnqkGIt7vHfMFAJZDcWSNZZ7cMyI1ASMiuHQdQ2zg/4WK3PZ/SyNZrI9q+ztVaIt49
+         AxwMgXu0wB0kLREBNlpvufsjZEOfYE+zihG50jkCHyOcJUZyhp878YKQGSMqDSZ4UXFd
+         4JFtwNltE7hTUE7RBOHS/OffAxYRUEWsq0UvWFm+u4T1AmDbzkwb71mIjC6Vr/cc+vpO
+         VnbbofvGW4YE/qmCCsfAX7Es+VKeBgrSVRX0xvCwUIB1pwk/Z8F94z0Pa+zg0OPfBBnr
+         xxBw==
+X-Forwarded-Encrypted: i=1; AKwUvBxS4DJu9D740hhJV9wP/ILZx4pmW6JJoWT5IcW+2uXh+iNs8CYbfYq56GGj8N8RhATd2psJNr3MeTUO6kZs@vger.kernel.org
+X-Gm-Message-State: AFuF++k9vEkU6GUhaC1Of4A/RVbRfVa6Z8myMYrLvsVI+QH3K05s5x7O
+	cF4jfpUipIQUeuAgach8UmCsBIkgMXQ+zgUOydFxxaT2KzbmneMct7ob06c2MJpiPE4VsV2qJ0Y
+	zdaKKS+/33EBf+rL717NWZ4BWsHt0U2UP8ltoGgjB3ijUQH9PFXQ/ehF/ZyqDMos/ZSBd
+X-Gm-Gg: AYBFou2mNVxg0dCmZDC2G2NscGHbgwyq9eJisu77Q+N40VtJxAxs25f4YU+iiuS97Mp
+	aiRtl+GZfLFGLUdndqLS/F1SA8N1kews7vjApPFewCPSDSRY5BL+0NeTje/MxKrYcBAzy0KFbQ4
+	eqUbbOoC7Gc3Hm0HSLl7/HJfoJYP/mttxVKnbxg0qj26GiAlv5nhFtvKw0t/qgMWPwFnzUc9yBO
+	BIzkQ+FZA6tkYcelqdHTMtrtK5qfYcEhAroxFYbf2M8q1kaOJxZhj7u4SxqIfZSffc8O1iTmE5T
+	gAkrncjKXwKM6tNgAijKdISmr+KZKjia3qdel/40Xoh71Qf38k0cLvkXR6U/wEH3zYzmGM/YNlQ
+	9VLZ0iW1RiPN/nC0qkHdnPoCerQc2M7dHlEfkD52ZVoEJREtil/s9GYI/ZlxdqrGxhW7pIBjTPx
+	PRx10pZqYV64id
+X-Received: by 2002:a05:6102:644c:b0:786:d33d:af15 with SMTP id ada2fe7eead31-78a4a94a067mr14441229137.6.1788954505585;
+        Wed, 09 Sep 2026 04:48:25 -0700 (PDT)
+X-Received: by 2002:a05:6102:644c:b0:786:d33d:af15 with SMTP id ada2fe7eead31-78a4a94a067mr14441070137.6.1788954500288;
+        Wed, 09 Sep 2026 04:48:20 -0700 (PDT)
+Received: from umbar.lan (2001-14ba-a073-af00-264b-feff-fe8b-be8a.rev.dnainternet.fi. [2001:14ba:a073:af00:264b:feff:fe8b:be8a])
+        by smtp.gmail.com with ESMTPSA id 38308e7fff4ca-3a370599810sm42910711fa.24.2026.09.09.04.48.18
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 09 Sep 2026 04:48:19 -0700 (PDT)
+Date: Wed, 9 Sep 2026 14:48:17 +0300
+From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+To: Bjorn Andersson <andersson@kernel.org>
+Cc: Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>, rob.clark@oss.qualcomm.com,
+        Krzysztof Kozlowski <krzk@kernel.org>,
+        Oded Gabbay <ogabbay@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
+        Shuah Khan <skhan@linuxfoundation.org>,
+        Randy Dunlap <rdunlap@infradead.org>,
+        Nathan Chancellor <nathan@kernel.org>,
+        Nick Desaulniers <ndesaulniers@google.com>,
+        Bill Wendling <morbo@google.com>,
+        Justin Stitt <justinstitt@google.com>,
+        "Joerg Roedel (AMD)" <joro@8bytes.org>, Will Deacon <will@kernel.org>,
+        Robin Murphy <robin.murphy@arm.com>,
+        Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+        Maxime Ripard <mripard@kernel.org>,
+        Thomas Zimmermann <tzimmermann@suse.de>,
+        David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+        Sumit Semwal <sumit.semwal@linaro.org>,
+        Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>,
+        Bharath Kumar <quic_bkumar@quicinc.com>,
+        Chenna Kesava Raju <quic_chennak@quicinc.com>,
+        srinivas.kandagatla@oss.qualcomm.com, linux-kernel@vger.kernel.org,
+        dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org,
+        linux-arm-msm@vger.kernel.org, llvm@lists.linux.dev,
+        iommu@lists.linux.dev, linux-media@vger.kernel.org,
+        linaro-mm-sig@lists.linaro.org,
+        Anandu Krishnan E <anandu.e@oss.qualcomm.com>
+Subject: Re: [PATCH v2 00/15] accel/qda: Qualcomm DSP Accelerator driver
+Message-ID: <rh5ufacfap4x63rjmgd76wlwgn3n2wuelpe4sqwy4yda27nsiq@lg4ltoqwz7ba>
+References: <318f14c2-0e87-4e07-8173-1511dca67d78@kernel.org>
+ <CACSVV01T=ytVJKM7NRoBTAJm7vH+JPJNT9Tftu5X9YskGXerwg@mail.gmail.com>
+ <e7b4eceb-cb3a-49ea-bed9-728c958594b0@kernel.org>
+ <CACSVV03ypjBYkhRpt=TyDwOKhejKKke3x=Fi_TvxXN-5U_rCsw@mail.gmail.com>
+ <fb834ae5-7113-4a86-bb84-ca5115c8d7ff@kernel.org>
+ <CACSVV018jB4WRRJ_CUHQmkHXZcqauWJXWGgrzY_HA6cFQ+Q3Xw@mail.gmail.com>
+ <dd3da35b-1db6-43a4-ae1f-35620692f51f@kernel.org>
+ <CACSVV01o_XYuSzaYGbo9pY=459qiA_fgL_KRHVJH+LH4RYcMzQ@mail.gmail.com>
+ <23e31249-cce2-421e-88f7-1a2af66e34b6@oss.qualcomm.com>
+ <aqCKgM1yCbWjFdgO@baldur>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 2/3] PCI: dwc: Force L2 link entry on shutdown/reboot
- without D3cold check
-To: Manivannan Sadhasivam <mani@kernel.org>
-Cc: Jingoo Han <jingoohan1@gmail.com>,
-        Lorenzo Pieralisi <lpieralisi@kernel.org>,
-        =?UTF-8?Q?Krzysztof_Wilczy=C5=84ski?= <kwilczynski@kernel.org>,
-        Rob Herring <robh@kernel.org>, Bjorn Helgaas <bhelgaas@google.com>,
-        konrad.dybcio@oss.qualcomm.com, linux-pci@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org
-References: <20260905-shutdown-v5-0-f0c6bafa1d4f@oss.qualcomm.com>
- <20260905-shutdown-v5-2-f0c6bafa1d4f@oss.qualcomm.com>
- <tkcout2ymlzvcx6my2hal5hgh4fxcpppxl2t5s4wogz3hjykp6@k72ig7seb7m2>
-Content-Language: en-US
-From: Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>
-In-Reply-To: <tkcout2ymlzvcx6my2hal5hgh4fxcpppxl2t5s4wogz3hjykp6@k72ig7seb7m2>
-Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-X-Authority-Analysis: v=2.4 cv=KP1qylFo c=1 sm=1 tr=0 ts=6aa1475d cx=c_pps
- a=JL+w9abYAAE89/QcEU+0QA==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
- a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22
- a=EUspDBNiAAAA:8 a=Q-PrnzyzFlRskm0mrpIA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
- a=324X-CrmTo6CU4MGRt3R:22
-X-Proofpoint-ORIG-GUID: o541hiZXyzMtjAR5me-57yaTc50Zw4n6
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTA5MDEzMSBTYWx0ZWRfX4N5nMwS6E9m9
- EIk+C/fHcxw8d8F0nNAfUUSKOjYySVw+OiKEO5G/CkC4qebdUSVXrb9hjVQzb/tueQQ+V9f2uZA
- NqhAigtOQNotWcWzri0ouHO8B0FlnHc=
-X-Proofpoint-GUID: o541hiZXyzMtjAR5me-57yaTc50Zw4n6
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTA5MDEzMSBTYWx0ZWRfX56Gy3h087nj9
- TYUfi5aEO6II4zx00M+SzIv1HmcyvLLMcB+oUpTmk/JJJca+SK6ZbmCxT/WlOcuFpkyTipLPm6J
- Dcyfdiwkk0syqhMNFfLin5R7Ap3qF5AnTyQLmYTh7t3a7l7N69d7Tu0fkQ6udHbKbmDU82MJvx7
- NNpEuwuNC+jcEz2M6slKCPEkxngw8ejD67JxorIZtKnvCzVfraFikN/4SJ3HtH7eutLKOK+iadv
- qYKGEpb49dQvwMWABzfV9ojaovS5A8D3Oz681qMW6ol+JJVWkq3eOEvKxHv6nLxmE/nDKGo8bRp
- fA7bUOj2dQnexL0UWSQgP5PFBc4ki8hAs0tZNsCRzyiTAvMc4Bzkqb5nSlTI/MaTe54Tpovf/60
- wufH66f52D6ORdUoCRMEP5xSfhf2A2WSB5xXa+9Of2cBMosI+cGXwLkHYUTjgLL5UzFBt8lO7fc
- w2MrW2XEXxmqHiakMfg==
+In-Reply-To: <aqCKgM1yCbWjFdgO@baldur>
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTA5MDEzMSBTYWx0ZWRfXyTD6aaVp+x6h
+ jup74jncaVzpTFIsoHtlb7N04UodOG0rBgN2O4f+396izEhL6vZQ3Rn8XEQKubO8wdGFHvlBnQg
+ zDgdNX/3gdxAJ8wWtcCWM8xtFVgHLSc=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTA5MDEzMSBTYWx0ZWRfXz4weC4IgQ6I1
+ nhA247tYPAx4K5KAvQj93kfayf0msZjkCJUDPKm1gnKkfOAIRL5J0xyQ8eopnVfU3CuThcZ8r3B
+ pnsusQ2Y02ot4TkOIpNG0IwpGRwZNF2An8M4A62d7jC8hZN04XwpnkX8kQx8y1umN6nxg/GIxgU
+ B1Sa8gS7L6FFZH5QUa52J0g7hIrwqiESZBR5cpybGgO/fmLNa/Ml43IDwHx3D4JL8ldtDM6y9ct
+ rvYhT8fw5cJEr8VZo2m5DDUxETiUK2/U9xPYilUZHrz3fV1mrPZaSDUSIVNgzIDrTAI+X/AZfEK
+ nZchh7cBpssQ1cjrdv7Npiu7Uipa6SPUZsfljSkVwdVJbjDhSlLQeumI2KTXlBJdA72XVto7A4G
+ OoOzF4rMoFUiIivwYFoF4wMIau76QFnAsoD58hFXjwTfvDFy7l6Uwi5byEL/olbXsx3gbt6+ajv
+ QYrwtaQmkpf8+KgKmZQ==
+X-Authority-Analysis: v=2.4 cv=UeFhjqSN c=1 sm=1 tr=0 ts=6aa1478f cx=c_pps
+ a=KB4UBwrhAZV1kjiGHFQexw==:117 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
+ a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22 a=VwQbUJbxAAAA:8
+ a=RNmUHPL9eSbnRv9Ut4YA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+ a=o1xkdb1NAhiiM49bd1HK:22
+X-Proofpoint-ORIG-GUID: L3jGJlRTkqOhiNAiniG15VZfsyn6P10k
+X-Proofpoint-GUID: L3jGJlRTkqOhiNAiniG15VZfsyn6P10k
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-09-08_03,2026-09-09_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 lowpriorityscore=0 adultscore=0 spamscore=0 malwarescore=0
- suspectscore=0 impostorscore=0 bulkscore=0 priorityscore=1501 phishscore=0
+ suspectscore=0 clxscore=1015 phishscore=0 lowpriorityscore=0 bulkscore=0
+ priorityscore=1501 malwarescore=0 adultscore=0 impostorscore=0 spamscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2609090131
 
+On Tue, Sep 08, 2026 at 05:44:10PM -0500, Bjorn Andersson wrote:
+> On Wed, Aug 26, 2026 at 06:37:00PM +0530, Ekansh Gupta wrote:
+> > On 20-08-2026 20:17, Rob Clark wrote:
+> > > On Wed, Aug 19, 2026 at 11:15 PM Krzysztof Kozlowski <krzk@kernel.org> wrote:
+> > >>
+> > >> On 19/08/2026 17:48, Rob Clark wrote:
+> > >>> On Wed, Aug 19, 2026 at 8:27 AM Krzysztof Kozlowski <krzk@kernel.org> wrote:
+> > >>>> The rule of usptream development is that we do not accept duplicated
+> > >>>> code, just because a vendor wants to write something new. This is
+> > >>>> basically the concept applied all over the drivers tree, where we pushed
+> > >>>> back against all sorts of duplications all over the vendors.
+> > >>>>
+> > >>>> What I miss in this thread is why would there be any exception here. We
+> > >>>> do not grant exceptions from standard practices on "I want" reasons.
+> > >>>
+> > >>> I agree that we should not have duplicated drivers just for vendor
+> > >>> lolz.  But when it comes to adopting common frameworks and integrating
+> > >>> better into the ecosystem, this doesn't seem like something we should
+> > >>> actively discourage.  I don't think this is a case of vendor lolz, but
+> > >>
+> > >> No one discourages it. Following standard Linux kernel practices and
+> > >> requirements is not discouraging, do not twist the narrative here.
+> > >> Again, it is standard upstream review telling that we do not duplicate
+> > >> drivers. Ever, unless there is serious exception needed.
+> > > 
+> > > I wasn't trying to twist the narrative, just trying to come up with a
+> > > path forward that isn't "no" or "improve existing driver", since
+> > > neither of those gets us towards a future using common frameworks.
+> > > 
+> > >> I asked why there should be an exception granted? Is the reason for
+> > >> exception following:
+> > >> "We want to adopt common framework"
+> > >> ?
+> > > 
+> > > Possibly?  But I don't think we want two drivers to be any sort of
+> > > long term solution.  (Ie. as long as venus/iris have co-exist.)
+> > > 
+> > >>
+> > >>> rather reacting to drm/accel emerging as the standard framework for
+> > >>> this sort of driver.
+> > >>>
+> > >>> So how do we get from here to there?
+> > >>
+> > >> What is wrong with my proposal?
+> > > 
+> > > Maybe I missed something, my understanding was your proposal was
+> > > "Grow/replace/improve existing driver instead of coming with a
+> > > duplicate"..  grow or improve doesn't move us toward common
+> > > frameworks.  Maybe "replace" is a valid option.  If there is something
+> > > I missed, then I apologize.
+> > > 
+> > > Options I can think of are:
+> > > 
+> > > 1. Hardware cutoff.. new hw gets new driver, existing hw gets existing
+> > >    driver
+> > > 2. Backwards compat chardev registered by new driver, providing existing
+> > >    UABI.  I'm not 100% sure about the feasibility/drawbacks of this..
+> > >    AFAIU the fastrpc folks where planning a backwards compat layer in
+> > >    userspace, so maybe it is possible.
+> > > 3. exception?
+> > > 
+> > > I'd like to know what the feasibility of #2 is, since at a high level
+> > > that sounds like the best option.  Possibly limit exposure of legacy
+> > > UABI to existing hw so we don't get into a place of needing to extend
+> > > the legacy UABI for new hw?
+> > > 
+> > > But #1 sounds like a non-controversial place to start regardless.
+> > > Possibly with #2 coming as followup and necessary step before eventual
+> > > migration to new driver for existing hw?
+> > > 
+> > > Even if we start with #2, how do we handle first-merge-window
+> > > bugs/regressions without reverting addition of new driver and removal
+> > > of old?  It seems like we'd need a window of a couple release cycles
+> > > where both drivers exist?
+> > > 
+> > > Maybe others have other/better options in mind?
+> > To all, I'm seeking on the approach I should follow to go ahead here. I
+> > can work on implementing #1(as per Rob's list) with hw specific
+> > compatible for v4 if it's acceptable.
+> > 
+> 
+> I don't see any reason for you to define a "hw specific compatible",
+> because as you have shown in this series (and as Rob point out), there's
+> no difference in the "hardware".
+> 
+> The only reason for your "hw specific compatible" is to make a software
+> selection in Linux - and that's not what DeviceTree is for.
+
+That's not exactly true. There are protocol differences. For example,
+polling mode is supported only since a certain timeline in the history.
+Likewise other interface features are not supported on all the FastRPC
+devices. For the polling mode support we were already beaten by the lack
+of SoC-specific compats.
+
+> As such, I don't see that you have a DeviceTree problem at all, because
+> this is a Linux-internal problem.
+> 
+> > #2(compat driver) is something that we are still exploring as we
+> > couldn't find any standard way to achieve it. We might start a separate
+> > discussion for that once we have few possible designs with us.
+> > 
+> 
+> This is the actual problem!
+> 
+> We have existing user space that depends on the ioctl interface exposed
+> by the current misc driver. You must not break these.
+
+This is clear.
+
+> Hardware cutoff is not a viable solution, because that's just a
+> declaration that we'll let the old platforms rotten - or alternatively
+> you commit to maintain two drivers to the very same feature and quality
+> level.
+> 
+> So the only reasonable solution is #2; from there it's a valid question
+> if you reach that point my stepwise migrating the current misc driver
+> that solution, or if you present a new driver with the fully backwards
+> compatible interface, alongside the new ABI.
+
+I think the general direction was #3 (or #2.1): implement a shim layer
+on top of the QDA driver as a separate module. Put all the historical
+over-complicated solutions into that shim module and let it die at some
+point. Current fastrpc driver lets userspace specify buffers in several
+different ways, forcing the kernel driver to perform a lot of work
+with buffer addresses. I don't think that this legacy code should be a
+part of the QDA. It can go to qda-fastrpc-shim, keeping it out of the
+kernel memory if it's not necessary.
+
+> But this does bring to a question which the cover letter should explain
+> - but doesn't: what problem does this patch series actually solve?
+
+I agree that it should be a part of the cover letter.
+
+As a person who triggered this work, I can propose my reasons:
+
+- Current driver has over-complicated memory manager (both on the
+  userspace and on the kernel side). Correspondng uAPI is not really
+  suitable for virtualization. Using GEM simplifies both the kernel
+  driver and uAPI. Also using handle-offset-length to specify the
+  buffers makes it easy to support virtual QDA devices.
+
+- Current driver predates the accel subsystem. Using common subsystem
+  simplifies reviews. The QDA driver has gotten several comments about
+  the usage of the DMA-BUFs. It'not unlikely that the same issues are
+  present in the current FastRPC driver, just being unnoticed.
+
+- The ideas present in the current FastRPC driver also predate the
+  current design practices. The uAPI was created in the ad-hoc way, just
+  following the momentary needs. Driver code also shows the result of
+  that, having enough of the spaghetti code.
+
+Given all of that, yes, it is possible to provide an evolution of the
+FastRPC driver into the accel+shim, improve the code quality meanwhile
+and end up with the good enough split. However I think that the path
+taken would be longer and the net result might be worse.
+
+With all of that in mind, my suggestion is to continue working on the
+QDA driver, get the core of it to integrate nicely with the accel and
+DMA-BUF usage requirements and implement the (minimal?) fastrpc shim on
+top of it.
 
 
-On 9/9/2026 4:30 PM, Manivannan Sadhasivam wrote:
-> On Sat, Sep 05, 2026 at 06:18:49AM +0530, Krishna Chaitanya Chundru wrote:
->> dw_pcie_suspend_noirq() normally calls pci_host_common_d3cold_possible()
->> to check whether every downstream endpoint can be put into D3cold before
->> bothering to move the link to L2. If no endpoint supports it, the
->> function returns early and leaves the link up.
->>
->> Querying D3cold support during shutdown is actively harmful, not just
->> slow: pci_host_common_d3cold_possible() requires every active endpoint
->> to already be in PCI_D3hot, and returns false otherwise. If any endpoint
->> is still in D0 -- which is common, since endpoint drivers aren't
->> guaranteed to have suspended by the time the host's shutdown path runs
->> the check fails and dw_pcie_suspend_noirq() returns early without ever
->> moving the link to L2, leaving it up right up to the point where the
->> system cuts power/clocks to the controller.
->>
->> Add a "force_d3cold" flag to struct dw_pcie_rp that callers set
->> explicitly to force this behavior, rather than having
->> dw_pcie_suspend_noirq() infer the shutdown/reboot case itself from
->> system_state. Still call pci_host_common_d3cold_possible()
->> unconditionally, since it's also how "pme_capable" gets set, but ignore
->> its return value when force_d3cold is set and force L2 entry regardless.
->>
->> Signed-off-by: Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>
->> ---
->>  drivers/pci/controller/dwc/pcie-designware-host.c | 5 +++--
->>  drivers/pci/controller/dwc/pcie-designware.h      | 1 +
->>  2 files changed, 4 insertions(+), 2 deletions(-)
->>
->> diff --git a/drivers/pci/controller/dwc/pcie-designware-host.c b/drivers/pci/controller/dwc/pcie-designware-host.c
->> index f5a38e6fd8d7..a8a3861c2956 100644
->> --- a/drivers/pci/controller/dwc/pcie-designware-host.c
->> +++ b/drivers/pci/controller/dwc/pcie-designware-host.c
->> @@ -1224,14 +1224,15 @@ static int dw_pcie_pme_turn_off(struct dw_pcie *pci)
->>  
->>  int dw_pcie_suspend_noirq(struct dw_pcie *pci)
->>  {
->> -	bool pme_capable = false;
->> +	bool d3cold, pme_capable = false;
->>  	int ret = 0;
->>  	u32 val;
->>  
->>  	if (!dw_pcie_link_up(pci))
->>  		goto stop_link;
->>  
->> -	if (!pci_host_common_d3cold_possible(pci->pp.bridge, &pme_capable))
->> +	d3cold = pci_host_common_d3cold_possible(pci->pp.bridge, &pme_capable);
->> +	if (!d3cold && !pci->pp.force_d3cold)
-> I asked for a parameter in dw_pcie_suspend_noirq().
-I misinterpreted your comment,  I will do it next series.
-
-- Krishna Chaitanya.
->
-> - Mani
->
-
+-- 
+With best wishes
+Dmitry
