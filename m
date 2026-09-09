@@ -1,80 +1,77 @@
-Received: from mail-wr2-f12.google.com (mail-wr2-f12.google.com [74.125.225.76])
+Received: from mail-wm1-f51.google.com (mail-wm1-f51.google.com [209.85.128.51])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8CDAC378D94
-	for <linux-arm-msm@vger.kernel.org>; Wed,  9 Sep 2026 17:24:47 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.225.76
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1845137AA86
+	for <linux-arm-msm@vger.kernel.org>; Wed,  9 Sep 2026 17:54:02 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.51
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788974689; cv=none; b=KbP2rCi+Btlfj93gO+UpweNRxQ9+C4gVwiOUgIc7g+y0xqrXkVsMFgWq+0VfW5PyHrcW76IrMHUilEatJGz9dIHV6Raky4dHs1yTC8weNL+aYTnFxmyrOSfPfUDNgDLTGg6O3cUQbHrdV1mcllzCYiNr/6etnD4GAHD0DThZW+0=
+	t=1788976444; cv=none; b=eojvxFjLKmzlEGUmegZKuLjJiBptbkG3AwEeyus+ZprfR74KoTW5XwZe32uhv0QqgFaa4tbrI+u/CnKoLb0rDiNgb106Nq9Zo3kdje7rDa/v5uvOMmqJm7yxHKrUSoOtmqIwKNxUugPJlqkBL+FQg89XnAPzCefUZ2XUQ2in1ic=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788974689; c=relaxed/simple;
-	bh=KcdkskPZc+id3U9zkCYQWYCGpi5lTG9LAShHAZoo/Y0=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=t0YlpVXjeVrMe4GrerrtEcWM1gP9RIqnsgUW9TFOzQ5c1ojY7LuzlMM3DiEGDUeRuoVQXfdJKSaR49MXzugGyYldfOQJ2JDLCaMbZF7ciPipxV/m5hLMthGQQHc/z90FVN4A2RLuNZLpEG0SblYsgqKYk+CqD0T+sw5djDt586Q=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=GSg/tEIP; arc=none smtp.client-ip=74.125.225.76
+	s=arc-20240116; t=1788976444; c=relaxed/simple;
+	bh=EMnT4kHchx2+P/lmChz1dpPEcXLACq2mnqCNT6dOulI=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=bk2BpoCXYce1prRc39imhbilKX7zad25McOx+XGbcvlLASiPV1zUeQxAvqpJ+aeffTev0CSxRQlCd1cwrCx2zeTxIoLPHlHPxlyubFggUdtC3rNEZtjIh6WjqbtoD5qGtZVND4nU+po3mtLbVFSMPfE2dFR1q7eGhBp6Q/oiJrs=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=ZXJLnFYf; arc=none smtp.client-ip=209.85.128.51
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="GSg/tEIP"
-Received: by mail-wr2-f12.google.com with SMTP id ffacd0b85a97d-485b1d2874aso447524f8f.1
-        for <linux-arm-msm@vger.kernel.org>; Wed, 09 Sep 2026 10:24:47 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="ZXJLnFYf"
+Received: by mail-wm1-f51.google.com with SMTP id 5b1f17b1804b1-49b0d8bc2aaso75450165e9.0
+        for <linux-arm-msm@vger.kernel.org>; Wed, 09 Sep 2026 10:54:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1788974686; x=1789579486; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=/Bekkl4qhHUf311IFcNmMeQeQNaNKK+Rl4rP+OQD2u0=;
-        b=GSg/tEIPcHNuJw3iTN7FBb/EKk3i/MDXtijd00PFP48SxYsLlnVJ8MVDW3OWpH2qAQ
-         NSee93xdsu8HaSXNrptstRrgaFprXpsZ2+GMQYDmAIB8WAnyvBtjRI0HxSSMnNvBWOaG
-         +kjeNMU8vrUPtX9YKrIBcubDBQE8kuekv8Ops4bclqKPha4MWpAy+u0LDMd3Rs4cu/qA
-         gzk5bIJosrSC5/XknaYcbTClDeDbz8fbNGZrYAWwQbWQczVKIwKiD4Ir8zSPInJhVxKz
-         XB/ZGwnz8vJBh8eqGxUZxe5IfWvJeWJuZ9ocx2xNrCBta2wfB3Dvx9pJPgs0BYr7Uqyz
-         1m/A==
+        d=gmail.com; s=20251104; t=1788976441; x=1789581241; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=O5n70PUZZye6R/YP7VdE8nN7+zey26ZUi2vpqGJsQtg=;
+        b=ZXJLnFYf5AbyDEjAicmwiejoI3dQ3zCDZgX9pgqwIB3XybJB/YtPaVyfaYRbq/bxfG
+         qPGBFeIPpyT6pKHEtEIqkP+Gu2tdhiKiKU1UlrD5IhjqHLeUmR0Baycz+km7tFgeFuwj
+         v1ULEQsZf94kUetp9r9+L8pnEk2nyv6OFaIepdJt0fIrzFubYEoxAnjagu1cYcDhhSJA
+         LFUUlAX5gdsviJUGAFTwCxRcVwAxouMAPnytckmm9O86r+bBLsaLcbzo8vXxL/bgjNRw
+         BhGvltGkNwlKhE5QVwXQK5j44FkLmEKS8a/R5JbB3ItbzLMxDB1d7a25LDdkO4sbwjhQ
+         dpBQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788974686; x=1789579486;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=/Bekkl4qhHUf311IFcNmMeQeQNaNKK+Rl4rP+OQD2u0=;
-        b=bxtOTzmUMz6Db4tFbWC2j94wZjeuK07OEUCu1AEC5t93QAIde7gwDWLbgfElTpltqF
-         MVE+llQJYIqeyvKRCQn4/0Y7X6a1APaEj7iboSIIStR7cZDpBtin3vaQJmYmoY7lAbcK
-         zf5g7HRfwWN2eXGpuCTWV6lTHW1H9Jb/4yZh1qpIQklj9zNQXvfmti26K1wf64VxfZBt
-         BuJN1lyDUFryfpcFiv5ZAYBqc/ydjEMa2EG+CC+4XudJX3/WLtIp8u0Fm3Sj1rZuJMOH
-         W2yMlIanbWNdGXZ5aaBjDP07kXPUHGfGA3LHdou+CD1T1P+wJw2wdrFwg3StNZuG6MI+
-         sLKg==
-X-Forwarded-Encrypted: i=1; AKwUvBw0mqa/LkvzdGcgO0i7D2pZNsHBwfeC10+GBQRis2ap73/p5SXtVEwT30o7SVO65u4YBIJkmvscl2liSNVf@vger.kernel.org
-X-Gm-Message-State: AFuF++nYflP8SoZksIdisGQK7dEk3epF02TZYIqwfBuPF9lGTkDf1VHJ
-	LKl1CCJKOT9SM5MywvFY9bhFrXRDpvXlvATcqttzy1aqU2GJNEjkdrJn
-X-Gm-Gg: AYBFou2HNH8f0M5XbO2e31c1k80mvCXsbI8TtUCCpCJZDiKaTlaarIIEg778bgM0pdL
-	5xBQb0F8gKkuu1iR+12Q8/lZsoiLdgtf6FMlhJcDZOMlEnZ0m3E3RxtxCmKOoTtfCbA6YrKJaos
-	kTdyejLbApDpLl2u93hMijMU5lspvEg/O1zIFlJ4Xqnpxib99l+CmhzehSxkzBtCxkuvCTvYcD0
-	5TSSqo3MjVkHcWiClFAzmxpvetKwp/BGNoWwRlR2b7wzTadtOL5jOix1UOOBqS5BTTq2Qt+shQa
-	5Z+VqyKTKlitzYu60TT4HFbe2z6XciPz8vKHmjQM49Lg6D2HgnVl3t+HSlcg9qThrxZXOF32rgg
-	E0wFlCII755GOm2Bz5wNU9F0sqk/Zx6BuGdXX4xW5U7LIYvVHDws/FfGmnZSQhdCDWEqmL+FulH
-	t4ABrw8kHxh+SdGyFWSLY7+JyG79Du7YlDIao4Km83Aq0DnHntw5OdBn/dvOW6SpRDJqbImxaTy
-	JYWtZCHK0SzxvhCrVJKKez3b2/RBR59146rbFo6iWRFvgCl0dfEaityeviOOI3yRT/+
-X-Received: by 2002:a05:6000:22c5:b0:485:847f:fd9b with SMTP id ffacd0b85a97d-485ba5ac3f3mr4734806f8f.6.1788974685634;
-        Wed, 09 Sep 2026 10:24:45 -0700 (PDT)
-Received: from archlinux.ht.home (89-74-4-99.dynamic.play.pl. [89.74.4.99])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48591eb3d3bsm30311792f8f.0.2026.09.09.10.24.44
+        d=1e100.net; s=20251104; t=1788976441; x=1789581241;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=O5n70PUZZye6R/YP7VdE8nN7+zey26ZUi2vpqGJsQtg=;
+        b=e9c9Zx92+GxRG2PWOK5rYApRjE2EP/fna4CzTtcF7RQ/KreDXyz0JP+2H2J22w20TK
+         voAPmB/mOq4aXC+gBhVQTYoMX15Omj9/8iu3h9mX63cSJt8McDifCJGDiUi/KY8z7i7k
+         4aN+5xB87MRYKVXJQ7m7DPmHNT0d0xW0T082SIicp84yN/mkk4sZpISaYXkOCZX2nlfE
+         LlfKEXVOE5ItAS86F9QeOzzYGEWnkQHYEq2GuFbJtQr8M+HBTtMk1KG42UD6+Qr7Zg7c
+         +GSFF9GAgmdylAtt+hUoktZfAovRKpwY+XyG8sSjeprXY/rgwt7Cby56QFWbwQLa9yEJ
+         JPzg==
+X-Forwarded-Encrypted: i=1; AKwUvByHvlhFx+j82WkE/UN+mquYAvsjJXRg03ulXDCNu9UuvAnQ+oEY56hVVtnHVDX9rJ8iEY66wyWrctS12e6X@vger.kernel.org
+X-Gm-Message-State: AFuF++kdYF56V2simcRoSoUMFKQFRjAL0/lD/oQqfY1TjxjP12LswSmd
+	GU3Vwio84fc0ZLGdUd1Xg5Hm6LHtJRivxkl0WzZApMMjhxg90lBtpGOwfD9d5ZSW
+X-Gm-Gg: AYBFou3Pu9YoPcDJ32Sb5k1nd2EI4B7rhtznbCLksXVE6aSTLc3pE6m4AHehdb+xbta
+	T880Kxm2XkUic9KakisQjo5SZwCJvvANjVUOIpr92t2YoPkzDl+gXodYepmkuulyA3bRITlGkIO
+	c+EwnD4Rg/dEddZacq9lDY8X5ktzMoBvFv1yih4t4SCbWQl67TvCLj42fN8OtgFQkVGl8YcJ5lP
+	rsNOodShkRagNg3qcXkLtH8viS2G4VvjOtNxYCrjt+m3zOyG4RxjGtxZQBcl+7KpJ0lpdXfDuTA
+	bqk1tqaPms/N9quEQY3N3yL305pL3acEzT0lCxIgfNqhzA/as8YJt5mmtB/P6pON2KNx3Z8LT3V
+	QfBPxeXd6H+Sw3PEG56XVN8qWn2jJTyGaDKP7hNZBJ5eaHu6OH5cbUPRTwZiPpkzwwHJHoPqUvn
+	1Tfg3lUF9wYmylyfdcy3qY0SdR9H6w43bXlqbgP9yV1+Un+aT8ADuTjvWkexzBmYi+cVIwde92Q
+	Mk=
+X-Received: by 2002:a05:600c:4684:b0:49c:fc6c:be14 with SMTP id 5b1f17b1804b1-49cfc6cc10bmr334315895e9.26.1788976441025;
+        Wed, 09 Sep 2026 10:54:01 -0700 (PDT)
+Received: from Empers0n ([193.23.219.104])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-49d1fd532dcsm68031755e9.1.2026.09.09.10.53.58
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 09 Sep 2026 10:24:45 -0700 (PDT)
-From: Jan Paszkowski <jan.m.paszkowski@gmail.com>
-To: andersson@kernel.org,
-	konradybcio@kernel.org,
-	robh@kernel.org,
-	krzk+dt@kernel.org,
-	conor+dt@kernel.org,
+        Wed, 09 Sep 2026 10:54:00 -0700 (PDT)
+From: Vsevolod Nevorotov <sevanevorotov29@gmail.com>
+To: vkoul@kernel.org,
+	dmaengine@vger.kernel.org
+Cc: Frank.Li@kernel.org,
+	andi.shyti@kernel.org,
+	mukesh.savaliya@oss.qualcomm.com,
+	naresh.maramaina@oss.qualcomm.com,
+	aniket.randive@oss.qualcomm.com,
 	linux-arm-msm@vger.kernel.org,
-	devicetree@vger.kernel.org
-Cc: marijn.suijten@somainline.org,
-	Jan Paszkowski <jan.m.paszkowski@gmail.com>
-Subject: [PATCH 1/1] arm64: dts: qcom: sm8350-sony-xperia-sagami: enable UFS
-Date: Wed,  9 Sep 2026 19:13:12 +0200
-Message-ID: <20260909172421.33593-2-jan.m.paszkowski@gmail.com>
+	linux-kernel@vger.kernel.org,
+	Vsevolod Nevorotov <sevanevorotov29@gmail.com>
+Subject: [PATCH] dmaengine: qcom: gpi: Set IEOB on linked I2C GO TRE to retire TX descriptor
+Date: Thu, 10 Sep 2026 00:53:32 +0700
+Message-ID: <20260909175332.304767-1-sevanevorotov29@gmail.com>
 X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20260909172421.33593-1-jan.m.paszkowski@gmail.com>
-References: <20260909172421.33593-1-jan.m.paszkowski@gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -83,43 +80,77 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-The UFS bug that haunted the Sony devices seems to be gone this
-generation. This patch enables it for the ability to use internal
-storage.
+In GPI mode, an I2C read transaction consists of a command phase on the
+TX channel (issuing CONFIG0 and GO TREs) linked to a data phase on the RX
+channel (issuing the DMA TRE to receive data).
 
-Signed-off-by: Jan Paszkowski <jan.m.paszkowski@gmail.com>
+Commit 656147fb1d4c ("i2c: qcom-geni: Avoid extra TX DMA TRE for single
+read message in GPI mode") avoided programming a dummy TX DMA TRE for read
+messages, leaving only the GO TRE on the TX channel with the TRE_FLAGS_LINK
+flag set.
+
+However, gpi_create_i2c_tre() did not set TRE_FLAGS_IEOB (Interrupt on End
+of Block) on the linked GO TRE. Because no TRE on the TX channel has an
+interrupt flag set, GSI hardware never generates a completion event on
+the TX channel when the GO command finishes. As a result, the TX transfer
+ring read pointer is never advanced and TX descriptors are never retired.
+
+Under sustained or high-frequency traffic (such as touchscreen controllers
+operating at 120-240 Hz), the TX transfer ring quickly runs out of slots:
+  gpi 900000.dma-controller: not enough space in ring, avail:1 required:3
+  geni_i2c 990000.i2c: prep_slave_sg failed
+  geni_i2c 990000.i2c: GPI transfer failed: -5
+
+Fix this properly by setting TRE_FLAGS_IEOB on the GO TRE when multi_msg
+is true (matching Qualcomm's hardware specification and the existing SPI
+implementation in gpi_create_spi_tre). When the hardware finishes executing
+the GO command block, it generates an MSM_GPI_TCE_EOB event on the TX
+channel. In gpi_process_xfer_compl_event(), handle MSM_GPI_TCE_EOB for
+linked I2C command descriptors without a subsequent TX DMA TRE by
+retiring the descriptor and updating the cookie without invoking the
+client callback, allowing the linked RX channel's DMA completion
+(MSM_GPI_TCE_EOT) to signal final transfer completion to the client.
+Other EOB events fall through to the default transfer completion path.
+
+Fixes: 656147fb1d4c ("i2c: qcom-geni: Avoid extra TX DMA TRE for single read message in GPI mode")
+Signed-off-by: Vsevolod Nevorotov <sevanevorotov29@gmail.com>
 ---
- .../dts/qcom/sm8350-sony-xperia-sagami.dtsi     | 17 ++++++++++++++---
- 1 file changed, 14 insertions(+), 3 deletions(-)
+ drivers/dma/qcom/gpi.c | 13 +++++++++++--
+ 1 file changed, 11 insertions(+), 2 deletions(-)
 
-diff --git a/arch/arm64/boot/dts/qcom/sm8350-sony-xperia-sagami.dtsi b/arch/arm64/boot/dts/qcom/sm8350-sony-xperia-sagami.dtsi
-index 4b62ee50da7b..969c8cb31df9 100644
---- a/arch/arm64/boot/dts/qcom/sm8350-sony-xperia-sagami.dtsi
-+++ b/arch/arm64/boot/dts/qcom/sm8350-sony-xperia-sagami.dtsi
-@@ -893,9 +893,20 @@ sdc2_card_det_sleep: sd-card-det-sleep-state {
- 	};
- };
+diff --git a/drivers/dma/qcom/gpi.c b/drivers/dma/qcom/gpi.c
+index a5055a6273a..a1ab63bf9f6 100644
+--- a/drivers/dma/qcom/gpi.c
++++ b/drivers/dma/qcom/gpi.c
+@@ -1050,6 +1050,13 @@ static void gpi_process_xfer_compl_event(struct gchan *gchan,
+ 			return;
+ 	}
  
--/* BIG WARNING! DO NOT TOUCH UFS, YOUR DEVICE WILL DIE! */
--&ufs_mem_hc { status = "disabled"; };
--&ufs_mem_phy { status = "disabled"; };
-+&ufs_mem_hc {
-+	status = "okay";
-+	reset-gpios = <&tlmm 203 GPIO_ACTIVE_LOW>;
-+	vcc-supply = <&pm8350_l7>;
-+	vcc-max-microamp = <800000>;
-+	vccq-supply = <&pm8350_l9>;
-+	vcc-max-microamp = <900000>;
-+};
++	if (compl_event->code == MSM_GPI_TCE_EOB &&
++	    gchan->protocol == QCOM_GPI_I2C &&
++	    (gpi_desc->tre[gpi_desc->num_tre - 1].dword[3] & TRE_FLAGS_LINK)) {
++		dma_cookie_complete(&vd->tx);
++		goto gpi_free_desc;
++	}
 +
-+&ufs_mem_phy {
-+	status = "okay";
-+	vdda-phy-supply = <&pm8350_l5>;
-+	vdda-pll-supply = <&pm8350_l6>;
-+};
+ 	if (compl_event->code == MSM_GPI_TCE_UNEXP_ERR) {
+ 		dev_err(gpii->gpi_dev->dev, "Error in Transaction\n");
+ 		result.result = DMA_TRANS_ABORTED;
+@@ -1668,10 +1675,12 @@ static int gpi_create_i2c_tre(struct gchan *chan, struct gpi_desc *desc,
  
- &usb_1 {
- 	status = "okay";
+ 		tre->dword[3] = u32_encode_bits(TRE_TYPE_GO, TRE_FLAGS_TYPE);
+ 
+-		if (i2c->multi_msg)
++		if (i2c->multi_msg) {
++			tre->dword[3] |= u32_encode_bits(1, TRE_FLAGS_IEOB);
+ 			tre->dword[3] |= u32_encode_bits(1, TRE_FLAGS_LINK);
+-		else
++		} else {
+ 			tre->dword[3] |= u32_encode_bits(1, TRE_FLAGS_CHAIN);
++		}
+ 	}
+ 
+ 	if (i2c->op == I2C_READ || i2c->multi_msg == false) {
 -- 
 2.55.0
 
