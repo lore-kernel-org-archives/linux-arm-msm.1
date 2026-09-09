@@ -1,49 +1,46 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 607F9323416;
-	Wed,  9 Sep 2026 07:28:49 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7BEE33D9DA9;
+	Wed,  9 Sep 2026 07:30:17 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788938930; cv=none; b=gYzsryWueLHK/85yG8xj2B/baH4290Rh14igU8buBUVu5bRaWYpKaJrHxbPmoSUj8s+17N94CqVFKDR1t8OcWG1Vwof45+hSXhcwRatVlwGQv+qcZ/DSmsp6aesqd9x6p1MbSSsRUPT7BDSh9r3xmcPV19loStnfwykgZn3pE4o=
+	t=1788939025; cv=none; b=A+45von2MRc7v7O4BlFfWawd0PN6U2zreYlArYF4D9AoKeyNCwRACcqQ//0J/3yN75XGLHHmgyIyHsRyTF5h0CRSfsLIFsRs5TEWvQLZHBjiS2AYmnyOh6nR6I6MQ80Lq6KVhHys6BqwmPUU3RE3SPFJk3v200Q49qJEIDPOlKg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788938930; c=relaxed/simple;
-	bh=8yVzF90AoaAUb8R+7eeWxFRhtRbFA35v3+7WbXbVEDY=;
+	s=arc-20240116; t=1788939025; c=relaxed/simple;
+	bh=r8Pt05tOLsQVDNpEjrnfBltDznJH3HlN+GGjwIt/5vU=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=FQQ4VRNPiqb1PLv1xuJfyS471kch/0EQ19D0Xve8UKztW+kMD3iHxLYv64w6w/uC5r8Dh6SM/3HPlZoiWgD03JqnMa7XtwhJB9cFFfwEMwBy82K8NwAVT/PpPlpIafmdNMc4MrEI2cHA8BAgAqYp/m4vJ/tW6BPTG0zTfMGFvkc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=KsOz/14p; arc=none smtp.client-ip=100.103.45.18
+	 Content-Type:Content-Disposition:In-Reply-To; b=fdIuNtKw/0GHZmP9ks+NE7XUiG+g821MsI4s26a8UsDj+hCK4pcYoBwQrBbhJ3wXI5YqCZZgVGqJUZg0VrQ0HOWRbbMD5UuIhUyzqrOAxDWsatnuMOubtaJKuxOQou/FExNmo/NhyuZ0AvXBiIL0ifOWzF1rD5G21uw2MMRZCJw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Ry05l2AG; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="KsOz/14p"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 008D31F00A3A;
-	Wed,  9 Sep 2026 07:28:47 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Ry05l2AG"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 21D461F00A3A;
+	Wed,  9 Sep 2026 07:30:10 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1788938929;
-	bh=t+tV0/lAuT7CI4Ui5m8EmZlQe7dn2V6hXPejm7rkrWo=;
+	s=k20260515; t=1788939012;
+	bh=sMcLwJpcSb7+w22fu/uKQDJRMv/mZfHVYmTvM3dJGyM=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=KsOz/14poZfHaEGIYearElwNKpYepOycHddfz19fcbPukp3QY0jFiThoKoo6dH8ox
-	 ruNgL2F2sgLxRWLbCzTid0KtgtOALFDWS1/vZn+0RHolpOCqWjj51MW+dFmHSs328p
-	 6V68IYu/RTvevUQrL5vSfTOWwYf+AEnrwBYR4E8Zp5nIdgB9OJUrc8UpWc+0oJ4ZjG
-	 UStIj/s7p9/UgYcAQypYG0aTynHwQQD+92scbsmHbu0AgO9XuUeCxDFmBbZJEq5KBD
-	 rGZ3f+YTeCovtgRktywNP4E+0jPaFWh/uVIrE++8FWGiZnvOwp8jm7Bwx0IyuHCRpR
-	 FmRE+ukf41yVQ==
-Date: Wed, 9 Sep 2026 09:28:45 +0200
+	b=Ry05l2AGPFbuEm3vj0K0mvu4uXnh5I+6d1lM7v1nOmwOTaU6RuQ7hqG+ECd7vtgU/
+	 /TBIEDK2f5OCl2rPtlgxhlh53/bPEOZWDDdB4s8IaeeNlRADr0z8PvbuJYNRwxySsf
+	 WOK8X5VMWCFXoFN0nXZYEhm4FDkEqYRpV7YQbqhm78W08ttcQ1NEkaKEkLAzaesMWE
+	 5pKNtzEclT9zsSvAeFfsah9udo+v0U4oqsP1KJk/LSs/2utD8JVHzehON6jL5UfZGT
+	 HxiGJkgGTKXzg5410y9pDrT0k5OHPBHLMd8Z7OU32XcUcBg9Pr/77DGyT8Iibs1yEe
+	 IxJMdxI7EvT5A==
+Date: Wed, 9 Sep 2026 09:30:08 +0200
 From: Krzysztof Kozlowski <krzk@kernel.org>
-To: Lorenzo Bianconi <lorenzo.bianconi@oss.qualcomm.com>
-Cc: Bjorn Helgaas <bhelgaas@google.com>, 
-	Lorenzo Pieralisi <lpieralisi@kernel.org>, Krzysztof =?utf-8?Q?Wilczy=C5=84ski?= <kwilczynski@kernel.org>, 
-	Manivannan Sadhasivam <mani@kernel.org>, Rob Herring <robh@kernel.org>, 
+To: Jagadeesh Kona <jagadeesh.kona@oss.qualcomm.com>
+Cc: Bjorn Andersson <andersson@kernel.org>, 
+	Stephen Boyd <sboyd@kernel.org>, Brian Masney <bmasney+clk@redhat.com>, 
+	Jerome Brunet <jbrunet+clk@baylibre.com>, Rob Herring <robh@kernel.org>, 
 	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
-	Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>, Linus Walleij <linusw@kernel.org>, 
-	Bartosz Golaszewski <brgl@kernel.org>, Bjorn Andersson <andersson@kernel.org>, 
-	Konrad Dybcio <konradybcio@kernel.org>, Michael Walle <mwalle@kernel.org>, 
-	Alex Elder <elder@riscstar.com>, Daniel Thompson <daniel@riscstar.com>, 
-	Sushrut Shree Trivedi <sushrut.trivedi@oss.qualcomm.com>, linux-pci@vger.kernel.org, devicetree@vger.kernel.org, 
-	linux-gpio@vger.kernel.org, linux-arm-msm@vger.kernel.org
-Subject: Re: [PATCH v3 1/5] dt-bindings: PCI: toshiba,tc9563: Document
- embedded GPIO controller
-Message-ID: <20260909-fascinating-vermilion-tarantula-0c9dff@quoll>
-References: <20260904-pci-tc9563-aux-v3-0-5b1449d62ba2@oss.qualcomm.com>
- <20260904-pci-tc9563-aux-v3-1-5b1449d62ba2@oss.qualcomm.com>
+	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>, Taniya Das <taniya.das@oss.qualcomm.com>, 
+	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org, 
+	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH 1/4] dt-bindings: clock: qcom: Add TCSR_UFS_CLKREF_EN
+ definition
+Message-ID: <20260909-devout-generous-oyster-0efdef@quoll>
+References: <20260905-glymur-ufs-clk-changes-v1-0-cdff2c67a8c2@oss.qualcomm.com>
+ <20260905-glymur-ufs-clk-changes-v1-1-cdff2c67a8c2@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -52,53 +49,29 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
-In-Reply-To: <20260904-pci-tc9563-aux-v3-1-5b1449d62ba2@oss.qualcomm.com>
+In-Reply-To: <20260905-glymur-ufs-clk-changes-v1-1-cdff2c67a8c2@oss.qualcomm.com>
 
-On Fri, Sep 04, 2026 at 07:15:18PM +0200, Lorenzo Bianconi wrote:
-> The TC9563 PCIe switch embeds a GPIO controller providing 37 GPIO
-> lines. The controller is registered as an auxiliary device by the TC9563
-
-"auxiliary device" is Linux term, so not really relevant here.
-
-> power controller and accessed through the same register map.
+On Sat, Sep 05, 2026 at 12:20:42AM +0530, Jagadeesh Kona wrote:
+> UFS and PCIE_4 share the same clkref enable on Glymur. Hence define
+> TCSR_UFS_CLKREF_EN as an alias of TCSR_PCIE_4_CLKREF_EN for UFS consumers
+> to reference the shared clkref on Qualcomm Glymur platform.
 > 
-> Describe the switch node itself as the embedded GPIO controller and
-> document the per-port reset-gpios property.
-
-Isn't the switch node already described?
-
-> 
-> Signed-off-by: Lorenzo Bianconi <lorenzo.bianconi@oss.qualcomm.com>
+> Signed-off-by: Jagadeesh Kona <jagadeesh.kona@oss.qualcomm.com>
 > ---
->  .../devicetree/bindings/pci/toshiba,tc9563.yaml       | 19 ++++++++++++++++++-
->  1 file changed, 18 insertions(+), 1 deletion(-)
+>  include/dt-bindings/clock/qcom,glymur-tcsr.h | 1 +
+>  1 file changed, 1 insertion(+)
 > 
-> diff --git a/Documentation/devicetree/bindings/pci/toshiba,tc9563.yaml b/Documentation/devicetree/bindings/pci/toshiba,tc9563.yaml
-> index f084830c6d0c..c4cd162cb084 100644
-> --- a/Documentation/devicetree/bindings/pci/toshiba,tc9563.yaml
-> +++ b/Documentation/devicetree/bindings/pci/toshiba,tc9563.yaml
-> @@ -31,6 +31,11 @@ properties:
->      description:
->        GPIO controlling the RESX# pin.
->  
-> +  gpio-controller: true
-> +
-> +  '#gpio-cells':
-> +    const: 2
-> +
->    vdd18-supply: true
->  
->    vdd09-supply: true
-> @@ -84,6 +89,11 @@ $defs:
->      type: object
->  
->      properties:
-> +      reset-gpios:
-> +        maxItems: 1
-> +        description:
-> +          GPIO controlling the reset line connected to the downstream port.
+> diff --git a/include/dt-bindings/clock/qcom,glymur-tcsr.h b/include/dt-bindings/clock/qcom,glymur-tcsr.h
+> index 72614226b113bb60f1e430fc18e13c46c8b043d3..f338ab4454a14aa75532cd0a6a56b6bbb02f9448 100644
+> --- a/include/dt-bindings/clock/qcom,glymur-tcsr.h
+> +++ b/include/dt-bindings/clock/qcom,glymur-tcsr.h
+> @@ -20,5 +20,6 @@
+>  #define TCSR_USB3_1_CLKREF_EN					10
+>  #define TCSR_USB4_1_CLKREF_EN					11
+>  #define TCSR_USB4_2_CLKREF_EN					12
+> +#define TCSR_UFS_CLKREF_EN					TCSR_PCIE_4_CLKREF_EN
 
-Why do you exactly need this? Isn't this PERST, thus already there?
+I could not find usage of this new ABI in your patches. Can you point me?
 
 Best regards,
 Krzysztof
