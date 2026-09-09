@@ -1,211 +1,276 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wm2-f12.google.com (mail-wm2-f12.google.com [74.125.225.140])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2825B559C9A
-	for <linux-arm-msm@vger.kernel.org>; Wed,  9 Sep 2026 12:46:21 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0FB8F559CA1
+	for <linux-arm-msm@vger.kernel.org>; Wed,  9 Sep 2026 12:47:29 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.225.140
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788957987; cv=none; b=eX42D/nWdcxX5501SnGk+BS5w8ILWEAq6FZ0pBW+0wzu9fkgZN6EYpgtlcWn8ZGXhM/hSuo2Tvm6IsTasGrEJ8BfcWT1Lt/rPY18GN9f9rFOkm1Ne96GleI70CfRodig4nziGEpjo9NEpevTIp7AcAxSSuL++hDDQPEyDF8N/II=
+	t=1788958053; cv=none; b=XyPQpPKaaG/VHD+sCuMLEIEVfkiZupiH3dTnK+xKyTQowELuTx4agHkN/ICBWkNH2lc9lYLjxKeNcJP8Vwu/yC3pelYSFqUCigZKlkNsGS0E01Gx/GttllTx4dW1PRNVJoqKswO5Y9tnwKh9oV8qMrMbpv+nBPxm4CQLvS25vWU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788957987; c=relaxed/simple;
-	bh=yI0YtwwDoRq46cm6dlAsPClpp9C16ia2CjUjaVPn11M=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=pT1SUUGYx9jOZpv2pTwHmSzvg3ehm6ozOgdIqWr9vPKdpmrkUY7qQ2sYt373XPg+nYvy0IhQICyVyszeJTLJliZ34WEgNHpnoWQPHcZNLRaKSIQtgfkOAm2Jgtn5qv4WSDr4an2WJNDrGj2n+G/GYR3tdxaNFIGPaFqTbOAs8+A=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=dkkJeDvQ; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=fn43Svxq; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1788958053; c=relaxed/simple;
+	bh=3UKaD4rM4go22sDUpsRlvjUXuf+J3aOuz77zwirxZX8=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=agc7Acd9wF2nl76qdxVL21NBeAjVDRDRp6xB529nzszkvkPvk+DRLMdTx9q6xH1y1AF50infee5DBZhT44tzRA0PQHtvImaYOPi7xQqkUbUujbOJxznmXR/LFScMkaWnTGQuCqpqiYMjGRkCrsdSN33Bo6DsVyeOu+kOdP4UoGw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=cOaxcO+l; arc=none smtp.client-ip=74.125.225.140
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=google.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="dkkJeDvQ";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="fn43Svxq"
-Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 689BUBjg1723429
-	for <linux-arm-msm@vger.kernel.org>; Wed, 9 Sep 2026 12:46:17 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	1Rx/vpo0zvv0ttoTKgs+GGM/ZJwxjq76fMb0r1Xbs2U=; b=dkkJeDvQdQ3LR3Mu
-	2R2KM1Rqn9gxAo8WifsUlLYIdBz/yVuTja/aKb4DseodKUcbyr9FCsnAgcTw2rVE
-	PdNnFEEdM3JXy713aNWi+Lz+jovQn9zxDcWUp2I8Zkslr1OoTU8K1vL9c6At/RGQ
-	+j0HEZgsxELhJjlOOVqEuFPvLslwlrWNwmbJHCv2+/vSFV9DxIQVTSJtHXsk1b4t
-	CnDjS9ccmHDX//Y91u9ZhhZj8P/hNbcKOsGJI9vETDw8bbhh0Cjox+CCkT2hJzbq
-	d4DoRXwEcsf7b8dS6g8iaDN9odOPE7Au7hes4KNL6ZiXhm8yjqFP4HKrb73APElJ
-	lm5Fhg==
-Received: from mail-ua1-f69.google.com (mail-ua1-f69.google.com [209.85.222.69])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gk5cnrk74-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 09 Sep 2026 12:46:16 +0000 (GMT)
-Received: by mail-ua1-f69.google.com with SMTP id a1e0cc1a2514c-97ea2f5863cso54184241.0
-        for <linux-arm-msm@vger.kernel.org>; Wed, 09 Sep 2026 05:46:16 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="cOaxcO+l"
+Received: by mail-wm2-f12.google.com with SMTP id 5b1f17b1804b1-49ccf3bc34cso46725e9.0
+        for <linux-arm-msm@vger.kernel.org>; Wed, 09 Sep 2026 05:47:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1788957976; x=1789562776; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=1Rx/vpo0zvv0ttoTKgs+GGM/ZJwxjq76fMb0r1Xbs2U=;
-        b=fn43SvxqC5a1IYePtyAibLj10CBQTvhMez2KPj0HGMnj4m/t5iO8v/o7zA9b2w717g
-         zC4MiJ15X2J6zEldF/AMmkG2ggZP49lJhH8jb8WaQvIt4JYycf3Xi49nftdzh/3pkuDj
-         bfmQNwO19uwDkEItEyd5gMm5t4Yv6xWBw4DjnneqB2891KwAvnptvryX8V5OC7EY13KO
-         EynIuZ1T/ahkQUiVn6FeFD4yI3fg8+bofetSSynbL4WAq56hXT4V809kwd3UrwNyIpZf
-         dVisZmU33lBghVKIF5UKWCx1FopIS+T+kzwJ6EZ84eo/s7tjJgh2BEb9IuA4FHwz0HTq
-         6O5A==
+        d=google.com; s=20251104; t=1788958047; x=1789562847; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=wuHyN6zqAofLWB78jkKtomccACb9bxHB5O8GjC+eKe8=;
+        b=cOaxcO+lLAbSrEBVKS7D3TTS+6Bafd+2+fXxwdt+2UTrjFEHK7Yk/pw/eOVcJVkXjn
+         /ikOalI/49Bz/pSZjyaHAI6ATg8ZJ2i8MbVl3LZbh/BO2ixOeldGb85Cz0dcpb7+cnx5
+         DCl+Uz5dPeM8u398jxtEjRefu9n/+fPUHDM+zyGtDMEYvK/MTgD09elP8bEqEi55+fHB
+         qz7XUoyNFOUr4YaWW0TrO+TaFfepjaAt7bUNAQU1AyMaF2uBivO1vr80tGeNuOT+dQax
+         r4Uuk6XU7FwidqepE2uZ/yQXcBAH9Jh4Y8LTFYJ4aqqRgse8Kzh4Bzy/0Z82vsQ3aXCS
+         ZMLQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788957976; x=1789562776;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=1Rx/vpo0zvv0ttoTKgs+GGM/ZJwxjq76fMb0r1Xbs2U=;
-        b=gYpBxsHYKqVRftWppk8M6ZZs05Y5UQrO6j6V9kb00X7TrUtY+AWwLZCGfZHTZ72ACr
-         K7/brlx1EuKWFlpB33zrFsyGkFy9Wjf7TlWZudU13Al8hHHKMXRqumsQ9V4uu7KYAD2R
-         trfqIlBGaX9dYqtShxiZp79viZMywKZ6mFRlOAeKoY7spdh6/SmG70JhoT3GZ8fd0zjt
-         vasqE97SGczxNLI1vkNpJt9l0e+BTIHeu7I8VN7ECbwzBMOjT+jV97wrTSpoUYgCcOcC
-         FKNMdio04goC/GHxoRZdovSqrgsLdKGKllZMKZNxDZob2H6NUr6UcNkUScDlu8JIBPmT
-         8jUw==
-X-Gm-Message-State: AFuF++nWkj8iej95W1cl5lIoKiBXUhdml/CDLyQrLV9wVHHbsVJKUkpm
-	zlNqI0fTVi2KqIbPKtuhOpVrndpD43A2PectSaMQBNWFpMvJiIBzQOi8VHSiiORqHzdDCwSWoSB
-	9bdzvDAE8dZKmqaWA5ksYyPTrKZYrA0n1l+DYQRd2R8pjOh5MBSY5OnTQ5PJJFD+e4RF/
-X-Gm-Gg: AYBFou1yAMK+fdcyg6g1BUILbgme78pNEiBfjiuH4F0fJI/b5Em2+wo57boO/Jzknij
-	qhIR0Uis4kXh12qeftTNHU4eKg/uXIhQkaZT1l7Na2DJQ3PdRFRaRsLPi8b/edwx0WEPJrt5nQv
-	g+0/h5vMKw8Hj3TQ/3fvzprs0hPGzVRJ7lQ/HkKSaiMbF8ORDjUt2oI8H/2X1kuJCmIlHYiMRoX
-	iQfRmJmG6OESqNDWYLaTeOmAnoRVFCo3scVr5GpJlb+DBzw7IgKuDdiivrfjIE/2N0+T1g3+P6h
-	cdZNdXOs7jNaYa4AzksaLoDUJspGK0AJUTRmCftQtiQ90O19dlQhH6PuhHYITcqDOLgoF0c+aL+
-	JO452/1FmTijAVgDaHoJw0Q==
-X-Received: by 2002:a67:ebd5:0:b0:790:563:8d1b with SMTP id ada2fe7eead31-79005639f22mr328301137.0.1788957976214;
-        Wed, 09 Sep 2026 05:46:16 -0700 (PDT)
-X-Received: by 2002:a67:ebd5:0:b0:790:563:8d1b with SMTP id ada2fe7eead31-79005639f22mr328244137.0.1788957975073;
-        Wed, 09 Sep 2026 05:46:15 -0700 (PDT)
-Received: from [192.168.202.12] ([178.235.128.140])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c260cb7a18dsm762361366b.0.2026.09.09.05.46.12
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 09 Sep 2026 05:46:13 -0700 (PDT)
-Message-ID: <ae3a76d2-9c46-43c1-8521-398ca23b36e0@oss.qualcomm.com>
-Date: Wed, 9 Sep 2026 14:46:11 +0200
+        d=1e100.net; s=20251104; t=1788958047; x=1789562847;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=wuHyN6zqAofLWB78jkKtomccACb9bxHB5O8GjC+eKe8=;
+        b=iSPTCXSSFVyQrjzAKVdK9ojDiG/bPUQXqPuvfrs5I6Q9OFr0JbHW1vB7FOPMNSHnp4
+         VZwq8USuG1/FABVdWC0Q/imoaKvBlXFnCrpJcpqCfDaSc9lqaX1MQaeEX8UhBCmBa2pb
+         qECi0Ql6gB0XpnOJDoFDfNTcTN9zDbz9TGqyli7YSXepqeLwvBFgX/hFFfDmikfGkJ79
+         pJpuBnhV9XQ69EnO5hRBv2wrnJpN7KQjINwwvzk6Chd0Tpl3PC06Z50qz/J8TM7GYUKH
+         B4q1UyW04SE6fOzZ/qsrMA30C/cyOngdJMuHjp25TXMt+CsA5V/xKGJBD6TfZZjOgZus
+         cjCw==
+X-Forwarded-Encrypted: i=1; AKwUvBwU0kLZNIYQ8Bm/XgKGvSLJHMUHCwwJ+ud0PPl5e1+CeVXGBTMuYtm/p5tnp6J2vH+ntT5sbFi9cZAkUjT7@vger.kernel.org
+X-Gm-Message-State: AFuF++lzt1BtO+6+u8AP2iaCPhwyhrL4Z82MLQPbx5CYOYUdZTi7QBTA
+	5sNbTwhsuhOP2lHGubqVDvPXAja11LSKY0XeirEyZG0KdmCFp2QT0FGjTRUH9F/WTA==
+X-Gm-Gg: AYBFou0IPs1ADV1VhCOtJVmw/6eUgZmsy/N+Fu7cIJCyairghRj3H2mi4D1RBwRLuXJ
+	zDmlKzgx1ya01H04jABBguuG6pEu3f3xZS+n/YEIKMiuPHdoz9g+OUAcdKDcZdepjX71erVgIjH
+	EOEuaGjfszb0sez2WM+Vxlv7lYBTRAg7VW/7iEANbwj7lfBoizXV00NnFv08Ehmtah8TxGf5GHj
+	+ydpbHMnd2SwJvgBPAeMQ6lMgiWkGLkGPbzs79cLCqG28tVYrvvG4nTkUsB75LRxSTM2LIRwtky
+	b6ee+Zdcp8pSvrpU7PR69Y0sqJIkf99cuvH1643S6WtGGbVs7Lw97PigZaAH8xbF00quiSLL5zb
+	YkfYoWhLjNsle0EGiArjaCLLIBoKzITSoOY4BPfnod600XY9BokI45Jp54hLGvz+hyXltBnHCeT
+	xOYpeJHceC4cjERf1hs5MaBTxYI8NV1UX1BBNuHnVAKbi/jJUHmUCS3m3PcxpxHFG3BR1xV9Q1J
+	b1ws3fquIRvlYblyIemeoSVSckiDpdyM5DgKsIf25qQ2kOOQpE=
+X-Received: by 2002:a05:600c:c3ce:10b0:49d:3:4a29 with SMTP id 5b1f17b1804b1-49d2163e1f0mr507365e9.7.1788958046662;
+        Wed, 09 Sep 2026 05:47:26 -0700 (PDT)
+Received: from google.com (250.192.189.35.bc.googleusercontent.com. [35.189.192.250])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-49d20fb2b95sm36271305e9.4.2026.09.09.05.47.25
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 09 Sep 2026 05:47:26 -0700 (PDT)
+Date: Wed, 9 Sep 2026 12:47:21 +0000
+From: Mostafa Saleh <smostafa@google.com>
+To: Jens Glathe <jens.glathe@oldschoolsolutions.biz>
+Cc: Bjorn Andersson <andersson@kernel.org>,
+	Konrad Dybcio <konradybcio@kernel.org>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>, linux-arm-msm@vger.kernel.org,
+	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH 0/7] arm64: dts: qcom: IdeaCentre Mini 01Q8X10 Hamoa +
+ Purwa
+Message-ID: <aqFVWedkcb6PY-oh@google.com>
+References: <20260905-x1-ideacentre-mini-prettify-v1-0-9a87882973bb@oldschoolsolutions.biz>
+ <ap_PdUrwLIVGJ3oG@google.com>
+ <dcae935c-ccbb-4cb5-a184-eb5dc2cc84b8@oldschoolsolutions.biz>
+ <ap_qwdz-3WibXRjq@google.com>
+ <364326dc-9715-4e77-bf25-4d0a30179826@oldschoolsolutions.biz>
+ <ap_69OsnAOwQyo50@google.com>
+ <9762659c-fbde-4887-8da8-200db7dfad09@oldschoolsolutions.biz>
+ <aqBKI0Fg3ZqYPOJh@google.com>
+ <6eaa70f3-4d76-4271-b12d-75e063c9f869@oldschoolsolutions.biz>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v6 05/13] arm64: dts: qcom: x1e80100: Add CAMSS block
- definition
-To: Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley
- <conor+dt@kernel.org>, Bryan O'Donoghue <bod@kernel.org>,
-        Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
-        Loic Poulain <loic.poulain@oss.qualcomm.com>,
-        Mauro Carvalho Chehab <mchehab@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-media@vger.kernel.org
-References: <20260906-x1e-camss-csi2-phy-dtsi-v6-0-067f2ecc4630@linaro.org>
- <20260906-x1e-camss-csi2-phy-dtsi-v6-5-067f2ecc4630@linaro.org>
-Content-Language: en-US
-From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-In-Reply-To: <20260906-x1e-camss-csi2-phy-dtsi-v6-5-067f2ecc4630@linaro.org>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Proofpoint-GUID: Hk0AD5tKQScdQwRiGZPnYo0WfLeMHSe-
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTA5MDE0MyBTYWx0ZWRfX3rx6u9qed6lZ
- LYlbTqeJfsyUM048/p2NXRVw517CvVVTJxNZ+N6YLvfkT74HfFpY2Cjbo1R6aOzZDzTeIa3L1uE
- NKz0+1VWhHih/CeuWDoj3EgAjzNA3Zo=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTA5MDE0MyBTYWx0ZWRfXxGURQ5Ao47JT
- epyJWrSqp3TPDsMIMSKIwa0BKuJt9QEuomTg79sMn1gpakbT3AflcO/ybJJt2RyDBGH8/bTaB7O
- 1rj5Qejk/OlbC2Gf7JEmTFgJ3hFCbnGGMHuSsGOIJM66xckhgv1kae7XF0aUunDiIKWR0WAnRVD
- A8NadL2gvVZnraKaqN8sBNGoh21JbbfEZ4A1xS5mhdlC8ELQYxn1uKDWYflIjDbdRcF/QDJDcsW
- HNWPyRJailS1YKjs9N4rVm04U79d7YtHmxnstDPVdXW2SfiZvyX08cz8hndaUYYx51vbjxvYOFW
- 7J/Z3jE1pktLm35n2uF2m8b/Zj60Y2T/XrVh5ZzH/tGvZUz2GqTRdPhrY8wam1rSRHZeRs6LKpc
- YsFxVsy9ZixKhYVDVJagjOqPqIpq9pMaa9yVydLs0B5lb07cczDYg1U7aIcBjOTxGQyGW7VGSD7
- 7EfB+x7bdnGsc1B6lDA==
-X-Authority-Analysis: v=2.4 cv=S+jpBosP c=1 sm=1 tr=0 ts=6aa15518 cx=c_pps
- a=UbhLPJ621ZpgOD2l3yZY1w==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
- a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
- a=EUspDBNiAAAA:8 a=BxjtONQi-ztXtwshH1IA:9 a=QEXdDO2ut3YA:10
- a=TOPH6uDL9cOC6tEoww4z:22
-X-Proofpoint-ORIG-GUID: Hk0AD5tKQScdQwRiGZPnYo0WfLeMHSe-
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-08_03,2026-09-09_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- adultscore=0 spamscore=0 impostorscore=0 phishscore=0 lowpriorityscore=0
- priorityscore=1501 suspectscore=0 clxscore=1015 bulkscore=0 malwarescore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2609090143
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <6eaa70f3-4d76-4271-b12d-75e063c9f869@oldschoolsolutions.biz>
 
-On 9/6/26 4:20 PM, Bryan O'Donoghue wrote:
-> Add dtsi to describe the xe180100 CAMSS block
+On Tue, Sep 08, 2026 at 08:15:27PM +0200, Jens Glathe wrote:
+> Hi Mostafa,
+> 
+> On 08.09.26 19:47, Mostafa Saleh wrote:
+> > On Tue, Sep 08, 2026 at 05:04:44PM +0200, Jens Glathe wrote:
+> > > Hi Mostafa,
+> > > 
+> > > This is my .config [1].
+> > > 
+> > > [1]: https://pastebin.com/QhDizqCB
+> > Thanks! I tested with your config plus
+> > - CONFIG_EFI_ARMSTUB_DTB_LOADER=y otherwise I can't load my device
+> >    tree from UEFI shell
+> > - CONFIG_SERIAL_QCOM_GENI=y, otherwise I can't see the console.
+> > 
+> > Booting in EL2 is similar to before with SMMUv2 errors.
+> 
+> For that you would need the patch as listed before: [2]
+> 
+> [2]: https://github.com/jglathe/linux_ms_dev_kit/tree/b4/x1-el2-unfuck
+> 
+> This should give you boot on EL2.
+> 
+> > Booting in EL1 hangs with timeouts and missing suppliers:
+> > [    0.000000] Booting Linux on physical CPU 0x0000000000 [0x512f0011]
+> > [    0.000000] Linux version 7.3.0-rc1-next-20260904+ (smostafa@mostafa1.c.googlers.com) (Debian clang version 21.1.8 (3), Debian LLD 21.1.8) #2 SMP PREEMPT_DYNAMIC Tu6
+> > [    0.000000] KASLR enabled
+> > [    0.000000] Machine model: Lenovo IdeaCentre Mini 01Q8X10 (Purwa)
+> > [    0.000000] earlycon: qcom_geni0 MMIO:0x0000000000894000 (options '')
+> > [    0.000000] printk: legacy bootconsole [qcom_geni0] enabled
+> > [    0.000000] CPU features: SYS_ID_AA64MMFR0_EL1[63:60]: forced to 1
+> > [    0.000000] ITS@0x0000000017040000: Devices Table too large, reduce ids 32->19
+> > [    0.000000] ITS@0x0000000017040000: Devices too large, reduce ITS pages 1024->256
+> > [    0.163152] qcom-pcie 1c00000.pcie: supply vdda not found, using dummy regulator
+> > [    0.163313] qcom-pcie 1c08000.pcie: supply vdda not found, using dummy regulator
+> > [    0.168334] clk: Not disabling unused clocks
+> > [    0.168336] PM: genpd: Not disabling unused power domains
+> > [    0.170770] qcom-pcie 1c00000.pcie: supply vddpe-3v3 not found, using dummy regulator
+> > [    0.178347] qcom-pcie 1c08000.pcie: supply vddpe-3v3 not found, using dummy regulator
+> > [    0.184718] qcom-pcie 1c00000.pcie: supply vdda not found, using dummy regulator
+> > [    0.211932] Warning: unable to open an initial console.
+> > [    0.212057] qcom-pcie 1c00000.pcie: supply vddpe-3v3 not found, using dummy regulator
+> > [    0.213907] qcom-pcie 1c08000.pcie: supply vdda not found, using dummy regulator
+> > [    0.213928] qcom-pcie 1c08000.pcie: supply vddpe-3v3 not found, using dummy regulator
+> > [    0.244210] qcom-pcie 1c08000.pcie: supply vdda not found, using dummy regulator
+> > [    0.244275] qcom-pcie 1c00000.pcie: supply vdda not found, using dummy regulator
+> > [    0.251833] qcom-pcie 1c08000.pcie: supply vddpe-3v3 not found, using dummy regulator
+> > [    0.259418] qcom-pcie 1c00000.pcie: supply vddpe-3v3 not found, using dummy regulator
+> > [   10.213618] qcom-pcie 1bf8000.pcie: supply vdda not found, using dummy regulator
+> > [   10.214873] arm-smmu 3da0000.iommu: deferred probe timeout, ignoring dependency
+> > [   10.228713] arm-smmu 3da0000.iommu: probe with driver arm-smmu failed with error -110
+> 
+> Since you don't load firmwares, maybe try these? However, I was able to boot
+> and install with the Ubuntu Resolute ISO by providing the dtb, without the
+> firmwares. Odd.
+> 
+> > I believe we are testing on different SoCs from your fastfetch:
+> > CPU: Qualcomm Snapdragon X Elite 1E80100 (8) @ 2.96 GHz
+> > 
+> > While mine:
+> > CPU: Qualcomm Snapdragon X Elite 1P42100 (8) @ 2.96 GHz
+> > 
+> > I enabled CONFIG_QCOM_SOCINFO which shows:
+> > [root@alarm ~]# cat /sys/devices/soc0/soc_id
+> > 635 # which does not exist in qcom,ids.h
+> > [root@alarm ~]# cat /sys/devices/soc0/revision
+> > 1.0
+> Looks like nope:
+> 
+> root@mini-x-jg:~# cat /sys/devices/soc0/soc_id
+> 635
+> root@mini-x-jg:~# cat /sys/devices/soc0/revision
+> 1.0
+> 
+> We have the same SoC, maybe different binning. You could try to boot up with
+> the extended Resolute ISO to boot without firmwares [3]. It contains the
+> same dtb.
+> 
+> [3]:
+> https://drive.google.com/drive/folders/1sc_CpqOMTJNljfvRyLG-xdwB0yduje_O
+> 
 
-"x1e80100"
+Thanks! I can boot ubuntu with:
+resolute-desktop-arm64+x1e-20260831_extended_jg.iso
 
-[...]
+I figured out the issue, the problem is that I am using the console
+which is missing. And all the warnings in the logs were just a red
+herring.
 
-> +		camss: isp@acb7000 {
-> +			compatible = "qcom,x1e80100-camss";
-> +
-> +			reg = <0 0x0acb7000 0 0x2000>,
-> +			      <0 0x0acb9000 0 0x2000>,
-> +			      <0 0x0acbb000 0 0x2000>,
-> +			      <0 0x0acc6000 0 0x1000>,
-> +			      <0 0x0acca000 0 0x1000>,
-> +			      <0 0x0acb6000 0 0x1000>,
-> +			      <0 0x0ace4000 0 0x1000>,
-> +			      <0 0x0ace6000 0 0x1000>,
-> +			      <0 0x0ace8000 0 0x1000>,
-> +			      <0 0x0acec000 0 0x4000>,
-> +			      <0 0x0acf6000 0 0x1000>,
-> +			      <0 0x0acf7000 0 0x1000>,
-> +			      <0 0x0acf8000 0 0x1000>,
-> +			      <0 0x0ac62000 0 0xf000>,
-> +			      <0 0x0ac71000 0 0xf000>,
-> +			      <0 0x0acc7000 0 0x2000>,
-> +			      <0 0x0accb000 0 0x2000>;
-> +
-> +			reg-names = "csid0",
+With that patch on top of your device tree I can fully boot:
+diff --git a/arch/arm64/boot/dts/qcom/x1-lenovo-ideacentre-mini-01q8x10.dtsi b/arch/arm64/boot/dts/qcom/x1-lenovo-ideacentre-mini-01q8x10.dtsi
+index b720622c5d90..973e603bbb6a 100644
+--- a/arch/arm64/boot/dts/qcom/x1-lenovo-ideacentre-mini-01q8x10.dtsi
++++ b/arch/arm64/boot/dts/qcom/x1-lenovo-ideacentre-mini-01q8x10.dtsi
+@@ -13,7 +13,7 @@ / {
+ 	chassis-type = "desktop";
+ 
+ 	aliases {
+-		serial0 = &uart14;
++		serial0 = &uart21;
+ 	};
+ 
+ 	wcd938x: audio-codec {
+@@ -1183,3 +1183,8 @@ &usb_mp_qmpphy0 {
+ 
+ 	status = "okay";
+ };
++
++&uart21 {
++	compatible = "qcom,geni-debug-uart";
++	status = "okay";
++};
 
-Stray \n above
+However, the kernel logs are extremely verbose (I have 39 warnings)
 
-[...]
+Disabling MDSS makes it cleaner:
+diff --git a/arch/arm64/boot/dts/qcom/purwa-lenovo-ideacentre-mini-01q8x10.dts b/arch/arm64/boot/dts/qcom/purwa-lenovo-ideacentre-mini-01q8x10.dts
+index 9813a570cf69..8dc038566f93 100644
+--- a/arch/arm64/boot/dts/qcom/purwa-lenovo-ideacentre-mini-01q8x10.dts
++++ b/arch/arm64/boot/dts/qcom/purwa-lenovo-ideacentre-mini-01q8x10.dts
+@@ -40,3 +40,34 @@ &remoteproc_cdsp {
+ 
+ 	status = "okay";
+ };
++
++
++&mdss {
++	status = "disabled";
++};
++
++&mdss_dp0 {
++	status = "disabled";
++
++};
++
++&mdss_dp0_out {
++	status = "disabled";
++};
++
++&mdss_dp1 {
++	status = "disabled";
++
++};
++
++&mdss_dp1_out {
++	status = "disabled";
++};
++
++&mdss_dp2 {
++	status = "disabled";
++};
++
++&mdss_dp2_out {
++	status = "disabled";
++};
 
-> +				 <&camcc CAM_CC_IFE_LITE_AHB_CLK>,
-> +				 <&camcc CAM_CC_IFE_LITE_CPHY_RX_CLK>,
-> +				 <&camcc CAM_CC_IFE_LITE_CSID_CLK>;
-> +
-> +			clock-names = "camnoc_nrt_axi",
+I do not have any media attached nor drivers enabled, but that
+shouldn't make the logs that verbose, I can dig more into it.
 
-And here
+One other problem, is that there is a missing a PCI bus with the WIFI
+card:
 
-[...]
+0005:00:00.0 PCI bridge: Qualcomm Technologies, Inc SC8380XP PCIe Root Complex [Snapdragon X / X Plus / X Elite]
+0005:01:00.0 Ethernet controller: Realtek Semiconductor Co., Ltd. RTL8111/8168/8211/8411 PCI Express Gigabit Ethernet Controller (rev 1b)
+0006:00:00.0 PCI bridge: Qualcomm Technologies, Inc SC8380XP PCIe Root Complex [Snapdragon X / X Plus / X Elite]
+0006:01:00.0 Non-Volatile memory controller: SK hynix Platinum P41/PC801 NVMe Solid State Drive
 
-> +				      "vfe_lite_ahb",
-> +				      "vfe_lite_cphy_rx",
-> +				      "vfe_lite_csid";
-> +
-> +			interrupts = <GIC_SPI 464 IRQ_TYPE_EDGE_RISING>,
-> +				     <GIC_SPI 466 IRQ_TYPE_EDGE_RISING>,
-> +				     <GIC_SPI 431 IRQ_TYPE_EDGE_RISING>,
-> +				     <GIC_SPI 468 IRQ_TYPE_EDGE_RISING>,
-> +				     <GIC_SPI 359 IRQ_TYPE_EDGE_RISING>,
-> +				     <GIC_SPI 477 IRQ_TYPE_EDGE_RISING>,
-> +				     <GIC_SPI 478 IRQ_TYPE_EDGE_RISING>,
-> +				     <GIC_SPI 479 IRQ_TYPE_EDGE_RISING>,
-> +				     <GIC_SPI 122 IRQ_TYPE_EDGE_RISING>,
-> +				     <GIC_SPI 465 IRQ_TYPE_EDGE_RISING>,
-> +				     <GIC_SPI 467 IRQ_TYPE_EDGE_RISING>,
-> +				     <GIC_SPI 469 IRQ_TYPE_EDGE_RISING>,
-> +				     <GIC_SPI 360 IRQ_TYPE_EDGE_RISING>;
-> +
-> +			interrupt-names = "csid0",
 
-And here
+Compared to with my device tree:
+0004:00:00.0 PCI bridge: Qualcomm Technologies, Inc SC8380XP PCIe Root Complex [Snapdragon X / X Plus / X Elite]
+0004:01:00.0 Network controller: Qualcomm Technologies, Inc WCN785x Wi-Fi 7(802.11be) 320MHz 2x2 [FastConnect 7800] (rev 01)
+0005:00:00.0 PCI bridge: Qualcomm Technologies, Inc SC8380XP PCIe Root Complex [Snapdragon X / X Plus / X Elite]
+0005:01:00.0 Ethernet controller: Realtek Semiconductor Co., Ltd. RTL8111/8168/8211/8411 PCI Express Gigabit Ethernet Controller (rev 1b)
+0006:00:00.0 PCI bridge: Qualcomm Technologies, Inc SC8380XP PCIe Root Complex [Snapdragon X / X Plus / X Elite]
+0006:01:00.0 Non-Volatile memory controller: SK hynix Platinum P41/PC801 NVMe Solid State Drive
 
-otherwise I don't think this is going to get any better without
-holding this hostage for another N years pending a rearchitecture
-of the drivers so
+Thanks,
+Mostafa
 
-Acked-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-
-Konrad
+> with best regards
+> 
+> Jens
+> 
