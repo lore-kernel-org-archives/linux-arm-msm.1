@@ -1,474 +1,236 @@
-Received: from GVXPR05CU001.outbound.protection.outlook.com (mail-swedencentralazon11013066.outbound.protection.outlook.com [52.101.83.66])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3CFED3AEF51;
-	Wed,  9 Sep 2026 20:56:32 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=52.101.83.66
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788987401; cv=fail; b=JvYMaRpGjbyw7wtQ+WDgsIrbxdmh/MEfthvl++4ptVGmak9qy4/oLeJMyNEvlrKspTjLwVdB/qN3IUJoutG3BwfC1qwdcNZjMtNB+NNPhqrGcMMjlpv5XZRCpfqKoIBH3jyuUxGNK6Z7YHKp68D5gQfY2Xq6vwKgfqfU+vvn24I=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788987401; c=relaxed/simple;
-	bh=7VFo19t2sSxO4NkGC16QmXaU8jCcgz7iLJjSD/gSGHU=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:Content-Type:
-	 Content-Disposition:In-Reply-To:MIME-Version; b=blQ44+gm7G+hkRi0NPrGHfGeK5pdQMAbGtMxLuOwpJcaRHDq1wDOmkI1lzJghho5q69TolV2LRfcCAW4wxnaoJQVJUpKfWV4OfxRzS8QCMx8uG7XgAm6w1g9Sp1lbEZOJiWwliLe3vcu1BVf7b1pBlnUN4H62fOc2wj3Q7FfRuM=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.nxp.com; spf=pass smtp.mailfrom=oss.nxp.com; dkim=pass (2048-bit key) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b=kAoicNJ9; arc=fail smtp.client-ip=52.101.83.66
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.nxp.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.nxp.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 768EF3BB673
+	for <linux-arm-msm@vger.kernel.org>; Wed,  9 Sep 2026 20:57:45 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1788987468; cv=none; b=UrN1WT+3fOd6YHc8sIwBnqcfqMXKcHavhwqN2KXMOeC1uDcf9IR+xnob5WAsuLCagjNXQwPIgOgXs+Q8gRihEHhWsoJ8bTk9NV/PpdBTDp/2grqRbc/dBJ+cULnygtCTMZPTwa4fHnU/UBP5OXNgY0qopfWyGWTLHAKkv1uEBhc=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1788987468; c=relaxed/simple;
+	bh=BDmAOXk/J0il5WGjLq49F7s//UAnHfnxlMZpGTigT3s=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=pZCO646LNlCO8MjsQKsrluvRc4SGoAArZLTiqeWnhqUNGA9dt/fcxMVMk7XSqthJkyzTM/Ovg77jh9bcxCxcQ+gb4Qx87jRAGRscmhKpVXIU/iXXvfLDlW8TKh/CmU/xLgRyAmSLuOfxvQeXfpNp4IN81tLgcDhRoIPIPG43kxQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=XBQnBnW+; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=W42BUMmb; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="kAoicNJ9"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=l9E8UbGc6DqvvZIVcrKl4uHdXKG2czUgHF1PT2os7B+k15MO456lVLYKPkiFx1tw0B9huUYmhoINn+X46XdSGwUMMC4AmeIrUbngwtr7Xk77cigPQhCBTUH2MHePdWPkTuTz5JgGY2JAi19zknU8NbQ98NAmtNoIKxWn2K64u5C4OjGwKLJF6D2aWcV+cldEqO9mtHjQZyIkggzypGVXrAJ13FzkYLdqQCMkdGYmyg/kEHEeGVSTCjNL49nr8To1dwz2ETOkqXWHp7Z4EG4QYw60B0rKuEBlARs+uibIezh9zjK3rpV7Yi9ZprRxDLDCb7KlcV+YorSI+i8VQUanGQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=HdDXD0FOfX6jCxzNm7lS3zUVyX7SYnpd6QltbboOJsM=;
- b=l8WGvib/jSfLJ0EbTsMbZZzQ8zBkIFPnM7HrMlbDtJ+G46V3huaAMyDYmNuJiU6+Ii4a7tb+7pK5ktmQ9kiKyEO0KAw32hVO2EeenAe2NS+xxwFYWts4k25AZxfqI3mXbuyJQe7hQaifWDyi1C27+jVT3fAJsMVkbrfimN7Csbzr82qQPBgtQ3E6NOBW1FytjWTJUYaFhSIaM12xmQekF1Vm5EF3lEWCwSdXF5vkH1uddrUd2L4J9xR7Ar+YMXTMb/BgAMqaWMQbrJjU5Uyse4QeDOA72L0ERPB68L6ZYOyITkBGKQc9+pysbpXLHqsn5x66AdLQ/IB8idmnIYAOCA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
- dkim=pass header.d=oss.nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com;
- s=selector1-NXP1-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=HdDXD0FOfX6jCxzNm7lS3zUVyX7SYnpd6QltbboOJsM=;
- b=kAoicNJ9n4A7QBvK7k72QpbH/WyToM8P+Ljy8IyDZKbl4gfqmcAl32IEaJSRG+B2umoMpKsu8MgxRWCmnYTXzS9ymZS6tskTzCPMSOozFNgS5iubjO4Xte9d7vzpXlhqkmvX7aeupdYruWxWVFR2S2wLADl5HPWgS2rTwEiuTRQ/0yBl98xWw6vuR/vjud/kpvESW5aZyDG1BKuxQfGwdxaiF5l1f0A0Sz9YBMwKLcL2K0S6a0StAJRQboMGIM7bBlnIeyz+y8XizsNzVH3QLX2syTJTMv5HEHexERw4RuazmHKmWA09/sOQ2vsS7hI6An7m2heGXPJZvIWZfm+BUQ==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=oss.nxp.com;
-Received: from GV2PR04MB11799.eurprd04.prod.outlook.com (2603:10a6:150:2cf::9)
- by DB9PR04MB8495.eurprd04.prod.outlook.com (2603:10a6:10:2c7::20) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.406.7; Wed, 9 Sep 2026
- 20:56:29 +0000
-Received: from GV2PR04MB11799.eurprd04.prod.outlook.com
- ([fe80::2146:83a2:5329:b7c]) by GV2PR04MB11799.eurprd04.prod.outlook.com
- ([fe80::2146:83a2:5329:b7c%7]) with mapi id 15.21.0406.005; Wed, 9 Sep 2026
- 20:56:28 +0000
-Date: Wed, 9 Sep 2026 15:56:18 -0500
-From: Frank Li <Frank.li@oss.nxp.com>
-To: Praveen Talari <praveen.talari@oss.qualcomm.com>
-Cc: konrad.dybcio@oss.qualcomm.com, Steven Rostedt <rostedt@goodmis.org>,
-	Masami Hiramatsu <mhiramat@kernel.org>,
-	Mathieu Desnoyers <mathieu.desnoyers@efficios.com>,
-	Vinod Koul <vkoul@kernel.org>, Frank Li <Frank.Li@kernel.org>,
-	chandana.chiluveru@oss.qualcomm.com,
-	mukesh.savaliya@oss.qualcomm.com, linux-kernel@vger.kernel.org,
-	linux-trace-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-	dmaengine@vger.kernel.org
-Subject: Re: [PATCH v2 1/3] dmaengine: qcom: gpi: trace: Add trace events
- header for Qualcomm GPI DMA
-Message-ID: <aqHH8rliEDTmrW9P@SMW015318>
-References: <20260909-add-trace-support-gpio-v2-0-01f81739bb88@oss.qualcomm.com>
- <20260909-add-trace-support-gpio-v2-1-01f81739bb88@oss.qualcomm.com>
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260909-add-trace-support-gpio-v2-1-01f81739bb88@oss.qualcomm.com>
-X-ClientProxiedBy: CYXPR03CA0017.namprd03.prod.outlook.com
- (2603:10b6:930:d0::15) To GV2PR04MB11799.eurprd04.prod.outlook.com
- (2603:10a6:150:2cf::9)
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="XBQnBnW+";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="W42BUMmb"
+Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 689JIb3x3219932
+	for <linux-arm-msm@vger.kernel.org>; Wed, 9 Sep 2026 20:57:42 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-type:date:from:in-reply-to:message-id:mime-version
+	:references:subject:to; s=qcppdkim1; bh=aD1svCqhonHuEhBxqeD/lMr7
+	ELQWc/Ex9Uh61jsKr0I=; b=XBQnBnW+o0JuCdB1nHL7fsroyLQyb4ry0bYaN3EI
+	ZTdLoK43rd2Apyj64z62cFGax6reUMgTQH3xkaLqf+WbKbwP1yQ4xRrEE/SQR//f
+	7ZRSfPC9SPLkHGrP329/P3RkqLBSt5QUQ7GWMUA0GIy4Ev0ITk26HGULM79d4/LQ
+	Zj53VfleseFH/KN1lBauIOMoObdOCgLv3IX8uLGODFfd61SyfxOPoNKFLfIWZcmt
+	42wwSamxdxHFrLYmw7OHxa8LLYw5ts/5aKJJmTwmOC0AwGfI7gpYXLpAh1vRcqjp
+	hfo7U4cE+5iiJB8uhDkC4gP9MxtlfQU/aDRoUB5DRV8/ww==
+Received: from mail-ua1-f71.google.com (mail-ua1-f71.google.com [209.85.222.71])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gkcyg0j8f-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Wed, 09 Sep 2026 20:57:42 +0000 (GMT)
+Received: by mail-ua1-f71.google.com with SMTP id a1e0cc1a2514c-97e9cc5ac86so579995241.1
+        for <linux-arm-msm@vger.kernel.org>; Wed, 09 Sep 2026 13:57:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1788987461; x=1789592261; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=aD1svCqhonHuEhBxqeD/lMr7ELQWc/Ex9Uh61jsKr0I=;
+        b=W42BUMmbttSeyr/3svmpL1DuZbA7+Ky1G0LiZGe8NbedZBiMpPSS56rGYHi3SMIszY
+         p3K7220AzJ5VD+kpxhaYLEvQ+PKQvU++rz9XX+nFkYNCEFhzH/GgJRrWU1h5PBB6jy3a
+         N3B6tEFciGMnWO1c4piJpwjFKQr/Tc9hTWRJZQOnjWKHILbEKEBoyiXC3hV12ivvMNP5
+         0erGZCusyVdJHYuox9FIj4Lpa4scUcJaAsD50KWqLIyZJEqe3ueFBMGWYQ2xR8Y+riga
+         4VG/Qpi4EVDhkD7vHy/PL1Edj5ZGOAcfm7z51J4titeF2BGaIOzqVWSPiWJYf7UW0bfj
+         voHg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1788987461; x=1789592261;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=aD1svCqhonHuEhBxqeD/lMr7ELQWc/Ex9Uh61jsKr0I=;
+        b=dTbuu5xbdIDUvNCXqZcxj4qHfg9hiUe5PVwDgKxhx/LM/0/ZyMfHTNCANxw4EuAiFy
+         Qm1IgF1hG7I+fsWkQ35av3QvWSlD+K65LbYj/7PJ8QC2Am7Oz2HQxaxjiOtKxB8/yB1Q
+         ABcCCwnwpy3enlZgmyzA/6OigwLqUlGP7LanpaL09aa4n6vw+ccfsR3omoLS3EpGpyXO
+         UeUYsTlObZBIh6x0azCmr+o1ttTV6CJrG13Er/1ziN0sPlSg5ViYX9h7mtqeFwHRfheN
+         M81u+gKByim2UbxNF45PDSnTmzI+OwGffvFkOHS4BXRSpvSrL98dRHyw1xfSOhJRYWqQ
+         FjSQ==
+X-Forwarded-Encrypted: i=1; AKwUvByCo+7L7819YYDQnrlWqZ8VcJLmDawrtfI6uw6OMcmae78S4RBYF79jOA3WWZ3CGsQL6AL3/zeFs+Uc30Pc@vger.kernel.org
+X-Gm-Message-State: AFuF++lQbwmuVvH8Pn/UTwPBfNSWKhU6MJAXt6ag34/M6aCD1tC1P0z6
+	LQgudEIPWqQIowHdyuxS0xudpQlUnCrXf624cQHml6Wj5iEkmv7C7M2xJ8M+qTD2Y/FzAL9ZRUM
+	3PhCC/LzYtDm1RUQUQAyE5ga4o+SodgcCXnjgHxRl9JPk/JzxHGP9/I+oIGtRgYb8bKJA
+X-Gm-Gg: AYBFou3uYQuP7v7be+3XhD5GAde9nVaZkawsOU2GnRPqfNIVBOnWl3hUf8kytxYG4/Z
+	F9WQ/266jxdoVjuozCwBabxLua3N8eyL0JsUbCvC/aX90HAFKM2wK3yMZ0jX8e3DBOx9K0yqOkj
+	Ozom9HyunL8ueCwYMpPv3VrVEFj/ox17BIpb0j5b/2ULo0GZxLja6Yq2YXnWzTrkL1l0ebm8Lph
+	dSNd1Wc+H3uuyMrdWi3B4OdpXAUr5qRqy/Jk8cNHQ5hr1E7syc1hg/U0BhMIgeElOW/UklrfYpS
+	wUxXmwpGG+HqrzUDvuzqsve5awDTXwAuisnmr9z/Xl2Cx8IBdQmTJX2JX1vYrotD5EoAPUlQym7
+	HWEsZfrMDn9i3Saj7Pp+lOWmkUFCIcYFmUgFQxDsAQ+BkMC9VjZvNoYPAZAdvBULZ+l/mfwU7ml
+	rIICi9pSS4bVkx
+X-Received: by 2002:a05:6102:160f:b0:781:210d:28aa with SMTP id ada2fe7eead31-78a4a8be7c5mr16080312137.2.1788987461371;
+        Wed, 09 Sep 2026 13:57:41 -0700 (PDT)
+X-Received: by 2002:a05:6102:160f:b0:781:210d:28aa with SMTP id ada2fe7eead31-78a4a8be7c5mr16080274137.2.1788987460865;
+        Wed, 09 Sep 2026 13:57:40 -0700 (PDT)
+Received: from umbar.lan (2001-14ba-a073-af00-264b-feff-fe8b-be8a.rev.dnainternet.fi. [2001:14ba:a073:af00:264b:feff:fe8b:be8a])
+        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5b765bfc42bsm728249e87.18.2026.09.09.13.57.39
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 09 Sep 2026 13:57:39 -0700 (PDT)
+Date: Wed, 9 Sep 2026 23:57:37 +0300
+From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+To: Vikash Garodia <vikash.garodia@oss.qualcomm.com>
+Cc: Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>,
+        Abhinav Kumar <abhinav.kumar@linux.dev>,
+        Bryan O'Donoghue <bod@kernel.org>,
+        Mauro Carvalho Chehab <mchehab@kernel.org>,
+        Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        Stanimir Varbanov <stanimir.varbanov@linaro.org>,
+        Neil Armstrong <neil.armstrong@linaro.org>,
+        Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
+        Stephan Gerhold <stephan.gerhold@linaro.org>,
+        "Joerg Roedel (AMD)" <joro@8bytes.org>, Will Deacon <will@kernel.org>,
+        Robin Murphy <robin.murphy@arm.com>, linux-media@vger.kernel.org,
+        linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
+        linux-kernel@vger.kernel.org,
+        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+        Krzysztof Kozlowski <krzk@kernel.org>, iommu@lists.linux.dev,
+        Daniel J Blueman <daniel@quora.org>,
+        Vishnu Reddy <busanna.reddy@oss.qualcomm.com>
+Subject: Re: [PATCH v3 02/13] dt-bindings: media: qcom,sm8550-iris: Add
+ context bank subnodes
+Message-ID: <dulfxazlrtqc4swjeuxmriudzzm23z3wea5n7tfflaeb5644kg@6buydclxzmab>
+References: <20260909-vpu_iommu_iova_handling-v3-0-2fe43ae45495@oss.qualcomm.com>
+ <20260909-vpu_iommu_iova_handling-v3-2-2fe43ae45495@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: GV2PR04MB11799:EE_|DB9PR04MB8495:EE_
-X-MS-Office365-Filtering-Correlation-Id: 8877068d-e995-4ade-9a75-08df0eb4d1b2
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|23010399003|1800799024|19092799006|376014|7416014|366016|10067099003|18002099003|22082099003|11063799006|4143699003|56012099006;
-X-Microsoft-Antispam-Message-Info:
-	rZvvIzBgYjS0xtNJRSVBwbKYUfszr5OQ+7OsrPFbU2zoOiLbtnY20lyD4ZDAvUasJd3rAljZ+CGapalh+wO3vGFmEidSlNGzAPi0JKhTfGMFGoUZW9KWguax+Y6RRnzn4fqNOBTU/IVBRHgj+54wDhZn41+Exuda1sDfNK2tjprbJ8hYduL09URe91dFqrsZfRJBoewcHJKXjOnFRnyVDVdBrzHBOCS9ZUuTYyWs/3fb/H7Ne5w1e4b0zbFaDx1GFG5p+qRHXW9Fjaek2kpKVMvFSxOzPvjx0G3S00qCZhWhsX+pSwFhXwvStYpZWHvZLOxaM1veyCBXg2YSuoE5OqeqA7AXrLbwzf6+EQGU/ny+I3x0bRbLSoEsYQFqQrJxZNXU5HdDbs8LI7p/K6/G4876A2+URH98KCJpv1Bh2yYtmj+VmROQ4lCM9qFnOhZ+QnFoA5p4I3oGzi/rX/Wl+QVC0d5sm0qHrJJFpL1zriEOpCkIt5si3zSDdIpxJc+/ZngZ9JRwnxjvgFBvxgoY1cW9WNlKMgzPMjWPb6bIqBCTy0CR50M04j1WwNk4gbqRHjL+AWm25UNWq/8rkmA8qvgtms/JOkd0f0xSvKsrslSqi6LNmMGTsFlPPVG/VpbBJin1901IZyNT3TxKNPt9EKKWQlYHVOd97BqtzwF0XU0=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:GV2PR04MB11799.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(23010399003)(1800799024)(19092799006)(376014)(7416014)(366016)(10067099003)(18002099003)(22082099003)(11063799006)(4143699003)(56012099006);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?CG2lSB7zHzKKhGdGXflka6K8sErbpixZqGBCuQKmMcQGU87+noj6os5rpa3M?=
- =?us-ascii?Q?SSfvp74jdmK5sh+9Ql/cu4yrLmyA2XO7tBqBkEUVc810zllYumiO6FVuld10?=
- =?us-ascii?Q?7Ir2cdrLFABxETQNrMLaEFpqc0yPjfD1dwzrSnlc9rWL6pN2NeLykZQfPBDP?=
- =?us-ascii?Q?68bkzzzqzUwCEZS/vCH26QG1BFEobeHV/5rCtiXs5+RQ64wM6YpFa/yGnR/y?=
- =?us-ascii?Q?qtCzcyHjn8ImCXsWUzCBS3RH80qXP8pYpxQXto91AQtdMtH0y3s6uctuhzAC?=
- =?us-ascii?Q?DkpohJ1Fxp8DjAHQVZGusIHRrmsR3k4ZoyNHRKeayrRNegM0/py5AdjF/koj?=
- =?us-ascii?Q?AWyfNMi/OCa58xx1ab3m9Lj2CYFxLPe3qVPn8hcAwCvbwLOu6D7NdP1a/gLQ?=
- =?us-ascii?Q?CRrLInG/D3mhX1WOUTauCvx+NYtFiHjdC0fsiB+EaX7gYm7sQnJ5Ftxocm04?=
- =?us-ascii?Q?vyVmxT6f9rzANAlB2owVLP7bTowcrebfQ/oABZX7IErOrrYDmvEZHxTjG3K1?=
- =?us-ascii?Q?8Af3Gpm+4GF90uxfeHZOljMeWhB3w9lSq4cbuAV+Dp/5m4shcC5GcUyMVYoq?=
- =?us-ascii?Q?mXKaJwT74IqEr6vii37VWhyRsCjhfNQYieORKbBvjlyeVXjXwvNKJvcAFhUe?=
- =?us-ascii?Q?ECVc/6ksiRKXMeUNCE4WjXm082ySX8sSfffeKAq9onhQGflzy8wOl7RGdIoP?=
- =?us-ascii?Q?sCnXwvB+yIm1eq4C5SfhpiSE1jPpoguf4EpxI62D3d1jPgZ0B9s3XERyTBxp?=
- =?us-ascii?Q?JPrk8Iqgbyyj2ekLm2tt/72LgwMBeCTwaZzdykzvTBsNn3a4U1+4+zZ3Rllc?=
- =?us-ascii?Q?4qJeJ+PrXZyAM3+3jazNI2VW0SF6njMlyYyBIFPfS7jrykNyKdj/X98e9dvj?=
- =?us-ascii?Q?Smd+zYjn8wavgx1g3jrUDNIR8DV/svNii1dKAvRNwhjf7sSlhl7YUSU5LU2I?=
- =?us-ascii?Q?THWINXw0g7otp49VISHWg92j7zlK68J9hCb+5dTYsFO2ElVmoja2Ga28NDh2?=
- =?us-ascii?Q?lqHKkz9B8mXWkdDDo9DMctBHbD/v1Gun9EMubT18Urh8SOciUjID50dEkTTo?=
- =?us-ascii?Q?JWjbXIMi22MMHtZdCrEjFlt4N38fkVZ2iFW1p6qpkJgb10eQ+AHFxi641pX0?=
- =?us-ascii?Q?ulkHirn9h5WozHG00NDkoyAEINACTiTwLOgEru9rFrlxhlMyuY95+SqRroYi?=
- =?us-ascii?Q?nw0aY8nC3Q4+7gRPy8SsKnbvo5gOKvcMBRnMRSJFCbRACIEDs9+LXy0Ee6pf?=
- =?us-ascii?Q?vw7eMeciX+cduoE89WACDQCs4eQTNGyLrKZGvLiijbQBEQLx81sOsNXlTU3o?=
- =?us-ascii?Q?TmCHIA1sDthqH/c67r3jGsmn97hCHOmFR1sTc5Gy9+NRF5324Fa+KtsVSS1z?=
- =?us-ascii?Q?JMb5GQ2Mmg+4qtVvJIjL1cxumRutmBRRnZFfhQvZsLNpaS9WugTHMPYLMWk4?=
- =?us-ascii?Q?kB83oqdyJ/EEjvgPv2l80KGZ2F5nsV8bYlCvBlHLPMzRLhOlEfj5MxpCalKu?=
- =?us-ascii?Q?GhecwDtDYDydjcy3dEDRGkztP85XnklUfssL9IxViV43s858ZOFJMQUj9nFV?=
- =?us-ascii?Q?wnfAGhipXJbOCcBAZnnkLkgc/osZXU4bt5b/O2FLGn2j82WhRIQffumay5fY?=
- =?us-ascii?Q?9TgXw9ZVlXyilO7OtPAKayMb0Ygxg0LKMcWzhjOvzK/ksgKxwyJsj24ewE6a?=
- =?us-ascii?Q?tCpNsAFjDhFagAhZVTff3QzhrhnZKLUrC7j/VE/SzWJsgB4O9tWDeNPXSPt8?=
- =?us-ascii?Q?vHICLZ892SdVjJL5b1jWyJ4xGfSRiYH2tnYrvh2wYLlx0QvI54s7?=
-X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 8877068d-e995-4ade-9a75-08df0eb4d1b2
-X-MS-Exchange-CrossTenant-AuthSource: GV2PR04MB11799.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Sep 2026 20:56:28.8332
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: cMHJdkh1HDtIOVk3/la5nFrgfWUF9EH3f+KOPbFKBuZC1cedoRaBpMm/QAgXA4weZvK77PJ+SRpRoHCQc2WeE7SBGXswo7tcD8gN+qlYDjqKsa3DK/NcDtOJaaWhDjJv
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR04MB8495
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260909-vpu_iommu_iova_handling-v3-2-2fe43ae45495@oss.qualcomm.com>
+X-Authority-Analysis: v=2.4 cv=YZYodARf c=1 sm=1 tr=0 ts=6aa1c846 cx=c_pps
+ a=KB4UBwrhAZV1kjiGHFQexw==:117 a=xqWC_Br6kY4A:10 a=kj9zAlcOel0A:10
+ a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=_glEPmIy2e8OvE2BGh3C:22 a=e5mUnYsNAAAA:8
+ a=VwQbUJbxAAAA:8 a=NEAV23lmAAAA:8 a=t9ty7G3lAAAA:8 a=EUspDBNiAAAA:8
+ a=JqCuCV_VPJ6-B_cMBtcA:9 a=CjuIK1q_8ugA:10 a=o1xkdb1NAhiiM49bd1HK:22
+ a=Vxmtnl_E_bksehYqCbjh:22 a=CsAS6f0m0zARWR-uHzm3:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTA5MDIzNSBTYWx0ZWRfXwgywhvK44csv
+ ZKkd7C/4AK2P4Y9H4Cs2jjLXnHJMPqo5RqxFmsafxa8kg4QKjhMnKjhsW4A942PJC32DK5qKsY1
+ HfIaa21V/ED9vvH1SsanRoSbdz/x1P4=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTA5MDIzNSBTYWx0ZWRfX6oi2B+CIB+l8
+ YNdQYNvOcy8iHqPUjaxIYTV79iqylTSnb0S9IFgmvTtvMssoxIOKqjzBTq2Vk+RpDtIK1VYwKME
+ APdAtLO2/4oK4xqgMhqulLlinEtN6pU85RF7bVgVdpNSL5tMOpcpCaQ8p63T8dWWbgw3/Bywq1X
+ SPrzGRNZiSi5BVLL6sq4I1r8TM+S4pOR7J03kXQi4LfC3stMoQ+TXQ6VWoCsrhHqgsxt420aAAv
+ IrqW9jP6o3nlOH416XxJrJKFdxKpJWJf09vO21xEv2Jrc59wFC6fEXVdRTezS9CqvyeW5vsZcsc
+ D40sTApzg9U+RuowwUfWgtPoqJZ60VRyOybHI4urdS7NshQOGMA2h2/NWm8qZ1hj63NcUoH98/Z
+ pLQlAn7uGTNzoyXKkYhz6K1LaFWrYGyOP3B0mYRhtSimhozjs85zl3dEK+eMZrXwJnCUPuFqIfX
+ N5mOiK+RiC1/ZpkWbdA==
+X-Proofpoint-GUID: 1ACwNn3D3FPH5zPxmAvegjkTb6OHJum7
+X-Proofpoint-ORIG-GUID: 1ACwNn3D3FPH5zPxmAvegjkTb6OHJum7
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-09-09_01,2026-09-09_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ malwarescore=0 suspectscore=0 lowpriorityscore=0 impostorscore=0 adultscore=0
+ bulkscore=0 phishscore=0 spamscore=0 clxscore=1015 priorityscore=1501
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609090235
 
-On Wed, Sep 09, 2026 at 10:39:41AM +0530, Praveen Talari wrote:
-> Add a tracepoint header for the Qualcomm GPI DMA engine driver.
->
-> The events defined here cover channel/event command dispatch, IRQ
-> type handling, channel/event control state transitions, error IRQ
-> status, completion event processing (including the no-pending-
-> descriptor and transfer result paths), per-event processing in the
-> event ring, ring allocation/programming details, already-in-state
-> checks for pause/resume, and TRE queuing and contents. Together they
-> give full runtime visibility into GPI DMA behavior in place of the
-> driver's former dev_dbg() based debug logging.
->
-> Signed-off-by: Praveen Talari <praveen.talari@oss.qualcomm.com>
+On Wed, Sep 09, 2026 at 08:27:09PM +0530, Vikash Garodia wrote:
+> The VPU issues DMA through several SMMU streams, and the hardware does
+> not give every stream the same addressable range. The non-pixel stream
+> cannot address the low 600MB of IOVA space, while the pixel stream can
+> address the full range:
+>     +-----------------------------------------------------------+
+>     | non-pixel stream addressable range (600 MB - 3.5 GB)      |
+>     | 0x25800000 - 0xe0000000                                   |
+>     +-----------------------------------------------------------+
+>     | pixel stream addressable range (0 - 3.5 GB)               |
+>     | 0x00000000 - 0xe0000000                                   |
+>     +-----------------------------------------------------------+
+> A single "iommus" property on the video-codec node puts every stream in
+> one IOMMU domain sharing one IOVA allocator, so nothing restricts a
+> non-pixel buffer to avoid 0 to 600MB. Once an allocation lands below
+> that boundary the hardware faults, which shows up as unhandled SMMU page
+> faults and spontaneous reboots:
+> https://gitlab.freedesktop.org/drm/msm/-/work_items/100
+> 
+> Given that the address range restriction is for specific VPU stream, it
+> should be ideally be moved to that stream. To achieve the same, a subset
+> of streams is now represented as subnodes, so that each can be
+> associated with its respective addressable range. The design was
+> discussed and agreed by mainatiners here
+> https://lore.kernel.org/all/c7b956a9-d3e8-4e18-b780-5d08f5cd2ca1@kernel.org
+> 
+> In the past, this limitation was addressed with an iommu-map approach,
+> with the iris driver dynamically creating the devices. That approach was
+> later concluded to be a hack to avoid having subnodes, and was NAKed by
+> the iommu maintainers. It was discussed in detail here:
+> https://lore.kernel.org/all/c7b956a9-d3e8-4e18-b780-5d08f5cd2ca1@kernel.org/
+> 
+> Update example to the subnode form. Doing so, it picks up the supporting
+> properties needed on the video-codec node, address-cells, size-cells and
+> dma-ranges to declare 1:1 DMA translation into the parent. Given a soc
+> with address-cells and size-cells as 2, update the video-codec "reg"
+> accordingly.
+> 
+> This patch depends-on:
+> https://github.com/devicetree-org/dt-schema/pull/207
+> 
+> Tested-by: Daniel J Blueman <daniel@quora.org>
+> Co-developed-by: Vishnu Reddy <busanna.reddy@oss.qualcomm.com>
+> Signed-off-by: Vishnu Reddy <busanna.reddy@oss.qualcomm.com>
+> Signed-off-by: Vikash Garodia <vikash.garodia@oss.qualcomm.com>
 > ---
->  include/trace/events/qcom_gpi.h | 313 ++++++++++++++++++++++++++++++++++++++++
+>  .../bindings/media/qcom,sm8550-iris.yaml           | 118 ++++++++++++---------
+>  1 file changed, 67 insertions(+), 51 deletions(-)
+> 
+> diff --git a/Documentation/devicetree/bindings/media/qcom,sm8550-iris.yaml b/Documentation/devicetree/bindings/media/qcom,sm8550-iris.yaml
+> index 0400ca1bff05dcef6b742c3fbf77e38adca9f280..dd80526838f1193f4c9105793ae4bf4fe0755ec2 100644
+> --- a/Documentation/devicetree/bindings/media/qcom,sm8550-iris.yaml
+> +++ b/Documentation/devicetree/bindings/media/qcom,sm8550-iris.yaml
+> @@ -98,10 +98,10 @@ required:
+>    - interconnect-names
+>    - resets
+>    - reset-names
+> -  - iommus
+>    - dma-coherent
+>  
+>  allOf:
+> +  - $ref: qcom,venus-common.yaml#
+>    - if:
+>        properties:
+>          compatible:
+> @@ -150,70 +150,86 @@ examples:
+>      #include <dt-bindings/power/qcom-rpmpd.h>
+>      #include <dt-bindings/power/qcom,rpmhpd.h>
+>  
+> -    video-codec@aa00000 {
+> -        compatible = "qcom,sm8550-iris";
+> -        reg = <0x0aa00000 0xf0000>;
+> -        interrupts = <GIC_SPI 174 IRQ_TYPE_LEVEL_HIGH>;
+> +    soc {
+> +        #address-cells = <2>;
+> +        #size-cells = <2>;
 
-Any user use it outside drivers/dma? if no, move it in drivers/dma
+No. The SoC node must go away. None of the schema examples have it.
 
-and please squash to patch 2, with user together.
+>  
+> -        power-domains = <&videocc VIDEO_CC_MVS0C_GDSC>,
+> -                        <&videocc VIDEO_CC_MVS0_GDSC>,
+> -                        <&rpmhpd RPMHPD_MXC>,
+> -                        <&rpmhpd RPMHPD_MMCX>;
 
-Frank
-
->  1 file changed, 313 insertions(+)
->
-> diff --git a/include/trace/events/qcom_gpi.h b/include/trace/events/qcom_gpi.h
-> new file mode 100644
-> index 000000000000..241d76855ac8
-> --- /dev/null
-> +++ b/include/trace/events/qcom_gpi.h
-> @@ -0,0 +1,313 @@
-> +/* SPDX-License-Identifier: GPL-2.0 */
-> +#undef TRACE_SYSTEM
-> +#define TRACE_SYSTEM qcom_gpi
-> +
-> +#if !defined(_TRACE_QCOM_GPI_H) || defined(TRACE_HEADER_MULTI_READ)
-> +#define _TRACE_QCOM_GPI_H
-> +
-> +#include <linux/tracepoint.h>
-> +
-> +TRACE_EVENT(gpi_send_cmd,
-> +	    TP_PROTO(struct device *dev, u32 chid, u32 cmd, const char *cmd_str),
-> +	    TP_ARGS(dev, chid, cmd, cmd_str),
-> +
-> +	    TP_STRUCT__entry(__string(name, dev_name(dev))
-> +			     __string(cmd_str, cmd_str)
-> +			     __field(u32, chid)
-> +			     __field(u32, cmd)
-> +	    ),
-> +
-> +	    TP_fast_assign(__assign_str(name);
-> +			   __assign_str(cmd_str);
-> +			   __entry->chid = chid;
-> +			   __entry->cmd = cmd;
-> +	    ),
-> +
-> +	    TP_printk("%s: chid=%u cmd=%s(%u)",
-> +		      __get_str(name), __entry->chid, __get_str(cmd_str),
-> +		      __entry->cmd)
-> +);
-> +
-> +TRACE_EVENT(gpi_irq_status,
-> +	    TP_PROTO(struct device *dev, u32 gpii_id, u32 irq_type),
-> +	    TP_ARGS(dev, gpii_id, irq_type),
-> +
-> +	    TP_STRUCT__entry(__string(name, dev_name(dev))
-> +			     __field(u32, gpii_id)
-> +			     __field(u32, irq_type)
-> +	    ),
-> +
-> +	    TP_fast_assign(__assign_str(name);
-> +			   __entry->gpii_id = gpii_id;
-> +			   __entry->irq_type = irq_type;
-> +	    ),
-> +
-> +	    TP_printk("%s: gpii=%u irq_type=0x%08x",
-> +		      __get_str(name), __entry->gpii_id, __entry->irq_type)
-> +);
-> +
-> +TRACE_EVENT(gpi_ch_ctrl_irq,
-> +	    TP_PROTO(struct device *dev, u32 chid, u32 ch_state),
-> +	    TP_ARGS(dev, chid, ch_state),
-> +
-> +	    TP_STRUCT__entry(__string(name, dev_name(dev))
-> +			     __field(u32, chid)
-> +			     __field(u32, ch_state)
-> +	    ),
-> +
-> +	    TP_fast_assign(__assign_str(name);
-> +			   __entry->chid = chid;
-> +			   __entry->ch_state = ch_state;
-> +	    ),
-> +
-> +	    TP_printk("%s: chid=%u ch_state=%u",
-> +		      __get_str(name), __entry->chid, __entry->ch_state)
-> +);
-> +
-> +TRACE_EVENT(gpi_ev_process,
-> +	    TP_PROTO(struct device *dev, u32 chid, u32 ev_type, u8 code,
-> +		     u16 status, u32 length),
-> +	    TP_ARGS(dev, chid, ev_type, code, status, length),
-> +
-> +	    TP_STRUCT__entry(__string(name, dev_name(dev))
-> +			     __field(u32, chid)
-> +			     __field(u32, ev_type)
-> +			     __field(u32, length)
-> +			     __field(u16, status)
-> +			     __field(u8, code)
-> +	    ),
-> +
-> +	    TP_fast_assign(__assign_str(name);
-> +			   __entry->chid = chid;
-> +			   __entry->ev_type = ev_type;
-> +			   __entry->code = code;
-> +			   __entry->status = status;
-> +			   __entry->length = length;
-> +	    ),
-> +
-> +	    TP_printk("%s: chid=%u ev_type=0x%02x code=%u status=%u length=%u",
-> +		      __get_str(name), __entry->chid, __entry->ev_type,
-> +		      __entry->code, __entry->status, __entry->length)
-> +);
-> +
-> +TRACE_EVENT(gpi_queue_xfer,
-> +	    TP_PROTO(struct device *dev, u32 chid, u32 num_tre),
-> +	    TP_ARGS(dev, chid, num_tre),
-> +
-> +	    TP_STRUCT__entry(__string(name, dev_name(dev))
-> +			     __field(u32, chid)
-> +			     __field(u32, num_tre)
-> +	    ),
-> +
-> +	    TP_fast_assign(__assign_str(name);
-> +			   __entry->chid = chid;
-> +			   __entry->num_tre = num_tre;
-> +	    ),
-> +
-> +	    TP_printk("%s: chid=%u num_tre=%u",
-> +		      __get_str(name), __entry->chid, __entry->num_tre)
-> +);
-> +
-> +TRACE_EVENT(gpi_gen_err_irq,
-> +	    TP_PROTO(struct device *dev, u32 gpii_id, u32 irq_stts),
-> +	    TP_ARGS(dev, gpii_id, irq_stts),
-> +
-> +	    TP_STRUCT__entry(__string(name, dev_name(dev))
-> +			     __field(u32, gpii_id)
-> +			     __field(u32, irq_stts)
-> +	    ),
-> +
-> +	    TP_fast_assign(__assign_str(name);
-> +			   __entry->gpii_id = gpii_id;
-> +			   __entry->irq_stts = irq_stts;
-> +	    ),
-> +
-> +	    TP_printk("%s: gpii=%u irq_stts=0x%08x",
-> +		      __get_str(name), __entry->gpii_id, __entry->irq_stts)
-> +);
-> +
-> +TRACE_EVENT(gpi_ev_ctrl_irq,
-> +	    TP_PROTO(struct device *dev, u32 gpii_id, u32 ev_ch_irq, u32 ev_state),
-> +	    TP_ARGS(dev, gpii_id, ev_ch_irq, ev_state),
-> +
-> +	    TP_STRUCT__entry(__string(name, dev_name(dev))
-> +			     __field(u32, gpii_id)
-> +			     __field(u32, ev_ch_irq)
-> +			     __field(u32, ev_state)
-> +	    ),
-> +
-> +	    TP_fast_assign(__assign_str(name);
-> +			   __entry->gpii_id = gpii_id;
-> +			   __entry->ev_ch_irq = ev_ch_irq;
-> +			   __entry->ev_state = ev_state;
-> +	    ),
-> +
-> +	    TP_printk("%s: gpii=%u ev_ch_irq=0x%08x ev_state=%u",
-> +		      __get_str(name), __entry->gpii_id, __entry->ev_ch_irq,
-> +		      __entry->ev_state)
-> +);
-> +
-> +TRACE_EVENT(gpi_ev_no_desc,
-> +	    TP_PROTO(struct device *dev, u32 chid, const u32 *ev_dword,
-> +		     const u32 *tre_dword),
-> +	    TP_ARGS(dev, chid, ev_dword, tre_dword),
-> +
-> +	    TP_STRUCT__entry(__string(name, dev_name(dev))
-> +			     __field(u32, chid)
-> +			     __array(u32, ev_dword, 4)
-> +			     __array(u32, tre_dword, 4)
-> +	    ),
-> +
-> +	    TP_fast_assign(__assign_str(name);
-> +			   __entry->chid = chid;
-> +			   memcpy(__entry->ev_dword, ev_dword, sizeof(__entry->ev_dword));
-> +			   memcpy(__entry->tre_dword, tre_dword, sizeof(__entry->tre_dword));
-> +	    ),
-> +
-> +	    TP_printk("%s: chid=%u event=%08x:%08x:%08x:%08x pending_tre=%08x:%08x:%08x:%08x",
-> +		      __get_str(name), __entry->chid,
-> +		      __entry->ev_dword[0], __entry->ev_dword[1],
-> +		      __entry->ev_dword[2], __entry->ev_dword[3],
-> +		      __entry->tre_dword[0], __entry->tre_dword[1],
-> +		      __entry->tre_dword[2], __entry->tre_dword[3])
-> +);
-> +
-> +TRACE_EVENT(gpi_xfer_result,
-> +	    TP_PROTO(struct device *dev, u32 chid, int result, u32 residue),
-> +	    TP_ARGS(dev, chid, result, residue),
-> +
-> +	    TP_STRUCT__entry(__string(name, dev_name(dev))
-> +			     __field(u32, chid)
-> +			     __field(int, result)
-> +			     __field(u32, residue)
-> +	    ),
-> +
-> +	    TP_fast_assign(__assign_str(name);
-> +			   __entry->chid = chid;
-> +			   __entry->result = result;
-> +			   __entry->residue = residue;
-> +	    ),
-> +
-> +	    TP_printk("%s: chid=%u result=%d residue=%u",
-> +		      __get_str(name), __entry->chid, __entry->result,
-> +		      __entry->residue)
-> +);
-> +
-> +TRACE_EVENT(gpi_process_event,
-> +	    TP_PROTO(struct device *dev, u32 chid, u32 type, const u32 *dword),
-> +	    TP_ARGS(dev, chid, type, dword),
-> +
-> +	    TP_STRUCT__entry(__string(name, dev_name(dev))
-> +			     __field(u32, chid)
-> +			     __field(u32, type)
-> +			     __array(u32, dword, 4)
-> +	    ),
-> +
-> +	    TP_fast_assign(__assign_str(name);
-> +			   __entry->chid = chid;
-> +			   __entry->type = type;
-> +			   memcpy(__entry->dword, dword, sizeof(__entry->dword));
-> +	    ),
-> +
-> +	    TP_printk("%s: chid=%u type=0x%02x %08x:%08x:%08x:%08x",
-> +		      __get_str(name), __entry->chid, __entry->type,
-> +		      __entry->dword[0], __entry->dword[1],
-> +		      __entry->dword[2], __entry->dword[3])
-> +);
-> +
-> +TRACE_EVENT(gpi_alloc_ring,
-> +	    TP_PROTO(struct device *dev, u32 elements, u32 el_size,
-> +		     u32 req_len, u64 len, size_t alloc_size),
-> +	    TP_ARGS(dev, elements, el_size, req_len, len, alloc_size),
-> +
-> +	    TP_STRUCT__entry(__field(u64, len)
-> +			     __field(size_t, alloc_size)
-> +			     __string(name, dev_name(dev))
-> +			     __field(u32, elements)
-> +			     __field(u32, el_size)
-> +			     __field(u32, req_len)
-> +	    ),
-> +
-> +	    TP_fast_assign(__assign_str(name);
-> +			   __entry->elements = elements;
-> +			   __entry->el_size = el_size;
-> +			   __entry->req_len = req_len;
-> +			   __entry->len = len;
-> +			   __entry->alloc_size = alloc_size;
-> +	    ),
-> +
-> +	    TP_printk("%s: elements=%u el_size=%u req_len=%u len=%llu alloc_size=%zu",
-> +		      __get_str(name), __entry->elements, __entry->el_size,
-> +		      __entry->req_len, __entry->len, __entry->alloc_size)
-> +);
-> +
-> +TRACE_EVENT(gpi_ring_info,
-> +	    TP_PROTO(struct device *dev, dma_addr_t dma_handle, phys_addr_t phys_addr,
-> +		     u32 len, u32 el_size, u32 elements),
-> +	    TP_ARGS(dev, dma_handle, phys_addr, len, el_size, elements),
-> +
-> +	    TP_STRUCT__entry(__field(u64, dma_handle)
-> +			     __field(u64, phys_addr)
-> +			     __string(name, dev_name(dev))
-> +			     __field(u32, len)
-> +			     __field(u32, el_size)
-> +			     __field(u32, elements)
-> +	    ),
-> +
-> +	    TP_fast_assign(__assign_str(name);
-> +			   __entry->dma_handle = dma_handle;
-> +			   __entry->phys_addr = phys_addr;
-> +			   __entry->len = len;
-> +			   __entry->el_size = el_size;
-> +			   __entry->elements = elements;
-> +	    ),
-> +
-> +	    TP_printk("%s: dma_handle=%llx phys_addr=%llx len=%u el_size=%u elements=%u",
-> +		      __get_str(name), __entry->dma_handle, __entry->phys_addr,
-> +		      __entry->len, __entry->el_size, __entry->elements)
-> +);
-> +
-> +TRACE_EVENT(gpi_already_state,
-> +	    TP_PROTO(struct device *dev, u32 gpii_id, u32 pm_state),
-> +	    TP_ARGS(dev, gpii_id, pm_state),
-> +
-> +	    TP_STRUCT__entry(__string(name, dev_name(dev))
-> +			     __field(u32, gpii_id)
-> +			     __field(u32, pm_state)
-> +	    ),
-> +
-> +	    TP_fast_assign(__assign_str(name);
-> +			   __entry->gpii_id = gpii_id;
-> +			   __entry->pm_state = pm_state;
-> +	    ),
-> +
-> +	    TP_printk("%s: gpii=%u already in pm_state=%u",
-> +		      __get_str(name), __entry->gpii_id, __entry->pm_state)
-> +);
-> +
-> +TRACE_EVENT(gpi_tre,
-> +	    TP_PROTO(struct device *dev, u32 chid, u32 idx, const u32 *dword),
-> +	    TP_ARGS(dev, chid, idx, dword),
-> +
-> +	    TP_STRUCT__entry(__string(name, dev_name(dev))
-> +			     __field(u32, chid)
-> +			     __field(u32, idx)
-> +			     __array(u32, dword, 4)
-> +	    ),
-> +
-> +	    TP_fast_assign(__assign_str(name);
-> +			   __entry->chid = chid;
-> +			   __entry->idx = idx;
-> +			   memcpy(__entry->dword, dword, sizeof(__entry->dword));
-> +	    ),
-> +
-> +	    TP_printk("%s: chid=%u tre[%u]=%08x:%08x:%08x:%08x",
-> +		      __get_str(name), __entry->chid, __entry->idx,
-> +		      __entry->dword[0], __entry->dword[1],
-> +		      __entry->dword[2], __entry->dword[3])
-> +);
-> +
-> +#endif /* _TRACE_QCOM_GPI_H */
-> +
-> +/* This part must be outside protection */
-> +#include <trace/define_trace.h>
->
-> --
-> 2.34.1
->
+-- 
+With best wishes
+Dmitry
