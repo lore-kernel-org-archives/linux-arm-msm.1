@@ -1,157 +1,171 @@
-Received: from mail-yx1-f45.google.com (mail-yx1-f45.google.com [74.125.224.45])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.10])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7A5C643FD3F
-	for <linux-arm-msm@vger.kernel.org>; Wed,  9 Sep 2026 07:42:11 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=74.125.224.45
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788939733; cv=pass; b=b4XJzKyurYHM9KMvJc2b4XmvF2PdsVttW09ZNhewaqfnWwctHoMmxQxFSjTL1rSw1yOSUnuUVM+oXdIWSG/eDZOpNsQJ5LbyyWJLYJCfEYf8bVALruETdK2cE275Okxn98/qibgkNsKs4Zp4Vcdyu1DMqIFog8PjLmtnHt41ldA=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788939733; c=relaxed/simple;
-	bh=3523oMidcQmtypT8PpooIe3em0q+Lkry14jI2PZd6R0=;
-	h=MIME-Version:From:Date:Message-ID:Subject:To:Content-Type; b=phelLjm9egLCG0Li6L6SOYDWKeNJkpllSeV8VcsKQDWCsMjym0Ac7wuYrIgDOyTfv1HZ9KuYtg5SMcNME5WYWkNfDMxz/V4RJrPQt+y+g4TllXVLvASr2Z3ZKhHduA4MTajSjDsHEmaG9ycHqi78B9p2XP1yedH4SYDW4oxsM/0=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=ZFOG1k45; arc=pass smtp.client-ip=74.125.224.45
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C996B455192;
+	Wed,  9 Sep 2026 07:50:51 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.175.65.10
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1788940257; cv=none; b=eTnmr65PQjx8zLBR660blVgr9qNnyOk/iQrt8DYOw61HODKGwei5t74zstQP3n0d7lFtdNmtvPcESSU5t/Bod9cYQRZdIpKqBgKASMUzB7/cv8Zez5Dpf0N1kdVcVFb3lNMxRRONhFHY2ONuCIIZ/+m+CX+xd/mbSFiDF3x/kA0=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1788940257; c=relaxed/simple;
+	bh=8F0Ei2ADVhTACBTdWLc3ypxF0x6jw1ombxI/ZsdGEjk=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=uqo4kZtRUVbydRfHqyuIqg1pw4tZIIhby2aT/840EeQexGjh9lzUvsQ12NwgyBTVQhkfBG9o2hpjI7DLGmi9jz9e88O6mLjk7V9NnDbwQZLegzW+Zc9Y5G+sAEkCYa4fBbVn+1Za1Pqm41XrcCHP+Bc2rbYv7ie1ndtCXdInnf8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=iGkwKTCO; arc=none smtp.client-ip=198.175.65.10
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="ZFOG1k45"
-Received: by mail-yx1-f45.google.com with SMTP id 956f58d0204a3-66e63c2c9e1so4999391d50.0
-        for <linux-arm-msm@vger.kernel.org>; Wed, 09 Sep 2026 00:42:11 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1788939730; cv=none;
-        d=google.com; s=arc-20260327;
-        b=GiySv6wgFBjkrfnQFpI6kRlMb9Q/Yrm//BGimiyNlvVAOGvbdiQqdzUKiPFnEF4ita
-         g0FJsCbMGezNelQyC90fgHfdiqXx9QLhWAdArCGdytyRRyAF8OYeo8zcJZuccPpkLJm5
-         dncOt8VtIjHhgRY8M+0u3yKs+J3GC11uei5qn9ya9rpNJBVMkcby4VZYooHxvfmnQreD
-         /U8blXDZjuWZBsccXGmIcUad/SvbA1GWsp32WT5teEgxwdFcBIDdD/gPa8WF3gksd8pS
-         Sk7i4t5kc0Gm+PBFsB6vCASw+zM1B5aKMj5xyWLDxKFB2qqiQuswEUOEGcy3gVlaXV0g
-         9CLQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=content-transfer-encoding:to:subject:message-id:date:from
-         :mime-version:dkim-signature;
-        bh=3523oMidcQmtypT8PpooIe3em0q+Lkry14jI2PZd6R0=;
-        fh=220zhUXHTa97qPv/Y3d1Z3V08esnNrff7jOXPqW9gB8=;
-        b=Vi20u3/gHn37B09oDBNoyu9uauWdCoCy/VulLZvdyEr9L8zLHZv8g3J9yTVdhpjQE8
-         k19JoBku94Mv+HOXK/W+8umbYbtG+wXTVZcpvQhlXyVlQZzR+qHsJcyz8Wb+mL97Xiwb
-         2YWN9Mhl0kE26Aw4Mzn0GpjXWqbrOc12dW0Db1tmleAekj/6daxprdWp7+3tYSXp0ttz
-         KfFgoqgozn1Cv4hGblOFUgz0JZCk/c8lSZhte1ZZ8xUcdOQgRRLrw4qKDC1ZnlRCXQmI
-         0KRPv5qEcsYwopu/yr5XbDfPTVtk5D/32ii+nCgXpS15mx0pApX7RHZzhekiYHLy2HRh
-         Iwhg==;
-        darn=vger.kernel.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1788939730; x=1789544530; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:to:subject:message-id:date
-         :from:mime-version:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=3523oMidcQmtypT8PpooIe3em0q+Lkry14jI2PZd6R0=;
-        b=ZFOG1k45Lpv0l3/VgXMTjunwQ6GTosElQXSzDo0Td7+P+Spq7h2dDBZvcOYJ0pNQpo
-         ypdlakuzJh4Cgxn3xMnHjpkNVs6grFtxV9a02RxvDR9IJgnSAJcafLnmp5vrEt2qJP08
-         EfWrPeiNuK9P06U+dWITqQwq/xmgRxYfGld/N9/h9GrOy/v4JFu2s05hEzzBEwyT/XF1
-         T4qSAhlVrJF15l9FpGoKKUm9rCs0XR2/4RI9tBtm2b+W6fdD0ImU7ixCgUepGfZPM8ij
-         m2on/qUN5X3sNR9RyIEqUy8tDuKkgmk+nohu3L8E0hSndwkSqfjBO4lmkmMVjgYnPbB+
-         eEjA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788939730; x=1789544530;
-        h=content-transfer-encoding:content-type:to:subject:message-id:date
-         :from:mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=3523oMidcQmtypT8PpooIe3em0q+Lkry14jI2PZd6R0=;
-        b=OYNzG71u2vqG/pC3/EZcpoqyA+MznOXabnsRzoptEXQ1svF1tNUHOyTplI0G2jEq5Q
-         cgjJlmpHUEXB/tE5kkXq81p93RCH2sHEbpxIXB4PgEAReo9CWGgx0e/WRprLgS7VLMv3
-         viyV+syeY/m93be0V1Msc+GsHpA1Zk/NGL/ZfFlHIwU8Ao1G8TEpeK0WMuQwm5/b31rR
-         aV/lj/xZJsYtjdQCYuSLT1PLqAY+srvGBoHL32jIV/J8owVV+ykHSzKMvVDJSJazATzp
-         0zZoXpxCYE6u4BQ6fHZS1xOLiUS2ri45/UaJWzBTtF/5RuOoLAXbWDN2C8lsxOrb030Y
-         4aRQ==
-X-Forwarded-Encrypted: i=1; AKwUvBx6D7qqvFZy6xuCql7yrKfmmg80ebNfkbcHa8tUFuPJMcRP0aZQA1OhfN2bYezCtjyPr9v7CcyKCez4wmuE@vger.kernel.org
-X-Gm-Message-State: AFuF++lGAlemkB6GWcRckMLb4PegSskFRuv0TNZS/pESKfvemZXSgh8O
-	pnb8OnN7wqqAUYqrKaYduJYO1mvjif2gTU0WkPC7KU7aU9520bpQVihmlJxgr7VKNWHl0z81lIa
-	UEKeS7sqDW+VL5UJd2/6Tivrt3mXR7uyjWn61
-X-Gm-Gg: AYBFou13/ZUkJ9EDqKhI1BavU4qBXzAM22w/2mY8wTQlRTSbabuuc2s68O2nohymciV
-	pvFhK5qhmaqvU7JKfdcd+r/SdiMDwW2NoxqjOQ+Ede1HIakgYjZwcPNon2CaOI9hTSbe9C2EM4K
-	Nc2XYhKile5LemVCvubn7W/1xTVNCU6htl84aFvSOKxBmHa2m4BTDKNULH3RyfkB14oN++3aBux
-	OxSFnLjuHTYLu2U2U1bRkVL+94SWZZR38BrpHqtRWdRr7tr3eTwa/xVOSvH64+FSfoNInEH/Pzm
-	yC+210vhvkc2jiwPr9f0FJjAJZLNQod6Hu4dL2mq2jePtAySIwjs50P/UA27BnuhPkv4+ku2quM
-	8QlXHTPHs6wkb
-X-Received: by 2002:a05:690c:26c2:b0:853:fc17:6054 with SMTP id
- 00721157ae682-86e6c41ee8cmr133970117b3.3.1788939730075; Wed, 09 Sep 2026
- 00:42:10 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="iGkwKTCO"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1788940252; x=1820476252;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=8F0Ei2ADVhTACBTdWLc3ypxF0x6jw1ombxI/ZsdGEjk=;
+  b=iGkwKTCOajtPcqKpwZhtJGxEtRNG6KJ9gJsUfQp0GZ1+9mUwz+vH9UcW
+   SaTe5mcNMR5zTQTcwKeWJ7/aEQo3qH2jxQ/MJdiPPjT2ASy91JEPh5F4H
+   7mGB5vcy8Tx7tvihegkB8QXTefwopE78EyJoLo527FPhik0hKnsqZ5K9k
+   +E/1p/Ze9r4oD4gTN58Hijp8mT6/4UDSiH5XR8V1YokVeNMJAe7KASxBH
+   85nsUSOTiBIFfEf6UQC5YOh8vK+ZBGUw7bCQzxZIUzYRL/9jWlWzAxMJy
+   zhIrCSnl0L5hHOegXbT2VQmhCKi8dOCQnASO2/cTXkA+j4i8s6DJZCbY5
+   w==;
+X-CSE-ConnectionGUID: np/XYqzqReiZNZB//g8v5g==
+X-CSE-MsgGUID: klbkykVdS+W1UBQ6OCPRdw==
+X-IronPort-AV: E=McAfee;i="6800,10657,11900"; a="106725230"
+X-IronPort-AV: E=Sophos;i="6.25,270,1779174000"; 
+   d="scan'208";a="106725230"
+Received: from fmviesa006.fm.intel.com ([10.60.135.146])
+  by orvoesa102.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 09 Sep 2026 00:50:48 -0700
+X-CSE-ConnectionGUID: YGt60OXITHmm6Ifxgle+Nw==
+X-CSE-MsgGUID: lT2DXUgtTZClrGGvcJOWwA==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.25,270,1779174000"; 
+   d="scan'208";a="266942103"
+Received: from lkp-server02.sh.intel.com (HELO cdbc6ec9b517) ([10.239.97.151])
+  by fmviesa006.fm.intel.com with ESMTP; 09 Sep 2026 00:50:46 -0700
+Received: from kbuild by cdbc6ec9b517 with local (Exim 4.98.2)
+	(envelope-from <lkp@intel.com>)
+	id 1x4D4t-0000000004t-1vtl;
+	Wed, 09 Sep 2026 07:50:43 +0000
+Date: Wed, 9 Sep 2026 15:48:26 +0800
+From: kernel test robot <lkp@intel.com>
+To: Neil Armstrong <neil.armstrong@linaro.org>,
+	Georgi Djakov <djakov@kernel.org>
+Cc: oe-kbuild-all@lists.linux.dev, linux-arm-msm@vger.kernel.org,
+	linux-pm@vger.kernel.org, linux-kernel@vger.kernel.org,
+	Neil Armstrong <neil.armstrong@linaro.org>
+Subject: Re: [PATCH v2] interconnect: qcom: implement get_bw with rpmh_read
+Message-ID: <202609091547.IZVghFTg-lkp@intel.com>
+References: <20260908-topic-sm8x50-icc-read-rpmh-v2-1-b6f1c4205450@linaro.org>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-From: AHMAD YASEEN <ahmadrandhawa01@gmail.com>
-Date: Wed, 9 Sep 2026 12:41:58 +0500
-X-Gm-Features: AcwNN1XiJtBTcT3xawx5grusG2FkFugR3RRjLRX8Nh8TiraKn5Uhw98BhRMFfcE
-Message-ID: <CAFJ6yro2PRQAsNwDMRmU8sve6nrXXWVruStgyYVRMcYeksdufQ@mail.gmail.com>
-Subject: Acer Swift SFG14-01 Camera Support not working on Linux
-To: loic.poulain@oss.qualcomm.com, rfoss@kernel.org, 
-	bryan.odonoghue@linaro.org, vladimir.zapolskiy@linaro.org, 
-	linux-arm-msm@vger.kernel.org, linux-i2c@vger.kernel.org, 
-	linux-media@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260908-topic-sm8x50-icc-read-rpmh-v2-1-b6f1c4205450@linaro.org>
 
-Hello Acer Support and Qualcomm/Linux Camera Maintainers,
+Hi Neil,
 
-We are working to enable the built-in RGB camera on an Acer Swift
-SFG14-01, board Bluetang_SX1, with Qualcomm Snapdragon X Plus
-(qcom,x1p42100). We need assistance identifying the correct hardware
-configuration and Linux enablement path.
+kernel test robot noticed the following build warnings:
 
-Current environment and findings:
+[auto build test WARNING on cee9395acd8043be0644b25c34bfa86623f2b935]
 
-Ubuntu 26.04, kernel 7.0.0-30-generic; device-tree boot.
+url:    https://github.com/intel-lab-lkp/linux/commits/Neil-Armstrong/interconnect-qcom-implement-get_bw-with-rpmh_read/20260908-100915
+base:   cee9395acd8043be0644b25c34bfa86623f2b935
+patch link:    https://lore.kernel.org/r/20260908-topic-sm8x50-icc-read-rpmh-v2-1-b6f1c4205450%40linaro.org
+patch subject: [PATCH v2] interconnect: qcom: implement get_bw with rpmh_read
+config: arc-randconfig-r112-20260909 (https://download.01.org/0day-ci/archive/20260909/202609091547.IZVghFTg-lkp@intel.com/config)
+compiler: arc-linux-gcc (GCC) 10.5.0
+sparse: v0.6.5-rc1
+reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20260909/202609091547.IZVghFTg-lkp@intel.com/reproduce)
 
-No USB camera detected; the internal camera uses the MIPI camera path.
+If you fix the issue in a separate patch/commit (i.e. not just a new version of
+the same patch/commit), kindly add following tags
+| Reported-by: kernel test robot <lkp@intel.com>
+| Closes: https://lore.kernel.org/oe-kbuild-all/202609091547.IZVghFTg-lkp@intel.com/
 
-CCI1 at ac16000 and CAMSS at acb7000 are disabled in the live device
-tree, with no corresponding platform devices.
+sparse warnings: (new ones prefixed by >>)
+>> drivers/interconnect/qcom/icc-rpmh.c:169:35: sparse: sparse: invalid assignment: *=
+   drivers/interconnect/qcom/icc-rpmh.c:169:35: sparse:    left side has type unsigned long long
+   drivers/interconnect/qcom/icc-rpmh.c:169:35: sparse:    right side has type restricted __le32
+>> drivers/interconnect/qcom/icc-rpmh.c:172:33: sparse: sparse: incorrect type in initializer (different base types) @@     expected unsigned int [usertype] __base @@     got restricted __le16 [usertype] width @@
+   drivers/interconnect/qcom/icc-rpmh.c:172:33: sparse:     expected unsigned int [usertype] __base
+   drivers/interconnect/qcom/icc-rpmh.c:172:33: sparse:     got restricted __le16 [usertype] width
+   drivers/interconnect/qcom/icc-rpmh.c:178:35: sparse: sparse: invalid assignment: *=
+   drivers/interconnect/qcom/icc-rpmh.c:178:35: sparse:    left side has type unsigned long long
+   drivers/interconnect/qcom/icc-rpmh.c:178:35: sparse:    right side has type restricted __le32
+   drivers/interconnect/qcom/icc-rpmh.c:181:33: sparse: sparse: incorrect type in initializer (different base types) @@     expected unsigned int [usertype] __base @@     got restricted __le16 [usertype] width @@
+   drivers/interconnect/qcom/icc-rpmh.c:181:33: sparse:     expected unsigned int [usertype] __base
+   drivers/interconnect/qcom/icc-rpmh.c:181:33: sparse:     got restricted __le16 [usertype] width
+   drivers/interconnect/qcom/icc-rpmh.c:231:28: sparse: sparse: incorrect type in assignment (different base types) @@     expected restricted __le32 [usertype] unit @@     got unsigned int [usertype] @@
+   drivers/interconnect/qcom/icc-rpmh.c:231:28: sparse:     expected restricted __le32 [usertype] unit
+   drivers/interconnect/qcom/icc-rpmh.c:231:28: sparse:     got unsigned int [usertype]
+   drivers/interconnect/qcom/icc-rpmh.c:232:29: sparse: sparse: incorrect type in assignment (different base types) @@     expected restricted __le16 [usertype] width @@     got unsigned short [usertype] @@
+   drivers/interconnect/qcom/icc-rpmh.c:232:29: sparse:     expected restricted __le16 [usertype] width
+   drivers/interconnect/qcom/icc-rpmh.c:232:29: sparse:     got unsigned short [usertype]
 
-CCI0 registers adapters, but an experimental HM1092 probe returned
-timeout -110. This was based on an unverified sensor configuration and
-does not establish an RGB sensor or hardware failure.
+vim +169 drivers/interconnect/qcom/icc-rpmh.c
 
-No RGB chip-ID has been obtained. No media/video devices are present,
-and libcamera lists no cameras.
+   138	
+   139	static int qcom_icc_get_bw(struct icc_node *node, u32 *avg, u32 *peak)
+   140	{
+   141		struct qcom_icc_node *qn = node->data;
+   142		u32 avg_max = 0;
+   143		u32 peak_max = 0;
+   144		u64 x, y;
+   145		int i;
+   146	
+   147		if (!qn->num_bcms) {
+   148			*avg = INT_MAX;
+   149			*peak = INT_MAX;
+   150	
+   151			return 0;
+   152		}
+   153	
+   154		for (i = 0; i < qn->num_bcms; ++i) {
+   155			struct qcom_icc_bcm *bcm = qn->bcms[i];
+   156	
+   157			/* Use AMC vote for boot-up */
+   158			x = bcm->vote_x[QCOM_ICC_BUCKET_AMC];
+   159			y = bcm->vote_y[QCOM_ICC_BUCKET_AMC];
+   160	
+   161			/* Consider enable mask and convert to INT_MAX */
+   162			if (bcm->enable_mask) {
+   163				if (x & bcm->enable_mask)
+   164					avg_max = INT_MAX;
+   165				if (y & bcm->enable_mask)
+   166					peak_max = INT_MAX;
+   167			} else {
+   168				if (x) {
+ > 169					x *= bcm->aux_data.unit;
+   170					do_div(x, bcm->vote_scale);
+   171					x *= qn->buswidth * qn->channels;
+ > 172					do_div(x, bcm->aux_data.width);
+   173	
+   174					avg_max = max(avg_max, x);
+   175				}
+   176	
+   177				if (y) {
+   178					y *= bcm->aux_data.unit;
+   179					do_div(y, bcm->vote_scale);
+   180					y *= qn->buswidth;
+   181					do_div(y, bcm->aux_data.width);
+   182	
+   183					peak_max = max(peak_max, y);
+   184				}
+   185			}
+   186		}
+   187	
+   188		*avg = avg_max;
+   189		*peak = peak_max;
+   190	
+   191		return 0;
+   192	}
+   193	
 
-A controller-only CCI1 boot test has been prepared but has not yet
-been validated on hardware.
-
-The Windows driver files available locally contain multiple sensor
-profiles, including imx688 and ov08x. We have not established which
-profile applies to this exact unit. Existing experimental GPIO,
-address and power settings are also unverified.
-
-Could Acer=E2=80=99s platform engineering team confirm:
-
-The exact RGB sensor and camera module fitted to this model/SKU.
-
-The CCI controller/master and 7-bit I2C address.
-
-Supply rails and voltages, power sequencing, reset/enable signals and
-MCLK requirements.
-
-CSI interface and lane configuration.
-
-Any available Linux device-tree configuration, driver patches or
-supported image.
-
-For the Qualcomm/Linux maintainers, we would appreciate guidance on
-the minimum CCI1 configuration and dependencies for this platform, any
-existing SFG14-01 camera enablement work, and the diagnostic evidence
-needed to investigate further.
-
-We can provide the kernel boot logs, kernel configuration, baseline
-and live device trees, minimal CCI1 patch, and Windows hardware IDs
-and driver-profile details. Serial number/SNID information can be
-provided privately to Acer.
-
-Our immediate objective is to bring up the correct CCI controller and
-obtain a repeatable RGB sensor chip-ID before proceeding to capture
-and libcamera integration.
-
-Please route this request to the appropriate platform or camera
-engineer if necessary.
-Ahmad
+--
+0-DAY CI Kernel Test Service
+https://github.com/intel/lkp-tests/wiki
