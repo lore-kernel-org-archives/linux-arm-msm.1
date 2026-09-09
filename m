@@ -1,55 +1,78 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pj1-f51.google.com (mail-pj1-f51.google.com [209.85.216.51])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7FF513559E1;
-	Wed,  9 Sep 2026 05:40:00 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A9BA32D3727
+	for <linux-arm-msm@vger.kernel.org>; Wed,  9 Sep 2026 05:58:58 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.216.51
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788932401; cv=none; b=pA+G+/XqSAiAi8T+UYOBCildsy5/zsk/Mxt173Ynp4MuHe5e9W/f+GKfpbZZ8N4oW1tmCg24xs3NoUrxwZPOLL8q8t5ejM9WTvniceUBoMOCxuHdV6zgz/ArUSTN/qeY+Vg7/ygfdw5gBtEY22pPM0D+TodmTarQuZIDeGY2Ei4=
+	t=1788933539; cv=none; b=tDsD+4DbB184canvMS+Kt2eijVqtcc8cV68c2s9uHNA/jnxYGj2yZsTB8WHty4FmeHfnm6SVMHkiXe+ylR1JdWMOk7HyVRw4MKU+DUtwQQniIHhtTXgL1nTYhia/ULNH/xgaJuuNAzjgIj+G5siTNEV2jYkwjv+nZuomReC+Fbg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788932401; c=relaxed/simple;
-	bh=eRLd7zKH3n/0gihUIl6MAKmNV6UvRpIkCOx3gB849HY=;
-	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=KK473di//rQ42WbDFjfAl5G2YjyQcduCo3onfDJKg7EkmtamKIJd2gWJMfwtn5Ax1GITdLjtVAgpt/mhC95UPYBA7BUESSh9vW8LzMpLmVzbT/UJ+BzU+bGOMwP9U5w1nuV1szdrnv1wGMKUcz5StRbz7+jkkJodRG/nlf2LxgI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=OLzBjy5n; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=qualcomm.com
+	s=arc-20240116; t=1788933539; c=relaxed/simple;
+	bh=j2/rpIMHlyvQBXpjp1UnZyA6EtxR2Hk238RofMuM6Xw=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=HrsjL1ebqpiawVmBmrQu2y8BTUSl3HeuWgo31k+gLHPLu8Ore6Cd5MHOOegv4Y7BjX6r7VsV0bw/Qnq3W7foyjKv/POu/e4a+R+o5eTI6EJO6CgVBA6B4gR6j3I0aGL/5LXTSBYrHLxYoaIgUshR6COXsns8TMcxLAmlQ0zw3hk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=quora.org; spf=pass smtp.mailfrom=quora.org; dkim=pass (1024-bit key) header.d=quora.org header.i=@quora.org header.b=OnXI7OVG; arc=none smtp.client-ip=209.85.216.51
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=quora.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=quora.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="OLzBjy5n"
-Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 688Mg5fR1274431;
-	Wed, 9 Sep 2026 05:39:54 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:date:from:message-id:mime-version
-	:subject:to; s=qcppdkim1; bh=nhfm6uEPdDFtO1sNsFI94jWt8J36TIrUt0n
-	9IMng61g=; b=OLzBjy5n7zZYtnOeVJPM/3ATkuuDaVLWgVmrXWgG7X8RlG7Ckvx
-	Z1fD6eff/qFQZMqqRA8xcMmxwG2C6DwjKsoa81Lz+AAUypB8bKri7EprGl7Q1z9X
-	1SRMcOc6tDPXVCbwrXqN19Ukt6RJc8el/aXSdt+8zn68V4yig9z0M/h/T8EMaVCT
-	FRp8D6PO8GLsdSWIZZ3m4137Idp7u73J4xBhDfhl9bbXS4DquQCA7xuo/N1y/cKy
-	DiHMchc7qnmtKPLj9qqpCCZhvJpmBEnMzFHRkvIxc4tlUaH2gEtSsPowAgRQIfsy
-	l13omCjgAv/UIljJEwoVA0eyYaAsfDflXsA==
-Received: from apblrppmta01.qualcomm.com (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com [103.229.18.19])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gjqdw2ehd-1
-	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
-	Wed, 09 Sep 2026 05:39:54 +0000 (GMT)
-Received: from pps.filterd (apblrppmta01.qualcomm.com [127.0.0.1])
-	by APBLRPPMTA01.qualcomm.com (8.18.1.11/8.18.1.11) with ESMTP id 6895dpjx3082257;
-	Wed, 9 Sep 2026 05:39:51 GMT
-Received: from hu-devc-hyd-u22-c.qualcomm.com ([10.213.101.157])
-	by APBLRPPMTA01.qualcomm.com (PPS) with ESMTPS id 6895dowQ3082250
-	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
-	Wed, 09 Sep 2026 05:39:50 +0000 (GMT)
-Received: by hu-devc-hyd-u22-c.qualcomm.com (Postfix, from userid 2342877)
-	id EC673649; Wed,  9 Sep 2026 11:09:49 +0530 (+0530)
-From: Nitin Rawat <nitin.rawat@oss.qualcomm.com>
-To: mani@kernel.org, James.Bottomley@HansenPartnership.com,
-        konrad.dybcio@linaro.org, martin.petersen@oracle.com
-Cc: linux-scsi@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-arm-msm@vger.kernel.org,
-        Nitin Rawat <nitin.rawat@oss.qualcomm.com>
-Subject: [PATCH V2] scsi: ufs: ufs-qcom: Enable only lane clocks in lane clock APIs
-Date: Wed,  9 Sep 2026 11:09:44 +0530
-Message-Id: <20260909053944.2827968-1-nitin.rawat@oss.qualcomm.com>
-X-Mailer: git-send-email 2.34.1
+	dkim=pass (1024-bit key) header.d=quora.org header.i=@quora.org header.b="OnXI7OVG"
+Received: by mail-pj1-f51.google.com with SMTP id 98e67ed59e1d1-398c1101c1bso5207661a91.1
+        for <linux-arm-msm@vger.kernel.org>; Tue, 08 Sep 2026 22:58:58 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=quora.org; s=google; t=1788933538; x=1789538338; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=2Yn17EsWeham9YF5uu/47qEPWL8ZeqKrd9IKLrIGf7Q=;
+        b=OnXI7OVGQbhpEUM44aG8PSXmuYnpzluuIJl/fsDdBsTnML0AtWzJbw/aqty++I+bRT
+         ufON8P2Sd+zRQbCBhUDHmynMWunDi4m2G8yg0DzT/SSV9cc0Kjwho1LWlTGIBbpMt0j4
+         nBQORs+cW6Cxg4/9o8fDjGyEdF8ie+HRvTT+g=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1788933538; x=1789538338;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=2Yn17EsWeham9YF5uu/47qEPWL8ZeqKrd9IKLrIGf7Q=;
+        b=PBJsmEREjaxyaRDcUYNDqh5NG0wbknbhcXo9KA/LeIx1f/Rtrrw4cTxImzp397uYWC
+         ef75mDgkrb3xzGgXUdcixMM8G7T+j51uXJnf0mja1pjZU0ACbtEMq3bwA22qUOAhcSiD
+         OJ7Sv5T2GqXnRXIeWXFtFZhNuBqIi6BlFJXdrSHnWudWOZvHUQhUGqqyKPQ2Knj5FCTI
+         C/vSlC7pUg+yVxp1FIrTK1l655SqaXi4YNIJeZNe6Bqa1swx/9wXnwwik/o8JkpGzfep
+         LXaEqJsObOGCgrJ+KWFnXYQmy6W8JJicR9wt1aDlbGonrReqvBciSCAg9JneZgyp1j/l
+         t7ZA==
+X-Forwarded-Encrypted: i=1; AKwUvBweAWo+GQNitIAD7EDQuSyHQdmzSJmTDwzV3KXKrkHqotUeUDm+CxGipInaRtudJqBaecLyQngliv+fnf0E@vger.kernel.org
+X-Gm-Message-State: AFuF++n58eKb3vdapQTmjzbRz3Y+KNTjLdIS4BPLlEwinAgXXLpN4nl9
+	JxlbRaFvoDLwJNAuBOz+yN09C44UkcixRpIhPKxgB7DlQkFiTCxAWtwyON7XAYXp44k=
+X-Gm-Gg: AYBFou2d1P1Tt2U3C8NfSXzAfdF6CXeFEfLc3L/ZKcxoXLVQtDRhWuuciIvAUvGZ44y
+	Ox71H8o/lxRrSrZpO6SKIV916uXvAH/AV7j2/gd3rhjHJe3TX/xAmEeGBkXwQNLwkwji++5WcLs
+	QN3xqzITs6n+Arr2RyInB26x5wSOV1soz9iKAVv4zNUuPBKdYN3DjPiAswbwJ1+2ZI53N7UWlWt
+	HMK90883dXxIXUhZLfwbGwAClas8pMvhiq5BNyAxAIvCfE7koCKSN/1/RihhkfBVVkQZETqvgZA
+	jlHTDXAFEvdjTKYvRJ10DTiOLQhXu2aJtOyxTcybm5PfGijDgDv1nulY5AVvum2LRkzGbWyJU+y
+	262575GU2FD4sCyq5ri+/JePrIIox8FAJL/uOsBqPtCpcTKWUVtCa8av7vGRV383zeKCmAT0OK9
+	G7fdqtb7Sra6cSgx2Kd0OSleeiol98CHbBOGNiZAuWqfciYUlYtM70mV+oMs1god1bg9SJSAkq8
+	m+kzkx1liU9zkpoFsRpIYfndfDzsPNNqaZkny3hqdVHb8jE1+HkaOPPdgZhVhYCkbiPoU2xGPPF
+	nyeMbYam8/Idt9xiCYQlSex8AtmVGsS3NmhVZdFSA14xd+YmHMNWdUJPHhlB5DV847dDdRGAL8a
+	o3YVE2LnXnZ1adLDj0L2/zExwFntjMTBCqd5EkHKE
+X-Received: by 2002:a17:90b:3809:b0:396:4dfb:5890 with SMTP id 98e67ed59e1d1-39b260d333amr51199234a91.2.1788933537932;
+        Tue, 08 Sep 2026 22:58:57 -0700 (PDT)
+Received: from aegis ([175.158.204.89])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-39d6538acc3sm1290927a91.6.2026.09.08.22.58.53
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 08 Sep 2026 22:58:57 -0700 (PDT)
+From: Daniel J Blueman <daniel@quora.org>
+To: Manivannan Sadhasivam <mani@kernel.org>
+Cc: "David S. Miller" <davem@davemloft.net>,
+	Eric Dumazet <edumazet@google.com>,
+	Jakub Kicinski <kuba@kernel.org>,
+	Paolo Abeni <pabeni@redhat.com>,
+	Simon Horman <horms@kernel.org>,
+	Chris Lew <christopher.lew@oss.qualcomm.com>,
+	Pranav Mahesh Phansalkar <pranav.phansalkar@oss.qualcomm.com>,
+	Deepak Kumar Singh <deepak.singh@oss.qualcomm.com>,
+	linux-arm-msm@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	Daniel J Blueman <daniel@quora.org>
+Subject: [PATCH] net: qrtr: resend HELLO on MHI resume
+Date: Wed,  9 Sep 2026 13:58:44 +0800
+Message-ID: <20260909055846.16539-1-daniel@quora.org>
+X-Mailer: git-send-email 2.53.0
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -57,161 +80,93 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-Reinject: loops=2 maxloops=12
-X-QCInternal: smtphost
-X-QCInternal: smtphost
-X-Proofpoint-ORIG-GUID: e0ncjI8vWPUcQBEVlG6NPu6Zo74Pn_Xx
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTA5MDA2MSBTYWx0ZWRfX/XHcsTk/WTur
- 6IgwAaaUqQDOQr76FvgWNKiBDmut0gN7/XiU9DZ5wF1sB2H/f/e6jHUROQHU1VUBHNKuSx9pju9
- KJ69R5O6fB2DoNwabU+wyBWromXoIe8=
-X-Proofpoint-GUID: e0ncjI8vWPUcQBEVlG6NPu6Zo74Pn_Xx
-X-Authority-Analysis: v=2.4 cv=Bo2tB4X5 c=1 sm=1 tr=0 ts=6aa0f12a cx=c_pps
- a=Ou0eQOY4+eZoSc0qltEV5Q==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
- a=VdqzKS8jKosA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
- a=eoimf2acIAo5FJnRuUoq:22 a=EUspDBNiAAAA:8 a=kaQ9LzzmEayfo5emOsQA:9
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTA5MDA2MSBTYWx0ZWRfX1E7uJfvgGWJh
- dn6QvkjyAXUazlZGnWUXjjTzaVaQp2/fFzTC+gY1hsiG3RhcIiBaVylOFYOOy7E8TpyEIPtjzM6
- CTxhusFtmmrkNM17MzLGXg3RC5KCAT9T9lsfX1U/bIbY8BDsT7wcnlGYiFgnC+Yn4s/gvz7+eYv
- jhkwm+MqPb0WNibl58BzJVlvCe09/c7ANUwQQkT4+5CKNZvL9ZiEI1PwrJFJfxKXCSyoXhrYKiL
- sMX/cQ6j7P5TCFgCvppU4JYJlBgD1DW3R8v/6aB1TcRUPdGOVs/pbDnHO1Vf9rtoc83hFyLtjoy
- bAeHF1tSmXgwzkqupObzOfQbVjqS3X2GyyRoHSH0CGpt0yuKPS9A4AePE3qj4qju/pNbTwXEP8m
- uz9VVxjnoE9l4dsxx/AOG+h0iuwibVM6c5CuiIAFTtGb1kQM22slKu4BKK7TeSU2/QLphQE0B0X
- CXG0QRzxIQ6lKawaOWg==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-08_03,2026-09-08_03,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1011 suspectscore=0 bulkscore=0 impostorscore=0 adultscore=0
- malwarescore=0 spamscore=0 priorityscore=1501 lowpriorityscore=0 phishscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2609090061
 
-ufs_qcom_enable_lane_clks() and ufs_qcom_disable_lane_clks() currently
-use clk_bulk_prepare_enable()/clk_bulk_disable_unprepare() on the
-entire host->clks array obtained from devm_clk_bulk_get_all(). This
-array contains all device clocks, not just lane symbol clocks.
+Since the MHI HELLO exchange was relocated, it is sent only at device
+registration. During a suspend-resume cycle, the firmware in WiFi
+cards such as WCN7850 indefinitely waits for another HELLO,
+triggering:
 
-Since the UFS core framework already manages the non-lane clocks via
-the setup_clocks callback, the bulk enable/disable in the lane clock
-APIs resulted in duplicate reference count increments on those shared
-clocks. The extra enable counts were never balanced by a corresponding
-disable from the framework's clock gating path, preventing the clock
-reference counts from reaching zero and ultimately blocking CXO
-shutdown during low-power states.
+  ath12k_wifi7_pci 0004:01:00.0: timeout while waiting for restart complete
+  ath12k_wifi7_pci 0004:01:00.0: failed to resume core: -110
 
-Fix this by restricting the lane clock APIs to only prepare/enable
-and disable/unprepare the three lane symbol clocks (tx_lane0_sync_clk,
-rx_lane0_sync_clk, rx_lane1_sync_clk), leaving the handling of all
-other clocks to the UFS core framework. The lane clocks are now
-acquired individually via devm_clk_get() instead of being looked up
-in the bulk clock array.
+Fix this by triggering the handshake from resume_early in the MHI
+transport.
 
-Signed-off-by: Nitin Rawat <nitin.rawat@oss.qualcomm.com>
+Validated on Qualcomm X1E-801800 on Lenovo Slim 7x across 10
+suspend-resume cycles.
+
+Fixes: 544d85de4dc2 ("net: qrtr: Send HELLO message on endpoint register")
+Signed-off-by: Daniel J Blueman <daniel@quora.org>
 ---
-Changes from v1:
-1. As per konrad's comment, used devm_clk_get instead of to get
-   lane clock handle instead of using bulk call API.
----
- drivers/ufs/host/ufs-qcom.c | 47 ++++++++++++++++++++++++++++++-------
- drivers/ufs/host/ufs-qcom.h |  5 ++--
- 2 files changed, 42 insertions(+), 10 deletions(-)
+ net/qrtr/af_qrtr.c | 13 +++++++++++++
+ net/qrtr/mhi.c     | 10 +++++++++-
+ net/qrtr/qrtr.h    |  2 ++
+ 3 files changed, 24 insertions(+), 1 deletion(-)
 
-diff --git a/drivers/ufs/host/ufs-qcom.c b/drivers/ufs/host/ufs-qcom.c
-index aa2ac2cd2b69..50f34d1c5fdb 100644
---- a/drivers/ufs/host/ufs-qcom.c
-+++ b/drivers/ufs/host/ufs-qcom.c
-@@ -348,7 +348,9 @@ static void ufs_qcom_disable_lane_clks(struct ufs_qcom_host *host)
- 	if (!host->is_lane_clks_enabled)
- 		return;
-
--	clk_bulk_disable_unprepare(host->num_clks, host->clks);
-+	clk_disable_unprepare(host->rx_lane1_sync_clk);
-+	clk_disable_unprepare(host->rx_lane0_sync_clk);
-+	clk_disable_unprepare(host->tx_lane0_sync_clk);
-
- 	host->is_lane_clks_enabled = false;
+diff --git a/net/qrtr/af_qrtr.c b/net/qrtr/af_qrtr.c
+index 78347c937af7..2ffcfc2fdb4a 100644
+--- a/net/qrtr/af_qrtr.c
++++ b/net/qrtr/af_qrtr.c
+@@ -623,6 +623,19 @@ static void qrtr_hello_work(struct work_struct *work)
+ 	qrtr_port_put(ctrl);
  }
-@@ -357,28 +359,57 @@ static int ufs_qcom_enable_lane_clks(struct ufs_qcom_host *host)
+ 
++/* Trigger the HELLO handshake after the remote has been reset, eg on resume */
++void qrtr_endpoint_hello(struct qrtr_endpoint *ep)
++{
++	struct qrtr_node *node = ep->node;
++
++	mutex_lock(&node->ep_lock);
++	node->hello_sent = false;
++	mutex_unlock(&node->ep_lock);
++
++	schedule_delayed_work(&node->say_hello, 0);
++}
++EXPORT_SYMBOL_GPL(qrtr_endpoint_hello);
++
+ /**
+  * qrtr_endpoint_register() - register a new endpoint
+  * @ep: endpoint to register
+diff --git a/net/qrtr/mhi.c b/net/qrtr/mhi.c
+index 3990da1a65dc..50326ffa3401 100644
+--- a/net/qrtr/mhi.c
++++ b/net/qrtr/mhi.c
+@@ -183,6 +183,7 @@ static int __maybe_unused qcom_mhi_qrtr_pm_suspend_late(struct device *dev)
+ static int __maybe_unused qcom_mhi_qrtr_pm_resume_early(struct device *dev)
  {
- 	int err;
-
--	err = clk_bulk_prepare_enable(host->num_clks, host->clks);
-+	if (host->is_lane_clks_enabled)
-+		return 0;
+ 	struct mhi_device *mhi_dev = container_of(dev, struct mhi_device, dev);
++	struct qrtr_mhi_dev *qdev = dev_get_drvdata(dev);
+ 	enum mhi_state state;
+ 	int rc;
+ 
+@@ -201,7 +201,13 @@ static int __maybe_unused qcom_mhi_qrtr_pm_resume_early(struct device *dev)
+ 		return rc;
+ 	}
+ 
+-	return qcom_mhi_qrtr_queue_dl_buffers(mhi_dev);
++	rc = qcom_mhi_qrtr_queue_dl_buffers(mhi_dev);
++	if (rc)
++		return rc;
 +
-+	err = clk_prepare_enable(host->tx_lane0_sync_clk);
- 	if (err)
--		return err;
-+		goto out;
++	qrtr_endpoint_hello(&qdev->ep);
 +
-+	err = clk_prepare_enable(host->rx_lane0_sync_clk);
-+	if (err)
-+		goto out_disable_tx_lane0;
-+
-+	err = clk_prepare_enable(host->rx_lane1_sync_clk);
-+	if (err)
-+		goto out_disable_rx_lane0;
-
- 	host->is_lane_clks_enabled = true;
-
- 	return 0;
-+
-+out_disable_rx_lane0:
-+	clk_disable_unprepare(host->rx_lane0_sync_clk);
-+out_disable_tx_lane0:
-+	clk_disable_unprepare(host->tx_lane0_sync_clk);
-+out:
-+	return err;
++	return 0;
  }
-
- static int ufs_qcom_init_lane_clks(struct ufs_qcom_host *host)
- {
--	int err;
- 	struct device *dev = host->hba->dev;
-
- 	if (has_acpi_companion(dev))
- 		return 0;
-
--	err = devm_clk_bulk_get_all(dev, &host->clks);
--	if (err <= 0)
--		return err;
-+	host->tx_lane0_sync_clk = devm_clk_get(dev, "tx_lane0_sync_clk");
-+	if (IS_ERR(host->tx_lane0_sync_clk))
-+		return dev_err_probe(dev, PTR_ERR(host->tx_lane0_sync_clk),
-+				     "failed to get tx_lane0_sync_clk\n");
+ 
+ static const struct dev_pm_ops qcom_mhi_qrtr_pm_ops = {
+diff --git a/net/qrtr/qrtr.h b/net/qrtr/qrtr.h
+index 3f2d28696062..de2de69a6199 100644
+--- a/net/qrtr/qrtr.h
++++ b/net/qrtr/qrtr.h
+@@ -27,6 +27,8 @@ int qrtr_endpoint_register(struct qrtr_endpoint *ep, unsigned int nid);
+ 
+ void qrtr_endpoint_unregister(struct qrtr_endpoint *ep);
+ 
++void qrtr_endpoint_hello(struct qrtr_endpoint *ep);
 +
-+	host->rx_lane0_sync_clk = devm_clk_get(dev, "rx_lane0_sync_clk");
-+	if (IS_ERR(host->rx_lane0_sync_clk))
-+		return dev_err_probe(dev, PTR_ERR(host->rx_lane0_sync_clk),
-+				     "failed to get rx_lane0_sync_clk\n");
-
--	host->num_clks = err;
-+	/* In case of single lane per direction, don't read lane1 clocks */
-+	if (host->hba->lanes_per_direction > 1) {
-+		host->rx_lane1_sync_clk = devm_clk_get(dev, "rx_lane1_sync_clk");
-+		if (IS_ERR(host->rx_lane1_sync_clk))
-+			return dev_err_probe(dev, PTR_ERR(host->rx_lane1_sync_clk),
-+					     "failed to get rx_lane1_sync_clk\n");
-+	}
-
- 	return 0;
- }
-diff --git a/drivers/ufs/host/ufs-qcom.h b/drivers/ufs/host/ufs-qcom.h
-index e20b3ca50577..37f6e88b0adf 100644
---- a/drivers/ufs/host/ufs-qcom.h
-+++ b/drivers/ufs/host/ufs-qcom.h
-@@ -330,8 +330,9 @@ struct ufs_qcom_host {
- 	struct phy *generic_phy;
- 	struct ufs_hba *hba;
- 	struct ufs_pa_layer_attr dev_req_params;
--	struct clk_bulk_data *clks;
--	u32 num_clks;
-+	struct clk *tx_lane0_sync_clk;
-+	struct clk *rx_lane0_sync_clk;
-+	struct clk *rx_lane1_sync_clk;
- 	bool is_lane_clks_enabled;
-
- 	struct icc_path *icc_ddr;
---
-2.34.1
+ int qrtr_endpoint_post(struct qrtr_endpoint *ep, const void *data, size_t len);
+ 
+ int qrtr_ns_init(void);
+-- 
+2.53.0
 
