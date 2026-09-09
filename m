@@ -1,33 +1,33 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 896C54B5CD4;
-	Wed,  9 Sep 2026 11:28:34 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 83FDB5452BD;
+	Wed,  9 Sep 2026 11:30:13 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788953315; cv=none; b=N9zV186rTVZaFw/gpKZn6BS3tZV+AelB6LYqenp574u95nr9/fFgeLmfYZt98+CySaHw6tCcycZICdgst3Hp8qL4soyN6ohLezfJn2lZXB9gwbrzVZH8Ph7qBP2+H99mKxhxOldy3ALPxHcABJHs+7UlgcWkJafiVyXsYcRLzMk=
+	t=1788953415; cv=none; b=p89JHP/UsD7ymhnMYRXlHnec5AVoKBW8m7BC/v9onOcjBWltWga6gx2ITvHDJ0oOwlJonz91U9Kxfa58nGOxq2TWe7eFQZvmsQEUqEFddllsTtbC4nwhc9zTYZ3vuAzVZQErfDdje/BsYu3fXprABcge6zYh3ZI1LijBzkVhbVk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788953315; c=relaxed/simple;
-	bh=YB87it622ts0toxfTmNSOhFVdA1wmPUd38htUOzhqS0=;
-	h=Message-ID:Date:MIME-Version:Subject:To:References:From:
-	 In-Reply-To:Content-Type; b=tuizTS2MkwiiOG9pL0SI+ZfoBg49YtEEzMwgbvv/olbZwwWJPji+rVqCOu/buIpNElp7sePkTwXvzSIn0k1RbY9o/XsvlWIUS5qK1Y3gJyA9lK0NwjPWgrwzM0ZUNisVwWxJJZvgdh4UTeNrIuYAFtMyzsCrqzwb31botW4k6bo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=hu/Q0a2c; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1788953415; c=relaxed/simple;
+	bh=fkEYmLZdN32k5AMFaNhqmEaA7/FEsVAeDNxA8L1bqGo=;
+	h=Message-ID:Date:MIME-Version:Subject:From:To:Cc:References:
+	 In-Reply-To:Content-Type; b=Qw1v/2BUs5tYvIhDRQKSCEoYSZ6EICMuoW/7IH5o62uGzVluoIDRPidzYOepmKaapP3j83vEe6PVnKBt1sTKBka2LjvSNu9bGeB7lIptRGMXOcGov9R+vWAG5gPableoh71RNC7DgyBP5g8Yl6hfvit1UqPEAgfOCpGVGI8OFww=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=gz7LElvN; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="hu/Q0a2c"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D7BAD1F00A3E;
-	Wed,  9 Sep 2026 11:28:32 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="gz7LElvN"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 47D551F00A3D;
+	Wed,  9 Sep 2026 11:30:06 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1788953314;
-	bh=dLkrsZhSPD5byjJojvFEbgMv/u3HdJBRsDXxbO13uuU=;
-	h=Date:Subject:To:References:From:In-Reply-To;
-	b=hu/Q0a2c/94vSoN3eubujXsH+Ha9fKuOy0oCLxT1ZRPz45hC1zUSlyb3lBjUyisB2
-	 5yBsVvwi4FxZ3N7fZmVYpc/iTz4QzpJOx812TEuKmOeEXHvAjA5CCQVD/f1cM51jna
-	 bwKSFIKIKqWO7lYiiKW1dxAiTrZQMZUjKdPEmSqA7cY5yV4nwak41CQDN880KhycsG
-	 elpBloiUKHpA0ZI0DpfP5nMbjRZAgod79uxff+W/PKsuGn7zlmZq1aDDIVpoMVYYth
-	 f9XXTMOgDoKywv1Fi8Ny45JTDeaSqNlZftT1pAZKUrrIP5jQbQHrBmlOLs76DDdCBX
-	 rmxcfD5ccPT1g==
-Message-ID: <6530a61b-5a41-4375-9bcb-a50558d7c75d@kernel.org>
-Date: Wed, 9 Sep 2026 12:28:31 +0100
+	s=k20260515; t=1788953413;
+	bh=U9/PVisJndqXPVEBJYwCPRJvkMsp2nPsLH4JBynlXe4=;
+	h=Date:Subject:From:To:Cc:References:In-Reply-To;
+	b=gz7LElvNAhIlmxcKivVP/vLctwmkAOdr1uUB3wIOH2FlHkWN6afKWKUb6pdmOIrZt
+	 92NIY69r12Ds5vwcRpKvgKl2r8N/Pw2Buz4T4D8ILfioCx+HNbwINkutG/iqmhvg0F
+	 fkwKmjJqdHz/ulqLrKCrJ/lajMD1I2P3+uLU2T9GqVVlkRqT60Kkpp6C4OTUKm5v57
+	 LDFG1zRjIOEkii+wXT8pXrn3aftiXCmdHFo77HmJdqgSIqFTGIQMnGGBxFaF1ymSYQ
+	 a+92wQRESKFsergPCIelyxdgKdMzrgIcnL4AbQS0LU2rJ0Z+kFTKA4Zv++S08buVqR
+	 0zwMgETTaT8Nw==
+Message-ID: <98602703-4a1c-4e91-b7bf-934bb9894eb7@kernel.org>
+Date: Wed, 9 Sep 2026 13:30:04 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -35,140 +35,109 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: Acer Swift SFG14-01 Camera Support not working on Linux
-To: AHMAD YASEEN <ahmadrandhawa01@gmail.com>, loic.poulain@oss.qualcomm.com,
- rfoss@kernel.org, vladimir.zapolskiy@linaro.org,
- linux-arm-msm@vger.kernel.org, linux-i2c@vger.kernel.org,
- linux-media@vger.kernel.org
-References: <CAFJ6yro2PRQAsNwDMRmU8sve6nrXXWVruStgyYVRMcYeksdufQ@mail.gmail.com>
-From: Bryan O'Donoghue <bod@kernel.org>
-Content-Language: en-GB
-Autocrypt: addr=bod@kernel.org; keydata=
- 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
-In-Reply-To: <CAFJ6yro2PRQAsNwDMRmU8sve6nrXXWVruStgyYVRMcYeksdufQ@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Subject: Re: [PATCH PRELIMINARY 1/5] arm64: dts: qcom: shikra-iqs-som: fix
+ GPIO138 reservation
+From: Krzysztof Kozlowski <krzk@kernel.org>
+To: Mohd Ayaan Anwar <mohd.anwar@oss.qualcomm.com>,
+ Bjorn Andersson <andersson@kernel.org>,
+ Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
+ <conor+dt@kernel.org>, Komal Bajaj <komal.bajaj@oss.qualcomm.com>,
+ Anurag Pateriya <apateriy@qti.qualcomm.com>,
+ Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+ Richard Cochran <richardcochran@gmail.com>,
+ Andrew Lunn <andrew+netdev@lunn.ch>,
+ Maxime Chevallier <maxime.chevallier@bootlin.com>
+Cc: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+ linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
+ linux-kernel@vger.kernel.org, netdev@vger.kernel.org
+References: <20260908-shikra_ethernet_dts-v1-0-69c0c5c7c124@oss.qualcomm.com>
+ <20260908-shikra_ethernet_dts-v1-1-69c0c5c7c124@oss.qualcomm.com>
+ <4aee70eb-bd1d-4320-8921-e55bb8e0d176@kernel.org>
+Content-Language: en-US
+Autocrypt: addr=krzk@kernel.org; keydata=
+ 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
+In-Reply-To: <4aee70eb-bd1d-4320-8921-e55bb8e0d176@kernel.org>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-On 09/09/2026 08:41, AHMAD YASEEN wrote:
-> We can provide the kernel boot logs, kernel configuration, baseline
-> and live device trees, minimal CCI1 patch, and Windows hardware IDs
-> and driver-profile details. Serial number/SNID information can be
-> provided privately to Acer.
+On 09/09/2026 13:24, Krzysztof Kozlowski wrote:
+> On 08/09/2026 08:23, Mohd Ayaan Anwar wrote:
+>> The GPIO mappings on the IQS variant differ from the CQ variants.
+>> GPIO138 is connected to the RGMII1_RX_CTL pin rather than the NFC ESE
+>> Secure IO pin; the latter is connected to GPIO49. This incorrect
+>> reservation causes the probe of the second Ethernet port to fail:
+>>
+>>   shikra-tlmm 500000.pinctrl: error -EINVAL: pin-138 (5d20000.ethernet)
+>>   shikra-tlmm 500000.pinctrl: error -EINVAL: could not request pin 138
+>>   (GPIO_138) from group gpio138 on device 500000.pinctrl
+>>   qcom-ethqos 5d20000.ethernet: Error applying setting, reverse things back
+
+
+Apply this patch and reproduce it. Is is possible? Didn't we talk about
+this already?
+
+>>
+>> Replace gpio138 with gpio49 in the reserved list.
+>>
+>> Fixes: 779aead2dace ("arm64: dts: qcom: shikra: Add gpio-reserved-ranges to tlmm")
+>> Signed-off-by: Mohd Ayaan Anwar <mohd.anwar@oss.qualcomm.com>
+>> ---
+>>  arch/arm64/boot/dts/qcom/shikra-iqs-som.dtsi | 2 +-
+>>  1 file changed, 1 insertion(+), 1 deletion(-)
+>>
 > 
-> Our immediate objective is to bring up the correct CCI controller and
-> obtain a repeatable RGB sensor chip-ID before proceeding to capture
-> and libcamera integration.
+> This looks duplicating:
+> https://lore.kernel.org/all/20260820085347.822-1-xueyao.an@oss.qualcomm.com/
+> 
 
-The RGB sensor and _should_ be on the same CCI and CSIPHY as the other 
-x1e platforms.
+Ah, no, mixed patches. Duplication is between other works:
+https://lore.kernel.org/all/20260820085347.822-1-xueyao.an@oss.qualcomm.com/
+https://lore.kernel.org/all/20260826-shikra-dtpm-v4-1-8476223184de@oss.qualcomm.com/
 
-Windows actually discloses alot of the information you need.
+But nevertheless I am sure we talked about this, that commit msg and is
+not accurate... Cannot find the thread, though...
 
-cd /mnt/windows; find . -name "*sensor*.bin" -print
-
-For me on the Dell Inspiron that show ov02e10.bin and hm1092.bin for the 
-RGB and Greyscale sensors respectively.
-
-So you don't necessarily need Acer to provide information though, it'd 
-be nice.
-
-You should add a dump of your DSDT here:
-
-https://github.com/aarch64-laptops/build/tree/master/misc
-
-Same one ?
-
-https://github.com/aarch64-laptops/build/tree/master/misc/acer-sfa14-11
-
-...
-
-You have a USB camera no ?
-
-DSDT Device(WCAM)
-
-https://github.com/aarch64-laptops/build/blob/57a8b779e1ad1f08fb5c05b74c6d2d5975706a92/misc/acer-sfa14-11/dsdt.dsl#L50015
-
-Device (WCAM)
-                     {
-                         Name (_ADR, One)  // _ADR: Address
-                         Name (_PLD, Package (0x01)  // _PLD: Physical 
-Location of Device
-                         {
-                             ToPLD (
-                                 PLD_Revision           = 0x2,
-                                 PLD_IgnoreColor        = 0x1,
-                                 PLD_Red                = 0x0,
-                                 PLD_Green              = 0x0,
-                                 PLD_Blue               = 0x0,
-                                 PLD_Width              = 0x0,
-                                 PLD_Height             = 0x0,
-                                 PLD_UserVisible        = 0x1,
-                                 PLD_Dock               = 0x0,
-                                 PLD_Lid                = 0x1,
-                                 PLD_Panel              = "FRONT",
-                                 PLD_VerticalPosition   = "UPPER",
-                                 PLD_HorizontalPosition = "CENTER",
-                                 PLD_Shape              = "UNKNOWN",
-                                 PLD_GroupOrientation   = 0x0,
-                                 PLD_GroupToken         = 0x0,
-                                 PLD_GroupPosition      = 0x0,
-                                 PLD_Bay                = 0x0,
-                                 PLD_Ejectable          = 0x0,
-                                 PLD_EjectRequired      = 0x0,
-                                 PLD_CabinetNumber      = 0x0,
-                                 PLD_CardCageNumber     = 0x0,
-                                 PLD_Reference          = 0x0,
-                                 PLD_Rotation           = 0x0,
-                                 PLD_Order              = 0x0,
-                                 PLD_VerticalOffset     = 0xFFFF,
-                                 PLD_HorizontalOffset   = 0xFFFF)
-
-                         })
-                     }
-
-Switch on host controller for usb_2 and the USB should should power it. 
-At a guess its probably a UVC video device.
-
----
-bod
+Best regards,
+Krzysztof
