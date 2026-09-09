@@ -1,87 +1,33 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C60B353A8A1
-	for <linux-arm-msm@vger.kernel.org>; Wed,  9 Sep 2026 11:25:07 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 896C54B5CD4;
+	Wed,  9 Sep 2026 11:28:34 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788953109; cv=none; b=LyOzAcISZWX36r4EdEyQ1nWpaTehEhumAuksHeGXQmmRgM9EFYvzgzMOptdbr7oef6sDoCN71cGriB72dxYBFjZvH/0baqFW8YJi/eNl7rnrLZ+DtiP9aFv+cxr6Mt3Gdk6O6AI1AlKl6Ega8jTd1WGXLxO9owjfJZyAleqeUHc=
+	t=1788953315; cv=none; b=N9zV186rTVZaFw/gpKZn6BS3tZV+AelB6LYqenp574u95nr9/fFgeLmfYZt98+CySaHw6tCcycZICdgst3Hp8qL4soyN6ohLezfJn2lZXB9gwbrzVZH8Ph7qBP2+H99mKxhxOldy3ALPxHcABJHs+7UlgcWkJafiVyXsYcRLzMk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788953109; c=relaxed/simple;
-	bh=Z09T1KtKmhwNLXiWVpHaJc9LPvi/1qHau6NWWjZF04Y=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=bViIgc5Ize1dwah2kGO8gADrP9giK/2V/NHYGxdHVpFNiKTY/tVFB28QUK2dO918Ih4rTzx69NSKckLkG8y8Rq0Rq7eptNsvzvhQT4Yl2/OdbWYpGtS91j+gsHQCClxbGr7B3iQBLw5G10GTpQLu8Qn4hdP3P/BH7lt0GHB3MYs=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=kvu35bdv; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=FEPsbGi9; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1788953315; c=relaxed/simple;
+	bh=YB87it622ts0toxfTmNSOhFVdA1wmPUd38htUOzhqS0=;
+	h=Message-ID:Date:MIME-Version:Subject:To:References:From:
+	 In-Reply-To:Content-Type; b=tuizTS2MkwiiOG9pL0SI+ZfoBg49YtEEzMwgbvv/olbZwwWJPji+rVqCOu/buIpNElp7sePkTwXvzSIn0k1RbY9o/XsvlWIUS5qK1Y3gJyA9lK0NwjPWgrwzM0ZUNisVwWxJJZvgdh4UTeNrIuYAFtMyzsCrqzwb31botW4k6bo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=hu/Q0a2c; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="kvu35bdv";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="FEPsbGi9"
-Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 689AqvTj2294326
-	for <linux-arm-msm@vger.kernel.org>; Wed, 9 Sep 2026 11:25:06 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	LmygLzWOfv5qdfrTuFBPJrVJYdNWjT1c7y/zoAmNeWQ=; b=kvu35bdvj/2kTlnr
-	AmEQcrS2WB3tRsgh3yjrsEXxH4quAHR9QtFzNCeisv/2PaZ9vXe4D51oR3/0PDtD
-	TBewfHUy6GzQvW/8aOwW+ABXkzA3TskbuJ9l38r5ZIOeHHtQnKUkzo9vUqFEM0Bp
-	KLABwX8LUA7loUJdhZmvJKM5mo38M9qdUo/bUusVf5dYjwRimfR0HnSjaxPlq0bL
-	IZWJJSD8cttC/p+J8QPeXpVcZauWndKY6+DSGa/L+9+FXAGxjArMkgpaAWTI47x9
-	ozQS8nZmxbiediOZTxetvFW7fxmSk6SKEig811q4vSbRpVMuPgRuhfjfzpNgq+PP
-	iKpeDQ==
-Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com [209.85.222.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gk5ru06ds-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 09 Sep 2026 11:25:06 +0000 (GMT)
-Received: by mail-qk1-f198.google.com with SMTP id af79cd13be357-9390890ae83so72525985a.3
-        for <linux-arm-msm@vger.kernel.org>; Wed, 09 Sep 2026 04:25:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1788953106; x=1789557906; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=LmygLzWOfv5qdfrTuFBPJrVJYdNWjT1c7y/zoAmNeWQ=;
-        b=FEPsbGi9hGj0d2AATQNExfHwK3/1lgW+hbYYe/4t9OfLK0UVh9d3mG7QpTEWJHssH/
-         ZY2vDIkfmNy2kUa41XVCiz0UBytzZVby3DHCYHhe5mkXrmzBRUbaacSih3ya6dGVm5Gq
-         HylThGHX8Vg6jxTGGKhTiMlHSIrvl+RbPGKS5FwhxgRbyXZ/FwrI8CpB+dyPNfQHzvwR
-         /WIuPjDJe6SwFEdZpR6OVwR7eRK7dZx8vRt1SmMxm2GrDmJ1LB3+KFZgKr9LQ7x82G+7
-         9CzZ9j8x1yziptjskqA/3Nim94OzQjRJrEHbPUM/ltLT0KVluvWf3xfxmscqCgOku7q2
-         KF/g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788953106; x=1789557906;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=LmygLzWOfv5qdfrTuFBPJrVJYdNWjT1c7y/zoAmNeWQ=;
-        b=B3XmC0wnFXhn7c2C/KUuhOJ52U0haLsdHp+aWZHMihlvVBgmJDni/YOLwOVe9dzgsT
-         vX/NqT53Pxp5tKTeO2glA+3mx5Q8u3gZJTFJ4bvupLKNiotcu/Ti+BDVqWw7eyOyhA4f
-         e8wWTGhZqY0e999FhxeOfn8hUU049GopEO9IFjBV51aChiuBDe/Ay7tj0UGY8nc2CJfZ
-         JHNaf4vGOCx7HXDUkUABxUSeekqGJltDZUSGtGNUyIyFD+3DqLKumFNhNYWT+zi3DtQr
-         d+aH7Odtu1ij5hKgkLM+k4rzkfuDaVa0fOHozM6HpR5DzbsU09Bk7k1yXvnmHaXmGl2e
-         zIVQ==
-X-Forwarded-Encrypted: i=1; AKwUvBwt/xV51VXK+z95th/tT0fX7JVvV5IfRGek3tF0cfon9gCWy6MMBvLRa9cbJqeLReekn7SfoNLOsxxGeW0K@vger.kernel.org
-X-Gm-Message-State: AFuF++mB3U3c2Wo5Rpv1UMEVtu/SseUDzMyas+shzzjD7GH1kV2GO6bd
-	GR/F1yR/UIpTvtTBkhqB9q1rSanK1YBhEW8V1a2+rmyvpGfBmQg3ZRY/X8VaPdaCZrwin1msPLu
-	WhjR9GR2pHMel9gg24lEipIy8gn+iySC8PhJWp5KB/swe4UQ7n+gnxLPdZ3ewPc2eZonr
-X-Gm-Gg: AYBFou2knA+cR7rJRuA+zUHof8+3rlU7vm6A0+ogKOaFM6EOKyjH+GKi9UuQpJl5AhK
-	9E6kZn42Dsi8vUD6CkNPfNWAZc56Okin35ypV5rg4zebxwgHVIy7LGktE+eL/Kt3DbiqlK92TpJ
-	1MxYd28MkofeCEUs58Z5XEvyon8ee6ShX549zt3BNme/M7oXSxZ0PCbvSzwpXabazIMRBCjYFpb
-	JP0L+fm6l22Cj2+l87ifuf2e4SYVc8HNnuFtst+Gwy40GY7mz1hyYjHxmzfZmO7hyvjlj2+L+bJ
-	GkZldrrn1ceZ9qFXHCwQonXgFc+p5+yeUudp9pRFbFzJNmTUzM/bp1HzGmc5PP0Ggky5zf8XbXZ
-	aX5SOsLbl0OvIC77IQe7wTw==
-X-Received: by 2002:a05:620a:1729:b0:939:c8b8:4639 with SMTP id af79cd13be357-939c8b8467cmr560512785a.4.1788953106005;
-        Wed, 09 Sep 2026 04:25:06 -0700 (PDT)
-X-Received: by 2002:a05:620a:1729:b0:939:c8b8:4639 with SMTP id af79cd13be357-939c8b8467cmr560508385a.4.1788953105607;
-        Wed, 09 Sep 2026 04:25:05 -0700 (PDT)
-Received: from [192.168.202.12] ([178.235.128.140])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c26e956ea81sm545162766b.33.2026.09.09.04.25.02
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 09 Sep 2026 04:25:03 -0700 (PDT)
-Message-ID: <c15d4fdf-0e78-40e5-aeab-56692623b6ea@oss.qualcomm.com>
-Date: Wed, 9 Sep 2026 13:25:01 +0200
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="hu/Q0a2c"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D7BAD1F00A3E;
+	Wed,  9 Sep 2026 11:28:32 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1788953314;
+	bh=dLkrsZhSPD5byjJojvFEbgMv/u3HdJBRsDXxbO13uuU=;
+	h=Date:Subject:To:References:From:In-Reply-To;
+	b=hu/Q0a2c/94vSoN3eubujXsH+Ha9fKuOy0oCLxT1ZRPz45hC1zUSlyb3lBjUyisB2
+	 5yBsVvwi4FxZ3N7fZmVYpc/iTz4QzpJOx812TEuKmOeEXHvAjA5CCQVD/f1cM51jna
+	 bwKSFIKIKqWO7lYiiKW1dxAiTrZQMZUjKdPEmSqA7cY5yV4nwak41CQDN880KhycsG
+	 elpBloiUKHpA0ZI0DpfP5nMbjRZAgod79uxff+W/PKsuGn7zlmZq1aDDIVpoMVYYth
+	 f9XXTMOgDoKywv1Fi8Ny45JTDeaSqNlZftT1pAZKUrrIP5jQbQHrBmlOLs76DDdCBX
+	 rmxcfD5ccPT1g==
+Message-ID: <6530a61b-5a41-4375-9bcb-a50558d7c75d@kernel.org>
+Date: Wed, 9 Sep 2026 12:28:31 +0100
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -89,63 +35,140 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 3/4] clk: qcom: convert drivers over to use
- subsys_platform_driver()
-To: Brian Masney <bmasney@redhat.com>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        "Rafael J. Wysocki" <rafael@kernel.org>,
-        Danilo Krummrich <dakr@kernel.org>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Stephen Boyd <sboyd@kernel.org>,
-        Jerome Brunet <jbrunet+clk@baylibre.com>,
-        Geert Uytterhoeven <geert+renesas@glider.be>
-Cc: driver-core@lists.linux.dev, linux-kernel@vger.kernel.org,
-        linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org,
-        linux-renesas-soc@vger.kernel.org
-References: <20260908-subsys_initcall-v1-0-cbccf4cd4288@redhat.com>
- <20260908-subsys_initcall-v1-3-cbccf4cd4288@redhat.com>
-Content-Language: en-US
-From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-In-Reply-To: <20260908-subsys_initcall-v1-3-cbccf4cd4288@redhat.com>
-Content-Type: text/plain; charset=UTF-8
+Subject: Re: Acer Swift SFG14-01 Camera Support not working on Linux
+To: AHMAD YASEEN <ahmadrandhawa01@gmail.com>, loic.poulain@oss.qualcomm.com,
+ rfoss@kernel.org, vladimir.zapolskiy@linaro.org,
+ linux-arm-msm@vger.kernel.org, linux-i2c@vger.kernel.org,
+ linux-media@vger.kernel.org
+References: <CAFJ6yro2PRQAsNwDMRmU8sve6nrXXWVruStgyYVRMcYeksdufQ@mail.gmail.com>
+From: Bryan O'Donoghue <bod@kernel.org>
+Content-Language: en-GB
+Autocrypt: addr=bod@kernel.org; keydata=
+ xsFNBGRJNSgBEADD7Vm2ZFa+v+JGJ2QYTJqQAkqis/uOHkhdFNXqpBarVBd47QU/DMNU5Rxg
+ jedMQEmHoeDbJ6UOpjbrUQ63c5sgG1JbroHJJctwsEI75OOlekMuebEbjIJBLfgENGwPBMHv
+ piv5TgCWr0VgYaXfp2eh2LINFywzqj823HiDPibQAXDrjzvF1ogksi/6cQZs8d4if8YQkLOr
+ YISFouG+eR0nN1I7mUfIddXOWu6lJeTyqbWVurv58k2ekIXKaOC9ixLHFbcfYV0hOgRaTwQC
+ B8CYF9nfqZla19iItfsN9QxN+ZdQjcRoYipp6HPCMfJlKH7GfaFcW93LKc4DKJ2lVL+pg/OQ
+ lythZbjRPY492NG9kZ65aYstCs90uhMUEVVPuGUw7wBEku+6IEwZfrbMVKeWzLlPyM4Hv9hM
+ 8ktxSmxWsPTPqpBC8eyeAQLalMELAyVcZlkaCtEcbj7w4l/JkYz+4l37obG8ZD+B34udBUUz
+ MsAJ8foDFrBh2MOFA3hxD6G90D23mmWsri7pnKA2tZs92aQX7Ee+FbCyg6g5ln62Sq83ZDbf
+ 53DdBs55EVpBadeInWmXhzCHPQx06H+CwTEjShTYIaMmBfrewvYUDKvFTC5iKQhAEUgt6i94
+ JsbG7NoeqcxkUMcBOEUQ3uCQG1D70ugspgXc0wd3Rimiq6535wARAQABzSFCcnlhbiBPJ0Rv
+ bm9naHVlIDxib2RAa2VybmVsLm9yZz7CwZEEEwEIADsWIQTmk/sqq6Nt4Rerb7QicTuzoY3I
+ OgUCZ+R+mwIbAwULCQgHAgIiAgYVCgkICwIEFgIDAQIeBwIXgAAKCRAicTuzoY3IOimUD/94
+ BwVEJX31JRe2sxbB/e1w2p8x1bxvTw5AeIzpV3ox7coJg1bSU2mnGuj1V4o0Yxf/3zmcJzCN
+ VfVjwRF8Ii3GnC7uUXk2t+87piQfKTyJAYQABhZUKgoVJbjJq/S+C3XCKIyBA+EiezoUsgsA
+ jTzwU+FzV7zVWIXFPJNtBERLwboE9w9U3KjAExOa1kSY8eLrsg6kOwlOHWy5UsQqYOjrS96M
+ mzm2xuc1+RCjrndAyYhCnrOKvJ67HsPnBeJCjw7ImGD/U1GchwYbX8o3DO3JNHm3qfC86ZqX
+ 2sCouENg4OzgPTtLKUrueM6xsu6KMM7gj17vxsiR3KQEoJnnMB8D1xtBofN3mFZE0wD9M24m
+ 8yGunZbtntMCUHzIrlJgAPwKWKuGOYtA8UgMTFkccnUJtQrg9KotKtEF/FuftG9zLG9XEkt4
+ 5ZdNgbSoLWgelu3T47mbOJ8LHhiLaCWP7yrovtVAvLUQ1BsiA42u8ECrFCFvQj9nrejE/ICv
+ kP+uqcKtdDvP9HrIGycF1WZyfZLp0RvopKW92FLvI4I1QFWJ+wenk6+LGyJ5bzlrWzevjxmf
+ nHcXE6sJBHrE7eijlbbImDAi3uLYN8Nd9Dm11IDAy4GAIQxSiQn0yblDhPiyGtchy80EVkCm
+ g9k17Wol+2E2mC4DKgVdCkyUtTRSLgsJCs7BTQRkSTUoARAAuTnmWHBS6izRcEE93ajpzI7h
+ dgQO4U3IRvOEsvIKR5NGcNEs0ngGebwsZ/lVULjN4vYU0LleqVhPBidNXUoZCN3A0F0Z2Ov8
+ NZdef+2EhQPBVWxFO7JBzhe8Z3ALj+wFtlg8akJjBzU56azW/iJzAobqHVrudzKoO2b1/CMg
+ VbiAQ+RXjgfN5kY/HqYDU7mw+hXuUV9PbtX1L8xqQQac95oM9rHzKHHpiVwxTeJnGQsa+THi
+ Kze+YET3rCoGHMvOQEJhdrucTv5FpAakKdkOFNel9FFckLRKEuWgCzhpFsjQ7xbirQgFUxG9
+ vlk1+q4hMRGNyEqoD6svYEeqbiUSd0oPUJeioiC3rNMRCNHLVrfZ2J6SCPkxfda08uzSdDQU
+ 1/YPjOh8ZtQDMu7WctZ3XO288Z1gyBR49V7fbFs2w4sQxG+h/enlxqP7fdw1mjUlZjU5huCJ
+ ielS0oEaIpmUpkugli7x4WhwLnhK2EbSoz7nLBC0y+ALUOdMlz/Y1l9xRt+bkDhpmf4O4IcI
+ MxgZ0QMLq8rHDkGaEbsgZZHQPS58T0XE3IP30Q9SNxsruCMXtd2hYtBssf/wohc6JVsTtMg2
+ VYTPDPIFNZFSXupEJB7jlqpDWJ8ooJfJRLBatbjT5+mVQaMYB7Hs/t+zWYWaJKHyc8O6WLEC
+ NUV5Tdt5EkkAEQEAAcLBdgQYAQoAIBYhBOaT+yqro23hF6tvtCJxO7Ohjcg6BQJkSTUoAhsM
+ AAoJECJxO7Ohjcg6LuIQALnXt36OUuK43wqw6UYt0cnN6EbUqJHApAF5eNFn0jCCB2XELjSz
+ JKJwuNAweowBdabiBniJ+501WIW+ewEsz1uby5fUQjZuCEsIkuaIluyfUFPb73qrQyAGuusd
+ 7teA4WT+/jUku9g7lX5sVoRCrKQPkd16f6Bzfztyqyjcn43/X5yQI+wlboQ6HuKe/3I3yiOx
+ OgmCHzOawpC9PvhEcKj79RLM3Zz5Ts5AuHpRX70Jz8Be76LwVFLp5Msx3S24ZTU1lBo2uiJ3
+ xSkay2lTpyVWRPx9vgcwzxGguOPJQJwsQeLb7wpoJMPpD3ERoaRii7Q7hvmxklpZjhKYWB3d
+ t6nQ497Ek9loCrp3MIjRCSDN5xEGffiHks9yTeGMUQwO4tX8RE04uOJPkUY7uCFzFqN6/qey
+ X3oFfPgkULMdiHofPAL1OskZSTzGPSfTYRE46NCJw8yoZBQ/oOyWeqaUQbK0wmW/g81wm8p7
+ LKSGEglMpiX07M1AotgvylN5C8fjbouoK+/RAMsXkk8jba6rPfuuXPaDjCyyKn6zSVHETnHW
+ 3AJbgVY50T8STpnxayBQvWbCvu+6NOEjXCbyaOJig+5l0zlGN9XHjdANXC5HnwmyaGRL9YDq
+ Jh2nVXVJDincOdQRdKcJjYLqaOAoWrYWSDi1iZGspHBTDrnOvfMQzzHY
+In-Reply-To: <CAFJ6yro2PRQAsNwDMRmU8sve6nrXXWVruStgyYVRMcYeksdufQ@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Authority-Analysis: v=2.4 cv=M+997Sws c=1 sm=1 tr=0 ts=6aa14212 cx=c_pps
- a=qKBjSQ1v91RyAK45QCPf5w==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
- a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22
- a=20KFwNOVAAAA:8 a=EUspDBNiAAAA:8 a=q2Z_u8HKrAuHhouZslcA:9 a=QEXdDO2ut3YA:10
- a=NFOGd7dJGGMPyQGDc5-O:22
-X-Proofpoint-GUID: IMYIEZkA3CjY8WXsdqyaKpymlxf1Nhbz
-X-Proofpoint-ORIG-GUID: IMYIEZkA3CjY8WXsdqyaKpymlxf1Nhbz
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTA5MDEyNyBTYWx0ZWRfX2QLySMfAEP1F
- iw+xYHJ9C9olP3gd8IgzJo2yd9q1sRxSH3F3iZWKzoX/aH8ZwG0JEsgMq1V1/c/hao2QQaJlTtg
- cL4Tn6+XOuwwOPu3BPyddX31uJnoarQ=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTA5MDEyNyBTYWx0ZWRfX2iPeRVfMLAgB
- UqLonxYdDMGK9zapo2fz9ft2vG4Nmg6vIaNlV7JBYJ87oEZaoDP0EAVTql6ul+pHoyPIDZh7bAU
- c+DmBTqOZArJIl8LNAalFXZOqhjdP1ZQ7f8hH4jwcNmgxQp23S0YIWw1Dyu7U6m3sEMOjay5H2w
- yJpvN6bXNmAU8S/AddBMuBMN/OuVBkHeUIgZgo5fjuOwLW/aNzxCDpWd8F1OHUDA4qm+63YCBhX
- 5/TUkG6BHm6vAloVkBR5Bs9+zivK5AecQFwtpg5oci+DcgZkS1hpQOQRGPx+nKSWhJldacVn8BB
- T863ELn2ahDiWpsahowYxqeVWWv3YbdMkSjBD0OjLSzh5YvB+gzOP2GJjdqwOdxvEjjYaXuO+na
- 2re0XN8Nd0b9mZF5egy9nt4ToTPQ7v2D7n+As8vQPOrcNGtF2qtU0relKKZ28Tm+tm1JWiFP5Ld
- De10TimPlJrV6dXhxEg==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-08_03,2026-09-09_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- adultscore=0 bulkscore=0 spamscore=0 phishscore=0 impostorscore=0
- lowpriorityscore=0 suspectscore=0 clxscore=1015 priorityscore=1501
- malwarescore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
- definitions=main-2609090127
 
-On 9/8/26 7:47 PM, Brian Masney wrote:
-> Reduce boilerplate code in the drivers and convert them over to use
-> subsys_platform_driver().
+On 09/09/2026 08:41, AHMAD YASEEN wrote:
+> We can provide the kernel boot logs, kernel configuration, baseline
+> and live device trees, minimal CCI1 patch, and Windows hardware IDs
+> and driver-profile details. Serial number/SNID information can be
+> provided privately to Acer.
 > 
-> Signed-off-by: Brian Masney <bmasney@redhat.com>
-> Assisted-by: Claude:claude-opus-4-8
-> ---
+> Our immediate objective is to bring up the correct CCI controller and
+> obtain a repeatable RGB sensor chip-ID before proceeding to capture
+> and libcamera integration.
 
-Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+The RGB sensor and _should_ be on the same CCI and CSIPHY as the other 
+x1e platforms.
 
-Konrad
+Windows actually discloses alot of the information you need.
+
+cd /mnt/windows; find . -name "*sensor*.bin" -print
+
+For me on the Dell Inspiron that show ov02e10.bin and hm1092.bin for the 
+RGB and Greyscale sensors respectively.
+
+So you don't necessarily need Acer to provide information though, it'd 
+be nice.
+
+You should add a dump of your DSDT here:
+
+https://github.com/aarch64-laptops/build/tree/master/misc
+
+Same one ?
+
+https://github.com/aarch64-laptops/build/tree/master/misc/acer-sfa14-11
+
+...
+
+You have a USB camera no ?
+
+DSDT Device(WCAM)
+
+https://github.com/aarch64-laptops/build/blob/57a8b779e1ad1f08fb5c05b74c6d2d5975706a92/misc/acer-sfa14-11/dsdt.dsl#L50015
+
+Device (WCAM)
+                     {
+                         Name (_ADR, One)  // _ADR: Address
+                         Name (_PLD, Package (0x01)  // _PLD: Physical 
+Location of Device
+                         {
+                             ToPLD (
+                                 PLD_Revision           = 0x2,
+                                 PLD_IgnoreColor        = 0x1,
+                                 PLD_Red                = 0x0,
+                                 PLD_Green              = 0x0,
+                                 PLD_Blue               = 0x0,
+                                 PLD_Width              = 0x0,
+                                 PLD_Height             = 0x0,
+                                 PLD_UserVisible        = 0x1,
+                                 PLD_Dock               = 0x0,
+                                 PLD_Lid                = 0x1,
+                                 PLD_Panel              = "FRONT",
+                                 PLD_VerticalPosition   = "UPPER",
+                                 PLD_HorizontalPosition = "CENTER",
+                                 PLD_Shape              = "UNKNOWN",
+                                 PLD_GroupOrientation   = 0x0,
+                                 PLD_GroupToken         = 0x0,
+                                 PLD_GroupPosition      = 0x0,
+                                 PLD_Bay                = 0x0,
+                                 PLD_Ejectable          = 0x0,
+                                 PLD_EjectRequired      = 0x0,
+                                 PLD_CabinetNumber      = 0x0,
+                                 PLD_CardCageNumber     = 0x0,
+                                 PLD_Reference          = 0x0,
+                                 PLD_Rotation           = 0x0,
+                                 PLD_Order              = 0x0,
+                                 PLD_VerticalOffset     = 0xFFFF,
+                                 PLD_HorizontalOffset   = 0xFFFF)
+
+                         })
+                     }
+
+Switch on host controller for usb_2 and the USB should should power it. 
+At a guess its probably a UVC video device.
+
+---
+bod
