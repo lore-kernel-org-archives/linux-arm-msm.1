@@ -1,106 +1,284 @@
-Received: from mail-ua1-f54.google.com (mail-ua1-f54.google.com [209.85.222.54])
+Received: from mail-wm2-f12.google.com (mail-wm2-f12.google.com [74.125.225.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B24DE33A014
-	for <linux-arm-msm@vger.kernel.org>; Wed,  9 Sep 2026 15:19:51 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.222.54
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8B08958496A
+	for <linux-arm-msm@vger.kernel.org>; Wed,  9 Sep 2026 15:26:34 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.225.140
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788967193; cv=none; b=KR337C/lQ/H3xaDdOadu87Pv0Mbp9WGrv/hhswMHdgxHjUks85gLsdETZTYEEl0NBx5MKouQ/X9zCFnIp1YXJiNn6rs7HHkcroFQGExLwX4kfo4A6ZLu+cGMXbmxW6MnwUccG70ndOI30ykS3HEgB75VVWCPsa8W0xqXr3ard3E=
+	t=1788967596; cv=none; b=NmFSORhADXhrtFxsgJb24yk403ZZ5abFOPdEu1ko/6COG8jeBIDbewJR6HCwasCDQeUjH3S9MHZqKZawH+gIoMvgeK8eiS0RE6MMNn6NFeAO3/1RCLpah1p0/OhRBulFV7FGZwFbnBKmHjE0GAdh03fjADAAdQJROe4L5ilmCXk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788967193; c=relaxed/simple;
-	bh=mQVTvUE5EMefp3N9PRRXFy1qIjow9eV0PSCua1TgAD8=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=n+kOEsC2Y8BdNVQ2++Rvzs6FDeL/g/okI7HTxmfTgHtVxrXXFPfuXiw5uACK5Gcnh+4JqJvoon58SMN5PM2XZJOqTRR6ZeO//zjidoF1jcto4ydgD2V9UTFsdi0UNxg6mWcF4SqC7z5t4x6ISzt1+/RGf9F1n7Kk3+n/gNUXqcc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=linux-m68k.org; spf=pass smtp.mailfrom=gmail.com; arc=none smtp.client-ip=209.85.222.54
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=linux-m68k.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-ua1-f54.google.com with SMTP id a1e0cc1a2514c-97ea365dd5cso3552265241.2
-        for <linux-arm-msm@vger.kernel.org>; Wed, 09 Sep 2026 08:19:51 -0700 (PDT)
+	s=arc-20240116; t=1788967596; c=relaxed/simple;
+	bh=CKIJqH/pCWa5y9mx1SLRPsTxPwNgxDkXr8WszpYSiwc=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=hjP3A7EWLgeH6lL19y4/us3H9ZFcH8DviI9jjWXJ2sSP3oCIKWbmnIj9hLVaKyS+U0YxEXz50ihHdyH6P9UKOWUbZuiRjdbz1kdbpLpQtwAVqkGwPHD7sZI2LqM47vY2mCd7JjRsoaUvV40Lctsv+AKUScklmKmKqfzm2ZlWNjE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=XDTRDQkz; arc=none smtp.client-ip=74.125.225.140
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="XDTRDQkz"
+Received: by mail-wm2-f12.google.com with SMTP id 5b1f17b1804b1-49d0e19300cso2063435e9.1
+        for <linux-arm-msm@vger.kernel.org>; Wed, 09 Sep 2026 08:26:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google; t=1788967593; x=1789572393; darn=vger.kernel.org;
+        h=cc:to:message-id:content-transfer-encoding:content-type
+         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=xi5anwLS5N66sj2Glni4kb1JwbXSCUh9kBtKPwAAERU=;
+        b=XDTRDQkzFAEin3GGUQsh+SvldK01VchPyovkKijh0JbLl+jbuTOosPEOkuZCMEqKe7
+         M687STJI1SrDAxXVi5hDCAMKr6DPiOyeiAAdEc99CZwrBrDURLqNl/5S5kdek0zMvEp9
+         5wpSQ12FMWx4k7v4hxMRTFcP8uaG3QYiunx525b6X1MuNrD5K0zBEwEb29mJd+0G/7sU
+         YgScRVTvqtB8fBCVqruRJ1P5/lW2ilY0PqoCqkkrmZjEuTYm1LyHzbDSboFk51CZY5Sw
+         1nxd2iFaOcAfHhlNCMCGFMjJkm9jE3qzMG0uPa57PxUtECmoy/1kEfLv7ytnFLs5i7Rp
+         Qgnw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788967190; x=1789571990;
-        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
-         :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=ck7KwbjNu626e6RdS1sR80rNpHN5osHYGNVSLeBH+E4=;
-        b=oG0UdVT9OzQ0vvvYx+1CdKtVQ+3SAsvpzbUJThCUzekNztVUkDEj5kLwE33NBkqC77
-         YE50YFtsa8PVaTjWC4pzwKDpVP7M7+gJRBb7O4vfAGfA/5iqTKHURbTkoYjDgyXAfKgW
-         wKUM1LrNm3Px3VBTKCLge0XolO4p8SiqIkb7SsxX1QRzmgGqOf2g9bfjJ1PrteszPyFD
-         39FPShneHe+Az9qn6vPRJyU1JSe6QjA77rzKy7LSgQ4q4Ooz7Kz43/AVsgcW5gu500B6
-         A6BYvjkMdh+muYBiLu+E+7Y4Iw08vKLi8NY/dV/ZyXqFluf1YjhFxHB5p3ZkaInQvHFX
-         6GwQ==
-X-Forwarded-Encrypted: i=1; AKwUvBzrnr3dNabVIOnpeAIL20ydi+h2zpNvcNWVbLaEBbUKKxHdKHhkQn4hF8ax8wC0HcUqxuElu2lOMeeBhXcq@vger.kernel.org
-X-Gm-Message-State: AFuF++lE3A5nqvdUJVXmJzGyclmIW4XXMpHjWcCvm33feVMyU+AQJk1L
-	yqKHLQocz5kDnv0kHOQbQXNV/GvJhsf4/zDr4MHVw+i5Dx3ZS4pJXLCTJoWH9FOUpNs=
-X-Gm-Gg: AYBFou3CbQVVbPcvQuxMQ+mGiCpbK8nslImQyet82GTn1WVK0D/gy7WZHpfoHEEbpbR
-	Fm4T7DQQRA31SXqP5g92XIx5On4MYYs/+0QgllaZ7cuI3FedqlLSEtjGkYT0cjZdtQv1DjoZIU1
-	RnJXS+1jD56BzoAvbFNOIzakLbAUM7wN5EbLdkNYXz+8l+HTzmXUfja4S6RSf9b1jbLm2OF9aQk
-	rqSonKmIZeeaBxUHe98GRuuojpEbreW9yf/2s06JnoODOMIG3v8D6tJsSvnDxD7PntDvXSzsYJ8
-	kxKPFmGP3JaF1Y0fvgIXtqkkBMgt6+AyKPZG9h0edHVfJl8c8RJIMkQtY4Dnwnvi+qeDir4yZQ4
-	+RL4Zepbw+jW1Rh7oIwM9VlAwmkTqVL7lnYs5nTiDrhhnohgm1SUPxazYRgVJdIjZajN7d9drei
-	0KEeJEDiH1Zx9mJI3iRHsqehTWxRdpzzCmLSyH8zvO7jcu0WvpcNSWMQK8oDp/2y0GvrRATMsff
-	a72e1kPg6vnpPrk/pIDS2JVQ613icrr6N/bSgM4urnl3Vs=
-X-Received: by 2002:a05:6122:660e:b0:5bf:d3cd:3d64 with SMTP id 71dfb90a1353d-5c7ed30ca0fmr22243385e0c.0.1788967189960;
-        Wed, 09 Sep 2026 08:19:49 -0700 (PDT)
-Received: from mail-ua1-f45.google.com (mail-ua1-f45.google.com. [209.85.222.45])
-        by smtp.gmail.com with ESMTPSA id 71dfb90a1353d-5c7ec1ef7a5sm13199245e0c.5.2026.09.09.08.19.49
-        for <linux-arm-msm@vger.kernel.org>
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 09 Sep 2026 08:19:49 -0700 (PDT)
-Received: by mail-ua1-f45.google.com with SMTP id a1e0cc1a2514c-97c7afa485bso3397702241.3
-        for <linux-arm-msm@vger.kernel.org>; Wed, 09 Sep 2026 08:19:49 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AKwUvBx/Xe33EBD88Gwxo8BLdVVW8e5V2Buiyl7tb4o0BmaLgSk57X9hpbxlU7IrW+RcOfC9+iI7pODMMFeqvhxZ@vger.kernel.org
-X-Received: by 2002:a05:6102:6b09:b0:77b:28c1:210e with SMTP id
- ada2fe7eead31-78f67ba56cbmr4525156137.1.1788967188938; Wed, 09 Sep 2026
- 08:19:48 -0700 (PDT)
+        d=1e100.net; s=20251104; t=1788967593; x=1789572393;
+        h=cc:to:message-id:content-transfer-encoding:content-type
+         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to:content-type;
+        bh=xi5anwLS5N66sj2Glni4kb1JwbXSCUh9kBtKPwAAERU=;
+        b=lctptgFOUYfTR/2I9au/yP9uwbyXC6qjnHv+3NfSMb6o/3qT+HCCiT/qcXJwQZ6ITF
+         Jv5JkBrgFXcKPCwTBPT81NvGlBqAhqPGgMImDdsSlh5UGNaG/yZ0z8bYAN6Oquu1qatd
+         /evBOMh519V5vMOpgUvM19qjjEMKh3RLq/NCfjLLdQioUoay/L4TedZXRciog/DJTTsu
+         3s1rqoE+lWlXMi+ODwzN7AtFKGpmvbEu9F8YKh/8aS4dv/qTKESN7o24Do/7HijlQVBp
+         seRI+34o+z0XAdEeEq9N9+NaQgPXWqy2UxgQfLgLzcF+oozwkoOKwUzgPdTfzp3MMBgO
+         14uA==
+X-Gm-Message-State: AFuF++kf/o017Xw5jOU+hnMLuhY9czfVIRL/fBvJesdIi/Hdk2hiTYFa
+	xdqbHF8cJsCnpUyZ0Xn/A/K3AgR7pu1cQKxD76SJBPESJGdmN4iXRvXao1poFMuQu3DvYQDn+K1
+	1WubA
+X-Gm-Gg: AYBFou1Jb6v8sqrSfWTEwWKOUNjNIJWMwlwuAeHruOE+MHsIInubAdBS2S/o9naIsEc
+	+fr/3sOCw/7u89YK0DxZGiW+ukRNHgb/WOZK3PxlSYqoOg0P7SqOiF80jv29SdnFhiNJZ4QRlES
+	aT5C0F7ptdxoDd/EGzgNDFrgiDKS+h4eRef2niN5Vl/Kk0KTTD1Y9dLVXNIi9fcceEXMjRRnusX
+	JTizLR3ALO5QQ8MQgw5CNrVqYUj8uXczYnafF+CvJZo1ruh9H1M0rQGz1ZF4zQiTMC83Ix8u093
+	S4MK90efLBoFRAzP3C6kUSEbDz0y/v/1zlQudxmJw3eOSWyfiZfMiUxKL9YvWt2E47MFW4UtyeY
+	LCRYvJyL+kHuzpBPRso0ai//qrNCbZLZce1uIPRROQ2ErO3hJOTWCvVcoA/hD3pYxdgCjiZbcu9
+	jrLFPr9hQ84X3Io++E3iqiEaLz4cUCcYPOt0KoMREYxl3UZDI6bjHdHfyz3yxwd+D89oMGaMNxo
+	mlWi1JAq59DrBymbL0=
+X-Received: by 2002:a05:600c:1d0c:b0:49d:243a:e4f9 with SMTP id 5b1f17b1804b1-49d258d8623mr16411955e9.10.1788967592466;
+        Wed, 09 Sep 2026 08:26:32 -0700 (PDT)
+Received: from arrakeen.starnux.net ([2a01:e0a:106d:1080:52eb:f6ff:feb3:451a])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-49d1fd58c31sm53751755e9.1.2026.09.09.08.26.30
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 09 Sep 2026 08:26:31 -0700 (PDT)
+From: Neil Armstrong <neil.armstrong@linaro.org>
+Date: Wed, 09 Sep 2026 17:26:29 +0200
+Subject: [PATCH v3] interconnect: qcom: implement get_bw with rpmh_read
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260908-subsys_initcall-v1-0-cbccf4cd4288@redhat.com> <20260908-subsys_initcall-v1-4-cbccf4cd4288@redhat.com>
-In-Reply-To: <20260908-subsys_initcall-v1-4-cbccf4cd4288@redhat.com>
-From: Geert Uytterhoeven <geert@linux-m68k.org>
-Date: Wed, 9 Sep 2026 17:19:37 +0200
-X-Gmail-Original-Message-ID: <CAMuHMdVhEuiukgHN3_KjQbOmeJo_+i6exDtJeidfm42S8sEx9g@mail.gmail.com>
-X-Gm-Features: AcwNN1WrudhTWyzE-dMx-744iV6jE5_0S03_iG05gjwf1BiOXXU0ML55Tupw88U
-Message-ID: <CAMuHMdVhEuiukgHN3_KjQbOmeJo_+i6exDtJeidfm42S8sEx9g@mail.gmail.com>
-Subject: Re: [PATCH 4/4] clk: renesas: convert drivers over to use subsys_platform_driver()
-To: Brian Masney <bmasney@redhat.com>
-Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>, "Rafael J. Wysocki" <rafael@kernel.org>, 
-	Danilo Krummrich <dakr@kernel.org>, Bjorn Andersson <andersson@kernel.org>, Stephen Boyd <sboyd@kernel.org>, 
-	Jerome Brunet <jbrunet+clk@baylibre.com>, driver-core@lists.linux.dev, 
-	linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
-	linux-clk@vger.kernel.org, linux-renesas-soc@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260909-topic-sm8x50-icc-read-rpmh-v3-1-2bc65d7b25e5@linaro.org>
+X-B4-Tracking: v=1; b=H4sIAKR6oWoC/43NsQ6CMBSF4Vchnb2mLbSgk+9hHEq5wE2EkpY0G
+ MK7W0gcXIzjf4bvrCygJwzsmq3MY6RAbkyRnzJmezN2CNSkZpJLJQTXMLuJLIShWhQHshY8mgb
+ 8NPSAtSm0MIWSWLIETB5bWg78/kjdU5idfx1fUezrX2wUIKDhuZGorFFteXvSaLw7O9+x3Y3yY
+ 2l+4dVPSyar1q2wheSqUPzL2rbtDWyAx7URAQAA
+X-Change-ID: 20251106-topic-sm8x50-icc-read-rpmh-eba461a452e7
+To: Georgi Djakov <djakov@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, linux-pm@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, Neil Armstrong <neil.armstrong@linaro.org>
+X-Mailer: b4 0.15.1
+X-Developer-Signature: v=1; a=openpgp-sha256; l=5802;
+ i=neil.armstrong@linaro.org; h=from:subject:message-id;
+ bh=CKIJqH/pCWa5y9mx1SLRPsTxPwNgxDkXr8WszpYSiwc=;
+ b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBqoXqmFeu/rKq+igBSw+T5HRR5uvIGS7HxOw+YjniI
+ d+5WjfyJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCaqF6pgAKCRB33NvayMhJ0QdOD/
+ 4lltqQ8PFuL0SASQG9SI3hEkcf1wtAyaDAjal4BC7LL1TqOKeFf2NhyP62v/VwM13VUEFm6R4AdUo7
+ 2fv7ottyA3PZwtKSBW4GT+tkxnVfkhMX8qRWFEydYvJBMzzQDkbfnl4MzCMQsiJk+WPzPv+GKAZ6kJ
+ VOWs1+v94Eogz271piwoMLxYTfRJmdLoFoyaVxydQJE17L7GnNen5POba1NYsbiyPiLxH8mW12IIfx
+ wzVn1Up7bxJZ0NOBL8pmOXxLzc+R/F3GL3kg1sceq7dTVKznScl6XYtH0DaasosxrxXEUb3VCNQLge
+ zu7xKUp2JqvHAcYRshvyrbKugHTbHiD3O/WuXeVfONrBacu5k0pzYOEj6Bh761yr0NhulQ9pIdsJ2A
+ SS3959xRNv7B9Y/W0zFDVfvla7O5dTouBiHjV+3FKjTfT1fn/LlqnBF0LdCNiuEFaa3zPEG9jeomrG
+ 80ieIB653yZXUZpJkPKFrtBMfvZijRpt1FuCiI3KAHIg50B6jS61bFDxrR9H8iW6dZFXdVv99rNSWq
+ OpbrC2apZjC3McyDQKe+EpbQkCKiqjIVsSOvlNebrAs/3hXr42ZMJk8xicE3K43ysoGWfW3anSMt5x
+ f+UcICsKZLe0fkHSwJfjcvOe7XUh/XnGS0ycpS31ZWGu+v6rFK8NPIItSkrA==
+X-Developer-Key: i=neil.armstrong@linaro.org; a=openpgp;
+ fpr=89EC3D058446217450F22848169AB7B1A4CFF8AE
 
-Hi Brian,
+Since we can actually read back the APPS rpmh interconnect
+BCM votes we can actually implement the get_bw() callback
+and provide a coherent average and peak bandwidth at probe time.
 
-On Tue, 8 Sept 2026 at 19:47, Brian Masney <bmasney@redhat.com> wrote:
-> Reduce boilerplate code in the drivers and convert them over to use
-> subsys_platform_driver().
->
-> Signed-off-by: Brian Masney <bmasney@redhat.com>
-> Assisted-by: Claude:claude-opus-4-8
+The benefits of that are:
+- keep disabled BCMs disabled
+- avoid voting unused BCMs to INT_MAX
 
-Nice, thanks!
+If the interconnects are correctly described for a platform,
+all the required BCMs would be voted to the maximum bandwidth
+until sync_state is reached.
 
-Reviewed-by: Geert Uytterhoeven <geert+renesas@glider.be>
+Since we only get the BCM vote, we need to redistribute
+the vote values to the associated nodes. The initial BCM
+votes are read back at probe time in order to be ready when
+the get_bw() is called when a node is added.
 
-Works fine, and no change in generated code (besides renaming a few
-functions), so
-Tested-by: Geert Uytterhoeven <geert+renesas@glider.be>
+Tested-by: Georgi Djakov <djakov@kernel.org> #db845c
+Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
+---
+Changes in v3:
+- Dropped unneeded rpmh_invalidate()
+- Link to v2: https://patch.msgid.link/20260908-topic-sm8x50-icc-read-rpmh-v2-1-b6f1c4205450@linaro.org
 
-As conflicts with renesas-clk are unlikely:
-Acked-by: Geert Uytterhoeven <geert+renesas@glider.be>
+Changes in v2:
+- Added tested-by
+- Rebased on v7.3-rc1 now the rpmh_read() is merged
+- Link to v1: https://patch.msgid.link/20251106-topic-sm8x50-icc-read-rpmh-v1-1-d03a2e5ca5f7@linaro.org
+---
+ drivers/interconnect/qcom/bcm-voter.c | 34 ++++++++++++++++++++
+ drivers/interconnect/qcom/bcm-voter.h |  1 +
+ drivers/interconnect/qcom/icc-rpmh.c  | 60 ++++++++++++++++++++++++++++++++++-
+ 3 files changed, 94 insertions(+), 1 deletion(-)
 
-Gr{oetje,eeting}s,
+diff --git a/drivers/interconnect/qcom/bcm-voter.c b/drivers/interconnect/qcom/bcm-voter.c
+index a2d437a05a11..c15abb57cd24 100644
+--- a/drivers/interconnect/qcom/bcm-voter.c
++++ b/drivers/interconnect/qcom/bcm-voter.c
+@@ -261,6 +261,40 @@ void qcom_icc_bcm_voter_add(struct bcm_voter *voter, struct qcom_icc_bcm *bcm)
+ }
+ EXPORT_SYMBOL_GPL(qcom_icc_bcm_voter_add);
+ 
++/**
++ * qcom_icc_bcm_get_bw - get current bcm vote
++ * @voter: voter used to query bcm
++ * @bcm: bcm to get current vote from
++ */
++void qcom_icc_bcm_get_bw(struct bcm_voter *voter,
++			 struct qcom_icc_bcm *bcm)
++{
++	struct tcs_cmd cmd = { .addr = bcm->addr };
++	int ret, i;
++	u64 x, y;
++
++	mutex_lock(&voter->lock);
++
++	ret = rpmh_read(voter->dev, &cmd);
++	if (ret) {
++		pr_err("Error sending AMC RPMH requests (%d)\n", ret);
++		goto out;
++	}
++
++	x = FIELD_GET(BCM_TCS_CMD_VOTE_X_MASK, cmd.data);
++	y = FIELD_GET(BCM_TCS_CMD_VOTE_Y_MASK, cmd.data);
++
++	/* For boot-up, fill the AMC vote in all buckets */
++	for (i = 0; i < QCOM_ICC_NUM_BUCKETS; i++) {
++		bcm->vote_x[i] = x;
++		bcm->vote_y[i] = y;
++	}
++
++out:
++	mutex_unlock(&voter->lock);
++}
++EXPORT_SYMBOL_GPL(qcom_icc_bcm_get_bw);
++
+ /**
+  * qcom_icc_bcm_voter_commit - generates and commits tcs cmds based on bcms
+  * @voter: voter that needs flushing
+diff --git a/drivers/interconnect/qcom/bcm-voter.h b/drivers/interconnect/qcom/bcm-voter.h
+index b4d36e349f3c..fc75d457dcc7 100644
+--- a/drivers/interconnect/qcom/bcm-voter.h
++++ b/drivers/interconnect/qcom/bcm-voter.h
+@@ -13,6 +13,7 @@
+ #include "icc-rpmh.h"
+ 
+ struct bcm_voter *of_bcm_voter_get(struct device *dev, const char *name);
++void qcom_icc_bcm_get_bw(struct bcm_voter *voter, struct qcom_icc_bcm *bcm);
+ void qcom_icc_bcm_voter_add(struct bcm_voter *voter, struct qcom_icc_bcm *bcm);
+ int qcom_icc_bcm_voter_commit(struct bcm_voter *voter);
+ 
+diff --git a/drivers/interconnect/qcom/icc-rpmh.c b/drivers/interconnect/qcom/icc-rpmh.c
+index 3b445acefece..7f2b5673629b 100644
+--- a/drivers/interconnect/qcom/icc-rpmh.c
++++ b/drivers/interconnect/qcom/icc-rpmh.c
+@@ -136,6 +136,61 @@ int qcom_icc_set(struct icc_node *src, struct icc_node *dst)
+ }
+ EXPORT_SYMBOL_GPL(qcom_icc_set);
+ 
++static int qcom_icc_get_bw(struct icc_node *node, u32 *avg, u32 *peak)
++{
++	struct qcom_icc_node *qn = node->data;
++	u32 avg_max = 0;
++	u32 peak_max = 0;
++	u64 x, y;
++	int i;
++
++	if (!qn->num_bcms) {
++		*avg = INT_MAX;
++		*peak = INT_MAX;
++
++		return 0;
++	}
++
++	for (i = 0; i < qn->num_bcms; ++i) {
++		struct qcom_icc_bcm *bcm = qn->bcms[i];
++
++		/* Use AMC vote for boot-up */
++		x = bcm->vote_x[QCOM_ICC_BUCKET_AMC];
++		y = bcm->vote_y[QCOM_ICC_BUCKET_AMC];
++
++		/* Consider enable mask and convert to INT_MAX */
++		if (bcm->enable_mask) {
++			if (x & bcm->enable_mask)
++				avg_max = INT_MAX;
++			if (y & bcm->enable_mask)
++				peak_max = INT_MAX;
++		} else {
++			if (x) {
++				x *= bcm->aux_data.unit;
++				do_div(x, bcm->vote_scale);
++				x *= qn->buswidth * qn->channels;
++				do_div(x, bcm->aux_data.width);
++
++				avg_max = max(avg_max, x);
++			}
++
++			if (y) {
++				y *= bcm->aux_data.unit;
++				do_div(y, bcm->vote_scale);
++				y *= qn->buswidth;
++				do_div(y, bcm->aux_data.width);
++
++				peak_max = max(peak_max, y);
++			}
++		}
++	}
++
++	*avg = avg_max;
++	*peak = peak_max;
++
++	return 0;
++}
++
+ /**
+  * qcom_icc_bcm_init - populates bcm aux data and connect qnodes
+  * @bcm: bcm to be initialized
+@@ -255,6 +310,7 @@ int qcom_icc_rpmh_probe(struct platform_device *pdev)
+ 	provider = &qp->provider;
+ 	provider->dev = dev;
+ 	provider->set = qcom_icc_set;
++	provider->get_bw = qcom_icc_get_bw;
+ 	provider->pre_aggregate = qcom_icc_pre_aggregate;
+ 	provider->aggregate = qcom_icc_aggregate;
+ 	provider->xlate_extended = qcom_icc_xlate_extended;
+@@ -272,8 +328,10 @@ int qcom_icc_rpmh_probe(struct platform_device *pdev)
+ 	if (IS_ERR(qp->voter))
+ 		return PTR_ERR(qp->voter);
+ 
+-	for (i = 0; i < qp->num_bcms; i++)
++	for (i = 0; i < qp->num_bcms; i++) {
+ 		qcom_icc_bcm_init(qp->bcms[i], dev);
++		qcom_icc_bcm_get_bw(qp->voter, qp->bcms[i]);
++	}
+ 
+ 	for (i = 0; i < num_nodes; i++) {
+ 		qn = qnodes[i];
 
-                        Geert
+---
+base-commit: cee9395acd8043be0644b25c34bfa86623f2b935
+change-id: 20251106-topic-sm8x50-icc-read-rpmh-eba461a452e7
 
--- 
-Geert Uytterhoeven -- There's lots of Linux beyond ia32 -- geert@linux-m68k.org
+Best regards,
+--  
+Neil Armstrong <neil.armstrong@linaro.org>
 
-In personal conversations with technical people, I call myself a hacker. But
-when I'm talking to journalists I just say "programmer" or something like that.
-                                -- Linus Torvalds
