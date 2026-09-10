@@ -1,272 +1,198 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 70A993546D0;
-	Thu, 10 Sep 2026 13:57:07 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8A014494838
+	for <linux-arm-msm@vger.kernel.org>; Thu, 10 Sep 2026 14:08:48 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789048628; cv=none; b=Nl9ExjxRPoJoeU8PpYb0mlPgMlqZtLlzf1DrBzVn0n/J5uB5WCPOlctI7OE0imreuRFM1GTsIdEqJaC3g0UuD02jT+VrBl/stoN1CcHWZQSyejz4yAzvIQJODUVSxZbof3dFfwujStlDqNVTmibd2sCrtK+vJ0sX9dHzr8Iq3yM=
+	t=1789049331; cv=none; b=kdkAaU/rA1SFBZ7V+O+Z3vTJQ7k5QrruGuKonIx6q+oB4kICqiBGCVbk3iLml1bKvF75qHQtG4zjoWMgsD/y5IqXRShr2VJOCA1bnDP/fT/DpKsryu1z/OXYH+awqh2aIpzFg/cpuHhenECCaJ6MaiZ0EC2r/8yBOx2s/Plo5jo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789048628; c=relaxed/simple;
-	bh=/V5WNdZ1RPhuheJlhxOVq0Ydh2//1gFKC0DOj17EII0=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=CMOkggypqedhHdiokzN0wDXkZkg47MiBWVNInYvKhQ7PyLOp3SxhAmnHrhSRXQJdTlLnTXJG2MUht3LNoTgRGnTIfhy49rVnv4FwHRWwyLflXrnB9TBajCPa2HR28NXcdLSebkfyc0cirjXy0W88I8ld1oAV2h5FrFNOgAA05mA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=cJF89swD; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1789049331; c=relaxed/simple;
+	bh=PJp7at6YbmABjQssQHHtns6pe+hmMVd0Nnzb//pLNGo=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=lX4le51/9h9N/SDkbWjgHcQHB7cPGVTy8VlU0aPDNlHvoRwP7CLqet5BY0LC6T2d9PfgqNjO1jDnNaW0r2cSfISlvbe0jSMhIxRHh1X2AhpvGWUIg7pTZs96FsotoTlE2GPnkxS1dTQe2GWElUBJ6WPs4RzGycmtKmM1n+mngKU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=NIOO4oHB; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=A597FpSj; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="cJF89swD"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 97D631F000FF;
-	Thu, 10 Sep 2026 13:57:02 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1789048627;
-	bh=DQns45W+7r5KCS8RR0S25TqH8Uxqu3GnDAmnybjH4WQ=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=cJF89swDw3fKORJfS1aHX4foh1nkbh0ygT2k8E8ydHdueT7aqP/Nh5833f4IsCxkq
-	 Ulq+C5dMsczrtxpktfXxWIPQjzLqyuvhLlGYN2zf1pHD4AnKsgAd6JmVpSLmILus54
-	 7t/zxQSANfjq/w506Co6X8IoFyMAvWoxkLyIy6slpBXZ1gMxkMLBUMJJs0EqiDGOZ5
-	 wMK4V2CvRswT+OyFSEH8+shPaBT0ffVizKMsadd/8AMJZ7RlTs1YrF/eQJVUF2VcI0
-	 Eri6eu/deM1iVa0w+DKK3Y1wzBQk32LIqujAApwdy5PMsJcMzTryhjg6usmVcYRH2B
-	 VDqjaCwr4y1yg==
-Date: Thu, 10 Sep 2026 14:56:59 +0100
-From: Lee Jones <lee@kernel.org>
-To: MINETTE Alexandre <contact@alex-min.fr>
-Cc: Bjorn Andersson <andersson@kernel.org>,
-	Konrad Dybcio <konradybcio@kernel.org>,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	MyungJoo Ham <myungjoo.ham@samsung.com>,
-	Chanwoo Choi <cw00.choi@samsung.com>,
-	Guru Das Srinagesh <linux@gurudas.dev>,
-	Linus Walleij <linusw@kernel.org>,
-	Rob Clark <robin.clark@oss.qualcomm.com>,
-	Kees Cook <kees@kernel.org>, Tony Luck <tony.luck@intel.com>,
-	"Guilherme G. Piccoli" <gpiccoli@igalia.com>,
-	linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org, linux-gpio@vger.kernel.org,
-	phone-devel@vger.kernel.org
-Subject: Re: [PATCH v5 4/6] mfd: qcom-pm8xxx: register PM8921 USB ID extcon
-Message-ID: <20260910135659.GC1051768@google.com>
-References: <20260804-mainline-send-v1-sending-v5-0-149dd4372ac8@alex-min.fr>
- <20260804-mainline-send-v1-sending-v5-4-149dd4372ac8@alex-min.fr>
- <20260812122900.GQ1072730@google.com>
- <646d46b1-7c59-4d73-b033-f4afaf19bdd7@app.fastmail.com>
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="NIOO4oHB";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="A597FpSj"
+Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68AC7q6j245338
+	for <linux-arm-msm@vger.kernel.org>; Thu, 10 Sep 2026 14:08:47 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=Xsa+f+27jsxypSSVPRpVMM
+	g/ju4l/7cO2PJaOMBUNws=; b=NIOO4oHBcIOSEwcH1CMpjqjIFnwbS4Tz5CqtIQ
+	5T1GEaxyl9UVtXKwKzitUiRK4FKyca8kxEgM8A2h5s3Opzhu8kIw/HNM4CzxBwXw
+	rfc+kbnAYvhF7LoNjpYfF+Wa/5f+nMydlPxOKf+HU/YbviuWVBlkSQgjtVQyhwa9
+	UuIwFKg/SyVCaxwQ48EhNucnbVT6kIU9iP8hBwDz3vzCSvCztGiIQkMLF5ZqlC1p
+	Z0jllnxuIa+5bSOJAaqYEUk3Blm+hhAM7AQpG1Xo23/psM0Y0s9CG20szoYO05vi
+	cRCftKkPqdubeXX0C5FKZ08+ZL2ebekXDR8X/Iw5aNcXcOBw==
+Received: from mail-oo1-f69.google.com (mail-oo1-f69.google.com [209.85.161.69])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gkcyfm998-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 10 Sep 2026 14:08:47 +0000 (GMT)
+Received: by mail-oo1-f69.google.com with SMTP id 006d021491bc7-6bf7ab47124so906872eaf.0
+        for <linux-arm-msm@vger.kernel.org>; Thu, 10 Sep 2026 07:08:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1789049326; x=1789654126; darn=vger.kernel.org;
+        h=cc:to:message-id:content-transfer-encoding:content-type
+         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=Xsa+f+27jsxypSSVPRpVMMg/ju4l/7cO2PJaOMBUNws=;
+        b=A597FpSj69HQ3Jd64jZWnr7EXJ6hj9htfyMU1kTnnixT4Fn86FRwLv5KMlm68LBhS3
+         4hnYGh8PUiXUh6r1gqzagyG1D6WLTu8EUL0gj3lDZKY6uPvTzz8hGQ5rbjkA0dTa6QIS
+         5j6HMHL/bNf4lAmuXvLywd5j8txskkE4+CCE4QI0Lb+OS+CVdVkOPwZnKsSqeHaFrSSY
+         9GM4nbxlhF4jD+L+RZLtJMkST4Zo1MsDXrjSk3Soi+9j4SMw1vOXYzuawj1o1ZIvJJ9p
+         whDt1ODphPLzfG4snXh4855Pgx1QhiGV8z8UMwaGGCEBEYcS05sp+0Iigw+HLwI5aUHB
+         2zag==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1789049326; x=1789654126;
+        h=cc:to:message-id:content-transfer-encoding:content-type
+         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to:content-type;
+        bh=Xsa+f+27jsxypSSVPRpVMMg/ju4l/7cO2PJaOMBUNws=;
+        b=WZZdulA5CEFF5YhYc+KWzKqd4POnkhm8FwVF/AXpdhBxWa9fxbieZ/zH/iRnXIOrvh
+         IpxXhRzn7Isel9mhqjbl7eCHm6yrNx49X0COXh6BeAGoQX8Z2ZC9Qpodx9IbnulD7rqY
+         FswxBIZmHw3jMkUJaO99BgppXsGOD34j939cOdgkhdg3CwJ7XyFjZCUzxHEm/uMIX9GY
+         Bzm5Ub6UxY9L9XubOAzcPiPlddxsqr55C/RY5A8D3C7RyPUsauEs6BGHnpco9DDjssLJ
+         gKskq2hFBf1NGTscs/pB5VQDY3A5+0iR9+Njy6VpoEs5m0uFvCDshGUCBxHqoRXu1CFp
+         6K7A==
+X-Gm-Message-State: AFuF++lmhyNK2T6lOr7qmaicJrLnq0tZ+GDODqwJYydHtgRb3dZemJAG
+	Gfks3etfbCkgpNrWCveyxNivft9iiwpZcRU4mtWEpuhMIggRFxTFz9mEhbMfexRlYYEqPT8b53u
+	H+itFq1GdI2GzG9Tj2NkPFAAeW/6BHg6HChb/osorhVi+TXrV7HTRkz25kwa1XckFopijvNoWQ9
+	3a
+X-Gm-Gg: AYBFou3KqaspTduDWULqyELTWB6krjROfomsEyUNiEupTwRLYX8OHEIQ97dv/MozJzZ
+	+VLJ5uH5AJXInuBvxMI4ehyBmbiwcoiN6Yb29SOhHbqHsDerO1Dpfo+EfLdil6h3h0ZbYdUBF2O
+	q1juMR2YI5a3XzDBLeohl2ZJFhWusALz1UPE65dkj4oRBPD4MwRwaFweODPvS18FPbWRLTEPvcR
+	zt/qsPZojGcBLw8NPkCJKUpcx/+LBJ0ytzEW4MpKSPZWh2SF4bG1Ha6hxjGquemj4pXK3dncycB
+	fVUMKdmLG7vJkEAZJWDZBETPTiczhpRA2oBl3/72tcfCaerDS+NFrGOJ2WxLIwt+4vU9iZUA82i
+	ipzcyDg==
+X-Received: by 2002:a05:6820:812:b0:6be:4eb3:e1be with SMTP id 006d021491bc7-6be4eb3ed98mr5956680eaf.39.1789049326409;
+        Thu, 10 Sep 2026 07:08:46 -0700 (PDT)
+X-Received: by 2002:a05:6820:812:b0:6be:4eb3:e1be with SMTP id 006d021491bc7-6be4eb3ed98mr5956622eaf.39.1789049325769;
+        Thu, 10 Sep 2026 07:08:45 -0700 (PDT)
+Received: from [127.0.1.1] ([86.121.7.210])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-49d26c494basm69712295e9.12.2026.09.10.07.08.43
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 10 Sep 2026 07:08:44 -0700 (PDT)
+From: Abel Vesa <abel.vesa@oss.qualcomm.com>
+Date: Thu, 10 Sep 2026 17:08:35 +0300
+Subject: [PATCH v3] arm64: dts: qcom: eliza-cqs-som: Enable Adreno A722 GPU
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <646d46b1-7c59-4d73-b033-f4afaf19bdd7@app.fastmail.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260910-dts-qcom-eliza-evk-enable-gpu-v3-1-806bf0fc51de@oss.qualcomm.com>
+X-B4-Tracking: v=1; b=H4sIAOK5omoC/43Oyw6CMBAF0F8hXTuEDq/gyv8wLtoyQJV3oVEJ/
+ 27BjQsT3UxykztnZmGGRk2GHb2FjWS10V3rQnjwmKpEWxLo3GWGASZBFnDIJwOD6hqgWj8FkL0
+ BtULWBGU/QxKHqHjIFQnOnNGPVOj77p8v72xmeSU1bejWqLSZuvGxP2D51vv3luXAQaQqLCSmM
+ qLs1BnjD7Oo3Urju8G2kxY/UfyFokNjLqMYRZQEAr+g67q+AJpAGEA4AQAA
+X-Change-ID: 20260901-dts-qcom-eliza-evk-enable-gpu-6532c131cea1
+To: Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
+        linux-kernel@vger.kernel.org,
+        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+        Abel Vesa <abel.vesa@oss.qualcomm.com>
+X-Mailer: b4 0.16-dev-0e65f
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1525;
+ i=abel.vesa@oss.qualcomm.com; h=from:subject:message-id;
+ bh=PJp7at6YbmABjQssQHHtns6pe+hmMVd0Nnzb//pLNGo=;
+ b=owEBbQKS/ZANAwAKARtfRMkAlRVWAcsmYgBqornmBIN7oAX3fVfYgFv0vXR0ZXLqJyBqphYi4
+ UaQeo0N90SJAjMEAAEKAB0WIQRO8+4RTnqPKsqn0bgbX0TJAJUVVgUCaqK55gAKCRAbX0TJAJUV
+ VhFQD/0eyDEQSNWpja7ldWoi9sap4iQuBgCTYeeOgUrlRSKbfOYW8NO9m35fcHkCDM2om2qIVWQ
+ 6w6e9/srQRV1LbaWfUxsK488G+22jlSQ8QWyQPqW2FrgeKthdUS8csvLZbVKOo2sVn04I9/ccAp
+ YCylwhOhQjARXVmGWdPRao2+LJld8NI8NJssRoBcdj8H9dJdxko7VKNn1y/ljr9uFhzF9T5QTam
+ cIZO2fP/0FDRhGIEoklEHE2voMJVUd6K8gFD2Vedbrd3T+RnXmAxL2KLQCDg238loqgVOtd8kfS
+ iRkwpd/IAttyVU70UX9KhAeEOYbslwzHfEtV/fQD8CWjLcu5cSZbX6bBtmezwZ8jdHUdDPiq16R
+ +aXfOapWKDxvBRHrGjJKOvf+ejBFJ+kCzVJnffR7YFuAf1Z1vRJqy8sraS7cNPtsGoYvyaylhpJ
+ wmFN7KzZwe8uwqiH1CQi80ve/GwEKPzlkYSPa/HUaQi/MDuFCecTWWdP35ICr5aQ/qZqUYOcgXf
+ cq8hSI+zKafNhAilwxZVVQA8aG3M7GUqcAg5Z9ROpprIvFT8LRs/DihG0CPa7ElcD+vhdCNhOBh
+ dZXUXj192hyv0wpel1uMnpwgtdA7blNyLYnDYG339XAZ4DCEux1zY12fLDE5FTGA1TQF/0vW6S9
+ f2SyQMVlrgMMaEw==
+X-Developer-Key: i=abel.vesa@oss.qualcomm.com; a=openpgp;
+ fpr=6AFF162D57F4223A8770EF5AF7BF214136F41FAE
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTEwMDE3MCBTYWx0ZWRfX8fb0Bkor71Gt
+ Gp8jKxOGt2QvlaRE9++JeIrVsn7XogLgk1z5wiFoFE+N/tLNwFQMZWCkU+T5Bc+XBkFxEtleO5X
+ jZO61TAPICN3eFZCQpivEf5buuybA+s=
+X-Proofpoint-ORIG-GUID: U8cgbC2Ld2K0peQVwCV6Zvyw5ZKdRk7B
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTEwMDE3MCBTYWx0ZWRfXyVnDe4wXHHvP
+ gBZZDi7+QMvQCbvICMC4R8EDv7a9g8nGKh0TOQqcdMyDcsk1ItsQ7JrRkgHQQo1mNPLWjkK1Ics
+ 6JhSg6qHVF/rUytgGRPA9HJLC79PTBpM3YTpqxVVUV0BhCFq/nY9ymu0Klm0jmjYv6YmlgKjTbT
+ bu/nSzK8YwRPHItfd4kuG8JwpNfWriPp14+UEGadVOH07MRl1ZDGNLXFrkaaJdgdcaK0rU6xSjS
+ O6vxpyv0G2bhZBe6zDPA9PJc4rueo1fcESEafUktdreLXP5Kz7DWLP1ITeQccaFi59RvLv28x97
+ DvzsX7yHwzsgWAGsFRuCJR84ox4YuBhN039YVN+4HtgkajZk5fM9aUO7jhnYu8EI7J/f6zJ3xe6
+ JqHWxI7jcz7XhOnm5avEKzvHt4yE5oEa/1San6J5sEJQkVu/kNVryt4KPFt5zRWJLqB/SlcQb4o
+ pcUW6RcMgsB5xpd64Mw==
+X-Authority-Analysis: v=2.4 cv=H5pOUOYi c=1 sm=1 tr=0 ts=6aa2b9ef cx=c_pps
+ a=lVi5GcDxkcJcfCmEjVJoaw==:117 a=dePp4Gl7O00gmbwhyVsZwA==:17
+ a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22
+ a=bC-a23v3AAAA:8 a=EUspDBNiAAAA:8 a=cfKdWksii-jdlWvcsasA:9 a=QEXdDO2ut3YA:10
+ a=rBiNkAWo9uy_4UTK5NWh:22 a=FO4_E8m0qiDe52t0p3_H:22
+X-Proofpoint-GUID: U8cgbC2Ld2K0peQVwCV6Zvyw5ZKdRk7B
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-09-10_04,2026-09-09_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ clxscore=1015 suspectscore=0 spamscore=0 priorityscore=1501 impostorscore=0
+ malwarescore=0 bulkscore=0 adultscore=0 lowpriorityscore=0 phishscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609100170
 
-On Sun, 30 Aug 2026, MINETTE Alexandre wrote:
+Enable the Adreno 722 GPU on the Eliza CQS SoM board and provide the zap
+shader firmware path.
 
-> Hi Lee, 
-> 
-> Thanks for the feedback!
-> 
-> For the v6 series, I'll add a proper define for the 49 IRQ and use the devm api indeed.
-> 
-> About using the MFD api: I looked at it, but devm_mfd_add_devices()  
-> doesn't seem to let me reuse the parent firmware node, which I need here  
-> because the DT consumer uses extcon = <&pm8921>. 
-> So I kept  platform_device_register_full().
-> Let me know if I missed something here.
+Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Signed-off-by: Abel Vesa <abel.vesa@oss.qualcomm.com>
+---
+Changes in v3:
+- Rebased on next-20260909.
+- Moved the nodes in proper place, to preserve alphabetical order.
+- Link to v2: https://patch.msgid.link/20260902-dts-qcom-eliza-evk-enable-gpu-v2-1-51b452a460a2@oss.qualcomm.com
 
-Please reply inline.
+Changes in v2:
+- Rebased on next-20260901.
+- Picked up Konrad's R-b tag.
+- Reworded commit message as Konrad suggested.
+- Fixed the zap shader firmware filename.
+- Link to v1: https://patch.msgid.link/20260901-dts-qcom-eliza-evk-enable-gpu-v1-1-a7c3fb27b4e9@oss.qualcomm.com
+---
+ arch/arm64/boot/dts/qcom/eliza-cqs-som.dtsi | 8 ++++++++
+ 1 file changed, 8 insertions(+)
 
-Top-posts are generally not allowed for this kind of discussion.
+diff --git a/arch/arm64/boot/dts/qcom/eliza-cqs-som.dtsi b/arch/arm64/boot/dts/qcom/eliza-cqs-som.dtsi
+index 5ef6c51618bf..fc2d419cfc09 100644
+--- a/arch/arm64/boot/dts/qcom/eliza-cqs-som.dtsi
++++ b/arch/arm64/boot/dts/qcom/eliza-cqs-som.dtsi
+@@ -369,6 +369,14 @@ vreg_l7k: ldo7 {
+ 	};
+ };
+ 
++&gpu {
++	status = "okay";
++};
++
++&gpu_zap_shader {
++	firmware-name = "qcom/eliza/gen71700_zap.mbn";
++};
++
+ &pm7550ba_eusb2_repeater {
+ 	vdd18-supply = <&vreg_l7b>;
+ 	vdd3-supply = <&vreg_l17b>;
 
-If you're not using the MFD API or of_platform_populate(), then this is
-not an MFD and therefore could and should live elsewhere.
+---
+base-commit: c68a982815dcce5464e3bf2a31ac94f5146c04ca
+change-id: 20260901-dts-qcom-eliza-evk-enable-gpu-6532c131cea1
 
-Can you explain to me the problem in depth please?
+Best regards,
+--  
+Abel Vesa <abel.vesa@oss.qualcomm.com>
 
-> Mer 12 août 2026, à 14:29, Lee Jones a écrit :
-> > On Tue, 04 Aug 2026, Alexandre MINETTE via B4 Relay wrote:
-> >
-> >> From: Alexandre MINETTE <contact@alex-min.fr>
-> >> 
-> >> PM8921 reports the USB ID pin through interrupt 49 of its interrupt
-> >> controller. Unlike PM8941, this path has no separate addressable misc
-> >> block to represent as a devicetree child node.
-> >> 
-> >> Register a child platform device for the existing Qualcomm USB extcon
-> >> driver after creating the PMIC IRQ domain. Pass the USB ID interrupt as
-> >> a named resource and reuse the PM8921 firmware node, allowing consumers
-> >> to reference the PMIC node directly as their extcon provider.
-> >> 
-> >> Unregister the child device and dispose of the IRQ mapping when the
-> >> PMIC is removed or probing fails.
-> >> 
-> >> Signed-off-by: Alexandre MINETTE <contact@alex-min.fr>
-> >> ---
-> >>  drivers/mfd/qcom-pm8xxx.c | 78 +++++++++++++++++++++++++++++++++++++++++++++--
-> >>  1 file changed, 76 insertions(+), 2 deletions(-)
-> >> 
-> >> diff --git a/drivers/mfd/qcom-pm8xxx.c b/drivers/mfd/qcom-pm8xxx.c
-> >> index 0cf374c015ce..884fc99a1488 100644
-> >> --- dangerously/mfd/qcom-pm8xxx.c
-> >> +++ b/drivers/mfd/qcom-pm8xxx.c
-> >> @@ -7,6 +7,7 @@
-> >>  
-> >>  #include <linux/kernel.h>
-> >>  #include <linux/interrupt.h>
-> >> +#include <linux/ioport.h>
-
-Should we sort the '#include' directives alphabetically here?
-
->>  #include <linux/irqchip/chained_irq.h>
->>  #include <linux/irq.h>
->>  #include <linux/irqdomain.h>
->> @@ -64,12 +65,15 @@
->>  
->>  struct pm_irq_data {
->>  	int num_irqs;
->> +	int usb_id_irq;
->>  	struct irq_chip *irq_chip;
->>  	irq_handler_t irq_handler;
->>  };
->>  
->>  struct pm_irq_chip {
->>  	struct regmap		*regmap;
->> +	struct platform_device	*usb_extcon;
->> +	unsigned int		usb_id_irq;
->>  	spinlock_t		pm_irq_lock;
->>  	struct irq_domain	*irqdomain;
->>  	unsigned int		num_blocks;
->> @@ -492,6 +496,13 @@ static const struct pm_irq_data pm8xxx_data = {
->>  	.irq_handler = pm8xxx_irq_handler,
->>  };
->>  
->> +static const struct pm_irq_data pm8921_data = {
->> +	.num_irqs = PM8XXX_NR_IRQS,
->> +	.usb_id_irq = 49,
-
-Should we define '49' with a descriptive macro rather than using a magic 
-number?
-
->> +	.irq_chip = &pm8xxx_irq_chip,
->> +	.irq_handler = pm8xxx_irq_handler,
->> +};
->> +
->>  static const struct pm_irq_data pm8821_data = {
->>  	.num_irqs = PM8821_NR_IRQS,
->>  	.irq_chip = &pm8821_irq_chip,
->> @@ -501,11 +512,60 @@ static const struct pm_irq_data pm8821_data = {
->>  static const struct of_device_id pm8xxx_id_table[] = {
->>  	{ .compatible = "qcom,pm8058", .data = &pm8xxx_data},
->>  	{ .compatible = "qcom,pm8821", .data = &pm8821_data},
->> -	{ .compatible = "qcom,pm8921", .data = &pm8xxx_data},
->> +	{ .compatible = "qcom,pm8921", .data = &pm8921_data},
->>  	{ }
->>  };
->>  MODULE_DEVICE_TABLE(of, pm8xxx_id_table);
->>  
->> +static int pm8xxx_add_usb_extcon(struct platform_device *pdev,
->> +				 struct pm_irq_chip *chip,
->> +				 unsigned int hwirq)
->> +{
->> +	struct irq_fwspec fwspec = {
->> +		.fwnode = dev_fwnode(&pdev->dev),
->> +		.param_count = 2,
->> +		.param = { hwirq, IRQ_TYPE_EDGE_BOTH },
->> +	};
->> +	struct platform_device_info pdevinfo = {
->> +		.parent = &pdev->dev,
->> +		.fwnode = dev_fwnode(&pdev->dev),
->> +		.of_node_reused = true,
->> +		.name = "qcom-pm8xxx-usb-id",
->> +		.id = PLATFORM_DEVID_NONE,
->> +	};
->> +	struct resource resource;
->> +
->> +	chip->usb_id_irq = irq_create_fwspec_mapping(&fwspec);
->> +	if (!chip->usb_id_irq)
->> +		return -ENXIO;
->> +
->> +	resource = DEFINE_RES_IRQ_NAMED(chip->usb_id_irq, "usb_id");
->> +	pdevinfo.res = &resource;
->> +	pdevinfo.num_res = 1;
->> +
->> +	chip->usb_extcon = platform_device_register_full(&pdevinfo);
-
-Should we use 'devm_platform_device_register_full()' here to simplify 
-resource management?
-
->> +	if (IS_ERR(chip->usb_extcon)) {
->> +		int ret = PTR_ERR(chip->usb_extcon);
->> +
->> +		chip->usb_extcon = NULL;
->> +		irq_dispose_mapping(chip->usb_id_irq);
->> +		chip->usb_id_irq = 0;
->> +
->> +		return ret;
->> +	}
->> +
->> +	return 0;
->> +}
->> +
->> +static void pm8xxx_remove_usb_extcon(struct pm_irq_chip *chip)
->> +{
->> +	if (chip->usb_extcon)
->> +		platform_device_unregister(chip->usb_extcon);
->> +
->> +	if (chip->usb_id_irq)
->> +		irq_dispose_mapping(chip->usb_id_irq);
->> +}
-> >
-> > Why not devm_*
-> >
-> >>  static int pm8xxx_probe(struct platform_device *pdev)
-> >>  {
-> >>  	const struct pm_irq_data *data;
-> >> @@ -570,9 +630,22 @@ static int pm8xxx_probe(struct platform_device *pdev)
-> >>  
-> >>  	irq_set_irq_wake(irq, 1);
-> >>  
-> >> +	if (data->usb_id_irq) {
-> >> +		rc = pm8xxx_add_usb_extcon(pdev, chip, data->usb_id_irq);
-
-Should we rename 'rc' to 'ret' here to align with the standard naming 
-convention for return values?
-
->> +		if (rc)
->> +			goto err_domain;
->> +	}
->> +
->>  	rc = of_platform_populate(pdev->dev.of_node, NULL, NULL, &pdev->dev);
->>  	if (rc)
->> -		irq_domain_remove(chip->irqdomain);
->> +		goto err_extcon;
->> +
->> +	return 0;
->> +
->> +err_extcon:
->> +	pm8xxx_remove_usb_extcon(chip);
->> +err_domain:
->> +	irq_domain_remove(chip->irqdomain);
->>  
-> >>  	return rc;
-> >>  }
-> >> @@ -582,6 +655,7 @@ static void pm8xxx_remove(struct platform_device *pdev)
-> >>  	struct pm_irq_chip *chip = platform_get_drvdata(pdev);
-> >>  
-> >>  	of_platform_depopulate(&pdev->dev);
-> >> +	pm8xxx_remove_usb_extcon(chip);
-> >>  	irq_domain_remove(chip->irqdomain);
-> >>  }
-> >>  
-> >> 
-> >> -- 
-> >> 2.43.0
-> >> 
-> >> 
-> >
-> > -- 
-> > Lee Jones
-
--- 
-Lee Jones
