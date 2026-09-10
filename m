@@ -1,85 +1,88 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 90278377553;
-	Thu, 10 Sep 2026 15:51:11 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 315F44A8419;
+	Thu, 10 Sep 2026 15:54:00 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789055472; cv=none; b=jE3w9ow0OOFB/uUui5H1eLdv4f77iWzsCMdFh2ccUzOQl6v66BNK0qvBOITZ84c/vqc665F+jbvONuXXFTmWLIMU4iDkyFaw4DP7BBN9sfFPOZQ3aD7s/XW9CFDSS6/vc1RDXtmmXUXHuvup3GQsPgQ8sojMWUrlx5Oq+Lbb804=
+	t=1789055642; cv=none; b=B4e9tyWt9B1HFiDkUS5mjptJzavZXvG4ohIaDT/lFuJ32rE5OLiSd8stPWAjvxrgXbGwNtDqaOri4tl1VUpPMo1qhyMaXWcjfKjw8kf7x5mK5F62pHZF/HxebLwBRuX4ObmbFlpTpaH8ILD87SXmhGnNxSCdMeZ7GaD+Eb3WPK8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789055472; c=relaxed/simple;
-	bh=hfjvvgQw610BAmuALSHE14lC6ihOlOKL4waqehdnbDE=;
-	h=Content-Type:MIME-Version:Subject:From:Message-Id:Date:References:
-	 In-Reply-To:To:Cc; b=oFHJVo9d3ctqumsrmuk/j3uhTfITM8ZYtI6LeqhvQjBCxF0jTwFUHB6QAB2yp7xPGuKdjQ/9znhXEaSCPIaF3AWcmkArY4tQd06riVTf8guW+ahA/FboI5bI1HSF4lcT2MC48gwWG5tYF9sKPRHf8W2k92b9YBU3gqjJtAij1Qs=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=L0IDzSeB; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1789055642; c=relaxed/simple;
+	bh=y15tVjuIpOkxFOtnQgQwuuNo79AxvLPn57cz3WK6kVc=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=blWsq7alQrYtR9iuByIqJXGPXkiXMq4q1bCVTzl284eps18g/72Qco1BORO6NWPKkVrK1hQSit79UqcdjfRu1LYt+GxUl2YqeDAGGeOkV6w7Q5fZzNaoYl0a+UYziKHNb9onEhivZO7gHac9t7+DfbkdYtr6anRd9HdUzEz+VVc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Pv1tSWs7; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="L0IDzSeB"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2C7A41F00893;
-	Thu, 10 Sep 2026 15:51:11 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Pv1tSWs7"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id ED8111F000FF;
+	Thu, 10 Sep 2026 15:53:55 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1789055471;
-	bh=lAxxxd+icwL3OXZJ6un0FNRSE4xRvoZ/XAj5r5yEcBY=;
-	h=Subject:From:Date:References:In-Reply-To:To:Cc;
-	b=L0IDzSeBMy8mlYT4O4IJjdudjfuXXuUiFfjkdZL0OZRQjA/CAXMMLT7RYUbEZdgln
-	 hd1f+BFALWmuZiQKtbsJgNGIQ/1KQFUOavDGm2pcRFwT0NZ9UFTIwqaaweboTdE/MJ
-	 occ59/fNd5uTBK8XrAeEatpS5nw4/Mg4DS2h5eRBPHFf4Hb9zZGasiN7lUUvUz4em6
-	 fyOcsB5oTmuK3fmZncFVTTA/I73QA4oSM+vx1DwX7DfQZdWINF3wwIEBjA6FYKHwOY
-	 NRn7Na1HfQxt57sMcSwJvvNoClRadNQ/qtQ2PXhkX9N+Gcd4KbufgN6mYUkhTlpqpW
-	 s5DSnhwb3KyCQ==
-Received: from [10.30.226.235] (localhost [IPv6:::1])
-	by aws-us-west-2-korg-oddjob-rhel9-1.codeaurora.org (Postfix) with ESMTP id D0B34380CFFA;
-	Thu, 10 Sep 2026 15:50:09 +0000 (UTC)
-Content-Type: text/plain; charset="utf-8"
+	s=k20260515; t=1789055640;
+	bh=Rhw/XB4oZMCuaT9L25oXSIHQQoDpEoegzurtGHYUhlM=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=Pv1tSWs7ainajgYjsidtvlIdbZM9m8x7e6csAWxID/NPmmB5o3ArXkWrZvipXRaeC
+	 hq0kBETRmNeoP+zyEdGWNjFIAK8A5EyuJZQT7sKkNa3tvOZ6+Rx2s37xxKr3hdmlBs
+	 j4YI8+qgXsY7OXesAo55+bE4n43jnmwL1PrbpU5kyAKMf+c7mkJzChPpo5xmMhUcQX
+	 XbUUUasK8nQH2dyAE4wfLNfQa5w6ddQm+7vvsWy/9ocUCLFbV/IDZp8y02dirkpxl/
+	 1T8zPHdu+MEkXxTPC4m/ayQFm3Cz79GmQmAtngKrMaHbowbDrPoIXxKq4xxM8iDKlh
+	 mmGYWiOz/PQZA==
+Date: Thu, 10 Sep 2026 17:53:51 +0200
+From: Manivannan Sadhasivam <mani@kernel.org>
+To: Krishna Kurapati <krishna.kurapati@oss.qualcomm.com>
+Cc: Vinod Koul <vkoul@kernel.org>, 
+	Neil Armstrong <neil.armstrong@linaro.org>, Rob Herring <robh@kernel.org>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	Thinh Nguyen <Thinh.Nguyen@synopsys.com>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, 
+	linux-phy@lists.infradead.org, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	linux-arm-msm@vger.kernel.org, linux-usb@vger.kernel.org, 
+	Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+Subject: Re: [PATCH v7 1/5] dt-bindings: phy: Add PHY_TYPE_EUSB2 definition
+Message-ID: <kwtken2y246g2se2bmn3uvxed2ynzxyseck6y2dlnjjn6icug5@p67crwakk4la>
+References: <20260905-eusb2-interrupt-v7-v7-0-820cf5377a70@oss.qualcomm.com>
+ <20260905-eusb2-interrupt-v7-v7-1-820cf5377a70@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-Subject: Re: [PATCH net v3 0/3] net: phy: handle the active-high LED polarity
- mode
-From: patchwork-bot+netdevbpf@kernel.org
-Message-Id: 
- <178905540837.1510486.3215302337759175412.git-patchwork-notify@kernel.org>
-Date: Thu, 10 Sep 2026 15:50:08 +0000
-References: <20260908105959.70453-1-donggeunyoo.kernel@gmail.com>
-In-Reply-To: <20260908105959.70453-1-donggeunyoo.kernel@gmail.com>
-To: Donggeun Yoo <donggeunyoo.kernel@gmail.com>
-Cc: andrew@lunn.ch, hkallweit1@gmail.com, davem@davemloft.net,
- edumazet@google.com, kuba@kernel.org, pabeni@redhat.com,
- linux@armlinux.org.uk, daniel@makrotopia.org, o.rempel@pengutronix.de,
- netdev@vger.kernel.org, linux-arm-msm@vger.kernel.org,
- linux-kernel@vger.kernel.org
+In-Reply-To: <20260905-eusb2-interrupt-v7-v7-1-820cf5377a70@oss.qualcomm.com>
 
-Hello:
-
-This series was applied to netdev/net.git (main)
-by Jakub Kicinski <kuba@kernel.org>:
-
-On Tue,  8 Sep 2026 19:59:56 +0900 you wrote:
-> Commit a274465cc3be ("net: phy: support 'active-high' property for PHY
-> LEDs") let a device tree LED node request PHY_LED_ACTIVE_HIGH, but a
-> ->led_polarity_set() that only handles PHY_LED_ACTIVE_LOW returns -EINVAL
-> for it. of_phy_leds() propagates that, phy_probe() fails, the mdio device
-> is left unbound, and phy_attach_direct() falls back to the genphy driver,
-> so the PHY loses its driver-specific configuration. Three in-tree drivers
-> still have that gap; each already programs active high as its default, so
-> the fix is one case label per driver.
+On Sat, Sep 05, 2026 at 08:59:05PM +0530, Krishna Kurapati wrote:
+> eUSB2 (Embedded USB2) is a MIPI Alliance standard for chip-to-chip USB2
+> signaling. Unlike standard USB2, which uses 3.3V signaling, eUSB2 uses
+> low-voltage differential signaling (~0.4V) and requires a repeater to
+> interface with external USB2 ports. Because of these differences, eUSB2
+> PHY initialization sequences, voltage tuning, and register configuration
+> are distinct from USB2.
 > 
-> [...]
+> Additionally, eUSB2 targets handle wakeup interrupts differently
+> depending on device speed when operating in host mode. According to the
+> eUSB2 specification, remote wakeup signaling in host mode is detected
+> via different data-line assertions based on the connected device speed:
+> 
+> - Low-speed devices: the host repeater drives eD+ to logic '1' upon
+>   detecting a K-state on the USB lines during remote wakeup (eUSB2
+>   spec, Section 5.5.14).
+> - Full-speed/high-speed devices: the host repeater drives eD- to
+>   logic '1' upon detecting a K-state during remote wakeup (eUSB2 spec,
+>    Sections 5.5.15 and 5.5.18).
+> 
+> Since the eUSB2 PHY's DP and DM lines need to be configured differently
+> from USB2 PHYs, controllers should be able to query the PHY type and
+> configure wakeup interrupts accordingly.
+> 
+> Add PHY_TYPE_EUSB2 to distinguish eUSB2 PHYs from standard USB2 PHYs.
+> 
+> Acked-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+> Signed-off-by: Krishna Kurapati <krishna.kurapati@oss.qualcomm.com>
 
-Here is the summary with links:
-  - [net,v3,1/3] net: phy: dp83867: handle the active-high LED polarity mode
-    (no matching commit)
-  - [net,v3,2/3] net: phy: dp83td510: handle the active-high LED polarity mode
-    https://git.kernel.org/netdev/net/c/6ca81bbc31cd
-  - [net,v3,3/3] net: phy: qca808x: handle the active-high LED polarity mode
-    (no matching commit)
+Reviewed-by: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
 
-You are awesome, thank you!
+- Mani
+
 -- 
-Deet-doot-dot, I am a bot.
-https://korg.docs.kernel.org/patchwork/pwbot.html
-
-
+மணிவண்ணன் சதாசிவம்
