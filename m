@@ -1,380 +1,198 @@
 Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E7AF938E11A
-	for <linux-arm-msm@vger.kernel.org>; Thu, 10 Sep 2026 06:21:00 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 345003C3C0F
+	for <linux-arm-msm@vger.kernel.org>; Thu, 10 Sep 2026 06:25:16 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789021264; cv=none; b=M2sC64OVjm2FamZLx7AWedFTtlPW/ONmtmDvz2F4oj5VFPNXKYlHW5XVYitWb4l7i2xgZsCj5RzKQE0OGRlE1hFITWBoMagC9Db/U82cvQFte/PcxkrmGbAzGyjPxQCuWsNxccZ3p3KJV5ndVIc7wyK0o+E2K4l1g1gIhoVNJPk=
+	t=1789021517; cv=none; b=NMIjlU/51JmgzO/sZ7M0tHlopnrofrV48fWwoyfUPqtL95tdBeSKHlGTUhaSnFDKeDtLeN89eoBkqdEF4hsR2oPf5sKUxS8iz3+DhNw8nIuxgHF8Zg29LqVxfJa+skJ0/hZa1/5lC7qWbWwmWHrqjPNOwoWtPdjyxW8x5YOaPXg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789021264; c=relaxed/simple;
-	bh=wwfJZGv/hTuYt9RLOGbzFJnWDVrBzY+HLZdIIf2AZ6M=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=b7zvR/RPd0nwO/I8D9oNk8HKUPJWPXR+RUBZ7Nt8p3wFsdYpV+LueJkdEOUdNFG4TwQlOVBsKCwfX47Ax5dTWMnwlnSIoSgPMkyZPktcb6OBAULaYgKNCGMuO72CBo9cPL7rzwjqiKbxBIA1dPFv7epmIRvpRJBCgxvJM7LiKV8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=DisahsTs; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=Tsfgy0HY; arc=none smtp.client-ip=205.220.180.131
+	s=arc-20240116; t=1789021517; c=relaxed/simple;
+	bh=i6fj8/kf6XJ2Mztwx1NrbscUGR6y+yJM6kOskXkB53I=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=b0AZB8XCvBI0E3Yo7J0iAiunSmYBpB4ONBncMTLZS3vTikoAtcC5PJTdkCwJ819sRsHLVnIXhmsWNR9WRg2FYwBSt2x0vdez5f0dWOaI9WmK6bALf5Vl34M6aS846lQsHCpacxSw6LWx3R2aKxXk/BRjTwsIOje4nN5b526mY7o=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=B+7uLXDO; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=KJduRUgB; arc=none smtp.client-ip=205.220.180.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="DisahsTs";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Tsfgy0HY"
-Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68A5Gutr319267
-	for <linux-arm-msm@vger.kernel.org>; Thu, 10 Sep 2026 06:20:57 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="B+7uLXDO";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="KJduRUgB"
+Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68A5GrnU3520298
+	for <linux-arm-msm@vger.kernel.org>; Thu, 10 Sep 2026 06:25:15 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	2cAKJH1jsDQk8uyFatdLABvegUQEk65JuqJ3UMhtbG4=; b=DisahsTs4N8B9T2x
-	GgdvXmJAZs7/rbbYikj/sm2o7gMbdy13gM/DjQJWnx9/32htnSoWhUbfixyPWSaJ
-	YhmeKHTSZkTztYZ+bXnrtjTfV8KUdfy4NLkkcfuGcKJycGimTEtOYYyikks1Z5mu
-	C7E4TSae3x8B6kAi4DKe5my25BcchR90gzjuiGdfbgOe4EjacIve+lVc1i55q4Ht
-	1OKqkYhtJYpSBQLvEfxZGmggVqPRWUAakCZZwM3EdoltnRGbwKHPF7o/AWew4sB7
-	jTKaJwlZCVqVJbQ8O0WNoBxhptr83w6KTFlpmWb2uyzSTlfleQ6zPRAgTx2PY4ke
-	tV0z8g==
-Received: from mail-pj1-f71.google.com (mail-pj1-f71.google.com [209.85.216.71])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gkcyg2c5e-1
+	0ObhisKuf3WFl+PwC9opKGA90mMXdNmzZ9JcAW0CfsI=; b=B+7uLXDO6p95T/EV
+	0zlTTLwnLxH15TZUT8Wpgq5Jc7BDYEhYMQDhP4HmiAE7xmTm5/xjnBvZa7E7MKFt
+	dB70ijuxGucY7FJaxQn237Gxmu8HXut+g638oYJGfIIKKx4WBhxIQzYiEWXYZlmB
+	NV0I8aTcDI2wOYu7nw9mkwCW65WjMsxhYH0HxqbgAN5kTtqgf+NL0Xvq9h90d4Pk
+	J9gtnb9RC9dGuoYXLqyyLvPPimqRQR2me/sjlr0v5s8s1henAzgtyyXzzN3XOWr3
+	7rd68rTU41afZ4IzDl4U5lDQCMg0jLtc/pLWORE2wTbbZ1J+Sf44jTD2znJLAiFw
+	BqjrmQ==
+Received: from mail-pg1-f197.google.com (mail-pg1-f197.google.com [209.85.215.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gkcyfjfnn-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Thu, 10 Sep 2026 06:20:57 +0000 (GMT)
-Received: by mail-pj1-f71.google.com with SMTP id 98e67ed59e1d1-381250979d5so8337150a91.0
-        for <linux-arm-msm@vger.kernel.org>; Wed, 09 Sep 2026 23:20:57 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 10 Sep 2026 06:25:14 +0000 (GMT)
+Received: by mail-pg1-f197.google.com with SMTP id 41be03b00d2f7-cc4afc810bfso641513a12.0
+        for <linux-arm-msm@vger.kernel.org>; Wed, 09 Sep 2026 23:25:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1789021256; x=1789626056; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=2cAKJH1jsDQk8uyFatdLABvegUQEk65JuqJ3UMhtbG4=;
-        b=Tsfgy0HYCCMNpj+t5F5IH2TRcyTq0q4Im3Qpw5fYepls62Z8KyDdi3YOlnvmD14lHZ
-         KxyPpyBa1Fqku5Erql6CoahvSaLxzCSNdcdk+/EEvbkbSiCZWQqfEFlynzVTDhBHJs0N
-         rpd0TeHzw+jmyT+7ZY4CfeKGBrIoW3oF4evFdmChNqbZYoK4U6smyT+E2/6eKUjlHE+M
-         pXoXKqkmsZtb/zMvoPezA4UmqPNthyL618LLm6TKBk/W3tATytCSUdEEtjGv+R3+kH2I
-         8spy4cxteyqpNc/214tksS2JVUwEY3qPgDEOFp7wliriNX0+BG8i6OOJ6WcggK3zVqSF
-         IMLg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1789021256; x=1789626056;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+        d=oss.qualcomm.com; s=google; t=1789021514; x=1789626314; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=2cAKJH1jsDQk8uyFatdLABvegUQEk65JuqJ3UMhtbG4=;
-        b=a2OwyjwPz1rBjZGbAE4JUFAMhebYkZt9YTKbBO99MF+CJ8/wYXvK6igZi4tKEiMno4
-         eYeMDrk8vRL3KovaE4hABI4m04i3nAS6jHzXRJawKuL+w81OjzBJTMkBC7fg9bn/oMum
-         xWgk9FLIo7NksiNZqWdgWlGT/UQpbFGmCbhXk93xJD0Uld3J6y8pTCQVnWZcbkoSXsY2
-         O7B1dseYCEKz278dk8sQwKRpuWjRGcX/Hz0eqJCe89neBtc8ucQ1AZJDoU2M1GhN/oBp
-         9HYcllftIDXkYrUNWfqcRac1H9x7bIIgeaAxkwk+p2xNf0ozRDXX1tFXtyXVOLsKoLFN
-         CNDw==
-X-Forwarded-Encrypted: i=1; AKwUvBzSVWIZc8I9mB6o62gQKy0CxENQrQ/6RANoxkIBvW64IqeMFDaeSTAtLzGPV60evEFbtAt1wZadgxwmyvWu@vger.kernel.org
-X-Gm-Message-State: AFuF++lATXaxtkal8UCRY62vnDfmbWC0KYGFGBo/0+oDcqD70d80UJTE
-	4d1/p+Ex94MNrhDPoLuFeeFYK3t0BArpFIIqMqSKxmP11BYLjhR5Q/WC+Y2z+De1Bqz0K2JI4hW
-	mQELAPdTJkQsf0Ahe6k1oWP85jNEXZaWuEuoi9TOCHaxquzaOE/QJDETNqBl11oC6IfVX
-X-Gm-Gg: AYBFou2j5XqHMecxEEr1dcyaeJZl9yWBE3dfZVYTbvbj5MxqceqBgymdASlrNzZTn1D
-	NYqeZExMdxkJdwZnMVxZQLzTJQjSSpd0oz6ZdW0bj5IaSxPXUqCak9c5A2cSxNrJriXxiJ9Jghc
-	ivpxpjaUmsGEyI4AiwEJbm7ygxZfy/VVe7iBc9LLBORYdNKmCj3A2gpkiMHQYFKKzGrnJ7ZEjrP
-	1H3457bepiYL+R5YwO0jvo1iTwm6B6XAaPNjQFJOMOn0ag2GAc7/DkH32EcZ5mBWj+G8Jz6lMjD
-	g0WzpQZt8fOgzwVs+OqnqdRdpJsp+vnNJ603GtqSeFQjnsgbLFCNN22Qa+rh730hx6Nm+6ac6in
-	5pb6gFfIRmt3r+TnCmDoJY0lBfFJ77DIRl133
-X-Received: by 2002:a17:90b:5243:b0:38e:c232:9d3f with SMTP id 98e67ed59e1d1-39b2614df1emr59401391a91.5.1789021256342;
-        Wed, 09 Sep 2026 23:20:56 -0700 (PDT)
-X-Received: by 2002:a17:90b:5243:b0:38e:c232:9d3f with SMTP id 98e67ed59e1d1-39b2614df1emr59401320a91.5.1789021255852;
-        Wed, 09 Sep 2026 23:20:55 -0700 (PDT)
-Received: from hu-mohs-hyd.qualcomm.com ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3339befe870sm54709946eec.30.2026.09.09.23.20.51
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 09 Sep 2026 23:20:55 -0700 (PDT)
-From: Mohammad Rafi Shaik <mohammad.rafi.shaik@oss.qualcomm.com>
-Date: Thu, 10 Sep 2026 11:50:15 +0530
-Subject: [PATCH v2 2/2] soundwire: qcom: add EE-aware register layout for
- Shikra
+        bh=0ObhisKuf3WFl+PwC9opKGA90mMXdNmzZ9JcAW0CfsI=;
+        b=KJduRUgBs0ZT8D+KHuVYQGjjIHeFuQIESbKNEPaWqWfn/rBQ9zam9CIZr027n/N7ss
+         dTs9vFm+AvV7sFU79v2v7drESkBoS+ljjMF0Q0Eq/Awbaa0aJGKW+W3P8zRhDZtCHz78
+         vL+cau9FNV8t3bztXkZrfpK+8FquB4cSpDmo0h4P4VfO+WTkSWKfYvo5B45yAIRETAbI
+         AoanpyHsCLUSdo1olIreM5VokN/3yfGUYDLNPrCt2TFk9KQg5ynTXT7qABk6bZJ4DTKr
+         gjacc/0unUJk1RkSB8sr3HE2lx65QXKcewONzmSAuBCA2atbLcT4oqE/ZmmYfxuy9wMO
+         PnMQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1789021514; x=1789626314;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=0ObhisKuf3WFl+PwC9opKGA90mMXdNmzZ9JcAW0CfsI=;
+        b=jn6a89+VgLCCl4QfPufdXR3t+kOzrhyKCEnFP35s8Ki6t+WYf+pfooeu+BBsrTwr6n
+         3IcBZBKn6DDDBO8I7PEhb10by2dDRBvdJ3aG0hAqVfb5IsEvuFI92984W7XlUx7+l1O9
+         /B8nVUJO3renVmRKRrRYIIsu27G0eeJxYqR4yaspoCeXY8qpdb0vpi4R1sGORX+l0252
+         E/mJuUXIcQojTbHyb8a1LrDeYyIrvS1JqfhM3f7hLxniPCBb6uwF9hoBrKYu/99i2knQ
+         REMIQV1PwF76hUs6PemkfXQr17F9lV0veR31Lyl8SaV+hRtPiHi9jaPhUfrST1iWkKxg
+         3Qyg==
+X-Gm-Message-State: AFuF++mQ2GYGin4CLQIVZFZinnzPofeg8YsHn19GaNb2DHSjL6anBnBu
+	ZKmKlTwlYZHNJDuEtzubELZ2b54j+b9m/ZWlPep6kLrlvJs4ON8ipmB/VTlshV+asyw3GFRXd6p
+	Va3+fB7xorlo5nn65vpW9vlbxQsXk/itdN2shH0YUDTVnFttiyY+WzTwQb1f8xbK/s1jZ
+X-Gm-Gg: AYBFou2K3gKsm3QfFmEfFUtm5ySxbVWkI0GT0vJVMJtKMOF6F8n6ybpa8AHticyUfcl
+	v5jADpKF69M2hbkRCzKKhyTYHmUnHQBOOfRp9mKfBzkKVbXYi9IbieuJN6rOl8Ff4fCG0JFDK3H
+	5kaOBUDROEGsRgkayfV1GH3QUSQ+kOAHOwfMnWP69NuivFFyXOyt2WZzjHZZAMf8F1A+GhOw+Uv
+	7iY0RS/jpJNOZD9uRP9ZWxPYBuKAC2+ROxaYWydl86G21pe0zlVvQNpIr/1+xihAumwKiY9lVVi
+	DPPdRElM2eAIVbbCUz693bSZbCyyXWsS9tmyJXymAhbosmerbK1s85MXSW8LoZb6PzOZqSrGCJW
+	xD5TStnQ5pXQ2vg47NepNDlij9yCVO8Gzk+nG1T9bQZHtjAEIEfY1TQIRlg==
+X-Received: by 2002:a17:90a:fc47:b0:38e:6d55:b1a6 with SMTP id 98e67ed59e1d1-39d7799fcc2mr2591708a91.3.1789021513982;
+        Wed, 09 Sep 2026 23:25:13 -0700 (PDT)
+X-Received: by 2002:a17:90a:fc47:b0:38e:6d55:b1a6 with SMTP id 98e67ed59e1d1-39d7799fcc2mr2591690a91.3.1789021513427;
+        Wed, 09 Sep 2026 23:25:13 -0700 (PDT)
+Received: from [10.133.33.114] (tpe-colo-wan-fw-bordernet.qualcomm.com. [103.229.16.4])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-39d7e77611asm2420034a91.6.2026.09.09.23.25.10
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 09 Sep 2026 23:25:12 -0700 (PDT)
+Message-ID: <bb67cc5b-a120-46f6-8b49-d1f492a784a7@oss.qualcomm.com>
+Date: Thu, 10 Sep 2026 14:25:08 +0800
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH RFC] power: reset: qcom-pon: Drop reason shift for PMK8350
+To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+        Alexander Koskovich <akoskovich@pm.me>,
+        Sebastian Reichel <sre@kernel.org>,
+        Kamal Wadhwa <kamal.wadhwa@oss.qualcomm.com>
+Cc: linux-arm-msm@vger.kernel.org, linux-pm@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+References: <20260907-pon-pbs-v1-1-cff2f5810769@pm.me>
+ <2b163290-d57c-4e84-99b1-d94fb5f45f79@oss.qualcomm.com>
+Content-Language: en-US
+From: Fenglin Wu <fenglin.wu@oss.qualcomm.com>
+In-Reply-To: <2b163290-d57c-4e84-99b1-d94fb5f45f79@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260910-shikra_soundwire_support-v2-2-f98c9a6ea1e1@oss.qualcomm.com>
-References: <20260910-shikra_soundwire_support-v2-0-f98c9a6ea1e1@oss.qualcomm.com>
-In-Reply-To: <20260910-shikra_soundwire_support-v2-0-f98c9a6ea1e1@oss.qualcomm.com>
-To: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>,
-        Srinivas Kandagatla <srini@kernel.org>,
-        Rao Mandadapu <quic_srivasam@quicinc.com>,
-        Vinod Koul <vkoul@kernel.org>,
-        Bard Liao <yung-chuan.liao@linux.intel.com>,
-        Pierre-Louis Bossart <pierre-louis.bossart@linux.dev>
-Cc: Mohammad Rafi Shaik <mohammad.rafi.shaik@oss.qualcomm.com>,
-        linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-sound@vger.kernel.org
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1789021241; l=9035;
- i=mohammad.rafi.shaik@oss.qualcomm.com; s=20260424;
- h=from:subject:message-id; bh=wwfJZGv/hTuYt9RLOGbzFJnWDVrBzY+HLZdIIf2AZ6M=;
- b=aMlR67VMW06hbwjN6slAeqjXYEQNhryp7AflTUs1RvuCoHkb2uu+KN/B1Zfd9JKkBVqcPZWcB
- TxXss/4hK81AVgleSsPP8QFVhlY7n/cXlRL47QO8w5+8zaZg3RUJxBq
-X-Developer-Key: i=mohammad.rafi.shaik@oss.qualcomm.com; a=ed25519;
- pk=KZedmYgMGYOzuTpLGv56tdrL+pTLDP8pdmfQ91xemiA=
-X-Authority-Analysis: v=2.4 cv=YZYodARf c=1 sm=1 tr=0 ts=6aa24c49 cx=c_pps
- a=UNFcQwm+pnOIJct1K4W+Mw==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTEwMDA2NCBTYWx0ZWRfX7yP6fKWmpjig
+ bGF9scSfAiKK1M6ShTpcBwLxNl91K9fXk6R1eaX1v8EypysWD0IcnWQ0koBqhLEfrczZjjKF482
+ Mse+cwCtbndYzhGBtQfIxa7oyHjXKaA=
+X-Proofpoint-ORIG-GUID: ONGIompgZsDxi8IkO80GESaTped5QU7p
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTEwMDA2NCBTYWx0ZWRfX6iy46IzDt3fK
+ hQNJ/W0mjfse7RocDX97/7IP2FEzzVyFL5jvymn5Jkp++1WjMS9gLliSdjA59T7OIK7JFytAVyj
+ 0kLdqXZYGcM7xCs9qxOuEDVgegerI0rCR983c4d6Hc2Ml/TptliwMbLEPTyVu+YOLT56Tl7zomN
+ kivZRmU7qCpHdHW0EjMX+hgdQrmKj1J0tOcsnBBig9Rc+QYHcFod/4xEDwL0ixnxHSR3X0aKElH
+ qJbGwhSSa9J9GaDsokurm1Loiv0N1NGwt72Eca5Zqi1XnPFJLwyJ49vlg/dzFhR06x3OQ/Ppen5
+ M07oGqD4IhqEZ1ptUujq2duMhbgoFYOYYFGh+Zwtqydj1is5Ey7jSeiod55qK1eOz/ZgH+9/oA5
+ vcrw5opL6tXr5uumufK8meUdeoFj/uSsrvMxjD1Y34oadMPLvG4pDWZl7FM8hcmCd9MEazfGym+
+ EAStNt7IWYAvN+MexxQ==
+X-Authority-Analysis: v=2.4 cv=H5pOUOYi c=1 sm=1 tr=0 ts=6aa24d4b cx=c_pps
+ a=rz3CxIlbcmazkYymdCej/Q==:117 a=nuhDOHQX5FNHPW3J6Bj6AA==:17
  a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_glEPmIy2e8OvE2BGh3C:22
- a=EUspDBNiAAAA:8 a=6zcml--_J13hLvNke2oA:9 a=QEXdDO2ut3YA:10
- a=uKXjsCUrEbL0IQVhDsJ9:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTEwMDA2NCBTYWx0ZWRfXwJyVOtBYMOzT
- k59v8IYpATDg/SQ9qMfb9SZt8wyWk74p004tRajPF3O5EXnaYw9BQ+K2eYC7eCUhHwb8ISKSplX
- hI1npv3HZ86AIvAzieHk6iJswoHZze0=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTEwMDA2NCBTYWx0ZWRfX5wectVrqGdXe
- kJh+9tvp1AWubONqArYEUOeFDLky3BbACmJgxxORWqzpV7FS2eX7JA782TAHKXUV7RFVU5cDFRk
- GWjzjjeCMhOLexYy1A3rvZByW6gzcmeymqy3boCM7Fmupb6rDsyCLJowEBEYVzW9rrCMt+FG/CB
- D2DUg5K9zThZvh0Lya2ZNzf9kI2q2nD4LSzxtDkFlRZweeCQ05CQmHEc+aOch8o2H6NTj2TuTGb
- qML5OFovMqbV/B+n0VwkduVgStk1iq02GruEE1tV6mpcajtB5InPyRvjrD//gcETXiI+eIgFyKi
- iaCCjwp30UHhf0J4zxV3/Uu6BC1HDYNPL9O0LEuQ2Eceab1wn7ZkO1+Uz4dyrGaL3m3VGFIY38X
- lQtlQH6UZBXMyj6FiUc1QL3xWMaB2Vu8YbOevXxuv9GnW1jcu0uoAmJKa8NSzUVfNxGaB1quwmT
- Ggmk3z51y1JQUkmiSyQ==
-X-Proofpoint-GUID: xBbSmuLwpxOkVgKXA5CRJZJlpjbCRrtu
-X-Proofpoint-ORIG-GUID: xBbSmuLwpxOkVgKXA5CRJZJlpjbCRrtu
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22
+ a=HE6Pee6EBNe1YuvuHLcA:9 a=QEXdDO2ut3YA:10 a=bFCP_H2QrGi7Okbo017w:22
+X-Proofpoint-GUID: ONGIompgZsDxi8IkO80GESaTped5QU7p
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-09-10_02,2026-09-09_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0 suspectscore=0 lowpriorityscore=0 impostorscore=0 adultscore=0
- bulkscore=0 phishscore=0 spamscore=0 clxscore=1015 priorityscore=1501
+ clxscore=1015 suspectscore=0 spamscore=0 priorityscore=1501 impostorscore=0
+ malwarescore=0 bulkscore=0 adultscore=0 lowpriorityscore=0 phishscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609100064
 
-On SoundWire v2.0 and later hardware, FIFO, and status
-registers are banked per Execution Environment (EE).
-The existing driver assumes the SoundWire controller is
-assigned to EE1, which is true for all currently supported
-Qualcomm SoCs.
 
-Shikra is an exception and assigns the controller to EE0.
-As a result, the relevant register windows are located at
-different offsets and cannot be accessed using the default
-EE1 register layout.
 
-Add an ee field to the SoC match data and introduce a
-dedicated qcom,shikra-soundwire compatible with ee = 0.
-The driver uses this information at probe time to select
-the correct register layout, while all existing platforms
-continue to use the default EE1 configuration.
+On 9/9/2026 7:52 PM, Konrad Dybcio wrote:
+> On 9/7/26 6:44 PM, Alexander Koskovich wrote:
+>> On the PMK8350 the SOFT_RB_SPARE register does not exist, the reset
+>> reason is instead kept in SDAM and written through the reboot-reason
+>> nvmem cell.
+>>
+>> Signed-off-by: Alexander Koskovich <akoskovich@pm.me>
+>> ---
+>> Would like some feedback on this as I'm seeing conflicting results,
+>> SOFT_RB_SPARE does not exist on HLOS but it looks like the downstream
+>> qpnp-power-on driver writes to XVDD_RB_SPARE2 for GEN3, which is on PBS.
+>>
+>> Though, targets like waipio don't seem to have access to write to PBS
+>> from HLOS? Get SPMI errors when I try. Didn't have an issue doing so on
+>> milos though.
+>>
+>> Besides, the bindings doesn't allow reboot modes on PMK8350 so maybe
+>> setting no reason shift is correct regardless so it gets skipped?
+>> ---
+> 
+> Maybe +Kamal or +Fenglin would know more
+> 
+> Konrad
+> 
 
-Signed-off-by: Mohammad Rafi Shaik <mohammad.rafi.shaik@oss.qualcomm.com>
----
- drivers/soundwire/qcom.c | 85 ++++++++++++++++++++++++++++++++++++++++--------
- 1 file changed, 71 insertions(+), 14 deletions(-)
+For pmk8350 HLOS_PON, I can see a register at 0x8f,
+PON_HLOS_DVDD_RB_SPARE2 in the dVdd_RB block, that may not retain the
+reset reason during a device reboot. The downstream qpnp-power-on driver
+stores the reset reason in PBS_PON register 0x8f,
+PON_PBS_XVDD_RB_SPARE2, which belongs to the xVdd_RB block where all
+register values are retained during normal reboot.
 
-diff --git a/drivers/soundwire/qcom.c b/drivers/soundwire/qcom.c
-index 35ffffd54..6e0c5fb10 100644
---- a/drivers/soundwire/qcom.c
-+++ b/drivers/soundwire/qcom.c
-@@ -25,7 +25,9 @@
- #define SWRM_COMP_SW_RESET					0x008
- #define SWRM_COMP_STATUS					0x014
- #define SWRM_LINK_MANAGER_EE					0x018
--#define SWRM_EE_CPU						1
-+#define SWRM_EE_CPU0						0
-+#define SWRM_EE_CPU1						1
-+#define SWRM_EE_CPU						SWRM_EE_CPU1
- #define SWRM_FRM_GEN_ENABLED					BIT(0)
- #define SWRM_VERSION_1_3_0					0x01030000
- #define SWRM_VERSION_1_5_1					0x01050001
-@@ -118,6 +120,7 @@
- #define SWRM_V2_0_CLK_CTRL					0x5060
- #define SWRM_V2_0_CLK_CTRL_CLK_START				BIT(0)
- #define SWRM_V2_0_LINK_STATUS					0x5064
-+#define SWRM_V2_REG_EE_STRIDE					0x1000
- 
- #define SWRM_DP_PORT_CTRL_EN_CHAN_SHFT				0x18
- #define SWRM_DP_PORT_CTRL_OFFSET2_SHFT				0x10
-@@ -201,6 +204,7 @@ struct qcom_swrm_ctrl {
- 	struct mutex port_lock;
- 	struct clk *hclk;
- 	int irq;
-+	u32 ee;
- 	unsigned int version;
- 	int wake_irq;
- 	int num_din_ports;
-@@ -224,6 +228,7 @@ struct qcom_swrm_ctrl {
- 	/* Per-Slave SCP_ADDRPAGE1/2 shadow; -1 = unknown. */
- 	s16 page1_cache[SDW_MAX_DEVICES + 1];
- 	s16 page2_cache[SDW_MAX_DEVICES + 1];
-+	unsigned int reg_layout_local[SWRM_OFFSET_DP_SAMPLECTRL2_BANK + 1];
- };
- 
- struct qcom_swrm_data {
-@@ -232,6 +237,7 @@ struct qcom_swrm_data {
- 	bool sw_clk_gate_required;
- 	u32 max_reg;
- 	const unsigned int *reg_layout;
-+	u32 ee;
- };
- 
- static const unsigned int swrm_v1_3_reg_layout[] = {
-@@ -258,6 +264,7 @@ static const struct qcom_swrm_data swrm_v1_3_data = {
- 	.default_cols = 16,
- 	.max_reg = SWR_V1_3_MSTR_MAX_REG_ADDR,
- 	.reg_layout = swrm_v1_3_reg_layout,
-+	.ee = SWRM_EE_CPU,
- };
- 
- static const struct qcom_swrm_data swrm_v1_5_data = {
-@@ -265,6 +272,7 @@ static const struct qcom_swrm_data swrm_v1_5_data = {
- 	.default_cols = 16,
- 	.max_reg = SWR_V1_3_MSTR_MAX_REG_ADDR,
- 	.reg_layout = swrm_v1_3_reg_layout,
-+	.ee = SWRM_EE_CPU,
- };
- 
- static const struct qcom_swrm_data swrm_v1_6_data = {
-@@ -273,6 +281,7 @@ static const struct qcom_swrm_data swrm_v1_6_data = {
- 	.sw_clk_gate_required = true,
- 	.max_reg = SWR_V1_3_MSTR_MAX_REG_ADDR,
- 	.reg_layout = swrm_v1_3_reg_layout,
-+	.ee = SWRM_EE_CPU,
- };
- 
- static const unsigned int swrm_v2_0_reg_layout[] = {
-@@ -300,6 +309,7 @@ static const struct qcom_swrm_data swrm_v2_0_data = {
- 	.sw_clk_gate_required = true,
- 	.max_reg = SWR_V2_0_MSTR_MAX_REG_ADDR,
- 	.reg_layout = swrm_v2_0_reg_layout,
-+	.ee = SWRM_EE_CPU,
- };
- 
- static const unsigned int swrm_v3_0_reg_layout[] = {
-@@ -327,9 +337,51 @@ static const struct qcom_swrm_data swrm_v3_0_data = {
- 	.sw_clk_gate_required = true,
- 	.max_reg = SWR_V2_0_MSTR_MAX_REG_ADDR,
- 	.reg_layout = swrm_v3_0_reg_layout,
-+	.ee = SWRM_EE_CPU,
-+};
-+
-+static const struct qcom_swrm_data swrm_shikra_data = {
-+	.default_rows = 50,
-+	.default_cols = 16,
-+	.sw_clk_gate_required = true,
-+	.max_reg = SWR_V2_0_MSTR_MAX_REG_ADDR,
-+	.reg_layout = swrm_v3_0_reg_layout,
-+	.ee = SWRM_EE_CPU0,
- };
- #define to_qcom_sdw(b)	container_of(b, struct qcom_swrm_ctrl, bus)
- 
-+static void qcom_swrm_set_ee_register_layout(struct qcom_swrm_ctrl *ctrl,
-+					     const struct qcom_swrm_data *data)
-+{
-+	int ee_offset;
-+
-+	memcpy(ctrl->reg_layout_local, data->reg_layout,
-+	       sizeof(ctrl->reg_layout_local));
-+	ctrl->reg_layout = ctrl->reg_layout_local;
-+
-+	if (ctrl->version < SWRM_VERSION_2_0_0)
-+		return;
-+
-+	/*
-+	 * The register layout constants are defined for EE1 (the default for
-+	 * most Qualcomm SoCs). For SoCs where the SoundWire master is assigned
-+	 * to EE0, the interrupt, FIFO and status register windows are shifted
-+	 * by one EE stride (0x1000) relative to the EE1 base addresses.
-+	 */
-+	ee_offset = ((int)ctrl->ee - SWRM_EE_CPU) * SWRM_V2_REG_EE_STRIDE;
-+	if (!ee_offset)
-+		return;
-+
-+	ctrl->reg_layout_local[SWRM_REG_FRAME_GEN_ENABLED] += ee_offset;
-+	ctrl->reg_layout_local[SWRM_REG_INTERRUPT_STATUS] += ee_offset;
-+	ctrl->reg_layout_local[SWRM_REG_INTERRUPT_CLEAR] += ee_offset;
-+	ctrl->reg_layout_local[SWRM_REG_INTERRUPT_CPU_EN] += ee_offset;
-+	ctrl->reg_layout_local[SWRM_REG_CMD_FIFO_WR_CMD] += ee_offset;
-+	ctrl->reg_layout_local[SWRM_REG_CMD_FIFO_RD_CMD] += ee_offset;
-+	ctrl->reg_layout_local[SWRM_REG_CMD_FIFO_STATUS] += ee_offset;
-+	ctrl->reg_layout_local[SWRM_REG_CMD_FIFO_RD_FIFO_ADDR] += ee_offset;
-+}
-+
- static int qcom_swrm_ahb_reg_read(struct qcom_swrm_ctrl *ctrl, int reg,
- 				  u32 *val)
- {
-@@ -910,12 +962,13 @@ static int qcom_swrm_init(struct qcom_swrm_ctrl *ctrl)
- 	ctrl->reg_write(ctrl, SWRM_MCP_CFG_ADDR, val);
- 
- 	if (ctrl->version == SWRM_VERSION_1_7_0) {
--		ctrl->reg_write(ctrl, SWRM_LINK_MANAGER_EE, SWRM_EE_CPU);
-+		ctrl->reg_write(ctrl, SWRM_LINK_MANAGER_EE, ctrl->ee);
- 		ctrl->reg_write(ctrl, SWRM_MCP_BUS_CTRL,
--				SWRM_MCP_BUS_CLK_START << SWRM_EE_CPU);
-+				SWRM_MCP_BUS_CLK_START << ctrl->ee);
- 	} else if (ctrl->version >= SWRM_VERSION_2_0_0) {
--		ctrl->reg_write(ctrl, SWRM_LINK_MANAGER_EE, SWRM_EE_CPU);
--		ctrl->reg_write(ctrl, SWRM_V2_0_CLK_CTRL,
-+		ctrl->reg_write(ctrl, SWRM_LINK_MANAGER_EE, ctrl->ee);
-+		ctrl->reg_write(ctrl, SWRM_V2_0_CLK_CTRL +
-+				((int)ctrl->ee - SWRM_EE_CPU) * SWRM_V2_REG_EE_STRIDE,
- 				SWRM_V2_0_CLK_CTRL_CLK_START);
- 	} else {
- 		ctrl->reg_write(ctrl, SWRM_MCP_BUS_CTRL, SWRM_MCP_BUS_CLK_START);
-@@ -941,11 +994,9 @@ static int qcom_swrm_init(struct qcom_swrm_ctrl *ctrl)
- 	ctrl->reg_write(ctrl, ctrl->reg_layout[SWRM_REG_INTERRUPT_CLEAR],
- 			0xFFFFFFFF);
- 
--	/* enable CPU IRQs */
--	if (ctrl->mmio) {
--		ctrl->reg_write(ctrl, ctrl->reg_layout[SWRM_REG_INTERRUPT_CPU_EN],
--				SWRM_INTERRUPT_STATUS_RMSK);
--	}
-+	/* enable CPU IRQs for the selected EE window */
-+	ctrl->reg_write(ctrl, ctrl->reg_layout[SWRM_REG_INTERRUPT_CPU_EN],
-+			SWRM_INTERRUPT_STATUS_RMSK);
- 
- 	/* Set IRQ to PULSE */
- 	ctrl->reg_write(ctrl, SWRM_COMP_CFG_ADDR,
-@@ -1580,6 +1631,7 @@ static int qcom_swrm_probe(struct platform_device *pdev)
- 	memset(ctrl->page2_cache, 0xff, sizeof(ctrl->page2_cache));
- 
- 	data = of_device_get_match_data(dev);
-+	ctrl->ee = data->ee;
- 	ctrl->max_reg = data->max_reg;
- 	ctrl->reg_layout = data->reg_layout;
- 	ctrl->rows_index = sdw_find_row_index(data->default_rows);
-@@ -1659,6 +1711,7 @@ static int qcom_swrm_probe(struct platform_device *pdev)
- 	prop->default_row = data->default_rows;
- 
- 	ctrl->reg_read(ctrl, SWRM_COMP_HW_VERSION, &ctrl->version);
-+	qcom_swrm_set_ee_register_layout(ctrl, data);
- 
- 	ret = devm_request_threaded_irq(dev, ctrl->irq, NULL,
- 					qcom_swrm_irq_handler,
-@@ -1769,16 +1822,19 @@ static int __maybe_unused swrm_runtime_resume(struct device *dev)
- 		reset_control_reset(ctrl->audio_cgcr);
- 
- 		if (ctrl->version == SWRM_VERSION_1_7_0) {
--			ctrl->reg_write(ctrl, SWRM_LINK_MANAGER_EE, SWRM_EE_CPU);
-+			ctrl->reg_write(ctrl, SWRM_LINK_MANAGER_EE, ctrl->ee);
- 			ctrl->reg_write(ctrl, SWRM_MCP_BUS_CTRL,
--					SWRM_MCP_BUS_CLK_START << SWRM_EE_CPU);
-+					SWRM_MCP_BUS_CLK_START << ctrl->ee);
- 		} else if (ctrl->version >= SWRM_VERSION_2_0_0) {
--			ctrl->reg_write(ctrl, SWRM_LINK_MANAGER_EE, SWRM_EE_CPU);
--			ctrl->reg_write(ctrl, SWRM_V2_0_CLK_CTRL,
-+			ctrl->reg_write(ctrl, SWRM_LINK_MANAGER_EE, ctrl->ee);
-+			ctrl->reg_write(ctrl, SWRM_V2_0_CLK_CTRL +
-+					((int)ctrl->ee - SWRM_EE_CPU) *
-+					SWRM_V2_REG_EE_STRIDE,
- 					SWRM_V2_0_CLK_CTRL_CLK_START);
- 		} else {
- 			ctrl->reg_write(ctrl, SWRM_MCP_BUS_CTRL, SWRM_MCP_BUS_CLK_START);
- 		}
-+
- 		ctrl->reg_write(ctrl, ctrl->reg_layout[SWRM_REG_INTERRUPT_CLEAR],
- 			SWRM_INTERRUPT_STATUS_MASTER_CLASH_DET);
- 
-@@ -1854,6 +1910,7 @@ static const struct of_device_id qcom_swrm_of_match[] = {
- 	{ .compatible = "qcom,soundwire-v1.7.0", .data = &swrm_v1_5_data },
- 	{ .compatible = "qcom,soundwire-v2.0.0", .data = &swrm_v2_0_data },
- 	{ .compatible = "qcom,soundwire-v3.1.0", .data = &swrm_v3_0_data },
-+	{ .compatible = "qcom,shikra-soundwire", .data = &swrm_shikra_data },
- 	{/* sentinel */},
- };
- 
+The downstream driver manages PON/reset behavior primarily through the
+PBS_PON module, whereas HLOS_PON is mainly used for power/reset keys.
 
--- 
-2.34.1
+Since I don't have a waipio device available, I couldn't verify the SPMI
+access permission issue you mentioned. My assumption is that it should
+work correctly; otherwise, all reset-related functionality would be
+broken internally, unless the PMIC module ownership settings in BOOT SW
+were changed on your device.
+
+
+>>  drivers/power/reset/qcom-pon.c | 2 +-
+>>  1 file changed, 1 insertion(+), 1 deletion(-)
+>>
+>> diff --git a/drivers/power/reset/qcom-pon.c b/drivers/power/reset/qcom-pon.c
+>> index 7e108982a582..9cd55f5536b4 100644
+>> --- a/drivers/power/reset/qcom-pon.c
+>> +++ b/drivers/power/reset/qcom-pon.c
+>> @@ -90,7 +90,7 @@ static const struct of_device_id qcom_pon_id_table[] = {
+>>  	{ .compatible = "qcom,pm8941-pon", .data = (void *)NO_REASON_SHIFT },
+>>  	{ .compatible = "qcom,pms405-pon", .data = (void *)GEN1_REASON_SHIFT },
+>>  	{ .compatible = "qcom,pm8998-pon", .data = (void *)GEN2_REASON_SHIFT },
+>> -	{ .compatible = "qcom,pmk8350-pon", .data = (void *)GEN2_REASON_SHIFT },
+>> +	{ .compatible = "qcom,pmk8350-pon", .data = (void *)NO_REASON_SHIFT },
+>>  	{ }
+>>  };
+>>  MODULE_DEVICE_TABLE(of, qcom_pon_id_table);
+>>
+>> ---
+>> base-commit: 944a035ecca915ae947905dcfb03f2b9dc6d032c
+>> change-id: 20260907-pon-pbs-76b7ecaafe33
+>>
+>> Best regards,
 
