@@ -1,99 +1,35 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 19DB54A68B5
-	for <linux-arm-msm@vger.kernel.org>; Thu, 10 Sep 2026 15:07:14 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2D71E408614;
+	Thu, 10 Sep 2026 15:21:14 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789052839; cv=none; b=o0DbwAxpflSCF1fajbFqj1ve2Ul5DvUAY9O5JuFIk/xyZYYGkOWlChjsjNU0H1yzPPIPpS8baTerfHiI68VcF8O2auJxMew4h5esKgoL+OHQscm42fGoIlZXJ3qnWOOunnI/63Wk8SwFtJxxv9fag34s/0H59iKOhcOn9rS0r9c=
+	t=1789053680; cv=none; b=tzAuIYUBsfcTtAaPBa8DSV9/CRvymwyl22GDUuAB+97BT9N83ENYl5BQhn1rioLPPjI+isnkr/cItxImUmmjETGtXizSSSb7u7+qnbbDi+zjR5gAN8SZW+zGQO1/qfviS3t+RZ8/rdW+a5Ji1vVQygtRkv/my97WkE1MM93de/k=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789052839; c=relaxed/simple;
-	bh=E88cDnynQv3HnPcm4uO7dMBnqIizydtK5X9+r637agg=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=SzBRBR6HcKfmkF1PGs//QGNDnMjnJs9ErQrnrXZ0ErXZ6ZyB5G1nanN+MZ/rWN/KEzKFYPRqkf2RXhuesl0BLOqZeLzI+jZxVxN1cBk+f6lNgFZLfj729ZrYODFYHN/8YT4fslVFI+/u+ygWIlq5nAsGjgRAjekHFOqtAAgbDdw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=XZrXuKyb; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=ebv/BTCW; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1789053680; c=relaxed/simple;
+	bh=7cfZkiKJwmCEA3BDbBejz2Td9xjhbgbOaRYLlnKaWl4=;
+	h=Content-Type:MIME-Version:Subject:From:Message-Id:Date:References:
+	 In-Reply-To:To:Cc; b=sca8Pd1C9lixksBNfxiYzKCYueCIPry41y+0vpO4yCR5ornlX2cAy1S3UyfNbTALl0N+07lqSFwvp4o1zBwk3k7EfCbwUsbjT8wCetb4I+wDMDg67+hk3HmbR3qZ9epG6m/OG9BjQoY6lFeZ3hwCstNsnjGL2t5zSpPEeSK2mJU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=IGEU4Hs5; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="XZrXuKyb";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="ebv/BTCW"
-Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68AF4kpA1652843
-	for <linux-arm-msm@vger.kernel.org>; Thu, 10 Sep 2026 15:07:11 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:date:from:in-reply-to:message-id
-	:mime-version:references:subject:to; s=qcppdkim1; bh=x1PtJB+V44p
-	G+pMdvHfWiQQyxDHRsQYqIEhYQsVQ/Qs=; b=XZrXuKybu18DtITtsx4R2fcFe3z
-	c9khbhNyN4Fp21yuCJKnDtnhQT5d0QXf2u/w3UYZw7+m5na6KOxSM1xB/58GVbHq
-	nS0X/QIsT4MVow92gUF/Q/RHZuWTaf6SNovTk+R8qQqTQgy1PKLGj9oYFlH2G14G
-	UUckKEuflgbZHhdTcYKwS7d3ZqGNtNS0Cwlfbstj4lhuOFrQHKH2j1ewkrsO1MMO
-	EkLogM1zxCFNbCCg81ww3GFfpSMA//yk6MDwwHNq6HnXQbe+AZ0sNIj40HWMbLDc
-	T6iM2ZILq1a83vRfMNjov24jrV1Li1YN23F3uU35urBY8thLpn6iKMuEOCQ==
-Received: from mail-oi1-f200.google.com (mail-oi1-f200.google.com [209.85.167.200])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gkrcjt129-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Thu, 10 Sep 2026 15:07:10 +0000 (GMT)
-Received: by mail-oi1-f200.google.com with SMTP id 5614622812f47-4b28deb7ee3so9091158b6e.0
-        for <linux-arm-msm@vger.kernel.org>; Thu, 10 Sep 2026 08:07:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1789052830; x=1789657630; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=x1PtJB+V44pG+pMdvHfWiQQyxDHRsQYqIEhYQsVQ/Qs=;
-        b=ebv/BTCWbPKV1O/qm4XhNJ1DrwtNpN/cfsXKzKJQZQ/dXgZU+bVZziK8yhinV6OnY6
-         CmVDp1vrbYcRYuM04uZpVPWWzYdhOSIDlhma7K8KSe/+MJlNvmoJjp3rR+VCgzFgzMvU
-         pH3iSUB1q3edrxrM18kPIapqhCit2YEXIoyGYMm9L3CjsCDRp15gMKbzE71A0FKs7Afl
-         qLSpQoNLvm2Bw8Kfwktun1n2mkmkDZsg5hRgWjsGP3bqmP3LbmIwpoADU6u3NKRHQ+p0
-         VekOSTpa/uXieon8ZuQFFE4w1aKHXqyfT+5G5rhucN0a2jngQrVGpH3STjWURBikmJjB
-         gDrw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1789052830; x=1789657630;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=x1PtJB+V44pG+pMdvHfWiQQyxDHRsQYqIEhYQsVQ/Qs=;
-        b=KRbHRm1ARq3YGawnCcbfu5TYiE256+xkH4r5jRYyv1Ozraa6XHKYBg4Yd2Z87Cd/21
-         3wSF8PZ1gAKvWX8ZumhvRaNlZ5AEUx0m0pwGohCvkEU2rVRzb+qtmddDq0c6e7zLk53a
-         hFLShXHrxihBvwGbdLDNlBWa9+JTJWmWdNJKogq9SSkFLWUGjhmNFkyMh76R4FjCLm06
-         tUNtzt7thmX1x3jZHNLaLA/xM2Bn6qoThc4nqhUF7UVqubdepHy8B82ldIlOpet5w/z7
-         UVx41JCZpsUHoJ2EYIo6MQqj8Q3aH9fzdIgMYsJEMfth5aCAoxbfSsQyKh32e2McGv03
-         ICcg==
-X-Gm-Message-State: AFuF++nVjSDsZukBSFS9KJeDLN88Vm5x3vKWr4AngW4yS1mYKoSfHGD/
-	DdM5SgrVSX8nkiurlx46oY0R6oPfqo7/+EbPMeVQaMYzvXUCErvkoGrtIdHdfbY2OYpaXTTZMPe
-	NX+R5X842d0x4qtBhI5+i/Qk9NhhjBylqQqTH3KGjD7pa6oTz/1tVf+A39VcbHpa96cKS
-X-Gm-Gg: AYBFou0w1Di+Rd5WVMx+Ql7KtMY8OuFcU5wJOLvzK55qiWGGZSXRITwUJnd4XMWE8Tm
-	g5vNKfA0ibtspvm6XXsp5fl/LohifigK+1zEeI5wQsdLUr6brxUQFEY3X+NS8OgqCzZVQPBjARZ
-	bhJ7bAyn4YD8w4ATV3AD/FmbeqPy4hoAWCj5G9e7cg+8on8dhczoZIXLQWK2ohEGRu3zh2ByrQU
-	Qb1EQNoQmPAf4GaLlA29c/ea/dbts78lqfK9V+96xiD3SQGBcK7kGMdZ8Buf45sxSmyK2UHnc51
-	HE1y3+gZqQUYSSvePdx8L27SEoNrR+zym6IvlYWeyxbCa8YDX5qQz79iQ/rixi8X2MIgWBInDQD
-	EmjFrvH0lk3F4sPelnix1dRQxhgk=
-X-Received: by 2002:a05:6808:4fd4:b0:4b2:98a3:a567 with SMTP id 5614622812f47-4c13fa87a8amr5633933b6e.4.1789052829805;
-        Thu, 10 Sep 2026 08:07:09 -0700 (PDT)
-X-Received: by 2002:a05:6808:4fd4:b0:4b2:98a3:a567 with SMTP id 5614622812f47-4c13fa87a8amr5633876b6e.4.1789052829260;
-        Thu, 10 Sep 2026 08:07:09 -0700 (PDT)
-Received: from hu-mojha-hyd.qualcomm.com ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id 5614622812f47-4b97167bd69sm19340773b6e.13.2026.09.10.08.07.03
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 10 Sep 2026 08:07:07 -0700 (PDT)
-From: Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>
-To: Bjorn Andersson <andersson@kernel.org>,
-        Mathieu Poirier <mathieu.poirier@linaro.org>,
-        Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>,
-        Manivannan Sadhasivam <mani@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, linux-remoteproc@vger.kernel.org,
-        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-        Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>,
-        Abel Vesa <abel.vesa@oss.qualcomm.com>,
-        Yijie Yang <yijie.yang@oss.qualcomm.com>
-Subject: [PATCH v4 2/2] remoteproc: qcom_q6v5_pas: add per-PD proxy performance states for Hawi CDSP
-Date: Thu, 10 Sep 2026 20:36:38 +0530
-Message-ID: <20260910150638.3270162-3-mukesh.ojha@oss.qualcomm.com>
-X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20260910150638.3270162-1-mukesh.ojha@oss.qualcomm.com>
-References: <20260910150638.3270162-1-mukesh.ojha@oss.qualcomm.com>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="IGEU4Hs5"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 28DE91F00899;
+	Thu, 10 Sep 2026 15:21:12 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1789053672;
+	bh=QBTCkpTfJ/RsxTsPfeDu6QW4Q9j7khudyRmxhb82B7I=;
+	h=Subject:From:Date:References:In-Reply-To:To:Cc;
+	b=IGEU4Hs5zCeOAx8VPt8MBvmSFUQgWjoIUn1m6B/zpyZ55cQjEQw3q86VyxfD+paLf
+	 wYGKf+jjUl8noWdt0ZbAs6Ryk/lksSF3xeECzBdNbeGNEF0OZ5lC/EG6MhBDVpYVdO
+	 7S56A1JVAmP5paQX6w/RZI9ztussmYuvUXI4QLxIR08jzjjGx/jdIsDHqf2tErNBa+
+	 TATN96NkNT95YSW4/1SfYNC1dImUhZ2g/Ot10bh0tMZInInu6WXYSgLi+lETCMujkY
+	 AumnoTJ+yX9Q2bGIOUh02ESMHO7IwxSl+J/e/q3tIJe0tCoWsrT8we1NNscDr8+qji
+	 qBWYsos0iCLlA==
+Received: from [10.30.226.235] (localhost [IPv6:::1])
+	by aws-us-west-2-korg-oddjob-rhel9-1.codeaurora.org (Postfix) with ESMTP id D0A19380CEF8;
+	Thu, 10 Sep 2026 15:20:10 +0000 (UTC)
+Content-Type: text/plain; charset="utf-8"
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -101,164 +37,49 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTEwMDE4MiBTYWx0ZWRfX8AvMAsJkJP4e
- 7d2vSUQDs6qLtmAR5pMLJ7ibOFtpcVAeX6BUH254q4rhZUCc/DbYWyzJfDhUvYbALKw7k2hfPMp
- vogaBKcLe9moSL4MQt2s7m8rCO+5ZCQ=
-X-Proofpoint-GUID: 0EwgXEdbMySGCGe6dVKXzifsx5R0dK9a
-X-Authority-Analysis: v=2.4 cv=aef0Dhot c=1 sm=1 tr=0 ts=6aa2c79e cx=c_pps
- a=AKZTfHrQPB8q3CcvmcIuDA==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
- a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=_glEPmIy2e8OvE2BGh3C:22 a=EUspDBNiAAAA:8
- a=EzEDkhfgfUAEW4_RwPsA:9 a=pF_qn-MSjDawc0seGVz6:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTEwMDE4MiBTYWx0ZWRfXyayjmuxMUsCj
- bQ+Okn+hNOtyOf3UFuTqE9JDBbUDx58pyw9KMs1mbfk59sxO+rgAIc/fruZeG8RHxU+hZOt85iP
- TKVnKD+qwm8WH29Jw/sKkgdcdLBfrB45wkmKd521XbaIq5H1+I3ObhPMjtHHLZ/JFGPZ2NDJmuD
- U9ZDlVuKkxKmjxzzm1fVGB8ktuwQSxEE+MdpCPydWU1Qr/s92Q/6CnAP1S7MGIE3y40jx5B3nqE
- 4DgitIDsxONtYH2tsCrwcgmesxN9KVazDBaOnZIYnoXrlDEJyajZiEjFMEKhRwcQExFaqNIkJPi
- SkIwOCtwWxJLL9m2MqExUNuQLrnA8uQuxEFi56jxxva9VY2AG/ZvGFlAU56jM/4Koog3CnMHWft
- 2A3UtbzevLH05QXrHyYW/yVgdw9jj4pwBOBqAk2dZ9sFuj3WUd7e2ya32TDTrxnWCrhJPhmrQcM
- 1bFW/aD2sNmQNOwqJVQ==
-X-Proofpoint-ORIG-GUID: 0EwgXEdbMySGCGe6dVKXzifsx5R0dK9a
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-10_05,2026-09-09_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- suspectscore=0 malwarescore=0 phishscore=0 priorityscore=1501 adultscore=0
- lowpriorityscore=0 impostorscore=0 bulkscore=0 clxscore=1015 spamscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609100182
+Subject: Re: [PATCH net v3 0/3] net: phy: handle the active-high LED polarity
+ mode
+From: patchwork-bot+netdevbpf@kernel.org
+Message-Id: 
+ <178905360938.1492964.9209925630234806744.git-patchwork-notify@kernel.org>
+Date: Thu, 10 Sep 2026 15:20:09 +0000
+References: <20260908105959.70453-1-donggeunyoo.kernel@gmail.com>
+In-Reply-To: <20260908105959.70453-1-donggeunyoo.kernel@gmail.com>
+To: Donggeun Yoo <donggeunyoo.kernel@gmail.com>
+Cc: andrew@lunn.ch, hkallweit1@gmail.com, davem@davemloft.net,
+ edumazet@google.com, kuba@kernel.org, pabeni@redhat.com,
+ linux@armlinux.org.uk, daniel@makrotopia.org, o.rempel@pengutronix.de,
+ netdev@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+ linux-kernel@vger.kernel.org
 
-The proxy power domain enable path requests INT_MAX performance
-state for every proxy PD. On Hawi, the NSP proxy power domain's
-RPMH power domain has no OPP at INT_MAX, while CX and MXC accept
-INT_MAX, mapping to their maximum supported level.
+Hello:
 
-Introduce a proxy_pd_performance_states array in qcom_pas_data
-to allow per-PD RPMH levels to be declared explicitly. Platforms
-that omit this field retain the existing INT_MAX behaviour.
+This series was applied to netdev/net.git (main)
+by Jakub Kicinski <kuba@kernel.org>:
 
-Add Hawi CDSP remoteproc support with the following proxy PD
-performance states:
+On Tue,  8 Sep 2026 19:59:56 +0900 you wrote:
+> Commit a274465cc3be ("net: phy: support 'active-high' property for PHY
+> LEDs") let a device tree LED node request PHY_LED_ACTIVE_HIGH, but a
+> ->led_polarity_set() that only handles PHY_LED_ACTIVE_LOW returns -EINVAL
+> for it. of_phy_leds() propagates that, phy_probe() fails, the mdio device
+> is left unbound, and phy_attach_direct() falls back to the genphy driver,
+> so the PHY loses its driver-specific configuration. Three in-tree drivers
+> still have that gap; each already programs active high as its default, so
+> the fix is one case label per driver.
+> 
+> [...]
 
-  CX:  RPMH_REGULATOR_LEVEL_TURBO
-  MXC: RPMH_REGULATOR_LEVEL_TURBO
-  NSP: RPMH_REGULATOR_LEVEL_NOM
+Here is the summary with links:
+  - [net,v3,1/3] net: phy: dp83867: handle the active-high LED polarity mode
+    https://git.kernel.org/netdev/net/c/36a45facedd5
+  - [net,v3,2/3] net: phy: dp83td510: handle the active-high LED polarity mode
+    (no matching commit)
+  - [net,v3,3/3] net: phy: qca808x: handle the active-high LED polarity mode
+    (no matching commit)
 
-Reviewed-by: Abel Vesa <abel.vesa@oss.qualcomm.com>
-Tested-by: Yijie Yang <yijie.yang@oss.qualcomm.com>
-Signed-off-by: Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>
----
- drivers/remoteproc/qcom_q6v5_pas.c | 48 +++++++++++++++++++++++++++++-
- 1 file changed, 47 insertions(+), 1 deletion(-)
-
-diff --git a/drivers/remoteproc/qcom_q6v5_pas.c b/drivers/remoteproc/qcom_q6v5_pas.c
-index a005546c265d..96a2436b777d 100644
---- a/drivers/remoteproc/qcom_q6v5_pas.c
-+++ b/drivers/remoteproc/qcom_q6v5_pas.c
-@@ -28,6 +28,7 @@
- #include <linux/soc/qcom/mdt_loader.h>
- #include <linux/soc/qcom/smem.h>
- #include <linux/soc/qcom/smem_state.h>
-+#include <dt-bindings/power/qcom,rpmhpd.h>
- 
- #include "qcom_common.h"
- #include "qcom_pil_info.h"
-@@ -51,6 +52,8 @@ struct qcom_pas_data {
- 	bool decrypt_shutdown;
- 
- 	char **proxy_pd_names;
-+	const unsigned int *proxy_pd_performance_states;
-+	unsigned int num_proxy_pd_performance_states;
- 
- 	const char *load_state;
- 	const char *ssr_name;
-@@ -79,6 +82,7 @@ struct qcom_pas {
- 	struct regulator *px_supply;
- 
- 	struct device *proxy_pds[3];
-+	const unsigned int *proxy_pd_performance_states;
- 
- 	int proxy_pd_count;
- 
-@@ -167,7 +171,12 @@ static int qcom_pas_pds_enable(struct qcom_pas *pas, struct device **pds,
- 	int i;
- 
- 	for (i = 0; i < pd_count; i++) {
--		dev_pm_genpd_set_performance_state(pds[i], INT_MAX);
-+		unsigned int state = INT_MAX;
-+
-+		if (pas->proxy_pd_performance_states)
-+			state = pas->proxy_pd_performance_states[i];
-+
-+		dev_pm_genpd_set_performance_state(pds[i], state);
- 		ret = pm_runtime_get_sync(pds[i]);
- 		if (ret < 0) {
- 			pm_runtime_put_noidle(pds[i]);
-@@ -873,6 +882,7 @@ static int qcom_pas_probe(struct platform_device *pdev)
- 	pas->info_name = desc->sysmon_name;
- 	pas->smem_host_id = desc->smem_host_id;
- 	pas->decrypt_shutdown = desc->decrypt_shutdown;
-+	pas->proxy_pd_performance_states = desc->proxy_pd_performance_states;
- 	pas->region_assign_idx = desc->region_assign_idx;
- 	pas->region_assign_count = min_t(int, MAX_ASSIGN_COUNT, desc->region_assign_count);
- 	pas->region_assign_vmid = desc->region_assign_vmid;
-@@ -908,6 +918,14 @@ static int qcom_pas_probe(struct platform_device *pdev)
- 		goto unassign_mem;
- 	pas->proxy_pd_count = ret;
- 
-+	if (WARN(desc->proxy_pd_performance_states &&
-+		 desc->num_proxy_pd_performance_states != pas->proxy_pd_count,
-+		 "proxy_pd_performance_states count %u != pd count %d\n",
-+		 desc->num_proxy_pd_performance_states, pas->proxy_pd_count)) {
-+		ret = -EINVAL;
-+		goto detach_proxy_pds;
-+	}
-+
- 	ret = qcom_q6v5_init(&pas->q6v5, pdev, rproc, desc->crash_reason_smem,
- 			     desc->load_state, qcom_pas_handover);
- 	if (ret)
-@@ -1798,6 +1816,33 @@ static const struct qcom_pas_data glymur_soccp_resource = {
- 	.needs_tzmem = true,
- };
- 
-+static const struct qcom_pas_data hawi_cdsp_resource = {
-+	.crash_reason_smem = 601,
-+	.firmware_name = "cdsp.mdt",
-+	.dtb_firmware_name = "cdsp_dtb.mdt",
-+	.pas_id = 18,
-+	.dtb_pas_id = 0x25,
-+	.minidump_id = 7,
-+	.auto_boot = true,
-+	.proxy_pd_names = (char*[]){
-+		"cx",
-+		"mxc",
-+		"nsp",
-+		NULL
-+	},
-+	.proxy_pd_performance_states = (const unsigned int[]){
-+		RPMH_REGULATOR_LEVEL_TURBO,
-+		RPMH_REGULATOR_LEVEL_TURBO,
-+		RPMH_REGULATOR_LEVEL_NOM,
-+	},
-+	.num_proxy_pd_performance_states = 3,
-+	.load_state = "cdsp",
-+	.ssr_name = "cdsp",
-+	.sysmon_name = "cdsp",
-+	.ssctl_id = 0x17,
-+	.smem_host_id = 5,
-+};
-+
- static const struct qcom_pas_data eliza_cdsp_resource = {
- 	.crash_reason_smem = 601,
- 	.firmware_name = "cdsp.mbn",
-@@ -1827,6 +1872,7 @@ static const struct of_device_id qcom_pas_of_match[] = {
- 	{ .compatible = "qcom,eliza-adsp-pas", .data = &sm8550_adsp_resource },
- 	{ .compatible = "qcom,eliza-cdsp-pas", .data = &eliza_cdsp_resource },
- 	{ .compatible = "qcom,glymur-soccp-pas", .data = &glymur_soccp_resource },
-+	{ .compatible = "qcom,hawi-cdsp-pas", .data = &hawi_cdsp_resource },
- 	{ .compatible = "qcom,kaanapali-soccp-pas", .data = &kaanapali_soccp_resource },
- 	{ .compatible = "qcom,milos-adsp-pas", .data = &sm8550_adsp_resource },
- 	{ .compatible = "qcom,milos-cdsp-pas", .data = &milos_cdsp_resource },
+You are awesome, thank you!
 -- 
-2.55.0
+Deet-doot-dot, I am a bot.
+https://korg.docs.kernel.org/patchwork/pwbot.html
+
 
