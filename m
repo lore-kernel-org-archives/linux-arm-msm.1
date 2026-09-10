@@ -1,46 +1,48 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9C2203CE0B4;
-	Thu, 10 Sep 2026 08:44:48 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A305C332614;
+	Thu, 10 Sep 2026 08:47:47 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789029889; cv=none; b=dE2Kq7OQGdqo9TPgANfTrmqqINuPZdv0H5cECsgjMMj4nkRm5brKn3NFviup4ymTF395qLsXCNSJJ63AmMQO/XFd/HrNPzsZwhZDghff8uaN6uHBF4uSegCERKKVmxVws2V53AgCetCOSr6cwFOgOZvbALZJqFIidnKx4SOAmNM=
+	t=1789030068; cv=none; b=ZRBTndd+Jpsby4OZhA1BpwxJKry1Afgq/LLmr3/5olrDm5P4D81iu7TG33j7ZNyzPIfpa6dl7Xydxlr2cqJ1b1RnY+0DbsqdxGC8iRkFmpAepoCQKFa5mph173qYuEoaAI2yScHXsfCINXyp4qPIGeobESeWUDc8KB9Jjj3yUkg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789029889; c=relaxed/simple;
-	bh=6steEaS+aSY98rjuCle32JR/iEK4/3aZjQXaMN98YL8=;
+	s=arc-20240116; t=1789030068; c=relaxed/simple;
+	bh=TzdfLYVdvc/uqvvlLjeZqyr1HCP76+9LY/efm22qI1g=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=Pf8Q+GD6GElXc8KCSQMnPTDRmvEA2m7svWsYLsfW83QU3/We+o2f5yxs9I2xuCf79fAeVcRPUKssbgNAcqiVdW93O24Wwz58hqfkgjCkuKY3jJrmCu0vnKVk+HyTudAh/am58Hu1nvogJr9G6s9Kg7DoH5gSrgYA/whnSK/rtVE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=orqnU6VV; arc=none smtp.client-ip=100.103.45.18
+	 Content-Type:Content-Disposition:In-Reply-To; b=lqHirfe/YW8UuAeADWPtPIJrHumg29WJ/IZENlZXRmS/NQFFw9iS8RwD1e7FKF8XyOX8mcu2O+Ub8Xua2bm9sSqnEhsCvJqUl9NgNaKAwQw+KF1GKE0C+ZxWwM22/Ic/BZSdwXO/E8SqqX9urQq47kSU249qrsB0QvRajkk2cgo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=IAG2DK2b; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="orqnU6VV"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6CB4C1F000FF;
-	Thu, 10 Sep 2026 08:44:47 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="IAG2DK2b"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 70B891F0089A;
+	Thu, 10 Sep 2026 08:47:45 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1789029888;
-	bh=Z6byc5daEPIFpWPF0nVQCstwhnFg/6jrnpDZCl6MYkY=;
+	s=k20260515; t=1789030067;
+	bh=B8EBdbpG51Uq4wdWZPtFB02CvwXvIeKHC+8GQIDP0r0=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=orqnU6VV4icNRRtzJ/FJcCepKryxrvY/QYdmWEcZXQ79iSyDpdnIvtPv2FuWOSyyB
-	 AxdSpxKrX1xjIeRX7l6ehjP/l0E8mua6D9w0Hf7MZ1D9wm569p2fJbnQHgr87wNjIS
-	 Fjcu6EAV0W4gMJQYplo94xNSzowXWOmK8CNvBEi/8w6tD4UpR28rh7f9kK0IKQUOqv
-	 N3Nm955PlQnKPZaCkJJcEYMxAdafV6Sv9xhUcq45CeFJWi+dzOt9OseI+yAstOIESf
-	 nynUUAtyHyys6p5hl3WEPx2+wowGQ4IUwkSbbmRIgGNDFQS0s9ns0bujqb8ELq9WKY
-	 qc8ILTBSiCS0Q==
-Date: Thu, 10 Sep 2026 10:44:44 +0200
+	b=IAG2DK2bZ/zdrqdTLFo0/P5NcJoT07bCPc6J6NT6+Llsnn+qaWHyQr62f91u5t7Zz
+	 DukqGeXzpFmZYflHoH0cm15SnCWqeX3s9mLHmg/ivsTWO5MTGppYnebAplynOwHt/Y
+	 jOBN1Z+afz5bytcuJnRw+2yINoraSnNxpBFVcl+nxI43kQWZlg3EbNXZiRzAbam3HV
+	 xNSkzLSxwDrUhATaj+7TGXe6HgxN4etrLSgL1NrY/o5YWtE47J0N7mlL+6SFLPGHsp
+	 9L3Ajad1fS2dH6m4qyy93p+LZRwDKbmin2b0d6d6wKUGgjDQERQEoJS4TEQsIcu+bi
+	 KKCCldgPGQpFg==
+Date: Thu, 10 Sep 2026 10:47:43 +0200
 From: Krzysztof Kozlowski <krzk@kernel.org>
-To: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
+To: Vivek Aknurwar <vivek.aknurwar@oss.qualcomm.com>
 Cc: Bjorn Andersson <andersson@kernel.org>, 
-	Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>, 
+	Michael Turquette <mturquette@baylibre.com>, Stephen Boyd <sboyd@kernel.org>, 
+	Brian Masney <bmasney@redhat.com>, Rob Herring <robh@kernel.org>, 
 	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
-	Bryan O'Donoghue <bod@kernel.org>, Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>, 
-	Loic Poulain <loic.poulain@oss.qualcomm.com>, Mauro Carvalho Chehab <mchehab@kernel.org>, 
-	linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	linux-media@vger.kernel.org
-Subject: Re: [PATCH v6 02/13] dt-bindings: media: qcom,x1e80100-camss: Make
- vdd-csiphy supplies optional
-Message-ID: <20260910-zippy-abiding-anteater-a5f1bb@quoll>
-References: <20260906-x1e-camss-csi2-phy-dtsi-v6-0-067f2ecc4630@linaro.org>
- <20260906-x1e-camss-csi2-phy-dtsi-v6-2-067f2ecc4630@linaro.org>
+	Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>, Jagadeesh Kona <jagadeesh.kona@oss.qualcomm.com>, 
+	Taniya Das <taniya.das@oss.qualcomm.com>, Brian Masney <bmasney+clk@redhat.com>, 
+	Jerome Brunet <jbrunet+clk@baylibre.com>, Jagadeesh Kona <quic_jkona@quicinc.com>, 
+	linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org, devicetree@vger.kernel.org, 
+	linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v2 1/2] dt-bindings: clock: qcom: Add Hawi CAMCC
+ compatible strings
+Message-ID: <20260910-bright-spotted-cuttlefish-8d6b5a@quoll>
+References: <20260908-camcc-hawi-v2-0-f892ba1d118e@oss.qualcomm.com>
+ <20260908-camcc-hawi-v2-1-f892ba1d118e@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -49,18 +51,34 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
-In-Reply-To: <20260906-x1e-camss-csi2-phy-dtsi-v6-2-067f2ecc4630@linaro.org>
+In-Reply-To: <20260908-camcc-hawi-v2-1-f892ba1d118e@oss.qualcomm.com>
 
-On Sun, Sep 06, 2026 at 03:20:47PM +0100, Bryan O'Donoghue wrote:
-> The vdd-csiphy supplies power the CSIPHY blocks. CSIPHYs may be
-> described as standalone phy nodes carrying their own supplies, in which
-> case the CAMSS node has none. Make the supplies optional; existing DTS
-> remain valid.
+On Tue, Sep 08, 2026 at 11:01:22PM -0700, Vivek Aknurwar wrote:
+> The Hawi SoC is a derivative of Kaanapali  with an updated camera
+> clock controller (CAMCC). While the overall block structure is
+> similar, Hawi's CAMCC differs from Kaanapali in the following ways:
 > 
-> Signed-off-by: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
+>   - Uses Taycan EHA-T PLLs instead of Taycan EKO-T PLLs, with an
+>     additional ninth PLL (PLL8)
+>   - Adds a SQPF block with its own GDSC, AHB clock, and BCR reset
+>   - Adds a CX GDSC (CAM_CC_TITAN_TOP_CX_GDSC) for the camera subsystem
+>   - Expands ICP from one to two instances (ICP_0 and ICP_1)
+> 
+> Due to these differences, Hawi requires its own 'qcom,hawi-camcc'
+> compatible string and a dedicated driver.
+> 
+> The BIST MCLK clock controller (CAMBISTMCLKCC) is unchanged between
+> Hawi and Kaanapali, allowing the existing Kaanapali CAMBISTMCLKCC
+> driver to support both SoCs without modification.
+> 
+> Add the 'qcom,hawi-camcc' and 'qcom,hawi-cambistmclkcc' compatible
+> strings to the binding, along with the corresponding clock ID header.
+> 
+> Signed-off-by: Vivek Aknurwar <vivek.aknurwar@oss.qualcomm.com>
 > ---
->  Documentation/devicetree/bindings/media/qcom,x1e80100-camss.yaml | 2 --
->  1 file changed, 2 deletions(-)
+>  .../bindings/clock/qcom,sm8450-camcc.yaml          |  27 ++--
+>  include/dt-bindings/clock/qcom,hawi-camcc.h        | 165 +++++++++++++++++++++
+>  2 files changed, 182 insertions(+), 10 deletions(-)
 
 Reviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
 
