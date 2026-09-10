@@ -1,120 +1,110 @@
-Received: from mail-wm1-f47.google.com (mail-wm1-f47.google.com [209.85.128.47])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 329F43B1EEF
-	for <linux-arm-msm@vger.kernel.org>; Thu, 10 Sep 2026 18:33:12 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.47
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D816B5452A8;
+	Thu, 10 Sep 2026 19:35:44 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789065197; cv=none; b=HR0BjcEIraW0PK0GHKlCvn8CZ/ywuVewx1ZS6Au+QkNLkK6J5usExkA3X5lXRaQHeYGor3VqWfXb0lgk/yNLJkKLFdOMBvhDQN/QD84EdwhhXTHwX0JfIyAPdhdsHtW+pmfu5iZzGgSdGfNyJi2oTUzugMC4RPk2z8upWYhm83w=
+	t=1789068946; cv=none; b=azKI/MzwCc2e3ehPxEWJOL4VvOqd2TjdwdYDsAWZAVmuh8Lb8e7V/OxwJ2Guuy8qgcBG1oSu34PzDvoI2NiYjzfuVjdgCj90wD650ZQ5GyvEajQgxwe5vfcw6h5Ow4VpvWvDrFtA4TvNUNf6pEIOR2UBmnWPGsNwY2hLt49Ok6w=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789065197; c=relaxed/simple;
-	bh=RD1JdQ4ANBusO8i4TEYoR0PsbDDRPyuOySGPUMHj/vI=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=ecPLmdk2QQvx/eP6BikTuoU0xytz0J4PhKgTQ2QOqEcxOYSa3X37fc7CQcDEW61ARGbw51X51f6dOugRyJQheDTf8D7xR0TqKxScRY/d4rfSjlFF2XWQwpbn30Z502a20ntzhkDbx9i7L/e073E2WEXN5r2CfBgm34NuLPecEpw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=Q1Jx7X37; arc=none smtp.client-ip=209.85.128.47
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	s=arc-20240116; t=1789068946; c=relaxed/simple;
+	bh=rGQb6pWP3s8+ybob6/+wvJRTEta0FaX+zgcYWjwrBM8=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=UCbKhoQFGCU0Qa5jhT682qN10Y21sRF0Yq4jC0u+kIq0MIwUrc/qkdSc7Q7kKsDQLzzi93aXBFqIIopD4hk29mVsfZmmBsMlaRboPji9grUZp5hx50XimmJzetG4b2ttGMlrzE6x42CeeCpmPP2gP6bpcKRPdKu8/JDSq4tt3Oc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=QHS9bb1g; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="Q1Jx7X37"
-Received: by mail-wm1-f47.google.com with SMTP id 5b1f17b1804b1-49d0da752ffso1708675e9.3
-        for <linux-arm-msm@vger.kernel.org>; Thu, 10 Sep 2026 11:33:12 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1789065191; x=1789669991; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=ECgfRQeUaZbHy1kJ8X3Qsii4ER4T141Iol6nIkF+8Yw=;
-        b=Q1Jx7X37Ig+1J87o6B75Yql4oeZGe7GkfdAnU/jksSLVaZdM3x3vpp9kjJpnl6Wp4V
-         z0F64f25ml8uXauMEHFFct8kDI0SC43qpIbIsCPzJ0qhd9quzgIrVHRk+kzQhy4Awjfx
-         WGrABtDx0FcDybuoY5GM0IgGgCmmFzBS7JL8WReRVS0YFuAs9oJjTRrYzvjgCviM6Voc
-         R/+z/DJenTK3jGooc4GHc3XBlbMoMusP0VMsXHGynjP1+2rfBIwCiWnPC/EuEBixbNKD
-         2DmKXZH6zwugswms7jXUHU/4Dlr5eqzypwCym2cDe6AIDssb5UM1uW8T3xjfCP4Grtt/
-         Ldog==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1789065191; x=1789669991;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=ECgfRQeUaZbHy1kJ8X3Qsii4ER4T141Iol6nIkF+8Yw=;
-        b=mH5Y0uQvvlKoQAv54rNc169oHeKiyr/QgUxM3E2Hxx4XpyPKMR8IrjowQNrHQXd4+M
-         Rjxr8R3811EdFdSeIkWz1NRG7AoZaRHeNC4rpk5Gi8y9yvejaJ6qIZoM3vshGAfUQoGG
-         Pe+ODjlZ/fL/PPqW/km2tdAGZg4j1EK9RuXFn+X6dgjItpiuDadjCbIZODn3GPpq5E2J
-         gUZdjOzFKkQewzzBJhmfZJqctRZ+fwLQj9HZx3scZdCw+VWvPGUI9/RNcsYaq3Iaxu4X
-         gjrniBSeBHoL3fpiWIUw2LDzgntAd76JdQEypodII7X3X6wRrq5xGkrH9ZtlA7GlYYma
-         uagA==
-X-Forwarded-Encrypted: i=1; AKwUvByBabTA9qe8fxv8C55b1V7lA62QFmmL4XfNhjItc5Cj647hSwOw9DNmSQjDHKG/RNU2iorE6y4UuUK9QQPC@vger.kernel.org
-X-Gm-Message-State: AFuF++kTJcjVpMV5ag2mmFkbYPDUGldZ9tCqMx3GrAjUxoHHAXf020Hy
-	24IIrx0OkY5HxFk6uAOHiRG2rrAXoGS11xCfI2xg5zNDbaqATzDWvsed
-X-Gm-Gg: AYBFou2PsqTiTbU7xIThH+ry6A1JgDVBnwzoOMLnTeAFNCpnTSgmCypOrWTsUQarVYu
-	Ex6WH3JZJ65hN/xRVtVyqcGb20x3p50ym9VcfXI9M4DE0hG3Apun+Se5mdvbBrgCW7poRr/o0fI
-	/WoEHVHgxI3PlkpTr1Xf3c6P9HXMQM1ItC3HDg6W0UFarM/Ha1Udrjak1Zd2eQbA4ejO0i3Rqqs
-	YRQ942COWtmns6dmP+vF/oOyONZAC83H7ASCc8AM1fsjBRexDt9nEOjlpNdISnWecHZsVnkdCEL
-	3OYl7qFwz4kfcpfZe6XAWvVkQUym/BrGp9+MFXjrXHdTgKeBgQM99NbuQCgLZJLMSi0khtyXZoQ
-	EFiWnT+0XTOY2Erks1QpwsQqmW5r5BwGsBmOrdutX8CowmeaF/XBBXQzVKnlCVj5i36Cv6zjSiu
-	d2I2Ls4WY1ds3ByVUWnl996ZMxW+1PmNEfEZNEh0GDq6qotgRYGV1z/2+2q+XvMhYbNCQBmRLUJ
-	NtT5HI96bCwrVfjcmfGwi4SMM6GgiQI8RoKg10qaCPYSu1w1yYJpSF7LCGYceqhfv4OR+nPGX5h
-	frzHc7xc2dI=
-X-Received: by 2002:a05:600d:4453:20b0:49c:fed6:cd3f with SMTP id 5b1f17b1804b1-49e619c4d59mr2746015e9.23.1789065190532;
-        Thu, 10 Sep 2026 11:33:10 -0700 (PDT)
-Received: from localhost.localdomain ([41.90.145.1])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-49e60ac42b9sm12541115e9.6.2026.09.10.11.33.08
-        (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
-        Thu, 10 Sep 2026 11:33:10 -0700 (PDT)
-From: Kenneth Kabogo <kennethkabogo2@gmail.com>
-To: Bjorn Andersson <andersson@kernel.org>,
-	Konrad Dybcio <konradybcio@kernel.org>
-Cc: Dmitry Baryshkov <lumag@kernel.org>,
-	linux-arm-msm@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: qcom_pd_mapper: SERVREG_LOC request handlers do not validate the QMI sender
-Date: Thu, 10 Sep 2026 21:33:04 +0300
-Message-ID: <20260910183304.76926-1-kennethkabogo2@gmail.com>
-X-Mailer: git-send-email 2.50.1
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="QHS9bb1g"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9AF061F000FF;
+	Thu, 10 Sep 2026 19:35:43 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1789068944;
+	bh=NEHLUGTnGIvTiSnbPaTYiuHz7Py0xQtY1MUskUwmPWE=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=QHS9bb1g4bOEu914forL0x7kDO1MY6HoyQrVpJA2Zm2D1LVGbRvWNR+VyFLDiCt8N
+	 8QfYMhEEX+Kyhwi3OfUTg0Styezbdjj2ltVim1F1O3W2zHp7SODgeElbwy3NAZNPc5
+	 wiRrATApSFP8PeH/VYFIgvdZSOF+zS3qaGiLd7m9jRhljhA4bvbX9kj+3F9WuSJhGJ
+	 I2Zfaq9CfVBf39UClc+CFWuGgk9fK1saxN3UFa9EyAyGqormI/1bzY47F+OJWLwV5Q
+	 wt5/C2qFDN+hrYSbvscC+6dUrPNXBhvdnmDC7mKaFUphaTDcdGaf6UaSraPExJ/Aop
+	 7S5VLmQxxIptw==
+Date: Thu, 10 Sep 2026 14:35:41 -0500
+From: Bjorn Andersson <andersson@kernel.org>
+To: Shashank Maurya <shashank.maurya@oss.qualcomm.com>
+Cc: Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	Florian Fainelli <florian.fainelli@broadcom.com>, 
+	Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>, linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, linux-rpi-kernel@lists.infradead.org, 
+	linux-arm-kernel@lists.infradead.org, venkata.valluru@oss.qualcomm.com, 
+	Jessica Zhang <jesszhan0024@gmail.com>
+Subject: Re: [PATCH v2 0/2] arm64: dts: qcom: Add RPi 7-inch DSI panel
+ overlays for Monaco/Lemans EVK
+Message-ID: <aqLGFfQ20mCGFkfl@baldur>
+References: <20260907-rpi_dts_overlay-v2-0-a4989322ce00@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260907-rpi_dts_overlay-v2-0-a4989322ce00@oss.qualcomm.com>
 
-Hi,
+On Mon, Sep 07, 2026 at 12:03:52PM +0530, Shashank Maurya wrote:
+> Add device tree overlays to enable support for the Raspberry Pi 7-inch
+> DSI touchscreen panel on Qualcomm Monaco and Lemans EVK platforms.
+> 
+> The overlays configure the panel on the primary DSI interface using
+> a 2-lane DSI connection and instantiate the panel MCU on the
+> corresponding touchscreen I2C bus for each platform. The changes
+> allow the Raspberry Pi 7-inch display to be used as an external
+> display option on both EVKs without affecting the default platform
+> configuration.
+> 
+> ---
+> To: Bjorn Andersson <andersson@kernel.org>
+> To: Konrad Dybcio <konradybcio@kernel.org>
+> To: Rob Herring <robh@kernel.org>
+> To: Krzysztof Kozlowski <krzk+dt@kernel.org>
+> To: Conor Dooley <conor+dt@kernel.org>
+> To: Florian Fainelli <florian.fainelli@broadcom.com>
+> To: Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>
+> Cc: linux-arm-msm@vger.kernel.org
+> Cc: devicetree@vger.kernel.org
+> Cc: linux-kernel@vger.kernel.org
+> Cc: linux-rpi-kernel@lists.infradead.org
+> Cc: linux-arm-kernel@lists.infradead.org
+> 
+> ---
+> Shashank Maurya (2):
+>       arm64: dts: qcom: monaco-evk: Add Raspberry Pi 7-inch DSI panel overlay
+>       arm64: dts: qcom: lemans-evk: Add Raspberry Pi 7-inch DSI panel overlay
+> 
+>  arch/arm64/boot/dts/qcom/Makefile                  |  4 ++
+>  .../dts/qcom/lemans-evk-raspberrypi-dsi-7inch.dtso | 83 ++++++++++++++++++++++
+>  .../dts/qcom/monaco-evk-raspberrypi-dsi-7inch.dtso | 82 +++++++++++++++++++++
+>  3 files changed, 169 insertions(+)
+> ---
+> base-commit: ed2647532a225739e86c7f236a2ce82764ec2772
+> change-id: 20260907-rpi_dts_overlay-58088ffce047
+> prerequisite-message-id: <20260907-rpi_reg-v2-0-0c59aa60d31f@oss.qualcomm.com>
 
-Flagging a hardening gap in the in-kernel protection-domain mapper, found
-by code inspection (no proof-of-concept, and I don't have the hardware to
-test on at runtime).
+The two dts patches in this series clearly relates to those two
+regulator patches, which has received change requests.
 
-qcom_pdm_get_domain_list() and qcom_pdm_pfr() are the two QMI_REQUEST
-handlers for the SERVREG_LOC service this driver registers. Neither
-validates the sender address (struct sockaddr_qrtr *sq); it is used only
-to address the response.
+I would have sent the 4 patches together in a series, but as you didn't
+you sent this series with unmet dependencies.
 
-  - qcom_pdm_get_domain_list(): any local sender that can reach the qrtr
-    socket can enumerate the registered protection-domain / service list
-    for any service name.
+All I can do now is reject this series as well. Please send v2 once the
+driver changes has been merged and you have validated this again.
 
-  - qcom_pdm_pfr(): any such sender can submit a restart/crash report
-    with attacker-controlled service and reason strings. The handler logs
-    them via pr_warn_ratelimited() and acks QMI_RESULT_SUCCESS_V01. There
-    is no check that the sender owns the domain it is reporting on, and no
-    recovery action is taken, so the practical effect is an
-    attacker-influenced ratelimited kernel log line.
+Regards,
+Bjorn
 
-Impact is low. On Android the qrtr socket is not reachable by untrusted
-apps (SELinux neverallow on qipcrtr_socket), so this is gated to
-privileged system components, and there is no memory-safety issue. But a
-PFR report in particular seems like it should only be accepted from the
-entity managing the domain being reported.
-
-Two questions:
-
-  1. Is get_domain_list intended to be an open lookup service for any
-     local client, or should it be restricted? If restricted, on what
-     basis?
-
-  2. For pfr, would you take a patch that rejects reports for domains the
-     sender does not provide (or checks the sender against the registered
-     owner of the reported domain)?
-
-Happy to send patches once the intended trust model is clear.
-
-Thanks,
-Kenneth Kabogo
+> prerequisite-patch-id: 5212bf185b35c36ed8857a67f29e60386d59ac60
+> prerequisite-patch-id: 056a90b913170106a6f8c1feb2366ee83c4375b9
+> 
+> Best regards,
+> --  
+> Shashank Maurya <shashank.maurya@oss.qualcomm.com>
+> 
