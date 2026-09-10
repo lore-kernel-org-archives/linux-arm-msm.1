@@ -1,34 +1,34 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2D71E408614;
-	Thu, 10 Sep 2026 15:21:14 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 90278377553;
+	Thu, 10 Sep 2026 15:51:11 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789053680; cv=none; b=tzAuIYUBsfcTtAaPBa8DSV9/CRvymwyl22GDUuAB+97BT9N83ENYl5BQhn1rioLPPjI+isnkr/cItxImUmmjETGtXizSSSb7u7+qnbbDi+zjR5gAN8SZW+zGQO1/qfviS3t+RZ8/rdW+a5Ji1vVQygtRkv/my97WkE1MM93de/k=
+	t=1789055472; cv=none; b=jE3w9ow0OOFB/uUui5H1eLdv4f77iWzsCMdFh2ccUzOQl6v66BNK0qvBOITZ84c/vqc665F+jbvONuXXFTmWLIMU4iDkyFaw4DP7BBN9sfFPOZQ3aD7s/XW9CFDSS6/vc1RDXtmmXUXHuvup3GQsPgQ8sojMWUrlx5Oq+Lbb804=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789053680; c=relaxed/simple;
-	bh=7cfZkiKJwmCEA3BDbBejz2Td9xjhbgbOaRYLlnKaWl4=;
+	s=arc-20240116; t=1789055472; c=relaxed/simple;
+	bh=hfjvvgQw610BAmuALSHE14lC6ihOlOKL4waqehdnbDE=;
 	h=Content-Type:MIME-Version:Subject:From:Message-Id:Date:References:
-	 In-Reply-To:To:Cc; b=sca8Pd1C9lixksBNfxiYzKCYueCIPry41y+0vpO4yCR5ornlX2cAy1S3UyfNbTALl0N+07lqSFwvp4o1zBwk3k7EfCbwUsbjT8wCetb4I+wDMDg67+hk3HmbR3qZ9epG6m/OG9BjQoY6lFeZ3hwCstNsnjGL2t5zSpPEeSK2mJU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=IGEU4Hs5; arc=none smtp.client-ip=100.103.45.18
+	 In-Reply-To:To:Cc; b=oFHJVo9d3ctqumsrmuk/j3uhTfITM8ZYtI6LeqhvQjBCxF0jTwFUHB6QAB2yp7xPGuKdjQ/9znhXEaSCPIaF3AWcmkArY4tQd06riVTf8guW+ahA/FboI5bI1HSF4lcT2MC48gwWG5tYF9sKPRHf8W2k92b9YBU3gqjJtAij1Qs=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=L0IDzSeB; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="IGEU4Hs5"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 28DE91F00899;
-	Thu, 10 Sep 2026 15:21:12 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="L0IDzSeB"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2C7A41F00893;
+	Thu, 10 Sep 2026 15:51:11 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1789053672;
-	bh=QBTCkpTfJ/RsxTsPfeDu6QW4Q9j7khudyRmxhb82B7I=;
+	s=k20260515; t=1789055471;
+	bh=lAxxxd+icwL3OXZJ6un0FNRSE4xRvoZ/XAj5r5yEcBY=;
 	h=Subject:From:Date:References:In-Reply-To:To:Cc;
-	b=IGEU4Hs5zCeOAx8VPt8MBvmSFUQgWjoIUn1m6B/zpyZ55cQjEQw3q86VyxfD+paLf
-	 wYGKf+jjUl8noWdt0ZbAs6Ryk/lksSF3xeECzBdNbeGNEF0OZ5lC/EG6MhBDVpYVdO
-	 7S56A1JVAmP5paQX6w/RZI9ztussmYuvUXI4QLxIR08jzjjGx/jdIsDHqf2tErNBa+
-	 TATN96NkNT95YSW4/1SfYNC1dImUhZ2g/Ot10bh0tMZInInu6WXYSgLi+lETCMujkY
-	 AumnoTJ+yX9Q2bGIOUh02ESMHO7IwxSl+J/e/q3tIJe0tCoWsrT8we1NNscDr8+qji
-	 qBWYsos0iCLlA==
+	b=L0IDzSeBMy8mlYT4O4IJjdudjfuXXuUiFfjkdZL0OZRQjA/CAXMMLT7RYUbEZdgln
+	 hd1f+BFALWmuZiQKtbsJgNGIQ/1KQFUOavDGm2pcRFwT0NZ9UFTIwqaaweboTdE/MJ
+	 occ59/fNd5uTBK8XrAeEatpS5nw4/Mg4DS2h5eRBPHFf4Hb9zZGasiN7lUUvUz4em6
+	 fyOcsB5oTmuK3fmZncFVTTA/I73QA4oSM+vx1DwX7DfQZdWINF3wwIEBjA6FYKHwOY
+	 NRn7Na1HfQxt57sMcSwJvvNoClRadNQ/qtQ2PXhkX9N+Gcd4KbufgN6mYUkhTlpqpW
+	 s5DSnhwb3KyCQ==
 Received: from [10.30.226.235] (localhost [IPv6:::1])
-	by aws-us-west-2-korg-oddjob-rhel9-1.codeaurora.org (Postfix) with ESMTP id D0A19380CEF8;
-	Thu, 10 Sep 2026 15:20:10 +0000 (UTC)
+	by aws-us-west-2-korg-oddjob-rhel9-1.codeaurora.org (Postfix) with ESMTP id D0B34380CFFA;
+	Thu, 10 Sep 2026 15:50:09 +0000 (UTC)
 Content-Type: text/plain; charset="utf-8"
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
@@ -41,8 +41,8 @@ Subject: Re: [PATCH net v3 0/3] net: phy: handle the active-high LED polarity
  mode
 From: patchwork-bot+netdevbpf@kernel.org
 Message-Id: 
- <178905360938.1492964.9209925630234806744.git-patchwork-notify@kernel.org>
-Date: Thu, 10 Sep 2026 15:20:09 +0000
+ <178905540837.1510486.3215302337759175412.git-patchwork-notify@kernel.org>
+Date: Thu, 10 Sep 2026 15:50:08 +0000
 References: <20260908105959.70453-1-donggeunyoo.kernel@gmail.com>
 In-Reply-To: <20260908105959.70453-1-donggeunyoo.kernel@gmail.com>
 To: Donggeun Yoo <donggeunyoo.kernel@gmail.com>
@@ -71,9 +71,9 @@ On Tue,  8 Sep 2026 19:59:56 +0900 you wrote:
 
 Here is the summary with links:
   - [net,v3,1/3] net: phy: dp83867: handle the active-high LED polarity mode
-    https://git.kernel.org/netdev/net/c/36a45facedd5
-  - [net,v3,2/3] net: phy: dp83td510: handle the active-high LED polarity mode
     (no matching commit)
+  - [net,v3,2/3] net: phy: dp83td510: handle the active-high LED polarity mode
+    https://git.kernel.org/netdev/net/c/6ca81bbc31cd
   - [net,v3,3/3] net: phy: qca808x: handle the active-high LED polarity mode
     (no matching commit)
 
