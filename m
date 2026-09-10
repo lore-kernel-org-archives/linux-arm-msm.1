@@ -1,86 +1,92 @@
-Received: from mail-m49197.qiye.163.com (mail-m49197.qiye.163.com [45.254.49.197])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D74002FDC28;
-	Thu, 10 Sep 2026 10:00:08 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.254.49.197
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 17A69257844;
+	Thu, 10 Sep 2026 10:03:16 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789034415; cv=none; b=IZIMBKpa52RygWlyyS338cc0pvdy4JQBPN9KJxCd+uHZQpmtpIRIj3J1sREEULz5E79NkdTwgN7IFRzs4O0Mnvpd9S2gQF0RKxWms3749Uwa21LnZJTfqnjR4dUpUQrwGDd5ycruJ3BdUWV/r+niHPWF4s0Vf2DEIl2AMYPhWDg=
+	t=1789034598; cv=none; b=GKLF5PkQAT2BGbX8hQXyemEC+/XEYC3k7Uhkd9nWcxpO1W9stH/lTUQrfo+BcOKmg5/uOEWKC5UHK3XDNe8HAtZs4QK1jQk29hpF6DZkUeKa0P/cpG04mL8UKUBiW9FlewoV+0tmADAxTRFvVW5Ir+TB4xuVwHbSNh0N3Dn4MMs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789034415; c=relaxed/simple;
-	bh=oyDvJsRsZUT5zQUvQL7230aHOCA0gis5Saf2Kq/K7e4=;
-	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=qSnwLaamMmJRGDLACsek9oQo+aZWcfLCatr+Jr2x1N+roCLVcIQVVAiLsQbfxryzho8TUj+GvK+d/uwCEjrWCCpjjdCl1UzsBvUJpJyqce8nKjmiV6m3KaSXPhKU8EPEm3g9V1UzmXtLAJioTmwRtj5ohS6UyKceUwZgcdWCTyU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=jmu.edu.cn; spf=pass smtp.mailfrom=jmu.edu.cn; arc=none smtp.client-ip=45.254.49.197
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=jmu.edu.cn
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=jmu.edu.cn
-Received: from Vostro-3710.. (unknown [14.220.232.127])
-	by smtp.qiye.163.com (Hmail) with ESMTP id 4d45e99d9;
-	Thu, 10 Sep 2026 18:00:03 +0800 (GMT+08:00)
-From: Chukun Pan <amadeus@jmu.edu.cn>
-To: Bjorn Andersson <andersson@kernel.org>
-Cc: Jerome Brunet <jbrunet+clk@baylibre.com>,
-	Brian Masney <bmasney+clk@redhat.com>,
-	Stephen Boyd <sboyd@kernel.org>,
-	linux-arm-msm@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	linux-clk@vger.kernel.org,
-	Chukun Pan <amadeus@jmu.edu.cn>
-Subject: [PATCH 1/1] clk: qcom: ipq8074: set BRANCH_HALT_VOTED flag for usb master clocks
-Date: Thu, 10 Sep 2026 18:00:00 +0800
-Message-Id: <20260910100000.2627799-1-amadeus@jmu.edu.cn>
-X-Mailer: git-send-email 2.34.1
+	s=arc-20240116; t=1789034598; c=relaxed/simple;
+	bh=8KMsO4FVaq5GWzi5LfRwn8CNrUpkIK9DaTsSz7HwljY=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=S7YuSJ40HWEzYjmB8XXuBJFbSQnjyEHr1zNsWFpSWttPzmKjtqLA+aMLxlIKDKEbsdJYVbm5qwC49Ys40wmrksz5B/buyijRSqhC7AnoIljfjjfykjGEv6iutf4p4jSNqOVircUP5dTCwXk7XngZHAtCDB3sQLwWnYrrxjDzaaU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Te9y/vpJ; arc=none smtp.client-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Te9y/vpJ"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6A42A1F000FF;
+	Thu, 10 Sep 2026 10:03:15 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1789034596;
+	bh=ukewkJzWg3+pptkPINmJqZ5vy6B6QPl0Un6jQ2Exu9w=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=Te9y/vpJuyFO9ZT7+Qf8JijMx8Z0O37WT+grjs6GBWCnI7+bpw7P197jBHIy0vEAy
+	 fg7VGC2jEW37Akx9JnJYfCSBLtH3jbzABvBAj1GwYR3iudohUOMi7XOPYAaz86rwV3
+	 afz2/1dw8RnO7nItIwC7Re6XOYQUMUfyi/gg5SWHlUvWyZoP5j8rM7wbUjyAx0yB+5
+	 PM6iWXXEmSxTpLedhqKVvfHIYj96TEaeSHfwl8rSv5E4E98X2Ity4WKediL+p/2DQc
+	 xnYtRZj8ibD02ye93XcNNhONUb6fVwRpR1VCPA7b1poYLS09MqtmtmizWQ6BxDtjZA
+	 GmUizaAdygi4Q==
+Date: Thu, 10 Sep 2026 12:03:12 +0200
+From: Krzysztof Kozlowski <krzk@kernel.org>
+To: Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>
+Cc: Vinod Koul <vkoul@kernel.org>, 
+	Neil Armstrong <neil.armstrong@linaro.org>, Rob Herring <robh@kernel.org>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	Lorenzo Pieralisi <lpieralisi@kernel.org>, Krzysztof =?utf-8?Q?Wilczy=C5=84ski?= <kwilczynski@kernel.org>, 
+	Manivannan Sadhasivam <mani@kernel.org>, Bjorn Helgaas <bhelgaas@google.com>, 
+	Bjorn Andersson <andersson@kernel.org>, Maxime Chevallier <maxime.chevallier@bootlin.com>, 
+	Philipp Zabel <p.zabel@pengutronix.de>, linux-arm-msm@vger.kernel.org, linux-phy@lists.infradead.org, 
+	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, linux-pci@vger.kernel.org, 
+	shengchao.guo@oss.qualcomm.com
+Subject: Re: [PATCH v3 1/5] dt-bindings: phy: qcom: add Nord QMP PCIe PHY
+ binding
+Message-ID: <20260910-neat-goat-of-prosperity-eeecaf@quoll>
+References: <20260909-nord-v3-0-b0a82721c547@oss.qualcomm.com>
+ <20260909-nord-v3-1-b0a82721c547@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-HM-Tid: 0aa08ac2971403a2kunmd372c5e61a4e91
-X-HM-MType: 10
-X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
-	tZV1koWUFITzdXWRgWCB1ZQUpXWS1ZQUlXWQ8JGhUIEh9ZQVkZGkMZVktCHxhLGk9PH0kdQ1YeHw
-	5VEwETFhoSFyQUDg9ZV1kYEgtZQVlKT1VJSUtVSUhJVUpJTFlXWRYaDxIVHRRZQVlPS0hVSktJT0
-	9PS1VKS0tVS1kG
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+In-Reply-To: <20260909-nord-v3-1-b0a82721c547@oss.qualcomm.com>
 
-Currently, on some boards with older versions of U-Boot, attempting
-to disable usb master clocks results in a "stuck at on" warning:
+On Wed, Sep 09, 2026 at 05:18:16PM +0530, Krishna Chaitanya Chundru wrote:
+> +  vdda-phy-a-supply: true
+> +
+> +  vdda-phy-b-supply: true
+> +
+> +  vdda-phy-c-supply: true
+> +
+> +  vdda-phy-d-supply: true
+> +
+> +  vdda-pll-a-supply: true
+> +
+> +  vdda-pll-b-supply: true
+> +
+> +  vdda-pll-c-supply: true
+> +
+> +  vdda-pll-d-supply: true
+> +
+> +  qcom,link-mode:
+> +    description: |
+> +      Reference to the TCSR syscon and the offset of the
+> +      TCSR_PCIE_LINK_CONFIG_MODE register.
+> +        0 (QMP_PCIE_NORD_MODE_X16)        =E2=80=94 all ports ganged as =
+x16
+> +        1 (QMP_PCIE_NORD_MODE_X8_X8)      =E2=80=94 x8 (port A) + x8 (po=
+rt B+C+D)
+> +        2 (QMP_PCIE_NORD_MODE_X8_X4_X4)   =E2=80=94 x8 (A) + x4 (B) + x4=
+ (C+D)
+> +        3 (QMP_PCIE_NORD_MODE_X8_X4_X2_X2)=E2=80=94 x8 (A) + x4 (B) + x2=
+ (C) + x2 (D)
 
-[    3.005088] gcc_usb1_master_clk status stuck at 'on'
-[    3.187119] gcc_usb0_master_clk status stuck at 'on'
+What does this mean? The phy working mode is defined by phy-cells
+argument, so what are these numbers above?
 
-The USB master clocks of IPQ5332 and IPQ5424 have the BRANCH_HALT_VOTED
-flag set, so let's do the same to fix the issue.
-
-Signed-off-by: Chukun Pan <amadeus@jmu.edu.cn>
----
-These boards run a vendor-specific version of U-Boot, and upgrading to
-a newer version could brick the device. Therefore, I think this should
-be fixed within the Linux kernel.
----
- drivers/clk/qcom/gcc-ipq8074.c | 2 ++
- 1 file changed, 2 insertions(+)
-
-diff --git a/drivers/clk/qcom/gcc-ipq8074.c b/drivers/clk/qcom/gcc-ipq8074.c
-index 1329ea28d703..10bd2f80010c 100644
---- a/drivers/clk/qcom/gcc-ipq8074.c
-+++ b/drivers/clk/qcom/gcc-ipq8074.c
-@@ -2612,6 +2612,7 @@ static struct clk_branch gcc_sys_noc_usb0_axi_clk = {
- 
- static struct clk_branch gcc_usb0_master_clk = {
- 	.halt_reg = 0x3e000,
-+	.halt_check = BRANCH_HALT_VOTED,
- 	.clkr = {
- 		.enable_reg = 0x3e000,
- 		.enable_mask = BIT(0),
-@@ -2725,6 +2726,7 @@ static struct clk_branch gcc_sys_noc_usb1_axi_clk = {
- 
- static struct clk_branch gcc_usb1_master_clk = {
- 	.halt_reg = 0x3f000,
-+	.halt_check = BRANCH_HALT_VOTED,
- 	.clkr = {
- 		.enable_reg = 0x3f000,
- 		.enable_mask = BIT(0),
--- 
-2.34.1
+Best regards,
+Krzysztof
 
