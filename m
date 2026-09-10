@@ -1,209 +1,287 @@
 Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B86F93CC33F
-	for <linux-arm-msm@vger.kernel.org>; Thu, 10 Sep 2026 07:26:18 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789025183; cv=none; b=fJreqxJWL05seKdQ/xp8JP3pVrMolYxZMB4JrvkEkKzyVaAbamD7fsYgI1Ne6bJ1p8M0pfi74sOgbpvXbMZyFR/0TXGC1Eq1p9N84EOjm7SESO1TKIBURa8hZnRc6rcQjD74BtrgWp5LSEWRMMxY1R1v+C8iGVabw6IvHR0Oha0=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789025183; c=relaxed/simple;
-	bh=cnSWqQcASQMLKInn2lI53+JxHJe6k/AWPc/O9s1mt7M=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=AJFNSjMk+7IMTNw8g4x91V4QPmpiDTHrhCR0diTJUwlXu1dwpnLdA2kkNdxhNJiDkrDlnVBK6LI3JnzFRwvN68dvQ9Xy4nCieqTx/HOEfKtZWJmsnYt261CeeCwMIlcwBQV2NK8VgynMLAoyBPdNbTTujkqRKJj8+idqRudyIf0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=ggpwfu74; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=IQAvvt0c; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 806923AFB18
+	for <linux-arm-msm@vger.kernel.org>; Thu, 10 Sep 2026 07:27:17 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=205.220.180.131
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1789025239; cv=pass; b=QZCBsw3b3D6YraBdq7IkuuJfC9WtnXotIFkVkBUmYBWGL6nViUOJ/n3ziB3yNfIyiYgnX/RJCPMED3T9YwIfDJTj77vOUmFSlOi3mQeVam7HsX920/kkVhW/Iw/dzT61z99ViAFyodZsZD15NMlCqaujciy1HTLnbtyYHw/oPRI=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1789025239; c=relaxed/simple;
+	bh=bZxWK4/oaCwKffC7eILmS9hf1WFNkZfOkRz6Aks28xc=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=SSIqsDbQ2vaMT+xl65c2HbclSYEsDkWe08fS/qPSxed1dwlHfi9t2nvKyUHheHYNxEWNHW7MkcKI4hhm524XehqlzcKdP4Vwh49BWJ6vode9LHW+RjBMO85NS5YAPujBp0ptXqSjfjRBwYo3vqdbxsf1ME1uQHbEJo4V0HaF99g=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=R7I/PT09; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=HEJ9d5VE; arc=pass smtp.client-ip=205.220.180.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="ggpwfu74";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="IQAvvt0c"
-Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68A5GuVZ319257
-	for <linux-arm-msm@vger.kernel.org>; Thu, 10 Sep 2026 07:26:16 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="R7I/PT09";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="HEJ9d5VE"
+Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68A5H0lj4142903
+	for <linux-arm-msm@vger.kernel.org>; Thu, 10 Sep 2026 07:27:16 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-type:date:from:in-reply-to:message-id:mime-version
-	:references:subject:to; s=qcppdkim1; bh=2DuUysS3GqngaCVO/CWJC3HZ
-	jN8ot3KwdZfBElTMIEQ=; b=ggpwfu74ffMEUwo6noqYCw+MoJyWa+Vr8ZCT65yD
-	nlMBH5dtYKZjIWlvNYJjDEKxTKAm1c9mc+rj8+VQ5MmYXUfuLwn3+BPmslgIY6ML
-	NMLAPnZcy9D861SWcjqIBK1hYRNV16kjrAtFsZx9y+4jZQPHRyqok6uMXrMQUq5Y
-	ieX7RhmcwmEFFCaIEop+zQyVapJj7gKqC4myFaOwcyPP8yZcWwwx3vR5l1B2yAFR
-	+FyHJHeBvakLSRkpOqNrL5hkt1Kte6E9ccBFdZl/LDAMCPP+d35Py1+G0COQGojz
-	3EUnVIiQz+1SD8g3HvNeU8E24E88D+xHajdEpGL/+C5puw==
-Received: from mail-pj1-f69.google.com (mail-pj1-f69.google.com [209.85.216.69])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gkcyg2mgr-1
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	taZQwJTu7Xj2QDuBpgX98mgl88qdgGujFrGGLJjeO/Y=; b=R7I/PT09opctkmDP
+	AtysNWExZ3Hw0+R+zBCwUyJ8Sn0N+LZ1p+JCqyJXtuKSJY1XwAeJwx/QwWWvv3oG
+	e4f5kj3ra2K5GX3nwyrdemh7pdQRA2dkCO6dxjaknGFVceuypSuwYvIIr3UEZgKF
+	witAiNhxaN5ePeNxct7pd6lpeiHLRHHCCWLfLQcNh9gSsxDcEWKj/vgrNgBFgcNh
+	xSNDT6X9eBd34ghP8DpkY7qJkwn14h9MSFgXjt256gXtweedZkiTRFgGrDFQS/PE
+	Y1GuxJiAfSRk/zdi9JqCqDxm5xmUw7znzIZij+yW7nQgtiYC5uVIS/ANxJvS1KEX
+	E4U5Pw==
+Received: from mail-yx1-f70.google.com (mail-yx1-f70.google.com [74.125.224.70])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gkcyd2kdf-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Thu, 10 Sep 2026 07:26:16 +0000 (GMT)
-Received: by mail-pj1-f69.google.com with SMTP id 98e67ed59e1d1-398d292eac1so13747230a91.1
-        for <linux-arm-msm@vger.kernel.org>; Thu, 10 Sep 2026 00:26:16 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 10 Sep 2026 07:27:16 +0000 (GMT)
+Received: by mail-yx1-f70.google.com with SMTP id 956f58d0204a3-66c767e23f6so7868001d50.0
+        for <linux-arm-msm@vger.kernel.org>; Thu, 10 Sep 2026 00:27:16 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1789025230; cv=none;
+        d=google.com; s=arc-20260327;
+        b=mYlHrn/oYXb1UGCEHAhmbDX/V0+eyOhgNAXRsh58qONOx+I9FD8VTQ9kk6JefMYtBF
+         +lO/Z0zoOjjgEPyWx6rnyFnitT78FbPw5+Jpi1Is2wbAEtwFky+g9i9WHDeNU9/QKktw
+         bJNpwxY+3ZtXq1KnWeTc+6dpeDcULaRl78laFqUFudbQV9zN0rTxuVzv9HphFcBWFbi9
+         VkFJfDeJ+nAhPze8ItGQZ/0f5H3NG2pOALYZESIWMtJkK5UtV2X5hwiIHzlex+SRYGt6
+         TRi/9Hz2taI0+eQ9SnF7oqajPOfAfFbBlMXLKeIfPJ+EQQ+eEZHzK59nV3WHkdyx1wup
+         pGew==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:dkim-signature;
+        bh=taZQwJTu7Xj2QDuBpgX98mgl88qdgGujFrGGLJjeO/Y=;
+        fh=IC3JssuQkF4A1JJ1Ves5kvuRsmS+cc1MmGalSXy/pD8=;
+        b=Z50xW76D8d8x9uHwjQ0hM9uMBOZMyp1HeD0+0pEyDPkuVCi7dTyLk6lGVYCboM89LK
+         PouCvlz8m7JlMaLKlCN92rX4puFXLQYFtC4XwLn1r/+eZlatehSQJ0YnebFzBfFpYeys
+         LIJhQzJzPU4+uoc9jfKY9hU5GsIocfaBsmJ0d/lSCnT3DJq2b4xQtrhOcnVqOGeF+cFj
+         /TE35QMDLcFznLyffK8mGlmYY3huSz82bU7GWLMq279YKVoV5Zwg5fSUSjgX3R22jMO9
+         oDk4I6RasNycMTEhx4fTZNM983u73/4bNObH165NS+7eIAd4xwjeCAmdNtzaVcNh5XFC
+         z4Zg==;
+        darn=vger.kernel.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1789025176; x=1789629976; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+        d=oss.qualcomm.com; s=google; t=1789025230; x=1789630030; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
          :date:message-id:reply-to:content-type;
-        bh=2DuUysS3GqngaCVO/CWJC3HZjN8ot3KwdZfBElTMIEQ=;
-        b=IQAvvt0cimutJmy/bpLGPhGVfAfeW//U9wvcAQ0BXmbPQT5qaudf15Mr1Vhb/Qn2Zv
-         un4VcxOnyCkz1l6f3riVt6YSrt9x1dYQuvm+LZJzIEZUImtcghQg3IXAWJorxdVdIsUK
-         EcgxpKbxPPxJtEJDCCBPJnUdjzlKZReVPjZ/STbXnIIp5Of0s4YVyQMFkPpU8WR6dn/F
-         DHuxZ12MnT5tH0InX6stWcEqr9XU3OV4cSzlJno6qJM2SIe0csA/maVsLb0vO/lXTqjY
-         198JTCdCYlJJOAuCjHWB9onyVD5gWXfg8sdmr0iLitpObnYGGAWhPwvNIpDLqK0VUg6H
-         jkPQ==
+        bh=taZQwJTu7Xj2QDuBpgX98mgl88qdgGujFrGGLJjeO/Y=;
+        b=HEJ9d5VEkO2oKknCn1tH1/f3rbbmic7IBHCLN8IAUqJa8R9ehJrrXXAWOfYScjXvkf
+         YBfNru2XeEWSkpLh0U0elO5q/TngWrn6vgbLWUeuro/3i9//qubGj06BlRDSPxt+99nY
+         hA5TyziUqsoxwr5tRop6SE5Bhp6pFk0XjFUsQP6Z2vl7EUuHevyp6x873qMZe0mnIC5W
+         0lGVfuviFetrDtKAbvx7mcZxCP6vV79OllnEaKqZBbcDSlja3kt2YkPjZAdzO1Skdbsy
+         5vkoJL92DAu+grfRzlY0LdCkNqs7iuCIJM3t5rPZ27QCR1jcOEdvktBeAb+vgedvi6Ru
+         W0Bg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1789025176; x=1789629976;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:x-gm-gg
+        d=1e100.net; s=20251104; t=1789025230; x=1789630030;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=2DuUysS3GqngaCVO/CWJC3HZjN8ot3KwdZfBElTMIEQ=;
-        b=mlqLvjnhdgFjJTqBveIdznwT4TOtySM4JCkiVhzvH1De0Rx2tn+WDBCykR+5K1RD93
-         Y4fp6g6tX2COJRiuOgIAT2hxUMMMLQc03u5IUoTCiXZay8NMAbwPtK/68Vgm/8F0BlTH
-         eA3Y6ds125XsiOnY4D/y+pOno6z2ks3uXtga/fIIqIC41n5GOvQQ5i1tfWsN8a5kG3Q+
-         jfVql4EyWT5ytpbqq9gzBDtymgGyTSavmcMS81I8A8YjVE1bMC72uF8JGY66iFUIYyTZ
-         QZaSQ9qr6/3WZjur3Ctp1YyVt/3ODvd4cffPgqMnkE8pI9e8MCEn38OVrz1fpoBqd251
-         0hkA==
-X-Forwarded-Encrypted: i=1; AKwUvBzxJqRWHHY2H8TQgiCaH9ir7gqxQUaIvBvESymW3xsNQbgsQkzSNuWfz/OWn5QLtzJaF8dE8gid5CBr+kZ9@vger.kernel.org
-X-Gm-Message-State: AFuF++nfsK47RdB5JbKHmcMvg6oKNM+LNLVzuxXCxxNEIktx8/burbGh
-	aKjTT6ZpS/+ekNXETwNsDOLCsgvK25Ye25gspgeW9CEZPHKtF19LBhzv98lh9w6E9SiM15V/2vk
-	bsIMBzXJoQvBH11aEMzO6OcAsqk1vQ8zUC0U0F6t+6ziWlkkZ9+C+C5rPCgpiSBVR0xU+
-X-Gm-Gg: AYBFou1Sw9pMFZ07YAqQ490YszDHRCIXkoPyeBZ0yipL8KO2XDv0A7mPCQjPaekyEdE
-	oJuTYlbuzNjooXDyoVdq78BzXTBddk4Pb2X9SaNtDw/I5mV5+4B57ldWCRuTY/uJIKlGQAy75iN
-	LyVehijhvqW625or4la8iHOw2NxdADriVEz+MMGaKLCHamolYKrYZfWQYUv0igmYMIlvAF/K8v2
-	zIX9fzxloYj5JMQ5lnznp7UkrXXO6aZG3XtOXZyNn668YreiZX7BzZ/VcgeYrrtrcySGZO+VVhv
-	f6JEPGxZ3BMFBxx6KPXvzJUEyGyMAWbEMoxTvKM2oYo/c519HBtFWpFmNNiAD4fjDAbzGTxWvOL
-	bv3FMBSRl6LenjI0+MUamhKFhrOtrQxDI1ALNBwaXfYU=
-X-Received: by 2002:a17:90b:520e:b0:398:9be8:ea65 with SMTP id 98e67ed59e1d1-39bac3c452dmr16830063a91.18.1789025175622;
-        Thu, 10 Sep 2026 00:26:15 -0700 (PDT)
-X-Received: by 2002:a17:90b:520e:b0:398:9be8:ea65 with SMTP id 98e67ed59e1d1-39bac3c452dmr16830014a91.18.1789025175191;
-        Thu, 10 Sep 2026 00:26:15 -0700 (PDT)
-Received: from QCOM-aGQu4IUr3Y (i-global052.qualcomm.com. [199.106.103.52])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1432435648esm60431654c88.5.2026.09.10.00.26.12
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 10 Sep 2026 00:26:14 -0700 (PDT)
-Date: Thu, 10 Sep 2026 15:26:10 +0800
-From: Shawn Guo <shengchao.guo@oss.qualcomm.com>
-To: Krishna Kurapati <krishna.kurapati@oss.qualcomm.com>
-Cc: Thinh Nguyen <Thinh.Nguyen@synopsys.com>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        linux-arm-msm@vger.kernel.org, linux-usb@vger.kernel.org,
-        linux-kernel@vger.kernel.org, Val Packett <val@packett.cool>
-Subject: Re: [PATCH] Revert "usb: dwc3: qcom: Add support to skip phy
- management by USB core"
-Message-ID: <aqJbktGye-8KD-KZ@QCOM-aGQu4IUr3Y>
-References: <20260909-xhci-fixes-revert-v1-1-7cc97fa0f307@oss.qualcomm.com>
+        bh=taZQwJTu7Xj2QDuBpgX98mgl88qdgGujFrGGLJjeO/Y=;
+        b=kw3Mp/rtaRguuSYRqr1bucb7tsIoVZ4N99Hno36r4O/JmQmizWq/POs+zr9liKT8ly
+         yfE+d0QZeLNhfbtt4d6Op4Lw7YrNNGd4xyvnZYxfrrVsySdQ9sM5R7ccJfRnm7mFqFoH
+         7/G72la8LOj8Ng3gBLVi7Q8NoDfAu4X86uaKk6Dd+x/9LgRQ1Xpo+3X7DEgveYOWHNqo
+         jvzQgGSj2gF9VUNLVJ+hWn4CcpWggZEK80NNC03HJfA9y4RFjoTGGj0qq50aDm1BltOa
+         mJ58sjq9YyNCIy732AUEPpB6BWuhCNOlEHDX6xXH6Dk4KcckmVeuvZvB0qZSKPJYJWhU
+         /Gew==
+X-Forwarded-Encrypted: i=1; AKwUvBw+6OWge36ppLNf7smVoLoqfYsaHLaJfZVCY/fY8mRBS2vPmn/qdG3OdjoVOIRpVfRmM1mVcM7nbem7pqao@vger.kernel.org
+X-Gm-Message-State: AFuF++nkhBKkx7AZDyXlkfKHhnX9S8JiRKmMN9EfFZKr/fp93OadcVHL
+	6yd7P6vRECdHPzCh84HhOWC5O9RUCoTtlQZoOBTpTH8BU8OElWp6ZhK7hRsuhUrNo1mQBLVcSjY
+	oYTxNeM3ee04TW1k858k417eIiy/cxedHALikqtyTOWgs/w7w1O7Dt7PyrykwlgXdoeDK0Zm0Z6
+	H1N2w9ymA5sm9aITREjXt6s5l557o0WFIpsvkyU83xdog=
+X-Gm-Gg: AYBFou3hCE03uZkf/fIJFeYG0n/H4U0QMnxcQVQZalO3av1lDmSXrIWPpDc/K2/HCny
+	uCQqINwyOlBgaavORBf3pB/YQllPYdQwNyUEWLYzpR/srrs/qU3hlTWvD+Q2QCVAB0Q8g1+NoH9
+	A8bdul1xUEKIao/7EUb5hmp+HrSGIWQXvaV6BOwnGbdhQ8itkmaMCsPf2w0A==
+X-Received: by 2002:a05:690e:4188:b0:666:396e:bf59 with SMTP id 956f58d0204a3-6710feea457mr1891098d50.1.1789025229999;
+        Thu, 10 Sep 2026 00:27:09 -0700 (PDT)
+X-Received: by 2002:a05:690e:4188:b0:666:396e:bf59 with SMTP id
+ 956f58d0204a3-6710feea457mr1891087d50.1.1789025229603; Thu, 10 Sep 2026
+ 00:27:09 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260909-xhci-fixes-revert-v1-1-7cc97fa0f307@oss.qualcomm.com>
-X-Authority-Analysis: v=2.4 cv=YZYodARf c=1 sm=1 tr=0 ts=6aa25b98 cx=c_pps
- a=vVfyC5vLCtgYJKYeQD43oA==:117 a=b9+bayejhc3NMeqCNyeLQQ==:17
- a=kj9zAlcOel0A:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_glEPmIy2e8OvE2BGh3C:22
- a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=18rzLyZ0tFcJ6Np8f_0A:9 a=CjuIK1q_8ugA:10
- a=rl5im9kqc5Lf4LNbBjHf:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTEwMDA3OSBTYWx0ZWRfX/84IpF+v1OUX
- d1wfKmp6ezEO7oy69tSiHQhLa3D0SnHZ2CEAE4S/CoZRjfaPwypHGqoVicCxvXzcfHMf1rAnhGz
- QSzITFaoQBdbF2qXX5e06Y5sLdBY2jM=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTEwMDA3OSBTYWx0ZWRfX7H81gG2QJWk9
- wqIAdh2l+NuAWlWlAlTmC6PnfywowKJlaz2umGUCoHoAAjRFEps5iFcvqnR836LcGzennbvKnZV
- GahRTOPCfCcrDtdKzxxisKSgvpRmYgq536Vmqr/ONrVQ1wQJrYJRPRghpGcJQTkLHenMqqpdIO2
- SeNlaYvoXYwj3Mr0zu3h8uH0ZPIQ9PPcQVmr1B+i2t/AxUiYM+m768WlmBUKG5mnYB4NyGcaZpv
- bx9CEBIG0AR9fGlkkScjQlHC1WeXqYHphN1hDSurEOs5R9sfR/P/icyWPGM4fDfx65Aq6Gf784w
- NMI4lzb1OSn0o1eTP67kXvNc0popjChgRvHdnAYG394JpvEfpjKtvy3UKWZZIJnBRH5NjML51O2
- AnL7H9rDbKfTI0r/A+LlK2xW2jqOFCJ1izR5kWWYKofqcTiW1Vj7X9nCS3MFkGU3kw1SpbHDumT
- CG5bOXjb96YEaud1QAQ==
-X-Proofpoint-GUID: CleFskH3qzIuIkwOX618y9qxZSi7lBHO
-X-Proofpoint-ORIG-GUID: CleFskH3qzIuIkwOX618y9qxZSi7lBHO
+References: <20260821081325.89088-1-phollinsky@holtechnik.com>
+In-Reply-To: <20260821081325.89088-1-phollinsky@holtechnik.com>
+From: Sumit Garg <sumit.garg@oss.qualcomm.com>
+Date: Thu, 10 Sep 2026 12:56:57 +0530
+X-Gm-Features: AcwNN1Vn6UxHVxU9O2c-HcaEnhmPjnjZ2yWHOjiTvHE8Ao96P_jBheKuiWTFEXE
+Message-ID: <CAGptzHM1tuR+JPoT4CmA9fO77pheTq6d+14XnpxtNysrBW71jQ@mail.gmail.com>
+Subject: Re: [PATCH] drm/msm/adreno: Only check for PAS when a zap shader is present
+To: Paul Hollinsky <phollinsky@holtechnik.com>
+Cc: Rob Clark <robin.clark@oss.qualcomm.com>,
+        Dmitry Baryshkov <lumag@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        Konrad Dybcio <konradybcio@gmail.com>,
+        Akhil P Oommen <akhilpo@oss.qualcomm.com>,
+        Abhinav Kumar <abhinav.kumar@linux.dev>, Sean Paul <sean@poorly.run>,
+        Jessica Zhang <jesszhan0024@gmail.com>,
+        Marijn Suijten <marijn.suijten@somainline.org>,
+        David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>,
+        cros-qcom-dts-watchers@chromium.org, linux-arm-msm@vger.kernel.org,
+        dri-devel@lists.freedesktop.org, freedreno@lists.freedesktop.org,
+        linux-kernel@vger.kernel.org, regressions@lists.linux.dev
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Proofpoint-GUID: BETg9sPlOBft5NG-HP0sGxCq6pJCYJC0
+X-Authority-Analysis: v=2.4 cv=ef+o7LEH c=1 sm=1 tr=0 ts=6aa25bd4 cx=c_pps
+ a=S/uc88zpIJVNbziUnJ6G4Q==:117 a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10
+ a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
+ a=rJkE3RaqiGZ5pbrm-msn:22 a=VwQbUJbxAAAA:8 a=8dbcrQVTAAAA:8 a=pGLkceISAAAA:8
+ a=EUspDBNiAAAA:8 a=L0M3gnoWJ22_1Ho6GyMA:9 a=QEXdDO2ut3YA:10
+ a=nd2WpGr1bMy9NW-iytEl:22 a=2958AbVqUNA9gn3SDOjC:22
+X-Proofpoint-ORIG-GUID: BETg9sPlOBft5NG-HP0sGxCq6pJCYJC0
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTEwMDA4MCBTYWx0ZWRfXxoEVD5s6A0Ds
+ Dw8tfCV8u25V78SKHBoe7f6lvWJhgffokxChnkMh4yeb0SA0cPHnmcDG8PYxJTuQ067bTfj+Nlg
+ BwZhe/iQBTRhl2fna9HXOlg0g7Z1p3k=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTEwMDA4MCBTYWx0ZWRfX8hTflWncKauP
+ lttxwVV8TpI0tuOVp+cle8cKhyuxwiIvExLO99/jq/ImS0kXlkQYqhXDigTS4jCGjJAP9JttnT4
+ +gyx3nXCHUO1L8Dpp7RUwq/vtwiTR5QotCk+KV8caBxZHaUGJcO4pdI3jKKXQlVtfrCv/Wxypkh
+ Gr7UiBEEdyqQWQofEA4fjzSr0NE5NEF1ycxBrozUi7ss7E/zD6zT7bl2rK5eAIqfFtIbcERGzsy
+ Ex1rPp7GQQz514wceCDO7lOqTTejCCynR4/nk7KBKeTuV84rjEkJYitzH+KJSDw59Z/uN2Q6yg2
+ V+t5Jan7fqPYqDWB3QD4f5Nz64iUtTWz8gSt4Ij45ttSYrnJVho7RU9bqy2oaXvYk6JVb55dP1V
+ lJulC6K6Vna4olDbCJdOeBp1lZJ8E2MUGJIcXdX3BhfHDndITecslRW5sMsuw9nhaiZCoo9MZHa
+ 0E7e0HB7LVFZtFXIbVQ==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-09-10_02,2026-09-09_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0 suspectscore=0 lowpriorityscore=0 impostorscore=0 adultscore=0
- bulkscore=0 phishscore=0 spamscore=0 clxscore=1015 priorityscore=1501
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609100079
+ malwarescore=0 suspectscore=0 adultscore=0 priorityscore=1501
+ lowpriorityscore=0 clxscore=1015 phishscore=0 impostorscore=0 bulkscore=0
+ spamscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
+ adjust=0 reason=mlx scancount=1 engine=8.22.0-2609040000
+ definitions=main-2609100080
 
-On Wed, Sep 09, 2026 at 03:19:10PM +0530, Krishna Kurapati wrote:
-> This reverts commit be7b1c68cd3e4fc0f5a4e1b85696de1052f21f2f.
-> 
-> Commit be7b1c68cd3e ("usb: dwc3: qcom: Add support to skip phy management by USB core")
-> is causing a regression on qualcomm platforms.
-> 
-> During role switch it tends to cause the following crash:
-> 
-> [    5.620951] refcount_t: underflow; use-after-free.
-> [    5.621114] Call trace:
-> [    5.621115]  refcount_warn_saturate+0xd8/0x140 (P)
-> [    5.621117]  kobject_put+0x11c/0x230
-> [    5.621121]  software_node_notify_remove+0xdc/0xf8
-> [    5.621124]  device_del+0x1dc/0x328
-> [    5.621126]  usb_disconnect+0x1d8/0x348
-> [    5.621129]  usb_remove_hcd+0x100/0x2a8
-> [    5.621131]  xhci_plat_remove+0x8c/0x170
-> [    5.621134]  platform_remove+0x28/0x40
-> [    5.621135]  device_release_driver_internal+0x174/0x290
-> [    5.621138]  device_release_driver+0x20/0x38
-> [    5.621140]  bus_remove_device+0x19c/0x1f8
-> [    5.621142]  device_del+0x1c4/0x328
-> [    5.621143]  platform_device_unregister+0x34/0xc0
-> [    5.621145]  dwc3_host_exit+0x50/0x70
-> [    5.621146]  __dwc3_set_mode+0xa4/0x378
-> 
-> [    5.644535] Unable to handle kernel paging request at virtual address
-> [    5.644657] Workqueue: events_freezable __dwc3_set_mode
-> [    5.644664] pc : __pi_strcmp+0x9c/0x140
-> [    5.644668] lr : software_node_property_present+0x60/0x98
-> [    5.644697] Call trace:
-> [    5.644698]  __pi_strcmp+0x9c/0x140 (P)
-> [    5.644700]  device_property_present+0x9c/0xc0
-> [    5.644703]  dwc3_gadget_init+0x230/0x7b0
-> [    5.644704]  __dwc3_set_mode+0x314/0x378
-> [    5.644707]  process_scheduled_works+0x1b8/0x538
-> [    5.644710]  worker_thread+0x1fc/0x2f8
-> [    5.644711]  kthread+0x114/0x148
-> [    5.644713]  ret_from_fork+0x10/0x20
-> 
-> Revert skipping of usb core phy management for Qualcomm platforms to avoid
-> the above issues.
-> 
-> Reported-by: Val Packett <val@packett.cool>
-> Closes: https://lore.kernel.org/all/f9926203-ee69-4e18-b6c7-95261ba10807@packett.cool/
-> Signed-off-by: Krishna Kurapati <krishna.kurapati@oss.qualcomm.com>
+On Fri, Aug 21, 2026 at 1:44=E2=80=AFPM Paul Hollinsky
+<phollinsky@holtechnik.com> wrote:
+>
+> Commit 0be72be03ca7 ("drm/msm: Switch to generic PAS TZ APIs") replaced
+> the qcom_scm_is_available() check in adreno_zap_shader_load() with
+> qcom_pas_is_available(). These are not equivalent: the former reports
+> whether the SCM transport is up, the latter whether the TrustZone
+> firmware implements the peripheral authentication service.
+>
+> On SC7180 Chromebooks (trogdor) TZ does not implement PAS at all. SCM
+> call-availability queries return 0 for every PAS command while other
+> services answer normally:
+>
+>   svc 0x06 cmd 0x01 IS_CALL_AVAIL    -> 1
+>   svc 0x02 cmd 0x01 PAS_INIT_IMAGE   -> 0
+>   svc 0x02 cmd 0x05 PAS_AUTH_RESET   -> 0
+>   svc 0x02 cmd 0x07 PAS_IS_SUPPORTED -> 0
+>   svc 0x0c cmd 0x16 MP_ASSIGN        -> 1
+>   svc 0x05 cmd 0x01 IO_READ          -> 1
+>
+> so qcom_scm_probe() never registers a PAS backend and
+> qcom_pas_is_available() is false for the lifetime of the boot.
+>
+> That on its own need not matter, because sc7180-trogdor.dtsi does
+> /delete-node/ &gpu_zap_shader;, and the intended path for such a board
+> is for zap_shader_load_mdt() to find no zap-shader child, clear
+> zap_available, return -ENODEV, and let the caller fall back to
+> SECVID_TRUST_CNTL.
+>
+> The problem is the ordering. zap_available is a static initialised to
+> true and is only ever cleared inside zap_shader_load_mdt(), but
+> adreno_zap_shader_load() consults PAS before calling it. The discovery
+> that decides whether a zap shader is needed at all can therefore never
+> run, the flag is never cleared, and every call returns -EPROBE_DEFER:
+>
+>   adreno 5000000.gpu: [drm:adreno_zap_shader_load] *ERROR* PAS is not ava=
+ilable
+>   msm_dpu ae01000.display-controller: [drm:adreno_load_gpu] *ERROR* gpu h=
+w init failed: -517
+>
+> Nothing retries that deferral, either. adreno_zap_shader_load() is
+> called from a6xx_hw_init() rather than from probe, so the -EPROBE_DEFER
+> is not a probe return value: it propagates up until adreno_load_gpu()
+> returns NULL. load_gpu() re-attempts on every DRM open while priv->gpu
+> is NULL, each open fails identically, and PAS cannot become available in
+> between - which is why the error repeats and userspace stays on
+> llvmpipe.
+>
+> Move the availability check into zap_shader_load_mdt(), behind the
+> zap-shader node lookup, so the driver only consults PAS once it knows it
+> needs PAS. Boards with no zap-shader node take the intended -ENODEV
+> fallback without ever asking, and boards that do have one keep the
+> qcom_pas_is_available() gate.
+>
+> Fixes: 0be72be03ca7 ("drm/msm: Switch to generic PAS TZ APIs")
+> Link: https://lore.kernel.org/r/20260808034716.58888-1-phollinsky@holtech=
+nik.com
+> Signed-off-by: Paul Hollinsky <phollinsky@holtechnik.com>
+> ---
+> Reported and analysed in:
+> https://lore.kernel.org/linux-arm-msm/20260808034716.58888-1-phollinsky@h=
+oltechnik.com/
+> Konrad agreed with this shape in
+> https://lore.kernel.org/linux-arm-msm/b63e93e4-2f4c-4cad-b726-e1b0565379d=
+7@gmail.com/
+>
+> 0be72be03ca7 landed in mainline during the v7.3 merge window (via the
+> soc-drivers-7.3 pull), so this is based on Linus' tree. Note that
+> msm-fixes and msm-next both still predate it as I write this, so it
+> needs a base that includes the merge window; happy to respin against
+> whatever base you prefer, and it can equally go via the qcom tree the
+> culprit came through.
+>
+> Tested on a Lenovo IdeaPad Duet 3 (sc7180-trogdor-wormdingler) on
+> next-20260805, which carries the same code: with this applied the GPU
+> initialises and logs "Zap shader not enabled - using SECVID_TRUST_CNTL
+> instead", and userspace gets a6xx rather than llvmpipe.
+>
+>  drivers/gpu/drm/msm/adreno/adreno_gpu.c | 13 ++++++-------
+>  1 file changed, 6 insertions(+), 7 deletions(-)
+>
 
-I'm seeing a duplicate sysfs filename issue on Nord platform. This revert
-fixes it, so:
+Reviewed-by: Sumit Garg <sumit.garg@oss.qualcomm.com>
 
-Tested-by: Shawn Guo <shengchao.guo@oss.qualcomm.com>
+-Sumit
 
-[    6.412085] sysfs: cannot create duplicate filename '/devices/platform/soc@0/a400000.usb/software_node'
-[    6.412088] CPU: 3 UID: 0 PID: 128 Comm: kworker/u73:3 Not tainted 7.3.0-rc2-next-20260908-00064-gde909f9bbb2a #16 PREEMPT(full)
-[    6.412090] Hardware name: Qualcomm Technologies, Inc. SA8797P Ride Embedded (DT)
-[    6.412091] Workqueue: events_unbound deferred_probe_work_func
-[    6.412098] Call trace:
-[    6.412099]  show_stack+0x18/0x24 (C)
-[    6.412103]  dump_stack_lvl+0x74/0x8c
-[    6.412107]  dump_stack+0x18/0x24
-[    6.412109]  sysfs_warn_dup+0x64/0x80
-[    6.412112]  sysfs_do_create_link_sd+0xf0/0xf8
-[    6.412114]  sysfs_create_link+0x20/0x40
-[    6.412116]  software_node_notify+0xb0/0x100
-[    6.412117]  device_create_managed_software_node+0xec/0x108
-[    6.412119]  dwc3_qcom_set_swnode+0x5c/0x8c
-[    6.412122]  dwc3_qcom_probe+0x4d4/0x9c4
-[    6.412123]  platform_probe+0x5c/0x9c
-[    6.412125]  really_probe+0xbc/0x29c
-[    6.412127]  __driver_probe_device+0x16c/0x19c
-[    6.412129]  driver_probe_device+0x3c/0x114
-[    6.412131]  __device_attach_driver+0xb8/0x118
-[    6.412132]  bus_for_each_drv+0x88/0xe8
-[    6.412134]  __device_attach+0xa0/0x190
-[    6.412136]  device_initial_probe+0x50/0x54
-[    6.412137]  bus_probe_device+0x38/0xa0
-[    6.412139]  deferred_probe_work_func+0x88/0xc0
-[    6.412141]  process_one_work+0x180/0x2dc
-[    6.412143]  worker_thread+0x188/0x300
-[    6.412145]  kthread+0x118/0x124
-[    6.412146]  ret_from_fork+0x10/0x20
+> diff --git a/drivers/gpu/drm/msm/adreno/adreno_gpu.c b/drivers/gpu/drm/ms=
+m/adreno/adreno_gpu.c
+> index 489462065ea9..995161215ad5 100644
+> --- a/drivers/gpu/drm/msm/adreno/adreno_gpu.c
+> +++ b/drivers/gpu/drm/msm/adreno/adreno_gpu.c
+> @@ -52,6 +52,12 @@ static int zap_shader_load_mdt(struct msm_gpu *gpu, co=
+nst char *fwname,
+>                 return -ENODEV;
+>         }
+>
+> +       /* We need PAS to be able to load the firmware */
+> +       if (!qcom_pas_is_available()) {
+> +               DRM_DEV_ERROR(dev, "PAS is not available\n");
+> +               return -EPROBE_DEFER;
+> +       }
+> +
+>         ret =3D of_reserved_mem_region_to_resource(np, 0, &r);
+>         if (ret) {
+>                 zap_available =3D false;
+> @@ -170,18 +176,11 @@ static int zap_shader_load_mdt(struct msm_gpu *gpu,=
+ const char *fwname,
+>  int adreno_zap_shader_load(struct msm_gpu *gpu, u32 pasid)
+>  {
+>         struct adreno_gpu *adreno_gpu =3D to_adreno_gpu(gpu);
+> -       struct platform_device *pdev =3D gpu->pdev;
+>
+>         /* Short cut if we determine the zap shader isn't available/neede=
+d */
+>         if (!zap_available)
+>                 return -ENODEV;
+>
+> -       /* We need PAS to be able to load the firmware */
+> -       if (!qcom_pas_is_available()) {
+> -               DRM_DEV_ERROR(&pdev->dev, "PAS is not available\n");
+> -               return -EPROBE_DEFER;
+> -       }
+> -
+>         return zap_shader_load_mdt(gpu, adreno_gpu->info->zapfw, pasid);
+>  }
+>
+>
+> base-commit: 818bebeb63dd6bf5f4e07e145f6cdbace520a34c
+> --
+> 2.55.0
+>
