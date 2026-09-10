@@ -1,45 +1,41 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D816B5452A8;
-	Thu, 10 Sep 2026 19:35:44 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8FF11414436;
+	Thu, 10 Sep 2026 20:01:27 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789068946; cv=none; b=azKI/MzwCc2e3ehPxEWJOL4VvOqd2TjdwdYDsAWZAVmuh8Lb8e7V/OxwJ2Guuy8qgcBG1oSu34PzDvoI2NiYjzfuVjdgCj90wD650ZQ5GyvEajQgxwe5vfcw6h5Ow4VpvWvDrFtA4TvNUNf6pEIOR2UBmnWPGsNwY2hLt49Ok6w=
+	t=1789070488; cv=none; b=M+xEuVmwnlaEl6zpylAV3Ekumm1iqqG8OWexYuwpnb3f0Oc6+CfTF185O7fn2vbhRW2Wb/CaU/R8oVZ9OFRyatsG0UddpoC2c6RfGvMGcNUDMJiQYnu7mYu+zn8fYQn2Z5wqoi57z4cepHSkpjHa7cKDqEnup53Ti4mwr4MLr+8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789068946; c=relaxed/simple;
-	bh=rGQb6pWP3s8+ybob6/+wvJRTEta0FaX+zgcYWjwrBM8=;
+	s=arc-20240116; t=1789070488; c=relaxed/simple;
+	bh=K3OhqYapq8/9YGp/iEQ2QKlD/1kQkmtpDwV8tx63Z9g=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=UCbKhoQFGCU0Qa5jhT682qN10Y21sRF0Yq4jC0u+kIq0MIwUrc/qkdSc7Q7kKsDQLzzi93aXBFqIIopD4hk29mVsfZmmBsMlaRboPji9grUZp5hx50XimmJzetG4b2ttGMlrzE6x42CeeCpmPP2gP6bpcKRPdKu8/JDSq4tt3Oc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=QHS9bb1g; arc=none smtp.client-ip=100.103.45.18
+	 Content-Type:Content-Disposition:In-Reply-To; b=V8UKUC6GWGtK54gBOrWjpEtnzAy+oUHj/HzZMvkUk+Gsm+ZG70BEMGUgjZOQ6RbW32habLA+JltqguSOxRi+AMDtc1mU4Im2+ZybLTL50vZbCqshX8TitKP5inHY8A9E8rztYaB0ZCA/eNvnkV7MmK8y6eNh5HQJu+rnQ6YjBIU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=fDMx76sD; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="QHS9bb1g"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9AF061F000FF;
-	Thu, 10 Sep 2026 19:35:43 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="fDMx76sD"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 71C6A1F000FF;
+	Thu, 10 Sep 2026 20:01:26 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1789068944;
-	bh=NEHLUGTnGIvTiSnbPaTYiuHz7Py0xQtY1MUskUwmPWE=;
+	s=k20260515; t=1789070487;
+	bh=qgAjydhKlvBY1ErV3UOJh0vIIGsAjA9VNJHIiNmRqtA=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=QHS9bb1g4bOEu914forL0x7kDO1MY6HoyQrVpJA2Zm2D1LVGbRvWNR+VyFLDiCt8N
-	 8QfYMhEEX+Kyhwi3OfUTg0Styezbdjj2ltVim1F1O3W2zHp7SODgeElbwy3NAZNPc5
-	 wiRrATApSFP8PeH/VYFIgvdZSOF+zS3qaGiLd7m9jRhljhA4bvbX9kj+3F9WuSJhGJ
-	 I2Zfaq9CfVBf39UClc+CFWuGgk9fK1saxN3UFa9EyAyGqormI/1bzY47F+OJWLwV5Q
-	 wt5/C2qFDN+hrYSbvscC+6dUrPNXBhvdnmDC7mKaFUphaTDcdGaf6UaSraPExJ/Aop
-	 7S5VLmQxxIptw==
-Date: Thu, 10 Sep 2026 14:35:41 -0500
+	b=fDMx76sDO7U5aGA0RooP6/dr82aG7LlUkxDzVccd5diNLWSYslWe92+1bbUKMq6TS
+	 LXbrdy3yX/dxUzSwECydbRPamXbCbWve8ctLjbCkGBZny1XhAIqB8QXlVCvAy2QSgC
+	 rVnbf32Y56UguAh3S0z8Dmb3FWT1nke9+01zUh9khjVFttM686VeHzx2nlITusZMym
+	 S3K39KDErtkxsR1Nkz3Wertn/txD7p7pSakbX2F6qzAyWk3/Xjk+pW5IEmebP6kyV9
+	 T90j400iYY11qKAoQ4qyEyuA92+60x4rPENfy6LJqQFdaOFdf668m3bGgv34BYf2FC
+	 be9WXtnzUEqVw==
+Date: Thu, 10 Sep 2026 15:01:23 -0500
 From: Bjorn Andersson <andersson@kernel.org>
-To: Shashank Maurya <shashank.maurya@oss.qualcomm.com>
-Cc: Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>, 
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
-	Florian Fainelli <florian.fainelli@broadcom.com>, 
-	Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>, linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, linux-rpi-kernel@lists.infradead.org, 
-	linux-arm-kernel@lists.infradead.org, venkata.valluru@oss.qualcomm.com, 
-	Jessica Zhang <jesszhan0024@gmail.com>
-Subject: Re: [PATCH v2 0/2] arm64: dts: qcom: Add RPi 7-inch DSI panel
- overlays for Monaco/Lemans EVK
-Message-ID: <aqLGFfQ20mCGFkfl@baldur>
-References: <20260907-rpi_dts_overlay-v2-0-a4989322ce00@oss.qualcomm.com>
+To: Aamir Ahmed <elb12345@hotmail.co.uk>
+Cc: Stephen Boyd <sboyd@kernel.org>, Brian Masney <bmasney+clk@redhat.com>, 
+	Jerome Brunet <jbrunet+clk@baylibre.com>, linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, Luo Jie <jie.luo@oss.qualcomm.com>, Kees Cook <kees@kernel.org>, 
+	linux-hardening@vger.kernel.org, stable@vger.kernel.org
+Subject: Re: [PATCH] clk: qcom: ipq-cmn-pll: Assign .num before accessing .hws
+Message-ID: <aqMLw9h-m3eA_UIc@baldur>
+References: <AS8P251MB0001B905088748016A0965F1C8B42@AS8P251MB0001.EURP251.PROD.OUTLOOK.COM>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -48,63 +44,96 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20260907-rpi_dts_overlay-v2-0-a4989322ce00@oss.qualcomm.com>
+In-Reply-To: <AS8P251MB0001B905088748016A0965F1C8B42@AS8P251MB0001.EURP251.PROD.OUTLOOK.COM>
 
-On Mon, Sep 07, 2026 at 12:03:52PM +0530, Shashank Maurya wrote:
-> Add device tree overlays to enable support for the Raspberry Pi 7-inch
-> DSI touchscreen panel on Qualcomm Monaco and Lemans EVK platforms.
+On Sat, Sep 05, 2026 at 09:48:25PM +0100, Aamir Ahmed wrote:
+> Commit f316cdff8d67 ("clk: Annotate struct clk_hw_onecell_data with
+> __counted_by") annotated the hws member of 'struct clk_hw_onecell_data'
+> with __counted_by, which informs the bounds sanitizer (UBSAN_BOUNDS)
+> about the number of elements in .hws[], so that it can warn when .hws[]
+> is accessed out of bounds. As noted in that change, the __counted_by
+> member must be initialized with the number of elements before the first
+> array access happens, otherwise there will be a warning from each access
+> prior to the initialization because the number of elements is zero.
+> This occurs in ipq_cmn_pll_register_clks() due to .num being assigned
+> only after the fixed rate output clocks and the CMN PLL clock have been
+> stored in .hws[]. If registering one of the fixed rate clocks fails, the
+> unwind loop under unregister_fixed_clk reads .hws[] while .num is still
+> zero as well. With CONFIG_UBSAN_BOUNDS and a compiler that implements
+> __counted_by (GCC 15.1+ or Clang 20.1+), this triggers an
+> array-index-out-of-bounds report during probe, and with
+> CONFIG_UBSAN_TRAP the first store traps so the CMN PLL clocks are never
+> provided.
+
+Please have your LLM rewrite this wall of text. It does not need to
+explain how UBSAN works.
+
+In particular the commit message claims this triggers an oob access
+during probe() but below you repeat most of the text (although in a
+more readable form) and there you say that this has only been compile
+tested...
+
 > 
-> The overlays configure the panel on the primary DSI interface using
-> a 2-lane DSI connection and instantiate the panel MCU on the
-> corresponding touchscreen I2C bus for each platform. The changes
-> allow the Raspberry Pi 7-inch display to be used as an external
-> display option on both EVKs without affecting the default platform
-> configuration.
+> Move the .num initialization to right after the allocation.
 > 
+> Cc: stable@vger.kernel.org
+> Fixes: f81715a4c87c ("clk: qcom: Add CMN PLL clock controller driver for IPQ SoC")
+> Assisted-by: LLM
+> Signed-off-by: Aamir Ahmed <elb12345@hotmail.co.uk>
 > ---
-> To: Bjorn Andersson <andersson@kernel.org>
-> To: Konrad Dybcio <konradybcio@kernel.org>
-> To: Rob Herring <robh@kernel.org>
-> To: Krzysztof Kozlowski <krzk+dt@kernel.org>
-> To: Conor Dooley <conor+dt@kernel.org>
-> To: Florian Fainelli <florian.fainelli@broadcom.com>
-> To: Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>
-> Cc: linux-arm-msm@vger.kernel.org
-> Cc: devicetree@vger.kernel.org
-> Cc: linux-kernel@vger.kernel.org
-> Cc: linux-rpi-kernel@lists.infradead.org
-> Cc: linux-arm-kernel@lists.infradead.org
+> Found while auditing the remaining clk_hw_onecell_data users that assign
+> .num only after touching .hws[], following the fixes already merged for
+> clk-s2mps11 (3e14c7207a97), exynos-clkout (cf33f0b7df13) and
+> clk-raspberrypi (6dc445c19050). The audit, the fix and this changelog
+> were drafted with an LLM assistant and reviewed by hand.
 > 
-> ---
-> Shashank Maurya (2):
->       arm64: dts: qcom: monaco-evk: Add Raspberry Pi 7-inch DSI panel overlay
->       arm64: dts: qcom: lemans-evk: Add Raspberry Pi 7-inch DSI panel overlay
+> Compile-tested only (W=1, no warnings) on x86_64 with GCC 13.3, via
+> COMPILE_TEST with CONFIG_IPQ_CMN_PLL=m. GCC 13.3 does not implement
+> __counted_by (CC_HAS_COUNTED_BY needs GCC 15.1+ or Clang 20.1+), so the
+> build only confirms that the change compiles; the sanitizer path was not
+> exercised. I do not have the hardware, so this is not runtime-tested and
+> no UBSAN report was captured.
 > 
->  arch/arm64/boot/dts/qcom/Makefile                  |  4 ++
->  .../dts/qcom/lemans-evk-raspberrypi-dsi-7inch.dtso | 83 ++++++++++++++++++++++
->  .../dts/qcom/monaco-evk-raspberrypi-dsi-7inch.dtso | 82 +++++++++++++++++++++
->  3 files changed, 169 insertions(+)
-> ---
-> base-commit: ed2647532a225739e86c7f236a2ce82764ec2772
-> change-id: 20260907-rpi_dts_overlay-58088ffce047
-> prerequisite-message-id: <20260907-rpi_reg-v2-0-0c59aa60d31f@oss.qualcomm.com>
+> Based on v7.3-rc1. Checked against the pending IPQ5210 CMN PLL series
+> (v3, 2026-08-14): no changed lines overlap, and the fix is still needed
+> after its first patch removes the unwind path.
+> 
 
-The two dts patches in this series clearly relates to those two
-regulator patches, which has received change requests.
+None of this noise is necessary, please put the relevant information in
+the commit message and leave it at that.
 
-I would have sent the 4 patches together in a series, but as you didn't
-you sent this series with unmet dependencies.
+>  drivers/clk/qcom/ipq-cmn-pll.c | 3 ++-
+>  1 file changed, 2 insertions(+), 1 deletion(-)
+> 
+> diff --git a/drivers/clk/qcom/ipq-cmn-pll.c b/drivers/clk/qcom/ipq-cmn-pll.c
+> index dafe8c1738d..a9abad9ff4e 100644
+> --- a/drivers/clk/qcom/ipq-cmn-pll.c
+> +++ b/drivers/clk/qcom/ipq-cmn-pll.c
+> @@ -380,6 +380,8 @@ static int ipq_cmn_pll_register_clks(struct platform_device *pdev)
+>  	if (!hw_data)
+>  		return -ENOMEM;
+>  
+> +	hw_data->num = num_clks + 1;
+> +
+>  	/*
+>  	 * Register the CMN PLL clock, which is the parent clock of
+>  	 * the fixed rate output clocks.
+> @@ -406,7 +408,6 @@ static int ipq_cmn_pll_register_clks(struct platform_device *pdev)
+>  	 * is configured to 12 GHZ by DT property assigned-clock-rates-u64.
+>  	 */
+>  	hw_data->hws[CMN_PLL_CLK] = cmn_pll_hw;
+> -	hw_data->num = num_clks + 1;
 
-All I can do now is reject this series as well. Please send v2 once the
-driver changes has been merged and you have validated this again.
+Change looks good though.
 
 Regards,
 Bjorn
 
-> prerequisite-patch-id: 5212bf185b35c36ed8857a67f29e60386d59ac60
-> prerequisite-patch-id: 056a90b913170106a6f8c1feb2366ee83c4375b9
+>  
+>  	ret = devm_of_clk_add_hw_provider(dev, of_clk_hw_onecell_get, hw_data);
+>  	if (ret)
 > 
-> Best regards,
-> --  
-> Shashank Maurya <shashank.maurya@oss.qualcomm.com>
+> base-commit: 654ae5d73c05bd2943d65636ce6cd0aa46e62f18
+> -- 
+> 2.53.0.windows.1
 > 
