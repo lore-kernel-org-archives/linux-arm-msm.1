@@ -1,195 +1,183 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from smtpbgau2.qq.com (smtpbgau2.qq.com [54.206.34.216])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A980933F368
-	for <linux-arm-msm@vger.kernel.org>; Thu, 10 Sep 2026 03:26:46 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E5B28311C15;
+	Thu, 10 Sep 2026 03:35:05 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=54.206.34.216
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789010808; cv=none; b=KjKC/Q9hz8WHwRIYZYIVB6TfZfkPXdmzTeyq0XWEvHXFxHddjTQ+3wbsyfj2OtgC9jj1MP+owvO0pKsL5HaV66yyviP9QuzXDRk3u+SVZ407+XbDQdrsC6Q6Ng58QKnCGFrGfbUCYLc9Ca51OspwAePUDeyGzyQmU3vzi1Jz7zM=
+	t=1789011311; cv=none; b=qaVXHPVwWtkDs3CHY1T89yXUhhEKQ2WaGRa61c/tvNLQccakyUchgy87+TiCFpJPPui6dkLHbzWvkPaHntK4+iPdFu0aqz4w6y8WLL/FN1tZ6B/J34CJ3lk82NXiZ04WZw3snEZtCV/oS+P9yzpNc7R0TzAMvKXniHiWcSzlmgQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789010808; c=relaxed/simple;
-	bh=UJnFcG6qwNrgHEmfO6bvSB+lMsHMJEjnj9V4eTIYsac=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=HVwB4xSRJJVUqcRxzC6PKlzvf0inH39zjH2toxLtbyidJB0vv3U98Qmdx7+cJeqbkx0oT+HEWp1PH83iaAC2KEoaCAzPHYFAN33CnLXkiaE4o3fBhM97bkIUoV2tmiKxjlhzPz1CKHD2r2tSz3a+c2T0Zb6YQ86m9ksxlzwKpT8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=hfSOz5C8; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=N15ccGIZ; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="hfSOz5C8";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="N15ccGIZ"
-Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68A1mDRA3605675
-	for <linux-arm-msm@vger.kernel.org>; Thu, 10 Sep 2026 03:26:45 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	szOFuM63HR18UcmMmXnvtaunzOu+6qWLkKEnlyU6mwk=; b=hfSOz5C8U5Y22/cP
-	JwVkDDbJUsmcSEr5wkd3kn0qRZkuG9n6C6wjTXRr2kDpZpdrltlMWklgkWB6PhmU
-	ZSpetBymH4hRGjEGdHvd4oQuDRbOOS4IJi69+mEVIZIbmIjOJ+plKF0YkLjF/qw8
-	5iSQeIwcwsJHEG7lGFZUEiOR1ddV2g+jDizeU/3ClE++P3ik8UZGcww6ygCUCHjK
-	m/vJTiSk4b49l2BKVxTLx5TVIV3ISsJSzAoWbbyZwJkVaK7F28AOwrMKU8jF86dT
-	0rsPeFfRSWoo3iueJKFdCd0eheC801Qkf1DW/GSjISbRuEntb3vQQGMxpI2s+vo2
-	fKE8bA==
-Received: from mail-pf1-f198.google.com (mail-pf1-f198.google.com [209.85.210.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gkcyfswbx-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Thu, 10 Sep 2026 03:26:45 +0000 (GMT)
-Received: by mail-pf1-f198.google.com with SMTP id d2e1a72fcca58-8699b293a80so263120b3a.0
-        for <linux-arm-msm@vger.kernel.org>; Wed, 09 Sep 2026 20:26:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1789010804; x=1789615604; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=szOFuM63HR18UcmMmXnvtaunzOu+6qWLkKEnlyU6mwk=;
-        b=N15ccGIZi9yg9U9oQpsYhMMFXmU2vFEGcM+5qA7y1YxEqmc7Pi8D4JOImTXghdPqTK
-         n9s38mNSpTPXJ7aNrCGdqYmttj9GUUjM5GuFsJJFgakHLEgxDn675iu1NMpN1n9oDJp5
-         P0r+SnLkASuHFvvy5Lqn7gVXMJgsMO12ipxjyxcHecupCTpQkX9/2uPkfc7Lg9JGT3KD
-         7SAKm2PE0rfgZ0LuAINda8tD7NZGwftytiIvvo1NpS5C7djZ6HfuYrPZC4lqH8KMW+DH
-         NC0Z38CYe/Zm0Ee26IMxAzhII3KJlthDnuupnYIDx9dTnxvWvWEvhXVsxUia1IvuOOTm
-         z/dA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1789010804; x=1789615604;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=szOFuM63HR18UcmMmXnvtaunzOu+6qWLkKEnlyU6mwk=;
-        b=pLPnsHrsMEP3M+P6BLDgyhjzjW5Pn7JzTrhKIK9UbTnTaq1i2cP0p6cAG+9c92v1n6
-         zFhPThiDgVGYt3JgVNHUH4E5OMUqvpHraLHca8s5a3bcZt5WsrvJ/6jdPaxiAID4Sts/
-         Qat98Deo+p3dTgyIlQMmouPUcobZ3eQSPPS6HnU6HDRFpOhLYYQd/DXfDb+fpFeyrqcl
-         MdSphfEc/MtdiQw/X21xvgp8gvDh0674QpgpXQOeBkc7I2ZVHVcrpnu57z8aZA6q3BE9
-         oqpGT2gbrCjlUgTpR7opy+rvGyrOMcY2i4YEofMfKt+Xpn8GXaCsdFqJN8eP+kp/+4ZZ
-         HinA==
-X-Forwarded-Encrypted: i=1; AKwUvBw2k8AO3yZl05d5su9JqVv24/TrOSndNLJbvyNvi1ipw+KUKio3CORQdizpjsVxL1P0icvno7aZfdrb9gzo@vger.kernel.org
-X-Gm-Message-State: AFuF++mJ8YvxNg4Fy95LCX1P2zfEoggwRuoD7kffzrq820vXWvWEN7Tq
-	ZRqVhXQN8YYPJJSC4e6fAGK1/wyG6SovJPoujE0UcASgrJQaYM54JxIQxOi0+V+tjc/ROf5Ewgc
-	yV1blRIFrxAmaWMJGGsGVmwx/76rxyBRFmrZlQ7h1lqNwPszqI8Z8Fpfxr7S5vzn8lYdL
-X-Gm-Gg: AYBFou1/u32v4lvYbwhUjKvGT9XrRB3gmCsg6wOJpfcSMDREcuM6WpcXVQjNBVDcjTJ
-	Xq90Bu5+62h+SC386nPU8MzeyXK+Jht51RRHOTrfUuwdjc1eIuDu2ykb/hPtpxvSF7Vrr3EkzzF
-	sY1yyNzxwMHRq6XWjmw3fWLNLwJOFwtM/q3mep6rnxj/PSXUeiz+yovTf87IWwdkXa1QxzfQQA4
-	rBcjG+vOxGtOoM1Gtq0Q4/Y3tl9bsBRy1rwOEvo3Py8g6GmdEvGz+e/fQRpd/DB7xSWwEB9ioSA
-	pM5WFTVnQgMcX6Eu1xc95Oa+VoeoSdJ9jN2i9kpKIQnq682kZJrZX7CwZMBbIP2kWpFELCbAIGp
-	u4Os2ZkyHZYYRmapOZhrxTJt8SxE6FN5s
-X-Received: by 2002:a05:6a20:1605:b0:3d1:66cb:d49 with SMTP id adf61e73a8af0-3da39b71971mr63167020637.4.1789010804538;
-        Wed, 09 Sep 2026 20:26:44 -0700 (PDT)
-X-Received: by 2002:a05:6a20:1605:b0:3d1:66cb:d49 with SMTP id adf61e73a8af0-3da39b71971mr63166947637.4.1789010803991;
-        Wed, 09 Sep 2026 20:26:43 -0700 (PDT)
-Received: from [10.218.35.45] ([202.46.22.19])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-333959d5f69sm45688920eec.0.2026.09.09.20.26.40
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 09 Sep 2026 20:26:43 -0700 (PDT)
-Message-ID: <8293c4b5-948c-4859-b63e-835ec35ea90d@oss.qualcomm.com>
-Date: Thu, 10 Sep 2026 08:56:38 +0530
+	s=arc-20240116; t=1789011311; c=relaxed/simple;
+	bh=uwbLdH4JlMUhHwB9Ehu4aTO25qAW+UrPjFrmpWTCWMM=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=kELMnwW+IFfxB/yqt/78b6orWuAV6gz+wWtVDY9lYbRjxJ8RFaVLMBWdzmW42icP+pML7wfToMs3C0gV9p0kx3Q8WxRpCsstnFE1TAOCkjXlwD/U1R42dpbsQJViGHqCpoJp/Lh75ZS6xGQs17Xn0XQ/iaseloTR0geEKqI8Op8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=radxa.com; spf=pass smtp.mailfrom=radxa.com; arc=none smtp.client-ip=54.206.34.216
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=radxa.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=radxa.com
+X-QQ-mid: zesmtpip3t1789011270ta45063a6
+X-QQ-Originating-IP: mzJpXuLuvAHubzsSSmDTo7/IgQ5p7XcdOadsdYhpsIM=
+Received: from [192.168.30.32] ( [localhost])
+	by bizesmtp.qq.com (ESMTP) with 
+	id ; Thu, 10 Sep 2026 11:34:24 +0800 (CST)
+X-QQ-SSF: 0000000000000000000000000000000
+X-QQ-GoodBg: 0
+X-BIZMAIL-ID: 6148723628812340598
+EX-QQ-RecipientCnt: 9
+From: Xilin Wu <sophon@radxa.com>
+Date: Thu, 10 Sep 2026 11:34:24 +0800
+Subject: [PATCH] media: iris: Add SC8280XP platform data
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v6 3/3] PCI: qcom: Implement shutdown() callback
-To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
-        Manivannan Sadhasivam <mani@kernel.org>
-Cc: linux-pci@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-arm-msm@vger.kernel.org,
-        Lorenzo Pieralisi <lpieralisi@kernel.org>,
-        Jingoo Han <jingoohan1@gmail.com>,
-        =?UTF-8?Q?Krzysztof_Wilczy=C5=84ski?= <kwilczynski@kernel.org>,
-        Rob Herring <robh@kernel.org>, Bjorn Helgaas <bhelgaas@google.com>
-References: <20260909-shutdown-v6-0-62b7bd123236@oss.qualcomm.com>
- <20260909-shutdown-v6-3-62b7bd123236@oss.qualcomm.com>
- <562fd574-a798-4b57-98fd-dc8e7c09f7f0@oss.qualcomm.com>
- <468f4ca4-e52e-48b3-bd60-20cadf7f311e@oss.qualcomm.com>
- <80f626f9-8a0d-49cb-a592-14195900e997@oss.qualcomm.com>
-Content-Language: en-US
-From: Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>
-In-Reply-To: <80f626f9-8a0d-49cb-a592-14195900e997@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-GUID: Vu5W1hgOunDWNRraPe4fqCfnzhINUkIn
-X-Authority-Analysis: v=2.4 cv=GNqdgeNK c=1 sm=1 tr=0 ts=6aa22375 cx=c_pps
- a=m5Vt/hrsBiPMCU0y4gIsQw==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
- a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
- a=VwQbUJbxAAAA:8 a=KKAkSRfTAAAA:8 a=EUspDBNiAAAA:8 a=EfmTqkNx2LSR9vyAH8wA:9
- a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10 a=IoOABgeZipijB_acs4fv:22
- a=cvBusfyB2V15izCimMoJ:22
-X-Proofpoint-ORIG-GUID: Vu5W1hgOunDWNRraPe4fqCfnzhINUkIn
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTEwMDAzNSBTYWx0ZWRfX6AOEeOF5BJys
- m1lUPaX/hAKHHPutd2z1mctX7iiRr/pN7YWbDrRQ9zIplY5vlh4pa04ir2V+zzz8v1ii0g4/4Kn
- Ly8gwFZDom9k0rPxn4cAIOLYhX4xu+FXuMPNw/jpSij1FJspRV4W26xiL3wVoJCkowOer03JOdW
- QDe68L9W/lhXOjJRF1/ZnxPz/XMcw/IpV40oDfa26qxrltPtklRjQNCIwRnBORD4F6Hk0GUTn2o
- YB/CbsaPbndt451PgQUVTGl4VCsC7bjFRX0w3bkAsz8g5yicJ3Hx3AQc4aypWfm42EBtidqOMYI
- ThLZurjqb3dpMw8rngJWOlRjIR3Zd+LEB9slwSlMuxzwM4+UnLzSudU5rIbVzPRNHSs+D/Hwq6L
- R3PHAEbY6J+Qn9xXW6AI1F9roY9FqfpstjXqNF5CHqkme1NELV7BY6W/IXISCkaotEwWtYzg7kk
- PlGt/EM0AmLxBvC5Qig==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTEwMDAzNSBTYWx0ZWRfX+LtY+8SA1I5F
- l6ooCQIvddnck2T/w1hcfo3JB0ud4hcFKxPOnK6k5cIvIzhpc/hl9U2sK7KYvWMTujH8DmHRrgc
- O4inArycFBRcqbFMakrGQ9izl7QAn28=
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-10_01,2026-09-09_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 impostorscore=0 priorityscore=1501 adultscore=0 phishscore=0
- malwarescore=0 bulkscore=0 spamscore=0 suspectscore=0 lowpriorityscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609100035
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260910-sc8280xp-hfi-gen2-v1-1-ea51d0386fdf@radxa.com>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXMwQ5FMBCF4VeRWZukGprWq4gFvYOxKOkgEvHue
+ ll+Jzn/BUKRSaDOLoh0sPASEoo8Az91YSTkXzJopY1yhULxVlt1rjgNjCMFjc5U3pRlWq2D9Fs
+ jDXy+zab9LHs/k9/+IbjvB+19/t11AAAA
+X-Change-ID: 20260910-sc8280xp-hfi-gen2-965c64428089
+To: Vikash Garodia <vikash.garodia@oss.qualcomm.com>, 
+ Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>, 
+ Abhinav Kumar <abhinav.kumar@linux.dev>, Bryan O'Donoghue <bod@kernel.org>, 
+ Mauro Carvalho Chehab <mchehab@kernel.org>
+Cc: linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, Xilin Wu <sophon@radxa.com>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=openpgp-sha256; l=4474; i=sophon@radxa.com;
+ h=from:subject:message-id; bh=uwbLdH4JlMUhHwB9Ehu4aTO25qAW+UrPjFrmpWTCWMM=;
+ b=owGbwMvMwCVmdFg0fe08Iz/G02pJDFmLVB37N4s//3Y6dV7H97iVdpNbnd87HbxoY7L8xOs0F
+ qtlF547d5SyMIhxMciKKbIoxDPMZa/MvfZUrFQPZg4rE8gQBi5OAZjIt1sM/8za/qaY3uc4r8nd
+ x+Z1wLK5ZJ9mz+xoxY9Zxzl/uk6ceY+RoatJ7fwP7sT+i7kr+hyrZ3+79FXHkidwvaT+F95N29f
+ dYwcA
+X-Developer-Key: i=sophon@radxa.com; a=openpgp;
+ fpr=205F009D07796DD6E516752E32C31567AD9E324E
+X-QQ-SENDSIZE: 520
+Feedback-ID: zesmtpip:radxa.com:qybglogicsvrsz:qybglogicsvrsz3b-0
+X-QQ-XMAILINFO: M9t1NOw+1P4Gxc7+Av82q/rWjdR0s8eOgMQ8d3wCBYQvXefDu0daImds
+	U63W/4ynV96W3Qh6gu5vz3WW0Cyoc35cHxqtoRi6jrYrmbTAtlE0sJ2yRVHRxZlFRcTudCe
+	szApwQQThCGTjzAP3IQg7Z9+rKS4UdPFT1kLWKIgezBlVSI8a82BLQ1mkSspz1fDZBpjHz3
+	H5png+fx1oOXY2/xgkJoS4GzJ2OxigRMpEQrIodPn/dSlGfgSZqv2OASHMDaOevRzhG7PAw
+	Sz9lFG8ZTdxQ4NXPFeA+X794yO8Os5MTzTgzqs32XTLjk51YFPbX+cYi+0ItCya8jha8HBC
+	jvrhUvcC8Wkj0iQhGKL6Cl8Zht9BwCz86GAmwaRBYFo/dwntnIADIEqcbcDmv1DLW4+Fbab
+	Bb64HRsEFkilyoN0EuvhBI8ADyd6UPYmTBB1F4emraIdFpRzs5Q9re3PA0/E17WyjSZy0pd
+	Ci5h5dRqHphREzQgXLfSi20gvn8mH42oE9VwE5HGNndCP9iZuM1MU1d2to2ySi0k9I9s5op
+	BWbH3SUvZFQCJhwEDRUWc+Z0ZeQF+7Ni0wcIZAz/jm+H23bI+nJJ8MozapJOMmnVarUyG7J
+	XctVKegCg94ifeb01C7GBiKjB3KOTYZ9id3gtvyAS+WdmiaZw1cjV+o+TGFJX/KLL6ngrg4
+	pJtrjT+cMJE5Q9vbYNGoTTyQGLQJiPeFB7lmNlZjK0PmfjmPW40ukBUzPFU7gd2fYVKb8k1
+	xYHwdg6MKUnHdiHy0rFzPaj6JGgsycLvyuZoCm6VmWwClPfWqMmJhg2Xd9OzYtT/Xqxk89n
+	h6ARzzVucXababCr/NUNYk02Nfd4n/G4cxP/FYvG/QHx0vwUayE/HuBcmW304NLisUFwVz+
+	FtUXZqwNUhgzQEV05mkraZoh55uTeUjgLj9s6XsnjoRpH8APFTnE4DFt/bY0aKAdP1ZHAHi
+	caQNFcGVpuqNS5ztQOSNlmkQMKb7T8gKcuE+hk5Tzq9HhWq3o3SrwW3r1VvuSd70jzefydO
+	fvU8w39fvtLID5ACsJsCkYBlD/wS9rtv1oE9KzDw==
+X-QQ-XMRINFO: NI4Ajvh11aEjEMj13RCX7UuhPEoou2bs1g==
+X-QQ-RECHKSPAM: 0
 
+Add platform data for the Iris VPU on SC8280XP and hook up the
+qcom,sc8280xp-iris compatible.
 
+SC8280XP uses the VPU2 programming model, but can run the newer HFI Gen2
+firmware.  Describe both the legacy Gen1 firmware and the Gen2 firmware
+so the driver can select the available firmware at runtime.
 
-On 9/9/2026 6:48 PM, Konrad Dybcio wrote:
-> On 9/9/26 2:40 PM, Krishna Chaitanya Chundru wrote:
->>
->> On 9/9/2026 6:06 PM, Konrad Dybcio wrote:
->>> On 9/9/26 2:24 PM, Krishna Chaitanya Chundru wrote:
->>>> From: Manivannan Sadhasivam <mani@kernel.org>
->>>>
->>>> PCIe host controllers should bring the link down cleanly before system
->>>> shutdown/reboot proceeds to remove power/clocks from the controller.
->>>> Without this, the link may still be up and endpoints still have
->>>> transactions in flight when power/clocks are cut, which can trip SMMU
->>>> translation faults or NoC protocol errors.
->>>>
->>>> Reuse dw_pcie_suspend_noirq() in the shutdown path to force the link
->>>> into L2, putting it into D3cold.
->>>>
->>>> device_shutdown() runs with interrupts enabled, unlike suspend_noirq().
->>>> Mask the chained MSI IRQ(s) and the Global IRQ before tearing down the
->>>> link and clocks/PHY, since a late/spurious interrupt could otherwise
->>>> reach a handler that touches now-unclocked PARF/DBI registers.
->>>>
->>>> Signed-off-by: Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>
->>>> Signed-off-by: Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>
->>>> ---
->>> [...]
->>>
->>>> +static void qcom_pcie_shutdown(struct platform_device *pdev)
->>>> +{
->>>> +	const struct qcom_pcie_cfg *pcie_cfg = of_device_get_match_data(&pdev->dev);
->>>> +	struct qcom_pcie *pcie;
->>>> +	struct dw_pcie *pci;
->>>> +
->>>> +	if (pcie_cfg && pcie_cfg->firmware_managed) {
->>>> +		/*
->>>> +		 * Firmware owns the link teardown and clock/PHY shutdown in
->>>> +		 * this mode; Linux only owns the chained MSI IRQ(s), which
->>>> +		 * still need to be masked off before shutdown proceeds.
->>>> +		 */
->>>> +		pci = platform_get_drvdata(pdev);
->>>> +	} else {
->>>> +		pcie = platform_get_drvdata(pdev);
->>> This is no less than an intriguing choice.. please store the same
->>> element in both cases so we don't have to do this
->> for firmware_managed solutions struct qcom_pcie *pcie is not being
->> used/allocated at all. it will waste of memory if we allocate memory for just
->> this use case. - Krishna Chaitanya.
-> Should we move it to a separate file/driver then, perhaps?
-> We could share the ECAM ops in e.g. pcie-qcom-common.c
-I will let Mani to comment on this.
+Set up the SC8280XP clocks, resets, power domains, bandwidth tables,
+format list, capabilities and DMA address limit needed by the Iris driver.
 
-- Krishna Chaitanya.
->
-> Konrad
+Signed-off-by: Xilin Wu <sophon@radxa.com>
+---
+ .../platform/qcom/iris/iris_platform_common.h      |  1 +
+ .../media/platform/qcom/iris/iris_platform_vpu2.c  | 36 ++++++++++++++++++++++
+ drivers/media/platform/qcom/iris/iris_probe.c      |  4 +++
+ 3 files changed, 41 insertions(+)
+
+diff --git a/drivers/media/platform/qcom/iris/iris_platform_common.h b/drivers/media/platform/qcom/iris/iris_platform_common.h
+index 974809509146..5b5306dcd69f 100644
+--- a/drivers/media/platform/qcom/iris/iris_platform_common.h
++++ b/drivers/media/platform/qcom/iris/iris_platform_common.h
+@@ -57,6 +57,7 @@ extern const struct iris_firmware_data iris_hfi_milos_data;
+ extern const struct iris_platform_data milos_data;
+ extern const struct iris_platform_data qcs8300_data;
+ extern const struct iris_platform_data sc7280_data;
++extern const struct iris_platform_data sc8280xp_data;
+ extern const struct iris_platform_data sm8250_data;
+ extern const struct iris_platform_data sm8550_data;
+ extern const struct iris_platform_data sm8650_data;
+diff --git a/drivers/media/platform/qcom/iris/iris_platform_vpu2.c b/drivers/media/platform/qcom/iris/iris_platform_vpu2.c
+index bbdbf21961d7..e0cca55c0873 100644
+--- a/drivers/media/platform/qcom/iris/iris_platform_vpu2.c
++++ b/drivers/media/platform/qcom/iris/iris_platform_vpu2.c
+@@ -41,6 +41,12 @@ static const struct iris_firmware_desc iris_vpu20_p4_gen1_desc = {
+ 	.fwname = "qcom/vpu/vpu20_p4.mbn",
+ };
+ 
++static const struct iris_firmware_desc iris_vpu20_p4_gen2_s6_desc = {
++	.firmware_data = &iris_hfi_gen2_data,
++	.get_vpu_buffer_size = iris_vpu33_buf_size,
++	.fwname = "qcom/vpu/vpu20_p4_gen2_s6.mbn",
++};
++
+ static const u32 iris_fmts_vpu2_dec[] = {
+ 	[IRIS_FMT_H264] = V4L2_PIX_FMT_H264,
+ 	[IRIS_FMT_HEVC] = V4L2_PIX_FMT_HEVC,
+@@ -135,6 +141,36 @@ const struct iris_platform_data sc7280_data = {
+ 	.max_core_mbps = 4096 * 2176 / 256 * 60,
+ };
+ 
++const struct iris_platform_data sc8280xp_data = {
++	.firmware_desc_gen1 = &iris_vpu20_p4_gen1_desc,
++	.firmware_desc_gen2 = &iris_vpu20_p4_gen2_s6_desc,
++	.vpu_ops = &iris_vpu2_ops,
++	.icc_tbl = iris_icc_info_vpu2,
++	.icc_tbl_size = ARRAY_SIZE(iris_icc_info_vpu2),
++	.clk_rst_tbl = iris_clk_reset_table_vpu2,
++	.clk_rst_tbl_size = ARRAY_SIZE(iris_clk_reset_table_vpu2),
++	.bw_tbl_dec = sm8250_bw_table_dec,
++	.bw_tbl_dec_size = ARRAY_SIZE(sm8250_bw_table_dec),
++	.pmdomain_tbl = iris_pmdomain_table_vpu2,
++	.pmdomain_tbl_size = ARRAY_SIZE(iris_pmdomain_table_vpu2),
++	.opp_pd_tbl = sm8250_opp_pd_table,
++	.opp_pd_tbl_size = ARRAY_SIZE(sm8250_opp_pd_table),
++	.clk_tbl = sm8250_clk_table,
++	.clk_tbl_size = ARRAY_SIZE(sm8250_clk_table),
++	.opp_clk_tbl = sm8250_opp_clk_table,
++	/* Upper bound of DMA address range */
++	.dma_mask = 0xe0000000 - 1,
++	.inst_iris_fmts = iris_fmts_vpu2_dec,
++	.inst_iris_fmts_size = ARRAY_SIZE(iris_fmts_vpu2_dec),
++	.inst_caps = &platform_inst_cap_vpu2,
++	.tz_cp_config_data = tz_cp_config_vpu2,
++	.tz_cp_config_data_size = ARRAY_SIZE(tz_cp_config_vpu2),
++	.num_vpp_pipe = 4,
++	.max_session_count = 16,
++	.max_core_mbpf = NUM_MBS_8K,
++	.max_core_mbps = ((7680 * 4320) / 256) * 60,
++};
++
+ const struct iris_platform_data sm8250_data = {
+ 	.firmware_desc_gen1 = &iris_vpu20_p4_gen1_desc,
+ 	.vpu_ops = &iris_vpu2_ops,
+diff --git a/drivers/media/platform/qcom/iris/iris_probe.c b/drivers/media/platform/qcom/iris/iris_probe.c
+index e4acf4a74f94..5986a5e77986 100644
+--- a/drivers/media/platform/qcom/iris/iris_probe.c
++++ b/drivers/media/platform/qcom/iris/iris_probe.c
+@@ -368,6 +368,10 @@ static const struct of_device_id iris_dt_match[] = {
+ 		.compatible = "qcom,sc7280-venus",
+ 		.data = &sc7280_data,
+ 	},
++	{
++		.compatible = "qcom,sc8280xp-iris",
++		.data = &sc8280xp_data,
++	},
+ 	{
+ 		.compatible = "qcom,sm8250-venus",
+ 		.data = &sm8250_data,
+
+---
+base-commit: df2908090cda368b01ff43709f51890076c56157
+change-id: 20260910-sc8280xp-hfi-gen2-965c64428089
+
+Best regards,
+--  
+Xilin Wu <sophon@radxa.com>
 
