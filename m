@@ -1,232 +1,327 @@
-Received: from DU2PR03CU002.outbound.protection.outlook.com (mail-northeuropeazon11011039.outbound.protection.outlook.com [52.101.65.39])
+Received: from mo4-p01-ob.smtp.rzone.de (mo4-p01-ob.smtp.rzone.de [81.169.146.165])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C0E423B635C;
-	Fri, 11 Sep 2026 21:09:46 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=52.101.65.39
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9C68E4A4F0D;
+	Fri, 11 Sep 2026 21:48:12 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=81.169.146.165
 ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789160988; cv=fail; b=aX6xt9yK7iIngeLYDdqb5Kb8esrCq+UQMbsKnZSC/igQMtMXHVcAe9NGSoOt7vTMZPGbzQO1irhbIarTmNSS0GALnN4IMOEAXJ2EM77u4h11MoD7hblHdy+PiMYLwCD84YAPlIevZZ2VZkZm5Uy//4nFgZagMkGD3XMl2sICVVE=
+	t=1789163296; cv=pass; b=CC5Z+TzJxVIs7dpBkmODd7Jq7jHtyNdCSryg5A4q0s7sDIRF4izxSl/WMudMp5G94NPUgedyPLT/wwXxJEEcXTzBh25Ygx52y0vo3eZlEvRDIsv8z9GNn9jwhgvUpWaGJs43a5xZwCyuwHsYK6Ly0wAoceqC60+alV8MozBdgqY=
 ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789160988; c=relaxed/simple;
-	bh=4oIO8u/CXUN+sFy9VqDnA7SBcF6+DZKzknyoR2JrLxU=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:Content-Type:
-	 Content-Disposition:In-Reply-To:MIME-Version; b=EbCc92bhdx8RhFOcF5vLa39NTiyO5W7vN1SFTdHbly1H7hlUEMW6LM3P0DNmjYpV7geOWFmqCYxTNsQbpPaRT8pwL2YAaFdsWChOENXdnXJcaBSYpbOQW0KmYG8y9zNCofISch8ymj83PjEovcv1ywa+GyUaSfJD5Du7Tr11T5k=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.nxp.com; spf=pass smtp.mailfrom=oss.nxp.com; dkim=pass (2048-bit key) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b=XEKyvV2b; arc=fail smtp.client-ip=52.101.65.39
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.nxp.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.nxp.com
+	s=arc-20240116; t=1789163296; c=relaxed/simple;
+	bh=ycUmqjr+j15i5WMteAkNalLy0jHrNrq78m43VLmnzVg=;
+	h=Message-ID:Subject:From:To:Cc:Date:In-Reply-To:References:
+	 Content-Type:MIME-Version; b=THEjQpq3aFFiDgokvxYrTfBKygo3U9pt+9iLVWVL7a0er+JNUG1prmCkmmHOFEtKlB+hjOaTNPeyHpnQ7JMxm0flL1mXlWr5hMBIYymDe8YcsPd+ujuS2RJsfL+4hLXrpegseMohip0jQbHZXWjfv8tFiFaE3ITF1wsuVVbjS/Y=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=iokpp.de; spf=none smtp.mailfrom=iokpp.de; dkim=pass (2048-bit key) header.d=iokpp.de header.i=@iokpp.de header.b=f5RgMYTq; dkim=permerror (0-bit key) header.d=iokpp.de header.i=@iokpp.de header.b=AajCHCLF; arc=pass smtp.client-ip=81.169.146.165
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=iokpp.de
+Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=iokpp.de
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="XEKyvV2b"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=YgFriERYVLvc05lNvNBgqzut/xOy37iBeqgCEuQ5JpjnAFCiv3Uk0qAJffBFqUevYi4CqifZB6UDJYXcik2mGjJ5AVJeiEFacjeq7UEkzOXcQumu3jZdRNhDwSQyFw14iKOgAYQzq1Mi/gdr7qPYQHyO7rKTQEQ0CZg4wXL5vMK2pDuZ5085fyBGAaT5YWa9BjesjGoDvRDr8ymRSrlztPEts6sM3jOWxLDQqGhsRfWPhCb+BcUxKN7eGWaDYqaNpbPnK+KecSFaTmh9NBnSx0wEcIEyV/H3++YJfI+P4LkMcYqsNOJ8R1ernJpvfo6UucI3Sq2ODbLDY3/Ypg3Cjg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=VfLkcYfM7u5aEuWbCbfkAYsUun/5v0qdzreRhQJ17W4=;
- b=nRHayyRjbk9kEVQ6tgreB9o8YlqPaHOyWPy3q7kxCLwPhIU2zlFurN/qwarwGt2J603OWD5wkHS9PXgZXBpgZaOE6OwlNz6f7rwHyx/WtM1mSoPAeYmP/qF7ARWQ52aRldPKhIo7ezyLNGIhSW69qYmvyAZMMFvH9/dRnSi6eudh92zAq/zAPM2LIBOo9Pea+LhjNGOlAWXlgTBvmTPoCN5wZfyDsdOwXgU/ut5fQUmr2hS9ZNP2d8d7jsE7dELI6KXel8Mvi21QgPPPIkoOcfxeKLle6mgWZVx9+aFnms920KKxE9KiClIeXLoHGYzPBs5gfQTVG3fNnoqeFp0ehw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
- dkim=pass header.d=oss.nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com;
- s=selector1-NXP1-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=VfLkcYfM7u5aEuWbCbfkAYsUun/5v0qdzreRhQJ17W4=;
- b=XEKyvV2bX0GlCGh2/3TsNVVrMEr2JFtw+wOU2nPjo16R0z6Gge2rg3V0Ft0hagG9HfQ4XPlmiO4jgB1hPYLh4vdmD914RgziOnFSi6YSH54bBuYXEurU1rbT3d7eYz92W2wNTmObL+dUYMiyUd1auFJRrcMi1a9jsfHHVqbPr+TbMBs2xQ6/8QFZhpQu8HnqPVkXAUuCxvALGn1N3vTQHKa6l66o8+8i15jqIJuLqOZcCMauWNx1mrDuGKNC9yYj2b82Lk7aE3vLli9A3oeE0ZN/9qxATTtrmmU0vMipZZnkxIrcXLxhl/lM42SMGR/Uc3pOsFPuQLFxuk5o8fNXzg==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=oss.nxp.com;
-Received: from GV2PR04MB11799.eurprd04.prod.outlook.com (2603:10a6:150:2cf::9)
- by AM9PR04MB7617.eurprd04.prod.outlook.com (2603:10a6:20b:286::6) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.406.10; Fri, 11 Sep
- 2026 21:09:41 +0000
-Received: from GV2PR04MB11799.eurprd04.prod.outlook.com
- ([fe80::2146:83a2:5329:b7c]) by GV2PR04MB11799.eurprd04.prod.outlook.com
- ([fe80::2146:83a2:5329:b7c%7]) with mapi id 15.21.0406.007; Fri, 11 Sep 2026
- 21:09:41 +0000
-Date: Fri, 11 Sep 2026 17:09:29 -0400
-From: Frank Li <Frank.li@oss.nxp.com>
-To: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
-Cc: Bjorn Andersson <andersson@kernel.org>,
-	Michael Turquette <mturquette@baylibre.com>,
-	Stephen Boyd <sboyd@kernel.org>, Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>, Robert Foss <rfoss@kernel.org>,
-	Todor Tomov <todor.too@gmail.com>,
-	Mauro Carvalho Chehab <mchehab@kernel.org>,
-	Konrad Dybcio <konradybcio@kernel.org>,
-	Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
-	Bryan O'Donoghue <bod@kernel.org>,
-	Loic Poulain <loic.poulain@oss.qualcomm.com>,
-	Vinod Koul <vkoul@kernel.org>,
-	Neil Armstrong <neil.armstrong@linaro.org>,
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-	Kishon Vijay Abraham I <kishon@kernel.org>,
-	Felipe Balbi <balbi@ti.com>, linux-arm-msm@vger.kernel.org,
-	linux-clk@vger.kernel.org, devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org, linux-media@vger.kernel.org,
-	linux-phy@lists.infradead.org,
-	Krzysztof Kozlowski <krzk@kernel.org>
-Subject: Re: [PATCH v16 3/5] phy: core: Add devm_phy_get_by_of_node()
-Message-ID: <aqRuCfmgPqa5h0y4@lizhi-Precision-Tower-5810>
-References: <20260906-b4-linux-next-25-03-13-dtsi-x1e80100-camss-v16-0-f7bd68b5369f@linaro.org>
- <20260906-b4-linux-next-25-03-13-dtsi-x1e80100-camss-v16-3-f7bd68b5369f@linaro.org>
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260906-b4-linux-next-25-03-13-dtsi-x1e80100-camss-v16-3-f7bd68b5369f@linaro.org>
-X-ClientProxiedBy: PH7P220CA0157.NAMP220.PROD.OUTLOOK.COM
- (2603:10b6:510:33b::23) To GV2PR04MB11799.eurprd04.prod.outlook.com
- (2603:10a6:150:2cf::9)
+	dkim=pass (2048-bit key) header.d=iokpp.de header.i=@iokpp.de header.b="f5RgMYTq";
+	dkim=permerror (0-bit key) header.d=iokpp.de header.i=@iokpp.de header.b="AajCHCLF"
+ARC-Seal: i=1; a=rsa-sha256; t=1789163098; cv=none;
+    d=strato.com; s=strato-dkim-0002;
+    b=f/5NYhka1D7iIUgBsnzzokn7zcC5XX4OFWKtWeZQmvWMZ9mSYCBnUEFDBA+nvPp1Iy
+    FnHvB89ahbQdAcfN2tfWU5R+h8edEL6S0lv7OWKPj/utArCf5bR28PVyJFsGC7l0w1ua
+    gnYsdlDFqtcsG4cBAWVVSNmgnoKBb3SRmhg6V3E579DqwZxHSQVuzjZJt7mN3AsExXPA
+    rZZUshijnSNpgyC85x9C2ByLWGg/xoPEltO6EW9Xvp4/HC+9qkMGFbfizexbzngXowBx
+    WGf/OfsMFA5Z2Khbejy6jVFNTpXBGxHs+4tvdKfBk8XA1NToPWmWmBSNeZzDzRih8rGi
+    Iswg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; t=1789163098;
+    s=strato-dkim-0002; d=strato.com;
+    h=References:In-Reply-To:Date:Cc:To:From:Subject:Message-ID:Cc:Date:
+    From:Subject:Sender;
+    bh=ycUmqjr+j15i5WMteAkNalLy0jHrNrq78m43VLmnzVg=;
+    b=cth0f/wtacQmjLvvl8syxe9R967N+tYhGYAYzNrWWXErlT/ARXXGLPLqeWxJ9LFYQg
+    vWOxIAVTimZFAhqhinCQZuTtPwRLyR7Klt7FHaGLhtnO0VVW5T31czcjn0ynOk2a5M4l
+    OozL/0FenauxH/88DWbq4/Z31rku6O5VCxQPDQe9bknFcN9tDr5FPsOnaKoTiZYCUWIW
+    bkCzT648Qy7hlOGtUGdQYcbIl2vQ5gRpFxyU8u6lyNMb4okVisc15e0UIwXNL3cniwMn
+    1MPn99Tl6gqEYyeRH87R7W+ap0Nefph6jcRYMxn5ZgzsrKF2u3HzKXaeiIeV/n+WamsD
+    UBYg==
+ARC-Authentication-Results: i=1; strato.com;
+    arc=none;
+    dkim=none
+X-RZG-CLASS-ID: mo01
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1789163098;
+    s=strato-dkim-0002; d=iokpp.de;
+    h=References:In-Reply-To:Date:Cc:To:From:Subject:Message-ID:Cc:Date:
+    From:Subject:Sender;
+    bh=ycUmqjr+j15i5WMteAkNalLy0jHrNrq78m43VLmnzVg=;
+    b=f5RgMYTqJfMquxhwtGA1DA8ll+WRybZZYXiUoW24vkwa75QjnUmbUvbvUzptfrMXPd
+    jKVqeQ0mcQ0B9bIlA72euuDYnwkJ+LIlAFE4yrirLgnA6IVjuSkd/0sMm7yqvgMaVeAi
+    2A4IzVVnYfbPGil13A0VqfYMzlPF8lwbDELAICK7XCu9Xug1zXeT5dHap/pPjeAqL6/N
+    lsShedLC77xvgfp5pBizkJcafoe9FLBb4jYuFW70RODHTI5BfB98Ay2h2pqyDq3OEdAB
+    KA9Mes98YQ1aMS5LlJJojjrJIxAonlOcLmCaLD71o6cmYjwHG3Ukd4XmP5DlhXOyMIVo
+    +Wdg==
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; t=1789163098;
+    s=strato-dkim-0003; d=iokpp.de;
+    h=References:In-Reply-To:Date:Cc:To:From:Subject:Message-ID:Cc:Date:
+    From:Subject:Sender;
+    bh=ycUmqjr+j15i5WMteAkNalLy0jHrNrq78m43VLmnzVg=;
+    b=AajCHCLFEu4bkgKHsBEN/GFCkWfWeG372Q42FB3qM+VArRk9jvVqzlSSDdsJqepvyO
+    tfbGFyMz9PXCnliZ/uDQ==
+X-RZG-AUTH: ":LmkFe0i9dN8c2t4QQyGBB/NDXvjDB6pBSe9tgBDSDt0V0zNriHg+YfT0rGaZpI+/63exJG3nKe+1cCDsnKpsYY+u4Ll0RlE="
+Received: from p200300c58729681c3f3e4b76edf8c1cb.dip0.t-ipconnect.de
+    by smtp.strato.de (RZmta 55.6.2 AUTH)
+    with ESMTPSA id ze37e128BLivUx1
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256 bits))
+	(Client did not present a certificate);
+    Fri, 11 Sep 2026 23:44:57 +0200 (CEST)
+Message-ID: <4c38f13af8f75020fefc35827463e9bc643b99f4.camel@iokpp.de>
+Subject: Re: [PATCH RFC] drivers/rufs: add Rust UFS host controller driver
+From: Bean Huo <beanhuo@iokpp.de>
+To: jaemyung.lee@samsung.com, Andreas Hindborg <a.hindborg@kernel.org>, 
+ Miguel Ojeda <ojeda@kernel.org>, Boqun Feng <boqun@kernel.org>, Gary Guo
+ <gary@garyguo.net>,  =?ISO-8859-1?Q?Bj=F6rn?= Roy Baron
+ <bjorn3_gh@protonmail.com>, Benno Lossin <lossin@kernel.org>, Alice Ryhl
+ <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>, Danilo Krummrich
+ <dakr@kernel.org>, Daniel Almeida <daniel.almeida@collabora.com>, Tamir
+ Duberstein <tamird@kernel.org>, Alexandre Courbot <acourbot@nvidia.com>,
+ Onur =?ISO-8859-1?Q?=D6zkan?= <work@onurozkan.dev>
+Cc: linux-kernel@vger.kernel.org, rust-for-linux@vger.kernel.org, 
+	linux-block@vger.kernel.org, linux-scsi@vger.kernel.org, 
+	linux-arm-msm@vger.kernel.org
+Date: Fri, 11 Sep 2026 23:44:57 +0200
+In-Reply-To: <20260912-rufs-private-v1-1-716db733e655@samsung.com>
+References: <20260912-rufs-private-v1-1-716db733e655@samsung.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+User-Agent: Evolution 3.44.4-0ubuntu2.1 
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: GV2PR04MB11799:EE_|AM9PR04MB7617:EE_
-X-MS-Office365-Filtering-Correlation-Id: 984bdb43-be3e-4649-1827-08df1048fee9
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|19092799006|7416014|376014|1800799024|366016|23010399003|4143699003|11063799006|56012099006|10067099003|18002099003|22082099003;
-X-Microsoft-Antispam-Message-Info:
-	eiSVYMYoKl6jAJ36gHfnbCHShzahgUA7XfiQhvyRnil339Mf0m/ld6CLE1PqUdH0WM/hqF8vZ33si4AqDe5Dn5iQ/EnPONPN4OXKRGB8Qo5xJR4lwQfPRPubF0uZst1X/6d51uoHHi7VFDebhHhPkGkPJbtTFbdKYvHsj0M2RqwPHYJUsH8b1JbzTd7fUMpCLGNksffenvJwgn3/AmctBQuWxdwjMFEQ3elpbmbxGn10JwNi5qlLzpHyL0dE7FWvA2fpMsrBXOMKHHU6AqxOlDvLK9vK3lPti82iM25huatxbtdaqvRwgzkCqSlFgsMsLO8nw3UzOrllZV7bOm+J5CMd0bZ+d+vARr706VHas3vSd1yFR55UnhsM71M/BpuGq9Iokv6b1HroUzOkkeE9B9QuAc+vkL0NJyJPzmMNH/JqU9/d5agFvKwBcefpC0ogP3dLwFW1/WRhKvdww/UCWRjveEy47YBEREgAJ2SPo1q4mHIhnqJW32Tl98RTQL7sPgA3c0pPThQNWgTDq2K4fFFLwOELLh+EkdL6oYJeVn7KXqA8o/HqiDDmU/cC7zGL2AZlRRfN9GzAz7m3gX6JE5wcwL9+EtltUhb3EViiouKGnH7sxafzraMBmWb9/HpjF1G7/+Ghf7mc2GG8UnwO2W9/NClxak9b76aGhNXbIGM=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:GV2PR04MB11799.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(19092799006)(7416014)(376014)(1800799024)(366016)(23010399003)(4143699003)(11063799006)(56012099006)(10067099003)(18002099003)(22082099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?B4Z01PYrcR5Q99tuSy7lQnim8RFg7MVnLMbcjQXb4UT52fXXwBjiRWBLrQbq?=
- =?us-ascii?Q?+4qOoLQhSIuUfBV6uz6pNI890zymA1SsNLelMR3PLkGYwD45NZUl4w9SF6Rb?=
- =?us-ascii?Q?cBgBYL1OwTVXbul1y5ZAVT/1HQH/F9h8urf6neHCBRRmgK0UyEG22qDXzCEI?=
- =?us-ascii?Q?6VgxpO8grbbvxt8LFreZGSZii0fO/O/d1nmjEX0/cz3qNBNKUF4urdYvqTEO?=
- =?us-ascii?Q?IAD2pWQkVVZzE3XkD6zMqAeWfHXsCkwhgnwPswOJhB2luCtuM858to51Lb5J?=
- =?us-ascii?Q?5iiQVHt1shH7Sh/ebU+xDs439iqY/Vqz5QwPIr6cn3CT9nqJJAtaSdwfndix?=
- =?us-ascii?Q?2OrZI6tl2buivwDud6FYGzrfC6CplbmzI+PY1w++yJammhAPOU4O0Ui2Ah5A?=
- =?us-ascii?Q?riarQJSQG2w9fLb/WdYzRk06Pihni/YDmz/7Z5HXI0KRuFNhGK6kKx2n1j/i?=
- =?us-ascii?Q?wM4SM1NiW6a39JkbVWxuSC40ZgGcR05Q2TIdNA/w7UGoyiaJvetVY7yIKKMk?=
- =?us-ascii?Q?6644CFT4mz1O19GZ+4UaB2cTOmizz1jTzfQWsAvacVdQv2MM45az/ENghZl+?=
- =?us-ascii?Q?K6EzyyQmRWPb/r6VQAUNbRmT3WQra3/G0iKaVprr28LlTu/S0Q6oRNY3oNIo?=
- =?us-ascii?Q?c7WsSX9eIUFAu+9Mii6+aA6NLlHi0dBLMeFPfHLMZiDn/foR8sJ6rUm6ETSm?=
- =?us-ascii?Q?bALvrFoppGdD+En6UGIJGefV1+da4LS1H4LWgTgecQQSclJt6gH3j/YIYeQR?=
- =?us-ascii?Q?5DVEPeelz36nbRvlPpSmle6s9MmJcex5qy7sb906CqE47agT7JX50LfLVagx?=
- =?us-ascii?Q?x81KkeH3ZznBNGWIEXOtzkwpOTDmI7qk9x3+aTWlDt6IrHOEJPCaoUYqjEzE?=
- =?us-ascii?Q?gRrKIfsnT241jUaSZr1UvReaLL0FSAhkyxHJYzLFjLU1VoVf8mXjkzpnukhY?=
- =?us-ascii?Q?VyTwkxAYQIEfDshDglViNRhozChpyZvNkN9DyR4yAaPMfz1RedCrZoYpgdrE?=
- =?us-ascii?Q?h/swjUxnw1rK8WIYZNtbVidBSDyXBY7MhG/L6UiLVr/EUAasH3cIw8smc/Zw?=
- =?us-ascii?Q?8viFS2xEsuyVZ+uNvjdVRj6nZr29I/Mbscy+aYMIAvUOrzfNbIhvr+eAkwXR?=
- =?us-ascii?Q?Qv2I0tMU081twcaCMgEzJ+Tz4NvIxOCyc7uZGX7RL29J8c8ihwqe5RhaZlB0?=
- =?us-ascii?Q?ZofIdZR8KdqRvRwh86bqIRY9FX1+rYPiC5T4HjvpfCM3/ds6VNWAN3ZdL9s5?=
- =?us-ascii?Q?dQABJEEPwNl2yMlGYuRBgRsr95t4zPOOKQUvuWYU9fAyMkWQNkNOWJRw+ipc?=
- =?us-ascii?Q?zJPUDHgcNwionc3diKxUU7i8ArwdV2x3PqthGUUdyQ2ylecTgOAZrYauUCfH?=
- =?us-ascii?Q?98vpYQqL/NikXbaBLMlwhP79MQTNkeX6917RnxTALIW6Tmq+qiwx5AOFVMrZ?=
- =?us-ascii?Q?V3Y1BhxQ/0HuDkeLYwlCphmhzBCOLb1uDGF0jn1AYajHU8MoaLXxUTirLlq6?=
- =?us-ascii?Q?khxEhiDsKC9gyuYtP7l9k4T5bMrJ4wL295y0fCrreM7cZa15Jq0yU0uqWTDY?=
- =?us-ascii?Q?aZex/30DPyQxgk8F41Fdf6uw6FyBc913IdcRaIZy3u+GMllfELjWoxrWQLHV?=
- =?us-ascii?Q?xrX7rVRITAjvFU4ZpM3yt4iXhuoDAnTeFIumtvzP8xH1ORKmV+A6nw3VaqhU?=
- =?us-ascii?Q?trjPqHoF3DxMtL9uhn0RjMMOfQkgGGEy+AJsr0idvSnOhaaVcXJjgrkLRUsj?=
- =?us-ascii?Q?kXTwtp1ndVgEf3XdNLfzbdsDbIZRyIzc1fXyQwcXJzTELomrQ8OM?=
-X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 984bdb43-be3e-4649-1827-08df1048fee9
-X-MS-Exchange-CrossTenant-AuthSource: GV2PR04MB11799.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Sep 2026 21:09:41.2335
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: gVO2nVGwhqMUqZlndwF5QUt5Tuou9Rv2neVOIRtdKVcTn9M3HslCVNSOnqEyZ2RoBTFQLcGL//W2w8wf6MdNL+6avG4iRnqIE4e+nXK2I+1y43iyTdoFSp3Oet8ukpd5
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM9PR04MB7617
 
-On Sun, Sep 06, 2026 at 12:52:04PM +0100, Bryan O'Donoghue wrote:
-> Add a devm variant of phy_get_by_of_node() to allow for the familiar
-> pattern of having devres automatically release resources on the driver's
-> exit path.
->
-> Signed-off-by: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
+On Sat, 2026-09-12 at 00:52 +0900, Jaemyung Lee via B4 Relay wrote:
+> From: Jaemyung Lee <jaemyung.lee@samsung.com>
+>=20
+> Add a Rust UFS host controller driver that exposes UFS logical units as
+> native blk-mq block devices without depending on the SCSI midlayer.
+>=20
+> Implement host controller setup, UIC link startup and power-mode
+> configuration, device and unit descriptor discovery, query operations, an=
+d
+> SCSI protocol command construction. Support normal read, write, flush, an=
+d
+> discard I/O with coherent UTP descriptors and owned streaming DMA mapping=
+s.
+>=20
+> Provide both single-doorbell and multi-circular-queue transfer backends.
+> Map shared blk-mq tags directly to UFS task tags, retain request ownershi=
+p
+> while commands are in flight, dispatch completion per MCQ completion queu=
+e,
+> and return polled completions through the blk-mq completion batch.
+>=20
+> Add PCI and Qualcomm platform frontends. The PCI frontend supports the QE=
+MU
+> UFS controller and existing Intel and Samsung IDs. The Qualcomm frontend
+> provides the clocks, PHY, reset, interconnect, power-domain, OPP, GPIO, a=
+nd
+> controller-specific initialization needed by supported SoCs.
+>=20
+> This establishes normal-I/O support for UFSHCI single-doorbell and MCQ
+> controllers. Full timeout recovery, error handling, and power management
+> are left for follow-up work.
+>=20
+> Signed-off-by: Jaemyung Lee <jaemyung.lee@samsung.com>
 > ---
->  drivers/phy/phy-core.c  | 34 ++++++++++++++++++++++++++++++++++
->  include/linux/phy/phy.h |  7 +++++++
->  2 files changed, 41 insertions(+)
->
-> diff --git a/drivers/phy/phy-core.c b/drivers/phy/phy-core.c
-> index 490a7cde6d40a..2e3581ecb42ee 100644
-> --- a/drivers/phy/phy-core.c
-> +++ b/drivers/phy/phy-core.c
-> @@ -1050,6 +1050,40 @@ struct phy *phy_get_by_of_node(struct device_node *np)
->  }
->  EXPORT_SYMBOL_GPL(phy_get_by_of_node);
->
-> +/**
-> + * devm_phy_get_by_of_node() - devm managed lookup and obtain phy reference by device node
-> + * @dev: device requesting the PHY
-> + * @np: device_node of the PHY provider
-> + *
-> + * Returns phy associated with the device_node or ERR_PTR. devres manages
-> + * releasing resources.
-> + */
-> +struct phy *devm_phy_get_by_of_node(struct device *dev, struct device_node *np)
-> +{
-> +	struct phy **ptr, *phy;
-> +	struct device_link *link;
-> +
-> +	ptr = devres_alloc(devm_phy_release, sizeof(*ptr), GFP_KERNEL);
-> +	if (!ptr)
-> +		return ERR_PTR(-ENOMEM);
+> This RFC introduces RUFS, a UFS host controller driver that sits directly
+> on the block layer and does not use the SCSI midlayer. UFS logical units
+> are exposed as native blk-mq block devices, the same way NVMe namespaces
+> are. The driver is written in Rust.
+>=20
+> Why decouple UFS from SCSI
+> --------------------------
+>=20
+> The existing UFS driver is built on the SCSI subsystem. That made sense
+> historically: UFS adopted the SCSI Architecture Model as its application
+> layer, so reusing the SCSI midlayer's command queuing, error handling,
+> power management, and logical-unit addressing let UFS reach Linux quickly
+> and reliably. ufshcd bridges the SCSI midlayer to UFS Protocol Informatio=
+n
+> Units.
+>=20
+> That foundation has become a source of friction. The evolution of UFS is
+> governed by JEDEC and increasingly includes UFS-specific features outside
+> the SCSI command set standardized by T10. These features must still be
+> expressed through, and constrained by, a SCSI-shaped driver. Features tha=
+t
+> are meaningful only to UFS are difficult to land in a subsystem whose
+> maintainers reasonably want to keep SCSI focused on SCSI, and block layer
+> or shared infrastructure changes that UFS needs end up mediated through
+> SCSI's priorities. In practice UFS is treated as an add-on to SCSI rather
+> than as a first-class storage interface, and a significant amount of UFS
+> functionality lives off-tree as a result, with the back- and forward-
+> porting cost that implies.
+>=20
+> We propose to decouple UFS from SCSI with a standalone driver that sits
+> directly on the block layer, alongside drivers like NVMe. This lets
+> JEDEC-specific features evolve independently of T10, gives UFS
+> its own dedicated review surface, and removes the impedance mismatch
+> between the UFS data model and the SCSI command model. UFS uses a subset =
+of
+> the SCSI command set within command UPIUs, so the driver can construct th=
+e
+> required CDBs directly without depending on the SCSI midlayer.
+>=20
+> The driver is designed around the UFS and UFSHCI specifications rather th=
+an
+> as a line-by-line translation of ufshcd. Its target is JEDEC UFS 4.1 and
+> UFSHCI 4.1.
+>=20
+> Why Rust
+> --------
+>=20
+> The architectural question above would be the same for a C driver. We cho=
+se
+> Rust because UFS features arrive at a high pace, and turning new
+> specification features into stable, validated code on tight timelines is
+> where memory- and concurrency-safety guarantees pay off: fewer classes of
+> bugs reach production, and iteration is faster. Rust's growing acceptance
+> in the kernel makes a block-layer-native UFS driver a realistic
+> architecture to evaluate.
+>=20
+> Initial feature set
+> --------------------
+>=20
+> The new driver supports single-doorbell and multi-circular-queue operatio=
+n,
+> PCI and Qualcomm platform frontends, logical-unit discovery, and normal
+> read, write, flush, and discard I/O. It uses shared blk-mq tags as UFS ta=
+sk
+> tags, keeps request ownership through completion, and uses owned DMA
+> mappings for the complete I/O lifetime.
+>=20
+> Full timeout recovery, error handling, and power management remain
+> follow-up work.
+>=20
+> Patch layout and dependencies
+> -----------------------------
+>=20
+> The single patch contains the complete driver. This keeps review focused =
+on
+> the RUFS architecture and the SCSI-independent blk-mq model.
+>=20
+> The driver depends on Rust block, DMA, IRQ, and platform abstractions tha=
+t
+> are intentionally excluded from this posting. Some of these abstractions
+> have already been posted to the list, most notably in the Rust null block
+> driver v2 series, the Ownable/OwnableRefCounted page series, and the
+> impl_flags extensions. The remaining abstractions are new and will be
+> posted as separate series before the first non-RFC version of this driver=
+.
+>=20
+> A buildable tree based on v7.3-rc2 with all dependencies and this patch i=
+s
+> at:
+>=20
+> https://github.com/SamsungDS/rufs/tree/rfc/rufs-public
+>=20
+> Testing
+> -------
+>=20
+> The v7.2 development version has been exercised with SDB and MCQ on the
+> QEMU UFS model, including ext4 fio workloads and module load/unload cycle=
+s.
+> SDB probe and normal I/O have also been exercised on Intel PCI and Qualco=
+mm
+> UFS hardware. The current port has been compile-tested independently with
+> PCI-only and Qualcomm-platform-only configurations.
+>=20
+> The exact v7.2 tree used for the hardware measurements is available at:
+>=20
+> https://github.com/SamsungDS/rufs/tree/rufs-7.2
+>=20
+> On Intel UFS 2.1 hardware, 4 KiB direct io_uring at QD32/job gave
+> these optimized-mode ranges over 1/2/4 jobs (three samples):
+>=20
+> =C2=A0 Workload=C2=A0 Op=C2=A0=C2=A0=C2=A0=C2=A0 RUFS kIOPS=C2=A0=C2=A0 C=
+ kIOPS=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 Difference
+> =C2=A0 --------=C2=A0 -----=C2=A0 -----------=C2=A0 -----------=C2=A0 ---=
+------------
+> =C2=A0 randread=C2=A0 read=C2=A0=C2=A0 48.91-61.26=C2=A0 41.56-41.60=C2=
+=A0 +17.6% to +47.4%
+> =C2=A0 randwrite write=C2=A0 8.19-8.30=C2=A0=C2=A0=C2=A0 8.21-8.22=C2=A0=
+=C2=A0=C2=A0 -0.4% to +1.1%
+> =C2=A0 randrw=C2=A0=C2=A0=C2=A0 read=C2=A0=C2=A0 5.26-5.34=C2=A0=C2=A0=C2=
+=A0 5.28-5.38=C2=A0=C2=A0=C2=A0 -0.9% to -0.4%
+> =C2=A0 randrw=C2=A0=C2=A0=C2=A0 write=C2=A0 5.27-5.34=C2=A0=C2=A0=C2=A0 5=
+.29-5.37=C2=A0=C2=A0=C2=A0 -0.8% to -0.5%
+>=20
+> The coefficient of variation (CV), calculated as the sample standard
+> deviation divided by the sample mean, measures run-to-run variability
+> relative to the mean. CV is a descriptive statistic; no normal or other
+> distribution was fitted to model the variation. The accompanying
+> two-sided 95% confidence intervals for the mean used Student's
+> t-distribution because each point contains only three samples. Those
+> intervals assume independent, approximately normally distributed sample
+> means and should be interpreted cautiously at this sample count.
+>=20
+> RUFS randread had a CV of 28-57%, versus below 0.8% for C. Its apparent
+> gain therefore has low confidence and should be treated as preliminary.
+> Both drivers also logged platform UIC errors. Stable write and mixed
+> points differed by no more than 1.1%.
+>=20
+> Feedback
+> --------
+>=20
+> Comments on the decision to bypass the SCSI midlayer, the blk-mq model us=
+ed
+> in its place, and the proposed prerequisite API boundaries would be
+> especially welcome.
 
-Relate patches use devm_add_action_or_reset() instead manaully alloc
-devres_alloc().
+Jaemyung,
 
-> +
-> +	phy = phy_get_by_of_node(np);
-> +	if (IS_ERR(phy)) {
-> +		devres_free(ptr);
-> +		return phy;
-> +	}
-> +
-> +	*ptr = phy;
-> +	devres_add(dev, ptr);
-> +	link = device_link_add(dev, &phy->dev, DL_FLAG_STATELESS);
-> +	if (!link)
-> +		dev_dbg(dev, "failed to create device link to %s\n",
-> +			dev_name(phy->dev.parent));
+thanks sharing.
 
-Is it okay to print dbg message()? suppose return NULL or some error?
+You still use scsi everywhere in your implementation protocol/scsi.rs build=
+s
+READ_10/16, WRITE_10/16, SYNCHRONIZE_CACHE and UNMAP CDB, so "decouple UFS =
+from
+SCSI" really means "copy a small part of sd and the SCSI error handling int=
+o a
+UFS driver." while JEDEC defines the UFS application layer as SCSI, the SCS=
+I
+work doesn't go away, you just move somewhere else, and it has to be writte=
+n
+again.
 
-Frank
+The "friction" claim is weak. SCSI has already been changed to fit UFS. Two
+examples: UFS now uses SCSI simple copy, group number in scsi write command=
+.
 
-> +
-> +	return phy;
-> +}
-> +EXPORT_SYMBOL_GPL(devm_phy_get_by_of_node);
-> +
->  /**
->   * phy_create() - create a new phy
->   * @dev: device that is creating the new phy
-> diff --git a/include/linux/phy/phy.h b/include/linux/phy/phy.h
-> index 71c2e16397130..14b924a88411f 100644
-> --- a/include/linux/phy/phy.h
-> +++ b/include/linux/phy/phy.h
-> @@ -285,6 +285,7 @@ struct phy *devm_of_phy_optional_get(struct device *dev, struct device_node *np,
->  struct phy *devm_of_phy_get_by_index(struct device *dev, struct device_node *np,
->  				     int index);
->  struct phy *phy_get_by_of_node(struct device_node *np);
-> +struct phy *devm_phy_get_by_of_node(struct device *dev, struct device_node *np);
->  void of_phy_put(struct phy *phy);
->  void phy_put(struct device *dev, struct phy *phy);
->  void devm_phy_put(struct device *dev, struct phy *phy);
-> @@ -499,6 +500,12 @@ static inline struct phy *phy_get_by_of_node(struct device_node *np)
->  	return ERR_PTR(-ENOSYS);
->  }
->
-> +static inline struct phy *devm_phy_get_by_of_node(struct device *dev,
-> +						  struct device_node *np)
-> +{
-> +	return ERR_PTR(-ENOSYS);
-> +}
-> +
->  static inline void of_phy_put(struct phy *phy)
->  {
->  }
->
-> --
-> 2.55.0
->
+I doubt how far this can go. do we really need to pay effort for a new RUST=
+ UFS
+driver, I am not very confident, unless SCSI is removed from the UFS spec a=
+nd
+JEDEC defines native UFS commands, or we talk to the device directly with U=
+PIU.
+please name the JEDEC feature that the SCSI midlayer really blocked, or tha=
+t was
+historial issue which has been fixed.
+
+
+I would also like to see the heavy and hard parts, because they are the par=
+ts
+that decide if this design worrks:
+
+1, error handling: abort, LU reset, retries with limits, sense decoding, th=
+is is
+the very hard part of UFS driver.
+
+2, user-space tools interface: SG_IO and bsg (sg3_utils, ufs-utils, FFU wit=
+h
+WRITE BUFFER), and the UFS sysfs tree..
+
+
+Did any AI tool help write this code? If so, please add the Assisted-by: ta=
+g.
+
+kind regards,=20
+Bean
+
+
+
+
+
