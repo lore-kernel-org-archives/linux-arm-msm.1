@@ -1,33 +1,37 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5E2F046AA85;
-	Fri, 11 Sep 2026 08:43:55 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0E504434984;
+	Fri, 11 Sep 2026 08:51:14 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789116237; cv=none; b=R0W6leOStnm/CRpR6kAeF692Fyvw5QAlAhYk/+GEf6wtvyslwb7iJZioOMKkXDjLfENPlu/wM47tSqneoib69eOVDmsqod5meWwB9uTbunU86UkjXxGzlp5qmPgl8JHaNfUPsUqD/TxUlIgxcPiEMJDzMaqqzC1Hzo1keHq9s1w=
+	t=1789116675; cv=none; b=FujaL1EeHqPtO6LrVeADNV+LWcAFaT+Zxahf32vb4Gkh86mmiK3v2ik+sgQnpNgQAk7PCDbCSVxv5/pJk9U5p88IM38FudoTqsxdkLoSvuxt+7g+XDH0JuDWZaApNxR075Ong5/jYxH6bHFny1uFZ0kcvywzRN8KqO20zWyIrSQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789116237; c=relaxed/simple;
-	bh=2IBqPAqPjl1RxfMLyiUtUS0gt8YqNj+UtUwvRtNHx/4=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=M7LOj56TkgHBbaQyQ1BtPSfwD9DPTxlQkcPWKc06bx0gU7FYyWBseM8s6tE463zu5mOPIk9cCZlSgmfiZBy67o8G1DB7hMfPWRi+4KPkhFnhLOUOAxIE39kw1q7QZGh/ZtHHGHHpOwYfiNlXPI7+ZTL1aPETQUCFXr9JxiklqQU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=KLww74no; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1789116675; c=relaxed/simple;
+	bh=07d8wKscWXVq7RDJjHkW9XddOX815xGvrx1VHtKkGvs=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
+	 In-Reply-To:To:Cc; b=AMxKuesPyy1a3/zHEAdAfs44OWPrXQaVtwDMlo58D/TzOUyU/ETSRXJuW7xmHluYjGalrv6JJ3d4GiqHyr8RST1efz0H1/IOoyWZJhrcx+iZtLCY5cL1Rwmqpu8KqvA2QIl4UxOqGoGh1hZkoRiLEDSIjB1kVWn41Ffft9DKWnA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=VF5ylQ+2; arc=none smtp.client-ip=10.30.226.201
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="KLww74no"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id BD4BE1F000FF;
-	Fri, 11 Sep 2026 08:43:53 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1789116235;
-	bh=ju22f4kGM/ljQr26IAQP0LJMv/6Rf0OzaOlVs5+VPI0=;
-	h=From:Date:Subject:To:Cc;
-	b=KLww74nociXNTdPYioz0QJTNHfwE/zHhHol+wAZCLOab6DB7WejmS0OGNZFRhBX88
-	 qzNr877FY7TLtgOh1hrq+/lvuHISL5dCmVzT3a7bIb4LoqurZfXNTIQ+BZ/LuNZ3dD
-	 uBaWsr0v/mouIXSn1SMRjZnSUJuU+I0kaZV1/4SWLap+lT1OqTgvmb6/DdCkSVp/6j
-	 VPlXiM+MxVWw6LZLKOHRRcJraFvQUhzb8eEpyOj2OFmBNmrI4fi6c2L8SyLJfbNTAN
-	 RJQ9Vy6SX0L4kizeq8XVIZ/W/7mPJvIiXgwmtGgJ9JQd5F0d+IWEEA1/pTHlxBpEkP
-	 JAQJLzWflSt2w==
-From: Konrad Dybcio <konradybcio@kernel.org>
-Date: Fri, 11 Sep 2026 10:43:47 +0200
-Subject: [PATCH] arm64: dts: qcom: msm8994-octagon: Remove ad7147_captouch
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="VF5ylQ+2"
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 92810C2BCF5;
+	Fri, 11 Sep 2026 08:51:14 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1789116674;
+	bh=07d8wKscWXVq7RDJjHkW9XddOX815xGvrx1VHtKkGvs=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
+	b=VF5ylQ+2c/h0Bl+82CoyVZ2QgmKthihLuNpr9gwMdtAbDCuGWaVgpWEuLrmAYyh5f
+	 y9PaJRwNV9by3p9x8fFUfOcl4+y5PmZYaBD8129bZ68ekJ3G3Ev2aWTXxhi+kLNu41
+	 8i9bS0sbHnJB9DuBetPM1iwV7w3SlA94CBS4H89x+B/GLWYSrWWx8pjAkK/Dx6o41B
+	 A3Qw925Xux6my/4yptEPZrfgkoKs4AVR4ePz47rVhLbSpIJG/G08Uy0HlAkbWpPfH3
+	 M+y3tTG1wwhtwR0TI61JLI85jAyFhqI0HGlzdStWHPrGrHxmFcw05lmWhF1FKIIDPj
+	 tld0n7NfQE68Q==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6BAC6C88E50;
+	Fri, 11 Sep 2026 08:51:14 +0000 (UTC)
+From: =?utf-8?q?Y=C4=B0=C4=9E=C4=B0TCAN_KAVAKLI_via_B4_Relay?= <devnull+kavakliyigitcan.gmail.com@kernel.org>
+Date: Fri, 11 Sep 2026 11:50:58 +0300
+Subject: [PATCH RFC 01/10] dt-bindings: backlight: add Kinetic KTD3136
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -35,70 +39,135 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260911-topic-lumia_drop_captouch-v1-1-6f92f1f3c6d3@oss.qualcomm.com>
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXMTQqDMBBA4avIrA1MXAjpVUqRZDKtU1oT8iOCe
- HfTuvwW7+2QOQlnuHU7JF4lS1gadN8BzXZ5sRLfDAMOIxqtVQlRSH3qV+zkU4gT2VhCpVkReme
- MQz1ahNbHxE/Z/u/743Ku7s1UfkM4jhMq2tpFfQAAAA==
-X-Change-ID: 20260911-topic-lumia_drop_captouch-c0db99b016a0
-To: Bjorn Andersson <andersson@kernel.org>, 
- Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>, 
- Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
- linux-kernel@vger.kernel.org, 
- Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1789116233; l=1336;
- i=konrad.dybcio@oss.qualcomm.com; s=20230215; h=from:subject:message-id;
- bh=uBWotT1ktwbMnj7lhGiRKkk+3QyBYGOIWnG24TtVn6A=;
- b=u8IbdDc24dYcLD4ivQhhVjGpOhWLmjCPSTdqvH6fzC0EaGzr/qbgUm6RUte3ki6aKZllGKuUW
- ekJD8V9YNx9D5dGJwcrtz5QojYXzINtgu3fvXj+Q5ZKNjB/yGIt3xsJ
-X-Developer-Key: i=konrad.dybcio@oss.qualcomm.com; a=ed25519;
- pk=iclgkYvtl2w05SSXO5EjjSYlhFKsJ+5OSZBjOkQuEms=
+Content-Transfer-Encoding: 8bit
+Message-Id: <20260911-ginkgo-submission-final-v1-1-0e68e63a18d4@gmail.com>
+References: <20260911-ginkgo-submission-final-v1-0-0e68e63a18d4@gmail.com>
+In-Reply-To: <20260911-ginkgo-submission-final-v1-0-0e68e63a18d4@gmail.com>
+To: Lee Jones <lee@kernel.org>, Daniel Thompson <danielt@kernel.org>, 
+ Jingoo Han <jingoohan1@gmail.com>, Pavel Machek <pavel@kernel.org>, 
+ Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, Helge Deller <deller@gmx.de>, 
+ Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>, 
+ Sumit Semwal <sumit.semwal@linaro.org>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Jessica Zhang <jesszhan0024@gmail.com>, 
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, 
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, 
+ Dmitry Torokhov <dmitry.torokhov@gmail.com>, 
+ Henrik Rydberg <rydberg@bitmath.org>, 
+ Rob Clark <robin.clark@oss.qualcomm.com>, 
+ Dmitry Baryshkov <lumag@kernel.org>, 
+ Abhinav Kumar <abhinav.kumar@linux.dev>, Sean Paul <sean@poorly.run>, 
+ Marijn Suijten <marijn.suijten@somainline.org>, 
+ Bjorn Andersson <andersson@kernel.org>, 
+ Konrad Dybcio <konradybcio@kernel.org>
+Cc: dri-devel@lists.freedesktop.org, linux-leds@vger.kernel.org, 
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
+ linux-fbdev@vger.kernel.org, linux-input@vger.kernel.org, 
+ linux-arm-msm@vger.kernel.org, freedreno@lists.freedesktop.org, 
+ =?utf-8?q?Y=C4=B0=C4=9E=C4=B0TCAN_KAVAKLI?= <kavakliyigitcan@gmail.com>
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1789116671; l=2380;
+ i=kavakliyigitcan@gmail.com; s=20260911; h=from:subject:message-id;
+ bh=1qOWka2RqpGg1tbdhR9VbVnp2Dr9kAnrMfXquGM3d6U=;
+ b=tPsC38NGiMj10cf2MHZTTpvh8GU5kjYbScAMNbDcYn3V2e+KSk4lCvwoX6GGsgBKF0/jvxY1j
+ 92U/sQgU3zNC9FOygauFmLnU35Ax7LZfLjiF0lcSDwfW4mxZjFKgCHj
+X-Developer-Key: i=kavakliyigitcan@gmail.com; a=ed25519;
+ pk=W2GaxVotULs2vAjRMMLheaDtMMYs4037zO1LVVfFtPI=
+X-Endpoint-Received: by B4 Relay for kavakliyigitcan@gmail.com/20260911
+ with auth_id=1024
+X-Original-From: =?utf-8?q?Y=C4=B0=C4=9E=C4=B0TCAN_KAVAKLI?= <kavakliyigitcan@gmail.com>
+Reply-To: kavakliyigitcan@gmail.com
 
-From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+From: YİĞİTCAN KAVAKLI <kavakliyigitcan@gmail.com>
 
-This node lacks dt-bindings, producing warnings and is reportedly only
-present on prototype hardware.
+Add devicetree binding documentation for the Kinetic Technologies
+KTD3136 3-channel LED backlight driver using the official "kinetic"
+vendor prefix.
 
-Remove it to get rid of the warnings.
+The device is controlled over I2C and supports an optional hardware
+enable GPIO line (enable-gpios), supply regulators, and standard
+backlight brightness range properties.
 
-Signed-off-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Signed-off-by: YİĞİTCAN KAVAKLI <kavakliyigitcan@gmail.com>
 ---
- arch/arm64/boot/dts/qcom/msm8994-msft-lumia-octagon.dtsi | 13 -------------
- 1 file changed, 13 deletions(-)
+ .../bindings/leds/backlight/kinetic,ktd3136.yaml   | 65 ++++++++++++++++++++++
+ 1 file changed, 65 insertions(+)
 
-diff --git a/arch/arm64/boot/dts/qcom/msm8994-msft-lumia-octagon.dtsi b/arch/arm64/boot/dts/qcom/msm8994-msft-lumia-octagon.dtsi
-index 7ace3540ef0a..4da448f17133 100644
---- a/arch/arm64/boot/dts/qcom/msm8994-msft-lumia-octagon.dtsi
-+++ b/arch/arm64/boot/dts/qcom/msm8994-msft-lumia-octagon.dtsi
-@@ -377,19 +377,6 @@ &blsp1_uart2 {
- &blsp2_i2c1 {
- 	status = "okay";
- 
--	sideinteraction: touch@2c {
--		compatible = "adi,ad7147_captouch";
--		reg = <0x2c>;
--
--		pinctrl-names = "default", "sleep";
--		pinctrl-0 = <&grip_default>;
--		pinctrl-1 = <&grip_sleep>;
--
--		interrupts = <&tlmm 96 IRQ_TYPE_EDGE_FALLING>;
--
--		vcc-supply = <&vreg_l18a_2p85>;
--	};
--
- 	/*
- 	 * The QPDS-T900/QPDS-T930 is a customized part built for Nokia
- 	 * by Avago. It is very similar to the Avago APDS-9930 with some
+diff --git a/Documentation/devicetree/bindings/leds/backlight/kinetic,ktd3136.yaml b/Documentation/devicetree/bindings/leds/backlight/kinetic,ktd3136.yaml
+new file mode 100644
+index 0000000000000000000000000000000000000000..f85381c29964529a09989a1ff60d9c9fe4897bb7
+--- /dev/null
++++ b/Documentation/devicetree/bindings/leds/backlight/kinetic,ktd3136.yaml
+@@ -0,0 +1,65 @@
++# SPDX-License-Identifier: (GPL-2.0 OR BSD-2-Clause)
++%YAML 1.2
++---
++$id: http://devicetree.org/schemas/leds/backlight/kinetic,ktd3136.yaml#
++$schema: http://devicetree.org/meta-schemas/core.yaml#
++
++title: Kinetic Technologies KTD3136 3-Channel LED Backlight Driver
++
++maintainers:
++  - Lee Jones <lee@kernel.org>
++
++description: |
++  The Kinetic Technologies KTD3136 is a high efficiency, 3-channel LED
++  backlight driver with 11-bit exponential or linear dimming control
++  via I2C interface.
++
++allOf:
++  - $ref: common.yaml#
++
++properties:
++  compatible:
++    const: kinetic,ktd3136
++
++  reg:
++    maxItems: 1
++
++  enable-gpios:
++    description: GPIO connected to the HWEN (Chip Enable) pin.
++    maxItems: 1
++
++  vin-supply:
++    description: Regulator providing power to the VIN pin.
++
++  default-brightness:
++    minimum: 0
++    maximum: 2047
++    default: 2047
++
++  max-brightness:
++    minimum: 0
++    maximum: 2047
++    default: 2047
++
++required:
++  - compatible
++  - reg
++
++additionalProperties: false
++
++examples:
++  - |
++    #include <dt-bindings/gpio/gpio.h>
++
++    i2c {
++        #address-cells = <1>;
++        #size-cells = <0>;
++
++        backlight@36 {
++            compatible = "kinetic,ktd3136";
++            reg = <0x36>;
++            enable-gpios = <&gpio 6 GPIO_ACTIVE_HIGH>;
++            default-brightness = <2047>;
++            max-brightness = <2047>;
++        };
++    };
 
----
-base-commit: f2bfbc3554ca6919484030729424b9dee2942d24
-change-id: 20260911-topic-lumia_drop_captouch-c0db99b016a0
+-- 
+2.47.3
 
-Best regards,
---  
-Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
 
