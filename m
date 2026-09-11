@@ -1,214 +1,78 @@
-Received: from ixit.cz (ixit.cz [84.42.129.46])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 680C45867D4;
-	Fri, 11 Sep 2026 20:00:18 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=84.42.129.46
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EB5A240A945;
+	Fri, 11 Sep 2026 20:28:52 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789156824; cv=none; b=k6+nZVb8zK4tgHvdHusoWyWQ7La0CDZnIwJv0Kg8H9Wg2MhAqqXFb1ohCMG6smjn9n52FGImx24ML/OUJcJctW3p90Zn4ylr6+HoiPMFEI9Y4i3mAh0rlQQSBc4NEqcPh/m4T7J8gBzAAzqpECpm8jJ88fsQ5COyfBwpOkM0NEg=
+	t=1789158534; cv=none; b=hh4zWtpDkEPweGJvYOy8k0aBMTZCd6dnwDwHMxA4y00aI8JhXaKVV9aEm+TANqfszzHR73VZ8fPlFQu1+1lZhCTV0M35hxy4LhPQbBLox6Q2Se8YZ6Ew0h2scVc/TsZdMMJkMnv2dRfjjjzD/Iys3Ly15RpNbAM2N5YWYSZcAAc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789156824; c=relaxed/simple;
-	bh=rECwwr5MXHKaAAu4Xm/MT/O2bAAImWhJ2GQb9tEFs1Q=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=vGcCkOD7MFyT2mR0cwgNHH5w2L7A/M4MUS2SmYYZ1POsFxJFBk8hf48j2LRLuTK1XaJLDIN3whD2wo5y428VLAqlWSoTqKvijP1NCL1XZ6YdY1W/GGiqNjrh1PBLLXYUq4ux02F5/77vRm4KeixHmrNqSZayhYnndsukWvwZlUE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=ixit.cz; spf=pass smtp.mailfrom=ixit.cz; dkim=pass (1024-bit key) header.d=ixit.cz header.i=@ixit.cz header.b=yrm7Efo2; arc=none smtp.client-ip=84.42.129.46
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=ixit.cz
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ixit.cz
+	s=arc-20240116; t=1789158534; c=relaxed/simple;
+	bh=posZRNGtXy2frZiYX5qhxcx6BncEzD+P8N1aN2Ie5aM=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=f5bzi9nOMHsE7jPLuWLkKO8MGrMwRDTkx2kKyXL2a40LOrB3C2J+K4xY7MkEnrF4lRQ6ttLqd8pKPxdddV/qMFKYpTsJQbQWCRely/ym6IdssgrZ6mo9aBCHQ/e9aXHyI2+Rp0xxOhQTiBADLU5wPlKMuTNasjuRIdJlFAxG/eE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (1024-bit key) header.d=linuxfoundation.org header.i=@linuxfoundation.org header.b=AVXbQPm7; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=ixit.cz header.i=@ixit.cz header.b="yrm7Efo2"
-Received: from [IPV6:2a02:830a:f787:8f00:d622:eaa3:3dd6:8f5e] (unknown [IPv6:2a02:830a:f787:8f00:d622:eaa3:3dd6:8f5e])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange x25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by ixit.cz (Postfix) with ESMTPSA id A204B5341057;
-	Fri, 11 Sep 2026 22:00:12 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ixit.cz; s=dkim;
-	t=1789156812;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
-	bh=6lIj0wihb2vxUd4EDj1/K0TDCkWxUQEoZDfJjbMQzdg=;
-	b=yrm7Efo2D2GjHRvHVmd+F0NKsJsr15M/6xv/1ztrPx9z6TOJ5Y8MNmyKlCngBtF37E5gfs
-	OpZdbpFdnLJyTZVS1MBjTeO3zykDmWmCqtPKj/bbhcbZQjZk2Jvtw5KwZjjsN5lsa0M+BU
-	9e1WOKkwlRVIvaGDwA7n8TrZP6VdzAc=
-Message-ID: <f5f6e231-ff11-45cf-af30-9db346ba5f97@ixit.cz>
-Date: Fri, 11 Sep 2026 22:00:12 +0200
+	dkim=pass (1024-bit key) header.d=linuxfoundation.org header.i=@linuxfoundation.org header.b="AVXbQPm7"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4FB631F000FF;
+	Fri, 11 Sep 2026 20:28:51 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linuxfoundation.org;
+	s=korg; t=1789158532;
+	bh=+5mzSpgILzHqr06GJbUTwa7c20pDz/QnXUmvQGKoMkU=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=AVXbQPm7L0+754CrGe0f211fQ6sydBek9ZkqMY9Ci1uoXaN6Rz7cKivlJ13lO6Ee2
+	 qd/MZRW7s0ESXHDxjw1N4mJTbQm/jDNkTno7QB21Qt6GYOwBer80RKRWxPPESRswKL
+	 JQ6KQkax6pA78HIpsw/wovO+XuGJrtg+iToQLhxQ=
+Date: Fri, 11 Sep 2026 22:27:02 +0200
+From: Greg KH <gregkh@linuxfoundation.org>
+To: jaemyung.lee@samsung.com
+Cc: Andreas Hindborg <a.hindborg@kernel.org>,
+	Miguel Ojeda <ojeda@kernel.org>, Boqun Feng <boqun@kernel.org>,
+	Gary Guo <gary@garyguo.net>,
+	=?iso-8859-1?Q?Bj=F6rn?= Roy Baron <bjorn3_gh@protonmail.com>,
+	Benno Lossin <lossin@kernel.org>, Alice Ryhl <aliceryhl@google.com>,
+	Trevor Gross <tmgross@umich.edu>,
+	Danilo Krummrich <dakr@kernel.org>,
+	Daniel Almeida <daniel.almeida@collabora.com>,
+	Tamir Duberstein <tamird@kernel.org>,
+	Alexandre Courbot <acourbot@nvidia.com>,
+	Onur =?iso-8859-1?Q?=D6zkan?= <work@onurozkan.dev>,
+	linux-kernel@vger.kernel.org, rust-for-linux@vger.kernel.org,
+	linux-block@vger.kernel.org, linux-scsi@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org
+Subject: Re: [PATCH RFC] drivers/rufs: add Rust UFS host controller driver
+Message-ID: <2026091124-treason-trickily-bc52@gregkh>
+References: <20260912-rufs-private-v1-1-716db733e655@samsung.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 3/3] arm64: dts: qcom: sdm845-oneplus: use generic fuel
- gauge compatible
-To: Andrew Davis <afd@ti.com>, Krzysztof Kozlowski <krzk@kernel.org>,
- Rinat Muhamedgaliev <rinat.muhamedgaliev@gmail.com>
-Cc: Bjorn Andersson <andersson@kernel.org>,
- Konrad Dybcio <konradybcio@kernel.org>, Sebastian Reichel <sre@kernel.org>,
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
- Conor Dooley <conor+dt@kernel.org>, =?UTF-8?Q?Pali_Roh=C3=A1r?=
- <pali@kernel.org>, linux-arm-msm@vger.kernel.org,
- devicetree@vger.kernel.org, linux-pm@vger.kernel.org,
- linux-kernel@vger.kernel.org
-References: <20260829205258.26955-1-rinat.muhamedgaliev@gmail.com>
- <20260909234744.1177153-1-rinat.muhamedgaliev@gmail.com>
- <20260909234744.1177153-4-rinat.muhamedgaliev@gmail.com>
- <20260911-relaxed-dexterous-hummingbird-72dfbe@quoll>
- <6c45cfd5-ac37-4f8e-bde3-0391512df982@ti.com>
-Content-Language: en-US, cs-CZ
-From: David Heidelberg <david@ixit.cz>
-Autocrypt: addr=david@ixit.cz; keydata=
- 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
-In-Reply-To: <6c45cfd5-ac37-4f8e-bde3-0391512df982@ti.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260912-rufs-private-v1-1-716db733e655@samsung.com>
 
+On Sat, Sep 12, 2026 at 12:52:55AM +0900, Jaemyung Lee via B4 Relay wrote:
+> Comments on the decision to bypass the SCSI midlayer, the blk-mq model used
+> in its place, and the proposed prerequisite API boundaries would be
+> especially welcome.
 
+Many many years ago, the USB subsystem tried to bypass the SCSI midlayer
+for its storage driver, and while it was a "quick solution" at the time,
+in the end, it didn't work out and we dropped the driver as it just made
+no sense to keep duplicating all of the logic all the time.
 
-On 11/09/2026 15:37, Andrew Davis wrote:
-> On 9/11/26 3:21 AM, Krzysztof Kozlowski wrote:
->> On Thu, Sep 10, 2026 at 02:47:44AM +0300, Rinat Muhamedgaliev wrote:
->>> OnePlus 6 and OnePlus 6T battery packs may contain either a TI
->>> bq27411 or bq27541 fuel gauge. Use the generic ti,bq27xxx compatible
->>> so the driver can select the register map from DeviceType at probe
->>> time.
->>>
->>> Tested on OnePlus 6T (fajita) with a bq27541 (DeviceType 0x0541):
->>> after booting the new kernel, the battery reported 4.360 V, 100% state
->>> of charge, 27.8 C, and Full status.
->>>
->>> Fixes: 12dfb002ca01 ("arm64: dts: qcom: sdm845-oneplus-*: add fuel gauge")
->>
->> What is the bug here? Your commit msg should be specific about it.
->>
-> 
-> Commit msg seems pretty clear about the bug (to me at least), the DT
-> says the fuel gauge is a BQ27411 but that isn't the case, some shipped
-> with a BQ27541 fuel gauge.
-> 
-> (I do agree though this shouldn't have a fixes tag as back-porting this
-> without also back-porting the driver-side change would break users)
-> 
-> Since these fuel gauges often live on the battery pack and not the
-> device itself, folks changing their batteries might end up with
-> different fuel gauges, so having some detection method is going to
-> be helpful.
-> 
-> Rinat,
-> 
-> I'm not familiar with the bootflow on these devices, but is this something
-> you could detect in the bootloader and fixup the DT before it is passed
-> to kernel? That way the kernel gets a DT with the correct and specific
-> compatible to start with?
+So I wouldn't recommend it, as long as UFS builds on top of the SCSI
+commands and the like, you should not attempt to duplicate it in a
+separate driver, no matter how much "simpler" it initially seems to be.
 
-Hello Andrew:
+But really:
 
-There are two possible bootflows:
-a) from fastboot (we can't do anything)
-b) from intermediate u-boot (we could do this)
+>  30 files changed, 10005 insertions(+)
 
-While your suggestion seems to be the most correct, I'm not sure the 
-"complexity" here outweighs the pros of simply reporting
+30 files and 10000 lines doesn't seem that simple :)
 
-deb_warn your phones has different charging chip
+thanks,
 
-and switching the behavior to the "replacement part" here.
-
-In the future we'll need to add u-boot logic because of camera focus, where the 
-focus in some phones is on different i2c addr + from different vendor, where we 
-cannot do it so simply as here.
-
-What do you think?
-
-David>
-> Andrew
-> 
->>>
->>> Signed-off-by: Rinat Muhamedgaliev <rinat.muhamedgaliev@gmail.com>
->>> ---
->>>   arch/arm64/boot/dts/qcom/sdm845-oneplus-common.dtsi   | 4 ++--
->>>   arch/arm64/boot/dts/qcom/sdm845-oneplus-enchilada.dts | 2 +-
->>>   arch/arm64/boot/dts/qcom/sdm845-oneplus-fajita.dts    | 2 +-
->>>   3 files changed, 4 insertions(+), 4 deletions(-)
->>>
->>> diff --git a/arch/arm64/boot/dts/qcom/sdm845-oneplus-common.dtsi b/arch/ 
->>> arm64/boot/dts/qcom/sdm845-oneplus-common.dtsi
->>> index 948a0dd..8c5cd94 100644
->>> --- a/arch/arm64/boot/dts/qcom/sdm845-oneplus-common.dtsi
->>> +++ b/arch/arm64/boot/dts/qcom/sdm845-oneplus-common.dtsi
->>> @@ -790,8 +790,8 @@ &i2c10 {
->>>       status = "okay";
->>>       clock-frequency = <100000>;
->>> -    bq27441_fg: bq27441-battery@55 {
->>> -        compatible = "ti,bq27411";
->>> +    bq27xxx_fg: fuel-gauge@55 {
->>> +        compatible = "ti,bq27xxx";
->>
->> And this is just breaking all users without any explanation.
->>
->>
->>
->>>           status = "okay";
->>>           reg = <0x55>;
->>>       };
->>> diff --git a/arch/arm64/boot/dts/qcom/sdm845-oneplus-enchilada.dts b/arch/ 
->>> arm64/boot/dts/qcom/sdm845-oneplus-enchilada.dts
->>> index 5f01115..cf40842 100644
->>> --- a/arch/arm64/boot/dts/qcom/sdm845-oneplus-enchilada.dts
->>> +++ b/arch/arm64/boot/dts/qcom/sdm845-oneplus-enchilada.dts
->>> @@ -44,7 +44,7 @@ main_cam_ois: main-cam-ois-regulator {
->>>       };
->>>   };
->>> -&bq27441_fg {
->>> +&bq27xxx_fg {
->>
->> No, irrelevant to the supposed bug here.
->>
->> Best regards,
->> Krzysztof
->>
-> 
-
+greg k-h
