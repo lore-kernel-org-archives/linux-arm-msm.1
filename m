@@ -1,85 +1,35 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 84BF4476058
-	for <linux-arm-msm@vger.kernel.org>; Fri, 11 Sep 2026 12:36:23 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D710B4718D9;
+	Fri, 11 Sep 2026 12:39:11 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789130185; cv=none; b=LgEu1WB1e2f+FsgupKaxVGSebHQriERdplLhbdAG1LBBZRKmAh51BtSsIQUO8RAxabTRkogVCfSvT82evM59jozOgDf7vxQPtj0PNHayQKam5LrcQbGd48s8sHHhwRNCQ1x2VVZ/GACsTfQdfe0kweJUBTT+L+GU6svb/Uz/YJE=
+	t=1789130355; cv=none; b=acdUdUjWTiSOeSn/jySXD90t2Ps2ClCXkQpumrq8yboe7licbC5/Shvd+N346xWpcyuJefMFNr3QS8ORk9yrG3wX4BebK0UJHL8GV6GrEcjZ+LbcEYvUY+o+MvaQWReuiWojUclA5OTUuIA1aT/88Uw2bC8XrYF6/l8RPuIh6+8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789130185; c=relaxed/simple;
-	bh=v3H5ZkNHV36erG0MxtCb6pxoYV7neyJzdd3gUEk9Vxo=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=riXayll41LwWjcE5XKyM1Xb+SaATJGvLdYZIxCILp0WCdFsEgVJwgo6PPTD/TsH9SFUm1H83yCR2tmk/dK92HujW4OJSdwxtMysumHp0Nc9dZ+veppK5U7w5qCQ9yDv0QQJ+1dV+oUszvf5k/Gs+1qmWLRytfreDa4OrjktRYsU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=oerqMIrH; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=bk7VMPqu; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1789130355; c=relaxed/simple;
+	bh=9a+o1zghkvN/+WOJNhLmsWPdTVgtZNIIF/cDy36ClLM=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
+	 In-Reply-To:To:Cc; b=EJARJQ88RN9tnQxPPYZfWUa0fa8Dycb8IvMrmBvvcK5W7saASWEPGrO4dESeUR1tD38TjgtrBPnQD5y9QTeqercHFGVsU1JSjJrSBRlutuuK19dvnspYSDjfFQYN/pCI1EGu/Al3Bkl7QGyAPEB/VWezfq4NYhTt24Ff3NFbJQo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=G70x9L9+; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="oerqMIrH";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="bk7VMPqu"
-Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68BAq1Yk3433413
-	for <linux-arm-msm@vger.kernel.org>; Fri, 11 Sep 2026 12:36:22 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:message-id
-	:mime-version:subject:to; s=qcppdkim1; bh=uHHyhqlf41DimyNYjZw66Q
-	yVIWBkLDkAbwH46LsGtBw=; b=oerqMIrHCRV5/gF/+05XuPyFDRcQEu14T51Sk+
-	qt0d8/N9tOBEzMNkFyrPxwLRRTQmF2yeLmeh31NMPG7IjUuOP3kusQIVCybjj2pw
-	46YYnveyEnn27ITlIg8RLTsmF1Mn3GtZWfcRvYCwk/xBV8aYwjqY0tRthGXFuGv3
-	VZujD6peBu8itg0wU+NEMeTpQ4ylsOPXracQi2+Hdox6p3AE2k4vbbuBFoKjVOUQ
-	Kxt1QXIKMYJly5m7y4N42wIVVUwoEnHnCP5Lwj+7QjL9sb3c0w2wfQGvWiieeE6Y
-	yfMV9iFT05E4xPLjGTBFo1twOg6USWRSuAcCLnSuj+XcS68A==
-Received: from mail-pj1-f70.google.com (mail-pj1-f70.google.com [209.85.216.70])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gmfbbgn8t-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Fri, 11 Sep 2026 12:36:22 +0000 (GMT)
-Received: by mail-pj1-f70.google.com with SMTP id 98e67ed59e1d1-38e54b6556aso1229149a91.2
-        for <linux-arm-msm@vger.kernel.org>; Fri, 11 Sep 2026 05:36:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1789130182; x=1789734982; darn=vger.kernel.org;
-        h=cc:to:message-id:content-transfer-encoding:content-type
-         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=uHHyhqlf41DimyNYjZw66QyVIWBkLDkAbwH46LsGtBw=;
-        b=bk7VMPquaYzsKC9xg7WkT3iZ3x+GEeG5xHC7BHqv7ExGN1lTdME07Wi+vMZXR4ndFb
-         KPOVIG8POEZHBPpftvghAn5o1P5OMA647q8bmgAJasc757BeFBdcFCpA6ye+QfvWmEy/
-         HjTdVMRrcv/bd1Pn/tZMQT3IaZ5H7zMpE11w6K5o7wYH7Tf/97W0SwRFjbFMphyZz/ds
-         y94mtPNV03hGVuXeCUH9nfQvScsQh+Mir7ePKtNMdwGF5zlBlCmGKA44LmF1fkFzhgWO
-         ogCS0cwgg+L8mFwk0uisLikbKf3ZHfJmRch6KS1/joHVDw/EPx2hyVcSoPeZiLX08Hdp
-         W4TQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1789130182; x=1789734982;
-        h=cc:to:message-id:content-transfer-encoding:content-type
-         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to:content-type;
-        bh=uHHyhqlf41DimyNYjZw66QyVIWBkLDkAbwH46LsGtBw=;
-        b=emzDSoZ9Wgzdg3VUZLZmWozbgurzGFkTYSg8/S6g5lHEeGLeASi2YA6Be+c6Q/wghD
-         kM3C22i1lec6JPQrS1UAIrTBXpLl62KrrZKeCkp+eYIqnqHFLwsVxg3iaZIdse7XSYdW
-         ZDSvkWROQRilh3OY7kY/7EzKY4eBokFjOCimXn5x8Hts5OB/ZIOIqt+5ZfE88otGvjdS
-         TQjIReHI2kOpOjUqivOVPLxFbhRkxSqnak9g3RfXHmLPaygNEulcdsxBSWB+b8m3saBQ
-         yQowegdYuQGzklWIknBjkR4Rt2EcsTb+Xt1IUnIYPJcuoE4WzuxsBK25yZKQxoB4T6Xk
-         qr5g==
-X-Forwarded-Encrypted: i=1; AKwUvByJjmqBKpVEVM+en+rJVBx5PusytTRKrht+ZyUgUM0gQnZpDFecDicxSitzMvxKTIQTODrQnbxx9GyBhfSF@vger.kernel.org
-X-Gm-Message-State: AFuF++kB60i5Vat/bGfCp74rXl9JsdO4S/IQBDO6ood2WqvmSsslgG1f
-	pahjBaMc/Yj8Rl6Sa/X+QGKeb6DX3lBRU8eL2jp+UYsBgG2WaQphlQiZR++RZrIr0dkBryQh9Vw
-	r6QKzcsSVtODx0+OYZJryEWysg080dv8KvgwHE3lS8mbJCB3wgsSmCIZSCYAmbVFXsFii
-X-Gm-Gg: AYBFou1jPT7pKv3G1gE7p/sfiopKYEZ3er5KQZtT9LOGyDPs2KAjBGkspJoBSC8fOgJ
-	T0+quZA+kwYJAtw5OofkH04mVVwoLLurW2BDnPsW7uwCsRMvZJkaBKwkBYSDpQAoVfOplW12ms7
-	s47yNjPMnnAMszLIO7HJZ5NtwAGPkbAtId08g8IAEl0GUe1SnDfZsAMxB1EAyqyTBbN1NR8oyBx
-	MWAOQYNDGoufwUnixJS+lrkURL/4zI8wWtVLXJdPI6EfCx+KtrRqsJBAsVsFy6GC9i01GJPPnat
-	fm4pAlSSupPrR/b4mX4/WaaB/E6WNr/vTXVGtiIbeN2HVJswY9qz7o2Ryn1N47E8zXaLcyT3pM9
-	ifJX7tTbe88bqA/QzwXCzxMNNqIdxTYQ=
-X-Received: by 2002:a17:90b:528b:b0:398:9c0c:7c71 with SMTP id 98e67ed59e1d1-39d9c35a3ccmr6880085a91.24.1789130181816;
-        Fri, 11 Sep 2026 05:36:21 -0700 (PDT)
-X-Received: by 2002:a17:90b:528b:b0:398:9c0c:7c71 with SMTP id 98e67ed59e1d1-39d9c35a3ccmr6880009a91.24.1789130181283;
-        Fri, 11 Sep 2026 05:36:21 -0700 (PDT)
-Received: from hu-imrashai-hyd.qualcomm.com ([202.46.22.19])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-39d94bb0119sm5360258a91.2.2026.09.11.05.36.12
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 11 Sep 2026 05:36:19 -0700 (PDT)
-From: Imran Shaik <imran.shaik@oss.qualcomm.com>
-Date: Fri, 11 Sep 2026 18:06:04 +0530
-Subject: [PATCH v5] arm64: dts: qcom: shikra: Add support for AudioCoreCC
- and AudioCoreCSR nodes
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="G70x9L9+"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1ADA61F00899;
+	Fri, 11 Sep 2026 12:39:05 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1789130350;
+	bh=QZDg0O/iXiCVjc0EVw1KEswumnkkgY6Y/5MT9GeGmUc=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc;
+	b=G70x9L9+J9FDGx3n6Q3hSz9fK4E7J6xnwVPq17Oyzl7lc/lM0BohD22209+bAO3jF
+	 BGzmvAKGOxFIS4ip1QfMlITqwrce4XlTMF2DpsX2mZvtR/3r+6SLkwxBek6Ty0Fj8C
+	 ofYoI50mHqQikrRtMJ7XMjmXoLLjfk1r1ZnjfJ2cRDM62sGWKntqhh5tFXOk7Y7Upp
+	 WYQt0hpN+oPROnoHDH2gTX8LntIGCg5TSVQ5R1y5V3scf4HNDqEgdQt2kno0xDHzwD
+	 6cMtoGx9KXCIJfAOJIdbmft133WOqZk/0x8SrUrmHBGM17KJghrrjrEYw0nZacxQgH
+	 3h6xwsoqlyIKA==
+From: Sumit Garg <sumit.garg@kernel.org>
+Date: Fri, 11 Sep 2026 18:08:55 +0530
+Subject: [PATCH 1/3] firmware: qcom: pas: Expose the active PAS backend
+ name
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -88,182 +38,110 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260911-shikra-audiocorecc-v5-1-b0fc3a2251ca@oss.qualcomm.com>
-X-B4-Tracking: v=1; b=H4sIALP1o2oC/33NTW7CMBAF4Ksgr+toMnZih1XvUbHwz6SxKBhsE
- lGh3L0OXcAisBnpPWm+d2OZUqDMtpsbSzSFHOKxhOZjw9xgjt/Egy+ZIWALLTQ8D2GfDDejD9H
- FRM5x3VBPPSghlWTl8ZSoD9c7+rX7z4nOY7Evj3II+RLT7314qpf27cZUc+CKqLVNj75D/Rlzr
- s6j+XHxcKjKYYs64UNSoFclLJIVCF4jOu/hhSSeJBSrkihSB1YrbQi8pBeSfJbkqiSLBEZ31tb
- C61qtSPM8/wH5qYaWrgEAAA==
-X-Change-ID: 20260605-shikra-audiocorecc-85efef073474
-To: Bjorn Andersson <andersson@kernel.org>,
-        Michael Turquette <mturquette@baylibre.com>,
-        Stephen Boyd <sboyd@kernel.org>, Brian Masney <bmasney@redhat.com>,
-        Philipp Zabel <p.zabel@pengutronix.de>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>
-Cc: Ajit Pandey <ajit.pandey@oss.qualcomm.com>,
-        Taniya Das <taniya.das@oss.qualcomm.com>,
-        Jagadeesh Kona <jagadeesh.kona@oss.qualcomm.com>,
-        linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org,
-        linux-kernel@vger.kernel.org, devicetree@vger.kernel.org,
-        Imran Shaik <imran.shaik@oss.qualcomm.com>,
-        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-X-Mailer: b4 0.15.2
-X-Proofpoint-GUID: Sf_aFMbpQJ2OIuyT-3RVpKF4kwedxNhr
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTExMDE3NyBTYWx0ZWRfX7BV2UEsZCG84
- lcz+4/4fZ0cWo7905QgkqMKsoGJXwr2wAzu+j5z2scIo3lT/igrt2zN+onV/lp0iOEyv/D7ht3x
- IzeZysGzPXbUUVByI8gHmizXWP3p4G33xZPGnokAjB0thL525WcY8Bid4OnBHBA0MJIxHDJHN2e
- hwHfidEu9mZ1djTpcFt1IuxrfniNBIiYxr72MCqjdgHpQNFwcW446XWtC5db8o76+ACIl2GhqFG
- vRD5/Mk3LMNHN+WjL7kSYACmFmdCtDaBFbMylaNqB1OIOzuSs1vNKeRocsdMKVOoEcaFUDPmy97
- Lie8gNEm4Fqys4G17P5qf0oQq4jUQkY0dSFMUhCz9wuH1JKc4cCqZysA320tm3X8YtT3rwGlDhP
- P45AM58YIruO2rdJIQbtR96Y5txwlK+RACv3OgtVWf5QlXFlS4OWP7H7pryJiRuRH/pRquOplF/
- 7ONUEtP4sVCcYxp3yxg==
-X-Authority-Analysis: v=2.4 cv=X6jHu2Te c=1 sm=1 tr=0 ts=6aa3f5c6 cx=c_pps
- a=0uOsjrqzRL749jD1oC5vDA==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
- a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
- a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=BLctq3pD1h73di9K4sgA:9 a=QEXdDO2ut3YA:10
- a=mQ_c8vxmzFEMiUWkPHU9:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTExMDE3NyBTYWx0ZWRfXyvhRRj0OuJLV
- L2MMhVIk049gQFD8gia8GH+dkMyWiEF3rUIaAszFJrcmBkYpDUk0dEddE9OC+PVQYpSrEhHQROR
- h6K6zghVFgitRta42rdmcjv+CikBOpc=
-X-Proofpoint-ORIG-GUID: Sf_aFMbpQJ2OIuyT-3RVpKF4kwedxNhr
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-11_04,2026-09-09_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 spamscore=0 adultscore=0 malwarescore=0 clxscore=1015
- suspectscore=0 priorityscore=1501 bulkscore=0 lowpriorityscore=0 phishscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609110177
+Message-Id: <20260911-video-optee-pas-v1-v1-1-7bbddaaac5ba@kernel.org>
+References: <20260911-video-optee-pas-v1-v1-0-7bbddaaac5ba@kernel.org>
+In-Reply-To: <20260911-video-optee-pas-v1-v1-0-7bbddaaac5ba@kernel.org>
+To: Bjorn Andersson <andersson@kernel.org>, 
+ Konrad Dybcio <konradybcio@kernel.org>, 
+ Vikash Garodia <vikash.garodia@oss.qualcomm.com>, 
+ Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>, 
+ Abhinav Kumar <abhinav.kumar@linux.dev>, Bryan O'Donoghue <bod@kernel.org>, 
+ Mauro Carvalho Chehab <mchehab@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org, 
+ linux-media@vger.kernel.org, Sumit Garg <sumit.garg@oss.qualcomm.com>, 
+ Jorge Ramirez-Ortiz <jorge.ramirez@oss.qualcomm.com>, 
+ Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>
+X-Mailer: b4 0.14.3
 
-Add support for Audio Core Clock Controller (AudioCoreCC) and Audio Core
-CSR nodes on Qualcomm Shikra SoC. The Audio Core Clocks and Resets support
-differs across Shikra variants based on Audio subsystem enablement as
-follows:
-- CQM variant: The QAIF driver runs on HLOS, hence both clocks and resets
-are required to be supported on HLOS.
-- CQS variant: The QAIF driver runs on the Modem, and required clocks are
-handled on Modem, so from HLOS only resets are needed.
-- IQS variant: no soundwire codes, hence no clocks/resets are needed.
+From: Jorge Ramirez-Ortiz <jorge.ramirez@oss.qualcomm.com>
 
-Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-Signed-off-by: Imran Shaik <imran.shaik@oss.qualcomm.com>
+Consumers may need to know which PAS backend is active, e.g. to decide
+whether SCM-specific calls apply.
+
+Add qcom_pas_get_backend() returning the active backend name (or NULL),
+and define QCOM_PAS_BACKEND_SCM/QCOM_PAS_BACKEND_TEE for consumers to
+match against. Use them in the SCM and OP-TEE backends too.
+
+Assisted-by: Copilot:claude-opus-4.8
+Signed-off-by: Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>
+Co-developed-by: Sumit Garg <sumit.garg@oss.qualcomm.com>
+Signed-off-by: Sumit Garg <sumit.garg@oss.qualcomm.com>
 ---
-This patch is rebased on top of Shikra USB DT series [1] to avoid merge
-conflicts, and there is no functional dependency.
+ drivers/firmware/qcom/qcom_pas.c       | 8 ++++++++
+ drivers/firmware/qcom/qcom_pas_tee.c   | 2 +-
+ drivers/firmware/qcom/qcom_scm.c       | 2 +-
+ include/linux/firmware/qcom/qcom_pas.h | 5 +++++
+ 4 files changed, 15 insertions(+), 2 deletions(-)
 
-[1]: https://lore.kernel.org/all/20260911-usb-shikra-v7-v8-0-851ee4bc0eec@oss.qualcomm.com/
----
-Changes in v5:
-- Dropped the bindings and driver patches that are already merged.
-- Link to v4: https://lore.kernel.org/r/20260724-shikra-audiocorecc-v4-0-0a89bb13d817@oss.qualcomm.com
-
-Changes in v4:
-- Dropped "clk: qcom: common: Register reset controller only when resets are present" patch
-  - Sashiko AI review pointed a valid GDSC-only corner case issue with this
-    change, will address it in a separate patch.
-  - This patch is not needed for this series, after splitting AudioCoreCC
-    clocks and resets into different devices.
-- Added NULL check for device_get_match_data() in driver [Sashiko AI review]
-- Removed unnecessary <linux/mod_devicetable.h> include in driver [Uwe]
-- Collected the R-By tags received on v2.
-- Link to v3: https://lore.kernel.org/r/20260723-shikra-audiocorecc-v3-0-90b878ae0d4e@oss.qualcomm.com
-
-Changes in v3:
-- Rebased on next-20260722, as the dependent RPMCC/GCC and Shikra base
-  DTS changes were merged. 
-- Separated the audiocorecc and audiocore_csr bindings into separate schema
-  docs [Rob]
-- Moved the AudioCoreCSR schema to bindings/reset/, since it now only
-  describes a reset controller.
-- Updated audiocorecc DTS node to use status reserved [Konrad]
-- Kept audiocore_csr node globally enabled by default in DTS [Konrad]
-- Collected all the R-By received on v1. 
-- Link to v2: https://lore.kernel.org/r/20260708-shikra-audiocorecc-v2-0-b320d822cdd0@oss.qualcomm.com
-
-Changes in v2:
-- Separated AudioCoreCC and AudioCoreCSR nodes as both resides in two
-  different register spaces. [Konrad]
-- Updated bindings and driver patches to handle the separate node
-  compatibles.
-- Updated resets in driver patch to handle HW_CTL bit.
-- Link to v1: https://lore.kernel.org/r/20260605-shikra-audiocorecc-v1-0-7ee6b5f2d928@oss.qualcomm.com
-
-To: Bjorn Andersson <andersson@kernel.org>
-To: Konrad Dybcio <konradybcio@kernel.org>
-To: Rob Herring <robh@kernel.org>
-To: Krzysztof Kozlowski <krzk+dt@kernel.org>
-To: Conor Dooley <conor+dt@kernel.org>
-Cc: Ajit Pandey <ajit.pandey@oss.qualcomm.com>
-Cc: Imran Shaik <imran.shaik@oss.qualcomm.com>
-Cc: Taniya Das <taniya.das@oss.qualcomm.com>
-Cc: Jagadeesh Kona <jagadeesh.kona@oss.qualcomm.com>
-Cc: linux-arm-msm@vger.kernel.org
-Cc: devicetree@vger.kernel.org
-Cc: linux-kernel@vger.kernel.org
----
- arch/arm64/boot/dts/qcom/shikra-cqm-evk.dts |  4 ++++
- arch/arm64/boot/dts/qcom/shikra.dtsi        | 17 +++++++++++++++++
- 2 files changed, 21 insertions(+)
-
-diff --git a/arch/arm64/boot/dts/qcom/shikra-cqm-evk.dts b/arch/arm64/boot/dts/qcom/shikra-cqm-evk.dts
-index 286ea46d0c36..079a1636cb6a 100644
---- a/arch/arm64/boot/dts/qcom/shikra-cqm-evk.dts
-+++ b/arch/arm64/boot/dts/qcom/shikra-cqm-evk.dts
-@@ -23,6 +23,10 @@ chosen {
- 	};
- };
+diff --git a/drivers/firmware/qcom/qcom_pas.c b/drivers/firmware/qcom/qcom_pas.c
+index 24485dd0fa10..eb9e8ac85860 100644
+--- a/drivers/firmware/qcom/qcom_pas.c
++++ b/drivers/firmware/qcom/qcom_pas.c
+@@ -253,6 +253,14 @@ bool qcom_pas_supported(u32 pas_id)
+ }
+ EXPORT_SYMBOL_GPL(qcom_pas_supported);
  
-+&audiocorecc {
-+	status = "okay";
-+};
++const char *qcom_pas_get_backend(void)
++{
++	struct qcom_pas_ops *ops = ops_ptr;
 +
- &pm4125_hs_in {
- 	remote-endpoint = <&usb_1_dwc3_hs>;
- };
-diff --git a/arch/arm64/boot/dts/qcom/shikra.dtsi b/arch/arm64/boot/dts/qcom/shikra.dtsi
-index 1395c182a2b1..999b478e1640 100644
---- a/arch/arm64/boot/dts/qcom/shikra.dtsi
-+++ b/arch/arm64/boot/dts/qcom/shikra.dtsi
-@@ -6,6 +6,7 @@
- #include <dt-bindings/clock/qcom,dispcc-qcm2290.h>
- #include <dt-bindings/clock/qcom,qcm2290-gpucc.h>
- #include <dt-bindings/clock/qcom,rpmcc.h>
-+#include <dt-bindings/clock/qcom,shikra-audiocorecc.h>
- #include <dt-bindings/clock/qcom,shikra-gcc.h>
- #include <dt-bindings/interconnect/qcom,icc.h>
- #include <dt-bindings/interconnect/qcom,osm-l3.h>
-@@ -3594,6 +3595,22 @@ cti@9900000 {
- 			label = "cti_apss_2";
- 		};
++	return ops ? ops->drv_name : NULL;
++}
++EXPORT_SYMBOL_GPL(qcom_pas_get_backend);
++
+ /**
+  * qcom_pas_is_available() - Check if the peripheral authentication service is
+  *			     available. Note that it is mandatory for any PAS
+diff --git a/drivers/firmware/qcom/qcom_pas_tee.c b/drivers/firmware/qcom/qcom_pas_tee.c
+index ac33a00687aa..397f11aea3b4 100644
+--- a/drivers/firmware/qcom/qcom_pas_tee.c
++++ b/drivers/firmware/qcom/qcom_pas_tee.c
+@@ -396,7 +396,7 @@ static void qcom_pas_tee_metadata_release(struct device *dev,
+ }
  
-+		audiocorecc: clock-controller@a0a0000 {
-+			compatible = "qcom,shikra-audiocorecc";
-+			reg = <0x0 0x0a0a0000 0x0 0x10000>;
-+			clocks = <&rpmcc RPM_SMD_XO_CLK_SRC>,
-+				 <&sleep_clk>,
-+				 <0>;
-+			#clock-cells = <1>;
-+			status = "reserved"; /* Owned by Modem firmware */
-+		};
+ static struct qcom_pas_ops qcom_pas_ops_tee = {
+-	.drv_name		= "qcom-pas-tee",
++	.drv_name		= QCOM_PAS_BACKEND_TEE,
+ 	.supported		= qcom_pas_tee_supported,
+ 	.init_image		= qcom_pas_tee_init_image,
+ 	.mem_setup		= qcom_pas_tee_mem_setup,
+diff --git a/drivers/firmware/qcom/qcom_scm.c b/drivers/firmware/qcom/qcom_scm.c
+index 3eaa4c9ccf3c..d556f357fecb 100644
+--- a/drivers/firmware/qcom/qcom_scm.c
++++ b/drivers/firmware/qcom/qcom_scm.c
+@@ -1057,7 +1057,7 @@ bool qcom_scm_pas_supported(u32 pas_id)
+ EXPORT_SYMBOL_GPL(qcom_scm_pas_supported);
+ 
+ static struct qcom_pas_ops qcom_pas_ops_scm = {
+-	.drv_name		= "qcom_scm",
++	.drv_name		= QCOM_PAS_BACKEND_SCM,
+ 	.supported		= __qcom_scm_pas_supported,
+ 	.init_image		= __qcom_scm_pas_init_image2,
+ 	.mem_setup		= __qcom_scm_pas_mem_setup,
+diff --git a/include/linux/firmware/qcom/qcom_pas.h b/include/linux/firmware/qcom/qcom_pas.h
+index fb2ec3be6a16..6e23b806259f 100644
+--- a/include/linux/firmware/qcom/qcom_pas.h
++++ b/include/linux/firmware/qcom/qcom_pas.h
+@@ -13,6 +13,10 @@
+ #include <linux/io.h>
+ #include <linux/types.h>
+ 
++/* Names reported by qcom_pas_get_backend() for the active PAS backend. */
++#define QCOM_PAS_BACKEND_SCM	"qcom_scm"
++#define QCOM_PAS_BACKEND_TEE	"qcom-pas-tee"
 +
-+		audiocore_csr: reset-controller@a0b4000 {
-+			compatible = "qcom,shikra-audiocore-csr";
-+			reg = <0x0 0x0a0b4000 0x0 0x1000>;
-+			#reset-cells = <1>;
-+		};
-+
- 		remoteproc_cdsp: remoteproc@b300000 {
- 			compatible = "qcom,shikra-cdsp-pas";
- 			reg = <0x0 0x0b300000 0x0 0x100000>;
+ struct qcom_pas_context {
+ 	struct device *dev;
+ 	u32 pas_id;
+@@ -34,6 +38,7 @@ static inline void __iomem *qcom_pas_ctx_map(struct qcom_pas_context *ctx)
+ 	return ptr;
+ }
+ 
++const char *qcom_pas_get_backend(void);
+ bool qcom_pas_is_available(void);
+ struct qcom_pas_context *devm_qcom_pas_context_alloc(struct device *dev,
+ 						     u32 pas_id,
 
----
-base-commit: ae800ad8819a6d89308031288a6ab6789eb5d2d4
-change-id: 20260605-shikra-audiocorecc-85efef073474
-
-Best regards,
---  
-Imran Shaik <imran.shaik@oss.qualcomm.com>
+-- 
+2.53.0
 
