@@ -1,130 +1,120 @@
-Received: from 011.lax.mailroute.net (011.lax.mailroute.net [199.89.1.14])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CC85C3DDAFB;
-	Fri, 11 Sep 2026 19:03:30 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=199.89.1.14
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3D1EA427A06;
+	Fri, 11 Sep 2026 19:10:12 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789153412; cv=none; b=InGkIDPEW7JaRf+riPrNn/INJ3t4WPYJ3i/TB/DcDFsOw+S2dJmrjexmRKTNt320OxliYn5SvVzzntSxNBOcbUBkymBTssWNSzUqQVP/zpJ8Kr6EMU/MfR361b/aWF8WEVD+5baPR9n0gwuh0pvVi7osLTEcHh/MpXugADf39Eo=
+	t=1789153822; cv=none; b=dpphQ6uUpTIxKUAowRXpclZsjpvVejWnPFqm1EA8lTmirpNh17E0Xaq0kbMv4C+HVQkvy1Z9Xho9x0+SQMGrbfb3KCzkDZlMYuV64igGBXeW+r99oUXRzenGFKNbGOp0jDGXRZvQ+pueH+SHV0jNE4IQny7gGgZ+n7Q1K/Izxwc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789153412; c=relaxed/simple;
-	bh=AAJxS1ZeWVorNTNsOrxKWTuYDxU3bdBsDIZpKFEvAmw=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=CLCq1/Lk9XICTyWDyG+EoqjExhNzXTeIGY89uIvnae+A9v4GXxspxJdvHQIVoISY+lvcBGcs56797amlhKCeRyfv1XA+RhABmWmEWSljNbZjhBam/tkpxDtQRMDO9f58plQKPVojxMvDo8OT0Z96jcPpz2kuo9XBWfDoBmxOPBE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=acm.org; spf=pass smtp.mailfrom=acm.org; dkim=pass (2048-bit key) header.d=acm.org header.i=@acm.org header.b=cvtq3BMS; arc=none smtp.client-ip=199.89.1.14
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=acm.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=acm.org
+	s=arc-20240116; t=1789153822; c=relaxed/simple;
+	bh=wGejjBh0RyidjF8E3zm/+gp4dnyW0prVCiM4HanGml4=;
+	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
+	 Message-Id; b=r3tovVCSxPxhihL97M6PCE67cCAYe8fI4qA9k14b3KNzcss3lcKKq328u7zR96zJrgMPd+BVy0SO2iS6tchnhOycZk/nazVLPoS7fXkA6Tjl2yqYJ1FxQWevcDU2e/TSlpSJRcRBoU2/x+93y4P2r5fGk8B+lvO0YNdyYN+V/Ls=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ZgfwXFn0; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=acm.org header.i=@acm.org header.b="cvtq3BMS"
-Received: from localhost (localhost [127.0.0.1])
-	by 011.lax.mailroute.net (Postfix) with ESMTP id 4hhP8K6yzjz1XM6JN;
-	Fri, 11 Sep 2026 19:03:29 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=acm.org; h=
-	content-transfer-encoding:content-type:content-type:in-reply-to
-	:from:from:content-language:references:subject:subject
-	:user-agent:mime-version:date:date:message-id:received:received;
-	 s=mr01; t=1789153394; x=1791745395; bh=HKB85OlUopoTlP2cYiFJXnK6
-	cXsUfRhylsdCN0AeosE=; b=cvtq3BMSIvQZr2O49qdJ6rlypEbTYIyBHGdXHuqv
-	zIQoCJdk6hmmw5EQ8jzvupgBakf1+/wLZ89T7v3w0Df7xOz5KW7YPY0X3o9ydnSj
-	CPRUrlf7SLM8jqy5fWIrjAHa7BxSWD3RK6/ju+f2klBF8xBun202aSqXZxvtzg6o
-	zLmS+GHWyIXINcaqUmyBwOkN/JgqhPnUR9B5GRFwVnuGQOZyfIHu0Ik1d/UdKHSZ
-	FNOpXXNQLRcYFEBsfyf+gZ3dZxQQScj7pAmki8+tGVzPSC6abnP7OG9en+86g7Dc
-	rpEaaypiB1JNtoZDKWHSA8uhSTBfyT5838f2QYxB1GsQTg==
-X-Virus-Scanned: by MailRoute
-Received: from 011.lax.mailroute.net ([127.0.0.1])
- by localhost (011.lax [127.0.0.1]) (mroute_mailscanner, port 10029) with LMTP
- id qvovV8J3T_kX; Fri, 11 Sep 2026 19:03:14 +0000 (UTC)
-Received: from [100.80.231.125] (unknown [104.135.182.41])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	(Authenticated sender: bvanassche@acm.org)
-	by 011.lax.mailroute.net (Postfix) with ESMTPSA id 4hhP7t6bfRz1XM4Sx;
-	Fri, 11 Sep 2026 19:03:06 +0000 (UTC)
-Message-ID: <94ee6bd1-8126-4a99-9b9c-d58e16fd9d9e@acm.org>
-Date: Fri, 11 Sep 2026 12:03:05 -0700
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="ZgfwXFn0"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 990EE1F000FF;
+	Fri, 11 Sep 2026 19:10:10 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1789153811;
+	bh=x8PF0Dw7B9WOGI0dgKC/lQ6SFx581HVewAv+WudZApk=;
+	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
+	b=ZgfwXFn0n86BydycMzknxcPJhdXE8VTJA5js5hebUm8GFRpG7Z+JgIMKyUznMIkr0
+	 42hSx1+db7cX6H/GFI23hksucKuXhCJF3qwqyqZW7l9xEJxRO+rrDBezl1ti8yLsM7
+	 XRRWahOkZhpZbT7hDSXLvW2WzWO/rKJZs+3m0UC1BMnt02Jd2mwpGty4Z4Mak30Lft
+	 fAwE8BwoFIqCz6XKMUlY7YnQ+fBIcJaapWbsDDhMjBWl7u94qKvs901ed85hrrS2ru
+	 jyPCvlqOmgJxTrdjaBmp6E6OsoRLztzdgZTj4ZpuS+8+6mreUnlIP+OJDVDPU0Iowd
+	 0cU1wtElUb90A==
+From: sashiko-bot@kernel.org
+Subject: Re: [PATCH v2 2/2] spi: spi-qpic-snand: drop the redundant ECC
+ context handling
+Reply-To: sashiko-reviews@lists.linux.dev
+To: md.alam@oss.qualcomm.com, broonie@kernel.org, "Johan Alvarado" <contact@c127.dev>
+Cc: j4g8y7@gmail.com, quic_varada@quicinc.com, linux-arm-msm@vger.kernel.org, linux-spi@vger.kernel.org, miquel.raynal@bootlin.com, pengpeng@iscas.ac.cn, linux-kernel@vger.kernel.org, quic_srichara@quicinc.com, linux-mtd@lists.infradead.org, konradybcio@kernel.org
+In-Reply-To: <20260911184416.109790-3-contact@c127.dev>
+References: <20260911184416.109790-1-contact@c127.dev>
+ <20260911184416.109790-3-contact@c127.dev>
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+Date: Fri, 11 Sep 2026 19:10:10 +0000
+Message-Id: <20260911191010.990EE1F000FF@smtp.kernel.org>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH RFC] drivers/rufs: add Rust UFS host controller driver
-To: jaemyung.lee@samsung.com, Andreas Hindborg <a.hindborg@kernel.org>,
- Miguel Ojeda <ojeda@kernel.org>, Boqun Feng <boqun@kernel.org>,
- Gary Guo <gary@garyguo.net>, =?UTF-8?Q?Bj=C3=B6rn_Roy_Baron?=
- <bjorn3_gh@protonmail.com>, Benno Lossin <lossin@kernel.org>,
- Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>,
- Danilo Krummrich <dakr@kernel.org>,
- Daniel Almeida <daniel.almeida@collabora.com>,
- Tamir Duberstein <tamird@kernel.org>, Alexandre Courbot
- <acourbot@nvidia.com>, =?UTF-8?Q?Onur_=C3=96zkan?= <work@onurozkan.dev>,
- "Martin K. Petersen" <martin.petersen@oracle.com>,
- James Bottomley <james.bottomley@hansenpartnership.com>,
- Jens Axboe <axboe@kernel.dk>
-Cc: linux-kernel@vger.kernel.org, rust-for-linux@vger.kernel.org,
- linux-block@vger.kernel.org, linux-scsi@vger.kernel.org,
- linux-arm-msm@vger.kernel.org
-References: <20260912-rufs-private-v1-1-716db733e655@samsung.com>
-Content-Language: en-US
-From: Bart Van Assche <bvanassche@acm.org>
-In-Reply-To: <20260912-rufs-private-v1-1-716db733e655@samsung.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
 
-On 9/11/26 8:52 AM, Jaemyung Lee via B4 Relay wrote:
-> Add a Rust UFS host controller driver that exposes UFS logical units as
-> native blk-mq block devices without depending on the SCSI midlayer.
+Thank you for your contribution! Sashiko AI review found 1 potential issue(=
+s) to consider:
+- [High] Deterministic kernel panic in qcom_spi_block_erase() when the host=
+ ECC engine is bypassed (e.g., via non-NAND SPI memory drivers like spi-nor=
+, or ON-DIE/software ECC).
+--
 
-One of the goals in the Linux kernel is *not* to duplicate code.
-Decoupling the UFS driver from the SCSI mid-layer implies duplicating
-the functionality of the SCSI mid-layer. I do not agree with this.
+commit a97a071d79125bb5db4d55c7d03a5f945fa92aef
+Author: Johan Alvarado <contact@c127.dev>
 
-> The driver is written in Rust.
+    spi: spi-qpic-snand: drop the redundant ECC context handling
+   =20
+    qcom_spi_ecc_init_ctx_pipelined() now publishes the ECC context to
+    snandc->qspi->ecc, so the assignment in
+    qcom_spi_ecc_prepare_io_req_pipelined() repeats what the pointer already
+    holds, and the zeroed struct qpic_ecc that qcom_spi_probe() allocates is
+    never read.
 
-Most UFS driver contributors are not familiar with Rust so I think the
-choice of Rust will make this driver unpopular.
+> The pointer is non-NULL only between context creation and destruction,
+> and every reader runs inside that window. The ooblayout callbacks are
+> installed by init_ctx. The page read, write and program helpers run only
+> when prepare_io_req has set page_rw or oob_rw. qcom_spi_block_erase()
+> runs only while the mtd is registered, which happens after init_ctx and
+> ends before cleanup_ctx.
 
-> The existing UFS driver is built on the SCSI subsystem. That made sense
-> historically: UFS adopted the SCSI Architecture Model as its application
-> layer, so reusing the SCSI midlayer's command queuing, error handling,
-> power management, and logical-unit addressing let UFS reach Linux quickly
-> and reliably. ufshcd bridges the SCSI midlayer to UFS Protocol Information
-> Units.
-> 
-> That foundation has become a source of friction. The evolution of UFS is
-> governed by JEDEC and increasingly includes UFS-specific features outside
-> the SCSI command set standardized by T10.
+Is this assumption accurate for all configurations?
 
-Huh? As long as I was attending JEDEC meetings I insisted on using
-commands already standardized by T10 and *not* introducing new commands.
+If the device tree specifies ON-DIE or software ECC (nand,ecc-engine =3D
+"on-die"), or if a non-NAND SPI memory device (like spi-nor) is attached to
+this controller, won't the host's init_ctx be bypassed?
 
-I do not want to give UFS vendors the freedom to introduce new commands
-without coordinating with a standards body that has more experience with
-the introduction of new commands, e.g. T10.
+> diff --git a/drivers/spi/spi-qpic-snand.c b/drivers/spi/spi-qpic-snand.c
+> index 20045d4a46fad..760ee1c29402f 100644
+> --- a/drivers/spi/spi-qpic-snand.c
+> +++ b/drivers/spi/spi-qpic-snand.c
+[ ... ]
+> @@ -1586,14 +1584,9 @@ static int qcom_spi_probe(struct platform_device *=
+pdev)
+>  	struct spi_controller *ctlr;
+>  	struct qcom_nand_controller *snandc;
+>  	struct qpic_spi_nand *qspi;
+> -	struct qpic_ecc *ecc;
+>  	struct resource *res;
+>  	int ret;
+> =20
+> -	ecc =3D devm_kzalloc(dev, sizeof(*ecc), GFP_KERNEL);
+> -	if (!ecc)
+> -		return -ENOMEM;
+> -
 
-Linux filesystems support the NVMe and SCSI command sets via the
-abstractions offered by the block layer. Introducing new types of
-storage commands would require that the block layer and all filesystems
-are modified. I have not yet seen an good example of a new command that
-warrants such changes.
+[Severity: High]
+If init_ctx is bypassed as described above, will removing this allocation
+lead to a NULL pointer dereference in qcom_spi_block_erase()?
 
-> On Intel UFS 2.1 hardware, 4 KiB direct io_uring at QD32/job gave
-> these optimized-mode ranges over 1/2/4 jobs (three samples):
-> 
->    Workload  Op     RUFS kIOPS   C kIOPS      Difference
->    --------  -----  -----------  -----------  ---------------
->    randread  read   48.91-61.26  41.56-41.60  +17.6% to +47.4%
->    randwrite write  8.19-8.30    8.21-8.22    -0.4% to +1.1%
->    randrw    read   5.26-5.34    5.28-5.38    -0.9% to -0.4%
->    randrw    write  5.27-5.34    5.29-5.37    -0.8% to -0.5%
+If snandc->qspi->ecc remains NULL, a standard block erase operation
+delegated through qcom_spi_exec_op() to qcom_spi_block_erase() would appear
+to dereference it:
 
-"Intel UFS 2.1" sounds weird to me since Intel never produced any UFS
-devices as far as I know. Did you perhaps want to write "Intel UFSHCI
-2.1"? If so, these measurements are not representative since UFSHCI
-2.1 does not support MCQ. Measurement results for legacy (SDB) mode
-are highly sensitive to whether or not the I/O submitter runs on the
-same CPU core as the completion interrupt.
+drivers/spi/spi-qpic-snand.c:qcom_spi_block_erase() {
+	struct qpic_ecc *ecc_cfg =3D snandc->qspi->ecc;
+	...
+	snandc->regs->cfg0 =3D cpu_to_le32((ecc_cfg->cfg0_raw & ~CW_PER_PAGE_MASK)=
+ |
+					 FIELD_PREP(CW_PER_PAGE_MASK, 0));
+}
 
-Bart.
+>  	qspi =3D devm_kzalloc(dev, sizeof(*qspi), GFP_KERNEL);
+>  	if (!qspi)
+>  		return -ENOMEM;
+
+--=20
+Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260911184416.1097=
+90-1-contact@c127.dev?part=3D2
