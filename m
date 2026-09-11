@@ -1,327 +1,152 @@
-Received: from mo4-p01-ob.smtp.rzone.de (mo4-p01-ob.smtp.rzone.de [81.169.146.165])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-ej1-f51.google.com (mail-ej1-f51.google.com [209.85.218.51])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9C68E4A4F0D;
-	Fri, 11 Sep 2026 21:48:12 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=81.169.146.165
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3AD82486406
+	for <linux-arm-msm@vger.kernel.org>; Fri, 11 Sep 2026 22:06:49 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=209.85.218.51
 ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789163296; cv=pass; b=CC5Z+TzJxVIs7dpBkmODd7Jq7jHtyNdCSryg5A4q0s7sDIRF4izxSl/WMudMp5G94NPUgedyPLT/wwXxJEEcXTzBh25Ygx52y0vo3eZlEvRDIsv8z9GNn9jwhgvUpWaGJs43a5xZwCyuwHsYK6Ly0wAoceqC60+alV8MozBdgqY=
+	t=1789164412; cv=pass; b=BpXXR0gsJu0ODA41/WumSFUnx8JYpKV77/y9inZUfByuBfrPMec9byGIrwArGB70Dgxqm5xDAjbKwgl5mnX/+4MHeXPmGaZu/xkMhQWxSPQ3ZoNKR1djlNbpq68aR+tESC/qmXmS06s+rhUDQMpeb5id7v0FfdGFclinZ/GuRz0=
 ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789163296; c=relaxed/simple;
-	bh=ycUmqjr+j15i5WMteAkNalLy0jHrNrq78m43VLmnzVg=;
-	h=Message-ID:Subject:From:To:Cc:Date:In-Reply-To:References:
-	 Content-Type:MIME-Version; b=THEjQpq3aFFiDgokvxYrTfBKygo3U9pt+9iLVWVL7a0er+JNUG1prmCkmmHOFEtKlB+hjOaTNPeyHpnQ7JMxm0flL1mXlWr5hMBIYymDe8YcsPd+ujuS2RJsfL+4hLXrpegseMohip0jQbHZXWjfv8tFiFaE3ITF1wsuVVbjS/Y=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=iokpp.de; spf=none smtp.mailfrom=iokpp.de; dkim=pass (2048-bit key) header.d=iokpp.de header.i=@iokpp.de header.b=f5RgMYTq; dkim=permerror (0-bit key) header.d=iokpp.de header.i=@iokpp.de header.b=AajCHCLF; arc=pass smtp.client-ip=81.169.146.165
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=iokpp.de
-Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=iokpp.de
+	s=arc-20240116; t=1789164412; c=relaxed/simple;
+	bh=uhwITbsuBN1QyKKZ8uqQq/5/QXmUcyaikOFf8kDkoJc=;
+	h=MIME-Version:From:Date:Message-ID:Subject:To:Cc:Content-Type; b=VUFFc8T0ULL/Scz85j/BLG5OvvqsCqq6qvBSNQAbHXT5YyAynIYDHd1udycqLehu0dS9c2JcaTgLwS5hlZ+aBVZkh9LEH7oH05wbZKZ9M/D9SCl6uUtFWjxPq+WGWJcF4s+BWNjLGeeGnlPtPNJTiwL+YWhraloGT1CxJqL75J0=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=est.una.ac.cr; spf=pass smtp.mailfrom=est.una.ac.cr; dkim=pass (1024-bit key) header.d=est.una.ac.cr header.i=@est.una.ac.cr header.b=bP6A/RXV; arc=pass smtp.client-ip=209.85.218.51
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=est.una.ac.cr
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=est.una.ac.cr
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=iokpp.de header.i=@iokpp.de header.b="f5RgMYTq";
-	dkim=permerror (0-bit key) header.d=iokpp.de header.i=@iokpp.de header.b="AajCHCLF"
-ARC-Seal: i=1; a=rsa-sha256; t=1789163098; cv=none;
-    d=strato.com; s=strato-dkim-0002;
-    b=f/5NYhka1D7iIUgBsnzzokn7zcC5XX4OFWKtWeZQmvWMZ9mSYCBnUEFDBA+nvPp1Iy
-    FnHvB89ahbQdAcfN2tfWU5R+h8edEL6S0lv7OWKPj/utArCf5bR28PVyJFsGC7l0w1ua
-    gnYsdlDFqtcsG4cBAWVVSNmgnoKBb3SRmhg6V3E579DqwZxHSQVuzjZJt7mN3AsExXPA
-    rZZUshijnSNpgyC85x9C2ByLWGg/xoPEltO6EW9Xvp4/HC+9qkMGFbfizexbzngXowBx
-    WGf/OfsMFA5Z2Khbejy6jVFNTpXBGxHs+4tvdKfBk8XA1NToPWmWmBSNeZzDzRih8rGi
-    Iswg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; t=1789163098;
-    s=strato-dkim-0002; d=strato.com;
-    h=References:In-Reply-To:Date:Cc:To:From:Subject:Message-ID:Cc:Date:
-    From:Subject:Sender;
-    bh=ycUmqjr+j15i5WMteAkNalLy0jHrNrq78m43VLmnzVg=;
-    b=cth0f/wtacQmjLvvl8syxe9R967N+tYhGYAYzNrWWXErlT/ARXXGLPLqeWxJ9LFYQg
-    vWOxIAVTimZFAhqhinCQZuTtPwRLyR7Klt7FHaGLhtnO0VVW5T31czcjn0ynOk2a5M4l
-    OozL/0FenauxH/88DWbq4/Z31rku6O5VCxQPDQe9bknFcN9tDr5FPsOnaKoTiZYCUWIW
-    bkCzT648Qy7hlOGtUGdQYcbIl2vQ5gRpFxyU8u6lyNMb4okVisc15e0UIwXNL3cniwMn
-    1MPn99Tl6gqEYyeRH87R7W+ap0Nefph6jcRYMxn5ZgzsrKF2u3HzKXaeiIeV/n+WamsD
-    UBYg==
-ARC-Authentication-Results: i=1; strato.com;
-    arc=none;
-    dkim=none
-X-RZG-CLASS-ID: mo01
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1789163098;
-    s=strato-dkim-0002; d=iokpp.de;
-    h=References:In-Reply-To:Date:Cc:To:From:Subject:Message-ID:Cc:Date:
-    From:Subject:Sender;
-    bh=ycUmqjr+j15i5WMteAkNalLy0jHrNrq78m43VLmnzVg=;
-    b=f5RgMYTqJfMquxhwtGA1DA8ll+WRybZZYXiUoW24vkwa75QjnUmbUvbvUzptfrMXPd
-    jKVqeQ0mcQ0B9bIlA72euuDYnwkJ+LIlAFE4yrirLgnA6IVjuSkd/0sMm7yqvgMaVeAi
-    2A4IzVVnYfbPGil13A0VqfYMzlPF8lwbDELAICK7XCu9Xug1zXeT5dHap/pPjeAqL6/N
-    lsShedLC77xvgfp5pBizkJcafoe9FLBb4jYuFW70RODHTI5BfB98Ay2h2pqyDq3OEdAB
-    KA9Mes98YQ1aMS5LlJJojjrJIxAonlOcLmCaLD71o6cmYjwHG3Ukd4XmP5DlhXOyMIVo
-    +Wdg==
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; t=1789163098;
-    s=strato-dkim-0003; d=iokpp.de;
-    h=References:In-Reply-To:Date:Cc:To:From:Subject:Message-ID:Cc:Date:
-    From:Subject:Sender;
-    bh=ycUmqjr+j15i5WMteAkNalLy0jHrNrq78m43VLmnzVg=;
-    b=AajCHCLFEu4bkgKHsBEN/GFCkWfWeG372Q42FB3qM+VArRk9jvVqzlSSDdsJqepvyO
-    tfbGFyMz9PXCnliZ/uDQ==
-X-RZG-AUTH: ":LmkFe0i9dN8c2t4QQyGBB/NDXvjDB6pBSe9tgBDSDt0V0zNriHg+YfT0rGaZpI+/63exJG3nKe+1cCDsnKpsYY+u4Ll0RlE="
-Received: from p200300c58729681c3f3e4b76edf8c1cb.dip0.t-ipconnect.de
-    by smtp.strato.de (RZmta 55.6.2 AUTH)
-    with ESMTPSA id ze37e128BLivUx1
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256 bits))
-	(Client did not present a certificate);
-    Fri, 11 Sep 2026 23:44:57 +0200 (CEST)
-Message-ID: <4c38f13af8f75020fefc35827463e9bc643b99f4.camel@iokpp.de>
-Subject: Re: [PATCH RFC] drivers/rufs: add Rust UFS host controller driver
-From: Bean Huo <beanhuo@iokpp.de>
-To: jaemyung.lee@samsung.com, Andreas Hindborg <a.hindborg@kernel.org>, 
- Miguel Ojeda <ojeda@kernel.org>, Boqun Feng <boqun@kernel.org>, Gary Guo
- <gary@garyguo.net>,  =?ISO-8859-1?Q?Bj=F6rn?= Roy Baron
- <bjorn3_gh@protonmail.com>, Benno Lossin <lossin@kernel.org>, Alice Ryhl
- <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>, Danilo Krummrich
- <dakr@kernel.org>, Daniel Almeida <daniel.almeida@collabora.com>, Tamir
- Duberstein <tamird@kernel.org>, Alexandre Courbot <acourbot@nvidia.com>,
- Onur =?ISO-8859-1?Q?=D6zkan?= <work@onurozkan.dev>
-Cc: linux-kernel@vger.kernel.org, rust-for-linux@vger.kernel.org, 
-	linux-block@vger.kernel.org, linux-scsi@vger.kernel.org, 
-	linux-arm-msm@vger.kernel.org
-Date: Fri, 11 Sep 2026 23:44:57 +0200
-In-Reply-To: <20260912-rufs-private-v1-1-716db733e655@samsung.com>
-References: <20260912-rufs-private-v1-1-716db733e655@samsung.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.44.4-0ubuntu2.1 
+	dkim=pass (1024-bit key) header.d=est.una.ac.cr header.i=@est.una.ac.cr header.b="bP6A/RXV"
+Received: by mail-ej1-f51.google.com with SMTP id a640c23a62f3a-c25b661d37dso232050866b.0
+        for <linux-arm-msm@vger.kernel.org>; Fri, 11 Sep 2026 15:06:49 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1789164408; cv=none;
+        d=google.com; s=arc-20260327;
+        b=CRJyc8L5WteJ6I+TbF6eZsPMyjxorPYQ08YtOj7gjrk78JwGbyn9Ot3NNrm1NtwSLt
+         obPVZ3qmJ1ZHMgrNcjLmskt0GlNcnOP5RvvbrS9yFgu9AimEi4bNjKa1lGu4B5hA4/oh
+         mtoy5/M6y6ZXDXXBhEpsL8nLWE5StAyDvGKqgYqosa4WkcgZlBy9QKxoBZlFatyAoGda
+         9oqw9o5vBaBkt/RU9noCrvxI6t4HKb4ldsv+JaDpG4Vy/7SqKnLsCeB6YPk6cjddDL3r
+         Xob0HqHnZVFVtchEwus34HfDU/Lnr0NzTENXm4xxt3QBJIsrOw0gfCJr/uy/a7RAawdf
+         TZLA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=cc:to:subject:message-id:date:from:mime-version:dkim-signature;
+        bh=wQjMKqS7oeVmIMa2lPbwdzd52T317NKfkckf6Z3yXCU=;
+        fh=CKEbU6IoLN2kOfpAEEoYKzmWTQ6uEAwjb1lfPmt27PQ=;
+        b=SdT0Kqo5wLFLGU5FnKKShksDMtAkkvsQdvCy8FMnckpNEq6swiwa6LMHPyd8mL6NJX
+         Qo01IsVGwcEmA1s1r+ypm5A3he6qfV4rq+Y/ksnjjHWCNslh434IYfFPJssmal1pigBl
+         YXgzYBGinyI4PbL/ZgfBCA/32JPvObJTmkDsfmxJaPKJgJErCrwiuMi5P3NG/1R0Ylhh
+         ywbhkwHVk331mjwUueSnlqsozVs6jPbAsJcn5feLzETSSDdxjUffIPusiuEi2KXY4uYB
+         IH2GGBydnoYxEGEoCH9UnoeUfN0vU1B485gHthTKvflgUbsQYk8+TCRzETjWZOWSgDEX
+         eudQ==;
+        darn=vger.kernel.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=est.una.ac.cr; s=google; t=1789164408; x=1789769208; darn=vger.kernel.org;
+        h=content-type:cc:to:subject:message-id:date:from:mime-version:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=wQjMKqS7oeVmIMa2lPbwdzd52T317NKfkckf6Z3yXCU=;
+        b=bP6A/RXVpOY2dbDIzqUl1gC7qnWBzja7BOFuXJhtdFA5fxFtHLHrvIwb4e+9VPb4WE
+         TBS/wh9spDmKDW5VjpfMiLIQY2rBAFWHZ7U692HjkMsLikDKH04mf+CxEq9zNlajZXK+
+         QQuPrdBbxHGx4RfgxRBmtVBj/uP3v3TVhQctg=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1789164408; x=1789769208;
+        h=content-type:cc:to:subject:message-id:date:from:mime-version
+         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=wQjMKqS7oeVmIMa2lPbwdzd52T317NKfkckf6Z3yXCU=;
+        b=U8jQ74Uu4Pte5S49o8AJH3COtcz60+6WO3+sIvKeOiJQfYr5Iosjpi8GFLU3RyfRa+
+         zmHbTmE6KlOKrDeS50eXuO93RKLKys9PO4pbz4X494dWHJpJMoYVKufaBN20yqFhgXLS
+         kSqzPufnQRrcWJqAla03++J+gvSo1oTZpeLqjy1kFNt6fzKY6zZFwxInaccff58QjGW7
+         4LIZHVKYcT2g9+eoebsdn0Xy6UZomtuPqrDQZBwuIKkBWFs2qfV+7baZ9qppaTbZ3xZP
+         bRGcQADHTxnN5OWIv8FHgm9Q70Td3DWk589OBzph/Cdj5CjX4faIR9HWaGIurpCqFpQk
+         k27Q==
+X-Gm-Message-State: AFuF++kYE0f/zifOQOs9oROYam+6/tHfuyFBFUNu1oo619KQlSq0DZXV
+	ED2HF8x6qxVTtf5JsU/40kTBBc1sj9XqnKaNwlXkYpsZBjQv9gIAfDRxPhsN6wRH0cIcL1kkHP7
+	ZvT5nesQtO9SbZ8Gz1iafvWMuCePwsdGMEqST9WbTQhLQzbdZdA+uZFdGCA==
+X-Gm-Gg: AYBFou3hL3PoKa+aIlG3w5KrX1OuI7lOUTQV4kE+r2ei+Idc0zgi5fxzppGoL8JEWCx
+	3TRca1oEhayCaIEfKobtDk3C0o+aggOgdGNUMV2WaTfMYrhC9vesFob7Rg317P/fqFdQ4YDoKNx
+	A5k+CNB5/PPvEXJaYIRpleDNEb7X1Azpze0REpTJgLqDz3le59IXZhpXzuWuBMor0Utzwtjuxwt
+	q7cZAFBmYq88seRIEymMI5Qg5PISbQiDJUMkCGYuzATMObKW3qZE2veealL/feomxDeO5fv6ked
+	Fkpmn2jQOOB+Pcoxz27KQ0JGbwGybwCrb8RfCYjMZRT8QhSzxeBtlNVVrdubaae5rAOmf59Wwdc
+	GfSW6++Xr/4xgM9Smfsgn
+X-Received: by 2002:a17:907:944d:b0:c16:4e5:944a with SMTP id
+ a640c23a62f3a-c29666725d4mr279453966b.21.1789164408354; Fri, 11 Sep 2026
+ 15:06:48 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+From: Avalon Vargas Centeno <avalon.vargas.centeno@est.una.ac.cr>
+Date: Fri, 11 Sep 2026 16:06:37 -0600
+X-Gm-Features: AcwNN1U_2tuG8X_alxZ80QmSpMmOxpgoLvfHOPditQ4IaFjBhDDT2dZzYtdfpE0
+Message-ID: <CAGXpr56LDenxF5hM-_gdc7suckR9P7sgC8vY4T7dcHtLK0OwVA@mail.gmail.com>
+Subject: [RFC] arm64: dts: qcom: Dell Inspiron 7441 LXST2021 touchscreen at 0x09
+To: linux-arm-msm@vger.kernel.org
+Cc: andersson@kernel.org, konradybcio@kernel.org
+Content-Type: text/plain; charset="UTF-8"
 
-On Sat, 2026-09-12 at 00:52 +0900, Jaemyung Lee via B4 Relay wrote:
-> From: Jaemyung Lee <jaemyung.lee@samsung.com>
->=20
-> Add a Rust UFS host controller driver that exposes UFS logical units as
-> native blk-mq block devices without depending on the SCSI midlayer.
->=20
-> Implement host controller setup, UIC link startup and power-mode
-> configuration, device and unit descriptor discovery, query operations, an=
-d
-> SCSI protocol command construction. Support normal read, write, flush, an=
-d
-> discard I/O with coherent UTP descriptors and owned streaming DMA mapping=
-s.
->=20
-> Provide both single-doorbell and multi-circular-queue transfer backends.
-> Map shared blk-mq tags directly to UFS task tags, retain request ownershi=
-p
-> while commands are in flight, dispatch completion per MCQ completion queu=
-e,
-> and return polled completions through the blk-mq completion batch.
->=20
-> Add PCI and Qualcomm platform frontends. The PCI frontend supports the QE=
-MU
-> UFS controller and existing Intel and Samsung IDs. The Qualcomm frontend
-> provides the clocks, PHY, reset, interconnect, power-domain, OPP, GPIO, a=
-nd
-> controller-specific initialization needed by supported SoCs.
->=20
-> This establishes normal-I/O support for UFSHCI single-doorbell and MCQ
-> controllers. Full timeout recovery, error handling, and power management
-> are left for follow-up work.
->=20
-> Signed-off-by: Jaemyung Lee <jaemyung.lee@samsung.com>
-> ---
-> This RFC introduces RUFS, a UFS host controller driver that sits directly
-> on the block layer and does not use the SCSI midlayer. UFS logical units
-> are exposed as native blk-mq block devices, the same way NVMe namespaces
-> are. The driver is written in Rust.
->=20
-> Why decouple UFS from SCSI
-> --------------------------
->=20
-> The existing UFS driver is built on the SCSI subsystem. That made sense
-> historically: UFS adopted the SCSI Architecture Model as its application
-> layer, so reusing the SCSI midlayer's command queuing, error handling,
-> power management, and logical-unit addressing let UFS reach Linux quickly
-> and reliably. ufshcd bridges the SCSI midlayer to UFS Protocol Informatio=
-n
-> Units.
->=20
-> That foundation has become a source of friction. The evolution of UFS is
-> governed by JEDEC and increasingly includes UFS-specific features outside
-> the SCSI command set standardized by T10. These features must still be
-> expressed through, and constrained by, a SCSI-shaped driver. Features tha=
-t
-> are meaningful only to UFS are difficult to land in a subsystem whose
-> maintainers reasonably want to keep SCSI focused on SCSI, and block layer
-> or shared infrastructure changes that UFS needs end up mediated through
-> SCSI's priorities. In practice UFS is treated as an add-on to SCSI rather
-> than as a first-class storage interface, and a significant amount of UFS
-> functionality lives off-tree as a result, with the back- and forward-
-> porting cost that implies.
->=20
-> We propose to decouple UFS from SCSI with a standalone driver that sits
-> directly on the block layer, alongside drivers like NVMe. This lets
-> JEDEC-specific features evolve independently of T10, gives UFS
-> its own dedicated review surface, and removes the impedance mismatch
-> between the UFS data model and the SCSI command model. UFS uses a subset =
-of
-> the SCSI command set within command UPIUs, so the driver can construct th=
-e
-> required CDBs directly without depending on the SCSI midlayer.
->=20
-> The driver is designed around the UFS and UFSHCI specifications rather th=
-an
-> as a line-by-line translation of ufshcd. Its target is JEDEC UFS 4.1 and
-> UFSHCI 4.1.
->=20
-> Why Rust
-> --------
->=20
-> The architectural question above would be the same for a C driver. We cho=
-se
-> Rust because UFS features arrive at a high pace, and turning new
-> specification features into stable, validated code on tight timelines is
-> where memory- and concurrency-safety guarantees pay off: fewer classes of
-> bugs reach production, and iteration is faster. Rust's growing acceptance
-> in the kernel makes a block-layer-native UFS driver a realistic
-> architecture to evaluate.
->=20
-> Initial feature set
-> --------------------
->=20
-> The new driver supports single-doorbell and multi-circular-queue operatio=
-n,
-> PCI and Qualcomm platform frontends, logical-unit discovery, and normal
-> read, write, flush, and discard I/O. It uses shared blk-mq tags as UFS ta=
-sk
-> tags, keeps request ownership through completion, and uses owned DMA
-> mappings for the complete I/O lifetime.
->=20
-> Full timeout recovery, error handling, and power management remain
-> follow-up work.
->=20
-> Patch layout and dependencies
-> -----------------------------
->=20
-> The single patch contains the complete driver. This keeps review focused =
-on
-> the RUFS architecture and the SCSI-independent blk-mq model.
->=20
-> The driver depends on Rust block, DMA, IRQ, and platform abstractions tha=
-t
-> are intentionally excluded from this posting. Some of these abstractions
-> have already been posted to the list, most notably in the Rust null block
-> driver v2 series, the Ownable/OwnableRefCounted page series, and the
-> impl_flags extensions. The remaining abstractions are new and will be
-> posted as separate series before the first non-RFC version of this driver=
-.
->=20
-> A buildable tree based on v7.3-rc2 with all dependencies and this patch i=
-s
-> at:
->=20
-> https://github.com/SamsungDS/rufs/tree/rfc/rufs-public
->=20
-> Testing
-> -------
->=20
-> The v7.2 development version has been exercised with SDB and MCQ on the
-> QEMU UFS model, including ext4 fio workloads and module load/unload cycle=
-s.
-> SDB probe and normal I/O have also been exercised on Intel PCI and Qualco=
-mm
-> UFS hardware. The current port has been compile-tested independently with
-> PCI-only and Qualcomm-platform-only configurations.
->=20
-> The exact v7.2 tree used for the hardware measurements is available at:
->=20
-> https://github.com/SamsungDS/rufs/tree/rufs-7.2
->=20
-> On Intel UFS 2.1 hardware, 4 KiB direct io_uring at QD32/job gave
-> these optimized-mode ranges over 1/2/4 jobs (three samples):
->=20
-> =C2=A0 Workload=C2=A0 Op=C2=A0=C2=A0=C2=A0=C2=A0 RUFS kIOPS=C2=A0=C2=A0 C=
- kIOPS=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 Difference
-> =C2=A0 --------=C2=A0 -----=C2=A0 -----------=C2=A0 -----------=C2=A0 ---=
-------------
-> =C2=A0 randread=C2=A0 read=C2=A0=C2=A0 48.91-61.26=C2=A0 41.56-41.60=C2=
-=A0 +17.6% to +47.4%
-> =C2=A0 randwrite write=C2=A0 8.19-8.30=C2=A0=C2=A0=C2=A0 8.21-8.22=C2=A0=
-=C2=A0=C2=A0 -0.4% to +1.1%
-> =C2=A0 randrw=C2=A0=C2=A0=C2=A0 read=C2=A0=C2=A0 5.26-5.34=C2=A0=C2=A0=C2=
-=A0 5.28-5.38=C2=A0=C2=A0=C2=A0 -0.9% to -0.4%
-> =C2=A0 randrw=C2=A0=C2=A0=C2=A0 write=C2=A0 5.27-5.34=C2=A0=C2=A0=C2=A0 5=
-.29-5.37=C2=A0=C2=A0=C2=A0 -0.8% to -0.5%
->=20
-> The coefficient of variation (CV), calculated as the sample standard
-> deviation divided by the sample mean, measures run-to-run variability
-> relative to the mean. CV is a descriptive statistic; no normal or other
-> distribution was fitted to model the variation. The accompanying
-> two-sided 95% confidence intervals for the mean used Student's
-> t-distribution because each point contains only three samples. Those
-> intervals assume independent, approximately normally distributed sample
-> means and should be interpreted cautiously at this sample count.
->=20
-> RUFS randread had a CV of 28-57%, versus below 0.8% for C. Its apparent
-> gain therefore has low confidence and should be treated as preliminary.
-> Both drivers also logged platform UIC errors. Stable write and mixed
-> points differed by no more than 1.1%.
->=20
-> Feedback
-> --------
->=20
-> Comments on the decision to bypass the SCSI midlayer, the blk-mq model us=
-ed
-> in its place, and the proposed prerequisite API boundaries would be
-> especially welcome.
+Hello,
 
-Jaemyung,
+My Dell Inspiron 14 Plus 7441 has an LXST2021 touchscreen that works in
+Windows and BIOS but it was not detected with the Linux Inspiron
+device tree found upstream. After working on it i found that
+changing the touchscreen address from 0x10 to 0x09 fixes the
+touchscreen on this unit.
 
-thanks sharing.
+Hardware/software:
+- Dell Inspiron 14 Plus 7441, Snapdragon X Elite, BIOS 2.16.0
+- AUO B140QAX01.H internal panel (AUO0BA4)
+- NixOS, aarch64 Linux 7.2.4
+- Windows ACPI ID: LXST2021
+- Working Linux HID ID: 29BD:1103, I2C device 0-0009
 
-You still use scsi everywhere in your implementation protocol/scsi.rs build=
-s
-READ_10/16, WRITE_10/16, SYNCHRONIZE_CACHE and UNMAP CDB, so "decouple UFS =
-from
-SCSI" really means "copy a small part of sd and the SCSI error handling int=
-o a
-UFS driver." while JEDEC defines the UFS application layer as SCSI, the SCS=
-I
-work doesn't go away, you just move somewhere else, and it has to be writte=
-n
-again.
+The Inspiron DTS declares touchscreen@10, reg = <0x10>. A targeted reprobe
+on the original configuration logged:
 
-The "friction" claim is weak. SCSI has already been changed to fit UFS. Two
-examples: UFS now uses SCSI simple copy, group number in scsi write command=
-.
+  i2c_hid_of 0-0010: nothing at this address: -6
 
-I doubt how far this can go. do we really need to pay effort for a new RUST=
- UFS
-driver, I am not very confident, unless SCSI is removed from the UFS spec a=
-nd
-JEDEC defines native UFS commands, or we talk to the device directly with U=
-PIU.
-please name the JEDEC feature that the SCSI midlayer really blocked, or tha=
-t was
-historial issue which has been fixed.
+No touchscreen input device was created. The corresponding LXST2021 node
+in x1e80100-dell-latitude-7455.dts instead uses address 0x09, with the same
+I2C8 controller, descriptor address 1, GPIO51 level-low IRQ and ts0_default
+pinctrl state.
 
+I tested a local device-tree overlay disabling touchscreen@10 and adding
+touchscreen@9 with that upstream Latitude configuration. Linux now reports:
 
-I would also like to see the heavy and hard parts, because they are the par=
-ts
-that decide if this design worrks:
+  hid-multitouch 0018:29BD:1103.0003: input,hidraw2: I2C HID v1.00
+Device [hid-over-i2c 29BD:1103] on 0-0009
 
-1, error handling: abort, LU reset, retries with limits, sense decoding, th=
-is is
-the very hard part of UFS driver.
+Touch interaction works after reboot. The full NixOS configuration built
+successfully and the compiled DTB was inspected. Touch operation after
+suspend/resume has also been tested successfully.
+Other Inspiron touchscreen variants have not been tested. This was tested on
+7.2.4 with an overlay, not by building the proposed diff on current mainline.
 
-2, user-space tools interface: SG_IO and bsg (sg3_utils, ufs-utils, FFU wit=
-h
-WRITE BUFFER), and the UFS sysfs tree..
+The successful address fix uses the original upstream ts0_default state;
+no reset-pin change or new HID driver is needed for this result.
 
+Would replacing the Inspiron's 0x10 node with the existing LXST2021 setup
+be appropriate, or are there known Inspiron variants that genuinely use
+0x10 and need to remain supported? The original board submission described
+touch as working, so I would like to confirm variant handling before
+submitting this as an unconditional fix.
 
-Did any AI tool help write this code? If so, please add the Assisted-by: ta=
-g.
+The minimal proposed change against the currently inspected upstream file
+is below. My tested overlay is equivalent for the enabled touchscreen node.
 
-kind regards,=20
-Bean
+diff --git a/arch/arm64/boot/dts/qcom/x1e80100-dell-inspiron-14-plus-7441.dts
+b/arch/arm64/boot/dts/qcom/x1e80100-dell-inspiron-14-plus-7441.dts
+--- a/arch/arm64/boot/dts/qcom/x1e80100-dell-inspiron-14-plus-7441.dts
++++ b/arch/arm64/boot/dts/qcom/x1e80100-dell-inspiron-14-plus-7441.dts
+@@ -25,9 +25,10 @@
+ };
 
+ &i2c8 {
+- touchscreen@10 {
++ /* LXST2021 */
++ touchscreen@9 {
+  compatible = "hid-over-i2c";
+- reg = <0x10>;
++ reg = <0x09>;
 
-
-
-
+  hid-descr-addr = <0x1>;
+  interrupts-extended = <&tlmm 51 IRQ_TYPE_LEVEL_LOW>;
