@@ -1,67 +1,67 @@
-Received: from mail-yw1-f180.google.com (mail-yw1-f180.google.com [209.85.128.180])
+Received: from mail-yx1-f52.google.com (mail-yx1-f52.google.com [74.125.224.52])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8C0234AB1C4
-	for <linux-arm-msm@vger.kernel.org>; Fri, 11 Sep 2026 18:34:47 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.180
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8AE344BE42D
+	for <linux-arm-msm@vger.kernel.org>; Fri, 11 Sep 2026 18:36:08 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.224.52
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789151695; cv=none; b=GDKgOq7T8HiZj4ouRrm6fy904zfP6ksSDWfX6ZgLnj58qDLMwZZYvtqMQVLFuUblkIlQ4RtcR6yAcx5YVppemkPfqDCUBEmZixpt7eJfe2fFg9J58pk01FIj/vPTt8dYId9nQJk74K9E7SF/nmkkBLFzRtY2DUVrRK9bukMaGe0=
+	t=1789151785; cv=none; b=Z1/RLSlGkJSg0llCZxaQSRei4dxa+GVzfpPLeozid9J2eNWI769ep9wwLMe/+oU610MzLZiWIkUpi5Jw/mPQesydY+9ueWds2hNn/4zw1zqBtK7vL9mmMO+zcLQ44tLKTJKuPQsx3Ro1ON/N/KygjxIbvUxSnrGclOchs4Ummdk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789151695; c=relaxed/simple;
-	bh=OH4TD0T1j9//gFx8Hjs8ilFM6X8S8rbMf9k/5jV8TiE=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=PPYpIO6ZfjvVogWi5lPOEA+r4uwTZGygy2w7K0U8LzrQcU6b0nl9jTDVywC4BXfMinGDXWugPi2DIZYQRNduoVxiwb0KKSb/B7b0dMvNeUFqHQ+kW+XXbjgOPyLxKNqRAKloO3jXLhnXya7a0OXltaTPq8YJagVy2WY+UUCMsHM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=BH3Gvypw; arc=none smtp.client-ip=209.85.128.180
+	s=arc-20240116; t=1789151785; c=relaxed/simple;
+	bh=lb/Hv/vqEZyIorfE/AOb+//fnEmSJFGFf+2xZzLtrZw=;
+	h=Message-ID:Date:MIME-Version:From:Subject:To:Cc:References:
+	 In-Reply-To:Content-Type; b=EKh9qrH3FfxH2sZ8HJaM6aarN9Wmts/AdGahHKS7NQAFHQtwjsE1c3EdKIkJJJXBFstJCndq5NK3ScLAr70diKuJI2LArVTNXT5LgAjBHK/J2Fn15EnqG93d0nBg/bBM82/7wV99p/Q1YlJq5Y4xW/VSEG9e6WkydcB3evV+vZc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=Ok3D9HET; arc=none smtp.client-ip=74.125.224.52
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="BH3Gvypw"
-Received: by mail-yw1-f180.google.com with SMTP id 00721157ae682-8706dfdcd4fso13747147b3.3
-        for <linux-arm-msm@vger.kernel.org>; Fri, 11 Sep 2026 11:34:47 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="Ok3D9HET"
+Received: by mail-yx1-f52.google.com with SMTP id 956f58d0204a3-6712bea5c91so901696d50.0
+        for <linux-arm-msm@vger.kernel.org>; Fri, 11 Sep 2026 11:36:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1789151685; x=1789756485; darn=vger.kernel.org;
-        h=content-type:in-reply-to:autocrypt:from:content-language:references
-         :cc:to:subject:user-agent:mime-version:date:message-id:from:to:cc
+        d=gmail.com; s=20251104; t=1789151762; x=1789756562; darn=vger.kernel.org;
+        h=content-type:autocrypt:in-reply-to:content-language:references:cc
+         :to:subject:from:user-agent:mime-version:date:message-id:from:to:cc
          :subject:date:message-id:reply-to:content-type;
-        bh=hk2aRK1vwnRKpbCEcf4tT6rBkC59i6gDVNC/VnuWdwc=;
-        b=BH3GvypwzTzf+/oIl4NT6GDRmDXXMjcAHSrFZ4cRo8DRjyQMX3wTU+6QQRpubYyYx9
-         8z5CF1y8IHahAtaSdRTt+3L7xrZINfED0CTwHNaYpn0Yzm07BYK/rImo5Hzg+siyVle0
-         dAjB9jeLLVnAPJFVEQ1iAOJatM4KfTdlpcz6Kd8s1PCj6KZwfsGrJfPhJXmfMVdjFSFv
-         ldFZHmnNZJRofIi/4074FwY4VcpqfKU4K0jRslDR8vjcQCLzcTxLHmXdFUC4V2yZDf4H
-         1Ely8tSPnp6YN8/BXdBjT+y1q/EnpCpLfEBaLpFw0NzSldJ+Yslt7lBG/frIPIaSo9HG
-         pQEQ==
+        bh=PQUFlReksbLvMHzOhaRbAImsyhNtxAatqnZZuEpJRhA=;
+        b=Ok3D9HETB00LZJjbTP2QGMb1ptro0pPN8aAAjVCA2fBG1Fg0gtGTEX/WE6XfeJuzBs
+         4clY52MucBPwLuKtfU81nee/V3LtJGrg1xZh3oHUxCX+c0qG7irf7djKtdsplESOjTPX
+         jEAnBJnNF3NganAv2YaX12hG+sbtqiDyd69xjs9UHMIx9708GLilzxVIGbICfysn0rgF
+         rf63IOF8wbQHjro6Sl86XCOscOg2RbOqXIbTJ2aFD92h4qkRtgs0GvZHJYu8GQhM1cmX
+         z7MjQF2XeHW9QhBdfDbeJMIIfdl8IoExDKNSKOtNMuOXG26VUvZrsISTYJwBVO8TuL6u
+         gYSw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1789151685; x=1789756485;
-        h=content-type:in-reply-to:autocrypt:from:content-language:references
-         :cc:to:subject:user-agent:mime-version:date:message-id:x-gm-gg
+        d=1e100.net; s=20251104; t=1789151762; x=1789756562;
+        h=content-type:autocrypt:in-reply-to:content-language:references:cc
+         :to:subject:from:user-agent:mime-version:date:message-id:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=hk2aRK1vwnRKpbCEcf4tT6rBkC59i6gDVNC/VnuWdwc=;
-        b=VpFefhgzOl0f3Wtxl6mDUm8yWDf8yFJbpVnguvw36ryAYiUXt/XvWUFpE5iLWeTbH+
-         KWypF7Ce0ioJMSELqzjN4paCJa6V15xaRSJWVLKZvKG4dexb6a8R1QKb73LjBS2MCMgB
-         gPZJKpW5c5u4gSCVC1nzFwIuYwhY1Wy8GxQtYEftVUKfqu8rAzJPAsEVrZqAZ1YuWsuu
-         OhFj8AuhdiNNFl5EQJTIqOkIA98uLe3T09VWEkQbI5PC5Ik04MzTWWLJNFZRBTxWPm/n
-         z5Cgjl2/wiLCtWVc5WiwomuYbUwd1Ya6tWt4YQD54JZTsEuHnM2mMH0Y1a3/BUnYGiIQ
-         QQsg==
-X-Forwarded-Encrypted: i=1; AKwUvBzZdKvZFJj3JWR0ysthrvixxFjDS0uzWvUteok3yF9hMcRW9Qn/yO3bmc89NyvNyJi87ltwxueLQu6SyXUh@vger.kernel.org
-X-Gm-Message-State: AFuF++mHLNqq+fJrj2RmVTDWdkDpSrZwJBO4sGp3yEfB3uJI/fLGbKXo
-	/WDjv+oWOmlqLP6GEaak/ATRPpJrHwIt27Zg3nsOhEvRVDd5ZvAXr4+m
-X-Gm-Gg: AYBFou3il8D+WjTm+k71qkcDyn7lTXCxhG28YzzGG39+3p/Aw1IOpC3wmzAzMj9sddR
-	94etm+RYbqZs/3FkGux9PqH3kjWeDBBFncHKRprnLemsA9NJcL/a1TfAB0Ed4i20rMEx3OVdkD9
-	Oywd6ZieCgki4z10pyCJ8CRZ5+QSwdmvsRaKcjs+3fY1CKfllkN+OIurOTyGV5PA5h34nHDwg8Y
-	kni/7lNZ95+ocL4enLe2fnkzmStt9lfAstZvx9onJkXAhUk1ORp1cCgP4NQCwiw0XGkP1WOOIoP
-	cv87GwXsRu7Pq7bqkySzEvk3iWJR0xPmZwTiKNQsa919JbjKXCKuSxHcWejwVv87fDZ4c0HQWSp
-	AUhE/Zdj2Dj1tQEyZgbcsd4pBa2BDDmISN3XkDUJVfC0aXPclm3xMTvZn733I8e9hixJKSOe6pz
-	rjoLbyQK8CXsv+NL67HYCdQBDSiIT1qg580HxOVQEYFBMkdoF9MEbtKR5X3cPoeawuViCB2LBZc
-	Q==
-X-Received: by 2002:a05:690c:7107:b0:873:5bb2:6c31 with SMTP id 00721157ae682-884b2eb52bemr20024517b3.56.1789151684818;
-        Fri, 11 Sep 2026 11:34:44 -0700 (PDT)
+        bh=PQUFlReksbLvMHzOhaRbAImsyhNtxAatqnZZuEpJRhA=;
+        b=obORjEYn7p+TdEGKSYsFL6WALS69LW1kYtd5IF2HsU54YN0dW44tlEgNWU7lBez8Xs
+         J7PoSAUtjWy614kynY2Z3aEOItRIyU6rOiTeE5ooapW7mGJksv1yTzTYjMqha42ixDTE
+         SMjZ9OMbmDvvOwjdSy512x2IsFG9+uz14h9Eot+sK3IM216KnBFhYY/jLVW/FVx8KzcV
+         dR7ET8RO4YpK2nN7LvN8G7Dh2BTzxhBhulQk0tWKQEGx1I9/6N3j9DWKb21jmehMFyGf
+         BJ8leVqsc889mL2FWqvca3C5IIFB43JECXI1M+jbNK7vW/BX7JAwA3KVIrjYJN2D39cX
+         KCSA==
+X-Forwarded-Encrypted: i=1; AKwUvBz97m/OrYElpUdjRgnDiyGGKDYAUU4t7XRUHWXMgj+n5zWv/FQ/RC0zGeX28gq/HDuqUqSq3GxsYC/mCNeP@vger.kernel.org
+X-Gm-Message-State: AFuF++lsYQ2bqiw7zdXSHN+U+LVLroIrtXKxWCfw9PSgXoOA2AC59+TN
+	CsDJcX/9KWKSXuVvbdI55e/4XSCDAzeuG9DABAvNsHvL2zDghtezcss8
+X-Gm-Gg: AYBFou1Ccp376zrHP1gznGmqXIHuMRby1iHHRV2V6qhShVVW5j6Klx8tkWZTZXoQJqZ
+	tsAcERUc73IQvV+KbntNo+MsPmW9Y5ZQzpdkFDSaRL6tZyDpqBZiPilx9jJYQTAgClU6ZeGKeMf
+	h0hZmCa+blB2Lp/0/zLKhu7iyZicZdiJPAHp9rbAD8gN306DC+wNculTJySEns2mOtJuemK/1FN
+	G4FRKhtPlYOMv5+Iu2GxtNnkMuEa1yYDHXGAKxAEA7Eh2iIwyySgPjOw2/TKlMvmMzi2812K0Du
+	3cIHzp4Ot6i0iHDrD6mvrw62SglIdl6zmqeXEK7eFnmT661d87rxN2JL6FIDqtJrK8NddstyLBI
+	aD4BThZYDM2IukvwJr4aCXXZzC1l1X9PgxMK2FaPmsk+UmaN4GGfl/Ry3cj5P3ZxzWPd458Vi+u
+	uFjjTHlVOSeGEd1X2ItbKiiSPxbJySqYDOgCk0rsfWVkUeCbaYYOXxlP1ymEkVVIpPu65LT1ZoR
+	g==
+X-Received: by 2002:a05:690e:dc6:b0:671:3261:b0ab with SMTP id 956f58d0204a3-6713261b143mr303786d50.96.1789151762005;
+        Fri, 11 Sep 2026 11:36:02 -0700 (PDT)
 Received: from [10.138.10.6] ([185.98.168.14])
-        by smtp.gmail.com with ESMTPSA id 00721157ae682-88488a4c120sm14489077b3.38.2026.09.11.11.34.43
+        by smtp.gmail.com with ESMTPSA id 956f58d0204a3-67125db747esm1396460d50.3.2026.09.11.11.36.00
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 11 Sep 2026 11:34:43 -0700 (PDT)
-Message-ID: <7e1b4800-258b-4410-8e88-2ce49505689e@gmail.com>
-Date: Fri, 11 Sep 2026 14:34:39 -0400
+        Fri, 11 Sep 2026 11:36:01 -0700 (PDT)
+Message-ID: <c08519bb-b912-4d34-a164-5a9d65162716@gmail.com>
+Date: Fri, 11 Sep 2026 14:35:58 -0400
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -69,21 +69,25 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v7 00/12] crypto: qce - Fix crypto self-test failures
-To: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>,
- Thara Gopinath <thara.gopinath@gmail.com>,
+From: Demi Marie Obenour <demiobenour@gmail.com>
+Subject: Re: [PATCH v7 09/12] crypto: qce - remove the BROKEN label
+To: Bartosz Golaszewski <brgl@kernel.org>, Eric Biggers <ebiggers@kernel.org>
+Cc: Thara Gopinath <thara.gopinath@gmail.com>,
  Herbert Xu <herbert@gondor.apana.org.au>,
  "David S. Miller" <davem@davemloft.net>,
  Stanimir Varbanov <svarbanov@mm-sol.com>,
  Eneas U de Queiroz <cotequeiroz@gmail.com>,
  Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>,
- Eric Biggers <ebiggers@kernel.org>, Bjorn Andersson <andersson@kernel.org>,
- Konrad Dybcio <konradybcio@kernel.org>
-Cc: linux-crypto@vger.kernel.org, linux-arm-msm@vger.kernel.org,
- linux-kernel@vger.kernel.org, brgl@kernel.org, stable@vger.kernel.org
+ Bjorn Andersson <andersson@kernel.org>,
+ Konrad Dybcio <konradybcio@kernel.org>, linux-crypto@vger.kernel.org,
+ linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
+ Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
 References: <20260910-qce-fix-self-tests-v7-0-cdbd2718af14@oss.qualcomm.com>
+ <20260910-qce-fix-self-tests-v7-9-cdbd2718af14@oss.qualcomm.com>
+ <20260910143140.GA5719@quark>
+ <CAMRc=McDHXWRfYTwRasdBCXMnoVkXK9T7RB+gBNgCsGof-euyg@mail.gmail.com>
 Content-Language: en-US
-From: Demi Marie Obenour <demiobenour@gmail.com>
+In-Reply-To: <CAMRc=McDHXWRfYTwRasdBCXMnoVkXK9T7RB+gBNgCsGof-euyg@mail.gmail.com>
 Autocrypt: addr=demiobenour@gmail.com; keydata=
  xsFNBFp+A0oBEADffj6anl9/BHhUSxGTICeVl2tob7hPDdhHNgPR4C8xlYt5q49yB+l2nipd
  aq+4Gk6FZfqC825TKl7eRpUjMriwle4r3R0ydSIGcy4M6eb0IcxmuPYfbWpr/si88QKgyGSV
@@ -127,34 +131,37 @@ Autocrypt: addr=demiobenour@gmail.com; keydata=
  vUSQHSrmfOzX3cV4yfmjM5lewgSstoxGyTx2M8enslgdXhPthZlDnTnOT+C+OTsh8+m5tos8
  HQjaPM01MKBiAqdPgksm1wu2DrrwUi6ChRVTUBcj6+/9IJ81H2P2gJk3Ls3AVIxIffLoY34E
  +MYSfkEjBz0E8CLOcAw7JIwAaeBT
-In-Reply-To: <20260910-qce-fix-self-tests-v7-0-cdbd2718af14@oss.qualcomm.com>
 Content-Type: multipart/signed; micalg=pgp-sha256;
  protocol="application/pgp-signature";
- boundary="------------b6Pv0kWTnPJ4ZTrxShFmchbP"
+ boundary="------------wVAkQh0BYR9c4IMoAzf71N0A"
 
 This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------b6Pv0kWTnPJ4ZTrxShFmchbP
-Content-Type: multipart/mixed; boundary="------------b0zZgz1THSQE2fTDm71bz4rh";
+--------------wVAkQh0BYR9c4IMoAzf71N0A
+Content-Type: multipart/mixed; boundary="------------0OOUWZtcuQBwgLiyOlj8YQdY";
  protected-headers="v1"; hp="clear"
-Message-ID: <7e1b4800-258b-4410-8e88-2ce49505689e@gmail.com>
-Date: Fri, 11 Sep 2026 14:34:39 -0400
+Message-ID: <c08519bb-b912-4d34-a164-5a9d65162716@gmail.com>
+Date: Fri, 11 Sep 2026 14:35:58 -0400
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v7 00/12] crypto: qce - Fix crypto self-test failures
-To: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>,
- Thara Gopinath <thara.gopinath@gmail.com>,
+From: Demi Marie Obenour <demiobenour@gmail.com>
+Subject: Re: [PATCH v7 09/12] crypto: qce - remove the BROKEN label
+To: Bartosz Golaszewski <brgl@kernel.org>, Eric Biggers <ebiggers@kernel.org>
+Cc: Thara Gopinath <thara.gopinath@gmail.com>,
  Herbert Xu <herbert@gondor.apana.org.au>,
  "David S. Miller" <davem@davemloft.net>,
  Stanimir Varbanov <svarbanov@mm-sol.com>,
  Eneas U de Queiroz <cotequeiroz@gmail.com>,
  Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>,
- Eric Biggers <ebiggers@kernel.org>, Bjorn Andersson <andersson@kernel.org>,
- Konrad Dybcio <konradybcio@kernel.org>
-Cc: linux-crypto@vger.kernel.org, linux-arm-msm@vger.kernel.org,
- linux-kernel@vger.kernel.org, brgl@kernel.org, stable@vger.kernel.org
+ Bjorn Andersson <andersson@kernel.org>,
+ Konrad Dybcio <konradybcio@kernel.org>, linux-crypto@vger.kernel.org,
+ linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
+ Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
 References: <20260910-qce-fix-self-tests-v7-0-cdbd2718af14@oss.qualcomm.com>
+ <20260910-qce-fix-self-tests-v7-9-cdbd2718af14@oss.qualcomm.com>
+ <20260910143140.GA5719@quark>
+ <CAMRc=McDHXWRfYTwRasdBCXMnoVkXK9T7RB+gBNgCsGof-euyg@mail.gmail.com>
 Content-Language: en-US
-From: Demi Marie Obenour <demiobenour@gmail.com>
+In-Reply-To: <CAMRc=McDHXWRfYTwRasdBCXMnoVkXK9T7RB+gBNgCsGof-euyg@mail.gmail.com>
 Autocrypt: addr=demiobenour@gmail.com; keydata=
  xsFNBFp+A0oBEADffj6anl9/BHhUSxGTICeVl2tob7hPDdhHNgPR4C8xlYt5q49yB+l2nipd
  aq+4Gk6FZfqC825TKl7eRpUjMriwle4r3R0ydSIGcy4M6eb0IcxmuPYfbWpr/si88QKgyGSV
@@ -198,73 +205,79 @@ Autocrypt: addr=demiobenour@gmail.com; keydata=
  vUSQHSrmfOzX3cV4yfmjM5lewgSstoxGyTx2M8enslgdXhPthZlDnTnOT+C+OTsh8+m5tos8
  HQjaPM01MKBiAqdPgksm1wu2DrrwUi6ChRVTUBcj6+/9IJ81H2P2gJk3Ls3AVIxIffLoY34E
  +MYSfkEjBz0E8CLOcAw7JIwAaeBT
-In-Reply-To: <20260910-qce-fix-self-tests-v7-0-cdbd2718af14@oss.qualcomm.com>
 
---------------b0zZgz1THSQE2fTDm71bz4rh
+--------------0OOUWZtcuQBwgLiyOlj8YQdY
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-On 9/10/26 09:00, Bartosz Golaszewski wrote:
-> This iteration - in addition to the previous fixes - proposes to split
-> the QCE driver into a core part necessary to bind to the QCE DT node an=
-d
-> enable runtime power management in order to allow to drop the
-> interconnect votes, and the crypto part registering the crypto
-> algorithms. The core module is then enabled in arm64 defconfig while th=
-e
-> crypto part stays disabled by default.
+On 9/11/26 07:14, Bartosz Golaszewski wrote:
+> On Thu, 10 Sep 2026 16:31:40 +0200, Eric Biggers <ebiggers@kernel.org> =
+said:
+>> On Thu, Sep 10, 2026 at 03:00:50PM +0200, Bartosz Golaszewski wrote:
+>>> All self-tests now pass.
+>>
+>> Have the other bugs that were reported been fixed?  For example:
+>> https://lore.kernel.org/linux-crypto/20260723202704.GB110634@quark/
+>> https://lore.kernel.org/linux-crypto/20260723183438.GB93534@quark/
+>> https://lore.kernel.org/linux-crypto/20260723205342.GC110634@quark/
+>>
 >=20
-> The QCE hardware crypto engine has several limitations that cause it to=
+> I will get to these too. For now, the series allows the self-tests to p=
+ass,
+> I assume it it's enough to not keep the BROKEN label.
 
-> produce incorrect results or stall on certain inputs. This series fixes=
+Personally, I think the driver should stay BROKEN until all the
+known bugs have been fixed.  The self-tests aren't enough for HW
+crypto drivers.
 
-> several bugs and adds workaround allowing the deiver to pass crypto
-> self-tests.
+>>>  	help
+>>>  	  This driver supports Qualcomm crypto engine accelerator
+>>
+>> As this patch would make the kconfig option visible again and would
+>> result in everyone running "make oldconfig" being asked about it, it
 >=20
-> The failures addressed are:
+> I don't mind changing the symbol if you prefer it to avoid any accident=
+al
+> `make oldconfig` carry-overs.
 >=20
-> - HMAC self-test failures for empty messages
-> - AES-XTS returning success on zero-length input (should be -EINVAL)
-> - AES-CTR: partial final block causes the engine to stall, output IV
->   derivation was incorrect
-> - AES-XTS with key1 =3D=3D key2 is not supported by the CE
-> - AES-CCM: partial final block and fragmented payload both stall the
->   engine
+>> needs to be fixed to accurately document why anyone would want to enab=
+le
+>> this option.  As you've stated, it's actually just for "testing".  The=
+
+>> false claim that it's an "accelerator" also needs to go.
+>>
 >=20
-> All fixes were tested on an SM8650 QRD board with
-> CONFIG_CRYPTO_SELFTESTS=3Dy and CONFIG_CRYPTO_SELFTESTS_FULL=3Dy.
->=20
-> Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.co=
-m>
-For stable, would it be better to not register the algorithms, thus
-preventing their use?  Another option would be to replace the whole
-driver with an always-on stub driver that just does power management.
+> "Offloader" for lack of a better word?
+Could it be called a "decelerator"?  That would give users an idea
+of what to expect from the driver.  Maybe explicitly mention that
+you will take at least a 50x performance hit?
 --=20
 Sincerely,
 Demi Marie Obenour (she/her/hers)
 
---------------b0zZgz1THSQE2fTDm71bz4rh--
 
---------------b6Pv0kWTnPJ4ZTrxShFmchbP
+--------------0OOUWZtcuQBwgLiyOlj8YQdY--
+
+--------------wVAkQh0BYR9c4IMoAzf71N0A
 Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
 Content-Description: OpenPGP digital signature
 Content-Disposition: attachment; filename="OpenPGP_signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAEBCgAdFiEEopQtqVJW1aeuo9/sszaHOrMp8lMFAmqkSb8ACgkQszaHOrMp
-8lO7hg//dbVegiswT9OWuiiGRNL+3ZcajQKPRYop7Furtl8QGFJLNnPvy9HGsoC/
-dNu7zvnyjdvq0yUCPYUDX4FRu91ub4jeLjERVoiVt0vBG4vZ9Q+GaIOQkh8mN4zD
-9LOIe3f4oXZmcP2VNBmngRY74+liMEianyQS1VUum6ARhwG0w6J8lFAjTWcXGt23
-djST7HR04rLN/nhRR1+fNaoAkOVVrNP499u1Db/otch9dmWGXtdFc8x9Cr9Fqi+d
-796xeQyEG3uoRpKj9VAoNrJtKgEUe/ccZCDoBkxEyT6PE45rCj3sN6A0Yim4Pstg
-BCeppYc/tz076CaQ8JPm7/xuOhsm8pXfytihp/zBNQ1nsvm+mp46shmkqZteNo0W
-Xhw/Jjc4ZG+JjuIIGTpoPJ6sIP8atO8meSSmHnLAJnCfsMKZBDeQxNsxSHc+E1Qh
-RQ2JO9O7gF8XPmt0A1XdzuUp19k32ET50Q9/WQQUUG5I0bbBjUiO3OdTju5pYNuZ
-V9NYKGLGoQpSZ2oIHmfDU84rEwdHl1tewrWqtmUmRJ5o/3yzWRElBSmOkd89KJRz
-4ZItImyuy/eerN7T8Z7PP24Klc3mAFgT3cXGsY1yLyvBvJiHoutMvPwSNkGyB4ig
-opXcjqL9WRB65MrV6H1RG864VH4a4dlCmdemgBV2aJuTL4TCj7M=
-=zFw5
+iQIzBAEBCgAdFiEEopQtqVJW1aeuo9/sszaHOrMp8lMFAmqkSg4ACgkQszaHOrMp
+8lOJcw//ZYv8AEBDFni13+DfWwnPh1wU47dii3Cvw4PPVNbr2gUyKxFsCRgqib1D
+9NtqoDZYnVN5wgO1m1ON/FzOAzwXz2SnTySdSKiz3t9ycF5vjXFw7gFHFgpmnyCf
+Kf6mYLxy8ot4i+ztZlucGTyQwwbqkGONrPQIwcDIBvTvOmr2kyQ6nAn7xYlmK1uW
+ch0vUXjWCpXqkWThuEYhPOCEYkM9Y3hsFVVwrBQDZ2n1gpF6LvrJHdZ2zukPIRWH
+Jo6hHRXk6JUn+SOTT1EHLxzfgQB0aWmT/8oWiQFySyYKeI5GgyfTOCPXV9Rz84Xz
+MSaLDzYpHc96r1UWjLE5tmm8DIAjmHsDI8GeImxsjm3PCX2EjPiX2iVhjYdmtEsD
+ZrD30/i+7/6RLlBvrrv0KVD5tQIJ9qhnkbk6BIBjWH+wfmIwSk31txLWUIv2ZbhY
+CltiKKaZeC1aylgkePOSqPchiyIbSifKCjbi9XC1jcCmlIwOi+i0Z2349/ja8Kfj
+bpb+pF5MsqbVf6CZ18Z+04nn9Ym4UsK0uexdDxEwy+oJEroGL5HJcEDQZ16NKY/x
+hWXVvFMYYxX6NNVIMqgiqNzFnFF0iL09ib+ujMhGbs+2GaedN8TGZCYkJHl6J3nI
+QCbvoNl1bFlb2IVbJy8jafma0JplLC37IMKDlu2u8cgkhXE8iKY=
+=GS2j
 -----END PGP SIGNATURE-----
 
---------------b6Pv0kWTnPJ4ZTrxShFmchbP--
+--------------wVAkQh0BYR9c4IMoAzf71N0A--
