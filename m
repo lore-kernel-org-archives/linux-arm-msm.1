@@ -1,181 +1,91 @@
-Received: from mail-ej1-f46.google.com (mail-ej1-f46.google.com [209.85.218.46])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A178743DEB9
-	for <linux-arm-msm@vger.kernel.org>; Fri, 11 Sep 2026 10:43:17 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.218.46
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 857A63EC2E3;
+	Fri, 11 Sep 2026 10:44:54 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789123399; cv=none; b=aGYL75Xx6Dh6nMDKEG29+CmqvuK+ndc+0mY06uOgbTmGoy16BnzB6IAg6ZeFpH/YetIbvR2Xeh9sqosRcC5esi3npU5wYZazqsKsthb7AUca9YkQ3F/q7UHwcasO+N9VmvPhqEkzqqERm9vNmsRWyh/hJzswJB7VEPE5IXR7R5Y=
+	t=1789123495; cv=none; b=sKPrpnEvyoqppgLF0AsJF1SgE8dyAoIVYNBYaURHwY2ZDvtaSs/vGP3Tj73xCupUbL6LA05remrM76KYTEysW4/XFGTmOzJXS+0H4FmXA7M3TKt3VpsslbV4RSg6lO6NfGinPrHVZ7bZ0yIWMgezl/nmy87rQuNxX58qqO9CdU8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789123399; c=relaxed/simple;
-	bh=L/lGKMfp42hBWo7w5pZxZLyTlsE3A7O8TBaqBICRHSg=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=nN3CKZ1W4XGJB+rEWmJwBVoxcmuL5CIYfKrCaQmS7wnIGF0WA5UBzLTyTse1YvDhyBaNb9GX/8VxXhNeJLEMy6zFqkG704ya6ViGM6oMf7U5BjtXJo3QS7Qm/8wWRHAKc14rARbfaZ1XA8Eg6VNKSkKijMIENb2L0v+DaMf+UIY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=Gt1aVH0Q; arc=none smtp.client-ip=209.85.218.46
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
+	s=arc-20240116; t=1789123495; c=relaxed/simple;
+	bh=sBl7unFdQaDQe34bxkdWGY36+h6A/0xyc3GNRSRhcpc=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=Nj1QNM1NfBUui1u61nskv3nJd4v0XzLurG42Dw/1+pjH9dcED1euLpNvBwozfXyHKPdffsGW/Xk9qvJZw+CCAVTBg31dBqh4qLg7xtQ8Tr3H2ot2HPwkByQfi8MBp8KPb0vDgE2jtpXjT1XRz9j91uMVQC0lBIlzuoU83qEDp04=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=cY1sQBIL; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="Gt1aVH0Q"
-Received: by mail-ej1-f46.google.com with SMTP id a640c23a62f3a-c294a71c377so104072066b.2
-        for <linux-arm-msm@vger.kernel.org>; Fri, 11 Sep 2026 03:43:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1789123396; x=1789728196; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:content-language
-         :from:references:cc:to:subject:user-agent:mime-version:date
-         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=0OBJZFY4WEPdfeqZOIs4m4qo0tGRehs4CamLBjm99hQ=;
-        b=Gt1aVH0QPyM6P/zjdhKJZLjqHlX29/xTEwcuAeGv6gQC/I8qEzIvN/ijdXhCcJOJkL
-         feB5eHJNKPBMcewpPyGbPoHh/h2y6FtFTyKc6xNrY4+EFj+g1/jjDzkMXHDR9hL6fxrY
-         dcWqoUvnBPnDkrv4eKJrhYVrmcrqJXQ/uEaoEu6Bm5S3+7OsxMK8omO7EW3QAc7vCbtp
-         33ct1WP1FMzD/uRPOSDEXh5fGU4NuOXFhLFcBi6eRRwg5B8COhm0X2wM4bfvdUP/cUz/
-         tcpkhQOos4AETgmBoPKJqrM7drFB0FDJcTFJR8vCbKJk185Jsc5kQmzqmNHUNr4gcmjE
-         8bUg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1789123396; x=1789728196;
-        h=content-transfer-encoding:content-type:in-reply-to:content-language
-         :from:references:cc:to:subject:user-agent:mime-version:date
-         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=0OBJZFY4WEPdfeqZOIs4m4qo0tGRehs4CamLBjm99hQ=;
-        b=LgqsaWN/S3GYfYlb/VfztIDEtxitmhee778ElVEPTaU/vLWRcmiHD8kk5Lo4JSHqt3
-         mYISnI+aS70WWgETxlikZcODvdPEfTSFy7DO8sH32vY6THubtMKMRzOgRRjk4ZshTIB4
-         Kh5KkQoXL2e7cAvOBUgwIvF6DcJb5NLmdXnWzKxolfKTAACsaUwQUaJ82Eaz4J00MbuE
-         oiKYVktz1aKdZL7xptjSi/82lyP/pLaClqVAB43Aa7/Mqv0nqdkZN/WazPwWmDczs7+G
-         q4TQIx2CQp11scKXitnb0RTsPpxlMSQgCnmJa3zTndCGOFoQcYUwaAsU1tu680oGExlF
-         3pmA==
-X-Forwarded-Encrypted: i=1; AKwUvBxoKl2mpUbkr/7OpTv7xX6S1WWoZCG24N+OoEJz1Ih7gXq/BNmlrpkGFMskPZzLBreq4X2EqnNOTft52T7Z@vger.kernel.org
-X-Gm-Message-State: AFuF++lnUs9UBnNOqGu8l2ncy3l66YJY4jsGfV52QEAFx6j7qMXQAPPl
-	LyYqK304bSIj51JbyuxhjITZjAHDYm0YwCVb/7jm3SBkkBHUvHErPglS+hOuoNzJuNQ=
-X-Gm-Gg: AYBFou1XFV21B+C2tMQj4EaUIUun54htAhTMlNyotPoCBsc+dlOiTikDyVsSN3vNAnK
-	yf07joBuV/XoDV4wGGtferTZ5stHWNQu3J23ODSod7pC08thooHqsc4uis9fkZ9fHQ6k3YbsXBF
-	+3P4IS1m5ENiNVceRFFEJ3nrkSB9Sd3NlaKq2125aUop9Ywj1HXABsuW4KkQ8K2cL5UyAELNyXq
-	l9Z5ouz0pSF9QfBchPt/52fOW/jU6ihlAhcRekCBRhQpeDAtTa+KBVOTcIw/FZIDVL08Hk+vqkw
-	r1ek6I5v9uE1dQLL0f2cskMdJcWE9Rb6B6RWRlQZLz2+6W6G2/8QlhpmolhvzIgRNt8jRRNIDlu
-	4kw582sDbF4NE6JF+Bzzz9hSOYvbiW4xvBALKOSDeq1FvoSWn+4wzutCfNdP53IJXPiXTQ37x+W
-	uirY9Sxh/U5YC+Qxv/VDxkOecZ9Assobb4938I/djTAY8fl21QdDajqQiR6YycnkhZO4FeuvzyO
-	CSgRMcmEiKU
-X-Received: by 2002:a17:907:da6:b0:c26:19de:9ac3 with SMTP id a640c23a62f3a-c296668e2a7mr154495166b.27.1789123395825;
-        Fri, 11 Sep 2026 03:43:15 -0700 (PDT)
-Received: from [192.168.0.167] ([109.76.225.241])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c2966103984sm67215966b.52.2026.09.11.03.43.14
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 11 Sep 2026 03:43:14 -0700 (PDT)
-Message-ID: <87e34805-e56c-45b8-a3d8-458ef17b92cc@linaro.org>
-Date: Fri, 11 Sep 2026 11:43:13 +0100
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="cY1sQBIL"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id DE69C1F000FF;
+	Fri, 11 Sep 2026 10:44:50 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1789123494;
+	bh=diuK0ZP38Rx8cZSyKuN6MESmWCfs5CGaCBGSDXyaI38=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=cY1sQBILgEdxgearVStLHjHCydE1WTIQ7zZwTKinoMii4duugpKor2YZo5A7OKYBR
+	 Pq3bvZRLs/BW4Y6LN7/ZeeGlZFt4d1w7SE50Zk3aHJk4DQJJcqNqxncM7JA9wOS2Gm
+	 jfnHjsw+32WPRie+JRp6x1O0oaQ58YlMATWNDc1K/SFz1/6Whob4CBia/qdUh1kRdA
+	 ysjROH12rqlFa6rqQe59aadW0boReV6eYd6yKKRztDfkG+CebUtFbWruu/Vm/P3kNN
+	 IDm8rMThjy6NVeCpFY7GOzd6/ayEV/Lrv9Dski1WXhDg6tWfpXszDN5OoKSKOYCH9Z
+	 OkX1penzgGvyQ==
+Date: Fri, 11 Sep 2026 12:44:46 +0200
+From: Manivannan Sadhasivam <mani@kernel.org>
+To: Daniel J Blueman <daniel@quora.org>
+Cc: "David S. Miller" <davem@davemloft.net>, 
+	Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>, 
+	Paolo Abeni <pabeni@redhat.com>, Simon Horman <horms@kernel.org>, 
+	Chris Lew <christopher.lew@oss.qualcomm.com>, Pranav Mahesh Phansalkar <pranav.phansalkar@oss.qualcomm.com>, 
+	Deepak Kumar Singh <deepak.singh@oss.qualcomm.com>, linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH] net: qrtr: resend HELLO on MHI resume
+Message-ID: <hcr4woicsnz3pbhzlguuwjlego7yli3znhjmsx4cdz66xa74zd@wjtle2yslc4b>
+References: <20260909055846.16539-1-daniel@quora.org>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/8] media: qcom: camss: Add streams API hw_ops to CSID
- interface
-To: Gjorgji.Rosikopulos.gjorgji.rosikopulos@oss.qualcomm.com,
- Mauro Carvalho Chehab <mchehab@kernel.org>
-Cc: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
- Loic Poulain <loic.poulain@oss.qualcomm.com>,
- Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
- Atanas Filipov <atanas.filipov@oss.qualcomm.com>,
- Jigarkumar Zala <jigarkumar.zala@oss.qualcomm.com>,
- linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
- linux-kernel@vger.kernel.org,
- Gjorgji Rosikopulos <gjorgji.rosikopulos@oss.qualcomm.com>
-References: <20260911062213.195007-1-gjorgji.rosikopulos@oss.qualcomm.com>
- <20260911062213.195007-3-gjorgji.rosikopulos@oss.qualcomm.com>
-From: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
-Content-Language: en-GB
-In-Reply-To: <20260911062213.195007-3-gjorgji.rosikopulos@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <20260909055846.16539-1-daniel@quora.org>
 
-On 11/09/2026 07:22, 
-Gjorgji.Rosikopulos.gjorgji.rosikopulos@oss.qualcomm.com wrote:
-> From: Gjorgji Rosikopulos <gjorgji.rosikopulos@oss.qualcomm.com>
+On Wed, Sep 09, 2026 at 01:58:44PM +0800, Daniel J Blueman wrote:
+> Since the MHI HELLO exchange was relocated, it is sent only at device
+> registration. During a suspend-resume cycle, the firmware in WiFi
+> cards such as WCN7850 indefinitely waits for another HELLO,
+> triggering:
 > 
-> Add configure_rx/enable_stream/disable_stream to struct csid_hw_ops:
-> per-stream hardware operations needed to support the V4L2 subdev
-> streams API, where the CSID Rx front-end is configured once
-> independently of the per-stream RDI programming.
+>   ath12k_wifi7_pci 0004:01:00.0: timeout while waiting for restart complete
+>   ath12k_wifi7_pci 0004:01:00.0: failed to resume core: -110
 > 
-> No functional change: these are new optional hw_ops entries, not yet
-> implemented by any backend or called by any code path.
+> Fix this by triggering the handshake from resume_early in the MHI
+> transport.
 > 
-> Signed-off-by: Gjorgji Rosikopulos <gjorgji.rosikopulos@oss.qualcomm.com>
+> Validated on Qualcomm X1E-801800 on Lenovo Slim 7x across 10
+> suspend-resume cycles.
+> 
+> Fixes: 544d85de4dc2 ("net: qrtr: Send HELLO message on endpoint register")
+> Signed-off-by: Daniel J Blueman <daniel@quora.org>
 > ---
->   .../media/platform/qcom/camss/camss-csid.h    | 43 +++++++++++++++++++
->   1 file changed, 43 insertions(+)
+>  net/qrtr/af_qrtr.c | 13 +++++++++++++
+>  net/qrtr/mhi.c     | 10 +++++++++-
+>  net/qrtr/qrtr.h    |  2 ++
+>  3 files changed, 24 insertions(+), 1 deletion(-)
 > 
-> diff --git a/drivers/media/platform/qcom/camss/camss-csid.h b/drivers/media/platform/qcom/camss/camss-csid.h
-> index 5296b10f6bac..90ee611b9092 100644
-> --- a/drivers/media/platform/qcom/camss/camss-csid.h
-> +++ b/drivers/media/platform/qcom/camss/camss-csid.h
-> @@ -74,6 +74,25 @@ struct csid_phy_config {
->   
->   struct csid_device;
->   
-> +/*
-> + * struct csid_hw_ops - CSID hardware version specific operations
-> + *
-> + * configure_stream() is the legacy (non-streams-API) path and is mutually
-> + * exclusive with enable_stream()/disable_stream() - a given CSID instance
-> + * uses one family or the other, chosen by streams_enable.
-> + *
-> + * stream_id, as passed to enable_stream()/disable_stream(), is a hardware
-> + * RDI/PIX port index in [0, MSM_CSID_MAX_SRC_STREAMS). It is currently
-> + * always equal to pad - MSM_CSID_PAD_FIRST_SRC (multi-pad, 1:1
-> + * pad-to-port mapping).
+> diff --git a/net/qrtr/af_qrtr.c b/net/qrtr/af_qrtr.c
+> index 78347c937af7..2ffcfc2fdb4a 100644
+> --- a/net/qrtr/af_qrtr.c
+> +++ b/net/qrtr/af_qrtr.c
+> @@ -623,6 +623,19 @@ static void qrtr_hello_work(struct work_struct *work)
+>  	qrtr_port_put(ctrl);
+>  }
+>  
+> +/* Trigger the HELLO handshake after the remote has been reset, eg on resume */
 
-Lets not mix and match names. There has historically been a huge amount 
-of sin and liberty taken, not the good kind unfortunately - with port_id 
-and write-master.
+Use proper kernel-doc please.
 
-port I believe is the misnomer we are currently stuck with - so lets 
-continue to use it until a more crisp naming convention happens.
+Rest LGTM, thanks!
 
-> + *
-> + * configure_rx() is called once, on the transition from zero to non-zero
-> + * active sink streams, strictly before the first enable_stream() call.
-> + * enable_stream()/disable_stream() calls are always made under the
-> + * subdev's active-state lock (core-enforced via
-> + * v4l2_subdev_enable_streams()/disable_streams()), so hw_ops
-> + * implementations don't need their own serialization.
-> + */
->   struct csid_hw_ops {
->   	/*
->   	 * configure_stream - Configures and starts CSID input stream
-> @@ -81,6 +100,30 @@ struct csid_hw_ops {
->   	 */
->   	void (*configure_stream)(struct csid_device *csid, u8 enable);
->   
-> +	/*
-> +	 * configure_rx - Configure the CSID Rx front-end
-> +	 * @csid: CSID device
-> +	 *
-> +	 * Called once, when the first stream is enabled.
-> +	 */
-> +	void (*configure_rx)(struct csid_device *csid);
-> +
-> +	/*
-> +	 * enable_stream - Enable a single CSID output stream
-> +	 * @csid: CSID device
-> +	 * @stream_id: stream id to enable
-> +	 * @vc: virtual channel to program
-> +	 * @dt: data type to program
-> +	 */
-> +	void (*enable_stream)(struct csid_device *csid, u32 stream_id, u8 vc, u8 dt);
-> +
-> +	/*
-> +	 * disable_stream - Disable a single CSID output stream
-> +	 * @csid: CSID device
-> +	 * @stream_id: stream id to disable
-> +	 */
-> +	void (*disable_stream)(struct csid_device *csid, u32 stream_id);
-> +
+- Mani
 
-Seems odd that none of these have integer return types to propagate errors.
-
->   	/*
->   	 * configure_testgen_pattern - Validates and configures output pattern mode
->   	 * of test pattern generator
-
+-- 
+மணிவண்ணன் சதாசிவம்
