@@ -1,233 +1,155 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 876A846984B;
-	Fri, 11 Sep 2026 08:51:15 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E26AB2E7F39;
+	Fri, 11 Sep 2026 08:53:45 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789116675; cv=none; b=kS6sEv8tcH+PD0Ltku8Lf2wnzLd94BEOp1hx4ZKZP898D+oH98Q3KSxJdHLuGYbQ4K1Ej/sb0PpdYJRuwvs/zyKOqwBj+1W6wDJLIijEoecNMQ5bmLXaRoDMpJsIMfA06btiKGFc4MZ9n55FAw/CHODmsP2TF1gZLBrHDly5NxM=
+	t=1789116827; cv=none; b=sz9vb11xATi/Pl/HnIQZCgW6dyoii4XXKGSX1Mg8FxphkH6Hrc359BFRVY2Bcd9ORd1ZvjpspBIm4WJ4XGwYRtYbVNWrcDaizEZBf4VYcajDMsl75URx7YZpY84qCff4UqP5EyUkio90Zafvg+n0AI2z6wxqIb34RgmX3oi+XdY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789116675; c=relaxed/simple;
-	bh=DY3nAZEw7IwIcK7ATvLcXz2X/NgGx+ZUSaAnsbH9oD0=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=G9m8csvKl79A+E0FL8BHmd+PFG/uTCf8nzpQjlX3hHmkr0lENYDsxX/pfXbs9Ef02l4CtnIE2eY2hH1Lki1/kmPz8zjmRVXxOkCVAak9jbOH9iHsnkmo68S6vXUQ+WUQE8OqibbYNrEyA1zIaa8NzTnSn09x0RTOIkAg2cjSTf4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=vIOQPc9o; arc=none smtp.client-ip=10.30.226.201
+	s=arc-20240116; t=1789116827; c=relaxed/simple;
+	bh=hKG5P0tTq4RzoNZpCTbQPdMBJ2cV3b+axlhcsqqp73o=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=cZCAOPcniOBVYvfCEDSvvYNTvF/1apyKG6J87Cja4Uq7dpEfcuBjoWDQGLY2VLFK3UcV8A+7xoGu16Bs110Kdg1djV9LVD14OxDnzsrXmx22bCoZcEutEs0gHikhztMhXizxpnBV0tXxr1ZO3GRDOoGgItfcOle1atkbsMai5Rs=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=h8jmrs9P; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="vIOQPc9o"
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 44BECC2BCF4;
-	Fri, 11 Sep 2026 08:51:15 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1789116675;
-	bh=DY3nAZEw7IwIcK7ATvLcXz2X/NgGx+ZUSaAnsbH9oD0=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
-	b=vIOQPc9oHsAb5NAMCqQSY2ZC9ZWES3F1I+WL1UMX6w0fWakBt6wCJ8/BpvamaPKBA
-	 GztFcpozC1ZOMwR/pHj4OXDiXjuaPoY/SPUe1BVCqlaY00PsilXrVmt4qqRjLG2to+
-	 F2MNSekiB/ZaIfTcsueZR+hqhaQq65rIM8N+ExzP0mV1zg7kibl4/pTDICNwOcy1rp
-	 ABb7U8WTkS+dcJoj68T5nK/LNcfOzCTSrE3U700Vp4WwzPo660EKT3JaMWOZ+iJoSE
-	 KjknH85+1JDXx+v532KClu9oP+OQpplH3a+lvwqypOUY6QaI1QRaTlQQNtPgx8RvK2
-	 3HNXYLpAtT9rQ==
-Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2F9C3C88E53;
-	Fri, 11 Sep 2026 08:51:15 +0000 (UTC)
-From: =?utf-8?q?Y=C4=B0=C4=9E=C4=B0TCAN_KAVAKLI_via_B4_Relay?= <devnull+kavakliyigitcan.gmail.com@kernel.org>
-Date: Fri, 11 Sep 2026 11:51:07 +0300
-Subject: [PATCH RFC 10/10] arm64: dts: qcom: sm6125-xiaomi-ginkgo: enable
- display, backlight and touchscreen
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="h8jmrs9P"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 64D671F000FF;
+	Fri, 11 Sep 2026 08:53:43 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1789116825;
+	bh=kgSConEeaNKwRfeQHsprcVAJQzgQ9r9vYuhm0YayU6U=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=h8jmrs9PBevDtTd4sRaOokYoR/qPc8H6BRrhVczX7pKyCqtn8SCIwEFXZ0Q1zROcq
+	 qP1eN9mIcpaxU8sFS5UPNg+ypt/CSSErUM5W8u8ynQnrvTC2TwRxRoLpJ3lfYhKejC
+	 /VcFj+a+7i/MFJb9v9GCwfgi2uMuxbplTdWG9G85NIvMpWhrwLuPxyfVb47en2fKXQ
+	 QoCra8sH/NOy3fhvCNQ9QNxc+RxTR1ANnn4LLHNP1p5rUwXYTdP1z/0K3+f/j5cI/F
+	 /NTOvtaMmYwVqK7nLDR9qI5TF/9FhOy+ayL5cw8W03+eXzHvh2i2XGMKtkiCoLTEB6
+	 OkDjkiv3boAaA==
+Date: Fri, 11 Sep 2026 10:53:41 +0200
+From: Krzysztof Kozlowski <krzk@kernel.org>
+To: Griffin Kroah-Hartman <griffin.kroah@fairphone.com>
+Cc: Mauro Carvalho Chehab <mchehab@kernel.org>, 
+	Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+	Conor Dooley <conor+dt@kernel.org>, =?utf-8?B?QW5kcsOp?= Apitzsch <git@apitzsch.eu>, 
+	Luca Weiss <luca.weiss@fairphone.com>, Sakari Ailus <sakari.ailus@linux.intel.com>, 
+	Daniel Scally <dan.scally@ideasonboard.com>, Bjorn Andersson <andersson@kernel.org>, 
+	Konrad Dybcio <konradybcio@kernel.org>, linux-media@vger.kernel.org, devicetree@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org
+Subject: Re: [PATCH 1/3] dt-bindings: media: i2c: dw9800: Redocument DW9800K
+Message-ID: <20260911-savvy-gazelle-from-tartarus-4ebddd@quoll>
+References: <20260910-b4-dw9800k_cleanup-v1-0-608255ea61ab@fairphone.com>
+ <20260910-b4-dw9800k_cleanup-v1-1-608255ea61ab@fairphone.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-Message-Id: <20260911-ginkgo-submission-final-v1-10-0e68e63a18d4@gmail.com>
-References: <20260911-ginkgo-submission-final-v1-0-0e68e63a18d4@gmail.com>
-In-Reply-To: <20260911-ginkgo-submission-final-v1-0-0e68e63a18d4@gmail.com>
-To: Lee Jones <lee@kernel.org>, Daniel Thompson <danielt@kernel.org>, 
- Jingoo Han <jingoohan1@gmail.com>, Pavel Machek <pavel@kernel.org>, 
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>, Helge Deller <deller@gmx.de>, 
- Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>, 
- Sumit Semwal <sumit.semwal@linaro.org>, 
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Jessica Zhang <jesszhan0024@gmail.com>, 
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
- Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, 
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, 
- Dmitry Torokhov <dmitry.torokhov@gmail.com>, 
- Henrik Rydberg <rydberg@bitmath.org>, 
- Rob Clark <robin.clark@oss.qualcomm.com>, 
- Dmitry Baryshkov <lumag@kernel.org>, 
- Abhinav Kumar <abhinav.kumar@linux.dev>, Sean Paul <sean@poorly.run>, 
- Marijn Suijten <marijn.suijten@somainline.org>, 
- Bjorn Andersson <andersson@kernel.org>, 
- Konrad Dybcio <konradybcio@kernel.org>
-Cc: dri-devel@lists.freedesktop.org, linux-leds@vger.kernel.org, 
- devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
- linux-fbdev@vger.kernel.org, linux-input@vger.kernel.org, 
- linux-arm-msm@vger.kernel.org, freedreno@lists.freedesktop.org, 
- =?utf-8?q?Y=C4=B0=C4=9E=C4=B0TCAN_KAVAKLI?= <kavakliyigitcan@gmail.com>
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1789116671; l=3582;
- i=kavakliyigitcan@gmail.com; s=20260911; h=from:subject:message-id;
- bh=x7HUi8j9WM0O66VRg2zaqPmBSUKqKlYUrg3o+6fVUMA=;
- b=0p7Sw0WODkPHyr6uYaCxqJhHD15HpgWvncYsEcFoTIdse3nMrsA429rybhBMBFN9lnbCG75i0
- EoyAv2U5cNvCyIAm66vhUwtwyvhJf5el9hJ1LDQvAl6pw6l7r3yALhq
-X-Developer-Key: i=kavakliyigitcan@gmail.com; a=ed25519;
- pk=W2GaxVotULs2vAjRMMLheaDtMMYs4037zO1LVVfFtPI=
-X-Endpoint-Received: by B4 Relay for kavakliyigitcan@gmail.com/20260911
- with auth_id=1024
-X-Original-From: =?utf-8?q?Y=C4=B0=C4=9E=C4=B0TCAN_KAVAKLI?= <kavakliyigitcan@gmail.com>
-Reply-To: kavakliyigitcan@gmail.com
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <20260910-b4-dw9800k_cleanup-v1-1-608255ea61ab@fairphone.com>
 
-From: YİĞİTCAN KAVAKLI <kavakliyigitcan@gmail.com>
+On Thu, Sep 10, 2026 at 04:54:16PM +0200, Griffin Kroah-Hartman wrote:
+> The DW9800K's properties are too different to justify sharing the same
+> bindings file as the dw9719, Create a separate bindings documentation
 
-Enable the display subsystem (MDSS/MDP/DSI0), Kinetic KTD3136 backlight,
-and Novatek NT36672A SPI touchscreen on the Xiaomi Redmi Note 8 (ginkgo).
+Say here something useful which not immediately visible from the diff -
+which properties are different?
 
-Hardware nodes added:
-- Fixed LCDB regulators (lcdb_lab and lcdb_ibb at +/- 5.5V)
-- MDSS and DSI0 with Tianma 1080x2340 FHD+ video panel
-- I2C1 backlight node at 0x36 with PMI632 GPIO 6 hardware enable
-- SPI2 touchscreen node at CS0 with GPIO 88 interrupt and panel follower
-  reference
-- Touchscreen active pinctrl definition on GPIO 88
+> for the Dongwoon Anatech DW9800K with it's updated properties.
+> 
+> Signed-off-by: Griffin Kroah-Hartman <griffin.kroah@fairphone.com>
+> ---
+>  .../bindings/media/i2c/dongwoon,dw9719.yaml        |  1 -
+>  .../bindings/media/i2c/dongwoon,dw9800k.yaml       | 91 ++++++++++++++++++++++
+>  2 files changed, 91 insertions(+), 1 deletion(-)
+> 
+> diff --git a/Documentation/devicetree/bindings/media/i2c/dongwoon,dw9719.yaml b/Documentation/devicetree/bindings/media/i2c/dongwoon,dw9719.yaml
+> index 8e8d62436e0d..38db0764c0f7 100644
+> --- a/Documentation/devicetree/bindings/media/i2c/dongwoon,dw9719.yaml
+> +++ b/Documentation/devicetree/bindings/media/i2c/dongwoon,dw9719.yaml
+> @@ -21,7 +21,6 @@ properties:
+>        - dongwoon,dw9718s
+>        - dongwoon,dw9719
+>        - dongwoon,dw9761
+> -      - dongwoon,dw9800k
+>  
+>    reg:
+>      maxItems: 1
+> diff --git a/Documentation/devicetree/bindings/media/i2c/dongwoon,dw9800k.yaml b/Documentation/devicetree/bindings/media/i2c/dongwoon,dw9800k.yaml
+> new file mode 100644
+> index 000000000000..046c0a88bcef
+> --- /dev/null
+> +++ b/Documentation/devicetree/bindings/media/i2c/dongwoon,dw9800k.yaml
+> @@ -0,0 +1,91 @@
+> +# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
+> +%YAML 1.2
+> +---
+> +$id: http://devicetree.org/schemas/media/i2c/dongwoon,dw9800k.yaml#
+> +$schema: http://devicetree.org/meta-schemas/core.yaml#
+> +
+> +title: Dongwoon Anatech DW9800K Bi-Direction Voice Coil Motor (Bi-VCM) Controller
+> +
+> +maintainers:
+> +  - Luca Weiss <luca.weiss@fairphone.com>
+> +  - Griffin Kroah-Hartman <griffin.kroah@fairphone.com>
+> +
+> +description:
+> +  The Dongwoon DW9800K is a single 10-bit digital-to-analog converter with
+> +  +-130 mA output current sink capability, designed for linear control of
+> +  bi-directional voice coil motors (Bi-VCM) in camera lenses. This chip
+> +  provides a Smart Actuator Control (SAC) mode intended for minimizing
+> +  mechanical vibration.
+> +
+> +properties:
+> +  compatible:
+> +    enum:
+> +      - dongwoon,dw9800k
+> +
+> +  reg:
+> +    maxItems: 1
+> +
+> +  vdd-supply:
+> +    description: VDD power supply, can range from 2.3V to 4.8V
+> +
+> +  dongwoon,sac-mode:
+> +    description: >
+> +      Slew Rate Control mode to use: direct, LSC (Linear Slope Control) or
+> +      SAC2-SAC5 (Smart Actuator Control).
+> +    $ref: /schemas/types.yaml#/definitions/uint32
+> +    enum:
+> +      - 0 # Direct mode
+> +      - 1 # LSC mode
+> +      - 2 # SAC2 mode (operation time# 0.48 x Tvib)
+> +      - 3 # SAC3 mode (operation time# 0.72 x Tvib)
+> +      - 4 # SAC4 mode (operation time# 1.20 x Tvib)
+> +      - 5 # SAC5 mode (operation time# 1.64 x Tvib)
+> +    default: 3
+> +
+> +  dongwoon,clock-presc:
 
-Signed-off-by: YİĞİTCAN KAVAKLI <kavakliyigitcan@gmail.com>
----
- .../boot/dts/qcom/sm6125-xiaomi-ginkgo-common.dtsi | 100 +++++++++++++++++++++
- 1 file changed, 100 insertions(+)
+Why this cannot be named the same? Commit msg should answer such
+questions.
 
-diff --git a/arch/arm64/boot/dts/qcom/sm6125-xiaomi-ginkgo-common.dtsi b/arch/arm64/boot/dts/qcom/sm6125-xiaomi-ginkgo-common.dtsi
-index 59042a5937535c4acda064fa0f865f4f5a52d01b..f4b9e2092a814e56cdc23218025cb4166dec110a 100644
---- a/arch/arm64/boot/dts/qcom/sm6125-xiaomi-ginkgo-common.dtsi
-+++ b/arch/arm64/boot/dts/qcom/sm6125-xiaomi-ginkgo-common.dtsi
-@@ -26,11 +26,30 @@ / {
- 	chassis-type = "handset";
- 
- 	qcom,msm-id = <QCOM_ID_SM6125 0x10000>;
-+	qcom,board-id = <34 0>, <34 1>, <34 2>, <34 3>, <34 4>, <0 0>;
- 
- 	aliases {
- 		serial0 = &uart4;
- 	};
- 
-+	lcdb_lab: regulator-lcdb-lab {
-+		compatible = "regulator-fixed";
-+		regulator-name = "lcdb_lab";
-+		regulator-min-microvolt = <5500000>;
-+		regulator-max-microvolt = <5500000>;
-+		regulator-boot-on;
-+		regulator-always-on;
-+	};
-+
-+	lcdb_ibb: regulator-lcdb-ibb {
-+		compatible = "regulator-fixed";
-+		regulator-name = "lcdb_ibb";
-+		regulator-min-microvolt = <5500000>;
-+		regulator-max-microvolt = <5500000>;
-+		regulator-boot-on;
-+		regulator-always-on;
-+	};
-+
- 	chosen {
- 		#address-cells = <2>;
- 		#size-cells = <2>;
-@@ -356,6 +375,13 @@ irled@1 {
- 
- &tlmm {
- 	gpio-reserved-ranges = <0 4>, <30 4>;
-+
-+	ts_int_active: ts-int-active-state {
-+		pins = "gpio88";
-+		function = "gpio";
-+		drive-strength = <8>;
-+		bias-pull-up;
-+	};
- };
- 
- &uart4 {
-@@ -369,3 +395,77 @@ &usb3 {
- &usb_dwc3_hs {
- 	remote-endpoint = <&pmi632_hs_in>;
- };
-+
-+&mdss {
-+	status = "okay";
-+};
-+
-+&mdss_mdp {
-+	status = "okay";
-+};
-+
-+&mdss_dsi0_phy {
-+	vdds-supply = <&vreg_l7a>;
-+	status = "okay";
-+};
-+
-+&mdss_dsi0 {
-+	vdda-supply = <&vreg_l18a>;
-+	status = "okay";
-+
-+	panel: panel@0 {
-+		compatible = "tianma,fhd-video-ginkgo", "novatek,nt36672a";
-+		reg = <0>;
-+
-+		reset-gpios = <&tlmm 90 GPIO_ACTIVE_LOW>;
-+		vddio-supply = <&vreg_l9a>;
-+		vddpos-supply = <&lcdb_lab>;
-+		vddneg-supply = <&lcdb_ibb>;
-+		backlight = <&backlight>;
-+
-+		port {
-+			panel_in: endpoint {
-+				remote-endpoint = <&mdss_dsi0_out>;
-+			};
-+		};
-+	};
-+};
-+
-+&mdss_dsi0_out {
-+	remote-endpoint = <&panel_in>;
-+	data-lanes = <0 1 2 3>;
-+};
-+
-+&qupv3_id_0 {
-+	status = "okay";
-+};
-+
-+&i2c1 {
-+	clock-frequency = <400000>;
-+	status = "okay";
-+
-+	backlight: backlight@36 {
-+		compatible = "kinetic,ktd3136";
-+		reg = <0x36>;
-+		enable-gpios = <&pmi632_gpios 6 GPIO_ACTIVE_HIGH>;
-+		default-brightness = <2047>;
-+		max-brightness = <2047>;
-+	};
-+};
-+
-+&spi2 {
-+	status = "okay";
-+
-+	touchscreen@0 {
-+		compatible = "novatek,nt36672a-spi", "novatek,nt36672a-ts";
-+		reg = <0>;
-+		spi-max-frequency = <4000000>;
-+		interrupt-parent = <&tlmm>;
-+		interrupts = <88 IRQ_TYPE_EDGE_RISING>;
-+		pinctrl-0 = <&ts_int_active>;
-+		pinctrl-names = "default";
-+		panel = <&panel>;
-+		touchscreen-size-x = <1080>;
-+		touchscreen-size-y = <2340>;
-+	};
-+};
+> +    description:
+> +      Indication of VCM internal clock dividing rate select, as one multiple
+> +      factor to calculate VCM ring periodic time Tvib.
+> +    $ref: /schemas/types.yaml#/definitions/uint32
+> +    enum:
+> +      - 0 #  Dividing Rate -  2
+> +      - 1 #  Dividing Rate -  1
+> +      - 2 #  Dividing Rate -  1/2
+> +      - 3 #  Dividing Rate -  1/4
+> +      - 4 #  Dividing Rate -  8
+> +      - 5 #  Dividing Rate -  4
+> +    default: 1
+> +
+> +  dongwoon,timing-control:
 
--- 
-2.47.3
+So it seems you have only one different property, quite a difference
+comparing to bold statement in commit msg?
 
+Best regards,
+Krzysztof
 
