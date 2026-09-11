@@ -1,74 +1,74 @@
-Received: from mail-ej1-f51.google.com (mail-ej1-f51.google.com [209.85.218.51])
+Received: from mail-ej1-f48.google.com (mail-ej1-f48.google.com [209.85.218.48])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3AD82486406
-	for <linux-arm-msm@vger.kernel.org>; Fri, 11 Sep 2026 22:06:49 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=209.85.218.51
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CC15B4BEE47
+	for <linux-arm-msm@vger.kernel.org>; Fri, 11 Sep 2026 22:11:47 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=209.85.218.48
 ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789164412; cv=pass; b=BpXXR0gsJu0ODA41/WumSFUnx8JYpKV77/y9inZUfByuBfrPMec9byGIrwArGB70Dgxqm5xDAjbKwgl5mnX/+4MHeXPmGaZu/xkMhQWxSPQ3ZoNKR1djlNbpq68aR+tESC/qmXmS06s+rhUDQMpeb5id7v0FfdGFclinZ/GuRz0=
+	t=1789164710; cv=pass; b=epHoBmpK972fRR4S7ifgPlkgqiUyTm9BSrAPNnhmxi7jDERresHBJzwG/4rRq9wEOY32W164BJ/kWYV+ro7meIAqRTahBBi+a1HW+Oei8rngMPDRs+vjvsRb9tojgacLeMObpzMDFDtyMS0jFI7qPN3uNWuYYzMcNguPyYCwKG8=
 ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789164412; c=relaxed/simple;
-	bh=uhwITbsuBN1QyKKZ8uqQq/5/QXmUcyaikOFf8kDkoJc=;
-	h=MIME-Version:From:Date:Message-ID:Subject:To:Cc:Content-Type; b=VUFFc8T0ULL/Scz85j/BLG5OvvqsCqq6qvBSNQAbHXT5YyAynIYDHd1udycqLehu0dS9c2JcaTgLwS5hlZ+aBVZkh9LEH7oH05wbZKZ9M/D9SCl6uUtFWjxPq+WGWJcF4s+BWNjLGeeGnlPtPNJTiwL+YWhraloGT1CxJqL75J0=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=est.una.ac.cr; spf=pass smtp.mailfrom=est.una.ac.cr; dkim=pass (1024-bit key) header.d=est.una.ac.cr header.i=@est.una.ac.cr header.b=bP6A/RXV; arc=pass smtp.client-ip=209.85.218.51
+	s=arc-20240116; t=1789164710; c=relaxed/simple;
+	bh=64DI/R3Fb3DmgLTAgL4BfcJDwxaJEMQAyDpP0IBKAGs=;
+	h=MIME-Version:From:Date:Message-ID:Subject:To:Cc:Content-Type; b=cizFV/V5RkVNOpcaQ0k+ntZFzO4vFjuzm1eQz0DjkHFdbKZrEOAIufFRVY1rXjdGAS97w1GNALDftPLY5xoNZcjjBHNDl6/LfFxNz6mupLMehBjBoMeEOfK9JwbVVcWAKe5HqH9+2D9icmjbvVJx1bpQr6fh8UHf5zdGykytLGo=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=est.una.ac.cr; spf=pass smtp.mailfrom=est.una.ac.cr; dkim=pass (1024-bit key) header.d=est.una.ac.cr header.i=@est.una.ac.cr header.b=NZWQy7B7; arc=pass smtp.client-ip=209.85.218.48
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=est.una.ac.cr
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=est.una.ac.cr
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=est.una.ac.cr header.i=@est.una.ac.cr header.b="bP6A/RXV"
-Received: by mail-ej1-f51.google.com with SMTP id a640c23a62f3a-c25b661d37dso232050866b.0
-        for <linux-arm-msm@vger.kernel.org>; Fri, 11 Sep 2026 15:06:49 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1789164408; cv=none;
+	dkim=pass (1024-bit key) header.d=est.una.ac.cr header.i=@est.una.ac.cr header.b="NZWQy7B7"
+Received: by mail-ej1-f48.google.com with SMTP id a640c23a62f3a-c2946dc8dbfso213887266b.0
+        for <linux-arm-msm@vger.kernel.org>; Fri, 11 Sep 2026 15:11:47 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1789164706; cv=none;
         d=google.com; s=arc-20260327;
-        b=CRJyc8L5WteJ6I+TbF6eZsPMyjxorPYQ08YtOj7gjrk78JwGbyn9Ot3NNrm1NtwSLt
-         obPVZ3qmJ1ZHMgrNcjLmskt0GlNcnOP5RvvbrS9yFgu9AimEi4bNjKa1lGu4B5hA4/oh
-         mtoy5/M6y6ZXDXXBhEpsL8nLWE5StAyDvGKqgYqosa4WkcgZlBy9QKxoBZlFatyAoGda
-         9oqw9o5vBaBkt/RU9noCrvxI6t4HKb4ldsv+JaDpG4Vy/7SqKnLsCeB6YPk6cjddDL3r
-         Xob0HqHnZVFVtchEwus34HfDU/Lnr0NzTENXm4xxt3QBJIsrOw0gfCJr/uy/a7RAawdf
-         TZLA==
+        b=cX/Y+bppGvOVs+nfeXoqJejh6yi/AQp8tfnzFSkQ4YZbhy1giJa/YCx6nuOk00jzvV
+         AEZKbBwOGa36q0ida959kqd3KB8gtErcxgm4RB+cOVCvhxYUItUIdLPabvlBRw1x0L7p
+         ucUTTQvydvPGf0eLKE7mmH99gsmttSXoVO1sYil3Mu/Ywj/rIjlEIq6sTmUU3FkMEzGw
+         quedBXUWD9MVKJpF1bSqPvF8NkgISGGi/jtqx2Vr+yoBR6ZT4COrQLsL/5jJl93TY6BT
+         wVBUgoBfwnxdPP15n80AW6mDRCawVgEDjQhXQghU8k80kVcUftKBwajdDD15Dzjg3me2
+         /RSw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
         h=cc:to:subject:message-id:date:from:mime-version:dkim-signature;
-        bh=wQjMKqS7oeVmIMa2lPbwdzd52T317NKfkckf6Z3yXCU=;
-        fh=CKEbU6IoLN2kOfpAEEoYKzmWTQ6uEAwjb1lfPmt27PQ=;
-        b=SdT0Kqo5wLFLGU5FnKKShksDMtAkkvsQdvCy8FMnckpNEq6swiwa6LMHPyd8mL6NJX
-         Qo01IsVGwcEmA1s1r+ypm5A3he6qfV4rq+Y/ksnjjHWCNslh434IYfFPJssmal1pigBl
-         YXgzYBGinyI4PbL/ZgfBCA/32JPvObJTmkDsfmxJaPKJgJErCrwiuMi5P3NG/1R0Ylhh
-         ywbhkwHVk331mjwUueSnlqsozVs6jPbAsJcn5feLzETSSDdxjUffIPusiuEi2KXY4uYB
-         IH2GGBydnoYxEGEoCH9UnoeUfN0vU1B485gHthTKvflgUbsQYk8+TCRzETjWZOWSgDEX
-         eudQ==;
+        bh=jmcmRooIJWZcfOxhhMxU11ULm5mq/IM7NKssWyEliKc=;
+        fh=q10J0ztacb8j/NjsAMr8dQn1b3jSfaVaXlOkkKv7mVY=;
+        b=UhVebZa4PF+6kEzioB8CHyGaCfm5/KiySIdKDfRnmj8KBlYrWSZX2E+BR/7q6VHOjO
+         eS5AwvHoYgnZ/P1rykiNW3+cipYXIAoxrOlE7p1o7tjDLztA08GrUdpVgcOu0qBi/NDU
+         52a3xdFXBqLWCOmkCRKJt4nm5vHgWGyYDEGgd9hCUmvYnNxN1mC7IP3oGlBQnBplAHOa
+         75F6oiqohv0QrlJHFdHKTkCwLkzHzZy9GWtHKNwoDhRk0pDUocjeNUi0UcaC2pDMcJDY
+         ZJP4w5FHqDzNCwrgevvOIatyKO8h6CpVnZiYuAgMx1QVYoy754vCAXxlEyntTJ7yZDLd
+         LDgw==;
         darn=vger.kernel.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=est.una.ac.cr; s=google; t=1789164408; x=1789769208; darn=vger.kernel.org;
+        d=est.una.ac.cr; s=google; t=1789164706; x=1789769506; darn=vger.kernel.org;
         h=content-type:cc:to:subject:message-id:date:from:mime-version:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=wQjMKqS7oeVmIMa2lPbwdzd52T317NKfkckf6Z3yXCU=;
-        b=bP6A/RXVpOY2dbDIzqUl1gC7qnWBzja7BOFuXJhtdFA5fxFtHLHrvIwb4e+9VPb4WE
-         TBS/wh9spDmKDW5VjpfMiLIQY2rBAFWHZ7U692HjkMsLikDKH04mf+CxEq9zNlajZXK+
-         QQuPrdBbxHGx4RfgxRBmtVBj/uP3v3TVhQctg=
+        bh=jmcmRooIJWZcfOxhhMxU11ULm5mq/IM7NKssWyEliKc=;
+        b=NZWQy7B7P93Z9mSBPSH+yYNv5GOfYfJz9elcgc+dYbOUuy7ltpPx4xu3paNzLSfmNl
+         gyS4D6gAGTcJuEwH35o2mGdoLJWESStdgahUVzNC5tZNFTR2nFjXthHK1QpyQ+DvrC1T
+         c48CAYfJ7SjRNMn1OObgwrpELo8FjPI0hTmqI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1789164408; x=1789769208;
+        d=1e100.net; s=20251104; t=1789164706; x=1789769506;
         h=content-type:cc:to:subject:message-id:date:from:mime-version
          :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to:content-type;
-        bh=wQjMKqS7oeVmIMa2lPbwdzd52T317NKfkckf6Z3yXCU=;
-        b=U8jQ74Uu4Pte5S49o8AJH3COtcz60+6WO3+sIvKeOiJQfYr5Iosjpi8GFLU3RyfRa+
-         zmHbTmE6KlOKrDeS50eXuO93RKLKys9PO4pbz4X494dWHJpJMoYVKufaBN20yqFhgXLS
-         kSqzPufnQRrcWJqAla03++J+gvSo1oTZpeLqjy1kFNt6fzKY6zZFwxInaccff58QjGW7
-         4LIZHVKYcT2g9+eoebsdn0Xy6UZomtuPqrDQZBwuIKkBWFs2qfV+7baZ9qppaTbZ3xZP
-         bRGcQADHTxnN5OWIv8FHgm9Q70Td3DWk589OBzph/Cdj5CjX4faIR9HWaGIurpCqFpQk
-         k27Q==
-X-Gm-Message-State: AFuF++kYE0f/zifOQOs9oROYam+6/tHfuyFBFUNu1oo619KQlSq0DZXV
-	ED2HF8x6qxVTtf5JsU/40kTBBc1sj9XqnKaNwlXkYpsZBjQv9gIAfDRxPhsN6wRH0cIcL1kkHP7
-	ZvT5nesQtO9SbZ8Gz1iafvWMuCePwsdGMEqST9WbTQhLQzbdZdA+uZFdGCA==
-X-Gm-Gg: AYBFou3hL3PoKa+aIlG3w5KrX1OuI7lOUTQV4kE+r2ei+Idc0zgi5fxzppGoL8JEWCx
-	3TRca1oEhayCaIEfKobtDk3C0o+aggOgdGNUMV2WaTfMYrhC9vesFob7Rg317P/fqFdQ4YDoKNx
-	A5k+CNB5/PPvEXJaYIRpleDNEb7X1Azpze0REpTJgLqDz3le59IXZhpXzuWuBMor0Utzwtjuxwt
-	q7cZAFBmYq88seRIEymMI5Qg5PISbQiDJUMkCGYuzATMObKW3qZE2veealL/feomxDeO5fv6ked
-	Fkpmn2jQOOB+Pcoxz27KQ0JGbwGybwCrb8RfCYjMZRT8QhSzxeBtlNVVrdubaae5rAOmf59Wwdc
-	GfSW6++Xr/4xgM9Smfsgn
-X-Received: by 2002:a17:907:944d:b0:c16:4e5:944a with SMTP id
- a640c23a62f3a-c29666725d4mr279453966b.21.1789164408354; Fri, 11 Sep 2026
- 15:06:48 -0700 (PDT)
+        bh=jmcmRooIJWZcfOxhhMxU11ULm5mq/IM7NKssWyEliKc=;
+        b=HbPUFZ3UOpxvlyTU3nP+3DkZC1Y+5WaWeu2qZPXfkS6VepEXfLJbRizdQSljvok7Kh
+         pPae5ubKHQoQjg59JIiE6ULRsOXl5nZbv+tO3TCn9SmTPbfEbJW99w7G2HI1YIlXaAlq
+         JdvEHUn9EAUD0WFhlYZumgN2ZPISraX29Z2SC+/JpgvdeCr3WujcvqNAxJnnJvUOcXg/
+         Se6zMWPrTDhaJFCXSRArKvgqzg5lis8opQoO2JgEm8HMByWQWJf2YYAdfA4H6T2mpjPp
+         ebXuvFcvR3HeN9ozZP3bXi0f5dSXaWPXJWy9LjYfOk0vr/OmRtWOO65ky/3CUzDLA+ZV
+         kg+w==
+X-Gm-Message-State: AFuF++l11NgUcXFR3KyQQhaz0Iipx+yQYYuSrpP5uql+OE5HOXgSObFq
+	FqXslAwRU2Hp13z6OvMAUyZPRkp27Ko/6RlH3kMBAIidM4n4iLpWK6c2nRM85rc8kajcNTSRANB
+	HdKCvn994uKZ9vcaDcfXi/IOK9PymZhlNfYHuXdvKflRPHp7UWzWq/qRv8y/A
+X-Gm-Gg: AYBFou3Y97dikhK/BMOdklAGMG7WApQm5gE3dRVsWBUIsegaNq50MMtc4k7ZYASKJyZ
+	69WDMEwLxzsv9esF4TawmNCvfjiryUsFjIzQObhHpJliVCpkM64iqpNbS+Nv4LsDuzTF2wRsN9s
+	wrY9d668Yud80u9lnepXSZKQODv0Hq+TmNvJ/PfXiZh7dSaFBXx8199RaRzJjVG6krxG+9EATUm
+	pysqqLHRZSjJMwE1P2fBDmb++irBc0YOiTG6x7gPws/GQXIRFpaJ5aWI38Ad/86ASrgydkM0Tf+
+	49WRhzpZsEA+vhGZff88YTFKJKsErKemAgunjryeIeLc6gBsXLlD0SLkRPvTQDZCYwCTi7VCyb4
+	mqXj7U4iSzJ0=
+X-Received: by 2002:a17:907:1c10:b0:c29:286e:2e3e with SMTP id
+ a640c23a62f3a-c29666d5f9dmr280604466b.38.1789164706055; Fri, 11 Sep 2026
+ 15:11:46 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -76,77 +76,50 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 From: Avalon Vargas Centeno <avalon.vargas.centeno@est.una.ac.cr>
-Date: Fri, 11 Sep 2026 16:06:37 -0600
-X-Gm-Features: AcwNN1U_2tuG8X_alxZ80QmSpMmOxpgoLvfHOPditQ4IaFjBhDDT2dZzYtdfpE0
-Message-ID: <CAGXpr56LDenxF5hM-_gdc7suckR9P7sgC8vY4T7dcHtLK0OwVA@mail.gmail.com>
-Subject: [RFC] arm64: dts: qcom: Dell Inspiron 7441 LXST2021 touchscreen at 0x09
+Date: Fri, 11 Sep 2026 16:11:34 -0600
+X-Gm-Features: AcwNN1UKz1EzNqNrYibLG4EW7is5QWZ2Va82YNgb4e5YpYrggY_-TnFTnLexsys
+Message-ID: <CAGXpr54Bn9Wf24asY2RcXgBNLy1A16=U1mtFx7mKeNK4CCOCYQ@mail.gmail.com>
+Subject: [RFC] Dell Inspiron 7441 AUO0BA4 panel backlight: PWM configuration
 To: linux-arm-msm@vger.kernel.org
-Cc: andersson@kernel.org, konradybcio@kernel.org
+Cc: andersson@kernel.org, konradybcio@kernel.org, devicetree@vger.kernel.org, 
+	dri-devel@lists.freedesktop.org, neil.armstrong@linaro.org, val@packett.cool, 
+	bryan.odonoghue@linaro.org
 Content-Type: text/plain; charset="UTF-8"
 
 Hello,
 
-My Dell Inspiron 14 Plus 7441 has an LXST2021 touchscreen that works in
-Windows and BIOS but it was not detected with the Linux Inspiron
-device tree found upstream. After working on it i found that
-changing the touchscreen address from 0x10 to 0x09 fixes the
-touchscreen on this unit.
+On my Dell Inspiron 14 Plus 7441 (BIOS 2.16.0, aarch64 Linux 7.2.4,
+NixOS), the AUO B140QAX01.H / AUO0BA4 panel originally exposed an unusable
+dp_aux_backlight with max_brightness 0. GNOME could not adjust brightness.
 
-Hardware/software:
-- Dell Inspiron 14 Plus 7441, Snapdragon X Elite, BIOS 2.16.0
-- AUO B140QAX01.H internal panel (AUO0BA4)
-- NixOS, aarch64 Linux 7.2.4
-- Windows ACPI ID: LXST2021
-- Working Linux HID ID: 29BD:1103, I2C device 0-0009
+Panel DPCD bytes at 0x700-0x72f:
 
-The Inspiron DTS declares touchscreen@10, reg = <0x10>. A targeted reprobe
-on the original configuration logged:
+  05 9b 91 00 00 00 00 00 00 00 00 00 00 00 00 00
+  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  00 00 02 00 0a 04 0a 00 1b 00 0d 2f 03 ff ff 03
 
-  i2c_hid_of 0-0010: nothing at this address: -6
+The capability bits indicate PWM brightness setting rather than AUX
+brightness setting. Inspection of the local panel-edp and DP helper code
+suggests that this capability combination can leave the AUX backlight
+maximum at zero. This is a code-path inference, not a separately verified
+generic DRM driver bug.
 
-No touchscreen input device was created. The corresponding LXST2021 node
-in x1e80100-dell-latitude-7455.dts instead uses address 0x09, with the same
-I2C8 controller, descriptor address 1, GPIO51 level-low IRQ and ts0_default
-pinctrl state.
+A privileged GPIO snapshot showed PMK8550 GPIO5 already routed to func3
+by firmware, with no Linux PWM provider registered. VREG_EDP_3P3 was enabled.
 
-I tested a local device-tree overlay disabling touchscreen@10 and adding
-touchscreen@9 with that upstream Latitude configuration. Linux now reports:
+A local DT overlay enables pmk8550_pwm, configures PMK8550 GPIO5 func3,
+adds a pwm-backlight using channel 0 and vreg_edp_3p3, and connects it to
+the existing eDP panel. The existing panel enable GPIO is preserved.
+The chosen period is 4266537 ns, borrowed from the upstream ThinkPad T14s
+LCD setup; it is not a measured Dell firmware period. The brightness curve
+is linear with 101 values and default index 80.
 
-  hid-multitouch 0018:29BD:1103.0003: input,hidraw2: I2C HID v1.00
-Device [hid-over-i2c 29BD:1103] on 0-0009
+Validation status: the overlay compiled and applied, and its connection
+was checked in the compiled DTB. Physical brightness adjustment and
+suspend/resume have been tested successfully on this laptop. But I have not
+measured the PWM waveform or tested other panel variants.
 
-Touch interaction works after reboot. The full NixOS configuration built
-successfully and the compiled DTB was inspected. Touch operation after
-suspend/resume has also been tested successfully.
-Other Inspiron touchscreen variants have not been tested. This was tested on
-7.2.4 with an overlay, not by building the proposed diff on current mainline.
-
-The successful address fix uses the original upstream ts0_default state;
-no reset-pin change or new HID driver is needed for this result.
-
-Would replacing the Inspiron's 0x10 node with the existing LXST2021 setup
-be appropriate, or are there known Inspiron variants that genuinely use
-0x10 and need to remain supported? The original board submission described
-touch as working, so I would like to confirm variant handling before
-submitting this as an unconditional fix.
-
-The minimal proposed change against the currently inspected upstream file
-is below. My tested overlay is equivalent for the enabled touchscreen node.
-
-diff --git a/arch/arm64/boot/dts/qcom/x1e80100-dell-inspiron-14-plus-7441.dts
-b/arch/arm64/boot/dts/qcom/x1e80100-dell-inspiron-14-plus-7441.dts
---- a/arch/arm64/boot/dts/qcom/x1e80100-dell-inspiron-14-plus-7441.dts
-+++ b/arch/arm64/boot/dts/qcom/x1e80100-dell-inspiron-14-plus-7441.dts
-@@ -25,9 +25,10 @@
- };
-
- &i2c8 {
-- touchscreen@10 {
-+ /* LXST2021 */
-+ touchscreen@9 {
-  compatible = "hid-over-i2c";
-- reg = <0x10>;
-+ reg = <0x09>;
-
-  hid-descr-addr = <0x1>;
-  interrupts-extended = <&tlmm 51 IRQ_TYPE_LEVEL_LOW>;
+I can provide the small overlay and further test results. I would also
+appreciate advice on the correct Dell PWM period and whether the
+zero-range AUX backlight
+behavior should be handled separately in the display helpers. Thanks
