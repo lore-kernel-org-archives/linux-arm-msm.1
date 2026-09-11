@@ -1,87 +1,88 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A4C2E34D3A9
-	for <linux-arm-msm@vger.kernel.org>; Fri, 11 Sep 2026 14:26:07 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 63B7435E1C5
+	for <linux-arm-msm@vger.kernel.org>; Fri, 11 Sep 2026 14:33:54 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789136769; cv=none; b=EqR+bj9huBqrpeqyZe7NwgLj38blbFz/Wq49MN3oquKdH1zFgvddP1ouPrqti/P6TtD/sRk3sSc7UfmwuxmAu///etel0M3tZokFlc8NYUDhmbOHlLFcXKsVoHMunlo1pxDIS6XIVeEfZNXty1oVKUDpr8vTOqhyrxyghnVPqrM=
+	t=1789137236; cv=none; b=huoo/ms/nACwdpkHlqG/aBvczPFzuv4s1ABw/LuQMHJBbkrrdVrAkJtrjioPveiWbuBc5NEVNSsnRQNpvsH9/VDENAK8ADyLocz67GkKscaf8CcKRZ8ecdQHUBR5QpUMYZstVVwDuPhe+KAWUFyOabVoZERQSWZXZlcg8E+5+kY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789136769; c=relaxed/simple;
-	bh=StmW96JqWZG7fKkrql9YvkfYJmFJ7jmdDutyVcOwjmE=;
+	s=arc-20240116; t=1789137236; c=relaxed/simple;
+	bh=cJ3zJdyQLESWJxyl8LoiF1RSpFCEAxC+0QEhnvoAq08=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=fxls2A7hyQM3VVDlDw190k3NcAY/T/A5vtF/4J4XfA+/Vz5Gy7bGCd+y3KxIDyyfJ2CP/hKgk48mfyDbU4gF0g8XJUIv5/owjvVMwV2xiWhS/onbagEkZ+OB7+LsoPI9HRGVr190kSAgYXR7A/5UxOUI+JqwERxlCybsMROsR4g=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=m5Ej9Iud; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=NRlES1ei; arc=none smtp.client-ip=205.220.168.131
+	 In-Reply-To:Content-Type; b=nAo/vg0fan56WzHDY0ygXqQMb7qb07pLnV0u10n1/F+bSEMDdH9TQIub8aV8mMREc21Qm82iCFNwkWFNWchlHFCr2t8nkc7wAbaEiJLF6iu4vDwQiskolO2q250JEikGq6gokhr0O4ses8xZdETVHLmxGgHQKxPU8yKqDXf6wjY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=L2K+b9we; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=YjVDG0dJ; arc=none smtp.client-ip=205.220.180.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="m5Ej9Iud";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="NRlES1ei"
-Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68BCiVn1815095
-	for <linux-arm-msm@vger.kernel.org>; Fri, 11 Sep 2026 14:26:07 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="L2K+b9we";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="YjVDG0dJ"
+Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68BCigsQ3505567
+	for <linux-arm-msm@vger.kernel.org>; Fri, 11 Sep 2026 14:33:53 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	uz25G+qDafHaYTcukJB4mX7gmdL4Il0RlndYwgEhWHo=; b=m5Ej9IudHnxlIbJp
-	CqMiKZ87K0v0zFULFil/b6+JHUJQashozqlLTCGFTnEdGqz9YVLWb6vPxGKQb0bJ
-	nbV4Xd5L2NSCchk7ojPnkY4ysRnL4vuVy7x+C18V/1PHXFmW3YTx652qAVa+IDep
-	N+WYnFQ9SRqfF4xKkeL1hMhRIWphax89BMoMYUK4DbhfHYRY6n5fgZQpwne1wK1I
-	qkFBK6AYX6QEti8kt37E3wzjUqvxIcXWRM7DOmW+6yYNe21zQNP1iG7vpTsxef2T
-	UoE1Apj9rO7pT5LF8kzVZ/SjAGaxQHbh9KOw4aoAPi7Lo8u13Np6rcshLJ5usaH2
-	0W7mWQ==
-Received: from mail-vs1-f70.google.com (mail-vs1-f70.google.com [209.85.217.70])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gmbd3a5xa-1
+	J/f/3hDXPEmkpUjn36wZnVHUKAQU6nEKOyGFkLsJQTs=; b=L2K+b9weGNfW8ZZA
+	mf6+iP7ThBlkK3oW/Zr48D4srLa0qNaauy5oucyUAuzJxFCF86ZmbGfLViWz7YiS
+	UqZQfzZkaFqqskY9BppvkPq0dWpUIG6naVTbgvadPnzSUXc4Yz8wEBWAGu+GOLOG
+	3rAwnyZaqPrXaGZ2MJeBeQqLc4rCnlmLkJkZPNmKvVmUvX7k061ItJoFIaV4mfdY
+	+kdWERgrmtY5KeGKKh5Fx8jP4X6nh2O1c6O9lLMBcWOtdG/1Eo4K2s/yr5qQN7bn
+	ADKk9ZYchp0LJqeQ1pehcq18Rt9o8e2MfArSfhxBZs7xt1YL4eg35/Pkaf/qDlDD
+	UZO3Bw==
+Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com [209.85.222.198])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gmcgfhxj4-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Fri, 11 Sep 2026 14:26:06 +0000 (GMT)
-Received: by mail-vs1-f70.google.com with SMTP id ada2fe7eead31-77f133855b9so40402137.1
-        for <linux-arm-msm@vger.kernel.org>; Fri, 11 Sep 2026 07:26:06 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 11 Sep 2026 14:33:52 +0000 (GMT)
+Received: by mail-qk1-f198.google.com with SMTP id af79cd13be357-93903622880so428205885a.0
+        for <linux-arm-msm@vger.kernel.org>; Fri, 11 Sep 2026 07:33:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1789136766; x=1789741566; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1789137232; x=1789742032; darn=vger.kernel.org;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=uz25G+qDafHaYTcukJB4mX7gmdL4Il0RlndYwgEhWHo=;
-        b=NRlES1eiIc9cuyxssBZ14zXXNpoMmuZiRSZgcpzpWXuj3kzOozoWfMJ6m8pKJVUhnF
-         MVfAuYRglJMx4qtCufLjdUrDqcxkGodVBeQmtnBp8Tr+40/m3Var9KmxeEdW+75xg4mD
-         ZV3pzLuYCg3XlAPiBOXRfdv+mPEh9k3BK7Rf7y5UUYSccZZYeU9TxYzVBLKDD23Xbjn1
-         5ewKoHb0fmtqdmTldj9eezmJYNtSn+CYvr6nLpSosulenpTr1sMzln8LiJNlT2IfluUC
-         KIQE0vGnSIRt2mLOto7fyvQ9PfYY8yUcXVt7bC1ZROVm/F3q0xdcpuYsGtwTyXnMCrpI
-         THaA==
+        bh=J/f/3hDXPEmkpUjn36wZnVHUKAQU6nEKOyGFkLsJQTs=;
+        b=YjVDG0dJ3fvgxZcNmT1EF2vlohKhKaMWKgH0nzE/mWdzpJ1k0386BOAcjYjZmR0087
+         kISWDO656ukWDzLWsxLkTUo/3pueeDsxQhnjMngGNDoo3YuPkxDlNDf315iv91br4Qnx
+         Ch3k5AAamt8wci6D4jhSwiGBPaErTbI0uo1P2SRwhr9onpnrAe1k0BAhIY59ke6vu6Qh
+         v/NBh7Gc6Uj+tKwiFkZcllW4Iw5KpxzKNQEMCCrI2pus2n15vOpmJtXVUZJTuI/vyY5S
+         7rHlXQCv39O2NyuQdN18Z1SuVl+frR0wlFoZXo2JWlRMU1pRhBUIfnt55iKeh1VGZgmb
+         EIOQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1789136766; x=1789741566;
+        d=1e100.net; s=20251104; t=1789137232; x=1789742032;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=uz25G+qDafHaYTcukJB4mX7gmdL4Il0RlndYwgEhWHo=;
-        b=PBi6O3cjqS825P2rKLv3KJm/Lu9YzuF/MKVmfRWD+5Jf+rcqKvTmesIk6IKO2+84LI
-         yN8j8Ao4kuhcwHY/hbIeJk653JvF97U6OF8j3f0W1vBmT0h7aOt/37R+6coZ9jIdk/tP
-         hSUQmBIlqfeBAgOM4Vqj905zcSCNgniyzMYEpzrzbuyEoE7NUO5VPF1c7hc5wbv5aVMD
-         NLLc/j6abvX8BYKCOBFZB1lGu3Zv1B2IfZKOiAwOIb2ObzwZ5PmsOJ2u0PTS0qVOcZT/
-         70d7Rgq+iUM3+0b760QVGivFRfsJOy7lgMtodOiaFBQFVcTsKXFLh8Ydg8Ek56hxQD6h
-         VprA==
-X-Forwarded-Encrypted: i=1; AKwUvBxuebhU3Yp5LjKFlxCRyY9MdwpMOYqeUo3R1XIjQU9gmDURQU+LKqAoljQYsnZCLpJQYszZXAURV/rWusSZ@vger.kernel.org
-X-Gm-Message-State: AFuF++nNSGl2y2khj+XKIBiZqxlW8J2knl1i8mtdibM7VVZJmDnWDeHt
-	k33saedJXuIT5exO2ihhIUp8NGlzQkeDk+f72yIUOWhcREeZre8/fyv7BWjhDeOkRkhhL52pMvT
-	mV4nLUD6MgAVM0PW9pUtnbM/YkdgOTuE4jfIkLsX2ar63FYIxFkQiT+fd+CfYLLhGloaU
-X-Gm-Gg: AYBFou0prR8czEWvYKavr1BDXeOhwD+LJYI4hE/QrvbUMPHrZXy7fTsM5yLas+GPHB8
-	c2lbf71sV+A1kgl+ohqsXqI0TY3wZW/JhKzZKEZsgSxohCwgCjt4exY2ap+24T8IjGp18Ws25wO
-	DmTKZh9VplRyB6PuxBBDRwrJvzfMHWMv8Uqd6O6tKiqtGZHp+Yw7Hb/TtQbOCSoLBNhCp1QBWDH
-	zQhAvf/+RVV6aeDSl10s8qUKFhOWe84N5S5KOPAktPmSbzRrQrh+oIxeemVyU+ZMDaFz7BoyUIM
-	sQxCowWkErJJGg+Yr794iMNoG9R2fJiULIWQNBOXvNoag85W4PKoq6wxYC8roJy9toEmkfnT6tV
-	kfC4AW/Ic8GS3dYOUaaXJuw==
-X-Received: by 2002:a05:6102:41a2:b0:791:33c:9d1 with SMTP id ada2fe7eead31-792a6758b54mr1275614137.1.1789136765724;
-        Fri, 11 Sep 2026 07:26:05 -0700 (PDT)
-X-Received: by 2002:a05:6102:41a2:b0:791:33c:9d1 with SMTP id ada2fe7eead31-792a6758b54mr1275573137.1.1789136765193;
-        Fri, 11 Sep 2026 07:26:05 -0700 (PDT)
-Received: from [192.168.202.12] ([178.235.128.140])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c2966021d0dsm86105266b.10.2026.09.11.07.26.01
+        bh=J/f/3hDXPEmkpUjn36wZnVHUKAQU6nEKOyGFkLsJQTs=;
+        b=cb6gvmAG33TyYZpKhpsn4hysVLZRBHA7Bzga04VNyzczk/uEvHO6KVhNVRrWtZU4+f
+         YkrV1O/c5i8tB72IfqwZNuUjTySyInmRTtu4aO/7i1OvUqsmfKi2eMQtP5QzV2yeKS1s
+         zhRZ39lY7qJDeER/xYbMJBc11Izi7AOv+g/nnAimBkAMlVS5+M1xCIPJRsqhspQ14MLX
+         5CIYOcXM24BO9zUgniliTAHKiioX+S5eoKZT2Wrwq9T9887g9Nxft0WrYT47wqP5w+9G
+         Cm6s4mWQvb26rgVFTdHkPRZNCpSx6ePmZTX6A5mMwwoXX3oeSFMhktqwEFV7YsRZB3kI
+         yKwQ==
+X-Forwarded-Encrypted: i=1; AKwUvByedIRQ4yNsMKUUc8szXUpqD/TiFxcudpSZPuvIJJEXl5j6HRtU1tMZUUOguijo+gi1djp1mQ55pxh4uXXg@vger.kernel.org
+X-Gm-Message-State: AFuF++nztESO6f6mni3n9j3E6RIj0Nk4Wjoy+XlxvQGhqGp472TED4Ui
+	6e2jmVh7fLKkolvoyF6pRTyCTEUiO/PvaCo+kjPbeISLAgj41gswvo8DyaReObPsTEaU05HpHsj
+	9mclW6AagHWiI5JRBEy2vn9YdlucDUNG2LDXtGwk8et3tRDORJmXVUzSL0jw5PNuCWL1XruEsil
+	5B0D4=
+X-Gm-Gg: AYBFou1e3tC8V1d1RkLtpMMt0sH3JLoYrv6lxFR0OXdpKtJacVXnVpkPfSMkUsTJHJS
+	2cUJLXHCkljSPiWWxphbub+sozCwGQxX1xegcBlXfJuvKO9RzPjHWymNd2+lU+WlKsMH8vqctVk
+	PtSHG5yITSkFxF5X7cJ//GWcBYhkSgZXS2nRk/8g3KDp5bvH/3MjQqNxl/TlGMpGK4GWno5AhPP
+	jgbV01myjXFrk1NuGEVSdZGhecMBWEYvhzerfUze1vYNUQz+rhC6WzJyjkb3TGMI99jQmHNZJDS
+	Ay/qI4wyFwVIzn+NZP3FOpTcqyDQtOXiqF2cSIQ0w8TsVvyJ8aMWYCKW7tiWpatVuapftBhiqPQ
+	DpbTwrxYZl4BmXH4kvJK2a4JsGJEyWKS72r+MDtwq
+X-Received: by 2002:a05:620a:6892:b0:939:d6a1:234 with SMTP id af79cd13be357-939d7eb1d0amr1197581885a.18.1789137231591;
+        Fri, 11 Sep 2026 07:33:51 -0700 (PDT)
+X-Received: by 2002:a05:620a:6892:b0:939:d6a1:234 with SMTP id af79cd13be357-939d7eb1d0amr1197571885a.18.1789137230924;
+        Fri, 11 Sep 2026 07:33:50 -0700 (PDT)
+Received: from [192.168.1.31] ([85.196.172.179])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-49e62231360sm44266545e9.4.2026.09.11.07.33.49
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 11 Sep 2026 07:26:04 -0700 (PDT)
-Message-ID: <04e79cef-bbd1-4f4d-a249-f040c7e33435@oss.qualcomm.com>
-Date: Fri, 11 Sep 2026 16:26:00 +0200
+        Fri, 11 Sep 2026 07:33:49 -0700 (PDT)
+Message-ID: <5cf6f2d9-bc9f-4d86-8318-b040d7a6839f@oss.qualcomm.com>
+Date: Fri, 11 Sep 2026 17:33:47 +0300
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -89,98 +90,728 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH net-next v2 9/9] net: stmmac: qcom-ethqos: add Shikra EMAC
- support
-To: Mohd Ayaan Anwar <mohd.anwar@oss.qualcomm.com>,
-        Andrew Lunn <andrew+netdev@lunn.ch>,
-        "David S. Miller"
- <davem@davemloft.net>,
-        Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>,
-        Paolo Abeni <pabeni@redhat.com>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>, Andrew Davis <afd@ti.com>,
-        Andrew Lunn <andrew@lunn.ch>, Heiner Kallweit <hkallweit1@gmail.com>,
-        Russell King <linux@armlinux.org.uk>,
-        Richard Cochran <richardcochran@gmail.com>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Alexandre Torgue <alexandre.torgue@foss.st.com>,
-        Giuseppe Cavallaro <peppe.cavallaro@st.com>,
-        Jose Abreu <joabreu@synopsys.com>,
-        Maxime Chevallier <maxime.chevallier@bootlin.com>,
-        Maxime Coquelin <mcoquelin.stm32@gmail.com>
-Cc: netdev@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-        linux-stm32@st-md-mailman.stormreply.com,
-        linux-arm-kernel@lists.infradead.org
-References: <20260908-shikra_ethernet-v2-0-bbe3389d0652@oss.qualcomm.com>
- <20260908-shikra_ethernet-v2-9-bbe3389d0652@oss.qualcomm.com>
+Subject: Re: [PATCH 4/8] media: qcom: camss: Add streams API support in CSID
+ subdevice
+To: Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
+        Gjorgji.Rosikopulos.gjorgji.rosikopulos@oss.qualcomm.com,
+        Mauro Carvalho Chehab <mchehab@kernel.org>
+Cc: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
+        Loic Poulain <loic.poulain@oss.qualcomm.com>,
+        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+        Atanas Filipov <atanas.filipov@oss.qualcomm.com>,
+        Jigarkumar Zala <jigarkumar.zala@oss.qualcomm.com>,
+        linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+References: <20260911062213.195007-1-gjorgji.rosikopulos@oss.qualcomm.com>
+ <20260911062213.195007-5-gjorgji.rosikopulos@oss.qualcomm.com>
+ <f1570f7e-c895-433e-996d-973a96a9afef@linaro.org>
 Content-Language: en-US
-From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-In-Reply-To: <20260908-shikra_ethernet-v2-9-bbe3389d0652@oss.qualcomm.com>
+From: "Gjorgji Rosikopulos (Consultant)"
+ <gjorgji.rosikopulos@oss.qualcomm.com>
+In-Reply-To: <f1570f7e-c895-433e-996d-973a96a9afef@linaro.org>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Authority-Analysis: v=2.4 cv=Bv8IUoX5 c=1 sm=1 tr=0 ts=6aa40f7e cx=c_pps
- a=N1BjEkVkxJi3uNfLdpvX3g==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTExMDIwMyBTYWx0ZWRfXwacSCvG+aFbz
+ TKcPp2AI/D68DPMRkOF+rlr3TK9wXsW8wHbDSUy/it1aI+3pu/1ThHTUCZvu476svq0H7DtS3Gz
+ rBFfkQQYgnNBwv4ROpByPAOt9hOYf+cWtIH0dihKsI8/qSR8ifVecSTfZyO5Ah3zA1taBe5BmT1
+ 8RvB9qArFISH6Ia3iCKT4nFrWcgE9Euz+i+aKpH8lc03Uw5G6gM/kkEadYMskdmbGriqEPvUlmm
+ y6E4pMRTdCfjFVMKKPrSHrkpyqFMrTubAfr0ybynenWOGbojuaf66Vl9xXjkbWt5RXZzFRlG2pI
+ 1m8DigMhSdo4NRmXIB78p2H9DhaVsosgOLclBlM3u220tYnhhpa3ar8b1CoxNqrJnbrSX4wKn+C
+ l0XeNQoKS87ljFRuIvD7PFYCG92Knx3l9QluurtqoZOAZmTQ4QW7o2JyfmcCvkyyrBHrjfGQ0lB
+ 0zrhGgoW52vba1xEpog==
+X-Proofpoint-GUID: p7agLjdMrzMZZtavecz3-CjJg0o4sue7
+X-Proofpoint-ORIG-GUID: p7agLjdMrzMZZtavecz3-CjJg0o4sue7
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTExMDIwMyBTYWx0ZWRfX6cVMVkD1fFjH
+ lUWjwZ37Wv/mTUH1MIwYdRN8O8E7zveDxAthCXKpHbxhtci580GlBDcuUP0ooB59JTWJaSSuodi
+ ntRZlN9qvJvdCcsBuDddXgIDWg/gjcM=
+X-Authority-Analysis: v=2.4 cv=ULtIjyfy c=1 sm=1 tr=0 ts=6aa41150 cx=c_pps
+ a=qKBjSQ1v91RyAK45QCPf5w==:117 a=Q/e3f29T3Hw2hnAEzBPF7w==:17
  a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22
- a=EUspDBNiAAAA:8 a=q6PzOI_h-AFGYkee8UYA:9 a=QEXdDO2ut3YA:10
- a=crWF4MFLhNY0qMRaF8an:22
-X-Proofpoint-GUID: ZAXlGvHJUBek2laIX4z0kGSKovgWwxwU
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTExMDIwMSBTYWx0ZWRfX9okuzrMdMYFm
- Jd8ZpAKmKKTd1RKgJijLFbnP7zN/2j/b243G0Z5ErCVQUxWCCcXtbzlYdKvctw0yXd4JxyFCC8V
- R8ls+LcO6SkN4eG1MraeruiaCxKqtSU=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTExMDIwMSBTYWx0ZWRfX9EtKc09ie8yd
- Nbm+fU7naLrmdV9opgA0ybUTmAGUlcVNAp0PSBUdIt46yoASsQq2TMhI0vnpRYE508sk+6jRhJK
- PEpaoD6fdd9DfPzU6OCv9EJNyUCaXtoma1vyV8ZVDS///M9bTHTJafjVepG/jpNoNXkiSAsBBOT
- na+ITzB6cVIY20OclFTIQUtUoSQHmbCM8T3WxbtlL1/igIjdTiOodpZqwh087I7OHlBwtmrO5r4
- a0sySNdHIbwd/MNDFEZDtlArAQqy4uTm6TZ4csrYP3V29w/YwFx7+CA20Mtido+jyVaiXzLhL4n
- uz1TLbc9SHCWclnxZBgqXt7VYQW9cHnzYxUSAWBGU4E5UybfKZOU/CBqL0SsEFIxhTRbvFcvflC
- cp4XEval43wfUEUbrJt49DQuzJHz6nDjpneIZZrjg4KlOK+VDwVMRIO3CIPDrntmRlrE/BmXV0c
- Ol5Ivlic/hmVvsnvMfQ==
-X-Proofpoint-ORIG-GUID: ZAXlGvHJUBek2laIX4z0kGSKovgWwxwU
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22
+ a=EUspDBNiAAAA:8 a=aa__H5kD5iCe5lwQuFMA:9 a=Ez32RhJvJVYJKobC:21
+ a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10 a=NFOGd7dJGGMPyQGDc5-O:22
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-09-11_04,2026-09-11_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- suspectscore=0 bulkscore=0 priorityscore=1501 phishscore=0 impostorscore=0
- adultscore=0 clxscore=1015 spamscore=0 malwarescore=0 lowpriorityscore=0
+ priorityscore=1501 adultscore=0 phishscore=0 bulkscore=0 clxscore=1015
+ malwarescore=0 suspectscore=0 spamscore=0 lowpriorityscore=0 impostorscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609110201
+ reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609110203
 
-On 9/7/26 10:23 PM, Mohd Ayaan Anwar wrote:
-> Shikra integrates two Qualcomm ETHQOS controllers based on the Synopsys
-> GMAC IP, similar to previous platforms.  Register qcom,shikra-ethqos
-> backed by a new shikra_data descriptor that enables the three NOC clocks
-> required for DMA memory access (axi-noc, pcie-tile-axi-noc, stmmaceth)
-> all at 120 MHz, and the 36-bit DMA address width.
-> 
-> As part of the NOC clock voting logic, the qcom-ethqos glue driver takes
-> a second enable reference on the "stmmaceth" clock, which is already
-> enabled by the stmmac core. All three clocks in shikra_noc_clks[] must
-> run at 120 MHz for NOC access, and managing "stmmaceth" through the same
-> clk_bulk path keeps the rate-setting and enable/disable together.
-> 
-> Signed-off-by: Mohd Ayaan Anwar <mohd.anwar@oss.qualcomm.com>
-> ---
->  .../ethernet/stmicro/stmmac/dwmac-qcom-ethqos.c    | 31 ++++++++++++++++++++++
->  1 file changed, 31 insertions(+)
-> 
-> diff --git a/drivers/net/ethernet/stmicro/stmmac/dwmac-qcom-ethqos.c b/drivers/net/ethernet/stmicro/stmmac/dwmac-qcom-ethqos.c
-> index 8871d285941162c72e2a8f79d2eef915d9283796..c474f1e5a043777a52bcbff8a488640f6dbdca30 100644
-> --- a/drivers/net/ethernet/stmicro/stmmac/dwmac-qcom-ethqos.c
-> +++ b/drivers/net/ethernet/stmicro/stmmac/dwmac-qcom-ethqos.c
-> @@ -328,6 +328,36 @@ static const struct ethqos_emac_driver_data emac_v4_0_0_data = {
->  	},
->  };
->  
-> +static const struct ethqos_noc_clk_cfg shikra_noc_clks[] = {
-> +	{ "axi-noc", 120000000 },
-> +	{ "pcie-tile-axi-noc", 120000000 },
-> +	{ "stmmaceth", 120000000 },
-> +};
+Hi Bryan,
 
-Can we please put this into an OPP table, so that it also casts
-the required power vote?
+Thanks for the review,
 
-Konrad
+On 9/11/2026 2:35 PM, Bryan O'Donoghue wrote:
+> On 11/09/2026 07:22, 
+> Gjorgji.Rosikopulos.gjorgji.rosikopulos@oss.qualcomm.com wrote:
+>> From: Gjorgji Rosikopulos <gjorgji.rosikopulos@oss.qualcomm.com>
+>>
+>> Add the V4L2 subdev streams API to the CSID driver: per-source-pad
+>> enable/disable_streams pad ops, VC/DT discovery via get_frame_desc on
+>> the remote sink pad, and a routing table that routes a single incoming
+>> sink stream to every source pad by default (remappable via
+>> set_routing for multi-VC sensors).
+>>
+>> Active streams are tracked per pad via a per-pad enabled_streams[]
+>> bitmask, so that enable/disable_streams correctly propagates to the
+>> CSIPHY only on first arrival/last departure of a sink stream, and
+>> multiple source-pad consumers can share a single propagated sink
+>> stream without redundant or colliding propagation.
+>>
+>> csid_init_state() caps the number of default routes to
+>> MSM_CSID_MAX_SRC_STREAMS - 1 for non-lite CSIDs, matching the 3 usable
+>> RDI pads on full-IFE CSIDs (the 4th/pix pad is non-functional).
+> 
+> That makes sense.
+> 
+>> msm_csid_register_entity() mirrors the same is_lite check for the pad
+>> count itself, so non-lite CSIDs no longer register a pix source pad
+>> that no route ever targets.
+> 
+> Nope. I'll send a different solution. Fixing the non-functional and 
+> incorrectly mapped pix is a Fixes: level thing not a workaround it 
+> inline thing.
+> 
+> Just drop the workaround and assume any CSID you are working with 
+> actually works and is valid.
+
+Ok will do that in the next patchset.
+
+> 
+>> csid_pad_enable_streams() rejects enabling with -ENOLINK when there is
+>> no remote sink link and the test generator is disabled, matching the
+>> equivalent check the legacy csid_set_stream() already performs.
+>>
+>> msm_csid_register_entity() assigns the ctrl handler's lock as the
+>> subdev's state_lock before v4l2_subdev_init_finalize(), when the test
+>> pattern control is present. Without this, the test-pattern S_CTRL
+>> handler and the streams API's active-state accessors serialize on two
+>> independent locks despite both touching csid->testgen.enabled,
+>> allowing a concurrent S_CTRL(TEST_PATTERN) and stream enable/disable to
+>> race.
+> 
+> Actually this reminds me of the first go at VCs in CAMSS which ended up 
+> getting rolled back.
+> 
+> How will this be tested ? Is the TPG capable of generating different VCs ?
+
+TPG can not produce simultaneous streams with different VC's so can not be
+used for verification. I have setup for verification but checking if can
+be shared publicly. I agree having implementation without a way to test and
+verify by the maintaner is same as having nothing...
+
+> 
+> _That_ would be very useful.
+> 
+>>
+>> This is opt-in per CSID instance via the new streams_enable resource
+>> flag; no platform sets it yet, so CSIDs continue to use the legacy
+>> non-streams subdev ops unchanged.
+>>
+>> Signed-off-by: Gjorgji Rosikopulos <gjorgji.rosikopulos@oss.qualcomm.com>
+>> ---
+>>   .../media/platform/qcom/camss/camss-csid.c    | 494 +++++++++++++++++-
+>>   .../media/platform/qcom/camss/camss-csid.h    |   2 +
+>>   2 files changed, 491 insertions(+), 5 deletions(-)
+>>
+>> diff --git a/drivers/media/platform/qcom/camss/camss-csid.c b/drivers/media/platform/qcom/camss/camss-csid.c
+>> index 48459b46a981..ce4b07c0c1c2 100644
+>> --- a/drivers/media/platform/qcom/camss/camss-csid.c
+>> +++ b/drivers/media/platform/qcom/camss/camss-csid.c
+>> @@ -842,7 +842,7 @@ static void csid_try_format(struct csid_device *csid,
+>>   
+>>   		break;
+>>   
+>> -	case MSM_CSID_PAD_SRC:
+>> +	default:
+> 
+> Why subtract the case ?
+> Just add the default:
+> 
+> Also I don't think that code change is anything todo with adding streams 
+> support to CSID.
+> 
+> Separate patches for separate things.
+
+I agree somehow this was included, it will be moved to separate patch.
+
+> 
+>>   		if (csid->testgen.nmodes == CSID_PAYLOAD_MODE_DISABLED ||
+>>   		    csid->testgen_mode->cur.val == 0) {
+>>   			/* Test generator is disabled, */
+>> @@ -1338,10 +1338,476 @@ static const struct v4l2_subdev_ops csid_v4l2_ops = {
+>>   	.pad = &csid_pad_ops,
+>>   };
+>>   
+>> +/*
+>> + * csid_get_stream_csi2_desc - Discover the virtual channel and data type
+>> + *			       used by a given sink stream, from an
+>> + *			       already-fetched frame descriptor
+>> + * @frame_desc: Frame descriptor fetched via .get_frame_desc from the remote
+>> + *		subdev linked on the sink pad
+>> + * @sink_stream: Sink-side stream number to look up
+>> + * @desc_csi2: Returns the discovered virtual channel/data type on success
+>> + *
+>> + * A frame descriptor with a single entry means the remote only exposes one
+>> + * stream (e.g. a single-VC sensor), which feeds every CSID source pad, so
+>> + * that entry is used regardless of @sink_stream.
+>> + *
+>> + * Return true if a matching entry was found, false otherwise
+>> + */
+>> +static bool csid_get_stream_csi2_desc(struct v4l2_mbus_frame_desc *frame_desc,
+>> +				      u32 sink_stream,
+>> +				      struct v4l2_mbus_frame_desc_entry_csi2 *desc_csi2)
+>> +{
+>> +	unsigned int i;
+>> +
+>> +	if (frame_desc->type != V4L2_MBUS_FRAME_DESC_TYPE_CSI2 || !frame_desc->num_entries)
+>> +		return false;
+>> +
+>> +	if (frame_desc->num_entries == 1) {
+>> +		*desc_csi2 = frame_desc->entry[0].bus.csi2;
+>> +		return true;
+>> +	}
+> 
+> You can drop that check entirely, the below loop will do exactly the 
+> same thing for num_entires == 1..
+
+I Agree, will be done in next patchset.
+
+> 
+>> +
+>> +	for (i = 0; i < frame_desc->num_entries; i++) {
+>> +		if (frame_desc->entry[i].stream == sink_stream) {
+>> +			*desc_csi2 = frame_desc->entry[i].bus.csi2;
+>> +			return true;
+>> +		}
+>> +	}
+>> +
+>> +	return false;
+>> +}
+>> +
+>> +/*
+>> + * csid_get_stream_vc_dt - Discover the virtual channel and data type to
+>> + *			   program for a given sink pad/stream, falling back
+>> + *			   to @format_dt when no frame descriptor is available
+>> + * @csid: CSID device
+>> + * @state: V4L2 subdevice state
+>> + * @remote_pad: Remote pad linked on the CSID sink pad, or NULL if unlinked
+>> + * @pad: Source pad number the caller is enabling a stream on
+>> + * @format_dt: Data type derived from the sink format, used as a fallback
+>> + *	       and sanity-checked against the discovered data type
+>> + *
+>> + * Return the discovered virtual channel/data type, or {0, @format_dt} if
+>> + * not discovered
+>> + */
+>> +static struct v4l2_mbus_frame_desc_entry_csi2
+>> +csid_get_stream_vc_dt(struct csid_device *csid, struct v4l2_subdev_state *state,
+>> +		      struct media_pad *remote_pad, u32 pad, u8 format_dt)
+>> +{
+>> +	struct v4l2_mbus_frame_desc_entry_csi2 desc_csi2 = { .dt = format_dt };
+>> +	struct v4l2_mbus_frame_desc fd = { };
+>> +	u32 sink_stream;
+>> +
+>> +	if (!remote_pad ||
+>> +	    v4l2_subdev_call(media_entity_to_v4l2_subdev(remote_pad->entity),
+>> +			     pad, get_frame_desc, remote_pad->index, &fd))
+>> +		return desc_csi2;
+>> +
+> 
+> if (thing ||
+>      some_other_thing) {
+> 	return desc_csi2;
+> }
+> 
+
+I agree that will be fixed.
+
+>> +	if (v4l2_subdev_routing_find_opposite_end(&state->routing, pad, 0, NULL, &sink_stream))
+>> +		return desc_csi2;
+>> +
+>> +	if (!csid_get_stream_csi2_desc(&fd, sink_stream, &desc_csi2)) {
+>> +		dev_warn(csid->camss->dev,
+>> +			 "Failed to find CSI2 descriptor for sink stream %u, using vc=%u dt=%u\n",
+>> +			 sink_stream, desc_csi2.vc, desc_csi2.dt);
+>> +		return desc_csi2;
+> 
+> Is this an error it seems like it should be ?
+
+I was also not sure. Maybe is better to mark as an error anyways the streaming will likely to not have
+calid vc/dt.
+
+> 
+>> +	}
+>> +
+>> +	if (desc_csi2.dt != format_dt)
+>> +		dev_warn(csid->camss->dev,
+>> +			 "Sink stream %u frame desc dt=%u differs from format dt=%u, using dt=%u\n",
+>> +			 sink_stream, desc_csi2.dt, format_dt, desc_csi2.dt);
+>> +
+>> +	return desc_csi2;
+> 
+> I'd return a pointer here.
+
+Well the structure has only two u8 fields i think that passing pointer as argument or allocating and returing
+pointer will likely be to match. But if you think is better i can switch to pointer.
+
+> 
+>> +}
+>> +
+>> +/*
+>> + * csid_pad_enable_streams - Enable one or more streams on a source pad
+>> + * @sd: CSID V4L2 subdevice
+>> + * @state: V4L2 subdevice state
+>> + * @pad: Pad number
+>> + * @streams_mask: Bitmask of v4l2 streams to enable
+>> + *
+>> + * The v4l2 core only calls this on a source pad (v4l2_subdev_enable_streams()
+>> + * rejects sink pads with -EOPNOTSUPP before reaching the driver), so @pad is
+>> + * not checked here. Each source pad only ever carries stream 0.
+>> + *
+>> + * The shared sink stream(s) are propagated upstream only once, on the
+>> + * transition from no active sink streams to at least one, so that a second
+>> + * consumer of the same shared sink stream never triggers a second, redundant
+>> + * propagation to the sensor. The Rx front-end is likewise only configured
+>> + * once, on that same transition.
+>> + *
+>> + * Return 0 on success, -ENOLINK if there is no remote sink link and the test
+>> + * generator is disabled, or another negative error code otherwise
+>> + */
+>> +static int csid_pad_enable_streams(struct v4l2_subdev *sd,
+>> +				   struct v4l2_subdev_state *state,
+>> +				   u32 pad, u64 streams_mask)
+>> +{
+>> +	struct csid_device *csid = v4l2_get_subdevdata(sd);
+>> +	const struct csid_hw_ops *hw_ops = csid->res->hw_ops;
+>> +	struct media_pad *remote_pad = media_pad_remote_pad_first(&csid->pads[MSM_CSID_PAD_SINK]);
+>> +	unsigned int hw_port = pad - MSM_CSID_PAD_FIRST_SRC;
+>> +	const struct csid_format_info *format;
+>> +	struct v4l2_mbus_frame_desc_entry_csi2 desc_csi2;
+>> +	u64 sink_streams, propagate_mask;
+>> +	int ret;
+>> +
+>> +	if (!csid->testgen.enabled && !remote_pad)
+>> +		return -ENOLINK;
+>> +
+>> +	sink_streams = v4l2_subdev_state_xlate_streams(state, pad, MSM_CSID_PAD_SINK,
+>> +						       &streams_mask);
+>> +
+>> +	if (!csid->enabled_streams[MSM_CSID_PAD_SINK]) {
+>> +		if (csid->testgen.nmodes != CSID_PAYLOAD_MODE_DISABLED) {
+>> +			/*
+>> +			 * sd->state_lock is aliased to csid->ctrls.lock, and is
+>> +			 * already held here by the v4l2_subdev_enable_streams()
+>> +			 * caller, so use the lock-free variant to avoid
+>> +			 * self-deadlocking on the same mutex.
+>> +			 */
+>> +			ret = __v4l2_ctrl_handler_setup(&csid->ctrls);
+>> +			if (ret < 0) {
+>> +				dev_err(csid->camss->dev,
+>> +					"could not sync v4l2 controls: %d\n", ret);
+>> +				return ret;
+>> +			}
+>> +		}
+>> +
+>> +		hw_ops->configure_rx(csid);
+>> +	}
+>> +
+>> +	/* Sink streams already active elsewhere don't need re-propagating. */
+>> +	propagate_mask = sink_streams & ~csid->enabled_streams[MSM_CSID_PAD_SINK];
+>> +	csid->enabled_streams[MSM_CSID_PAD_SINK] |= sink_streams;
+>> +	csid->enabled_streams[pad] |= streams_mask;
+>> +
+>> +	format = csid_get_fmt_entry(csid->res->formats->formats,
+>> +				    csid->res->formats->nformats,
+>> +				    csid->fmt[pad].code);
+>> +	desc_csi2 = csid_get_stream_vc_dt(csid, state, remote_pad, pad, format->data_type);
+> 
+> You're doing an implict memcpy() here - just return a pointer.
+
+Yes it is just two u8 fields vc and dt.
+
+> 
+> And I really wonder based on the activity within the method why 
+> returning an error isn't part of this ?
+
+Well yet to be discussed the get_frame_desc is not standartazied across the sensors,
+What we have today.
+If sensor supports get_frame_desc it will return the vc/dt per stream. You also need
+to validate if the dt reported is matching with the dt converted from mbus format.
+
+If sensor does not support get_frame_desc you need to asume that vc is 0 
+and get the dt based on the mbus format. The idea of that function is to hide that
+and return vc/dt regardless if sensor supports that op or not.
+
+So if you think that having return and passing pointer for desc_csi2 is 
+more portable for future implementations and extensions i will switch to that.
+
+> 
+>> +
+>> +	hw_ops->enable_stream(csid, hw_port, desc_csi2.vc, desc_csi2.dt);
+> 
+> I commented elsewhere should this be void or int ?
+> 
+> I'm not suggesting either more asking rhetorically.
+
+Not sure either. We are just writing the registers, if there is a way to validate that
+streaming is actually started and having return code yes make sense to have return code,
+but with the current implementation i dont see that is the case.
+
+> 
+>> +
+>> +	if (propagate_mask && remote_pad) {
+>> +		ret = v4l2_subdev_enable_streams(media_entity_to_v4l2_subdev(remote_pad->entity),
+>> +						 remote_pad->index, propagate_mask);
+>> +		if (ret) {
+>> +			csid->enabled_streams[MSM_CSID_PAD_SINK] &= ~propagate_mask;
+>> +			csid->enabled_streams[pad] &= ~streams_mask;
+>> +
+>> +			hw_ops->disable_stream(csid, hw_port);
+>> +
+>> +			return ret;
+>> +		}
+>> +	}
+>> +
+>> +	return 0;
+>> +}
+>> +
+>> +/*
+>> + * csid_sink_streams_in_use - Compute the subset of sink streams still
+>> + *			      referenced by a source pad other than @pad
+>> + * @csid: CSID device
+>> + * @state: V4L2 subdevice state
+>> + * @pad: Source pad to exclude from the check
+>> + * @sink_streams: Candidate sink streams to check
+>> + *
+>> + * Return the subset of @sink_streams still referenced by some other source
+>> + * pad
+>> + */
+>> +static u64 csid_sink_streams_in_use(struct csid_device *csid, struct v4l2_subdev_state *state,
+>> +				    u32 pad, u64 sink_streams)
+>> +{
+>> +	u64 in_use = 0;
+>> +	unsigned int i;
+>> +
+>> +	for (i = MSM_CSID_PAD_FIRST_SRC; i < MSM_CSID_PADS_NUM; i++) {
+>> +		u64 other_streams = csid->enabled_streams[i];
+>> +		u64 other_sink_streams;
+>> +
+>> +		if (i == pad)
+>> +			continue;
+>> +
+>> +		other_sink_streams = v4l2_subdev_state_xlate_streams(state, i, MSM_CSID_PAD_SINK,
+>> +								     &other_streams);
+>> +		in_use |= sink_streams & other_sink_streams;
+>> +	}
+>> +
+>> +	return in_use;
+>> +}
+>> +
+>> +/*
+>> + * csid_pad_disable_streams - Disable one or more streams on a source pad
+>> + * @sd: CSID V4L2 subdevice
+>> + * @state: V4L2 subdevice state
+>> + * @pad: Pad number
+>> + * @streams_mask: Bitmask of v4l2 streams to disable
+>> + *
+>> + * The v4l2 core only calls this on a source pad (v4l2_subdev_disable_streams()
+>> + * rejects sink pads with -EOPNOTSUPP before reaching the driver), so @pad is
+>> + * not checked here. Each source pad only ever carries stream 0.
+>> + *
+>> + * A sink stream is only disabled, and propagated upstream to disable it there
+>> + * too, once no source pad references it any more.
+>> + *
+>> + * Return 0 on success or a negative error code otherwise
+>> + */
+>> +static int csid_pad_disable_streams(struct v4l2_subdev *sd,
+>> +				    struct v4l2_subdev_state *state,
+>> +				    u32 pad, u64 streams_mask)
+>> +{
+>> +	struct csid_device *csid = v4l2_get_subdevdata(sd);
+>> +	const struct csid_hw_ops *hw_ops = csid->res->hw_ops;
+>> +	struct media_pad *remote_pad = media_pad_remote_pad_first(&csid->pads[MSM_CSID_PAD_SINK]);
+>> +	unsigned int hw_port = pad - MSM_CSID_PAD_FIRST_SRC;
+>> +	u64 sink_streams, disable_sink_streams;
+>> +	int ret = 0;
+>> +
+>> +	sink_streams = v4l2_subdev_state_xlate_streams(state, pad, MSM_CSID_PAD_SINK,
+>> +						       &streams_mask);
+>> +
+>> +	/* Keep a sink stream active as long as any other source pad still uses it. */
+>> +	disable_sink_streams = sink_streams &
+>> +				~csid_sink_streams_in_use(csid, state, pad, sink_streams);
+>> +
+>> +	if (disable_sink_streams && remote_pad) {
+>> +		ret = v4l2_subdev_disable_streams(media_entity_to_v4l2_subdev(remote_pad->entity),
+>> +						  remote_pad->index, disable_sink_streams);
+>> +		if (ret)
+>> +			dev_err(csid->camss->dev,
+>> +				"Failed to disable stream on remote pad: %d\n", ret);
+>> +	}
+>> +
+>> +	hw_ops->disable_stream(csid, hw_port);
+>> +
+>> +	csid->enabled_streams[pad] &= ~streams_mask;
+>> +	csid->enabled_streams[MSM_CSID_PAD_SINK] &= ~disable_sink_streams;
+>> +
+>> +	return ret;
+>> +}
+>> +
+>> +static const struct v4l2_mbus_framefmt csid_default_format = {
+>> +	.code = MEDIA_BUS_FMT_UYVY8_1X16,
+>> +	.width = 1920,
+>> +	.height = 1080,
+>> +	.field = V4L2_FIELD_NONE,
+>> +	.colorspace = V4L2_COLORSPACE_SRGB,
+>> +};
+>> +
+>> +/*
+>> + * csid_set_routing - Handle setting of routing table
+>> + * @sd: CSID V4L2 subdevice
+>> + * @state: V4L2 subdevice state
+>> + * @which: TRY or ACTIVE routing
+>> + * @routing: Routing table to set
+>> + *
+>> + * Return 0 on success or a negative error code otherwise
+>> + */
+>> +static int csid_set_routing(struct v4l2_subdev *sd,
+>> +			    struct v4l2_subdev_state *state,
+>> +			    enum v4l2_subdev_format_whence which,
+>> +			    struct v4l2_subdev_krouting *routing)
+>> +{
+>> +	struct csid_device *csid = v4l2_get_subdevdata(sd);
+>> +	unsigned int i;
+>> +	int ret;
+>> +
+>> +	if (which == V4L2_SUBDEV_FORMAT_ACTIVE && csid->enabled_streams[MSM_CSID_PAD_SINK])
+>> +		return -EBUSY;
+>> +
+>> +	for (i = 0; i < routing->num_routes; i++)
+>> +		if (routing->routes[i].source_stream != 0)
+>> +			return -EINVAL;
+>> +
+>> +	ret = v4l2_subdev_routing_validate(sd, routing,
+>> +					   V4L2_SUBDEV_ROUTING_NO_SOURCE_STREAM_MIX |
+>> +					   V4L2_SUBDEV_ROUTING_NO_SOURCE_MULTIPLEXING |
+>> +					   V4L2_SUBDEV_ROUTING_NO_N_TO_1);
+>> +	if (ret)
+>> +		return ret;
+>> +
+>> +	return v4l2_subdev_set_routing_with_fmt(sd, state, routing, &csid_default_format);
+>> +}
+>> +
+>> +/*
+>> + * __csid_get_stream_format - Get pointer to per-stream format structure
+>> + * @csid: CSID device
+>> + * @sd_state: V4L2 subdev state
+>> + * @pad: pad from which format is requested
+>> + * @stream: stream from which format is requested
+>> + * @which: TRY or ACTIVE format
+>> + *
+>> + * Same as __csid_get_format(), but honors @stream for TRY-state lookups.
+>> + * For ACTIVE state, csid->fmt[] is indexed by pad + stream. @stream is
+>> + * always 0 and @pad selects the RDI channel (0-3).
+>> + *
+>> + * Return pointer to TRY or ACTIVE format structure
+>> + */
+>> +static struct v4l2_mbus_framefmt *
+>> +__csid_get_stream_format(struct csid_device *csid,
+>> +			 struct v4l2_subdev_state *sd_state,
+>> +			 unsigned int pad, u32 stream,
+>> +			 enum v4l2_subdev_format_whence which)
+>> +{
+>> +	if (which == V4L2_SUBDEV_FORMAT_TRY)
+>> +		return v4l2_subdev_state_get_format(sd_state, pad, stream);
+>> +
+>> +	if (pad == MSM_CSID_PAD_SINK)
+>> +		return &csid->fmt[MSM_CSID_PAD_SINK];
+>> +
+>> +	return &csid->fmt[pad + stream];
+>> +}
+>> +
+>> +/*
+>> + * csid_streams_get_format - Handle get format by pads subdev method
+>> + * @sd: CSID V4L2 subdevice
+>> + * @sd_state: V4L2 subdev state
+>> + * @fmt: pointer to v4l2 subdev format structure
+>> + *
+>> + * Return -EINVAL or zero on success
+>> + */
+>> +static int csid_streams_get_format(struct v4l2_subdev *sd,
+>> +				   struct v4l2_subdev_state *sd_state,
+>> +				   struct v4l2_subdev_format *fmt)
+>> +{
+>> +	struct csid_device *csid = v4l2_get_subdevdata(sd);
+>> +	struct v4l2_mbus_framefmt *format;
+>> +
+>> +	format = __csid_get_stream_format(csid, sd_state, fmt->pad, fmt->stream, fmt->which);
+>> +	if (!format)
+>> +		return -EINVAL;
+>> +
+>> +	fmt->format = *format;
+>> +
+>> +	return 0;
+>> +}
+>> +
+>> +/*
+>> + * csid_streams_set_format - Handle set format by pads subdev method
+>> + * @sd: CSID V4L2 subdevice
+>> + * @sd_state: V4L2 subdev state
+>> + * @fmt: pointer to v4l2 subdev format structure
+>> + *
+>> + * Return -EINVAL or zero on success
+>> + */
+>> +static int csid_streams_set_format(struct v4l2_subdev *sd,
+>> +				   struct v4l2_subdev_state *sd_state,
+>> +				   struct v4l2_subdev_format *fmt)
+>> +{
+>> +	struct csid_device *csid = v4l2_get_subdevdata(sd);
+>> +	struct v4l2_mbus_framefmt *format;
+>> +	struct v4l2_subdev_route *route;
+>> +
+>> +	if (fmt->which == V4L2_SUBDEV_FORMAT_ACTIVE && csid->enabled_streams[MSM_CSID_PAD_SINK])
+>> +		return -EBUSY;
+>> +
+>> +	format = __csid_get_stream_format(csid, sd_state, fmt->pad, fmt->stream, fmt->which);
+>> +	if (!format)
+>> +		return -EINVAL;
+>> +
+>> +	csid_try_format(csid, sd_state, fmt->pad, &fmt->format, fmt->which);
+>> +	*format = fmt->format;
+>> +
+>> +	/* Propagate the format from the sink stream to every source stream it feeds */
+>> +	for_each_active_route(&sd_state->routing, route) {
+>> +		struct v4l2_mbus_framefmt *src_format;
+>> +
+>> +		if (route->sink_pad != fmt->pad || route->sink_stream != fmt->stream)
+>> +			continue;
+>> +
+>> +		src_format = __csid_get_stream_format(csid, sd_state, route->source_pad,
+>> +						      route->source_stream, fmt->which);
+>> +		if (!src_format)
+>> +			continue;
+>> +
+>> +		*src_format = fmt->format;
+>> +		csid_try_format(csid, sd_state, route->source_pad, src_format, fmt->which);
+>> +	}
+>> +
+>> +	return 0;
+>> +}
+> 
+> Why do we need a full new set of get-format and set-format ?
+> 
+> "Feels" like this could wrapper the existing code.
+
+It can, for stream api you can have in one pad multiple streams and each stream
+can have different format. In csid case becouse we have one stream per pad existing
+API can be reused. If we decide to have muiltiple streams per source pad then we need
+to intrudoce this function. I am ok to reuse existing function with some small change.
+
+> 
+>> +
+>> +static const struct v4l2_subdev_pad_ops csid_streams_pad_ops = {
+>> +	.enum_mbus_code = csid_enum_mbus_code,
+>> +	.enum_frame_size = csid_enum_frame_size,
+>> +	.get_fmt = csid_streams_get_format,
+>> +	.set_fmt = csid_streams_set_format,
+>> +	.set_routing = csid_set_routing,
+>> +	.enable_streams = csid_pad_enable_streams,
+>> +	.disable_streams = csid_pad_disable_streams,
+>> +};
+>> +
+>> +static const struct v4l2_subdev_video_ops csid_streams_video_ops = {
+>> +	.s_stream = v4l2_subdev_s_stream_helper,
+>> +};
+>> +
+>> +static const struct v4l2_subdev_ops csid_streams_v4l2_ops = {
+>> +	.core = &csid_core_ops,
+>> +	.pad = &csid_streams_pad_ops,
+>> +	.video = &csid_streams_video_ops,
+>> +};
+>> +
+>> +/*
+>> + * csid_init_state - Initialize the routing table for the streams API subdev
+>> + * @sd: CSID V4L2 subdevice
+>> + * @state: V4L2 subdev state
+>> + *
+>> + * source_stream is always 0: each source pad MSM_CSID_PAD_FIRST_SRC + i
+>> + * links to its own independent downstream subdev, and a link's sink side is
+>> + * validated against the implicit stream 0 exposed by any subdev without
+>> + * V4L2_SUBDEV_FL_STREAMS (see v4l2_link_validate_get_streams()) — every
+>> + * downstream VFE line is such a subdev.
+>> + *
+>> + * All source pads route from sink_stream 0 by default, fanning the single
+>> + * incoming stream out to every port; a multi-VC source is supported by
+>> + * remapping each route's sink_stream via .set_routing, leaving
+>> + * source_pad/source_stream untouched.
+>> + *
+>> + * Return 0 on success or a negative error code otherwise
+>> + */
+>> +static int csid_init_state(struct v4l2_subdev *sd, struct v4l2_subdev_state *state)
+>> +{
+>> +	struct csid_device *csid = v4l2_get_subdevdata(sd);
+>> +	struct v4l2_subdev_route routes[MSM_CSID_MAX_SRC_STREAMS];
+>> +	struct v4l2_subdev_krouting routing = { };
+>> +	unsigned int num_routes;
+>> +	int i, ret;
+>> +
+>> +	/* The full IFE has only 3 rdi's and pix output is not functional */
+>> +	if (csid_is_lite(csid))
+>> +		num_routes = MSM_CSID_MAX_SRC_STREAMS;
+>> +	else
+>> +		num_routes = MSM_CSID_MAX_SRC_STREAMS - 1;
+> 
+> No. Don't code around this here.
+> 
+> I'll make a Fixes: patch for the pix stuff - I have it in tree. I don't 
+> want to add work-arounds in code.
+
+Ok, Sorry i did know that. Just that my scripts are iterating and verifying all
+the paths, and this was failing i have introduced this change.
+
+> 
+>> +
+>> +	for (i = 0; i < num_routes; i++) {
+>> +		routes[i].sink_pad = MSM_CSID_PAD_SINK;
+>> +		routes[i].sink_stream = 0;
+>> +		routes[i].source_pad = MSM_CSID_PAD_FIRST_SRC + i;
+>> +		routes[i].source_stream = 0;
+>> +		routes[i].flags = V4L2_SUBDEV_ROUTE_FL_ACTIVE;
+>> +	}
+>> +
+>> +	routing.num_routes = num_routes;
+>> +	routing.routes = routes;
+>> +	ret = v4l2_subdev_set_routing_with_fmt(sd, state, &routing, &csid_default_format);
+>> +	if (ret)
+>> +		dev_err(csid->camss->dev, "Failed to set routing: %d\n", ret);
+>> +
+>> +	return ret;
+>> +}
+>> +
+>>   static const struct v4l2_subdev_internal_ops csid_v4l2_internal_ops = {
+>>   	.open = csid_init_formats,
+>>   };
+>>   
+>> +static const struct v4l2_subdev_internal_ops csid_streams_internal_ops = {
+>> +	.init_state = csid_init_state,
+>> +};
+>> +
+>>   static const struct media_entity_operations csid_media_ops = {
+>>   	.link_setup = csid_link_setup,
+>>   	.link_validate = v4l2_subdev_link_validate,
+>> @@ -1360,13 +1826,18 @@ int msm_csid_register_entity(struct csid_device *csid,
+>>   	struct v4l2_subdev *sd = &csid->subdev;
+>>   	struct media_pad *pads = csid->pads;
+>>   	struct device *dev = csid->camss->dev;
+>> +	bool streams_api = csid->res->streams_enable;
+> 
+> As I stated elsewhere there's no need to have this flag copy/pasted.
+> 
+> Just move it one level up does this SoC support streams, in 
+> camss->supports_streams;
+
+Yes that is noted. Will be fixed in the next patchset.
+
+~Gjorgji
