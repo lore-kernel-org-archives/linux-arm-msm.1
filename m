@@ -1,87 +1,87 @@
 Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5E2392BE7AB
-	for <linux-arm-msm@vger.kernel.org>; Fri, 11 Sep 2026 11:40:24 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D0F52443C16
+	for <linux-arm-msm@vger.kernel.org>; Fri, 11 Sep 2026 11:42:03 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789126825; cv=none; b=lrLPXZtT1tLHWaPGA5AIfFqcoEehezid1WON8Svs3hNbyhpBn6xZWlgT2gtP3fIRh17/ZZRPdlXc87L16N/jZ9nvSe2YO6JFYmR/EKA7a1mEqhz4LcCz5F+ryOOR6amHOVJywcgepC7th81+MHn7QbrzQ0kwmCh7KAxweHtEDkw=
+	t=1789126925; cv=none; b=GGAo80jHIdsIPoqQR4I8oHNbuXRb+mooMrWX1zCK0SqIbtMsev7dM76rgwKfWbm7wIrHmLlM9pwfSuK/FjPHOun4AQ1pEH29UvdYtxcWwR4Z+DaW+fmyH+RfwivDHE8FyG9hLEaSixC0nToHXCE3A1QzkFBhFFKICpMqr5MYpuE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789126825; c=relaxed/simple;
-	bh=AiFZxVxb4uPFuB6epvfZYhvtU1oHMpSADyh0bZhRhLU=;
+	s=arc-20240116; t=1789126925; c=relaxed/simple;
+	bh=8OZ4a2edIVVK/vZtCjjrjBg+MAj0UxhKV2NnMjhk53M=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=t/3MQy0niR5Fd1bHMzzdkQe62SgSszGY3xWA9cbVYtlhp/03PlYc9c25Wiabcrm2Fy3Z3UuB4Iiyq6hEM3WRHkrQ38mGV+A7O9By7yoblVGAjIVGcDn/DZJQ39Ne+9DKbLB/8WxYdmYkqMIG+SjDW8rQSwoEBCk7sxsxcdKU/CQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=K9V4kjb7; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=GR68RKuZ; arc=none smtp.client-ip=205.220.180.131
+	 In-Reply-To:Content-Type; b=P1FH6TPnPubXVZDs+CNge/75TzZXcwFHUpH4B73iWcAzfwk4oKY9iZqT2Q/2vwfNUgBV/5e5x/xup6nkOmmrqLyPfbC1Kl6LOTfsiEBtEGuw4H4rxJPGMhTAtEej/3r0uYLL5ogssJ5Xk9zhjk2nLTwS/34GKMNev9grkXFi/AU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=CVcAvFv6; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=cvDs70WT; arc=none smtp.client-ip=205.220.180.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="K9V4kjb7";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="GR68RKuZ"
-Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68BAqin23788374
-	for <linux-arm-msm@vger.kernel.org>; Fri, 11 Sep 2026 11:40:23 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="CVcAvFv6";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="cvDs70WT"
+Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68BAqcgA4105668
+	for <linux-arm-msm@vger.kernel.org>; Fri, 11 Sep 2026 11:42:02 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	L3Wnep3ucQT0IwQfa+r8v+NvhklcvjC9W+oJ9otiAag=; b=K9V4kjb7SQeHdbk+
-	BQMo9NMTrDLO78f2+xH2BQ6KW3qMZHJEqBIiHCohKkU+edfFGLfPn6yTfePW0g7Z
-	WCfQSJ+STQbnQCh8oJ7kH8zFnIugyOjt5SoFsvmePuObEHkEOCwAF5mr2XYgjq1c
-	yLP3PYzQzgdw56cGFwUO38f6RMwsAzC7cHDCU6971B82yu1IcUIipNE3WeAlVF2v
-	hFJaX93I6wc+3GloOuJVPKga+TPcYbDZ0yNUMhlIdDOtcblT3eRXtVPTCkH1qQeb
-	7eZ33+V+VXB0lxjnmCBn3vKIJkeSHglHnq9gJiEMfi2fUDliqDYPKMJZTGMgBDsH
-	N+ElPQ==
+	Kh1ZaKFFAWBr4fjzHz54y8tVqiq5bHMizSTx+63Udl0=; b=CVcAvFv6AJ9cWXzm
+	9wSO7Jy4nFq8pQV22eZndKTO97I1SYEvCM002m5VCFCuKqacQhHixMZL2j/Z6+Vz
+	wVSS35wldyuErUXhI3TudRGdiV50E84Rbta/pKngtw1Db5+P53+RM+CaHgesmHmK
+	Q0rRNN0Kk5oNUX73qmppvHL8Dycev+VCiv4kF9W6GBNJlsBXkyjJJWsH9wu2Eyw4
+	xOe1yLBCNQmuqlxQ4HLRaeCvnALwuJVI1ZRAKhm4Ee3S6vrLUtCQkuM75cYu1cVP
+	4fxOniVDSvxaxbyBkjIku+0qk7NF0U2HFUrduSG/8v/hHFc3Nmaq/EAGZq7F230a
+	FgJTtQ==
 Received: from mail-pj1-f71.google.com (mail-pj1-f71.google.com [209.85.216.71])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gm1k2bp86-1
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gmapg1pnx-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Fri, 11 Sep 2026 11:40:22 +0000 (GMT)
-Received: by mail-pj1-f71.google.com with SMTP id 98e67ed59e1d1-39af92138f9so1565321a91.0
-        for <linux-arm-msm@vger.kernel.org>; Fri, 11 Sep 2026 04:40:22 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 11 Sep 2026 11:42:02 +0000 (GMT)
+Received: by mail-pj1-f71.google.com with SMTP id 98e67ed59e1d1-38f57e31b6eso977403a91.1
+        for <linux-arm-msm@vger.kernel.org>; Fri, 11 Sep 2026 04:42:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1789126822; x=1789731622; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1789126918; x=1789731718; darn=vger.kernel.org;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=L3Wnep3ucQT0IwQfa+r8v+NvhklcvjC9W+oJ9otiAag=;
-        b=GR68RKuZNoRcc4TK2tUyu2zrxIahyXQs8s6DczYxAhycK7hqDMyxMn9xGuy1JnDeux
-         00eJg5/tajlB7LwkC06043WzNTo95VtUh/PpOsRFjQkLWZaZkcIpw/6DAahJShc9hc96
-         XgniL4/kx6S+fsOwiEDY5zmqrqEwr0YwLd3pV629ck5v/8jRSu8YTuD9IBMZcivblt5D
-         Gf+GNiHAmlOZgrePKwNci5YV/Wd8CVcUIzWNKTngy+X8YpN5eWhRzRMxoJLv8Iqk820G
-         P0xZpOBikPNLTxZlehPtf5u5pAIunBDP/o/LLX02ASVNrmHxzNnH/SqsGabWnL/6eJ8u
-         4JhQ==
+        bh=Kh1ZaKFFAWBr4fjzHz54y8tVqiq5bHMizSTx+63Udl0=;
+        b=cvDs70WTiizAtJWch/CGUyu8P284Gvc7llJPUR6V2FZ7AJED7mlmCGOl0mlYtJLgF7
+         k1QN9RZ+COtMUNuu9CmZ3MW4bKKhxI9tGfXvc8wdkTfRjHeiNnzVGNii3YePmBKgYZ7X
+         qrzGF04CCTGGrAk8GsmlSk2BKaSiWcTAUi0WuUOCFtjcGnFCmrTXgMFP/2v8ImEI6Cyp
+         E9mBjq5yTwQuJtudi1hCgKGIleEuOQaUkE2xOWtYx/J71BLMNE2KR+El0bm7cmaH4HSv
+         07J9KrsjEPesOnLP0hbbiyp3WFJHf0QqcaiAo2BnnajOwekpVtB2AfeABmOZODSrA+3D
+         66Mg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1789126822; x=1789731622;
+        d=1e100.net; s=20251104; t=1789126918; x=1789731718;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=L3Wnep3ucQT0IwQfa+r8v+NvhklcvjC9W+oJ9otiAag=;
-        b=FveB46hVUeh69gbQFk60ZFAAQ7bsVoOQsZGpYX/8VCSd3Oxp+NO8Jj8X8qNvBpEIcF
-         RuDse+dhZcXFpW8XO7PETbXlOBsKOrbFTinl976mrZvzpDLYe3BVWSwtB2scoxhPIVah
-         Wlw9BrqmPs+F5ZbqhHnJd/N+fUEjJ4n/tkFFmU2DvOKZKv9YN8lG+3+BkEY+DKocsjHG
-         Finvcig4dS/62iR5piSSfLJ0kEdKynvgy8Iqxg2oJGxpcBWva9CkU8TS20cSHjd4Xyiv
-         0RuPL9zDlIvOSD9o9O58yUqGgH/3PVKmRfbwJ99ir1HcFMYOlSpQLz2IagdFb3B0vGje
-         /58Q==
-X-Forwarded-Encrypted: i=1; AKwUvBwDsqJGtWRIawSmxh4SHP5I/gt+PxtTDsfBUqkIlTd41bcgfLqnaVyV9OSBt9mfKxxrYZhYMtsK6cLafjh4@vger.kernel.org
-X-Gm-Message-State: AFuF++nHAkhcHMqBLhhaLIu0gVKJfWyEbHasPszWp/+DaTPPm4vRoSwd
-	3Ow8VfbeDXcKo+VEJMvzRnCRuv0qxn+C2NM0QQ5J5MKxXnEWjwFYdSqV3MWKZLgVoL1Kiv3WeH0
-	cjttMr4LY5W0QRXK//PIb2MNjOpqboSIYKi27pW/foKBPoYg5lrr+uohG5TXwt9WykD3K
-X-Gm-Gg: AYBFou0KTd1C0fUohZYXJvHIZtzZb4dZNIXEynjfpOtYAvl/OPgpAUPSWOLXOOz+jvJ
-	a5tUkUgZ7PbSE0thXgpEMAGhyF6LL32o8X7akC9aM+v4HpDlAkkcGfFr2PJdcfLwowAeB9z4RVc
-	OoMG/HiQmEpETPb5T6tegcy8970VOuFzThfR9ay7umMa6nzuCWlkEB3bkT3YXhT56nqC0qx2oJa
-	G6j85mlyHKToA973mp7xkX+/qPS1Xd+b53AEhWliZEL8a8+fLwnMXLA+oZXsTujX0zWoh3idDo5
-	M5DHiJiBYfhV5b6OIJZl4T7E+bsLKB9FM2f+CTldLWmj+TV5XaCu6/61uEn7WwYdtHrqTt7BQ/o
-	Hm+7iFHSlqDh6jcbf3DiYzDbSs3rONb5E
-X-Received: by 2002:a17:90b:3fcc:b0:38e:a52e:a3c9 with SMTP id 98e67ed59e1d1-39d7795b9aemr12122450a91.8.1789126821938;
-        Fri, 11 Sep 2026 04:40:21 -0700 (PDT)
-X-Received: by 2002:a17:90b:3fcc:b0:38e:a52e:a3c9 with SMTP id 98e67ed59e1d1-39d7795b9aemr12122402a91.8.1789126821413;
-        Fri, 11 Sep 2026 04:40:21 -0700 (PDT)
-Received: from [10.206.103.83] ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-33ba4fa50efsm6705009eec.28.2026.09.11.04.40.17
+        bh=Kh1ZaKFFAWBr4fjzHz54y8tVqiq5bHMizSTx+63Udl0=;
+        b=CrI8Uu6H7I89BwDs//JtztrzZAQxkZk8keh/jWD5SdzrjoN2mocYPA37wt9w6oexP6
+         TBYazniGufXizcFK5hR+/6GPZenummEY23LFBFDnApATA5pJt6RZVrRvSZo5y4+Dki+z
+         CNM+xmfFfnlis590QSjHqYF0Nl2T26OJemu5NTEiqttGXQ7fzPOzkNJ8tYAr3KsPr/jU
+         4syDt/sYi6ej8XcwuetadXfiQGizRC35YwPuZABibmHzNqD5M+wjsoLfpx7EguydjjZg
+         nbA8bz4S+FeEKFR2dN0FgWqytIFiR2ojwV/KP8+VAjI9ifxFN4XX7+v7p1jxpsiU/vAQ
+         aMJw==
+X-Forwarded-Encrypted: i=1; AKwUvByPo9XSDkypOD0WuhAvQdVX6c3MRX0+1YGTQXhL8eYSNrXN5zmMPFVGxxIWKml5fYslRKB4iDzDWY+SVS4y@vger.kernel.org
+X-Gm-Message-State: AFuF++lwdB3gSRjBFDB3MzA9Qvfg6Z+1wlT0e/BJr+wv479X2Mj44lI4
+	anbFbBWIVV4q0+dfKQ+DWWvTBBeup+7HC+m1fn/SbjPS3PdZkSGhYmBRsK6Mpqw2ubx7WVHJcRq
+	x9h/HpGy35KIdBLOqMOHGDwYYAXGVRyIBn1YCTXlkUxTfzwWpznAjNAs93gkBCeEuWvcp
+X-Gm-Gg: AYBFou3QPFdj5VLQAAdx910yCuAZeb+6pJ/QPRh7HcqHlqV9/3pzEXdT4DgULKRMWXM
+	AwBqxaRS+E9w0KeqbNVGAHmcsTuiWiRfas/6l4YbLwKJgIYp0GaPI8yJm0leyjymoLWrpxGUJfw
+	cTg+PtBpkY+ypmHyCq/cHs2OA4hnizO981eYQ5kkLlpxASwawE9/woCfJG5BF1rwOCvud1S/G2d
+	FVi+MBFrFHsK8kO4ZWZetEV3GMcoE1YfCIhJ0W+1EhdjykX2AmBwBQKtvJdI4KYkTgvS3cy+N6I
+	JD1dykB+LbeutmgMohyAgUx9fKWZgJcHAkyto0hgVpJAG29kqZF2HYsKsqW2cSSK+JItgufRq7T
+	GleZNAiUws4tvGD1FZePgit9bXGA9
+X-Received: by 2002:a17:90b:2b44:b0:398:bd37:6a49 with SMTP id 98e67ed59e1d1-39d9c1bf032mr6519781a91.12.1789126918249;
+        Fri, 11 Sep 2026 04:41:58 -0700 (PDT)
+X-Received: by 2002:a17:90b:2b44:b0:398:bd37:6a49 with SMTP id 98e67ed59e1d1-39d9c1bf032mr6519719a91.12.1789126917768;
+        Fri, 11 Sep 2026 04:41:57 -0700 (PDT)
+Received: from [10.218.24.45] ([202.46.22.19])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-33ba4e5182fsm6041150eec.9.2026.09.11.04.41.52
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 11 Sep 2026 04:40:20 -0700 (PDT)
-Message-ID: <9a6b7238-11d1-45ac-ac0b-ed34c6109424@oss.qualcomm.com>
-Date: Fri, 11 Sep 2026 17:10:14 +0530
+        Fri, 11 Sep 2026 04:41:57 -0700 (PDT)
+Message-ID: <b10cb8de-638f-48bc-9880-edecf35e4659@oss.qualcomm.com>
+Date: Fri, 11 Sep 2026 17:11:51 +0530
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -89,82 +89,263 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] media: iris: Fix bus_info prefix in VIDIOC_QUERYCAP
-To: Vishnu Reddy <busanna.reddy@oss.qualcomm.com>,
-        Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>,
-        Abhinav Kumar <abhinav.kumar@linux.dev>,
-        Bryan O'Donoghue <bod@kernel.org>,
-        Mauro Carvalho Chehab <mchehab@kernel.org>,
-        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-Cc: Bryan O'Donoghue <bryan.odonoghue@linaro.org>, linux-media@vger.kernel.org,
-        linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
-        stable@vger.kernel.org
-References: <20260818-v4l2-compliance-fix-v1-1-77f8076d5ca3@oss.qualcomm.com>
+Subject: Re: [PATCH v3] misc: fastrpc: avoid duplicate DMA mappings in
+ fastrpc_create_maps()
+To: Jianping Li <jianping.li@oss.qualcomm.com>,
+        Srinivas Kandagatla <srini@kernel.org>
+Cc: Arnd Bergmann <arnd@arndb.de>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        Sumit Semwal <sumit.semwal@linaro.org>,
+        =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
+        Ling Xu <quic_lxu5@quicinc.com>,
+        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+        linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org,
+        linux-kernel@vger.kernel.org, linux-media@vger.kernel.org,
+        linaro-mm-sig@lists.linaro.org, quic_chennak@quicinc.com,
+        stable@kernel.org
+References: <20260805060940.41414-1-jianping.li@oss.qualcomm.com>
 Content-Language: en-US
-From: Vikash Garodia <vikash.garodia@oss.qualcomm.com>
-In-Reply-To: <20260818-v4l2-compliance-fix-v1-1-77f8076d5ca3@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+From: Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>
+In-Reply-To: <20260805060940.41414-1-jianping.li@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-Authority-Analysis: v=2.4 cv=cM11IVeN c=1 sm=1 tr=0 ts=6aa3e8a6 cx=c_pps
- a=UNFcQwm+pnOIJct1K4W+Mw==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
+X-Proofpoint-ORIG-GUID: gjDZ-bhFuHrPT0lsi34BaAYMB_B9MsB1
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTExMDE2NCBTYWx0ZWRfXxRtlqwghxj74
+ nGUIQ8pdswUucMwpI0xalRIXBwPQC8KZGhrKsNHi9/9W9w7C5Fryp9czQlh+WaO3miSE2k0/PtE
+ CDXFyQOXu2iVg5ceCLdvnlCr3sGk7Qo=
+X-Proofpoint-GUID: gjDZ-bhFuHrPT0lsi34BaAYMB_B9MsB1
+X-Authority-Analysis: v=2.4 cv=DLoacCNb c=1 sm=1 tr=0 ts=6aa3e90a cx=c_pps
+ a=UNFcQwm+pnOIJct1K4W+Mw==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
  a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
- a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=j3-kLYPpZ4N4r97w07IA:9 a=QEXdDO2ut3YA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
+ a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=pdARdrlki2Vdj_-LtegA:9 a=QEXdDO2ut3YA:10
  a=uKXjsCUrEbL0IQVhDsJ9:22
-X-Proofpoint-GUID: YacjYxAAj9vfjzf0QuhbLtTzi3HZgM0l
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTExMDE2MyBTYWx0ZWRfX3h9eW2FTrS5s
- PHUtiLPgOryRTYZdJBMLI3CapSJWF6NUiLWfMfVSLVrcc7FrIQ6AhGGzhGchRDI5pKA3Hn23o8Z
- slu09l698wp68tYL3a4ZoG5OyVB0EUw=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTExMDE2MyBTYWx0ZWRfX9c/waJcFRNjD
- 9g1BavdDJUk0ehRKM570yB7qEkVU0YpOrFpCfyvmrr/GHQjw63G8EIcp5QW77iJ4aUeZ3bX88yn
- FlvNTwYddgjv1FW123uXrvaBX4Kkhdpb1INJC7IMlK2nTWDA6nQWDd/xF9aVXUo7xlvauWFARv8
- nrPHWRVfG2glFEEzxC2wXw1bmNEjw0yzmQQIMKhYDZ0ObuYYYDot2H4B9Dxom1s+rwQTelpY2Es
- bEr1BpknLasPbTZwxA+7G4JX0t3Qq8nC5kZbfLL42xkvmdGIcd8nWzqwNkQay4LY1QKKNffZ2IR
- pcQ93ykPLTtWnmWocLxSO5o5sSwAlQYN5tet15FLbtNfkeE8VjzWWAIFdwplTqxaGYoO4W82eCB
- kxTeFDREAfXiZixkbCwT7KfOJGpfsJscbj2WCVvz0aqGUSPSP3HLNrIor7b0JYQ/1Qn3LWzhB7t
- zk/B+0KY8fHQ5NULOpw==
-X-Proofpoint-ORIG-GUID: YacjYxAAj9vfjzf0QuhbLtTzi3HZgM0l
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTExMDE2NCBTYWx0ZWRfX/0y2asFmHCch
+ JFk4CVkmSyoSO+DE+csMidTmRMHCWPer1Nm/sGzsX4OCaH/2zurSUsryq6JiaWXYdLsI/u7gNAB
+ o7w5/AbhMN+amjq5ZahJDYmLu7SJcbSkYnXl6NiVl9wLg9ZliJtYMdq3OGyG6S/l9VlR/9JViuq
+ an5fi9zh0s6L2/7kKISz+kx8OnJKeAV0OcE1vUKA3mMdmcXCsqb/IzFPFzE7eRsysJpgTubdK2f
+ SW5gIeC1xTZvejWGKaVsza20Gg6LMCo1u9hr33jz3Vz/uWkYcX9fRXSq1NL2XNrH75Ow1qlTY0v
+ MWJ+mOWl2QsUD+gJPkHHByqHI0z6XIouej4wBiMKzk0g9gT5r7ruQ0FpYMIj0n433j5x+NsyA4o
+ iP1ZMt23JU0NCbyPHSNXeBck3LLNvasYl99hPd0gVHOnfGqsJ4MqtMFHWe+VyyIvfdHGXVkHKkx
+ VWDPNvQ09ru/wkwxPYw==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-09-11_04,2026-09-09_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 lowpriorityscore=0 clxscore=1015 adultscore=0 bulkscore=0
- priorityscore=1501 impostorscore=0 malwarescore=0 spamscore=0 suspectscore=0
+ malwarescore=0 priorityscore=1501 phishscore=0 adultscore=0 suspectscore=0
+ spamscore=0 impostorscore=0 bulkscore=0 clxscore=1015 lowpriorityscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609110163
+ reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609110164
 
-
-On 8/18/2026 9:43 PM, Vishnu Reddy wrote:
-> The bus_info field returned by VIDIOC_QUERYCAP used the abbreviated
-> prefix "plat:" instead of the standard "platform:" prefix expected
-> for platform devices. v4l2-compliance validates that bus_info for
-> platform devices starts with "platform:", and fails otherwise:
+On 05-08-2026 11:39, Jianping Li wrote:
+> DMA handles passed as invoke arguments (scalars beyond nbufs) may refer
+> to the same dma_buf fd as an input/output buffer argument. Taking an
+> extra reference for such DMA handle maps leads to duplicate mappings and
+> an unbalanced reference count, since DMA handle maps are released
+> separately when the DSP returns the fd through the fdlist.
 > 
-> fail: ../utils/v4l2-compliance/v4l2-compliance.cpp(671):
-> missing bus_info prefix ('plat:aa00000.video-codec:dec')
+> Fix this by not taking an extra reference for DMA handle arguments
+> (take_ref = false) and tagging them with FASTRPC_MAP_DMA_HANDLE. As
+> these maps are borrowed references, fastrpc_get_args() re-validates the
+> map via fastrpc_map_lookup() before dereferencing it, so it is not used
+> after being freed. fastrpc_put_args() only releases maps flagged as
+> FASTRPC_MAP_DMA_HANDLE and clears the flag to guarantee the map is freed
+> exactly once.
 > 
-> Update the format string in iris_querycap() to use "platform:" so
-> that v4l2-compliance bus_info check passes.
+> Also reject FASTRPC_MAP_DMA_HANDLE in fastrpc_req_mem_map(), since such
+> handles are already mapped implicitly during the remote invoke call and
+> must not be mapped again through the explicit MEM_MAP path.
 > 
-> Fixes: 94ef75095d5e ("media: iris: Enumerate cap->bus_info to differentiate between encoder and decoder")
-> Cc: stable@vger.kernel.org
-> Signed-off-by: Vishnu Reddy <busanna.reddy@oss.qualcomm.com>
+> Fixes: 10df039834f84 ("misc: fastrpc: Skip reference for DMA handles")
+> Cc: stable@kernel.org
+> Signed-off-by: Jianping Li <jianping.li@oss.qualcomm.com>
 > ---
->   drivers/media/platform/qcom/iris/iris_vidc.c | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
 > 
-> diff --git a/drivers/media/platform/qcom/iris/iris_vidc.c b/drivers/media/platform/qcom/iris/iris_vidc.c
-> index fcbc60016bee..d39ac71a25aa 100644
-> --- a/drivers/media/platform/qcom/iris/iris_vidc.c
-> +++ b/drivers/media/platform/qcom/iris/iris_vidc.c
-> @@ -466,7 +466,7 @@ static int iris_querycap(struct file *filp, void *fh, struct v4l2_capability *ca
->   		info = "enc";
->   	}
->   	snprintf(cap->bus_info, sizeof(cap->bus_info),
-> -		 "plat:%s:%s", dev_name(core->dev), info);
-> +		 "platform:%s:%s", dev_name(core->dev), info);
->   
->   	return 0;
->   }
+> Patch [v2]: https://lore.kernel.org/all/20260716113254.570-1-jianping.li@oss.qualcomm.com/
 > 
-Reviewed-by: Vikash Garodia <vikash.garodia@oss.qualcomm.com>
+> Changes in v3:
+> - No functional changes.
+> - fastrpc_put_args(): document that clearing map->flags without a lock
+>   is safe because the DSP reports a given fd in the fdlist only once,
+>   so no concurrent fastrpc_put_args() can race on the same map's flags.
+> 
+> Changes in v2:
+> - Rework the commit message to describe the DMA handle reference and
+>   lifetime problem more precisely.
+> - Introduce a new FASTRPC_MAP_DMA_HANDLE uapi flag and a 'flags' field
+>   in struct fastrpc_map to explicitly tag DMA handle maps, instead of
+>   relying only on the nbufs boundary / take_ref.
+> - Plumb an mflags argument through fastrpc_map_create() and
+>   fastrpc_map_attach() so DMA handle maps are tagged at creation time.
+> - Re-validate the borrowed map in fastrpc_get_args() via
+>   fastrpc_map_lookup() before dereferencing it, to avoid a
+>   use-after-free when the map was created with take_ref = false.
+> - In fastrpc_put_args(), only release maps tagged FASTRPC_MAP_DMA_HANDLE
+>   and clear the flag afterwards, so such maps are freed exactly once.
+> - Reject FASTRPC_MAP_DMA_HANDLE in fastrpc_req_mem_map(), since these
+>   handles are already mapped implicitly during the remote invoke and
+>   must not be mapped again through the explicit MEM_MAP path.
+> 
+> ---
+>  drivers/misc/fastrpc.c      | 60 +++++++++++++++++++++++++++----------
+>  include/uapi/misc/fastrpc.h |  2 ++
+>  2 files changed, 46 insertions(+), 16 deletions(-)
+> 
+> diff --git a/drivers/misc/fastrpc.c b/drivers/misc/fastrpc.c
+> index 90fd669636ec..8c98c8af6084 100644
+> --- a/drivers/misc/fastrpc.c
+> +++ b/drivers/misc/fastrpc.c
+> @@ -253,6 +253,7 @@ struct fastrpc_map {
+>  	u64 len;
+>  	u64 raddr;
+>  	u32 attr;
+> +	u32 flags;
+>  	struct kref refcount;
+>  };
+>  
+> @@ -879,7 +880,7 @@ static dma_addr_t fastrpc_compute_dma_addr(struct fastrpc_user *fl, dma_addr_t s
+>  }
+>  
+>  static int fastrpc_map_attach(struct fastrpc_user *fl, int fd,
+> -			      u64 len, u32 attr, struct fastrpc_map **ppmap)
+> +			      u64 len, u32 attr, struct fastrpc_map **ppmap, int mflags)
+>  {
+>  	struct fastrpc_session_ctx *sess = fl->sctx;
+>  	struct fastrpc_map *map = NULL;
+> @@ -896,6 +897,7 @@ static int fastrpc_map_attach(struct fastrpc_user *fl, int fd,
+>  
+>  	map->fl = fl;
+>  	map->fd = fd;
+> +	map->flags = mflags;
+>  	map->buf = dma_buf_get(fd);
+>  	if (IS_ERR(map->buf)) {
+>  		err = PTR_ERR(map->buf);
+> @@ -970,13 +972,13 @@ static int fastrpc_map_attach(struct fastrpc_user *fl, int fd,
+>  	return err;
+>  }
+>  
+> -static int fastrpc_map_create(struct fastrpc_user *fl, int fd,
+> -			      u64 len, u32 attr, struct fastrpc_map **ppmap)
+> +static int fastrpc_map_create(struct fastrpc_user *fl, int fd, u64 len, u32 attr,
+> +			      struct fastrpc_map **ppmap, bool take_ref, int mflags)
+>  {
+> -	if (!fastrpc_map_lookup(fl, fd, ppmap, true))
+> +	if (!fastrpc_map_lookup(fl, fd, ppmap, take_ref))
+>  		return 0;
+>  
+> -	return fastrpc_map_attach(fl, fd, len, attr, ppmap);
+> +	return fastrpc_map_attach(fl, fd, len, attr, ppmap, mflags);
+>  }
+>  
+>  /*
+> @@ -1047,23 +1049,25 @@ static int fastrpc_create_maps(struct fastrpc_invoke_ctx *ctx)
+>  	int i, err;
+>  
+>  	for (i = 0; i < ctx->nscalars; ++i) {
+> +		bool take_ref = i < ctx->nbufs;
+> +		int mflags = 0;
+>  
+>  		if (ctx->args[i].fd == 0 || ctx->args[i].fd == -1 ||
+>  		    ctx->args[i].length == 0)
+>  			continue;
+>  
+> -		if (i < ctx->nbufs)
+> -			err = fastrpc_map_create(ctx->fl, ctx->args[i].fd,
+> -				 ctx->args[i].length, ctx->args[i].attr, &ctx->maps[i]);
+> -		else
+> -			err = fastrpc_map_attach(ctx->fl, ctx->args[i].fd,
+> -				 ctx->args[i].length, ctx->args[i].attr, &ctx->maps[i]);
+> +		/* Set the DMA handle mapping flag for DMA handles */
+> +		if (i >= ctx->nbufs)
+> +			mflags = FASTRPC_MAP_DMA_HANDLE;
+> +
+> +		err = fastrpc_map_create(ctx->fl, ctx->args[i].fd, ctx->args[i].length,
+> +					 ctx->args[i].attr, &ctx->maps[i], take_ref, mflags);
+>  		if (err) {
+>  			dev_err(dev, "Error Creating map %d\n", err);
+>  			return -EINVAL;
+>  		}
+> -
+>  	}
+> +
+>  	return 0;
+>  }
+>  
+> @@ -1195,6 +1199,16 @@ static int fastrpc_get_args(u32 kernel, struct fastrpc_invoke_ctx *ctx)
+>  		list[i].num = ctx->args[i].length ? 1 : 0;
+>  		list[i].pgidx = i;
+>  		if (ctx->maps[i]) {
+> +			/* It is possible that map is created with
+> +			 * mflags FASTRPC_MAP_DMA_HANDLE and take_ref
+> +			 * is false. Check if map still exists or is
+> +			 * being freed as take_ref is false
+> +			 */
+> +			if (fastrpc_map_lookup(ctx->fl, ctx->args[i].fd,
+> +					       &ctx->maps[i], false)) {
+> +				ctx->maps[i] = NULL;
+> +				return -EINVAL;
+> +			}
+>  			pages[i].addr = ctx->maps[i]->dma_addr;
+>  			pages[i].size = ctx->maps[i]->size;
+>  		}
+> @@ -1244,8 +1258,17 @@ static int fastrpc_put_args(struct fastrpc_invoke_ctx *ctx,
+>  	for (i = 0; i < FASTRPC_MAX_FDLIST; i++) {
+>  		if (!fdlist[i])
+>  			break;
+> -		if (!fastrpc_map_lookup(fl, (int)fdlist[i], &mmap, false))
+> +		/*
+> +		 * DMA handle maps are released when the DSP returns the corresponding fd in
+> +		 * fdlist. The DSP is expected to return a specific fd only once in fdlist,
+> +		 * so no two fastrpc_put_args() paths should clear the DMA_HANDLE flag for
+> +		 * the same map concurrently.
+> +		 */
+> +		if (!fastrpc_map_lookup(fl, (int)fdlist[i], &mmap, false) &&
+> +		    mmap->flags == FASTRPC_MAP_DMA_HANDLE) {
+> +			mmap->flags = 0;
+>  			fastrpc_map_put(mmap);
+> +		}
+>  	}
+>  
+>  	return ret;
+> @@ -1621,7 +1644,7 @@ static int fastrpc_init_create_process(struct fastrpc_user *fl,
+>  	fl->pd = USER_PD;
+>  
+>  	if (init.filelen && init.filefd) {
+> -		err = fastrpc_map_create(fl, init.filefd, init.filelen, 0, &map);
+> +		err = fastrpc_map_create(fl, init.filefd, init.filelen, 0, &map, true, 0);
+>  		if (err)
+>  			goto err;
+>  	}
+> @@ -2246,9 +2269,14 @@ static int fastrpc_req_mem_map(struct fastrpc_user *fl, char __user *argp)
+>  
+>  	if (copy_from_user(&req, argp, sizeof(req)))
+>  		return -EFAULT;
+> -
+> +	/*
+> +	 * Prevent mapping backward compatible DMA handles here, as they are
+> +	 * already mapped in the remote call.
+> +	 */
+> +	if (req.flags == FASTRPC_MAP_DMA_HANDLE)
+> +		return -EINVAL;
+>  	/* create SMMU mapping */
+> -	err = fastrpc_map_create(fl, req.fd, req.length, 0, &map);
+> +	err = fastrpc_map_create(fl, req.fd, req.length, 0, &map, true, 0);
+>  	if (err) {
+>  		dev_err(dev, "failed to map buffer, fd = %d\n", req.fd);
+>  		return err;
+> diff --git a/include/uapi/misc/fastrpc.h b/include/uapi/misc/fastrpc.h
+> index ba1ea5ed426c..c04749bf4f96 100644
+> --- a/include/uapi/misc/fastrpc.h
+> +++ b/include/uapi/misc/fastrpc.h
+> @@ -45,6 +45,8 @@ enum fastrpc_map_flags {
+>  	FASTRPC_MAP_FD = 2,
+>  	FASTRPC_MAP_FD_DELAYED,
+>  	FASTRPC_MAP_FD_NOMAP = 16,
+> +	/* Map the DMA handle in the invoke call for backward compatibility */
+> +	FASTRPC_MAP_DMA_HANDLE = 0x20000,
+was having a looks again at this, user is never passing this flag,
+should we have this in uapi? I think you can move this in kernel as it
+is set and used by kernel.>  	FASTRPC_MAP_MAX,
+>  };
+>  
+
