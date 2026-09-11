@@ -1,80 +1,82 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D669A41A91B
-	for <linux-arm-msm@vger.kernel.org>; Fri, 11 Sep 2026 08:21:33 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8467245628B
+	for <linux-arm-msm@vger.kernel.org>; Fri, 11 Sep 2026 08:21:35 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789114895; cv=none; b=tH7/Uy8Sj0QWVGxSKTTUFC8lBMa2J2Ty++5rW9LuW8CqbPsMBovFM5GgqKxrU0UBC+Yvj0dQTT8WNYq9yJfECdY0VyD0mbZvxteukD/8qxAk5vS1K1xA8W50Hkh8fQPmQqFKM2SCSkK3I1mOyaqziJ75U5gtu6RUJ4bU1E4yM5Y=
+	t=1789114897; cv=none; b=i7u655p2LnRyIXk1S1BFKimsINooOPWPABsUNHojHnRx0BaQoSThvjAZJcmxfVNBjYR++E3S7Nx36khoCsycqNAitH3RuEoNYrlo4QA5B1N+ZAUj4KbP8juJeVb53H4TExbN0R9WQMHShKyTNmFVcUhmoLT9L0GbyrQbTbePD3o=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789114895; c=relaxed/simple;
-	bh=/uI/IonCsG0gCA+TuNsimYDR40/idqbcuTaTESIrhQk=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=Ukk1FWNcmlVqg+pzOK3H5PlY0ARzouov/Egv/UyZrhw/YisTczxIa7syN0YrjZWlrakem4B8dr9q37OXRO1jX+XEII8l5VRz0gEvoRIFruQTmdzmpKDUqxOVX6ruFB21/QNl04uD0e3wzJnK5sNRqAwDNDhAvGeyMyEt06c9GH0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=DtQuau69; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=gmjxr9qr; arc=none smtp.client-ip=205.220.168.131
+	s=arc-20240116; t=1789114897; c=relaxed/simple;
+	bh=mwkLRTFPxbfx/aCfkpcg51GVVHCgt7ycr1rCcEhiNDo=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=IbXPQh5r9VC+glP7jeSogpkbR+mDKHY7PmO+r5+d/551wEPBfpJUsHS1u8SIBgy6DsOXWnhg8CuEmDkNRcmBwTTRgy1yln36wKbTuX1istz3D6iuAXVCSL+MgJ5Z5JXa+MtaTHkH251ihc3fAJR7W4fC63uaFDUjjsL/LxrBCmk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=W/XxxEJN; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=Btmi3y6B; arc=none smtp.client-ip=205.220.180.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="DtQuau69";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="gmjxr9qr"
-Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68B7kfIo423498
-	for <linux-arm-msm@vger.kernel.org>; Fri, 11 Sep 2026 08:21:33 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="W/XxxEJN";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Btmi3y6B"
+Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68B7kfsa3686805
+	for <linux-arm-msm@vger.kernel.org>; Fri, 11 Sep 2026 08:21:34 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:date:from:message-id:mime-version
-	:subject:to; s=qcppdkim1; bh=jC//AH8MdM789lRUxzj5I06WPe9fiOoh+LA
-	3vnSIH8c=; b=DtQuau69yqAaTJOLGxdFF/nFB9/w+p6GFDhZz97tD7j3eq/IZgy
-	OdEKQK2X0y8/eu6AJB91O40cXxLbud5+nhbJfagMzRbrdqK8gOJqY/RnJKxtkjvW
-	9+UFI9xjvSiOYuv7FEwy1muLVHJ0XTbvgEJ5sjf4/5bFMVQrYUCXBcxWsEqOgt1p
-	Exq3/zKZzfl7z0QvRktEjDcVM26bs5IZQpFpBon0sGhQ9Wfm8XK+/ueb9fryf+iA
-	IYj3c7urwV0pVCG0NmTevH1Q1S9y8ZKxiJ+LMwutlcEx75vi8fjQJQMe/xrDOr73
-	Cu4X6rRHiRdcCW95AtdK878K0Ywq5rUBOgw==
-Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com [209.85.222.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gmbf8gp5n-1
+	cc:content-transfer-encoding:date:from:in-reply-to:message-id
+	:mime-version:references:subject:to; s=qcppdkim1; bh=Oy4TzhqSJ/D
+	vWDw+eqBd+EceR40UC6PEjoMrpbwGDes=; b=W/XxxEJNoAeJNvZ337GB9TlInf8
+	wA54YGHHFFC/Os0G7DNNqCb7dDQUVhOfGdm82SXtwu0vdxNOq1+BRGVamzPMkBnW
+	UaRa6tAMPREMP88s3qqwatRTI6ltF54mfCjvJi8y3EgUmhZdkXqs0Dcb2Pf4wq0V
+	+8h85WAUUR2l9AYdmySD1tAszdCTNz+vEjKl1gcXn6+3epbP6TKZxQabzPj6p51B
+	xWfFmKs5VaS1EL5HXdf7aYrcR/17QCCwcN79kyQLp3TcbOGvTwnLHRARnEKWE+7z
+	0YwkNzNGuieKkVMs242oINfp4G55WGCgFzfC9VopUpKD/Agn/p8kXAFcDJA==
+Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com [209.85.222.198])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gmapg0ufg-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Fri, 11 Sep 2026 08:21:33 +0000 (GMT)
-Received: by mail-qk1-f197.google.com with SMTP id af79cd13be357-9394ad7f64aso90069685a.3
-        for <linux-arm-msm@vger.kernel.org>; Fri, 11 Sep 2026 01:21:32 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 11 Sep 2026 08:21:34 +0000 (GMT)
+Received: by mail-qk1-f198.google.com with SMTP id af79cd13be357-939f3426a7cso35354485a.0
+        for <linux-arm-msm@vger.kernel.org>; Fri, 11 Sep 2026 01:21:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1789114892; x=1789719692; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=jC//AH8MdM789lRUxzj5I06WPe9fiOoh+LA3vnSIH8c=;
-        b=gmjxr9qr0T49W3uBMDuaHpwSQUz/7Rhn1icsbhtZAjy1FQ8JJxs8EvBeCClMWoXQ2A
-         6fR7IViRmDRmjBmZWQflgpMxZ/73milZYkUwwSE/XtbHApuzjDX503M7xUbniG2skrD7
-         nmAPL/Pvu5rQmtLnAom8rMJ7lvw6Stw6kbBZNbLoRfLB37Q2+CwFGgYuTZ+vxS8TRNSs
-         uGGBkN1obX2z5LCjLFTcfa+e4ICZDGmEK44eHdOO9UflcLYbU8OTRDsuiukU/qkNisgc
-         u56uSqphj/lgMR93AL0nYfsBg3VMDlwnC8x7k/JxEpERS8GQI+P902qLz18S3FC6bU0v
-         Goow==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1789114892; x=1789719692;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=oss.qualcomm.com; s=google; t=1789114893; x=1789719693; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=jC//AH8MdM789lRUxzj5I06WPe9fiOoh+LA3vnSIH8c=;
-        b=iAiqlWJDIxNN5Ff1NdwdA6aevFIl/2DOj8HrM3DZn8mTYHZ6FB9JE/VvGv/Gi30k3H
-         wpKhYv0PQHf+2KmwefKXaQTYP7olUMOD3Cxf2/9ovv3KuHHfF/Y1G8ywSmUHZ5trkuDN
-         kXBnSKV4aHAs4DJm49bw/bk4CdgqDdlz1uXm/IO6A7+NK8QEuUPrMU/H9nGQKdvQLxsF
-         Ph+5s0sgz94TE1fIXL+JQb/CGRZCxtId7KBvPFaUYqEaiAzNjeeqmtuyG0HevrlH+fdU
-         4YmgvtNpu4kMkmHr6AxctDOlv1Td7Y+KNNOZYzirpIUwvFztlm2y87nZNq2FFF946VVA
-         zRRg==
-X-Forwarded-Encrypted: i=1; AKwUvBwRq6wtl2VkK7NKpFiN8pqRKQUecVUuz03Fs93ERxFgJ/X5/s8Brnyvuvfx9c7ZqN3b/CUyC6unSyPeA129@vger.kernel.org
-X-Gm-Message-State: AFuF++kH4g0LZWiDrw9J6K4xBoKa3HLr+6H8Y1QytUMdx8g8tiLE8hzW
-	vku+D2nHIIxGhJ3N9u7jX5X+bB13jHBFXAFhTM/8Fqz0fKbckhP2nIP5131IhNcJa7oAghatMdb
-	+cCbC7XTXyzSIHeC4+cpRxWH1aDvJzMtDdl2ybA+/al4j+75K1o07agWJNzD8mEmft7GE
-X-Gm-Gg: AYBFou23ACJioPddQlxhVLcCXwf8rnBywvzfmsW/wtzZDaBZ5uEFYTGXIAsrFgyQwX8
-	NVSLTfIm0FFb8UsCl87QXOBxTXFjgtTQ+hIEFPvRtMjkOXztrK/kbFhKxT0O+mv71W9cOolCL8j
-	mSY72XDQnZTqE4c5IDc8GBQQFCpoCPH+AtCO2LXLAsO5i10yuVzDI5y12i2oKtq2V40uapXORWe
-	rosN8LbwaUaXVVHsBK66W5/a9v0H3APdoB6Xi6Y9jOeIqdaAiSBMhVqQIaBy8ta1R0oCc5bHzn8
-	zGK5l+vPXci4GHbzyscGqXwAF9zp6EBINa0r6a2gLAsqsVznGtb+nqbYDHnEMrWlx1WUhLY/jVS
-	07HPGoLisza6DhA==
-X-Received: by 2002:a05:620a:19a6:b0:930:987d:9cd7 with SMTP id af79cd13be357-939ea0e3700mr387707685a.11.1789114891884;
-        Fri, 11 Sep 2026 01:21:31 -0700 (PDT)
-X-Received: by 2002:a05:620a:19a6:b0:930:987d:9cd7 with SMTP id af79cd13be357-939ea0e3700mr387705185a.11.1789114891489;
-        Fri, 11 Sep 2026 01:21:31 -0700 (PDT)
+        bh=Oy4TzhqSJ/DvWDw+eqBd+EceR40UC6PEjoMrpbwGDes=;
+        b=Btmi3y6Bpvqt8Wu84JKT14xjHCjNb5Y6+aiT9uw4egNWmsmBuv+Z8T1iD+h0hfa7s8
+         1IqGzgIVysU0YID9sxrkONW+O2akj0VlyZSNxG3obEOwmxc3s1+TLJzK+CXH3iKluVSQ
+         6xtA7JZqFILQM7eqLujOsouYFn4rriMqlX/zamjRncH87c/yCJxuud5XFUdqh95lyQ/k
+         p5Bq7zhR9HVBJbOrj1i9v3j4ho21jpHN0Mp17B1F1RdH3q1T+/TePl3trraNza94Ep40
+         Vk5O486RBT3MhOyD9nkChdbAHOzkB+Vc6clIKy8FLHGCn8aZdz9FjuHBwMuyBAs2TH5L
+         /fnQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1789114893; x=1789719693;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=Oy4TzhqSJ/DvWDw+eqBd+EceR40UC6PEjoMrpbwGDes=;
+        b=Pqnpp8KafydP0lxZqIUfKcWGNxUzZF1BDp/TeSWJ+sMZdGO4TmfFyat95n4zgmK2jh
+         qe68PhlNcoaBDI4JhY2ZNZLupZjvKfAZng36/utyNJ2wSSWwqS73OUTzotPvxYyCNGZd
+         Zk8UxhphJFL80EbwolKD4VOGz9+obPwmLbwvjCvfNF9XjCbct7KPzOsLC/KLhWBmFIAZ
+         MTiFtA6ms7RqRn4gAJadQekj7AbodrxCqV04WniU8HlXqpHbuAfBu9hIFtWoDGWT9MYL
+         A9nmhubkqxlAxxFeVSB94p3ZkP2IbTxXhCH2tj1mBGIUZBGpENvHySPs2f9zKseDFXY+
+         1NZQ==
+X-Forwarded-Encrypted: i=1; AKwUvBwmwBIQDiuwNakVf0qvJ11a/xuB3gQ94htME91L8bWn/y5HxL2lEz53swEUJEdvXXA2Ue+YRvy4nBEqGojf@vger.kernel.org
+X-Gm-Message-State: AFuF++nU92P+XTUyOFnL9HN2Vt1+UueWMm+gOifuHF9wmI0NaKkpdMiJ
+	OSnHtnUEYITYjXa07qv8w6+g+XC8L7kdesnfmj0M/26bGD+mPH2YOXKkwoH49P25Q10rHKAu5QM
+	AfuRdWf9W5HPoKxZ27pQegCyDIJxWkvibun/BxlFsMEnzXOvFKc7o5ZIrV7SA+UEnmtlB
+X-Gm-Gg: AYBFou1Pf0s92sb0wnAiNMnonvTAnooa8LIlwKAyPsbTl6taCiDILpSVqBsC/GhynnE
+	F4maoiLN3f1TMrlvy4F5GIqQrdoApNpVyFmbfbO8mLWTPBU3m44jeYzqJ/vSCSiU5PMt/siN5Mu
+	XBQkEUGTSII+e9mLpvWSkKV0hFRufhBC3jOSuBBzW1sZOBvtC+uM9DpX8rDb3onto+Loq06/d9R
+	QXY1R27tEq7B5s+ldnDHyki3utjsz6i5dwbQVhUz3euB321xZ4kk1PyJfN6cy70987TgNsqFuWE
+	Sin36eTOrnHFTlIm/tl1eOzmpFa9Uz2dy55WVjSCJe7krTkJoctIp85X4QsWcwEElL++Ww6YZBc
+	JwBji/hYrwnRvBA==
+X-Received: by 2002:a05:620a:19a4:b0:939:d459:4810 with SMTP id af79cd13be357-939ea13c59bmr382467185a.26.1789114893500;
+        Fri, 11 Sep 2026 01:21:33 -0700 (PDT)
+X-Received: by 2002:a05:620a:19a4:b0:939:d459:4810 with SMTP id af79cd13be357-939ea13c59bmr382462785a.26.1789114893005;
+        Fri, 11 Sep 2026 01:21:33 -0700 (PDT)
 Received: from debian ([5.133.47.210])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-486eb34e608sm4488880f8f.23.2026.09.11.01.21.30
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-486eb34e608sm4488880f8f.23.2026.09.11.01.21.31
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 11 Sep 2026 01:21:30 -0700 (PDT)
+        Fri, 11 Sep 2026 01:21:32 -0700 (PDT)
 From: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
 To: robh@kernel.org, vkoul@kernel.org
 Cc: krzk+dt@kernel.org, conor+dt@kernel.org, srini@kernel.org,
@@ -84,10 +86,12 @@ Cc: krzk+dt@kernel.org, conor+dt@kernel.org, srini@kernel.org,
         linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
         linux-kernel@vger.kernel.org, linux-sound@vger.kernel.org,
         Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
-Subject: [PATCH 0/3] soundwire: qcom: add multi-master support
-Date: Fri, 11 Sep 2026 09:21:08 +0100
-Message-ID: <cover.1789114385.git.srinivas.kandagatla@oss.qualcomm.com>
+Subject: [PATCH 1/3] dt-bindings: soundwire: qcom: describe multi-master
+Date: Fri, 11 Sep 2026 09:21:09 +0100
+Message-ID: <d7b3d0618f20d18f714217d9604a7c09a3539578.1789114385.git.srinivas.kandagatla@oss.qualcomm.com>
 X-Mailer: git-send-email 2.53.0
+In-Reply-To: <cover.1789114385.git.srinivas.kandagatla@oss.qualcomm.com>
+References: <cover.1789114385.git.srinivas.kandagatla@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -95,106 +99,180 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-GUID: TznvaQ8ySwZyTsMQbfcdICaLXEGc5M1R
-X-Proofpoint-ORIG-GUID: TznvaQ8ySwZyTsMQbfcdICaLXEGc5M1R
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTExMDExNSBTYWx0ZWRfX0u8Ew38ihSSK
- nzC+oi0PuheQKJEf1qozazO+yxwVwyti2pwcZC7r/cJot7SNqBOhJHhqPbxWeVUW7wv7q1HgFhk
- onRzdtjDKLeN1gcztXb64aOrq4fiRnTEbnxV0fd0sk/wG+R1eH5D8Hd+5MSfjH9CM2HvLtrKFco
- fjq9BYgR0bN4Hd85RWsViQr7Dvnbktlv3mXnaMpeN8F7hpHMr9jCC0AQXr98upRleLoMxuXYvbo
- 7b9xbbHy7XCBZx0YYh23bpi4FLBfbgfDI68Yhy8icGJPL6QxxzbiiKxT67pa+4+jHW31yrnT8pV
- yB4kW6bQ9SP5q8ykd/OhxqA9WRG8hCQR1mhN2moM6vXxRP6+haTaWqDx+O96MCWNaLtUDJQUnZx
- CNbUSGGtWO9a/rMsJRvKy3HILgMptar+xi7d2VL6RJcMUsFX4E/5Gg/4/LzZ3bzJ8kMcqrjTHi3
- GaTVT3u4tUWyDKBXkCw==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTExMDExNSBTYWx0ZWRfX0xUphZywrW5A
- wzFCC81bvIkyGJ1BgSaJAXvLHd9WLHpkm8/Y02byj6shRfKlt2Mykws1ZQjops4vZ5vhft4uDBw
- +zaEwAqgREfkmTZFv5E99e5PVgPxO84=
-X-Authority-Analysis: v=2.4 cv=UJFIjyfy c=1 sm=1 tr=0 ts=6aa3ba0d cx=c_pps
- a=50t2pK5VMbmlHzFWWp8p/g==:117 a=ZsC4DHZuhs/kKio7QBcDoQ==:17
+X-Proofpoint-ORIG-GUID: QfbLQhhrvxySPWET0EDVpdeAQkuYPFMN
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTExMDExNiBTYWx0ZWRfX/VyGykBEVhvb
+ awM3Zhug7M2EUMX64WMOHEDLqAPUhlWUcGa5m7L8AeICKBCCZFzUEyOzG78IO8LnklGvDEQ07Co
+ SbEv5cSv4eUIz1Fm7qMhaWc21pgyizM=
+X-Proofpoint-GUID: QfbLQhhrvxySPWET0EDVpdeAQkuYPFMN
+X-Authority-Analysis: v=2.4 cv=DLoacCNb c=1 sm=1 tr=0 ts=6aa3ba0e cx=c_pps
+ a=qKBjSQ1v91RyAK45QCPf5w==:117 a=ZsC4DHZuhs/kKio7QBcDoQ==:17
  a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22 a=ra76rZe8w0pY-zNsRq0A:9
- a=IoWCM6iH3mJn3m4BftBB:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22 a=EUspDBNiAAAA:8
+ a=Na-TPb6K_91XsI5DB0sA:9 a=NFOGd7dJGGMPyQGDc5-O:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTExMDExNiBTYWx0ZWRfX7ZwY2hJVMiov
+ 2hu6RMabTLEIqRGPa3/b6SB51/aK+37jvGII9OtSWElb7fb4qSOEmha0vX4aMJ1p/hONKlXivGN
+ HTRGg2ejZYEQ5nMZfwPyexv1lOraUJ2forOs5kF92URk3mIK624sHTSV//X5RTCzpcH4sT9gk+W
+ IqUtKwXPpCYh6vdbQ1E3zt/DqVgHRS7E/S40XBi4ozP4tKmMqWOFgVTXpub3R2oY7zf1yA9lO5t
+ KYsiXTUTaTYgxJLSTthR71Qzsl+kuLmLh7xSmyPMmslZ4euZdv5NMbi9mm5ODXSr/aNDpGGUQea
+ +3f2Q3YKswsMMVzQ/BnTN+YHyhSPOKij5PA6NXxj2HMTxaXhGBY0eejcN/yQcxWSythWoppYK8m
+ 7OubSi3WjX1UM1IiYJufcHsXm2j+HFfjq4/PiKBqy4/yg40LuAKmg3enNpVTEzqzd9O8x63pRyG
+ cS+NdI6AQoB8SsJ+Z/Q==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-09-11_03,2026-09-09_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0 phishscore=0 bulkscore=0 spamscore=0 adultscore=0
- malwarescore=0 suspectscore=0 impostorscore=0 clxscore=1015
- priorityscore=1501 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2609040000
- definitions=main-2609110115
+ malwarescore=0 priorityscore=1501 phishscore=0 adultscore=0 suspectscore=0
+ spamscore=0 impostorscore=0 bulkscore=0 clxscore=1015 lowpriorityscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609110116
 
-This patch series adds support to the multi-master in existing soundwire
-controller driver.
+v3.1.0+ Qualcomm SoundWire IPs can be paired to expose one logical
+bus with more than two DATA lanes. Add the two properties that
+describe such a pair:
 
-On Qualcomm Glymur SoC, both TX and RX soundwire controllers are wired
-up in multi master mode connecting to an SDCA compliant Tambora codec.
+  qcom,multi-master-mode  role in the pair ("primary" or "dependent")
+  qcom,multi-master-peer  <phandle, bus-port-offset> to the other IP
 
-One of the two controllers (tx,rx) act as primary controller in this
-instance its tx which provides clock and control and some data lines and
-other controller instance in this case rx act as dependent controller
-providing extra data lanes to primary controller. This is called multi
-master mode in Qualcomm Soundwire controller.
+Both nodes carry both properties.
 
-Multi Master mode allows synchronous transport across two independent
-soundwire masters. This includes synchronized clock-stop, clock-resume,
-clock scaling and bank switch between both masters, the Primary master
-will ensure that.
+Signed-off-by: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
+---
+ .../bindings/soundwire/qcom,soundwire.yaml    | 109 ++++++++++++++++--
+ 1 file changed, 100 insertions(+), 9 deletions(-)
 
-From the slave's point of view there is still one SoundWire bus with
-one clock and one control lane; the extra DATA lanes just come from
-a different pad on the SoC.
-
-Currently the bindings are added in a way that its possible to add more
-than one dependent, however to keep things simple the driver only
-supports single dependent for now.
-
-Topology (2+2 lane example):
-
-     Primary IP                          Dependent IP
-     +-----------------+                 +-----------------+
-     |  MM_SYNC  <=====+=================+=====>  MM_SYNC  |
-     |                 |                 |                 |
-     |  SWR_CLK  ---+  |                 |                 |
-     |  CTRL     ---+  |                 |                 |
-     |  DATA0    ---+  |                 |  DATA0  ---+    |
-     |  DATA1    ---+  |                 |  DATA1  ---+    |
-     +--------------|--+                 +------------|----+
-                    |                                 |
-                    v                                 v
-        +-----------+-----------+           +---------+---------+
-        |  SWR_CLK, CTRL,       |           |  bus DATA2,       |
-        |  bus DATA0, DATA1     |           |      DATA3        |
-        +-----------+-----------+           +---------+---------+
-                    |                                 |
-                    +----------------+----------------+
-                                     |
-                                     v
-                              +--------------+
-                              |    Slave     |
-                              +--------------+
-
-This series adds multi-master support.
-
-Patch 1 adds two new DT properties qcom,multi-master-mode and
-qcom,multi-master-peer for describing the pair.
-
-Patch 2 wires up the primary and dependent roles in the driver.
-
-Patch 3 programs SWRM_V3_MM_SYNC_CONFIG on both sides so their frame
-generators lock to a single SWR_CLK.
-
-Tested on Glymur (SC8480XP) CRD with WCD9378 in compute mode. HPH
-playback and mic capture both work.
-
-Srinivas Kandagatla (3):
-  dt-bindings: soundwire: qcom: describe multi-master
-  soundwire: qcom: add multi-master support
-  soundwire: qcom: program MM_SYNC for multi-master
-
- .../bindings/soundwire/qcom,soundwire.yaml    | 109 ++++++++-
- drivers/soundwire/qcom.c                      | 218 ++++++++++++++++--
- 2 files changed, 303 insertions(+), 24 deletions(-)
-
+diff --git a/Documentation/devicetree/bindings/soundwire/qcom,soundwire.yaml b/Documentation/devicetree/bindings/soundwire/qcom,soundwire.yaml
+index 8e6973fa229c..6cf3285ded92 100644
+--- a/Documentation/devicetree/bindings/soundwire/qcom,soundwire.yaml
++++ b/Documentation/devicetree/bindings/soundwire/qcom,soundwire.yaml
+@@ -215,6 +215,36 @@ properties:
+           maximum: 4
+         - const: 0xff
+ 
++  qcom,multi-master-mode:
++    description:
++      Role in v3.1.0+ multi-master mode. Both nodes set this; the
++      primary owns SWR_CLK, the dependent contributes DATA lanes
++      only.
++    $ref: /schemas/types.yaml#/definitions/string
++    enum: [ primary, dependent ]
++
++  qcom,multi-master-peer:
++    description:
++      Peers in multi-master mode. Each entry is a
++      <peer-phandle, bus-port-offset> pair. Peer N's DPn slots
++      1, 2, 3, ... occupy bus ports (offset+1), (offset+2), ...
++    $ref: /schemas/types.yaml#/definitions/phandle-array
++    items:
++      items:
++        - description: peer phandle
++        - description: bus port offset (last primary-local port)
++    minItems: 1
++
++  num-lanes:
++    description:
++      Number of DATA lanes this IP exposes locally. Required in
++      multi-master mode; on the primary it defines the boundary
++      between local bus lanes (0..num-lanes-1) and lanes contributed
++      by the dependent.
++    $ref: /schemas/types.yaml#/definitions/uint32
++    minimum: 1
++    maximum: 8
++
+   label:
+     maxItems: 1
+ 
+@@ -224,21 +254,82 @@ required:
+   - interrupts
+   - clocks
+   - clock-names
+-  - '#sound-dai-cells'
+   - '#address-cells'
+   - '#size-cells'
+-  - qcom,ports-offset1
+-  - qcom,ports-offset2
+-
+-oneOf:
+-  - required:
+-      - qcom,ports-sinterval-low
+-  - required:
+-      - qcom,ports-sinterval
+ 
+ allOf:
+   - $ref: soundwire-controller.yaml#
+ 
++  # Single-master (no qcom,multi-master-mode): needs port config.
++  - if:
++      not:
++        required:
++          - qcom,multi-master-mode
++    then:
++      required:
++        - '#sound-dai-cells'
++        - qcom,ports-offset1
++        - qcom,ports-offset2
++      oneOf:
++        - required:
++            - qcom,ports-sinterval-low
++        - required:
++            - qcom,ports-sinterval
++
++  # Multi-master primary: drives the bus, needs port config + MM props.
++  - if:
++      properties:
++        qcom,multi-master-mode:
++          const: primary
++      required:
++        - qcom,multi-master-mode
++    then:
++      properties:
++        compatible:
++          contains:
++            const: qcom,soundwire-v3.1.0
++      required:
++        - '#sound-dai-cells'
++        - qcom,ports-offset1
++        - qcom,ports-offset2
++        - qcom,multi-master-peer
++        - num-lanes
++      oneOf:
++        - required:
++            - qcom,ports-sinterval-low
++        - required:
++            - qcom,ports-sinterval
++
++  # Multi-master dependent: contributes DATA lanes
++  - if:
++      properties:
++        qcom,multi-master-mode:
++          const: dependent
++      required:
++        - qcom,multi-master-mode
++    then:
++      properties:
++        compatible:
++          contains:
++            const: qcom,soundwire-v3.1.0
++        '#sound-dai-cells': false
++        qcom,din-ports: false
++        qcom,dout-ports: false
++        qcom,ports-word-length: false
++        qcom,ports-sinterval-low: false
++        qcom,ports-sinterval: false
++        qcom,ports-offset1: false
++        qcom,ports-offset2: false
++        qcom,ports-lane-control: false
++        qcom,ports-block-pack-mode: false
++        qcom,ports-hstart: false
++        qcom,ports-hstop: false
++        qcom,ports-block-group-count: false
++        qcom,ports-ch-mask: false
++      required:
++        - qcom,multi-master-peer
++        - num-lanes
++
+ unevaluatedProperties: false
+ 
+ examples:
 -- 
 2.53.0
 
