@@ -1,87 +1,47 @@
 Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 19CFF46D2C9
-	for <linux-arm-msm@vger.kernel.org>; Fri, 11 Sep 2026 09:08:44 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 177583B5820;
+	Fri, 11 Sep 2026 09:19:38 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789117725; cv=none; b=uuVEtRo3FdczCCjPijQGrvAvjuI3Z9g7YOGKVhdpOBIzuCpQSiKTCHOrYqRWRAJMdauPeQrrTbjptSmjVFlllwZXUnSiG+qoBVR4nHTpH4MwL2dtZZKhZxx/CZUTq5kZbM2/X3B4jFjXK6PGRi+dswAWWgwlgqJQKOzRcxOeioA=
+	t=1789118380; cv=none; b=fh8M8LcQMbQM7LK9gqiKkZuRVxmwpx3epednqHq7cVj1G2c86vF/7T9+Iw5n9gwKrReP3EL6NqveE7/tKLk63U2ASFDHzB6a8vyzEX2yw3jwhsqQ+WRnNnf3psTGY6GUsIF7pS7jn84iF69xhKfOTlN0RcFifbrqT/4Y5D8maQo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789117725; c=relaxed/simple;
-	bh=BZ+EXxMNqbRpkj09rE8LZ5ynhSE2JKECFYkwWJRgobY=;
+	s=arc-20240116; t=1789118380; c=relaxed/simple;
+	bh=FW/XeAHbrTNr82j0hz8EWpWL1b0PvJT8ATOveejkZjU=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=SUI/6MfApEy2HLtFcTNsL7gNL50VlfcrT5DzPVkSkZrVl4hnQWg0m1WoeCMDJ0m0KtMxbg+PDE0ZGqV+XoZdyPUqSvxk/tieBuJO2UkkGYVvPmvxs5ZvJLITqzi+1sL0IVlC4Pswti/Qz/suREgDem4eARkHCIRcRcYwTQFzVXw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=kDZUsrlp; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=Xqs0/p+K; arc=none smtp.client-ip=205.220.180.131
+	 In-Reply-To:To:Cc; b=DsKG3mUkF+XEJ3YiN8oA27ZH0U7nQvfiq0mNASqy3SJ3S4FVwYPkJtRIBFZkSXe9MWJwyaujgdlTkLsatEGxGdzM5Bic1qN6Mg475Oyt5b8kEZd94kdmK//5Ns2ZOFX2CZOvTD0zapG7wrxcQBuki1vB3oAG2XEPIYqIv78MAKc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=I7KQiR2j; arc=none smtp.client-ip=205.220.180.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="kDZUsrlp";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Xqs0/p+K"
-Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68B7kfYq3366287
-	for <linux-arm-msm@vger.kernel.org>; Fri, 11 Sep 2026 09:08:43 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="I7KQiR2j"
+Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68B7ktd63687072;
+	Fri, 11 Sep 2026 09:19:29 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	6TGWZvmgQIdRN7dd3rtsDVz6PxAL2ZtejgVwr5LURWo=; b=kDZUsrlpl/FWywaI
-	Q3KRHmcDN1do5LEpUSyZkmx2KDBy9NavKxof0AuNQKwYg6D01aj0Nkvq+8R2eU8H
-	N84I3fjl9w9hdHg206NKv35s6VxWaLELZ9AsGPB2PRWZEwYpDwfWT8m9ByDlD2xl
-	nAHmRPQ8NVZ5gbN4eaXQwiUTSuLXaO0zCE7SXpUXqiBOBsk59vyrHs3urTrDMcgj
-	wV8PrMKHyhHLNuYD5lYvHxKq7wHDvYZzPscRW5I2u8eqIzfeg5sDvOCHp625f2By
-	B2efV2bPaZqrBG3+/aHZbYR3mqqO/1wx+Yh6uKSPJUJkbW6HzbLZapDS2+Vp3ogT
-	jg5gTQ==
-Received: from mail-pj1-f72.google.com (mail-pj1-f72.google.com [209.85.216.72])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gm1k2b1ky-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Fri, 11 Sep 2026 09:08:42 +0000 (GMT)
-Received: by mail-pj1-f72.google.com with SMTP id 98e67ed59e1d1-398dcfabbf8so1596824a91.0
-        for <linux-arm-msm@vger.kernel.org>; Fri, 11 Sep 2026 02:08:42 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1789117722; x=1789722522; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=6TGWZvmgQIdRN7dd3rtsDVz6PxAL2ZtejgVwr5LURWo=;
-        b=Xqs0/p+KwMPM8PXF60Bri3tzyao1shKd4LxfctBbsH0T99Qtvk+4NWOc2KTfYjm9VS
-         vMAo8iz9VgWJzPGNSAcR9q4t2I/EvQq6I8WJNsRSZl+likPf9GyzZdIv61KECW9w0HjP
-         h7H4TWpSnEZ3fiISh2abR8rE9d6m1A0YBb1c6icvzAuHVdXzo1ED2RIIm+mob5wHAFzu
-         gmMQzX8j6n8TNZ687dIQoHxL3aczIi7cRggiaQSIxT7IxdQ8Gk+FoUVBsgmofjkD/C9I
-         27Y04B/UrtYQQeHeh0laVHxZX04pXTqxE5XeqMLYHqyvr+rrbePl1HE62+m4+4fWMN9R
-         fMbg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1789117722; x=1789722522;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=6TGWZvmgQIdRN7dd3rtsDVz6PxAL2ZtejgVwr5LURWo=;
-        b=YZBTBaRYlCnGp9vRA37Ms4PbpiPxfOB4BFUTEry8A6wmk/tVjNY5TL7pAO0Io8YjGn
-         5yfW8k7OvIgx5i9PWfgmSxc+8eoO5WXCFe56+n2sWdqA+xxqfb13iolpr2ohpTAE1ORU
-         LDs8ZWNUWoJpesEZVAEsrt7TLjUI0DR+7z/OfFyPRAxVtc9k/X7UySWSDuyuuckpPTvd
-         1ys4/lrQo6pO95bThmHHUXoWrZ+lU1UdAbJ6StQefVJxIc0SC0sGGk7vcXarptwFikIB
-         8CaqcwT33WUDB0obyION1haJy0NyO2eULaO59vQuRmvykfg3Xh8iDd3S7RW8nR1/sBYC
-         WKUQ==
-X-Gm-Message-State: AFuF++kAirSc/9rXv4clIL63zixf5mHH7S2EJ7ms6Sj3Dut06ZSZgFDp
-	lW7PamPDxaXVzwqby0nc1Qyme7bOpkKf3CGCJdq+bOSFcA4/bkk84SMQs94Ww/dLu8/YBBrpKBT
-	nCpCDnITK0V9a6U0G4HFtjNbdNxn5IWR8i9tMw0edbSizzBeS3+1i6Tyazumz2sqmix4c
-X-Gm-Gg: AYBFou0RvW/i8ZDqfm2V2x4VESIzinsokSzZFTCvXNpohlic3gw2eqrV0Gl6Ku52Hd5
-	IoW5OvDMKEeQE7RunbmcCbdBVlAYh2/57EGrT+Uyyk6g0uafRWHq+OdTxaFG7vzd3GUvzC4DC5H
-	I+sxheT7FsisnEj7OHlVoNS9KKEDtpyvVE0iIkQnBvwyVcYFm4AkTae66G/X39kipdoX75rew0v
-	rFuFS/ym8ptMdyBiShXRBq+UMi9dcaTYGJSgPXYzqTfYUOsqQnYlW4bvA/oCnndLABFmOIJZ48c
-	rBAMsCQh9pSwhv6CocGNaHxcDtNnPbGU8/n+HRdHdbjKYrunlSexbreboMa4i7KARycTybO1SYz
-	/iJxVWAjf5VoOxm0sFZJF+lboF9Z2
-X-Received: by 2002:a17:90b:586f:b0:39b:66ee:a14 with SMTP id 98e67ed59e1d1-39d9c374d49mr5009783a91.25.1789117722144;
-        Fri, 11 Sep 2026 02:08:42 -0700 (PDT)
-X-Received: by 2002:a17:90b:586f:b0:39b:66ee:a14 with SMTP id 98e67ed59e1d1-39d9c374d49mr5009724a91.25.1789117721571;
-        Fri, 11 Sep 2026 02:08:41 -0700 (PDT)
-Received: from hu-mkshah-hyd.qualcomm.com ([202.46.22.19])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-33ba4f82c69sm5040447eec.27.2026.09.11.02.08.37
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 11 Sep 2026 02:08:39 -0700 (PDT)
-From: Maulik Shah <maulik.shah@oss.qualcomm.com>
-Date: Fri, 11 Sep 2026 14:38:14 +0530
-Subject: [PATCH v2 2/2] soc: qcom: rpmh-rsc: Skip read requests on
- unsupported platforms
+	2pY80PvDV6iExYov5wC67KqHfSfKYMJwWVmg4/2GrSw=; b=I7KQiR2jXkm3a6Xl
+	IAbRESLMYmiSbPtrQq8+nANwJjFIk8hfD3hYkuEjYvmSaDsV/Meg0mW2nVHedvHc
+	gUYnx0wGbZuNoDSFRCYWofvVqLdrav/GeKY3Wrqo59eWuV4LHVIDJucb6eBjqkFE
+	I7E0nxi3ksplK4I3EIEM9c2SU9qV6vmBMwATjMfmZb6Q4Ewpej7TkzzyUjndZjdq
+	tXfKODI7qsGY+L0HyqlroYaIAyE+gTv4NLASRGJSN3C+LLNi9IjCQl8HSx7ZCRmR
+	o8SXUADokTPJgyWxncQ1CnhOt8NqXlnHODx2WZTwA8Q4TgaSOICfKOOqvpVDcHj1
+	70pY9Q==
+Received: from apblrppmta02.qualcomm.com (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com [103.229.18.19])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gmapg12kh-1
+	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
+	Fri, 11 Sep 2026 09:19:29 +0000 (GMT)
+Received: from pps.filterd (apblrppmta02.qualcomm.com [127.0.0.1])
+	by APBLRPPMTA02.qualcomm.com (8.18.1.11/8.18.1.11) with ESMTP id 68B9JMU32870832;
+	Fri, 11 Sep 2026 09:19:26 GMT
+Received: from hu-hgautam-hyd.qualcomm.com (hu-hgautam-hyd.qualcomm.com [10.147.247.91])
+	by APBLRPPMTA02.qualcomm.com (PPS) with ESMTP id 68B9JL2f2870824;
+	Fri, 11 Sep 2026 09:19:26 +0000 (GMT)
+From: Harendra Gautam <harendra.gautam@oss.qualcomm.com>
+Date: Fri, 11 Sep 2026 14:47:33 +0530
+Subject: [PATCH v6 09/10] ASoC: qcom: Add Shikra QAIF support
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -90,137 +50,557 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260911-rsc_read-v2-2-98675c248278@oss.qualcomm.com>
-References: <20260911-rsc_read-v2-0-98675c248278@oss.qualcomm.com>
-In-Reply-To: <20260911-rsc_read-v2-0-98675c248278@oss.qualcomm.com>
-To: Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Kamal Wadhwa <kamal.wadhwa@oss.qualcomm.com>,
-        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
-        Mark Brown <broonie@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
-        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
-        Maulik Shah <maulik.shah@oss.qualcomm.com>
+Message-Id: <20260911-b4-qaif-shikra-audio-v6-9-e9addb358201@oss.qualcomm.com>
+References: <20260911-b4-qaif-shikra-audio-v6-0-e9addb358201@oss.qualcomm.com>
+In-Reply-To: <20260911-b4-qaif-shikra-audio-v6-0-e9addb358201@oss.qualcomm.com>
+To: Srinivas Kandagatla <srini@kernel.org>
+Cc: Mark Brown <broonie@kernel.org>, Liam Girdwood <lgirdwood@gmail.com>,
+        Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>, Jaroslav Kysela <perex@perex.cz>,
+        Takashi Iwai <tiwai@suse.com>,
+        Kuninori Morimoto <kuninori.morimoto.gx@renesas.com>,
+        linux-sound@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+        Prasad Kumpatla <prasad.kumpatla@oss.qualcomm.com>,
+        Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>,
+        Sarath Ganapathiraju <sarath.ganapathiraju@oss.qualcomm.com>,
+        Kumar Anurag Singh <kumar.singh@oss.qualcomm.com>,
+        Mohammad Rafi Shaik <mohammad.rafi.shaik@oss.qualcomm.com>,
+        Harendra Gautam <harendra.gautam@oss.qualcomm.com>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1789117708; l=3016;
- i=maulik.shah@oss.qualcomm.com; s=20240109; h=from:subject:message-id;
- bh=BZ+EXxMNqbRpkj09rE8LZ5ynhSE2JKECFYkwWJRgobY=;
- b=6dcJ4q3uVIozHxHznj+ISS0NN48Utn/0w0VNiOrwdAwjArDyop7V6W1zrGWhYb/J275m1KpoW
- MlZbUa18t+FAZwXxusm58GkjaLKEirqoon8/Q9mL4auzdJfmbtHfXpk
-X-Developer-Key: i=maulik.shah@oss.qualcomm.com; a=ed25519;
- pk=bd9h5FIIliUddIk8p3BlQWBlzKEQ/YW5V+fe759hTWQ=
-X-Authority-Analysis: v=2.4 cv=cM11IVeN c=1 sm=1 tr=0 ts=6aa3c51b cx=c_pps
- a=RP+M6JBNLl+fLTcSJhASfg==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
- a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
- a=EUspDBNiAAAA:8 a=k3WCD5QtlwoTK8Or2cMA:9 a=QEXdDO2ut3YA:10
- a=iS9zxrgQBfv6-_F4QbHw:22
-X-Proofpoint-GUID: OcMU6zwf7ckrMtZ2SyEeI0otw5zeJHER
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTExMDEyNyBTYWx0ZWRfXz+tkNJg9HN/I
- 0h+fSLnan2ZCSwTBRlxJO35YpFw9nY2fVYiT0hH68gjuF7oOOlUvidYmkC/7EBzRUY+VBRxPO1Y
- 6AMAbnZjMeeDCR465JtDiD8QtLWZWnQ=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTExMDEyNyBTYWx0ZWRfX4ssZbAgi8wtO
- fTMNGPf1RmLJEzbM5WU/9xPxmWXuxTJuhHYftHGUQ2AGzoqZC0qEPBLK2Cq/cXazo4nttKYUU7L
- xZU8LKzG+V6y8+ZLafDJxXXUE3QToPV1HU4IPpQvbMkxWSLBHQEHjzQraiTv1a8cxdI52wHHwqu
- zD0n47njcpav/3/VwpLea7OFMS9SE6ow/nLDTk92Es+PvHJckmPxJE6elWEi57PlAiDaIpzootz
- tFixt5iVjVl9s58Ml47L4uBPEm/dj91Ccpi2cEElh2ANRyLASkWPEuzuld5oCmIeITfFGcTKmu+
- Cjrza/uqCrqBLi90v6SwVPvg+oJKrtbPHITS1rmf+8RU3aoqM1iWI31Sdfag52ENVG9tjCprYF2
- 6PXd4nzFd2+UP2g6TU7vePj5Q8sW5XuJw4iWHNhoch/eg0OVUh9LdUUrAW8l2acQK3kYNGN5bKY
- /qCqZNkuMrrn2oUgOmw==
-X-Proofpoint-ORIG-GUID: OcMU6zwf7ckrMtZ2SyEeI0otw5zeJHER
+X-Proofpoint-Reinject: loops=2 maxloops=12
+X-QCInternal: smtphost
+X-QCInternal: smtphost
+X-Proofpoint-ORIG-GUID: rJqRA7pYiIgAKtz50RTtYb1Wp6TyH6ur
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTExMDEyOSBTYWx0ZWRfX67NTxHn/jqcy
+ /d+PI5V3xypE8eq7OShIv+vELKEUUSdpJYfbdnCITKx4r4G3FNqmdS0GFhX+KdvNlzUjdHtYcom
+ OZBVwAT0/auJOce7WLdX6iWPcMk89V8=
+X-Proofpoint-GUID: rJqRA7pYiIgAKtz50RTtYb1Wp6TyH6ur
+X-Authority-Analysis: v=2.4 cv=DLoacCNb c=1 sm=1 tr=0 ts=6aa3c7a1 cx=c_pps
+ a=Ou0eQOY4+eZoSc0qltEV5Q==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+ a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22 a=EUspDBNiAAAA:8
+ a=uD8aj_56PGaHGp0t6EcA:9 a=QEXdDO2ut3YA:10
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTExMDEyOSBTYWx0ZWRfX1A1AUAodZpmA
+ VEaKCV1U5QcbH6izu+ebEhovFvpLtNq/enmWzLDXebcrnC87WBPCy9m0FkdWdBUp7JIyM7gWGfZ
+ IdVyf1Jb8pFMPp/D4G/YW4AB0tNStvH2sKXLVk8bepNcPPrG/3C5MjbUepKKsAwsIgxhq352EU0
+ 1LnkZYPLWs0DpccrujinXlThTu5AILXATunbAeU1kFCyD+jKBqYE6KPMzTTKjjj+8vmb5t4vBBa
+ 4S5m+RiN9NbkUTFZL2/R8ia7A0KTUWxV5Nu7eioVnqXZAPHIZsPq+lCmsKAeEAJZ+uHp3fEP9i9
+ jg/JBR39K3rMz2DGcBwuL+PRjhZ/Q4aMUWGO8Ny5thRT63TEd0WaeSC2F7JuS5Eq9cpUJsd+tqv
+ 987ZOi6PKSuDJ1mTPUt8TJKwdfUElkkYmQDhbKEHiAYaVcUdkILg255mArlhTCFg1Iru3ziv01O
+ 28KpYjutwIFnz9k4ClQ==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-09-11_03,2026-09-09_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 lowpriorityscore=0 clxscore=1015 adultscore=0 bulkscore=0
- priorityscore=1501 impostorscore=0 malwarescore=0 spamscore=0 suspectscore=0
+ malwarescore=0 priorityscore=1501 phishscore=0 adultscore=0 suspectscore=0
+ spamscore=0 impostorscore=0 bulkscore=0 clxscore=1015 lowpriorityscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609110127
+ reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609110129
 
-On some platforms AOSS do not respond to read requests. Read request in
-such cases will consume the ACTIVE TCS but forever waits for a response
-blocking the subsequent write requests.
+Add the Shikra variant data for the Qualcomm Audio Interface driver so
+the common QAIF code can bind to the Shikra QAIF device and expose the
+SoC-specific DAIs.
 
-Skip issuing read commands on sm8150 and sc8180x platforms. For such
-platforms return success to the caller with the resource level at zero
-to avoid the caller taking any action on error code.
+Provide the Shikra DMA-to-DAI mappings, DMA and SHRAM layout, clock
+names, DAI driver data and power-management hooks required by the QAIF
+driver. Add the Kconfig symbol and Makefile entries needed to build the
+new variant.
 
-Fixes: edbafe65eef2 ("soc: qcom: rpmh: Add support to read back resource settings")
-Signed-off-by: Maulik Shah <maulik.shah@oss.qualcomm.com>
+Signed-off-by: Harendra Gautam <harendra.gautam@oss.qualcomm.com>
 ---
- drivers/soc/qcom/rpmh-internal.h | 2 ++
- drivers/soc/qcom/rpmh-rsc.c      | 7 +++++++
- drivers/soc/qcom/rpmh.c          | 6 ++++++
- 3 files changed, 15 insertions(+)
+ sound/soc/qcom/Kconfig       |  10 +
+ sound/soc/qcom/Makefile      |   3 +
+ sound/soc/qcom/qaif-shikra.c | 447 +++++++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 460 insertions(+)
 
-diff --git a/drivers/soc/qcom/rpmh-internal.h b/drivers/soc/qcom/rpmh-internal.h
-index 39441a25af9b..960a62f0e931 100644
---- a/drivers/soc/qcom/rpmh-internal.h
-+++ b/drivers/soc/qcom/rpmh-internal.h
-@@ -75,12 +75,14 @@ struct rpmh_request {
-  * @cache: the list of cached requests
-  * @cache_lock: synchronize access to the cache data
-  * @dirty: was the cache updated since flush
-+ * @no_rpmh_read: controller does not support or respond to read commands
-  * @batch_cache: Cache sleep and wake requests sent as batch
-  */
- struct rpmh_ctrlr {
- 	struct list_head cache;
- 	spinlock_t cache_lock;
- 	bool dirty;
-+	bool no_rpmh_read;
- 	struct list_head batch_cache;
- };
+diff --git a/sound/soc/qcom/Kconfig b/sound/soc/qcom/Kconfig
+index e6e24f3b9922..b7088b1e5cad 100644
+--- a/sound/soc/qcom/Kconfig
++++ b/sound/soc/qcom/Kconfig
+@@ -71,6 +71,16 @@ config SND_SOC_QCOM_COMMON
+ config SND_SOC_QCOM_SDW
+ 	tristate
  
-diff --git a/drivers/soc/qcom/rpmh-rsc.c b/drivers/soc/qcom/rpmh-rsc.c
-index c5ed9874bb67..054122ccc46c 100644
---- a/drivers/soc/qcom/rpmh-rsc.c
-+++ b/drivers/soc/qcom/rpmh-rsc.c
-@@ -987,6 +987,12 @@ static void rpmh_rsc_cpu_pm_unregister(void *data)
- 	cpu_pm_unregister_notifier(data);
- }
- 
-+static bool rpmh_rsc_no_rpmh_read(void)
-+{
-+	return of_machine_is_compatible("qcom,sm8150") ||
-+	       of_machine_is_compatible("qcom,sc8180x");
-+}
++config SND_SOC_QCOM_QAIF
++	tristate "Qualcomm QAIF audio interface support"
++	depends on COMMON_CLK
++	select REGMAP_MMIO
++	help
++	  Say Y or M to enable the Qualcomm Audio Interface (QAIF) driver
++	  for the Shikra audio platform. QAIF is a DMA-based audio
++	  subsystem that moves PCM data between memory and external serial
++	  audio interfaces (AIF) and internal codec interfaces (CIF).
 +
- static int rpmh_probe_tcs_config(struct platform_device *pdev, struct rsc_drv *drv)
- {
- 	struct tcs_type_config {
-@@ -1156,6 +1162,7 @@ static int rpmh_rsc_probe(struct platform_device *pdev)
- 	spin_lock_init(&drv->client.cache_lock);
- 	INIT_LIST_HEAD(&drv->client.cache);
- 	INIT_LIST_HEAD(&drv->client.batch_cache);
-+	drv->client.no_rpmh_read = rpmh_rsc_no_rpmh_read();
+ config SND_SOC_QDSP6_COMMON
+ 	tristate
  
- 	dev_set_drvdata(&pdev->dev, drv);
- 	drv->dev = &pdev->dev;
-diff --git a/drivers/soc/qcom/rpmh.c b/drivers/soc/qcom/rpmh.c
-index 360242a315e3..fed2ea06f490 100644
---- a/drivers/soc/qcom/rpmh.c
-+++ b/drivers/soc/qcom/rpmh.c
-@@ -240,12 +240,18 @@ int rpmh_read(const struct device *dev, struct tcs_cmd *cmd)
- {
- 	DECLARE_COMPLETION_ONSTACK(compl);
- 	DEFINE_RPMH_MSG_ONSTACK(dev, RPMH_ACTIVE_ONLY_STATE, &compl, rpm_msg);
-+	struct rpmh_ctrlr *ctrlr = get_rpmh_ctrlr(dev);
- 	int ret;
+diff --git a/sound/soc/qcom/Makefile b/sound/soc/qcom/Makefile
+index 985ce2ae286b..cf50b7a24bcf 100644
+--- a/sound/soc/qcom/Makefile
++++ b/sound/soc/qcom/Makefile
+@@ -47,3 +47,6 @@ obj-$(CONFIG_SND_SOC_QCOM_OFFLOAD_UTILS) += snd-soc-qcom-offload-utils.o
  
- 	ret = __fill_rpmh_msg(&rpm_msg, RPMH_ACTIVE_ONLY_STATE, cmd, 1, true);
- 	if (ret)
- 		return ret;
- 
-+	if (ctrlr->no_rpmh_read) {
-+		cmd[0].data = 0;
-+		return 0;
+ #DSP lib
+ obj-$(CONFIG_SND_SOC_QDSP6) += qdsp6/
++
++snd-soc-qcom-qaif-y := qaif-cpu.o qaif-platform.o qaif-shikra.o
++obj-$(CONFIG_SND_SOC_QCOM_QAIF) += snd-soc-qcom-qaif.o
+diff --git a/sound/soc/qcom/qaif-shikra.c b/sound/soc/qcom/qaif-shikra.c
+new file mode 100644
+index 000000000000..0d5c2baade28
+--- /dev/null
++++ b/sound/soc/qcom/qaif-shikra.c
+@@ -0,0 +1,447 @@
++// SPDX-License-Identifier: GPL-2.0-only
++/*
++ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
++ *
++ * qaif-shikra.c -- ALSA SoC CPU-Platform DAI driver for QTi QAIF
++ */
++
++#include <linux/module.h>
++#include <linux/pm.h>
++#include <sound/pcm.h>
++#include <sound/soc.h>
++#include "qaif.h"
++
++static const struct qaif_dmaidx_dai_map shikra_mi2s_dma_dai_map[] = {
++	{ AIF_MI2S_RX_0, QAIF_DMA_IDX0 },
++	{ AIF_MI2S_RX_1, QAIF_DMA_IDX1 },
++	{ AIF_MI2S_RX_2, QAIF_DMA_IDX2 },
++	{ AIF_MI2S_RX_3, QAIF_DMA_IDX3 },
++	{ AIF_MI2S_TX_0, QAIF_DMA_IDX0 },
++	{ AIF_MI2S_TX_1, QAIF_DMA_IDX1 },
++	{ AIF_MI2S_TX_2, QAIF_DMA_IDX2 },
++	{ AIF_MI2S_TX_3, QAIF_DMA_IDX3 },
++};
++
++static const struct qaif_dmaidx_dai_map shikra_tdm_dma_dai_map[] = {
++	{ AIF_TDM_RX_0, QAIF_DMA_IDX0 },
++	{ AIF_TDM_RX_1, QAIF_DMA_IDX1 },
++	{ AIF_TDM_RX_2, QAIF_DMA_IDX2 },
++	{ AIF_TDM_RX_3, QAIF_DMA_IDX3 },
++	{ AIF_TDM_TX_0, QAIF_DMA_IDX0 },
++	{ AIF_TDM_TX_1, QAIF_DMA_IDX1 },
++	{ AIF_TDM_TX_2, QAIF_DMA_IDX2 },
++	{ AIF_TDM_TX_3, QAIF_DMA_IDX3 },
++};
++
++static const struct qaif_dmaidx_dai_map shikra_cif_dma_dai_map[] = {
++	{ RX_CODEC_DMA_RX_0, QAIF_DMA_IDX0 },
++	{ RX_CODEC_DMA_RX_1, QAIF_DMA_IDX1 },
++	{ VA_CODEC_DMA_TX_0, QAIF_DMA_IDX0 },
++	{ VA_CODEC_DMA_TX_1, QAIF_DMA_IDX1 },
++};
++
++static struct snd_soc_dai_driver shikra_qaif_cpu_dai_driver[] = {
++	{
++		.id = AIF_MI2S_RX_0,
++		.name = "MI2S AIF RX Zero",
++		.playback = {
++			.stream_name = "MI2S AIF RX Zero Playback",
++			.formats	= SNDRV_PCM_FMTBIT_S16 |
++					  SNDRV_PCM_FMTBIT_S32,
++			.rates		= SNDRV_PCM_RATE_8000_192000,
++			.channels_min	= 1,
++			.channels_max	= 2,
++		},
++		.ops = &asoc_qcom_qaif_aif_cpu_dai_ops,
++	}, {
++		.id = AIF_MI2S_TX_0,
++		.name = "MI2S AIF TX Zero",
++		.capture = {
++			.stream_name = "MI2S AIF TX Zero Capture",
++			.formats	= SNDRV_PCM_FMTBIT_S16 |
++					  SNDRV_PCM_FMTBIT_S32,
++			.rates		= SNDRV_PCM_RATE_8000_192000,
++			.channels_min	= 1,
++			.channels_max	= 2,
++		},
++		.ops = &asoc_qcom_qaif_aif_cpu_dai_ops,
++	}, {
++		.id = AIF_TDM_RX_0,
++		.name = "TDM AIF RX Zero",
++		.playback = {
++			.stream_name = "TDM AIF RX Zero Playback",
++			.formats	= SNDRV_PCM_FMTBIT_S16 |
++					  SNDRV_PCM_FMTBIT_S24 |
++					  SNDRV_PCM_FMTBIT_S32,
++			.rates		= SNDRV_PCM_RATE_8000_192000,
++			.channels_min	= 1,
++			.channels_max	= 8,
++		},
++		.ops = &asoc_qcom_qaif_aif_cpu_dai_ops,
++	}, {
++		.id = AIF_TDM_TX_0,
++		.name = "TDM AIF TX Zero",
++		.capture = {
++			.stream_name = "TDM AIF TX Zero Capture",
++			.formats	= SNDRV_PCM_FMTBIT_S16 |
++					  SNDRV_PCM_FMTBIT_S24 |
++					  SNDRV_PCM_FMTBIT_S32,
++			.rates		= SNDRV_PCM_RATE_8000_192000,
++			.channels_min	= 1,
++			.channels_max	= 8,
++		},
++		.ops = &asoc_qcom_qaif_aif_cpu_dai_ops,
++	}, {
++		.id = AIF_MI2S_RX_1,
++		.name = "MI2S AIF RX One",
++		.playback = {
++			.stream_name = "MI2S AIF RX One Playback",
++			.formats	= SNDRV_PCM_FMTBIT_S16 |
++					  SNDRV_PCM_FMTBIT_S32,
++			.rates		= SNDRV_PCM_RATE_8000_192000,
++			.channels_min	= 1,
++			.channels_max	= 2,
++		},
++		.ops = &asoc_qcom_qaif_aif_cpu_dai_ops,
++	}, {
++		.id = AIF_MI2S_TX_1,
++		.name = "MI2S AIF TX One",
++		.capture = {
++			.stream_name = "MI2S AIF TX One Capture",
++			.formats	= SNDRV_PCM_FMTBIT_S16 |
++					  SNDRV_PCM_FMTBIT_S32,
++			.rates		= SNDRV_PCM_RATE_8000_192000,
++			.channels_min	= 1,
++			.channels_max	= 2,
++		},
++		.ops = &asoc_qcom_qaif_aif_cpu_dai_ops,
++	}, {
++		.id = AIF_TDM_RX_1,
++		.name = "TDM AIF RX One",
++		.playback = {
++			.stream_name = "TDM AIF RX One Playback",
++			.formats	= SNDRV_PCM_FMTBIT_S16 |
++					  SNDRV_PCM_FMTBIT_S24 |
++					  SNDRV_PCM_FMTBIT_S32,
++			.rates		= SNDRV_PCM_RATE_8000_192000,
++			.channels_min	= 1,
++			.channels_max	= 8,
++		},
++		.ops = &asoc_qcom_qaif_aif_cpu_dai_ops,
++	}, {
++		.id = AIF_TDM_TX_1,
++		.name = "TDM AIF TX One",
++		.capture = {
++			.stream_name = "TDM AIF TX One Capture",
++			.formats	= SNDRV_PCM_FMTBIT_S16 |
++					  SNDRV_PCM_FMTBIT_S24 |
++					  SNDRV_PCM_FMTBIT_S32,
++			.rates		= SNDRV_PCM_RATE_8000_192000,
++			.channels_min	= 1,
++			.channels_max	= 8,
++		},
++		.ops = &asoc_qcom_qaif_aif_cpu_dai_ops,
++	}, {
++		.id = AIF_MI2S_RX_2,
++		.name = "MI2S AIF RX Two",
++		.playback = {
++			.stream_name = "MI2S AIF RX Two Playback",
++			.formats	= SNDRV_PCM_FMTBIT_S16 |
++					  SNDRV_PCM_FMTBIT_S32,
++			.rates		= SNDRV_PCM_RATE_8000_192000,
++			.channels_min	= 1,
++			.channels_max	= 2,
++		},
++		.ops = &asoc_qcom_qaif_aif_cpu_dai_ops,
++	}, {
++		.id = AIF_MI2S_TX_2,
++		.name = "MI2S AIF TX Two",
++		.capture = {
++			.stream_name = "MI2S AIF TX Two Capture",
++			.formats	= SNDRV_PCM_FMTBIT_S16 |
++					  SNDRV_PCM_FMTBIT_S32,
++			.rates		= SNDRV_PCM_RATE_8000_192000,
++			.channels_min	= 1,
++			.channels_max	= 2,
++		},
++		.ops = &asoc_qcom_qaif_aif_cpu_dai_ops,
++	}, {
++		.id = AIF_TDM_RX_2,
++		.name = "TDM AIF RX Two",
++		.playback = {
++			.stream_name = "TDM AIF RX Two Playback",
++			.formats	= SNDRV_PCM_FMTBIT_S16 |
++					  SNDRV_PCM_FMTBIT_S24 |
++					  SNDRV_PCM_FMTBIT_S32,
++			.rates		= SNDRV_PCM_RATE_8000_192000,
++			.channels_min	= 1,
++			.channels_max	= 8,
++		},
++		.ops = &asoc_qcom_qaif_aif_cpu_dai_ops,
++	}, {
++		.id = AIF_TDM_TX_2,
++		.name = "TDM AIF TX Two",
++		.capture = {
++			.stream_name = "TDM AIF TX Two Capture",
++			.formats	= SNDRV_PCM_FMTBIT_S16 |
++					  SNDRV_PCM_FMTBIT_S24 |
++					  SNDRV_PCM_FMTBIT_S32,
++			.rates		= SNDRV_PCM_RATE_8000_192000,
++			.channels_min	= 1,
++			.channels_max	= 8,
++		},
++		.ops = &asoc_qcom_qaif_aif_cpu_dai_ops,
++	}, {
++		.id = AIF_MI2S_RX_3,
++		.name = "MI2S AIF RX Three",
++		.playback = {
++			.stream_name = "MI2S AIF RX Three Playback",
++			.formats	= SNDRV_PCM_FMTBIT_S16 |
++					  SNDRV_PCM_FMTBIT_S32,
++			.rates		= SNDRV_PCM_RATE_8000_192000,
++			.channels_min	= 1,
++			.channels_max	= 2,
++		},
++		.ops = &asoc_qcom_qaif_aif_cpu_dai_ops,
++	}, {
++		.id = AIF_MI2S_TX_3,
++		.name = "MI2S AIF TX Three",
++		.capture = {
++			.stream_name = "MI2S AIF TX Three Capture",
++			.formats	= SNDRV_PCM_FMTBIT_S16 |
++					  SNDRV_PCM_FMTBIT_S32,
++			.rates		= SNDRV_PCM_RATE_8000_192000,
++			.channels_min	= 1,
++			.channels_max	= 2,
++		},
++		.ops = &asoc_qcom_qaif_aif_cpu_dai_ops,
++	}, {
++		.id = AIF_TDM_RX_3,
++		.name = "TDM AIF RX Three",
++		.playback = {
++			.stream_name = "TDM AIF RX Three Playback",
++			.formats	= SNDRV_PCM_FMTBIT_S16 |
++					  SNDRV_PCM_FMTBIT_S24 |
++					  SNDRV_PCM_FMTBIT_S32,
++			.rates		= SNDRV_PCM_RATE_8000_192000,
++			.channels_min	= 1,
++			.channels_max	= 8,
++		},
++		.ops = &asoc_qcom_qaif_aif_cpu_dai_ops,
++	}, {
++		.id = AIF_TDM_TX_3,
++		.name = "TDM AIF TX Three",
++		.capture = {
++			.stream_name = "TDM AIF TX Three Capture",
++			.formats	= SNDRV_PCM_FMTBIT_S16 |
++					  SNDRV_PCM_FMTBIT_S24 |
++					  SNDRV_PCM_FMTBIT_S32,
++			.rates		= SNDRV_PCM_RATE_8000_192000,
++			.channels_min	= 1,
++			.channels_max	= 8,
++		},
++		.ops = &asoc_qcom_qaif_aif_cpu_dai_ops,
++	}, {
++		.id = RX_CODEC_DMA_RX_0,
++		.name = "RX CDC DMA RX0",
++		.playback = {
++			.stream_name = "RX CDC DMA RX0 Playback",
++			.formats = SNDRV_PCM_FMTBIT_S16,
++			.rates = SNDRV_PCM_RATE_48000,
++			.rate_min	= 48000,
++			.rate_max	= 48000,
++			.channels_min	= 1,
++			.channels_max	= 2,
++		},
++		.ops	= &asoc_qcom_qaif_cif_dai_ops,
++	}, {
++		.id = RX_CODEC_DMA_RX_1,
++		.name = "RX CDC DMA RX1",
++		.playback = {
++			.stream_name = "RX CDC DMA RX1 Playback",
++			.formats = SNDRV_PCM_FMTBIT_S16,
++			.rates = SNDRV_PCM_RATE_48000,
++			.rate_min	= 48000,
++			.rate_max	= 48000,
++			.channels_min	= 1,
++			.channels_max	= 2,
++		},
++		.ops	= &asoc_qcom_qaif_cif_dai_ops,
++	}, {
++		.id = VA_CODEC_DMA_TX_0,
++		.name = "VA CDC DMA TX0",
++		.capture = {
++			.stream_name = "VA CDC DMA TX0 Capture",
++			.formats = SNDRV_PCM_FMTBIT_S16,
++			.rates = SNDRV_PCM_RATE_48000,
++			.rate_min	= 48000,
++			.rate_max	= 48000,
++			.channels_min	= 1,
++			.channels_max	= 4,
++		},
++		.ops	= &asoc_qcom_qaif_cif_dai_ops,
++	}, {
++		.id = VA_CODEC_DMA_TX_1,
++		.name = "VA CDC DMA TX1",
++		.capture = {
++			.stream_name = "VA CDC DMA TX1 Capture",
++			.formats = SNDRV_PCM_FMTBIT_S16,
++			.rates = SNDRV_PCM_RATE_48000,
++			.rate_min	= 48000,
++			.rate_max	= 48000,
++			.channels_min	= 1,
++			.channels_max	= 4,
++		},
++		.ops	= &asoc_qcom_qaif_cif_dai_ops,
++	},
++};
++
++static int shikra_qaif_get_dma_idx(unsigned int dai_id)
++{
++	const struct qaif_dmaidx_dai_map *map;
++	int i, size;
++
++	if (dai_id >= AIF_MI2S_RX_0 && dai_id <= AIF_MI2S_TX_12) {
++		map = shikra_mi2s_dma_dai_map;
++		size = ARRAY_SIZE(shikra_mi2s_dma_dai_map);
++	} else if (dai_id >= AIF_TDM_RX_0 && dai_id <= AIF_TDM_TX_12) {
++		map = shikra_tdm_dma_dai_map;
++		size = ARRAY_SIZE(shikra_tdm_dma_dai_map);
++	} else {
++		map = shikra_cif_dma_dai_map;
++		size = ARRAY_SIZE(shikra_cif_dma_dai_map);
 +	}
 +
- 	ret = __rpmh_write(dev, RPMH_ACTIVE_ONLY_STATE, &rpm_msg);
- 	if (ret)
- 		return ret;
++	for (i = 0; i < size; i++) {
++		if (map[i].dai_id == dai_id)
++			return map[i].dma_idx;
++	}
++	return -EINVAL;
++}
++
++static int shikra_qaif_alloc_stream_dma_idx(struct qaif_drv_data *drvdata,
++					    int direction,
++					    unsigned int dai_id)
++{
++	const struct qaif_variant *v = drvdata->variant;
++	int dma_idx, index;
++
++	dma_idx = shikra_qaif_get_dma_idx(dai_id);
++	if (dma_idx < 0)
++		return dma_idx;
++
++	if (qaif_is_aif_port(dai_id)) {
++		index = (direction == SNDRV_PCM_STREAM_PLAYBACK) ?
++			dma_idx : v->wrdma_start + dma_idx;
++		if (index >= QAIF_MAX_AIF_DMA_IDX)
++			return -EINVAL;
++		if (test_and_set_bit(index, &drvdata->aif_dma_idx_bit_map))
++			return -EBUSY;
++	} else if (qaif_is_cif_port(dai_id)) {
++		index = (direction == SNDRV_PCM_STREAM_PLAYBACK) ?
++			dma_idx : v->codec_wrdma_start + dma_idx;
++		if (index >= QAIF_MAX_CIF_DMA_IDX)
++			return -EINVAL;
++		if (test_and_set_bit(index, &drvdata->cif_dma_idx_bit_map))
++			return -EBUSY;
++	} else {
++		return -EINVAL;
++	}
++
++	return index;
++}
++
++static int shikra_qaif_free_stream_dma_idx(struct qaif_drv_data *drvdata,
++					   int index,
++					   unsigned int dai_id)
++{
++	if (qaif_is_aif_port(dai_id))
++		clear_bit(index, &drvdata->aif_dma_idx_bit_map);
++	else
++		clear_bit(index, &drvdata->cif_dma_idx_bit_map);
++	return 0;
++}
++
++static const struct qaif_variant shikra_qaif_data = {
++	.ee = 0,
++
++	.num_rddma = 4,
++	.num_wrdma = 4,
++	.wrdma_start = 4,
++
++	.num_codec_rddma = 4,
++	.num_codec_wrdma = 4,
++	.codec_wrdma_start = 4,
++	.num_intf = 4,
++
++	.rddma_reg_base = 0x8000,
++	.rddma_stride = 0x1000,
++	.codec_rddma_reg_base = 0xc000,
++	.codec_rddma_stride = 0x1000,
++
++	.wrdma_reg_base = 0x11000,
++	.wrdma_stride = 0x1000,
++	.codec_wrdma_reg_base = 0x15000,
++	.codec_wrdma_stride = 0x1000,
++
++	.rddma_irq_reg_base = 0x19000,
++	.rddma_irq_stride = 0x1000,
++	.codec_rddma_irq_reg_base = 0x191A0,
++	.codec_rddma_irq_stride = 0x1000,
++
++	.wrdma_irq_reg_base = 0x19078,
++	.wrdma_irq_stride = 0x1000,
++	.codec_wrdma_irq_reg_base = 0x19290,
++	.codec_wrdma_irq_stride = 0x1000,
++
++	.qxm_type = QAIF_QXM0,
++	.rd_len = 512,
++	.rddma_shram_len = 64,
++	.rddma_shram_start_addr = {0, 256},
++	.wr_len = 512,
++	.wrdma_shram_len = 64,
++	.wrdma_shram_start_addr = {0, 256},
++
++	.clk_name		= (const char * const []) {
++					"lpass_config",
++					"lpass_core_axim",
++					"bus",
++				},
++	.num_clks		= 3,
++
++	.dai_driver		= shikra_qaif_cpu_dai_driver,
++	.num_dai		= ARRAY_SIZE(shikra_qaif_cpu_dai_driver),
++
++	.dai_bit_clk_names	= (const char * const []) {
++					"aif_if0_ibit",
++					"aif_if1_ibit",
++					"aif_if2_ibit",
++					"aif_if3_ibit",
++				},
++	.aif_full_cycle_en	= (const bool []) { false, false, false, false },
++	.aif_ctrl_data_oe	= (const bool []) { false, false, false, false },
++	.aif_loopback_en	= (const bool []) { false, false, false, false },
++	.alloc_stream_dma_idx	= shikra_qaif_alloc_stream_dma_idx,
++	.free_stream_dma_idx	= shikra_qaif_free_stream_dma_idx,
++	.get_dma_idx		= shikra_qaif_get_dma_idx,
++};
++
++static const struct of_device_id shikra_qaif_cpu_device_id[] = {
++	{ .compatible = "qcom,shikra-qaif-cpu", .data = &shikra_qaif_data },
++	{}
++};
++MODULE_DEVICE_TABLE(of, shikra_qaif_cpu_device_id);
++
++static struct platform_driver shikra_qaif_cpu_platform_driver = {
++	.driver = {
++		.name = "shikra-qaif-cpu",
++		.of_match_table = shikra_qaif_cpu_device_id,
++		.pm = pm_ptr(&asoc_qcom_qaif_pm_ops),
++	},
++	.probe = asoc_qcom_qaif_cpu_platform_probe,
++};
++module_platform_driver(shikra_qaif_cpu_platform_driver);
++
++MODULE_DESCRIPTION("Qualcomm Audio Interface (QAIF) Shikra variant driver");
++MODULE_AUTHOR("Harendra Gautam <harendra.gautam@oss.qualcomm.com>");
++MODULE_LICENSE("GPL");
 
 -- 
-2.43.0
+2.34.1
 
