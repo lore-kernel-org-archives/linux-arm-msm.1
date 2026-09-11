@@ -1,372 +1,234 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6C8CF43713C;
-	Fri, 11 Sep 2026 22:12:11 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 434863DD52F
+	for <linux-arm-msm@vger.kernel.org>; Fri, 11 Sep 2026 22:25:50 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789164733; cv=none; b=ew4ce9SXPPjJQS+0XRxs4Hvn9w8zJ3GiUPkoADgHh9lOGDG9dvDh9AI4I8mW8HtZF2JbD3CBU6mrXALUsqPbILOkCRjt8h6QAoIYNhayBRkd7a7Pi+nnIDQD23pCUUvSKpJ9e5bA747pPzs2hDFVm5xj8z29XigVbU9WyY/Yldc=
+	t=1789165556; cv=none; b=T4+Ohb7ZzslKo8ZVxN9e0/9jUFlW2JnCNvWR5PjsDwlKqSC/WxSQA/1c/+R/iVfUCVeMpuVLWDm+uSmzcOk2mKy5z8KPaT4DkhF1oZXngX8GqDhBaXmbeOTwh6hxJl18pE02AtJj7NP1eTY075abt7fKbk6D+9MnrE3SxHwODWw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789164733; c=relaxed/simple;
-	bh=7SacOg1IENiLKpqU81RPB0pY6bRjEI9ald8g9YA+/JA=;
-	h=Date:From:To:Cc:Subject:Message-ID:MIME-Version:Content-Type:
-	 Content-Disposition:In-Reply-To; b=ZzbqqbE74canXHyXIHMJKKET/hV7ctskd86qoUbjs5IntBYVeFCAr3q7psIQJrYs0CM3p9QpPlcgfdvS09Yt9YLfpLcWNA/Y113kt+nRMr2DAo9W1oNHMlYiIPHVsjaZ04TGboO3kua6GqwJAMTopDVuMCgUhxId1c9BGCeMG+4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=fpZSM3z6; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1789165556; c=relaxed/simple;
+	bh=ZL2A2cFHlRhAKSuQ9oyrYwVIfm2ZzCci0b8JvPtYKrc=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=W0FEua8HfL3OF8AVAIvm9+YVO/+DJ20cJcqKYUaVJv99vGDHbuTDldLpkYvZPzkvKz1IgjZfjVETOfzB15Ifp/FmAoFb6chMD17MW4XClrNOXz8nILVtClVwKUY+rMhvURX44DRe6yu/EE4ayTvwDsMhjrPIRmmNuL27M0RLGHc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=Nz4fFmc+; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=XluIJ+te; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="fpZSM3z6"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id CD6811F000FF;
-	Fri, 11 Sep 2026 22:12:10 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1789164731;
-	bh=zcSpC8B/zBe1QBiSP3SsQ8IbOXdwAlEg8XGj9L10bq8=;
-	h=Date:From:To:Cc:Subject:In-Reply-To;
-	b=fpZSM3z6PJ9swFzsvH+djv6QNuc3r3Jbh6fc5fg1plDIs1WScdIHvAlLBKslHFOpC
-	 VUlgeo0f4KrBy7cqz2x9XD+Eh3NSgeWTi4XevOllxU7aRx6le8EGCRlOn+NRS1y7ZT
-	 GYBZJbc5xO7X6hzpn+Zvxucqhh1evUkZ/RnAsEuHLV1vwBDcR/+mcWL3e5UX0jetdV
-	 yVMQfWSmiYNtJBa+MBKplM6FwGvkAsIabg7ccf5NsRaHmsVooL7N1AKbaAWG/Rv2bV
-	 0AwWtnXJG/bkaR0cMvSqKCps8HWA3DXqOgv3MqLk2Vx/pAe1cBKiOZbR7fWWy90N/G
-	 b2VIe389tv9qg==
-Date: Fri, 11 Sep 2026 17:12:09 -0500
-From: Bjorn Helgaas <helgaas@kernel.org>
-To: Vladimir Oltean <vladimir.oltean@nxp.com>
-Cc: linux-pci@vger.kernel.org, linux-kernel@vger.kernel.org,
-	linux-omap@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
-	linux-rockchip@lists.infradead.org, linux-arm-msm@vger.kernel.org,
-	linux-riscv@lists.infradead.org, spacemit@lists.linux.dev,
-	linux-tegra@vger.kernel.org, Bjorn Helgaas <bhelgaas@google.com>,
-	Manivannan Sadhasivam <mani@kernel.org>,
-	Lorenzo Pieralisi <lpieralisi@kernel.org>,
-	Krzysztof =?utf-8?Q?Wilczy=C5=84ski?= <kwilczynski@kernel.org>,
-	Rob Herring <robh@kernel.org>,
-	Vignesh Raghavendra <vigneshr@ti.com>,
-	Siddharth Vadapalli <s-vadapalli@ti.com>,
-	Felix Gu <ustc.gu@gmail.com>
-Subject: Re: [PATCH v9 3/3] PCI: Remove device links to PHY
-Message-ID: <20260911221209.GA587622@bhelgaas>
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="Nz4fFmc+";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="XluIJ+te"
+Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68BHWdHh972171
+	for <linux-arm-msm@vger.kernel.org>; Fri, 11 Sep 2026 22:25:48 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=zrkXTFmlVQPcnpPC8U/nG2
+	oDFHYiPrW26FCuVN6FIbM=; b=Nz4fFmc+3q+4nYFt4RGFkV8rHsuq9n7y0j/sT9
+	6RBjPxeI7LETEmQx0wMaKjK5zN9HbHV3qWtGgXdaQweVtAvJkoy4jfQfBPurC9OE
+	D4TGEi930v87yr864sGf8EI6Q/b8ssQ3er447C2YMnr6PoLar8y6GbBe2vUWIBZd
+	U56U7UP7axarq8JU/UwW12/Hl84C2Fv5RAhwkmxmaCUBAo3PVdTWR64T0ZCuodKv
+	xUcth9ZfBDiqv14PkaEVnDycK8PVEVVrGSCQNCLXi2gtaEZtiGZisYXhOO2jatss
+	ZvV32ym29jvOUiMKwHMtmnzqPov8GqH/aWsI+9SAzEZ+XJlA==
+Received: from mail-pg1-f198.google.com (mail-pg1-f198.google.com [209.85.215.198])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gmm22sj7d-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 11 Sep 2026 22:25:48 +0000 (GMT)
+Received: by mail-pg1-f198.google.com with SMTP id 41be03b00d2f7-cc1b8088203so1518423a12.3
+        for <linux-arm-msm@vger.kernel.org>; Fri, 11 Sep 2026 15:25:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1789165547; x=1789770347; darn=vger.kernel.org;
+        h=cc:to:message-id:content-transfer-encoding:content-type
+         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=zrkXTFmlVQPcnpPC8U/nG2oDFHYiPrW26FCuVN6FIbM=;
+        b=XluIJ+teK8PgecRI6E4g7itV0x1ylRj7WB/XH5wmbeqCR4Bf/OCtXn6U38P4D7RyXW
+         7bBbgu3TSddTN+tkmLQLQnpFC/3+w78Bp1UtSUp3Xdsoq8xFj3OPjx0Umc3my5V2sFfy
+         nIA8GRfPGIn3G8HE/KIjdwPwFPmxcSQg7Zizqhi+hVzcNET7bBcvmdtO2jDid42UOXYC
+         fjKZVLlyXq9+FuI+SCE7knjdh4b1KHnqMZ18r2hiK4hXWweY+2ZXB3/fdc1kzdr26BJI
+         fvuU0iJZVOo9ZTF6F7rqp+qwMxj8Yygl92KQ9/rDZEeyipa81XtI3R1vzpjFKsPDVXM/
+         AH2Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1789165547; x=1789770347;
+        h=cc:to:message-id:content-transfer-encoding:content-type
+         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to:content-type;
+        bh=zrkXTFmlVQPcnpPC8U/nG2oDFHYiPrW26FCuVN6FIbM=;
+        b=cE9wHQ/sU5aRyEcNRzD4aCdHLyb/pBHVEnyUd3xc0rErQinqcxz0To8+Gqjesh50U+
+         gsUmtSEE2VcARPWrQwKF0hoDjb/I5LTAoAmuav4vi4T+TsfOj1+2rJYYxpwXmuePyWVb
+         flOCd1EVKydt2zqpOhsVYIbvPu3zQaC7zI/5kd2GO4vGeT3P7admSSVFlXaQqpl+qdWa
+         cbVuBBatOcuddJqmI5YfRyQZZEGh8HhD/NE+lDpAmY991lbp62QeWLT4vsojUAsPulCH
+         NCWVKn36g7EKW7SH1mdTgqh2cUMGgE/WbMiquPrsmjDyD5d5kju15HRVEnKpIR1/pVoZ
+         QyfQ==
+X-Forwarded-Encrypted: i=1; AKwUvBwYyLI1/9ciwLGwTdD6jqk0BzPy4RXQBFXaHU4LX9r+M4As/VuP2wWEkAOmDvFw7ZGWH/qHVTnIc+pc3WGz@vger.kernel.org
+X-Gm-Message-State: AFuF++kqoTOAL9jNwpi8HL+FH9SxDfkmg+8mQillnCgXgLw0wueTKM6f
+	HB5M/MN419lhPQoiDK4Mz0XA/D7gpe6gDeWWWVlBoHt4MzGpMWwReio19yfdlZzHSHYbN+KqiRr
+	uKU3aSy+r7ftYYhjrdM2GHWHtkOQQ7wbzlEfhcIyXMvMIKi9BTc5QF7w1X82aYjRQkUZl
+X-Gm-Gg: AYBFou2M1ook+A7gFDsYy3rSU0wwgmMHmFmeMNJsZtuESylPxHnIoeI7QHnmFGYTGau
+	sTcBuCjU5dRd9vvdMAe9IvC3qPuSjICOiD5ucp7tACqdZHG4Oow6zlaEH7daW4n+jdBmeNmJXiv
+	IvKJzNb7NJsDP8Eje+7xqRL+aejRBu1ePKuMME34qheM6Iq7Hchxn7dFiTytYiMMPjgyE3cEnUQ
+	s4v1r22iahiCX02VU3ShnqK5rgADDaUwRHlEJtxcu+sFzT9fB5jz62RbtR/sXbUX3mtuhzUoODj
+	krGgpaZEygDXFrfHg9rOgyZWdh85GrRmksPxoOg+506rNsjCybHabjnoouUaXj+gqJOwKyCTUFK
+	vnPFzOpgkyABEN4HY5iHicTV6a5zpOG0=
+X-Received: by 2002:a05:6a21:138e:b0:3d3:b00a:7082 with SMTP id adf61e73a8af0-3db0e48256bmr382370637.28.1789165547004;
+        Fri, 11 Sep 2026 15:25:47 -0700 (PDT)
+X-Received: by 2002:a05:6a21:138e:b0:3d3:b00a:7082 with SMTP id adf61e73a8af0-3db0e48256bmr382332637.28.1789165546468;
+        Fri, 11 Sep 2026 15:25:46 -0700 (PDT)
+Received: from hu-bibekkum-hyd.qualcomm.com ([202.46.22.19])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-33ba4f739b5sm9213321eec.25.2026.09.11.15.25.43
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 11 Sep 2026 15:25:45 -0700 (PDT)
+From: Bibek Kumar Patro <bibek.patro@oss.qualcomm.com>
+Date: Sat, 12 Sep 2026 03:55:38 +0530
+Subject: [PATCH] iommu: arm-smmu-qcom: Skip fault-info reads when suspended
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <20260810124315.433448-4-vladimir.oltean@nxp.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260912-priv_call_runtime_handlers-v1-1-fc0c3a17523f@oss.qualcomm.com>
+X-B4-Tracking: v=1; b=H4sIAOF/pGoC/yXMQQqDMBBA0avIrA3EGCt6FZFg49hOiVFmVAri3
+ Zu2yweff4IgEwq02QmMBwktMaHIM/DPIT5Q0ZgMRpubbgqjVqbD+SEEx3vcaEaXsjEgi6qnsrJ
+ 1Za22GtJgZZzo/Zt3/d+y31/ot+8RrusDGsMagn4AAAA=
+X-Change-ID: 20260912-priv_call_runtime_handlers-7f3547544040
+To: Rob Clark <robin.clark@oss.qualcomm.com>, Will Deacon <will@kernel.org>,
+        Robin Murphy <robin.murphy@arm.com>,
+        "Joerg Roedel (AMD)" <joro@8bytes.org>
+Cc: iommu@lists.linux.dev, linux-arm-msm@vger.kernel.org,
+        linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org,
+        Bibek Kumar Patro <bibek.patro@oss.qualcomm.com>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1789165542; l=3706;
+ i=bibek.patro@oss.qualcomm.com; s=20260617; h=from:subject:message-id;
+ bh=ZL2A2cFHlRhAKSuQ9oyrYwVIfm2ZzCci0b8JvPtYKrc=;
+ b=wtl28Fbdd6qYisueH5Nk753b3YTVUJyX0jmUcgObLW99BpkEMzkerPCmXfpJNlpCsF2blsOhf
+ aSlOmE9xVBnB3e3iXcUCRaQvOyaulsDfn9heSVcHUyAhbNIgn7IHefe
+X-Developer-Key: i=bibek.patro@oss.qualcomm.com; a=ed25519;
+ pk=DkrbE5dhskZJmBAKR5LygWRsAydEOSN+T0/YxNYxDLM=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTExMDMxNyBTYWx0ZWRfX2Ug2a0YEKnCM
+ nxwxrLyL2iQ1xB16hcxosLuqzCUZ3mUHiFHuYcRPfxIuxgHoHj9zZf1bP4RxvlAlNb6m+Dy56eN
+ pWKWjUU7EmyBDAhsjsweuTplLonE13PGmMCsXs111aCPdUAZsIiBIdX/nC57OuMEZSshEHCGqF7
+ a60/1dk8xNCn//2O2TsFJjjBzK5iBNXq4ZP1VOzFnjEc/SWKNWtvtRriyPCqnoEbQ91jOhwp/sS
+ XD92cEpSMjsz3wYerWjg946l6f4L9ZQH0JxXdmK68JQPpBg10Y9bhQ9fxHgFp8/LA8i0DDd77MH
+ 5sp/9NmyV8zepBnsBGkqPUmEbm+woVz98patxYTRobnhDdu++Z5/1Pc2DmwiKQJtLRk2CnU5zv1
+ pcBrAWFfqUGkwtLt+NNaWDfoY8O1p8+gCBL3uH+KoraQFHBGcaTxKhc6/yO/MImZgrV3nYd5ymz
+ SBgZSOh0Ss0q8XiiZgw==
+X-Authority-Analysis: v=2.4 cv=LPDz05W9 c=1 sm=1 tr=0 ts=6aa47fec cx=c_pps
+ a=Qgeoaf8Lrialg5Z894R3/Q==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
+ a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_glEPmIy2e8OvE2BGh3C:22
+ a=EUspDBNiAAAA:8 a=FyyklSoAK86a5T4BgM4A:9 a=QEXdDO2ut3YA:10
+ a=x9snwWr2DeNwDh03kgHS:22
+X-Proofpoint-ORIG-GUID: mT4xvUWGhEg9QMyrkpDJyTdbOo0oshaN
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTExMDMxNyBTYWx0ZWRfXx0MgEvbLwRLZ
+ sVImiCQrTqA1cKx3QpwsV4C/1pJp3cjm9JdbLaBlNZeG4OuCh4vCul/t3bQzbDZovHKVGOS/k44
+ SDcnNfeC3Cnp+LyIdjdsadjvSUHuWNQ=
+X-Proofpoint-GUID: mT4xvUWGhEg9QMyrkpDJyTdbOo0oshaN
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-09-11_06,2026-09-11_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ lowpriorityscore=0 adultscore=0 clxscore=1015 bulkscore=0 impostorscore=0
+ malwarescore=0 spamscore=0 suspectscore=0 priorityscore=1501 phishscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609110317
 
-[+cc Felix, author of device link leak fixes]
+qcom_adreno_smmu_get_fault_info() accesses SMMU registers without
+holding a runtime PM reference. A fault is raised while the SMMU is
+active, but the GPU may drop its power vote before the threaded fault
+handler reaches the callback, allowing the SMMU to runtime suspend.
 
-On Mon, Aug 10, 2026 at 03:43:15PM +0300, Vladimir Oltean wrote:
-> This is practically a full revert of commit
-> 7a4db656a635 ("PCI: dra7xx: Create functional dependency between PCIe and PHY")
-> and a partial revert of the device link pieces from commits
-> dfb80534692d ("PCI: cadence: Add generic PHY support to host and EP drivers")
-> 49229238ab47 ("PCI: keystone: Cleanup PHY handling")
+Accessing the SMMU registers after suspend has started is unsafe and
+may cause subsequent register accesses during runtime resume to fail
+with a NoC error and an asynchronous SError.
 
-Can we split this into three commits (dra7xx, cadence, keystone)?
-This combined commit is applied on the pci/controller/misc branch, and
-then we have conflicts between that branch and
-pci/controller/dwc-dra7xx.
+Use pm_runtime_get_if_active() to keep the SMMU active while collecting
+the fault information, and skip the register reads if suspend has
+already started.
 
-I think if we split this into three separate commits, we can apply the
-dra7xx one on pci/controller/dwc-dra7xx and drop Felix's device link
-leak fixes below so we don't clutter the git history with conflict
-resolutions or irrelevant commits:
+Signed-off-by: Bibek Kumar Patro <bibek.patro@oss.qualcomm.com>
+---
+qcom_adreno_smmu_get_fault_info() accesses SMMU registers without
+holding a runtime PM reference. A fault is raised while the SMMU is
+active, but the GPU may drop its power vote before the threaded fault
+handler reaches the callback, allowing the SMMU to runtime suspend.
 
-  https://git.kernel.org/cgit/linux/kernel/git/pci/pci.git/commit/?id=2b9a036b568c ("PCI: dra7xx: Fix device link leak when devm_phy_get() fails")
+The failure sequence:
 
-  https://git.kernel.org/cgit/linux/kernel/git/pci/pci.git/commit/?id=bdfdf654b4b2 ("PCI: dra7xx: Fix device links leak when dra7xx_pcie_enable_phy() fails")
+  GPU context fault
+          |
+          v
+  qcom_adreno_smmu_get_fault_info()
+          |
+          | GPU drops its power vote
+          | SMMU starts runtime suspend
+          v
+  SMMU register access without an active RPM reference
+          |
+          v
+  later Adreno PRR private-interface operation
+          |
+          v
+  pm_runtime_resume_and_get()
+          |
+          v
+  arm_smmu_runtime_resume()
+          |
+          v
+  arm_smmu_device_reset()
+          |
+          v
+  SMMU register access
+          |
+          v
+  NoC error / asynchronous SError
 
-> The trouble with these commits is that they dereference fields inside
-> struct phy from a consumer driver, which will become no longer possible.
-> 
-> Since commit 987351e1ea77 ("phy: core: Add consumer device link
-> support") from 2019, the PHY core also adds a device link to order PHY
-> provider and consumer suspend/resume operations. All reverted commits
-> are from 2017-2018, and what they do should actually be redundant now.
-> 
-> Signed-off-by: Vladimir Oltean <vladimir.oltean@nxp.com>
-> Acked-by: Bjorn Helgaas <bhelgaas@google.com>
-> Reviewed-by: Manivannan Sadhasivam <mani@kernel.org>
-> ---
-> Cc: Lorenzo Pieralisi <lpieralisi@kernel.org>
-> Cc: "Krzysztof Wilczyński" <kwilczynski@kernel.org>
-> Cc: Manivannan Sadhasivam <mani@kernel.org>
-> Cc: Rob Herring <robh@kernel.org>
-> Cc: Bjorn Helgaas <bhelgaas@google.com>
-> Cc: Vignesh Raghavendra <vigneshr@ti.com>
-> Cc: Siddharth Vadapalli <s-vadapalli@ti.com>
-> 
-> v8->v9: none
-> v7->v8: only context change - "return 0" became "return ret" for
->         cdns_plat_pcie_probe()
-> v6->v7: none
-> v5->v6: collect tag from Manivannan Sadhasivam
-> v3->v5: none
-> v2->v3:
-> - remove dangling set but unused phy_count local variable in
->   cdns_plat_pcie_probe()
-> v1->v2:
-> - fully remove struct device link **link from struct cdns_pcie and from
->   cdns_plat_pcie_probe() error path
-> - collect tag from Bjorn Helgaas
-> - adjust commit title
-> ---
->  .../controller/cadence/pcie-cadence-plat.c    |  4 ---
->  drivers/pci/controller/cadence/pcie-cadence.c | 16 +---------
->  drivers/pci/controller/cadence/pcie-cadence.h |  2 --
->  drivers/pci/controller/dwc/pci-dra7xx.c       | 16 ----------
->  drivers/pci/controller/dwc/pci-keystone.c     | 31 +++----------------
->  5 files changed, 5 insertions(+), 64 deletions(-)
-> 
-> diff --git a/drivers/pci/controller/cadence/pcie-cadence-plat.c b/drivers/pci/controller/cadence/pcie-cadence-plat.c
-> index 8aed8b4c3e11..13edc6be21f5 100644
-> --- a/drivers/pci/controller/cadence/pcie-cadence-plat.c
-> +++ b/drivers/pci/controller/cadence/pcie-cadence-plat.c
-> @@ -41,7 +41,6 @@ static int cdns_plat_pcie_probe(struct platform_device *pdev)
->  	struct pci_host_bridge *bridge;
->  	struct cdns_pcie_ep *ep;
->  	struct cdns_pcie_rc *rc;
-> -	int phy_count;
->  	bool is_rc;
->  	int ret;
->  
-> @@ -122,9 +121,6 @@ static int cdns_plat_pcie_probe(struct platform_device *pdev)
->  	pm_runtime_put_sync(dev);
->  	pm_runtime_disable(dev);
->  	cdns_pcie_disable_phy(cdns_plat_pcie->pcie);
-> -	phy_count = cdns_plat_pcie->pcie->phy_count;
-> -	while (phy_count--)
-> -		device_link_del(cdns_plat_pcie->pcie->link[phy_count]);
->  
->  	return ret;
->  }
-> diff --git a/drivers/pci/controller/cadence/pcie-cadence.c b/drivers/pci/controller/cadence/pcie-cadence.c
-> index a1eada56edba..0ac980249941 100644
-> --- a/drivers/pci/controller/cadence/pcie-cadence.c
-> +++ b/drivers/pci/controller/cadence/pcie-cadence.c
-> @@ -222,7 +222,6 @@ int cdns_pcie_init_phy(struct device *dev, struct cdns_pcie *pcie)
->  	struct device_node *np = dev->of_node;
->  	int phy_count;
->  	struct phy **phy;
-> -	struct device_link **link;
->  	int i;
->  	int ret;
->  	const char *name;
-> @@ -238,10 +237,6 @@ int cdns_pcie_init_phy(struct device *dev, struct cdns_pcie *pcie)
->  	if (!phy)
->  		return -ENOMEM;
->  
-> -	link = devm_kcalloc(dev, phy_count, sizeof(*link), GFP_KERNEL);
-> -	if (!link)
-> -		return -ENOMEM;
-> -
->  	for (i = 0; i < phy_count; i++) {
->  		of_property_read_string_index(np, "phy-names", i, &name);
->  		phy[i] = devm_phy_get(dev, name);
-> @@ -249,17 +244,10 @@ int cdns_pcie_init_phy(struct device *dev, struct cdns_pcie *pcie)
->  			ret = PTR_ERR(phy[i]);
->  			goto err_phy;
->  		}
-> -		link[i] = device_link_add(dev, &phy[i]->dev, DL_FLAG_STATELESS);
-> -		if (!link[i]) {
-> -			devm_phy_put(dev, phy[i]);
-> -			ret = -EINVAL;
-> -			goto err_phy;
-> -		}
->  	}
->  
->  	pcie->phy_count = phy_count;
->  	pcie->phy = phy;
-> -	pcie->link = link;
->  
->  	ret =  cdns_pcie_enable_phy(pcie);
->  	if (ret)
-> @@ -268,10 +256,8 @@ int cdns_pcie_init_phy(struct device *dev, struct cdns_pcie *pcie)
->  	return 0;
->  
->  err_phy:
-> -	while (--i >= 0) {
-> -		device_link_del(link[i]);
-> +	while (--i >= 0)
->  		devm_phy_put(dev, phy[i]);
-> -	}
->  
->  	return ret;
->  }
-> diff --git a/drivers/pci/controller/cadence/pcie-cadence.h b/drivers/pci/controller/cadence/pcie-cadence.h
-> index b4d51adefea5..4a96e1869e53 100644
-> --- a/drivers/pci/controller/cadence/pcie-cadence.h
-> +++ b/drivers/pci/controller/cadence/pcie-cadence.h
-> @@ -260,7 +260,6 @@ struct cdns_plat_pcie_of_data {
->   * @is_hpa: indicates if the architecture is HPA
->   * @phy_count: number of supported PHY devices
->   * @phy: list of pointers to specific PHY control blocks
-> - * @link: list of pointers to corresponding device link representations
->   * @ops: Platform-specific ops to control various inputs from Cadence PCIe
->   *       wrapper
->   * @cdns_pcie_reg_offsets: Register bank offsets for different SoC
-> @@ -276,7 +275,6 @@ struct cdns_pcie {
->  	bool				     is_hpa;
->  	int			             phy_count;
->  	struct phy		             **phy;
-> -	struct device_link	             **link;
->  	const  struct cdns_pcie_ops          *ops;
->  	const  struct cdns_plat_pcie_of_data *cdns_pcie_reg_offsets;
->  	int				     max_link_speed;
-> diff --git a/drivers/pci/controller/dwc/pci-dra7xx.c b/drivers/pci/controller/dwc/pci-dra7xx.c
-> index 3fc889944f02..bf6c5b86bb27 100644
-> --- a/drivers/pci/controller/dwc/pci-dra7xx.c
-> +++ b/drivers/pci/controller/dwc/pci-dra7xx.c
-> @@ -9,7 +9,6 @@
->  
->  #include <linux/clk.h>
->  #include <linux/delay.h>
-> -#include <linux/device.h>
->  #include <linux/err.h>
->  #include <linux/interrupt.h>
->  #include <linux/irq.h>
-> @@ -678,7 +677,6 @@ static int dra7xx_pcie_probe(struct platform_device *pdev)
->  	int i;
->  	int phy_count;
->  	struct phy **phy;
-> -	struct device_link **link;
->  	void __iomem *base;
->  	struct dw_pcie *pci;
->  	struct dra7xx_pcie *dra7xx;
-> @@ -726,10 +724,6 @@ static int dra7xx_pcie_probe(struct platform_device *pdev)
->  	if (!phy)
->  		return -ENOMEM;
->  
-> -	link = devm_kcalloc(dev, phy_count, sizeof(*link), GFP_KERNEL);
-> -	if (!link)
-> -		return -ENOMEM;
-> -
->  	dra7xx->clk = devm_clk_get_optional(dev, NULL);
->  	if (IS_ERR(dra7xx->clk))
->  		return dev_err_probe(dev, PTR_ERR(dra7xx->clk),
-> @@ -744,12 +738,6 @@ static int dra7xx_pcie_probe(struct platform_device *pdev)
->  		phy[i] = devm_phy_get(dev, name);
->  		if (IS_ERR(phy[i]))
->  			return PTR_ERR(phy[i]);
-> -
-> -		link[i] = device_link_add(dev, &phy[i]->dev, DL_FLAG_STATELESS);
-> -		if (!link[i]) {
-> -			ret = -EINVAL;
-> -			goto err_link;
-> -		}
->  	}
->  
->  	dra7xx->base = base;
-> @@ -851,10 +839,6 @@ static int dra7xx_pcie_probe(struct platform_device *pdev)
->  	pm_runtime_disable(dev);
->  	dra7xx_pcie_disable_phy(dra7xx);
->  
-> -err_link:
-> -	while (--i >= 0)
-> -		device_link_del(link[i]);
-> -
->  	return ret;
->  }
->  
-> diff --git a/drivers/pci/controller/dwc/pci-keystone.c b/drivers/pci/controller/dwc/pci-keystone.c
-> index e9b012a5ea9a..8085c4f61403 100644
-> --- a/drivers/pci/controller/dwc/pci-keystone.c
-> +++ b/drivers/pci/controller/dwc/pci-keystone.c
-> @@ -130,7 +130,6 @@ struct keystone_pcie {
->  	int			num_lanes;
->  	u32			num_viewport;
->  	struct phy		**phy;
-> -	struct device_link	**link;
->  	struct			device_node *msi_intc_np;
->  	struct irq_domain	*intx_irq_domain;
->  	struct device_node	*np;
-> @@ -1130,7 +1129,6 @@ static int ks_pcie_probe(struct platform_device *pdev)
->  	enum dw_pcie_device_mode mode;
->  	struct dw_pcie *pci;
->  	struct keystone_pcie *ks_pcie;
-> -	struct device_link **link;
->  	struct gpio_desc *gpiod;
->  	struct resource *res;
->  	void __iomem *base;
-> @@ -1201,31 +1199,17 @@ static int ks_pcie_probe(struct platform_device *pdev)
->  	if (!phy)
->  		return -ENOMEM;
->  
-> -	link = devm_kcalloc(dev, num_lanes, sizeof(*link), GFP_KERNEL);
-> -	if (!link)
-> -		return -ENOMEM;
-> -
->  	for (i = 0; i < num_lanes; i++) {
->  		snprintf(name, sizeof(name), "pcie-phy%d", i);
->  		phy[i] = devm_phy_optional_get(dev, name);
->  		if (IS_ERR(phy[i])) {
->  			ret = PTR_ERR(phy[i]);
-> -			goto err_link;
-> -		}
-> -
-> -		if (!phy[i])
-> -			continue;
-> -
-> -		link[i] = device_link_add(dev, &phy[i]->dev, DL_FLAG_STATELESS);
-> -		if (!link[i]) {
-> -			ret = -EINVAL;
-> -			goto err_link;
-> +			goto err;
->  		}
->  	}
->  
->  	ks_pcie->np = np;
->  	ks_pcie->pci = pci;
-> -	ks_pcie->link = link;
->  	ks_pcie->num_lanes = num_lanes;
->  	ks_pcie->phy = phy;
->  
-> @@ -1235,7 +1219,7 @@ static int ks_pcie_probe(struct platform_device *pdev)
->  		ret = PTR_ERR(gpiod);
->  		if (ret != -EPROBE_DEFER)
->  			dev_err(dev, "Failed to get reset GPIO\n");
-> -		goto err_link;
-> +		goto err;
->  	}
->  
->  	/* Obtain references to the PHYs */
-> @@ -1250,7 +1234,7 @@ static int ks_pcie_probe(struct platform_device *pdev)
->  
->  	if (ret) {
->  		dev_err(dev, "failed to enable phy\n");
-> -		goto err_link;
-> +		goto err;
->  	}
->  
->  	platform_set_drvdata(pdev, ks_pcie);
-> @@ -1337,25 +1321,18 @@ static int ks_pcie_probe(struct platform_device *pdev)
->  	pm_runtime_disable(dev);
->  	ks_pcie_disable_phy(ks_pcie);
->  
-> -err_link:
-> -	while (--i >= 0 && link[i])
-> -		device_link_del(link[i]);
-> -
-> +err:
->  	return ret;
->  }
->  
->  static void ks_pcie_remove(struct platform_device *pdev)
->  {
->  	struct keystone_pcie *ks_pcie = platform_get_drvdata(pdev);
-> -	struct device_link **link = ks_pcie->link;
-> -	int num_lanes = ks_pcie->num_lanes;
->  	struct device *dev = &pdev->dev;
->  
->  	pm_runtime_put(dev);
->  	pm_runtime_disable(dev);
->  	ks_pcie_disable_phy(ks_pcie);
-> -	while (num_lanes--)
-> -		device_link_del(link[num_lanes]);
->  }
->  
->  static struct platform_driver ks_pcie_driver = {
-> -- 
-> 2.34.1
-> 
+Use pm_runtime_get_if_active() to keep the SMMU active while collecting
+the fault information. If suspend has already started, skip the register
+reads instead of accessing the SMMU while it is being powered down.
+---
+ drivers/iommu/arm/arm-smmu/arm-smmu-qcom.c | 14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
+
+diff --git a/drivers/iommu/arm/arm-smmu/arm-smmu-qcom.c b/drivers/iommu/arm/arm-smmu/arm-smmu-qcom.c
+index 795e8ec7e8fa..b1787a4ba0d3 100644
+--- a/drivers/iommu/arm/arm-smmu/arm-smmu-qcom.c
++++ b/drivers/iommu/arm/arm-smmu/arm-smmu-qcom.c
+@@ -129,6 +129,18 @@ static void qcom_adreno_smmu_get_fault_info(const void *cookie,
+ 	struct arm_smmu_cfg *cfg = &smmu_domain->cfg;
+ 	struct arm_smmu_device *smmu = smmu_domain->smmu;
+ 
++	/*
++	 * A fault can only fire while the SMMU is active (GPU is issuing
++	 * transactions). Use get_if_active so that if by a rare race the
++	 * device has already suspended, we skip the register reads rather
++	 * than triggering a cold resume which would call device_reset and
++	 * destroy the fault state we are trying to capture.
++	 */
++	if (pm_runtime_get_if_active(smmu->dev) <= 0) {
++		dev_warn(smmu->dev, "get_fault_info: device not active, skipping\n");
++		return;
++	}
++
+ 	info->fsr = arm_smmu_cb_read(smmu, cfg->cbndx, ARM_SMMU_CB_FSR);
+ 	info->fsynr0 = arm_smmu_cb_read(smmu, cfg->cbndx, ARM_SMMU_CB_FSYNR0);
+ 	info->fsynr1 = arm_smmu_cb_read(smmu, cfg->cbndx, ARM_SMMU_CB_FSYNR1);
+@@ -136,6 +148,8 @@ static void qcom_adreno_smmu_get_fault_info(const void *cookie,
+ 	info->cbfrsynra = arm_smmu_gr1_read(smmu, ARM_SMMU_GR1_CBFRSYNRA(cfg->cbndx));
+ 	info->ttbr0 = arm_smmu_cb_readq(smmu, cfg->cbndx, ARM_SMMU_CB_TTBR0);
+ 	info->contextidr = arm_smmu_cb_read(smmu, cfg->cbndx, ARM_SMMU_CB_CONTEXTIDR);
++
++	pm_runtime_put_autosuspend(smmu->dev);
+ }
+ 
+ static void qcom_adreno_smmu_set_stall(const void *cookie, bool enabled)
+
+---
+base-commit: f61bb3920fa8cb44b84d32e0fa9fbaab4eb00c80
+change-id: 20260912-priv_call_runtime_handlers-7f3547544040
+
+Best regards,
+--  
+Bibek Kumar Patro <bibek.patro@oss.qualcomm.com>
+
