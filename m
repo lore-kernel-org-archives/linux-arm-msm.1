@@ -1,74 +1,104 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 726F03EFFC3;
-	Fri, 11 Sep 2026 08:36:48 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5E2F046AA85;
+	Fri, 11 Sep 2026 08:43:55 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789115810; cv=none; b=aAFNZPQMgv4a00sgLDJ4ToceGLHdxXWc2Nl8/4sJHc8qp/2oEWXCLlhaQCarykr3A50y0DFBc/65kEyiGrZkbUfJEuY9Ip4F37d8EdR3TWnyl7n846o5EMqy71VrIpsmXebgwv9M9Z5U22Fr7Sf0S9tKd6GsG2zGPFgTGPNzEAQ=
+	t=1789116237; cv=none; b=R0W6leOStnm/CRpR6kAeF692Fyvw5QAlAhYk/+GEf6wtvyslwb7iJZioOMKkXDjLfENPlu/wM47tSqneoib69eOVDmsqod5meWwB9uTbunU86UkjXxGzlp5qmPgl8JHaNfUPsUqD/TxUlIgxcPiEMJDzMaqqzC1Hzo1keHq9s1w=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789115810; c=relaxed/simple;
-	bh=ac/UXho56Q3YaxpXmd7TM5v7erW4vLhYjTAzIga1LFA=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=ebBUtwfFawqNIEONJACmahBKMrFb/xuO7SwO+WmbktBUbKNrhEGNw/FPtEy1UfGtgjoIL+IvhBH+SfFsH2/+38Vw+fWv3ar2mdCdeYVb26ejwi6hxn/lz00EPB15m9WricBNQgiePtQGdJCNUEm3bvhtlWBW96TGy27ADShonk4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=YXabYVkB; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1789116237; c=relaxed/simple;
+	bh=2IBqPAqPjl1RxfMLyiUtUS0gt8YqNj+UtUwvRtNHx/4=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=M7LOj56TkgHBbaQyQ1BtPSfwD9DPTxlQkcPWKc06bx0gU7FYyWBseM8s6tE463zu5mOPIk9cCZlSgmfiZBy67o8G1DB7hMfPWRi+4KPkhFnhLOUOAxIE39kw1q7QZGh/ZtHHGHHpOwYfiNlXPI7+ZTL1aPETQUCFXr9JxiklqQU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=KLww74no; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="YXabYVkB"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id DF9201F000FF;
-	Fri, 11 Sep 2026 08:36:45 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="KLww74no"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id BD4BE1F000FF;
+	Fri, 11 Sep 2026 08:43:53 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1789115807;
-	bh=vG9ckl+amOULFkJfxIKjmXT0X3mKOQi9U3WoU2ETxVw=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=YXabYVkBhmeVT9S3RYesFSALzQ++YC3ZxyiyvyvMoy0Q4oORdvbsW4n+H9SwNZ8Co
-	 rpSUaJ6EcPCjA7CUuvJ1XHB9gUR67QyET/3Qpdo9PPW9bBhok87brrIGUvP/dS5+Cd
-	 cwuAYRNcUzzhXHv0pziM6Jnr/Ckq9PG+Ojyc9zq75EPoQ/9c4IAl/lg/LhDU1E4dBK
-	 XERqzbpEvKh9Nil9IOC7Vosaci1P56cc1+b80DDkhckiy7bRrrYEqt1rnMmX7P3p2i
-	 Jsjfdj4VIB/8gGfHP9TTwh21gFGIDD4exqA2e4EGe9WPNcxd2BMcfPIsrAUwE035fu
-	 PtrBApivYFsNw==
-Date: Fri, 11 Sep 2026 10:36:43 +0200
-From: Krzysztof Kozlowski <krzk@kernel.org>
-To: Mohammad Rafi Shaik <mohammad.rafi.shaik@oss.qualcomm.com>
-Cc: Rob Herring <robh@kernel.org>, 
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
-	Srinivas Kandagatla <srini@kernel.org>, Rao Mandadapu <quic_srivasam@quicinc.com>, 
-	Vinod Koul <vkoul@kernel.org>, Bard Liao <yung-chuan.liao@linux.intel.com>, 
-	Pierre-Louis Bossart <pierre-louis.bossart@linux.dev>, linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, linux-sound@vger.kernel.org
-Subject: Re: [PATCH v2 1/2] dt-bindings: soundwire: qcom: add
- qcom,shikra-soundwire compatible
-Message-ID: <20260911-pastel-quixotic-hedgehog-a2ae2b@quoll>
-References: <20260910-shikra_soundwire_support-v2-0-f98c9a6ea1e1@oss.qualcomm.com>
- <20260910-shikra_soundwire_support-v2-1-f98c9a6ea1e1@oss.qualcomm.com>
+	s=k20260515; t=1789116235;
+	bh=ju22f4kGM/ljQr26IAQP0LJMv/6Rf0OzaOlVs5+VPI0=;
+	h=From:Date:Subject:To:Cc;
+	b=KLww74nociXNTdPYioz0QJTNHfwE/zHhHol+wAZCLOab6DB7WejmS0OGNZFRhBX88
+	 qzNr877FY7TLtgOh1hrq+/lvuHISL5dCmVzT3a7bIb4LoqurZfXNTIQ+BZ/LuNZ3dD
+	 uBaWsr0v/mouIXSn1SMRjZnSUJuU+I0kaZV1/4SWLap+lT1OqTgvmb6/DdCkSVp/6j
+	 VPlXiM+MxVWw6LZLKOHRRcJraFvQUhzb8eEpyOj2OFmBNmrI4fi6c2L8SyLJfbNTAN
+	 RJQ9Vy6SX0L4kizeq8XVIZ/W/7mPJvIiXgwmtGgJ9JQd5F0d+IWEEA1/pTHlxBpEkP
+	 JAQJLzWflSt2w==
+From: Konrad Dybcio <konradybcio@kernel.org>
+Date: Fri, 11 Sep 2026 10:43:47 +0200
+Subject: [PATCH] arm64: dts: qcom: msm8994-octagon: Remove ad7147_captouch
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <20260910-shikra_soundwire_support-v2-1-f98c9a6ea1e1@oss.qualcomm.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260911-topic-lumia_drop_captouch-v1-1-6f92f1f3c6d3@oss.qualcomm.com>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXMTQqDMBBA4avIrA1MXAjpVUqRZDKtU1oT8iOCe
+ HfTuvwW7+2QOQlnuHU7JF4lS1gadN8BzXZ5sRLfDAMOIxqtVQlRSH3qV+zkU4gT2VhCpVkReme
+ MQz1ahNbHxE/Z/u/743Ku7s1UfkM4jhMq2tpFfQAAAA==
+X-Change-ID: 20260911-topic-lumia_drop_captouch-c0db99b016a0
+To: Bjorn Andersson <andersson@kernel.org>, 
+ Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>, 
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, 
+ Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1789116233; l=1336;
+ i=konrad.dybcio@oss.qualcomm.com; s=20230215; h=from:subject:message-id;
+ bh=uBWotT1ktwbMnj7lhGiRKkk+3QyBYGOIWnG24TtVn6A=;
+ b=u8IbdDc24dYcLD4ivQhhVjGpOhWLmjCPSTdqvH6fzC0EaGzr/qbgUm6RUte3ki6aKZllGKuUW
+ ekJD8V9YNx9D5dGJwcrtz5QojYXzINtgu3fvXj+Q5ZKNjB/yGIt3xsJ
+X-Developer-Key: i=konrad.dybcio@oss.qualcomm.com; a=ed25519;
+ pk=iclgkYvtl2w05SSXO5EjjSYlhFKsJ+5OSZBjOkQuEms=
 
-On Thu, Sep 10, 2026 at 11:50:14AM +0530, Mohammad Rafi Shaik wrote:
-> Add qcom,shikra-soundwire as a standalone compatible for the Shikra SoC
-> SoundWire controller.
-> 
-> On Shikra SoC, the SoundWire controller is assigned to an Execution
-> Environment (EE), which determines which banked register window must be
-> used for interrupt, FIFO, and status register access on SoundWire v2.0
-> and later hardware.
-> 
-> Add a dedicated qcom,shikra-soundwire compatible so the driver can select
-> the correct register layout for Shikra at probe time.
-> 
-> Signed-off-by: Mohammad Rafi Shaik <mohammad.rafi.shaik@oss.qualcomm.com>
-> ---
->  Documentation/devicetree/bindings/soundwire/qcom,soundwire.yaml | 1 +
->  1 file changed, 1 insertion(+)
+From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
 
-Acked-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+This node lacks dt-bindings, producing warnings and is reportedly only
+present on prototype hardware.
+
+Remove it to get rid of the warnings.
+
+Signed-off-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+---
+ arch/arm64/boot/dts/qcom/msm8994-msft-lumia-octagon.dtsi | 13 -------------
+ 1 file changed, 13 deletions(-)
+
+diff --git a/arch/arm64/boot/dts/qcom/msm8994-msft-lumia-octagon.dtsi b/arch/arm64/boot/dts/qcom/msm8994-msft-lumia-octagon.dtsi
+index 7ace3540ef0a..4da448f17133 100644
+--- a/arch/arm64/boot/dts/qcom/msm8994-msft-lumia-octagon.dtsi
++++ b/arch/arm64/boot/dts/qcom/msm8994-msft-lumia-octagon.dtsi
+@@ -377,19 +377,6 @@ &blsp1_uart2 {
+ &blsp2_i2c1 {
+ 	status = "okay";
+ 
+-	sideinteraction: touch@2c {
+-		compatible = "adi,ad7147_captouch";
+-		reg = <0x2c>;
+-
+-		pinctrl-names = "default", "sleep";
+-		pinctrl-0 = <&grip_default>;
+-		pinctrl-1 = <&grip_sleep>;
+-
+-		interrupts = <&tlmm 96 IRQ_TYPE_EDGE_FALLING>;
+-
+-		vcc-supply = <&vreg_l18a_2p85>;
+-	};
+-
+ 	/*
+ 	 * The QPDS-T900/QPDS-T930 is a customized part built for Nokia
+ 	 * by Avago. It is very similar to the Avago APDS-9930 with some
+
+---
+base-commit: f2bfbc3554ca6919484030729424b9dee2942d24
+change-id: 20260911-topic-lumia_drop_captouch-c0db99b016a0
 
 Best regards,
-Krzysztof
+--  
+Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
 
