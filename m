@@ -1,194 +1,96 @@
-Received: from ixit.cz (ixit.cz [84.42.129.46])
+Received: from sendmail.purelymail.com (sendmail.purelymail.com [34.202.193.197])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F07F34AF9DC;
-	Fri, 11 Sep 2026 18:42:07 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=84.42.129.46
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 021D93B6354
+	for <linux-arm-msm@vger.kernel.org>; Fri, 11 Sep 2026 18:44:51 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=34.202.193.197
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789152130; cv=none; b=S50kvfUKgxo7jZyZRc+ROu0LbvFsblKNMq6XUzkt9YH45+4buxbWupsgViYiC9FAfWWPXVU3gJASkQWRz1HBSq7HjEwMgt1sw/be2jY8DqJrSfuQnV8fsnVhwYJncVN5XroXpWM4crMKr/LeOmarVavkseDIkyIpNr/6OXk2OnU=
+	t=1789152293; cv=none; b=cXFFDBfYpPUgTiUOB933LQ1Gg7qpw3+afGsQ7tE9gB+jrgG2ZEqoQJV5/Gmci+He7dwnIKhUTVHJhluvMwGwQc2fm6y9gnnXiUh1g+34o2pVtQeqnxaiW0RtcBuWlrgbz9lwhiBBQdw+LMSq4JQegGA4zake5L28tY1y1Lk5/40=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789152130; c=relaxed/simple;
-	bh=UBYUwVJ+HLAWNIXYST+Re1c1Q5Ue1zkuzoGOShspLXU=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=oJDmd8zvpjdk8oSlUEg5lsJSXBAUlkeFn5NZBV6B6h1KlTdQ1+JHBVRoqTayxho/ewQaic8EzYkv+269/LpFBUdv1sTIIqPlXGMhvyXyztDE4pTyxo6SGScjLR9BijEKDS/GhjJwbZa6qSlVX0Eoyyhm2unGPUywVLSaX6q67iw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=ixit.cz; spf=pass smtp.mailfrom=ixit.cz; dkim=pass (1024-bit key) header.d=ixit.cz header.i=@ixit.cz header.b=BEWDvx0k; arc=none smtp.client-ip=84.42.129.46
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=ixit.cz
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ixit.cz
+	s=arc-20240116; t=1789152293; c=relaxed/simple;
+	bh=bJUwiUIJZTg2xrplNNc6KqeDU7Cp83zq+iS/Qhrji1E=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=KYK+apiLcRtRA671PXgmt6GTolRaTnASjI1I2WhBXqCfoo8h6XsBQkBDb7F19VA5hXwtXnUgY+UAk6CAcZ4zt3hHsJIBbicYoxmsyz82WCSYbT+bGK06NBNYLYZd4bbBn97w04NhSo/zu9am72GH4IEy/or7yT3ktCY0e9YlonA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=c127.dev; spf=pass smtp.mailfrom=c127.dev; dkim=pass (2048-bit key) header.d=c127.dev header.i=@c127.dev header.b=duTQ74Yj; dkim=pass (2048-bit key) header.d=purelymail.com header.i=@purelymail.com header.b=U1AVAIUx; arc=none smtp.client-ip=34.202.193.197
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=c127.dev
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=c127.dev
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=ixit.cz header.i=@ixit.cz header.b="BEWDvx0k"
-Received: from [IPV6:2a02:830a:f787:8f00:d622:eaa3:3dd6:8f5e] (unknown [IPv6:2a02:830a:f787:8f00:d622:eaa3:3dd6:8f5e])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange x25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by ixit.cz (Postfix) with ESMTPSA id D80455340298;
-	Fri, 11 Sep 2026 20:41:58 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ixit.cz; s=dkim;
-	t=1789152119;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
-	bh=rHSjTarwBc7bg0NGFzwow8Dj+HXlOlAGtccg+T6t/AM=;
-	b=BEWDvx0kN4RjDqrMEWjh+20MLWSmMvQ6uKKSr6/qUqTKzmtQuACKe5RSYzu+kBKMbMoV1B
-	MTie3d5RK3tPbjabPI8tsfV1GPP5dYP6ClY+M0rXDpKgRjsdCvxpuyxjx5vVaiY4pz5p63
-	9Co3MpCPac6rL6xnCisipv7x2cRNkRQ=
-Message-ID: <94dcb0f5-f886-478e-be3b-722d4c808a49@ixit.cz>
-Date: Fri, 11 Sep 2026 20:41:58 +0200
+	dkim=pass (2048-bit key) header.d=c127.dev header.i=@c127.dev header.b="duTQ74Yj";
+	dkim=pass (2048-bit key) header.d=purelymail.com header.i=@purelymail.com header.b="U1AVAIUx"
+DKIM-Signature: a=rsa-sha256; b=duTQ74YjWQQZ+u4oM2wsuLy3Vx8sfSV5pihsXaM2Bb/z5AzRTKJMUl6SXzstBlkS9PR6DX9xvYiOcyx7aqFrJiBPIqZNVoIUltuQgfaMyHiKFQkJxzZyne8b3EcZku2wlMJ0ht3D/KwfexpYNXALt800xf0MzO+fY8XNVVIXiUbT+/YlG8QaNvHM0flQhgy7XBDJMQeBi3yC6rd60ZjPAxTkM1j+Vi4EYc7JCyRP0Jp41iq3oja0RKAvXzF7o6bE723b7MFdgL6ZIX+MDhsdmWcrDOSUTI3RbzNgw8DybZwcaJm9M+MGSRDWS0yrxPQbjdLc1n/pG6KF1nez5oRu4g==; s=purelymail1; d=c127.dev; v=1; bh=bJUwiUIJZTg2xrplNNc6KqeDU7Cp83zq+iS/Qhrji1E=; h=Received:From:To:Subject:Date;
+DKIM-Signature: a=rsa-sha256; b=U1AVAIUx67SC8KPYWPwkeNFInTUOE/s5Juv0+KIWw1L/OP+3lu5lySYOSC8831n3RXM3Y3tDIt3xOnxjMD6aNWOOKz/JIMrl5LRPCuSOPOP3EFZ24AzSV27Kw1RA4Un4AMYX3qM/BVUL5CpIzq7o5X30Y53prr7Mm9iHCcvgv2NXSyYFJe1U9F0bh/SD0mhFwsW7iCfPiGf4Z+yJqw/er4cs2GW6Yv2oxDYzwnxT11FQppDlvlqOf4Wsk17rK9xryYPELKsUvIUlWKrFOOjIVFMjZlVHvi0VjDWw7JpIpVxOzUTMwQypNnMOrP78yU37jgTToNoJUs4d1g1j5rvl4A==; s=purelymail1; d=purelymail.com; v=1; bh=bJUwiUIJZTg2xrplNNc6KqeDU7Cp83zq+iS/Qhrji1E=; h=Feedback-ID:Received:From:To:Subject:Date;
+Feedback-ID: 1017243:43747:null:purelymail
+X-Pm-Original-To: linux-arm-msm@vger.kernel.org
+Received: by smtp.purelymail.com (Purelymail SMTP) with ESMTPSA id 51783469;
+          (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
+          Fri, 11 Sep 2026 18:44:20 +0000 (UTC)
+From: Johan Alvarado <contact@c127.dev>
+To: broonie@kernel.org,
+	md.alam@oss.qualcomm.com
+Cc: konradybcio@kernel.org,
+	pengpeng@iscas.ac.cn,
+	miquel.raynal@bootlin.com,
+	j4g8y7@gmail.com,
+	quic_varada@quicinc.com,
+	quic_srichara@quicinc.com,
+	linux-spi@vger.kernel.org,
+	linux-mtd@lists.infradead.org,
+	linux-arm-msm@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	Johan Alvarado <contact@c127.dev>
+Subject: [PATCH v2 0/2] spi: spi-qpic-snand: fix the stale ECC context pointer
+Date: Fri, 11 Sep 2026 13:44:14 -0500
+Message-ID: <20260911184416.109790-1-contact@c127.dev>
+X-Mailer: git-send-email 2.55.0
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 3/3] arm64: dts: qcom: sdm845-oneplus: use generic fuel
- gauge compatible
-To: Andrew Davis <afd@ti.com>, Krzysztof Kozlowski <krzk@kernel.org>,
- Rinat Muhamedgaliev <rinat.muhamedgaliev@gmail.com>
-Cc: Bjorn Andersson <andersson@kernel.org>,
- Konrad Dybcio <konradybcio@kernel.org>, Sebastian Reichel <sre@kernel.org>,
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
- Conor Dooley <conor+dt@kernel.org>, =?UTF-8?Q?Pali_Roh=C3=A1r?=
- <pali@kernel.org>, linux-arm-msm@vger.kernel.org,
- devicetree@vger.kernel.org, linux-pm@vger.kernel.org,
- linux-kernel@vger.kernel.org
-References: <20260829205258.26955-1-rinat.muhamedgaliev@gmail.com>
- <20260909234744.1177153-1-rinat.muhamedgaliev@gmail.com>
- <20260909234744.1177153-4-rinat.muhamedgaliev@gmail.com>
- <20260911-relaxed-dexterous-hummingbird-72dfbe@quoll>
- <6c45cfd5-ac37-4f8e-bde3-0391512df982@ti.com>
-Content-Language: en-US, cs-CZ
-From: David Heidelberg <david@ixit.cz>
-Autocrypt: addr=david@ixit.cz; keydata=
- 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
-In-Reply-To: <6c45cfd5-ac37-4f8e-bde3-0391512df982@ti.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: quoted-printable
+X-MIME-Autoconverted: from 8bit to quoted-printable by Purelymail
+Content-Type: text/plain; charset=UTF-8
+
+qcom_spi_ecc_init_ctx_pipelined() installs the ooblayout but never
+publishes the ECC context it allocates, so qcom_spi_ooblayout_ecc() and
+qcom_spi_ooblayout_free() run against a pointer that describes something
+else - a zeroed struct on a first probe, the previous attempt's freed
+context on a retry. On IPQ5018 the qcom,smem-part parser makes that retry
+routine, and like half the boots on a Mercusys MR80X failed to mount the
+rootfs.
+
+Patch 1 is the fix and is unchanged from v1. Patch 2 removes what becomes
+redundant once the context is published. It is a cleanup with no
+functional change, so it carries no Fixes: tag and is not marked for
+stable.
+
+Patch 1 was applied to mtd/fixes as 93bc7c4d2f41 on 2026-09-04 and
+dropped the same day, so nothing from this series is queued.
+
+v1: https://lore.kernel.org/all/20260825013848.1056946-1-contact@c127.dev/
+
+Changes in v2:
+ - Add Gabor Juhos' Tested-by to patch 1.
+ - Add patch 2, dropping the now redundant assignment in
+   qcom_spi_ecc_prepare_io_req_pipelined() and the unused zeroed
+   struct qpic_ecc allocated in qcom_spi_probe(). Suggested by Gabor
+   Juhos, kept separate so the stable backport stays minimal.
+ - Rebase onto spi/for-next, which carries commit 44d39535cd4f ("spi:
+   spi-qpic-snand: remove interim 'dev_data' variable from
+   qcom_spi_probe()") touching the same probe lines as patch 2.
+
+Both patches build with W=3D1 and sparse without warnings, and each patch
+builds on its own.
+
+Johan Alvarado (2):
+  spi: spi-qpic-snand: publish the ECC context to snandc->qspi
+  spi: spi-qpic-snand: drop the redundant ECC context handling
+
+ drivers/spi/spi-qpic-snand.c | 11 +++--------
+ 1 file changed, 3 insertions(+), 8 deletions(-)
 
 
-
-On 11/09/2026 15:37, Andrew Davis wrote:
-> On 9/11/26 3:21 AM, Krzysztof Kozlowski wrote:
->> On Thu, Sep 10, 2026 at 02:47:44AM +0300, Rinat Muhamedgaliev wrote:
->>> OnePlus 6 and OnePlus 6T battery packs may contain either a TI
->>> bq27411 or bq27541 fuel gauge. Use the generic ti,bq27xxx compatible
->>> so the driver can select the register map from DeviceType at probe
->>> time.
->>>
->>> Tested on OnePlus 6T (fajita) with a bq27541 (DeviceType 0x0541):
->>> after booting the new kernel, the battery reported 4.360 V, 100% state
->>> of charge, 27.8 C, and Full status.
->>>
->>> Fixes: 12dfb002ca01 ("arm64: dts: qcom: sdm845-oneplus-*: add fuel gauge")
->>
->> What is the bug here? Your commit msg should be specific about it.
->>
-> 
-> Commit msg seems pretty clear about the bug (to me at least), the DT
-> says the fuel gauge is a BQ27411 but that isn't the case, some shipped
-> with a BQ27541 fuel gauge.
-> 
-> (I do agree though this shouldn't have a fixes tag as back-porting this
-> without also back-porting the driver-side change would break users)
-> 
-> Since these fuel gauges often live on the battery pack and not the
-> device itself, folks changing their batteries might end up with
-> different fuel gauges, so having some detection method is going to
-> be helpful.
-> 
-> Rinat,
-> 
-> I'm not familiar with the bootflow on these devices, but is this something
-> you could detect in the bootloader and fixup the DT before it is passed
-> to kernel? That way the kernel gets a DT with the correct and specific
-> compatible to start with?
-> 
-> Andrew
-> 
->>>
->>> Signed-off-by: Rinat Muhamedgaliev <rinat.muhamedgaliev@gmail.com>
->>> ---
->>>   arch/arm64/boot/dts/qcom/sdm845-oneplus-common.dtsi   | 4 ++--
->>>   arch/arm64/boot/dts/qcom/sdm845-oneplus-enchilada.dts | 2 +-
->>>   arch/arm64/boot/dts/qcom/sdm845-oneplus-fajita.dts    | 2 +-
->>>   3 files changed, 4 insertions(+), 4 deletions(-)
->>>
->>> diff --git a/arch/arm64/boot/dts/qcom/sdm845-oneplus-common.dtsi b/arch/ 
->>> arm64/boot/dts/qcom/sdm845-oneplus-common.dtsi
->>> index 948a0dd..8c5cd94 100644
->>> --- a/arch/arm64/boot/dts/qcom/sdm845-oneplus-common.dtsi
->>> +++ b/arch/arm64/boot/dts/qcom/sdm845-oneplus-common.dtsi
->>> @@ -790,8 +790,8 @@ &i2c10 {
->>>       status = "okay";
->>>       clock-frequency = <100000>;
->>> -    bq27441_fg: bq27441-battery@55 {
->>> -        compatible = "ti,bq27411";
->>> +    bq27xxx_fg: fuel-gauge@55 {
->>> +        compatible = "ti,bq27xxx";
->>
->> And this is just breaking all users without any explanation.
->>
->>
->>
->>>           status = "okay";
->>>           reg = <0x55>;
->>>       };
->>> diff --git a/arch/arm64/boot/dts/qcom/sdm845-oneplus-enchilada.dts b/arch/ 
->>> arm64/boot/dts/qcom/sdm845-oneplus-enchilada.dts
->>> index 5f01115..cf40842 100644
->>> --- a/arch/arm64/boot/dts/qcom/sdm845-oneplus-enchilada.dts
->>> +++ b/arch/arm64/boot/dts/qcom/sdm845-oneplus-enchilada.dts
->>> @@ -44,7 +44,7 @@ main_cam_ois: main-cam-ois-regulator {
->>>       };
->>>   };
->>> -&bq27441_fg {
->>> +&bq27xxx_fg {
->>
->> No, irrelevant to the supposed bug here.
->>
->> Best regards,
->> Krzysztof
->>
-> 
+base-commit: 98100d83adc8e17606605d131e685b1fbedfe092
+--=20
+2.55.0
 
