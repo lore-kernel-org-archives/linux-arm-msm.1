@@ -1,143 +1,130 @@
-Received: from mail-wr2-f12.google.com (mail-wr2-f12.google.com [74.125.225.76])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from 011.lax.mailroute.net (011.lax.mailroute.net [199.89.1.14])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4E180403AF8
-	for <linux-arm-msm@vger.kernel.org>; Fri, 11 Sep 2026 18:57:04 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.225.76
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CC85C3DDAFB;
+	Fri, 11 Sep 2026 19:03:30 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=199.89.1.14
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789153026; cv=none; b=sQRL7m0smly/ri7Mv8Tuole94nSw9giG/hQY/hsfeftKzJ7S8xrwikgCC8fFEATP9tqdfjovIc+TuvLw58KAzlA6QuptB1lmPCHUJfIjlZmFDbWLLEAFHtw0Vf5nw+SooYWL27JBk7OgqTA9iqwvZ05BXo265Wb71nlTKw6jcwQ=
+	t=1789153412; cv=none; b=InGkIDPEW7JaRf+riPrNn/INJ3t4WPYJ3i/TB/DcDFsOw+S2dJmrjexmRKTNt320OxliYn5SvVzzntSxNBOcbUBkymBTssWNSzUqQVP/zpJ8Kr6EMU/MfR361b/aWF8WEVD+5baPR9n0gwuh0pvVi7osLTEcHh/MpXugADf39Eo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789153026; c=relaxed/simple;
-	bh=L6rh7PbU0UFjpOX2cNRwoGSW2b55d7SIpmhWyxZe2jU=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=EBzMSNcpvALZwHi/UsLRuwbRgkrSL0hrubrU+pk5nC6LY0tZKTlpkZaH+6UwidDFSshJAUt6Xku98OvEe0qAMyh41hvXs5u8RYHiSMz5wJUiqAC1/GvTxdBVC5roZ7Tnx1hiqoaenTwOztEHsmIkDtzoNz3VfJwBEcGu1qFbWJA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com; spf=pass smtp.mailfrom=baylibre.com; dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b=jnWmsfDH; arc=none smtp.client-ip=74.125.225.76
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=baylibre.com
+	s=arc-20240116; t=1789153412; c=relaxed/simple;
+	bh=AAJxS1ZeWVorNTNsOrxKWTuYDxU3bdBsDIZpKFEvAmw=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=CLCq1/Lk9XICTyWDyG+EoqjExhNzXTeIGY89uIvnae+A9v4GXxspxJdvHQIVoISY+lvcBGcs56797amlhKCeRyfv1XA+RhABmWmEWSljNbZjhBam/tkpxDtQRMDO9f58plQKPVojxMvDo8OT0Z96jcPpz2kuo9XBWfDoBmxOPBE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=acm.org; spf=pass smtp.mailfrom=acm.org; dkim=pass (2048-bit key) header.d=acm.org header.i=@acm.org header.b=cvtq3BMS; arc=none smtp.client-ip=199.89.1.14
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=acm.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=acm.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b="jnWmsfDH"
-Received: by mail-wr2-f12.google.com with SMTP id ffacd0b85a97d-4834977ae75so88004f8f.3
-        for <linux-arm-msm@vger.kernel.org>; Fri, 11 Sep 2026 11:57:04 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=baylibre.com; s=google; t=1789153022; x=1789757822; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=Hh4sVlhxU5dBVP/3K7psJppy2n4LZjrwVn2yp2aqAe0=;
-        b=jnWmsfDHjbwFsI/w5LaETScW3g2GoWP8DH3MNQ39LInxEQ45K9gykyqpHXNMDCvNdn
-         oK1+M1kU+Dkx8M6mvJydhJqeupXg2bCK/j7tZdrpxAzZwwcefG0mho6WaSD8FKW7OEaI
-         5HMu2LlpfcBle6t2IDRZ0q1Qs0bhBXsgxm0OsZzrLanVQgSaNIpAeW3pstCN466taBDI
-         faEQp/aYTkWnBarQnFww1JSwnLD8r9dFs59GCVpH4calW7DzRgi5g47aRzOcbKNAG3uB
-         8+T+5ArgFk9NgnfiV0XumTkidaW1eDExFDJxSG0qBHLQ6STsymzLfJJc0gK6updgxX1I
-         OGtA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1789153022; x=1789757822;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=Hh4sVlhxU5dBVP/3K7psJppy2n4LZjrwVn2yp2aqAe0=;
-        b=s8ULUSjoNiBvNUP/UbPv1sOc1YruMOq/LH5xdSoREQvByGvJ7UPvElqWRw0QBY61N0
-         I4DJIylmDPmmS/yuFIB+9El0lG4fyh7e0aoofEKifhsmV4n1ZacfZ0HhmV7B1ve54rHc
-         hevZlr/p+4YWfUFBVvZjMWSsq0xW7MAY2m581/dDGyOyLNERn8H3KPteWDxTlpgRzQfJ
-         fKkMZy6NdL3YJZ8VABQrv59RYXiD6efTfF3gdsvbV0DOnrOflsKKG4nnFr1ltSvpzLRR
-         5lCU1NqMfllBFVfclEGc/sDTgrkea1qxJAoyqjczInNQwOUFPQVzsztlkkfVg012Z5WX
-         tDqQ==
-X-Forwarded-Encrypted: i=1; AKwUvBxfUX7YX602b3uFRB05iiGRoa+nsMRZznXroUhplMhFIQ6c3XxYnYBlQyBcBQuy65ZIPoYx6veEEBXuo/P+@vger.kernel.org
-X-Gm-Message-State: AFuF++my528O8QKqC+v1ruWYH7qzs58usRz4ZI9s3bY2xeMOAAOuJ/mj
-	XDGCQXIiem8Cz+4sPhiyHp+prEBYBU2U3LHfpbkwe9Rd2R0eBYLpLB/byPEYvIkUKUE=
-X-Gm-Gg: AYBFou2tr+NKhUKj3ztMSJrLmlnUGgeHpL8ayR8S7Dsp1+nwDCKoYH/y/z7xnXgOFfA
-	HTrOdYOkmgNlbLmQ/EzIXfkwJjAlB//vHVB78ZEiidDHrynPNFoYroce3qEH9ykWQ1a1Z5yDxI+
-	hqE9nhyHOWKRq5bGnILQdPXyh+aK1QwBcknfd4LX0sIYnOhvJL33yoXW8f8xSigy8ls9Iiutwfu
-	Gi/W3erAMOBCbYGJccxTigPG3lFXbPhjY42GGooCyY7SiXkZXO5Ok7OUs1xvZUWkRuZZxmX4QLe
-	Kqwj9upMJ1J5MFs/IpGg5lxy6r3NfkViixJ3JivCEzQb1i52XK8SfZYUn27irTENiYavCncrINc
-	PCjqcvrz8AmUXvsc/FEaiVLX4yaYDGSRccJfP3Wpm7OT9cL2rOxGbwR1PsoJ6Cv01Qb21LbmdPV
-	CqmqPdmYRhPQZDc9dRCvymRnMzRTD6zyrldvBF6lXploEiXh2M/nq5Fnj/fp2wp8gSvqw8oMFXA
-	oba
-X-Received: by 2002:a5d:5f49:0:b0:485:b169:54fd with SMTP id ffacd0b85a97d-486eb1d388cmr12205373f8f.4.1789153022414;
-        Fri, 11 Sep 2026 11:57:02 -0700 (PDT)
-Received: from localhost ([2a02:8071:56d1:2de0:1d24:d58d:2b65:c291])
-        by smtp.gmail.com with UTF8SMTPSA id ffacd0b85a97d-486eb2ed0fbsm7924090f8f.3.2026.09.11.11.57.01
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 11 Sep 2026 11:57:01 -0700 (PDT)
-Date: Fri, 11 Sep 2026 20:57:00 +0200
-From: Uwe =?utf-8?Q?Kleine-K=C3=B6nig?= <u.kleine-koenig@baylibre.com>
-To: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
-Cc: Thara Gopinath <thara.gopinath@gmail.com>, 
-	Herbert Xu <herbert@gondor.apana.org.au>, "David S. Miller" <davem@davemloft.net>, 
-	Stanimir Varbanov <svarbanov@mm-sol.com>, Eneas U de Queiroz <cotequeiroz@gmail.com>, 
-	Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>, Eric Biggers <ebiggers@kernel.org>, 
-	Demi Marie Obenour <demiobenour@gmail.com>, Bjorn Andersson <andersson@kernel.org>, 
-	Konrad Dybcio <konradybcio@kernel.org>, linux-crypto@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, brgl@kernel.org
-Subject: Re: [PATCH v7 11/12] soc: qcom: add core driver for the Qualcomm
- Crypto Engine
-Message-ID: <aqRNEJt5Wec4AeH4@monoceros>
-References: <20260910-qce-fix-self-tests-v7-0-cdbd2718af14@oss.qualcomm.com>
- <20260910-qce-fix-self-tests-v7-11-cdbd2718af14@oss.qualcomm.com>
+	dkim=pass (2048-bit key) header.d=acm.org header.i=@acm.org header.b="cvtq3BMS"
+Received: from localhost (localhost [127.0.0.1])
+	by 011.lax.mailroute.net (Postfix) with ESMTP id 4hhP8K6yzjz1XM6JN;
+	Fri, 11 Sep 2026 19:03:29 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=acm.org; h=
+	content-transfer-encoding:content-type:content-type:in-reply-to
+	:from:from:content-language:references:subject:subject
+	:user-agent:mime-version:date:date:message-id:received:received;
+	 s=mr01; t=1789153394; x=1791745395; bh=HKB85OlUopoTlP2cYiFJXnK6
+	cXsUfRhylsdCN0AeosE=; b=cvtq3BMSIvQZr2O49qdJ6rlypEbTYIyBHGdXHuqv
+	zIQoCJdk6hmmw5EQ8jzvupgBakf1+/wLZ89T7v3w0Df7xOz5KW7YPY0X3o9ydnSj
+	CPRUrlf7SLM8jqy5fWIrjAHa7BxSWD3RK6/ju+f2klBF8xBun202aSqXZxvtzg6o
+	zLmS+GHWyIXINcaqUmyBwOkN/JgqhPnUR9B5GRFwVnuGQOZyfIHu0Ik1d/UdKHSZ
+	FNOpXXNQLRcYFEBsfyf+gZ3dZxQQScj7pAmki8+tGVzPSC6abnP7OG9en+86g7Dc
+	rpEaaypiB1JNtoZDKWHSA8uhSTBfyT5838f2QYxB1GsQTg==
+X-Virus-Scanned: by MailRoute
+Received: from 011.lax.mailroute.net ([127.0.0.1])
+ by localhost (011.lax [127.0.0.1]) (mroute_mailscanner, port 10029) with LMTP
+ id qvovV8J3T_kX; Fri, 11 Sep 2026 19:03:14 +0000 (UTC)
+Received: from [100.80.231.125] (unknown [104.135.182.41])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	(Authenticated sender: bvanassche@acm.org)
+	by 011.lax.mailroute.net (Postfix) with ESMTPSA id 4hhP7t6bfRz1XM4Sx;
+	Fri, 11 Sep 2026 19:03:06 +0000 (UTC)
+Message-ID: <94ee6bd1-8126-4a99-9b9c-d58e16fd9d9e@acm.org>
+Date: Fri, 11 Sep 2026 12:03:05 -0700
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="joivlbaqnu5rwgfx"
-Content-Disposition: inline
-In-Reply-To: <20260910-qce-fix-self-tests-v7-11-cdbd2718af14@oss.qualcomm.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH RFC] drivers/rufs: add Rust UFS host controller driver
+To: jaemyung.lee@samsung.com, Andreas Hindborg <a.hindborg@kernel.org>,
+ Miguel Ojeda <ojeda@kernel.org>, Boqun Feng <boqun@kernel.org>,
+ Gary Guo <gary@garyguo.net>, =?UTF-8?Q?Bj=C3=B6rn_Roy_Baron?=
+ <bjorn3_gh@protonmail.com>, Benno Lossin <lossin@kernel.org>,
+ Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>,
+ Danilo Krummrich <dakr@kernel.org>,
+ Daniel Almeida <daniel.almeida@collabora.com>,
+ Tamir Duberstein <tamird@kernel.org>, Alexandre Courbot
+ <acourbot@nvidia.com>, =?UTF-8?Q?Onur_=C3=96zkan?= <work@onurozkan.dev>,
+ "Martin K. Petersen" <martin.petersen@oracle.com>,
+ James Bottomley <james.bottomley@hansenpartnership.com>,
+ Jens Axboe <axboe@kernel.dk>
+Cc: linux-kernel@vger.kernel.org, rust-for-linux@vger.kernel.org,
+ linux-block@vger.kernel.org, linux-scsi@vger.kernel.org,
+ linux-arm-msm@vger.kernel.org
+References: <20260912-rufs-private-v1-1-716db733e655@samsung.com>
+Content-Language: en-US
+From: Bart Van Assche <bvanassche@acm.org>
+In-Reply-To: <20260912-rufs-private-v1-1-716db733e655@samsung.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
+On 9/11/26 8:52 AM, Jaemyung Lee via B4 Relay wrote:
+> Add a Rust UFS host controller driver that exposes UFS logical units as
+> native blk-mq block devices without depending on the SCSI midlayer.
 
---joivlbaqnu5rwgfx
-Content-Type: text/plain; protected-headers=v1; charset=us-ascii
-Content-Disposition: inline
-Subject: Re: [PATCH v7 11/12] soc: qcom: add core driver for the Qualcomm
- Crypto Engine
-MIME-Version: 1.0
+One of the goals in the Linux kernel is *not* to duplicate code.
+Decoupling the UFS driver from the SCSI mid-layer implies duplicating
+the functionality of the SCSI mid-layer. I do not agree with this.
 
-Hello Bart,
+> The driver is written in Rust.
 
-On Thu, Sep 10, 2026 at 03:00:52PM +0200, Bartosz Golaszewski wrote:
-> +#include <linux/mod_devicetable.h>
-> +#include <linux/platform_device.h>
+Most UFS driver contributors are not familiar with Rust so I think the
+choice of Rust will make this driver unpopular.
 
-Please don't add new includes for <linux/mod_devicetable.h>. Either rely
-on <linux/platform_device.h> to provide of_device_id (my preference), or
-include <linux/device-id/of.h>.
+> The existing UFS driver is built on the SCSI subsystem. That made sense
+> historically: UFS adopted the SCSI Architecture Model as its application
+> layer, so reusing the SCSI midlayer's command queuing, error handling,
+> power management, and logical-unit addressing let UFS reach Linux quickly
+> and reliably. ufshcd bridges the SCSI midlayer to UFS Protocol Information
+> Units.
+> 
+> That foundation has become a source of friction. The evolution of UFS is
+> governed by JEDEC and increasingly includes UFS-specific features outside
+> the SCSI command set standardized by T10.
 
-> [...]
-> +static const struct of_device_id qce_core_of_match[] = {
-> +	{ .compatible = "qcom,crypto-v5.1", },
-> +	{ .compatible = "qcom,crypto-v5.4", },
-> +	{ .compatible = "qcom,qce", },
-> +	{}
+Huh? As long as I was attending JEDEC meetings I insisted on using
+commands already standardized by T10 and *not* introducing new commands.
 
-Please drop the commas for before the closing }. Also in my cleanups
-around these device_id structs I used { } with a space in-between the
-braces. Just today I got some opposition to that[1], but in combination
-with the spacing in the non-empty initializers I still prefer { } over
-{}.
+I do not want to give UFS vendors the freedom to introduce new commands
+without coordinating with a standards body that has more experience with
+the introduction of new commands, e.g. T10.
 
-> +};
-> +MODULE_DEVICE_TABLE(of, qce_core_of_match);
+Linux filesystems support the NVMe and SCSI command sets via the
+abstractions offered by the block layer. Introducing new types of
+storage commands would require that the block layer and all filesystems
+are modified. I have not yet seen an good example of a new command that
+warrants such changes.
 
-Best regards
-Uwe
+> On Intel UFS 2.1 hardware, 4 KiB direct io_uring at QD32/job gave
+> these optimized-mode ranges over 1/2/4 jobs (three samples):
+> 
+>    Workload  Op     RUFS kIOPS   C kIOPS      Difference
+>    --------  -----  -----------  -----------  ---------------
+>    randread  read   48.91-61.26  41.56-41.60  +17.6% to +47.4%
+>    randwrite write  8.19-8.30    8.21-8.22    -0.4% to +1.1%
+>    randrw    read   5.26-5.34    5.28-5.38    -0.9% to -0.4%
+>    randrw    write  5.27-5.34    5.29-5.37    -0.8% to -0.5%
 
-[1] https://lore.kernel.org/all/45a04396-c6c1-41f4-ace8-0ee0ccbc50ad@acm.org/
+"Intel UFS 2.1" sounds weird to me since Intel never produced any UFS
+devices as far as I know. Did you perhaps want to write "Intel UFSHCI
+2.1"? If so, these measurements are not representative since UFSHCI
+2.1 does not support MCQ. Measurement results for legacy (SDB) mode
+are highly sensitive to whether or not the I/O submitter runs on the
+same CPU core as the completion interrupt.
 
---joivlbaqnu5rwgfx
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAABCgAdFiEEP4GsaTp6HlmJrf7Tj4D7WH0S/k4FAmqkTvoACgkQj4D7WH0S
-/k5B8ggArcjj6bNgFKC+jk74PuEqWNqnxp83hYq4YhCQ4nkN5btdBCTUHpvce57Y
-tBLNeoqp+ogRIJDvTqZwBjB+3Gpn7Xaz5G0oW7tfOPbfQYrS02tXJbN4iR5v85Sd
-9PrXSAOEjomDiJ5iCToEvNzs/NHzabEZ+IH721yYfCBsiUvd+nLYePUdzq9ICGij
-zaKxkNLMiyiV5WtnuF19WfPsemVF8etJYThIiGfQ9vzFWAIRU2fgEW1XghxIC2/C
-vVzujCNLI5VkWqgZDuB1UtSlLshJ+ZtT87nGphi1LWV9KVabXtsfPTdTFnHHyx8U
-aAQtSnfF0SdPJaeWJMLNMGNHWcvaeg==
-=3iTu
------END PGP SIGNATURE-----
-
---joivlbaqnu5rwgfx--
+Bart.
