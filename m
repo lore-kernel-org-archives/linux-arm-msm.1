@@ -1,289 +1,80 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from out-2z4y-a133.jellyfish.systems (out-2z4y-a133.jellyfish.systems [198.54.127.133])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9CBCF4A6886
-	for <linux-arm-msm@vger.kernel.org>; Fri, 11 Sep 2026 16:48:00 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CC3C1310645
+	for <linux-arm-msm@vger.kernel.org>; Fri, 11 Sep 2026 16:50:23 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.54.127.133
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789145284; cv=none; b=o7Sjm5Ova+4NTytgRr2SSlBE0260Eenvbb5nbc6LTK6k5hRvB3YJ9P8uY8FurIN6DgDn4FUsaSJpbH4jVLOWqPLo1PvFW9OVKKR65+Nhc60Ca2WQXN0gzhucgBI2NaOoNXKUv4YvrJ6/G9E9SLtP9PhBUbr0BAzw4S/2s5zrlvI=
+	t=1789145425; cv=none; b=sMgopOIQcfqJ88ZTRwl+8VmzMybSo+cNP+G9U+pHNMNiq0W5bLgau0yZ3L1peTWr5gDZqG+pBLZklkG2ciW1W28di65VTPQZdbPWJDNSK6gX+tHhF0F8ATUp/SiCI8ZUzCBIAH4IJTY7ugfpEQmYfiSlfHf0/r1hQTIwze9qwyI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789145284; c=relaxed/simple;
-	bh=qoVOpYXbkklKFyGDP0UJY48D7jItqDHtsul1kpaySdc=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=d4R34Zi7UEZxQtfWdwEWitgECRUpcyWmMjeSfiRpC2nL/yR2bhnE3GgHov5kY93CaDNHs2nXpbek8cxdodDqPTIiSz+VRkeQB7dC9oOob2Czm4EC0vM6lXM46n9yIP+EYRxDaryTbc9FxFdupENJS3t0DJSZRH7BGfEsjKMRJnw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=ngB7Ts+j; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=iTEhTFvI; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="ngB7Ts+j";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="iTEhTFvI"
-Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68BEmEJB3780629
-	for <linux-arm-msm@vger.kernel.org>; Fri, 11 Sep 2026 16:47:58 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	DI3R9NZ3E2+yrMUVBYsdYQ915kqxXw7Nr3YPwwVUFVI=; b=ngB7Ts+jrq8IGUbk
-	3oBUSpjghhdroeVuv4Ei77yA41W3u9xCQrppNB0vFNI9e3vdf7YbXKwKHNOVCBPo
-	yn6p/BnYUU3BBv3vuOezBaSEdgV9qTItMNyHpvLJItUTNhvRy/L+BAwc9DYGNExV
-	cLdNXxjeQnRmpPl1gXos5hPs8O0u/74nF98UPJV2tD5yaeTIw3hLySADXEpskXQB
-	sFWPxGTJDJzML2/g4bg89i2SH2MnqUvW2oOnADL8Ifhr5yG4oKe+QQhfDfV2ZK0z
-	xjnX+1hJ4WCbTPi47xr4EIDjUrH8WbixcNtbSnBSd7D8v/A3WkdBg4hMJj8YiJtF
-	4pNHRw==
-Received: from mail-pj1-f71.google.com (mail-pj1-f71.google.com [209.85.216.71])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gmcgfjh5w-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Fri, 11 Sep 2026 16:47:58 +0000 (GMT)
-Received: by mail-pj1-f71.google.com with SMTP id 98e67ed59e1d1-39512608fb1so2515527a91.1
-        for <linux-arm-msm@vger.kernel.org>; Fri, 11 Sep 2026 09:47:58 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1789145278; x=1789750078; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=DI3R9NZ3E2+yrMUVBYsdYQ915kqxXw7Nr3YPwwVUFVI=;
-        b=iTEhTFvI202EpOoAhHybcEq86dXyeYfVzpm80OiWqNnf0v8l1aSdLW1Qkr3+7XD0qL
-         vJ5YOdHVkARxax4a1cdRQUScpBnc2kaHl0NK1gQPSHE5FSaIN5Dt1xpxoK55OQxwsM7Z
-         Oga89BJ9fOqmGFThWlzjnplcg+i47Ipfwfl2RyHJZ3JVlsmNQLXfe/0fWF2IhTygBD9I
-         01oV/ulRtrpqzU/1hHwZmzU8l5DVvCx8vL6KNnWW1A8v4Gc11E01A8LAPJh/xwVWG6+i
-         RIyKUUwHXpaUmxGR3guDEOZiCnkkMelXJPX1T1GInZxDS/x9H4xicihP1k9IGzZ5Lerb
-         VAtw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1789145278; x=1789750078;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=DI3R9NZ3E2+yrMUVBYsdYQ915kqxXw7Nr3YPwwVUFVI=;
-        b=KZkZScinHxDRuLbDNhMBLd+O6UAHsHVsDU7sbGTpJ3nrc3qZiIosu9tWgjxn7v71c4
-         H/GI1gomU7eUkYOmiI0MgGkCmf6iKPhCo+5LdfRf/UtElFHWmpkZisSmJWWan0bPgCU2
-         5KuVlJTukWUaPx2TJAILP0pxhUom9xMB/rUEAuH8jWVKwZXbYqBbqM59Kk2vCF+NxYBW
-         xl8cfaFlzvcNxotaVgx1Z1Fx7yLzRa5foqxduz21TsCC/StbWmzN8JEc+EPp7zw4P054
-         TnS9F43p9K/giOHcLKUdauE7t7nOa472pzsnwI3dMKfGlFR+M9AE7iYw7oNH2Xun4F/S
-         qKPg==
-X-Gm-Message-State: AFuF++nbF2zPLpCMBo5Lj363ZwI+iHUgJWK3W6pZEGdS5cngrx4KxWzY
-	TNx0do0LxwLt3D98Ucs0BYNOSUA0focud3tN2MZq3fUrritCrK0toaypEqs3/aZYmgtSdqQ1o8w
-	avh6doKZA99D7HCeu9QhoHU8wH5exlg1iAhzApSb1+XQYnHhDHdnCv6WO/nP3SFQSAQ8h
-X-Gm-Gg: AYBFou3rjwiQxXBGWTDkJgEXT0sdsOEkVhdYjSS5dL93BFgDYeUlJa8dFOCq5GJmLnd
-	FoaV5TmEiRktNqsOYUe8KRfKIf3b9AYVJviC+3NL11tKBetWC0WPs5uf1ztYKAZ+TpIoq4a1mib
-	E0d3G8o5JS1ITe3VacRn4yikovGP2JUN4FQ/r0LSFGhtCBWdmgmvYgh/v49zbQ0hrXXyIBnfUdc
-	lUgjrTsZh821rDcZCahd2QR4GrA7uTg7Goulj1sH0FML6sDVyoMPMgkKupo7Yyhbw9IJwf1CnbB
-	nEaQ8YSYE5RS/D2OmjHbB9hkq3GWFxe8qkjmgPVyonKMKoPKpqrC78Egs3zAtSgtmajDlc9dAzS
-	4JzGd/Cccn3NfuO1MLjiTf0Up8g==
-X-Received: by 2002:a17:90a:e7cb:b0:395:7fff:a08f with SMTP id 98e67ed59e1d1-39d9b960825mr8491121a91.0.1789145277637;
-        Fri, 11 Sep 2026 09:47:57 -0700 (PDT)
-X-Received: by 2002:a17:90a:e7cb:b0:395:7fff:a08f with SMTP id 98e67ed59e1d1-39d9b960825mr8491025a91.0.1789145276917;
-        Fri, 11 Sep 2026 09:47:56 -0700 (PDT)
-Received: from [10.213.101.15] ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-39da64d4bdfsm944193a91.0.2026.09.11.09.47.50
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 11 Sep 2026 09:47:56 -0700 (PDT)
-From: Pradeep P V K <pradeep.pragallapati@oss.qualcomm.com>
-Date: Fri, 11 Sep 2026 22:17:09 +0530
-Subject: [PATCH 5/5] phy: qcom-qmp-ufs: Add Glymur support
+	s=arc-20240116; t=1789145425; c=relaxed/simple;
+	bh=x47TK3jUwh3i8c5UgD8DnvakrZ5m0a2pfrY9ATBcHGU=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=jflKD655bAtX5SQZJG2to1XxWeS7VKWdLIpFp1loWM5NNUfSAwKR2AnX+ZNqbhjXZklHRKAf6taKXFCH1rFxeijXaFjyhK+JZytq4oVMiTRDUyouKGtDObyAw5pD4zks2cbZt1aaoH4J1r0GSBMRYiJlc/0hF4jrxG6JHZ+YoVg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=catcrafts.net; spf=pass smtp.mailfrom=catcrafts.net; arc=none smtp.client-ip=198.54.127.133
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=catcrafts.net
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=catcrafts.net
+Received: from mail.privateemail.com (unknown [87.215.145.39])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by mail.privateemail.com (Postfix) with ESMTPSA id 4hhL4H3ZJzzyQ9;
+	Fri, 11 Sep 2026 16:44:47 +0000 (UTC)
+From: Jorijn van der Graaf <jorijnvdgraaf@catcrafts.net>
+To: Krzysztof Kozlowski <krzk@kernel.org>
+Cc: Jorijn van der Graaf <jorijnvdgraaf@catcrafts.net>,
+	Mark Brown <broonie@kernel.org>,
+	Srinivas Kandagatla <srini@kernel.org>,
+	Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>,
+	Ravi Hothi <ravi.hothi@oss.qualcomm.com>,
+	Liam Girdwood <lgirdwood@gmail.com>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Jaroslav Kysela <perex@perex.cz>,
+	Takashi Iwai <tiwai@suse.com>,
+	Pierre-Louis Bossart <pierre-louis.bossart@linux.dev>,
+	Julian Braha <julianbraha@gmail.com>,
+	Vinod Koul <vkoul@kernel.org>,
+	Bard Liao <yung-chuan.liao@linux.intel.com>,
+	Luca Weiss <luca.weiss@fairphone.com>,
+	Mohammad Rafi Shaik <mohammad.rafi.shaik@oss.qualcomm.com>,
+	linux-sound@vger.kernel.org,
+	devicetree@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v2 1/2] ASoC: dt-bindings: add the Qualcomm WCD9378 audio codec
+Date: Fri, 11 Sep 2026 18:44:40 +0200
+Message-ID: <20260911164440.101533-1-jorijnvdgraaf@catcrafts.net>
+X-Mailer: git-send-email 2.55.0
+In-Reply-To: <20260730-impartial-angelic-harrier-ab9192@quoll>
+References: <20260729000649.263426-1-jorijnvdgraaf@catcrafts.net> <20260729000649.263426-2-jorijnvdgraaf@catcrafts.net> <20260730-impartial-angelic-harrier-ab9192@quoll>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260911-glymur_ufs_qcb_enablement-v1-5-b9fc5e2ee99a@oss.qualcomm.com>
-References: <20260911-glymur_ufs_qcb_enablement-v1-0-b9fc5e2ee99a@oss.qualcomm.com>
-In-Reply-To: <20260911-glymur_ufs_qcb_enablement-v1-0-b9fc5e2ee99a@oss.qualcomm.com>
-To: Vinod Koul <vkoul@kernel.org>, Neil Armstrong <neil.armstrong@linaro.org>,
-        Manivannan Sadhasivam <mani@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>,
-        Alim Akhtar <alim.akhtar@samsung.com>,
-        Avri Altman <avri.altman@sandisk.com>,
-        Bart Van Assche <bvanassche@acm.org>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
-        gopikrishna.garmidi@oss.qualcomm.com, jagadeesh.kona@oss.qualcomm.com
-Cc: linux-arm-msm@vger.kernel.org, linux-phy@lists.infradead.org,
-        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-scsi@vger.kernel.org, nitin.rawat@oss.qualcomm.com,
-        sibi.sankar@oss.qualcomm.com, Taniya Das <taniya.das@oss.qualcomm.com>,
-        Pradeep P V K <pradeep.pragallapati@oss.qualcomm.com>
-X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1789145236; l=6169;
- i=pradeep.pragallapati@oss.qualcomm.com; s=20260911;
- h=from:subject:message-id; bh=qoVOpYXbkklKFyGDP0UJY48D7jItqDHtsul1kpaySdc=;
- b=OyAllVu0k90GkwBz4DgK+LVYWc4KCY2tuzjJ+R1eiclkH6AC8DQeXgv0QhmGJiPwXQVyz0ZFq
- mniKf7b5hZgDCIh8Il0f5hkj3ibfv7hlK3StG2W6jsVRo74JFI9lQM/
-X-Developer-Key: i=pradeep.pragallapati@oss.qualcomm.com; a=ed25519;
- pk=uyRUsge8nQMwf3iW/e/o0U8z9nWLCMm1MGKxEftztic=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTExMDIzNCBTYWx0ZWRfX/GhFNKQE5x6e
- 8r9kuIsKL8+hBTWp6VRafbuGeITrnyTUhhuG3+u4ueQ5sqjCVuYe0tn+WybTVaQmY9inA+7T+8p
- n53DGjlvsRXcFyuGTGpqWlJOfbNYm0QzJXD9DuxBy51MgcMJpfkyU8v0GjeCAP6J79ME2I62AYi
- imRHMNQhApJ6QbmBUAXkCAaCQqjXUKphf+SMNx5DOwbPUBfeSu+bSkN/UuiPHZ0moPhxhxB7cwP
- oxAF3aQ12ZEOpn+aeRUEGIDY9QnlbnQqOv12Br6N57HkxI8fuZxdo+d0Da95jqJMnvmtGsnHS7V
- 5VclDuJnqFcpgQtOwIlcVVaTDmIvBDWGiq15P1ElAeb7BiiTxdF36xGYIAljn1ILMCOV2UvTw+a
- qah3tOL1uCZJuj5kpw5kSnZJxjoe4HzF2+WFXedp3GEb8apfX7Vi33kCuhN84XWLSmDQbA8U2Yw
- a+tLI56snvAsm1kFSGw==
-X-Proofpoint-GUID: p8RMTTmz0_-4cSGhh47wRddBsLLOdCXF
-X-Proofpoint-ORIG-GUID: p8RMTTmz0_-4cSGhh47wRddBsLLOdCXF
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTExMDIzNCBTYWx0ZWRfX+MG/KjviDU4x
- jYHRKs71d/5QLL64Zdwu89V26b2+prouybSfXNSodK10Byp1ZHq6NEHkdF2RsXkL6c1A3V1Te01
- cCFTWIcN0XesFHjSAYM2tUKn0oX/Ktw=
-X-Authority-Analysis: v=2.4 cv=ULtIjyfy c=1 sm=1 tr=0 ts=6aa430be cx=c_pps
- a=UNFcQwm+pnOIJct1K4W+Mw==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
- a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22
- a=EUspDBNiAAAA:8 a=r5doU5UFZFQtV_mqMKkA:9 a=QEXdDO2ut3YA:10
- a=uKXjsCUrEbL0IQVhDsJ9:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-11_05,2026-09-11_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 adultscore=0 phishscore=0 bulkscore=0 clxscore=1015
- malwarescore=0 suspectscore=0 spamscore=0 lowpriorityscore=0 impostorscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609110234
+Content-Transfer-Encoding: 8bit
+X-Envelope-From: jorijnvdgraaf@catcrafts.net
 
-Add the init sequence tables and config for the UFS QMP phy found in
-the Glymur SoC.
+On Thu, Jul 30, 2026 at 09:09:48AM +0200, Krzysztof Kozlowski wrote:
+> As pointed out by RFC from Srini, this binding/node is not correct. It
+> is a fake node to solve (real) power sequencing issues, but Srini's SDCA
+> patchset points that this should be part of TX.
+> 
+> Bindings should be complete. It is fine to have them incomplete of
+> missing features and extend later, but it is not fine to have them with
+> incorrect and incompatible solution.
+> 
+> Therefore this needs to be sorted out for both patchset - this and SDCA
+> version of WCD9378 codec.
 
-Signed-off-by: Pradeep P V K <pradeep.pragallapati@oss.qualcomm.com>
----
- drivers/phy/qualcomm/phy-qcom-qmp-ufs.c | 99 +++++++++++++++++++++++++++++++++
- 1 file changed, 99 insertions(+)
+I am withdrawing this series. Ravi Hothi (Cc) has RX support working on
+top of it and will take it over from here.
 
-diff --git a/drivers/phy/qualcomm/phy-qcom-qmp-ufs.c b/drivers/phy/qualcomm/phy-qcom-qmp-ufs.c
-index d4aca22c181e..ffef8801143a 100644
---- a/drivers/phy/qualcomm/phy-qcom-qmp-ufs.c
-+++ b/drivers/phy/qualcomm/phy-qcom-qmp-ufs.c
-@@ -93,6 +93,59 @@ static const unsigned int ufsphy_v7_regs_layout[QPHY_LAYOUT_SIZE] = {
- 	[QPHY_PCS_POWER_DOWN_CONTROL]	= QPHY_V7_PCS_UFS_POWER_DOWN_CONTROL,
- };
- 
-+static const struct qmp_phy_init_tbl glymur_ufsphy_rx[] = {
-+	QMP_PHY_INIT_CFG(QSERDES_UFS_V7_RX_UCDR_FO_GAIN_RATE2, 0x0c),
-+	QMP_PHY_INIT_CFG(QSERDES_UFS_V7_RX_UCDR_FO_GAIN_RATE4, 0x0c),
-+	QMP_PHY_INIT_CFG(QSERDES_UFS_V7_RX_UCDR_SO_GAIN_RATE4, 0x04),
-+	QMP_PHY_INIT_CFG(QSERDES_UFS_V7_RX_EQ_OFFSET_ADAPTOR_CNTRL1, 0x14),
-+	QMP_PHY_INIT_CFG(QSERDES_UFS_V7_RX_UCDR_PI_CONTROLS, 0x07),
-+	QMP_PHY_INIT_CFG(QSERDES_UFS_V7_RX_OFFSET_ADAPTOR_CNTRL3, 0x0e),
-+	QMP_PHY_INIT_CFG(QSERDES_UFS_V7_RX_UCDR_FASTLOCK_COUNT_HIGH_RATE4, 0x02),
-+	QMP_PHY_INIT_CFG(QSERDES_UFS_V7_RX_UCDR_FASTLOCK_FO_GAIN_RATE4, 0x1c),
-+	QMP_PHY_INIT_CFG(QSERDES_UFS_V7_RX_UCDR_FASTLOCK_SO_GAIN_RATE4, 0x06),
-+	QMP_PHY_INIT_CFG(QSERDES_UFS_V7_RX_VGA_CAL_MAN_VAL, 0xce),
-+	QMP_PHY_INIT_CFG(QSERDES_UFS_V7_RX_EQU_ADAPTOR_CNTRL4, 0x0f),
-+	QMP_PHY_INIT_CFG(QSERDES_UFS_V7_RX_MODE_RATE_0_1_B0, 0xce),
-+	QMP_PHY_INIT_CFG(QSERDES_UFS_V7_RX_MODE_RATE_0_1_B1, 0xce),
-+	QMP_PHY_INIT_CFG(QSERDES_UFS_V7_RX_MODE_RATE_0_1_B2, 0x18),
-+	QMP_PHY_INIT_CFG(QSERDES_UFS_V7_RX_MODE_RATE_0_1_B3, 0x1a),
-+	QMP_PHY_INIT_CFG(QSERDES_UFS_V7_RX_MODE_RATE_0_1_B4, 0x0f),
-+	QMP_PHY_INIT_CFG(QSERDES_UFS_V7_RX_MODE_RATE_0_1_B6, 0x60),
-+	QMP_PHY_INIT_CFG(QSERDES_UFS_V7_RX_MODE_RATE_0_1_B7, 0x62),
-+	QMP_PHY_INIT_CFG(QSERDES_UFS_V7_RX_MODE_RATE2_B3, 0x9a),
-+	QMP_PHY_INIT_CFG(QSERDES_UFS_V7_RX_MODE_RATE2_B6, 0xe2),
-+	QMP_PHY_INIT_CFG(QSERDES_UFS_V7_RX_MODE_RATE2_B7, 0x06),
-+	QMP_PHY_INIT_CFG(QSERDES_UFS_V7_RX_MODE_RATE3_B0, 0x1b),
-+	QMP_PHY_INIT_CFG(QSERDES_UFS_V7_RX_MODE_RATE3_B1, 0x1b),
-+	QMP_PHY_INIT_CFG(QSERDES_UFS_V7_RX_MODE_RATE3_B2, 0x98),
-+	QMP_PHY_INIT_CFG(QSERDES_UFS_V7_RX_MODE_RATE3_B3, 0x9b),
-+	QMP_PHY_INIT_CFG(QSERDES_UFS_V7_RX_MODE_RATE3_B4, 0x2a),
-+	QMP_PHY_INIT_CFG(QSERDES_UFS_V7_RX_MODE_RATE3_B5, 0x12),
-+	QMP_PHY_INIT_CFG(QSERDES_UFS_V7_RX_MODE_RATE3_B7, 0x06),
-+	QMP_PHY_INIT_CFG(QSERDES_UFS_V7_RX_MODE_RATE3_B8, 0x01),
-+	QMP_PHY_INIT_CFG(QSERDES_UFS_V7_RX_MODE_RATE4_SA_B0, 0x93),
-+	QMP_PHY_INIT_CFG(QSERDES_UFS_V7_RX_MODE_RATE4_SA_B1, 0x93),
-+	QMP_PHY_INIT_CFG(QSERDES_UFS_V7_RX_MODE_RATE4_SA_B2, 0x60),
-+	QMP_PHY_INIT_CFG(QSERDES_UFS_V7_RX_MODE_RATE4_SA_B3, 0x99),
-+	QMP_PHY_INIT_CFG(QSERDES_UFS_V7_RX_MODE_RATE4_SA_B4, 0x5f),
-+	QMP_PHY_INIT_CFG(QSERDES_UFS_V7_RX_MODE_RATE4_SA_B5, 0x92),
-+	QMP_PHY_INIT_CFG(QSERDES_UFS_V7_RX_MODE_RATE4_SA_B6, 0xe3),
-+	QMP_PHY_INIT_CFG(QSERDES_UFS_V7_RX_MODE_RATE4_SA_B7, 0x06),
-+	QMP_PHY_INIT_CFG(QSERDES_UFS_V7_RX_MODE_RATE4_SB_B0, 0x24),
-+	QMP_PHY_INIT_CFG(QSERDES_UFS_V7_RX_MODE_RATE4_SB_B1, 0x24),
-+	QMP_PHY_INIT_CFG(QSERDES_UFS_V7_RX_MODE_RATE4_SB_B2, 0xe0),
-+	QMP_PHY_INIT_CFG(QSERDES_UFS_V7_RX_MODE_RATE4_SB_B3, 0x99),
-+	QMP_PHY_INIT_CFG(QSERDES_UFS_V7_RX_MODE_RATE4_SB_B4, 0x5f),
-+	QMP_PHY_INIT_CFG(QSERDES_UFS_V7_RX_MODE_RATE4_SB_B5, 0x92),
-+	QMP_PHY_INIT_CFG(QSERDES_UFS_V7_RX_MODE_RATE4_SB_B6, 0xfb),
-+	QMP_PHY_INIT_CFG(QSERDES_UFS_V7_RX_MODE_RATE4_SB_B7, 0x06),
-+	QMP_PHY_INIT_CFG(QSERDES_UFS_V7_RX_UCDR_SO_SATURATION, 0x1f),
-+	QMP_PHY_INIT_CFG(QSERDES_UFS_V7_RX_UCDR_PI_CTRL1, 0x94),
-+	QMP_PHY_INIT_CFG(QSERDES_UFS_V7_RX_TERM_BW_CTRL0, 0xfa),
-+	QMP_PHY_INIT_CFG(QSERDES_UFS_V7_RX_DLL0_FTUNE_CTRL, 0x30),
-+	QMP_PHY_INIT_CFG(QSERDES_UFS_V7_RX_SIGDET_CAL_TRIM, 0x77),
-+};
-+
- static const struct qmp_phy_init_tbl milos_ufsphy_serdes[] = {
- 	QMP_PHY_INIT_CFG(QSERDES_V6_COM_SYSCLK_EN_SEL, 0xd9),
- 	QMP_PHY_INIT_CFG(QSERDES_V6_COM_CMN_CONFIG_1, 0x16),
-@@ -1236,6 +1289,11 @@ static inline void qphy_clrbits(void __iomem *base, u32 offset, u32 val)
- }
- 
- /* Regulator bulk data with load values for specific configurations */
-+static const struct regulator_bulk_data glymur_ufsphy_vreg_l[] = {
-+	{ .supply = "vdda-phy", .init_load_uA = 217130 },
-+	{ .supply = "vdda-pll", .init_load_uA = 18340 },
-+};
-+
- static const struct regulator_bulk_data milos_ufsphy_vreg_l[] = {
- 	{ .supply = "vdda-phy", .init_load_uA = 140120 },
- 	{ .supply = "vdda-pll", .init_load_uA = 18340 },
-@@ -1348,6 +1406,44 @@ static const struct qmp_ufs_offsets qmp_ufs_offsets_v7 = {
- 	.rx2		= 0x3000,
- };
- 
-+static const struct qmp_phy_cfg glymur_ufsphy_cfg = {
-+	.lanes			= 2,
-+
-+	.offsets		= &qmp_ufs_offsets_v6,
-+	.max_supported_gear	= UFS_HS_G5,
-+
-+	.tbls = {
-+		.serdes		= sm8750_ufsphy_serdes,
-+		.serdes_num	= ARRAY_SIZE(sm8750_ufsphy_serdes),
-+		.tx		= sm8750_ufsphy_tx,
-+		.tx_num		= ARRAY_SIZE(sm8750_ufsphy_tx),
-+		.rx		= glymur_ufsphy_rx,
-+		.rx_num		= ARRAY_SIZE(glymur_ufsphy_rx),
-+		.pcs		= sm8750_ufsphy_pcs,
-+		.pcs_num	= ARRAY_SIZE(sm8750_ufsphy_pcs),
-+	},
-+
-+	.tbls_hs_b = {
-+		.pcs		= sm8750_ufsphy_hs_b_pcs,
-+		.pcs_num	= ARRAY_SIZE(sm8750_ufsphy_hs_b_pcs),
-+	},
-+
-+	.tbls_hs_overlay[0] = {
-+		.pcs		= sm8750_ufsphy_g4_pcs,
-+		.pcs_num	= ARRAY_SIZE(sm8750_ufsphy_g4_pcs),
-+		.max_gear	= UFS_HS_G4,
-+	},
-+	.tbls_hs_overlay[1] = {
-+		.pcs		= sm8650_ufsphy_g5_pcs,
-+		.pcs_num	= ARRAY_SIZE(sm8650_ufsphy_g5_pcs),
-+		.max_gear	= UFS_HS_G5,
-+	},
-+
-+	.vreg_list		= glymur_ufsphy_vreg_l,
-+	.num_vregs		= ARRAY_SIZE(glymur_ufsphy_vreg_l),
-+	.regs			= ufsphy_v6_regs_layout,
-+};
-+
- static const struct qmp_phy_cfg milos_ufsphy_cfg = {
- 	.lanes			= 2,
- 
-@@ -2395,6 +2491,9 @@ static int qmp_ufs_probe(struct platform_device *pdev)
- 
- static const struct of_device_id qmp_ufs_of_match_table[] = {
- 	{
-+		.compatible = "qcom,glymur-qmp-ufs-phy",
-+		.data = &glymur_ufsphy_cfg,
-+	}, {
- 		.compatible = "qcom,hawi-qmp-ufs-phy",
- 		.data = &hawi_ufsphy_cfg,
- 	}, {
+I cannot test the RX path on my hardware, which I personally require
+for all my patches.
 
--- 
-2.34.1
-
+Thanks,
+Jorijn
