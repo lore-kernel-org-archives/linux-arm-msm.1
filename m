@@ -1,219 +1,239 @@
 Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 92352353A70
-	for <linux-arm-msm@vger.kernel.org>; Fri, 11 Sep 2026 12:44:17 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9B2D547C106
+	for <linux-arm-msm@vger.kernel.org>; Fri, 11 Sep 2026 12:55:31 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789130659; cv=none; b=jG0pJRwzBh9Hy/Vb2aCvxM3yzpCGhRTaRd3PF7R4KxUiX3V8/HO2BIYzPFNojbVLOXnWyG7hwBrmoeunWNNHRp/QutZKnnkku1MNjdpkcwciIRE57rgcjLw9tJvjaUsmHaI/9H7BVJ5PxTPTMl+83jYa8p2pYd/eTzhw7GL0spc=
+	t=1789131340; cv=none; b=Akq/q2io73TjYVoMG6wndWtD6uBYvGfHkEeV4pscbAKcXBEOW4G1ISTZ52vBYoI3zDlavtmP5jVFw9ibsKxnu6rt/oyQroHp59eUjTOAOex9OC/fk3bcYpjzXpl/UAv3Cir+UvRZ9iM3Z0fuU2xOOgy6LyfmyFfBDVlsTGknfKM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789130659; c=relaxed/simple;
-	bh=Iw8u2HFgGqDAoQrrT9wzoBb0ozZH/XWjDz6cYa9Fox4=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=SLp+1Vr3Mc/iZxkee3h8x758+oYo9Ema/qdTRrLGPM9Jc5a2o6heMCMvjO/eJI9iQfKM3WZNe8z79GFv/6Lwa8lx3Xm3L9aHTiXS0GKamgGJnSTHt7eNrTum8IzJdqVCEe48dYJxgP+nsfBZQbfko6sOppxE+b3U697W1OrcP9M=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=NjK7fcb6; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=fKiQYTbD; arc=none smtp.client-ip=205.220.180.131
+	s=arc-20240116; t=1789131340; c=relaxed/simple;
+	bh=EJ5r57gLpilZ3+yZl5NF8P243eDG3yT6SXqShaFf8fQ=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=ZG35rTPxEpxX1g6NrpGZ1d+mVUjv/y33bfbhnHhiDeb3QOJNnFNvk/S1nFPTTzhsxXow1SUpht4FhBy79nb68Y/ImuaUklbwCKwPbvgFbFUUIyJuVFcOOgOvVaJzptGB2kBx4J/lFbFdh1fZ4v0lx56z7ClHvoIRIXvNIx+aw5g=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=Y2lUjdMn; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=F5HARGnR; arc=none smtp.client-ip=205.220.180.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="NjK7fcb6";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="fKiQYTbD"
-Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68BAqEVT4105344
-	for <linux-arm-msm@vger.kernel.org>; Fri, 11 Sep 2026 12:44:16 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="Y2lUjdMn";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="F5HARGnR"
+Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68BCjZMC524794
+	for <linux-arm-msm@vger.kernel.org>; Fri, 11 Sep 2026 12:55:25 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-type:date:from:in-reply-to:message-id:mime-version
-	:references:subject:to; s=qcppdkim1; bh=hs3C87rUc37Br7hDul2xSyhF
-	h9hB6GXOl4E84myixsI=; b=NjK7fcb6JPtbo5k6auGunh1/s6S8cSB7/2xfUCb0
-	geBR6XfxyIyAv/YgcP8Y+c9tuKr9gYAo3B6JafTG8Heot7v1jkoHq+1UeI5/8ix4
-	uIuXBf3NIewBEGLANgLEDH4Iv91nN3YQ4OrelX0svTbAYm0QAF7onmGlMv1xOTv2
-	pqTqXF1qOaUn2TSkn2Zx+Zy+UlzWsOMcW6qV/pxCY0hCDp6ut9jyKGe+oY6sv/Jx
-	mJYOXFPLWKjH6vg1XX2p8L37maNfpKt26iRisfXiPNpqJvnAdB1w7P207DHsAOw9
-	m9cW25yCDc132GIie1OvaXAGaotgkwZaoA4TdtHSVtUrIw==
-Received: from mail-pl1-f199.google.com (mail-pl1-f199.google.com [209.85.214.199])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gmapg1wm6-1
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	fE1XO9uFP7kpmRsabwHa5xPnxFyIwcWkuY3YR4Rbemg=; b=Y2lUjdMnDN2LUBpn
+	K+H0dzBwMfJCUSO6uF1Zvfar1ZHnFsKI/o7e7n/EW8M0FitGjwxsel7YIpRiHyRP
+	CKmdgpBDLelwdzXWDD4aKNySBBlgl5cnPfPtp1WRV+V0PLpAlNiY5rU8xLaGOF3C
+	pNuQTdtHJPljyVbwzT2qmCfPzoh1N6lwGBR+lKJBXXSnPm6f5jjWuql095LHS15M
+	68dDK/sU5Wepk4p1HeAfSkxHNbTsyfEuAAUL7lz6xpLqi4C7KU9BPFCZ0Vw1NSyU
+	SIfob3oQu2yK5PzWgfNMgQ57fMWe/T1t1L98Bq+Z3bFJ/qvy8jIPNNSOOCN4yGNw
+	DRBq8Q==
+Received: from mail-vk1-f199.google.com (mail-vk1-f199.google.com [209.85.221.199])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gm2q13jhd-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Fri, 11 Sep 2026 12:44:15 +0000 (GMT)
-Received: by mail-pl1-f199.google.com with SMTP id d9443c01a7336-2d904f64a30so1511455ad.2
-        for <linux-arm-msm@vger.kernel.org>; Fri, 11 Sep 2026 05:44:15 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 11 Sep 2026 12:55:25 +0000 (GMT)
+Received: by mail-vk1-f199.google.com with SMTP id 71dfb90a1353d-5c8487ce333so214893e0c.1
+        for <linux-arm-msm@vger.kernel.org>; Fri, 11 Sep 2026 05:55:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1789130655; x=1789735455; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=hs3C87rUc37Br7hDul2xSyhFh9hB6GXOl4E84myixsI=;
-        b=fKiQYTbDKQfAi0S23XtJQ4AeV/Q42iA9GSeFDLieoavnkmfTPp0d5k5tawdaSIUc46
-         E0V0yRBcCBXN9TjyVdkZEW3BAawVbG8PaSvbDO3XxkauzwfhLakBf44BbteZmIoczD0G
-         pTyO+m0aRlQPpLg9Uw8aaacI56stDtWi9YuxC3CJzxDfOCtYrNo9iJwOpEdcGXwW9To1
-         rGy8VvkgtxGn6YHFULweROYK+I5StwYfL90IDASdz0EVXy11u3Vf26RwHVeI5aJ/E8bW
-         Y7Yq3lWv2rCpYZO8FU8bAW2OBjHRkerW9oAk+CddqHgp4WntOzM6EQiZVKUGkMYXY4u0
-         hWSg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1789130655; x=1789735455;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+        d=oss.qualcomm.com; s=google; t=1789131324; x=1789736124; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=hs3C87rUc37Br7hDul2xSyhFh9hB6GXOl4E84myixsI=;
-        b=oLTejJFJLaC6Sql6l0wcSnlGcFcldm3iJWfsuv1h28/qExAfUMbd83wimIoUcKE2yU
-         LDRvWHDTpkkk5OkLYaMont0ADvr/8XN1lQjjN1OivelFwehl+p3aDRENQ12dBSRVq9aM
-         djCc91NKXYBBsDXuZO+RJwM7ow9sLlpHcar5C9GErjD5EPpVxHth94ji8SfwjzocPg35
-         1inv+Nq4IBjdZyyFDs04Bdbww38EORf2ccIy+7OJv3w8y/nMgccZxFAYhKTPYmidY7fD
-         PIQWvnSW818jlclZehsKkSRxjC4HHqjGRgwADkKBMvT4lFTBMJ+m9jgd5q+bX8iAXuGk
-         /ZHA==
-X-Forwarded-Encrypted: i=1; AKwUvBysrRFJ1QoZuiC171H9fz8VaI0NuwsTJvsUQ3Qh3I6gI5opk+O6gYy+g2QJ6ouVNiU2IKizr3ahIKkJcpu0@vger.kernel.org
-X-Gm-Message-State: AFuF++mkmZDBF31S/AZk9MN/0u4EmrVvpZ3rbDF9+yzizYxkncTrwlD6
-	HikuDJetC0eqyLWYRONITRYHCFqmRZvIKNtmMr+M79QtGQNoq3yzHipWFIrQe9lmkxxvOs7cxfZ
-	MQvEvWSGkQXsVswTVFxSw711k65soJLfXajEYaF+0u52iHYhPLDObcCWsg9inOV+NOADN
-X-Gm-Gg: AYBFou0ba7bDILk/gUniFVA0oftxYkvCoetZd+q72XBAUE8L/CpmfWfB3kmoOGzeNF9
-	x0/fAvFu123HGCCrks8/sOWEZNaMWbWlq013HYKM8JJYajIA5gzAgzpRgGv87btuFPryZj09lbE
-	cDids8OAY8PfKDekunK0ZxGOoFKyd6pmVXGpG7rpZv9wXrqWWPfwbPPE7JH2B6jg1pCEsY6BRFO
-	KbwGBkE8M7+y42GADXDpuYiEWT0QEzT1MyHkoKGNDiboFyl7/llAJ0+kKGlAynTzFFL6AVOrlEj
-	zXS52ZB1HV3NDjqMxrk/sb63z14+Ewyx5/P/j4vN1Zw0vUWOme5YJtxKlwMNdMFqLosIf8zPA/K
-	Xu0SXYwWkgbAK2BQCseB0F/0t9vsHelkJUWHDBKlY3hqn2ktJE4iLpfMhYkPZrrxaCzOPCe41gc
-	QnsF982AAXIX5lgcFfVLQd
-X-Received: by 2002:a17:902:ce12:b0:2c9:ed4a:c3a4 with SMTP id d9443c01a7336-2dd29e0eb11mr52067485ad.0.1789130654992;
-        Fri, 11 Sep 2026 05:44:14 -0700 (PDT)
-X-Received: by 2002:a17:902:ce12:b0:2c9:ed4a:c3a4 with SMTP id d9443c01a7336-2dd29e0eb11mr52067185ad.0.1789130654445;
-        Fri, 11 Sep 2026 05:44:14 -0700 (PDT)
-Received: from hu-vishsain-blr.qualcomm.com (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2dd3f0faf19sm3636485ad.12.2026.09.11.05.44.07
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 11 Sep 2026 05:44:13 -0700 (PDT)
-Date: Fri, 11 Sep 2026 18:14:04 +0530
-From: Vishnu Saini <vishnu.saini@oss.qualcomm.com>
-To: Sebastian Andrzej Siewior <bigeasy@linutronix.de>
-Cc: Rob Clark <robin.clark@oss.qualcomm.com>,
-        Dmitry Baryshkov <lumag@kernel.org>,
-        Abhinav Kumar <abhinav.kumar@linux.dev>,
-        Jessica Zhang <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>,
-        Marijn Suijten <marijn.suijten@somainline.org>,
-        David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
-        Clark Williams <clrkwllms@kernel.org>,
-        Steven Rostedt <rostedt@goodmis.org>,
-        Jordan Crouse <jordan@cosmicpenguin.net>,
-        Sravanthi Kollukuduru <skolluku@codeaurora.org>,
-        Archit Taneja <architt@codeaurora.org>,
-        Jeykumar Sankaran <jsanka@codeaurora.org>,
-        Chandan Uddaraju <chandanu@codeaurora.org>,
-        Rajesh Yadav <ryadav@codeaurora.org>, linux-arm-msm@vger.kernel.org,
-        dri-devel@lists.freedesktop.org, freedreno@lists.freedesktop.org,
-        linux-kernel@vger.kernel.org, linux-rt-devel@lists.linux.dev,
-        venkata.valluru@oss.qualcomm.com,
-        Naman S Thaker <namathak@qti.qualcomm.com>, stable@vger.kernel.org
-Subject: Re: [PATCH] drm/msm: split DPU core IRQ handler under
- CONFIG_PREEMPT_RT
-Message-ID: <aqP3lDjzzsbFNly5@hu-vishsain-blr.qualcomm.com>
-References: <20260909-drm-mis-next-split-irq-v1-1-89bc9c512c53@oss.qualcomm.com>
- <20260910064723.pbZP3vic@linutronix.de>
+        bh=fE1XO9uFP7kpmRsabwHa5xPnxFyIwcWkuY3YR4Rbemg=;
+        b=F5HARGnRO7Tw+GhAZM10g2+QCww6OjlQdg6bzoFI+n+3RxraKyeMQzqcfretU90Ow8
+         lA+n53sFTxOOv8dwzHfmpV/sCACXXFAjHd46nNSw+IzFUveqjh7C43uydv7HAMl+kLS8
+         l1G5llcCGDQGY8B7kWom/hpn6sD+BrTCgLs9/7Z9xF2wpcp2SvfTGc/tCsEFRNfymmQf
+         j+wfw7R37kTWAHN3h/5FBrrKyrYdDOdLl2IpWPh5qVHMBEEeF+EpylurNTTMa4QkfEfn
+         2GiKlbwfI8ig9ovCppJIQHfP6e3G+jIsB9pEQrwvJBtGbFMJHYn7KTFhsLzqZlleZCOY
+         Vnig==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1789131324; x=1789736124;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=fE1XO9uFP7kpmRsabwHa5xPnxFyIwcWkuY3YR4Rbemg=;
+        b=YWjksNyoOwaxj+jTUUXYDYzvLD4Jm1G2Swss98kO3qS4w5ODTURiKLikS6qy+MpsUI
+         jfz9yek7nGi3E3HloO9Hl57dnb8JvIUnj6BgZTTbxAUCaFzte/bOHH55+HEniNB+NJdS
+         gshy15TOC0ucH4B/32evDTdr33Hsl+zYH3JxkjBhH0a6pbMlkW+CJ9ZdmGSlKngW8oYg
+         w6JwJd5L6Z/svqKa7WCkoxZUwdIoelyq8t6722zGmRouwejHfq/5DXN8BAjhwh1crbXa
+         pWvl6xT3dyrHcRcsOZRTD3tmChENA2V0oPWe3m+ZYCqPHjhAByuG+u0ejWseNdbN83aR
+         DeKQ==
+X-Forwarded-Encrypted: i=1; AKwUvByvuT8NvTPwQhyN0CdXEG7tFevBrdGNFINddc6tD+mC9EdN5nwymdVk5sC7JcENXjS4rQfmiQWojHipTM+1@vger.kernel.org
+X-Gm-Message-State: AFuF++l8PVtYNGYbrMhSHOGVViI2y3q+5p056N+p/7Lu/NKzpVk/mKxC
+	SqiA5+IlBEABpAdU8SmZHnZcjLVDVjXGS2ziUvikLB7N0kRXvH1gPy0vWWSLaQH6fHLH1OkeLc1
+	XQTheMtR6QMtdJbj3WUFKaW5KewsdzISUk6RJJ8l1vaHT+qIfGWY50SsK2TuJXc2qpljC
+X-Gm-Gg: AYBFou0kXGvcwGENt399aysSZV0GTuL2WFey4mkST33GLHacKZEHqYk4NDfZf91iGTY
+	Wj8Gci2rQSKmUpbbpj3YF7ZD0Tna4wImcl7H4AEqd+zESIV3C+vUNciMVcVLYCvBP2grbJYJa0C
+	W/Clpu7zb7oRLN+tQU6EJ+QXFSK5V3Y51sqNIuAJuggGkZHLP7Tj41y+3nu03Dyxh8UQQ8l/ZTP
+	0pyv8gsA94VHD4P6lPDf4mI8k3P8KW78VXeLCXPCcBjpIctrjY/bnKeaDffyDeoqFpdVY69GHFh
+	jQaClWM1KU0s8zDyaFSt+0tskKIFMALSNzM0nutOVbjUfLHRIhF7P6tvYXNLGQsA6jJ8aRJry96
+	0xjuVi2TTKeXo+izBp+Ic1yIjRausAlEiXKyEuq2e
+X-Received: by 2002:a05:6123:105:b0:5c8:54d1:d0f2 with SMTP id 71dfb90a1353d-5c854d1e5fcmr913896e0c.2.1789131324540;
+        Fri, 11 Sep 2026 05:55:24 -0700 (PDT)
+X-Received: by 2002:a05:6123:105:b0:5c8:54d1:d0f2 with SMTP id 71dfb90a1353d-5c854d1e5fcmr913541e0c.2.1789131319192;
+        Fri, 11 Sep 2026 05:55:19 -0700 (PDT)
+Received: from [192.168.1.31] ([85.196.172.179])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-486eb2ecfc3sm5592265f8f.4.2026.09.11.05.55.12
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Fri, 11 Sep 2026 05:55:13 -0700 (PDT)
+Message-ID: <5924ecf4-4aff-481f-a074-e3768f54d091@oss.qualcomm.com>
+Date: Fri, 11 Sep 2026 15:55:10 +0300
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260910064723.pbZP3vic@linutronix.de>
-X-Proofpoint-ORIG-GUID: SjjZ4bpoA3-L0nBRq1exDzQI4f6vGtQR
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTExMDE3NyBTYWx0ZWRfXyTnybWkP+hYs
- 4stM62CjsDRzC3bInxW21VuLswhBZ7ttcCpIxJbYI0gUn1J/3F9V/xQHJ9zc1T3nP2Rhg66Ook6
- 70uGnR5YzYy+731cQaI5fidhuNMy6Kc=
-X-Proofpoint-GUID: SjjZ4bpoA3-L0nBRq1exDzQI4f6vGtQR
-X-Authority-Analysis: v=2.4 cv=DLoacCNb c=1 sm=1 tr=0 ts=6aa3f79f cx=c_pps
- a=JL+w9abYAAE89/QcEU+0QA==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
- a=kj9zAlcOel0A:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
- a=EUspDBNiAAAA:8 a=p8fm3qIaiwJ8G5vN5j0A:9 a=CjuIK1q_8ugA:10
- a=324X-CrmTo6CU4MGRt3R:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTExMDE3NyBTYWx0ZWRfX45ZFmj5OFsWl
- FHCcwywBRSukRdtCIfIqVEULjYS3LPbGCt8jVMKiKfIR1w8/vhZh47fu8teDRTY9ApF/5MI7usM
- nj2eU+6Qz2ISsLnxtxkIgAtHGuuKn8HTdy1UfwPUCcjZa9KwmHM+eh5hCZc5Y6xxCOTg9qtT84E
- gRvq09SNoXhHv/V1JurUigfIbMQm2TBBKs0j+ILf606p02uaA3Ybsyjh+GMtSMv+l2+1E8fB9o/
- pP3yvMACFk0ilRLPGKt6iziA25qbmnIf+dxK7P/YPkAsluWUTl4Ls6Imj08HBPYZ2XkDnWOraaI
- b8gNBCFJ+p1ElHdyGBImmcYd1OGJzWYLXL2aoQrPC2tCNOLxnWMXWcHSmV5D6My0rQFoxK45HGo
- DWsUF+oc0csCj6O+R0E5M89CyMnXyQ7KQz/VsclPzF1aoHn7stv4h1T/6VJPht0iPNjy+U47a63
- pDshhAXiN9gvyIo4twA==
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 0/8] media: qcom: camss: add V4L2 subdev streams API
+ support
+To: Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
+        Gjorgji.Rosikopulos.gjorgji.rosikopulos@oss.qualcomm.com,
+        Mauro Carvalho Chehab <mchehab@kernel.org>
+Cc: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
+        Loic Poulain <loic.poulain@oss.qualcomm.com>,
+        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+        Atanas Filipov <atanas.filipov@oss.qualcomm.com>,
+        Jigarkumar Zala <jigarkumar.zala@oss.qualcomm.com>,
+        linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+References: <20260911062213.195007-1-gjorgji.rosikopulos@oss.qualcomm.com>
+ <b44d7cc0-203f-4bf0-ac3b-5393bb0e1a90@linaro.org>
+Content-Language: en-US
+From: "Gjorgji Rosikopulos (Consultant)"
+ <gjorgji.rosikopulos@oss.qualcomm.com>
+In-Reply-To: <b44d7cc0-203f-4bf0-ac3b-5393bb0e1a90@linaro.org>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Authority-Analysis: v=2.4 cv=d6lgWhjE c=1 sm=1 tr=0 ts=6aa3fa3d cx=c_pps
+ a=+D9SDfe9YZWTjADjLiQY5g==:117 a=Q/e3f29T3Hw2hnAEzBPF7w==:17
+ a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22
+ a=EUspDBNiAAAA:8 a=6dU6rKIv1OnIQb75gLYA:9 a=QEXdDO2ut3YA:10
+ a=vmgOmaN-Xu0dpDh8OwbV:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTExMDE4MCBTYWx0ZWRfX4Vlu9jeG4sLh
+ f6NpyYTjeR3bW+k2qMasBWptcjIo7R1Mf8pfExc2AWPiuAMWy4G2s3B8i5sDIaZxotO15o/CwkE
+ VeTcYTLpQxAF6MoApjSIFfmNEAeeNHpJfNl0lXr1seOBOp9ltPxXAuSPagGMifMkQ5bAQOd8yab
+ pOydDQ8H37RPS8vfHXGFImH1vgQ/TT7L0IzkxzU3afp9p+vi89+/3WWub7dZtI86p+XNqJJOc2P
+ 0BkH8pCtmX7dY3gjDOERQVEuTRC21/TcIdiBS8deC00/HB2duLyP6HQvAX605yTMkXL4tHkizMj
+ Z+78qlUCYfwV3xwrrK2Q7YkSKN4L0E5GCo1gvky/BCKaswPAancAVLziMDJ84z97P4r6nmYd1+A
+ +ZsSPlViWcOzhbPjrN6oma8vIbXg7b8t8RbHDfC/yZ9ytrodjhbQJYfpU2SW4aQ4WwFKs4CXZBN
+ QsEuOoZgXgqar4MZMBQ==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTExMDE4MCBTYWx0ZWRfX/oNBT9AZTK0r
+ w+0+ONp5RoBP4H3/mZEowQL8Y8CTvaw9X0qO+NNtLDFy05/rCvDZqU9oFF5GSwKX1aLwynxm8Ii
+ zDjiqscpTCUZVl5h19ZYAH3jvLTu9F8=
+X-Proofpoint-GUID: bfv8SCE6pbb8vQtYCF-O7cAa8QhrgYzq
+X-Proofpoint-ORIG-GUID: bfv8SCE6pbb8vQtYCF-O7cAa8QhrgYzq
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-11_04,2026-09-09_02,2025-10-01_01
+ definitions=2026-09-11_04,2026-09-11_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0 priorityscore=1501 phishscore=0 adultscore=0 suspectscore=0
- spamscore=0 impostorscore=0 bulkscore=0 clxscore=1015 lowpriorityscore=0
+ impostorscore=0 suspectscore=0 spamscore=0 priorityscore=1501 bulkscore=0
+ adultscore=0 lowpriorityscore=0 phishscore=0 clxscore=1015 malwarescore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609110177
+ reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609110180
 
-On Thu, Sep 10, 2026 at 08:47:23AM +0200, Sebastian Andrzej Siewior wrote:
-> On 2026-09-09 14:22:16 [+0530], vishnu.saini@oss.qualcomm.com wrote:
-> > From: Naman S Thaker <namathak@qti.qualcomm.com>
-> > 
-> > On a PREEMPT_RT kernel, dpu_core_irq() runs as a true hardirq handler,
+Hi Bryan thanks for the review,
+
+On 9/11/2026 1:19 PM, Bryan O'Donoghue wrote:
+> On 11/09/2026 07:22, 
+> Gjorgji.Rosikopulos.gjorgji.rosikopulos@oss.qualcomm.com wrote:
+>> From: Gjorgji Rosikopulos <gjorgji.rosikopulos@oss.qualcomm.com>
+>>
+>> This series adds V4L2 subdev streams API support to the CAMSS driver.
 > 
-> *why* is this the case. The code you replaces adds some ifdefs around
-> request_irq() with 0 as flags. This does not make it run has hardirq.
-You are right, the statement is incorrect, i will update the commit msg.
-On RT kernel, the dpu_core_irq() runs in threaded context by default.
-This behavior is changed in the commit by calling devm_request_threaded_irq with
-IRQ_ONESHOT flag only for RT kernel using the ifdefs.
+> Can you please provide a use-case and test in your overview.
 
-The irq is now split into two parts for RT,
-1: primary handler which does not use sleeping locks, and
-2: secondary threaded handler which can use sleepable locks.
-For normal kernels, the request_irq() with 0 flag is still used as-is.
+The use case is having multi VC sensor operating in DOL mode,
+i have locally some register settings for enabling that and verify
+the multi VC but unfortunately i dont have permission to post that upstream
+for now... 
+
+> 
+> i.e. show what it does and show it doesn't break anything in a way a 
+> reviewer can test ?
+
+I have shell scripts setting up the links using media-ctl and streaming
+with v4l2-ctl, i will post the content in the cover letter in next patchset.
+
+> 
+>> Each subdevice gains streams-aware enable_streams/disable_streams pad
+>> ops alongside the existing legacy (non-streams) subdev ops, guarded by
+>> a new per-instance streams_enable resource flag.
+>>
+>> Patches 1-4 add the CSIPHY/CSID mechanism:
+>>   - CSIPHY: passthrough routing, NO_STREAM_MIX/NO_N_TO_1 validation, and
+>>     shared D-PHY lane enable/disable gated on stream-count transitions.
+>>   - CSID: per-source-pad routing (a single sink stream propagated to
+>>     every source pad by default, remappable for multi-VC sensors),
+>>     VC/DT discovery via get_frame_desc, and new hw_ops
+>>     (configure_rx/enable_stream/disable_stream) with a gen2 backend
+>>     implementation.
+>>
+>> Patch 5 is a standalone bug fix, independent of the streams API:
+>> camss_link_entities() used to create an all-to-all CSID-to-VFE
+>> crossbar, but SM8250's hardware wiring is a fixed 1:1 pairing
+>> (csid[i] <-> vfe[i]). Enabling a mismatched link (e.g. csid0 -> vfe1)
+>> exposed a media link with no real hardware datapath. Fixed via an
+>> opt-in csid_vfe_fixed_pairing flag, set only for sm8250_resources.
+>>
+>> Patches 6-8 complete the mechanism and turn it on for real hardware:
+>>   - VFE: streams-aware pad ops. VFE lines are inherently single-consumer
+>>     (vfe_link_setup() enforces one link per pad), so no refcounting is
+>>     needed there.
+>>   - camss-video: the video device pipeline walk now checks, via
+>>     v4l2_subdev_has_op(), whether the directly-connected subdev supports
+>>     enable_streams/disable_streams; if so it issues a single top-level
+>>     call instead of manually walking the pipeline one subdev at a time
+>>     with .s_stream(). Falls back to the existing legacy path unchanged
+>>     when the remote subdev doesn't support the streams API, so no other
+>>     platform is affected.
+>>   - SM8250: streams_enable is set true on every CSIPHY, CSID, and VFE
+>>     line resource entry, turning the mechanism on for real hardware.
+>>     Every other platform keeps using the legacy non-streams subdev ops,
+>>     so this is a no-op everywhere else.
+>>
+>> A practical benefit of the CSID routing change (patch 4) is routing
+>> flexibility for multi-VC sensors: the CSID's routing table maps sink
+>> streams to source pads/streams via userspace-configurable
+>> v4l2_subdev_route entries instead of a fixed pad<->VC assignment, so a
+>> sensor emitting multiple virtual channels can have each VC directed to
+>> a different RDI output (and thus a different VFE line/video node)
+>> with a set_routing call, rather than being constrained to whatever
+>> fixed mapping the driver hardcodes.
+>>
+>> When a sink stream is shared by multiple source pads/streams, CSID
+>> only enables the corresponding upstream CSIPHY stream on the first
+>> source stream that needs it, and only disables it once the last
+>> remaining source stream using it is disabled. Enabling or disabling
+>> additional consumers of an already-active shared stream is a no-op
+>> upstream, so no consumer can double-enable or prematurely disable a
+>> stream still in use by another. This also avoids ever hitting v4l2
+>> core's own -EALREADY re-enable gate.
+>>
+>> Verified clean with checkpatch --strict. Built, flashed, and tested on
+>> RB5/SM8250 hardware; ran the no-routing capture verification test
+>> across all four CSID/VFE RDI pairs (csid0->vfe0, csid1->vfe1,
+>> csid2->vfe2, csid3->vfe3) at 4056x3040 - all four passed with
+>> correctly-sized frame captures.
+> 
+> What's that - please detail your exact steps in the cover letter. What I 
+> need to see in the first instance is that nothing breaks.
+>
+
+Yes i will post them in the next patchset. Along with the routing commands when
+stream_api is enabled in the kernel.
 
  
-> > but it dispatches per-encoder callbacks that take sleepable locks
-> > (spinlock_t becomes an rt_mutex on RT, and some DRM-core locks reached
-> > through vblank/CRC/writeback handling are sleepable as well). Sleeping
-> > inside a hardirq handler is not allowed and eventually crashes the
-> > display, which is what happens after running GLMark2 for a while.
-> 
-> That is correct. That is the irq handler are threaded by default and
-> only non-threaded if explicitly requested.
-> 
-> I suggest to stick with non-threaded by default.
-> There is only one request_threaded_irq() as far as I can tell and this
-> msm_dp_display_request_irq():
-> 
-> |         rc = devm_request_threaded_irq(&pdev->dev, dp->irq,
-> |                                        msm_dp_display_irq_handler,
-> |                                        msm_dp_display_irq_thread,
-> |                                        IRQ_TYPE_LEVEL_HIGH,
-> |                                        "dp_display_isr", dp);
-> 
-> and its primary handler will be threaded on PREEMPT_RT, too. So you end
-> up with two threads here.
-You are correct about the primary handler in msm_dp_display_request_irq() being threaded.
-But the request_threaded_irq function in msm_dp_display_request_irq() is not modified in this commit.
-The issue fixed by the current commit relates to msm_mdss_irq crash stack below.
+> Maybe try running libcamera cam with or without gpuisp. Show some yavta 
+> commands to prove nothing breaks and then something to show how to use 
+> your code.
 
-[  152.108462] Call trace:
-[  152.108465]  show_stack+0x18/0x30 (C)
-[  152.108477]  dump_stack_lvl+0x60/0x80
-[  152.108484]  dump_stack+0x18/0x24
-[  152.108489]  __report_bad_irq+0x4c/0xec
-[  152.108496]  note_interrupt+0x340/0x394
-[  152.108502]  handle_irq_event+0x94/0xa0
-[  152.108508]  handle_level_irq+0xd8/0x16c
-[  152.108513]  handle_irq_desc+0x34/0x5c
-[  152.108518]  generic_handle_domain_irq+0x1c/0x28
-[  152.108522]  msm_mdss_irq+0x68/0x144 [msm]
-[  152.108654]  handle_irq_desc+0x34/0x5c
-[  152.108660]  generic_handle_domain_irq+0x1c/0x28
-[  152.108664]  gic_handle_irq+0x4c/0x140
-[  152.108669]  call_on_irq_stack+0x30/0x48
-[  152.108673]  do_interrupt_handler+0x80/0x84
-[  152.108678]  el1_interrupt+0x38/0x58
-[  152.108685]  el1h_64_irq_handler+0x18/0x24
-[  152.108690]  el1h_64_irq+0x70/0x74
-[  152.108694]  __schedule+0x6c/0xc9c (P)
-[  152.108701]  schedule_idle+0x20/0x40
-[  152.108705]  do_idle+0x17c/0x2c0
-[  152.108710]  cpu_startup_entry+0x38/0x40
-[  152.108714]  rest_init+0xd8/0xe0
-[  152.108719]  console_on_rootfs+0x0/0x6c
-[  152.108726]  __primary_switched+0x88/0x90
-[  152.108732] handlers:
-[  152.108734] [<000000000cabe59c>] irq_default_primary_handler threaded [<00000000779fd542>] msm_irq [msm]
-[  152.108859] Disabling IRQ #246
+Also i will verify with libcamera and gpuisp and update the results in
+second patchset.
 
-> Sebastian
+~Gjorgji
