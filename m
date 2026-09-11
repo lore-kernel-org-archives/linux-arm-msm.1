@@ -1,68 +1,68 @@
 Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5718C3F0761
-	for <linux-arm-msm@vger.kernel.org>; Fri, 11 Sep 2026 06:22:24 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4EFE53D9549
+	for <linux-arm-msm@vger.kernel.org>; Fri, 11 Sep 2026 06:22:26 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789107746; cv=none; b=ZdlNsyrrp97F/ahanPcYciq04AxLH32wI94aVcRoUA5hDW5VtGoIhFngNoNbPxs/cZHZGEiGdNcaDsZEuvJd5a3Us5PeMK6lm/SP17oyflhpGqE59YQVIXawPV+SMfP+L/0z7J8gv7JkjqkejnOmWcM/f+MqkTUaX1I+RJ4zEVo=
+	t=1789107749; cv=none; b=A9fLoOmgORZcipVRoqAWsu63wMY14BofYBWP6+t58f0TP6Qo7efWr85KXUCcc7l6qaFu3R3zEKjXJ7Iy5mvXsNZKSg1yWCFvwlQNtk1FUH3SQAaFPteGgpNtyQSzJA5pMoy5IDzvHt0lLM7nAxfWPRCiD/g5ZuljE76QZcBD75o=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789107746; c=relaxed/simple;
-	bh=UoS5f2EBhTJcgyOtezRR0LMksrdBR09WIq1yMgN96kw=;
+	s=arc-20240116; t=1789107749; c=relaxed/simple;
+	bh=jQhOx3vEY0b8cO6ZOGrXD/l8aLbSQYyq3/tXIbU7Iqs=;
 	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
-	 MIME-Version; b=TJr7z68rcfd4fhrTcaEmG7KecNSK15pDOuL21e1ousJBGut1zB8//Jdspey8T3ei31egskPJRHYrUB1CBXy7FAP9joVIZ1LtAbTsO039ppMuHxLBWr3M3B2Sjr6Q7B497rsA0EX4HjxfByH24Zi1LBZQqRJ9MVg6vkufcVy1yL8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=fail (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=Q/O2d/Y2 reason="signature verification failed"; arc=none smtp.client-ip=205.220.180.131
+	 MIME-Version; b=ajXFSyC9PvfYD+xivp0IZ/1dfnRB46ttA+2PoGm7L9siGLs1jwG7NBFMwQyMyCvvNnnPh1V7u7uKVuzLtUSH4U0gGB1tnaiOM0ELlXYGW4FYTaPiMYPC3Av4F14PamPFegQvBnd/ZMR20wFa9HdKi1f6XFbGuJct5K+t8MlfYoc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=fail (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=Sxonks// reason="signature verification failed"; arc=none smtp.client-ip=205.220.180.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="Q/O2d/Y2"
-Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68B4vJ0T3305641
-	for <linux-arm-msm@vger.kernel.org>; Fri, 11 Sep 2026 06:22:23 GMT
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="Sxonks//"
+Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68B4vQfJ2986636
+	for <linux-arm-msm@vger.kernel.org>; Fri, 11 Sep 2026 06:22:24 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:date:from:in-reply-to:message-id
-	:mime-version:references:subject:to; s=qcppdkim1; bh=amy1Wyx/W47
-	khn1kptgW1d87ONaJebqc8PBAbdLfWj8=; b=Q/O2d/Y2D3PsDLJdK1S6/oAb8Ub
-	wmKvkAUrsG5iyoxQQ4mxNYq2SwEaRT2KEBwZp3/4QTsGgUeOD2yH10uIHwqXXpKU
-	DYYhqi7I++I9S1oH0Q1phayXekBPtctUGyeq6Oy90/X8s5H52oQyKLU60twSOpNp
-	wtS2CGS4nLauq1Rv4VyTdQymR2AtsS3MITpP0fY69Qzbjv8vZvUqEUS35cG3SUwN
-	xjwyeuvo+MLo7D58sbBk61PygCRPXMQoyRB4Q76z6hDD/s6x6YQFoYNNVcS9mHbc
-	l+yskj2x8WhiEdCaPCWwLsJ+cfX1ehbb54DNwfuiPqf2RH3SOrMB05mYPYw==
-Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com [209.85.222.199])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gmapg0ccg-1
+	:mime-version:references:subject:to; s=qcppdkim1; bh=FE8iTCn+Uly
+	bWQ7qDFQypS2k5l4/hLWcIH1MjmtNl0s=; b=Sxonks//qAmQ+YeCSWe7KCI+bRA
+	6UjV4X+S+gOab32X/ad9Y5weZoxu16KmpHup14xrLhGSEDHgvVzc0LtIFyDZNFwv
+	vZJ49zOqZfOksy/X7D1TzatMFazT2cf743giv6qgGbIg08OICgyR2k145L6G8ZeC
+	GywIQov9UIu8yeF+yaSOl52OF6AlUKSzFa26RyEdcwVSxh8v8SDMK+kFXWtMY9G6
+	qwL66NwvgThp1a5/QTJrr2u0/ORvTWbrGLJM8IEbnQUO6TCAqNjq0fAvkKIrY0KL
+	ABOGM3Svr++1ozyFDoVCPbA9QB7m06jhmfSXfhM+twbwsLxtvjoi9LRC46w==
+Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com [209.85.222.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gm1k2abxp-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Fri, 11 Sep 2026 06:22:22 +0000 (GMT)
-Received: by mail-qk1-f199.google.com with SMTP id af79cd13be357-93909014c85so100902885a.0
-        for <linux-arm-msm@vger.kernel.org>; Thu, 10 Sep 2026 23:22:22 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 11 Sep 2026 06:22:24 +0000 (GMT)
+Received: by mail-qk1-f197.google.com with SMTP id af79cd13be357-92e53b8a302so102494485a.1
+        for <linux-arm-msm@vger.kernel.org>; Thu, 10 Sep 2026 23:22:24 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1789107742; x=1789712542;
+        d=1e100.net; s=20251104; t=1789107744; x=1789712544;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=amy1Wyx/W47khn1kptgW1d87ONaJebqc8PBAbdLfWj8=;
-        b=a66Zl/JCBI8dkv5uEeO3BBsl7KPqY8Cgv14FJ4YxDDLLVfwN6+Xae9TtUA+GhURj19
-         aNz3xqXodXkX1zqeG39LCWGKDLmOKIaJJDi+Ki/Cq1lrl8TjY0KeYRNH5gZ6obpPNU8k
-         10RjMT18BR499+osvZVEVhGIMH/Lo23RN9TAIOu/Wl4P/ouYSKPIGX6LiBjzYnH5M3ac
-         qzG9jhxW+v0kBI2eUNrQE/PMFjUzC/gJZG8NhwEekRuI0dr6P3ygRh7roXHFL9e3qoLl
-         fuka+VZ21SglttvFn1VNflhR4tLRtGti6hl/SVZWJnw1yvLtxspBlr+++WK07B69w7PJ
-         QIsg==
-X-Forwarded-Encrypted: i=1; AKwUvBxHRqKXaQkmzScrSKbMuo48jtCpKY6OaXqfSVIQGL4ZOmo0EdYV308PIJxtmXOGLcGPCArJDWGOd6Qp4nT3@vger.kernel.org
-X-Gm-Message-State: AFuF++nQI1sf4f7bV/JuBbcJjj/Tp2gl2vwTkClAQMMQ61SnFAuVJ5KK
-	XRMNboc8NCa3xN4MtbYSzpBjBnT2IwgYBD8E5+4JXJRUhLoBOPWKSGtbJ6Pb+hRf9lZLbi1n1vK
-	RhN34hzeVRTJ/Oix5ciZKcFWFhZxOp/WCZsuEqrMo75gkvAsNG3edg0tp4BnqqeXS0x8b
-X-Gm-Gg: AYBFou2CB4jOOud9t/mC4GfOANTiz/jEmcFQPuvV2w34SsxoA4xybj9WLqLwAtqQvRj
-	AcfFSb/YYYI/lBW/ZAbRLmu767eN4ZoArZn3G5A8X0TKaSDcvCbwONHra/xCOylajMAy0WVOAlj
-	7UI0bFQaaDh5x6EdKOAqZiIE/mSJisN/35OLeelxyPfcM2FgKJBy/vDSj7VUDzVCx3jOj3GZH02
-	+Lwll1OO+qQiYOVtdQImpzwJoZmDIWN86WbOVDOBxun8fT7eM8rw+FEGznIK231CTJP035w5h2w
-	LfeGRL/wPOEf6cKbebSc07WOzJTlrOvWoigsdTW+uu+qKCD13p9Y0N31YPk=
-X-Received: by 2002:a05:620a:4513:b0:939:c555:efb6 with SMTP id af79cd13be357-939ea085dbdmr334589685a.12.1789107742302;
-        Thu, 10 Sep 2026 23:22:22 -0700 (PDT)
-X-Received: by 2002:a05:620a:4513:b0:939:c555:efb6 with SMTP id af79cd13be357-939ea085dbdmr334585885a.12.1789107741784;
-        Thu, 10 Sep 2026 23:22:21 -0700 (PDT)
+        bh=FE8iTCn+UlybWQ7qDFQypS2k5l4/hLWcIH1MjmtNl0s=;
+        b=N9aNrZu9+hiHqJCLoLINE+YgE3eaBOmep8dlvH+VB+BcFX9W09gBYRWUbse3NUFvpo
+         OljXoKdBBPSsB0DxQr7O99a0neEV2UGr+Orwn04T3ROJvyxNDlphcU8YI43OgCLUOuS3
+         GK8C2UREzRRp5+rkbZzLsYTHpAAAzfjAWd+VFnPk/uYNz7tDsT2+9/svxnF0AsvyQlQZ
+         J7jz8ESZZTxZQe1jDtAOE9AZ8mOHv6XUovGRKnWpHR539qIDqo9BwaA4uVeWr2dc20VX
+         2hkue/HOhuBvoYL5qML1wQCPlILa1pkW1kXLBBi6sm8ES4QRURXgTllLsLmm2tKuOVu2
+         BJEg==
+X-Forwarded-Encrypted: i=1; AKwUvBxpjWFEXJomn4kLrOlQH2mM3CZR1orst6GCImL+MCI10yLGRRHEgWywue8bHK6HkqQDelNCUJauGZ9Caf3W@vger.kernel.org
+X-Gm-Message-State: AFuF++kVONdIboxucb7DZyLees3sWzLoKXQfuvM3T5/ChVTFR5GNJ/yK
+	z2M5XGXVI8ar8BBW8loA/n+qSBpHal7QwjFNbURFwQql0HlIL2qlXSW7c/DpdFLopp0UOVdE7mB
+	UZMebNw9CTb+P7A5mvW5OI7ArWf1kaXxYDvba3ZiPyBs8zHst17/VhXD4sNHf7t8wirW7
+X-Gm-Gg: AYBFou0H+76hbhV3Wu6rBg26GHtImNbgS5Al6UJc9wKdGDouDTV57WuHFUuEdLc7Lg8
+	+diU2sBjAWs/JzLLQQlxw6t9irE3dZUo4A1UmMGP77F2PTFW4jdY5SpK7aEQTYcbpBiW+lRyh8I
+	/fa9AhnBc5NKfhFFOS1IYsFqxDw1eUPAejwvE/qMxgCAmxkrAQZ4SFi1YPdS40sey7QAP2fZYlN
+	ffW06K8KPAfBjWaUkZIxX+lHjLrPDakFsyGaBohBIygEIn/C3sD9ICDyhxvVUiiscDV/bLVSV8n
+	6AZI/bGcn56qgAV8DrOK3undZGgQk34XZxcJJ9SpOW20BpkxxtZ3Vx87yL0=
+X-Received: by 2002:a05:620a:4103:b0:914:e3dd:17ea with SMTP id af79cd13be357-939ea051eb2mr339494685a.12.1789107744072;
+        Thu, 10 Sep 2026 23:22:24 -0700 (PDT)
+X-Received: by 2002:a05:620a:4103:b0:914:e3dd:17ea with SMTP id af79cd13be357-939ea051eb2mr339492285a.12.1789107743598;
+        Thu, 10 Sep 2026 23:22:23 -0700 (PDT)
 Received: from lin-0843.qualcomm.com ([212.136.9.4])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-486eb33ea60sm3681969f8f.17.2026.09.10.23.22.19
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-486eb33ea60sm3681969f8f.17.2026.09.10.23.22.22
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 10 Sep 2026 23:22:20 -0700 (PDT)
+        Thu, 10 Sep 2026 23:22:22 -0700 (PDT)
 From: Gjorgji.Rosikopulos.gjorgji.rosikopulos@oss.qualcomm.com
 To: Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
         Mauro Carvalho Chehab <mchehab@kernel.org>
@@ -74,9 +74,9 @@ Cc: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
         linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
         linux-kernel@vger.kernel.org,
         Gjorgji Rosikopulos <gjorgji.rosikopulos@oss.qualcomm.com>
-Subject: [PATCH 2/8] media: qcom: camss: Add streams API hw_ops to CSID interface
-Date: Fri, 11 Sep 2026 09:22:07 +0300
-Message-Id: <20260911062213.195007-3-gjorgji.rosikopulos@oss.qualcomm.com>
+Subject: [PATCH 3/8] media: qcom: camss: Implement CSID streams API hw_ops for gen2
+Date: Fri, 11 Sep 2026 09:22:08 +0300
+Message-Id: <20260911062213.195007-4-gjorgji.rosikopulos@oss.qualcomm.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20260911062213.195007-1-gjorgji.rosikopulos@oss.qualcomm.com>
 References: <20260911062213.195007-1-gjorgji.rosikopulos@oss.qualcomm.com>
@@ -87,109 +87,149 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-ORIG-GUID: zfLpnjSfzUKQBr2g3NQf-5uVsmN_va14
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTExMDA4NiBTYWx0ZWRfXxDqYVgWErViw
- gVT3isJWSJLtXNTkiX27hS6UxEbRBkxuweTXvuMVvwLIQuZ7htMgOM3EqM77ow2cZcTOSGS2y/4
- lLQ5d8XRE49LwiuWjMQ75omPzWHYXfA=
-X-Proofpoint-GUID: zfLpnjSfzUKQBr2g3NQf-5uVsmN_va14
-X-Authority-Analysis: v=2.4 cv=DLoacCNb c=1 sm=1 tr=0 ts=6aa39e1e cx=c_pps
- a=HLyN3IcIa5EE8TELMZ618Q==:117 a=dNlqnMcrdpbb+gQrTujlOQ==:17
+X-Authority-Analysis: v=2.4 cv=cM11IVeN c=1 sm=1 tr=0 ts=6aa39e20 cx=c_pps
+ a=50t2pK5VMbmlHzFWWp8p/g==:117 a=dNlqnMcrdpbb+gQrTujlOQ==:17
  a=VdqzKS8jKosA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
- a=gowsoOTTUOVcmtlkKump:22 a=EUspDBNiAAAA:8 a=nPBgRWIF8C1TIduujCsA:9
- a=bTQJ7kPSJx9SKPbeHEYW:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTExMDA4NiBTYWx0ZWRfX4yr0j+QQB/Fn
- 5p5Qwc+dboMPYEHjfi1305mAgK+oOiiImhHbm5/MgXRpP0R9zdbLqniQx8m/lbZ7VCalSCfq1C4
- i6RlxfJqE6dyW6wdgXq7LDjss64RO5lg3pAKQG4501oMB0lai5jIeNsO+59nupHDh33enVcEjun
- qwUIoTke03sng+sTHv4FAS7lifpjIANaP6m7VhYN6DH3Mk1VrW9CS085wttmcsDvWiU7R+nTCjO
- MukGqk5zy6n57YYsjPRWjT78byosqZmh6prj8peuUFYdRKaX61ENi1VHvmHyYWUJVMDeL3vz4vp
- a7vu2xDf4gEn9GOpuahIu8tuiQPdLsc+I1LyiOGrbq/TV9f2jfmev8os9zeThp3ZDj+F1pDbBCn
- mwql/B/Li4l8F99I/1bScXBZ9tl3wNt6Z5iatuot+Hfbv6B32f464FdiIIYlsoKW5XUL0U+FaAv
- AESE0Z7QhgvcCAyHPIQ==
+ a=ZpdpYltYx_vBUK5n70dp:22 a=EUspDBNiAAAA:8 a=Uk0bjlubZieTOrE2B0cA:9
+ a=IoWCM6iH3mJn3m4BftBB:22
+X-Proofpoint-GUID: QwRCyZRVGscInBXokoYQsdVg6JGCTG8w
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTExMDA4NiBTYWx0ZWRfXwWrf/vFsXDzR
+ B3bhZAsvEb7HMRx5o7D9q7qUxGKLO/7SlH7DClm4KeLrfEeopGftmgASRijB/MPjLa0bZZeO5wd
+ BWuOA3Y32DI+iUGt39zcxSFYr9gre3Q=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTExMDA4NiBTYWx0ZWRfXwOega1P08rAu
+ 7OqPke8mphcsgTBvYWuoJZ0qG2+rK19chW9Pm9JC/PthVU3L6ck16s8vtf/IekwG/5FGFVfoBjH
+ 1Or71msiKUswvPauU1nk0lvbhWsmBGDOk4wHvn2J9Qq7Z3Gm5B5YVx+9rSatpfihWYx/1M2rWnV
+ gew/HTeae7h5judJcFqw5bEzDEUesWR+UtbjT7fMptIW+nV2zP2aU5843Po2efPnmzC6YArp3jf
+ cVO/9mTVclR8otH/MnNFqDfDv1LhOOdXH2TRbqWt6ZF6EMLzzlZW7VBLPPNNP2ul2Ybpux404a+
+ s9OG5m7MObvVRnR5c1e2AUl8FOztDtlrd2KrTkgOG+DSXFI1qq+XBqWUImCwizJyrACevRhPQIC
+ wLaEEahCTPM3NeBuRH4W6EqQl8/tmz3E+kU7QHadkxLX0o+PB4Hf53BDDWxVyTj1uXS6/X6brQA
+ BR44ZN962cmLKC7XuGQ==
+X-Proofpoint-ORIG-GUID: QwRCyZRVGscInBXokoYQsdVg6JGCTG8w
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-09-11_02,2026-09-09_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0 priorityscore=1501 phishscore=0 adultscore=0 suspectscore=0
- spamscore=0 impostorscore=0 bulkscore=0 clxscore=1015 lowpriorityscore=0
+ phishscore=0 lowpriorityscore=0 clxscore=1015 adultscore=0 bulkscore=0
+ priorityscore=1501 impostorscore=0 malwarescore=0 spamscore=0 suspectscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609110086
 
 From: Gjorgji Rosikopulos <gjorgji.rosikopulos@oss.qualcomm.com>
 
-Add configure_rx/enable_stream/disable_stream to struct csid_hw_ops:
-per-stream hardware operations needed to support the V4L2 subdev
-streams API, where the CSID Rx front-end is configured once
-independently of the per-stream RDI programming.
+Implement the configure_rx/enable_stream/disable_stream hw_ops added to
+struct csid_hw_ops, for the gen2 CSID hardware backend used by SM8250.
 
-No functional change: these are new optional hw_ops entries, not yet
-implemented by any backend or called by any code path.
+__csid_configure_rdi_stream() now takes an explicit data type parameter
+instead of deriving it from the CSID source pad's format, since the
+streams API keys each stream by stream_id rather than by pad. The
+existing configure_stream() path is updated to pass its per-port format
+lookup through to this parameter, preserving current behavior.
 
 Signed-off-by: Gjorgji Rosikopulos <gjorgji.rosikopulos@oss.qualcomm.com>
 ---
- .../media/platform/qcom/camss/camss-csid.h    | 43 +++++++++++++++++++
- 1 file changed, 43 insertions(+)
+ .../platform/qcom/camss/camss-csid-gen2.c     | 59 ++++++++++++++++---
+ 1 file changed, 51 insertions(+), 8 deletions(-)
 
-diff --git a/drivers/media/platform/qcom/camss/camss-csid.h b/drivers/media/platform/qcom/camss/camss-csid.h
-index 5296b10f6bac..90ee611b9092 100644
---- a/drivers/media/platform/qcom/camss/camss-csid.h
-+++ b/drivers/media/platform/qcom/camss/camss-csid.h
-@@ -74,6 +74,25 @@ struct csid_phy_config {
+diff --git a/drivers/media/platform/qcom/camss/camss-csid-gen2.c b/drivers/media/platform/qcom/camss/camss-csid-gen2.c
+index eadcb2f7e3aa..2512cdb16d94 100644
+--- a/drivers/media/platform/qcom/camss/camss-csid-gen2.c
++++ b/drivers/media/platform/qcom/camss/camss-csid-gen2.c
+@@ -253,13 +253,8 @@ static void __csid_configure_testgen(struct csid_device *csid, u8 enable, u8 por
+ 	writel_relaxed(val, csid->base + CSID_TPG_CTRL);
+ }
  
- struct csid_device;
+-static void __csid_configure_rdi_stream(struct csid_device *csid, u8 enable, u8 port, u8 vc)
++static void __csid_configure_rdi_stream(struct csid_device *csid, u8 enable, u8 port, u8 vc, u8 dt)
+ {
+-	/* Source pads matching RDI channels on hardware. Pad 1 -> RDI0, Pad 2 -> RDI1, etc. */
+-	struct v4l2_mbus_framefmt *input_format = &csid->fmt[MSM_CSID_PAD_FIRST_SRC + port];
+-	const struct csid_format_info *format = csid_get_fmt_entry(csid->res->formats->formats,
+-								   csid->res->formats->nformats,
+-								   input_format->code);
+ 	u32 val;
+ 
+ 	/*
+@@ -281,7 +276,7 @@ static void __csid_configure_rdi_stream(struct csid_device *csid, u8 enable, u8
+ 	val |= 1 << RDI_CFG0_TIMESTAMP_EN;
+ 	/* note: for non-RDI path, this should be format->decode_format */
+ 	val |= DECODE_FORMAT_PAYLOAD_ONLY << RDI_CFG0_DECODE_FORMAT;
+-	val |= format->data_type << RDI_CFG0_DATA_TYPE;
++	val |= dt << RDI_CFG0_DATA_TYPE;
+ 	val |= vc << RDI_CFG0_VIRTUAL_CHANNEL;
+ 	val |= dt_id << RDI_CFG0_DT_ID;
+ 	writel_relaxed(val, csid->base + CSID_RDI_CFG0(port));
+@@ -330,15 +325,60 @@ static void csid_configure_stream(struct csid_device *csid, u8 enable)
+ 	/* Loop through all enabled ports and configure a stream for each */
+ 	for (i = 0; i < MSM_CSID_MAX_SRC_STREAMS; i++)
+ 		if (csid->phy.en_vc & BIT(i)) {
++			/* Source pads match RDI channels: pad 1 -> RDI0, pad 2 -> RDI1, etc. */
++			struct v4l2_mbus_framefmt *input_format =
++				&csid->fmt[MSM_CSID_PAD_FIRST_SRC + i];
++			const struct csid_format_info *format =
++				csid_get_fmt_entry(csid->res->formats->formats,
++						   csid->res->formats->nformats,
++						   input_format->code);
++			u8 vc = 0;
++
+ 			if (tg->enabled)
+ 				__csid_configure_testgen(csid, enable, i, 0);
+ 
+-			__csid_configure_rdi_stream(csid, enable, i, 0);
++			__csid_configure_rdi_stream(csid, enable, i, vc, format->data_type);
+ 			__csid_configure_rx(csid, &csid->phy, 0);
+ 			__csid_ctrl_rdi(csid, enable, i);
+ 		}
+ }
  
 +/*
-+ * struct csid_hw_ops - CSID hardware version specific operations
-+ *
-+ * configure_stream() is the legacy (non-streams-API) path and is mutually
-+ * exclusive with enable_stream()/disable_stream() - a given CSID instance
-+ * uses one family or the other, chosen by streams_enable.
-+ *
-+ * stream_id, as passed to enable_stream()/disable_stream(), is a hardware
-+ * RDI/PIX port index in [0, MSM_CSID_MAX_SRC_STREAMS). It is currently
-+ * always equal to pad - MSM_CSID_PAD_FIRST_SRC (multi-pad, 1:1
-+ * pad-to-port mapping).
-+ *
-+ * configure_rx() is called once, on the transition from zero to non-zero
-+ * active sink streams, strictly before the first enable_stream() call.
-+ * enable_stream()/disable_stream() calls are always made under the
-+ * subdev's active-state lock (core-enforced via
-+ * v4l2_subdev_enable_streams()/disable_streams()), so hw_ops
-+ * implementations don't need their own serialization.
++ * configure_rx - Configure the CSID Rx front-end
 + */
- struct csid_hw_ops {
- 	/*
- 	 * configure_stream - Configures and starts CSID input stream
-@@ -81,6 +100,30 @@ struct csid_hw_ops {
- 	 */
- 	void (*configure_stream)(struct csid_device *csid, u8 enable);
- 
-+	/*
-+	 * configure_rx - Configure the CSID Rx front-end
-+	 * @csid: CSID device
-+	 *
-+	 * Called once, when the first stream is enabled.
-+	 */
-+	void (*configure_rx)(struct csid_device *csid);
++static void csid_configure_rx(struct csid_device *csid)
++{
++	__csid_configure_rx(csid, &csid->phy, 0);
++}
 +
-+	/*
-+	 * enable_stream - Enable a single CSID output stream
-+	 * @csid: CSID device
-+	 * @stream_id: stream id to enable
-+	 * @vc: virtual channel to program
-+	 * @dt: data type to program
-+	 */
-+	void (*enable_stream)(struct csid_device *csid, u32 stream_id, u8 vc, u8 dt);
++/*
++ * stream_id is used directly as the hardware RDI port index below. This
++ * assumes a 1:1 stream-to-port mapping and should be revisited once
++ * per-platform src_streams data (stream id -> hw pipe) is added.
++ */
++static void csid_enable_stream(struct csid_device *csid, u32 stream_id, u8 vc, u8 dt)
++{
++	struct csid_testgen_config *tg = &csid->testgen;
 +
-+	/*
-+	 * disable_stream - Disable a single CSID output stream
-+	 * @csid: CSID device
-+	 * @stream_id: stream id to disable
-+	 */
-+	void (*disable_stream)(struct csid_device *csid, u32 stream_id);
++	if (tg->enabled)
++		__csid_configure_testgen(csid, 1, stream_id, vc);
 +
- 	/*
- 	 * configure_testgen_pattern - Validates and configures output pattern mode
- 	 * of test pattern generator
++	__csid_configure_rdi_stream(csid, 1, stream_id, vc, dt);
++	__csid_ctrl_rdi(csid, 1, stream_id);
++}
++
++static void csid_disable_stream(struct csid_device *csid, u32 stream_id)
++{
++	struct csid_testgen_config *tg = &csid->testgen;
++
++	__csid_ctrl_rdi(csid, 0, stream_id);
++
++	if (tg->enabled)
++		__csid_configure_testgen(csid, 0, stream_id, 0);
++
++	__csid_configure_rdi_stream(csid, 0, stream_id, 0, 0);
++}
++
+ static int csid_configure_testgen_pattern(struct csid_device *csid, s32 val)
+ {
+ 	if (val > 0 && val <= csid->testgen.nmodes)
+@@ -425,6 +465,9 @@ static void csid_subdev_init(struct csid_device *csid)
+ const struct csid_hw_ops csid_ops_gen2 = {
+ 	.configure_stream = csid_configure_stream,
+ 	.configure_testgen_pattern = csid_configure_testgen_pattern,
++	.configure_rx = csid_configure_rx,
++	.enable_stream = csid_enable_stream,
++	.disable_stream = csid_disable_stream,
+ 	.hw_version = csid_hw_version,
+ 	.isr = csid_isr,
+ 	.reset = csid_reset,
 -- 
 2.34.1
 
