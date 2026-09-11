@@ -1,38 +1,38 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0E5CA439F62;
-	Fri, 11 Sep 2026 08:51:14 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 78EE746983E;
+	Fri, 11 Sep 2026 08:51:15 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789116675; cv=none; b=VTgTuH3WubOwGq/NLEG6gXV+CdjbcaJbmIPWIMTcuN09BTf4c5qzMQ/LLUWCtoNKF20LiL0Q+kHPzyDDGL6wjoRCckqvpKUM84jgi1m6penVEUN/xLrG8t/2QdE6SKsNWWstKQfuUFxxOxZIeFBKh5Rf2F+4w+xoritWR7dEpcY=
+	t=1789116675; cv=none; b=EuK/NnEXb0LYRw+v/CD/6asovc6dXoK6Zv7VKR0Ta1kdYzOWZUj4TQP8Lb+r9btZjsUkcgpYDNrjSlYVHeIFMR4Lf5jjOnUJKXDlrEAqg4xR+plno/7GFnKd6qRBxJW7RWJMvSOo7wZi73m4R4Up7AWSlApe6bXrStlXquOnA3Q=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1789116675; c=relaxed/simple;
-	bh=tXGlROxpJEoJs8ys8hL2wCVQSvGrnJqMHuLMf6SWryw=;
-	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=R5k1/J3AD5YJYyCTxtaY2Hi5EFACff6NSkmACaDQjf4xISGUx3t0jdi2dTvELwLi40mHlDJVOLNJr5Hsx4DIRqf1/TyLWNF+7zYBB8uYmPOcgKW29psS9n8k6TgBSMhkH4EIGDV4wxCluEodTSv9hRpZPGGl+rMd77iNZabq3RY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=kZPeUGUW; arc=none smtp.client-ip=10.30.226.201
+	bh=Ir2kLA2MThBgdITjF1uXNT5vEPUPjCB6BDKYUWJlkVw=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
+	 In-Reply-To:To:Cc; b=mmELsGvLSUbuZXJK0uy8ZSycTNuq8X4SoufD6IdpM67VnB69R5I2iZR8Zm1C+G6ftgw92rv/JHfEHG0nzIHIsJBFhARtEjMwDsYjBSZcHiixOpFL0dZNUWxR4l7/Jw54Gwltd8nFeONpsXJ+H5XGbA6kcKiHC5+pozli4NxokKk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=RYSSY0U3; arc=none smtp.client-ip=10.30.226.201
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="kZPeUGUW"
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 6C746C2BCF4;
-	Fri, 11 Sep 2026 08:51:14 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="RYSSY0U3"
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 05C54C32786;
+	Fri, 11 Sep 2026 08:51:15 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1789116674;
-	bh=tXGlROxpJEoJs8ys8hL2wCVQSvGrnJqMHuLMf6SWryw=;
-	h=From:Subject:Date:To:Cc:Reply-To:From;
-	b=kZPeUGUWNCs2NTVf6bK2OVKn22P1BmXXQioAPE1Pf18Szj2QVUn7E1Cy7pL4PbZIL
-	 DOiYtC2NeVk6tWVGxZzDKcxDu4hDLgqHlsbd6UUvRoBdPkTj/H3Z7H/H7VYyW7NlRU
-	 NwPBZh0ZWrfBiaYjJbtINt8aS9i5THdzW1fFu0rKygGSfC3fQxe8dynR5UwryDEIUj
-	 JCMkdOEsNT5Ptifwri60qM121zx3KKMO+tsJbYwy8V8nxhP/lU1y1tUpbOAdZEHRbD
-	 qUjsIniSL3P67C+RkmAAdAJpY422irSuV9PM22NRz6abwyQVf+relFfY566ecsGlf6
-	 SIr8Yskxhj4/w==
+	s=k20201202; t=1789116675;
+	bh=Ir2kLA2MThBgdITjF1uXNT5vEPUPjCB6BDKYUWJlkVw=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
+	b=RYSSY0U3ZTgE0EmFs+R/EejwrlYRI+/TrMNhbNEX4oXfFnrGdk9pbOm4Je+CbXGef
+	 kWfdnuvbUiyLH/ntBecjS+nC4mRYGaVu+cZ15jcX+x99Mzs4IrvSeHYFdZyExXvSBw
+	 C4SP5mvaXwH+WI87t9FWeCD/0EDboQxyTJfW0rr5UADaTpeWVPu+AQ4qgvkOK8kAuh
+	 KAgqHzRl+ZgRJJIxc0RkR9upmWVjHtLIu8hpdMC9lH14aX5kb3begGcV2LVxb+Wia1
+	 jseVCk+3S3+K9rdH+7XVG6xwDjCdnYhQ+agpg/JKcxCz8ejk1gYa7QgGmlxOheWrP9
+	 vUu9WzQpEinwA==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 55398C88E4D;
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E16AAC88E50;
 	Fri, 11 Sep 2026 08:51:14 +0000 (UTC)
 From: =?utf-8?q?Y=C4=B0=C4=9E=C4=B0TCAN_KAVAKLI_via_B4_Relay?= <devnull+kavakliyigitcan.gmail.com@kernel.org>
-Subject: [PATCH RFC 00/10] arm64: qcom: sm6125-ginkgo: display, backlight,
- and touch support
-Date: Fri, 11 Sep 2026 11:50:57 +0300
-Message-Id: <20260911-ginkgo-submission-final-v1-0-0e68e63a18d4@gmail.com>
+Date: Fri, 11 Sep 2026 11:51:04 +0300
+Subject: [PATCH RFC 07/10] drm/msm/dpu: describe SM6125 programmable-fetch
+ delayed-start quirk
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -41,10 +41,9 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-X-B4-Tracking: v=1; b=H4sIAPHAo2oC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
- vPSU3UzU4B8JSMDIzMDS0ND3fTMvOz0fN3i0qTczGKQat20zLzEHF0zcwPjJAtjUwNjU3MloO6
- CotS0zAqwydFKQW7OSrG1tQANxwocbgAAAA==
-X-Change-ID: 20260911-ginkgo-submission-final-6703b8350357
+Message-Id: <20260911-ginkgo-submission-final-v1-7-0e68e63a18d4@gmail.com>
+References: <20260911-ginkgo-submission-final-v1-0-0e68e63a18d4@gmail.com>
+In-Reply-To: <20260911-ginkgo-submission-final-v1-0-0e68e63a18d4@gmail.com>
 To: Lee Jones <lee@kernel.org>, Daniel Thompson <danielt@kernel.org>, 
  Jingoo Han <jingoohan1@gmail.com>, Pavel Machek <pavel@kernel.org>, 
  Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
@@ -70,11 +69,11 @@ Cc: dri-devel@lists.freedesktop.org, linux-leds@vger.kernel.org,
  linux-arm-msm@vger.kernel.org, freedreno@lists.freedesktop.org, 
  =?utf-8?q?Y=C4=B0=C4=9E=C4=B0TCAN_KAVAKLI?= <kavakliyigitcan@gmail.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1789116671; l=6606;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1789116671; l=4060;
  i=kavakliyigitcan@gmail.com; s=20260911; h=from:subject:message-id;
- bh=tXGlROxpJEoJs8ys8hL2wCVQSvGrnJqMHuLMf6SWryw=;
- b=F9sCtUdsZnrbTxUweRexehtvWmh7jODfw2hugXQy5LvdLtntAotU0HIT7olWxdAPKyTfFnW8p
- +S2m6ZLHc5eBimxf9ju4MCs5vuc/fqeRi0c2q5huyTRgrX2W6cS/ehk
+ bh=dCreEw0ry0ghroTxWJf7tgoAXBd+986oDcr+3tTl2VM=;
+ b=KYl/lRrMDLhvHmU1okl6IBNSYl8H3UZgdc2FxvgWCppoBUwtEFIZVK5FOVUPt7/MCw61kGQkv
+ KJLS3g1uVXIC9D2IU3cjGrSuCaC0umPhHpUeGM0zuoT1TWfIB4deo3w
 X-Developer-Key: i=kavakliyigitcan@gmail.com; a=ed25519;
  pk=W2GaxVotULs2vAjRMMLheaDtMMYs4037zO1LVVfFtPI=
 X-Endpoint-Received: by B4 Relay for kavakliyigitcan@gmail.com/20260911
@@ -82,121 +81,94 @@ X-Endpoint-Received: by B4 Relay for kavakliyigitcan@gmail.com/20260911
 X-Original-From: =?utf-8?q?Y=C4=B0=C4=9E=C4=B0TCAN_KAVAKLI?= <kavakliyigitcan@gmail.com>
 Reply-To: kavakliyigitcan@gmail.com
 
-This RFC series introduces full display, backlight, and touchscreen support
-for the Xiaomi Redmi Note 8 ("ginkgo"), based on the Qualcomm SM6125 platform.
+From: YİĞİTCAN KAVAKLI <kavakliyigitcan@gmail.com>
 
-Hardware architecture summary:
-1. Kinetic KTD3136 3-channel 11-bit I2C LED backlight driver.
-2. Novatek NT36672A TDDI controller driving a 1080x2340 FHD+ video-mode DSI panel.
-3. Novatek NT36672A SPI touchscreen interface (co-packaged within the TDDI
-   controller, sharing physical reset and power lines with the display panel).
-4. Qualcomm DPU 5.4 / DSI display subsystem on SM6125.
+On Qualcomm SM6125 (Snapdragon 665 / Trinket DPU 5.4.0), calculating the
+programmable prefetch start counter strictly as:
 
--------------------------------------------------------------------------------
-RFC / Open Review Questions
--------------------------------------------------------------------------------
+    (vert_total - vfp_fetch_lines) * horiz_total + 1
 
-1. Panel Compatible Naming:
-   - The compatible used in this series is `tianma,fhd-video-ginkgo`.
-   - THIS IS AN OPEN REVIEW QUESTION. An authoritative Tianma module part
-     number (e.g. TMxxxx) is not currently known or visible on accessible
-     hardware markings for this OEM display module.
-   - This compatible is NOT claimed as established upstream naming. We welcome
-     maintainer guidance on whether to retain `tianma,fhd-video-ginkgo`, standardize
-     on a board-specific or controller-specific fallback, or use an alternate convention.
+causes the fetch trigger to evaluate on the active-video to vertical
+front porch line boundary. In hardware, this triggers an internal line
+buffer FIFO conflict within the INTF timing generator, resulting in
+immediate DSI FIFO overflow and timeout errors (status=5) and complete
+loss of pixel output.
 
-2. External Touchscreen Firmware:
-   - The Novatek NT36672A touchscreen controller requires SRAM firmware download.
-   - Firmware is dynamically requested via request_firmware() using the name
-     "novatek/nt36672a_tianma.bin" (118,784 bytes).
-   - This firmware is externally loaded from userspace filesystem and NOT
-     included in the kernel patches.
+Qualcomm downstream display drivers mitigate this erratum via
+delay_prg_fetch_start = true, delaying the fetch start by one scanline
+(+ horiz_total) into vertical front porch line 1.
 
-3. SM6125 DPU Programmable Fetch Delay:
-   - On the tested SM6125 hardware, video mode output empirically requires the
-     programmable fetch start counter to be offset by one horizontal total line
-     (fetch_start += horiz_total).
-   - Without this offset, the hardware suffers immediate DSI FIFO/TIMEOUT status=5
-     errors and fails to display pixels.
-   - Patch 7 models this via a catalog quirk `has_prg_fetch_delay` for SM6125.
-     Reviewer feedback on whether this should be catalog-driven or handled in the
-     encoder layer is appreciated.
-
-4. MSM DSI Host Link vs Video Streaming Separation:
-   - Patch 9 separates host link enable (atomic_pre_enable) from video stream
-     enable (atomic_enable) to allow video-mode panels to accept DCS initialization
-     packets before active pixel transmission begins.
-   - Patch 8 enforces mutual exclusion between command and video modes.
-
--------------------------------------------------------------------------------
-Physical Hardware Validation Summary
--------------------------------------------------------------------------------
-
-Validation on physical Xiaomi Redmi Note 8 (SM6125) hardware:
-- Display / DRM: Console text and graphical output verified crisp and stable.
-- Backlight: Kinetic KTD3136 11-bit brightness scaling (0..2047) verified.
-- Touchscreen: Continuous 10-second user interaction confirmed smooth 60 Hz event
-  flow (985 hardware interrupts, 5034 EV_ABS events, 536 SYN_REPORT frames,
-  median interval 8.36 ms).
-- Lifecycle / Stress:
-  * 10 / 10 consecutive isolated display OFF -> ON cycles PASSED with active
-    touch verified responsive after wake on every cycle.
-  * Rapid power-button spam stress PASSED without wedging display or power daemon.
-  * Zero DSI FIFO errors, zero firmware load timeouts (-110, -5).
-
--------------------------------------------------------------------------------
-Series Structure
--------------------------------------------------------------------------------
-
-Patch 01: dt-bindings: backlight: add Kinetic KTD3136
-Patch 02: backlight: add Kinetic KTD3136 driver
-Patch 03: dt-bindings: display: panel: novatek,nt36672a: add Tianma FHD+ video mode variant
-Patch 04: drm/panel: novatek-nt36672a: add Tianma FHD+ video mode panel
-Patch 05: dt-bindings: input: touchscreen: add Novatek NT36672A SPI touchscreen
-Patch 06: Input: novatek-nt36672a-spi: add driver for Novatek NT36672A SPI touchscreen
-Patch 07: drm/msm/dpu: describe SM6125 programmable-fetch delayed-start quirk
-Patch 08: drm/msm/dsi: make command and video mode configuration mutually exclusive
-Patch 09: drm/msm/dsi: separate host link enable from video stream enable
-Patch 10: arm64: dts: qcom: sm6125-xiaomi-ginkgo: enable display, backlight and touchscreen
+Introduce 'has_prg_fetch_delay' in struct dpu_caps, enable it for SM6125
+in its catalog entry, and throttle fetch start in programmable_fetch_config()
+when the capability is set.
 
 Signed-off-by: YİĞİTCAN KAVAKLI <kavakliyigitcan@gmail.com>
 ---
-YİĞİTCAN KAVAKLI (10):
-      dt-bindings: backlight: add Kinetic KTD3136
-      backlight: add Kinetic KTD3136 driver
-      dt-bindings: display: panel: novatek,nt36672a: add Tianma FHD+ video mode variant
-      drm/panel: novatek-nt36672a: add Tianma FHD+ video mode panel
-      dt-bindings: input: touchscreen: add Novatek NT36672A SPI touchscreen
-      Input: novatek-nt36672a-spi: add driver for Novatek NT36672A SPI touchscreen
-      drm/msm/dpu: describe SM6125 programmable-fetch delayed-start quirk
-      drm/msm/dsi: make command and video mode configuration mutually exclusive
-      drm/msm/dsi: separate host link enable from video stream enable
-      arm64: dts: qcom: sm6125-xiaomi-ginkgo: enable display, backlight and touchscreen
+ drivers/gpu/drm/msm/disp/dpu1/catalog/dpu_5_4_sm6125.h |  1 +
+ drivers/gpu/drm/msm/disp/dpu1/dpu_encoder_phys_vid.c   | 11 +++++++++++
+ drivers/gpu/drm/msm/disp/dpu1/dpu_hw_catalog.h         |  2 ++
+ 3 files changed, 14 insertions(+)
 
- .../bindings/display/panel/novatek,nt36672a.yaml   |   1 +
- .../input/touchscreen/novatek,nt36672a-spi.yaml    |  66 ++
- .../bindings/leds/backlight/kinetic,ktd3136.yaml   |  65 ++
- .../boot/dts/qcom/sm6125-xiaomi-ginkgo-common.dtsi | 100 +++
- .../gpu/drm/msm/disp/dpu1/catalog/dpu_5_4_sm6125.h |   1 +
- .../gpu/drm/msm/disp/dpu1/dpu_encoder_phys_vid.c   |  11 +
- drivers/gpu/drm/msm/disp/dpu1/dpu_hw_catalog.h     |   2 +
- drivers/gpu/drm/msm/dsi/dsi.h                      |   1 +
- drivers/gpu/drm/msm/dsi/dsi_host.c                 |  29 +-
- drivers/gpu/drm/msm/dsi/dsi_manager.c              |  20 +
- drivers/gpu/drm/panel/panel-novatek-nt36672a.c     | 141 ++++-
- drivers/input/touchscreen/Kconfig                  |  11 +
- drivers/input/touchscreen/Makefile                 |   1 +
- drivers/input/touchscreen/novatek-nt36672a-spi.c   | 674 +++++++++++++++++++++
- drivers/video/backlight/Kconfig                    |  12 +
- drivers/video/backlight/Makefile                   |   1 +
- drivers/video/backlight/ktd3136-backlight.c        | 262 ++++++++
- 17 files changed, 1362 insertions(+), 36 deletions(-)
----
-base-commit: 893e11787f78e43b534e252249ac3fff4d1333f8
-change-id: 20260911-ginkgo-submission-final-6703b8350357
+diff --git a/drivers/gpu/drm/msm/disp/dpu1/catalog/dpu_5_4_sm6125.h b/drivers/gpu/drm/msm/disp/dpu1/catalog/dpu_5_4_sm6125.h
+index 64be51e301591b7f17918475a957623c6fea23d4..ec0315284e0663f57a41a1fdf515d948c3d40d68 100644
+--- a/drivers/gpu/drm/msm/disp/dpu1/catalog/dpu_5_4_sm6125.h
++++ b/drivers/gpu/drm/msm/disp/dpu1/catalog/dpu_5_4_sm6125.h
+@@ -13,6 +13,7 @@ static const struct dpu_caps sm6125_dpu_caps = {
+ 	.max_mixer_blendstages = 0x6,
+ 	.has_dim_layer = true,
+ 	.has_idle_pc = true,
++	.has_prg_fetch_delay = true,
+ 	.max_linewidth = 2160,
+ 	.pixel_ram_size = DEFAULT_PIXEL_RAM_SIZE,
+ 	.max_hdeci_exp = MAX_HORZ_DECIMATION,
+diff --git a/drivers/gpu/drm/msm/disp/dpu1/dpu_encoder_phys_vid.c b/drivers/gpu/drm/msm/disp/dpu1/dpu_encoder_phys_vid.c
+index ba810f26ea3099106aac1783f7f6bf5e014e41a0..15445eaf9f3baf4661e22bee133cc2059a3cd2b1 100644
+--- a/drivers/gpu/drm/msm/disp/dpu1/dpu_encoder_phys_vid.c
++++ b/drivers/gpu/drm/msm/disp/dpu1/dpu_encoder_phys_vid.c
+@@ -237,10 +237,21 @@ static void programmable_fetch_config(struct dpu_encoder_phys *phys_enc,
+ 
+ 	vfp_fetch_lines = programmable_fetch_get_num_lines(phys_enc, timing);
+ 	if (vfp_fetch_lines) {
++		const struct dpu_mdss_cfg *catalog = phys_enc->dpu_kms->catalog;
++
+ 		vert_total = get_vertical_total(timing);
+ 		horiz_total = get_horizontal_total(timing);
+ 		vfp_fetch_start_vsync_counter =
+ 		    (vert_total - vfp_fetch_lines) * horiz_total + 1;
++
++		/*
++		 * SM6125 (DPU 5.4 / Trinket) quirk matching downstream
++		 * delay_prg_fetch_start = true. Throttle fetch start
++		 * to the second line after active video (VFP line 1).
++		 */
++		if (catalog && catalog->caps && catalog->caps->has_prg_fetch_delay)
++			vfp_fetch_start_vsync_counter += horiz_total;
++
+ 		f.enable = 1;
+ 		f.fetch_start = vfp_fetch_start_vsync_counter;
+ 	}
+diff --git a/drivers/gpu/drm/msm/disp/dpu1/dpu_hw_catalog.h b/drivers/gpu/drm/msm/disp/dpu1/dpu_hw_catalog.h
+index f45faf87333e89bbd463504ae3219609ef6209bd..db3cbf9fa04a13baf3ac40390757ed24120ccccd 100644
+--- a/drivers/gpu/drm/msm/disp/dpu1/dpu_hw_catalog.h
++++ b/drivers/gpu/drm/msm/disp/dpu1/dpu_hw_catalog.h
+@@ -273,6 +273,7 @@ struct dpu_rotation_cfg {
+  * @has_dim_layer      dim layer feature status
+  * @has_idle_pc        indicate if idle power collapse feature is supported
+  * @has_3d_merge       indicate if 3D merge is supported
++ * @has_prg_fetch_delay indicate if programmable fetch start requires a 1-line delay
+  * @max_linewidth      max linewidth for sspp
+  * @pixel_ram_size     size of latency hiding and de-tiling buffer in bytes
+  * @max_hdeci_exp      max horizontal decimation supported (max is 2^value)
+@@ -285,6 +286,7 @@ struct dpu_caps {
+ 	bool has_dim_layer;
+ 	bool has_idle_pc;
+ 	bool has_3d_merge;
++	bool has_prg_fetch_delay;
+ 	/* SSPP limits */
+ 	u32 max_linewidth;
+ 	u32 pixel_ram_size;
 
-Best regards,
 -- 
-YİĞİTCAN KAVAKLI <kavakliyigitcan@gmail.com>
+2.47.3
 
 
