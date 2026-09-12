@@ -1,95 +1,116 @@
-Received: from 011.lax.mailroute.net (011.lax.mailroute.net [199.89.1.14])
+Received: from mail-43103.protonmail.ch (mail-43103.protonmail.ch [185.70.43.103])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 82F2847A872;
-	Sat, 12 Sep 2026 13:38:12 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=199.89.1.14
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0AAEC47C106
+	for <linux-arm-msm@vger.kernel.org>; Sat, 12 Sep 2026 13:41:32 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.70.43.103
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789220294; cv=none; b=ijnb2nSLbAXK/xJxa8QMs7eDCB0+w6K1sPWL0auQtqw8tjRskv34Zajqdi9mzkAewsvXxAqttY59NkuE72gyp3lwWVBkHdmH+85d0WVrSPhQTNNU1sVkmb+Agpe5yKczaEHxnRHaa/5m0HSjMFAAlULuDQTU1+9CZJsgJorTkkw=
+	t=1789220499; cv=none; b=kH9NqfPYRotpg9I6VwHG5ZlSDDHdaBhLeJM4God0nhwO3F0waVs94ackfVBSlV7xycGcFa4zbbEVq2VdtesFtn17iE1DBC+YH31XYiLuFgLUo/FHv/vYVJ3oxp4T2iMtm7SZQZ2VycgT4D2wPNWsEsrtLiwsqZwl53ckOxTV3L0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789220294; c=relaxed/simple;
-	bh=RTJWQPVnP2cOgXsP4ClBmG+cOVJE5siN7LC/E44GvyE=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=e/yZc04xk0C+PJFHxdQXwSeAtE6qlcqkq/Py0rthuZrmTWFzWrUfQ8MA3EHZJu5pVuvUGwGiu7dunrz0jqXIHx6PyfDTT7qZrJbqJVOCx7F5n9kETO8geOuLDi+yNU9PFtzrHtrfN0qVuwNqbeaUyYzBAJ/TA1COwd70c4DNfdc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=acm.org; spf=pass smtp.mailfrom=acm.org; dkim=pass (2048-bit key) header.d=acm.org header.i=@acm.org header.b=kylMEAS/; arc=none smtp.client-ip=199.89.1.14
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=acm.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=acm.org
+	s=arc-20240116; t=1789220499; c=relaxed/simple;
+	bh=sFsCH8XysqDEg1LSVkE9x/UFUMp31MIAyt5dqKW58dM=;
+	h=Date:To:From:Cc:Subject:Message-ID:MIME-Version:Content-Type; b=HMyVowugAOzUZT3QDVqo4cJ3fYmitD3Af5DygWLd+/6GKcsHhCDvEGdc3Qn/mJ5sNXGsuk4dmA5JB9LniD9R8o3tyy8smN02m0tTpoklhOR7BzVTOB9MVzUwJn6JtpMPBe8O3abML1oVv3yUNI3yTPxTU/QvyQXmuNMzI/Wl1Z8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=proton.me; spf=pass smtp.mailfrom=proton.me; dkim=pass (2048-bit key) header.d=proton.me header.i=@proton.me header.b=Ldbr/Ra+; arc=none smtp.client-ip=185.70.43.103
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=proton.me
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=proton.me
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=acm.org header.i=@acm.org header.b="kylMEAS/"
-Received: from localhost (localhost [127.0.0.1])
-	by 011.lax.mailroute.net (Postfix) with ESMTP id 4hhstW3k24z1XM4Tn;
-	Sat, 12 Sep 2026 13:38:11 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=acm.org; h=
-	content-transfer-encoding:content-type:content-type:in-reply-to
-	:from:from:content-language:references:subject:subject
-	:user-agent:mime-version:date:date:message-id:received:received;
-	 s=mr01; t=1789220282; x=1791812283; bh=RTJWQPVnP2cOgXsP4ClBmG+c
-	OVJE5siN7LC/E44GvyE=; b=kylMEAS/uohEmArHVY5mu2GljCVVBZEG8faduRUp
-	cv1Ez/x1NhcE7opQCNoneTYveQnTM6n4ivZJlYeCCi5MfApFihkf5Lv5arA8d+ua
-	5C9Zyua1Mdv3dKU03I7PsXGIUEBD0J5EEM0tzG74Jwv5pzaENkoMgl+oHfuncZ7l
-	+qTJTUUYnk3YbRi8gM6P7UQ9ED7uzWDfLnOSd8vKR9u2scuDkdYwqievv88QzQ6O
-	DBflHp3acTkqXHWkXZtYIZ+mQh71t7Ec9QJSHzms9YRyXCB1tYuOBN8X/I9UvTsW
-	3t0AZSBop7GqbkvbQMXa1oAzFnLqrzeCvdaBiBItIz3LXg==
-X-Virus-Scanned: by MailRoute
-Received: from 011.lax.mailroute.net ([127.0.0.1])
- by localhost (011.lax [127.0.0.1]) (mroute_mailscanner, port 10029) with LMTP
- id 4OGwJAQrYKY2; Sat, 12 Sep 2026 13:38:02 +0000 (UTC)
-Received: from [192.168.51.14] (c-24-6-239-25.hsd1.ca.comcast.net [24.6.239.25])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	(Authenticated sender: bvanassche@acm.org)
-	by 011.lax.mailroute.net (Postfix) with ESMTPSA id 4hhstC2kndz1XM4Sx;
-	Sat, 12 Sep 2026 13:37:54 +0000 (UTC)
-Message-ID: <fb1d0993-4349-406c-8721-41602e5fe5a7@acm.org>
-Date: Sat, 12 Sep 2026 06:37:53 -0700
+	dkim=pass (2048-bit key) header.d=proton.me header.i=@proton.me header.b="Ldbr/Ra+"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=proton.me;
+	s=protonmail; t=1789220489; x=1789479689;
+	bh=hMFZ/DhTLbyMTJSv5E5VJ6nGgBCir088xR8Ufmezdsk=;
+	h=Date:To:From:Cc:Subject:Message-ID:Feedback-ID:From:To:Cc:Date:
+	 Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
+	b=Ldbr/Ra+ZFurW1tIaYoVumFDWIdyon7YQm9cPKWdvGRcMAAI1tUsq37nIJip2UAXr
+	 Yd2lumChW/FwcGOl4OSdfaZGO8dfViVDpFalwcrPKseu2KLsAKuGp4e2AParwrSgPp
+	 Aw2CPn7rVLL6EKs+gV468n1J1j/XuF4dvbHJjKmKrJ2zjbSQcuKXQ6xLCtby9/7crr
+	 M1VV86JJa7CTlQpWZV5PStSEazfBPcsNsg8RocGQ76Tna7JOV5/8SZJgXcBQnyalzi
+	 WPUbAShp91zp6mrlGg7nvcLHhwRyXE+Q0jprYXtlyP5cafStjeU4rXCvRW6s+jr5du
+	 pTcGYJA/a+bOw==
+Date: Sat, 12 Sep 2026 13:41:23 +0000
+To: "andersson@kernel.org" <andersson@kernel.org>, "konradybcio@kernel.org" <konradybcio@kernel.org>, "robh@kernel.org" <robh@kernel.org>, "krzk+dt@kernel.org" <krzk+dt@kernel.org>, "conor+dt@kernel.org" <conor+dt@kernel.org>
+From: Martin <hemisputnik@proton.me>
+Cc: "linux-arm-msm@vger.kernel.org" <linux-arm-msm@vger.kernel.org>, "devicetree@vger.kernel.org" <devicetree@vger.kernel.org>, "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>, hemisputnik <hemisputnik@proton.me>
+Subject: [PATCH] arm64: dts: qcom: msm8917-xiaomi-wingtech: enable flash LED
+Message-ID: <20260912134056.3347741-1-hemisputnik@proton.me>
+Feedback-ID: 150620256:user:proton
+X-Pm-Message-ID: 8452db8322bfa719371867a2bc3565e112cfd1ae
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH RFC] drivers/rufs: add Rust UFS host controller driver
-To: Andreas Hindborg <a.hindborg@kernel.org>,
- James Bottomley <James.Bottomley@HansenPartnership.com>,
- Greg KH <gregkh@linuxfoundation.org>, jaemyung.lee@samsung.com
-Cc: Miguel Ojeda <ojeda@kernel.org>, Boqun Feng <boqun@kernel.org>,
- Gary Guo <gary@garyguo.net>, =?UTF-8?Q?Bj=C3=B6rn_Roy_Baron?=
- <bjorn3_gh@protonmail.com>, Benno Lossin <lossin@kernel.org>,
- Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>,
- Danilo Krummrich <dakr@kernel.org>,
- Daniel Almeida <daniel.almeida@collabora.com>,
- Tamir Duberstein <tamird@kernel.org>, Alexandre Courbot
- <acourbot@nvidia.com>, =?UTF-8?Q?Onur_=C3=96zkan?= <work@onurozkan.dev>,
- linux-kernel@vger.kernel.org, rust-for-linux@vger.kernel.org,
- linux-block@vger.kernel.org, linux-scsi@vger.kernel.org,
- linux-arm-msm@vger.kernel.org
-References: <20260912-rufs-private-v1-1-716db733e655@samsung.com>
- <YKq4TcQM0v2dXF4wTHEvZKwASII6PDd_R7_UiHWe3NRnR4JsrC_ZS-x6jA_Kl7P6ONehU0REHYk7WaLz8Xv5gA==@protonmail.internalid>
- <2026091124-treason-trickily-bc52@gregkh> <87mrtmvioe.fsf@kernel.org>
- <6JMwZ4EuSfQ8V4TGaPwatQ31m30TceLJblORsuILQmy4VV8Fx2lHbihL8ARsRUuJmaSUqek8L54y4Nk6DuZMXQ==@protonmail.internalid>
- <bdcff6a168e6d4b8e9c9524bd598281817a7df2c.camel@HansenPartnership.com>
- <87eceyvdnv.fsf@kernel.org>
-Content-Language: en-US
-From: Bart Van Assche <bvanassche@acm.org>
-In-Reply-To: <87eceyvdnv.fsf@kernel.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-On 9/12/26 5:48 AM, Andreas Hindborg wrote:
-> At any rate, the rationale for extracting the UFS driver is to make room
-> for features that fit poorly into the SCSI midlayer and which are not
-> standardized in T10 - without making additional work for scsi subsystem
-> maintainers.
+From: hemisputnik <hemisputnik@proton.me>
 
-This rationale is completely wrong. I have seen multiple proposals for
-the introduction of new SCSI commands in JEDEC that made me think
-"Yikes. This proposal shouldn't be accepted." Some of these commands
-were attempts to introduce ZBC-like functionality for traditional block
-devices. That is wrong - if ZBC-like functionality is needed, ZBC should
-be implemented. Other proposals were about the introduction of new copy
-offload commands. Copy offload commands should be standardized by T10
-instead of JEDEC.
+Add SGM3780 flash LED controller to msm8917-xiaomi-wingtech device tree.
 
-Bart.
+Although the devices this device tree describes have a SGM3780, the
+existing driver for SGM3140 is compatible with it, hence why there is a
+fallback for it.
+
+While there is no camera suppport in the device tree at the moment, having
+this allows using the LED as a torch.
+
+Tested on Xiaomi Redmi 5A (xiaomi-riva).
+
+Signed-off-by: hemisputnik <hemisputnik@proton.me>
+---
+ .../dts/qcom/msm8917-xiaomi-wingtech.dtsi     | 23 +++++++++++++++++++
+ 1 file changed, 23 insertions(+)
+
+diff --git a/arch/arm64/boot/dts/qcom/msm8917-xiaomi-wingtech.dtsi b/arch/a=
+rm64/boot/dts/qcom/msm8917-xiaomi-wingtech.dtsi
+index 69eda5f42c06..c0b5094efced 100644
+--- a/arch/arm64/boot/dts/qcom/msm8917-xiaomi-wingtech.dtsi
++++ b/arch/arm64/boot/dts/qcom/msm8917-xiaomi-wingtech.dtsi
+@@ -7,6 +7,7 @@
+=20
+ #include <dt-bindings/arm/qcom,ids.h>
+ #include <dt-bindings/gpio/gpio.h>
++#include <dt-bindings/leds/common.h>
+ #include "msm8917.dtsi"
+ #include "pm8937.dtsi"
+=20
+@@ -25,6 +26,20 @@ pwm_backlight: backlight {
+ =09=09default-brightness-level =3D <128>;
+ =09};
+=20
++=09flash-led-controller {
++=09=09compatible =3D "sgmicro,sgm3780", "sgmicro,sgm3140";
++=09=09enable-gpios =3D <&tlmm 93 GPIO_ACTIVE_HIGH>;
++=09=09flash-gpios =3D <&tlmm 90 GPIO_ACTIVE_HIGH>;
++
++=09=09pinctrl-0 =3D <&flash_led_default>;
++=09=09pinctrl-names =3D "default";
++
++=09=09led {
++=09=09=09function =3D LED_FUNCTION_FLASH;
++=09=09=09color =3D <LED_COLOR_ID_WHITE>;
++=09=09};
++=09};
++
+ =09chosen {
+ =09=09#address-cells =3D <2>;
+ =09=09#size-cells =3D <2>;
+@@ -306,6 +321,14 @@ tsp_int_rst_default: tsp-int-rst-default-state {
+ =09=09drive-strength =3D <8>;
+ =09=09bias-pull-up;
+ =09};
++
++=09flash_led_default: flash-led-default-state {
++=09=09pins =3D "gpio90", "gpio93";
++=09=09function =3D "gpio";
++=09=09drive-strength =3D <2>;
++=09=09bias-disable;
++=09=09output-high;
++=09};
+ };
+=20
+ &wcnss {
+--=20
+2.55.0
+
+
