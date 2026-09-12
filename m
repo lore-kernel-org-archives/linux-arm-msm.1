@@ -1,99 +1,107 @@
-Received: from sendmail.purelymail.com (sendmail.purelymail.com [34.202.193.197])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wm2-f13.google.com (mail-wm2-f13.google.com [74.125.225.141])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DA98F1C695
-	for <linux-arm-msm@vger.kernel.org>; Sat, 12 Sep 2026 00:05:48 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=34.202.193.197
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 65CDD155757
+	for <linux-arm-msm@vger.kernel.org>; Sat, 12 Sep 2026 00:07:27 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.225.141
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789171550; cv=none; b=Niqq+dUIqGBkNHnW/LFw17Wzc5ovnV/LK0BF6E8KK3PjUm+5LNBNyWOgOqAkjMiBAU7ZbDDstL6w/8HTDe6sH+uMK4GEY8zpIQ7OG6CcuXL7nXRkLx1mt0HRhLJXF5pOnt/mJJdjCd7QXj4qQ3u2B1vH10CWAqdmrVZhoPhkQv0=
+	t=1789171648; cv=none; b=OTCV/ws1tyw4hIDqvCEozS/Iho/ZTZheWyJ7Ft+TiC98++s3S/BDO3XUUTZhkL9KabLrG/ixVXn+j6kc9htd+RS8ToCq9ZcrYxVmV+UsHYpevAEMMIVzPB24RFVWIBLVeJ/33kv6AiAqDl/xTyorFOF8BepTcRyoTUxDViPmDG8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789171550; c=relaxed/simple;
-	bh=bEuJl6tbZwwTV8fGbs7IcdzniD+J04Zd/HtTkYcb35c=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=ASDqke7OCl9fx7PkHpPp2V+Wfo02NQcFIGEH0pQDUAPe3j89ngEzcznEXd5hRSJlp9QblBJuq/fkF+wUWFFGG4jHef2ZDn7zezx3yWcIOmhtHf/NGsjQv7yU3qPAAwqCQL73ppxrLnPmhrUxS3esi+IgrGoy1vLYQ/AkUtQfTmg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=c127.dev; spf=pass smtp.mailfrom=c127.dev; dkim=pass (2048-bit key) header.d=c127.dev header.i=@c127.dev header.b=pSUHe7qL; dkim=pass (2048-bit key) header.d=purelymail.com header.i=@purelymail.com header.b=JPTE+ygz; arc=none smtp.client-ip=34.202.193.197
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=c127.dev
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=c127.dev
+	s=arc-20240116; t=1789171648; c=relaxed/simple;
+	bh=8m1R80XfDZbh5zUhLZAcOUU72JG3PqinZPRM3tOCJuc=;
+	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=Gc1NfXqmJcUdJgkF8oSLcCEYYVMfDIWygGiT7aEcv8Mf3nFyZNJzFvmlL4vH11glCIkSBTegr8ccfHyTOjwg+T6JpYSVsndDhDsJ8Tv1ioJ2RK4A4aKUL/0LSkLolAomUTZoRKnpRegNOw+J1FwVoNun/iRPsMWC3QKrrz1OrVo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=pSjBh8ik; arc=none smtp.client-ip=74.125.225.141
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=c127.dev header.i=@c127.dev header.b="pSUHe7qL";
-	dkim=pass (2048-bit key) header.d=purelymail.com header.i=@purelymail.com header.b="JPTE+ygz"
-DKIM-Signature: a=rsa-sha256; b=pSUHe7qL9M6cTkt/HKYb3eo5nQep5aPmRqx+xKIfyKoactwZMtXDM3J4Xw0wEZTUMKhYI04+TaEOCJ+QTyvJMKFpWHwR90M78mn9AqqPDuztPky73kW/d53ETqIcvhLkGop/vd+hTESAY68KmWXNFLDOLLa0tbDHfw4CKZrsi22PToL2Oii9w+OqReEUAmUODD716e9xd6pXHeoZPYHO5p7M5rCTjGlnGRU6FPFuTQVHg4zC50jJk7wZkVIBNWGoBPo9ghEvKFIN4EsUtLtvgBFZE6VS9tnnHFK2vaHLohZJJ+201F8aZ+MZqr3QS1YOivBjxFJ7e+uPLZbo5V+tPQ==; s=purelymail1; d=c127.dev; v=1; bh=bEuJl6tbZwwTV8fGbs7IcdzniD+J04Zd/HtTkYcb35c=; h=Received:From:To:Subject:Date;
-DKIM-Signature: a=rsa-sha256; b=JPTE+ygzkg1E+W5yILE+IuWPVnn595+I5i8x/RVe/uXOaInPVKPdTfA+woNA0mMC7UxyuMnBUGMZaCs+IW/L3cDHfAp/hPhiTjeO6IABDyXEJCE87OefZcfuW/X/GqBWyXS6YLCdxGSc50QmEoL0AMnvdE9idrCDej3d6o5m7vgaMHqkKqr6Vd6f7RfxK94504OZHMOMbesjsqbmOH9W9K74FjUrDqcCj+f3aOkSEd04ajkq0WZb5/XSW60gMOqJ78e+uqLEzwzv9kcJt+VYTjzAgYBdk01SX1etbutbOraJtgKQLJOmRAu24QPuUj42za3XkH+LKaZ8gwrYcuukgQ==; s=purelymail1; d=purelymail.com; v=1; bh=bEuJl6tbZwwTV8fGbs7IcdzniD+J04Zd/HtTkYcb35c=; h=Feedback-ID:Received:From:To:Subject:Date;
-Feedback-ID: 1017243:43747:null:purelymail
-X-Pm-Original-To: linux-arm-msm@vger.kernel.org
-Received: by smtp.purelymail.com (Purelymail SMTP) with ESMTPSA id -621174798;
-          (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
-          Sat, 12 Sep 2026 00:05:21 +0000 (UTC)
-From: Johan Alvarado <contact@c127.dev>
-To: broonie@kernel.org,
-	md.alam@oss.qualcomm.com
-Cc: Johan Alvarado <contact@c127.dev>,
-	sashiko-reviews@lists.linux.dev,
-	j4g8y7@gmail.com,
-	konradybcio@kernel.org,
-	pengpeng@iscas.ac.cn,
-	miquel.raynal@bootlin.com,
-	quic_varada@quicinc.com,
-	quic_srichara@quicinc.com,
-	linux-spi@vger.kernel.org,
-	linux-mtd@lists.infradead.org,
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="pSjBh8ik"
+Received: by mail-wm2-f13.google.com with SMTP id 5b1f17b1804b1-49ccf3ca94bso483305e9.3
+        for <linux-arm-msm@vger.kernel.org>; Fri, 11 Sep 2026 17:07:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1789171645; x=1789776445; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=Txatduw7g2Rcis/bJMKV9l341+MbMhD8Kyx8qAkEHH0=;
+        b=pSjBh8ikIX0hcVexn4ZqdE8qq6PaYd1s0cPLovSEgnI/qaqWBbrLaFXax9Ho/ncWge
+         0YF1wXq39lMIOrgXL5N+hQt7kftHDV7wPdFxFmIyfxqOJpgE+eeIVQFIOshH0FdC+t4B
+         uXbgmPMCNfOJUeVMg2tKI1xIy7XLMT2KdPlEEQl0odDyrx/F8qyvjd5/Cgs4Bg8HjrKi
+         4U/GqHX+TeWv5pVSt3SUhMQ3e1CzgwVBkhYngE7V0DJ+3Yxsjkj3jxbQzA+2kHz4dcqc
+         k5/HPb6QK4AU9Tu0fe03VmDiSL6NWk64PxgX50GSbshvkNKTJYXpqQ1DNH79th6I6PH5
+         a1Fw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1789171645; x=1789776445;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=Txatduw7g2Rcis/bJMKV9l341+MbMhD8Kyx8qAkEHH0=;
+        b=ffYvMHPaOU9gVFEoYrrxNR0FLNHDv/GyZI2r6FmQRrO8YTUTVYEuKiAEa886Caf4Vy
+         1r83y7TB0kx4fRv/bwh66IJ/C2NIRq/+yvGQ9FE3f4OvTEcUwBGgXitX4BZ5G+RnAm+e
+         +s+TyR2jrIF8k8coBavT4A0bDv9RQFMSpEcx9IxD1MBg6se5uzNbIkMWsX/R+9yVwxCu
+         VFNl/b5kotLmVfLFT8Q9K2wCzm3EtlsqUnKkD902DriarurjIa5qL5j8rZ8bVVaTGLfE
+         INSdRGhTOaHAvbJWl731t6Dnaz3iAPi5gFHwjFcZWZe1NLn+17YdcW5x+V9XHffhFxtT
+         9BGQ==
+X-Forwarded-Encrypted: i=1; AKwUvBxfKyF5MJYLe1Z4d4Ot5/JNb4NNaQ62y3h3Mnqm0brz4/D0GP+1Jtbd1+CnsUpTpf+n/vapC81wzUJxuIcD@vger.kernel.org
+X-Gm-Message-State: AFuF++lBUeMMn3Ohq26jcZP7qNsDdZHxBf50NMLooPaxPMUu/W5BF6Pg
+	XctLGKXmwLRR+U494IksFjAvcYUjuXDJh7TpRmFFfaBOdPCjq0Xsgtjc
+X-Gm-Gg: AYBFou2wUglsL0wMpuuMviT86pLYPPrYHBwtUhze1mtmqpg+5LOON+Jk+k4Hr37d+Be
+	1yofgMMM7lvCIo/B8W0bjDYyjOEJTfEqCi5iVvSJsd28lT2Ulj7A8c2dfi1ORkDahnLEviB4fgm
+	npZgDP8/A9GXhIPJo+a9ZIGSDMX9pl7vdiuuCX7q74I4ox8ZcT15LWPb8bMnOXTIUoGZAdBClNj
+	pR71m8DgYb3ZY76M7JNAfkVyqKuEgY+3f+HE3hbc7Hs5WuabBm6giRGpLT0MAtIIuXPM2NJT//k
+	e7yucYsq7f7ipx62M5y3ijuEa8a21m05p8iM/SedOa0plJlXOZTeUB0wTG2AdJXc1KKPm6O2OxJ
+	7V0XROY7qeC7fNY72N4cL4zqnu8UtvSy7Rx6+ygoIpT0pZD4H3vVyvvJrujM31S9a4d1eZfuYjT
+	+wl+x+1jnXy58CPWr7lBgn77XoIANHXmQyiK5dC6p/sTvZqxJeIb2jvxSWi+DYiUZHpEjIcwWyr
+	mCik3Rj+8yw9yMKIBf12tGn7Cly9QPfUJCeZXaITyVq365czBp94E+E+Waz4kSUIUePwZXqTTM9
+	w4UVtldvb+XZGFC1T3DJFLKua2HkgsKSMVB4lg==
+X-Received: by 2002:a05:600c:358d:b0:49c:fc6c:bdfa with SMTP id 5b1f17b1804b1-49e6cbec302mr4417405e9.17.1789171645506;
+        Fri, 11 Sep 2026 17:07:25 -0700 (PDT)
+Received: from localhost.localdomain (dynamic-095-114-033-154.95.114.pool.telefonica.de. [95.114.33.154])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-49e60a8a89esm108823005e9.1.2026.09.11.17.07.23
+        (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
+        Fri, 11 Sep 2026 17:07:25 -0700 (PDT)
+From: Karl Mehltretter <kmehltretter@gmail.com>
+To: Liam Girdwood <lgirdwood@gmail.com>,
+	Mark Brown <broonie@kernel.org>
+Cc: Karl Mehltretter <kmehltretter@gmail.com>,
+	Douglas Anderson <dianders@chromium.org>,
 	linux-arm-msm@vger.kernel.org,
 	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v2 2/2] spi: spi-qpic-snand: drop the redundant ECC context handling
-Date: Fri, 11 Sep 2026 19:05:13 -0500
-Message-ID: <20260912000516.653989-1-contact@c127.dev>
-X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20260911191010.990EE1F000FF@smtp.kernel.org>
-References: <20260911184416.109790-1-contact@c127.dev> <20260911184416.109790-3-contact@c127.dev> <20260911191010.990EE1F000FF@smtp.kernel.org>
+Subject: [PATCH] regulator: qcom-rpmh: Fix the return value in rpmh_regulator_vrm_get_optimum_mode() kernel-doc
+Date: Sat, 12 Sep 2026 02:06:06 +0200
+Message-Id: <20260912000606.34614-1-kmehltretter@gmail.com>
+X-Mailer: git-send-email 2.39.5 (Apple Git-154)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-X-MIME-Autoconverted: from 8bit to quoted-printable by Purelymail
-Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Fri, Sep 11, 2026 at 07:10:10PM +0000, sashiko-bot@kernel.org wrote:
-> Is this assumption accurate for all configurations?
-> If the device tree specifies ON-DIE or software ECC (nand,ecc-engine =3D
-> "on-die"), or if a non-NAND SPI memory device (like spi-nor) is attached =
-to
-> this controller, won't the host's init_ctx be bypassed?
+rpmh_regulator_vrm_get_optimum_mode() returns REGULATOR_MODE_NORMAL or
+REGULATOR_MODE_IDLE and cannot fail, but its kernel-doc says "0 on
+success, or a negative error number on failure", which was never true.
+Describe the mode.
 
-The engine is selected by the nand-ecc-engine phandle, or by
-nand-no-ecc-engine and nand-use-soft-ecc-engine; the core does not read a
-nand,ecc-engine =3D "on-die" property. A chip node that phandles itself, or
-that omits the property and takes the SPI-NAND default, does land on the
-on-die engine, and qcom_spi_ecc_init_ctx_pipelined() is then never called.
+Fixes: efb0cb50c427 ("regulator: qcom-rpmh: Implement get_optimum_mode(), not set_load()")
+Assisted-by: LLM
+Signed-off-by: Karl Mehltretter <kmehltretter@gmail.com>
+---
+ drivers/regulator/qcom-rpmh-regulator.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-That configuration has never worked. The page helpers are gated on
-qspi->page_rw and qspi->oob_rw, which only
-qcom_spi_ecc_prepare_io_req_pipelined() sets, so qcom_spi_read_page()
-returns 0 with the buffer untouched while spi_mem_no_dirmap_read() reports
-the full length as read. Removing the phandle on an IPQ5018 board confirms
-it: the chip probes, then UBI reports "no valid UBI magic found inside
-mtd15" and "failed to attach mtd13, error -22". A block erase there took
-cfg0_raw and cfg1_raw from the zeroed scratch struct, which is a wrong
-erase configuration rather than a working one. So this patch changes no
-configuration that works today, and the three in-tree boards using this
-controller all set nand-ecc-engine =3D <&qpic_nand>.
+diff --git a/drivers/regulator/qcom-rpmh-regulator.c b/drivers/regulator/qcom-rpmh-regulator.c
+index 25c14de3cd8b5e77b48f168d1afa0f3ad7ab9d5e..7db5730240e257c056e5e83e36e9b7816b44db7e 100644
+--- a/drivers/regulator/qcom-rpmh-regulator.c
++++ b/drivers/regulator/qcom-rpmh-regulator.c
+@@ -400,7 +400,7 @@ static unsigned int rpmh_regulator_vrm_get_mode(struct regulator_dev *rdev)
+  * This function is used in the regulator_ops for VRM type RPMh regulator
+  * devices.
+  *
+- * Return: 0 on success, or a negative error number on failure
++ * Return: the regulator mode to use for the load
+  */
+ static unsigned int rpmh_regulator_vrm_get_optimum_mode(
+ 	struct regulator_dev *rdev, int input_uV, int output_uV, int load_uA)
+-- 
+2.39.5 (Apple Git-154)
 
-For spi-nor, the binding documents a spi-nand child only, and
-qcom_spi_cmd_mapping() returns -EOPNOTSUPP for opcodes outside the
-SPI-NAND set, RDSR 0x05 and SFDP 0x5A among them, so such a probe fails
-before an mtd is registered.
-
-A mismatched device tree should still not panic, and the silent read is
-the worse half of it. Refusing page access and block erase in
-qcom_spi_exec_op() while the context is NULL covers both. I have that
-patch ready and will send it on top once this series is applied, so it
-does not hold anything here up. It cannot go in qcom_spi_supports_op():
-spinand_select_op_variant() uses that callback to choose the cache op
-templates during detection, long before any ECC context exists, so
-rejecting page operations there leaves no variant supported and the chip
-fails to probe with "unknown raw ID".
-
-Best regards,
-Johan
