@@ -1,129 +1,112 @@
-Received: from lamorak.hansenpartnership.com (lamorak.hansenpartnership.com [198.37.111.173])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pg1-f182.google.com (mail-pg1-f182.google.com [209.85.215.182])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 51BE1299920;
-	Sat, 12 Sep 2026 12:10:08 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.37.111.173
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F383147A0B6
+	for <linux-arm-msm@vger.kernel.org>; Sat, 12 Sep 2026 12:28:24 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.215.182
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789215010; cv=none; b=R2AfaN88hX6rdzYvIY2i7ZyF8H13pbUI6WkIsGxdzBD+D82nifR/j3j+xPvRvkAPcsx9oPGd5gJWur6H5Ac7PKhj4cxYpqKvFbAfihKtJGa+5AUmAmncJE1jOR5BK1lTisqxEu50zPWNBUCUFyCx7Jflwaw39VTU+3AGtowgI7g=
+	t=1789216106; cv=none; b=nXpqziu8o78yMhybLZUK+0fE1GtCBF6gnwDZPZxamGTHQgE8U2KlfyOS44eTnbEbdPRFCy6AyR1vVwXsQf/wq/ENdP9ZCpl44EFhSRA9ZVJSOgYNA80oEljlw00AH+NARbq6jXAVQfocPr9Q4wFOB3bhVzXKHcjx5qoy4ropLiE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789215010; c=relaxed/simple;
-	bh=/k4GRfwmwZKzSvKRwfRpdBLr6CRpzHPGhwfQMUhuJh8=;
-	h=Message-ID:Subject:From:To:Cc:Date:In-Reply-To:References:
-	 Content-Type:MIME-Version; b=UuTOX7mvtnYQwN/tkvm9EeeHIAO1rsUtOlCAkAtadlWzM+/2U+goM6x+V6dh8K5pX+ySo7dpPP1wPjyN2GD8oZ9OJoxFhwP1zj0wnwTrrPLDlX2IFcHe95tI9adQBxbVik49K5CjK6MdpoPxenfdTrRJiSCjzahBq22lMwws/K4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=HansenPartnership.com; spf=pass smtp.mailfrom=HansenPartnership.com; dkim=pass (1024-bit key) header.d=hansenpartnership.com header.i=@hansenpartnership.com header.b=oZM71hHx; arc=none smtp.client-ip=198.37.111.173
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=HansenPartnership.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=HansenPartnership.com
+	s=arc-20240116; t=1789216106; c=relaxed/simple;
+	bh=06OCCRLJZiWFmko6yn+El7auSYo4iw4lQ+pGHqY4J3s=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=GkvbogmAj050rk939BV9NItRGVzrwUiqmGqc9r5QGN3GxeBhFu2gi1vS9a8QTUlIPDYHiL091SoqeziujxSp+nJ6k9evUtrT4NTagv+uFkZfd/0TnPeYlB6veDqv5Tt6pd3/Bi6DqGGyoLABQhQwv0zGBHVzNp3dr+oVoo73VIk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=BhYPyA9I; arc=none smtp.client-ip=209.85.215.182
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=hansenpartnership.com header.i=@hansenpartnership.com header.b="oZM71hHx"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-	d=hansenpartnership.com; s=20151216; t=1789215006;
-	bh=/k4GRfwmwZKzSvKRwfRpdBLr6CRpzHPGhwfQMUhuJh8=;
-	h=Message-ID:Subject:From:To:Date:In-Reply-To:References:From;
-	b=oZM71hHxMpR9t+SuGo5js5DAyZlRbQAFVHKU4+7Zb+EqftYdEo0QJgdiRvK/I3YLX
-	 iGTUu+ySHx3yK/Y6KXn1EgbBfyjfuy3DgUKYgonreQK3g7FtI/rWtk7VLNPQJr2H/U
-	 HM16lMnR9WUccxFiyQ7zieUDuecpvOybOD11HMnM=
-Received: from lingrow.int.hansenpartnership.com (unknown [IPv6:2601:5c4:4300:d341::8309])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519MLKEM768 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by lamorak.hansenpartnership.com (Postfix) with ESMTPSA id 1990A1C00A3;
-	Sat, 12 Sep 2026 08:10:06 -0400 (EDT)
-Message-ID: <bdcff6a168e6d4b8e9c9524bd598281817a7df2c.camel@HansenPartnership.com>
-Subject: Re: [PATCH RFC] drivers/rufs: add Rust UFS host controller driver
-From: James Bottomley <James.Bottomley@HansenPartnership.com>
-To: Andreas Hindborg <a.hindborg@kernel.org>, Greg KH
-	 <gregkh@linuxfoundation.org>, jaemyung.lee@samsung.com
-Cc: Miguel Ojeda <ojeda@kernel.org>, Boqun Feng <boqun@kernel.org>, Gary Guo
-	 <gary@garyguo.net>, =?ISO-8859-1?Q?Bj=F6rn?= Roy Baron	
- <bjorn3_gh@protonmail.com>, Benno Lossin <lossin@kernel.org>, Alice Ryhl	
- <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>, Danilo Krummrich	
- <dakr@kernel.org>, Daniel Almeida <daniel.almeida@collabora.com>, Tamir
- Duberstein <tamird@kernel.org>, Alexandre Courbot <acourbot@nvidia.com>,
- Onur =?ISO-8859-1?Q?=D6zkan?=	 <work@onurozkan.dev>,
- linux-kernel@vger.kernel.org, 	rust-for-linux@vger.kernel.org,
- linux-block@vger.kernel.org, 	linux-scsi@vger.kernel.org,
- linux-arm-msm@vger.kernel.org
-Date: Sat, 12 Sep 2026 08:10:05 -0400
-In-Reply-To: <87mrtmvioe.fsf@kernel.org>
-References: <20260912-rufs-private-v1-1-716db733e655@samsung.com>
-	 <YKq4TcQM0v2dXF4wTHEvZKwASII6PDd_R7_UiHWe3NRnR4JsrC_ZS-x6jA_Kl7P6ONehU0REHYk7WaLz8Xv5gA==@protonmail.internalid>
-	 <2026091124-treason-trickily-bc52@gregkh> <87mrtmvioe.fsf@kernel.org>
-Autocrypt: addr=James.Bottomley@HansenPartnership.com;
- keydata=mQENBE58FlABCADPM714lRLxGmba4JFjkocqpj1/6/Cx+IXezcS22azZetzCXDpm2MfNE
- lecY3qkFjfnoffQiw5rrOO0/oRSATOh8+2fmJ6el7naRbDuh+i8lVESfdlkoqX57H5R8h/UTIp6gn
- 1mpNlxjQv6QSZbl551zQ1nmkSVRbA5TbEp4br5GZeJ58esmYDCBwxuFTsSsdzbOBNthLcudWpJZHU
- RfMc0ew24By1nldL9F37AktNcCipKpC2U0NtGlJjYPNSVXrCd1izxKmO7te7BLP+7B4DNj1VRnaf8
- X9+VIApCi/l4Kdx+ZR3aLTqSuNsIMmXUJ3T8JRl+ag7kby/KBp+0OpotABEBAAG0N0phbWVzIEJvd
- HRvbWxleSA8SmFtZXMuQm90dG9tbGV5QEhhbnNlblBhcnRuZXJzaGlwLmNvbT6JAVgEEwEIAEICGw
- MGCwkIBwMCBhUIAgkKCwQWAgMBAh4BAheAAhkBFiEE1WBuc8i0YnG+rZrfgUrkfCFIVNYFAml2ZBI
- FCS3GUMIACgkQgUrkfCFIVNZKjQf/deRzlXZClKxTC/Ee2yEPqqS7mm/INUA49KdQQ5oIhSxkUBy0
- 9J4qjMIo5F8ZFkFTqikBqeL35LKu7O7rn8WETfX8Bxvos3HUsl3jHo34DES4MUFIpoQPgtiLRGwLb
- K0cVCAArR2u2qj4ABmTRrs1I1kvdjEw6gatOuXtEe/j5O2fvfzTq9GBr0Q3n2IAsFXi4hLlx6VPE8
- tyWUZ8BWJKtih3JAeUiXFvASL3McV0rV9RnU0VbjEQEhSE7PMYhWpnDC9AyBb0lXJllQRvC3NSkUB
- 8KVQgNNxRPss0WE/nBoZ4dFA42jTyzTz8lNylxZoAWV7WJb3QxVg4oCodRVrxxrQhSmFtZXMgQm90
- dG9tbGV5IDxqZWpiQGtlcm5lbC5vcmc+iQFVBBMBCAA/AhsDBgsJCAcDAgYVCAIJCgsEFgIDAQIeA
- QIXgBYhBNVgbnPItGJxvq2a34FK5HwhSFTWBQJgS5mYBQkbNYS9AAoJEIFK5HwhSFTWBpwIAL5Bk3
- 5FB34U6iHmDzzgdCbxLTs43T/YQyJpcGIvopBvnI/fDY8oSG6Df64/O6B+1R+A8TDp6ZG5ysUWnCC
- 6GuIaEHemBYkitMPglR6+sGCMQY7O0mlsPvdssvKK1KI9Bno4VU6ogaF2qVzefSqg1Djmf/DcsxWP
- rI/jdJ8FB5AYR2rjIdDFc+zRdAJuavo1/anyY2wgpFh/3R8IOYAEfWV9nGgYkf9+tA4EIn1sxE0I3
- L5oW2N3mbyRrkzuBwO8ztMCwqEPk7moWzhokcZqMXiAIahaZdkashJC+s2X2RZSGCy+g+pvY5NN4B
- BVG5XwLgVBqbHMTcxE0fbmPqz+q6O0LEphbWVzIEJvdHRvbWxleSA8amVqYkBoYW5zZW5wYXJ0bmV
- yc2hpcC5jb20+iQFXBBMBCABBFiEE1WBuc8i0YnG+rZrfgUrkfCFIVNYFAmODZ5ACGwMFCRs1hL0F
- CwkIBwICIgIGFQoJCAsCBBYCAwECHgcCF4AACgkQgUrkfCFIVNZu0Af/TzvL2/NdgAcw9uN3x60H8
- jc4QUq14VpxcFEFEMpcj1morkX/G93V+56HBBaXZj+yK8PhxIA/SIz+sU7C/0YvKuvzakP8ZX/7WJ
- e32SOUtjfr/VTaqjIBzNj6OxLvZpmNbBw7s6DwhhNpHOWqJ/1ml+PtDRDV71IB58yVqQjp1xlNKVl
- ZppcJ5908EJzsFnRIVjiQiDSKoppqB2BCibBbrWcln7CiWMyOC/cco6SIn6twH+f7+aivJ3xGcOE2
- a9gBKF5rNi9TBoX9oyPmshv/TDmnohsVrH7AYXlGYfZTk15SWEiROh1QX8/uD9wl/gcIv5EDUpT/F
- L2jzOsA5663bw==
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.56.2 
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="BhYPyA9I"
+Received: by mail-pg1-f182.google.com with SMTP id 41be03b00d2f7-cc4dbcf2b85so294778a12.3
+        for <linux-arm-msm@vger.kernel.org>; Sat, 12 Sep 2026 05:28:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1789216104; x=1789820904; darn=vger.kernel.org;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=oe7EXYlzw5spJ4MGmK2TXNFq8D9C+6xPH4nivENYcuY=;
+        b=BhYPyA9IrNZBzadE/xwuZhtWgRAC8lgeIBzDTaC2GcEnwP4TqINJO4sPJcir14Ucl8
+         HokL2QWEvU8n8kHYaRc2MSM83FSTSzMGyHKyXt5V9avbymkSBjzU0IBseZHfOhbRENuV
+         id4CiDzkufYLl3vnIiQnErwICdxzjExoh3sF1EoXaOS8+4rlqfzqHIDcysa3fDnzd3X7
+         W16OcGrgE6kwustxrpONo5mufCKfCYMI+dbkou2cE5Wz0i8bP9pYi2R6TY0y5pX/H6RV
+         1RAX++MPxplV2yNaxIr39O3kDcer+vFlbk0M+Dyet50no03kDxYOWumQFPswqZVFOIzK
+         yKnQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1789216104; x=1789820904;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=oe7EXYlzw5spJ4MGmK2TXNFq8D9C+6xPH4nivENYcuY=;
+        b=VUjjm5bHdyrVGn0SX7yd8ONnRw4T8K3xrkibdbBbGZTpvhecMORLr7w8+W619XPO0j
+         ELIInW8mT2WWcQoZwu4HgW/28OimZv1g0Uk2sMBBmYVqbU47xS8FmTZ6UYdsnw7njhi5
+         KZCJuhs6vdRhmFqO6De0C82xgIG2zWdtjObFam0+rg1SQavAh/UHOx3mbgNG93B/dqsi
+         MCkPZ///LmcIb+wxiYSXIghySfanqwV+BPRiGeMwXEdX1vllWmqsD4ehajaPR8xKFIQq
+         d5+5H2/C84j2FzwACdboWIsN9RhJ955gyxXUhLqyN5+2U0oK7HHo1OrCXQVXD9wFIx7U
+         wqFg==
+X-Forwarded-Encrypted: i=1; AKwUvBzmQKB1Lm2yI5H065+euJntEv8bKK0SUN+xwiZrNqCJEKuCW2suvc6tSx8K+3mEzqksBW5AjUNs/E77d5Z1@vger.kernel.org
+X-Gm-Message-State: AFuF++kKWVUw8pQRjJlSdtJfSn3yZ/b5tspaJr+2+o30FP9+ROFP7d+A
+	VbBe5XPdqjvvajt6MN3ZicjW21JoY3Rq4euaQ+cIWaj3nWynIKkkQJDi
+X-Gm-Gg: AYBFou3h2s9n5O4bCj1BA/TfPukQSv8pBuDM226toQACAMcJEISuCw0BLcM1iUvCA1S
+	tytHAeD7rKxfU1EPq1Ue17FfO3vgaRMWNtBE81WkTdGYFNf+Ltr+fNhJzeiLuzo0aq8S8+rQwDO
+	X71HV7RD9VqJxJGpfkCs/taRYeDv0HIJY3jjQjZpBIEzjxGPF2EHBeZGeUq9lOz9SYzxQmoT5nR
+	xXmKT7417X/Jw3TQFM3fW+3/jsJg184gSFt5FiGvY0PfHth4yuev3hD6KQT4B34UtNlEXVdfFeR
+	TaD811BVVqXJMojMTkX5C3ce7IZaIGaUT55c24em2aVGy49FCPSBkFF/DLZN0xAGahG9qL70qi3
+	N/7nAqIgB/ygCNoN3Qq9ASTqEdKYKiL4S3O/mbK5X6fjSyTVn+r+C7INLfnHnBboD/qVAOxq6r9
+	TjSmJFt3HfY8bKDgH2cjx3hdkI6sH9rc4PdxoGcTIUbsB1GKHU4Hhxwfig0aN7q2Q=
+X-Received: by 2002:a05:6a20:b08d:b0:3da:6bdd:2308 with SMTP id adf61e73a8af0-3daed5d1814mr17126253637.18.1789216104145;
+        Sat, 12 Sep 2026 05:28:24 -0700 (PDT)
+Received: from [127.0.0.2] ([2404:c0:701d:4e35:aab7:8c01:68f1:4912])
+        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-cc4c65b1a63sm2512427a12.31.2026.09.12.05.28.19
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sat, 12 Sep 2026 05:28:23 -0700 (PDT)
+From: Reza Kurniawan <imkyufie@gmail.com>
+Subject: [PATCH 0/2] Enable USB support (peripheral mode) for Xiaomi Redmi
+ 5A (riva)
+Date: Sat, 12 Sep 2026 12:27:32 +0000
+Message-Id: <20260912-riva-usb-v1-0-0acd5cf8c62a@gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXMQQ5AMBCF4avIrDWpJhVcRSwYg7Eo6SCSpndXL
+ L/kfy+AkGcSaLIAni4W3lxCkWeAS+9mUjwmg9Gm1HVhlOerV6cMirCmyVisKouQ8t3TxPd31Xa
+ /5RxWwuPdQ4wP6sV+cGwAAAA=
+X-Change-ID: 20260912-riva-usb-ec9ef25c885c
+To: Sebastian Reichel <sre@kernel.org>, 
+ Bjorn Andersson <andersson@kernel.org>, 
+ Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>, 
+ Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>
+Cc: linux-pm@vger.kernel.org, linux-kernel@vger.kernel.org, 
+ linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
+ Reza Kurniawan <imkyufie@gmail.com>
+X-Mailer: b4 0.15.2
 
-On Sat, 2026-09-12 at 13:00 +0200, Andreas Hindborg wrote:
-> "Greg KH" <gregkh@linuxfoundation.org> writes:
->=20
-> > On Sat, Sep 12, 2026 at 12:52:55AM +0900, Jaemyung Lee via B4 Relay
-> > wrote:
-> > > Comments on the decision to bypass the SCSI midlayer, the blk-mq
-> > > model used
-> > > in its place, and the proposed prerequisite API boundaries would
-> > > be
-> > > especially welcome.
-> >=20
-> > Many many years ago, the USB subsystem tried to bypass the SCSI
-> > midlayer for its storage driver, and while it was a "quick
-> > solution" at the time, in the end, it didn't work out and we
-> > dropped the driver as it just made no sense to keep duplicating all
-> > of the logic all the time.
-> >=20
-> > So I wouldn't recommend it, as long as UFS builds on top of the
-> > SCSI commands and the like, you should not attempt to duplicate it
-> > in a separate driver, no matter how much "simpler" it initially
-> > seems to be.
->=20
-> The scsi related code in this driver is less than 300 lines and is
-> mostly struct packing/unpacking. I guess we could lift the struct
-> definitions from the scsi layer via bindgen. But at 280 lines I am
-> not sure it is worth it, and it hardly counts as duplication.
+The purpose of this series is to enable the device to act as a USB peripheral.
+It enables USB-related DT nodes (controller and PHY) and modifies the
+charger driver (BQ256XX) to expose its VBUS state through extcon.
 
-You didn't actually read the above did you?  The problem isn't
-necessarily the duplication of code per-se it's the duplication of
-function without understanding the subtlety.   Every fool thinks they
-can duplicate the core features of SCSI in a few hundred lines (and
-they can: the core SCSI model looks beguilingly simple).  They then
-usually spend years adding back the necessary corner cases and quirks
-before finally concluding that actually they shouldn't have tried in
-the first place.  Just because it's in rust doesn't change that
-calculus ... and you're by no means the first people to try this, so
-listen to the voices of experience and don't.
+Driver change is required since the device has its VBUS connected to the
+charger IC, which means cable connection/disconnection events must be fed
+from the charger IC, to the controller driver to dynamically enable/disable
+the USB gadget functionality.
 
-Regards,
+Signed-off-by: Reza Kurniawan <imkyufie@gmail.com>
+---
+Reza Kurniawan (2):
+      power: supply: bq256xx: Expose VBUS state through extcon
+      arm64: dts: qcom: msm8917-xiaomi-riva: Enable USB support (peripheral mode)
 
-James
+ arch/arm64/boot/dts/qcom/msm8917-xiaomi-riva.dts | 17 ++++-
+ drivers/power/supply/bq256xx_charger.c           | 88 +++++++++++++++++++++---
+ 2 files changed, 96 insertions(+), 9 deletions(-)
+---
+base-commit: 68142f986ff04b2b70b31db00f719bf690f64a9a
+change-id: 20260912-riva-usb-ec9ef25c885c
+
+Best regards,
+--  
+Reza Kurniawan <imkyufie@gmail.com>
+
