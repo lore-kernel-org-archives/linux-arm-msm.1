@@ -1,124 +1,133 @@
-Received: from mail-wr2-f12.google.com (mail-wr2-f12.google.com [74.125.225.76])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4961D30E0EE
-	for <linux-arm-msm@vger.kernel.org>; Sat, 12 Sep 2026 06:57:11 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.225.76
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 33D9537F8DD;
+	Sat, 12 Sep 2026 07:47:43 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789196232; cv=none; b=nmGaE2cVLgvtMJ9n3WttlqHWRbHz8h0keNlcoBfrBGeCbtS1SwzZtnCznFfOnV7q9Jnsf0L8/Pmz3mzq9e9GfUVS6Xww2FLrGvQt/WdoybxPDWxpWFRFwHuo/JI4msxMjF3SPFM35zem8AlYgBgyXZbvS2I2j77zTM2Iwgy98Sw=
+	t=1789199264; cv=none; b=RziEV23Z9ucJmn+oVqvc104qyWho1m14Vm/2V15SlaFRh5cMWtCcSTUgjnR4Pj72sOL7S7j3VsNgd9yyBCifl/a8ncTqew4+7EbZQna1rlT75ZD2KZTx2R0hd9V/o0MV+NdKJ3yPJd7zXyZ5SlqDaSueLxgUIWXnrapQiFQ1z6A=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789196232; c=relaxed/simple;
-	bh=mr9mEofpZg517wnfuvyOVQlKcymgg20rBs3rPdaoQTE=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=gGpGE6tjUZLVRgQicOM8jAKYqTtol1qtb2JvA0FxH0UO5VG2n7hoti2tTDHw5my/yMNBiZbbzVSalZC6nHt+GRtn8yE5fWjbL3tx3Rf7dw74x+lo3gi02lLUeW1b0K9NMDS2nSFbLCKWNi97L+6zs8ooPgOS+6BZ+VflkVEUjpo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=BQ7edGGc; arc=none smtp.client-ip=74.125.225.76
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	s=arc-20240116; t=1789199264; c=relaxed/simple;
+	bh=R/Wd26fZOArpDS0VCiW2VIg+U6TfjdnRy5lUqkHrXds=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=WovVo9mYxiJBzjipr8aelWmajXIt6nulIgM+VAZuokirvODZHbejitYqvnwlEOJHYCI2Div7mLAy4URthlVLFfbH6wOaGoDwJQTlSI+I6Nyn2+8kLNy95pqV0ntCOdILw+EzMth4FsaYdZ63AOJOME/vGQxDdmD6GZkPrgOWXfs=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=j/uoTbdk; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="BQ7edGGc"
-Received: by mail-wr2-f12.google.com with SMTP id ffacd0b85a97d-4858bc96fabso195539f8f.3
-        for <linux-arm-msm@vger.kernel.org>; Fri, 11 Sep 2026 23:57:11 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1789196229; x=1789801029; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=81nBBk0ZNsJNmNXGHQvlj0ybllEDe9lXdGKxk1W969Q=;
-        b=BQ7edGGcyXg75I9K0WkY+sMjmYL4/JPuPrsehQFI28AOotsdiDSy3dlQwWiXsXnAfw
-         KB5VuEQ7yFFJVuV8++TajvFeqOX03DMT9JmxVcKPt4rmtQKvKUYsz1Q6CzyyhyBygZ9J
-         AnOssCbbPZcXtNius+J7i3bWXwWdPIhEjclfw+jrdZWJoFWZIVNYwO63tBv4bqRQZAeP
-         T1Su8rRFWs6WpdzDBlqbYCkQCquoHaMa91zD+IdrU/3yL2l5P1HvUXZWXCVVmMbxZKY0
-         pmA82b/s4Su4PSa4xsVwPoZT+ps23vxX2IrEc689BmPxRmKSza+OvgjoUSHOOoO88Bkk
-         bEIw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1789196229; x=1789801029;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=81nBBk0ZNsJNmNXGHQvlj0ybllEDe9lXdGKxk1W969Q=;
-        b=d7k++/CCIxFrj9ZF8MtUFqPIYtKwThNVh/cdp9/Gepfrl/j96ISb5BjZY/dknGQwqv
-         WMRtrtbfmMyTGHfiRp3vp/wlG+kRYQD6qrOvDg/kzJE2uPRj0rjhLX2m0WO8wOA7dFmy
-         CHm2SyZsC3uo1JOkg23orbo3p6CyUhsrd+IU+ErYSrRLmlYq9R15rP0CkBxdcNEGKy4J
-         WEoONo98EHtAJ6UeSd2SPp2SwiogVZufCIojVJcdWpByy2Z2hGzK8V2LCwAH8cdG2xxu
-         99kCYwDdln5Cj+hM3duBDjVy/+uJSB6V89kqwy5JjaCCwNh45Co+YPYKhLa41sF3g37q
-         fJEg==
-X-Gm-Message-State: AFuF++mAZfnErn1QFG+TKoATsXarBYoo+ARZLZO0FA7AA/NM8xxVEMKR
-	oeZhXyGM1SMkSFUvRFAk6Hblmzmrc89RG4YJTgf15B0tX0dutdUjzlgV
-X-Gm-Gg: AYBFou3XEJTFYGeRSGJiVhe6yyR8kE/f8eOICfWo+kA1ZJ8Bgum6DDHjMH5Rrp3O8O2
-	tSZdnaOBUzHdH1puIcNyJI1KaPPK6IMisB2j9QO9jOjeG8urBE+FkcZMtkAo6TExXN71Ztq2Lgc
-	d/b+TcFSC3YZSimZuH7t7+AM9cteJb+cw/MGTXwE6g1IZ/MGEb0gEV5IEgmAcgYIAb7EkLRA3sV
-	uvmI81hx4ElyCYdAu0nSQumFUHPMetkM2q3QxGB0qClFqwmTwoZvH/txvGa2XiihIAkFclM/Ui+
-	8os4Kjes8sIC2ShOkhE1d59vY8XmTAaFU6Z326jJWd50rtBbzOklWsNYrw7sehz7kXBKnCo+D2M
-	K84ISYWfQDdLRGNyRBUWkxownEqIZXK0klTMZjWrjbS493bKbz3E0gg+/xAJbaL86nYPwiASCDq
-	WEuBTwHP+VhHdNrp60rkeJwJKLTOM55cRiXsilYcRNR2zANu2n8hWFIPcK4BVljdbjzvPcncw9X
-	5m9BWCbXDZIBxdEUQE+/S3Klg2KTbz4KIlQhhzSqmO5ku1h8aA5lonEYo/+8ErV+udeU3h2mSZI
-	rNPw0ASigwqN
-X-Received: by 2002:a05:6000:71a:b0:485:8a46:704e with SMTP id ffacd0b85a97d-486f6c4b7fbmr1611416f8f.32.1789196229218;
-        Fri, 11 Sep 2026 23:57:09 -0700 (PDT)
-Received: from localhost.localdomain ([41.90.145.204])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-486f301121asm6495278f8f.0.2026.09.11.23.57.06
-        (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
-        Fri, 11 Sep 2026 23:57:07 -0700 (PDT)
-From: Kenneth Kabogo <kennethkabogo2@gmail.com>
-To: andersson@kernel.org,
-	konradybcio@kernel.org
-Cc: linux-arm-msm@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	Kenneth Kabogo <kennethkabogo2@gmail.com>
-Subject: [PATCH] soc: qcom: mdt_loader: fix off-by-one heap overflow in segment name
-Date: Sat, 12 Sep 2026 09:56:51 +0300
-Message-ID: <20260912065651.59968-1-kennethkabogo2@gmail.com>
-X-Mailer: git-send-email 2.55.0
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="j/uoTbdk"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E2CDB1F000FF;
+	Sat, 12 Sep 2026 07:47:39 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1789199263;
+	bh=fEk/+hjIO0JPeORZMXigoTsG7Twv5Bvnn+lcX8uIdUA=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To;
+	b=j/uoTbdkemp1lTBkEdp7a5iePn6loWnzURddGH+pHmbp3TdI+Ht9vKB5+5HDaMkTz
+	 4XMNQMCixVIjSJgIUIpdDJkP3e+Zk7Zp6DLG8R0pbbNCMi+vNKMW8vXDXOqhrK+f5T
+	 4ubb7OTc080BSuVU8WcfJykWnX7f5Z0WoVW04LQG4n3ICAqaFQYrolJW1Id7gDkGyT
+	 9XdoNxIDMO+1FxLFBT1mCMBpRGz0RyDmtz4V9EskILs09SHmK1bOxAd64LIXEduN84
+	 G01WKPddNVoqYjlumTombMlc6OK9zmDzR1HpVKwt+t7qHgrMeljIhAzddIk6rPIX4a
+	 HVtiSFigUNPcQ==
+Message-ID: <0e917c61-8be9-4919-9173-0dd92e1c0d22@kernel.org>
+Date: Sat, 12 Sep 2026 09:47:38 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 3/3] arm64: dts: qcom: sdm845-oneplus: use generic fuel
+ gauge compatible
+To: Andrew Davis <afd@ti.com>,
+ Rinat Muhamedgaliev <rinat.muhamedgaliev@gmail.com>
+Cc: Bjorn Andersson <andersson@kernel.org>,
+ Konrad Dybcio <konradybcio@kernel.org>, Sebastian Reichel <sre@kernel.org>,
+ David Heidelberg <david@ixit.cz>, Rob Herring <robh@kernel.org>,
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
+ <conor+dt@kernel.org>, =?UTF-8?Q?Pali_Roh=C3=A1r?= <pali@kernel.org>,
+ linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
+ linux-pm@vger.kernel.org, linux-kernel@vger.kernel.org
+References: <20260829205258.26955-1-rinat.muhamedgaliev@gmail.com>
+ <20260909234744.1177153-1-rinat.muhamedgaliev@gmail.com>
+ <20260909234744.1177153-4-rinat.muhamedgaliev@gmail.com>
+ <20260911-relaxed-dexterous-hummingbird-72dfbe@quoll>
+ <6c45cfd5-ac37-4f8e-bde3-0391512df982@ti.com>
+From: Krzysztof Kozlowski <krzk@kernel.org>
+Content-Language: en-US
+Autocrypt: addr=krzk@kernel.org; keydata=
+ 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
+In-Reply-To: <6c45cfd5-ac37-4f8e-bde3-0391512df982@ti.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-mdt_load_split_segment() builds a segment firmware filename by
-overwriting the last three characters of a kstrdup'd copy of fw_name
-with "b%02d" formatted from segment. %02d is a minimum field width,
-not a cap: for segment in [0, 99] this produces exactly "bNN" + NUL,
-which fits the buffer, but for segment >= 100 it writes "b100" or
-wider, one or more bytes past the end of the kstrdup allocation.
+On 11/09/2026 15:37, Andrew Davis wrote:
+> On 9/11/26 3:21 AM, Krzysztof Kozlowski wrote:
+>> On Thu, Sep 10, 2026 at 02:47:44AM +0300, Rinat Muhamedgaliev wrote:
+>>> OnePlus 6 and OnePlus 6T battery packs may contain either a TI
+>>> bq27411 or bq27541 fuel gauge. Use the generic ti,bq27xxx compatible
+>>> so the driver can select the register map from DeviceType at probe
+>>> time.
+>>>
+>>> Tested on OnePlus 6T (fajita) with a bq27541 (DeviceType 0x0541):
+>>> after booting the new kernel, the battery reported 4.360 V, 100% state
+>>> of charge, 27.8 C, and Full status.
+>>>
+>>> Fixes: 12dfb002ca01 ("arm64: dts: qcom: sdm845-oneplus-*: add fuel gauge")
+>>
+>> What is the bug here? Your commit msg should be specific about it.
+>>
+> 
+> Commit msg seems pretty clear about the bug (to me at least), the DT
+> says the fuel gauge is a BQ27411 but that isn't the case, some shipped
+> with a BQ27541 fuel gauge.
+> 
+> (I do agree though this shouldn't have a fixes tag as back-porting this
+> without also back-porting the driver-side change would break users)
 
-segment is not bounded to [0, 99] anywhere before this point. It is a
-raw index into the firmware's ELF program header table, ultimately
-bounded only by e_phnum, a 16-bit ELF field (max 65535). The existing
-check in mdt_header_valid() only verifies that the program header
-table fits inside the firmware file, not that e_phnum itself is sane,
-so a small firmware file can supply e_phnum > 100 and reach this path
-with segment >= 100 from either qcom_mdt_read_metadata() (the hash
-segment scan) or the main loadable-segment loop in
-qcom_mdt_load_no_init(), whenever the image uses the split-firmware
-convention.
+But different model is not a bug by itself. If devices are compatible
+how would it be a bug? if everything is working fine with different
+model how would that be a bug?
 
-segment was never valid past 99 under this driver's own "bNN" naming
-scheme, so reject it outright instead of widening the buffer.
 
-Found by code inspection while auditing the Qualcomm PIL/PAS
-firmware-authentication flow. No reproducer beyond code inspection is
-available; I don't have affected hardware to trigger it on.
-
-Signed-off-by: Kenneth Kabogo <kennethkabogo2@gmail.com>
----
- drivers/soc/qcom/mdt_loader.c | 3 +++
- 1 file changed, 3 insertions(+)
-
-diff --git a/drivers/soc/qcom/mdt_loader.c b/drivers/soc/qcom/mdt_loader.c
-index 002100fe2..0d55e9e0a 100644
---- a/drivers/soc/qcom/mdt_loader.c
-+++ b/drivers/soc/qcom/mdt_loader.c
-@@ -77,6 +77,9 @@ static ssize_t mdt_load_split_segment(void *ptr, const struct elf32_phdr *phdrs,
- 	if (strlen(fw_name) < 4)
- 		return -EINVAL;
- 
-+	if (segment > 99)
-+		return -EINVAL;
-+
- 	char *seg_name __free(kfree) = kstrdup(fw_name, GFP_KERNEL);
- 	if (!seg_name)
- 		return -ENOMEM;
--- 
-2.55.0
-
+Best regards,
+Krzysztof
