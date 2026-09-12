@@ -1,63 +1,63 @@
-Received: from mail-pz2-f25.google.com (mail-pz2-f25.google.com [74.125.228.25])
+Received: from mail-pj1-f44.google.com (mail-pj1-f44.google.com [209.85.216.44])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1597D3A6F09
-	for <linux-arm-msm@vger.kernel.org>; Sat, 12 Sep 2026 19:13:09 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.228.25
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 00316492525
+	for <linux-arm-msm@vger.kernel.org>; Sat, 12 Sep 2026 19:13:20 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.216.44
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789240390; cv=none; b=lHBgveepjNcxmk2WFDsX7J+Vwxi5Hzz3L+bDUJS0lCboCCWJo7aTEQCgdoBmX6qmL3S+zcHEjdSMPlbQtb4wuMVMH78jPQM2HnAJbd/mGrtXx3l1jv3bZ4EwSKHeArlaoxSsRd9zIu/0QDG70SUxRL3LltK1ZW4HacyKP2t7RFg=
+	t=1789240402; cv=none; b=YPLYtitDQ6pG1ACApAN8Jp+Renzw1EUyzBZCewmXSC8vfM6ys2fBvrNKpZ9SaQ8n0WFdp826Pd+IBznAgrFBMCo5QUfp/ZHEykrp2wF0Bp5TkgpRIRkWJov3FxIXO1U/4bYiT2ETp0tOoruYUknoG+DIAjFgP5di/ssVGzxQqCo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789240390; c=relaxed/simple;
-	bh=3EjLPMtvKg2GmNImlqYJqrTo1wBe3j2XE35A47khzrU=;
+	s=arc-20240116; t=1789240402; c=relaxed/simple;
+	bh=rzU25QtfHWStXyf5JOAOYagDMlPR8E/O7UUr9Hj10z4=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=GyXkcZADeFj4eqL22taCJ3UXGl6iFE7UMDkrQnqUt7FydObf2+rgdcgJ91CRpOG1gy/MhnVNkpFwQfeITo+wjwhKHPVTN1MWHchmM6qdODX3D71Q6brbYYRPoUEp9/C4r6yuJlZNYKl5SFbXYZL5W0nhgsxzcj0QHgt5g+5L7kk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=oxUnVPSY; arc=none smtp.client-ip=74.125.228.25
+	 MIME-Version; b=iOX3vDTrWaahHkz/qGEFgpff8Tb2W02MF/enyX6LMY7fF6rYQBIT8EuOEQOmIE6dc4KEcpDhKT4jH7lg3jGv0BxwqSobpatEPpQfCp11NbAnygAi+o9oFHBTqINg7TCrWcKHWcBL2Jx7uqOXMngEoGG71xUVv/V/k178TfvjVJ8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=a3gOWOis; arc=none smtp.client-ip=209.85.216.44
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="oxUnVPSY"
-Received: by mail-pz2-f25.google.com with SMTP id 41be03b00d2f7-cc1cebad4aeso863260a12.2
-        for <linux-arm-msm@vger.kernel.org>; Sat, 12 Sep 2026 12:13:09 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="a3gOWOis"
+Received: by mail-pj1-f44.google.com with SMTP id 98e67ed59e1d1-38e42560ebcso2007502a91.1
+        for <linux-arm-msm@vger.kernel.org>; Sat, 12 Sep 2026 12:13:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1789240388; x=1789845188; darn=vger.kernel.org;
+        d=gmail.com; s=20251104; t=1789240400; x=1789845200; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=/HIyoexeJaOf4GZ5Mzi02CK37U3A8OAhoynQEmxQpvQ=;
-        b=oxUnVPSYBtPggWEn+MOfo9FXtx4DX3lANkbForUWBr8rbfzzKFho2+GfJafWnmw4OL
-         n3vHsJjXCFk3o4Q7FgAN83gZjSajGkp+GqDPoEcpb376qaFj9h/yV8raEBElqhKe5t/K
-         ryVsIKWdnwyeIv8PB+AHTIdsfhAOWJmlKQVqaUq5fZk95m3ysHWXL/SmfmF0858VsKKq
-         k+LhXNRLAIZI0+GtKMaENAeT/9rNZQs9GmE1A5ATzVN2TVDvUTShl750BD6Lsux4UvBT
-         u7QcRLVe93kQpOGgHVjWbbQLoisJAk9k/y7okfNpbRMehmsUX3x3KEsmwGTLQQl0kPDP
-         AZnQ==
+        bh=epJRaVobxvGM+/1VLnT5WJdru54OJK34KQRZKM0LI5E=;
+        b=a3gOWOisn5B5hRqXKFFZKdetKy+GtbuubsLGdKfo8dqVPZnDjUVVyhiVI9XUkx9E4X
+         TMjXM4UvHdST9h6udvx5ez24iQKYZ2V7W3zX1Z0yh5dQCXfeX3zqcpE2VLPlOgcvDKPB
+         paiBP6rpMsArRYh1Y3t/GG1OsXYDzEAPgP1HyakdZ1/FjORGhtUuAlf/QPT7c7QhZIpx
+         lzRNGFdtG6uhd9cpzXIXhVGYxs5Kn7OxElWIVaR25MN0adsA2AhHHg7oF0GD8OthXboy
+         aTUKZPWGTWoXVFr1+pU2wPMwfIAj8HJQ0Xan/coljkOmX3aPp+PI5OyofQSVcbAEQ8hK
+         M3rw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1789240388; x=1789845188;
+        d=1e100.net; s=20251104; t=1789240400; x=1789845200;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=/HIyoexeJaOf4GZ5Mzi02CK37U3A8OAhoynQEmxQpvQ=;
-        b=VWCEduTxEi0O1Tuc+32tUMphngkgGwuv+9UlOdFLXI0vAn4Ayde4lfVGSuSAbnR2bO
-         VOH4kHUcYHPvE3Q7D7F+rrK/bH2E+xP/B8Yk2U4g8wWAEIrcZ43jjGhNn67omYm8R16P
-         ATK0x8jTSPnx3WfO2K9NX/HkQvpO0EQV6jMMJHv8GTg7mIiG+9o0chnUF4nG6QgWsb7U
-         FlvaKwiVaTSqzAR8T30xaNkn1AsgXSRuD4bqzg9jD5tD8oUX5wvccpQ+8bRvqayYtrpj
-         MCio8CSVokXgBo5OmLgTDUuPVA2aMK29SmOOyVoRaL9WjRJICh8XyD2//cTp74FPzD4C
-         1oLg==
-X-Forwarded-Encrypted: i=1; AKwUvBwEn8vGGHfIVRx/KODfjJj0hggQEOyaoTwl0KY/pyPQQ/eEwO2qSsm7LLtCSF4/fBiKOcFnB1V2DxZIkx5c@vger.kernel.org
-X-Gm-Message-State: AFuF++mQ0enmY2/lFrnya1nU5ufuRUqj5lJEVCp0jJC9/VLVLy1/gKDS
-	o55RiXKPR5l7mpMeS/TilvnZo4ibyJRjUHfvuRruwVO2P0yIbfIe6Lk2
-X-Gm-Gg: AYBFou2S0xlZQb8SD+qWLV3n1S8xsafP3PXYxNJsou4GXXHODF7UHLpb0kKg77gC/jz
-	vepDQntIy3xSQ2LwiVRBBGqRluZnkA3G4mVNqskTmtcWxcUVUnPThrFDQJizVPS3i9i4H1PXZvU
-	hXPJDwjhYqe6zcod/BBCjKqWpFCRhf/eSUjyEiRT6BHsOQC3YUR6lod8GQp4tELOsRAcsCxy048
-	JAdt3Yu0nNMUN9IdAC5mPxXeIHjoXVmMvdBO7m+Es/B8oFgW2ec3VEdyD+m0ic9zoVBOsDDnYJA
-	DIfmocsiMwJ1b8sOrRcAHm8gIihBByOpgaAyCrs79haR1FDCBqIZF5dc0ERcgA5NPjfU7NgEoKp
-	wF3fiTnqrv5WMv/0ZDOOSETgC5Kskfll9fTXJuM82MDAVkJUq2huZgDxGoepSmvUn1XETXF7MTN
-	lFZe7s70NLPk+U6d2Og2eyAh4JQlsIjk8X08gWyUsKVdy9P3I7EyD3uWutzgVgjwRk4WiH
-X-Received: by 2002:a05:6a20:d807:b0:3a0:bc61:62e6 with SMTP id adf61e73a8af0-3daed15f5b6mr20435411637.8.1789240388372;
-        Sat, 12 Sep 2026 12:13:08 -0700 (PDT)
+        bh=epJRaVobxvGM+/1VLnT5WJdru54OJK34KQRZKM0LI5E=;
+        b=GYNcbfLmBeoQUyctgtm7Lgg2z8LF9LRTkm5HmO02DH2Q+EJflPm6p8e9NQTn9WqlSp
+         twoI8ZMpnvyhK1pF6S0gTRX5FbvU7Zo+eVwopCGdySBEoNyY5zt8pfJyGJeZUzM1IjyP
+         X3VP2ZeXuB7BGg4NntF5+TsOurglQl1BB0hGY+pt6/s84okPZ9m7RIJIp4C8BRbMM3zs
+         mPyUFo0ELRZ6LX50iz/aOHA5V2PikXwT6C6lPvlVeH4/qpratXouS5jKA7iqJNcFpeGS
+         Eu/pz8VWgJ4NlGxo0oPPkKzQBo2tYnTJXv7nk1FoNkwTy6DdlMIh0SPozjzuvQbgjkRl
+         CMVw==
+X-Forwarded-Encrypted: i=1; AKwUvBwxAXE4p6weAdHFUROaR+Y657Wlcj07LKcuOrHjEc32ZdVpNmkdMoUjErSUUBv+Ld3vJUN3Wem+3nVv2cR9@vger.kernel.org
+X-Gm-Message-State: AFuF++keJ5obRZ4LAH+kT8MUfdsTD52Ssz5u1SLBXNEEVZEa9XTVIoyN
+	HOHNNt0UfNMBGnftHBTRdxu8v7aC02LSEvWxU5XhwI82LfiTTUEc+2zO
+X-Gm-Gg: AYBFou3ZG34Ru4zgp7/WjruZBWEf5ETPON7SzNvPLKngohWOQG97eQkRgKH0Ql/eBey
+	G+A4y63pHO/hnW066NyyUQgq96r6gQLGCOJFJld5MsylS3HOZzw6PngvripvWi6hfdqvSO61nBu
+	mXyW4QwVxdXSGQQ3ysF4RqOXoGYz0Z2acxN+WMiwEWD0J/385fWDpvSB2B8qFek6xtocPiJmEc/
+	OCyfghkMNfSVKdEgw0HdC7p5N0/1G/MDOGxSI5m5bYa36WQUS9x+ZlDcXruK1Dw9fTnnTHoZhXZ
+	8E9MqX4tHWZyAGPkNqOxYg+8jGaap56im3BjH67A/mqET9YaY+Y9IsB8hnjtOkIBdkqw9ShVdM5
+	AP1Bo1AyhmxSi8hdg8CLTxJKiQYjUHLvaKMXRJ34RbEddPK8Vx/NX7FdKz1/CTn2rOkDWDY/RXD
+	a+rJVMZyIliUuohpU0G3z7GgX9cm2PDD3k2HjJESZcjmmfzBKujWZuXOf6XDYcGxMtmQK6
+X-Received: by 2002:a17:90b:4cce:b0:38e:7168:281 with SMTP id 98e67ed59e1d1-39d9bec4d91mr17930859a91.10.1789240400257;
+        Sat, 12 Sep 2026 12:13:20 -0700 (PDT)
 Received: from gmail.com ([58.84.61.98])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-14365b348cbsm14722239c88.3.2026.09.12.12.12.56
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-14365b348cbsm14722239c88.3.2026.09.12.12.13.08
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 12 Sep 2026 12:13:07 -0700 (PDT)
+        Sat, 12 Sep 2026 12:13:19 -0700 (PDT)
 From: Sumeet Pawnikar <sumeet4linux@gmail.com>
 To: rafael@kernel.org,
 	krzk@kernel.org,
@@ -95,9 +95,9 @@ Cc: bcm-kernel-feedback-list@broadcom.com,
 	linux-pm@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
 	sumeet4linux@gmail.com
-Subject: [PATCH v2 4/5] thermal: Use %pe to print error pointers symbolically
-Date: Sun, 13 Sep 2026 00:41:54 +0530
-Message-ID: <20260912191156.185448-5-sumeet4linux@gmail.com>
+Subject: [PATCH v2 5/5] powercap: intel_rapl: Use %pe to print error pointers symbolically
+Date: Sun, 13 Sep 2026 00:41:55 +0530
+Message-ID: <20260912191156.185448-6-sumeet4linux@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260912191156.185448-1-sumeet4linux@gmail.com>
 References: <20260912191156.185448-1-sumeet4linux@gmail.com>
@@ -110,63 +110,31 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
 Replace PTR_ERR() and %ld with %pe and pass the original pointer directly
-to pr_err() and dev_err(). The %pe format specifier prints a symbolic error
-name (e.g. -ENOMEM) when CONFIG_SYMBOLIC_ERRNAME is enabled, otherwise it
-falls back gracefully and prints the raw integer value. This makes messages
-more readable without any functional change.
+to pr_debug(). The %pe format specifier prints a symbolic error name
+(e.g. -ENOMEM) when CONFIG_SYMBOLIC_ERRNAME is enabled, otherwise it falls
+back gracefully and prints the raw integer value. This makes messages more
+readable without any functional change.
 
 Signed-off-by: Sumeet Pawnikar <sumeet4linux@gmail.com>
 ---
- drivers/thermal/cpufreq_cooling.c        | 4 ++--
- drivers/thermal/devfreq_cooling.c        | 4 ++--
- drivers/thermal/qcom/qcom-spmi-adc-tm5.c | 4 ++--
- 3 files changed, 6 insertions(+), 6 deletions(-)
+ drivers/powercap/intel_rapl_msr.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/drivers/thermal/cpufreq_cooling.c b/drivers/thermal/cpufreq_cooling.c
-index 768859a7aed0..856d619370db 100644
---- a/drivers/thermal/cpufreq_cooling.c
-+++ b/drivers/thermal/cpufreq_cooling.c
-@@ -661,8 +661,8 @@ of_cpufreq_cooling_register(struct cpufreq_policy *policy)
+diff --git a/drivers/powercap/intel_rapl_msr.c b/drivers/powercap/intel_rapl_msr.c
+index a34543e66446..46972ee1ff84 100644
+--- a/drivers/powercap/intel_rapl_msr.c
++++ b/drivers/powercap/intel_rapl_msr.c
+@@ -582,8 +582,8 @@ static int intel_rapl_msr_init(void)
+ 	rapl_msr_platdev = platform_device_register_data(NULL, "intel_rapl_msr", 0, def,
+ 							 sizeof(*def));
+ 	if (IS_ERR(rapl_msr_platdev))
+-		pr_debug("intel_rapl_msr device register failed, ret:%ld\n",
+-			 PTR_ERR(rapl_msr_platdev));
++		pr_debug("intel_rapl_msr device register failed, ret:%pe\n",
++			 rapl_msr_platdev);
  
- 		cdev = __cpufreq_cooling_register(np, policy, em);
- 		if (IS_ERR(cdev)) {
--			pr_err("cpufreq_cooling: cpu%d failed to register as cooling device: %ld\n",
--			       policy->cpu, PTR_ERR(cdev));
-+			pr_err("cpufreq_cooling: cpu%d failed to register as cooling device: %pe\n",
-+			       policy->cpu, cdev);
- 			cdev = NULL;
- 		}
- 	}
-diff --git a/drivers/thermal/devfreq_cooling.c b/drivers/thermal/devfreq_cooling.c
-index 0330a8112832..9ada52cbf7dd 100644
---- a/drivers/thermal/devfreq_cooling.c
-+++ b/drivers/thermal/devfreq_cooling.c
-@@ -156,8 +156,8 @@ static unsigned long get_voltage(struct devfreq *df, unsigned long freq)
- 		opp = dev_pm_opp_find_freq_exact(dev, freq, false);
- 
- 	if (IS_ERR(opp)) {
--		dev_err_ratelimited(dev, "Failed to find OPP for frequency %lu: %ld\n",
--				    freq, PTR_ERR(opp));
-+		dev_err_ratelimited(dev, "Failed to find OPP for frequency %lu: %pe\n",
-+				    freq, opp);
- 		return 0;
- 	}
- 
-diff --git a/drivers/thermal/qcom/qcom-spmi-adc-tm5.c b/drivers/thermal/qcom/qcom-spmi-adc-tm5.c
-index af72db6299cd..4554a6fa55d1 100644
---- a/drivers/thermal/qcom/qcom-spmi-adc-tm5.c
-+++ b/drivers/thermal/qcom/qcom-spmi-adc-tm5.c
-@@ -680,8 +680,8 @@ static int adc_tm5_register_tzd(struct adc_tm5_chip *adc_tm)
- 				continue;
- 			}
- 
--			dev_err(adc_tm->dev, "Error registering TZ zone for channel %d: %ld\n",
--				adc_tm->channels[i].channel, PTR_ERR(tzd));
-+			dev_err(adc_tm->dev, "Error registering TZ zone for channel %d: %pe\n",
-+				adc_tm->channels[i].channel, tzd);
- 			return PTR_ERR(tzd);
- 		}
- 		adc_tm->channels[i].tzd = tzd;
+ 	return 0;
+ }
 -- 
 2.43.0
 
