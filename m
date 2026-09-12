@@ -1,159 +1,129 @@
-Received: from GVXPR05CU001.outbound.protection.outlook.com (mail-swedencentralazon11013019.outbound.protection.outlook.com [52.101.83.19])
+Received: from lamorak.hansenpartnership.com (lamorak.hansenpartnership.com [198.37.111.173])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 70BB436728D;
-	Sat, 12 Sep 2026 11:39:53 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=52.101.83.19
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789213195; cv=fail; b=ArUmqTbD4bZBj5dhbu3l7Mtm9gkPuY+DeFFe9N0HeKWD8jJysi84Oel8+2WGzoyhQ+6kIAKShoMizHunh2Kz1uvNS0xI9siWBxGLDH32OOOO/WDDTIJBsyMH6Qy50oB8JJI3mGeu9G1aluzUN93VraoRvSbzAOVi6HHZEyIhhm4=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789213195; c=relaxed/simple;
-	bh=iaGAZMQBaVpj20yCLgbDXRI03eUiffKlJXF0mm51P9E=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:Content-Type:
-	 Content-Disposition:In-Reply-To:MIME-Version; b=m3NwsTbBv1uVkeNVvPc/XqTvxRdt5pvCJN7i21028lbzk12DDSttugGtT/H/OGrkLIJkL3Xy+uTQV0wVdnKkVyBeWm3BEQF9JIw4qBAsviKlMx6x5jv/U16jtRO9ce52SJdWO8Xg9D0zFN/AIv/qUIgcQN/6FiFhgz5KmLw8gv4=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=nxp.com; spf=pass smtp.mailfrom=nxp.com; dkim=pass (2048-bit key) header.d=nxp.com header.i=@nxp.com header.b=FvLZghkN; arc=fail smtp.client-ip=52.101.83.19
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=nxp.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=nxp.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 51BE1299920;
+	Sat, 12 Sep 2026 12:10:08 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.37.111.173
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1789215010; cv=none; b=R2AfaN88hX6rdzYvIY2i7ZyF8H13pbUI6WkIsGxdzBD+D82nifR/j3j+xPvRvkAPcsx9oPGd5gJWur6H5Ac7PKhj4cxYpqKvFbAfihKtJGa+5AUmAmncJE1jOR5BK1lTisqxEu50zPWNBUCUFyCx7Jflwaw39VTU+3AGtowgI7g=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1789215010; c=relaxed/simple;
+	bh=/k4GRfwmwZKzSvKRwfRpdBLr6CRpzHPGhwfQMUhuJh8=;
+	h=Message-ID:Subject:From:To:Cc:Date:In-Reply-To:References:
+	 Content-Type:MIME-Version; b=UuTOX7mvtnYQwN/tkvm9EeeHIAO1rsUtOlCAkAtadlWzM+/2U+goM6x+V6dh8K5pX+ySo7dpPP1wPjyN2GD8oZ9OJoxFhwP1zj0wnwTrrPLDlX2IFcHe95tI9adQBxbVik49K5CjK6MdpoPxenfdTrRJiSCjzahBq22lMwws/K4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=HansenPartnership.com; spf=pass smtp.mailfrom=HansenPartnership.com; dkim=pass (1024-bit key) header.d=hansenpartnership.com header.i=@hansenpartnership.com header.b=oZM71hHx; arc=none smtp.client-ip=198.37.111.173
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=HansenPartnership.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=HansenPartnership.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=nxp.com header.i=@nxp.com header.b="FvLZghkN"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=JdcpBzsSKVAK+pm3sl1YucjVdWApB2JlvXrLGbhBQ8LPXJF8Z2eFovtyQqQmqFuzb2TYFWdGK/VPFj6g2NDR+BbIFc71+ztaMCvugYAxjBXTFafK04h8g/LFRQznNOIKdL3S1nE5fyIcgZgr+ZP1kj1PGHKX4ROPBKzTyAHJ9QrS8oDAzMW13UdXGLKF9tSIw+99SCzBfMXupnVlJiD7vn4g60xu6SPN/6dc9JFqmhrL9Eg0VnORS8JbRs9z0fRi9X6+qkH2ygChy9Ok3CRq9g7hhSsb2GcrXv6lJ+CaTUtIyPIOoSbsNNhkRTgq9KUvFCaOUTpF/NR4aBHtxdzYaw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=KZXJwnSdWWnCiHu6CFBEOlgICtMyxV/EetgcKlS2Cas=;
- b=cRTxvsigtntLNxWeswnVGwxpGeQ+g1dGKccBkl6nHiU6kHMFpDiMM4Tj4qW+PvsVCbdmF/eEh2mEf/gcgtAz3Z5DHBmJtQpW18vD7LjLejEeMSeuztrxvA9CezvTHTVBBSmcjh7poFR+Dwp718Ah5HrZJv1W8sAVoso2VVcx3+C1uUFVo5VC0XWKnH6DcVhWIWGxv8Xm8jJoqulLcciZEwuRDfranQeusDxMrZQC1jx07CBykmg14nbyOlkf4onjUuQKKnCXwNaHGIGSkmDzy1HFYAKHuH7sCAAD8jO5tI24fYGKk97DT4i/vbmq2l3nygXxQjxRbNf1jZrkpRacPg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nxp.com; dmarc=pass action=none header.from=nxp.com; dkim=pass
- header.d=nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nxp.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=KZXJwnSdWWnCiHu6CFBEOlgICtMyxV/EetgcKlS2Cas=;
- b=FvLZghkNn0zv7J9GhwZ3upjMDpnYn7us826ks3pF1QdBD3l0d6EFcdxnc71oodkIkKhQnO8ye2JJnwkoTVyK9vKYXpTbrKtew3yekmD57C21tL23etoUkTza4x3Zqwn78tUors3I73MBBDGRLMqcHd80bJHnNmHZrk4cg9FwBMCXNAjRJlfb+QOExAQACoJgskSaU3z/O3XbZkBdN8Ih2bvia3nogbBArEeLxdyzBZw0KABRgWs2UR7iO0FMRM+tNms7qOCgJJp1z+5ApR+glQEiEH6f2ERX2auq4IqK/a5IHfn1+WrpA5VKKWhg7Oes4IpPuHGyjQHjHGWvMluaJA==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=nxp.com;
-Received: from AM0PR04MB6900.eurprd04.prod.outlook.com (2603:10a6:208:17d::10)
- by DBAPR04MB7478.eurprd04.prod.outlook.com (2603:10a6:10:1b3::24) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.406.11; Sat, 12 Sep
- 2026 11:39:49 +0000
-Received: from AM0PR04MB6900.eurprd04.prod.outlook.com
- ([fe80::7fda:8431:ca1b:b023]) by AM0PR04MB6900.eurprd04.prod.outlook.com
- ([fe80::7fda:8431:ca1b:b023%4]) with mapi id 15.21.0406.007; Sat, 12 Sep 2026
- 11:39:48 +0000
-Date: Sat, 12 Sep 2026 14:39:44 +0300
-From: Vladimir Oltean <vladimir.oltean@nxp.com>
-To: Bjorn Helgaas <helgaas@kernel.org>
-Cc: linux-pci@vger.kernel.org, linux-kernel@vger.kernel.org,
-	linux-omap@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
-	linux-rockchip@lists.infradead.org, linux-arm-msm@vger.kernel.org,
-	linux-riscv@lists.infradead.org, spacemit@lists.linux.dev,
-	linux-tegra@vger.kernel.org, Bjorn Helgaas <bhelgaas@google.com>,
-	Manivannan Sadhasivam <mani@kernel.org>,
-	Lorenzo Pieralisi <lpieralisi@kernel.org>,
-	Krzysztof =?utf-8?Q?Wilczy=C5=84ski?= <kwilczynski@kernel.org>,
-	Rob Herring <robh@kernel.org>,
-	Vignesh Raghavendra <vigneshr@ti.com>,
-	Siddharth Vadapalli <s-vadapalli@ti.com>,
-	Felix Gu <ustc.gu@gmail.com>
-Subject: Re: [PATCH v9 3/3] PCI: Remove device links to PHY
-Message-ID: <20260912113944.cfs6tebsv2eqctvw@skbuf>
-References: <20260810124315.433448-4-vladimir.oltean@nxp.com>
- <20260911221209.GA587622@bhelgaas>
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260911221209.GA587622@bhelgaas>
-X-ClientProxiedBy: WA2PEPF000008BA.POLP291.PROD.OUTLOOK.COM
- (2603:10a6:1d8::696) To AM0PR04MB6900.eurprd04.prod.outlook.com
- (2603:10a6:208:17d::10)
+	dkim=pass (1024-bit key) header.d=hansenpartnership.com header.i=@hansenpartnership.com header.b="oZM71hHx"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+	d=hansenpartnership.com; s=20151216; t=1789215006;
+	bh=/k4GRfwmwZKzSvKRwfRpdBLr6CRpzHPGhwfQMUhuJh8=;
+	h=Message-ID:Subject:From:To:Date:In-Reply-To:References:From;
+	b=oZM71hHxMpR9t+SuGo5js5DAyZlRbQAFVHKU4+7Zb+EqftYdEo0QJgdiRvK/I3YLX
+	 iGTUu+ySHx3yK/Y6KXn1EgbBfyjfuy3DgUKYgonreQK3g7FtI/rWtk7VLNPQJr2H/U
+	 HM16lMnR9WUccxFiyQ7zieUDuecpvOybOD11HMnM=
+Received: from lingrow.int.hansenpartnership.com (unknown [IPv6:2601:5c4:4300:d341::8309])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519MLKEM768 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by lamorak.hansenpartnership.com (Postfix) with ESMTPSA id 1990A1C00A3;
+	Sat, 12 Sep 2026 08:10:06 -0400 (EDT)
+Message-ID: <bdcff6a168e6d4b8e9c9524bd598281817a7df2c.camel@HansenPartnership.com>
+Subject: Re: [PATCH RFC] drivers/rufs: add Rust UFS host controller driver
+From: James Bottomley <James.Bottomley@HansenPartnership.com>
+To: Andreas Hindborg <a.hindborg@kernel.org>, Greg KH
+	 <gregkh@linuxfoundation.org>, jaemyung.lee@samsung.com
+Cc: Miguel Ojeda <ojeda@kernel.org>, Boqun Feng <boqun@kernel.org>, Gary Guo
+	 <gary@garyguo.net>, =?ISO-8859-1?Q?Bj=F6rn?= Roy Baron	
+ <bjorn3_gh@protonmail.com>, Benno Lossin <lossin@kernel.org>, Alice Ryhl	
+ <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>, Danilo Krummrich	
+ <dakr@kernel.org>, Daniel Almeida <daniel.almeida@collabora.com>, Tamir
+ Duberstein <tamird@kernel.org>, Alexandre Courbot <acourbot@nvidia.com>,
+ Onur =?ISO-8859-1?Q?=D6zkan?=	 <work@onurozkan.dev>,
+ linux-kernel@vger.kernel.org, 	rust-for-linux@vger.kernel.org,
+ linux-block@vger.kernel.org, 	linux-scsi@vger.kernel.org,
+ linux-arm-msm@vger.kernel.org
+Date: Sat, 12 Sep 2026 08:10:05 -0400
+In-Reply-To: <87mrtmvioe.fsf@kernel.org>
+References: <20260912-rufs-private-v1-1-716db733e655@samsung.com>
+	 <YKq4TcQM0v2dXF4wTHEvZKwASII6PDd_R7_UiHWe3NRnR4JsrC_ZS-x6jA_Kl7P6ONehU0REHYk7WaLz8Xv5gA==@protonmail.internalid>
+	 <2026091124-treason-trickily-bc52@gregkh> <87mrtmvioe.fsf@kernel.org>
+Autocrypt: addr=James.Bottomley@HansenPartnership.com;
+ keydata=mQENBE58FlABCADPM714lRLxGmba4JFjkocqpj1/6/Cx+IXezcS22azZetzCXDpm2MfNE
+ lecY3qkFjfnoffQiw5rrOO0/oRSATOh8+2fmJ6el7naRbDuh+i8lVESfdlkoqX57H5R8h/UTIp6gn
+ 1mpNlxjQv6QSZbl551zQ1nmkSVRbA5TbEp4br5GZeJ58esmYDCBwxuFTsSsdzbOBNthLcudWpJZHU
+ RfMc0ew24By1nldL9F37AktNcCipKpC2U0NtGlJjYPNSVXrCd1izxKmO7te7BLP+7B4DNj1VRnaf8
+ X9+VIApCi/l4Kdx+ZR3aLTqSuNsIMmXUJ3T8JRl+ag7kby/KBp+0OpotABEBAAG0N0phbWVzIEJvd
+ HRvbWxleSA8SmFtZXMuQm90dG9tbGV5QEhhbnNlblBhcnRuZXJzaGlwLmNvbT6JAVgEEwEIAEICGw
+ MGCwkIBwMCBhUIAgkKCwQWAgMBAh4BAheAAhkBFiEE1WBuc8i0YnG+rZrfgUrkfCFIVNYFAml2ZBI
+ FCS3GUMIACgkQgUrkfCFIVNZKjQf/deRzlXZClKxTC/Ee2yEPqqS7mm/INUA49KdQQ5oIhSxkUBy0
+ 9J4qjMIo5F8ZFkFTqikBqeL35LKu7O7rn8WETfX8Bxvos3HUsl3jHo34DES4MUFIpoQPgtiLRGwLb
+ K0cVCAArR2u2qj4ABmTRrs1I1kvdjEw6gatOuXtEe/j5O2fvfzTq9GBr0Q3n2IAsFXi4hLlx6VPE8
+ tyWUZ8BWJKtih3JAeUiXFvASL3McV0rV9RnU0VbjEQEhSE7PMYhWpnDC9AyBb0lXJllQRvC3NSkUB
+ 8KVQgNNxRPss0WE/nBoZ4dFA42jTyzTz8lNylxZoAWV7WJb3QxVg4oCodRVrxxrQhSmFtZXMgQm90
+ dG9tbGV5IDxqZWpiQGtlcm5lbC5vcmc+iQFVBBMBCAA/AhsDBgsJCAcDAgYVCAIJCgsEFgIDAQIeA
+ QIXgBYhBNVgbnPItGJxvq2a34FK5HwhSFTWBQJgS5mYBQkbNYS9AAoJEIFK5HwhSFTWBpwIAL5Bk3
+ 5FB34U6iHmDzzgdCbxLTs43T/YQyJpcGIvopBvnI/fDY8oSG6Df64/O6B+1R+A8TDp6ZG5ysUWnCC
+ 6GuIaEHemBYkitMPglR6+sGCMQY7O0mlsPvdssvKK1KI9Bno4VU6ogaF2qVzefSqg1Djmf/DcsxWP
+ rI/jdJ8FB5AYR2rjIdDFc+zRdAJuavo1/anyY2wgpFh/3R8IOYAEfWV9nGgYkf9+tA4EIn1sxE0I3
+ L5oW2N3mbyRrkzuBwO8ztMCwqEPk7moWzhokcZqMXiAIahaZdkashJC+s2X2RZSGCy+g+pvY5NN4B
+ BVG5XwLgVBqbHMTcxE0fbmPqz+q6O0LEphbWVzIEJvdHRvbWxleSA8amVqYkBoYW5zZW5wYXJ0bmV
+ yc2hpcC5jb20+iQFXBBMBCABBFiEE1WBuc8i0YnG+rZrfgUrkfCFIVNYFAmODZ5ACGwMFCRs1hL0F
+ CwkIBwICIgIGFQoJCAsCBBYCAwECHgcCF4AACgkQgUrkfCFIVNZu0Af/TzvL2/NdgAcw9uN3x60H8
+ jc4QUq14VpxcFEFEMpcj1morkX/G93V+56HBBaXZj+yK8PhxIA/SIz+sU7C/0YvKuvzakP8ZX/7WJ
+ e32SOUtjfr/VTaqjIBzNj6OxLvZpmNbBw7s6DwhhNpHOWqJ/1ml+PtDRDV71IB58yVqQjp1xlNKVl
+ ZppcJ5908EJzsFnRIVjiQiDSKoppqB2BCibBbrWcln7CiWMyOC/cco6SIn6twH+f7+aivJ3xGcOE2
+ a9gBKF5rNi9TBoX9oyPmshv/TDmnohsVrH7AYXlGYfZTk15SWEiROh1QX8/uD9wl/gcIv5EDUpT/F
+ L2jzOsA5663bw==
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+User-Agent: Evolution 3.56.2 
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AM0PR04MB6900:EE_|DBAPR04MB7478:EE_
-X-MS-Office365-Filtering-Correlation-Id: 99f746bd-4296-43f1-cf9a-08df10c28d04
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|376014|19092799006|7416014|10070799003|366016|23010399003|1800799024|10067099003|4143699003|56012099006|11063799006|18002099003|22082099003;
-X-Microsoft-Antispam-Message-Info:
-	OFLgkwxff8Qo7TmyuPs+uO7hfEbjjkc286NGkhmmX5v+qijUUUfIq2M0A949+bajRBzKcqEjdmVoVNPOS3sqoRmKri20dNp7sXR5+6aiJFMDkB2gfWdEyqw1BqK3IlYvBBG9mmHUkAEe0eir8apcMI30JoFBqak1f9wjVrlKDA1w1xdhltG7KyfQpz6qQcClwL5ALLzMiephZdUipHL6WVKDjdJBnx9goJnWMUU2t1RQie1G4zyp/HQr0vimycT4GM+MqZvDunzAi0zvbMF4SIpvq+a02QOa6Dx2ztQ6V/EShB+GfJksEUIXDRCLdMKyJ/hI/zUUjj0GhbH8V37pqQ9b3h5NdF4htbjN0p2uZ+Ke/VI052BmXTulmX6bILjq2youLVXzp1t2PcYxMPZume2Buqno8h5vsT9YIq6l1AJfcqlqDpM1+6CDOETvvtGnmDG9NqOdH5ORNGSpgQ+1rBAG3NbHq+uQ04Zl1Bz8xE/eK+VH86Vtt2DBLc91//gj0a4mPbMqmsXb7w1Z9oth1fosC7vqrpEqkOfeRXj44VPnH2L9HeuxbDpt3H5k8L68SaVac4tFPRz2LqlWBK5kpVVvnRCzdiLDHYKL3f0y7vF7ERnuUM0NeUBlDrnWC9Ke9ZPvfMcwc3fAJvm4bPf0+2i8S9muNJjIGuP8ewdS8Xk=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AM0PR04MB6900.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(19092799006)(7416014)(10070799003)(366016)(23010399003)(1800799024)(10067099003)(4143699003)(56012099006)(11063799006)(18002099003)(22082099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 2
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?ZbFA1VgxTCNW2fgmxPxG2MWdcUtZSlQsJUKPq8lIiX+OPFCJK6OA8CW8FOAS?=
- =?us-ascii?Q?KZXVIQ/Dl+3bZeHZxvTuekz8LnL9+4uJAge+eXTLlpZE61rWixVNkV9JZlUt?=
- =?us-ascii?Q?0wuOaZLvdgH72b340bsXYgxCB3fNuutHA7tdl0aLQ4+IQ2+l2JLt9dUoIFXE?=
- =?us-ascii?Q?Fc3z9HS6JLzr1cNG5hhzG3QIxEInARNy3bmBgtxbVe5JPMdAr+RYBbJGVC2m?=
- =?us-ascii?Q?bP4u9yKOUiozffkfb5gW0hasLpaQOhOGLuBTBX5xU45j8f4GLLy0nc7czJDX?=
- =?us-ascii?Q?w9IccBq6Y4IgiGrtbmBX1fFqoLJImNNb6RGbyomMm60QC1ngQwm+G8m4Cmq4?=
- =?us-ascii?Q?swBl3vB7334VjEB7+Lg4Lub+IYnczRCZWB53NX3O0rowEggyeIUcM4Cm8EMH?=
- =?us-ascii?Q?AqB5bQqn8J/fw4KOg33tTWP4DAzOTma724yx1DrF4QxThGnR+OdICTS5BzaB?=
- =?us-ascii?Q?QUrqKEiKZrUZ7sMYCTd9mxYf9MXbGvx/RZa3xlgWDw8nhctw7e9yyf7f3V+Z?=
- =?us-ascii?Q?Mw1LP1SEhEQvYsnPJmqItFLIJuwAwLsqYg1RK/zT8viD5QYS51RCXfQhh3uR?=
- =?us-ascii?Q?PaZnpcH3SlRJlOsX5U4JYYqU5vpIChBMqoTZFiIaDzEon9SNynu2kCshQWST?=
- =?us-ascii?Q?lh2uH8wB3nLpW+taW0mMwNwUtYAat6MjpbIQ9mDrR9CsN1RurGbSlvQEIz6h?=
- =?us-ascii?Q?19wwSBXYg3tBHEKw7PQ1spW8nzPxuGV8QwRQ5SeJz7iV838t4DKcfTp0RflO?=
- =?us-ascii?Q?hvoiydFZY6sfII9E2kC0GBkN8r4Ea6wXNw3RKxE+wI7K6rDLYdHxuEGqTNDZ?=
- =?us-ascii?Q?9WtbJq8mDV+yaVn3leqLqO6SQxkqejzraMvFY0t/SzbhmO2T5LfoHWHRQ8iQ?=
- =?us-ascii?Q?tK7Wqn2BzaTkZeERzvQJLTz83QGWiGNfRTkebhm4ISphH/uGMczq1oj+CL6d?=
- =?us-ascii?Q?SdLxhvtOFSeE8cO6aMdBrDj+g39w87JOJ1zguEPPJa/hsk6U70+ifrf18Dhj?=
- =?us-ascii?Q?YNbkV/HDbA9BtIybK2mhPRLDD/GZT8+++kvKCGb1od8JlXKkQz2u/qBKB0zA?=
- =?us-ascii?Q?hCeg/lGl00JE9AGaX9AH/wDZR6ZVOApCznyyNAdYSsLsxo0A/TboPXtXQubA?=
- =?us-ascii?Q?70hc0vQ/KIkHQUuFeBmzld8qCGJny7TNFNv1Q4IgTfVQroadL84JRrTU6tjc?=
- =?us-ascii?Q?V45CyVGfF7UdKppa1xcdbyoDzVq5W2opDiEG2wVua85ZPski/af+knnmcYE7?=
- =?us-ascii?Q?QXqLaxe36VeG0AoAp3xMg0uOX0rBidCr1JUvUgdN0QLQjr4cBq3lQYZOFVU9?=
- =?us-ascii?Q?SdGV3pKB7SXao2YLWLethKD2w+fXomdKxqB2gYhHWeKCzWbuS0nbk4Fo03d7?=
- =?us-ascii?Q?7wd5w2FKK+N174w8gnWu2PzD3vq7Ef6jcGrrLeABMwFpxisqG156xhFQdyQ+?=
- =?us-ascii?Q?JBi28TVjxWvEgA7es9vg3baCbpC3aCQySQVzM96ZxhduTrWSVR8zUMZLRy4t?=
- =?us-ascii?Q?u99MglhhOGICARDYerU9tHUzmYNwuJROb80kV2AOTcFX9HD9Chk53glW5WiI?=
- =?us-ascii?Q?lz3LA9xd2hbzN30N/XRDpggs+j3pdKF+Sv5JfgO3C89h+ID0wQRIx9NqjOIH?=
- =?us-ascii?Q?ht5RBBax4R/hZeqfGcTnpMaM8+4mbpJEvQ5bjKhtg3LfWSxzFMhx1RPTMicW?=
- =?us-ascii?Q?4rRd6RivMi7IHXqpzLTQZbF0uqbtNBc/WpV6RdQ/pZ8v+HsIdzvBvUyCRNbu?=
- =?us-ascii?Q?JQp5g0OdB26YtnxUWGA5th/OnjL4rAP+GebtqhHOe946dX8Y05KbeFGinIjS?=
-X-MS-Exchange-AntiSpam-MessageData-1: dNtMtMYXUgQSnUy/gsk+UN5EEpuXOrnKD7I=
-X-OriginatorOrg: nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 99f746bd-4296-43f1-cf9a-08df10c28d04
-X-MS-Exchange-CrossTenant-AuthSource: AM0PR04MB6900.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Sep 2026 11:39:48.7224
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: vLpPF5QL4+Onm1IH+aj4H4dV17uZmYO3RmcAF2OYL0OtM0o5Ymsfe3FEmlbm+kgQBNb0+uZzPHIRkoKGUnipRw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DBAPR04MB7478
 
-Hi Bjorn,
+On Sat, 2026-09-12 at 13:00 +0200, Andreas Hindborg wrote:
+> "Greg KH" <gregkh@linuxfoundation.org> writes:
+>=20
+> > On Sat, Sep 12, 2026 at 12:52:55AM +0900, Jaemyung Lee via B4 Relay
+> > wrote:
+> > > Comments on the decision to bypass the SCSI midlayer, the blk-mq
+> > > model used
+> > > in its place, and the proposed prerequisite API boundaries would
+> > > be
+> > > especially welcome.
+> >=20
+> > Many many years ago, the USB subsystem tried to bypass the SCSI
+> > midlayer for its storage driver, and while it was a "quick
+> > solution" at the time, in the end, it didn't work out and we
+> > dropped the driver as it just made no sense to keep duplicating all
+> > of the logic all the time.
+> >=20
+> > So I wouldn't recommend it, as long as UFS builds on top of the
+> > SCSI commands and the like, you should not attempt to duplicate it
+> > in a separate driver, no matter how much "simpler" it initially
+> > seems to be.
+>=20
+> The scsi related code in this driver is less than 300 lines and is
+> mostly struct packing/unpacking. I guess we could lift the struct
+> definitions from the scsi layer via bindgen. But at 280 lines I am
+> not sure it is worth it, and it hardly counts as duplication.
 
-On Fri, Sep 11, 2026 at 05:12:09PM -0500, Bjorn Helgaas wrote:
-> [+cc Felix, author of device link leak fixes]
-> 
-> On Mon, Aug 10, 2026 at 03:43:15PM +0300, Vladimir Oltean wrote:
-> > This is practically a full revert of commit
-> > 7a4db656a635 ("PCI: dra7xx: Create functional dependency between PCIe and PHY")
-> > and a partial revert of the device link pieces from commits
-> > dfb80534692d ("PCI: cadence: Add generic PHY support to host and EP drivers")
-> > 49229238ab47 ("PCI: keystone: Cleanup PHY handling")
-> 
-> Can we split this into three commits (dra7xx, cadence, keystone)?
-> This combined commit is applied on the pci/controller/misc branch, and
-> then we have conflicts between that branch and
-> pci/controller/dwc-dra7xx.
-> 
-> I think if we split this into three separate commits, we can apply the
-> dra7xx one on pci/controller/dwc-dra7xx and drop Felix's device link
-> leak fixes below so we don't clutter the git history with conflict
-> resolutions or irrelevant commits:
-> 
->   https://git.kernel.org/cgit/linux/kernel/git/pci/pci.git/commit/?id=2b9a036b568c ("PCI: dra7xx: Fix device link leak when devm_phy_get() fails")
-> 
->   https://git.kernel.org/cgit/linux/kernel/git/pci/pci.git/commit/?id=bdfdf654b4b2 ("PCI: dra7xx: Fix device links leak when dra7xx_pcie_enable_phy() fails")
+You didn't actually read the above did you?  The problem isn't
+necessarily the duplication of code per-se it's the duplication of
+function without understanding the subtlety.   Every fool thinks they
+can duplicate the core features of SCSI in a few hundred lines (and
+they can: the core SCSI model looks beguilingly simple).  They then
+usually spend years adding back the necessary corner cases and quirks
+before finally concluding that actually they shouldn't have tried in
+the first place.  Just because it's in rust doesn't change that
+calculus ... and you're by no means the first people to try this, so
+listen to the voices of experience and don't.
 
-Isn't this patch already merged in pci/next as
-https://git.kernel.org/pub/scm/linux/kernel/git/pci/pci.git/commit/?id=9a9d18547ddc97a73d5d90cff4d5aef90bd8c15d
-?
+Regards,
+
+James
