@@ -1,193 +1,220 @@
 Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B66A3369990
-	for <linux-arm-msm@vger.kernel.org>; Sat, 12 Sep 2026 09:19:47 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5989935AC09
+	for <linux-arm-msm@vger.kernel.org>; Sat, 12 Sep 2026 10:15:30 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789204789; cv=none; b=f2e3LN4ipQyt9kqcJucj4wt07xvJNE21rAKoKEy+SOMikkgiMpD/RbMI4TkIee1fK/XtyJ/DVUfWetOhpRH4XjEUYzhjb9LSvSxjgRw9u9B1HoMWcf22ajXqF+ttUIt6jjkIvtkjGE5US6yGQvdyguNBv25Mw1eZvU2pmNSA6tk=
+	t=1789208132; cv=none; b=ZodlkfdKOsM4r0XereJt8XxM63p9CsIuKVyh0d8JqGss6kmT8gh0JaFhd/7m/zsaj6EWnkIyr6BDYyYX0R64yo+9pGPp7urp7wRH7NKXx6qC/ef1nCN7LN48owcBYQbsVxvoGyCmqz0NZByIctUqJtsBd7KGfsFhEn2oq938hgc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789204789; c=relaxed/simple;
-	bh=iofOTXYS/bZXZ/2qBa9da7ho8/2GhtalFO00MODtkb8=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=d+TfxZ9g6jMyrP8iHt/jAUCkXw70lS3inSVvo83S5Zbjl73j2zX7YE02lypArEFBv7Sar+PNdDzHbzO+f0j93Lla5sn7YHqBzSUW2NbptsUslChOOBrbSxpbvvjHo1k7SRv57pbw3nazmIXtRxsqaLbikmQO1oW3vKSfAIFbqLc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=BGFupaJx; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=XN2G9PPa; arc=none smtp.client-ip=205.220.180.131
+	s=arc-20240116; t=1789208132; c=relaxed/simple;
+	bh=3i/FrZXVmWI7Atm0YNsVJ226agJdLQqGFQnqYBQUV1U=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=NpHyRgmiSmQ3xFiMDcw8MpF+kwnRfMErCP7e6aLG8Hd/J6ssbG+xEzA0CAM69NNPC/NSdIJmCo9B0+nJd/veyr5d9c2K6kush5VNO/1DJLJzsocEx6FtZkMfJGQR5+dM0V5fUgAMf8Q736ZwI4qqjY700LlcRI+zJ9u6nrNLAg0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=hZNawyG1; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=Hi3yII+w; arc=none smtp.client-ip=205.220.180.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="BGFupaJx";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="XN2G9PPa"
-Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68C85ZbY2343587
-	for <linux-arm-msm@vger.kernel.org>; Sat, 12 Sep 2026 09:19:46 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="hZNawyG1";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Hi3yII+w"
+Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68C853I63019601
+	for <linux-arm-msm@vger.kernel.org>; Sat, 12 Sep 2026 10:15:29 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	/33vb3qfO68qBBPyyf3BMf9vXtG4LUI2mzvFC7b6Ls4=; b=BGFupaJxsCp5Ahs+
-	68qLTg/6wTbeLOGtIp0K/hgIDt2VlrkNoNpZVWP8g3v1YaU2GFYI+Whcz/Qxq3pm
-	lIE73ZUFRwkK4ItPiGl93YsomUcKszTDx4uzwBFnLAzEl9tm4scTPzpZZLtxQZlM
-	Js8aqyGz4LsMn5J50cWVx57moU8R4JIlv2Hi9eQ9jfYXSW6rxgIyBIbIDGHaM2yn
-	VvIruPB4o+KYtcpIjE+2OCxEulyQwOeXN3XgfIHItCtLyzyLvdPm+iYVOM8dOkMU
-	A+E0WG1v0Ttg+N9+BnEnPaUnPXmNk64rTBy5IijJlB7yNHMyzfsCtGhZASjLeirK
-	kxiWoQ==
-Received: from mail-pl1-f200.google.com (mail-pl1-f200.google.com [209.85.214.200])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gmy9d8k20-1
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=R5jHNQqpCxih0uhIATPS5R
+	+CswhgM6mi1nkI0T2LCp8=; b=hZNawyG1cAWEXrtAytMyqklfS03eL509lBJneE
+	b2VbFNBOd5m5zXDHkmAUqxntKNhlOVwtcx1/mOjxlsRg7zpPNlaHlN8G4bioqCva
+	VWbNBG7R6+PnTjBdIj40swU6nbXPGIBGqNv+25uClJFoSFY+FDU6CLkqArHsUDKb
+	PDmAOuT86uAAQkJVlLiWSoBY4dxCHcKrVxCAPQMFnIsLVIXvf+LVm6SLJVgiUwpJ
+	6rtd9w3vJvA435vbapOsOzEz1p6FCcvCklRYok9IPml02JWekCwv/e+koo+3f8ns
+	XcyFWa0RdyEeJ+e1iykMy/GHhUHrkjHRHXBiJ6+sD7CWd2Ew==
+Received: from mail-pj1-f69.google.com (mail-pj1-f69.google.com [209.85.216.69])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gmy9dgp86-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Sat, 12 Sep 2026 09:19:46 +0000 (GMT)
-Received: by mail-pl1-f200.google.com with SMTP id d9443c01a7336-2dd1631d291so19744485ad.1
-        for <linux-arm-msm@vger.kernel.org>; Sat, 12 Sep 2026 02:19:46 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Sat, 12 Sep 2026 10:15:28 +0000 (GMT)
+Received: by mail-pj1-f69.google.com with SMTP id 98e67ed59e1d1-38f283baf1fso2094083a91.3
+        for <linux-arm-msm@vger.kernel.org>; Sat, 12 Sep 2026 03:15:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1789204785; x=1789809585; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:content-language
-         :from:references:cc:to:subject:user-agent:mime-version:date
-         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=/33vb3qfO68qBBPyyf3BMf9vXtG4LUI2mzvFC7b6Ls4=;
-        b=XN2G9PPaHg0WzARB29b89jUiz2+ka44gETZH9dUrz9h8eMl1PFosvI9loMR1W++HC3
-         tZGC4KQelTCDxK70ac2lIhDpzmZo675pltnLljxzjaNzP8MEhaolVnNTbqHO1HWtgPXb
-         +siW434bNnABeUJbWod7b+oLZ4AjLbw5bIR9wPcXjQGLZPjT+urE4z/tPlMMRmyStEaY
-         ov9Q1TU6u6rcT/VN9D7cXAGnRBvQwioMK78+2GOLwp8njYi+VZmiSUrVWz5ViZQUWx/d
-         J9kzg4e7RaNIYMur/ZH1jNTXSA8Jpx6xFimdru7omM2YVvvcCPfX3WtxCu5HR/53sTvI
-         7ddw==
+        d=oss.qualcomm.com; s=google; t=1789208128; x=1789812928; darn=vger.kernel.org;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=R5jHNQqpCxih0uhIATPS5R+CswhgM6mi1nkI0T2LCp8=;
+        b=Hi3yII+wMTKvV3nJ7Rl0CaibiAzeiHUcZF/sVuscKGOqv1FiciUq1jPI8uKCPtlWJG
+         ItV2+pCP7o9H5uN4DLS7BFvRVUzzp3Ji8EXrwWNAxfSNdo5fU+5Be3ozXlCdv8TKWLRO
+         9HZS9X9odo4jivFZm0JFC8DA8HJejk8u5Qo/D5mxcy6T5lA1fJTSV7j4klgho6OkYuLP
+         LoGRK6LfXyDiLi6hdsNWV74jFZx9WxWikEWyisYoHn14W8phdn8sJnNuPqAMde3hAJkT
+         ig+y4F0++plORtsm48912NExuelmBOUUxJtMEmz1AKo/ON6ew0J9DpmncbPcufR83pGs
+         ic/Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1789204785; x=1789809585;
-        h=content-transfer-encoding:content-type:in-reply-to:content-language
-         :from:references:cc:to:subject:user-agent:mime-version:date
-         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=/33vb3qfO68qBBPyyf3BMf9vXtG4LUI2mzvFC7b6Ls4=;
-        b=Fn7DVvDWJTjHSDgHA0TrtrnSXCmSDykXkBElOafWMHw7NsvjD5LAOiFVGaVhQQHxS4
-         +zUmnIm92pdDRtLgZd0xD/GnNbeE17D9MygqFrmB1D2pTnh5kpZJprgEDUGiPZ57Y1lk
-         vjfq1W6R0r1LMDe/2cnXXD9mDiVcGx5l0GGRSLrJbMcdrbBLo74gGPUxPRc8sd/P3hiw
-         loKR6U7Cn5aEZ9d0MuMSHmAEIL1UkitsvYgP7YnK+vz59jnF3k3OfmshVDi84nB8vcd3
-         xYZDFTrQVI2w20sf+vAXQV4cpxgtgLQ0uVFQz7BSEQ7JE/XRnOrT/u1aFB+nENOOnCJj
-         MAYQ==
-X-Gm-Message-State: AFuF++km1lqjzUnTfdenfA09Fe0znNJcj/u+Zo3xtCUbCzMGfbzfhu6W
-	HCgCl7pmfr2ALE70lBJRnUO7acPS0Q5ZObuanFxtp8SdJ4y2M5/T2fRniF7vjO0O4quig4MwuVD
-	GXnS5udLvX4GCN3IaJOe8zkDRpeqtl9IH7ashNnD3jo9RPy9G66ON7ufM9VunNGD/Zo4i
-X-Gm-Gg: AYBFou01NTx02kM51LIAqovUWHRAxazYcrYAof6Zp9pcd+WlsKn1BWYYGv6wRB85y7d
-	Er007q5ftz0GutJnrX2sVhyqLYGV1XkGD25IhPSpQQIn4FOgdlO4IU3Qyd6pajThr66gPd+fPKQ
-	6gt09GaBn25JiVX9QRWY7P4JRkK2u5DRkQFiAmHm4Wt0HUFnMwxkPVZoR4dFyIln+cQ+I4v2XvH
-	GM4cohITkEdYtowtbI/m76d5cXSewTJuldxW/Dz3j7UVrn5UVfdb3K3M80F4mLZ/XMBGpP1pEDs
-	jA4DJb5qUBW/zbnuvcIMBDFeDDa1mrbtA38svKbi3YuJL1bdcKVKPUOoUdPjfiXAwuOW6fdDIMg
-	O4hJjqUNQ9r4upWeGHmYWk4+K9N2Cdrj4YJBOqBHNRjMJkr1A+IzYekszmCY9qjsWFkac
-X-Received: by 2002:a17:902:f685:b0:2dd:3ddf:b895 with SMTP id d9443c01a7336-2dd3ddfbaa5mr83347485ad.3.1789204785428;
-        Sat, 12 Sep 2026 02:19:45 -0700 (PDT)
-X-Received: by 2002:a17:902:f685:b0:2dd:3ddf:b895 with SMTP id d9443c01a7336-2dd3ddfbaa5mr83347155ad.3.1789204784987;
-        Sat, 12 Sep 2026 02:19:44 -0700 (PDT)
-Received: from [10.249.16.182] (tpe-colo-wan-fw-bordernet.qualcomm.com. [103.229.16.4])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2dd2cca268csm22228795ad.1.2026.09.12.02.19.41
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Sat, 12 Sep 2026 02:19:44 -0700 (PDT)
-Message-ID: <06aa40f1-9a47-46e0-88f5-43ece4e3160c@oss.qualcomm.com>
-Date: Sat, 12 Sep 2026 17:19:40 +0800
+        d=1e100.net; s=20251104; t=1789208128; x=1789812928;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=R5jHNQqpCxih0uhIATPS5R+CswhgM6mi1nkI0T2LCp8=;
+        b=GBXtgSFQ0hGI2hmgOOJkjnAX7dDVRaF0ngmIOhwIEn5X16/ONUnm+74NJw50aRxVZs
+         HetTlI2iuVfvaVg0HuuPtkZFcF+JQDC5PnscxdKEavh136QbBSIvIrrjYyrzHwmYb20+
+         Y7qYljhc7Pcx0ick569zvU4Yew3ctIXcCD3G+hMVCXxITixE0DmWibDXNtxBTlt27mPT
+         rP8a94PAMBy8WEvpAfaK32/Cgz29CsSrlDRxjRFJw99SmbL5ViYYFWTnFflgh8MpK7mb
+         YFIz/okJ6l/2ZwYLCqIPn1VRAjwov/D/IF2KCCCkOTUdCZxHzCE9EbY6UOjyBgwje9BQ
+         jHqQ==
+X-Gm-Message-State: AFuF++kTmL7jSzeHL21N2uPIFIu4O0HLTZtamuVq2MusebDa5tr13FWJ
+	SRVW/EXTOlNqjNW5fhK5feBFbD+uDt16eZ2X/Y3jj/UlslCuT8idVM9Kjd1vqnvFO6qSyTi9d/S
+	AVI8nuJGNzpj3E9htxT7Ob9aBjRI/QMiT+Dco5maJiqQy4Dr4oRcVs6vhwGTjqqXGo6s=
+X-Gm-Gg: AYBFou12fvuHvxbVJuBivYCCCTBfz/8giVldE7u+pZUX6M4o+Q1wTVeqYFiELl0OUWQ
+	uf4CpCqCpYUhpCgLchsFiqGIZ2sBd6NGJjUIxIwTcC3MvY//0ILlTeoBSJ1ZRZKpTK+xvht23t1
+	8rQDSjdf/uuHGEaGdZUgvOE7WD3csJdO7P9QkFeisXsxtfxB7QxZVgkDALoVHjoVD2QrxorSABU
+	SSrhO0gdopJ/ngA+E/b3yEZtPbIA/IuFNrlBJt4+iv4AlJwMKWSmaoxPjQFmljNBwVmFcvEaRkG
+	aJjuuqFUTZFXhVtoElN5KizbLKCMDft6bVGVB/BMtYRRbPxaHJkkppH+15tLr1JNHbyFZK2j4Jv
+	i5nXyTKUnoSbeoBcYLGl4KZ8PUtZXkNa7e0Ze5TAyrInDrpeoLpcEMNJjwuI=
+X-Received: by 2002:a17:90b:4b83:b0:396:b98b:a3c2 with SMTP id 98e67ed59e1d1-39d9bd67a22mr13716499a91.8.1789208127850;
+        Sat, 12 Sep 2026 03:15:27 -0700 (PDT)
+X-Received: by 2002:a17:90b:4b83:b0:396:b98b:a3c2 with SMTP id 98e67ed59e1d1-39d9bd67a22mr13716438a91.8.1789208127398;
+        Sat, 12 Sep 2026 03:15:27 -0700 (PDT)
+Received: from hu-azarrabi-lv.qualcomm.com (Global_NAT1.qualcomm.com. [129.46.96.20])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-33baf0ea9a1sm10340085eec.8.2026.09.12.03.15.25
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sat, 12 Sep 2026 03:15:26 -0700 (PDT)
+From: Amirreza Zarrabi <amirreza.zarrabi@oss.qualcomm.com>
+Subject: [PATCH RFC 0/5] tee: optee: add RISC-V RPMI TEE transport
+Date: Sat, 12 Sep 2026 03:15:11 -0700
+Message-Id: <20260912-rpmi-tee-service-grp-dev-v1-0-1d1d35c2a859@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] virtio_blk: use synchronous quiesce in
- virtblk_freeze_priv()
-To: "Michael S. Tsirkin" <mst@redhat.com>, Jason Wang <jasowangio@gmail.com>,
-        =?UTF-8?Q?Eugenio_P=C3=A9rez?= <eperezma@redhat.com>,
-        Xuan Zhuo <xuanzhuo@linux.alibaba.com>,
-        Paolo Bonzini <pbonzini@redhat.com>,
-        Stefan Hajnoczi <stefanha@redhat.com>, Jens Axboe <axboe@kernel.dk>,
-        Ming Lei <ming.lei@redhat.com>
-Cc: linux-arm-msm@vger.kernel.org, virtualization@lists.linux.dev,
-        linux-block@vger.kernel.org, linux-kernel@vger.kernel.org,
-        stable@vger.kernel.org
-References: <20260912-virtblk_sync_quiesce-v2-1-09a001549b72@oss.qualcomm.com>
-From: Cong Zhang <cong.zhang@oss.qualcomm.com>
-Content-Language: en-US
-In-Reply-To: <20260912-virtblk_sync_quiesce-v2-1-09a001549b72@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTEyMDEzMyBTYWx0ZWRfX5GwJa+nuWIbC
- tq9liNe+tY5XQoWsaG8oTedSh6Utto7TACDG4el/1hoJl2pa0W2AlELA5FqNtuwyHvamOlhyBEu
- D6gdcNKnWvaW/3flIcknsLlKLaK1MHzJ2H4INUfS6lc9yAjqV6j/a8dTE3UIgU8tXI3xshNSjfo
- v8vEtp18TpEQgnr+4vfD+bqo2E39+gHf9Mc851wc2Dhy4MFaMZOL8v8N/WAhJIlFJtl7PSSM9jf
- +YDXxDN3gBw0rCiGdwQ7Zf31lbdhrT+197DbfwmVfxMV/QhtuMupSsLTxwki2Y3LZV++2N4+ZtL
- VE2agc/MT/0NJ4JTC5A5rFmrpYwgq3hSraIy5ZJyGwIuHsRWZYMp5fWpyorECIt4zRvfhsF45VE
- s9Y4fCRpl7PXS/91NmPD4BjdwkA2/AOVgRj2a0gA/ul/z1JDGdTub5bAI8lsiRcnI+18fWumohH
- 02Mj8Lj2LcqFuz7pCRw==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTEyMDEzMyBTYWx0ZWRfX71gbwHD/eDdU
- pWiw7mEBZ0+paETxwFXJGzqi9M4+qRkPg61VOgeFDyZh6AcI8hAlRmkVxF6g5/3HRzObmqGPMhf
- DrpI0oDK6OwhvWS2GtIYptz6QlE717I=
-X-Proofpoint-GUID: 4vd82GozoBB20qlS3xzCe9S3oYeIN7nX
-X-Authority-Analysis: v=2.4 cv=OeUNnRTY c=1 sm=1 tr=0 ts=6aa51932 cx=c_pps
- a=IZJwPbhc+fLeJZngyXXI0A==:117 a=nuhDOHQX5FNHPW3J6Bj6AA==:17
+X-B4-Tracking: v=1; b=H4sIAC8mpWoC/x3MMQrDMAxG4asEzRE4KgTatZADdA0ZWvt3qiGpk
+ YMpmNy9puMbvlcpwxSZbl0lQ9Gsn73F0Hfk3899BWtoTeJkdNdB2NKmfADcYFEPXi1xQOGXeEg
+ cL3AhUuPJEPX7X8/0mO60nOcPQEwISG8AAAA=
+To: Jens Wiklander <jenswi@kernel.org>, Sumit Garg <sumit.garg@kernel.org>,
+        Paul Walmsley <pjw@kernel.org>, Palmer Dabbelt <palmer@dabbelt.com>,
+        Albert Ou <aou@eecs.berkeley.edu>, Alexandre Ghiti <alex@ghiti.fr>,
+        Rahul Pathak <rahul@summations.net>, Anup Patel <anup@brainfault.org>,
+        Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
+        op-tee@lists.trustedfirmware.org, linux-riscv@lists.infradead.org,
+        devicetree@vger.kernel.org,
+        Amirreza Zarrabi <amirreza.zarrabi@oss.qualcomm.com>
+X-Mailer: b4 0.13.0
+X-Proofpoint-GUID: IFkuvQYigF85LWmrrHjB8kbicr9-2OHF
+X-Proofpoint-ORIG-GUID: IFkuvQYigF85LWmrrHjB8kbicr9-2OHF
+X-Authority-Analysis: v=2.4 cv=NelzRGD4 c=1 sm=1 tr=0 ts=6aa52640 cx=c_pps
+ a=vVfyC5vLCtgYJKYeQD43oA==:117 a=ouPCqIW2jiPt+lZRy3xVPw==:17
  a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
- a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=tUvm9EZT49aG8J7fJHcA:9 a=QEXdDO2ut3YA:10
- a=uG9DUKGECoFWVXl0Dc02:22
-X-Proofpoint-ORIG-GUID: 4vd82GozoBB20qlS3xzCe9S3oYeIN7nX
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22
+ a=NEAV23lmAAAA:8 a=V1jnuoLLAAAA:20 a=EUspDBNiAAAA:8 a=MT4jQWGmPZThi4S9qkAA:9
+ a=QEXdDO2ut3YA:10 a=rl5im9kqc5Lf4LNbBjHf:22 a=bA3UWDv6hWIuX7UZL3qL:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTEyMDE0NiBTYWx0ZWRfX2pD9O0pI3XXw
+ lN1CNa69oqtEDHCaEnAP+H3y3Qeh+D1iONVTLfyEmzD1jM3O6IwYFxXBIIw3qT6GWUoIF4alfGI
+ u9koVWxSitiWAx0PMez70cJ66NlFwfA=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTEyMDE0NiBTYWx0ZWRfX43/UYDcmAY2d
+ eb0Caeewn14mn49/MLWFnr3EdF3d/RxBgS8ZeMkW9hhepTNWjutr7MhdASdFwKb1au0vAnBKDZD
+ JtdsqGRHWOB4R5RA85g0m8AyXu/+JCtiV+vuIhgyX4bEoeCzEqBmk0/k3jNXoZFzI48pEFSxR91
+ 5PdiI5+Fentc6Qk9qFX3SYe2XLN2mMExiDDbQAntGf7oiMlqTvcuIMjR/ZHnBJj7fQr5mxTD5Tg
+ fTqtLmJqyHYV8PRxEavVlzwimBzXkosoU/JbOA6TNhkC9+9cnNH73q6Z0RcmduQD2Co8Ac06PCl
+ mZ+Lvy7/E1FxlgAXGzCEnwii3PgGhFE//o3U124K6CSwpbFjCziQgW6edcv7l/bGsL1r8ze2ByI
+ 83I8bXjULWD1dWDBDIt2sxepm1i+X6rWHVmJhug3brDfY6pkcqM4kUciev+E6AFnZ0XBXKq7zaH
+ VTGVvHVqJB6UX+WFrsg==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-09-12_03,2026-09-11_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0 malwarescore=0 phishscore=0 bulkscore=0 spamscore=0
- priorityscore=1501 suspectscore=0 impostorscore=0 adultscore=0 clxscore=1015
+ bulkscore=0 adultscore=0 impostorscore=0 priorityscore=1501 clxscore=1015
+ spamscore=0 malwarescore=0 suspectscore=0 lowpriorityscore=0 phishscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609120133
+ reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609120146
 
-On 9/12/2026 4:52 PM, Cong Zhang wrote:
-> Replace blk_mq_quiesce_queue_nowait() with blk_mq_quiesce_queue() in
-> virtblk_freeze_priv().
-> 
-> Keep the existing freeze and unfreeze order. The synchronous call waits
-> for dispatch code that was already running. The queue remains quiesced
-> until virtblk_restore_priv() calls blk_mq_unquiesce_queue().
-> 
-> Fixes: 7678abee0867 ("virtio-blk: don't keep queue frozen during system suspend")
-> 
-> Signed-off-by: Cong Zhang <cong.zhang@oss.qualcomm.com>
->
-Just noticed that I forget to add the ack tag, sorry about that.
->
-> ---
-> blk_mq_run_work_fn() can call blk_mq_sched_dispatch_requests() through
-> blk_mq_run_dispatch_ops(). The dispatcher checks QUEUE_FLAG_QUIESCED
-> while the flag is clear. It can then be preempted before it gets a
-> request. At that time, it has no queue usage reference, so
-> blk_mq_freeze_queue() does not wait for it.
-> 
-> virtblk_freeze_priv() then calls blk_mq_quiesce_queue_nowait() and
-> blk_mq_unfreeze_queue(). A new request can enter the queue. The old
-> dispatcher can run again, use its old flag check, get the new request,
-> and call virtio_queue_rq(). At the same time, virtblk_freeze_priv() can
-> reset the device, delete the virtqueues, and free vblk->vqs. The old
-> dispatcher can then use a deleted virtqueue or a NULL vblk->vqs, and the
-> kernel can crash.
-> ---
-> Changes in v2:
-> - Cc stable@vger.kernel.org.
-> - Link to v1: https://lore.kernel.org/20260911-virtblk_sync_quiesce-v1-1-a883f8f31258@oss.qualcomm.com
-> ---
->  drivers/block/virtio_blk.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/drivers/block/virtio_blk.c b/drivers/block/virtio_blk.c
-> index 32bf3ba07a9d..7a570591e040 100644
-> --- a/drivers/block/virtio_blk.c
-> +++ b/drivers/block/virtio_blk.c
-> @@ -1595,7 +1595,7 @@ static int virtblk_freeze_priv(struct virtio_device *vdev)
->  
->  	/* Ensure no requests in virtqueues before deleting vqs. */
->  	memflags = blk_mq_freeze_queue(q);
-> -	blk_mq_quiesce_queue_nowait(q);
-> +	blk_mq_quiesce_queue(q);
->  	blk_mq_unfreeze_queue(q, memflags);
->  
->  	/* Ensure we don't receive any more interrupts */
-> 
-> ---
-> base-commit: 50d05c7c76c96b90462f24debacca971d2e86713
-> change-id: 20260910-virtblk_sync_quiesce-9b2c88d45416
-> 
-> Best regards,
-> --  
-> Cong Zhang <cong.zhang@oss.qualcomm.com>
-> 
+This RFC adds initial support for communicating with OP-TEE on RISC-V
+using the RPMI TEE service group [1] over the SBI MPXY [2]
+mailbox framework.
+
+The intention is to provide a transport for RISC-V systems similar in
+purpose to the FF-A transport currently used by OP-TEE on Arm systems.
+Linux and OP-TEE act as endpoints of the RPMI TEE service group, while
+the RPMI framework in machine-mode firmware mediates communication
+between them.
+
+The implementation closely follows the existing OP-TEE FF-A backend in
+drivers/tee/optee/ffa_abi.c. Where possible, the same overall design and
+lifetime rules are preserved, with FF-A operations mapped to equivalent
+RPMI TEE services.
+
+For shared memory, FF-A memory handles are replaced by RPMI memory parcel
+identifiers. Linux creates an RPMI memory parcel for shared memory and
+makes OP-TEE a receiver of that parcel. The parcel identifier is then
+used in OP-TEE message parameters in a similar way to the FF-A global
+memory handle.
+
+RPMI TEE_CALL is used as the entry mechanism into OP-TEE, serving a role
+similar to the FF-A direct-message path. The request and response contain
+a small register-like payload carrying the OP-TEE call information and
+state required to resume yielding calls. The existing OP-TEE call queue,
+RPC handling and shared-memory infrastructure are reused as much as
+possible.
+
+The transport uses one SBI MPXY mailbox channel per hart. A TEE call is
+issued using the channel corresponding to the CPU on which the call is
+running. This preserves the execution model where entering OP-TEE on a
+hart results in secure-world execution associated with that hart.
+
+Shared memory is implemented using RPMI TEE memory parcels. The driver
+maintains a mapping between parcel identifiers and struct tee_shm objects
+and uses parcel create and reclaim operations to manage the lifetime of
+memory shared with OP-TEE.
+
+Asynchronous notifications are implemented using the RPMI TEE signal
+bus. The RPMI TEE service group does not provide framework notification
+events corresponding directly to the OP-TEE asynchronous notification
+mechanism, so the signal bus is used to carry notification values from
+OP-TEE to Linux.
+
+This is an early RFC and the implementation is not complete. There may
+still be functional bugs, incorrect assumptions, missing pieces, or
+interfaces that need to change.
+
+The series is being posted at this stage primarily to get feedback on the
+overall architecture and on how the OP-TEE ABI is mapped onto the RPMI
+TEE service group.
+
+The implementation deliberately follows the FF-A backend and ffa_abi.c
+closely. This allows the existing OP-TEE driver design to be reused and
+keeps the RISC-V and FF-A transports as consistent as possible. Some of
+these abstractions may need to be adjusted where the RPMI execution,
+notification, or memory model differs from FF-A, while others may
+eventually be shared between the transports.
+
+[1] https://github.com/riscv-non-isa/riscv-rpmi/commits/main/src/srvgrp-tee.adoc
+[2] https://github.com/riscv-non-isa/riscv-sbi-doc/releases
+
+Signed-off-by: Amirreza Zarrabi <amirreza.zarrabi@oss.qualcomm.com>
+---
+Amirreza Zarrabi (5):
+      optee: riscv: add RPMI TEE service group transport
+      optee: riscv: add shared memory and scheduled calls
+      optee: riscv: enable persistent shared argument cache
+      optee: riscv: add asynchronous notifications over the signal bus
+      dt-bindings: tee: add RISC-V RPMI TEE transport
+
+ .../bindings/tee/riscv,rpmi-mpxy-tee.yaml          |   65 +
+ MAINTAINERS                                        |    1 +
+ drivers/tee/optee/Makefile                         |    1 +
+ drivers/tee/optee/core.c                           |    8 +-
+ drivers/tee/optee/optee_private.h                  |   47 +
+ drivers/tee/optee/optee_riscv.c                    | 1621 ++++++++++++++++++++
+ drivers/tee/optee/optee_riscv.h                    |  334 ++++
+ include/linux/mailbox/riscv-rpmi-message.h         |    1 +
+ 8 files changed, 2076 insertions(+), 2 deletions(-)
+---
+base-commit: 68142f986ff04b2b70b31db00f719bf690f64a9a
+change-id: 20260912-rpmi-tee-service-grp-dev-b2ce2f63e0df
+
+Best regards,
+-- 
+Amirreza Zarrabi <amirreza.zarrabi@oss.qualcomm.com>
 
