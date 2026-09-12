@@ -1,145 +1,181 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B1529345749
-	for <linux-arm-msm@vger.kernel.org>; Sat, 12 Sep 2026 15:36:50 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F36BF475334;
+	Sat, 12 Sep 2026 15:45:57 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789227411; cv=none; b=MWPPzUGdEhzqWikv2QeSgjnluC7myMousIauLNjWwm+0HsYb+FmSLDiySn+V07drEiOTo9xJddKXjXwzGV5HgliRYcirLYJTjCNwpkNijK6p5YZXcLgeuyG5WWlgRdxImJ+Ctq5e4sTJ74wAu7RDenuE13Q3OgWFmXwzQpWdl2Y=
+	t=1789227959; cv=none; b=NekZH8g9dK4RuvYH+KBRCTXgILfpZSRuaAVzkJBVcKnggRm+pVQ0rroXn8mvYZLzPzPsPHrovdpOi+FwosHrtXW773T5PdV56GHo3dRDiRV9PGzpmOZ4jN/Aa2pmBjDkU1C804FV97VN8iN0AbSs9n3mP/da55d6c20mYiVYFww=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789227411; c=relaxed/simple;
-	bh=5+z/T0zRXn+xjmvFdyxFVa20FKeIoctl8Vsxn2GO1HU=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=sPYdUnvdM20SeKND0504Rj65U7QC61ngah3ORsBSNdKFqAwB/gzyFw0n7YrpYrH2La6/V7lqcw6bugVFgEqhetJ2+R9v5FO5r+fm2UOj0bTHOCRFgVHyKTwurG2rHtjOGiloznjJ/C3+esOc4F1tGCaCu3QSXipj+VBMLTDvDvw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=aqoeC8fQ; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=ZNvcL+lt; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1789227959; c=relaxed/simple;
+	bh=8ER3or0aXOIo0/gTiBp/Gq/PHHeOUbuTmPzvW2r3QXE=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
+	 MIME-Version:Content-Type; b=L9qxIbFs7+msMNpvyTumuXY/rGFKpYkG/CS2+pdtmmIMaB8u5eAaUKPHtDZfZ8Fbc0dL0KgQDJV71XL8CfUcxMWyedDoBRnF+56Yvw0WvzJpGbklIc/QO72+LMHQ4RXkt+Fj6EEm3E09xUgT6bgFEdVs44G8aT1wy47tjrdkWS8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=CkeJklpE; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="aqoeC8fQ";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="ZNvcL+lt"
-Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68CEdf6t2794597
-	for <linux-arm-msm@vger.kernel.org>; Sat, 12 Sep 2026 15:36:50 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-type:date:from:in-reply-to:message-id:mime-version
-	:references:subject:to; s=qcppdkim1; bh=rH/IEqmAkYrTTbJdUOTSduna
-	mr9PJLC1X6Zur1mXdvE=; b=aqoeC8fQ5sLvEjnvTf/4WxXyIevy8YYchE6UbkfX
-	OkahyrjwKK3m9da7K7t/Cw2DUWOD8weyrXrXsX1Ej2f9nxtzMZ0HAy/xrvk0cY9A
-	fk9SvJPOtPVx5zEhOroEyIEdWEdgRVGJqG9B/CZ88D/6p/UXYYdF1xWBA9f69WSk
-	agOpHf+s9mQf3qnluXgAAtZEZskmh27QWrWuUU97S7EpSLyBOva0DDWVBQltB6ml
-	mBy+Tdxv8OcrJ8w1uoJeQLLrz0FuJ1SgUCWc0KiOdqUaxxoi1QXf5UQeskSR1yJJ
-	+KbJTVc/x3ZhP8gEC1ni+3jEFtO/G2/okkmz9AS9EoLlrA==
-Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com [209.85.222.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gmygd19je-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Sat, 12 Sep 2026 15:36:49 +0000 (GMT)
-Received: by mail-qk1-f198.google.com with SMTP id af79cd13be357-93a07b5b5efso79201385a.1
-        for <linux-arm-msm@vger.kernel.org>; Sat, 12 Sep 2026 08:36:49 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1789227409; x=1789832209; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=rH/IEqmAkYrTTbJdUOTSdunamr9PJLC1X6Zur1mXdvE=;
-        b=ZNvcL+ltesOmjoRzaQC9KHXYENO8OSt3bjsV6OzLbhhhnu098rb09oQR5CPqGpavm3
-         DazbcM4yP0GRp5ylUqxvbPwJY6Og5VMiDUad/zFrnNom0Ln4U+dLtfTsarN4JwXdeGLL
-         JvInoo6OzQSaYzoZZf6Q6SkNmz0do+uR+4mnJL54cwFSHNWtFJXBDqjcD0uaqNzcCY5+
-         0K85RiIWpc2aE83pmwYGDusnk+Mrh5ypXyQ70SKrczzFaPpb7DmWidtS+qxKFl++d7iR
-         l+efX+qadEQ6pvJU3TDU3RbVcdrOG+gStgLUfasYtcHiJjiz/PJyTVe4yPv91ZE7Wr3R
-         2ixw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1789227409; x=1789832209;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=rH/IEqmAkYrTTbJdUOTSdunamr9PJLC1X6Zur1mXdvE=;
-        b=bro15xRIjbz9Y6pcguMy4lRQq18EzuiV72ZWbfeXgrpEL6w2FtThJVlMuy/F2wce9R
-         OQWwL50GxdMKHTd+nnlMqvqKw2vb81QoeClFo8cOe88NYFoeNGvUkfiu9MQnYA5iR8GP
-         wBJsJYMvbN4RRl0TzyU9qwPdf0TvN8ozj5IfNKxIc/h+nFl0ZbtmqtShadEBHLHyli/t
-         yvbwuOWvE+ecRammhwL/A7V6UXoeKbEWYkk7iOdZi2pyuPZJ0rEZIrPqu9Ih4KfHhWkC
-         xBLL6F+ZSESJpVT3tceslX0KR+b2B3tWbFzy1ou07FhV11N9bDhtInX4G29HDk58LWgc
-         TMdQ==
-X-Forwarded-Encrypted: i=1; AKwUvBx9h6XGkfre6p1zstey0bmmrKMcoaXzIAESMUk5IRB8893azJ5d5ypDEQD4ElzzSrYOFrq15UI41+TwHzoC@vger.kernel.org
-X-Gm-Message-State: AFuF++nYv+oaKD6o/27PE/Ll4Ys6/qW31duygIosxBUguDPYATHMoQ8n
-	Itu0cld8WtK2omkUAG7JMRF+Mfs5UZnOEW1KcBc4lHnyl/MjEZRPXeUp9f3HFeUwxcc1O+/cA/C
-	LLvGIhDEZ8n4iMDWZyQVWK5S9mlMMRhqcdy1E3NZ7aakpNZ/QzlHlpEVxL8MIqsv9zSC0
-X-Gm-Gg: AYBFou1dYZui1Rc4PR7vXz6z7fi98YLwDFRVQsyro9WMEo58fceJqO/jte1UHlrKGZl
-	fjWGHv96DER1fP9+5Nf8kBwoRn4uF5/+SyaFPp/0fuHuLhQRkILnFsOXttX6GyxSFaZxYtL3ogg
-	XF4Ke4hR2tw5MueSWYSKWTAf0Pekntk/DiOnQGiB+JLYvehFq6Wp48sAohRg2hCWecsDiNqPbSU
-	gOQEAhaCK14ifT73IsDZyJDr+4JRyul98If81ltdllJE6NOytt5WesQb3cDZ58xFUI/ZSZY8kdK
-	RK+9rYyIowXoNPA+qG/ZckdY98FtnPNxzXm6hbgLoOl9v2AoARP0gTmqdSihXocb+jGNszbo8YW
-	r6yKOYy0qOYT4s5E=
-X-Received: by 2002:a05:620a:1723:b0:93a:2eb:36e2 with SMTP id af79cd13be357-93a02eb398dmr392716385a.35.1789227408745;
-        Sat, 12 Sep 2026 08:36:48 -0700 (PDT)
-X-Received: by 2002:a05:620a:1723:b0:93a:2eb:36e2 with SMTP id af79cd13be357-93a02eb398dmr392712685a.35.1789227408211;
-        Sat, 12 Sep 2026 08:36:48 -0700 (PDT)
-Received: from oss.qualcomm.com ([86.121.170.232])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-49d26c2a419sm271583555e9.7.2026.09.12.08.36.46
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 12 Sep 2026 08:36:47 -0700 (PDT)
-Date: Sat, 12 Sep 2026 18:36:45 +0300
-From: Abel Vesa <abel.vesa@oss.qualcomm.com>
-To: Jishnu Prakash <jishnu.prakash@oss.qualcomm.com>
-Cc: Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>, linux-arm-msm@vger.kernel.org,
-        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-        Kamal Wadhwa <kamal.wadhwa@oss.qualcomm.com>,
-        Rakesh Kota <rakesh.kota@oss.qualcomm.com>,
-        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-Subject: Re: [PATCH v6 4/4] arm64: dts: qcom: Add PMIC thermal support for
- Shikra IQ2390S SoM platform
-Message-ID: <tf5vpawigetrbqzhbnnosta2spfsuynfbngdxvvkh2tkdrpsup@bbh7sv52rc46>
-References: <20260911-shikra_adc_support-v6-0-e4b2da5cd55c@oss.qualcomm.com>
- <20260911-shikra_adc_support-v6-4-e4b2da5cd55c@oss.qualcomm.com>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="CkeJklpE"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id DFE201F00893;
+	Sat, 12 Sep 2026 15:45:52 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1789227957;
+	bh=gpE7hpvn6MeyqhNqz6cqrOOcN1VuNhouP3veEi9dIbg=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date;
+	b=CkeJklpEnRwbNrIxrKlLQnEuLzgdLELqJF1eB/s+4eS7jLuzzVGSXv2L/zkCtJVcB
+	 0Olv8XzAmLMSX1tpUITfj12F32msiFralKrN8PbiOKs4Bb5ewkANjrAO5k8HzXjAFW
+	 J4HQFV9XRXFaYDj/HbU2OeJeGS+C5CbtD9vaTcYWW9eDqYUS+9aexjllTf5ZG46GWx
+	 dxgkuPWTp2VhzZ+CtZ/stz+EbdbZbBgmoQ7Zi5fCjab5oHm1y7zbbwujCGB+ahWfGh
+	 eLIRit3CWFjw4spA9hN77HJ6fnNSzbPhWYA2oBxrRUDrNjDFeZMLd/5kKx9GNi4gQH
+	 mhdhSA1padJ3g==
+From: Andreas Hindborg <a.hindborg@kernel.org>
+To: James Bottomley <James.Bottomley@HansenPartnership.com>, Greg KH
+ <gregkh@linuxfoundation.org>, jaemyung.lee@samsung.com
+Cc: Miguel Ojeda <ojeda@kernel.org>, Boqun Feng <boqun@kernel.org>,
+	Gary Guo <gary@garyguo.net>, =?utf-8?Q?Bj=C3=B6rn?= Roy Baron
+ <bjorn3_gh@protonmail.com>,
+	Benno Lossin <lossin@kernel.org>, Alice
+ Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>, Danilo
+ Krummrich <dakr@kernel.org>, Daniel Almeida <daniel.almeida@collabora.com>,
+	Tamir Duberstein <tamird@kernel.org>,
+	Alexandre Courbot <acourbot@nvidia.com>, Onur =?utf-8?Q?=C3=96zkan?=
+ <work@onurozkan.dev>,
+	linux-kernel@vger.kernel.org, rust-for-linux@vger.kernel.org,
+	linux-block@vger.kernel.org, linux-scsi@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org, Jens Axboe <axboe@kernel.dk>,
+	"Martin K. Petersen" <martin.petersen@oracle.com>,
+	Bart Van Assche <bvanassche@acm.org>, Bean Huo <beanhuo@iokpp.de>
+Subject: Re: [PATCH RFC] drivers/rufs: add Rust UFS host controller driver
+In-Reply-To: <77e00073a9254d5ea1ade771590da81a859b75a6.camel@HansenPartnership.com>
+References: <20260912-rufs-private-v1-1-716db733e655@samsung.com>
+ <YKq4TcQM0v2dXF4wTHEvZKwASII6PDd_R7_UiHWe3NRnR4JsrC_ZS-x6jA_Kl7P6ONehU0REHYk7WaLz8Xv5gA==@protonmail.internalid>
+ <2026091124-treason-trickily-bc52@gregkh> <87mrtmvioe.fsf@kernel.org>
+ <6JMwZ4EuSfQ8V4TGaPwatQ31m30TceLJblORsuILQmy4VV8Fx2lHbihL8ARsRUuJmaSUqek8L54y4Nk6DuZMXQ==@protonmail.internalid>
+ <bdcff6a168e6d4b8e9c9524bd598281817a7df2c.camel@HansenPartnership.com>
+ <87eceyvdnv.fsf@kernel.org>
+ <RJ3H-1s-vh5YR7DRuPZ6p050ld3umNGcKNeBigg7n3KUQt1WJ2C-sR9kEqrF6f4ubj5AHoHNvB0MRGJyw6tf_Q==@protonmail.internalid>
+ <77e00073a9254d5ea1ade771590da81a859b75a6.camel@HansenPartnership.com>
+Date: Sat, 12 Sep 2026 17:45:45 +0200
+Message-ID: <87bja2v5g6.fsf@kernel.org>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260911-shikra_adc_support-v6-4-e4b2da5cd55c@oss.qualcomm.com>
-X-Authority-Analysis: v=2.4 cv=RY0FmFtv c=1 sm=1 tr=0 ts=6aa57191 cx=c_pps
- a=qKBjSQ1v91RyAK45QCPf5w==:117 a=po8fGBi+ks8MzcVQGuqtFQ==:17
- a=kj9zAlcOel0A:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
- a=EUspDBNiAAAA:8 a=RXrNB5dDG2c-zWUEkKQA:9 a=CjuIK1q_8ugA:10
- a=NFOGd7dJGGMPyQGDc5-O:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTEyMDIyNiBTYWx0ZWRfXwsq2SG0dS9WJ
- sT8X/0z+JnW+Q2BFw2mTno3UYH/JCG9RiXB/ynfrSLCZqy8Yy7gEPmWi/HWDXNg8eECD3/kq/xr
- PcuV11sob+1zgyqZSwcmAju+4esrfcC3JzA7Ug6iHqgZun8eN3g8DjSC86f2LKNVFJaIEeNATsn
- ZBbXSIkusE/ZhmT+BrmtkYPx6tdqRZSq/NbsmvAt4cNO0KNoskkqf4oeItj11TBII2sS1jyiwQs
- 3iyBX8ntZbKcUkYmzdE+WgJ2Dg6Etz9aq08WYfW2Y0H4BsTBM9MDLSHNE2X24pYmdfLE+lgtvs4
- goeF/e3deYTTf0P3k6M3FcQ2mO+BFy4OeUBnt0aoxz0VHjTEi2KbxvtWnYERFGKEjyeE5hxShwC
- rfC0yapMSLIo2IRG+J0FWlEsnLQyn5C38haJxd5lfdHsYeol6yrI15Z3VSf1spY9t5nsMNkFFZ1
- ZSQp8TqXBFN5K38p+4Q==
-X-Proofpoint-ORIG-GUID: eWzVob1DHGmb4Gn5hgrD5JC3sqWOUfOm
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTEyMDIyNiBTYWx0ZWRfX4uqRSGGtI6tF
- vjmb32UeHx511JXzlcbXLqBnPT+xjhrc5cRJ4f7yJYsncbKhes668Tv5VjToXNXNXfaDoRDAGzo
- GEou18CK9B7Ldepr6fqW4YytYWETkpw=
-X-Proofpoint-GUID: eWzVob1DHGmb4Gn5hgrD5JC3sqWOUfOm
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-12_05,2026-09-11_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 priorityscore=1501 spamscore=0 suspectscore=0
- lowpriorityscore=0 impostorscore=0 phishscore=0 malwarescore=0 bulkscore=0
- adultscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2609040000
- definitions=main-2609120226
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-On 26-09-11 22:10:42, Jishnu Prakash wrote:
-> Add ADC channels for system thermistors, used for thermal mitigation.
-> Add ADC_TM nodes for pa/quiet/msm thermistors and also thermal zones
-> for them.
-> 
-> Co-developed-by: Rakesh Kota <rakesh.kota@oss.qualcomm.com>
-> Signed-off-by: Rakesh Kota <rakesh.kota@oss.qualcomm.com>
-> Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-> Signed-off-by: Jishnu Prakash <jishnu.prakash@oss.qualcomm.com>
+"James Bottomley" <James.Bottomley@HansenPartnership.com> writes:
 
-Reviewed-by: Abel Vesa <abel.vesa@oss.qualcomm.com>
+> On Sat, 2026-09-12 at 14:48 +0200, Andreas Hindborg wrote:
+>> "James Bottomley" <James.Bottomley@HansenPartnership.com> writes:
+>>
+>> > On Sat, 2026-09-12 at 13:00 +0200, Andreas Hindborg wrote:
+>> > > "Greg KH" <gregkh@linuxfoundation.org> writes:
+>> > >
+>> > > > On Sat, Sep 12, 2026 at 12:52:55AM +0900, Jaemyung Lee via B4
+>> > > > Relay
+>> > > > wrote:
+>> > > > > Comments on the decision to bypass the SCSI midlayer, the
+>> > > > > blk-mq model used in its place, and the proposed prerequisite
+>> > > > > API boundaries would be especially welcome.
+>> > > >
+>> > > > Many many years ago, the USB subsystem tried to bypass the SCSI
+>> > > > midlayer for its storage driver, and while it was a "quick
+>> > > > solution" at the time, in the end, it didn't work out and we
+>> > > > dropped the driver as it just made no sense to keep duplicating
+>> > > > all of the logic all the time.
+>> > > >
+>> > > > So I wouldn't recommend it, as long as UFS builds on top of the
+>> > > > SCSI commands and the like, you should not attempt to duplicate
+>> > > > it in a separate driver, no matter how much "simpler" it
+>> > > > initially seems to be.
+>> > >
+>> > > The scsi related code in this driver is less than 300 lines and
+>> > > is mostly struct packing/unpacking. I guess we could lift the
+>> > > struct definitions from the scsi layer via bindgen. But at 280
+>> > > lines I am not sure it is worth it, and it hardly counts as
+>> > > duplication.
+>> >
+>> > You didn't actually read the above did you?
+>>
+>> Yes.
+>>
+>> > The problem isn't necessarily the duplication of code per-se it's
+>> > the duplication of function without understanding the subtlety.=C2=A0=
+=C2=A0
+>> > Every fool thinks they can duplicate the core features of SCSI in a
+>> > few hundred lines (andthey can: the core SCSI model looks
+>> > beguilingly simple).
+>>
+>> Yes, it's really just encoding/decoding. Not much semantics or logic.
+>>
+>> > They then usually spend years adding back the necessary corner
+>> > cases and quirks before finally concluding that actually they
+>> > shouldn't have tried in the first place.
+>>
+>> Please educate this fool then. I am curious what SCSI logic we would
+>> spend years re-implementing in a detached ufshci driver.
+>
+> The "duplication" is incomplete (it's actually only sense code handling
+> in scsi.rs, but the rest of the duplication is sprayed all over the
+> driver).
+
+The SCSI logic is the CDB encoding in scsi.rs and about 50 lines of
+completion disposition in queue.rs (status to block status, unit
+attention requeue). I agree that the latter is the start of what
+scsi_decide_disposition and sd_done do, and that it is incomplete. What
+I am not yet convinced of is that the complete version for UFS is large
+or subtle compared to scsi midlayer combined with current ufshcd.
+
+> The incompleteness is fine if you never test for it, but your
+> users will run into it in the field (almost certainly in error
+> handling), which is when you begin the reinvention.
+
+Correct, the RFC deliberately leaves out recovery and task management.
+We wanted to get this discussion going sooner rather than later.
+
+Of course we would validate the driver with proper testing before
+declaring it stable.
+
+And yes, the encoding/decoding surface will expand a bit once we
+implement TMF and recovery. And there would have to be a bit of logic to
+handle that as well. And that logic would be similar in semantics to
+code in the scsi midlayer. I doubt it will be many lines, but I feel
+like I have to build it first to convince you of that.
+
+> As Greg said, this
+> is the exact path USB storage tried ... and they did it because their
+> devices barely behave like SCSI ones so they seemed different enough
+> that there was little overlap with core SCSI (i.e. exactly like the
+> JEDEC comment in the cover letter).
+>
+> What I don't quite get is this isn't a criticism of the language or the
+> rust project, it's a criticism of the implementation methodology of
+> this particular driver; and it isn't a theoretical criticism: it's
+> practical; this path has been tried before and failed.  The definition
+> of insanity is doing the same thing over and expecting different
+> results.
+
+Agreed, and I did not read it as a criticism of the language.
+
+For ub, the deprecation commit from 2012 says it was removed because
+every device it handled was also handled by usb-storage. Not because the
+SCSI midlayer turned out to be deep. The UFS situation is different. The
+device population is a handful of vendors behind one host controller
+spec.
+
+If we expected this new driver to be a strict subset of ufshcd, we would
+not build it. The reason to do it is the features that do not fit the
+scsi midlayer.
+
+Here is what I count the midlayer doing for UFS today: sense to
+retry/errno disposition (scsi_decide_disposition, scsi_check_sense,
+sd_done), the abort to LU reset to host reset escalation in scsi_eh with
+ufshcd supplying the handlers, the sd device model (capacity, write
+cache, UNMAP, runtime PM), and the SG_IO ioctl plus the scsi_device
+sysfs tree. Which of these is the part you expect to take years?
+
+Best regards,
+Andreas Hindborg
+
+
