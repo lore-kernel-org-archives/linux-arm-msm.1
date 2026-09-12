@@ -1,94 +1,73 @@
-Received: from mail-m49198.qiye.163.com (mail-m49198.qiye.163.com [45.254.49.198])
+Received: from mail.mainlining.org (mail.mainlining.org [5.75.144.95])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 94E3247B42F;
-	Sat, 12 Sep 2026 16:12:26 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.254.49.198
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 018C8427F91;
+	Sat, 12 Sep 2026 17:43:23 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=5.75.144.95
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789229549; cv=none; b=YiOpZaU+HP3XbyeMA5ib1P+R0ZLtfP53mcH2Ghq6g6LnNpEsCgHKgaof8lWy63aP9MhXPKeJs8H1hOE53lDE21Hrh6o8mD4lO/Gc1wo/CNJQ12rGmsu09Y0GVK8wLtxoc8l2+S2V+PoDPgfHGh25gMuGUqMJUV8olbhd7U3i5y8=
+	t=1789235006; cv=none; b=SzCDww3u3+vldT0lO/WURYBaJsNFCcZgtSfIiR5tgsn4iAWVX/SHEdTtegeTwYlRUdyEurvmEo92AnwLjOizgG+pDRQKvnI145y/LevrV/pTxsoMHHmX7h9ybRRM+W4yc79AFyZ5JcvMtQbTqgYrdQ2fVk3K0aFhCiZsnnBWFKc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789229549; c=relaxed/simple;
-	bh=zk19l8ef2t9JFQnK+eWAGlSj5kE5UIz7oNKYU9CfXRM=;
-	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=cRXw+Uj0yNXTOCTbCFcVWuezOprSA3qctINMskrGwfZGkXpH6tb8XVH8EcFSd234e7x7qc1klThxa3EU0IMfHMeY8FYWkR2ZhWOTRDAtqRkgqZJYKtfaoXVItugQMA8HseWqMPeWvQNgD4BlkeSqS/q4sqCcTLiQgO5ZSS5rK/Y=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=tju.edu.cn; spf=pass smtp.mailfrom=tju.edu.cn; dkim=pass (1024-bit key) header.d=tju.edu.cn header.i=@tju.edu.cn header.b=cIytBO0j; arc=none smtp.client-ip=45.254.49.198
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=tju.edu.cn
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=tju.edu.cn
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=tju.edu.cn header.i=@tju.edu.cn header.b="cIytBO0j"
-Received: from tju.edu.cn (gy-adaptive-ssl-proxy-1-entmail-virt204.gy.ntes [183.242.150.9])
-	by smtp.qiye.163.com (Hmail) with ESMTP id 4d867e24a;
-	Sun, 13 Sep 2026 00:12:13 +0800 (GMT+08:00)
-From: Yibo Tan <lhfff@tju.edu.cn>
-To: Bjorn Andersson <andersson@kernel.org>,
-	Konrad Dybcio <konradybcio@kernel.org>
-Cc: Neil Armstrong <neil.armstrong@linaro.org>,
-	Dmitry Baryshkov <lumag@kernel.org>,
-	linux-arm-msm@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: [PATCH v1] soc: qcom: pmic_pdcharger_ulog: prevent work requeue during remove
-Date: Sun, 13 Sep 2026 00:12:10 +0800
-Message-Id: <20260912161210.1683266-1-lhfff@tju.edu.cn>
+	s=arc-20240116; t=1789235006; c=relaxed/simple;
+	bh=p9xNgzyOOGjC3nneFi7FF9dS3gReLqfYyME7Rxt17rs=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=R6FIqNU1UmlDxmhq5eFbL0d75mQUOAcBcbABLajhDKAAbxK4qSS+IzHB2/FsmCUn3EbuJ0+tXD5WYb0jSvlPyYUYp6dhse5yASyRbcQpYPO7HZNVecgdcaWIX9teE85rN4E8TDiMNAMm5P2yFNO7UZDioGAZRDkC3YJURPr+Gwc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=mainlining.org; spf=pass smtp.helo=mail.mainlining.org; arc=none smtp.client-ip=5.75.144.95
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=mainlining.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.helo=mail.mainlining.org
+Message-ID: <506c188c-2518-4d2e-aff6-336a8dbbb65a@mainlining.org>
+Date: Sat, 12 Sep 2026 20:42:12 +0300
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-HM-Tid: 0aa096640a8f03a1kunm0f5d962121d6c8
-X-HM-MType: 10
-X-HM-Spam-Status: e1kfGhgUHx5ZQUtXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
-	tZV1koWUFITzdXWRgWCB1ZQUpXWS1ZQUlXWQ8JGhUIEh9ZQVlCHkMdVh1NTx0dQhlPTklPTVYeHw
-	5VEwETFhoSFyQUDg9ZV1kYEgtZQVlKQ0hVSU9JVUpOS1VCWVdZFhoPEhUdFFlBWUtVS1VLVUtZBg
-	++
-DKIM-Signature: a=rsa-sha256;
-	b=cIytBO0j/iHRYYOOdMAdbsu2uOvYi55QjsK1Z3WeJfffRYyDuHRfoAdzRqZGhHWeVdCT+1kI3eiZ/5o7AYJIWKgCp7LIddmqW461uppjJ0xFo+pUZr+gSjlqOcNtUzTvevpe4RJB6e11ZWuZvh6lPBhIxlZughRl/UXWvw9xcVg=; c=relaxed/relaxed; s=default; d=tju.edu.cn; v=1;
-	bh=d91C1al67b2L/hoNOOlGyT4FH5684EndnPjPgy9Ety0=;
-	h=date:mime-version:subject:message-id:from;
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH RFC 20/20] arm64: dts: qcom: generalmobile-shamrock: new
+ device
+To: David Heidelberg <david@ixit.cz>
+Cc: Abel Vesa <abelvesa@kernel.org>, Stephen Boyd <sboyd@kernel.org>,
+ Brian Masney <bmasney+clk@redhat.com>,
+ Jerome Brunet <jbrunet+clk@baylibre.com>, Rob Herring <robh@kernel.org>,
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
+ <conor+dt@kernel.org>, Srinivas Kandagatla <srini@kernel.org>,
+ Ulf Hansson <ulfh@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>,
+ "Joerg Roedel (AMD)" <joro@8bytes.org>, Will Deacon <will@kernel.org>,
+ Robin Murphy <robin.murphy@arm.com>, Lee Jones <lee@kernel.org>,
+ Rob Clark <robin.clark@oss.qualcomm.com>, Dmitry Baryshkov
+ <lumag@kernel.org>, Abhinav Kumar <abhinav.kumar@linux.dev>,
+ Jessica Zhang <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>,
+ Marijn Suijten <marijn.suijten@somainline.org>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+ Robert Marko <robimarko@gmail.com>, Guru Das Srinagesh <linux@gurudas.dev>,
+ Amit Kucheria <amitk@kernel.org>, Thara Gopinath <thara.gopinath@gmail.com>,
+ "Rafael J. Wysocki" <rafael@kernel.org>,
+ Daniel Lezcano <daniel.lezcano@kernel.org>, Zhang Rui <rui.zhang@intel.com>,
+ Lukasz Luba <lukasz.luba@arm.com>, Kees Cook <kees@kernel.org>,
+ Tony Luck <tony.luck@intel.com>, "Guilherme G. Piccoli"
+ <gpiccoli@igalia.com>, Dmitry Torokhov <dmitry.torokhov@gmail.com>,
+ Bjorn Andersson <andersson@kernel.org>, Dang Huynh <danct12@riseup.net>,
+ phone-devel@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+ linux-clk@vger.kernel.org, devicetree@vger.kernel.org,
+ linux-kernel@vger.kernel.org, linux-mmc@vger.kernel.org,
+ iommu@lists.linux.dev, mfd@lists.linux.dev, dri-devel@lists.freedesktop.org,
+ freedreno@lists.freedesktop.org, Krzysztof Kozlowski <krzk@kernel.org>,
+ linux-pm@vger.kernel.org, linux-input@vger.kernel.org
+References: <20260912-msm8952-initial-support-v1-0-0e742578b524@mainlining.org>
+ <20260912-msm8952-initial-support-v1-20-0e742578b524@mainlining.org>
+ <9d2c5d44-206f-4ae9-b340-ba1994e234bf@ixit.cz>
+From: Muzaffer Kadir <muzafferkadir@mainlining.org>
+Content-Language: en-US
+In-Reply-To: <9d2c5d44-206f-4ae9-b340-ba1994e234bf@ixit.cz>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-pmic_pdcharger_ulog_rpmsg_remove() cancels the delayed worker while the
-RPMsg endpoint can still deliver callbacks. The RPMsg core invokes the
-driver remove callback before destroying the endpoint, so a response
-callback can run after cancel_delayed_work_sync() returns and queue the
-worker again.
+Hi David,
 
-Device cleanup then frees the devm-allocated pmic_pdcharger_ulog while the
-requeued delayed work still embeds and dereferences that object. KASAN
-reports a slab-use-after-free in pmic_pdcharger_ulog_work().
+I will fix all of these in v2.
+Thanks a lot for review.
 
-Use disable_delayed_work_sync() to drain the worker and reject queue
-attempts that race with removal.
-
-The issue was reproduced in four of four runs with the real target driver,
-RPMsg bus removal, endpoint teardown, workqueue code and devres cleanup.
-The test provider delivered a valid response in the window between the
-driver remove callback and endpoint destruction. With this change, the
-same late callback occurred in four of four runs without a KASAN report,
-warning, Oops or panic.
-
-The reproducer uses a test RPMsg provider to control the teardown timing.
-No unprivileged trigger or physical Qualcomm-device result is claimed.
-
-Fixes: 086fdb48bc65 ("soc: qcom: add ADSP PDCharger ULOG driver")
-Assisted-by: Codex:GPT-5
-Signed-off-by: Yibo Tan <lhfff@tju.edu.cn>
----
- drivers/soc/qcom/pmic_pdcharger_ulog.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/drivers/soc/qcom/pmic_pdcharger_ulog.c b/drivers/soc/qcom/pmic_pdcharger_ulog.c
-index 39f412bbf2c1..06cd9c4411c2 100644
---- a/drivers/soc/qcom/pmic_pdcharger_ulog.c
-+++ b/drivers/soc/qcom/pmic_pdcharger_ulog.c
-@@ -143,7 +143,7 @@ static void pmic_pdcharger_ulog_rpmsg_remove(struct rpmsg_device *rpdev)
- {
- 	struct pmic_pdcharger_ulog *pg = dev_get_drvdata(&rpdev->dev);
- 
--	cancel_delayed_work_sync(&pg->ulog_work);
-+	disable_delayed_work_sync(&pg->ulog_work);
- }
- 
- static const struct rpmsg_device_id pmic_pdcharger_ulog_rpmsg_id_match[] = {
--- 
-2.39.5
-
+Best regards,
+Muzaffer Kadir
