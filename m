@@ -1,65 +1,82 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E56B33537CE;
-	Sun, 13 Sep 2026 06:22:19 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3424724501D;
+	Sun, 13 Sep 2026 07:50:07 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789280540; cv=none; b=ljnIzDkXzKBBLtc186+e00BIviI/5Q2s3A+TDmUxZN7O2VQEWulflsibBt78+PodYrtQsn79LpeoxSG4crZwVme3Nd8cgjdAWEA+gPvSqnG0GNE1FZT34eWkRS6kdR72kKbLnnU5h8k+AcAKEWt5sq6emtH4uhuCURKwPlGEM1c=
+	t=1789285808; cv=none; b=ZYhjCVbgP0pnKByc03oQM3xbiNWXe1l3Pn4CxlHNWRwyIpEw7lC3c2sSPqEq13a9wjsMKNcNXfGKluQ/pEs34mEWjcn9QWO86js+UEi3prdqQDbvOMrspoi1aViW6uoXT0D3qIuDa+3Zat/TEGTqnDKwT+UD9P8xNMIHR/yGagc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789280540; c=relaxed/simple;
-	bh=8BDEnjodhH2RB7P97lubsAwOpEGrZ7oiAzrRN7Ben1c=;
+	s=arc-20240116; t=1789285808; c=relaxed/simple;
+	bh=hU1rqViu1EpVEvQCb/N/SYZKKgn81mdJCzicQsLe0F0=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=LPqd17wcCG/DH3rNd+Wcc8XCEMIq2ulNl+k3e+wkgv1xyjAQgVHAbQOixpYwQHXED+nkDGIozkLP8sbPTgdcrfijHEXLfBmKSJSUQj/Rp7Hej14iO98FnqfU+41UBu/9+PR5zdHjCRTjdqKkjRWN7NZREkrtijNXOtgkUk/5tAw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Sy+aDC9J; arc=none smtp.client-ip=100.103.45.18
+	 Content-Type:Content-Disposition:In-Reply-To; b=QdTSu5idrN3ogdvtrwYxSKfTvyU39VxIRo7etLBv27XgL1PPHYAfwYuTgczw7JTAf9sZjswQCCxAVHozh2K2kkBdEH8VjUjZm6IXNchYsJO6wPUN3dTAOoC/IzbVXZHv5EmGwdRjjBvdSWYtohFFzNuXHED+0gzCPNeC7DvMtTI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=NQyqepqa; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Sy+aDC9J"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 966501F000FF;
-	Sun, 13 Sep 2026 06:22:18 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="NQyqepqa"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id F129E1F000FF;
+	Sun, 13 Sep 2026 07:50:05 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1789280539;
-	bh=7O0ijmU/63M3r27RIHOfPvuoO9Nzvs8zYyUzoD6v4J8=;
+	s=k20260515; t=1789285807;
+	bh=/vfBaplv3ynsUjvQf48JdtOudWdNUPLDX6cz9N40dxs=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=Sy+aDC9JoaxxV0w0LSHTaYGkr5Sp7dyL5FC3zlcdJX62ZYbUjU3JLD31BP6TkO/f4
-	 fUkrlG8gPnHUKLzKyug7JboVFMkUlJTY+xCfnlvu/DPp0Z/gCCeZO5kQg35wU/Czbf
-	 sPwuQQ6Xf/VG67+lrmJPbqmvxAcD6VgBGoWvtPdOUZlorJQo3ZSEKlPqTCZGY1wz8N
-	 FXpkLJhzlGSu1zoHCXd+zfhcF3UmupNg5QbhVRIppoMwuzu84+jrIiwN2rx8nKYyha
-	 oKbIYdx9M6OzwbJkJrZPT9tebELeaKhcW5eDIVNdfLoN+JlT5SVm2E4IrIN8IU/ACz
-	 FqcYQfHX6SRMg==
-Date: Sun, 13 Sep 2026 11:52:14 +0530
-From: Vinod Koul <vkoul@kernel.org>
-To: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-Cc: Neil Armstrong <neil.armstrong@linaro.org>,
-	Kathiravan T <quic_kathirav@quicinc.com>,
-	Baruch Siach <baruch@tkos.co.il>,
-	Dmitry Baryshkov <lumag@kernel.org>,
-	Krishna Kurapati <krishna.kurapati@oss.qualcomm.com>,
-	Manu Gautam <mgautam@codeaurora.org>,
-	Kishon Vijay Abraham I <kishon@kernel.org>,
-	linux-arm-msm@vger.kernel.org, linux-phy@lists.infradead.org,
-	linux-kernel@vger.kernel.org, stable@vger.kernel.org
-Subject: Re: [PATCH v2 0/3] phy: qcom-qusb2: sort out register layouts
-Message-ID: <aqZBFvKu24Ed_IKj@parshuram>
-References: <20260706-fix-qusb2-v2-0-8d9cd73b1db7@oss.qualcomm.com>
+	b=NQyqepqacY2wTnbV1Q1tXFbycIEo8cp7lLc2CC7si3ixm6N1Dv/EndBL8RCGwikkI
+	 qpaGBStF/j16Ocsg4vJJdhhCeunXTxzYlz1aCiFiQrXMHNt96kcLeYTkYJQ+sJTypH
+	 n9+808sCaHxi+gSZqpTThxINukKrandZ5LSGN7RyVAG8r469ZpF02XL5wD+wQ5ArWj
+	 pa7WaTV8X5klYPMRaGZsY0VL1ijvBRLRchS/w/HnT+CG33hBjbJsWdwCr7Cb1zV7fF
+	 RP+UM1NckVZ7HxiOgU10H5BU4bwilWr+LmQiE+hwf7oPM2aU9/G5iULaihLH2F3j6r
+	 xADm43avrVrpw==
+Date: Sun, 13 Sep 2026 09:50:03 +0200
+From: Krzysztof Kozlowski <krzk@kernel.org>
+To: Nabige Aala <nabige.aala@oss.qualcomm.com>
+Cc: Vinod Koul <vkoul@kernel.org>, 
+	Neil Armstrong <neil.armstrong@linaro.org>, Manivannan Sadhasivam <mani@kernel.org>, 
+	Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+	Conor Dooley <conor+dt@kernel.org>, Bjorn Andersson <andersson@kernel.org>, 
+	Rob Clark <robin.clark@oss.qualcomm.com>, Dmitry Baryshkov <lumag@kernel.org>, 
+	Abhinav Kumar <abhinav.kumar@linux.dev>, Jessica Zhang <jesszhan0024@gmail.com>, 
+	Sean Paul <sean@poorly.run>, Marijn Suijten <marijn.suijten@somainline.org>, 
+	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, 
+	Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@gmail.com>, 
+	Simona Vetter <simona@ffwll.ch>, Kuogee Hsieh <quic_khsieh@quicinc.com>, 
+	linux-arm-msm@vger.kernel.org, linux-phy@lists.infradead.org, devicetree@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, freedreno@lists.freedesktop.org, 
+	Ritesh Kumar <ritesh.kumar@oss.qualcomm.com>, Mahadevan P <mahadevan.p@oss.qualcomm.com>
+Subject: Re: [PATCH 03/17] dt-bindings: display/msm: Document Nord MDSS
+Message-ID: <20260913-festive-shrimp-of-strength-10b9df@quoll>
+References: <20260911-nord-drv-dt-v1-0-e25c073cf1b6@oss.qualcomm.com>
+ <20260911-nord-drv-dt-v1-3-e25c073cf1b6@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
-In-Reply-To: <20260706-fix-qusb2-v2-0-8d9cd73b1db7@oss.qualcomm.com>
+In-Reply-To: <20260911-nord-drv-dt-v1-3-e25c073cf1b6@oss.qualcomm.com>
 
-On 06-07-26, 16:53, Dmitry Baryshkov wrote:
-> IPQ6018 and MSM8996 use the same register layout, however for historical
-> reasons ipq6018_regs_layout ended up correctly definig TEST1 register at
-> 0x98 (because platforms using that layout didn't use autoresume), while
-> msm8996_regs_layout used TEST_CTRL offset (0xb8) for the TEST1 layout
-> entry. Fix handling of the autoresume register and definitions of those
-> regs layouts.
+On Fri, Sep 11, 2026 at 09:06:34PM +0530, Nabige Aala wrote:
+> +    display-subsystem@ae00000 {
+> +        compatible = "qcom,nord-mdss";
+> +        reg = <0x0ae00000 0x1000>;
+> +        reg-names = "mdss";
+> +        power-domains = <&dispcc_gdsc>;
+> +        clocks = <&dispcc DISPCC_MDSS_AHB_CLK>,
+> +                 <&gcc GCC_DISP_HF_AXI_CLK>,
+> +                 <&dispcc DISPCC_MDSS_MDP_CLK>;
+> +        clock-names = "iface", "bus", "core";
+> +        resets = <&dispcc DISP_CC_MDSS_CORE_BCR>;
+> +        interrupts = <GIC_SPI 83 IRQ_TYPE_LEVEL_HIGH>;
+> +        interrupt-controller;
+> +        #interrupt-cells = <1>;
+> +        iommus = <&apps_smmu 0x800 0x420>;
+> +        #address-cells = <1>;
+> +        #size-cells = <1>;
+> +        ranges;
 
-This fails to apply on the current code, can you please rebase
+Make the example complete here.
 
--- 
-~Vinod
+Best regards,
+Krzysztof
+
