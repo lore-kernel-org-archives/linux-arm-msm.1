@@ -1,111 +1,163 @@
-Received: from 011.lax.mailroute.net (011.lax.mailroute.net [199.89.1.14])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-qk2-f12.google.com (mail-qk2-f12.google.com [74.125.230.204])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 779F3C2EA;
-	Sun, 13 Sep 2026 00:30:51 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=199.89.1.14
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 45F20280CD5
+	for <linux-arm-msm@vger.kernel.org>; Sun, 13 Sep 2026 02:14:04 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.230.204
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789259452; cv=none; b=kJmaOBU8NGod+jAmnbTyYHcvByuSunNZCWEKhn6iZsylpHkN7JzrsWnikBP2cTnyVzACRn3Cxh6AGM9Hgv95Q4Sb0oVzdOnuNj4rISSbUHHH0pki1LJutoUhlFJlMgmLeoZiU/4jSxx1XF1iWjJmyvNXE9txaVBfSg/V2x6AXpI=
+	t=1789265645; cv=none; b=nK8EIOR0dR5ynPFfHBWx9E30p6IGTKoDcXlRBKnpUbXfdwEZhT9YMxdCedZVSZHGg8s/CLPY1OE+qGgnGpH+IqKblQUSnh1w4zFRhTCceHLpgVSN+13Vyu0WVjIj6RoSN/Q7yusiBPN3OiiyGVCk37Ixho/LaU//GQ/qgpQ484c=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789259452; c=relaxed/simple;
-	bh=HlbGcHncXgxeJnyIgMYYOBgqjwLfT1+DovrzLoZeEKw=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=P0IG1vqQPQR8++786EG1szpK9qOQHP2zkQlwFxjSegh1t3qUg3GbkJIPH0NUAPnLDfd1B96skk/BWnpey03rcP9RYMm9NBVwXOp/JX6pee+X+Za1l6snXPwYUYhQfKgww1TRcGaUxY2xgtmxXYvTDmH3cHyhX7aEI7QnzJwkVVg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=acm.org; spf=pass smtp.mailfrom=acm.org; dkim=pass (2048-bit key) header.d=acm.org header.i=@acm.org header.b=myJRdf8Y; arc=none smtp.client-ip=199.89.1.14
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=acm.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=acm.org
+	s=arc-20240116; t=1789265645; c=relaxed/simple;
+	bh=+0JcbwgDBAnCe37S1lbW1di/g8nThyfXp0uPh67aoJA=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=ou+fj/4bdCx5GK8v0n3d2uc2lhtVYLfEKTrBDGkrLBmmCMhCjipE5vpd0xS3TvyPpGz0o0D8RG+GSsJR92wD42Db5ZcKbjo1tw5L3r5gxMpUvRkAGM2nXCG5rP3jnm0TeeEY+AzW0R9Hundm/N3YrRoD1EXN6gIrEYFUTO4UM4A=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=ptsTaoOg; arc=none smtp.client-ip=74.125.230.204
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=acm.org header.i=@acm.org header.b="myJRdf8Y"
-Received: from localhost (localhost [127.0.0.1])
-	by 011.lax.mailroute.net (Postfix) with ESMTP id 4hj8MT064Fz1XM4TB;
-	Sun, 13 Sep 2026 00:30:45 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=acm.org; h=
-	content-transfer-encoding:content-type:content-type:in-reply-to
-	:from:from:content-language:references:subject:subject
-	:user-agent:mime-version:date:date:message-id:received:received;
-	 s=mr01; t=1789259432; x=1791851433; bh=HlbGcHncXgxeJnyIgMYYOBgq
-	jwLfT1+DovrzLoZeEKw=; b=myJRdf8Y48khX3oHnCfykX7JiM8D2p5lIv3j4Z+T
-	aqMmyojak/oUaZg9HU3ffg2DzINFpfGQMNqF2vvMiZ5MyfRzobSLAlwNIamtpg9p
-	8qMjmuBtGcmsu3uO4eDC49Ywoeamp2WYkmaU6ICKrK2eb8Kx1KBls2bkUeYIFCAK
-	QfN5KHlGv7nlvmGRW2Q8fPuoV4dy2z+5NGrotqoFnbNf7HsC4+W2Da6BIevicBjf
-	46OCNPmf5G9aO44la11cSoea2SgjXP2/7Iy+74bYZBom6/ZYUpJN0B9MLc7sgR9u
-	RurcDhNuN8EQZ5aJl2sedu8CW4n7IeY4vhm0wSm5FOshjw==
-X-Virus-Scanned: by MailRoute
-Received: from 011.lax.mailroute.net ([127.0.0.1])
- by localhost (011.lax [127.0.0.1]) (mroute_mailscanner, port 10029) with LMTP
- id TTRlBX5WCrYz; Sun, 13 Sep 2026 00:30:32 +0000 (UTC)
-Received: from [192.168.0.215] (c-24-6-239-25.hsd1.ca.comcast.net [24.6.239.25])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	(Authenticated sender: bvanassche@acm.org)
-	by 011.lax.mailroute.net (Postfix) with ESMTPSA id 4hj8M40tmMz1XM4Sx;
-	Sun, 13 Sep 2026 00:30:23 +0000 (UTC)
-Message-ID: <ba386a0a-8022-4c3f-a1c1-bb22205b51d4@acm.org>
-Date: Sat, 12 Sep 2026 17:30:22 -0700
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="ptsTaoOg"
+Received: by mail-qk2-f12.google.com with SMTP id af79cd13be357-93a0fd41a7bso53796185a.1
+        for <linux-arm-msm@vger.kernel.org>; Sat, 12 Sep 2026 19:14:04 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1789265643; x=1789870443; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=88ICzwtScsGBN29oTXuL8hAaTuiJVGtZYlaw6P8iREg=;
+        b=ptsTaoOgWBFz21BIqyw2zsxvI+XBkXCYeB1zkpDXlZ87Uhv4zQJinlkUe/ReTPUYsU
+         yo1mv/fDtq++xQ+G7cG7xkCfqYaEOf/TrFnUwjTow/tmlNvQ0JauY8ZqVDwEiCrpHoqw
+         U8tK8dSwItuiutFGjU8nTLHN3wYYNWHrTtYHiHXLRkJ7hAbxzwbdVZTXX09j9H2yypU0
+         tNLs5OykV0qL+Bjvtz2FBsfmbLoxVHd3iR4RETuPMYJlinK/w07IF5WB7+Yoym/F48Gv
+         DN+1DhBqew6V9aJbfu7SWZin3nshKS5VpqcvbmltIwrGx8NCX7H008H47weSdidA8AG0
+         D2zA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1789265643; x=1789870443;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=88ICzwtScsGBN29oTXuL8hAaTuiJVGtZYlaw6P8iREg=;
+        b=B8DbO4vaHa9y8iMLVJheT/phR1RH8gMIVZaEIwV2qlx5FwmuDGiuGYFYGMQ7ojegMH
+         otJrt8SCVUcG6M0MySGlXWk9eEvPpe3mwsFdzsCE4YdHU7wyCdRFKujr768MQcpm4Cfa
+         Uob2SyuF67RaJo8MHBW3ytI6KDcoKvYjbk93ONmtmQDLbKD6o54N+rB53Duu+gGpJ74M
+         RK9EDWaA8eymDIZJ56JxZ8W0JvglryxCYYnmfV4czvKaFxknaBk7/65mJcdHSxak09dq
+         YSX5z1yQ4g+6M3ahUU5lhI4ZLLepnAAjaG9YV2a192j2RyBSfcJ1L+fJT3M1Yz2Wlhr7
+         uJDw==
+X-Forwarded-Encrypted: i=1; AKwUvBzwWGz2b7lULD+JdS3ihsJsIfwb1SxTPTkzvGhj4o7ghW+aK+JVh2eYKAv/t4GbxkUe/4JolknGodSIDRDh@vger.kernel.org
+X-Gm-Message-State: AFuF++kPjmkHX1CFUaRk1yPzXq73vQGw9Sub0M68KnXs4HEstmcRyEvo
+	zEtffDIv2hpbWPAyToYn02zxjjMa67HZWynQmVYmsKC5m0aI/5UZORQ=
+X-Gm-Gg: AYBFou2LJp9oUROZasPjFYyavAKk7fU7OfoLIJwfwceKkQXAOexSSJ03ztTBv08avSS
+	f4YnlOh8GtHnyiF69SbAv3xDsWYGwhUYBQ1afWAOxVCFPik0DXcT4JGkRtqv6R+ozsToTM2xkwQ
+	kyKzs49ASOtqk7LaLG59Z+gm8fC81aNUOaA6rIO+BKuTaiEuCoD5K/mJ6eleXyPSuXtCB37GWyt
+	sarsquSJyAQJd7M2SEGengDb36uqUnjrONV29H9oprneTJsdGTW4zKfEDFOjTBdwTQorIzK4W/A
+	21ZpkdVcYn155rsPTohuXAe1dLAXnrC7wlaP7TYSJgNkWTd+c5uwaQniuNUpaJ3zUlHLyAyrT12
+	hMN2z7AC5lHHkcoWHtWTb7NbzFlgZghbNL1BbsHwg0jZpgl0gBFk6o4B2htJJKlBf4o0ClOzV5d
+	1muaDww1FrHnIvxOQEedvxo8pV394hp9D4g47E2I7lEVf+vBwQiQfgEMOHF+cxbnkMMvUreDt1Z
+	zaQM0uNfZj7k7f9m9a/cCPpTgBEgqAl9A2BjOtcDY5M9U0FxGRRYtqJAL9ylDedtnswyNIhvfaF
+	dlyKEQxCqFmSJCHiuG6YFT2Yy+/3Mdkjvw==
+X-Received: by 2002:a05:620a:838b:b0:939:9bcf:8d35 with SMTP id af79cd13be357-93a03886412mr757341585a.35.1789265643185;
+        Sat, 12 Sep 2026 19:14:03 -0700 (PDT)
+Received: from localhost.localdomain ([104.39.73.78])
+        by smtp.gmail.com with ESMTPSA id af79cd13be357-939e8045d9fsm629778085a.19.2026.09.12.19.14.01
+        (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
+        Sat, 12 Sep 2026 19:14:01 -0700 (PDT)
+From: Myeonghun Pak <mhun512@gmail.com>
+To: Srinivas Kandagatla <srini@kernel.org>,
+	Vinod Koul <vkoul@kernel.org>,
+	Bard Liao <yung-chuan.liao@linux.intel.com>
+Cc: Pierre-Louis Bossart <pierre-louis.bossart@linux.dev>,
+	linux-sound@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	stable@vger.kernel.org,
+	Ijae Kim <ae878000@gmail.com>
+Subject: [PATCH] soundwire: qcom: quiesce runtime PM before removing bus
+Date: Sat, 12 Sep 2026 22:13:56 -0400
+Message-ID: <20260913021356.60079-1-mhun512@gmail.com>
+X-Mailer: git-send-email 2.50.1
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH RFC] drivers/rufs: add Rust UFS host controller driver
-To: Andreas Hindborg <a.hindborg@kernel.org>,
- James Bottomley <James.Bottomley@HansenPartnership.com>,
- Greg KH <gregkh@linuxfoundation.org>, jaemyung.lee@samsung.com
-Cc: Miguel Ojeda <ojeda@kernel.org>, Boqun Feng <boqun@kernel.org>,
- Gary Guo <gary@garyguo.net>, =?UTF-8?Q?Bj=C3=B6rn_Roy_Baron?=
- <bjorn3_gh@protonmail.com>, Benno Lossin <lossin@kernel.org>,
- Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>,
- Danilo Krummrich <dakr@kernel.org>,
- Daniel Almeida <daniel.almeida@collabora.com>,
- Tamir Duberstein <tamird@kernel.org>, Alexandre Courbot
- <acourbot@nvidia.com>, =?UTF-8?Q?Onur_=C3=96zkan?= <work@onurozkan.dev>,
- linux-kernel@vger.kernel.org, rust-for-linux@vger.kernel.org,
- linux-block@vger.kernel.org, linux-scsi@vger.kernel.org,
- linux-arm-msm@vger.kernel.org, Jens Axboe <axboe@kernel.dk>,
- "Martin K. Petersen" <martin.petersen@oracle.com>,
- Bean Huo <beanhuo@iokpp.de>
-References: <20260912-rufs-private-v1-1-716db733e655@samsung.com>
- <YKq4TcQM0v2dXF4wTHEvZKwASII6PDd_R7_UiHWe3NRnR4JsrC_ZS-x6jA_Kl7P6ONehU0REHYk7WaLz8Xv5gA==@protonmail.internalid>
- <2026091124-treason-trickily-bc52@gregkh> <87mrtmvioe.fsf@kernel.org>
- <6JMwZ4EuSfQ8V4TGaPwatQ31m30TceLJblORsuILQmy4VV8Fx2lHbihL8ARsRUuJmaSUqek8L54y4Nk6DuZMXQ==@protonmail.internalid>
- <bdcff6a168e6d4b8e9c9524bd598281817a7df2c.camel@HansenPartnership.com>
- <87eceyvdnv.fsf@kernel.org>
- <RJ3H-1s-vh5YR7DRuPZ6p050ld3umNGcKNeBigg7n3KUQt1WJ2C-sR9kEqrF6f4ubj5AHoHNvB0MRGJyw6tf_Q==@protonmail.internalid>
- <77e00073a9254d5ea1ade771590da81a859b75a6.camel@HansenPartnership.com>
- <87bja2v5g6.fsf@kernel.org>
-Content-Language: en-US
-From: Bart Van Assche <bvanassche@acm.org>
-In-Reply-To: <87bja2v5g6.fsf@kernel.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-On 9/12/26 8:45 AM, Andreas Hindborg wrote:
-> If we expected this new driver to be a strict subset of ufshcd, we would
-> not build it. The reason to do it is the features that do not fit the
-> scsi midlayer.
+Qualcomm SoundWire controllers enable runtime PM after registering the bus,
+but remove tears down the bus and iface clock while runtime callbacks and
+the main or optional in-band wake IRQ handlers can still run. A controller
+that is already runtime-suspended also has its iface clock disabled, so the
+unconditional clock disable in remove unbalances that clock.
 
-That's a super vague statement. What features do you want to implement
-that do not fit the SCSI mid-layer? If this is about implementing non-
-standard SCSI commands, REQ_OP_DRV_IN and REQ_OP_DRV_OUT should be
-sufficient, isn't it? Please note that this is not an endorsement for
-implementing non-standard commands in UFS devices. Non-standard storage
-commands complicate filesystem development and maintenance, especially
-if which commands are supported depends on both the manufacturer of the
-storage device and the device model.
+Disable runtime PM first to cancel pending requests and drain any callback.
+Free both controller IRQs synchronously before deleting SoundWire children,
+then disable the iface clock only when runtime suspend has not already done
+so. Record the powered-down state for a later rebind. Bus deletion does not
+require a resume: the Qualcomm master has no put_device_num operation. The
+core disables slave runtime PM before unregistering each SoundWire child.
 
-> Here is what I count the midlayer doing for UFS today: sense to
-> retry/errno disposition (scsi_decide_disposition, scsi_check_sense,
-> sd_done), the abort to LU reset to host reset escalation in scsi_eh with
-> ufshcd supplying the handlers, the sd device model (capacity, write
-> cache, UNMAP, runtime PM), and the SG_IO ioctl plus the scsi_device
-> sysfs tree.
-Logical unit scanning, DMA support, /dev/sg* support, /dev/bsg support,
-timeout handling, pausing I/O while error handling is ongoing and zoned
-storage support is missing from the above list.
+A pending runtime resume can run while runtime PM is being disabled. Make
+its clock enable failure visible to the PM core and restore the wake IRQ in
+that case, so the runtime status continues to describe the clock state.
 
-Thanks,
+This issue was identified during our ongoing static-analysis research while
+reviewing kernel code.
 
-Bart.
+Fixes: 74e79da9fd46 ("soundwire: qcom: add runtime pm support")
+Cc: stable@vger.kernel.org
+Assisted-by: OpenAI:GPT-5.6
+Co-developed-by: Ijae Kim <ae878000@gmail.com>
+Signed-off-by: Ijae Kim <ae878000@gmail.com>
+Signed-off-by: Myeonghun Pak <mhun512@gmail.com>
+---
+ drivers/soundwire/qcom.c | 27 +++++++++++++++++++++++----
+ 1 file changed, 23 insertions(+), 4 deletions(-)
+
+diff --git a/drivers/soundwire/qcom.c b/drivers/soundwire/qcom.c
+index 55678a30c..35e552cc0 100644
+--- a/drivers/soundwire/qcom.c
++++ b/drivers/soundwire/qcom.c
+@@ -1713,23 +1713,42 @@ static int qcom_swrm_probe(struct platform_device *pdev)
+ 
+ static void qcom_swrm_remove(struct platform_device *pdev)
+ {
+-	struct qcom_swrm_ctrl *ctrl = dev_get_drvdata(&pdev->dev);
++	struct device *dev = &pdev->dev;
++	struct qcom_swrm_ctrl *ctrl = dev_get_drvdata(dev);
++	bool suspended;
++
++	pm_runtime_disable(dev);
++	suspended = pm_runtime_status_suspended(dev);
++
++	devm_free_irq(dev, ctrl->irq, ctrl);
++	if (ctrl->wake_irq > 0)
++		devm_free_irq(dev, ctrl->wake_irq, ctrl);
+ 
+ 	sdw_bus_master_delete(&ctrl->bus);
+-	clk_disable_unprepare(ctrl->hclk);
++	if (!suspended)
++		clk_disable_unprepare(ctrl->hclk);
++	pm_runtime_set_suspended(dev);
+ }
+ 
+ static int __maybe_unused swrm_runtime_resume(struct device *dev)
+ {
+ 	struct qcom_swrm_ctrl *ctrl = dev_get_drvdata(dev);
++	bool wake_irq_disabled = false;
+ 	int ret;
+ 
+ 	if (ctrl->wake_irq > 0) {
+-		if (!irqd_irq_disabled(irq_get_irq_data(ctrl->wake_irq)))
++		if (!irqd_irq_disabled(irq_get_irq_data(ctrl->wake_irq))) {
+ 			disable_irq_nosync(ctrl->wake_irq);
++			wake_irq_disabled = true;
++		}
+ 	}
+ 
+-	clk_prepare_enable(ctrl->hclk);
++	ret = clk_prepare_enable(ctrl->hclk);
++	if (ret) {
++		if (wake_irq_disabled)
++			enable_irq(ctrl->wake_irq);
++		return ret;
++	}
+ 
+ 	if (ctrl->clock_stop_not_supported) {
+ 		reinit_completion(&ctrl->enumeration);
