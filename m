@@ -1,80 +1,82 @@
 Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 249B33E715E
-	for <linux-arm-msm@vger.kernel.org>; Sun, 13 Sep 2026 12:33:47 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 906C437FF6D
+	for <linux-arm-msm@vger.kernel.org>; Sun, 13 Sep 2026 12:33:49 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789302830; cv=none; b=NdNdiICguOhWo+4dXKkf1Ng4KSWTdp+kaYsD5B8BW/rPgzkQy2P6ACtQ1HjX/tH0yTkcIfBo/SfAnloHxWoH22PpUy/v+avoYLFua+zNdQG3bgVkBmtKfeBrXT0xTONDYq5KaCNeKzM56oeRcdnk7VAVURUYE4xnfLocetxqvfw=
+	t=1789302832; cv=none; b=nsbVCytRCg79iaJWCNpASSTP3DDXrKUvuJHPG3+s2skN6oCn6q3SxF+X3mHYZWYzZ3TR9bKesiQdJ14L56RLkTTcgBWUhQvHTM/qENIfPhW/7abcDPzOnGuEV5laMTWYmXozTjQHz7tX1tKmO1ekoznRKS+MnYqa+2OaCEokiTk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789302830; c=relaxed/simple;
-	bh=t/ic0tf39N6W1RFgeQXjtBLIbwB325uktvFQO+N0nJI=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=q01tAaxsl5RnH6PwOzO3b1G4SaxnFCiG7669xKAOeVKff7A8oc+nVLmJZszoViAP4Mymre9RGrgPlF7nTXJExwT/Q2XNG4Q0EmvXSSkl65ZYrxxqDxQXFxc3Qgu5woLgEBa3v3WqptR2l10TDE1dYqXH1+6RoJ/9FMM7XLl3aew=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=b7n0FhAD; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=htH38APZ; arc=none smtp.client-ip=205.220.180.131
+	s=arc-20240116; t=1789302832; c=relaxed/simple;
+	bh=/BtZgDfys4CXTrsxFKjPXH5EalqVZkUvEMDQgav+eWQ=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=I0mMsDcMuEywbSznEGOYbqbo71VMIEFZMfkgESXNARPHjTyxU5gH7pyyFKcgX/00nhyuJkFbaYJoOyeVZZJVrGIOGOMRE0vT6e5cWqPdoVrUmzeJW9Yn8BeAaqoz4DEUt7sPw8Xb6N7yIZKTGTTK63ObqR3J5CQw+/nmM39NluM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=Vbtc5akr; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=fkhjF7PO; arc=none smtp.client-ip=205.220.180.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="b7n0FhAD";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="htH38APZ"
-Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68DAUDhD2053688
-	for <linux-arm-msm@vger.kernel.org>; Sun, 13 Sep 2026 12:33:47 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="Vbtc5akr";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="fkhjF7PO"
+Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68DATxZK1467994
+	for <linux-arm-msm@vger.kernel.org>; Sun, 13 Sep 2026 12:33:48 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:date:from:message-id:mime-version
-	:subject:to; s=qcppdkim1; bh=f7HmkIpzv0+5Vv76flnhc4C5zbL28Bg/Lfl
-	KqWGDWGA=; b=b7n0FhADcI+IpF5mfr1PX2tBD4EfBpKtmPseVPxYWM2OSjmeWWo
-	fg4+eYEcJsIC5rfIYitoEL864RL2UJ3sm3p8/lp6UH7Q8GXKg8rsJpUeQrx3on8q
-	2I72efIUvNGgilEalnAlqAweqoQgwoYECompVaI7sYTiVc3sg8vX7N9WRoRVnVQ5
-	H2lsg5sST8/gFh6YnK8auD3/7r12VpAwF25R5nykNFlpOKtgpsRDuuFhCFxEFz2F
-	B4jR7jrz/PrVQWQ5XUFsJHKKmu53wvfzo5sv27Yuc8dgzC2pzzk8wJ+O9lfSwmd2
-	zqQBFdn+UiHaKhAXSL597Y47ZUGZ8vSjxbg==
-Received: from mail-qk1-f200.google.com (mail-qk1-f200.google.com [209.85.222.200])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gmy9dk7k6-1
+	cc:content-transfer-encoding:date:from:in-reply-to:message-id
+	:mime-version:references:subject:to; s=qcppdkim1; bh=cyF7bDkehBP
+	xmMLQkDJqRH6FRo5LgFRknR9TH2lR+pw=; b=Vbtc5akrWG0zesD6IH5CV8IsjEy
+	SB1MMzY1X3ZE8yz6bmi3++eMe8tCD7cR0XdsSCyfls0kEKP2Ssd3Rl2AzOhBuvQb
+	36B/y3jB2hnYRvS7Yj1wacJrBbSCrvPsWG7U7Dq/ErXNK87Z8p7cpb34SJ9S9C6I
+	FthnBYyA9heWHk4q3vR65jAENHTK1jyghNKCHZvd4YUVaqXJotT9rUE9FhKqzCu5
+	EackylVKLzM+Ns2J8hzPC5UQq7p3lTeMoIydJb4yMHhIkinFe8hQU1icZAScMXxa
+	CKpXnJk75cT2NPWtBFvKa0ukD5+e/3VgWW9xFwW+eAMdOlC6RJ5bug+HRvw==
+Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com [209.85.222.198])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gmy9c377b-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Sun, 13 Sep 2026 12:33:46 +0000 (GMT)
-Received: by mail-qk1-f200.google.com with SMTP id af79cd13be357-93a07b5b5efso169630885a.1
-        for <linux-arm-msm@vger.kernel.org>; Sun, 13 Sep 2026 05:33:46 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Sun, 13 Sep 2026 12:33:48 +0000 (GMT)
+Received: by mail-qk1-f198.google.com with SMTP id af79cd13be357-93a05d645acso256670685a.2
+        for <linux-arm-msm@vger.kernel.org>; Sun, 13 Sep 2026 05:33:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1789302826; x=1789907626; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=f7HmkIpzv0+5Vv76flnhc4C5zbL28Bg/LflKqWGDWGA=;
-        b=htH38APZllglciECuLqiiLTRPODlnuO4PJwQwPV+46zbyqgMPAeC1ix7NZoUHElej3
-         NN7yEDspJon6EwcUuf2w+xnPudkUGU6gsP3a9JLfOSAwtDsoQUB0LSscVTFLM61rnpbr
-         wLee72DoRf8B6dtEhOivI+vKoyxnUBfPcIx7tHAEgrqn2/N3VMIsk8G2RPE3lRB0HClW
-         FRg6k7CYrCSST0d228nEJb+YPxcCFkSIvfVA3DJAPwFQU6hz4dx/tzVl2D+WP4Ge5TYA
-         YEnBtCSg1VeD5RryW1OFbpm/wa9vo1UfKdcq+OaIoVbBZWmT41qSNTmTQ5I7tuPqfvGN
-         nSMQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1789302826; x=1789907626;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=oss.qualcomm.com; s=google; t=1789302828; x=1789907628; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=f7HmkIpzv0+5Vv76flnhc4C5zbL28Bg/LflKqWGDWGA=;
-        b=ktanoGA2GJRuqv0UypseH7vQTEjOr9NeDVyKwaoa4rxm2FAIADjlfeVz1jP4akuomr
-         24X24W7YZb7czos4x0BFl68F0r7ORfGlQFoo8d/n2OFjVCfQ4iBnpd/xoORzlWmQRXio
-         qkY/fqj3sdGUy/ZS6mmNEaSdbeIOODaNGb7GtEMKemgP5Vt3WP897CKWkd7dQHvWTj5a
-         T31pyRIc8V/nerRvX84N9KzcCBDUODvJ8noHXoj3PmYAvWVf7BKkJBIAsb1Myb753zjU
-         OOpjySPuUBFb02TWq84OAo+E00C1ZdXc5QQZBzqgBbFn8OhTufCl9vV+9DgeZMCBNMS1
-         T8QQ==
-X-Forwarded-Encrypted: i=1; AKwUvBzCDi1SqrEM5WMXRorRz8/rme/PEyqFRkTxDXx999YWazxx7NKd9M1l7r9gyXS0Cj+ymxJq8iE2OGUeGOo8@vger.kernel.org
-X-Gm-Message-State: AFuF++nZot/S91M1AWyr8UcjqfWDOzg7YhC0BDWSveCg0op7AVi99zzf
-	dCScOVmSAJo5EO6I6sR/oi7O0nsl2UMRAMLIYXrCJwDoJWuXPHkos+KNh+yEBHa64hcergIvYjT
-	hgNE5GsIZtskitA6aoLrQD5kNaiWLJ4dTxvAUibTSKCARTMyoPixD7vkjWCD3tUiV7zUU
-X-Gm-Gg: AYBFou2vSDtaAjwFcQixyzIkJav1cvbciZ7XZUlf0IvRi6JhShlLHOtKqcKyQRYO3Q/
-	kO1l+0OWiyMW4/iZ2TyCecy90p3XCzkluxrsLWNMfRkNo++zvk/P4OPauEvxJrZgkRF3ofdkbDJ
-	vkn+6zZUWARtmD+A6SXxeRm51M87pkTa1fMNk8Wy9lOXlN8gEwfQjEW9dbiEZFYUix9q1MyFBgT
-	dEY5ngkJ1bIi9V0eGbiFRv33hCXcpKlgkRKbSMefQpJLw/aT9u+Cl5s2Vk5y8gXLbNBytUIJOI5
-	gkpK/dwLjOfAIMiDcS1bXvUzwp6j9tGaqCVy9bvsfAc5epsxrO+FoZT60utbzxnJbJZKsqMu7Z/
-	Rjsmv+APYnYldqnw=
-X-Received: by 2002:a05:620a:2608:b0:939:72cb:bae9 with SMTP id af79cd13be357-93a1875c70dmr190604885a.32.1789302821093;
-        Sun, 13 Sep 2026 05:33:41 -0700 (PDT)
-X-Received: by 2002:a05:620a:2608:b0:939:72cb:bae9 with SMTP id af79cd13be357-93a1875c70dmr190598085a.32.1789302820486;
-        Sun, 13 Sep 2026 05:33:40 -0700 (PDT)
+        bh=cyF7bDkehBPxmMLQkDJqRH6FRo5LgFRknR9TH2lR+pw=;
+        b=fkhjF7POzhZs2MWFscZi7LFxwaUfIiS/iCATkHlRgjgMTbyN0pMVz6hhXPIIjBYf68
+         bh+B1BjnvMM5hCeee/LKkP7MNwE0s0P93r3OAZ5XYcCW8KJ4IrBJaAWAgHOiQx1c8h+W
+         IuPPrv+DpxQKG+1S8Si5wVHKToZ7F12f2Yr3Bmz59FDpSwfptD/C/gjq7na/7z+JeiI2
+         ZejlymJkiDfZlZO/EdHZCt0tKm8L3ntqkEKSfWrAaVjELd/CumIYDGCgOb1z8L2Huqq7
+         MzVncWMQrhJ8x3cLyPPfDLt7kIgE57wNIFx1vi8R/MFbA4AGZmNkupMIUFvC9m13/8gg
+         7+OA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1789302828; x=1789907628;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=cyF7bDkehBPxmMLQkDJqRH6FRo5LgFRknR9TH2lR+pw=;
+        b=Z+tM5f7z8Apfaf+AeaslluCfvkRycOJqIdsH2UmSwPPSL41VCq0KAmCKduQk5xx2Fg
+         M0uxVZ5+/LUREj4Bb5pKb4LXMONMxnULAscvxb+0hHgNCm9BKx8TWXCgC0E8zkCi45nr
+         Il/4CEijbirtYOA0B9miSTIA4332/zqWvI1McVWqBgt07dxVYfy0NnCxCBtEvGn3xKv2
+         sipgltGCJExU2wbUp13h3r+YrDmQw8p06v8TuRXsQ7jwkQBs7xTxJaMrQ39JxfCfmDuB
+         UyPOdGf4ctOFwH4kG8Vg4WODpFRWlBD90i6Jd56kATtzw45ZSM9ndzjR20XaTDddTis0
+         0oRA==
+X-Forwarded-Encrypted: i=1; AKwUvBxumZL8uwh55IQ5hSdTDVE2ANIoImG6zGFqAwwFTLv8KcRbPq8zK5//PAouSDxi4Hvwmvbwh2gcpaJsp7xk@vger.kernel.org
+X-Gm-Message-State: AFuF++msmrTL2nq+BNpzd3dDLs12v5YIaBSSZpi7pFiiU4Dfb4soZqYE
+	91PXNGOGCtJBl/4KOnotcHtkxH1pB21XAvEK9J40DcQtdBVdN5/k+c+YQ5Hd1Xw2AJVNPUAHnZk
+	9V/xCIq8UqPdsiuyqeA6zAi4YocjColpnhiMtADMoUHrQzEwm52qOWYeUkmKhfGWAHRuP
+X-Gm-Gg: AYBFou3uIwky4FG5fNzlvTRWShlwtcgr6hg74eKZwhThcD/G3T328Sjy8gYhK61y97c
+	7qHK2/mo2MW9OZlsGgj5YfDn5UFesmLOnZFGwfEhGH8wPAhGJexz+BnGX3g3gZV9AuC/HOozQsK
+	ydRio6keZC8sEcu0TQtm5yqWoEgGdpAFp0SmUoYO45qHo7WtH9fmF35rpKz+Sh790t0t82Si7A3
+	2YiRMcJEBa5qlb8KaEmBjAMQtBYb5JNFPQcbqA86VX4OwudwHut2Pr+YLaISzRuINwAitkFrvcG
+	1O0ULZKg/HPDo2TKMxu85BIDFDZ0ajcM2lgUPDyJ2YrWaKNNpQPS4XF9ObN/oIsvChDH/ad7zAZ
+	27oZMbxdY1HCBNBE=
+X-Received: by 2002:a05:620a:28c4:b0:939:518d:7f6e with SMTP id af79cd13be357-939ea137501mr1929973785a.22.1789302827575;
+        Sun, 13 Sep 2026 05:33:47 -0700 (PDT)
+X-Received: by 2002:a05:620a:28c4:b0:939:518d:7f6e with SMTP id af79cd13be357-939ea137501mr1929947785a.22.1789302824548;
+        Sun, 13 Sep 2026 05:33:44 -0700 (PDT)
 Received: from quoll ([178.197.219.214])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-49e69f02c92sm131403175e9.2.2026.09.13.05.33.36
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-49e69f02c92sm131403175e9.2.2026.09.13.05.33.40
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 13 Sep 2026 05:33:39 -0700 (PDT)
+        Sun, 13 Sep 2026 05:33:43 -0700 (PDT)
 From: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
 To: Chen-Yu Tsai <wens@kernel.org>, David Airlie <airlied@gmail.com>,
         Simona Vetter <simona@ffwll.ch>,
@@ -124,55 +126,57 @@ To: Chen-Yu Tsai <wens@kernel.org>, David Airlie <airlied@gmail.com>,
         freedreno@lists.freedesktop.org,
         linux-stm32@st-md-mailman.stormreply.com
 Cc: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
-Subject: [PATCH 1/2] dt-bindings: display: Use consistent indentation in the example
-Date: Sun, 13 Sep 2026 14:33:32 +0200
-Message-ID: <20260913123331.100293-3-krzysztof.kozlowski@oss.qualcomm.com>
+Subject: [PATCH 2/2] dt-bindings: display/msm: Use consistent indentation in the example
+Date: Sun, 13 Sep 2026 14:33:33 +0200
+Message-ID: <20260913123331.100293-4-krzysztof.kozlowski@oss.qualcomm.com>
 X-Mailer: git-send-email 2.53.0
+In-Reply-To: <20260913123331.100293-3-krzysztof.kozlowski@oss.qualcomm.com>
+References: <20260913123331.100293-3-krzysztof.kozlowski@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=22457; i=krzysztof.kozlowski@oss.qualcomm.com;
- h=from:subject; bh=t/ic0tf39N6W1RFgeQXjtBLIbwB325uktvFQO+N0nJI=;
- b=owEBbQKS/ZANAwAKAcE3ZuaGi4PXAcsmYgBqppgbdMNBpo0AnVIy4ur2YLrkt4SDEMjNBcmQQ
- tLi/y/gxliJAjMEAAEKAB0WIQTd0mIoPREbIztuuKjBN2bmhouD1wUCaqaYGwAKCRDBN2bmhouD
- 12C3D/9CPU7qgE0K/4X7lvjxa5vavXw/cLVgs1jasrbMM8VKmuC+xgEGCbNOfkfXTR2lOdzuqlz
- vuuWpOzbCUbXSHYM1+ZEP4SFXzxOjtW4QCjuuH7lBnFBUrI1Lq12YpJDhoORYdachYihnCT2h1Q
- 6kEnDTWiFbFNdISfNE8riq0iDN0YzBIR4ng6bRsZWhOKZPUKXjm4m+R9TlY/p/QJ4EAH5ZgspSi
- Z1ZQZFyV/bMEiVauVUOIPCIt5qhr3UhwOXf4T90qUvTjU5ANGwyNgSra7SK4vKKUJMKmOoJkft9
- gRQBp/KZhOaWd+XD4Tsw+/JpuvTSOges34QKAgFZJPkOxRqpVQ79JtJ5AcaA8nr/m4KLeS04ASJ
- 6RRlNteHb7dLeWoVVJX+A4MwNZ7wbHf7CnJpNVAD3xod+k9I3ElYuLn/Rx3uYqBmE9TtWIiEAoU
- TucsUHnpKgwHPBiHFkVw2Va75luCrvITE8a8l5QmRLMpuTLCfzIWD28ZBpUWBt14Ro48lxBNX7X
- h5QXliaQGAacI4SGSzsCqL7SboSgK86r4dhJaoNtv2etdf2VLbzAE8bc21XAVdOCETsHKzaQBjg
- 4nbgYRUsnxwMEO1BcpgQHGtcFnlKXIIN0yz8MVVt/eqLvR1LNgRPZwP/vSwtxmjdoXrz9HiZN2z E6iSMWa3Oi3k2HQ==
+X-Developer-Signature: v=1; a=openpgp-sha256; l=7238; i=krzysztof.kozlowski@oss.qualcomm.com;
+ h=from:subject; bh=/BtZgDfys4CXTrsxFKjPXH5EalqVZkUvEMDQgav+eWQ=;
+ b=owEBbQKS/ZANAwAKAcE3ZuaGi4PXAcsmYgBqppgcDRWoexqVysJxJwz/JPJdHx9ku3F8DoK6B
+ yuVBP6zpQWJAjMEAAEKAB0WIQTd0mIoPREbIztuuKjBN2bmhouD1wUCaqaYHAAKCRDBN2bmhouD
+ 1y6aD/9f+MGyU72k6ORvj3aQN0S1PsG+bjGsEspokFkPaCBbS7zAdkPouE7QFYItzCwMvv/m0gK
+ APZCXfYZlCP6eUi9UTspRlXiXU7NISQbua9ZXN+IXb2FDaWgd5zM3peWDhJhLu5bS2WcxQVr/8N
+ I5RNPu5hf5M8d+T4dXFhU96eALQUqoa/wttTAc5WT54YQpIQ+aKgyXNOOD8mPvA4HF4htEU/7Ps
+ Nrk6wjVJ/ANv+ndNEOC1D3doEBW/Jz0/FwUqWKF+TogLWFiOEcrhkzGknmjD7O2SL0OG1KlHh3g
+ ex/1yYjQzZLn8NZ7xIUX6ylwGd7/+qlEapIsuyGpV1WX7WxoeW6VijBpZipCZZA7PYQ7O9s5Nla
+ OmiDMjSxY6/bUkUFv46YkBBbuVJpUFrr5iDiKs6/eN1mgKcWf68ONIgxM8fm3GiilYyXAM1x3wU
+ zkrhT2nOisbLArRqZBV/sSuUjwpaoFvg4xibMe6vw6Gbveh+2miJkAYP0bB54UjrJVW7Qdj8Y5j
+ O93zxfjAFIAMdWW0pzpb0V6x5YsTtWwxKBZ+8MDixIqAiFQXp93HqTD868dPpffRwRiGPVipvNI
+ E8lqXrt3TtAfO5Raa9OjgbQ1kaYXPxhIhpW76faosmFJa/588EqAE0KYH3pqqhgkCfBy0pvuGr/ 8Ur3MhMzzkfl7lg==
 X-Developer-Key: i=krzysztof.kozlowski@oss.qualcomm.com; a=openpgp; fpr=9BD07E0E0C51F8D59677B7541B93437D3B41629B
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-GUID: HshhiUPxm0AxkleYP2GCtK13c58_jo15
-X-Proofpoint-ORIG-GUID: HshhiUPxm0AxkleYP2GCtK13c58_jo15
-X-Authority-Analysis: v=2.4 cv=NelzRGD4 c=1 sm=1 tr=0 ts=6aa6982a cx=c_pps
- a=hnmNkyzTK/kJ09Xio7VxxA==:117 a=+bKQE0WJfmhK2875HamI0Q==:17
+X-Proofpoint-ORIG-GUID: 5gSVg14DhTPZvkyxZb9oDiincPyyTkDp
+X-Proofpoint-GUID: 5gSVg14DhTPZvkyxZb9oDiincPyyTkDp
+X-Authority-Analysis: v=2.4 cv=c5Y+0h9l c=1 sm=1 tr=0 ts=6aa6982c cx=c_pps
+ a=qKBjSQ1v91RyAK45QCPf5w==:117 a=+bKQE0WJfmhK2875HamI0Q==:17
  a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22 a=EUspDBNiAAAA:8
- a=0YAVxFya4kk6LBs_cYMA:9 a=PEH46H7Ffwr30OY-TuGO:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTEzMDE3OCBTYWx0ZWRfX8ynaphCmqAJK
- YNZV57QKHC6QWz9xO4BXcC/aFJtTincayEcA+oEblTKD/sE11Bzrx1KIUv4yPnDjYEkxrqn1Y1/
- CahiBH0IALGUM4R5RgwylbyTMQRsKgM=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTEzMDE3OCBTYWx0ZWRfX6aVgcHkIEaqA
- qvLstgH+sFI0J9kcsF4kDZLb/HOL5wB4P2ib3dzP/bgGawrpm4D4Rg2grYamUi9tk40L60NIDOx
- jvHr+B0IBLdbnyDomxn9kyjAv/Zsr7fPr9fIXSS9dCYyJRawy9MO5ZuF2oeBPnKeMm5M4y8DHnb
- 5TJ8j+PoW8y8S0qlTN1I5xH4GujCUXeENqVaWqiNIyNFmEJdINFOgrhhZ/Ugo+UIt2+t3nbz3iG
- gdHyjiPc2dke9KjjDRnFY3uVKCPDNBwgNYBgoo781QTvaOhJo5mct8ScjCNSEjOCZYx5PHdibt/
- fkX1WZ/pZHgCAeEuN37RcVu1FziR/Nxiu9GOdi4LEOVLAcv6stSiP/QNZ5On7rff+GIxCapdxs3
- yLRaxB5ArAZ2bMspcePDgK2x9ZTgu49Li2nuuot/Q9NyxHK/MXB2vQzG04TsCIWeBGS/J9x99Lr
- wN5FNWyl5QsHr5LjFVw==
+ a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22 a=EUspDBNiAAAA:8
+ a=KDEBpenjW5rMv1hHu3kA:9 a=NFOGd7dJGGMPyQGDc5-O:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTEzMDE3OCBTYWx0ZWRfX1VmqhNGPZK6M
+ O0IrUMfvWXO99XBmKJeQi0MbxLA3yK8zHZmr8uHAU0JUXzJZTg0G4+gWL8lF/LQK3F93/LoSCPg
+ NvEfFnp+tvcMFEuru5iRbsoCl7Gj1Pcsx1jFCqajA87NXFnHiLpE3xZInOTIhXb5shd0yAmkt3I
+ yEBfVpygPKcThfYZ/w71Q8DuwYPysvteeEmfpJV39EleMxE80M6ZX1bYsaHEJETiAbgt0Rmz6nS
+ 9P1eeNo6SI6/Xq4hVLklZsqXU2dK2rwt/KlE9dtJtEJfHmwdJkK4lmI0EQ+pcumZbnl2y2XLJdu
+ ovFRSpJHrbuuLfwG+1vycKNalGy1VblsthsYK+lXSU+jAEzF2frePFyfeP/8dTaaPvCdPQ1thzI
+ ijOpQ3a+IA/9C+4ltJYktoZP7FeTsenv3MRdiyK4qPWVqvk64AB4TfO+ZAX83c2qqhhE+0jhkN/
+ Orw0riCDe3b+dTUf0lQ==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTEzMDE3OCBTYWx0ZWRfX15FjfXRWeOEG
+ 8KllvbAAg1cw81CD3RpzVI6lxSeqZQxwuSENZqpaQqvgkENl/44Xo05h8O6mf9mtPEH66pK+deQ
+ /Pz/XZuisaK2ik3GmU4ZU+VCLkvz6qg=
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-09-13_04,2026-09-11_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- bulkscore=0 adultscore=0 impostorscore=0 priorityscore=1501 clxscore=1015
- spamscore=0 malwarescore=0 suspectscore=0 lowpriorityscore=0 phishscore=0
+ adultscore=0 clxscore=1015 priorityscore=1501 lowpriorityscore=0 bulkscore=0
+ impostorscore=0 suspectscore=0 malwarescore=0 phishscore=0 spamscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609130178
 
@@ -183,516 +187,187 @@ re-indenting entire example just for that is too much churn.
 
 Signed-off-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
 ---
- .../display/allwinner,sun6i-a31-mipi-dsi.yaml | 10 +--
- .../display/bridge/fsl,imx8qxp-pxl2dpi.yaml   |  4 +-
- .../display/bridge/lontium,lt8912b.yaml       |  8 +-
- .../megachips,stdp2690-ge-b850v3-fw.yaml      |  2 +-
- .../bindings/display/bridge/nxp,tda998x.yaml  |  2 +-
- .../display/bridge/toshiba,tc358764.yaml      |  2 +-
- .../display/bridge/toshiba,tc358775.yaml      | 12 +--
- .../bindings/display/himax,hx8357.yaml        |  2 +-
- .../bindings/display/imx/fsl,imx-lcdc.yaml    |  2 +-
- .../bindings/display/imx/fsl,imx6q-ldb.yaml   | 54 +++++------
- .../display/mediatek/mediatek,ethdr.yaml      | 90 +++++++++----------
- .../display/mediatek/mediatek,hdmi.yaml       | 24 ++---
- .../display/panel/samsung,ams495qa01.yaml     |  2 +-
- .../bindings/display/sitronix,st7567.yaml     |  4 +-
- .../bindings/display/st,stm32-dsi.yaml        | 46 +++++-----
- .../bindings/display/st,stm32-ltdc.yaml       |  6 +-
- .../bindings/display/st,stm32mp25-lvds.yaml   |  4 +-
- 17 files changed, 137 insertions(+), 137 deletions(-)
+ .../display/msm/qcom,qcs8300-mdss.yaml        |  6 +-
+ .../display/msm/qcom,sar2130p-mdss.yaml       |  4 +-
+ .../bindings/display/msm/qcom,sm6150-dpu.yaml | 14 ++---
+ .../display/msm/qcom,sm8350-mdss.yaml         |  2 +-
+ .../display/msm/qcom,x1e80100-mdss.yaml       | 60 +++++++++----------
+ 5 files changed, 43 insertions(+), 43 deletions(-)
 
-diff --git a/Documentation/devicetree/bindings/display/allwinner,sun6i-a31-mipi-dsi.yaml b/Documentation/devicetree/bindings/display/allwinner,sun6i-a31-mipi-dsi.yaml
-index c731fbdc2fe0..7b11cb5e5f6d 100644
---- a/Documentation/devicetree/bindings/display/allwinner,sun6i-a31-mipi-dsi.yaml
-+++ b/Documentation/devicetree/bindings/display/allwinner,sun6i-a31-mipi-dsi.yaml
-@@ -119,11 +119,11 @@ examples:
-         #size-cells = <0>;
+diff --git a/Documentation/devicetree/bindings/display/msm/qcom,qcs8300-mdss.yaml b/Documentation/devicetree/bindings/display/msm/qcom,qcs8300-mdss.yaml
+index c41a86203e78..287cce4dbddc 100644
+--- a/Documentation/devicetree/bindings/display/msm/qcom,qcs8300-mdss.yaml
++++ b/Documentation/devicetree/bindings/display/msm/qcom,qcs8300-mdss.yaml
+@@ -150,7 +150,7 @@ examples:
+                     reg = <0>;
  
-         panel@0 {
--                compatible = "bananapi,lhr050h41", "ilitek,ili9881c";
--                reg = <0>;
--                power-supply = <&reg_display>;
--                reset-gpios = <&r_pio 0 5 1>; /* PL05 */
--                backlight = <&pwm_bl>;
-+            compatible = "bananapi,lhr050h41", "ilitek,ili9881c";
-+            reg = <0>;
-+            power-supply = <&reg_display>;
-+            reset-gpios = <&r_pio 0 5 1>; /* PL05 */
-+            backlight = <&pwm_bl>;
-         };
- 
-         port {
-diff --git a/Documentation/devicetree/bindings/display/bridge/fsl,imx8qxp-pxl2dpi.yaml b/Documentation/devicetree/bindings/display/bridge/fsl,imx8qxp-pxl2dpi.yaml
-index e4e77fad05f1..af9ad07ef08b 100644
---- a/Documentation/devicetree/bindings/display/bridge/fsl,imx8qxp-pxl2dpi.yaml
-+++ b/Documentation/devicetree/bindings/display/bridge/fsl,imx8qxp-pxl2dpi.yaml
-@@ -84,8 +84,8 @@ examples:
-                 };
- 
-                 mipi_lvds_0_pxl2dpi_dc_pixel_link1: endpoint@1 {
--                     reg = <1>;
--                     remote-endpoint = <&dc_pixel_link1_mipi_lvds_0_pxl2dpi>;
-+                    reg = <1>;
-+                    remote-endpoint = <&dc_pixel_link1_mipi_lvds_0_pxl2dpi>;
-                 };
-             };
- 
-diff --git a/Documentation/devicetree/bindings/display/bridge/lontium,lt8912b.yaml b/Documentation/devicetree/bindings/display/bridge/lontium,lt8912b.yaml
-index 988351f3cd01..2d2dc9c046fb 100644
---- a/Documentation/devicetree/bindings/display/bridge/lontium,lt8912b.yaml
-+++ b/Documentation/devicetree/bindings/display/bridge/lontium,lt8912b.yaml
-@@ -107,11 +107,11 @@ examples:
-           };
- 
-           port@1 {
--              reg = <1>;
-+            reg = <1>;
- 
--              endpoint {
--                  remote-endpoint = <&hdmi_in>;
--              };
-+            endpoint {
-+              remote-endpoint = <&hdmi_in>;
-+            };
-           };
-         };
-       };
-diff --git a/Documentation/devicetree/bindings/display/bridge/megachips,stdp2690-ge-b850v3-fw.yaml b/Documentation/devicetree/bindings/display/bridge/megachips,stdp2690-ge-b850v3-fw.yaml
-index dfa6ff6f115e..74539132bf94 100644
---- a/Documentation/devicetree/bindings/display/bridge/megachips,stdp2690-ge-b850v3-fw.yaml
-+++ b/Documentation/devicetree/bindings/display/bridge/megachips,stdp2690-ge-b850v3-fw.yaml
-@@ -104,7 +104,7 @@ examples:
-                     endpoint {
-                         remote-endpoint = <&stdp2690_in>;
+                     dpu_intf0_out: endpoint {
+-                         remote-endpoint = <&mdss_dp0_in>;
++                        remote-endpoint = <&mdss_dp0_in>;
                      };
--               };
-+                };
-             };
-         };
-     };
-diff --git a/Documentation/devicetree/bindings/display/bridge/nxp,tda998x.yaml b/Documentation/devicetree/bindings/display/bridge/nxp,tda998x.yaml
-index 1205c8e9de32..0ad55ff8e330 100644
---- a/Documentation/devicetree/bindings/display/bridge/nxp,tda998x.yaml
-+++ b/Documentation/devicetree/bindings/display/bridge/nxp,tda998x.yaml
-@@ -106,7 +106,7 @@ examples:
-             video-ports = <0x230145>;
+                 };
  
-             #sound-dai-cells = <1>;
--                         /* DAI-format / AP_ENA reg value */
-+            /* DAI-format / AP_ENA reg value */
-             audio-ports = <TDA998x_SPDIF 0x04>,
-                           <TDA998x_I2S 0x03>;
+@@ -352,9 +352,9 @@ examples:
+                 };
  
-diff --git a/Documentation/devicetree/bindings/display/bridge/toshiba,tc358764.yaml b/Documentation/devicetree/bindings/display/bridge/toshiba,tc358764.yaml
-index 866607400514..23c5b254426b 100644
---- a/Documentation/devicetree/bindings/display/bridge/toshiba,tc358764.yaml
-+++ b/Documentation/devicetree/bindings/display/bridge/toshiba,tc358764.yaml
-@@ -81,7 +81,7 @@ examples:
                  port@1 {
-                     reg = <1>;
-                     lvds_ep: endpoint {
--                      remote-endpoint = <&panel_ep>;
-+                        remote-endpoint = <&panel_ep>;
+-                   reg = <1>;
++                    reg = <1>;
+ 
+-                   mdss_dp_out: endpoint { };
++                    mdss_dp_out: endpoint { };
+                 };
+             };
+ 
+diff --git a/Documentation/devicetree/bindings/display/msm/qcom,sar2130p-mdss.yaml b/Documentation/devicetree/bindings/display/msm/qcom,sar2130p-mdss.yaml
+index 44c1bb9e4109..fb3d24bbac7d 100644
+--- a/Documentation/devicetree/bindings/display/msm/qcom,sar2130p-mdss.yaml
++++ b/Documentation/devicetree/bindings/display/msm/qcom,sar2130p-mdss.yaml
+@@ -248,9 +248,9 @@ examples:
+                         remote-endpoint = <&usb_dp_qmpphy_dp_in>;
                      };
                  };
-             };
-diff --git a/Documentation/devicetree/bindings/display/bridge/toshiba,tc358775.yaml b/Documentation/devicetree/bindings/display/bridge/toshiba,tc358775.yaml
-index 258dd9cfd770..8a0d8a66a9b0 100644
---- a/Documentation/devicetree/bindings/display/bridge/toshiba,tc358775.yaml
-+++ b/Documentation/devicetree/bindings/display/bridge/toshiba,tc358775.yaml
-@@ -161,9 +161,9 @@ examples:
-                 dsi0_out: endpoint {
-                     remote-endpoint = <&d2l_in_test>;
-                 };
--             };
--         };
--     };
-+            };
-+        };
-+    };
- 
-   - |
-     /* For dual-link LVDS display panel */
-@@ -227,7 +227,7 @@ examples:
-                 dsi0_out_dual: endpoint {
-                     remote-endpoint = <&d2l_in_dual>;
-                 };
--             };
--         };
--     };
-+            };
-+        };
-+    };
- ...
-diff --git a/Documentation/devicetree/bindings/display/himax,hx8357.yaml b/Documentation/devicetree/bindings/display/himax,hx8357.yaml
-index 34c3b89bf003..bafcd4418d5a 100644
---- a/Documentation/devicetree/bindings/display/himax,hx8357.yaml
-+++ b/Documentation/devicetree/bindings/display/himax,hx8357.yaml
-@@ -74,5 +74,5 @@ examples:
-             dc-gpios = <&gpio0 25 GPIO_ACTIVE_HIGH>;
-             rotation = <90>;
-             backlight = <&backlight>;
--       };
-+        };
-     };
-diff --git a/Documentation/devicetree/bindings/display/imx/fsl,imx-lcdc.yaml b/Documentation/devicetree/bindings/display/imx/fsl,imx-lcdc.yaml
-index c2b29622bceb..84610b5690c4 100644
---- a/Documentation/devicetree/bindings/display/imx/fsl,imx-lcdc.yaml
-+++ b/Documentation/devicetree/bindings/display/imx/fsl,imx-lcdc.yaml
-@@ -110,7 +110,7 @@ examples:
- 
-         port {
-             parallel_out: endpoint {
--              remote-endpoint = <&panel_in>;
-+                remote-endpoint = <&panel_in>;
-             };
-         };
-     };
-diff --git a/Documentation/devicetree/bindings/display/imx/fsl,imx6q-ldb.yaml b/Documentation/devicetree/bindings/display/imx/fsl,imx6q-ldb.yaml
-index 1646f41d8f72..cee1b504adf9 100644
---- a/Documentation/devicetree/bindings/display/imx/fsl,imx6q-ldb.yaml
-+++ b/Documentation/devicetree/bindings/display/imx/fsl,imx6q-ldb.yaml
-@@ -150,44 +150,44 @@ examples:
- 
-         /* Using an of-graph endpoint link to connect the panel */
-         lvds-channel@0 {
-+            reg = <0>;
-+            #address-cells = <1>;
-+            #size-cells = <0>;
-+
-+            port@0 {
-                 reg = <0>;
--                #address-cells = <1>;
--                #size-cells = <0>;
- 
--                port@0 {
--                    reg = <0>;
--
--                    endpoint {
--                        remote-endpoint = <&ipu_di0_lvds0>;
--                    };
-+                endpoint {
-+                    remote-endpoint = <&ipu_di0_lvds0>;
-                 };
+-        };
 +            };
  
--                port@2 {
--                    reg = <2>;
-+            port@2 {
-+                reg = <2>;
+-        dp_opp_table: opp-table {
++            dp_opp_table: opp-table {
+                 compatible = "operating-points-v2";
  
--                    endpoint {
--                        remote-endpoint = <&panel_in>;
--                    };
--               };
-+                endpoint {
-+                    remote-endpoint = <&panel_in>;
-+                };
-+            };
-         };
- 
-         /* Using display-timings and fsl,data-mapping/width instead */
-         lvds-channel@1 {
-+            reg = <1>;
-+            #address-cells = <1>;
-+            #size-cells = <0>;
-+            fsl,data-mapping = "spwg";
-+            fsl,data-width = <24>;
-+
-+            display-timings {/* ... */
-+            };
-+
-+            port@1 {
-                 reg = <1>;
--                #address-cells = <1>;
--                #size-cells = <0>;
--                fsl,data-mapping = "spwg";
--                fsl,data-width = <24>;
- 
--                display-timings {/* ... */
--                };
--
--                port@1 {
--                     reg = <1>;
--
--                     endpoint {
--                         remote-endpoint = <&ipu_di1_lvds1>;
--                     };
-+                endpoint {
-+                    remote-endpoint = <&ipu_di1_lvds1>;
-                 };
-+            };
-         };
-     };
-diff --git a/Documentation/devicetree/bindings/display/mediatek/mediatek,ethdr.yaml b/Documentation/devicetree/bindings/display/mediatek/mediatek,ethdr.yaml
-index 98db47894eeb..6c0edbae96d7 100644
---- a/Documentation/devicetree/bindings/display/mediatek/mediatek,ethdr.yaml
-+++ b/Documentation/devicetree/bindings/display/mediatek/mediatek,ethdr.yaml
-@@ -158,51 +158,51 @@ examples:
-         #size-cells = <2>;
- 
-         hdr-engine@1c114000 {
--                compatible = "mediatek,mt8195-disp-ethdr";
--                reg = <0 0x1c114000 0 0x1000>,
--                      <0 0x1c115000 0 0x1000>,
--                      <0 0x1c117000 0 0x1000>,
--                      <0 0x1c119000 0 0x1000>,
--                      <0 0x1c11a000 0 0x1000>,
--                      <0 0x1c11b000 0 0x1000>,
--                      <0 0x1c11c000 0 0x1000>;
--                reg-names = "mixer", "vdo_fe0", "vdo_fe1", "gfx_fe0", "gfx_fe1",
--                            "vdo_be", "adl_ds";
--                mediatek,gce-client-reg = <&gce0 SUBSYS_1c11XXXX 0x4000 0x1000>,
--                                          <&gce0 SUBSYS_1c11XXXX 0x5000 0x1000>,
--                                          <&gce0 SUBSYS_1c11XXXX 0x7000 0x1000>,
--                                          <&gce0 SUBSYS_1c11XXXX 0x9000 0x1000>,
--                                          <&gce0 SUBSYS_1c11XXXX 0xa000 0x1000>,
--                                          <&gce0 SUBSYS_1c11XXXX 0xb000 0x1000>,
--                                          <&gce0 SUBSYS_1c11XXXX 0xc000 0x1000>;
--                clocks = <&vdosys1 CLK_VDO1_DISP_MIXER>,
--                         <&vdosys1 CLK_VDO1_HDR_VDO_FE0>,
--                         <&vdosys1 CLK_VDO1_HDR_VDO_FE1>,
--                         <&vdosys1 CLK_VDO1_HDR_GFX_FE0>,
--                         <&vdosys1 CLK_VDO1_HDR_GFX_FE1>,
--                         <&vdosys1 CLK_VDO1_HDR_VDO_BE>,
--                         <&vdosys1 CLK_VDO1_26M_SLOW>,
--                         <&vdosys1 CLK_VDO1_HDR_VDO_FE0_DL_ASYNC>,
--                         <&vdosys1 CLK_VDO1_HDR_VDO_FE1_DL_ASYNC>,
--                         <&vdosys1 CLK_VDO1_HDR_GFX_FE0_DL_ASYNC>,
--                         <&vdosys1 CLK_VDO1_HDR_GFX_FE1_DL_ASYNC>,
--                         <&vdosys1 CLK_VDO1_HDR_VDO_BE_DL_ASYNC>,
--                         <&topckgen CLK_TOP_ETHDR>;
--                clock-names = "mixer", "vdo_fe0", "vdo_fe1", "gfx_fe0", "gfx_fe1",
--                              "vdo_be", "adl_ds", "vdo_fe0_async", "vdo_fe1_async",
--                              "gfx_fe0_async", "gfx_fe1_async","vdo_be_async",
--                              "ethdr_top";
--                power-domains = <&spm MT8195_POWER_DOMAIN_VDOSYS1>;
--                iommus = <&iommu_vpp M4U_PORT_L3_HDR_DS>,
--                         <&iommu_vpp M4U_PORT_L3_HDR_ADL>;
--                interrupts = <GIC_SPI 517 IRQ_TYPE_LEVEL_HIGH 0>; /* disp mixer */
--                resets = <&vdosys1 MT8195_VDOSYS1_SW1_RST_B_HDR_VDO_FE0_DL_ASYNC>,
--                         <&vdosys1 MT8195_VDOSYS1_SW1_RST_B_HDR_VDO_FE1_DL_ASYNC>,
--                         <&vdosys1 MT8195_VDOSYS1_SW1_RST_B_HDR_GFX_FE0_DL_ASYNC>,
--                         <&vdosys1 MT8195_VDOSYS1_SW1_RST_B_HDR_GFX_FE1_DL_ASYNC>,
--                         <&vdosys1 MT8195_VDOSYS1_SW1_RST_B_HDR_VDO_BE_DL_ASYNC>;
--                reset-names = "vdo_fe0_async", "vdo_fe1_async", "gfx_fe0_async",
--                              "gfx_fe1_async", "vdo_be_async";
-+            compatible = "mediatek,mt8195-disp-ethdr";
-+            reg = <0 0x1c114000 0 0x1000>,
-+                  <0 0x1c115000 0 0x1000>,
-+                  <0 0x1c117000 0 0x1000>,
-+                  <0 0x1c119000 0 0x1000>,
-+                  <0 0x1c11a000 0 0x1000>,
-+                  <0 0x1c11b000 0 0x1000>,
-+                  <0 0x1c11c000 0 0x1000>;
-+            reg-names = "mixer", "vdo_fe0", "vdo_fe1", "gfx_fe0", "gfx_fe1",
-+                        "vdo_be", "adl_ds";
-+            mediatek,gce-client-reg = <&gce0 SUBSYS_1c11XXXX 0x4000 0x1000>,
-+                                      <&gce0 SUBSYS_1c11XXXX 0x5000 0x1000>,
-+                                      <&gce0 SUBSYS_1c11XXXX 0x7000 0x1000>,
-+                                      <&gce0 SUBSYS_1c11XXXX 0x9000 0x1000>,
-+                                      <&gce0 SUBSYS_1c11XXXX 0xa000 0x1000>,
-+                                      <&gce0 SUBSYS_1c11XXXX 0xb000 0x1000>,
-+                                      <&gce0 SUBSYS_1c11XXXX 0xc000 0x1000>;
-+            clocks = <&vdosys1 CLK_VDO1_DISP_MIXER>,
-+                     <&vdosys1 CLK_VDO1_HDR_VDO_FE0>,
-+                     <&vdosys1 CLK_VDO1_HDR_VDO_FE1>,
-+                     <&vdosys1 CLK_VDO1_HDR_GFX_FE0>,
-+                     <&vdosys1 CLK_VDO1_HDR_GFX_FE1>,
-+                     <&vdosys1 CLK_VDO1_HDR_VDO_BE>,
-+                     <&vdosys1 CLK_VDO1_26M_SLOW>,
-+                     <&vdosys1 CLK_VDO1_HDR_VDO_FE0_DL_ASYNC>,
-+                     <&vdosys1 CLK_VDO1_HDR_VDO_FE1_DL_ASYNC>,
-+                     <&vdosys1 CLK_VDO1_HDR_GFX_FE0_DL_ASYNC>,
-+                     <&vdosys1 CLK_VDO1_HDR_GFX_FE1_DL_ASYNC>,
-+                     <&vdosys1 CLK_VDO1_HDR_VDO_BE_DL_ASYNC>,
-+                     <&topckgen CLK_TOP_ETHDR>;
-+            clock-names = "mixer", "vdo_fe0", "vdo_fe1", "gfx_fe0", "gfx_fe1",
-+                          "vdo_be", "adl_ds", "vdo_fe0_async", "vdo_fe1_async",
-+                          "gfx_fe0_async", "gfx_fe1_async","vdo_be_async",
-+                          "ethdr_top";
-+            power-domains = <&spm MT8195_POWER_DOMAIN_VDOSYS1>;
-+            iommus = <&iommu_vpp M4U_PORT_L3_HDR_DS>,
-+                     <&iommu_vpp M4U_PORT_L3_HDR_ADL>;
-+            interrupts = <GIC_SPI 517 IRQ_TYPE_LEVEL_HIGH 0>; /* disp mixer */
-+            resets = <&vdosys1 MT8195_VDOSYS1_SW1_RST_B_HDR_VDO_FE0_DL_ASYNC>,
-+                     <&vdosys1 MT8195_VDOSYS1_SW1_RST_B_HDR_VDO_FE1_DL_ASYNC>,
-+                     <&vdosys1 MT8195_VDOSYS1_SW1_RST_B_HDR_GFX_FE0_DL_ASYNC>,
-+                     <&vdosys1 MT8195_VDOSYS1_SW1_RST_B_HDR_GFX_FE1_DL_ASYNC>,
-+                     <&vdosys1 MT8195_VDOSYS1_SW1_RST_B_HDR_VDO_BE_DL_ASYNC>;
-+            reset-names = "vdo_fe0_async", "vdo_fe1_async", "gfx_fe0_async",
-+                          "gfx_fe1_async", "vdo_be_async";
-         };
-     };
- ...
-diff --git a/Documentation/devicetree/bindings/display/mediatek/mediatek,hdmi.yaml b/Documentation/devicetree/bindings/display/mediatek/mediatek,hdmi.yaml
-index b90b6d18a828..9af876329e6a 100644
---- a/Documentation/devicetree/bindings/display/mediatek/mediatek,hdmi.yaml
-+++ b/Documentation/devicetree/bindings/display/mediatek/mediatek,hdmi.yaml
-@@ -112,24 +112,24 @@ examples:
-         mediatek,syscon-hdmi = <&mmsys 0x900>;
- 
-         ports {
--          #address-cells = <1>;
--          #size-cells = <0>;
-+            #address-cells = <1>;
-+            #size-cells = <0>;
- 
--          port@0 {
--            reg = <0>;
-+            port@0 {
-+                reg = <0>;
- 
--            hdmi0_in: endpoint {
--              remote-endpoint = <&dpi0_out>;
-+                hdmi0_in: endpoint {
-+                    remote-endpoint = <&dpi0_out>;
-+                };
-             };
--          };
- 
--          port@1 {
--            reg = <1>;
-+            port@1 {
-+                reg = <1>;
- 
--            hdmi0_out: endpoint {
--              remote-endpoint = <&hdmi_con_in>;
-+                hdmi0_out: endpoint {
-+                    remote-endpoint = <&hdmi_con_in>;
-+                };
-             };
--          };
-         };
-     };
- 
-diff --git a/Documentation/devicetree/bindings/display/panel/samsung,ams495qa01.yaml b/Documentation/devicetree/bindings/display/panel/samsung,ams495qa01.yaml
-index e081c84a932b..6db87f7d70d8 100644
---- a/Documentation/devicetree/bindings/display/panel/samsung,ams495qa01.yaml
-+++ b/Documentation/devicetree/bindings/display/panel/samsung,ams495qa01.yaml
-@@ -51,7 +51,7 @@ examples:
- 
-             port {
-                 mipi_in_panel: endpoint {
--                  remote-endpoint = <&mipi_out_panel>;
-+                    remote-endpoint = <&mipi_out_panel>;
-                 };
-             };
-         };
-diff --git a/Documentation/devicetree/bindings/display/sitronix,st7567.yaml b/Documentation/devicetree/bindings/display/sitronix,st7567.yaml
-index 2eb6d00b5a25..c007718541f6 100644
---- a/Documentation/devicetree/bindings/display/sitronix,st7567.yaml
-+++ b/Documentation/devicetree/bindings/display/sitronix,st7567.yaml
-@@ -64,5 +64,5 @@ examples:
-                 vfront-porch = <0>;
-                 vsync-len = <0>;
-             };
--          };
--     };
-+        };
-+    };
-diff --git a/Documentation/devicetree/bindings/display/st,stm32-dsi.yaml b/Documentation/devicetree/bindings/display/st,stm32-dsi.yaml
-index 53560052aaf0..1b5f4317dab2 100644
---- a/Documentation/devicetree/bindings/display/st,stm32-dsi.yaml
-+++ b/Documentation/devicetree/bindings/display/st,stm32-dsi.yaml
-@@ -101,35 +101,35 @@ examples:
-         #size-cells = <0>;
- 
-         ports {
--              #address-cells = <1>;
--              #size-cells = <0>;
-+            #address-cells = <1>;
-+            #size-cells = <0>;
- 
--              port@0 {
--                    reg = <0>;
--                    dsi_in: endpoint {
--                        remote-endpoint = <&ltdc_ep1_out>;
--                    };
--              };
-+            port@0 {
-+                reg = <0>;
-+                dsi_in: endpoint {
-+                    remote-endpoint = <&ltdc_ep1_out>;
-+                };
-+            };
- 
--              port@1 {
--                    reg = <1>;
--                    dsi_out: endpoint {
--                        remote-endpoint = <&panel_in>;
--                    };
--              };
-+            port@1 {
-+                reg = <1>;
-+                dsi_out: endpoint {
-+                    remote-endpoint = <&panel_in>;
-+                };
-+            };
-         };
- 
-         panel@0 {
--              compatible = "orisetech,otm8009a";
--              reg = <0>;
--              reset-gpios = <&gpioe 4 GPIO_ACTIVE_LOW>;
--              power-supply = <&v3v3>;
-+            compatible = "orisetech,otm8009a";
-+            reg = <0>;
-+            reset-gpios = <&gpioe 4 GPIO_ACTIVE_LOW>;
-+            power-supply = <&v3v3>;
- 
--              port {
--                    panel_in: endpoint {
--                        remote-endpoint = <&dsi_out>;
--                    };
--              };
-+            port {
-+                panel_in: endpoint {
-+                    remote-endpoint = <&dsi_out>;
-+                };
-+            };
-         };
-     };
- 
-diff --git a/Documentation/devicetree/bindings/display/st,stm32-ltdc.yaml b/Documentation/devicetree/bindings/display/st,stm32-ltdc.yaml
-index 77058a5ccf68..81c7772de25b 100644
---- a/Documentation/devicetree/bindings/display/st,stm32-ltdc.yaml
-+++ b/Documentation/devicetree/bindings/display/st,stm32-ltdc.yaml
-@@ -119,9 +119,9 @@ examples:
-         resets = <&rcc LTDC_R>;
- 
-         port {
--             ltdc_out_dsi: endpoint {
--                     remote-endpoint = <&dsi_in>;
--             };
-+            ltdc_out_dsi: endpoint {
-+                remote-endpoint = <&dsi_in>;
-+            };
-         };
-     };
- 
-diff --git a/Documentation/devicetree/bindings/display/st,stm32mp25-lvds.yaml b/Documentation/devicetree/bindings/display/st,stm32mp25-lvds.yaml
-index 14e042156179..f8e43c5a656a 100644
---- a/Documentation/devicetree/bindings/display/st,stm32mp25-lvds.yaml
-+++ b/Documentation/devicetree/bindings/display/st,stm32mp25-lvds.yaml
-@@ -114,14 +114,14 @@ examples:
-             port@0 {
-                 reg = <0>;
-                 lvds_in: endpoint {
--                   remote-endpoint = <&ltdc_ep1_out>;
-+                    remote-endpoint = <&ltdc_ep1_out>;
-                 };
-             };
- 
+                 opp-162000000 {
+diff --git a/Documentation/devicetree/bindings/display/msm/qcom,sm6150-dpu.yaml b/Documentation/devicetree/bindings/display/msm/qcom,sm6150-dpu.yaml
+index b4f437172218..8cbf99f9fcba 100644
+--- a/Documentation/devicetree/bindings/display/msm/qcom,sm6150-dpu.yaml
++++ b/Documentation/devicetree/bindings/display/msm/qcom,sm6150-dpu.yaml
+@@ -81,7 +81,7 @@ examples:
              port@1 {
                  reg = <1>;
-                 lvds_out0: endpoint {
--                   remote-endpoint = <&lvds_panel_in>;
-+                    remote-endpoint = <&lvds_panel_in>;
+                 dpu_intf1_out: endpoint {
+-                  remote-endpoint = <&mdss_dsi0_in>;
++                    remote-endpoint = <&mdss_dsi0_in>;
                  };
              };
          };
+@@ -90,18 +90,18 @@ examples:
+             compatible = "operating-points-v2";
+ 
+             opp-19200000 {
+-              opp-hz = /bits/ 64 <19200000>;
+-              required-opps = <&rpmhpd_opp_low_svs>;
++                opp-hz = /bits/ 64 <19200000>;
++                required-opps = <&rpmhpd_opp_low_svs>;
+             };
+ 
+             opp-25600000 {
+-              opp-hz = /bits/ 64 <25600000>;
+-              required-opps = <&rpmhpd_opp_svs>;
++                opp-hz = /bits/ 64 <25600000>;
++                required-opps = <&rpmhpd_opp_svs>;
+             };
+ 
+             opp-307200000 {
+-              opp-hz = /bits/ 64 <307200000>;
+-              required-opps = <&rpmhpd_opp_nom>;
++                opp-hz = /bits/ 64 <307200000>;
++                required-opps = <&rpmhpd_opp_nom>;
+             };
+         };
+     };
+diff --git a/Documentation/devicetree/bindings/display/msm/qcom,sm8350-mdss.yaml b/Documentation/devicetree/bindings/display/msm/qcom,sm8350-mdss.yaml
+index 68176de854b3..f5acf528d0e4 100644
+--- a/Documentation/devicetree/bindings/display/msm/qcom,sm8350-mdss.yaml
++++ b/Documentation/devicetree/bindings/display/msm/qcom,sm8350-mdss.yaml
+@@ -223,7 +223,7 @@ examples:
+             phys = <&mdss_dsi0_phy>;
+ 
+             ports {
+-             #address-cells = <1>;
++                #address-cells = <1>;
+                 #size-cells = <0>;
+ 
+                 port@0 {
+diff --git a/Documentation/devicetree/bindings/display/msm/qcom,x1e80100-mdss.yaml b/Documentation/devicetree/bindings/display/msm/qcom,x1e80100-mdss.yaml
+index 8d698a2e055a..8c65a80b46e4 100644
+--- a/Documentation/devicetree/bindings/display/msm/qcom,x1e80100-mdss.yaml
++++ b/Documentation/devicetree/bindings/display/msm/qcom,x1e80100-mdss.yaml
+@@ -208,47 +208,47 @@ examples:
+             #sound-dai-cells = <0>;
+ 
+             ports {
+-              #address-cells = <1>;
+-              #size-cells = <0>;
++                #address-cells = <1>;
++                #size-cells = <0>;
+ 
+-              port@0 {
+-                  reg = <0>;
++                port@0 {
++                    reg = <0>;
+ 
+-                  mdss_dp0_in: endpoint {
+-                    remote-endpoint = <&mdss_intf0_out>;
+-                  };
+-              };
++                    mdss_dp0_in: endpoint {
++                        remote-endpoint = <&mdss_intf0_out>;
++                    };
++                };
+ 
+-              port@1 {
+-                  reg = <1>;
++                port@1 {
++                    reg = <1>;
+ 
+-                  mdss_dp0_out: endpoint {
+-                  };
+-              };
++                    mdss_dp0_out: endpoint {
++                    };
++                };
+             };
+ 
+             mdss_dp0_opp_table: opp-table {
+-              compatible = "operating-points-v2";
++                compatible = "operating-points-v2";
+ 
+-              opp-160000000 {
+-                 opp-hz = /bits/ 64 <160000000>;
+-                 required-opps = <&rpmhpd_opp_low_svs>;
+-              };
++                opp-160000000 {
++                    opp-hz = /bits/ 64 <160000000>;
++                    required-opps = <&rpmhpd_opp_low_svs>;
++                };
+ 
+-              opp-270000000 {
+-                 opp-hz = /bits/ 64 <270000000>;
+-                 required-opps = <&rpmhpd_opp_svs>;
+-              };
++                opp-270000000 {
++                    opp-hz = /bits/ 64 <270000000>;
++                    required-opps = <&rpmhpd_opp_svs>;
++                };
+ 
+-              opp-540000000 {
+-                 opp-hz = /bits/ 64 <540000000>;
+-                 required-opps = <&rpmhpd_opp_svs_l1>;
+-              };
++                opp-540000000 {
++                    opp-hz = /bits/ 64 <540000000>;
++                    required-opps = <&rpmhpd_opp_svs_l1>;
++                };
+ 
+-              opp-810000000 {
+-                 opp-hz = /bits/ 64 <810000000>;
+-                 required-opps = <&rpmhpd_opp_nom>;
+-              };
++                opp-810000000 {
++                    opp-hz = /bits/ 64 <810000000>;
++                    required-opps = <&rpmhpd_opp_nom>;
++                };
+             };
+         };
+     };
 -- 
 2.53.0
 
