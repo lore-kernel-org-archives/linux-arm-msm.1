@@ -1,88 +1,88 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AC67B3EC808
-	for <linux-arm-msm@vger.kernel.org>; Sun, 13 Sep 2026 12:55:09 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 85B743E9C12
+	for <linux-arm-msm@vger.kernel.org>; Sun, 13 Sep 2026 12:55:12 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789304111; cv=none; b=qDsji204gpchc9ZiiBZZgHUTfhE6ynrrb8lEjQ7HdsZwyE0cSp3NOKE7a71QyQLxs2CI6F31a0jBqD3jGA152vt3PtHQmMmYOE/SkXG7Wf97dzvuTCVAdEyBVfp0sqIShtmjKAhma1s/xiSwXp3XGeay54ZuZAKhmGmGhrseKN8=
+	t=1789304114; cv=none; b=I+/t6C+xDskII/IrAggzwEQXqC0MH69JnJJpUu20VG32+t28dTcnOOGCgjMxEYUQIFjMNyI76T9I9yQEQj4RgorAbq7BeP+Y0rqEn3AAFHJQUExwUrDd85J/Kq6ybcI+RS0lWr4iwbxoww0uLX16aUUKB3QugnRY4Q7oECkKfqc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789304111; c=relaxed/simple;
-	bh=Awtww+xGbDL+nxVnQEG1cxUG7fthGy19mjWzqfVG5cg=;
+	s=arc-20240116; t=1789304114; c=relaxed/simple;
+	bh=b4WvXQ0COzU5NuxznFesN5SzpLiS/QR0/NbsHm44HGs=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=q7trodRkoGNb2Em+YBOfINFaPNxxIGcOAMWFSVMKDsElalOX7sv0d+Gl8Wd6KNxj6NQSze8PBT2ZyGDXkCmj1gwDTNOg/3sCNIJWeYUU8tVy/Nuz/fnOkPnj2HDVpDJws2XlkRN8RGJCJ0DIaBT0IU5Rc2unDtYotR02qg5BGB8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=QJ/he6kS; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=RN5FWVLq; arc=none smtp.client-ip=205.220.180.131
+	 In-Reply-To:To:Cc; b=Cj/0p/CJTlxGm+ENjD1KbkQvxJkVNvHLNV1EM1ByIjvkQ3K8Db+WE0+b2LHIiBLF4Gx44yN8qXhbWQGGoFjnF/AyauU5GD8PTny0U3embsdgY/fpF4t+Fr3zaPMQi6M9GS3/7Z/R5M17YQdqKM0zEWzm9Zyvg/n4090F+UGWR5Y=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=SC2PsqHH; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=YPSLC6sl; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="QJ/he6kS";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="RN5FWVLq"
-Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68DAUiaa1690749
-	for <linux-arm-msm@vger.kernel.org>; Sun, 13 Sep 2026 12:55:08 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="SC2PsqHH";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="YPSLC6sl"
+Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68DAUXI91005585
+	for <linux-arm-msm@vger.kernel.org>; Sun, 13 Sep 2026 12:55:12 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	mdoSA1kgar9Z3f+Ulk0kOmhE3Fl6cLYdcHN+I2h4KKE=; b=QJ/he6kSePzEqURb
-	PlkZhDq/Mw0Rq7mc32YYsGs0JLMlsLwdG7QuZ4bC0uTkKL7PHqTZYznKc22q+L1j
-	BJ2fPD1zD5kGv+kTBO9PUJvNmq33wjjDYgR14XeTwPxPkI0MyZdnJ1h1Ov1tWdgI
-	LXsLyu5pIa8Xykclb0v1pliPuhUEBsxKyuJypcWGqukEq7pz1gKimHtqVIyn+d9w
-	CL+KLAq48CokQrE8qMHVeAAzFYETjg/dd3fpmdJ2D/y/a93x7zRLOhNhcAEtejVS
-	lXgTxJ8bxWTG+h1FZ8Qm6B5M08HMzNmJNs4E8UTx/gPoRN1eJ3J7j+7Ev0rjpiJ9
-	TkOf8g==
-Received: from mail-pg1-f200.google.com (mail-pg1-f200.google.com [209.85.215.200])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gmy9cb8h8-1
+	P0hFYEAWjOWGQHPFsazn/kZWAVEinVYrYfd3wwodbro=; b=SC2PsqHHnLaMuvwf
+	PLmaSh6zSDYpZWaf9obxxFU+qkQlMCbWy37qkvj8pfgZ8sUNC76bCx84R//pAemE
+	bkqh7BafYiQCk7ApDaw1U1bQ0bnF3WmnlSjyOoRHF5aWHtEr8MX7sbfK7EnSJ8HL
+	Wk7IFDdSctVginJEPy35LcyuXjnzJAGzQFgGTb0WMm8Me2HLdTHUzBcAHlY5Xbwi
+	H33k5ruhDsGZjMPFQjc3cdDRvrU67nwEPKMWZt+lahMR5Wfxodr8CpQfjZn79tgl
+	8qjOtkD8prwBnPG1qJ4xq3/w7df4q+pvlR5/5ayOg+kyaiX62syUzuN9QsrJB/dE
+	OK/ivg==
+Received: from mail-pl1-f198.google.com (mail-pl1-f198.google.com [209.85.214.198])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gmygd39wy-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Sun, 13 Sep 2026 12:55:08 +0000 (GMT)
-Received: by mail-pg1-f200.google.com with SMTP id 41be03b00d2f7-cc132709c76so3158996a12.3
-        for <linux-arm-msm@vger.kernel.org>; Sun, 13 Sep 2026 05:55:08 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Sun, 13 Sep 2026 12:55:11 +0000 (GMT)
+Received: by mail-pl1-f198.google.com with SMTP id d9443c01a7336-2ccb687f82eso32322585ad.3
+        for <linux-arm-msm@vger.kernel.org>; Sun, 13 Sep 2026 05:55:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1789304107; x=1789908907; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1789304111; x=1789908911; darn=vger.kernel.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=mdoSA1kgar9Z3f+Ulk0kOmhE3Fl6cLYdcHN+I2h4KKE=;
-        b=RN5FWVLqxIubuj9n53DHYO7ChRFUPGftLDwLeA4oagWYW+yjqg6GfpxZOZ7BbVmWp9
-         hv+hACBohgo/lui7AbecjjlwcEAUyDAce3UA4r8UoE1+hnpmWrVF0Kd1iL00QIpiQIM+
-         w33a0V5/qSdGTRCr5J/IQsoXcSZwJnkb32eZvTMC41xCkpB87hXxep+sFJYEsuI4pdk1
-         FzBV3+X6Y3ZTMGEFUoZs+uNG9Zpt57O8rSIbGBy9f8pWWIH+vyTsQIDANOqVONwlsdMR
-         oR4WR9OydQ8zT79apTUVfvMYWmEzbmafqjHHDAWr0zXOf2C01qbmgZjn0cEqLMGwcIdx
-         +2nQ==
+        bh=P0hFYEAWjOWGQHPFsazn/kZWAVEinVYrYfd3wwodbro=;
+        b=YPSLC6slC/hk2avEjT+f5avIuDW/iPKymxxev+C5HAKcRQFzWJZUkYvxJP/efp0k73
+         /h0sdFEgsi3ZdbkJr+D4D4JW+qUKRg0eRHy7DBp6BUeaVLOpT+DNbM1jnZuajtOdsnEK
+         fwx2gB4LR11rcIrazLsF7kH7NsD6MwWgyKy1FR+1pF8NbZHWjXmpuytQF1SzUQi5EEa9
+         2rXqvbTWSsz9Seu89oMyICbiEZ3g4avLjhoI9dCJvnZOSFm20TF9NL56hEqknVBUJcOE
+         +BDWqXR97ehCISTIm2zBKboaIQhfSvivhxg3XOV3mIJUCucNQJTGkzBzh5KPvvy6K7H/
+         Nf0Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1789304107; x=1789908907;
+        d=1e100.net; s=20251104; t=1789304111; x=1789908911;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=mdoSA1kgar9Z3f+Ulk0kOmhE3Fl6cLYdcHN+I2h4KKE=;
-        b=ZoIcxjXg9KId1DGD18L9jTgRq/idFCESKTh25XN3B4e3VBDBbLjif2rzbgr6+tl9SK
-         vIc2Mr8RABNLfB850jExH2h/g1pkXvyEIctwQJh+XcjCJIfiB6sZpyVHl7eoZmAAXQG3
-         u3IOO3OkUbmZy8xnPgU70MYMW4rCQbuAL0Fig/BB6A7+0aGMPv0PBTMre2S/PhKQkOkN
-         oHONsdqYTSbvZa0A6kgSrstvoXfq+hqNF6B73mXPJ1dvYUtEMqvJVaB54GFj10qrl7IX
-         Xhtgbjf2TwrPBsmKUpXwBEuB0Vd2Va0qNEBHGqdmRxxmJuTsCZa2qs5oj5U71YUDFrKX
-         l+Qg==
-X-Gm-Message-State: AFuF++lx3fEUt0Cg3658PB86tMLqip2ytEmH1JvdVhb6EMZXTBNMLvuL
-	ElkR7cGZ+lgnpuFCsTZKY0TtiiqpFXcj2M1tty7R+P9bU+IbWIPHP+/h0zq04I2COuYM92R2XxX
-	2uVTOe+l2Hh88MWUDYPXACSD+b3Qo+LZ095pMomKGTjVJrmavnBzoxiYvQQzWIZEuqjHd1BUEYR
-	/+
-X-Gm-Gg: AYBFou2Sc+uPR2XDJb/1uicKnJutVMhGiPyFbzbREH0n/DmfNjWNOkHN48VIplgTtg1
-	OTb/v+NBEbPO4cwWK6NNLDh7Fk2Qdwy19zSYKsIBXFpFml98/Oh8xMDX/pNl/XDN+6BgHJUqwqB
-	Sw3LJ7acY5yVynzntEa6NjI6XScMypqDUtoI2oCRPDNg+4PTwRCwslcCLQL7qGHnaMpnkuO3k5g
-	aybsXWckYPcTc3B5yUyLTRIfPuvEYIA9PDKVZR48wuUWHp77lnkPsF5eolj56RDpgkw63rF1jNr
-	psP8SpoaME8eQBPHyvINUo5X3txQnXvio095INJJ5+bcMmdmmJp+tEXEcssBberc90kylsjuChV
-	DaFscX4IuRBzZOJOa0ORnU9zyBDXZ
-X-Received: by 2002:a05:6a20:1604:b0:3bf:5b7a:fc8b with SMTP id adf61e73a8af0-3daecac7fc7mr24845477637.0.1789304107328;
-        Sun, 13 Sep 2026 05:55:07 -0700 (PDT)
-X-Received: by 2002:a05:6a20:1604:b0:3bf:5b7a:fc8b with SMTP id adf61e73a8af0-3daecac7fc7mr24845405637.0.1789304106887;
-        Sun, 13 Sep 2026 05:55:06 -0700 (PDT)
+        bh=P0hFYEAWjOWGQHPFsazn/kZWAVEinVYrYfd3wwodbro=;
+        b=Q7uvyF2I/zhkVKUJxVib8k8Jyz9dBPNrOxXfZCvW+zTv/4HnXkERIwhcm9Il3+pkT3
+         HxhorXbbTYEEaYonvkij8o3R7r01wJqoLSi8YGqte14U/1eNgtVA9xukHLQWHGXziq1E
+         ZFFbvSyOs/HD2X4lzXL6M0WNfDofwnNE282iSZ5ejWo90cG5CAQmlKSHxsyfP0te80ri
+         rSveSPDGjdWlz3B//mvHJl7G+FJwsR2xvW8YRUt+4HagvmBf9A6vGoYHiOkrJDWpmZlc
+         gUafgzIBX+j6vLwZ9RhBNj3TBWS63erGLUx8BDBbztPe32XD1yR33FDmsjydjebpHIiE
+         Q0vA==
+X-Gm-Message-State: AFuF++moemfp4SD3xvXU4i/WVpu0pVV8NivKNDUzLFT9nYSd8RK24Jv7
+	Q2Hc35Adbzlk/aFzpRw433s1SmwJcGTalM/m7Uuj/sOeR42FWbfsqbJDdhQXVIEcibg74dJ3SC0
+	spNZhKGj7svAbTpWnc0KYe4t0ZKR0PuQBP8MPB/mBR1EsKnx+syRqMWimTXIeP0JRsh3EBcLxKr
+	Ya
+X-Gm-Gg: AYBFou0b26MdHch+zrI9AZpfBdzP/ZqEUujGdjFeHigbWl00nVduNh3srzoBiy2j9rc
+	ONb78wSKizvj/ecKez6Tu+/IAewg+te5QAMG17u/LFUhUhu/Ih2BlxoFH5wuD8+Qbxy79JwmC6a
+	RwKadzKtmdAg9uMxXj85YQMa14opEX0fyHSSQcIBo8RzM7ifvpbzXkG15rfx3BjoKEUlgp5q6pz
+	oZb6CikZQg65VCqMhcfkEpocf4VxltFSpkfknGN1F/I1wAGBuRTtu73IKzRQHcJSj79JCAKtv+K
+	unyfYFvA2h9/B2eK9YeD+Jx+vrYYLYmuzMMfKZQVjEhyfoHHS9NTJotRnECIkE1Jpq2AA4sjJbs
+	3JPUjTHkEf6JaehRI0Z8Us+qkfBB7
+X-Received: by 2002:a17:90b:4b0e:b0:398:bee5:61d6 with SMTP id 98e67ed59e1d1-39dbc725258mr12039427a91.24.1789304111047;
+        Sun, 13 Sep 2026 05:55:11 -0700 (PDT)
+X-Received: by 2002:a17:90b:4b0e:b0:398:bee5:61d6 with SMTP id 98e67ed59e1d1-39dbc725258mr12039378a91.24.1789304110584;
+        Sun, 13 Sep 2026 05:55:10 -0700 (PDT)
 Received: from hu-mkshah-hyd.qualcomm.com ([202.46.22.19])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-14365a598aasm18027211c88.1.2026.09.13.05.55.03
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-14365a598aasm18027211c88.1.2026.09.13.05.55.07
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 13 Sep 2026 05:55:06 -0700 (PDT)
+        Sun, 13 Sep 2026 05:55:10 -0700 (PDT)
 From: Maulik Shah <maulik.shah@oss.qualcomm.com>
-Date: Sun, 13 Sep 2026 18:24:23 +0530
-Subject: [PATCH v4 1/3] soc: qcom: cmd-db: export RPMh accelerator type
- string helper
+Date: Sun, 13 Sep 2026 18:24:24 +0530
+Subject: [PATCH v4 2/3] soc: qcom: cmd-db: add reverse address-to-name
+ lookup
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -91,7 +91,7 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260913-rpmh-timeout-debug-v1-v4-1-e94d3e416ea1@oss.qualcomm.com>
+Message-Id: <20260913-rpmh-timeout-debug-v1-v4-2-e94d3e416ea1@oss.qualcomm.com>
 References: <20260913-rpmh-timeout-debug-v1-v4-0-e94d3e416ea1@oss.qualcomm.com>
 In-Reply-To: <20260913-rpmh-timeout-debug-v1-v4-0-e94d3e416ea1@oss.qualcomm.com>
 To: Bjorn Andersson <andersson@kernel.org>,
@@ -103,47 +103,61 @@ Cc: linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
         Navya Malempati <navya.malempati@oss.qualcomm.com>,
         Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1789304099; l=2695;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1789304099; l=4138;
  i=maulik.shah@oss.qualcomm.com; s=20240109; h=from:subject:message-id;
- bh=Awtww+xGbDL+nxVnQEG1cxUG7fthGy19mjWzqfVG5cg=;
- b=OVr+rQ/in0HOwWQo/kZom+aLV8VkNZu+Df1BTO6ImCVLM/MwGUe2C78n15CAcYijW0gnTzVVs
- n0XaYyQcZ6eBgDs8huSIBTCaHUtEwXahVm5RBBYyq0/4xRGl202C3bW
+ bh=b4WvXQ0COzU5NuxznFesN5SzpLiS/QR0/NbsHm44HGs=;
+ b=Cc5Sja+aTPwWi65l/aZyiEwZjmyztQcVSGwtmcgkx9mRbWt6IXaagbCcjjCvjgIV94TfXpL9H
+ mGFMMVmIgO3BTD/wrsrSop+MJHQzvvoOLhpwezfFvl4JettIP6Sirf+
 X-Developer-Key: i=maulik.shah@oss.qualcomm.com; a=ed25519;
  pk=bd9h5FIIliUddIk8p3BlQWBlzKEQ/YW5V+fe759hTWQ=
-X-Authority-Analysis: v=2.4 cv=e+mT2qp/ c=1 sm=1 tr=0 ts=6aa69d2c cx=c_pps
- a=oF/VQ+ItUULfLr/lQ2/icg==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
+X-Authority-Analysis: v=2.4 cv=RY0FmFtv c=1 sm=1 tr=0 ts=6aa69d2f cx=c_pps
+ a=MTSHoo12Qbhz2p7MsH1ifg==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
  a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
- a=EUspDBNiAAAA:8 a=OEZb8WWwy_IDIPDo1iAA:9 a=QEXdDO2ut3YA:10
- a=3WC7DwWrALyhR5TkjVHa:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTEzMDE4NCBTYWx0ZWRfX4oIs+H2w+6WF
- rreuU6BlrBDgChpy5OsEg2U7TZN4EbDzIRZ/5s8DHTqF0WQBpUPbd9MQwfKu+uBnGno8JMIuoF8
- d5CJlOfaUdk9eqvnoJKP9JuCQ9H/V8E=
-X-Proofpoint-ORIG-GUID: iAGd4njD44Fv8ny1zs9PbQ5Wsw55uyHt
-X-Proofpoint-GUID: iAGd4njD44Fv8ny1zs9PbQ5Wsw55uyHt
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTEzMDE4NCBTYWx0ZWRfX9aN7e4kFTqOH
- +qFM+aOY6X+PJPMseXfX0Y0MMKOdb4DIyEyWluh5oltqQceXezU/6sOvF7IPAomK5jOrTUfjmxR
- XdNu/eIxErFUvzfaJaLxQ7Lz5zJxuWMnu1lkoCnB81Ll0PosXQUj0rG8c7fK6opamJ2OQ7wNqXS
- 0MxcBjnICCOXRgMfbwhU4sadYG7X3xtfpEmYCLlq9dDKC4jXgF2NDqEfq0SnunIAqSg81yfxbOS
- bL6LmGMkT7L5hk9eGcQdx5DWl8pWrDIvZEqsfaa9D79l5bNQR7BbrPY3jxaiDSPKrYHaeR0HIi+
- mSjqZEbeTAQeYzyz8wScCgb+xtjhQaZ2SC8eYXRkWgXqoggqdirVX5vjUMp6l5y0ygnLd8w71Db
- L4e8Ox7tJsVfI7klSR3BLhHvOfKqoUS46tK0tDzqf+3z22eBbdjhAsktMbYcUd3CLjTHeUg/yfF
- xGv/xBfu/oOVJje5hvQ==
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
+ a=EUspDBNiAAAA:8 a=7Q9v_upN9S1qH8PsicYA:9 a=QEXdDO2ut3YA:10
+ a=GvdueXVYPmCkWapjIL-Q:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTEzMDE4NCBTYWx0ZWRfX3JKfFIId0zkY
+ sxH3jX/PALLwmMBDMYtdYqXdgvmIdbchYhxa1/vmWE1e7QEiLnEMickkVwDYmqCRVtOErQEdOKg
+ 2KlfyP5/I67IjdI7eCKako6Zus8Jvn76mrBPBYh1UYbsl5PD16Xm+p4Y2LugvF0Db+WpDxTTIFB
+ 6uU8t++76rBkFU6GdAl5k1T5sQjv4co0lg4K4sd5W9bKn9FMJ7F5PQR+e2gdIg04VdPFrKZOgyW
+ sKABDUoPh4AGbvjoIJ2d/d1lQWX53E3NSnC27/JGTmUzmR0wYWJXorw8aY6+l66kCiQn1Ue7J7G
+ cKnnPHshXJWzxZ9EBwpbYPdwyQUpGDdgBze/HsYAJ1aUEwPplzeGYV7cyYbNwktlEl7acgoLfA6
+ oC53FrTxmWIXH6STCs2rGevmookjYIUpXU2uIkhqflH2s8MWXg2cUK+rWJCj7tf9kGS7d3vBnMu
+ 0cimNsdJqz2UwgSdPrQ==
+X-Proofpoint-ORIG-GUID: j9wdI-I-NsxpP3c-dbMolSOaEq1mB2iy
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTEzMDE4NCBTYWx0ZWRfX97aMCXjGRgSo
+ 6uO2BQxXkaQShlfw5Bpoz6YbwhYueuQzP1ZhlokJvtAjDgGEXCiNAed9ou3cOKb2L3bka/3EdV+
+ V/LsL1tUEWgRpynchAP9Bs33luZpjds=
+X-Proofpoint-GUID: j9wdI-I-NsxpP3c-dbMolSOaEq1mB2iy
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-09-13_04,2026-09-11_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 clxscore=1015 phishscore=0 impostorscore=0 spamscore=0
- suspectscore=0 bulkscore=0 lowpriorityscore=0 adultscore=0 malwarescore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609130184
+ clxscore=1015 priorityscore=1501 spamscore=0 suspectscore=0
+ lowpriorityscore=0 impostorscore=0 phishscore=0 malwarescore=0 bulkscore=0
+ adultscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2609040000
+ definitions=main-2609130184
 
-RPMh resource addresses encode the accelerator type (ARC, VRM, BCM)
-in bits [19:16], matching the cmd_db_hw_type enum values. Add
-cmd_db_hw_type_str() to map an RPMh address to its accelerator type
-name string using the existing SLAVE_ID() macro, and export it so
-drivers that handle raw RPMh addresses can produce human-readable
-diagnostic output without duplicating the address encoding knowledge.
+RPMh resource addresses are opaque 32-bit values. While the slave ID
+in bits [19:16] identifies the accelerator type (ARC/VRM/BCM), the
+lower bits encode a resource index that is only meaningful when mapped
+back to the human-readable resource name stored in the command DB
+(e.g. 0x30000 -> cx.lvl).
+
+Add cmd_db_read_name() to perform this reverse lookup by iterating
+the command DB entries and matching on address. Unlike other exported
+cmd-db APIs which go through cmd_db_get_header() (which calls
+cmd_db_ready() internally), this function iterates cmd_db_header
+directly for address matching, so it calls cmd_db_ready() itself.
+
+For VRM resources,
+which have up to 4 contiguous 4-byte-aligned addresses per resource,
+the match uses VRM_ADDR() on bits [19:4] so that any sub-address
+(enable, voltage, mode, headroom) resolves to the same resource name.
+
+Also export CMD_DB_ID_SIZE so callers can size their name buffers
+correctly without open-coding the magic constant 8.
 
 Assisted-by: Claude:claude-sonnet-4-5
 Reviewed-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
@@ -151,61 +165,93 @@ Reviewed-by: Navya Malempati <navya.malempati@oss.qualcomm.com>
 Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
 Signed-off-by: Maulik Shah <maulik.shah@oss.qualcomm.com>
 ---
- drivers/soc/qcom/cmd-db.c | 20 ++++++++++++++++++++
+ drivers/soc/qcom/cmd-db.c | 45 +++++++++++++++++++++++++++++++++++++++++++++
  include/soc/qcom/cmd-db.h |  5 +++++
- 2 files changed, 25 insertions(+)
+ 2 files changed, 50 insertions(+)
 
 diff --git a/drivers/soc/qcom/cmd-db.c b/drivers/soc/qcom/cmd-db.c
-index 3f1eee784387..117f810d5ca4 100644
+index 117f810d5ca4..e1453b194aa3 100644
 --- a/drivers/soc/qcom/cmd-db.c
 +++ b/drivers/soc/qcom/cmd-db.c
-@@ -267,6 +267,26 @@ enum cmd_db_hw_type cmd_db_read_slave_id(const char *id)
+@@ -287,6 +287,51 @@ const char *cmd_db_hw_type_str(u32 addr)
  }
- EXPORT_SYMBOL_GPL(cmd_db_read_slave_id);
+ EXPORT_SYMBOL_GPL(cmd_db_hw_type_str);
  
 +/**
-+ * cmd_db_hw_type_str() - Return the name string for an RPMh accelerator address.
-+ * @addr: RPMh resource address whose slave ID encodes the accelerator type.
++ * cmd_db_read_name() - Look up the resource name for a given RPMh address.
++ * @addr:  RPMh resource address to reverse-look up.
++ * @buf:   Output buffer to write the resource name into.
++ * @len:   Size of @buf; must be at least CMD_DB_ID_SIZE + 1.
 + *
-+ * Extracts the slave ID from bits [19:16] of @addr and maps it to the
-+ * corresponding cmd_db_hw_type name.
++ * Iterates the command DB to find the entry whose address matches @addr.
++ * For VRM resources, which have up to 4 contiguous 4-byte-aligned addresses
++ * per resource, the match is performed on bits [19:4] so that any of the
++ * sub-addresses resolve to the same resource name.
 + *
-+ * Return: A constant string: "ARC", "VRM", "BCM", or "unknown".
++ * Return: 0 on success, -ENODEV if not found or DB not ready.
 + */
-+const char *cmd_db_hw_type_str(u32 addr)
++int cmd_db_read_name(u32 addr, char *buf, size_t len)
 +{
-+	switch (SLAVE_ID(addr)) {
-+	case CMD_DB_HW_ARC: return "ARC";
-+	case CMD_DB_HW_VRM: return "VRM";
-+	case CMD_DB_HW_BCM: return "BCM";
-+	default:            return "unknown";
++	const struct rsc_hdr *rsc_hdr;
++	const struct entry_header *ent;
++	int ret, i, j;
++
++	ret = cmd_db_ready();
++	if (ret)
++		return ret;
++
++	for (i = 0; i < MAX_SLV_ID; i++) {
++		rsc_hdr = &cmd_db_header->header[i];
++		if (!rsc_hdr->slv_id)
++			break;
++
++		ent = rsc_to_entry_header(rsc_hdr);
++		for (j = 0; j < le16_to_cpu(rsc_hdr->cnt); j++, ent++) {
++			u32 ent_addr = le32_to_cpu(ent->addr);
++
++			if (cmd_db_match_resource_addr(ent_addr, addr)) {
++				snprintf(buf, len, "%.*s",
++					 (int)strnlen(ent->id, sizeof(ent->id)),
++					 ent->id);
++				return 0;
++			}
++		}
 +	}
++
++	return -ENODEV;
 +}
-+EXPORT_SYMBOL_GPL(cmd_db_hw_type_str);
++EXPORT_SYMBOL_GPL(cmd_db_read_name);
 +
  #ifdef CONFIG_DEBUG_FS
  static int cmd_db_debugfs_dump(struct seq_file *seq, void *p)
  {
 diff --git a/include/soc/qcom/cmd-db.h b/include/soc/qcom/cmd-db.h
-index 47a6cab75e63..34adc04eac94 100644
+index 34adc04eac94..d03d64f3407d 100644
 --- a/include/soc/qcom/cmd-db.h
 +++ b/include/soc/qcom/cmd-db.h
-@@ -29,6 +29,8 @@ bool cmd_db_match_resource_addr(u32 addr1, u32 addr2);
- enum cmd_db_hw_type cmd_db_read_slave_id(const char *resource_id);
+@@ -9,6 +9,8 @@
  
- int cmd_db_ready(void);
+ #include <linux/err.h>
+ 
++#define CMD_DB_ID_SIZE		8
 +
-+const char *cmd_db_hw_type_str(u32 addr);
+ enum cmd_db_hw_type {
+ 	CMD_DB_HW_INVALID = 0,
+ 	CMD_DB_HW_MIN     = 3,
+@@ -31,6 +33,7 @@ enum cmd_db_hw_type cmd_db_read_slave_id(const char *resource_id);
+ int cmd_db_ready(void);
+ 
+ const char *cmd_db_hw_type_str(u32 addr);
++int cmd_db_read_name(u32 addr, char *buf, size_t len);
  #else
  static inline u32 cmd_db_read_addr(const char *resource_id)
  { return 0; }
-@@ -44,5 +46,8 @@ static inline enum cmd_db_hw_type cmd_db_read_slave_id(const char *resource_id)
+@@ -49,5 +52,7 @@ static inline int cmd_db_ready(void)
  
- static inline int cmd_db_ready(void)
- { return -ENODEV; }
-+
-+static inline const char *cmd_db_hw_type_str(u32 addr)
-+{ return "unknown"; }
+ static inline const char *cmd_db_hw_type_str(u32 addr)
+ { return "unknown"; }
++static inline int cmd_db_read_name(u32 addr, char *buf, size_t len)
++{ return -ENODEV; }
  #endif /* CONFIG_QCOM_COMMAND_DB */
  #endif /* __QCOM_COMMAND_DB_H__ */
 
