@@ -1,88 +1,87 @@
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B36743F0777
-	for <linux-arm-msm@vger.kernel.org>; Sun, 13 Sep 2026 14:41:09 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EC8AE3F1ADD
+	for <linux-arm-msm@vger.kernel.org>; Sun, 13 Sep 2026 14:41:14 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789310471; cv=none; b=C4i2lkrUWAGaa6EvYdSq2eONedCM6rOo/BCxANL60XxatyA8QebzyABuP3UMv7Bi+DmTSAJz+Kbqmo0ggyGaSih7k4XJ9ly1IiRHI4YrPCdYme9Ibkz8Da84TzjhKOo+NgcHGHX9yJ58GFODuOSzP54/lqCK5Q+HUPUOZNKE4sw=
+	t=1789310476; cv=none; b=bMzBGiBj5cKeYILI6dS/JQC5NBhQSY+WOcRjJ7sp2ngAdKd2BdNaTjF0WZ8lveEoBBKDkh1PeUjeVBY8t8wAWU07zK34eCljz9GqtkRA7ypfthT/OyvycHszjggWiN6f6fH9j9w6KOP9ZHA4OIUqWqDVS6vhlsvYmHSRJwBCM64=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789310471; c=relaxed/simple;
-	bh=Dx3ovNJlM9aS0KyPy/KkFqWuw6/wLLR7Yg/2GW2PrQc=;
+	s=arc-20240116; t=1789310476; c=relaxed/simple;
+	bh=9HkS3wxfvgP0/0gQboWN88Ps/r7tlaD0hKV9cwObfFE=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=RPqDuSdr6LrBF+1ozqUe6AIVBLRqPO5BUE0YQZOZF5/fBLTPDjNcxZl03QNRbv9FZ1E7LunTBj/Bhisr4Mg8thnzHDSKjyNJXr7B5FUi4UXVglYeAVM7xJmoO/1qg1sytNX7VxVuDN1vICWVyof+xPzGHE+CkEh6dlPBadASeZQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=KhCZqfH5; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=KLxBNbJQ; arc=none smtp.client-ip=205.220.168.131
+	 In-Reply-To:To:Cc; b=SjMN3fhI7B+FDxOEv+T4H3U+UX237BDRcLC523hFojB8x3ymaVSWbf8LfJ/ERvImep8WMbMoTVGhtOhfFwoWkVr3tX0/dKGzo7kbxRRc1DDiIx03yFek67AzkQKFlv8+lgX8dpBJweh+4z3PZmD7WXP3Pn51j4oWnBBlHs+bs14=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=Eixe3jv3; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=TANXNwpe; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="KhCZqfH5";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="KLxBNbJQ"
-Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68DDxmde2785785
-	for <linux-arm-msm@vger.kernel.org>; Sun, 13 Sep 2026 14:41:09 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="Eixe3jv3";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="TANXNwpe"
+Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68DE0A0q700069
+	for <linux-arm-msm@vger.kernel.org>; Sun, 13 Sep 2026 14:41:14 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	x0uly6JHLnN++DMu29WEaZNFPjIiWYw6gQfnWNoZwd8=; b=KhCZqfH5vXYGq+r9
-	YaIgXXuVEHTOu4an/u+6WgHN8AQQ31XlHdE9KN7JDmbfoNvJzzHz5y8o7S2vtnIX
-	P2ATiz1I5fdtN4jSc3fJNDid9Juv8hMzebrgFCuCFs5uKoHs75NL+m3K0eDsD5dg
-	aJEJ9xAhcOzO4XsFIWmL5MfSIB78K+oAnkNHTDmw8JrNdMzVLax+/FyHXR7pu0fa
-	9GTw9zkJdUZr6e/Z02J4DlsgMJ8HgED8SA7tWdox+c4G0emNviGVg4791p0jwkCe
-	H/5KWenF/FQ8kU8xNFbOz9ixzCI5KybUmlN9EdzLIVnHtsB0B/5QWXBC0EX3QGmC
-	qZRbyw==
-Received: from mail-pg1-f198.google.com (mail-pg1-f198.google.com [209.85.215.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gmy9cbh6g-1
+	WmdRTxeOLyf0Pab2r9UoJT0vEIVmxiuf0Wt2l2dbmoY=; b=Eixe3jv3QRj5J4NM
+	nA5JvZ/2Wb2ZuNnK66xKiCFeTYDXDKqX4atyKEAjplyCrFwb8XoX4JI5RmCTOOGS
+	QN6CJzl4HOG68ouxTNzOTdgJELe+vvude9CGLTQGnbp9NyF5eEgT4nP3DAWxGcv8
+	dJeMA3y7xjgxRf/Kq3Ewqhyf/a7LMoJ35snI18+yJL8qUl/W/jB1/1TuixUHMq9C
+	BUG9B17AJoqerCtuX3WcptLQro2dgZgVX2PfAFP1x3kY4QSiO0h/ZH79Y2dS3sx4
+	mjtyYNLkaNq9YRRtQyq8AdnddNj2GedisAWeO4ZggialQfZOZaW3HG4Rut+y/aUa
+	fUuSfQ==
+Received: from mail-pj1-f71.google.com (mail-pj1-f71.google.com [209.85.216.71])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gmywh3cb9-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Sun, 13 Sep 2026 14:41:08 +0000 (GMT)
-Received: by mail-pg1-f198.google.com with SMTP id 41be03b00d2f7-cb835525b10so3036182a12.2
-        for <linux-arm-msm@vger.kernel.org>; Sun, 13 Sep 2026 07:41:08 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Sun, 13 Sep 2026 14:41:14 +0000 (GMT)
+Received: by mail-pj1-f71.google.com with SMTP id 98e67ed59e1d1-39de4e72b33so14556a91.2
+        for <linux-arm-msm@vger.kernel.org>; Sun, 13 Sep 2026 07:41:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1789310468; x=1789915268; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1789310473; x=1789915273; darn=vger.kernel.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=x0uly6JHLnN++DMu29WEaZNFPjIiWYw6gQfnWNoZwd8=;
-        b=KLxBNbJQtEob6ypPifc8lhj2eQVNXZUr3tDa8lgvCWPqeplJR7wgCzvzxPcJ5tN6LI
-         NAE+4cB/IUpSQ3e5XmVo3SiONR6/PzceMMviXDCF3g9rz4SW2lmIpopU5v2fuQIqVL7s
-         ORYNYth6nsdeN2nBfOBBwn3FL9TCE9yCY3+IKTgUvJCuQWICEV/gkaXNm/Hhj1qTKp6G
-         WyjX9Wom8g1RJJnws5WlxMt2LpbVfxz9FJ1QVCif6XX7zWBvGLcmemIhD5I5kIcLYuNn
-         BKEXhxN7vjIhXW7iXLYmaofD+Ek1FyETzNU6UkNrrQbLooz5ymUyKTSDLFwWWMVT3POJ
-         lPUg==
+        bh=WmdRTxeOLyf0Pab2r9UoJT0vEIVmxiuf0Wt2l2dbmoY=;
+        b=TANXNwpeKvDG2eQhJEycO+8gNtkr3ibUF9D/xbQNaX/FJT3G9EO1cXt5VoPuPp4r9t
+         5Owd7Hf+NrD4jVboslqKctQOVNosaENiQe0+7KMSWcTOb6+kalMjGEm+jHde/d6ckAg/
+         2k2rZXYV6qdIUfqsYkQ/OGfriJiCoqXLhvVRAp6S9ZDVNca/oXVd3xpKuoYuIdqUpElH
+         13sIZHPBomJP95aqfxwDAOa1FSfpRcHK97mkzo/ahhRCz6vshxdDoG3mselY6lG+mozs
+         RcazHiBFZoHEWdnUAh1EpdTdhite9bB3ef37jADGwvn3f0xpbQyuBiz8CFUkdIk+uwSB
+         99Jg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1789310468; x=1789915268;
+        d=1e100.net; s=20251104; t=1789310473; x=1789915273;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=x0uly6JHLnN++DMu29WEaZNFPjIiWYw6gQfnWNoZwd8=;
-        b=fb/rWm5Nsg41FUJ33KQy5T/g8+A2L1gcogOX/nNvLA2AvL1QE58LN4aUE/g8ZMIaXa
-         xdd75qVwkEaQTuQfdRK+LvNlHmeHAn6J08pbS5zVfzyNRX5/AY/kr+kdGUxfci+BQprP
-         3vxznIdA+ctyb2tNZMOrIiRpCMyW08GMACXU9YfEi4VNksfxEaYimqbYMzoTNA59z3I7
-         UJ1YR2IigYLkix47oa1xwMtB0ijQDGXBQDFFyqZn/SS3OQvU1mZhpL0mk0c2JKa+RU10
-         Jp/rCA08UhhiFYFT5DKJl6bbY/kH0dLcJ3mv/nyIjj3AQeSaMmnVBwvSS5FVU5aMDW2G
-         l1Sw==
-X-Forwarded-Encrypted: i=1; AKwUvBxfAi7DRRLB3nwHbHP0yTVxan+Qdla0FncVujEa3uSG3zWLnU9/PmLwv9z3KgwQQGqsIJSkgTb7h/BIXj+4@vger.kernel.org
-X-Gm-Message-State: AFuF++kFYXll/waHRGQ0qxUpkIA7MruKRz5De4RXBU9onN0/ml33NfkA
-	Yk4+XnaiWnVVK2/SFiLmrbf4ipvceEJTV2NgsMIQkdwFnRGP/3VjLMlAP+0Rx/QdW8Su+4FaYWh
-	xvIcisfnq39E61tNeYul7OMLm7aTHiUYlwI/rMp0xzsUJSZ6lJinm7o42tFgUkCIsqPXR
-X-Gm-Gg: AYBFou3mszwUZOQV4t7bPSWklBAps8LFQYh4MRyc6Mge/bYSNjAkT/AfS2DXBv7uK3U
-	mkvpYPTKVGpGLHkmw/+3WfKF6gzj8FxyY6BhOi26Yq2A3BrFECR03g/avy3fJ/eebydv2bkhPj9
-	YxZd4B7MxPjsjZvzbQF+vA3V5ZB2CXC5g5aofErKdNY8Wp8P2gZFtNyWJ4QcyZ2CEHiuCQhTmRZ
-	X+j1IIaW5v4Z45v5K/pPEXCqlYwA2Ied8kyBR1kw1XLx68B9bki9zFAjYFNf6ahmOluE6daIgbp
-	/0w2k4tYmS5AS8/U+gOgueO37UInAQRKtBpGTKttjKQXvHckqgXQV+KAn4QjdHRQlEpaJVKu9Nw
-	FnetrZVebESoICBCZfJRh4lK/OcdmHxjNh546cX+rzacBuoYAEIs2Z4AkOhvNaRz1yTWdqw==
-X-Received: by 2002:a05:6a21:32a9:b0:3da:e7dd:45d5 with SMTP id adf61e73a8af0-3db0e485c2emr13344578637.20.1789310468302;
-        Sun, 13 Sep 2026 07:41:08 -0700 (PDT)
-X-Received: by 2002:a05:6a21:32a9:b0:3da:e7dd:45d5 with SMTP id adf61e73a8af0-3db0e485c2emr13344493637.20.1789310467806;
-        Sun, 13 Sep 2026 07:41:07 -0700 (PDT)
+        bh=WmdRTxeOLyf0Pab2r9UoJT0vEIVmxiuf0Wt2l2dbmoY=;
+        b=BU1dEcDEbhD9/L5SiI3qkS2MOcX4QwiJUHvEVqktWDzyu64FEfxOjgIGTGYvQ3tc9E
+         Dp4xOadw5T9MbcQl2c7a3sDPasWTiqtlFnGNU0XmAeY02RIVwBgmKeaDBaIeOqzmhn7t
+         wwlirA8Dn/L7pc6iDqO2hBjY+S2tApp9IPBT8GvPRD8dv5NC6FH1Aa+W52K0i2skvS5z
+         QxhQhQPIm91wL1IGFNnzxPrAM7KtCb9I+3aEJcLGRnysvvv+IxyO0Z/SoEO4r3MJ241w
+         00hdY4SlzTi0rSieGFBsI4EOzOTct3lbw+4zRs9L+/FkgFDiGObAgjbTPPRyxTNC62qa
+         Iqrg==
+X-Forwarded-Encrypted: i=1; AKwUvByPHIRVvfct0dKcdQKvVPVqmKpcmWT0bMSlPL8XKdr9zH7ScGCWy0dXukdRKw9VlW83hZTB9WB/js0jIYGw@vger.kernel.org
+X-Gm-Message-State: AFuF++mjn8AOkyCtKgVNejHPQaiO4pYTJX+e+N05Ayk0Mki+k/NDKEFf
+	77MdESQgUYp2hZXbatyqPYH+m05TXPXOLUXFLMjUcj+Po6FPx4EL9u7jT/IfJ5RDhXmuDOmj6zI
+	5bNeWkUVUnNENIk7O119vrTqmtZUC0878gNzqBB5KpXANC2xgtMAPi8+aJ345DsTbFwa2
+X-Gm-Gg: AYBFou2UgxRq9EvGKc+D5Vrc0xyZexCy/BBMYDkjg49oXHr7Q3kSj6OGrwv5VT962M1
+	rQYgBCrqmhsDovGGkfAz2rnl2KdKHjWMQoCE/Ib0tfNgK3ugBMlE+MhXZlEG+LDq44CD31TBYQC
+	dBDcKpTc2erCI3jkVsEmfdiFvrtltwkq0RKvWnjbtVFmD7toecW68eyygq1IPpYALRctS7CjIuB
+	FrDX8FEOcZZT16TTrlpGOZBrqDTpTfrQcrFHCNARrPDWy/I3RsD5Z3V4VLpz2USU6LQfowcWuuw
+	8rFIcB4ugWkLMpgAWWpENdD3BVNRJW6Lk5ghLEonU5Z903fWRWBuCHEV0MVdXLlaNUgPZHCgKEZ
+	1xA30eC9wy9IMdRpqZL6VG1LrFD15RnZKdV12W87vPvM3JEBmEcP9KoHTUA+h00pSDycddw==
+X-Received: by 2002:a17:90b:1d51:b0:38d:b36e:9813 with SMTP id 98e67ed59e1d1-39dbc1d770emr13606719a91.11.1789310473430;
+        Sun, 13 Sep 2026 07:41:13 -0700 (PDT)
+X-Received: by 2002:a17:90b:1d51:b0:38d:b36e:9813 with SMTP id 98e67ed59e1d1-39dbc1d770emr13606659a91.11.1789310472987;
+        Sun, 13 Sep 2026 07:41:12 -0700 (PDT)
 Received: from hu-kriskura-hyd.qualcomm.com ([202.46.22.19])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-14382741839sm2904705c88.6.2026.09.13.07.41.03
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-14382741839sm2904705c88.6.2026.09.13.07.41.08
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 13 Sep 2026 07:41:07 -0700 (PDT)
+        Sun, 13 Sep 2026 07:41:12 -0700 (PDT)
 From: Krishna Kurapati <krishna.kurapati@oss.qualcomm.com>
-Date: Sun, 13 Sep 2026 20:10:45 +0530
-Subject: [PATCH v8 2/5] include: linux: phy: Add phy attribute "type" and
- associated helpers
+Date: Sun, 13 Sep 2026 20:10:46 +0530
+Subject: [PATCH v8 3/5] phy: snps-eusb2: Set phy type to EUSB2
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -91,7 +90,7 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260913-eusb2-interrupt-v8-v8-2-0f505b9c394b@oss.qualcomm.com>
+Message-Id: <20260913-eusb2-interrupt-v8-v8-3-0f505b9c394b@oss.qualcomm.com>
 References: <20260913-eusb2-interrupt-v8-v8-0-0f505b9c394b@oss.qualcomm.com>
 In-Reply-To: <20260913-eusb2-interrupt-v8-v8-0-0f505b9c394b@oss.qualcomm.com>
 To: Vinod Koul <vkoul@kernel.org>, Neil Armstrong <neil.armstrong@linaro.org>,
@@ -106,125 +105,65 @@ Cc: linux-phy@lists.infradead.org, devicetree@vger.kernel.org,
         Krishna Kurapati <krishna.kurapati@oss.qualcomm.com>,
         Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1789310452; l=2358;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1789310452; l=918;
  i=krishna.kurapati@oss.qualcomm.com; s=20260707; h=from:subject:message-id;
- bh=Dx3ovNJlM9aS0KyPy/KkFqWuw6/wLLR7Yg/2GW2PrQc=;
- b=aD1Pl6wzsZlO8t0tJjp6+liaW2VZ55woEjDK4YgYpMdoEpojaDpkr2nuVijBQkLErVGWgXfUT
- r8s3M5rlZuLDT4F1E2SJuiyt0DwY4f+4hhOK9s1OzuzyzyemFuCuqXf
+ bh=9HkS3wxfvgP0/0gQboWN88Ps/r7tlaD0hKV9cwObfFE=;
+ b=hFTLP85/zIcgbaptlBh/BmvV3xuqMw0s+k6Ph6T8oM3NL+PnmNbm/0eEaDDFGvOmPncgOywup
+ G2OVf7ppvxKAuafSuanXxZkWqHK9043pYh8jPNfg8ErIs729ddDDvQo
 X-Developer-Key: i=krishna.kurapati@oss.qualcomm.com; a=ed25519;
  pk=6PmiuwGCdov3wRO+bdmRlRxRtmJyDKz3ED57LLPVgds=
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTEzMDIxMCBTYWx0ZWRfX5aLgXnCv6fZ1
- 3PkvcFr8uaNplts/rn89dacpo8UfXAiagAdauGVRqBnlJVy2LHFEysny7W0FtaEzGN/kvp1o0Uu
- T4SIYGPBBWY9XnHrzP7e67aLMfGn8m4=
-X-Proofpoint-GUID: eM88MzOABq7EU1YZtsBMrSAx11O4JOeZ
-X-Authority-Analysis: v=2.4 cv=BdZNQbt2 c=1 sm=1 tr=0 ts=6aa6b605 cx=c_pps
- a=Qgeoaf8Lrialg5Z894R3/Q==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
+X-Proofpoint-GUID: ZW4jyMNd3LPz4uWRNXDBam5wzLHQKKsf
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTEzMDIxMCBTYWx0ZWRfX6QuCroHksoNx
+ 5PWTBByNCAqlSTS4ql6A70PRM4KHQNFl+NRyQkuncfTwIh/h9szx5it/C90/Sp9IzZVnIifTSSF
+ vgUSKn9mHSFcslK5KcILuQazpU/9u/TV9suuX5YKZvjGLZf/KmUmWwNHaskFE0YLZK0TFYZQtIU
+ QEh+QJFg0NrHCKPqREOCyHj1++HAcIuMdPEQTDUqZ0f+oIZXcLLY2+TTFFjBPVnRwnIVljxzlCZ
+ F2ML2C6mD0FVTHRitZQaceI9uE8y6lUeVVRJyBBfGs94vMpMd1F9xfsxzg57eKNuB3qw/8KTNKE
+ X3Uv2fGLJmF4xPTSSXQuJqYlApkrW2k22L/E3SNDT+WuvEuqy14fzkCxl1UsWx537vqioY4bdoe
+ AK45ewA4bfPPno1GIOrYoozOhI7TN1DBqFvz8zh3VM2U6CHLMXAREBWL+QlH7lVcrs2mmWjNsUd
+ pPlECD5CiRXGQPXwdMQ==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTEzMDIxMCBTYWx0ZWRfX1Go1nplymOAF
+ ALuNY/M1H+2TcZuMVsCRGVBO5N2IWbv+MxRy1a0VzDbh0ZfOtgdopbf9aFwqa1dV/92KTlvz6zD
+ JrPL4Bkim9XIt3DN1VrYBd9MazldYOc=
+X-Proofpoint-ORIG-GUID: ZW4jyMNd3LPz4uWRNXDBam5wzLHQKKsf
+X-Authority-Analysis: v=2.4 cv=PsUG/AM3 c=1 sm=1 tr=0 ts=6aa6b60a cx=c_pps
+ a=UNFcQwm+pnOIJct1K4W+Mw==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
  a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22
- a=jIQo8A4GAAAA:8 a=EUspDBNiAAAA:8 a=YrurubeZKOWHlXb_luAA:9 a=QEXdDO2ut3YA:10
- a=x9snwWr2DeNwDh03kgHS:22
-X-Proofpoint-ORIG-GUID: eM88MzOABq7EU1YZtsBMrSAx11O4JOeZ
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTEzMDIxMCBTYWx0ZWRfX7hn68q4oAwyN
- QVO+h2rX0LMv22rtLHtTH4sTPgMy3tOuO6SUc0i6c+JGXr6y8/hYF15zDEY/bFk5Yu2+3Ius5KQ
- 6il1H5LyoLH8VniyEsb4UeVpquzdxFdmwR/1Ct+0nYgIx6W59exrmpo7ltugMT8To/A2av7llQH
- Zrrpsxvf7+SIq85loFKNomxQFi7RddovxwOSbPOO/5NmcDTsxwuSDwCqrqaqSga6NNuMElIRcT7
- g/4dhE9tsr1IrdYjLjfwq6btjHmTyUF3uXBHtkmoYXv3a8w91zgRPkm5+ouaT3jx9dEkOZCRZzZ
- NYNerguq2RZTjxTWwFoDrx+i2XaOEb8kRRvucJZMH7w/eMDpQ5FJJu47aAPqNcxmP8u2B+zzXB7
- NqCYltk5TeKf+Z/vN0mZZSNS6JDwxd6b0g+ckdI5cu5l4/3cgzSUtef1sO7md6XWZMC2e7oRwcn
- ZJebHbCpyog5BnQWMeg==
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
+ a=jIQo8A4GAAAA:8 a=EUspDBNiAAAA:8 a=ugjOiUgvsQrqGD8bgbUA:9 a=QEXdDO2ut3YA:10
+ a=uKXjsCUrEbL0IQVhDsJ9:22
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-09-13_05,2026-09-11_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 suspectscore=0 adultscore=0 malwarescore=0 clxscore=1015
- spamscore=0 bulkscore=0 lowpriorityscore=0 phishscore=0 impostorscore=0
+ impostorscore=0 priorityscore=1501 suspectscore=0 bulkscore=0 spamscore=0
+ malwarescore=0 lowpriorityscore=0 phishscore=0 adultscore=0 clxscore=1015
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609130210
 
-In cases like USB High-speed phys which can be either USB2 or EUSB2, it is
-required to know the type of phy (rather than the operating mode) because
-DP and DM interrupt lines need to be configured differently for each of
-them.
-
-Add support to cache the PHY_TYPE and add the following helpers:
-
-- phy_set_type() for the phy drivers (like m31_eusb2 or snps-eusb2) to
-declare what type of PHY they are (in this case PHY_TYPE_EUSB2).
-
-- phy_get_type() for the consumers (like USB controllers) to query the
-type of phy connected to them.
+USB controllers like DWC3 are agnostic of the kind of phy (USB2/eUSB2)
+connected to it. Set the phy type to EUSB2 to let the controller know
+the phy type when queried during its probe.
 
 Reviewed-by: Thinh Nguyen <Thinh.Nguyen@synopsys.com>
 Reviewed-by: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
 Signed-off-by: Krishna Kurapati <krishna.kurapati@oss.qualcomm.com>
 ---
- include/linux/phy/phy.h | 27 +++++++++++++++++++++++++++
- 1 file changed, 27 insertions(+)
+ drivers/phy/phy-snps-eusb2.c | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/include/linux/phy/phy.h b/include/linux/phy/phy.h
-index ea47975e288a..038c2b58bbe1 100644
---- a/include/linux/phy/phy.h
-+++ b/include/linux/phy/phy.h
-@@ -21,6 +21,8 @@
- #include <linux/phy/phy-lvds.h>
- #include <linux/phy/phy-mipi-dphy.h>
+diff --git a/drivers/phy/phy-snps-eusb2.c b/drivers/phy/phy-snps-eusb2.c
+index af4fa17ac6cb..ab405108c727 100644
+--- a/drivers/phy/phy-snps-eusb2.c
++++ b/drivers/phy/phy-snps-eusb2.c
+@@ -596,6 +596,8 @@ static int snps_eusb2_hsphy_probe(struct platform_device *pdev)
+ 		return PTR_ERR(generic_phy);
+ 	}
  
-+#include <dt-bindings/phy/phy.h>
++	phy_set_type(generic_phy, PHY_TYPE_EUSB2);
 +
- struct phy;
+ 	dev_set_drvdata(dev, phy);
+ 	phy_set_drvdata(generic_phy, phy);
  
- enum phy_mode {
-@@ -152,11 +154,13 @@ struct phy_ops {
-  * @bus_width: Data path width implemented by PHY
-  * @max_link_rate: Maximum link rate supported by PHY (units to be decided by producer and consumer)
-  * @mode: PHY mode
-+ * @type: PHY type
-  */
- struct phy_attrs {
- 	u32			bus_width;
- 	u32			max_link_rate;
- 	enum phy_mode		mode;
-+	int			type;
- };
- 
- /**
-@@ -262,6 +266,20 @@ static inline enum phy_mode phy_get_mode(struct phy *phy)
- {
- 	return phy->attrs.mode;
- }
-+
-+static inline int phy_get_type(struct phy *phy)
-+{
-+	if (phy)
-+		return phy->attrs.type;
-+
-+	return PHY_NONE;
-+}
-+
-+static inline void phy_set_type(struct phy *phy, int type)
-+{
-+	phy->attrs.type = type;
-+}
-+
- int phy_reset(struct phy *phy);
- int phy_calibrate(struct phy *phy);
- int phy_notify_connect(struct phy *phy, int port);
-@@ -393,6 +411,15 @@ static inline enum phy_mode phy_get_mode(struct phy *phy)
- 	return PHY_MODE_INVALID;
- }
- 
-+static inline int phy_get_type(struct phy *phy)
-+{
-+	return PHY_NONE;
-+}
-+
-+static inline void phy_set_type(struct phy *phy, int type)
-+{
-+}
-+
- static inline int phy_reset(struct phy *phy)
- {
- 	if (!phy)
 
 -- 
 2.34.1
