@@ -1,404 +1,780 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.14])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C204B4746DD
-	for <linux-arm-msm@vger.kernel.org>; Mon, 14 Sep 2026 13:01:57 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8EA75471CF7;
+	Mon, 14 Sep 2026 13:10:26 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.14
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789390919; cv=none; b=H7kqb/sy3znPo2jOS52s0s4XSH5IiimJ488y2TlHa1UMpVJGGkqGODEwkdmcVkk3T1KqSkeUGmMr1WhR7x+REOBxwoNXAG+TVlZQGVFDK/bP5KbW1yDcWV5GahlrrsgVnE82wMPgBiL5bQznG/aK3V8SwycF5oohWlfLPFU2alM=
+	t=1789391429; cv=none; b=DZcmdr3334E+cj5zfQgg6To6FK3uJAwU71BakHGmsb0awtxfd20TVgvZS2UPlYv52WBQZlaoN5mX2gSDPyNi1v/V4ufFwuU/oKZgG+E/ikXP75AAvG96leJCbeHWAripwCl+JbzkuBwCFMjnzbJNji9U9qdpn0eHobjnYF/l/KQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789390919; c=relaxed/simple;
-	bh=emTQjKtF958VuRYhFu2t9A64DPRu8dA2BOz/r6vU5yk=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=o0utWc0V4s2wESLfzkiHFJweqQAh2I6ZazhUaDacHVPshwKcA+4/NRD5u/F2xMAq2UUiOTGHx8i8MVDb2uonxcK0iDZ3xhJ/R5+eflqXBl1EoDfWQcwISgtxcgUN5IK8foC1GdyNe7YBGUhbqL2RNZ1w3VtbzMVaAJxJwFIxYN0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=lyCgRki6; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=BzQtdcR1; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1789391429; c=relaxed/simple;
+	bh=uCqDim5/bbKRkWe/i7i6nJ3bw0q8hISDo5pOEmy+8ik=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=s9GHl5lJtDKv+AVQKwnGff4DwDojbL5e2YApLiwrA2icCIXcXE9M/ML76afI3uth+Ki11igR3i6AVIjdNMiQr23Phpbs64I+Xt3ft1IQ7dZhHD+9wOYqG/EKPQnB23KjPxmSx0vGDsrn9aVCMWh4y/wwXkYvf7HqT4bFERE7YNo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=pass smtp.mailfrom=linux.intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=GAQTDJbW; arc=none smtp.client-ip=192.198.163.14
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.intel.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="lyCgRki6";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="BzQtdcR1"
-Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68ED0URJ1514397
-	for <linux-arm-msm@vger.kernel.org>; Mon, 14 Sep 2026 13:01:56 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	lRz6VHQGiykBa0i3ogC19Dh3CgFydt4OqqNuW0NHehk=; b=lyCgRki6e0lUGktd
-	yOtDT/frP3tsimy95ST03kDn1/kxwUKrg37b30xTJjEVicA2/2nERpECgbAlxFxV
-	RLrZwh1yqHGIq66ouWCrCQBNl4FcKU8d8lBxSeO11tEyiMIMJ1jd1oSONrEPTbZl
-	YTgz1SUVVc0GWUEmi8X9WjDlsO3U7TB0KE+PrKZC31xo2Vv7xh57hQispjMEBKr0
-	MkPDUp2ncKrBulrkFo2F8p6Cc2BQa+cCfHc7nrc53vwuqpXJGRRWW4JBRt4KpvEW
-	E4VM98n4tywJYX8WqrvGp4oldF6kxwNEgPl9Q+QvLafKd1dzKg7QX48hk097dymj
-	uDBjMg==
-Received: from mail-yw1-f197.google.com (mail-yw1-f197.google.com [209.85.128.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gp3k0ak55-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Mon, 14 Sep 2026 13:01:56 +0000 (GMT)
-Received: by mail-yw1-f197.google.com with SMTP id 00721157ae682-8789206f693so46394707b3.3
-        for <linux-arm-msm@vger.kernel.org>; Mon, 14 Sep 2026 06:01:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1789390916; x=1789995716; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=lRz6VHQGiykBa0i3ogC19Dh3CgFydt4OqqNuW0NHehk=;
-        b=BzQtdcR13tq8ClUWYM7xGC227+9riOUZcFrNTR4iAPei2k6MMkYOHzkhtPsOp2HKvT
-         iMy9TEdjjK4DGhSxggg+xy7TxovRo+E5yw8AosMziFAZwRBY6KXVk/6N4rsJNwxq1ais
-         mrm++hXgkGLxVRQNNJnO1Vp18qYsb/TKr5Rq/SRDBTxeXvt6i5an6VzqswDSfckfP/fb
-         AHUOoO6VgtRFVf4qD70iCIajkD1wKKLLNlbZTrpRbeUfgoj7N2/lQqDk8nd+EtA7JrKo
-         f/DAtAy/q9slZzm9uXA3s1rJzzdA6O8KbdCPIbri2NvtCaP2GKsJeCw0/uy4rVTh4HE1
-         oScA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1789390916; x=1789995716;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=lRz6VHQGiykBa0i3ogC19Dh3CgFydt4OqqNuW0NHehk=;
-        b=VqVjcc1Z9rG79J/t36+kn/aG0uGlsWlkD8TvMHrU5sEfXUcQHNSJYOk3yxWvW265Aa
-         wncMmP3cHIXCmezQoV8NxHfnAmxgzqX/iUDf/0Y1Yn5rNfeiKP263d8xo7wlEcG9HMn+
-         Oy7WtJM2TePjwbpzeeMy8mQpCYNzQokFv0eqg9NCB+zeHvxE4BtTjVq3FgJIcvE0Y7mj
-         YR1lHlj1rqwDi2AKvBv7h73rFsArlhUhd1jBlcYmL4pHVGblcPei3opaecmh9jDaocuI
-         OFUM0COpfs/gPdAzAqRW4xLGxYvDfE7wDFv9TXy/w9ToYi7YVp31tzWvZIRBZwc8Bwgr
-         DYHw==
-X-Forwarded-Encrypted: i=1; AKwUvBxHaMb2b3ZdK8tvYZqlCDOarQs8YJm3Pa4khG98EAiTPTxVHftQYNEb0wLRt+ppG+w8bPJ6K61+uPkKkRAI@vger.kernel.org
-X-Gm-Message-State: AFuF++lTs9IPEQGeyLcPZeCEfelrZHCa/0KrLO/vf9rJkzsYpwVJDlVq
-	M5cBimXGDz0CfhfKMUQDwv/0ep2VilMbhDgAsxEwU4RHQzrXn6609cSq7+pC42GZ1MEr32uHltc
-	XbnxdGDBQEJYRVms7mxXXgWN1C8U1L5kywbgQkkNkP+GmAp/ximGBmlwKMF0p0ssg2LnV
-X-Gm-Gg: AYBFou381uNypVhlK3tJPSuQTwELODmRXfmj+QfW3W1Uj8bEGl3sF3AyH0r+qkwikJb
-	iOe6FBTwHimJpj1KL2rRMSPMlNpDbLa5IdxpGI7exvi55mlpnbvKYEUmWlRt/C/sKZ8e83a1GTi
-	VePisDTkkxkwrLZ7FBW3noTeI8P6a6I+qDrzgQx6z6moHMOVTvWmiONUYokn+w9cpW9w/iFqBhL
-	gvV2eWNZhK/k4QnInGBLkgd3Xu5h2pNpfRBDTDO3qknSCj20BdsZ9zeMGdtwzRTfftwPdMp/9i4
-	lbGeIKaDBVz1i4po7sCLxIfz820Jpve/iicqtjq/RU+GJs1R9PrI0WDlMtJrrqlonwEVLDDs71M
-	zEOMrdFVN5YXfO22rPP1y8q0l7ZVeiDr2TngyREU4qvsgyvM/tGpHZrzDCiMIiIPgyqnblRqN4n
-	E=
-X-Received: by 2002:a05:690c:580e:b0:873:5ddf:d875 with SMTP id 00721157ae682-88d235a5bddmr4653547b3.64.1789390915330;
-        Mon, 14 Sep 2026 06:01:55 -0700 (PDT)
-X-Received: by 2002:a17:903:2442:b0:2cf:b68a:340 with SMTP id d9443c01a7336-2dd6c6e2c10mr51107335ad.10.1789390849810;
-        Mon, 14 Sep 2026 06:00:49 -0700 (PDT)
-Received: from WANGAOW-LAB01.ap.qualcomm.com (tpe-colo-wan-fw-bordernet.qualcomm.com. [103.229.16.4])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2dd2ceb6861sm47434965ad.36.2026.09.14.06.00.45
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 14 Sep 2026 06:00:49 -0700 (PDT)
-From: Wangao Wang <wangao.wang@oss.qualcomm.com>
-Date: Mon, 14 Sep 2026 21:00:25 +0800
-Subject: [PATCH 2/5] dt-bindings: media: qcom,maili-iris: Add maili video
- codec binding
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="GAQTDJbW"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1789391427; x=1820927427;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=uCqDim5/bbKRkWe/i7i6nJ3bw0q8hISDo5pOEmy+8ik=;
+  b=GAQTDJbWAP5sgQ07cPp3EUfgRu3bzFG25d/zWpj6N7GjpJg1o7O43kyY
+   mRV3fDxAz9FTPuXsAKt0wSxESzqiq9RamhT0hmwh2ncuOtVvXzSkovOVK
+   sP8/sAjn5Wp92oHueqnPUYxOcAqDS3C8QaKnqobAn8dsEMH/rjc5HjT3y
+   SDvhz7xoVcpr+rH66Rw+2n679eDAnNJSNtOTsURqmkXP5sVyFyNrgsgyw
+   FZDjcbGnDAweb/K7eNtaf4VGbpW6vP/l8XV1UCUjlNnupMBEMQhomRw9U
+   UauAxEry+lGD6YbipadDuQy4N0yn/IT+Pb23Esl+giivAkTjcG5rYTWBb
+   A==;
+X-CSE-ConnectionGUID: BxI0TwpkQ0WfZDoJA5D1Hg==
+X-CSE-MsgGUID: X5FeKEbyQCmBpkB3+X7dMA==
+X-IronPort-AV: E=McAfee;i="6800,10657,11904"; a="89753669"
+X-IronPort-AV: E=Sophos;i="6.27,102,1787036400"; 
+   d="scan'208";a="89753669"
+Received: from orviesa001.jf.intel.com ([10.64.159.141])
+  by fmvoesa108.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 14 Sep 2026 06:10:26 -0700
+X-CSE-ConnectionGUID: bWkAYvPhSiWPoNcsK4Brig==
+X-CSE-MsgGUID: GtrC2GHJR0Kjl4ddt5sAoA==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.27,102,1787036400"; 
+   d="scan'208";a="310913018"
+Received: from black.igk.intel.com ([10.91.253.5])
+  by orviesa001.jf.intel.com with ESMTP; 14 Sep 2026 06:10:23 -0700
+Received: by black.igk.intel.com (Postfix, from userid 1008)
+	id C3CE499; Mon, 14 Sep 2026 15:10:21 +0200 (CEST)
+Date: Mon, 14 Sep 2026 15:10:21 +0200
+From: Heikki Krogerus <heikki.krogerus@linux.intel.com>
+To: Shawn Guo <shengchao.guo@oss.qualcomm.com>
+Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Bartosz Golaszewski <brgl@kernel.org>,
+	Krishna Kurapati <krishna.kurapati@oss.qualcomm.com>,
+	Uwe =?iso-8859-1?Q?Kleine-K=F6nig?= <u.kleine-koenig@baylibre.com>,
+	linux-usb@vger.kernel.org, devicetree@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
+	Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+Subject: Re: [PATCH v2 RESEND 2/2] usb: typec: Add onsemi FUSB15201 driver
+Message-ID: <aqfyPQ8bxxvBEB_3@black.igk.intel.com>
+References: <20260911073414.16711-1-shengchao.guo@oss.qualcomm.com>
+ <20260911073414.16711-3-shengchao.guo@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260914-add_iris_for_maili-v1-2-09df2b54c317@oss.qualcomm.com>
-References: <20260914-add_iris_for_maili-v1-0-09df2b54c317@oss.qualcomm.com>
-In-Reply-To: <20260914-add_iris_for_maili-v1-0-09df2b54c317@oss.qualcomm.com>
-To: Bryan O'Donoghue <bod@kernel.org>,
-        Vikash Garodia <vikash.garodia@oss.qualcomm.com>,
-        Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>,
-        Mauro Carvalho Chehab <mchehab@kernel.org>,
-        Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>,
-        Stanimir Varbanov <stanimir.k.varbanov@gmail.com>,
-        Abhinav Kumar <abhinav.kumar@linux.dev>,
-        Hans Verkuil <hverkuil+cisco@kernel.org>,
-        Vishnu Reddy <busanna.reddy@oss.qualcomm.com>
-Cc: linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-        Wangao Wang <wangao.wang@oss.qualcomm.com>
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1789390835; l=7864;
- i=wangao.wang@oss.qualcomm.com; s=20251021; h=from:subject:message-id;
- bh=emTQjKtF958VuRYhFu2t9A64DPRu8dA2BOz/r6vU5yk=;
- b=yHUXyrdeohNAMUShXLAoxEhjQGHj3fLl2f2QRkLimgobydlk0aqkWasPssOHb1Y96UPFRwkb3
- GCc3OCm5VY/DyxHZbUAVD8a1Z9cvdqBv226fei/qQzkx0pW1+Fr29tj
-X-Developer-Key: i=wangao.wang@oss.qualcomm.com; a=ed25519;
- pk=bUPgYblBUAsoPyGfssbNR7ZXUSGF8v1VF4FJzSO6/aA=
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTE0MDE4NiBTYWx0ZWRfX2GdN79n+Lfu/
- dNfstCHa9OwXsQYsc4Ba5v8HfLas5juRQD36uSWMIbVbOaGbMYLORibXztkKKZBQx7lTBW4EVFW
- hlL4RkNKFPve/7+JgSSl/b8bhrXx7bg=
-X-Proofpoint-GUID: iuW3R8-C-mNyJv5_g1MC9HV-HhkSbxVK
-X-Proofpoint-ORIG-GUID: iuW3R8-C-mNyJv5_g1MC9HV-HhkSbxVK
-X-Authority-Analysis: v=2.4 cv=BtAIUoX5 c=1 sm=1 tr=0 ts=6aa7f044 cx=c_pps
- a=0mLRTIufkjop4KoA/9S1MA==:117 a=nuhDOHQX5FNHPW3J6Bj6AA==:17
- a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22
- a=gEfo2CItAAAA:8 a=EUspDBNiAAAA:8 a=4rOvIeOAciRA3S1PgUQA:9 a=QEXdDO2ut3YA:10
- a=WgItmB6HBUc_1uVUp3mg:22 a=sptkURWiP4Gy88Gu7hUp:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTE0MDE4NiBTYWx0ZWRfX5+k2oSWyG1w/
- pPcyc8+mH4cT8ZxpxxLX4k43sfCzUi5+++wzwSDe1J5GROde2KPN6zSk7ipsFmdyTn5Qgxh5Ei3
- YbPvd67bu0rsHAjerUSy/jRU3P3XqeCxKq+GYK6yBjku1PyLRZuugwyR9/WMzcO+Fs1G4rFfzxy
- Vwd5NnPaJdDJfKxZ1qHhPVSYImnH5bo0h6bXwkJULBNW/E8TJmiKKQfn8xmq/63+2A/w4rlqh4z
- zqsCGVW7dAb2Fy/MQUb8KuQ46Ztko6CW5oUMVvvLmZlEAqgB35os8t245lndeTrjqUTVCX56dJW
- iapaOd6to28s9a1L2MfO8pB/zxkFpifCM33bVq1adDBpXYV9fYJ+3g16X+7IuUf7u4Ov3f/Z++j
- up66DpDB7ZyPXvxzTpzSmvXiRUaNI044ys82rG7JYlF1enRLYKl6jgliQdyL5PZs5sVSE92OCJp
- cW/ggZvT8nOSRgcG06g==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-14_03,2026-09-14_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 spamscore=0 phishscore=0 impostorscore=0 suspectscore=0
- bulkscore=0 malwarescore=0 adultscore=0 lowpriorityscore=0 priorityscore=1501
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609140186
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260911073414.16711-3-shengchao.guo@oss.qualcomm.com>
 
-Add a devicetree binding for the Iris4 video encoder and decoder block
-found on the Qualcomm Maili SoC.
-Compared to the Iris3 generation, this block has
-- separate power domains for stream and pixel processing hardware blocks
-  (bse and vpp).
-- different clocks and reset lines.
+On Fri, Sep 11, 2026 at 03:34:14PM +0800, Shawn Guo wrote:
+> The FUSB15201 is a dual-port USB Type-C and Power Delivery controller
+> which runs the Type-C state machine and the PD policy engine on an
+> integrated microcontroller. The host only observes the resulting state
+> and may ask for role swaps, so this is a plain Type-C class driver
+> rather than a TCPC driven by the Type-C Port Manager.
+> 
+> Register a Type-C port for each connector described in firmware, report
+> attach and detach, orientation, power and data roles and the PD
+> capability of the partner, and drive the USB role switch of the attached
+> USB controller so that OTG role switching works. Data and power role
+> swaps requested through sysfs are forwarded to the controller, which
+> performs them asynchronously and reports the outcome as a port status
+> interrupt.
+> 
+> The controller exposes a per-port VBUS ADC reading, but the Type-C class
+> has no VBUS attribute and nothing needs the value, so it is not read.
+> PD messages, PDOs and alternate modes are not exposed by the hardware at
+> all. The chip-wide MASTER_RESET command would drop both ports at once
+> and has no caller, so it is left alone as well.
+> 
+> Assisted-by: LLM
+> Reviewed-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+> Signed-off-by: Shawn Guo <shengchao.guo@oss.qualcomm.com>
 
-Signed-off-by: Wangao Wang <wangao.wang@oss.qualcomm.com>
----
- .../devicetree/bindings/media/qcom,maili-iris.yaml | 235 +++++++++++++++++++++
- 1 file changed, 235 insertions(+)
+You changed the commit message, and that counts too. This is v3. A
+few nitpicks below.
 
-diff --git a/Documentation/devicetree/bindings/media/qcom,maili-iris.yaml b/Documentation/devicetree/bindings/media/qcom,maili-iris.yaml
-new file mode 100644
-index 0000000000000000000000000000000000000000..58d241999824f3cdc85a1d644200be1e4916e324
---- /dev/null
-+++ b/Documentation/devicetree/bindings/media/qcom,maili-iris.yaml
-@@ -0,0 +1,235 @@
-+# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
-+%YAML 1.2
-+---
-+$id: http://devicetree.org/schemas/media/qcom,maili-iris.yaml#
-+$schema: http://devicetree.org/meta-schemas/core.yaml#
-+
-+title: Qualcomm Maili SoC Iris video encoder and decoder
-+
-+maintainers:
-+  - Vikash Garodia <vikash.garodia@oss.qualcomm.com>
-+  - Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>
-+
-+description:
-+  The Iris video processing unit on Qualcomm Maili SoC is a video encode and
-+  decode accelerator.
-+
-+properties:
-+  compatible:
-+    enum:
-+      - qcom,maili-iris
-+
-+  reg:
-+    maxItems: 1
-+
-+  interrupts:
-+    maxItems: 1
-+
-+  clocks:
-+    maxItems: 8
-+
-+  clock-names:
-+    items:
-+      - const: iface
-+      - const: core
-+      - const: vcodec0_core
-+      - const: iface1
-+      - const: core_freerun
-+      - const: vcodec0_core_freerun
-+      - const: vcodec_bse
-+      - const: vcodec_vpp0
-+
-+  firmware-name:
-+    maxItems: 1
-+
-+  interconnects:
-+    maxItems: 2
-+
-+  interconnect-names:
-+    items:
-+      - const: cpu-cfg
-+      - const: video-mem
-+
-+  power-domains:
-+    maxItems: 5
-+
-+  power-domain-names:
-+    items:
-+      - const: venus
-+      - const: vcodec0
-+      - const: mxc
-+      - const: mmcx
-+      - const: vpp0
-+
-+  resets:
-+    maxItems: 4
-+
-+  reset-names:
-+    items:
-+      - const: bus0
-+      - const: bus1
-+      - const: core
-+      - const: vcodec0_core
-+
-+  iommus:
-+    maxItems: 4
-+
-+  dma-coherent: true
-+
-+  memory-region:
-+    minItems: 1
-+    items:
-+      - description: Firmware-loaded codec carveout
-+      - description: IOMMU IOVA reservation region
-+
-+  operating-points-v2: true
-+
-+  opp-table:
-+    type: object
-+
-+required:
-+  - compatible
-+  - dma-coherent
-+  - interconnects
-+  - interconnect-names
-+  - power-domain-names
-+  - resets
-+  - reset-names
-+
-+allOf:
-+  - $ref: qcom,venus-common.yaml#
-+
-+unevaluatedProperties: false
-+
-+examples:
-+  - |
-+    #include <dt-bindings/clock/qcom,hawi-gcc.h>
-+    #include <dt-bindings/clock/qcom,maili-videocc.h>
-+    #include <dt-bindings/interrupt-controller/arm-gic.h>
-+    #include <dt-bindings/interconnect/qcom,icc.h>
-+    #include <dt-bindings/interconnect/qcom,maili-rpmh.h>
-+    #include <dt-bindings/power/qcom,rpmhpd.h>
-+
-+    video-codec@2000000 {
-+        compatible = "qcom,maili-iris";
-+        reg = <0x02000000 0xf0000>;
-+
-+        interrupts = <GIC_ESPI 238 IRQ_TYPE_LEVEL_HIGH>;
-+
-+        clocks = <&gcc GCC_VIDEO_AXI0_CLK>,
-+                  <&videocc VIDEO_CC_MVS0C_CLK>,
-+                  <&videocc VIDEO_CC_MVS0_CLK>,
-+                  <&gcc GCC_VIDEO_AXI0C_CLK>,
-+                  <&videocc VIDEO_CC_MVS0C_FREERUN_CLK>,
-+                  <&videocc VIDEO_CC_MVS0_FREERUN_CLK>,
-+                  <&videocc VIDEO_CC_MVS0B_CLK>,
-+                  <&videocc VIDEO_CC_MVS0_VPP0_CLK>;
-+        clock-names = "iface",
-+                      "core",
-+                      "vcodec0_core",
-+                      "iface1",
-+                      "core_freerun",
-+                      "vcodec0_core_freerun",
-+                      "vcodec_bse",
-+                      "vcodec_vpp0";
-+
-+        dma-coherent;
-+
-+        interconnects = <&gem_noc MASTER_APPSS_PROC QCOM_ICC_TAG_ACTIVE_ONLY
-+                          &config_noc SLAVE_IRIS_CFG QCOM_ICC_TAG_ACTIVE_ONLY>,
-+                        <&mmss_noc MASTER_VIDEO_MVP QCOM_ICC_TAG_ALWAYS
-+                          &mc_virt SLAVE_EBI1 QCOM_ICC_TAG_ALWAYS>;
-+        interconnect-names = "cpu-cfg",
-+                              "video-mem";
-+
-+        memory-region = <&video_mem>;
-+
-+        power-domains = <&videocc VIDEO_CC_MVS0C_GDSC>,
-+                        <&videocc VIDEO_CC_MVS0_GDSC>,
-+                        <&rpmhpd RPMHPD_MXC>,
-+                        <&rpmhpd RPMHPD_MMCX>,
-+                        <&videocc VIDEO_CC_MVS0_VPP0_GDSC>;
-+        power-domain-names = "venus",
-+                              "vcodec0",
-+                              "mxc",
-+                              "mmcx",
-+                              "vpp0";
-+
-+        resets = <&gcc GCC_VIDEO_AXI0_CLK_ARES>,
-+                  <&gcc GCC_VIDEO_AXI0C_CLK_ARES>,
-+                  <&videocc VIDEO_CC_MVS0C_FREERUN_CLK_ARES>,
-+                  <&videocc VIDEO_CC_MVS0_FREERUN_CLK_ARES>;
-+        reset-names = "bus0",
-+                      "bus1",
-+                      "core",
-+                      "vcodec0_core";
-+
-+        operating-points-v2 = <&iris_opp_table>;
-+
-+        #address-cells = <1>;
-+        #size-cells = <1>;
-+        dma-ranges = <0x0 0x0 0xffc00000>;
-+
-+        non-pixel {
-+            iommus = <&apps_smmu 0x1540 0x0000>,
-+                      <&apps_smmu 0x1620 0x0000>,
-+                      <&apps_smmu 0x1544 0x0000>;
-+            iommu-ranges = <0x25800000 0xda400000>;
-+        };
-+
-+        pixel {
-+            iommus = <&apps_smmu 0x1543 0x0000>;
-+        };
-+
-+        iris_opp_table: opp-table {
-+            compatible = "operating-points-v2";
-+
-+            opp-240000000 {
-+                opp-hz = /bits/ 64 <240000000 240000000 360000000>;
-+                required-opps = <&rpmhpd_opp_low_svs_d2>,
-+                                <&rpmhpd_opp_low_svs_d1>;
-+            };
-+
-+            opp-338000000 {
-+                opp-hz = /bits/ 64 <338000000 338000000 507000000>;
-+                required-opps = <&rpmhpd_opp_low_svs_d1>,
-+                                <&rpmhpd_opp_low_svs>;
-+            };
-+
-+            opp-420000000 {
-+                opp-hz = /bits/ 64 <420000000 420000000 630000000>;
-+                required-opps = <&rpmhpd_opp_svs>,
-+                                <&rpmhpd_opp_svs>;
-+            };
-+
-+            opp-444000000 {
-+                opp-hz = /bits/ 64 <444000000 444000000 666000000>;
-+                required-opps = <&rpmhpd_opp_svs>,
-+                                <&rpmhpd_opp_svs_l1>;
-+            };
-+
-+            opp-600000000 {
-+                opp-hz = /bits/ 64 <600000000 533000000 800000000>;
-+                required-opps = <&rpmhpd_opp_svs_l1>,
-+                                <&rpmhpd_opp_nom>;
-+            };
-+
-+            opp-630000000 {
-+                opp-hz = /bits/ 64 <630000000 630000000 1104000000>;
-+                required-opps = <&rpmhpd_opp_svs_l1>,
-+                                <&rpmhpd_opp_turbo>;
-+            };
-+
-+            opp-800000000 {
-+                opp-hz = /bits/ 64 <800000000 630000000 1260000000>;
-+                required-opps = <&rpmhpd_opp_svs_l1>,
-+                                <&rpmhpd_opp_turbo_l1>;
-+            };
-+
-+            opp-1000000000 {
-+                opp-hz = /bits/ 64 <1000000000 800000000 1260000000>;
-+                required-opps = <&rpmhpd_opp_nom>,
-+                                <&rpmhpd_opp_turbo_l3>;
-+            };
-+        };
-+    };
+> ---
+>  drivers/usb/typec/Kconfig     |  17 +
+>  drivers/usb/typec/Makefile    |   1 +
+>  drivers/usb/typec/fusb15201.c | 580 ++++++++++++++++++++++++++++++++++
+>  3 files changed, 598 insertions(+)
+>  create mode 100644 drivers/usb/typec/fusb15201.c
+> 
+> diff --git a/drivers/usb/typec/Kconfig b/drivers/usb/typec/Kconfig
+> index 2f80c2792dbd..e21854cb89d4 100644
+> --- a/drivers/usb/typec/Kconfig
+> +++ b/drivers/usb/typec/Kconfig
+> @@ -64,6 +64,23 @@ config TYPEC_ANX7411
+>  	  If you choose to build this driver as a dynamically linked module, the
+>  	  module will be called anx7411.ko.
+>  
+> +config TYPEC_FUSB15201
+> +	tristate "onsemi FUSB15201 Type-C and Power Delivery controller driver"
+> +	depends on I2C
+> +	depends on USB_ROLE_SWITCH
+> +	select REGMAP_I2C
+> +	help
+> +	  Say Y or M here if your system has an onsemi FUSB15201 dual-port USB
+> +	  Type-C and Power Delivery controller.
+> +
+> +	  The FUSB15201 handles Type-C detection and Power Delivery negotiation
+> +	  autonomously. This driver reports the resulting state to the Type-C
+> +	  class, drives the USB role switch of the attached USB controller, and
+> +	  allows data and power role swaps to be requested.
+> +
+> +	  If you choose to build this driver as a dynamically linked module, the
+> +	  module will be called fusb15201.ko.
+> +
+>  config TYPEC_RT1719
+>  	tristate "Richtek RT1719 Sink Only Type-C controller driver"
+>  	depends on USB_ROLE_SWITCH || !USB_ROLE_SWITCH
+> diff --git a/drivers/usb/typec/Makefile b/drivers/usb/typec/Makefile
+> index 8a6a1c663eb6..9f3a156d9c9f 100644
+> --- a/drivers/usb/typec/Makefile
+> +++ b/drivers/usb/typec/Makefile
+> @@ -7,6 +7,7 @@ obj-$(CONFIG_TYPEC_TCPM)	+= tcpm/
+>  obj-$(CONFIG_TYPEC_UCSI)	+= ucsi/
+>  obj-$(CONFIG_TYPEC_TPS6598X)	+= tipd/
+>  obj-$(CONFIG_TYPEC_ANX7411)	+= anx7411.o
+> +obj-$(CONFIG_TYPEC_FUSB15201)	+= fusb15201.o
+>  obj-$(CONFIG_TYPEC_HD3SS3220)	+= hd3ss3220.o
+>  obj-$(CONFIG_TYPEC_STUSB160X) 	+= stusb160x.o
+>  obj-$(CONFIG_TYPEC_RT1719)	+= rt1719.o
+> diff --git a/drivers/usb/typec/fusb15201.c b/drivers/usb/typec/fusb15201.c
+> new file mode 100644
+> index 000000000000..897b2fabc449
+> --- /dev/null
+> +++ b/drivers/usb/typec/fusb15201.c
+> @@ -0,0 +1,580 @@
+> +// SPDX-License-Identifier: GPL-2.0
+> +/*
+> + * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+> + *
+> + * Driver for the onsemi FUSB15201 dual-port USB Type-C and Power Delivery
+> + * controller.
+> + *
+> + * The FUSB15201 runs the Type-C state machine and the Power Delivery policy
+> + * engine on an integrated microcontroller. The host only observes the
+> + * resulting state and may ask for role swaps, so this is a plain Type-C class
+> + * driver rather than a TCPC on the Type-C Port Manager.
+> + */
+> +
+> +#include <linux/bits.h>
+> +#include <linux/device.h>
+> +#include <linux/i2c.h>
+> +#include <linux/interrupt.h>
+> +#include <linux/module.h>
+> +#include <linux/mutex.h>
+> +#include <linux/property.h>
+> +#include <linux/regmap.h>
+> +#include <linux/usb/role.h>
+> +#include <linux/usb/typec.h>
+> +
+> +#define FUSB15201_NUM_PORTS		2
+> +
+> +#define FUSB15201_REG_VENDID		0x00
+> +#define FUSB15201_REG_PRODID		0x01
+> +#define FUSB15201_REG_DEVID		0x02
+> +#define FUSB15201_REG_HWVER		0x03
+> +#define FUSB15201_REG_FWVER		0x04
+> +
+> +#define FUSB15201_VENDID		0xaa
+> +#define FUSB15201_PRODID		0x65
+> +#define FUSB15201_DEVID			0x01
+> +
+> +/* Per-port status block, port A at 0x06 and port B at 0x0c */
+> +#define FUSB15201_PORT_BASE(p)		(0x06 + (p) * 0x06)
+> +#define FUSB15201_REG_STATUS(p)		(FUSB15201_PORT_BASE(p) + 0x02)
+> +#define FUSB15201_REG_RESET_STATUS(p)	(FUSB15201_PORT_BASE(p) + 0x03)
+> +#define FUSB15201_REG_FAULT_STATUS(p)	(FUSB15201_PORT_BASE(p) + 0x04)
+> +
+> +#define FUSB15201_STATUS_ATTACHED	BIT(0)
+> +#define FUSB15201_STATUS_USBPD		BIT(1)
+> +#define FUSB15201_STATUS_CC2		BIT(2)
+> +#define FUSB15201_STATUS_DFP		BIT(3)
+> +#define FUSB15201_STATUS_SINK		BIT(4)
+> +
+> +#define FUSB15201_RESET_ERR_RECOVERY	BIT(2)
+> +
+> +#define FUSB15201_FAULT_VBUS_OVP	BIT(0)
+> +#define FUSB15201_FAULT_OTP		BIT(1)
+> +#define FUSB15201_FAULT_CC_OVP		BIT(2)
+> +#define FUSB15201_FAULT_VCONN_OCP	BIT(3)
+> +
+> +/* Per-port command block, port A at 0x11 and port B at 0x13 */
+> +#define FUSB15201_REG_COMMANDS(p)	(0x11 + (p) * 0x02)
+> +#define FUSB15201_REG_INT_MASK(p)	(0x12 + (p) * 0x02)
+> +
+> +/*
+> + * The swap command bits are named after the role the port is in when the swap
+> + * is requested, not the role it ends up in.
+> + */
+> +#define FUSB15201_CMD_UFP_TO_DFP	BIT(4)
+> +#define FUSB15201_CMD_DFP_TO_UFP	BIT(5)
+> +#define FUSB15201_CMD_SINK_TO_SOURCE	BIT(6)
+> +#define FUSB15201_CMD_SOURCE_TO_SINK	BIT(7)
+> +
+> +#define FUSB15201_REG_MASTER_CONTROL	0x15
+> +#define FUSB15201_MASTER_DRP_DISABLE	BIT(1)
+> +
+> +/* Per-port interrupt status, write one to clear */
+> +#define FUSB15201_REG_INTERRUPT(p)	(0x16 + (p))
+> +#define FUSB15201_INT_FAULT		BIT(0)
+> +#define FUSB15201_INT_RESET_STATUS	BIT(1)
+> +#define FUSB15201_INT_PORT_STATUS	BIT(2)
+> +#define FUSB15201_INT_ALL		(FUSB15201_INT_FAULT | \
+> +					 FUSB15201_INT_RESET_STATUS | \
+> +					 FUSB15201_INT_PORT_STATUS)
+> +
+> +#define FUSB15201_REG_MAX		FUSB15201_REG_INTERRUPT(1)
+> +
+> +struct fusb15201;
+> +
+> +struct fusb15201_port {
+> +	struct fusb15201 *chip;
+> +	unsigned int index;
+> +	struct typec_port *port;
+> +	struct typec_partner *partner;
+> +	struct usb_role_switch *role_sw;
+> +	struct typec_capability cap;
+> +	unsigned int status;
+> +};
+> +
+> +struct fusb15201 {
+> +	struct device *dev;
+> +	struct regmap *regmap;
+> +	struct mutex lock;	/* serialises access to the shared registers */
+> +	struct fusb15201_port ports[FUSB15201_NUM_PORTS];
+> +};
+> +
+> +static enum typec_role fusb15201_default_pwr_role(struct fusb15201_port *port)
+> +{
+> +	switch (port->cap.type) {
+> +	case TYPEC_PORT_SRC:
+> +		return TYPEC_SOURCE;
+> +	case TYPEC_PORT_SNK:
+> +		return TYPEC_SINK;
+> +	default:
+> +		if (port->cap.prefer_role == TYPEC_SOURCE)
+> +			return TYPEC_SOURCE;
+
+Please prefer the is_source() and is_sink() helpers with the power
+role.
+		if (is_source(port->cap.prefer_role))
+			return TYPEC_SOURCE;
+
+> +		return TYPEC_SINK;
+> +	}
+> +}
+> +
+> +static void fusb15201_set_roles(struct fusb15201_port *port,
+> +				enum typec_role pwr_role,
+> +				enum typec_data_role data_role, bool attached)
+> +{
+> +	typec_set_pwr_role(port->port, pwr_role);
+> +	typec_set_vconn_role(port->port, pwr_role);
+> +	typec_set_data_role(port->port, data_role);
+> +
+> +	if (!port->role_sw)
+> +		return;
+> +
+> +	if (!attached)
+> +		usb_role_switch_set_role(port->role_sw, USB_ROLE_NONE);
+> +	else if (data_role == TYPEC_HOST)
+> +		usb_role_switch_set_role(port->role_sw, USB_ROLE_HOST);
+> +	else
+> +		usb_role_switch_set_role(port->role_sw, USB_ROLE_DEVICE);
+> +}
+> +
+> +static void fusb15201_hw_update(struct fusb15201_port *port)
+> +{
+> +	struct fusb15201 *chip = port->chip;
+> +	enum typec_data_role data_role;
+> +	enum typec_role pwr_role;
+> +	unsigned int status;
+> +	int ret;
+> +
+> +	ret = regmap_read(chip->regmap, FUSB15201_REG_STATUS(port->index),
+> +			  &status);
+
+One line is enough for that.
+
+> +	if (ret) {
+> +		dev_warn(chip->dev, "port%u: failed to read status: %d\n",
+> +			 port->index, ret);
+> +		return;
+> +	}
+> +
+> +	if (!(status & FUSB15201_STATUS_ATTACHED)) {
+> +		if (port->partner) {
+> +			typec_unregister_partner(port->partner);
+> +			port->partner = NULL;
+> +		}
+> +
+> +		/*
+> +		 * None of the remaining status bits are valid while detached,
+> +		 * so fall back to what the port is configured to do.
+> +		 */
+> +		typec_set_orientation(port->port, TYPEC_ORIENTATION_NONE);
+> +		typec_set_pwr_opmode(port->port, TYPEC_PWR_MODE_USB);
+> +
+> +		pwr_role = fusb15201_default_pwr_role(port);
+> +		data_role = pwr_role == TYPEC_SOURCE ? TYPEC_HOST : TYPEC_DEVICE;
+
+You can avoid the ternary operator here.
+
+        enum typec_data_role data_role = TYPEC_DEVICE;
+        ...
+        if (is_source(pwr_role))
+                data_role = TYPEC_HOST;
+
+> +		fusb15201_set_roles(port, pwr_role, data_role, false);
+> +
+> +		port->status = status;
+> +		return;
+> +	}
+> +
+> +	if (!(port->status & FUSB15201_STATUS_ATTACHED)) {
+> +		struct typec_partner_desc desc = {
+> +			.usb_pd = !!(status & FUSB15201_STATUS_USBPD),
+> +		};
+> +
+> +		port->partner = typec_register_partner(port->port, &desc);
+> +		if (IS_ERR(port->partner)) {
+> +			dev_err(chip->dev,
+> +				"port%u: failed to register partner: %pe\n",
+> +				port->index, port->partner);
+> +			port->partner = NULL;
+> +		}
+> +	}
+> +
+> +	typec_set_orientation(port->port, status & FUSB15201_STATUS_CC2 ?
+> +			      TYPEC_ORIENTATION_REVERSE :
+> +			      TYPEC_ORIENTATION_NORMAL);
+> +
+> +	/*
+> +	 * The controller only tells us whether the partner is PD capable. The
+> +	 * Type-C current advertisement is not reported, so 1.5A and 3.0A
+> +	 * operation cannot be distinguished from the default.
+> +	 */
+> +	typec_set_pwr_opmode(port->port, status & FUSB15201_STATUS_USBPD ?
+> +			     TYPEC_PWR_MODE_PD : TYPEC_PWR_MODE_USB);
+> +
+> +	pwr_role = status & FUSB15201_STATUS_SINK ? TYPEC_SINK : TYPEC_SOURCE;
+> +	data_role = status & FUSB15201_STATUS_DFP ? TYPEC_HOST : TYPEC_DEVICE;
+> +	fusb15201_set_roles(port, pwr_role, data_role, true);
+> +
+> +	port->status = status;
+> +}
+> +
+> +static void fusb15201_report_faults(struct fusb15201_port *port)
+> +{
+> +	struct fusb15201 *chip = port->chip;
+> +	unsigned int fault;
+> +	int ret;
+> +
+> +	ret = regmap_read(chip->regmap, FUSB15201_REG_FAULT_STATUS(port->index),
+> +			  &fault);
+> +	if (ret)
+> +		return;
+> +
+> +	/*
+> +	 * The controller protects itself, so there is nothing to do here
+> +	 * beyond making the fault visible.
+> +	 */
+> +	if (fault & FUSB15201_FAULT_VBUS_OVP)
+> +		dev_warn_ratelimited(chip->dev, "port%u: VBUS overvoltage\n",
+> +				     port->index);
+> +	if (fault & FUSB15201_FAULT_OTP)
+> +		dev_warn_ratelimited(chip->dev, "port%u: over temperature\n",
+> +				     port->index);
+> +	if (fault & FUSB15201_FAULT_CC_OVP)
+> +		dev_warn_ratelimited(chip->dev, "port%u: CC overvoltage\n",
+> +				     port->index);
+> +	if (fault & FUSB15201_FAULT_VCONN_OCP)
+> +		dev_warn_ratelimited(chip->dev, "port%u: VCONN overcurrent\n",
+> +				     port->index);
+> +}
+> +
+> +static void fusb15201_report_reset(struct fusb15201_port *port)
+> +{
+> +	struct fusb15201 *chip = port->chip;
+> +	unsigned int reset;
+> +	int ret;
+> +
+> +	ret = regmap_read(chip->regmap, FUSB15201_REG_RESET_STATUS(port->index),
+> +			  &reset);
+> +	if (ret)
+> +		return;
+> +
+> +	dev_dbg(chip->dev, "port%u: reset status 0x%02x\n", port->index, reset);
+> +
+> +	if (reset & FUSB15201_RESET_ERR_RECOVERY)
+> +		dev_warn_ratelimited(chip->dev,
+> +				     "port%u: entered error recovery\n",
+> +				     port->index);
+> +}
+> +
+> +static irqreturn_t fusb15201_irq(int irq, void *data)
+> +{
+> +	struct fusb15201 *chip = data;
+> +	irqreturn_t ret = IRQ_NONE;
+> +	unsigned int i;
+> +
+> +	guard(mutex)(&chip->lock);
+> +
+> +	for (i = 0; i < FUSB15201_NUM_PORTS; i++) {
+> +		struct fusb15201_port *port = &chip->ports[i];
+> +		unsigned int pending;
+> +
+> +		if (!port->port)
+> +			continue;
+> +
+> +		if (regmap_read(chip->regmap, FUSB15201_REG_INTERRUPT(i),
+> +				&pending))
+
+One line is enough for that too.
+
+> +			continue;
+> +
+> +		pending &= FUSB15201_INT_ALL;
+> +		if (!pending)
+> +			continue;
+> +
+> +		/* Write one to clear */
+> +		regmap_write(chip->regmap, FUSB15201_REG_INTERRUPT(i), pending);
+> +
+> +		if (pending & FUSB15201_INT_PORT_STATUS)
+> +			fusb15201_hw_update(port);
+> +		if (pending & FUSB15201_INT_FAULT)
+> +			fusb15201_report_faults(port);
+> +		if (pending & FUSB15201_INT_RESET_STATUS)
+> +			fusb15201_report_reset(port);
+> +
+> +		ret = IRQ_HANDLED;
+> +	}
+> +
+> +	return ret;
+> +}
+> +
+> +/*
+> + * Role swaps are asynchronous: the command only asks the controller to start
+> + * the swap, and the outcome arrives later as a port status interrupt.
+> + */
+> +static int fusb15201_command(struct fusb15201_port *port, unsigned int cmd)
+> +{
+> +	struct fusb15201 *chip = port->chip;
+> +
+> +	guard(mutex)(&chip->lock);
+> +
+> +	if (!(port->status & FUSB15201_STATUS_ATTACHED))
+> +		return -ENOTCONN;
+> +
+> +	return regmap_write(chip->regmap, FUSB15201_REG_COMMANDS(port->index),
+> +			    cmd);
+
+Ditto.
+
+> +}
+> +
+> +static int fusb15201_dr_set(struct typec_port *p, enum typec_data_role role)
+> +{
+> +	struct fusb15201_port *port = typec_get_drvdata(p);
+> +	unsigned int cmd;
+> +
+> +	cmd = role == TYPEC_HOST ? FUSB15201_CMD_UFP_TO_DFP :
+> +				   FUSB15201_CMD_DFP_TO_UFP;
+
+        unsigned int cmd = FUSB15201_CMD_DF_TO_UFP;
+
+        if (role == TYPEC_HOST)
+                cmd = FUSB15201_CMD_UFP_TO_DF;
+
+> +	return fusb15201_command(port, cmd);
+> +}
+> +
+> +static int fusb15201_pr_set(struct typec_port *p, enum typec_role role)
+> +{
+> +	struct fusb15201_port *port = typec_get_drvdata(p);
+> +	unsigned int cmd;
+> +
+> +	cmd = role == TYPEC_SOURCE ? FUSB15201_CMD_SINK_TO_SOURCE :
+> +				     FUSB15201_CMD_SOURCE_TO_SINK;
+
+        unsigned int cmd = FUSB15201_CMD_SOURCE_TO_SINK;
+
+        if (is_source(role))
+                cmd = FUSB15201_CMD_SINK_TO_SOURCE;
+
+> +	return fusb15201_command(port, cmd);
+> +}
+> +
+> +static const struct typec_operations fusb15201_typec_ops = {
+> +	.dr_set = fusb15201_dr_set,
+> +	.pr_set = fusb15201_pr_set,
+> +};
+> +
+> +/*
+> + * Nearly every register is either volatile or write-only, and the interrupt
+> + * registers are write-one-to-clear, so the register map is not cached.
+> + */
+> +static const struct regmap_config fusb15201_regmap_config = {
+> +	.reg_bits = 8,
+> +	.val_bits = 8,
+> +	.max_register = FUSB15201_REG_MAX,
+> +};
+> +
+> +static void fusb15201_unregister_port(void *data)
+> +{
+> +	struct fusb15201_port *port = data;
+> +
+> +	if (port->partner)
+> +		typec_unregister_partner(port->partner);
+> +	typec_unregister_port(port->port);
+> +}
+> +
+> +static void fusb15201_put_role_sw(void *data)
+> +{
+> +	usb_role_switch_put(data);
+> +}
+> +
+> +static int fusb15201_check_id(struct fusb15201 *chip)
+> +{
+> +	static const struct {
+> +		unsigned int reg;
+> +		unsigned int expected;
+> +		const char *name;
+> +	} ids[] = {
+> +		{ FUSB15201_REG_VENDID, FUSB15201_VENDID, "vendor" },
+> +		{ FUSB15201_REG_PRODID, FUSB15201_PRODID, "product" },
+> +		{ FUSB15201_REG_DEVID, FUSB15201_DEVID, "device" },
+> +	};
+> +	unsigned int val, hwver, fwver;
+> +	int ret, i;
+> +
+> +	for (i = 0; i < ARRAY_SIZE(ids); i++) {
+> +		ret = regmap_read(chip->regmap, ids[i].reg, &val);
+> +		if (ret)
+> +			return dev_err_probe(chip->dev, ret,
+> +					     "failed to read %s id\n",
+> +					     ids[i].name);
+> +
+> +		if (val != ids[i].expected)
+> +			return dev_err_probe(chip->dev, -ENODEV,
+> +					     "bad %s id 0x%02x, expected 0x%02x\n",
+> +					     ids[i].name, val, ids[i].expected);
+> +	}
+> +
+> +	/*
+> +	 * The register semantics are defined by the firmware image, so record
+> +	 * the versions to make mismatches easier to spot.
+> +	 */
+> +	if (!regmap_read(chip->regmap, FUSB15201_REG_HWVER, &hwver) &&
+> +	    !regmap_read(chip->regmap, FUSB15201_REG_FWVER, &fwver))
+> +		dev_dbg(chip->dev, "hardware version %u, firmware version %u\n",
+> +			hwver, fwver);
+> +
+> +	return 0;
+> +}
+> +
+> +static int fusb15201_register_port(struct fusb15201 *chip,
+> +				   struct fwnode_handle *fwnode)
+> +{
+> +	struct fusb15201_port *port;
+> +	unsigned int index;
+> +	int ret;
+> +
+> +	ret = fwnode_property_read_u32(fwnode, "reg", &index);
+> +	if (ret)
+> +		return dev_err_probe(chip->dev, ret,
+> +				     "missing reg property of %pfwP\n", fwnode);
+> +
+> +	if (index >= FUSB15201_NUM_PORTS)
+> +		return dev_err_probe(chip->dev, -EINVAL,
+> +				     "invalid connector index %u\n", index);
+> +
+> +	port = &chip->ports[index];
+> +	if (port->port)
+> +		return dev_err_probe(chip->dev, -EINVAL,
+> +				     "duplicate connector for port %u\n", index);
+> +
+> +	port->chip = chip;
+> +	port->index = index;
+> +
+> +	ret = typec_get_fw_cap(&port->cap, fwnode);
+> +	if (ret)
+> +		return dev_err_probe(chip->dev, ret,
+> +				     "port%u: failed to get capabilities\n",
+> +				     index);
+> +
+> +	port->cap.revision = USB_TYPEC_REV_2_0;
+> +	port->cap.orientation_aware = true;
+> +	port->cap.driver_data = port;
+> +	port->cap.ops = &fusb15201_typec_ops;
+> +
+> +	port->port = typec_register_port(chip->dev, &port->cap);
+> +	if (IS_ERR(port->port)) {
+> +		ret = PTR_ERR(port->port);
+> +		port->port = NULL;
+> +		return dev_err_probe(chip->dev, ret,
+> +				     "port%u: failed to register\n", index);
+> +	}
+> +
+> +	ret = devm_add_action_or_reset(chip->dev, fusb15201_unregister_port,
+> +				       port);
+
+One line for that too.
+
+> +	if (ret)
+> +		return ret;
+> +
+> +	port->role_sw = fwnode_usb_role_switch_get(fwnode);
+> +	if (IS_ERR(port->role_sw))
+> +		return dev_err_probe(chip->dev, PTR_ERR(port->role_sw),
+> +				     "port%u: failed to get role switch\n",
+> +				     index);
+> +
+> +	if (port->role_sw) {
+> +		ret = devm_add_action_or_reset(chip->dev, fusb15201_put_role_sw,
+> +					       port->role_sw);
+> +		if (ret)
+> +			return ret;
+> +	}
+> +
+> +	return 0;
+> +}
+> +
+> +static int fusb15201_hw_init(struct fusb15201 *chip)
+> +{
+> +	bool source_only = true;
+> +	unsigned int i;
+> +	int ret;
+> +
+> +	for (i = 0; i < FUSB15201_NUM_PORTS; i++) {
+> +		struct fusb15201_port *port = &chip->ports[i];
+> +
+> +		if (!port->port) {
+> +			/* Nothing describes this port, keep it quiet. */
+> +			ret = regmap_write(chip->regmap,
+> +					   FUSB15201_REG_INT_MASK(i),
+> +					   FUSB15201_INT_ALL);
+> +			if (ret)
+> +				return ret;
+> +
+> +			continue;
+> +		}
+> +
+> +		if (port->cap.type != TYPEC_PORT_SRC)
+> +			source_only = false;
+> +
+> +		ret = regmap_write(chip->regmap, FUSB15201_REG_INT_MASK(i), 0);
+> +		if (ret)
+> +			return ret;
+> +
+> +		/* Discard anything that happened before we got here */
+> +		ret = regmap_write(chip->regmap, FUSB15201_REG_INTERRUPT(i),
+> +				   FUSB15201_INT_ALL);
+> +		if (ret)
+> +			return ret;
+> +	}
+> +
+> +	/*
+> +	 * Dual role toggling is the only configurable part of the Type-C state
+> +	 * machine, and it is chip wide rather than per port, which is why it is
+> +	 * set up here instead of from a port_type_set() callback.
+> +	 */
+> +	return regmap_update_bits(chip->regmap, FUSB15201_REG_MASTER_CONTROL,
+> +				  FUSB15201_MASTER_DRP_DISABLE,
+> +				  source_only ? FUSB15201_MASTER_DRP_DISABLE : 0);
+> +}
+> +
+> +static int fusb15201_probe(struct i2c_client *client)
+> +{
+> +	struct device *dev = &client->dev;
+> +	struct fusb15201 *chip;
+> +	unsigned int i, nports = 0;
+> +	int ret;
+> +
+> +	chip = devm_kzalloc(dev, sizeof(*chip), GFP_KERNEL);
+> +	if (!chip)
+> +		return -ENOMEM;
+> +
+> +	chip->dev = dev;
+> +	i2c_set_clientdata(client, chip);
+> +
+> +	ret = devm_mutex_init(dev, &chip->lock);
+> +	if (ret)
+> +		return ret;
+> +
+> +	chip->regmap = devm_regmap_init_i2c(client, &fusb15201_regmap_config);
+> +	if (IS_ERR(chip->regmap))
+> +		return dev_err_probe(dev, PTR_ERR(chip->regmap),
+> +				     "failed to initialise register map\n");
+> +
+> +	ret = fusb15201_check_id(chip);
+> +	if (ret)
+> +		return ret;
+> +
+> +	device_for_each_child_node_scoped(dev, fwnode) {
+> +		ret = fusb15201_register_port(chip, fwnode);
+> +		if (ret)
+> +			return ret;
+> +
+> +		nports++;
+> +	}
+> +
+> +	if (!nports)
+> +		return dev_err_probe(dev, -ENODEV, "no connector described\n");
+> +
+> +	ret = fusb15201_hw_init(chip);
+> +	if (ret)
+> +		return dev_err_probe(dev, ret, "failed to initialise\n");
+> +
+> +	/* Seed the Type-C class with the current state before arming the IRQ */
+> +	for (i = 0; i < FUSB15201_NUM_PORTS; i++) {
+> +		if (chip->ports[i].port)
+> +			fusb15201_hw_update(&chip->ports[i]);
+> +	}
+
+Couldn't that be done in fusb15201_hw_init()?
+
+> +	ret = devm_request_threaded_irq(dev, client->irq, NULL, fusb15201_irq,
+> +					IRQF_ONESHOT, dev_name(dev), chip);
+> +	if (ret)
+> +		return dev_err_probe(dev, ret, "failed to request irq\n");
+> +
+> +	return 0;
+> +}
+> +
+> +static const struct of_device_id fusb15201_of_match[] = {
+> +	{ .compatible = "onnn,fusb15201" },
+> +	{ }
+> +};
+> +MODULE_DEVICE_TABLE(of, fusb15201_of_match);
+> +
+> +static struct i2c_driver fusb15201_driver = {
+> +	.driver = {
+> +		.name = "fusb15201",
+> +		.of_match_table = fusb15201_of_match,
+> +	},
+> +	.probe = fusb15201_probe,
+> +};
+> +module_i2c_driver(fusb15201_driver);
+> +
+> +MODULE_AUTHOR("Shawn Guo <shengchao.guo@oss.qualcomm.com>");
+> +MODULE_DESCRIPTION("onsemi FUSB15201 Type-C and Power Delivery controller");
+> +MODULE_LICENSE("GPL");
+> -- 
+> 2.43.0
+
+thanks,
 
 -- 
-2.43.0
-
+heikki
