@@ -1,158 +1,215 @@
-Received: from PNZPR01CU001.outbound.protection.outlook.com (mail-centralindiaazon11021138.outbound.protection.outlook.com [40.107.51.138])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 787903093CF;
-	Mon, 14 Sep 2026 13:23:48 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=40.107.51.138
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789392230; cv=fail; b=d0DlpC1GtoNszhMuAm2zhZsSxuzutt2K3YtEBlQxV+aJSgMGS6u32OQWRk+Ve05rHGv/DYzs29gx+91rUQw6SptmXxaPp4HdSVo2KoCXlK1ZEdSvjgOjfaU3VBNdbelQ3pMsF1FWN8UNLdtqCkAgSTfj58lQ45KhPVwFgr5JnVQ=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789392230; c=relaxed/simple;
-	bh=O71Caw62uxAhIinuaHwKxfkNforb4Y11r30b3/GuF/4=;
-	h=From:To:Cc:Subject:Date:Message-ID:Content-Type:MIME-Version; b=awKanWcdB6pkeQgxAkqXnUOy+uoojemVAAD+1f8oYlpiLjwfUWfuwUHP4gEK08oc0q6RvnkV4Pcz9Oh0FLcnnhE0G8/iuJQqzXd4jgnHwv2GFag7R1b0+sLOMhN8a7kNOHi+sjnzp5W2v9+5qIkr5SBJgI6vyBFX2uD+Xf6Eia4=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=ebytelogic.com; spf=pass smtp.mailfrom=ebytelogic.com; arc=fail smtp.client-ip=40.107.51.138
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=ebytelogic.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ebytelogic.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=GkgVYWU8cLaogRext/oA6UE4OHmZ20HxJdan8LXhk5r2/26mKBdxREVN9WqwuqbVh6L7EULMMR5B+iUF+CIU6o9+SRPx8bPhHOxkNdR1GDDB/A1x9lLArFUijhXF1V5z3GpIpo9qZ/tuFQB2qv0+rOIRYcV8FnqQIjco2diRPe8fRq2eOFmqHmo3YYNAzw4jaMSJrwv2r+nVKPiZOIrQHg82HPlVaqon+fatlYi2xO/AP+SQqCSkN/Q699i0QQJ7kjObP45QlZFtnCxq9YY8IzNPKFxonF1WPu8eUmoVaEpr/A8gJ5RIU2Yt9rkrGe2xGiy0LpMZ9LqZxgHIZlrC/A==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=yCyrtoR1R3oH9LVyD34BoSf1gBW8c3ufYeDUnkAQKKg=;
- b=nv11uGx1s3DNC5qw3T/hxQoWEXByJC37JafMmcjm/xargM6ubRQINa+kR31ETBgPuUQsAc/KoqRxxgwHHej57ZXw70vsDjs63vv6U4S3bOzj5tCM5PPSZ5UxavyclT3MkFL8rAi8jGh1lfoNW1byPSlC5++/2i0qrepl1Kqc2sofjy1Q+WA+QcFOH2C83yIkaB7keSHADWfSBoOGnhc7fNs63OX0sFFHDcY/qEAZTVsR45owcWjqD884ovSCrwzUsjjW1gAnpsSo9h8SOgyTZ6mJuK6pgYpNmkUdHdkeL5PEocvWuAFNvP95+hzshZoLbvUkWqQs2z97urvQpo0c0A==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=ebytelogic.com; dmarc=pass action=none
- header.from=ebytelogic.com; dkim=pass header.d=ebytelogic.com; arc=none
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=ebytelogic.com;
-Received: from PN3PPF28092842E.INDP287.PROD.OUTLOOK.COM (2603:1096:c04:1::97)
- by PNWP287MB6066.INDP287.PROD.OUTLOOK.COM (2603:1096:c01:345::23) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.406.12; Mon, 14 Sep
- 2026 13:23:44 +0000
-Received: from PN3PPF28092842E.INDP287.PROD.OUTLOOK.COM
- ([fe80::df75:6e8c:7def:a08e]) by PN3PPF28092842E.INDP287.PROD.OUTLOOK.COM
- ([fe80::df75:6e8c:7def:a08e%6]) with mapi id 15.21.0406.007; Mon, 14 Sep 2026
- 13:23:44 +0000
-From: Hitesh Patel <hitesh@ebytelogic.com>
-To: Andi Shyti <andi.shyti@kernel.org>
-Cc: Loic Poulain <loic.poulain@oss.qualcomm.com>,
-	Robert Foss <rfoss@kernel.org>,
-	linux-i2c@vger.kernel.org,
-	linux-arm-msm@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	ravi@ebytelogic.com,
-	Hitesh Patel <hitesh@ebytelogic.com>
-Subject: [PATCH] i2c: qcom-cci: enable SCL clock stretching in standard mode on CCI v2
-Date: Mon, 14 Sep 2026 18:53:28 +0530
-Message-ID: <20260914132328.976902-1-hitesh@ebytelogic.com>
-X-Mailer: git-send-email 2.43.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: PNYPR01CA0064.INDPRD01.PROD.OUTLOOK.COM
- (2603:1096:c01:2b7::9) To PN3PPF28092842E.INDP287.PROD.OUTLOOK.COM
- (2603:1096:c04:1::97)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DFEDE3D649F
+	for <linux-arm-msm@vger.kernel.org>; Mon, 14 Sep 2026 13:24:48 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1789392291; cv=none; b=Es4Iltg5O7BFAW4sLzbt4Q+AzVCwRcQVpMsULhn6NlVluieD7Mu/zcnZtCWXoRteyvKzMmOO4Bfyn8f1x+N956LFqfH3vcFLozKNYRCMMQnqBC4jnznKOvLK6njdZOpq8W77g4Em1I8Mn0arKlI5g0fZfQ5ZQI56BtpR7CeixwE=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1789392291; c=relaxed/simple;
+	bh=5KLPdncsLccVWG4vS1VbkO+4SihTxYoWlWEpXBujLM0=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=iScRYkEUkBiUmfjwKLy7lH9tw4W3RkrsmWfDUjy3pFYfVn0x716XWzThehvko6FPac3duKwhjjkU0ND4F8QH62XqjUB3lPMFDtVb0XcS7vKUGTxbR5lcSj2oIjW4NFdPV8LorHbaC80Nr6ofvXaeeZ51YueEYTHfADJte+GR5GA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=QWbNb02Q; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=cNtCCiDe; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="QWbNb02Q";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="cNtCCiDe"
+Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68ED0h2X135640
+	for <linux-arm-msm@vger.kernel.org>; Mon, 14 Sep 2026 13:24:48 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	TJEsqlbhkeYlvOTZeQMhupa6Ph/sDiB31OAPFik2LLM=; b=QWbNb02QNVXvEYSI
+	LSHs0mIIGJEbh/T60hOsLDfGeW2+GMdGZgtgPBLfnuRpRvHzI9whPWMqZB86tGU4
+	F9Go+RUrpDjru1FiBA3stdJJu47PqKS9Z5kGo27IFKcinkoCSQTC198YnBCTizSS
+	ttcOlgH7DjXqVvTOOKEM8duu2LlXmt6ByPebsT4qK8MFH2VOQceaHToc8TlTntSS
+	Jn7hcGDiwvYgr3Fb+R6PtOmtQl1oAp8Lo9ckpm5fsVNJS0O+rlcpLsjr6E/Xe+FD
+	OtEhHqF5jl8gITZcdzYhNROZS9Stzi7zQy10Mx/ibD95d4dH+3yam4vpdPeXUsiA
+	44yPZw==
+Received: from mail-vs1-f72.google.com (mail-vs1-f72.google.com [209.85.217.72])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gpeuq8ray-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Mon, 14 Sep 2026 13:24:47 +0000 (GMT)
+Received: by mail-vs1-f72.google.com with SMTP id ada2fe7eead31-78fb9f59781so2871467137.1
+        for <linux-arm-msm@vger.kernel.org>; Mon, 14 Sep 2026 06:24:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1789392287; x=1789997087; darn=vger.kernel.org;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :content-type:mime-version:references:message-id:subject:cc:to:from
+         :date:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=TJEsqlbhkeYlvOTZeQMhupa6Ph/sDiB31OAPFik2LLM=;
+        b=cNtCCiDeibDi5/bc8ZxF38OlsZA4M+jjBdAOsIm7ByWVO913r3NfhHOM0HKxr4imAq
+         Yh83r7fTbEK5yuhPYNCcuYqeFAwJGj4PwwUQHxMdz56pE/GpDNbqKkniUqSKVjSfz7cd
+         DI3xuze9kL5keqJ96+G7xBDdE7HLXpjTCt333PjM5uBlaljaDmeM+PNO118HxLNDIFN0
+         IAJ+E1mpwF3Cs80L0VcfO45czc+V6/yBHq9Be66YFyPLdHAAqhbX0RI1hSjC7CVWIsAO
+         x8EKVlbu9d2S3U/dOMt8ddlRtKANlzYe1bMKOk6SjBR2s0+1bP1/TeWhRt9Sl//zRdf/
+         5VuA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1789392287; x=1789997087;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :content-type:mime-version:references:message-id:subject:cc:to:from
+         :date:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=TJEsqlbhkeYlvOTZeQMhupa6Ph/sDiB31OAPFik2LLM=;
+        b=XCG+GX3lkySBoLGgtsrBNPqUZcXo7VMOY5lX2jOLD9wHVAh9vp81kb+ckP5LCMOTMV
+         UIfXBkiEiVSJxW+Pe58S2Go4Mgf46q1tqI5ZntiQ8HDUTfRsLoyIW+VUpjBu7d+YFaxi
+         OGS/E4QAk1u0MmMJTwGpFfjSu9ivQbY1ArcB5KkFc2IE8rXOzEJVNorGJG6ZHRBjYMo6
+         k+B10B6dw/GOloZ/15jsXpdjYkNKnWlmvtGpwyn3yzi22Jr0r/O6tR4QrTacb5oiTVXf
+         HC2ptm1w55YMNJKPK1Y14Y0A/cwex/QkbQ468XlHivMrisKZGqp8SAhkW5dodLy2rOsu
+         +XGw==
+X-Forwarded-Encrypted: i=1; AKwUvBxA/JA1hsZ2ykogK30ikFhu4VlCDnq0rpTW5PREXcuXRLQ3/DnBFFnVC4UNC6QMNSx8ZYLVU/j4oIeH7ZHI@vger.kernel.org
+X-Gm-Message-State: AFuF++k2QvgI8s3kr9/jJI+TEQ5WttKZpGCzlYTL3I6/Bu/oQohucaS8
+	VD1RqgeXl6NA3bdfK6HtECvxjwArSm2sB1od/nG8oPMy45PcgvZ5JznywOWoq/GOCRPmvyGrHCI
+	ctlHeTX/zh4AclS5VIeNVgzU/93tfrCLMLwS9n2xiLjHDXL9PhDwAITqxnYOQmLbZug/O
+X-Gm-Gg: AYBFou2yhcsBQRFdJjgeSpSUWTVsrQvG316pP+mHRqFBGyZ12nmqiz6DDpnu9e5uvIk
+	pcQZ/vABxe7xJkOBUs/HoaTKsQ2DyRV4HRVPlG+HL0Mt1aFczw3G53V7+rlGvAyZjZc1WPrNeQh
+	ajBJWUogK2+jvfCijNkn2JJyAqwnEO6ACOXZ+9WpNEw8eIJZf459eS+6Z2rwjv5b9IE31wek9bk
+	YsGkMVVggTgII5Il+SPaMm4nqkOgRdTiw5qdBTi6viSrm416LyyIddFConyBMDD2PcWs5SbLKc1
+	nIl3DebFfAgztdpgZ4VnUsBulQO50PW3+IgKBVOvFUJTKk8NpDJ91mN/3pPgLP0Ha/4f2E5bAm6
+	9pznUoczTeQ6B+p3E3tdWh3nZ0V8sZgVjxn+klc7SQbLuAhLFyFahNW2jOA3NqOHSRP5tLyj/k6
+	rrygf3XHj3D4wo
+X-Received: by 2002:a05:6102:6a90:b0:795:1be9:661e with SMTP id ada2fe7eead31-79b570f4ba8mr1227998137.1.1789392286916;
+        Mon, 14 Sep 2026 06:24:46 -0700 (PDT)
+X-Received: by 2002:a05:6102:6a90:b0:795:1be9:661e with SMTP id ada2fe7eead31-79b570f4ba8mr1227965137.1.1789392286464;
+        Mon, 14 Sep 2026 06:24:46 -0700 (PDT)
+Received: from umbar.lan (2001-14ba-a073-af00-264b-feff-fe8b-be8a.rev.dnainternet.fi. [2001:14ba:a073:af00:264b:feff:fe8b:be8a])
+        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5b8a0472bdasm2443458e87.63.2026.09.14.06.24.44
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 14 Sep 2026 06:24:45 -0700 (PDT)
+Date: Mon, 14 Sep 2026 16:24:43 +0300
+From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+To: kavakliyigitcan@gmail.com
+Cc: Lee Jones <lee@kernel.org>, Daniel Thompson <danielt@kernel.org>,
+        Jingoo Han <jingoohan1@gmail.com>, Pavel Machek <pavel@kernel.org>,
+        Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>, Helge Deller <deller@gmx.de>,
+        Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>,
+        Sumit Semwal <sumit.semwal@linaro.org>,
+        Neil Armstrong <neil.armstrong@linaro.org>,
+        Jessica Zhang <jesszhan0024@gmail.com>,
+        Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+        Maxime Ripard <mripard@kernel.org>,
+        Thomas Zimmermann <tzimmermann@suse.de>,
+        David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+        Dmitry Torokhov <dmitry.torokhov@gmail.com>,
+        Henrik Rydberg <rydberg@bitmath.org>,
+        Rob Clark <robin.clark@oss.qualcomm.com>,
+        Dmitry Baryshkov <lumag@kernel.org>,
+        Abhinav Kumar <abhinav.kumar@linux.dev>, Sean Paul <sean@poorly.run>,
+        Marijn Suijten <marijn.suijten@somainline.org>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        dri-devel@lists.freedesktop.org, linux-leds@vger.kernel.org,
+        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-fbdev@vger.kernel.org, linux-input@vger.kernel.org,
+        linux-arm-msm@vger.kernel.org, freedreno@lists.freedesktop.org
+Subject: Re: [PATCH RFC 08/10] drm/msm/dsi: make command and video mode
+ configuration mutually exclusive
+Message-ID: <pnlrq23steuyvrqm4e6krzdlaa7pqozxqcaaakzsmqajuo7n54@hhhu6chgeei5>
+References: <20260911-ginkgo-submission-final-v1-0-0e68e63a18d4@gmail.com>
+ <20260911-ginkgo-submission-final-v1-8-0e68e63a18d4@gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PN3PPF28092842E:EE_|PNWP287MB6066:EE_
-X-MS-Office365-Filtering-Correlation-Id: dc2cb598-8d26-425e-92bd-08df12636638
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|376014|52116014|10070799003|23010399003|1800799024|366016|10067099003|56012099006|18002099003;
-X-Microsoft-Antispam-Message-Info:
-	+psDkWBIpRvAWi4V8BG7rUgZHxquhDHJ+q5xx08mvrZhQeg0mdPDwSOF3no7CRtcyFm6Hsi5tK3E9x8FYOIsCmekzefJ6nNpcLBLb7QwE4ok56epi9CYM3Qh1q7Z8sXcIZGkbU9xIx7ocS21QX20viFgVrMDOWF3bSjpqrPJOjRu22VyC5AhLsrUTQiE2sttqHchhCv9X6LijOshxp8qdoYyYTP++snji+RsxFJQos72S9ayLtNAz3Lw4e/ypCqoU17jvGnlbCi9uhbnuEIbmnNBZfQJBz2VQsXjJEtNwxjylgtMWgdj7BQncQPqMn9x9dTvceMQ18hGRDcrTRBwSXUhWamWGiSMimI1ny5J70f0wMlIoaHFs4eR6v3gV8HwGi6K84Pf0CovgPwXiSnQFdYQ0SShARncl7Aie6ZQAT2Blr8WatfDt+fMXF/cvxFnsy+GVN/Owe2U9m/gcuMj4ZLmTVigme9seeUNqGw4MTA/4rTFt/070NKXfxevYl1uKAw7Ym1oUB2oDpZOFmWohygjyonnJFyEcsWbPuRnpzUty6OUK5L+5RnG8y957k85xdAuGX0wUE76jn30aoSUbX+wG4ccUgASDn8tli5FZgB5XBGrc084ifELImPYV/x4jrnUNXK46SDdK1Y/z3P/E9uqyhnrlMHZD4fOP7ZEfCE=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PN3PPF28092842E.INDP287.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(376014)(52116014)(10070799003)(23010399003)(1800799024)(366016)(10067099003)(56012099006)(18002099003);DIR:OUT;SFP:1102;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 2
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?5VhJQkmSHB8xlFonklh4UpDGGbc0pkpBuCrMtdB+LZfF3RoTRfa1IlA6Jx7Q?=
- =?us-ascii?Q?jPDy/xrIepa5WmsQpL571TmttELevBrdoQAFBg2YA4kG+gvMFxXYaxj7RrMx?=
- =?us-ascii?Q?0SPldjQMI14tvbVjlQL8qlMtvklNNUU8AsEENdXQZ+utYq7UkouXCJrLnQnK?=
- =?us-ascii?Q?otkcD0wwrLkhOL995kQuvJ6lC7oWEBgrFOF3lgQDDvef5dc1JPc9Otace6jl?=
- =?us-ascii?Q?QobJnso2HPjr/uo7uofFJiwN5xAZb9I6bWR+LL23zsHfz5znQh2ZCOtyf4bw?=
- =?us-ascii?Q?o7GQJEf49KQAlWf3KcAftmUA6/pDqPkvk5SlYMWymIOTCIIaGWWDPHHEETZ/?=
- =?us-ascii?Q?ZZQ75AztzYCIeJtV5oKDfNZxyRTeoqLEGjP9R6E/VpVwR33lc9FiW9uG3eX4?=
- =?us-ascii?Q?AvvX79WpkGC02Vnt4waga+jfUHXDvR1611FzGJPnHYJdY0uuNLk2Lklt/pyY?=
- =?us-ascii?Q?qlKOV6T3VgDr0U2Plj5dXAh/QARR8e/IvD8/uj2NDmcQxONhJNh6RxtWHUCK?=
- =?us-ascii?Q?62wYoYcbcj07f0GwfPUsnJmNHRe2wzD05HKa7BU5WhHei8YkUa97H1Khv+aj?=
- =?us-ascii?Q?FvxzCeyPDbjEmA6f7njqvTgOBM549wasVlPBfZ4RdS3SWeYlZH12+VqHX2O6?=
- =?us-ascii?Q?ySfb8L8q5HeC8YsPK3lznqNBp1ULAtJ7ROfnp0n1tud9EFofoz7aGbBPW8C9?=
- =?us-ascii?Q?VWC72MDbhKKNWInORUhPTs++9t66+axnolkUP4Uq6Je7ht2NaAbOln977glI?=
- =?us-ascii?Q?ZoTlZ77RFxp9FsXI26Qh0M+xmgp1UlOfChE6IgEFm6zzz2cb9XSOGvV9oiFA?=
- =?us-ascii?Q?evcy8rXbOqBhntySqjizkzTIsbQ+1pNO92VbhzfNGhZ8Wok1hkKL3eIJ1vYx?=
- =?us-ascii?Q?vjDQcRfS3JPK4yTMj99ui7FK5qCsLKRYVQPbj5Wh14+cy2OcZJlJuwW8DoUh?=
- =?us-ascii?Q?4CtZkRyXwBLraOnUMaegBoLDWWhF1ijWzJjKzAzC53+Fh5/P9nbATz+Rdm1e?=
- =?us-ascii?Q?Jf4Qi2PeiGDeH7Tzdn05yc58fKNxCm3F7vncIYu3rLaSE9QdwVSForw2q9jf?=
- =?us-ascii?Q?8P470ZXXAT6Bg7cmSN/9c//5lIAOIA9pxrgr7N8W0um7hBq2bIGCM/3FiVEn?=
- =?us-ascii?Q?3F6haRZNRbLXzf/xMUuK5xZlBZ41h1wxvXVBd6VyiBpm82DmDr7Io3U5WhdH?=
- =?us-ascii?Q?2IsjTI5KflxDobgg5ztQjIhZ5Zmh3tjVIpKQM5FkJhEFk8czSiS2tzGg1D9p?=
- =?us-ascii?Q?Whtkc18NAmcmEj3tggchkuGrxZIwhPLEl6BrtWd1ltUhft9asnXjLpf0n4RN?=
- =?us-ascii?Q?eSvhumiAdONw5GTmnfeiLUYyfFs3SccKhs8T64SCk8Wpq5e/N1cEJ+uO5HJw?=
- =?us-ascii?Q?3vYBQ5QJ8cbPwt3hTkbaVCXmAuJn+qPOi1CijcAoq4tW+IE5s6upSYt48K4Y?=
- =?us-ascii?Q?sLRV0ra4NjS764amtYrMTh4EYgPjUMuS8V1vcYBrAg2q7xcq2uqfLkrkfZoa?=
- =?us-ascii?Q?KHPJGxJ8Ep5cRLY0XtTUMrGMCfkVmz35dDIKddrDa7KARIceteQ4tDfg8W1O?=
- =?us-ascii?Q?QTDA+lJQ1wzWB1QV1yG+MZcYf/QWWBTrMStrs2LYxilUOa05cXdpOLH+T+ho?=
- =?us-ascii?Q?03YBt2/tKweDIZCCXaPfVXA3BCI/DFQoOp6sdaQAoPZGhDLnNccZZuN314uf?=
- =?us-ascii?Q?a/gs1Bqt7VBRXRLNm38zQhlRm1cYz0ff9Sx5CTk24xEBK+Lch/GlvTTPfIbj?=
- =?us-ascii?Q?7tgB66OC1Sz5QijS+6kq+2c1asnXtpZ3KUVhfA6aFdhZUWHZXx2HSRXVZg1D?=
-X-MS-Exchange-AntiSpam-MessageData-1: xr0XfZuzxhx7gw==
-X-OriginatorOrg: ebytelogic.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: dc2cb598-8d26-425e-92bd-08df12636638
-X-MS-Exchange-CrossTenant-AuthSource: PN3PPF28092842E.INDP287.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Sep 2026 13:23:44.1338
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 13bdb17c-4ae8-490c-90c1-ec8121ef96ee
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: tibLIf2fkS+GGfxIHWKpQyOTI+12ES5hCbBkRgFY3TMCQ/5CdqZabEb8dVE1cb+p4gF5p1vqPc9sWeNUI3gOiQ==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PNWP287MB6066
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <20260911-ginkgo-submission-final-v1-8-0e68e63a18d4@gmail.com>
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTE0MDE5MiBTYWx0ZWRfX+8XFSptCk20f
+ K8x3KLGq0MUy38zzrlosO9AXF7oyvbHGq8xMcukcpOUbnKuC4pivzRTPkw/IPz0rqPv9l5UJQel
+ tUbfXoLamU9vkM0fIdY24Y6xhvaDM0XdF0VTnyQ5IFKmHJ6MAejrnVt5YIWYkuoleYCWluUV5c0
+ 38izTv/K4ItG70rsZIXGj7BXZH59t4t9dG57qxDJEH953PHlivQVoz4+3nPEMcpmnJA09wRM2rn
+ TcrHGXTVfd6npyZwXvIDMQQwYWNMwDPWI2HjmfSxNj7LtELBufJ6IfnWrnTYka/vdd8iyEz7uAq
+ q/ajQK/Zfgo4JRrhiI8VimJCqK9DBcIkdGEHblewyGHn8vZTPQcAraaw7EcQ2vEQkeOcLjM/rLS
+ NgTT6X4pa5EiiD9vN51HmP3Hc/Zz1jKxtzQcSmhqj2XvPp/GY4Pi4iSPFaGY6cHmeWLI+nuS/Ra
+ 2PFH4TiGj4jUE7CM9gw==
+X-Authority-Analysis: v=2.4 cv=TrFzFzXh c=1 sm=1 tr=0 ts=6aa7f59f cx=c_pps
+ a=DUEm7b3gzWu7BqY5nP7+9g==:117 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
+ a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22 a=pGLkceISAAAA:8
+ a=irAkg3Ti1NS2jvoIXoMA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+ a=-aSRE8QhW-JAV6biHavz:22
+X-Proofpoint-ORIG-GUID: Ksyx782EfldA_tfa06gGGqea8YNtGVrK
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTE0MDE5MiBTYWx0ZWRfX5okO8BN9AXfG
+ Z2MwNNN/CHfNSuTGFSOFFF8/MwHHwAv1An5xVBI9t2Jg26Q2959HP1XnHlIC3Qhwb6q1tYZ8m2g
+ 6pQD0ysZnEa5gjkWl/8FNfli7g/3yBY=
+X-Proofpoint-GUID: Ksyx782EfldA_tfa06gGGqea8YNtGVrK
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-09-14_03,2026-09-14_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ spamscore=0 phishscore=0 priorityscore=1501 lowpriorityscore=0 bulkscore=0
+ clxscore=1015 suspectscore=0 impostorscore=0 adultscore=0 malwarescore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609140192
 
-The CCI v2 standard-mode (100 kHz) timing table leaves SCL clock
-stretching disabled, unlike the fast-plus table for the same block.
-A slave that holds SCL low is then not waited for: the master keeps
-its own clock timing and the transfer fails with a NACK or returns
-corrupt data.
+On Fri, Sep 11, 2026 at 11:51:05AM +0300, YİĞİTCAN KAVAKLI via B4 Relay wrote:
+> From: YİĞİTCAN KAVAKLI <kavakliyigitcan@gmail.com>
+> 
+> In dsi_op_mode_config(), entering video mode sets DSI_CTRL_VID_MODE_EN
+> without clearing DSI_CTRL_CMD_MODE_EN, and entering command mode sets
+> DSI_CTRL_CMD_MODE_EN without clearing DSI_CTRL_VID_MODE_EN.
+> 
+> Ensure explicit mutual exclusion by clearing the opposing enable bit
+> when switching operational modes to prevent hardware bus collisions.
+> 
+> Signed-off-by: YİĞİTCAN KAVAKLI <kavakliyigitcan@gmail.com>
+> ---
+>  drivers/gpu/drm/msm/dsi/dsi_host.c | 6 +++++-
+>  1 file changed, 5 insertions(+), 1 deletion(-)
+> 
+> diff --git a/drivers/gpu/drm/msm/dsi/dsi_host.c b/drivers/gpu/drm/msm/dsi/dsi_host.c
+> index 7e4e3718b536c92dc555de213042857379499447..b9e2867d435a3ad8b6db6b57c440bbd827180b6e 100644
+> --- a/drivers/gpu/drm/msm/dsi/dsi_host.c
+> +++ b/drivers/gpu/drm/msm/dsi/dsi_host.c
+> @@ -1094,7 +1094,9 @@ static void dsi_timing_setup(struct msm_dsi_host *msm_host, bool is_bonded_dsi)
+>  		dsi_write(msm_host, REG_DSI_ACTIVE_HSYNC,
+>  			DSI_ACTIVE_HSYNC_START(hs_start) |
+>  			DSI_ACTIVE_HSYNC_END(hs_end));
+> -		dsi_write(msm_host, REG_DSI_ACTIVE_VSYNC_HPOS, 0);
+> +		dsi_write(msm_host, REG_DSI_ACTIVE_VSYNC_HPOS,
+> +			DSI_ACTIVE_VSYNC_HPOS_START(hs_start) |
+> +			DSI_ACTIVE_VSYNC_HPOS_END(vs_end));
 
-This is hit with a camera reached through a GMSL serializer/
-deserializer I2C tunnel (MAX9296A/MAX96717 on the RB3 Gen2 vision
-mezzanine). The deserializer acknowledges the address locally, but
-forwards the transaction over the coax link and stretches SCL until
-the remote side has completed it, which takes well over one clock
-period at 100 kHz. Without stretching the register reads of the
-sensor behind the link intermittently return garbage and writes are
-dropped, which shows up as random sensor init failures.
+This fixup is unrelated, please split it to a separate commit. Also, I
+don't see corresponding code in the downstream driver. Do you have a
+reference?
 
-Clock stretching is part of the I2C specification for every speed
-mode and a device that does not stretch is unaffected by enabling it,
-so enable it for standard mode as it already is for fast-plus.
+>  		dsi_write(msm_host, REG_DSI_ACTIVE_VSYNC_VPOS,
+>  			DSI_ACTIVE_VSYNC_VPOS_START(vs_start) |
+>  			DSI_ACTIVE_VSYNC_VPOS_END(vs_end));
+> @@ -1168,8 +1170,10 @@ static void dsi_op_mode_config(struct msm_dsi_host *msm_host,
+>  					DSI_IRQ_MASK_VIDEO_DONE, 0);
+>  	} else {
+>  		if (video_mode) {
+> +			dsi_ctrl &= ~DSI_CTRL_CMD_MODE_EN;
+>  			dsi_ctrl |= DSI_CTRL_VID_MODE_EN;
+>  		} else {		/* command mode */
+> +			dsi_ctrl &= ~DSI_CTRL_VID_MODE_EN;
+>  			dsi_ctrl |= DSI_CTRL_CMD_MODE_EN;
+>  			dsi_intr_ctrl(msm_host, DSI_IRQ_MASK_CMD_MDP_DONE, 1);
 
-Signed-off-by: Hitesh Patel <hitesh@ebytelogic.com>
----
- drivers/i2c/busses/i2c-qcom-cci.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+For this one:
 
-diff --git a/drivers/i2c/busses/i2c-qcom-cci.c b/drivers/i2c/busses/i2c-qcom-cci.c
-index 25b6e4e9e..327efa86f 100644
---- a/drivers/i2c/busses/i2c-qcom-cci.c
-+++ b/drivers/i2c/busses/i2c-qcom-cci.c
-@@ -723,7 +723,7 @@ static const struct cci_data cci_v2_data = {
- 		.thd_dat = 22,
- 		.thd_sta = 162,
- 		.tbuf = 227,
--		.scl_stretch_en = 0,
-+		.scl_stretch_en = 1,
- 		.trdhld = 6,
- 		.tsp = 3
- 	},
 
-base-commit: 68142f986ff04b2b70b31db00f719bf690f64a9a
+Fixes: a689554ba6ed ("drm/msm: Initial add DSI connector support")
+
+
+>  		}
+> 
+> -- 
+> 2.47.3
+> 
+> 
+
 -- 
-2.43.0
-
+With best wishes
+Dmitry
