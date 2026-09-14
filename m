@@ -1,117 +1,115 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-ej2-f12.google.com (mail-ej2-f12.google.com [74.125.228.140])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9F47B47DD77
-	for <linux-arm-msm@vger.kernel.org>; Mon, 14 Sep 2026 15:04:33 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 043A048F829
+	for <linux-arm-msm@vger.kernel.org>; Mon, 14 Sep 2026 15:07:08 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.228.140
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789398275; cv=none; b=IiAU5yo2MaiGyAgDKj5w2OL3dGlHJYnPI9ybZep1//3tXFP8cPW5ddpR8wQ2Dw4Rz8ew95ADZT9AdfAuWLRAKBt64u5nKMSDF44ktPta9LT02IP2vOqWp1q49wFzuQYg//tN5WH7XL28Pn0PPCzU7dPGTXSNoFERcgdH5g4k2OY=
+	t=1789398431; cv=none; b=Mq0JMkeHtPHRAC8SzllCNrpQU5qor19CbV2yEqYCncmtb+babHAg7ubm5En5nAjw0WkBCiZbdlKPJhOjsMZEA6GNsHe28WKQd9ZaMGKs6dWHBD+W/dDJ+F4RSB+6r4eIGbxhWxIioJfSRURlwybgs+pH8PzEcEbdQnPIHFbdKG4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789398275; c=relaxed/simple;
-	bh=PnsGIkFSQFZuCWsQ2QwTC0W+o4KV7lN9P7EnTBVrlGs=;
-	h=From:In-Reply-To:MIME-Version:References:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=Ac7/4N/V/WM250qqxhpAJUOkP2aSd3UK1qwL1zeIbll4D8ZUTPnCv/r0UFBLsiB2kwbxMunsSY/jcGz7yGJ7rBLYh4xEn7sMdTlylbgn8WfIutK7MNKUghgb0WB/QvXjw/TrxQERFFfVJRAXL5n/hdcgg2F9youor5ZjVMfjl5U=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=JMzOaUA2; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1789398431; c=relaxed/simple;
+	bh=FCXiZlqccnOhYUcAQVW7/WcCqqPmBSKFOKi8hDqggKk=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=bC6FitnLau624zExH/cgKGcd1goqhhSJ7gjulj6E0L5ipPI7xsZciHbwK2wgv+2X5G1kizEb59OApDtkMVhulJ0ClPKlC+x8UKgC/vRO1GCrsna04mycc+OKYiuehskF2tLpmawV9oziEDY7Z/lW5+xzBUAw5BR++Hy1L7tahnA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=UK/Sjr8k; arc=none smtp.client-ip=74.125.228.140
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="JMzOaUA2"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6BEC81F00898
-	for <linux-arm-msm@vger.kernel.org>; Mon, 14 Sep 2026 15:04:33 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1789398273;
-	bh=yntR3BN9XrUq8Wqo3AlusT+bLqPtUZsGGGNwHCzeHkg=;
-	h=From:In-Reply-To:References:Date:Subject:To:Cc;
-	b=JMzOaUA23TythRGI0rS2oorRu0BdQAt2q3wANvslwWjiUSmckkom1FzSNtSesKrNw
-	 d4JeQ2he/Q+51N9YtrETv2nRKLNa//MqQnDoLm2NSTHlXEOVJckbn7+5KouBezrzni
-	 CX6OWVrJhgUziBakziRcUlQi14U2qbiv1oupVetT7zvkjKzy+KMELc/Ypen0tovdNh
-	 pnCTTjwG4rttzKEtA05NgFULRiBS00DwEOIrTn+Xy0ENiUMWzAKsXx7FosI//OjBS4
-	 l7G9dWzgQzgElZwC1uIDUR+U1uc8tBqJibe3Z3De3t031fPJcsHCQ9g7erGtX3p2nN
-	 S7I8lUtm+adVQ==
-Received: by mail-oo1-f44.google.com with SMTP id 006d021491bc7-6aa9606ddadso2904953eaf.0
-        for <linux-arm-msm@vger.kernel.org>; Mon, 14 Sep 2026 08:04:33 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AKwUvBxU5A2AXSgXqK62alFnxjKGoJTCiJSonun+AuDNjvjBBkkMbY1PsVEO8dy+mERY6ZKPMzmbi6KPdYgeRQIW@vger.kernel.org
-X-Gm-Message-State: AFuF++nbqaiN0PTW5JzLxztn2qNBlvoKpn/cbaDAu79qF3BnbmAlKucM
-	A8FEpq1kndFsSgAG/L7avc04EMJfR8XxjmxazD3Klt8liBfy+0ABY+xxT/Ji29J0Ologk5ck1+R
-	+jbXSGnTSZEEJBrQJX/EXTR27SNX7EDnu4cbZSLq3+Q==
-X-Received: by 2002:a05:6820:4ded:b0:6b1:4fa4:76c5 with SMTP id
- 006d021491bc7-6c53f74c28cmr1453244eaf.4.1789398272654; Mon, 14 Sep 2026
- 08:04:32 -0700 (PDT)
-Received: from 969154062570 named unknown by gmailapi.google.com with
- HTTPREST; Mon, 14 Sep 2026 10:04:27 -0500
-Received: from 969154062570 named unknown by gmailapi.google.com with
- HTTPREST; Mon, 14 Sep 2026 10:04:27 -0500
-From: Bartosz Golaszewski <brgl@kernel.org>
-In-Reply-To: <20260914071944.164217-1-shengchao.guo@oss.qualcomm.com>
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="UK/Sjr8k"
+Received: by mail-ej2-f12.google.com with SMTP id a640c23a62f3a-c25ef7a3ce9so262211966b.3
+        for <linux-arm-msm@vger.kernel.org>; Mon, 14 Sep 2026 08:07:08 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google; t=1789398427; x=1790003227; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :from:references:cc:to:subject:user-agent:mime-version:date
+         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=3h5ea7IOf0EVQAaE0ptSbBKWXAx2/t/WtJvk1q8hIhk=;
+        b=UK/Sjr8kFUFcUApvsJ+UgvnebPDhTxht+mM3Arje2JZYp0ku4z8zxKsHKKsUzsV6gS
+         ZgorhyDIGaUDTOKE6rHnvFgY6vULTp3iFZOUrTmiAq2kQ17HVX/KbZZEpsNd0X/kKpqg
+         IKz3eTS4GpFXt8v4NaXRjfjaCbTcR+Hl797MzcjI5nXt0bX//9Y/lWcY9KmMSZcGnA/W
+         BaL5hrSyMkSqDJVhD55+nrpbI8zA/6Q0qa1J10gA4zT/JvGh4/4bE3cpjp5ULwE2HZu7
+         ttVH4L+Nvhtn9+IFrmus6DAV604GguhoQqXcObXFW7HnNP4udYjlUto8vCx6oVbQF21T
+         CQ5w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1789398427; x=1790003227;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :from:references:cc:to:subject:user-agent:mime-version:date
+         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=3h5ea7IOf0EVQAaE0ptSbBKWXAx2/t/WtJvk1q8hIhk=;
+        b=kTtaENM2z6SWufGk+xeId/Wy6HumxRV1sANlb7kwKdxUNChVqOkRKJrYZbUrVo2+Io
+         Jhr0cLCbnnVYBpRLrVHeTULPGu0qfMLOg5KBfNUrwoMs2cLuuJ7pmtUuUJq5fo4cwfub
+         juo/wLSMWOrli6lX5DxSDqt2ief+nxNqtlgzRugmKgUpde8QiRR6fjEn++RTcJo67X+y
+         Pvl76f4QKX0CvGS4XbDviRq7UBUygIRRAYDvxpFLjwYUnBoiP1ebpNWgkP76lJfyK7K9
+         0TQX3VzZQgP95hej8T4BBG/nPKwRaykfhF0DETNQxhG8Zaucr/Q5Rj6rPVWHJsZsScGy
+         4K2w==
+X-Forwarded-Encrypted: i=1; AKwUvBzWC2hae6F62CNaCwpqWLYHlQwArYai3Igabu8mala0LmWHyiUvetmOxKkKHokKahUX2F7d9ToKNPZcDRwu@vger.kernel.org
+X-Gm-Message-State: AFuF++lq2hZrYzY+WVPVA8gCZffyl0St/9uP+u4RIiehLJWal/NnQBGi
+	IR8XWKCZZ73bwzYZpXNHcz5EbmAAJyhq8zu5ObX0zPbOIyxeuRJ2u6FlZI9N6PAG6xc=
+X-Gm-Gg: AYBFou1h4ZlLLGiKWcoNm29y65obZgMiwRAi+o9JnbKh39pW/6jC8FXwUpV+lF/0uDg
+	E44ZCD8isDzkB0ulfKV8p17uznfZxMHOaBQYj/F1REU6axU9HlrYp6ygYmiQT61mWUzzxgFXJuq
+	GM1UeGmABRBDETtrrYzOpkZDz+J1o4jD2BXl/ZPZBJnzcJhwjcjDYur2XkcPn8a0egYrwu38Rvz
+	Pjs79CjrfhB/Ldx7uI9XjvEBWK0TsL+Zot1df35byKVa3LcdtN6qpID9/LUiBK1KZQnleXQH+6v
+	edfe4QecgMGDRtP5W+7TSBES0lo6bGBfYLNNLhvXHQMid7+0DfRs3QALag8SsD6KRrHuH6BU3Ur
+	OuHnDHwB+snh/WoRLwTTYtGEbw+a3gjhp8NLI99b0mtr0FcuDkGRMC9lRvO66vT25t6oMep3+IS
+	ddMnkLIn3l+5uQkzQoAvf9mi/gD6Y+nlQgQDmQyDZaPS+FVrZ1f2y8RtPMHpKs1FPVpzxxN40eF
+	yFkh62BpBA=
+X-Received: by 2002:a17:906:c106:b0:c25:8fb2:5e24 with SMTP id a640c23a62f3a-c29b8605e46mr206316666b.15.1789398427031;
+        Mon, 14 Sep 2026 08:07:07 -0700 (PDT)
+Received: from [192.168.0.167] ([109.76.248.34])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c2966125543sm443442466b.55.2026.09.14.08.07.04
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 14 Sep 2026 08:07:05 -0700 (PDT)
+Message-ID: <81fc2514-151c-4305-9a3f-4d2774c7c5ce@linaro.org>
+Date: Mon, 14 Sep 2026 16:07:01 +0100
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260914071944.164217-1-shengchao.guo@oss.qualcomm.com>
-Date: Mon, 14 Sep 2026 10:04:27 -0500
-X-Gmail-Original-Message-ID: <CAMRc=MdusArtL93xQ8c6HkQeAxLrB+3++jO2-8mNds9vkg=tww@mail.gmail.com>
-X-Gm-Features: AcwNN1V6OLo_FdWNPyGqxOdJCRRZC8xotNwD9949d4CjrdUhJxWkvQD9p6ks3Mo
-Message-ID: <CAMRc=MdusArtL93xQ8c6HkQeAxLrB+3++jO2-8mNds9vkg=tww@mail.gmail.com>
-Subject: Re: [PATCH 0/5] arm64: dts: qcom: nord: Add PCIe and WLAN support
-To: Shawn Guo <shengchao.guo@oss.qualcomm.com>
-Cc: Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>, 
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
-	Bartosz Golaszewski <brgl@kernel.org>, 
-	Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>, Yu Zhang <yu.zhang@oss.qualcomm.com>, 
-	devicetree@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, Bjorn Andersson <andersson@kernel.org>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 2/8] media: qcom: camss: create the source to CSIPHY link
+ per endpoint
+To: Hitesh Patel <hitesh@ebytelogic.com>, linux-media@vger.kernel.org
+Cc: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
+ Loic Poulain <loic.poulain@oss.qualcomm.com>,
+ Mauro Carvalho Chehab <mchehab@kernel.org>, linux-arm-msm@vger.kernel.org,
+ linux-kernel@vger.kernel.org, ravi@ebytelogic.com
+References: <20260914133416.1030231-1-hitesh@ebytelogic.com>
+ <20260914133416.1030231-3-hitesh@ebytelogic.com>
+From: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
+Content-Language: en-GB
+In-Reply-To: <20260914133416.1030231-3-hitesh@ebytelogic.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Mon, 14 Sep 2026 09:19:39 +0200, Shawn Guo
-<shengchao.guo@oss.qualcomm.com> said:
-> This series enables PCIe on the Qualcomm Nord SoC and brings up the WLAN
-> modules on the two reference boards.
->
-> Nord has four PCIe controllers fed by a single quadfurcated Gen5 QMP
-> multi-PHY.  The link topology (x16, x8+x8, x8+x4+x4 or x8+x4+x2+x2) is
-> selected by firmware through a TCSR register that the PHY driver reads at
-> probe time, so the DT only describes the PHY ports and hands the driver
-> the TCSR handle.  Patch 1 adds the PHY, the four controllers and the PCIe
-> SMMU; patches 2 and 3 enable them on the IQ10 Robotics Reference Design
-> and the Ride Embedded board respectively, along with the per-port PERST#
-> and WAKE# lines.
->
-> Patches 4 and 5 add the WCN7850 WLAN module sitting on PCIe2 on both
-> boards.  The two boards power the module differently: the Ride Embedded
-> connectivity adapter card derives the core rails from the module DBUs
-> gated by PWR_CORE and PWR_CTRL1, whereas the RRD generates them with
-> discrete on-board bucks behind a single core power enable.  Both are
-> described as they are wired.
->
-> This depends on the Nord Gen5x16 multi-PHY driver support [1], without
-> which the PHY does not probe.
->
-> Dependencies:
-> - PCIe and PHY: https://lore.kernel.org/all/20260909-nord-v3-0-b0a82721c547@oss.qualcomm.com/
-> - DTS prerequisite: https://lore.kernel.org/all/20260904081619.593602-1-shengchao.guo@oss.qualcomm.com/
->
-> Krishna Chaitanya Chundru (3):
->   arm64: dts: qcom: nord: Add PCIe PHY and controller nodes
->   arm64: dts: qcom: nord-rrd: Enable PCIe controllers and PHY
->   arm64: dts: qcom: nord-ride-embedded: Enable PCIe controllers and PHY
->
-> Shawn Guo (1):
->   arm64: dts: qcom: nord-rrd: Add WCN7850 WLAN support
->
-> Yu Zhang(Yuriy) (1):
->   arm64: dts: qcom: nord-ride-embedded: Add WCN7850 WLAN support
->
->  arch/arm64/boot/dts/qcom/nord-embedded.dtsi   | 926 +++++++++++++++++-
->  .../boot/dts/qcom/nord-ride-embedded.dts      | 151 +++
->  arch/arm64/boot/dts/qcom/nord-rrd.dts         | 158 +++
->  arch/arm64/boot/dts/qcom/nord.dtsi            | 297 ++++++
->  4 files changed, 1528 insertions(+), 4 deletions(-)
->
-> --
-> 2.43.0
->
->
+On 14/09/2026 14:34, Hitesh Patel wrote:
+> The link from the external CSI-2 transmitter to the CSIPHY is created
+> in the notifier .complete() callback by walking every registered
+> subdev, reading the CSIPHY it was bound to from sd->host_priv and
+> linking the subdev's first source pad to that CSIPHY.
+> 
+> This assumes one transmitter feeds exactly one CSIPHY. A GMSL
+> deserializer such as the MAX9296A has two independent CSI-2 output
+> ports which, on the RB3 Gen2 vision mezzanine, are wired to two
+> different SoC CSIPHYs. The same subdev is then bound once per CAMSS
+> port endpoint, the second .bound() overwrites host_priv, and
+> .complete() creates a single link from source pad 0 to the last
+> CSIPHY. The second output port is left with no link at all, so a
+> second camera can never be routed to the SoC.
+> 
+> Move the link creation into .bound(), where both the endpoint and
+> the CSIPHY are known, and resolve the transmitter's source pad from
+> the endpoint fwnode with media_entity_get_fwnode_pad(). Each
+> endpoint then gets its own link between the right source pad and
+> the right CSIPHY.
+> 
+> For a subdev that does not implement .get_fwnode_pad,
+> media_entity_get_fwnode_pad() falls back to the first pad matching
+> the requested direction, which is exactly what the .complete() loop
+> did, so ordinary single-output sensors keep the same link as before.
+> 
+> Signed-off-by: Hitesh Patel<hitesh@ebytelogic.com>
 
-For the series:
-
-Reviewed-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+Reviewed-by: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
