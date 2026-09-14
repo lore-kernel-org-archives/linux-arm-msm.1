@@ -1,282 +1,166 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-ej2-f12.google.com (mail-ej2-f12.google.com [74.125.228.140])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 205B53B14D5
-	for <linux-arm-msm@vger.kernel.org>; Mon, 14 Sep 2026 11:29:07 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=205.220.168.131
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789385351; cv=pass; b=DojKgs4D5rO+A8f8C06kgtIVw48n1WVMyPnhqvZSrgMw82IpRx6kzJgxRxuRKvFBO4Ia6co4XTVRf+xxNy59yYmbO7G/yAkNf0BCYH8C52tA9Emxaf22i99rkKIx22YAVTB30bJ4v7V13wK1hJfNVWFvWDhEYVPnqU389vbvgpI=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789385351; c=relaxed/simple;
-	bh=sESUPPWq/CMboQ5PQmmk2MKfkkFYJhL7/gKSrRe1IkI=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=ONFvNowm5YWCyx3wYtKKQ9X66YKIo374qt0eNxCg6igzsacQcxpR6qnOhLS07P7DFtyCnAXVdAqdcQ2CYd6C6Le0tRju3LvmzHRrlGATmSgKIDM3Jfz4e+B+zzYJuK3S3lAkJPAl7qNIFo4oSs5ip+WF8h8P3E8EahmzL6y+oII=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=caRqaS2A; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=YD6oI3Qi; arc=pass smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D1CFA3D9527
+	for <linux-arm-msm@vger.kernel.org>; Mon, 14 Sep 2026 11:37:11 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.228.140
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1789385834; cv=none; b=T6ik50eB068nfsIyvG3Z6hsSWsXxwDn81QWrOeuwzueBgUTncRjdSzJMiovLhr4CDJxCG2vsMmJxQzBkDpNwh/gt9q9iJ6WJomGAD1TR37yY0UiMbPHf9mo54Rv2Za7tKoYAbsF/FtjIU86+fRgb8S0LJHKc8Fak3r//I8bKDnc=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1789385834; c=relaxed/simple;
+	bh=fVFayjc2eOqsSz3WXVu1VPZKmGsi43dhiuYuNC+XHjw=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=aQy4FmrFowfNIqkgUavLXeOmeP+q0X1oouZ5EI8Ck3l3N2FIluKCpI1v32r3kXjG9ACpVt4/WnBeb2bXKET9oVpfSrbxTa/bE7xWdtoL+lZzpV1DK3vtEIJU+7BnKVvBLghQ/8/OHf1YVkDeKIVeMB0D7f74Iy41uyoZ46yW5S0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=wHsPQhQa; arc=none smtp.client-ip=74.125.228.140
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="caRqaS2A";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="YD6oI3Qi"
-Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68EAmAVC377879
-	for <linux-arm-msm@vger.kernel.org>; Mon, 14 Sep 2026 11:29:06 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	vu8FzaKqwvVKte6/8Xq/EhQXyU+EIfm/StcQWbop8JU=; b=caRqaS2AxVs7aeG1
-	acaSpuQ2wtaqMV2Jcb1gFqnQboOUQA7+5b2IPrpYgQnnX9Zr4dkQkPJI0QaKMFnp
-	DVhFHKvbuIhTAG3fC0NtC1mHIvH9NredhDP+UHMr63HmwvySYOdpXrRn7GQgwWPx
-	4u14ckoPSnF26FkPNgKnP6qJB6JwIkRjd32bfjr97v6JL1W2LAVnasrkrtZzkVx4
-	0sbWMGZhSmUVBgXPS4f6iAEXOc2A+pahveMCJo6mfcphbmhkrReAyjcSJNKPzWBm
-	8dQ4pH6RbkAwsHkAjh0Jey6w80HXZJTpkdTydOXKsUNG/F7uYu7oOxQZm3vlaNqW
-	gJhHog==
-Received: from mail-pg1-f200.google.com (mail-pg1-f200.google.com [209.85.215.200])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gpecs8fbn-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Mon, 14 Sep 2026 11:29:06 +0000 (GMT)
-Received: by mail-pg1-f200.google.com with SMTP id 41be03b00d2f7-cc1b80835d5so4058178a12.2
-        for <linux-arm-msm@vger.kernel.org>; Mon, 14 Sep 2026 04:29:06 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1789385345; cv=none;
-        d=google.com; s=arc-20260327;
-        b=HptdTuayr+sH5FP8EodWE5oycUPve6mxQiPrSvN7PyqRiaUozzz6LF0ZLevbJZWUBf
-         j8cUSCCXN5iQNoLNiKqT0TIWWjEjEJFg6SyN49FMgZEVNUK4aO99PAHP4wa3peexTV/5
-         E2eW4rD2wEXajfEA9tnLQoJhT6sP5Izs+r/HgPPJjlvYDBkuo3xx4wJIwFAh16fmQiJC
-         qeZJ33vLyC6FItSYwsnTxd8KHqZkiOmrTIro78v4nTwkQ6udmw+5NdQ/I8DdyJoO5H6l
-         hmjizTvN4FtT4+nT9C6pcFLrCt1jWYQadUMJZmqwQQJrM8RuAL9BuUlYj4g/xOYCjqB7
-         8Rsg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=vu8FzaKqwvVKte6/8Xq/EhQXyU+EIfm/StcQWbop8JU=;
-        fh=7eP/HbOeHMesiAnIyNyVKD9ATusmepWByV0711xiUHc=;
-        b=V52cDvPSxlPoE5CBJCWASxEnN/RCYwCPSwS77qLpRyy5UNtSyuHng/pwDm7+Jk8QFv
-         6ei5QJ+hCqF2JvwlvchLqKr02i4OuIkoUBu/POOGVZFsOnaCKcxIvQqd3ZqP/5nuztnQ
-         1tiKdjMfL+kEFJi1WRLwGy5KUO6+HuL0EqvZBKwCFLdNMbCwk0TFYPX00TGBjcR7kj2m
-         Kz7j/dAUj1daNksxDMy08MUVKy3Ro8dFmJVAHPhi8C3u1vPIXYUfT+nhRnhTfQXCqKaR
-         hFCyYKCpOpwsV2kiZ2LVLfLU+gp4v06JJpxqx9/8kEXZxwAKVFBVczHu690Xfir9sZfr
-         OLaA==;
-        darn=vger.kernel.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="wHsPQhQa"
+Received: by mail-ej2-f12.google.com with SMTP id a640c23a62f3a-c293c683202so250196066b.3
+        for <linux-arm-msm@vger.kernel.org>; Mon, 14 Sep 2026 04:37:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1789385345; x=1789990145; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=vu8FzaKqwvVKte6/8Xq/EhQXyU+EIfm/StcQWbop8JU=;
-        b=YD6oI3Qi3gGlDyV8OJnyOo6COs2tfUMcwjjTCdlHdirYdWJzVpTLLjhVHNXKtyHfvO
-         ItHmNw3R/nWMaqgQubJwa4uqJiYJvgv11yz7uzqU6QCU/uGeLpWREUtS/dXSKFK2OP4l
-         RhrphuojRzL48T/oYvNqdIWmOODpE7k41ujfxprHdcP9Ud3BhRdq3yTQ0GKqoKc6Np3E
-         +fCAcYVBPyNb0iUKr22Wrk5YjCX63ecJsrtCteogKp91m+soHao4cuyLq6OqGFWzGFOE
-         HQ4uRl/ZudnP8xui3ISSevp2NLo4jCSztd2D9GyyG+DNEGR4YVjMnpR5FglG3Xcbc9FR
-         xoNg==
+        d=linaro.org; s=google; t=1789385830; x=1789990630; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :from:references:cc:to:subject:user-agent:mime-version:date
+         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=BrFobApx96GbKEm837whkFKjtf7GL+qiMSoZ+3ZGcro=;
+        b=wHsPQhQaTJzUQzz1qYlTn4P++71n2Iy5bqhx0T7CRPf+7i3lKHY1rexkOlNGQMCwcZ
+         u0Si7AN1hryouOPT0nQ0XaHFU17Iz0k837RLoBm0pTbq3bVh3u6e8NjjrxEZo1yzlreq
+         1zeFFjjSVCVNE917fZ1a0rcs2BBY86bNkcm8ynrlvONS2osqrRYMOqKc4nbC9jcDbBaR
+         8Mo1vHCg2uYDr/G9ok+a/q8fdH2mrPsd4SB5QMrq9jVl5Vb8QjRxzNjhzSrHzNM275s4
+         w8KsXaUL4F+uO0EjoogrCOS/Qg7/3bCEvsns7xfnDYsM2h8qyihbpQOc/NHgDu7MPpdn
+         3q7Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1789385345; x=1789990145;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=vu8FzaKqwvVKte6/8Xq/EhQXyU+EIfm/StcQWbop8JU=;
-        b=YO0c8OiL7vBkvJ1nfoJZLpPsT5sdEfx3wQGB08Qchwh0hXkexon00nGJ8a4PRJVhQG
-         ExBIE16L2iW1F81WsDhwLNvVY95ymacz2CUyBUknuzPLx7l5R9aMGS+1XBwfpirdV6gd
-         pQtZxTU/XKLiuV+q+hAkzUJfknKzq9E7ox6WFn6trnvskc3ClS5M27HE6Vvuh98m4KhC
-         kMUGxo8FPKpxgbaAT2wa3ITYsnoFywsPs4XhS7KCg8GaXVOD6jmA7heNmcDz2PDlErwt
-         VpKz+eLiqU2z0Q3WJY4931+B3/OW+WCIuUNKQp4M6vpIsQxvFFld3ZyUGfZOZbjC994v
-         O2rw==
-X-Forwarded-Encrypted: i=1; AKwUvBzgmIX2gfsCCdF5njO1LeZytVj96YPwaRsCUJzN0iG2X1OsaXoX2EObBeie0SSQX+pXhd4hdkTMgMRBvsRn@vger.kernel.org
-X-Gm-Message-State: AFuF++nOrbT9s0CGuneLKUQmn+JXHYlr/J1vSuiM+J9ugBXr0N1e/gl7
-	JZT2IUSmGVFb6vDKxE+TQirOKnevfytwHXzUOMt7Ww9bpPrbWufj3hit90IfWtp33olG6h73NsU
-	Ark+/BinTReL122sZ5+eF/cCNR3uXz7Y5djGnIrdWzpBOxErNEat4Riu7Skis00Mgjz8KJUdOTy
-	xs9Y7iszPLHY6NGdUsoivfSgFinJTTw9ZMcLIYFktnqOs=
-X-Gm-Gg: AYBFou1NMQaSTQziswKdBICgBnXbEMankkb3nYR9z1aFUcvhxdeDNBN2Zfyb9oTSb8l
-	W287BZc0otT8A1ZmKfs78oWOzMT/K3sMP4kA4B2/U5Fl3d1EKrxcS0gp/tvW5AX6jbkGz3do1ci
-	B6dfpwY76f27kOj1UhrC3lro1Tj1Vj1lC7y5SjrcJaxX8Vx3QjKQo0IAcpwg==
-X-Received: by 2002:a05:6a20:ce49:b0:3d0:cc29:ff64 with SMTP id adf61e73a8af0-3db40642804mr5427118637.15.1789385345388;
-        Mon, 14 Sep 2026 04:29:05 -0700 (PDT)
-X-Received: by 2002:a05:6a20:ce49:b0:3d0:cc29:ff64 with SMTP id
- adf61e73a8af0-3db40642804mr5427033637.15.1789385344914; Mon, 14 Sep 2026
- 04:29:04 -0700 (PDT)
+        d=1e100.net; s=20251104; t=1789385830; x=1789990630;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :from:references:cc:to:subject:user-agent:mime-version:date
+         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=BrFobApx96GbKEm837whkFKjtf7GL+qiMSoZ+3ZGcro=;
+        b=olSYXtAJYRaCoy7S6CUOoY9cNpXKUlbbrPKrirNVSSqUR6iLr8PS4JNvnPj9N+Kunl
+         l5pl0Kod+7HcXOW+mFAyBjgCF/gNRsP0kBCqP79Enyzgy4cQc4udHJKyS2JEeofEnCvk
+         0uoW2lFOX+AtbZG4Ep6oTtCN1NMBRtjLfFn1MJK3uO4OfQQFYgdufn9K5pXFzoBMPeOV
+         Rw2SNxijXQ0ntm1D/Y3WkJn8hU3nvGP7Psv7XTp+0bYKPyaYZwd5tRKISZSNDoJXmJvP
+         T0nTS3JJipXHuAzYfF3M/wkl4pcoiz+KCQVgiWaQS0fA8eEoffHsOTMKXLvDslOeJit6
+         g+2g==
+X-Forwarded-Encrypted: i=1; AKwUvBzqfedCPU2MYxJCoDYB/j/uWgtNUz/vyg04W2Q45wFmSITSgHc9ox6o6VJTCepPi1V+saPdBe/Ecpv3GCkC@vger.kernel.org
+X-Gm-Message-State: AFuF++kIcdYO/zIkXlDpFJ07g6uXvRpO9lXe4in+c5BSw5BBLdeTUuIv
+	J49X1cT0CDjHaxX9NhiCnTu3FrriZRpbiIxxUNM6s/aL3gyqEdA5svPRofTHPwzLjeY=
+X-Gm-Gg: AYBFou0ejAn4rDQu97VXcGGrJgOAOW8ZA2RutdlLKdieIeIEF9ea7kCc+8Ze5UdB5EF
+	/pybPpIpKDYWST8MdWtRCqNF8S3QTXA6Hwvj1h9BJZ0DuX5FZldk8VBEeTq8y36g54HNzKRz+TF
+	3XZXVHaMTOaYYxVpoJhfVu7s/I6rReafIejTAYxe02ThXjGZk08uvWYzXyg6bpXR+u00x3jWtEg
+	8bfsGDByDgg4UI5CnAssEp3dbLp2fbl3VQCDgLSHiBH3hp0VABuL8kb+oPU3EZkpG9sRa8FWlzB
+	srHvKM6+rU8VHB+qK+4xN1QHcA8KxlYuI3c2GN5Uih0rNw9hzHKXf6f25heUmopYJIdBtS90q0a
+	GFgt+PIRa4TW3agv1qk4kRnxn7XvwcJITLRZibjzJfnn+ZTPwiie0ZOYsopjWSOOB8qWpeuNBQP
+	ChsvkKCLGgJNq4jF6S17Fap+gBHpoOpv7SZ+Sj+HhXArNfBWTVsLDYEveoo6g/fp5/9xyq7+ro0
+	6Q75sxi5w==
+X-Received: by 2002:a17:907:806:b0:c29:53b5:c69d with SMTP id a640c23a62f3a-c29b86f99a5mr151242966b.28.1789385830007;
+        Mon, 14 Sep 2026 04:37:10 -0700 (PDT)
+Received: from [192.168.0.35] ([109.76.248.34])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c29660219ecsm412455366b.16.2026.09.14.04.37.08
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 14 Sep 2026 04:37:09 -0700 (PDT)
+Message-ID: <44634913-fd6c-454d-a3a2-6a8d541b2c1e@linaro.org>
+Date: Mon, 14 Sep 2026 12:37:06 +0100
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260907111659.263324-1-ulf.hansson@oss.qualcomm.com>
- <20260907111659.263324-5-ulf.hansson@oss.qualcomm.com> <327e3afc-0803-4ca4-9c76-249077ab9b2e@gmail.com>
-In-Reply-To: <327e3afc-0803-4ca4-9c76-249077ab9b2e@gmail.com>
-From: Ulf Hansson <ulf.hansson@oss.qualcomm.com>
-Date: Mon, 14 Sep 2026 13:28:54 +0200
-X-Gm-Features: AcwNN1WlCy19af4Kdfv9qzAUmpjAMUrSlWlur374POXIbZWJybPNGsXjpQRAkBg
-Message-ID: <CAPx+jO9P=7i48OAjCZTRbdKgPSLvyKjXW+z3sRcNExSc3-Zd6Q@mail.gmail.com>
-Subject: Re: [PATCH v3 4/5] cpuidle: psci: Initialize the PM domains in
- powered off state for OSI
-To: Dhruva G <goledhruva@gmail.com>
-Cc: Sudeep Holla <sudeep.holla@kernel.org>,
-        "Rafael J . Wysocki" <rafael@kernel.org>,
-        Daniel Lezcano <daniel.lezcano@kernel.org>, linux-pm@vger.kernel.org,
-        Abel Vesa <abel.vesa@oss.qualcomm.com>,
-        Lorenzo Pieralisi <lpieralisi@kernel.org>,
-        Christian Loehle <christian.loehle@arm.com>,
-        Maulik Shah <maulik.shah@oss.qualcomm.com>,
-        Yuanfang Zhang <yuanfang.zhang@oss.qualcomm.com>,
-        Sneh Mankad <sneh.mankad@oss.qualcomm.com>,
-        Suzuki K Poulose <suzuki.poulose@arm.com>,
-        linux-arm-kernel@lists.infradead.org, linux-arm-msm@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTE0MDE2MyBTYWx0ZWRfXyY6XKW0yv8ns
- /65UDQM2SIaOC3/TFHjgTUtzLffLqz+48MhBkfw2MxOfEzmLcLTR6JRAqvn2BXgav8vpQs9t0zP
- rD/mh7sDZWzFExdErhB9YCnisA7FfDU=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTE0MDE2MyBTYWx0ZWRfX6gMBc8/FMnJ6
- IFBT7RojQ3jQrhzUJosBLRiGXwrE1HBwWdDeEqBJ2EMWPMm/m0OwuTENimh08+SBJKSkxICubEy
- gUG9om+vhAK+esN5i3FnxraVZ1R39zK9DWOnSlBhuovy5sPyau2SmLw+7D4yviYKVBhH7TbO1DD
- sSL0a/AoYhglwqSPzMy4AepjEiNnj8Az0RF5w+yEGQPhjia7jcCOUOG8gDfRlSMqopGlPT4AAzf
- rwcAl8+bfmFWPH5FHKS3pR3RjAUhy39wCvygmIFX+twmcp8BZVDkTyK431neZLJiBvRoZXU+JAA
- OeopveHpI6/ryz82vvXv93pMxOimVVNQN70ZpM5AWfoX13m2TxPzWT1Jh0rD317kOuDrzqPBmTz
- LtJmIlY42mxUhze3A0o/khCi3c2m7OKX341jFNMIV9N0o4t59v+kas5kR64TnUbOuMP/+mM9tWg
- T3j4iFAFHY9AdBEuEDw==
-X-Proofpoint-GUID: d8l4Je_EniuBYAetpKcY1T_5qlMzxpUI
-X-Authority-Analysis: v=2.4 cv=b/cncdGx c=1 sm=1 tr=0 ts=6aa7da82 cx=c_pps
- a=oF/VQ+ItUULfLr/lQ2/icg==:117 a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10
- a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
- a=yOCtJkima9RkubShWh1s:22 a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=pGLkceISAAAA:8
- a=rXashWC7mhQ_VnoTN34A:9 a=QEXdDO2ut3YA:10 a=3WC7DwWrALyhR5TkjVHa:22
-X-Proofpoint-ORIG-GUID: d8l4Je_EniuBYAetpKcY1T_5qlMzxpUI
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-14_03,2026-09-13_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- spamscore=0 bulkscore=0 adultscore=0 priorityscore=1501 phishscore=0
- clxscore=1015 impostorscore=0 lowpriorityscore=0 suspectscore=0
- malwarescore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2609040000
- definitions=main-2609140163
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v16 1/5] phy: core: Fix use-after-free in phy_get paths
+To: Frank Li <Frank.li@oss.nxp.com>
+Cc: Bjorn Andersson <andersson@kernel.org>,
+ Michael Turquette <mturquette@baylibre.com>, Stephen Boyd
+ <sboyd@kernel.org>, Rob Herring <robh@kernel.org>,
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
+ <conor+dt@kernel.org>, Robert Foss <rfoss@kernel.org>,
+ Todor Tomov <todor.too@gmail.com>, Mauro Carvalho Chehab
+ <mchehab@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>,
+ Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
+ Bryan O'Donoghue <bod@kernel.org>,
+ Loic Poulain <loic.poulain@oss.qualcomm.com>, Vinod Koul <vkoul@kernel.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+ Kishon Vijay Abraham I <kishon@kernel.org>, Felipe Balbi <balbi@ti.com>,
+ linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org,
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-media@vger.kernel.org, linux-phy@lists.infradead.org,
+ Krzysztof Kozlowski <krzk@kernel.org>, stable@vger.kernel.org
+References: <20260906-b4-linux-next-25-03-13-dtsi-x1e80100-camss-v16-0-f7bd68b5369f@linaro.org>
+ <20260906-b4-linux-next-25-03-13-dtsi-x1e80100-camss-v16-1-f7bd68b5369f@linaro.org>
+ <aqRq-xZRIDL1apdI@lizhi-Precision-Tower-5810>
+From: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
+Content-Language: en-US
+In-Reply-To: <aqRq-xZRIDL1apdI@lizhi-Precision-Tower-5810>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Fri, Sep 11, 2026 at 6:34=E2=80=AFPM Dhruva G <goledhruva@gmail.com> wro=
-te:
->
-> On 07-09-2026 16:46, Ulf Hansson wrote:
-> > At the point when the PM domain and the topology are registered through=
- the
-> > genpd subsystem, it's not really known whether corresponding CPUs are
-> > online and thus if the PM domain should be initialized as powered on or
-> > not. Instead this information becomes available when the CPU devices ge=
-ts
-> > attached to their respective PM domain through dt_idle_attach_cpu().
-> >
-> > This is a problem when using PSCI OS-initiated mode, as we may end up w=
-ith
-> > a PM domain that has the genpd's status indicating it to be powered on,
-> > while it in fact may not be the case. In the less severe scenario, this
-> > leads to selecting a shallower domain idle state for the PM domain than
-> > necessary. A more critical problem is when a non-CPU device shares the =
-PM
-> > domain, leading to their corresponding drivers not being able to trust =
-the
-> > status of it.
-> >
-> > Let's fix these problems by initializing the state for the genpd's to b=
-e
-> > powered off and in the deepest possible domain idle state, when using
-> > OS-initiated mode. The support for ->sync_state() is maintained by sett=
-ing
-> > the GENPD_FLAG_POWER_UNKNOWN for the genpds in question.
-> >
-> > Reported-by: Maulik Shah <maulik.shah@oss.qualcomm.com>
-> > Link: https://lore.kernel.org/all/20260811-domain_off_ss3-v1-0-6a0a0fc0=
-23f5@oss.qualcomm.com/
-> > Reviewed-by: Abel Vesa <abel.vesa@oss.qualcomm.com>
-> > Tested-by: Yuanfang Zhang <yuanfang.zhang@oss.qualcomm.com>
-> > Signed-off-by: Ulf Hansson <ulf.hansson@oss.qualcomm.com>
-> > ---
-> >
-> > Changes in v3:
-> >       - None.
-> > Changes in v2:
-> >       - Fix a bug in the call to pm_genpd_init().
-> >
-> > ---
-> >  drivers/cpuidle/cpuidle-psci-domain.c | 5 +++--
-> >  1 file changed, 3 insertions(+), 2 deletions(-)
-> >
-> > diff --git a/drivers/cpuidle/cpuidle-psci-domain.c b/drivers/cpuidle/cp=
-uidle-psci-domain.c
-> > index b9e4ad7d43a3..4d8c63d329c2 100644
-> > --- a/drivers/cpuidle/cpuidle-psci-domain.c
-> > +++ b/drivers/cpuidle/cpuidle-psci-domain.c
-> > @@ -68,7 +68,8 @@ static int psci_pd_init(struct device_node *np, bool =
-use_osi)
-> >        */
-> >       if (use_osi) {
-> >               pd->power_off =3D psci_pd_power_off;
-> > -             pd->flags |=3D GENPD_FLAG_ACTIVE_WAKEUP;
-> > +             pd->flags |=3D GENPD_FLAG_ACTIVE_WAKEUP | GENPD_FLAG_POWE=
-R_UNKNOWN;
-> > +             pd->state_idx =3D pd->state_count ? pd->state_count - 1 :=
- 0;
-> >               if (IS_ENABLED(CONFIG_PREEMPT_RT))
-> >                       pd->flags |=3D GENPD_FLAG_RPM_ALWAYS_ON;
-> >       } else {
-> > @@ -78,7 +79,7 @@ static int psci_pd_init(struct device_node *np, bool =
-use_osi)
-> >       /* Use governor for CPU PM domains if it has some states to manag=
-e. */
-> >       pd_gov =3D pd->states ? &pm_domain_cpu_gov : NULL;
-> >
-> > -     ret =3D pm_genpd_init(pd, pd_gov, false);
-> > +     ret =3D pm_genpd_init(pd, pd_gov, use_osi);
->
-> If CONFIG_PREEMPT_RT=3Dy,
->
-> psci_pd_init(use_osi=3Dtrue)
->   -> sets GENPD_FLAG_POWER_UNKNOWN
->   -> sets GENPD_FLAG_RPM_ALWAYS_ON
->   -> pm_genpd_init(..., is_off=3Dtrue)
->   -> genpd->status =3D GENPD_STATE_OFF
->   -> RPM_ALWAYS_ON + OFF is rejected (pmdomain/core.c: pm_genpd_init()
->                                       rejects an RPM_ALWAYS_ON domain who=
-se initial state is OFF)
->   -> return -EINVAL
->
-> Therefore, on a PREEMPT_RT platform using OSI and hierarchical PSCI domai=
-ns, psci_cpuidle_domain_probe()
-> should fail while initializing the first domain. The genpd providers are =
-then unavailable, so
-> dt_idle_attach_cpu() fails during PSCI cpuidle initialization and the dri=
-ver rolls back its CPU
-> registrations.
->
-> I don't have a device on me to test this path, perhaps one of the QC devi=
-ces + RT config
-> can reproduce this?
+On 11/09/2026 21:56, Frank Li wrote:
+> suggested subject:
+> 
+> phy: core: use phy_provider_mutex protect between _of_phy_get and try_module_get()
 
-No need to test this on HW, it's certainly a problem. I also noticed
-that Sashiko pointed out this as well.
+A pattern I try to encourage and role-model is making fixes very 
+explicit and obvious - frequently I'll ask people to prefix their 
+patches fixing things with Fix.
 
->
-> Should PREEMPT_RT case instead initialize these domains as ON?
+I'll split the difference with you since now that I read this submitted 
+patch title you're right, it could read better.
 
-I don't think so. Instead, I think we can simply drop
-GENPD_FLAG_RPM_ALWAYS_ON. The main reason to use it was mostly for
-optimization reasons.
+"Fix race-condition between _of_phy_get and try_module_get()"
+>> Sashiko asked during a patch review if the existing usage pattern had a
+>> race condition; specifically in of_phy_get() if it was possible between
+>> returning from _of_phy_get() and running try_module_get() that a module
+>> might be unbound leading to use-after-free.
+>>
+>> Looking at the code this appears to be so, there is no linkage between the
+>> phy and module under a synchronisation primitive.
+>>
+>> Using the phy_provider_mutex in phy_get() will ensure there is a link between
+>> the returned phy pointer and the module_get() bumping the module reference
+>> count.
+>>
+>> Amend phy_get(), of_phy_get() and devm_of_phy_get_by_index() to fix the
+>> same usage pattern.
+>>
+>> phy_provider_unregister() must take the phy_provider_mutex so amending
+>> phy_get()/of_phy_get() to take that same mutex guarantees there is no
+>> use-after-free.
+>>
+>> Fixes: ff764963479a1 ("drivers: phy: add generic PHY framework")
+>> Cc:stable@vger.kernel.org
+>> Reviewed-by: Loic Poulain<loic.poulain@oss.qualcomm.com>
+>> Signed-off-by: Bryan O'Donoghue<bryan.odonoghue@linaro.org>
+>> ---
+> ...
+>> @@ -678,15 +677,21 @@ struct phy *of_phy_get(struct device_node *np, const char *con_id)
+>>   	if (con_id)
+>>   		index = of_property_match_string(np, "phy-names", con_id);
+>>
+>> +	mutex_lock(&phy_provider_mutex);
+>> +
+>>   	phy = _of_phy_get(np, index);
+>>   	if (IS_ERR(phy))
+>> -		return phy;
+>> +		goto out_unlock;
+>>
+>> -	if (!try_module_get(phy->ops->owner))
+>> -		return ERR_PTR(-EPROBE_DEFER);
+>> +	if (!try_module_get(phy->ops->owner)) {
+>> +		phy = ERR_PTR(-EPROBE_DEFER);
+>> +		goto out_unlock;
+>> +	}
+> why no use auto cleanup guard() for mutex lock?
 
-Since we don't assign psci_enter_domain_idle_state() to the
-corresponding ->enter() callback for the idle states, when PREEMPT_RT
-is set, this should still be fine without GENPD_FLAG_RPM_ALWAYS_ON.
+Technically this fix would apply to kernels predating scoped_guard() - 
+kernel 6.5 v Fixes: @ ~ 3.13.
 
-I will give this a try and see how it plays out, cooking a v4.
+Not really sure how far back the cherry-pick will work but I'd like to 
+give the possibility.
 
->
-> This might be safer here atleast:
->
-> ret =3D pm_genpd_init(pd, pd_gov,
->                     use_osi && !IS_ENABLED(CONFIG_PREEMPT_RT));
->
-> Regards,
-> Dhruva
+We can always sweep this file to use scoped_guard() on tip-of-tree later.
 
-Again, thanks for reviewing!
-
-Kind regards
-Uffe
+---
+bod
