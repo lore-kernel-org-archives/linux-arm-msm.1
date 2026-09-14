@@ -1,86 +1,33 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4DAD0463B76
-	for <linux-arm-msm@vger.kernel.org>; Mon, 14 Sep 2026 12:30:57 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id BB4F8471D0B;
+	Mon, 14 Sep 2026 12:32:24 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=217.140.110.172
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789389065; cv=none; b=e9daC5m01QFPsBPCPFazW1UK3i6lhp0RvdJAnycm3bM0IIyyMrV4349jAyk/2gWigmhpi6hI0GQVlB38OQ9xcbNb7v1pG8KJiNKQIOcF+bu5Bb6lcBX6mK0V1tKZqYvQbK+7qql/oQJ9rPi08ss+CSo1Pqnh7yeSs/Hdiv4xYiE=
+	t=1789389148; cv=none; b=T+B/0DbXFo53JBx7tT0ae/Yfxjk6eLzNamm7oIyBjteSxSHjMoCqn7Hfo5j5jQwhTJzCO8QwLMT1S/Q7SnZeaZlbebMlOk4k8FQ6flllHzG+lL9/bghqkpG2szqRMHmkSiC0+DbEu9cZ1szvKPjz2AVwFR6GyWrTGYunwW+veGY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789389065; c=relaxed/simple;
-	bh=4KMlHwFQQyRLI90XZ+lD7GxY4U8Fg6eWl2hPAl1Uhu8=;
+	s=arc-20240116; t=1789389148; c=relaxed/simple;
+	bh=//mVfT+cS6bsEEtaMcIXiUoj03Wbk2JdXzrCu9QKdyU=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=f0P8lT2Ryi5HBL6BazPaYJf9k/h11rUaIbmNoD3BGdHO2fLwZvUMQ6S8WqGweLwbYjnSALfFkTfmlwpTt3cyOAr7eXWDl5CSzZs1C1Le/bzTHAPt9oqUsKkJxRpTq6+GdJIwClXWl0qtEJJF/360bX3nDGxvA0tBVZprY9G16ko=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=ZnAppl9X; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=SBho2sOZ; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	 In-Reply-To:Content-Type; b=UiNPQwfsKcX3r4VWmy08mn0veu4D6MEfOP9sb/14DWJU0rNqiPUjNlCxpETJXnmk6wQx6oRvWXU1/mEFLAuvgjPEmyP2XBS7fp2VtDF196MMUh6fSSLNb0z7vQG0xSOZJEMdfqcktT51cr8xDTTfr5/9VTKdGndaB6xwIJxkqJw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com; spf=pass smtp.mailfrom=arm.com; dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b=vzKnHSdK; arc=none smtp.client-ip=217.140.110.172
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=arm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="ZnAppl9X";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="SBho2sOZ"
-Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68EAmAcK377879
-	for <linux-arm-msm@vger.kernel.org>; Mon, 14 Sep 2026 12:30:53 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	dGUo9Meu4HFS0XWi5GZylJInbwusqwOZ5wQiv+wpt90=; b=ZnAppl9XmQjv1s2k
-	Gp1uAgkSKc3+UuUSdYG3yAY6q7VXe9qP2g7C6LLsW9KWYGQ2dld6WpHgpbiyK4Pa
-	6t5dOjRbozbA9JkReZiBFAYxxdsy1sRN8JSJw28d/64te9j/J/5jOyjsFEy+v0q0
-	UFCpw/wMDYhmxthywTwBTnQ9vNaZFD5XO7i+SQS4yIhCvA0moc886GLn2hz3zJkP
-	Z87cf5ireWvkUdxD6AdQZ2iU/bLSMTTz/p9D9XmIl09V1Q7LfmsWhpgTNkqtnpjk
-	z00sqzD5bmf+n3SDHokdU3xB/qerUMHnvUJuBsH2FkbzVdf6+CtG4nzjo/zBquxt
-	YbzeFA==
-Received: from mail-vk1-f198.google.com (mail-vk1-f198.google.com [209.85.221.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gpecs8n8n-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Mon, 14 Sep 2026 12:30:53 +0000 (GMT)
-Received: by mail-vk1-f198.google.com with SMTP id 71dfb90a1353d-5c65b0280a2so117695e0c.2
-        for <linux-arm-msm@vger.kernel.org>; Mon, 14 Sep 2026 05:30:53 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1789389048; x=1789993848; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=dGUo9Meu4HFS0XWi5GZylJInbwusqwOZ5wQiv+wpt90=;
-        b=SBho2sOZ0+5xaz0WmNJB2p0y/nIDavFovU7VPgL/erI4sC4ctHKvY8K+gj6s0Z9YCq
-         igKXU6+8UlaF3ZxvJAdES1PqHq44GP3Gpd62E2GLiS7+5i5B8TVj0dHC9Dpn6h3sbFup
-         d+HD5blXOl7clFqbj11DZMH1PZM9PLvovbGzZcyfdXf+cwwLz9WXWdeZ/DR+MhawRTzN
-         BREp0jJWWNgBefA6gr7JBd1YlkHT1DHaeWorBJJuUplMg7WHPkFwWcI2Bv8YUSVco6cZ
-         SqJ41/jGLx1MWzctfaSv1Rx0h/xFexNZUgrss/qg5ixH7GsnKV56VEKjxzQbZ/dlRzkj
-         5BwA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1789389048; x=1789993848;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=dGUo9Meu4HFS0XWi5GZylJInbwusqwOZ5wQiv+wpt90=;
-        b=dFRWroXwo3Abm7TwM6eKFzLwpNV2dxFY8zbYcXb7mOnoGuZg+8T+DVtWy0tzUWSWnX
-         uBaPv4BW4o8jbN7Lnw8oiXsJmD1UemAI9kWMRWsWMs8lER/LY5aFHUvOgGweXv9gfkDx
-         fjXZPCK99gLIMU7fMUQ9N9hsRjNDV5MHPOb0n/zuahqFsDRNf1HILXC4PyDt02Yi0iHI
-         xNwIUUhbHLDs8aWCmNYyDpp92X1I/Q3ZqysUGfG8WIOPHl+oEblAeB04Qe0VwumINhs9
-         WTBz5c6mm8aA23XpZuBFaaHp8BBLONR3iK1yLF/EMQ5O4rC7Gi3xHUC/ICGlD93U6ZH3
-         z/pg==
-X-Gm-Message-State: AFuF++nn/5+GZXEwDGeFTuDQm0GntAJS0ceeG2MmtQxCNGLOxGZxe/bn
-	t6ismAw3M+2VLy1Imx/AiqLh76Uzj2BVdlR8ad5ruwbVE0RgJeulJBPI7zfCeuHwUbbDSgU5/Px
-	sqlDOzWaPi8nDUlR2MG6PbGyd5R2X0p1VWBCYG8zIVuoicN5cDZDIQpHapt1mVRap20LD
-X-Gm-Gg: AYBFou3aMNDb0KSnS9cLySopTb6l1NO5NSZEw4G2VSk1Qpp/qlvsDLJEe6BhFffa7A+
-	qUhLw2oTiIZoBhfUXMaFMR/oAQoBykL8cq23o8O2g6EYn1l4bv2Ta5iF57Lq+24kWZiDh3WjP8E
-	35jEM9Ouo/FH7eG9evoEKl39km+oBFRh+Q7Kf5QANHGvx3tW/U+kIq8sJkbrGwNCuc4APRuhC4o
-	IdVRItYJyGONY52WNoxHjULsoMlTPSTPvtf+6LZsovkHtjal8JQuM7k7YUEjpNE89RSO7tMH2nA
-	4/lFg2g8VNk7Oca0tc6N19LZccV/ynJyKjaYIul9vxlH4qiau58bq288WlmGqqcQ53TD1TKSWvn
-	dyAgthREi3WOIvBiS7Y7qyg==
-X-Received: by 2002:a05:6102:11:b0:79b:b389:d6d7 with SMTP id ada2fe7eead31-79bb3a8603emr245661137.2.1789389048507;
-        Mon, 14 Sep 2026 05:30:48 -0700 (PDT)
-X-Received: by 2002:a05:6102:11:b0:79b:b389:d6d7 with SMTP id ada2fe7eead31-79bb3a8603emr245658137.2.1789389048060;
-        Mon, 14 Sep 2026 05:30:48 -0700 (PDT)
-Received: from [192.168.202.12] ([178.235.128.140])
-        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5b8a0456bbesm2368480e87.22.2026.09.14.05.30.45
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 14 Sep 2026 05:30:47 -0700 (PDT)
-Message-ID: <d83450cf-715d-426d-aa65-6a9c57de45ab@oss.qualcomm.com>
-Date: Mon, 14 Sep 2026 14:30:44 +0200
+	dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b="vzKnHSdK"
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 856191570;
+	Mon, 14 Sep 2026 05:32:18 -0700 (PDT)
+Received: from [10.2.212.23] (e121345-lin.cambridge.arm.com [10.2.212.23])
+	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id EBC8D3F86F;
+	Mon, 14 Sep 2026 05:32:12 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
+	t=1789389142; bh=//mVfT+cS6bsEEtaMcIXiUoj03Wbk2JdXzrCu9QKdyU=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+	b=vzKnHSdKbin0VxCTUDozy936CXwnZ/R6yHiNneZhuEooJRckC2b3b/3cDvQz6g7NQ
+	 EDbJ4v+G1Disjqeycfm076iot2cIQi216QhEGxfBgTwPMeZPQww1CDLP4/uTNYKQ3/
+	 9uIii6KCKAS7CGPMY9JU2rgfVNqlhesVxcszDx6M=
+Message-ID: <fe22fb3d-77dd-4b34-9dd8-aafe11f36988@arm.com>
+Date: Mon, 14 Sep 2026 13:32:11 +0100
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -88,86 +35,130 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 00/31] Add domain idle state names
-To: Maulik Shah <maulik.shah@oss.qualcomm.com>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Abel Vesa <abelvesa@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>,
-        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
-        Luca Weiss <luca.weiss@fairphone.com>,
-        cros-qcom-dts-watchers@chromium.org
-Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-References: <20260914-b4-idle-state-name-v1-0-660c31187819@oss.qualcomm.com>
-Content-Language: en-US
-From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-In-Reply-To: <20260914-b4-idle-state-name-v1-0-660c31187819@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8
+Subject: Re: [PATCH] iommu: arm-smmu-qcom: Skip fault-info reads when
+ suspended
+To: Bibek Kumar Patro <bibek.patro@oss.qualcomm.com>,
+ Rob Clark <robin.clark@oss.qualcomm.com>, Will Deacon <will@kernel.org>,
+ "Joerg Roedel (AMD)" <joro@8bytes.org>
+Cc: iommu@lists.linux.dev, linux-arm-msm@vger.kernel.org,
+ linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org
+References: <20260912-priv_call_runtime_handlers-v1-1-fc0c3a17523f@oss.qualcomm.com>
+From: Robin Murphy <robin.murphy@arm.com>
+Content-Language: en-GB
+In-Reply-To: <20260912-priv_call_runtime_handlers-v1-1-fc0c3a17523f@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTE0MDE3OCBTYWx0ZWRfX8ghfQH5rG/CO
- u/KIKuZBI/ulry0LJoYFL/5zfu0hS8apIun7m7ixh/IwFodIHwoAQnWnmwVIwFGkpc7ldI3TQc8
- Kna1HwC/nSd71h5RB6flvhd07wpU6TU=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTE0MDE3OCBTYWx0ZWRfXwdYPDZHGCv/q
- IIAbWF1Jv7YbbLc0SL2nAccDUQ28J0MK0Wccm6U0LWuhPRB6g6b7z4IqqB15CkKxmTTW8OpPL4s
- AOAIBYfnAxfQY3DVsR2DsH+q2N+fDasK5aJZT6bhiPZKVWdeiuthegSjg6ZXIQ/DlCdRZc/kn9/
- VA3CyFDCz5t7xvKg0rNfQpd2kJO5/+6S/z2dpp/Lvni8KzPt4TnpkU6C31E+TPu3DxWdLmqBHEU
- /jVrOc0otksJuhkQwXGVpJfieiPqflCctNbOn4tc/RqIbYfGQxIgZxR+fogUjmW56UZGLH+Uvp/
- HDLmjbjdZ9+mYvgm5e73491Df/2rZSpAH3iRC86IjuO4hJQJ+QLpQH95WP5/84zP4nK6+vJKknY
- rEILSfhs2LVmBezu42KcyPjZvQlCOVPzd7oHtFtTQLj9jKTx36PPgYS7Ze26cV7VEFGCLsPwJ6s
- O5+RiGqLOlGWnf6ueHQ==
-X-Proofpoint-GUID: OIfLQhdRrsAV8vimaiU3O5eSkCbbk0Cl
-X-Authority-Analysis: v=2.4 cv=b/cncdGx c=1 sm=1 tr=0 ts=6aa7e8fd cx=c_pps
- a=1Os3MKEOqt8YzSjcPV0cFA==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
- a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22
- a=5S0Yd9-XfeUnBg4NLNYA:9 a=QEXdDO2ut3YA:10 a=hhpmQAJR8DioWGSBphRh:22
-X-Proofpoint-ORIG-GUID: OIfLQhdRrsAV8vimaiU3O5eSkCbbk0Cl
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-14_03,2026-09-13_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- spamscore=0 bulkscore=0 adultscore=0 priorityscore=1501 phishscore=0
- clxscore=1015 impostorscore=0 lowpriorityscore=0 suspectscore=0
- malwarescore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2609040000
- definitions=main-2609140178
 
-On 9/14/26 8:59 AM, Maulik Shah wrote:
-> Add or update idle-state-name properties for Qualcomm CPU and domain idle
-> states.
+On 11/09/2026 11:25 pm, Bibek Kumar Patro wrote:
+> qcom_adreno_smmu_get_fault_info() accesses SMMU registers without
+> holding a runtime PM reference. A fault is raised while the SMMU is
+> active, but the GPU may drop its power vote before the threaded fault
+> handler reaches the callback, allowing the SMMU to runtime suspend.
 > 
-> The generic cpuidle parser can fall back to the DT node name for CPU idle
-> state descriptions, but genpd domain idle states do not get an implicit
-> fallback name. Without an idle-state-name property, those genpd states are
-> shown as N/A in debugfs.
+> Accessing the SMMU registers after suspend has started is unsafe and
+> may cause subsequent register accesses during runtime resume to fail
+> with a NoC error and an asynchronous SError.
+
+But hang on, if I'm following the code correctly, the callchain would be:
+
+arm_smmu_context_fault
+   report_iommu_fault
+     msm_gpu_fault_handler
+      qcom_adreno_smmu_get_fault_info
+
+and from here we still need to return to arm_smmu_context_fault() to 
+clear the FSR, so surely that still has the same problem in itself?
+
+Thanks,
+Robin.
+
+> Use pm_runtime_get_if_active() to keep the SMMU active while collecting
+> the fault information, and skip the register reads if suspend has
+> already started.
 > 
-> For example, before this change a platform may show:
+> Signed-off-by: Bibek Kumar Patro <bibek.patro@oss.qualcomm.com>
+> ---
+> qcom_adreno_smmu_get_fault_info() accesses SMMU registers without
+> holding a runtime PM reference. A fault is raised while the SMMU is
+> active, but the GPU may drop its power vote before the threaded fault
+> handler reaches the callback, allowing the SMMU to runtime suspend.
 > 
->   # cat /sys/kernel/debug/pm_genpd/power-domain-cluster/idle_states_desc
->   State  Latency(us)  Residency(us)  Name
->   S0     5790         6118           N/A
+> The failure sequence:
 > 
-> With an idle-state-name property in DT, the same state is reported with a
-> proper low power mode name:
+>    GPU context fault
+>            |
+>            v
+>    qcom_adreno_smmu_get_fault_info()
+>            |
+>            | GPU drops its power vote
+>            | SMMU starts runtime suspend
+>            v
+>    SMMU register access without an active RPM reference
+>            |
+>            v
+>    later Adreno PRR private-interface operation
+>            |
+>            v
+>    pm_runtime_resume_and_get()
+>            |
+>            v
+>    arm_smmu_runtime_resume()
+>            |
+>            v
+>    arm_smmu_device_reset()
+>            |
+>            v
+>    SMMU register access
+>            |
+>            v
+>    NoC error / asynchronous SError
 > 
->   # cat /sys/kernel/debug/pm_genpd/power-domain-cluster/idle_states_desc
->   State  Latency(us)  Residency(us)  Name
->   S0     5800         6118           l3-pc
+> Use pm_runtime_get_if_active() to keep the SMMU active while collecting
+> the fault information. If suspend has already started, skip the register
+> reads instead of accessing the SMMU while it is being powered down.
+> ---
+>   drivers/iommu/arm/arm-smmu/arm-smmu-qcom.c | 14 ++++++++++++++
+>   1 file changed, 14 insertions(+)
+> 
+> diff --git a/drivers/iommu/arm/arm-smmu/arm-smmu-qcom.c b/drivers/iommu/arm/arm-smmu/arm-smmu-qcom.c
+> index 795e8ec7e8fa..b1787a4ba0d3 100644
+> --- a/drivers/iommu/arm/arm-smmu/arm-smmu-qcom.c
+> +++ b/drivers/iommu/arm/arm-smmu/arm-smmu-qcom.c
+> @@ -129,6 +129,18 @@ static void qcom_adreno_smmu_get_fault_info(const void *cookie,
+>   	struct arm_smmu_cfg *cfg = &smmu_domain->cfg;
+>   	struct arm_smmu_device *smmu = smmu_domain->smmu;
+>   
+> +	/*
+> +	 * A fault can only fire while the SMMU is active (GPU is issuing
+> +	 * transactions). Use get_if_active so that if by a rare race the
+> +	 * device has already suspended, we skip the register reads rather
+> +	 * than triggering a cold resume which would call device_reset and
+> +	 * destroy the fault state we are trying to capture.
+> +	 */
+> +	if (pm_runtime_get_if_active(smmu->dev) <= 0) {
+> +		dev_warn(smmu->dev, "get_fault_info: device not active, skipping\n");
+> +		return;
+> +	}
+> +
+>   	info->fsr = arm_smmu_cb_read(smmu, cfg->cbndx, ARM_SMMU_CB_FSR);
+>   	info->fsynr0 = arm_smmu_cb_read(smmu, cfg->cbndx, ARM_SMMU_CB_FSYNR0);
+>   	info->fsynr1 = arm_smmu_cb_read(smmu, cfg->cbndx, ARM_SMMU_CB_FSYNR1);
+> @@ -136,6 +148,8 @@ static void qcom_adreno_smmu_get_fault_info(const void *cookie,
+>   	info->cbfrsynra = arm_smmu_gr1_read(smmu, ARM_SMMU_GR1_CBFRSYNRA(cfg->cbndx));
+>   	info->ttbr0 = arm_smmu_cb_readq(smmu, cfg->cbndx, ARM_SMMU_CB_TTBR0);
+>   	info->contextidr = arm_smmu_cb_read(smmu, cfg->cbndx, ARM_SMMU_CB_CONTEXTIDR);
+> +
+> +	pm_runtime_put_autosuspend(smmu->dev);
+>   }
+>   
+>   static void qcom_adreno_smmu_set_stall(const void *cookie, bool enabled)
+> 
+> ---
+> base-commit: f61bb3920fa8cb44b84d32e0fa9fbaab4eb00c80
+> change-id: 20260912-priv_call_runtime_handlers-7f3547544040
+> 
+> Best regards,
+> --
+> Bibek Kumar Patro <bibek.patro@oss.qualcomm.com>
+> 
 
-I left a r-b on most patches, but I have some comments that you may
-take into account (and still retain them)
-
-> Describe the affected low power modes explicitly so the CPU and domain idle
-> states are reported consistently across Qualcomm platforms. Shorten
-> existing power-collapse and power-down names to use pc.
-
-This seems mildly useful.. I know that PC stands for Power Collapse,
-but for most other people that's Program Counter or Personal Computer..
-
-And the llcc-off (or l2-xxx) states should be more descriptive to say
-what other implications entering this state has (the name does not
-make that obvious in isolation)
-
-Konrad
