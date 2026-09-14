@@ -1,67 +1,48 @@
-Received: from mail-ed1-f41.google.com (mail-ed1-f41.google.com [209.85.208.41])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from 011.lax.mailroute.net (011.lax.mailroute.net [199.89.1.14])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3823C360EF2
-	for <linux-arm-msm@vger.kernel.org>; Mon, 14 Sep 2026 20:15:28 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.208.41
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 85C1647CC99;
+	Mon, 14 Sep 2026 20:27:52 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=199.89.1.14
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789416929; cv=none; b=sTVQ+BtYmi6C5KfSOZ+GvAYhPzGm2vsmQKoBv825WVVlbJiWuYsYbPlm8LCiGiX7cU4gvh8ZXgD1/lBjvp3kZcPlvlZhcpU1NyO12wZ6dqkmgKwB6ZyIkfzfA/qfuDdKigwffU7rnPku+hL5rXWseZq8BVW2Q6iu8aBdALILpQU=
+	t=1789417674; cv=none; b=LTfTrLqX6FloHTDYJf/HUu0KNs3doveqLjSoeIIIEaK3fwybDJpmFxZyWd4lpkr1K7SYtIEF+k1HHuOfU47aqNJYJoXLmFJswMDBw2a80iNIZWOLqW6Y/AwmweCh5yOhvQCoCR6HyQ+uRBuchdfftPiNi9jKV0wDeCq5uoskIbM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789416929; c=relaxed/simple;
-	bh=GykgSnZ4kWqbaJjn/9T0vyH9n/iK2VhkIfkcUJdlBuk=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=rOc3FzfuGSzXkY+0j/Szo5fANIgar5qHAYHlF7Ezv30vmZBo0JUZFEzMQKyEUmlVVCRI2AxbO5AO+Es97Z5aa0kfZzWuFtmWvNS3nLkqBZh8lxxcWWD8K9JMD4KHpD8tvnSTAA+OdoVAr/JF/pw0qLovST3iIX8el8waT8gCBRw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=bMZZDctY; arc=none smtp.client-ip=209.85.208.41
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
+	s=arc-20240116; t=1789417674; c=relaxed/simple;
+	bh=3xGGCaIfKo59yYUoPrTHjEyNAbBk2RJXUibjDZEiTOA=;
+	h=Message-ID:Date:MIME-Version:Subject:From:To:Cc:References:
+	 In-Reply-To:Content-Type; b=gR2HfO6fPRoLVgPROpz52D6LIaRVrZFdtXkk3+dQ+uff35FmqrITynn1MYOSvFy/IHeEfVHFCXdklU2LGeBh4GsapRBYU12ih1I2tDC1B3dNnalG67Jy3jGiqmaxUZiC7yyPgnOfhv81kGGrrQOIM3BKaoZS34w+X0NqhZSZxDc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=acm.org; spf=pass smtp.mailfrom=acm.org; dkim=pass (2048-bit key) header.d=acm.org header.i=@acm.org header.b=hM9QBcOZ; arc=none smtp.client-ip=199.89.1.14
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=acm.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=acm.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="bMZZDctY"
-Received: by mail-ed1-f41.google.com with SMTP id 4fb4d7f45d1cf-6a9a2f16ed4so381757a12.0
-        for <linux-arm-msm@vger.kernel.org>; Mon, 14 Sep 2026 13:15:28 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1789416926; x=1790021726; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:content-language
-         :from:references:cc:to:subject:user-agent:mime-version:date
-         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=K7ypREDUbgOotRmXNI3oJlTg66vvpyevfxzia1IXsPA=;
-        b=bMZZDctYnf21WxAkfoqiCg9XxwZLGTkmzQt8JZ45r39/go9xGReDPVtHVcK3Bs6EYU
-         bEfOyNxykmx7gPfJAs44CUDF3S5HEcYaWIo50S37e9b4mYlvZE30G0juDcqNds1VYU+J
-         6gT7B+KTl8FpHeUfv0S62eoly12FlbZvGTt9xkMG1PYShuDCP57/bYD4zn+m4USqhpCk
-         GxeY+AGznjb9+s/dnCm/66lD2i+b7hJU0aQpmfrTziqskXsVfCIEhba8OYac8UNVHg7x
-         Xklv9+HRxzWMWSFTrrafknvLXUH9LNjDIJ4Nkg5JRNLDzQp4EAYPsiR9I3soTYl0VJ6r
-         VfvA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1789416926; x=1790021726;
-        h=content-transfer-encoding:content-type:in-reply-to:content-language
-         :from:references:cc:to:subject:user-agent:mime-version:date
-         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=K7ypREDUbgOotRmXNI3oJlTg66vvpyevfxzia1IXsPA=;
-        b=m9U7zVNT6JTgGh2iwKcssHbmYYzkOglMExLQJKDXpzPTCotxZJm6y6P7xv1YibfMVg
-         YxLX+g7RgHgH+DjW+q1h1hl1u2T5iWMfFeEetyXMoHFBcf8ME/bz5OjqA8fidUX/eaYi
-         NGjjK6iLIYDuF04Ksvxsv8taSX9Pp7NBoyh3yMb8RNiVt2jxXtq7JhUUIKaS1JAkNQ1O
-         koLZHfxuqZBrLH0YMJ2auc5k4FkAwoL4XYvKpx8TCtgsyPLRkcmts8qoESZtAram0PDO
-         WhA1pCUqmveOD7WkrXZVYpI4SWwZDKXqy9OMZwvgGY4/rcQNwUhRozTwWhCcEoPEa2sh
-         8hcQ==
-X-Forwarded-Encrypted: i=1; AKwUvBx49YoltXamG6VWvlvQtSRiFP0C7aDjybllPx4GLm0tXRI6kBOrJveILpdpKzD0MTp0ea0tn4cfGw2cMUk6@vger.kernel.org
-X-Gm-Message-State: AFuF++niJoHYFXtcFHzgwVNT0KPhJKcvBbILDWBLPTiVzbQBykHIKVJX
-	wFhAEFsaxq0xW+bIeJ7Myq/shelxkEwC2sFNdGaUzjM2O3LcReueQ20TJmEPsuovOZU=
-X-Gm-Gg: AYBFou1GAUyXRkDJZeajYSsp4byubzWTCQBA/ykuHzPQptSl4oe7r4WzthgL0BgBQ28
-	RvbgUgfvSvDfZHGP2mOkGlVcT3imd2bJ5KviFksqAI5oWkzXGRPkGZH4IieR6xESEjYPJ05kPhr
-	H48Dq5ZqkzYwKLa96KTU6FYcjSFB6MVTv8lv+x7ElP/GGXhNfsJp8Ck0UV3AL+KLbgBCxI4rlYh
-	t5zlMlC29cZwu+mlkAw2emo6xzXCJoxmdM9wnYKE5nlsH5OcrxaNIGvt6lfILzhHuuIgxnThqux
-	Odr9WSaAy/AMW18iy4GBqh050QLxtwleDRYGKaufj5eKvqIl9Ei8VXCjdQaqC/Vkpvi0RmQPUVJ
-	0SyQGWjCZSbbe/9ANV+e39LhYRrlW5KN7mCXmtJZFtohvnHP4cIMUT+rrE0UC6tPrfcOH1hlk9/
-	PW2fa1gOb11fVJhREYa1NCunGxkkutgXQOF3eZGmc73AlKbX4/NJi3Ec0vQyf2ibCrzp17T/HKk
-	8OkMWTVlg==
-X-Received: by 2002:a05:6402:b86:b0:6a6:75b7:4ff6 with SMTP id 4fb4d7f45d1cf-6aa03f7ab4cmr403420a12.8.1789416926406;
-        Mon, 14 Sep 2026 13:15:26 -0700 (PDT)
-Received: from [192.168.0.35] ([109.76.248.34])
-        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-6a9b594e462sm4859796a12.24.2026.09.14.13.15.23
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 14 Sep 2026 13:15:25 -0700 (PDT)
-Message-ID: <cd7d3d8d-f629-4fa4-9417-98bbef3230d4@linaro.org>
-Date: Mon, 14 Sep 2026 21:15:23 +0100
+	dkim=pass (2048-bit key) header.d=acm.org header.i=@acm.org header.b="hM9QBcOZ"
+Received: from localhost (localhost [127.0.0.1])
+	by 011.lax.mailroute.net (Postfix) with ESMTP id 4hkGtB04gQz1XM5kW;
+	Mon, 14 Sep 2026 20:27:46 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=acm.org; h=
+	content-transfer-encoding:content-type:content-type:in-reply-to
+	:content-language:references:from:from:subject:subject
+	:user-agent:mime-version:date:date:message-id:received:received;
+	 s=mr01; t=1789417653; x=1792009654; bh=J1CKBIiEpPMc/bzFX/8Ii0Ki
+	p8JzihDw9DTYdiO28kQ=; b=hM9QBcOZyt7afYXjNUCNLYtkegXZ88nhJ18xPmFl
+	0bPQXMrCSWy4N5DAC1CXxDeUHiGWpNtRseHDrPnIUbEgHIZrxqrfNFEDU+16Ngjr
+	MEweINwGtGGUevL99McpBwHjt7SLpkShIIRl0T4KBFlHOZIbxbu1O5cyuynPbBP/
+	TF7NQ0036DoMmq7FB3XfUNS4Dvkd8jlXcnYvgymaHru0SOgS0WpBNueNG19rCPiT
+	CJINKC8oebrS1XC9ywRx3xaBiXPujFdoJeMbXMieM+aQ+gMsyVQ58bUQYDhK+B3H
+	9ymTDaIGRZJq/nE1fmGP50hy4alQjJnFUAcvRLe4hYWg5g==
+X-Virus-Scanned: by MailRoute
+Received: from 011.lax.mailroute.net ([127.0.0.1])
+ by localhost (011.lax [127.0.0.1]) (mroute_mailscanner, port 10029) with LMTP
+ id VSWTyGqAaRSJ; Mon, 14 Sep 2026 20:27:33 +0000 (UTC)
+Received: from [IPV6:2a00:79e0:2ed2:d:e88:b67e:bf8c:1880] (unknown [104.135.182.40])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	(Authenticated sender: bvanassche@acm.org)
+	by 011.lax.mailroute.net (Postfix) with ESMTPSA id 4hkGsn21HYz1XM4Tl;
+	Mon, 14 Sep 2026 20:27:24 +0000 (UTC)
+Message-ID: <3c1c0025-2a88-463d-8aeb-6331dd09bad3@acm.org>
+Date: Mon, 14 Sep 2026 13:27:23 -0700
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -69,72 +50,58 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] arm64: dts: qcom: Fix touchscreen address on Dell
- Inspiron 7441
-To: avalon.vargas.centeno@est.una.ac.cr,
- Bjorn Andersson <andersson@kernel.org>,
- Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
- Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>
-Cc: Val Packett <val@packett.cool>, linux-arm-msm@vger.kernel.org,
- devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
-References: <20260914-dell7441-touchscreen-v1-1-d79540ca5e81@est.una.ac.cr>
-From: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
+Subject: Re: [PATCH RFC] drivers/rufs: add Rust UFS host controller driver
+From: Bart Van Assche <bvanassche@acm.org>
+To: Andreas Hindborg <a.hindborg@kernel.org>,
+ James Bottomley <James.Bottomley@HansenPartnership.com>,
+ Greg KH <gregkh@linuxfoundation.org>, jaemyung.lee@samsung.com
+Cc: Miguel Ojeda <ojeda@kernel.org>, Boqun Feng <boqun@kernel.org>,
+ Gary Guo <gary@garyguo.net>, =?UTF-8?Q?Bj=C3=B6rn_Roy_Baron?=
+ <bjorn3_gh@protonmail.com>, Benno Lossin <lossin@kernel.org>,
+ Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>,
+ Danilo Krummrich <dakr@kernel.org>,
+ Daniel Almeida <daniel.almeida@collabora.com>,
+ Tamir Duberstein <tamird@kernel.org>, Alexandre Courbot
+ <acourbot@nvidia.com>, =?UTF-8?Q?Onur_=C3=96zkan?= <work@onurozkan.dev>,
+ linux-kernel@vger.kernel.org, rust-for-linux@vger.kernel.org,
+ linux-block@vger.kernel.org, linux-scsi@vger.kernel.org,
+ linux-arm-msm@vger.kernel.org, Jens Axboe <axboe@kernel.dk>,
+ "Martin K. Petersen" <martin.petersen@oracle.com>,
+ Bean Huo <beanhuo@iokpp.de>
+References: <20260912-rufs-private-v1-1-716db733e655@samsung.com>
+ <YKq4TcQM0v2dXF4wTHEvZKwASII6PDd_R7_UiHWe3NRnR4JsrC_ZS-x6jA_Kl7P6ONehU0REHYk7WaLz8Xv5gA==@protonmail.internalid>
+ <2026091124-treason-trickily-bc52@gregkh> <87mrtmvioe.fsf@kernel.org>
+ <6JMwZ4EuSfQ8V4TGaPwatQ31m30TceLJblORsuILQmy4VV8Fx2lHbihL8ARsRUuJmaSUqek8L54y4Nk6DuZMXQ==@protonmail.internalid>
+ <bdcff6a168e6d4b8e9c9524bd598281817a7df2c.camel@HansenPartnership.com>
+ <87eceyvdnv.fsf@kernel.org>
+ <RJ3H-1s-vh5YR7DRuPZ6p050ld3umNGcKNeBigg7n3KUQt1WJ2C-sR9kEqrF6f4ubj5AHoHNvB0MRGJyw6tf_Q==@protonmail.internalid>
+ <77e00073a9254d5ea1ade771590da81a859b75a6.camel@HansenPartnership.com>
+ <87bja2v5g6.fsf@kernel.org> <ba386a0a-8022-4c3f-a1c1-bb22205b51d4@acm.org>
 Content-Language: en-US
-In-Reply-To: <20260914-dell7441-touchscreen-v1-1-d79540ca5e81@est.una.ac.cr>
+In-Reply-To: <ba386a0a-8022-4c3f-a1c1-bb22205b51d4@acm.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On 14/09/2026 14:30, Avalon Vargas via B4 Relay wrote:
-> From: Avalon Vargas <avalon.vargas.centeno@est.una.ac.cr>
+On 9/12/26 5:30 PM, Bart Van Assche wrote:
+> On 9/12/26 8:45 AM, Andreas Hindborg wrote:
+>> If we expected this new driver to be a strict subset of ufshcd, we would
+>> not build it. The reason to do it is the features that do not fit the
+>> scsi midlayer.
 > 
-> The LXST2021 touchscreen on the tested Dell Inspiron 14 Plus 7441
-> responds at I2C address 0x09, while the device tree specifies 0x10.
-> Probing the latter fails with -ENXIO and no touchscreen input device
-> is registered.
-> 
-> Use address 0x09, matching the LXST2021 configuration on the related
-> Dell Latitude 7455. With this address, the controller identifies as
-> 29BD:1103 and binds to hid-multitouch. Touch input and suspend/resume
-> have been verified on the affected Inspiron using Linux 7.2.4 with
-> the equivalent device-tree overlay.
-> 
-> Signed-off-by: Avalon Vargas <avalon.vargas.centeno@est.una.ac.cr>
-> ---
-> This replaces the earlier report-plus-diff with a patch submission.
-> Only one unit has been tested. I have no evidence of double-sourcing
-> or a working Inspiron touchscreen at 0x10; a typo remains possible.
-> 
-> touch input and suspend/resume. The native upstream patch has not yet
-> undergone a full kernel DTB build or dtbs_check.
-> 
-> Validation: Linux 7.2.4 plus the equivalent local DT overlay, physical
-> ---
->   arch/arm64/boot/dts/qcom/x1e80100-dell-inspiron-14-plus-7441.dts | 5 +++--
->   1 file changed, 3 insertions(+), 2 deletions(-)
-> 
-> diff --git a/arch/arm64/boot/dts/qcom/x1e80100-dell-inspiron-14-plus-7441.dts b/arch/arm64/boot/dts/qcom/x1e80100-dell-inspiron-14-plus-7441.dts
-> index 75e10d9..0cf5716 100644
-> --- a/arch/arm64/boot/dts/qcom/x1e80100-dell-inspiron-14-plus-7441.dts
-> +++ b/arch/arm64/boot/dts/qcom/x1e80100-dell-inspiron-14-plus-7441.dts
-> @@ -25,9 +25,10 @@ &gpu_zap_shader {
->   };
->   
->   &i2c8 {
-> -	touchscreen@10 {
-> +	/* LXST2021 */
-> +	touchscreen@9 {
->   		compatible = "hid-over-i2c";
-> -		reg = <0x10>;
-> +		reg = <0x09>;
->   
->   		hid-descr-addr = <0x1>;
->   		interrupts-extended = <&tlmm 51 IRQ_TYPE_LEVEL_LOW>;
-Nice.
+> That's a super vague statement. What features do you want to implement
+> that do not fit the SCSI mid-layer? If this is about implementing non-
+> standard SCSI commands, REQ_OP_DRV_IN and REQ_OP_DRV_OUT should be
+> sufficient, isn't it? Please note that this is not an endorsement for
+> implementing non-standard commands in UFS devices. Non-standard storage
+> commands complicate filesystem development and maintenance, especially
+> if which commands are supported depends on both the manufacturer of the
+> storage device and the device model.
+(replying to my own e-mail)
 
-A Fix should have a
+Since my question has not been answered, I assume that REQ_OP_DRV_IN and
+REQ_OP_DRV_OUT are sufficient. If REQ_OP_DRV_IN and REQ_OP_DRV_OUT are
+sufficient, there is no longer a reason to implement a new UFS driver
+subsystem because the upstream UFS driver already supports these
+operations, isn't it?
 
-Fixes: tag
-Cc: stable@vger.kernel.org
-
----
-bod
+Bart.
