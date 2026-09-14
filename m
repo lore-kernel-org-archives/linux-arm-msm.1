@@ -1,219 +1,233 @@
-Received: from ixit.cz (ixit.cz [84.42.129.46])
+Received: from DUZPR83CU001.outbound.protection.outlook.com (mail-northeuropeazon11012044.outbound.protection.outlook.com [52.101.66.44])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A4BD345198A;
-	Mon, 14 Sep 2026 12:05:20 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=84.42.129.46
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789387522; cv=none; b=WNPI2YJ5+JqHrHqMc5skOgtj1b0RfPHhWcjr+XdOISVhzOXZPAWdfxEsVXVP5qRAxnKrN9yTDoP2thGpy11Zr6+YZ1ZbI4dvVTqEOZrZwMNPcWULqQ+gb28YkVfvk/HhncxYTEPa86ZhQ7v2YqMNdGTyDHO6TSSar+1FQDFM4sM=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789387522; c=relaxed/simple;
-	bh=TXBFlo/yKQa3ajGkoWWKR8wNXMf580F82Ef81AWSp+s=;
-	h=Message-ID:Date:MIME-Version:Subject:From:To:Cc:References:
-	 In-Reply-To:Content-Type; b=B9BczsILCYwyoUFdpQO+5o9MvGsRHUPgf7JA2TT+XbnxSXYVaFzTaSd2w8rPdy38TDZbPpOLei5Ct9EC4FZqABd0Ojj1CNOks9XsH77SehaE2wZl3bq2bWrMevM6ifczLHQPJj1QaxI3l7ynzF5MmcshjVWCid25/vUecZ1UhSA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=ixit.cz; spf=pass smtp.mailfrom=ixit.cz; dkim=pass (1024-bit key) header.d=ixit.cz header.i=@ixit.cz header.b=xUNsbCkl; arc=none smtp.client-ip=84.42.129.46
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=ixit.cz
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ixit.cz
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 54907448B96;
+	Mon, 14 Sep 2026 12:05:34 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=52.101.66.44
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1789387536; cv=fail; b=qwcjVlt80V//ZFAdt11MzTZ1BRLx7vRLU/TrHuB0U54K7zuVUTAghLZq7meR23CvP7u07tas8CgxNKQGQee+rttSr/wmE7+spbFqhOs0IpbSH29WzY+5+3hh8xt+nr1cZ2bChugb/edrtXSStqkyPGenGesjWOo8aEMkcnBxxrM=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1789387536; c=relaxed/simple;
+	bh=67Pbava63R24bDuW1qraKh0B8ExvNBX3U2h+p/xlCWQ=;
+	h=Message-ID:Date:Subject:To:Cc:References:From:In-Reply-To:
+	 Content-Type:MIME-Version; b=Swi6hyKIhah2HxAHJGUpqbIdxr0wSZLBXJvCJ76Xop9A1jcfzPSbuyEm7Oy9mhpzYuwcOGoY/c3Ywo/tf4gV5k7az6d6XvNx+kT+BxKVMjQvIuVOAPEKlkru9eh1MV1kd/QRKllkpcJDmFGZFSUd3JBQz4NK6URXI5Hjg83QBlo=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.nxp.com; spf=pass smtp.mailfrom=oss.nxp.com; dkim=pass (2048-bit key) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b=wdPcLP9w; arc=fail smtp.client-ip=52.101.66.44
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.nxp.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.nxp.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=ixit.cz header.i=@ixit.cz header.b="xUNsbCkl"
-Received: from [IPV6:2a02:830a:f787:8f00:d622:eaa3:3dd6:8f5e] (unknown [IPv6:2a02:830a:f787:8f00:d622:eaa3:3dd6:8f5e])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange x25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by ixit.cz (Postfix) with ESMTPSA id EA1945341063;
-	Mon, 14 Sep 2026 14:05:17 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ixit.cz; s=dkim;
-	t=1789387518;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
-	bh=2fr3EoOIiIhQYIp0RlRy+4O9t1XNQ0pEoMB84iuMT0E=;
-	b=xUNsbCklwwjyvKtMuuXEvuSTWz4FGWiOVUSmy+8jvoksW8A53Ff75P3hBS8x9ej4+0qtCs
-	BGvDnFf+9LgXSRcZh/3F4t1/Ji8EzifTuSn/c8OcMsNTm+XXpUTfgJid+bqskis1XG8ycH
-	9CFD/ezURu2k4XCN1+t4j8MAp7ARRPo=
-Message-ID: <158555ee-315b-45c5-a2a7-c98ea104d540@ixit.cz>
-Date: Mon, 14 Sep 2026 14:05:17 +0200
+	dkim=pass (2048-bit key) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="wdPcLP9w"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=f6T0IFs+RmubWbV9I8Se6sIzTXVeNPyqlZxRBffTkjKnopcKqKOdX5EKcMQEJ6FfQWJjQJcCMG5c9z1xkhSA18UelCFRXZw/rFbD8n/xwiYNF8oIT4o/AB5fg19hmpJi0L3z8dmQjxvHvpLpOySzdAWk/NauwduXjsdDAo7n3XMbg5D6RrAIcso59MMZw6R+F+njMEPK7s5T60GnDlif6O66zvbABNar+kaEU+zwk8bfDWM9LTu5PPXz29MXBk+T9FuacjO2Tbz7Gh7CqPggi0aGk+6NRQv+L35ztzQqjvAy8re9PS8+alIprV8dp2vOc3fq1g5PLVZgBB4R82GQsg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=9DBIyEjoXBaobETsgAMeXtIzUVA7oeIsr3UWXgIqqGc=;
+ b=hj/35DH9maSynr5DAACOe71oOyhaWwJWkIGYP1upr+dRhyX/YxYHI3yn8vfx9QbfOFJkaynn3cjZkS8FUMxGWP+9yYLlYEFUj1k7Ie1ulwIIxNAmNnsKYDev2Sv3LZBhhNJDnXidS9MMnCf7jS7b/jTF+wwTWHx4lAiYn6vxK2weYIRIjZZFcfh3nz+e+Qjjt0xuqzeVxSS08vTlST+XIYFe79KYo6Wm2Skm93/1gZfaYM/5MXD0a2Ka52SKBCZ2l8q+DLPJLcHJmBytMl3cBqZvwUJu8DEC/jwB+WkAWRv5d7FiJ7NJYruznvT7Vfp7P8QeyHZqHVd2vj8/e9PnpA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
+ dkim=pass header.d=oss.nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com;
+ s=selector1-NXP1-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=9DBIyEjoXBaobETsgAMeXtIzUVA7oeIsr3UWXgIqqGc=;
+ b=wdPcLP9wxmZ9GrFKJ5SjcCHT2HWE63VPh6XAlRjXadw29h02LUCF5lcLQmm8V49pL3AXc+nWn5MfubjnXm4Qgb9/WJ3qUC2xRVQt+ZRFxJBNCNhRewV/aXtM/y4SyAIwmAFHpRSzQJY5N7pljPtbnHpCP/p/rvMus2WqCy/xKea8osUoBu4YYhP6dxFal0/jOjywxX1W5FkyuckODMMuYSdtSEESTKSQQvYcx7Qn8MSepcRPNHdtOGAFhJ8Rna2qNsEAGxjFJPd/b+TrDV4K3kA27RqsBBb/i9rV6PZZXptqxjP+EUYtQhaxWXij3jEe1ktHcowRqxpBEP7xlvwO+Q==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=oss.nxp.com;
+Received: from GV2PR04MB12558.eurprd04.prod.outlook.com
+ (2603:10a6:150:368::10) by DBBPR04MB8044.eurprd04.prod.outlook.com
+ (2603:10a6:10:1e5::11) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.406.12; Mon, 14 Sep
+ 2026 12:05:29 +0000
+Received: from GV2PR04MB12558.eurprd04.prod.outlook.com
+ ([fe80::cd9f:102:ea58:4c49]) by GV2PR04MB12558.eurprd04.prod.outlook.com
+ ([fe80::cd9f:102:ea58:4c49%6]) with mapi id 15.21.0406.007; Mon, 14 Sep 2026
+ 12:05:29 +0000
+Message-ID: <cceb8f7e-2ff0-43d2-979c-6ddea98f4bea@oss.nxp.com>
+Date: Mon, 14 Sep 2026 15:05:24 +0300
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 06/10] dt-bindings: ufs: Add compatibles for S32N79 Host
+ Controller platform driver
+To: Krzysztof Kozlowski <krzk@kernel.org>
+Cc: NXP S32 Linux Team <s32@nxp.com>, Alim Akhtar <alim.akhtar@samsung.com>,
+ Avri Altman <avri.altman@sandisk.com>, Bart Van Assche <bvanassche@acm.org>,
+ Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
+ Conor Dooley <conor+dt@kernel.org>, Frank Li <Frank.Li@nxp.com>,
+ Sascha Hauer <s.hauer@pengutronix.de>,
+ Pengutronix Kernel Team <kernel@pengutronix.de>,
+ Fabio Estevam <festevam@gmail.com>,
+ "James E . J . Bottomley" <James.Bottomley@hansenpartnership.com>,
+ "Martin K . Petersen" <martin.petersen@oracle.com>,
+ Sai Krishna Potthuri <sai.krishna.potthuri@amd.com>,
+ Ajay Neeli <ajay.neeli@amd.com>, Manivannan Sadhasivam <mani@kernel.org>,
+ Pedro Sousa <pedrom.sousa@synopsys.com>, clizzi@redhat.com,
+ aruizrui@redhat.com, eballetb@redhat.com, echanude@redhat.com,
+ linux-scsi@vger.kernel.org, devicetree@vger.kernel.org,
+ linux-kernel@vger.kernel.org, imx@lists.linux.dev,
+ linux-arm-kernel@lists.infradead.org, linux-arm-msm@vger.kernel.org
+References: <20260826134048.854748-1-larisa.grigore@oss.nxp.com>
+ <20260826134048.854748-7-larisa.grigore@oss.nxp.com>
+ <20260828-dark-foamy-guillemot-0b60be@quoll>
+Content-Language: en-US
+From: Larisa Ileana Grigore <larisa.grigore@oss.nxp.com>
+In-Reply-To: <20260828-dark-foamy-guillemot-0b60be@quoll>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: FR5P281CA0058.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:f0::14) To GV2PR04MB12558.eurprd04.prod.outlook.com
+ (2603:10a6:150:368::10)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH RFC 20/20] arm64: dts: qcom: generalmobile-shamrock: new
- device
-From: David Heidelberg <david@ixit.cz>
-To: Muzaffer Kadir <muzafferkadir@mainlining.org>,
- Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-Cc: Bjorn Andersson <andersson@kernel.org>, Abel Vesa <abelvesa@kernel.org>,
- Stephen Boyd <sboyd@kernel.org>, Brian Masney <bmasney+clk@redhat.com>,
- Jerome Brunet <jbrunet+clk@baylibre.com>, Rob Herring <robh@kernel.org>,
- Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
- <conor+dt@kernel.org>, Srinivas Kandagatla <srini@kernel.org>,
- Ulf Hansson <ulfh@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>,
- "Joerg Roedel (AMD)" <joro@8bytes.org>, Will Deacon <will@kernel.org>,
- Robin Murphy <robin.murphy@arm.com>, Lee Jones <lee@kernel.org>,
- Rob Clark <robin.clark@oss.qualcomm.com>, Dmitry Baryshkov
- <lumag@kernel.org>, Abhinav Kumar <abhinav.kumar@linux.dev>,
- Jessica Zhang <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>,
- Marijn Suijten <marijn.suijten@somainline.org>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
- Robert Marko <robimarko@gmail.com>, Guru Das Srinagesh <linux@gurudas.dev>,
- Amit Kucheria <amitk@kernel.org>, Thara Gopinath <thara.gopinath@gmail.com>,
- "Rafael J. Wysocki" <rafael@kernel.org>,
- Daniel Lezcano <daniel.lezcano@kernel.org>, Zhang Rui <rui.zhang@intel.com>,
- Lukasz Luba <lukasz.luba@arm.com>, Kees Cook <kees@kernel.org>,
- Tony Luck <tony.luck@intel.com>, "Guilherme G. Piccoli"
- <gpiccoli@igalia.com>, Dmitry Torokhov <dmitry.torokhov@gmail.com>,
- Dang Huynh <danct12@riseup.net>, phone-devel@vger.kernel.org,
- linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org,
- devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-mmc@vger.kernel.org, iommu@lists.linux.dev, mfd@lists.linux.dev,
- dri-devel@lists.freedesktop.org, freedreno@lists.freedesktop.org,
- Krzysztof Kozlowski <krzk@kernel.org>, linux-pm@vger.kernel.org,
- linux-input@vger.kernel.org
-References: <20260912-msm8952-initial-support-v1-0-0e742578b524@mainlining.org>
- <20260912-msm8952-initial-support-v1-20-0e742578b524@mainlining.org>
- <d0d7e3d0-15bf-4850-99ec-44d429c6bae1@oss.qualcomm.com>
- <42ef03e8-112a-4689-aedd-eeb7ec9b4f58@mainlining.org>
- <be018c1c-88f3-41fc-9293-d5090a79b3a7@ixit.cz>
-Content-Language: en-US, cs-CZ
-Autocrypt: addr=david@ixit.cz; keydata=
- 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
-In-Reply-To: <be018c1c-88f3-41fc-9293-d5090a79b3a7@ixit.cz>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+X-MS-Exchange-MessageSentRepresentingType: 1
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: GV2PR04MB12558:EE_|DBBPR04MB8044:EE_
+X-MS-Office365-Filtering-Correlation-Id: c8e39ca0-f920-4ba0-449a-08df12587840
+X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
+X-LD-Processed: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635,ExtAddr
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+ BCL:0;ARA:13230040|366016|1800799024|23010399003|376014|19092799006|7416014|10067099003|4143699003|6133799003|3023799007|22082099003|18002099003|56012099006|11063799006|5023799004;
+X-Microsoft-Antispam-Message-Info:
+ 3NH2IsWrm/TJdNhbVWLWXqE3BUKidlMcYcDJ077eltYp2BT65k8wuc6xu2sKSLLWq1DKxsgnwdcSjgH//L5q4O5t3dTSi7FusyZq+MFEqGXf1vE6/LD/6IlmNoOs3JhYsSFTTaepVUKVLQaiEHiveDFwe67QYdhy3M9vanRY2jc4S9yw19DgBRw6FY9jJE+wJCc6WJvj9Hwy3qi7gkjXt9THJ+vUc1JfawINZ9n/DAW6gEMoLO+G5ez99rjARPyj7jBBdLWZIe/7XfyDHR5rr4GfmfeUQ62+qDHwtHbffUr4vtnWV9xy/WUTku70RRTATMWm0q7F+vVyASMqHCL99IH7YoqANJqHfay0AC2p6nOVe/+YClRt8nzLNLJHmQqjLBbwNeK+DKVAj7OJO4KfOewrglX+Nd86aaU62i++LyrEjm2CY/QlIzmCYdKq8EDgSOuhuFi+NL/DFp37SLpTMxvt2tWIZ4SiM8creSriZUlDOT3hH661qg4MhEov7QvGtZcsmzs5V5HNTPVZiAT8vQcXVnhqLApHB3IPEcPl1qFYKo3GppSov8poLKm9e+DgZm1K4rJQ3GhlMaGrYxN97216us9IjW2chEGKoO/IbdmVyoOSxCVZqCSS31FW+Hl3mBaoSK/dFrlYRAAaYdUYy2KsPRLaJFC+0nIhDCu0Kys=
+X-Forefront-Antispam-Report:
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:GV2PR04MB12558.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(1800799024)(23010399003)(376014)(19092799006)(7416014)(10067099003)(4143699003)(6133799003)(3023799007)(22082099003)(18002099003)(56012099006)(11063799006)(5023799004);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+ =?utf-8?B?cVZDY082eHo3NnZNMzVWWXdDTmlxMkV6Ymc3ZGNMMXdJclJUSk91UXBxYTlB?=
+ =?utf-8?B?V2JiK05aanJQNGFSelNyWDgyZ2d1N0JVVG44bVkzZ1Vqb3FVaEozcUhETTAw?=
+ =?utf-8?B?SEQ3dWYxOHNkcFMyN0JOMVVXVmh4Q2hCNjdmWUR3VGkxOW9QWEdWeHVPKy9w?=
+ =?utf-8?B?OHlxUXRKNkFvUUpKNmxRR3NLajZueTdpOE1YcXIrK2M1T3NMc0ZPRTQwSVgv?=
+ =?utf-8?B?cStNZUwvSGJDd2ZDeGZ3L25nczEzS3paOWwyd0dIM0tzc2s2aWZVeU5uditS?=
+ =?utf-8?B?dm1BcWNoRy9QYjlDUDRUUDY2ZlYzU3oxSjN4TzRmUGJXRWM4c0F6WWYxQTls?=
+ =?utf-8?B?QzFNTmR5MWZJZG1Wa1NOU3BqRWsxSXdEN3lKZUNoeWtxS3dGaVpxazQwN3BS?=
+ =?utf-8?B?bDZsSlhCZHFkWVRJTzZqT0VMSWhGNDVMLzg1cllNcEFTZnJpNmNwczh5SWF0?=
+ =?utf-8?B?OVI2NGxZeEtrNW5VQXhIaHNhcWFOajdGMjQ4ak9XM09kQzVRSHAwOFhUM0hp?=
+ =?utf-8?B?MzFmLzRLcmxPYUJtNVh3UXBUNXhDN21pVURNNFRyVzJLUmluY3dqYXZ1SjJs?=
+ =?utf-8?B?U2xyaWtPTmlicHNyWm1xQ0FJLzRxL1VwWjVTbzYzMldCVmFLdUYzUWFnRDNs?=
+ =?utf-8?B?UDlPeXhKUE1ZQ3VTaFNONWFUNldVYXJWdGpSVEpueXNvdHpXSHRwVXpiNjln?=
+ =?utf-8?B?cldJYkVnbEFWUDlaV21uaDNqME9ySVZiTWRKSWJXY3NidFpscjVpTm93MmNi?=
+ =?utf-8?B?QTIybXN3YjdLeHdkNVBFOVhFKzM0VVdmUDhOWEZBbjN2OW1VSmVYdGRGZFhx?=
+ =?utf-8?B?ZXpySDF0OU8yUVFsM0tQU2llZzRQV0tzTWxINzRwZE1JZks2M2Y0Lzkvd3do?=
+ =?utf-8?B?Nks3cHJXY3lmNUFjcW0wWEdrZitJQ3l5aEszR2RuNVZiNjlHdnRxS2VLT0Fo?=
+ =?utf-8?B?SVQ1aHJlTklZVUJxMWltRUIwN0VaeFlPMDNtVW5yMzE3bTRHNURpMUhvSjNB?=
+ =?utf-8?B?bS81L2R5WHdBWERhOCtsNVJKMWl4TVBZOXhIYzVieHFwU2dhclRRUWJYU0dw?=
+ =?utf-8?B?bWRYc042MVRISHp2ZDk1S0xuMXRpMWt3MFplOFF6WlluOElJSWU4K0s2QUIr?=
+ =?utf-8?B?TWR3TytnV0pWOEYzTmREZ014aDh5UW80ejJSaXJ1dHNsUmNrSDZReTkyZzFZ?=
+ =?utf-8?B?OVEvVVVtMnNaZ2FKM0xFbEtzb21zQkRHRUE2a21NemVpVEorblkwQ2U1eDlL?=
+ =?utf-8?B?MldlczlMQkZ5aWJ2RjU4OVJyRngyWjNaVXBLZ0d5NUlpN2ZUN1JwTFJtLytV?=
+ =?utf-8?B?MlV0YU96S0svYVBXczNLOENsbUNhcm5XV1JCN0YxaVdPdXRrRitSODV3MXJ6?=
+ =?utf-8?B?UmUvVnBlNUJwZDhDS01pZ1g2OFk2REFHN25DeDZMZEdsb0tGSWs2MFNZRkxy?=
+ =?utf-8?B?OE9BanFnbmFaalk1TkliQnVybUkyTlJKMVRBaXdZdmN5UC9wakIvSThESk5Q?=
+ =?utf-8?B?NVo1cE5aTzNxSDBPNnpZRlhqNkJzMFFlUXhkbHh1VkVpaWlGMUNJZzd6QUJn?=
+ =?utf-8?B?bm9BeXcvbDYvQ2NPbU9ic08zSVUzb0FyUEV2R29TS1Z3U3p2bG0wZHhkbVpi?=
+ =?utf-8?B?WDJGNk8wdUVQdEp1SEtIdFV1ZlM2S1lEcGJPd3d3dEJMaDE4cDlBZm4vVnhY?=
+ =?utf-8?B?bnorS1hPVmtCMk5KcEtuVEVHa0xzM3JQVzNLVk50OHl6enBaSHExTGJqMTNh?=
+ =?utf-8?B?VjFueUNWUWFLcnF6bzZmUC83OEMvVDlJc2JRTGVwR3FvSlNaRHpjYVZ5ZEFk?=
+ =?utf-8?B?cEJqMnpxUkpOdnA1QmpJOVBnRldzeHFySmtpK1J2MGRuQTlOeGlaOWdmS1JC?=
+ =?utf-8?B?RnUyYURIVE5BMzdWYWZTeEh5aTZkMWdrTzg5ZE95eTVua1RaS2NKc3lDR094?=
+ =?utf-8?B?NjhXVGNCUElCUk5MMU1GVXVOZFJ3cFdodmh2K052OFlkSmFHWjhJbko3Nmlv?=
+ =?utf-8?B?UHpobys1eHZQRSsycWczMHlkQTE3WmFPL2hjWmRqMnVmS1ZxOTRaWndXMzZr?=
+ =?utf-8?B?RzU3a0NNcXMyTkJEcUNQOEM4M0hZa1lkNm9CRWNZMnUvanFzbEFMQUxHRmhn?=
+ =?utf-8?B?T2c2YkQzVmphVHQwOThwaDkzWWZWYkxVNzdwbmRUc1BLNG9lMTNYb3JRWVJz?=
+ =?utf-8?B?ak9qazR0eG9ydHVUQTB3L1lyZDZKQkw2U29tbmxXMmp5TFBQeDFCTW55MitC?=
+ =?utf-8?B?OUpZZ21FTVEzNmhlSHMyRXhwbFpxNUZGOHZOOUlHUFdDY0h1OEViRzlIaG1o?=
+ =?utf-8?B?RndoQ1VDeHNjS0gvT2YzRmpXMy9kV2dWSkxMM1IyeGhpaTZXYW9rMXFBQkE3?=
+ =?utf-8?Q?ZgoPAgQ+aKDFAsd8=3D?=
+X-OriginatorOrg: oss.nxp.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: c8e39ca0-f920-4ba0-449a-08df12587840
+X-MS-Exchange-CrossTenant-AuthSource: GV2PR04MB12558.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Sep 2026 12:05:29.7025
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: JX091Z/gelT4IWCTDHC9adUctmbCFoLin/7DOQFU2Dq/HG6bX+wOnwaQGIrTbQBCj0oVV+OwlY8dS7SI2tr8TA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DBBPR04MB8044
 
-On 14/09/2026 14:03, David Heidelberg wrote:
-> On 14/09/2026 13:58, Muzaffer Kadir wrote:
->> Hi Konrad,
->>
->> On Mon, 14 Sep 2026 13:22:52 +0200, Konrad Dybcio wrote:
->>> On 9/12/26 10:39 AM, Muzaffer Kadir via B4 Relay wrote:
->>>> From: Muzaffer Kadir <muzafferkadir@mainlining.org>
->>>>
->>>> Add General Mobile Shamrock (GM 5 Plus).
->>>> Shamrock is designed similar to L9300.
->>>> Downstream reference is [1].
->>>
->>> Please feel free to
->>> wrap your messages at 72
->>> characters, otherwise they are
->>> a bit hard to read! :D
->>
->> I am sorry to hear that. vim shows
->> it less than 72 and I can't see which
->> line is bigger than 72.
+On 8/28/2026 1:28 PM, Krzysztof Kozlowski wrote:
+> On Wed, Aug 26, 2026 at 03:40:44PM +0200, Larisa Grigore wrote:
+>> +  clocks:
+>> +    maxItems: 1
+>> +    description: UFS core clock
+>> +
+>> +  clock-names:
+>> +    items:
+>> +      - const: core_clk
 > 
-> Hehe, yeah, had the same issue.
+> _clk is redundant, just "core". Or skip names, not really useful in this
+> case.
 > 
-> require('lualine').setup {
->    options = {
->      icons_enabled = true,
->      theme = 'auto',
->      component_separators = { left = '', right = '|'},
->      section_separators = { left = '', right = ''},
->      disabled_filetypes = {
->        statusline = {},
->        winbar = {},
->      },
->      ignore_focus = {},
->      always_divide_middle = true,
->      globalstatus = false,
->      refresh = {
->        statusline = 1000,
->        tabline = 1000,
->        winbar = 1000,
->      }
->    },
->    sections = {
->      lualine_a = {'mode'},
->      lualine_b = {'branch', 'diff', 'diagnostics'},
->      lualine_c = {'filename'},
->      lualine_x = {'filetype'},
->      lualine_y = {'progress'},
->      lualine_z = {
->        { '%3l:%-2.(%c%V%)', type = 'stl' },
->      },
->    },
->    inactive_sections = {
->      lualine_a = {},
->      lualine_b = {},
->      lualine_c = {'filename'},
->      lualine_x = {'location'},
->      lualine_y = {},
->      lualine_z = {}
->    },
->    tabline = {},
->    winbar = {},
+Thank you for the review Krzysztof! I will remove clock-names.
+>> +
+>> +  nxp,mphy-boot-mode:
+>> +    description: |
+>> +      MPHY initialization mode. Defines how the MPHY firmware should be
+>> +      initialized and executed during UFS controller startup.
+>> +      If this property is not specified, MPHY initialization will be skipped.
 > 
->    inactive_winbar = {},
-> 
->    extensions = {}
-> 
-> }
-> 
-> see a lualine_z for the way how to let neovim show length INCLUDING tabs :)
+> Isn't this implied by the compatible?
 
-...aaaand the comment was about opposite problem then the one I tried to address.
+Thank you! I will drop this property.
 
-Sorry for the noise.
+>> +    $ref: /schemas/types.yaml#/definitions/string
+>> +    enum:
+>> +      - rom
+>> +
+>> +required:
+>> +  - compatible
+>> +  - reg
+>> +
+>> +allOf:
+>> +  - $ref: ufs-common.yaml
+>> +  - if:
+>> +      required:
+>> +        - nxp,mphy-boot-mode
+>> +    then:
+>> +      properties:
+>> +        reg:
+>> +          minItems: 2
+>> +        reg-names:
+>> +          minItems: 2
+>> +      required:
+>> +        - reg-names
+>> +        - clocks
+>> +        - clock-names
+>> +    else:
+>> +      properties:
+>> +        reg:
+>> +          maxItems: 1
+>> +        reg-names:
+>> +          maxItems: 1
+> 
+> I don't get why for the SAME device diffeernt initialization means
+> device has different address space or clocks. It's the same device, same
+> wiring, same hardware setup.
 
-> 
-> David
-> 
->> Only one I can see is url itself.
->> Should I move url to Link trailer?
->>
->> For other parts of review,
->> I will fix them in v2.
->> Thanks a lot for review.
->>
->> Best regards,
->> Muzaffer Kadir
+Thank you, that makes sense.
+
+My initial intention was to distinguish between two ownership models: 
+one where Linux performs the complete UFS/MPHY initialization, and 
+another where the UFS subsystem has already been initialized by firmware 
+and Linux is not expected to configure the clocks or access the SCM 
+registers.
+
+Looking at it again, this does not seem to describe a property of the 
+hardware itself. In the firmware-managed case, Linux would not be 
+expected to touch the SCM area at all, so representing it via a DT 
+property is probably not appropriate.
+
+A separate compatible describing the firmware-managed interface may be a 
+better fit. What do you think?
+
+Best regards,
+Larisa
+
+> Best regards,
+> Krzysztof
 > 
 
