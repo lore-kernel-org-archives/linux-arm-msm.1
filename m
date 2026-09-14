@@ -1,88 +1,87 @@
 Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 47A53445AF4
-	for <linux-arm-msm@vger.kernel.org>; Mon, 14 Sep 2026 12:45:03 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 590CE45D91C
+	for <linux-arm-msm@vger.kernel.org>; Mon, 14 Sep 2026 12:45:54 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789389904; cv=none; b=P3zxAXpdfpUHWgArkzRU/gMQ1e0trPx3DvOlg2DZ7zCsv8VdUY9VpFL0ICjNRySeMF2bsggZglA3TOhSl86pxL6BsycfGKxM+ymo9kFNmlr7Gj6guxZqJG+nRhbjinqrzjxZccFrJOiwXY4+aGiGvM2bm8jqpjFg0h1y+NRYV7U=
+	t=1789389957; cv=none; b=dvSG4XF54Lym+UbRNaEYXGFRIuz2UPv8j7ANT0xEvkX7BmObaueJCMzuw0fQvkHkFCoRfMXKVgN/aT1SfLVM/xiVsR6aEdVFFfVmKjbYsNeGuMmq0zaxmzp0MavUImcpwn3IxU1Z0GYUupBi4ooRKAC28HToJceCr17aqfI3GpY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789389904; c=relaxed/simple;
-	bh=HL7cW7xm8EfCujd7ZA5FmqadaQ7C4TRhY1ufV8m/R8g=;
+	s=arc-20240116; t=1789389957; c=relaxed/simple;
+	bh=1GDtDP3OFpq7NJLUmbj/0ID1kjfq8k4ENToZ3o0FA5c=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=AraadNAyjr1oEAUinH5Y5Zd2Q1ym2XWNMp5TR1/vJAGIe9BfxxWULsJ8po3P8cyXqiXG2lZw9ZdJ8at97X0dldHaOlGPLUess2f0NVeMMoK/DiYLEvAwQ06xpd172V1FS5LKP7ubeq3hekgK7RF6TVHo1UhUu2RYQAvJK4n5eFM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=Pa/Y5CEm; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=kDJmzlr4; arc=none smtp.client-ip=205.220.180.131
+	 In-Reply-To:Content-Type; b=HFxHfQYOuvGHtYUr5PCGwjmHgUBjBMeR9C6mtLM95drvDOW+5UIE5H9QEeI+XJ9zmeZgJC8a7q489NmpCSff+Srl4Zn4fjbR6OHdj/iGILxy4uU3+E+TXR89u4XzynNJVMAG44P/knc9XMqVYCW0jRCGqfa1RRTMbQWgTrfcq6A=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=QnS9yUpa; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=Tykx9q/g; arc=none smtp.client-ip=205.220.180.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="Pa/Y5CEm";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="kDJmzlr4"
-Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68EBRI2r406996
-	for <linux-arm-msm@vger.kernel.org>; Mon, 14 Sep 2026 12:45:02 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="QnS9yUpa";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Tykx9q/g"
+Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68EAm8q9531006
+	for <linux-arm-msm@vger.kernel.org>; Mon, 14 Sep 2026 12:45:53 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	rPWhR462mdcnDKwkGM4WYGff1/qnBDSiVxAAgQpd/gE=; b=Pa/Y5CEmamZvyh7b
-	iYOf20KMt2Ue2cQbFlNvi1+tf1T/cXoV1be//vs9bH3/cZqNaAJX3X6w5tl00f3S
-	XTgEOJGbkjJ9tpyYNQZN1715la4BQeV5MC8avCsQNJwG26xCVtblH5rYX3a7jQ6G
-	M8Q01oRpb2464nph9oFcDGodLHB4KnRgqmF6ykIHO4lcc2AFV/z1/2hU+nZsJsRG
-	eSh9967MkmpmPp9hTQ8xt4HOIeD/Zy0IavQhfdPUpFtk7InV0fmyFAaH3OmQ6vCg
-	WvltOUFLauIcqcvroxdoCKN6t7hhbuq/voTo53YmO23FC82s+vP+cFLgQs1c/riE
-	TxSE2Q==
-Received: from mail-vs1-f72.google.com (mail-vs1-f72.google.com [209.85.217.72])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gpg2kr7qg-1
+	l7KCTyCnAql3eBzhMGVF8+s6B/KLW2Pt7JD9jXvISpw=; b=QnS9yUpa1Xly6lWs
+	vWv4Aq2Pc7H4GhHyTWrola0gT6Ig/Zy5N0hgLAkByd9aM3vaZTGlOySe1cYpQKb5
+	YYNaxxnTAQxpSTmfMsf6gRpEYsofe/40XNP66Jxw59URBNc7lPz09fKJOax5y4Yf
+	BWz1Hre73QPAXtOiBb+PccxtgD2pGSJY9OpaQn2WC2JmJMitek1Oy37A73IeVA9W
+	IkANGydE4+PaQKi+M3s1KW3IFFplRcrnK9QdxQt2I9LO4gRFszMNd2r7wtdtQWCj
+	c0/ZupjjIGFVX5efegYN0wMII8/Fk12rMxtWVfmhO7b+LZGBixC7Qg4TL6vD7UT0
+	C+64JQ==
+Received: from mail-vk1-f198.google.com (mail-vk1-f198.google.com [209.85.221.198])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gp3hstfct-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Mon, 14 Sep 2026 12:45:02 +0000 (GMT)
-Received: by mail-vs1-f72.google.com with SMTP id ada2fe7eead31-74ab6065f97so57575137.2
-        for <linux-arm-msm@vger.kernel.org>; Mon, 14 Sep 2026 05:45:02 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Mon, 14 Sep 2026 12:45:52 +0000 (GMT)
+Received: by mail-vk1-f198.google.com with SMTP id 71dfb90a1353d-5c82c2e9761so746074e0c.0
+        for <linux-arm-msm@vger.kernel.org>; Mon, 14 Sep 2026 05:45:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1789389899; x=1789994699; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1789389952; x=1789994752; darn=vger.kernel.org;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=rPWhR462mdcnDKwkGM4WYGff1/qnBDSiVxAAgQpd/gE=;
-        b=kDJmzlr4lqp/8EBt0VGZ9t0ncFcJU93LHLaV5WqEzC6aNEP77udbUF5duLx9QFS85Y
-         zRzQqc+oM5vY0Zy9yb4ZPQ2okEGWcvUaELMhaLRR+/96D31BqEzl7S7JHgUbhJC0/kBC
-         A0BCBIueWN10MCxznAs2oXprsTu3Ch8spPhpJ0Isl/62YrgQb9KfA3eCQjOvgby3Lebn
-         /79V2qap+u+fnQfjBjT3vdIjeSwCTpK/XI2jpyuouTxOfqsvoasalS3lD7k5Rz9pxUGL
-         hwhh9mCABHJp/erUaQr0q6MW7Zqr6+2XDLG3WEW+18GW3qxb58MLHtblCHP0Z4TRCN6T
-         RAjg==
+        bh=l7KCTyCnAql3eBzhMGVF8+s6B/KLW2Pt7JD9jXvISpw=;
+        b=Tykx9q/ghTBv6GMTp5XRD8w/YoJJtoZOFExofQT9aeJafJu1v8DhPBIlrvpnMpdfOl
+         NIQCjeYHB5tGx81zV6p9iL8fgDDwQUVCWqlIhNEwFt7k3aqQ1Uoz777npKwThxPRjeIt
+         EwKXyHbJ6AVznlI5rMNPSIsADDDMiKf5XCl8hcBbAtmSiD4kv+bIZy6r3sit5ijj/OzY
+         uIahjVuJROCjM3D8VmhCeV1olfabd3tW4SRqLNL7gqAS/AnFBPSlx8vMaAEKvNAgYgCr
+         pkPbdyIzNrxtyQ5I84xKby/9G8zvEOzw0jrO08nOUowC68RvQ9eqg4KND/jth57GXM8m
+         KFKA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1789389899; x=1789994699;
+        d=1e100.net; s=20251104; t=1789389952; x=1789994752;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=rPWhR462mdcnDKwkGM4WYGff1/qnBDSiVxAAgQpd/gE=;
-        b=sPot30aOk7Lg+6BOtEmG/NkBsghm+Zdija0tLIzytyaHubk2huLeu2i5CYnd37qYnB
-         gYv3oVN2CjJfess+9yPQwlILn047BFA73YDnXd415Ihs8bFJjfaEHMUBjDF7gLJIjVGj
-         0Gfa7waLprtN4nIwLmGVh1Q01l5GFDOxns21qzW9Zc7sPiNEyyvhJvaOo+e4HFUBwGns
-         40t9TjYzkkkWArsMZ5sPIgdA4I0g9NG192H3JucyZ4XbktdY8eCbMlYKaVQp0J0iK4le
-         BsJKOX23ihCc8oVLRe/QsdQ76ZHBn4PPCx2a9zNP4tbWSI4jzr9mnOa5XZvMnpp114dw
-         gNKg==
-X-Forwarded-Encrypted: i=1; AKwUvBxpMrk6FOuzDoUfkoIrdhtF+h3J4M7FNxooin+iXO95LfOBGuBsyLLNXIfYCLxqmgvZbX7eH4s7tBA/uUUf@vger.kernel.org
-X-Gm-Message-State: AFuF++kdIxxxJ01IK0GRuio4CLMeV5D15dnHGhscWBos7weZSby4j622
-	cDgZVWspkX76fIJ4KeyMR4491Svpl60IAsNaWykSsjjTuXq4VANO9hiDldR6E5E4SgFBo/eznoG
-	X+Xt32rLmi9s/7tePYs200cDMg6kH64CTQNvAdaOkZQvrUGU0ytA5KOTl6BJ7oiPrw64JW2Ht0c
-	rH
-X-Gm-Gg: AYBFou2dSwrxX8DlFDZB9XpxeMO0khRseXqi/c4Mn5BkZ/9Qhee7TzDzsz0M5sOX1mD
-	2y7KIcl5HtMDz9mrn/L/WVWi8/nPYzOjuPsiLcneA4S7SKCtZk9uJeJsI8cl++X83y7ZOwJeK+u
-	RSTQc47ZrFe0n0xyqmAJ7EwuFt/3rUci18c1MN/PpOsYqVwdDVtQPNDeSXZv1WR6Ronw9iZORmM
-	tSreVREOgQKKwcXTYF3jvtomV35+pYmcKlhwwV5doE24pcnmz/VKilcvlB7KssOGb/xvcowyaUT
-	92YUdCalktkHhCqxiVnMf/4yW7jeaLbqEE9PZmggJwq3KY4LMA1G9kyRskfAnotq6NwBgqI0m3R
-	ZHOTZpCP6HmwEffLAicaoGg==
-X-Received: by 2002:a05:6102:160b:b0:78f:c6f5:27c9 with SMTP id ada2fe7eead31-79b509df7c8mr395520137.0.1789389899486;
-        Mon, 14 Sep 2026 05:44:59 -0700 (PDT)
-X-Received: by 2002:a05:6102:160b:b0:78f:c6f5:27c9 with SMTP id ada2fe7eead31-79b509df7c8mr395517137.0.1789389899071;
-        Mon, 14 Sep 2026 05:44:59 -0700 (PDT)
-Received: from [192.168.202.12] ([178.235.128.140])
-        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5b8a04709b3sm2430850e87.57.2026.09.14.05.44.57
+        bh=l7KCTyCnAql3eBzhMGVF8+s6B/KLW2Pt7JD9jXvISpw=;
+        b=IB0v6txgXcHxkPhmZ/hGhhXggD6dhOpT/jfyqPW8qLRUasH7HMOzQTaTrGEHnqgQm4
+         NFRZe6zwP8SxUGo6+rxUSt2RBbV/QAseyp1gscWTR2L+VO+XXwskPJ8BA7rv6C+aufUf
+         e3fWn21dXAUvzJ4GRX51jbsaEWzUawniYY6cIBowWsm5Htb55F1JuOLhNb6HPfHSXttE
+         JBDOh04JiZe3p5RjVj/+iAyyBRqc73mVWsuYi8S5XCeEsn7n5QvneqFXQkwPfvih0iQU
+         O2xQ5adsZjomSsrEWATdNfTLnJUrfQN+sSmR13EyQzUie4I11eHKhvLBPZcHFiZvFHw7
+         DIHw==
+X-Forwarded-Encrypted: i=1; AKwUvByt4z0E2EUeZj0T4psM7s7yhXwBIkoFC7VCM04MdKBj/5AHdq0i0XNSoKKjvS1yeVjJ2UBVjx4LJt/ir4Iq@vger.kernel.org
+X-Gm-Message-State: AFuF++mvsacNJ/I0P92uF0X/eXuMXgjTW9g3EK/Iw5qBzKaxicX8TP16
+	WOfvM3V2sF+hBbm5bvyvLR+C74XGORKF2RYICtxY0TmFjobzn5uSDIiPI2Mu5RJjnW3QVSayYuI
+	CDzrO49dn0QyznDU0ffQ15vt8+1w1sCYyq4qUrkIXRN+Ux5BW2exnfg5XxtP53Y94z6AC
+X-Gm-Gg: AYBFou0ynS3zaZ9Eac4wnrlh+vu10tRsmo+Xh21gILij96aKzt/t+S0t8QJM1I0aIR+
+	/iQ9himCoZNuYxnI6OVssjZZ60vUfgDoBPDulsKwKMSKXXZUKCDx1JJMOWJOf57orYIaq6nFRnI
+	/haCXA0w3ig0bbVKydibskedKujXWBs8yyHVX6gpxKTVWZYFP7vb0GhIVfRNZnEDbMVPo5OhZRK
+	lLs8Wy9sLMLlL59QJYNt0zkGFhSqLMOBxsX0pPeRiViHPwDif+rwKTMWrvt1O57wDfwZnkomKVG
+	W2NFe0TiDlBbVLtX9KiuH4dT2gQhlfEp+3YhHRRV4zvnl2cLNnFKkZc14o4HuJ9e55dH4m1fwYn
+	90cKN9CtuZxB84kjLALsJiqUcpGM=
+X-Received: by 2002:a05:6122:3382:b0:5c7:a9ee:dcfb with SMTP id 71dfb90a1353d-5c9820c3842mr1704517e0c.5.1789389952143;
+        Mon, 14 Sep 2026 05:45:52 -0700 (PDT)
+X-Received: by 2002:a05:6122:3382:b0:5c7:a9ee:dcfb with SMTP id 71dfb90a1353d-5c9820c3842mr1704396e0c.5.1789389951547;
+        Mon, 14 Sep 2026 05:45:51 -0700 (PDT)
+Received: from [192.168.68.120] ([5.133.47.210])
+        by smtp.googlemail.com with ESMTPSA id 2adb3069b0e04-5b8a0471d5bsm2429218e87.61.2026.09.14.05.45.49
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 14 Sep 2026 05:44:58 -0700 (PDT)
-Message-ID: <e034dc1d-f612-4e23-9805-74124445bb67@oss.qualcomm.com>
-Date: Mon, 14 Sep 2026 14:44:56 +0200
+        Mon, 14 Sep 2026 05:45:50 -0700 (PDT)
+Message-ID: <3b22232c-7573-4f09-86d3-21984d5c3a1c@oss.qualcomm.com>
+Date: Mon, 14 Sep 2026 13:45:48 +0100
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -90,76 +89,287 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC] arm64: dts: qcom: Dell Inspiron 7441 LXST2021 touchscreen
- at 0x09
-To: Avalon Vargas Centeno <avalon.vargas.centeno@est.una.ac.cr>,
-        linux-arm-msm@vger.kernel.org
-Cc: andersson@kernel.org, konradybcio@kernel.org
-References: <CAGXpr56LDenxF5hM-_gdc7suckR9P7sgC8vY4T7dcHtLK0OwVA@mail.gmail.com>
+Subject: Re: [PATCH v2 6/6] ASoC: qcom: lpass-va-macro: Add SoundWire
+ microphone mux support
+To: Mohammad Rafi Shaik <mohammad.rafi.shaik@oss.qualcomm.com>,
+        Srinivas Kandagatla <srini@kernel.org>,
+        Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>,
+        Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley
+ <conor+dt@kernel.org>, Jaroslav Kysela <perex@perex.cz>,
+        Takashi Iwai <tiwai@suse.com>
+Cc: linux-sound@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
+References: <20260910-add_shikra_support-v2-0-fdd2129c696c@oss.qualcomm.com>
+ <20260910-add_shikra_support-v2-6-fdd2129c696c@oss.qualcomm.com>
 Content-Language: en-US
-From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-In-Reply-To: <CAGXpr56LDenxF5hM-_gdc7suckR9P7sgC8vY4T7dcHtLK0OwVA@mail.gmail.com>
+From: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
+In-Reply-To: <20260910-add_shikra_support-v2-6-fdd2129c696c@oss.qualcomm.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-Proofpoint-ORIG-GUID: KZcGe95dkCYHFL_LZQ49G-cGysPZvFGK
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTE0MDE4MiBTYWx0ZWRfX2ah44vSZxIi0
- zZKsmVgAy3nBWA+sbs8R/FKwuUYhkn3gUW2l3BX8UXDM068IRwVgKK0LaTpKTBa9soqoPt3LDfU
- hk7SVvTyxr2uo71WvUmySBpDCuHyw95U/tMrHthNXr6/nuRne5I1oVT5r6dVVw/F9AtJvTAPaa2
- 9eAOI6Fe1fyrGekBdsBPFYVxSd8yLTmjwlSs6ktQEiagLIg/8JchX7pNN5jfENzrW34QHgeJ+4/
- PwibsIvTswKyixXikHNDPtYFpFs8UHOmmbdIq298v6kaUuyQs/lw5Xp+091OZJnLDnGNxfLAxJE
- gUOJTXZKS7XzOkbpXFWKmakWvC21mWtCatwdfHQZupfShJCDeveK+NVNx3y2OMe6XNsreQq4Umh
- YFhtf5geaCDy52pTYgs8gKlxC1pOzmMQSd+7wYPpQyJU/MMDM44Wzdz6m4eVlfv8lYQ/DqC6TkR
- AH2Tmng/4pQF4ijuAIg==
-X-Proofpoint-GUID: KZcGe95dkCYHFL_LZQ49G-cGysPZvFGK
-X-Authority-Analysis: v=2.4 cv=M7TYuCws c=1 sm=1 tr=0 ts=6aa7ec4e cx=c_pps
- a=DUEm7b3gzWu7BqY5nP7+9g==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTE0MDE4MiBTYWx0ZWRfX/jhOOQIyhSVC
+ 2JKnNa5Vxgs/QiyhANRFexveiqfzstBp0ew5n8p2sXuXwhmD7wfoU9eN3xTFNnoLMxQ3W8kmwSh
+ Cva/ti+n8O6mRIETKHX+Ik8967kTudS/BeIWz6F7QKErR7VDviqHsr2Z9tcGW8ATuht8YWXca7V
+ fpJVRvr0KN6KY4a9rNf7SgBkZqR8U8MzoZUeAhIH+uu02fOK86IWHoVxi0bRyGIRo66KHd2Jw5r
+ ApOz8ZlqkUP9xGk7jLwiv7tows4SvMaIzWSETwGXs10I/XBVTRWHryjbL3ktakVIQ1pActMnKqH
+ WwgbIjRVPjMyjlBHFTGvrwPO91E/ojguEwNzc9gMOV9cVks7IcZBd9sRNVUunqWQc702zvBpzii
+ T6F3O1fmz5r9mtY3TlXUSGKflccfwQS2M1YG8Cy4R+Jmc4IMw1kHNr4Lp2O5FG8fFMWJach0iOy
+ QPjE+gGXIEjmB/6Q0kg==
+X-Authority-Analysis: v=2.4 cv=IZwSymqa c=1 sm=1 tr=0 ts=6aa7ec80 cx=c_pps
+ a=1Os3MKEOqt8YzSjcPV0cFA==:117 a=ZsC4DHZuhs/kKio7QBcDoQ==:17
  a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
- a=VwQbUJbxAAAA:8 a=22cVwcawnwk_avja69cA:9 a=QEXdDO2ut3YA:10
- a=-aSRE8QhW-JAV6biHavz:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTE0MDE4MiBTYWx0ZWRfX0n7brMjvyFPD
- fUWGHAMwjbeyj22Ao5yZZ5+0PS9b+vupX1Bt1pZTlGbx3GDNC0vrHVZpQpFF+qDNh1czxaZhfdS
- VjbZtVqp/3UVr/WU5FG6zWXKVyvmBts=
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
+ a=EUspDBNiAAAA:8 a=DNEr2gOle52aZHLQxwsA:9 a=QEXdDO2ut3YA:10
+ a=hhpmQAJR8DioWGSBphRh:22
+X-Proofpoint-GUID: Ki-OFnSWQ9WOzUho0YrdZZIPgXE_8Dxq
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTE0MDE4MiBTYWx0ZWRfX9Ch/tNFVan+Z
+ 7fBKusBlMXUn2p13SU3RXJMqzhPi4hZR211w7DR8sfjUqz9s03esogRbmwzFxcFp1IkD+Nngu1E
+ y1LsxJxvXy2QJKq+hY+WLOwshdt5Zz8=
+X-Proofpoint-ORIG-GUID: Ki-OFnSWQ9WOzUho0YrdZZIPgXE_8Dxq
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-09-14_03,2026-09-13_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 clxscore=1015 bulkscore=0 impostorscore=0 suspectscore=0
- malwarescore=0 adultscore=0 lowpriorityscore=0 spamscore=0 priorityscore=1501
+ suspectscore=0 adultscore=0 impostorscore=0 malwarescore=0 phishscore=0
+ clxscore=1015 bulkscore=0 lowpriorityscore=0 priorityscore=1501 spamscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609140182
 
-On 9/12/26 12:06 AM, Avalon Vargas Centeno wrote:
-> Hello,
+On 9/10/26 10:46 AM, Mohammad Rafi Shaik wrote:
+> The VA decimators can currently capture audio only from DMIC inputs.
+> Add support for routing audio from SoundWire microphone (SMIC) inputs
+> as well.
 > 
-> My Dell Inspiron 14 Plus 7441 has an LXST2021 touchscreen that works in
-> Windows and BIOS but it was not detected with the Linux Inspiron
-> device tree found upstream. After working on it i found that
-> changing the touchscreen address from 0x10 to 0x09 fixes the
-> touchscreen on this unit.
-
-Do we know that's because of double-sourcing, or because of a typo?
-
-[...]
-
-> diff --git a/arch/arm64/boot/dts/qcom/x1e80100-dell-inspiron-14-plus-7441.dts
-> b/arch/arm64/boot/dts/qcom/x1e80100-dell-inspiron-14-plus-7441.dts
-> --- a/arch/arm64/boot/dts/qcom/x1e80100-dell-inspiron-14-plus-7441.dts
-> +++ b/arch/arm64/boot/dts/qcom/x1e80100-dell-inspiron-14-plus-7441.dts
-> @@ -25,9 +25,10 @@
+> Update the decimator source selection logic to switch between DMIC and
+> SMIC sources based on the active input path.
+> 
+> Add a helper to detect whether a decimator is using a SoundWire microphone
+> input. Use this information to skip DMIC-specific HPF programming sequences
+> when the decimator is configured for an SMIC source.
+> 
+> This enables VA decimators to capture audio from either DMIC or SoundWire
+> microphone inputs.
+> 
+> Signed-off-by: Mohammad Rafi Shaik <mohammad.rafi.shaik@oss.qualcomm.com>
+> ---
+>  sound/soc/codecs/lpass-va-macro.c | 124 ++++++++++++++++++++++++++++++++++----
+>  1 file changed, 113 insertions(+), 11 deletions(-)
+> 
+> diff --git a/sound/soc/codecs/lpass-va-macro.c b/sound/soc/codecs/lpass-va-macro.c
+> index 8353921f7..46f35a984 100644
+> --- a/sound/soc/codecs/lpass-va-macro.c
+> +++ b/sound/soc/codecs/lpass-va-macro.c
+> @@ -249,6 +249,7 @@ enum {
+>  	VA_MACRO_CLK_DIV_16,
 >  };
+>  
+> +
+>  #define VA_NUM_CLKS_MAX		3
+>  
+>  struct va_macro {
+> @@ -756,10 +757,16 @@ static int va_macro_put_dec_enum(struct snd_kcontrol *kcontrol,
+>  		return -EINVAL;
+>  	}
+>  
+> -	if (val != 0)
+> -		snd_soc_component_update_bits(component, mic_sel_reg,
+> +	if (val != 0) {
+> +		if (strstr(widget->name, "SMIC"))
+Where is this widget in this patch, it could be anything which has SMIC.
+or either match the full Widget name.
+
+> +			snd_soc_component_update_bits(component, mic_sel_reg,
+> +					      CDC_VA_TX_PATH_ADC_DMIC_SEL_MASK,
+> +					      CDC_VA_TX_PATH_ADC_DMIC_SEL_ADC);
+> +		else
+> +			snd_soc_component_update_bits(component, mic_sel_reg,
+>  					      CDC_VA_TX_PATH_ADC_DMIC_SEL_MASK,
+>  					      CDC_VA_TX_PATH_ADC_DMIC_SEL_DMIC);
+> +	}
+>  
+>  	return snd_soc_dapm_put_enum_double(kcontrol, ucontrol);
+>  }
+> @@ -940,6 +947,16 @@ static int va_macro_enable_dmic(struct snd_soc_dapm_widget *w,
+>  	return 0;
+>  }
+>  
+> +static bool is_amic_enabled(struct snd_soc_component *comp, int decimator)
+> +{
+> +	u16 adc_mux_reg;
+> +
+> +	adc_mux_reg = CDC_VA_INP_MUX_ADC_MUX0_CFG1 +
+> +		      VA_MACRO_ADC_MUX_CFG_OFFSET * decimator;
+> +
+> +	return snd_soc_component_read(comp, adc_mux_reg) & BIT(0);
+> +}
+> +
+>  static int va_macro_enable_dec(struct snd_soc_dapm_widget *w,
+>  			       struct snd_kcontrol *kcontrol, int event)
+>  {
+> @@ -949,7 +966,6 @@ static int va_macro_enable_dec(struct snd_soc_dapm_widget *w,
+>  	u16 tx_gain_ctl_reg;
+>  	u16 adpt_ctrl_reg;
+>  	u8 hpf_cut_off_freq;
+> -
+>  	struct va_macro *va = snd_soc_component_get_drvdata(comp);
+>  
+>  	decimator = w->shift;
+> @@ -980,7 +996,8 @@ static int va_macro_enable_dec(struct snd_soc_dapm_widget *w,
+>  		snd_soc_component_update_bits(comp, tx_vol_ctl_reg,
+>  					      CDC_VA_TX_PATH_CLK_EN_MASK,
+>  					      CDC_VA_TX_PATH_CLK_EN);
+> -		snd_soc_component_update_bits(comp, hpf_gate_reg,
+> +		if (!is_amic_enabled(comp, decimator))
+> +			snd_soc_component_update_bits(comp, hpf_gate_reg,
+>  					      CDC_VA_TX_HPF_ZERO_GATE_MASK,
+>  					      CDC_VA_TX_HPF_ZERO_GATE);
+>  
+> @@ -994,21 +1011,20 @@ static int va_macro_enable_dec(struct snd_soc_dapm_widget *w,
+>  						      CF_MIN_3DB_150HZ << 5);
+>  
+>  			snd_soc_component_update_bits(comp, hpf_gate_reg,
+> -				      CDC_VA_TX_HPF_CUTOFF_FREQ_CHANGE_MASK,
+> -				      CDC_VA_TX_HPF_CUTOFF_FREQ_CHANGE_REQ);
+> +					      CDC_VA_TX_HPF_CUTOFF_FREQ_CHANGE_MASK,
+> +					      CDC_VA_TX_HPF_CUTOFF_FREQ_CHANGE_REQ);
+>  
+>  			/*
+>  			 * Minimum 1 clk cycle delay is required as per HW spec
+>  			 */
+>  			usleep_range(1000, 1010);
+>  
+> -			snd_soc_component_update_bits(comp,
+> -				hpf_gate_reg,
+> -				CDC_VA_TX_HPF_CUTOFF_FREQ_CHANGE_MASK,
+> -				0x0);
+> +			if (!is_amic_enabled(comp, decimator))
+> +				snd_soc_component_update_bits(comp, hpf_gate_reg,
+> +						      CDC_VA_TX_HPF_CUTOFF_FREQ_CHANGE_MASK,
+> +						      0x0);
+>  		}
+>  
+> -
+>  		usleep_range(1000, 1010);
+>  		snd_soc_component_update_bits(comp, hpf_gate_reg,
+>  					      CDC_VA_TX_HPF_ZERO_GATE_MASK,
+> @@ -1208,6 +1224,39 @@ static const char * const adc_mux_text[] = {
+>  	"VA_DMIC", "SWR_MIC"
+>  };
+>  
+> +static const char * const smic_mux_text[] = {
+> +	"ZERO", "SWR_MIC0", "SWR_MIC1", "SWR_MIC2", "SWR_MIC3",
+> +	"SWR_MIC4", "SWR_MIC5", "SWR_MIC6", "SWR_MIC7"
+> +};
+> +
+> +static SOC_ENUM_SINGLE_DECL(va_smic0_enum, CDC_VA_INP_MUX_ADC_MUX0_CFG0,
+> +			0, smic_mux_text);
+> +
+> +static SOC_ENUM_SINGLE_DECL(va_smic1_enum, CDC_VA_INP_MUX_ADC_MUX1_CFG0,
+> +			0, smic_mux_text);
+> +
+> +static SOC_ENUM_SINGLE_DECL(va_smic2_enum, CDC_VA_INP_MUX_ADC_MUX2_CFG0,
+> +			0, smic_mux_text);
+> +
+> +static SOC_ENUM_SINGLE_DECL(va_smic3_enum, CDC_VA_INP_MUX_ADC_MUX3_CFG0,
+> +			0, smic_mux_text);
+> +
+> +static const struct snd_kcontrol_new va_smic0_mux = SOC_DAPM_ENUM_EXT("va_smic0",
+> +			 va_smic0_enum, snd_soc_dapm_get_enum_double,
+> +			 va_macro_put_dec_enum);
+> +
+> +static const struct snd_kcontrol_new va_smic1_mux = SOC_DAPM_ENUM_EXT("va_smic1",
+> +			 va_smic1_enum, snd_soc_dapm_get_enum_double,
+> +			 va_macro_put_dec_enum);
+> +
+> +static const struct snd_kcontrol_new va_smic2_mux = SOC_DAPM_ENUM_EXT("va_smic2",
+> +			 va_smic2_enum, snd_soc_dapm_get_enum_double,
+> +			 va_macro_put_dec_enum);
+> +
+> +static const struct snd_kcontrol_new va_smic3_mux = SOC_DAPM_ENUM_EXT("va_smic3",
+> +			 va_smic3_enum, snd_soc_dapm_get_enum_double,
+> +			 va_macro_put_dec_enum);
+> +
+>  static SOC_ENUM_SINGLE_DECL(va_dec0_enum, CDC_VA_INP_MUX_ADC_MUX0_CFG1,
+>  		   0, adc_mux_text);
+>  static SOC_ENUM_SINGLE_DECL(va_dec1_enum, CDC_VA_INP_MUX_ADC_MUX1_CFG1,
+> @@ -1343,6 +1392,11 @@ static const struct snd_soc_dapm_widget va_macro_dapm_widgets[] = {
+>  	SND_SOC_DAPM_MUX("VA DMIC MUX2", SND_SOC_NOPM, 0, 0, &va_dmic2_mux),
+>  	SND_SOC_DAPM_MUX("VA DMIC MUX3", SND_SOC_NOPM, 0, 0, &va_dmic3_mux),
+>  
+> +	SND_SOC_DAPM_MUX("VA SMIC MUX0", SND_SOC_NOPM, 0, 0, &va_smic0_mux),
+> +	SND_SOC_DAPM_MUX("VA SMIC MUX1", SND_SOC_NOPM, 0, 0, &va_smic1_mux),
+> +	SND_SOC_DAPM_MUX("VA SMIC MUX2", SND_SOC_NOPM, 0, 0, &va_smic2_mux),
+> +	SND_SOC_DAPM_MUX("VA SMIC MUX3", SND_SOC_NOPM, 0, 0, &va_smic3_mux),
+> +
+>  	SND_SOC_DAPM_REGULATOR_SUPPLY("vdd-micb", 0, 0),
+>  	SND_SOC_DAPM_INPUT("DMIC0 Pin"),
+>  	SND_SOC_DAPM_INPUT("DMIC1 Pin"),
+> @@ -1397,6 +1451,14 @@ static const struct snd_soc_dapm_widget va_macro_dapm_widgets[] = {
+>  	SND_SOC_DAPM_INPUT("VA SWR_MIC5"),
+>  	SND_SOC_DAPM_INPUT("VA SWR_MIC6"),
+>  	SND_SOC_DAPM_INPUT("VA SWR_MIC7"),
+> +	SND_SOC_DAPM_INPUT("VA SWR_INPUT0"),
+> +	SND_SOC_DAPM_INPUT("VA SWR_INPUT1"),
+> +	SND_SOC_DAPM_INPUT("VA SWR_INPUT2"),
+> +	SND_SOC_DAPM_INPUT("VA SWR_INPUT3"),
+> +	SND_SOC_DAPM_INPUT("VA SWR_INPUT4"),
+> +	SND_SOC_DAPM_INPUT("VA SWR_INPUT5"),
+> +	SND_SOC_DAPM_INPUT("VA SWR_INPUT6"),
+> +	SND_SOC_DAPM_INPUT("VA SWR_INPUT7"),
+
+Why not use exising SWR_MICx's ?
+
+
+>  
+>  	SND_SOC_DAPM_MUX_E("VA DEC0 MUX", SND_SOC_NOPM, VA_MACRO_DEC0, 0,
+>  			   &va_dec0_mux, va_macro_enable_dec,
+> @@ -1487,6 +1549,46 @@ static const struct snd_soc_dapm_route va_audio_map[] = {
+>  	{"VA DMIC MUX3", "DMIC6", "VA DMIC6"},
+>  	{"VA DMIC MUX3", "DMIC7", "VA DMIC7"},
+>  
+> +	{"VA DEC0 MUX", "SWR_MIC", "VA SMIC MUX0"},
+> +	{"VA SMIC MUX0", "SWR_MIC0", "VA SWR_INPUT0"},
+> +	{"VA SMIC MUX0", "SWR_MIC1", "VA SWR_INPUT1"},
+> +	{"VA SMIC MUX0", "SWR_MIC2", "VA SWR_INPUT2"},
+> +	{"VA SMIC MUX0", "SWR_MIC3", "VA SWR_INPUT3"},
+> +	{"VA SMIC MUX0", "SWR_MIC4", "VA SWR_INPUT4"},
+> +	{"VA SMIC MUX0", "SWR_MIC5", "VA SWR_INPUT5"},
+> +	{"VA SMIC MUX0", "SWR_MIC6", "VA SWR_INPUT6"},
+> +	{"VA SMIC MUX0", "SWR_MIC7", "VA SWR_INPUT7"},
+> +
+> +	{"VA DEC1 MUX", "SWR_MIC", "VA SMIC MUX1"},
+> +	{"VA SMIC MUX1", "SWR_MIC0", "VA SWR_INPUT0"},
+> +	{"VA SMIC MUX1", "SWR_MIC1", "VA SWR_INPUT1"},
+> +	{"VA SMIC MUX1", "SWR_MIC2", "VA SWR_INPUT2"},
+> +	{"VA SMIC MUX1", "SWR_MIC3", "VA SWR_INPUT3"},
+> +	{"VA SMIC MUX1", "SWR_MIC4", "VA SWR_INPUT4"},
+> +	{"VA SMIC MUX1", "SWR_MIC5", "VA SWR_INPUT5"},
+> +	{"VA SMIC MUX1", "SWR_MIC6", "VA SWR_INPUT6"},
+> +	{"VA SMIC MUX1", "SWR_MIC7", "VA SWR_INPUT7"},
+> +
+> +	{"VA DEC2 MUX", "SWR_MIC", "VA SMIC MUX2"},
+> +	{"VA SMIC MUX2", "SWR_MIC0", "VA SWR_INPUT0"},
+> +	{"VA SMIC MUX2", "SWR_MIC1", "VA SWR_INPUT1"},
+> +	{"VA SMIC MUX2", "SWR_MIC2", "VA SWR_INPUT2"},
+> +	{"VA SMIC MUX2", "SWR_MIC3", "VA SWR_INPUT3"},
+> +	{"VA SMIC MUX2", "SWR_MIC4", "VA SWR_INPUT4"},
+> +	{"VA SMIC MUX2", "SWR_MIC5", "VA SWR_INPUT5"},
+> +	{"VA SMIC MUX2", "SWR_MIC6", "VA SWR_INPUT6"},
+> +	{"VA SMIC MUX2", "SWR_MIC7", "VA SWR_INPUT7"},
+> +
+> +	{"VA DEC3 MUX", "SWR_MIC", "VA SMIC MUX3"},
+> +	{"VA SMIC MUX3", "SWR_MIC0", "VA SWR_INPUT0"},
+> +	{"VA SMIC MUX3", "SWR_MIC1", "VA SWR_INPUT1"},
+> +	{"VA SMIC MUX3", "SWR_MIC2", "VA SWR_INPUT2"},
+> +	{"VA SMIC MUX3", "SWR_MIC3", "VA SWR_INPUT3"},
+> +	{"VA SMIC MUX3", "SWR_MIC4", "VA SWR_INPUT4"},
+> +	{"VA SMIC MUX3", "SWR_MIC5", "VA SWR_INPUT5"},
+> +	{"VA SMIC MUX3", "SWR_MIC6", "VA SWR_INPUT6"},
+> +	{"VA SMIC MUX3", "SWR_MIC7", "VA SWR_INPUT7"},
+> +
+>  	{ "VA DMIC0", NULL, "DMIC0 Pin" },
+>  	{ "VA DMIC1", NULL, "DMIC1 Pin" },
+>  	{ "VA DMIC2", NULL, "DMIC2 Pin" },
 > 
->  &i2c8 {
-> - touchscreen@10 {
-> + /* LXST2021 */
-> + touchscreen@9 {
->   compatible = "hid-over-i2c";
-> - reg = <0x10>;
-> + reg = <0x09>;
 
-Please send patches, not regular emails with diffs attached, we can't
-do much with these. It's easiest to use the b4 tool:
-
-https://b4.docs.kernel.org/en/latest/
-
-Konrad
