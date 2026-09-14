@@ -1,97 +1,84 @@
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.4])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B45A2279DC3;
-	Mon, 14 Sep 2026 08:06:34 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.4
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E05973F4DC2;
+	Mon, 14 Sep 2026 08:07:35 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789373196; cv=none; b=E6zsEIuZpYQlZIIqp5IlASnUi2TyCyxYKS3tGsCSbKknEOqqtEbnlJtF7lv4rbXhjSeVpQTXnylMQNUCgFS00HGCkwy+oRG5nIO6SL1w64i0xKyA4yLiDc9dzdeQu3EyjEgBYFueQDFXyltZfohThJVxu7paKvOlQjANqQpHMjI=
+	t=1789373257; cv=none; b=Z4vhRDoyzVc30CGG9rl4gM9FkBhHYiKRVZIYcmNWczSCl355Nv73nsOh0iRL4OKoSR7mDHCFqsUht7oFWeUN0pBkQ1VEU04IbYaUHQStJ8GzWR5qgNiLXzijDnkMj2raMSrxAWmz6YEY/BkumL7gUKtaZtJdrrNW8A+jOzm0AnY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789373196; c=relaxed/simple;
-	bh=X6brkOAP3lrhzjUoaD0QihF8srSFXE/F/lrOZE26crI=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=oyDrEw7YEk7p8C7NKi7mwbrmY9mi4FpLpSiJfVbAMFiqKs/2UMxywLtwAGRmxOWCZhkeqjPiydekJpKytoHcj57yLJLmr7Nue5wLSIt+AJzBChjs6JC2UiDC1L+2WYqjyp3WPVIEZgOf3n7caW0qfRbaDT6YQJ5jMTDiMdFAo60=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=PU/8J64o; arc=none smtp.client-ip=192.198.163.4
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
+	s=arc-20240116; t=1789373257; c=relaxed/simple;
+	bh=8e7WGv9Wbn59L5zZG9EX7KZXLR5OzQsjUIfycOfg8WM=;
+	h=From:To:Cc:In-Reply-To:References:Subject:Message-Id:Date:
+	 MIME-Version:Content-Type; b=HTFx/PSs7IPjRA3puvjbPX53taZ7qYNXw4IEx48iY9SzW/ZKtCY+W82d2W4hmfyXiqmX1Ato/UAzqJz8MyoHXetn1ETKjcnBC8n3phNFJqEth6F2HH81m1QE02r7PhnIIkYgMI27/pj9Kdas/90aoxeSqmnIsDlcGsGHbrl9MJ0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=F3XfDGpu; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="PU/8J64o"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1789373195; x=1820909195;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:content-transfer-encoding:in-reply-to;
-  bh=X6brkOAP3lrhzjUoaD0QihF8srSFXE/F/lrOZE26crI=;
-  b=PU/8J64oIgZLVCtnGSGTttEouze92AH5TDAMcj1tji1FQcyPq6czQui2
-   WTB6lYjhQx0/NoJ08QpWJ1nG7D/XB3GkS2c6oU//u1jYuFA0lCHm4ZmdT
-   kVyZbBSrmz89poimii7tXZoZAl1GpQJGNr72XXXRl07OWjsM/1GUdu/W+
-   VcIvqhsKgeuAwKkeq4PNqHocZE9OOjMB7/YKQSQ2JyybpIQZSkP8KwY/Y
-   TzuNAokI1x6pKJsNSkyMDhlFEftBwERFVSj1XD9a0KlkkoXKYNENCm/6h
-   vXjkGkKUnbNLHuJYZHXo0ul9qJKmUvMgHTsUIk3X1+SqdQM4EOUABXFSU
-   Q==;
-X-CSE-ConnectionGUID: cfo+Sgq2TU2VqFoL35R8Aw==
-X-CSE-MsgGUID: DjtwKCPHSYKTz9GEJJ/YBg==
-X-IronPort-AV: E=McAfee;i="6800,10657,11904"; a="232838"
-X-IronPort-AV: E=Sophos;i="6.27,102,1787036400"; 
-   d="scan'208";a="232838"
-Received: from fmviesa005.fm.intel.com ([10.60.135.145])
-  by fmvoesa114.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 14 Sep 2026 01:06:34 -0700
-X-CSE-ConnectionGUID: nPzRhKimS7K9nb7ijcLj6w==
-X-CSE-MsgGUID: BwSpFtfCQaufbZDXPiEzoA==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.27,102,1787036400"; 
-   d="scan'208";a="277837276"
-Received: from ettammin-mobl2.ger.corp.intel.com (HELO localhost) ([10.245.245.29])
-  by fmviesa005-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 14 Sep 2026 01:06:29 -0700
-Date: Mon, 14 Sep 2026 11:06:27 +0300
-From: Andy Shevchenko <andriy.shevchenko@intel.com>
-To: Nuno =?iso-8859-1?Q?S=E1?= <nuno.sa@analog.com>
-Cc: linux-kernel@vger.kernel.org, dmaengine@vger.kernel.org,
-	linux-arm-msm@vger.kernel.org,
-	linux-stm32@st-md-mailman.stormreply.com,
-	linux-arm-kernel@lists.infradead.org, linux-iio@vger.kernel.org,
-	linux-sound@vger.kernel.org, linux-spi@vger.kernel.org,
-	Vinod Koul <vkoul@kernel.org>, Frank Li <Frank.Li@kernel.org>,
-	Lars-Peter Clausen <lars@metafoo.de>,
-	Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>,
-	=?iso-8859-1?Q?Am=E9lie?= Delaunay <amelie.delaunay@foss.st.com>,
-	Maxime Coquelin <mcoquelin.stm32@gmail.com>,
-	Alexandre Torgue <alexandre.torgue@foss.st.com>,
-	Jonathan Cameron <jic23@kernel.org>,
-	David Lechner <dlechner@baylibre.com>,
-	Andy Shevchenko <andy@kernel.org>, Jaroslav Kysela <perex@perex.cz>,
-	Takashi Iwai <tiwai@suse.com>, Mark Brown <broonie@kernel.org>,
-	Frank Li <Frank.Li@nxp.com>,
-	Jonathan Cameron <jonathan.cameron@oss.qualcomm.com>
-Subject: Re: [PATCH v4 07/10] iio: buffer-dmaengine: Use dma_slave_caps bus
- width accessors
-Message-ID: <aqerA3A1kgOB6fNC@ashevche-desk.local>
-References: <20260911-dmaengine-support-wider-dma-masks-v4-0-72b8fd4cc78e@analog.com>
- <20260911-dmaengine-support-wider-dma-masks-v4-7-72b8fd4cc78e@analog.com>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="F3XfDGpu"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9111E1F00893;
+	Mon, 14 Sep 2026 08:07:33 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1789373255;
+	bh=IzPzHT2O9FcOj6iMVx+MrnepZgj296Jj/Ts9i8e4R0M=;
+	h=From:To:Cc:In-Reply-To:References:Subject:Date;
+	b=F3XfDGpu7a5ak5OovQ9AvQpAc2X8WC82R8M37ob14XYX6u+HiAfDNrBK5qxDI0cEa
+	 VmDY4Vbs0fqVAbi4fXPPt+ouX/C+zcv0kK9c1sR0Kc35Oe7jxyAQK+H58so9b4Mm55
+	 X6NBjnYUeb7QaVqfi1J9oowExKPK8yE2VLZRxQofldmAx1tU7Rr/MaeV9sjevLf9NK
+	 mBR6T9ma9oKERL6zMN26F08UR8DKqu22jloHmpDgxtbNmsLUPB6+ybfeOKjNNILfKy
+	 19KYK/ip4i0VtdmqHw/JJ75PCQqhz+vBsnv5/oBPf9lR5kR59KxZR5CtuUlHtZJReL
+	 iINyFzJ1VNUIA==
+From: Srinivas Kandagatla <srini@kernel.org>
+To: Amol Maheshwari <amahesh@qti.qualcomm.com>, 
+ Yifei Gao <gyf161023@gmail.com>
+Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>, 
+ Arnd Bergmann <arnd@arndb.de>, Abel Vesa <abelvesa@kernel.org>, 
+ Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>, 
+ Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>, 
+ linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org, 
+ linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org, 
+ stable@vger.kernel.org
+In-Reply-To: <20260811225102.1077841-1-gyf161023@gmail.com>
+References: <20260806235056.456341-1-gyf161023@gmail.com>
+ <20260811225102.1077841-1-gyf161023@gmail.com>
+Subject: Re: [PATCH v2] misc: fastrpc: fix double-free in
+ fastrpc_map_attach() error path
+Message-Id: <178937325340.257763.18070145219812711052.b4-ty@kernel.org>
+Date: Mon, 14 Sep 2026 09:07:33 +0100
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <20260911-dmaengine-support-wider-dma-masks-v4-7-72b8fd4cc78e@analog.com>
-Organization: Intel Finland Oy - BIC 0357606-4 - c/o Alberga Business Park, 6
- krs, Bertel Jungin Aukio 5, 02600 Espoo
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.3
 
-On Fri, Sep 11, 2026 at 06:25:42PM +0100, Nuno Sá wrote:
-> Query the minimum supported source and destination bus widths through
-> the new dma_bus_width_min() helper rather than decoding the raw legacy
-> u32 width masks. This keeps the buffer working
-> with DMA controllers that advertise bus widths via the new bitmap
-> representation.
 
-Reviewed-by: Andy Shevchenko <andriy.shevchenko@intel.com>
+On Tue, 11 Aug 2026 22:51:01 +0000, Yifei Gao wrote:
+> map->table is assigned right after dma_buf_map_attachment_unlocked()
+> succeeds. The two failure checks that follow, the len > map->size test
+> and, where subsystem VMIDs are configured, a failed qcom_scm_assign_mem(),
+> jump to map_err with map->table already set.
+> 
+> map_err manually calls dma_buf_detach() and dma_buf_put() and then falls
+> through to fastrpc_map_put(). Since that change the error path tail is
+> fastrpc_map_put() -> fastrpc_free_map(), and fastrpc_free_map() already
+> unmaps, detaches and puts the dma-buf whenever map->table is set.
+> The two operations therefore run twice: the second dma_buf_put() drops an
+> extra reference on map->buf, and dma_buf_unmap_attachment_unlocked()
+> dereferences the map->attach already freed by the manual dma_buf_detach().
+> kref_init() sets the refcount to 1 with no intervening get, so the final
+> fastrpc_map_put() frees the map synchronously and the redundant cleanup is
+> deterministic.
+> 
+> [...]
 
+Applied, thanks!
+
+[1/1] misc: fastrpc: fix double-free in fastrpc_map_attach() error path
+      commit: 2159430fe26068ca3c89557ddd2d5eb17a5a8cf0
+
+Best regards,
 -- 
-With Best Regards,
-Andy Shevchenko
-
+Srinivas Kandagatla <srini@kernel.org>
 
