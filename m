@@ -1,124 +1,193 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from MA0PR01CU012.outbound.protection.outlook.com (mail-southindiaazon11021088.outbound.protection.outlook.com [40.107.57.88])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BBB0044A40E;
-	Mon, 14 Sep 2026 13:31:01 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789392661; cv=none; b=faaLyBhT8vTeGXxOGOImN/jFFIb1+hcZM1/JfBJz8qIsqTYxgRTYC1/82WPanww/wk/pTc0z9XXCPneOZVNJEK7f+a3zG5jffaQ0O2/A/VTrI3pIevpYcohwWnIt5YMVaFkDvp8fbqkChRcIwnY5hISc90Hd1wX1DSM/sucJXBg=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789392661; c=relaxed/simple;
-	bh=FZ93MFND4SZk1HkhbjKt6fLSIxoPV8LGoHAopPRUrH0=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=rMgFuH8HT7O/2eKDDwBQ+fEV9EZe40Tmbnq67zQJDexTki+S1lkvf36ZkF3ccf7Rji7KbTEu9nlY9NAfm1cigpVXxKDZ9+J5IMeopNO6wwhmJc2MclnSBsUc1K58yksk+JooqCdt1FcAhUiO/8gPdDrv+PJts/kyFm+8oaUkk3Y=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=J00m7Nhg; arc=none smtp.client-ip=10.30.226.201
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="J00m7Nhg"
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 67BE9C2BCF5;
-	Mon, 14 Sep 2026 13:31:01 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1789392661;
-	bh=FZ93MFND4SZk1HkhbjKt6fLSIxoPV8LGoHAopPRUrH0=;
-	h=From:Date:Subject:To:Cc:Reply-To:From;
-	b=J00m7NhgRyXI+XMBNkxOggYYXeK5lmXV6TeNMOHvxYjKGkuHepuIkUaueDTV13o0N
-	 Ao5sP1vj4XySZQL0ZYnKCkZhlbM50rN4q73xy+X65JStst4Y561QbWmmF0ORZ8D1Jb
-	 qhftgzNP51MLYUxKTKMvEEY5F6feXFiG1LXLTRLZSxZL7V7XfCwvgdbPZkFIf21Qwj
-	 vKW+ovafpj3lJ1eNyDzmahsq4fWPUMP6Ui/52aVPQ+bro7hp/XTQ01bmK1WqOvsYbK
-	 lc/ZD+OppcuLZ3Pwj9ekL1AJ2qelF72zYFGiwRr0N6olLL2yTEWOLuIYxFpxTyyVO5
-	 6sLZgtmAzBGbA==
-Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5285CC88E70;
-	Mon, 14 Sep 2026 13:31:01 +0000 (UTC)
-From: Avalon Vargas via B4 Relay <devnull+avalon.vargas.centeno.est.una.ac.cr@kernel.org>
-Date: Mon, 14 Sep 2026 07:30:47 -0600
-Subject: [PATCH] arm64: dts: qcom: Fix touchscreen address on Dell Inspiron
- 7441
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B232E4078CA;
+	Mon, 14 Sep 2026 13:34:29 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=40.107.57.88
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1789392871; cv=fail; b=LFFcN+rvfFtlNuuNmMwaT9WoUEG1yZbZgiGCrhYo1RkB10DtDBt6qix9LuhIBJ42+e7ESr6X89FA2PDCTZURpUkD3EytxNpn+Zc8YMPwFXXgpqh6/FpSESHFiIZn9pylfZoA3GXzQfOqwyBZwbZO9MK4F5mmgFacCJ+RTDcec1s=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1789392871; c=relaxed/simple;
+	bh=zeGJvV/FMer28fCwH5yi//PvwreaqnMtX9qvFyL05hs=;
+	h=From:To:Cc:Subject:Date:Message-ID:Content-Type:MIME-Version; b=tpS5tFv+iIHTx7jvZSOSgcgmSW4iavyRG/gWuNOFUDWyD08tCrEq7ptw8uzW06a2qlglfBYliA+64WdqtPcT8pOnw1s9H6U8J111jGiMIEZBwBtr0DRXvKaFAoYLkkyrI+HQj9W81Bx4pdlu11fsN1rxvfwVdSdS3HLDXS1fPSg=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=ebytelogic.com; spf=pass smtp.mailfrom=ebytelogic.com; arc=fail smtp.client-ip=40.107.57.88
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=ebytelogic.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ebytelogic.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=DM1KC3qPR4WMEgTEGy7kCEaD13Hj+IQJlOR9buizz+9zYGNb+TLXbSCAPHMDlFkeIbYHuNYsnyi8zoeoZa7K6YOYYaaUZb2zij9qHsqI47fnKSBTh+FxFIHhGgkksw6rHP9hNCfsGyODpB+vGlrL4AS6fPjNO2tBQHscEY6bKaxPcSTfWZ303yPwC2RhlV6IkNREUcBcfBoM82Iya3blEfJ+4DvNR2rUBZjktkPaC0AYO9OktcYJhvPrBcb5sVzYgcX07RlYul2RvxinL87IXGVFjcoWU/wdKJgWWV6Lyx+9L0FyL/0RiH6X9Tt4Q9hby7IO56XkhEE2Z1C2/8CS0A==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=DrI4tHlHaqIHovHO2lCQWB8CJz6nfvI6xO0HsyuX9iw=;
+ b=J9XcfgnJgFoohoiE34JvFxZNAld3l5dnnKBVjXg/RCmUVOXXYApon0W2LrIxutoiWWHtoCD1eAbJAFJbt2OLTNKhwb2zhzsGCOzi28LUGWA7qoEut6E1HN+ueYTZmNBK3orfdxxfnBP7T+ZsPIEx76cWQk5Bs/fVFQKcWFJStQBIjymmDR0DwT+u6Ef2er0Pu9BOSnPN4YPLyvRsWTsKdfqvLDL2InU3rwiQ5CCUNkqhWuTSCVR/TaMlw/Y7XKKbpilrFuU9Bsk1VDgNqpa1j8tR96A3qPaD9G4NOSJD2CVcckrqAhVS5qeKPTyP9adrpt2LMA8RHLf5I2tXBZLeoA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=ebytelogic.com; dmarc=pass action=none
+ header.from=ebytelogic.com; dkim=pass header.d=ebytelogic.com; arc=none
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=ebytelogic.com;
+Received: from PN3PPF28092842E.INDP287.PROD.OUTLOOK.COM (2603:1096:c04:1::97)
+ by PN2P287MB1360.INDP287.PROD.OUTLOOK.COM (2603:1096:c01:127::6) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.406.12; Mon, 14 Sep
+ 2026 13:34:25 +0000
+Received: from PN3PPF28092842E.INDP287.PROD.OUTLOOK.COM
+ ([fe80::df75:6e8c:7def:a08e]) by PN3PPF28092842E.INDP287.PROD.OUTLOOK.COM
+ ([fe80::df75:6e8c:7def:a08e%6]) with mapi id 15.21.0406.007; Mon, 14 Sep 2026
+ 13:34:25 +0000
+From: Hitesh Patel <hitesh@ebytelogic.com>
+To: linux-media@vger.kernel.org
+Cc: Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
+	Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
+	Loic Poulain <loic.poulain@oss.qualcomm.com>,
+	Mauro Carvalho Chehab <mchehab@kernel.org>,
+	linux-arm-msm@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	ravi@ebytelogic.com,
+	Hitesh Patel <hitesh@ebytelogic.com>
+Subject: [PATCH 0/8] media: qcom: camss: support several cameras behind a CSI-2 bridge
+Date: Mon, 14 Sep 2026 19:04:08 +0530
+Message-ID: <20260914133416.1030231-1-hitesh@ebytelogic.com>
+X-Mailer: git-send-email 2.43.0
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: PN5P287CA0003.INDP287.PROD.OUTLOOK.COM
+ (2603:1096:c01:262::11) To PN3PPF28092842E.INDP287.PROD.OUTLOOK.COM
+ (2603:1096:c04:1::97)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260914-dell7441-touchscreen-v1-1-d79540ca5e81@est.una.ac.cr>
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yWMyw7CIBBFf6WZtSSABB+/YlwAHWVMpWaGGpOm/
- y7o8tzcc1YQZEKB87AC45uE5tLA7AZIOZQ7Khobg9XW65NxasRpOjhnVJ2XlCUxYlE+eqvN3h1
- D9NDUF+ONPr/s5fpnWeIDU+2t/ohBUEUOJeU+PYNUZNi2Lxvirp6RAAAA
-X-Change-ID: 20260914-dell7441-touchscreen-6b6201348ab6
-To: Bjorn Andersson <andersson@kernel.org>, 
- Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>, 
- Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>
-Cc: Val Packett <val@packett.cool>, 
- Bryan O'Donoghue <bryan.odonoghue@linaro.org>, 
- linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
- linux-kernel@vger.kernel.org, 
- Avalon Vargas <avalon.vargas.centeno@est.una.ac.cr>
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1789392660; l=1937;
- i=avalon.vargas.centeno@est.una.ac.cr; s=avalon-una-20260914;
- h=from:subject:message-id;
- bh=cWKOXfSe8ZMCWag3Rxp781xh1Hgee6YPOPUmg88AEUg=;
- b=FayQ/FIpndcg5F9U82KQTUWBFChd9LE0wC09Rwqx5L/LbJmEocy1yRMpLDy6XxVvXCd7RqZO/
- e4kAxKsH227CfRIje3fiLIkNHHlW5RPRbbXXgsMdHh8llOfoxy/alhI
-X-Developer-Key: i=avalon.vargas.centeno@est.una.ac.cr; a=ed25519;
- pk=I7FZ301yhA9Jl2LReBEqv+9LUrd5zi397CIT2gTB6RE=
-X-Endpoint-Received: by B4 Relay for
- avalon.vargas.centeno@est.una.ac.cr/avalon-una-20260914 with auth_id=1032
-X-Original-From: Avalon Vargas <avalon.vargas.centeno@est.una.ac.cr>
-Reply-To: avalon.vargas.centeno@est.una.ac.cr
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PN3PPF28092842E:EE_|PN2P287MB1360:EE_
+X-MS-Office365-Filtering-Correlation-Id: 6a992282-7b4d-4d70-c3a8-08df1264e492
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|376014|52116014|10070799003|23010399003|1800799024|366016|6133799003|10067099003|56012099006|18002099003;
+X-Microsoft-Antispam-Message-Info:
+	gjSRTNheUQJznwfIrATB3TO+mDqn6NwUjJC9M1IOyudHYqpRo81AifoQ3HrKB7DebHoBGe+qAf+oP3UzffEX0rS95k53a4Mj8o9ItgtY4kkKACimN+2FFj+bR83wPdUpxXjdsTkLDHP8I3EInMhsnfOYdmDqWgadDDr9PBFphJE9DmOqEfXxxVo+QAvwRxf2/JLm2zRwvpUy6d0kpqzvVpUGQ1HAyxrRPZeoXlet92F2jEjV/uqrh6P/vqAyG1ybJ0ANC/LsKB8x0e9y4ZOVwE28GuBnkHKYmlmC5uw0Pw/SuYmUsHCH1IKotgOvWND1Xfh7/zbtJE85IUjuCJ9PeZa/NhowhT0XhJBh5pI04O4EW/KZAmoMvWTl0edYGd4iuSwemxiPS038BTtIm74AjkYfnluk64Mc/UAUiidQCaH7IyV52F1vWQtIz6AKIs0wHZdDHzwd0vV7kq/kdmn/QvPWLADs7FUkjLHjdh99lUezY/12apreAKqW+5C0wBp/EKJUAqX6LBbQppzxVJUZOBicAujXxuo0KrKieyOlQMPS+CS4WXwm0kUjMYuCc3rhmJz//UdHitaRSkI3q4GLitr7Yf5VqW2P1igEOUCDxeCzeE0bAreJXOlY/G4vNLmo+7AMYevP3LVL4ES0BnVBxVvEuWEMAfWxekpuPLgWoeg=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PN3PPF28092842E.INDP287.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(376014)(52116014)(10070799003)(23010399003)(1800799024)(366016)(6133799003)(10067099003)(56012099006)(18002099003);DIR:OUT;SFP:1102;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 2
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?us-ascii?Q?bp7CdPXKWT7pHf0qDW/FDZK9/ozCLbMdEhHCk7Df5svgZThnnVgCeuXwO81P?=
+ =?us-ascii?Q?t3XUUvEpQByhNhXT9W/L2BL9BJ2/jenW1RzbmhCtd4qbXVzpJ+JkyLM/4rN7?=
+ =?us-ascii?Q?bFDr0ZdADrSRzAL+WbKwB725yCLf4D2B61yCEw1po412/YDVD296Jl3za7tu?=
+ =?us-ascii?Q?UTtYV+aNn+nQJOB0GT8xijJtTChc6NRF4GHKWl3vGKzZaU0srIFgUqbB5G+A?=
+ =?us-ascii?Q?Y8Cfi8rHsIXw+aX24QT+PW4+7aeuEe5tulWI+67h3dYkxxceVqFoP2nMh3sf?=
+ =?us-ascii?Q?N9LFSF0B7P2dSoh4AegyilAu2Vz11Irv8Z7cz7RQCUnC7lpUv0S8CVAFD925?=
+ =?us-ascii?Q?FZuYGEALss45RiARUhGuWxTxK+LUdTvNntkyx+H+uGHWCC568JXJcDoZ34Ua?=
+ =?us-ascii?Q?mVmyRVp00ZuW5zSP8DV2AelJxxPvzCsBuhsBUeqYYZmYiGEiCjCf2CjRkqBo?=
+ =?us-ascii?Q?sUnfWfMrxZ4W9Y0gJD2KpUy8lVoqZZAq1tAI5XBA/HqVOjiRH7hWxAmx7nZj?=
+ =?us-ascii?Q?BRd9pKmaC8dHETWAPh7vNXRxxtY6kWuPqN4fhFBy8d7z9tVBnAKxnp754d7o?=
+ =?us-ascii?Q?3UNXu1lLkNgeu0J75trP1+G40VtjP9oONDOirdtkH1aitdaKsaPKWKjhQhsS?=
+ =?us-ascii?Q?JtaULONvJRorgPnCMiGns0h9aEkdF1n9agmJ7wnFDInVfbL45BtI1s2/t9cG?=
+ =?us-ascii?Q?jA1BTOmT7aA0Hodtpjx2BAM6WyNR4Nuh2C/1gLvUh6Rlav7PFejqvpEk5ZPp?=
+ =?us-ascii?Q?K8JSP6PiQNxSzSLRk6CyCDI9v25aZED6jxIpZPvqUvgXCzDCJ8m8ifNi0Kyx?=
+ =?us-ascii?Q?dpv+FrkQQuK5mOnzafq49uQ9VuZotXduzjsW4I7mETBbC2l0hc0gSvzX0hus?=
+ =?us-ascii?Q?xMeIFI9YcR+eGJaf91WcTj2hWTl3ISYIqfMDLWxOIKLGXOFw5JrInFPwyUXa?=
+ =?us-ascii?Q?LhxepUFauwCndkejCGxb4gK8k0KrC1owCO8cUAnLqrfezzGxfC7h/hpg/Hmj?=
+ =?us-ascii?Q?gEPlm1FYOvpgDNzzRcWaoWF6GmTXlUqAFOJt14R9F6oQR1zONVoMfqAikTX+?=
+ =?us-ascii?Q?urNQZKzdRV5mYzXtRTRO2DLROeZfFU6tNXmQwhOEoyMTmQHAtW/6sP06ZUL1?=
+ =?us-ascii?Q?uy7KcIMec6TDpZoyhfZnkF5BCqEuyi3f34Vm+SAXx1/4qh7U1LRzG7CyyNUM?=
+ =?us-ascii?Q?KuNgANisiFVgt4C//8W2OYFBsGHT765nPmRU4yNnUNu+M1JRS92rikfzRyyp?=
+ =?us-ascii?Q?1RX6qS9jdASfoHWbBy7tHTeuQq1MuBsW43szxTrZiUHokOwW5yOM7JCJjTSR?=
+ =?us-ascii?Q?foWiuv0TB9vLydiAayfpwnrtKUnw6Ic37pU7A3RzskZFTHiNfuooaUUOnJXj?=
+ =?us-ascii?Q?W8hcmmuTmTN1OsLAHx7ECSRWw2KtnOYHTYvDlOpJ1JNVbQBkV1kHYlgxL0i9?=
+ =?us-ascii?Q?voQMVuU2JXHC9JJLYj8FTayEJeraJoat/x2ofJ5yqdg9ZLzIYFUu/XpuGWN9?=
+ =?us-ascii?Q?ntPpG867BiAhDzURUNpLPe5cY1oLVWwQPjD1Hw9Z14G4zYtWVOiI9XDgqNQ8?=
+ =?us-ascii?Q?qH/5YEaID4Xs93YszUfBKvV0YOCwwLm2Ww7pNWAiLdUxyA5UtZe/yCO5hT6k?=
+ =?us-ascii?Q?6Iu1QGDz3ij/64oH1N1gDy6HjYx5mmCvT/eqvQftxqHBOdiM1OGlb1ygkXLz?=
+ =?us-ascii?Q?9+ZUvotcDIl/0XVR7Vb7h4uwrs+wpH4XXklycXS0hGG2sV3Ppmd1a/opgMkZ?=
+ =?us-ascii?Q?P41ugaleftVv7nLtgyjCJAaO2THZ+igMJaCIqy6jmYz+U/4GCnFVualAwzWa?=
+X-MS-Exchange-AntiSpam-MessageData-1: moe/nF2eY4ndeg==
+X-OriginatorOrg: ebytelogic.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 6a992282-7b4d-4d70-c3a8-08df1264e492
+X-MS-Exchange-CrossTenant-AuthSource: PN3PPF28092842E.INDP287.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Sep 2026 13:34:25.2579
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 13bdb17c-4ae8-490c-90c1-ec8121ef96ee
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: h5yiVKsoMCeZs1viB68LhWPw3t94+O0FdqdNhA4KQavsky0w+ZOW3VxccVrdBqM6uWmi8ya6SkT4J89UilgN7Q==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PN2P287MB1360
 
-From: Avalon Vargas <avalon.vargas.centeno@est.una.ac.cr>
+This series contains the CAMSS changes needed to run two GMSL cameras
+on the RB3 Gen2 (QCS6490 / SC7280) vision mezzanine, where a MAX9296A
+deserializer sits between the sensors and the SoC. The deserializer and
+serializer drivers (the out-of-tree maxim-serdes work for MAX9296A and
+MAX96717) and the AR0234/IMX900 sensor drivers are out of tree and not
+part of this submission; only the SoC side is here.
 
-The LXST2021 touchscreen on the tested Dell Inspiron 14 Plus 7441
-responds at I2C address 0x09, while the device tree specifies 0x10.
-Probing the latter fails with -ENXIO and no touchscreen input device
-is registered.
+Everything CAMSS has seen so far is one sensor wired straight to one
+CSIPHY. A CSI-2 to CSI-2 bridge breaks several assumptions that follow
+from that, and both bridge topologies were exercised:
 
-Use address 0x09, matching the LXST2021 configuration on the related
-Dell Latitude 7455. With this address, the controller identifies as
-29BD:1103 and binds to hid-multitouch. Touch input and suspend/resume
-have been verified on the affected Inspiron using Linux 7.2.4 with
-the equivalent device-tree overlay.
+ - two cameras aggregated on ONE CSI-2 port as two virtual channels,
+   demultiplexed by the CSID to RDI0/RDI1 of the same VFE. The CSIPHY
+   and CSID are then shared by two pipelines (patches 5, 6, 8) and the
+   VFE 17x has two write masters active (patches 3, 4);
 
-Signed-off-by: Avalon Vargas <avalon.vargas.centeno@est.una.ac.cr>
----
-This replaces the earlier report-plus-diff with a patch submission.
-Only one unit has been tested. I have no evidence of double-sourcing
-or a working Inspiron touchscreen at 0x10; a typo remains possible.
+ - two cameras on the deserializer's TWO CSI-2 ports, wired to two
+   CSIPHYs. The same subdev then binds for two endpoints (patch 2) and
+   heads two independent pipelines (patch 7).
 
-touch input and suspend/resume. The native upstream patch has not yet
-undergone a full kernel DTB build or dtbs_check.
+Patch 1 addresses the assumption that the sensor is the CSI-2
+transmitter: the rate the receiver has to be programmed for belongs to
+whatever drives the bus, and v4l2_get_link_freq() already knows how to
+ask it.
 
-Validation: Linux 7.2.4 plus the equivalent local DT overlay, physical
----
- arch/arm64/boot/dts/qcom/x1e80100-dell-inspiron-14-plus-7441.dts | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
+Patches 3, 4 and 5 are bug fixes in their own right and are not
+specific to a bridge: they are hit by any configuration where two RDI
+lines of one VFE stream at the same time.
 
-diff --git a/arch/arm64/boot/dts/qcom/x1e80100-dell-inspiron-14-plus-7441.dts b/arch/arm64/boot/dts/qcom/x1e80100-dell-inspiron-14-plus-7441.dts
-index 75e10d9..0cf5716 100644
---- a/arch/arm64/boot/dts/qcom/x1e80100-dell-inspiron-14-plus-7441.dts
-+++ b/arch/arm64/boot/dts/qcom/x1e80100-dell-inspiron-14-plus-7441.dts
-@@ -25,9 +25,10 @@ &gpu_zap_shader {
- };
- 
- &i2c8 {
--	touchscreen@10 {
-+	/* LXST2021 */
-+	touchscreen@9 {
- 		compatible = "hid-over-i2c";
--		reg = <0x10>;
-+		reg = <0x09>;
- 
- 		hid-descr-addr = <0x1>;
- 		interrupts-extended = <&tlmm 51 IRQ_TYPE_LEVEL_LOW>;
+A CCI fix found during the same bring-up, enabling SCL clock stretching
+in standard mode so a sensor reached through the bridge's I2C tunnel
+can hold the clock, has been sent separately to linux-i2c. It is
+independent of this series.
 
----
-base-commit: 704340f1cd0dcef829eb62f5b48ae95a2ce17bdf
-change-id: 20260914-dell7441-touchscreen-6b6201348ab6
+Tested on RB3 Gen2 with AR0234 and IMX900 cameras on MAX96717
+serializers, on the vendor 6.18 tree and on the qualcomm-linux qcom-next
+branch (v7.2 based): both cameras streaming concurrently on the two
+CSI-2 ports, and each camera started and stopped repeatedly while the
+other keeps streaming, without interference. The single-port
+virtual-channel aggregation topology is what the original out-of-tree
+work targeted; it could not be re-validated in the current state of the
+out-of-tree serializer and sensor drivers, so patches 6-8 should be
+read with that in mind. Each patch builds and was bisected against
+next-20260911 for arm64.
 
-Best regards,
---  
-Avalon Vargas <avalon.vargas.centeno@est.una.ac.cr>
 
+Hitesh Patel (8):
+  media: qcom: camss: take the link frequency from the CSI-2 transmitter
+  media: qcom: camss: create the source to CSIPHY link per endpoint
+  media: qcom: camss: vfe-17x: do not gate write master done on
+    IRQ_STATUS_0
+  media: qcom: camss: vfe-17x: use the write master matching the RDI
+    line
+  media: qcom: camss: vfe: only reset the VFE when its last line stops
+  media: qcom: camss: refcount streaming on the shared CSIPHY and CSID
+  media: qcom: camss: drive streams-aware transmitters through the
+    streams API
+  media: qcom: camss: enable only the stream of the pipeline's virtual
+    channel
+
+ .../media/platform/qcom/camss/camss-csid.c    |   2 +-
+ .../media/platform/qcom/camss/camss-csid.h    |   2 +
+ .../media/platform/qcom/camss/camss-csiphy.c  |   6 +-
+ .../media/platform/qcom/camss/camss-csiphy.h  |   2 +
+ .../media/platform/qcom/camss/camss-vfe-17x.c |  33 ++--
+ drivers/media/platform/qcom/camss/camss-vfe.c |   8 +
+ .../media/platform/qcom/camss/camss-video.c   | 141 ++++++++++++++-
+ drivers/media/platform/qcom/camss/camss.c     | 167 +++++++++++++-----
+ drivers/media/platform/qcom/camss/camss.h     |   8 +-
+ 9 files changed, 310 insertions(+), 59 deletions(-)
+
+
+base-commit: 68142f986ff04b2b70b31db00f719bf690f64a9a
+-- 
+2.43.0
 
