@@ -1,120 +1,162 @@
-Received: from mail-lf1-f49.google.com (mail-lf1-f49.google.com [209.85.167.49])
+Received: from mail-ej2-f12.google.com (mail-ej2-f12.google.com [74.125.228.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1132947FB19
-	for <linux-arm-msm@vger.kernel.org>; Mon, 14 Sep 2026 15:13:37 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.167.49
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4094E4A3D47
+	for <linux-arm-msm@vger.kernel.org>; Mon, 14 Sep 2026 15:18:05 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.228.140
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789398820; cv=none; b=VSjbOKNWDa4CyyDOhhK8KdlrMR+M1CiOc8jdVjsLP5GuBgR5YyswhldiVW6pRd+xt80QgSvG899lgpouegxR8dFakQDpHmy/5Z4fRfrTsP53Mr8MrME8/moa6TOoZ7Wp5HeJlZIdvXQGhAYX9oaL988fJevL+EmeGc8gz7yZH3U=
+	t=1789399090; cv=none; b=Esswgz/wPj0SJrsA/ZkJJh/N6yy2+E3YhRVUbdOhFbZOVkwKjDWX4f4boIyEMk6fAZfxvuI99TMkDaFjtUwy0fqMd0U/GSYj8sSEUVu+gDpgygorj/k7ivI9xQ/dN2uqoeN/DNMAMUjd9MML/bWuUCn58aZpwRLBv76TWpuJtm0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789398820; c=relaxed/simple;
-	bh=fFA7B1Zzm+M6TOI4RFrwiV6L7EFm/dOdjC0+vMkdzrE=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=T0sUr4LLvsEEGlhUx+9mtEPE4zsj6uDphtLLKISQhQyOKZLav0YwS6TlgMnFnyahdzckPDREssYcS8DdSdgL2XvUFB2D26UHP0jKZAn7C026qVE4/V75K7FqyLHhxCijv7vYfFyflSo/v51V9RJ8YsGjo6o6gYZ9xcl1miFMVDU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=chromium.org; spf=pass smtp.mailfrom=chromium.org; dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org header.b=nP8VjC4p; arc=none smtp.client-ip=209.85.167.49
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=chromium.org
+	s=arc-20240116; t=1789399090; c=relaxed/simple;
+	bh=/pgQG5KUhDkYmVqUNpz6SqgDukRn/wHm0ri+wDmcxsA=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=u6SuOMpXHQuyB/qbDc0Jul+BekWvCosb1N0fPnBQcWUpt/vG2Tm+BD9JY6O4K+/ZMDvEq+qYeP7GTpP4FtpAhrcrbH0R1rO3CifDQl/LZ0j+IbNIabo/g9+O9wx38ucmVJ7j7kip8QIa1tFrI0XtShQ9t2qUM6zSWEMAWcmcJL4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=NbiAl3dR; arc=none smtp.client-ip=74.125.228.140
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org header.b="nP8VjC4p"
-Received: by mail-lf1-f49.google.com with SMTP id 2adb3069b0e04-5b76515c0d7so3125435e87.0
-        for <linux-arm-msm@vger.kernel.org>; Mon, 14 Sep 2026 08:13:37 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="NbiAl3dR"
+Received: by mail-ej2-f12.google.com with SMTP id a640c23a62f3a-c254f55efe5so297350466b.2
+        for <linux-arm-msm@vger.kernel.org>; Mon, 14 Sep 2026 08:18:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=chromium.org; s=google; t=1789398815; x=1790003615; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=fFA7B1Zzm+M6TOI4RFrwiV6L7EFm/dOdjC0+vMkdzrE=;
-        b=nP8VjC4p7rBsLC2Y8cLpU6cO74nfReqhzPSY6dEKRZodNt06OJQ2t2FGkcAC+VkCrw
-         xprFfdZdnTupRC+evc3DH6SBp90HIMAF6KJj1BU4rWmCS3lWetEumintJ6PK4vRlpv3p
-         GXkMMNetg0YOjA5inkDlPaeR6kZd4tYA8B3Mk=
+        d=linaro.org; s=google; t=1789399083; x=1790003883; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :from:references:cc:to:subject:user-agent:mime-version:date
+         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=djWd8vxPQqmW4gSE0tDhqhSUTCq+zmwi1DvcsmVYZ3o=;
+        b=NbiAl3dRkpAvso3n9L6yg1iPhc+btD3tIBNA5bGuBluO7/2ncBoktPu35GLLlCUidL
+         5V/U9PJMf4LmsP8lwwgyqzBbl20iCbTnrny/L/jD3gQZahmwNzKKCQ5GylnqVParBW2U
+         FD71KrEb4VDwBK0fjW/uqYriOG+p+8y63YhGImzuGk66QvG1Wcv0QdbzV1Gmc2kpAhwY
+         ZBpkQQz7p9tXJjpEult9+r1sEC9yNzIHWF1UgevtX0D5h9CgafTkQFSwSod5i84uKjtJ
+         DwTws/2aWs2GJSjwbuGADvky1E7gWXISchhvWixvt6ruFuADvKVkQW7WLg3W+59BOmzx
+         PT8g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1789398815; x=1790003615;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=fFA7B1Zzm+M6TOI4RFrwiV6L7EFm/dOdjC0+vMkdzrE=;
-        b=SsQ9Lw8U399/G8NA7o5iW6/UrslKZ3964NB1M6p/S4Q0xpkecxRz6UCYbD+54220z/
-         eV0UWGHQiDhwqAa70LiLgB+AnhG+uNqwwQO4FoQF8g0W46L16Y9cTrB3do+Y2bsn1K9j
-         xBthPxWmPEWELzo/0sLh2s75CF8bdwqjzbY1NCIuxoJv2g/fRopNzIr9/Sq9uzT1l4t8
-         azTs7noxsCR+IAHnhXMLasn1SY5MZ0D0K4d1B5bJcdo/lKFmwB1tFcAg/NLSju8rvBsA
-         Y3h7nlh2aHf6WoZp5efb9onVO9X1ZtVctCCABKHWGI0NYJTdmWTnMMgW0/+Wdk/pBbgr
-         D5Xg==
-X-Forwarded-Encrypted: i=1; AKwUvBwxoOtU7V+/7W7/w+pUTL62t/+A2jvGp3xrmTjI3oboiQ3T7LotgN7o95s8AjnOGt4hK9Yot0Q1e5QG6R+7@vger.kernel.org
-X-Gm-Message-State: AFuF++kK0pHZIOHh4LzFFHB9DzLHBcELez2KFHaGiwE/BY8+1g9AVW+0
-	gBEhDKSStTzHSbLPyifJSxzka59skfJHVcDWiTVbHCcZpibPPbE19kKQSIjzF5KIF3bXmfyWAop
-	qZLd5cQ==
-X-Gm-Gg: AYBFou0dbTy2tOZP3jJUZTl99bWE6js6IS98SIaD0t4q+b0nnCakBOglgKd2HpVrhCS
-	+ApxB862ZHd1u02YupLchaRO4vRAT9zJpfPHfMQk7CQK9m8etzlqwNcAsDyknMu1LfmnHh3kia8
-	q4pl0oEdNJIq3cm4YVrnUXTaV05fBRwLJnV/bqf4I6zonWnT4qC63g0XesJD1s6mJ+w0gl/yqpw
-	f2pckhI7baU4Wh/sXuirZY5Tr7NfqcqtoSEi8bxtITpRajFc0mojEIDZn2hSA+5Iyqdf9qjjBVW
-	VYyulLyZ6uO0xv4s7yleF8iQlhmgfnePpm1T6aV060O1O6rZsPY1oEFHVZvKyM/HJUchoyU9VU6
-	00+SQWV9eTgQx1B+p/xzuyhYyMePLDjudX2E0fggghGHAmmCZG2+rNtNj7MN7voZR/nBQNEZl8W
-	mNGY9mgLEfqKprOR+SqhV/FFIKKftCm3jlUu+bKtlmbZJg8qJeCN85z+RqsO8k6t0Y1FVeCB8Qq
-	UutvJ1oxWUaL55ofVjyZ0esM8NDQSuW/CqbfA==
-X-Received: by 2002:a05:6512:135b:b0:5b7:668a:e8cb with SMTP id 2adb3069b0e04-5b8abb0ed04mr1199856e87.31.1789398815432;
-        Mon, 14 Sep 2026 08:13:35 -0700 (PDT)
-Received: from mail-wr2-f12.google.com (mail-wr2-f12.google.com. [74.125.225.76])
-        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5b8a047d1d1sm2658846e87.80.2026.09.14.08.13.32
-        for <linux-arm-msm@vger.kernel.org>
+        d=1e100.net; s=20251104; t=1789399083; x=1790003883;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :from:references:cc:to:subject:user-agent:mime-version:date
+         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=djWd8vxPQqmW4gSE0tDhqhSUTCq+zmwi1DvcsmVYZ3o=;
+        b=sdUBsuZlZZgsvm5nsN/LJw6KHsa0vXfRzQ0RnsLP3omFATTbU9Hu+Ft5ENtKDU4ajx
+         qhEx7Kg3Z35LvMmfIYGm3ttVkx2TbPr1WRzi/qFTyYJb6MMQGXxDSqAlALu42udqi3Cm
+         sh3qVKqPWSnEVMGS/+NxhLbURtko1w+M8oJgWzAf07YGBV7YpDzZzEwhqglgxZtjYI89
+         LzDz0Hh3XwHzqbiWdyU47bjJBFaFdjVd/vlLoRUqn26IJh2avee9fa3gbn8yFb1TpFzT
+         6MhVAQfnXh+NA39uGmklHygRFHmrOmPwLkAxuhPtXT/UKUGHtY3AV0bcXFBez0+zxWKH
+         nslA==
+X-Forwarded-Encrypted: i=1; AKwUvBwbGHCTxOYhVYI/uC0UYqQaTFf+ksSeD4Kxb9LQhfXsRrEIMea+hYHCeTSXrPARoTOCmbnRZDto41vGX2zX@vger.kernel.org
+X-Gm-Message-State: AFuF++lhPNCI+UEg92A8p+wcnMUR8ej1oP8VdEpb8D+w+uI3WPFRcCNp
+	uIqtt6HN6PASuSs3LIymjBXydpGh9wwwku/HFOrwGdeCEsBTxC3ud7AGjH7YBVWK3NU=
+X-Gm-Gg: AYBFou3IAlWIcuEZ7hXho0Ds1/k4YLeLQ6qbOBFDwPSTA/o/bCEeICqPNN5xvUDLB0O
+	ei5v3Bm3TkuknpBdVoJ9clYjPOxkM699YWcIXGKdm1bRNN4/ggwXNmNyy9918OqkxN9m0xNVM9S
+	zDwqEtdxtyPBCZxmIWUqRDbaAsNoYzjA7kE3v5AevQ9xNsus5bkg6VmHUZi/Vcw2noDMw8njhuj
+	AV+5F9Q6yW0lIGASpYReGbxqUrHUcl+HMFC0ffHq3eyvLVn036oLHBgABREGsZ8kCoxUW7JnJ02
+	buyVtV8Tbe7nTchdiXYWmfe3We3Ozp8dbLQASKBu/ZC+hDjSH4IbLWicnZQCoyiB6FRkpyXeDs3
+	PzR+pm02ioN3AHWgCijqqQZRTv+tfOGFmS7sRCkPRIbT+wLaPgzxDaFCPuzY/mwbtA7ztyndP7v
+	1fSR7NKLzgf39RHZYXiDxeMH2wUgitZpLKFGOvLO/iekg5M2HMy1xaVPwQ1Xbb1jK9SIKSzggMQ
+	kzpYbqIIQA=
+X-Received: by 2002:a17:907:6092:b0:c29:63ce:a796 with SMTP id a640c23a62f3a-c29b875fe70mr205584366b.46.1789399083410;
+        Mon, 14 Sep 2026 08:18:03 -0700 (PDT)
+Received: from [192.168.0.167] ([109.76.248.34])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c2965c4dfc7sm452450966b.4.2026.09.14.08.18.02
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 14 Sep 2026 08:13:34 -0700 (PDT)
-Received: by mail-wr2-f12.google.com with SMTP id ffacd0b85a97d-48449f62b93so661378f8f.0
-        for <linux-arm-msm@vger.kernel.org>; Mon, 14 Sep 2026 08:13:32 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AKwUvByv4ZmRit5awHM8oK/uBw7uScVdRZRITSuznPytl9bWKzSNlJlHp2IgHqb2tttXEFEhul7G5BZIhkZ/ynJJ@vger.kernel.org
-X-Received: by 2002:a05:6000:1acb:b0:484:3147:49c9 with SMTP id
- ffacd0b85a97d-487028be8c5mr4006418f8f.2.1789398811422; Mon, 14 Sep 2026
- 08:13:31 -0700 (PDT)
+        Mon, 14 Sep 2026 08:18:02 -0700 (PDT)
+Message-ID: <aba32d74-74d1-4571-be60-d9639a4fc04a@linaro.org>
+Date: Mon, 14 Sep 2026 16:18:01 +0100
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260913201835.250085-1-srinivas.kandagatla@oss.qualcomm.com>
- <20260913201835.250085-3-srinivas.kandagatla@oss.qualcomm.com> <biywo5isdeagqu323ozaleeakngl4sngps4v7ngwqo23ju2sw7@jn53hxxuccff>
-In-Reply-To: <biywo5isdeagqu323ozaleeakngl4sngps4v7ngwqo23ju2sw7@jn53hxxuccff>
-From: Doug Anderson <dianders@chromium.org>
-Date: Mon, 14 Sep 2026 08:13:19 -0700
-X-Gmail-Original-Message-ID: <CAD=FV=X-Te1fieogNaMuyFAa2q33RKUCVXAUFcce_r7csXAwVg@mail.gmail.com>
-X-Gm-Features: AcwNN1XNTZvJpFGb6MbsUkQxxgT0-VHyrG0ryskn4Oe6UeBRJylCSlvDiAONe_A
-Message-ID: <CAD=FV=X-Te1fieogNaMuyFAa2q33RKUCVXAUFcce_r7csXAwVg@mail.gmail.com>
-Subject: Re: [PATCH 2/4] drm/panel-edp: add CSOT MNE007QB1-1 entry
-To: Abel Vesa <abel.vesa@oss.qualcomm.com>
-Cc: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>, 
-	Bjorn Andersson <andersson@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>, 
-	Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
-	Neil Armstrong <neil.armstrong@linaro.org>, Jessica Zhang <jesszhan0024@gmail.com>, 
-	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, 
-	Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, 
-	linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
-	dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, 
-	mpearson-lenovo@squebb.ca, sibi.sankar@oss.qualcomm.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 3/8] media: qcom: camss: vfe-17x: do not gate write master
+ done on IRQ_STATUS_0
+To: Hitesh Patel <hitesh@ebytelogic.com>, linux-media@vger.kernel.org
+Cc: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
+ Loic Poulain <loic.poulain@oss.qualcomm.com>,
+ Mauro Carvalho Chehab <mchehab@kernel.org>, linux-arm-msm@vger.kernel.org,
+ linux-kernel@vger.kernel.org, ravi@ebytelogic.com
+References: <20260914133416.1030231-1-hitesh@ebytelogic.com>
+ <20260914133416.1030231-4-hitesh@ebytelogic.com>
+From: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
+Content-Language: en-GB
+In-Reply-To: <20260914133416.1030231-4-hitesh@ebytelogic.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Hi,
+On 14/09/2026 14:34, Hitesh Patel wrote:
+> The VFE 17x interrupt handler reads and clears IRQ_STATUS_0/1 and
+> then reads and clears every BUS_IRQ_STATUS register, unconditionally.
+> It only acts on the per write master WM_CLIENT_BUF_DONE bits from
+> BUS_IRQ_STATUS(1), however, when bit 9 of the previously sampled
+> IRQ_STATUS_0 was set. That bit is the ping-pong flag of image master
+> 1, which says nothing about the other masters.
 
-On Mon, Sep 14, 2026 at 12:34=E2=80=AFAM Abel Vesa <abel.vesa@oss.qualcomm.=
-com> wrote:
->
-> On 26-09-13 21:18:33, Srinivas Kandagatla wrote:
-> > 14" 1920x1200 IPS panel used on Lenovo ThinkPad T14s Gen 7 (Mahua).
-> > Panel identifies as CSW 0x1465 over eDP AUX; uses conservative
-> > delay_200_500_e50 preset in line with sibling MNE007QB/QS panels.
-> >
-> > Assisted-by: Claude:claude-opus-4-7
-> > Signed-off-by: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.co=
-m>
->
-> I think Doug starting asking for EDID dump in the commit message.
+This paragraph is disjointed, places a full stop where there was going 
+to be a comma ? "IRQ_STATUS_0 was set. That bit is the"
+> 
+> Those two reads are not atomic either. A buffer done that becomes
+> pending after IRQ_STATUS_0 has been sampled but before
+> BUS_IRQ_STATUS(1) is read, for example while the handler is entered
+> for another line's RDI SOF or REG_UPDATE, is cleared by the bus
+> status read and then dropped by the gate: wm_done() is never called
+> for it, the buffer is never returned to userspace and that line
+> stalls until the next frame happens to line up with the gate again.
+> 
+> With a single RDI streaming the window is rarely hit. As soon as a
+> second RDI of the same VFE streams, which is the case when a CSID
+> demultiplexes two virtual channels to RDI0 and RDI1, the interrupt
+> rate doubles and one of the two lines loses buffer done events
+> continuously.
+> 
+> The bus status is read-to-clear in this handler, so once read it is
+> the authoritative record of which write masters completed. Act on it
+> directly, as the gen2 VFE handler does, and drop the gate.
+> 
+> The write master of a PIX line is skipped: its buffers are completed
+> from the composite done above, through vfe_isr_comp_done(), and
+> completing them here as well would return two buffers per frame.
 
-Yup, please send a v2 with the EDID in the commit message. See all
-recent commits to this file for examples.
+Please rewrite this whole commit log in your own language.
 
-It also looks like you are adding the panel without having access to
-the datasheet. That's an OK thing to do if you truly can't get access
-to it, but I'll at least ask if you could get the datasheet to confirm
-the timings...
+Also since your are describing a bug this needs
 
--Doug
+1. Fixes:
+2. A patch title starting with Fix
+3. All fixes in a serious should prefix functionality changes.
+
+> 
+> Signed-off-by: Hitesh Patel <hitesh@ebytelogic.com>
+> ---
+>   drivers/media/platform/qcom/camss/camss-vfe-17x.c | 11 +++++++----
+>   1 file changed, 7 insertions(+), 4 deletions(-)
+> 
+> diff --git a/drivers/media/platform/qcom/camss/camss-vfe-17x.c b/drivers/media/platform/qcom/camss/camss-vfe-17x.c
+> index e5ee7e717..f62fdabbc 100644
+> --- a/drivers/media/platform/qcom/camss/camss-vfe-17x.c
+> +++ b/drivers/media/platform/qcom/camss/camss-vfe-17x.c
+> @@ -363,10 +363,13 @@ static irqreturn_t vfe_isr(int irq, void *dev)
+>   		if (vfe_bus_status[0] & STATUS0_COMP_BUF_DONE(i))
+>   			vfe->isr_ops.comp_done(vfe, i);
+>   
+> -	for (wm = 0; wm < MSM_VFE_IMAGE_MASTERS_NUM; wm++)
+> -		if (status0 & BIT(9))
+> -			if (vfe_bus_status[1] & STATUS1_WM_CLIENT_BUF_DONE(wm))
+> -				vfe->isr_ops.wm_done(vfe, wm);
+> +	for (wm = 0; wm < MSM_VFE_IMAGE_MASTERS_NUM; wm++) {
+> +		if (vfe->wm_output_map[wm] == VFE_LINE_PIX)
+> +			continue;
+
+Drop this workaround for pix. We will fix PIX a different way instead of 
+for local specific stuff like this.
+
+> +
+> +		if (vfe_bus_status[1] & STATUS1_WM_CLIENT_BUF_DONE(wm))
+> +			vfe->isr_ops.wm_done(vfe, wm);
+> +	}
+
+OK then this becomes a one-liner to not disjunction BIT(9)
+
+>   	return IRQ_HANDLED;
+>   }
+
