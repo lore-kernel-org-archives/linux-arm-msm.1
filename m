@@ -1,91 +1,146 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wr2-f12.google.com (mail-wr2-f12.google.com [74.125.225.76])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C8C13427F85;
-	Mon, 14 Sep 2026 09:24:11 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2FB3141F344
+	for <linux-arm-msm@vger.kernel.org>; Mon, 14 Sep 2026 09:28:13 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.225.76
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789377852; cv=none; b=EOi09NjEMlHvmDya54hNG9pdLXqnqfPWEQyRKwu00wBAxS/r9argm6rSX28BLjZwDzrkvfPg0wbJq+uS1kKx6sqipRsJ7xbjphaI73FxX7uPKEKaWmocWEi58gEx9TD1IALOdQpLfpMQMhuQTvrHZ33Tx4AuPpHT74ygx66qXWE=
+	t=1789378094; cv=none; b=uYnCqk0ALU5tnbBJitkJj8+SRNUJ8AdqK6zF1mtyKtAQnA1GSKtR7Wvv9FUp+7xn89l09FBND5mKfsc5YQnUonXvkegsYvgbgGUS/kdljlUu/cHAQ2gpktpWF/n+mzEJY/UD+hkfYJrV2CoRJOq8HPzeByPT4ajCnU6S8KzVu7I=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789377852; c=relaxed/simple;
-	bh=Yk5Q/bYA/6cID9EgtmiSFYx9/ovYne5/e3SkuBlPoBw=;
-	h=From:To:Cc:In-Reply-To:References:Subject:Message-Id:Date:
-	 MIME-Version:Content-Type; b=Ms5kLwZ72vicBvEPtsmB8+C34Zbs48pTqLWrfxLKiOkxZaQbMYflWBkKB6WWBpbgtOrHLbahy93ETPII+fgJYjxWaebtMPLHt2fN5xFWR+12vHHBoShclNSipE9awQtkPoTuFwRyjUHOevx2mkGmtncPUZa7jPISXdXS7Nc9D2g=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=k12sInqw; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1789378094; c=relaxed/simple;
+	bh=uBRBgt60qnQzF51ZX1c+WFKEWEU4s4VaOlHTPM97Lag=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=AU99UMoU9Rl+OnTPv8nKiXuf5o+oZs91I+tS+CziKj1Mb/Q32/oZvE5y1Vmhsvlt/3WObQp0gFUE8ifOHIcWaMp/mHTqw7Jcz9yrmMus2UWKW5ATs8m8LBnIKh0PZMaqH0kA8b7iWXmMDOUjA3eaM4aEpBN4PKydTRl4Wtr99Do=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=F0uMdTl0; arc=none smtp.client-ip=74.125.225.76
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="k12sInqw"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8A65A1F00893;
-	Mon, 14 Sep 2026 09:24:10 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1789377851;
-	bh=YrdWWwQUG3SsodlqBZSPibvJpFetR98ZO0yc7T5ekyA=;
-	h=From:To:Cc:In-Reply-To:References:Subject:Date;
-	b=k12sInqw//QK9CH6m966bqvVChhDwiqaEKNyubbPYqoOE0174j4HJk7IKcJ1O6ebe
-	 tA9yj7M6FNBS95PETB8WFugr+Fmmu06X+0ofrcEqv1efEUBOyucn+pIQh6zURpPY51
-	 s3cEycummftpLwCWE1PBQzvoOrsBPwvUBI8n32cmYbcuR8E9rXyTSpku7HwFLrEcoG
-	 ENYQfiv8nB7eOv7K8BFfaHNShLqWY1COR0f89yxxCU3U9qGkocHvudJD0hlsNdE9nv
-	 /QOnpbUudKnxcYwsQODjVr2ErthexpC5+4tkTIbHAEv9BgV/e69+nQMCa1hZhovLQJ
-	 XkXTwjpufRKDw==
-From: Mark Brown <broonie@kernel.org>
-To: Liam Girdwood <lgirdwood@gmail.com>, 
- Karl Mehltretter <kmehltretter@gmail.com>
-Cc: Douglas Anderson <dianders@chromium.org>, linux-arm-msm@vger.kernel.org, 
- linux-kernel@vger.kernel.org
-In-Reply-To: <20260912000606.34614-1-kmehltretter@gmail.com>
-References: <20260912000606.34614-1-kmehltretter@gmail.com>
-Subject: Re: [PATCH] regulator: qcom-rpmh: Fix the return value in
- rpmh_regulator_vrm_get_optimum_mode() kernel-doc
-Message-Id: <178934257805.1239410.12118428099167170260.b4-ty@b4>
-Date: Mon, 14 Sep 2026 00:36:18 +0100
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="F0uMdTl0"
+Received: by mail-wr2-f12.google.com with SMTP id ffacd0b85a97d-48583cc7ab1so759534f8f.2
+        for <linux-arm-msm@vger.kernel.org>; Mon, 14 Sep 2026 02:28:13 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1789378091; x=1789982891; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=xa5ZbUfuvrToiYmQZWM/hOZFSIc+eJSMXf4MjNO/px8=;
+        b=F0uMdTl0wnRVDDi57eBVsSwHBeIkhHZKMwQ/GgzQiYBRyj/cwd3ioOOu9yvZYO/6dj
+         qKTEwc1euxg6XUgHxeuXj2Xprb47cfK08fzyHMn/4ctls1rDrY1sy1Ng7zYGTuuG//zD
+         l1W7vXQHSjlhM6LtEWuijGJR0mleo8hmNT+o1+jwvueIIfPlLfjnyCSO+U/UVAcJFOAh
+         qZfkH12MUF95515wgaZJn4dPz/cEI21IMKuDEnYmhZtet+FCFw7WwDxX7wNcEg0msrjE
+         BeLOvSFElOUsRJPvfWGt+mvmNrK+254WRZViXp0b8ILiSJyXQCo/hVc7X0xLjiPA88dO
+         B5zw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1789378091; x=1789982891;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=xa5ZbUfuvrToiYmQZWM/hOZFSIc+eJSMXf4MjNO/px8=;
+        b=KCnq2f9IfXKg8Oh8WaAIPamWT0gg90ENFTa7GBKsVTTbsQpiTriXK99dlaP2hw2R+h
+         R/LXbZvOgd39+UmsHUOB89BUfV5sxrqV3I8qanT27XWP4udcQOlB4B6GLLJ4AvjY4BJl
+         rEhuBFp04ki3D5pb9wCt2kY5ZoWmroQCtQ/trAh8Fto1PI2gIAmioZz2KBhA4h0+OxrJ
+         +Hfc+i22r2WrlHr5n4TR8WOIx/An8t53fPseI8mUjqQ5Wmh+EsHK6UQTapkKBda02GNU
+         yEc53ryFdiLVB3kymaZTHQfzlWdUOqodePqzWG3ugtjzPEZjPAiDVigx7Jqx5EVFYdjd
+         TiSA==
+X-Gm-Message-State: AFuF++l1Mb0dIYPGdljoHE+XuTWNfAdM/M6KXB04SbtiQCMhsDitJ/xG
+	zg9lY4RBstjhuUTyR2MH8KfH9oQX9QafXwAvexRF0Lf7SUupTNF/P8ck
+X-Gm-Gg: AYBFou3/ij9XTKMhkawSRD2IWdWpmDHme6oVCe57sbc8vYfPiIiK4zPOq/5SJ2Sg/Uh
+	q19UVpVXV/FU6Kb4cJ31GmO5Op9z/nfovIlQzjVdwJTC/lgLd4ZrGbpNBdrojPlGBuFjZmva1mV
+	kYXzC2vFvz+1BpUXlhIRUZJHzbJd+ce8JWDxWHYkK0MliG4pFWl2HRYBBpNwdKU6lz3sIXpqT4+
+	m/4h8EnXLLM/hDfttcPCRxHa/OiGZEBYTiWwXdJcTCKvqvAAdP/m8/kVkPwlw9LcOKbP6CtB4V0
+	ovKGL6yI2OASH1o1p0BNV0+Ja9fKn6ciHOEp4fz+19ABwdtkkplXmxgZ7eG8gLQzG0AT+CP8gU0
+	dADF4uwPaqfVbv0Aq1ExTA1x2jF+JXJ8p4h5iBifM5ZP6Na+bR7s79KscrOF7NhjLHJfval+eLo
+	tMjFBh5mniHvw/vLiu5BfeaUSZ7RlzRGp67j2H3DEa0aILSLniQceVnwcZmkWTMttU/NPlX39Fr
+	Fdb0Qw=
+X-Received: by 2002:a05:600c:4745:b0:49e:799e:c1c3 with SMTP id 5b1f17b1804b1-49e7a6868a8mr17463165e9.17.1789378091334;
+        Mon, 14 Sep 2026 02:28:11 -0700 (PDT)
+Received: from localhost.localdomain ([94.252.75.25])
+        by smtp.googlemail.com with ESMTPSA id 5b1f17b1804b1-49e7a29826fsm45244255e9.4.2026.09.14.02.28.10
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 14 Sep 2026 02:28:10 -0700 (PDT)
+From: Oleg Keri <okerixx@gmail.com>
+To: Bjorn Andersson <andersson@kernel.org>,
+	Konrad Dybcio <konradybcio@kernel.org>,
+	Abel Vesa <abelvesa@kernel.org>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org,
+	devicetree@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Subject: [PATCH v2] arm64: dts: qcom: glymur-lenovo-yoga-slim7x: add the camera privacy switch The laptop has a camera privacy switch on the side of the top case - a slider, not a mechanical cover over the lens, and it does nothing to the camera itself. TLMM gpio99 follows its position: high with the switch open, low with it engaged. Describe it as a gpio-keys switch so userspace can act on it.
+Date: Mon, 14 Sep 2026 11:28:02 +0200
+Message-ID: <20260914092802.12315-1-okerixx@gmail.com>
+X-Mailer: git-send-email 2.55.0
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.17-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1218; i=broonie@kernel.org;
- h=from:subject:message-id; bh=Yk5Q/bYA/6cID9EgtmiSFYx9/ovYne5/e3SkuBlPoBw=;
- b=owEBbQGS/pANAwAKASTWi3JdVIfQAcsmYgBqp7032ZUryO3shj1GF+HkhTdpsbtICDXMs0jdi
- WmJKC7+nkWJATMEAAEKAB0WIQSt5miqZ1cYtZ/in+ok1otyXVSH0AUCaqe9NwAKCRAk1otyXVSH
- 0ImqB/4ndWGnJyU+h5vr0n3b78MA8yOOkkL+wptzAVQ72jBToNkcmBbFjkXm5eFhe9XdKFF/6pD
- pW8Q0UyXHzt9ZGc9vn0VpNT+Z/2VtfrrjkS6jWIT5xrTLV2QtqLWS+/CbPn3/DR7Xaplls9oksk
- QnApr8RZkvXYWt23jEn/ZqYIRuL5dnDgwId2VXY5D8W6sMfWc6QsKIvOhlqB90OSAtCOXrXgzov
- edre6y3ffQw7vgPaTyp4OhTFivoYL9fajWHSOsVtLRZgR9KNCjgwORJJU2/T/OTz23mVocSuae+
- SQ3yC4+1r7mpACfHCuCLCXVHGWOjNQrcWJ1l5TDFGo0d70aO
-X-Developer-Key: i=broonie@kernel.org; a=openpgp;
- fpr=3F2568AAC26998F9E813A1C5C3F436CA30F5D8EB
+Content-Transfer-Encoding: 8bit
 
-On Sat, 12 Sep 2026 02:06:06 +0200, Karl Mehltretter wrote:
-> regulator: qcom-rpmh: Fix the return value in rpmh_regulator_vrm_get_optimum_mode() kernel-doc
+SW_CAMERA_LENS_COVER is the only switch code the input layer has for a
+camera privacy state, and it is what the Lenovo WMI camera driver and
+Dell's privacy driver report for the same kind of electronic switch on
+x86 machines, so use it here as well despite the name.
 
-Applied to
+The embedded controller also raises event 0x29 whenever the switch
+moves, which makes it tempting to report it from the EC driver instead.
+That would be the wrong layer: the pin is a plain level that tracks the
+slider position and needs no EC transaction to read, and the EC event
+carries nothing the pin does not already say.
 
-   https://git.kernel.org/pub/scm/linux/kernel/git/broonie/regulator.git for-7.4
+Signed-off-by: Oleg Keri <okerixx@gmail.com>
+---
+Changes in v2:
+- Capitalize the switch label (Konrad).
+- Put the pin state where the GPIO index sorts it, between gpio94 and
+  gpio111, instead of after the trackpad state (Konrad).
+- Link to v1: https://lore.kernel.org/all/20260914081652.5935-1-okerixx@gmail.com/
 
-Thanks!
+ .../boot/dts/qcom/glymur-lenovo-yoga-slim7x.dts   | 15 ++++++++++++++-
+ 1 file changed, 14 insertions(+), 1 deletion(-)
 
-[1/1] regulator: qcom-rpmh: Fix the return value in rpmh_regulator_vrm_get_optimum_mode() kernel-doc
-      https://git.kernel.org/broonie/regulator/c/51d6888b51e0
+diff --git a/arch/arm64/boot/dts/qcom/glymur-lenovo-yoga-slim7x.dts b/arch/arm64/boot/dts/qcom/glymur-lenovo-yoga-slim7x.dts
+index ecc8c34fb983..769f195c99d9 100644
+--- a/arch/arm64/boot/dts/qcom/glymur-lenovo-yoga-slim7x.dts
++++ b/arch/arm64/boot/dts/qcom/glymur-lenovo-yoga-slim7x.dts
+@@ -51,7 +51,7 @@ sleep_clk: sleep-clk {
+ 	gpio-keys {
+ 		compatible = "gpio-keys";
+ 
+-		pinctrl-0 = <&hall_int_n_default>;
++		pinctrl-0 = <&hall_int_n_default>, <&cam_privacy_default>;
+ 		pinctrl-names = "default";
+ 
+ 		switch-lid {
+@@ -62,6 +62,13 @@ switch-lid {
+ 			wakeup-source;
+ 			wakeup-event-action = <EV_ACT_DEASSERTED>;
+ 		};
++
++		switch-camera-privacy {
++			label = "Camera privacy switch";
++			gpios = <&tlmm 99 GPIO_ACTIVE_LOW>;
++			linux,input-type = <EV_SW>;
++			linux,code = <SW_CAMERA_LENS_COVER>;
++		};
+ 	};
+ 
+ 	leds {
+@@ -1012,6 +1019,12 @@ wcn_sw_en: wcn-sw-en-state {
+ 		bias-disable;
+ 	};
+ 
++	cam_privacy_default: cam-privacy-default-state {
++		pins = "gpio99";
++		function = "gpio";
++		bias-pull-up;
++	};
++
+ 	cam_indicator_en: cam-indicator-en-state {
+ 		pins = "gpio111";
+ 		function = "gpio";
+-- 
+2.55.0
 
-All being well this means that it will be integrated into the linux-next
-tree (usually sometime in the next 24 hours) and sent to Linus during
-the next merge window (or sooner if it is a bug fix), however if
-problems are discovered then the patch may be dropped or reverted.
-
-You may get further e-mails resulting from automated or manual testing
-and review of the tree, please engage with people reporting problems and
-send followup patches addressing any issues that are reported if needed.
-
-If any updates are required or you are submitting further changes they
-should be sent as incremental updates against current git, existing
-patches will not be replaced.
-
-Please add any relevant lists and maintainers to the CCs when replying
-to this mail.
-
-Thanks,
-Mark
-
+base-commit: 68142f986ff04b2b70b31db00f719bf690f64a9a
