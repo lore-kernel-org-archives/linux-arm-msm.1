@@ -1,147 +1,147 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wr2-f12.google.com (mail-wr2-f12.google.com [74.125.225.76])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BDF793F5BDB
-	for <linux-arm-msm@vger.kernel.org>; Mon, 14 Sep 2026 08:14:11 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AF1A1375F8E
+	for <linux-arm-msm@vger.kernel.org>; Mon, 14 Sep 2026 08:17:04 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.225.76
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789373653; cv=none; b=fe62RQsylc5quoaYl6RctnLy438xjytXMpNJS+3tnOtVTOYMlcPKrqxx41EyCax37pfaXeYJuIRyK55yG9xgJOKGXK4Ckkfiy32vaZigC3H6Nxafl+pJkeNcFzWQGtBWhhfC/+roGz563p3pw2Xe4u8bgK0il0voxgvguL/Xwm0=
+	t=1789373827; cv=none; b=LHhvGGbmz4WE11X662tjNEIFBAURgCGY5hnR34b7sH2Fn1tE8HpvRMZgVHpfxTj+vxcy54lnUHsSwFgW5xfu7kYCGXhrzachklVRJ/tzP4kbRD0W2D8n0199624BsgLGngBhFK5+cCs5f1bg5ICAHAKVU6TBkirosSTK8XHg4Yk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789373653; c=relaxed/simple;
-	bh=y5T/F7vrssXPrR0h8cK35gqPOkp5meOnh4qAw5/OTjU=;
-	h=Message-ID:Date:MIME-Version:Subject:To:References:From:
-	 In-Reply-To:Content-Type; b=sB01xO/AlVXqAeCtJBc5cpl0QSM1BIp5VnrTTIhoGUGfz++2xZaQf9IDizuVnAK4++iukyMTjBL3bR1Xi058pzWMhChJ9AXSUWxCpraqPkRqFDGDXCv9zYbBxLdNixZmqsmGVFTn142cDb5oewSCqxKXBJ3re4fcyo6iUZmANT8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=dU8XY3+Q; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=I3GAlXY6; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1789373827; c=relaxed/simple;
+	bh=U2fObva/T4kb4gnGW2Nd5bcGjQpO3qUpI3v+NuFZT80=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=GDDpf8vdIvvqvFftEj1upWcPBgytoERT9Myb3ffjp3EdbwwVUalPHmlQrqY51cDT/d46Kv2M1HL4hPoGqWXZ1B1ag9L0iFalFtRKXE5V2Td3OLiNPlzwBC/00pVuY/EoNt7zBL+RcTX0CZrk3BG9Hv8SUm1VHruVt9RGXh/4xno=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=IZK4k8zT; arc=none smtp.client-ip=74.125.225.76
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="dU8XY3+Q";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="I3GAlXY6"
-Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68E5j4iB063677
-	for <linux-arm-msm@vger.kernel.org>; Mon, 14 Sep 2026 08:14:10 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	6slG+PlxKqF6Q98TkEjyPj1ZH9nSMFFefO7QrlI6Ul4=; b=dU8XY3+QUzdnFCrd
-	XDVzW3ItUiB9RsOrZ1WDsqBO+rh3UuBRdhGY4dFeIMNuHRB09bsT4yKHg7d8mH8S
-	IoP0yKe1QhHTyvix+X11/IER18drswGDVcvqUbVvripoKm9ZinF0yBivsBCEWiAZ
-	AL8+ZjQtIAQ8CaSCsy8SuJJAW9nr5Fp7SHjWqcTwhvR9ZzNDL7fMDgedMZQhXuq9
-	B2eRh+4wMsEEBqyWOvbwsGAtmrUrotF4CtH54lTFnze6FiJ4b311mAtecjYH+kBi
-	zSOqCJJfJ/U5F0ddYyuDhab+OIG+TYwoChMyXSptzZz5yyc2zAOKftXoVnuotxzk
-	xTUAlQ==
-Received: from mail-qk1-f200.google.com (mail-qk1-f200.google.com [209.85.222.200])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gmy9dnqu1-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Mon, 14 Sep 2026 08:14:10 +0000 (GMT)
-Received: by mail-qk1-f200.google.com with SMTP id af79cd13be357-9349ba88188so49424785a.2
-        for <linux-arm-msm@vger.kernel.org>; Mon, 14 Sep 2026 01:14:10 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="IZK4k8zT"
+Received: by mail-wr2-f12.google.com with SMTP id ffacd0b85a97d-4834977ae75so871936f8f.3
+        for <linux-arm-msm@vger.kernel.org>; Mon, 14 Sep 2026 01:17:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1789373650; x=1789978450; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:to:subject:user-agent:mime-version:date
-         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=6slG+PlxKqF6Q98TkEjyPj1ZH9nSMFFefO7QrlI6Ul4=;
-        b=I3GAlXY6wNO/BgyN4pwc4RUxIfdtL2+QS358yxYJsApJYVAraFGJKbg31zh3dfBxOQ
-         PUweok5Nfor3SJ3vEHADviuRDA2va04cWpbSHuBB2qIlzgRLc+rXtUZeIa21qN+SS7f5
-         iqJzf2wuVEE4f9EjOH2pQVk/dBjSs2l31QhIF8cYBDH8uZEsDKhp0VnVOrVKkIpZdS1s
-         StjN+HzBqj4Tj4feWeffdiJOeLANsLWh5aOUlEZW+lYJjXnUmE5GR9NEp3SV3wp0+7DK
-         zlifTC5Ut0SKlvfHzRr+5HH8bibuUdhf7bFPNfQhx0nAJQaqQPAVl2DFGIVUCPu/H98H
-         HErA==
+        d=gmail.com; s=20251104; t=1789373823; x=1789978623; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=bDdWbQbVn5+bafx3DiaQBgQ61FY9LOrox9bmnpws3Bc=;
+        b=IZK4k8zTtDuva5FJNWkxh/YAunjlvDUeOuwsPgN0/ONSwLidsMf1GdJTDRv1Gskf3R
+         XXM/WcoRhUON13Tb3oPy+oTfMNa57c6xgyMs3pJuklo7HzDhLadq/Au+YLqDbiESiMZN
+         NIof1TsyDzE2XtBtipxEwkpZ9gW71nJcwVk2wB/WveaX4RNc2PglNl3d74wU9/meX88I
+         3gYlgGXYpf7xDinlQEQtyxlR8W7GXgewfNtp2Rr29oeJBczewPSQ1uVi4vs/QTepJ7ko
+         rp9umskdHnBESNoAo/pvZeD7ZfTk+jcr8Idx/D+f25xblIVbirJxTtOENxVHmFfH5KuW
+         iMpA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1789373650; x=1789978450;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:to:subject:user-agent:mime-version:date
-         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=1e100.net; s=20251104; t=1789373823; x=1789978623;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=6slG+PlxKqF6Q98TkEjyPj1ZH9nSMFFefO7QrlI6Ul4=;
-        b=gdmD9Do1Sh6Vn1eljN8Bp0YA0Xulhfzj2X8rtzjRrrT5rv5BrKWTJvNwRHDFdiqDfT
-         8NObknjtUrH/XbTCQJOxNXyBVVx7b6y5ZooC7JsoOI/E6CjjrJjepneRTk9y8e6AalSb
-         MdU6GDdQZfOmMhbDykceTvdUeHgY6bXRhW/J1OUcH9D/JtxVRbR/s3otOrJqQs30pygS
-         pMELb0DtbrENlB2k67jDLKN+k+YzAeJ/aq9I9ihVgksk5Hlc6nKDwzzWGTkFqvTvoj0h
-         DkVoji2zteqdNTeuEXjL1EJgHUPSMdZnAYxXZ5ggwnr6M8P6h8UeCdL1ofyWdrs7rtch
-         V80Q==
-X-Forwarded-Encrypted: i=1; AKwUvBwyoG0uOhEZP9vPq7UKmrmXduoCHkm52WCFSUXIbTTeye/qKtteV3pp5cHtAj3ok9Mnjt8jZRNyKHhQjg2s@vger.kernel.org
-X-Gm-Message-State: AFuF++kB0NwH0Kj1zplQw2/9vAi24Gx1xVJQzloFqMyLCwHMqSaX8Fcl
-	h8sBC9OC5+URNdqru1IKWsfZwS8nnvYv6MuGWbk64w8fOdVbvuWMA4JGEXDtflcnKWHk/aIVVrE
-	5YmU4vOYiDF+5uzL8vxXS4UgTwsNKpfWOqahj85zI+o7fVhY0Tx/EmWPjt5MgtIz8YxX4
-X-Gm-Gg: AYBFou3DSBcCT0riDtgHwPxCQ8M2R/3SaUivg9k44MAKCudFFnndtyWXba98TlWtVxt
-	oO1UiVlvXyO7g7gNaRZeaiqiNaRLxC0EB2GfBjIuHqfXYMMPl+tbpwHo2R12+VJzMKg6dmthAkk
-	nEeYKLqybTJHE4jQc28PvoBHrO2zaocPdGxJfEDHAtYow2ARAim0896iw2pFojzBnbxrjAsuzkO
-	ttTamOI98+1HLpoI1wUf85lD0UFL8ijK4Z7L9PWUjxxyOYl0k/G52HvhytyOG/qw+pms6ULC8GA
-	Eyw/9qQaKq14tGOWRdv2j6IlHOvJaVTI6zwSxxTDMjxiBOl/VzpKaWl+Oe9x6YTy6NWF29DHELe
-	UmzasfcI4jdewmzLjqMQ0Cw==
-X-Received: by 2002:a05:620a:288d:b0:939:94c4:b799 with SMTP id af79cd13be357-93a29cc315fmr167361885a.5.1789373647858;
-        Mon, 14 Sep 2026 01:14:07 -0700 (PDT)
-X-Received: by 2002:a05:620a:288d:b0:939:94c4:b799 with SMTP id af79cd13be357-93a29cc315fmr167359285a.5.1789373647409;
-        Mon, 14 Sep 2026 01:14:07 -0700 (PDT)
-Received: from [192.168.202.12] ([178.235.128.140])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c2965c4e1ffsm376092166b.7.2026.09.14.01.14.05
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 14 Sep 2026 01:14:06 -0700 (PDT)
-Message-ID: <a66a9afe-f649-44f8-ab13-06455f95ccec@oss.qualcomm.com>
-Date: Mon, 14 Sep 2026 10:14:04 +0200
+        bh=bDdWbQbVn5+bafx3DiaQBgQ61FY9LOrox9bmnpws3Bc=;
+        b=YG0/xNu7xKVmyJ9fBmyHDklZGzz9Ud1M8SbDBeK3mMdOWbx1g3qCjHM3aQxecrDhvI
+         dM6V48+SO/pCJmTLqLbWmypvhUD7gQt/NDVJdNHcwTEPAztr/BuFC/pI9mPZLDz1QAKJ
+         dIHPUVKo6ZrUPtZ8itTrZ17p10703xVh55CvnkwwAglwfXHXul8b9vQnC19qTatPKZQ9
+         4QXnuCQ6k4T6HIBVb3sfl28J2VWuQy+hIedz9z82Z9sPPGxH241WC1QhSl5yFvH8GsdW
+         za1GRaYq1HI5s6H3m0lOzJtIJOdvPBYr62GAQ+yI+ZY+IrBnzF5D+J2pZCzsykUym9L7
+         MEXg==
+X-Gm-Message-State: AFuF++kizuMIQsBfSNlr4p2qJTgur3ja3VtfsKyU6Nt5m8XQ7HWvaVzJ
+	E1Sltk30ii0shN+t+4GBuZ/uAy+03V1xg92s4kT24Nz51A0U3gjfaFme
+X-Gm-Gg: AYBFou1ApQFrBhtxtbkEcV7r6b4cE6Qy5V3PprzOE+qdZoldeeiDjHau/7UlZArB64j
+	GLmwdvOPlLfe5T0SGpe3+u/ZErEj4g3JJwnMZDCKHOoY3FVYFn09jhLTANliiysQp/xtzET4JjQ
+	2kHV01dZEtsh9gMYwl2F4MGhn7wSCHpjKEsmOido/x2cRPllCaXtj7/5yYNkhJm961AivX/oEOt
+	6dD4gr+YB2fB77ZiL1fFUwvB1Cb/AIGlqB+NrT7xyO8nPIhUD9V03C36wH2vRlkIJVrJi6WX3EU
+	vjsHPQNG7gVbj+zA2Naf4DcvW7CL/tvo1TptnNSbbhN7PYeYc8lnq3SOIsNawIxdaevl8ndGNgl
+	XOjEUP5e3TOchC9bECgokGD6Gh5FA2rUPymwFLYvnLSUHmSy2i9aumUY2+GVAgv8aQF7XSCacAS
+	emoB8N2W4ryZ4DrrC1JllAnBOMAO7kjTfvGmVCS1WjtfNfCelIFP/flUfmupx9E+fL9h3giiNoQ
+	dZcEsV6SbH3U4JNFg==
+X-Received: by 2002:a05:600c:3e17:b0:49d:726:cc9f with SMTP id 5b1f17b1804b1-49e7a65e422mr30100785e9.5.1789373822299;
+        Mon, 14 Sep 2026 01:17:02 -0700 (PDT)
+Received: from localhost.localdomain ([94.252.75.25])
+        by smtp.googlemail.com with ESMTPSA id 5b1f17b1804b1-49e6221963dsm202053055e9.2.2026.09.14.01.17.01
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 14 Sep 2026 01:17:01 -0700 (PDT)
+From: Oleg Keri <okerixx@gmail.com>
+To: Bjorn Andersson <andersson@kernel.org>,
+	Konrad Dybcio <konradybcio@kernel.org>,
+	Abel Vesa <abelvesa@kernel.org>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org,
+	devicetree@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Subject: [PATCH] arm64: dts: qcom: glymur-lenovo-yoga-slim7x: add the camera privacy switch
+Date: Mon, 14 Sep 2026 10:16:52 +0200
+Message-ID: <20260914081652.5935-1-okerixx@gmail.com>
+X-Mailer: git-send-email 2.55.0
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] arm64: dts: qcom: Correct inconsistent indentation
-To: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley
- <conor+dt@kernel.org>,
-        cros-qcom-dts-watchers@chromium.org, linux-arm-msm@vger.kernel.org,
-        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
-References: <20260913141440.177169-2-krzysztof.kozlowski@oss.qualcomm.com>
-Content-Language: en-US
-From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-In-Reply-To: <20260913141440.177169-2-krzysztof.kozlowski@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTE0MDExNiBTYWx0ZWRfXygfWZh8LfLZl
- T0z78kjUdArfaxTnHEFKIqSbwmv25XiQcAsXVtKe8t8Js5oo7Dc6j/a4GnT4Uq3TaQQH59QzSTj
- uitkSoVlB6/LoiXkM3Nhm0WbQlHLmt2VsIIwuKof+N472bMuSwPiozGpMJvSP9FMlGb49ypo8Y9
- vboKXRvPeWoI/nSDxMSZCSm6VUELgOHxXvn7DEEMDj+aoBkhkkETwnatkemp8kVoFnCbAdxW7ez
- /RurFO+SAcNIxggoGcEE5O5fAiTTbVUVdW2qulQuwXTaOk3lfOpbkrQpByOtQEG3YLqbizjyHbb
- pbkN1oMZU1bL2XnzXtcnvW25+3a0pBt1wFLUG6HbuWo07pDuFcz4BXPM+qKhLt/OdlfE4kpUePG
- GRTL8/H1a0o6mMGfPI65SQ58srdnL2U5paXIFk5Cl1TNao1Sb5Rkvrg5OcncGOUbMOeZ81lp+tN
- rA5lSd6DmWgX6zLWKeA==
-X-Proofpoint-ORIG-GUID: IhPjNQO87dO09vaFpxc1pEPYnza556g7
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTE0MDExNiBTYWx0ZWRfX/eTq4mxp0HyM
- VaZd5+9iuQ3ERtZt9ual/dKTrydAptgMNf0N3GigcOLs4g733coQbgXBfEtjlVxT+LTHkBOWi3L
- xNNZfXNTlcefPziTjuA4gKQuJQaPqsI=
-X-Authority-Analysis: v=2.4 cv=Y6htIReN c=1 sm=1 tr=0 ts=6aa7acd2 cx=c_pps
- a=hnmNkyzTK/kJ09Xio7VxxA==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
- a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_glEPmIy2e8OvE2BGh3C:22
- a=EUspDBNiAAAA:8 a=tPLuR_csD6jfBswSsDEA:9 a=QEXdDO2ut3YA:10
- a=PEH46H7Ffwr30OY-TuGO:22
-X-Proofpoint-GUID: IhPjNQO87dO09vaFpxc1pEPYnza556g7
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-14_02,2026-09-13_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0 lowpriorityscore=0 adultscore=0 spamscore=0 impostorscore=0
- bulkscore=0 clxscore=1015 suspectscore=0 priorityscore=1501 phishscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609140116
+Content-Transfer-Encoding: 8bit
 
-On 9/13/26 4:14 PM, Krzysztof Kozlowski wrote:
-> Fixup mis-indentation, e.g. spaces or tabs mixed with spaces, to fix
-> dt-check-style warnings like:
-> 
->   talos-evk.dts:39: [indent-consistent] indent mismatch (expected depth 4 * '\t')
-> 
-> No functional change.
-> 
-> Signed-off-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
-> ---
+The laptop has a camera privacy switch on the side of the top case - a
+slider, not a mechanical cover over the lens, and it does nothing to the
+camera itself. TLMM gpio99 follows its position: high with the switch
+open, low with it engaged. Describe it as a gpio-keys switch so userspace
+can act on it.
 
-Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+SW_CAMERA_LENS_COVER is the only switch code the input layer has for a
+camera privacy state, and it is what the Lenovo WMI camera driver and
+Dell's privacy driver report for the same kind of electronic switch on
+x86 machines, so use it here as well despite the name.
 
-Konrad
+The embedded controller also raises event 0x29 whenever the switch
+moves, which makes it tempting to report it from the EC driver instead.
+That would be the wrong layer: the pin is a plain level that tracks the
+slider position and needs no EC transaction to read, and the EC event
+carries nothing the pin does not already say.
+
+Signed-off-by: Oleg Keri <okerixx@gmail.com>
+---
+ .../boot/dts/qcom/glymur-lenovo-yoga-slim7x.dts   | 15 ++++++++++++++-
+ 1 file changed, 14 insertions(+), 1 deletion(-)
+
+diff --git a/arch/arm64/boot/dts/qcom/glymur-lenovo-yoga-slim7x.dts b/arch/arm64/boot/dts/qcom/glymur-lenovo-yoga-slim7x.dts
+index ecc8c34fb983..b5848991dffb 100644
+--- a/arch/arm64/boot/dts/qcom/glymur-lenovo-yoga-slim7x.dts
++++ b/arch/arm64/boot/dts/qcom/glymur-lenovo-yoga-slim7x.dts
+@@ -51,7 +51,7 @@ sleep_clk: sleep-clk {
+ 	gpio-keys {
+ 		compatible = "gpio-keys";
+ 
+-		pinctrl-0 = <&hall_int_n_default>;
++		pinctrl-0 = <&hall_int_n_default>, <&cam_privacy_default>;
+ 		pinctrl-names = "default";
+ 
+ 		switch-lid {
+@@ -62,6 +62,13 @@ switch-lid {
+ 			wakeup-source;
+ 			wakeup-event-action = <EV_ACT_DEASSERTED>;
+ 		};
++
++		switch-camera-privacy {
++			label = "camera privacy switch";
++			gpios = <&tlmm 99 GPIO_ACTIVE_LOW>;
++			linux,input-type = <EV_SW>;
++			linux,code = <SW_CAMERA_LENS_COVER>;
++		};
+ 	};
+ 
+ 	leds {
+@@ -958,6 +965,12 @@ tpad_default: tpad-default-state {
+ 		bias-disable;
+ 	};
+ 
++	cam_privacy_default: cam-privacy-default-state {
++		pins = "gpio99";
++		function = "gpio";
++		bias-pull-up;
++	};
++
+ 	edp_bl_en: edp-bl-en-state {
+ 		pins = "gpio18";
+ 		function = "gpio";
+-- 
+2.55.0
+
+
+base-commit: 68142f986ff04b2b70b31db00f719bf690f64a9a
