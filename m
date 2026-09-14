@@ -1,156 +1,242 @@
 Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4880C33A9D1
-	for <linux-arm-msm@vger.kernel.org>; Mon, 14 Sep 2026 03:15:42 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E94CB36494B;
+	Mon, 14 Sep 2026 04:39:20 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789355748; cv=none; b=WHNtGp3KmRlV7pWFg1A243bzg0LD56LyeQb9dAxp589YkC1xCNcndKiKPpbeQGqHc6v2tem0VVccd5yTEZUlwA6JGvrgRxOFKZbLznvO5D/4sVj7VxOcn8grKoT4kVUH5bpgqZo0iIEZFqsPv3z+mIiRbHY3mtDBGpUxjBOASBQ=
+	t=1789360762; cv=none; b=A9ua08IHGfzP6HOsIR3/PZV0F8QXLr77ET1E2b0zEt8FVzULby+KaZ/HnB4z2GPUl/tdz8CK8YUZJ+jSZb87qjP4huZzzD2ga0ijidjx+94PyMsTYHpGJcw2tJc0chYoHjX84cEbvcHUGMtU9s0aue1wJGBp+K9qzWPvOOshs+0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789355748; c=relaxed/simple;
-	bh=mK06GAMN+hILvZvtuvnK53IOVlNURJ9vQy+3bYDxhM0=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=cBATPEqd5bfirgnQ1RVBkPPbP694kCw8WuetV92KEJ/itwZM4VlJRHSevpEn+estOin+eNu7iK5I5cREnE4pqwiu9qIHS/nkgtgROdvLFIHlCtHSMo2KurfgIv917UAgzpBKKcjE8hQHiLXqjt9YmvF0iSUCVEEzyOFsnii8Pgk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=oPVogkjh; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=LY9MgJoX; arc=none smtp.client-ip=205.220.180.131
+	s=arc-20240116; t=1789360762; c=relaxed/simple;
+	bh=Jf//lRDz3flR2m9+z2nB27S+N9VfH8xw32JAlPzTShA=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
+	 In-Reply-To:To:Cc; b=NZidpwaM+i+pg2gpi5YdEuQL1NubMe+OXWzOpOAQgK8irlqJ7BlolLHOIADf1HbjEndALZYSTcbUGm0m1M4JtM73a8HYT/KlZbR5HD3J6Ph6WPuueuCNjp3qZwJeWB3MBhO4VAbz+DfNXxGm3n+eYSbXO7G45xClZ/zqBc0zBwQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=OfpN3HFK; arc=none smtp.client-ip=205.220.180.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="oPVogkjh";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="LY9MgJoX"
-Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68E2eZfM4040696
-	for <linux-arm-msm@vger.kernel.org>; Mon, 14 Sep 2026 03:15:41 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="OfpN3HFK"
+Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68E2ejIH3349103;
+	Mon, 14 Sep 2026 04:38:52 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-type:date:from:in-reply-to:message-id:mime-version
-	:references:subject:to; s=qcppdkim1; bh=6rzyQuCnw85ip+ebepgEtspZ
-	yo8ym6Nb1+G0cVglh/4=; b=oPVogkjhJTIyXa14RLJbOstt326ApMDY9vbgzaEN
-	lKWCiddNqBpw3ZO3r7h/TyKtL2lOevEtqN5jmgqzsGCVpbYRM8VueIIZJdpmfj41
-	9nnA9iYpXCLmw5kDr5/89D22D5ODkVgmY2WCylccu8TCIEcp2D6/j5EzH3NfuviZ
-	lgXXl0Q8NmcJhV2Zxsp5S/WgmfI1eCgrCsA/VMupTP7wamObl4eVuhYQtu65cjN6
-	FmgYGfTLrHMgdLWYHcAaeng5k85PzPx6MCwUAZVQ6EzQ6alxJw3U1uPBSLzhbjRq
-	/dm5wmQ9eRq9x0zAfltk23WPKaB/7FRPyuSFcAS04o7J+w==
-Received: from mail-pj1-f69.google.com (mail-pj1-f69.google.com [209.85.216.69])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gmy9dmtpp-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Mon, 14 Sep 2026 03:15:41 +0000 (GMT)
-Received: by mail-pj1-f69.google.com with SMTP id 98e67ed59e1d1-399311947f6so5411912a91.0
-        for <linux-arm-msm@vger.kernel.org>; Sun, 13 Sep 2026 20:15:40 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1789355740; x=1789960540; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=6rzyQuCnw85ip+ebepgEtspZyo8ym6Nb1+G0cVglh/4=;
-        b=LY9MgJoX+Q6KiUbJCbwqp/NaMyqz2JzY6Lsyhduq41ISdCvi9Q5TgiZTHXQiu1bmPJ
-         gOdENZIraymCZuPswx7MA/Z5s37lfKqTQz7t7GX8+Cl5CuaErzDtGRPItuStuOF6H9K2
-         f46w6hZlcqndI8VMlZ9ONE1gMDztkCghy97Xcv2sVA95uhLcZ0HGZecbE0MtFAsJB+on
-         AiZEt2/Ec62FPs6DV6VpfDYHGxV1q/dXc6cKVS6GgS35qs0k8gSalEE4iRUpG+mo0zhA
-         YMrMiRajfvvXyVT+0c8S+HYvXlHkU5IlMTtNSkbtpsdFJ/UZNrY5Px/V9wZv9W5jatsu
-         NB7g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1789355740; x=1789960540;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=6rzyQuCnw85ip+ebepgEtspZyo8ym6Nb1+G0cVglh/4=;
-        b=jzOjDT+22TLAtp1nZBnS/q8P8vxCz03gaPItF8NkChXcwnWtj8C6L64/gOzg0OqPbg
-         GfEkcwdllO9CHrj03UIyMjxTiBMF4FENtPSgtvF0jrhOLDKtMAjlNggx0+q+uNANpx40
-         i0I1CIVg5sl9ndQOE9bxiZD62qxoSfazHw1CcnhSSqcUcex1/84IK1pThdEODvOXKli6
-         GPSBZckUsYfvfEGpietwNDIyFplWU74DJqB45bSOKOyWjrcjrXm+X3ctlPR1zAQuLsMt
-         eqQvjdZ8D+p6wx9pX0xEV6OBLXUFijXkSsBuVBtB10iofQD5zcHHMQP7ndUxvC2S8ANk
-         YhDg==
-X-Forwarded-Encrypted: i=1; AKwUvBxPtmlXt9yGOUAOR882ayLyyVWBKMMkuzpvu6UnNHem48yxDG5Foxd5JDKaGYLGAQXJESr/60Sz6fdeXpuW@vger.kernel.org
-X-Gm-Message-State: AFuF++kZtK6s3pHL93PqkFyGQUeCq9044KeQMQS+rDb1/diIgLMq7dOP
-	psXQORh/64t9qrXWHFTdzz7fItdx0wbybAanGqLEatAkgB34MAmNKwdjBF7Zs6jGnG/ek2hYBNs
-	bhhxHwRdwg7TljXmNE6vsCA8ZmEQpEd5KS0ltbM3iY6Ov+gWf3xSHVn25e8JGEtQlmL7i
-X-Gm-Gg: AYBFou2gDsd0RuoOl5JEe/FyiOqy47MAEJ+tNJVn3hL9bHcDMme+t8+8FYfYOTAVsoW
-	N4hU7eGE5cDSBfsYy3VK/xcdp5hcWtMstXl6KUi6tVxu8P+hehm23x3Pxrsuz9+kzZQ5UAkleAI
-	QhB/HNoiyYekwLCOS+SDvsoyP8HzkokxqHDTtU7UV3svKUnQbMewxdUfoMvpBM4wsaYUcE0WvC9
-	EJvAOFVQTqnMEEtNep4ybGYWxhNjB5qlBU3VrvsQY+NJeUGWYQ062eVUn2ipaWtkwJkkykYnIFn
-	gt3jzpX5jY1p2TOSCa3kJbBUjuGTBRj8RssxSb6Lu0BhEtiOqFZKp+LEB5zvep6ebf50tfH9PPj
-	auxyo2AGF+WGbklLHEVoSkbrLeLqR2lhgv+qLFAhDUgs=
-X-Received: by 2002:a17:90b:1f86:b0:398:bee5:61d6 with SMTP id 98e67ed59e1d1-39dec0f9ff3mr1737751a91.24.1789355740010;
-        Sun, 13 Sep 2026 20:15:40 -0700 (PDT)
-X-Received: by 2002:a17:90b:1f86:b0:398:bee5:61d6 with SMTP id 98e67ed59e1d1-39dec0f9ff3mr1737689a91.24.1789355739511;
-        Sun, 13 Sep 2026 20:15:39 -0700 (PDT)
-Received: from QCOM-aGQu4IUr3Y (i-global052.qualcomm.com. [199.106.103.52])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-33ba4ee07f2sm21136098eec.18.2026.09.13.20.15.36
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 13 Sep 2026 20:15:39 -0700 (PDT)
-Date: Mon, 14 Sep 2026 11:15:33 +0800
-From: Shawn Guo <shengchao.guo@oss.qualcomm.com>
-To: Abel Vesa <abel.vesa@oss.qualcomm.com>
-Cc: Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>,
-        Bartosz Golaszewski <brgl@kernel.org>,
-        Krishna Kurapati <krishna.kurapati@oss.qualcomm.com>,
-        devicetree@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-Subject: Re: [PATCH 1/5] arm64: dts: qcom: nord-embedded: Fix i2c9/i2c10 pin
- functions
-Message-ID: <aqdm1VO1IWs_n04v@QCOM-aGQu4IUr3Y>
-References: <20260911142040.100263-1-shengchao.guo@oss.qualcomm.com>
- <20260911142040.100263-2-shengchao.guo@oss.qualcomm.com>
- <zsohlfgrvaqxg2wsymmgeiiasstmk3y5t6vj3aj3v6gl6arcqf@dwyie4ondge7>
- <aqdY43X_kskpsjYV@QCOM-aGQu4IUr3Y>
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	3txe3yu6jGxScXy2YvkNYUJwJvPmVYDUc+F0+CCds34=; b=OfpN3HFKNWJhyMD6
+	HcOA5kB9PxZN6onRmoxnkuOYbxXpjruFJV5r6Asvc54g8H721bwNYDq6W6NgEe4+
+	Y74adieNF7DbIjOO9RrCkAGAdlJkYPqzQ2w1+joOs589U/mnM/ThPWDs+2g7ybCq
+	uTYPXS6nLoHMEiXPi9uSUgMHneeaNMjSD65AVNVMa1yc+DxoWj9dU1a+g+bR/Ain
+	ndelylfvrKDdP4TGb071aiC5Q9ibPhTzTFsFYyFtQPtaSKOijD6kNEGqxHAQ7Pd2
+	rE8SLVLMKOkihQVdNIL7UsC6tLGiK14nZxPGo0Lef4q/aS5HRkWsXW+wY1B7e6G5
+	Yka7Ow==
+Received: from apblrppmta02.qualcomm.com (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com [103.229.18.19])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gmy9dd0qw-1
+	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
+	Mon, 14 Sep 2026 04:38:51 +0000 (GMT)
+Received: from pps.filterd (apblrppmta02.qualcomm.com [127.0.0.1])
+	by APBLRPPMTA02.qualcomm.com (8.18.1.11/8.18.1.11) with ESMTP id 68E4cnfQ811242;
+	Mon, 14 Sep 2026 04:38:49 GMT
+Received: from hu-ffaruque-hyd.qualcomm.com (hu-ffaruque-hyd.qualcomm.com [10.147.245.31])
+	by APBLRPPMTA02.qualcomm.com (PPS) with ESMTP id 68E4cm1k811221;
+	Mon, 14 Sep 2026 04:38:49 +0000 (GMT)
+From: Faruque Ansari <faruque.ansari@oss.qualcomm.com>
+Date: Mon, 14 Sep 2026 10:08:45 +0530
+Subject: [PATCH v3 1/3] dt-bindings: nvmem: layouts: Add PSCRR NVMEM layout
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <aqdY43X_kskpsjYV@QCOM-aGQu4IUr3Y>
-X-Proofpoint-GUID: DR7JlBxV-gzeT8c42Nw6zwvapcI4H1G1
-X-Proofpoint-ORIG-GUID: DR7JlBxV-gzeT8c42Nw6zwvapcI4H1G1
-X-Authority-Analysis: v=2.4 cv=NelzRGD4 c=1 sm=1 tr=0 ts=6aa766dd cx=c_pps
- a=vVfyC5vLCtgYJKYeQD43oA==:117 a=b9+bayejhc3NMeqCNyeLQQ==:17
- a=kj9zAlcOel0A:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22
- a=EUspDBNiAAAA:8 a=kt1rYbH7FQegcMq7uf4A:9 a=CjuIK1q_8ugA:10
- a=rl5im9kqc5Lf4LNbBjHf:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTE0MDA0MyBTYWx0ZWRfX2X0WTlNdhJ17
- bPzRk5BhqM+ClNYFVrrZi6t2XFa+6UHo72cQn+NWKx2S/Mc7ys9vaJir61hoGnrV0cVF5/fDWaR
- RUkMfLJTnH19TaiA/en3UIDobn059cY=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTE0MDA0MyBTYWx0ZWRfX8qdfn1lO5ecF
- 7V6krJIH3dSEv6GLVOzUq45NeGSMNNnF183h258hX/n1ZfoUQsTD3kl/R4rimm2cT3CT6POyWL2
- Qh88jOshmp7DlyGLCE2Jv18tgGXkdnALUf7IUUBqwVEZfvq/M7Bep+McldD3/bG8QsOFcL4eNIT
- XqvC5IGuzVr9a3EBwCMNGxm5jVV0GAQ901uXXSgdgo8nmD0KCVu9Pb5uvnEJChCOmexbAUnfzeJ
- moZ+sRMzBy22+ufj962Kk3DOZwHiGj/fqXyp86OBCOfUM3Z8wa95qA7x0eRAsJ6Y8e1gFP/oxfG
- FLkmcSZNoP1k+jW6kpLt6GXLsY8V1ZKEE/Wyaj1+ecxuYruOa9oJIQenJsHIBINZl6fnjJD4vyi
- 5nh44lU6Bn9J2yWsZyIPiGz4zBVl7WjtoILAc4KEfNwxryDeOOQkHZMyeJ9RL3OGlc7TtrCkdU7
- we/j/yhh/lJ1TbwFNpw==
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260914-pscrr-provider-v3-1-c45cb16542e8@oss.qualcomm.com>
+References: <20260914-pscrr-provider-v3-0-c45cb16542e8@oss.qualcomm.com>
+In-Reply-To: <20260914-pscrr-provider-v3-0-c45cb16542e8@oss.qualcomm.com>
+To: Oleksij Rempel <o.rempel@pengutronix.de>,
+        Pengutronix Kernel Team <kernel@pengutronix.de>,
+        Sebastian Reichel <sre@kernel.org>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Wim Van Sebroeck <wim@linux-watchdog.org>,
+        Guenter Roeck <linux@roeck-us.net>, Benson Leung <bleung@chromium.org>,
+        Tzung-Bi Shih <tzungbi@kernel.org>,
+        Srinivas Kandagatla <srini@kernel.org>,
+        Daniel Lezcano <daniel.lezcano@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-pm@vger.kernel.org, devicetree@vger.kernel.org,
+        linux-watchdog@vger.kernel.org, kernel@pengutronix.de,
+        Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>,
+        "Rafael J. Wysocki" <rafael@kernel.org>,
+        Zhang Rui <rui.zhang@intel.com>, Lukasz Luba <lukasz.luba@arm.com>,
+        =?utf-8?q?S=C3=B8ren_Andersen?= <san@skov.dk>,
+        Guenter Roeck <groeck@chromium.org>,
+        Matti Vaittinen <mazziesaccount@gmail.com>,
+        Ahmad Fatoum <a.fatoum@pengutronix.de>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        avaneesh.dwivedi@oss.qualcomm.com,
+        Umang Chheda <umang.chheda@oss.qualcomm.com>,
+        Faruque Ansari <faruque.ansari@oss.qualcomm.com>
+X-Mailer: b4 0.14.3
+X-Proofpoint-Reinject: loops=2 maxloops=12
+X-QCInternal: smtphost
+X-QCInternal: smtphost
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTE0MDA2MSBTYWx0ZWRfX/GylF/Y7QMW5
+ hDVmY/J5Ct6CYYdHaneh2x1DsNYQM2kpV1/YTFC7vZDypfXI2JiCyTeu/OQbZX67Z1QAmWZ8X33
+ Tevdi737BVkCP0ERYMsOEoOvmeYYD9wY4fTiHnisXxwxEFLeNGXu1fxE4l54+qZfT3caI+oKmiT
+ 2zGwCunygpaPf5T0ppM9WW5q3Mu8pfaoBKT09G10D/WlPo4ocg07IKqmBSZpWKYUsxri1feS04b
+ JJkEK00rWsaAiTT2jYi9YPxBkYddaql383SbP54D5DY3VURhCyve6wRi98LUIX25tYeW/z2Pce8
+ jf0DX+2Ayuw6fJ8wwYsvEvTm1spVTjHY4BDDrTx0UH0fn+Wx5EBEODemXjGG0MIjyCBc5/BZumL
+ HaRagGNbSx2XEehGAhdcPj95z1tynWRfLJMxHdmLpF0jemV24TtoY17vsf0bcdtFHObSi5Xqk+f
+ sabknjtu4qOE9mCyxdw==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTE0MDA2MSBTYWx0ZWRfX9rsEnXumNPKu
+ qCcfdDs3rmnVyluNk8FyLnmv+lTZzCYy4DHfJk0aNLbuh2Kd5G7QQI2sz0N2U0GAYVT3t9RzPEx
+ uJv8QBRIp/XPuuMGvFeocOyqpuIrfIc=
+X-Proofpoint-GUID: s8esPd92c-UOiuQyFCC_OUsilfC16_zX
+X-Authority-Analysis: v=2.4 cv=OeUNnRTY c=1 sm=1 tr=0 ts=6aa77a5c cx=c_pps
+ a=Ou0eQOY4+eZoSc0qltEV5Q==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+ a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22 a=gEfo2CItAAAA:8
+ a=EUspDBNiAAAA:8 a=VwQbUJbxAAAA:8 a=T2scfIwO0EnMTC8JHKIA:9 a=QEXdDO2ut3YA:10
+ a=sptkURWiP4Gy88Gu7hUp:22
+X-Proofpoint-ORIG-GUID: s8esPd92c-UOiuQyFCC_OUsilfC16_zX
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-09-14_01,2026-09-13_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- bulkscore=0 adultscore=0 impostorscore=0 priorityscore=1501 clxscore=1015
- spamscore=0 malwarescore=0 suspectscore=0 lowpriorityscore=0 phishscore=0
+ lowpriorityscore=0 malwarescore=0 phishscore=0 bulkscore=0 spamscore=0
+ priorityscore=1501 suspectscore=0 impostorscore=0 adultscore=0 clxscore=1015
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609140043
+ reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609140061
 
-On Mon, Sep 14, 2026 at 10:16:03AM +0800, Shawn Guo wrote:
-> On Sat, Sep 12, 2026 at 06:34:14PM +0300, Abel Vesa wrote:
-> > On 26-09-11 22:20:36, Shawn Guo wrote:
-> > > The i2c9/i2c10 and uart9/uart10 pinctrl states shared the same pins and
-> > > the same "qup1_se2"/"qup1_se3" function name, so the I2C states were
-> > > indistinguishable from the UART ones and ended up muxing the UART lanes.
-> > > i2c9 and i2c10 therefore did not work.
-> > > 
-> > > Now that the TLMM driver names each lane pair separately, select the
-> > > lane 0/1 function for I2C and the lane 2/3 function for UART.
-> > > 
-> > > Signed-off-by: Shawn Guo <shengchao.guo@oss.qualcomm.com>
-> > 
-> > No fixes tag?
-> 
-> The Nord DTS hasn't been picked up. If it's preferable, I can send v15
-> of Nord DTS to fold this fix.
+Add a schema for the PSCRR NVMEM layout, which persists the power
+state change reason in a single NVMEM cell so it survives a power
+cycle and can be read back on the next boot.
 
-Nord DTS v15 is out with this fix.
+Signed-off-by: Faruque Ansari <faruque.ansari@oss.qualcomm.com>
+---
+ .../bindings/nvmem/layouts/nvmem-layout.yaml       |  1 +
+ .../bindings/nvmem/layouts/pscrr-nvmem.yaml        | 87 ++++++++++++++++++++++
+ MAINTAINERS                                        |  1 +
+ 3 files changed, 89 insertions(+)
 
-Shawn
+diff --git a/Documentation/devicetree/bindings/nvmem/layouts/nvmem-layout.yaml b/Documentation/devicetree/bindings/nvmem/layouts/nvmem-layout.yaml
+index 382507060651..24545db61416 100644
+--- a/Documentation/devicetree/bindings/nvmem/layouts/nvmem-layout.yaml
++++ b/Documentation/devicetree/bindings/nvmem/layouts/nvmem-layout.yaml
+@@ -21,6 +21,7 @@ oneOf:
+   - $ref: fixed-layout.yaml
+   - $ref: kontron,sl28-vpd.yaml
+   - $ref: onie,tlv-layout.yaml
++  - $ref: pscrr-nvmem.yaml
+   - $ref: u-boot,env.yaml
+ 
+ properties:
+diff --git a/Documentation/devicetree/bindings/nvmem/layouts/pscrr-nvmem.yaml b/Documentation/devicetree/bindings/nvmem/layouts/pscrr-nvmem.yaml
+new file mode 100644
+index 000000000000..118669d33f5c
+--- /dev/null
++++ b/Documentation/devicetree/bindings/nvmem/layouts/pscrr-nvmem.yaml
+@@ -0,0 +1,87 @@
++# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
++%YAML 1.2
++---
++$id: http://devicetree.org/schemas/nvmem/layouts/pscrr-nvmem.yaml#
++$schema: http://devicetree.org/meta-schemas/core.yaml#
++
++title: NVMEM layout for the Power State Change Reason recorder (PSCRR)
++
++maintainers:
++  - Faruque Ansari <faruque.ansari@oss.qualcomm.com>
++  - Oleksij Rempel <o.rempel@pengutronix.de>
++
++description:
++  An NVMEM layout for a Power State Change Reason (PSCRR) recorder. The
++  reboot or shutdown cause is persisted into a single small NVMEM cell,
++  such as an RTC scratch register, a PMIC SDAM (Scratch Data Access Memory)
++  byte, or an EEPROM byte, so the reason survives a power cycle and can be
++  read back on the next boot.
++
++select: false
++
++properties:
++  compatible:
++    const: pscrr-nvmem
++
++  "#address-cells":
++    const: 1
++
++  "#size-cells":
++    const: 1
++
++patternProperties:
++  "^.*@[0-9a-f]+$":
++    type: object
++    description:
++      The single NVMEM cell used to persist the power state change reason.
++
++    properties:
++      reg:
++        items:
++          - items:
++              - description: Offset, in bytes, of the cell within the
++                  parent NVMEM device.
++              - const: 1
++        description:
++          Offset and size, in bytes, of the cell within the parent NVMEM
++          device. The reason value occupies a single byte, so the size
++          must be 1.
++
++      bits:
++        $ref: /schemas/types.yaml#/definitions/uint32-array
++        items:
++          - minimum: 0
++            maximum: 7
++            description:
++              Bit offset within the byte addressed by reg.
++          - minimum: 1
++            maximum: 8
++            description:
++              Number of bits used to store the reason. Must be wide enough
++              to hold every value of enum psc_reason (currently 4 bits or
++              more).
++        description:
++          Optional. When absent, the whole byte addressed by reg is used.
++
++    required:
++      - reg
++
++    additionalProperties: false
++
++required:
++  - compatible
++
++additionalProperties: false
++
++examples:
++  - |
++    nvmem-layout {
++        compatible = "pscrr-nvmem";
++        #address-cells = <1>;
++        #size-cells = <1>;
++
++        reboot-reason-persist@49 {
++            reg = <0x49 0x1>;
++            bits = <0 4>;
++        };
++    };
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 19b9f6605d98..51f31e95f4ea 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -21693,6 +21693,7 @@ R:	Pengutronix Kernel Team <kernel@pengutronix.de>
+ L:	linux-pm@vger.kernel.org
+ S:	Maintained
+ F:	Documentation/ABI/testing/sysfs-kernel-pscrr
++F:	Documentation/devicetree/bindings/nvmem/layouts/pscrr-nvmem.yaml
+ F:	drivers/power/reset/pscrr/
+ F:	include/linux/pscrr.h
+ F:	tools/testing/selftests/pscrr/
+
+-- 
+2.34.1
+
