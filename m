@@ -1,111 +1,126 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from ixit.cz (ixit.cz [84.42.129.46])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C415738838B;
-	Mon, 14 Sep 2026 18:34:26 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 87EB439A06D;
+	Mon, 14 Sep 2026 18:34:57 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=84.42.129.46
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789410868; cv=none; b=BbNtnqk2o0f4Dl5LMIWiOmFYbDVNCbmUEpGV/NbWe3WLS3778KJP3zinooZTFaldNjXYt2VPg6UfsF9KveHfquGe1BK1qnbKID8u/zXTMye56vcrepix6Z8VpMrYMgzKzgnIUIpg3GHldAzVBXWi6Mdoak7GfsjfQMGzG1E0N0k=
+	t=1789410902; cv=none; b=ZKYZGmWHlqy6v3uzInCj8Aq59odcSgww8o7wgLVhbRgtQtAZI0jqfBKXlVyphf4CoC18VWenH/v6mRyJnMM+hEEOgn6X9wiPSfcgohjDC5KicurxbdjuqKBfS/LnB5SBsAREKKLLfwoOAKZiHnZjhgRs4XWPV1dpyFRP2znkGvY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789410868; c=relaxed/simple;
-	bh=P7vuABoQPB/jBq7MF1gSPsyzvKUQewcumsuLyNTDzXY=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=qT22oCHWM0+5e2C1LSbomvjfdiH+RQJ6B/I6o3/xUFRj7Av2OzSBFCNKTQql6jBQ7JfW0/WfO5UQYn0ZqVL51LUHinGkbo5ZbGCZOSHivoDvErsK5eRRp4If7seYHmyKz0sQml6rY3zNVMBuFHVtX8WxBjJfC/ntz2+ZXwjiCAo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=MJYEfIGr; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1789410902; c=relaxed/simple;
+	bh=B/KhOE/cPA5wuGhVuSxvGslGu9BTJq+GgxVblXAqPlo=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=hf7n//lRkXh11j2x7KunQH0dGBNTUpqhmpT0T/4bPLlIub9iFNsL5pNYDA+h+3pKXyGp+wvWzQozr9+Z7ol/6J8Z1iQ8Eeh46JdkJwPlguVlcR/ZYN3cG/1uQjMXCAQrIsQEH2L2mUhuRQOYgto4BAIzyuGYkPGH/PA4eholUlU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=ixit.cz; spf=pass smtp.mailfrom=ixit.cz; dkim=pass (1024-bit key) header.d=ixit.cz header.i=@ixit.cz header.b=etFSTt+8; arc=none smtp.client-ip=84.42.129.46
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=ixit.cz
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ixit.cz
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="MJYEfIGr"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 260EE1F000FF;
-	Mon, 14 Sep 2026 18:34:26 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1789410866;
-	bh=rWfUa8bmXSX552+TKwgWU2/ORXQ7Q1rSLsaWVFwWKOk=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=MJYEfIGrctCrjp80fMHKOXL+v3+v0amDvVqRBdeLLF76eNP297tbt4N2hkUpC/EY8
-	 sznchidEzPuY5BXJrdL3Qk1U/r6FvSouZfldBrCHdwCJ0jchfgmlon20ABH3i/IyX9
-	 tlKRZ3e0ZjaMwXImYLMxWj1j8hmdsfinHS25br3JrEdfAQzq340GWMHZLKKys/hneP
-	 EbJiCCFIczFPvH8PKF37Yrmt4PeTTXu9IBpgafISv1FkdrcmUoLptX2xV/ZtRWV1ws
-	 dwGblnrLMxwcucJtFyLmILmqwAmzDk7HqZnouelylwENwi2le+HZ2RfdCnluPz8aJ0
-	 frLzKwIpeUrIw==
-Received: by traversing.sirena.org.uk (Postfix, from userid 1000)
-	id 3772BFDB50F; Mon, 14 Sep 2026 19:34:13 +0100 (BST)
-Date: Mon, 14 Sep 2026 19:34:13 +0100
-From: Mark Brown <broonie@kernel.org>
-To: Kamal Wadhwa <kamal.wadhwa@oss.qualcomm.com>
-Cc: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, robh@kernel.org,
-	Saikiran <bjsaikiran@gmail.com>, monish.chunara@oss.qualcomm.com,
-	jishnu.prakash@oss.qualcomm.com, nitin.rawat@oss.qualcomm.com,
-	Bjorn Andersson <bjorn.andersson@oss.qualcomm.com>,
-	lgirdwood@gmail.com, andersson@kernel.org,
-	linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
-	krzk+dt@kernel.org, devicetree@vger.kernel.org
-Subject: Re: [PATCH v3 0/2] regulator: qcom-rpmh: Add off-on-delay support
-Message-ID: <aqg-JSTrbg-xR69l@sirena.org.uk>
-References: <20260127190211.14312-1-bjsaikiran@gmail.com>
- <20260515111647.qg75thdvcbvvjpoi@hu-kamalw-hyd.qualcomm.com>
- <06a264d0-6a14-4b71-b783-82b771f04411@oss.qualcomm.com>
- <oa3okt7mdhoqmrebwim5yswarbcacbmhpwfvqbhtv6ib3cwrwi@ddox6mw3uhmy>
- <0d4fa333-df22-42b9-b9c2-ccb43ac4fac3@oss.qualcomm.com>
- <3pybhkqdvve2ct6burnhav3utis6nljz7ncheqcrs7v55ullz4@nek57empeoca>
- <086f8e7c-0afa-45d5-bdb2-54ac5f79eefa@sirena.org.uk>
- <xmjovrqonged7m77zlx4gbz6xvfksygbw7g4vgv2stlucvqoy6@uie3qdhdtkoe>
+	dkim=pass (1024-bit key) header.d=ixit.cz header.i=@ixit.cz header.b="etFSTt+8"
+Received: from [IPV6:2a02:830a:f787:8f00:d622:eaa3:3dd6:8f5e] (unknown [IPv6:2a02:830a:f787:8f00:d622:eaa3:3dd6:8f5e])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange x25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by ixit.cz (Postfix) with ESMTPSA id D55435340313;
+	Mon, 14 Sep 2026 20:34:48 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ixit.cz; s=dkim;
+	t=1789410889;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+	bh=eSQ1KHTYxMqP644PbBgyA/dOPDLer74IQYxGcMnJfUA=;
+	b=etFSTt+8ptYo4K+cR2gJYnXD8B4G3ZuMtll5cEaDNDktWBL3s5VSOPK2USP1SW3NFlkRWq
+	SF/FUFcs4EyVMUigZfyLJ1iyNm0M85UDjLpXIruQrRTF9sWi15FhMLZI7Mqp4MpiV43bjC
+	1/l/pb1SDjvbRLD0KisEGP34f4Lu50M=
+Message-ID: <9ada2cc5-1f2e-48fa-a170-052fe33dff29@ixit.cz>
+Date: Mon, 14 Sep 2026 20:34:48 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="3w1ZrWn4GhR4n0Bg"
-Content-Disposition: inline
-In-Reply-To: <xmjovrqonged7m77zlx4gbz6xvfksygbw7g4vgv2stlucvqoy6@uie3qdhdtkoe>
-X-Cookie: Orders subject to approval.
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 1/4] backlight: qcom-wled: Fix NULL pointer dereference
+ in PM callbacks
+To: Lee Jones <lee@kernel.org>, Daniel Thompson <danielt@kernel.org>,
+ Jingoo Han <jingoohan1@gmail.com>, Helge Deller <deller@gmx.de>,
+ Kiran Gunda <quic_kgunda@quicinc.com>,
+ Marco Mattiolo <marco.mattiolo@hotmail.it>,
+ =?UTF-8?B?QmFybmFiw6FzIEN6w6ltw6Fu?= <barnabas.czeman@mainlining.org>
+Cc: linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ linux-fbdev@vger.kernel.org, linux-kernel@vger.kernel.org,
+ phone-devel@vger.kernel.org, Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+ Joel Selvaraj <foss@joelselvaraj.com>, stable@vger.kernel.org
+References: <20260914-qcom-wled-backlight-v3-0-d69fe9843841@ixit.cz>
+ <20260914-qcom-wled-backlight-v3-1-d69fe9843841@ixit.cz>
+Content-Language: en-US, cs-CZ
+From: David Heidelberg <david@ixit.cz>
+Autocrypt: addr=david@ixit.cz; keydata=
+ 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
+In-Reply-To: <20260914-qcom-wled-backlight-v3-1-d69fe9843841@ixit.cz>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
+On 14/09/2026 20:14, David Heidelberg via B4 Relay wrote:
+> From: David Heidelberg <david@ixit.cz>
+> 
+> wled_probe() doesn't set the driver data for the platform device.
+> As a result, dev_get_drvdata() in wled_remove() will return NULL,
+> leading to a NULL pointer dereference afterward.
+> 
+> Set the platform device driver data in wled_probe().
+> 
+> Cc: stable@vger.kernel.org
+> Fixes: feeab87b3072 ("backlight: qcom-wled: Add support for short circuit handling")
+> Signed-off-by: David Heidelberg <david@ixit.cz>
+> ---
+>   drivers/video/backlight/qcom-wled.c | 1 +
+>   1 file changed, 1 insertion(+)
+> 
+Please ignore this [1/4] patch, so at least the rest get fixed.
+In next series, I'll omit this one (I thought it's easy drop in fix for 
+critical, but seems not).
 
---3w1ZrWn4GhR4n0Bg
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-
-On Wed, Sep 09, 2026 at 02:34:21AM +0530, Kamal Wadhwa wrote:
-
-Please fix your mail client to word wrap within paragraphs at something
-substantially less than 80 columns.  Doing this makes your messages much
-easier to read and reply to.
-
-> However recently on Qualcomm's QCS8300 RB4 boards we started seeing "NOP OUT" issue
-> for UFS driver, where this patch seems to be helping.
-
-> Also, Rob had earlier raised a few points to Saikiran on this patch series
-> (https://lore.kernel.org/all/20260129174829.GA1324020-robh@kernel.org/):
-
-> 3. If we can avoid turning the regulator off itself, so we may not need this delay
-
-> point 3 - We evaluated this for UFS - but the problem is that the issue happens in
-> the defer probe path, so if we avoid turning off the regulator, it leads to long
-> error prints appearing for the regulator being left ON. So we couldn't take that
-> path.
-
-I think Rob might be thinking here of something like the runtime PM
-autosuspend delay where once the final reference is dropped we wait some
-time before we actually implement the power off in hardware, thus a
-quick power cycle would never actually get implemented.  That does sound
-like a good idea if we've got issues with quick cycling, obviously the
-actual delay would still be needed but if you've got quick bounces
-happening routinely then a delay like that would allow you to avoid both
-power off and ramp delays.
-
---3w1ZrWn4GhR4n0Bg
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAABCgAdFiEEreZoqmdXGLWf4p/qJNaLcl1Uh9AFAmqoPiQACgkQJNaLcl1U
-h9B66Af/Z1tqV+rU3YT1wzEkMZtPgbjGkYlEPQq9zkJIbzo3O5Rv3ZK0mmP2ktCj
-PMkcbyFA1Eih3z8Ig/1bena+n9JUt4x86hWGS8KdZyUUNkeDzDyvWGSLAhUPhr9N
-encu5859kXdlZXAMEkBpYRLqtDAf1jzIX4ERiL0TaFJ7w9D7a6K/U0n++20vAjQX
-hnLU9/GJMEKLmuxrOqJ8vCG9EZjsc2/ZCAtOowEhdQ4AI+09eox76Oi0bZxGdg6l
-JjxdiJmPwV5tKMA6hz2rKBlgmLfEMeGZr1hpd8iGDxvT8BP8lUw/XDbLCIdZ9JLO
-RrNvY5qPZzw9w7gBst8zrYgUcLq/fA==
-=NvkX
------END PGP SIGNATURE-----
-
---3w1ZrWn4GhR4n0Bg--
+David
