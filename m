@@ -1,126 +1,120 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 05C9E4119F9;
-	Tue, 15 Sep 2026 16:18:30 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5D8E13E0083;
+	Tue, 15 Sep 2026 16:20:26 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789489111; cv=none; b=g6PietbA4B5iT/bWVGMpznW2vxUET1LknsP94I5O9pwAwxxLPPTQiVDjDfCDcIEatWQEkDdgaQSVAcaUv+9i9NUQJxEwviPUepaeJTfv7phgW+Hd0to92qnLQlBg2I2WJGjcj0UG90nGkpItN71AJSr89XLEMlYEkWM4G/qIPog=
+	t=1789489228; cv=none; b=nzT1tuZ2QkN2rnl0to4QXNSsmbMMppYM/ARnVfNzLQzuaa73z6rPTtVyQ9/lolrG6xps5bwrsayC7Gs5v2Sb7qJ4QyroQgJ6ZaXSvaLWT987gKUFEnjkN1A8XxjyPCteIJ4uRlFHPBPo5JZba/7tindKAnEHyHr11gihTpmtz1I=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789489111; c=relaxed/simple;
-	bh=xsHfdw96GFbaepBJbdXAFV0YRCZ+PaNC0b49O+JVBp0=;
-	h=From:To:Cc:In-Reply-To:References:Subject:Message-Id:Date:
-	 MIME-Version:Content-Type; b=Jn0VzZWh4eyjOfw6tlfAxdZheix+tqzxPQ3/Lsuk4x85jyunM31+VLUWjNaoznhYNqipySaZvhFvb0i5IOKpiPbs8wHRdqkAtWvrfwlxcurOtJgvPf117lKjLs7o2ZF1J8kcCa1CaykWB2vCR3mzFgKEoQowkB4l1fw0ocjdWxM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=h27yCwED; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1789489228; c=relaxed/simple;
+	bh=jUEL+Dw/QJMk2Eyov9zCQpu1wz6GU5A0ReeHH779BYg=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=PyiV/3dvXZAxppBZH33hxTH9XjwvLRxRE7mFPsjac+oShxmi211WRr9qdl9lhYPiJFEVdBlqefiR15JRoE9xOoXT7u7VDVMos3lPVHpJPKxvAw25L2tnTBKXwgNRye1jhxRoLiSNvuiu6EEnemRlKG1UwJbv9GneXXzmmBZumMc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=i6gOUUdR; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="h27yCwED"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id CB3F11F00893;
-	Tue, 15 Sep 2026 16:18:20 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="i6gOUUdR"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 022DB1F00893;
+	Tue, 15 Sep 2026 16:20:25 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1789489109;
-	bh=zdMtzOEeKhZuTFoJsqIR3X1skRiJm5fGYebmf2XTqE0=;
-	h=From:To:Cc:In-Reply-To:References:Subject:Date;
-	b=h27yCwED5eGU5g7CjoRIMjXid1gcL0jK0GIkjqMBQUvezag4D7EoNkuvSCEqur0D2
-	 daVAKP9EZ4rnltqq1O3bZgPwu7oZPS8nB6jnIOQk0oX6i7HVATaCyQq5VgNy65h4rr
-	 LBLMVmA8lx7OdSEbHtlg0JRcHdL/RCfDv4iB+HPR38r5/YcnGy5AUbNRA4v5ysSxhn
-	 9dihzuIcsyXeBmoUtCp9dmFZHQHnhIo6b7LgOEvd7GubTKzN3VOSeLCkAG4WNRMyQy
-	 0gFiruljocQ7QTDMYwK9+TKqxCKwaRauuIyiCB48VbWoL7wGSk1rjSF5Dv+XCOt28W
-	 F09pU1HC4yPjQ==
-From: Mark Brown <broonie@kernel.org>
-To: Lars-Peter Clausen <lars@metafoo.de>, 
- =?utf-8?q?Nuno_S=C3=A1?= <nuno.sa@analog.com>, 
- Liam Girdwood <lgirdwood@gmail.com>, Rob Herring <robh@kernel.org>, 
- Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>, Jerome Brunet <jbrunet@baylibre.com>, 
- David Rhodes <david.rhodes@cirrus.com>, 
- Richard Fitzgerald <rf@opensource.cirrus.com>, 
- =?utf-8?q?Martin_Povi=C5=A1er?= <povik+lin@cutebit.org>, 
- Frank Li <Frank.Li@nxp.com>, Sascha Hauer <s.hauer@pengutronix.de>, 
- Pengutronix Kernel Team <kernel@pengutronix.de>, 
- Fabio Estevam <festevam@gmail.com>, Binbin Zhou <zhoubinbin@loongson.cn>, 
- Matthias Brugger <matthias.bgg@gmail.com>, 
- AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>, 
- Srinivas Kandagatla <srini@kernel.org>, 
- Kuninori Morimoto <kuninori.morimoto.gx@renesas.com>, 
- Biju Das <biju.das.jz@bp.renesas.com>, 
- Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>, 
- Shenghao Ding <shenghao-ding@ti.com>, Kevin Lu <kevin-lu@ti.com>, 
- Baojun Xu <baojun.xu@ti.com>, Sen Wang <sen@ti.com>, 
- Geert Uytterhoeven <geert+renesas@glider.be>, 
- Magnus Damm <magnus.damm@gmail.com>, 
- Alexandre Belloni <alexandre.belloni@bootlin.com>, 
- Khanh Le <khanh.le.xr@renesas.com>, 
- Ricardo Rivera-Matos <rriveram@opensource.cirrus.com>, 
- patches@opensource.cirrus.com, 
- David Rau <David.Rau.opensource@dm.renesas.com>, 
- Shawn Guo <shawnguo@kernel.org>, Shengjiu Wang <shengjiu.wang@nxp.com>, 
- Oleksij Rempel <o.rempel@pengutronix.de>, 
- Yingkun Meng <mengyingkun@loongson.cn>, Trevor Wu <trevor.wu@mediatek.com>, 
- Julien Massot <jmassot@collabora.com>, Jiaxin Yu <jiaxin.yu@mediatek.com>, 
- Shane Chien <shane.chien@mediatek.com>, 
- Daniel Beer <daniel.beer@igorinstitute.com>, 
- Sebastian Reichel <sre@kernel.org>, linux-sound@vger.kernel.org, 
- devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
- asahi@lists.linux.dev, imx@lists.linux.dev, 
- linux-arm-kernel@lists.infradead.org, linux-mediatek@lists.infradead.org, 
- linux-arm-msm@vger.kernel.org, linux-renesas-soc@vger.kernel.org, 
- Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
-Cc: Charles Keepax <ckeepax@opensource.cirrus.com>
-In-Reply-To: <20260915063317.28971-2-krzysztof.kozlowski@oss.qualcomm.com>
-References: <20260915063317.28971-2-krzysztof.kozlowski@oss.qualcomm.com>
-Subject: Re: [PATCH v3] ASoC: dt-bindings: Use consistent indentation in
- the example
-Message-Id: <178948092653.151760.9676551205398911501.b4-ty@b4>
-Date: Tue, 15 Sep 2026 15:02:06 +0100
+	s=k20260515; t=1789489226;
+	bh=46gL7e56MAEV+QE7Z3CduA1LUjoQGUDv2tnhYHAXOoc=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=i6gOUUdRELi9ju9aLowbcP6vJKgEXpk8T75B7wgpZB2AXtVSfjgFS/5krFn+Tjrjn
+	 U+toJGWxVxzuErG+fvgvEatlTQ+q3EEbNN1/IScUhX9f9OSGu7UACw/+iPgEfhg3md
+	 d96nYF4wWEym8yrAUuuUV2Ye0qY/HfEqbRcUZfhJqAyWc3xSnLJVrg+N/Sacu+MkXs
+	 4GOpV3KLpWCXXtTmuaztED2nA7EuYV2eE2gKgSq+bQqCXY2m2iz3rEjUpkzxcwLCjh
+	 mxpWVbUNKrGvNMpHLBTNyYARbXQen6GlpgBCk1IsCDGyILoJkSgU5m/mIMzYhmR/Dn
+	 ks/VKHqWJfiCg==
+Date: Tue, 15 Sep 2026 21:50:22 +0530
+From: Vinod Koul <vkoul@kernel.org>
+To: Andy Shevchenko <andriy.shevchenko@intel.com>
+Cc: Frank Li <Frank.li@oss.nxp.com>,
+	Nuno =?iso-8859-1?Q?S=E1?= <nuno.sa@analog.com>,
+	linux-kernel@vger.kernel.org, dmaengine@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org,
+	linux-stm32@st-md-mailman.stormreply.com,
+	linux-arm-kernel@lists.infradead.org, linux-iio@vger.kernel.org,
+	linux-sound@vger.kernel.org, linux-spi@vger.kernel.org,
+	Frank Li <Frank.Li@kernel.org>,
+	Lars-Peter Clausen <lars@metafoo.de>,
+	Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>,
+	=?iso-8859-1?Q?Am=E9lie?= Delaunay <amelie.delaunay@foss.st.com>,
+	Maxime Coquelin <mcoquelin.stm32@gmail.com>,
+	Alexandre Torgue <alexandre.torgue@foss.st.com>,
+	Jonathan Cameron <jic23@kernel.org>,
+	David Lechner <dlechner@baylibre.com>,
+	Andy Shevchenko <andy@kernel.org>, Jaroslav Kysela <perex@perex.cz>,
+	Takashi Iwai <tiwai@suse.com>, Mark Brown <broonie@kernel.org>
+Subject: Re: [PATCH v4 01/10] dmaengine: Move enum dma_slave_buswidth to a
+ new header
+Message-ID: <aqlwRkNcs_UqKjWs@parshuram>
+References: <20260911-dmaengine-support-wider-dma-masks-v4-0-72b8fd4cc78e@analog.com>
+ <20260911-dmaengine-support-wider-dma-masks-v4-1-72b8fd4cc78e@analog.com>
+ <aqgCQvRw9fns__0d@SMW015318>
+ <aqjzvxI4ecoFvRLT@ashevche-desk.local>
+ <aqlpoBJJXfZgsMxT@parshuram>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.17-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1145; i=broonie@kernel.org;
- h=from:subject:message-id; bh=xsHfdw96GFbaepBJbdXAFV0YRCZ+PaNC0b49O+JVBp0=;
- b=owEBbQGS/pANAwAKASTWi3JdVIfQAcsmYgBqqW/KhCABg54MOkosoFTzPXmeLy/RlhkivifSk
- jMcT3bipsWJATMEAAEKAB0WIQSt5miqZ1cYtZ/in+ok1otyXVSH0AUCaqlvygAKCRAk1otyXVSH
- 0LcyB/4hxF4ifiG0nOiFlkrrz1CCm5Ai3AIXbPgY9VtS02VcW230+rF+S51HzwY3b/C69z5M+sl
- E5Bz+18HBKeoMsXQemKmgV3INECe3Ea9Ar+RsVNdjlak3uOxsrweJQs3wXAmBk39p6XeKwsIxa2
- NFhIiS+s3/H5RQoltOYjzF3kbeotptgw8GlvnraZJLU3E8cvMurY4BbIb4ZdIYMR8eAYZ1TIYDC
- tE68mtQGyskHvWIMuv/9pVeHIevKetO+5V4kN/PpMhJXr++EfVuolMTpCMGWRJT/FclrHONvFUq
- MHa017eKvt2sLQlj4BPmTFz/WuSKhH6YpMhSdDizVu85Oo6q
-X-Developer-Key: i=broonie@kernel.org; a=openpgp;
- fpr=3F2568AAC26998F9E813A1C5C3F436CA30F5D8EB
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <aqlpoBJJXfZgsMxT@parshuram>
 
-On Tue, 15 Sep 2026 08:33:18 +0200, Krzysztof Kozlowski wrote:
-> ASoC: dt-bindings: Use consistent indentation in the example
+On 15-09-26, 21:22, Vinod Koul wrote:
+> On 15-09-26, 10:29, Andy Shevchenko wrote:
+> > On Mon, Sep 14, 2026 at 09:18:42AM -0500, Frank Li wrote:
+> > > On Fri, Sep 11, 2026 at 06:25:36PM +0100, Nuno Sá wrote:
+> > > > In preparation for the bitmap based bus width capabilities, move
+> > > > enum dma_slave_buswidth out of linux/dmaengine.h into a new
+> > > > include/linux/dma/engine/types.h.
+> > > >
+> > > > linux/dmaengine.h is included nearly everywhere, so growing it with the
+> > > > new interface would make every one of its users pay for it. Keeping the
+> > > > basic types in a separate header lets the new interface live next to it
+> > > > without that cost. linux/dmaengine.h includes the new header, so its
+> > > > users are unaffected.
+> > > >
+> > > > While at it, add the missing kernel-doc for the enum members. The block
+> > > > already opened with /**, so kernel-doc expected every member to be
+> > > > described and warned about each one of them. Describe the UNDEFINED case
+> > > > in particular, as its meaning depends on where the value is used.
+> > 
+> > ...
+> > 
+> > > >  include/linux/dmaengine.h        | 20 +++-----------------
+> > > 
+> > > I think it is good to split dmengine consumer and provider header files to
+> > > hidden dmaengine's detail.
+> > 
+> > It's indeed desirable change. but isn't it a bit out of scope of the series?
+> > I suggest to do one step at a time. Would it work for you?
+> > 
+> > > suggest name
+> > > 	dma/engine.h
+> > > 
+> > > so we can start move more API to this files.
+> > > 
+> > > after all user include this consumer header file,  old
+> > > include/linux/dmaengine.h rename to include/linux/dmaengine-provider.h,
+> > > which only include by dmaengine drivers.
+> > 
+> > Traditional naming would be
+> > dma/engine/provider.h
+> > dma/engine/consumer.h
+> 
+> consumer and provider and good names.. I would retain the full dmaengine
+> everywhere please. dma causes confusion already!
 
-Applied to
+Thinking about it again, drivers/dma/dmaengine.h should be the provider
+and include/linux/dmaengine.h the consumer header, things can be
+arranged into these files.. I would say whatever is not used by
+consumers can be moved into local header
 
-   https://git.kernel.org/pub/scm/linux/kernel/git/broonie/sound.git for-7.4
-
-Thanks!
-
-[1/1] ASoC: dt-bindings: Use consistent indentation in the example
-      https://git.kernel.org/broonie/sound/c/bd1041d3e1c0
-
-All being well this means that it will be integrated into the linux-next
-tree (usually sometime in the next 24 hours) and sent to Linus during
-the next merge window (or sooner if it is a bug fix), however if
-problems are discovered then the patch may be dropped or reverted.
-
-You may get further e-mails resulting from automated or manual testing
-and review of the tree, please engage with people reporting problems and
-send followup patches addressing any issues that are reported if needed.
-
-If any updates are required or you are submitting further changes they
-should be sent as incremental updates against current git, existing
-patches will not be replaced.
-
-Please add any relevant lists and maintainers to the CCs when replying
-to this mail.
-
-Thanks,
-Mark
-
+Thanks
+-- 
+~Vinod
