@@ -1,192 +1,137 @@
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.18])
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.9])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BAD5A4A5C33;
-	Tue, 15 Sep 2026 14:51:06 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B809C37D12E;
+	Tue, 15 Sep 2026 14:53:34 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.175.65.9
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789483869; cv=none; b=DpgqEIPpKzqZ7cDovdlO2wx4y0taRnZPORaMUbUbietddv+OPEp4egJnOonrpstv0Exr1f6HR15zdyNL9xfBMzpb0LWYZiW7jtjBNIndwofDZqzs6L4rkpRfguiRZy59BHNXj0r+sO4vVMovbxyWArGVOMhv4Fr4m3buGDdXtNc=
+	t=1789484016; cv=none; b=TyW48riov+3rDgrX2m+YrF5NcgbH0yiyAOt2wG4/vQLhEeQDcOPKIc+E8whdhH66/179y875sxwWy2bHkmDiMbRuKffLXv5SBClJn5n+Bu2PaNlQ03yJaDgnTT15Z/UIviWT05eQni0LTtUbDEDmDMCDG4uuYbw/v65EF2Twm4o=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789483869; c=relaxed/simple;
-	bh=P5iYy/QSYWpIBpgNKRP7nBK+8mbBN5jaovZEL295pX4=;
+	s=arc-20240116; t=1789484016; c=relaxed/simple;
+	bh=PeCPQwsh+qKGrcT3bTdkFKnhdBA1fVZf3KBFD/Bg9AY=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=tcDTKq5C+SElw+y117NQAMCCxOkhlmBkBZ6vHXC+uabRJ94ttiXLNgZ8jpWV/27xtqMlboT3HB7Bpb8hRmcUxlKsQB5K9GSgtJua/gIZes7eO1WMkzXElMbCyPf+zmbxMg5+l03CKElgNwCvhvWYG9iFTSL09x3EpoVJTwwMLqU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=pass smtp.mailfrom=linux.intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=NKG4ADbx; arc=none smtp.client-ip=192.198.163.18
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.intel.com
+	 Content-Type:Content-Disposition:In-Reply-To; b=eH6D+Rf4VPPwVjnW+9cjeYaxzemGKNRTlQ/FMfiUc5cGSf2m5atZcuCEDTTntM1hyzSFIvSm61WafJWu57M40+MsDCd/UJNhCKZZMrB1g2rVD6WFgifcVyN2p2ge++ELArPMJh/G7GM/KC5nDyy60hEBhbKh1LrKnibNVXFrAA8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=Tc9Dk6Yy; arc=none smtp.client-ip=198.175.65.9
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="NKG4ADbx"
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="Tc9Dk6Yy"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1789483867; x=1821019867;
+  t=1789484015; x=1821020015;
   h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=P5iYy/QSYWpIBpgNKRP7nBK+8mbBN5jaovZEL295pX4=;
-  b=NKG4ADbxya7fF+3RfHk4VPEfYgWX/pUpuTei1Hy7txdRNgw2/iPFsYav
-   9EYSA0vCB/8OWxKWp8d1BrbaUCWyHOFS5EgVXAJo9SguigIpdXRfizein
-   PintOYQILj4MkzkfFJtoAspoY1P0VJN1jhMfRVrYvsOUn/A9qk05haUTO
-   xS3ns3rwJQWqdB2fvRPch9FWcYpU9jf7qIdAE9rjwkgXs6+1vTO5lMv1W
-   o63z5cZsrfBDFYk1Nx2EfyZNt6EZ7oOymeev3WH3qg7v6i7NDbS9F/oki
-   q+C5bb1TlYe9pdCHIf2KFc+9ZUghm6hO3pY6TenCMfITRCKOY4nOcif8A
-   Q==;
-X-CSE-ConnectionGUID: RZPmtIYbQJeJT5VDdVQQ7g==
-X-CSE-MsgGUID: wmGuwELvRPS4bdQQxLnCOg==
-X-IronPort-AV: E=McAfee;i="6800,10657,11905"; a="88983364"
+   mime-version:content-transfer-encoding:in-reply-to;
+  bh=PeCPQwsh+qKGrcT3bTdkFKnhdBA1fVZf3KBFD/Bg9AY=;
+  b=Tc9Dk6YyScGEtemGXaTh9nko1vd+MmLxHp0f+fRLtzZjZwSoUoanPi4a
+   ISgxOZcTDwk8zAtiWRjSgQGt56ttaIahGcbcgdqg2dOn7amwn6V0Ulrrx
+   KRodF9Z6j4qNpC75xH7FFGn9bBp4rYRX4cXsNxVbYUT2dBd1zNoxfJGC0
+   +5hnAPGqQEXQ2O4dhGMwqV69QGwnEdGawo9bgJ6A/h10ChAY+CzdbEva2
+   Vh24SbsY+tmUgcou1/fANVZSR/AAb2m6S27yWduTztipHkO8t7udx4S60
+   gfNu6bJSTqYLK8JoAHh/YPv2CKYs4gNleDXoZM31TJoa2dXKcVKxDF8pj
+   A==;
+X-CSE-ConnectionGUID: xjQH2LblSqWHRjGFDAU1/w==
+X-CSE-MsgGUID: tkMc6KQWSiW+FeMThGZ7DA==
+X-IronPort-AV: E=McAfee;i="6800,10657,11905"; a="112619422"
 X-IronPort-AV: E=Sophos;i="6.27,103,1787036400"; 
-   d="scan'208";a="88983364"
-Received: from fmviesa010.fm.intel.com ([10.60.135.150])
-  by fmvoesa112.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 15 Sep 2026 07:51:06 -0700
-X-CSE-ConnectionGUID: Ol/cDn8bTau4gdkva6ZjQQ==
-X-CSE-MsgGUID: Vlsrmi9NRxeS/5OiZL/mRw==
+   d="scan'208";a="112619422"
+Received: from orviesa005.jf.intel.com ([10.64.159.145])
+  by orvoesa101.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 15 Sep 2026 07:53:34 -0700
+X-CSE-ConnectionGUID: pD+gpyMUTpWXizQXOXxYtA==
+X-CSE-MsgGUID: MNUHoTn5StWYHXkAWDsF7Q==
 X-ExtLoop1: 1
 X-IronPort-AV: E=Sophos;i="6.27,103,1787036400"; 
-   d="scan'208";a="269352551"
+   d="scan'208";a="277156120"
 Received: from conormcd-mobl2.ger.corp.intel.com (HELO localhost) ([10.245.244.57])
-  by fmviesa010-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 15 Sep 2026 07:51:02 -0700
-Date: Tue, 15 Sep 2026 17:51:00 +0300
-From: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-To: manivannan.sadhasivam@oss.qualcomm.com
-Cc: Marcel Holtmann <marcel@holtmann.org>,
-	Luiz Augusto von Dentz <luiz.dentz@gmail.com>,
-	Bartosz Golaszewski <brgl@kernel.org>,
-	Manivannan Sadhasivam <mani@kernel.org>,
-	Amitkumar Karwar <amitkumar.karwar@nxp.com>,
-	Neeraj Kale <neeraj.sanjaykale@nxp.com>,
-	Philipp Zabel <p.zabel@pengutronix.de>,
-	linux-kernel@vger.kernel.org, linux-bluetooth@vger.kernel.org,
-	linux-arm-msm@vger.kernel.org, linux-pci@vger.kernel.org,
-	linux-pm@vger.kernel.org,
-	Rahul Samana <rahul.samana@oss.qualcomm.com>,
-	Wei Deng <wei.deng@oss.qualcomm.com>,
-	Loic Poulain <loic.poulain@oss.qualcomm.com>
-Subject: Re: [PATCH 2/5] Bluetooth: btnxpuart: Add auxiliary driver for PCIe
- M.2 modules
-Message-ID: <aqlbVNjTUHXlObgy@ashevche-desk.local>
-References: <20260915-pci-m2-bt-rework-v1-0-3c7d9cf9c010@oss.qualcomm.com>
- <20260915-pci-m2-bt-rework-v1-2-3c7d9cf9c010@oss.qualcomm.com>
+  by orviesa005-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 15 Sep 2026 07:53:29 -0700
+Date: Tue, 15 Sep 2026 17:53:26 +0300
+From: Andy Shevchenko <andriy.shevchenko@intel.com>
+To: Frank Li <Frank.li@oss.nxp.com>
+Cc: Nuno =?iso-8859-1?Q?S=E1?= <nuno.sa@analog.com>,
+	linux-kernel@vger.kernel.org, dmaengine@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org,
+	linux-stm32@st-md-mailman.stormreply.com,
+	linux-arm-kernel@lists.infradead.org, linux-iio@vger.kernel.org,
+	linux-sound@vger.kernel.org, linux-spi@vger.kernel.org,
+	Vinod Koul <vkoul@kernel.org>, Frank Li <Frank.Li@kernel.org>,
+	Lars-Peter Clausen <lars@metafoo.de>,
+	Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>,
+	=?iso-8859-1?Q?Am=E9lie?= Delaunay <amelie.delaunay@foss.st.com>,
+	Maxime Coquelin <mcoquelin.stm32@gmail.com>,
+	Alexandre Torgue <alexandre.torgue@foss.st.com>,
+	Jonathan Cameron <jic23@kernel.org>,
+	David Lechner <dlechner@baylibre.com>,
+	Andy Shevchenko <andy@kernel.org>, Jaroslav Kysela <perex@perex.cz>,
+	Takashi Iwai <tiwai@suse.com>, Mark Brown <broonie@kernel.org>
+Subject: Re: [PATCH v4 01/10] dmaengine: Move enum dma_slave_buswidth to a
+ new header
+Message-ID: <aqlb5iZQ07Xicq0m@ashevche-desk.local>
+References: <20260911-dmaengine-support-wider-dma-masks-v4-0-72b8fd4cc78e@analog.com>
+ <20260911-dmaengine-support-wider-dma-masks-v4-1-72b8fd4cc78e@analog.com>
+ <aqgCQvRw9fns__0d@SMW015318>
+ <aqjzvxI4ecoFvRLT@ashevche-desk.local>
+ <aqlYOHIFU_dB72I3@SMW015318>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
-In-Reply-To: <20260915-pci-m2-bt-rework-v1-2-3c7d9cf9c010@oss.qualcomm.com>
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <aqlYOHIFU_dB72I3@SMW015318>
 Organization: Intel Finland Oy - BIC 0357606-4 - c/o Alberga Business Park, 6
  krs, Bertel Jungin Aukio 5, 02600 Espoo
 
-On Tue, Sep 15, 2026 at 04:24:03PM +0200, Manivannan Sadhasivam via B4 Relay wrote:
+On Tue, Sep 15, 2026 at 09:37:44AM -0500, Frank Li wrote:
+> On Tue, Sep 15, 2026 at 10:29:03AM +0300, Andy Shevchenko wrote:
+> > On Mon, Sep 14, 2026 at 09:18:42AM -0500, Frank Li wrote:
+> > > On Fri, Sep 11, 2026 at 06:25:36PM +0100, Nuno Sá wrote:
+> > > > In preparation for the bitmap based bus width capabilities, move
+> > > > enum dma_slave_buswidth out of linux/dmaengine.h into a new
+> > > > include/linux/dma/engine/types.h.
+> > > >
+> > > > linux/dmaengine.h is included nearly everywhere, so growing it with the
+> > > > new interface would make every one of its users pay for it. Keeping the
+> > > > basic types in a separate header lets the new interface live next to it
+> > > > without that cost. linux/dmaengine.h includes the new header, so its
+> > > > users are unaffected.
+> > > >
+> > > > While at it, add the missing kernel-doc for the enum members. The block
+> > > > already opened with /**, so kernel-doc expected every member to be
+> > > > described and warned about each one of them. Describe the UNDEFINED case
+> > > > in particular, as its meaning depends on where the value is used.
 
-> The 88W8987 combo module exposes Bluetooth over UART. Since this module is
-> attached over PCIe, it is not described in firmware like devicetree. So it
-> is discovered at runtime over PCIe by the power sequencing driver, which
-> allocates the UART serdev and creates an auxiliary device carrying that
-> transport and the power sequencing target to power up the Bluetooth
-> function.
+...
+
+> > > >  include/linux/dmaengine.h        | 20 +++-----------------
+> > >
+> > > I think it is good to split dmengine consumer and provider header files to
+> > > hidden dmaengine's detail.
+> >
+> > It's indeed desirable change. but isn't it a bit out of scope of the series?
+> > I suggest to do one step at a time. Would it work for you?
 > 
-> Add an auxiliary driver that binds to this device. It reuses the serdev
-> provided by the producer, brings up the controller through the existing
-> UART transport with nxp_register_dev() and drives power through the
-> sequencer obtained with pwrseq_get().
-> 
-> Factor the HCI device setup and teardown shared with the serdev probe into
-> helpers so both paths register the same controller.
+> Yes, but I hope the file name is finial expected file name. it is okay
+> just move enum dma_slave_buswidth to there now.
 
-...
+Hmm... The whole split as is in this series is due to bitmap.h and the whole
+train wreck with headers we have. I haven't checked that particular enum, but
+if it's possible to gather it in one of provider.h/consumer.h at the end, then
+yes, we may name file accordingly from day 1.
 
-> -static int nxp_serdev_probe(struct serdev_device *serdev)
-> +static int nxp_register_dev(struct btnxpuart_dev *nxpdev)
->  {
-> +	struct serdev_device *serdev = nxpdev->serdev;
-
-Why not also
-
-	struct device *dev = &serdev->dev;
-
-and use it to make lines even shorter?
-
-...
-
-> -	device_property_read_u32(&nxpdev->serdev->dev, "max-speed",
-> +	device_property_read_u32(&serdev->dev, "max-speed",
->  				 &nxpdev->secondary_baudrate);
-
-	device_property_read_u32(dev, "max-speed", &nxpdev->secondary_baudrate);
-
-Now exactly a single line (out of 80 characters).
-
-...
-
-> -	device_property_read_u8_array(&nxpdev->serdev->dev,
-> +	device_property_read_u8_array(&serdev->dev,
->  				      "local-bd-address",
->  				      (u8 *)&ba, sizeof(ba));
-
-	device_property_read_u8_array(dev, "local-bd-address",
-				      (u8 *)&ba, sizeof(ba));
-
-Now two lines instead of three. But ideally this casting should gone and
-instead something like ether_addr_copy() to be used. (The latter is out
-of scope here, of course.)
-
-...
-
-> +static int nxp_serdev_probe(struct serdev_device *serdev)
-> +{
-> +	struct btnxpuart_dev *nxpdev;
-> +	int err;
-> +
-> +	nxpdev = devm_kzalloc(&serdev->dev, sizeof(*nxpdev), GFP_KERNEL);
-> +	if (!nxpdev)
-> +		return -ENOMEM;
-
-> +	nxpdev->nxp_data = (struct btnxpuart_data *)device_get_match_data(&serdev->dev);
-
-This is bad. The const qualifier is for a reason. Make sure it's kept.
-On top the same suggestion as per above, use local 'dev' pointer.
-
-Also Sashiko found a nice issue with the driver data, id est driver_override
-mechanism that in some cases may lead to NULL dereferencing. Please, double
-check if it's not the case, otherwise check for NULL and return -ENODATA.
-
-> +	nxpdev->serdev = serdev;
-> +
-> +	nxpdev->pdn = devm_reset_control_get_optional_shared(&serdev->dev, NULL);
-> +	if (IS_ERR(nxpdev->pdn))
-> +		return PTR_ERR(nxpdev->pdn);
-> +
-> +	err = devm_regulator_get_enable(&serdev->dev, "vcc");
-> +	if (err) {
-> +		dev_err(&serdev->dev, "Failed to enable vcc regulator\n");
-> +		return err;
-> +	}
-> +
-> +	if (nxp_m2_connector_is_available(&serdev->ctrl->dev)) {
-> +		struct pwrseq_desc *pwrseq;
-> +
-> +		pwrseq = pwrseq_get(&serdev->ctrl->dev, "uart");
-> +		if (IS_ERR(pwrseq))
-> +			return dev_err_probe(&serdev->dev, PTR_ERR(pwrseq),
-> +					     "failed to get pwrseq\n");
-> +
-> +		nxpdev->pwrseq = pwrseq;
-> +		err = pwrseq_enable(pwrseq);
-> +		if (err)
-> +			goto err_pwrseq_put;
-> +	}
-> +
-> +	err = nxp_register_dev(nxpdev);
-> +	if (err)
-> +		goto err_pwrseq_put;
-> +
-> +	return 0;
-> +
->  err_pwrseq_put:
->  	if (nxpdev->pwrseq)
->  		pwrseq_put(nxpdev->pwrseq);
->  	return err;
->  }
+> > > suggest name
+> > > 	dma/engine.h
+> > >
+> > > so we can start move more API to this files.
+> > >
+> > > after all user include this consumer header file,  old
+> > > include/linux/dmaengine.h rename to include/linux/dmaengine-provider.h,
+> > > which only include by dmaengine drivers.
+> >
+> > Traditional naming would be
+> > dma/engine/provider.h
+> > dma/engine/consumer.h
 
 -- 
 With Best Regards,
