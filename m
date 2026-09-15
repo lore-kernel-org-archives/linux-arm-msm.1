@@ -1,122 +1,294 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 882D43BB4A;
-	Tue, 15 Sep 2026 19:34:05 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C95BD456E03;
+	Tue, 15 Sep 2026 20:04:43 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789500846; cv=none; b=EQh/o7jWlPZfPZ6Mrhd+uHtiirwCPpH7xT+hBcCxHeYoddcQn6HCWb4BbqccT6mFomX1vW1GHoHr5IsDiHcWVSAfO5QIVIyc5WSkKyAxyx17n9jok7DNQQh9YXXuNjjjeNumkSwEkkiLd95LbH/IIzZvNWKS8Vidnyx/+v88WcY=
+	t=1789502686; cv=none; b=PwGljrF2G/pSBa0L2qP2Uioc7PPc8iPe4SMEu5xQ6rdi2K2PDKMIoB1KgqI6nr6X296C3eMJ5y4T6Hg+/vMVdPLqc70jkig0VDhuisVzHKnhaWYeznL2Yp0zhgqBFERUBQoi+xZuj1I8LbUtHRnnpUZ152lBLo2GEJnPDxL4JWU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789500846; c=relaxed/simple;
-	bh=M0fn0wDeDj0PYctfUQQ6Zg5NN2QyXOiqYRG6KHup8hY=;
-	h=Date:Content-Type:MIME-Version:From:Cc:To:In-Reply-To:References:
-	 Message-Id:Subject; b=ix3kfpSgLfLrRFpmB9DzOC9AAy+I71E4ofA4luTIfd06qSmDsu3AdXjGLe8qraS9zasd7ryBmBrF5CwDW3WeWDTU/+/GKdHbAFWaiuVU+baJzeK8Bo0ZCxtHbnGY6FgBMoZHv2q9GcpBMEvcowLvPvzvzwyvS5lcuNwTIDfOOtg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=N6qz05IS; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1789502686; c=relaxed/simple;
+	bh=vlF93fqZgzjB9CFcevEyM2vWZFBAhMHI9qyOl+lZ9Og=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=Mou6bx8Bl+5vVyoIeno1x8c3AVTIp0Z3fMqR//jIny8EVXbBj8iN9SOpzgrzOxmFZTQ95K0PJv6OKDn2Wq5GaZwyx6+0tJ2cwMBjawPrWI+MXjWHqX+TRVadjfM43uld+DpN//Ke3OIw05JZyRfVEN3uvnEMHticobM+SHC29C8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ThaJ56Sg; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="N6qz05IS"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id EAD041F000FF;
-	Tue, 15 Sep 2026 19:34:04 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="ThaJ56Sg"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 872B81F000FF;
+	Tue, 15 Sep 2026 20:04:38 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1789500845;
-	bh=L71WPmZxDx8wZZPJ5Om9wyHwxrzK8OZGBKGYPFDIuq8=;
-	h=Date:From:Cc:To:In-Reply-To:References:Subject;
-	b=N6qz05ISzNbqHKxG7rvjtaQSslj++v/BoZ7Q0j8MsuuiM+88E4SzEY+zv5Uff8jZq
-	 3zyvRREGfxevKWnjBaT6LCgcFk54wQhh+UBLD8mmrg6TysDAWI/pMHdGRi+aTwdDDW
-	 Ga8PIRrk5vx9RTXEZ/KjK6U/R2WPNS2MQ9GPSHcf2gHr/NP5PUZlEaMaBxi6uxlxqC
-	 +S814POFlQv7maeE15HF7XbEc37aTW5CEfXcD6H5Oupx33Ge0ulCOLR8t7iDd5TnKW
-	 RsOFjguGc+e6+ZsEimsyLLDGuaTYiZg2Xf+21IazwTSB91ehCsl15rXndHPb/LAldf
-	 VR2owqU1a6d4A==
-Date: Tue, 15 Sep 2026 14:34:03 -0500
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
+	s=k20260515; t=1789502681;
+	bh=q78L4/vDO6Lu8fPZFSYnJqNi8VQABd/NBnCciOQTVW0=;
+	h=From:To:Cc:Subject:Date;
+	b=ThaJ56SgqF2eWSPt87Sk3LTcRnaG0V21fUl40tuHXJo4oK/ydCm17boIRl8DS7Opm
+	 cLhf4O+K/+ol1wCaHD/NOHEUD4K4Xq07wv2F2uEy22EFY0MYi0K1AUASVIIHAXSmm9
+	 hoKgwuKoQuZJS2B4VxGTuQj2BRk3dlXPUc++jHBUMDEMGBd9F2ojHUmvq3QIr5/Ui5
+	 PCanTCL1Q46uMo2bH4K+Tb8TaBhudfk0DwK0ds2NfHYUGdYQkHbfVvZ7M4OhBgCNEU
+	 sDU9hmf4Wy+G7rGqZpmGgtkGMK5BqZh6PBHQQzZr8YjooB+4fkph+RXMSKR56ghS/E
+	 QrP3+qgFRj4Mg==
+From: Arnd Bergmann <arnd@kernel.org>
+To: Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	Jiri Slaby <jirislaby@kernel.org>,
+	Bjorn Andersson <bjorn.andersson@oss.qualcomm.com>
+Cc: Arnd Bergmann <arnd@arndb.de>,
+	Praveen Talari <praveen.talari@oss.qualcomm.com>,
+	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+	Viken Dadhaniya <viken.dadhaniya@oss.qualcomm.com>,
+	Aniket Randive <aniket.randive@oss.qualcomm.com>,
+	Krzysztof Kozlowski <krzk@kernel.org>,
+	linux-arm-msm@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	linux-serial@vger.kernel.org
+Subject: [PATCH] serial: qcom-geni: avoid unused-function warning
+Date: Tue, 15 Sep 2026 22:04:11 +0200
+Message-ID: <20260915200435.3524505-1-arnd@kernel.org>
+X-Mailer: git-send-email 2.53.0
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-From: "Rob Herring (Arm)" <robh@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
- dri-devel@lists.freedesktop.org, Abel Vesa <abelvesa@kernel.org>, 
- Bjorn Andersson <andersson@kernel.org>, 
- Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Maxime Ripard <mripard@kernel.org>, linux-kernel@vger.kernel.org, 
- David Airlie <airlied@gmail.com>, 
- Marijn Suijten <marijn.suijten@somainline.org>, 
- Simona Vetter <simona@ffwll.ch>, 
- Krishna Manikandan <quic_mkrishn@quicinc.com>, Sean Paul <sean@poorly.run>, 
- Jessica Zhang <jesszhan0024@gmail.com>, 
- Yuanjie Yang <yuanjie.yang@oss.qualcomm.com>, 
- Abhinav Kumar <abhinav.kumar@linux.dev>, 
- Thomas Zimmermann <tzimmermann@suse.de>, 
- Konrad Dybcio <konradybcio@kernel.org>, Dmitry Baryshkov <lumag@kernel.org>, 
- Rob Clark <robin.clark@oss.qualcomm.com>, 
- Conor Dooley <conor+dt@kernel.org>, freedreno@lists.freedesktop.org, 
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>
-To: Yongxing Mou <yongxing.mou@oss.qualcomm.com>
-In-Reply-To: <20260915-msm_gdsc2-v2-1-9157237b8382@oss.qualcomm.com>
-References: <20260915-msm_gdsc2-v2-0-9157237b8382@oss.qualcomm.com>
- <20260915-msm_gdsc2-v2-1-9157237b8382@oss.qualcomm.com>
-Message-Id: <178947727730.1548829.13172666413996021793.robh@kernel.org>
-Subject: Re: [PATCH v2 1/3] dt-bindings: display: msm: Add INT2 GDSC to
- Kaanapali DPU
+Content-Transfer-Encoding: 8bit
 
+From: Arnd Bergmann <arnd@arndb.de>
 
-On Tue, 15 Sep 2026 17:27:48 +0800, Yongxing Mou wrote:
-> Kaanapali (SM8850) has an additional INT2 GDSC that powers a subset
-> of the DPU source pipes (VIG2/VIG3/DMA5), on top of the CORE_GDSC
-> that powers the rest of the MDSS hardware.
-> 
-> Describe INT2 GDSC as an additional power domain of the DPU device
-> rather than of the whole MDSS, since it only supplies DPU-local
-> source pipes. Restrict the schema change to the Kaanapali DPU
-> compatible via an if/then, so other platforms sharing
-> qcom,sm8650-dpu.yaml (which don't have an INT2 GDSC) keep the
-> existing single power-domain constraint.
-> 
-> Signed-off-by: Yongxing Mou <yongxing.mou@oss.qualcomm.com>
-> ---
->  .../bindings/display/msm/dpu-common.yaml           | 19 ++++++++++++++++--
->  .../bindings/display/msm/qcom,sm8650-dpu.yaml      | 23 ++++++++++++++++++++++
->  2 files changed, 40 insertions(+), 2 deletions(-)
-> 
+The qcom_geni_serial_poll_rx_fifo_locked() function is only
+used for console support, but defined outside of the #ifdef block:
 
-My bot found errors running 'make dt_binding_check' on your patch:
+drivers/tty/serial/qcom_geni_serial.c:918:13: error: 'qcom_geni_serial_poll_rx_fifo_locked' defined but not used [-Werror=unused-function]
+  918 | static void qcom_geni_serial_poll_rx_fifo_locked(struct uart_port *uport)
 
-yamllint warnings/errors:
+Move the function definition to a more appropriate place that
+avoids the warning.
 
-dtschema/dtc warnings/errors:
-/builds/robherring/linux-dt-review/Documentation/devicetree/bindings/display/msm/qcom,sm8650-dpu.yaml: allOf:0:then:properties:power-domain-names: {'minItems': 2, 'maxItems': 2, 'items': [{'const': 'mmcx'}, {'const': 'int2'}]} should not be valid under {'required': ['maxItems']}
-	hint: "maxItems" is not needed with an "items" list
-	from schema $id: http://devicetree.org/meta-schemas/items.yaml
-/builds/robherring/linux-dt-review/Documentation/devicetree/bindings/display/msm/qcom,sm8650-dpu.yaml: allOf:0:then:properties:power-domain-names: 'oneOf' conditional failed, one must be fixed:
-	False schema does not allow 2
-	[{'const': 'mmcx'}, {'const': 'int2'}] is too long
-	[{'const': 'mmcx'}, {'const': 'int2'}] is too short
-	1 was expected
-	hint: "minItems" is only needed if less than the "items" list length
-	from schema $id: http://devicetree.org/meta-schemas/items.yaml
-Documentation/devicetree/bindings/display/msm/qcom,kaanapali-mdss.example.dtb: display-controller@9801000 (qcom,kaanapali-dpu): power-domains: [[4294967295, 6]] is too short
-	from schema $id: http://devicetree.org/schemas/display/msm/qcom,sm8650-dpu.yaml
-Documentation/devicetree/bindings/display/msm/qcom,kaanapali-mdss.example.dtb: display-controller@9801000 (qcom,kaanapali-dpu): power-domains: [[4294967295, 6]] is too short
-	from schema $id: http://devicetree.org/schemas/display/msm/qcom,sm8650-dpu.yaml
-Documentation/devicetree/bindings/display/msm/qcom,kaanapali-mdss.example.dtb: display-controller@9801000 (qcom,kaanapali-dpu): 'power-domain-names' is a required property
-	from schema $id: http://devicetree.org/schemas/display/msm/qcom,sm8650-dpu.yaml
+Fixes: 8200871327d1 ("serial: qcom-geni: Keep FIFO RX active during console TX")
+Signed-off-by: Arnd Bergmann <arnd@arndb.de>
+---
+ drivers/tty/serial/qcom_geni_serial.c | 190 +++++++++++++-------------
+ 1 file changed, 96 insertions(+), 94 deletions(-)
 
-doc reference errors (make refcheckdocs):
-
-See https://patchwork.kernel.org/project/devicetree/patch/20260915-msm_gdsc2-v2-1-9157237b8382@oss.qualcomm.com
-
-The base for the series is generally the latest rc1. A different dependency
-should be noted in *this* patch.
-
-If you already ran 'make dt_binding_check' and didn't see the above
-error(s), then make sure 'yamllint' is installed and dt-schema is up to
-date:
-
-pip3 install dtschema --upgrade
-
-Please check and re-submit after running the above command yourself. Note
-that DT_SCHEMA_FILES can be set to your schema file to speed up checking
-your schema. However, it must be unset to test all examples with your schema.
+diff --git a/drivers/tty/serial/qcom_geni_serial.c b/drivers/tty/serial/qcom_geni_serial.c
+index 3633723acef8..21213f5546b5 100644
+--- a/drivers/tty/serial/qcom_geni_serial.c
++++ b/drivers/tty/serial/qcom_geni_serial.c
+@@ -171,7 +171,6 @@ static void qcom_geni_serial_cancel_tx_cmd(struct uart_port *uport);
+ static int qcom_geni_serial_port_setup(struct uart_port *uport);
+ static void qcom_geni_serial_start_tx_fifo(struct uart_port *uport);
+ static void qcom_geni_serial_resume_tx(struct uart_port *uport);
+-static void qcom_geni_serial_poll_rx_fifo_locked(struct uart_port *uport);
+ 
+ static inline struct qcom_geni_serial_port *to_dev_port(struct uart_port *uport)
+ {
+@@ -467,6 +466,102 @@ static int qcom_geni_serial_poll_init(struct uart_port *uport)
+ #endif
+ 
+ #ifdef CONFIG_SERIAL_QCOM_GENI_CONSOLE
++static void handle_rx_console(struct uart_port *uport, u32 bytes, bool drop)
++{
++	u32 i;
++	unsigned char buf[sizeof(u32)];
++	struct tty_port *tport;
++	struct qcom_geni_serial_port *port = to_dev_port(uport);
++
++	tport = &uport->state->port;
++	for (i = 0; i < bytes; ) {
++		int c;
++		int chunk = min_t(int, bytes - i, BYTES_PER_FIFO_WORD);
++
++		ioread32_rep(uport->membase + SE_GENI_RX_FIFOn, buf, 1);
++		i += chunk;
++		if (drop)
++			continue;
++
++		for (c = 0; c < chunk; c++) {
++			int sysrq;
++
++			uport->icount.rx++;
++			if (port->brk && buf[c] == 0) {
++				port->brk = false;
++				if (uart_handle_break(uport))
++					continue;
++			}
++
++			sysrq = uart_prepare_sysrq_char(uport, buf[c]);
++
++			if (!sysrq)
++				tty_insert_flip_char(tport, buf[c], TTY_NORMAL);
++		}
++	}
++	if (!drop)
++		tty_flip_buffer_push(tport);
++}
++#else
++static void handle_rx_console(struct uart_port *uport, u32 bytes, bool drop)
++{
++
++}
++#endif
++
++static void qcom_geni_serial_handle_rx_fifo(struct uart_port *uport, bool drop)
++{
++	u32 status;
++	u32 word_cnt;
++	u32 last_word_byte_cnt;
++	u32 last_word_partial;
++	u32 total_bytes;
++
++	status = readl(uport->membase +	SE_GENI_RX_FIFO_STATUS);
++	word_cnt = status & RX_FIFO_WC_MSK;
++	last_word_partial = status & RX_LAST;
++	last_word_byte_cnt = (status & RX_LAST_BYTE_VALID_MSK) >>
++						RX_LAST_BYTE_VALID_SHFT;
++
++	if (!word_cnt)
++		return;
++	total_bytes = BYTES_PER_FIFO_WORD * (word_cnt - 1);
++	if (last_word_partial && last_word_byte_cnt)
++		total_bytes += last_word_byte_cnt;
++	else
++		total_bytes += BYTES_PER_FIFO_WORD;
++	handle_rx_console(uport, total_bytes, drop);
++}
++
++#ifdef CONFIG_SERIAL_QCOM_GENI_CONSOLE
++/* Caller holds the UART port lock. */
++static void qcom_geni_serial_poll_rx_fifo_locked(struct uart_port *uport)
++{
++	struct qcom_geni_serial_port *port = to_dev_port(uport);
++	struct tty_port *tport = &uport->state->port;
++	u32 s_irq_status;
++	bool drop_rx = false;
++
++	s_irq_status = readl(uport->membase + SE_GENI_S_IRQ_STATUS);
++	writel(s_irq_status, uport->membase + SE_GENI_S_IRQ_CLEAR);
++
++	if (s_irq_status & S_RX_FIFO_WR_ERR_EN) {
++		uport->icount.overrun++;
++		tty_insert_flip_char(tport, 0, TTY_OVERRUN);
++	}
++
++	if (s_irq_status & (S_GP_IRQ_0_EN | S_GP_IRQ_1_EN)) {
++		if (s_irq_status & S_GP_IRQ_0_EN)
++			uport->icount.parity++;
++		drop_rx = true;
++	} else if (s_irq_status & (S_GP_IRQ_2_EN | S_GP_IRQ_3_EN)) {
++		uport->icount.brk++;
++		port->brk = true;
++	}
++
++	qcom_geni_serial_handle_rx_fifo(uport, drop_rx);
++}
++
+ static void qcom_geni_serial_drain_fifo(struct uart_port *uport)
+ {
+ 	struct qcom_geni_serial_port *port = to_dev_port(uport);
+@@ -676,47 +771,6 @@ static void qcom_geni_serial_console_device_unlock(struct console *co,
+ #endif
+ }
+ 
+-static void handle_rx_console(struct uart_port *uport, u32 bytes, bool drop)
+-{
+-	u32 i;
+-	unsigned char buf[sizeof(u32)];
+-	struct tty_port *tport;
+-	struct qcom_geni_serial_port *port = to_dev_port(uport);
+-
+-	tport = &uport->state->port;
+-	for (i = 0; i < bytes; ) {
+-		int c;
+-		int chunk = min_t(int, bytes - i, BYTES_PER_FIFO_WORD);
+-
+-		ioread32_rep(uport->membase + SE_GENI_RX_FIFOn, buf, 1);
+-		i += chunk;
+-		if (drop)
+-			continue;
+-
+-		for (c = 0; c < chunk; c++) {
+-			int sysrq;
+-
+-			uport->icount.rx++;
+-			if (port->brk && buf[c] == 0) {
+-				port->brk = false;
+-				if (uart_handle_break(uport))
+-					continue;
+-			}
+-
+-			sysrq = uart_prepare_sysrq_char(uport, buf[c]);
+-
+-			if (!sysrq)
+-				tty_insert_flip_char(tport, buf[c], TTY_NORMAL);
+-		}
+-	}
+-	if (!drop)
+-		tty_flip_buffer_push(tport);
+-}
+-#else
+-static void handle_rx_console(struct uart_port *uport, u32 bytes, bool drop)
+-{
+-
+-}
+ #endif /* CONFIG_SERIAL_QCOM_GENI_CONSOLE */
+ 
+ static void handle_rx_uart(struct uart_port *uport, u32 bytes)
+@@ -890,58 +944,6 @@ static void qcom_geni_serial_cancel_tx_cmd(struct uart_port *uport)
+ 	port->tx_queued = 0;
+ }
+ 
+-static void qcom_geni_serial_handle_rx_fifo(struct uart_port *uport, bool drop)
+-{
+-	u32 status;
+-	u32 word_cnt;
+-	u32 last_word_byte_cnt;
+-	u32 last_word_partial;
+-	u32 total_bytes;
+-
+-	status = readl(uport->membase +	SE_GENI_RX_FIFO_STATUS);
+-	word_cnt = status & RX_FIFO_WC_MSK;
+-	last_word_partial = status & RX_LAST;
+-	last_word_byte_cnt = (status & RX_LAST_BYTE_VALID_MSK) >>
+-						RX_LAST_BYTE_VALID_SHFT;
+-
+-	if (!word_cnt)
+-		return;
+-	total_bytes = BYTES_PER_FIFO_WORD * (word_cnt - 1);
+-	if (last_word_partial && last_word_byte_cnt)
+-		total_bytes += last_word_byte_cnt;
+-	else
+-		total_bytes += BYTES_PER_FIFO_WORD;
+-	handle_rx_console(uport, total_bytes, drop);
+-}
+-
+-/* Caller holds the UART port lock. */
+-static void qcom_geni_serial_poll_rx_fifo_locked(struct uart_port *uport)
+-{
+-	struct qcom_geni_serial_port *port = to_dev_port(uport);
+-	struct tty_port *tport = &uport->state->port;
+-	u32 s_irq_status;
+-	bool drop_rx = false;
+-
+-	s_irq_status = readl(uport->membase + SE_GENI_S_IRQ_STATUS);
+-	writel(s_irq_status, uport->membase + SE_GENI_S_IRQ_CLEAR);
+-
+-	if (s_irq_status & S_RX_FIFO_WR_ERR_EN) {
+-		uport->icount.overrun++;
+-		tty_insert_flip_char(tport, 0, TTY_OVERRUN);
+-	}
+-
+-	if (s_irq_status & (S_GP_IRQ_0_EN | S_GP_IRQ_1_EN)) {
+-		if (s_irq_status & S_GP_IRQ_0_EN)
+-			uport->icount.parity++;
+-		drop_rx = true;
+-	} else if (s_irq_status & (S_GP_IRQ_2_EN | S_GP_IRQ_3_EN)) {
+-		uport->icount.brk++;
+-		port->brk = true;
+-	}
+-
+-	qcom_geni_serial_handle_rx_fifo(uport, drop_rx);
+-}
+-
+ static void qcom_geni_serial_stop_rx_fifo(struct uart_port *uport)
+ {
+ 	u32 irq_en;
+-- 
+2.53.0
 
