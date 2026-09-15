@@ -1,65 +1,106 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AB4F03D6487;
-	Tue, 15 Sep 2026 12:21:21 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5794C3D411D;
+	Tue, 15 Sep 2026 12:30:33 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789474882; cv=none; b=PQ47Z/OH83XVNBE7JgH4SqkXbLMTFUMvOB0CjaFmGnDWos43ZARwThFKssGk6A+1I4zQxY7kFs/GQ9LlE+PGaiiC/yuI3bKTlMv1HgBl4VScr4by1CXAVpeSbrDhUONKATxwY1tZ5gZjS160DYDVqwnqIzbD/SepqTIzW6G5uDU=
+	t=1789475434; cv=none; b=sK6HTcGmwdd9dxPkg9dGSKqux/NLPqIYmU84IhVeOyHGkYyITFCKUIFhWpSglJed1v7q7mwZOZBnQ0ctPizqnjTA+L89y+HV2xgoxTPRDVvaN1jb6Nnp/5sutCI34UmOa85Kvq+f2zWNLV+LX3Hsvs3Vyq2LBEODrp2G4bSakng=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789474882; c=relaxed/simple;
-	bh=Uc7cO5xoe1cQZMzNgyouoEulYOfR9Lrcdm/hjSDUACk=;
-	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
-	 Message-Id; b=WOfWwbfAJVt7D5wIOPAeyHKCnEk9WxUUhVtjoCViYBzz5QYG1M3GqvyyjvzgvY2ak2g/RXyboVl1l/3FA2kfwLwPeMR5PAfnZfdve5So+yTNCG5iFrOqf6EFE7aovcJouU55fxd12gr0HlAj1lHoRgpOSEwC4Sso8VS7y9RH5GU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=RifjIpqw; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1789475434; c=relaxed/simple;
+	bh=gCBuP+2Evjh4veQE3BW3pdqF9G7KNExs6hM05mou+nU=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=sdci1KXKwqzpoL7b5s/1K2o8hkQ+EGXgTLazo31T1TFaeLXQETlgmCSMgcTF93+p8nbVWLSTf9ZO86EZpqVlvD+ODcHUUIPyy7vR86iWSTOm3wMJ068cjjRHpOUEcAaffqNtOGTO641MGZZGk06Tsp0nArNLvxCwgmLFDAXvheU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=dPT/trEt; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="RifjIpqw"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 789A61F00893;
-	Tue, 15 Sep 2026 12:21:19 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="dPT/trEt"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id CF1401F000FF;
+	Tue, 15 Sep 2026 12:30:25 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1789474881;
-	bh=Uc7cO5xoe1cQZMzNgyouoEulYOfR9Lrcdm/hjSDUACk=;
-	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=RifjIpqwJ9OqsSvNVf8dpgAPRIXNtpH+2TvjVYCOe9JUquNlggyFFXGJ0dnsaYmCg
-	 GQ9XosyxDDx8GSMITHICVAvNL+LxNcmxvQMQP7A3d1sqIXZ9RcF7rJNLS5wAMhcPOo
-	 SPow9eKiSuj2zKpRt8Cuw1b4X6SN6EeInZhqMldrk5L5hldvpE4fVZKWhOZYYZiNwJ
-	 uht3jZCMYXSw+Eavv2okVbNxYC6NRCTmed+SaIPKeRXggq0abWEv5pETdDXtyZFTxL
-	 +PtN1edDe9OuMct6IEevtSb0WL7MUHUyK38VC8DLpI0Q9G8uZMCxYp4zSbGdcMEgO3
-	 kB54THZRs52CQ==
-From: sashiko-bot@kernel.org
-Subject: Re: [PATCH RFC POC 46/50] xen/gntdev-dmabuf: stop putting the
- descriptor back on failure
-Reply-To: sashiko-reviews@lists.linux.dev
-To: "Christian Brauner" <brauner@kernel.org>, "Linus Torvalds" <torvalds@linux-foundation.org>
-Cc: linux-gpio@vger.kernel.org, bpf@vger.kernel.org, "Oleg Nesterov" <oleg@redhat.com>, "Jann
- Horn" <jannh@google.com>, linux-mm@kvack.org, linux-openrisc@vger.kernel.org, linux-arm-msm@vger.kernel.org, linux-hyperv@vger.kernel.org, virtualization@lists.linux.dev, sparclinux@vger.kernel.org, kvm@vger.kernel.org, linux-mips@vger.kernel.org, linux-alpha@vger.kernel.org, dri-devel@lists.freedesktop.org, "Peter
- Zijlstra" <peterz@infradead.org>, io-uring@vger.kernel.org, "David Airlie" <airlied@redhat.com>,
- =?utf-8?b?Q2hyaXN0aWFuIEJyYXVuZXIgKEFtdXRhYmxlKQ==?= <brauner@kernel.org>, linux-m68k@lists.linux-m68k.org, linux-arm-kernel@lists.infradead.org, "Ingo
- Molnar" <mingo@redhat.com>, linux-um@lists.infradead.org, linux-sh@vger.kernel.org, "Jan
- Kara" <jack@suse.cz>, "Alexander Viro" <viro@zeniv.linux.org.uk>, linux-kernel@vger.kernel.org, "Jens
- Axboe" <axboe@kernel.dk>, linuxppc-dev@lists.ozlabs.org, linux-snps-arc@lists.infradead.org, "Eugenio
- Perez" <eperezma@redhat.com>, kexec@lists.infradead.org, linux-parisc@vger.kernel.org, linux-fsdevel@vger.kernel.org, linux-hexagon@vger.kernel.org, "Michael
- S. Tsirkin" <mst@redhat.com>, linux-csky@vger.kernel.org
-In-Reply-To: <20260915-work-fd-reserve-unify-folded-v1-46-4d5217d6b246@kernel.org>
-References: <20260915-work-fd-reserve-unify-folded-v1-0-4d5217d6b246@kernel.org>
- <20260915-work-fd-reserve-unify-folded-v1-46-4d5217d6b246@kernel.org>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Date: Tue, 15 Sep 2026 12:21:19 +0000
-Message-Id: <20260915122119.789A61F00893@smtp.kernel.org>
+	s=k20260515; t=1789475432;
+	bh=TVtfbg9cLJPxe8CeCcpFkHFABq+D56AX0qqaWOp7cYg=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=dPT/trEtgWSwmvf4ssrot2pTPi+3EgP+7jA5SMylqsftSnb6kmNLGGkazcWzOosXn
+	 2Vp9dIoTa0CGeivRWiRZ4hlOD2VqdxKcxSudldG/8P1XhIg97wh2pz23M9uJVMvEB7
+	 ASJYBRFUgN1fzdHQpipXRRI5/LEKdxCMM0gEA/uGWM9OG0a4D8fU7Y+7+ZeYq2acLE
+	 dOVIfk/G4mTIw4oiTQUQXmInZ7vyMxnafJMjD4hTtYqzoq2ZNKZlPvKZsSSKOaznzY
+	 XI51RrUsrUic4xhyZKAv6MhvYZ5ItT2guPS0QlC0bSUhNYjVFAHqqoGLYCVM/6qLjS
+	 mOs6uFUo48N2w==
+Date: Tue, 15 Sep 2026 13:30:23 +0100
+From: Mark Brown <broonie@kernel.org>
+To: Hemanth Selam <hemanth.selam@gmail.com>
+Cc: Liam Girdwood <lgirdwood@gmail.com>,
+	Claudiu Beznea <claudiu.beznea@tuxon.dev>,
+	Andrei Simion <andrei.simion@microchip.com>,
+	Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>,
+	Nicolas Ferre <nicolas.ferre@microchip.com>,
+	Alexandre Belloni <alexandre.belloni@bootlin.com>,
+	Ray Jui <rjui@broadcom.com>, Scott Branden <sbranden@broadcom.com>,
+	Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>,
+	Lars-Peter Clausen <lars@metafoo.de>,
+	Nuno =?iso-8859-1?Q?S=E1?= <nuno.sa@analog.com>,
+	David Rhodes <david.rhodes@cirrus.com>,
+	Richard Fitzgerald <rf@opensource.cirrus.com>,
+	Support Opensource <support.opensource@diasemi.com>,
+	Matthias Brugger <matthias.bgg@gmail.com>,
+	AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>,
+	Oder Chiou <oder_chiou@realtek.com>,
+	Shenghao Ding <shenghao-ding@ti.com>, Kevin Lu <kevin-lu@ti.com>,
+	Baojun Xu <baojun.xu@ti.com>, Sen Wang <sen@ti.com>,
+	Cezary Rojewski <cezary.rojewski@intel.com>,
+	Peter Ujfalusi <peter.ujfalusi@linux.intel.com>,
+	Bard Liao <yung-chuan.liao@linux.intel.com>,
+	Kai Vehmanen <kai.vehmanen@linux.intel.com>,
+	Pierre-Louis Bossart <pierre-louis.bossart@linux.dev>,
+	Srinivas Kandagatla <srini@kernel.org>,
+	Jarkko Nikula <jarkko.nikula@bitmer.com>,
+	Kunihiko Hayashi <hayashi.kunihiko@socionext.com>,
+	Masami Hiramatsu <mhiramat@kernel.org>, linux-sound@vger.kernel.org,
+	linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org,
+	patches@opensource.cirrus.com, linux-mediatek@lists.infradead.org,
+	linux-arm-msm@vger.kernel.org, linux-omap@vger.kernel.org
+Subject: Re: [PATCH v2] ASoC: fix typos in comments
+Message-ID: <63334ddf-5ddc-4a90-8244-98e38a0ea174@sirena.org.uk>
+References: <20260904110315.11650-1-hemanth.selam@gmail.com>
+ <20260915063206.519683-1-hemanth.selam@gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="GiDgBwWwOzEOdFcQ"
+Content-Disposition: inline
+In-Reply-To: <20260915063206.519683-1-hemanth.selam@gmail.com>
+X-Cookie: Void where prohibited by law.
 
-> Rely on the fd exit path machinery.
->=20
-> Signed-off-by: Christian Brauner (Amutable) <brauner@kernel.org>
 
-Sashiko has reviewed this patch and found no issues. It looks great!
+--GiDgBwWwOzEOdFcQ
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
---=20
-Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260915-work-fd-re=
-serve-unify-folded-v1-0-4d5217d6b246@kernel.org?part=3D46
+On Tue, Sep 15, 2026 at 12:02:00PM +0530, Hemanth Selam wrote:
 
+> v2:
+>  - Rebased onto asoc/for-next; v1 no longer applied against current code
+>    (Mark Brown).
+
+It's still not applying against my tree?
+
+--GiDgBwWwOzEOdFcQ
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAABCgAdFiEEreZoqmdXGLWf4p/qJNaLcl1Uh9AFAmqpOl4ACgkQJNaLcl1U
+h9Cpfgf/Q7YrQXQeaROc/u9unXenwWJLaxVPhJGgdjoufaOEw/YeQHHnC66FhF/H
+n2skcounXBkPPvmeFnkoCeV+3ammQ+wWQv6HVL9CWdEYOKJYiesoS+u5WI9KNae1
+hJyBQw0prpFKvyxuJKhv8aewBYknoowABWc/15HK8DjqQZPEw8gMzyCgZTJrb0IY
+JxTznbOUKHxMr0U6Mi6HS0zVX1HIYkuzKJ3VlKK6IYUGpxtP8+ceFa9UXjg2p9oU
+SrNghGQ8TeBx5GJ2h9Wkyv6bvXkX8ru2TV6WYgGo66bTvBCgV+1gAk3wrIWKPrdM
+vkfSCtaDDZQT0SRZ7QrFHs8WOQJtaQ==
+=0/I9
+-----END PGP SIGNATURE-----
+
+--GiDgBwWwOzEOdFcQ--
