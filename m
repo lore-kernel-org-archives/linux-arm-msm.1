@@ -1,90 +1,69 @@
-Received: from mail-24418.protonmail.ch (mail-24418.protonmail.ch [109.224.244.18])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 684B737A836;
-	Tue, 15 Sep 2026 14:17:23 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=109.224.244.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 158F13B14BD;
+	Tue, 15 Sep 2026 14:21:41 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789481845; cv=none; b=NNN+lWfxY+Nbkif2GswU2GZCEFi3FUTXi8LhmMPNJ6YgfS7CGvHhzYF7miL5oUr0WPGLYR5L6NiHEOu8VEOBhJ9MoKK0WI+wHBwtxsrHhmaeZ6aSTJTF5qKgXwV11OPTCOfuvFUhlBcCN3ZaIxDC+BwGkHOaKue4Fp+bbIiNOlM=
+	t=1789482102; cv=none; b=UaAUl5YIMsgD4LcMYATDiRYvtBFWRXx6I/+AJKPazBvNQjCGIb4HFH8HexFj7U0IzQ03CFIo0+Ft6/S7JW4+InobO34RM8/MPSsAm2B/TEOUMwWbi6nuS4oD2vlDJu9dS6fBEVAuzlFBPnTazGXk2dQDzImXgjUDk4Xjb3O0bYg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789481845; c=relaxed/simple;
-	bh=5KS1EgjYzXRO/LGwHSnOnFkVf2f169ADWg9LUHRlUEg=;
-	h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=tUDLb6m7H2PtHUuRcGzLyEQAa+0IGvUe7H0gEwkARrokRZJMjktx9Mdz7uHg0tIuO8Kon+w6XbJ57LkrmXljiQmMRjcafQ/ihqR0jU3pneD5iLGwkFMVbkM2zPsinEu2xWl2Sv6xqbwnLDBNYbt2HXIzR5K6/dNkMGzGjiiwoMo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=pm.me; spf=pass smtp.mailfrom=pm.me; dkim=pass (2048-bit key) header.d=pm.me header.i=@pm.me header.b=oQ7avwCU; arc=none smtp.client-ip=109.224.244.18
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=pm.me
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=pm.me
+	s=arc-20240116; t=1789482102; c=relaxed/simple;
+	bh=SjBVg0UIo5VYVk7KVnIqdsoieGnzW1/3QiREcG+Wbdo=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=fNSNvlIeGtqsmMscK9m3QmZznWKaGPz3o1YzFwVx75lUex7SLeB6c9hfqt6XKPq5U2UYNLTCO9osdzqp6F+SuDsvLVPY2mxViL4WW+gl0cihAE9+oubvSE+q+2X4ZS1F88hJczxKXXC4MPux0Bi/uL31nWLMkHyrjd0qMz5gtVA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=kmSFdEPA; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=pm.me header.i=@pm.me header.b="oQ7avwCU"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=pm.me;
-	s=protonmail3; t=1789481841; x=1789741041;
-	bh=YpZiKTdkBRV8HrUzJ48KBDYy9De2eBfD+hXdyRTErhs=;
-	h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
-	 Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
-	 Message-ID:BIMI-Selector;
-	b=oQ7avwCULkbth4nZNaY+DX9Jp/itRJAYGdH3wSuloaqeppukUvLeLAXgZrTEwMVUe
-	 fPMKfqT0zWzE19I+pzKB6xS9aXrzKUTASoWqRQAgi84HB1hHJb/4WCQGLPVWrlFzsE
-	 KmdFEcoYBo6k3LVAiMiyPTxbmh4WZD9e+uQD0RHplTTqMguAOWG13vtdKqWj7+XOKh
-	 hAHAQ8O5bhghldL3VDLnP9pJlIB45gXQHwgAMaIm8zDTrmKCPc4fqCvvWPvEV0S5W2
-	 y1TDanyWK1DZXlEXgU5zKCp6vWnwAcIi87LaWfOe+0mYtYJKl6n0zFi3R8+UbCAtk5
-	 vGp49jxNF3BAw==
-Date: Tue, 15 Sep 2026 14:17:16 +0000
-To: Anvesh Jain P <anvesh.p@oss.qualcomm.com>
-From: Birk Skyum <birk.skyum@pm.me>
-Cc: Sibi Sankar <sibi.sankar@oss.qualcomm.com>, Hans de Goede <hansg@kernel.org>, =?utf-8?Q?Ilpo_J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>, Bryan O'Donoghue <bryan.odonoghue@linaro.org>, Guenter Roeck <linux@roeck-us.net>, Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>, Randy Dunlap <rdunlap@infradead.org>, Daniel J Blueman <daniel@quora.org>, Maya Matuszczyk <maccraft123mc@gmail.com>, linux-arm-msm@vger.kernel.org, platform-driver-x86@vger.kernel.org, linux-hwmon@vger.kernel.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: [RFC PATCH v2 0/2] Monitor Yoga Slim 7x EC sensors without taking over cooling
-Message-ID: <dQbSKN-LtVryTrUiryOnW7ur2YSJe4nzHx4QAltRbJRgsDHxWBYVQI3H0SPzxlqlCOAZg5NJx2Fe8dpgr7KjQkxLrLPRZuc8ISiUY1-v66Y=@pm.me>
-In-Reply-To: <73db10fb-7778-44be-aced-562aa1039404@oss.qualcomm.com>
-References: <20260908135801.81436-1-birk.skyum@pm.me> <73db10fb-7778-44be-aced-562aa1039404@oss.qualcomm.com>
-Feedback-ID: 21326998:user:proton
-X-Pm-Message-ID: 328f6d94d1881f1cbc1d19fe2dea1636ba71f5dc
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="kmSFdEPA"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 021D81F00893;
+	Tue, 15 Sep 2026 14:21:38 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1789482101;
+	bh=R8EnJl10YJOY5Nkon1MY2df+AJVu+cW/izK3OP3v3UQ=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=kmSFdEPAWUSs3E9BrHKMAj8s3+D1dsrTeO+rJFSK/jatNYydFei8hG/r3hMOZvu4h
+	 vjY7XF8zHnBo7U12S0muktc47OhTdKfLUcprwcN46Pn0kZzHs6/NP9nT1/aa0v00Tl
+	 /B6u7Ah591zmziN8xsmp9Se0YbAmjh0NPTtQ+utxB4QO9BZjPcmsyVISXCnnV4X2uL
+	 v8arA9xBKOMln8jQZwNncUYMVKQJ0wpqPs+DUc2uZ4s/mAlTa7ycH5UztCzQSB5Ykz
+	 fj4ePGM7RuSOeXoNgaDsDKm1GtpK6XnidPnIc7c8Qxhpv3LA9GynYe+QRjHXGM0xIo
+	 9XiZUUF9+terw==
+Date: Tue, 15 Sep 2026 15:21:36 +0100
+From: Sudeep Holla <sudeep.holla@kernel.org>
+To: Hans de Goede <johannes.goede@oss.qualcomm.com>
+Cc: Bjorn Andersson <andersson@kernel.org>,
+	Sudeep Holla <sudeep.holla@kernel.org>,
+	Cristian Marussi <cristian.marussi@arm.com>,
+	Daniel Lezcano <daniel.lezcano@oss.qualcomm.com>,
+	Bjorn Andersson <bjorn.andersson@oss.qualcomm.com>,
+	Frank.Li@kernel.org, arm-scmi@vger.kernel.org,
+	linux-arm-kernel@lists.infradead.org, linux-arm-msm@vger.kernel.org,
+	imx@lists.linux.dev, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v6 3/4] firmware: arm_scmi: Fix
+ scmi_protocol_device_unrequest() race
+Message-ID: <20260915-messy-imposing-frog-ea9338@sudeepholla>
+References: <20260911152329.5822-1-johannes.goede@oss.qualcomm.com>
+ <20260911152329.5822-4-johannes.goede@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260911152329.5822-4-johannes.goede@oss.qualcomm.com>
 
-Hi Anvesh,
+On Fri, Sep 11, 2026 at 05:23:28PM +0200, Hans de Goede wrote:
+> scmi_protocol_device_unrequest() unlocks scmi_requested_devices_mtx during
+> the notifier call. During this window phead might have been deleted by
+> another racing scmi_protocol_device_unrequest().
+> 
+> Re-acquire phead before cleaning it up to avoid this potential double
+> free problem.
+>
 
-Thanks for the review and for raising the firmware comparison with Daniel.
+Does the below address this issue already ?
+Commit 2c4097e6c4ae ("firmware: arm_scmi: Fix requested device removal race")
 
-Agreed on preserving the LUT match data. My v2 is based on
-28924df2a08f440c73991b83028032c901de2ae4, which does not contain that
-implementation, and I could not find it in the current mainline driver
-either. Could you point me to the latest series or branch you would like
-me to target? I can integrate the read-only variant with that match data
-without changing the existing LUT behavior.
-
-On your thermistor comment on patch 1, would a DT thermal sensor and a
-monitoring-only thermal zone, without cooling maps, be the interface you
-have in mind? I can keep fan RPM under hwmon and leave cooling under
-firmware control.
-
-I also agree that sharing the EC chip is not sufficient to justify the
-qcom,hamoa-crd-ec fallback. I would like to compare firmware behavior
-before treating the capability-query failure as a model-wide limitation,
-then coordinate any binding adjustment with Daniel's series.
-
-For that comparison, my existing September 8 test recorded:
-
-  Yoga Slim 7x 14Q8X9 / 83ED
-  BIOS NHCN62WW, EC 0.99.0
-  Firmware query 0x0e: 03 00 63 00
-  Capability query 0x42: 00 00 00, identical across three reads
-
-The capability transfer completed with three bytes, but its count byte
-was zero rather than two. The unmodified driver rejected it with EINVAL.
-The separate read-only sensor test successfully read RPM and temperature
-while firmware controlled the fans.
-
-These are the earlier results, not a fresh test or evidence that a BIOS
-update would or would not resolve it. Daniel, I am happy to compare your
-versions and capability response, or repeat targeted read-only checks if
-there is a useful difference to investigate.
-
-Thanks,
-Birk
-
+-- 
+Regards,
+Sudeep
