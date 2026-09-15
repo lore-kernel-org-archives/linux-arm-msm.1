@@ -1,143 +1,228 @@
-Received: from meesny.iki.fi (meesny.iki.fi [195.140.195.201])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 02CAD3876CC;
-	Tue, 15 Sep 2026 07:46:43 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=195.140.195.201
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789458405; cv=pass; b=bp/yVilX6fBgl5BL/bYK4oj+Eh1oRuQjd5Xq/hOWcg3WEIbqvtRx1HEUsygxmyb/3HeavKUxvAHsfCXfpbP14sZIGbqRHqlnw5GrQjoBncaERwDPoovZ1xHHsEcoxYbbEIGWZGrG/OwuyRlAgErILLQzfY/ZABE2DUM29Fe/iXE=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789458405; c=relaxed/simple;
-	bh=CjIuEh27k1Xal8RS7CusYRx4cMVCNqvokJf2yY4eXCU=;
-	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
-	 MIME-Version; b=sEQPQwFas1nhvsg8dGE9ZTcFv2b0TW9FIhoRv7A8+TaFJybjYAHdH9QeXXsj1WvFoN/t09aHIgndcan9IZ2Jq/i3Sn5hzYBjGQIJLfVolbtYv7l/PgrcN+UkIMUBY9udR8dvxcGDEubppUZChM07zBnfQb4pOE/6c2xwoWL06cI=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=iki.fi; spf=pass smtp.mailfrom=iki.fi; dkim=pass (1024-bit key) header.d=iki.fi header.i=@iki.fi header.b=OqNGYX7v; arc=pass smtp.client-ip=195.140.195.201
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=iki.fi
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=iki.fi
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 52A18396588;
+	Tue, 15 Sep 2026 07:59:25 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=217.140.110.172
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1789459168; cv=none; b=Pqmsd6tVynF7Vc5q6GLWjIqjpoXI3K19G06H64jrvg1mD9lWNcc+fCWN0Ok3M54KJJITNoFb2v7ty+2BmN4ZUopGQ0Ed2j/jNtMiR5Ez5zzSrYx3smVk0pqK79Chd3GKrbHN/ImQBl6VG+Bs0XRv0MSENToiBUdi1qtieJ5zaes=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1789459168; c=relaxed/simple;
+	bh=NFm/Bmw3lQZ0sZ9bbnHxw99/b8GrSXW/d3Xz1RSCeO4=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=RdQa54QP+JW9BhwalTzQnbaHD/pjZK7irX7MzVitR50PREJ596OPQR1G2lKMWSxf16oTo56uZk/QocygKAgPgEntzRQw2r0WPuM0hEO5J9R35+QYt3t+4W1Y8PhaWf9qB/nhX8DiElftenUryrGxl9W0AyhZRABcl7WEwoHGx8A=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com; spf=pass smtp.mailfrom=arm.com; dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b=Dl75BtWV; arc=none smtp.client-ip=217.140.110.172
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=arm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=iki.fi header.i=@iki.fi header.b="OqNGYX7v"
-Received: from mandelbrot.. (xdsl-83-150-90-33.nebulazone.fi [83.150.90.33])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange x25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	(Authenticated sender: jmtilli)
-	by meesny.iki.fi (Postfix) with ESMTPSA id 4hkYxT3qlZzySb;
-	Tue, 15 Sep 2026 10:46:37 +0300 (EEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iki.fi; s=meesny;
-	t=1789458397;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=vRs19l52ovGuAIjGa7YqoKMg2NfGlSjJwTPL4k7vc2c=;
-	b=OqNGYX7vVbvIxmsjtk2iQWRf8dbYFihlNE89E8lbUVn7GPXTxHKhx9rEZduo3om+1v6KJR
-	LG07Ihot+saV2Mnj5N6DksBKYcVoX9PkMIjs5cvGfd1p6EzyFsMyjRP4d+GezG/iJIvsUY
-	P118wN8WCBkY7dViRsPQbn2lhp1t5jc=
-ARC-Seal: i=1; a=rsa-sha256; d=iki.fi; s=meesny; cv=none; t=1789458397;
-	b=oggymuq6kYnCD9ygbnfq5pW2izEpq/HMDNiT8xlKY8NWS088zm19ixvqM3dWW3yWQrJ2SK
-	AsPM/clBPb83G8I4zNv6M8YaQ8CrY0QIEpT7u2h7bCiI6aDJA0VE5F1yIvTQgN1jLEynNQ
-	YPfiB68/TscZLuN3RixRNXAJahCaELg=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=iki.fi;
-	s=meesny; t=1789458397;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=vRs19l52ovGuAIjGa7YqoKMg2NfGlSjJwTPL4k7vc2c=;
-	b=fax/XSqyVU8LzgedToyLxUTctI5UAwgECN+5d1KbxtWPNGFmjzQYWPHDpWCCOiGoUKUf4k
-	Mmj7uPTrxtFm8X2kkh/SrOFSQT8rSJ3a0iZzbhWcrrwRGuOx4faPha9xUtLG7tUVoxkVWN
-	7iqeCFgqnMB+a7sHjS1PALni7QuZNjc=
-ARC-Authentication-Results: i=1;
-	ORIGINATING;
-	auth=pass smtp.auth=jmtilli smtp.mailfrom=juha-matti.tilli@iki.fi
-From: Juha-Matti Tilli <juha-matti.tilli@iki.fi>
-To: ath11k@lists.infradead.org,
-	ath12k@lists.infradead.org,
-	mhi@lists.linux.dev,
-	linux-arm-msm@vger.kernel.org,
-	Manivannan Sadhasivam <mani@kernel.org>,
-	Jeff Johnson <jjohnson@kernel.org>
-Cc: Jeff Hugo <jeff.hugo@oss.qualcomm.com>,
-	Bjorn Andersson <andersson@kernel.org>,
-	Konrad Dybcio <konradybcio@kernel.org>,
-	Eric Dumazet <edumazet@google.com>,
-	Kuniyuki Iwashima <kuniyu@google.com>,
-	Paolo Abeni <pabeni@redhat.com>,
-	Willem de Bruijn <willemb@google.com>,
-	"David S. Miller" <davem@davemloft.net>,
-	Jakub Kicinski <kuba@kernel.org>,
-	Simon Horman <horms@kernel.org>,
-	linux-kernel@vger.kernel.org,
-	linux-wireless@vger.kernel.org,
-	netdev@vger.kernel.org,
-	Juha-Matti Tilli <juha-matti.tilli@iki.fi>,
-	Mihai Moldovan <ionic@ionic.de>,
-	Denis Kenzior <denkenz@gmail.com>
-Subject: [PATCH v4 12/12] wifi: ath12k: bind to QRTR endpoint ID in ath12k_qmi_init_service
-Date: Tue, 15 Sep 2026 10:41:35 +0300
-Message-Id: <20260915074135.2567411-13-juha-matti.tilli@iki.fi>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20260915074135.2567411-1-juha-matti.tilli@iki.fi>
-References: <20260915074135.2567411-1-juha-matti.tilli@iki.fi>
+	dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b="Dl75BtWV"
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id BC03B169C;
+	Tue, 15 Sep 2026 00:59:20 -0700 (PDT)
+Received: from [192.168.178.24] (usa-sjc-mx-foss1.foss.arm.com [172.31.20.19])
+	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 348883F86F;
+	Tue, 15 Sep 2026 00:59:19 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
+	t=1789459164; bh=NFm/Bmw3lQZ0sZ9bbnHxw99/b8GrSXW/d3Xz1RSCeO4=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+	b=Dl75BtWVkvlLYgY6l9WA7uPXRoT36D3Nt7r8pBsnRpQzSfsxZ8hAg/k19yyxEGfHA
+	 v/ge4Im8TagH1qzW4ufriEcxpI2b0Hd6EAEbehfcnqoax2CIBigQYzbRxndv0M6905
+	 EFTt/crJfNSMvMY0W42CbEU4dMdrirLdoXlddr3s=
+Message-ID: <e8a33eea-c54d-471c-9936-41762453feb7@arm.com>
+Date: Tue, 15 Sep 2026 09:59:17 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH RFC v2 04/10] cacheinfo: Expose the code to generate a
+ cache-id from a device_node
+To: Yin Li <yin.li@oss.qualcomm.com>, James Morse <james.morse@arm.com>,
+ Rob Herring <robh@kernel.org>, Shanker Donthineni <sdonthineni@nvidia.com>,
+ Ben Horgan <ben.horgan@arm.com>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
+ Conor Dooley <conor+dt@kernel.org>, Catalin Marinas
+ <catalin.marinas@arm.com>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+ "Rafael J. Wysocki" <rafael@kernel.org>, Danilo Krummrich <dakr@kernel.org>,
+ Reinette Chatre <reinette.chatre@intel.com>, Fenghua Yu
+ <fenghuay@nvidia.com>, Jonathan Cameron <jic23@kernel.org>,
+ Bjorn Andersson <andersson@kernel.org>,
+ Konrad Dybcio <konradybcio@kernel.org>, Gavin Shan <gshan@redhat.com>
+Cc: Drew Fustini <fustini@kernel.org>,
+ =?UTF-8?Q?Ilpo_J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>,
+ Shaopeng Tan <tan.shaopeng@jp.fujitsu.com>, trilok.soni@oss.qualcomm.com,
+ aiqun.yu@oss.qualcomm.com, ganapatrao.kulkarni@oss.qualcomm.com,
+ Srivathsa L Rao <srivathsa.rao@oss.qualcomm.com>,
+ Huang Yiwei <huang.yiwei@oss.qualcomm.com>,
+ linux-arm-kernel@lists.infradead.org, linux-arm-msm@vger.kernel.org,
+ linux-kernel@vger.kernel.org, driver-core@lists.linux.dev,
+ devicetree@vger.kernel.org
+References: <20260914-mpam-resctrl-dt-knp-support-v2-0-bf6645bb2f65@oss.qualcomm.com>
+ <20260914-mpam-resctrl-dt-knp-support-v2-4-bf6645bb2f65@oss.qualcomm.com>
+ <317682e8-63e7-4047-9106-deea7bf96388@arm.com>
+ <a340505d-9495-4f68-8ed1-c7e8772c28e4@oss.qualcomm.com>
+Content-Language: en-GB
+From: Andre Przywara <andre.przywara@arm.com>
+In-Reply-To: <a340505d-9495-4f68-8ed1-c7e8772c28e4@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 
-From: Mihai Moldovan <ionic@ionic.de>
+Hi Yin,
 
-If possible, fetch the QRTR endpoint ID in ath12k_qmi_init_service, just
-before calling qmi_handle_init, and make it available in the qmi_handle.
+thanks for the reply!
 
-qmi_helpers will then automatically bind to this endpoint for us.
+On 9/15/26 08:49, Yin Li wrote:
+> 
+> 
+> On 9/14/2026 8:26 PM, Andre Przywara wrote:
+>> Hi,
+>>
+>> On 9/14/26 11:37, Yin Li wrote:
+>>> From: James Morse <james.morse@arm.com>
+>>>
+>>> The MPAM driver identifies caches by id for use with resctrl. It
+>>> needs to know the cache-id when probe-ing, but the value isn't set
+>>> in cacheinfo until device_initcall(). Even after device_initcall(),
+>>> the cache-id is only available if at least one CPU associated with
+>>> the cache is online.
+>>>
+>>> Instead of making the driver wait, expose the code that generates the
+>>> cache-id. The parts of the MPAM driver that run early can use this to
+>>> set up the resctrl structures before cacheinfo is ready in
+>>> device_initcall().
+>>>
+>>> Signed-off-by: James Morse <james.morse@arm.com>
+>>> [ Yin Li: fix context conflicts in cacheinfo.c and cacheinfo.h; guard 
+>>> the
+>>>    cache_of_calculate_id() declaration with CONFIG_OF to prevent build
+>>>    errors when CONFIG_OF is not set ]
+>>
+>> You can shorten that part in square brackets: doing adjustments due to 
+>> rebasing is surely implied, and you can shorten the rest, like:
+>> [ Yin Li: guard cache_of_calculate_id() prototype ]
+>>
+>> Speaking of which ...
+>>
+>>> Signed-off-by: Yin Li <yin.li@oss.qualcomm.com>
+>>> ---
+>>>   drivers/base/cacheinfo.c  | 17 ++++++++++++-----
+>>>   include/linux/cacheinfo.h |  3 +++
+>>>   2 files changed, 15 insertions(+), 5 deletions(-)
+>>>
+>>> diff --git a/drivers/base/cacheinfo.c b/drivers/base/cacheinfo.c
+>>> index 9f9c72727a05..f75e7f64038b 100644
+>>> --- a/drivers/base/cacheinfo.c
+>>> +++ b/drivers/base/cacheinfo.c
+>>> @@ -226,8 +226,7 @@ static bool match_cache_node(struct device_node 
+>>> *cpu,
+>>>   #define arch_compact_of_hwid(_x)    (_x)
+>>>   #endif
+>>> -static void cache_of_set_id(struct cacheinfo *this_leaf,
+>>> -                struct device_node *cache_node)
+>>> +u32 cache_of_calculate_id(struct device_node *cache_node)
+>>>   {
+>>>       struct device_node *cpu;
+>>>       u32 min_id = ~0;
+>>> @@ -238,15 +237,23 @@ static void cache_of_set_id(struct cacheinfo 
+>>> *this_leaf,
+>>>           id = arch_compact_of_hwid(id);
+>>>           if (FIELD_GET(GENMASK_ULL(63, 32), id)) {
+>>>               of_node_put(cpu);
+>>> -            return;
+>>> +            return ~0;
+>>>           }
+>>>           if (match_cache_node(cpu, cache_node))
+>>>               min_id = min(min_id, id);
+>>>       }
+>>> -    if (min_id != ~0) {
+>>> -        this_leaf->id = min_id;
+>>> +    return min_id;
+>>> +}
+>>> +
+>>> +static void cache_of_set_id(struct cacheinfo *this_leaf,
+>>> +                struct device_node *cache_node)
+>>> +{
+>>> +    u32 id = cache_of_calculate_id(cache_node);
+>>> +
+>>> +    if (id != ~0) {
+>>> +        this_leaf->id = id;
+>>>           this_leaf->attributes |= CACHE_ID;
+>>>       }
+>>>   }
+>>> diff --git a/include/linux/cacheinfo.h b/include/linux/cacheinfo.h
+>>> index fc879ac4cc4f..c33bb3c8bd63 100644
+>>> --- a/include/linux/cacheinfo.h
+>>> +++ b/include/linux/cacheinfo.h
+>>> @@ -113,6 +113,9 @@ int acpi_get_cache_info(unsigned int cpu,
+>>>   #endif
+>>>   const struct attribute_group *cache_get_priv_group(struct cacheinfo 
+>>> *this_leaf);
+>>> +#ifdef CONFIG_OF
+>>
+>> Why is that, exactly? First IIUC it's quite uncommon to use #ifdef 
+>> guards around prototypes (unless they are stubbed without the symbol 
+>> defined). Using types protected by those symbols if certainly another 
+>> reason, and it looks like this would be the case here, but I had no 
+>> trouble building the kernel for x86, where CONFIG_OF is not defined.
+>> So can you share a .config example (or give a hint) as to where this 
+>> fails building?
+>> And if it does, wouldn't it be better to always include <linux/of.h> 
+>> in that file instead? I think I see a similar pattern elsewhere 
+>> (rfkill- gpio.c, sound/ac97/bus.c).
+>>
+> 
+> Hi Andre,
+> 
+> On the #ifdef CONFIG_OF: I also verified that removing the guard doesn't
+> break the build. However, since the implementation in cacheinfo.c is
+> itself guarded by #ifdef CONFIG_OF, exposing the prototype
+> unconditionally could cause a link error on CONFIG_OF=n builds if called
 
-This finally allows using multiple ath12k-based cards with the same QRTR
-node/port combination to work simultanenous (and, for that matter, at
-all), including combinations of ath11k-based and ath12k-based cards.
+How so? Just exposing a prototype wouldn't be a problem, as long as you 
+don't try to call that function. And that would be caught by the linker, 
+and then you have a different problem anyway (the caller).
 
-Signed-off-by: Mihai Moldovan <ionic@ionic.de>
-Old-version-tested-by: Mihai Moldovan <ionic@ionic.de>
-Old-version-tested-on: WCN7850 hw2.0 PCI WLAN.HMT.1.0.c5-00481-QCAHMTSWPL_V1.0_V2.0_SILICONZ-3
-Signed-off-by: Juha-Matti Tilli <juha-matti.tilli@iki.fi>
----
- drivers/net/wireless/ath/ath12k/qmi.c | 9 +++++++++
- 1 file changed, 9 insertions(+)
+The only reason to protect the prototype would be if a type used in the 
+parameters is not defined. And on the face of it "struct device_node" is 
+an OF specific type, declared in include/linux/of.h, but as mentioned, I 
+can't produce a compiler error, and even if so, would prefer to include 
+of.h instead.
 
-diff --git a/drivers/net/wireless/ath/ath12k/qmi.c b/drivers/net/wireless/ath/ath12k/qmi.c
-index 50082505c882d..3611d0eff22b3 100644
---- a/drivers/net/wireless/ath/ath12k/qmi.c
-+++ b/drivers/net/wireless/ath/ath12k/qmi.c
-@@ -9,11 +9,13 @@
- #include "qmi.h"
- #include "core.h"
- #include "debug.h"
-+#include "hif.h"
- #include <linux/of.h>
- #include <linux/firmware.h>
- #include <linux/of_address.h>
- #include <linux/ioport.h>
- #include <linux/of_reserved_mem.h>
-+#include <net/sock.h>
- 
- #define SLEEP_CLOCK_SELECT_INTERNAL_BIT	0x02
- #define HOST_CSTATE_BIT			0x04
-@@ -4075,6 +4077,13 @@ int ath12k_qmi_init_service(struct ath12k_base *ab)
- 	ab->qmi.ab = ab;
- 
- 	ab->qmi.target_mem_mode = ab->target_mem_mode;
-+
-+	ret = ath12k_hif_set_qrtr_endpoint_id(ab);
-+	if (ret) {
-+		ath12k_warn(ab, "failed to set QRTR endpoint ID: %d\n", ret);
-+		ath12k_warn(ab, "only one device per system will be supported\n");
-+	}
-+
- 	ret = qmi_handle_init(&ab->qmi.handle, ATH12K_QMI_RESP_LEN_MAX,
- 			      &ath12k_qmi_ops, ath12k_qmi_msg_handlers);
- 	if (ret < 0) {
--- 
-2.34.1
+> from outside the ARM64/MPAM path. A more idiomatic approach might be to
+> use a stub to keep the header consistent with the implementation:
+> 
+>    #ifdef CONFIG_OF
+>    u32 cache_of_calculate_id(struct device_node *np);
+>    #else
+>    static inline u32 cache_of_calculate_id(struct device_node *np)
+>    {
+>        return ~0U;
+>    }
+>    #endif
+> 
+> Would that work for you?
+
+That's not necessary and doesn't solve the problem: the struct 
+device_node would be present in both branches, so that doesn't help. And 
+given there are no preprocessor protections for OF or ACPI in the whole 
+of mpam_devices.c, that's a non-issue, I'd say.
+
+> Otherwise I'm happy to just drop the guard in
+> the next version.
+
+So can you say whether you have a .config that does not build? Or was 
+that issue just pointed out by some picky AI review tool?
+Otherwise I would drop the guards, and wait for the kernel test robot or 
+Arnd's infamous randconfig builds to show up the exact problem.
+
+Cheers,
+Andre
+
+>>
+>>> +u32 cache_of_calculate_id(struct device_node *np);
+>>> +#endif
+>>>   /*
+>>>    * Get the cacheinfo structure for the cache associated with @cpu at
+>>>
+>>
+> 
 
