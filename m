@@ -1,134 +1,132 @@
-Received: from ixit.cz (ixit.cz [84.42.129.46])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-lf2-f12.google.com (mail-lf2-f12.google.com [74.125.229.204])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8F2944BFE93;
-	Tue, 15 Sep 2026 19:12:04 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=84.42.129.46
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 17BCE440A32
+	for <linux-arm-msm@vger.kernel.org>; Tue, 15 Sep 2026 19:15:41 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.229.204
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789499526; cv=none; b=orEGIQcW03bvCt1ae0aAea9HjGiSLhrMgpnBA1vMELIpeWzQziSgfe2dsV/k4OY+Oc0wMe4dr6jjKM2Fh3P5/xwlcrd8dh51UDcDuOeRebjq3T1KyS4yly93IfgQToS0+u8/lCdSDC4pOBEnl3fLYo26yGxgZb+owbdXhM+sbls=
+	t=1789499744; cv=none; b=jK/6qvzc8Oc+k7BjgIcoaGn18lGb/q22ga7qor9u2DFPHK9oJun+ea77eFLUBP405Y/grYP1kPgYF+ekuTWBJz972beEVL7BtyrvQ1MwUPajr40+d+ua/dKjKm1fR+NBViiVvJZaYCusHqHoCmA5Wxx5Qqc7r/x1d+6WBHk0FSQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789499526; c=relaxed/simple;
-	bh=f1zNdSJg1o8BUkFINZNhccQHuVqHZH4JwWbwqFiVZ/Y=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=gttphVN8zeBdp62LmXDdi7rWlTQf5TAgKhgXtFuFKbXDwGkj71c+D8JFlFvl5bFocb30gcjPn7K/iPaS6qcxSh/0ZjH+Z2N80MHOdaG/sNmFxEbjiuj/5BWVZipbwIWpN/uKnZ9+cDn+a6OBnYpFnwADQM3X1VEGkozMY02ivOQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=ixit.cz; spf=pass smtp.mailfrom=ixit.cz; dkim=pass (1024-bit key) header.d=ixit.cz header.i=@ixit.cz header.b=fUkPb4lN; arc=none smtp.client-ip=84.42.129.46
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=ixit.cz
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ixit.cz
+	s=arc-20240116; t=1789499744; c=relaxed/simple;
+	bh=AGk4y8oFpNibhByHKIxcRS7KnQx6z20Q8VC6dFl1tNo=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=kb0a9iPZbBB/4lk5z2fdtIevXl7gOeaoBnwWdWHHJ25Mae+0Kw5GlJG8GZGfKtvYVsD3kf7yrmdhAxe8ZfEGHEZ3grlJtEcnkJaFL9PyrPjp2AFYGSSpWsdU3BrbISP7jBIaMqGj41MwIhzTVqWi99DFgEp14Vzx9Jw7t/W5QRE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=linux-foundation.org; spf=pass smtp.mailfrom=linuxfoundation.org; dkim=pass (1024-bit key) header.d=linux-foundation.org header.i=@linux-foundation.org header.b=CD5U/VDG; arc=none smtp.client-ip=74.125.229.204
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=linux-foundation.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linuxfoundation.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=ixit.cz header.i=@ixit.cz header.b="fUkPb4lN"
-Received: from [IPV6:2a02:830a:f787:8f00:d622:eaa3:3dd6:8f5e] (unknown [IPv6:2a02:830a:f787:8f00:d622:eaa3:3dd6:8f5e])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange x25519)
-	(No client certificate requested)
-	by ixit.cz (Postfix) with ESMTPSA id 91E1353401FA;
-	Tue, 15 Sep 2026 21:11:55 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ixit.cz; s=dkim;
-	t=1789499515;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
-	bh=3tQYdPbdvmVniCNpMNauGvwGZKAhllS/E3SmEnCd4is=;
-	b=fUkPb4lNPhTbN0V8wIRStdLHse890Sj/XmLEcdv386dfr509pge0jqM1nSq+bc+9yxpmNH
-	BIgQHwuCWkMxoZt5Y0pIuocot4/N9LnzTCWwp6GNkVDeCFtEBIV6qooXMDMFRCsAkHwall
-	MWrClAwBUbYkfz3xapOyf5WGsk9nhvY=
-Message-ID: <a51ddd6e-cd20-4860-98a8-9cc759b7810b@ixit.cz>
-Date: Tue, 15 Sep 2026 21:11:55 +0200
+	dkim=pass (1024-bit key) header.d=linux-foundation.org header.i=@linux-foundation.org header.b="CD5U/VDG"
+Received: by mail-lf2-f12.google.com with SMTP id 2adb3069b0e04-5b74e0c2e4dso142853e87.0
+        for <linux-arm-msm@vger.kernel.org>; Tue, 15 Sep 2026 12:15:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linux-foundation.org; s=google; t=1789499740; x=1790104540; darn=vger.kernel.org;
+        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+         :references:mime-version:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=XFFk9jJtDswBQpA8QWIooO6lLG4HdlvPT/LqykRjG+U=;
+        b=CD5U/VDGypdXQcsqAmcpRH6R71bAOB9S4Dm3wqMqaq59Yhfvy8Bhw8Z7QD9p9kH5H5
+         cB99Htt31Uhqud5/Sh6FF9L4U3kWBF/TfLF0IO0zqtndlIZJE6XGeplUdZXN44ZHmFiR
+         4m9NC5e0a5bd9JmIvoawG1cdaFsvMc6ud18qU=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1789499740; x=1790104540;
+        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+         :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=XFFk9jJtDswBQpA8QWIooO6lLG4HdlvPT/LqykRjG+U=;
+        b=DN9aMAOoxJ1wbQkFshU6HFpCCEjsMs5FxoRzab1VTvl7CslR58M2UgzHR6ExS9DwPy
+         vmQADXL0Bxw6q3cUBBdldN1x8AWVfDGvyEublzKncZ8T6wZOFy94xUJj/E3XR7S+ySSW
+         6Jnyj9br6dm6RR/t6uVKH3mslXIMY5TDr9UCvpjd0SOHnfMJUaZEPfyr2pMwvbGOJ21d
+         AjxeI87+QpFL6bxc9C7NzBPZvIf10vKZYbgMYVgsqiFvyX32oY3EFORJAfTE7jce2/g9
+         w29ZVmv9QWa+oBCnAFDXa6uVie03R9+Au+dAWlqMVSCPbXDLjn1tPUB7OOFb+ivhAZ3x
+         798Q==
+X-Forwarded-Encrypted: i=1; AKwUvBz5PlE+cBiWm7Usg1jbxYc7YDJT/C5NUFIewnYsL/KWraNw2bTTKD0ZZ6Eb6HrUCcAf0bPwiTE1Rn3iL7Sx@vger.kernel.org
+X-Gm-Message-State: AFuF++liDxA5KgzS8IZbVnJXx/Q3E1KVTPkNEIs7r8/k9L7TQKVhxaCL
+	EWDEbHQRdXCiUwo+rpDl6UmtQ0GnLLZrKF3WKugkcbxqcN0iAZ3XpR918JRwEmrVX1eGEl3RgLP
+	ZyWXDnvjB0Emi
+X-Gm-Gg: AYBFou2Ly4X0gSOxvZ9wUFHl+Zq32ShgE8OVst2oX9YokLHXb35pV6hL8vZtf88y+bD
+	LJbuAIGlloQQRn6YO94cqHxT1DrbdEBtY7LHPTxSDKHBLM6XRFsiXY24agakHU9wAkqlsk/eQUH
+	BfKKRrjAvHtRaQ15plwXjVxrCwbYs9/1QgsfJpKrLYhdmjqrgP+NItRINN9gndO3rIW8uua4p9n
+	Om0JTAKpMGWV1w9X9laSSpFObU7nDwn6rtBqHBOcAWyTyUtueBtF/gXQuO7nfb6qMlK6hyU/108
+	6TVZ+nG4oXDDovF8WbtxABApai9BkiZK+ycs4/k2t3Mo66VMcK9YabiXimAxhha/6Uta4rUhu6e
+	ynjdMdmtiPhg9NKieAKrOu8XvnlNRnqJjX64HYYYsw/li6yY5XkqvgqXdlU2mKTGcEguI9OJXL0
+	ErW3P0xXqrYGdQibdIMptRbDqY7eZjiS07lvRVpHMxuWY5xbwqONiSmLW5f8sJ8oj1oRxwN/d+S
+	oyuipOSgAVkhlQsHOgRCWlT7zQMaK329QKmw0vTphg/YU17Sg==
+X-Received: by 2002:a05:6512:108a:b0:5b6:19e9:faee with SMTP id 2adb3069b0e04-5b8ae67d24emr4554416e87.7.1789499739894;
+        Tue, 15 Sep 2026 12:15:39 -0700 (PDT)
+Received: from mail-lf2-f12.google.com (mail-lf2-f12.google.com. [74.125.229.204])
+        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5b8b57d7570sm169689e87.50.2026.09.15.12.15.39
+        for <linux-arm-msm@vger.kernel.org>
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 15 Sep 2026 12:15:39 -0700 (PDT)
+Received: by mail-lf2-f12.google.com with SMTP id 2adb3069b0e04-5b5e4f15b78so93907e87.2
+        for <linux-arm-msm@vger.kernel.org>; Tue, 15 Sep 2026 12:15:39 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AKwUvBzFY3YzWy+2igBur9iOnMDoV+qQiF0XAZxLvZrP3TVp2hraIm1EIPik0Tw/yidxzoOomKkwUEVN7uBhsKLC@vger.kernel.org
+X-Received: by 2002:a17:906:7309:b0:c25:47a4:fedc with SMTP id
+ a640c23a62f3a-c29b839a057mr1176039766b.2.1789499355710; Tue, 15 Sep 2026
+ 12:09:15 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] arm64: dts: qcom: sdm845-lg: Enable NFC
-To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
- Paul Sajna <sajattack@postmarketos.org>,
- Bjorn Andersson <andersson@kernel.org>,
- Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
- Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
- linux-kernel@vger.kernel.org, phone-devel@vger.kernel.org,
- ~postmarketos/upstreaming@lists.sr.ht
-References: <20260906-sdm845-lg-judy-nfc-v2-1-63aeb7b1a5f6@postmarketos.org>
- <28fb606b-8631-483a-a02e-ecd16e9cc238@ixit.cz>
- <062d0fc6-dcae-4636-ae95-c8144317f0ff@oss.qualcomm.com>
-Content-Language: en-US, cs-CZ
-From: David Heidelberg <david@ixit.cz>
-Autocrypt: addr=david@ixit.cz; keydata=
- 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
-In-Reply-To: <062d0fc6-dcae-4636-ae95-c8144317f0ff@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+References: <20260915-work-fd-reserve-unify-folded-v1-0-4d5217d6b246@kernel.org>
+ <CAG48ez1RsdT=O=-0city3vjgWhDvY424KtTmrCJntWy5ds3HBQ@mail.gmail.com>
+In-Reply-To: <CAG48ez1RsdT=O=-0city3vjgWhDvY424KtTmrCJntWy5ds3HBQ@mail.gmail.com>
+From: Linus Torvalds <torvalds@linux-foundation.org>
+Date: Tue, 15 Sep 2026 12:08:57 -0700
+X-Gmail-Original-Message-ID: <CAHk-=wi3Kkqgfg6zUTHpQoZNL2VOB4vYqpi6RX0WNO++29UtyQ@mail.gmail.com>
+X-Gm-Features: AcwNN1VCm0LMG7z3Jned014oJh6WBcf4uOx0OBk98_hrtHKbrhcQiMMJ_A-fmB0
+Message-ID: <CAHk-=wi3Kkqgfg6zUTHpQoZNL2VOB4vYqpi6RX0WNO++29UtyQ@mail.gmail.com>
+Subject: Re: [PATCH RFC POC 00/50] file: handle files on syscall exit
+To: Jann Horn <jannh@google.com>
+Cc: Christian Brauner <brauner@kernel.org>, Alexander Viro <viro@zeniv.linux.org.uk>, Jan Kara <jack@suse.cz>, 
+	Ingo Molnar <mingo@redhat.com>, Peter Zijlstra <peterz@infradead.org>, linux-fsdevel@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, linux-mm@kvack.org, 
+	Oleg Nesterov <oleg@redhat.com>, linux-alpha@vger.kernel.org, 
+	linux-snps-arc@lists.infradead.org, linux-arm-kernel@lists.infradead.org, 
+	linux-csky@vger.kernel.org, linux-hexagon@vger.kernel.org, 
+	linux-m68k@lists.linux-m68k.org, linux-mips@vger.kernel.org, 
+	linux-openrisc@vger.kernel.org, linux-parisc@vger.kernel.org, 
+	linux-sh@vger.kernel.org, sparclinux@vger.kernel.org, 
+	linux-um@lists.infradead.org, Jens Axboe <axboe@kernel.dk>, io-uring@vger.kernel.org, 
+	netdev@vger.kernel.org, linuxppc-dev@lists.ozlabs.org, 
+	linux-gpio@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
+	dri-devel@lists.freedesktop.org, bpf@vger.kernel.org, 
+	David Airlie <airlied@redhat.com>, virtualization@lists.linux.dev, kvm@vger.kernel.org, 
+	kexec@lists.infradead.org, linux-hyperv@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
 
-On 09/09/2026 15:16, Konrad Dybcio wrote:
-> On 9/6/26 11:32 PM, David Heidelberg wrote:
->> On 06/09/2026 23:11, Paul Sajna wrote:
->>> Add the i2c and tlmm nodes to support the NXP PN547 NFC chip
->>>
->>> Downstream dtsi for reference:
->>> https://github.com/LineageOS/android_kernel_lge_sdm845/blob/lineage-22.2/arch/arm64/boot/dts/lge/sdm845-judy/sdm845-judyln_lao_com/sdm845-judyln_lao_com-nfc.dtsi
->>>
->>> Signed-off-by: Paul Sajna <sajattack@postmarketos.org>
->>> ---
-> 
-> [...]
-> 
->>> +    nfc_default: nfc-default-state {
->>> +        pins = "gpio12", "gpio62", "gpio63", "gpio116";
->>
->> here the verbosity may not be bad (device-tree functions as documentation too)
->> gpio116 is associated with eSE NFC part (just guessing, but... it worked before, so), and generally the pn547 doesn't need it at all to work.
->>
->> TBH not sure if there or what consensus is here about this. The eSE needs it, but we don't have the driver thus also no integration with NFC part.
-> 
-> The eSE driver would still be acting on the NFC node, right?
+On Tue, 15 Sept 2026 at 10:52, Jann Horn <jannh@google.com> wrote:
+>
+> Is this mainly about stuff like "we installed a file descriptor and
+> then the following put_user() failed"? Because if so, I think a nicer
+> fix would be to have a policy of "if userspace provides unwritable
+> memory to a syscall, just keep going and pretend the access worked",
+> and maybe have a sysctl that kills the process when this happens to
+> emphasize that userspace should not be doing this.
 
-So far that's the Android design. So, yes.
+We've done that before, where we just ignore put_user() errors and the
+user gets whatever the user gets.
 
-David
+It is maybe not optimal, but it's fine. You can find quite a lot of
+unchecked put_user() calls with a pattern like
 
-> 
-> Konrad
+        git grep '^[[:space:]]*put_user(.*);'
 
+and some of them are in core code - see the two in kernel/fork.c, for example.
+
+One of them says "if userspace has not set up a proper pointer then
+tough luck". The other one doesn't even bother with a comment.
+
+The scheduler has two cases too, although one of them is admittedly
+for another error case.
+
+So yes, saying "if you pass bogus arguments, you get what you get" is
+a valid model. It's perhaps not the *preferred* model, but it's not
+wrong.
+
+It *would* be wrong to take code that already has error handling and
+remove the error handling, though.
+
+                  Linus
