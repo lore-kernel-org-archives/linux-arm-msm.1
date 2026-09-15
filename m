@@ -1,87 +1,87 @@
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AC7E64779A1
-	for <linux-arm-msm@vger.kernel.org>; Tue, 15 Sep 2026 09:34:48 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1D3E03B3899
+	for <linux-arm-msm@vger.kernel.org>; Tue, 15 Sep 2026 09:34:52 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789464891; cv=none; b=u9CGr9CqVht7CVkum9EhRaxo3kKB/Be8jYdyoWeYtYDwSvAaUHxptghKU8jMhf89JGu+Wm9VYTZbc5uX9dS+1h+Qfu21SOsnIHsX30Aq8Bszfvcwz4UmRl+JO9l80yf/PQsPoR+/0qaUKdjzXmOvduiiziFAKUwxt2+DtgRbsDg=
+	t=1789464897; cv=none; b=kYWKbeGac5tY3iJH0wAL63TcrGPaBsEP4hZuQMYyN1N6LBVAdNdSS4hvbYwMCmmKQlsPFtrXhRzlvrOvZpGmT4yrOk9pAym5bBXjhKsb3VVm4AeUaf3F8RwJ6hLnA1Fc2ACFv6HKTWQM2MXhkrypxvci840LnpQFQnLLZjZDXRc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789464891; c=relaxed/simple;
-	bh=+5+GPUnn5LU9//MFVc3bOF+EnEW0tZ9aBxtawXQ/5LI=;
+	s=arc-20240116; t=1789464897; c=relaxed/simple;
+	bh=OSz6slksdIAoSzgmisjbvzEKnbj2o8gL8+vwRbByiik=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=b1DljNzEpUou9eUevnjlz3rueiHtZx5hAH/I12wy7cYfK27dDbjC2ktADn8Rc4ADZtxX47wfTYu/aQm5i+gu0DhzfzC8Nt6KA8r2Sk3LnWdWPdMto8Aat9ofOzqeXfeDTdeVQKgAF7o9FuPcOhKvcgZPh6lPZpWyyeNYo+QRMrE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=lYF/Mqlp; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=FQHRGUf6; arc=none smtp.client-ip=205.220.168.131
+	 In-Reply-To:To:Cc; b=G+6pFfkJRBhHfB3dotB1jI1F96TbkMIpAua1w6DBiuSkjItRFowmKfwP4Ptqhzlxx9gKtgwHUbD63suWZQ8WT6zJeoQqJsqb5awzHCD+uufT0Bpbze2HGwSX3WyiJAGJ8tWhqs8ND33gK8yGkb15UuKfr+CSV5A7LJ/DnCRIEMk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=Nrkmyge7; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=i4re2toR; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="lYF/Mqlp";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="FQHRGUf6"
-Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68F6Z80n2415185
-	for <linux-arm-msm@vger.kernel.org>; Tue, 15 Sep 2026 09:34:47 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="Nrkmyge7";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="i4re2toR"
+Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68F7Wi5N1790771
+	for <linux-arm-msm@vger.kernel.org>; Tue, 15 Sep 2026 09:34:52 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	Gfeh+w8TMgfcF1MJR/jM8lM4OAFc6Lpf2PZYXC9fYpE=; b=lYF/MqlpHlzEndij
-	c//1aex4/q9f0UfGCqSXtLnb0cJacGr+IGQnzbJtt5gjoCIAVUlrPA6EimTzH1M8
-	jikyaPDPk3KO2vo3LJ6WoiDnrz0gYKgQNGa1ZpaocwOXFHQ9vetpcCxkrtIaBi+A
-	9Fm3d+APW1kIMjFmMm0sA+701KgsepZkKsaruYNT7q8a0d6vMdTOYDG9u/wXtRFq
-	LZcFQ+7XC39K3OdMvcHs1I6sPtn1e4rgBQNBRnh2AlC96M5z3LFU9SQ40n+1XmtZ
-	VDv2Ovir5a9biHYvzwVlY4jZDhNZO2CqLxbJZDKRXTKCKHKJdMvSsar9TP7veMh+
-	iUaqKQ==
-Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com [209.85.222.199])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gpxyd94u7-1
+	GtH2QxNxmmEMFEdaZRJ4xZn6e0M0SKZpckqDapyPseE=; b=Nrkmyge7ELvAg9Rq
+	EZb9IYmm3ElvDzPi7X6TknVXs5VesFqA33aI+BMl8JLopDY6Tunjycz8Dabz+d/H
+	v4lPNkHmVwTWo7eLbLpTIbhWVx8dNKYsUmsdLYmL6jLPAUqTFUqcQM+r+de9Lxrh
+	FmBEOyq+7o0+n5+HtYNv4nBqi1SRAoXDhhC+EzOX+NGLeP0FLDaVgb+EuyJtZ7xQ
+	oVarFTj6ZKJpOSyLdEJ20Ak9CzlMQB4Zy+wNBDUPRxDlrW7ukCint2PUZw/l0RoT
+	YgWQYabwkxUAKT/scXeKAdbJipaBYfGC3nPFrOqgPCWFRt/d1TASd6ML4in4CezM
+	dClYBA==
+Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com [209.85.222.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gq1qp8k5j-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 15 Sep 2026 09:34:46 +0000 (GMT)
-Received: by mail-qk1-f199.google.com with SMTP id af79cd13be357-93a1b824e84so432160185a.2
-        for <linux-arm-msm@vger.kernel.org>; Tue, 15 Sep 2026 02:34:46 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Tue, 15 Sep 2026 09:34:51 +0000 (GMT)
+Received: by mail-qk1-f197.google.com with SMTP id af79cd13be357-93a00c70d28so469763885a.0
+        for <linux-arm-msm@vger.kernel.org>; Tue, 15 Sep 2026 02:34:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1789464886; x=1790069686; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1789464891; x=1790069691; darn=vger.kernel.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=Gfeh+w8TMgfcF1MJR/jM8lM4OAFc6Lpf2PZYXC9fYpE=;
-        b=FQHRGUf6JJHBwAW5pt37NsD6twr5HaF+eTaFTrXdEW/3NgxRAMLzSmDv2YvFLcSdQC
-         lNJ/A3fVYrL2z0xYWbPF6+ECmNYhlAN/2dVSRCXJ7s47EIzA9R5uEM1c1ANv9w/Gjvrj
-         HrSpXbwc9apdxHj9eSPiUNiO3dvgVsTplykKpyMxUD+W/zn865bF2zbejNrIF5iPLbqz
-         QeDvCka4kaooSAqHFdGgx2v2v0lXTCImyfPWlEdDBmNBs0hapaaQ+ZFS90fvwUUz4Ylf
-         pwjbhOTgd1sKun/MlhTdOcVkVAaVqzjDAUkzZkci8JyplWx6J/jt8DxYmCBQf55YYZnr
-         aetA==
+        bh=GtH2QxNxmmEMFEdaZRJ4xZn6e0M0SKZpckqDapyPseE=;
+        b=i4re2toRBy4AMowcNoMrpcxpipQRllqfc0P7Lvg8CCtmGlEKK4Cz9qiTx3bOgVh39K
+         KiflFRPS3rpNyg/DS6zSBMcXUuWJtjGUWxw+FgscSRxDbSMLY1qoBb3DJ2D+pCTOrM4o
+         e7A3zcZSbhGVzncvn8LFW7Y3J94QNmsGxZz7+KWqBekRZLF/erYJqmHX4cS2A6rc7ltw
+         xWkehN7J6l68zCL03dzwTXbrtICmepW5l8kuMK99JRwRtg00I6rOYfmFjm1+Y2uK444S
+         3XW1/Ro2erE/Z7crLBc4lu3Xv10sQ2KDlkx41LOO5TffECeSkoAGLM6kjN8ymPyPGFVs
+         GCoA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1789464886; x=1790069686;
+        d=1e100.net; s=20260707; t=1789464891; x=1790069691;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=Gfeh+w8TMgfcF1MJR/jM8lM4OAFc6Lpf2PZYXC9fYpE=;
-        b=pykY8JMBW6xjgvbMIWGY/0qAfF/vOjMZxtKdQtZJZQeQVm0MfOhBxb9HJpMPKM4a8X
-         Rfrtig2OnEdAvCPPDqxrbR3HF2tp2xEqyLFeBfw9UL+Wt9y+NPfL4HEugZv44LezWi1h
-         JZaeWqzkSBRB9J30PDwosTsJEwAuB1YvLD4PS4s2FJxi+tQT1YboZ8k8n5tSrCDtIgmW
-         EjDxY9mnT9tg9xmQqWmnqPqJ+xSqE7iuOJYKDyPAitRGrmqqpA2vH7+dfeHzizqT6bzo
-         E5tJmK1QbbnmgyJn1D39tGIK3OVgCKSbfUwnyvI55KkKa5+UCh1uIMxaZagjFoMN18xo
-         gn7Q==
-X-Forwarded-Encrypted: i=1; AKwUvBzjxUOB2xdtJU1n5ze5o0LCErZSBxJ1CYkdltk0v+GUPcQzd6IDKv0/28T6ruQGeF/iSVa/wZoHHhStJtH/@vger.kernel.org
-X-Gm-Message-State: AFuF++lZXhfMpmRRAgRvCcI1X05hylmAA/VwDs87SVqZr/i0G2Oxbhc6
-	kkG/iZn4+O6HiHFnBPjqIXuxj6zPEtgR+2RLkqda5lyM5qsh5nhnmeSGT7HlIMgjVvuN2x5YaKu
-	QQygttkxPNVSdvrUx11fwSOMPNW5FwKc/FpSjk6AsJYTCYHw/oIYp5+UcdPV32KOZ8SUu
-X-Gm-Gg: AYBFou0IqvJg6hdJtijwTFNZ8KvpNDwnk1ZDJ0COZ5tSDHPSca+bvYEk1MoysJcioD3
-	YWjjy+Y3HuBefmKbFv6Up+K2qcu6WRjRQI8hWOPJ9ELbMkI3Jzo3IeZBPxqa8+L6r4D33KHErbX
-	y/so6d5ferP05vCCrqXW2ALU3gCqcxpc0xKlz8eyh7OZP2ER0xe0KEg2s7gIu+3SOb2pNyUYx0w
-	90ysvc026V/2JVhbmJDFwi4AWTyqOmVM7hciftG2wNZj/sYW12H3h1OR5XDR0Ajli51C34X5iZi
-	fyP6iNNqnfRQzlLtHCakMJzI0chXY3441uFK9ncwVN3BzAialFfMRZFTcqTC5wZGZMgrI87/bVo
-	DLQLVBvxZNjcroTP0Lc712o80kqOxK9iVBkBJi358cBgpiwYvd7VyschsNsT6DsdfP5I3
-X-Received: by 2002:a05:620a:1726:b0:93a:10f5:6a5b with SMTP id af79cd13be357-93a29a18414mr948506885a.45.1789464886006;
-        Tue, 15 Sep 2026 02:34:46 -0700 (PDT)
-X-Received: by 2002:a05:620a:1726:b0:93a:10f5:6a5b with SMTP id af79cd13be357-93a29a18414mr948503885a.45.1789464885572;
-        Tue, 15 Sep 2026 02:34:45 -0700 (PDT)
+        bh=GtH2QxNxmmEMFEdaZRJ4xZn6e0M0SKZpckqDapyPseE=;
+        b=KzVQCczaQz6ftLWPiiS006MlCnwBXWZYNo3pJyTyJ3N0PujiAk/tj7Ux8uuUu0YqPs
+         MLV+H+0+pUGXrHryjaGCrgtc8jidujEAYHpKdd/tfShWCnrXG/0Rur/KYSTHN++HAtcc
+         U7GIfbY3UMQ0A2i60VJW05rKvptQONz20IZCPSJQSQuofQtFuEDLn7bKu8sU8U4rnQvL
+         LZYEZyq5E7iwX5Nc/s1Qae/6y4YGr/wXX77bbTE81Gsn4SJDLDlsiqKVBcCwjAGTdbnC
+         a6qJC1RPcKaQgMgvhAiZV+PZj3uYj6Tn85gy0Cr0uiqlLyMNU7mzMrxO3h+GQltomKXh
+         Cy8Q==
+X-Forwarded-Encrypted: i=1; AKwUvBzqgIr0IoeAkOPGuKkCYGpbXsOd0Ylu5R9cK26roeC/yfHsvPWJBvwFyYmJzCJEyEcxQanNiPATzVkrE5hP@vger.kernel.org
+X-Gm-Message-State: AFuF++mlUr1fiM2BXj4P1TxrCC2zMHF7Q7iD/QXY+f9IeWEeBQHQFL2h
+	W9FJjWc8pec2ahFEkqMgiRvOEXPNZsaer0MUCiJX8KUd/56IMXD4ZadnSzHC7KGyoop1cs9PvoV
+	VqAvBxmAViL407D0gFSLjAto3/zOeKlAyWSnrr5EbP66kVawKEVvNtN5g+oo+0jMY9Mxy
+X-Gm-Gg: AYBFou2xwx8TRvGlc6BCpMyX4KTePXFEBMa2oGlFaFXsa3nfFhj50NF6Y6LBEbVKHuf
+	LUg6s89k9nQ2nrIk27uhVdAig4OQYfPWYvTN4w/TQMGnVpRxaoLdTxnEgrj9OTBaOc56f2cnawn
+	JrOCJ2wC1MkQ7jxUnbNrgqYhxCrPyhJAhxoO53WbBkt2nf8hzg8kQrwwAZ6Wm3VbLE1pcVeefqN
+	g1/QxUwLaC7k3p/cXzv0+BZbMee6mumfX1cElIQVBdSWILeaNbWcFq3F/UruyMt3V+7osrNecjf
+	JTyZjVWEP1ko7bbWuKSynnw8wBcvfTpfxSSJETnTlkzBdtk31rsIRka4HqAq1B6y68WV7IW28b8
+	UIBUh2c1NtJkj+EtzXMaeqrRCa+g28dgQDmSu9Oa/sf9+8FQCK46hG9afzXlI+cajiJE4
+X-Received: by 2002:a05:620a:1d0c:b0:93a:1b82:4962 with SMTP id af79cd13be357-93a29a39ce8mr907220285a.47.1789464890718;
+        Tue, 15 Sep 2026 02:34:50 -0700 (PDT)
+X-Received: by 2002:a05:620a:1d0c:b0:93a:1b82:4962 with SMTP id af79cd13be357-93a29a39ce8mr907217185a.47.1789464890363;
+        Tue, 15 Sep 2026 02:34:50 -0700 (PDT)
 Received: from WENMLIU-LAB01.ap.qualcomm.com (Global_NAT1_IAD_FW.qualcomm.com. [129.46.232.65])
-        by smtp.gmail.com with ESMTPSA id af79cd13be357-93a26921baesm447229985a.24.2026.09.15.02.34.41
+        by smtp.gmail.com with ESMTPSA id af79cd13be357-93a26921baesm447229985a.24.2026.09.15.02.34.45
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 15 Sep 2026 02:34:45 -0700 (PDT)
+        Tue, 15 Sep 2026 02:34:49 -0700 (PDT)
 From: Wenmeng Liu <wenmeng.liu@oss.qualcomm.com>
-Date: Tue, 15 Sep 2026 17:34:14 +0800
-Subject: [PATCH 4/6] media: qcom: camss: vfe: Add support for VFE 900
+Date: Tue, 15 Sep 2026 17:34:15 +0800
+Subject: [PATCH 5/6] media: qcom: camss: tpg: Add support for TPG v2.5.0
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -90,7 +90,7 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260915-nord-v1-4-20db41a7f1ff@oss.qualcomm.com>
+Message-Id: <20260915-nord-v1-5-20db41a7f1ff@oss.qualcomm.com>
 References: <20260915-nord-v1-0-20db41a7f1ff@oss.qualcomm.com>
 In-Reply-To: <20260915-nord-v1-0-20db41a7f1ff@oss.qualcomm.com>
 To: Bryan O'Donoghue <bod@kernel.org>,
@@ -105,218 +105,108 @@ Cc: linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
         devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
         Wenmeng Liu <wenmeng.liu@oss.qualcomm.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1789464860; l=5828;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1789464860; l=2550;
  i=wenmeng.liu@oss.qualcomm.com; s=20250925; h=from:subject:message-id;
- bh=+5+GPUnn5LU9//MFVc3bOF+EnEW0tZ9aBxtawXQ/5LI=;
- b=+iz1rVOaH7QaiXL/nV9zJkgPx14xigxcbHgPOgPuebH9QUxfedpj0xBCh92I4dbnQoyQ2mDpV
- dym6dz5aH3EDQb/lG5cQ0vBxfExGx5JX9Xxbnq9PmEia+ceykdt+uN+
+ bh=OSz6slksdIAoSzgmisjbvzEKnbj2o8gL8+vwRbByiik=;
+ b=svOSthiaPLI7WPtzxH7/4SGIVTAaZ0rAoZ3WLtiGdemaUdD4z7/l604Ra4X1TiyGnbwOljUWE
+ hZ5xhzaTLPgD4CN1qnY/kBO5TSopPXTsSXc+0Ghvf7stvSaRDcLRMwV
 X-Developer-Key: i=wenmeng.liu@oss.qualcomm.com; a=ed25519;
  pk=fQJjf9C3jGDjE1zj2kO3NQLTbQEaZObVcXAzx5WLPX0=
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTE1MDEzNyBTYWx0ZWRfX4FMDK7WIz8ER
- 73Otwbotz/9di1eUBoa6oOkqry8FYWLsTAhefYhUqw3gCenFtsSsShRVOkdTPTbLjZGrfNQKi0J
- /JWZzVS8H9EEyGMfYt5ZN0qSBkQgHlE=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTE1MDEzNyBTYWx0ZWRfX+6KgODnAExW8
- plIJWG/dAxS1gmNYx1h6uh0mPYACjd8gyXjHtzXGDtvd8ZIetlj2LYWIplMKEmoNEdmBlzJDd7J
- /f9tM5We15OCrV+OPtbsiy6hP655Orr4uZR8VnfjURQa5tBhqegT2uz51ptwLo9MN2K0Ij3VAFN
- sf4R+8HDw8qe4Zx0swtsgzgiOHXkX/sz5iWfAw40QtlPgymdHDmWrh3mWR0jDVaMeiDJqvsHcbi
- aBAGRA8Eoew2qRFOM7GrvjOhRbDhCy/c9D6139sfaNw000Hp3uQLYoKKhAOq9XZmJY8p/G6g6RQ
- n1SuAx0JihpwzkvNlzANoGbOOckOmOo2JtnwSXvXBMyitcTigOc6iUuQwp7/Xm7wGVLvAPCdUea
- RZzhPWePwmTLusUKIeVqpJdumoWteZDCA8RB5yfwdbccBTzvVtpCBEstUNbmFP4rPxShrD/Wxme
- 0b8OOBtgFSRxJ+BlBdw==
-X-Proofpoint-ORIG-GUID: gBXv77kH_P1skBly_Z5FDyW4ab22ea_8
-X-Authority-Analysis: v=2.4 cv=LYepeTfi c=1 sm=1 tr=0 ts=6aa91136 cx=c_pps
- a=HLyN3IcIa5EE8TELMZ618Q==:117 a=C3Dk8TwHQYyIj7nOf9RCJw==:17
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTE1MDEzNyBTYWx0ZWRfX6iLMJ+Pb5MAO
+ mbvzTqtl3rkLnXkCY1vZhb/YCBf+UpbNQkXjyuBPEL22iBZTaW5co6YsUs3kQ1AUbpftBGBAgMn
+ L5WdT3dC5EEuYXPoLjNz1JF1+OOZ1TU=
+X-Authority-Analysis: v=2.4 cv=I4Xw19gg c=1 sm=1 tr=0 ts=6aa9113b cx=c_pps
+ a=50t2pK5VMbmlHzFWWp8p/g==:117 a=C3Dk8TwHQYyIj7nOf9RCJw==:17
  a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
- a=EUspDBNiAAAA:8 a=qXagEdxrQNsuUdFw53gA:9 a=QEXdDO2ut3YA:10
- a=bTQJ7kPSJx9SKPbeHEYW:22
-X-Proofpoint-GUID: gBXv77kH_P1skBly_Z5FDyW4ab22ea_8
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
+ a=EUspDBNiAAAA:8 a=kKMPr9q_OXaYOzBTrtwA:9 a=QEXdDO2ut3YA:10
+ a=IoWCM6iH3mJn3m4BftBB:22
+X-Proofpoint-ORIG-GUID: vOwpYd9bLjr4r3Y-RVLz1jgirTqpQ-IB
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTE1MDEzNyBTYWx0ZWRfXwwn1h8M6ejqp
+ uMQWubzxLESSzXmkeIfVLzW4IJXW7KFGr61cG/JcZrbOzhRLl7ZiD0iqmVszinI6xcFupaaNN+j
+ Sm7AJgJfPSmHbKRXgdu5DnMY0rIGqn5YFI0vp2oPQyqoV+oaDn1Wl47CEtNny7zgQtWeTcQ+PVh
+ g7ua+j0yEbxyx5gjK4EeGs0I8lKV7Wu84JYZ4UcPlID0SMewnzO/Py1K9tXVrQCcCEFAh7zcIZL
+ JiqQ+TYJaWX8Xl7fbR8tq45eKI/1K6gWZNU2zHy/tcARF1Qp/ybhA03pRpZTVhDmzqmW3bu5UDz
+ P5OU+QwBwpzRWJVxQmM5ACjvxTKAidzcJiDQ4J06+xQIPjHNpHeYeA60kBJUNRGYu6de8oluFFI
+ /1jvTVu7UpQ0Y+2uf+Tdxa9bP0QXKkvMULRp8fhdKYT7/Gd9yD9cXJ4jg6DZRDP/CDHyJZh7629
+ coha6k4sckVQ5uF/4zQ==
+X-Proofpoint-GUID: vOwpYd9bLjr4r3Y-RVLz1jgirTqpQ-IB
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-09-15_02,2026-09-14_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0 clxscore=1015 suspectscore=0 adultscore=0 impostorscore=0
- malwarescore=0 priorityscore=1501 bulkscore=0 phishscore=0 spamscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609150137
+ lowpriorityscore=0 suspectscore=0 phishscore=0 clxscore=1015
+ priorityscore=1501 bulkscore=0 malwarescore=0 impostorscore=0 adultscore=0
+ spamscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
+ adjust=0 reason=mlx scancount=1 engine=8.22.0-2609040000
+ definitions=main-2609150137
 
-The VFE on the Nord platform reuses the gen4 VFE driver but places its
-bus registers at a different base and does not implement the write
-master CGC override register. Add a VFE 900 variant to the gen4 driver
-to handle the different bus register base, the separate location of the
-test bus control register, and to skip the missing CGC override
-register.
-
-In addition, the v900 ADDR_IMAGE register takes a full byte address
-rather than the 256-byte-unit encoding used by the gen4 baseline, and
-the full IFE write master client map places the RDI clients at index 28
-(the lite instances keep RDI0 at client 0).
+Add support for TPG v2.5.0, which moves the stream enable bit out of
+TPG_CTRL into a dedicated command register (TPG_CTRL_CMD). Branch
+tpg_stream_on() on the runtime hw_version so the generator is enabled
+through the command register on v2.5.0 and through TPG_CTRL on earlier
+revisions; the reset bit is unchanged.
 
 Signed-off-by: Wenmeng Liu <wenmeng.liu@oss.qualcomm.com>
 ---
- drivers/media/platform/qcom/camss/camss-vfe-gen4.c | 102 +++++++++++++++++++--
- drivers/media/platform/qcom/camss/camss.h          |   1 +
- 2 files changed, 95 insertions(+), 8 deletions(-)
+ drivers/media/platform/qcom/camss/camss-tpg-gen1.c | 21 +++++++++++++++++----
+ 1 file changed, 17 insertions(+), 4 deletions(-)
 
-diff --git a/drivers/media/platform/qcom/camss/camss-vfe-gen4.c b/drivers/media/platform/qcom/camss/camss-vfe-gen4.c
-index d73d70898710a2127c606ac8459a1d8c747a2f7c..f1429a6d2be54c415175a0129778f4b3a232564f 100644
---- a/drivers/media/platform/qcom/camss/camss-vfe-gen4.c
-+++ b/drivers/media/platform/qcom/camss/camss-vfe-gen4.c
-@@ -13,13 +13,77 @@
- #include "camss.h"
- #include "camss-vfe.h"
+diff --git a/drivers/media/platform/qcom/camss/camss-tpg-gen1.c b/drivers/media/platform/qcom/camss/camss-tpg-gen1.c
+index d29de5f93c18ee3c1778dc0626e8c198f354eb1f..de7ef5b8ff5fbd22e5659e5c896c5484a5c818b0 100644
+--- a/drivers/media/platform/qcom/camss/camss-tpg-gen1.c
++++ b/drivers/media/platform/qcom/camss/camss-tpg-gen1.c
+@@ -22,6 +22,7 @@
  
-+struct vfe_gen4_hw_info {
-+	u32 bus_reg_base;
-+	u32 bus_reg_base_lite;
-+	s32 test_bus_ctrl_offset; /* relative to the bus register base */
-+	u8 rdi_wm_offset;
-+	u8 rdi_wm_offset_lite;
-+	u8 addr_shift; /* ADDR_IMAGE address unit */
-+	bool has_wm_cgc_override;
-+};
-+
-+static const struct vfe_gen4_hw_info vfe_900_hw_info = {
-+	.bus_reg_base = 0xA00,
-+	.bus_reg_base_lite = 0x700,
-+	.test_bus_ctrl_offset = -0x1BC,
-+	.rdi_wm_offset = 0x1C,
-+	.rdi_wm_offset_lite = 0x0,
-+	.addr_shift = 0,
-+	.has_wm_cgc_override = false,
-+};
-+
-+static const struct vfe_gen4_hw_info vfe_1080_hw_info = {
-+	.bus_reg_base = 0x1000,
-+	.bus_reg_base_lite = 0x800,
-+	.test_bus_ctrl_offset = 0x128,
-+	.rdi_wm_offset = 0x17,
-+	.rdi_wm_offset_lite = 0x0,
-+	.addr_shift = 8,
-+	.has_wm_cgc_override = true,
-+};
-+
-+static inline const struct vfe_gen4_hw_info *
-+vfe_gen4_get_hw_info(struct vfe_device *vfe)
-+{
-+	switch (vfe->camss->res->version) {
-+	case CAMSS_NORD:
-+		return &vfe_900_hw_info;
-+	default:
-+		return &vfe_1080_hw_info;
-+	}
-+}
-+
-+static inline u32 vfe_gen4_bus_reg_base(struct vfe_device *vfe)
-+{
-+	const struct vfe_gen4_hw_info *hw_info = vfe_gen4_get_hw_info(vfe);
-+
-+	return vfe_is_lite(vfe) ? hw_info->bus_reg_base_lite :
-+		hw_info->bus_reg_base;
-+}
-+
-+static inline u32 vfe_gen4_test_bus_ctrl(struct vfe_device *vfe)
-+{
-+	const struct vfe_gen4_hw_info *hw_info = vfe_gen4_get_hw_info(vfe);
-+
-+	return vfe_gen4_bus_reg_base(vfe) + hw_info->test_bus_ctrl_offset;
-+}
-+
-+static inline u8 vfe_gen4_rdi_wm(struct vfe_device *vfe, u8 rdi)
-+{
-+	const struct vfe_gen4_hw_info *hw_info = vfe_gen4_get_hw_info(vfe);
-+
-+	return rdi + (vfe_is_lite(vfe) ? hw_info->rdi_wm_offset_lite :
-+		hw_info->rdi_wm_offset);
-+}
-+
- /* VFE-gen4 Bus Register Base Addresses */
--#define BUS_REG_BASE				(vfe_is_lite(vfe) ? 0x800 : 0x1000)
-+#define BUS_REG_BASE				(vfe_gen4_bus_reg_base(vfe))
+ #define TPG_HW_VER_2_0_0                TPG_HW_VER(2, 0, 0)
+ #define TPG_HW_VER_2_1_0                TPG_HW_VER(2, 1, 0)
++#define TPG_HW_VER_2_5_0                TPG_HW_VER(2, 5, 0)
  
- #define VFE_BUS_WM_CGC_OVERRIDE			(BUS_REG_BASE + 0x08)
- #define		WM_CGC_OVERRIDE_ALL			(0x7FFFFFF)
+ #define TPG_HW_STATUS		0x4
  
--#define VFE_BUS_WM_TEST_BUS_CTRL		(BUS_REG_BASE + 0x128)
-+#define VFE_BUS_WM_TEST_BUS_CTRL		(vfe_gen4_test_bus_ctrl(vfe))
+@@ -33,7 +34,14 @@
+ # define TPG_CTRL_OVERLAP_SHDR_EN	BIT(10)
+ # define TPG_CTRL_NUM_ACTIVE_VC		GENMASK(31, 30)
  
- #define VFE_BUS_WM_CFG(n)			(BUS_REG_BASE + 0x500 + (n) * 0x100)
- #define		WM_CFG_EN				BIT(0)
-@@ -83,18 +147,36 @@
-  * RDI3			3
-  * GAMMA		4
-  * STATES_BE		5
-+ *
-+ * v900 full IFE write master client map: the RDI clients start at 28,
-+ * after the 28 image/stats clients (0-27):
-+ *
-+ * MAIN C0/C1/C2/UV		0-3
-+ * PIXEL_RAW			4
-+ * W_IR				5
-+ * AI_1 C0/C1/C2/UV		6-9
-+ * AI_2 C0/C1/C2/UV		10-13
-+ * HV_DS16 / HV_DS4		14-15
-+ * STATS BG_IR..BLTM		16-27
-+ * RDI0				28
-+ * RDI1				29
-+ * RDI2				30
-+ * ... RDI11			39
-+ *
-+ * v900 IFE Lite matches the generic map above (RDI0 at client 0).
-  */
--#define RDI_WM(n) ((vfe_is_lite(vfe) ? 0x0 : 0x17) + (n))
+-#define TPG_CLEAR		0x1F4
++/*
++ * Command register at 0x1F4. Earlier TPG revisions only expose HW_RESET[0]
++ * here; v2.5.0 adds TEST_EN[4], moving the generator enable out of TPG_CTRL.
++ * HW_RESET[0] is unchanged, so the reset path is revision-independent.
++ */
++#define TPG_CTRL_CMD		0x1F4
++# define TPG_CTRL_CMD_HW_RESET		BIT(0)
++# define TPG_CTRL_CMD_TEST_EN		BIT(4)
  
- static void vfe_wm_start(struct vfe_device *vfe, u8 wm, struct vfe_line *line)
- {
- 	struct v4l2_pix_format_mplane *pix =
- 		&line->video_out.active_fmt.fmt.pix_mp;
+ /* TPG VC-based registers */
+ #define TPG_VC_n_GAIN_CFG(n)		(0x60 + (n) * 0x60)
+@@ -164,18 +172,23 @@ static int tpg_stream_on(struct tpg_device *tpg)
+ 	}
  
--	wm = RDI_WM(wm);
-+	wm = vfe_gen4_rdi_wm(vfe, wm);
+ 	/* Global TPG control */
+-	val = FIELD_PREP(TPG_CTRL_TEST_EN, 1) |
+-	      FIELD_PREP(TPG_CTRL_NUM_ACTIVE_LANES, lane_cnt - 1) |
++	val = FIELD_PREP(TPG_CTRL_NUM_ACTIVE_LANES, lane_cnt - 1) |
+ 	      FIELD_PREP(TPG_CTRL_NUM_ACTIVE_VC, last_vc);
++	if (tpg->hw_version < TPG_HW_VER_2_5_0)
++		val |= FIELD_PREP(TPG_CTRL_TEST_EN, 1);
+ 	writel(val, tpg->base + TPG_CTRL);
  
- 	/* no clock gating at bus input */
--	writel(WM_CGC_OVERRIDE_ALL, vfe->base + VFE_BUS_WM_CGC_OVERRIDE);
-+	if (vfe_gen4_get_hw_info(vfe)->has_wm_cgc_override)
-+		writel(WM_CGC_OVERRIDE_ALL,
-+		       vfe->base + VFE_BUS_WM_CGC_OVERRIDE);
- 
- 	writel(0x0, vfe->base + VFE_BUS_WM_TEST_BUS_CTRL);
- 
-@@ -123,15 +205,19 @@ static void vfe_wm_start(struct vfe_device *vfe, u8 wm, struct vfe_line *line)
- 
- static void vfe_wm_stop(struct vfe_device *vfe, u8 wm)
- {
--	wm = RDI_WM(wm);
-+	wm = vfe_gen4_rdi_wm(vfe, wm);
- 	writel(0, vfe->base + VFE_BUS_WM_CFG(wm));
++	/* v2.5.0 enables the generator through the command register */
++	if (tpg->hw_version >= TPG_HW_VER_2_5_0)
++		writel(TPG_CTRL_CMD_TEST_EN, tpg->base + TPG_CTRL_CMD);
++
+ 	return 0;
  }
  
- static void vfe_wm_update(struct vfe_device *vfe, u8 wm, u32 addr,
- 			  struct vfe_line *line)
+ static int tpg_reset(struct tpg_device *tpg)
  {
--	wm = RDI_WM(wm);
--	writel(addr >> 8, vfe->base + VFE_BUS_WM_IMAGE_ADDR(wm));
-+	const struct vfe_gen4_hw_info *hw_info = vfe_gen4_get_hw_info(vfe);
-+
-+	wm = vfe_gen4_rdi_wm(vfe, wm);
-+
-+	writel(addr >> hw_info->addr_shift,
-+	       vfe->base + VFE_BUS_WM_IMAGE_ADDR(wm));
+ 	writel(0, tpg->base + TPG_CTRL);
+-	writel(1, tpg->base + TPG_CLEAR);
++	writel(TPG_CTRL_CMD_HW_RESET, tpg->base + TPG_CTRL_CMD);
  
- 	dev_dbg(vfe->camss->dev, "wm:%d, image buf addr:0x%x\n", wm, addr);
+ 	return 0;
  }
-diff --git a/drivers/media/platform/qcom/camss/camss.h b/drivers/media/platform/qcom/camss/camss.h
-index 93d691c8ac63b2a47dbb234856b627d8911a1851..487b8ec0f7cdbfe2e2da0e46cb4431b1e6b4c475 100644
---- a/drivers/media/platform/qcom/camss/camss.h
-+++ b/drivers/media/platform/qcom/camss/camss.h
-@@ -96,6 +96,7 @@ enum camss_version {
- 	CAMSS_8550,
- 	CAMSS_8650,
- 	CAMSS_8775P,
-+	CAMSS_NORD,
- 	CAMSS_X1E80100,
- };
- 
 
 -- 
 2.34.1
