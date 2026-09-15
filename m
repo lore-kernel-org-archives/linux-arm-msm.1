@@ -1,42 +1,87 @@
-Received: from mout.kundenserver.de (mout.kundenserver.de [212.227.17.13])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 423A935F5E1;
-	Tue, 15 Sep 2026 05:13:07 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=212.227.17.13
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 063B643B3C9
+	for <linux-arm-msm@vger.kernel.org>; Tue, 15 Sep 2026 05:23:14 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789449190; cv=none; b=slpiptNotl6lpMcyMt+ctdDNjLOwDvSnx1Ef60CHICfKMVLIgxac/AIILO1l6EMeH6QpgLybP6VlyPRmwuPTd+hPpViumnEjCXTmtlP9NtTABLsNJ4N1EWx/B0u5Ng0JNDANFnqtPzCFfPSNg8UuV1p+k6fTS86XlOeJpp3KvGA=
+	t=1789449797; cv=none; b=kFMO7UZAdZfUw80OmHaFS6h+LV9igSmQcSXM+voJHvWT++gDGnwyviGUWJUQ7onDtNZ+wQpY8TMkvRbm3qiHyuR1kjuVu5b9HUgdfjI8RYmIkELNbisYkeusERAibFVwtU3j+L/LOxcOqXEQeoS1+RdG4a8p2f36xMWoAmf8r/w=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789449190; c=relaxed/simple;
-	bh=aVSn3+SZhX1Sac1jjscci9lTm8VMaMFL99YGtDXmsj8=;
+	s=arc-20240116; t=1789449797; c=relaxed/simple;
+	bh=tI4DS4Edvy3z9i1bmkDFio0fZbfcmUH+lpsjB7VpXlA=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=JrPkKuPq7t9SSFPrkDZ+KEF+lUd0Ub/CxC+Qcc7AkpuwKD8IXlOxs8smE4Y7Cx57uyAmUnUTpO4vqphOqW4DHAL2JbPTUJfYxPgFGAbINBsaxwfCawWFqDmrPUskgUjdO9JdFcw3E10g7Ugyi3jvOEzLlVQ9fJHWdyLIKBUb1+U=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oldschoolsolutions.biz; spf=pass smtp.mailfrom=oldschoolsolutions.biz; dkim=pass (2048-bit key) header.d=oldschoolsolutions.biz header.i=jens.glathe@oldschoolsolutions.biz header.b=obfux4HN; arc=none smtp.client-ip=212.227.17.13
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oldschoolsolutions.biz
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oldschoolsolutions.biz
+	 In-Reply-To:Content-Type; b=sJlls6uhsyh1aNur0jXW2cEapSxW3dgRpbjOjVHayZJTNXfkpm60nOVYSR7DzcSLOArSoTMZEFl/4AIM/badYhDdLme4GKmNT2kObzLG418iocHzps/h06aRIDhEjjh1/cNMUjpL1WGv2D3ffE41yTjQ3e9hV/z1dRg2e6GaDcU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=FLxnoxmx; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=K0UlH1ui; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=oldschoolsolutions.biz header.i=jens.glathe@oldschoolsolutions.biz header.b="obfux4HN"
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="FLxnoxmx";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="K0UlH1ui"
+Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68F2neP72823316
+	for <linux-arm-msm@vger.kernel.org>; Tue, 15 Sep 2026 05:23:12 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	ahgAtWxFRwy6cq9ng7VxTyalhlNA7iHoeeWQVniYX/M=; b=FLxnoxmxl1XZ9BBw
+	QGUKqn7DwFY+nscNlV5bzxzE5NYptx/u/ZetxDR/DgLEXefEfoq4lElggx52WT0W
+	WzYRzr5x+bWp0cGDSYDzLWPNYrXpq3VXboGjrFcYsWps9HwrJC2upheBRjYPVRwi
+	oinwl4uZMM1Rne54+hldIo+E36rnd2Fj6r6YFrLRlHKz0d5LBh6nQHufFmGuLNi6
+	A/qxihasUaHfrc8tHFRMAAtvbk0T4GPrt1893cotV7QMPVwx/H+TLo69Zw2m+e4+
+	58YPcFlU51DoJP+0tzZLgA/3hm0OsSWPL+KgM8eolcsLYQweqqNPja/0kep5/f9r
+	1ncUsw==
+Received: from mail-pg1-f197.google.com (mail-pg1-f197.google.com [209.85.215.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gpdb5vghd-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Tue, 15 Sep 2026 05:23:11 +0000 (GMT)
+Received: by mail-pg1-f197.google.com with SMTP id 41be03b00d2f7-cc4216aee8fso5149735a12.1
+        for <linux-arm-msm@vger.kernel.org>; Mon, 14 Sep 2026 22:23:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=oldschoolsolutions.biz; s=s1-ionos; t=1789449186; x=1790053986;
-	i=jens.glathe@oldschoolsolutions.biz;
-	bh=tnXNjj7lClz72+wluQ0IYjFHS/ljWRqHZho3KlUBhig=;
-	h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
-	 References:From:In-Reply-To:Content-Type:
-	 Content-Transfer-Encoding:cc:content-transfer-encoding:
-	 content-type:date:from:message-id:mime-version:reply-to:subject:
-	 to;
-	b=obfux4HNOoxPa7LZcyZ+QVByD0koUoEmCW4swngYuGOkGlnvqQk+182BkiwAOtbo
-	 bB4rwZngYeEEJoxpxUILuiH/gjzMJxH5QNB8Pscz5VqsOOfndH3UXBO3SRiQUFQsc
-	 J9qhhu8mzq6TQ2LYejgOZrptVRjq65eu1M07gwGJHwV1pFOn2+DWpJut2YeqHWwYd
-	 Aic+aPHZOWs5pA5UTmq1oCV1CUwdboOWCHs2zc9OS2Xyp2lIQy1MpFmjcY85GtT5Y
-	 qD3cvvn5kTo2OlJx0fzed24HdUFyVySArVW4eX9AIflvUwg6tggAxKP/u6sic3MCV
-	 mn9tdFr1mulogmW7MA==
-X-UI-Sender-Class: 55c96926-9e95-11ee-ae09-1f7a4046a0f6
-Received: from client.hidden.invalid by mrelayeu.kundenserver.de (mreue108
- [212.227.15.183]) with ESMTPSA (Nemesis) id 1MkYg4-1wNhi73Qp4-00fVnZ; Tue, 15
- Sep 2026 07:07:25 +0200
-Message-ID: <0ce929dd-1512-46a5-8d7a-eb1052faa32f@oldschoolsolutions.biz>
-Date: Tue, 15 Sep 2026 07:07:23 +0200
+        d=oss.qualcomm.com; s=google; t=1789449791; x=1790054591; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=ahgAtWxFRwy6cq9ng7VxTyalhlNA7iHoeeWQVniYX/M=;
+        b=K0UlH1uijS38bLbCVGbSC6qJ9Kr3n0BggORQZn3VHX1aLZyj/ovgW1sGcd4SezUC2u
+         FuwKV4tEpeZ7U3ob3h/QQuId2XVrL/W6S/0uxn21CXra0Xg7WgMK0wKH802X1bfjwaS8
+         b14w9MOCqx1HYVG6CcPAfQw1wG2S8M1QNy47yFWeMUQjp4GJ3U9SA2FqtaYyFoIMgwX7
+         rqzhdGAWtQAbkzde3IGUGDb0bKwfI6PEGewB+lm5ba/2/PqcFzuTpo95QyTeUHyEirAx
+         wZWocQnGk5HCIISPQtCd9ae41fffBEVrPsIBJvtFxirR7phoMxCD8DcjLoDtEm1JloS3
+         L29Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1789449791; x=1790054591;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=ahgAtWxFRwy6cq9ng7VxTyalhlNA7iHoeeWQVniYX/M=;
+        b=af6hd7QPFO+jJYXog19x9AdbWnBl5IhiGDLplDlnVDn38EqTu/4bL61m+GNiaiyKC4
+         z3V0xk2YcNpkXkCUSa+AlHv5FuU7vhxQ4YeAbVliwQWTQwHBxWw7v5wBlQbQvzakYzbW
+         QRmiiJWyxqItkK4UuksCrYC2nIqogJyrcfFN0jDx6aItseDzrmsOdMlMjCIHnZK60XIl
+         Q72AOl5EqxZCfDbFF3Kbk9LgdgglioltizOH5I3szY3t8hjSUe4mItCcYDok2SqwdHyq
+         bFEGpN/HE1XBe433A2QdptORQs80H2/AxW9dCsIrxdYzP6d/Tw6Dy8i0YpHfBxicklj/
+         JSsA==
+X-Forwarded-Encrypted: i=1; AKwUvBzBQSZG8JpXjySbVbUnsczL+XDpMBJT+QNjQiebyvle5bSWw26GqIV99YKqbcgdBJ4JdS6aehwfsghxoJ+4@vger.kernel.org
+X-Gm-Message-State: AFuF++keYL0cUb5hmMCRt43uQQJobYUP7ZTubIinWsNAgdlyHLNqbG5A
+	ZKBnDHYZNxdnsrvZoMXuIsF1jeoNc7tefr5RVBt6QwO+B+t3CQrw5iQ7S+Uh90BqXt5hGa9zOK5
+	uNt1/2Im0GEsA5C1y5go+ve6CmWbiY2ion3TR9S/HgBDg7++8ohZXoKDL/TgNJM7UVGB1
+X-Gm-Gg: AYBFou1HcgdSnIdhg88eX8S4Hg/WPy/cZ0MOznDyiAQSfkh+TwZ8fXZzdkVg9oPo/z+
+	1Gd3ShJmNHhHLQOXouCBIM+eWaa8DMKtkKbZyP00cX010hKvR4OPaDNz7qLIixEH9AwGuXCe4FH
+	WKpfiHYRkGLAEjt3W1C9cNNLDg9mlpnPjbFVpsnynQFjnkYoQD8QpHqZSE+h1H2HNcWfXwMtgFt
+	W/M8wCL5RCbHGd9wyozAKagBCPnrX8DF3cdh4l+7irSAK9Xn6+OU8fHcnFC3wN2gAiTLLBH8zb2
+	jelF21C38wV+UakgA3Xlyj1uviExb8VnJtfg9PL/hjeq8D3k3Lz6fdNG3JnJDV9CUhjXsd/zaPV
+	KM3mHdhWJKWkw46XcPagZyNmn7YfRJ4HM
+X-Received: by 2002:a05:6a20:728e:b0:3d3:aec2:4dc8 with SMTP id adf61e73a8af0-3db4059257dmr12375120637.20.1789449791091;
+        Mon, 14 Sep 2026 22:23:11 -0700 (PDT)
+X-Received: by 2002:a05:6a20:728e:b0:3d3:aec2:4dc8 with SMTP id adf61e73a8af0-3db4059257dmr12375051637.20.1789449790628;
+        Mon, 14 Sep 2026 22:23:10 -0700 (PDT)
+Received: from [10.218.35.45] ([202.46.22.19])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-33ba4cf015csm33549798eec.4.2026.09.14.22.23.04
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 14 Sep 2026 22:23:10 -0700 (PDT)
+Message-ID: <3e28ec09-4378-4cd7-b786-ddee520db5eb@oss.qualcomm.com>
+Date: Tue, 15 Sep 2026 10:53:03 +0530
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -44,155 +89,107 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/3] usb: typec: mux: ps883x: support TYPEC_DP_STATE_F
- like qmp-combo
-To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
- Heikki Krogerus <heikki.krogerus@linux.intel.com>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- Abel Vesa <abelvesa@kernel.org>, Bjorn Andersson <andersson@kernel.org>,
- Konrad Dybcio <konradybcio@kernel.org>, Sebastian Reichel <sre@kernel.org>
-Cc: linux-usb@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-arm-msm@vger.kernel.org, stable@vger.kernel.org,
- "Dr. David Alan Gilbert" <dave@treblig.org>,
- Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-References: <20260914-ps883x-disable-usb4-v2-0-523c32b4e4d7@oldschoolsolutions.biz>
- <20260914-ps883x-disable-usb4-v2-1-523c32b4e4d7@oldschoolsolutions.biz>
- <b96659e1-d2e4-4272-8e78-8042cd5bca9b@oss.qualcomm.com>
+Subject: Re: [PATCH v3 1/5] dt-bindings: phy: qcom: add Nord QMP PCIe PHY
+ binding
+To: Krzysztof Kozlowski <krzk@kernel.org>
+Cc: Vinod Koul <vkoul@kernel.org>, Neil Armstrong
+ <neil.armstrong@linaro.org>,
+        Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley
+ <conor+dt@kernel.org>,
+        Lorenzo Pieralisi <lpieralisi@kernel.org>,
+        =?UTF-8?Q?Krzysztof_Wilczy=C5=84ski?= <kwilczynski@kernel.org>,
+        Manivannan Sadhasivam <mani@kernel.org>,
+        Bjorn Helgaas
+ <bhelgaas@google.com>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Maxime Chevallier <maxime.chevallier@bootlin.com>,
+        Philipp Zabel <p.zabel@pengutronix.de>, linux-arm-msm@vger.kernel.org,
+        linux-phy@lists.infradead.org, devicetree@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-pci@vger.kernel.org,
+        shengchao.guo@oss.qualcomm.com
+References: <20260909-nord-v3-0-b0a82721c547@oss.qualcomm.com>
+ <20260909-nord-v3-1-b0a82721c547@oss.qualcomm.com>
+ <20260910-neat-goat-of-prosperity-eeecaf@quoll>
 Content-Language: en-US
-From: Jens Glathe <jens.glathe@oldschoolsolutions.biz>
-In-Reply-To: <b96659e1-d2e4-4272-8e78-8042cd5bca9b@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:12TAmqxyjk9ZHXoob95i7ait23dbNufMnKytaFl9Gr2QNtN7ECj
- fUZTd0sML2u1HGZeFj4gemke8ScmlX64y/LZ1IRHohMksfs8p/DU6lo249KC8G4fjdT9xrg
- tRYC2GMQ9tIgcym9qB1iFPWQ9nqOvtZ/pyiTb7ujvM03zrxIU5ODmON7xppaD3odfMO70Y/
- SSIw4QpisBtgRKW7EbECg==
-X-Spam-Flag: NO
-UI-OutboundReport: notjunk:1;M01:P0:46liG5Mj5EM=;uMlfOJyCpH1i76HUwte/X/+WRQJ
- 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
+From: Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>
+In-Reply-To: <20260910-neat-goat-of-prosperity-eeecaf@quoll>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTE1MDA3NCBTYWx0ZWRfXxr4S0sTdPmVN
+ 5AJRhp3sMyi+lR9qp6C6zF/cBnpjE+CCJuxK8rWSZh6vBD5sE99nOGvgGymjIoYtT1PSd6nGuV1
+ 16dsy64LrAX+VV0/BlSAM4FlJ3/IHMI=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTE1MDA3NCBTYWx0ZWRfXwvbzucIS83nv
+ KCXj4C+CTRcqt2ekAEZdww61YxC2JOzGBKiSfdesBtREDpWnGoKa1MYiRiIwRdJ7htEkJdmmoHn
+ uuW7pYHr4YruS8+X8KlKCS57dM3nGkXUBhISu1pgCzuP7ZFgaaUCLqdhx3XzoDNeDIJZlxfZW/q
+ Ld8fRZlL0cUfxHtdsvlOjI5PXfEdLiEQG+inFOlf5TrCQHJ7s4SRqAINcl3RvJb78XFOcZxlCZW
+ isAExOicsEauDobsgwaqBinRi6Ip8xVAuvFS6Am5G6VVoIVD5BMOYe5pkbEtvmXAHfdEdB1aXha
+ CRYhGetApgG+kvrPKJvgaUjG7NBqwV36mcARWoQSEAKqwlLC5x4m43u5elhaml2zrRCuYrroCCq
+ Q4B8LfheQM0TGv8HMD9sHi18gGH518TLmeDkv8EwvBewLzVs04TINGQWIMFbxvr7vp7FjytMlpx
+ j1lTcO3ohyi8PTA1JGg==
+X-Proofpoint-GUID: wwpoaqhXjGXVYso87OfUZJu9Rc_fFKNi
+X-Authority-Analysis: v=2.4 cv=Ie4Symqa c=1 sm=1 tr=0 ts=6aa8d63f cx=c_pps
+ a=rz3CxIlbcmazkYymdCej/Q==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
+ a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_glEPmIy2e8OvE2BGh3C:22
+ a=bnyAZr9--xUIB8vRdWUA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+ a=bFCP_H2QrGi7Okbo017w:22
+X-Proofpoint-ORIG-GUID: wwpoaqhXjGXVYso87OfUZJu9Rc_fFKNi
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-09-15_01,2026-09-14_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ spamscore=0 bulkscore=0 impostorscore=0 phishscore=0 adultscore=0
+ malwarescore=0 suspectscore=0 clxscore=1015 lowpriorityscore=0
+ priorityscore=1501 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2609040000
+ definitions=main-2609150074
 
-Hi Konrad,
 
-On 14.09.26 12:25, Konrad Dybcio wrote:
-> On 9/14/26 8:05 AM, Jens Glathe via B4 Relay wrote:
->> From: Jens Glathe <jens.glathe@oldschoolsolutions.biz>
->>
->> Several docks, including the Lenovo 40B0 and SSK SC220, still send the
->> legacy TYPEC_DP_STATE_F mode request (deprecated since DisplayPort Alt
->> Mode spec version 1.0b).
->>
->> Keep the handling in the existing DP altmode path in ps883x_set() and
->> mirror qcom-qmp-combo: pin C/E are DP-only, pin D/F are USB3 + DP.
->> STATE_E is grouped with STATE_C the same way.
-> The premise here is entirely wrong, you shouldn't assume wholly
-> different hardware should be programmed the same way
+
+On 9/10/2026 3:33 PM, Krzysztof Kozlowski wrote:
+> On Wed, Sep 09, 2026 at 05:18:16PM +0530, Krishna Chaitanya Chundru wrote:
+>> +  vdda-phy-a-supply: true
+>> +
+>> +  vdda-phy-b-supply: true
+>> +
+>> +  vdda-phy-c-supply: true
+>> +
+>> +  vdda-phy-d-supply: true
+>> +
+>> +  vdda-pll-a-supply: true
+>> +
+>> +  vdda-pll-b-supply: true
+>> +
+>> +  vdda-pll-c-supply: true
+>> +
+>> +  vdda-pll-d-supply: true
+>> +
+>> +  qcom,link-mode:
+>> +    description: |
+>> +      Reference to the TCSR syscon and the offset of the
+>> +      TCSR_PCIE_LINK_CONFIG_MODE register.
+>> +        0 (QMP_PCIE_NORD_MODE_X16)        — all ports ganged as x16
+>> +        1 (QMP_PCIE_NORD_MODE_X8_X8)      — x8 (port A) + x8 (port B+C+D)
+>> +        2 (QMP_PCIE_NORD_MODE_X8_X4_X4)   — x8 (A) + x4 (B) + x4 (C+D)
+>> +        3 (QMP_PCIE_NORD_MODE_X8_X4_X2_X2)— x8 (A) + x4 (B) + x2 (C) + x2 (D)
+> What does this mean? The phy working mode is defined by phy-cells
+> argument, so what are these numbers above?
+I wasn't clear on the description of phy-cells properly, we need phy-cells to
+be 1, so
+that controller nodes can reference phy with index indicating which port of
+phy being used.
+
+I will update the description in next series.
+
+The TCSR register is the real value programmed by TZ to tell which mode we are
+currently
+operating.
+
+- Krishna Chaitanya.
 >
->> Assisted-by: Grok(xAI):4.6
->> Signed-off-by: Jens Glathe <jens.glathe@oldschoolsolutions.biz>
->> ---
->>   drivers/usb/typec/mux/ps883x.c | 9 ++++++---
->>   1 file changed, 6 insertions(+), 3 deletions(-)
->>
->> diff --git a/drivers/usb/typec/mux/ps883x.c b/drivers/usb/typec/mux/ps8=
-83x.c
->> index 64e0a61b776a1..c185d8897e3a4 100644
->> --- a/drivers/usb/typec/mux/ps883x.c
->> +++ b/drivers/usb/typec/mux/ps883x.c
->> @@ -205,21 +205,24 @@ static int ps883x_set(struct ps883x_retimer *reti=
-mer, struct typec_retimer_state
->>   			cfg1 |=3D CONN_STATUS_1_DP_CONNECTED |
->>   				CONN_STATUS_1_DP_HPD_LEVEL;
->>  =20
->> -			switch (state->mode)  {
->> +			switch (state->mode) {
->> +			/* DP + USB3 (pin D, and legacy pin F) */
->>   			case TYPEC_DP_STATE_D:
->> +			case TYPEC_DP_STATE_F:
->>   				cfg0 |=3D CONN_STATUS_0_USB_3_1_CONNECTED;
->>   				fallthrough;
->> +			/* DP only (pin C, and pin E) */
->>   			case TYPEC_DP_STATE_C:
->> +			case TYPEC_DP_STATE_E:
-> STATE_E must not set the CONN_STATUS_1_DP_PIN_ASSIGNMENT_C_D bit
-> I don't know if that's the case for F too, possibly.
+> Best regards,
+> Krzysztof
 >
-> Setting DP_SINK_REQUESTED seems to be valid on _E.
->
->>   				cfg1 |=3D CONN_STATUS_1_DP_SINK_REQUESTED |
->>   					CONN_STATUS_1_DP_PIN_ASSIGNMENT_C_D;
->>   				break;
->> -			default: /* MODE_E */
->> +			default:
->>   				break;
->>   			}
->>   			break;
->>   		case USB_TYPEC_TBT_SID:
->>   			tb_data =3D state->data;
->> -
->>   			/* Unconditional */
->>   			cfg2 |=3D CONN_STATUS_2_TBT_CONNECTED;
-> Stray change
->
-> Konrad
-Acknowledged, copy/paste debris. I refined the patch and tested this one:
-
-diff --git a/drivers/usb/typec/mux/ps883x.c b/drivers/usb/typec/mux/ps883x=
-.c
-index 64e0a61b776a1..a5696aef054ee 100644
-=2D-- a/drivers/usb/typec/mux/ps883x.c
-+++ b/drivers/usb/typec/mux/ps883x.c
-@@ -207,6 +207,7 @@ static int ps883x_set(struct ps883x_retimer=20
-*retimer, struct typec_retimer_state
-
- =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 switch (state->mode)=C2=A0 {
- =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 case TYPEC_DP_STATE_D:
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0case TYPEC_DP_STATE_F:
- =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 cfg0 |=3D CONN_STATUS_0_USB_3_1_CON=
-NECTED;
- =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 fallthrough;
- =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 case TYPEC_DP_STATE_C:
-
-This will be in V3 with a corresponding commit message.
-
-with best regards
-
-Jens
 
