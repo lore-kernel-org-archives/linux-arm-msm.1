@@ -1,139 +1,136 @@
-Received: from mail-pj2-f12.google.com (mail-pj2-f12.google.com [74.125.227.140])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from meesny.iki.fi (meesny.iki.fi [195.140.195.201])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 444D84AEBE5
-	for <linux-arm-msm@vger.kernel.org>; Tue, 15 Sep 2026 12:30:42 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.227.140
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789475444; cv=none; b=HuVtXN4mZcAT+Dqmu7S667gJqSzWJlPbzxHqh8GJPWGK8QdScMOdiRH67bnPa3pwoPbloG961M02WL/WrMpH1R5z23p6msIXhSpL6U05OurKi3zWzDYOlsjuhAc5+u80GeBbHckQQ/vFVwUnyCrH08tr0BvVtpZZVNC5WYNGx5I=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789475444; c=relaxed/simple;
-	bh=rD24ettfq/yp1pQmJ0kLVwsU5W/LV5RYcqusbnnOepQ=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=Q+tutuu062yv1uoOtitTHgRdW0O/vapj0eKmbhjC6XR959PsouDUVzsecGjQHQvI1AFZ7y9T9fFNZMpOqGdcmwFMakdTNQ4oG/deRHqRTX+BogF9h8+zED2SJGk/wsKjnPoN+xqkVmq9cC6ofu+btN+kk4lJejTZzHA2Nf5Hq3o=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=Tqwyhhm/; arc=none smtp.client-ip=74.125.227.140
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 47D663B3C18;
+	Tue, 15 Sep 2026 12:32:39 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=195.140.195.201
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1789475561; cv=pass; b=cfz7A7DFxGKuCt+3eylCKdazGrIIDvApDM675TQ9L2IV+7Y8+bYoValJZCTyWuIwN8D0ucdqCe6prhYQwigRsvw66mFTMWBKzEj3gYhtVXGWqeDb8N2yiXjsRMvw4doZE2+odcFzYa+igr6WZDnEiszF7Q3e/ccP5kHh5cAn/kY=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1789475561; c=relaxed/simple;
+	bh=NYx6mzzZPmldI53NSxGpwwRPncOdBwkbPbQ66RgsM7A=;
+	h=MIME-Version:Date:From:To:Cc:Message-Id:In-Reply-To:References:
+	 Subject:Content-Type; b=F8V3f9o0sZ4Ri2d8I/uzSEnQC4qH5ExLbdG9DLAcUN6g2e/Fo+NQ2WH3bEVbxirrl2NcG7prqieboeZlTrUIvdRVM2fsKI8BcfvFcftHrMwjnmeyWSLisroeELROtq+xLg3ZxU4NkwpTcHEMtl+tVNPOvmiK0GdM0zJUihFYK80=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=iki.fi; spf=pass smtp.mailfrom=iki.fi; dkim=pass (1024-bit key) header.d=iki.fi header.i=@iki.fi header.b=U/p6Iq0t; arc=pass smtp.client-ip=195.140.195.201
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=iki.fi
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=iki.fi
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="Tqwyhhm/"
-Received: by mail-pj2-f12.google.com with SMTP id d9443c01a7336-2d90ba1d807so42506465ad.3
-        for <linux-arm-msm@vger.kernel.org>; Tue, 15 Sep 2026 05:30:42 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1789475442; x=1790080242; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=xqadnkZnQpvwO0yu2aZCQtLbtAViRwE5+Ankys+V6vM=;
-        b=Tqwyhhm/qk2uBraPWQOJYiTLghbGUNE3NYtSIKcrYvKSuVXblfX2sPcfo9T1FzVaoo
-         u43HBmnROPCzIS8v3l/58yzIckmyoMfVL2AwhqSanHTFeOO9zSAC77Qz0DV1byI08QFd
-         YfVE7DuazfFgTYR5/8Qfu4y9jp3sqVkEu+qBhvT+a3NfiU+F8GDDrWz5x1G7079YTWsF
-         nyrHXU20Js/xuHeaDjzsEkj/29TpXOvZv9PlBdyaA7d5wDd9Hrxk++1tb+Y7HRJnd48i
-         xRz6HdbnAelqUjA/1ilSqqFGyR4vNkIDml4WVM0ir3AXOiSqSvakBZuoOPEnkNAy3Og3
-         OqBw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1789475442; x=1790080242;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=xqadnkZnQpvwO0yu2aZCQtLbtAViRwE5+Ankys+V6vM=;
-        b=APIMMVtbO2Gc/1GiLeGCHeL/oZ2Qft9mRhz+HFgkPUnJHcTWy87JKrr0NcQpryWcxc
-         e1oUF3+ii1VSijCImcE09tWhU+053Y+UjnVAu53cCLat/SJCKbCxDaEvc2pTR5vyiPai
-         whi0EVoiABpSMQnR65OnLnYyYvLajlPmlJg62HpT1F2eGF71dmV4uK8ip75Vb6FZGSTE
-         mrVM62m2KGPrDhGWlF/06Rgs+un7TdTs6+O3yeVjVmt3P/csRP6WqhzCLlzkeyEqjPKp
-         /5X00bVFn99SJeuqcZhp7JGVMKawAC5Gs40gV+IBPkR42RZBVYzThN/aKmVGzKtrTnlM
-         Gxkw==
-X-Forwarded-Encrypted: i=1; AKwUvByGedisvyMdqRjs/8wkDlPToG6QNcS4GWiNYhBjeexGcjSy0WUKfvvb+GCa8HP1ehLyEtkRUXrIcJpIad7k@vger.kernel.org
-X-Gm-Message-State: AFuF++nw16hsLLg70bxQkhrSPXhvxrFFQYcagOUu60v7722fbx/h6stg
-	eLMHhEtW0cLS4InBKkvAdlrTxWvMd2Eb6qw1OlqPop3Bg/rJJBkOtSws
-X-Gm-Gg: AYBFou1toUCKqRRPnjXJYETq8gkUvz+fwpqV9i2FiL8P1dg/aSiH5a7qVw8buRHOLJ5
-	e34d/NE3MHfxmWeRWcdjfibfdXS+hfOoh/BCE26O+9bN+CTONNQ/IKOIBJdkJsbFmsX2SNI0OeB
-	8yA+CQkvcimLOuv0cuOzyCa3WPJGLZt6q6ZRYLNnfv0bl/2F1BIHUDlVZl055fwdTV7dZGCzcJN
-	rJfnXj4LOVkmHTLTXtL3cjwwvOMxW7TpgWMTi36MVvV7NjRsoGaaeNxU/Y21pE4O4bc5FC6j03C
-	tbahxkLZtKkzRub+48gvttKwmyuaBtZsxI5OKoH1m2t38flBwAIROJ5HF5Itmze97VzB5TVoUSf
-	QXh2kgcnsVKUIBi9tej2B9NIHbKl4d5jHse6MXLNd9ruO6woRCoCozwC4BBDOtdN2k9jU2Fc+kJ
-	OtaRHqmBLekgIXcXyXg3k6oNwjHwNN3IT9oeLfB9NPlHCxaEOU3S6SCd4=
-X-Received: by 2002:a17:902:e54b:b0:2d7:203b:9863 with SMTP id d9443c01a7336-2dd6c5b1084mr131399045ad.1.1789475441464;
-        Tue, 15 Sep 2026 05:30:41 -0700 (PDT)
-Received: from lgs.. ([2001:250:5800:1002::de93])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2dd76fc2c54sm12402345ad.72.2026.09.15.05.30.36
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 15 Sep 2026 05:30:40 -0700 (PDT)
-From: Guangshuo Li <lgs201920130244@gmail.com>
-To: Vikash Garodia <vikash.garodia@oss.qualcomm.com>,
-	Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>,
-	"Bryan O'Donoghue" <bod@kernel.org>,
-	Mauro Carvalho Chehab <mchehab@kernel.org>,
-	Hans Verkuil <hverkuil@kernel.org>,
-	Jorge Ramirez-Ortiz <jorge.ramirez@oss.qualcomm.com>,
-	linux-media@vger.kernel.org,
-	linux-arm-msm@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Cc: Guangshuo Li <lgs201920130244@gmail.com>,
-	stable@vger.kernel.org
-Subject: [PATCH] media: venus: avoid HFI resource leak on IRQ request failure
-Date: Tue, 15 Sep 2026 20:30:09 +0800
-Message-ID: <20260915123009.2420780-1-lgs201920130244@gmail.com>
-X-Mailer: git-send-email 2.43.0
+	dkim=pass (1024-bit key) header.d=iki.fi header.i=@iki.fi header.b="U/p6Iq0t"
+Received: from fauth-c2-smtp.messagingengine.com (fauth-c2-smtp.messagingengine.com [204.75.18.201])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange x25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	(Authenticated sender: jmtilli)
+	by meesny.iki.fi (Postfix) with ESMTPSA id 4hkhHM70QVz10gQ;
+	Tue, 15 Sep 2026 15:32:31 +0300 (EEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iki.fi; s=meesny;
+	t=1789475552;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=lulhfXdBZ8IlWRG8McqTlzoi9Lws1M12SFhrapzdGsk=;
+	b=U/p6Iq0t7lwWgfXglk4q/W1iTerf4NV8JWGIACjjP7iZciHiHJrNvCfPmesv3B7nxiGYGj
+	C/Vk34LHNe04OpSdFRx1+55880SM9DHeE/gz+lyK10J1nMG8LV1aSQl1Zs5+g0y4X5h9Zc
+	xBKsPCXm38ka6pX8OIRaQAc/qqBWH2M=
+ARC-Seal: i=1; a=rsa-sha256; d=iki.fi; s=meesny; cv=none; t=1789475552;
+	b=K6d+i8phejjQKVrcLEMHnXs/cCVtN4aBOxtMDN/J0jbUEsrJLmsdplk2R8V5TAVDfKBf4M
+	0lmKX7yw+wN8YEmQiLNSAL3lgM1vag0LQHjsWEjjyZ9iPJs8Igfs4hFBocH75nLKRRgxtJ
+	wU1sYlc1Bp8P0ls9oPWvy/wIQHh/sHk=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=iki.fi;
+	s=meesny; t=1789475552;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=lulhfXdBZ8IlWRG8McqTlzoi9Lws1M12SFhrapzdGsk=;
+	b=E4aoBWj3Dy1SorXjWqpdMDWwONblq3rQiu+YIH5mw1wNHg3iEQMqzRRHB3ZNqA0cFTSWe0
+	7FIuTEbM15CzU/PqaczitDwmQNmajDLV4Qe67DcXnYw4/XgvLykj+ye3EaDpJ4rXD6hAE1
+	H6o+h2WjmfQBghRZXu3OebL+z8tNn/8=
+ARC-Authentication-Results: i=1;
+	ORIGINATING;
+	auth=pass smtp.auth=jmtilli smtp.mailfrom=juha-matti.tilli@iki.fi
+Received: from ams-compute-02.internal (ams-compute-02.internal [10.64.2.62])
+	by mailfauth.ams.internal (Postfix) with ESMTP id 78E24198003A;
+	Tue, 15 Sep 2026 08:32:30 -0400 (EDT)
+Received: from ams-imap-13 ([10.64.2.33])
+  by ams-compute-02.internal (MEProxy); Tue, 15 Sep 2026 08:32:30 -0400
+X-ME-Sender: <xms:2jqpak0bJ0YRiWQiNx_2y0ZIftizHOz3eY2-gSxBctN2xImZgQhApQ>
+    <xme:2jqpap6huM2Q017AzlPLLoZRbJhikx6bUeMaJUZYNcaXA3XmKkiaoYCPNU_M7rhMQ
+    1urF-vkH2lw4lgvr3sdCSleFNK_8FLKRMUWKGeUraFr1y1Ssl7F6eEf>
+X-ME-Proxy-Cause: dmFkZTEFymrOVPWK+MQ4UXejtvxyh+l6dc5IFIgY4jnDXoWEvKpMjB051KQpVtX+K4gQ75
+    kUfcjqqxEf3p9FzEJAN0QsyR1bZY+KS7rL4N8A4Zr61S146jEPyD/UHZtYNPbKCo7DWY+p
+    s4x6/sThfkRdNZV+RL7rVbK4RWJVMo2nLKKITqNAjCmiDkIBD7hROe4coNhKbitLSzCJy1
+    mAo4Jiq8udQVkdUsueh/WGbRTj3wyUMHAM3AzJ4Zsl37M2RLv7LzWwPXgdFKPs7S2lGFUB
+    N55+wUYvrw9L20LzbwhmmQ7s+ErG8LKT9ccLLa7hDRnuwVBbqSX0SoHf9niz2A/OvVcQJu
+    zDSpJNLDB8FGblXKsvXis1Iw1zZnBPxoRM36BrN+C9kLGA7xPSnQPINWIPv5mdN8QIiI1p
+    1iyL1odL+MY43Qw8n7/v7B8fAy3L/Dnaw3ErMoe4s/6ijKtZI8gtjJEkd569lumsEghzaT
+    xB8Wx+Kk4MdnciVvLwlRy44HQ9mbyqsiV/AveldrPTVxiFmtJj9ulds+wF+AJlupbeBwak
+    QmCAv9s8K7PnZb5Mw0JBxK1rc/jvSSeP9q5oBJEr2Caq5N7nZf5//LLecDHggeeOaN+vYl
+    hY/IZcs+h5CYej7CR3MDuymC1gvQK29r7cFct0XF6k70BPzNFzNyvXG+x8GQ
+X-ME-Proxy: <xmx:3jqpapE5fuSSiL3vJPkxhThkglAA33DNJI7cVgIdZx9U3P7PmmA3OA>
+    <xmx:3jqpana-kdrjVns9y24LBC4N2xbFW-ZwkIsAaoDLmvBLmFQaijy9gA>
+    <xmx:3jqpakN5YO46-r3Ba2vQcOGTsvQnwzBrs90AEfYwOB_WSFerGW50eA>
+    <xmx:3jqpaq1SrDBlqOKwSL1iW3o-i2bcCkjKY_QDXzxej4a5un8rmL6zyw>
+    <xmx:3jqpaomo-h_ZFFWWaFEAnIyOOr5e18WpSkI8FBLX4AagS7DwrKIqXFR_>
+Feedback-ID: i02414972:Fastmail
+Received: by mailuser.ams.internal (Postfix, from userid 501)
+	id 1540AF80089; Tue, 15 Sep 2026 08:32:26 -0400 (EDT)
+X-Mailer: MessagingEngine.com Webmail Interface
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-ThreadId: AfrYmASNsTfZ
+Date: Tue, 15 Sep 2026 15:30:26 +0300
+From: "Juha-Matti Tilli" <juha-matti.tilli@iki.fi>
+To: "Arthur Crepin Leblond" <arthur@marmottus.net>
+Cc: "Manivannan Sadhasivam" <mani@kernel.org>, linux-arm-msm@vger.kernel.org,
+ "Jeff Hugo" <jeff.hugo@oss.qualcomm.com>,
+ "Jeff Johnson" <jjohnson@kernel.org>,
+ "Bjorn Andersson" <andersson@kernel.org>,
+ "Konrad Dybcio" <konradybcio@kernel.org>,
+ "Eric Dumazet" <edumazet@google.com>,
+ "Kuniyuki Iwashima" <kuniyu@google.com>, "Paolo Abeni" <pabeni@redhat.com>,
+ "Willem de Bruijn" <willemb@google.com>,
+ "David S . Miller" <davem@davemloft.net>, "Jakub Kicinski" <kuba@kernel.org>,
+ "Simon Horman" <horms@kernel.org>, "Mihai Moldovan" <ionic@ionic.de>,
+ "Denis Kenzior" <denkenz@gmail.com>, "Marcel Holtmann" <marcel@holtmann.org>,
+ "Andy Gross" <agross@kernel.org>, linux-kernel@vger.kernel.org,
+ mhi@lists.linux.dev, linux-wireless@vger.kernel.org,
+ ath11k@lists.infradead.org, ath12k@lists.infradead.org,
+ netdev@vger.kernel.org
+Message-Id: <c4a033ee-b71f-4548-8be9-0a43f31c8d42@app.fastmail.com>
+In-Reply-To: <20260915071131.GA30612@marmottus.net>
+References: <20260915054207.2513877-1-juha-matti.tilli@iki.fi>
+ <20260915054207.2513877-13-juha-matti.tilli@iki.fi>
+ <20260915071131.GA30612@marmottus.net>
+Subject: Re: [PATCH v7 12/15] net: qrtr: mhi: Report endpoint id in sysfs
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-venus_probe() calls hfi_create() before requesting the IRQ, but the IRQ
-request failure path does not call hfi_destroy().
+On Tue, Sep 15, 2026, at 10:11, Arthur Crepin Leblond wrote:
+> On Tue, Sep 15, 2026 at 08:42:04AM +0300, Juha-Matti Tilli wrote:
+> >+static ssize_t endpoint_show(struct device *dev,
+> >+      struct device_attribute *attr, char *buf)
+> >+{
+> >+ struct qrtr_mhi_dev *qdev = dev_get_drvdata(dev);
+> >+
+> >+ return sprintf(buf, "%u\n", qdev->ep.id);
+> >+}
+> >+
+> >+static DEVICE_ATTR_RO(endpoint);
+> 
+> I think you could use sysfs_emit instead of sprintf.
 
-The history patch moved hfi_create() before the IRQ request to ensure
-that the interrupt handler context is initialized before an interrupt
-can be delivered. However, if devm_request_threaded_irq() fails after
-hfi_create() succeeds, the error path jumps directly to err_core_put
-and leaves the HFI resources allocated.
+Thank you for the commentary. I tested sysfs_emit and it compiles and:
 
-Request the IRQ with IRQF_NO_AUTOEN before creating the HFI device so
-that the interrupt remains disabled during HFI initialization. Enable
-the IRQ only after hfi_create() succeeds.
+cat /sys/devices/platform/soc/*.pcie/pci*/*/*/mhi0/*/endpoint
 
-This preserves the protection against interrupts arriving before HFI
-initialization while ensuring that an IRQ request failure cannot leak
-HFI resources.
+...prints 2, as it should, so it seems to work too.
 
-This issue was found by manual code inspection.
+The next patchset version will use sysfs_emit here.
 
-Fixes: 3200144a2fa4 ("media: venus: protect against spurious interrupts during probe")
-Cc: stable@vger.kernel.org
-Signed-off-by: Guangshuo Li <lgs201920130244@gmail.com>
----
- drivers/media/platform/qcom/venus/core.c | 11 +++++++----
- 1 file changed, 7 insertions(+), 4 deletions(-)
-
-diff --git a/drivers/media/platform/qcom/venus/core.c b/drivers/media/platform/qcom/venus/core.c
-index 243e342b0ae7..42348bdc2332 100644
---- a/drivers/media/platform/qcom/venus/core.c
-+++ b/drivers/media/platform/qcom/venus/core.c
-@@ -432,16 +432,19 @@ static int venus_probe(struct platform_device *pdev)
- 	INIT_DELAYED_WORK(&core->work, venus_sys_error_handler);
- 	init_waitqueue_head(&core->sys_err_done);
- 
--	ret = hfi_create(core, &venus_core_ops);
-+	ret = devm_request_threaded_irq(dev, core->irq, hfi_isr,
-+					venus_isr_thread,
-+					IRQF_TRIGGER_HIGH | IRQF_ONESHOT |
-+					IRQF_NO_AUTOEN, "venus", core);
- 	if (ret)
- 		goto err_core_put;
- 
--	ret = devm_request_threaded_irq(dev, core->irq, hfi_isr, venus_isr_thread,
--					IRQF_TRIGGER_HIGH | IRQF_ONESHOT,
--					"venus", core);
-+	ret = hfi_create(core, &venus_core_ops);
- 	if (ret)
- 		goto err_core_put;
- 
-+		enable_irq(core->irq);
-+
- 	venus_assign_register_offsets(core);
- 
- 	ret = v4l2_device_register(dev, &core->v4l2_dev);
--- 
-2.43.0
-
+BR, Juha-Matti
