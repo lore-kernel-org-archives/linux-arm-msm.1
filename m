@@ -1,140 +1,127 @@
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.9])
+Received: from smtpbguseast2.qq.com (smtpbguseast2.qq.com [54.204.34.130])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B809C37D12E;
-	Tue, 15 Sep 2026 14:53:34 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.175.65.9
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 97F073DD520;
+	Tue, 15 Sep 2026 15:05:16 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=54.204.34.130
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789484016; cv=none; b=TyW48riov+3rDgrX2m+YrF5NcgbH0yiyAOt2wG4/vQLhEeQDcOPKIc+E8whdhH66/179y875sxwWy2bHkmDiMbRuKffLXv5SBClJn5n+Bu2PaNlQ03yJaDgnTT15Z/UIviWT05eQni0LTtUbDEDmDMCDG4uuYbw/v65EF2Twm4o=
+	t=1789484722; cv=none; b=T2lof1Mybx2PoY/AqZ+/Oxj5zMH6HlUA3442YD6Bbd5vmWteRDM3d61RggZ6XfKKKXtJoBow33QJu4xFHDgwMWZEZ491rAWEWo2fwZGnC+wcZL2Y+sEudgwj0i5mWFrc5BtEy7L8CR3MGBU/7oA5yxVPYMwIV3EJK/0DV2cJ6so=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789484016; c=relaxed/simple;
-	bh=PeCPQwsh+qKGrcT3bTdkFKnhdBA1fVZf3KBFD/Bg9AY=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=eH6D+Rf4VPPwVjnW+9cjeYaxzemGKNRTlQ/FMfiUc5cGSf2m5atZcuCEDTTntM1hyzSFIvSm61WafJWu57M40+MsDCd/UJNhCKZZMrB1g2rVD6WFgifcVyN2p2ge++ELArPMJh/G7GM/KC5nDyy60hEBhbKh1LrKnibNVXFrAA8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=Tc9Dk6Yy; arc=none smtp.client-ip=198.175.65.9
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="Tc9Dk6Yy"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1789484015; x=1821020015;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:content-transfer-encoding:in-reply-to;
-  bh=PeCPQwsh+qKGrcT3bTdkFKnhdBA1fVZf3KBFD/Bg9AY=;
-  b=Tc9Dk6YyScGEtemGXaTh9nko1vd+MmLxHp0f+fRLtzZjZwSoUoanPi4a
-   ISgxOZcTDwk8zAtiWRjSgQGt56ttaIahGcbcgdqg2dOn7amwn6V0Ulrrx
-   KRodF9Z6j4qNpC75xH7FFGn9bBp4rYRX4cXsNxVbYUT2dBd1zNoxfJGC0
-   +5hnAPGqQEXQ2O4dhGMwqV69QGwnEdGawo9bgJ6A/h10ChAY+CzdbEva2
-   Vh24SbsY+tmUgcou1/fANVZSR/AAb2m6S27yWduTztipHkO8t7udx4S60
-   gfNu6bJSTqYLK8JoAHh/YPv2CKYs4gNleDXoZM31TJoa2dXKcVKxDF8pj
-   A==;
-X-CSE-ConnectionGUID: xjQH2LblSqWHRjGFDAU1/w==
-X-CSE-MsgGUID: tkMc6KQWSiW+FeMThGZ7DA==
-X-IronPort-AV: E=McAfee;i="6800,10657,11905"; a="112619422"
-X-IronPort-AV: E=Sophos;i="6.27,103,1787036400"; 
-   d="scan'208";a="112619422"
-Received: from orviesa005.jf.intel.com ([10.64.159.145])
-  by orvoesa101.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 15 Sep 2026 07:53:34 -0700
-X-CSE-ConnectionGUID: pD+gpyMUTpWXizQXOXxYtA==
-X-CSE-MsgGUID: MNUHoTn5StWYHXkAWDsF7Q==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.27,103,1787036400"; 
-   d="scan'208";a="277156120"
-Received: from conormcd-mobl2.ger.corp.intel.com (HELO localhost) ([10.245.244.57])
-  by orviesa005-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 15 Sep 2026 07:53:29 -0700
-Date: Tue, 15 Sep 2026 17:53:26 +0300
-From: Andy Shevchenko <andriy.shevchenko@intel.com>
-To: Frank Li <Frank.li@oss.nxp.com>
-Cc: Nuno =?iso-8859-1?Q?S=E1?= <nuno.sa@analog.com>,
-	linux-kernel@vger.kernel.org, dmaengine@vger.kernel.org,
-	linux-arm-msm@vger.kernel.org,
-	linux-stm32@st-md-mailman.stormreply.com,
-	linux-arm-kernel@lists.infradead.org, linux-iio@vger.kernel.org,
-	linux-sound@vger.kernel.org, linux-spi@vger.kernel.org,
-	Vinod Koul <vkoul@kernel.org>, Frank Li <Frank.Li@kernel.org>,
-	Lars-Peter Clausen <lars@metafoo.de>,
-	Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>,
-	=?iso-8859-1?Q?Am=E9lie?= Delaunay <amelie.delaunay@foss.st.com>,
-	Maxime Coquelin <mcoquelin.stm32@gmail.com>,
-	Alexandre Torgue <alexandre.torgue@foss.st.com>,
-	Jonathan Cameron <jic23@kernel.org>,
-	David Lechner <dlechner@baylibre.com>,
-	Andy Shevchenko <andy@kernel.org>, Jaroslav Kysela <perex@perex.cz>,
-	Takashi Iwai <tiwai@suse.com>, Mark Brown <broonie@kernel.org>
-Subject: Re: [PATCH v4 01/10] dmaengine: Move enum dma_slave_buswidth to a
- new header
-Message-ID: <aqlb5iZQ07Xicq0m@ashevche-desk.local>
-References: <20260911-dmaengine-support-wider-dma-masks-v4-0-72b8fd4cc78e@analog.com>
- <20260911-dmaengine-support-wider-dma-masks-v4-1-72b8fd4cc78e@analog.com>
- <aqgCQvRw9fns__0d@SMW015318>
- <aqjzvxI4ecoFvRLT@ashevche-desk.local>
- <aqlYOHIFU_dB72I3@SMW015318>
+	s=arc-20240116; t=1789484722; c=relaxed/simple;
+	bh=jiOkmYLs4VxfvywQ+bTqIfHcZP74j27nq8IimI7aauw=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=HQGrRcrXItqTTOsFI2tt3CFX4kdYcwVMWYgp57ERwdKyceBQGq+L9Xki65QTn80Gd9p6J6JVkKfgmIoC64b5C/OV87wW4enOkFhA9h/AU9iUhExGi0ZvmPmphnEM5YFsdxC5OgPZx8ytsjNBhP3grOQ0zs8h/PRSbeJKyEfmNQo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=radxa.com; spf=pass smtp.mailfrom=radxa.com; arc=none smtp.client-ip=54.204.34.130
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=radxa.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=radxa.com
+X-QQ-mid: zesmtpsz6t1789484670t67a17d3f
+X-QQ-Originating-IP: VtDu49u5oeW10uTnOj34xIDXGh1ZJrJR14GaSySw/yc=
+Received: from [127.0.0.1] ( [180.159.160.209])
+	by bizesmtp.qq.com (ESMTP) with 
+	id ; Tue, 15 Sep 2026 23:04:26 +0800 (CST)
+X-QQ-SSF: 0000000000000000000000000000000
+X-QQ-GoodBg: 0
+X-BIZMAIL-ID: 3756391934278307056
+EX-QQ-RecipientCnt: 29
+Message-ID: <811E4CAAE0EC3103+2a53ade9-4b52-49a5-945d-2364fbce3c82@radxa.com>
+Date: Tue, 15 Sep 2026 23:04:25 +0800
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <aqlYOHIFU_dB72I3@SMW015318>
-Organization: Intel Finland Oy - BIC 0357606-4 - c/o Alberga Business Park, 6
- krs, Bertel Jungin Aukio 5, 02600 Espoo
+User-Agent: Mozilla Thunderbird
+Reply-To: sophon@radxa.com
+Subject: Re: [PATCH 1/6] PCI: of: Avoid config reads for disabled bridge nodes
+To: Manivannan Sadhasivam <mani@kernel.org>
+Cc: Bjorn Helgaas <bhelgaas@google.com>,
+ Andrzej Hajda <andrzej.hajda@intel.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>, Robert Foss <rfoss@kernel.org>,
+ Laurent Pinchart <Laurent.pinchart@ideasonboard.com>,
+ Jonas Karlman <jonas@kwiboo.se>, Jernej Skrabec <jernej.skrabec@gmail.com>,
+ Luca Ceresoli <luca.ceresoli@bootlin.com>, David Airlie <airlied@gmail.com>,
+ Simona Vetter <simona@ffwll.ch>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
+ Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
+ Conor Dooley <conor+dt@kernel.org>, Bjorn Andersson <andersson@kernel.org>,
+ Konrad Dybcio <konradybcio@kernel.org>, Bartosz Golaszewski
+ <brgl@kernel.org>, Linus Walleij <linusw@kernel.org>,
+ linux-pci@vger.kernel.org, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, devicetree@vger.kernel.org,
+ linux-arm-msm@vger.kernel.org, linux-gpio@vger.kernel.org,
+ Stephen Chen <stephen@radxa.com>, Junhao Xie <bigfoot@radxa.com>
+References: <20260901-q8b-dts-v1-0-7de0b6a73d08@radxa.com>
+ <20260901-q8b-dts-v1-1-7de0b6a73d08@radxa.com>
+ <xfwoa4jjigdx46lunasf5ze23ihm6qcvbhge7n27mxst5fxyzj@3ovbxzp4wzkk>
+Content-Language: en-US
+From: Xilin Wu <sophon@radxa.com>
+Organization: Radxa Computer (Shenzhen) Co., Ltd
+In-Reply-To: <xfwoa4jjigdx46lunasf5ze23ihm6qcvbhge7n27mxst5fxyzj@3ovbxzp4wzkk>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-QQ-SENDSIZE: 520
+Feedback-ID: zesmtpsz:radxa.com:qybglogicsvrsz:qybglogicsvrsz3b-0
+X-QQ-XMAILINFO: MgRO26CFjEybZlJVhxv+F6oTGh6RwEw9a9Yr08/wwObhmQKJSNI8H8Ed
+	emIjA6ZBXgUHKO2GJ+bmUXd2zIzim6nwffUAlZ0eq0CxvE3E3LFueGxSSLNCQ2lFQJxsoy1
+	Vfh6ARSKbWwxYgr7mh9Tze3b+wNEsvUXLZTcfXYl1okm7cTuzEbKM5jjUeexs+mTfmTQJrK
+	YuYB2eqmMS/AeO3DLo+x/oMLHFvrXl2aFvRpGlFzzuq3A1roKVC3KIZNS7ORYYip+CBDqvH
+	fN2pvEPP6bSLqww1tDsNmwRnEcgkxzqyr57lywT3nawrWme0UURgaMwcUADWfJyRE/oprYT
+	xmKm/ckzepQkwUE9jJWQr9UdHVfyrfvmmgT7kVLc4YZnGs6mUDPniDZIOHjlRL1k4sEUKZa
+	NNY1pCUO1ye7jjA+7MqzNywT5kc/breoGDpSqKprfdj0bIKNybqb7jA1Zsu3tyFlGi8uIff
+	Zc4Q0ta9e6yVUKlkUwX21IfNMfR+5elpwqeBS1bQToyhKsmm85Q7a5iLfulPHRrfQrxLkF6
+	dwPmu9KUUOkpfHgbY8l/qBKYBgC3dg54SDGu5ghzRlxrDmfhCCKH6r0YTwejyRvheKeS0S2
+	b+eyQb9FLi7F59naIrtwrQZsZxrzVeHD56KhTRBX5JToNq/sPjjO4tvcEs06QtqCsdgMY+R
+	TOGQKjcvTihRfuYuLf38tdvSbV2mvvqlMQPykZC1uCLrOTqgC0OG/ZmYIkRnO69hGfxp5jS
+	WveqivrgG/bwxM3TpqWG0nGLOuRtoiS70P53X8D0sBuEqlTPwe8RWGMzaSnLmQyMf+YYloi
+	JOP07Uk8MVhAWNTI9jgdfqxZLYrCLIjZMC/kh8nEfCxZOc5hx74yxHtgdgZpu2EMpNf0Hk1
+	FlnCZkk4sU83ydrQaGEvCpITfTrDYVhhG6FkBIj44S6Xxgrbc7D5ziFBasdKZgrj1ycj/Zz
+	IeEK3la1XcY5pHQ2IXFsD8Rh3GKmERiIPp1G8yAf/usmXM+Xyb9MXHcu938G+U08Ncj+9pz
+	42SwIsOlp8Dhzcv56hcOSfsoSq+AON67u3etr/0eXFNAX62Yq2WeYD4kPpjaiBfKurYpXZi
+	FUhawLu6B0v
+X-QQ-XMRINFO: OWPUhxQsoeAVwkVaQIEGSKwwgKCxK/fD5g==
+X-QQ-RECHKSPAM: 0
 
-On Tue, Sep 15, 2026 at 09:37:44AM -0500, Frank Li wrote:
-> On Tue, Sep 15, 2026 at 10:29:03AM +0300, Andy Shevchenko wrote:
-> > On Mon, Sep 14, 2026 at 09:18:42AM -0500, Frank Li wrote:
-> > > On Fri, Sep 11, 2026 at 06:25:36PM +0100, Nuno Sá wrote:
-> > > > In preparation for the bitmap based bus width capabilities, move
-> > > > enum dma_slave_buswidth out of linux/dmaengine.h into a new
-> > > > include/linux/dma/engine/types.h.
-> > > >
-> > > > linux/dmaengine.h is included nearly everywhere, so growing it with the
-> > > > new interface would make every one of its users pay for it. Keeping the
-> > > > basic types in a separate header lets the new interface live next to it
-> > > > without that cost. linux/dmaengine.h includes the new header, so its
-> > > > users are unaffected.
-> > > >
-> > > > While at it, add the missing kernel-doc for the enum members. The block
-> > > > already opened with /**, so kernel-doc expected every member to be
-> > > > described and warned about each one of them. Describe the UNDEFINED case
-> > > > in particular, as its meaning depends on where the value is used.
-
-...
-
-> > > >  include/linux/dmaengine.h        | 20 +++-----------------
-> > >
-> > > I think it is good to split dmengine consumer and provider header files to
-> > > hidden dmaengine's detail.
-> >
-> > It's indeed desirable change. but isn't it a bit out of scope of the series?
-> > I suggest to do one step at a time. Would it work for you?
+On 9/10/2026 11:04 PM, Manivannan Sadhasivam wrote:
+> On Tue, Sep 01, 2026 at 04:47:54PM +0800, Xilin Wu wrote:
+>> The TC9563 PCI power-control driver powers off external downstream ports
+>> whose device tree nodes have status = "disabled".
+>>
+>> On the Radxa Dragon Q8B, reading the Vendor ID from one of these
+>> powered-off port functions during PCI enumeration raises an Arm SError
+>> instead of returning an all-ones PCI error response. This prevents the
+>> board from completing boot.
+>>
+>> Commit 1a8c251cff20 ("PCI: move OF status = "disabled" detection to
+>> dev->match_driver") made disabled PCI functions remain discoverable so
+>> PCI fixups can still be applied, while suppressing driver binding later.
+>> Preserve that behavior for endpoint functions.
+>>
+>> For an unavailable node describing a PCI-to-PCI bridge, however, the
+>> node also represents a subordinate bus that must not be enumerated.
+>> Check the device tree node before reading the Vendor ID and return a PCI
+>> error response without accessing config space when such a bridge is
+>> disabled.
+>>
+>> Functions not described by device tree and disabled endpoint functions
+>> remain discoverable.
+>>
+>> Signed-off-by: Xilin Wu <sophon@radxa.com>
 > 
-> Yes, but I hope the file name is finial expected file name. it is okay
-> just move enum dma_slave_buswidth to there now.
+> Does this patch help?
+> https://lore.kernel.org/linux-pci/20260819-ecam_blocker-v2-1-e7a8fdc1c5cb@oss.qualcomm.com/
+> 
+> - Mani
+> 
 
-Hmm... The whole split as is in this series is due to bitmap.h and the whole
-train wreck with headers we have. I haven't checked that particular enum, but
-if it's possible to gather it in one of provider.h/consumer.h at the end, then
-yes, we may name file accordingly from day 1.
-
-> > > suggest name
-> > > 	dma/engine.h
-> > >
-> > > so we can start move more API to this files.
-> > >
-> > > after all user include this consumer header file,  old
-> > > include/linux/dmaengine.h rename to include/linux/dmaengine-provider.h,
-> > > which only include by dmaengine drivers.
-> >
-> > Traditional naming would be
-> > dma/engine/provider.h
-> > dma/engine/consumer.h
+Thanks for the pointer. I don't think it helps in this case. That patch 
+enables the Qualcomm ECAM blocker when the Root Port link goes down. 
+Here, the link between the Root Port and the TC9563 remains up; only 
+some TC9563 downstream port functions are powered off, and probing those 
+functions triggers the SError. Therefore, we still need to avoid these 
+config-space reads.
 
 -- 
-With Best Regards,
-Andy Shevchenko
-
-
+Best regards,
+Xilin Wu <sophon@radxa.com>
