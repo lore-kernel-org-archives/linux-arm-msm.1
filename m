@@ -1,245 +1,356 @@
-Received: from mail-wr2-f12.google.com (mail-wr2-f12.google.com [74.125.225.76])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9516141BA7A
-	for <linux-arm-msm@vger.kernel.org>; Tue, 15 Sep 2026 10:11:24 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.225.76
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789467086; cv=none; b=HwoeyHtsCMxmEEiH4USd8JkCHYU6EhQvEiKIVzZmAPtmki88LXrJ09QJ3PouEU/G54Sas97fk4GquguuFjt/2GjekoDowXIM0VovM+v86PLCfe7JFbiX8ejv2EbwSFaoPmsNtiT37meLfPnwRv1iw0DMBsFb5ffS7vguVLp1jeA=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789467086; c=relaxed/simple;
-	bh=3A11Je4xZf8841M0gdOA4/nlkkErzXWi3HPLVU0/0LY=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=QTbkV8X+xJbzt/ML13vY5D67Kyoczf/s5XNdNNKnP/O/ma5jxSLXR1mTiwFrWs7++Op1sr3uvwqnNs0LD/uOU4umNd0zpGZMLNwyuYbyoyp30XC/pNTvvDC2H2DQuEFZdq6+WhPu6J1BYPEuVq0nKLI3SHZVjzfgYrVsmsunwEs=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=suse.com; spf=pass smtp.mailfrom=suse.com; dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.b=RXY3VjgZ; arc=none smtp.client-ip=74.125.225.76
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=suse.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=suse.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 82A9441E6C5
+	for <linux-arm-msm@vger.kernel.org>; Tue, 15 Sep 2026 10:17:15 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=205.220.168.131
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1789467437; cv=pass; b=NmezWsPvOoI8LuFOzNfGkhM8LC0R/qB6gwu00cbDJjtnajPFCTzZHdb5kdmA/4uFgxt/DD5waAybjfSjg65kzVkzODG7v2XxmjteOWkamGM1f1ZQSYCgqHL2Vy8sc7NWxudW+R3yss0pAfGXquec25PeRDKj6Yj1HqDSVxzrA+Y=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1789467437; c=relaxed/simple;
+	bh=MSWHoWGIFn+iwFs4suHXdlxtL4JfLcvYlTQxB2Sr6m8=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=k6BymUVVYFPIgWTH/QmJsqf7EFRSCX9bsSohwobHdUvo6Pza367DbpOSVo1XBZ3+UnL7tBjGEfoItiwhwfawwWiEuETNJOiZQZn5ZVjmhLGNXOQ42XIif8SOnSyLjzmmnuPRNdwK6BxrPCUpoQM0LgVNYCcG7tq4hZTjdAIngC0=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=NwlEfJCk; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=iIotmcRt; arc=pass smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.b="RXY3VjgZ"
-Received: by mail-wr2-f12.google.com with SMTP id ffacd0b85a97d-482e1b55da9so399218f8f.2
-        for <linux-arm-msm@vger.kernel.org>; Tue, 15 Sep 2026 03:11:24 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="NwlEfJCk";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="iIotmcRt"
+Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68F9gwVl2584570
+	for <linux-arm-msm@vger.kernel.org>; Tue, 15 Sep 2026 10:17:14 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	Y4oAyrq2KtQXNsE5MFIxXDu1u6My17cNb8DrQ/MjMRk=; b=NwlEfJCkHhcoeSOK
+	bmZITvB9u6oxNjBQ7h8OqvduG6KCTuaHaqtd6r7UtHxSq9vvGuJoYmXWue24/YWs
+	MB609WXQEURRd/LJndkTYQ6tbZ9N3xKbp9j4xqrmYqudZRmUR23aOjb1wiSMl9x2
+	WraC9KiG18nhXL5+RWojUvSULL38a1AVIuq5wq4oC2SIwPK/yiuq7QxjLvhDS92V
+	TtLI4pKdvjibQRzT//j2jYyCCunekiY9BJgaAkPJB8tYYO6yH9LJwaixx9l6rHzQ
+	CyuIomy4EwIApyYEM55fZcqdQ+/gbGyH5NI4FWon/jf2iN0qItqpwrYceAbbhvzX
+	5kbpMg==
+Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com [209.85.222.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gpx4s9gg4-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Tue, 15 Sep 2026 10:17:14 +0000 (GMT)
+Received: by mail-qk1-f197.google.com with SMTP id af79cd13be357-93903622880so152925685a.0
+        for <linux-arm-msm@vger.kernel.org>; Tue, 15 Sep 2026 03:17:14 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1789467434; cv=none;
+        d=google.com; s=arc-20260327;
+        b=rlCUQckgV3qkmmbLLM+USRtlMZkaf6jhLc7fbLq9F15rwDjpNtFX78f5ftWYgCJmGY
+         LQ1bnUl4Adt+w9dMDpsUX3IujhWTbT5OOkZ7qpBW5iPakK1pQ03v+g/auTy9136D4ATG
+         3d+EsWKbFsOImdznx5451b3CT4tULlPYpImsd9T+FMZE7lM+0LuSTyv+dpxptSan9znj
+         fzN9izJyPLYKMdSy+W6dNnx8Co20Bsd/C3dEs5pBEOL1F4s18YCqGOC+Pps5jvvPWLd6
+         VnYsizWRHDKIJF/oZFBCpifPPvcDfEP2Ysh27JWQ9dl0CoQj8G5ZjFaIfelSG89PX78R
+         o0tQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:dkim-signature;
+        bh=Y4oAyrq2KtQXNsE5MFIxXDu1u6My17cNb8DrQ/MjMRk=;
+        fh=2wgLLrhBebacxBIqY3vDNQdeGbD4V1BAqDonRoMC8vk=;
+        b=CMiuTZN7cZvzPRNnyBglymdXf3mThGXVAZVYjBnM8YN6aZmQwd2XTAmpnXNreDRvvs
+         y2NqbeP62VmjgTEbhV4XOq7fevhm3fv8XUL1+7nvCQwPwP5okuJVI8BApxsInleRpjHy
+         B9LOLiNbGJu8uLr9AZiTgP5JJm8h+hK6/G20O09NsARHwkAteczsS+LQILLNJkHy9MvK
+         aSf2cZbrIGu2+QKRUayLYKR6s/QzNUlKxwQv3CwP3MMCTyxydUIDYYg4G9kkpvXinR2z
+         oCR0+IbceJrKINnY43IvERmL+XgWnA9pWD+WaM/3BQP5sRfu0p9SkJU5qZG3WnKIsfdK
+         rLhA==;
+        darn=vger.kernel.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1789467083; x=1790071883; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :references:cc:to:content-language:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=Mkp4/wKZXD3uenxBisrMtNjucgS6f3bitOkqBmF1Axo=;
-        b=RXY3VjgZAxCywUcerRzduigoU9FEPtq2dRj2RTVTA/26g80xN3paC1V+NUq4HY/6kv
-         pBKUCza/DP13Q3RY15BlCrhK5a5K3XGLVRemm+Hen3TajhH6MMSKLrtY4D8xVo8LOyc+
-         ZOYXYmmfiny3fd1ughPzmjxbAjjRoPwNScXwu8gAgUgOohYp30d3Wg/+mwKryp/r1+6Y
-         y9nO8vCuFWcY5ep5++7P+7R5ParuSo2UewidF8p71bxxOQwFkrXNpF5AoPD9XlhRS7zO
-         WZnG38c07s0VvOPpPU6h71fT974XBwCzCOBw9TWsZWH/yaARnFXDJLryVk3MKbgCZb5H
-         Ay+w==
+        d=oss.qualcomm.com; s=google; t=1789467434; x=1790072234; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=Y4oAyrq2KtQXNsE5MFIxXDu1u6My17cNb8DrQ/MjMRk=;
+        b=iIotmcRtyn1xIbAtbmxhTEQRAoJoosWUu0KAYqxr/NxrGJkg6D3MhXjsph0RIau96P
+         /tOgmCWz90wqB3gQ4p6cGVvjPJav561jWBBQkQW3ckW3CXKdILncJ7qkSCFHJEDEJKQ3
+         aiO80i49ocuGPjnjua9Ma1rqjTq/S49Kwb/xwxs1kX8bcS2ZcSBMDNj6AZi4x5LZjAxa
+         twQ1eV931iGz1L/PCF/6zBUUa34UtIDCYX9CU+lso5AbEY4DJNLzp3su3LpATV0XJoXj
+         uYxEvfT3zqF6mUDG9JUwkSGmdNytlF11PDSv+8Vxj277k5t2uSozvgcU96zCf90r43om
+         xx+Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1789467083; x=1790071883;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :references:cc:to:content-language:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=Mkp4/wKZXD3uenxBisrMtNjucgS6f3bitOkqBmF1Axo=;
-        b=TkU6o+Fqzsqq0I6aZVuDCIZjE9afkkLESbwnuWyLhGPA80g2959H3phS+5xZnbWIgh
-         Mpo+rN9XNbfS8pp/+mg7vjPTReZAol7kO84DKgJseN3bG/WQZDhGQdYwmnFrZJV7U0gB
-         7Cxgj1beKEVt+ipZmT0Vzota5Fr61fGZJTR+ataneCRvwt3QxSP+36lDo0cjZ/NasxfF
-         iF1+aqWPirax2mPzqEyTUdW3p94m1Wyz93cBl7PA6qUD4p3gWAQ44tuZvI9wOLvfsJL7
-         jV2/FqlX0P3mOZGk2UTV808hUFw87cbb4BDgGBpi2t29G8F9zkqNHdVwc9WOELw4hXNQ
-         lytw==
-X-Forwarded-Encrypted: i=1; AKwUvBwjJ9uW76XVVToZmOVg+t0NpAe95Uv1LYlsxIILpsW2i/atKhELgUugvdc2CxMMtd4AgqhFGgLg8ON3u7+T@vger.kernel.org
-X-Gm-Message-State: AFuF++khysLoKNDqNoL2RwFdG78PqgyQag8kI3qysBJsu7LAHuH8YAIt
-	aNjt1DWel8r3sYsGJ+YZMhjGnKM0Nx/D5Mh6DC1/ts6n6ID7LE36/fmO3i3QQBEqMWc=
-X-Gm-Gg: AYBFou0o8zhpbAm7+ZtYKCvzsBNcAtqB8fL77R4EaYhzHlGuZe7GZ4EEz3OUkmZe2No
-	oiLmurGUh3E6UKef7tL9HIC9agz6tUQtl0yFhJl8jQk2OcokSD+Jmp3adqWX+LVh3pFYtbifXaI
-	1Vq8C6uFlLYCM9DlaVqbfCeNrXkZtoyctDLcIo1A2f5fj1U5qAOiQZVzwdrBlvLTeU1/5Mr6w0/
-	0F0l1ODi/Byl4KkOFN9jta4I1LdGPGDSRgTPbtmo5R9EWfL++iPlbY3sYpZo2c4MHr/fzuugHUW
-	3JEGb02ELtZQV/xPqleAi2D1O4oyz7foxhnJVY5X5zKsgZWP1V3DrLpHpio9CfFoFRIVtrRKt6I
-	YIWdJLzuVY+Q2b+o+G1XxgTDpsfzv8Uf3pLJ61nbTM55CXSEwr3b6h8cAvfDQoJUt/h/hsWAJUH
-	rXZIm6cATSQmzZGsC34YThvOa5tTYQoizrF6Uy2xOXy0iaSqB58khGG3hJHP0w7V5RsA==
-X-Received: by 2002:a05:600c:4e53:b0:49c:ff81:e062 with SMTP id 5b1f17b1804b1-49e7a68b774mr72695915e9.2.1789467081857;
-        Tue, 15 Sep 2026 03:11:21 -0700 (PDT)
-Received: from ?IPV6:2001:1a48:8:903::e14? ([2001:1a48:8:903::e14])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-49e7d695677sm60344685e9.5.2026.09.15.03.11.20
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 15 Sep 2026 03:11:21 -0700 (PDT)
-Message-ID: <ab1491bb-cca5-4145-ac7d-31c966abf7b4@suse.com>
-Date: Tue, 15 Sep 2026 12:11:19 +0200
+        d=1e100.net; s=20260707; t=1789467434; x=1790072234;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=Y4oAyrq2KtQXNsE5MFIxXDu1u6My17cNb8DrQ/MjMRk=;
+        b=pWH0sNpIAlYThBi/B5ooN0fo3sOTV2AvLGUzUDWMHmCcP/MplESJLe0lYeVjLgIJLw
+         BuMXqIs+bZCeDj0dorvc7mH2dCV8YDGkan/m5zZSPPxmekukUjy/KNRkvpnIR+N8T057
+         tizM6rnhsIalyP9pDDhFEQP8EJZBg9N29rULjgwPB8GMgaXBjQJR+PWchJ/gbJE9GjN7
+         gFB34PQrMAIF/BktnMAMaHCru9sFXEh+XIn/UjNQjzP87hVyjrG95xm/zg1ncf4qDrtc
+         C14Lb5pUjvp/ev7Uh6s6M7YF5zzwz2Jr+9wNSybMs5BCC/G8uKK46Ii/4+VMZeMTS3p9
+         gUxA==
+X-Forwarded-Encrypted: i=1; AKwUvBxpNvlni6TxutgKuwcvfC7pmZ3rk2eo0D1olyZ46AGCsUtNqD7Up9a1/i8ioftJboaRNQpdZkhcZR/61CZx@vger.kernel.org
+X-Gm-Message-State: AFuF++lLi5n9lxD/STlC59BkhGz/H3HWH4vCLm8Q6JVDe9gcMMUJCtf6
+	2HGFq5lx1Snyew2ZZnjbaU930+jHY5Hx1XQGdBoo6ncT11+Rxh/12Rh20ptduZxw0sO1E7HmSBK
+	wrw9qtp9Qk4Cy0skk7ECFvKzK475c8iT70rXA28hLpzz6ZEaB7l9j3dXJawbR5gRXyc6oapHNoA
+	Qmb6OLNsXhpJswApkihLHBVEJeVRICrnVvvRSvlLp/Kffi98bbAs8=
+X-Gm-Gg: AYBFou0spO4x0KzPVNJzoWlLpa+sZMqkiSkXcc0ZbPs9culjSWCdwOUODHdCmms6xgi
+	W2J9cRWSnzedkUB1YuNvyUGii5fwZYyqqle5fxeiupiRq/CY+v2a3OedpzYNJaSVBRrU+Bvdqrd
+	cVcnQeuoBAGC4dAoKnwX6+HRSnqhQg+BH9qDVl9ZgSV8joxnK15FLZKXAuEnbuZ1d3uHz34ity2
+	oYW9inI9X5J0EBeNZ5cH1wwATgqpdhkKcW9eN2UsYiy/5lYoHHh00XU3G6G2wt07iatxInLs64S
+	B3uKyhAs8ESIaxeRWaYqeY7OtDFn
+X-Received: by 2002:a05:620a:2b8f:b0:936:d00a:4947 with SMTP id af79cd13be357-93a345745demr388745285a.2.1789467433621;
+        Tue, 15 Sep 2026 03:17:13 -0700 (PDT)
+X-Received: by 2002:a05:620a:2b8f:b0:936:d00a:4947 with SMTP id
+ af79cd13be357-93a345745demr388741685a.2.1789467433112; Tue, 15 Sep 2026
+ 03:17:13 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] net: qrtr: resend HELLO on MHI resume
-Content-Language: en-US
-To: Thorsten Leemhuis <regressions@leemhuis.info>,
- Daniel J Blueman <daniel@quora.org>, Manivannan Sadhasivam <mani@kernel.org>
-Cc: "David S. Miller" <davem@davemloft.net>,
- Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>,
- Paolo Abeni <pabeni@redhat.com>, Simon Horman <horms@kernel.org>,
- Chris Lew <christopher.lew@oss.qualcomm.com>,
- Pranav Mahesh Phansalkar <pranav.phansalkar@oss.qualcomm.com>,
- Deepak Kumar Singh <deepak.singh@oss.qualcomm.com>,
- linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
- Linux kernel regressions list <regressions@lists.linux.dev>,
- Takashi Iwai <tiwai@suse.de>
-References: <20260909055846.16539-1-daniel@quora.org>
- <260eee02-29d3-478f-9a39-d67adfefe862@leemhuis.info>
-From: Vlastimil Babka <vbabka@suse.com>
-Autocrypt: addr=vbabka@suse.com; keydata=
- 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
- pYekxJujNeEDkUlky0Y=
-In-Reply-To: <260eee02-29d3-478f-9a39-d67adfefe862@leemhuis.info>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+References: <20260915-camss-isp-ope-v7-0-77b13d131d3d@oss.qualcomm.com>
+ <20260915-camss-isp-ope-v7-4-77b13d131d3d@oss.qualcomm.com> <4b8f4fd6-53e0-4efd-953a-cd8ebad7d479@linaro.org>
+In-Reply-To: <4b8f4fd6-53e0-4efd-953a-cd8ebad7d479@linaro.org>
+From: Loic Poulain <loic.poulain@oss.qualcomm.com>
+Date: Tue, 15 Sep 2026 12:17:00 +0200
+X-Gm-Features: AcwNN1Xege-7rQu-hUK_GBF3L260MNhym32h4wKC90S0C1_dNyEg6Nm0Y0W-5zQ
+Message-ID: <CAFEp6-3bvRtjDhmRy+G3AzP9vL=TrnGpOf1gU-=aQKNcdyzn_w@mail.gmail.com>
+Subject: Re: [PATCH v7 4/9] media: uapi: Add CAMSS ISP configuration definition
+To: "Bryan O'Donoghue" <bryan.odonoghue@linaro.org>
+Cc: Mauro Carvalho Chehab <mchehab@kernel.org>,
+        Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
+        Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>, Kees Cook <kees@kernel.org>,
+        "Gustavo A. R. Silva" <gustavoars@kernel.org>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>, linux-media@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+        devicetree@vger.kernel.org, linux-hardening@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTE1MDE0NyBTYWx0ZWRfX/+e5rWpqir4f
+ PzuwhczyW/EFr2FgGt1RhG+tZ5sntiyNh/ST6txUcZS4NQ2AxviorW06LYkmiEdFptb/yRSfWSs
+ usattGN/ajINgM9h2SGAqZ7gTO7pZnU=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTE1MDE0NyBTYWx0ZWRfX5GnItYKhw7Dw
+ aUAdSHW3Oxi/t87yKV/17QCg1WvcohBRo19IPKRgjTp/2klTFT1cL5WXS+mKpwIpSXFIjulw4jV
+ n8NzDUznlvWOry2Vz3PQGFLgTmp1BabWcB09Qqvj55cFtJ0iGn6xiRgJt2n44/lQ/ZMqgZOFMPx
+ PEvYRKrttQU72LPiES38JFt49qkdJdA3xPF6ItuuuDzp6uHbdPlYRSUTucWHxaTGJzHn5L4M85L
+ cV+90/pFRYVaa5JX011NZ2m74xshTDlw+SgD/5Hl2VOsX1lwoaMZFVuK1RQ+vhNKp00FzatoJZB
+ ZFHkBvZNP6U/rNCYKvFZz+//t6YRVmg8j3p4jDnwOEZ1Z2qrAnhBljfJimgoHRBceFAsP1xnMKl
+ 3fEpXZTa3cXT+McW1D6Y3KxRO2d5XNGkWx+JR+PuNx7R/eZRvLngmiAtIRD62x0pzBwUNzykbMl
+ iP0do7fR8rK0dGDtMkw==
+X-Authority-Analysis: v=2.4 cv=HsDjiETS c=1 sm=1 tr=0 ts=6aa91b2a cx=c_pps
+ a=50t2pK5VMbmlHzFWWp8p/g==:117 a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10
+ a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
+ a=YMgV9FUhrdKAYTUUvYB2:22 a=xq3W2uTSAAAA:8 a=KKAkSRfTAAAA:8 a=EUspDBNiAAAA:8
+ a=_-fwvmfW1z61RZSq5NcA:9 a=QEXdDO2ut3YA:10 a=IoWCM6iH3mJn3m4BftBB:22
+ a=P5L7wpMTXyg1GfFA3Gwx:22 a=cvBusfyB2V15izCimMoJ:22
+X-Proofpoint-GUID: bzuGJ17qkJ7k8SVAxlLXfSQCffKA4AoZ
+X-Proofpoint-ORIG-GUID: bzuGJ17qkJ7k8SVAxlLXfSQCffKA4AoZ
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-09-15_03,2026-09-14_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ priorityscore=1501 phishscore=0 lowpriorityscore=0 clxscore=1015 adultscore=0
+ impostorscore=0 suspectscore=0 spamscore=0 malwarescore=0 bulkscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609150147
 
-On 9/14/26 11:04, Thorsten Leemhuis wrote:
-> On 9/9/26 07:58, Daniel J Blueman wrote:
->> Since the MHI HELLO exchange was relocated, it is sent only at device
->> registration. During a suspend-resume cycle, the firmware in WiFi
->> cards such as WCN7850 indefinitely waits for another HELLO,
->> triggering:
->> 
->>   ath12k_wifi7_pci 0004:01:00.0: timeout while waiting for restart complete
->>   ath12k_wifi7_pci 0004:01:00.0: failed to resume core: -110
->> 
->> Fix this by triggering the handshake from resume_early in the MHI
->> transport.
->> 
->> Validated on Qualcomm X1E-801800 on Lenovo Slim 7x across 10
->> suspend-resume cycles.
-> 
-> For the record: Takashi ran into this regression as well and provided a
-> different fix, but withdrew it after I pointed out this fix, which
-> worked for Takashi. For details see:
-> https://lore.kernel.org/all/87mrtkpd2q.wl-tiwai@suse.de/
+Hi Bryan,
 
-Thanks to Thorsten pointing me there I skipped the bisect and applied this
-patch instead and it works.
+On Tue, Sep 15, 2026 at 11:11=E2=80=AFAM Bryan O'Donoghue
+<bryan.odonoghue@linaro.org> wrote:
+>
+> On 15/09/2026 09:11, Loic Poulain wrote:
+> > Add the uapi header qcom-camss-config.h defining the ISP parameter
+> > structures used by the CAMSS Offline Processing Engine (OPE) driver.
+> > This includes structures for white balance, chroma enhancement and
+> > color correction configuration.
+> >
+> > The block type enum is shared across CAMSS ISPs so that userspace only
+> > has to deal with a single set of block identifiers.
+> >
+> > Signed-off-by: Loic Poulain <loic.poulain@oss.qualcomm.com>
+> > ---
+> >   include/uapi/linux/qcom-camss-config.h | 212 ++++++++++++++++++++++++=
++++++++++
+> >   1 file changed, 212 insertions(+)
+> >
+> > diff --git a/include/uapi/linux/qcom-camss-config.h b/include/uapi/linu=
+x/qcom-camss-config.h
+> > new file mode 100644
+> > index 0000000000000000000000000000000000000000..e3d6cc4df7de00345e8142c=
+81392dd42338c6ead
+> > --- /dev/null
+> > +++ b/include/uapi/linux/qcom-camss-config.h
+> > @@ -0,0 +1,212 @@
+> > +/* SPDX-License-Identifier: GPL-2.0-only WITH Linux-syscall-note */
+> > +/*
+> > + * Qualcomm CAMSS ISP Driver - Userspace API
+> > + *
+> > + * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+> > + */
+> > +
+> > +#ifndef _UAPI_LINUX_QCOM_CAMSS_CONFIG_H
+> > +#define _UAPI_LINUX_QCOM_CAMSS_CONFIG_H
+> > +
+> > +#include <linux/types.h>
+> > +#include <linux/media/v4l2-isp.h>
+> > +
+> > +/**
+> > + * enum camss_params_block_type - CAMSS ISP parameter block identifier=
+s
+> > + *
+> > + * Each value identifies one ISP processing block.  The value is place=
+d in
+> > + * the @type field of &struct v4l2_isp_params_block_header.
+> > + *
+> > + * @CAMSS_PARAMS_OPE_WB_GAIN: white balance gains and offsets (CLC_WB)=
+,
+> > + *   &struct camss_params_ope_wb_gain
+> > + * @CAMSS_PARAMS_OPE_CHROMA_ENHAN: RGB to YUV colour transfer matrix
+> > + *   (CLC_CHROMA_ENHAN), &struct camss_params_ope_chroma_enhan
+> > + * @CAMSS_PARAMS_OPE_COLOR_CORRECT: colour correction matrix (CLC_CC),
+> > + *   &struct camss_params_ope_color_correct
+> > + * @CAMSS_PARAMS_OPE_GAMMA: per-channel gamma correction curves (CLC_G=
+LUT),
+> > + *   &struct camss_params_ope_gamma
+> > + */
+> > +enum camss_params_block_type {
+> > +     CAMSS_PARAMS_OPE_WB_GAIN =3D 1,
+> > +     CAMSS_PARAMS_OPE_CHROMA_ENHAN =3D 2,
+> > +     CAMSS_PARAMS_OPE_COLOR_CORRECT =3D 3,
+> > +     CAMSS_PARAMS_OPE_GAMMA =3D 4,
+> > +};
+>
+> Most of the OPE specific naming can be dropped, I shared the ICP
+> data-structure analysis already:
+>
+> https://patchwork.linuxtv.org/project/linux-media/patch/20260426000346.11=
+58633-1-bryan.odonoghue@linaro.org/
 
-My laptop is T14s AMD Gen3 with ath11k_pci. Since rc2 the wifi would stop
-working on suspend/resume, making the resume freeze for a while (I initially
-thought it was frozen completely and was shutting off the laptop).
+Ok, I thought we agreed on having OPE specific structures, that is why
+I recently moved everything to OPE specific name.
 
-Interestingly the card doesn't recover after reboot, but only after a full
-power off/on cycle. But if the HELLO handshake is sent after a boot,
-shouldn't it recover? Maybe the hardware gets too confused to recover.
-Dunno. Hm maybe I can try if 7.2 kernel (and/or 7.3 with this patch)
-recovers it without poweroff/on after a 7.3 without this patch
-suspend/resume wedges it.
+>
+> i.e.
+> > +struct camss_params_ope_color_correct {
+> > +     struct v4l2_isp_params_block_header header;
+> > +     __u16 a[3];
+> > +     __u16 b[3];
+> > +     __u16 c[3];
+> > +     __u16 k[3];
+> > +     __u16 qfactor;
+> > +     __u16 _pad[3];
+> > +} __attribute__((aligned(8)));
+>
+> For ICP I have:
+>
+> +struct camss_params_color_correct {
+> +       struct v4l2_isp_params_block_header header;
+> +       __u16 a[3];
+> +       __u16 b[3];
+> +       __u16 c[3];
+> +       __u16 k[3];
+> +       __u16 qfactor;
+> +       __u16 _pad[3];
+> +} __attribute__((aligned(8)));
+>
+> So this data-structure is shared camss_params_ope_color_correct ->
+> camss_params_color_correct
 
-But anyway this prevents the suspend/resume issue for me from happening in
-the first place on 7.3-rc3, so:
+Ack.
 
-Tested-by: Vlastimil Babka (SUSE) <vbabka@kernel.org>
+Also, I will remove the _ope_ suffix from the wb_gain and
+color_correct structures. These structures may differ or even be
+absent in the ICP case, but they should remain aligned with the IFE
+implementation since both use the same underlying blocks.
 
-> 
-> Ciao, Thorsten
->> Fixes: 544d85de4dc2 ("net: qrtr: Send HELLO message on endpoint register")
->> Signed-off-by: Daniel J Blueman <daniel@quora.org>
->> ---
->>  net/qrtr/af_qrtr.c | 13 +++++++++++++
->>  net/qrtr/mhi.c     | 10 +++++++++-
->>  net/qrtr/qrtr.h    |  2 ++
->>  3 files changed, 24 insertions(+), 1 deletion(-)
->> 
->> diff --git a/net/qrtr/af_qrtr.c b/net/qrtr/af_qrtr.c
->> index 78347c937af7..2ffcfc2fdb4a 100644
->> --- a/net/qrtr/af_qrtr.c
->> +++ b/net/qrtr/af_qrtr.c
->> @@ -623,6 +623,19 @@ static void qrtr_hello_work(struct work_struct *work)
->>  	qrtr_port_put(ctrl);
->>  }
->>  
->> +/* Trigger the HELLO handshake after the remote has been reset, eg on resume */
->> +void qrtr_endpoint_hello(struct qrtr_endpoint *ep)
->> +{
->> +	struct qrtr_node *node = ep->node;
->> +
->> +	mutex_lock(&node->ep_lock);
->> +	node->hello_sent = false;
->> +	mutex_unlock(&node->ep_lock);
->> +
->> +	schedule_delayed_work(&node->say_hello, 0);
->> +}
->> +EXPORT_SYMBOL_GPL(qrtr_endpoint_hello);
->> +
->>  /**
->>   * qrtr_endpoint_register() - register a new endpoint
->>   * @ep: endpoint to register
->> diff --git a/net/qrtr/mhi.c b/net/qrtr/mhi.c
->> index 3990da1a65dc..50326ffa3401 100644
->> --- a/net/qrtr/mhi.c
->> +++ b/net/qrtr/mhi.c
->> @@ -183,6 +183,7 @@ static int __maybe_unused qcom_mhi_qrtr_pm_suspend_late(struct device *dev)
->>  static int __maybe_unused qcom_mhi_qrtr_pm_resume_early(struct device *dev)
->>  {
->>  	struct mhi_device *mhi_dev = container_of(dev, struct mhi_device, dev);
->> +	struct qrtr_mhi_dev *qdev = dev_get_drvdata(dev);
->>  	enum mhi_state state;
->>  	int rc;
->>  
->> @@ -201,7 +201,13 @@ static int __maybe_unused qcom_mhi_qrtr_pm_resume_early(struct device *dev)
->>  		return rc;
->>  	}
->>  
->> -	return qcom_mhi_qrtr_queue_dl_buffers(mhi_dev);
->> +	rc = qcom_mhi_qrtr_queue_dl_buffers(mhi_dev);
->> +	if (rc)
->> +		return rc;
->> +
->> +	qrtr_endpoint_hello(&qdev->ep);
->> +
->> +	return 0;
->>  }
->>  
->>  static const struct dev_pm_ops qcom_mhi_qrtr_pm_ops = {
->> diff --git a/net/qrtr/qrtr.h b/net/qrtr/qrtr.h
->> index 3f2d28696062..de2de69a6199 100644
->> --- a/net/qrtr/qrtr.h
->> +++ b/net/qrtr/qrtr.h
->> @@ -27,6 +27,8 @@ int qrtr_endpoint_register(struct qrtr_endpoint *ep, unsigned int nid);
->>  
->>  void qrtr_endpoint_unregister(struct qrtr_endpoint *ep);
->>  
->> +void qrtr_endpoint_hello(struct qrtr_endpoint *ep);
->> +
->>  int qrtr_endpoint_post(struct qrtr_endpoint *ep, const void *data, size_t len);
->>  
->>  int qrtr_ns_init(void);
+>
+> > +/**
+> > + * struct camss_params_ope_gamma - per-channel gamma correction curves
+> > + *
+> > + * Implements the CLC_GLUT pipeline module, applied in the RGB domain.=
+  It
+> > + * holds one independent lookup table per colour channel. Each table i=
+s a
+> > + * direct (not segmented) map of input level to output level.
+> > + *
+> > + * Each table has @CAMSS_OPE_GAMMA_LUT_SIZE (256) entries of 16-bit un=
+signed
+> > + * output. Each entry holds an X-bit output value depending on interna=
+l bus,
+> > + * the upper bits are ignored by the hardware.
+> > + *
+> > + * On Agatti OPE, The module maps a 12-bit input to an 8-bit output, t=
+he top
+> > + * 8 input bits index the table and the low 4 bits are used to linearl=
+y
+> > + * interpolate between adjacent entries. Entry i therefore represents =
+the
+> > + * output for input level i/255 of full scale.
+> > + * Output range: 0x00 =3D black, 0xFF =3D white.
+>
+> That's not specific to Agatti, its hwo the Qcom gamma silicon works right=
+ ?
 
+Yes, as far as I know. However, we may observe some variation if the
+internal bus width changes.
+Considering the hardware platforms we currently support with OPE, as
+well as the upcoming platforms, I think we can treat this as a generic
+assumption for now.
+
+> Same RTL synthesised in OPE, IPE and IFE. So you don't need to make this
+> OPE specific commentary.
+
+Ack.
+
+>
+> > + *
+> > + * How to fill a curve (same on all three channels for pure luminance
+> > + * gamma; different curves per channel additionally shift colour balan=
+ce):
+> > + *
+> > + *   Identity (pass-through, gamma 1.0):
+> > + *     lut[i] =3D i;                                // i =3D 0..255
+> > + *
+> > + *   Encode with gamma g (e.g. sRGB-like, g =3D 2.2):
+> > + *     lut[i] =3D round(pow(i / 255.0, 1.0 / g) * 255.0);
+> > + *
+> > + * @header:  block header; @header.type =3D CAMSS_PARAMS_OPE_GAMMA
+> > + * @glut:    green channel gamma curve
+> > + * @blut:    blue  channel gamma curve
+> > + * @rlut:    red   channel gamma curve
+> > + */
+> > +struct camss_params_ope_gamma {
+> > +     struct v4l2_isp_params_block_header header;
+> > +     __u16 glut[CAMSS_OPE_GAMMA_LUT_SIZE];
+> > +     __u16 blut[CAMSS_OPE_GAMMA_LUT_SIZE];
+> > +     __u16 rlut[CAMSS_OPE_GAMMA_LUT_SIZE];
+> > +} __attribute__((aligned(8)));
+>
+> For the ICP I have
+>
+> +struct camss_params_glut {
+> +       struct v4l2_isp_params_block_header header;
+> +       __u8  instance;
+> +       __u8  _pad[7];
+> +       __u16 r[CAMSS_GLUT_LUT_SIZE];
+> +       __u16 g[CAMSS_GLUT_LUT_SIZE];
+> +       __u16 b[CAMSS_GLUT_LUT_SIZE];
+> +} __attribute__((aligned(8)));
+>
+> So it makes more sense to differentiate the firmware type to the
+> register-mapping type. i.e. the above becomes camss_params_icp_gamma {}
+> whereas your subumitted change would be just camss_params_gamma {}
+
+ok!
+
+
+
+>
+> > +#define CAMSS_PARAMS_OPE_MAX_PAYLOAD         \
+> > +     (sizeof(struct camss_params_ope_wb_gain)        +\
+> > +      sizeof(struct camss_params_ope_chroma_enhan)   +\
+> > +      sizeof(struct camss_params_ope_color_correct)  +\
+> > +      sizeof(struct camss_params_ope_gamma))
+> > +
+> > +#endif /* _UAPI_LINUX_QCOM_CAMSS_CONFIG_H */
+> >
+>
