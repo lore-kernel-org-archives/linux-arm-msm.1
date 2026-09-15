@@ -1,67 +1,67 @@
-Received: from mail-wm1-f53.google.com (mail-wm1-f53.google.com [209.85.128.53])
+Received: from mail-wr1-f50.google.com (mail-wr1-f50.google.com [209.85.221.50])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C10E13A1683
-	for <linux-arm-msm@vger.kernel.org>; Tue, 15 Sep 2026 08:04:55 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.53
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 951943B5305
+	for <linux-arm-msm@vger.kernel.org>; Tue, 15 Sep 2026 08:05:52 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.50
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789459497; cv=none; b=HpDrYtQ+c1nmHcXzrzofcy4bd/Xqcxg+W9/bVRMJWYzfUm2TqWVacs0HrJOJaDKyxmztr4Oc2R7fLu9hSY2qyl/AguOUdpQ5wmbONY6vJyL2VM4ePzvBs5ySb1A2ryYu6Pt3sKllbPukdGfJ86ghG1Z+87RRM7G9qDzYxgTN6i8=
+	t=1789459554; cv=none; b=AK8bgQPtMRKlY3qKK3SThbdrHAi0Wg3X9MBazhNkjk/Q3o++UAWqb8kfAkc21ud3OT61zHYKNR5YuH+w0+qvk9IUzplYayerWQP9p/0y9ZlX2whCNm0THoo9i7PaMs/rW1W2RZZ7Snu6lsQRpFSnLH/UW6y3bmtTBmEbem95H7o=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789459497; c=relaxed/simple;
-	bh=0oTshtxPlnqGnJFpFlsNGtOZIMoAHkXNWQJYJcuMq1I=;
+	s=arc-20240116; t=1789459554; c=relaxed/simple;
+	bh=zUR5ieW/1xeMro3AUcJkNuU5g5wF7tcrOcN9Xqi85C4=;
 	h=Message-ID:Date:MIME-Version:From:Subject:To:Cc:References:
-	 In-Reply-To:Content-Type; b=F29BeJO31YCYB0tlONKPdrhtuizuQcATP9HWk+WbyTl8n7J/GL7EYmza219InjB28ilExI1k7HkCdwEBPh7SHnC5J+WO6X/6l6/fChNV5ll7IUh3aqh0AvN4fpi24kAFEz9b5wMNXPOwnlxl+TdChbzH37H+9S5K0cmkCf6d9bk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=IORpcRNg; arc=none smtp.client-ip=209.85.128.53
+	 In-Reply-To:Content-Type; b=kv25+neJ8v26eSbLhQzfYlY3f3/grK0jVKee+Wktib3HCYiOG9nl8c3GzoZ7elB1iR1CiVeDefVvJH5hEwn1SmkOTQ/uImM/3Qj2PJAatc7t/+ZYRrwD75irRvJu+2deqTtPPU3bpnnWQ/HHi1KWkebZo3a3CsPqbrP7QM5A5Ek=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=edpY8qm6; arc=none smtp.client-ip=209.85.221.50
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="IORpcRNg"
-Received: by mail-wm1-f53.google.com with SMTP id 5b1f17b1804b1-49e6deb520eso39270115e9.0
-        for <linux-arm-msm@vger.kernel.org>; Tue, 15 Sep 2026 01:04:55 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="edpY8qm6"
+Received: by mail-wr1-f50.google.com with SMTP id ffacd0b85a97d-47de0093c42so3952509f8f.3
+        for <linux-arm-msm@vger.kernel.org>; Tue, 15 Sep 2026 01:05:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1789459494; x=1790064294; darn=vger.kernel.org;
+        d=linaro.org; s=google; t=1789459551; x=1790064351; darn=vger.kernel.org;
         h=content-transfer-encoding:content-type:in-reply-to:organization
          :autocrypt:content-language:references:cc:to:subject:reply-to:from
          :user-agent:mime-version:date:message-id:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=2kATBR0QOSU9fXXjvSA3WJqKNnMFONEMjfJxwyv31kI=;
-        b=IORpcRNgxtnx8AN+BUFfnJwue9pcSmrL/tb4w7ozvyJU5fFPp7MwzK8s+gUHOv7P4V
-         s0UhyJqLDu3Yq+1LObcxq3ZgTE62DDHVqN5K59pFmlfNPh1hEgSRM2snCiDyCdLOBr2o
-         81G040B1ZIXtuRizAm4Tb7sl50982ghI9Q7L9nYbe38gPVUlUY2IHwxZvFeKV1/GeiIl
-         43AkJlgzjMlg/4Xo/RhDCPEbiDMlE5PbeaxBeQHafu8mmx/7LwBLgSFnglHVgn9HRt5L
-         nEndo7rMMz4J8jeIejlDQrZi+8vBHljzZcRNm3PWEDOYP5t8EctR/CIncZSkPHF9QcSF
-         oWwA==
+        bh=fFvjfvuRHyiDs9ZL0ZSGaphdyLSM272ZOZkijKnwP9w=;
+        b=edpY8qm6xz8j9w/4OMP+/X9E5LFuJX8xep8D5ygE+ILyYCEa/cSdym5s63RpXp7sCe
+         TFIrmSNKtIqZaa6cm1077jOVRJ7pGfN4+socmUGNfj1mVdzvzZM738bgmrjsPTRgD6XR
+         KIo+2QWacmghvxx9S8aLWzPGZwguibatesbtdg5xI0tB4kD++3CxL3w16311o2X99E6N
+         MxKByS9PW12ayfIxafvZb34zQVaGcLgwYk7IpjB5jkg/X2bWTC+em7H7JjMCTv+orHap
+         9lB1vuyJ3/syTvnN+aH7mhoM7lcBQdPzceGxRGGEsENTJrTNFnuD+FdMzV28wbm6jGjK
+         33BQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1789459494; x=1790064294;
+        d=1e100.net; s=20260707; t=1789459551; x=1790064351;
         h=content-transfer-encoding:content-type:in-reply-to:organization
          :autocrypt:content-language:references:cc:to:subject:reply-to:from
          :user-agent:mime-version:date:message-id:x-gm-gg:x-gm-message-state
          :from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=2kATBR0QOSU9fXXjvSA3WJqKNnMFONEMjfJxwyv31kI=;
-        b=BfdEa5wkDfBhDA2RrmIn93G8GOXpXwuIYxe58Qk7QpDEVnPfSmrfd2JrwsRolwCQBz
-         2vhI1ccQqVUCcaoX2bm9yFApiHYjD2jm+U+Y9FzbaoFt/8OEyaOeT+9Xt/hwArEjehgD
-         erFqD55UBzgMhdAbjtWBgwBqNovLS5PAwOpDvuKBiyIaWq4EIrsfdWP+4IYRBvhDvpnI
-         GSh3wqpvU/mbcwN0FdKQNEVKZHfH8n2EwNbdnpbTWV1+bHq/BPZuWtiX1jJpKAJIKqzZ
-         5viNmxj04xoTfXkcSateAxLsu9zY2EL2IKLOUHJbrKeptzCuE4tSSctm3pvAAERS3+lV
-         ATRw==
-X-Gm-Message-State: AFuF++lPiOPoQZcaX4dvhu/QWeFH5n0w5YGHINvt/EEeS1o7d7U5saqT
-	lTmM6Zwb/rEpWtL9sGATl2eePfJQwUqBZwuQnriY1bcPjkkiLU3ABwE2p0Ve4MtJh9Q=
-X-Gm-Gg: AYBFou0aLxGCrPIbKsM5vHBQQNipNj5B/2EHiV0J74+IMWs8E7+F1w4GpCfBl0FphNw
-	AY16cEo6ILwH6Q3uU4Oi6nVmOTfG7g+yESL/xmCue94M0KuV/zZIkOoHOlfBjHu3wIYWh+Oy2BR
-	YJPISh0ovGmgtM3rgKppi1TUwpb14LDiDHjywDjWnC8fQTPcGhu4EmAFzHTYL9IOwGJuAOVUicg
-	0wUBm11FctIPqa8oW68OH+KLij752PKDoMGBhUlU4OIDf2s8ijKjxj3JNhSRLcUTW3EiQWnRBzc
-	IoZfVBBjDhUGroTM0Ofjg/YXWIwksS3fqCehNVaoXz6ViMGFvjPQ0WuuQ5HWUd5YruP7oOiTiea
-	fkEJAWs2o/ji5nkPvpWUluYIrx9X8TgKxyIpjdPvf7pJlJ+e4eFdYdV/YX8gy5Dw+KzttNWjVKV
-	QSoqYh4N3QxfqevsTYkp5KJPY3VIqKWxCKR9jTgHOSRmMWfl0TETr8uCdv0jduC0gyUdS5tE34W
-	FcPkoNSGqRfCDkflABXeJMgQ++23c63CO6OnXfksv72AX/pc1E=
-X-Received: by 2002:a05:6000:2c0b:b0:486:e77c:ba4 with SMTP id ffacd0b85a97d-48702b00eddmr6889231f8f.22.1789459493717;
-        Tue, 15 Sep 2026 01:04:53 -0700 (PDT)
+        bh=fFvjfvuRHyiDs9ZL0ZSGaphdyLSM272ZOZkijKnwP9w=;
+        b=FwG5pWgSQNcWgLTGpwq3+fc06fCdukaYHbg7Y4c2OeHgfpTamoz+Km6ZHHpj3bsEAk
+         mwM1Uo/Bi4p9n/0oHwcbfdoMwTcd24vcE05FYut8ZwaSf4YWcHE/6Kf7QxdPxTspPTxO
+         X9jliwhEHdHxY8fT8GFpx71uafTy9y6KRbd70B/8wG7CNZ4cPdNKvNWxU8sknDhsYUSG
+         hkx3MeH9lIJ1WA0bXyrq5/KYuNYPb4dfetz8IGFRaRjwUtt1pPo5suaLhk/gayWTRdtx
+         9dnV21cy5STSyakahRdb3ApsvWWvdvARy1T4DzF3bXgGUcu6R9qar25AX887OOE9ckdS
+         BbDg==
+X-Gm-Message-State: AFuF++kkTh3lo184RY2YR02Ujvo/K61hntgCqd0Pd/NgMNV+q9PtGJZC
+	Fd1Tr2mZujZofrWhh/09/1sAKFs+xODYYWHgbLq0KW79mQveqKEVZufFF+VOVwAs7vQ=
+X-Gm-Gg: AYBFou1VzqlDALPx15hiTx+/dPNO5J6M0HzPzuWg2eN3ZzvKsTwEDhZpUy0GeeW9DPc
+	yA+8yh38v7UE3Ubqjqom79JHtJcvn0EvosolQfeGIcLOgExX7lUdPSfUbk5h6iDCGaJMUczB7fY
+	anGM35CfwGnITJ2tCaGT2O+vAvwQhnqEDDXoli1U30E9sUAHns43iK86OV4KnzDjDPjYvqGW/Fa
+	S0Wd2JNg+GnGk1W25JE1jb74aMShhEYKut89EUqzpVPKIM9GS9VlYfEqgt8EeIaeQRxFuK59mRP
+	HgeQsc/Dk5XHl58OcQcose/iqphULEicjNy7tlODxXh+0IJQmgpv4RwdyXmREAv+wkdd5E8eyeN
+	c7kxH1NR5BrptcG1Ho7WdvlbwdpF0E/xN4iH3nSQ+qJOa0wmXvqpEhWLvfFLNUbkoNo0B0wYSkV
+	7KZrMrusXyc+3zR+RvO1Fv0enrd3/1CpTpMsdYOHJeqWzebEDF8/OQOVua3T/LYXObPPO81FF8F
+	BsdRW+/YpVIEwqXpovSwOSrl9WHwzdfcmdL8BhPikyFCQkPJ2k=
+X-Received: by 2002:a05:6000:41c3:b0:485:85d5:7ac7 with SMTP id ffacd0b85a97d-48702b0e846mr6483949f8f.26.1789459550628;
+        Tue, 15 Sep 2026 01:05:50 -0700 (PDT)
 Received: from ?IPV6:2a01:e0a:106d:1080:ff86:16e:fede:9407? ([2a01:e0a:106d:1080:ff86:16e:fede:9407])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-486eb33ee5csm32961569f8f.20.2026.09.15.01.04.52
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-486eb32e7f5sm32371402f8f.9.2026.09.15.01.05.49
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 15 Sep 2026 01:04:53 -0700 (PDT)
-Message-ID: <ad089a64-5708-4ad9-ae82-924cecb23f85@linaro.org>
-Date: Tue, 15 Sep 2026 10:04:52 +0200
+        Tue, 15 Sep 2026 01:05:50 -0700 (PDT)
+Message-ID: <107fc574-ecfa-42ef-b576-227dd5bae2c2@linaro.org>
+Date: Tue, 15 Sep 2026 10:05:49 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -71,18 +71,14 @@ MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: Neil Armstrong <neil.armstrong@linaro.org>
 Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH v2 0/2] drm/msm/a6xx: use correct timestamp counter on
- A750 GPU
-To: Rob Clark <robin.clark@oss.qualcomm.com>, Sean Paul <sean@poorly.run>,
- Konrad Dybcio <konradybcio@kernel.org>,
- Akhil P Oommen <akhilpo@oss.qualcomm.com>,
- Dmitry Baryshkov <lumag@kernel.org>, Abhinav Kumar
- <abhinav.kumar@linux.dev>, Jessica Zhang <jesszhan0024@gmail.com>,
- Marijn Suijten <marijn.suijten@somainline.org>,
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>
-Cc: linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org,
- freedreno@lists.freedesktop.org, linux-kernel@vger.kernel.org
-References: <20260909-topic-sm8650-gmu-a750-timestamp-reg-v2-0-091d74958951@linaro.org>
+Subject: Re: [PATCH v4 0/3] ASoC: qcom: allow SM[456]50 HDK board to play
+ audio via I2S
+To: Bjorn Andersson <andersson@kernel.org>,
+ Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
+ linux-kernel@vger.kernel.org
+References: <20260831-topic-sm8x50-next-hdk-i2s-v4-0-a224aa073f9d@linaro.org>
 Content-Language: en-US, fr
 Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
@@ -109,51 +105,58 @@ Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
  QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
 Organization: Linaro
-In-Reply-To: <20260909-topic-sm8650-gmu-a750-timestamp-reg-v2-0-091d74958951@linaro.org>
+In-Reply-To: <20260831-topic-sm8x50-next-hdk-i2s-v4-0-a224aa073f9d@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Hi Rob, Akhil,
+Hi,
 
-On 9/9/26 15:07, Neil Armstrong wrote:
-> The A750 uses a different counter register as used on the downstream
-> driver:
+On 8/31/26 11:13, Neil Armstrong wrote:
+> Following [1], this adds the necessary settings to setup
+> the I2S link to the HDMI bridge to allow audio playback.
 > 
-> static u64 gen7_9_0_read_alwayson(struct adreno_device *adreno_dev)
-> {
-> ...
-> 	/* Always use the GMU AO counter when doing a AHB read */
-> 	gmu_core_regread(device, GEN7_GMU_CX_AO_COUNTER_HI, &hi);
-> 	gmu_core_regread(device, GEN7_GMU_CX_AO_COUNTER_LO, &lo);
-> ...
-> }
+> All dependencies are merged v7.3-rc1
 > 
-> gen7_reg.h:#define GEN7_GMU_CX_AO_COUNTER_LO		0x1f880
-> gen7_reg.h:#define GEN7_GMU_CX_AO_COUNTER_HI		0x1f881
+> [1] https://lore.kernel.org/all/20260724182446.1484894-1-mohammad.rafi.shaik@oss.qualcomm.com/
 > 
 > Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
 > ---
+> Changes in v4:
+> - Rebased on v7.3-rc1
+> - Link to v3: https://patch.msgid.link/20260805-topic-sm8x50-next-hdk-i2s-v3-0-07a6483c430f@linaro.org
+> 
+> Changes in v3:
+> - Fixed node unit number on patch 3
+> - Link to v2: https://patch.msgid.link/20260731-topic-sm8x50-next-hdk-i2s-v2-0-42c1acee5a2d@linaro.org
+> 
 > Changes in v2:
-> - Fix swapped H/L registers in XML
-> - Link to v1: https://patch.msgid.link/20260908-topic-sm8650-gmu-a750-timestamp-reg-v1-0-284880d6e68b@linaro.org
+> - Dropped applied patch 1
+> - Fixed node unit number
+> - Reversed clock names order to respect bindings
+> - Link to v1: https://patch.msgid.link/20260728-topic-sm8x50-next-hdk-i2s-v1-0-2393a0fe4aa9@linaro.org
+> 
+> ---
+> Neil Armstrong (3):
+>        arm64: dts: qcom: sm8450-hdk: Enable I2S for HDMI
+>        arm64: dts: qcom: sm8550-hdk: Enable I2S for HDMI
+>        arm64: dts: qcom: sm8650-hdk: Enable I2S for HDMI
 
-Gentle ping for review
+Gentle ping, this has been out for a while and the related ASoC changes were merged fro v7.3 already.
 
 Thanks,
 Neil
 
 > 
+>   arch/arm64/boot/dts/qcom/sm8450-hdk.dts | 36 +++++++++++++++-
+>   arch/arm64/boot/dts/qcom/sm8450.dtsi    | 40 ++++++++++++++++++
+>   arch/arm64/boot/dts/qcom/sm8550-hdk.dts | 36 +++++++++++++++-
+>   arch/arm64/boot/dts/qcom/sm8550.dtsi    | 73 +++++++++++++++++++++++++++++++++
+>   arch/arm64/boot/dts/qcom/sm8650-hdk.dts | 35 +++++++++++++++-
+>   arch/arm64/boot/dts/qcom/sm8650.dtsi    | 40 ++++++++++++++++++
+>   6 files changed, 257 insertions(+), 3 deletions(-)
 > ---
-> Neil Armstrong (2):
->        drm/msm/a6xx: Add CX AO Counter registers used for a750 GPUs
->        drm/msm/a6xx: Use CX AO Counter register for timestamp on a750 GPUs
-> 
->   drivers/gpu/drm/msm/adreno/a6xx_gpu.c             | 12 +++++++++---
->   drivers/gpu/drm/msm/registers/adreno/a6xx_gmu.xml |  2 ++
->   2 files changed, 11 insertions(+), 3 deletions(-)
-> ---
-> base-commit: df2908090cda368b01ff43709f51890076c56157
-> change-id: 20260908-topic-sm8650-gmu-a750-timestamp-reg-2e7575e6279d
+> base-commit: cee9395acd8043be0644b25c34bfa86623f2b935
+> change-id: 20260728-topic-sm8x50-next-hdk-i2s-6d63c25eceac
 > 
 > Best regards,
 > --
