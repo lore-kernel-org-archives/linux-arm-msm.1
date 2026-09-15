@@ -1,86 +1,68 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wm2-f12.google.com (mail-wm2-f12.google.com [74.125.225.140])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 60B9F3B636A
-	for <linux-arm-msm@vger.kernel.org>; Tue, 15 Sep 2026 13:02:06 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CEADF3BADB1
+	for <linux-arm-msm@vger.kernel.org>; Tue, 15 Sep 2026 13:11:51 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.225.140
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789477327; cv=none; b=E5sjHWs1RkfEGYedr1z7BAQmv5WSK6VsdC9tj537/v6ga1Es6VzdPaLKE81gCga41Gr72ApzlIPfYOH1GWzA+bzw3ksZZKEIlf7d5oieu/un3ewobut/OY32kQRvJzxrcJpOM21Fz6y19Y0N6OpWUOS5ArHz1/tz3W7GhsGU6Fc=
+	t=1789477913; cv=none; b=QaRrmNXeiBHWOmgey9PeROSPDV0zQhnGQDlXQoLUS14V1/cXdcc4g9bihOFG3rZhbg6YewPoyghUxBOJDvoXHF/PVu9K+MHz82i+EcdxZUfoIiogy8OAHXPUQf0cakoKbQkvo66CuYoBq8MoEQ8fp2tRujSecHSmxBXx99Ri0XY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789477327; c=relaxed/simple;
-	bh=iQGXphKryUmb+DAlTxCnwPtT4u12722nCx+SciMAuww=;
+	s=arc-20240116; t=1789477913; c=relaxed/simple;
+	bh=dJIpLG7rWyh8df7B17Ve+WIWPViliazZmnq6Gw510oU=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=Y2qYnp/Z/VmHV3N8QOGP08zk2t/NAlAqxtju/iOSYAzq1z6YW2uRV0HqgYSmMnf6GzZkBnoNzC2QaQdw/LyUzJ7widcmvUv85vttowEV0Iv3VFuHfo0MCiVBYUZRnoLkhPci0Luq4MiOaKIuhHqh1lOblHqSpVep8rExMl7dRls=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=aj3jLjwA; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=IMz92pqw; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	 In-Reply-To:Content-Type; b=kXLAJgR+PfgF2hvzsBMyejaSXsLpKYfln5Nd6y647IjBd0PlE7ro3Vc0zwakgGMoiMQyc/8YVuKUx77r4jMscTN7pTc6IV0sVJ/j8ZJfuf6NYq4MxPKFix4d22ywNx6XkPz6REEp1SfNJcg6G3f54Cql8ebw1GS8h7a7ZA+DbJ4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=rV+LRg4O; arc=none smtp.client-ip=74.125.225.140
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="aj3jLjwA";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="IMz92pqw"
-Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68FD005O3265430
-	for <linux-arm-msm@vger.kernel.org>; Tue, 15 Sep 2026 13:02:05 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	0TACi45iWjML+NP56x0bPRivduU8gk7mMqeeyrAStfI=; b=aj3jLjwAu7ygID7T
-	vH+3qNmJKZDwABb/57fLhQ/8opZQhO+DaLSsRox2nDPpDcnrmthDhqWXNHYb22jp
-	xLs1SoBIn4be9TmfFOxkw4d8qTDiZgy7/IZe5D2yk4S4E/EmleBDsZcXpdtbaZqc
-	cUV5xhWAWWamEOrv+CL51filHnuj0HD+MNRbbQ8BYlN48DivDzlMA5j4AsLEK+pr
-	FoZUMZJ8cdIjB/nRvV35la+weNEn86mTB+WocQyZyc4K+KAnxufMxTYm9WIpKYUC
-	wbq1mWV24qOXEVeRLAAu0kUb8deVlar41fgcUqzKANnFPsbwUUJxobc7bDOYTn1G
-	AWv/6g==
-Received: from mail-ua1-f72.google.com (mail-ua1-f72.google.com [209.85.222.72])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gpxyd9x54-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 15 Sep 2026 13:02:05 +0000 (GMT)
-Received: by mail-ua1-f72.google.com with SMTP id a1e0cc1a2514c-97cace0be95so56030241.1
-        for <linux-arm-msm@vger.kernel.org>; Tue, 15 Sep 2026 06:02:05 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="rV+LRg4O"
+Received: by mail-wm2-f12.google.com with SMTP id 5b1f17b1804b1-49d097b4939so14998885e9.0
+        for <linux-arm-msm@vger.kernel.org>; Tue, 15 Sep 2026 06:11:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1789477323; x=1790082123; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=0TACi45iWjML+NP56x0bPRivduU8gk7mMqeeyrAStfI=;
-        b=IMz92pqwNV77rhe8WMIpm1IgcmwivKq7GQTu43mqCjqHoZq9S+J9vJjZy1cdyN1LD+
-         4MxHDDX4M8lC8NKWBHpoKxQDk4FO7ICRTikKsaCfAOcFWwQHKNX9N/XMG1ABRk1L+X7Z
-         7bn0ADWvob/GkLn2uNgKtwOCWeUXqfhkn6JTaUD004ofXAVT50axUuUASRbWhnjkbA+Q
-         Ih4zistDeLwitTq/rWeNgAkBfOwaonhsJdZe5s4qU8dwo4Lhen8r8CQ9tLEu8CBvOXh1
-         zaq+0gg9cMRG2Vdqqj89jjVaGMYD0+l0zEDw6WwEv4wY2s7lpJLHlefezKHvYWuYUkPQ
-         z/RA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1789477323; x=1790082123;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=linaro.org; s=google; t=1789477910; x=1790082710; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:organization
+         :autocrypt:content-language:from:references:cc:to:subject:reply-to
+         :user-agent:mime-version:date:message-id:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=0TACi45iWjML+NP56x0bPRivduU8gk7mMqeeyrAStfI=;
-        b=gRwrQYfdzGB/T7X5fbGexBAcAjdlHEc4ltwfa1rOQ0UKcGgBKXWzb8mbHwJcq3oXpR
-         8JixiZKYgs3d9tCbFNkZQ1T2/fByoUlpcSw+ylZmW2CJTWMbfT7bNIBa7QTVI7jy+7fp
-         Yf+D1FSaWMNEk3zudg1crkHrjYm1JGozICOvzRqANnJRGSFKHgzYD5USu9ENroEuZiUd
-         zm0dutdercp0EJePnGeEhtm0sfUAy8aHLHcrTCVbG/5wUPlyZZHAqDg6ZorOjV7PKUXe
-         y2dyPBhQR+yYeN/qlcmu5sWHJjqaFw+gQWUzamIwr0H7nOVf3P9tWLegLeGV2J2AilFl
-         r/rQ==
-X-Gm-Message-State: AFuF++kH3cEuDjgSi2K47bd7tzTgcDXm7sCy34JbSNQB3+tPfK7ODN8c
-	ZpsT2q9BxKliD5XHwMdUsEkllxE21UBh98nFMETYiSUCTvvBBPvudDe+DikCYSZneBGyescim/y
-	leqIl9EJMuPR2tY59VvvtElycdTQwRPGRJXntQnP0jPQkVnY6Rc5q92kOPQq/YYdhhuqT
-X-Gm-Gg: AYBFou2GeVsEiUtKGs0ON89yRAmXlX7uJPwCe31BffiTZSjTfKYWtNyE0tM5xudR+sj
-	5EWRKqwi/sbg+Vbq/hKQFkG0+wpY/KnA/ruNGVvFnmZY5BuKcr7QyUVJUvU/SJQtodOipGEfIPv
-	qjDKOSJYYvdxhWJ9V2gu+BdzHHLTyWcxqXug6FgtFEPaycsF7Idrwupm38LeBeDpEqma3vVJtP8
-	bPQYgzE5kIdGmhIyBvgeH617J/hUUcKirIbwxm3Z6gdk3fd4FmVQQgwFrHmhKbnXZjZFNZGjTBP
-	4IbK7EJqOMULh8Jy99A5tyk4aadCwH/3Icexe8hvQt/nQhVwZwEr8YFYsLDyQpRLmtfQHbcatID
-	AzgoCOwjXZpdVww6QJpMW0Q==
-X-Received: by 2002:a05:6102:50ab:b0:799:e864:aaba with SMTP id ada2fe7eead31-79b58b76fc7mr2190648137.1.1789477322032;
-        Tue, 15 Sep 2026 06:02:02 -0700 (PDT)
-X-Received: by 2002:a05:6102:50ab:b0:799:e864:aaba with SMTP id ada2fe7eead31-79b58b76fc7mr2190529137.1.1789477321202;
-        Tue, 15 Sep 2026 06:02:01 -0700 (PDT)
-Received: from [192.168.202.12] ([178.235.128.140])
-        by smtp.gmail.com with ESMTPSA id 38308e7fff4ca-3a5a3357673sm33700881fa.31.2026.09.15.06.01.57
+        bh=eh3LDHsIzCU2/5CFMWOjBf/zXaCZZA/0hmDU111rhjw=;
+        b=rV+LRg4O2RSaiIwvoddovYspkNkX46209zrY4YlBt2tF3Bbbk+R/LxeMPQbcMsyfA1
+         vwANPY3UhfgKvIQ4SIlEePT2JLw/t/2bEoHm8vEbc9EO2BhMkhEpHLaZaUGXfnpWMEbh
+         FFBChUMNIf7FhL+P9TKbY1NNALfCpQE0G/RwfRcBa3KhRQUj9Ewle1tdnhKWCO62Wd+o
+         rYOXnc7hybGb/kbGvST49E/WK9bpZEN21fF1BEbHa8qGu3BRZBjs2HSa1iUqSayqiAPA
+         OyVZU0UjooC3PX7/VgEbzVbSHHtHdmluL2e426vQ+P1Ew5/Eia+SChVJ2h8lmjcFYBDR
+         6uYA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1789477910; x=1790082710;
+        h=content-transfer-encoding:content-type:in-reply-to:organization
+         :autocrypt:content-language:from:references:cc:to:subject:reply-to
+         :user-agent:mime-version:date:message-id:x-gm-gg:x-gm-message-state
+         :from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=eh3LDHsIzCU2/5CFMWOjBf/zXaCZZA/0hmDU111rhjw=;
+        b=tzBr2xqaOuWwsU51uRmIZAshJShey+GmxjxhD9lTH9poeXCfg0PU7JywuiAqHKWRag
+         qQ/9RbPd/laK3K4FrLsKfQYYxxzBOqc3zFrgEFjYQovCVXbriQ68oonk1KxUj6ryhp8D
+         l6lDk2L8h3nyrNiI9fVVWd73bKpLVsWmcjqCU7nj6JaOwUMjPp+efS59v+cJw7/f9hjy
+         eO4OBz2Gg6l3nIU7GTK8C1i/Pf+80P16B7ALZf7tKnjUqMZ7WiiUEfufvBaNpqqjqEnt
+         enOLNzUSwY9y6nVEVd6PuAeSONj8oRVa1bq9CCAxlNgBS45JX9bJlyl93A6I449hBu4r
+         ojzQ==
+X-Forwarded-Encrypted: i=1; AKwUvBy1VNg+H3wdsh0lzJLIZnarNq0S8PyJod/acwA3N/rwbswlb/cN1o2CytwLFvIe9dcCUgyYZ7mIfbljZREh@vger.kernel.org
+X-Gm-Message-State: AFuF++mnDAnoNS2RXkjn4jqmCm8A9dF/R4VfOj3SMQatUygnp0bUDkiQ
+	2AldJasDg1HcnwfW+j6eX/kexvZS4MwAW0Q3CekpA4eNsgtfR5G9HaGqmLvmfOgF9fE=
+X-Gm-Gg: AYBFou0nSX64DMtDbv8DJqlmuRdUtstcbxaGFhpX7xYxp7MkM1lyDjsDgFXvZXAsI7W
+	nllldlJ+/9EwjPCsCX6KQgCkZU33rzYuOhjjtwLEmLK9vVWcBCaC77FIBgtExED2UiErHb91Sat
+	KYiEXYs9PQDEYMBzLCvEK88gam0I+UWags5O827yWPC+jC4Iwgu1QRm49y8RNFb5T8Un/aNjgF+
+	JtcQCyAK6USj8sbdyN/D2OcZksG8qDTWHv3U1g6iWppwMpk1cnJfNTKMAny8BLTmWelfJMWwZ3C
+	n/mP0l9PhnTeaGSOmj0J9EoneSIbVFz4j7aNZtWj+p8i4dvmoUMcDCuNktlZLLrDWTaSf3qmBec
+	XeVuCfZtIG/cZKi6bQP+xIirDVR+glrBx3k1ZSn5/gqmsPnygo26upwyQl4qAA6kYR0JAZ04HB2
+	pX1Pp2rT1HG6A31voHXdxU3i7zOVI+S95w+QoKzOlvDDR81G8wK1fSCQu6e72GipDf0hFvvBBpe
+	QnD+28mj0KVXR7pGAjpHKQYTV60sQfXWuwdjlgEme7TWJXJ/BlN
+X-Received: by 2002:a05:600c:81ca:b0:49e:642a:4f6f with SMTP id 5b1f17b1804b1-49e7a69ba24mr89417055e9.33.1789477909851;
+        Tue, 15 Sep 2026 06:11:49 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:106d:1080:ff86:16e:fede:9407? ([2a01:e0a:106d:1080:ff86:16e:fede:9407])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-49e7eed9d00sm58506615e9.0.2026.09.15.06.11.49
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 15 Sep 2026 06:01:59 -0700 (PDT)
-Message-ID: <4047a1ea-f105-4b8d-86c6-8176ed58d9b4@oss.qualcomm.com>
-Date: Tue, 15 Sep 2026 15:01:56 +0200
+        Tue, 15 Sep 2026 06:11:49 -0700 (PDT)
+Message-ID: <0d0ee38b-8ded-480d-a586-d26b3c292427@linaro.org>
+Date: Tue, 15 Sep 2026 15:11:48 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -88,64 +70,133 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/2] clk: qcom: rpmhcc: Add LNBB clocks support for
- Glymur
-To: Jagadeesh Kona <jagadeesh.kona@oss.qualcomm.com>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Stephen Boyd <sboyd@kernel.org>, Brian Masney <bmasney+clk@redhat.com>,
-        Jerome Brunet <jbrunet+clk@baylibre.com>,
-        Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley
- <conor+dt@kernel.org>,
-        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
-        Taniya Das <taniya.das@oss.qualcomm.com>,
-        Abel Vesa <abelvesa@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org,
-        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
-References: <20260915-glymur-ufs-clk-changes-v2-0-d0aa1c60c269@oss.qualcomm.com>
- <20260915-glymur-ufs-clk-changes-v2-1-d0aa1c60c269@oss.qualcomm.com>
-Content-Language: en-US
-From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-In-Reply-To: <20260915-glymur-ufs-clk-changes-v2-1-d0aa1c60c269@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8
+Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
+Subject: Re: [PATCH 2/2] pinctrl: qcom: spmi-gpio: make direction changes
+ exclusive
+To: Shawn Guo <shengchao.guo@oss.qualcomm.com>,
+ Linus Walleij <linusw@kernel.org>
+Cc: Bartosz Golaszewski <brgl@kernel.org>,
+ Bjorn Andersson <andersson@kernel.org>, Yu Zhang
+ <yu.zhang@oss.qualcomm.com>, linux-gpio@vger.kernel.org,
+ linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org
+References: <20260915014447.282121-1-shengchao.guo@oss.qualcomm.com>
+ <20260915014447.282121-3-shengchao.guo@oss.qualcomm.com>
+From: Neil Armstrong <neil.armstrong@linaro.org>
+Content-Language: en-US, fr
+Autocrypt: addr=neil.armstrong@linaro.org; keydata=
+ xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
+ GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
+ BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
+ qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
+ 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
+ AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
+ OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
+ Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
+ YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
+ GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
+ UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
+ GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
+ yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
+ QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
+ SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
+ 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
+ Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
+ oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
+ M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
+ 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
+ KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
+ 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
+ QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
+Organization: Linaro
+In-Reply-To: <20260915014447.282121-3-shengchao.guo@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTE1MDE4OSBTYWx0ZWRfX6HqbyyQgsneZ
- Jc2zke3z7nmNgAiRkjQKhwzF64jKAaOak3WBBEgzuAUWAmXzGBU4QC/u4tB/KyEebgrzjEc15rD
- Ejvj0sM7WnvsR56PEeifdGEfZovmgiQ=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTE1MDE4OSBTYWx0ZWRfXyHLwQ634wCiO
- kxeddtQzW80tZ2DNtBq2rsBseiRH222DBlyObysoZ/tT7+UUH2I7YJLqv0C2j8XzIPpAx0Jm1Gv
- E7W8Iy/t3hSC2L7EqypAgJT5J6JjCngjj6qAQvRfiBmtxN6bGk1ZVBmUJqsXa7/ealGEMlWVoNk
- S1q1ke2M0dn2OpJTWHvvjWmOwCeaAMIR6o8xSSRZc+RMMrsvTfyuZ9E2HT9qwV/Zayj0pTYuFBG
- n/lOlybbHxM99DtYQ0zWlRPFi40wAl4iFIpYDFROJT2GcSw+iyOF5oMCRM+d43JV/0/qbQgK0MM
- 1/dpZBhjYcPWqhR9cAAB32T7ebDjgrEhOqAwFFm0yiwvhsZXO6FbjgNn1hje2oiR0TatXFJOgaz
- +ojn/dPygoMwVk62AlhMAoouQ0gQqFm5CjzYhDbEB5HRC7DkQJoWS9mPPyqEnlWQZbJcCFKDN+J
- nk/sXsB3WbOH6M1vofw==
-X-Proofpoint-ORIG-GUID: qF6TXN41646LBAtFn3x_gOiODgtaB_ca
-X-Authority-Analysis: v=2.4 cv=LYepeTfi c=1 sm=1 tr=0 ts=6aa941cd cx=c_pps
- a=ULNsgckmlI/WJG3HAyAuOQ==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
- a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
- a=EUspDBNiAAAA:8 a=dHuaQup7kaPGrqMl_VAA:9 a=QEXdDO2ut3YA:10
- a=1WsBpfsz9X-RYQiigVTh:22
-X-Proofpoint-GUID: qF6TXN41646LBAtFn3x_gOiODgtaB_ca
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-15_04,2026-09-14_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0 clxscore=1015 suspectscore=0 adultscore=0 impostorscore=0
- malwarescore=0 priorityscore=1501 bulkscore=0 phishscore=0 spamscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609150189
 
-On 9/15/26 2:07 PM, Jagadeesh Kona wrote:
-> Add support for rpmh LN_BB_CLK2 and LN_BB_CLK3 clocks on Qualcomm Glymur
-> platform.
+On 9/15/26 03:44, Shawn Guo wrote:
+> pmic_gpio_populate() seeds pad->input_enabled and pad->output_enabled from
+> the hardware MODE_CTL register, so a pad left in DIGITAL_INPUT or
+> DIGITAL_INPUT_OUTPUT mode by the bootloader starts out with the input
+> buffer enabled.  Neither direction callback clears the opposite buffer:
+> .direction_output() only packs PIN_CONFIG_LEVEL, which sets
+> output_enabled, and .direction_input() only packs PIN_CONFIG_INPUT_ENABLE,
+> which sets input_enabled.  Requesting either direction on such a pad
+> therefore programs MODE_DIGITAL_INPUT_OUTPUT rather than the requested
+> direction.
 > 
-> Fixes: ebcb9db98bda ("clk: qcom: rpmh: Add support for Glymur rpmh clocks")
-> Signed-off-by: Jagadeesh Kona <jagadeesh.kona@oss.qualcomm.com>
+> That silently breaks both directions.  After gpiod_direction_input() the
+> pad keeps driving the line, since the output buffer is never disabled.
+> And after gpiod_direction_output() pmic_gpio_get_direction() still reports
+> GPIO_LINE_DIRECTION_IN, because it cannot tell plain input from
+> input+output, which makes gpiolib consider the line an input while the
+> driver is driving it.  On a board where several regulator-fixed nodes
+> share one PMIC GPIO the shared GPIO proxy reads that direction back and
+> rejects every consumer after the first:
+> 
+>    reg-fixed-voltage regulator-wcn-core-vm-1p35: setup of GPIO (default) failed: -1
+>    reg-fixed-voltage regulator-wcn-core-vm-1p35: error -EPERM: can't get GPIO
+> 
+> Pack the opposite buffer's PIN_CONFIG_*_ENABLE along with the requested
+> direction so that the resulting MODE_CTL is DIGITAL_INPUT or
+> DIGITAL_OUTPUT, never both.  pmic_gpio_config_set() programs the registers
+> once after walking all configs, so this stays a single register write.
+> 
+> Pads that are genuinely bidirectional can still be described that way
+> through pinconf, which is the interface that has always been able to
+> express it; the gpiolib direction callbacks now mean what gpiolib says
+> they mean.
+> 
+> Assisted-by: LLM
+> Fixes: eadff3024472 ("pinctrl: Qualcomm SPMI PMIC GPIO pin controller driver")
+
+You should add:
+Fixes: 263447532463 ("pinctrl: qcom: spmi-gpio: implement .get_direction()")
+
+Since my change added the get_direction callback.
+
+Personally I would prefer patch 1 instead of this change.
+
+Neil
+
+> Signed-off-by: Shawn Guo <shengchao.guo@oss.qualcomm.com>
 > ---
+>   drivers/pinctrl/qcom/pinctrl-spmi-gpio.c | 16 ++++++++++------
+>   1 file changed, 10 insertions(+), 6 deletions(-)
+> 
+> diff --git a/drivers/pinctrl/qcom/pinctrl-spmi-gpio.c b/drivers/pinctrl/qcom/pinctrl-spmi-gpio.c
+> index f6dc43e27b38..eb4431591331 100644
+> --- a/drivers/pinctrl/qcom/pinctrl-spmi-gpio.c
+> +++ b/drivers/pinctrl/qcom/pinctrl-spmi-gpio.c
+> @@ -741,22 +741,26 @@ static int pmic_gpio_get_direction(struct gpio_chip *chip, unsigned pin)
+>   static int pmic_gpio_direction_input(struct gpio_chip *chip, unsigned pin)
+>   {
+>   	struct pmic_gpio_state *state = gpiochip_get_data(chip);
+> -	unsigned long config;
+> +	unsigned long configs[2];
+>   
+> -	config = pinconf_to_config_packed(PIN_CONFIG_INPUT_ENABLE, 1);
+> +	configs[0] = pinconf_to_config_packed(PIN_CONFIG_OUTPUT_ENABLE, 0);
+> +	configs[1] = pinconf_to_config_packed(PIN_CONFIG_INPUT_ENABLE, 1);
+>   
+> -	return pmic_gpio_config_set(state->ctrl, pin, &config, 1);
+> +	return pmic_gpio_config_set(state->ctrl, pin, configs,
+> +				    ARRAY_SIZE(configs));
+>   }
+>   
+>   static int pmic_gpio_direction_output(struct gpio_chip *chip,
+>   				      unsigned pin, int val)
+>   {
+>   	struct pmic_gpio_state *state = gpiochip_get_data(chip);
+> -	unsigned long config;
+> +	unsigned long configs[2];
+>   
+> -	config = pinconf_to_config_packed(PIN_CONFIG_LEVEL, val);
+> +	configs[0] = pinconf_to_config_packed(PIN_CONFIG_INPUT_ENABLE, 0);
+> +	configs[1] = pinconf_to_config_packed(PIN_CONFIG_LEVEL, val);
+>   
+> -	return pmic_gpio_config_set(state->ctrl, pin, &config, 1);
+> +	return pmic_gpio_config_set(state->ctrl, pin, configs,
+> +				    ARRAY_SIZE(configs));
+>   }
+>   
+>   static int pmic_gpio_get(struct gpio_chip *chip, unsigned pin)
 
-Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-
-Konrad
