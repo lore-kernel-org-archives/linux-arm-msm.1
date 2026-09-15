@@ -1,85 +1,142 @@
-Received: from relay3-d.mail.gandi.net (relay3-d.mail.gandi.net [217.70.183.195])
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.16])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BF5BB443E38;
-	Tue, 15 Sep 2026 07:11:38 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=217.70.183.195
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 166DE45D5E2;
+	Tue, 15 Sep 2026 07:15:50 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.16
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789456301; cv=none; b=KLvhzKd6m33VRglK4pkyZFk7B1ZZOvGOxeW8nvJAKepGnQw2keTHC46pXiH7n8qZQEsSCmgTEua1nLnXkRsP6Qcbfni9pIkdrCqtAEBvmXFqWLmJXGCvey1+zOKqYSGjuiuirRujr9dn5W4tnycDktLIwvOoJgJpNONvCIWUsdE=
+	t=1789456556; cv=none; b=ARe1cMUDC63eczqzkoY0erP71eOtGAgQGcy4vNXchXN8wl3cWz9e88Ebucca2BhWAZT//u1lillwZXPlpPOBMqyvmITQ0anZ0pVa2ylp/Tk2TjYN4Et7QgpJtKZlqCLzsMPMqsZx9R4/SrRvF4EQ0R1k7Rzb/tIsYhgY2MTF5zg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789456301; c=relaxed/simple;
-	bh=2ehmnUofZbTdLc1u5yR/J6v+urGofaLLn0RAmXhFd9Y=;
+	s=arc-20240116; t=1789456556; c=relaxed/simple;
+	bh=+hFmXzfeob24QkbjYP8iQSqL7rHNCW4SoAluNe2Mtzo=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=uDE3/rPjrkYqLOdZ2OJDwu3g8o5GwWwvxw2egoUjc1L8ce2UpQZMkVdyng6o9Xn2V9QPIo4cNqtZRUhKE7CyKoqAkIWwGfhXmagea7AbXaoxLk1SB2FsRWRSENkxMe7X0lp9QAlF5ghNpnrmwr7uzvZfgONZNXllh372jmmk054=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=marmottus.net; spf=pass smtp.mailfrom=marmottus.net; dkim=pass (2048-bit key) header.d=marmottus.net header.i=@marmottus.net header.b=Ice7pvFc; arc=none smtp.client-ip=217.70.183.195
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=marmottus.net
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=marmottus.net
+	 Content-Type:Content-Disposition:In-Reply-To; b=cB/Fn1MPmGzioysAyzAWr1Co2uFEf+0bEmdvNBeRyzfyCwgZEgSWqh6UM7/OcWo1erDs78xKPZTzszYEueSjYgRUmUVP20zhLL2RWonTWl4p1NFkYriJLID7a3twx7nfZfYnfjNwHTXkwamRIJGZNVmOAjbB1uUfuk64LfYNIUM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=SqTPGq1/; arc=none smtp.client-ip=192.198.163.16
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=marmottus.net header.i=@marmottus.net header.b="Ice7pvFc"
-Received: by mail.gandi.net (Postfix) with ESMTPSA id 3C2A71F47F;
-	Tue, 15 Sep 2026 07:11:32 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=marmottus.net;
-	s=gm1; t=1789456296; h=from:from:reply-to:reply-to:subject:subject:date:date:
-	 message-id:message-id:to:to:cc:cc:mime-version:mime-version:
-	 content-type:content-type:in-reply-to:in-reply-to:  references:references;
-	bh=/k+y3LoBfQZyu4Fn8UExwUdQIbMcggqcKxO9y+XqHO0=;
-	b=Ice7pvFcBVgU+jIYOKrOoCHCoGn8cZe1IovgDa3pZN6T0Tg2l4ujy8yUg3wJp3bDNH97Ms
-	orM8nKgxTmqnnmHTYTECrvTp78lX2KbS4pjy4zmUdniUkCf/D9VWuW6WFhoGoQYlGr47pT
-	VCTcH94RwppT5Puvepm8gtOD8T4YfCQ5Fkn5BQuniv+NLGtancWXAOILM08rYJDK4icBqy
-	/Z1ZeGt+OmRiDD1WS3Xx6lzOfbJtEplccp48s88bTu5V6t3hcx72jl+jTdb43HQXBBlJ2G
-	q7rE2ENfs0pUXI8q9tevsgqtpTDRCJtxL8v0lo50RClXcgKvdAtAwnqvUBiRjA==
-Date: Tue, 15 Sep 2026 09:11:31 +0200
-From: Arthur Crepin Leblond <arthur@marmottus.net>
-To: Juha-Matti Tilli <juha-matti.tilli@iki.fi>
-Cc: Manivannan Sadhasivam <mani@kernel.org>, linux-arm-msm@vger.kernel.org,
-	Jeff Hugo <jeff.hugo@oss.qualcomm.com>,
-	Jeff Johnson <jjohnson@kernel.org>,
-	Bjorn Andersson <andersson@kernel.org>,
-	Konrad Dybcio <konradybcio@kernel.org>,
-	Eric Dumazet <edumazet@google.com>,
-	Kuniyuki Iwashima <kuniyu@google.com>,
-	Paolo Abeni <pabeni@redhat.com>,
-	Willem de Bruijn <willemb@google.com>,
-	"David S. Miller" <davem@davemloft.net>,
-	Jakub Kicinski <kuba@kernel.org>, Simon Horman <horms@kernel.org>,
-	Mihai Moldovan <ionic@ionic.de>, Denis Kenzior <denkenz@gmail.com>,
-	Marcel Holtmann <marcel@holtmann.org>,
-	Andy Gross <agross@kernel.org>, linux-kernel@vger.kernel.org,
-	mhi@lists.linux.dev, linux-wireless@vger.kernel.org,
-	ath11k@lists.infradead.org, ath12k@lists.infradead.org,
-	netdev@vger.kernel.org
-Subject: Re: [PATCH v7 12/15] net: qrtr: mhi: Report endpoint id in sysfs
-Message-ID: <20260915071131.GA30612@marmottus.net>
-Reply-To: arthur@marmottus.net
-References: <20260915054207.2513877-1-juha-matti.tilli@iki.fi>
- <20260915054207.2513877-13-juha-matti.tilli@iki.fi>
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="SqTPGq1/"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1789456550; x=1820992550;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=+hFmXzfeob24QkbjYP8iQSqL7rHNCW4SoAluNe2Mtzo=;
+  b=SqTPGq1/wIAt9oHS4ekKDbtM/G4Ocj3SZMwt0/NBaW1JmxQb5STj2vgF
+   EUI19h3YNhp+CgoentcZiZFmvRElTAipytatNsq/Ai6mc7N4l+8SD9OHM
+   NPjZlQ7A2uHGNx/i2EEi+7ZxXX7HQOa1KzrZnPUqt3uxaPwOiqVs69dyo
+   KjlFTby+Ol7uNVYWfX4aTBx15PnJ0CEVVNfxOVaZQtv8kA3yWJr4Gh59s
+   bWk+D3oWw+dZlEyhkWtmc2hWQdQT/jsUZElIISdLLZh5PLJyfRcIX4H9C
+   a8BWJKM4Wkx4uV8SHLJUUXbk/ZhtMJChv+tjzlZRLMKc0XYtk+PJHWSal
+   A==;
+X-CSE-ConnectionGUID: H9vYFKX1T7ypSpfKTc6YTA==
+X-CSE-MsgGUID: 8VWw3pWOQdWZAykg0JnRuA==
+X-IronPort-AV: E=McAfee;i="6800,10657,11905"; a="77372789"
+X-IronPort-AV: E=Sophos;i="6.27,103,1787036400"; 
+   d="scan'208";a="77372789"
+Received: from fmviesa006.fm.intel.com ([10.60.135.146])
+  by fmvoesa110.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 15 Sep 2026 00:15:49 -0700
+X-CSE-ConnectionGUID: jCoR3+hhS+iTfoVrXV+ydQ==
+X-CSE-MsgGUID: EtpDa52ZR/agKBjetRCxuQ==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.27,103,1787036400"; 
+   d="scan'208";a="268588584"
+Received: from smoticic-mobl1.ger.corp.intel.com (HELO localhost) ([10.245.245.203])
+  by fmviesa006-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 15 Sep 2026 00:15:38 -0700
+Date: Tue, 15 Sep 2026 10:15:36 +0300
+From: Andy Shevchenko <andriy.shevchenko@intel.com>
+To: Srinivas Kandagatla <srini@kernel.org>
+Cc: Link Mauve <linkmauve@linkmauve.fr>,
+	Sasha Finkelstein <k@chaosmail.tech>,
+	Neil Armstrong <neil.armstrong@linaro.org>,
+	Kevin Hilman <khilman@baylibre.com>,
+	Jerome Brunet <jbrunet@baylibre.com>,
+	Martin Blumenstingl <martin.blumenstingl@googlemail.com>,
+	Sven Peter <sven@kernel.org>, Janne Grunau <j@jannau.net>,
+	Neal Gompa <neal@gompa.dev>, Frank Li <Frank.Li@nxp.com>,
+	Sascha Hauer <s.hauer@pengutronix.de>,
+	Pengutronix Kernel Team <kernel@pengutronix.de>,
+	Fabio Estevam <festevam@gmail.com>,
+	Vladimir Zapolskiy <vz@mleia.com>,
+	=?iso-8859-1?Q?Andr=E9?= Draszik <andre.draszik@linaro.org>,
+	Orson Zhai <orsonzhai@gmail.com>,
+	Baolin Wang <baolin.wang@linux.alibaba.com>,
+	Chunyan Zhang <zhang.lyra@gmail.com>,
+	Maxime Coquelin <mcoquelin.stm32@gmail.com>,
+	Alexandre Torgue <alexandre.torgue@foss.st.com>,
+	Kalyani Akula <kalyani.akula@amd.com>,
+	Michal Simek <michal.simek@amd.com>,
+	Miguel Ojeda <ojeda@kernel.org>, Boqun Feng <boqun@kernel.org>,
+	Gary Guo <gary@garyguo.net>,
+	=?iso-8859-1?Q?Bj=F6rn?= Roy Baron <bjorn3_gh@protonmail.com>,
+	Benno Lossin <lossin@kernel.org>,
+	Andreas Hindborg <a.hindborg@kernel.org>,
+	Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>,
+	Danilo Krummrich <dakr@kernel.org>,
+	Daniel Almeida <daniel.almeida@collabora.com>,
+	Tamir Duberstein <tamird@kernel.org>,
+	Alexandre Courbot <acourbot@nvidia.com>,
+	Onur =?iso-8859-1?Q?=D6zkan?= <work@onurozkan.dev>,
+	Johan Hovold <johan@kernel.org>,
+	Ronald Claveau <linux-kernel-dev@aliel.fr>,
+	Daniel Lezcano <daniel.lezcano@kernel.org>,
+	linux-arm-kernel@lists.infradead.org,
+	linux-amlogic@lists.infradead.org, linux-kernel@vger.kernel.org,
+	asahi@lists.linux.dev, imx@lists.linux.dev,
+	linux-arm-msm@vger.kernel.org,
+	linux-stm32@st-md-mailman.stormreply.com,
+	rust-for-linux@vger.kernel.org
+Subject: Re: [PATCH v5 2/3] nvmem: core: deprecate reg_write callback with
+ reg_write_const
+Message-ID: <aqjwmMn7GkAoxsu2@ashevche-desk.local>
+References: <20260804135940.2378737-1-linkmauve@linkmauve.fr>
+ <20260804135940.2378737-3-linkmauve@linkmauve.fr>
+ <a1488d9d-3014-44ea-a0d7-6ab99fedccc9@kernel.org>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii; format=flowed
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20260915054207.2513877-13-juha-matti.tilli@iki.fi>
-X-GND-Sasl: arthur@marmottus.net
-X-GND-Score: -100
-X-GND-Cause: dmFkZTGFzgp8DpaceHJXsLAY9igazZeLQ/Fb6nk/Zr+ipgXP7EdxuXSxa9lVDbKYEYekx2BahP04hh/UrfivTn9rNoAad/Ihbj1N8SKUiFDGm4QJMUcWFIP1SD5NWpovXOlLm3nzzJ+obYoPfs1i9jCQCcL/YPO7L6JxSZ4RjmvNJIDylGwDBDMWyfMqT6ULwSpNIY5g4ZxkdNQC4ndb70firUg16CnCPEFui1j9O1Rxt4fvlhU9XsUsW9gIIEqgGlikLVBc/V6kTPao3l+ipIJ+Abn+I5aGYA33UnXdhq2uBu9KiYninSq5SUbgvE97pS0cJaovjY7CKRYzbvX1MZDbi9NHfC3qQxjGZHlKJRaFi20WDHCYpFFYSzwQEtAkZEkF2NLmpv3OOpj3vEa4hJLgCC1g249wkPnivMuZXKCBaoLzUGUsZ9jRwAtdyaE+Gi9Wo5j2Iog+76+ejo4Q7A+TKckc5iTxz9VEuKMrVPV6Sf8xBjuq/Dwz4dVAU8gpx8RhKxxmyYVYI4yC4XYJnmFNqhjm4P2FTG50un8qTWskfdnAeX/VFhYiDPp6chbdqGiqQ7qsvggyEg0aIviPpu3J7pTId1vNiRB9fv8jrWg7fjqMLhub0jBHpSDha0ZtUIlUjQbGJ0oVKHxrnfD3sCR8Ae6jxh3B6AVgUXj5DJXESVePvg
-X-GND-State: clean
+In-Reply-To: <a1488d9d-3014-44ea-a0d7-6ab99fedccc9@kernel.org>
+Organization: Intel Finland Oy - BIC 0357606-4 - c/o Alberga Business Park, 6
+ krs, Bertel Jungin Aukio 5, 02600 Espoo
 
-On Tue, Sep 15, 2026 at 08:42:04AM +0300, Juha-Matti Tilli wrote:
->+static ssize_t endpoint_show(struct device *dev,
->+			     struct device_attribute *attr, char *buf)
->+{
->+	struct qrtr_mhi_dev *qdev = dev_get_drvdata(dev);
->+
->+	return sprintf(buf, "%u\n", qdev->ep.id);
->+}
->+
->+static DEVICE_ATTR_RO(endpoint);
+On Mon, Sep 14, 2026 at 10:48:21PM +0100, Srinivas Kandagatla wrote:
+> On 8/4/26 2:59 PM, Link Mauve wrote:
 
-I think you could use sysfs_emit instead of sprintf.
+...
 
-https://docs.kernel.org/filesystems/sysfs.html#reading-writing-attribute-data
+> > - * @reg_write:	Callback to write data; return zero if successful.
+> > + * @reg_write:	**DEPRECATED** - please use reg_write_const instead.
+> 
+> Marking here as deprecated is total waste as no one will read it,
 
-Arthur
+This is still okay as we have many such things in the kernel (during the time).
+
+> May be move this message to the core while registering.
+
+No objections here.
+
+...
+
+> >  	nvmem_reg_read_t	reg_read;
+> >  	nvmem_reg_write_t	reg_write;
+> 
+> flag this with compile time __deprecated flag.
+
+__deprecated is DEPRECATED :-)
+No new code should use it.
+
+include/linux/compiler_attributes.h:110: * Don't. Just don't. See commit 771c035372a0 ("deprecate the '__deprecated'
+
+> > +	nvmem_reg_write_const_t	reg_write_const;
+
+
+-- 
+With Best Regards,
+Andy Shevchenko
+
+
