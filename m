@@ -1,86 +1,33 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 74FE147F3DD
-	for <linux-arm-msm@vger.kernel.org>; Tue, 15 Sep 2026 10:33:32 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 033FE33DEF7;
+	Tue, 15 Sep 2026 10:45:29 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789468415; cv=none; b=PB81TC7MIp6cNQO6wOdiU/J+Bz5mH2nsiPQmEXyAfwHwchlPWh0KWcgpB0PeCOGTgnFNbzbIvcjT72tGcDYga6B6jN0b/ccYohXEcgxQC3Alqt5KoOp4nO6JiyibPF8vfYgbjZiKI6MP+SfhGd6kRhRCXrjGDZSqYDo7u/oXy5A=
+	t=1789469131; cv=none; b=LdLpmCj4ksrtO7r4HQCyoqR8MUk77y+I/hXo/DD9lF2wJNgoqVGvFvoQYx9ksgPvRxYJQ8Q7PE3g2v1t0q5QzWiv8wVsUyA7hd9Dcd+baUuxsHQ73TVrjRtNnJNol11a9raAdMsdqurr1UwdJ/MTk+NZYcY9wU5mwSq43CadgSk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789468415; c=relaxed/simple;
-	bh=HdVbv25549gC96kYbLnDlO3NtEiaAkeg1ptsK3D4fGs=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=K4USz81EuWin1/Iqv4Iu/6aUTBFZBGh/utUlac1MWnBpXm02cbh2m288dip3cZlr0SRLLMp7OEnS8SAVVTpit277RRG/uVKTAw/NhCjBym77nPIwQb21h35eQ4a4Zmevb4MRim07rENWoJgMO1ZgrPioxIiJZ6po07lgrZA28pI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=mrNPSel2; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=UX1JqKXM; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1789469131; c=relaxed/simple;
+	bh=yK5BnZdSoaqS2VDQ2ZesIxc1V5gRPxqBUrI7bX2jabE=;
+	h=Message-ID:Date:MIME-Version:Subject:From:To:Cc:References:
+	 In-Reply-To:Content-Type; b=Kzy0kqW6EDQPwAe+cGQ7JcT7LvOWVo/Tpd3AhzXcmNfqgLS0nn4YvxcfYL/w1XIXr4U8CN+H1DIMHAEyVKJ6UiovkJLyFfir/Ye5WG8Mh++kcaQTb9NdHVh2vfD9uX9GFrXH5fT/Oga7wGEoofm1jGyGnEGiZ1JAIZ9rHfXTyPw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=OXREdqwB; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="mrNPSel2";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="UX1JqKXM"
-Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68F9hH7H2833328
-	for <linux-arm-msm@vger.kernel.org>; Tue, 15 Sep 2026 10:33:31 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	+nhcbIo13/RQhS94ysjC9Pcq9pCsuzSG3P5Q3HgXTjg=; b=mrNPSel2KMjzeUyZ
-	5wv2ollHGKv8nD1sH5YNFiZtJ0kFNDaasquSN9wBlPg8u+yqcPQFf741XGnTGUxf
-	ZCYqB1bEk0H5oQIoTyRYDArjTJjC4gia5HQJmSXOxTQqyy3uZCpUZb10/awjlc3t
-	fkf1IRST4xJUVJ7N21tQxKodIF0u4jXxG/Xns7DSoNeFddwhHjFznDoHeQLFAP02
-	HwK1MnJZySuPjjtTaPTYpN0KKBppj+H+ZZhRTbb/ObHCdeAxnSHv2Ll638N2AuTX
-	BEzeWlTPv9e33+MmaXDvk0QXP1WNNTkwrOt95AOqaPEKEmNKwBc26SgxcrvKx6wl
-	7AqPTQ==
-Received: from mail-pj1-f70.google.com (mail-pj1-f70.google.com [209.85.216.70])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gpxyd9c72-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 15 Sep 2026 10:33:31 +0000 (GMT)
-Received: by mail-pj1-f70.google.com with SMTP id 98e67ed59e1d1-398d0010cfaso8761948a91.3
-        for <linux-arm-msm@vger.kernel.org>; Tue, 15 Sep 2026 03:33:31 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1789468411; x=1790073211; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=+nhcbIo13/RQhS94ysjC9Pcq9pCsuzSG3P5Q3HgXTjg=;
-        b=UX1JqKXMNFcxNtyYuId6vR/sqhGcNgE/1LxNQvc/Lf9tc0B3wCj8CKpbbT0dryxex7
-         Aq7oBw9yjtsmUO6IHtChE33jmgiQB2SjtrY6RmUN3wYZMdOZGdWgDhQlBOy7GXSsN3RY
-         szMjBOR0B9Slg0bXMdsLfmlUp8YMn84SM+/Zx/UpUC3BbI1wn42eyrOVWBMLaWs+F0Xm
-         H4rveeCqkEzBBfln0G+n7ab5F4reI5Snc0M9SkIGAYt2u4M4HFDue+33H3m1gsiezwk0
-         DiZF7//ntKIvIFQD8Hx8NwvY9OnZawWF1JlFgA5fvw0ZbrTjEtQNrZmtniv1mZJTmGfO
-         BofQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1789468411; x=1790073211;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=+nhcbIo13/RQhS94ysjC9Pcq9pCsuzSG3P5Q3HgXTjg=;
-        b=ORwLwwb9ilgv3LRY4Nl8e76KnD0COdweAB5xKgAOfQAaTI6mrcVEBxgxiK+Tth/C4U
-         eUGp1kW8g/VSHJR0gX4/yn+28uZQa8tpp694IhVANy50thVEYMFr7CCuJvKbR2J6W29X
-         8HPCdMeypcIGbB4ckVNpa0Mc42Bc+Aqwl1bOH6BEunGq1FC+cPs6CRpai4a2d2Qu4nNF
-         kd1fW+nAWfeVA6c/WwskID+D3lC5eoUSAy0FDfnyg3szFOONLzE7sMgxJpP522YvPW+N
-         ruEN/Zu2vdNql0J6wYAN1tupJtnumaR+NfWaIC/j9UHMEaeioOoagpp7jvipz+pQLbfR
-         7lWg==
-X-Gm-Message-State: AFuF++lNTlYi17ZMxv9XNSAokK7KF0CtgYuQZbLN5pTgSdb5ZeNL6Ubm
-	soJV5wdpYXgb3bFE4po37bfxRKDdfjCyqymBgEaqnRdmYr5ynnTUPaz+atHqS/GZTSOdy/I+tvJ
-	86oXR5cxgz33ratt5IR8MiDy4X1zZjHKCzaurUn5AqMB8D+XgTVaMfmXSRd0xKiCkezJP
-X-Gm-Gg: AYBFou3vaL5FRRA+VC/up3z+mg4SPyi/HwPODZg6Yu1Tu7f2uDvZF7dCkwsSiTKNPvg
-	0A5QYYxOICnnmYgmp/YKZVKJWyrB5tnQ/Fc8xmITw/y2gwAxP06NXdEjmhylq05yqDJCSHguWPc
-	C1qQ54vRb+0I8Aloc5EnvxmUDRMUWrjVDnF45bkf2tZaFBTgIQKE0Jh7Dmg3nNckWspcWXjbjfJ
-	esRDeGARVqFCOutQdFXjgqHHdzSchE/1RolJsHl+VMgOcZHpIbhGr1t/xje+wJpA9BNGQp6Mamz
-	A2zpirU3nv2FLaI6dCIPAUqmNRzHi1TceoZwzXWzQmE7PetwuFyjXNFn4LqHAZ/3FHBBwSSjzf7
-	mMEr4CB4sOj3PNjRo0r1CswAfXqTsXEvcOQ==
-X-Received: by 2002:a17:90a:e188:b0:398:b88c:2b7b with SMTP id 98e67ed59e1d1-39debf93d89mr16403190a91.8.1789468410953;
-        Tue, 15 Sep 2026 03:33:30 -0700 (PDT)
-X-Received: by 2002:a17:90a:e188:b0:398:b88c:2b7b with SMTP id 98e67ed59e1d1-39debf93d89mr16403129a91.8.1789468410543;
-        Tue, 15 Sep 2026 03:33:30 -0700 (PDT)
-Received: from [10.217.222.20] ([202.46.22.19])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-33ba4ee07f2sm30101513eec.18.2026.09.15.03.33.27
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 15 Sep 2026 03:33:30 -0700 (PDT)
-Message-ID: <9b8ed8b6-4fa2-49f6-8164-6c705b8cf975@oss.qualcomm.com>
-Date: Tue, 15 Sep 2026 16:03:25 +0530
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="OXREdqwB"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9871E1F000FF;
+	Tue, 15 Sep 2026 10:45:26 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1789469129;
+	bh=6i7AgDVaLZYXq9O8A47exoIsezEzfj3SO5fE9LPyFa8=;
+	h=Date:Subject:From:To:Cc:References:In-Reply-To;
+	b=OXREdqwBf/qCC+oJS89T24cziDZQLK4Fa8h/cP0Xs1xAulZkq4Ja51yNGCITocD+4
+	 Z9doidBmSOFUnMaS/Om4d2zRzJoQ0PLU//QYNycjUA+4gvhya4DSoJB+7XpqjPD7+M
+	 BPDgYyZTfYTU9UUrE4zZU5upomsgLXVEtgqs0Vfevt2g5m9/vY+ByOYMykPZhLT6Ty
+	 6ItcFmcmzpze+o5cuWZCncTyjwVuw6cjuhFIIIWM3z7tnLdCIJ6Bb0pNcp9oHxdFCa
+	 97O9dkMpWyq3/tbO15yZjXetE3WeuzliK2WruF7sT+U2poCHYIOb6DzF8HbNuj/FDV
+	 wZjNWVm3cmwAA==
+Message-ID: <42876863-2b0f-4353-a719-16b66b82b914@kernel.org>
+Date: Tue, 15 Sep 2026 12:45:24 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -88,94 +35,102 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH RESEND] dmaengine: qcom: bam_dma: Defer IRQ trigger type
- to device tree
-To: Vinod Koul <vkoul@kernel.org>, Frank Li <Frank.Li@kernel.org>,
-        Andy Gross <agross@codeaurora.org>
-Cc: linux-arm-msm@vger.kernel.org, dmaengine@vger.kernel.org,
-        linux-kernel@vger.kernel.org,
-        Deepak Kumar Singh <deepak.singh@oss.qualcomm.com>,
-        bjorn.andersson@oss.qualcomm.com,
-        "chris.lew@oss.qualcomm.com" <chris.lew@oss.qualcomm.com>
-References: <20260717-qcom-bam-dma-irq-trigger-v1-1-6405eac86f00@oss.qualcomm.com>
+Subject: Re: [PATCH] net: qrtr: resend HELLO on MHI resume
 Content-Language: en-US
-From: Vishnu Santhosh <vishnu.santhosh@oss.qualcomm.com>
-In-Reply-To: <20260717-qcom-bam-dma-irq-trigger-v1-1-6405eac86f00@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTE1MDE1MSBTYWx0ZWRfX3hNthGMn2sm8
- iUGVUCCCW8Nof16pE5/W3b9Tv5dlAmtfidRQFnSMNptvLwwL704TWiJYTkbdUVDgPR/q+UweHe2
- k7NMHelKxC3rICUUF/4Lf07ad/9S0Uo=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTE1MDE1MSBTYWx0ZWRfX4b1evsdzsZPB
- WzOJqTtq+u0aJ3qw69zZuQWVGdd+HOVPPaf+jaz/OcTYNEJ8WvFPKd2yb8ryw5Y7hgfRRSPBs3F
- MeWxIPpxfkLWu18lkAZ9yRWDibbE9I6+lo1uLcb5ylwJPU96tl6TIRKEB5bPtAMg/rdkxPWeCUG
- Qf+y+vuQkhmXIHA/TE8aXugqMVPMvAlO8BjYZ+PtM62Nd6+/yFOnf3tY3E3e5vbVxMd/eHOMkEY
- QMT/kFV+fRIMArScyfNl8C8fAx95mtPu4538A5DPXgCkWiyETCOL36KsKzJZ+0EXD2mvN7o5FyQ
- JbP9OmdSs22XyMnVBzPNZujF8gmIXJdpjujTbW+cX4eDF9hWiePtnncWKSQGDnzXQ2OjJ9tRnSZ
- 1ap47a0i98oFBsZV16K/TCzbjC+ONLKQ7aPxRfsOO65/Tr9r1qzxr3pYiNxFYci6L5EWv0OfgEu
- JlXE4O4f0GQPsLGJADA==
-X-Proofpoint-ORIG-GUID: qQoG9qMKQElBWmeKyXfPE3FZfKq-ZI2J
-X-Authority-Analysis: v=2.4 cv=LYepeTfi c=1 sm=1 tr=0 ts=6aa91efb cx=c_pps
- a=0uOsjrqzRL749jD1oC5vDA==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
- a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
- a=EUspDBNiAAAA:8 a=iP_vca1yj_mBCQa1ra0A:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
- a=mQ_c8vxmzFEMiUWkPHU9:22
-X-Proofpoint-GUID: qQoG9qMKQElBWmeKyXfPE3FZfKq-ZI2J
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-15_03,2026-09-14_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0 clxscore=1015 suspectscore=0 adultscore=0 impostorscore=0
- malwarescore=0 priorityscore=1501 bulkscore=0 phishscore=0 spamscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609150151
+From: "Vlastimil Babka (SUSE)" <vbabka@kernel.org>
+To: Thorsten Leemhuis <regressions@leemhuis.info>,
+ Daniel J Blueman <daniel@quora.org>, Manivannan Sadhasivam <mani@kernel.org>
+Cc: "David S. Miller" <davem@davemloft.net>,
+ Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>,
+ Paolo Abeni <pabeni@redhat.com>, Simon Horman <horms@kernel.org>,
+ Chris Lew <christopher.lew@oss.qualcomm.com>,
+ Pranav Mahesh Phansalkar <pranav.phansalkar@oss.qualcomm.com>,
+ Deepak Kumar Singh <deepak.singh@oss.qualcomm.com>,
+ linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
+ Linux kernel regressions list <regressions@lists.linux.dev>,
+ Takashi Iwai <tiwai@suse.de>
+References: <20260909055846.16539-1-daniel@quora.org>
+ <260eee02-29d3-478f-9a39-d67adfefe862@leemhuis.info>
+ <ab1491bb-cca5-4145-ac7d-31c966abf7b4@suse.com>
+Autocrypt: addr=vbabka@kernel.org; keydata=
+ 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
+In-Reply-To: <ab1491bb-cca5-4145-ac7d-31c966abf7b4@suse.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
+On 9/15/26 12:11, Vlastimil Babka wrote:
+> On 9/14/26 11:04, Thorsten Leemhuis wrote:
+>> On 9/9/26 07:58, Daniel J Blueman wrote:
+>>> Since the MHI HELLO exchange was relocated, it is sent only at device
+>>> registration. During a suspend-resume cycle, the firmware in WiFi
+>>> cards such as WCN7850 indefinitely waits for another HELLO,
+>>> triggering:
+>>> 
+>>>   ath12k_wifi7_pci 0004:01:00.0: timeout while waiting for restart complete
+>>>   ath12k_wifi7_pci 0004:01:00.0: failed to resume core: -110
+>>> 
+>>> Fix this by triggering the handshake from resume_early in the MHI
+>>> transport.
+>>> 
+>>> Validated on Qualcomm X1E-801800 on Lenovo Slim 7x across 10
+>>> suspend-resume cycles.
+>> 
+>> For the record: Takashi ran into this regression as well and provided a
+>> different fix, but withdrew it after I pointed out this fix, which
+>> worked for Takashi. For details see:
+>> https://lore.kernel.org/all/87mrtkpd2q.wl-tiwai@suse.de/
+> 
+> Thanks to Thorsten pointing me there I skipped the bisect and applied this
+> patch instead and it works.
+> 
+> My laptop is T14s AMD Gen3 with ath11k_pci. Since rc2 the wifi would stop
+> working on suspend/resume, making the resume freeze for a while (I initially
+> thought it was frozen completely and was shutting off the laptop).
+> 
+> Interestingly the card doesn't recover after reboot, but only after a full
+> power off/on cycle. But if the HELLO handshake is sent after a boot,
+> shouldn't it recover? Maybe the hardware gets too confused to recover.
+> Dunno. Hm maybe I can try if 7.2 kernel (and/or 7.3 with this patch)
+> recovers it without poweroff/on after a 7.3 without this patch
+> suspend/resume wedges it.
 
-On 17-07-2026 10:30 am, Vishnu Santhosh wrote:
-> The driver hardcodes IRQF_TRIGGER_HIGH when registering the BAM
-> interrupt, which overrides the trigger type specified in the device
-> tree. On Qualcomm Shikra SoC, the A2 BAM signals an edge interrupt
-> to the apps processor; registering it as level-high causes the
-> interrupt to not fire, resulting in missed DMA completions.
->
-> Use IRQF_TRIGGER_NONE instead, which causes the kernel to use the
-> trigger type already configured by platform_get_irq() when it parsed
-> the device tree interrupts property. This makes the driver
-> platform-agnostic.
->
-> Fixes: e7c0fe2a5c84 ("dmaengine: add Qualcomm BAM dma driver")
-> Co-developed-by: Deepak Kumar Singh <deepak.singh@oss.qualcomm.com>
-> Signed-off-by: Deepak Kumar Singh <deepak.singh@oss.qualcomm.com>
-> Signed-off-by: Vishnu Santhosh <vishnu.santhosh@oss.qualcomm.com>
-> ---
->   drivers/dma/qcom/bam_dma.c | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/drivers/dma/qcom/bam_dma.c b/drivers/dma/qcom/bam_dma.c
-> index 19116295f8325767a0d97a7848077885b118241c..6c3e2ca8a572fd04c925de0adbd5cc0616b361ef 100644
-> --- a/drivers/dma/qcom/bam_dma.c
-> +++ b/drivers/dma/qcom/bam_dma.c
-> @@ -1303,7 +1303,7 @@ static int bam_dma_probe(struct platform_device *pdev)
->   		bam_channel_init(bdev, &bdev->channels[i], i);
->   
->   	ret = devm_request_irq(bdev->dev, bdev->irq, bam_dma_irq,
-> -			IRQF_TRIGGER_HIGH, "bam_dma", bdev);
-> +			IRQF_TRIGGER_NONE, "bam_dma", bdev);
->   	if (ret)
->   		goto err_bam_channel_exit;
->   
->
-> ---
-> base-commit: e43ffb69e0438cddd72aaa30898b4dc446f664f8
-> change-id: 20260601-qcom-bam-dma-irq-trigger-0366e7e86f17
->
-> Best regards,
-
-Gentle ping on this patch. Could you please review it and let me know if
-there are any concerns with the approach?
-
-
-Thanks,
-Vishnu
+Neither 7.2 nor 7.3 + patch was able to recover the card on reboot, so while
+that's not great, at least 7.3+patch isn't worse in this aspect.
 
