@@ -1,169 +1,218 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 398853CAA50
-	for <linux-arm-msm@vger.kernel.org>; Tue, 15 Sep 2026 12:55:27 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 175663A9622;
+	Tue, 15 Sep 2026 12:58:14 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789476929; cv=none; b=HIWyNIRHw9839aKrM/Aj/czjVhHhUslszFar3iw0/f9g2S6PqnRBT5OKOnVqNLtzrgYzrGDYKD/4AtboGqnC6CQngIeotfJMdqJ2REOrlHqN8sFj4swbnGnGbrt/dwIQiEgAmAbpLvgTWgPs0vfHeiqkX4BzBIzWxtXDoZrxbE0=
+	t=1789477096; cv=none; b=P1xlnuTwx81HKEa4xBwdDANvCujnyD6S95YB/T2NBlIqke2C2a+YfINiwCeCKQFO+TK+C0UIvg8a2zgQAyZc5N3CqJfR1XlHaQTIWwEoxqKoVyEyYK3j1hUh8p0A3CW3saB0lc0QcyeoFhmAIfG8GCT5v8uVSrGhr602EnCK1pU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789476929; c=relaxed/simple;
-	bh=eBuqRI24vD9lYQdJzGI9yYYYHDAzmgfP+d2spgyUCE0=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=ovnm9lfZzLbvCLmU6UzKjFAtQZwEjcO9ZOUFhXsx1tcG1NrL5RyBh1YwGhPVw6PfWZXKNoGcE6ZBgWZkDVQOj4pYIKgbK3sFR1T6Vq8JRhdVgYhZWhkvDlfsCA7/diLoZpIJwMhP+RnjfzA8Vz40qhXZiSL6eeTYUdQhYpVonXg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=PVO+5lEP; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=XuwkCcdM; arc=none smtp.client-ip=205.220.168.131
+	s=arc-20240116; t=1789477096; c=relaxed/simple;
+	bh=P002CZDa1g32upMI8F/p03n30wWNyTPTUS/pn4g4o2A=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=ScDjWYNd0MdkE7xRYpX1mho8MGD+5u2r0M1zOdYQrgav+1MUFa8+QiSxpj5nzePJQ25VEdzJPILtkLUDEmjvNQYBJYF0uQOKrrV28gS9bF2IRQng/wINySUwR/cHPFimmkP3BoLlUPfafW3a4DXdJbEYv08wTNZZ259KwDafzEE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=b1b1sx4T; arc=none smtp.client-ip=205.220.180.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="PVO+5lEP";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="XuwkCcdM"
-Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68F9h2U72086727
-	for <linux-arm-msm@vger.kernel.org>; Tue, 15 Sep 2026 12:55:26 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="b1b1sx4T"
+Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68F9hMi42675157;
+	Tue, 15 Sep 2026 12:58:03 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	r4oI1G/Tvwo9Ye+D1/omQonq92SLREOl8PUl+SUaYyg=; b=PVO+5lEPcrUX73k3
-	qJVcygFJF2n6LbU2fBb8YO5youBtQ8EgV4G5/PnY5VtJGH/5lG8u2NzcXdlnxWJk
-	MZoeDcPqNNwygsna3I4NsAoxdmJYetCXTI/fXuGv4BTJmD3cWdkZGSaRPjpd/bSe
-	HqKPZnq12RkGMQmS5PcOdaXkC5TDXyuueVy4h4oenZA+/wT4zdoe7RKAmei27KRw
-	UACC8uhZrtq0dF9+HrKAotgmlcKWaMY1V6f/b054vIsEBuGO6FeCS7i/a9tO5DuD
-	f0df5fL/iBsVcv0hu7PDWvZDbFgzcGafIPTaUumQQWBEEVcMjN1g6XEc9rTsavRX
-	jfoQuw==
-Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com [209.85.222.199])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gq1qp9j4j-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 15 Sep 2026 12:55:26 +0000 (GMT)
-Received: by mail-qk1-f199.google.com with SMTP id af79cd13be357-93a00c70d28so495429285a.0
-        for <linux-arm-msm@vger.kernel.org>; Tue, 15 Sep 2026 05:55:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1789476925; x=1790081725; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=r4oI1G/Tvwo9Ye+D1/omQonq92SLREOl8PUl+SUaYyg=;
-        b=XuwkCcdM1Z+GwiMn1YS6FnO1GeHl1xMqUMcaw4GfSWaL+FM1j9PCwwNZAOfvwqCfaX
-         UUMquYTZK9LsdjpJxQ+RgNOS1eqisOlJfUnnyvLm8HZ1Am1rqPFyRznjeWKrmXoZQquS
-         a7083MbQ/zvsHy/Hg6/1NXc18Wj9yuSKNU9krDTWu8ERa0n9jNIjMTw5DGWr7f+pqW5o
-         q4cKrg1wl2iTt9+fMtWWwdVZVp866gKXbJeavKjza65Yv0mhiA838jBSrb9qX1KXqfiE
-         HnjtZbB8lKnk6NkCRiVYCX1Lv7k6QAt+W0/H2YjPrxh3ExVbvCDJNZ4tPSq2GS0OG2gX
-         0mMA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1789476925; x=1790081725;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=r4oI1G/Tvwo9Ye+D1/omQonq92SLREOl8PUl+SUaYyg=;
-        b=SsGkTVDaYD+hjgOBqgCmCUJOmGeU0J1eV/2cEilPmdNWLiFO3v0CPimG/GFFSNLT9u
-         D4/9P8O5scrOY3n43MjWk7mz7M9XiMa1GquOyOZ6GkafGfGd3pVhx1/rmj99CK0zCpYG
-         wQBqw+3HSTwHrRFrQmLuTY87iPVZaW23nW7bODGrPU45Apu8UX1QAhQLFDl1bZUPfdSx
-         l0wLsxBMtaw5Mu66sI1cvPxv+BL1eceDa0/kYqJc5STuJGRJm9NZt/xyw2k3iZpywR2q
-         7IpJVKzw4KRHnewhoD2IzVMYnbhjGy2sshTFdIxDZsQyJu4FVVFS1aXgjIUJqgYp6fBP
-         JLtg==
-X-Forwarded-Encrypted: i=1; AKwUvBzFkQUxkhodkZOO47gI6uRCcDoh7yq12fxib6YYPLEhPZB8Klsv8K9izinOeNRf1QygNdvdVoAdv3G7pjH/@vger.kernel.org
-X-Gm-Message-State: AFuF++nC0zZryUY1BDMk+OAxPlQJ2gD0T1wQ3ezHzZbuWiUaPXMgjjAh
-	Zb7LsFTBgaDItp04KZF08+bmlzhNuKork58yR1p+PDqJJCIGQaH7Dxa9xlBAC9YVZHmgDj+28Ps
-	E7cmkFUl9wfLvIun73hc2s8qZOsHx3MBGRc3PsruxK8KRjolfJqkhQk/bQBk9c9+oViZD
-X-Gm-Gg: AYBFou1SFl2DIfMeparC4CrfpHYQX1mNtp0TIEiR5BE8vqfZJqwY9O10ORmeekLVHzn
-	/f4TrFXk6E9IXyuSoF5faMwI9RUirwfuufNlisZ0lfJfJDlDwbRZX5YxlA1fSVI1pleJEHAAzK7
-	XWATOpNHTyObEHY8yrfIKIHVULj5IACdCkbgjtS4eyuUm/GE16i2DLzBY3tL/X8l1T1Qm5+BMMO
-	wBTplBt9G8WfSw+B8Is4Usc8odnO6W+qbIf4ntZdRNsa2EVDrEJJAIrhcLRAQx2AuvJW/JSNZ1Q
-	kaC48jXE9p0LgJ19P63eYLjLj0scKGJysx/hX4WCB+zsDYGdfZK3BNVcsjKYgzpZI9rrw8T0pVI
-	PnWuPD31oIa4vlkroiBtUip338MqYRFQlq6ZI5IE=
-X-Received: by 2002:a05:620a:2556:b0:939:13a7:70f0 with SMTP id af79cd13be357-93a40765af3mr102035985a.5.1789476925510;
-        Tue, 15 Sep 2026 05:55:25 -0700 (PDT)
-X-Received: by 2002:a05:620a:2556:b0:939:13a7:70f0 with SMTP id af79cd13be357-93a40765af3mr102029085a.5.1789476924914;
-        Tue, 15 Sep 2026 05:55:24 -0700 (PDT)
-Received: from [10.218.21.154] ([202.46.22.19])
-        by smtp.gmail.com with ESMTPSA id af79cd13be357-939ecc38105sm1206322785a.4.2026.09.15.05.55.18
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 15 Sep 2026 05:55:24 -0700 (PDT)
-Message-ID: <9ba16818-ae60-49a3-8444-c1056c03c63a@oss.qualcomm.com>
-Date: Tue, 15 Sep 2026 18:25:16 +0530
+	cc:content-type:date:from:in-reply-to:message-id:mime-version
+	:references:subject:to; s=qcppdkim1; bh=UbKFa6dG5UBkDfq3ndVqVEPf
+	2wDCJCG6++eqJMrwxIs=; b=b1b1sx4T/TbvEJ6t0UPMYxeQD8KFltkntWoh9Foh
+	sX05R8XrcnvOkQUpwGfi3jKxC6JdJDOZidBhng2WQ4fd0K9PgqnrfHRclABUMPTU
+	mFvzMDvu2xB1JWsd8DVY82NRYAhOWt0IySJMX1y9cBn6lkUVCO6kn7aXngyl4K4J
+	1I++lyboZLSOwtNPl3nMUR9k33K0PpfzsxTrVVnatVdVeZrLn7KmGIK0BdmqZw0C
+	UXugNJZ+zR2rLz/CJ70pN8bjkAyNr4foVlrCnmKSSXY3zGfO3RqeqjZw3BUyfe8P
+	CB5u1KuFSntk5RVB8QXIZ3i1zcOuuYlLy8OQebJYFGOVQQ==
+Received: from apblrppmta01.qualcomm.com (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com [103.229.18.19])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gpye71xbr-1
+	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
+	Tue, 15 Sep 2026 12:58:03 +0000 (GMT)
+Received: from pps.filterd (apblrppmta01.qualcomm.com [127.0.0.1])
+	by APBLRPPMTA01.qualcomm.com (8.18.1.11/8.18.1.11) with ESMTP id 68FCvx4w2370413;
+	Tue, 15 Sep 2026 12:57:59 GMT
+Received: from hu-devc-hyd-u22-c.qualcomm.com (hu-bibekkum-hyd.qualcomm.com [10.147.243.199])
+	by APBLRPPMTA01.qualcomm.com (PPS) with ESMTPS id 68FCvxoC2370407
+	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
+	Tue, 15 Sep 2026 12:57:59 +0000 (GMT)
+Received: by hu-devc-hyd-u22-c.qualcomm.com (Postfix, from userid 4253010)
+	id 99CB35E3; Tue, 15 Sep 2026 18:27:58 +0530 (+0530)
+Date: Tue, 15 Sep 2026 18:27:58 +0530
+From: Bibek Kumar Patro <bibek.patro@oss.qualcomm.com>
+To: Robin Murphy <robin.murphy@arm.com>
+Cc: Rob Clark <robin.clark@oss.qualcomm.com>, Will Deacon <will@kernel.org>,
+        "Joerg Roedel (AMD)" <joro@8bytes.org>, iommu@lists.linux.dev,
+        linux-arm-msm@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
+        linux-kernel@vger.kernel.org
+Subject: Re: [PATCH] iommu: arm-smmu-qcom: Skip fault-info reads when
+ suspended
+Message-ID: <20260915125758.ekt323jhwsiis6bp@hu-bibekkum-hyd.qualcomm.com>
+References: <20260912-priv_call_runtime_handlers-v1-1-fc0c3a17523f@oss.qualcomm.com>
+ <fe22fb3d-77dd-4b34-9dd8-aafe11f36988@arm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 5/6] ASoC: qcom: lpass-va-macro: Add shikra compatible
-To: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>,
-        Srinivas Kandagatla <srini@kernel.org>,
-        Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>,
-        Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley
- <conor+dt@kernel.org>, Jaroslav Kysela <perex@perex.cz>,
-        Takashi Iwai <tiwai@suse.com>
-Cc: linux-sound@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
-References: <20260910-add_shikra_support-v2-0-fdd2129c696c@oss.qualcomm.com>
- <20260910-add_shikra_support-v2-5-fdd2129c696c@oss.qualcomm.com>
- <8acf2491-01f3-49d0-a357-39592ba991dc@oss.qualcomm.com>
-Content-Language: en-US
-From: Mohammad Rafi Shaik <mohammad.rafi.shaik@oss.qualcomm.com>
-In-Reply-To: <8acf2491-01f3-49d0-a357-39592ba991dc@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTE1MDE4NyBTYWx0ZWRfX1z7qAAjMyeUr
- DeXPoHa/XtLZUIjTNQ6w94T/ET8Dv1WwftxF2ea/Y0YBNSNbKnoNOb+DtzQNp6zpSepGd7JyGTs
- 3ZmsVdxfnIerSZh9M8l44JXAGNEE9Ao=
-X-Authority-Analysis: v=2.4 cv=I4Xw19gg c=1 sm=1 tr=0 ts=6aa9403e cx=c_pps
- a=HLyN3IcIa5EE8TELMZ618Q==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
- a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
- a=xk92F0r0DzOCDTAHD88A:9 a=QEXdDO2ut3YA:10 a=bTQJ7kPSJx9SKPbeHEYW:22
-X-Proofpoint-ORIG-GUID: FLb0d7Ws2b-XLBs3JZqJroEqyWV-T4Cx
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTE1MDE4NyBTYWx0ZWRfX0jfTN1lCF0Vt
- Vt0NwW2XOvLntNm9Lvc7BaPO/8uXNBrC27QWslaS9JFlJi72R26B804CFVud4y2qegE2Tev3Ndc
- 4ohcgUIhPMyg1Ep8Jqn3S4ezoyTUObHm35cZ+rtMiLcLRLJ0orRdOb4KahUCl/ek8LhHQQ9fiYc
- rJYttR0TW5Eve1EZDSleLJSL9F5fRQrNVb3RLjB9Z1jkW3cIN9yQZFQaVsdj3qPQq1ASiOVYFSd
- YC2Y2G8zZ3pIMrX18Dweg4SZEg+W2E3XD7oxyNL/Rr40yS30mEXZS/rSD3IngwjDDV9q2bM+dCA
- 3hGMslYV/DDTayj8HE7VYihrHSzDD6z0T0io0ATbh6JtQ6eG5fHizLrXBdFSHtL8tJzcWB7Q4af
- 7NXyuZ2efiADUivwXUtL5jN+vj9R+g7sjLqLex6Cv11CVEb2CuC92+Ul4Z+30h/TbD+XDmrZgHr
- dEba0FewVI41e254vXQ==
-X-Proofpoint-GUID: FLb0d7Ws2b-XLBs3JZqJroEqyWV-T4Cx
+Content-Type: text/plain; charset=us-ascii; format=flowed
+Content-Disposition: inline
+In-Reply-To: <fe22fb3d-77dd-4b34-9dd8-aafe11f36988@arm.com>
+X-Proofpoint-Reinject: loops=2 maxloops=12
+X-QCInternal: smtphost
+X-QCInternal: smtphost
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTE1MDE4NyBTYWx0ZWRfX4copq2whpTUq
+ skDCKOJ5ityBv84+tFSxUzk2CR+tK+qHdrtB6k0lx91khZ4Z9uMy8McIqXflmCjgJayvto0MpBm
+ Zyib+wI3RfFaHFtNWmgtNkTzBrFbx4mHMaWr/uLxIL7TTsTyF9Hmjva0v5pufxjgNV/JGGXdsqt
+ gQiQzd+SAT+7EYeJEABGEym5/PtqxprIbj6hgxzBlnBi/HxRaRAKeGrXoYf7B/iZfWpdroeiLZu
+ 3UrBqkNWO5Q3/A6Pk9M2cpZ3Erp/ePfjf5sbu5qxAcgLMD4zMlRqRQRZ5TnldbH5U2HLtZHBtlg
+ G9FVblkFKAb+otRGHhx2xLCTe5Fgjj/wVgVscsBcYFR5fAkikNcloAdbQCM4UDeTnoK1AHRldaH
+ XNN3bslFaXIWZ8tk/Wlx1mk1tTm8kan6K/W8WHiWUab8H7YX2wTSwxPfXTdg1KXttqs46muATP3
+ oyuleQZizSupEUnmOdA==
+X-Proofpoint-GUID: wFe0_PrRhd-FsqBF57E34UOXZmZzEjYQ
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTE1MDE4NyBTYWx0ZWRfXyzAZkhIst5QZ
+ mXrwxcdX/JbVpeExZJANiduJrbBL4TS2t4FueVFTNA4Hgfj13craL3xeU661aCAY7o5Qfiaqalq
+ JetUvJz3tSoijFwYYvrQ4HBMdcYLyaM=
+X-Authority-Analysis: v=2.4 cv=fck4WEQF c=1 sm=1 tr=0 ts=6aa940db cx=c_pps
+ a=Ou0eQOY4+eZoSc0qltEV5Q==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+ a=kj9zAlcOel0A:10 a=VdqzKS8jKosA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22 a=VwQbUJbxAAAA:8
+ a=EUspDBNiAAAA:8 a=NEAV23lmAAAA:8 a=WfeKVc-BsYg2EYeYhGIA:9 a=CjuIK1q_8ugA:10
+X-Proofpoint-ORIG-GUID: wFe0_PrRhd-FsqBF57E34UOXZmZzEjYQ
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-09-15_03,2026-09-14_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0 suspectscore=0 phishscore=0 clxscore=1015
- priorityscore=1501 bulkscore=0 malwarescore=0 impostorscore=0 adultscore=0
- spamscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
- adjust=0 reason=mlx scancount=1 engine=8.22.0-2609040000
- definitions=main-2609150187
+ impostorscore=0 suspectscore=0 bulkscore=0 malwarescore=0 phishscore=0
+ spamscore=0 lowpriorityscore=0 adultscore=0 clxscore=1015 priorityscore=1501
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609150187
 
+On Sep 14, Robin Murphy wrote:
+>On 11/09/2026 11:25 pm, Bibek Kumar Patro wrote:
+>>qcom_adreno_smmu_get_fault_info() accesses SMMU registers without
+>>holding a runtime PM reference. A fault is raised while the SMMU is
+>>active, but the GPU may drop its power vote before the threaded fault
+>>handler reaches the callback, allowing the SMMU to runtime suspend.
+>>
+>>Accessing the SMMU registers after suspend has started is unsafe and
+>>may cause subsequent register accesses during runtime resume to fail
+>>with a NoC error and an asynchronous SError.
+>
+>But hang on, if I'm following the code correctly, the callchain would be:
+>
+>arm_smmu_context_fault
+>  report_iommu_fault
+>    msm_gpu_fault_handler
+>     qcom_adreno_smmu_get_fault_info
+>
+>and from here we still need to return to arm_smmu_context_fault() to 
+>clear the FSR, so surely that still has the same problem in itself?
+>
 
+Ah, yes this path also should have the same problem for GPU smmu.
+But I am carrying [1] in my workspace [2] for testing currently.
+So haven't encountered the same yet. We might need to address [1]
+also as part of this thread. wdyt?
 
-On 9/14/2026 5:17 PM, Srinivas Kandagatla wrote:
-> On 9/10/26 10:46 AM, Mohammad Rafi Shaik wrote:
->> Add shikra specific VA macro data and register programming needed by
->> the LPASS codec v4.0 implementation.
->> +static const struct regmap_config va_4_1_regmap_config = {
->> +	.name = "va_macro",
->> +	.reg_bits = 32,
->> +	.val_bits = 32,
->> +	.reg_stride = 4,
->> +	.cache_type = REGCACHE_FLAT,
-> 
-> Pl use MAPLE here.
+[1]: https://lore.kernel.org/all/20260313-smmu-rpm-v2-1-8c2236b402b0@oss.qualcomm.com/
+[2]: https://github.com/qualcomm-linux/kernel/blame/aff7542c319ede2037eeee316f20c2429062c08a/drivers/iommu/arm/arm-smmu/arm-smmu.c#L500
 
-Thanks for the suggestion. I will switch to REGCACHE_MAPLE and update it 
-in the next revision.
+Thanks & regards,
+Bibek
 
-> 
->>   		regmap_update_bits(regmap, CDC_VA_CLK_RST_CTRL_FS_CNT_CONTROL,
->>   				   CDC_VA_FS_CONTROL_EN | CDC_VA_FS_COUNTER_CLR,
->>   				   CDC_VA_FS_CONTROL_EN | CDC_VA_FS_COUNTER_CLR);
->> +
->> +		if (lpass_macro_get_codec_version() >= LPASS_CODEC_VERSION_4_1)
-> same comment as in 4/5 patch use a flag.
-
-Ack, Will introduce a flag or switch-case mechanism to handle this 
-configuration.
-
-Best Regards,
-Rafi.
+>Thanks,
+>Robin.
+>
+>>Use pm_runtime_get_if_active() to keep the SMMU active while collecting
+>>the fault information, and skip the register reads if suspend has
+>>already started.
+>>
+>>Signed-off-by: Bibek Kumar Patro <bibek.patro@oss.qualcomm.com>
+>>---
+>>qcom_adreno_smmu_get_fault_info() accesses SMMU registers without
+>>holding a runtime PM reference. A fault is raised while the SMMU is
+>>active, but the GPU may drop its power vote before the threaded fault
+>>handler reaches the callback, allowing the SMMU to runtime suspend.
+>>
+>>The failure sequence:
+>>
+>>   GPU context fault
+>>           |
+>>           v
+>>   qcom_adreno_smmu_get_fault_info()
+>>           |
+>>           | GPU drops its power vote
+>>           | SMMU starts runtime suspend
+>>           v
+>>   SMMU register access without an active RPM reference
+>>           |
+>>           v
+>>   later Adreno PRR private-interface operation
+>>           |
+>>           v
+>>   pm_runtime_resume_and_get()
+>>           |
+>>           v
+>>   arm_smmu_runtime_resume()
+>>           |
+>>           v
+>>   arm_smmu_device_reset()
+>>           |
+>>           v
+>>   SMMU register access
+>>           |
+>>           v
+>>   NoC error / asynchronous SError
+>>
+>>Use pm_runtime_get_if_active() to keep the SMMU active while collecting
+>>the fault information. If suspend has already started, skip the register
+>>reads instead of accessing the SMMU while it is being powered down.
+>>---
+>>  drivers/iommu/arm/arm-smmu/arm-smmu-qcom.c | 14 ++++++++++++++
+>>  1 file changed, 14 insertions(+)
+>>
+>>diff --git a/drivers/iommu/arm/arm-smmu/arm-smmu-qcom.c b/drivers/iommu/arm/arm-smmu/arm-smmu-qcom.c
+>>index 795e8ec7e8fa..b1787a4ba0d3 100644
+>>--- a/drivers/iommu/arm/arm-smmu/arm-smmu-qcom.c
+>>+++ b/drivers/iommu/arm/arm-smmu/arm-smmu-qcom.c
+>>@@ -129,6 +129,18 @@ static void qcom_adreno_smmu_get_fault_info(const void *cookie,
+>>  	struct arm_smmu_cfg *cfg = &smmu_domain->cfg;
+>>  	struct arm_smmu_device *smmu = smmu_domain->smmu;
+>>+	/*
+>>+	 * A fault can only fire while the SMMU is active (GPU is issuing
+>>+	 * transactions). Use get_if_active so that if by a rare race the
+>>+	 * device has already suspended, we skip the register reads rather
+>>+	 * than triggering a cold resume which would call device_reset and
+>>+	 * destroy the fault state we are trying to capture.
+>>+	 */
+>>+	if (pm_runtime_get_if_active(smmu->dev) <= 0) {
+>>+		dev_warn(smmu->dev, "get_fault_info: device not active, skipping\n");
+>>+		return;
+>>+	}
+>>+
+>>  	info->fsr = arm_smmu_cb_read(smmu, cfg->cbndx, ARM_SMMU_CB_FSR);
+>>  	info->fsynr0 = arm_smmu_cb_read(smmu, cfg->cbndx, ARM_SMMU_CB_FSYNR0);
+>>  	info->fsynr1 = arm_smmu_cb_read(smmu, cfg->cbndx, ARM_SMMU_CB_FSYNR1);
+>>@@ -136,6 +148,8 @@ static void qcom_adreno_smmu_get_fault_info(const void *cookie,
+>>  	info->cbfrsynra = arm_smmu_gr1_read(smmu, ARM_SMMU_GR1_CBFRSYNRA(cfg->cbndx));
+>>  	info->ttbr0 = arm_smmu_cb_readq(smmu, cfg->cbndx, ARM_SMMU_CB_TTBR0);
+>>  	info->contextidr = arm_smmu_cb_read(smmu, cfg->cbndx, ARM_SMMU_CB_CONTEXTIDR);
+>>+
+>>+	pm_runtime_put_autosuspend(smmu->dev);
+>>  }
+>>  static void qcom_adreno_smmu_set_stall(const void *cookie, bool enabled)
+>>
+>>---
+>>base-commit: f61bb3920fa8cb44b84d32e0fa9fbaab4eb00c80
+>>change-id: 20260912-priv_call_runtime_handlers-7f3547544040
+>>
+>>Best regards,
+>>--
+>>Bibek Kumar Patro <bibek.patro@oss.qualcomm.com>
+>>
+>
