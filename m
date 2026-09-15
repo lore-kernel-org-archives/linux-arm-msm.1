@@ -1,113 +1,144 @@
-Received: from mail-ej2-f12.google.com (mail-ej2-f12.google.com [74.125.228.140])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from PNYPR01CU001.outbound.protection.outlook.com (mail-centralindiaazon11020073.outbound.protection.outlook.com [52.101.225.73])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AB9854772B5
-	for <linux-arm-msm@vger.kernel.org>; Tue, 15 Sep 2026 08:49:09 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.228.140
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789462152; cv=none; b=bs97N3JRkZihKmQhlV1irriIwDEqkw4DI3PUGoTzqeRY8AIHEvSt2LTuQ+sLajYrb/zrAsvaT4SNKfVyxqQ6kIR9rliQBfI7+YVyrxxbAY2tAn9qNbYlipfaHlPfYym0TwPCOf5yr/PQ9WfdcZHsvAKIBC+99P7V62o1x6GVo+A=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789462152; c=relaxed/simple;
-	bh=a2V+I7UeXRDj3lHU2NGFDjdBIe3drc9UQsymhMr1D/4=;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7C166345EB4;
+	Tue, 15 Sep 2026 09:09:44 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=52.101.225.73
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1789463386; cv=fail; b=SWLuvoAEcLnixIRso+O5C6pmYNprOzsYPC46uKLj1aL6poU9VOAXJYS9UveMbuMS/zbvkZjpghVJmTWiqIY4y5newvExlONTEiBPFW+H0A3LvAkEMwtGreQ+eitMjxERPIf/iz3DJuSmD4ulOpFOI8dVIEZStHwU0ZNaTwqkwt8=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1789463386; c=relaxed/simple;
+	bh=nOLeRLBB0qQi/maCeFMCC1E828SykBpix2j9nI9WkJE=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=HGwzRysCW3MlaXW3+fr4guo3dZ7HGgR5xDnXogTVr9XdbzCh+YOK3XfKXH7Zk43aCBhW7/2SbPwUZV+ZRQUaVHZvRd7PFbpoJMeZ0GC/hv9SSa8C5SHMqKxhX4xVWUA6pJ78HdTHg/FbEb6bmcCy+WHi0gqF2T7pYMMohW2wGEY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=SSeuqfoh; arc=none smtp.client-ip=74.125.228.140
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="SSeuqfoh"
-Received: by mail-ej2-f12.google.com with SMTP id a640c23a62f3a-c254f9f7db0so6299666b.3
-        for <linux-arm-msm@vger.kernel.org>; Tue, 15 Sep 2026 01:49:09 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1789462148; x=1790066948; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=CC6zM5DNH7SSIqqjxl1MzTwo2sU+cNMvlHaMx4m2Zy8=;
-        b=SSeuqfohJURUKjycap9F5z+aJZ7iCSURdtZibOyhO3hvCOFyz41lmLRYwcTVgacVfC
-         LWfwa6nTCLi55gxhj2za/c8l5u7sAb/L124ZcgbJ6+jAVHj1zugpuEtItf8tEzFazhnL
-         2LuEaQn3b6q+6szsI8r6B5dokeyKEebIHpzXikm8+p+xnl324MF1Atz/Mv3MECt6pxZd
-         +SnA3w7DKZQpXGDp7NEATbcX2S01Si2YUc05+61Uk3yfpYyrkGW9vibGEopCr6Iou2aO
-         N3UlDj/4nl1ynntXmx+mXslHCYIyKcm8teM5BuSAMB1pXjK5qJ/9c9KnIu9g1ihIYZWP
-         RV3Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1789462148; x=1790066948;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=CC6zM5DNH7SSIqqjxl1MzTwo2sU+cNMvlHaMx4m2Zy8=;
-        b=lw66luemfixhxeX69Kqt5CUZPvC4TePp5W9IKJAUu9nfvbgSC5K1DHKS/NwY2KhYW1
-         B6XM7Oll0eERZHfqm1kvHJaGkdGyeqYH3i0rCvkO0IiNmL7rOQNHyJufLhHyEhtHNBmy
-         eCkaMps9k777RM3xidwTa2SqbXcH2YLvEgok/jULw//adWRphmPGhXsRB45hW4veKg6g
-         v7E9EmCwAKHXrgX5ieVe1kagux6S0U4Mol/UaYNvWrl2CiLtv5tPO/o6g/X7EJ41QO3v
-         0JktbmhWNmgoph4W4dy0eLRs2INLPzxr7FAbjGPJuW8q5jXfxjAvjWa0q1qy3oMShGij
-         KB9g==
-X-Gm-Message-State: AFuF++lS/TzgEybtFFEb6kz3MaciUBeNghbONYVtDxYr4SpIPO6DBpi5
-	WF4LiawlnYy15f5jbJJrU5LjF5Qdf+TnkIqffq9/p2YvjYuv7qn8iv4q
-X-Gm-Gg: AYBFou2s7+s3dEjEPutIhIglwcL6SmfyJ0xl1jfZzVwGwfP/J6p+nEPXgTFsBTwAS9q
-	SzOko1s8a6pbtDa9p2Pj9KRNFWrO1UfvymteVSpm3TM+487N3Pl9nQ2bcshRc3Owc4Ax6fu+Zi+
-	lTwFqCGQXR2Rhu3e3EGkvRJhRYOawWE0M/0JLFTFn7Nd1/+QNfvzOvbPGIa5ZYZy4mlim8+NcVH
-	2eK0068XR1AlWy3E0lOAtHqfwAAIn9iLo49g4CKJw8/43xZvOYxIN9o5JU9ruarbHmqHmtaddK3
-	w6zeIuq6D7pJMV6zEc5+G5lRQXVlbqTsed452M8QaD7hzqIEVrIWkKc3KoLBoT5RJLppAB7N9cI
-	OjtWQ+i6oIKThuh9iU4P1MCIbzA9dIKqsIOxeMBUDt+qFVGd44G1pVKC0Lq2Y8lrBtHuRaGxE0D
-	obhFffGWF4EqWB1fdCYAa8wG3tVs/AwY2R3cRb+xksxRikKF2IGDIGJKOnRJBu9M+7iCXorx27N
-	xPdTWYN6NleyWR85j0q5Oq7Us3PQ1vS
-X-Received: by 2002:a17:907:d25:b0:c29:56d3:65a with SMTP id a640c23a62f3a-c29d792b30emr12532966b.33.1789462147841;
-        Tue, 15 Sep 2026 01:49:07 -0700 (PDT)
-Received: from workstation (161-53-210-87.ftth.glasoperator.nl. [87.210.53.161])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c2966067101sm552702966b.35.2026.09.15.01.49.07
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 15 Sep 2026 01:49:07 -0700 (PDT)
-From: Stanislav Zaikin <zstaseg@gmail.com>
-To: Bjorn Andersson <andersson@kernel.org>,
-	Konrad Dybcio <konradybcio@kernel.org>,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Sebastian Reichel <sre@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org,
-	devicetree@vger.kernel.org,
+	 Content-Type:MIME-Version; b=opUspxw4wscTpic20sDS9FdOqZRzxCk5aaAFMpDWPIPUAC+MsbBKHdWBEBp9hF0MzjkGDS6OtVQC75/W1yoaDGSBuhdfecEGju2sMwzbTnO4ygUmT3NSecqnz+7zwymRki8dmkNk5F2WTOJGn4gvB+7lUQPc7RynpgxvogWdPcQ=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=ebytelogic.com; spf=pass smtp.mailfrom=ebytelogic.com; arc=fail smtp.client-ip=52.101.225.73
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=ebytelogic.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ebytelogic.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=mSgNUefY45LHqALxLWxTGJIHRkC6dIT6qT2ksTOIvF4EOu496EkGpjmCq/bCEug0G3hWgv8Y+5x/tuxSPUVjEehqf9rzyd/F4VZRZhkP1Vy3H4G6gzpp/UVFsltBJgPwZ2dt2FMVDBEouLSAlM/W/7SuT9296ltDMnE0STaBnxnJpW3+lVsykwC9f10wlZ7hHkHzqHVyiExasYf+FPVV+aUGlp7RGo2hz3FNXXDAHI+x2MZ5rh1ZwI7VoZRYr3RbcnGVF1g+ad56MFlPSkhta3znUg3OufykwfNX4xP3DPSr/9rn5QW6qILS+gDK13YxnpqNZHM0K3v23n+G5/rWaw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=nOLeRLBB0qQi/maCeFMCC1E828SykBpix2j9nI9WkJE=;
+ b=sl0sHZ7PYXuU7Svln9/q9Al2c7HTg2yltCUZhMZ2pWlHhEoONKebGk6NEqOSdatN/lK4bDrPBF8g/6VQALOfcX8QJLlFbGi4EeFkjp07Ho+/EoUzSv/Uqk2ld/5MBkcygDE2T7u1iJnOom+BKK87gVeEC5KDMhe3J8W8pqXWM3UMoH3GMX8qo9PcuVBPH4j6vmDpHMBcjvtvdsOzvroh416hTlMlLMSogmkItK4vsjeQ3ujnpNU5XhOFPZZ2sgBerQFrW4KCy4D5K6US4cgJaCICrOEP0c6V8vDgpDCrxugbUOClLxTvhELVZBB40j9/MmMW+C4BrdcWMRQbbQ4eng==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=ebytelogic.com; dmarc=pass action=none
+ header.from=ebytelogic.com; dkim=pass header.d=ebytelogic.com; arc=none
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=ebytelogic.com;
+Received: from PN3PPF28092842E.INDP287.PROD.OUTLOOK.COM (2603:1096:c04:1::97)
+ by MAUP287MB5156.INDP287.PROD.OUTLOOK.COM (2603:1096:a01:1c2::21) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.406.13; Tue, 15 Sep
+ 2026 09:09:40 +0000
+Received: from PN3PPF28092842E.INDP287.PROD.OUTLOOK.COM
+ ([fe80::df75:6e8c:7def:a08e]) by PN3PPF28092842E.INDP287.PROD.OUTLOOK.COM
+ ([fe80::df75:6e8c:7def:a08e%6]) with mapi id 15.21.0406.012; Tue, 15 Sep 2026
+ 09:09:39 +0000
+From: Hitesh Patel <hitesh@ebytelogic.com>
+To: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
+Cc: Hitesh Patel <hitesh@ebytelogic.com>,
+	linux-media@vger.kernel.org,
+	Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
+	Loic Poulain <loic.poulain@oss.qualcomm.com>,
+	Mauro Carvalho Chehab <mchehab@kernel.org>,
+	linux-arm-msm@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
-	linux-pm@vger.kernel.org,
-	Stanislav Zaikin <zstaseg@gmail.com>
-Subject: [PATCH v4 3/3] arm64: dts: qcom: sm7325-xiaomi-taoyao: switch to device-specific pmic-glink compatible
-Date: Tue, 15 Sep 2026 10:49:01 +0200
-Message-ID: <20260915084901.56622-4-zstaseg@gmail.com>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260915084901.56622-1-zstaseg@gmail.com>
-References: <20260915084901.56622-1-zstaseg@gmail.com>
+	ravi@ebytelogic.com
+Subject: Re: [PATCH 1/8] media: qcom: camss: take the link frequency from the CSI-2 transmitter
+Date: Tue, 15 Sep 2026 14:38:37 +0530
+Message-ID: <20260915090929.1284112-1-hitesh@ebytelogic.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <bd3fa7ab-9c60-4697-a0bc-92877e8a2885@linaro.org>
+References: <20260914133416.1030231-1-hitesh@ebytelogic.com> <20260914133416.1030231-2-hitesh@ebytelogic.com> <bd3fa7ab-9c60-4697-a0bc-92877e8a2885@linaro.org>
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: PNYP287CA0086.INDP287.PROD.OUTLOOK.COM
+ (2603:1096:c01:2b6::9) To PN3PPF28092842E.INDP287.PROD.OUTLOOK.COM
+ (2603:1096:c04:1::97)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PN3PPF28092842E:EE_|MAUP287MB5156:EE_
+X-MS-Office365-Filtering-Correlation-Id: 549cc6a1-2945-4081-006b-08df13091257
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|10070799003|366016|52116014|23010399003|1800799024|376014|10067099003|4143699003|18002099003|22082099003|56012099006|5023799004;
+X-Microsoft-Antispam-Message-Info:
+	57zZ+5fF2omvMbW5z2tTwiANQIDjB9mzLi6Ci4ZOg0OipJmocDVTsXm+TWRRGmAgFn+lmgNA7snpksx7y9f9v2B0cSOVPGCcbDQMLq6OSx46rmAUj4UwCz6QYUCpE73jlxRLLyvFNSr8qGjG0TIaezLNOlCnsixGI4Qmb2X1d9MTXObtNxEkgSnhcH9uUWlnc0et8NcCY/4PoqPHP2Ga528fxA4APk7d84NZTgJtE7uIz33n5yQKx0kCsdpDjmgkVmGVQLxKjTq1/DKQg01LnRcImkinpm77N3gxMjdWB2BSw6QtqymEqB7itiuY5GdzMxS3LlNcqQio4QKyhmTIswVIDRE5ZbahxSquu/sjcdbYRExCGQTpjYKWTz5St+9alxAHP6uU88tm4z0UwvXSdm/qM7bjwXNoTfeXFCFWF3VY6p6EDFy+yZoPuG40fE6VAns1AfpmAzVIokGFYbJi8KMnG7l/pZj0zq7MJms4opGUcuvTAEMiX97aX19yTxW9Y4L7ApRAYo3qc6YAYs1RanCgHCff/ssaKzHtv3/gARcz3hsWG7a9fq/hNdNtsgr6ZZ9X4HbV32vKMKMycThxaBKr2VJbhwguciVHNxKOPGuwXJp1FXx1mJk+hgvU1z1qYQFW9LSm94/Cx5u1/Y0HCYCYpoqPzJ+Un7kymel/GhY=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PN3PPF28092842E.INDP287.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(10070799003)(366016)(52116014)(23010399003)(1800799024)(376014)(10067099003)(4143699003)(18002099003)(22082099003)(56012099006)(5023799004);DIR:OUT;SFP:1102;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 2
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?us-ascii?Q?qIBNfGC9KO9C5E4MXlCEi7VmWuE6IMjIfw0xaKtY2focdw2GdGYMpblvQKUB?=
+ =?us-ascii?Q?du0yYRZfXlU9QhCrMeGCxNIaRW3V2B4g3jk6F+FHIaEgPGrnuX7N0Ffmy4RD?=
+ =?us-ascii?Q?Bd+JGagTbBcxjq1XKTQAnW52olKcy8t2izbymiR8RFiNVGaVJDI+LXW0tXBL?=
+ =?us-ascii?Q?gvyT4YWmFQMHeuwZ2GEvEc5at36x+J15fCA7b77HVC61aGFuWFWa/8xhanGW?=
+ =?us-ascii?Q?FTNaJruD4qhW1nyi9gKjFIhqu7Be1Ilr3MtssovNx86+Fv2mSZ3uaTweDb/M?=
+ =?us-ascii?Q?sQxYwp7EUF4P2Eu1pNHdvVxIPHZotvdkFTpNksCN0gAClWnBj0tNOzExFbmK?=
+ =?us-ascii?Q?v5tUM2EhShV7FefSgVOlwUiZmlFV/QlQ2i8TRBMgKqzfjReOLmMhx1Az9YCr?=
+ =?us-ascii?Q?DppA2HzNedd+aULgm2TYcXU077eiVBlXWmmyiMDJo1RkyMcswzKlCgVezTt/?=
+ =?us-ascii?Q?vMNM/5CVY6IyizKqkcITGsgl1h89xiMoUaDlSpbue51Wk4pXXKxeI2uaosIo?=
+ =?us-ascii?Q?71M3RnK4iEsRb5MMwseL9jSchaWIMG/FlcrPUTPqCCwMSs0eP3n3JhD5kLbL?=
+ =?us-ascii?Q?pi3Do0mZTF95hLHJ2H8mbjUGY0e4B7YqrhQPHNxipzayk4mt2BKq4gFttkOh?=
+ =?us-ascii?Q?1zgENbt0zwAz19I2laf2F6n5u7cotSqMmqNygJMet/w7ALLh+Fnu7/EE7Y15?=
+ =?us-ascii?Q?CziDM5/2rjRVWkvNFmiaatyQw3+5NzAmMbqIriw0qjooh9+ptFjTXdmmhM45?=
+ =?us-ascii?Q?a2X5P0t3yaTEvFmsBeQeXFy6N5FQJcdibEDTXH+qMgJqt5VmixBaso9Cn55o?=
+ =?us-ascii?Q?p1T3C+Xl5QP/gIETkdm8vHRh/ylPOsD5FpHCx/dhq17+XvrsXxW8LX/Amixz?=
+ =?us-ascii?Q?s43AXzAT3zajOdfNLuLSwXEkTrlvjidJML2nmTQB52xOFHGOlUu3rEN7vpWu?=
+ =?us-ascii?Q?XwV2nJycfwkDsJbO0Lo/px5A8Co1UjxmPhvRADzW/5gJBxZyLTXNseyoJ++P?=
+ =?us-ascii?Q?mUSXLN2wgpAQIC0FAygy0oMEIHz3i8tztylocGEbjVxAT8R5nW9Q7NWomNcx?=
+ =?us-ascii?Q?tpgj/siPH0yCnI1fRUOTqcfHnTls+zw8qU5m3V99PMCh/j86mUhaXCBCohDr?=
+ =?us-ascii?Q?pUkrmPuOZH4fXveoHTTs0J4xkurxiOnusLeP9cisvmX2KVBbpXTViwnK3tgy?=
+ =?us-ascii?Q?8lLVqBAvT3SnR7MoguucFZtpGVupeJIugBQdGay5J3SS52+hfxsbwldgyTZQ?=
+ =?us-ascii?Q?puHokWasFXxIYrSdXv95HrE2iImXnayLh6OITGZSJHKeud2dOGz4zIFKaCeG?=
+ =?us-ascii?Q?l38PZTRNGXwpcu9WlPUKi4ke1nSgDnhvQyLffQrJa+aSarSZ6v8z5vhRP4FC?=
+ =?us-ascii?Q?Wrdk3ewisqtn+OWoHE7rDX7q7HL3iGvWgGHuICdyJGc3d1iDQIc3e/rQ9p6s?=
+ =?us-ascii?Q?qnERWkD3fDjqmGLJcfHpFEmvJWur4CbDooOsX08EgG7uUPByn/Sk2kbLvcqT?=
+ =?us-ascii?Q?B90UOXI4A0fsP0KMPbQVTV1OST6rubMhbuMgqjjELIMO/sFxL5FUUwVrqE9Z?=
+ =?us-ascii?Q?kRSW4CBrvLeDdRA9JJGrmJM3ekMwTr2JU4IhkewKv9mTNYxoNL97zi77xWoG?=
+ =?us-ascii?Q?kKmV6YccXcDzmLt9ae0MmQBrs0i8Zp38d94Sp5JBrE/E35BMvrLqcdk2HIsA?=
+ =?us-ascii?Q?P61lN/Vefa4g3HWl3LTzOb4uoSzz918v63csDw95o0v6SdZV4ekteWM9N/pb?=
+ =?us-ascii?Q?PWlSNIEK7DYZN/t5IaPzVRmjkW2VxdyI21JsTpEfbKnXRXFKYTPI3F5I/6Bw?=
+X-MS-Exchange-AntiSpam-MessageData-1: weIwXDlldk9JVw==
+X-OriginatorOrg: ebytelogic.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 549cc6a1-2945-4081-006b-08df13091257
+X-MS-Exchange-CrossTenant-AuthSource: PN3PPF28092842E.INDP287.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Sep 2026 09:09:39.4997
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 13bdb17c-4ae8-490c-90c1-ec8121ef96ee
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: b7iMpTlQwMHNk5Jto57HaoPCdgAWbLKKZ+NycWBe8gtqXEt4JpHSMlMdfRjqCUxJahTkNcYswRbFdK67SucuFw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MAUP287MB5156
 
-Switch taoyao to "xiaomi,taoyao-pmic-glink" compatible so
-qcom_battmgr can identify the device and apply its taoyao-specific
-battery property mapping, required because its firmware shifts
-battery property IDs relative to the generic sm7325-pmic-glink
-firmware.
+> Its redundant to pass csiphy->camss and &csiphy->subdev.entity
+> Just pass struct camss_csiphy *csiphy once and then extract the pointers
+> you need in the routine.
 
-Signed-off-by: Stanislav Zaikin <zstaseg@gmail.com>
----
- arch/arm64/boot/dts/qcom/sm7325-xiaomi-taoyao.dts | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+The same helper is called from the CSID as well, so a csiphy argument
+would not fit both callers. The camss pointer is reachable from the
+entity itself though: container_of(entity->graph_obj.mdev, struct camss,
+media_dev). I will use that in v2 and drop the extra parameter, which
+also leaves the callers untouched. Does that work for you?
 
-diff --git a/arch/arm64/boot/dts/qcom/sm7325-xiaomi-taoyao.dts b/arch/arm64/boot/dts/qcom/sm7325-xiaomi-taoyao.dts
-index 6f8bc65bb99b..bc4dfa49ef38 100644
---- a/arch/arm64/boot/dts/qcom/sm7325-xiaomi-taoyao.dts
-+++ b/arch/arm64/boot/dts/qcom/sm7325-xiaomi-taoyao.dts
-@@ -72,7 +72,7 @@ key-volume-up {
- 	};
- 
- 	pmic-glink {
--		compatible = "qcom,sm7325-pmic-glink",
-+		compatible = "xiaomi,taoyao-pmic-glink",
- 			     "qcom,qcm6490-pmic-glink",
- 			     "qcom,pmic-glink";
- 
--- 
-2.53.0
+> This seems fine. I wonder how it works with the TPG, probably fine,
+> needs testing.
 
+With the CSID TPG there is no link on the CSID sink pad, so the walk
+returns NULL and camss_get_link_freq() returns -ENODEV, exactly as
+camss_find_sensor_pad() did before. I will run the TPG on RB3 Gen2
+before sending v2 and mention the result in the cover letter.
+
+> Please fix up that clause a bit so its not spralling multi-line
+
+Will do.
+
+Thanks for the review,
+Hitesh
