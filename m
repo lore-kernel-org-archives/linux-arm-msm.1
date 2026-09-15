@@ -1,169 +1,224 @@
-Received: from GVXPR05CU001.outbound.protection.outlook.com (mail-swedencentralazon11013047.outbound.protection.outlook.com [52.101.83.47])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EE8DE4A8A0C;
-	Tue, 15 Sep 2026 16:34:31 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=52.101.83.47
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789490073; cv=fail; b=cX3n8TUV5rOCHci0G1ppMSIaVKRfsawU6alHq0zhNmKzDVaY7mD36HZXW8WMQRyzVUgC0AIB48O2DkcQaLD6khhjXcImCVeg2eqc6xGc0dPq4ue0WKoBpw4Ohcz7b9Qc3DeJ1Gm87mLubE/M1Tyle+i5asWq2TkflAJpvjJPimc=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789490073; c=relaxed/simple;
-	bh=QvSeaZeE6HSSfL+tp95pEWrOLeoaGgEBOO6k+sRVn4U=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:Content-Type:
-	 Content-Disposition:In-Reply-To:MIME-Version; b=tkmROAUpqsCt/Gtr28avII6OgoiVAXyq7/W82+39BaQ13o8j3emTkY2WBUoby3Njp3FwLHChoX0TH+0SDrxDprQC07KpO37FBgOSedeC8cQk8NTssUBD/LuftxFXpUecytWKwruTf7hCfYZim7/5hWtyfUYlp8ZjHxhm4ULRpyk=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.nxp.com; spf=pass smtp.mailfrom=oss.nxp.com; dkim=pass (2048-bit key) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b=AEmyFt1W; arc=fail smtp.client-ip=52.101.83.47
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.nxp.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.nxp.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 047E14B1B5C
+	for <linux-arm-msm@vger.kernel.org>; Tue, 15 Sep 2026 16:57:14 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1789491436; cv=none; b=IKedIt9IxxhAXKNA4AY0RRdYer2Y75c2iOumAvWkA7gdNbDVYLRwjqTj3bmea7rZLI9oyBAQND49OBaCBFyuwwnxHovpdWdw7sKv6zNqaw+4l4m+87iUHPsAg7GssmtLmD4GxaOZt++/Z55pTCpGi5YaIanaUOfu8HnvluzIF7s=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1789491436; c=relaxed/simple;
+	bh=7sZXCJrlcQe6tWAnvFSzQqrjQWl6F0vafplST4Apil8=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=mdZyFZ6sRNnDJjFb7FR802z9T86IFdkWHB+fz2qS/iZmy9mMsOkpwJBGu3g9zyrS2PmZmVRsjqrrNDz5K5VnWR7sjmR3NfdxBOQ7aJP9eyIe0eVXESmLlQY551KSeC5HaR/b/13qtiCOuFZ8yKq0+pdBlYPEOKMv8/+jjWemEuo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=OjZnOgzx; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=U7GAPlaF; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="AEmyFt1W"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=PkyNP7uGW5UNSec7S7Gf/QNiCVajoZ1WE0qW7UDEj4NNW3B/3bJImQbyWx5+VR6xOYWsgkuD5rp6TZTZZVPLJV8SVwEnKjRMJHkdAcToHPx4zK+TAN8gIMV88Gx2+jtw9lSFtuLh0y9MwN6b2ftQafP3jpdN7DDTh6mjIjxZBf3PE/aV4u7iU6PWJZuIAwNVOxxXTedpuo5oU5bZ1V5WjtonlF6qXFllglBQsCMuWB6EJ23ixGNrCpMWtxcPnfPp+ANKBvmkqpn1Yy7GdnFAeYA3Vp66RKUcuSSkhbXFZ5oL/BjnYl/RSi0wmR0lAEQh3HipjyFuuhZ9KrGZyxYfUQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=cm3KQGdgaluthvvb/TTHUgWa+xu4SalMw/jRcgsJx6A=;
- b=cIPpOXOamtPasHB7TaHotKu8RSD6Y/IMx3GxjBHlmJ7YCxQs6+U0nm4qT8mtR5U5HM2JuynNQBC3EOf9y9VD+UUDWV7xLKqSN8hhjRRdyfNpYV/TgIZavQRcstUgpdy1fN7tHZAZJaTqaJxgyeHFzrOIrZSDSyd6OSAZgDCHl1cs2TJkEmkGA5avZo1maH8y6QbYH3+aSa57HT1TB7A1sDT7N9b4EfiqvVVrPp+HDB8Bq8eOJpScJ38laUr5QlWYFIFbfnK0EJqMLOBZpFHBgNICaT0uLcIBLtPoKR3ChnAArNoHBMXh5oUaPEitJdx1HhPQspP8qBAfCSgA3+nSIw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
- dkim=pass header.d=oss.nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com;
- s=selector1-NXP1-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=cm3KQGdgaluthvvb/TTHUgWa+xu4SalMw/jRcgsJx6A=;
- b=AEmyFt1Wgo8szdIjW6cnKwDuQNXJ+cmh3SM6VNLIbDHQd29L5mFNwMKkKLnK56E5IM63cBU3w5s/B9DotndQvA4h0wsweojR8W5LCy6Ptl7ay+/1b13GRTeXhj5wQxF0mvlXGOw08VZkn9WpRdmmAy6CdLo0YUWNEK7COPIfCWudFNcFawbYly+6A7cSE8WElIlXBdmZ6BSSi8HIYVCwGQAMgq+rYdxKSZ/KTZnB8DuLnk9pEouUwC48zZ7LUKemWk315TtgBFVgJHeUadEojSRyVIbxIO+iv7YUGmDjJmiy3LNX+nabowerFqKYETcQQSZgVIy7+abS1KYhPmTc7A==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=oss.nxp.com;
-Received: from GV2PR04MB11799.eurprd04.prod.outlook.com (2603:10a6:150:2cf::9)
- by DU2PR04MB8679.eurprd04.prod.outlook.com (2603:10a6:10:2de::14) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.406.12; Tue, 15 Sep
- 2026 16:34:28 +0000
-Received: from GV2PR04MB11799.eurprd04.prod.outlook.com
- ([fe80::2146:83a2:5329:b7c]) by GV2PR04MB11799.eurprd04.prod.outlook.com
- ([fe80::2146:83a2:5329:b7c%7]) with mapi id 15.21.0406.012; Tue, 15 Sep 2026
- 16:34:28 +0000
-Date: Tue, 15 Sep 2026 12:34:21 -0400
-From: Frank Li <Frank.li@oss.nxp.com>
-To: Pawel Zalewski <pzalewski@thegoodpenguin.co.uk>
-Cc: Viresh Kumar <vireshk@kernel.org>,
-	Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
-	Vinod Koul <vkoul@kernel.org>, Frank Li <Frank.Li@kernel.org>,
-	Binbin Zhou <zhoubinbin@loongson.cn>, Sinan Kaya <okaya@kernel.org>,
-	dmaengine@vger.kernel.org, linux-kernel@vger.kernel.org,
-	linux-arm-kernel@lists.infradead.org, linux-arm-msm@vger.kernel.org
-Subject: Re: [PATCH v2 3/4] dma: qcom: use named initializers for
- acpi_device_id
-Message-ID: <aqlzjZigicrtyh7o@lizhi-Precision-Tower-5810>
-References: <20260907-acpi-dma-v2-0-0ffe4a007992@thegoodpenguin.co.uk>
- <20260907-acpi-dma-v2-3-0ffe4a007992@thegoodpenguin.co.uk>
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260907-acpi-dma-v2-3-0ffe4a007992@thegoodpenguin.co.uk>
-X-ClientProxiedBy: CY5P220CA0005.NAMP220.PROD.OUTLOOK.COM
- (2603:10b6:930:ed::13) To GV2PR04MB11799.eurprd04.prod.outlook.com
- (2603:10a6:150:2cf::9)
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="OjZnOgzx";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="U7GAPlaF"
+Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68FFAS8x813432
+	for <linux-arm-msm@vger.kernel.org>; Tue, 15 Sep 2026 16:57:14 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:date:from:message-id:mime-version
+	:subject:to; s=qcppdkim1; bh=MI9Kl7QZCeP7JVMjKmDtliZY8ZENsVTkKBw
+	Bqm3AWGs=; b=OjZnOgzxB/Ny/uKwILwfTDmDBotboGiLbs5GjDZllgRDP51/nrp
+	GIaviMks4eOhaIu/0bdDTfgotEs1RFidTkcSbGEa4HV+nOBqWwGuCcXeX+1dMDeI
+	vVvOxDjfHMilqgx//l2LikFX+ImGINhUYOxKbOx3FJRKM4XYZXyuNQdNhx4CuMSL
+	WRIZoOWB6dlHyx3OdxlnK+mcxVbQOn35gIGV76EzpvkkvVjJVaF+G/UsOXcl+DLM
+	vPiWfs/r5pc3QlnQSjxmsOPwTJStpkAFX5q/Th2Ugcw0m/IxkPBunw0iKiths5gp
+	1aLcfC9Kgl96yvrBrOk2fPILLY0IfW03KaA==
+Received: from mail-vs1-f69.google.com (mail-vs1-f69.google.com [209.85.217.69])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gq6kc1bgu-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Tue, 15 Sep 2026 16:57:14 +0000 (GMT)
+Received: by mail-vs1-f69.google.com with SMTP id ada2fe7eead31-790376c9f8cso1192480137.1
+        for <linux-arm-msm@vger.kernel.org>; Tue, 15 Sep 2026 09:57:13 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1789491433; x=1790096233; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=MI9Kl7QZCeP7JVMjKmDtliZY8ZENsVTkKBwBqm3AWGs=;
+        b=U7GAPlaF7yJEerwi+ZDWNtGQvumHelZKPJ3MiIFdiAVCw1ZT6hDOqDq0Ynz5eCbeba
+         PBF38+wy+Wwzd2e/KDl/sgltxZxCVNXiEMwFnwkjSJlEJYl53wtcQ626e+VYfkjiU3gH
+         tlAnraghCb7ob5unwhkLkJSz48Meic9nGZQ+128UzYeuKy6v4YW4tEBtTgieXEuuWY7e
+         Gu8/FskHki1v5y6NlfzG9aHY6AcpfPaxzplFxsdP6dlfYeRPiMM7FvN6PjwjO7oVgikY
+         dP2XziQbsAh4pnTE6Xhx7nuoxii2ZNZnq5CpEoqgthUg3zlxqWxIJNCogiLU3Q4UtA/j
+         Qv6Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1789491433; x=1790096233;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=MI9Kl7QZCeP7JVMjKmDtliZY8ZENsVTkKBwBqm3AWGs=;
+        b=awPo9f+gDoiz7Ad/ugA8jMiVa8I8BA2AKkZq0cxhsJOnVjJ1Gbw0DAzo1oMK+5aXpf
+         rFh2wITCaj+VspxaF5/mUt/mYtMPLhQYKj4V9q3VUv8ACJZpECV5SV3sb6t90PYJWdd5
+         gpGjz2I5jEg0jSlGJjD29ZmQ74bO4u9v+j54qOLJ299kljnt7EOzkTy4Jq1cQr52iFmg
+         /Mmhtedp8goJy11ddFtjUy0WsqVH0VLXVfzWOoFGKuDShWXFn6KQRdGkx/5JZx6PwM3U
+         1HN9dFpFMLgdiKa843IMcdoziGqQgMPZdWvtFGRUe/qTdlxR5X8On5YZj0waqs85RjXQ
+         Z3JQ==
+X-Forwarded-Encrypted: i=1; AKwUvBxNVvzcaRMmGbJcWGmt5VVQreqtmlLDm+D/qL+hClRKHXbC225VCvt2b8U5PDuW1vVbOH9IBY+bPGGMDsIB@vger.kernel.org
+X-Gm-Message-State: AFuF++kp0cpRIH0yLePENagWLGEX2BACmmr7vYJoDOfssQTmiwzlE6xZ
+	sWFTXcjknBoiDTVJJYbgjZjqi+KQLRRiKtX3DPh26Z/3Eg5OjpZtwxpIdnoCQwA8x8Ef/xDWh82
+	GU2LSJnGjEQFeaIjyOjkHShP8nBoGVwMO7HkkR1Gc1zR/GHpEqdUslraHuCKyBV60P7LlVNcxHs
+	Xq
+X-Gm-Gg: AYBFou01VZzaCdqu3aHbDWDEWk3IcswCceOJvW7L7HqArMo7qv2bhrdG8dWSg/31d7t
+	rqal4srQ6LLyBPGa9Vb+7Kuv4HE8Nf99Nd8tFxrYWvpLkfjcUzyby3NZDrqu1t9BAPQ4iFK60BE
+	wWKM1TowkReXmxuObmJn7vQZDRbXBae2mawYvzgZDZUk1IDiyD2llb6zUy3h+k6XnmScBXgW63f
+	/6tHqa4R7IpYPIMQzHb+0O6ojVZFqMusP/TVy5mQcjb37b11F8ftX9slH/fFbtVuQbwQNXjcMqB
+	0JcbClVmgZ9Et/yA2USOywwVT6Vb+jASaOxaAkop/0KqOlH9jgPF5reBo9U6u1vdK80YWBS3K2/
+	888oj3sCBKBjdQg==
+X-Received: by 2002:a05:6102:6407:b0:79b:ff9f:74cc with SMTP id ada2fe7eead31-79bff9f793bmr8266145137.0.1789491433053;
+        Tue, 15 Sep 2026 09:57:13 -0700 (PDT)
+X-Received: by 2002:a05:6102:6407:b0:79b:ff9f:74cc with SMTP id ada2fe7eead31-79bff9f793bmr8266072137.0.1789491432543;
+        Tue, 15 Sep 2026 09:57:12 -0700 (PDT)
+Received: from debian ([5.133.47.210])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-49e83d9057dsm4361335e9.3.2026.09.15.09.57.11
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 15 Sep 2026 09:57:11 -0700 (PDT)
+From: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
+To: Mark Brown <broonie@kernel.org>
+Cc: Liam Girdwood <lgirdwood@gmail.com>, Jaroslav Kysela <perex@perex.cz>,
+        Takashi Iwai <tiwai@suse.com>,
+        Pierre-Louis Bossart <pierre-louis.bossart@linux.dev>,
+        Charles Keepax <ckeepax@opensource.cirrus.com>,
+        Maciej Strozek <mstrozek@opensource.cirrus.com>,
+        Bard Liao <yung-chuan.liao@linux.intel.com>,
+        Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>, patches@opensource.cirrus.com,
+        linux-sound@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+        Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
+Subject: [PATCH v3 0/8] ASoC: SDCA: Qualcomm Tambora (WCD9378) SDCA codec support
+Date: Tue, 15 Sep 2026 17:56:42 +0100
+Message-ID: <20260915165652.914893-1-srinivas.kandagatla@oss.qualcomm.com>
+X-Mailer: git-send-email 2.53.0
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: GV2PR04MB11799:EE_|DU2PR04MB8679:EE_
-X-MS-Office365-Filtering-Correlation-Id: cafdc498-b527-4b70-747f-08df13473663
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|376014|23010399003|7416014|1800799024|366016|19092799006|11063799006|56012099006|10067099003|4143699003|22082099003|18002099003;
-X-Microsoft-Antispam-Message-Info:
-	SYQJyyQlTYIUz26XxE64x6UdrqViMavClTqLo10v+ZIXJXOWax57f+UMF+2QCo8NSHcY0e1ZJBEJxvLHug/zk+2wntZb0VeKGV8Oa97LsqFXcS0QOAKcuwaUmCh1F5+AfAoSb6cCZpvblDW7vl8yXHzz/xBzc4S7FruuVEwB/EdjtiLh5jMJ8M3FHNupreWVIjOQbnGHEZtd5FQJfAXvozb+B5lMTx/u/8Ghnl3b6+ucUew5yq47VU9qLXOYppllC0WWiEtKsqo/RudPttNp9gBwCGVxZxJOhQ0D5CiLH65s2jK3WnV9g+30oTe4lpblhwaZXe+joCv0uP8Q7jXYNQgbqSZ/vBu9GO4Bmih+3THQZm1x5h27MabE5plYqzBNNKvs4KnNSh6F6wgS4Pt1lUQd3yhN2RPvWxpXHHG3bQ+jBi39PQWvyzVzjyJPYaJIXDldTdlwKNh6pNUY1XWkbTNLplWCE1SomrmZ2sxI4VMekuH5VQeNJlYdQbEwUt+6RnqwhTjfFdh6nAby184uhDMdLhXEbzEKYf3sJJvqig26rf3P7TdLb0zY8kUi9GVlbWWxiplJuj/Ff4aTH+PIH4KFNAyVi9K4BPR85Ajix1BX7lCvrlzAVq7264R3G29nc/TNeqjweTgjO1j3divczUna+fKlneR7LcF+PGFhqzo=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:GV2PR04MB11799.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(23010399003)(7416014)(1800799024)(366016)(19092799006)(11063799006)(56012099006)(10067099003)(4143699003)(22082099003)(18002099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?db4sepwYu3ZQeqzRXeQ/k5ux/iZ7DhmHqsP+jvZxjcHf0u8hTTwkQPHiaR6w?=
- =?us-ascii?Q?2PNkyx2T0z/w6a66LDQXZ1jAAMBTLD+ZwwioBAvPsv4SHaqIzouLIx+6TKtx?=
- =?us-ascii?Q?jaG9rMjsEeWMD5oUg0K4fuOpWJLWEssOkGsFtjPJu1FrLd841jpKjJx/u6lC?=
- =?us-ascii?Q?NO9BcnKVL7S3zoLcFn0u7y4GrfMJxJqF3V9cIVpnVBb6w/x6Xd1DVWadfJrJ?=
- =?us-ascii?Q?D450gGaA1fsj+6Z+xNX/1f3sNFrCPeEV5U2HvEtw4fI7zHe7l3orc/KGytgy?=
- =?us-ascii?Q?7L6TjCqks5KajIQwUQkAVIpzVXVY+er5DQ5OiaJBlDjDn18o6HFTQM5YtvVC?=
- =?us-ascii?Q?QvJ++/M0KhY8SzT5OD7xl/ltfEAxqd/ZLSTRPjFdHWi3RtInZEhR1Vh6WDZB?=
- =?us-ascii?Q?265QVyf6+s0ZCQgVXEPSabD3BZNoiXVl9mtBY58Cll70PImLg07qEfDunxaz?=
- =?us-ascii?Q?Z5UlIWkMB31wfARuoSeTRHhonsNIWBukk5/PZx6QgRWnWRx/SxG7Urhif8hp?=
- =?us-ascii?Q?0R92IJS1oJNG7mq8r4A/bs2ywJW9OGGuZoMn9gIGtokStVr45meApWtEI58Z?=
- =?us-ascii?Q?PVtXeNnusfVWnLGDKTpzBQIXOqz1mBMk8IPwdFUseZ+gLiCDNqIrSyq6yiHQ?=
- =?us-ascii?Q?jD2KhxL+5bMROykCwzMZexhnwCdkFD+cq+Kp/Lzcj1fY0RLMeRjFTXp0aF2N?=
- =?us-ascii?Q?UILrkcq81hZ+P2Ju78oNX7IxjMAFRVxpR+bmv6JfqQJpn33zURYCdJDhmR7O?=
- =?us-ascii?Q?oGukjcFNnE0yInye+X33VagSYJHBjoi8VVrp1ZrIAZQxC63miyjSlmBGKNG3?=
- =?us-ascii?Q?XiQvD+CLgeyzAonYdmPrpTapSY6nPC9erGhMAqXGexvDHS4hoGR1Ry5tAzBP?=
- =?us-ascii?Q?4DewxS/QwT/pXi241DZ2aq8Q/V6jh5f/q+U2EdFV1GAGww/8hxOPGznteJr6?=
- =?us-ascii?Q?zGcHa54bZT6LTpiinkfHePOi83R9tjyuBcTy8ZboqgrSeRqK0h5dCpn8jVOl?=
- =?us-ascii?Q?3suSMsqCnrZ8pGBtTW4G79LlKtgoEsHP7Z7IETW5NAXaIyO5B20l3pFoROwf?=
- =?us-ascii?Q?tgpfHv3IGKnm1/gfDFROsOiQMhPEBmgAj+Xk4bq1b+6Ifa4PW1Z+Hr/Zyduy?=
- =?us-ascii?Q?J76pAi077QYPGvaotcPY3v6/IDGoZf3FTJkVlG8XTyUWn7QKfsfyE1G8xihr?=
- =?us-ascii?Q?y5YDw6wvCe8JxJm6KksFkM+cysTK7rY5oMXsYsrQrfZ4Xxewwee26PPrzz2L?=
- =?us-ascii?Q?Xns8ogc9NI/eJWH1jlx8rFayzrVZNnFKNBIbnRW+BIKUumzVXoBG3yIX7/Z2?=
- =?us-ascii?Q?B+8+NIIFapXYyJ9p02aK+1KfLdnfbtiP5QiqpoHdh2X6SAmC79frY1F1oMd+?=
- =?us-ascii?Q?zk9AuYIvKXDjCShZ5sW3nJg6++Jh9C4Cqfvo2y1XCgu9+PENVOWKWQPjzV7E?=
- =?us-ascii?Q?8PYB5WER/r5699ZPBj1F9V78alyZ4xQyFvwmUDt29zBy5cVPoxgNOgsXEtkd?=
- =?us-ascii?Q?393QoGORMMXWrjRU5L7zi9lTIJ9SvKyZtK4vxY0mxXE3Lg6RaPwpqcpadFxP?=
- =?us-ascii?Q?bzrQ6KcJZfbrboSKyQsaJoq+J5lbF6Fj2/UWfvi/C98usX2xDqCaN6As809L?=
- =?us-ascii?Q?FTVyd9C00Uv2rFRh8g7y4ksQHgolLS55ODo87BRupzd4kM8T11kiqVjVSdTu?=
- =?us-ascii?Q?JjlfkGB1kV1Ba4LkQBmKasj4XEPPXOo14fpg4Qvbb9/GZUnE/rbjNCAyYO0O?=
- =?us-ascii?Q?0P0rgUZhJEzLV5MSwN4lhxonSSSk41vABe6J1moN2UqpZZWyCx73?=
-X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: cafdc498-b527-4b70-747f-08df13473663
-X-MS-Exchange-CrossTenant-AuthSource: GV2PR04MB11799.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Sep 2026 16:34:28.7571
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 5MLhyXCdGPTsdQfXidZuU0D80cnZ0BfzhPbIe8e2LGrGul8411vp+V7QqzOvOQeR96bR6sWizCOpNbfgkALXkwRx8XI0fh7VZXMNSNvcWgO0pw8LmVvSFZivzKfCCfFr
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU2PR04MB8679
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTE1MDI0NyBTYWx0ZWRfX8mqee/mF0zgD
+ klKOl/yr+tpF9+8NJ7LtLFtCEzs61TKtHvYxrAG12Iuthn3UCvirpQl1Eo3CaXheVmFjvG5cmAj
+ EdZB3VgmbCpoueL9dEGJ1aQEhoFB0y0=
+X-Proofpoint-GUID: C_m0NBoQUy9KzuuVjo-geNnO19HfOerz
+X-Authority-Analysis: v=2.4 cv=ZINCCn7b c=1 sm=1 tr=0 ts=6aa978ea cx=c_pps
+ a=5HAIKLe1ejAbszaTRHs9Ug==:117 a=ZsC4DHZuhs/kKio7QBcDoQ==:17
+ a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22 a=VwQbUJbxAAAA:8
+ a=EUspDBNiAAAA:8 a=NRmDave84CxBQQXzKXEA:9 a=O8hF6Hzn-FEA:10
+ a=gYDTvv6II1OnSo0itH1n:22
+X-Proofpoint-ORIG-GUID: C_m0NBoQUy9KzuuVjo-geNnO19HfOerz
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTE1MDI0NyBTYWx0ZWRfX1lYW7QXjzPLl
+ +v6U8NvroWdCtgg27LGYbDHSU4s+Q8AAvYnnLk+Ufm3epkTUr1TZOjP9BWxRhUxLRV7oW88ewxe
+ s9xGpbsvsqxGbiEoS1UsR31WQlZHSP/h60MEl6kKtHqWDJvPYZ5bwX8/A6g/PcVwVPC4CJdl6Wi
+ J7VMGqclPEQCxryqYcIJXbcDvu1QIAZU3lOwr+5wuYk866+5GomItYxgmlXhdSXv0na2fChG7Ri
+ rZMwgv1u0IOtuSDVysuNW2mBeX/JGuGPUmPz+DAwFvSHRAZzguv0+O1iO1LkcX7eo9BSGsLuqlN
+ f/eveOpNK5OP773KN8ubP3KD3FXNdEKYB2AJkQQ/TnScIPImhz53xx6KM5RSJ4KdDimDeWrr4Xn
+ 3eArSkLnbgvjbSe2PK1rKGR69T7RlI1qznE7zt/OgCT/f9ipn/hGt6RDBsLj4EAfswPmF7XwBOk
+ cNqXh3z6vJqoUzTyrJw==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-09-15_04,2026-09-15_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ malwarescore=0 spamscore=0 clxscore=1015 lowpriorityscore=0 impostorscore=0
+ adultscore=0 bulkscore=0 phishscore=0 priorityscore=1501 suspectscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609150247
 
-On Mon, Sep 07, 2026 at 04:17:45PM +0100, Pawel Zalewski wrote:
+This series extends the SDCA class driver to work on DT / non-ACPI
+platforms via a codec-provided static topology, and adds the Qualcomm
+WCD9378 (Tambora) codec as the first user driven in SDCA / compute
+mode. Tested on the Snapdragon X2 Elite Glymur CRD.
 
-Please update subject, correct tag is dmaengine
+Patches 1-6 extend the SDCA class helpers:
 
-dmaengine: qcom: ....
+  - Kconfig gate to build the class without ACPI enabled.
+  - PM helpers keyed on a codec-embedded struct sdca_class_drv, so
+    codec drivers can build their own dev_pm_ops.
+  - Class SoundWire probe/remove exposed as library functions
+    callable from codec-specific SDW slave drivers.
+  - class_ops with a populate_function hook so codec drivers can
+    supply the SDCA function payload from static tables on DT /
+    non-DisCo platforms.
+  - Class function driver registers SDCA_FUNCTION_TYPE_SIMPLE_JACK,
+    and resolves sound-dai cells by entity index.
+  - sdca_apply_default_control_classifiers() applies the same
+    is_volatile / has_reset flags that the DisCo/ACPI parser would.
 
-Frank
+Note:
+None of these are functional changes in sdca core, all of these are
+helper functions to allow non-ACPI users to use sdca core.
 
-> Use a named initializer for the acpi_device_id fields which makes the code
-> more readable and consistent with how lists are initialized in the rest of
-> the kernel code base.
->
-> Unify the list terminator to have a single space between the brackets and
-> no trailing comma.
->
-> Signed-off-by: Pawel Zalewski <pzalewski@thegoodpenguin.co.uk>
-> Reviewed-by: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-> ---
->  drivers/dma/qcom/hidma.c | 8 ++++----
->  1 file changed, 4 insertions(+), 4 deletions(-)
->
-> diff --git a/drivers/dma/qcom/hidma.c b/drivers/dma/qcom/hidma.c
-> index c939635be21d..1349066b1544 100644
-> --- a/drivers/dma/qcom/hidma.c
-> +++ b/drivers/dma/qcom/hidma.c
-> @@ -935,10 +935,10 @@ static void hidma_remove(struct platform_device *pdev)
->
->  #if IS_ENABLED(CONFIG_ACPI)
->  static const struct acpi_device_id hidma_acpi_ids[] = {
-> -	{"QCOM8061"},
-> -	{"QCOM8062", HIDMA_MSI_CAP},
-> -	{"QCOM8063", (HIDMA_MSI_CAP | HIDMA_IDENTITY_CAP)},
-> -	{},
-> +	{ .id = "QCOM8061" },
-> +	{ .id = "QCOM8062", .driver_data = HIDMA_MSI_CAP },
-> +	{ .id = "QCOM8063", .driver_data = (HIDMA_MSI_CAP | HIDMA_IDENTITY_CAP) },
-> +	{ }
->  };
->  MODULE_DEVICE_TABLE(acpi, hidma_acpi_ids);
->  #endif
->
-> --
-> 2.43.0
->
+Patches 7-8 add the WCD9378 SDCA / compute-mode codec:
+
+  - dt-bindings for the SoundWire slave in compute mode.
+  - Codec driver split across wcd9378-sdw.c (SoundWire plumbing)
+    and wcd9378-sdca.c (SDCA topology + class_ops), sharing a
+    wcd9378-sdca.h header. A future mobile-mode driver can plug
+    into the same module by adding its own files.
+
+Testing: HPH playback and headset-mic capture confirmed on the
+Snapdragon X2 Elite Glymur CRD. Will test it on Lenovo T14s. 
+
+Jack detection is not wired up in this series.
+
+Changes since v2 [1]:
+
+  - Un-export sdca_class_pm_ops and per-op wrappers; keep them
+    static and let codecs compose their own dev_pm_ops.
+  - Drop the exported sdca_class_read_prop() helper; codecs
+    open-code the four lines locally.
+  - class_function: check the codec-provided ops hook first, fall
+    back to sdca_parse_function() only when a firmware node is
+    present.
+  - Rename sdca_class_hw_ops to sdca_class_ops; populate_function
+    does no bus I/O.
+  - Drop the hw_init callback; codec users moved bring-up into
+    their own SoundWire probe.
+  - wcd9378-sdca: MIC_BIAS fixed at 2.75 V via the init_table;
+    drop stale qcom,micbias2-microvolt reference from the commit
+    message.
+  - Rebased on b-next-20260911.
+
+[1] https://lore.kernel.org/all/20260907083727.733705-1-srinivas.kandagatla@oss.qualcomm.com/
+
+Srinivas Kandagatla (8):
+  ASoC: SDCA: allow building without ACPI
+  ASoC: SDCA: export PM helpers keyed on sdca_class_drv
+  ASoC: SDCA: expose class SoundWire probe/remove as library
+  ASoC: SDCA: add class_ops with populate_function
+  ASoC: SDCA: class_function: xlate sound-dai cell by entity index
+  ASoC: SDCA: add sdca_apply_default_control_classifiers() helper
+  dt-bindings: sound: qcom: add Tambora WCD9378 SDCA codec
+  ASoC: codecs: add Qualcomm Tambora (WCD9378) SDCA codec
+
+ .../bindings/sound/qcom,wcd9378-sdw.yaml      |   91 ++
+ include/sound/sdca.h                          |   23 +-
+ include/sound/sdca_class.h                    |   70 ++
+ include/sound/sdca_function.h                 |    2 +
+ sound/soc/codecs/Kconfig                      |   11 +
+ sound/soc/codecs/Makefile                     |    2 +
+ sound/soc/codecs/wcd9378-sdca.c               | 1005 +++++++++++++++++
+ sound/soc/codecs/wcd9378-sdca.h               |   20 +
+ sound/soc/codecs/wcd9378-sdw.c                |   52 +
+ sound/soc/sdca/Kconfig                        |    6 +-
+ sound/soc/sdca/sdca_class.c                   |  148 ++-
+ sound/soc/sdca/sdca_class.h                   |   35 -
+ sound/soc/sdca/sdca_class_function.c          |   45 +-
+ sound/soc/sdca/sdca_device.c                  |    4 +
+ sound/soc/sdca/sdca_functions.c               |   31 +
+ 15 files changed, 1474 insertions(+), 71 deletions(-)
+ create mode 100644 Documentation/devicetree/bindings/sound/qcom,wcd9378-sdw.yaml
+ create mode 100644 include/sound/sdca_class.h
+ create mode 100644 sound/soc/codecs/wcd9378-sdca.c
+ create mode 100644 sound/soc/codecs/wcd9378-sdca.h
+ create mode 100644 sound/soc/codecs/wcd9378-sdw.c
+ delete mode 100644 sound/soc/sdca/sdca_class.h
+
+--
+2.53.0
+
