@@ -1,190 +1,681 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pg1-f179.google.com (mail-pg1-f179.google.com [209.85.215.179])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EE58543F8CF
-	for <linux-arm-msm@vger.kernel.org>; Tue, 15 Sep 2026 06:05:08 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BEA0442E409
+	for <linux-arm-msm@vger.kernel.org>; Tue, 15 Sep 2026 06:32:21 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.215.179
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789452312; cv=none; b=P57NttdGQV2lOZ3hp7R/chD/5qoZ0rC6+xuPRkyLGvbpukizoZTbu3XFrCaW0xsYwTFTMdx5fw9ofyCbz/bo/SpN6AZho3nOSwITIQiyLbCzxcYDjQwojUsfeDJ0CXoYuee4JrXW9rtIWpgs9jwLY00lyo0E/tX8sgtcdAHIScw=
+	t=1789453944; cv=none; b=XQe+jNrlxAUjarJ0xAHx5VnTX076MkvnhV/LrbkqZie+7XazslaFAEtXbHTqoBhRNzjrq+YNzff1SjFTtS187eBTm08mQhVufo/erotYf+hVja1A2Aqjfn5FHD9ZAScTDhO2XKHuDugZ30HTURw+y3hPeGh3QRyKLGb5uKhaYI0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789452312; c=relaxed/simple;
-	bh=lmbl0FDJ8BKHPU7iGiLSRRUOzdLjYSXjkdgoP2gRUcQ=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=ErpkzXtjdKsi6CCP91ktZXZxdrYH7b2wtdtOxXBkY/fz8SMrbM8yFaI7hFzfirM6kqrkl7fksQecK6Qp9Imq3n3pm4cSf2rRB9ot49HxAWG824cGIjNoO+0Z5dpxZ3cC4rDgeGW9yCYTz8nQrk7Z5QOU7M2doPYpfKc5p/zJ3Wg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=IYAr1IbJ; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=fVE9d5AB; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1789453944; c=relaxed/simple;
+	bh=6C/HSGfxcGl/ipuQMllxmYNIy6q7nwEEjwj2KBdG3ik=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=J+LiGKhbz4uRfraERlNM6jx2pKg+SAk0Noc7g97CAcIDFkxq7Ruqvc5zJyfWuA+aEsj3XOQxjA58atUROcXQfrEdw2cMrvN983jexwxyw9drPumwnFsTRuEpTaYas2dD1+xutebQXxTu7uLHpN7KtXU66QnPjG6GlaQ/jBr5Ok0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=h1SGuByn; arc=none smtp.client-ip=209.85.215.179
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="IYAr1IbJ";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="fVE9d5AB"
-Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68F2nRYn1170270
-	for <linux-arm-msm@vger.kernel.org>; Tue, 15 Sep 2026 06:05:06 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	+uyBT5Zaxv1RHABZ8zEG0vkgVxe7bFptHBkSRZjYknY=; b=IYAr1IbJLqKGHlp+
-	8asmbPHttAf9fAPsgi74UFS+fWXB2zYMG+GRBUm85azZODOx/3pIAfXSSu/i/kB4
-	5bwFbvagZrWPOUNgmUNmMOtSw2B3A8xhIMQ5h595xLXb77yE2vHyOUjIVCOCvKL8
-	Yh9Oz+g471cIkF59lwAgs5JY5Fd7nV4JAm37hAVdwzirn29fwbNa+0ePm9SfqOq9
-	G7NSkTtNk2EEt9l9nuba4rvDRUNDDOb6rM+v9U9c1h08OTLPQkegwsp/wKoqVhOs
-	YXbk2bHC1haLukheqGRPl6ExyoQBrMgHSXBLv+lUOau6J3TMBsu0Bj5d29FWLNCr
-	Q2ymAQ==
-Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com [209.85.222.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gpergc71c-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 15 Sep 2026 06:05:06 +0000 (GMT)
-Received: by mail-qk1-f197.google.com with SMTP id af79cd13be357-93a082c014aso158537885a.0
-        for <linux-arm-msm@vger.kernel.org>; Mon, 14 Sep 2026 23:05:06 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="h1SGuByn"
+Received: by mail-pg1-f179.google.com with SMTP id 41be03b00d2f7-cc4aa18f9afso2915539a12.3
+        for <linux-arm-msm@vger.kernel.org>; Mon, 14 Sep 2026 23:32:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1789452306; x=1790057106; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:content-language
-         :from:references:cc:to:subject:user-agent:mime-version:date
-         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=+uyBT5Zaxv1RHABZ8zEG0vkgVxe7bFptHBkSRZjYknY=;
-        b=fVE9d5ABIQKYlGViC8aOFdrQ215dCKXoVhE3/GvEez0A5Mse1Mr+Nv5v9NI3usHgxt
-         SvTHJ5lSKFCZGuQU1fv1lPblvFgoCybgpXcNyiWyj10sPmi7oyH/pm4e0tl6Bv26EeA2
-         ncIWJq/fTDVbRMSbitzqGhUtzF1c3y279795mQHmBY7nthkwXXMuTxYrBeUdlFYQTeWo
-         HfKpWsJuzm35Zplf1tRMzAdwDxrYeRqyr0WqNMgrhXN8MkW6zO073DDfwTcUT/Ix2EdL
-         GNfw7OvT253RiGTsfR/7tQOkYlcPJ/Yq2iWQGfVrrRYxpv20oGyBAEU7bJvIVSOgrrNo
-         vAug==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1789452306; x=1790057106;
-        h=content-transfer-encoding:content-type:in-reply-to:content-language
-         :from:references:cc:to:subject:user-agent:mime-version:date
-         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=gmail.com; s=20251104; t=1789453941; x=1790058741; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=+uyBT5Zaxv1RHABZ8zEG0vkgVxe7bFptHBkSRZjYknY=;
-        b=aC2cXnd3iYrEsaPKqKIsk02gj6ASBNJccpVxUJkB6CtmOov3YFXMhzz3BWwtOU1mTk
-         ca8I0Jh/+qMmNyTeLS0p/mjdyACuz7yGUC4b2bAfPms9ZOzXxB521zg7aVu3p81kI6/C
-         wh04NbnNFRppQXaa9dZPjBYuUJsfZAv0ED4G7rXWGOWbqkjDahxOiH9dg8GPUhR4UVAH
-         JrKYJ3yRX+ISpMyeMA0bjCZ0YNZpQIAIlxgDX95NpbfHCMMKPTyDrs9MD1YIr4Z1H1M6
-         QcNp/OgCIYG/fT94jMP9nUW6HmXjSkV36oki7erstjY5geVb1hfrb06oHoMFUizSG2ai
-         0lHw==
-X-Forwarded-Encrypted: i=1; AKwUvBzLw9EiJHxy+O/Qw/OTi5aJY8XwoblY7a1fIHnPV75aAJvMwZp4vecnhdoV73p/ockzaaIK02FsG41A8GVL@vger.kernel.org
-X-Gm-Message-State: AFuF++lGYc8dyxNc6a7ijovg2Qa99w0jMt5zYOHbPgk17VN+bHGBofmD
-	bke/Eiq1nih8a8Gh5m1wO+7NqbYToCZCcwj2GuPaquucJN37Lsy96Dxl+Xd7aPyH0TiQNHOVIle
-	AeXvfJ40eAMsH6bJLCJ4xTEJNbX/ghbUPqOTtUdsKwcy3+a3UBF/+pZJMyXJOLies6MvS
-X-Gm-Gg: AYBFou08sW7zOJz4+KEUxU1TeRCla/IQWSfy90BRpJ8uUbxHSJDd9TYQ1Q9GuICY6wV
-	aNc0bXI85bIJ8NT3vyBXhkmBmgg74Z4mqM8K1ufc8Hxp+Yg2M23+uCGY6H0aBILoL2+5Rn+qYUe
-	F9Zkp5JdCifsI+Hpnr1efg59MV2nd5OI+tTNHDKOIFdrybpUOfr4jpbyZnHrCVZkjVAHz1d7pzy
-	OEB69yoXT+ZIFyQy103gm2UisuCNIIyDMLNXmNYrxkMz/6ZS2TDmBv8QaPIErYa6d88xLrlithl
-	Vyopn0fsD2caomw2qrySnLc3EpkottEsYGAXNzuzfmNqVYFqzWO6eZuFf7RwZ5kKHrWRL96JcIL
-	llEYZu1n1w0dBb6pg5SXxbdVbZdjx
-X-Received: by 2002:a05:620a:7018:b0:93a:3257:34b with SMTP id af79cd13be357-93a346fa956mr323526985a.29.1789452305632;
-        Mon, 14 Sep 2026 23:05:05 -0700 (PDT)
-X-Received: by 2002:a05:620a:7018:b0:93a:3257:34b with SMTP id af79cd13be357-93a346fa956mr323522485a.29.1789452305151;
-        Mon, 14 Sep 2026 23:05:05 -0700 (PDT)
-Received: from [192.168.1.110] ([178.197.219.214])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-486eb3602eesm30648123f8f.34.2026.09.14.23.05.01
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 14 Sep 2026 23:05:04 -0700 (PDT)
-Message-ID: <18eff59e-e9ec-4c44-8d2f-f689bd5f1832@oss.qualcomm.com>
-Date: Tue, 15 Sep 2026 08:05:00 +0200
+        bh=godyDfS7BUyeocBMPizi6OiwJkyeUZQ0Bils3zR68fo=;
+        b=h1SGuBynY82YgYQCFL0F7ETkUSsm12dmijlTUrnlWy4s+PrVmXo4ALWHEAOUh7U2yl
+         JOxtOW0NNo2aJQfkq1iQQ+LxZMIWgn6XpU0ZsPO07EiGL+DkI88AySXnJah9chU9Y4fd
+         CV0CBz0HPhH7F+isSb7PXLhRvCMGLt7jpbnAEJeV4+7On1DWPxj7Xz8YiGcRI7V280TK
+         ybYViO8Fijw7USp3B7qzgP87IynabnBNEA/ecliwyIUFpZK8QT1XPrA+gq5c2Op2Iuko
+         QelFEAqi+eapboSaT0i7KS5+C+TER5+UdGukOsKHeUQ/8rzxThKi6Z55MQLd3gw/XboA
+         ibcw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1789453941; x=1790058741;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=godyDfS7BUyeocBMPizi6OiwJkyeUZQ0Bils3zR68fo=;
+        b=Jc/WefcvAst7EaNpFdTx7KskLHGoawu+5oQ7FFH9SZYlh7GYbrGwwzvgK8QN21LI5L
+         Be65sSYJZvHZbTXZ/6DqhqTnLXuBKPVO1v2hfafs/uL8175tkGExercMFng+In7TOt55
+         fdg1A0QpHyxoPNA7su4T7bx4yb/2YhbsDWEYOWfzbg7NdFWUfkG6xaEWV/O+koaRigFs
+         sAUFF9JWs1QTlDZs6usSHh9XCCoLyKvwhPNx4kDl9vhJGyXIoFE5UxvrQLV/vzvbPTf5
+         0w+V67SoQNVDqi59w2h8u6RwH6hDRxaEN6xYEbCsKaGVdFXkThX/IDQqoOGOgFAS8b0/
+         CCXA==
+X-Forwarded-Encrypted: i=1; AKwUvBxVP7cSXVyf9nciAkXgYT6IqgEVt0dky5grb7ny5Jf0ZgLmt5Dz3vLYRY/DcNbOpkdXCeYzMUCKiwkbsn4s@vger.kernel.org
+X-Gm-Message-State: AFuF++mjKCL+JAI1kKJ+SbGoMAnSxDU9iiTP2iiD7KsdeKyeiOfmDMfY
+	PBf4LIReYv95WypS/T3mFIeuWIH4UaW2o2j4NyTQ1DpSjboJzbvR3fJQAK9EZSZX
+X-Gm-Gg: AYBFou3l275B8h47WZTjJqLGoz/m/T/AGfnX/8G1f/OZiMJob4W63TeVuK7rNQLn3pJ
+	5J28oLdgKZW59HWEsScFzYCwWO11QWtvcLhzVBidPJYSqPj5aAwHAhynKq6oL3HX5oPxgM3Z8J6
+	S1UFo33i/wOcPgsHftaR47VjjkXGmrcsheZLcuY9VaP56PJCJNYzBCH/ZWeuTfr9aQU7dJdOsNH
+	7qiyy+/QmL+XFzW4skiz7+nTdMeaQfXTD5knTbIAUK7hw514Ny2V4iG9Cu1a4Am1RiXqKx4tWS0
+	uPEJnC641vIirADhsynDN1My9xiADwj6M3W5TkTVJQzGaAutAxrHDAt3hETAmH/QAbErN4c/2u+
+	bXY1T5ygDIZY6VUluZFUrScPBsmNte1Kcn55CwY+mruaoztdwl6jnXKk38tApodLr//aU6mqyuf
+	b1zlDyxK0mnay9l9cwwIIabJjCYKse/1Y8dXpjiZ2oSXs3B3s11PprEnWuYLmJA0mWFUNfPwW3D
+	d04Lc8iCNPDCpZO72vWF/L+Gw==
+X-Received: by 2002:a17:90b:1d82:b0:398:a2a3:b631 with SMTP id 98e67ed59e1d1-39dec0be84amr11371473a91.19.1789453940787;
+        Mon, 14 Sep 2026 23:32:20 -0700 (PDT)
+Received: from volcano9f6e-hostos.amd.com ([165.204.217.251])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-33ba4ee07f2sm28379233eec.18.2026.09.14.23.32.09
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 14 Sep 2026 23:32:20 -0700 (PDT)
+From: Hemanth Selam <hemanth.selam@gmail.com>
+To: Mark Brown <broonie@kernel.org>,
+	Liam Girdwood <lgirdwood@gmail.com>
+Cc: Claudiu Beznea <claudiu.beznea@tuxon.dev>,
+	Andrei Simion <andrei.simion@microchip.com>,
+	Jaroslav Kysela <perex@perex.cz>,
+	Takashi Iwai <tiwai@suse.com>,
+	Nicolas Ferre <nicolas.ferre@microchip.com>,
+	Alexandre Belloni <alexandre.belloni@bootlin.com>,
+	Ray Jui <rjui@broadcom.com>,
+	Scott Branden <sbranden@broadcom.com>,
+	Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>,
+	Lars-Peter Clausen <lars@metafoo.de>,
+	=?UTF-8?q?Nuno=20S=C3=A1?= <nuno.sa@analog.com>,
+	David Rhodes <david.rhodes@cirrus.com>,
+	Richard Fitzgerald <rf@opensource.cirrus.com>,
+	Support Opensource <support.opensource@diasemi.com>,
+	Matthias Brugger <matthias.bgg@gmail.com>,
+	AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>,
+	Oder Chiou <oder_chiou@realtek.com>,
+	Shenghao Ding <shenghao-ding@ti.com>,
+	Kevin Lu <kevin-lu@ti.com>,
+	Baojun Xu <baojun.xu@ti.com>,
+	Sen Wang <sen@ti.com>,
+	Cezary Rojewski <cezary.rojewski@intel.com>,
+	Peter Ujfalusi <peter.ujfalusi@linux.intel.com>,
+	Bard Liao <yung-chuan.liao@linux.intel.com>,
+	Kai Vehmanen <kai.vehmanen@linux.intel.com>,
+	Pierre-Louis Bossart <pierre-louis.bossart@linux.dev>,
+	Srinivas Kandagatla <srini@kernel.org>,
+	Jarkko Nikula <jarkko.nikula@bitmer.com>,
+	Kunihiko Hayashi <hayashi.kunihiko@socionext.com>,
+	Masami Hiramatsu <mhiramat@kernel.org>,
+	linux-sound@vger.kernel.org,
+	linux-arm-kernel@lists.infradead.org,
+	linux-kernel@vger.kernel.org,
+	patches@opensource.cirrus.com,
+	linux-mediatek@lists.infradead.org,
+	linux-arm-msm@vger.kernel.org,
+	linux-omap@vger.kernel.org
+Subject: [PATCH v2] ASoC: fix typos in comments
+Date: Tue, 15 Sep 2026 12:02:00 +0530
+Message-ID: <20260915063206.519683-1-hemanth.selam@gmail.com>
+X-Mailer: git-send-email 2.48.1
+In-Reply-To: <20260904110315.11650-1-hemanth.selam@gmail.com>
+References: <20260904110315.11650-1-hemanth.selam@gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] ASoC: dt-bindings: Use consistent indentation in the
- example
-To: Mark Brown <broonie@kernel.org>
-Cc: Lars-Peter Clausen <lars@metafoo.de>,
-        =?UTF-8?Q?Nuno_S=C3=A1?=
- <nuno.sa@analog.com>,
-        Liam Girdwood <lgirdwood@gmail.com>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>,
-        Jerome Brunet <jbrunet@baylibre.com>,
-        David Rhodes <david.rhodes@cirrus.com>,
-        Richard Fitzgerald <rf@opensource.cirrus.com>,
-        =?UTF-8?Q?Martin_Povi=C5=A1er?= <povik+lin@cutebit.org>,
-        Frank Li <Frank.Li@nxp.com>, Sascha Hauer <s.hauer@pengutronix.de>,
-        Pengutronix Kernel Team <kernel@pengutronix.de>,
-        Fabio Estevam <festevam@gmail.com>,
-        Binbin Zhou <zhoubinbin@loongson.cn>,
-        Matthias Brugger <matthias.bgg@gmail.com>,
-        AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>,
-        Srinivas Kandagatla <srini@kernel.org>,
-        Kuninori Morimoto <kuninori.morimoto.gx@renesas.com>,
-        Biju Das <biju.das.jz@bp.renesas.com>,
-        Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>,
-        Shenghao Ding <shenghao-ding@ti.com>, Kevin Lu <kevin-lu@ti.com>,
-        Baojun Xu <baojun.xu@ti.com>, Sen Wang <sen@ti.com>,
-        Geert Uytterhoeven <geert+renesas@glider.be>,
-        Magnus Damm <magnus.damm@gmail.com>,
-        Alexandre Belloni <alexandre.belloni@bootlin.com>,
-        Khanh Le <khanh.le.xr@renesas.com>,
-        Ricardo Rivera-Matos <rriveram@opensource.cirrus.com>,
-        patches@opensource.cirrus.com,
-        David Rau <David.Rau.opensource@dm.renesas.com>,
-        Shawn Guo <shawnguo@kernel.org>, Shengjiu Wang <shengjiu.wang@nxp.com>,
-        Oleksij Rempel <o.rempel@pengutronix.de>,
-        Yingkun Meng <mengyingkun@loongson.cn>,
-        Trevor Wu <trevor.wu@mediatek.com>,
-        Julien Massot <jmassot@collabora.com>,
-        Jiaxin Yu <jiaxin.yu@mediatek.com>,
-        Shane Chien <shane.chien@mediatek.com>,
-        Daniel Beer <daniel.beer@igorinstitute.com>,
-        Sebastian Reichel <sre@kernel.org>, linux-sound@vger.kernel.org,
-        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-        asahi@lists.linux.dev, imx@lists.linux.dev,
-        linux-arm-kernel@lists.infradead.org,
-        linux-mediatek@lists.infradead.org, linux-arm-msm@vger.kernel.org,
-        linux-renesas-soc@vger.kernel.org
-References: <20260914093657.61218-2-krzysztof.kozlowski@oss.qualcomm.com>
- <aqg6VUKriyVANv6u@sirena.org.uk>
-From: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
-Content-Language: en-US
-In-Reply-To: <aqg6VUKriyVANv6u@sirena.org.uk>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Authority-Analysis: v=2.4 cv=QK/91QLL c=1 sm=1 tr=0 ts=6aa8e012 cx=c_pps
- a=50t2pK5VMbmlHzFWWp8p/g==:117 a=+bKQE0WJfmhK2875HamI0Q==:17
- a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
- a=EUspDBNiAAAA:8 a=chZs0_0Ys9iI7aL1xjgA:9 a=QEXdDO2ut3YA:10
- a=IoWCM6iH3mJn3m4BftBB:22
-X-Proofpoint-GUID: ccj5xu6YHgzpA6qRR57P2K0x7aIcMoIk
-X-Proofpoint-ORIG-GUID: ccj5xu6YHgzpA6qRR57P2K0x7aIcMoIk
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTE1MDA4NSBTYWx0ZWRfX+yd8JkIghhc1
- CKNvVgnk+buSL4jM4cB4VzRthSB5o+tvNzYmXBIDT1r3a9pRXs+L0MzZAtyCUIIzIlh+Qc4DoXD
- nMFXtu7TfakrI708QVdkkuuLBWHRCpyNRuGax+RqnIt+l+dzyCmjc16BQUPWDkxrJTENt/lBH5X
- /XhWECnbzHWU4p10ZTdTgueqaSpTODMEAvGOelRN39bn8GmhfWt5Qa6WQ+QPKkY3iBsgmOYTwQc
- LaOJhZINex3rtI4rkKLjCC27gKRH9NcBANAhf+hkyWyLi9tph7MlDXr33/8voIT8XVSldbC9OXz
- T+pTBffi24+VmHJKYqcxkFwzZBrZk6PfcdFQMUyW+tfwV8R5W7q1V8C8WVqvuVv67UU9aYR2lRR
- Hdo3ayYO1EvgQi0XUhtr3412p3Pz3HjrqUrTCsfIULIEaVAaNFwllgZujYpuRBPv8OZkQpAaWb9
- qwGxP9hZSMve1p6tKXA==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTE1MDA4NSBTYWx0ZWRfX+e7xZjZJ/JG7
- I/65yB7oZOXt05k/OY6pu2M1vlUq2GZRT6Zh1P8PgYdHf3haur8AmlFXi1yLzHJOWkVmV4UvwYk
- xCfRaqgIRD1fdMzD2Cej74DBbKf1BqA=
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-15_01,2026-09-14_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 malwarescore=0 suspectscore=0 lowpriorityscore=0
- priorityscore=1501 spamscore=0 adultscore=0 bulkscore=0 clxscore=1015
- impostorscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2609040000
- definitions=main-2609150085
+Content-Transfer-Encoding: 8bit
 
-On 14/09/2026 20:17, Mark Brown wrote:
-> On Mon, Sep 14, 2026 at 11:36:58AM +0200, Krzysztof Kozlowski wrote:
->> Correct indentation in the examples to consistent 2- or 4-spaces
->> indentation to fix dt-check-style warnings ("example 0
->> [indent-consistent] indent mismatch ...").  Preferred is 4-spaces, but
->> re-indenting entire example just for that is too much churn.
->>
->> While changing the lines, correct also node name to be generic in
->> cirrus,cs35l45.yaml, cirrus,cs42l42.yaml and dialog,da7219.yaml.
->>
->> Signed-off-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
-> 
-> Can you rebase this against current for-7.4 please?
+Fix typos in comments, reported by scripts/checkpatch.pl using the
+misspelling list in scripts/spelling.txt.  Only touches comments, no code
+changes.
 
-Sure
+Signed-off-by: Hemanth Selam <hemanth.selam@gmail.com>
+---
 
-Best regards,
-Krzysztof
+v2:
+ - Rebased onto asoc/for-next; v1 no longer applied against current code
+   (Mark Brown).
+ - Dropped the include/dt-bindings/sound/audio-graph.h hunk so this stays
+   confined to sound/soc/, as checkpatch asks for binding header changes
+   to be a separate patch.
+ - Dropped the Assisted-by trailer naming the model.
+
+v1: https://lore.kernel.org/all/20260904110315.11650-1-hemanth.selam@gmail.com/
+
+Applies cleanly to asoc/for-next (50f117b9f12c).
+
+Only comments change.  Verified by stripping C comments from every
+touched file before and after the patch and comparing the result: all 30
+files are byte-identical outside comments.
+
+Build tested with allmodconfig on x86_64, building sound/soc/ with the
+touched files forced to rebuild: no new warnings or errors.  24 of the 25
+.c files are built by that config; sound/soc/ux500/ux500_msp_i2s.c is not
+(ARM-only), and its change is a standalone comment line.
+
+Separately, please drop "[PATCH v3] ASoC: codecs: fix typos in comments"
+(20260908055328.22099-1-hemanth.selam@gmail.com).  All four typos it
+fixed have since been corrected upstream, so it is obsolete rather than
+in need of a rebase.
+
+ sound/soc/atmel/atmel-pcm-dma.c            |  2 +-
+ sound/soc/bcm/cygnus-ssp.h                 |  2 +-
+ sound/soc/codecs/adau1701.c                |  4 ++--
+ sound/soc/codecs/cs35l33.c                 |  2 +-
+ sound/soc/codecs/cs35l34.c                 |  2 +-
+ sound/soc/codecs/cs42l42.c                 |  2 +-
+ sound/soc/codecs/cs42l73.c                 |  4 ++--
+ sound/soc/codecs/cx20442.c                 |  2 +-
+ sound/soc/codecs/da7210.c                  |  2 +-
+ sound/soc/codecs/hdac_hda.c                |  2 +-
+ sound/soc/codecs/hdac_hdmi.c               |  2 +-
+ sound/soc/codecs/max98927.c                |  4 ++--
+ sound/soc/codecs/mt6359.c                  |  8 ++++----
+ sound/soc/codecs/nau8825.c                 | 10 +++++-----
+ sound/soc/codecs/rt1320-sdw.c              |  2 +-
+ sound/soc/codecs/rt5631.h                  |  8 ++++----
+ sound/soc/codecs/rt5640.c                  |  2 +-
+ sound/soc/codecs/rt5645.c                  |  2 +-
+ sound/soc/codecs/rt5651.c                  |  2 +-
+ sound/soc/codecs/rt5670.c                  |  2 +-
+ sound/soc/codecs/tlv320dac33.c             |  2 +-
+ sound/soc/intel/atom/sst-mfld-dsp.h        |  2 +-
+ sound/soc/intel/atom/sst/sst.h             |  2 +-
+ sound/soc/intel/boards/sof_cirrus_common.c |  2 +-
+ sound/soc/qcom/qdsp6/q6asm-dai.c           |  2 +-
+ sound/soc/ti/davinci-i2s.c                 |  2 +-
+ sound/soc/ti/davinci-mcasp.c               |  2 +-
+ sound/soc/ti/omap-mcbsp.c                  |  2 +-
+ sound/soc/uniphier/aio.h                   |  2 +-
+ sound/soc/ux500/ux500_msp_i2s.c            |  2 +-
+ 30 files changed, 43 insertions(+), 43 deletions(-)
+
+diff --git a/sound/soc/atmel/atmel-pcm-dma.c b/sound/soc/atmel/atmel-pcm-dma.c
+index 7306e04da513..e4b73ae3df4f 100644
+--- a/sound/soc/atmel/atmel-pcm-dma.c
++++ b/sound/soc/atmel/atmel-pcm-dma.c
+@@ -47,7 +47,7 @@ static const struct snd_pcm_hardware atmel_pcm_dma_hardware = {
+  * atmel_pcm_dma_irq: SSC interrupt handler for DMAENGINE enabled SSC
+  *
+  * We use DMAENGINE to send/receive data to/from SSC so this ISR is only to
+- * check if any overrun occured.
++ * check if any overrun occurred.
+  */
+ static void atmel_pcm_dma_irq(u32 ssc_sr,
+ 	struct snd_pcm_substream *substream)
+diff --git a/sound/soc/bcm/cygnus-ssp.h b/sound/soc/bcm/cygnus-ssp.h
+index 4925e03c3c30..7848e15efbe1 100644
+--- a/sound/soc/bcm/cygnus-ssp.h
++++ b/sound/soc/bcm/cygnus-ssp.h
+@@ -27,7 +27,7 @@ struct ringbuf_regs {
+ 	unsigned wraddr;
+ 	unsigned baseaddr;
+ 	unsigned endaddr;
+-	unsigned fmark;   /* freemark for play, fullmark for caputure */
++	unsigned fmark;   /* freemark for play, fullmark for capture */
+ 	unsigned period_bytes;
+ 	unsigned buf_size;
+ };
+diff --git a/sound/soc/codecs/adau1701.c b/sound/soc/codecs/adau1701.c
+index 505d52c63627..4afbf46ffaa3 100644
+--- a/sound/soc/codecs/adau1701.c
++++ b/sound/soc/codecs/adau1701.c
+@@ -4,7 +4,7 @@
+  *
+  * Copyright 2011 Analog Devices Inc.
+  * Author: Lars-Peter Clausen <lars@metafoo.de>
+- *	based on an inital version by Cliff Cai <cliff.cai@analog.com>
++ *	based on an initial version by Cliff Cai <cliff.cai@analog.com>
+  */
+ 
+ #include <linux/module.h>
+@@ -699,7 +699,7 @@ static int adau1701_probe(struct snd_soc_component *component)
+ 	 */
+ 	adau1701->pll_clkdiv = ADAU1707_CLKDIV_UNSET;
+ 
+-	/* initalize with pre-configured pll mode settings */
++	/* initialize with pre-configured pll mode settings */
+ 	ret = adau1701_reset(component, adau1701->pll_clkdiv, 0);
+ 	if (ret < 0)
+ 		goto exit_regulators_disable;
+diff --git a/sound/soc/codecs/cs35l33.c b/sound/soc/codecs/cs35l33.c
+index d0f9231f5e44..b8c19f175701 100644
+--- a/sound/soc/codecs/cs35l33.c
++++ b/sound/soc/codecs/cs35l33.c
+@@ -578,7 +578,7 @@ static int cs35l33_set_tdm_slot(struct snd_soc_dai *dai, unsigned int tx_mask,
+ 			| CS35L33_X_LOC);
+ 	}
+ 
+-	/* disconnect {vp,vbst}_mon routes: eanble later if set in tx_mask*/
++	/* disconnect {vp,vbst}_mon routes: enable later if set in tx_mask*/
+ 	snd_soc_dapm_del_routes(dapm, cs35l33_vp_vbst_mon_route,
+ 		ARRAY_SIZE(cs35l33_vp_vbst_mon_route));
+ 
+diff --git a/sound/soc/codecs/cs35l34.c b/sound/soc/codecs/cs35l34.c
+index 3f265bd760f7..a72be629a31e 100644
+--- a/sound/soc/codecs/cs35l34.c
++++ b/sound/soc/codecs/cs35l34.c
+@@ -297,7 +297,7 @@ static int cs35l34_set_tdm_slot(struct snd_soc_dai *dai, unsigned int tx_mask,
+ 				CS35L34_X_STATE | CS35L34_X_LOC,
+ 				CS35L34_X_STATE | CS35L34_X_LOC);
+ 
+-	/* disconnect {vp,vbst}_mon routes: eanble later if set in tx_mask*/
++	/* disconnect {vp,vbst}_mon routes: enable later if set in tx_mask*/
+ 	while (slot >= 0) {
+ 		/* configure VMON_TX_LOC */
+ 		if (slot_num == 0)
+diff --git a/sound/soc/codecs/cs42l42.c b/sound/soc/codecs/cs42l42.c
+index 9e40c03ada4e..b5d69d5516a6 100644
+--- a/sound/soc/codecs/cs42l42.c
++++ b/sound/soc/codecs/cs42l42.c
+@@ -1682,7 +1682,7 @@ irqreturn_t cs42l42_irq_thread(int irq, void *data)
+ 	if (cs42l42->suspended || !cs42l42->init_done)
+ 		return IRQ_NONE;
+ 
+-	/* Read sticky registers to clear interurpt */
++	/* Read sticky registers to clear interrupt */
+ 	for (i = 0; i < ARRAY_SIZE(stickies); i++) {
+ 		regmap_read(cs42l42->regmap, irq_params_table[i].status_addr,
+ 				&(stickies[i]));
+diff --git a/sound/soc/codecs/cs42l73.c b/sound/soc/codecs/cs42l73.c
+index 72076ccf4570..72c4213ed74b 100644
+--- a/sound/soc/codecs/cs42l73.c
++++ b/sound/soc/codecs/cs42l73.c
+@@ -761,7 +761,7 @@ static const struct snd_soc_dapm_route cs42l73_audio_map[] = {
+ 	{"ASPOUTL", "ASP-IP Volume", "ASPL Output Mixer"},
+ 	{"ASPOUTR", "ASP-IP Volume", "ASPR Output Mixer"},
+ 
+-	/* Auxillary Capture */
++	/* Auxiliary Capture */
+ 	{"XSPL Output Mixer", NULL, "Input Left Capture"},
+ 	{"XSPR Output Mixer", NULL, "Input Right Capture"},
+ 
+@@ -1126,7 +1126,7 @@ static int cs42l73_set_bias_level(struct snd_soc_component *component,
+ 			mdelay(cs42l73->shutdwn_delay);
+ 			cs42l73->shutdwn_delay = 0;
+ 		} else {
+-			mdelay(15); /* Min amount of time requred to power
++			mdelay(15); /* Min amount of time required to power
+ 				     * down.
+ 				     */
+ 		}
+diff --git a/sound/soc/codecs/cx20442.c b/sound/soc/codecs/cx20442.c
+index 0dea84cd8ef2..d3c7a9370220 100644
+--- a/sound/soc/codecs/cx20442.c
++++ b/sound/soc/codecs/cx20442.c
+@@ -200,7 +200,7 @@ static int cx20442_write(struct snd_soc_component *component, unsigned int reg,
+  * Line discpline related code
+  *
+  * Any of the callback functions below can be used in two ways:
+- * 1) registerd by a machine driver as one of line discipline operations,
++ * 1) registered by a machine driver as one of line discipline operations,
+  * 2) called from a machine's provided line discipline callback function
+  *    in case when extra machine specific code must be run as well.
+  */
+diff --git a/sound/soc/codecs/da7210.c b/sound/soc/codecs/da7210.c
+index 597510de561a..40d759938edc 100644
+--- a/sound/soc/codecs/da7210.c
++++ b/sound/soc/codecs/da7210.c
+@@ -1158,7 +1158,7 @@ static int da7210_probe(struct snd_soc_component *component)
+ 	snd_soc_component_write(component, DA7210_PLL_DIV3, DA7210_MCLK_RANGE_10_20_MHZ |
+ 					      DA7210_PLL_BYP);
+ 
+-	/* Diable PLL and bypass it */
++	/* Disable PLL and bypass it */
+ 	snd_soc_component_write(component, DA7210_PLL, DA7210_PLL_FS_48000);
+ 
+ 	/* Activate all enabled subsystem */
+diff --git a/sound/soc/codecs/hdac_hda.c b/sound/soc/codecs/hdac_hda.c
+index 1c06fdbf0e71..7414be08d3d5 100644
+--- a/sound/soc/codecs/hdac_hda.c
++++ b/sound/soc/codecs/hdac_hda.c
+@@ -520,7 +520,7 @@ static int hdac_hda_codec_probe(struct snd_soc_component *component)
+ 	/*
+ 	 * hdac_device core already sets the state to active and calls
+ 	 * get_noresume. So enable runtime and set the device to suspend.
+-	 * pm_runtime_enable is also called during codec registeration
++	 * pm_runtime_enable is also called during codec registration
+ 	 */
+ 	pm_runtime_put(&hdev->dev);
+ 	pm_runtime_suspend(&hdev->dev);
+diff --git a/sound/soc/codecs/hdac_hdmi.c b/sound/soc/codecs/hdac_hdmi.c
+index d9e6fa6d3e99..b3f677e7ddc9 100644
+--- a/sound/soc/codecs/hdac_hdmi.c
++++ b/sound/soc/codecs/hdac_hdmi.c
+@@ -1753,7 +1753,7 @@ static int hdmi_codec_resume(struct device *dev)
+ 	/*
+ 	 * As the ELD notify callback request is not entertained while the
+ 	 * device is in suspend state. Need to manually check detection of
+-	 * all pins here. pin capablity change is not support, so use the
++	 * all pins here. pin capability change is not support, so use the
+ 	 * already set pin caps.
+ 	 *
+ 	 * NOTE: this is safe to call even if the codec doesn't actually resume.
+diff --git a/sound/soc/codecs/max98927.c b/sound/soc/codecs/max98927.c
+index d8dfaefdca7e..285c9d1ea721 100644
+--- a/sound/soc/codecs/max98927.c
++++ b/sound/soc/codecs/max98927.c
+@@ -672,7 +672,7 @@ static int max98927_probe(struct snd_soc_component *component)
+ 		     0x80);
+ 	regmap_write(max98927->regmap, MAX98927_R0026_PCM_TO_SPK_MONOMIX_B,
+ 		     0x1);
+-	/* Set inital volume (+13dB) */
++	/* Set initial volume (+13dB) */
+ 	regmap_write(max98927->regmap, MAX98927_R0036_AMP_VOL_CTRL, 0x38);
+ 	regmap_write(max98927->regmap, MAX98927_R003C_SPK_GAIN, 0x05);
+ 	/* Enable DC blocker */
+@@ -870,7 +870,7 @@ static int max98927_i2c_probe(struct i2c_client *i2c)
+ 	/* voltage/current slot configuration */
+ 	max98927_slot_config(i2c, max98927);
+ 
+-	/* codec registeration */
++	/* codec registration */
+ 	ret = devm_snd_soc_register_component(&i2c->dev,
+ 		&soc_component_dev_max98927,
+ 		max98927_dai, ARRAY_SIZE(max98927_dai));
+diff --git a/sound/soc/codecs/mt6359.c b/sound/soc/codecs/mt6359.c
+index b15bdb15dbb0..c51eae602ca0 100644
+--- a/sound/soc/codecs/mt6359.c
++++ b/sound/soc/codecs/mt6359.c
+@@ -82,7 +82,7 @@ static void mt6359_reset_capture_gpio(struct mt6359_priv *priv)
+ 			   0x3 << 0, 0x0);
+ }
+ 
+-/* use only when doing mtkaif calibraiton at the boot time */
++/* use only when doing mtkaif calibration at the boot time */
+ static void mt6359_set_dcxo(struct mt6359_priv *priv, bool enable)
+ {
+ 	regmap_update_bits(priv->regmap, MT6359_DCXO_CW12,
+@@ -90,7 +90,7 @@ static void mt6359_set_dcxo(struct mt6359_priv *priv, bool enable)
+ 			   (enable ? 1 : 0) << RG_XO_AUDIO_EN_M_SFT);
+ }
+ 
+-/* use only when doing mtkaif calibraiton at the boot time */
++/* use only when doing mtkaif calibration at the boot time */
+ static void mt6359_set_clksq(struct mt6359_priv *priv, bool enable)
+ {
+ 	/* Enable/disable CLKSQ 26MHz */
+@@ -99,7 +99,7 @@ static void mt6359_set_clksq(struct mt6359_priv *priv, bool enable)
+ 			   (enable ? 1 : 0) << RG_CLKSQ_EN_SFT);
+ }
+ 
+-/* use only when doing mtkaif calibraiton at the boot time */
++/* use only when doing mtkaif calibration at the boot time */
+ static void mt6359_set_aud_global_bias(struct mt6359_priv *priv, bool enable)
+ {
+ 	regmap_update_bits(priv->regmap, MT6359_AUDDEC_ANA_CON13,
+@@ -107,7 +107,7 @@ static void mt6359_set_aud_global_bias(struct mt6359_priv *priv, bool enable)
+ 			   (enable ? 0 : 1) << RG_AUDGLB_PWRDN_VA32_SFT);
+ }
+ 
+-/* use only when doing mtkaif calibraiton at the boot time */
++/* use only when doing mtkaif calibration at the boot time */
+ static void mt6359_set_topck(struct mt6359_priv *priv, bool enable)
+ {
+ 	regmap_update_bits(priv->regmap, MT6359_AUD_TOP_CKPDN_CON0,
+diff --git a/sound/soc/codecs/nau8825.c b/sound/soc/codecs/nau8825.c
+index 5165aeba4b67..2eb0efc983a0 100644
+--- a/sound/soc/codecs/nau8825.c
++++ b/sound/soc/codecs/nau8825.c
+@@ -345,10 +345,10 @@ static u32 nau8825_intlog10_dec3(u32 value)
+ /**
+  * nau8825_xtalk_sidetone - computes cross talk suppression sidetone gain.
+  *
+- * @sig_org: orignal signal level
++ * @sig_org: original signal level
+  * @sig_cros: cross talk signal level
+  *
+- * The orignal and cross talk signal vlues need to be characterized.
++ * The original and cross talk signal vlues need to be characterized.
+  * Once these values have been characterized, this sidetone value
+  * can be converted to decibel with the equation below.
+  * sidetone = 20 * log (original signal level / crosstalk signal level)
+@@ -671,11 +671,11 @@ static void nau8825_xtalk_imm_stop(struct nau8825 *nau8825)
+  * Thus, the measurement function has four states to complete whole sequence.
+  * 1. Prepare state : Prepare the resource for detection and transfer to HPR
+  *     IMM stat to make JKR1(HPR) impedance measure.
+- * 2. HPR IMM state : Read out orignal signal level of JKR1(HPR) and transfer
++ * 2. HPR IMM state : Read out original signal level of JKR1(HPR) and transfer
+  *     to HPL IMM state to make JKTIP(HPL) impedance measure.
+  * 3. HPL IMM state : Read out cross talk signal level of JKTIP(HPL) and
+  *     transfer to IMM state to determine suppression sidetone gain.
+- * 4. IMM state : Computes cross talk suppression sidetone gain with orignal
++ * 4. IMM state : Computes cross talk suppression sidetone gain with original
+  *     and cross talk signal level. Apply this gain and then restore codec
+  *     configuration. Then transfer to Done state for ending.
+  */
+@@ -724,7 +724,7 @@ static void nau8825_xtalk_measure(struct nau8825 *nau8825)
+ 		nau8825->xtalk_state = NAU8825_XTALK_IMM;
+ 		break;
+ 	case NAU8825_XTALK_IMM:
+-		/* In impedance measure state, the orignal and cross talk
++		/* In impedance measure state, the original and cross talk
+ 		 * signal level vlues are ready. The side tone gain is deter-
+ 		 * mined with these signal level. After all, restore codec
+ 		 * configuration.
+diff --git a/sound/soc/codecs/rt1320-sdw.c b/sound/soc/codecs/rt1320-sdw.c
+index 444a91755be9..b13622e54ae0 100644
+--- a/sound/soc/codecs/rt1320-sdw.c
++++ b/sound/soc/codecs/rt1320-sdw.c
+@@ -2084,7 +2084,7 @@ static int rt1320_rae_load(struct rt1320_sdw_priv *rt1320)
+ 		regmap_update_bits(rt1320->regmap, 0x20005818, 0x80, 0x80);
+ 		/* RAE run */
+ 		regmap_update_bits(rt1320->regmap, 0x2000301c, 0x01, 0x01);
+-		/* Phase sync eanble */
++		/* Phase sync enable */
+ 		regmap_update_bits(rt1320->regmap, 0xc047, 0x80, 0x80);
+ 		break;
+ 	}
+diff --git a/sound/soc/codecs/rt5631.h b/sound/soc/codecs/rt5631.h
+index 8a6b99a48c7c..00734207ac9f 100644
+--- a/sound/soc/codecs/rt5631.h
++++ b/sound/soc/codecs/rt5631.h
+@@ -415,7 +415,7 @@
+ #define RT5631_ADDA_FILTER_CLK_SEL_256FS		(0 << 7) /* 256FS */
+ #define RT5631_ADDA_FILTER_CLK_SEL_384FS		(1 << 7) /* 384FS */
+ 
+-/* Power managment addition 1 (0x3A) */
++/* Power management addition 1 (0x3A) */
+ #define RT5631_PWR_MAIN_I2S_EN			(0x1 << 15)
+ #define RT5631_PWR_MAIN_I2S_BIT			15
+ #define RT5631_PWR_CLASS_D				(0x1 << 12)
+@@ -435,7 +435,7 @@
+ #define RT5631_PWR_DAC_R_TO_MIXER			(0x1 << 5)
+ #define RT5631_PWR_DAC_R_TO_MIXER_BIT		5
+ 
+-/* Power managment addition 2 (0x3B) */
++/* Power management addition 2 (0x3B) */
+ #define RT5631_PWR_OUTMIXER_L				(0x1 << 15)
+ #define RT5631_PWR_OUTMIXER_L_BIT			15
+ #define RT5631_PWR_OUTMIXER_R				(0x1 << 14)
+@@ -461,7 +461,7 @@
+ #define RT5631_PWR_PLL2				(0x1 << 0)
+ #define RT5631_PWR_PLL2_BIT				0
+ 
+-/* Power managment addition 3(0x3C) */
++/* Power management addition 3(0x3C) */
+ #define RT5631_PWR_VREF				(0x1 << 15)
+ #define RT5631_PWR_VREF_BIT				15
+ #define RT5631_PWR_FAST_VREF_CTRL			(0x1 << 14)
+@@ -489,7 +489,7 @@
+ #define RT5631_PWR_HP_AMP_DRIVING			(0x1 << 0)
+ #define RT5631_PWR_HP_AMP_DRIVING_BIT		0
+ 
+-/* Power managment addition 4(0x3E) */
++/* Power management addition 4(0x3E) */
+ #define RT5631_PWR_SPK_L_VOL				(0x1 << 15)
+ #define RT5631_PWR_SPK_L_VOL_BIT			15
+ #define RT5631_PWR_SPK_R_VOL				(0x1 << 14)
+diff --git a/sound/soc/codecs/rt5640.c b/sound/soc/codecs/rt5640.c
+index 4fa1eee8e87f..03d0ac3359f5 100644
+--- a/sound/soc/codecs/rt5640.c
++++ b/sound/soc/codecs/rt5640.c
+@@ -1216,7 +1216,7 @@ static const struct snd_soc_dapm_widget rt5640_dapm_widgets[] = {
+ 		0, rt5640_spk_l_mix, ARRAY_SIZE(rt5640_spk_l_mix)),
+ 	SND_SOC_DAPM_MIXER("SPK MIXR", RT5640_PWR_MIXER, RT5640_PWR_SM_R_BIT,
+ 		0, rt5640_spk_r_mix, ARRAY_SIZE(rt5640_spk_r_mix)),
+-	/* Ouput Volume */
++	/* Output Volume */
+ 	SND_SOC_DAPM_PGA("SPKVOL L", RT5640_PWR_VOL,
+ 		RT5640_PWR_SV_L_BIT, 0, NULL, 0),
+ 	SND_SOC_DAPM_PGA("SPKVOL R", RT5640_PWR_VOL,
+diff --git a/sound/soc/codecs/rt5645.c b/sound/soc/codecs/rt5645.c
+index bf9f278c3de9..bb448254275f 100644
+--- a/sound/soc/codecs/rt5645.c
++++ b/sound/soc/codecs/rt5645.c
+@@ -2209,7 +2209,7 @@ static const struct snd_soc_dapm_widget rt5645_dapm_widgets[] = {
+ 		0, rt5645_out_l_mix, ARRAY_SIZE(rt5645_out_l_mix)),
+ 	SND_SOC_DAPM_MIXER("OUT MIXR", RT5645_PWR_MIXER, RT5645_PWR_OM_R_BIT,
+ 		0, rt5645_out_r_mix, ARRAY_SIZE(rt5645_out_r_mix)),
+-	/* Ouput Volume */
++	/* Output Volume */
+ 	SND_SOC_DAPM_SWITCH("SPKVOL L", RT5645_PWR_VOL, RT5645_PWR_SV_L_BIT, 0,
+ 		&spk_l_vol_control),
+ 	SND_SOC_DAPM_SWITCH("SPKVOL R", RT5645_PWR_VOL, RT5645_PWR_SV_R_BIT, 0,
+diff --git a/sound/soc/codecs/rt5651.c b/sound/soc/codecs/rt5651.c
+index 9723b4c7540c..b911757376f5 100644
+--- a/sound/soc/codecs/rt5651.c
++++ b/sound/soc/codecs/rt5651.c
+@@ -1024,7 +1024,7 @@ static const struct snd_soc_dapm_widget rt5651_dapm_widgets[] = {
+ 			   0, rt5651_out_l_mix, ARRAY_SIZE(rt5651_out_l_mix)),
+ 	SND_SOC_DAPM_MIXER("OUT MIXR", RT5651_PWR_MIXER, RT5651_PWR_OM_R_BIT,
+ 			   0, rt5651_out_r_mix, ARRAY_SIZE(rt5651_out_r_mix)),
+-	/* Ouput Volume */
++	/* Output Volume */
+ 	SND_SOC_DAPM_SWITCH("OUTVOL L", RT5651_PWR_VOL,
+ 			    RT5651_PWR_OV_L_BIT, 0, &outvol_l_control),
+ 	SND_SOC_DAPM_SWITCH("OUTVOL R", RT5651_PWR_VOL,
+diff --git a/sound/soc/codecs/rt5670.c b/sound/soc/codecs/rt5670.c
+index f772f093479a..62d4e7cea5af 100644
+--- a/sound/soc/codecs/rt5670.c
++++ b/sound/soc/codecs/rt5670.c
+@@ -1901,7 +1901,7 @@ static const struct snd_soc_dapm_widget rt5670_dapm_widgets[] = {
+ 			   0, rt5670_out_l_mix, ARRAY_SIZE(rt5670_out_l_mix)),
+ 	SND_SOC_DAPM_MIXER("OUT MIXR", RT5670_PWR_MIXER, RT5670_PWR_OM_R_BIT,
+ 			   0, rt5670_out_r_mix, ARRAY_SIZE(rt5670_out_r_mix)),
+-	/* Ouput Volume */
++	/* Output Volume */
+ 	SND_SOC_DAPM_MIXER("HPOVOL MIXL", RT5670_PWR_VOL,
+ 			   RT5670_PWR_HV_L_BIT, 0,
+ 			   rt5670_hpvoll_mix, ARRAY_SIZE(rt5670_hpvoll_mix)),
+diff --git a/sound/soc/codecs/tlv320dac33.c b/sound/soc/codecs/tlv320dac33.c
+index 55a95b62a650..b91ab42882d1 100644
+--- a/sound/soc/codecs/tlv320dac33.c
++++ b/sound/soc/codecs/tlv320dac33.c
+@@ -914,7 +914,7 @@ static int dac33_prepare_chip(struct snd_pcm_substream *substream,
+ 	/* OSC calibration time */
+ 	dac33_write(component, DAC33_CALIB_TIME, 96);
+ 
+-	/* adjustment treshold & step */
++	/* adjustment threshold & step */
+ 	dac33_write(component, DAC33_INT_OSC_CTRL_B, DAC33_ADJTHRSHLD(2) |
+ 						 DAC33_ADJSTEP(1));
+ 
+diff --git a/sound/soc/intel/atom/sst-mfld-dsp.h b/sound/soc/intel/atom/sst-mfld-dsp.h
+index c8f0816edb53..59606259a06e 100644
+--- a/sound/soc/intel/atom/sst-mfld-dsp.h
++++ b/sound/soc/intel/atom/sst-mfld-dsp.h
+@@ -189,7 +189,7 @@ struct ipc_dsp_hdr {
+ union ipc_header_high {
+ 	struct {
+ 		u32  msg_id:8;	    /* Message ID - Max 256 Message Types */
+-		u32  task_id:4;	    /* Task ID associated with this comand */
++		u32  task_id:4;	    /* Task ID associated with this command */
+ 		u32  drv_id:4;    /* Identifier for the driver to track*/
+ 		u32  rsvd1:8;	    /* Reserved */
+ 		u32  result:4;	    /* Reserved */
+diff --git a/sound/soc/intel/atom/sst/sst.h b/sound/soc/intel/atom/sst/sst.h
+index c43946c5ecee..e24d9dad7ef6 100644
+--- a/sound/soc/intel/atom/sst/sst.h
++++ b/sound/soc/intel/atom/sst/sst.h
+@@ -182,7 +182,7 @@ struct sst_block {
+  * @pcm_substream : PCM substream
+  * @period_elapsed : PCM period elapsed callback
+  * @sfreq : stream sampling freq
+- * @cumm_bytes : cummulative bytes decoded
++ * @cumm_bytes : cumulative bytes decoded
+  */
+ struct stream_info {
+ 	unsigned int		status;
+diff --git a/sound/soc/intel/boards/sof_cirrus_common.c b/sound/soc/intel/boards/sof_cirrus_common.c
+index 88fc6cb2bfd4..ec4bda40ae00 100644
+--- a/sound/soc/intel/boards/sof_cirrus_common.c
++++ b/sound/soc/intel/boards/sof_cirrus_common.c
+@@ -151,7 +151,7 @@ static const char * const cs35l41_name_prefixes[] = { "WL", "WR", "TL", "TR" };
+  * UID 0x2 -> TL
+  * UID 0x3 -> TR
+  * Note: If there are less than 4 Amps, UIDs still map to WL/WR/TL/TR. Dynamic code will only create
+- * dai links for UIDs which exist, and ignore non-existant ones. Only 2 or 4 amps are expected.
++ * dai links for UIDs which exist, and ignore non-existent ones. Only 2 or 4 amps are expected.
+  * Return number of codecs found.
+  */
+ static int cs35l41_compute_codec_conf(void)
+diff --git a/sound/soc/qcom/qdsp6/q6asm-dai.c b/sound/soc/qcom/qdsp6/q6asm-dai.c
+index 4f09fdd40905..cd4f82bb8cc7 100644
+--- a/sound/soc/qcom/qdsp6/q6asm-dai.c
++++ b/sound/soc/qcom/qdsp6/q6asm-dai.c
+@@ -551,7 +551,7 @@ static void compress_event_handler(uint32_t opcode, uint32_t token,
+ 						 prtd->stream_id,
+ 						 CMD_CLOSE);
+ 				/*
+-				 * vaild stream ids start from 1, So we are
++				 * valid stream ids start from 1, So we are
+ 				 * toggling this between 1 and 2.
+ 				 */
+ 				prtd->stream_id = (prtd->stream_id == 1 ? 2 : 1);
+diff --git a/sound/soc/ti/davinci-i2s.c b/sound/soc/ti/davinci-i2s.c
+index ec7eb2f19b6f..3614f614117d 100644
+--- a/sound/soc/ti/davinci-i2s.c
++++ b/sound/soc/ti/davinci-i2s.c
+@@ -49,7 +49,7 @@
+  *    incompatible with ASP and with either McBSP.
+  *
+  * In short:  this uses ASP to implement I2S, not McBSP.
+- * And it won't be the only DaVinci implemention of I2S.
++ * And it won't be the only DaVinci implementation of I2S.
+  */
+ #define DAVINCI_MCBSP_DRR_REG	0x00
+ #define DAVINCI_MCBSP_DXR_REG	0x04
+diff --git a/sound/soc/ti/davinci-mcasp.c b/sound/soc/ti/davinci-mcasp.c
+index ad9e194a3d0d..d461ab419655 100644
+--- a/sound/soc/ti/davinci-mcasp.c
++++ b/sound/soc/ti/davinci-mcasp.c
+@@ -1818,7 +1818,7 @@ static int davinci_mcasp_startup(struct snd_pcm_substream *substream,
+ 	    !mcasp->async_mode)
+ 		max_channels = mcasp->channels;
+ 	/*
+-	 * But we can always allow channels upto the amount of
++	 * But we can always allow channels up to the amount of
+ 	 * the available tdm_slots.
+ 	 */
+ 	if (max_channels < tdm_slots)
+diff --git a/sound/soc/ti/omap-mcbsp.c b/sound/soc/ti/omap-mcbsp.c
+index 5734388a4e4b..889e357b64d0 100644
+--- a/sound/soc/ti/omap-mcbsp.c
++++ b/sound/soc/ti/omap-mcbsp.c
+@@ -1237,7 +1237,7 @@ static int omap_mcbsp_dai_set_dai_sysclk(struct snd_soc_dai *cpu_dai,
+ 		break;
+ 	case OMAP_MCBSP_SYSCLK_CLKR_EXT:
+ 		regs->pcr0	|= SCLKME;
+-		/* Disable ouput on CLKR pin in master mode */
++		/* Disable output on CLKR pin in master mode */
+ 		regs->pcr0	&= ~CLKRM;
+ 		break;
+ 	default:
+diff --git a/sound/soc/uniphier/aio.h b/sound/soc/uniphier/aio.h
+index 1900ea01ce3d..87b27256cf80 100644
+--- a/sound/soc/uniphier/aio.h
++++ b/sound/soc/uniphier/aio.h
+@@ -183,7 +183,7 @@ struct uniphier_aio_selector {
+  *
+  * These are examples for sound data paths:
+  *
+- * For caputure device:
++ * For capture device:
+  *   (outer of AIO) -> iport -> iif -> ch -> rb -> (CPU)
+  * For playback device:
+  *   (CPU) -> rb -> ch -> oif -> oport -> (outer of AIO)
+diff --git a/sound/soc/ux500/ux500_msp_i2s.c b/sound/soc/ux500/ux500_msp_i2s.c
+index 683b485fb570..bd2cfc618290 100644
+--- a/sound/soc/ux500/ux500_msp_i2s.c
++++ b/sound/soc/ux500/ux500_msp_i2s.c
+@@ -19,7 +19,7 @@
+ 
+ #include "ux500_msp_i2s.h"
+ 
+- /* Protocol desciptors */
++ /* Protocol descriptors */
+ static const struct msp_protdesc prot_descs[] = {
+ 	{ /* I2S */
+ 		MSP_SINGLE_PHASE,
+-- 
+2.48.1
+
