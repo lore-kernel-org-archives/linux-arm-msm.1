@@ -1,193 +1,164 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 99C8943846E;
-	Tue, 15 Sep 2026 17:13:14 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D0AD0430CD8;
+	Tue, 15 Sep 2026 17:16:20 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789492396; cv=none; b=MWOU5o8Xev/2Ob1h9ewXqiW196temh9aYtYgXeWBkCwOeYpfsoo65X6FOzT46OITCAHBsNcj00ChDMUUbGTG1iJ66HG5HmzuElX1n//hMh3ckaFy41w+pj31BNI2yGCNxRwPHeoex6hMt6mM3Q4i/wRYmTZJddzv6ZfahFvIhiE=
+	t=1789492582; cv=none; b=Ziv/VuNXsP8ZB0shYu1+L7H5OQOAPPackOivLWyGzkRxhGXvF/rP3PSpVXcpQyzAWQVcYo0HWMKGUSBn28Fsq61r4XRVdeNjRfhR1hGlYXX1E0nNElE6RUNc+9b9YjX2KQHTZl43fHrIj2yTmO7lOKgXdhOP8oqEi9cH5kpH1qo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789492396; c=relaxed/simple;
-	bh=ivBonYODbbsrsacrHrcfoJQOLzw23nGRDwkGNZqoBo4=;
+	s=arc-20240116; t=1789492582; c=relaxed/simple;
+	bh=3iCawYRhIdUmQYjz7gwER5Gj/m2Nzx7Xsyj5Ck+jaD0=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=rcHw+mQP2xxSbrLzj9X/393Wsjm8CwVi5eEZeK/74iIrQAcBdTlBi2RSGTW98hqnaqtafXGinarrZ97kLeFi0FbhbwulZaT3/8K2wYnSe1fkajkgJVc+o4IHM7lPceIDZ7rDnWp+FmJV6xeYWHNtYjMd0rq0yHK2Bf+29tFLtec=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=OKOnqNmU; arc=none smtp.client-ip=100.103.45.18
+	 Content-Type:Content-Disposition:In-Reply-To; b=P0quMKvneZlmk0dnmPh6Y87kSxTLKtIKHYVkofpSqerxQaSbuIHV43CB3qSVLgaNtZ43vA8OlCmf4abUskrq+ecx3iowwucZW/UPDsLVsgKs/C2sb2BaES1Z2+YHzW/a/hiCpit9a2R290SChyAyl1gNk4m8VLxzfyzqmlVQQnI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=B/3J9QO3; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="OKOnqNmU"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 260F81F000FF;
-	Tue, 15 Sep 2026 17:13:10 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="B/3J9QO3"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0D54B1F00893;
+	Tue, 15 Sep 2026 17:16:16 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1789492394;
-	bh=YJR9aq2r86J30eW8lL/Fjsuscy+SjBA6fWgSJoTL8AQ=;
+	s=k20260515; t=1789492580;
+	bh=NqodpybQYzQMYyiAsa6eDfHM+c1mgTm+hYeUbm6qFwM=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=OKOnqNmUUVc6YU90Q7sW0mC92AKXaFVQvfauDuNsQ6qdMUDZisWKNfUtoDsHiI0+l
-	 eG2M47wjWgh0mM8K0aq+F74Ai/vQr7mouMeTdalC7p05GQaq04qSL6tN1GAAfvHNO6
-	 8XnESBkddlGTcnbFYHtzRCI7CyLZraBqgOkTJIqTEADOEnFmXtGm/hz2Ep0Mcn2JaH
-	 7/nrnmaIgyMVLDAfcELr0qkTO+zM9viRTsL5Ob+t9kP+r+7d81fAK3zyXFUVwY9jBD
-	 Ux3yvf6LWDMYREU4qwh3MWyOEnervXSkfvCxLrmflqPxR2ogTn3ZtsCBQJIIm/bo5+
-	 d4VcEfPSn/jkg==
-Date: Tue, 15 Sep 2026 18:13:09 +0100
-From: Conor Dooley <conor@kernel.org>
-To: Amirreza Zarrabi <amirreza.zarrabi@oss.qualcomm.com>
-Cc: Jens Wiklander <jenswi@kernel.org>, Sumit Garg <sumit.garg@kernel.org>,
-	Paul Walmsley <pjw@kernel.org>, Palmer Dabbelt <palmer@dabbelt.com>,
-	Albert Ou <aou@eecs.berkeley.edu>, Alexandre Ghiti <alex@ghiti.fr>,
-	Rahul Pathak <rahul@summations.net>,
-	Anup Patel <anup@brainfault.org>, Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>, linux-arm-msm@vger.kernel.org,
-	linux-kernel@vger.kernel.org, op-tee@lists.trustedfirmware.org,
-	linux-riscv@lists.infradead.org, devicetree@vger.kernel.org
-Subject: Re: [PATCH RFC 5/5] dt-bindings: tee: add RISC-V RPMI TEE transport
-Message-ID: <20260915-reappear-hatchback-f4c3697a1b4e@spud>
-References: <20260912-rpmi-tee-service-grp-dev-v1-0-1d1d35c2a859@oss.qualcomm.com>
- <20260912-rpmi-tee-service-grp-dev-v1-5-1d1d35c2a859@oss.qualcomm.com>
+	b=B/3J9QO363ccRg3QEcgHDuPKpJXSjJy4w79gSCuLYEN00K3BtUwbJgWwu/vAzblVF
+	 IX0fBQnIOyK+i6oY5V7LlWvfRtOSu8XK52alZI0snZegp0+gwcMr8k+6lsbJEbo+c+
+	 M++k4A48R1/oFv+ZtgNy7Ped4VC3D/KUDboIjU/Vbk20p1Hp1GJ+mMgRbqHa3VvqPW
+	 ZcIj6woUv/8TtWrQ7RbW2nhn0qkZy4PnA1GZXn0n6gpCFN8qFRr1gIX8hrYsTOf5n1
+	 R5+cV91DrMTaOZk9bzR5pYlGovfyn7pKAUYgWSAFY4JzH01QKONluk3zMtHVGAaBJc
+	 V8v9MpqQQD0Xg==
+Date: Tue, 15 Sep 2026 19:16:11 +0200
+From: Manivannan Sadhasivam <mani@kernel.org>
+To: Bjorn Helgaas <helgaas@kernel.org>
+Cc: Qiang Yu <qiang.yu@oss.qualcomm.com>, 
+	Lorenzo Pieralisi <lpieralisi@kernel.org>, Krzysztof =?utf-8?Q?Wilczy=C5=84ski?= <kwilczynski@kernel.org>, 
+	Rob Herring <robh@kernel.org>, Bjorn Helgaas <bhelgaas@google.com>, 
+	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, linux-pci@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
+	linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v2] PCI: qcom: Block accesses to downstream devices on
+ link down
+Message-ID: <2ibficaitalz4lacqffsrp4kuqzanxnxr2bwd6x5yti4mmfabf@h3y63kuz7fjh>
+References: <ienbx5wjdzhgtdtbmuqcc76ovzy5d4wid7x4nhq5e4bco6u4il@264db3obw2qq>
+ <20260911171807.GA402207@bhelgaas>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="rnRve9bgpYmX7ikw"
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
-In-Reply-To: <20260912-rpmi-tee-service-grp-dev-v1-5-1d1d35c2a859@oss.qualcomm.com>
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <20260911171807.GA402207@bhelgaas>
 
---rnRve9bgpYmX7ikw
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Fri, Sep 11, 2026 at 12:18:07PM -0500, Bjorn Helgaas wrote:
+> On Fri, Sep 11, 2026 at 08:17:29AM +0200, Manivannan Sadhasivam wrote:
+> > On Tue, Sep 08, 2026 at 06:00:30PM -0500, Bjorn Helgaas wrote:
+> > > On Wed, Aug 19, 2026 at 11:36:54PM -0700, Qiang Yu wrote:
+> > > > After a PCIe link goes down, software may still access the BAR
+> > > > (MMIO) space or configuration space of devices behind that link
+> > > > before recovery has run. As the link is down, these accesses
+> > > > never complete, resulting in a storm of Completion Timeout AERs.
+> > > 
+> > > What is special about qcom here?  It seems like the Completion
+> > > Timeouts and AER interrupts should happen with every PCIe
+> > > controller.
+> > 
+> > The special behavior which is common across many (not all) ARM SoCs
+> > is that they don't synthesize all-one response for completion
+> > timeouts, unlike RCs in x86 machines. Rather, they return AXI error
+> > response, resulting in CPU treating them as SError, in-addition to
+> > AER storm.
+> > 
+> > Commit message missed mentioning SError though.
+> 
+> I don't know how SError works, but this sounds like a pretty big open
+> issue with respect to RAS.  I don't think we want a kernel panic
+> because a device failed to respond to a config or MMIO access, e.g.,
+> if a card or Thunderbolt cable got unplugged.
+> 
+> > > Is this mitigating an issue that will still happen on other
+> > > controllers and should be solved elsewhere, e.g., by changing the
+> > > software that accesses the BAR to look for the error responses it
+> > > gets when the Completion Timeout happens?
+> > 
+> > That would be too late as we don't get a proper error response.
+> > That's why this patch is used.
+> > 
+> > > The patch refers to the ECAM blocker (which I assume affects
+> > > config accesses) and doesn't mention MMIO.  Is the SLV_AXI stuff
+> > > for MMIO?
+> > 
+> > ECAM blocker is a Qcom's custom implementation which prevents the
+> > config access to go out of the link and terminate the request
+> > properly. And yes, it doesn't affect MMIO like BAR.
+> 
+> The commit log implies that the patch blocks both config and MMIO
+> accesses: "software may access MMIO or config space ... Use ECAM
+> blocker to drop these accesses."  If the ECAM blocker only affects
+> config accesses, we need to reword that description.
+> 
 
-On Sat, Sep 12, 2026 at 03:15:16AM -0700, Amirreza Zarrabi wrote:
-> Add a device-tree binding for the OP-TEE RISC-V transport using the RPMI
-> TEE service group over SBI MPXY.
->=20
-> Describe one mailbox channel per hart and an optional interrupt used as
-> the availability doorbell for asynchronous notifications.
->=20
-> Add the binding to the existing OP-TEE MAINTAINERS entry.
->=20
-> Signed-off-by: Amirreza Zarrabi <amirreza.zarrabi@oss.qualcomm.com>
+Sorry, ECAM blocker blocks both config and MMIO access, my bad.
 
-The clock and (?reset?) bindings for mpxy stuff have both S and M mode
-bindings. How come you only have the S mode one here?
+> If this patch doesn't affect MMIO accesses, I assume they will still
+> fail and lead to SError?  I'm a little dubious about the utility of
+> this because I assume most runtime driver accesses will be to MMIO
+> space, not config space.
+> 
+> I assume this is also racy: any config access that happens in the
+> window between the link going down and the ECAM blocker being enabled
+> will still fail and result in SError, right?
+> 
 
-Cheers,
-Conor.
+That's true. But this is our best effort to avoid SError.
 
-> ---
->  .../bindings/tee/riscv,rpmi-mpxy-tee.yaml          | 65 ++++++++++++++++=
-++++++
->  MAINTAINERS                                        |  1 +
->  2 files changed, 66 insertions(+)
->=20
-> diff --git a/Documentation/devicetree/bindings/tee/riscv,rpmi-mpxy-tee.ya=
-ml b/Documentation/devicetree/bindings/tee/riscv,rpmi-mpxy-tee.yaml
-> new file mode 100644
-> index 000000000000..8f6ff313fd42
-> --- /dev/null
-> +++ b/Documentation/devicetree/bindings/tee/riscv,rpmi-mpxy-tee.yaml
-> @@ -0,0 +1,65 @@
-> +# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
-> +# Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
-> +%YAML 1.2
-> +---
-> +$id: http://devicetree.org/schemas/tee/riscv,rpmi-mpxy-tee.yaml#
-> +$schema: http://devicetree.org/meta-schemas/core.yaml#
-> +
-> +title: RISC-V RPMI TEE service group based message proxy
-> +
-> +maintainers:
-> +  - Amirreza Zarrabi <amirreza.zarrabi@oss.qualcomm.com>
-> +
-> +description: |
-> +  The RISC-V Platform Management Interface (RPMI) [1] defines a messaging
-> +  protocol which is modular and extensible. The supervisor software can
-> +  send/receive RPMI messages via the SBI MPXY extension [2] or some dedi=
-cated
-> +  supervisor-mode RPMI transport.
-> +
-> +  The RPMI specification [1] defines a TEE service group which is the RI=
-SC-V
-> +  analog of Arm FF-A: OP-TEE and the rich execution environment (REE, i.=
-e.
-> +  Linux) are peer endpoints and the RPMI framework (machine mode firmwar=
-e)
-> +  mediates every message. Entering OP-TEE on a hart runs it on that hart=
- until
-> +  it responds, so the SBI implementation provides one SBI MPXY channel p=
-er
-> +  hart; all of them are listed, in hart order, on a single node.
-> +
-> +  =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> +  References
-> +  =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> +
-> +  [1] RISC-V Platform Management Interface (RPMI) v1.0 (or higher)
-> +      https://github.com/riscv-non-isa/riscv-rpmi/releases
-> +
-> +  [2] RISC-V Supervisor Binary Interface (SBI) v3.0 (or higher)
-> +      https://github.com/riscv-non-isa/riscv-sbi-doc/releases
-> +
-> +properties:
-> +  compatible:
-> +    const: riscv,rpmi-mpxy-tee
-> +
-> +  mboxes:
-> +    minItems: 1
-> +    description:
-> +      One SBI MPXY channel implementing the RPMI TEE service group per h=
-art,
-> +      listed in the same order as the CPU nodes.
-> +
-> +  interrupts:
-> +    maxItems: 1
-> +    description:
-> +      Availability doorbell raised by OP-TEE to signal asynchronous
-> +      notifications over the RPMI TEE signal bus. Optional; when absent
-> +      asynchronous notification is disabled.
-> +
-> +required:
-> +  - compatible
-> +  - mboxes
-> +
-> +additionalProperties: false
-> +
-> +examples:
-> +  - |
-> +    tee {
-> +        compatible =3D "riscv,rpmi-mpxy-tee";
-> +        mboxes =3D <&mpxy_mbox 0x10 0x0>, <&mpxy_mbox 0x11 0x0>;
-> +    };
-> +...
-> diff --git a/MAINTAINERS b/MAINTAINERS
-> index 207a6e2db70c..7d0e550085b2 100644
-> --- a/MAINTAINERS
-> +++ b/MAINTAINERS
-> @@ -20577,6 +20577,7 @@ M:	Jens Wiklander <jenswi@kernel.org>
->  L:	op-tee@lists.trustedfirmware.org (moderated for non-subscribers)
->  S:	Maintained
->  F:	Documentation/ABI/testing/sysfs-bus-optee-devices
-> +F:	Documentation/devicetree/bindings/tee/riscv,rpmi-mpxy-tee.yaml
->  F:	drivers/tee/optee/
-> =20
->  OP-TEE RANDOM NUMBER GENERATOR (RNG) DRIVER
->=20
-> --=20
-> 2.34.1
->=20
+> > > Assume the root port leads to a switch, and the switch has two
+> > > links to downstream devices.  If one of the switch downstream
+> > > links goes down, is this going to kill the device on the other
+> > > link that is still up?
+> > 
+> > ECAM blocker is only enabled when the PCIe link to the Root Port
+> > goes down. We don't get LDn interrupt when the switch downstream
+> > link goes down. In that case, the switch should synthesize the error
+> > response if the CPU tries to access the unavailable device.
+> 
+> For config or MMIO reads targeting a device below a switch, if the
+> link to the device is down, I think the switch will return an
+> Unsupported Request completion without data (PCIe r7.0, sec 2.3.1.1).
+> 
 
---rnRve9bgpYmX7ikw
-Content-Type: application/pgp-signature; name=signature.asc
+Yes, that's my understanding as well. And I believe SError won't happen if the
+RC gets Unsupported Request (UR). SErrors are mostly associated with Completion
+Timeouts and that will only happen if the PCIe link between the Switch
+downstream port and Endpoint is still active and the Endpoint becomes inactive
+(rare).
 
------BEGIN PGP SIGNATURE-----
+But if the Endpoint gets removed, then the link between the Port and the
+Endpoint will go down and the Port will return Unsupported Request to the RC for
+any read request.
 
-iHUEABYKAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCaql8pQAKCRB4tDGHoIJi
-0smFAP0R3vKvUGlmEV4YG9wl6CzD59R3GC/ptm3Ws/6hAwvFEgD/SWG7NL0Hb75u
-DRG3OBY7VmT02Og/lMQzuGAffMPf/QA=
-=mJKu
------END PGP SIGNATURE-----
+> The PCIe spec doesn't prescribe whether RC synthesizes data to
+> complete the read, but x86 RCs typically synthesize ~0 data.  I guess
+> some arm64 RCs assert SError instead of completing the read.
+> 
 
---rnRve9bgpYmX7ikw--
+Yes, that's the implementation issue in some ARM SoCs.
+
+> IIUC, if the link from the RP goes down, we'll take the LDn interrupt,
+> enable ECAM blocker, and future config reads would return ~0.  But if
+> a link below a switch goes down, there's no LDn interrupt and it
+> sounds like future config reads would result in a UR Cpl and SError.
+
+Last sentence needs correction. UR won't trigger SError, but only Completion
+Timeouts will. So when a device connected to a PCIe switch gets removed, it
+won't result in SError as long as the downstream port responds with UR.
+
+But in the case of Qcom RPs, most of the time, Completion Timeouts are observed
+when the CPU issues read to device whose link is down. That's why we need this
+ECAM blocker feature to avoid it (not all the time though as you noted above,
+but still better than nothing).
+
+- Mani
+
+-- 
+மணிவண்ணன் சதாசிவம்
