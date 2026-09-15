@@ -1,181 +1,152 @@
-Received: from mx.treblig.org (mx.treblig.org [46.235.229.95])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EE7A018B0A;
-	Tue, 15 Sep 2026 01:14:58 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=46.235.229.95
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3EBD02DEA93
+	for <linux-arm-msm@vger.kernel.org>; Tue, 15 Sep 2026 01:20:36 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789434901; cv=none; b=P6+ufAp5XUvTDGWrzQnfXhbTm/G0MiQ+U23pryz5ZUCiVOfbxfE/w4/d72O6hYNsW30xvYCdZBJ6iHN9vfPYoghd74BSIpYJkKgwmewTi/SIT8j7+L6f+8ysG7cO17vT3ftnwF9ZRREntSa2R/FC7sJwVFZT+tEFKGs57pReY/0=
+	t=1789435237; cv=none; b=D3LRDu6Rra7ZjTWTMg2eA1Oou1irfHETaIhw92Gfp2pz8YFoqjz6iMd0ixvXrbCI+HCaT1H318HU2pX0663ZQCTjFpzdrkILVESbGlef+m3QKsjxVo12o0mKkEZkicXVSJQMsBsPFKN9W1r06kjuITVDH09iI9FnO5eiLwAFveI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789434901; c=relaxed/simple;
-	bh=DwJjwn5HIEHKhtU52jSO9IR5QQMvOoresNqNN3wGl5w=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=XN6xnCDgqmkC2gWEnMyHSLn5ML59OMLoWHtr5EFRkH6IVxervcBkykv44MZlJ/bQ4w44qXBeYy16UePRUnJSxLQY7ILVXIM49JJlXZSOqkcWfaDzLXBxuSuZD6njN00xfAHpatqTSIvFQlTDsFAeKIHeaCvllcWwxWUg06sB7dE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=treblig.org; spf=pass smtp.mailfrom=treblig.org; dkim=pass (2048-bit key) header.d=treblig.org header.i=@treblig.org header.b=fTWCjfLh; arc=none smtp.client-ip=46.235.229.95
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=treblig.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=treblig.org
+	s=arc-20240116; t=1789435237; c=relaxed/simple;
+	bh=odgso7si0D+HJtBaRRkr+elkQ6gwGtPGCZeiSn/buw4=;
+	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=lAynjqwWDvRzzJNpUD1eqXHu5cbgB2uXkAwLLwQb0Suc6NvDPDRhmqv6MqDt3zcXzVwXFyuHR02zVSQANhQp6cQ7J3kL/15fO5fqEF87uQdY3PnkjdA2PQ6TfkthMOL+en4zBk7jTY0a/lLNOLfmw+9HcYkguuZW06OilqshHw0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=E3JbfoxO; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=Wp62EmjA; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=treblig.org header.i=@treblig.org header.b="fTWCjfLh"
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=treblig.org
-	; s=bytemarkmx; h=Content-Type:MIME-Version:Message-ID:Subject:From:Date:From
-	:Subject; bh=Aq7S2rs88ABpoxMUNzWr6791EmdCrGhcJbnJNOT1LaY=; b=fTWCjfLh+xAA/d3S
-	+hLFdzyMouCmLyX9WpIXLQfgIoLUr0Zw+7zVYUtWDjR38X7lTMuAu9sVwXVnP1nQm8k8jQoK4GlEr
-	Hi1zPTbYoKSbBxgxkJWPBf9LEw+WBBBwTwqloVcyA3eHtGCsdj9/d5bYivdlwg8Ehba77ACvnmaLa
-	vFZo/Zqr/TkuxGNFgFIywB86wE3jWqgxqypOpIBsGTxcN5p6VA2/6n6zQF7OgIRHhNvyJ7WYF6ULJ
-	phrpvA+xWfS7uqr4aWDGThsjWr6rvSsgCM5uKlq2scUL44eOBcJJMJVl49EhG4j8zsQOmPR7psTWs
-	YyY+IRkLo+OsV0SPYw==;
-Received: from dg by mx.treblig.org with local (Exim 4.98.2)
-	(envelope-from <dg@treblig.org>)
-	id 1x6HTA-00000000b9C-2ZS7;
-	Tue, 15 Sep 2026 00:56:20 +0000
-Date: Tue, 15 Sep 2026 00:56:20 +0000
-From: "Dr. David Alan Gilbert" <dave@treblig.org>
-To: jens.glathe@oldschoolsolutions.biz
-Cc: Heikki Krogerus <heikki.krogerus@linux.intel.com>,
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-	Abel Vesa <abelvesa@kernel.org>,
-	Bjorn Andersson <andersson@kernel.org>,
-	Konrad Dybcio <konradybcio@kernel.org>,
-	Sebastian Reichel <sre@kernel.org>, linux-usb@vger.kernel.org,
-	linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-	stable@vger.kernel.org,
-	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-Subject: Re: [PATCH v2 3/3] usb: typec: mux: ps883x: disable USB4 on
- incomplete USB4 platforms
-Message-ID: <aqiXtO3WrwSFHE3e@gallifrey>
-References: <20260914-ps883x-disable-usb4-v2-0-523c32b4e4d7@oldschoolsolutions.biz>
- <20260914-ps883x-disable-usb4-v2-3-523c32b4e4d7@oldschoolsolutions.biz>
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="E3JbfoxO";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Wp62EmjA"
+Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68EMxodJ1984578
+	for <linux-arm-msm@vger.kernel.org>; Tue, 15 Sep 2026 01:20:35 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:date:from:message-id:mime-version
+	:subject:to; s=qcppdkim1; bh=2wqGhKhCvfksusQnfhBnSQB+Eve9RoX70et
+	djYEZIzo=; b=E3JbfoxO3Uv8ltyHcugsZQeWqsYtLuR6Sw7/59+b0dC8Qslxkwa
+	1UVVhIkp7lL9K74TqBVAUFe2TyJezH9P1wkb8CrWtmvBeW73dTfVHEX3dZDwcwJ3
+	eq+13cn6avh0RxUGLoIpIIAF6Ykt4mCBHtrNxXBuIk9847Iv/7i7kG20J927rLdS
+	/tgAa/V4oYiiFPMf/vc3PGBfv5C/rH+/VnLp8TdXaA+Xj5CMyyAwtTWW/wz3Woxw
+	OHgSNUfG+Qt63vSFQhTgj40SZxRN+npDZCJywq+mxcWzNkYUBtBAc3c9PD5xTekJ
+	xNeq3WLMrBsFYnS+HhIgrqggGX4LKwdO55Q==
+Received: from mail-pj1-f70.google.com (mail-pj1-f70.google.com [209.85.216.70])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gpnet1ex2-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Tue, 15 Sep 2026 01:20:35 +0000 (GMT)
+Received: by mail-pj1-f70.google.com with SMTP id 98e67ed59e1d1-385d2703b64so400732a91.1
+        for <linux-arm-msm@vger.kernel.org>; Mon, 14 Sep 2026 18:20:35 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1789435235; x=1790040035; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=2wqGhKhCvfksusQnfhBnSQB+Eve9RoX70etdjYEZIzo=;
+        b=Wp62EmjArbGlgWuw5mNcikkNALRpYyN3Sw5XJRaP59XEAX4GbAopzdrETy5sljsUui
+         eYboJxGDNAUcR3qeAhmqsrAWQtdYW9v0I8WxvNRYsmY0q9EKjoCdad+oaET+ZeZwu9og
+         yk3tkJkMnNqJ/TBCxLeBHg4zo+dH2YH+B92YQNn0Fv/KC44fSRnOW4VG/Icnq3k+jTSB
+         /EqUiuW5h/ZXuoRCCPbZeBTFp9v0unjDWrMI5jUmON/DaFyiAl1pM0do3XojYddRg+yE
+         3UuSr3gEYi7rOms2TY3R7kPLlepDZo0+iu1syBUx7Chz2ibicbMgwosiZTAySHlxCSvX
+         1VrA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1789435235; x=1790040035;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=2wqGhKhCvfksusQnfhBnSQB+Eve9RoX70etdjYEZIzo=;
+        b=UqNEwdAZ6cmKiarCaKwk5veToTqlpkEEflrlUD+0634ZwZj9aR5MRnldb07jk1T8Yt
+         x10aDvno6Z6JKR7QGjZxDxO4HEMvu89iwNabFKWqGxhQYF6KX86NAXb5mvsViiWbPqa2
+         WPHG0MPPg/4I5ZNZ+FGFagXyj7B+b4iUmd5TN/mBo2t8XmioZ4xBZ3XDSKC5hqkIvi6y
+         Iuj1cElgKIiYKSG2d/OLZXIrz2P7tEVt1y569gYTo1OYvn6jlt/EWXxQNvu549KJhqrP
+         UksuukztH6eX0rnA4WRmSRCkfAyjQv96CMZuyIOsI4fIOKI+a0+NJ/BREQYWOSvLxoXJ
+         6edg==
+X-Forwarded-Encrypted: i=1; AKwUvBzPQJAcBVnW/IXueE072Pj51jHHISJN0zsm4qMnyIC3/jV2omW+/6eFxCHNiiWPqVD1XAH2HlOqgDjz7UrT@vger.kernel.org
+X-Gm-Message-State: AFuF++lGpAewNy59pqQLy1VzNdcR2gWBzSEKT2A61SB60GD7afM//GfG
+	w3pVSQxkknRDSTLro/GjQvRnlOx0kzzbTvFrXkKRBdC1rRjuXJ32WtCt8HNsVoiSFSoxf5Axv8k
+	rImLZbbX45RIXY9jeviGHbFXjSKV+yeTZSl/1fOHhkoJOgI74NS2WGe2yvvyhqSpwcCiN
+X-Gm-Gg: AYBFou0YbasbH7ioGRvdk9mUfGjpOxeMPzTOcwgbMeI6i5xpc/DI86TLFk7qx4vsSTR
+	4jBBtc/bYMb3VNwgUlDM3JtR1X3hdDj1AwVmzmr7lvas+oL4vHcZl484J7Z6cj1ZV4k6cvtijZ2
+	Ec5iJwpAxoSZw0lwC1IDAgP3FtZ7D4xyL+3UWsDLZKY2+IPQK+TUm+byPVdUVRMPwJKa3oqaXFV
+	vAFY8UcHfd1paW+s2HUGdEymhoYcWnXHCA5tFvWP1NtrQ0Wuo0PcdF1XFnLWLAHBcpuSnn1dZNd
+	LI7U3TZMXeIyXHqbIUhIAAuPrRCxWhIV5Ym9bv9L/4XV3wPhono9Zh5KSfbdH1RghwJlw9eyOUF
+	4G2wFH2x9gd3ITgcvS9nMV/GAxrCLyHizpRo=
+X-Received: by 2002:a17:90b:4a92:b0:398:9beb:a2b9 with SMTP id 98e67ed59e1d1-39dfe1ca2dbmr2501323a91.27.1789435234664;
+        Mon, 14 Sep 2026 18:20:34 -0700 (PDT)
+X-Received: by 2002:a17:90b:4a92:b0:398:9beb:a2b9 with SMTP id 98e67ed59e1d1-39dfe1ca2dbmr2501272a91.27.1789435234220;
+        Mon, 14 Sep 2026 18:20:34 -0700 (PDT)
+Received: from hu-hongchen-sha.qualcomm.com ([114.94.8.21])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-33ba4e4fb3esm29216573eec.7.2026.09.14.18.20.30
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 14 Sep 2026 18:20:33 -0700 (PDT)
+From: Hongcheng Zhang <hongcheng.zhang@oss.qualcomm.com>
+To: andersson@kernel.org, konradybcio@kernel.org, abelvesa@kernel.org,
+        robh@kernel.org, krzk+dt@kernel.org, conor+dt@kernel.org,
+        linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+Cc: hongcheng.zhang@oss.qualcomm.com, hangtian.zhu@oss.qualcomm.com,
+        miaoqing.pan@oss.qualcomm.com
+Subject: [PATCH v1] arm64: dts: qcom: qcs6490-rb3gen2-industrial-mezzanine: Add PCIe wake GPIO
+Date: Tue, 15 Sep 2026 06:50:20 +0530
+Message-Id: <20260915012020.2667577-1-hongcheng.zhang@oss.qualcomm.com>
+X-Mailer: git-send-email 2.34.1
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-In-Reply-To: <20260914-ps883x-disable-usb4-v2-3-523c32b4e4d7@oldschoolsolutions.biz>
-X-Chocolate: 70 percent or better cocoa solids preferably
-X-Operating-System: Linux/6.12.107+deb13-amd64 (x86_64)
-X-Uptime: 00:55:31 up 2 days, 12:40,  3 users,  load average: 0.00, 0.00, 0.00
-User-Agent: Mutt/2.2.13 (2024-03-09)
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTE1MDAxNiBTYWx0ZWRfXyxaYuiIfjl91
+ +CYf6LdXTX0nUvbPH8HFU2834bXk52x/07teJrlqEaMF0gzAEFUcgt+T6yFD2cC5fwF4BSQwqKA
+ NmE32Ceta8wnpa8ru9w0gORQFg/azqQ=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTE1MDAxNiBTYWx0ZWRfXxvtjBtCPwMZ9
+ VN9pnTmVWr73V4ZsW6ZSBAht36S8Z6pWpyccUHiAcc2UcQhljQZ2WhMhILusZR9OzZo22StHD8a
+ JOatDP+CqYRM4cuOjFjGjizXfzN3hoj2JA57tE011ir1MsxLcyK0gDMiHmy35vhkeHyQ7zGPeJP
+ px15oegkrAkbWB4dm5Bvy3vvpN3b9wS/z4f9nimxPk5G7WSaQTmr0e7gx4EfHe+rDpNCKwrQAMT
+ VCIRTIqG/tzgWMjvvVDdVnJkHJOuxfVjdJ1zEdXxMK1CWlZoAV4dvTXBJzFlgV2yfdXam2uUxHn
+ REbaWLbSXnvsTFREeiBRzhlLDJLsrfZ2izMjv1wMG0RSacOGS7vO60GYQ3mYr/n2al/OPDmTv2Z
+ zTycfLLlQrMmCX2rIfr2Z+RIN4UTt0uQPgFig76XrPyr4SPW//DrBJZdYihdoFIuAcF5JIW8KGA
+ Takh3XLauM6hVFT+hRg==
+X-Authority-Analysis: v=2.4 cv=PKKaavqC c=1 sm=1 tr=0 ts=6aa89d63 cx=c_pps
+ a=0uOsjrqzRL749jD1oC5vDA==:117 a=Uz3yg00KUFJ2y2WijEJ4bw==:17
+ a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22 a=EUspDBNiAAAA:8
+ a=6FOz5cXy--B9gFNoW_kA:9 a=mQ_c8vxmzFEMiUWkPHU9:22
+X-Proofpoint-GUID: k2sNZvLRYaPexDgJxZ1pIzTv2SKklCy2
+X-Proofpoint-ORIG-GUID: k2sNZvLRYaPexDgJxZ1pIzTv2SKklCy2
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-09-14_05,2026-09-14_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ priorityscore=1501 suspectscore=0 malwarescore=0 bulkscore=0 spamscore=0
+ clxscore=1011 lowpriorityscore=0 impostorscore=0 phishscore=0 adultscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609150016
 
-* Jens Glathe via B4 Relay (devnull+jens.glathe.oldschoolsolutions.biz@kernel.org) wrote:
-> From: Jens Glathe <jens.glathe@oldschoolsolutions.biz>
-> 
-> On Qualcomm X1E80100 / X1P42100 platforms using the Parade PS883x
-> retimer, hotplugging USB4-capable docks such as the Lenovo 40B0 can
-> result in working USB but no DisplayPort output.
-> 
-> When the dock negotiates USB4, the retimer receives TYPEC_MODE_USB4
-> and forwards it via typec_mux_set(). The qmp-combo PHY then selects
-> USB3-only because no classic DP altmode SVID is present in the state,
-> leaving the DP transmitter and AUX channel disabled.
-> 
-> Reject USB4 with -EOPNOTSUPP on platforms whose USB4 / DP-tunneling
-> stack is not ready yet. The Type-C stack then falls back to USB3 + DP
-> Alt Mode. DP altmode configuration continues to use the existing
-> ps883x_set() path.
-> 
-> Use a machine-compatible table rather than a DT property so the quirk
-> stays inside the kernel and can be removed later without creating ABI.
-> 
-> Link: https://patch.msgid.link/20260312101431.2375709-1-krishna.kurapati@oss.qualcomm.com
-> Assisted-by: Grok(xAI):4.6
-> Signed-off-by: Jens Glathe <jens.glathe@oldschoolsolutions.biz>
+The QCS6490-based RB3 Gen 2 Industrial Kit cannot wake from suspend via
+PCIe Wake-on-WLAN.
 
-Seems to work here (pair of Asus zenbook a14's doing usb networking), so:
+Add the wake-gpios property to the PCIe port so the WLAN wake signal is
+propagated as a system wakeup source.
 
-Tested-by: Dr. David Alan Gilbert <dave@treblig.org>
+Signed-off-by: Hongcheng Zhang <hongcheng.zhang@oss.qualcomm.com>
+---
+ .../boot/dts/qcom/qcs6490-rb3gen2-industrial-mezzanine.dtso     | 2 ++
+ 1 file changed, 2 insertions(+)
 
-> ---
->  drivers/usb/typec/mux/ps883x.c | 37 +++++++++++++++++++++++++++++++++++++
->  1 file changed, 37 insertions(+)
-> 
-> diff --git a/drivers/usb/typec/mux/ps883x.c b/drivers/usb/typec/mux/ps883x.c
-> index e93e958065f6f..02d6c04d45ae3 100644
-> --- a/drivers/usb/typec/mux/ps883x.c
-> +++ b/drivers/usb/typec/mux/ps883x.c
-> @@ -13,6 +13,7 @@
->  #include <linux/kernel.h>
->  #include <linux/module.h>
->  #include <linux/mutex.h>
-> +#include <linux/of.h>
->  #include <linux/regmap.h>
->  #include <linux/regulator/consumer.h>
->  #include <linux/usb/pd.h>
-> @@ -42,6 +43,22 @@
->  #define CONN_STATUS_2_TBT_UNIDIR_LSRX_ACT_LT	BIT(4)
->  #define CONN_STATUS_2_USB4_CONNECTED		BIT(7)
->  
-> +/*
-> + * Platforms where the USB4 / DP-tunneling stack is not ready yet. Rejecting
-> + * USB4 here lets the Type-C stack fall back to USB3 + DP Alt Mode instead of
-> + * negotiating USB4 and then failing to drive DisplayPort.
-> + *
-> + * This is a temporary, kernel-contained quirk (not DT ABI). Drop the entries
-> + * once the corresponding USB4 support is complete.
-> + */
-> +static const char * const ps883x_disable_usb4_compats[] = {
-> +	"qcom,x1e80100",
-> +	"qcom,x1p42100",
-> +	"qcom,hamoa",
-> +	"qcom,purwa",
-> +	NULL,
-> +};
-> +
->  struct ps883x_retimer {
->  	struct i2c_client *client;
->  	struct gpio_desc *reset_gpio;
-> @@ -63,8 +80,21 @@ struct ps883x_retimer {
->  
->  	enum typec_orientation orientation;
->  	bool in_reset;
-> +	bool disable_usb4;
->  };
->  
-> +static bool ps883x_should_disable_usb4(void)
-> +{
-> +	const char * const *compat;
-> +
-> +	for (compat = ps883x_disable_usb4_compats; *compat; compat++) {
-> +		if (of_machine_is_compatible(*compat))
-> +			return true;
-> +	}
-> +
-> +	return false;
-> +}
-> +
->  static int ps883x_enable_vregs(struct ps883x_retimer *retimer)
->  {
->  	struct device *dev = &retimer->client->dev;
-> @@ -262,6 +292,9 @@ static int ps883x_set(struct ps883x_retimer *retimer, struct typec_retimer_state
->  			cfg0 |= CONN_STATUS_0_USB_3_1_CONNECTED;
->  			break;
->  		case TYPEC_MODE_USB4:
-> +			if (retimer->disable_usb4)
-> +				return -EOPNOTSUPP;
-> +
->  			eudo_data = state->data;
->  
->  			cfg2 |= CONN_STATUS_2_USB4_CONNECTED;
-> @@ -391,6 +424,10 @@ static int ps883x_retimer_probe(struct i2c_client *client)
->  
->  	retimer->client = client;
->  
-> +	retimer->disable_usb4 = ps883x_should_disable_usb4();
-> +	if (retimer->disable_usb4)
-> +		dev_info(dev, "USB4 disabled until platform USB4 support is complete\n");
-> +
->  	mutex_init(&retimer->lock);
->  
->  	retimer->regmap = devm_regmap_init_i2c(client, &ps883x_retimer_regmap);
-> 
-> -- 
-> 2.53.0
-> 
-> 
+diff --git a/arch/arm64/boot/dts/qcom/qcs6490-rb3gen2-industrial-mezzanine.dtso b/arch/arm64/boot/dts/qcom/qcs6490-rb3gen2-industrial-mezzanine.dtso
+index 46bb52c667a4..b2bd60dad1cf 100644
+--- a/arch/arm64/boot/dts/qcom/qcs6490-rb3gen2-industrial-mezzanine.dtso
++++ b/arch/arm64/boot/dts/qcom/qcs6490-rb3gen2-industrial-mezzanine.dtso
+@@ -78,6 +78,8 @@ &pcie0_port {
+ 	#address-cells = <3>;
+ 	#size-cells = <2>;
+ 
++	wake-gpios = <&tlmm 89 GPIO_ACTIVE_LOW>;
++
+ 	pcie@0,0 {
+ 		compatible = "pci1179,0623";
+ 		reg = <0x10000 0x0 0x0 0x0 0x0>;
+
+base-commit: ac38b483e5aacffecdf0c91f7d767ce6284cf57d
+prerequisite-patch-id: afb3d6a9952fa85d5ea4e9a6e19fdb54b03bb9fa
 -- 
- -----Open up your eyes, open up your mind, open up your code -------   
-/ Dr. David Alan Gilbert    |       Running GNU/Linux       | Happy  \ 
-\        dave @ treblig.org |                               | In Hex /
- \ _________________________|_____ http://www.treblig.org   |_______/
+2.34.1
+
