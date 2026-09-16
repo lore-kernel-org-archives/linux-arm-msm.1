@@ -1,33 +1,86 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1836D345EA9;
-	Wed, 16 Sep 2026 14:43:22 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7AE7C3630AC
+	for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 14:48:11 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789569804; cv=none; b=Jj9PcFVxvNdJ0uJKtitxhW0AxQacsWchp1H6g8bDc3Zb2WhuMHel7NtFnvVPKcwIRUUwmIRc/fjh7PZEuOgIkxHfabBXN396MRafDjIz8eQ+iAEHZbewo31ui+OY4j5fWFObvY2t3+MzEcKydxr9L93Fh6MRPoFMcD37v8FyvcQ=
+	t=1789570093; cv=none; b=DY0fPunxUnvlzlO9rkYOSh1VZEio4IXG0FYLNTJ9EvcxycVq+zk2Y2yxwXKM0LfWCbPnNUI5ACyX4NpseT5diuQEcubixj0i436eMYh9Y+Sy9ZjAmmLa9ZiXZg9uQHkzfNZfcfheyD3hNbOUUVauAjqOhwrLj7+I8y9BEpFXrp8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789569804; c=relaxed/simple;
-	bh=2blyJVrLPGRj0l0yu7fJBugdjsKzvJN/b9+RvvBJZUk=;
+	s=arc-20240116; t=1789570093; c=relaxed/simple;
+	bh=ADERtoxYIOzXLRbqlsE2bdSO/yjhpvw3j8HbRBX/NXo=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=R3LDOicFez07q/0Cegs3ZEUp0G0y/gz4hSKDcwqOh/OYdA0+HW1vweUNjw6UbhwOJ+xxsUq71BQZiTpR090pn74Tsi4zLdJWD/d0zJFGyWcruBpUMRJ6fHu1kTmHtxyISw/3TPlj5LWxhqgZSUHFMR2ngMDAdEd72KKyFVtyQSU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=US4HjDlo; arc=none smtp.client-ip=100.103.45.18
+	 In-Reply-To:Content-Type; b=qeShysPRQTpUn8R28Tjrecf4ocWNApexxRPmNe3GJhKNBGFLl2huC/VmcpM8fgn3eXvyDxW7/HZCPVoZf6XIbfU3x3V02sUmTd31AwhPNbCqZv3dHT5BUP0eCWtNivvAqefQrDo231rFP1ZeShevFayI71YRv8a2u25NbtEj8PI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=CErg3NHQ; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=EBToJqWx; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="US4HjDlo"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 879721F000FF;
-	Wed, 16 Sep 2026 14:43:20 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1789569802;
-	bh=xSDVG1lglUQwFFqlygYf5GfKu89gxUCIwl8QHxqxrNQ=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=US4HjDloLd3rTwRGv61tzk1+s2ehxUJaAKRwaEQW5YxLXGW7eDKunWQaQOXFSm76b
-	 tWV+Ste9NP/hiHh42Gr3UzI1zxBFLXStdNvV7vw1eOxb6tFBMrud8unwiYuUXrvVLx
-	 MHtQ9o1Gyql2G1UBrGgLoErR/sCe6j+DZBf+RYnWRE0M5k/AMxpJBWRhcbwotgQofB
-	 FNJ4N9pQ4qYImsGMsVxwfwrK8YXskAmdRtoUHEv2yX3ThKE/Is3mRJH5FRrETPd72j
-	 bfE/3/ker2vNMZ56/vj2k1CqLwQVDe/Dhh2VPruwWve/28XMRHkr/dTNwW1tjAldj3
-	 l6ePbVM1BezCA==
-Message-ID: <b9693892-d0d3-49aa-8fb8-21da12f6eadc@kernel.org>
-Date: Wed, 16 Sep 2026 15:43:18 +0100
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="CErg3NHQ";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="EBToJqWx"
+Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68GEYgi72448977
+	for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 14:48:07 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	F3Zk5y/DSVzAwqyVWlk3wiBDRckqt0orU3V64+Tdiko=; b=CErg3NHQ5/A/gFRM
+	XuajNl4sOMsDLEvcvDIi7rL9Qd1vv0elLFlcPo0LmQ8RkEMZ79zQWnrZLF/Ccg4L
+	53GC9x5kt0KOmWuCAcha8+5wIwDPBdu1CCXUORNoaK3su25gPyxmvL8f2WFkCuFd
+	/FiBIE06xo8AyCZejnTFclez9AkxSbAekThQ5KqAlwtyWKdNkzWUg4OCstKwZJYV
+	hKuQVkDj86IKHP7UGNMPTDClimSEJ3+kloI9QTrIjxJX+Dvv9ZrNaYomMPSw9IjB
+	2xV2+YmrLF+HODBeZu5cluxFJzbvpLZhD65WNigavO+tS0qvNvJvO0Akm18wtRsl
+	WISxXw==
+Received: from mail-oo1-f72.google.com (mail-oo1-f72.google.com [209.85.161.72])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gquwb0c43-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 14:48:07 +0000 (GMT)
+Received: by mail-oo1-f72.google.com with SMTP id 006d021491bc7-6c1b7981b4eso4488998eaf.3
+        for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 07:48:07 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1789570081; x=1790174881; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=F3Zk5y/DSVzAwqyVWlk3wiBDRckqt0orU3V64+Tdiko=;
+        b=EBToJqWxuXBTXKW4MM4Fdh9ltiHXlq14NOBroRIrkjDsjsZf1bDM3iq+rs0gMuqA0F
+         JCa1oMxmDUuuvtQYHSrpxeRIVo2DT4+zMbzji/WF+AajskmUZd+5Quhfji5Q5pis0iv2
+         dRJ33HqR3pHTg0YovFOlEyj4BMqtB/anspaUmPbcZCo9+mlh6MtkO3tJNFToJGrBjpaQ
+         Z1GEPRXmt1OxZY1CtNNTW+D88ZYzeOPQuSsYQk9L5nmh/5tDefAgxvVw2zUtl17yEF7m
+         MbU+tGW6tFK7mXTkHqCojyh0ekqEIxTTajGvAIfRCHe6txS7xZ9LYPblI/YaKw8SHTkp
+         NfAg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1789570081; x=1790174881;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=F3Zk5y/DSVzAwqyVWlk3wiBDRckqt0orU3V64+Tdiko=;
+        b=Ln/TOX3ttBwtLZuSh13aDk80dYjrTuuwSGBVefhMVMIsqxuRsrSXRpAQVFBfo/LoXB
+         Nyw0M393WLL8gLHADsUMC/76qBIlaMHKpK/vvsD0nt58qC6P6DABZ9uq6hlMsm3rXkqt
+         yCnqsgWg/ZBV+whXq0Xnrrh2bP7AShVuSgcdshX9wBXQIMbIrLIGKEsj4/edsWMac5hD
+         2bpSoKVVBGeL6IoOBWkIE/fkfiHOh38nr5W/X5SbRGQHj7v6Kie1++WHxW7POIl2ve7Y
+         LAoM9ilS22g5ykre4vcvnJvRJLdCp1OAvQfMNit2ZEvAV3vY0fhr+ksJALbgxehHh5X7
+         mHZw==
+X-Gm-Message-State: AFuF++nVSTOdzXrKeLLEv6diYZXUwr/mXV9yEqjvP0ES6T9mTBovSb/+
+	1XFdFDK9xXxXnvD7D4phX8/tBLDHucW2wgoMlV5yqtguqISE7EV/BkDpOWYl56ofAdRHKr9q8Zc
+	fVOCAQpn702EWbvyCiNr7BtnKu89grQcZhrgcgWeyt7tOM7HiXU9ERNKmCa7l6N0OpCy0
+X-Gm-Gg: AYBFou0c6Y0UWbXw6E+pjTW+0WfopMn3PHYh+5GpyKUQWKOBvNsfdMu9BEYEzUN7thf
+	qo/prDuejqsJ/l8jxE3kajEkc9H2EfpxEXuAFjS8eeaHLpqqZcEIuoH3N2JnY9WLHOuUKDStu6f
+	zY2OT/4eJF5eGL3yC303/zfdfB5WQvgaswKG/v4198lcEDj4ji6YJDYG6J4lPnNMbUpuq3YPPkV
+	lfSGSYTOKR1UyjPyoig6mw+rFef8uqKcoDBDMIGcAUi/gQvIIHTtZ2qJ9ZVzfDPVpckffXXNDKa
+	xWz+U6iWG+BYZtmaYkyPZzLUAtcDotxFtboFjL5A8c4RGepQERq1yAm3cdktBWBXA1aK/1W/gUZ
+	iZATeoXstYWBEP1Jg7yeEu2TuAIAIWiKU8IFozrxs
+X-Received: by 2002:a05:6820:308f:b0:6b1:afca:5c78 with SMTP id 006d021491bc7-6c7d39f91e0mr2890673eaf.32.1789570081240;
+        Wed, 16 Sep 2026 07:48:01 -0700 (PDT)
+X-Received: by 2002:a05:6820:308f:b0:6b1:afca:5c78 with SMTP id 006d021491bc7-6c7d39f91e0mr2890645eaf.32.1789570080802;
+        Wed, 16 Sep 2026 07:48:00 -0700 (PDT)
+Received: from [10.216.41.130] ([202.46.23.19])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-33bf5b030aesm8554016eec.26.2026.09.16.07.47.53
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 16 Sep 2026 07:48:00 -0700 (PDT)
+Message-ID: <109d7c44-f58a-4462-bdf9-7c22759b4569@oss.qualcomm.com>
+Date: Wed, 16 Sep 2026 20:17:51 +0530
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -35,91 +88,155 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v13 3/5] media: qcom: camss: Add support for PHY API
- devices
-To: Oleg Keri <okerixx@gmail.com>,
- Bryan O'Donoghue <bryan.odonoghue@linaro.org>
-Cc: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
- Konrad Dybcio <konradybcio@kernel.org>,
- Loic Poulain <loic.poulain@oss.qualcomm.com>, Robert Foss
- <rfoss@kernel.org>, Todor Tomov <todor.too@gmail.com>,
- Mauro Carvalho Chehab <mchehab@kernel.org>,
- Nihal Kumar Gupta <nihal.gupta@oss.qualcomm.com>,
- linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
- linux-kernel@vger.kernel.org
-References: <20260728-b4-linux-next-25-03-13-dtsi-x1e80100-camss-v13-3-ae811e2f0799@linaro.org>
- <BkBVG4wA3hW3czd3HkiTpcRrXAS9XQUXYIaW-daywIBstO3j8EYH1SjT-KLmM_3FIkcbIETf8t-eyx048tIIzA==@protonmail.internalid>
- <178956537382.2699.6279926603215472320@gmail.com>
-From: Bryan O'Donoghue <bod@kernel.org>
-Content-Language: en-GB
-Autocrypt: addr=bod@kernel.org; keydata=
- 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
-In-Reply-To: <178956537382.2699.6279926603215472320@gmail.com>
+Subject: Re: [PATCH 3/5] arm64: dts: qcom: glymur: Add UFS nodes
+To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+        Vinod Koul <vkoul@kernel.org>,
+        Neil Armstrong <neil.armstrong@linaro.org>,
+        Manivannan Sadhasivam <mani@kernel.org>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley
+ <conor+dt@kernel.org>,
+        Alim Akhtar <alim.akhtar@samsung.com>,
+        Avri Altman <avri.altman@sandisk.com>,
+        Bart Van Assche <bvanassche@acm.org>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+        gopikrishna.garmidi@oss.qualcomm.com, jagadeesh.kona@oss.qualcomm.com
+Cc: linux-arm-msm@vger.kernel.org, linux-phy@lists.infradead.org,
+        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-scsi@vger.kernel.org, nitin.rawat@oss.qualcomm.com,
+        sibi.sankar@oss.qualcomm.com, Taniya Das <taniya.das@oss.qualcomm.com>
+References: <20260911-glymur_ufs_qcb_enablement-v1-0-b9fc5e2ee99a@oss.qualcomm.com>
+ <20260911-glymur_ufs_qcb_enablement-v1-3-b9fc5e2ee99a@oss.qualcomm.com>
+ <381607db-0e7e-4d27-a992-64cd722c23fc@oss.qualcomm.com>
+Content-Language: en-US
+From: Pradeep Pragallapati <pradeep.pragallapati@oss.qualcomm.com>
+In-Reply-To: <381607db-0e7e-4d27-a992-64cd722c23fc@oss.qualcomm.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
+X-Authority-Analysis: v=2.4 cv=H4JOUOYi c=1 sm=1 tr=0 ts=6aaaac27 cx=c_pps
+ a=wURt19dY5n+H4uQbQt9s7g==:117 a=j4ogTh8yFefVWWEFDRgCtg==:17
+ a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
+ a=EUspDBNiAAAA:8 a=GD_5qw-SCA1CiScccr0A:9 a=QEXdDO2ut3YA:10
+ a=-UhsvdU3ccFDOXFxFb4l:22
+X-Proofpoint-GUID: qULI-Jv5fozpPU5DrC7_Tw-qNEYgh3Ni
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTE2MDE5OSBTYWx0ZWRfX+VU7I7/J9Tbi
+ 8PQMLyBo7/gnjtjrgZBOPUEC/VKK96LihFt7dlHXbIY0p9xGugc7gWDK1sQusktUuhSvsCJM07O
+ ivU4OpZ9eb7OlEmYO6vBv+l+9IkHDL/s8WsdH/gZuY6/C0UElan4c+cLtl0P9z0KzOUKZeKgD2W
+ ERvi96Dsstl4KLcHB1l/Af+Dg+VteI5nnKpHkGbe+0PjknU1EvXp3lKM7GlayOorSoZOnbQkWuo
+ APCtnSn1ChmOjlAAohmLBIMbGW5okwwoUxJLjndR7s7nWTtF3RF6hjKO7zGAjGxMJudOJij+Px9
+ k84MTacDqptGWCpCu3iXuWT02V6FBOSuQ9dFr4sRf7Y+V/yIYRsMqxu29zSnJEIJP/lS0dWBVWl
+ LSm81+u9dKy5/STxuUYn2EioByXd+qFsEekpV504wzvuQRyjcmH5b8LVT25d5tE6kSMeS4hlAa6
+ DnQBppDwG2MiEalaDuw==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTE2MDE5OSBTYWx0ZWRfX0MCN21QiS5FW
+ mCtOPyTSPB2C2wHpv2uCs6Rs3z6W9gryz0TZvyGrbvWrMhKBAWtgRqLsEHHml/kpzjf+My37Sis
+ sddV5lUDtrgajPCdh3ePZ86Fxm0XHeo=
+X-Proofpoint-ORIG-GUID: qULI-Jv5fozpPU5DrC7_Tw-qNEYgh3Ni
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-09-16_02,2026-09-16_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ clxscore=1015 malwarescore=0 spamscore=0 priorityscore=1501 impostorscore=0
+ phishscore=0 adultscore=0 lowpriorityscore=0 suspectscore=0 bulkscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609160199
 
-On 16/09/2026 14:29, Oleg Keri wrote:
-> Hi Bryan,
-> 
-> On Tue, Jul 28, 2026 at 10:35:34AM +0100, Bryan O'Donoghue wrote:
->> Add support for PHY API devices
-> One thing I ran into while bringing this up on a Lenovo Yoga Slim 7x
-> Gen 11 (Glymur, ov08x40 on CSIPHY4, two lanes), with Nihal's Glymur
-> CAMSS series on top: the two ends of the CAMSS <-> PHY link count lanes
-> differently, and the CAMSS side silently ends up on the wrong lanes.
-> 
-> The csi2-phy binding numbers data-lanes from 1, and the PHY driver
-> converts:
-> 
-> 	/* Convert data-lanes = <1 2 3 4> to bit positions */
-> 	csi2phy->stream_cfg.lane_cfg.data[i].pos = data_lanes[i] - 1;
-> 
-> The CAMSS endpoint still takes its data-lanes as 0-based positions;
 
-Resolved here:
 
-https://lore.kernel.org/r/20260906-b4-linux-next-25-03-13-dtsi-x1e80100-camss-v17-5-e2197a3e2551@linaro.org
+On 9/14/2026 2:44 PM, Konrad Dybcio wrote:
+> On 9/11/26 6:47 PM, Pradeep P V K wrote:
+>> Add UFS PHY and UFS host controller nodes for Glymur SoC.
+>>
+>> Signed-off-by: Pradeep P V K <pradeep.pragallapati@oss.qualcomm.com>
+>> ---
+>>   arch/arm64/boot/dts/qcom/glymur.dtsi | 114 ++++++++++++++++++++++++++++++++++-
+>>   1 file changed, 111 insertions(+), 3 deletions(-)
+>>
+>> diff --git a/arch/arm64/boot/dts/qcom/glymur.dtsi b/arch/arm64/boot/dts/qcom/glymur.dtsi
+>> index 624a9edd602c..7bbc804ed340 100644
+>> --- a/arch/arm64/boot/dts/qcom/glymur.dtsi
+>> +++ b/arch/arm64/boot/dts/qcom/glymur.dtsi
+>> @@ -812,9 +812,9 @@ gcc: clock-controller@100000 {
+>>   				 <0>,				/* QUSB4 1 PHY RX 1 */
+>>   				 <0>,				/* QUSB4 2 PHY RX 0 */
+>>   				 <0>,				/* QUSB4 2 PHY RX 1 */
+>> -				 <0>,				/* UFS PHY RX Symbol 0 */
+>> -				 <0>,				/* UFS PHY RX Symbol 1 */
+>> -				 <0>,				/* UFS PHY TX Symbol 0 */
+>> +				 <&ufs_mem_phy 0>,		/* UFS PHY RX Symbol 0 */
+>> +				 <&ufs_mem_phy 1>,		/* UFS PHY RX Symbol 1 */
+>> +				 <&ufs_mem_phy 2>,		/* UFS PHY TX Symbol 0 */
+> 
+> The comment is no useful, please drop it
+sure, i will remove it in my next patchset.>
+> 
+>>   				 <&usb_0_qmpphy QMP_USB43DP_USB3_PIPE_CLK>,
+>>   				 <&usb_1_qmpphy QMP_USB43DP_USB3_PIPE_CLK>,
+>>   				 <&usb_2_qmpphy QMP_USB43DP_USB3_PIPE_CLK>,
+>> @@ -4103,6 +4103,114 @@ rng: rng@10c3000 {
+>>   			reg = <0x0 0x010c3000 0x0 0x1000>;
+>>   		};
+>>   
+>> +		ufs_mem_phy: phy@1d80000 {
+>> +			compatible = "qcom,glymur-qmp-ufs-phy";
+>> +			reg = <0x0 0x01d80000 0x0 0x2000>;
+>> +
+>> +			clocks = <&rpmhcc RPMH_CXO_CLK>,
+>> +				 <&gcc GCC_UFS_PHY_PHY_AUX_CLK>,
+>> +				 /* UFS and PCIE4 shares the same clkref on glymur */
+> 
+> s/shares/share
+ok, i will change this in my next patchset.>
+>> +				 <&tcsr TCSR_PCIE_4_CLKREF_EN>;
+>> +
+>> +			clock-names = "ref",
+>> +				      "ref_aux",
+>> +				      "qref";
+>> +
+>> +			resets = <&ufs_mem_hc 0>;
+>> +			reset-names = "ufsphy";
+>> +
+>> +			#clock-cells = <1>;
+>> +			#phy-cells = <0>;
+>> +
+>> +			status = "disabled";
+>> +		};
+>> +
+>> +		ufs_mem_hc: ufshc@1d84000 {
+>> +			compatible = "qcom,glymur-ufshc",
+>> +				     "qcom,ufshc",
+>> +				     "jedec,ufs-2.0";
+>> +			reg = <0x0 0x01d84000 0x0 0x3000>,
+>> +			      <0x0 0x01da0000 0x0 0x15000>;
+>> +
+>> +			reg-names = "std",
+> 
+> Stray \n above
+>
+sure, will remove it in my next patchset version.
+> [...]
+> 
+>> +			ufs_opp_table: opp-table {
+>> +				compatible = "operating-points-v2";
+>> +
+>> +				opp-100000000 {
+>> +					opp-hz = /bits/ 64 <100000000>,
+>> +						 /bits/ 64 <0>,
+>> +						 /bits/ 64 <0>,
+>> +						 /bits/ 64 <100000000>,
+>> +						 /bits/ 64 <0>,
+>> +						 /bits/ 64 <0>,
+>> +						 /bits/ 64 <0>,
+>> +						 /bits/ 64 <0>;
+>> +					required-opps = <&rpmhpd_opp_low_svs>;
+>> +				};
+>> +
+>> +				opp-403000000 {
+> 
+> There's another (201.5 MHz) OPP at SVS
+>
+acknowledged, i will add it in my next patchset.
+> Konrad
 
----
-bod
