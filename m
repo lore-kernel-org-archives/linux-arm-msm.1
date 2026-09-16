@@ -1,165 +1,246 @@
-Received: from mail-pj2-f12.google.com (mail-pj2-f12.google.com [74.125.227.140])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 155C851A736
-	for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 16:46:13 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.227.140
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789577178; cv=none; b=JZpb1TjFzpoqp4rInk6ZcBTP45AWKsUhnvAklbVQtDf9U0wOvsWxQ4IBayoxWax+0GNhMjEjzDL0rI/GHmFXqF8yxq4KWjarcFXi507RiHBMAyN2z2+q4UnR4NHGCSZ0IqO/260Lb5XrZnQkaM/RgpJPJGw62KkNjiV7bTLHsKo=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789577178; c=relaxed/simple;
-	bh=1fs5/9PJdlbuBhTs0ZxkDNW+v2WItpOPk3QzGFWOdbk=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=EdcIfl10j9EiWtfiBmqgTXgQOoOffHGzqOFQxGGpyvHB6RlX02fsiQGSiYsGZ8V7yx06hvP7chQoA4RUHq3SsfE6yJ6c5q/GbQEKQAEbA6KoCVznHD9t+onozaDf9pnAaU+KliWiAiy5DwL4z0r1ps2rPqYZJfAr3fUW6/2RpKk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=QMSLSCTc; arc=none smtp.client-ip=74.125.227.140
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4E0CF4B8272
+	for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 16:48:23 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=205.220.180.131
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1789577314; cv=pass; b=L5u3kSNSI3qqDxMk2ouzGx9qsJPudM3B1L/SjSXJjO+KjnaQRa/kNde9zMbIwUZYytla3QxTRMhPY1ftPck0lNfHztx9Y/6ChphpyLDSB9Yi9bpAHrmuBK0nT3Nn/Y1Lox0JoEmoyy+tZNatXrPZQAaYv0QVEIlgYW35TLUpXaM=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1789577314; c=relaxed/simple;
+	bh=mC/f2N1M0iceYJ9fexSsAREqK6EwqUktA4bBW+fc/iA=;
+	h=MIME-Version:From:Date:Message-ID:Subject:To:Cc:Content-Type; b=GsF40+77MfO2zhYd8+UOoRfxM2Pn7w7xBHH07Ek2I2ojRNZintDAOtkSJ0HgRbmd6tKVaVzdz41SGTaiucpVjaJqoVsYlNcWM7i5xZoc/rDxJMDZAwFgFr/fY/JF/0EyvyZ6FqrKhZhVigVFK17Xbilw+RaM6Hd6C95QUtoEeoQ=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=Nhw4UNJk; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=MtCA2kFG; arc=pass smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="QMSLSCTc"
-Received: by mail-pj2-f12.google.com with SMTP id 98e67ed59e1d1-398b3b189e0so918438a91.2
-        for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 09:46:12 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="Nhw4UNJk";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="MtCA2kFG"
+Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68GFeEl93365361
+	for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 16:48:20 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-type:date:from:message-id:mime-version:reply-to
+	:subject:to; s=qcppdkim1; bh=ndtfDnMzOItYaqfMXX9EhB8LCDaP/lEclZx
+	u5jQm/Do=; b=Nhw4UNJk9MfuvR/7n3Hn2bV+QbhaBXbbBSdhh0EubtD0cyv/ax/
+	af+8CrYyALzykkvyHHLJs0LC2kL9gRqPyYFfrp2KxbHXc3wE2j5gSP34MvN5EI3e
+	dJA7YBBD61mC2EuG5h5+C9N4uHr6z0gUO00diznoyCOmYmJhg7/RDl+x1pbielTa
+	wau7zkVlgH9Kq0GTlwSaD/m6yOGL1milfbuxNc/HKKBrJLSq+LJ1Qh8srQ8T+kTy
+	0FiueGfV2C5OxOZeCf1IGfLVFofO1zfK374JtIOwU9MJo74vgVQ5h5SGimJobd13
+	bnPxAJMRjKq+XAjyj+srzz7wteSOWBQ7hTg==
+Received: from mail-oo1-f69.google.com (mail-oo1-f69.google.com [209.85.161.69])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gqjckuhvh-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 16:48:20 +0000 (GMT)
+Received: by mail-oo1-f69.google.com with SMTP id 006d021491bc7-6c748676f6cso2729656eaf.3
+        for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 09:48:20 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1789577300; cv=none;
+        d=google.com; s=arc-20260327;
+        b=QWrauX0Pg3RCm7tZcXDbcW7+iQaiMaqgetzJT7C47+YVidbkH3vs0kkfF7+4zsz5a3
+         SnzJOq5/fAsaSRg/lElHxWveI8qeNXbuUyJ3s0ARB16MbEXRj8y1AaM9667hFkTZI8o4
+         JV/LjS3nNBREmh+OrLQ77jzMgC+ojBUpn6rCbwDbboymeT8BuQROKulhVeAZ+8ZZleDW
+         +WnILsGM5/pe0hwyzvEBE+jhQKdnkNJo6nt1ViRqXqVHA6/2Z8ZuVbRlZWlPBsuW3raI
+         tGpDCogrvWq3O0MTeKTTb+MSdbWmk1TRIL/JTMuXYwjSuzIbn+Cj8qOggVL4wv84E4R6
+         dXjg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=cc:to:subject:message-id:date:from:reply-to:mime-version
+         :dkim-signature;
+        bh=ndtfDnMzOItYaqfMXX9EhB8LCDaP/lEclZxu5jQm/Do=;
+        fh=QyOs7Lv8ZtmE0yNnLn+/bBO37x+dgqUcWkIEJW2J1lw=;
+        b=Tn35C74/HsbGt6cGBYm42Ac2F7E5+SJev48Ecnac0OriSPdDe210k913iWdRz28A82
+         HN8DMLl0L9iPmSFMB1HqA38cj/h5ZSyggSZ5uBvvhgVOrf7YvTS3jbctOXu/pt72Xo8g
+         AJjP9YZon/sjlxI1n1rMYecSzV9OQOhCwNFzC0pDI/a9CNBReqnt9az7LrGePXkRb1b5
+         FIoXpJNT9RFQAa1DdQMk842OmZYmOqbu3YP2e+DkQ728QbxYbxnc6rn6C1x5Sj59MaNH
+         2oowuWiM0d++bvtSbDpKQ5TRfhzkSU2uP1xU07+IbcgP43nRzs7kNaQeWoaGAWznNQ7x
+         I1xA==;
+        darn=vger.kernel.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1789577171; x=1790181971; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:mime-version:references
-         :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=1fs5/9PJdlbuBhTs0ZxkDNW+v2WItpOPk3QzGFWOdbk=;
-        b=QMSLSCTcLtJ+AiMJ6XECO+C16YHQOAZXJqddh+1hwfr5SVCU4HFWiTSJa1dhNOAfge
-         pfYOyTxgh+G7+nYzG29DcTK0mbanmL4Ki5CnnFA1nBDvUO6vmqKWePAB+FZ5FpUy7ybf
-         NvpmQd8hmW1D58fLfNxQ2IO4hTT5eo54DBnXZzh2iajCO69bt2cf5NtANoLSgFqyO5/A
-         9LEmXnDntVcj3+khqajRkChzL+EBb5PV7pHymXnMoVk6pz3eKRz4jysRegqRDLaw73Fi
-         qXC75IwpNB6FudUN9Cqwzv40xMcW2rJfnS4fRbIUZsdSRYywhbx5SH4WUeYfZTSmmPUN
-         0lKA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1789577171; x=1790181971;
-        h=content-transfer-encoding:content-type:mime-version:references
-         :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+        d=oss.qualcomm.com; s=google; t=1789577300; x=1790182100; darn=vger.kernel.org;
+        h=content-type:cc:to:subject:message-id:date:from:reply-to
+         :mime-version:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=1fs5/9PJdlbuBhTs0ZxkDNW+v2WItpOPk3QzGFWOdbk=;
-        b=Mwk0nM0YBEkXyhRteuGCRJQIwuoDV9s1tmp+2cdkyssSUsdUuFGSDn7DcWF/g7CTDM
-         CmANIScWmW964mS7AYH4N+TZt/My54ADS1c119HscieeaQv8mwgNF2KSCDuPYowjW7IJ
-         jO1pP3zujwWuvsdiVYafRoNIntD4IaLJB9zXZiiXnZzLuTI1HygFyKjcls3emp/iRuA6
-         df2G8wX7CmEhNUoq/+fpe7qCWa37R0/ZdND9kpc4zpV+9GUmP2V9fbdzYfNZE3UkMazb
-         4Piw7URTImoC0icwqLlsvlPwwKN+ToikKAxOas8xE6N5MMLtV5sjXk61U9naGWdTlBGU
-         F6jg==
-X-Forwarded-Encrypted: i=1; AKwUvBxvKY7TSd8K3AHqFre4gha5SzFNE9sn0Sf/JSV8ITrtc1DaAx/4qI7HPgOaRibDaybpI92tIFZkZ3jm765B@vger.kernel.org
-X-Gm-Message-State: AFuF++m3p1R7qBcsSfgQeCeYXaiKVYtGicRkknhNQcdwcLR+DZAPMG3K
-	mGcgZ8jq3qRQ7AyQouYKoQJVnYs7US08XhkJZhB2GVSWYv0TFUF3c7n3
-X-Gm-Gg: AYBFou0ysLx35zL9uVIetsySP2K1Qj9o+e7+JztIVe9EpLtAQwJdy8FzXLD0vpVOwnF
-	7DZzsuXa7eR8xmo6zQbqWk66iWQjz3sIJN0amnxBig5vBUvD6upNfMBP98AtYQ5MAT9A8mumfw+
-	A12UQHOcplE7O16BHZRQMAr4QEEBPav9W9N6yp7UHC7Gvz9ZD2Z3POVxcPdBHXbxcEyOsosYGdO
-	iYcWyKoyW3qk9SGH045aQprtzyQ8ZfrBe6GZTjZdpyQppNITZ6zH1eknUVGCLDJysZJBhqJ0nqg
-	/5HUPV5snd3LnruMSapOf4Cx+uLpgTXqAkzjGxzG0zvxaE9Y3YDqmuJ4GI6Hvwppvq/4MypFMwg
-	8pYKZE0VJIjp07ztT1wLgdvo6Ef9EwdEN25X3H9dUs67/A62LHtqcRvLxNbKKr12Uwkayz3UiJm
-	knoHYO/3B4fq5SXMfFz4Tj8sI0uDLaHnsPcIDbdLjf3le97bepVAo6oC+wj4+cGufreA==
-X-Received: by 2002:a17:90b:560d:b0:39b:3109:10ce with SMTP id 98e67ed59e1d1-39e1e45cbaemr7258907a91.16.1789577170531;
-        Wed, 16 Sep 2026 09:46:10 -0700 (PDT)
-Received: from jm-X870 ([2001:e60:20dd:7c28:de1c:fff7:d3a4:d8c7])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-39e3617443asm292100a91.9.2026.09.16.09.46.04
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 16 Sep 2026 09:46:09 -0700 (PDT)
-From: Jaemyung Lee <ldc.jml@gmail.com>
-X-Google-Original-From: Jaemyung Lee <jaemyung.lee@samsung.com>
-To: Bean Huo <beanhuo@iokpp.de>
-Cc: Jaemyung Lee <jaemyung.lee@samsung.com>,
-	Andreas Hindborg <a.hindborg@kernel.org>,
-	Miguel Ojeda <ojeda@kernel.org>,
-	Boqun Feng <boqun@kernel.org>,
-	Gary Guo <gary@garyguo.net>,
-	bjorn3_gh@protonmail.com,
-	Benno Lossin <lossin@kernel.org>,
-	Alice Ryhl <aliceryhl@google.com>,
-	Trevor Gross <tmgross@umich.edu>,
-	Danilo Krummrich <dakr@kernel.org>,
-	Daniel Almeida <daniel.almeida@collabora.com>,
-	Tamir Duberstein <tamird@kernel.org>,
-	Alexandre Courbot <acourbot@nvidia.com>,
-	work@onurozkan.dev,
-	linux-kernel@vger.kernel.org,
-	rust-for-linux@vger.kernel.org,
-	linux-block@vger.kernel.org,
-	linux-scsi@vger.kernel.org,
-	linux-arm-msm@vger.kernel.org
-Subject: Re: [PATCH RFC] drivers/rufs: add Rust UFS host controller driver
-Date: Thu, 17 Sep 2026 01:46:01 +0900
-Message-ID: <20260916164601.2562349-1-jaemyung.lee@samsung.com>
-X-Mailer: git-send-email 2.55.0
-In-Reply-To: <4c38f13af8f75020fefc35827463e9bc643b99f4.camel@iokpp.de>
-References: <20260912-rufs-private-v1-1-716db733e655@samsung.com> <4c38f13af8f75020fefc35827463e9bc643b99f4.camel@iokpp.de>
+        bh=ndtfDnMzOItYaqfMXX9EhB8LCDaP/lEclZxu5jQm/Do=;
+        b=MtCA2kFGzUyJ0NF31FHKp/OYD369qJCBgXUT4B6e37kplnwTjmC/FKiMSc+H8uP3JR
+         iuZ+VDeJ13bdmU+I0cq6mrHWzCIGDcgfdkuH5ZeHoHd0+0yIoo7trirKBVwH8QjqGJjD
+         DAEKptJ7/+TiAPjjfQW48BwwhSLyNiMp/gf3p1TzBSou8aH1nPOVDgpJB2P5vMd6BK7A
+         +XNzQO77bHmwJ1bd2df6l4joo6FJ+216m6mhAqWZzRWKaI7B6KR1+ihpAK/LlxWVj956
+         HPALuN53sYoQt1LO62djOvfLxVLf5iHw8sW4iHXECLSn0VQzvI5k6noVbEhBwu7Ad+yx
+         G+Kw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1789577300; x=1790182100;
+        h=content-type:cc:to:subject:message-id:date:from:reply-to
+         :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=ndtfDnMzOItYaqfMXX9EhB8LCDaP/lEclZxu5jQm/Do=;
+        b=Le/OAkYS9CNTzib0SdRjHFDIqw854WbcWNxaXr5f6K4AvI+S9gyiltE8+vRUHsmb6c
+         nNIdwAOWQHTycZe3+Y0s7cY1btCeo8Fr+dyJ59rc1N1TsHpH7ksynPbUHk0+nYQ7XfgQ
+         kgt7ZqyjaDdGXeAUk8Px1NiYWo4aARDEom3EumSmLkCvGLCFoORrRU7CPOVLuR3JMJTi
+         wSocrqlKbO8yFYzma4qtK8msH1YdJHYLsqZHzX017o0Akc4XF3yvs3lxMMvpHa6T3/Rm
+         k98fqLMZm6+ElmCdO+WV5w4l6uJrCDTlsmPaAI3lv6alop2qa+5elvGKQA8BcDgBaezV
+         Uk8g==
+X-Forwarded-Encrypted: i=1; AKwUvBwkfefiGvKFB4Wlt1NM/i2bpkLyV/oDgSzWOHStkqoL3usDgN7DColvqwm12jwZS7oRAZQg20ex8EOwlwM9@vger.kernel.org
+X-Gm-Message-State: AFuF++mHvb378Fmf+Um+P9exW0UGS2kESHNjiEp2HERLP6lKUsAnSAvm
+	Tr/PuHhRbnXY+Jhe9vzJx0kCFkz3xLfYDrG5PzIuzKXwBT75f6+wGNDMDwF6gdfMQZeeuJ3RwOw
+	44iBlf6cpXA+WsSE1oN2VPiJUMPVuu5xbX7YVTXhELaSP1zGZPJiGMkq5qGemqm+kjdG/rIb1qC
+	Oq/ydDYh3aRB5ioG7TjaYCMe/Oql95BZYMaYVNKmcFT6SaezXUPMxvQQ==
+X-Gm-Gg: AYBFou1fb2sjMucLgxRZZD9Fk8iKEJQ4v3L1MF+6GOT45/4cIsNJbLNCDj9U4MupEze
+	WAqhqXRj7meTCUO4Mz/9kqld5SP/lo2q2khstutytpRbha29jk4ZbXiDELr56glmbY/f/Ruk/sE
+	aBXn/JPBsPe4J5e4FmuerofL9/gFMFJFCG7BkmY9Zj/bpj0SFoHaYDGFvt
+X-Received: by 2002:a05:6820:2918:b0:6bd:7732:adc6 with SMTP id 006d021491bc7-6c7d1ad0f1fmr3608884eaf.17.1789577299457;
+        Wed, 16 Sep 2026 09:48:19 -0700 (PDT)
+X-Received: by 2002:a05:6820:2918:b0:6bd:7732:adc6 with SMTP id
+ 006d021491bc7-6c7d1ad0f1fmr3608859eaf.17.1789577298933; Wed, 16 Sep 2026
+ 09:48:18 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Reply-To: rob.clark@oss.qualcomm.com
+From: Rob Clark <rob.clark@oss.qualcomm.com>
+Date: Wed, 16 Sep 2026 09:48:08 -0700
+X-Gm-Features: AcwNN1Xs2qsK7N5X5y4rnsKq3hyloIUXdh_jq5FWdCG-lVMbMqzchSg9OgBCCag
+Message-ID: <CACSVV021rZsjmiPEyR_LR7L=k7=DRV0QdsA50BF_Gd0s2DXaCw@mail.gmail.com>
+Subject: [pull] drm/msm: drm-msm-fixes-2026-09-16 for v7.3-rc4
+To: David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>
+Cc: dri-devel@lists.freedesktop.org, freedreno@lists.freedesktop.org,
+        linux-arm-msm@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTE2MDIyOSBTYWx0ZWRfX9ztUEsf/qnE8
+ XpZpvjL/yF+X4ZTrGBFi0hSm2fJRflTtEUXwws0uzWYVjfpe9vBzV23cHND78QbhNLhYrcFPLzs
+ qJAHn+w23+aVZEuH4BTYJU+V0hvew88=
+X-Authority-Analysis: v=2.4 cv=PsIG/AM3 c=1 sm=1 tr=0 ts=6aaac854 cx=c_pps
+ a=lVi5GcDxkcJcfCmEjVJoaw==:117 a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10
+ a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
+ a=gowsoOTTUOVcmtlkKump:22 a=e5mUnYsNAAAA:8 a=8FDDF9oY24P6SjVuP7IA:9
+ a=QEXdDO2ut3YA:10 a=rBiNkAWo9uy_4UTK5NWh:22 a=Vxmtnl_E_bksehYqCbjh:22
+X-Proofpoint-ORIG-GUID: 1zsMSpKUqGlPxVBQasybzi19goYmKJzE
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTE2MDIyOSBTYWx0ZWRfX998IgM4H5/ai
+ AdncBNH0PnkOPJ2NhmMA+E7DOg7UJ2dUn2GEQ8s5gMlPm1sAqiUNK+zo4+qnelTIp2FUv5xXajj
+ S3N6bUrxAtuFU0dHWfTmQZ9iddp6QQzZZzkZkd5zrXdzQf2aLQFYETZyghkkjsl8LtUV74sz77v
+ Gzv0JuYr62GWydXO2xaTGBqrowE+N4ofnLqOp/kZevZn9JnU1zbRj8dk+lKsBNIkf3Kw1QNaJ6r
+ muJ72GAZ3KAM4gonfuU3scWGfIr9imKwPt/GmF2D2VnTba8Q/uaT4jCvX71815KUy5HT58sSaIu
+ jEQshm8yDT1kjn77XGdKDfVGoUM42hquYPak1P5R1NKRlQKkbYxos0QBstvS3x8fAoGn7Q/UQkB
+ CJRX1CCmrpWsT4VvOukY0lSwui4bOgaFDRcG6LGmf/EdCFDzqesTpzlamzbfPC/EcQx5s+eoxY4
+ m0bLSMbzRREXHaxJudg==
+X-Proofpoint-GUID: 1zsMSpKUqGlPxVBQasybzi19goYmKJzE
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-09-16_03,2026-09-16_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ impostorscore=0 lowpriorityscore=0 adultscore=0 priorityscore=1501
+ phishscore=0 spamscore=0 clxscore=1015 suspectscore=0 bulkscore=0
+ malwarescore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2609040000
+ definitions=main-2609160229
 
-On Fri, 2026-09-11 at 23:44 +0200, Bean Huo wrote:
-> You still use scsi everywhere in your implementation protocol/scsi.rs
-> builds READ_10/16, WRITE_10/16, SYNCHRONIZE_CACHE and UNMAP CDB, so
-> "decouple UFS from SCSI" really means "copy a small part of sd and the
-> SCSI error handling into a UFS driver." while JEDEC defines the UFS
-> application layer as SCSI, the SCSI work doesn't go away, you just move
-> somewhere else, and it has to be written again.
+Hi Dave, Simona,
 
-I agree. By "decouple" I meant independence from the Linux SCSI mid-layer,
-not removal of the SCSI command set from UFS.
+Fixes for v7.3 as described below.
 
-The current RFC has CDB construction and only a small part of completion
-disposition. It does not yet implement enough sense, retry, recovery, and
-disk behavior to show that the complete UFS-specific version is smaller or
-simpler. The cover letter stated that conclusion too early.
+The following changes since commit df2908090cda368b01ff43709f51890076c56157:
 
-> The "friction" claim is weak. SCSI has already been changed to fit UFS.
-> Two examples: UFS now uses SCSI simple copy, group number in scsi write
-> command.
->
-> I doubt how far this can go. do we really need to pay effort for a new
-> RUST UFS driver, I am not very confident, unless SCSI is removed from the
-> UFS spec and JEDEC defines native UFS commands, or we talk to the device
-> directly with UPIU. please name the JEDEC feature that the SCSI midlayer
-> really blocked, or that was historial issue which has been fixed.
+  Linux 7.3-rc2 (2026-09-06 15:07:20 -0700)
 
-Also fair. I cannot currently name a public JEDEC feature that was
-shown to be impossible to implement because of the SCSI mid-layer.
+are available in the Git repository at:
 
-One of my main motivations was the amount of cross-layer reasoning needed
-for product EH and PM problems. In product work, I often had to follow UFS
-state, generic SCSI recovery state, block queue state, and device-PM state
-together. That experience is a reason to investigate another design, but
-private product experience is not proof that the upstream architecture is
-wrong.
+  https://gitlab.freedesktop.org/drm/msm.git tags/drm-msm-fixes-2026-09-16
 
-> I would also like to see the heavy and hard parts, because they are the
-> parts that decide if this design worrks:
->
-> 1, error handling: abort, LU reset, retries with limits, sense decoding,
-> this is the very hard part of UFS driver.
->
-> 2, user-space tools interface: SG_IO and bsg (sg3_utils, ufs-utils, FFU
-> with WRITE BUFFER), and the UFS sysfs tree..
+for you to fetch changes up to a15fac810c76397ec9f62a6fc26c4d7ab6e238a7:
 
-I agree. These are architecture requirements, not small follow-up features.
-Before claiming that standalone is useful, the design needs to cover
-timeout, abort, LU and host recovery, bounded retries, sense and Unit
-Attention, late completion, DMA safety, PM-aware recovery, and request
-disposition.
+  dt-bindings: display/msm: Use consistent indentation in the example
+(2026-09-15 02:09:28 +0300)
 
-I think the next step should be to document these responsibilities and
-compare the standalone design with improving `ufshcd` before completing a
-second implementation. If RUFS only reproduces the same behavior and
-complexity, the standalone design would need to be reconsidered.
+----------------------------------------------------------------
+Fixes for v7.3-rc4:
 
-> Did any AI tool help write this code? If so, please add the Assisted-by:
-> tag.
+DT:
+- Corrected indentation
 
-Yes. An LLM helped during reviewing, testing and preparation of the
-submission. I will add the tag required by the current kernel documentation
-in the next revision:
+Core:
+- Marked fbdev as system memory
 
-Assisted-by: LLM
+GPU:
+- Fixed autosuspend cleanup on teardown
+- a750: fix timestamps
+- Increase GMU fw init timeout
+- Misc fixes/cleanups
 
-Regards,
-Jaemyung
+DPU:
+- Fixed clock rounding, unbreaking newest platforms
+- Cleared pending flush state
+
+DP:
+- Skip PUSH_IDLE when link was never enabled
+- Fixed bandwidth checks
+
+HDMI:
+- Fixed runtime PM cleanup on probe failure
+
+----------------------------------------------------------------
+Dmitry Baryshkov (2):
+      drm/msm: mark the fbdev framebuffer as system memory
+      drm/msm/dsi: round the byte clock rate after reparenting to the PHY PLL
+
+George Emmanuel Thomas (1):
+      drm/msm: remove stale perf counter XML TODO
+
+Guangshuo Li (2):
+      drm/msm/adreno: fix autosuspend cleanup during teardown
+      drm/msm/hdmi_phy: fix runtime PM cleanup on probe failure
+
+Jesse Casco (1):
+      drm/msm/dp: skip PUSH_IDLE when the link was never enabled
+
+Jonghyuk Kim(MalHyuk) (1):
+      drm/msm: RCU-free the scheduler-containing ring and VM objects
+
+Karl Mehltretter (2):
+      drm/msm: Fix the separate_gpu_kms parameter description
+      drm/msm/adreno: Fix the skip_gpu parameter description
+
+Krzysztof Kozlowski (1):
+      dt-bindings: display/msm: Use consistent indentation in the example
+
+Neil Armstrong (2):
+      drm/msm/a6xx: Add CX AO Counter registers used for a750 GPUs
+      drm/msm/a6xx: Use CX AO Counter register for timestamp on a750 GPUs
+
+Paul Hollinsky (1):
+      drm/msm/adreno: Only check for PAS when a zap shader is present
+
+Rob Clark (2):
+      drm/ci: Update xfails for kms_cursor_legacy regression
+      drm/msm/a6xx+: Increase GMU FW init timeout
+
+Saim Shujah (1):
+      drm/msm/dpu: clear pending peripheral flush state
+
+William Bright (1):
+      drm/msm/dp: fix link bandwidth check when wide bus is enabled
+
+ .../bindings/display/msm/qcom,qcs8300-mdss.yaml    |  6 +-
+ .../bindings/display/msm/qcom,sar2130p-mdss.yaml   |  4 +-
+ .../bindings/display/msm/qcom,sm6150-dpu.yaml      | 14 ++---
+ .../bindings/display/msm/qcom,sm8350-mdss.yaml     |  2 +-
+ .../bindings/display/msm/qcom,x1e80100-mdss.yaml   | 68 +++++++++++-----------
+ drivers/gpu/drm/ci/xfails/msm-apq8016-fails.txt    |  7 +++
+ drivers/gpu/drm/msm/Makefile                       |  1 -
+ drivers/gpu/drm/msm/adreno/a6xx_gmu.c              |  2 +-
+ drivers/gpu/drm/msm/adreno/a6xx_gpu.c              | 12 +++-
+ drivers/gpu/drm/msm/adreno/adreno_device.c         |  2 +-
+ drivers/gpu/drm/msm/adreno/adreno_gpu.c            | 15 ++---
+ drivers/gpu/drm/msm/disp/dpu1/dpu_hw_ctl.c         |  1 +
+ drivers/gpu/drm/msm/dp/dp_display.c                | 21 ++++++-
+ drivers/gpu/drm/msm/dsi/dsi_host.c                 | 36 ++++++------
+ drivers/gpu/drm/msm/hdmi/hdmi_phy.c                |  8 ++-
+ drivers/gpu/drm/msm/msm_drv.c                      |  2 +-
+ drivers/gpu/drm/msm/msm_fbdev.c                    |  1 +
+ drivers/gpu/drm/msm/msm_gem.h                      |  3 +
+ drivers/gpu/drm/msm/msm_gem_vma.c                  |  2 +-
+ drivers/gpu/drm/msm/msm_ringbuffer.c               |  2 +-
+ drivers/gpu/drm/msm/msm_ringbuffer.h               |  1 +
+ drivers/gpu/drm/msm/registers/adreno/a6xx_gmu.xml  |  2 +
+ 22 files changed, 128 insertions(+), 84 deletions(-)
