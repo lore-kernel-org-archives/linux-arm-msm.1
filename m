@@ -1,174 +1,131 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 860F7449997
-	for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 07:56:47 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 93825388E7E;
+	Wed, 16 Sep 2026 08:03:33 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789545418; cv=none; b=WnQpsQGe4wEjvg3EWLI4/qmqS46joCVYtnPsBDqERinupFDXiDcrBABMzv93yDsiepHT9UAlBWqRcqvgfA50jLqRCOnNnJDUO8mu70ETmZEPizn9Xm2ecuFnrIf+ZO+Ef3+Y9kt6KK01vaqHi3hgced14gPUgI4DOx8YfGFi3v0=
+	t=1789545823; cv=none; b=ta0j0xTcsYKsae5Q/ezKt9j+cv3mc6TvQ0JxrfhbAXTBxytLsjex/zHzpggwilBWEjsTI4xFnO1OXugc0XTknCOM+3ziaqWd75iDA6KIW0o3nzPT07f+Lt1pg+R+XuAm2vNYTcLbeSeficUtn++zR7zyOavCMIAdvqqfBJNNSVw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789545418; c=relaxed/simple;
-	bh=HbIfItTOo8OE4am6c9ivPQcztfXU6kk/9gwLzj89GuA=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=o8JsuIkd3FI/XG7PRLLnWttUcb6O7biUkfEmwBiKwWYk18ouVP80CbPnUghE9jogaElXQaoUmnmuTKexI7hNLGlXwyXBgypaSh8BU0eR8fO2KB9lOSiN/n+Zpc1l2xaRXOG5jx3FsWtn8xLEqsLF8ZZRaGEIXC9trUWgYL+YROQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=k6FiNCSQ; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=DvIl4Bl4; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1789545823; c=relaxed/simple;
+	bh=KyLeZDs65SJigKA9uBYEoUpTW2XH2SOgKl2BHTpojYY=;
+	h=Date:Message-ID:From:To:Cc:Subject:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=TBCSAiYOI6XTCs7eijlK9rfBmCXa79haoUlN8ADnEyPlB5VdvNmK5yIKZ8vRry4xOnldK2Ds948QPPW6XJ/yX4843vM7Xge7Bk923UdOt4DCCd8P8LJA5E8BopLxSe1VF2JvhP3efSHsBkW0Dwgf3Eo/jhWKhWhNUFdxXRpeM0k=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=SMVra4ZE; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="k6FiNCSQ";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="DvIl4Bl4"
-Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68G68ngH2986942
-	for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 07:56:45 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:message-id
-	:mime-version:subject:to; s=qcppdkim1; bh=NsEV4uVA6aessXGwFZ9cUl
-	Nd6oEQR/Eydv18K2tX5rA=; b=k6FiNCSQo8PYZdB1mUws4tI/J6YsjAo8uHO8n5
-	yUITh8o7+zc3wdYyWRNoFno9wLja5Vp9DjLUglaKzw1utmXvLovJxTDXO+VW68P4
-	M+FktSOmsPMr+BCqDkXP4ztNt1D4rWW7Kio++8x/J9wksKkraoiz3e6IcpFn9/iO
-	vBI8JHu1wadL1zdJD8+5/fUxerifpEa/wokOUJx+c+zguxOBV/3OO8FfkVzja9mC
-	KoxIvagHRyFvnJjCUs3Nogf6t/gytNEdfbuM5r1XPlCm6LxDsBYlgmmau6gRswtR
-	pKlVA9QeIU+mKmk771bFhU8mvdndL1pTh6Azom1kjsWGVlEw==
-Received: from mail-pj1-f69.google.com (mail-pj1-f69.google.com [209.85.216.69])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gqefpa1e6-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 07:56:45 +0000 (GMT)
-Received: by mail-pj1-f69.google.com with SMTP id 98e67ed59e1d1-381250979d5so6283165a91.0
-        for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 00:56:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1789545404; x=1790150204; darn=vger.kernel.org;
-        h=cc:to:message-id:content-transfer-encoding:content-type
-         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=NsEV4uVA6aessXGwFZ9cUlNd6oEQR/Eydv18K2tX5rA=;
-        b=DvIl4Bl4T2DWjFlJE6AVfE3N4cgLMVtePluJiWQy3HOlRP3dLR2pIpHTRaPXccytn8
-         DVuVPcYTHaABZuztfDnsRHecHioXdPZ7N0ajb6sX9vApRO6ywAg90IYc3ljG/YloKJwQ
-         V7lFAQFLJKloTXdo4Ulas1Ku3mq/B/51EYYLVmNrDG7K7oWkaR/7HkCH5GP5BxnDadRI
-         k15GQ2jNf7eNzFFWSsqFmtJWhI1ycV5v2qs6PW8/EXVAZ3ljUWTX8GRtsVAj/CK/QWZE
-         I0mdX4kyat2V7KZNSKIV/ONcVVLjgvXsiR02JNPig/LzFyqI9iRb8dFUXnyB+9rZ3vt1
-         pZ9Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1789545404; x=1790150204;
-        h=cc:to:message-id:content-transfer-encoding:content-type
-         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to:content-type;
-        bh=NsEV4uVA6aessXGwFZ9cUlNd6oEQR/Eydv18K2tX5rA=;
-        b=tLuBbbx+4c3KsJLiPH2jP0HpbhF66OZCJD/U3XrFwVNcmK1yt8bCqEPvu6Dnd0EwDT
-         9E7TGpdX1ufnGHKOIt2QjAo9iCm7B6q2Z/rnffksPPaADvjER4hjVQJ3agO/ThZCO60y
-         eT0jSHk/Yoxbd4O6HB4qoC1rvrSIQ1VTgU/ebaW6fpqVFtuYZm5SPVVg+fodFBAwbTqk
-         x8+NPz7Q0FXP4NDI54Jf7KR1LE2n9gEq38JDnaWl2tyiMVZv3bfPGuByRO+mZ8SxUv8y
-         N1RJkBhDA6ShLr7LM8ENLbEB21zJnfXzHK8oXxat4FMMc+lfTqB9EmtsPuRy6zuvWLNY
-         eLOw==
-X-Gm-Message-State: AFuF++mnHwOfLzcgwPs3VwdBKaJY5NTIuTTGxCBX1ZIBrQVZY81iwWgU
-	fUXwvS6nzI+K7gtdfbBomQTQ6jQNskZw3tRsQVkCKqgS7QOYGcHxvXMK2K5Q3vaQFzwAtKtBNuV
-	FuZ1pMZxv3oSuHN4QfaYSviOl9BstjnuYhpF8sTs1yH5emE4yNZvgo1MistEyP9ZpNIvMiBj43E
-	t1
-X-Gm-Gg: AYBFou0uzg0VVf/O3wr1N9LBB1e2MxDZJMp+XEN3plPCjhQJ1vE26Z5Jmg36FYr96pm
-	wKcrxg6gFWptxw4IckHb+Tcj3Ux3Vgc4cWRTmZn1Krx9c5acwnYK1YonR9uBuO+/YdICOEKB3J+
-	QZ+xlhOjMkEMZIUu2LjNmfe+6OcxKd3HjzfMB/aQfVZFeWUTHsrnj5X874TJVAAl+972hzpcAvO
-	R3E7ksBMGbFq1m6hkYM5zb4AsdyzoxDm9Y9ziKZL5Ldmdn/+shJPdZtILrUA+v8PIcEKYG8Wr4A
-	yCHBBEOmyNhqOg6a7lKHlphVE9FpHGRsh53YJVRLnOxp2xrKVJrxwL3+M70abIZzouEQ4PPteBS
-	5Q1EOchkQdSWAbZdG69QwSQCs7ksYJkoXpOoV4g==
-X-Received: by 2002:a17:90b:2885:b0:39d:f130:8f13 with SMTP id 98e67ed59e1d1-39e1e4d3357mr4052791a91.21.1789545404300;
-        Wed, 16 Sep 2026 00:56:44 -0700 (PDT)
-X-Received: by 2002:a17:90b:2885:b0:39d:f130:8f13 with SMTP id 98e67ed59e1d1-39e1e4d3357mr4052719a91.21.1789545403713;
-        Wed, 16 Sep 2026 00:56:43 -0700 (PDT)
-Received: from hu-anupvish-hyd.qualcomm.com ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-14395d13cb7sm4688714c88.7.2026.09.16.00.56.40
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 16 Sep 2026 00:56:43 -0700 (PDT)
-From: Anup Vishwakarma <anup.vishwakarma@oss.qualcomm.com>
-Date: Wed, 16 Sep 2026 13:26:36 +0530
-Subject: [PATCH] remoteproc: qcom_q6v5_mss: Fix missing PDM subdev cleanup
- on probe failure
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="SMVra4ZE"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 03BAA1F000FF;
+	Wed, 16 Sep 2026 08:03:29 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1789545809;
+	bh=XIBzlK2j0riyQGL55D1titlOQJB9O6G+ICsOTOSNMtM=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References;
+	b=SMVra4ZERH4PoKOds3r0DQlp0tyeT4BzWfkiz8NejsvdN5aBCI8A6ezKj773wen9n
+	 iJiuuO+KUak6rbmCV5ZNZqc9XNTK8+Z+hBIUq+53/vbzMUE0La20b0UVp3DY9eMkyj
+	 vRmDvBvFG4GAQix8vDBvdC19oJpdAYU/dM2ajLz3+sZaE9ZDROYfjpVYsHNzNo0dAH
+	 y8XkCdg1htRfB+arjQW88RAejYQh/CVe0656eEpicN474lNoR5SNJHVWJ1Z8T2jI2E
+	 qzA9NZtOVtRipNvZnMqppv2ME8s63t12l9YkqFH52l6IBany/n1eEl2/V3BYP4JYRA
+	 Q9REjNywDnKUg==
+Received: from sofa.misterjones.org ([185.219.108.64] helo=goblin-girl.misterjones.org)
+	by disco-boy.misterjones.org with esmtpsa  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+	(Exim 4.98.2)
+	(envelope-from <maz@kernel.org>)
+	id 1x6kc2-00000009VAE-3lNw;
+	Wed, 16 Sep 2026 08:03:26 +0000
+Date: Wed, 16 Sep 2026 09:03:26 +0100
+Message-ID: <86jyol62sx.wl-maz@kernel.org>
+From: Marc Zyngier <maz@kernel.org>
+To: Bjorn Helgaas <helgaas@kernel.org>
+Cc: Manivannan Sadhasivam <mani@kernel.org>,	Qiang Yu
+ <qiang.yu@oss.qualcomm.com>,	Lorenzo Pieralisi <lpieralisi@kernel.org>,
+	Krzysztof =?UTF-8?B?V2lsY3p5xYRza2k=?= <kwilczynski@kernel.org>,	Rob
+ Herring <robh@kernel.org>,	Bjorn Helgaas <bhelgaas@google.com>,	Konrad
+ Dybcio <konrad.dybcio@oss.qualcomm.com>,	linux-pci@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org,	linux-kernel@vger.kernel.org,	James Morse
+ <james.morse@arm.com>,	Andrew Scull <ascull@google.com>
+Subject: Re: [PATCH v2] PCI: qcom: Block accesses to downstream devices on link down
+In-Reply-To: <20260915231421.GA881410@bhelgaas>
+References: <2ibficaitalz4lacqffsrp4kuqzanxnxr2bwd6x5yti4mmfabf@h3y63kuz7fjh>
+	<20260915231421.GA881410@bhelgaas>
+User-Agent: Wanderlust/2.15.9 (Almost Unreal) SEMI-EPG/1.14.7 (Harue)
+ FLIM-LB/1.14.9 (=?UTF-8?B?R29qxY0=?=) APEL-LB/10.8 EasyPG/1.0.0 Emacs/30.1
+ (aarch64-unknown-linux-gnu) MULE/6.0 (HANACHIRUSATO)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
-MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260916-b4-q6v5_mss_pdm_subdev_unwind_upstream-v1-1-ea6575aa42db@oss.qualcomm.com>
-X-B4-Tracking: v=1; b=H4sIALNLqmoC/yXNyw7CIBCF4VdpZi0JNC1eXsUYAmXUMQGRKWjS9
- N2LuvwW5z8LMGZChlO3QMZKTM/YoHYdTHcbbyjIN0Mvey2PSgs3iJeuownMJvlguDiP1ZT4puh
- NSTxntEFIZQ9u0HtE5aHFUsYrfX5H58vfbfnAaf7WYV03ysbaT4oAAAA=
-X-Change-ID: 20260916-b4-q6v5_mss_pdm_subdev_unwind_upstream-01a8b467ee1d
-To: Bjorn Andersson <andersson@kernel.org>,
-        Mathieu Poirier <mathieu.poirier@linaro.org>,
-        Chris Lew <quic_clew@quicinc.com>, Dmitry Baryshkov <lumag@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, linux-remoteproc@vger.kernel.org,
-        linux-kernel@vger.kernel.org,
-        Anup Vishwakarma <anup.vishwakarma@oss.qualcomm.com>
-X-Mailer: b4 0.16.0
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1789545400; l=1514;
- i=anup.vishwakarma@oss.qualcomm.com; s=20260805; h=from:subject:message-id;
- bh=HbIfItTOo8OE4am6c9ivPQcztfXU6kk/9gwLzj89GuA=;
- b=SBvixAsrejmThHZXVm27H8cvkn3KKWNuOT3UtPaGhGtqKB3jJbqpeAu9F0gkf/CTa4bZpNvnK
- oPIn0cNrh+8DhkUUFGzUZVplKa8ccpg9IvO7f4uk9k9MbxdijPmDymv
-X-Developer-Key: i=anup.vishwakarma@oss.qualcomm.com; a=ed25519;
- pk=Y9ilCu91UQrzHOM14SG2IjnmQ1QSroH5uVeBSWEmEDM=
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTE2MDEwMiBTYWx0ZWRfXx5upuwUN2Z0Z
- 6nnZDkS5G5uYI38T48u+8M6eTb3NTpkPcKB8UdqqjsPYPhxkzDmh5kWF4tw+Q2w/1Ncl/oiEvbw
- CFg/5JNBimoFhySb9YsM7oieLWb8INI=
-X-Authority-Analysis: v=2.4 cv=HrTjiETS c=1 sm=1 tr=0 ts=6aaa4bbd cx=c_pps
- a=vVfyC5vLCtgYJKYeQD43oA==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
- a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22
- a=EUspDBNiAAAA:8 a=nKoQMm1Mf4hYkZarmuoA:9 a=QEXdDO2ut3YA:10
- a=rl5im9kqc5Lf4LNbBjHf:22
-X-Proofpoint-ORIG-GUID: VwIQAX_doxTFPkxzJpGf4H3yRufunKpl
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTE2MDEwMiBTYWx0ZWRfX0yvIx0eiAsC8
- TUy4ihQvXjLcSdLTphQZcUG3v9XAgrvth1PZrEBT0sUQ60f0vpWiS5NsYlwj/k3FaqR28OgpXAY
- BmEI0Qm10C3PPXXQmNvN0ozmg1/B6Pm0TGNgxyfKwutp5i7QadW8UxKBhuSHntIR5nXULl0yxir
- jT0xthhLdaO03vME4rzMGbjIg0+npXS03CzwvjoTYKAltsIdU2aJeo/ES14jZzWZUd3Gc11Wuh8
- rTYgxwpNaaiuFJikwGrD5zQ8LedIuFQ9lmGDEABDJ4sP7ILASMsZNIArLvHdr8tZPuk1Kwu8YU/
- F9F1hgIfC0jNZgtR6USEiJ9wGVqcJzpSkz7sR2irpE2beEQHkpPYbOtpaqehKwY0ZfmWENLDgjW
- GmQrRaL4cucbcgzgfX60rVoRzxEWLIXaiz01tAcUdD96OxbPEAbzW9oJl3fV8FAsPUMD5f3+3i3
- SOzFOmPU/gxVmIOUgYg==
-X-Proofpoint-GUID: VwIQAX_doxTFPkxzJpGf4H3yRufunKpl
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-15_05,2026-09-15_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- suspectscore=0 lowpriorityscore=0 impostorscore=0 bulkscore=0 phishscore=0
- malwarescore=0 clxscore=1015 priorityscore=1501 spamscore=0 adultscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609160102
+MIME-Version: 1.0 (generated by SEMI-EPG 1.14.7 - "Harue")
+Content-Type: text/plain; charset=US-ASCII
+X-SA-Exim-Connect-IP: 185.219.108.64
+X-SA-Exim-Rcpt-To: helgaas@kernel.org, mani@kernel.org, qiang.yu@oss.qualcomm.com, lpieralisi@kernel.org, kwilczynski@kernel.org, robh@kernel.org, bhelgaas@google.com, konrad.dybcio@oss.qualcomm.com, linux-pci@vger.kernel.org, linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org, james.morse@arm.com, ascull@google.com
+X-SA-Exim-Mail-From: maz@kernel.org
+X-SA-Exim-Scanned: No (on disco-boy.misterjones.org); SAEximRunCond expanded to false
 
-q6v5_probe() calls qcom_add_pdm_subdev() but the remove_subdevs:
-error unwind never calls qcom_remove_pdm_subdev(). If
-qcom_add_sysmon_subdev() or rproc_add() subsequently fails, the PDM
-subdev remains registered in the rproc subdev list.
+On Wed, 16 Sep 2026 00:14:21 +0100,
+Bjorn Helgaas <helgaas@kernel.org> wrote:
+> 
+> [+cc James, Andrew, Marc for guidance on generic arm64 PCIe error
+> recovery; beginning of thread:
+> https://lore.kernel.org/all/20260819-ecam_blocker-v2-1-e7a8fdc1c5cb@oss.qualcomm.com]
+> 
+> On Tue, Sep 15, 2026 at 07:16:11PM +0200, Manivannan Sadhasivam wrote:
+> > On Fri, Sep 11, 2026 at 12:18:07PM -0500, Bjorn Helgaas wrote:
+> > > On Fri, Sep 11, 2026 at 08:17:29AM +0200, Manivannan Sadhasivam wrote:
+> > > > On Tue, Sep 08, 2026 at 06:00:30PM -0500, Bjorn Helgaas wrote:
+> > > > > On Wed, Aug 19, 2026 at 11:36:54PM -0700, Qiang Yu wrote:
+> > > > > > After a PCIe link goes down, software may still access the
+> > > > > > BAR (MMIO) space or configuration space of devices behind
+> > > > > > that link before recovery has run. As the link is down,
+> > > > > > these accesses never complete, resulting in a storm of
+> > > > > > Completion Timeout AERs.
+> > > > > 
+> > > > > What is special about qcom here?  It seems like the Completion
+> > > > > Timeouts and AER interrupts should happen with every PCIe
+> > > > > controller.
+> > > > 
+> > > > The special behavior which is common across many (not all) ARM
+> > > > SoCs is that they don't synthesize all-one response for
+> > > > completion timeouts, unlike RCs in x86 machines. Rather, they
+> > > > return AXI error response, resulting in CPU treating them as
+> > > > SError, in-addition to AER storm.
+> > > > 
+> > > > Commit message missed mentioning SError though.
+> > > 
+> > > I don't know how SError works, but this sounds like a pretty big
+> > > open issue with respect to RAS.  I don't think we want a kernel
+> > > panic because a device failed to respond to a config or MMIO
+> > > access, e.g., if a card or Thunderbolt cable got unplugged.
+> 
+> I still don't know anything about arm64 or SError, but I see these KVM
+> commits about using ESB to manage SError in some cases:
+> 
+>   0e5b9c085dce ("KVM: arm64: Consume pending SError as early as possible")
+>   472fc011ccd3 ("KVM: arm64: nVHE: Don't consume host SErrors with ESB")
+> 
+> I assume it's not possible or practical to use ESB in the native host
+> case to deal with issues like this in a generic way instead of the
+> vendor-specific feature Qcom is using here?
 
-The three sibling drivers (qcom_q6v5_adsp.c, qcom_q6v5_pas.c,
-qcom_q6v5_wcss.c) all correctly call qcom_remove_pdm_subdev() in
-their probe error unwind. Add the missing call after
-qcom_remove_ssr_subdev(), in reverse order of registration.
+In general, an SError is fatal. No ifs, no buts. It is asynchronous,
+and has no syndrome information. Once you find out about it, you're
+already dead.
 
-Fixes: 5b9f51b200dc ("remoteproc: qcom: enable in-kernel PD mapper")
-Signed-off-by: Anup Vishwakarma <anup.vishwakarma@oss.qualcomm.com>
----
- drivers/remoteproc/qcom_q6v5_mss.c | 1 +
- 1 file changed, 1 insertion(+)
+ESB is a way to paper over this sorry state of affair by making sure
+that the error is observed at a known point. You can think of it as a
+barrier synchronising potential errors for transactions in flight. KVM
+uses that to attribute SErrors triggered by a guest, on an exception
+boundary.
 
-diff --git a/drivers/remoteproc/qcom_q6v5_mss.c b/drivers/remoteproc/qcom_q6v5_mss.c
-index 2f71ed2feff6..1574e26aeaab 100644
---- a/drivers/remoteproc/qcom_q6v5_mss.c
-+++ b/drivers/remoteproc/qcom_q6v5_mss.c
-@@ -2222,6 +2222,7 @@ static int q6v5_probe(struct platform_device *pdev)
- 	qcom_remove_sysmon_subdev(qproc->sysmon);
- remove_subdevs:
- 	qcom_remove_ssr_subdev(rproc, &qproc->ssr_subdev);
-+	qcom_remove_pdm_subdev(rproc, &qproc->pdm_subdev);
- 	qcom_remove_smd_subdev(rproc, &qproc->smd_subdev);
- 	qcom_remove_glink_subdev(rproc, &qproc->glink_subdev);
- detach_proxy_pds:
+That's not applicable to the kernel itself, unless you want to place
+an ESB after each and every load/store in the kernel (/s).
 
----
-base-commit: e6e35979777d646fe3c7c94dca7dd32fb25d45f4
-change-id: 20260916-b4-q6v5_mss_pdm_subdev_unwind_upstream-01a8b467ee1d
+Modern versions of the architecture allow these errors to be reported
+as *synchronous* exceptions, with all the syndrome information you
+want. I guess this HW doesn't implement it, which is a pretty big
+mistake for systems that allow surprise removal of devices...
 
-Best regards,
---  
-Anup Vishwakarma <anup.vishwakarma@oss.qualcomm.com>
+	M.
 
+-- 
+Without deviation from the norm, progress is not possible.
