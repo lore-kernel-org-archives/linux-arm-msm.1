@@ -1,282 +1,213 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 740BD4A261D
-	for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 13:22:50 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EC3AB4F647E
+	for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 13:27:00 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789564973; cv=none; b=hrl0Al3fFAtSxROPNW0TwRSKS8pNHl8tOjPPZbv3HOf+QfhGSpNgzS2UF72xJjSSH+PNBLzN2+Q6tAjmQsLqeEAfAXig8710ga/EAZBQz3W4iM5vJfU+ugO3CL30CpOm1e3xwT+F11kOMisfTox9is4ghEbTUTWFv+UFE8luj7U=
+	t=1789565224; cv=none; b=smmiZ5KmIVXdjslOcfORxNrmPTe7cjh0aC4RNFF2MFHZdHFbhWgmFV2qN1Mf+O4eC34drhRHYUy20jpvp6kJTOO0hSyHtQblzIQvRiL8m3fNwvg9Emn22ahpcef8LZyTx9bX9yhe1ygQUBxHpIG9kDrrye5zRQ8yF/3GbApM/to=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789564973; c=relaxed/simple;
-	bh=5soaOGZObSNGOcK95ZhMd5l24sDwrTJqxb1rZikxyIE=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=gpgiBRHThWEfeBEg1SkYy0D9hh+SgYto8stikim8ssWlB4kgG9fgjw7+YvjWqFHD3a99IrKPYBAqyxS1cZcOA7ZvQG8yH3KWMfMPQOZcWAIBisg/El38416Jo8lcXpW4wlKUpOTb5o2VzmuLPXlWM03w/uiNdhXIYND5nrMuH6o=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=mZPApaZ0; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=GUZfB6xt; arc=none smtp.client-ip=205.220.180.131
+	s=arc-20240116; t=1789565224; c=relaxed/simple;
+	bh=0MVH1UVmAUe5/J+L/Yf6YJo56Lmvi/jOR7Pmv6KXqjQ=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=Mu/FP8r1ivXwbxiSmgwJPjJeL+9jMl40vhY5j9IEHHZgsRXNq/0g4eCDiJJVHcyR/BWj/jfh95vQ3BydLczo2TWqTm0uX76dHFc8u0ZlCwKY9z3GG3LhAEG4A4JWW4znSrzTerxFO3H15+veyalRzy10HPlVsOOPQLurnlqNNMI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=mdcQP4VE; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=Dztp3BoI; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="mZPApaZ0";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="GUZfB6xt"
-Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68GDJA9H2788782
-	for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 13:22:48 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="mdcQP4VE";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Dztp3BoI"
+Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68GDJhUC2283708
+	for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 13:26:59 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:message-id
-	:mime-version:subject:to; s=qcppdkim1; bh=68DVc1Rw7Ic9+mA58NCJ+S
-	OpY/N/DIaqlcODSFHBDqQ=; b=mZPApaZ0z4BcdwcaJcTb44icMDBjJOEfzL8rJx
-	dFqU30MCM0qFW4eCgiB7/eAz2g0192qJnpfb02SLJF2BbxVEdIVtaw9RYTLI1M1Y
-	SC7L+97UUtwITvk+Yx98INU0UDgRfaAiX9oU4sWFNtbTXCjFyuzl8QTG9/koU6Rz
-	D1BSbFCwuHrtCK4YKfAS9D25qxweiEp9XTH0dj/3BSbch2cFnpOrC9TC1dlAijGv
-	82rKZOs5ZA1A75JCuvM7udcWw5VI/83tqTwVrfxat99wV4cgoSTRvWWg+SMQ8Fkc
-	maoyBBVs/dqTIgso4JjUiPF23RG2uRM9L2USBTDNCPsOQVmQ==
-Received: from mail-vk1-f197.google.com (mail-vk1-f197.google.com [209.85.221.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gquw2r0hn-1
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	4MESC1KI0wX6qjB4s98iNgVKHGPJ6KH1ZIsZM1iGaT8=; b=mdcQP4VEcQ2YZ7in
+	MjoGc0dkFhF7e1Dv5zwqOWromheFG07ioVoo3k3geil4jNO5TfeAxx8TGU5y1HZu
+	2S5kA45hKqN3uVlAdvWOEDA9DjRfgC6bS+2GETOVdeEYfGkhVvztUVhxSV+chKEq
+	aE7jNidhypXHnk9ChR+Bu4Va2f6K2fHY5rC9SO2LtcKQxPTGELynf+pImUOz6ax6
+	uNenbmdMs/6J1dZVR4GqsvozYFJAuUc8Sds+eikKm5BkiFd4w4eGhgRT7Amyf28w
+	uZnLSRZUXZZfz03+eOW7zJDFQeoF0qViAU0pyjG4nYDMV2oVbJNslXVNQqbJtX/Q
+	KZejwQ==
+Received: from mail-pf1-f197.google.com (mail-pf1-f197.google.com [209.85.210.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gquwb00xs-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 13:22:48 +0000 (GMT)
-Received: by mail-vk1-f197.google.com with SMTP id 71dfb90a1353d-5c82ad4977dso6197594e0c.2
-        for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 06:22:47 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 13:26:59 +0000 (GMT)
+Received: by mail-pf1-f197.google.com with SMTP id d2e1a72fcca58-86ab8302b54so6174257b3a.1
+        for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 06:26:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1789564967; x=1790169767; darn=vger.kernel.org;
-        h=cc:to:message-id:content-transfer-encoding:content-type
-         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=68DVc1Rw7Ic9+mA58NCJ+SOpY/N/DIaqlcODSFHBDqQ=;
-        b=GUZfB6xtS4ydS37uNCilKhv/v+dO8qda+qJNDQYriskw7SZ6TvtefW/hTrQl1p90qY
-         vl2/lE6Mn+68Xb4RwMzuKjPPPirk24xEPNrUZGBoJ9FAO1S0be2BWXvuYWUx7UtxZeNv
-         EbK23yOWoJNZq4g/CZ8L+7mPjp1KOjF8r73UYx8v5qJpelZHmsVBGuyVi5T/oC8Z5brS
-         GH7tU2YZhUj7uTYhEbKnBJ2WhTBuFhcZj2bSL55reWj+CTp5l/finqNRhy6945AZL19V
-         BZg/KFj972DIR8reCUrMZXc0RhiSkccaTaTxvPKYkw2MrI1Gcwn/lwv9uYFOejk/WPKr
-         Qrcw==
+        d=oss.qualcomm.com; s=google; t=1789565219; x=1790170019; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=4MESC1KI0wX6qjB4s98iNgVKHGPJ6KH1ZIsZM1iGaT8=;
+        b=Dztp3BoIeZHfvXudcOEYSml0sUt+Zg6opESAKOF4Oq8OZsq825TGe1UWtZUb7/PNkA
+         xBLwNguHSEkw3CYkoQmITvC4QqMg0KC3xdYPexA7YAVYUAMQfv5YBomYZAOVQTK7Nr5L
+         K+aEvjGjQi2sh21RAWxXV6voNu7E+JJvLaYjbCxcbpDXdFjFnNiCZjPQf0+IhNQQZp2P
+         n9kbkTXnG+B8NSoCHgeSeB6VPx5/qZEmIefy8XRi2hxe1SiVXJhZxGjUS4voNd+7KFIK
+         aBIcR2+x0oFGJcUsouMhbHKvW7cqbYt3z3gTvNXiIfYF72tbhh7APK1qxDhCFIax12zv
+         gDcA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1789564967; x=1790169767;
-        h=cc:to:message-id:content-transfer-encoding:content-type
-         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to:content-type;
-        bh=68DVc1Rw7Ic9+mA58NCJ+SOpY/N/DIaqlcODSFHBDqQ=;
-        b=vGOXnDIfBJrHNHiVDA4uNpKVwlZekhpsGcFjYABM1xZ16/miuQp3d4HjN+8u9ngLsh
-         RO61xEVL+M9u5msLedEZEr5ao3hdj9enMu5Pwpmm1CXB7QbV8FsK3zAGTW9oDChWQtPN
-         lHAY8aPQLpy2DtvJcJsCxEimXTsHuRoBcZU8rFAKHZzVLU/sx6VZemd/ORj+f4b5tyTF
-         /H35vAD/jT5Cm4Px1bhynqTyB/GWjE47B27BFQzcbBQFs60NvQ1TPEhIyCQ0kq0AUSDj
-         +PdR6KyiGr+pjWiSrkQq+aYpj0phZNVLO2MKklhOZqqUhrzb76YG4IkiRlxkNQAdminK
-         +ZgQ==
-X-Forwarded-Encrypted: i=1; AKwUvBwZ5BCcTupW7ZcIe0beCVZRLERGd9/yY2oPA1BGj/F43jlrSd2yyVYNDUfx2LZ1PeXYqsFX7C7UDlAZusx0@vger.kernel.org
-X-Gm-Message-State: AFuF++kh7nGsnfDTirIh9Je2o9HtZGUXrH1XdbaJZr/Dvl8j61V4x2jS
-	I6Fn/3ov3+zJdku1t7x5BaMN6nnrZJsN2NigywQMt/Oz2WxXQmUePS0hFamy5JOXjrQOsR55Ips
-	Wd3HsbiBMg6MjpRdjAiI/QdndZTZ1FerzU4RtAGZUjhoG2197Op5aphuqQNs58f8+usVpqzSGuK
-	er
-X-Gm-Gg: AYBFou3nWPwna2AwBBc0tBi5zsj4h64s+RGJISq1nak8+yfGIUcuqiZz0YIUfKrdOes
-	IPJUFEHq5ydbfcv9E4R+JgbLRxV210Fz6ssNirltj2amyGuVQYh2CYGPaBx+Xz2y9eLa7WjUhBw
-	/lS2Jrh99r9fzkHPjQ+tNaqJF8RMrEpu+reiQ+5ZDf5JKD1KCKqqr65+Sk1TVUSDipPjUzQh4K9
-	c002IS6KwH2VztipPkyfaE1GbUPP4hfTXtcn/ryMTA4mJqpYuGzHnW/Uc9slbUKtkLAvmimLYBa
-	7PTbdzEQeEvmqV8W03aa/2i4LA84xOeHlctJ4XZGmm4hP8MrXQvrj68QyiZm5VX7GTuKaNj11sK
-	SulqtzVj57rVZYTbN/LorRZTYv0SJXwfF7Bl8/EbQ8xKmedMIMLUwJh0KmA9GB/KB9RZUWNl0Ow
-	IELZ/YeS1c1mnk
-X-Received: by 2002:a05:6122:4d09:b0:5bf:9461:91d with SMTP id 71dfb90a1353d-5c99ae6afa6mr2586495e0c.5.1789564967384;
-        Wed, 16 Sep 2026 06:22:47 -0700 (PDT)
-X-Received: by 2002:a05:6122:4d09:b0:5bf:9461:91d with SMTP id 71dfb90a1353d-5c99ae6afa6mr2586380e0c.5.1789564966816;
-        Wed, 16 Sep 2026 06:22:46 -0700 (PDT)
-Received: from umbar.lan (2001-14ba-a073-af00-264b-feff-fe8b-be8a.rev.dnainternet.fi. [2001:14ba:a073:af00:264b:feff:fe8b:be8a])
-        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5b8b57e0bdcsm849631e87.58.2026.09.16.06.22.45
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 16 Sep 2026 06:22:45 -0700 (PDT)
-From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-Date: Wed, 16 Sep 2026 16:22:41 +0300
-Subject: [PATCH] drm/vblank: serialise drm_crtc_next_vblank_start() with
- vblank_off
+        d=1e100.net; s=20260707; t=1789565219; x=1790170019;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=4MESC1KI0wX6qjB4s98iNgVKHGPJ6KH1ZIsZM1iGaT8=;
+        b=UPKsFLikm4OwI6eStwRs3Yr/tyI7oyUn7y19kN4obKjO6SeZeeHIwH9jTSTvhB9eW+
+         10l3ERlbXvDDAKRl/GhMKFWSL7G9/qn5ohTlNpR1xcLnFl2vLB8LNtWKTDPOnsdLkQQ8
+         u7rAzA6wCMkMdEDHIJKsDKaSme4gE5ThOlX6fPgc7O3sjZ3EclZ1u9wn2b8VTEFKM2O3
+         BZbY13mKvUTB38aGgkuDAi2T3lu1vGNpFBIN0IXbwZ4585ME7dDRVX1w6S6cG92WKDbE
+         qoRt7gkpE2ITJGdN/uRXXe4ILOmLpW62ABehzi47jHIpjniBQpy7CNZ/uM2qcMDsubfV
+         1qBQ==
+X-Forwarded-Encrypted: i=1; AKwUvBxym9nmM05YfrRuO+sOvgRBma56vZTT1JYxeiKWhfRVy4nbYy09y6N6Hm9BVbVg467RZV/4Kyiz+fyc1iWf@vger.kernel.org
+X-Gm-Message-State: AFuF++n32E9nQTT06j1B4ji21YkP8Ja5NyySClWvgaMYdH4wNN1QV6pw
+	BYskX8U5AG2HXas4y4a8wZbzmJjdspU7FLT+XSwK4oUTPCCiwZ1o5YvuiFUI7qZQpkRbKL32Pje
+	/+Z0bqr5M8YaPnii79XLuBPoQKIGljBy21yMSh57slznYv6Ham7Bh9gg/tg8qgCPYUVLy
+X-Gm-Gg: AYBFou0XtutjVKcdvNCbIUGMvpvUuvmF6jhxta7FJLpqgsCQTBPLXOpPGl0O5ovcXug
+	KecFZIMatpPxLVU+tIe7meRzz4UK3qof7fiqgfkXHI0F3yDXpFERo+KTeEK7qfpvyXcuQe2p+Hp
+	Yj/AOQN9Mu7e3qlzKGz0Lk9Ufq0s1dS4HKU6deJmrltZaClaCNsJo5gQNplMe1LnXEbS7TZYbWv
+	ksxjAG4evsjJ7Js5VkYZMUtUC+z2hdt6wxW6hqFhIZpcUZkg/UteyJZBnFAynRlQi20qsl4IVYf
+	C58g0nz7SZKYZHM/vm3xRQ771RQ6jSSA74Y98nUyeWgTMYZ1f+1P9RTiQaKFAjfcoYysGNyShnA
+	maR8U/DBMQrEMWOqmmcDzs5nBN3N5wnDA
+X-Received: by 2002:a05:6a00:3c86:b0:86d:c2d4:f3c0 with SMTP id d2e1a72fcca58-872376bd23bmr5119025b3a.9.1789565218624;
+        Wed, 16 Sep 2026 06:26:58 -0700 (PDT)
+X-Received: by 2002:a05:6a00:3c86:b0:86d:c2d4:f3c0 with SMTP id d2e1a72fcca58-872376bd23bmr5118933b3a.9.1789565218017;
+        Wed, 16 Sep 2026 06:26:58 -0700 (PDT)
+Received: from [10.92.206.34] ([202.46.23.19])
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-87201d17e76sm1241562b3a.49.2026.09.16.06.26.52
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 16 Sep 2026 06:26:57 -0700 (PDT)
+Message-ID: <5f862178-ba18-4b27-b5db-1732d57d7b47@oss.qualcomm.com>
+Date: Wed, 16 Sep 2026 18:56:50 +0530
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 5/5] phy: qcom: qmp-pcie: Add Nord Gen5x16 PCIe
+ multi-PHY support
+To: Shawn Guo <shengchao.guo@oss.qualcomm.com>
+Cc: Vinod Koul <vkoul@kernel.org>, Neil Armstrong
+ <neil.armstrong@linaro.org>,
+        Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley
+ <conor+dt@kernel.org>,
+        Lorenzo Pieralisi <lpieralisi@kernel.org>,
+        =?UTF-8?Q?Krzysztof_Wilczy=C5=84ski?= <kwilczynski@kernel.org>,
+        Manivannan Sadhasivam <mani@kernel.org>,
+        Bjorn Helgaas
+ <bhelgaas@google.com>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Maxime Chevallier <maxime.chevallier@bootlin.com>,
+        Philipp Zabel <p.zabel@pengutronix.de>, linux-arm-msm@vger.kernel.org,
+        linux-phy@lists.infradead.org, devicetree@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-pci@vger.kernel.org
+References: <20260909-nord-v3-0-b0a82721c547@oss.qualcomm.com>
+ <20260909-nord-v3-5-b0a82721c547@oss.qualcomm.com>
+ <aqJFo3beKde404qd@QCOM-aGQu4IUr3Y>
+Content-Language: en-US
+From: Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>
+In-Reply-To: <aqJFo3beKde404qd@QCOM-aGQu4IUr3Y>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260916-vblank-deadline-lock-v1-1-df377ba7f184@oss.qualcomm.com>
-X-B4-Tracking: v=1; b=H4sIACCYqmoC/yXMSw6DIBRG4a2YO+5NgIGvrTQdIPzVqwQbsKaJc
- e+ldfgNzjkoIwky9dVBCbtkWWOBvlXkJhtHsPhiMsrUqtM170OwcWEP64NEcFjdwo1pvFPQrUF
- HJX0lPOXz394fl/N7mOG234vO8wt3eFXzeAAAAA==
-X-Change-ID: 20260916-vblank-deadline-lock-727dc0e182e9
-To: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
-        Maxime Ripard <mripard@kernel.org>,
-        Thomas Zimmermann <tzimmermann@suse.de>,
-        David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
-        Rob Clark <robin.clark@oss.qualcomm.com>, Sean Paul <sean@poorly.run>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Akhil P Oommen <akhilpo@oss.qualcomm.com>
-Cc: Simona Vetter <simona.vetter@ffwll.ch>, dri-devel@lists.freedesktop.org,
-        linux-kernel@vger.kernel.org, freedreno@lists.freedesktop.org,
-        linux-arm-msm@vger.kernel.org
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=5512;
- i=dmitry.baryshkov@oss.qualcomm.com; h=from:subject:message-id;
- bh=5soaOGZObSNGOcK95ZhMd5l24sDwrTJqxb1rZikxyIE=;
- b=owEBbQGS/pANAwAKAYs8ij4CKSjVAcsmYgBqqpglQSjO+6xtzyVKICjcTKfd5SgJbHOoriZi3
- 25Jw2IDmQWJATMEAAEKAB0WIQRMcISVXLJjVvC4lX+LPIo+Aiko1QUCaqqYJQAKCRCLPIo+Aiko
- 1c/PCACWx3UFIaXNQ/810IYFWIDwqKiJ72t+9mR+3+0cWUNYptVdWWpCStHF01mZhGS7CnVrRkT
- 62oyotOiXYYAKTS0Wsi6ptI8mzwgU2PV8mjECFJ77ULc2xTu6znRlmhD4op9ZSWsaZFNKK9mBX8
- FgtPHA3qZA+t6QmgysZ770Fxz1v5omQQZVi91u8A75vFxtEeD1VAlHQvtUDXw9QcWStkt0fWz2t
- 7KdJLw8p2C8AgszW2dmahLVJU0xPpr1wSRopl9r4LHj8S+W2T0IeO+tP+BGqR0XWmzEbxmg39DO
- PgU3lVtTEe5sEdL3TWlOru2nGIbyczeG3TCcem+Ku4AtndLm
-X-Developer-Key: i=dmitry.baryshkov@oss.qualcomm.com; a=openpgp;
- fpr=8F88381DD5C873E4AE487DA5199BF1243632046A
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTE2MDE3NyBTYWx0ZWRfXyk9hNVINuunp
- IX6DGMcw9AeYJBCBBJDMjdRid+cK/WNJq1esgw9Yz7GsyZoY/FbLvvmBLTqWGixUX72ZO8XXrxQ
- m9bumsfpgD8QV4FIgUeabfeGAx/yDuQ=
-X-Proofpoint-GUID: S0Zmdh-IRfxLb1vloZOWVTsV6Yx9H-5T
-X-Authority-Analysis: v=2.4 cv=N4m8hG9B c=1 sm=1 tr=0 ts=6aaa9828 cx=c_pps
- a=JIY1xp/sjQ9K5JH4t62bdg==:117 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
- a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22 a=e5mUnYsNAAAA:8
- a=EUspDBNiAAAA:8 a=ZQ5kVCjTFVWBDE528uIA:9 a=QEXdDO2ut3YA:10
- a=tNoRWFLymzeba-QzToBc:22 a=Vxmtnl_E_bksehYqCbjh:22
-X-Proofpoint-ORIG-GUID: S0Zmdh-IRfxLb1vloZOWVTsV6Yx9H-5T
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTE2MDE3NyBTYWx0ZWRfX9+YrkMsuwNPI
- Bp1pJgIwfDimibilDPLjm5QWZYLfggOT3l3GwoYLyG0yGp8hFmO50i6eTPWFUnPEvVMSQgBdJc0
- uqnDeZxdhtuiIv3gqS3qYOomnKENzP/Xv29pwZ1ZV6de2syNroBbfd/uFIqDoajadMPb/PQ7Vyl
- n0h/5rUNzM239mtuMSgUh9QuO0Jr981qqTEgpqpR/W5LivgYbf1BodYb8LpK2e7PwjGi0iNF5GX
- yWHZNAHRxo4HKnntVuEq3SnRjs5ZTQIgFINXDousjyVx0rzvGdpKj7FtDjSEvsvrXsZngKKavj1
- fji8taLL9h06U4ZwHUvye/YzsXwtePpU3Hc6uwu+AgIvN4Y9T3am7pgAntQMv5spdy4YS3hrt1k
- xy7KkuQtwa7qVtpb3Qk0kMIvjLuo+yFw+41RKbkI1oX42msGfzfepZJsVZ/nQOVGLhqi0JeFnAg
- XjkflPJAp/w6JArFbtg==
+X-Authority-Analysis: v=2.4 cv=H4JOUOYi c=1 sm=1 tr=0 ts=6aaa9923 cx=c_pps
+ a=rEQLjTOiSrHUhVqRoksmgQ==:117 a=j4ogTh8yFefVWWEFDRgCtg==:17
+ a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
+ a=L3-XMscUPCAweoWNVT8A:9 a=QEXdDO2ut3YA:10 a=2VI0MkxyNR6bbpdq8BZq:22
+X-Proofpoint-GUID: Dxywy0V3Ed7BOL1X57l2OaKBWiujLfpn
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTE2MDE3OSBTYWx0ZWRfXw2F0ExdrORiZ
+ fhuF44J5ekuXforVn9u6HZWvm52LaKCtRh3AQbXvuK290okDeTN2eQ4F0BIm1z5TqDgzmMeimmW
+ 8dwjzCevZlE8mQo8ffp5Jf53G3iwKduRGQzJMVa0i1xT7dq3XKr2mdW7DR1/JwLq6lZ96zp+Rx3
+ fDc+r8Usih7MbXYakBJBUX2pvzpyvidBUzHB1MWag1nc4/L/WfDQ5C203RvcnsgDHl/7OVxDdYz
+ +8BfG5leh8jgkXCIBW/pTl9OBedRkpRsxtkei9RrMM6lEZVU1eVoSMHYibAI6zoF7q0Fxh2lg8L
+ LE5/Qgfx0FE1wDC63I/81ksoWSS80eK1Qnf4WmrSsU1hYGiYGDKp76bN5GOcuUTbnVvoiw7pUi0
+ jNDulPQHOff/bpKFj6JBfvUO21sWX00F16hP12AmjNVpFbe+ktw39WkdlH0tA6PbEFcW4UAOOD0
+ uI3B75as67m8iYivGDQ==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTE2MDE3OSBTYWx0ZWRfX+MdxkRloV2UZ
+ kIgbg6Pi1sDT0GNZDquWv0u2YfEVYZV35HiPkwUTXj0UaCTp77LHWiWL52bFKrI9sf1SscaIXXk
+ kHGpC3P72ODn84cxQWt8Spqt5NtbFQw=
+X-Proofpoint-ORIG-GUID: Dxywy0V3Ed7BOL1X57l2OaKBWiujLfpn
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-09-16_02,2026-09-15_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- bulkscore=0 priorityscore=1501 impostorscore=0 suspectscore=0 malwarescore=0
- lowpriorityscore=0 clxscore=1015 phishscore=0 adultscore=0 spamscore=0
+ clxscore=1015 malwarescore=0 spamscore=0 priorityscore=1501 impostorscore=0
+ phishscore=0 adultscore=0 lowpriorityscore=0 suspectscore=0 bulkscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609160177
+ reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609160179
 
-drm_crtc_vblank_off() zeroes vblank->hwmode.crtc_clock to arm the sanity
-check in drm_crtc_vblank_helper_get_vblank_timestamp_internal(), which
-asserts that an atomic driver never asks for a vblank timestamp while the
-mode timings are not set up.  The only caller that can ask for one outside
-the vblank machinery is the fence deadline code, and it decides from atomic
-state rather than from the vblank state:
 
-  msm_dpu ae01000.display-controller: [drm] drm_WARN_ON_ONCE(drm_drv_uses_atomic_modeset(dev))
-  WARNING: drivers/gpu/drm/drm_vblank.c:756 at drm_crtc_vblank_helper_get_vblank_timestamp_internal+0x310/0x380
-   drm_crtc_vblank_helper_get_vblank_timestamp
-   drm_crtc_get_last_vbltimestamp
-   drm_crtc_next_vblank_start
-   drm_atomic_helper_wait_for_fences
-   drm_atomic_helper_commit
-   drm_mode_cursor_universal
-   drm_mode_cursor_common
-   drm_mode_cursor_ioctl
 
-set_fence_deadline() skips CRTCs that need a modeset or are not active, but
-both of those describe the commit it is called for.  A cursor update on a
-CRTC that a concurrent, already swapped in commit is taking through
-drm_crtc_vblank_off() has neither flag set, and that commit runs in parallel
-by design: drm_atomic_helper_wait_for_fences() is called before
-drm_atomic_helper_swap_state(), i.e. before commit_tail() waits for the
-previous commit.  kms_cursor_legacy@long-nonblocking-modeset-vs-cursor-atomic
-hits this window.
+On 9/10/2026 11:22 AM, Shawn Guo wrote:
+>> const struct qmp_phy_cfg *cfg = qmp->cfg;
+>>  
+>> -	reset_control_bulk_assert(qmp->cfg->num_nocsr_resets, qmp->nocsr_resets);
+>> +	if (qmp->nocsr_resets)
+>> +		reset_control_bulk_assert(qmp->cfg->num_nocsr_resets, qmp->nocsr_resets);
+>> +	if (qmp->resets)
+>> +		reset_control_bulk_assert(cfg->num_resets, qmp->resets);
+>>  
+>>  	clk_bulk_disable_unprepare(qmp->cfg->num_clks, qmp->clks);
+>>  	regulator_bulk_disable(cfg->num_vregs, qmp->vregs);
+>> @@ -335,6 +1067,20 @@ static int qmp_pcie_power_on(struct phy *phy)
+>>  		goto err_disable_pipe_clk;
+>>  	}
+>>  
+>> +	if (!qmp->skip_init) {
+>> +		qmp_pcie_init_port_registers(qmp);
+> Have we tested the patch on Glymur? As Glymur's cfgs have either .pll_tbls
+> nor .tbls, so skip_init is unconditionally false for Glymur. Is it
+> intentional to run qmp_pcie_init_port_registers() on Glymur?
+Thanks for the catch, I will test for glymur before posting next series.
+>
+>> +
+>> +		for (i = 0; i < cfg->num_regs; i++) {
+>> +			qphy_clrbits(qmp->base[i] + offs->pcs,
+>> +				     cfg->regs[QPHY_PCS_SW_RESET], SW_RESET);
+>> +			qphy_setbits(qmp->base[i] + offs->pcs,
+>> +				     cfg->regs[QPHY_PCS_START_CONTROL],
+>> +				     SERDES_START | PCS_START);
+>> +		}
+>> +
+>> +		usleep_range(2000, 2500);
+>> +	}
+>> +
+>>  	for (i = 0; i < cfg->num_regs; i++) {
+>>  		status = qmp->base[i] + offs->pcs + cfg->regs[QPHY_PCS_STATUS];
+>>  		ret = readl_poll_timeout(status, val, !(val & cfg->phy_status), 200,
+>> @@ -357,9 +1103,36 @@ static int qmp_pcie_power_on(struct phy *phy)
+>>  static int qmp_pcie_power_off(struct phy *phy)
+>>  {
+>>  	struct qmp_pcie *qmp = phy_get_drvdata(phy);
+>> +	const struct qmp_phy_cfg *cfg = qmp->cfg;
+>> +	const struct qmp_pcie_offsets *offs = cfg->offsets;
+>> +	int i;
+>>  
+>>  	clk_bulk_disable_unprepare(qmp->cfg->num_pipe_clks, qmp->pipe_clks);
+>>  
+>> +	/*
+>> +	 * While powering off the PHY, only nocsr_resets needs to be checked.
+>> +	 * This way, no matter whether the PHY settings were initially
+>> +	 * programmed by the bootloader or the PHY driver itself, we can
+>> +	 * reuse them the next time the PHY is powered on.
+>> +	 */
+>> +	if (cfg->pll_tbls && !qmp->nocsr_resets) {
+> Every cfg in the file (Glymur and all seven Nord ones) declares
+> nocsr_reset_list, and qmp_pcie_reset_init() only leaves qmp->nocsr_resets
+> NULL when num_nocsr_resets == 0. So the condition is always false, no?
+Thats true for current targets, but on future targets it might not be true.
+I will remove the check here for now, in future if we have any target with
+nocsr then
+we can add it back.
 
-drm_crtc_next_vblank_start() cannot spot it either.  It guards on
-framedur_ns and linedur_ns, which drm_crtc_vblank_off() leaves at their old
-values, so it walks into the timestamp query anyway.  Nor would testing
-crtc_clock there be enough on its own: both it and the query read state the
-writer may be changing underneath.
+Ack for rest of the comments.
 
-Take vblank_time_lock across the check and the query, and take it over the
-store in drm_crtc_vblank_off(), so the two cannot interleave, and reject the
-call when the mode timings are gone.  Every other reader of hwmode already
-holds this lock, drm_crtc_accurate_vblank_count() already calls into the
-same timestamp path under it from process context, and it is the innermost
-of the vblank locks, so nothing nests the wrong way round.
-
-This does put the driver's get_scanout_position() callback inside an
-interrupts-off section on the atomic commit path.  That is the same cost
-drm_crtc_accurate_vblank_count() already pays, and it is bounded by
-DRM_TIMESTAMP_MAXRETRIES.
-
-Fixes: d39e48ca80c0 ("drm/atomic-helper: Set fence deadline for vblank")
-Reported-by: Rob Clark <robin.clark@oss.qualcomm.com>
-Closes: https://gitlab.freedesktop.org/drm/msm/-/merge_requests/243#note_3662857
-Assisted-by: LLM
-Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
----
-Rob spotted this splat in the drm/msm CI on a sc7180 trogdor board, in
-kms_cursor_legacy@long-nonblocking-modeset-vs-cursor-atomic.  It is not
-msm specific: the fence deadline code queries the vblank timestamp based
-on atomic state, which says nothing about whether a concurrent commit has
-already taken the CRTC's vblank down.
-
-f2c7ca890182 ("drm/atomic-helper: Don't set deadline for modesets") fixed
-the case where the commit doing the query is itself the modeset.  This is
-the other half of it.
-
-Reproduced and tested on an SM8350 HDK: the WARN fires on the first run of
-the subtest without the patch, and 20 consecutive runs are clean with it,
-with CONFIG_PROVE_LOCKING=y.
----
- drivers/gpu/drm/drm_vblank.c | 20 +++++++++++++++-----
- 1 file changed, 15 insertions(+), 5 deletions(-)
-
-diff --git a/drivers/gpu/drm/drm_vblank.c b/drivers/gpu/drm/drm_vblank.c
-index f90fb2d13e42..2984ce3b68ed 100644
---- a/drivers/gpu/drm/drm_vblank.c
-+++ b/drivers/gpu/drm/drm_vblank.c
-@@ -1020,28 +1020,36 @@ EXPORT_SYMBOL(drm_crtc_vblank_count_and_time);
-  */
- int drm_crtc_next_vblank_start(struct drm_crtc *crtc, ktime_t *vblanktime)
- {
-+	struct drm_device *dev = crtc->dev;
- 	struct drm_vblank_crtc *vblank;
- 	struct drm_display_mode *mode;
-+	unsigned long irqflags;
- 	u64 vblank_start;
-+	int ret = -EINVAL;
- 
--	if (!drm_dev_has_vblank(crtc->dev))
-+	if (!drm_dev_has_vblank(dev))
- 		return -EINVAL;
- 
- 	vblank = drm_crtc_vblank_crtc(crtc);
- 	mode = &vblank->hwmode;
- 
--	if (!vblank->framedur_ns || !vblank->linedur_ns)
--		return -EINVAL;
-+	spin_lock_irqsave(&dev->vblank_time_lock, irqflags);
-+
-+	if (!vblank->framedur_ns || !vblank->linedur_ns || !mode->crtc_clock)
-+		goto out;
- 
- 	if (!drm_crtc_get_last_vbltimestamp(crtc, vblanktime, false))
--		return -EINVAL;
-+		goto out;
- 
- 	vblank_start = DIV_ROUND_DOWN_ULL(
- 			(u64)vblank->framedur_ns * mode->crtc_vblank_start,
- 			mode->crtc_vtotal);
- 	*vblanktime  = ktime_add(*vblanktime, ns_to_ktime(vblank_start));
-+	ret = 0;
-+out:
-+	spin_unlock_irqrestore(&dev->vblank_time_lock, irqflags);
- 
--	return 0;
-+	return ret;
- }
- EXPORT_SYMBOL(drm_crtc_next_vblank_start);
- 
-@@ -1405,7 +1413,9 @@ void drm_crtc_vblank_off(struct drm_crtc *crtc)
- 
- 	/* Will be reset by the modeset helpers when re-enabling the crtc by
- 	 * calling drm_calc_timestamping_constants(). */
-+	spin_lock_irq(&dev->vblank_time_lock);
- 	vblank->hwmode.crtc_clock = 0;
-+	spin_unlock_irq(&dev->vblank_time_lock);
- 
- 	/* Wait for any vblank work that's still executing to finish */
- 	drm_vblank_flush_worker(vblank);
-
----
-base-commit: e6e35979777d646fe3c7c94dca7dd32fb25d45f4
-change-id: 20260916-vblank-deadline-lock-727dc0e182e9
-
-Best regards,
---  
-With best wishes
-Dmitry
+- Krishna Chaitanya.
 
