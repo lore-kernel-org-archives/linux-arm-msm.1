@@ -1,88 +1,86 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9352B45D19F
-	for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 21:16:40 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6FC4840928D
+	for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 21:24:02 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789593414; cv=none; b=ZGcaHkpEu4TCWUT9yvFOGjRd2OlV0NOF6qv8kdWVU2E3iJdFWE/EfFZqqa//D5zE8wl/je9aijkslUfRkkAbejyXe0KZmz/H2D7oG8CmNGUPJTPlvYKohHO9gApAVobZQvByXnWyAH2kietyS+CJVuLa2Wyt8JIVJfSHXmbBGzI=
+	t=1789593856; cv=none; b=H9XRYogzVXM7wW1wBCpMR0sqROJvltf+41oRzmJyxt09eoyiXmx1e8VJ6RnA9ZB/8Sz48+1NSbKIgUhy/X3nGn3pV8PGH3uat303R2CusOs6s9XGoPYjxFD7yNxbMQrJ/zTPXVMXDA4giUXbTRV7aUSs8CGYB/zzWDjI1MijsOM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789593414; c=relaxed/simple;
-	bh=NXDeynE+4VTMCJQ1nw8qyw1rHsMURFTSCpVFmSmMAes=;
+	s=arc-20240116; t=1789593856; c=relaxed/simple;
+	bh=gJJWBQeFSX1YsrOWygD+rC9pHJoBZw2+qKeEeFs6RRo=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=U/IO8l+qWZaPa0858vOL4MC+uT8jjKJyOxPP9JOzFsGw/BA1b3JxvaEQR8UsFb2KDEkrtgRYMyR6JyYpR/FUcL/9qg3ZoOmjRPhhk6+PKOhWciBA1FZfJbFpGQ/1r6yVvIeuZYMDEzBtRA5qvtB8mIqHFJfTgVipGIMTMB1iIq0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=GGyK/0zH; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=URrFwEsu; arc=none smtp.client-ip=205.220.180.131
+	 In-Reply-To:Content-Type; b=Bcq0sM4EIAdvGGPo1bmHGxmaIatelRuMxMCrs2U1i/6kIqIKRxH9GL2x9cmG8CsVpMVIDZ7ilk2rkx6O174MzVNRDCqKHzJhfMoFnhOBmihIsgHvYuJmjtl1bvBSAm55FwdAIwf/HChu8NHPbQ4YFaLpmbwQsUeMIFYhxTQN/Hk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=B9zVUleq; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=RjUXA05P; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="GGyK/0zH";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="URrFwEsu"
-Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68GFeBkf3107044
-	for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 21:16:37 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="B9zVUleq";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="RjUXA05P"
+Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68GGtKqe3402921
+	for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 21:23:50 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	bJ5ikrelPOxZxaf5C/PtGjFWO0wzJsRg+Use1Q/ipvM=; b=GGyK/0zHNxSER+y2
-	LaQiDgbRKmox1nWm6jaUokUYLQp7Wle7RA2P9+sEAt0iAnLMR/5HNtMUZVIXqAC9
-	gxpBU2pYo437aMdnbYROqvsqeFmXRBpcwYO9tKgCY4vwuYPDTEVLWvypG+CDihoz
-	OQnrWld7Q9ZTRb8uiXz5DsDm61iz+vtuoi6Hcu3KUTBCBkEp00qO90XSl4YnHIah
-	4cD0QOf86qmD3vibijpIY8nYM5wqP/9sEeCQ4UEtV+Ayqm7lvWv91/fCA9bSchKC
-	r5VSz8aurAUmSVofu7dpEpGm6C04jj6YrSJldOGTNpcdkU8Dwq26FGPJ4u42rzZU
-	zTd7tg==
-Received: from mail-pj1-f70.google.com (mail-pj1-f70.google.com [209.85.216.70])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gquw2t36y-1
+	w/qTLVLi8JrEbZ5Wtjo59+5wUP++p74xd9zORAOvt3Q=; b=B9zVUleqVc0IwYvo
+	2kVS9RooIb9ERrcP5PS6AJMR0gaiIevixWLq5qN/3aBKETxjM+rhRBUTzcok5Whb
+	svM4ZTgwJPuPkCaNElgopGA52rcmgpqGQ7XVErtlmAIEq+GzVMbMCz6NH7EA7DIx
+	JFvOfToWEO0K8/39zGLSg9eniwoyvlbxaElKoqjDbAnPej0Q6e50+et7aoofhuox
+	XHRPcOIRMlbXXmowCW3mvxB+TDmnEzDZfJDrqhJKvE0PKJOxQYHIl9qkUCr6fnmg
+	4vxlh7AoQbWeNSsdY4heO8bk0K6uRVpYox3qdPrQXH1kiaweWsoA9yWTsJkLltAR
+	0ei0/Q==
+Received: from mail-pg1-f198.google.com (mail-pg1-f198.google.com [209.85.215.198])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gqy2d15sg-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 21:16:37 +0000 (GMT)
-Received: by mail-pj1-f70.google.com with SMTP id 98e67ed59e1d1-38e8e864ef0so233239a91.0
-        for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 14:16:36 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 21:23:50 +0000 (GMT)
+Received: by mail-pg1-f198.google.com with SMTP id 41be03b00d2f7-cc2229450b4so92554a12.1
+        for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 14:23:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1789593396; x=1790198196; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1789593830; x=1790198630; darn=vger.kernel.org;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=bJ5ikrelPOxZxaf5C/PtGjFWO0wzJsRg+Use1Q/ipvM=;
-        b=URrFwEsulBdImvRI87pEAn3o8xUUZdidtIhIZ2nqph/IBEDXzjEqPZtYjwDJNjCcWh
-         PPiVnWluxyT9rHVIuC9sivFsHr7XXoM7NjJwA4ck0ccqPENzxWNzzXcXTachC6ih4ohW
-         IUazFpRktcxiMTInt2ktGH7UR7ngYgP8Ek7XMsm09y/MX5aZlNPGRILljjx5a/OSl53s
-         y/dn4q+nx4Zjuw8m6VYZPI/6bnbMDtLOcz95Sx/b8UCULXP6xtRRIaYIVhEJfHyhTLhH
-         umsqTyCf5f3/i14kViPVpwYt6D5wnTgVN4U09Lptk6LBqZA/A0ZQSaB+KSntAPxRmzfr
-         8QnQ==
+        bh=w/qTLVLi8JrEbZ5Wtjo59+5wUP++p74xd9zORAOvt3Q=;
+        b=RjUXA05PcrkLXiwLmHcIj1OkpOoedtm849jRtkyDsFjwn9FBHHDmurph5VcZOvzqnh
+         xMtVa3H8ztx+CKXhKa1T9CaLm+73Y+d1FqYSTRxdmkZ22IZ4wGuhqOgH0N1jN1K3aImq
+         mIJklUB2eTTVy/dt13TqNSyoVYQB60dWAEIBq7X7+4jgPxeSqoMSFp4cykPw9ZzyQMHv
+         OOIr3ihTD+lbo+0Cyl6B6pjdjCK28u+RUMizBKTZ/y1Ks+5+ehYf+Z6V0rJc+iKLAsRq
+         SXbC1Q3thNZc7/g9PdK02KjZwDbwUlXs5A2P6VZzId7tA9uYjaFX+mn7qlwZb3BWmtND
+         KcKw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1789593396; x=1790198196;
+        d=1e100.net; s=20260707; t=1789593830; x=1790198630;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=bJ5ikrelPOxZxaf5C/PtGjFWO0wzJsRg+Use1Q/ipvM=;
-        b=O8+pG6rNVIPrK16D+frGQwtwH0/TACDA3JsQUWzQk7h2kL/fIpQ/O1leZ1EI2P4mJq
-         kjcA7vhMHg76zQM1P+6FceUh9xGIbRu/K7gLb/34zFIPoPbIZfaT2Z0oW0E/eOS5cQj3
-         ClNGR/IDy2mPntAFwnHONC+iWa9Pi2UazHMbu+85AA+b5w/Tyxc8JK4PucGEaJBCuxrI
-         mxF7FgffLnjuFukm8sBOzi2RMo+WExzHf9ixL7fs+wX4NzoKAQJsEjaO28MA93l/7Xte
-         yLmQtVEROkMJZleuPJjf9ZzzmwCYu924RA7CbtCiyrEEMrT2IGxZZos4P+0B70C8pTE4
-         mdHw==
-X-Forwarded-Encrypted: i=1; AKwUvBxB2+HC4QgdRk9MpBXGFzXNhUtkNJ+d1J0EyTlKFDHlGCZ4QsJDQ+WNOvsm+SPItSf3XCZ500RcdaEP+731@vger.kernel.org
-X-Gm-Message-State: AFuF++n0miEJ0GOgiZG4ojwQE1xPpE2lLyC0dC3QQw3wTLPR0UZXuqet
-	o1f3/9WjAJoEzpL3C93iMKZ66nf/JySKdfzytz3GL24RO/tMwcDGZJVwkZs3TfeglerVfZTf/CP
-	AnZY3Z4kDkbucHeGOpWkxLCFXK9s2GP+CJUZNRSSQJsMtEGB/BYmIhM95UX1ySN+ngXKdJgE7cV
-	0=
-X-Gm-Gg: AYBFou1Uy03xbQ8DCSpKcqVH90MwAm3c+fnZAeYxz5yTkXivfeZOz6PrDMA4tcK4+45
-	mHcHwjL7+VpUBK4Rqv1OORPW9gMlnSQD6WP9qucJ6qYD+QYUkuQ0oKJV7TAZLI0m6sj1AtcidMZ
-	MBnvk0j/Wx/dUL8RCHqKnKnv+vFTfUaUqrmlkF8Hd75pb4/2pTXllI//KJpPFEy6z7vt6I8VO+g
-	K9wvBFAybvXnnDZcrvknuKw5MnaDyJehHUnnXq5H3xXVbbeD3OUzcKx+wvxAvUmu3Ill8D0S7Mf
-	zziWpXLgBBvygOMwFb2V25gIuQxDCygyQMe03upb4bVIZCeArpK/1Rg8AEedn7Xnq+sqUh3Ue/L
-	6BZgdbLNmcx2p7iaCqT0qKerMBA7b4TJV
-X-Received: by 2002:a17:90b:1811:b0:39d:e54c:8658 with SMTP id 98e67ed59e1d1-39e1e250230mr11033526a91.5.1789593396042;
-        Wed, 16 Sep 2026 14:16:36 -0700 (PDT)
-X-Received: by 2002:a17:90b:1811:b0:39d:e54c:8658 with SMTP id 98e67ed59e1d1-39e1e250230mr11033403a91.5.1789593395476;
-        Wed, 16 Sep 2026 14:16:35 -0700 (PDT)
+        bh=w/qTLVLi8JrEbZ5Wtjo59+5wUP++p74xd9zORAOvt3Q=;
+        b=CfCUskGxVfL4WFixiN1SC66eTFGn//Ym8XSpZ5bHGFr6o013W+F5oEgumyzwkKe9DB
+         Q59lI2BNh6gSjWCx8ZGHuVLBRVEfzhjSnlhbyeqTLLorfq6k+xixMlalkOJcbSVt1/Uf
+         ftDJ3msfVIilu/uxWm4boZj8Lm0l6B/cY5bFBcQk9o+Prb9lk8HzzzYciDb5cXWtLHnl
+         7c+cWKJCckQAfXQo1tOaUlZJ4CE3gfvUPdOTMhzjsZXMOb9zfRGLGl1FQ2wKtYr19jK3
+         BOPydUspOzvrFZp6fONlj6xEAJSIK4+3HwNrj7glRo4TZ3XFdYoOj7ot3cWZpaSp5y+t
+         GVWg==
+X-Gm-Message-State: AFuF++k1S2JWngv0Iw8D7sdWaJ1iaWnDE8sefSdokD0IlK2Ja1sAnHJy
+	VsQ+NwVGtAQL0N/S6Ywj9bNtRhLSCvckHhxyzHHDqeC1+3SGI8J3kSDByALEsYW/cOwo7aPTXUV
+	Qlo7qpO2vIkINUYI0l//qgdFe68iBBf3yZfauguOv8lHA9AxLB+UztpfbmE9xxcFUY/Y=
+X-Gm-Gg: AYBFou1Qm+tsG7Hsit5giIEp90JjqMaaNpm8FAPoWRdwb1KLhSl2r6V/IqrK3tHvOWp
+	Fa3GTVVpXPTEHQF1GrnSv64PyjtYYag7HmalBTDNV1S8HWJQa3XBYB6owXC35fCV1auwUZW4Nd5
+	Nn607L5x4Jyp2mDMP2LjTdGmn3IlKyDvKxuL4HKj3k8CghebmFO/z5szYkqDmUBDHUKRRpKF1x0
+	qFHBtRa1hRvQObupvbnje5JHuHLsQCitBuv83Q0CszREMTDV/qsWJhtS5DQfWxKXsfdaOtLbMm/
+	RWildDsUUEtBPM9nB5wLSd/NHIdkf4aVNzEz7vqUh5FJxXsYvUJwWjmUW38yN9NplP4fMoYtJ8l
+	AWolKbnjfuwhfvvzISQFazYewYAkY7B0Z
+X-Received: by 2002:a05:6a21:6b10:b0:3da:3bdb:b22a with SMTP id adf61e73a8af0-3dd5f71a912mr10826727637.20.1789593829851;
+        Wed, 16 Sep 2026 14:23:49 -0700 (PDT)
+X-Received: by 2002:a05:6a21:6b10:b0:3da:3bdb:b22a with SMTP id adf61e73a8af0-3dd5f71a912mr10826675637.20.1789593829396;
+        Wed, 16 Sep 2026 14:23:49 -0700 (PDT)
 Received: from [192.168.1.86] ([65.181.15.100])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-39e35e532e4sm1147947a91.10.2026.09.16.14.16.29
+        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-cc50a7a3526sm2253425a12.0.2026.09.16.14.23.43
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 16 Sep 2026 14:16:34 -0700 (PDT)
-Message-ID: <d7ba3e45-84fa-409d-bd43-23caa05587de@oss.qualcomm.com>
-Date: Thu, 17 Sep 2026 07:16:27 +1000
+        Wed, 16 Sep 2026 14:23:48 -0700 (PDT)
+Message-ID: <786a1460-c660-4de7-bb07-debdbd6a4661@oss.qualcomm.com>
+Date: Thu, 17 Sep 2026 07:23:40 +1000
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -90,199 +88,157 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH RFC 5/5] dt-bindings: tee: add RISC-V RPMI TEE transport
-To: Anup Patel <anup@brainfault.org>
-Cc: Jens Wiklander <jenswi@kernel.org>, Sumit Garg <sumit.garg@kernel.org>,
+Subject: Re: [PATCH RFC 1/5] optee: riscv: add RPMI TEE service group
+ transport
+To: Trilok Soni <trilokkumar.soni@oss.qualcomm.com>,
+        Jens Wiklander <jenswi@kernel.org>, Sumit Garg <sumit.garg@kernel.org>,
         Paul Walmsley <pjw@kernel.org>, Palmer Dabbelt <palmer@dabbelt.com>,
         Albert Ou <aou@eecs.berkeley.edu>, Alexandre Ghiti <alex@ghiti.fr>,
-        Rahul Pathak <rahul@summations.net>, Rob Herring <robh@kernel.org>,
+        Rahul Pathak <rahul@summations.net>, Anup Patel <anup@brainfault.org>,
+        Rob Herring <robh@kernel.org>,
         Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley
- <conor+dt@kernel.org>, linux-arm-msm@vger.kernel.org,
-        linux-kernel@vger.kernel.org, op-tee@lists.trustedfirmware.org,
-        linux-riscv@lists.infradead.org, devicetree@vger.kernel.org
+        Conor Dooley <conor+dt@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
+        op-tee@lists.trustedfirmware.org, linux-riscv@lists.infradead.org,
+        devicetree@vger.kernel.org
 References: <20260912-rpmi-tee-service-grp-dev-v1-0-1d1d35c2a859@oss.qualcomm.com>
- <20260912-rpmi-tee-service-grp-dev-v1-5-1d1d35c2a859@oss.qualcomm.com>
- <CAAhSdy3Or_uDWuQniUGguc9AwL8smF6XHhJ0kizFOJKJ0N+9OA@mail.gmail.com>
+ <20260912-rpmi-tee-service-grp-dev-v1-1-1d1d35c2a859@oss.qualcomm.com>
+ <a9d9aac7-cb2d-46fe-a220-40f61f615b89@oss.qualcomm.com>
 Content-Language: en-US
 From: Amirreza Zarrabi <amirreza.zarrabi@oss.qualcomm.com>
-In-Reply-To: <CAAhSdy3Or_uDWuQniUGguc9AwL8smF6XHhJ0kizFOJKJ0N+9OA@mail.gmail.com>
+In-Reply-To: <a9d9aac7-cb2d-46fe-a220-40f61f615b89@oss.qualcomm.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTE2MDI5NiBTYWx0ZWRfXxJdKKyjMB+Od
- cRNLgEslQgFMSyNyAmi2WpaFqV+GjSvwtTmxS+E9FIbNLtwxQjzAyvqYETdxcIEq97cmJMMOQZu
- ueSoMkGqMiuZBgO0S3m584P+3n0ckLg=
-X-Proofpoint-GUID: 3-3807Z9CBVKi5f712VVE6wSmI5A4lQj
-X-Authority-Analysis: v=2.4 cv=N4m8hG9B c=1 sm=1 tr=0 ts=6aab0735 cx=c_pps
- a=0uOsjrqzRL749jD1oC5vDA==:117 a=RYJI0oIToGyOemi2SthaJQ==:17
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-ORIG-GUID: hAxRgUl0OZoBoX2OAU9QtvRDg79yjViG
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTE2MDI5NyBTYWx0ZWRfX3dGr4X0pYA8U
+ 32KaeYld2bou8qRNf0a9gjuY65pPwRXIeKhdHYViaEGsmuvHfP/WU8OdjRtiZ1oD89Yj6wxrdpJ
+ Fu0gTylAbLIcUF3riAH3ebocrqV+1jA=
+X-Authority-Analysis: v=2.4 cv=HbeB3SE8 c=1 sm=1 tr=0 ts=6aab08e6 cx=c_pps
+ a=Qgeoaf8Lrialg5Z894R3/Q==:117 a=RYJI0oIToGyOemi2SthaJQ==:17
  a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
- a=gEfo2CItAAAA:8 a=V1jnuoLLAAAA:20 a=EUspDBNiAAAA:8 a=VwQbUJbxAAAA:8
- a=b45o4kL6AAAA:8 a=oSFF6Vc5-LCmsOG0wpkA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
- a=mQ_c8vxmzFEMiUWkPHU9:22 a=sptkURWiP4Gy88Gu7hUp:22 a=dhdsR-PFWuPJUldTnwXm:22
- a=bA3UWDv6hWIuX7UZL3qL:22
-X-Proofpoint-ORIG-GUID: 3-3807Z9CBVKi5f712VVE6wSmI5A4lQj
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTE2MDI5NiBTYWx0ZWRfX36eDTBoBo+w8
- /bNAdpwtGVRXfLH/voSTiUqNmoL5wB/479Y0yrvtMvEV4GUoPfGGRJ5qqGqKwdp1X51ktPUAlVd
- PoyfJRIA/8dX9Adv7J9c5a7ioD4sDEU2D8WNipWCYuvR/lgGvlLFCu9P4doQ4a+QWbSMPOI05jM
- aZYFRkrtyPrp9yOIBYUdjym+MH8syjkLE3iJ0zxKKY63gxP3zUJQBnDcbLXhJ3+s8Wex2HWDOSh
- RZw/BnfFWcpqHe6Ws00uUt+VCNtuc/h1/lVqjQNljOrRW7Gy1r6k+IMfFgR6p5T7f9JvvUdEtf+
- uAysj83SLrXfjmmxL5s9YWOIpK+PyMm22m/ShgcQFCv+kg3UsAaq19CqHLA3e1fdAVqOrCK8Hp9
- Qe0D0LSOrH2VVG2vRI0U7hG6IzoEZCVgfzgKTg4ewSj7q9icCGhwV+49CxAdvrSWiVPx+uxihGj
- k7ptQQEGzqWnG4HWeRA==
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22
+ a=EUspDBNiAAAA:8 a=-u4usqK0Ikitso02ChQA:9 a=QEXdDO2ut3YA:10
+ a=x9snwWr2DeNwDh03kgHS:22
+X-Proofpoint-GUID: hAxRgUl0OZoBoX2OAU9QtvRDg79yjViG
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTE2MDI5NyBTYWx0ZWRfX36+kHmg8E34s
+ +7nFbNoMzuizz9+tBRv9vbSEMuD46/d3YFXMjwiCzGwsvkwawd+C5DdNboOBW7DFbKS7tEBpCTi
+ x48U7Gq4coQej9efgWQT10OO/oR+pbw8mZN3icYXiECn+F3ylzni46hm3fBb659d5WU/IWVXhCB
+ IWiz9A2S4+Y6cQGTMmV7qs253+IKu3SGfkxegFSZr4/wUMHkGbCV0ViZ3LCU+snhxSQiufehXfo
+ ULIyVJdaoZVD7Gc0b6rv2jKtRLgTO5SJ6Sh7oviaoNodtW6LLyCgu6Aqpi4KdaJYNwcfsNaq4O1
+ sQN8c5DGFMu1a7Tlt+TkQmVT73B/q3CHF7H/W8p6rKJar3Uu3wqkYJ+YIneuu5JKukhuiXc3Hu0
+ dq8sZKDar/NFtyWWdIT0YGUnXgjRAvLpSLK673jC+oPT7SMTDSWVyLQ8JgjRWX+wxUDNWEnvKPJ
+ XUwsTZIrM0Nh/1x7LHg==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-09-16_03,2026-09-16_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- bulkscore=0 priorityscore=1501 impostorscore=0 suspectscore=0 malwarescore=0
- lowpriorityscore=0 clxscore=1015 phishscore=0 adultscore=0 spamscore=0
+ impostorscore=0 priorityscore=1501 bulkscore=0 spamscore=0 adultscore=0
+ suspectscore=0 malwarescore=0 phishscore=0 clxscore=1015 lowpriorityscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609160296
+ reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609160297
 
-Hi Anup,
+Hi Trilok,
 
-On 9/16/2026 8:12 PM, Anup Patel wrote:
-> On Sat, Sep 12, 2026 at 3:45 PM Amirreza Zarrabi
-> <amirreza.zarrabi@oss.qualcomm.com> wrote:
+On 9/16/2026 3:30 PM, Trilok Soni wrote:
+> On 9/12/2026 3:15 AM, Amirreza Zarrabi wrote:
+>> Add an OP-TEE transport for RISC-V using the RPMI TEE service group over
+>> the SBI MPXY mailbox framework.
 >>
->> Add a device-tree binding for the OP-TEE RISC-V transport using the RPMI
->> TEE service group over SBI MPXY.
+>> Request one mailbox channel per hart and use the channel corresponding to
+>> the current CPU when issuing a TEE request. Probe the RPMI TEE service
+>> group and required memory-sharing capabilities before registering the
+>> transport.
 >>
->> Describe one mailbox channel per hart and an optional interrupt used as
->> the availability doorbell for asynchronous notifications.
->>
->> Add the binding to the existing OP-TEE MAINTAINERS entry.
+>> This provides the basic transport and discovery support needed by the
+>> following patches.
 >>
 >> Signed-off-by: Amirreza Zarrabi <amirreza.zarrabi@oss.qualcomm.com>
 >> ---
->>  .../bindings/tee/riscv,rpmi-mpxy-tee.yaml          | 65 ++++++++++++++++++++++
->>  MAINTAINERS                                        |  1 +
->>  2 files changed, 66 insertions(+)
+>>  drivers/tee/optee/Makefile                 |   1 +
+>>  drivers/tee/optee/core.c                   |   8 +-
+>>  drivers/tee/optee/optee_private.h          |  34 ++++
+>>  drivers/tee/optee/optee_riscv.c            | 312 +++++++++++++++++++++++++++++
+>>  drivers/tee/optee/optee_riscv.h            | 141 +++++++++++++
+>>  include/linux/mailbox/riscv-rpmi-message.h |   1 +
+>>  6 files changed, 495 insertions(+), 2 deletions(-)
 >>
->> diff --git a/Documentation/devicetree/bindings/tee/riscv,rpmi-mpxy-tee.yaml b/Documentation/devicetree/bindings/tee/riscv,rpmi-mpxy-tee.yaml
->> new file mode 100644
->> index 000000000000..8f6ff313fd42
->> --- /dev/null
->> +++ b/Documentation/devicetree/bindings/tee/riscv,rpmi-mpxy-tee.yaml
->> @@ -0,0 +1,65 @@
->> +# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
->> +# Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
->> +%YAML 1.2
->> +---
->> +$id: http://devicetree.org/schemas/tee/riscv,rpmi-mpxy-tee.yaml#
->> +$schema: http://devicetree.org/meta-schemas/core.yaml#
->> +
->> +title: RISC-V RPMI TEE service group based message proxy
->> +
->> +maintainers:
->> +  - Amirreza Zarrabi <amirreza.zarrabi@oss.qualcomm.com>
->> +
->> +description: |
->> +  The RISC-V Platform Management Interface (RPMI) [1] defines a messaging
->> +  protocol which is modular and extensible. The supervisor software can
->> +  send/receive RPMI messages via the SBI MPXY extension [2] or some dedicated
->> +  supervisor-mode RPMI transport.
->> +
->> +  The RPMI specification [1] defines a TEE service group which is the RISC-V
->> +  analog of Arm FF-A: OP-TEE and the rich execution environment (REE, i.e.
->> +  Linux) are peer endpoints and the RPMI framework (machine mode firmware)
->> +  mediates every message. Entering OP-TEE on a hart runs it on that hart until
->> +  it responds, so the SBI implementation provides one SBI MPXY channel per
->> +  hart; all of them are listed, in hart order, on a single node.
->> +
->> +  ===========================================
->> +  References
->> +  ===========================================
->> +
->> +  [1] RISC-V Platform Management Interface (RPMI) v1.0 (or higher)
->> +      https://github.com/riscv-non-isa/riscv-rpmi/releases
->> +
->> +  [2] RISC-V Supervisor Binary Interface (SBI) v3.0 (or higher)
->> +      https://github.com/riscv-non-isa/riscv-sbi-doc/releases
->> +
->> +properties:
->> +  compatible:
->> +    const: riscv,rpmi-mpxy-tee
->> +
->> +  mboxes:
->> +    minItems: 1
->> +    description:
->> +      One SBI MPXY channel implementing the RPMI TEE service group per hart,
->> +      listed in the same order as the CPU nodes.
+>> diff --git a/drivers/tee/optee/Makefile b/drivers/tee/optee/Makefile
+>> index ad7049c1c107..925b8ec7ef68 100644
+>> --- a/drivers/tee/optee/Makefile
+>> +++ b/drivers/tee/optee/Makefile
+>> @@ -9,6 +9,7 @@ optee-objs += supp.o
+>>  optee-objs += device.o
+>>  optee-objs += smc_abi.o
+>>  optee-objs += ffa_abi.o
+>> +optee-$(CONFIG_RISCV_SBI_MPXY_MBOX) += optee_riscv.o
+>>  
+>>  # for tracing framework to find optee_trace.h
+>>  CFLAGS_smc_abi.o := -I$(src)
+>> diff --git a/drivers/tee/optee/core.c b/drivers/tee/optee/core.c
+>> index a52c1f498b99..63f1725e646e 100644
+>> --- a/drivers/tee/optee/core.c
+>> +++ b/drivers/tee/optee/core.c
+>> @@ -220,6 +220,7 @@ void optee_remove_common(struct optee *optee)
+>>  
+>>  static int smc_abi_rc;
+>>  static int ffa_abi_rc;
+>> +static int riscv_abi_rc;
+>>  static bool intf_is_regged;
+>>  
+>>  static int __init optee_core_init(void)
+>> @@ -245,9 +246,10 @@ static int __init optee_core_init(void)
+>>  
+>>  	smc_abi_rc = optee_smc_abi_register();
+>>  	ffa_abi_rc = optee_ffa_abi_register();
+>> +	riscv_abi_rc = optee_riscv_abi_register();
 > 
-> I am not sure why you need separate MPXY channel per hart. The MPXY shared
-> memory is already per-hart whereas the MPXY channel will be doman specific
-> for TEE.
-
-True. My reasoning was that TEE_CALL, as I understand it, is expected to execute on
-the same hart that issued it. Given that, the mailbox core holds the per-channel spinlock
-across the call to `send_data()`, while the underlying `sbi_ecall()` is synchronous
-and does not return until the TEE call completes.
-
-So, if two harts shared the same channel, a hart executing a long-running TEE operation
-would hold that channel's lock for the duration of the call, and another hart
-trying to enqueue on the same channel would spin waiting for it.
-
-Using per-hart channels avoids that cross-hart contention. I agree that this may
-not be the right layer in which to address the issue. I did not pull it to the discussion in to this RFC.
-I'm happy to use single channel for now and follow up on it separately if useful.
-
+> Isn't it growing rapidly now? We have two register calls for the ARM,
+> one for the RISC-V. One more region specific ISA I am aware of and it
+> may have op-tee support in future? It is time we fix this logic
+> in the better way. 
+>
 > 
-> Also, for this binding refererring to only mailbox channel is
-> sufficient. The underlying
-> mechanism to send RPMI messages is abstracted away by the mailbox controller
-> driver.
+>>  
+>> -	/* If both failed there's no point with this module */
+>> -	if (smc_abi_rc && ffa_abi_rc) {
+>> +	/* If all failed there's no point with this module */
+>> +	if (smc_abi_rc && ffa_abi_rc && riscv_abi_rc) {
+> 
+> This is started looking ugly in my opinion. 
+> 
+>>  		if (IS_REACHABLE(CONFIG_RPMB)) {
+>>  			rpmb_interface_unregister(&rpmb_class_intf);
+>>  			intf_is_regged = false;
+>> @@ -270,6 +272,8 @@ static void __exit optee_core_exit(void)
+>>  		optee_smc_abi_unregister();
+>>  	if (!ffa_abi_rc)
+>>  		optee_ffa_abi_unregister();
+>> +	if (!riscv_abi_rc)
+>> +		optee_riscv_abi_unregister();
+>>  }
+>>  module_exit(optee_core_exit);
+>>  
+>> diff --git a/drivers/tee/optee/optee_private.h b/drivers/tee/optee/optee_private.h
+>> index aefe1e6f5689..8d22d65e087b 100644
+>> --- a/drivers/tee/optee/optee_private.h
+>> +++ b/drivers/tee/optee/optee_private.h
+>> @@ -171,6 +171,31 @@ struct optee_ffa {
+>>  	struct work_struct notif_work;
+>>  };
+>>  
+>> +/**
+>> + * struct optee_riscv - RPMI TEE communication struct
+> 
+> do we need to name it optee_riscv? we don't use optee_arm anywhere in this
+> code I believe. 
+> 
+> More later...
+> 
 
-Ack.
+The naming convention, and even the file structure, will change in v2.
+This RFC currently mirrors the _internal_ FF-A implementation, which is neither
+required nor ideal. We are moving away from that structure.
 
-Best regards,
+Best Regards,
 Amir
-
-> 
->> +
->> +  interrupts:
->> +    maxItems: 1
->> +    description:
->> +      Availability doorbell raised by OP-TEE to signal asynchronous
->> +      notifications over the RPMI TEE signal bus. Optional; when absent
->> +      asynchronous notification is disabled.
->> +
->> +required:
->> +  - compatible
->> +  - mboxes
->> +
->> +additionalProperties: false
->> +
->> +examples:
->> +  - |
->> +    tee {
->> +        compatible = "riscv,rpmi-mpxy-tee";
-> 
-> This must be "riscv,rpmi-tee" based on above comments.
-> 
->> +        mboxes = <&mpxy_mbox 0x10 0x0>, <&mpxy_mbox 0x11 0x0>;
-> 
-> Like mentioned above, only one mailbox channel is sufficient.
-> 
->> +    };
->> +...
->> diff --git a/MAINTAINERS b/MAINTAINERS
->> index 207a6e2db70c..7d0e550085b2 100644
->> --- a/MAINTAINERS
->> +++ b/MAINTAINERS
->> @@ -20577,6 +20577,7 @@ M:      Jens Wiklander <jenswi@kernel.org>
->>  L:     op-tee@lists.trustedfirmware.org (moderated for non-subscribers)
->>  S:     Maintained
->>  F:     Documentation/ABI/testing/sysfs-bus-optee-devices
->> +F:     Documentation/devicetree/bindings/tee/riscv,rpmi-mpxy-tee.yaml
->>  F:     drivers/tee/optee/
->>
->>  OP-TEE RANDOM NUMBER GENERATOR (RNG) DRIVER
->>
->> --
->> 2.34.1
->>
-> 
-> Regards,
-> Anup
 
