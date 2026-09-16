@@ -1,68 +1,68 @@
-Received: from mail-pj2-f12.google.com (mail-pj2-f12.google.com [74.125.227.140])
+Received: from mail-pj2-f42.google.com (mail-pj2-f42.google.com [74.125.227.170])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C92A54D0CE8
-	for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 16:52:34 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.227.140
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 72FA24D0CCF
+	for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 16:53:07 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.227.170
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789577563; cv=none; b=NFeXKYyMZtDf/Fx0RWKDb2Oox60V+vBI9zEKngINeNY8ISjojAM7w8+VLlTxEg+yYhI3pjg2iiCn8fghiwP+T/eFIUxRsrfV0ZBELNSi94Frx8tAkLq8U/9lLbqQtQLi1JRyvf183HBjxZ34Nty3WrqZXxZzK2ongpO9uD53190=
+	t=1789577603; cv=none; b=cIG5IQ/o49R015M7nlWbYlYVuC2A+aIRO7dKvxjM0X07PCjgrd5uCIIuXLSMoILQx3t9wvoepAus0OY8dd6jn0k+h9zqAzAGidVv0pBQeNNEaXWottAHpL9UQgA4TzwNZXHn6UplaZYkiSxF1BeOK4N5I2E24CFjZfjITHlKz9Q=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789577563; c=relaxed/simple;
-	bh=3hb2s1nE8GbWF4nFX41LjIjY6GWkRYkXDkCPa4Nu+74=;
+	s=arc-20240116; t=1789577603; c=relaxed/simple;
+	bh=YkK6RJEJPunD8g8tcyzACJifZmbP0xrMRJxM/ELtzTg=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=V+vWTDK+ThP33K2fe2jgf16e+WI1BWjfF6k92DPcIHhe7fKLzUPazOwFAaFrq7N3+YiESb+ynVlSnRxM7oTQinZi7THezV7uY3vca/0BXFuvHYr7STprqH/+08eIsJqbRoxrmjBxh2BjuQ6KJTOnA/OWlLTvVdPuCyRmD136HzM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=AgNvJxP1; arc=none smtp.client-ip=74.125.227.140
+	 In-Reply-To:Content-Type; b=fkOGP1u7BSj9rtfMYl4cm9VC9UlMkijDy7XdBzGhoFW20c8+h/simbC68YC9kc3jIWTxQuEhWn972ybuHrgu5tmNEm1O2V/V5e07tO1r1r59I1JgPxhlMfkit/FhHttyWBZBZfqFFcycM873gAzuS8gpjvFMZXif5f4UfxRrk0A=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=gBhNrtoV; arc=none smtp.client-ip=74.125.227.170
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="AgNvJxP1"
-Received: by mail-pj2-f12.google.com with SMTP id d9443c01a7336-2d8fb334ddcso9982805ad.0
-        for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 09:52:34 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="gBhNrtoV"
+Received: by mail-pj2-f42.google.com with SMTP id 98e67ed59e1d1-396ccb1a990so1044815a91.3
+        for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 09:53:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1789577550; x=1790182350; darn=vger.kernel.org;
+        d=gmail.com; s=20251104; t=1789577585; x=1790182385; darn=vger.kernel.org;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=k1jCbTheaiSUBkfYGV3xzwMyY5fdH2jCKLwykFGBBIE=;
-        b=AgNvJxP1DMnYNwLESwxLzqy4FJq6Ru0Y+xKhQl4JZTnJ/oEz3AzyUkNtjQZDk75+lL
-         NbTXNnUUCJCWMYlYMrLpq5bwqwh6oQQHF7rfrqYw8/5ttFFRYwaJiGWGxJvSPnp/eKNv
-         L8M1dSHegANyE7VSneb3fqA7UUKsAP5Y6h69JS+y1rhxR+VHbZlaOqR8HOguTY9xYjJ1
-         I8HZKcNKd+nzU7ElY80D6ehaRCjRJYcR7X6iB14S+9So0KyI0zyaEzspsqNLTijuG0e+
-         /QF8wtGdsbs1uWTRcT7w073idLupnKJ4cT7dlAYyehm9Bl16qRpZohfnrqfiThkslabm
-         9X2g==
+        bh=gyqlA1K0vb4/rd48mxGs7fCQDs5HffhajRXLz681a30=;
+        b=gBhNrtoVx8lRC7+z4PbrlBJCws988YibryeVyWl+ZnuXKEJk+0/PfLMZJW+DnH9mwI
+         W/cYmYik0ifMZyt8Xz5zWT5ktIXpkR9xEJg/0L837pyxDluDYb7+qUN4Co50i0luf3ul
+         fRDevmfutC3d9kYBSfJb+8+zr+VMMikihb+vFQ4hNCx6Kxi3eYk0PDqsNGCAc8vQE9A2
+         39UbBhljcq6tvjxPOV5rC07IDODjYdyUYlLxM0IbzjJF3ZhuREC2jT/4SyCeBhFHGkLV
+         enSR8LUTt4EOXUyJTbXyyRvBJOeErUFkO6qBtWRx/1ThntF+bRjKHIEh8wMF2y33yEuM
+         5r+w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1789577550; x=1790182350;
+        d=1e100.net; s=20260707; t=1789577585; x=1790182385;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=k1jCbTheaiSUBkfYGV3xzwMyY5fdH2jCKLwykFGBBIE=;
-        b=QFD0TP+JNOe3j+PNwtkD83ayFPhrKbZIFv0rE9GEkqfbLdlAD1UwnpWxC/djHh53z9
-         57w2zZ5aRsYG5ail1qe4BO0yP0wcQguOj1PHEkngAHlEpKIDKpio5i9kg2DxEPVTsv2z
-         wqdaaVGYI8fjJqHPontGoYH1wbos/yIo4H0KAZ51CfUqIjPhbp8mJnReIZXrSOpEcY5Y
-         2sPn6Yfi+0TxdbYgXdVRi7F42uim/AATt+/7/mdZIm2Cqv7z/sR0rixjwzAk45eX3Qt+
-         izP+9nx/2NmSpnwWQymSy955pVrwDDMR0mxvwpH9Xl70IJAQidVPhX8JIdCzL31IRByX
-         +BTg==
-X-Forwarded-Encrypted: i=1; AKwUvBzNgdXVSnPlCrNjNdN5x9JpzYo802akDmbcNQl59BN299GFpYgisEBcsi70hKVKZABO6A410jK3hKwJcuwe@vger.kernel.org
-X-Gm-Message-State: AFuF++lVArGdbe6Lf3ufec8F6YtlT1JeWrKSJD/HyB3+klM9X8qL30L0
-	ZclKt8nGG0+wDngWfitYVyaBibI+oVhPRujcIuz1mlfvvlR0CMxn6VVI
-X-Gm-Gg: AYBFou39WpDMnhoXXKeEjn33UoIfRXnLzOSbN5Ut32U/VcW0xDRHd6PJMqH90K78Nng
-	TgtQ0167dt2rni96sCookExMFuNK2OYHhuHH/I0SYGIZom1aMCHH4wsupR3PNAlyRReMZ2jxXHq
-	vP+mfHfTOPlv/G0Dgx05+0D00K0c/ZGS1z6MuxSvdEwlMSfrBD/sTwgqAnLN2Rh/UB55B6Hnf84
-	W5ZlGWq/bn0HwP43Z2It3ypEaTE4hmdekKl5X0gtLsL2e+odGaefBrOE+eNlJZ7gjdMhSPOsEVY
-	V6EKWI5qVl/BCRu0aSRr9WcC7Ykz0tlaGoLpcSCQprCO8NKLwEQrbTm8d5G+B6uqmm5zvo/JEZ0
-	h3xaHQYe/jwyvhqzBm9AdGCzecN8qxJ51XxtleSwgfvbnrXMuokVrB6/6DDx550SXh8LN8Lvlte
-	PguKuykeX53GD++XEnwrzp6LFunnowyMCSVdAqHT7XuxbxAgxSLoeNkpvZmo2Vk9qSMaSY0zVLK
-	IU1nQHv4TQJnOwt1J/TwQfd3Fesjle7WPHw77sKhqWpG1+ThQ==
-X-Received: by 2002:a17:902:c40d:b0:2d9:216a:cdd3 with SMTP id d9443c01a7336-2dd8e6368a5mr67941175ad.18.1789577549942;
-        Wed, 16 Sep 2026 09:52:29 -0700 (PDT)
+        bh=gyqlA1K0vb4/rd48mxGs7fCQDs5HffhajRXLz681a30=;
+        b=K9UCp7mLhpR9XlWNkGwq3vUgDzfmCJ5mp9NZCPDIOtO820LSltDFQUE4sIVs6JGUq2
+         PYSbCNQEJnZf4spHIPnnUeO3HhS8vDN/8dkYPVuAgvXn7B5nYf4cwQLBKB8+a7uMVr6r
+         hytu52YwMQlYA9TJ00ywddyneuz8aoPPEYEzw0eNLz0Q6VCnpvatdPmPwUTzxXCjoEYq
+         MidoGdsBgOp1XorWIK2cO7XhEDdh5iqoKcYtfH4mIdheDaQEcjW1RwL2zBCO82y9DxPF
+         ltuqZ03W3AyZkEFQfD1Vxdbm2kA7+rjABcwgb39/ZnPZRxY3wtJGi/D0IEKqnQOB6Twl
+         N/nQ==
+X-Forwarded-Encrypted: i=1; AKwUvBzMRrBkNye2Zqzdgxk67xRlQFQdid5DOu8JGz0KS+6ok91fsbCiNT6arMUA2AxE9mxraHXjQ2nP7nLiL/4A@vger.kernel.org
+X-Gm-Message-State: AFuF++lB2R1ZSoMx6UglmhNN6ca8fDv2VsU4FCuPgIey9oTxehSLRjpe
+	3dBu/TU1RO3wpYvGANIneO0YrEZaWcHsa67IoksLSgFwlTn6zmnNFCsn
+X-Gm-Gg: AYBFou2JqCQIcHgRYj/ck8uNZ5x+0rMkbAtaWUpBLlOP8XW6iCm/FwlIMbRYtOh6JJr
+	Q93mcFNBNR2dx8bzUOWWJq8vwkkE2hFVvwVgi0hLbqyyDZaAey7vhOMyD06O8kwhctLLlBUv8RK
+	KZVhCV4cnPpFTsH7EQaF3wU2F+o3AryKGOLpFJ5BuLsj9cGPFSwILB2DG7Nqp60rgi5CrPwX9MP
+	4a0ibdOvtOAX0vz/lJly6hSgw/iEaxk5OAG0Vh2aloZiGvcQXY3pKmsquuGbE3uA3XeMbC+4IPj
+	/ZJhMNZpl0EMvUBkCVi9ZO6oX4ivapcCes9l31sK1h4yD0Y/jvXkYfLrkowOSa9vNEgPtCvpoWs
+	Vqc07CtHf+CqngKNiqBvH56lhLzna6mquvdQ9P0TF8OINXi3bw+Pm6pwUKyFMQtQCkMDEwiHcHy
+	Vn6MakwRDC66gGArHQ4XjkSEkpBRG8g3WiIsYXS+RgD9z6ehDhFjtEydjQD46OFUnUqmrRvk/dS
+	9LvGmWEp0xqXKTwW81z7w/LwSkYQtDwhECDl+Z+Wm4m78YoAxbmn3GrIkdY
+X-Received: by 2002:a17:90b:5866:b0:39d:f97c:bb2f with SMTP id 98e67ed59e1d1-39e1e25a32fmr7684849a91.3.1789577584902;
+        Wed, 16 Sep 2026 09:53:04 -0700 (PDT)
 Received: from ?IPV6:2406:7400:56:e503:ad72:fda5:83e8:be95? ([2406:7400:56:e503:ad72:fda5:83e8:be95])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2dd90c7b215sm12866435ad.72.2026.09.16.09.52.24
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-39e1c2c5d86sm2168471a91.4.2026.09.16.09.53.00
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 16 Sep 2026 09:52:29 -0700 (PDT)
-Message-ID: <ce80af4b-5d4d-4fdd-a4ca-3c361c542eeb@gmail.com>
-Date: Wed, 16 Sep 2026 22:22:22 +0530
+        Wed, 16 Sep 2026 09:53:04 -0700 (PDT)
+Message-ID: <7d7f33ee-1f07-4170-9d0b-cf5d986ab19b@gmail.com>
+Date: Wed, 16 Sep 2026 22:22:58 +0530
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -70,8 +70,8 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 4/5] cpuidle: psci: Initialize the PM domains in
- powered off state for OSI
+Subject: Re: [PATCH v4 5/5] cpuidle: psci: Move initialization a bit earlier
+ in the boot sequence
 To: Ulf Hansson <ulf.hansson@oss.qualcomm.com>,
  Sudeep Holla <sudeep.holla@kernel.org>,
  "Rafael J . Wysocki" <rafael@kernel.org>,
@@ -86,78 +86,50 @@ Cc: Abel Vesa <abel.vesa@oss.qualcomm.com>,
  linux-arm-kernel@lists.infradead.org, linux-arm-msm@vger.kernel.org,
  linux-kernel@vger.kernel.org
 References: <20260914150146.187622-1-ulf.hansson@oss.qualcomm.com>
- <20260914150146.187622-5-ulf.hansson@oss.qualcomm.com>
+ <20260914150146.187622-6-ulf.hansson@oss.qualcomm.com>
 Content-Language: en-US
 From: Dhruva G <goledhruva@gmail.com>
-In-Reply-To: <20260914150146.187622-5-ulf.hansson@oss.qualcomm.com>
+In-Reply-To: <20260914150146.187622-6-ulf.hansson@oss.qualcomm.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
 On 14-09-2026 20:31, Ulf Hansson wrote:
-> At the point when the PM domain and the topology are registered through the
-> genpd subsystem, it's not really known whether corresponding CPUs are
-> online and thus if the PM domain should be initialized as powered on or
-> not. Instead this information becomes available when the CPU devices gets
-> attached to their respective PM domain through dt_idle_attach_cpu().
+> When using PSCI OS-initiated mode along with the cpuidle-psci-domain driver
+> it's of great benefit to attach the CPU devices to their CPU PM domains as
+> soon as possible, as other non-CPU devices sharing the same PM domains
+> depends on it to allow their devices to be probed.
 > 
-> This is a problem when using PSCI OS-initiated mode, as we may end up with
-> a PM domain that has the genpd's status indicating it to be powered on,
-> while it in fact may not be the case. In the less severe scenario, this
-> leads to selecting a shallower domain idle state for the PM domain than
-> necessary. A more critical problem is when a non-CPU device shares the PM
-> domain, leading to their corresponding drivers not being able to trust the
-> status of it.
+> Let's therefore move to a subsys_initcall, which should be soon enough
+> after the cpuidle-psci-domain have initialized the PM domain topology.
 > 
-> Let's fix these problems by initializing the state for the genpd's to be
-> powered off and in the deepest possible domain idle state, when using
-> OS-initiated mode. The support for ->sync_state() is maintained by setting
-> the GENPD_FLAG_POWER_UNKNOWN for the genpds in question.
-> 
-> Reported-by: Maulik Shah <maulik.shah@oss.qualcomm.com>
-> Link: https://lore.kernel.org/all/20260811-domain_off_ss3-v1-0-6a0a0fc023f5@oss.qualcomm.com/
 > Reviewed-by: Abel Vesa <abel.vesa@oss.qualcomm.com>
 > Tested-by: Yuanfang Zhang <yuanfang.zhang@oss.qualcomm.com>
 > Signed-off-by: Ulf Hansson <ulf.hansson@oss.qualcomm.com>
 > ---
-> 
-> Changes in v4:
-> 	- Drop GENPD_FLAG_RPM_ALWAYS_ON.
 
-Thanks, Looks good.
+
 Reviewed-by: Dhruva Gole <goledhruva@gmail.com>
 
+> 
+> Changes in v4:
+> 	- None.
 > Changes in v3:
 > 	- None.
 > Changes in v2:
-> 	- Fix a bug in the call to pm_genpd_init().
+> 	- New patch.
 > 
 > ---
->  drivers/cpuidle/cpuidle-psci-domain.c | 7 +++----
->  1 file changed, 3 insertions(+), 4 deletions(-)
+>  drivers/cpuidle/cpuidle-psci.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 > 
-> diff --git a/drivers/cpuidle/cpuidle-psci-domain.c b/drivers/cpuidle/cpuidle-psci-domain.c
-> index b9e4ad7d43a3..5722365b943e 100644
-> --- a/drivers/cpuidle/cpuidle-psci-domain.c
-> +++ b/drivers/cpuidle/cpuidle-psci-domain.c
-> @@ -68,9 +68,8 @@ static int psci_pd_init(struct device_node *np, bool use_osi)
->  	 */
->  	if (use_osi) {
->  		pd->power_off = psci_pd_power_off;
-> -		pd->flags |= GENPD_FLAG_ACTIVE_WAKEUP;
-> -		if (IS_ENABLED(CONFIG_PREEMPT_RT))
-> -			pd->flags |= GENPD_FLAG_RPM_ALWAYS_ON;
-> +		pd->flags |= GENPD_FLAG_ACTIVE_WAKEUP | GENPD_FLAG_POWER_UNKNOWN;
-> +		pd->state_idx = pd->state_count ? pd->state_count - 1 : 0;
->  	} else {
->  		pd->flags |= GENPD_FLAG_ALWAYS_ON;
->  	}
-> @@ -78,7 +77,7 @@ static int psci_pd_init(struct device_node *np, bool use_osi)
->  	/* Use governor for CPU PM domains if it has some states to manage. */
->  	pd_gov = pd->states ? &pm_domain_cpu_gov : NULL;
+> diff --git a/drivers/cpuidle/cpuidle-psci.c b/drivers/cpuidle/cpuidle-psci.c
+> index b250d0dde760..0187d6a9096a 100644
+> --- a/drivers/cpuidle/cpuidle-psci.c
+> +++ b/drivers/cpuidle/cpuidle-psci.c
+> @@ -479,4 +479,4 @@ static int __init psci_idle_init(void)
 >  
-> -	ret = pm_genpd_init(pd, pd_gov, false);
-> +	ret = pm_genpd_init(pd, pd_gov, use_osi);
->  	if (ret)
->  		goto free_pd_prov;
->  
+>  	return 0;
+>  }
+> -device_initcall(psci_idle_init);
+> +subsys_initcall(psci_idle_init);
 
