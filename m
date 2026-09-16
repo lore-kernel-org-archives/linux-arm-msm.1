@@ -1,66 +1,66 @@
-Received: from mail-ed2-f35.google.com (mail-ed2-f35.google.com [74.125.228.99])
+Received: from mail-ed2-f12.google.com (mail-ed2-f12.google.com [74.125.228.76])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A8884377541
-	for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 15:06:24 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.228.99
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 84B973890EE
+	for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 15:14:18 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.228.76
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789571186; cv=none; b=M/YQ8I9H2ELCMV0g/ySn85tMBpr82NeiaqklRG505AL3tWpO+LthEEuYy0PTMagWLNHbnc9QiRfeY/pcsiM81ydHk1fD6i5yGnfFVb8yZGgjbwFrriqcjHpWnR33zkB0/jXMaQE4M9RDitmKTznY8rD5+fOuLCvFDqEevZu+Rxg=
+	t=1789571664; cv=none; b=S3BFzSMUyDmDS9ZN2fvns2ZA0PMnSoVwfc9DR0oAOeVdhZsmOsoZ9qm7lUD530SMS/F+xs6zc6pQW6/qiQKMiazsIQG3Po3XINYYkJpMCjUvVa77WgA1AKnK9qTXSlRXDLcfIYvXNYRzKZaBl1dgH0yvKyEAEaVWL+SnyqQoN+k=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789571186; c=relaxed/simple;
-	bh=fnE5efAXrYDH63o61zDt3jsPaz4AKBrN/AQ+31gDqD0=;
+	s=arc-20240116; t=1789571664; c=relaxed/simple;
+	bh=I1mUBpETXIszOJUI+4PfxF9aL9vUcBmsZqAXr03BHWM=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=UpnmJ6w3OUPaDWB28Cz9MdolEkCsjlYZ91bSKsBW/gGlqefKOxSkmBQYJ+hdipY+AaoTrqILyxf9+/Qfg5KHvEIrU1U3oYWGNJYlE6pXcx7e45xoT8hk+Tsi5kqUKAqRzSdeE2s9VgTwDi0hWKkx/RB3+YozS0EnWDr2FTPgnM8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=g8uLxNpD; arc=none smtp.client-ip=74.125.228.99
+	 In-Reply-To:Content-Type; b=qCbd9lMvrzQ4mDulVTsC/kRCSdoZRIfu6zPUx6dDFXj4WWaGkKasuGt+U1QSt2ptgQfR+muHbluGBRjZ8pNDk4JTxsImsPx6vLbB/LshS5YjDFDfOaEmptYkkk61CZeLnQFpQNolMcGfAVX6n8VDkod67YZsJ0eMG9ZvigXfZrg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=xapfVJko; arc=none smtp.client-ip=74.125.228.76
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="g8uLxNpD"
-Received: by mail-ed2-f35.google.com with SMTP id 4fb4d7f45d1cf-6aa1da63791so1329864a12.1
-        for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 08:06:24 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="xapfVJko"
+Received: by mail-ed2-f12.google.com with SMTP id 4fb4d7f45d1cf-6a9adea43b6so1592490a12.0
+        for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 08:14:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1789571183; x=1790175983; darn=vger.kernel.org;
+        d=linaro.org; s=google; t=1789571655; x=1790176455; darn=vger.kernel.org;
         h=content-transfer-encoding:content-type:in-reply-to:content-language
          :from:references:cc:to:subject:user-agent:mime-version:date
          :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=a0ZqTXxWmIi8spdoKcHLXhkmgdsqCfsr13D7RbpQDjQ=;
-        b=g8uLxNpDOWf4Ro7imrfuTpkB6KLXSmbO1UOnSXsw2RC6r7A56yhtpHPYkjqEXC7Opn
-         3KbDBbfSVL2DTORigWOSZp9Dw7fkEXdzcpRfuoOr+dWA5+OvWogxcd1nYtK8Z17rTuwk
-         fGls2FrkynG5efUKCsJ4Ksi10mPXB2TZ51lSLT0RrxKdtom1a5WHAhCrH84b4N6+po5j
-         yCelzRRzH/JW5rt0Dkc/Iv8ip6vC+hKSvRMTR8Kyqcp4LXk1uAM7CGQqK1TXnOXRly8D
-         sG27oApa+Ydp/VvAZtMbJw5m9pJR96v+024AMiu7rVjnkBUqfxCNKPKw2vROzGbPYNeZ
-         4TYg==
+        bh=EGiTz7ecYRQ3R9tZPodslfq/Xnj5pm8tXpwlFqHcud4=;
+        b=xapfVJkoYBobjp8XjptcdXGEtHvKOADHSRHD94vwtUKg/bWGND9iUlmGIz2ltM1WQL
+         l2Ck+yJIGOflplDkKbFoADzz4zBA5u36MaWxg4SczCUjMa+YoOv6ZXY5obQbDbqvyNxA
+         prRuMDlyzSk6G0wg7frPgzPd/7FBGet+sf1Hkt/KpqcifO2Snbl3Bls8k6K/wZz9vsmq
+         P7d7ZF5QnUdmo7UkuHQj+dVt+6l9oWqIUIYJUokGnYbKnubcpO/8AEnKu4bytYFvJqdz
+         22Gm+by7e0RP+ToXct3mX7gJHosrj1idA6K52xpsktToH4M36EwhReJt1EfjeA4XrjtU
+         sLvg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1789571183; x=1790175983;
+        d=1e100.net; s=20260707; t=1789571655; x=1790176455;
         h=content-transfer-encoding:content-type:in-reply-to:content-language
          :from:references:cc:to:subject:user-agent:mime-version:date
          :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=a0ZqTXxWmIi8spdoKcHLXhkmgdsqCfsr13D7RbpQDjQ=;
-        b=Es9IiS4tqC9k4BhuCwAUk82fkFUYROPfetV8YPXkIG8Vwj9ig+hsynlviJ4hPGfrYM
-         D1IWCvJVR3VBbyyhkmMORM3LzI8DX/093eoXvkR6uAvUJq1hjERAmyy2XuyfBxiMgSIY
-         yzGAleiOPLlPO4oRBmjJyWXTKTN15PSpAPTANIuKKzot/BHDhK0GTAGza7lJbcSPj7FN
-         IpFt+211I07lAIDVBnOPYAnX9EXUoWcRUBqQigaR9PuhflRh2TGITYWq/mY6sOArBXo9
-         jGMt7Jqv3GRU5D0qFHs9aruPbxYV5dWdW6btk3OSvo41o8YWESjNEAl/gjARvLvaBWmY
-         q2ug==
-X-Gm-Message-State: AFuF++nd7T8ePNbWaQMaXcT9KNvIbn6l+9uHt42/JjfU8FNEuHPjDw/k
-	G3lCR155Rnl+EbSz+nNL2fxkC0z5s97ym1InuwRZaGFc1ckdW/X4w5fQHMEBKRwI+oc=
-X-Gm-Gg: AYBFou1JHBimzbtInLOfrcxS7cQ4Fb7phAT/N/4CERBDeoQSNFrBBdSnT7+bbcZMXIv
-	SJsv9vNUsoZKRQUQXCfhnbvpNyqCwvZaD4omKaNWFhBecuJwqHUp+MWOpIeVP21BBAE8lS6D3+h
-	zZDzDSLB8OTBXjmg1+nmW3XefEZw9MfI1EaxKpBgbzBScWXsG80SNNSmCexOQ/ZvqjQYAjEE7Fn
-	yztBfoi43ezJmaZGcwtdTXMhbLUG/UqdwO18uurQP09ywfChd/6HHNq+ggJ2p9XqBFSrDRtWH1J
-	CTe6783b/uHs+t26Dt6Gn79bpbdRUDTsM/TB6t6pbYh1SCvFNUCEcOxAd+Qi1Goq2OCBDKCNRGb
-	TaVsUHPFqEzcivXa77EBLfhUW/QNR4le56FS+IM0QZFVh8HLBLw6jUDVSylCyFjVDU2gNn6jL0M
-	Xe6lbE1qCguhO744oqzv8NzutToZVp9thvFBVT/8NB0YNMAC+F1uD3GMfGbPvRPKX7s1Qo9HkD9
-	O0WKvueNhnt
-X-Received: by 2002:a05:6402:c42:b0:6a9:232b:ec6d with SMTP id 4fb4d7f45d1cf-6aa22479709mr2186159a12.41.1789571182901;
-        Wed, 16 Sep 2026 08:06:22 -0700 (PDT)
+        bh=EGiTz7ecYRQ3R9tZPodslfq/Xnj5pm8tXpwlFqHcud4=;
+        b=buYFsTc58mUgjiD9gHlDQ8xlXS35Zu7u9S1htEHgPP11DeN/oqY1vaaIs8shqVkICI
+         1//3lm2PW7iXUtM+RwKGW5RDFYSu2MudOPTP+DSbXTrJ+C2vt/dmylyLTW02C/lR6QDv
+         Bt/7aIDajaHtgQ6ExSgFh6tFHciFE1PnNmXv2jovnuHh8c0Yqd92cMyPCrm2On76lRSe
+         4F4jxYV59zm+58vka6nXYLoQzLHyBCUEX19yF3YMdBAVHuuBa4sQP3abbq+UDkrz6e8R
+         6H+4HmT4OUi280o9KaO4Dqcd3hTJ0sKEIAmS87lJ41j5lAj05GDY3Z76KlnBthL2/XNO
+         xnVg==
+X-Gm-Message-State: AFuF++k7P6gewfy58XNLXcHOe8gohKBeGP1kOoEQhdVb66wpWxluNNoj
+	3+hHb2KY9CA8UGKzXWLot5A7WvXuDd6anJl5kALgAvqLrMn79dvbPBTBV3Kq5PIsJtg=
+X-Gm-Gg: AYBFou2B/9l+ZQm1AF05YSkBfjJynWzteYK8K+j55CGZoSJ+3o+6Eh7CdRQ/9iDwuYA
+	Frau4hwQ6k2rvpq3p2qY9wwl8h1dTvif9oeWxyF2UDMdKoS/Sg5rmltaXsYPugkaHQMEEEue0GQ
+	rd8PZ3amHNCTHk/juEWOOdk8PI5p8T+/85X82dLMnlxgYeJvW7M1uanvJe32igqQTBn+IwA/pL1
+	XeXKLYs1/Ko1dgYQ2/HV8VwunruFlLg8WEFR8N+ZAHrJQKSr79/+h1OWFRtsQlflhtcvV3ekk/m
+	kA1OSM9rxY/qLwip4bmQsiL5sLe+Eekf/2keMzbeQ+WVUQYorW6MWGgeisNB5hhXvBDBA/zL3QG
+	U4e8UufU/SLOxU2A+9EyEnlc0ZNCp7qEhEFnOM+8kV+DfR+u7twS7shbsKkiv8tv9uuqp9eVX57
+	TmPoJr4XX4vqWVUFi3+JPljDhV3Umu4H2lkr2SiCgEmXknYRRKHKAs2k3Sb1RiP5nF48lXNF4Vt
+	A7isoKpSiDz
+X-Received: by 2002:a05:6402:548d:b0:6a9:a33b:bb8f with SMTP id 4fb4d7f45d1cf-6aa2245f519mr2317168a12.41.1789571654700;
+        Wed, 16 Sep 2026 08:14:14 -0700 (PDT)
 Received: from [192.168.0.167] ([109.76.116.194])
-        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-6aa1d260702sm1876319a12.18.2026.09.16.08.06.20
+        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-6aa1d2ab4ebsm2002234a12.30.2026.09.16.08.14.12
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 16 Sep 2026 08:06:22 -0700 (PDT)
-Message-ID: <510e12e9-fa79-456b-8215-9f613d6d6e7b@linaro.org>
-Date: Wed, 16 Sep 2026 16:06:20 +0100
+        Wed, 16 Sep 2026 08:14:13 -0700 (PDT)
+Message-ID: <6c084416-39bf-4715-908e-14cb7e89b7d9@linaro.org>
+Date: Wed, 16 Sep 2026 16:14:12 +0100
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -85,41 +85,55 @@ References: <20260906-x1e-camss-csi2-phy-dtsi-v6-0-067f2ecc4630@linaro.org>
  <2f950735-91ef-4e43-a5e3-1375585dc43d@oss.qualcomm.com>
  <8c82ffbe-748a-49f2-aa52-eb7a56165c03@kernel.org>
  <6dcb0b11-3490-4254-b86c-a1afbcd3b863@oss.qualcomm.com>
+ <510e12e9-fa79-456b-8215-9f613d6d6e7b@linaro.org>
 From: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
 Content-Language: en-GB
-In-Reply-To: <6dcb0b11-3490-4254-b86c-a1afbcd3b863@oss.qualcomm.com>
+In-Reply-To: <510e12e9-fa79-456b-8215-9f613d6d6e7b@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-On 16/09/2026 16:04, Konrad Dybcio wrote:
-> Perhaps moving the endpoint label and definition there too would
-> make sense, i.e.
+On 16/09/2026 16:06, Bryan O'Donoghue wrote:
+> On 16/09/2026 16:04, Konrad Dybcio wrote:
+>> Perhaps moving the endpoint label and definition there too would
+>> make sense, i.e.
+>>
+>> -- hamoa.dtsi
+>> ports {
+>>     #address-cells = <1>;
+>>     #size-cells = <0>;
+>>
+>>     port@0 {
+>>         reg = <0>;
+>>
+>>         camss_csiphy4_inep: endpoint {
+>>         };
+>>     };
+>>
+>>     ...
+>> };
+>>
+>>
+>> -- x1-crd.dtsi
+>> &camss_csiphy4_inep {
+>>     ...
+>> };
 > 
-> -- hamoa.dtsi
-> ports {
-> 	#address-cells = <1>;
-> 	#size-cells = <0>;
+> I don't think I can add the endpoint, my memory is I tried that and the 
+> dtbs_checker spat it back out at me.
 > 
-> 	port@0 {
-> 		reg = <0>;
+> I'll retry though since I may be mis-remembering.
 > 
-> 		camss_csiphy4_inep: endpoint {
-> 		};
-> 	};
-> 
-> 	...
-> };
-> 
-> 
-> -- x1-crd.dtsi
-> &camss_csiphy4_inep {
-> 	...
-> };
+> ---
+> bod
 
-I don't think I can add the endpoint, my memory is I tried that and the 
-dtbs_checker spat it back out at me.
+qcom,x1e80100-camss.yaml
 
-I'll retry though since I may be mis-remembering.
+^port@[0-3]$ → endpoint
+
+required:
+   - data-lanes
+
+So I'll have to leave endpoints out.
 
 ---
 bod
