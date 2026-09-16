@@ -1,147 +1,117 @@
 Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E92104BD34B
-	for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 18:31:39 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A24B849A3AE
+	for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 18:59:05 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789583542; cv=none; b=lfdhd73HZGzL1a24jAYC2DMNwYwGecGOFRBfFxgZunlIEuhA3sNGSI+iRCLy8SkCL834ZmdE0KIb4/2wOEXkA5kUBs78ZOJG6m51r6mhHXAyVxBkyOE4fbKbETN4lWuyoA8iz3r8afFNiu2nKdn5qFqWBDCXqhkj75tlnjyrasU=
+	t=1789585162; cv=none; b=LB3X9Nb7FsMOhNY1jrbJ3H5jiyG+HyicWaWhqqZlBalFmkPBz6vO+fMjrwFS/3WmjIa6jrd21dm4hPKE2S9FW7Ftzgg1IsUduAKxY9OzVug0gTIyaaJgktOEQvyKSPDO15taXDYHp5yjMSPk8cxp5f90ov/sxRkyBHCtP3TPDHY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789583542; c=relaxed/simple;
-	bh=aEHAQHfBVivuua/vFIx06acVPmCqKszNmBVF///mHO0=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=Ru1qCnSRPVwv2m9q3e0yUnr7qZs0dNfrtUaS1U+xKHwb1FOF9cdG0RJYI8eevAXW2BnZOGQsV4Hw4klHdUemeF+04mAAuiP+Yp41EwznuyNx6D13kfhFSbAYllgIgthmuUe1LMkOH9A4D8SLHvPY3sAvfTtFhx1t4z8vDc82DU4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=UieW6IA9; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=IPIZms1l; arc=none smtp.client-ip=205.220.180.131
+	s=arc-20240116; t=1789585162; c=relaxed/simple;
+	bh=iou8jtUT5lziFEwj1uPmEAa0iUVv2n/54nzBQHsydCY=;
+	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=eMZXwvBc6M8S8aXYengZ89AqqoUHt5eEqyikD8Mu7l41qX/9fTtI3/b9u9Ifsi+tLSG6GN9iTSIqd2FkIFo5d3wWd8LgeXcQvn5yGDfi0G4rHmMXfeCoBDgtELt0Z2BnWmOMcRN3yf6bAgixQR+xXuXl32HNJFqBghd3kJw3hlg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=SON14eeV; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=i+EcT4jQ; arc=none smtp.client-ip=205.220.180.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="UieW6IA9";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="IPIZms1l"
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="SON14eeV";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="i+EcT4jQ"
 Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68GFeKrX2470525
-	for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 18:31:30 GMT
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68GFeDIi2470101
+	for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 18:59:03 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	NO7b42YBwSn1pgx8rjlpajz93VqzR7OjhoiLHTqdiDI=; b=UieW6IA9653WC2f5
-	VUWRAfJCYzXWz1NEXsSBpmDoz2iqz9/oH8VGUgeUxhGxFJ3TFO7XML4GbJ+t1BUG
-	BR/0stofY60MzU3c5+hUgtRl5hrhVoLTARZXCFnIk4bLHiG+G8/zXgurzxQ2Ohdt
-	+17PdWwpnS2Pg11vEOIu0XSJawd6TZXmQzpFwPCMnwxhKc7bAOt4q7NIVTMIeua7
-	dStJHuzdmg/Zc3Lc1NG+r38cXZqTbbe9M4dWizsO5Y1Vay6z5KcFNRVVygOJfQMO
-	j5M2HaWZGNBwUGojRSALeph7goCvMmwHSSkG1YAoPdAXsLjwEJjqrAMYpEHXccVs
-	oNkpYw==
-Received: from mail-oo1-f71.google.com (mail-oo1-f71.google.com [209.85.161.71])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gqtn51sg1-1
+	cc:content-transfer-encoding:date:from:message-id:mime-version
+	:subject:to; s=qcppdkim1; bh=oNh5E4YjPV8Mu31/aT2lj/zyB3bKAAIBtti
+	yNhLYqOs=; b=SON14eeVgYUiQGCrUv1gWqAVLKyoojRGGX/4C941WcnT/GAUi3P
+	SRXlUmeGgSwzgadAU9HFF3av+UWpxqrnXdjd4OeVNw0iT3NUaoLvlCsvpfUkjyHn
+	Ai+hFDtmiMVK8Ci0Pt+spyS28dQMAiJTrvzK/4/g/ahsajJpmmPbSDA6Hx6zzSPe
+	AEnqfUv2MGUlbQnfDPMhAuVUjAV1D41bKG908FCfgBZWKSEL1cOOz/eif8996tQ9
+	rocKNih9OQNFBrRl9oNROR+i92wV1idbH065McJhfmkb39lEduCM6G4u0kkjGngg
+	03OoU2whbwccWYbV2YVkwCU3sB4sM0WuSUA==
+Received: from mail-pj1-f72.google.com (mail-pj1-f72.google.com [209.85.216.72])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gqtn51vsn-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 18:31:30 +0000 (GMT)
-Received: by mail-oo1-f71.google.com with SMTP id 006d021491bc7-6c2549d0cbaso8825533eaf.0
-        for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 11:31:30 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 18:59:03 +0000 (GMT)
+Received: by mail-pj1-f72.google.com with SMTP id 98e67ed59e1d1-39e087a17dfso7831a91.3
+        for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 11:59:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1789583490; x=1790188290; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=NO7b42YBwSn1pgx8rjlpajz93VqzR7OjhoiLHTqdiDI=;
-        b=IPIZms1lTjmZONthddAKe1KQuniA4RzG0YuyeCPs01RHDRI6F8KUOfZ1VTjr6pn814
-         +n6+aQKsVirfXMtPD2tfF5B3/KLeElUl5Eblkh3S/1T7nAaUs+/q4xCQkRmv9kBlV0iZ
-         G0GngDi7mkAagujnTjC5ihMr16NJcmPho04zDVLain2bXQBM2xCQfSiCnaYRdJteW5gU
-         TF/2k+S7eq+2Tyi4KEgshIKI/z2YBxxe8jL8fVeaaAUvA/ztalaYi9jEZPSoXqIOrNqP
-         ZsuivpJNdXsc0kZ/qPtsoUH/BVzZRhsDJwZ7CqopzsujRVbDZdjUG8S0lvkg/wbDCYIJ
-         4leQ==
+        d=oss.qualcomm.com; s=google; t=1789585142; x=1790189942; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=oNh5E4YjPV8Mu31/aT2lj/zyB3bKAAIBttiyNhLYqOs=;
+        b=i+EcT4jQJV3o7jsVVQTH7pIhUFokVlchy2VXRbLBWTOhyBs9NfUdJGFyplqaxzqY2/
+         5AAGV67zzH0ShoCvMkdiacdxUYm4dq81nPNoUicASiBdSEeBoZhC700iFz2Pdy0k9cV6
+         8eAFL0ZQ2UXCN0BTvlWtLugPQsR68Ae3abNzpsH1N+ZUvwGMbU8DIKRRzDA9XmP7JXnz
+         MwtiQTxUN3ur+0SQcRs9A+So5713d9avZ2xSOJKeGXBeV2Y8+fmA7JLFsqjadqiCP19o
+         j0PC+y+jaFlwaxtJUk3Y2aL0lpTTldsr1mr+XqA+bV6k7TxUOF5hcZtqlK1F9Gj+AK2f
+         tvKQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1789583490; x=1790188290;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=NO7b42YBwSn1pgx8rjlpajz93VqzR7OjhoiLHTqdiDI=;
-        b=FThRXlXgxyQYRsjb/O4DiKJlO5WRyxYajYcvZ2zV57wVX/xmsbc5p2oqEoJLn9sKiO
-         E2Q2TcCcqtgHPgLMoFl797OvlTr3D5J1JhmYQlw+lAmSBy6/49/I6p6PisSUNpL7tJWW
-         seMko1TZG+twKhNKpBXYq0iqMPwRiqiwPhCjxAX4s6NDm5w/2vAoWRSCbkWFs4VwmvR+
-         83NS6Uva/VlxCANiPixPoclYtOpajU6nK8yoIQ6xHjIEyR/ukvfPq2Nmofm5EFCtX3Yv
-         SRm4FqL5WtU9FqnCYSbNHu4L6bwLCejytPhIv0fHFH9s3FMmA0vvR+Ziwtl+HFHXDII0
-         ypQA==
-X-Gm-Message-State: AFuF++mOv5bo+6TO2w9ZYxMdJLB8OF3Ru2r123MYXod4HSftZOZzxNR0
-	IuNsnY7GOxX4o5RDYa5+Tz2alhR9w8gJsuV7kQuF1dkh6G4EnwgatXM9Yb2i/YQxXR/JJYszSeZ
-	C7O9/yjWOXPhg4qF/gdQ8u73XL8DHv7wmc3oCnI0XscQ+GBPGWzWpJMeKlIh4KNWIIx1wal08gD
-	Ky
-X-Gm-Gg: AYBFou0s/SWKlXOD70nrp+Ka81X8LyX3Ympk8xLFdllLrQSJbVq8Mrg4r0yGbTtMm/g
-	2GOXP8AmBfrNB0YAtT73fiu5KVDaqoPJdTpkyleCS1iKFuJEl2CWYBajOjIfN1QKKB8yCxB2vzm
-	AC4XA8N49WrWj5oPGzaRbO5UycDeHm0Y/7Cv+9RJHe3whpX3l+vziCxynmZRL94h2tXGFE4MZXq
-	js2cSKhiu8f+odqgQx375Cy3V4B5P6rZ09+zIDp9hgcfntUAv/8HzUYUoum3uA1J5+XFQtr/5Jg
-	KTr+A3CTdQcd1O10OrA0RIVEOCLVyI21Yj+ffb26NTsiV+lrA+pd+ppotM+8aECOU49obT14mYF
-	FOPaOCZ7ESdvn6Iz0k7jPRV7hG8g=
-X-Received: by 2002:a05:6820:4c89:b0:6b7:83c5:fde2 with SMTP id 006d021491bc7-6c7d3ee59bamr3635846eaf.35.1789583489672;
-        Wed, 16 Sep 2026 11:31:29 -0700 (PDT)
-X-Received: by 2002:a05:6122:3c42:b0:5c9:a60b:e5be with SMTP id 71dfb90a1353d-5c9a60be881mr407924e0c.14.1789583477604;
-        Wed, 16 Sep 2026 11:31:17 -0700 (PDT)
-Received: from brgl-qcom.local ([90.161.207.100])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4870bf2797csm8625416f8f.16.2026.09.16.11.31.15
+        d=1e100.net; s=20260707; t=1789585142; x=1790189942;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=oNh5E4YjPV8Mu31/aT2lj/zyB3bKAAIBttiyNhLYqOs=;
+        b=QxbhjBpgT8EEpdIuYa8CLIp1d6NmbXzykmGT+bnkRp3mlLrP7prG5sU5YPK7jXcqXg
+         w4uS8GSy5ZLoA5EeD3HUEYYTvQYOLWt2ydIKAAkYa6k/IJFE94W73G3quPUgjyeubP9E
+         N4ph6swqKGeceTyiUHzrzmOTeexROW1b0kt0Kn6B+FQwVZPBE0tzFr+HTBjz11xfAKWO
+         IAyrpG1NLiO1FdZoxvm7FzBbv0JJLYgjw1FGwJzyReNJPh6tc2Hd0Ukh3ksDVdQtegBj
+         789Lb6sAV13rcGQlAifzaqDE5DXkKXahzyuRU5ZA76TxJ9v4UbVy/OHGnC2fuXbfGZZr
+         7fqQ==
+X-Forwarded-Encrypted: i=1; AKwUvBxuEXtP2yP5EmCW4WLwhBQrOFS1IwZTewIQ7NmZCKcvRBn5Ce52Ayxgqo6u8RH5GLS3SNGUYBKBIaYZ1JNM@vger.kernel.org
+X-Gm-Message-State: AFuF++k+VfUF4VpTsBLTVpNCSIP/TN9uUpk5T0fXrcU9mgNtY2q8gZ3i
+	yyU9kzeUNZkARQH70dZ+2nIufAgri7/Heh4fpcm/xAgyX+rK6vetiBs8YboYR6jPOFOsOA6R1Qe
+	1bI9BlRHEhxwc3pHkfzBkN3hMlqg8vqbH/ewIjq+vQgDeQYO+WyxEErLEPKgOGHFbTjhJ6AEaX7
+	X4
+X-Gm-Gg: AYBFou0f4wFN1pY8DKAmgbQT3INsqHMo1OCh5IZMBsBm4t8TLdfuFlZj/lqSBl2QPg3
+	SaTL09r+GZDn9fnZbUSrSnGQnug/LifszK/mO5ghc3q5Bf8xXd8ke6Qoeb2Q90wPdFisHnTv46J
+	fau/RZioTdAZOZFlPyjufiDWkt/plso2eIss3WLNfmFd94LdQ/uVPAS9rc+uD1fw7T2Pg6zz1rN
+	jFH/kOi7yYXNW5HUewDgVQvMeqLbaiXtc/jCnWDcB4C7v5lSFGb1VNqlbR9AMRNh8r5Po6c16TW
+	Ud634NriUyBdPbsXf14GMPOAzThhgGiHe9IVKk/jt2rTefa0cawqzbU+3h59UQseUEN45x2QEWx
+	xspyeO6xzRhu3HLjthGppnzblnki3QhvCppI=
+X-Received: by 2002:a17:90b:1a8f:b0:39b:61f1:8032 with SMTP id 98e67ed59e1d1-39e1e42497cmr8260227a91.16.1789585142364;
+        Wed, 16 Sep 2026 11:59:02 -0700 (PDT)
+X-Received: by 2002:a17:90b:1a8f:b0:39b:61f1:8032 with SMTP id 98e67ed59e1d1-39e1e42497cmr8260135a91.16.1789585141688;
+        Wed, 16 Sep 2026 11:59:01 -0700 (PDT)
+Received: from hu-parihar-hyd.qualcomm.com ([202.46.22.19])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-33bfb19f8cesm11790987eec.2.2026.09.16.11.58.58
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 16 Sep 2026 11:31:16 -0700 (PDT)
-From: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
-Date: Wed, 16 Sep 2026 20:30:53 +0200
-Subject: [PATCH v2 3/3] phy: qcom: qmp-combo: Add USB3+DP PHY support for
- Nord
+        Wed, 16 Sep 2026 11:59:01 -0700 (PDT)
+From: Abhinav Parihar <abhinav.parihar@oss.qualcomm.com>
+To: srinivas.kandagatla@linaro.org, linux-arm-msm@vger.kernel.org
+Cc: Abhinav Parihar <abhinav.parihar@oss.qualcomm.com>,
+        gregkh@linuxfoundation.org, quic_bkumar@quicinc.com,
+        ekansh.gupta@oss.qualcomm.com, linux-kernel@vger.kernel.org,
+        quic_chennak@quicinc.com, dri-devel@lists.freedesktop.org,
+        arnd@arndb.de
+Subject: [PATCH] misc: fastrpc: Add cache maintenance for non-coherent platforms
+Date: Thu, 17 Sep 2026 00:28:50 +0530
+Message-Id: <20260916185850.3686010-1-abhinav.parihar@oss.qualcomm.com>
+X-Mailer: git-send-email 2.34.1
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260916-nord-usb-phy-v2-3-2c8461bb30e6@oss.qualcomm.com>
-References: <20260916-nord-usb-phy-v2-0-2c8461bb30e6@oss.qualcomm.com>
-In-Reply-To: <20260916-nord-usb-phy-v2-0-2c8461bb30e6@oss.qualcomm.com>
-To: Vinod Koul <vkoul@kernel.org>, Neil Armstrong <neil.armstrong@linaro.org>,
-        Manivannan Sadhasivam <mani@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>, Abel Vesa <abelvesa@kernel.org>,
-        Philipp Zabel <p.zabel@pengutronix.de>,
-        Shawn Guo <shawnguo@kernel.org>, brgl@kernel.org
-Cc: linux-arm-msm@vger.kernel.org, linux-phy@lists.infradead.org,
-        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-        Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>,
-        Abel Vesa <abel.vesa@oss.qualcomm.com>,
-        Shawn Guo <shengchao.guo@oss.qualcomm.com>
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=5341;
- i=bartosz.golaszewski@oss.qualcomm.com; h=from:subject:message-id;
- bh=aEHAQHfBVivuua/vFIx06acVPmCqKszNmBVF///mHO0=;
- b=owEBbQKS/ZANAwAKAQWdLsv/NoTDAcsmYgBqquBpbyie065QQ6xUUU1da4CM8Qm9YBTRuxl9q
- 1Fi8t21hNeJAjMEAAEKAB0WIQSR5RMt5bVGHXuiZfwFnS7L/zaEwwUCaqrgaQAKCRAFnS7L/zaE
- w/qiD/4mcX8AE7ot7L0NMUT829zd+LzbU+Emq9E2J3XKvbENIsbDHIcHMYdIxWA23AugQNO/Q2B
- Jd78I+8S8CFfxcUdpdx7PK47fxIWrOy1VvOAgfl1Kt6uHVWrDA7zsNjpmSQxeAlWLJbLqFIRidq
- oVGDFIGjSxLVW4LqjZbVtlY4v1jvH4utiOh0RllC+ec7XdEXyexuVSrqnwlqK7F82Ywkn7sD1qo
- clNao6tJfmvAy17qR0MIRQ3tnCA+xxvs2TiI98GqsRhgh6QTHJ0V/+7uuzJfX7bZEs9KY88Gx1N
- JAa6o33GdOb2ts7SOSIC/NCkLQ8fs8gM4Xe6Ra7GvPMNYPTZ1M3jjLIHncVRHQG1cEazJhRccCT
- NMgg7twwmzuA13UF7mY2LnZ6mGFXbvc356xtQBwAt8S4pzRCPgzkPobYr781whj+WH5ElpR9ax2
- CIe1GIll7Xyad27eQezHJZGY7LULPz+3PomENXPUgDf3qFWPbPIfXQdOLv53Xx9vP6TTWJ//jYs
- HoXhqM6LijPfNt+yolCZ14QtA4uyilweDBFwAenvak9qeWcl7DkvbXsGk28SiIX4Mxgc0HO6xoK
- lXxBCF0xuWixGoKagURq8O1XJ/WphI+0TrCs74saB5G0eFM51wohkp8zgCVb8hftKcHbRnA+FIv
- JIrGG5gUjIcLA4g==
-X-Developer-Key: i=bartosz.golaszewski@oss.qualcomm.com; a=openpgp;
- fpr=169DEB6C0BC3C46013D2C79F11A72EA01471D772
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTE2MDI1NSBTYWx0ZWRfX5I7jR8yeIgCF
- 9H7TCOFnWFHF3vTi8UhwoxAehzo4BlLGNmyXIKAhUwyL/Kpv8PuDsYHNUjjG3CB2QH2SlfY8gVj
- ufABjtR+Qss2Xrs72/hy3s7fvRCI8FgSY2dqtzoxYKdHuUlwE5x7hrTI4liQQOoKVpofX3HpyFR
- xISD0L7lG4HrHO9kNH+I+6IrRCg4Pn1wFvWxYEv839wqcEmMIJgnynwV4Z6HuswnpBlx2KZ2T9n
- W50fnzN8XQn7Kt3UP7hhHLpVrIpQmQ4jpAG4IAaN0hwP5XBqZtiQOidKUF2KzwG8/hdjWgS4qPy
- r0vafleMbW3otnA/ZVOi0b5tUqr/B+bwihiCK0S9knTk7mxJP6DXmCzHZBoSqRHcfPUBjIYTunJ
- bVRdT08PMpHtefc4UMPWOPFAWEuOL3GzrJvlIUARN/PygvFsnfyiY6WHTWgqD0iRpDDb1s8ljB9
- NYnP7WEZss6YXuz008g==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTE2MDI1NSBTYWx0ZWRfXzeuCt/oR1vQu
- jc0GxCxKogsuzgLsQpy+O6Gswz6XrSphs80VAkPNphBI8YXUNtnxaMpb15zm/T+lfZVO6uBzqPj
- flZlcwgdyGBFAWRfIH8vv+y2KBtiD80=
-X-Proofpoint-ORIG-GUID: aL2r6qAEHlS7cYu93wZ6d0bgDJY7BFO6
-X-Authority-Analysis: v=2.4 cv=K7O3jCWI c=1 sm=1 tr=0 ts=6aaae082 cx=c_pps
- a=V4L7fE8DliODT/OoDI2WOg==:117 a=BQ2oiuy6hHN+kKmom1QVvA==:17
- a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22
- a=EUspDBNiAAAA:8 a=mRaulJff6YCFnxtsk_cA:9 a=QEXdDO2ut3YA:10
- a=WZGXeFmKUf7gPmL3hEjn:22
-X-Proofpoint-GUID: aL2r6qAEHlS7cYu93wZ6d0bgDJY7BFO6
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTE2MDI2MiBTYWx0ZWRfX4sksYUm01038
+ UmXn/xvrUbFpZGj24CguhxF8mS9w9+C8/rj4dAhWjbf3WL5TeiWwkL9DmgWVHErGvJ9LSuMT26C
+ twESXtHxjIIuU4h0QaRq7J6Pp7jyavTWjKXrVhwe0KoDWOTYqBIGDvryp0SkwvL3jgsNZUunhND
+ 1PVoXKQV/Rb1dRVB/6pb6iHFblzbvj/0s6CW2fDbgL4JiU2OD1xtZ/0M3s8t0DL9NNFnB5fFdOK
+ puGk6w7gwLC05zIWKxka+NB3O8Z19nRWVtAm7myV4HRSRnZUhF8AbufR1b55YsbLhiBoSCc8jW4
+ 3V5Zu1jsLiKH+NBlVR0/gu+Tzuw3bB3q/R8OYsxWktbdiMP7rs/daQJfTiAAyc8+7Wv+ZGi6ZEC
+ alBoX2PD+PNNnq1PxikDL4n/zoY4xSWo1AIXcgM7bTx/CKURj0rtY9H8YRZmJgC+frHGT7muUdV
+ DjunT0USTiYyiBPaU6Q==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTE2MDI2MiBTYWx0ZWRfX/kygv0itg6BQ
+ 4Tvi69DVoXEwr+g/LxZEaK6mjLa8K9groyRpHtZuBvYDknbDOIeaGgeCbcJmYNh0eGTaKj/9kZI
+ dh4sPUtkkxjvvU8SVLiSZEGoN84X380=
+X-Proofpoint-ORIG-GUID: uYkzUngWVeH9O_MGr5KwRFXeqNRoevn0
+X-Authority-Analysis: v=2.4 cv=K7O3jCWI c=1 sm=1 tr=0 ts=6aaae6f7 cx=c_pps
+ a=RP+M6JBNLl+fLTcSJhASfg==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
+ a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22 a=VwQbUJbxAAAA:8
+ a=EUspDBNiAAAA:8 a=MU9f_CYsPQiu3DAa9dAA:9 a=iS9zxrgQBfv6-_F4QbHw:22
+X-Proofpoint-GUID: uYkzUngWVeH9O_MGr5KwRFXeqNRoevn0
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-09-16_03,2026-09-16_02,2025-10-01_01
@@ -149,140 +119,217 @@ X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
  malwarescore=0 impostorscore=0 phishscore=0 bulkscore=0 priorityscore=1501
  lowpriorityscore=0 spamscore=0 adultscore=0 suspectscore=0 clxscore=1015
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609160255
+ reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609160262
 
-Nord SoC provides two USB3+DP combo PHYs. Their initialisation sequences
-are identical to sm8550, but the sub-blocks are not laid out the same way:
-Nord adds a dedicated USB3_PCS_AON region at offset 0x1e00 and leaves
-everything else where sm8550 has it. None of the existing offsets tables
-describe that, so add a v6 table which is the v3 layout plus usb3_pcs_aon.
+Some platforms using fastrpc do not support DMA coherency on
+HLOS. On such systems, explicit cache maintenance is
+required to ensure data consistency for RPC argument buffers.
 
-Populating usb3_pcs_aon changes where the driver drives the I/O clamp when
-entering and leaving autonomous mode: it now uses the real AON region
-rather than falling back to PCS_MISC, which is what platforms with no AON
-region do.
+Add cache maintenance for argument buffers when operating on
+non-coherent platforms:
+- Flush input buffers before invoking RPC to ensure CPU writes are
+  visible to the DSP
+- Invalidate output buffers after RPC completion to ensure DSP
+  writes are visible to the CPU
 
-Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
-Assisted-by: LLM
-Reviewed-by: Abel Vesa <abel.vesa@oss.qualcomm.com>
-Signed-off-by: Shawn Guo <shengchao.guo@oss.qualcomm.com>
+Introduce helper functions fastrpc_flush_args() and
+fastrpc_inv_args() to perform the required dma-buf cache
+operations. These are invoked only when the device is not marked
+as DMA coherent.
+
+The coherency capability is determined using the "dma-coherent"
+device tree property and stored per session context.
+
+This ensures correct data synchronization on platforms lacking
+DMA coherency, while avoiding unnecessary overhead on coherent
+systems.
+
+Signed-off-by: Abhinav Parihar <abhinav.parihar@oss.qualcomm.com>
 ---
- drivers/phy/qualcomm/phy-qcom-qmp-combo.c | 80 +++++++++++++++++++++++++++++++
- 1 file changed, 80 insertions(+)
 
-diff --git a/drivers/phy/qualcomm/phy-qcom-qmp-combo.c b/drivers/phy/qualcomm/phy-qcom-qmp-combo.c
-index a4f130fc33e3990e4101a710803bb4d0a0ed077b..c4e88b0384cb557f88f5af233f0568c7a93ab9cd 100644
---- a/drivers/phy/qualcomm/phy-qcom-qmp-combo.c
-+++ b/drivers/phy/qualcomm/phy-qcom-qmp-combo.c
-@@ -2356,6 +2356,20 @@ static const struct qmp_phy_init_tbl hawi_usb3_pcs_usb_tbl[] = {
- 	QMP_PHY_INIT_CFG(QPHY_V10_PCS_USB3_RCVR_DTCT_DLY_U3_H, 0x00),
+ Patch [v1]: https://lore.kernel.org/all/20260604194811.2437567-1-abhinav.parihar@oss.qualcomm.com/
+
+ Changes in v2:
+  - Fix buffer overlap handling to ensure cache maintenance is performed
+    when input and output buffers overlap and the overlap calculation
+    suppresses the buffer's mstart/mend range.
+  - Add a do_cmo flag to track buffers that require cache maintenance
+    even when their overlap range is clipped.
+  - Invalidate output buffers before sending the RPC request, preventing
+    stale CPU cache lines from being written back while the DSP updates
+    the buffers.
+  - Use DMA_FROM_DEVICE consistently for both begin_cpu_access() and
+    end_cpu_access() when invalidating output buffers.
+
+ drivers/misc/fastrpc.c | 77 +++++++++++++++++++++++++++++++++++++++++-
+ 1 file changed, 76 insertions(+), 1 deletion(-)
+
+diff --git a/drivers/misc/fastrpc.c b/drivers/misc/fastrpc.c
+index d4fac2caca86..83d04b9d2ea0 100644
+--- a/drivers/misc/fastrpc.c
++++ b/drivers/misc/fastrpc.c
+@@ -217,6 +217,7 @@ struct fastrpc_buf_overlap {
+ 	u64 mstart;
+ 	u64 mend;
+ 	u64 offset;
++	bool do_cmo;
  };
  
-+static const struct qmp_phy_init_tbl nord_usb3_tx_tbl[] = {
-+	QMP_PHY_INIT_CFG(QSERDES_V6_TX_RES_CODE_LANE_TX, 0x00),
-+	QMP_PHY_INIT_CFG(QSERDES_V6_TX_RES_CODE_LANE_RX, 0x00),
-+	QMP_PHY_INIT_CFG(QSERDES_V6_TX_RES_CODE_LANE_OFFSET_TX, 0x1f),
-+	QMP_PHY_INIT_CFG(QSERDES_V6_TX_RES_CODE_LANE_OFFSET_RX, 0x09),
-+	QMP_PHY_INIT_CFG(QSERDES_V6_TX_LANE_MODE_1, 0xf5),
-+	QMP_PHY_INIT_CFG(QSERDES_V6_TX_LANE_MODE_3, 0x3f),
-+	QMP_PHY_INIT_CFG(QSERDES_V6_TX_LANE_MODE_4, 0x3f),
-+	QMP_PHY_INIT_CFG(QSERDES_V6_TX_LANE_MODE_5, 0x5f),
-+	QMP_PHY_INIT_CFG(QSERDES_V6_TX_RCV_DETECT_LVL_2, 0x14),
-+	QMP_PHY_INIT_CFG_LANE(QSERDES_V6_TX_PI_QEC_CTRL, 0x21, 1),
-+	QMP_PHY_INIT_CFG_LANE(QSERDES_V6_TX_PI_QEC_CTRL, 0x05, 2),
-+};
-+
- /* list of regulators */
- static struct regulator_bulk_data qmp_phy_vreg_l[] = {
- 	{ .supply = "vdda-phy", .init_load_uA = 21800, },
-@@ -2720,6 +2734,23 @@ static const struct qmp_combo_offsets qmp_combo_offsets_v5 = {
- 	.dp_dp_phy	= 0x2200,
+ struct fastrpc_buf {
+@@ -292,6 +293,7 @@ struct fastrpc_session_ctx {
+ 	int sid;
+ 	bool used;
+ 	bool valid;
++	bool coherent;
  };
  
-+static const struct qmp_combo_offsets qmp_combo_offsets_v6 = {
-+	.com		= 0x0000,
-+	.txa		= 0x1200,
-+	.rxa		= 0x1400,
-+	.txb		= 0x1600,
-+	.rxb		= 0x1800,
-+	.usb3_serdes	= 0x1000,
-+	.usb3_pcs_misc	= 0x1a00,
-+	.usb3_pcs	= 0x1c00,
-+	.usb3_pcs_aon	= 0x1e00,
-+	.usb3_pcs_usb	= 0x1f00,
-+	.dp_serdes	= 0x2000,
-+	.dp_txa		= 0x2200,
-+	.dp_txb		= 0x2600,
-+	.dp_dp_phy	= 0x2a00,
-+};
-+
- static const struct qmp_combo_offsets qmp_combo_offsets_v8 = {
- 	.com		= 0x0000,
- 	.txa		= 0x1400,
-@@ -3424,6 +3455,51 @@ static const struct qmp_phy_cfg glymur_usb3dpphy_cfg = {
- 	.num_vregs		= ARRAY_SIZE(qmp_phy_vreg_refgen),
- };
- 
-+static const struct qmp_phy_cfg nord_usb3dpphy_cfg = {
-+	.offsets		= &qmp_combo_offsets_v6,
-+
-+	.serdes_tbl		= sm8550_usb3_serdes_tbl,
-+	.serdes_tbl_num		= ARRAY_SIZE(sm8550_usb3_serdes_tbl),
-+	.tx_tbl			= nord_usb3_tx_tbl,
-+	.tx_tbl_num		= ARRAY_SIZE(nord_usb3_tx_tbl),
-+	.rx_tbl			= sm8550_usb3_rx_tbl,
-+	.rx_tbl_num		= ARRAY_SIZE(sm8550_usb3_rx_tbl),
-+	.pcs_tbl		= sm8550_usb3_pcs_tbl,
-+	.pcs_tbl_num		= ARRAY_SIZE(sm8550_usb3_pcs_tbl),
-+	.pcs_usb_tbl		= sm8550_usb3_pcs_usb_tbl,
-+	.pcs_usb_tbl_num	= ARRAY_SIZE(sm8550_usb3_pcs_usb_tbl),
-+
-+	.dp_serdes_tbl		= qmp_v6_dp_serdes_tbl,
-+	.dp_serdes_tbl_num	= ARRAY_SIZE(qmp_v6_dp_serdes_tbl),
-+	.dp_tx_tbl		= qmp_v6_dp_tx_tbl,
-+	.dp_tx_tbl_num		= ARRAY_SIZE(qmp_v6_dp_tx_tbl),
-+
-+	.serdes_tbl_rbr		= qmp_v6_dp_serdes_tbl_rbr,
-+	.serdes_tbl_rbr_num	= ARRAY_SIZE(qmp_v6_dp_serdes_tbl_rbr),
-+	.serdes_tbl_hbr		= qmp_v6_dp_serdes_tbl_hbr,
-+	.serdes_tbl_hbr_num	= ARRAY_SIZE(qmp_v6_dp_serdes_tbl_hbr),
-+	.serdes_tbl_hbr2	= qmp_v6_dp_serdes_tbl_hbr2,
-+	.serdes_tbl_hbr2_num	= ARRAY_SIZE(qmp_v6_dp_serdes_tbl_hbr2),
-+	.serdes_tbl_hbr3	= qmp_v6_dp_serdes_tbl_hbr3,
-+	.serdes_tbl_hbr3_num	= ARRAY_SIZE(qmp_v6_dp_serdes_tbl_hbr3),
-+
-+	.swing_hbr_rbr		= &qmp_dp_v5_voltage_swing_hbr_rbr,
-+	.pre_emphasis_hbr_rbr	= &qmp_dp_v6_pre_emphasis_hbr_rbr,
-+	.swing_hbr3_hbr2	= &qmp_dp_v5_voltage_swing_hbr3_hbr2,
-+	.pre_emphasis_hbr3_hbr2	= &qmp_dp_v5_pre_emphasis_hbr3_hbr2,
-+
-+	.dp_aux_init		= qmp_v4_dp_aux_init,
-+	.configure_dp_tx	= qmp_v4_configure_dp_tx,
-+	.configure_dp_clocks	= qmp_v3_configure_dp_clocks,
-+	.configure_dp_phy	= qmp_v4_configure_dp_phy,
-+
-+	.regs			= qmp_v6_usb3phy_regs_layout,
-+	.reset_list		= msm8996_usb3phy_reset_l,
-+	.num_resets		= ARRAY_SIZE(msm8996_usb3phy_reset_l),
-+	.vreg_list		= qmp_phy_vreg_l,
-+	.num_vregs		= ARRAY_SIZE(qmp_phy_vreg_l),
-+};
-+
- static int qmp_combo_dp_serdes_init(struct qmp_combo *qmp)
+ struct fastrpc_soc_data {
+@@ -655,7 +657,9 @@ static int olaps_cmp(const void *a, const void *b)
+ static void fastrpc_get_buff_overlaps(struct fastrpc_invoke_ctx *ctx)
  {
- 	const struct qmp_phy_cfg *cfg = qmp->cfg;
-@@ -5621,6 +5697,10 @@ static const struct of_device_id qmp_combo_of_match_table[] = {
- 		.compatible = "qcom,hawi-qmp-usb3-dp-phy",
- 		.data = &hawi_usb3dpphy_cfg,
- 	},
-+	{
-+		.compatible = "qcom,nord-qmp-usb3-dp-phy",
-+		.data = &nord_usb3dpphy_cfg,
-+	},
- 	{
- 		.compatible = "qcom,sar2130p-qmp-usb3-dp-phy",
- 		.data = &sar2130p_usb3dpphy_cfg,
-
+ 	u64 max_end = 0;
++	int max_raix = -1;
+ 	int i;
++	int inbufs = REMOTE_SCALARS_INBUFS(ctx->sc);
+ 
+ 	for (i = 0; i < ctx->nbufs; ++i) {
+ 		ctx->olaps[i].start = ctx->args[i].ptr;
+@@ -675,6 +679,9 @@ static void fastrpc_get_buff_overlaps(struct fastrpc_invoke_ctx *ctx)
+ 			if (ctx->olaps[i].end > max_end) {
+ 				max_end = ctx->olaps[i].end;
+ 			} else {
++				if ((max_raix < inbufs && ctx->olaps[i].raix + 1 > inbufs) ||
++					(ctx->olaps[i].raix < inbufs && max_raix + 1 > inbufs))
++					ctx->olaps[i].do_cmo = true;
+ 				ctx->olaps[i].mend = 0;
+ 				ctx->olaps[i].mstart = 0;
+ 			}
+@@ -684,6 +691,7 @@ static void fastrpc_get_buff_overlaps(struct fastrpc_invoke_ctx *ctx)
+ 			ctx->olaps[i].mstart = ctx->olaps[i].start;
+ 			ctx->olaps[i].offset = 0;
+ 			max_end = ctx->olaps[i].end;
++			max_raix = ctx->olaps[i].raix;
+ 		}
+ 	}
+ }
+@@ -703,6 +711,7 @@ static struct fastrpc_invoke_ctx *fastrpc_context_alloc(
+ 
+ 	INIT_LIST_HEAD(&ctx->node);
+ 	ctx->fl = user;
++	ctx->sc = sc;
+ 	ctx->nscalars = REMOTE_SCALARS_LENGTH(sc);
+ 	ctx->nbufs = REMOTE_SCALARS_INBUFS(sc) +
+ 		     REMOTE_SCALARS_OUTBUFS(sc);
+@@ -728,7 +737,6 @@ static struct fastrpc_invoke_ctx *fastrpc_context_alloc(
+ 	/* Take a reference to user, released in fastrpc_context_free() */
+ 	fastrpc_user_get(user);
+ 
+-	ctx->sc = sc;
+ 	ctx->retval = -1;
+ 	ctx->pid = current->pid;
+ 	ctx->client_id = user->client_id;
+@@ -1067,6 +1075,64 @@ static int fastrpc_create_maps(struct fastrpc_invoke_ctx *ctx)
+ 	return 0;
+ }
+ 
++static void fastrpc_flush_args(struct fastrpc_invoke_ctx *ctx)
++{
++	union fastrpc_remote_arg *rpra = ctx->rpra;
++	int i, inbufs, outbufs;
++
++	inbufs = REMOTE_SCALARS_INBUFS(ctx->sc);
++	outbufs = REMOTE_SCALARS_OUTBUFS(ctx->sc);
++
++	for (i = 0; i < inbufs + outbufs; ++i) {
++		int raix = ctx->olaps[i].raix;
++		struct fastrpc_map *map = ctx->maps[raix];
++
++		if (raix + 1 > inbufs)
++			continue;
++		if (!map || !map->buf)
++			continue;
++
++		if (rpra[raix].buf.len && (ctx->olaps[i].mstart || ctx->olaps[i].do_cmo)) {
++			dma_buf_begin_cpu_access(map->buf, DMA_TO_DEVICE);
++			dma_buf_end_cpu_access(map->buf, DMA_TO_DEVICE);
++		}
++	}
++}
++
++static void fastrpc_inv_args(struct fastrpc_invoke_ctx *ctx)
++{
++	union fastrpc_remote_arg *rpra = ctx->rpra;
++	int i, inbufs, outbufs;
++
++	inbufs = REMOTE_SCALARS_INBUFS(ctx->sc);
++	outbufs = REMOTE_SCALARS_OUTBUFS(ctx->sc);
++
++	for (i = 0; i < inbufs + outbufs; ++i) {
++		int raix = ctx->olaps[i].raix;
++		struct fastrpc_map *map = ctx->maps[raix];
++
++		if (raix + 1 <= inbufs)
++			continue;
++		if (!rpra[raix].buf.len)
++			continue;
++		if (!map || !map->buf)
++			continue;
++
++		/*
++		 * Skip invalidation if the argument overlaps with the
++		 * RPC control header page.
++		 */
++		if (((uintptr_t)rpra & PAGE_MASK) ==
++			((uintptr_t)rpra[raix].buf.pv & PAGE_MASK))
++			continue;
++
++		if (ctx->olaps[i].mstart || ctx->olaps[i].do_cmo) {
++			dma_buf_begin_cpu_access(map->buf, DMA_FROM_DEVICE);
++			dma_buf_end_cpu_access(map->buf, DMA_FROM_DEVICE);
++		}
++	}
++}
++
+ static struct fastrpc_invoke_buf *fastrpc_invoke_buf_start(union fastrpc_remote_arg *pra, int len)
+ {
+ 	return (struct fastrpc_invoke_buf *)(&pra[len]);
+@@ -1191,6 +1257,9 @@ static int fastrpc_get_args(u32 kernel, struct fastrpc_invoke_ctx *ctx)
+ 		}
+ 	}
+ 
++	if (!ctx->fl->sctx->coherent)
++		fastrpc_flush_args(ctx);
++
+ 	for (i = ctx->nbufs; i < ctx->nscalars; ++i) {
+ 		list[i].num = ctx->args[i].length ? 1 : 0;
+ 		list[i].pgidx = i;
+@@ -1376,6 +1445,8 @@ static int fastrpc_internal_invoke(struct fastrpc_user *fl,  u32 kernel,
+ 	if (err)
+ 		goto bail;
+ 
++	if (!fl->sctx->coherent)
++		fastrpc_inv_args(ctx);
+ 	/* make sure that all CPU memory writes are seen by DSP */
+ 	dma_wmb();
+ 	/* Send invoke buffer to remote dsp */
+@@ -1396,6 +1467,9 @@ static int fastrpc_internal_invoke(struct fastrpc_user *fl,  u32 kernel,
+ 
+ 	/* make sure that all memory writes by DSP are seen by CPU */
+ 	dma_rmb();
++	if (!fl->sctx->coherent)
++		fastrpc_inv_args(ctx);
++
+ 	/* populate all the output buffers with results */
+ 	err = fastrpc_put_args(ctx, kernel);
+ 	if (err)
+@@ -2393,6 +2467,7 @@ static int fastrpc_cb_probe(struct platform_device *pdev)
+ 	sess->used = false;
+ 	sess->valid = true;
+ 	sess->dev = dev;
++	sess->coherent = of_property_read_bool(dev->of_node, "dma-coherent");
+ 	dev_set_drvdata(dev, sess);
+ 	sess->sid = sid;
+ 
 -- 
-2.47.3
+2.34.1
 
