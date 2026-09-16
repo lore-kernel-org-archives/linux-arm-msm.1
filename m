@@ -1,183 +1,189 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3C6C81A2C04;
-	Tue, 15 Sep 2026 23:14:23 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EB381370AD7
+	for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 00:00:19 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789514064; cv=none; b=LxRPdmeJPEvHXLxTe8DvPvi2HKVhGBTsWaVE/OBKWN83DQXDVz5XcDe7WF6SwLTdoCyx5Jl0EQMUzf5jVmkD9ta8mxK3Er2zwGhr14sbu/TuAIarSsk+00lt0nkcJtNmg/Fkb6Oa87SwqsdQrB/RLu+A0ssN1jR3R5j9/eBVgJw=
+	t=1789516821; cv=none; b=aGoq4t1h5hXVQ2NRZtbAuT17VGlFcruykVgmZTr/Yaiqfb2KIATRxGdX5ZyIZWO8nbFLTtcbSOdGmsk78IGW8PRnC3l0ZuS/DFKM0X3J1bUE063KIYjDQjww8JaUq4qKJTkbZzu44rH/YS+INs+z3cfnTuBWkqmb+e6kpQ4v924=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789514064; c=relaxed/simple;
-	bh=gSVCD7ttOBnaUuTZl1ZQHR+lieeaF8G2Z7XwYRI5ZuI=;
-	h=Date:From:To:Cc:Subject:Message-ID:MIME-Version:Content-Type:
-	 Content-Disposition:In-Reply-To; b=U1TI7As+u+HaDuJET7ryI9PTkHWmWX7ZQ2Hy4e71JOKQxGvKzrA5QD8Qie7Br1L6P2Dt61BguhHTPgRlmqlMKpqB4yLzdLJxHs9c5vncbT5W0vZunTtkuAR4l6YNgfsDDkM2Xi7VhlNaoW9dwMQ1Q6go/ObFZumesEhAETpCw7Q=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=fmXOuZmk; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1789516821; c=relaxed/simple;
+	bh=26C+ToikrdDEucP2YwD27WA7DtsKW71JwRXumcGVaH4=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=m6zMAz3ePnSz9xce+TIXh6LK3yGLkLg5wnzY//ZtZ+jxX3MC+BysvzVxLwJ4pHd/dyjHVSNIccz8TO+ugAeftxWVGEAGR0GGspX4tgGvurbZZLYyNRbffQWBZwBJiGW8S7py64tB7jOx/GeDeo87gVsMG6n6OJl1wbsqlTmcbqg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=dvTFTQdr; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=f7KML/I+; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="fmXOuZmk"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A58951F000FF;
-	Tue, 15 Sep 2026 23:14:22 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1789514062;
-	bh=fus+PONEuzYkdGrcViZBwMcYzx5qWtxnJLG+dD5KPHM=;
-	h=Date:From:To:Cc:Subject:In-Reply-To;
-	b=fmXOuZmk3F2RP+4+Sm96H06PqvphzqNP2SixH/6GNTX+guw8HD0uBgvZ5n2gk+hqH
-	 MfObpryAjid5wvbcjDx+WCuOXjJfJ2lW4P0W0Ry6zSrzMVmiS8hcr/ehHF/AyF3LQu
-	 pTCGV6Geymyx7+y+XYdz5M7HmQQM+WRaGPtRPfMoKyd+aBYG8FyQqzgDLnguEPxO34
-	 rs/R5NhKc687ubyhy9NWtVc8Fo+S1vVVI5jVVqBTfsTSKbqJL+XVPaQUm5vxe7LvVw
-	 jQBZbGTbgGcmcss7m8cFvzPpt/KyXRxAELd9ixqGDf0Bvc//fHtVlpE/itrf2+gGwq
-	 erSKr2JDVeWdw==
-Date: Tue, 15 Sep 2026 18:14:21 -0500
-From: Bjorn Helgaas <helgaas@kernel.org>
-To: Manivannan Sadhasivam <mani@kernel.org>
-Cc: Qiang Yu <qiang.yu@oss.qualcomm.com>,
-	Lorenzo Pieralisi <lpieralisi@kernel.org>,
-	Krzysztof =?utf-8?Q?Wilczy=C5=84ski?= <kwilczynski@kernel.org>,
-	Rob Herring <robh@kernel.org>, Bjorn Helgaas <bhelgaas@google.com>,
-	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
-	linux-pci@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-	linux-kernel@vger.kernel.org, James Morse <james.morse@arm.com>,
-	Andrew Scull <ascull@google.com>, Marc Zyngier <maz@kernel.org>
-Subject: Re: [PATCH v2] PCI: qcom: Block accesses to downstream devices on
- link down
-Message-ID: <20260915231421.GA881410@bhelgaas>
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="dvTFTQdr";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="f7KML/I+"
+Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68FLYb6R224928
+	for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 00:00:19 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=220jgmOFT1NOZxBi5UiZyD
+	ErfSIXzTYSIYjd/SsRggA=; b=dvTFTQdrkxom2LSqwjRpDw+cshoPKlI8+yXZrK
+	WC4A9+C4Qo+SBc1tNzcct3nkWpKtb7f4+5OpJ+X1G1UP4BPfZr/NMA2zXTimpTZw
+	cP+f3dHQuOuGOjAXtHopd0MJBHrnevxMbUIjG+y86OvzQlbfmljqhOU2WxYhCsBv
+	xDs5tReetOco0dtGC32e6hB/aIcGzLhYHCIPQDytmyH3k25bl6oAqOJo8n/9o3/K
+	0259uww3LqHdnJJo7WOHUKw9sG0HgK0X3gV6DGoVoxE9A2JnqzJkxQkSdtbRVghY
+	ifI6kRDOzl/F3KBJV9A+2wnGKcozViYOimj6y0r70ONtC7Ow==
+Received: from mail-oa1-f72.google.com (mail-oa1-f72.google.com [209.85.160.72])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gqbmnh2t8-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 00:00:19 +0000 (GMT)
+Received: by mail-oa1-f72.google.com with SMTP id 586e51a60fabf-45e6091d8a1so3571317fac.1
+        for <linux-arm-msm@vger.kernel.org>; Tue, 15 Sep 2026 17:00:19 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1789516818; x=1790121618; darn=vger.kernel.org;
+        h=cc:to:message-id:content-transfer-encoding:content-type
+         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=220jgmOFT1NOZxBi5UiZyDErfSIXzTYSIYjd/SsRggA=;
+        b=f7KML/I+XmbtGB+l5fOqJQvjhkFrFEWKOPxXP7oWOqzZuyW0C3tr+AJyOn/e951xSR
+         l/C+yAlsf8v9EoSgielexLzMSQgAvS41ktsDngBgktBN4sfsSYxEdURFUvk5xJxd76Ee
+         jGB+vrQDvuALeqwDyg2G/J+WuZED1e5fBLB/NvSKJdZRFNygy1C11OJ5WQgwBCk162Fj
+         9BJVlTmq9M8YQuIEujwcVC/pOcZyAliuyzemsVvbQcKfYal2VGbz0zoqoWBhuminMYQM
+         GexbwwTgI7eh4Vng9fcDPIvhXIoBhjhBXsMWp4p5CtBTP/UWILawR0lG1piJ9FjfRs/g
+         UEvw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1789516818; x=1790121618;
+        h=cc:to:message-id:content-transfer-encoding:content-type
+         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to:content-type;
+        bh=220jgmOFT1NOZxBi5UiZyDErfSIXzTYSIYjd/SsRggA=;
+        b=vhdqoDUCGGcQIRteTKFIPwcN/1YZv22Kdk5InclS3U7rqXbhFClNWPV08iYPXPbUIC
+         /wPcapUYdak9fzrVrHjj5ufD3zOGsKX97+FTMA1D3DxnrtPaNU966u5Ej8+1Cej+0bE2
+         U1f5Io4R2rb8qDMZFkX7LOUL3ntP0U6enEtC92AaaFiifau/BVCs2V7lg3xXXclhiLN/
+         YWTKJyemy7F5ZRcrMwE+VV9f+Spbt8bgS5ge7WcUGJvdaXyCqY8SHNI5rUdy1s9G95dw
+         tMg6DiXIi6iSESieOOMA3dUEgd0l5IyOURVYNjMM1NAEHlfYMVmaBJV5I2k0s9CsNG67
+         Fz2Q==
+X-Gm-Message-State: AFuF++msyFwhrLmdbnrHMwrEpKVb4ATrTj3Rqcp7zLw4PM7SvSGtnOkt
+	1kreHzvVeyo93uk3ndiGUR/l+85XdiPdqcy8Tk/YCEGHoifHs05hRdHLpisHaYVHLLs74+ShjAQ
+	P7JAkZv5nH64msIEbl6fp98KtKRODBG9VmLd2XiPqskEE0yFYTn13MlHLpY3l2Ojdg7Ti
+X-Gm-Gg: AYBFou0xf5kvhN9kBZ4QQrr6aDH8E2zp078l+sS1zzejZe+0ZgBIoR82j/ViiEkcqob
+	kJynexfyWS2rRKjwYHyCKh1lhoW4HiI3W5UHqU73kfraaVh6EO5eQiRjiwvl/CBMP7gSZi/pU1R
+	OP2Vlp8DI8yuK2wmKvQoXdAGJK1Rta4C2PfnpsgL4M4EVssaA2yJpr/RaCE5YempfuxWeulUnk9
+	+U7BnPZbDgkrBCKJ63FoxKqvIOzFxwZqIwmkxCzH1euubWOqSB9+/8SzJr/jlJlFFtWQTJuivAK
+	NpQSK91nOGiC50ogHNM1PGEp/1ufyxphLCKS8FZZxONh05rZcl8aKKF/V7A3vicM
+X-Received: by 2002:a05:6820:1899:b0:6b7:46e9:9702 with SMTP id 006d021491bc7-6c7d44e4575mr620296eaf.50.1789516818429;
+        Tue, 15 Sep 2026 17:00:18 -0700 (PDT)
+X-Received: by 2002:a05:6820:1899:b0:6b7:46e9:9702 with SMTP id 006d021491bc7-6c7d44e4575mr620266eaf.50.1789516817972;
+        Tue, 15 Sep 2026 17:00:17 -0700 (PDT)
+Received: from [192.168.86.45] ([104.57.184.186])
+        by smtp.gmail.com with ESMTPSA id 586e51a60fabf-4842a67ca40sm1242613fac.15.2026.09.15.17.00.16
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 15 Sep 2026 17:00:17 -0700 (PDT)
+From: Bjorn Andersson <bjorn.andersson@oss.qualcomm.com>
+Date: Tue, 15 Sep 2026 19:00:15 -0500
+Subject: [PATCH] pinctrl: qcom: lpass-lpi: Include value in debugfs output
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <2ibficaitalz4lacqffsrp4kuqzanxnxr2bwd6x5yti4mmfabf@h3y63kuz7fjh>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260915-pinctrl-lpass-debug-v1-1-bc49766c9f6f@oss.qualcomm.com>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXMQQqDQAxA0atI1g2MAS16ldJFHKONyHSYqAji3
+ R3b5Vv8f4BJUjFoiwOSbGr6DRnlowD/4TAKap8N5Kh2TVlh1OCXNOMc2Qx76dYRn8zEDQ2OqIJ
+ cxiSD7r/r6/23rd0kfrlXcJ4XLr0IVncAAAA=
+X-Change-ID: 20260915-pinctrl-lpass-debug-7aa2a92f0225
+To: Bjorn Andersson <andersson@kernel.org>,
+        Bartosz Golaszewski <brgl@kernel.org>,
+        Linus Walleij <linusw@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, linux-gpio@vger.kernel.org,
+        linux-kernel@vger.kernel.org,
+        Bjorn Andersson <bjorn.andersson@oss.qualcomm.com>
+X-Mailer: b4 0.16.0
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1601;
+ i=bjorn.andersson@oss.qualcomm.com; h=from:subject:message-id;
+ bh=26C+ToikrdDEucP2YwD27WA7DtsKW71JwRXumcGVaH4=;
+ b=owEBgwJ8/ZANAwAKAQsfOT8Nma3FAcsmYgBqqdwQaOgjkhXIQD/DyXMlg602HvhNPIWeWhYUw
+ pNJnAMhhNGJAkkEAAEKADMWIQQF3gPMXzXqTwlm1SULHzk/DZmtxQUCaqncEBUcYW5kZXJzc29u
+ QGtlcm5lbC5vcmcACgkQCx85Pw2ZrcV9JQ//eAWTfCIdBFv3DyViURTiQSGaWlMOiuTTSYEZZzy
+ pscM86Afvr5L3i/YILd5+wP5YKzoEMAleUaR+JCGQrCW1vpbOh06RlG7wS/8pgYutIJlir8PD0J
+ 8LAKDZnNiYGY9P/OEQn7TEgT9p930KtpThhkVK4bj4WxvgTrDgkMdv1PCUanVTEKFe+Ppbo0pE4
+ yvT+INsCnuLOG8E+DKrK4Zvb0RgCtiBQciJ9gH7aUbdG/b7H8LkmZRmwBNCOS9OMNb09YqtZBAo
+ pzLH1revkUVIMlghHZyb6yCYGiZWfUwn/WwRWXQQBuCbJUYPHvA7e98zXNQCdzScBpYFAlf0acm
+ R2bYt0HYqzsxaeafoEwTVpVajolS4f7ZxoXCUOoeGSiy5EQSA5n7VFQ3oe8V87dkMYYHJRIRukz
+ QjaauDxc3CUQS9WhAlmPixuRK6vGbUxZPwU+aH8hbQHfZiCyc8VhazSLSan0YBMfdCfIf2OBMz0
+ ERue/sWUGkmAOKHdgmL+AcN08pMSuS0N8VzrCy/KbA/Qw6R5fFNfAgm8kJKL7lTbQ/zW2CTo8bO
+ xNFuJSzOV1Y12evl1KtB9FNIqs1xNnmsNVeO++gSAgjGDmXoGYmDMdZcy/fHd03MTzRa37YzYCY
+ NvucUrKOvBBhnB8gQX9me8oY4Dkhy1qakddjfBJq4f2E=
+X-Developer-Key: i=bjorn.andersson@oss.qualcomm.com; a=openpgp;
+ fpr=05DE03CC5F35EA4F0966D5250B1F393F0D99ADC5
+X-Authority-Analysis: v=2.4 cv=POyaavqC c=1 sm=1 tr=0 ts=6aa9dc13 cx=c_pps
+ a=Z3eh007fzM5o9awBa1HkYQ==:117 a=DaeiM5VmU20ml6RIjrOvYw==:17
+ a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
+ a=EUspDBNiAAAA:8 a=P3g009chSsC6MAKsTMIA:9 a=QEXdDO2ut3YA:10
+ a=eBU8X_Hb5SQ8N-bgNfv4:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTE1MDM1MSBTYWx0ZWRfXzE8mE2Hrls4w
+ llKQJFhBzNud4VRxL7GSdXCb7oDvv9z+wyUmqbrcUnbvtMZFJMIY2X8KZM8ja+Iw1tpAhlYJ63k
+ dCv6K/iVMf8mL+W5n7Mjec+Un4Bc58BFCZ2a9p+2RqVbwBGlnyjE8EGEFsvUR1GMuFcLPdzONRZ
+ J+0YXRNTjjIZhskFb0UIdeaHsBpsn1mGcmoFgFGAX3xJhimBIMnz5pqnTf9GyUeoUXCOczrH1o1
+ qDstIQq1JbvE2wciSdMSJol1zZ8Q6FGbiNYqtfVKgIHXBQsj9GyhD3SOWdMDpTK/v/guavOtX4s
+ GHT8T0se7KKK7X6DN73BoqXrKXGHoeiBs66UkVFFnfcUVNHILjpQNrUnLZ66BZtnihbO36Gctsu
+ 1WtxIWKxweXMVWqfs/kczMqA0cFR2LAnZW9wDlAvBiJiAkUM2twyl39crYVYlAMmrhC56t6Cchq
+ DbyS9rWEA4wE51KZ8iA==
+X-Proofpoint-GUID: AH6YWRyIO3x38KRi8Xht_1kWVcNXj2Sy
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTE1MDM1MSBTYWx0ZWRfX9qw0HkoYn7y4
+ PboCTNnRFrwCC/MDOwUVJkxuubJsEfcuHg8HXN811uY6/zZ4V02unUJWuwWNY6+ZRzDBXUP8Q0f
+ pRz2Elwp/V+/DwMZZaNwUiCIY+xB9xs=
+X-Proofpoint-ORIG-GUID: AH6YWRyIO3x38KRi8Xht_1kWVcNXj2Sy
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-09-15_05,2026-09-15_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ priorityscore=1501 adultscore=0 bulkscore=0 clxscore=1015 phishscore=0
+ suspectscore=0 impostorscore=0 spamscore=0 lowpriorityscore=0 malwarescore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609150351
 
-[+cc James, Andrew, Marc for guidance on generic arm64 PCIe error
-recovery; beginning of thread:
-https://lore.kernel.org/all/20260819-ecam_blocker-v2-1-e7a8fdc1c5cb@oss.qualcomm.com]
+As with other pinctrl providers, it's useful to be able to inspect the
+current GPIO state of the LPASS LPI pins during system integration and
+debugging.
 
-On Tue, Sep 15, 2026 at 07:16:11PM +0200, Manivannan Sadhasivam wrote:
-> On Fri, Sep 11, 2026 at 12:18:07PM -0500, Bjorn Helgaas wrote:
-> > On Fri, Sep 11, 2026 at 08:17:29AM +0200, Manivannan Sadhasivam wrote:
-> > > On Tue, Sep 08, 2026 at 06:00:30PM -0500, Bjorn Helgaas wrote:
-> > > > On Wed, Aug 19, 2026 at 11:36:54PM -0700, Qiang Yu wrote:
-> > > > > After a PCIe link goes down, software may still access the
-> > > > > BAR (MMIO) space or configuration space of devices behind
-> > > > > that link before recovery has run. As the link is down,
-> > > > > these accesses never complete, resulting in a storm of
-> > > > > Completion Timeout AERs.
-> > > > 
-> > > > What is special about qcom here?  It seems like the Completion
-> > > > Timeouts and AER interrupts should happen with every PCIe
-> > > > controller.
-> > > 
-> > > The special behavior which is common across many (not all) ARM
-> > > SoCs is that they don't synthesize all-one response for
-> > > completion timeouts, unlike RCs in x86 machines. Rather, they
-> > > return AXI error response, resulting in CPU treating them as
-> > > SError, in-addition to AER storm.
-> > > 
-> > > Commit message missed mentioning SError though.
-> > 
-> > I don't know how SError works, but this sounds like a pretty big
-> > open issue with respect to RAS.  I don't think we want a kernel
-> > panic because a device failed to respond to a config or MMIO
-> > access, e.g., if a card or Thunderbolt cable got unplugged.
+Extend the driver's debugfs logic to read the current value and include
+this in the printout.
 
-I still don't know anything about arm64 or SError, but I see these KVM
-commits about using ESB to manage SError in some cases:
+Signed-off-by: Bjorn Andersson <bjorn.andersson@oss.qualcomm.com>
+---
+ drivers/pinctrl/qcom/pinctrl-lpass-lpi.c | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
 
-  0e5b9c085dce ("KVM: arm64: Consume pending SError as early as possible")
-  472fc011ccd3 ("KVM: arm64: nVHE: Don't consume host SErrors with ESB")
+diff --git a/drivers/pinctrl/qcom/pinctrl-lpass-lpi.c b/drivers/pinctrl/qcom/pinctrl-lpass-lpi.c
+index 5fd4a4eba654..9412fd36a4aa 100644
+--- a/drivers/pinctrl/qcom/pinctrl-lpass-lpi.c
++++ b/drivers/pinctrl/qcom/pinctrl-lpass-lpi.c
+@@ -421,6 +421,7 @@ static void lpi_gpio_dbg_show_one(struct seq_file *s,
+ 	struct pinctrl_pin_desc pindesc;
+ 	unsigned int func;
+ 	int is_out;
++	int value;
+ 	int drive;
+ 	int pull;
+ 	u32 ctl_reg;
+@@ -443,7 +444,10 @@ static void lpi_gpio_dbg_show_one(struct seq_file *s,
+ 	drive = FIELD_GET(LPI_GPIO_OUT_STRENGTH_MASK, ctl_reg);
+ 	pull = FIELD_GET(LPI_GPIO_PULL_MASK, ctl_reg);
+ 
+-	seq_printf(s, " %-8s: %-3s %d", pindesc.name, is_out ? "out" : "in", func);
++	value = lpi_gpio_get(chip, offset);
++
++	seq_printf(s, " %-8s: %-3s", pindesc.name, is_out ? "out" : "in");
++	seq_printf(s, " %-4s func%d", str_high_low(value), func);
+ 	seq_printf(s, " %dmA", lpi_regval_to_drive(drive));
+ 	seq_printf(s, " %s", pulls[pull]);
+ }
 
-I assume it's not possible or practical to use ESB in the native host
-case to deal with issues like this in a generic way instead of the
-vendor-specific feature Qcom is using here?
+---
+base-commit: 68142f986ff04b2b70b31db00f719bf690f64a9a
+change-id: 20260915-pinctrl-lpass-debug-7aa2a92f0225
 
-> > > > Is this mitigating an issue that will still happen on other
-> > > > controllers and should be solved elsewhere, e.g., by changing
-> > > > the software that accesses the BAR to look for the error
-> > > > responses it gets when the Completion Timeout happens?
-> > > 
-> > > That would be too late as we don't get a proper error response.
-> > > That's why this patch is used.
-> > > 
-> > > > The patch refers to the ECAM blocker (which I assume affects
-> > > > config accesses) and doesn't mention MMIO.  Is the SLV_AXI
-> > > > stuff for MMIO?
-> > > 
-> > > ECAM blocker is a Qcom's custom implementation which prevents
-> > > the config access to go out of the link and terminate the
-> > > request properly. And yes, it doesn't affect MMIO like BAR.
-> > 
-> > The commit log implies that the patch blocks both config and MMIO
-> > accesses: "software may access MMIO or config space ... Use ECAM
-> > blocker to drop these accesses."  If the ECAM blocker only affects
-> > config accesses, we need to reword that description.
-> 
-> Sorry, ECAM blocker blocks both config and MMIO access, my bad.
-> 
-> > If this patch doesn't affect MMIO accesses, I assume they will
-> > still fail and lead to SError?  I'm a little dubious about the
-> > utility of this because I assume most runtime driver accesses will
-> > be to MMIO space, not config space.
-> > 
-> > I assume this is also racy: any config access that happens in the
-> > window between the link going down and the ECAM blocker being
-> > enabled will still fail and result in SError, right?
-> 
-> That's true. But this is our best effort to avoid SError.
-> 
-> > > > Assume the root port leads to a switch, and the switch has two
-> > > > links to downstream devices.  If one of the switch downstream
-> > > > links goes down, is this going to kill the device on the other
-> > > > link that is still up?
-> > > 
-> > > ECAM blocker is only enabled when the PCIe link to the Root Port
-> > > goes down. We don't get LDn interrupt when the switch downstream
-> > > link goes down. In that case, the switch should synthesize the
-> > > error response if the CPU tries to access the unavailable
-> > > device.
-> > 
-> > For config or MMIO reads targeting a device below a switch, if the
-> > link to the device is down, I think the switch will return an
-> > Unsupported Request completion without data (PCIe r7.0, sec
-> > 2.3.1.1).
-> 
-> Yes, that's my understanding as well. And I believe SError won't
-> happen if the RC gets Unsupported Request (UR). SErrors are mostly
-> associated with Completion Timeouts and that will only happen if the
-> PCIe link between the Switch downstream port and Endpoint is still
-> active and the Endpoint becomes inactive (rare).
+Best regards,
+--  
+Bjorn Andersson <bjorn.andersson@oss.qualcomm.com>
 
-OK, I guess this part of handling of UR/CT is device-specific, not
-prescribed by the PCIe spec.
-
-> But if the Endpoint gets removed, then the link between the Port and
-> the Endpoint will go down and the Port will return Unsupported
-> Request to the RC for any read request.
-> 
-> > The PCIe spec doesn't prescribe whether RC synthesizes data to
-> > complete the read, but x86 RCs typically synthesize ~0 data.  I
-> > guess some arm64 RCs assert SError instead of completing the read.
-> 
-> Yes, that's the implementation issue in some ARM SoCs.
-> 
-> > IIUC, if the link from the RP goes down, we'll take the LDn
-> > interrupt, enable ECAM blocker, and future config reads would
-> > return ~0.  But if a link below a switch goes down, there's no LDn
-> > interrupt and it sounds like future config reads would result in a
-> > UR Cpl and SError.
-> 
-> Last sentence needs correction. UR won't trigger SError, but only
-> Completion Timeouts will. So when a device connected to a PCIe
-> switch gets removed, it won't result in SError as long as the
-> downstream port responds with UR.
-> 
-> But in the case of Qcom RPs, most of the time, Completion Timeouts
-> are observed when the CPU issues read to device whose link is down.
-> That's why we need this ECAM blocker feature to avoid it (not all
-> the time though as you noted above, but still better than nothing).
-> 
-> - Mani
-> 
-> -- மணிவண்ணன் சதாசிவம்
