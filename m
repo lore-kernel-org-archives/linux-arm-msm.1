@@ -1,274 +1,232 @@
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.8])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DE44A3CBE80;
-	Wed, 16 Sep 2026 05:18:02 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.8
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 38D1D314B66
+	for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 05:30:23 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789535890; cv=none; b=tLEQWxBcadMgufIpjnPAT3ndqi+CjEjop4nBcYHaqCnEW2NcsjRdmlTflmFvB8B808Z/H/8tAjNOELZqwsXWEj7cj//KsvG8rRzBRhWiTo54TxCVhICBsGRA3Gdyn+3JAX9eBmVgBAjvGfLOYlWPTvYoZ5DGDyhEBgnK21mbT5o=
+	t=1789536624; cv=none; b=Unixf6745uvgrZLhZkac7vpP3npbyKUdg4u7M5mn8YNfRn5wUWlfqYNavKMrvBn2ohNlP9SIzzjExLlAKt1ZiDwAX1a28u/ZRrSOi3dmHQseF511QUUapMzLcOwzpgv8zyZ7hx54bkK18Yjy77MjSTsluKS2corANVNBj5jqZ3U=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789535890; c=relaxed/simple;
-	bh=7K9m8F0mD1KG4TcDKDJKxVH0VueNV6FDVlQ8Ad7+dF4=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=hGPTKHZ92TpuSD2C8TmzSunC+TMvJ7tEfS8K0XnO2qUiqGDZMn81ismRfrDNV2vqYuoqKxeiRX7HuBWtor+MElLUw4JB56naXa7mX29Rro2ZxGFnEYH96UHA/0KIKayl4yaFM0iGVc6DwLnzQH88xMvy0B901cHpwpHTVvmuQ+c=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=Pd9w6tb9; arc=none smtp.client-ip=192.198.163.8
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
+	s=arc-20240116; t=1789536624; c=relaxed/simple;
+	bh=W+a/JDOjoaE1hUAH1acBJLP7pSsGB05GfTnuEehx8/4=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=gYOAECSg9rEIR9ehNW1GstLKHHSSL8iIxRZaag7D9MIZCqlpxFVE46O+Br5Sgl0sN0uo6szwU0pwY6ZZdHdzNT7H7U/3/eYzMRED5JWri/4ck/6EQ5NpJbiLa/vKK4ZfGolmi/HhpIrhkFVj8jtsheMLUBUy4PH8XVk5NgfBJA8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=UYrXbv/V; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=VTMTSbe+; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="Pd9w6tb9"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1789535885; x=1821071885;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=7K9m8F0mD1KG4TcDKDJKxVH0VueNV6FDVlQ8Ad7+dF4=;
-  b=Pd9w6tb9mhG5ljwwppW1v5mbGVRPq9YIWp5wRjCranDIsp2qf99VnspJ
-   NotvAz4FI+Aou1X6o/kNOo+6hBmbu1hiwBrv1yH6xicVwgBrM0DbaHZcR
-   86pqOAblgiYdkPCnKqHGtJwt4wCu4mOgY+y1IJ8Vjp/9vmj7XUh9Hwjka
-   s+FSgvzOMRk2/hJ4eT4TqNkQBThfyOiWTJzECfkN0AhhpIMbUiebzLq8o
-   bt83FzYbcLRKOUAGCeg9LHdofpUrg+pPMUzeguXB5oCI4EFH34wfC/p+1
-   He7ciRQDHyth9MkF0KVipPFcpYLkarIln8tlv43yv90Mjo9XrniApOVJq
-   A==;
-X-CSE-ConnectionGUID: fOMs1mN3TniWtEJI5hn/mA==
-X-CSE-MsgGUID: U3c0mfJNQO+fFbxIzwWH5A==
-X-IronPort-AV: E=McAfee;i="6800,10657,11905"; a="107416577"
-X-IronPort-AV: E=Sophos;i="6.27,103,1787036400"; 
-   d="scan'208";a="107416577"
-Received: from fmviesa009.fm.intel.com ([10.60.135.149])
-  by fmvoesa102.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 15 Sep 2026 22:17:59 -0700
-X-CSE-ConnectionGUID: e4iKesyjTzeod7b1HLHAUQ==
-X-CSE-MsgGUID: i4wUTo/ZSzGY0adSHgPQTg==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.27,103,1787036400"; 
-   d="scan'208";a="267017284"
-Received: from lkp-server01.sh.intel.com (HELO 462990a40a85) ([10.239.97.150])
-  by fmviesa009.fm.intel.com with ESMTP; 15 Sep 2026 22:17:56 -0700
-Received: from kbuild by 462990a40a85 with local (Exim 4.98.2)
-	(envelope-from <lkp@intel.com>)
-	id 1x6i1p-000000005X7-0J2U;
-	Wed, 16 Sep 2026 05:17:53 +0000
-Date: Wed, 16 Sep 2026 13:17:23 +0800
-From: kernel test robot <lkp@intel.com>
-To: Guangshuo Li <lgs201920130244@gmail.com>,
-	Vikash Garodia <vikash.garodia@oss.qualcomm.com>,
-	Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>,
-	Bryan O'Donoghue <bod@kernel.org>,
-	Mauro Carvalho Chehab <mchehab@kernel.org>,
-	Hans Verkuil <hverkuil@kernel.org>,
-	Jorge Ramirez-Ortiz <jorge.ramirez@oss.qualcomm.com>,
-	linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org
-Cc: llvm@lists.linux.dev, oe-kbuild-all@lists.linux.dev,
-	linux-media@vger.kernel.org,
-	Guangshuo Li <lgs201920130244@gmail.com>, stable@vger.kernel.org
-Subject: Re: [PATCH] media: venus: avoid HFI resource leak on IRQ request
- failure
-Message-ID: <202609161343.qH6ypqkG-lkp@intel.com>
-References: <20260915123009.2420780-1-lgs201920130244@gmail.com>
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="UYrXbv/V";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="VTMTSbe+"
+Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68FLYaGo1668066
+	for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 05:30:22 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	PeWBUFQKpi9k7BVFmzgyqFxO12My8fWkOb1uwjidszI=; b=UYrXbv/VQwW3H57t
+	Z0UA/w7bnzdwE+dSanmAzsdRk6gI/sj++H+ff/fO+Q9t7k2dHX8ErySsMR/cjeqj
+	l+/Za20c21hYA/wfmv93J2ezDeIYAwmDKRlgOhe6F7ofLpdRItYwUuja43nD3qn4
+	QMy3qBmPT+SYvdotWXdNsjSPEF5e8zujzBlTA+u7OGgjGAnG4fWgPM76B6Z4CkfT
+	zqhtTcqmvLvb/7iptDndqOl8lyC4qQHLaHNSCKRfQpKV3ed9fO1OmvVUZAqxMgVV
+	913Y3Rhehxxm4XZXl4d+tGPrrR5ROnpYYFlF5b1CNfBV6tC/wMiyAxJHUvmVa6/+
+	r0UoLA==
+Received: from mail-pj1-f71.google.com (mail-pj1-f71.google.com [209.85.216.71])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gq6kc42xb-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 05:30:21 +0000 (GMT)
+Received: by mail-pj1-f71.google.com with SMTP id 98e67ed59e1d1-39e087a17dfso2204319a91.3
+        for <linux-arm-msm@vger.kernel.org>; Tue, 15 Sep 2026 22:30:21 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1789536620; x=1790141420; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=PeWBUFQKpi9k7BVFmzgyqFxO12My8fWkOb1uwjidszI=;
+        b=VTMTSbe+CfSpYAYUUy9nwg7bY4G/kPDdRQ1Z4p1fxiZhQyXeRD4bEyh0qbgC7LW5BK
+         7NQuTnLQkDEBjTJHZLRNzuJN42uFbm+8G3eQ7jcFuN7FkM3C4DRBuC0y//dtQ7ldlWd2
+         DhOhSslQvFrlRg5LmzTDRizTkD5BebTDE3feNv5L7NMwhmYkSOprDHOm5kKAHPQ0Ik1D
+         yYijh7fKMPRMG5s/xC7gHXklHisZPCDNTh6FckScAWJNnHAJNM7TBfJ23qNsRBweu6m7
+         p1FDNA3ccLj2obRbW8sWoKk1OLZbxy6GiyS4UV4a1eJy7sgbrU++ShN+l0+c6vN+FKmQ
+         yH8A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1789536620; x=1790141420;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=PeWBUFQKpi9k7BVFmzgyqFxO12My8fWkOb1uwjidszI=;
+        b=FWnllvdH6UOpANSuoAsSOD+iGGlaIn8XZ+fLOMSTFUatsnNxIHqoW2jXXC0ecxEL0p
+         XqWjX8abutk1LuPNMqYZXOc+0VZ0RuqHUaiwnKK1oBxq6Ifqv1/HtxHSk9UceFM4EsF7
+         sUpCIeABFXIJ494Y8qVfde+a02Hmw3utWs2jGuCq38ZoTL+lt6Dv8Gv9AAX7tDtOjtBu
+         z1dsjjzcKtEGmvj/UU+tMCLMJOmP/8atbFzPagiBsMAMdYuOQooJbctkPWYU+QZeLNdF
+         Wg/6NRw5lWNyJbu3gXr9Q0MIpb996y2Sl0fWQ7fuEpmP2I8XMN2pu3dreu4EuXAdD/Fs
+         HEYg==
+X-Gm-Message-State: AFuF++lXM9KLY8Zt2NAuj6w+jM3ApznZCJ9n3/JWYi0xZHnMw4UUmEr6
+	V0hujf7qvpeQqV2GxmoTb8y+zWRznhTaN63KMnggOdkgGS42Ld45rq1HXfd36CS5K/jzDY47N+7
+	bGiqwEgTRn5/lD93RkYnQUxcu9SK6tVvSR7qnwTMegayiWclcjr6hwN8K73k/H9CV+LNN
+X-Gm-Gg: AYBFou0VYJvH7tPQHRtjvu1kss+ENmW8dJaAJqBPs9zr4JalwAm3gP+obOX8gckskVH
+	W1i2MRjPhIpxKhFQBi93wcvopak3bkwMYVsE2m6dC3AStKKlLcTdsupU0CZ8qRncLJHGtOSpKgf
+	eBk06aE0j488ZN2itf6BGlTqAvx18k6WEhEGoguenkMv9O5O6POLUjNvgWHCAYAC063dY7h7f0P
+	thsiJbv9HlwpOf6y2gbqgesAhHj7IUCMkeakgoA3W5vyEmzD1lKm5E1hRjq1B/DyLPj970KRSgc
+	SE07oQNYutnbLwWoa2P5Er/FCGG7fVae5HOzTnHgoTh8eK8X9efPqh599m4/6BjkR6rsYmXYs6W
+	RIv1yctOZRmZMRDAu9O4W5CDltD7E1qZKKvbAug==
+X-Received: by 2002:a17:90b:224b:b0:38e:57a3:f218 with SMTP id 98e67ed59e1d1-39e1e4246f7mr3005291a91.13.1789536620488;
+        Tue, 15 Sep 2026 22:30:20 -0700 (PDT)
+X-Received: by 2002:a17:90b:224b:b0:38e:57a3:f218 with SMTP id 98e67ed59e1d1-39e1e4246f7mr3005220a91.13.1789536619995;
+        Tue, 15 Sep 2026 22:30:19 -0700 (PDT)
+Received: from [192.168.86.250] ([76.176.48.107])
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-14395d13ee7sm3425309c88.8.2026.09.15.22.30.18
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 15 Sep 2026 22:30:19 -0700 (PDT)
+Message-ID: <a9d9aac7-cb2d-46fe-a220-40f61f615b89@oss.qualcomm.com>
+Date: Tue, 15 Sep 2026 22:30:17 -0700
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260915123009.2420780-1-lgs201920130244@gmail.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH RFC 1/5] optee: riscv: add RPMI TEE service group
+ transport
+To: Amirreza Zarrabi <amirreza.zarrabi@oss.qualcomm.com>,
+        Jens Wiklander <jenswi@kernel.org>, Sumit Garg <sumit.garg@kernel.org>,
+        Paul Walmsley <pjw@kernel.org>, Palmer Dabbelt <palmer@dabbelt.com>,
+        Albert Ou <aou@eecs.berkeley.edu>, Alexandre Ghiti <alex@ghiti.fr>,
+        Rahul Pathak <rahul@summations.net>, Anup Patel <anup@brainfault.org>,
+        Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
+        op-tee@lists.trustedfirmware.org, linux-riscv@lists.infradead.org,
+        devicetree@vger.kernel.org
+References: <20260912-rpmi-tee-service-grp-dev-v1-0-1d1d35c2a859@oss.qualcomm.com>
+ <20260912-rpmi-tee-service-grp-dev-v1-1-1d1d35c2a859@oss.qualcomm.com>
+Content-Language: en-US
+From: Trilok Soni <trilokkumar.soni@oss.qualcomm.com>
+In-Reply-To: <20260912-rpmi-tee-service-grp-dev-v1-1-1d1d35c2a859@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTE2MDA2OCBTYWx0ZWRfX2KBXA1q6fvqV
+ iBqh2aExs16o7N/1HbIjqUGOguzLSuhGUNfbuShA7q3O6k0cISJjucB8jBrobpkntgp5+gNdn6O
+ 9irFj5mHdScsw2eaG4qpPIedYvTtNis=
+X-Proofpoint-GUID: dKzI1EF4UkVEYi3xAjd8GnEkhjPKvPo8
+X-Authority-Analysis: v=2.4 cv=ZINCCn7b c=1 sm=1 tr=0 ts=6aaa296d cx=c_pps
+ a=UNFcQwm+pnOIJct1K4W+Mw==:117 a=lsoD3MMNObdLvy1227ExmA==:17
+ a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22
+ a=EUspDBNiAAAA:8 a=v3eslg5cZyQnhgVqE9oA:9 a=QEXdDO2ut3YA:10
+ a=uKXjsCUrEbL0IQVhDsJ9:22
+X-Proofpoint-ORIG-GUID: dKzI1EF4UkVEYi3xAjd8GnEkhjPKvPo8
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTE2MDA2OCBTYWx0ZWRfX9o9LpeO3rzaT
+ Mg1A02HCCIOYWis+pjk9oah6I9jrxTsX4zJpLRYqQ3bAtdO7GRzg6GT/QrSngMyfxmAxvhJsLu9
+ zq7iACBUJcoNVJ7oVtNh1uSnmNwPIXsjyRuigrjwKe02wjKFotKWjrJXR7DR3BuAXLTlc+UNPxi
+ FPVIhZBWmJZFPqP7CtJlrFyOfJtDTDrmsQjxqKloCDmuckkmw1xVjGLpGWzNZZAHQJrgmU6XnzM
+ br4+FISxeZXM2J3b8pO5Cwre+RWAqHTTQG1XXT0PUh8EZ+Kk8/LCZq7WWIRfA3f64C8rAQvVW2O
+ 9k+xlSjkULB/q/cI5y+lcK9BPUmg4RHloDx1Ha7MzvfxriFyGAnUyUgOhJkQzpg2He/onrbH1Ho
+ SAOCaGiNy1N48faGC3Jm5MI8A3KUfhJgOxr71n+83wA77i0w2aa2X874D7qINTnKUliYbyyE7hN
+ 0d+mDwJNkU3zgNBEYRw==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-09-15_05,2026-09-15_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ malwarescore=0 spamscore=0 clxscore=1011 lowpriorityscore=0 impostorscore=0
+ adultscore=0 bulkscore=0 phishscore=0 priorityscore=1501 suspectscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609160068
 
-Hi Guangshuo,
+On 9/12/2026 3:15 AM, Amirreza Zarrabi wrote:
+> Add an OP-TEE transport for RISC-V using the RPMI TEE service group over
+> the SBI MPXY mailbox framework.
+> 
+> Request one mailbox channel per hart and use the channel corresponding to
+> the current CPU when issuing a TEE request. Probe the RPMI TEE service
+> group and required memory-sharing capabilities before registering the
+> transport.
+> 
+> This provides the basic transport and discovery support needed by the
+> following patches.
+> 
+> Signed-off-by: Amirreza Zarrabi <amirreza.zarrabi@oss.qualcomm.com>
+> ---
+>  drivers/tee/optee/Makefile                 |   1 +
+>  drivers/tee/optee/core.c                   |   8 +-
+>  drivers/tee/optee/optee_private.h          |  34 ++++
+>  drivers/tee/optee/optee_riscv.c            | 312 +++++++++++++++++++++++++++++
+>  drivers/tee/optee/optee_riscv.h            | 141 +++++++++++++
+>  include/linux/mailbox/riscv-rpmi-message.h |   1 +
+>  6 files changed, 495 insertions(+), 2 deletions(-)
+> 
+> diff --git a/drivers/tee/optee/Makefile b/drivers/tee/optee/Makefile
+> index ad7049c1c107..925b8ec7ef68 100644
+> --- a/drivers/tee/optee/Makefile
+> +++ b/drivers/tee/optee/Makefile
+> @@ -9,6 +9,7 @@ optee-objs += supp.o
+>  optee-objs += device.o
+>  optee-objs += smc_abi.o
+>  optee-objs += ffa_abi.o
+> +optee-$(CONFIG_RISCV_SBI_MPXY_MBOX) += optee_riscv.o
+>  
+>  # for tracing framework to find optee_trace.h
+>  CFLAGS_smc_abi.o := -I$(src)
+> diff --git a/drivers/tee/optee/core.c b/drivers/tee/optee/core.c
+> index a52c1f498b99..63f1725e646e 100644
+> --- a/drivers/tee/optee/core.c
+> +++ b/drivers/tee/optee/core.c
+> @@ -220,6 +220,7 @@ void optee_remove_common(struct optee *optee)
+>  
+>  static int smc_abi_rc;
+>  static int ffa_abi_rc;
+> +static int riscv_abi_rc;
+>  static bool intf_is_regged;
+>  
+>  static int __init optee_core_init(void)
+> @@ -245,9 +246,10 @@ static int __init optee_core_init(void)
+>  
+>  	smc_abi_rc = optee_smc_abi_register();
+>  	ffa_abi_rc = optee_ffa_abi_register();
+> +	riscv_abi_rc = optee_riscv_abi_register();
 
-kernel test robot noticed the following build warnings:
+Isn't it growing rapidly now? We have two register calls for the ARM,
+one for the RISC-V. One more region specific ISA I am aware of and it
+may have op-tee support in future? It is time we fix this logic
+in the better way. 
+ 
 
-[auto build test WARNING on linuxtv-media-pending/master]
-[also build test WARNING on media-tree/master linus/master v7.3-rc3 next-20260914]
-[If your patch is applied to the wrong git tree, kindly drop us a note.
-And when submitting patch, we suggest to use '--base' as documented in
-https://git-scm.com/docs/git-format-patch#_base_tree_information]
+>  
+> -	/* If both failed there's no point with this module */
+> -	if (smc_abi_rc && ffa_abi_rc) {
+> +	/* If all failed there's no point with this module */
+> +	if (smc_abi_rc && ffa_abi_rc && riscv_abi_rc) {
 
-url:    https://github.com/intel-lab-lkp/linux/commits/Guangshuo-Li/media-venus-avoid-HFI-resource-leak-on-IRQ-request-failure/20260915-203009
-base:   https://git.linuxtv.org/media-ci/media-pending.git master
-patch link:    https://lore.kernel.org/r/20260915123009.2420780-1-lgs201920130244%40gmail.com
-patch subject: [PATCH] media: venus: avoid HFI resource leak on IRQ request failure
-config: loongarch-allmodconfig (https://download.01.org/0day-ci/archive/20260916/202609161343.qH6ypqkG-lkp@intel.com/config)
-compiler: clang version 19.1.7 (https://github.com/llvm/llvm-project cd708029e0b2869e80abe31ddb175f7c35361f90)
-reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20260916/202609161343.qH6ypqkG-lkp@intel.com/reproduce)
+This is started looking ugly in my opinion. 
 
-If you fix the issue in a separate patch/commit (i.e. not just a new version of
-the same patch/commit), kindly add following tags
-| Reported-by: kernel test robot <lkp@intel.com>
-| Closes: https://lore.kernel.org/oe-kbuild-all/202609161343.qH6ypqkG-lkp@intel.com/
+>  		if (IS_REACHABLE(CONFIG_RPMB)) {
+>  			rpmb_interface_unregister(&rpmb_class_intf);
+>  			intf_is_regged = false;
+> @@ -270,6 +272,8 @@ static void __exit optee_core_exit(void)
+>  		optee_smc_abi_unregister();
+>  	if (!ffa_abi_rc)
+>  		optee_ffa_abi_unregister();
+> +	if (!riscv_abi_rc)
+> +		optee_riscv_abi_unregister();
+>  }
+>  module_exit(optee_core_exit);
+>  
+> diff --git a/drivers/tee/optee/optee_private.h b/drivers/tee/optee/optee_private.h
+> index aefe1e6f5689..8d22d65e087b 100644
+> --- a/drivers/tee/optee/optee_private.h
+> +++ b/drivers/tee/optee/optee_private.h
+> @@ -171,6 +171,31 @@ struct optee_ffa {
+>  	struct work_struct notif_work;
+>  };
+>  
+> +/**
+> + * struct optee_riscv - RPMI TEE communication struct
 
-All warnings (new ones prefixed by >>):
+do we need to name it optee_riscv? we don't use optee_arm anywhere in this
+code I believe. 
 
->> drivers/media/platform/qcom/venus/core.c:446:3: warning: misleading indentation; statement is not part of the previous 'if' [-Wmisleading-indentation]
-     446 |                 enable_irq(core->irq);
-         |                 ^
-   drivers/media/platform/qcom/venus/core.c:443:2: note: previous statement is here
-     443 |         if (ret)
-         |         ^
-   1 warning generated.
+More later...
 
-
-vim +/if +446 drivers/media/platform/qcom/venus/core.c
-
-   379	
-   380	static int venus_probe(struct platform_device *pdev)
-   381	{
-   382		struct device *dev = &pdev->dev;
-   383		struct venus_core *core;
-   384		int ret;
-   385	
-   386		core = devm_kzalloc(dev, sizeof(*core), GFP_KERNEL);
-   387		if (!core)
-   388			return -ENOMEM;
-   389	
-   390		core->dev = dev;
-   391	
-   392		core->base = devm_platform_ioremap_resource(pdev, 0);
-   393		if (IS_ERR(core->base))
-   394			return PTR_ERR(core->base);
-   395	
-   396		core->video_path = devm_of_icc_get(dev, "video-mem");
-   397		if (IS_ERR(core->video_path))
-   398			return PTR_ERR(core->video_path);
-   399	
-   400		core->cpucfg_path = devm_of_icc_get(dev, "cpu-cfg");
-   401		if (IS_ERR(core->cpucfg_path))
-   402			return PTR_ERR(core->cpucfg_path);
-   403	
-   404		core->irq = platform_get_irq(pdev, 0);
-   405		if (core->irq < 0)
-   406			return core->irq;
-   407	
-   408		core->res = of_device_get_match_data(dev);
-   409		if (!core->res)
-   410			return -ENODEV;
-   411	
-   412		mutex_init(&core->pm_lock);
-   413	
-   414		core->pm_ops = venus_pm_get(core->res->hfi_version);
-   415		if (!core->pm_ops)
-   416			return -ENODEV;
-   417	
-   418		if (core->pm_ops->core_get) {
-   419			ret = core->pm_ops->core_get(core);
-   420			if (ret)
-   421				return ret;
-   422		}
-   423	
-   424		ret = dma_set_mask_and_coherent(dev, core->res->dma_mask);
-   425		if (ret)
-   426			goto err_core_put;
-   427	
-   428		dma_set_max_seg_size(dev, UINT_MAX);
-   429	
-   430		INIT_LIST_HEAD(&core->instances);
-   431		mutex_init(&core->lock);
-   432		INIT_DELAYED_WORK(&core->work, venus_sys_error_handler);
-   433		init_waitqueue_head(&core->sys_err_done);
-   434	
-   435		ret = devm_request_threaded_irq(dev, core->irq, hfi_isr,
-   436						venus_isr_thread,
-   437						IRQF_TRIGGER_HIGH | IRQF_ONESHOT |
-   438						IRQF_NO_AUTOEN, "venus", core);
-   439		if (ret)
-   440			goto err_core_put;
-   441	
-   442		ret = hfi_create(core, &venus_core_ops);
-   443		if (ret)
-   444			goto err_core_put;
-   445	
- > 446			enable_irq(core->irq);
-   447	
-   448		venus_assign_register_offsets(core);
-   449	
-   450		ret = v4l2_device_register(dev, &core->v4l2_dev);
-   451		if (ret)
-   452			goto err_hfi_destroy;
-   453	
-   454		platform_set_drvdata(pdev, core);
-   455	
-   456		pm_runtime_enable(dev);
-   457	
-   458		ret = pm_runtime_get_sync(dev);
-   459		if (ret < 0)
-   460			goto err_runtime_disable;
-   461	
-   462		ret = venus_firmware_init(core);
-   463		if (ret)
-   464			goto err_runtime_disable;
-   465	
-   466		ret = venus_boot(core);
-   467		if (ret)
-   468			goto err_firmware_deinit;
-   469	
-   470		ret = venus_firmware_cfg(core);
-   471		if (ret)
-   472			goto err_venus_shutdown;
-   473	
-   474		ret = hfi_core_resume(core, true);
-   475		if (ret)
-   476			goto err_venus_shutdown;
-   477	
-   478		ret = hfi_core_init(core);
-   479		if (ret)
-   480			goto err_venus_shutdown;
-   481	
-   482		ret = venus_firmware_check(core);
-   483		if (ret)
-   484			goto err_core_deinit;
-   485	
-   486		if (core->res->dec_nodename || core->res->enc_nodename) {
-   487			ret = venus_add_dynamic_nodes(core);
-   488			if (ret)
-   489				goto err_core_deinit;
-   490		}
-   491	
-   492		ret = of_platform_populate(dev->of_node, NULL, NULL, dev);
-   493		if (ret)
-   494			goto err_remove_dynamic_nodes;
-   495	
-   496		ret = venus_enumerate_codecs(core, VIDC_SESSION_TYPE_DEC);
-   497		if (ret)
-   498			goto err_of_depopulate;
-   499	
-   500		ret = venus_enumerate_codecs(core, VIDC_SESSION_TYPE_ENC);
-   501		if (ret)
-   502			goto err_of_depopulate;
-   503	
-   504		ret = pm_runtime_put_sync(dev);
-   505		if (ret) {
-   506			pm_runtime_get_noresume(dev);
-   507			goto err_of_depopulate;
-   508		}
-   509	
-   510		venus_dbgfs_init(core);
-   511	
-   512		return 0;
-   513	
-   514	err_of_depopulate:
-   515		of_platform_depopulate(dev);
-   516	err_remove_dynamic_nodes:
-   517		venus_remove_dynamic_nodes(core);
-   518	err_core_deinit:
-   519		hfi_core_deinit(core, false);
-   520	err_venus_shutdown:
-   521		venus_shutdown(core);
-   522	err_firmware_deinit:
-   523		venus_firmware_deinit(core);
-   524	err_runtime_disable:
-   525		pm_runtime_put_noidle(dev);
-   526		pm_runtime_disable(dev);
-   527		pm_runtime_set_suspended(dev);
-   528		v4l2_device_unregister(&core->v4l2_dev);
-   529	err_hfi_destroy:
-   530		hfi_destroy(core);
-   531	err_core_put:
-   532		if (core->pm_ops->core_put)
-   533			core->pm_ops->core_put(core);
-   534		return ret;
-   535	}
-   536	
-
---
-0-DAY CI Kernel Test Service
-https://github.com/intel/lkp-tests/wiki
