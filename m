@@ -1,86 +1,86 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3A45F4EA39C
-	for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 10:30:25 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 11C344E80DF
+	for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 10:30:23 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789554647; cv=none; b=USnSFeu8ipR6w9guxGcI+ugBcEv7WY3SGTbji6Pa+GNtecPGt7SGnASIWJlUW2hw8mkSiW0qv+TaebTzcAPCAdPlE+JbgA9anzvD6Tny1p5/6jZKhIgVJwihlzb0mEniAuOQOChV/aGuzZA4PHtu1E8qqOHzdoKNeQ5gAS5vv2A=
+	t=1789554646; cv=none; b=JWCHeS8gwJijucNfpI1yVa1+yFVL3Q9zKNLQ2TdKw0eREBVbj1r2i0WngA8jKJFrntTgSxlABMzwonnrzgLS1ee04626lJRl3VnqceNnrw4DRiSHGU6aNDvFGmUPK+qIjgwHAyHIBfPSQMp3lMs2pGwWO4dWZyZsqCx8C3vdxz0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789554647; c=relaxed/simple;
-	bh=2UaU7R3Klsyvl2wWmbPnmjteeasW2un+bpN/PVjJb6I=;
+	s=arc-20240116; t=1789554646; c=relaxed/simple;
+	bh=QChgSQqvnf6c/lIB4mn0G+lFoP91Je7jvpkAWsYg9KI=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=cu2hD+Z+Cedvl99OHe1t7tgtC/vvxm5ztWIME7v+0/wpczO5B191lJR6Ggjpuz92ADMWabYLOhbG3wK9h85bOXtKaElFRJICiSrdiZRhXFw2gQ243Gu/dJL/xrCDwVtaOeKZq+QQXiib5g0MtId6foEfw2AoG7EFK7AFdo4PjyE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=DEd6gRct; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=YiKfnHt1; arc=none smtp.client-ip=205.220.180.131
+	 In-Reply-To:To:Cc; b=W9rnCmYXu6yPnpuYT9UFKSpxifWuPuHS9PE6SsIM+iL850gaxLaAvSRc2o0PLEagof5bFEyo+6AdSkc0XzS01WqXxgUt0pBF+XTcw8hvd247TAa4EiJ26D9TWg5r1snnQf6v5vMtAqN3pioJ9JtKZIxFWuk41qvhzx+y2RXlgHY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=hWIUT/Ah; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=fCm5XR3+; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="DEd6gRct";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="YiKfnHt1"
-Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68G92j682478061
-	for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 10:30:23 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="hWIUT/Ah";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="fCm5XR3+"
+Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68G92ueA1721210
+	for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 10:30:17 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	Z1Sf97NFKUaUqW6VmDXtLv92KAWnBnsE42F8yV4CgO4=; b=DEd6gRctHCbTpgrU
-	9y22YIuK5oDurM/X90Nfm/M8p0c6LYabztYeFHWI7IrzZ5GiDR21ZVG3s9PXKHRr
-	6rMhO40mSvT//L/rH3GovP1lygqyLdRS5Bvbcl9tHvGAsqcF2ELqpT/OW8ufd1/s
-	2cCBKc8PJNllOx4rZAa+OvTtIUxYDcMhznUiDQaRN2nQj6YnyWxUn73ub+fO2FHh
-	eIcZV//KYrRiFGZ8iGU9LYiaV9pau9I5zPbHXH7mkZ9kQEgkoJmoSysKHM1pNXUC
-	QYoawUTX30J4nO+unrKqh444VwTuiEITV/4OO4FdCAdjfXpxNfCGAFu2A/CgQrjD
-	g4slrw==
-Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com [209.85.222.199])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gqjcksvh3-1
+	NWKFqRYP1BXZSJYeZ9+388TaOWZejTGN2ObzubjSvaE=; b=hWIUT/Ah+4aVZwDv
+	7TQOxZ0+4HYSwRMfmKxpn7092coc/Y8BkHBINikRtwvhylWyGPyPGKLYR1lPz4fB
+	/PanSPV8/jgnqJBKZ2HWfjG01fY2R+DD+wxd5x1qYXzsIY4Cc/vcYGHeinfAcaSp
+	oCDJii280lyb0cWPRJgvHMcxiJb531HNOFietJ2kYWF61iNd8n7ktqFZ8aSG1Q6v
+	EiM+sEl6sVu0BANnuYUDz8DmONNt2pxKuG9PEDa+KPZIyqlOL2WNvdAREDdWbGff
+	6mPcqwmDNRNU6JpeQObdwM/7tubGcfuIwbIg2uLpgZvgpxzCe7x1Kp27fo57AtTh
+	QGl5Tw==
+Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com [209.85.222.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gqbmnkbyp-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 10:30:22 +0000 (GMT)
-Received: by mail-qk1-f199.google.com with SMTP id af79cd13be357-939062ecda9so852977785a.1
-        for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 03:30:22 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 10:30:16 +0000 (GMT)
+Received: by mail-qk1-f197.google.com with SMTP id af79cd13be357-934963b2bc0so1117316685a.3
+        for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 03:30:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1789554622; x=1790159422; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1789554616; x=1790159416; darn=vger.kernel.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=Z1Sf97NFKUaUqW6VmDXtLv92KAWnBnsE42F8yV4CgO4=;
-        b=YiKfnHt17S2PJ8BcBbL8ZIFnQy+yQSY0CWKkNpsmK3+X9ydvcPe5QtGp9RcvI1ekRM
-         hy9dqnwngCvotfKico1gbhaef6zeIE6udYOJ1IcDGp5lGpn49iU9kPNgY3NXdkJrx632
-         C2SyBUpuJvlMSCtxmm9r5yo1bO/DAPSH/ARz4w6QAOrK/MNg+lRBZx+uY0XWHFDMqzX8
-         xjsQPVhCdwAeTWySbSXnNChcJ0zISnYQcxgE4+ExKc9YUzjcmjUKaQLKbtaF58LaU+pK
-         pTieApPENRXDD9NALuIyVIDedAk+BDJaM4Gjm0ehLStoh2cWCXWoUe0znNrVl8euGNkm
-         awpw==
+        bh=NWKFqRYP1BXZSJYeZ9+388TaOWZejTGN2ObzubjSvaE=;
+        b=fCm5XR3+HDfqp6qjgqISw4FviPK7V2O93J85p7rjh4XmIl6iaOGffXHIoJb4+Ev5tN
+         imHaJXvwcJcBRnZr1K7uqSV+mJ4Kf4KWD/mGbHzOGS8h//uAxNn1wDfSJHmdEYNPUi0Z
+         4puCOlJTHtRtqutAXXrelMnP2dU0mpz8Az8u6vqb/P0K+OFqRjho3bBp20u5lRDKsixM
+         9oRqIWui0R9eyyLWaQf8IYJ5x9oMdk7L1p+GnIB0QNsgAXTnwY1PUByBM1RBmQVpYrhp
+         1gqXPRhUBzYI6NT5slW1gGqipIayQaETd3O66NcTkDLRDXDJRit7K9+0X1mbSbZvIk/G
+         af3g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1789554622; x=1790159422;
+        d=1e100.net; s=20260707; t=1789554616; x=1790159416;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=Z1Sf97NFKUaUqW6VmDXtLv92KAWnBnsE42F8yV4CgO4=;
-        b=WvolRU8USz2g8W4kixA2AP3sBsYPCX6Rq+eZNzjU/yo2w4L07tHLRo0+//oUPU/nPc
-         LunFydoPvyqrFt7RkqaJZrCsH+HGZ2+qvrR4Z3j98sB1hP3o1q5Iu+Ao5DigATayAKbU
-         3jBmtSg4iP0r0nidcGg3GGH/JfDVtRde5OyBzYpRUyfLzOovtquxTr+NScn8kw3v/HTI
-         PItiOyf9nvXk2l425D23e+9WtVa4+HpdfYD+jSUAaaLE2TpqPSfObkVQ9gEIsfUBU2dz
-         YbWGG0vcsbmNHx+sHqm8txsynYu3F5FzAK8LjXVe6UJrt1AZM06ugcJrHfvwgAxve4P5
-         s0yQ==
-X-Gm-Message-State: AFuF++mWKUPJxVjbzlZFEbSNH8pRIlzQyLFyQAF2i7VhAAI8jyErnWEC
-	MBmE/yKPoi+PaT3UcQlzS24pmWpc3heHS8phOD/bCQeeMHhKyRwoNHl5bHRM+sX5VgGuBnA/j0Z
-	34QxXYQSFIq201I4JfLDxEHvmlEnb/OMwIgAbIw21dssS7oKTFC47+gK3mfaeSG+FLm0G
-X-Gm-Gg: AYBFou0sBbFzsDn0OpvHiEFBIqTsRmVM1AhYbYU2xkMVCpJ1qLeiNtHrSpHNmco1eoW
-	kkeU+tkkgeLGJL5t9qQXOQaPFzW/CAShGANyJoJwE5EwAbuJ6iWxtfx5fPzI3KX5ngMxuqYQLQH
-	vLd3tK2OswwnglsIp1VBRTSFvsC/RnnuvoLZDUudI/wyVW7UVgemOxlPsuaEP0IDjI3/cXnLDRc
-	EMQLjleKJMntrARqPuyFtERKX7iVihzSBdn4EbO4VMi3JJlF/tGkFUymtTjyR9F4mNqFXJ8prQ7
-	cyhWc5qWs8YT2b83RezwwVoYmVUV3sxdO65hEWz6PpdR8WyS8OVsYIG8k29D2rwDQniMmczSygz
-	GI1f/BP0=
-X-Received: by 2002:a05:620a:1726:b0:939:7f14:ebc6 with SMTP id af79cd13be357-93bb76bb193mr292577385a.3.1789554622026;
-        Wed, 16 Sep 2026 03:30:22 -0700 (PDT)
-X-Received: by 2002:a05:620a:1726:b0:939:7f14:ebc6 with SMTP id af79cd13be357-93bb76bb193mr292569185a.3.1789554621405;
-        Wed, 16 Sep 2026 03:30:21 -0700 (PDT)
+        bh=NWKFqRYP1BXZSJYeZ9+388TaOWZejTGN2ObzubjSvaE=;
+        b=tyKCyCXehjGN2W850wuKvcBuoDb6Wq8de7ZOzHcawvKB6YEK2P/11T8U6KHKwF7buW
+         kWzJfen2GrHWzFR5/7W2Puboq6f5RlHLzxI7SzwcOdoDCV8YC2Q3PMALpSF5DTwcpMfs
+         9ixT15zvONkpAAJeefRGQvnNJDNMnTfMRgEjSuAOXoO3sXrCh7//nz59DgzoTWSh9yPP
+         8q/66SoyzhnC1fddzW4nn03g4GgsudLoMCeEIV+SzIk+ZFQvy7KnNlnUxvqOrVMCcsP/
+         zbSMsUq84PioyfUXXNT1An327mFPR/i2bIhxRa199sIXGUy4FbhLvOtPCNR//ExhaKHI
+         +ZXg==
+X-Gm-Message-State: AFuF++nHxzWifLQKvm9K+s6dzhIzGlC0UUfNyNgqjEbpvSALYWTJjGbZ
+	d0WAAPDYsYWAHZbM0Jmfic2rGFJznXM6HYmM93xQiIIUPFY8ZR2JB46RB9/I05PpU7PsyYBVgvn
+	/xNKH5iRu3tPlVOwY4aMTUE+8PUNplI7WBjnz9AcDBSSN/11tXs8LqDliSF4TAy9G4T7/
+X-Gm-Gg: AYBFou2KNDqeaVwosENFWW/tu3Rp15og1WKFMNn+D8Sw/zg1KHOtfNuaEk17FpRtONP
+	79DppYTo4XopAyhEnOhzj1qldLbka9SG5miDSlTx59PZxfF2nxL3YDcTzV9nBXORDqJVz7UhY3A
+	MpeBtOqyhqU1ePSbm/93oo2PBQ+NOM46k+WzP16NFL1m/IZ0sN0YCJSI8cb0uuxf396IORnGfid
+	vtVcePTsY+pawqGtXjnXLofVGmX7pcmsNexNcEmOMnPcWgSERy7dLzCJu0iUYXnTiQEOBJLjGzR
+	Jv5ngIpsCP0Etw0H1pvRILPBmJ02uzqen7v35Bf4f8fqRc8qQN4DVr2noFGyqS4SUK9NeSgwhAQ
+	cTm1nGW8=
+X-Received: by 2002:a05:620a:4385:b0:939:b482:d474 with SMTP id af79cd13be357-93bb79096femr296784685a.35.1789554616012;
+        Wed, 16 Sep 2026 03:30:16 -0700 (PDT)
+X-Received: by 2002:a05:620a:4385:b0:939:b482:d474 with SMTP id af79cd13be357-93bb79096femr296775085a.35.1789554615301;
+        Wed, 16 Sep 2026 03:30:15 -0700 (PDT)
 Received: from [127.0.1.1] ([86.121.170.232])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-49e83dbb0c1sm71633805e9.14.2026.09.16.03.30.19
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-49e83dbb0c1sm71633805e9.14.2026.09.16.03.30.13
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 16 Sep 2026 03:30:20 -0700 (PDT)
+        Wed, 16 Sep 2026 03:30:14 -0700 (PDT)
 From: Abel Vesa <abel.vesa@oss.qualcomm.com>
-Date: Wed, 16 Sep 2026 13:28:48 +0300
-Subject: [PATCH 32/48] clk: qcom: gcc-sm8550: Use common clock controller
+Date: Wed, 16 Sep 2026 13:28:45 +0300
+Subject: [PATCH 29/48] clk: qcom: gcc-sm8250: Use common clock controller
  probe data
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
@@ -90,7 +90,7 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260916-clk-qcom-rework-legacy-always-on-clocks-v1-32-25a24e50f82a@oss.qualcomm.com>
+Message-Id: <20260916-clk-qcom-rework-legacy-always-on-clocks-v1-29-25a24e50f82a@oss.qualcomm.com>
 References: <20260916-clk-qcom-rework-legacy-always-on-clocks-v1-0-25a24e50f82a@oss.qualcomm.com>
 In-Reply-To: <20260916-clk-qcom-rework-legacy-always-on-clocks-v1-0-25a24e50f82a@oss.qualcomm.com>
 To: Bjorn Andersson <andersson@kernel.org>, Abel Vesa <abelvesa@kernel.org>,
@@ -99,51 +99,50 @@ To: Bjorn Andersson <andersson@kernel.org>, Abel Vesa <abelvesa@kernel.org>,
 Cc: linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org,
         linux-kernel@vger.kernel.org, Abel Vesa <abel.vesa@oss.qualcomm.com>
 X-Mailer: b4 0.16-dev-0e65f
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3400;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3657;
  i=abel.vesa@oss.qualcomm.com; h=from:subject:message-id;
- bh=2UaU7R3Klsyvl2wWmbPnmjteeasW2un+bpN/PVjJb6I=;
- b=owEBbQKS/ZANAwAKARtfRMkAlRVWAcsmYgBqqm9pRzt6zcSHKcFZCSTUWhXZf6Nk0cg6V8EDu
- 5lGQGsJvqmJAjMEAAEKAB0WIQRO8+4RTnqPKsqn0bgbX0TJAJUVVgUCaqpvaQAKCRAbX0TJAJUV
- VkeXD/9ehP+Lz5BOO2Njg9IIymYBBm/k+XyNrFwd3mxET/HLz4wVgYqyBzxZBZ3Y0PW6s7+Ht0g
- kTWVYbZ/ljJiihojDM8xZ+uv2xc7b/uyQ1Tf7XEKzzFtSqaGZKMQO6yoJ6We4PQUwuhrx6pGU4F
- vbnqeRuWCWLY7hy1AP60uvgGvcxsyHIDQjuDoRfUAivU9TOhjOfp4iMP8ZzcuHdo848aamSBinf
- /VHcyahw6woVIN6g1VqRLxYVNzikYx7/V4g7GYQHwuK3z5tKZtnF8IseE0GhTeCvzDVqCv9ZAwx
- le8gBpXRun9Juhc+u7sLk+3ODJDesqaKbMm/BQ8Fec0herBbh3r/xT/h1KWErgxu7Oc+CcFpp1i
- NDjIqmF2Is0M9c4zCdDIqSNwQtG/EOLSo1+Ckyx+V5gWcZxPDkZWRCjydyZlE1KnsLpIGDkDf49
- jC9+XNwubYbcu9I/Ujj7ocksB7kjv2PS6Hwo4OdAQdk1CgAvIbTmm1b/A0S5GROOzLbvJLvfE/U
- jw7e5zZIkRJypdqoxyI0ozDifK4s3KBdtop7NrKW0qBjOH0sp4Y98gx+So9hqahRnOej5izOguH
- d4YwNljnLviU3da/p372P9dsriDT++cje4ZDzAvd2COqyz5feiJ99H1z+jeG2KR3/TZiPkzIPkh
- KIniaY1DOs5rUOQ==
+ bh=QChgSQqvnf6c/lIB4mn0G+lFoP91Je7jvpkAWsYg9KI=;
+ b=owEBbQKS/ZANAwAKARtfRMkAlRVWAcsmYgBqqm9nGW/po7DlXDbCnzMFWHg/wPB4Zbavnq/u9
+ bvyjjfG4AGJAjMEAAEKAB0WIQRO8+4RTnqPKsqn0bgbX0TJAJUVVgUCaqpvZwAKCRAbX0TJAJUV
+ VsQfD/9ZkYJOlhePKgXiN+F4WttNdw4OPOMEnv0X4HsZHUoovdo3SJVkcbnJ/C/Tkk43nKWIm/k
+ aPy51rYrOkwNjl6XhkkDshPN+degCNT6GgJJxrW+jhlLSDmbQsf7yTeua6MDMfstp+oR3J5cUZJ
+ /6mk0gWd8ZE1HaAeJhcVWjIm2iCKKQC+GLeH2Xf+t/IdqIz2cEItKcaG79jfGirQ+aZcMpFqkfO
+ 79KrkeW95i2NUp8UNc9Ymy5NNLR/aFlQXnczC9ML8CV+ed8RS4aCFbwUaTcCsjaIzfyH0fVzqZ9
+ VQSVsxJxBN/RVaqnuYPqqSGUIPm12TjeQbcJXDsH+kypVhhIAzCuOP27Jc42OexksNTExlKkpXF
+ BZl3GMzchVUGirL1EK6DJez5YuOze/eep4+7A12jYYoOn5I0suCTGet5GWv7XIzgG98Zf3OH+q1
+ pXF4xnAu+X7Fbe9Go7CoN2RR3O1BxrJitrrb/0dQMyG2Fm/L2rs0S5apFjhC69qpDFLKVzc73UY
+ hgLs1V0Q+HV0ltwzDLXWNchQhvqma5esJfI9FsN0YKYbmNZcAiijy3Ah03IKFUFPzhYdbJ/Lelz
+ tY+x7WB3wPiRCZu+K+4rb9CbTyMfc/vICFVk845cBze44CvyRs0tT63b7B/pXRavd5oWR2xzqBu
+ PjXQbc9Mt91LHWA==
 X-Developer-Key: i=abel.vesa@oss.qualcomm.com; a=openpgp;
  fpr=6AFF162D57F4223A8770EF5AF7BF214136F41FAE
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTE2MDEzNyBTYWx0ZWRfXyS2yvAprBtQk
- YF/lH4HhMk0BReMfCzKB/DI/Mqa5ifuc80sUnm3qtCLI5oeE+v+yklekAcK+oxqL6EojZrHdTBz
- OiStOxWgiScizYqVAIMaWhY02kpkU04=
-X-Authority-Analysis: v=2.4 cv=PsIG/AM3 c=1 sm=1 tr=0 ts=6aaa6fbe cx=c_pps
- a=HLyN3IcIa5EE8TELMZ618Q==:117 a=po8fGBi+ks8MzcVQGuqtFQ==:17
+X-Authority-Analysis: v=2.4 cv=POyaavqC c=1 sm=1 tr=0 ts=6aaa6fb9 cx=c_pps
+ a=50t2pK5VMbmlHzFWWp8p/g==:117 a=po8fGBi+ks8MzcVQGuqtFQ==:17
  a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
  a=EUspDBNiAAAA:8 a=RW22A4phRzxp-fsVvwcA:9 a=QEXdDO2ut3YA:10
- a=bTQJ7kPSJx9SKPbeHEYW:22
-X-Proofpoint-ORIG-GUID: X7ap0FybuAeu4hPcdtHkDEWquRY0OWG_
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTE2MDEzNyBTYWx0ZWRfXyk5Sh0RD8DwU
- z9AuK5tbJuQihq+fYFkFPvYoAl+uyAS/Gvc2KP/2plKAj+TqB9wSCGzjg7Xj5dAUPTo9gNyXU7r
- AWWWRuHk3VbUi+SOqiuww8CsRMRC5DHcnIC/rPLPJFMfbqLvMph08ecUrFpvr69aOMIUsQHhw/M
- mfvrcqo/XgYBQu7XzZFkUHxCXVveRoz/Z8Ebs+AFXbi+wqnGerlh559aLJSac26SXII2Lx/TvBC
- Hf52UsgG5Bq7iDU+4L0/1xFNhSIB8OfzmPNMqNpOjPqUUIiobZrDG4E8j4UAc/Y4xg2+S8IjmgE
- ChnNju8iKFe+qlVJNaqhS3YcrQ4Is162FA86T6dKqYHXNkfO42Ga5fL2jeH28CKtJDS0qUU79Un
- 8w03OEl8pPtfUeyjELXseKjjy6DVZITqn1XznrPwopST0gBKyXAA+kqCbeNcywS5nejnGsZZyPz
- 8mb2uG5Z9wlCZImHhQg==
-X-Proofpoint-GUID: X7ap0FybuAeu4hPcdtHkDEWquRY0OWG_
+ a=IoWCM6iH3mJn3m4BftBB:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTE2MDEzNyBTYWx0ZWRfX4mpTvYlSjzsU
+ Sn7gGz8cQK36a9rW94Xd0BsG2P3DlYXCVPhX0sw+PP/TMc8iP4d8iCNISTfDIPH7QK/BuIgcswe
+ +s3zzqqTsefpZfLd8Qcr8eSMiUPSFlVTKXB4iYsFgJl12MmvNQdL9sTGychuxTDF9/W24l67dTR
+ VLceCsR+KTHT/kvXwO1KdxckLq/bchMJNhp+8wyvzMXMVgxT53KEXV88DyqQ3wWlP1WU4/iUwrD
+ 7i5dZwEydcWGN0kbma5F8lWUJiAbNonmfjh7cyyP39yZZazbJE+HQSgHs4+l2Rj3QHUcm+CrfLx
+ 7BzbbAuG+lmLw3y4ozzx/JKVQiDICq1ruUCh47FR1Q1Pf2bDU2h2Cymxv2ZyyLd0lSAwJvoM05I
+ QYm5FO9bjwJeWW7svaCTwq1XQtROb+vbmenz/Eu3/Tw3ru8yXrvPUT4De2Y188lmL4rpV3yLDug
+ kdkN8YdTlbdnKjGb1Vw==
+X-Proofpoint-GUID: hp2PBueYy8sLew6t9ATRT8ffrgJtfm5I
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTE2MDEzNyBTYWx0ZWRfX9scO+Vlm+PH1
+ jeiafsntk+uicLm99krLadg1ugm2UzyrH9TKRXfePXL8i61CvCezqmqzUjE1nNLrOjJsO+laZDr
+ qfKmKUOmGATve7+PRQN7j6252Y67kPc=
+X-Proofpoint-ORIG-GUID: hp2PBueYy8sLew6t9ATRT8ffrgJtfm5I
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-09-15_05,2026-09-15_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 lowpriorityscore=0 adultscore=0 priorityscore=1501
- phishscore=0 spamscore=0 clxscore=1015 suspectscore=0 bulkscore=0
- malwarescore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2609040000
- definitions=main-2609160137
+ priorityscore=1501 adultscore=0 bulkscore=0 clxscore=1015 phishscore=0
+ suspectscore=0 impostorscore=0 spamscore=0 lowpriorityscore=0 malwarescore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609160137
 
 Move the always-on branch register offsets into a critical_cbcrs array,
 describe the DFS RCGs through qcom_cc_driver_data and move the register
@@ -155,85 +154,98 @@ open-coding it in the driver's probe.
 Assisted-by: LLM
 Signed-off-by: Abel Vesa <abel.vesa@oss.qualcomm.com>
 ---
- drivers/clk/qcom/gcc-sm8550.c | 57 ++++++++++++++++++++++---------------------
+ drivers/clk/qcom/gcc-sm8250.c | 57 ++++++++++++++++++++++---------------------
  1 file changed, 29 insertions(+), 28 deletions(-)
 
-diff --git a/drivers/clk/qcom/gcc-sm8550.c b/drivers/clk/qcom/gcc-sm8550.c
-index 36a5b7de5b55..8a8c541ccc10 100644
---- a/drivers/clk/qcom/gcc-sm8550.c
-+++ b/drivers/clk/qcom/gcc-sm8550.c
-@@ -3319,7 +3319,35 @@ static const struct regmap_config gcc_sm8550_regmap_config = {
+diff --git a/drivers/clk/qcom/gcc-sm8250.c b/drivers/clk/qcom/gcc-sm8250.c
+index 1c59d70e0f96..f6ce572261bb 100644
+--- a/drivers/clk/qcom/gcc-sm8250.c
++++ b/drivers/clk/qcom/gcc-sm8250.c
+@@ -3603,6 +3603,15 @@ static const struct clk_rcg_dfs_data gcc_dfs_clocks[] = {
+ 	DEFINE_RCG_DFS(gcc_qupv3_wrap2_s5_clk_src),
+ };
+ 
++static const u32 gcc_sm8250_critical_cbcrs[] = {
++	0x0b004, /* GCC_VIDEO_AHB_CLK */
++	0x0b008, /* GCC_CAMERA_AHB_CLK */
++	0x0b00c, /* GCC_DISP_AHB_CLK */
++	0x4818c, /* GCC_CPUSS_DVM_BUS_CLK */
++	0x71004, /* GCC_GPU_CFG_AHB_CLK */
++	0x52000, /* GCC_SYS_NOC_CPUSS_AHB_CLK */
++};
++
+ static const struct regmap_config gcc_sm8250_regmap_config = {
+ 	.reg_bits = 32,
+ 	.reg_stride = 4,
+@@ -3611,6 +3620,24 @@ static const struct regmap_config gcc_sm8250_regmap_config = {
  	.fast_io = true,
  };
  
-+static const u32 gcc_sm8550_critical_cbcrs[] = {
-+	0x26004, /* GCC_CAMERA_AHB_CLK */
-+	0x26028, /* GCC_CAMERA_XO_CLK */
-+	0x27004, /* GCC_DISP_AHB_CLK */
-+	0x27018, /* GCC_DISP_XO_CLK */
-+	0x71004, /* GCC_GPU_CFG_AHB_CLK */
-+	0x32004, /* GCC_VIDEO_AHB_CLK */
-+	0x32030, /* GCC_VIDEO_XO_CLK */
-+};
-+
-+static void gcc_sm8550_regs_configure(struct device *dev, struct regmap *regmap)
++static void gcc_sm8250_regs_configure(struct device *dev, struct regmap *regmap)
 +{
-+	/* FORCE_MEM_CORE_ON for ufs phy ice core clocks */
-+	regmap_update_bits(regmap, gcc_ufs_phy_ice_core_clk.halt_reg, BIT(14), BIT(14));
-+
-+	/* Clear GDSC_SLEEP_ENA_VOTE to stop votes being auto-removed in sleep. */
-+	regmap_write(regmap, 0x52024, 0x0);
++	/*
++	 * Disable the GPLL0 active input to NPU and GPU
++	 * via MISC registers.
++	 */
++	regmap_update_bits(regmap, 0x4d110, 0x3, 0x3);
++	regmap_update_bits(regmap, 0x71028, 0x3, 0x3);
 +}
 +
-+static const struct qcom_cc_driver_data gcc_sm8550_driver_data = {
-+	.clk_cbcrs = gcc_sm8550_critical_cbcrs,
-+	.num_clk_cbcrs = ARRAY_SIZE(gcc_sm8550_critical_cbcrs),
++static const struct qcom_cc_driver_data gcc_sm8250_driver_data = {
++	.clk_cbcrs = gcc_sm8250_critical_cbcrs,
++	.num_clk_cbcrs = ARRAY_SIZE(gcc_sm8250_critical_cbcrs),
 +	.dfs_rcgs = gcc_dfs_clocks,
 +	.num_dfs_rcgs = ARRAY_SIZE(gcc_dfs_clocks),
-+	.clk_regs_configure = gcc_sm8550_regs_configure,
++	.clk_regs_configure = gcc_sm8250_regs_configure,
 +};
 +
- static const struct qcom_cc_desc gcc_sm8550_desc = {
-+	.driver_data = &gcc_sm8550_driver_data,
- 	.config = &gcc_sm8550_regmap_config,
- 	.clks = gcc_sm8550_clocks,
- 	.num_clks = ARRAY_SIZE(gcc_sm8550_clocks),
-@@ -3337,34 +3365,7 @@ MODULE_DEVICE_TABLE(of, gcc_sm8550_match_table);
+ static const struct qcom_cc_desc gcc_sm8250_desc = {
+ 	.config = &gcc_sm8250_regmap_config,
+ 	.clks = gcc_sm8250_clocks,
+@@ -3619,6 +3646,7 @@ static const struct qcom_cc_desc gcc_sm8250_desc = {
+ 	.num_resets = ARRAY_SIZE(gcc_sm8250_resets),
+ 	.gdscs = gcc_sm8250_gdscs,
+ 	.num_gdscs = ARRAY_SIZE(gcc_sm8250_gdscs),
++	.driver_data = &gcc_sm8250_driver_data,
+ };
  
- static int gcc_sm8550_probe(struct platform_device *pdev)
+ static const struct of_device_id gcc_sm8250_match_table[] = {
+@@ -3629,34 +3657,7 @@ MODULE_DEVICE_TABLE(of, gcc_sm8250_match_table);
+ 
+ static int gcc_sm8250_probe(struct platform_device *pdev)
  {
 -	struct regmap *regmap;
 -	int ret;
 -
--	regmap = qcom_cc_map(pdev, &gcc_sm8550_desc);
+-	regmap = qcom_cc_map(pdev, &gcc_sm8250_desc);
 -	if (IS_ERR(regmap))
 -		return PTR_ERR(regmap);
+-
+-	/*
+-	 * Disable the GPLL0 active input to NPU and GPU
+-	 * via MISC registers.
+-	 */
+-	regmap_update_bits(regmap, 0x4d110, 0x3, 0x3);
+-	regmap_update_bits(regmap, 0x71028, 0x3, 0x3);
+-
+-	/* Keep some clocks always-on */
+-	qcom_branch_set_clk_en(regmap, 0x0b004); /* GCC_VIDEO_AHB_CLK */
+-	qcom_branch_set_clk_en(regmap, 0x0b008); /* GCC_CAMERA_AHB_CLK */
+-	qcom_branch_set_clk_en(regmap, 0x0b00c); /* GCC_DISP_AHB_CLK */
+-	qcom_branch_set_clk_en(regmap, 0x4818c); /* GCC_CPUSS_DVM_BUS_CLK */
+-	qcom_branch_set_clk_en(regmap, 0x71004); /* GCC_GPU_CFG_AHB_CLK */
+-	qcom_branch_set_clk_en(regmap, 0x52000); /* GCC_SYS_NOC_CPUSS_AHB_CLK */
 -
 -	ret = qcom_cc_register_rcg_dfs(regmap, gcc_dfs_clocks,
 -				       ARRAY_SIZE(gcc_dfs_clocks));
 -	if (ret)
 -		return ret;
 -
--	/* FORCE_MEM_CORE_ON for ufs phy ice core clocks */
--	regmap_update_bits(regmap, gcc_ufs_phy_ice_core_clk.halt_reg, BIT(14), BIT(14));
--
--	/* Keep some clocks always-on */
--	qcom_branch_set_clk_en(regmap, 0x26004); /* GCC_CAMERA_AHB_CLK */
--	qcom_branch_set_clk_en(regmap, 0x26028); /* GCC_CAMERA_XO_CLK */
--	qcom_branch_set_clk_en(regmap, 0x27004); /* GCC_DISP_AHB_CLK */
--	qcom_branch_set_clk_en(regmap, 0x27018); /* GCC_DISP_XO_CLK */
--	qcom_branch_set_clk_en(regmap, 0x71004); /* GCC_GPU_CFG_AHB_CLK */
--	qcom_branch_set_clk_en(regmap, 0x32004); /* GCC_VIDEO_AHB_CLK */
--	qcom_branch_set_clk_en(regmap, 0x32030); /* GCC_VIDEO_XO_CLK */
--
--	/* Clear GDSC_SLEEP_ENA_VOTE to stop votes being auto-removed in sleep. */
--	regmap_write(regmap, 0x52024, 0x0);
--
--	return qcom_cc_really_probe(&pdev->dev, &gcc_sm8550_desc, regmap);
-+	return qcom_cc_probe(pdev, &gcc_sm8550_desc);
+-	return qcom_cc_really_probe(&pdev->dev, &gcc_sm8250_desc, regmap);
++	return qcom_cc_probe(pdev, &gcc_sm8250_desc);
  }
  
- static struct platform_driver gcc_sm8550_driver = {
+ static struct platform_driver gcc_sm8250_driver = {
 
 -- 
 2.54.0
