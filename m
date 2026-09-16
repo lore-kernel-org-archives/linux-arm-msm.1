@@ -1,167 +1,274 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.8])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E3CBD348477
-	for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 04:17:56 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DE44A3CBE80;
+	Wed, 16 Sep 2026 05:18:02 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.8
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789532278; cv=none; b=NMFHyQQLZqggL/UjsZ1RcM5YL8NQxQM1K+F5brHFFp7NbLJSzZy9lh/gJXb/SS7X3cerPgeDOyhnQEGhIUSgAI7OepAz5ZE3XzvR2A/8T0PNByo8R67Q2Lq/ea0batJ/EDdt0dFPd8XUR/fgBvE1/anjy4W+q3VP3tcW/4ZG62Y=
+	t=1789535890; cv=none; b=tLEQWxBcadMgufIpjnPAT3ndqi+CjEjop4nBcYHaqCnEW2NcsjRdmlTflmFvB8B808Z/H/8tAjNOELZqwsXWEj7cj//KsvG8rRzBRhWiTo54TxCVhICBsGRA3Gdyn+3JAX9eBmVgBAjvGfLOYlWPTvYoZ5DGDyhEBgnK21mbT5o=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789532278; c=relaxed/simple;
-	bh=0Um5hxrCDnA6hJBMs8PXT66TyVO85dEsGiGzP6yZCbs=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=DZltmGLejJEvFRJ7welzYdz0gw5l6WFxwGYa1VEw4PRHPwqzO0AbZW8VyPY8X0hq9VTXbUwQDnt8rG6LuS0xinv/7b1z3eQtO+896ZwPAqob3XS2y0EjXBgmBEOu2X2t57URdbI6jeIKDWQEUof1bBF7+Krd5HKslxEwimNY2hQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=Ht1JxI2l; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=eE0o2f/a; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1789535890; c=relaxed/simple;
+	bh=7K9m8F0mD1KG4TcDKDJKxVH0VueNV6FDVlQ8Ad7+dF4=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=hGPTKHZ92TpuSD2C8TmzSunC+TMvJ7tEfS8K0XnO2qUiqGDZMn81ismRfrDNV2vqYuoqKxeiRX7HuBWtor+MElLUw4JB56naXa7mX29Rro2ZxGFnEYH96UHA/0KIKayl4yaFM0iGVc6DwLnzQH88xMvy0B901cHpwpHTVvmuQ+c=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=Pd9w6tb9; arc=none smtp.client-ip=192.198.163.8
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="Ht1JxI2l";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="eE0o2f/a"
-Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68FLYpmw3680606
-	for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 04:17:56 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	CFyXjwf1vW6dWLb9NnJHDFBua+RxW8tDX7Lmq8HoTrU=; b=Ht1JxI2l10OWZ/Ic
-	/kAmtifwpte+vO0gL4njqrp0FBiq2yswUHCnwJYmhBultnP9jxvE0hyNtHuE7qYJ
-	6Hdtj9yf+C45Y0xkExzWP48pIHHo2kectFCGfUSLdEyUCiP46YyauXJfwhLFMr3u
-	z3QC6KmU8XCiu781QibzYHE+MHrTpIciDwdZU2+Dio9ACVqVoz9s2XlDMNNfiJkK
-	+p88G5QRqZYsLtNwJwd6dPY0dhb3hb638W++6ffRs30861VE/xgRtol/ckeaHl3S
-	UqcRz9yhEX1dv+HbQR7HWFLUB9mzOgUxkia7VcZcMXF/rfgnnx3GStzVGWhePvsP
-	fBCxwQ==
-Received: from mail-pl1-f197.google.com (mail-pl1-f197.google.com [209.85.214.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gqe1r97q3-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 04:17:56 +0000 (GMT)
-Received: by mail-pl1-f197.google.com with SMTP id d9443c01a7336-2d6f80c76e6so97445015ad.3
-        for <linux-arm-msm@vger.kernel.org>; Tue, 15 Sep 2026 21:17:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1789532275; x=1790137075; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=CFyXjwf1vW6dWLb9NnJHDFBua+RxW8tDX7Lmq8HoTrU=;
-        b=eE0o2f/awQRquFbHrBv2LqET5wPRtIXMxiHzpn5pS8UpLl0Qn3w3cXPpMy9oe6V4OB
-         YxIaWsO/CQONJ+B/Spl5oB4o2hR/r3xyVi9Pc9G+NMvd0UQdqJ7lt6p9YB5sfoIGl/22
-         J34Vlr/gBEj0u3Yx3Um8LL8Y+jQN/N+SgfYryFRM9SwhtS5GstxRWcd2eCk7SqpdMrng
-         Q2i6q3oB6JEIMsE5Vy4TIAsrF2j4EUWZkCwtRPDnHoAq75tuBdPOTxfh1GOPAWWK7AKb
-         3jfNaNbj3HLQgoMkbyrxZ8d12kVwgoE8Ppr+aYCJ1u+ZdRKBwXG6gCw3pjnkF4mJ6C11
-         rYQg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1789532275; x=1790137075;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=CFyXjwf1vW6dWLb9NnJHDFBua+RxW8tDX7Lmq8HoTrU=;
-        b=UyLm1EGfnQjnpFFQH8Ltv+nRLd0gqi0aRnqaOA+X/+CmLLICW6XXg46S1IXmTkSo0x
-         hRsI1W+1MwE/7l9IWp6ow9edJ8olBVH4zAC24cAAcFlNb1aLn5YhDwA+c4eb1Tk2tBon
-         aYF/LTqYqS/NEHSqwlmtzxTpoo+lu1lTa3vS+IE8vTLQsvByHEUgkgH94V0LW7qvOjLO
-         Lf9hXCoLNstijhkg7cvhIR7Gn8GZMtEA6ZQ8uaJH90WceQ09eTX7bpP0gzI19Fe+IMCr
-         JrxhB+Un9ZxdiUvSX2vQeCzv59NnqtiPDzjMEPuhD6ooITc1wXFKZPOhX3QqmAscXmip
-         g8kA==
-X-Gm-Message-State: AFuF++nd1zWv82oka3QW1iAzbVFW+nRrOCAOjXExHuyndmG/b6KjuWMf
-	xAb2P/8YfLexafQaYbNKRvlTEykGX9Zpqk43m9KKRbXdEPvckBZw5eradzDqmizM7uJePXWS4Jl
-	j4/ikizDrQchI7ej6jdNPbR0S6009f29lzRKiOMMQCqFPww3RA50W6MK52EeYxlinm6l3
-X-Gm-Gg: AYBFou1BU7rSMqB3kCoJYVKmmOak0Uq+QGJd1nBV1yGaILNtpmKvsJ3waOEzw+2YBeV
-	NU2P6f2EGbMaA4D2X/1qxWTnyLnk4zqnnXZJA3WxWNeDAExsI7qZbn0A7JssNZ/pamS47ynxdYQ
-	ndw7nvvu/JBwz0chE4VdIFFQRoSl3DeG4HmeDzUKAe1ECxa5Ryb+DDPOgOJdimHHQxUkZM2qOPE
-	WmMipPHt6y4zSS8q0vted58J7K7typOLCDNgTo5ttBbz8rjV/eb5se9Vex9ALxtTM5YEqOKNhDJ
-	nqIZQFGzAfWDyi54edsQxR4wwr1xzcFuWl4Qohj0TV/WxQBddWklA18GtZQsdcKy//2Td7It+nK
-	7yYpHb7wiGO1HuyiAvGHyNqVJtJo=
-X-Received: by 2002:a17:902:ce81:b0:2dd:64:12ac with SMTP id d9443c01a7336-2dd8e632d3bmr19186205ad.11.1789532275516;
-        Tue, 15 Sep 2026 21:17:55 -0700 (PDT)
-X-Received: by 2002:a17:902:ce81:b0:2dd:64:12ac with SMTP id d9443c01a7336-2dd8e632d3bmr19185755ad.11.1789532275081;
-        Tue, 15 Sep 2026 21:17:55 -0700 (PDT)
-Received: from [10.218.28.224] ([202.46.22.19])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-33bf5aca3fbsm3951906eec.20.2026.09.15.21.17.49
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 15 Sep 2026 21:17:54 -0700 (PDT)
-Message-ID: <80971c66-23f0-439d-afd0-a4f0211d2a36@oss.qualcomm.com>
-Date: Wed, 16 Sep 2026 09:47:47 +0530
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="Pd9w6tb9"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1789535885; x=1821071885;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=7K9m8F0mD1KG4TcDKDJKxVH0VueNV6FDVlQ8Ad7+dF4=;
+  b=Pd9w6tb9mhG5ljwwppW1v5mbGVRPq9YIWp5wRjCranDIsp2qf99VnspJ
+   NotvAz4FI+Aou1X6o/kNOo+6hBmbu1hiwBrv1yH6xicVwgBrM0DbaHZcR
+   86pqOAblgiYdkPCnKqHGtJwt4wCu4mOgY+y1IJ8Vjp/9vmj7XUh9Hwjka
+   s+FSgvzOMRk2/hJ4eT4TqNkQBThfyOiWTJzECfkN0AhhpIMbUiebzLq8o
+   bt83FzYbcLRKOUAGCeg9LHdofpUrg+pPMUzeguXB5oCI4EFH34wfC/p+1
+   He7ciRQDHyth9MkF0KVipPFcpYLkarIln8tlv43yv90Mjo9XrniApOVJq
+   A==;
+X-CSE-ConnectionGUID: fOMs1mN3TniWtEJI5hn/mA==
+X-CSE-MsgGUID: U3c0mfJNQO+fFbxIzwWH5A==
+X-IronPort-AV: E=McAfee;i="6800,10657,11905"; a="107416577"
+X-IronPort-AV: E=Sophos;i="6.27,103,1787036400"; 
+   d="scan'208";a="107416577"
+Received: from fmviesa009.fm.intel.com ([10.60.135.149])
+  by fmvoesa102.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 15 Sep 2026 22:17:59 -0700
+X-CSE-ConnectionGUID: e4iKesyjTzeod7b1HLHAUQ==
+X-CSE-MsgGUID: i4wUTo/ZSzGY0adSHgPQTg==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.27,103,1787036400"; 
+   d="scan'208";a="267017284"
+Received: from lkp-server01.sh.intel.com (HELO 462990a40a85) ([10.239.97.150])
+  by fmviesa009.fm.intel.com with ESMTP; 15 Sep 2026 22:17:56 -0700
+Received: from kbuild by 462990a40a85 with local (Exim 4.98.2)
+	(envelope-from <lkp@intel.com>)
+	id 1x6i1p-000000005X7-0J2U;
+	Wed, 16 Sep 2026 05:17:53 +0000
+Date: Wed, 16 Sep 2026 13:17:23 +0800
+From: kernel test robot <lkp@intel.com>
+To: Guangshuo Li <lgs201920130244@gmail.com>,
+	Vikash Garodia <vikash.garodia@oss.qualcomm.com>,
+	Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>,
+	Bryan O'Donoghue <bod@kernel.org>,
+	Mauro Carvalho Chehab <mchehab@kernel.org>,
+	Hans Verkuil <hverkuil@kernel.org>,
+	Jorge Ramirez-Ortiz <jorge.ramirez@oss.qualcomm.com>,
+	linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org
+Cc: llvm@lists.linux.dev, oe-kbuild-all@lists.linux.dev,
+	linux-media@vger.kernel.org,
+	Guangshuo Li <lgs201920130244@gmail.com>, stable@vger.kernel.org
+Subject: Re: [PATCH] media: venus: avoid HFI resource leak on IRQ request
+ failure
+Message-ID: <202609161343.qH6ypqkG-lkp@intel.com>
+References: <20260915123009.2420780-1-lgs201920130244@gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/2] clk: qcom: gcc-glymur: Use clk_regmap_phy_mux_ops
- for GCC UFS muxes
-To: Jagadeesh Kona <jagadeesh.kona@oss.qualcomm.com>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Stephen Boyd <sboyd@kernel.org>, Brian Masney <bmasney+clk@redhat.com>,
-        Jerome Brunet <jbrunet+clk@baylibre.com>,
-        Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley
- <conor+dt@kernel.org>,
-        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
-        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
-        Abel Vesa <abelvesa@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org,
-        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-        Abel Vesa <abel.vesa@oss.qualcomm.com>
-References: <20260915-glymur-ufs-clk-changes-v2-0-d0aa1c60c269@oss.qualcomm.com>
- <20260915-glymur-ufs-clk-changes-v2-2-d0aa1c60c269@oss.qualcomm.com>
-Content-Language: en-US
-From: Taniya Das <taniya.das@oss.qualcomm.com>
-In-Reply-To: <20260915-glymur-ufs-clk-changes-v2-2-d0aa1c60c269@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTE2MDA1MiBTYWx0ZWRfX3T+sNjny5KrP
- rt1owTy/q8pcXQiFGtCKrQdBZQvDWLJSQppth/mmz8JTZHKkPreC+QV563ykayS1q/nnif9a2Nr
- 0X18KyIoEJlrKX8SKGOhI+WJ9nqVVK4=
-X-Proofpoint-GUID: Bd1QTUALhr8t1hqfnucL0Jfje369wUyi
-X-Proofpoint-ORIG-GUID: Bd1QTUALhr8t1hqfnucL0Jfje369wUyi
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTE2MDA1MiBTYWx0ZWRfX+khlbWwVo7U0
- W/TvZyHAh/LqwZxGQ/r6DpKftWw+J++ujfxpGQNFsZmps1bZ/lu0TdB8Lg6bZoZmATmapCqP/19
- ZtEaXE0mPUtdVcBYjqrFeNL4xCBKb2bEPgl+a95uD5di3XzVjQsGWqJ5XhmyolL2Mro31TmzKkP
- GJNzCxPjfT8xpXNcV+gcWfVg8D/QzpkmSuRW4QX9tjWUB4pKajbdIcYdZ08VinklW36E2K78JG7
- nqAbYWGCqfkPVKfTU6Ddi318gfC697HF0Dbrdn6K+Xc1yKA8vX26ex0Ovw/20FypNs8+WnN7Zlo
- SSbIZWlfgDZd/uekFzipl2CXlDPlbLh6PZrwhtk08sC75vsPpOkuYcaeTjmHkg21woHh+tU4cmO
- b8El0SvzQ+xjC1F8LkW5bPx9WmgRpQ/HtCCvSLLWUEYf3mNpb0UyVjjDlW88zHMWXEq9ju1Yil/
- eLx9BiqiUgNh4tF4G6w==
-X-Authority-Analysis: v=2.4 cv=ZIhCCn7b c=1 sm=1 tr=0 ts=6aaa1874 cx=c_pps
- a=cmESyDAEBpBGqyK7t0alAg==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
- a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
- a=EUspDBNiAAAA:8 a=vZgVdhwgRuDMrAwUH48A:9 a=QEXdDO2ut3YA:10
- a=1OuFwYUASf3TG4hYMiVC:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-15_05,2026-09-15_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0 priorityscore=1501 clxscore=1015 spamscore=0 phishscore=0
- impostorscore=0 lowpriorityscore=0 bulkscore=0 adultscore=0 suspectscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609160052
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260915123009.2420780-1-lgs201920130244@gmail.com>
+
+Hi Guangshuo,
+
+kernel test robot noticed the following build warnings:
+
+[auto build test WARNING on linuxtv-media-pending/master]
+[also build test WARNING on media-tree/master linus/master v7.3-rc3 next-20260914]
+[If your patch is applied to the wrong git tree, kindly drop us a note.
+And when submitting patch, we suggest to use '--base' as documented in
+https://git-scm.com/docs/git-format-patch#_base_tree_information]
+
+url:    https://github.com/intel-lab-lkp/linux/commits/Guangshuo-Li/media-venus-avoid-HFI-resource-leak-on-IRQ-request-failure/20260915-203009
+base:   https://git.linuxtv.org/media-ci/media-pending.git master
+patch link:    https://lore.kernel.org/r/20260915123009.2420780-1-lgs201920130244%40gmail.com
+patch subject: [PATCH] media: venus: avoid HFI resource leak on IRQ request failure
+config: loongarch-allmodconfig (https://download.01.org/0day-ci/archive/20260916/202609161343.qH6ypqkG-lkp@intel.com/config)
+compiler: clang version 19.1.7 (https://github.com/llvm/llvm-project cd708029e0b2869e80abe31ddb175f7c35361f90)
+reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20260916/202609161343.qH6ypqkG-lkp@intel.com/reproduce)
+
+If you fix the issue in a separate patch/commit (i.e. not just a new version of
+the same patch/commit), kindly add following tags
+| Reported-by: kernel test robot <lkp@intel.com>
+| Closes: https://lore.kernel.org/oe-kbuild-all/202609161343.qH6ypqkG-lkp@intel.com/
+
+All warnings (new ones prefixed by >>):
+
+>> drivers/media/platform/qcom/venus/core.c:446:3: warning: misleading indentation; statement is not part of the previous 'if' [-Wmisleading-indentation]
+     446 |                 enable_irq(core->irq);
+         |                 ^
+   drivers/media/platform/qcom/venus/core.c:443:2: note: previous statement is here
+     443 |         if (ret)
+         |         ^
+   1 warning generated.
 
 
+vim +/if +446 drivers/media/platform/qcom/venus/core.c
 
-On 9/15/2026 5:37 PM, Jagadeesh Kona wrote:
-> Use clk_regmap_phy_mux_ops for GCC UFS muxes so these muxes are
-> automatically switched to UFS external symbol clocks during enable and
-> safely parked at XO clk during disable.
-> 
-> Fixes: efe504300a17 ("clk: qcom: gcc: Add support for Global Clock Controller")
-> Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-> Reviewed-by: Abel Vesa <abel.vesa@oss.qualcomm.com>
-> Signed-off-by: Jagadeesh Kona <jagadeesh.kona@oss.qualcomm.com>
-> ---
->  drivers/clk/qcom/gcc-glymur.c | 69 +++++++++++--------------------------------
->  1 file changed, 18 insertions(+), 51 deletions(-)
-> 
-> diff --git a/drivers/clk/qcom/gcc-glymur.c b/drivers/clk/qcom/gcc-glymur.c
-> index 2ee4820b6fdfb1ad2cdb15366cf746651fc1a36a..a47a2c6b961ba01edc69be91e299a190f4662c3e 100644
-> --- a/drivers/clk/qcom/gcc-glymur.c
-> +++ b/drivers/clk/qcom/gcc-glymur.c
+   379	
+   380	static int venus_probe(struct platform_device *pdev)
+   381	{
+   382		struct device *dev = &pdev->dev;
+   383		struct venus_core *core;
+   384		int ret;
+   385	
+   386		core = devm_kzalloc(dev, sizeof(*core), GFP_KERNEL);
+   387		if (!core)
+   388			return -ENOMEM;
+   389	
+   390		core->dev = dev;
+   391	
+   392		core->base = devm_platform_ioremap_resource(pdev, 0);
+   393		if (IS_ERR(core->base))
+   394			return PTR_ERR(core->base);
+   395	
+   396		core->video_path = devm_of_icc_get(dev, "video-mem");
+   397		if (IS_ERR(core->video_path))
+   398			return PTR_ERR(core->video_path);
+   399	
+   400		core->cpucfg_path = devm_of_icc_get(dev, "cpu-cfg");
+   401		if (IS_ERR(core->cpucfg_path))
+   402			return PTR_ERR(core->cpucfg_path);
+   403	
+   404		core->irq = platform_get_irq(pdev, 0);
+   405		if (core->irq < 0)
+   406			return core->irq;
+   407	
+   408		core->res = of_device_get_match_data(dev);
+   409		if (!core->res)
+   410			return -ENODEV;
+   411	
+   412		mutex_init(&core->pm_lock);
+   413	
+   414		core->pm_ops = venus_pm_get(core->res->hfi_version);
+   415		if (!core->pm_ops)
+   416			return -ENODEV;
+   417	
+   418		if (core->pm_ops->core_get) {
+   419			ret = core->pm_ops->core_get(core);
+   420			if (ret)
+   421				return ret;
+   422		}
+   423	
+   424		ret = dma_set_mask_and_coherent(dev, core->res->dma_mask);
+   425		if (ret)
+   426			goto err_core_put;
+   427	
+   428		dma_set_max_seg_size(dev, UINT_MAX);
+   429	
+   430		INIT_LIST_HEAD(&core->instances);
+   431		mutex_init(&core->lock);
+   432		INIT_DELAYED_WORK(&core->work, venus_sys_error_handler);
+   433		init_waitqueue_head(&core->sys_err_done);
+   434	
+   435		ret = devm_request_threaded_irq(dev, core->irq, hfi_isr,
+   436						venus_isr_thread,
+   437						IRQF_TRIGGER_HIGH | IRQF_ONESHOT |
+   438						IRQF_NO_AUTOEN, "venus", core);
+   439		if (ret)
+   440			goto err_core_put;
+   441	
+   442		ret = hfi_create(core, &venus_core_ops);
+   443		if (ret)
+   444			goto err_core_put;
+   445	
+ > 446			enable_irq(core->irq);
+   447	
+   448		venus_assign_register_offsets(core);
+   449	
+   450		ret = v4l2_device_register(dev, &core->v4l2_dev);
+   451		if (ret)
+   452			goto err_hfi_destroy;
+   453	
+   454		platform_set_drvdata(pdev, core);
+   455	
+   456		pm_runtime_enable(dev);
+   457	
+   458		ret = pm_runtime_get_sync(dev);
+   459		if (ret < 0)
+   460			goto err_runtime_disable;
+   461	
+   462		ret = venus_firmware_init(core);
+   463		if (ret)
+   464			goto err_runtime_disable;
+   465	
+   466		ret = venus_boot(core);
+   467		if (ret)
+   468			goto err_firmware_deinit;
+   469	
+   470		ret = venus_firmware_cfg(core);
+   471		if (ret)
+   472			goto err_venus_shutdown;
+   473	
+   474		ret = hfi_core_resume(core, true);
+   475		if (ret)
+   476			goto err_venus_shutdown;
+   477	
+   478		ret = hfi_core_init(core);
+   479		if (ret)
+   480			goto err_venus_shutdown;
+   481	
+   482		ret = venus_firmware_check(core);
+   483		if (ret)
+   484			goto err_core_deinit;
+   485	
+   486		if (core->res->dec_nodename || core->res->enc_nodename) {
+   487			ret = venus_add_dynamic_nodes(core);
+   488			if (ret)
+   489				goto err_core_deinit;
+   490		}
+   491	
+   492		ret = of_platform_populate(dev->of_node, NULL, NULL, dev);
+   493		if (ret)
+   494			goto err_remove_dynamic_nodes;
+   495	
+   496		ret = venus_enumerate_codecs(core, VIDC_SESSION_TYPE_DEC);
+   497		if (ret)
+   498			goto err_of_depopulate;
+   499	
+   500		ret = venus_enumerate_codecs(core, VIDC_SESSION_TYPE_ENC);
+   501		if (ret)
+   502			goto err_of_depopulate;
+   503	
+   504		ret = pm_runtime_put_sync(dev);
+   505		if (ret) {
+   506			pm_runtime_get_noresume(dev);
+   507			goto err_of_depopulate;
+   508		}
+   509	
+   510		venus_dbgfs_init(core);
+   511	
+   512		return 0;
+   513	
+   514	err_of_depopulate:
+   515		of_platform_depopulate(dev);
+   516	err_remove_dynamic_nodes:
+   517		venus_remove_dynamic_nodes(core);
+   518	err_core_deinit:
+   519		hfi_core_deinit(core, false);
+   520	err_venus_shutdown:
+   521		venus_shutdown(core);
+   522	err_firmware_deinit:
+   523		venus_firmware_deinit(core);
+   524	err_runtime_disable:
+   525		pm_runtime_put_noidle(dev);
+   526		pm_runtime_disable(dev);
+   527		pm_runtime_set_suspended(dev);
+   528		v4l2_device_unregister(&core->v4l2_dev);
+   529	err_hfi_destroy:
+   530		hfi_destroy(core);
+   531	err_core_put:
+   532		if (core->pm_ops->core_put)
+   533			core->pm_ops->core_put(core);
+   534		return ret;
+   535	}
+   536	
 
-Reviewed-by: Taniya Das <taniya.das@oss.qualcomm.com>
-
--- 
-Thanks,
-Taniya Das
-
+--
+0-DAY CI Kernel Test Service
+https://github.com/intel/lkp-tests/wiki
