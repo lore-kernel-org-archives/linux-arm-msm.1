@@ -1,49 +1,51 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2A7883BE636;
-	Wed, 16 Sep 2026 07:01:55 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 16178404BE3;
+	Wed, 16 Sep 2026 07:09:56 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789542117; cv=none; b=YFizbQGIWhO7NgMlIxLsrgmE90YmXcoBhSf2rWvB31Hbumd/j3oR8s+/mCq5Cav+36wR3JX5vM9j8x1g98j5G7Kbf6Ut6Z+HAwTHgTtWbep4HkGlt2/fRqeL2o02pBzS9wUH1AP0huqI1ddaDvl7uVzveG7Cj7U/yeS2PGNX9n0=
+	t=1789542618; cv=none; b=K38diUVL614ge1960I66gxJrCS8ArwcadhKgbWgc0JoeQK8ZZW/x56DQt3sOVKJI/t6ZoHvgvMoyKW5qhbR2UkwnnTYFEDCbCiSugUEzy/VnUcXf6ifjSPBNMh7td5Cy7FGf8n4a7jZHt83rdE+6CbDbvFTiu6BJx6yRe86OE7I=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789542117; c=relaxed/simple;
-	bh=Kwb8KX87R9r4L4tQow9CcPKZwEpqNnFjy0YoemwMEmo=;
+	s=arc-20240116; t=1789542618; c=relaxed/simple;
+	bh=TbkgiRjWeQ8a0xpMBTTJK/KlAo0wUUGLv0byzFa/anY=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=Of8Qzrut/tjsW+dLGokMgBUmK9uK18ws24llte07mh7DQlMC13PN1QW79f8+jlR0pLQ2cCTZTme+UK0KLUjmCCOqMbkeebyFyFaPsoQPpK3NHqFti0+ZtuYWITFcsv9hXb9S3DdaYRhcrYkrexvV7HCufI7/XtVUKrA67XdxfgM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ETpOXFml; arc=none smtp.client-ip=100.103.45.18
+	 Content-Type:Content-Disposition:In-Reply-To; b=maegKj806eAP7zNa/awQgawtiLuCg4C//pqdq3NX71oYTywYUnxXTdiscCN7oUVZlXSRUl0dEEapa6VFvuxpBqbribxgk+7hF7AMc54dsy7oNNyoI9SZfPGWjxrOw6uk/Ms9LMwCgxpb/Glw/sUca16Q1m0lHqd67+tbWDSxkro=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=K7SwAZ5T; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="ETpOXFml"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A32E71F000FF;
-	Wed, 16 Sep 2026 07:01:48 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="K7SwAZ5T"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 165081F000FF;
+	Wed, 16 Sep 2026 07:09:43 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1789542115;
-	bh=AtbMstdSsxsrcHglRSS47mfL0CBM0tMluc7NdE73fNc=;
+	s=k20260515; t=1789542593;
+	bh=p2gx8+1v2YG2nXZ5rZ43ZGOVbgNWYwB+4lHcBSPfXX4=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=ETpOXFmlT7btJY32ZMUu7DeLGxPK5xXTD5xrjD1rZVtlKZg3CbM7mmlHSNcnE18Zi
-	 sFBKwBstQiLxCJszrz03+2scS1iQkH9mOaoEI86AqddGQ0T/Ompn2S+aezzWd6rcvi
-	 D16R6u/JeCB+NQBKou/G2qC/0T3zjGD4FY6as8IdXQeHtMazhMKMlkTzl1ifnZc7Ib
-	 j+d+rp99wMYb+Eu0jeQ6PcKgWBLG/4hxnTjpFT2vNWbjOwO2DEaSSHaA43HCfpoYch
-	 xI+ycYCOPz9joePsLbjn4O0FExSlfbxxerRlvTJlw0auZBtYJfWQpRMqWfM1Y8bh3W
-	 a0CwFWYeANchQ==
-Date: Wed, 16 Sep 2026 09:01:44 +0200
-From: Manivannan Sadhasivam <mani@kernel.org>
-To: Juha-Matti Tilli <juha-matti.tilli@iki.fi>
-Cc: linux-arm-msm@vger.kernel.org, Jeff Hugo <jeff.hugo@oss.qualcomm.com>, 
-	Jeff Johnson <jjohnson@kernel.org>, Bjorn Andersson <andersson@kernel.org>, 
-	Konrad Dybcio <konradybcio@kernel.org>, Eric Dumazet <edumazet@google.com>, 
-	Kuniyuki Iwashima <kuniyu@google.com>, Paolo Abeni <pabeni@redhat.com>, 
-	Willem de Bruijn <willemb@google.com>, "David S. Miller" <davem@davemloft.net>, 
-	Jakub Kicinski <kuba@kernel.org>, Simon Horman <horms@kernel.org>, Mihai Moldovan <ionic@ionic.de>, 
-	Denis Kenzior <denkenz@gmail.com>, Marcel Holtmann <marcel@holtmann.org>, 
-	Andy Gross <agross@kernel.org>, linux-kernel@vger.kernel.org, mhi@lists.linux.dev, 
-	linux-wireless@vger.kernel.org, ath11k@lists.infradead.org, ath12k@lists.infradead.org, 
-	netdev@vger.kernel.org
-Subject: Re: [PATCH v7 03/15] net: qrtr: fit node ID + port number
- combination into unsigned long
-Message-ID: <bjfwy4usrfbrabmcp4xsr65nqwdpuryvmrb6tzp6k2ckmdx27h@kvf7idvsugsm>
-References: <20260915054207.2513877-1-juha-matti.tilli@iki.fi>
- <20260915054207.2513877-4-juha-matti.tilli@iki.fi>
+	b=K7SwAZ5TQox94KhnzDZgdWak9JeascnEJT6tgsdFitx13oH/yvHVurs3emFIQIidi
+	 xcR0gIE20GLza50nMYtjBg//0e7WD22sTKu3OHciVTO0Egw6dpfNvS97BoC4LpWgvN
+	 ZD0aZmUahuws0zfu0FGKie6dskhpn2wDFZH1gLvxR0Y/XLP3PDKD59Q3XEFPNj3iGd
+	 l3nMpo+kKycUGKylVUc5DFObZlUBNTgMifgw32kRkszA3iFJ9ppTn7CES9cJYrH1JE
+	 XD/gyr3hXov/6xjsaqqL1FGY+8ZmWmmW0Gqlh80XrHJbwZzvXyNf+hmB3sQ+DilGUR
+	 S0XyD3cx8I3Gw==
+Date: Wed, 16 Sep 2026 09:09:41 +0200
+From: Christian Brauner <brauner@kernel.org>
+To: Linus Torvalds <torvalds@linux-foundation.org>
+Cc: Alexander Viro <viro@zeniv.linux.org.uk>, Jann Horn <jannh@google.com>, 
+	Jan Kara <jack@suse.cz>, Ingo Molnar <mingo@redhat.com>, 
+	Peter Zijlstra <peterz@infradead.org>, linux-fsdevel@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	linux-mm@kvack.org, Oleg Nesterov <oleg@redhat.com>, linux-alpha@vger.kernel.org, 
+	linux-snps-arc@lists.infradead.org, linux-arm-kernel@lists.infradead.org, linux-csky@vger.kernel.org, 
+	linux-hexagon@vger.kernel.org, linux-m68k@lists.linux-m68k.org, linux-mips@vger.kernel.org, 
+	linux-openrisc@vger.kernel.org, linux-parisc@vger.kernel.org, linux-sh@vger.kernel.org, 
+	sparclinux@vger.kernel.org, linux-um@lists.infradead.org, Jens Axboe <axboe@kernel.dk>, 
+	io-uring@vger.kernel.org, netdev@vger.kernel.org, linuxppc-dev@lists.ozlabs.org, 
+	linux-gpio@vger.kernel.org, linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org, 
+	bpf@vger.kernel.org, David Airlie <airlied@redhat.com>, 
+	virtualization@lists.linux.dev, kvm@vger.kernel.org, kexec@lists.infradead.org, 
+	linux-hyperv@vger.kernel.org
+Subject: Re: [PATCH RFC POC 00/50] file: handle files on syscall exit
+Message-ID: <20260916-seilbahn-heimvorteil-edelmut-bad3637b3a95@brauner>
+References: <20260915-work-fd-reserve-unify-folded-v1-0-4d5217d6b246@kernel.org>
+ <CAHk-=wjeamU=_RYT9cR3dZJ2N-Teo-N1+aYh7jwhrB=iWXD0cg@mail.gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -52,50 +54,30 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <20260915054207.2513877-4-juha-matti.tilli@iki.fi>
+In-Reply-To: <CAHk-=wjeamU=_RYT9cR3dZJ2N-Teo-N1+aYh7jwhrB=iWXD0cg@mail.gmail.com>
 
-On Tue, Sep 15, 2026 at 08:41:55AM +0300, Juha-Matti Tilli wrote:
-> From: Mihai Moldovan <ionic@ionic.de>
+On Tue, Sep 15, 2026 at 09:02:31AM -0700, Linus Torvalds wrote:
+> On Tue, 15 Sept 2026 at 04:31, Christian Brauner <brauner@kernel.org> wrote:
+> >
+> > TL;DR, this lets arch code handle fd install and cleanup. fd_prepare()
+> > allocates a descriptor like get_unused_fd_flags() does and records it in
+> > a slot on the task. fd_stage() attaches the file to that slot and
+> > returns the number.
 > 
-> The flow control implementation uses a radix tree to store node ID and
-> port number combinations and the key length is hardcoded to unsigned
-> long.
-> 
-> The original implementation shifted the node ID up by 32 bits and added
-> the port number to the lower 32 bits of the unsigned long value to
-> create a key.
-> 
-> Unfortunately, since both node IDs and port numbers are defined as u32,
-> this will overflow on platforms where sizeof(unsigned long) < 8 (which
-> are most 32 bit platforms) and essentially just drop the node ID part.
-> 
-> To fix this, build the key in a generic way, using half of the unsigned
-> long space for the node ID and the other half for the port number.
-> 
-> This will be transparent to platforms where sizeof(unsigned long) >= 8
-> and fix overflow issues otherwise.
-> 
-> The caveat, of course, is that, for platforms where
-> sizeof(unsigned long) < 8, the supported amount of node IDs and port
-> numbers will be severely limited - to half of sizeof(unsigned long),
-> which typically will be 16 bits. Needless to say, we have to check if
-> both values fit into this limit.
-> 
-> This limitation is probably not going to be an issue in real-world
-> scenarios, but if it turns out to be one after all, we could switch from
-> a radix tree implementation to an XArray implementation.
-> 
+> Honestly, I am *not* a fan. At all.
 
-Documentation/core-api/xarray.rst says:
+I'm really glad that you don't like it! I hate it too.
 
-"If your index can be larger than ``ULONG_MAX`` then the XArray is not the data
-type for you."
+To quote back from the cover letter:
 
-So the fix is to not make XArray work, but switch over to some other storage
-mechanism instead of XArray, like hashtable.
+> The idea in this series is old-ish and really never let go of me and so
+> I wanted to at least dump it onto the list once even if it's just for
+> illustrative purposes.
 
-- Mani
+I think the cleanup-based solution we've added a couple of releases ago
+is the better appraoch. Which is why I chose it over this.
 
--- 
-மணிவண்ணன் சதாசிவம்
+But this install-on-the-way-out idea has been brought up quite a few
+times as the "better approach". I never really believed it would work
+nicely. Now we have an implementation on the list that we can point to
+and we can move on from this.
