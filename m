@@ -1,293 +1,165 @@
-Received: from mail-yx2-f13.google.com (mail-yx2-f13.google.com [74.125.224.141])
+Received: from mail-pj2-f12.google.com (mail-pj2-f12.google.com [74.125.227.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 37C124D0CDC
-	for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 16:46:00 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.224.141
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 155C851A736
+	for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 16:46:13 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.227.140
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789577172; cv=none; b=aGFdNWUk5qRzKkFs89TOrzjCaccvABoH4IHlSoMmDXVrCjPR2YuG+Mc/uRA9g8H8NwxoQpS1zroG5tRKAheEzySkdR6GswnL6AuR9Kcnzq6WR1NEQtvwFIYKFCPWplDH585hFUtKDB8Be8p68pQAMsjXyEYExP6LnA+jdvWGtn4=
+	t=1789577178; cv=none; b=JZpb1TjFzpoqp4rInk6ZcBTP45AWKsUhnvAklbVQtDf9U0wOvsWxQ4IBayoxWax+0GNhMjEjzDL0rI/GHmFXqF8yxq4KWjarcFXi507RiHBMAyN2z2+q4UnR4NHGCSZ0IqO/260Lb5XrZnQkaM/RgpJPJGw62KkNjiV7bTLHsKo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789577172; c=relaxed/simple;
-	bh=qUjUi4OUkxEIztp25vsRitnlL+dXfqSGw1HVgzhiFO8=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=s41rE45wqTK/GkC79ngzAucWymGUzwF+rO0atTQ8UPSx4/bqMUzECmfaJGnvAGsVmSA1kZO6Fz2+BCdAde7KVJH2CmGADn0dgJ+tOlnUsw0hxfTRCD9QVM2jonIJ/bVjRq1oNlVlLxriFwo9xtrQulKqDVLOLxKQw06k3BOvNOE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=EPKDZ+PL; arc=none smtp.client-ip=74.125.224.141
+	s=arc-20240116; t=1789577178; c=relaxed/simple;
+	bh=1fs5/9PJdlbuBhTs0ZxkDNW+v2WItpOPk3QzGFWOdbk=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=EdcIfl10j9EiWtfiBmqgTXgQOoOffHGzqOFQxGGpyvHB6RlX02fsiQGSiYsGZ8V7yx06hvP7chQoA4RUHq3SsfE6yJ6c5q/GbQEKQAEbA6KoCVznHD9t+onozaDf9pnAaU+KliWiAiy5DwL4z0r1ps2rPqYZJfAr3fUW6/2RpKk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=QMSLSCTc; arc=none smtp.client-ip=74.125.227.140
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="EPKDZ+PL"
-Received: by mail-yx2-f13.google.com with SMTP id 956f58d0204a3-66f7f72a284so1384540d50.2
-        for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 09:46:00 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="QMSLSCTc"
+Received: by mail-pj2-f12.google.com with SMTP id 98e67ed59e1d1-398b3b189e0so918438a91.2
+        for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 09:46:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1789577157; x=1790181957; darn=vger.kernel.org;
-        h=content-type:in-reply-to:autocrypt:from:content-language:references
-         :cc:to:subject:user-agent:mime-version:date:message-id:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=Bn6aZ1lxwJ4I9Ak9bkD3kswRMqJ+xZxBaB9EJrANxpc=;
-        b=EPKDZ+PLK5/qV2BV9dlC+vUbDDr8CnTKrtN0betFSOYS+eL8+V5Bv3HIVcBBw8nZkG
-         XvhCJX/4FvNyMkMAzvXNG0dhRvApwgrvst//XT2eqy5l1sQrgagon4+ITro8R827A2j6
-         mTo2KPv7QWxuhHJ6H82l+G971tl2EeL4s5RaKmnWNey10/zDsUK2xJHi39q2qyID6xKE
-         x0hbedXU8yudpc43hhJaA7YZok0lfhP/R1VizEnTiHBod/wEQ98gbTzxZ77k+H3nPJ+X
-         mRBqkaFQ/zLCAKIdQFEEpfiMGm6RE9Iu7pjuL6NHvWjDy3fjWAlVKa65s1UCdr7v9ifJ
-         q7Aw==
+        d=gmail.com; s=20251104; t=1789577171; x=1790181971; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:mime-version:references
+         :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=1fs5/9PJdlbuBhTs0ZxkDNW+v2WItpOPk3QzGFWOdbk=;
+        b=QMSLSCTcLtJ+AiMJ6XECO+C16YHQOAZXJqddh+1hwfr5SVCU4HFWiTSJa1dhNOAfge
+         pfYOyTxgh+G7+nYzG29DcTK0mbanmL4Ki5CnnFA1nBDvUO6vmqKWePAB+FZ5FpUy7ybf
+         NvpmQd8hmW1D58fLfNxQ2IO4hTT5eo54DBnXZzh2iajCO69bt2cf5NtANoLSgFqyO5/A
+         9LEmXnDntVcj3+khqajRkChzL+EBb5PV7pHymXnMoVk6pz3eKRz4jysRegqRDLaw73Fi
+         qXC75IwpNB6FudUN9Cqwzv40xMcW2rJfnS4fRbIUZsdSRYywhbx5SH4WUeYfZTSmmPUN
+         0lKA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1789577157; x=1790181957;
-        h=content-type:in-reply-to:autocrypt:from:content-language:references
-         :cc:to:subject:user-agent:mime-version:date:message-id:x-gm-gg
+        d=1e100.net; s=20260707; t=1789577171; x=1790181971;
+        h=content-transfer-encoding:content-type:mime-version:references
+         :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=Bn6aZ1lxwJ4I9Ak9bkD3kswRMqJ+xZxBaB9EJrANxpc=;
-        b=mRyqEW69v024uhFPohoVDwPp6LvODGxN2bZOBbRkmCVI1uAzHKVflyv9BPmp2RIyNP
-         UidReiaLfR+T0VuDRdu3uYjpzbMx+a19SrXvtpeqH+jArfSqmb/fOHPEeAu35xkW3t3O
-         ecVEoQ2kDbBp8fnP9pzPXYZ/7625Irtr4/zr3DM6pKGBQ7z3ZdIME9bA93inxpVmNDPN
-         Pp62D2Uq7uglNfojK+RAWej7Fh0ilW3zvs1hX7ykQFCu0zNvQD0EGEKsRvDR0yhj0OhS
-         r7hJO0RJwDg8WOOk7FHhK6uJvzOenNP1j54sbPt+sbJRjKnNru/0u/CwQBTDGsnpIaIK
-         cllw==
-X-Forwarded-Encrypted: i=1; AKwUvBzPeMB86vpuRG009y5KCRofR1HxMGdl/5kDPhYpjWKjOGUCEsJZbSuxpHlYxAoTDcglfnlKuRqnaSWU/b04@vger.kernel.org
-X-Gm-Message-State: AFuF++mR0ESHqyW6E5cAu3EMoUae/0qBF5YtHzWzQwQjRu+Qnitfe5nR
-	vBtlHPidmz5n6EGsl30OYqLLFw0ois8ULEbQNNdder4BAbKuOxMLFV2F
-X-Gm-Gg: AYBFou1iN3xvAfpT374F+h08kpD2OojPqxLYi2ZFK5xCCNVm/Kqe00E2lwpIjleZGad
-	VMMsX1o5poumzVvoFHyEy4BJKBTjG74TotwHq276rRDUT0GM1vo7rKjdkC5szvBxOd3PqQgCGNk
-	kOfKJxV45QIsXaCUUQCNWO8+X5Ln8Xp/Vt4527GjrkU57atGcfb06jBDAoL4+kqTqHKvvJ7Rww9
-	ELuEbHYY2vQHSbv5zoEt7PIp5chg9OeNidZBJo9G+cKUyHbkyR1eJr+i6EapiXnth4WtzEuyZf0
-	Zg4V/FWmIk3W1vBLktzv14LaFYj/oycbkylWODz6aTC6apLhneDmZp969y5mtzHkFWHkDugE+9u
-	IGs7N19O3az5oxVr7Y3kf0AFehkF/6lx2neKZvszAm4EF+4OFM6UmDnTcIPIk7KlS8W2StUqdmH
-	zjwAZPrXwJHzRCR3CmPCRigY7r+LH/Aqp4/zoklRHVwx0RUuh9HQ5vWYgjTJRfTg0lqrKJ8fiJ+
-	g==
-X-Received: by 2002:a05:690e:1501:b0:66f:c1bc:4025 with SMTP id 956f58d0204a3-671632afbedmr1106459d50.82.1789577157100;
-        Wed, 16 Sep 2026 09:45:57 -0700 (PDT)
-Received: from [10.138.10.6] ([185.98.168.18])
-        by smtp.gmail.com with ESMTPSA id 956f58d0204a3-6715f45f803sm1587709d50.0.2026.09.16.09.45.54
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 16 Sep 2026 09:45:55 -0700 (PDT)
-Message-ID: <157aa2cc-65b3-4d89-aa5e-eccd87296293@gmail.com>
-Date: Wed, 16 Sep 2026 12:45:40 -0400
+        bh=1fs5/9PJdlbuBhTs0ZxkDNW+v2WItpOPk3QzGFWOdbk=;
+        b=Mwk0nM0YBEkXyhRteuGCRJQIwuoDV9s1tmp+2cdkyssSUsdUuFGSDn7DcWF/g7CTDM
+         CmANIScWmW964mS7AYH4N+TZt/My54ADS1c119HscieeaQv8mwgNF2KSCDuPYowjW7IJ
+         jO1pP3zujwWuvsdiVYafRoNIntD4IaLJB9zXZiiXnZzLuTI1HygFyKjcls3emp/iRuA6
+         df2G8wX7CmEhNUoq/+fpe7qCWa37R0/ZdND9kpc4zpV+9GUmP2V9fbdzYfNZE3UkMazb
+         4Piw7URTImoC0icwqLlsvlPwwKN+ToikKAxOas8xE6N5MMLtV5sjXk61U9naGWdTlBGU
+         F6jg==
+X-Forwarded-Encrypted: i=1; AKwUvBxvKY7TSd8K3AHqFre4gha5SzFNE9sn0Sf/JSV8ITrtc1DaAx/4qI7HPgOaRibDaybpI92tIFZkZ3jm765B@vger.kernel.org
+X-Gm-Message-State: AFuF++m3p1R7qBcsSfgQeCeYXaiKVYtGicRkknhNQcdwcLR+DZAPMG3K
+	mGcgZ8jq3qRQ7AyQouYKoQJVnYs7US08XhkJZhB2GVSWYv0TFUF3c7n3
+X-Gm-Gg: AYBFou0ysLx35zL9uVIetsySP2K1Qj9o+e7+JztIVe9EpLtAQwJdy8FzXLD0vpVOwnF
+	7DZzsuXa7eR8xmo6zQbqWk66iWQjz3sIJN0amnxBig5vBUvD6upNfMBP98AtYQ5MAT9A8mumfw+
+	A12UQHOcplE7O16BHZRQMAr4QEEBPav9W9N6yp7UHC7Gvz9ZD2Z3POVxcPdBHXbxcEyOsosYGdO
+	iYcWyKoyW3qk9SGH045aQprtzyQ8ZfrBe6GZTjZdpyQppNITZ6zH1eknUVGCLDJysZJBhqJ0nqg
+	/5HUPV5snd3LnruMSapOf4Cx+uLpgTXqAkzjGxzG0zvxaE9Y3YDqmuJ4GI6Hvwppvq/4MypFMwg
+	8pYKZE0VJIjp07ztT1wLgdvo6Ef9EwdEN25X3H9dUs67/A62LHtqcRvLxNbKKr12Uwkayz3UiJm
+	knoHYO/3B4fq5SXMfFz4Tj8sI0uDLaHnsPcIDbdLjf3le97bepVAo6oC+wj4+cGufreA==
+X-Received: by 2002:a17:90b:560d:b0:39b:3109:10ce with SMTP id 98e67ed59e1d1-39e1e45cbaemr7258907a91.16.1789577170531;
+        Wed, 16 Sep 2026 09:46:10 -0700 (PDT)
+Received: from jm-X870 ([2001:e60:20dd:7c28:de1c:fff7:d3a4:d8c7])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-39e3617443asm292100a91.9.2026.09.16.09.46.04
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 16 Sep 2026 09:46:09 -0700 (PDT)
+From: Jaemyung Lee <ldc.jml@gmail.com>
+X-Google-Original-From: Jaemyung Lee <jaemyung.lee@samsung.com>
+To: Bean Huo <beanhuo@iokpp.de>
+Cc: Jaemyung Lee <jaemyung.lee@samsung.com>,
+	Andreas Hindborg <a.hindborg@kernel.org>,
+	Miguel Ojeda <ojeda@kernel.org>,
+	Boqun Feng <boqun@kernel.org>,
+	Gary Guo <gary@garyguo.net>,
+	bjorn3_gh@protonmail.com,
+	Benno Lossin <lossin@kernel.org>,
+	Alice Ryhl <aliceryhl@google.com>,
+	Trevor Gross <tmgross@umich.edu>,
+	Danilo Krummrich <dakr@kernel.org>,
+	Daniel Almeida <daniel.almeida@collabora.com>,
+	Tamir Duberstein <tamird@kernel.org>,
+	Alexandre Courbot <acourbot@nvidia.com>,
+	work@onurozkan.dev,
+	linux-kernel@vger.kernel.org,
+	rust-for-linux@vger.kernel.org,
+	linux-block@vger.kernel.org,
+	linux-scsi@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org
+Subject: Re: [PATCH RFC] drivers/rufs: add Rust UFS host controller driver
+Date: Thu, 17 Sep 2026 01:46:01 +0900
+Message-ID: <20260916164601.2562349-1-jaemyung.lee@samsung.com>
+X-Mailer: git-send-email 2.55.0
+In-Reply-To: <4c38f13af8f75020fefc35827463e9bc643b99f4.camel@iokpp.de>
+References: <20260912-rufs-private-v1-1-716db733e655@samsung.com> <4c38f13af8f75020fefc35827463e9bc643b99f4.camel@iokpp.de>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v7 00/12] crypto: qce - Fix crypto self-test failures
-To: Bartosz Golaszewski <brgl@kernel.org>
-Cc: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>,
- Thara Gopinath <thara.gopinath@gmail.com>,
- Herbert Xu <herbert@gondor.apana.org.au>,
- "David S. Miller" <davem@davemloft.net>,
- Stanimir Varbanov <svarbanov@mm-sol.com>,
- Eneas U de Queiroz <cotequeiroz@gmail.com>,
- Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>,
- Eric Biggers <ebiggers@kernel.org>, Bjorn Andersson <andersson@kernel.org>,
- Konrad Dybcio <konradybcio@kernel.org>, linux-crypto@vger.kernel.org,
- linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
- stable@vger.kernel.org
-References: <20260910-qce-fix-self-tests-v7-0-cdbd2718af14@oss.qualcomm.com>
- <7e1b4800-258b-4410-8e88-2ce49505689e@gmail.com>
- <CAMRc=Mdd-_t4HniR0k-xhyS4aMD1gnqJPYgS2cEY81b0dwDZGA@mail.gmail.com>
-Content-Language: en-US
-From: Demi Marie Obenour <demiobenour@gmail.com>
-Autocrypt: addr=demiobenour@gmail.com; keydata=
- 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
- +MYSfkEjBz0E8CLOcAw7JIwAaeBT
-In-Reply-To: <CAMRc=Mdd-_t4HniR0k-xhyS4aMD1gnqJPYgS2cEY81b0dwDZGA@mail.gmail.com>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------3xXgf3kbCf0caq6YE31E0Mh9"
-
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------3xXgf3kbCf0caq6YE31E0Mh9
-Content-Type: multipart/mixed; boundary="------------dkM26DHH2Ls9uC8sbskWeJcz";
- protected-headers="v1"; hp="clear"
-Message-ID: <157aa2cc-65b3-4d89-aa5e-eccd87296293@gmail.com>
-Date: Wed, 16 Sep 2026 12:45:40 -0400
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v7 00/12] crypto: qce - Fix crypto self-test failures
-To: Bartosz Golaszewski <brgl@kernel.org>
-Cc: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>,
- Thara Gopinath <thara.gopinath@gmail.com>,
- Herbert Xu <herbert@gondor.apana.org.au>,
- "David S. Miller" <davem@davemloft.net>,
- Stanimir Varbanov <svarbanov@mm-sol.com>,
- Eneas U de Queiroz <cotequeiroz@gmail.com>,
- Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>,
- Eric Biggers <ebiggers@kernel.org>, Bjorn Andersson <andersson@kernel.org>,
- Konrad Dybcio <konradybcio@kernel.org>, linux-crypto@vger.kernel.org,
- linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
- stable@vger.kernel.org
-References: <20260910-qce-fix-self-tests-v7-0-cdbd2718af14@oss.qualcomm.com>
- <7e1b4800-258b-4410-8e88-2ce49505689e@gmail.com>
- <CAMRc=Mdd-_t4HniR0k-xhyS4aMD1gnqJPYgS2cEY81b0dwDZGA@mail.gmail.com>
-Content-Language: en-US
-From: Demi Marie Obenour <demiobenour@gmail.com>
-Autocrypt: addr=demiobenour@gmail.com; keydata=
- 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
- +MYSfkEjBz0E8CLOcAw7JIwAaeBT
-In-Reply-To: <CAMRc=Mdd-_t4HniR0k-xhyS4aMD1gnqJPYgS2cEY81b0dwDZGA@mail.gmail.com>
-
---------------dkM26DHH2Ls9uC8sbskWeJcz
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 
-On 9/15/26 05:42, Bartosz Golaszewski wrote:
-> On Fri, 11 Sep 2026 20:34:39 +0200, Demi Marie Obenour
-> <demiobenour@gmail.com> said:
->> On 9/10/26 09:00, Bartosz Golaszewski wrote:
->>> This iteration - in addition to the previous fixes - proposes to spli=
-t
->>> the QCE driver into a core part necessary to bind to the QCE DT node =
-and
->>> enable runtime power management in order to allow to drop the
->>> interconnect votes, and the crypto part registering the crypto
->>> algorithms. The core module is then enabled in arm64 defconfig while =
-the
->>> crypto part stays disabled by default.
->>>
->>> The QCE hardware crypto engine has several limitations that cause it =
-to
->>> produce incorrect results or stall on certain inputs. This series fix=
-es
->>> several bugs and adds workaround allowing the deiver to pass crypto
->>> self-tests.
->>>
->>> The failures addressed are:
->>>
->>> - HMAC self-test failures for empty messages
->>> - AES-XTS returning success on zero-length input (should be -EINVAL)
->>> - AES-CTR: partial final block causes the engine to stall, output IV
->>>   derivation was incorrect
->>> - AES-XTS with key1 =3D=3D key2 is not supported by the CE
->>> - AES-CCM: partial final block and fragmented payload both stall the
->>>   engine
->>>
->>> All fixes were tested on an SM8650 QRD board with
->>> CONFIG_CRYPTO_SELFTESTS=3Dy and CONFIG_CRYPTO_SELFTESTS_FULL=3Dy.
->>>
->>> Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.=
-com>
->> For stable, would it be better to not register the algorithms, thus
->> preventing their use?  Another option would be to replace the whole
->> driver with an always-on stub driver that just does power management.
->=20
-> A module parameter called: really_register_algos that's disabled by def=
-ault?
->=20
-> Bart
+On Fri, 2026-09-11 at 23:44 +0200, Bean Huo wrote:
+> You still use scsi everywhere in your implementation protocol/scsi.rs
+> builds READ_10/16, WRITE_10/16, SYNCHRONIZE_CACHE and UNMAP CDB, so
+> "decouple UFS from SCSI" really means "copy a small part of sd and the
+> SCSI error handling into a UFS driver." while JEDEC defines the UFS
+> application layer as SCSI, the SCSI work doesn't go away, you just move
+> somewhere else, and it has to be written again.
 
-Works for me!  If you add that and fix the tests, go ahead and revert
-my patch that marked it as BROKEN.  I suggest reverting the defconfig
-changes too, for power management reasons.
+I agree. By "decouple" I meant independence from the Linux SCSI mid-layer,
+not removal of the SCSI command set from UFS.
 
-While the driver is buggy, you might want to add a kernel taint if
-the option is set.  There's precedent for that in other parts of the
-kernel.
---=20
-Sincerely,
-Demi Marie Obenour (she/her/hers)
+The current RFC has CDB construction and only a small part of completion
+disposition. It does not yet implement enough sense, retry, recovery, and
+disk behavior to show that the complete UFS-specific version is smaller or
+simpler. The cover letter stated that conclusion too early.
 
---------------dkM26DHH2Ls9uC8sbskWeJcz--
+> The "friction" claim is weak. SCSI has already been changed to fit UFS.
+> Two examples: UFS now uses SCSI simple copy, group number in scsi write
+> command.
+>
+> I doubt how far this can go. do we really need to pay effort for a new
+> RUST UFS driver, I am not very confident, unless SCSI is removed from the
+> UFS spec and JEDEC defines native UFS commands, or we talk to the device
+> directly with UPIU. please name the JEDEC feature that the SCSI midlayer
+> really blocked, or that was historial issue which has been fixed.
 
---------------3xXgf3kbCf0caq6YE31E0Mh9
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature.asc"
+Also fair. I cannot currently name a public JEDEC feature that was
+shown to be impossible to implement because of the SCSI mid-layer.
 
------BEGIN PGP SIGNATURE-----
+One of my main motivations was the amount of cross-layer reasoning needed
+for product EH and PM problems. In product work, I often had to follow UFS
+state, generic SCSI recovery state, block queue state, and device-PM state
+together. That experience is a reason to investigate another design, but
+private product experience is not proof that the upstream architecture is
+wrong.
 
-iQIzBAEBCgAdFiEEopQtqVJW1aeuo9/sszaHOrMp8lMFAmqqx78ACgkQszaHOrMp
-8lOXMg//YUoYq1jOWJhfaYWrvjJUWr4wIsMXxR7r4HrvqRlmSA7MysXs6nyT2/YS
-0jq8PO5/hR7WNnQIKLnWOvCuVJAvftfLKXla2X2W+PUdjP6o7Z1B9w087OGk9RWL
-iPMCo8p4RkK0m+eJs4FNBLV71Xi24ivv0/2o2ixyJSOH939/Xa8x3ndW3SGajA9v
-ErJFDlD0nIpDNVk4lY/meOVy1Na/JTujjboJBcqqlkQcfATgqNkPepwqJCnYbe6w
-SeqfPMOlG7LqzBU7FL7ZIbo5sRBLqU1qmAQ4qlVyRcvr3nuNsHku2u8/kMNFLB4n
-cxM+PwZ+5LPhV50Cic/INKASvblYZ7sGkFMgjHP9sSiFctYUPylsm1jbHCl6rt3U
-qRWqZURLgrV6AmSbb9wFPkmUeVdHyVq7ZiCzoXtpVTPJ3j8Epdx0B/M7gzTrmF5Q
-4VyeVVbEap8sRQrJYmAbZtzlRppZMUQjMi7ZrAvg+r/FmTxcHGknFBZ9UGRgT/7Y
-EYMBMuUCOGlos+6qS2PXLV3Onsi+olovwhrR45EffzBTSzopqX6EQDxZcQS04mVa
-fJk8NcewRI9vnOoeJR7jsFhUlY0HSo7Xf1LShGGHEKGJB9nrDylccN4HqI/U6lI+
-Ued2Zg9qqzbB/KIOZlyMWhn9FulgcVI84kpEsPXlWfTLt+f2NrQ=
-=Uo2z
------END PGP SIGNATURE-----
+> I would also like to see the heavy and hard parts, because they are the
+> parts that decide if this design worrks:
+>
+> 1, error handling: abort, LU reset, retries with limits, sense decoding,
+> this is the very hard part of UFS driver.
+>
+> 2, user-space tools interface: SG_IO and bsg (sg3_utils, ufs-utils, FFU
+> with WRITE BUFFER), and the UFS sysfs tree..
 
---------------3xXgf3kbCf0caq6YE31E0Mh9--
+I agree. These are architecture requirements, not small follow-up features.
+Before claiming that standalone is useful, the design needs to cover
+timeout, abort, LU and host recovery, bounded retries, sense and Unit
+Attention, late completion, DMA safety, PM-aware recovery, and request
+disposition.
+
+I think the next step should be to document these responsibilities and
+compare the standalone design with improving `ufshcd` before completing a
+second implementation. If RUFS only reproduces the same behavior and
+complexity, the standalone design would need to be reconsidered.
+
+> Did any AI tool help write this code? If so, please add the Assisted-by:
+> tag.
+
+Yes. An LLM helped during reviewing, testing and preparation of the
+submission. I will add the tag required by the current kernel documentation
+in the next revision:
+
+Assisted-by: LLM
+
+Regards,
+Jaemyung
