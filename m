@@ -1,614 +1,282 @@
 Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8A87D43BDB8
-	for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 13:17:58 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 740BD4A261D
+	for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 13:22:50 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789564681; cv=none; b=iHECPbq06IKNAy3/48xhq7vhFRLS18aa3419fiLUc/BQMBZ5dJ/lhon65D06pe5o8GKXmX6JwNgAXP1bhLwI8VQE/xY79gbFBlcihNlGi+Yr5bdERBZBZUtvGRiC8q14TMJPsEkkHAkb/5qbo+NWGv2dTcFMEH9unr2b5UxbCCg=
+	t=1789564973; cv=none; b=hrl0Al3fFAtSxROPNW0TwRSKS8pNHl8tOjPPZbv3HOf+QfhGSpNgzS2UF72xJjSSH+PNBLzN2+Q6tAjmQsLqeEAfAXig8710ga/EAZBQz3W4iM5vJfU+ugO3CL30CpOm1e3xwT+F11kOMisfTox9is4ghEbTUTWFv+UFE8luj7U=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789564681; c=relaxed/simple;
-	bh=ZdzVUdKGuJbuUdoreohnBiST/+zqsZ7fJOFBCLD4adc=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=pni5G0mFHhDVMXSS4U0N2ekag1MDGSqyi3cyiNfFTB3c5Dnu3H277KITBumvEfnx8CZ1l/4YDuIcQkQtb5PHL4vnD4lX57a7WDYyP4Qe48J+wNdfdo5Un/1BJCyd5OBYKwk+1EmlwyvyFeqW6dNeUbzmCIef9kyVTxm6/076Myc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=VAMPfih0; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=VarpQK+N; arc=none smtp.client-ip=205.220.180.131
+	s=arc-20240116; t=1789564973; c=relaxed/simple;
+	bh=5soaOGZObSNGOcK95ZhMd5l24sDwrTJqxb1rZikxyIE=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=gpgiBRHThWEfeBEg1SkYy0D9hh+SgYto8stikim8ssWlB4kgG9fgjw7+YvjWqFHD3a99IrKPYBAqyxS1cZcOA7ZvQG8yH3KWMfMPQOZcWAIBisg/El38416Jo8lcXpW4wlKUpOTb5o2VzmuLPXlWM03w/uiNdhXIYND5nrMuH6o=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=mZPApaZ0; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=GUZfB6xt; arc=none smtp.client-ip=205.220.180.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="VAMPfih0";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="VarpQK+N"
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="mZPApaZ0";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="GUZfB6xt"
 Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68GCYq902692101
-	for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 13:17:57 GMT
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68GDJA9H2788782
+	for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 13:22:48 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-type:date:from:in-reply-to:message-id:mime-version
-	:references:subject:to; s=qcppdkim1; bh=yHQkyirFPIu+CFaQpPRRHR+t
-	zp1hZeQhJ1UaJsGSR1g=; b=VAMPfih0goi22Z0aWtSxuhw4Jyda+9mxnrrcdGZY
-	vpMYK9aMthR0/PvazPIO0VNwwamHfBAlasf56SHfxpksZ4h/PHKWzmSpEOq9LagU
-	Bo9azOVETATjKkpPmtmmof3F4FyF3KTrHEVXVuRmNMzI/v1ZtSmt1YoQXUuAjytj
-	sA4FYrEW9hTmilr8AxBKcfedvNBIA2mBf4c6iMVY0vfxy+RjwnL6RUJk6L/Aa28w
-	oqBfh/vX94TkJpYgzr4qredsXjtKcncjT6bHgolMXZiBNw4an403YOrY2TSJD1qh
-	gBVs8T6cVaCRM/diwHj6OL7okotKrYFWNjP2T3Ci3qD3fw==
-Received: from mail-vs1-f70.google.com (mail-vs1-f70.google.com [209.85.217.70])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gqah9vfru-1
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=68DVc1Rw7Ic9+mA58NCJ+S
+	OpY/N/DIaqlcODSFHBDqQ=; b=mZPApaZ0z4BcdwcaJcTb44icMDBjJOEfzL8rJx
+	dFqU30MCM0qFW4eCgiB7/eAz2g0192qJnpfb02SLJF2BbxVEdIVtaw9RYTLI1M1Y
+	SC7L+97UUtwITvk+Yx98INU0UDgRfaAiX9oU4sWFNtbTXCjFyuzl8QTG9/koU6Rz
+	D1BSbFCwuHrtCK4YKfAS9D25qxweiEp9XTH0dj/3BSbch2cFnpOrC9TC1dlAijGv
+	82rKZOs5ZA1A75JCuvM7udcWw5VI/83tqTwVrfxat99wV4cgoSTRvWWg+SMQ8Fkc
+	maoyBBVs/dqTIgso4JjUiPF23RG2uRM9L2USBTDNCPsOQVmQ==
+Received: from mail-vk1-f197.google.com (mail-vk1-f197.google.com [209.85.221.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gquw2r0hn-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 13:17:56 +0000 (GMT)
-Received: by mail-vs1-f70.google.com with SMTP id ada2fe7eead31-79285c98038so4764161137.1
-        for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 06:17:56 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 13:22:48 +0000 (GMT)
+Received: by mail-vk1-f197.google.com with SMTP id 71dfb90a1353d-5c82ad4977dso6197594e0c.2
+        for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 06:22:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1789564676; x=1790169476; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=yHQkyirFPIu+CFaQpPRRHR+tzp1hZeQhJ1UaJsGSR1g=;
-        b=VarpQK+NYvFB6t4692XPjE4Z64UoN9wF0L+16JPm0KP14V+EgRpCGMDCkkD4u/EdTT
-         UvPz9BBbkkPKtjIEX08Lng0qqvDIlx05jjaZbnUbYXBc9dAUB8w66fKQa1ltqzlMa0eY
-         1Glmy+h3Rl9v2iVpUFIPx/3Vb/RoMGEd8yruekzC0g35zmH4RZEce/mT6SVTY7ZrvEc0
-         R1JMFznbheGnwKLX8RhwOOaMf2bWgCw29WoAeZBusdEfIoeFmrgIDGyiHEWTSHd4V4Kx
-         fmaWNVYYBIn9HOvlCLEI1CiQbgTbt7R8oL8lK8BLNzg+5QkRKqUMwOL9b+BIJQyPZAjM
-         XSvA==
+        d=oss.qualcomm.com; s=google; t=1789564967; x=1790169767; darn=vger.kernel.org;
+        h=cc:to:message-id:content-transfer-encoding:content-type
+         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=68DVc1Rw7Ic9+mA58NCJ+SOpY/N/DIaqlcODSFHBDqQ=;
+        b=GUZfB6xtS4ydS37uNCilKhv/v+dO8qda+qJNDQYriskw7SZ6TvtefW/hTrQl1p90qY
+         vl2/lE6Mn+68Xb4RwMzuKjPPPirk24xEPNrUZGBoJ9FAO1S0be2BWXvuYWUx7UtxZeNv
+         EbK23yOWoJNZq4g/CZ8L+7mPjp1KOjF8r73UYx8v5qJpelZHmsVBGuyVi5T/oC8Z5brS
+         GH7tU2YZhUj7uTYhEbKnBJ2WhTBuFhcZj2bSL55reWj+CTp5l/finqNRhy6945AZL19V
+         BZg/KFj972DIR8reCUrMZXc0RhiSkccaTaTxvPKYkw2MrI1Gcwn/lwv9uYFOejk/WPKr
+         Qrcw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1789564676; x=1790169476;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=yHQkyirFPIu+CFaQpPRRHR+tzp1hZeQhJ1UaJsGSR1g=;
-        b=uLRxpz7nFZOhQfczWtyeiG1r++J0rrC5TMfvn/dIzXoFxtOZTkAwDstaekKQskSkqh
-         lJMpcmJ6xI4lRC0HmyVdQzXr/fzNuCxvfgGufDKmMlB+h6ZdAjHwX60cCL2ETw+H6IQg
-         i+tSDzKr97/rGslhlJZBE4olpu7bPxJAVoz0XR4FGIDc12rnhzVqpS658KWj6nA9r28y
-         eX3CaamjuYMhlFNhvFsOMqkXiISiP13l+sRI6ITzYR8dc1pFAuZZAqtceuuHvcAkmFsc
-         JdCa9kZlM9L6w+XNz/0HBJ3u09E8Ebs93kdEFjTB+6oa2PYfGgrt1YJYhT+TZjTy5V/g
-         m7ag==
-X-Forwarded-Encrypted: i=1; AKwUvBysCj839U2O9EcaMmDy+ByZFXq/UjbaeBgvG9U6lkz3AJZc1Mu9Zj6OQ8ulS3n0+0TsdQvJusRFxdou1iYZ@vger.kernel.org
-X-Gm-Message-State: AFuF++mCzPG6EGi36cWSqXyjF5k7RkZJCOKLm/k+e66Vwub69eHl4Ige
-	Caz5UFFhNXFww2LRkNNGCsLnGjrI1YmXjU6YaJEY6VsNtp1iBeU2f2thaPnikSD8w54wNUUikHj
-	+yp91M+E56IN3VP5zm6tcG2y6XcY+lMcRIFL0JFCYO3Haf9mREjplsc2M7eVxLOlrFgN+
-X-Gm-Gg: AYBFou13/zY3znwBN4IJtPeIucrRCi88QgmPVf6SYPblRF8BYrWcJ0x8ijXHvCD9HtI
-	UCS8nhmXwLLSoOIM3bu4BaLHe018QlZlURi9KFlOAM1jo8CxTLbbSspGYmgge5Dw/LUpJ9xIlEA
-	wqffJTcrwc+mWhpHa1B2HJjT+qAH0thhcTjjuKaPOYkXNceNmfDXnBVc8/jUusf/gk1O3sptJVQ
-	3dw2YoYORl+vsMq/hGAZcVZrWOW5rlH9Qv8gzCur7kQn12LoDeqUzG+lPLu3Aeun93Z954YdObr
-	Bgon+WUSf+f5xVeh8DsncffwtzlBNgvNzH54RSsLw0uRMeEyQfV33zoJYy1mMDcuMDc4kXhA1ll
-	c54dfG2DsnB9EBAZ7g0RcH9Q90pozllP0kcIU2s60rb3/xKYnBe1DFg==
-X-Received: by 2002:a05:6102:161f:b0:79e:cc38:c40b with SMTP id ada2fe7eead31-7a0285a1f25mr2822388137.11.1789564673603;
-        Wed, 16 Sep 2026 06:17:53 -0700 (PDT)
-X-Received: by 2002:a05:6102:161f:b0:79e:cc38:c40b with SMTP id ada2fe7eead31-7a0285a1f25mr2821480137.11.1789564668396;
-        Wed, 16 Sep 2026 06:17:48 -0700 (PDT)
+        d=1e100.net; s=20260707; t=1789564967; x=1790169767;
+        h=cc:to:message-id:content-transfer-encoding:content-type
+         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to:content-type;
+        bh=68DVc1Rw7Ic9+mA58NCJ+SOpY/N/DIaqlcODSFHBDqQ=;
+        b=vGOXnDIfBJrHNHiVDA4uNpKVwlZekhpsGcFjYABM1xZ16/miuQp3d4HjN+8u9ngLsh
+         RO61xEVL+M9u5msLedEZEr5ao3hdj9enMu5Pwpmm1CXB7QbV8FsK3zAGTW9oDChWQtPN
+         lHAY8aPQLpy2DtvJcJsCxEimXTsHuRoBcZU8rFAKHZzVLU/sx6VZemd/ORj+f4b5tyTF
+         /H35vAD/jT5Cm4Px1bhynqTyB/GWjE47B27BFQzcbBQFs60NvQ1TPEhIyCQ0kq0AUSDj
+         +PdR6KyiGr+pjWiSrkQq+aYpj0phZNVLO2MKklhOZqqUhrzb76YG4IkiRlxkNQAdminK
+         +ZgQ==
+X-Forwarded-Encrypted: i=1; AKwUvBwZ5BCcTupW7ZcIe0beCVZRLERGd9/yY2oPA1BGj/F43jlrSd2yyVYNDUfx2LZ1PeXYqsFX7C7UDlAZusx0@vger.kernel.org
+X-Gm-Message-State: AFuF++kh7nGsnfDTirIh9Je2o9HtZGUXrH1XdbaJZr/Dvl8j61V4x2jS
+	I6Fn/3ov3+zJdku1t7x5BaMN6nnrZJsN2NigywQMt/Oz2WxXQmUePS0hFamy5JOXjrQOsR55Ips
+	Wd3HsbiBMg6MjpRdjAiI/QdndZTZ1FerzU4RtAGZUjhoG2197Op5aphuqQNs58f8+usVpqzSGuK
+	er
+X-Gm-Gg: AYBFou3nWPwna2AwBBc0tBi5zsj4h64s+RGJISq1nak8+yfGIUcuqiZz0YIUfKrdOes
+	IPJUFEHq5ydbfcv9E4R+JgbLRxV210Fz6ssNirltj2amyGuVQYh2CYGPaBx+Xz2y9eLa7WjUhBw
+	/lS2Jrh99r9fzkHPjQ+tNaqJF8RMrEpu+reiQ+5ZDf5JKD1KCKqqr65+Sk1TVUSDipPjUzQh4K9
+	c002IS6KwH2VztipPkyfaE1GbUPP4hfTXtcn/ryMTA4mJqpYuGzHnW/Uc9slbUKtkLAvmimLYBa
+	7PTbdzEQeEvmqV8W03aa/2i4LA84xOeHlctJ4XZGmm4hP8MrXQvrj68QyiZm5VX7GTuKaNj11sK
+	SulqtzVj57rVZYTbN/LorRZTYv0SJXwfF7Bl8/EbQ8xKmedMIMLUwJh0KmA9GB/KB9RZUWNl0Ow
+	IELZ/YeS1c1mnk
+X-Received: by 2002:a05:6122:4d09:b0:5bf:9461:91d with SMTP id 71dfb90a1353d-5c99ae6afa6mr2586495e0c.5.1789564967384;
+        Wed, 16 Sep 2026 06:22:47 -0700 (PDT)
+X-Received: by 2002:a05:6122:4d09:b0:5bf:9461:91d with SMTP id 71dfb90a1353d-5c99ae6afa6mr2586380e0c.5.1789564966816;
+        Wed, 16 Sep 2026 06:22:46 -0700 (PDT)
 Received: from umbar.lan (2001-14ba-a073-af00-264b-feff-fe8b-be8a.rev.dnainternet.fi. [2001:14ba:a073:af00:264b:feff:fe8b:be8a])
-        by smtp.gmail.com with ESMTPSA id 38308e7fff4ca-3a5daf0dbacsm5894961fa.4.2026.09.16.06.17.44
+        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5b8b57e0bdcsm849631e87.58.2026.09.16.06.22.45
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 16 Sep 2026 06:17:47 -0700 (PDT)
-Date: Wed, 16 Sep 2026 16:17:43 +0300
+        Wed, 16 Sep 2026 06:22:45 -0700 (PDT)
 From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-To: Harshal Dev <harshal.dev@oss.qualcomm.com>
-Cc: Jens Wiklander <jens.wiklander@oss.qualcomm.com>,
-        Sumit Garg <sumit.garg@kernel.org>,
-        Amirreza Zarrabi <amirreza.zarrabi@oss.qualcomm.com>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Basant Kumar <basantk@qti.qualcomm.com>,
-        Apurupa Pattapu <apurupa@qti.qualcomm.com>,
-        Arun Kumar Neelakantam <aneelaka@qti.qualcomm.com>,
-        op-tee@lists.trustedfirmware.org, linux-kernel@vger.kernel.org,
-        linux-arm-msm@vger.kernel.org
-Subject: Re: [PATCH v2 0/6] Add TEE based client driver for UEFI Secure
- Application
-Message-ID: <lby2euy3igp6m5mnt5tdmn6njpmnpoebxiqwtcsmbfl4o25maj@o72kavh7vwyv>
-References: <20260722-qcom_uefisecapp_migrate_qcomtee-v2-0-b8a8fcbe4211@oss.qualcomm.com>
- <nfijwr2ptpxqvdw625yedep7tmakwvkeavyeobrmig5hbkw77w@rcqyp7h4y327>
- <db27820a-2b43-45e4-bc4a-0e9e81aacd93@oss.qualcomm.com>
- <oicbypv7rpxmweclopi5xxpcfq5chnypp5tlqd4uix2pm5e72f@kd3bibeximjq>
- <10a091a4-89a5-4a0c-820d-c5b91dd52529@oss.qualcomm.com>
- <wjzuf7regh2rvrt3spkesp3qanooiqpkua6f7mgq6ulw5z3hvp@q2fkcu2bueow>
- <ab7b94aa-6d9a-41b2-97fd-601db1cab5e6@oss.qualcomm.com>
+Date: Wed, 16 Sep 2026 16:22:41 +0300
+Subject: [PATCH] drm/vblank: serialise drm_crtc_next_vblank_start() with
+ vblank_off
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <ab7b94aa-6d9a-41b2-97fd-601db1cab5e6@oss.qualcomm.com>
-X-Authority-Analysis: v=2.4 cv=BtkIUoX5 c=1 sm=1 tr=0 ts=6aaa9705 cx=c_pps
- a=N1BjEkVkxJi3uNfLdpvX3g==:117 a=xqWC_Br6kY4A:10 a=kj9zAlcOel0A:10
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260916-vblank-deadline-lock-v1-1-df377ba7f184@oss.qualcomm.com>
+X-B4-Tracking: v=1; b=H4sIACCYqmoC/yXMSw6DIBRG4a2YO+5NgIGvrTQdIPzVqwQbsKaJc
+ e+ldfgNzjkoIwky9dVBCbtkWWOBvlXkJhtHsPhiMsrUqtM170OwcWEP64NEcFjdwo1pvFPQrUF
+ HJX0lPOXz394fl/N7mOG234vO8wt3eFXzeAAAAA==
+X-Change-ID: 20260916-vblank-deadline-lock-727dc0e182e9
+To: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+        Maxime Ripard <mripard@kernel.org>,
+        Thomas Zimmermann <tzimmermann@suse.de>,
+        David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+        Rob Clark <robin.clark@oss.qualcomm.com>, Sean Paul <sean@poorly.run>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        Akhil P Oommen <akhilpo@oss.qualcomm.com>
+Cc: Simona Vetter <simona.vetter@ffwll.ch>, dri-devel@lists.freedesktop.org,
+        linux-kernel@vger.kernel.org, freedreno@lists.freedesktop.org,
+        linux-arm-msm@vger.kernel.org
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=openpgp-sha256; l=5512;
+ i=dmitry.baryshkov@oss.qualcomm.com; h=from:subject:message-id;
+ bh=5soaOGZObSNGOcK95ZhMd5l24sDwrTJqxb1rZikxyIE=;
+ b=owEBbQGS/pANAwAKAYs8ij4CKSjVAcsmYgBqqpglQSjO+6xtzyVKICjcTKfd5SgJbHOoriZi3
+ 25Jw2IDmQWJATMEAAEKAB0WIQRMcISVXLJjVvC4lX+LPIo+Aiko1QUCaqqYJQAKCRCLPIo+Aiko
+ 1c/PCACWx3UFIaXNQ/810IYFWIDwqKiJ72t+9mR+3+0cWUNYptVdWWpCStHF01mZhGS7CnVrRkT
+ 62oyotOiXYYAKTS0Wsi6ptI8mzwgU2PV8mjECFJ77ULc2xTu6znRlmhD4op9ZSWsaZFNKK9mBX8
+ FgtPHA3qZA+t6QmgysZ770Fxz1v5omQQZVi91u8A75vFxtEeD1VAlHQvtUDXw9QcWStkt0fWz2t
+ 7KdJLw8p2C8AgszW2dmahLVJU0xPpr1wSRopl9r4LHj8S+W2T0IeO+tP+BGqR0XWmzEbxmg39DO
+ PgU3lVtTEe5sEdL3TWlOru2nGIbyczeG3TCcem+Ku4AtndLm
+X-Developer-Key: i=dmitry.baryshkov@oss.qualcomm.com; a=openpgp;
+ fpr=8F88381DD5C873E4AE487DA5199BF1243632046A
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTE2MDE3NyBTYWx0ZWRfXyk9hNVINuunp
+ IX6DGMcw9AeYJBCBBJDMjdRid+cK/WNJq1esgw9Yz7GsyZoY/FbLvvmBLTqWGixUX72ZO8XXrxQ
+ m9bumsfpgD8QV4FIgUeabfeGAx/yDuQ=
+X-Proofpoint-GUID: S0Zmdh-IRfxLb1vloZOWVTsV6Yx9H-5T
+X-Authority-Analysis: v=2.4 cv=N4m8hG9B c=1 sm=1 tr=0 ts=6aaa9828 cx=c_pps
+ a=JIY1xp/sjQ9K5JH4t62bdg==:117 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
  a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22 a=P-IC7800AAAA:8
- a=NEAV23lmAAAA:8 a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=7Qg-RMaVp9VtV8b7jR8A:9
- a=CjuIK1q_8ugA:10 a=crWF4MFLhNY0qMRaF8an:22 a=d3PnA9EDa4IxuAV0gXij:22
-X-Proofpoint-ORIG-GUID: FU1sdIQAc7-cF1c1cU21cDBTFWowMogQ
-X-Proofpoint-GUID: FU1sdIQAc7-cF1c1cU21cDBTFWowMogQ
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTE2MDE3NyBTYWx0ZWRfX+Rd71AMLhw67
- 1DMVunBXdNauTh2HncVem2VTHjkWfg2iQ2LfKpQdZ3QMKBprniYQJkJwGTbvs4nOcggzSIzTTA7
- /YDFZ0T7j2j1gocyrJLuBzsgx8XMsGfyHhXtGeCHRcA7YNcOhLSmSloMdZ8mRpe5XhL+azkQHks
- JSGpcvBhzIuRkIiswyMm8nmMdhUTGRNrh4MluuHIY2OhyKiUkkz4iP5705hDVyViIq4Y8HAZ8Hi
- +Ssd3dOg0RYWlokFr+gZ7N1vr3z6JBgQ+0fpT0k3hlis+qSW0X8KZ/RvIpT7r6c4SmxU2rvX4wm
- s7iVe6nzDNdilte1pNcBWmDXu/aNtNNDIVvaGhzg9v4OExU+fXRnkKFGDq211xEzPP3f9VVchT/
- I8t2ULtzJBY3G02A+62uRA4u97d1Z2J2kOE94SWp0cbtSeU6neZFNBMDE92tJEdjCN3Mjiksx0X
- j320PSJjlG+0gxlPjzQ==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTE2MDE3NyBTYWx0ZWRfX/mKT4dWidlei
- l/QSju6Qeg0SeTqYwTGoDCK/4g926OFJlROvIwopy+EvPEDn+HLHCTkWGLEbXY8QR7341jLb4gu
- jxKynPEJrb4VnEDLX1OU3qO6QcoJOxs=
+ a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22 a=e5mUnYsNAAAA:8
+ a=EUspDBNiAAAA:8 a=ZQ5kVCjTFVWBDE528uIA:9 a=QEXdDO2ut3YA:10
+ a=tNoRWFLymzeba-QzToBc:22 a=Vxmtnl_E_bksehYqCbjh:22
+X-Proofpoint-ORIG-GUID: S0Zmdh-IRfxLb1vloZOWVTsV6Yx9H-5T
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTE2MDE3NyBTYWx0ZWRfX9+YrkMsuwNPI
+ Bp1pJgIwfDimibilDPLjm5QWZYLfggOT3l3GwoYLyG0yGp8hFmO50i6eTPWFUnPEvVMSQgBdJc0
+ uqnDeZxdhtuiIv3gqS3qYOomnKENzP/Xv29pwZ1ZV6de2syNroBbfd/uFIqDoajadMPb/PQ7Vyl
+ n0h/5rUNzM239mtuMSgUh9QuO0Jr981qqTEgpqpR/W5LivgYbf1BodYb8LpK2e7PwjGi0iNF5GX
+ yWHZNAHRxo4HKnntVuEq3SnRjs5ZTQIgFINXDousjyVx0rzvGdpKj7FtDjSEvsvrXsZngKKavj1
+ fji8taLL9h06U4ZwHUvye/YzsXwtePpU3Hc6uwu+AgIvN4Y9T3am7pgAntQMv5spdy4YS3hrt1k
+ xy7KkuQtwa7qVtpb3Qk0kMIvjLuo+yFw+41RKbkI1oX42msGfzfepZJsVZ/nQOVGLhqi0JeFnAg
+ XjkflPJAp/w6JArFbtg==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-09-16_02,2026-09-15_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 lowpriorityscore=0 spamscore=0 adultscore=0 malwarescore=0
- impostorscore=0 bulkscore=0 clxscore=1015 phishscore=0 suspectscore=0
+ bulkscore=0 priorityscore=1501 impostorscore=0 suspectscore=0 malwarescore=0
+ lowpriorityscore=0 clxscore=1015 phishscore=0 adultscore=0 spamscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609160177
 
-On Wed, Sep 02, 2026 at 01:41:54PM +0530, Harshal Dev wrote:
-> Hi Dmitry,
-> 
-> On 29-08-2026 08:19 pm, Dmitry Baryshkov wrote:
-> > On Wed, Aug 12, 2026 at 05:00:27PM +0530, Harshal Dev via OP-TEE wrote:
-> >> On 10-08-2026 12:37 pm, Dmitry Baryshkov wrote:
-> >>> On Fri, Jul 24, 2026 at 02:43:42PM +0530, Harshal Dev wrote:
-> >>>> Hi Dmitry,
-> >>>>
-> >>>> On 22-07-2026 01:56 pm, Dmitry Baryshkov wrote:
-> >>>>> On Wed, Jul 22, 2026 at 12:29:11PM +0530, Harshal Dev wrote:
-> >>>>>> On Qualcomm SoC based platforms, UEFI stores EFI variables within the
-> >>>>>> Replay Protected Memory Block (RPMB) which is only accessible by the
-> >>>>>> Qualcomm Trusted Execution Environment (QTEE).
-> >>>>>
-> >>>>> Is it so? I think RPMB is accessible to Linux...
-> >>>>
-> >>>> I should have been more descriptive here, RPMB is accessible by Linux but
-> >>>> its frames can only be prepared by QTEE.
-> >>>>
-> >>>> The RPMB key which is one-time programmed into the storage controller to allow
-> >>>> authentication of the RPMB frames is generated by and only available to a TEE.
-> >>>> So on Qualcomm platforms (and many others platforms with a TEE) Linux can only
-> >>>> route the RPMB frames generated by QTEE to the storage, it cannot create and
-> >>>> write the RPMB frames itself (it doesn't have access to the key).
-> >>>>
-> >>>> While it is possible for Linux to generate/program/store this key, on Qualcomm
-> >>>> platforms we do not want Linux to do so because we do not trust it. We trust
-> >>>> QTEE.
-> >>>>
-> >>>> I will re-phrase this and make it a bit more clear everywhere.
-> >>>
-> >>> OK.
-> >>>
-> >>>>
-> >>>>>
-> >>>>>> For Qualcomm platforms without emulated RPMB support, specifically
-> >>>>>
-> >>>>> What is emulated RPMB support? Why is it mentioned here? Which platforms
-> >>>>> use emulated RPMB?
-> >>>>
-> >>>> Emulated RPMB refers to RPMB on a storage which doesn't have its own firmware.
-> >>>> Primarily, NAND/NOR storage. Unlike UFS/eMMC storage, NAND/NOR storage does not
-> >>>> have a storage controller where we can program the RPMB key to be used by the
-> >>>> firmware. So we must 'emulate' RPMB by moving the storage driver within QTEE
-> >>>> and making the driver hold/use the key.
-> >>>>
-> >>>> Qualcomm compute SoCs (Glymur, Hamoa) have RPMB available on SPI-*NOR* storage,
-> >>>> and a driver for communicating with it is also available in QTEE. And so, these
-> >>>> have 'emulated' RPMB.
-> >>>
-> >>> This needs to be explained in the cover letter.
-> >>>
-> >>
-> >> Ack. 
-> >>>>
-> >>>> I will add this detail in an updated cover letter.
-> >>>>>
-> >>>>>> platforms where RPMB is not located within SPI-NOR storage and instead
-> >>>>>> located on UFS/EMMC storage, non-volatile EFI variables can only be set via
-> >>>>>> a callback request from the UEFI Secure Application to the RPMB service
-> >>>>>> running in user-space (within the QTEE supplicant [1]).
-> >>>>>
-> >>>>> Can it be moved to the kernel?
-> >>>>
-> >>>> We have a plan to move the RPMB service to the kernel similar to OPTEE:
-> >>>> https://elixir.bootlin.com/linux/v7.2-rc3/source/drivers/tee/optee/rpc.c#L449
-> >>>>
-> >>>> It is a work in progress. Once this happens, we don't need QTEE supplicant available
-> >>>> on the Linux distribution.
-> >>>
-> >>> Ok.
-> >>>
-> >>>>
-> >>>>>
-> >>>>>>
-> >>>>>> Unlike the QCOM-TEE driver, the QSEECOM driver (used by the current
-> >>>>>> QSEECOM based uefisecapp) does not support callback requests.
-> >>>>>
-> >>>>> How did it work then? I think Windows has been perfectly using QSEECOM
-> >>>>> rather than QTEE.
-> >>>>
-> >>>> It works because Windows on Arm on Qualcomm has SPI-NOR storage. A driver for which
-> >>>
-> >>> I have WoA devices without SPI NOR. Windows still can store UEFI
-> >>> variables.
-> >>>
-> >>
-> >> Ahh, the key point here is 'Windows'. Windows has a separate way of providing
-> >> RPMB access via a service in the TrEE driver within the OS:
-> >> https://github.com/microsoft/Windows-driver-samples/tree/main/TrEE
-> >>
-> >> However, the Linux QSEECOM driver we have here in upstream does not have that support.
-> >> And so without the QCOMTEE + QTEE supplicant combination, we cannot access EFI
-> >> variables on these Qualcomm WoA platforms when they boot with upstream Linux.
-> > 
-> > So, this must be fixed, I assume? What is the ETA?
-> >
-> 
-> I agree, it will have to be a separate effort. If new firmware QTEE releases are not
-> being rolled out for these existing WoA devices, and if their RPMB exists on UFS/eMMC
-> then the only way to support EFI variable is to:
-> 1. Add support for callback requests in the upstream QSEECOM driver.
-> 2. Add support for RPMB listener in kernel which routes the RPMB frames from QTEE to
->    the RPMB device via the QSEECOM driver.
-> 
-> This is significant effort for supporting a protocol which is deprecated on the QTEE
-> side moving forward. That being said, I do not discourage this effort. We can think of
-> a plan if we really want to support these devices. I will be happy to engage.
+drm_crtc_vblank_off() zeroes vblank->hwmode.crtc_clock to arm the sanity
+check in drm_crtc_vblank_helper_get_vblank_timestamp_internal(), which
+asserts that an atomic driver never asks for a vblank timestamp while the
+mode timings are not set up.  The only caller that can ask for one outside
+the vblank machinery is the fence deadline code, and it decides from atomic
+state rather than from the vblank state:
 
-Why woudln't we want to support the existing devices on the market side?
-I think this boils down to a few questions. See below (where we discuss
-three kinds of platforms).
+  msm_dpu ae01000.display-controller: [drm] drm_WARN_ON_ONCE(drm_drv_uses_atomic_modeset(dev))
+  WARNING: drivers/gpu/drm/drm_vblank.c:756 at drm_crtc_vblank_helper_get_vblank_timestamp_internal+0x310/0x380
+   drm_crtc_vblank_helper_get_vblank_timestamp
+   drm_crtc_get_last_vbltimestamp
+   drm_crtc_next_vblank_start
+   drm_atomic_helper_wait_for_fences
+   drm_atomic_helper_commit
+   drm_mode_cursor_universal
+   drm_mode_cursor_common
+   drm_mode_cursor_ioctl
 
-> 
-> >>
-> >>>> is available within QTEE, and so QTEE does not need to make a callback request
-> >>>> to Linux to request RPMB frame routing. However, in case of UFS/eMMC storage the
-> >>>> driver only exists in the Linux kernel and so QTEE must make a callback request.
-> >>>>
-> >>>> And so, if you try to use the QSEECOM driver to write EFI-variables to RPMB
-> >>>> on a device with UFS/eMMC storage, it won't work.
-> >>>
-> >>> Yep. It seems to work under Windows though.
-> >>>
-> >>
-> >> As explained above, the mechanism is different for Windows. A different driver
-> >> and a different protocol. :)
-> > 
-> > Let me be very explicit here. The path used by Windows is tested and
-> > verified to work on a plethora of the devices. Those devices must work
-> > with Linux too, so, in my opinion, we should use the same firmware path
-> 
-> Agreed, as mentioned above, we can think of a plan to support these devices by extending
-> the QSEECOM driver.
-> 
-> > and the same firmware interfaces as used by Windows.
-> >
-> 
-> The interfaces used on Windows by the TrEE driver are different as per the information
-> I obtained from Windows team. But we don't need to worry about that, we already have
-> QSEECOM in upstream which we can extend.
+set_fence_deadline() skips CRTCs that need a modeset or are not active, but
+both of those describe the commit it is called for.  A cursor update on a
+CRTC that a concurrent, already swapped in commit is taking through
+drm_crtc_vblank_off() has neither flag set, and that commit runs in parallel
+by design: drm_atomic_helper_wait_for_fences() is called before
+drm_atomic_helper_swap_state(), i.e. before commit_tail() waits for the
+previous commit.  kms_cursor_legacy@long-nonblocking-modeset-vs-cursor-atomic
+hits this window.
 
-Also added to the question below.
+drm_crtc_next_vblank_start() cannot spot it either.  It guards on
+framedur_ns and linedur_ns, which drm_crtc_vblank_off() leaves at their old
+values, so it walks into the timestamp query anyway.  Nor would testing
+crtc_clock there be enough on its own: both it and the query read state the
+writer may be changing underneath.
 
-> 
-> >>>>>> And on
-> >>>>>> certain Qualcomm platforms such as the RB3Gen2, attempts to access the
-> >>>>>> QSEECOM interface fail due to lack of support within Qualcomm TEE.
-> >>>>>
-> >>>>> So, I assume, on RB3 Gen2 the QSEECOM doesn't report uefisecapp as
-> >>>>> supported. Does it?
-> >>>>
-> >>>> It doesn't, this API returns -2 if I add RB3 Gen2 in the allow-list for QSEECOM:
-> >>>> https://elixir.bootlin.com/linux/v7.2-rc3/source/drivers/firmware/qcom/qcom_qseecom.c#L46
-> >>>
-> >>> Does it support QTEE-based uefi variable storage?
-> >>>
-> >>
-> >> It does, the QTEE-based uefi variable storage app, i.e. uefisecapp is loaded by
-> >> UEFI on RB3Gen2, however, the QSEECOM interface on RB3Gen2 is broken so it misreports
-> >> it as 'not supported'. But the app is loaded and available, which is why if you apply
-> >> this patch series, you can communicate with it. Just make sure you take the QTEE
-> >> release mentioned in this cover letter.
-> > 
-> > Can't we fix the QSEECOM instead, if one needs to flash another release
-> > anyways?
-> >
-> 
-> QSEECOM is deprecated, requesting support for fixing it is an overhead at this point.
-> Even if we take the time to fix it ourselves, it won't help, because the QSEECOM driver
-> doesn't support callback requests and a path to the RPMB device within the Linux kernel.
+Take vblank_time_lock across the check and the query, and take it over the
+store in drm_crtc_vblank_off(), so the two cannot interleave, and reject the
+call when the mode timings are gone.  Every other reader of hwmode already
+holds this lock, drm_crtc_accurate_vblank_count() already calls into the
+same timestamp path under it from process context, and it is the innermost
+of the vblank locks, so nothing nests the wrong way round.
 
-Why is it deprecated? Maybe it would have been a good start for the
-cover letter.
+This does put the driver's get_scanout_position() callback inside an
+interrupts-off section on the atomic commit path.  That is the same cost
+drm_crtc_accurate_vblank_count() already pays, and it is bounded by
+DRM_TIMESTAMP_MAXRETRIES.
 
-> 
-> >>>>>> On these platforms, a TEE based uefisecapp client driver is required to:
-> >>>>>> 1. Access cached & volatile EFI variables stored in uefisecapp's memory.
-> >>>>>> 2. Ensure persistence of non-volatile EFI variables via writes through
-> >>>>>> the RPMB service hosted in the QTEE supplicant.
-> >>>>>>
-> >>>>>> This series introduces such a uefisecapp TEE client driver for the
-> >>>>>> aforementioned Qualcomm platforms which installs efi-var operations _if_
-> >>>>>> the QCOMTEE driver registers support for an object-IPC based uefisecapp
-> >>>>>> service on the TEE bus during its probe. Only new QTEE firmware versions
-> >>>>>> available at [2] provide this support.
-> >>>>>
-> >>>>> What about existing WoA devices?
-> >>>>
-> >>>> New Windows on Arm devices like Hamoa/Glymur work perfectly fine with existing
-> >>>> QSEECOM based uefisecapp. But they will also work with this new QCOMTEE based
-> >>>> uefisecapp once they upgrade their firmware.
-> >>>
-> >>> Do extisting commercial devices suppot it? For example, does Lenovo T14s
-> >>> support it? Will it continue to work with this patchset in place?
-> >>
-> >> Existing devices like the Lenovo T14s do not have mature QCOMTEE/SMCInvoke support
-> >> on QTEE side and new QTEE versions for it are not being rolled out. However, this
-> >> QCOMTEE based uefisecapp driver and the QSEECOM based uefisecapp driver can co-exist.
-> >> It will not cause any breakage of existing working functionality since the QSEECOM
-> >> path can probe and continue as usual.
-> > 
-> > My understanding was that QTEE path completely disables the QSEECOM
-> > path, does it not?
-> >
-> 
-> By 'QTEE path', I believe you mean the 'QCOMTEE/SMCInvoke' protocol path.
-> 
-> No, both SMCInvoke/QCOMTEE and QSEECOM paths can be supported simultaneously within QTEE.
-> QTEE does not disable the QSEECOM path when it enables the SMCInvoke/QCOMTEE one.
-> 
-> You can have both QSEECOM and SMCInvoke clients running together on a Qualcomm platform.
-> QTEE doesn't impose any restrictions. The control/data paths within QTEE for these
-> two protocols are completely isolated from each other.
+Fixes: d39e48ca80c0 ("drm/atomic-helper: Set fence deadline for vblank")
+Reported-by: Rob Clark <robin.clark@oss.qualcomm.com>
+Closes: https://gitlab.freedesktop.org/drm/msm/-/merge_requests/243#note_3662857
+Assisted-by: LLM
+Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+---
+Rob spotted this splat in the drm/msm CI on a sc7180 trogdor board, in
+kms_cursor_legacy@long-nonblocking-modeset-vs-cursor-atomic.  It is not
+msm specific: the fence deadline code queries the vblank timestamp based
+on atomic state, which says nothing about whether a concurrent commit has
+already taken the CRTC's vblank down.
 
-Okay, that's nice. Thanks.
+f2c7ca890182 ("drm/atomic-helper: Don't set deadline for modesets") fixed
+the case where the commit doing the query is itself the modeset.  This is
+the other half of it.
 
-> 
-> >>
-> >> As per your comments on patch 6 of this series, I plan to enable the QCOMTEE based
-> >> uefisecapp as default 'm'. That way we don't need to enable one over the other and
-> >> will continue supporting all existing functionality while extending it for devices
-> >> with UFS/eMMC storage and running upstream Linux.
-> >>
-> >> Do let me know your opinion on it.
-> > 
-> > My opinion is very obvious by now. Existing devices should work. _Must_
-> > work. They provide the reference interface. Make them work first and
-> > work good. Then explain, why the other interface is better (I fail to
-> > see it from your cover letter or from any of the commit messages).
-> > 
-> > When I take a Glumur laptop from the market shelf, will it be QSEECOM or
-> > QCOMTEE? If I take the next-generation-after-Glymur, will QTEE interface
-> > for uefisecapp be supported there? Will it be used by Windows?
-> > 
-> > I think the series fails to answer, why do we need another mechanism, if
-> > we already have one which has been working for the past N years and
-> > which is supposed to work for another M years?
-> >
-> 
-> At this point, we have the following categories of devices:
-> 1. Devices with only QSEECOM support, but no support for callbacks/RPMB listener within
-> Linux QSEECOM driver.
-> Example, MSM8998 and older WoA laptops. These are very old devices (at least more than
-> 6-7 years old).
-> 
-> 2. Devices with both QSEECOM and SMCInvoke/QCOMTEE support.
-> Example, SM8650, *Glymur*. These are relatively new devices (2-5 years old).
+Reproduced and tested on an SM8350 HDK: the WARN fires on the first run of
+the subtest without the patch, and 20 consecutive runs are clean with it,
+with CONFIG_PROVE_LOCKING=y.
+---
+ drivers/gpu/drm/drm_vblank.c | 20 +++++++++++++++-----
+ 1 file changed, 15 insertions(+), 5 deletions(-)
 
-Where do SC8280XP and Hamoa / Purwa devices fall into? Is it #1 or #2?
-What about WoA laptops for the next platform after Glymur?
+diff --git a/drivers/gpu/drm/drm_vblank.c b/drivers/gpu/drm/drm_vblank.c
+index f90fb2d13e42..2984ce3b68ed 100644
+--- a/drivers/gpu/drm/drm_vblank.c
++++ b/drivers/gpu/drm/drm_vblank.c
+@@ -1020,28 +1020,36 @@ EXPORT_SYMBOL(drm_crtc_vblank_count_and_time);
+  */
+ int drm_crtc_next_vblank_start(struct drm_crtc *crtc, ktime_t *vblanktime)
+ {
++	struct drm_device *dev = crtc->dev;
+ 	struct drm_vblank_crtc *vblank;
+ 	struct drm_display_mode *mode;
++	unsigned long irqflags;
+ 	u64 vblank_start;
++	int ret = -EINVAL;
+ 
+-	if (!drm_dev_has_vblank(crtc->dev))
++	if (!drm_dev_has_vblank(dev))
+ 		return -EINVAL;
+ 
+ 	vblank = drm_crtc_vblank_crtc(crtc);
+ 	mode = &vblank->hwmode;
+ 
+-	if (!vblank->framedur_ns || !vblank->linedur_ns)
+-		return -EINVAL;
++	spin_lock_irqsave(&dev->vblank_time_lock, irqflags);
++
++	if (!vblank->framedur_ns || !vblank->linedur_ns || !mode->crtc_clock)
++		goto out;
+ 
+ 	if (!drm_crtc_get_last_vbltimestamp(crtc, vblanktime, false))
+-		return -EINVAL;
++		goto out;
+ 
+ 	vblank_start = DIV_ROUND_DOWN_ULL(
+ 			(u64)vblank->framedur_ns * mode->crtc_vblank_start,
+ 			mode->crtc_vtotal);
+ 	*vblanktime  = ktime_add(*vblanktime, ns_to_ktime(vblank_start));
++	ret = 0;
++out:
++	spin_unlock_irqrestore(&dev->vblank_time_lock, irqflags);
+ 
+-	return 0;
++	return ret;
+ }
+ EXPORT_SYMBOL(drm_crtc_next_vblank_start);
+ 
+@@ -1405,7 +1413,9 @@ void drm_crtc_vblank_off(struct drm_crtc *crtc)
+ 
+ 	/* Will be reset by the modeset helpers when re-enabling the crtc by
+ 	 * calling drm_calc_timestamping_constants(). */
++	spin_lock_irq(&dev->vblank_time_lock);
+ 	vblank->hwmode.crtc_clock = 0;
++	spin_unlock_irq(&dev->vblank_time_lock);
+ 
+ 	/* Wait for any vblank work that's still executing to finish */
+ 	drm_vblank_flush_worker(vblank);
 
-Also, the standard worry is that even if they implement QCOMTEE path in
-addition to QSEECOM it might be less tested. That's why beforehand I
-pointed out that it's imporant to use the same path as Windows do.
+---
+base-commit: e6e35979777d646fe3c7c94dca7dd32fb25d45f4
+change-id: 20260916-vblank-deadline-lock-727dc0e182e9
 
-> 3. Devices with only SMCInvoke/QCOMTEE support.
-> Example, RB3Gen2/Kodiak, IQ-9075/LeMans and newer devices which might not have
-> QSEECOM support in the future since QTEE team has deprecated QSEECOM.
-> 
-> This patch series helps devices in category 2 and 3. Without the mechanism introduced
-> by this series, we will end up in a situation where EFI variable based use-cases will
-> become impossible on at least category 3 of devices. We must conform to the reality
-> that QTEE firmware is transitioning to SMCInvoke as the protocol of choice with
-> long-term committed support.
-> 
-> At the same time, I am aligned that we must think of a way to support devices in category 1
-> which is what you really care about. The QCOMTEE and QSEECOM drivers can co-exist, and so
-> by adding support for both this patch series and callback requests to the QSEECOM driver
-> (at a later point of time via a separate series) we will be able to provide EFI variable
-> support on all Qualcomm platforms under the sun. This will accomplish our common goal.
-
-Ok. Let me take as an example the set of devices that (some of) my
-colleagues and I use on a daily bases for our work: Lenovo X13s
-(SC8280XP), Lenovo T14s (Hamoa), Lenovo Yoga Slim7x2 (Glymur). What will
-be the effect of the series on those devices? If they switch to QCOMTEE
-to provide EFI variables, how well tested is that path?
-
-X13s were produced 3-4 years ago, T14s are even newer.
-
-> I will add this information in the cover letter in a concise manner.
->  
-> >>> What about other existing devices? We have WoA devices starting with
-> >>> MSM8998. The QSEECOM driver works on them, but, as you mentioned, it
-> >>> can't flash updates to the backing storage.
-> >>>
-> >>
-> >> Unfortunately, unless we roll out new QTEE firmware versions for devices like MSM8998
-> >> with QCOMTEE/SMCInvoke support + access to the Uefisecapp over SMCInvoke protocol,
-> >> they cannot be helped with this series.
-> > 
-> > So, I'd say, the series is strange. We are proposing something which is
-> > not rolled out, which is not supported by the exsiting commercial
-> > devices, etc. On the other hand we have future gaps which are known.
-> > This doesn't sound correctly.
-> >
-> 
-> We are proposing a mechanism which supports the majority of Qualcomm devices in the market
-> launched within the last 5 years and also the upcoming ones. The category of devices which
-> are not helped by this series are extremely old (at least 6+ years). Regardless, I am not
-> pushing the view that we do not care about those devices, just that the route to helping
-> them is different and orthogonal to this series and I am happy to engage on it separately. 
-
-Ok. So, I assume Glymur+1 will also use QCOMTEE on Windows side to
-access EFI vars?
-
-> >>>> I need to double-check but this firmware release for Glymur on Qualcomm Linux
-> >>>> is probably carrying the support for QCOMTEE based uefisecapp access:
-> >>>> https://github.com/qualcomm-linux/meta-qcom/commit/728251fcbe5113980805ea6c571e33235062ee71
-> >>>> If not, the next release will definitely have it since I have merged support for
-> >>>> this in QTEE and talked to the boot firmware release team about this.
-> >>>
-> >>> Does it work on the CRD?
-> >>>
-> >>
-> >> Yes it does, I have validated on Glymur CRD by locally switching it from the current QSEECOM
-> >> based uefisecapp to this new QCOMTEE based uefisecapp. This is the QTEE release which
-> > 
-> > Why do we need to switch the app? Why is the old one worth switching?
-> >
-> 
-> You do not need to, Glymur supports both QSEECOM and QCOMTEE/SMCInvoke. I just used Glymur
-> as an example to show that both work there and if a user wants he can chose one over the other
-> (It really doesn't matter). Glymur sits in the middle of the old and the new, it is a category 2
-> device as mentioned above. 
-> >> needs to be consumed for it:
-> >> https://github.com/qualcomm-linux/meta-qcom/commit/5590c1dc631827624c110df282965b85ef2a2e60 
-> >>
-> >>>>
-> >>>> The next planned firmware upgrade for Hamoa will also provide this support for
-> >>>> Qualcomm Linux. And similarly, for all other targets being supported upstream.
-> >>>
-> >>> So, we are forcing users to upgrade to the new firmware? That doesn't
-> >>> sound nice.
-> >>>
-> >>
-> >> We have an open ecosystem for all devices supported by the Qualcomm Linux distribution,
-> >> users can easily consume new releases (and new QTEE versions) to access new features.
-> >> Until now, developers/users of RB3Gen2 or IQ-9075 could not access EFI variables to
-> > 
-> > What stopped us from delivering the TZ apps compatible with the existing
-> > interface?
-> >
-> 
-> QSEECOM support is deprecated on IQ-9075 and broken on RB3Gen2.
-
-That's not really an answer to 'what stopped us from delivering a
-working solution' question. I think it boils down to the 'why was
-QSEECOM' deprecated question.
-
-> 
-> >> develop use-cases such as secure-boot key revocation, but by taking this patch series
-> >> as part of a subsequent Qualcomm Linux release, they will be able to.
-> >>
-> >>>>>> Thus, QCOMTEE now maintains a static list of always-available object-IPC
-> >>>>>> based secure services exposed by QTEE. These services are implemented either
-> >>>>>> within the QTEE kernel or within a pre-loaded Trusted Application (TA)
-> >>>>>> usually loaded by the bootloader. The uefisecapp TA is an example of a
-> >>>>>> preloaded TA loaded by UEFI. A static list is required since QTEE does not
-> >>>>>> yet expose any way to dynamically query and enumerate the services exposed by
-> >>>>>> it.
-> >>>>>
-> >>>>> Can it be fixed instead of having static lists? In the end, we can't
-> >>>>> guarantee that users update the firmware.
-> >>>>>
-> >>>>
-> >>>> Unfortunately, no existing QTEE release out there currently has this support.
-> >>>> But support for this is currently being added by QTEE team last I checked with them.
-> >>>> Once it is available, and a new QTEE firmware release is out there, we will add
-> >>>> support for dynamically querying QTEE services in the QCOMTEE driver. 
-> >>>
-> >>> It seems you are still rolling out QTEE-based support. In such a case,
-> >>> please go back and implement dynamic detection of QTEE services.
-> >>> Otherwise it would be a nightmare.
-> >>>
-> >>
-> >> We are working on it, but until then there is no overhead involved in maintaining
-> >> this static list of services because we don't have to extend/modify this list when
-> >> adding support for a new Qualcomm platform upstream. If a particular service from
-> >> the list is not implemented/accessible from QTEE we log the event and silently avoid
-> >> probing the TEE driver for the service. We also don't add platform specific services
-> >> here. So the list doesn't need to be extended on a per-platform basis.
-> >>
-> >> So unlike the QSEECOM driver, we don't have to keep maintaining this list forever
-> >> for all new platforms.
-> > 
-> > I don't see a difference. You are saying that the list implementation is
-> > good, it silintly skips the unavailable services, etc., and then you say
-> > that you don't have to keep maintaining the list.
-> >
-> 
-> We only have to add services to this list when a client driver appears for it. For
-> example, this TPM series by Kuldeep:
-> https://lore.kernel.org/all/20260831-tpm_qcom_driver-v1-1-6f16fa6924fa@oss.qualcomm.com/
-> 
-> We don't need to maintain this list on a per-platform basis unlike QSEECOM:
-> https://elixir.bootlin.com/linux/v7.2-rc7/source/drivers/firmware/qcom/qcom_scm.c#L2289
-> 
-> Support will arrive for dynamic detection, I have commitment from QTEE team for somewhere
-> around end of the year. :)
-
-Ok, thanks for the explanation. For the reference, if listener interface
-was implemented, we could have dropped the QSEECOM list too, only
-keeping the broken entries there.
-
-> >>>>>> To facilitate object-IPC interactions from the kernel-space, this
-> >>>>>> series also introduces a tee_client_object_invoke_func() to allow
-> >>>>>> invocation of TEE objects similar to the existing tee_client_invoke_func()
-> >>>>>> API exported by the TEE subsystem which allows invocation of TEE functions.
-> >>>>>> Some suporting changes are also introduced to track and handle operations
-> >>>>>> for TEE contexts opened from the kernel-space in the back-end QCOM-TEE
-> >>>>>> driver.
-> >>>>>>
-> >>>>>> Finally and as previously mentioned, access to the object-IPC based uefisecapp
-> >>>>>> service is restricted on older QTEE firmware versions. A new QTEE firmware
-> >>>>>> release must be picked up from QArtifactory [2] for all upstream supported
-> >>>>>> Qualcomm SoCs to enable access to uefisecapp service via the TEE client
-> >>>>>> driver.
-> >>>>>
-> >>>>> What about fused devices?
-> >>>>
-> >>>> The procedure for updating the firmware on fused devices is slightly different.
-> >>>> The firmware images need to be signed by the OEM using the security profile
-> >>>> of the chipset before flashing/upgrading them. Security profiles are now public:
-> >>>> https://github.com/qualcomm/security-profiles
-> >>>
-> >>> Will OEMs release new firmware images? What about the devices which are
-> >>> already out of the support phase? This whole story rotates about the 'we
-> >>> are releasing new firmware with new features' paradigm. However there
-> >>> are existing devices in the field, which typically can't be upgraded,
-> >>> From your cover letter it seems they can't support UEFI variables
-> >>> properly. However they do so in Windows.
-> >>>
-> >>
-> >> Yes Dmitry, this series is effectively forward looking. QSEECOM protocol/driver
-> >> support is essentially deprecated on QTEE side, no new features added to QTEE support
-> >> it, and it also doesn't work on many devices like the RB3Gen2.
-> > 
-> > To look forward, we need to have a good firm stand on the ground. We
-> > have a half-baked implementation, based on reverse engineering. No RPMB
-> > support, etc.
-> >
-> 
-> Agreed. I am happy to engage on a separate series for adding callback support to QSEECOM
-> driver along with RPMB listener within the kernel.
-
-Nice, let's continue in this direction while this series lands (we have
-started the discussion internally some time ago, but I didn't have time
-to finish the listener study).
-
->  
-> >> For existing devices, if they boot with upstream Linux and have RPMB located on
-> >> UFS/eMMC this patch series cannot help them. But the focus of this series is not on the
-> >> past, it is on currently supported and future hardware. Every new Qualcomm platform
-> >> whose support is being up-streamed or is planned to be up-streamed will have access to
-> >> EFI variables via this series.
-> >>
-> >> If someone wants to add support for older Qualcomm devices to access EFI variables
-> >> via QSEECOM that patch series will not conflict with this one. Like I said, both
-> >> QSEECOM and QCOMTEE based drivers can co-exist.
-> > 
-> > What will happen if I build both and boot the kernel on the existing
-> > devices?
-> >
-> 
-> QSEECOM and its client driver probe first and establishes the path to uefisecapp for
-> providing EFI variables service. QCOMTEE and its client silently fail probe.
-
-I hope you mean here that UEFI variables client fails to probe.
-
--- 
+Best regards,
+--  
 With best wishes
 Dmitry
+
