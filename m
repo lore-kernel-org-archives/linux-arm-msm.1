@@ -1,112 +1,67 @@
-Received: from mail-qv2-f12.google.com (mail-qv2-f12.google.com [74.125.230.140])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E815444CF29
-	for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 07:38:32 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=74.125.230.140
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789544318; cv=pass; b=De0HdvNdwvbe+U9n/1koXAyl5IWsdwCsnRDTFwIt+3Zdg4dnc3pxEQJj73GvSAS2FZStMPWj6hQKvfmyrVPSi5V4pHIGpm2iLYczxYPnhBDKJmM3Q3Q2x9VDYkqI8J0nLph74nOXpVMqGwsKLIQErgK4ieFDSbK8fUieUy7KYxw=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789544318; c=relaxed/simple;
-	bh=hQYBSbI5ZDykG/tHrbEEtWawqAnT4ZwcW8GfIYLRIEU=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=haoCTaL+fKDFkg6hru2p65NvlRcF4dblHyUA7Fv7GbP2KWlrZAD2/uzwhW0iS2sQW/3gindxDOA1aa3N0n8ubf5s/NKYyaEpCXgWA1aiDghhec4XfSlqbd53Ykq8dY55l0ID6vAtYdC3DxG8VnP8abNrGAW3t7v9BuIvpt+XFXc=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=thegoodpenguin.co.uk; spf=pass smtp.mailfrom=thegoodpenguin.co.uk; dkim=pass (2048-bit key) header.d=thegoodpenguin-co-uk.20251104.gappssmtp.com header.i=@thegoodpenguin-co-uk.20251104.gappssmtp.com header.b=b32oWsj1; arc=pass smtp.client-ip=74.125.230.140
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=thegoodpenguin.co.uk
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=thegoodpenguin.co.uk
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6D9F1456292;
+	Wed, 16 Sep 2026 07:55:02 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1789545314; cv=none; b=AgeLn7L0Y+jxgfMZMg7Vs9cp/1IcW/Sy3vZiJ1r0khZ/GU9GM/ooOh31pZ04vG946k+33/zugHp8Y7DvAzkbLjC1jnqJDL24rIRO3ixSceeWM/ber6KPp0TF1UJzXyqG1l2vXAEa6GPs+U1tM8wMz/RG1Kaq71IvKt2kjRoNSbI=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1789545314; c=relaxed/simple;
+	bh=1RzC7PqbfWrhbi+RkKBrrf22Vn14hRSQYCIwQxGdKzM=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=U47xXa9J4wJ7L8dhA+OwJ69GslRuyIgmd25V3qnsBU4KBTrXR6zR+cAtbudDsCUlLdEAh0CrZOU5KX35pEPmmg6kBCIjDK6WnYYS7NB980SvxKdZiAeqkOeoIvWZH2DEAEd+T/wQRydPiuCO53oOJeZ0aaCzA/Le0WogwHRHSeA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=jQXJc38X; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=thegoodpenguin-co-uk.20251104.gappssmtp.com header.i=@thegoodpenguin-co-uk.20251104.gappssmtp.com header.b="b32oWsj1"
-Received: by mail-qv2-f12.google.com with SMTP id 6a1803df08f44-910537b51a0so4501876d6.3
-        for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 00:38:31 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1789544310; cv=none;
-        d=google.com; s=arc-20260327;
-        b=MHaueXiftx5UHw88LtM/XXyGl6tWiixU7AwNeXRgTztdRIEt+VDldaRP7wFapioxrW
-         PvIqz+GD89gTYazeFU6Sn6GvcN9JT76nWITKeJOwutro9LfyXXdNV6ive1sf2xHmvRoH
-         A7FiLQj5jWg8EaY3DrIKlXC3395fdjlmGtUrBqrtlW3f2nMKJ5jv6ANh7ABn/M5NnT8P
-         s2SdgeadB2e7+vyvN+CRNM7vuBbUtRfy7PZUzFyWdju9hcwphpzJcc4MRS26KlTzrI8N
-         cLV9JKfpYa8C2jYbVmMEBhIfda9sliVKamyU+1raIVW9Qo/B9CI+AqcGn1VZfVOEwuPd
-         8YAQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=hQYBSbI5ZDykG/tHrbEEtWawqAnT4ZwcW8GfIYLRIEU=;
-        fh=Ynbrdd9D+P1pRz6gTrSVIVIVrgIITtfkYLfrT7VKFgg=;
-        b=qaqewdY2mZ9PitAeYLCmmeGYlbKdJy32xx/tCEIB4R3UqZg4IXfyqQSLyXSBiVT19+
-         yDcOH1bO658TbB3rT4IcpSdcyihmEZ/YxSU+HH1ZqRi2dv1Y8gQhj3Yc2X0H5p0bifNT
-         3reC15i6QViuK5bpxBCqIh+BxmrlBFdlteV/ABGjYg2wDvYC7qiiHrmMvilUHKiLhzbg
-         s/16KTHxVhZSLVH4kZG0iqRJAXuaQKOovUWBkANkLHt/OyVmaJZmLDWuwPWb1PD46OFe
-         xlre5x5MCDIUy1gg1SIf4lbTKADU35rXj5LO7AzZRUCAw6gJTm5PY21/lVNkwD3uTP88
-         U/8A==;
-        darn=vger.kernel.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=thegoodpenguin-co-uk.20251104.gappssmtp.com; s=20251104; t=1789544310; x=1790149110; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=hQYBSbI5ZDykG/tHrbEEtWawqAnT4ZwcW8GfIYLRIEU=;
-        b=b32oWsj16mxTGEh19RvHUbkJHkIwah2h4TxsF7HLpV77run0DEsVR+XTo1qDJ8oa4T
-         Euveeympooh5Xdh/tx8nLhieBUztvkwi59ZmqrtrstKXcuKX/8HePXbWUDJtk92OnJ0t
-         RYQo1azCxSMHljt+rD4MxrYz6cmXmi/Bjp3FCAwU9TDBzeVW6U0Mp83DglrETsfFfhIj
-         12oLXDWMbFw+aK5Bo76A4EtvXuW/tG46PvDMTssINITG81T4a6/Z3vmpa5g9Ymldbh5X
-         uYuSzKKtasN/Rd2D6iNOLKOddvvF8PRXU9zZFFzLa36hHU6vF767LIHV+9f3RHeqFu5X
-         An0Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1789544310; x=1790149110;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=hQYBSbI5ZDykG/tHrbEEtWawqAnT4ZwcW8GfIYLRIEU=;
-        b=vgEKPvRgzywz7MrJpJ6Bp4F6YrOGExD1kcOFIYsjtMdNOFkWgdXo6RQtl1ubGJZ1RI
-         RyrELwVObxCqpesbp7hkf2h5GZQAAcSWhsjkT526Gv/FkaPbGtRrmWdfAkmurfvgZRxS
-         rqJus29Ur1qfClcZtvuWo5xyzvOhW+CXnY9pEsQO5+u8PxMhYv7obuTFBTDDIcAmo/dE
-         0CMI8A/0I7JkHGUU63gZ+KBd05urKaZfTvZYv6XAxgdWI09SONx+SNuoC71C+dRZ04f8
-         KodNsU6p2Sk3RWfHt7G3MJF2NiMGaRih0EsrGQFPx9esnd0F/CLFgIta3MWFG4nBhAVV
-         UW7A==
-X-Forwarded-Encrypted: i=1; AKwUvBwQfshTJOPegE0i90kXNxENXWHmlHHXCGNcYn46JsdS/Shrlre1XDyd8plpN4g9zvWzIIu9r/ENiVGyi7XZ@vger.kernel.org
-X-Gm-Message-State: AFuF++nwjiQCsAH2mFXYPJSoR9LKwRcGJhtgMLtTChFSemPWoDN0q4rc
-	Lc5xFohT5HU+ye8Yqs+v9nRZnnFpDBRxlG9dzi5kl4eFFpqAyZZLoW3l4X4/1VBcP3bDp2q1PP7
-	TsGKPw2YWOlqVFO2dlsKzp2Fe8iArKIAJ2o0zV395lXCzigBAwxjJWzI=
-X-Gm-Gg: AYBFou1K6247cL/odc8W2oAZAGnqV39sWaM2f0cWQI47yOA+AZOe+uaSqCm+mxI4vaE
-	Gv+/PBBfQZfDLRsVmSKRxI0Omcx5Q+B9snF808CdTPB4Z0TLnwZctyzqm8GIvUxWdXVCujOWAKd
-	OFx0H2uXvoTL2x4aK8aJMKfNvLknglZ+WyGnZnp1M0GZU+TqlchIzFG68xs4JwIq8bfua+45e6P
-	h51XNQDShnCQXjWO8E8rWxE19uA1h/gH3eRfdvA7ZjEhvNPW5nEE3IYKROVutcw+39OcWj9mAhD
-	EJzmuxIKIzixYYXyXutG24xkwpdCrX/n1MeuS2yJ8e7LtOlcut4+F4BSUUN3poHH488Rq0+lbk7
-	AsYapNZl83HBp
-X-Received: by 2002:a05:6214:500c:b0:910:6ffd:a941 with SMTP id
- 6a1803df08f44-9123d721985mr29575576d6.5.1789544309746; Wed, 16 Sep 2026
- 00:38:29 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="jQXJc38X"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 61E231F00893;
+	Wed, 16 Sep 2026 07:54:58 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1789545299;
+	bh=2OgOP+jxXWQNRYRoolW60fTXYG8LulWcgv1fskPdr4Y=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=jQXJc38XSm97lmRc3872XmOkSrrP4O7h/wvOdwT7rH0JjjxQW4cNAr9TTZwr74C0n
+	 80EfU1uu+E+g+W+Bs0Q6W3kcEqYqXbXO2Ua9Ug27DvF4br/xVOMoYA7Ma5XZ9Fwuy9
+	 PReFtdG7zkupeROqWNOMVKONS3zG7eUFtju86SKbnRaM54vTd6j956O4XxZudRzdXR
+	 pyxGjlAU8sFIu/MCIfBmquaKqYekFAuF0/JSB70ySWn9YPVTKhcraaovyhwRXNSScL
+	 IvhY69JsGl31fCnN1fbWy3JqFxF7kB670kqCp3y5fDneGSYN9R6mTmg4pxTrMoOMGC
+	 q6e33yDcE3m1A==
+Date: Wed, 16 Sep 2026 09:54:55 +0200
+From: Andi Shyti <andi.shyti@kernel.org>
+To: Shengzhuo Wei <me@cherr.cc>
+Cc: Codrin Ciubotariu <codrin.ciubotariu@microchip.com>, 
+	Nicolas Ferre <nicolas.ferre@microchip.com>, Alexandre Belloni <alexandre.belloni@bootlin.com>, 
+	Claudiu Beznea <claudiu.beznea@tuxon.dev>, Wolfram Sang <wsa@kernel.org>, 
+	Ludovic Desroches <ludovic.desroches@atmel.com>, Oleksij Rempel <o.rempel@pengutronix.de>, 
+	Pengutronix Kernel Team <kernel@pengutronix.de>, Frank Li <Frank.Li@nxp.com>, 
+	Sascha Hauer <s.hauer@pengutronix.de>, Fabio Estevam <festevam@gmail.com>, 
+	Yao Yuan <yao.yuan@freescale.com>, Mukesh Kumar Savaliya <mukesh.savaliya@oss.qualcomm.com>, 
+	Viken Dadhaniya <viken.dadhaniya@oss.qualcomm.com>, Bjorn Andersson <andersson@kernel.org>, 
+	Vinod Koul <vkoul@kernel.org>, Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, 
+	Praveen Talari <praveen.talari@oss.qualcomm.com>, linux-i2c@vger.kernel.org, linux-arm-kernel@lists.infradead.org, 
+	linux-kernel@vger.kernel.org, imx@lists.linux.dev, linux-arm-msm@vger.kernel.org, 
+	stable@vger.kernel.org
+Subject: Re: [PATCH 0/3] i2c: fix DMA channel leaks on probe error and remove
+Message-ID: <aqpLLgjoREHUkj5C@zenone.zhora.eu>
+References: <20260827-i2c-dma-channel-leak-v1-0-271d4adc03a0@cherr.cc>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260907-acpi-dma-v2-0-0ffe4a007992@thegoodpenguin.co.uk>
- <20260907-acpi-dma-v2-3-0ffe4a007992@thegoodpenguin.co.uk> <aqlzjZigicrtyh7o@lizhi-Precision-Tower-5810>
-In-Reply-To: <aqlzjZigicrtyh7o@lizhi-Precision-Tower-5810>
-From: Pawel Zalewski <pzalewski@thegoodpenguin.co.uk>
-Date: Wed, 16 Sep 2026 08:38:17 +0100
-X-Gm-Features: AcwNN1Vn5ljoRLzFV2GiG-9S0jHlKDZRzXLPscawH2jK-lpFtONtbul3vK317do
-Message-ID: <CAA6zWZ+tBBWdsZFGySWFsRKFq-FYy36QAYVQtUOPZ4GVGDYudA@mail.gmail.com>
-Subject: Re: [PATCH v2 3/4] dma: qcom: use named initializers for acpi_device_id
-To: Frank Li <Frank.li@oss.nxp.com>
-Cc: Viresh Kumar <vireshk@kernel.org>, Andy Shevchenko <andriy.shevchenko@linux.intel.com>, 
-	Vinod Koul <vkoul@kernel.org>, Frank Li <Frank.Li@kernel.org>, 
-	Binbin Zhou <zhoubinbin@loongson.cn>, Sinan Kaya <okaya@kernel.org>, dmaengine@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org, 
-	linux-arm-msm@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260827-i2c-dma-channel-leak-v1-0-271d4adc03a0@cherr.cc>
 
-> Please update subject, correct tag is dmaengine
->
-> dmaengine: qcom: ....
->
-> Frank
+Hi Shengzhuo,
 
-I checked the history of all files touched in this series and all
-existing commits are tagged with the dmaengine tag=E2=80=94I'll have to
-correct all of them. Usually the tag/list name matches the in-tree
-directory name, which caused my confusion. Thanks.
+> Shengzhuo Wei (3):
+>       i2c: at91: release DMA channels on remove and probe error
+>       i2c: imx: release DMA channels on probe error
+>       i2c: qcom-geni: release DMA channels on probe error
+
+pushed to i2c/i2c-fixes.
+
+Thanks,
+Andi
