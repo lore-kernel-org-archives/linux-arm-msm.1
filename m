@@ -1,42 +1,51 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C017E4BD7B7;
-	Wed, 16 Sep 2026 22:32:09 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A6EDC3C3F4E;
+	Wed, 16 Sep 2026 22:32:07 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789597934; cv=none; b=kkMcywLJtvjxhXg12+xB6MKdrH+29iT8GBgKrga69+3RNoJlo/txou7St2CE29ElfAQTFynLwNULnGf12qOtQOJqFxz42LYkSmAcX+pgK/0/Ar7BPeCv7X8cS/afcP8nGGFG+I29AXcaMY/xFljzvW3ftZ1iryxUVA1FH9I+1TY=
+	t=1789597934; cv=none; b=XFld8LUswPbw+02Tu685WKaj4efarlMxA1DKx3JjzRGQAHlusbNwDEYRmSjcLwQvjsgS89C6zoU6onNKSk8hVtuo849T+F6upil4UV+1+Zcd3Pc1bI6a0aduCtBwjzcP7FtDmIxJXpCXJ86aQ6w1+tFW+NzgO+jok2xxv0q69gg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1789597934; c=relaxed/simple;
-	bh=sbVzSJLW3oX5KtM7Go0Cq+/WWnngD20gRbN+GP16BZY=;
+	bh=A2rj1iUUhe0+aCpRC+4wABUqqChxpsKXoRWKvygqIUY=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=G5GQFNLD9I3bHluSRb/NcxzLWtXexNpIqD7LbONGlSyJoVSiLHJNy//iu80ZLRzLz5GsTiPocELjnGEqfN21EWoI8rW1XOEH94DH/+Ux11LrgvCFKECS8Ya86qN8ztrOF3dULbmMeZ2HssbwFFnaxGUuJ2rWw+Mo6kRGAmcN3/w=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=mNFbeDCn; arc=none smtp.client-ip=100.103.45.18
+	 MIME-Version:Content-Type; b=iA4hZw1fjkeB6HVgh4lDIuaBrElyLtWldLHL4sc+i+F09uUkxNuh2dAhTgCLap+OKnxYKpiaSFBRuxSZiSDS1GmFnfL6iKOTGucTWzyUNo4w4pYrBkjr7Ya6a+qCSDnsFB6UCGMl5eudaQewxp7goiXVs7Sls/RMwvYejDgJQhg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ZEW4bklb; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="mNFbeDCn"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A14211F0089C;
-	Wed, 16 Sep 2026 22:32:06 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="ZEW4bklb"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 84C7F1F000FF;
+	Wed, 16 Sep 2026 22:32:04 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1789597927;
-	bh=Ae/A1vxdV1gmMxQqD2Q1btqKzFyjmSlJCGakMquo+xo=;
+	s=k20260515; t=1789597925;
+	bh=7O3m89aBa8b30JsKemOhKBYOSlk1XKFI/jSTfvzarBc=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=mNFbeDCnj2j3EZyaftPmpXQHfuFUtX2lKOlq1tlUW6Ze1DGEeWJvchCD0uW6K378K
-	 jg4Yr4TYvKhYVxfJyGvo3RZLYLpqVvo1InCCIsXU0fZY3tJ1z7bmRLAQzh2o7UgrJd
-	 VaZ9vycLHuw/MFRBncBaCTHPTiOWwVxBJmkm84/2Xy48N91EvTgY/5Qfk7hRQ4TgYm
-	 WFFDl1FM5/BmFSh0aN7IMI0gaipgyTL+IG+M4+zBzcxZA8KrDTZkPKYdkx1YlptWQv
-	 rK5Mje9rdjNA/8MOTPN1hzp/u33/E/j1auG3Ls9wRAVdGwvB4F4LbtkUYbN3tkfkfh
-	 kEMI1gqsw/lGA==
+	b=ZEW4bklbmV+I4gGU3lgQsQbUXvtfUiVeLu9PXYclIUQzbLaHoi3aCatXitaOt0xbV
+	 kuXyB0gdVAiXcs2xKxuYbtiN3us2L8Rc031JQ3DHQdc4K1GdT6a75I72GrblQJBs0m
+	 h+TucA8j6r8aUJVOIqgboq7vf4BvUZyQbg8lx6eM2lgM5KDUId9JSr5zgruYQSQI6B
+	 z1rCQa95Ju8VcLwFUzNm7sGqf/If7FLz0i2XmanRtQyOq7ROs5rm4x2ccCMrPAqyEN
+	 oI2SRrthidyLoRYNQodIhDrpPzL4KA4rfHXLZZIVsDrrfNenvd6HVPuXW9I10xt2Yy
+	 Bru7A0EfiubWg==
 From: Bjorn Andersson <andersson@kernel.org>
-To: Sivansh Gupta <sivansh.gupta@oss.qualcomm.com>
+To: Konrad Dybcio <konradybcio@kernel.org>,
+	Abel Vesa <abelvesa@kernel.org>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Bjorn Andersson <bjorn.andersson@oss.qualcomm.com>
 Cc: linux-arm-msm@vger.kernel.org,
-	linux-clk@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH] clk: qcom: Fix CLK_GLYMUR_GPUCC default and CLK_GLYMUR_EVACC duplicate
-Date: Wed, 16 Sep 2026 17:31:55 -0500
-Message-ID: <178959783408.1336377.16132938816078163121.b4-ty@kernel.org>
+	devicetree@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	Nicko van Someren <nicko@nicko.org>,
+	Chris Pouliot <chris@pouliot.me>,
+	Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>,
+	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+Subject: Re: (subset) [PATCH v2 0/3] arm64: dts: qcom: Introduce Asus Zenbook A14 (UX3407NA)
+Date: Wed, 16 Sep 2026 17:31:53 -0500
+Message-ID: <178959783410.1336377.853415939571836906.b4-ty@kernel.org>
 X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260821045214.2623299-2-sivansh.gupta@oss.qualcomm.com>
-References: <20260821045214.2623299-2-sivansh.gupta@oss.qualcomm.com>
+In-Reply-To: <20260915-zenbook-dts-v2-0-41de8669a7a8@oss.qualcomm.com>
+References: <20260915-zenbook-dts-v2-0-41de8669a7a8@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -47,21 +56,28 @@ Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 
 
-On Fri, 21 Aug 2026 10:22:15 +0530, Sivansh Gupta wrote:
-> Commit 6b150572bb76 ("clk: qcom: Add defaults for desired arm64 drivers")
-> missed adding a defaults for CLK_GLYMUR_GPUCC and created a duplicated
-> for CLK_GLYMUR_EVACC instead. The original patch series did't have this
-> problem and was introduced during the merge. Fix this by removing the
-> duplicate and adding a default for CLK_GLYMUR_GPUCC.
+On Tue, 15 Sep 2026 20:54:21 -0500, Bjorn Andersson wrote:
+> UX3407NA is a variant of the Asus Zenbook A14 built on the Qualcomm
+> Glymur platform.
 > 
-> Fixes: 6b150572bb76 ("clk: qcom: Add defaults for desired arm64 drivers")
+> This (v2) remains dependent on the eDP support here:
+> https://lore.kernel.org/linux-arm-msm/20260622-glymur-edp-phy-v1-0-814b45089ac9@oss.qualcomm.com/
+> 
+> As reported by both Chris and Nicko, the A14 only has 2 speakers so this
+> has now been resolved. But, on linux-next I need to introduce a
+> pm_runtime_forbid() in the soundwire controller (swr0) to avoid SWR bus
+> clashes when trying to play audio.
 > 
 > [...]
 
 Applied, thanks!
 
-[1/1] clk: qcom: Fix CLK_GLYMUR_GPUCC default and CLK_GLYMUR_EVACC duplicate
-      commit: 364709a9d450ae3814726768aec6611e5f003467
+[1/3] dt-bindings: arm: qcom: Add Asus Zenbook A14 (UX3407NA)
+      commit: 21c65236981f1e71d40afd3d05bddd0863af7177
+[2/3] arm64: dts: qcom: glymur: Add Asus Zenbook A14 (UX3407NA)
+      commit: 7e38885d78f7b008c085a0cde7173242d02d2b01
+[3/3] firmware: qcom: scm: Allow QSEECOM on Asus Zenbook A14 (UX3407NA)
+      commit: d3bacfccd82c974a541398a5ce310de7546b525f
 
 Best regards,
 -- 
