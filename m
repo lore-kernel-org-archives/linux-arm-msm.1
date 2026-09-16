@@ -1,90 +1,155 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wm2-f12.google.com (mail-wm2-f12.google.com [74.125.225.140])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C6E794AA3F7
-	for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 09:40:02 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DCB874AF167
+	for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 09:50:24 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.225.140
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789551611; cv=none; b=B4ZCGqwSPxFuhgjz5WEL+9Gsm+h6AU5CmQRw/RcWpBZf7Ku1TWIbxhfOxQgIMK4ehaxfxtOgPNMJDSpM/vGRnfGoEqMcMTNPhmu/nb2iXO2mF9bRKV72k6xGc2bfOdmo7pH5d2fClMwBHClVF3ynq55iHKvXyN7cobWMlg0sLuQ=
+	t=1789552230; cv=none; b=VtVx31aVixOtpH4wggKBH/GLnXYOLcr1bJMW/JjJeViwIh/QiOzNHhqaT5sQTVwxavwIRHaYWpdfJ5sUw/PTHaVpBfty2pZ8rSDbB/ZuDqMyfzOZrcIoFt/+l21ssiLTe0LzwSvOm55a4b3Bd67Npo3VbM6lNiTTH0+kXPPPO1U=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789551611; c=relaxed/simple;
-	bh=2yuKCjIDyK/x4MOE4g5o5qI7ddhrFfbRopnIqh1iLi0=;
-	h=From:In-Reply-To:MIME-Version:References:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=eWvvffF/2mYgQu2+3pxNBD5cTGLDwlA6SE2tt29vAqRwUsMAix+Ay8VidP3Q/XAAjQMXvNUb0GrBi9kiCQAGOMuV1k/ehktBJqlMsQvQRVotWJBCNRoIoD6QJ3+o+ewnZ7XifnxilzbFNqO8EbKCNCTwZoXtbdCVU7orK1AtyZs=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=kEa7+TAC; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1789552230; c=relaxed/simple;
+	bh=zVftL0e6KTn1Fup/RmgkkUqXURXldH56P13A6WLi8KQ=;
+	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=k8yxrYKw/9bzKUrIoDxUYBhDQFOWcCyPKmXK97zz88YutKZRZ9eKO++T9fecFIfZMsm2qTuU5UQxZKcygWp78VFyoJtY3Uk6AfENtkkr7yVg3jMq3Wp/gzGlwaz0dZHaemvMAGOZrUehp9pEUAKOIGZ3aBLl63GXM3yNptTDdlM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=Dzby88uf; arc=none smtp.client-ip=74.125.225.140
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="kEa7+TAC"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7A0A51F008A2
-	for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 09:39:55 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1789551595;
-	bh=2yuKCjIDyK/x4MOE4g5o5qI7ddhrFfbRopnIqh1iLi0=;
-	h=From:In-Reply-To:References:Date:Subject:To:Cc;
-	b=kEa7+TACmQw9LLtOKBXcr9+yyNyOsC76QAKqMJLa5QYBQgs1P38YkG2xbJwqH0Z0v
-	 F/biy0p2Go6mXtf9m9RtdBuyc4v6VevPJqTGYqMxZzcZ2GHQsphNwBJHzxbjU2o0I1
-	 cs1uaMTRAqTSs0X1LckGEtVGXBMo2OaDflQ0RLRiVAe2Lih6/A+DaM07Xxb117pcUU
-	 gZrV0rZ1TjCEh1Nmp2U7L0+X6JkNN5hLxa05isdVkvKBIoBhWbGayHExVo7TjfSzzm
-	 QEY0PmQ2SKX0GkatvrL89n3HvaTRnRB8yGSneD01ZhNdTPRPzoY3cGfc1FGKs88Tz6
-	 vmSepgBDmXi+A==
-Received: by mail-lf2-f12.google.com with SMTP id 2adb3069b0e04-5b5e4f1744fso1013932e87.2
-        for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 02:39:55 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AKwUvBwzpPnZUuKkWv9TmVEjIB+BtJCwnVYfnwKmi5w2WW/EaoUupjkYlDJ4Nx932hCjz0HQkiWA0CZVcIYpPJ29@vger.kernel.org
-X-Gm-Message-State: AFuF++mt86nOnUUzeb+4QIPpiQMnqVM43PFxt0KateuLBsr7Mo8ez1Ce
-	pUL/vEepqv/6DnKGR7I9HHzDzrtnJIzobtYolnDupo5u/e6k04cvO/sjTIEhXUrQFOKlTEIGq/Y
-	Oqy9MLvUnnp0f7QbMgi+ZFemU3KHIxTq7kG1EYV/Pvg==
-X-Received: by 2002:a05:6512:1107:b0:5b7:de2d:191a with SMTP id
- 2adb3069b0e04-5b8b6616213mr571469e87.23.1789551594053; Wed, 16 Sep 2026
- 02:39:54 -0700 (PDT)
-Received: from 969154062570 named unknown by gmailapi.google.com with
- HTTPREST; Wed, 16 Sep 2026 04:39:51 -0500
-Received: from 969154062570 named unknown by gmailapi.google.com with
- HTTPREST; Wed, 16 Sep 2026 04:39:51 -0500
-From: Bartosz Golaszewski <brgl@kernel.org>
-In-Reply-To: <20260915-pci-m2-bt-rework-v1-1-3c7d9cf9c010@oss.qualcomm.com>
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="Dzby88uf"
+Received: by mail-wm2-f12.google.com with SMTP id 5b1f17b1804b1-49ccead2aecso3137595e9.0
+        for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 02:50:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1789552219; x=1790157019; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:mime-version:references
+         :in-reply-to:message-id:subject:cc:to:from:date:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=79YAdtaHEv3S3nDvYc6X9C5ar06F3FncZEtUncQdJQ4=;
+        b=Dzby88ufsV19pEuHSQnO0Z3r75FgiJ44qF/jXgKTm3w+wAYVSGDUH6LyexeTQiqa/g
+         mb7EWvB3UuhKI7YAj+i2TOZr9/Z0Jn4HnQ3SO6kUkIrvAwSnRTzKzvfGb0So06LetuEf
+         Ts3VEs9CM5zHiWBu1V4JZ71jpXN6ZkETnLDwqKE7PV3aA5kY0+ABvWOim6YHWnbq5cCK
+         nHzOneSJDYvvXY/C7BkTDDo/hN/r3+9IBjrwRhsKYcoz9kdWM+uOTg6K8qjcDaH6D7EX
+         KA0rYEGGzwyipB5cM3imDGmhTpbUuWgcSiyW3ZIBr1TR7/Q7dN5mD7jr++kuJyreI5UR
+         skeQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1789552219; x=1790157019;
+        h=content-transfer-encoding:content-type:mime-version:references
+         :in-reply-to:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=79YAdtaHEv3S3nDvYc6X9C5ar06F3FncZEtUncQdJQ4=;
+        b=yqDKVZZij3wew3pl4AWSuAt+4KxCyoISJ/VeB2maWbQ1lE5a0MUhzvhXHbe3Vwc6/z
+         uxIyiMmyv23XXMCGiVMMhQSSfs4wSmj1qTwR7x1I66kcAbGEKtYpkKHl+ej4zw1mw93M
+         DDIMR1cfVVD/JaXWNfh97X8CHrnto2gnUP5ZQCWLqTTaPWu/zI57RbB3rcftdy1ArvtN
+         VEUcfOrpzj9n/iCnP85PFtG/vYSy/0+WUibsn2lVnipMJVe2KaY07W3PLJ26RB6hW0DN
+         H6U9oibYWOaJbTAOuKXSN1yTfY+weOCWbi/M7X2GejXF4Imjy65akLw1OWRUOnsB8jfE
+         pD0A==
+X-Forwarded-Encrypted: i=1; AKwUvBxwsWuiKnFRE8LEYoof6+VrVoXhtpwhbv4YdARwkrMvvH9+QncCIItoL2WWplx63nbDzNz/C4HbU0WFJ0M9@vger.kernel.org
+X-Gm-Message-State: AFuF++mrj45nO5w6M5u3FzZhD0MWoYNGDJrXeI7TzEs8y8gbeUVKrdGn
+	Wa9etr8+bL7TdSGHK8Jv3gZInTiQPunc6qSO/thlxbatwJHRN0FeV6s1
+X-Gm-Gg: AYBFou1bBr3V1T0nQKEzt45P7MD2p7u8y25Eoebjy0BDP3O96pTfH7rCrmXotUAzQ9q
+	mmMpPik65BpIlKWCueAs7VQZEAkmRedpjs+FZGBtBa7QZwRFcn7hNaili+yOV8Z1ZY/vJkvwR+A
+	7lVhW4KAIccQckjp3gglg6JaiTLnsb4VTrKf6Ov9cK7xRu7rBPyLhNVKOXv8WQrkFqU+Tglg1fY
+	rkgqkgmf4MecWWoXGu63m2UtewV1Q4KjWmMPossAX/D6MPzybqNZs3YGSzTYV+DmHpULY3ddHiI
+	79s2V685sRMVfEfyh0TCEFGVO9qvmREFOkXPTokdc4BRKL0eCbe8nNeJ9ZI9QFKClZZYyUdv25J
+	TYbnO8/jOwu5Nes/hRVh/YvYoHHX2VZWPaU/qfl7313LtRcQjAMLGkPo1B8PMQMs8f2XgvHjLgm
+	Ml5fcSd70cJQjq9mY1XD2jQkQNJggI0G0qe+rUPuDyJhcrgNe80nXMVWAzBtb55ptNQqRmdNvxY
+	0NB+Tu/98wQ7rRLUAyroDI2DHu0sPG7fygi1Y6H4+4CaF0=
+X-Received: by 2002:a05:600c:4ec6:b0:49c:fea3:8633 with SMTP id 5b1f17b1804b1-49eb732aec0mr19444455e9.24.1789552219000;
+        Wed, 16 Sep 2026 02:50:19 -0700 (PDT)
+Received: from pumpkin (82-69-66-36.dsl.in-addr.zen.co.uk. [82.69.66.36])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-49e83b02245sm84055225e9.10.2026.09.16.02.50.18
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 16 Sep 2026 02:50:18 -0700 (PDT)
+Date: Wed, 16 Sep 2026 10:50:17 +0100
+From: David Laight <david.laight.linux@gmail.com>
+To: Linus Torvalds <torvalds@linux-foundation.org>
+Cc: Jann Horn <jannh@google.com>, Christian Brauner <brauner@kernel.org>,
+ Alexander Viro <viro@zeniv.linux.org.uk>, Jan Kara <jack@suse.cz>, Ingo
+ Molnar <mingo@redhat.com>, Peter Zijlstra <peterz@infradead.org>,
+ linux-fsdevel@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-mm@kvack.org, Oleg Nesterov <oleg@redhat.com>,
+ linux-alpha@vger.kernel.org, linux-snps-arc@lists.infradead.org,
+ linux-arm-kernel@lists.infradead.org, linux-csky@vger.kernel.org,
+ linux-hexagon@vger.kernel.org, linux-m68k@lists.linux-m68k.org,
+ linux-mips@vger.kernel.org, linux-openrisc@vger.kernel.org,
+ linux-parisc@vger.kernel.org, linux-sh@vger.kernel.org,
+ sparclinux@vger.kernel.org, linux-um@lists.infradead.org, Jens Axboe
+ <axboe@kernel.dk>, io-uring@vger.kernel.org, netdev@vger.kernel.org,
+ linuxppc-dev@lists.ozlabs.org, linux-gpio@vger.kernel.org,
+ linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ bpf@vger.kernel.org, David Airlie <airlied@redhat.com>,
+ virtualization@lists.linux.dev, kvm@vger.kernel.org,
+ kexec@lists.infradead.org, linux-hyperv@vger.kernel.org
+Subject: Re: [PATCH RFC POC 00/50] file: handle files on syscall exit
+Message-ID: <20260916105017.13ea5e36@pumpkin>
+In-Reply-To: <CAHk-=wi3Kkqgfg6zUTHpQoZNL2VOB4vYqpi6RX0WNO++29UtyQ@mail.gmail.com>
+References: <20260915-work-fd-reserve-unify-folded-v1-0-4d5217d6b246@kernel.org>
+	<CAG48ez1RsdT=O=-0city3vjgWhDvY424KtTmrCJntWy5ds3HBQ@mail.gmail.com>
+	<CAHk-=wi3Kkqgfg6zUTHpQoZNL2VOB4vYqpi6RX0WNO++29UtyQ@mail.gmail.com>
+X-Mailer: Claws Mail 4.1.1 (GTK 3.24.38; arm-unknown-linux-gnueabihf)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260915-pci-m2-bt-rework-v1-0-3c7d9cf9c010@oss.qualcomm.com> <20260915-pci-m2-bt-rework-v1-1-3c7d9cf9c010@oss.qualcomm.com>
-Date: Wed, 16 Sep 2026 04:39:51 -0500
-X-Gmail-Original-Message-ID: <CAMRc=Mdt7+xYGJTDpYfLf+aKT1-h05qznuuz5eCwLQUa3WU1ug@mail.gmail.com>
-X-Gm-Features: AcwNN1UHyIe_E1G_6fwzRWv11gNibMjjztMru9LJ8H2caU7qReugLOq9coLS8D8
-Message-ID: <CAMRc=Mdt7+xYGJTDpYfLf+aKT1-h05qznuuz5eCwLQUa3WU1ug@mail.gmail.com>
-Subject: Re: [PATCH 1/5] Bluetooth: hci_qca: Add auxiliary driver for PCIe M.2 modules
-To: manivannan.sadhasivam@oss.qualcomm.com
-Cc: linux-kernel@vger.kernel.org, linux-bluetooth@vger.kernel.org, 
-	linux-arm-msm@vger.kernel.org, linux-pci@vger.kernel.org, 
-	linux-pm@vger.kernel.org, Rahul Samana <rahul.samana@oss.qualcomm.com>, 
-	Wei Deng <wei.deng@oss.qualcomm.com>, Loic Poulain <loic.poulain@oss.qualcomm.com>, 
-	Andy Shevchenko <andriy.shevchenko@linux.intel.com>, Marcel Holtmann <marcel@holtmann.org>, 
-	Luiz Augusto von Dentz <luiz.dentz@gmail.com>, Bartosz Golaszewski <brgl@kernel.org>, 
-	Manivannan Sadhasivam <mani@kernel.org>, Amitkumar Karwar <amitkumar.karwar@nxp.com>, 
-	Neeraj Kale <neeraj.sanjaykale@nxp.com>, Philipp Zabel <p.zabel@pengutronix.de>, 
-	Manivannan Sadhasivam via B4 Relay <devnull+manivannan.sadhasivam.oss.qualcomm.com@kernel.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 
-On Tue, 15 Sep 2026 16:24:02 +0200, Manivannan Sadhasivam via B4 Relay
-<devnull+manivannan.sadhasivam.oss.qualcomm.com@kernel.org> said:
-> From: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
->
-> The QCA2066, WCN6855 and WCN7850 combo modules expose Bluetooth over
-> UART. Since these modules are attached over PCIe, these are not described
-> in firmware like devicetree. So these modules are discovered at runtime
-> over PCIe by the power sequencing driver, which allocates the UART serdev
-> and creates an auxiliary device carrying that transport and the power
-> sequencing target to power up the Bluetooth function.
->
-> Add an auxiliary driver that binds to this device. It reuses the serdev
-> provided by the producer, brings up the controller through the existing
-> UART transport with hci_uart_register_device() and drives power through
-> the sequencer obtained with devm_pwrseq_get().
->
-> Add a shared header describing the auxiliary device so that the power
-> sequencing driver and hci_qca agree on its layout.
->
-> Signed-off-by: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
-> ---
+On Tue, 15 Sep 2026 12:08:57 -0700
+Linus Torvalds <torvalds@linux-foundation.org> wrote:
 
-Reviewed-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+> On Tue, 15 Sept 2026 at 10:52, Jann Horn <jannh@google.com> wrote:
+> >
+> > Is this mainly about stuff like "we installed a file descriptor and
+> > then the following put_user() failed"? Because if so, I think a nicer
+> > fix would be to have a policy of "if userspace provides unwritable
+> > memory to a syscall, just keep going and pretend the access worked",
+> > and maybe have a sysctl that kills the process when this happens to
+> > emphasize that userspace should not be doing this.  
+> 
+> We've done that before, where we just ignore put_user() errors and the
+> user gets whatever the user gets.
+> 
+> It is maybe not optimal, but it's fine. You can find quite a lot of
+> unchecked put_user() calls with a pattern like
+> 
+>         git grep '^[[:space:]]*put_user(.*);'
+> 
+> and some of them are in core code - see the two in kernel/fork.c, for example.
+> 
+> One of them says "if userspace has not set up a proper pointer then
+> tough luck". The other one doesn't even bother with a comment.
+
+I think the code should try to return EFAULT (IIRC that is too hard
+in one of the exec cases).
+Otherwise very unexpected things might happen if the memory is just
+readonly.
+If you ignore the error and the pointer is invalid the application will
+get a SIGSEGV and (usually) die.
+But winding back kernel data because a user copy failed is likely to
+be problematic/difficult and at best have error path code that isn't
+really tested.
+
+As well as writing fd numbers to userspace, some sockopt code tries to
+wind back if the write to optlen fails (which has been read earlier).
+
+I've forgotten which Unix converted EFAULT to SIGSEGV in the system
+call exit code - I'm sure one of the ones I've used did.
+
+David
+
+> 
+> The scheduler has two cases too, although one of them is admittedly
+> for another error case.
+> 
+> So yes, saying "if you pass bogus arguments, you get what you get" is
+> a valid model. It's perhaps not the *preferred* model, but it's not
+> wrong.
+> 
+> It *would* be wrong to take code that already has error handling and
+> remove the error handling, though.
+> 
+>                   Linus
+> 
+
