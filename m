@@ -1,87 +1,80 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6DD774C9E02
-	for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 17:21:42 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3FDC6377A87;
+	Wed, 16 Sep 2026 17:47:11 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789579304; cv=none; b=jyje8a5uUqm5rL4pJPTJdIzh/l/Q1qMFG7c/LNRaBHOdHzr2nibWEq+sCGkBQPf1tOASp6AJOaWlECHtH7cKg9seEKkisj4ffylhJVyrLztOQwj+r+6xpYm1bDDKPAy56bCXW6oEIQbGLCBdG3k8Ot6G+o2ZuUF1RoZ6Kbfph+M=
+	t=1789580842; cv=none; b=XQCsjL8l2SsG/ulMZdQJ5Q2hwpvdVaqvvj1QDan11pL5O5/Av6jURo2HMOMT03bFyjq8akKUvCHaZoyeKo9ZCSOmdxl5rBFghR1iJRcbitIRV5jkh8DO6RuPfXLKCcbUQ2Az+DquVQwFdU0YRwqgqYYujnD8Fu4UBMrRIsBRqjQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789579304; c=relaxed/simple;
-	bh=+Wm8XztWe9cjSuQsXSOKuMkDzkD1yzW07KRTOyVgie0=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=AFuvu5/tmwJKBNM+z4mpL/h45P7TRhkEpeE0B7LSEmryPBq/nRsoJi+cKZRc7tK1Nm/4cXwcN6XO0/Suk13ipRH1+6LrmArhyYpScnA25V2116DD4wNn81QGZBaV05GwNtBYH5ribp98TWbKbZ8mt8CSNEYmf0LgjqFlJDehgnA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=OtqPa6xW; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1789580842; c=relaxed/simple;
+	bh=Ybmndea+9BVFEsrsa54+odnni4estZ50obHtla6/t5g=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
+	 MIME-Version:Content-Type; b=Ar0YflxiRSsh+OAUSAuPGFmlVnshwHtkwcIsOkZQS0XbOc63Q//9o7EUPK2eZkM41TJJMiNwt5QyjYvOI44g1Q5Out/eLE/CRBLaPMb1OwcJtDDgkIG8lXW9AbEyaNnBKQpF43lbBPs6BWQk4DUlZ2gJnTqFP94sNlKB50xCuvc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=KPyAL0Hi; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="OtqPa6xW"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id EB3D51F008BC
-	for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 17:21:41 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="KPyAL0Hi"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 27DA81F00898;
+	Wed, 16 Sep 2026 17:47:05 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1789579302;
-	bh=F1UErD4H6r6whOgpoMHeGy/yiV6kGc+XBk8QJER2Od8=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc;
-	b=OtqPa6xWTvZHahphsBKsXSM0vVDuwyyQDfeMMeeEdCwWUcXyf9dlKeNLwgs5z44tQ
-	 WrEw0/lFS1kR81AfTFFl8gO2WD8ymB6OULjtt3mMaSrQZ/BLplGiHqg2ZX64o9jZyv
-	 lRQjurrPvX6EHDlo/M7bJ3vybpD2OkTMf18ZzfkBroMKIYFxdFYoOBO4SqZXkxmA+m
-	 5H66Szm6FTlqa6jX0VplbsuV5ZZ89DhiviBw+u3aGEgpG3N7+v+oORv1usu/Fl+caa
-	 0oDpvEUV/RUY8fvpDeaGcVR6CILUMSDmpvRRSbahMAfV/wEskXbF0UkH8q4fFAn5zH
-	 6D4yaBy6bTqaQ==
-Received: by mail-lf1-f45.google.com with SMTP id 2adb3069b0e04-5b76694fb7aso2069797e87.0
-        for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 10:21:41 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AKwUvBzWgP502o4u6/9DqISYEpvzv6XQjZip6NOajffPsZdJkER3LsgSuFuwzdyZ/W9gBHVNy+9poUs4FHMSkZzm@vger.kernel.org
-X-Gm-Message-State: AFuF++lLHAVlt8Gu9Ua6jslMQaCoMepTLmMorw8QhBuEiWr35hi+HboN
-	FDOr5+LFLrnK1UzlGuozy+3gRx8s2SdCJKCKKhlsjON+OBI+qEoPjsOPp11IJWbc3BtZgiYL85F
-	YujQG5wIsoHDedm7/4l+aAxdmFxJibpA=
-X-Received: by 2002:a05:6512:6883:10b0:5b6:172b:7ba1 with SMTP id
- 2adb3069b0e04-5b8ba5d1a82mr67749e87.9.1789579300578; Wed, 16 Sep 2026
- 10:21:40 -0700 (PDT)
+	s=k20260515; t=1789580830;
+	bh=Ybmndea+9BVFEsrsa54+odnni4estZ50obHtla6/t5g=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date;
+	b=KPyAL0HilCLyPj5ml21WZPDVC+r/jiafBL7OK0lvJuyx9Z7TxbYiVD0yWTDmkoISy
+	 hoaCIZbQCcMdk/jJ65RC6xMQA/+6ql3ymd2ZQ7aPvJ2bkzIxVIAs+uR3ezh4GID6VW
+	 McnEj0B/xaPnVbZlaARK+9sZB+8FUlHg9ghcmAR8kFEMjlRsiaz+6bFA0hzGEDM691
+	 eCSR2enFAU718trhrhbC3zsTBrjDMBubFiAXXIzfbOxKwyyX3teSuXEhvihRAJZlvQ
+	 zaTgW4tf5zMLAQwWJZpLa2YpTQ12JGobTvJzd/zoTYIrbcVN8MigMKNflybz/LuJyb
+	 VfT64YbuaTigQ==
+From: Andreas Hindborg <a.hindborg@kernel.org>
+To: Bart Van Assche <bvanassche@acm.org>, Bean Huo <beanhuo@iokpp.de>,
+ jaemyung.lee@samsung.com, Miguel Ojeda <ojeda@kernel.org>, Boqun Feng
+ <boqun@kernel.org>, Gary Guo <gary@garyguo.net>, =?utf-8?Q?Bj=C3=B6rn?= Roy
+ Baron
+ <bjorn3_gh@protonmail.com>, Benno Lossin <lossin@kernel.org>, Alice Ryhl
+ <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>, Danilo Krummrich
+ <dakr@kernel.org>, Daniel Almeida <daniel.almeida@collabora.com>, Tamir
+ Duberstein <tamird@kernel.org>, Alexandre Courbot <acourbot@nvidia.com>,
+ Onur =?utf-8?Q?=C3=96zkan?= <work@onurozkan.dev>
+Cc: linux-kernel@vger.kernel.org, rust-for-linux@vger.kernel.org,
+ linux-block@vger.kernel.org, linux-scsi@vger.kernel.org,
+ linux-arm-msm@vger.kernel.org
+Subject: Re: [PATCH RFC] drivers/rufs: add Rust UFS host controller driver
+In-Reply-To: <d19d0b37-a599-426c-b54f-cf9b16462904@acm.org>
+References: <20260912-rufs-private-v1-1-716db733e655@samsung.com>
+ <8mLXEMDMxh8mZQqVywUYUeOiZPZIPmrVGRlOkDbHptW0NEJeszKVpff5h39MjUvD5yyivwY3Z7kCXIH5VlGoiw==@protonmail.internalid>
+ <4c38f13af8f75020fefc35827463e9bc643b99f4.camel@iokpp.de>
+ <87jyoqvhpm.fsf@kernel.org>
+ <01d56517261d397f5e17101f03554f91529e23f0.camel@iokpp.de>
+ <8733vduwin.fsf@kernel.org> <d19d0b37-a599-426c-b54f-cf9b16462904@acm.org>
+Date: Wed, 16 Sep 2026 19:46:59 +0200
+Message-ID: <87a4ph3x7w.fsf@t14s.mail-host-address-is-not-set>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260913123223.99893-2-krzysztof.kozlowski@oss.qualcomm.com>
-In-Reply-To: <20260913123223.99893-2-krzysztof.kozlowski@oss.qualcomm.com>
-From: Linus Walleij <linusw@kernel.org>
-Date: Wed, 16 Sep 2026 19:21:28 +0200
-X-Gmail-Original-Message-ID: <CAD++jLm2hQ=fHmLGL4KnaK-q2L95tz3P6__qx=dFCUeiMUz9tA@mail.gmail.com>
-X-Gm-Features: AcwNN1WeMHFPjUODWxifW5uhfKTviiZfd6OYXXOq_JHN6cgG4pckjp0gwgbXDp4
-Message-ID: <CAD++jLm2hQ=fHmLGL4KnaK-q2L95tz3P6__qx=dFCUeiMUz9tA@mail.gmail.com>
-Subject: Re: [PATCH] dt-bindings: pinctrl: Use consistent indentation in the example
-To: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
-Cc: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
-	Conor Dooley <conor+dt@kernel.org>, Dong Aisheng <aisheng.dong@nxp.com>, 
-	Fabio Estevam <festevam@gmail.com>, Frank Li <Frank.Li@nxp.com>, Jacky Bai <ping.bai@nxp.com>, 
-	Pengutronix Kernel Team <kernel@pengutronix.de>, NXP S32 Linux Team <s32@nxp.com>, 
-	Sascha Hauer <s.hauer@pengutronix.de>, Sean Wang <sean.wang@kernel.org>, 
-	Matthias Brugger <matthias.bgg@gmail.com>, 
-	AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>, 
-	Bartosz Golaszewski <brgl@kernel.org>, Bjorn Andersson <andersson@kernel.org>, 
-	Michal Simek <michal.simek@amd.com>, Gary Yang <gary.yang@cixtech.com>, 
-	Fugang Duan <fugang.duan@cixtech.com>, 
-	CIX Linux Kernel Upstream Group <cix-kernel-upstream@cixtech.com>, 
-	Del Regno <angelogioacchino.delregno@somainline.org>, 
-	Rahul Tanwar <rahul.tanwar@linux.intel.com>, Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>, 
-	Jingyi Wang <jingyi.wang@oss.qualcomm.com>, Neil Armstrong <neil.armstrong@linaro.org>, 
-	Krishna Potthuri <sai.krishna.potthuri@amd.com>, linux-gpio@vger.kernel.org, 
-	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, imx@lists.linux.dev, 
-	linux-arm-kernel@lists.infradead.org, linux-mediatek@lists.infradead.org, 
-	linux-arm-msm@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain
 
-On Sun, Sep 13, 2026 at 2:32=E2=80=AFPM Krzysztof Kozlowski
-<krzysztof.kozlowski@oss.qualcomm.com> wrote:
+Bart Van Assche <bvanassche@acm.org> writes:
 
-> Correct indentation in the examples to consistent 2- or 4-spaces
-> indentation to fix dt-check-style warnings ("example 0
-> [indent-consistent] indent mismatch ...").  Preferred is 4-spaces, but
-> re-indenting entire example just for that is too much churn.
->
-> Signed-off-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+> On 9/13/26 6:10 AM, Andreas Hindborg wrote:
+>> I understand that userland tools need to be updated, and that
+>> carries cost.
+> Hmm ... my understanding is that the Rust UFS host driver needs to be
+> modified. Why should user space code have to know what UFS driver has
+> been activated in the kernel? sysfs ABIs are assumed to be stable, isn't
+> it?
 
-Patch applied!
+There is a choice to be made. Arguments could be made in both
+directions. One could argue that this is a new driver, so technically it
+is a new ABI and as such there, is no stability requirement.
 
-Yours,
-Linus Walleij
+With a goal of constructing a more simple driver, sticking with scsi
+legacy user space interfaces might not make sense.
+
+Best regards,
+Andreas Hindborg
+
+
