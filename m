@@ -1,187 +1,136 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 171064C8C49
-	for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 11:55:57 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AD49B4EBAD6;
+	Wed, 16 Sep 2026 11:57:20 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789559762; cv=none; b=b9DvmTqkZ4Wh/HaH4kkzXV2PjQQM57SplBqgiVsWQCAONmj08QBAL3/KRZEMKRPoqCR/9lBq/7gqu9YoIlyhd7eW7NfbVgeVPR7/oqsHwP7lBh2jzDslq1rsEFGxFFCZNcZ2/cl6AXO1Uxip7SlcqzzE8dTNpxSKr9wCgqwySrY=
+	t=1789559844; cv=none; b=Nacdnwb38c5sdmwVT6H36fVVPneEZWLc0T4DtjcfIjGx5U+CJ0006kwGXWlGrAKb30GQEsm3Zw527w+T8EdgU5INX/MzLjDIwtNJDuC82IidnbMRVRemLCoiDuibqjnyeo6eHk1yzcxGYR337MMMukqS+lIxjjdkgiF24U3oU6s=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789559762; c=relaxed/simple;
-	bh=r5edjYHWcbLbf1p3IWihy7C7waQQXQNiUeI2eHMHB/g=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=fLsmmHV8O102PJTkSCgHCcdy8pQKAlwMbviqo9ruWMxwf2HzIIaG/hjyXSWFonhzw2HB9j+lNwXblt+8pQwkNTDTMV18dnYsEdljJGst+/v7jWSrEhjacnC+vsMoME8or2ppmX0PAUkqmM3Lr8mdZEpti3sEkxnvCAHcCXwOfL4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=nn3VDP0Y; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=fsrpaWnx; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1789559844; c=relaxed/simple;
+	bh=+LtRmbxwd85RdYqmHNnNzjoHFPg6PgK4hUBdyvizWwA=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=nJdgJ8X3K3rNtA4TapGl1qx9iQKTWC6YtEuZ4WWOG24jg6VSnUOj7az/zTS+0Tnl5gQjcr3ZXv9KFFpLRs+FPk9hEPUYFDEPJM6NqT75o8IAcDti/Fd3bXm0jBs0gk940Z2ucM2FZ1sCc6cy2WfCq0RxQLBtt1oz0Zb1tIIUaT8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=CzeCY7Vq; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="nn3VDP0Y";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="fsrpaWnx"
-Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68GBkdAu1912230
-	for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 11:55:53 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:message-id
-	:mime-version:subject:to; s=qcppdkim1; bh=6ee0FcggQC8Fx6LCyjG2aS
-	hjOOnSgooLHQ16SsvJMiU=; b=nn3VDP0YUDbQ9kat3MvT1E2iSx6rfD2Jfh1bGV
-	0cZ4FFmL5uiOvGc5evtNw/elXzCYS+i6gDJW4HQUoHEnf/rp4hSOvSPQmEUxODru
-	4PS1VWxHZjfd5OzNM4Fg7XdoIHJp9ODtIOcjINgB5rjEXFehtfJBeTpzV6J2cvwJ
-	bRs7F9OLS2LSSwhV3WzMip4AXFub9w8BzoTuJZz8xMCo1buJ/nuYI5goUd+krbL1
-	DrGM4tX7xwXrNOqYXW7duR64hN3gYCM5zFZGc934KY/bvi/51Bv78CxZchqyDaa5
-	ECQBvdlv9ubZ3V2JeVflZRYQHYPiEaTDiHawHt9wRgtgROtg==
-Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com [209.85.222.199])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gqthnr200-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 11:55:53 +0000 (GMT)
-Received: by mail-qk1-f199.google.com with SMTP id af79cd13be357-92e82060977so379538785a.1
-        for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 04:55:53 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1789559752; x=1790164552; darn=vger.kernel.org;
-        h=cc:to:message-id:content-transfer-encoding:content-type
-         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=6ee0FcggQC8Fx6LCyjG2aShjOOnSgooLHQ16SsvJMiU=;
-        b=fsrpaWnxVW3dHM0BKVY5WVKYhrkTY/S9CQUignERWLIeIEZkwxRgXS3vQq6hwdv0xi
-         LWaEMSzeXbaVd+8zIpDeef2jObNPGMuB87OGaIk86lOS2/KGNsFTWhE182Ws+egGDvr9
-         dIPxR41Rne+9MKgeD6eOZOsQm5eWYVRor647MN4ZVZ10swB5WKja+9BgNlBrcoZoYXTC
-         IGBrffI4EHyTAes/cRGe1svAhK2HdQBQZKAgWNaktJYgHeWC+U8PmWF48pwTSueRT3KG
-         lgUAGbiI2ebB6ck/EwGPSQDgz0riLk88ghkmwvfltM9MNrnXQaSaP32F/bvBk0fS9dua
-         zg+A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1789559752; x=1790164552;
-        h=cc:to:message-id:content-transfer-encoding:content-type
-         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to:content-type;
-        bh=6ee0FcggQC8Fx6LCyjG2aShjOOnSgooLHQ16SsvJMiU=;
-        b=C1xDNKaUJ+Ige3zbmZjaAtbHaRjPalQNZBsV8WdS9VZxm/UIP3+R5MTvB6EFTjkRMD
-         KrM+KoUTyw2i+0+oEC0a3iQZhLXTt5+owHTNsbvPqWx8TWUnQkg8sY0XfpC8chgRpop6
-         xoVdzzDX8lPUCdpX2voQcEY2VWw1gwUmitCuhfx1d+j983EnV5Y425ofDkT+vKPY14BN
-         iqBSptbMO7UwfnMFPsy9MPpqnzutQAmigQnDHZkBTkqrm/OGGNwD8PtuKjJelbIddwIK
-         iEDJy0nL1GxRwrZ9qSLZzVsgAFHQBjyOtZIzIdfXOqTMswxzcWji+/IB3tcKDQFkmmB4
-         xVLg==
-X-Gm-Message-State: AFuF++mX+HegKFJHwHZ7RYoMCtKzIXDvwUAgl7xLZBMcwrNGG3X9lRr3
-	HyDA4DKlcPJz1RqVKnF69q5evJEQBxz/aFEVMFFbaQr+iTt/8vfLXgLXTeCNYvIrsuG6qP6hkh0
-	K/vn2KPncszC2ig4smEo7rVSiTzPfPJEGr2yq4FPwxY4flmRxRIdDP9zoZxpJOCZlAgci
-X-Gm-Gg: AYBFou0gIbuewikMy34N5v3UXQd4ZZoeqCb0g7XhXKjqZAk80hZomkTy97xRQdumQ6F
-	vlT6UQvzek4i3Znj0kBHllzfMt4aXjZ/5CY9M8OuwKJtO0yn4OLXBtSN7rf0mVL0tJ+A0SEhVbJ
-	zPdyHEwjsLnXnWQGC+hVPG0DvKPzfkSiEm+exQsAZiq+dzEw4WLEeIm2Ur4hkSGFJ6/Y7e7VT0G
-	xFi3K5eCvq/jIfhNvEKEKPHovcpmfbBGAHA2VVMhyxjgdNfyGlin5OGlqcG4mYT9zWrZ6VuHWNL
-	ja8MLN7HsKec/ZQnUgM3QjC4J99hcPbccf8b8QV1jQ9Ae5jh4zLCidtf2nXgJFMIVnTQ3GVtxta
-	TSxmxaTpP
-X-Received: by 2002:a05:620a:3710:b0:939:a8b1:3696 with SMTP id af79cd13be357-93a346faf19mr1043575585a.27.1789559752080;
-        Wed, 16 Sep 2026 04:55:52 -0700 (PDT)
-X-Received: by 2002:a05:620a:3710:b0:939:a8b1:3696 with SMTP id af79cd13be357-93a346faf19mr1043571685a.27.1789559751528;
-        Wed, 16 Sep 2026 04:55:51 -0700 (PDT)
-Received: from [127.0.1.1] ([86.121.170.232])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4870bf33e01sm7819977f8f.23.2026.09.16.04.55.49
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 16 Sep 2026 04:55:50 -0700 (PDT)
-From: Abel Vesa <abel.vesa@oss.qualcomm.com>
-Date: Wed, 16 Sep 2026 14:55:46 +0300
-Subject: [PATCH] clk: qcom: mmcc-sdm660: Fix MDSS AHB clock HWCG register
- offset
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="CzeCY7Vq"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 469821F000FF;
+	Wed, 16 Sep 2026 11:57:15 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1789559838;
+	bh=jQzahxlR3x5lfRUGFf42Mhc85kasPW7Fz63+sfAlGVg=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=CzeCY7Vquq8rG8pevEn4vuQ3aKfYpKYwRBBA3CBuWRgrOD86Bfgk52M/9M4lHidsr
+	 uM2cIk+MB5/BbTEEe3gd0cvfPiQP0wjIetkiM+VjsP2lfuidtgPoJrCk3v15PBrUfp
+	 PBIoQos5KZ+1md8DGnXN5bMEKAAHsYTNlCYTm0nixARBx78ALGq0VMRSTZuLagred7
+	 QV3YtETijFpKLZiE4sXnfJmbm5TrQD6YN/GMY6Cz6O3JzXSRLOZYzyfUq2r4zsQUrE
+	 6HgZYNWOF8jlTsTVTFaGA2768cBjQu8kajwbdQ9GzCBszn/8esOZLO16UuhXyi5HbV
+	 mdwW8JBre3gPQ==
+Date: Wed, 16 Sep 2026 12:57:12 +0100
+From: Mark Brown <broonie@kernel.org>
+To: Jishnu Prakash <jishnu.prakash@oss.qualcomm.com>
+Cc: Kamal Wadhwa <kamal.wadhwa@oss.qualcomm.com>,
+	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, robh@kernel.org,
+	Saikiran <bjsaikiran@gmail.com>, monish.chunara@oss.qualcomm.com,
+	nitin.rawat@oss.qualcomm.com,
+	Bjorn Andersson <bjorn.andersson@oss.qualcomm.com>,
+	lgirdwood@gmail.com, andersson@kernel.org,
+	linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
+	krzk+dt@kernel.org, devicetree@vger.kernel.org,
+	Manivannan Sadhasivam <mani@kernel.org>
+Subject: Re: [PATCH v3 0/2] regulator: qcom-rpmh: Add off-on-delay support
+Message-ID: <0d17ef87-0b95-43cf-809d-7d28d3e29afe@sirena.org.uk>
+References: <20260127190211.14312-1-bjsaikiran@gmail.com>
+ <20260515111647.qg75thdvcbvvjpoi@hu-kamalw-hyd.qualcomm.com>
+ <06a264d0-6a14-4b71-b783-82b771f04411@oss.qualcomm.com>
+ <oa3okt7mdhoqmrebwim5yswarbcacbmhpwfvqbhtv6ib3cwrwi@ddox6mw3uhmy>
+ <0d4fa333-df22-42b9-b9c2-ccb43ac4fac3@oss.qualcomm.com>
+ <3pybhkqdvve2ct6burnhav3utis6nljz7ncheqcrs7v55ullz4@nek57empeoca>
+ <086f8e7c-0afa-45d5-bdb2-54ac5f79eefa@sirena.org.uk>
+ <xmjovrqonged7m77zlx4gbz6xvfksygbw7g4vgv2stlucvqoy6@uie3qdhdtkoe>
+ <aqg-JSTrbg-xR69l@sirena.org.uk>
+ <5ff87d08-c263-4b9d-a18d-c8da8fc0de1a@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260916-clk-qcom-mmcc-sdm660-fix-mdss-ahb-hwcg-offset-v1-1-30dcf09d907c@oss.qualcomm.com>
-X-B4-Tracking: v=1; b=H4sIAMGDqmoC/yXNQQrCMBCF4auUWTuQBhqIVxEXzWTSRE2jmVaF0
- rsbdfnB4/0bCNfEAsdug8rPJKnMDf2hA4rjPDEm3wxaaaNsb5BuV3xQyZgzEYrPxigM6Y3Zi+A
- YHcYXTVhCEF7QKGWDtuQGO0D7vFdu21/vdP5bVndhWr4R2PcPpeHtoZEAAAA=
-X-Change-ID: 20260916-clk-qcom-mmcc-sdm660-fix-mdss-ahb-hwcg-offset-6009f29cb595
-To: Bjorn Andersson <andersson@kernel.org>, Abel Vesa <abelvesa@kernel.org>,
-        Stephen Boyd <sboyd@kernel.org>, Brian Masney <bmasney+clk@redhat.com>,
-        Jerome Brunet <jbrunet+clk@baylibre.com>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        AngeloGioacchino Del Regno <angelogioacchino.delregno@somainline.org>,
-        Martin Botka <martin.botka@somainline.org>
-Cc: linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org,
-        linux-kernel@vger.kernel.org, Abel Vesa <abel.vesa@oss.qualcomm.com>
-X-Mailer: b4 0.16-dev-0e65f
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1414;
- i=abel.vesa@oss.qualcomm.com; h=from:subject:message-id;
- bh=r5edjYHWcbLbf1p3IWihy7C7waQQXQNiUeI2eHMHB/g=;
- b=owEBbQKS/ZANAwAKARtfRMkAlRVWAcsmYgBqqoPEGDm5jrYhGCoYDA1YlLSBdj7bNyZ2o9uzb
- IvgGX80hb6JAjMEAAEKAB0WIQRO8+4RTnqPKsqn0bgbX0TJAJUVVgUCaqqDxAAKCRAbX0TJAJUV
- Vgf1D/oCaOMbGaJ1l9+agMauw/7gcumX2bkasnjBAJOnUnKQDeOWwuxxr+VRSmvqjZ8eLcBE4gL
- s85KhopcOqQkzkp7sgqkk15ZKZWCad7bcNHtuFrsUWTJTNx3D+MuUQ4uqLlwPpWpe+Ly6DY8V1S
- qDHuYixv2ZPXNJIjO8gliO0Ox4FLxWWmylM9KbSbIDXkFW/wvOkONb4q/tFHN1LEybeyCl8HNvy
- MIyNW4yK/RsN53SidXiZpIJFhboGiwqycHWX6dwJOA26QpVxeou2YsHhVTLMaiU+73TzbUVsF4X
- R0dB9GuyFiZVrdJyzL831adeg0b6NoPqfb1cqIFM8MHQvJO8jpcvNgew3v+o+pHG3o2CSaHJQ/w
- zsBQcAa0fqCkVVs/ac0Kd8utUKQvyqIedPCTarWlcpQhTFqer4ai409LlC2fH/yqMkHNeW7rx6T
- 6L/+2Fu0TpaH3+B5+EXgK/JUk2yybol0EBUH4JXO0eT2VbrY8gtDQ1jPd6aTWDtmT4FmzqMBtcp
- GkqiVQWj7p4m1FKSZzyEB7IUqobmebRZqmU3UNSizdqdHTDS2v3zpV22ADtq+nnN0FHF5z6U48E
- zpMLuafC/kCOCFPIb8e8/rsTgvYfgbYnjXx52rqks0muidno69I/y2ggWUFAtL4xaUVYTxZ1qkL
- R7Nd7JD8iQdy/Cw==
-X-Developer-Key: i=abel.vesa@oss.qualcomm.com; a=openpgp;
- fpr=6AFF162D57F4223A8770EF5AF7BF214136F41FAE
-X-Proofpoint-ORIG-GUID: muf-j9hwgglbdE37eicbtZT6HJXvxsRA
-X-Authority-Analysis: v=2.4 cv=IsKL47/g c=1 sm=1 tr=0 ts=6aaa83c9 cx=c_pps
- a=HLyN3IcIa5EE8TELMZ618Q==:117 a=po8fGBi+ks8MzcVQGuqtFQ==:17
- a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22
- a=EUspDBNiAAAA:8 a=FrX4wj76YW4h5ywvKWkA:9 a=QEXdDO2ut3YA:10
- a=bTQJ7kPSJx9SKPbeHEYW:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTE2MDE1NyBTYWx0ZWRfXzpc67R9mi/kh
- JNq6unDUqq1EbuHgAGl7QzrM9xG4lliVDD2IcDspXnR4U1fBi6veKl0o0WVxmiPFdPBL2C8oQM3
- 6L8tgv7CnSVVcbtAtT53boHhi7MCJNvhNhd4/gk8ChUvHUFlMYbD53IHhf8nXY0NtRTfC/UteWG
- kEfRfoMrAfP6TWQaKTxWcXdBR8Aou6Ppv1lxuHqgTzMmFIcR2FVu6/eMUTDflSAoJt4Jnxb5Hjz
- kexhIvRhaF7ya1J8+kHSWRiXagxjj8GE4TXbCnQ+cq5wjroz7IVozgYzH5oo9w+QDa4PJvSRcB9
- hsiewbcbbqS3YB+DKu5/8wWr+hfcErtqxyQ10TW3yENUYQ9z2n+c+TiFgXTpk2tRqYwkYZ0j8ke
- lQsKZ18vHWq3Z3+ILxaURrOhY27/+6fLgU6PTu7P+qgxHwNy6MBYwVbB4eyh0e9UPovgh9mfpu7
- G9JMcOMGKE2d9B5lTaw==
-X-Proofpoint-GUID: muf-j9hwgglbdE37eicbtZT6HJXvxsRA
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTE2MDE1NyBTYWx0ZWRfX8KD5i3/tBpW6
- KhUV9HzZ4MUjeRubCJri7KJ/URBJkuPvxxrMACfQJmY7C+WX+RahLX8LgF5Tn6rGDh/ZuY6AKHr
- msmACeMMq/2OtQIMaF50difjrESkgC8=
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-15_05,2026-09-15_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- suspectscore=0 spamscore=0 bulkscore=0 priorityscore=1501 lowpriorityscore=0
- adultscore=0 impostorscore=0 phishscore=0 clxscore=1015 malwarescore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609160157
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="LeMdaFtY1wIgmB0+"
+Content-Disposition: inline
+In-Reply-To: <5ff87d08-c263-4b9d-a18d-c8da8fc0de1a@oss.qualcomm.com>
+X-Cookie: Double!
 
-The MDSS AHB clock HWCG bit resides in the same register as the branch
-enable and halt status bits, at offset 0x2308. The current HWCG register
-offset of 0x8a004 exceeds the regmap maximum of 0x40000, so regmap rejects
-the read in clk_branch_in_hwcg_mode(). Since the read error is ignored,
-the helper uses an uninitialized value to decide whether to skip the
-halt status check.
 
-Correct the HWCG register offset so the helper reads the actual hardware
-clock gating state.
+--LeMdaFtY1wIgmB0+
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Fixes: 5db3ae8b33de ("clk: qcom: Add SDM660 Multimedia Clock Controller (MMCC) driver")
-Assisted-by: LLM
-Signed-off-by: Abel Vesa <abel.vesa@oss.qualcomm.com>
----
- drivers/clk/qcom/mmcc-sdm660.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+On Wed, Sep 16, 2026 at 01:35:09PM +0530, Jishnu Prakash wrote:
+> On 9/15/2026 12:04 AM, Mark Brown wrote:
+> > On Wed, Sep 09, 2026 at 02:34:21AM +0530, Kamal Wadhwa wrote:
 
-diff --git a/drivers/clk/qcom/mmcc-sdm660.c b/drivers/clk/qcom/mmcc-sdm660.c
-index 200f986de965..9f8b8e29fa0f 100644
---- a/drivers/clk/qcom/mmcc-sdm660.c
-+++ b/drivers/clk/qcom/mmcc-sdm660.c
-@@ -2017,7 +2017,7 @@ static struct clk_branch csiphy_ahb2crif_clk = {
- static struct clk_branch mdss_ahb_clk = {
- 	.halt_reg = 0x2308,
- 	.halt_check = BRANCH_HALT,
--	.hwcg_reg = 0x8a004,
-+	.hwcg_reg = 0x2308,
- 	.hwcg_bit = 1,
- 	.clkr = {
- 		.enable_reg = 0x2308,
+> >> 3. If we can avoid turning the regulator off itself, so we may not nee=
+d this delay
+> >=20
+> >> point 3 - We evaluated this for UFS - but the problem is that the issu=
+e happens in
+> >> the defer probe path, so if we avoid turning off the regulator, it lea=
+ds to long
+> >> error prints appearing for the regulator being left ON. So we couldn't=
+ take that
+> >> path.
 
----
-base-commit: e6e35979777d646fe3c7c94dca7dd32fb25d45f4
-change-id: 20260916-clk-qcom-mmcc-sdm660-fix-mdss-ahb-hwcg-offset-6009f29cb595
+> > I think Rob might be thinking here of something like the runtime PM
+> > autosuspend delay where once the final reference is dropped we wait some
+> > time before we actually implement the power off in hardware, thus a
+> > quick power cycle would never actually get implemented.  That does sound
+> > like a good idea if we've got issues with quick cycling, obviously the
+> > actual delay would still be needed but if you've got quick bounces
+> > happening routinely then a delay like that would allow you to avoid both
+> > power off and ramp delays.
 
-Best regards,
---  
-Abel Vesa <abel.vesa@oss.qualcomm.com>
+> I'm working with Kamal for upstreaming this series.
 
+> If I understand you correctly, instead of the approach in this driver
+> change (only setting the existing variable "off_on_delay"), you prefer
+> having a sequence somewhat like this:
+
+> 1. Regulator (if configured in DT for this new behaviour) gets disable
+>    vote from its last enabled consumer
+> 2. Delay timer is started
+> 3. If regulator gets enable vote before timer expires (quick bounce),
+>    clear timer and return without touching regulator HW
+> 4. Else, disable regulator when timer expires
+
+> Is this what you meant?
+
+That's what I understand Rob's suggestion to be.  Like I say that would
+still need any minimum off time enforcement.
+
+>=20
+> If the above sequence is right, where would you prefer it to be
+> implemented, in the regulator core file or our regulator driver file?
+>=20
+> Thanks,
+> Jishnu
+>=20
+
+--LeMdaFtY1wIgmB0+
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAABCgAdFiEEreZoqmdXGLWf4p/qJNaLcl1Uh9AFAmqqhBcACgkQJNaLcl1U
+h9Dg7Qf+Nu0Ohhyx39SLlpNPUCtloq/bocXVOAPu0oHRlGJcdbIIvKOT3suv9m7s
+jDmVLB04vLD34rkO5oBZi+ZNWGYNuEnnMwONuAq1Hw7AmyZP1xch/mFk7cHvdNcD
+qs3r+fvbLHq83wSCaGrd39ViSRiEv9jHjOiM4cP4GM6nlryJUv/aDUKWVwC24Wjv
+Ug/EaGtvYAPD5TVptB1Az8ZyX13PDZluns6hGtPNZbGk8g9mUVrp5kvGzYfayzxY
+P4llxftv/jA5XgbAPxAYRWBK2yvNhWEsadg0zwddAIzg/DNYkNb85a0ARxFgs4tN
+m0xv4QhnrBf7ISm4Q17HPBGbdKzEmg==
+=Klo0
+-----END PGP SIGNATURE-----
+
+--LeMdaFtY1wIgmB0+--
