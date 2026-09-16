@@ -1,244 +1,116 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6FC4840928D
-	for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 21:24:02 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B65EB4A9D7B;
+	Wed, 16 Sep 2026 22:06:46 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789593856; cv=none; b=H9XRYogzVXM7wW1wBCpMR0sqROJvltf+41oRzmJyxt09eoyiXmx1e8VJ6RnA9ZB/8Sz48+1NSbKIgUhy/X3nGn3pV8PGH3uat303R2CusOs6s9XGoPYjxFD7yNxbMQrJ/zTPXVMXDA4giUXbTRV7aUSs8CGYB/zzWDjI1MijsOM=
+	t=1789596411; cv=none; b=mp03hq1wMc/riwFO6pODKRGTOlRM2EfgeilCvFjB9dnLzWp/q8DyDpbpnPHfcekOWw1VNB2Z6Ji9XBRatHyh6lKUcS+y1Mb/0ggWFMhAGixB/Bs/V1VVm3lmNDVLHLtbTtOA1dmqpjYzokQb1/kNkdOKi0hDWOYNee3pMV693UU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789593856; c=relaxed/simple;
-	bh=gJJWBQeFSX1YsrOWygD+rC9pHJoBZw2+qKeEeFs6RRo=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=Bcq0sM4EIAdvGGPo1bmHGxmaIatelRuMxMCrs2U1i/6kIqIKRxH9GL2x9cmG8CsVpMVIDZ7ilk2rkx6O174MzVNRDCqKHzJhfMoFnhOBmihIsgHvYuJmjtl1bvBSAm55FwdAIwf/HChu8NHPbQ4YFaLpmbwQsUeMIFYhxTQN/Hk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=B9zVUleq; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=RjUXA05P; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1789596411; c=relaxed/simple;
+	bh=8jR3qXJDsRDhpRo2+hKqYNpQs7xwIeWBynYjDXLVyqA=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=nCRagBhmIuA+ZcaQLMSDFymeWIgcD/1PMv4LYtszgsl98nED0i5zttAHth/Oz3ebYreQUo5uOr8em/2+y2q6NY0Xd7mST9e47gruq65arMxNSR6wJ6kCIaslZhD9GFoNFPQAb/kx47ESLteHVu9DmZXooxoONKPqSMyQtuJ9uOI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=PaAS6O1s; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="B9zVUleq";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="RjUXA05P"
-Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68GGtKqe3402921
-	for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 21:23:50 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	w/qTLVLi8JrEbZ5Wtjo59+5wUP++p74xd9zORAOvt3Q=; b=B9zVUleqVc0IwYvo
-	2kVS9RooIb9ERrcP5PS6AJMR0gaiIevixWLq5qN/3aBKETxjM+rhRBUTzcok5Whb
-	svM4ZTgwJPuPkCaNElgopGA52rcmgpqGQ7XVErtlmAIEq+GzVMbMCz6NH7EA7DIx
-	JFvOfToWEO0K8/39zGLSg9eniwoyvlbxaElKoqjDbAnPej0Q6e50+et7aoofhuox
-	XHRPcOIRMlbXXmowCW3mvxB+TDmnEzDZfJDrqhJKvE0PKJOxQYHIl9qkUCr6fnmg
-	4vxlh7AoQbWeNSsdY4heO8bk0K6uRVpYox3qdPrQXH1kiaweWsoA9yWTsJkLltAR
-	0ei0/Q==
-Received: from mail-pg1-f198.google.com (mail-pg1-f198.google.com [209.85.215.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gqy2d15sg-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 21:23:50 +0000 (GMT)
-Received: by mail-pg1-f198.google.com with SMTP id 41be03b00d2f7-cc2229450b4so92554a12.1
-        for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 14:23:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1789593830; x=1790198630; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=w/qTLVLi8JrEbZ5Wtjo59+5wUP++p74xd9zORAOvt3Q=;
-        b=RjUXA05PcrkLXiwLmHcIj1OkpOoedtm849jRtkyDsFjwn9FBHHDmurph5VcZOvzqnh
-         xMtVa3H8ztx+CKXhKa1T9CaLm+73Y+d1FqYSTRxdmkZ22IZ4wGuhqOgH0N1jN1K3aImq
-         mIJklUB2eTTVy/dt13TqNSyoVYQB60dWAEIBq7X7+4jgPxeSqoMSFp4cykPw9ZzyQMHv
-         OOIr3ihTD+lbo+0Cyl6B6pjdjCK28u+RUMizBKTZ/y1Ks+5+ehYf+Z6V0rJc+iKLAsRq
-         SXbC1Q3thNZc7/g9PdK02KjZwDbwUlXs5A2P6VZzId7tA9uYjaFX+mn7qlwZb3BWmtND
-         KcKw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1789593830; x=1790198630;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=w/qTLVLi8JrEbZ5Wtjo59+5wUP++p74xd9zORAOvt3Q=;
-        b=CfCUskGxVfL4WFixiN1SC66eTFGn//Ym8XSpZ5bHGFr6o013W+F5oEgumyzwkKe9DB
-         Q59lI2BNh6gSjWCx8ZGHuVLBRVEfzhjSnlhbyeqTLLorfq6k+xixMlalkOJcbSVt1/Uf
-         ftDJ3msfVIilu/uxWm4boZj8Lm0l6B/cY5bFBcQk9o+Prb9lk8HzzzYciDb5cXWtLHnl
-         7c+cWKJCckQAfXQo1tOaUlZJ4CE3gfvUPdOTMhzjsZXMOb9zfRGLGl1FQ2wKtYr19jK3
-         BOPydUspOzvrFZp6fONlj6xEAJSIK4+3HwNrj7glRo4TZ3XFdYoOj7ot3cWZpaSp5y+t
-         GVWg==
-X-Gm-Message-State: AFuF++k1S2JWngv0Iw8D7sdWaJ1iaWnDE8sefSdokD0IlK2Ja1sAnHJy
-	VsQ+NwVGtAQL0N/S6Ywj9bNtRhLSCvckHhxyzHHDqeC1+3SGI8J3kSDByALEsYW/cOwo7aPTXUV
-	Qlo7qpO2vIkINUYI0l//qgdFe68iBBf3yZfauguOv8lHA9AxLB+UztpfbmE9xxcFUY/Y=
-X-Gm-Gg: AYBFou1Qm+tsG7Hsit5giIEp90JjqMaaNpm8FAPoWRdwb1KLhSl2r6V/IqrK3tHvOWp
-	Fa3GTVVpXPTEHQF1GrnSv64PyjtYYag7HmalBTDNV1S8HWJQa3XBYB6owXC35fCV1auwUZW4Nd5
-	Nn607L5x4Jyp2mDMP2LjTdGmn3IlKyDvKxuL4HKj3k8CghebmFO/z5szYkqDmUBDHUKRRpKF1x0
-	qFHBtRa1hRvQObupvbnje5JHuHLsQCitBuv83Q0CszREMTDV/qsWJhtS5DQfWxKXsfdaOtLbMm/
-	RWildDsUUEtBPM9nB5wLSd/NHIdkf4aVNzEz7vqUh5FJxXsYvUJwWjmUW38yN9NplP4fMoYtJ8l
-	AWolKbnjfuwhfvvzISQFazYewYAkY7B0Z
-X-Received: by 2002:a05:6a21:6b10:b0:3da:3bdb:b22a with SMTP id adf61e73a8af0-3dd5f71a912mr10826727637.20.1789593829851;
-        Wed, 16 Sep 2026 14:23:49 -0700 (PDT)
-X-Received: by 2002:a05:6a21:6b10:b0:3da:3bdb:b22a with SMTP id adf61e73a8af0-3dd5f71a912mr10826675637.20.1789593829396;
-        Wed, 16 Sep 2026 14:23:49 -0700 (PDT)
-Received: from [192.168.1.86] ([65.181.15.100])
-        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-cc50a7a3526sm2253425a12.0.2026.09.16.14.23.43
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 16 Sep 2026 14:23:48 -0700 (PDT)
-Message-ID: <786a1460-c660-4de7-bb07-debdbd6a4661@oss.qualcomm.com>
-Date: Thu, 17 Sep 2026 07:23:40 +1000
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="PaAS6O1s"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 835381F000FF;
+	Wed, 16 Sep 2026 22:06:41 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1789596402;
+	bh=ny09sGuz62R7zzgPJNiGubj3ISECT0ngvJE9U9Sh5CU=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=PaAS6O1seQoDoHbebs1MD+5RjJ0uBa37UI44pZikkQNKW/3s0B56qDJcTo0irzBgJ
+	 T3z7XzdxVRCjgB1gqKi0cWKv07EY5zpmF2+qTqpqLuVk6ojY9enq2EAkEYFZbUbjQ4
+	 RtYwE+WYP38tlPL5I39dT3ssTouyuomnaQT6VAoop9HkDtsKAfAouCOhzTAP/aicTS
+	 NT4VPfYfteyCD+NuRGWiH5QxsvVgbkJfDD8AGlhvTgD7IEV7T/6C2b/EypMhVbSCbz
+	 Xx94wjoqwii+v2vC/BK+humVsc9J+qZ3x/7pZ1EMsUK6Y/LXzUcXoWx0Dk2RqaRSyu
+	 3yNlIPh1zO5eQ==
+Date: Wed, 16 Sep 2026 17:06:38 -0500
+From: Bjorn Andersson <andersson@kernel.org>
+To: Pankaj Patil <pankaj.patil@oss.qualcomm.com>
+Cc: Taniya Das <taniya.das@oss.qualcomm.com>, 
+	Abel Vesa <abelvesa@kernel.org>, Stephen Boyd <sboyd@kernel.org>, 
+	Brian Masney <bmasney+clk@redhat.com>, Jerome Brunet <jbrunet+clk@baylibre.com>, 
+	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, Ajit Pandey <ajit.pandey@oss.qualcomm.com>, 
+	Imran Shaik <imran.shaik@oss.qualcomm.com>, Jagadeesh Kona <jagadeesh.kona@oss.qualcomm.com>, 
+	linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH] clk: qcom: Fix default entries for Glymur EVACC and GPUCC
+Message-ID: <aqsS3KIl59RdeEQb@baldur>
+References: <20260915-kconfig_updates-v1-1-b9bdf35db955@oss.qualcomm.com>
+ <0b371ca0-e91f-4ede-921f-9610961bbd6b@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH RFC 1/5] optee: riscv: add RPMI TEE service group
- transport
-To: Trilok Soni <trilokkumar.soni@oss.qualcomm.com>,
-        Jens Wiklander <jenswi@kernel.org>, Sumit Garg <sumit.garg@kernel.org>,
-        Paul Walmsley <pjw@kernel.org>, Palmer Dabbelt <palmer@dabbelt.com>,
-        Albert Ou <aou@eecs.berkeley.edu>, Alexandre Ghiti <alex@ghiti.fr>,
-        Rahul Pathak <rahul@summations.net>, Anup Patel <anup@brainfault.org>,
-        Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
-        op-tee@lists.trustedfirmware.org, linux-riscv@lists.infradead.org,
-        devicetree@vger.kernel.org
-References: <20260912-rpmi-tee-service-grp-dev-v1-0-1d1d35c2a859@oss.qualcomm.com>
- <20260912-rpmi-tee-service-grp-dev-v1-1-1d1d35c2a859@oss.qualcomm.com>
- <a9d9aac7-cb2d-46fe-a220-40f61f615b89@oss.qualcomm.com>
-Content-Language: en-US
-From: Amirreza Zarrabi <amirreza.zarrabi@oss.qualcomm.com>
-In-Reply-To: <a9d9aac7-cb2d-46fe-a220-40f61f615b89@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Proofpoint-ORIG-GUID: hAxRgUl0OZoBoX2OAU9QtvRDg79yjViG
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTE2MDI5NyBTYWx0ZWRfX3dGr4X0pYA8U
- 32KaeYld2bou8qRNf0a9gjuY65pPwRXIeKhdHYViaEGsmuvHfP/WU8OdjRtiZ1oD89Yj6wxrdpJ
- Fu0gTylAbLIcUF3riAH3ebocrqV+1jA=
-X-Authority-Analysis: v=2.4 cv=HbeB3SE8 c=1 sm=1 tr=0 ts=6aab08e6 cx=c_pps
- a=Qgeoaf8Lrialg5Z894R3/Q==:117 a=RYJI0oIToGyOemi2SthaJQ==:17
- a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22
- a=EUspDBNiAAAA:8 a=-u4usqK0Ikitso02ChQA:9 a=QEXdDO2ut3YA:10
- a=x9snwWr2DeNwDh03kgHS:22
-X-Proofpoint-GUID: hAxRgUl0OZoBoX2OAU9QtvRDg79yjViG
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTE2MDI5NyBTYWx0ZWRfX36+kHmg8E34s
- +7nFbNoMzuizz9+tBRv9vbSEMuD46/d3YFXMjwiCzGwsvkwawd+C5DdNboOBW7DFbKS7tEBpCTi
- x48U7Gq4coQej9efgWQT10OO/oR+pbw8mZN3icYXiECn+F3ylzni46hm3fBb659d5WU/IWVXhCB
- IWiz9A2S4+Y6cQGTMmV7qs253+IKu3SGfkxegFSZr4/wUMHkGbCV0ViZ3LCU+snhxSQiufehXfo
- ULIyVJdaoZVD7Gc0b6rv2jKtRLgTO5SJ6Sh7oviaoNodtW6LLyCgu6Aqpi4KdaJYNwcfsNaq4O1
- sQN8c5DGFMu1a7Tlt+TkQmVT73B/q3CHF7H/W8p6rKJar3Uu3wqkYJ+YIneuu5JKukhuiXc3Hu0
- dq8sZKDar/NFtyWWdIT0YGUnXgjRAvLpSLK673jC+oPT7SMTDSWVyLQ8JgjRWX+wxUDNWEnvKPJ
- XUwsTZIrM0Nh/1x7LHg==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-16_03,2026-09-16_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 priorityscore=1501 bulkscore=0 spamscore=0 adultscore=0
- suspectscore=0 malwarescore=0 phishscore=0 clxscore=1015 lowpriorityscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609160297
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <0b371ca0-e91f-4ede-921f-9610961bbd6b@oss.qualcomm.com>
 
-Hi Trilok,
-
-On 9/16/2026 3:30 PM, Trilok Soni wrote:
-> On 9/12/2026 3:15 AM, Amirreza Zarrabi wrote:
->> Add an OP-TEE transport for RISC-V using the RPMI TEE service group over
->> the SBI MPXY mailbox framework.
->>
->> Request one mailbox channel per hart and use the channel corresponding to
->> the current CPU when issuing a TEE request. Probe the RPMI TEE service
->> group and required memory-sharing capabilities before registering the
->> transport.
->>
->> This provides the basic transport and discovery support needed by the
->> following patches.
->>
->> Signed-off-by: Amirreza Zarrabi <amirreza.zarrabi@oss.qualcomm.com>
->> ---
->>  drivers/tee/optee/Makefile                 |   1 +
->>  drivers/tee/optee/core.c                   |   8 +-
->>  drivers/tee/optee/optee_private.h          |  34 ++++
->>  drivers/tee/optee/optee_riscv.c            | 312 +++++++++++++++++++++++++++++
->>  drivers/tee/optee/optee_riscv.h            | 141 +++++++++++++
->>  include/linux/mailbox/riscv-rpmi-message.h |   1 +
->>  6 files changed, 495 insertions(+), 2 deletions(-)
->>
->> diff --git a/drivers/tee/optee/Makefile b/drivers/tee/optee/Makefile
->> index ad7049c1c107..925b8ec7ef68 100644
->> --- a/drivers/tee/optee/Makefile
->> +++ b/drivers/tee/optee/Makefile
->> @@ -9,6 +9,7 @@ optee-objs += supp.o
->>  optee-objs += device.o
->>  optee-objs += smc_abi.o
->>  optee-objs += ffa_abi.o
->> +optee-$(CONFIG_RISCV_SBI_MPXY_MBOX) += optee_riscv.o
->>  
->>  # for tracing framework to find optee_trace.h
->>  CFLAGS_smc_abi.o := -I$(src)
->> diff --git a/drivers/tee/optee/core.c b/drivers/tee/optee/core.c
->> index a52c1f498b99..63f1725e646e 100644
->> --- a/drivers/tee/optee/core.c
->> +++ b/drivers/tee/optee/core.c
->> @@ -220,6 +220,7 @@ void optee_remove_common(struct optee *optee)
->>  
->>  static int smc_abi_rc;
->>  static int ffa_abi_rc;
->> +static int riscv_abi_rc;
->>  static bool intf_is_regged;
->>  
->>  static int __init optee_core_init(void)
->> @@ -245,9 +246,10 @@ static int __init optee_core_init(void)
->>  
->>  	smc_abi_rc = optee_smc_abi_register();
->>  	ffa_abi_rc = optee_ffa_abi_register();
->> +	riscv_abi_rc = optee_riscv_abi_register();
+On Wed, Sep 16, 2026 at 02:40:31PM +0530, Pankaj Patil wrote:
+> On 9/15/2026 12:28 PM, Taniya Das wrote:
+> > The EVA clock controller (CLK_GLYMUR_EVACC) config carried a duplicate
+> > 'default m if ARCH_QCOM' line, one of them misplaced before the 'select'
+> > statement, while the graphics clock controller (CLK_GLYMUR_GPUCC) config
+> > was missing the 'default m if ARCH_QCOM' line altogether.
+> > 
+> > Drop the duplicate on EVACC and add the missing default on GPUCC so both
+> > Qualcomm Glymur clock controllers follow the same
+> > depends on / select / default / help ordering used by the other entries.
+> > 
+> > Fixes: e291ec812dec ("clk: qcom: Add EVA clock controller driver for Glymur SoC")
+> > Fixes: 67e645285dd0 ("clk: qcom: Add support for GPUCC and GXCLK for Glymur")
+> > Signed-off-by: Taniya Das <taniya.das@oss.qualcomm.com>
+> > ---
+> > Fix Kconfig ordering/consistency issues for the Qualcomm Glymur clock
+> > controllers: the EVA clock controller (CLK_GLYMUR_EVACC) carried a
+> > duplicate 'default m if ARCH_QCOM' line, one of them misplaced before the
+> > 'select' statement, and the graphics clock controller (CLK_GLYMUR_GPUCC)
+> > was missing the 'default m if ARCH_QCOM' line altogether.
+> > 
+> > With this change both entries follow the same
+> > depends on / select / default / help ordering used by the other Glymur
+> > clock controller Kconfig entries.
 > 
-> Isn't it growing rapidly now? We have two register calls for the ARM,
-> one for the RISC-V. One more region specific ISA I am aware of and it
-> may have op-tee support in future? It is time we fix this logic
-> in the better way. 
->
-> 
->>  
->> -	/* If both failed there's no point with this module */
->> -	if (smc_abi_rc && ffa_abi_rc) {
->> +	/* If all failed there's no point with this module */
->> +	if (smc_abi_rc && ffa_abi_rc && riscv_abi_rc) {
-> 
-> This is started looking ugly in my opinion. 
-> 
->>  		if (IS_REACHABLE(CONFIG_RPMB)) {
->>  			rpmb_interface_unregister(&rpmb_class_intf);
->>  			intf_is_regged = false;
->> @@ -270,6 +272,8 @@ static void __exit optee_core_exit(void)
->>  		optee_smc_abi_unregister();
->>  	if (!ffa_abi_rc)
->>  		optee_ffa_abi_unregister();
->> +	if (!riscv_abi_rc)
->> +		optee_riscv_abi_unregister();
->>  }
->>  module_exit(optee_core_exit);
->>  
->> diff --git a/drivers/tee/optee/optee_private.h b/drivers/tee/optee/optee_private.h
->> index aefe1e6f5689..8d22d65e087b 100644
->> --- a/drivers/tee/optee/optee_private.h
->> +++ b/drivers/tee/optee/optee_private.h
->> @@ -171,6 +171,31 @@ struct optee_ffa {
->>  	struct work_struct notif_work;
->>  };
->>  
->> +/**
->> + * struct optee_riscv - RPMI TEE communication struct
-> 
-> do we need to name it optee_riscv? we don't use optee_arm anywhere in this
-> code I believe. 
-> 
-> More later...
+> Fix was posted by Sivansh and has been reviewed, should get picked up.
+> https://lore.kernel.org/all/20260821045214.2623299-2-sivansh.gupta@oss.qualcomm.com/
 > 
 
-The naming convention, and even the file structure, will change in v2.
-This RFC currently mirrors the _internal_ FF-A implementation, which is neither
-required nor ideal. We are moving away from that structure.
+Thanks for pointing that out, Pankaj.
 
-Best Regards,
-Amir
+Regards,
+Bjorn
 
+> > ---
+> >  drivers/clk/qcom/Kconfig | 2 +-
+> >  1 file changed, 1 insertion(+), 1 deletion(-)
+> > 
+> > diff --git a/drivers/clk/qcom/Kconfig b/drivers/clk/qcom/Kconfig
+> > index 6ef083f5d9e251d2d2c5592a3f3dd51845dc743b..b3ffe1dced017e6f4bd3f0fa9c11bed5948391fc 100644
+> > --- a/drivers/clk/qcom/Kconfig
+> > +++ b/drivers/clk/qcom/Kconfig
+> > @@ -104,7 +104,6 @@ config CLK_GLYMUR_DISPCC
+> >  config CLK_GLYMUR_EVACC
+> >  	tristate "Glymur EVA Clock Controller"
+> >  	depends on ARM64 || COMPILE_TEST
+> > -	default m if ARCH_QCOM
+> >  	select CLK_GLYMUR_GCC
+> >  	default m if ARCH_QCOM
+> >  	help
+> > @@ -127,6 +126,7 @@ config CLK_GLYMUR_GPUCC
+> >  	tristate "Glymur Graphics Clock Controller"
+> >  	depends on ARM64 || COMPILE_TEST
+> >  	select CLK_GLYMUR_GCC
+> > +	default m if ARCH_QCOM
+> >  	help
+> >  	  Support for the graphics clock controller on Glymur devices.
+> >  	  Say Y if you want to support graphics controller devices and
+> > 
+> > ---
+> > base-commit: 1a1de54f7369cd2b5bac0f265910e60ad3a6b4c3
+> > change-id: 20260915-kconfig_updates-39a684a748d0
+> > 
+> > Best regards,
+> 
