@@ -1,236 +1,125 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7C45F4F6488
-	for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 14:40:00 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1836D345EA9;
+	Wed, 16 Sep 2026 14:43:22 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789569601; cv=none; b=HTYdOY26pMPwMfZ2fq2c+f1LtLFyvNmu2djFG2iJkg1hXgUEL6aJD4yXyGzW5+7rW2CzYs2YXXlx/N+teBYes8x/G/0I9bUu41IsjFIoj6Vx8y1gdRliXOn7ly/reXBHVoBw+h9m1XmlqXcQAXIIfIUBq+zoc0W+PD3jLjYvr7s=
+	t=1789569804; cv=none; b=Jj9PcFVxvNdJ0uJKtitxhW0AxQacsWchp1H6g8bDc3Zb2WhuMHel7NtFnvVPKcwIRUUwmIRc/fjh7PZEuOgIkxHfabBXN396MRafDjIz8eQ+iAEHZbewo31ui+OY4j5fWFObvY2t3+MzEcKydxr9L93Fh6MRPoFMcD37v8FyvcQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789569601; c=relaxed/simple;
-	bh=G+np0cc0It8i302KUloDocttjC0x6BgQYbU+cAG/nt0=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=qWR8Cxjn76OQCuD7Sf7WAEItUtyPp6Bz28lXp1CHYT9byGroTTKgeUGyBUTb9SjdaMXGEVfznTfugjVkdmK6CwvrOCjCmn/gzug8O8XxcyFMAFZpoLUhbVxRP6TSqb6RWU30xOYOr1pis4kgD1MCn8AoDh1iyNLg8tWnADTRHYw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=fmbpbGf6; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=VDZ6k1F3; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1789569804; c=relaxed/simple;
+	bh=2blyJVrLPGRj0l0yu7fJBugdjsKzvJN/b9+RvvBJZUk=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=R3LDOicFez07q/0Cegs3ZEUp0G0y/gz4hSKDcwqOh/OYdA0+HW1vweUNjw6UbhwOJ+xxsUq71BQZiTpR090pn74Tsi4zLdJWD/d0zJFGyWcruBpUMRJ6fHu1kTmHtxyISw/3TPlj5LWxhqgZSUHFMR2ngMDAdEd72KKyFVtyQSU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=US4HjDlo; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="fmbpbGf6";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="VDZ6k1F3"
-Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68GEYVGu2279296
-	for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 14:40:00 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-type:date:from:in-reply-to:message-id:mime-version
-	:references:subject:to; s=qcppdkim1; bh=0oZAvYtD/3whDsCwaeMTxLwk
-	6ROtRTkdevulCwSPy3w=; b=fmbpbGf6d6GKMkaSfdm+GsDbA4+vxi6oxOUStNxB
-	a5CXoDbNwnIVIK8GjpT78iyZqM1N4LYRmu6tcst4CyETZENTH0+4N/xRBleb5EwC
-	AGPi7jhmo41dPKqiz6110CUg89EZxbrCohzXClrRo/2t6S1gvbbfAkXo/WNzt9LU
-	nPHpuZfiLEUlmZqRZsKR3RGqXv4GDwXR+xv7/ePF2hgy8rfk2adv7LZ3MictB6fm
-	s7fwmr3umQgyGkoo9rwLYOf53q4NPFP83jmYqa6mikJ2aXCYJ+khY4YwuhUVHrAs
-	CsGltqHtTCnW4v87EakeM9UDlzFuXwK3ldiXQUhHExcowA==
-Received: from mail-pg1-f200.google.com (mail-pg1-f200.google.com [209.85.215.200])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gqthnrqa2-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 14:39:59 +0000 (GMT)
-Received: by mail-pg1-f200.google.com with SMTP id 41be03b00d2f7-cc4fc935a11so2083397a12.0
-        for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 07:39:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1789569599; x=1790174399; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=0oZAvYtD/3whDsCwaeMTxLwk6ROtRTkdevulCwSPy3w=;
-        b=VDZ6k1F3pRgvZpcxW3VFXlXxgzSO81RwsB3R1Pkb7bRtuKO9A4Jgdf074bWJWx0WLL
-         8BeZ/lDtv5Szzk28pIJa9+CZQM0HXY6EgOX6xL7R5wutyXT9hWRK3kgemCyj+/D8FEBy
-         /7OxRCxBXErsHbsYPOZHjomnkjNI8Ihs/g3T5K9Hj0AeGrKELRrbQmLRciemR747dGyw
-         8fPEk/ditzrY7+vgJ0W9KEI/wuY1hJD5AYssZW9DgdqKYD53uIii988pCKFiO4mGacpB
-         XHgrXEua/2mjGG8IKRAferHxEjzpq261IO6BRbYNx+7yHozrhjRx7sAEo9saREpSujq9
-         bUNQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1789569599; x=1790174399;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=0oZAvYtD/3whDsCwaeMTxLwk6ROtRTkdevulCwSPy3w=;
-        b=glxTXxmnt+MnPaX5MDoMlgis41ipQaClQ8cX3Nel+itkdgJZWzUERDxGxccVZNboJj
-         ATugho2McrbWTnbV/jOC63mO4W0DCGDd+WUva4VT/X60oJb8eEoJFwHoLYZqeYly77Yw
-         wsolrzYkddJ+KR4QoNAEj4MBoQlp9T+ZNio3JoGH+p71+q5aB5BHh+JWvBlRqR49fYu2
-         cof4j78kOrm2Tac8pC5mWeq64ktxGHFcwluE5hpz60vbYwcYMjLOYXVmqIllrM14jbby
-         bBwN6Rno58yuALyMSjBBiXVv5l4ySxAqd+1dMV0B5edhUAr7SlneDtLrzQENWu6ehqr1
-         ZLlQ==
-X-Forwarded-Encrypted: i=1; AKwUvBwQWP2KxdJYNoUFgL6upC0/FFN0fv/hkj8+5Oed5BJWqG5NoGVKjbZ3ZVKqU+Z4XIznhoYMkDnUc6GKTBA2@vger.kernel.org
-X-Gm-Message-State: AFuF++lAllbvHWXoQqeAqrceKgNSlvN8mzGiljwn/Di/MNvZSFq0zZ3m
-	UyM+ME6Zx2bViMfO3nIlwM8+Sdq5hG+14zUC2V5LSK7k4dxgAIAYZFdIPCz0XpG/sXvvFz/RLV3
-	8wO3X238rANDCXFA9UZLvgxbaNFCb4Cu1zKg5qNgZnzpI8ynncOyM8UW/IQAUPcrcxEh6
-X-Gm-Gg: AYBFou04VTJkknqwjIGXSQv1IeHsJFRkymr3bPP8zgZ8l3dzlGd70JfrgAgvbUYqW9w
-	RfNC5WFUH9oriEvF3nMn0D5Xn4Fv9tOsLMkCp718mrCk0t8Dd0RUvJ5Ooti/3UQf/NwbPkUPAVA
-	2T27qJ9cKHZ9FK8fdNlwjjDnnqbhuwYIHArnbWsDtvY+mrxY7DBUHC8bnVD05v3FPxgTcTXQ3Fx
-	4P/nB+x545jCySWZ1OmBksTUcBop+w37H9iv4Vn+Tm4DOrtyz6a9fOBNdXPNvtqG3WNxJPtPsm6
-	vU4iAccSME5KnemGRGPbk6lgKOIlFFZrz4zacBc2Yvb3bjHMV8tfC5CRL8C/Up4MJgxztHMaJl6
-	7mCLfFWmThYy7Li0dcBybtpxaqY/dHHk424XVmNNnXUs=
-X-Received: by 2002:a05:6a20:1603:b0:3d3:ae1f:d7f5 with SMTP id adf61e73a8af0-3dd5f74d9b2mr7229572637.21.1789569598987;
-        Wed, 16 Sep 2026 07:39:58 -0700 (PDT)
-X-Received: by 2002:a05:6a20:1603:b0:3d3:ae1f:d7f5 with SMTP id adf61e73a8af0-3dd5f74d9b2mr7229498637.21.1789569598494;
-        Wed, 16 Sep 2026 07:39:58 -0700 (PDT)
-Received: from QCOM-aGQu4IUr3Y (i-global052.qualcomm.com. [199.106.103.52])
-        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-cc50aa9b03asm1782560a12.2.2026.09.16.07.39.54
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 16 Sep 2026 07:39:58 -0700 (PDT)
-Date: Wed, 16 Sep 2026 22:39:52 +0800
-From: Shawn Guo <shengchao.guo@oss.qualcomm.com>
-To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-Cc: Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>,
-        Bartosz Golaszewski <brgl@kernel.org>,
-        Krishna Kurapati <krishna.kurapati@oss.qualcomm.com>,
-        devicetree@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-        linux-kernel@vger.kernel.org,
-        Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
-Subject: Re: [PATCH 2/5] arm64: dts: qcom: nord: Add the USB controller nodes
-Message-ID: <aqqqOMS6QL3gxF58@QCOM-aGQu4IUr3Y>
-References: <20260911142040.100263-1-shengchao.guo@oss.qualcomm.com>
- <20260911142040.100263-3-shengchao.guo@oss.qualcomm.com>
- <f04ee103-ada5-41bc-88e7-7380b2b38e98@oss.qualcomm.com>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="US4HjDlo"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 879721F000FF;
+	Wed, 16 Sep 2026 14:43:20 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1789569802;
+	bh=xSDVG1lglUQwFFqlygYf5GfKu89gxUCIwl8QHxqxrNQ=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To;
+	b=US4HjDloLd3rTwRGv61tzk1+s2ehxUJaAKRwaEQW5YxLXGW7eDKunWQaQOXFSm76b
+	 tWV+Ste9NP/hiHh42Gr3UzI1zxBFLXStdNvV7vw1eOxb6tFBMrud8unwiYuUXrvVLx
+	 MHtQ9o1Gyql2G1UBrGgLoErR/sCe6j+DZBf+RYnWRE0M5k/AMxpJBWRhcbwotgQofB
+	 FNJ4N9pQ4qYImsGMsVxwfwrK8YXskAmdRtoUHEv2yX3ThKE/Is3mRJH5FRrETPd72j
+	 bfE/3/ker2vNMZ56/vj2k1CqLwQVDe/Dhh2VPruwWve/28XMRHkr/dTNwW1tjAldj3
+	 l6ePbVM1BezCA==
+Message-ID: <b9693892-d0d3-49aa-8fb8-21da12f6eadc@kernel.org>
+Date: Wed, 16 Sep 2026 15:43:18 +0100
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <f04ee103-ada5-41bc-88e7-7380b2b38e98@oss.qualcomm.com>
-X-Proofpoint-ORIG-GUID: 8GKucJcMCflAVxIXLjs043GoOZAVivGm
-X-Authority-Analysis: v=2.4 cv=IsKL47/g c=1 sm=1 tr=0 ts=6aaaaa3f cx=c_pps
- a=oF/VQ+ItUULfLr/lQ2/icg==:117 a=b9+bayejhc3NMeqCNyeLQQ==:17
- a=kj9zAlcOel0A:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22
- a=EUspDBNiAAAA:8 a=SqxCJjNS5mIqFQWAgecA:9 a=CjuIK1q_8ugA:10
- a=3WC7DwWrALyhR5TkjVHa:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTE2MDE5OCBTYWx0ZWRfX3mDSuzAlmy1O
- Fx7hdHf4a1hDa8yLNZrkmI+gsOHV7cm2uABIKZYRKIl5n3WE+SO28NI57FyNjkr6SuzRsiWM/dy
- HJYNRXJUK4iHeSBDRjjq1fUiZLQH8i9q4+JwEFfwvem664FgRUE31idb4bIcm8Sjur0zhAUE5Q7
- IDggNeBQUOFfRCEGL5luGy7YrtphRR5Db1rgoqEyaQW3ONzGDgnIVPuYok3Uw9tp5ITGq8rEry9
- h/UQEgrY7NULlEr06dHXdB9yQKc+0/HX6Hia2wQzXrvaVRws+yTzBtMZ9kuL4jD3rdM0PiKErLr
- YGA18jtJ8f1E5pN4TImjjeUmt1+/wffvVpAFmdIm8InZcw1WoLZ5DVgeMDvxpFDiAHyidD9l4LO
- N/oGvgUuahANXOwuHjk5JBSgEX181SgqKgvdnb4H2sd+/6Cn1+1wNYcZmkQwjPzckBNxVdwRiO+
- oX4vYoB7yFKbbFzIxjg==
-X-Proofpoint-GUID: 8GKucJcMCflAVxIXLjs043GoOZAVivGm
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTE2MDE5OCBTYWx0ZWRfX+xyki6D/fvvC
- KI7Cx6Kj9EjicapTUjs3DFB7oKDPc9/L4hccqxOh5Qkslhle2hCLUtT6a1ExvocTl7Y5ontBJmw
- JJQ2ELI+hbNRsw87/D6j0UQ4jvJCFC4=
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-16_02,2026-09-16_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- suspectscore=0 spamscore=0 bulkscore=0 priorityscore=1501 lowpriorityscore=0
- adultscore=0 impostorscore=0 phishscore=0 clxscore=1015 malwarescore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609160198
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v13 3/5] media: qcom: camss: Add support for PHY API
+ devices
+To: Oleg Keri <okerixx@gmail.com>,
+ Bryan O'Donoghue <bryan.odonoghue@linaro.org>
+Cc: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
+ Konrad Dybcio <konradybcio@kernel.org>,
+ Loic Poulain <loic.poulain@oss.qualcomm.com>, Robert Foss
+ <rfoss@kernel.org>, Todor Tomov <todor.too@gmail.com>,
+ Mauro Carvalho Chehab <mchehab@kernel.org>,
+ Nihal Kumar Gupta <nihal.gupta@oss.qualcomm.com>,
+ linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+ linux-kernel@vger.kernel.org
+References: <20260728-b4-linux-next-25-03-13-dtsi-x1e80100-camss-v13-3-ae811e2f0799@linaro.org>
+ <BkBVG4wA3hW3czd3HkiTpcRrXAS9XQUXYIaW-daywIBstO3j8EYH1SjT-KLmM_3FIkcbIETf8t-eyx048tIIzA==@protonmail.internalid>
+ <178956537382.2699.6279926603215472320@gmail.com>
+From: Bryan O'Donoghue <bod@kernel.org>
+Content-Language: en-GB
+Autocrypt: addr=bod@kernel.org; keydata=
+ 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
+In-Reply-To: <178956537382.2699.6279926603215472320@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Mon, Sep 14, 2026 at 10:33:06AM +0200, Konrad Dybcio wrote:
-> On 9/11/26 4:20 PM, Shawn Guo wrote:
-> > From: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
-> > 
-> > Add the base nodes for the three DWC3 USB controllers. These carry only
-> > the SoC-invariant properties and are disabled by default. The extension
-> > for the embedded Nord variant and relevant board files will add the
-> > platform resources and enable them.
+On 16/09/2026 14:29, Oleg Keri wrote:
+> Hi Bryan,
 > 
-> [...]
+> On Tue, Jul 28, 2026 at 10:35:34AM +0100, Bryan O'Donoghue wrote:
+>> Add support for PHY API devices
+> One thing I ran into while bringing this up on a Lenovo Yoga Slim 7x
+> Gen 11 (Glymur, ov08x40 on CSIPHY4, two lanes), with Nihal's Glymur
+> CAMSS series on top: the two ends of the CAMSS <-> PHY link count lanes
+> differently, and the CAMSS side silently ends up on the wrong lanes.
 > 
-> > +		usb_2: usb@a200000 {
-> > +			compatible = "qcom,nord-dwc3",
-> > +				     "qcom,snps-dwc3";
-> > +			reg = <0x0 0x0a200000 0x0 0xfc100>;
-> > +
-> > +			interrupts-extended = <&intc GIC_SPI 910 IRQ_TYPE_LEVEL_HIGH>,
-> > +					      <&intc GIC_SPI 907 IRQ_TYPE_LEVEL_HIGH>,
-> > +					      <&pdc 8 IRQ_TYPE_EDGE_BOTH>,
-> > +					      <&pdc 7 IRQ_TYPE_EDGE_BOTH>;
-> > +			interrupt-names = "dwc_usb3",
-> > +					  "pwr_event",
-> > +					  "dp_hs_phy_irq",
-> > +					  "dm_hs_phy_irq";
+> The csi2-phy binding numbers data-lanes from 1, and the PHY driver
+> converts:
 > 
-> There's also a hs_phy_irq @ SPI 908
+> 	/* Convert data-lanes = <1 2 3 4> to bit positions */
+> 	csi2phy->stream_cfg.lane_cfg.data[i].pos = data_lanes[i] - 1;
+> 
+> The CAMSS endpoint still takes its data-lanes as 0-based positions;
 
-You are right! That means the binding for "qcom,nord-dwc3" needs to be
-fixed as well. @Bartosz
+Resolved here:
 
-> > +
-> > +			iommus = <&apps_smmu_0 0x14e0 0x0>;
-> > +
-> > +			dma-coherent;
-> > +			wakeup-source;
-> > +
-> > +			snps,dis-u1-entry-quirk;
-> > +			snps,dis-u2-entry-quirk;
-> 
-> This is a suspiciously short list of quirks..
+https://lore.kernel.org/r/20260906-b4-linux-next-25-03-13-dtsi-x1e80100-camss-v17-5-e2197a3e2551@linaro.org
 
-I will double check.
-
-Shawn
-
-> > +
-> > +			maximum-speed = "high-speed";
-> > +
-> > +			qcom,select-utmi-as-pipe-clk;
-> > +
-> > +			status = "disabled";
-> > +		};
-> > +
-> > +		usb_1: usb@a400000 {
-> > +			compatible = "qcom,nord-dwc3",
-> > +				     "qcom,snps-dwc3";
-> > +			reg = <0x0 0x0a400000 0x0 0xfc100>;
-> > +
-> > +			interrupts-extended = <&intc GIC_SPI 917 IRQ_TYPE_LEVEL_HIGH>,
-> > +					      <&intc GIC_SPI 918 IRQ_TYPE_LEVEL_HIGH>,
-> > +					      <&pdc 13 IRQ_TYPE_EDGE_BOTH>,
-> > +					      <&pdc 12 IRQ_TYPE_EDGE_BOTH>,
-> > +					      <&pdc 41 IRQ_TYPE_LEVEL_HIGH>;
-> > +			interrupt-names = "dwc_usb3",
-> > +					  "pwr_event",
-> > +					  "dp_hs_phy_irq",
-> > +					  "dm_hs_phy_irq",
-> > +					  "ss_phy_irq";
-> 
-> hs_phy_irq @ SPI 919
-> 
-> > +
-> > +			iommus = <&apps_smmu_0 0x15c0 0x0>;
-> > +
-> > +			dma-coherent;
-> > +			wakeup-source;
-> > +
-> > +			snps,dis-u1-entry-quirk;
-> > +			snps,dis-u2-entry-quirk;
-> > +
-> > +			status = "disabled";
-> > +		};
-> > +
-> > +		usb_0: usb@a600000 {
-> > +			compatible = "qcom,nord-dwc3",
-> > +				     "qcom,snps-dwc3";
-> > +			reg = <0x0 0x0a600000 0x0 0xfc100>;
-> > +
-> > +			interrupts-extended = <&intc GIC_SPI 133 IRQ_TYPE_LEVEL_HIGH>,
-> > +					      <&intc GIC_SPI 130 IRQ_TYPE_LEVEL_HIGH>,
-> > +					      <&pdc 14 IRQ_TYPE_EDGE_BOTH>,
-> > +					      <&pdc 15 IRQ_TYPE_EDGE_BOTH>,
-> > +					      <&pdc 17 IRQ_TYPE_LEVEL_HIGH>;
-> > +			interrupt-names = "dwc_usb3",
-> > +					  "pwr_event",
-> > +					  "dp_hs_phy_irq",
-> > +					  "dm_hs_phy_irq",
-> > +					  "ss_phy_irq";
-> 
-> hs_phy_irq @ SPI 131
-> 
-> Konrad
+---
+bod
