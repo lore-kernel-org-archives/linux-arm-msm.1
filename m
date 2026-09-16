@@ -1,142 +1,293 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-yx2-f13.google.com (mail-yx2-f13.google.com [74.125.224.141])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 69595495AC0;
-	Wed, 16 Sep 2026 16:36:17 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 37C124D0CDC
+	for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 16:46:00 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.224.141
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789576582; cv=none; b=V3Wv73LPk2GZqlMfFnPeiI/IXZX/PFl4Z7loYbUCcat9ZlYnSHkAdKDCRwQjbGTEJPtlCkQchjAgZoicr58CXDIpg1/C4Pu+PSR/4YdEho/x5XTkYRTGrgZTJ2+6PaRlrETIHwrVfrQIra++eODAlbip1qdmx6tNdT3P6O+YuAU=
+	t=1789577172; cv=none; b=aGFdNWUk5qRzKkFs89TOrzjCaccvABoH4IHlSoMmDXVrCjPR2YuG+Mc/uRA9g8H8NwxoQpS1zroG5tRKAheEzySkdR6GswnL6AuR9Kcnzq6WR1NEQtvwFIYKFCPWplDH585hFUtKDB8Be8p68pQAMsjXyEYExP6LnA+jdvWGtn4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789576582; c=relaxed/simple;
-	bh=lP0PNuTOzAf1niRdMyk8DC2qQ5nMAHczVp7Sif7J3oY=;
-	h=Date:From:To:Cc:Subject:Message-ID:MIME-Version:Content-Type:
-	 Content-Disposition:In-Reply-To; b=WjDpfgGls/DqtGR624GoP2O6qcESa3u+NpHG4zex96k9pTylQnsqqbSmnxLUZvTsG98nSmdSQJh2FtcTNuUxOoGeClIPQdd4LKaGijc1VTNgqt6+l6v68MB+7+PWMi1jXCJn7TjTAtC4OTKBItTuLjXfSacuwlnjsdj77k/Tp6s=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=UvJ337nk; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1789577172; c=relaxed/simple;
+	bh=qUjUi4OUkxEIztp25vsRitnlL+dXfqSGw1HVgzhiFO8=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=s41rE45wqTK/GkC79ngzAucWymGUzwF+rO0atTQ8UPSx4/bqMUzECmfaJGnvAGsVmSA1kZO6Fz2+BCdAde7KVJH2CmGADn0dgJ+tOlnUsw0hxfTRCD9QVM2jonIJ/bVjRq1oNlVlLxriFwo9xtrQulKqDVLOLxKQw06k3BOvNOE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=EPKDZ+PL; arc=none smtp.client-ip=74.125.224.141
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="UvJ337nk"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0D2C01F000FF;
-	Wed, 16 Sep 2026 16:36:16 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1789576577;
-	bh=cTDQU2a4xA6zMCGkHZ1RKkFxyNk98kBgQHraj3q3KGU=;
-	h=Date:From:To:Cc:Subject:In-Reply-To;
-	b=UvJ337nkiarHTREPKIx+MfkaHS85iCrr+b/Xzi5MEKY9g9kAuAxhLIQkXY36Xafgm
-	 CTcgB3CIgJeyG+pU1nawACvwmcuNQzME+001LPW5zsBKNo2QqVFegl0cmgycrznOOy
-	 KMMPhACcbjxk0SqABN68Dy6WdKs82by0T/et4cjviSloYQ8x4ZARychMQv3P0vsGxF
-	 2PNengmoaEmL0ZWVYfkPkwwtQDvF9XcrxUfZ3Lo5wi8PAapMdRhxvlDTvtSFTxl1/Z
-	 gXquUIIvYYXUkQR5k9P2zhqxqG9qUIQHPASUmo9feNw7i4obC5lChx1d9GhPK9/m6w
-	 0w6k3x68UZsOA==
-Date: Wed, 16 Sep 2026 11:36:15 -0500
-From: Bjorn Helgaas <helgaas@kernel.org>
-To: Marc Zyngier <maz@kernel.org>
-Cc: Manivannan Sadhasivam <mani@kernel.org>,
-	Qiang Yu <qiang.yu@oss.qualcomm.com>,
-	Lorenzo Pieralisi <lpieralisi@kernel.org>,
-	Krzysztof =?utf-8?Q?Wilczy=C5=84ski?= <kwilczynski@kernel.org>,
-	Rob Herring <robh@kernel.org>, Bjorn Helgaas <bhelgaas@google.com>,
-	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
-	linux-pci@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-	linux-kernel@vger.kernel.org, James Morse <james.morse@arm.com>,
-	Andrew Scull <ascull@google.com>
-Subject: Re: [PATCH v2] PCI: qcom: Block accesses to downstream devices on
- link down
-Message-ID: <20260916163615.GA927772@bhelgaas>
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="EPKDZ+PL"
+Received: by mail-yx2-f13.google.com with SMTP id 956f58d0204a3-66f7f72a284so1384540d50.2
+        for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 09:46:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1789577157; x=1790181957; darn=vger.kernel.org;
+        h=content-type:in-reply-to:autocrypt:from:content-language:references
+         :cc:to:subject:user-agent:mime-version:date:message-id:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=Bn6aZ1lxwJ4I9Ak9bkD3kswRMqJ+xZxBaB9EJrANxpc=;
+        b=EPKDZ+PLK5/qV2BV9dlC+vUbDDr8CnTKrtN0betFSOYS+eL8+V5Bv3HIVcBBw8nZkG
+         XvhCJX/4FvNyMkMAzvXNG0dhRvApwgrvst//XT2eqy5l1sQrgagon4+ITro8R827A2j6
+         mTo2KPv7QWxuhHJ6H82l+G971tl2EeL4s5RaKmnWNey10/zDsUK2xJHi39q2qyID6xKE
+         x0hbedXU8yudpc43hhJaA7YZok0lfhP/R1VizEnTiHBod/wEQ98gbTzxZ77k+H3nPJ+X
+         mRBqkaFQ/zLCAKIdQFEEpfiMGm6RE9Iu7pjuL6NHvWjDy3fjWAlVKa65s1UCdr7v9ifJ
+         q7Aw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1789577157; x=1790181957;
+        h=content-type:in-reply-to:autocrypt:from:content-language:references
+         :cc:to:subject:user-agent:mime-version:date:message-id:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=Bn6aZ1lxwJ4I9Ak9bkD3kswRMqJ+xZxBaB9EJrANxpc=;
+        b=mRyqEW69v024uhFPohoVDwPp6LvODGxN2bZOBbRkmCVI1uAzHKVflyv9BPmp2RIyNP
+         UidReiaLfR+T0VuDRdu3uYjpzbMx+a19SrXvtpeqH+jArfSqmb/fOHPEeAu35xkW3t3O
+         ecVEoQ2kDbBp8fnP9pzPXYZ/7625Irtr4/zr3DM6pKGBQ7z3ZdIME9bA93inxpVmNDPN
+         Pp62D2Uq7uglNfojK+RAWej7Fh0ilW3zvs1hX7ykQFCu0zNvQD0EGEKsRvDR0yhj0OhS
+         r7hJO0RJwDg8WOOk7FHhK6uJvzOenNP1j54sbPt+sbJRjKnNru/0u/CwQBTDGsnpIaIK
+         cllw==
+X-Forwarded-Encrypted: i=1; AKwUvBzPeMB86vpuRG009y5KCRofR1HxMGdl/5kDPhYpjWKjOGUCEsJZbSuxpHlYxAoTDcglfnlKuRqnaSWU/b04@vger.kernel.org
+X-Gm-Message-State: AFuF++mR0ESHqyW6E5cAu3EMoUae/0qBF5YtHzWzQwQjRu+Qnitfe5nR
+	vBtlHPidmz5n6EGsl30OYqLLFw0ois8ULEbQNNdder4BAbKuOxMLFV2F
+X-Gm-Gg: AYBFou1iN3xvAfpT374F+h08kpD2OojPqxLYi2ZFK5xCCNVm/Kqe00E2lwpIjleZGad
+	VMMsX1o5poumzVvoFHyEy4BJKBTjG74TotwHq276rRDUT0GM1vo7rKjdkC5szvBxOd3PqQgCGNk
+	kOfKJxV45QIsXaCUUQCNWO8+X5Ln8Xp/Vt4527GjrkU57atGcfb06jBDAoL4+kqTqHKvvJ7Rww9
+	ELuEbHYY2vQHSbv5zoEt7PIp5chg9OeNidZBJo9G+cKUyHbkyR1eJr+i6EapiXnth4WtzEuyZf0
+	Zg4V/FWmIk3W1vBLktzv14LaFYj/oycbkylWODz6aTC6apLhneDmZp969y5mtzHkFWHkDugE+9u
+	IGs7N19O3az5oxVr7Y3kf0AFehkF/6lx2neKZvszAm4EF+4OFM6UmDnTcIPIk7KlS8W2StUqdmH
+	zjwAZPrXwJHzRCR3CmPCRigY7r+LH/Aqp4/zoklRHVwx0RUuh9HQ5vWYgjTJRfTg0lqrKJ8fiJ+
+	g==
+X-Received: by 2002:a05:690e:1501:b0:66f:c1bc:4025 with SMTP id 956f58d0204a3-671632afbedmr1106459d50.82.1789577157100;
+        Wed, 16 Sep 2026 09:45:57 -0700 (PDT)
+Received: from [10.138.10.6] ([185.98.168.18])
+        by smtp.gmail.com with ESMTPSA id 956f58d0204a3-6715f45f803sm1587709d50.0.2026.09.16.09.45.54
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 16 Sep 2026 09:45:55 -0700 (PDT)
+Message-ID: <157aa2cc-65b3-4d89-aa5e-eccd87296293@gmail.com>
+Date: Wed, 16 Sep 2026 12:45:40 -0400
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <86jyol62sx.wl-maz@kernel.org>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v7 00/12] crypto: qce - Fix crypto self-test failures
+To: Bartosz Golaszewski <brgl@kernel.org>
+Cc: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>,
+ Thara Gopinath <thara.gopinath@gmail.com>,
+ Herbert Xu <herbert@gondor.apana.org.au>,
+ "David S. Miller" <davem@davemloft.net>,
+ Stanimir Varbanov <svarbanov@mm-sol.com>,
+ Eneas U de Queiroz <cotequeiroz@gmail.com>,
+ Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>,
+ Eric Biggers <ebiggers@kernel.org>, Bjorn Andersson <andersson@kernel.org>,
+ Konrad Dybcio <konradybcio@kernel.org>, linux-crypto@vger.kernel.org,
+ linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
+ stable@vger.kernel.org
+References: <20260910-qce-fix-self-tests-v7-0-cdbd2718af14@oss.qualcomm.com>
+ <7e1b4800-258b-4410-8e88-2ce49505689e@gmail.com>
+ <CAMRc=Mdd-_t4HniR0k-xhyS4aMD1gnqJPYgS2cEY81b0dwDZGA@mail.gmail.com>
+Content-Language: en-US
+From: Demi Marie Obenour <demiobenour@gmail.com>
+Autocrypt: addr=demiobenour@gmail.com; keydata=
+ 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
+ +MYSfkEjBz0E8CLOcAw7JIwAaeBT
+In-Reply-To: <CAMRc=Mdd-_t4HniR0k-xhyS4aMD1gnqJPYgS2cEY81b0dwDZGA@mail.gmail.com>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------3xXgf3kbCf0caq6YE31E0Mh9"
 
-On Wed, Sep 16, 2026 at 09:03:26AM +0100, Marc Zyngier wrote:
-> On Wed, 16 Sep 2026 00:14:21 +0100,
-> Bjorn Helgaas <helgaas@kernel.org> wrote:
-> > 
-> > [+cc James, Andrew, Marc for guidance on generic arm64 PCIe error
-> > recovery; beginning of thread:
-> > https://lore.kernel.org/all/20260819-ecam_blocker-v2-1-e7a8fdc1c5cb@oss.qualcomm.com]
-> > 
-> > On Tue, Sep 15, 2026 at 07:16:11PM +0200, Manivannan Sadhasivam wrote:
-> > > On Fri, Sep 11, 2026 at 12:18:07PM -0500, Bjorn Helgaas wrote:
-> > > > On Fri, Sep 11, 2026 at 08:17:29AM +0200, Manivannan Sadhasivam wrote:
-> > > > > On Tue, Sep 08, 2026 at 06:00:30PM -0500, Bjorn Helgaas wrote:
-> > > > > > On Wed, Aug 19, 2026 at 11:36:54PM -0700, Qiang Yu wrote:
-> > > > > > > After a PCIe link goes down, software may still access the
-> > > > > > > BAR (MMIO) space or configuration space of devices behind
-> > > > > > > that link before recovery has run. As the link is down,
-> > > > > > > these accesses never complete, resulting in a storm of
-> > > > > > > Completion Timeout AERs.
-> > > > > > 
-> > > > > > What is special about qcom here?  It seems like the Completion
-> > > > > > Timeouts and AER interrupts should happen with every PCIe
-> > > > > > controller.
-> > > > > 
-> > > > > The special behavior which is common across many (not all) ARM
-> > > > > SoCs is that they don't synthesize all-one response for
-> > > > > completion timeouts, unlike RCs in x86 machines. Rather, they
-> > > > > return AXI error response, resulting in CPU treating them as
-> > > > > SError, in-addition to AER storm.
-> > > > > 
-> > > > > Commit message missed mentioning SError though.
-> > > > 
-> > > > I don't know how SError works, but this sounds like a pretty big
-> > > > open issue with respect to RAS.  I don't think we want a kernel
-> > > > panic because a device failed to respond to a config or MMIO
-> > > > access, e.g., if a card or Thunderbolt cable got unplugged.
-> > 
-> > I still don't know anything about arm64 or SError, but I see these KVM
-> > commits about using ESB to manage SError in some cases:
-> > 
-> >   0e5b9c085dce ("KVM: arm64: Consume pending SError as early as possible")
-> >   472fc011ccd3 ("KVM: arm64: nVHE: Don't consume host SErrors with ESB")
-> > 
-> > I assume it's not possible or practical to use ESB in the native host
-> > case to deal with issues like this in a generic way instead of the
-> > vendor-specific feature Qcom is using here?
-> 
-> In general, an SError is fatal. No ifs, no buts. It is asynchronous,
-> and has no syndrome information. Once you find out about it, you're
-> already dead.
-> 
-> ESB is a way to paper over this sorry state of affair by making sure
-> that the error is observed at a known point. You can think of it as a
-> barrier synchronising potential errors for transactions in flight. KVM
-> uses that to attribute SErrors triggered by a guest, on an exception
-> boundary.
-> 
-> That's not applicable to the kernel itself, unless you want to place
-> an ESB after each and every load/store in the kernel (/s).
-> 
-> Modern versions of the architecture allow these errors to be reported
-> as *synchronous* exceptions, with all the syndrome information you
-> want. I guess this HW doesn't implement it, which is a pretty big
-> mistake for systems that allow surprise removal of devices...
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------3xXgf3kbCf0caq6YE31E0Mh9
+Content-Type: multipart/mixed; boundary="------------dkM26DHH2Ls9uC8sbskWeJcz";
+ protected-headers="v1"; hp="clear"
+Message-ID: <157aa2cc-65b3-4d89-aa5e-eccd87296293@gmail.com>
+Date: Wed, 16 Sep 2026 12:45:40 -0400
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v7 00/12] crypto: qce - Fix crypto self-test failures
+To: Bartosz Golaszewski <brgl@kernel.org>
+Cc: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>,
+ Thara Gopinath <thara.gopinath@gmail.com>,
+ Herbert Xu <herbert@gondor.apana.org.au>,
+ "David S. Miller" <davem@davemloft.net>,
+ Stanimir Varbanov <svarbanov@mm-sol.com>,
+ Eneas U de Queiroz <cotequeiroz@gmail.com>,
+ Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>,
+ Eric Biggers <ebiggers@kernel.org>, Bjorn Andersson <andersson@kernel.org>,
+ Konrad Dybcio <konradybcio@kernel.org>, linux-crypto@vger.kernel.org,
+ linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
+ stable@vger.kernel.org
+References: <20260910-qce-fix-self-tests-v7-0-cdbd2718af14@oss.qualcomm.com>
+ <7e1b4800-258b-4410-8e88-2ce49505689e@gmail.com>
+ <CAMRc=Mdd-_t4HniR0k-xhyS4aMD1gnqJPYgS2cEY81b0dwDZGA@mail.gmail.com>
+Content-Language: en-US
+From: Demi Marie Obenour <demiobenour@gmail.com>
+Autocrypt: addr=demiobenour@gmail.com; keydata=
+ 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
+ +MYSfkEjBz0E8CLOcAw7JIwAaeBT
+In-Reply-To: <CAMRc=Mdd-_t4HniR0k-xhyS4aMD1gnqJPYgS2cEY81b0dwDZGA@mail.gmail.com>
 
-Thanks a lot for this background, Marc.
+--------------dkM26DHH2Ls9uC8sbskWeJcz
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-I guess we should take advantage of this qcom feature to at least
-avoid some issues.  I think we just need to update the commit log to
-clarify:
+On 9/15/26 05:42, Bartosz Golaszewski wrote:
+> On Fri, 11 Sep 2026 20:34:39 +0200, Demi Marie Obenour
+> <demiobenour@gmail.com> said:
+>> On 9/10/26 09:00, Bartosz Golaszewski wrote:
+>>> This iteration - in addition to the previous fixes - proposes to spli=
+t
+>>> the QCE driver into a core part necessary to bind to the QCE DT node =
+and
+>>> enable runtime power management in order to allow to drop the
+>>> interconnect votes, and the crypto part registering the crypto
+>>> algorithms. The core module is then enabled in arm64 defconfig while =
+the
+>>> crypto part stays disabled by default.
+>>>
+>>> The QCE hardware crypto engine has several limitations that cause it =
+to
+>>> produce incorrect results or stall on certain inputs. This series fix=
+es
+>>> several bugs and adds workaround allowing the deiver to pass crypto
+>>> self-tests.
+>>>
+>>> The failures addressed are:
+>>>
+>>> - HMAC self-test failures for empty messages
+>>> - AES-XTS returning success on zero-length input (should be -EINVAL)
+>>> - AES-CTR: partial final block causes the engine to stall, output IV
+>>>   derivation was incorrect
+>>> - AES-XTS with key1 =3D=3D key2 is not supported by the CE
+>>> - AES-CCM: partial final block and fragmented payload both stall the
+>>>   engine
+>>>
+>>> All fixes were tested on an SM8650 QRD board with
+>>> CONFIG_CRYPTO_SELFTESTS=3Dy and CONFIG_CRYPTO_SELFTESTS_FULL=3Dy.
+>>>
+>>> Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.=
+com>
+>> For stable, would it be better to not register the algorithms, thus
+>> preventing their use?  Another option would be to replace the whole
+>> driver with an always-on stub driver that just does power management.
+>=20
+> A module parameter called: really_register_algos that's disabled by def=
+ault?
+>=20
+> Bart
 
-  - The reason this is important: apparently lots of AER interrupts
-    but sounds like unrecoverable SError in some cases; I think it
-    would be useful to understand the differences and whether CT and
-    UR are handled differently.
+Works for me!  If you add that and fix the tests, go ahead and revert
+my patch that marked it as BROKEN.  I suggest reverting the defconfig
+changes too, for power management reasons.
 
-  - What the result of the ECAM blocker is.  IIUC it blocks both
-    config and MMIO.  I assume it prevents transactions from reaching
-    PCIe so they don't cause UR or CT; maybe writes are dropped and
-    reads return ~0 for both config and MMIO?
+While the driver is buggy, you might want to add a kernel taint if
+the option is set.  There's precedent for that in other parts of the
+kernel.
+--=20
+Sincerely,
+Demi Marie Obenour (she/her/hers)
 
-  - This is best-effort but not 100% because accesses between
-    link-down and ECAM blocker being enabled can still cause AER
-    interrupts and SError.
+--------------dkM26DHH2Ls9uC8sbskWeJcz--
 
-I'm more interested in these PCIe-level details than in the nitty
-gritty of programming the controller; we need that too, but maybe some
-of that can be addressed by code comments, e.g., the mutex could have
-a one-line comment about avoiding races with RP resets via AER
-recovery.
+--------------3xXgf3kbCf0caq6YE31E0Mh9
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCgAdFiEEopQtqVJW1aeuo9/sszaHOrMp8lMFAmqqx78ACgkQszaHOrMp
+8lOXMg//YUoYq1jOWJhfaYWrvjJUWr4wIsMXxR7r4HrvqRlmSA7MysXs6nyT2/YS
+0jq8PO5/hR7WNnQIKLnWOvCuVJAvftfLKXla2X2W+PUdjP6o7Z1B9w087OGk9RWL
+iPMCo8p4RkK0m+eJs4FNBLV71Xi24ivv0/2o2ixyJSOH939/Xa8x3ndW3SGajA9v
+ErJFDlD0nIpDNVk4lY/meOVy1Na/JTujjboJBcqqlkQcfATgqNkPepwqJCnYbe6w
+SeqfPMOlG7LqzBU7FL7ZIbo5sRBLqU1qmAQ4qlVyRcvr3nuNsHku2u8/kMNFLB4n
+cxM+PwZ+5LPhV50Cic/INKASvblYZ7sGkFMgjHP9sSiFctYUPylsm1jbHCl6rt3U
+qRWqZURLgrV6AmSbb9wFPkmUeVdHyVq7ZiCzoXtpVTPJ3j8Epdx0B/M7gzTrmF5Q
+4VyeVVbEap8sRQrJYmAbZtzlRppZMUQjMi7ZrAvg+r/FmTxcHGknFBZ9UGRgT/7Y
+EYMBMuUCOGlos+6qS2PXLV3Onsi+olovwhrR45EffzBTSzopqX6EQDxZcQS04mVa
+fJk8NcewRI9vnOoeJR7jsFhUlY0HSo7Xf1LShGGHEKGJB9nrDylccN4HqI/U6lI+
+Ued2Zg9qqzbB/KIOZlyMWhn9FulgcVI84kpEsPXlWfTLt+f2NrQ=
+=Uo2z
+-----END PGP SIGNATURE-----
+
+--------------3xXgf3kbCf0caq6YE31E0Mh9--
