@@ -1,162 +1,123 @@
-Received: from mail-wr2-f12.google.com (mail-wr2-f12.google.com [74.125.225.76])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 44BFD4FDE65
-	for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 13:38:30 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.225.76
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 333A9399346;
+	Wed, 16 Sep 2026 13:46:06 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.171.202.116
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789565932; cv=none; b=WX5aacvPbbzwdNRGpFBchLSbdOVH0Z+4dAGZTG/yqGBly+wIzv8uCEjY0jkejFmBAFRGM1PXwvWqYIER8cpcwVt6Wnc7Dpzw/CwhJtXASOphVKPMU5R76bRpCsQeiVNFMTtiZ+yiNjD3zXP1Rpr7mEwAdw2iAAuiP+uDhElGUbw=
+	t=1789566371; cv=none; b=QfCUiSHSjH4Oo1++XQqU9FGr3yjV0W5Ma1qpcwkFsWLbMBQZadwlIp+ncdMMUt79oy/oYNZqAZyTQffsomW2EEb2NMp0WKzi7DgebLF25SB/nGpYsgiAPLO4j4OvAgPeqzrV9/vhkPxVxgkDgMgYKD2JEex90WO+cUr/XDv8tsk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789565932; c=relaxed/simple;
-	bh=8i8Qr9F+LzOgZ9ctuIJBF35YtOXaQS3m8/GHuRgFMB0=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=u++fL8JZbXozpOq3VaK728kXxUws6FhJd6rpCfZCGoC39H11NcimowG5mWKEP9d28cr1lKC3DrLrVaVZ4IibnMJdDfTd/s6LiYJLacU8HVrbLl7/S36wHGRz9Unh1hmtXka8lexGA9J/0YuV+C5TqH80tK2n2PsmY7LQHkt99kQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=QrNClc2o; arc=none smtp.client-ip=74.125.225.76
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	s=arc-20240116; t=1789566371; c=relaxed/simple;
+	bh=lowFXRl4NuwAH0zVYf5fuhzFyt09+gJnt69COrToQZU=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
+	 In-Reply-To:To:Cc; b=Px+uBnHR+npKsWvUtwr3g1UjofIw1bclkYGjPB+7NBvm+1aaFVeF/F2xFjSiT8i1B4HfJvoNmKBnf9H4lz4s6hgljMimEqh1Kj+0IbXv3n6GCC/ZNydp4CwdbFQM8RNTgxD+GKourzwrGAjqu6Tn5j146rfq7uM5ZQ1ppBC82gc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=ZPALrDjd; arc=none smtp.client-ip=185.171.202.116
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="QrNClc2o"
-Received: by mail-wr2-f12.google.com with SMTP id ffacd0b85a97d-4858bc96fabso657016f8f.3
-        for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 06:38:29 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1789565905; x=1790170705; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=6Or2QBqTu0XO5TqiywS1dagQ1+7oN0y+saD1nDD1L5c=;
-        b=QrNClc2oMxNoNFB24nQtF44qRBwh1ByfdKqJY/RH5xAENQu56z2Qdic7Xj5THa9bQz
-         FfLBE0tpb7p9+RFBZbkHgw2euWzVDJ2wmUzTF1+WjsmN1LhR06BgZyPW5HyPLQzGsuSJ
-         0EerFlbksvqgm2PTRGyZqDW36ix89PnHZPt6yzJGyN6fGS4VumEwaN+98lhcQ+cek7eQ
-         aVsOKRM7p++2uabPKMsURrECQxuH1nyhUWdS2JBmbMPXw+9FmGVK2MQ/NfyXFZzS5Zf1
-         F1Ma1vRjJR7o/cD5TgI4QOHSZTwXc6pUAwwsvD47SVx5JmfhjaiHphBCjN9tU19+yDg0
-         gaRQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1789565905; x=1790170705;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=6Or2QBqTu0XO5TqiywS1dagQ1+7oN0y+saD1nDD1L5c=;
-        b=ccHZDiZwEcwJf825spVRdxbgyqC6zeuqTTq7XtpQ+eiwg2XkGVI2gon/hvYqFFRCUr
-         lDWniaFv0CMYSeygUkLA6tUDCOlqwuJa9AtwJnOqSx4mt+Kz633so3W0xvjJIy0gz+Xc
-         NvyCsRS5/dPGT9ibxeWLV2sdfhqhty5OsRCCFM8fw4ZS6fz4Q0zB0m7SALACbnU7jUOI
-         Pdb61eSstF6UEsjhING1+FZNPDgVarNQnkYJR4yGijGVZLhPhjTJADKtlWs80q9vv6gr
-         /lht9vf6ON9AsOCCBGfP9Y0VSkZaQopIzLQa5dFpddg7S0kZws+n+4H32mPgnXLFojLy
-         abdw==
-X-Gm-Message-State: AFuF++mlkD+yHRsc6209wkp38uFdXTQmuFvf4XV/jNkQ8kLauNYHPSd7
-	gZnluRfqcY6bzS+aZrI69HKnR8VxN7A7+jO+rCl/t6MWi8ZG/LJJIAOq
-X-Gm-Gg: AYBFou0BGBj/5318IbEsD0ZcL/iAa/+h2TfdG5Dc1zpLYhLXVhFO5jIh1KJZYjAxT7e
-	gpHyQTOXMemSR5n89nFP2IzZm2tcACUnyATxnOnSmuAO9pS7nJbV8tkvMda7sEmWo75GI2OXWQ8
-	aRxXM6EKCnp5vjJUbnW6znxPb9yQP/uypHvwE5E5DaZnf74rN9LleAj+20YhQ5ug9piMWyi8+lB
-	v8+rX59lWrcyZrP5YjMjJmk1weBrSE+yGksewzKS1pj5oyX9BsAoGlq9ZpnDbc7h5f4ma0JRkau
-	mPQbbnxRUHxKOtoYbVeOLQ8jt58WE+8vcj4fhVTWroUHunL8xTlZr4ULQo19S3+CP0eUlNdma1L
-	B/g5P3+7lrotNO5nJ8TmQ91v/dsYbfU78LG6Ja2TSaUOqI8x9cI0Eb0PKBlAusuBVKBwQTjDqSd
-	RKCNx3BMCv9Nsm6k0mNnO2hxsh7LZEfO4mqoKZY+xPxtNqr1zKP6zfjWjRoZF7pmprGXvqf2qpZ
-	O80CRUAcl4=
-X-Received: by 2002:a05:600c:8819:b0:49d:1fa8:b266 with SMTP id 5b1f17b1804b1-49eb732b40emr29254665e9.26.1789565904385;
-        Wed, 16 Sep 2026 06:38:24 -0700 (PDT)
-Received: from localhost.localdomain ([194.154.195.114])
-        by smtp.googlemail.com with ESMTPSA id 5b1f17b1804b1-49e83da9a7csm77085295e9.11.2026.09.16.06.38.23
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 16 Sep 2026 06:38:24 -0700 (PDT)
-From: Oleg Keri <okerixx@gmail.com>
-To: Vinod Koul <vkoul@kernel.org>,
-	Neil Armstrong <neil.armstrong@linaro.org>,
-	Manivannan Sadhasivam <mani@kernel.org>,
-	Johan Hovold <johan+linaro@kernel.org>,
-	Bjorn Andersson <quic_bjorande@quicinc.com>
-Cc: linux-arm-msm@vger.kernel.org,
-	linux-phy@lists.infradead.org,
-	linux-kernel@vger.kernel.org,
-	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-Subject: [PATCH v3 1/2] phy: qcom: qmp-combo: hold a runtime PM reference in the typec callbacks
-Date: Wed, 16 Sep 2026 15:38:13 +0200
-Message-ID: <20260916133814.3977-2-okerixx@gmail.com>
-X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20260916133814.3977-1-okerixx@gmail.com>
-References: <20260916133814.3977-1-okerixx@gmail.com>
+	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="ZPALrDjd"
+Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
+	by smtpout-04.galae.net (Postfix) with ESMTPS id 45F30C5CD58;
+	Wed, 16 Sep 2026 13:46:45 +0000 (UTC)
+Received: from mail.galae.net (mail.galae.net [212.83.136.155])
+	by smtpout-01.galae.net (Postfix) with ESMTPS id 47AEF60337;
+	Wed, 16 Sep 2026 13:46:01 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id F028A11C7B031;
+	Wed, 16 Sep 2026 15:45:52 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
+	t=1789566358; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+	 content-transfer-encoding:in-reply-to:references;
+	bh=VGcTy6f0Ll8C9rnyFjUhYOXAZUo1mPpaSmiZJ/9wm2c=;
+	b=ZPALrDjdz3TB141LdfvYONuMS9LDNcQYGrg3ty0iQvv7KwogBRI0eE7pVTXCe6Ixe+SL2D
+	CXjLjjWG1o9Vc1yKPc30O3KleM6ArW51aNq/J9FXVIBJDwUkpVE8qVALVSbnuDHdLccss5
+	j2CoC4X67Jitr5IlOzGHmeNdK9zINGThF/ZyVFBVVMpyP4bVAU2e1QVL0FNBD0fmNWoP4Q
+	nZ8hK0LPfdV1A+6KjGAX6SyncA/GvCUMiVv8MEmnHhs6HlKvS9t7r6NJAOwqgJMBN5ZqpB
+	x46HaF0f3PjSEuKtjUSLi3UKYzAUSdD5geWD9bEASgDaS1595E3yQRVAYgkaQw==
+From: Luca Ceresoli <luca.ceresoli@bootlin.com>
+Date: Wed, 16 Sep 2026 15:45:26 +0200
+Subject: [PATCH v3 02/19] drm: of: remove now unnecessary forward
+ declarations
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260916-drm-bridge-every-panel-v3-2-83afb4f1a707@bootlin.com>
+References: <20260916-drm-bridge-every-panel-v3-0-83afb4f1a707@bootlin.com>
+In-Reply-To: <20260916-drm-bridge-every-panel-v3-0-83afb4f1a707@bootlin.com>
+To: Andrzej Hajda <andrzej.hajda@intel.com>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, Robert Foss <rfoss@kernel.org>, 
+ Laurent Pinchart <Laurent.pinchart@ideasonboard.com>, 
+ Jonas Karlman <jonas@kwiboo.se>, Jernej Skrabec <jernej.skrabec@gmail.com>, 
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, 
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, 
+ Jessica Zhang <jesszhan0024@gmail.com>, 
+ Laurentiu Palcu <laurentiu.palcu@oss.nxp.com>, 
+ Lucas Stach <l.stach@pengutronix.de>, Frank Li <Frank.Li@nxp.com>, 
+ Sascha Hauer <s.hauer@pengutronix.de>, 
+ Pengutronix Kernel Team <kernel@pengutronix.de>, 
+ Fabio Estevam <festevam@gmail.com>, Paul Cercueil <paul@crapouillou.net>, 
+ Paul Kocialkowski <paulk@sys-base.io>, Linus Walleij <linusw@kernel.org>, 
+ Inki Dae <inki.dae@samsung.com>, Jagan Teki <jagan@amarulasolutions.com>, 
+ Marek Szyprowski <m.szyprowski@samsung.com>, Sean Paul <sean@poorly.run>, 
+ Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>, 
+ Randy Dunlap <rdunlap@infradead.org>
+Cc: Albert Esteve <aesteve@redhat.com>, 
+ Anusha Srivatsa <asrivats@redhat.com>, 
+ Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>, 
+ Hui Pu <Hui.Pu@gehealthcare.com>, Ian Ray <ian.ray@gehealthcare.com>, 
+ Thomas Petazzoni <thomas.petazzoni@bootlin.com>, 
+ dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, 
+ imx@lists.linux.dev, linux-arm-kernel@lists.infradead.org, 
+ linux-mips@vger.kernel.org, linux-rockchip@lists.infradead.org, 
+ linux-stm32@st-md-mailman.stormreply.com, asahi@lists.linux.dev, 
+ linux-arm-msm@vger.kernel.org, freedreno@lists.freedesktop.org, 
+ linux-tegra@vger.kernel.org, linux-doc@vger.kernel.org, 
+ linux-samsung-soc@vger.kernel.org, 
+ Luca Ceresoli <luca.ceresoli@bootlin.com>
+X-Mailer: b4 0.16.0
+X-Last-TLS-Session-Version: TLSv1.3
 
-qmp_combo_typec_switch_set() and qmp_combo_typec_mux_set() tear the common
-block down and bring it straight back up, calling qmp_combo_com_exit() and
-qmp_combo_com_init() with force=true.  Both release and re-acquire the PHY
-clocks.
+These forward declarations are now redundant after having moved
+drm_of_find_panel_or_bridge():
 
-Unlike the PHY operations, which the PHY core always invokes with a
-runtime PM reference held - phy_pm_runtime_get_sync() in phy_init(),
-phy_exit() and phy_power_on() - these two are typec_switch and typec_mux
-callbacks and hold no such reference.  Releasing the clocks is then enough
-to drop the device's last reference, so clk_core_unprepare() runs
-pm_runtime_idle() and re-enters the driver through
-qmp_combo_runtime_suspend(), which disables the very clocks that are being
-torn down:
+ * struct drm_panel is not referenced in this file
 
-  gcc_usb3_prim_phy_pipe_clk already disabled
-  WARNING: drivers/clk/clk.c:1259 at clk_core_disable+0x298/0x300
-  Workqueue: events_freezable pmic_glink_altmode_worker
-   clk_disable
-   qmp_combo_runtime_suspend
-   pm_generic_runtime_suspend
-   genpd_runtime_suspend
-   rpm_suspend
-   rpm_idle
-   __pm_runtime_idle
-   clk_core_unprepare
-   clk_core_unprepare
-   clk_core_unprepare
+ * struct drm_bridge is now referenced only inside an
 
-qmp_combo_runtime_suspend() only checks init_count, which is still
-non-zero at that point, so it proceeds and the clock enable and prepare
-counts underflow.
+      #if IS_ENABLED(CONFIG_OF) && IS_ENABLED(CONFIG_DRM_PANEL_BRIDGE)
 
-Runtime PM is forbidden at probe, so this only becomes reachable once
-userspace opts in through power/control - which is exactly what the
-comment above pm_runtime_forbid() invites it to do.
+   block, and in this case struct drm_bridge is already declared thanks to
+   these lines:
 
-Hold a runtime PM reference across the teardown and bringup so releasing
-the clocks cannot re-enter the driver's own suspend callback.
+      #if IS_ENABLED(CONFIG_OF) && IS_ENABLED(CONFIG_DRM_PANEL_BRIDGE)
+      ...
+      #include <drm/drm_bridge.h>
+      #endif
 
-Fixes: 2851117f8f42 ("phy: qcom-qmp-combo: Introduce orientation switching")
-Signed-off-by: Oleg Keri <okerixx@gmail.com>
+Signed-off-by: Luca Ceresoli <luca.ceresoli@bootlin.com>
 ---
- drivers/phy/qualcomm/phy-qcom-qmp-combo.c | 5 +++++
- 1 file changed, 5 insertions(+)
+ include/drm/drm_of.h | 2 --
+ 1 file changed, 2 deletions(-)
 
-diff --git a/drivers/phy/qualcomm/phy-qcom-qmp-combo.c b/drivers/phy/qualcomm/phy-qcom-qmp-combo.c
-index fa1a91e67549..f6d3320a59d9 100644
---- a/drivers/phy/qualcomm/phy-qcom-qmp-combo.c
-+++ b/drivers/phy/qualcomm/phy-qcom-qmp-combo.c
-@@ -16,6 +16,7 @@
- #include <linux/of_graph.h>
- #include <linux/phy/phy.h>
- #include <linux/platform_device.h>
-+#include <linux/pm_runtime.h>
- #include <linux/regulator/consumer.h>
- #include <linux/reset.h>
- #include <linux/slab.h>
-@@ -5179,6 +5180,8 @@ static int qmp_combo_typec_switch_set(struct typec_switch_dev *sw,
- 	qmp->orientation = orientation;
- 
- 	if (qmp->init_count) {
-+		guard(pm_runtime_active)(qmp->dev);
-+
- 		if (qmp->usb_init_count || qmp->usb4_init_count)
- 			qmp_combo_usb_power_off(qmp->usb_phy);
- 		qmp_combo_com_exit(qmp, true);
-@@ -5265,6 +5268,8 @@ static int qmp_combo_typec_mux_set(struct typec_mux_dev *mux, struct typec_mux_s
- 	if (!qmp->init_count)
- 		return 0;
- 
-+	guard(pm_runtime_active)(qmp->dev);
-+
- 	return qmp_combo_reconfigure_phy(qmp, new_mode);
- }
- 
+diff --git a/include/drm/drm_of.h b/include/drm/drm_of.h
+index 402f5db11e47..f6dad2c6e9b9 100644
+--- a/include/drm/drm_of.h
++++ b/include/drm/drm_of.h
+@@ -14,8 +14,6 @@ struct component_match;
+ struct device;
+ struct drm_device;
+ struct drm_encoder;
+-struct drm_panel;
+-struct drm_bridge;
+ struct device_node;
+ struct mipi_dsi_device_info;
+ struct mipi_dsi_host;
+
 -- 
 2.55.0
 
