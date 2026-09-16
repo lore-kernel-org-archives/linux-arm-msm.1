@@ -1,166 +1,184 @@
-Received: from mail-wr2-f12.google.com (mail-wr2-f12.google.com [74.125.225.76])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E7C3D27FD43
-	for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 12:56:33 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.225.76
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 608A43812DA;
+	Wed, 16 Sep 2026 12:58:39 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.246.85.4
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789563402; cv=none; b=a0wt2MX6SjL1NbyJ5kab+LXUDuOCthWifgHGOLiAXFX+9h0gypD+Y79mTtooO0s8BIWBY787Rqsm4k173lVN32wMmrHY6NX20t46zMPo2TSoDYZxQqZTzulejoY6SWK8/SEYmF78hlbr9G9nIMx+/Za5Stnt6Q0nKoUpuBUBh0E=
+	t=1789563522; cv=none; b=MT+CTqUnVWvXLgzyzl5ASC2B8ZYiRamMUH5yTbrnI2Z6yOp5GRNzH5QkvsL4mrxJ3Xr3kas6NAww7b4UTjvgxHem5kjOEP8oPiROKfP4CF27328X1Kgt6xA3FWOpzQwn92V3ge7HYcGmBm3qXODCm7TbK/TT9mZJ8qKwffaewys=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789563402; c=relaxed/simple;
-	bh=97JmprBqbeoexeJnNQ50AWIZviL4S7SD0NO1tVXsgKc=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=KWle9VydvkXgNXyjSfcxEZ/RK0ydcMVaNx4pcn9Cj50DApVw3ino5hUP/b62Dib5sHdrl1OR/RC23/V8rZ9Vk2INqehk/PPaDektm88tYsi9Kb8haeECmsgvCHA1Y6UAR1i7X+zYhXdJFE+ueYs0igkBMYpFouCJRzHs5Qi/rE8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=BWpz5N1r; arc=none smtp.client-ip=74.125.225.76
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	s=arc-20240116; t=1789563522; c=relaxed/simple;
+	bh=MVDwrdRoGs7U1+TI5rmeNPhvfPkVPX1VtkpZjTciIV8=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=HXf6yQXptBMXLKfjUUgwXeXgt2w2MeFvr+SjtUMxmIy3pS0WxxCzTymBNuZyZwAai0NEkU2BPFCeuklAezrY4GOZ2Q9XTHeLxsYSfFwp7pj5OfkUR14l2mjyLGfZomQsnwW46FDLj5FLJ30T9EcDuklL4qjcRz0df2BKN7xf1I4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=mg0pcc7B; arc=none smtp.client-ip=185.246.85.4
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="BWpz5N1r"
-Received: by mail-wr2-f12.google.com with SMTP id ffacd0b85a97d-485933b24c3so472234f8f.0
-        for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 05:56:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1789563390; x=1790168190; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=ka5zpxp/jCsYjEbSlG1itlHgACxSBnD5svSTVFgMxoQ=;
-        b=BWpz5N1rKqSglVhiC7uzoHIaVvtCEIFpJuQ9DShTdK5FnCq6mm/eIizPONhVnkrUjD
-         4/IZtlWE8D4yFu7/wcQoi/AAd/if/4CfdYAruU6xaRaKDOacQq0B/2a8YrvqjVud74h3
-         jDnSOZt3X4EP6YSezi18J2TuD8Z6MAdKRbRtFECiUWiLC6EyTBVop1x/VdsytiJFJbO0
-         Zf/4QVY/bXHJkJw/LdlStS9yzStkSbNaEuvlgaIQK9qr2rOpzIS0EMgXIXXASiB3KfuP
-         tiWuehPLTlSD19B3QNDt78A2yCV3KPr+lbsD3UEAve5SvrFda0KWAqSipZJXDtj3piuE
-         KhKg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1789563390; x=1790168190;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=ka5zpxp/jCsYjEbSlG1itlHgACxSBnD5svSTVFgMxoQ=;
-        b=e88cTytERtIp8JN0CWQdVh8Qnji7pmR4P63APY4glMgYmHlldZayH6zPmHSJrSZmu2
-         R+UyU6n2r/rkJlaWKdN7x2+tHLlLenN8Z4u2Icw7d7M+MvguqcH+XCNeYcSQGU5KBbKX
-         7so0LNaT2bUsqfO8Bs2r5FFB8a1MMnJOP87vB/xf7y+7W1Ju8qC7hzDOW0zZV91+ykeS
-         hXXWMs6qHZpkEahKDdaEQR8M2TocAZIos0xv4VG/qKMm2h53smud3Sy6Q9tU/O1ihPjH
-         dBUyxQeK8mSnmEM9EJ62AvxOk5Uzf1DAQAV7D/t3svFD+VTax3Ji7OnnwEBAy0KcQpHu
-         7fjA==
-X-Gm-Message-State: AFuF++mHZQqKs7DxW0GdW7KiyucGSVi76CMIIPARuLzVmWc1HIrVlv/L
-	++6rHeB7aU1mjs8Ml201i6fj4PpKZhq3IgqdeWM+481MS6+jDVykDKlS
-X-Gm-Gg: AYBFou3P3R+DaEBYHOYrBJ0hAeXFDNs3J1fwEIXKn38FSuXKzWRN4sc4NDVIccBYvoQ
-	ClJLx7JpbzmWbiW+ao/IB41hT0lwt+kGe/kc4UR2+b+MOyrfCfSzhG1CinN0+ix01gAn1+nLMMQ
-	vIBDkqI+7Hj0mhNRDGv9lZt/JsMLvqrfNwj9MwEEfgd+LwHa9MYnGL/+cx2MOTSSR2W2RH9Zimo
-	5lshti/WHV2IFpeUeADu+OAQZm4qkGTuxlC6gk3tP2FiWDo4Mv9tJnTZmurldQN60UGigxaUYoj
-	wQP8g+e8VdJlx4Sjr/zJnPHG4d4wKNAJo+VEsI1vqvUTVi/FG84fxst4VJx01ysYHTtPV0CbQ87
-	2MBztOLWR/ihCMv6JC2NRhQd1Osh+E4nRy/qL6UwDJUhrwiv2xrrMNYBINKh/H4c/kh+Oh4Jbx+
-	WZuLMsRGqo62mR2rnfD4IQO+qJnTCzR/Cjb7nwT8ozfdlGGqCGsLoF5pOS7dOaaqGk8fi2gnIqp
-	rJuMVZVGso=
-X-Received: by 2002:a05:6000:460c:b0:487:767:b301 with SMTP id ffacd0b85a97d-4870d2921d6mr2931012f8f.57.1789563390295;
-        Wed, 16 Sep 2026 05:56:30 -0700 (PDT)
-Received: from localhost.localdomain ([194.154.195.114])
-        by smtp.googlemail.com with ESMTPSA id ffacd0b85a97d-4870bf342a0sm6750729f8f.24.2026.09.16.05.56.29
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 16 Sep 2026 05:56:29 -0700 (PDT)
-From: Oleg Keri <okerixx@gmail.com>
-To: Vinod Koul <vkoul@kernel.org>,
-	Neil Armstrong <neil.armstrong@linaro.org>,
-	Manivannan Sadhasivam <mani@kernel.org>,
-	Johan Hovold <johan+linaro@kernel.org>,
-	Bjorn Andersson <quic_bjorande@quicinc.com>
-Cc: linux-arm-msm@vger.kernel.org,
-	linux-phy@lists.infradead.org,
-	linux-kernel@vger.kernel.org,
-	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-Subject: [PATCH v2 2/2] phy: qcom: qmp-combo: check qmp_combo_com_init() in the typec callbacks
-Date: Wed, 16 Sep 2026 14:56:19 +0200
-Message-ID: <20260916125619.4587-3-okerixx@gmail.com>
-X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20260916125619.4587-1-okerixx@gmail.com>
-References: <20260916125619.4587-1-okerixx@gmail.com>
+	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="mg0pcc7B"
+Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
+	by smtpout-03.galae.net (Postfix) with ESMTPS id 7444B4E40718;
+	Wed, 16 Sep 2026 12:58:37 +0000 (UTC)
+Received: from mail.galae.net (mail.galae.net [212.83.136.155])
+	by smtpout-01.galae.net (Postfix) with ESMTPS id 2BA9160337;
+	Wed, 16 Sep 2026 12:58:37 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id AA4C311C7B026;
+	Wed, 16 Sep 2026 14:58:26 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
+	t=1789563512; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+	 content-transfer-encoding:content-language:in-reply-to:references;
+	bh=ACT1BcK2mKgNZY0JsO79zzKWzTVjsJHY3lvjP8nZdTE=;
+	b=mg0pcc7ByLpO4n0yIIzGsYslxzp3CzZxijRHgtRU9iQ/zr675u+8g2DIyGBO1DZDKpmYmO
+	OEcGjZUEK3dhD2llZZhjh6/DLQaOiNdKNJLYzNXe+Ts7tdeXVjD7LfeBhHPDozqn42Dvbq
+	VPFeAbR1qDmPfU1Gzgc/UQGD5MWIq/ixcH2yA9Edz4CHxb3hDqHRcTAqmNcm2eYCkye4if
+	2bRCtUZ1An7Vk3LlsaxmQXk9PSXYoAnTNwBw49urNnpdyL57ySVOhjYpzU5ghm/MP+PrJk
+	74kxz5tUxeQXBNE3U9+RJeBOBhxSd5Gik5LYItYRujgnbbL9c9INU7TpQpWURg==
+Message-ID: <97924d2f-45f9-44d5-b482-97fcbb70abdc@bootlin.com>
+Date: Wed, 16 Sep 2026 14:58:25 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH net 2/2] net: stmmac: qcom-ethqos: advertise supported
+ SerDes interfaces
+To: Mohd Ayaan Anwar <mohd.anwar@oss.qualcomm.com>,
+ Thomas Karpiniec <tom.karpiniec@outlook.com>
+Cc: netdev@vger.kernel.org, Russell King <linux@armlinux.org.uk>,
+ Andrew Lunn <andrew+netdev@lunn.ch>, "David S . Miller"
+ <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>,
+ Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
+ Choong Yong Liang <yong.liang.choong@linux.intel.com>,
+ Bartosz Golaszewski <brgl@kernel.org>,
+ Russell King <rmk+kernel@armlinux.org.uk>, linux-arm-msm@vger.kernel.org,
+ linux-kernel@vger.kernel.org
+References: <CH3PR11MB8413FCBA598F7FABC04ADCFEE4B92@CH3PR11MB8413.namprd11.prod.outlook.com>
+ <CH3PR11MB841353E5708DDD7C5E2EA1D5E4B92@CH3PR11MB8413.namprd11.prod.outlook.com>
+ <aqqI9wOnradk9d7K@oss.qualcomm.com>
+Content-Language: en-US
+From: Maxime Chevallier <maxime.chevallier@bootlin.com>
+In-Reply-To: <aqqI9wOnradk9d7K@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Last-TLS-Session-Version: TLSv1.3
 
-qmp_combo_typec_switch_set() and qmp_combo_reconfigure_phy(), which the
-typec mux callback and the USB4 init path use, tear the common block down
-and bring it straight back up on an orientation or altmode change, but
-they discard the result of the bringup:
+Hi,
 
-	qmp_combo_com_exit(qmp, true);
+On 9/16/26 14:17, Mohd Ayaan Anwar wrote:
+> On Wed, Sep 16, 2026 at 08:39:50PM +1000, Thomas Karpiniec wrote:
+>> From: Thomas Karpiniec <tom@wendy.sh>
+>>
+>> With a QCA8081 PHY and phy-mode = "2500base-x", stmmac reports only
+>> 2500BASE-X in phylink's supported_interfaces. Phylink consequently removes
+>> 10/100/1000BASE-T modes from the PHY's advertisement, preventing a link
+>> with a gigabit switch.
+>>
+>> The QCA8081 uses SGMII for lower copper speeds and 2500BASE-X for 2.5Gbps.
+>> ETHQOS already reconfigures the SerDes in ethqos_mac_finish_serdes() when
+>> the PHY changes interface, but does not advertise this capability.
+>>
+>> Provide a get_interfaces() callback for serial interfaces. Add SGMII and
+>> 2500BASE-X when the SerDes validates them, allowing phylink to retain the
+>> corresponding copper link modes. Leave the existing stmmac fallback to
+>> the firmware interface in place when no interfaces are reported. RGMII
+>> configurations are unchanged.
+>>
+>> Fixes: 61e9be0efbe8 ("net: stmmac: qcom-ethqos: add support for 2.5G BASEX mode")
+>> Cc: stable@vger.kernel.org # 7.1+
+>> Assisted-by: LLM sparse
+>> Signed-off-by: Thomas Karpiniec <tom@wendy.sh>
+>> ---
+>>  .../stmicro/stmmac/dwmac-qcom-ethqos.c        | 22 +++++++++++++++++++
+>>  1 file changed, 22 insertions(+)
+>>
+>> diff --git a/drivers/net/ethernet/stmicro/stmmac/dwmac-qcom-ethqos.c b/drivers/net/ethernet/stmicro/stmmac/dwmac-qcom-ethqos.c
+>> index ac7d6d3e205a..3493e090f1a8 100644
+>> --- a/drivers/net/ethernet/stmicro/stmmac/dwmac-qcom-ethqos.c
+>> +++ b/drivers/net/ethernet/stmicro/stmmac/dwmac-qcom-ethqos.c
+>> @@ -1,6 +1,7 @@
+>>  // SPDX-License-Identifier: GPL-2.0
+>>  // Copyright (c) 2018-19, Linaro Limited
+>>  
+>> +#include <linux/bitops.h>
+>>  #include <linux/module.h>
+>>  #include <linux/of.h>
+>>  #include <linux/of_net.h>
+>> @@ -564,6 +565,26 @@ static void ethqos_pcs_set_inband(struct qcom_ethqos *ethqos, bool enable)
+>>  	stmmac_pcs_ctrl_ane(priv, enable, 0);
+>>  }
+>>  
+>> +static void ethqos_get_interfaces_serdes(struct stmmac_priv *priv, void *bsp_priv,
+>> +					 unsigned long *interfaces)
+>> +{
+>> +	struct qcom_ethqos *ethqos = bsp_priv;
+>> +
+>> +	if (!ethqos->serdes_phy)
+>> +		return;
+>> +
+>> +	/* PHYs such as QCA8081 switch between SGMII and 2500BASE-X with
+>> +	 * the negotiated copper speed. mac_finish reconfigures the SerDes
+>> +	 * accordingly; let phylink validate all modes that path supports.
+>> +	 */
+>> +	if (!phy_validate(ethqos->serdes_phy, PHY_MODE_ETHERNET,
+>> +			  PHY_INTERFACE_MODE_SGMII, NULL))
+>> +		__set_bit(PHY_INTERFACE_MODE_SGMII, interfaces);
+>> +	if (!phy_validate(ethqos->serdes_phy, PHY_MODE_ETHERNET,
+>> +			  PHY_INTERFACE_MODE_2500BASEX, NULL))
+>> +		__set_bit(PHY_INTERFACE_MODE_2500BASEX, interfaces);
+>> +}
+>> +
+> 
+> So, I had proposed this exact change a while back:
+> https://lore.kernel.org/netdev/aMgootkPQ%2FGcdiXX@oss.qualcomm.com/
+> 
+> As Russell noted, this behaviour is due to the messed-up integrated
+> PCS support in STMMAC/QCOM-ETHQOS.
+> 
+> I would defer to him for this if he's around.
 
-	qmp->qmpphy_mode = new_mode;
+Indeed, but we haven't heard from him in a while, let's see if we can
+figure this out. 
 
-	/* Now everything's powered down, power up the right PHYs */
-	qmp_combo_com_init(qmp, true);
+Does this IP have an integrated PCS ? (i.e. dma_cap.pcs is set)
+you can check that in debugfs :
 
-	if ((qmp->usb_init_count || qmp->usb4_init_count) &&
-	    new_mode != QMPPHY_MODE_DP_ONLY)
-		qmp_combo_usb_power_on(qmp->usb_phy);
+mount -t debugfs none /sys/kernel/debug
+cat /sys/kernel/debug/stmmaceth/eth0/dma_cap | grep PCS
 
-If qmp_combo_com_init() fails - a regulator, a reset or
-clk_bulk_prepare_enable() - it unwinds what it had brought up and returns
-an error, leaving the clocks disabled.  Both paths then carry on and
-qmp_combo_usb_power_on(), and dp_aux_init() after it, write PHY registers
-with no clock running.  qmp_combo_usb4_init() already checks the return
-value of qmp_combo_reconfigure_phy(), but never sees a failure from it.
+if it's Y, then you have the integrated one.
 
-Propagate the failure instead.  The PHY is then left logically
-initialised with its clocks off, which is the state any forced bringup
-failure already produces and which these callbacks have no way to report
-to the PHY consumers; what changes is that the register writes that
-would fault no longer happen.
+Russell worked hard on that, it looks like a lot of the plumbing went
+through.
 
-Fixes: 2851117f8f42 ("phy: qcom-qmp-combo: Introduce orientation switching")
-Signed-off-by: Oleg Keri <okerixx@gmail.com>
----
- drivers/phy/qualcomm/phy-qcom-qmp-combo.c | 12 ++++++++++--
- 1 file changed, 10 insertions(+), 2 deletions(-)
+I think the right approach here is to have the PCS itself report the
+list of supported interfaces, instead of relying on the glue. looking
+at stmmac_pcs.c :
 
-diff --git a/drivers/phy/qualcomm/phy-qcom-qmp-combo.c b/drivers/phy/qualcomm/phy-qcom-qmp-combo.c
-index f6d3320a59d9..ae70ebba36c4 100644
---- a/drivers/phy/qualcomm/phy-qcom-qmp-combo.c
-+++ b/drivers/phy/qualcomm/phy-qcom-qmp-combo.c
-@@ -4601,6 +4601,8 @@ static int qmp_combo_usb_set_mode(struct phy *phy, enum phy_mode mode, int submo
- 
- static int qmp_combo_reconfigure_phy(struct qmp_combo *qmp, enum qmpphy_mode new_mode)
- {
-+	int ret;
-+
- 	dev_dbg(qmp->dev, "qmp_combo_reconfigure_phy: switching from qmpphy mode %d to %d\n",
- 		qmp->qmpphy_mode, new_mode);
- 
-@@ -4615,7 +4617,9 @@ static int qmp_combo_reconfigure_phy(struct qmp_combo *qmp, enum qmpphy_mode new
- 	qmp->qmpphy_mode = new_mode;
- 
- 	/* Now everything's powered down, power up the right PHYs */
--	qmp_combo_com_init(qmp, true);
-+	ret = qmp_combo_com_init(qmp, true);
-+	if (ret)
-+		return ret;
- 
- 	if ((qmp->usb_init_count || qmp->usb4_init_count) &&
- 	    new_mode != QMPPHY_MODE_DP_ONLY)
-@@ -5166,6 +5170,7 @@ static int qmp_combo_typec_switch_set(struct typec_switch_dev *sw,
- {
- 	struct qmp_combo *qmp = typec_switch_get_drvdata(sw);
- 	const struct qmp_phy_cfg *cfg = qmp->cfg;
-+	int ret;
- 
- 	if (qmp->qmpphy_mode == QMPPHY_MODE_USB4) {
- 		/* QMPPHY has no orientation handling in USB4 mode, don't cache the setting */
-@@ -5186,7 +5191,10 @@ static int qmp_combo_typec_switch_set(struct typec_switch_dev *sw,
- 			qmp_combo_usb_power_off(qmp->usb_phy);
- 		qmp_combo_com_exit(qmp, true);
- 
--		qmp_combo_com_init(qmp, true);
-+		ret = qmp_combo_com_init(qmp, true);
-+		if (ret)
-+			return ret;
-+
- 		if (qmp->usb_init_count || qmp->usb4_init_count)
- 			qmp_combo_usb_power_on(qmp->usb_phy);
- 		if (qmp->dp_init_count)
--- 
-2.55.0
+220 int stmmac_integrated_pcs_init(struct stmmac_priv *priv,                                
+221                                const struct stmmac_pcs_info *pcs_info)                  
+222 {                                                                                       
+223         struct stmmac_pcs *spcs;                                                        
+224                                                                                         
+225         spcs = devm_kzalloc(priv->device, sizeof(*spcs), GFP_KERNEL);                   
+226         if (!spcs)                                                                      
+227                 return -ENOMEM;                                                         
+
+[...]
+                                                             
+246         /* Only allow 2500BASE-X if the SerDes has support. */                          
+247         if (priv->plat->flags & STMMAC_FLAG_SERDES_SUPPORTS_2500M)                      
+248                 __set_bit(PHY_INTERFACE_MODE_2500BASEX,                                 
+249                           spcs->pcs.supported_interfaces);                              
+250                                                                                         
+251         priv->integrated_pcs = spcs;                                                    
+252                                                                                         
+253         return 0;                                                                       
+254 }        
+
+Can you test settung the STMMAC_FLAG_SERDES_SUPPORTS_2500M flag in
+dwmac-qcom-ethqos ?
+
+Maxime
 
