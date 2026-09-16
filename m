@@ -1,87 +1,88 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C7CF53E7647
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9D9973E5578
 	for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 06:04:30 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789538673; cv=none; b=IxiQpI82S/8utn7fD9etfJ+miTAxxfH/U2/6D1HdJJUydu+zLVsHCNbEYJx9Y6zwoSuyv8vQ3ABvGBNQMX3elPBJOXKuHBIuV/KgDcSVOo8UyRuVaBDxLllQmH7KPbJH8rQ1Q/WCoCe/rVnHZR/MwRtI6xYYg2zZh1nASd/0uTw=
+	t=1789538673; cv=none; b=mnyQC/Gqjw2E/ToNYhmwYCKRi0dEltIPt4FIfu/pzkVwJkWNaPSXSQglZMZj+jI9Un5wt3Lm2hl+ajn40xU8YaGuKHViZooSiZXVn9o6G1uu6QiVjJJKUnNqQUG7JRozQo9nES9fBdaNWjj7bbN71TqVfHdeFhtRUv2uMezu7AI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1789538673; c=relaxed/simple;
-	bh=oM8i478j1OWwIT/sT0R2uSb9t/Wu6UrKojtfSKPkClw=;
+	bh=wBvSB5WoOED4qErJlwYmr87tVRah/FuLj4HM3VOi0Vw=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=Tk4Z/dI23ogbms5tAdVW6x6dDoUVIJqUc+H634HOBrCTJrKrstY2GbxJYSUyagbpcJOJUO6w1wr1EShvR7PjcvPAVOLoKoRw+iiKOVw3vmzMbMbh3+RvsExWd1KMkFWE17rE5NBaAcnbCfDrh8wuXHe2lnx8jIcuAOpS1decqnU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=IVayCzhL; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=bPDNG94d; arc=none smtp.client-ip=205.220.168.131
+	 In-Reply-To:To:Cc; b=T5VX2cYavcaqSQP6g6+69u22+b2Zxxy5dCCWScO6pLoP1rJzfP6a2G39IAFv2JDlaU41kgp3r7EwQXO9QxFhRB/QW1CfSFgOfGOGuo35ovH9Bwt5tyo951aA+BBmWYhe7JL3GWjO8z0Mh8+FcniAagrdd4gfzW89snOKoQYnETE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=IUXOptVM; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=G2bFW8fy; arc=none smtp.client-ip=205.220.180.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="IVayCzhL";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="bPDNG94d"
-Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68G5wacV225019
-	for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 06:04:30 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="IUXOptVM";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="G2bFW8fy"
+Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68G4BMbn1471146
+	for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 06:04:29 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	XY3M+7fTuLzqhreoJ5hF4hQOsJbMa/cuVlDQ6WwZkes=; b=IVayCzhLMExSvfNh
-	pM/pSfl/wEDi5qmwQiqJnkZx8JkmdwNUNxPxhKHufnW4YMGfYK4rjQVJUUkAzZp0
-	NRZPT/5gFs+EcNzFH5bfEMAxhga+4/2VdJHDGs0CpfHil+xKtS1h5qqgzb4+0R8B
-	YSd+AygujZ9P3Jiy4mUfo9PNkba/608cIiLY/K929c1lgQRXp6QezHwZYlpzvioC
-	zkgqOuPGqflL69xGzeC0Ki+umq5RMEwl8uD74cnG9l21E9zyEUe3EJ71UDGpDU0j
-	ccDlE5nYaGa24S5D2w2uxPsbRKc1sr/FKdjSjlol8pSKa6Xy7/lKZ4o/Vi2zkuI9
-	jVEbSg==
+	RwbdvGMOKKAYIsYgfHVcqW903J0uvxdkZ0G0r0u+VT0=; b=IUXOptVMyg8/FQMK
+	nLnBk6TJ851dqqwojDtDWfAwb2HRgCh6lD8vGuDvtmxtsjWMuDaRTLs4zUxIeb39
+	aGy/Ulxo6SaI0f0ZmhUWrwhpYtoeuFmP2FPFwJk9fyDq2PejX9EuNxKGCIYT9tN5
+	PXEmt+gMC0sBmY2trrjpljbTixnYrRvy7y62fpWG3berV7+euqdyHHG3RhCSMZAg
+	Y1K5HFfAWqCZH0FYyIMhSlJIpS8xh/PYU6FQ4lPh6+60IXzrAM7VcI7jZZTjEwYp
+	cfEDsIdb3VHlXF/htW6dOD+CCLtaCgj8L4let7RQp6XWeBSk/lO/X0LEEPNbAJmF
+	oDshlA==
 Received: from mail-pj1-f69.google.com (mail-pj1-f69.google.com [209.85.216.69])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gqbmnj8j5-1
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gqkv7gdgs-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 06:04:30 +0000 (GMT)
-Received: by mail-pj1-f69.google.com with SMTP id 98e67ed59e1d1-39aee9b4cf2so9331531a91.0
-        for <linux-arm-msm@vger.kernel.org>; Tue, 15 Sep 2026 23:04:29 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 06:04:28 +0000 (GMT)
+Received: by mail-pj1-f69.google.com with SMTP id 98e67ed59e1d1-39aee9b4cf2so9331486a91.0
+        for <linux-arm-msm@vger.kernel.org>; Tue, 15 Sep 2026 23:04:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1789538669; x=1790143469; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1789538668; x=1790143468; darn=vger.kernel.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=XY3M+7fTuLzqhreoJ5hF4hQOsJbMa/cuVlDQ6WwZkes=;
-        b=bPDNG94dRdeO8YQYFG+ef4g3FUN76RrVj9L5sOQQoaFZm/df7i90uxIAxiWlydxYT8
-         pv51e1DFblihGSTDzboak3h+V8xsSxu3Rz7G+Z3djsKC1vu5XfYT+84WbLzQEWdD+HQr
-         DCvmp4srPIWDVbMN7IECFIlU+QP76GeklQoUKk3ZtVm5R+tVaBBCm0nIfxTgTl40Txct
-         opQBzBRBmnhAcOTWfHiHxnQif/GKRnyLj9+blJHxWp/g2YJx4xd/Xt77X7PiBgox0Bvd
-         HV2IvfUxQXP2H+2jNUdPraaZAHF37Qzm9MUc1p4Z/z5rRDR1QT+OcehyLHmapCkwA/Zz
-         cJew==
+        bh=RwbdvGMOKKAYIsYgfHVcqW903J0uvxdkZ0G0r0u+VT0=;
+        b=G2bFW8fyA2lA0lUWhca/7ArwA2LyzdwOHGfheJKDo5GjacGpgcD2LXzFT4iXRj11dd
+         BrtmLyg5kgo2RkqY1RRKY6c6pW82DdZg3Ov8GdwzS9BhExF5RhWg4Lb0+pxYQQUq/nPE
+         cNkDJTQMvtoXvqH9Y6s6oZhbqNqzwX8dctN7ma4IXkqcRuFPgpy4GMa5nZAfuTs4H5CS
+         mrlbrXFZgejhjP5sjXgO+4812nfpoMXIj7af4LwnpaHwqu1zEyeGhaQrvofPIl3+gAQp
+         O4+aSxWFZHErWsmiiAUFsLDNOBRkHCyM9Pa8ortv32PDER78Fx7Ol3XTSAvqwto8g6lJ
+         i4Pw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1789538669; x=1790143469;
+        d=1e100.net; s=20260707; t=1789538668; x=1790143468;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=XY3M+7fTuLzqhreoJ5hF4hQOsJbMa/cuVlDQ6WwZkes=;
-        b=vDfs1YJKf6M0OgjkKZ5VQgRozWa+srjk8wobjLCpE6+b0Xh3qTKQ3eu2EWbbJeTPyf
-         s3Wvtcc67BAaOzFmn2kb2na+n0S3be/vh9UWLQbsKSlqWIOwXEqbF07gWKfYGkEK3uQH
-         FDkNDrza4JYl1IFk7R3KLxUBpl8nrMLuL/Q5g0CVS05LIO74HcL4u5TNk2XdnZiPy5Us
-         9b3xR/0yux5okVqafxQVz4Xrws+1xiWmUl7679yylDne7xbWwmtpo1PPCV8YbFQiBdbU
-         3A8VForeXZQpuYuq8YVTbxQfvBOXRHLP0tgFsh/HW3HcfsmM6kOKopheLFyWp1TB42T3
-         R0+A==
-X-Gm-Message-State: AFuF++kWxoogIAvPaclEyjjloheV0+nS+NxJI8FVjNWPNaPEBJpnyqzM
-	kVUr4ACT8G+LesneR3i/jYLKMK8mHudItqhNMXvWxxVmWUGxCKClXQ3GYC31hyv9Wh0aS5Z+IPa
-	shTTGTiXxI73gzCUfrKePTrSi8eY8oW++EurxrcCkruWaF0o2pzrnstfZWdqhCxU2sfPs
-X-Gm-Gg: AYBFou3ra5Dtgp/YdKgkSx/14N3Xf9qIKUXXgC/jp648sv3Bs6o40qzzO91c+y2sXun
-	21Tl+6Glf+tlcNUBJgJdYVTC+vdApdqiOj6uPff4RjJmGqprFehDFQ6/TQCLI3vg/BBV4b0Vw1v
-	vTvDZDbRyiFEqe00y/V9SbdNUjsKdQ5HcqauET0ge0ONKvecR3mkJg8hdbo/b3MQmdlfgEPnuWK
-	NeRoMNBM2pRJADfMO7+l0nx4EdtSklscD5P6VS0g9EN+9YYQk5aG4CKDgDQ+UJ31V3/H91DpiQx
-	iwaS4Br0nC798O91esf7rvtup6bOqhX7EVf5UZ9UR0fd2MpMv5zN7QBBL1FZ8AY/wTnvHuGhly/
-	bbc4+lP0KjjLjCgrFlvWXB4Ue8DGnUdfxMY51QAN4GxWl66U=
-X-Received: by 2002:a17:90b:5386:b0:39b:3510:49e7 with SMTP id 98e67ed59e1d1-39e1df52290mr3822853a91.0.1789538669411;
-        Tue, 15 Sep 2026 23:04:29 -0700 (PDT)
-X-Received: by 2002:a17:90b:5386:b0:39b:3510:49e7 with SMTP id 98e67ed59e1d1-39e1df52290mr3822765a91.0.1789538668901;
-        Tue, 15 Sep 2026 23:04:28 -0700 (PDT)
+        bh=RwbdvGMOKKAYIsYgfHVcqW903J0uvxdkZ0G0r0u+VT0=;
+        b=b+4OQsTohVUtqFg+oR6GIKddOVtcVncCWWNxvrk7l5N1ZPXibDG7UzTrbgM71GsAww
+         imuD/wYI1AFgYrwhSYqdtZj4lJ8U9z6jTqJlBB8TI0uaYAB5V5MtwVXKaZZoxCgUdbve
+         GFcqePshNXYetQ1DNHIrtsho1DSZBPHxvSXRWRyZ8keZMk0TIde9GA3zRCSPj63LGsTr
+         IB6np60+4O5uPNP+g7rA+MGhH8vZ7RTBjpWomzNPbc6vevZBEgkYO1gmmfkpFzG4kT8G
+         ofa0KSSMBfoW15sH1jUhxCyYVNl0olx6XlbaR6jyRoXuMqGQP9t86NFtiLbyshfWFukz
+         ZoVA==
+X-Gm-Message-State: AFuF++n28gmvvDKdqSjDRA/AQYpZnKpKqLNk2Iu3JZyJr3Xca5v6jCVx
+	z/thr4J7+KH6MgdpjPhCcaOI6i5jdk4GLtCbb4tsAjqNpXY3lYCV0VEiPL7W399J96W8CumyPsL
+	7roQkLFBBRcliCXh07PZWnMSBMVUu2pcjiLviQDkiiAPccTJTXjSRlcIBEZTHZSZRij+2lijZ6m
+	2lNZY=
+X-Gm-Gg: AYBFou1bD47NYUxXEAWZUR/8IKXejwNqOjlp0GMohJgnoH7ZhVovAUVuJmi14uo93Tt
+	1lL3QPm3MZAXXUBIWMi2HsjXU2zmaRyxuP04uh8iI+i2KjyYEvZaBE1sZx9dW2O7sZhhtk3t1SA
+	TrytHjSjQtfFEY1L58TjDbhlis/7Q9gP9fTHzY1MBqn4RTuCKyfdyVBjnhxhULqg7tiJYjJdH/y
+	+Co6SXPF86+yqPwXzgLTDXoNOSaUXjuNsFCaMZvbDV/1p61P4Fc0SZLynbrDzW3PQigN3yvGIkO
+	x9OuWj011j6Txk1uSy+2MISTrYOkSHqY4JCmju19eivKJDffLN4nC/w2TLNnPXPOq/pj8S7sYbv
+	gXEls8mY0LkeDlp0YvgRswOtbYYVFWVqcTUhkh3mpzx8bl9g=
+X-Received: by 2002:a17:90b:390e:b0:39e:53a:c8d4 with SMTP id 98e67ed59e1d1-39e1e424a7dmr2960795a91.12.1789538667672;
+        Tue, 15 Sep 2026 23:04:27 -0700 (PDT)
+X-Received: by 2002:a17:90b:390e:b0:39e:53a:c8d4 with SMTP id 98e67ed59e1d1-39e1e424a7dmr2960717a91.12.1789538667116;
+        Tue, 15 Sep 2026 23:04:27 -0700 (PDT)
 Received: from hu-qianyu-lv.qualcomm.com (Global_NAT1.qualcomm.com. [129.46.96.20])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-33bfb19f8cesm4740083eec.2.2026.09.15.23.04.28
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-33bfb19f8cesm4740083eec.2.2026.09.15.23.04.26
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 15 Sep 2026 23:04:28 -0700 (PDT)
+        Tue, 15 Sep 2026 23:04:26 -0700 (PDT)
 From: Qiang Yu <qiang.yu@oss.qualcomm.com>
-Date: Tue, 15 Sep 2026 23:04:23 -0700
-Subject: [PATCH 3/4] phy: qcom-qmp-pcie-multiphy: Split phy_ops into
- init/exit/reset/power_on
+Date: Tue, 15 Sep 2026 23:04:21 -0700
+Subject: [PATCH 1/4] PCI: qcom: Move PHY init and add PHY reset call to
+ align with HPG
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -90,7 +91,7 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260915-align_pcie_init_sequence_0916-v1-3-0b2195836f30@oss.qualcomm.com>
+Message-Id: <20260915-align_pcie_init_sequence_0916-v1-1-0b2195836f30@oss.qualcomm.com>
 References: <20260915-align_pcie_init_sequence_0916-v1-0-0b2195836f30@oss.qualcomm.com>
 In-Reply-To: <20260915-align_pcie_init_sequence_0916-v1-0-0b2195836f30@oss.qualcomm.com>
 To: Manivannan Sadhasivam <mani@kernel.org>,
@@ -104,208 +105,416 @@ Cc: linux-arm-msm@vger.kernel.org, linux-pci@vger.kernel.org,
         linux-kernel@vger.kernel.org, linux-phy@lists.infradead.org,
         Qiang Yu <qiang.yu@oss.qualcomm.com>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1789538665; l=4963;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1789538665; l=11264;
  i=qiang.yu@oss.qualcomm.com; s=20250513; h=from:subject:message-id;
- bh=oM8i478j1OWwIT/sT0R2uSb9t/Wu6UrKojtfSKPkClw=;
- b=K3Ucl9GhBeVKrJwKb/jxQIrJgF99z4xyiY7o08rGAc4Yz7eKFqtMkOhiYOb9hmirl2JCM/Igf
- NZD1Q1ASxp7DTFmXsNE58iajIR88EvSfT7IuYe9ZEEng1DiGOTJsb3U
+ bh=wBvSB5WoOED4qErJlwYmr87tVRah/FuLj4HM3VOi0Vw=;
+ b=wcM+CQ29Wxa0qsL2ZxHWjjmycqeaUP7KCCcteTeY659CQX0oEdm77HKH+Ls0itXWUSF8luEdI
+ pIh/eSwUu0BD5uPtDZJgKpxiRmzQU0856rYaAzbqvhDVUyoYmIuXIQ1
 X-Developer-Key: i=qiang.yu@oss.qualcomm.com; a=ed25519;
  pk=Rr94t+fykoieF1ngg/bXxEfr5KoQxeXPtYxM8fBQTAI=
-X-Authority-Analysis: v=2.4 cv=POyaavqC c=1 sm=1 tr=0 ts=6aaa316e cx=c_pps
+X-Proofpoint-ORIG-GUID: 0AJOy923DYHYjwCVpEPr0w-ss_V9yr8U
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTE2MDA3NiBTYWx0ZWRfXzjlmtZJhwk7T
+ G3/n/+gpppxp2bQhhY2wfeo7vErHPMjIScenyK+d1zZKqHziJZ59dUyXtyZZZOc+sTHbsY2MPP2
+ B9Ew+baunRj8hSJuBcBryF+XrpyemD60dS5xCsQZhhF49HpsLXqmsJtTR+s39IFJF2/sU69jM/x
+ g7k3O+fVvwJIzpSttPZcxsSm9LWYSAGhFCfRo14jUNC6C8HBmNVWaZZWcTEXVv+AiNjJEL5+o0z
+ WSZbyxUuwoqkkgSOkDOZdjAqIric05rsw7blPJ9J+XPpP7v7qPeKp3v2ozYCnP+b/dniMtoE9+K
+ aR5HE95IPlWZ/XeN8nk0BnRUvrCEA5JrtaRb5XKhytNjTX+WU8/EX5wImIeRKK0I8QP8ApSIwPp
+ BB+dAbnzClXUACesYBH/Unhnf2NjHW7zSTqjIfgZKK/8jAfa0VVAV+5IvGososaN88GhX/L4fvm
+ 6oP1/2mRTmQ5SpiyZ+A==
+X-Authority-Analysis: v=2.4 cv=eKmGH3p1 c=1 sm=1 tr=0 ts=6aaa316c cx=c_pps
  a=vVfyC5vLCtgYJKYeQD43oA==:117 a=ouPCqIW2jiPt+lZRy3xVPw==:17
  a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
- a=EUspDBNiAAAA:8 a=yU77vfN-gRUBXX0kDPsA:9 a=QEXdDO2ut3YA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
+ a=EUspDBNiAAAA:8 a=ltsZTcXAoX5SLtwclHIA:9 a=QEXdDO2ut3YA:10
  a=rl5im9kqc5Lf4LNbBjHf:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTE2MDA3NiBTYWx0ZWRfX2IXwGL1cTDq1
- mEKivN/e1S8Xhh+eo92VkVQybZqDjcss1TYuRviQu7A0XRdTukyxn/wYaDH9WnnHLE3osS+qmWF
- p4QaM6qWe/aRLGZ5HbiSEr4+IWdTb6nQoD6hOgG1rI/KdXQvNn2mxOofDQtH+UuKVkPN2I10yMn
- ogMAg07tu52A1em4MTzozZMBk69v4+qV61phCriZ2yiTS2fS2BAShf1RacpB1Cz5+L8CAiSxRio
- aj6efAfmfDVKRrCj1ig5Gm+w+FdFRJ0Dzhv58waSef4mhLo+jg5oBB1gFR7ivAOsAW2mc2yOThg
- fDUSUgRbihKg5TUpZbbVFkrCb14sYyvtcSX2Z4kHemQ4n/YvbkEfsexFIUph+Uu6b2U2TuoxQ7R
- hDxendj6myI8cm/yGLQBiKheEcIRvVd3GZS4wtoRS4WlQtQhR5Q11yxTWvBPSdXW9wHccTvS/Na
- SWd3ZX0JgjDn0alihNA==
-X-Proofpoint-GUID: klR1h63VDYBkF2Qa44O0zbdGxqKTThSs
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTE2MDA3NiBTYWx0ZWRfX8zM21RcAEfio
- NB2OpgTqbBlXHG/i82mw6ZjET6v7Z8toPgFhYFBcZKVBmTHNzAeSIH7EPsDL8lavXZR/t6m4Jqa
- bVC/GDNosPbDuHJT2M1xqM+hLVkKSEQ=
-X-Proofpoint-ORIG-GUID: klR1h63VDYBkF2Qa44O0zbdGxqKTThSs
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTE2MDA3NiBTYWx0ZWRfXy2oUnhRUkK5K
+ WXT6yBf+kGx2cpWzmWdLQtl9DsjvN69SlVC2VsopLKGYIBz3iTOJZ/H8ytNqmEj417xeHikbza0
+ MQZsclsOAccB544TjUUtWkZHy1xbc7Q=
+X-Proofpoint-GUID: 0AJOy923DYHYjwCVpEPr0w-ss_V9yr8U
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-09-15_05,2026-09-15_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 adultscore=0 bulkscore=0 clxscore=1015 phishscore=0
- suspectscore=0 impostorscore=0 spamscore=0 lowpriorityscore=0 malwarescore=0
+ impostorscore=0 lowpriorityscore=0 adultscore=0 bulkscore=0 clxscore=1015
+ phishscore=0 spamscore=0 priorityscore=1501 malwarescore=0 suspectscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609160076
 
-Per HPG, the controller now calls phy_init() from
-qcom_pcie_host_init() and phy_reset() from inside its own core reset
-assert/deassert. Making that actually happen here needs phy_ops::init
-and phy_ops::reset implemented, and phy_ops::power_on adjusted to
-match. Split the combined phy_ops::power_on/power_off into
-phy_ops::init/exit/reset/power_on to do that.
+HPG requires the controller/PHY GDSCs powered up and all controller/PHY
+clocks enabled first, then the controller's reset and the PHY's reset
+toggled together as a group, PARF_DEVICE_TYPE set right after, and the
+rest of the PARF/DBI config left until the PHY is ready.
 
-phy_ops::init enables power domains, regulators, and all PHY clocks
-(pipe clock first). phy_ops::reset does the no-CSR reset assert/
-delay/deassert/delay. phy_ops::power_on is left with just the PCS
-status poll. phy_ops::exit mirrors phy_ops::init in reverse;
-phy_ops::power_off is dropped since nothing remains for it to do.
+Make use of phy_init() and phy_reset(), and change the call flow to:
+
+  qcom_pcie_host_init():
+    phy_init()             (PHY GDSCs/regulators/clocks up)
+    qcom_pcie_ops::init:
+      enable controller clocks
+      assert controller reset
+      phy_reset()           (toggle the PHY's own reset)
+      deassert controller reset
+      write PARF_DEVICE_TYPE
+    phy_power_on()
+    qcom_pcie_ops::post_init  (rest of the PHY/PARF/DBI setup)
+
+phy_init() moves into qcom_pcie_host_init() and phy_exit() into
+qcom_pcie_host_deinit(), right before and right after they call
+qcom_pcie_ops::init/qcom_pcie_ops::deinit.
+
+Apply this to qcom_pcie_init_2_7_0()/_2_9_0()/_2_3_2()/_2_3_3().
+qcom_pcie_init_2_3_3() was enabling clocks after the reset deassert; move
+that ahead of the reset assert to match the same ordering. Also add or
+move the PARF_DEVICE_TYPE write to right after the reset group in each of
+those four functions.
+
+For most platforms phy_init()/phy_exit()/phy_reset() are no-ops against
+their phy_ops, so moving the calls around has no effect yet; the PHY's
+clocks/reset actually start being driven this way once a later PHY driver
+change implements phy_ops::init/phy_ops::exit/phy_ops::reset.
+phy-qcom-pcie2.c does implement phy_init()/phy_exit(), but moving the call
+site into qcom_pcie_host_init()/qcom_pcie_host_deinit() keeps them at the
+same point relative to that platform's own clock/reset programming, so its
+init sequence doesn't change either.
 
 Signed-off-by: Qiang Yu <qiang.yu@oss.qualcomm.com>
 ---
- drivers/phy/qualcomm/phy-qcom-qmp-pcie-multiphy.c | 94 +++++++++--------------
- 1 file changed, 35 insertions(+), 59 deletions(-)
+ drivers/pci/controller/dwc/pcie-qcom.c | 165 +++++++++++++++++++++++++--------
+ 1 file changed, 126 insertions(+), 39 deletions(-)
 
-diff --git a/drivers/phy/qualcomm/phy-qcom-qmp-pcie-multiphy.c b/drivers/phy/qualcomm/phy-qcom-qmp-pcie-multiphy.c
-index e93cba4369fb..aa7130efca45 100644
---- a/drivers/phy/qualcomm/phy-qcom-qmp-pcie-multiphy.c
-+++ b/drivers/phy/qualcomm/phy-qcom-qmp-pcie-multiphy.c
-@@ -280,20 +280,18 @@ static int qmp_pcie_init(struct phy *phy)
- 		goto err_pd_power_off;
- 	}
- 
--	ret = reset_control_bulk_assert(qmp->cfg->num_nocsr_resets, qmp->nocsr_resets);
--	if (ret) {
--		dev_err(qmp->dev, "no-csr reset assert failed: %d\n", ret);
-+	ret = clk_bulk_prepare_enable(qmp->cfg->num_pipe_clks, qmp->pipe_clks);
-+	if (ret)
- 		goto err_disable_regulators;
--	}
--
--	usleep_range(200, 300);
- 
- 	ret = clk_bulk_prepare_enable(qmp->cfg->num_clks, qmp->clks);
- 	if (ret)
--		goto err_disable_regulators;
-+		goto err_disable_pipe_clks;
- 
- 	return 0;
- 
-+err_disable_pipe_clks:
-+	clk_bulk_disable_unprepare(qmp->cfg->num_pipe_clks, qmp->pipe_clks);
- err_disable_regulators:
- 	regulator_bulk_disable(cfg->num_vregs, qmp->vregs);
- err_pd_power_off:
-@@ -310,31 +308,47 @@ static int qmp_pcie_exit(struct phy *phy)
- 	reset_control_bulk_assert(qmp->cfg->num_nocsr_resets, qmp->nocsr_resets);
- 
- 	clk_bulk_disable_unprepare(qmp->cfg->num_clks, qmp->clks);
-+	clk_bulk_disable_unprepare(qmp->cfg->num_pipe_clks, qmp->pipe_clks);
- 	regulator_bulk_disable(cfg->num_vregs, qmp->vregs);
- 	qmp_pcie_pd_power_off(qmp);
- 
- 	return 0;
+diff --git a/drivers/pci/controller/dwc/pcie-qcom.c b/drivers/pci/controller/dwc/pcie-qcom.c
+index ee63a6ec99de..c1792f35f9eb 100644
+--- a/drivers/pci/controller/dwc/pcie-qcom.c
++++ b/drivers/pci/controller/dwc/pcie-qcom.c
+@@ -508,6 +508,58 @@ static enum dw_pcie_ltssm qcom_pcie_2_1_0_get_ltssm(struct qcom_pcie *pcie)
+ 	return (enum dw_pcie_ltssm)FIELD_GET(ELBI_SYS_STTS_LTSSM_STATE_MASK, val);
  }
  
--static int qmp_pcie_power_on(struct phy *phy)
-+static int qmp_pcie_reset(struct phy *phy)
- {
- 	struct qmp_pcie *qmp = phy_get_drvdata(phy);
- 	const struct qmp_phy_cfg *cfg = qmp->cfg;
--	const struct qmp_pcie_offsets *offs = cfg->offsets;
--	void __iomem *status;
--	unsigned int val;
--	int i, ret;
-+	int ret;
- 
--	ret = clk_bulk_prepare_enable(qmp->cfg->num_pipe_clks, qmp->pipe_clks);
--	if (ret)
-+	ret = reset_control_bulk_assert(cfg->num_nocsr_resets, qmp->nocsr_resets);
-+	if (ret) {
-+		dev_err(qmp->dev, "no-csr reset assert failed: %d\n", ret);
- 		return ret;
-+	}
- 
--	ret = reset_control_bulk_deassert(qmp->cfg->num_nocsr_resets, qmp->nocsr_resets);
-+	udelay(5);
++static void qcom_pcie_phy_exit(struct qcom_pcie *pcie)
++{
++	struct qcom_pcie_port *port;
 +
-+	ret = reset_control_bulk_deassert(cfg->num_nocsr_resets, qmp->nocsr_resets);
- 	if (ret) {
- 		dev_err(qmp->dev, "no-csr reset deassert failed: %d\n", ret);
--		goto err_disable_pipe_clk;
-+		return ret;
- 	}
- 
-+	udelay(5);
++	list_for_each_entry(port, &pcie->ports, list)
++		phy_exit(port->phy);
++}
++
++static int qcom_pcie_phy_init(struct qcom_pcie *pcie)
++{
++	struct qcom_pcie_port *port, *failed_port = NULL;
++	struct device *dev = pcie->pci->dev;
++	int ret;
++
++	list_for_each_entry(port, &pcie->ports, list) {
++		ret = phy_init(port->phy);
++		if (ret) {
++			dev_err(dev, "phy init failed (%d)\n", ret);
++			failed_port = port;
++			goto err_exit_phy;
++		}
++	}
++
++	return 0;
++
++err_exit_phy:
++	list_for_each_entry(port, &pcie->ports, list) {
++		if (port == failed_port)
++			break;
++		phy_exit(port->phy);
++	}
++
++	return ret;
++}
++
++static int qcom_pcie_phy_reset(struct qcom_pcie *pcie)
++{
++	struct qcom_pcie_port *port;
++	struct device *dev = pcie->pci->dev;
++	int ret;
++
++	list_for_each_entry(port, &pcie->ports, list) {
++		ret = phy_reset(port->phy);
++		if (ret) {
++			dev_err(dev, "phy reset failed (%d)\n", ret);
++			return ret;
++		}
++	}
 +
 +	return 0;
 +}
 +
-+static int qmp_pcie_power_on(struct phy *phy)
-+{
-+	struct qmp_pcie *qmp = phy_get_drvdata(phy);
-+	const struct qmp_phy_cfg *cfg = qmp->cfg;
-+	const struct qmp_pcie_offsets *offs = cfg->offsets;
-+	void __iomem *status;
-+	unsigned int val;
-+	int i, ret;
-+
- 	for (i = 0; i < cfg->num_regs; i++) {
- 		status = qmp->base[i] + offs->pcs + cfg->regs[QPHY_PCS_STATUS];
- 		ret = readl_poll_timeout(status, val, !(val & cfg->phy_status), 200,
-@@ -342,56 +356,18 @@ static int qmp_pcie_power_on(struct phy *phy)
- 		if (ret) {
- 			dev_err(qmp->dev, "PHY power on timed-out (%s): %d\n",
- 				cfg->reg_names[i], ret);
--			goto err_disable_pipe_clk;
-+			return ret;
- 		}
+ static int qcom_pcie_get_resources_2_1_0(struct qcom_pcie *pcie)
+ {
+ 	struct qcom_pcie_resources_2_1_0 *res = &pcie->res.v2_1_0;
+@@ -791,11 +843,23 @@ static int qcom_pcie_init_2_3_2(struct qcom_pcie *pcie)
+ 	ret = clk_bulk_prepare_enable(res->num_clks, res->clks);
+ 	if (ret) {
+ 		dev_err(dev, "cannot prepare/enable clocks\n");
+-		regulator_bulk_disable(ARRAY_SIZE(res->supplies), res->supplies);
+-		return ret;
++		goto err_disable_regulators;
  	}
  
++	ret = qcom_pcie_phy_reset(pcie);
++	if (ret)
++		goto err_disable_clocks;
++
++	writel(DEVICE_TYPE_RC, pcie->parf + PARF_DEVICE_TYPE);
++
  	return 0;
--
--err_disable_pipe_clk:
--	clk_bulk_disable_unprepare(qmp->cfg->num_pipe_clks, qmp->pipe_clks);
--
--	return ret;
--}
--
--static int qmp_pcie_power_off(struct phy *phy)
--{
--	struct qmp_pcie *qmp = phy_get_drvdata(phy);
--
--	clk_bulk_disable_unprepare(qmp->cfg->num_pipe_clks, qmp->pipe_clks);
--
--	return 0;
--}
--
--static int qmp_pcie_enable(struct phy *phy)
--{
--	int ret;
--
--	ret = qmp_pcie_init(phy);
--	if (ret)
--		return ret;
--
--	ret = qmp_pcie_power_on(phy);
--	if (ret)
--		qmp_pcie_exit(phy);
--
--	return ret;
--}
--
--static int qmp_pcie_disable(struct phy *phy)
--{
--	int ret;
--
--	ret = qmp_pcie_power_off(phy);
--	if (ret)
--		return ret;
--
--	return qmp_pcie_exit(phy);
++
++err_disable_clocks:
++	clk_bulk_disable_unprepare(res->num_clks, res->clks);
++err_disable_regulators:
++	regulator_bulk_disable(ARRAY_SIZE(res->supplies), res->supplies);
++
++	return ret;
  }
  
- static const struct phy_ops qmp_pcie_phy_ops = {
--	.power_on	= qmp_pcie_enable,
--	.power_off	= qmp_pcie_disable,
-+	.init		= qmp_pcie_init,
-+	.exit		= qmp_pcie_exit,
-+	.power_on	= qmp_pcie_power_on,
-+	.reset		= qmp_pcie_reset,
- 	.owner		= THIS_MODULE,
- };
+ static int qcom_pcie_post_init_2_3_2(struct qcom_pcie *pcie)
+@@ -957,18 +1021,28 @@ static int qcom_pcie_init_2_3_3(struct qcom_pcie *pcie)
+ 	struct device *dev = pci->dev;
+ 	int ret;
  
++	ret = clk_bulk_prepare_enable(res->num_clks, res->clks);
++	if (ret) {
++		dev_err(dev, "cannot prepare/enable clocks\n");
++		return ret;
++	}
++
+ 	ret = reset_control_bulk_assert(ARRAY_SIZE(res->rst), res->rst);
+ 	if (ret < 0) {
+ 		dev_err(dev, "cannot assert resets\n");
+-		return ret;
++		goto err_disable_clocks;
+ 	}
+ 
+ 	usleep_range(2000, 2500);
+ 
++	ret = qcom_pcie_phy_reset(pcie);
++	if (ret)
++		goto err_assert_resets;
++
+ 	ret = reset_control_bulk_deassert(ARRAY_SIZE(res->rst), res->rst);
+ 	if (ret < 0) {
+ 		dev_err(dev, "cannot deassert resets\n");
+-		return ret;
++		goto err_assert_resets;
+ 	}
+ 
+ 	/*
+@@ -977,11 +1051,7 @@ static int qcom_pcie_init_2_3_3(struct qcom_pcie *pcie)
+ 	 */
+ 	usleep_range(2000, 2500);
+ 
+-	ret = clk_bulk_prepare_enable(res->num_clks, res->clks);
+-	if (ret) {
+-		dev_err(dev, "cannot prepare/enable clocks\n");
+-		goto err_assert_resets;
+-	}
++	writel(DEVICE_TYPE_RC, pcie->parf + PARF_DEVICE_TYPE);
+ 
+ 	return 0;
+ 
+@@ -991,6 +1061,8 @@ static int qcom_pcie_init_2_3_3(struct qcom_pcie *pcie)
+ 	 * the original failure in 'ret'.
+ 	 */
+ 	reset_control_bulk_assert(ARRAY_SIZE(res->rst), res->rst);
++err_disable_clocks:
++	clk_bulk_disable_unprepare(res->num_clks, res->clks);
+ 
+ 	return ret;
+ }
+@@ -1066,7 +1138,6 @@ static int qcom_pcie_init_2_7_0(struct qcom_pcie *pcie)
+ 	struct qcom_pcie_resources_2_7_0 *res = &pcie->res.v2_7_0;
+ 	struct dw_pcie *pci = pcie->pci;
+ 	struct device *dev = pci->dev;
+-	u32 val;
+ 	int ret;
+ 
+ 	ret = regulator_bulk_enable(ARRAY_SIZE(res->supplies), res->supplies);
+@@ -1085,6 +1156,10 @@ static int qcom_pcie_init_2_7_0(struct qcom_pcie *pcie)
+ 		goto err_disable_clocks;
+ 	}
+ 
++	ret = qcom_pcie_phy_reset(pcie);
++	if (ret)
++		goto err_disable_clocks;
++
+ 	usleep_range(1000, 1500);
+ 
+ 	ret = reset_control_deassert(res->rst);
+@@ -1099,6 +1174,21 @@ static int qcom_pcie_init_2_7_0(struct qcom_pcie *pcie)
+ 	/* configure PCIe to RC mode */
+ 	writel(DEVICE_TYPE_RC, pcie->parf + PARF_DEVICE_TYPE);
+ 
++	return 0;
++err_disable_clocks:
++	clk_bulk_disable_unprepare(res->num_clks, res->clks);
++err_disable_regulators:
++	regulator_bulk_disable(ARRAY_SIZE(res->supplies), res->supplies);
++
++	return ret;
++}
++
++static int qcom_pcie_post_init_2_7_0(struct qcom_pcie *pcie)
++{
++	const struct qcom_pcie_cfg *pcie_cfg = pcie->cfg;
++	struct dw_pcie *pci = pcie->pci;
++	u32 val;
++
+ 	/* Force PHY out of lowest power state */
+ 	val = readl(pcie->parf + PARF_PHY_CTRL);
+ 	val &= ~PHY_TEST_PWR_DOWN;
+@@ -1126,19 +1216,6 @@ static int qcom_pcie_init_2_7_0(struct qcom_pcie *pcie)
+ 	val |= EN;
+ 	writel(val, pcie->parf + PARF_AXI_MSTR_WR_ADDR_HALT_V2);
+ 
+-	return 0;
+-err_disable_clocks:
+-	clk_bulk_disable_unprepare(res->num_clks, res->clks);
+-err_disable_regulators:
+-	regulator_bulk_disable(ARRAY_SIZE(res->supplies), res->supplies);
+-
+-	return ret;
+-}
+-
+-static int qcom_pcie_post_init_2_7_0(struct qcom_pcie *pcie)
+-{
+-	const struct qcom_pcie_cfg *pcie_cfg = pcie->cfg;
+-
+ 	if (pcie_cfg->override_no_snoop)
+ 		writel(WR_NO_SNOOP_OVERRIDE_EN | RD_NO_SNOOP_OVERRIDE_EN,
+ 				pcie->parf + PARF_NO_SNOOP_OVERRIDE);
+@@ -1298,10 +1375,14 @@ static int qcom_pcie_init_2_9_0(struct qcom_pcie *pcie)
+ 	struct device *dev = pcie->pci->dev;
+ 	int ret;
+ 
++	ret = clk_bulk_prepare_enable(res->num_clks, res->clks);
++	if (ret)
++		return ret;
++
+ 	ret = reset_control_assert(res->rst);
+ 	if (ret) {
+ 		dev_err(dev, "reset assert failed (%d)\n", ret);
+-		return ret;
++		goto err_disable_clocks;
+ 	}
+ 
+ 	/*
+@@ -1310,15 +1391,26 @@ static int qcom_pcie_init_2_9_0(struct qcom_pcie *pcie)
+ 	 */
+ 	usleep_range(2000, 2500);
+ 
++	ret = qcom_pcie_phy_reset(pcie);
++	if (ret)
++		goto err_disable_clocks;
++
+ 	ret = reset_control_deassert(res->rst);
+ 	if (ret) {
+ 		dev_err(dev, "reset deassert failed (%d)\n", ret);
+-		return ret;
++		goto err_disable_clocks;
+ 	}
+ 
+ 	usleep_range(2000, 2500);
+ 
+-	return clk_bulk_prepare_enable(res->num_clks, res->clks);
++	writel(DEVICE_TYPE_RC, pcie->parf + PARF_DEVICE_TYPE);
++
++	return 0;
++
++err_disable_clocks:
++	clk_bulk_disable_unprepare(res->num_clks, res->clks);
++
++	return ret;
+ }
+ 
+ static int qcom_pcie_post_init_2_9_0(struct qcom_pcie *pcie)
+@@ -1335,7 +1427,6 @@ static int qcom_pcie_post_init_2_9_0(struct qcom_pcie *pcie)
+ 
+ 	qcom_pcie_configure_dbi_atu_base(pcie);
+ 
+-	writel(DEVICE_TYPE_RC, pcie->parf + PARF_DEVICE_TYPE);
+ 	writel(BYPASS | MSTR_AXI_CLK_EN | AHB_CLK_EN,
+ 		pcie->parf + PARF_MHI_CLOCK_RESET_CTRL);
+ 	writel(GEN3_RELATED_OFF_RXEQ_RGRDLESS_RXTS |
+@@ -1447,10 +1538,14 @@ static int qcom_pcie_host_init(struct dw_pcie_rp *pp)
+ 
+ 	qcom_pcie_perst_assert(pcie);
+ 
+-	ret = pcie->cfg->ops->init(pcie);
++	ret = qcom_pcie_phy_init(pcie);
+ 	if (ret)
+ 		return ret;
+ 
++	ret = pcie->cfg->ops->init(pcie);
++	if (ret)
++		goto err_exit_phy;
++
+ 	ret = qcom_pcie_phy_power_on(pcie);
+ 	if (ret)
+ 		goto err_deinit;
+@@ -1503,6 +1598,8 @@ static int qcom_pcie_host_init(struct dw_pcie_rp *pp)
+ 	qcom_pcie_phy_power_off(pcie);
+ err_deinit:
+ 	pcie->cfg->ops->deinit(pcie);
++err_exit_phy:
++	qcom_pcie_phy_exit(pcie);
+ 
+ 	return ret;
+ }
+@@ -1524,6 +1621,7 @@ static void qcom_pcie_host_deinit(struct dw_pcie_rp *pp)
+ 
+ 	qcom_pcie_phy_power_off(pcie);
+ 	pcie->cfg->ops->deinit(pcie);
++	qcom_pcie_phy_exit(pcie);
+ }
+ 
+ static void qcom_pcie_host_post_init(struct dw_pcie_rp *pp)
+@@ -2109,10 +2207,6 @@ static int qcom_pcie_parse_port(struct qcom_pcie *pcie, struct device_node *node
+ 	if (!port)
+ 		return -ENOMEM;
+ 
+-	ret = phy_init(phy);
+-	if (ret)
+-		return ret;
+-
+ 	INIT_LIST_HEAD(&port->perst);
+ 
+ 	ret = qcom_pcie_parse_perst(pcie, port, node);
+@@ -2157,7 +2251,6 @@ static int qcom_pcie_parse_ports(struct qcom_pcie *pcie)
+ 	list_for_each_entry_safe(port, tmp_port, &pcie->ports, list) {
+ 		list_for_each_entry_safe(perst, tmp_perst, &port->perst, list)
+ 			list_del(&perst->list);
+-		phy_exit(port->phy);
+ 		list_del(&port->list);
+ 	}
+ 
+@@ -2170,16 +2263,11 @@ static int qcom_pcie_parse_legacy_binding(struct qcom_pcie *pcie)
+ 	struct qcom_pcie_perst *perst;
+ 	struct qcom_pcie_port *port;
+ 	struct phy *phy;
+-	int ret;
+ 
+ 	phy = devm_phy_optional_get(dev, "pciephy");
+ 	if (IS_ERR(phy))
+ 		return PTR_ERR(phy);
+ 
+-	ret = phy_init(phy);
+-	if (ret)
+-		return ret;
+-
+ 	port = devm_kzalloc(dev, sizeof(*port), GFP_KERNEL);
+ 	if (!port)
+ 		return -ENOMEM;
+@@ -2398,7 +2486,6 @@ static int qcom_pcie_probe(struct platform_device *pdev)
+ 	list_for_each_entry_safe(port, tmp_port, &pcie->ports, list) {
+ 		list_for_each_entry_safe(perst, tmp_perst, &port->perst, list)
+ 			list_del(&perst->list);
+-		phy_exit(port->phy);
+ 		list_del(&port->list);
+ 	}
+ err_pm_runtime_put:
 
 -- 
 2.34.1
