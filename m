@@ -1,136 +1,182 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AD49B4EBAD6;
-	Wed, 16 Sep 2026 11:57:20 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 72C654AF674
+	for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 12:03:51 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789559844; cv=none; b=Nacdnwb38c5sdmwVT6H36fVVPneEZWLc0T4DtjcfIjGx5U+CJ0006kwGXWlGrAKb30GQEsm3Zw527w+T8EdgU5INX/MzLjDIwtNJDuC82IidnbMRVRemLCoiDuibqjnyeo6eHk1yzcxGYR337MMMukqS+lIxjjdkgiF24U3oU6s=
+	t=1789560234; cv=none; b=bngs+tHbfhNamskzLyDtUOZsXd33IRhvvIRUeB59c2RL+IECxnstYHAPSEgLiRI89wk3iaq6lVGAQok/jURi08OE4qhm3VCGGa0v2nujIb9wYtwYtuH3YrYxlSF6rhgA7m0ref0J0zxnYqNzEuv/MchDzup/zJD3EVMYuxGbfCs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789559844; c=relaxed/simple;
-	bh=+LtRmbxwd85RdYqmHNnNzjoHFPg6PgK4hUBdyvizWwA=;
+	s=arc-20240116; t=1789560234; c=relaxed/simple;
+	bh=6sK5lF1uG0tPWOFM+OttpVt7fqKt3BCa2jrH2Us6oik=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=nJdgJ8X3K3rNtA4TapGl1qx9iQKTWC6YtEuZ4WWOG24jg6VSnUOj7az/zTS+0Tnl5gQjcr3ZXv9KFFpLRs+FPk9hEPUYFDEPJM6NqT75o8IAcDti/Fd3bXm0jBs0gk940Z2ucM2FZ1sCc6cy2WfCq0RxQLBtt1oz0Zb1tIIUaT8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=CzeCY7Vq; arc=none smtp.client-ip=100.103.45.18
+	 Content-Type:Content-Disposition:In-Reply-To; b=grQZyVosGnyFcGl7ZzVnK2iazh7QR+ctnGXWjMexO9G6rSNwLsb+8ZM3ZxxtOTHFFBne0hFQXqRiQo+gyPNeTNqnXJaIbvhgFLA8VKzXZj01HHdepI8P20xolrCdNbSCZKKGMKXCf1l/Q17AXCkg33DVPa4zys4yNmHz6J0v4TA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=bb4xnBey; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=XtCcQUhz; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="CzeCY7Vq"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 469821F000FF;
-	Wed, 16 Sep 2026 11:57:15 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1789559838;
-	bh=jQzahxlR3x5lfRUGFf42Mhc85kasPW7Fz63+sfAlGVg=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=CzeCY7Vquq8rG8pevEn4vuQ3aKfYpKYwRBBA3CBuWRgrOD86Bfgk52M/9M4lHidsr
-	 uM2cIk+MB5/BbTEEe3gd0cvfPiQP0wjIetkiM+VjsP2lfuidtgPoJrCk3v15PBrUfp
-	 PBIoQos5KZ+1md8DGnXN5bMEKAAHsYTNlCYTm0nixARBx78ALGq0VMRSTZuLagred7
-	 QV3YtETijFpKLZiE4sXnfJmbm5TrQD6YN/GMY6Cz6O3JzXSRLOZYzyfUq2r4zsQUrE
-	 6HgZYNWOF8jlTsTVTFaGA2768cBjQu8kajwbdQ9GzCBszn/8esOZLO16UuhXyi5HbV
-	 mdwW8JBre3gPQ==
-Date: Wed, 16 Sep 2026 12:57:12 +0100
-From: Mark Brown <broonie@kernel.org>
-To: Jishnu Prakash <jishnu.prakash@oss.qualcomm.com>
-Cc: Kamal Wadhwa <kamal.wadhwa@oss.qualcomm.com>,
-	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, robh@kernel.org,
-	Saikiran <bjsaikiran@gmail.com>, monish.chunara@oss.qualcomm.com,
-	nitin.rawat@oss.qualcomm.com,
-	Bjorn Andersson <bjorn.andersson@oss.qualcomm.com>,
-	lgirdwood@gmail.com, andersson@kernel.org,
-	linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
-	krzk+dt@kernel.org, devicetree@vger.kernel.org,
-	Manivannan Sadhasivam <mani@kernel.org>
-Subject: Re: [PATCH v3 0/2] regulator: qcom-rpmh: Add off-on-delay support
-Message-ID: <0d17ef87-0b95-43cf-809d-7d28d3e29afe@sirena.org.uk>
-References: <20260127190211.14312-1-bjsaikiran@gmail.com>
- <20260515111647.qg75thdvcbvvjpoi@hu-kamalw-hyd.qualcomm.com>
- <06a264d0-6a14-4b71-b783-82b771f04411@oss.qualcomm.com>
- <oa3okt7mdhoqmrebwim5yswarbcacbmhpwfvqbhtv6ib3cwrwi@ddox6mw3uhmy>
- <0d4fa333-df22-42b9-b9c2-ccb43ac4fac3@oss.qualcomm.com>
- <3pybhkqdvve2ct6burnhav3utis6nljz7ncheqcrs7v55ullz4@nek57empeoca>
- <086f8e7c-0afa-45d5-bdb2-54ac5f79eefa@sirena.org.uk>
- <xmjovrqonged7m77zlx4gbz6xvfksygbw7g4vgv2stlucvqoy6@uie3qdhdtkoe>
- <aqg-JSTrbg-xR69l@sirena.org.uk>
- <5ff87d08-c263-4b9d-a18d-c8da8fc0de1a@oss.qualcomm.com>
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="bb4xnBey";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="XtCcQUhz"
+Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68G92ovQ2122504
+	for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 12:03:49 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-type:date:from:in-reply-to:message-id:mime-version
+	:references:subject:to; s=qcppdkim1; bh=QFXgN8orDBjbvQKpvi/E0ueO
+	Gqo2a07wjdptO1xinNA=; b=bb4xnBeyACviZAcfpfPaqE9zkcsZPlSAAT1vMJHY
+	C23OlXMqgtSOwOKbulh19Z2Z6CSNT05JeBG+u8MvA05K9g4TYMWoHpryergD/xvc
+	968WLELgWJShnO1JsJQ3jmMYk/fsz7XpkKSEb4t79RTJCboQbY8lNZkrpKaZ+uI3
+	9RVBi6R/5HU074GhGHoW2V1tAtLazz7v+hr6aj61O+8WIS7UvTp/8r9Am5DptPNn
+	mQK8Cn6LuzbtMxDGjxRtLpnk9ewNuI/OuuJfKemUCQWdBp0V0cmpITqJ3Q7ohCT5
+	+x9GjpxXl2NIYVe8PJ23tGJjzKLk9zy43z1g8g3sKd2bSw==
+Received: from mail-ot1-f69.google.com (mail-ot1-f69.google.com [209.85.210.69])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gqkv7hwhy-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 12:03:48 +0000 (GMT)
+Received: by mail-ot1-f69.google.com with SMTP id 46e09a7af769-8050554892dso9389570a34.2
+        for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 05:03:48 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1789560228; x=1790165028; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=QFXgN8orDBjbvQKpvi/E0ueOGqo2a07wjdptO1xinNA=;
+        b=XtCcQUhzICyHhEry5k3JXMBi8KQxfpybpzdXLwSm2S5H95o/0vk0ZHC700Mv+epQeK
+         KHJmAED59MX3qrLBxRWLwuCmR4m5oRrspF2zhSKALZtwXTnZaUGIp5Yl6q/VJDOlYsTs
+         w5uvkJjqxHs4zDw2GAMv3nX57xe9vhg9VARGi80lXU8p3SaOXYC58vB0GlyOGFyYFBaC
+         uaop0vg47GDvDAoRQstdVzpCjzfRZywN/FsGDn+elxxG4nkqR6PAitrwLxZeKaiuboTp
+         vAeTZ0t80B6cii1/2ec/mUstC8E8clrwQtjKRlXnVt21wFfl7paNzf/uXJLu6M0XWKTN
+         EXrQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1789560228; x=1790165028;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=QFXgN8orDBjbvQKpvi/E0ueOGqo2a07wjdptO1xinNA=;
+        b=WOSoMB+vKoBbxsysrl5g+AGhP8LlN5rMRtepCKbQMamzQ5doTxkE00+HeDuHX70sIM
+         b4ExfmvRHmGnc6qNyGuNbCBcfNZxCOrbo8h7D4hJ/OIukg4Y+1A6hpYnzgfrpORF75yR
+         4I/Aq1KDcQVj1jV7nDqMnrszCe3S3saV4UBweFyaTxZkjzwZa1DU6QZgGSpfWVvU92pV
+         XrKAT6Yy/uKVHAvmI8PTjo624FpgT1A/PHhVRdvYHuDzw7+Gdg6hfwehHGTkJoxYbPIf
+         Pzt6O/e/gTbUW+rZm0UDG8GdxDRhSkltqILFyLKib6mq5eX3PvdObqZ5IZDIl3Y4WLGJ
+         UZ7g==
+X-Forwarded-Encrypted: i=1; AKwUvBzKGBuoWhbip0LJOEIn+MWXC+FfkVhYuZMAURaR01jhb+F39QzZmyOhbTM4++1mSKDtrwGhMa7NCOIYVbA8@vger.kernel.org
+X-Gm-Message-State: AFuF++kfGzNRaEhBdDFqvyj1m6cEfhRUN9Gd3wb4JjikjT1ll3gabjyo
+	pqC0TbTMmshEsY0NJDI/O2/FV21c26udNPQJgE/nERC/pzyPMYyeqMJHLVqoGjGUmfxjLUWlBFK
+	iitWimi4CXI85rGjPftm11+JkQo8LIuoTxOfbyxqvkz8FGld/lNIQ+DOxc2OStfVU2nz9
+X-Gm-Gg: AYBFou3xurq9tJAdVZaKfbSGFsPTYRWt8RweJgBB0J4BCZSnsWlvkN+8wjXeiz48sSB
+	GLuxzAZaG52NGH9TZV9pO9VYZLkquA7v0dcFGWRYo+hriW6+BLWsX17bFebbaoH3g9ezLnBuYSl
+	eNYxd+/0+DCnAwV7HAcyKWP3Pr2iHsx7XLdbpIvRKIZIYWfhZRTHJ8PSb6YDd2nD8PuSsLjJw56
+	8Mgxho0EpHeA2IxhHLbE/gyZiQX5Pfz+WzNZqDAfQMlI/5enDLu4TIvfoa1F7uR0K29U3MQa0lb
+	QH+XWv6SPt1gK6QtRh8AP7Mej0DLX+O+Cz04nWRRjiqCD6Kye44Paw5TZ6BI/LgOyQduM4QkZeN
+	SYzjwQsqy+OwD+w==
+X-Received: by 2002:a05:6820:290d:b0:6b7:46fa:169e with SMTP id 006d021491bc7-6c7d45ec697mr2271827eaf.51.1789560228227;
+        Wed, 16 Sep 2026 05:03:48 -0700 (PDT)
+X-Received: by 2002:a05:6820:290d:b0:6b7:46fa:169e with SMTP id 006d021491bc7-6c7d45ec697mr2271761eaf.51.1789560227634;
+        Wed, 16 Sep 2026 05:03:47 -0700 (PDT)
+Received: from oss.qualcomm.com ([202.46.23.25])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-33bf5aee8b0sm16611955eec.23.2026.09.16.05.03.43
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 16 Sep 2026 05:03:47 -0700 (PDT)
+Date: Wed, 16 Sep 2026 17:33:40 +0530
+From: Mohd Ayaan Anwar <mohd.anwar@oss.qualcomm.com>
+To: Thomas Karpiniec <tom.karpiniec@outlook.com>
+Cc: netdev@vger.kernel.org, Maxime Chevallier <maxime.chevallier@bootlin.com>,
+        Russell King <linux@armlinux.org.uk>,
+        Andrew Lunn <andrew+netdev@lunn.ch>,
+        "David S . Miller" <davem@davemloft.net>,
+        Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>,
+        Paolo Abeni <pabeni@redhat.com>,
+        Choong Yong Liang <yong.liang.choong@linux.intel.com>,
+        Bartosz Golaszewski <brgl@kernel.org>, linux-arm-msm@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+Subject: Re: [PATCH net 1/2] net: stmmac: propagate platform mac_finish errors
+Message-ID: <aqqFnJ2EF828xFFb@oss.qualcomm.com>
+References: <CH3PR11MB8413FCBA598F7FABC04ADCFEE4B92@CH3PR11MB8413.namprd11.prod.outlook.com>
+ <CH3PR11MB8413069BD77B03793D1A9B42E4B92@CH3PR11MB8413.namprd11.prod.outlook.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="LeMdaFtY1wIgmB0+"
-Content-Disposition: inline
-In-Reply-To: <5ff87d08-c263-4b9d-a18d-c8da8fc0de1a@oss.qualcomm.com>
-X-Cookie: Double!
-
-
---LeMdaFtY1wIgmB0+
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+In-Reply-To: <CH3PR11MB8413069BD77B03793D1A9B42E4B92@CH3PR11MB8413.namprd11.prod.outlook.com>
+X-Proofpoint-ORIG-GUID: K1TBR7f2Gkrj1Rs4DomhEXn1zypL8oTg
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTE2MDE1OCBTYWx0ZWRfXycPsw0nlS2l2
+ UrvKhcqHWSiUnZiKVtxVjf7IUFnWerCsy4TSivXFXeDefa2RTbu1+wy1Rbj1Ld/nqOZtRuEtmAH
+ jU+OZw79PGsp4ZuPx+dmz1D4eWIjoXa7ZzDRRyeVjSHwb6A78ANZH/+fPMehAzVv0WKfdaTb6K/
+ Hj7hiWunwhNVVyKDV+UewM7CaNBdzL8Mw5pab7n/5WsA/mH/z4WPzmY92vQ9aiErqnvtF2XVrTj
+ 81f+162noJCszGCy41q02hgFbB22v6WjFN0DnjqbbK57ko95DIhkBbHG/9qnZ+KWTFzhuQpAcbA
+ Ey1wXSG8FbqmOur7C8fhVUQx5ZWmKHPRETUaF0gveoWfuXNnUAVLfZY78s5R3335H+zzyWUcKr/
+ F6sAR68lXjQrQPGqtgOYOTJDVQLSnSECzYeJUqxFNBcZ1RSgH/krWHPtVnyJedWNQ9pL+Rb13O+
+ MrIxYHVkQPFlRBnTCWQ==
+X-Authority-Analysis: v=2.4 cv=eKmGH3p1 c=1 sm=1 tr=0 ts=6aaa85a4 cx=c_pps
+ a=z9lCQkyTxNhZyzAvolXo/A==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
+ a=kj9zAlcOel0A:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
+ a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=xWJGE7MbY3rzqH8snsQA:9 a=CjuIK1q_8ugA:10
+ a=EyFUmsFV_t8cxB2kMr4A:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTE2MDE1OCBTYWx0ZWRfX1gh/XY5D+3N8
+ xxdlVS0DzF96mvG2H4Gj2JxhknDpCBJEIbu2XDN+YY0GYPdzoXTt4YiB8xUoeo2XvFBWYMuH+9c
+ 5P9S/47RWniZzGeMAvFQ4POFPuQsU0I=
+X-Proofpoint-GUID: K1TBR7f2Gkrj1Rs4DomhEXn1zypL8oTg
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-09-15_05,2026-09-15_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ impostorscore=0 lowpriorityscore=0 adultscore=0 bulkscore=0 clxscore=1015
+ phishscore=0 spamscore=0 priorityscore=1501 malwarescore=0 suspectscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609160158
 
-On Wed, Sep 16, 2026 at 01:35:09PM +0530, Jishnu Prakash wrote:
-> On 9/15/2026 12:04 AM, Mark Brown wrote:
-> > On Wed, Sep 09, 2026 at 02:34:21AM +0530, Kamal Wadhwa wrote:
+On Wed, Sep 16, 2026 at 08:39:49PM +1000, Thomas Karpiniec wrote:
+> From: Thomas Karpiniec <tom@wendy.sh>
+> 
+> stmmac_mac_finish() discards the platform callback's return value and
+> always reports success to phylink. For example, the Qualcomm ETHQOS
+> callback can return an error from phy_set_mode_ext() if SerDes
+> configuration fails. Phylink then treats the interface as successfully
+> configured and can report carrier even though the SerDes is not ready.
+> 
+> Return the platform callback's result so that phylink can report the
+> failure and keep the link down until a subsequent configuration succeeds.
+> Keep returning zero when no platform callback is installed.
+> 
+> Fixes: e654cfc718d4 ("net: stmmac: configure SerDes on mac_finish")
+> Cc: stable@vger.kernel.org
+> Assisted-by: LLM sparse
+> Signed-off-by: Thomas Karpiniec <tom@wendy.sh>
+> ---
+>  drivers/net/ethernet/stmicro/stmmac/stmmac_main.c | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+> 
+> diff --git a/drivers/net/ethernet/stmicro/stmmac/stmmac_main.c b/drivers/net/ethernet/stmicro/stmmac/stmmac_main.c
+> index 1fb5f804ea23..1350e92943ac 100644
+> --- a/drivers/net/ethernet/stmicro/stmmac/stmmac_main.c
+> +++ b/drivers/net/ethernet/stmicro/stmmac/stmmac_main.c
+> @@ -1048,8 +1048,8 @@ static int stmmac_mac_finish(struct phylink_config *config, unsigned int mode,
+>  	struct stmmac_priv *priv = netdev_priv(ndev);
+>  
+>  	if (priv->plat->mac_finish)
+> -		priv->plat->mac_finish(ndev, priv->plat->bsp_priv, mode,
+> -				       interface);
+> +		return priv->plat->mac_finish(ndev, priv->plat->bsp_priv, mode,
+> +					     interface);
+>  
+>  	return 0;
+>  }
 
-> >> 3. If we can avoid turning the regulator off itself, so we may not nee=
-d this delay
-> >=20
-> >> point 3 - We evaluated this for UFS - but the problem is that the issu=
-e happens in
-> >> the defer probe path, so if we avoid turning off the regulator, it lea=
-ds to long
-> >> error prints appearing for the regulator being left ON. So we couldn't=
- take that
-> >> path.
+Just curious, are you trying to resolve the issue where an interface
+gets created depite:
+  qcom-dwmac-sgmii-phy 8909000.phy: QSERDES_COM_C_READY_STATUS timed-out
+  qcom-ethqos 23040000.ethernet eth0: __stmmac_open: Serdes powerup failed
+in dmesg?
 
-> > I think Rob might be thinking here of something like the runtime PM
-> > autosuspend delay where once the final reference is dropped we wait some
-> > time before we actually implement the power off in hardware, thus a
-> > quick power cycle would never actually get implemented.  That does sound
-> > like a good idea if we've got issues with quick cycling, obviously the
-> > actual delay would still be needed but if you've got quick bounces
-> > happening routinely then a delay like that would allow you to avoid both
-> > power off and ramp delays.
+Anyways, the change looks reasonable to me:
 
-> I'm working with Kamal for upstreaming this series.
+Acked-by: Mohd Ayaan Anwar <mohd.anwar@oss.qualcomm.com>
 
-> If I understand you correctly, instead of the approach in this driver
-> change (only setting the existing variable "off_on_delay"), you prefer
-> having a sequence somewhat like this:
+	Ayaan
 
-> 1. Regulator (if configured in DT for this new behaviour) gets disable
->    vote from its last enabled consumer
-> 2. Delay timer is started
-> 3. If regulator gets enable vote before timer expires (quick bounce),
->    clear timer and return without touching regulator HW
-> 4. Else, disable regulator when timer expires
-
-> Is this what you meant?
-
-That's what I understand Rob's suggestion to be.  Like I say that would
-still need any minimum off time enforcement.
-
->=20
-> If the above sequence is right, where would you prefer it to be
-> implemented, in the regulator core file or our regulator driver file?
->=20
-> Thanks,
-> Jishnu
->=20
-
---LeMdaFtY1wIgmB0+
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAABCgAdFiEEreZoqmdXGLWf4p/qJNaLcl1Uh9AFAmqqhBcACgkQJNaLcl1U
-h9Dg7Qf+Nu0Ohhyx39SLlpNPUCtloq/bocXVOAPu0oHRlGJcdbIIvKOT3suv9m7s
-jDmVLB04vLD34rkO5oBZi+ZNWGYNuEnnMwONuAq1Hw7AmyZP1xch/mFk7cHvdNcD
-qs3r+fvbLHq83wSCaGrd39ViSRiEv9jHjOiM4cP4GM6nlryJUv/aDUKWVwC24Wjv
-Ug/EaGtvYAPD5TVptB1Az8ZyX13PDZluns6hGtPNZbGk8g9mUVrp5kvGzYfayzxY
-P4llxftv/jA5XgbAPxAYRWBK2yvNhWEsadg0zwddAIzg/DNYkNb85a0ARxFgs4tN
-m0xv4QhnrBf7ISm4Q17HPBGbdKzEmg==
-=Klo0
------END PGP SIGNATURE-----
-
---LeMdaFtY1wIgmB0+--
