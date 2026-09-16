@@ -1,43 +1,83 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wm2-f12.google.com (mail-wm2-f12.google.com [74.125.225.140])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 02DC1493642;
-	Wed, 16 Sep 2026 23:49:59 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A7A914AFE3B
+	for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 23:57:00 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.225.140
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789602601; cv=none; b=g/8TU2Xza51Tabke8qaXP9M5CL/OA0kRwW+lnifePku6KQB8NmxICwVZyuo3zfwXiasDJKKAbGpDgYba/1hXv+5C/myGnbDO7Cj7teJbtJZipn4YlJ8yqA1futOWoVrQnkmgt7cZ+qYcQA9oI/q39qxcHMFJa6lKuoKVCBqXkVY=
+	t=1789603022; cv=none; b=FLOlnmUPfKwt2ECRJx0QWIu0DuuLBAkmtZkDfBx32Gt9AjFIdvsr5wVcCaCwevAAjNVfh3OeoPbSAs6ZK26PjvjYnL7Hs1Ip/1v3krWlZgnpYU8lawios30QZCRVFv2Q/gILjm5b2Yu75mqcq2+0mfMckPVV/9mq+O11HEbXAJU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789602601; c=relaxed/simple;
-	bh=NNjIbUaYaWZ4tT4FFUewExGL1NK6vz19O/F0GPpATf0=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=JDudL0wdDcvXCkx7GZs51l3wGlWBfYUPEin2kfyekBuQBuBL7mnA9bPk7PAOdxf751euXDKnFs0Eh6ZzinXmx9FoMs1bxzOA1YVfPYQ+CmWngXJl4Au46nAW1GW/h6rDiNYbfLeJuI6ToDWmCKtJxCTC1rdiqmOvYEcxj8QggPE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=mekx8IwD; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1789603022; c=relaxed/simple;
+	bh=VGvZ2McX4R5AmpM+aD65U//d38njXDMp/8lXGO8s9fY=;
+	h=Message-ID:Date:From:To:Cc:Subject:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=rcwGsEMKzjrVHKH/SY2tFQ1TpSoqDqKfp1NxHUyozyZG1LoU20QzX2mqb+4nmQydRxddXbDuj9+BWbj12lurTsSl29Ez2W49zh26DcldJPn66JLj/J3wjAMi2fx47yXZLpuUMAdkuGsZYD8UDthCH3rOsJcBTw7CI3mi45moJLw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=L1hfraDg; arc=none smtp.client-ip=74.125.225.140
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="mekx8IwD"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id C91AA1F000FF;
-	Wed, 16 Sep 2026 23:49:58 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1789602599;
-	bh=VN6STUYeTPjIlv8wkaCwoduAtUJ1XttyOYdy6a//I+s=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=mekx8IwDPzqNLSJLOj7pxU2I8BU0fRvkjWobGU1f76TSrc8WwsLEVnqjcb+GKRiQd
-	 eSN7guqIcFOmyttCnprPB0Gp7MzxAzBxnKSsq/iHYnPjtN9Gr0qRpvk3P+apbiPDt6
-	 GBkax32iC54Wl/TzfqQfrKTHP7ewQeaLK/82xP6C2pA7HNpTxriNXWvqSwy+ZhZIvw
-	 D5ZwbdaymASnHIj4ASy29ffNS4thFdrRFUML6A4zGWtZZony3sS005yQJapAW9tsuU
-	 ujwvljWZdYzm8KvFqD/ojIwmBujPrYZUcyUn0hdeEfVLPCIdU6+JDwkH9nnwPw02PK
-	 7vslsUEuXOGog==
-Date: Wed, 16 Sep 2026 18:49:56 -0500
-From: Bjorn Andersson <andersson@kernel.org>
-To: david@ixit.cz
-Cc: Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>, 
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
-	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, Petr Hodina <petr.hodina@protonmail.com>, 
-	Richard Acayan <mailingradian@gmail.com>, linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, phone-devel@vger.kernel.org
-Subject: Re: [PATCH v9 0/2] Add initial dual front camera and rear flash
- support for Pixel 3 / 3 XL
-Message-ID: <aqsrBhqnXLRO3Qzv@baldur>
-References: <20260907-pixel3-camera-v9-0-b1981f2d3291@ixit.cz>
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="L1hfraDg"
+Received: by mail-wm2-f12.google.com with SMTP id 5b1f17b1804b1-49b912df756so1883005e9.3
+        for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 16:57:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1789603019; x=1790207819; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:subject:cc:to:from:date:message-id:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=RqA/0fr84svz/HOqoCjORMcBVPzXHKYkGVcKqp7/wRg=;
+        b=L1hfraDglk5BdW6YWihQ50AqrP4vcNrcDQPMCeT55kTyhQfjquN0wS5bob4Almk6SB
+         /ipLB6Ju+6KWkQKioXpu/Nj6DZUypa+8NwgIMi+osPdw8CPwK3j3oDMR+2S+UxhOVK2G
+         tXlzeFWEeFBNnRQlhm5ehtdj7K1+PPtnMh6yo4MZF39AE2+9FJrx9tLX+sJGiLMxrGqh
+         S6oGCEj16lNXyZX+LKwErapwpdMpO7Qi0R6dt2elaJiT5FVPL1DTnpGteHaqMXQ3RL39
+         uj2bBIwNpRE8Pa4QswCYq9xm1DhOf/chjn2nTVsCIphNdF2DfmUzS5bzhCilFkncOzwp
+         VqNg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1789603019; x=1790207819;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:subject:cc:to:from:date:message-id:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=RqA/0fr84svz/HOqoCjORMcBVPzXHKYkGVcKqp7/wRg=;
+        b=bL5NyubcRFzamSgKRskUwNNNhSK7RckWK8gYQDM/kKiv8yNd56iia5+fNC8J7tdT+u
+         M5mjUsx00XRlqTftuFbWcmoExt66p4/WGpQrNGjsziejNMCEWzWOkhc8x7OKOsCbG8cO
+         98ZQ3Q5JqJLL/6fCX79CRM2zAkII7frMgW3E1tPsgrNw55bZdTQzbrxl+pjwnQrTGvfM
+         EVP27cjJjwSbH59cRNLAu8Y2tyxUerosszH28CVEYxpWf+2XkC7OqI7KYbD+nO5RJ5wl
+         PAmOn5dcnO0MLP6u7RFLzMF5o0uX1wPNElqGqiIgMXrVvFArUN1sAjY/YFetbJtmAbdH
+         4vbQ==
+X-Forwarded-Encrypted: i=1; AKwUvBz/1b4YiZ8AwIHHkB8GJhxwdgdraxGL8GvvgrJWsahuxdEqSvdgQMoNihoW3AmtGba5H0m9DEP1oB0bYX1N@vger.kernel.org
+X-Gm-Message-State: AFuF++l4J1gFxZYisotBHYYeHfwP6MOsktVr08EGdLCl5VFgDfMpwOkY
+	X3dq9DV/aP8zX5l1edYGrhQNj2llBqi3jdBlkSRjH1EpUd397hXLVOm/
+X-Gm-Gg: AYBFou22Hcan1qB8hxLdJEeVCx8Hus0v0AHVBXLbw1PgAAEXxcQczn1ox2ZfqMRrE8U
+	b5KrMTqNTgwceo6JOI90MkJ0BMesYWNwFEWszCNoT3T5G3EDnWey7sdQVLCVtPgnC9gniMYLnom
+	KcLyTVJ0FHWUPzI4R9aZKcVXNpQVu/bz4l4z9z0l00nf8YNoDNzEUHwv9aG2kaUjAShCANclTYd
+	+HgNYkZ2sVYBuptEhE/N6FMBaIp8K+WH5TtEAqNgRY8wkZ7ttU0cJTo7YNW/evjrJQjcpmanki3
+	IMalD7xkumi7FyvKojXcq7UdGehSQxs/fCCqqncebM48N87r9859ur3gc1mDWZ6tF6EeHaAVjHs
+	Zbiad9EkLuXFI0XTcNl5xpGd3lM98rRwOwCZ3s81u01ALSkfjK0ToZPYf3a8aHC8y0IEmCmv1IK
+	cEyEDomncv8kNQRt9Yb1upmcJuBifCM7SD5mHeC1zyVHsJbRBhZycV38GvUs5398wnSw2Z1uv+E
+	Jxs3y67fjjTeggjQAk4qMeahnDoQnGQrstjt7qclBQ04e8=
+X-Received: by 2002:a05:6000:18a6:b0:487:b00:3853 with SMTP id ffacd0b85a97d-4870d16b717mr5872158f8f.27.1789603018764;
+        Wed, 16 Sep 2026 16:56:58 -0700 (PDT)
+Received: from Ansuel-XPS. (host-79-26-252-140.retail.telecomitalia.it. [79.26.252.140])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4870bf33d93sm9643791f8f.22.2026.09.16.16.56.56
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 16 Sep 2026 16:56:58 -0700 (PDT)
+Message-ID: <6aab2cca.142fb78a.207455.5b1d@mx.google.com>
+X-Google-Original-Message-ID: <aqssx5dMEgQaR1jD@Ansuel-XPS.>
+Date: Thu, 17 Sep 2026 01:56:55 +0200
+From: Christian Marangi <ansuelsmth@gmail.com>
+To: Donggeun Yoo <donggeunyoo.kernel@gmail.com>
+Cc: Andrew Lunn <andrew@lunn.ch>, Heiner Kallweit <hkallweit1@gmail.com>,
+	"David S . Miller" <davem@davemloft.net>,
+	Eric Dumazet <edumazet@google.com>,
+	Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
+	Russell King <linux@armlinux.org.uk>,
+	Daniel Golle <daniel@makrotopia.org>,
+	Rosen Penev <rosenp@gmail.com>, Sashiko <sashiko-bot@kernel.org>,
+	netdev@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+	linux-kernel@vger.kernel.org, stable@vger.kernel.org
+Subject: Re: [PATCH net v3 1/2] net: phy: qca808x: accept the active-high LED
+ polarity mode
+References: <20260915223138.321307-1-donggeunyoo.kernel@gmail.com>
+ <20260915223138.321307-2-donggeunyoo.kernel@gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -46,86 +86,26 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20260907-pixel3-camera-v9-0-b1981f2d3291@ixit.cz>
+In-Reply-To: <20260915223138.321307-2-donggeunyoo.kernel@gmail.com>
 
-On Mon, Sep 07, 2026 at 05:58:08PM +0200, David Heidelberg via B4 Relay wrote:
-> Describe the dual front-facing IMX355 sensors (standard and wide)
-> and enable the PMI8998 flash LED with hardware-accurate limits.
+On Wed, Sep 16, 2026 at 07:31:37AM +0900, Donggeun Yoo wrote:
+> commit a274465cc3be ("net: phy: support 'active-high' property for PHY LEDs")
+> added PHY_LED_ACTIVE_HIGH, but qca808x_led_polarity_set() still rejects
+> everything except PHY_LED_ACTIVE_LOW. An LED node carrying 'active-high'
+> therefore falls into the default case and returns -EINVAL, which
+> phy_probe() propagates: the mdio device is left unbound and
+> phy_attach_direct() falls back to the genphy driver, so the PHY loses
+> every qca808x-specific feature, not just the LED.
 > 
-> This brings up the basic camera topology and flash support in DT.
+> Accept the mode. The register write below already handles both
+> polarities.
 > 
-> Signed-off-by: David Heidelberg <david@ixit.cz>
-> ---
-> Changes in v9:
-> - Dependency merged, no longer depends on anything.
+> Cc: stable@vger.kernel.org
+> Fixes: a274465cc3be ("net: phy: support 'active-high' property for PHY LEDs")
+> Signed-off-by: Donggeun Yoo <donggeunyoo.kernel@gmail.com>
+> Assisted-by: Claude:claude-fable-5
 
-Do you know if there's a immutable branch containing
-dt-bindings/media/video-interface-devices.h somewhere, because this is
-still an unmet dependency in my tree.
+Reviewed-by: Christian Marangi <ansuelsmth@gmail.com>
 
-Regards,
-Bjorn
-
-> - Link to v8: https://patch.msgid.link/20260901-pixel3-camera-v8-0-99f159883348@ixit.cz
-> 
-> Changes in v8:
-> - Fix ordering of includes. (Konrad)
-> - Link to v7: https://lore.kernel.org/r/20260721-pixel3-camera-v7-0-82d323c6c5d2@ixit.cz
-> 
-> Changes in v7:
-> - Depend on the
->   https://lore.kernel.org/all/20260628-kbingham-orientation-v3-0-4ed92968aff8@ideasonboard.com/
->   (Konrad)
-> - Sort the renamed regulators. Why Mr. Anderson, why. (Konrad)
-> - Link to v6: https://lore.kernel.org/r/20260720-pixel3-camera-v6-0-afe419bef476@ixit.cz
-> 
-> Changes in v6:
-> - Remove forgotten bias-pull-down property from cci0_sleep node.
->   (dtbs_check)
-> - ..-regulator -> regulator-.. (Konrad)
-> - Rename camera -pin to -state and remove _pin from the labes. (Konrad,
->   dtbs_check)
-> - Link to v5: https://lore.kernel.org/r/20260719-pixel3-camera-v5-0-99593f1bd8ec@ixit.cz
-> 
-> Changes in v5:
-> - Added function-enumarator to flash LEDs. (Sashiko)
-> - Dropped l22a regulator needed only for NFOV actuator. (Sashiko)
-> - Dropped vdda-csi[0-2]-supply, as it was unused. (Sashiko).
-> - Added previously omited cam_mclk2_sleep sleep state.
-> - Link to v4: https://lore.kernel.org/r/20260719-pixel3-camera-v4-0-48cab1236852@ixit.cz
-> 
-> Changes in v4:
-> - Use 24 MHz ext clock for the cameras, as the downstream does, since
->   the upstream driver can now support it.
-> - Added additional LED, as the phone contains two separately controlled
->   white LEDs flash (upper and bottom, in one module).
-> - Increase flash-max-microamp, as I took wrong "flash" from the
->   downstream sources and dropped Dmitry R-b.
-> - Address formatting issues. (Konrad)
-> - Link to v3: https://lore.kernel.org/r/20260412-pixel3-camera-v3-0-e26b090a6110@ixit.cz
-> 
-> Changes in v3:
-> - Dropped cam_vio label. (Dmitry)
-> - Move the MCLK2 pinctrl from cameras to common camss. (Dmitry)
-> - Link to v2: https://lore.kernel.org/r/20260411-pixel3-camera-v2-0-41b889abb14c@ixit.cz
-> 
-> Changes in v2:
-> - leds.h include escaped the initial submission. Fixed.
-> - Link to v1: https://lore.kernel.org/r/20260411-pixel3-camera-v1-0-2757606515b6@ixit.cz
-> 
-> ---
-> David Heidelberg (2):
->       arm64: dts: qcom: sdm845-google: Add dual front IMX355 cameras
->       arm64: dts: qcom: sdm845-google: Enable PMI8998 camera flash LEDs
-> 
->  arch/arm64/boot/dts/qcom/sdm845-google-common.dtsi | 199 ++++++++++++++++++++-
->  1 file changed, 198 insertions(+), 1 deletion(-)
-> ---
-> base-commit: 944a035ecca915ae947905dcfb03f2b9dc6d032c
-> change-id: 20260315-pixel3-camera-a9989bf589ee
-> 
-> Best regards,
-> --  
-> David Heidelberg <david@ixit.cz>
-> 
-> 
+-- 
+	Ansuel
