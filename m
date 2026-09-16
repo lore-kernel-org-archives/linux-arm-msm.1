@@ -1,273 +1,162 @@
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.12])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E2709184524;
-	Wed, 16 Sep 2026 04:03:59 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.12
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 509FC34BA33
+	for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 04:17:05 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789531444; cv=none; b=g6zczYWs6Uzr7uuyyhSL92wSF8c45kqRH9MwHQe/oH1C1slDFMF0zAiqKQaS3HxxQv11lSRiafQG1DuoUtyHoU6gBfudHA5lgZayhQZ9wB2afnWqHKrTKYcnrBR1Pc1sDPEsw46LqPhvZVGXJXp618Sqlz1zUHCsHksMLijm+7s=
+	t=1789532226; cv=none; b=Upj4bIM+EtPTUG1JLqBt4J4F3fdvVKTZgAEjHEYmse2Dt4eq6+bukMNYT/zMjt+fXvjzPwNP0QoVGEEb8CKchZ0XLv8KDAeXtPL2yARe7GQ6jtXFQ75H9Ds9fbyQIQ1zb2TATyM7ekAu5fXmfF9mNQ5OnDwXXGxclmVW208iSAA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789531444; c=relaxed/simple;
-	bh=YW0Xe4FZmzkbLBEJu3FgyR3bCMlylarX7NFYocYeHVU=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=a/54y1XPXKfOs1v5/JqEILUO1FTP+9WoSZrivOpFZRfkw/VyP3SvIEow71CUy8Wp0CGcZ5rS8mRQQtQE/XdLw7dQpHDA61aCBRj1X+GZB2p0n2rRgV6RlXM1mIr3ZHm5ECqoCPZnMNgFEI9FX/CugoNcTKR8NWi2yXHkX4WYH2Q=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=TufMgn9B; arc=none smtp.client-ip=192.198.163.12
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
+	s=arc-20240116; t=1789532226; c=relaxed/simple;
+	bh=QEmS7gtQJV8lPegcQMTne5W34bluBivKSixSide/zvY=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=W5ZRhaO/ChsFSvxI8+aMmfOT4Lr3CRZrdxZqV/a6c1ZG0Em/gjSn4Yd+x2RhqnfqxBGA70tTgAUQxoXD9LyUcBI2+V/LgJvosunvI6iMz84Y/tqNgmcEmlmE+6aXiOOu6/Uku8v1PXrne0XM8olzRiL0cif2ReOSSFuC/a2GPM8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=ibWvfTpO; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=WTWF8jfZ; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="TufMgn9B"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1789531440; x=1821067440;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=YW0Xe4FZmzkbLBEJu3FgyR3bCMlylarX7NFYocYeHVU=;
-  b=TufMgn9B/hTMvULrxGIfyR9suD6QZX9/hmA3WUDLgTexQwMioSAQkk+T
-   Gm6EGugEUn8JkmZmSDXvIDSuecncMXI4IbSnoNzLFVGQ617+r5ebYnnc/
-   zmBV9Fl9JniH5eYfSyozNa+17PVYmSip1qcpQrytXwmG3zY8s8Qk0OdlB
-   wizfVrsUVJLFnzvBamVMCY6ZTZN4reU+Ar/dHK9U6aPAnmcYzP33gIhUs
-   4z6wHhIr6FOxYCBOkMgr6QJYx/ER++/kSVMmJOtZehj9L/M6r6HZ/wAle
-   XVzJYagYEZZbf72OofilSEVgjVc2wePzlmDoCtgIJreAPgeYCUeEiwDDh
-   w==;
-X-CSE-ConnectionGUID: i5FuLMHiQHGKaP9g7sDnNQ==
-X-CSE-MsgGUID: L7tYa+cQQzuZE1xKcHyu+A==
-X-IronPort-AV: E=McAfee;i="6800,10657,11905"; a="93726681"
-X-IronPort-AV: E=Sophos;i="6.27,103,1787036400"; 
-   d="scan'208";a="93726681"
-Received: from fmviesa008.fm.intel.com ([10.60.135.148])
-  by fmvoesa106.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 15 Sep 2026 21:03:59 -0700
-X-CSE-ConnectionGUID: 7H7tpPJSRX6hoFJ51FqF1g==
-X-CSE-MsgGUID: 5e0oc0nkTrmei+KUaD29TQ==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.27,103,1787036400"; 
-   d="scan'208";a="270584091"
-Received: from lkp-server01.sh.intel.com (HELO 462990a40a85) ([10.239.97.150])
-  by fmviesa008.fm.intel.com with ESMTP; 15 Sep 2026 21:03:55 -0700
-Received: from kbuild by 462990a40a85 with local (Exim 4.98.2)
-	(envelope-from <lkp@intel.com>)
-	id 1x6gsB-000000005UT-0EZw;
-	Wed, 16 Sep 2026 04:03:51 +0000
-Date: Wed, 16 Sep 2026 12:03:22 +0800
-From: kernel test robot <lkp@intel.com>
-To: Guangshuo Li <lgs201920130244@gmail.com>,
-	Vikash Garodia <vikash.garodia@oss.qualcomm.com>,
-	Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>,
-	Bryan O'Donoghue <bod@kernel.org>,
-	Mauro Carvalho Chehab <mchehab@kernel.org>,
-	Hans Verkuil <hverkuil@kernel.org>,
-	Jorge Ramirez-Ortiz <jorge.ramirez@oss.qualcomm.com>,
-	linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org
-Cc: oe-kbuild-all@lists.linux.dev, linux-media@vger.kernel.org,
-	Guangshuo Li <lgs201920130244@gmail.com>, stable@vger.kernel.org
-Subject: Re: [PATCH] media: venus: avoid HFI resource leak on IRQ request
- failure
-Message-ID: <202609161130.IsnPB09N-lkp@intel.com>
-References: <20260915123009.2420780-1-lgs201920130244@gmail.com>
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="ibWvfTpO";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="WTWF8jfZ"
+Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68FM3Dgw1932237
+	for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 04:17:04 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	WWpVeKnOVisrvOzrWemV8ElUFW/G4gO+jtiKlrfdLr4=; b=ibWvfTpOLf7VQIj2
+	zX0JLLIiGXmsdo5vGSLYOJOMMpoP/S0f3JtlJ8IxMIgfTKWyPNxFuGp0C811i35L
+	eh1nJtMZHD8i7sSEOdD+Z1z6rjCL8wONDxwTBTV6gmJu9ILwJXzqei6/+2HbaMYV
+	Y8/vueiEwJzrycVzmGE/oaD57UlNJ8COf4W1fBd8du4OWq51aVWnCywjgWsDcPUI
+	L0PhI2Or7mJpEE0TTFO3scYqEo7vZsEr/3oZvp8W4J/8cVgg+vT4p0nx4U92NzTE
+	f0pWYxvuoJaa1AMG5isKvUQxIy+OTMhvOVySQxCrhUDLnWTcipsBf/FjUqjtgTBY
+	EWzTOA==
+Received: from mail-pg1-f197.google.com (mail-pg1-f197.google.com [209.85.215.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gqefp94g5-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 04:17:04 +0000 (GMT)
+Received: by mail-pg1-f197.google.com with SMTP id 41be03b00d2f7-c89704da8c7so6971724a12.0
+        for <linux-arm-msm@vger.kernel.org>; Tue, 15 Sep 2026 21:17:04 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1789532223; x=1790137023; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=WWpVeKnOVisrvOzrWemV8ElUFW/G4gO+jtiKlrfdLr4=;
+        b=WTWF8jfZEMRlL3znDp5lSSuDVXlbiyZODo8ZOhRkrdOHcDN3Vghw9+KX5bY6eIenHr
+         HTESwquN9zbPhXYG3iQNA3Tw/P/1Lp75tEct+HLNIkmBwx35gtDYMtH4piFAi0m9s20U
+         Da3XB089u7j1l2FR4/pDZRzTH9cJ//lKZeFCqcJxV8TrdSYlU/G2Rpfq+M5NMyXPK9ca
+         yAimptIdzKMq3bo+UjMITqSPKWUFrLbEiF7aAhh3QBE1LP+E0ysatyiNo7O9BfLiGgft
+         dFzqAD5sdJ0lUUOoov31xdNTYDMgQ5I+ql8mP4fq9YbErDaFiwPN3xQnXeVXyY0i3g8f
+         THfg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1789532223; x=1790137023;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=WWpVeKnOVisrvOzrWemV8ElUFW/G4gO+jtiKlrfdLr4=;
+        b=K7FUePjKbX1RFkLR6aMY0jk2Czh+ZmhNpXK6vGSN2C97CKt8jXr6GvNQow4VamS2d1
+         DnkOoAvSYaCoHLXfLIV8IMmykgmxckWFWy2ZjC2759AfsOae4DO59gtqyOsyS84ge+NN
+         iBdNb+ngN6WhTCKPgne+nJ2dbNgq2JdOU6hDV5bEfvvhUbyA+ecW6dLux0CKGDZkhQk2
+         KJ98gagija242ArdJO0VVTXgRPhPAOwt8xbsSaG1jVvDtFKC696opRcbNd2PoCQFFvj+
+         MfNSbQragOFp1wW+DCo4qYpQh9tfdy+qbFWUtye1SXCjG1Shbr7dwnwfXeKk8FTTNXqt
+         cYqA==
+X-Gm-Message-State: AFuF++lmCbCJg/C7LhAkLHTWoMNXc+tbC/zNmSbWlgYKS8QK4odEsN9A
+	s7yIrDyHGh5SGcrUZtvkZlw7UogGyU2Y1OoJMz4oBa8+IlG66RupRq4XPmzuPBhg0OChC2RDgbu
+	gwtS3SG8objEp1HQnV2z2lHRjq3cw/PxTLQLBHw4EPP+l08QkVQvRMXvdYZ2fO7psKlJK
+X-Gm-Gg: AYBFou3euYjlOOc8QF2FQntcWpfWxdlMVxODoBv8KdoD0duYYnZyh3s4NynxBawOMof
+	Os7vAtmpNTDx56NakxhWx+neVMPa6V4tlQYZJuxJ8X70XOSb/twQQMUacUVkVlLriGdvHbf9Ads
+	351m5Hn8J1/wGyKEjyICE38PNN9Kl+nqI0cWLlI5OYXatl5BvaEPSXWsEGPq9Q/UB2kjdioMHrg
+	mU9IbYWH3+eu6HzMrzRY+8fV+qtAqErCeiNa48kg2TSpcL7avRzr1cJL6mBG9XLwdPRxOJWNxbS
+	9mVM6NWdQx8LvfpuyoZyEYRb/m3UY4tLBHrGQLCIE0En1ULBtum8cUsZUUrNs4BF/icwnMMJ80h
+	jMDRJkyeLeaTnfvIAdLiN+V6ASSo=
+X-Received: by 2002:a05:6a21:4c81:b0:3b4:61f:1fec with SMTP id adf61e73a8af0-3dd5f3c1abcmr2875680637.2.1789532223458;
+        Tue, 15 Sep 2026 21:17:03 -0700 (PDT)
+X-Received: by 2002:a05:6a21:4c81:b0:3b4:61f:1fec with SMTP id adf61e73a8af0-3dd5f3c1abcmr2875642637.2.1789532223009;
+        Tue, 15 Sep 2026 21:17:03 -0700 (PDT)
+Received: from [10.218.28.224] ([202.46.22.19])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-33bf5b1d335sm3901657eec.28.2026.09.15.21.16.57
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 15 Sep 2026 21:17:02 -0700 (PDT)
+Message-ID: <3e4949cc-4703-44de-ab86-867051ddc2b2@oss.qualcomm.com>
+Date: Wed, 16 Sep 2026 09:46:56 +0530
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260915123009.2420780-1-lgs201920130244@gmail.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 1/2] clk: qcom: rpmhcc: Add LNBB clocks support for
+ Glymur
+To: Jagadeesh Kona <jagadeesh.kona@oss.qualcomm.com>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Stephen Boyd <sboyd@kernel.org>, Brian Masney <bmasney+clk@redhat.com>,
+        Jerome Brunet <jbrunet+clk@baylibre.com>,
+        Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley
+ <conor+dt@kernel.org>,
+        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+        Abel Vesa <abelvesa@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org,
+        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
+References: <20260915-glymur-ufs-clk-changes-v2-0-d0aa1c60c269@oss.qualcomm.com>
+ <20260915-glymur-ufs-clk-changes-v2-1-d0aa1c60c269@oss.qualcomm.com>
+Content-Language: en-US
+From: Taniya Das <taniya.das@oss.qualcomm.com>
+In-Reply-To: <20260915-glymur-ufs-clk-changes-v2-1-d0aa1c60c269@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTE2MDA1MiBTYWx0ZWRfX07bpTG8pgfkl
+ 4CNblEbESOii2I3aFIzvK3ui4i38uw+xBGRkPVODckZUI2U8+m5+ciBu3FuTondJOTWiiINbatm
+ MkQSuuMohucKjoG4M34DQCa62tzq+lo=
+X-Authority-Analysis: v=2.4 cv=HrTjiETS c=1 sm=1 tr=0 ts=6aaa1840 cx=c_pps
+ a=rz3CxIlbcmazkYymdCej/Q==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
+ a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22
+ a=EUspDBNiAAAA:8 a=dHuaQup7kaPGrqMl_VAA:9 a=QEXdDO2ut3YA:10
+ a=bFCP_H2QrGi7Okbo017w:22
+X-Proofpoint-ORIG-GUID: Pr-C_1snWiB5_tdwlRT1RBuMVObgrq-M
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTE2MDA1MiBTYWx0ZWRfXxX3spIAeYERD
+ Me1Cr/8ccQsh/5Lkx9IFmtAyv77mPFjEfnvi8IRXMgi8rs3eTWieD+QQG2B62S/dHWzoJsVzC+3
+ JKHspAMY2Qmd17xpFMh86f55DBLVs8VslioNntjrjV9NhetXAgl1ReI/qmyR5U4PI+l7995yDup
+ MkZs5BBm4VfN3HcSnh+QYx7F5DQq1v7Bcg/qPKOI5xlAWP/arNDzOUw5/2iDI1ACBqCrz9eqrdI
+ sufWwHNErw3eyimSqqIEXfWVtdojW0qfxmlKO4EsUAfAAGrQeSXuxNS/WelW4htMLVnfozq9W8n
+ Hx5jTMjvBxZ0wFacZyyRwfLzBfi3ZUbV1GmpjGcx5Hi8/UaSAI8tQZYborcCqjVwloUrehZUtq3
+ vkIiQsV/8Qp0wbbZS/prHsMUlfa3dTYsILBHyT2+J1a9nkjzN+Ye6rig2K78PXqV/YtgA5+i/dA
+ WfYy1pDbERI64y3a2Iw==
+X-Proofpoint-GUID: Pr-C_1snWiB5_tdwlRT1RBuMVObgrq-M
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-09-15_05,2026-09-15_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ suspectscore=0 lowpriorityscore=0 impostorscore=0 bulkscore=0 phishscore=0
+ malwarescore=0 clxscore=1015 priorityscore=1501 spamscore=0 adultscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609160052
 
-Hi Guangshuo,
-
-kernel test robot noticed the following build warnings:
-
-[auto build test WARNING on linuxtv-media-pending/master]
-[also build test WARNING on media-tree/master linus/master v7.3-rc3 next-20260914]
-[If your patch is applied to the wrong git tree, kindly drop us a note.
-And when submitting patch, we suggest to use '--base' as documented in
-https://git-scm.com/docs/git-format-patch#_base_tree_information]
-
-url:    https://github.com/intel-lab-lkp/linux/commits/Guangshuo-Li/media-venus-avoid-HFI-resource-leak-on-IRQ-request-failure/20260915-203009
-base:   https://git.linuxtv.org/media-ci/media-pending.git master
-patch link:    https://lore.kernel.org/r/20260915123009.2420780-1-lgs201920130244%40gmail.com
-patch subject: [PATCH] media: venus: avoid HFI resource leak on IRQ request failure
-config: arm64-defconfig (https://download.01.org/0day-ci/archive/20260916/202609161130.IsnPB09N-lkp@intel.com/config)
-compiler: aarch64-linux-gcc (GCC) 16.1.0
-reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20260916/202609161130.IsnPB09N-lkp@intel.com/reproduce)
-
-If you fix the issue in a separate patch/commit (i.e. not just a new version of
-the same patch/commit), kindly add following tags
-| Reported-by: kernel test robot <lkp@intel.com>
-| Closes: https://lore.kernel.org/oe-kbuild-all/202609161130.IsnPB09N-lkp@intel.com/
-
-All warnings (new ones prefixed by >>):
-
-   drivers/media/platform/qcom/venus/core.c: In function 'venus_probe':
->> drivers/media/platform/qcom/venus/core.c:443:9: warning: this 'if' clause does not guard... [-Wmisleading-indentation]
-     443 |         if (ret)
-         |         ^~
-   drivers/media/platform/qcom/venus/core.c:446:17: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'if'
-     446 |                 enable_irq(core->irq);
-         |                 ^~~~~~~~~~
 
 
-vim +/if +443 drivers/media/platform/qcom/venus/core.c
+On 9/15/2026 5:37 PM, Jagadeesh Kona wrote:
+> Add support for rpmh LN_BB_CLK2 and LN_BB_CLK3 clocks on Qualcomm Glymur
+> platform.
+> 
+> Fixes: ebcb9db98bda ("clk: qcom: rpmh: Add support for Glymur rpmh clocks")
+> Signed-off-by: Jagadeesh Kona <jagadeesh.kona@oss.qualcomm.com>
+> ---
+>  drivers/clk/qcom/clk-rpmh.c | 5 +++++
+>  1 file changed, 5 insertions(+)
+> 
+> diff --git a/drivers/clk/qcom/clk-rpmh.c b/drivers/clk/qcom/clk-rpmh.c
+> index ec8700b6186d8d6dd1911b7a33f086805770284a..3db81c709729b547f288eb10d4aa5dcf63d9e951 100644
+> --- a/drivers/clk/qcom/clk-rpmh.c
+> +++ b/drivers/clk/qcom/clk-rpmh.c
 
-687bfbba5a1cb15 Bryan O'Donoghue    2024-12-30  379  
-af2c3834c8ca7cc Stanimir Varbanov   2017-06-15  380  static int venus_probe(struct platform_device *pdev)
-af2c3834c8ca7cc Stanimir Varbanov   2017-06-15  381  {
-af2c3834c8ca7cc Stanimir Varbanov   2017-06-15  382  	struct device *dev = &pdev->dev;
-af2c3834c8ca7cc Stanimir Varbanov   2017-06-15  383  	struct venus_core *core;
-af2c3834c8ca7cc Stanimir Varbanov   2017-06-15  384  	int ret;
-af2c3834c8ca7cc Stanimir Varbanov   2017-06-15  385  
-af2c3834c8ca7cc Stanimir Varbanov   2017-06-15  386  	core = devm_kzalloc(dev, sizeof(*core), GFP_KERNEL);
-af2c3834c8ca7cc Stanimir Varbanov   2017-06-15  387  	if (!core)
-af2c3834c8ca7cc Stanimir Varbanov   2017-06-15  388  		return -ENOMEM;
-af2c3834c8ca7cc Stanimir Varbanov   2017-06-15  389  
-af2c3834c8ca7cc Stanimir Varbanov   2017-06-15  390  	core->dev = dev;
-af2c3834c8ca7cc Stanimir Varbanov   2017-06-15  391  
-b4dac22d27a2cc4 Cai Huoqing         2021-09-01  392  	core->base = devm_platform_ioremap_resource(pdev, 0);
-af2c3834c8ca7cc Stanimir Varbanov   2017-06-15  393  	if (IS_ERR(core->base))
-af2c3834c8ca7cc Stanimir Varbanov   2017-06-15  394  		return PTR_ERR(core->base);
-af2c3834c8ca7cc Stanimir Varbanov   2017-06-15  395  
-5a465c5391a856a Christophe JAILLET  2021-01-28  396  	core->video_path = devm_of_icc_get(dev, "video-mem");
-32f0a6ddc8c98a1 Stanimir Varbanov   2019-08-13  397  	if (IS_ERR(core->video_path))
-32f0a6ddc8c98a1 Stanimir Varbanov   2019-08-13  398  		return PTR_ERR(core->video_path);
-32f0a6ddc8c98a1 Stanimir Varbanov   2019-08-13  399  
-5a465c5391a856a Christophe JAILLET  2021-01-28  400  	core->cpucfg_path = devm_of_icc_get(dev, "cpu-cfg");
-32f0a6ddc8c98a1 Stanimir Varbanov   2019-08-13  401  	if (IS_ERR(core->cpucfg_path))
-32f0a6ddc8c98a1 Stanimir Varbanov   2019-08-13  402  		return PTR_ERR(core->cpucfg_path);
-32f0a6ddc8c98a1 Stanimir Varbanov   2019-08-13  403  
-af2c3834c8ca7cc Stanimir Varbanov   2017-06-15  404  	core->irq = platform_get_irq(pdev, 0);
-af2c3834c8ca7cc Stanimir Varbanov   2017-06-15  405  	if (core->irq < 0)
-af2c3834c8ca7cc Stanimir Varbanov   2017-06-15  406  		return core->irq;
-af2c3834c8ca7cc Stanimir Varbanov   2017-06-15  407  
-af2c3834c8ca7cc Stanimir Varbanov   2017-06-15  408  	core->res = of_device_get_match_data(dev);
-af2c3834c8ca7cc Stanimir Varbanov   2017-06-15  409  	if (!core->res)
-af2c3834c8ca7cc Stanimir Varbanov   2017-06-15  410  		return -ENODEV;
-af2c3834c8ca7cc Stanimir Varbanov   2017-06-15  411  
-63342afea65e9ef Stanimir Varbanov   2020-01-30  412  	mutex_init(&core->pm_lock);
-63342afea65e9ef Stanimir Varbanov   2020-01-30  413  
-7482a983dea3b8d Stanimir Varbanov   2019-12-05  414  	core->pm_ops = venus_pm_get(core->res->hfi_version);
-7482a983dea3b8d Stanimir Varbanov   2019-12-05  415  	if (!core->pm_ops)
-7482a983dea3b8d Stanimir Varbanov   2019-12-05  416  		return -ENODEV;
-7482a983dea3b8d Stanimir Varbanov   2019-12-05  417  
-7482a983dea3b8d Stanimir Varbanov   2019-12-05  418  	if (core->pm_ops->core_get) {
-08b1cf474b7f727 Bryan O'Donoghue    2021-02-05  419  		ret = core->pm_ops->core_get(core);
-af2c3834c8ca7cc Stanimir Varbanov   2017-06-15  420  		if (ret)
-af2c3834c8ca7cc Stanimir Varbanov   2017-06-15  421  			return ret;
-7482a983dea3b8d Stanimir Varbanov   2019-12-05  422  	}
-af2c3834c8ca7cc Stanimir Varbanov   2017-06-15  423  
-af2c3834c8ca7cc Stanimir Varbanov   2017-06-15  424  	ret = dma_set_mask_and_coherent(dev, core->res->dma_mask);
-af2c3834c8ca7cc Stanimir Varbanov   2017-06-15  425  	if (ret)
-98cd831088c64aa Rajendra Nayak      2020-07-29  426  		goto err_core_put;
-af2c3834c8ca7cc Stanimir Varbanov   2017-06-15  427  
-0df720e59d9543a Robin Murphy        2020-09-03  428  	dma_set_max_seg_size(dev, UINT_MAX);
-de2563bce7a157f Vivek Gautam        2018-12-05  429  
-af2c3834c8ca7cc Stanimir Varbanov   2017-06-15  430  	INIT_LIST_HEAD(&core->instances);
-af2c3834c8ca7cc Stanimir Varbanov   2017-06-15  431  	mutex_init(&core->lock);
-af2c3834c8ca7cc Stanimir Varbanov   2017-06-15  432  	INIT_DELAYED_WORK(&core->work, venus_sys_error_handler);
-3227a8f7cf331ed Stanimir Varbanov   2021-04-23  433  	init_waitqueue_head(&core->sys_err_done);
-af2c3834c8ca7cc Stanimir Varbanov   2017-06-15  434  
-f7594c2d3a2ae92 Guangshuo Li        2026-09-15  435  	ret = devm_request_threaded_irq(dev, core->irq, hfi_isr,
-f7594c2d3a2ae92 Guangshuo Li        2026-09-15  436  					venus_isr_thread,
-f7594c2d3a2ae92 Guangshuo Li        2026-09-15  437  					IRQF_TRIGGER_HIGH | IRQF_ONESHOT |
-f7594c2d3a2ae92 Guangshuo Li        2026-09-15  438  					IRQF_NO_AUTOEN, "venus", core);
-af2c3834c8ca7cc Stanimir Varbanov   2017-06-15  439  	if (ret)
-98cd831088c64aa Rajendra Nayak      2020-07-29  440  		goto err_core_put;
-af2c3834c8ca7cc Stanimir Varbanov   2017-06-15  441  
-f7594c2d3a2ae92 Guangshuo Li        2026-09-15  442  	ret = hfi_create(core, &venus_core_ops);
-af2c3834c8ca7cc Stanimir Varbanov   2017-06-15 @443  	if (ret)
-98cd831088c64aa Rajendra Nayak      2020-07-29  444  		goto err_core_put;
-af2c3834c8ca7cc Stanimir Varbanov   2017-06-15  445  
-f7594c2d3a2ae92 Guangshuo Li        2026-09-15  446  		enable_irq(core->irq);
-f7594c2d3a2ae92 Guangshuo Li        2026-09-15  447  
-b4053a2097ec2f8 Bryan O'Donoghue    2021-04-02  448  	venus_assign_register_offsets(core);
-b4053a2097ec2f8 Bryan O'Donoghue    2021-04-02  449  
-08b1cf474b7f727 Bryan O'Donoghue    2021-02-05  450  	ret = v4l2_device_register(dev, &core->v4l2_dev);
-08b1cf474b7f727 Bryan O'Donoghue    2021-02-05  451  	if (ret)
-523cea3a19f0b3b Loic Poulain        2025-03-27  452  		goto err_hfi_destroy;
-08b1cf474b7f727 Bryan O'Donoghue    2021-02-05  453  
-08b1cf474b7f727 Bryan O'Donoghue    2021-02-05  454  	platform_set_drvdata(pdev, core);
-08b1cf474b7f727 Bryan O'Donoghue    2021-02-05  455  
-af2c3834c8ca7cc Stanimir Varbanov   2017-06-15  456  	pm_runtime_enable(dev);
-af2c3834c8ca7cc Stanimir Varbanov   2017-06-15  457  
-af2c3834c8ca7cc Stanimir Varbanov   2017-06-15  458  	ret = pm_runtime_get_sync(dev);
-af2c3834c8ca7cc Stanimir Varbanov   2017-06-15  459  	if (ret < 0)
-af2c3834c8ca7cc Stanimir Varbanov   2017-06-15  460  		goto err_runtime_disable;
-af2c3834c8ca7cc Stanimir Varbanov   2017-06-15  461  
-f9799fcce4bb383 Stanimir Varbanov   2018-10-17  462  	ret = venus_firmware_init(core);
-f9799fcce4bb383 Stanimir Varbanov   2018-10-17  463  	if (ret)
-85c853b7043657d Jorge Ramirez-Ortiz 2025-08-14  464  		goto err_runtime_disable;
-f9799fcce4bb383 Stanimir Varbanov   2018-10-17  465  
-a4cf7e3c069db63 Vikash Garodia      2018-10-17  466  	ret = venus_boot(core);
-af2c3834c8ca7cc Stanimir Varbanov   2017-06-15  467  	if (ret)
-8cc7a1b2aca0673 Christophe JAILLET  2021-08-19  468  		goto err_firmware_deinit;
-af2c3834c8ca7cc Stanimir Varbanov   2017-06-15  469  
-ba4fdff9201190d Jorge Ramirez-Ortiz 2025-08-14  470  	ret = venus_firmware_cfg(core);
-ba4fdff9201190d Jorge Ramirez-Ortiz 2025-08-14  471  	if (ret)
-ba4fdff9201190d Jorge Ramirez-Ortiz 2025-08-14  472  		goto err_venus_shutdown;
-ba4fdff9201190d Jorge Ramirez-Ortiz 2025-08-14  473  
-af2c3834c8ca7cc Stanimir Varbanov   2017-06-15  474  	ret = hfi_core_resume(core, true);
-af2c3834c8ca7cc Stanimir Varbanov   2017-06-15  475  	if (ret)
-af2c3834c8ca7cc Stanimir Varbanov   2017-06-15  476  		goto err_venus_shutdown;
-af2c3834c8ca7cc Stanimir Varbanov   2017-06-15  477  
-af2c3834c8ca7cc Stanimir Varbanov   2017-06-15  478  	ret = hfi_core_init(core);
-af2c3834c8ca7cc Stanimir Varbanov   2017-06-15  479  	if (ret)
-af2c3834c8ca7cc Stanimir Varbanov   2017-06-15  480  		goto err_venus_shutdown;
-af2c3834c8ca7cc Stanimir Varbanov   2017-06-15  481  
-85c853b7043657d Jorge Ramirez-Ortiz 2025-08-14  482  	ret = venus_firmware_check(core);
-1a73374a04e5551 Stanimir Varbanov   2018-07-06  483  	if (ret)
-523cea3a19f0b3b Loic Poulain        2025-03-27  484  		goto err_core_deinit;
-1a73374a04e5551 Stanimir Varbanov   2018-07-06  485  
-85c853b7043657d Jorge Ramirez-Ortiz 2025-08-14  486  	if (core->res->dec_nodename || core->res->enc_nodename) {
-85c853b7043657d Jorge Ramirez-Ortiz 2025-08-14  487  		ret = venus_add_dynamic_nodes(core);
-1a73374a04e5551 Stanimir Varbanov   2018-07-06  488  		if (ret)
-523cea3a19f0b3b Loic Poulain        2025-03-27  489  			goto err_core_deinit;
-85c853b7043657d Jorge Ramirez-Ortiz 2025-08-14  490  	}
-85c853b7043657d Jorge Ramirez-Ortiz 2025-08-14  491  
-85c853b7043657d Jorge Ramirez-Ortiz 2025-08-14  492  	ret = of_platform_populate(dev->of_node, NULL, NULL, dev);
-85c853b7043657d Jorge Ramirez-Ortiz 2025-08-14  493  	if (ret)
-85c853b7043657d Jorge Ramirez-Ortiz 2025-08-14  494  		goto err_remove_dynamic_nodes;
-85c853b7043657d Jorge Ramirez-Ortiz 2025-08-14  495  
-85c853b7043657d Jorge Ramirez-Ortiz 2025-08-14  496  	ret = venus_enumerate_codecs(core, VIDC_SESSION_TYPE_DEC);
-85c853b7043657d Jorge Ramirez-Ortiz 2025-08-14  497  	if (ret)
-85c853b7043657d Jorge Ramirez-Ortiz 2025-08-14  498  		goto err_of_depopulate;
-85c853b7043657d Jorge Ramirez-Ortiz 2025-08-14  499  
-85c853b7043657d Jorge Ramirez-Ortiz 2025-08-14  500  	ret = venus_enumerate_codecs(core, VIDC_SESSION_TYPE_ENC);
-85c853b7043657d Jorge Ramirez-Ortiz 2025-08-14  501  	if (ret)
-85c853b7043657d Jorge Ramirez-Ortiz 2025-08-14  502  		goto err_of_depopulate;
-1a73374a04e5551 Stanimir Varbanov   2018-07-06  503  
-af2c3834c8ca7cc Stanimir Varbanov   2017-06-15  504  	ret = pm_runtime_put_sync(dev);
-bbe516e976fce53 Dinghao Liu         2020-06-28  505  	if (ret) {
-bbe516e976fce53 Dinghao Liu         2020-06-28  506  		pm_runtime_get_noresume(dev);
-85c853b7043657d Jorge Ramirez-Ortiz 2025-08-14  507  		goto err_of_depopulate;
-bbe516e976fce53 Dinghao Liu         2020-06-28  508  	}
-af2c3834c8ca7cc Stanimir Varbanov   2017-06-15  509  
-f08abe6a1e07fdf Stanimir Varbanov   2020-05-21  510  	venus_dbgfs_init(core);
-f08abe6a1e07fdf Stanimir Varbanov   2020-05-21  511  
-af2c3834c8ca7cc Stanimir Varbanov   2017-06-15  512  	return 0;
-af2c3834c8ca7cc Stanimir Varbanov   2017-06-15  513  
-85c853b7043657d Jorge Ramirez-Ortiz 2025-08-14  514  err_of_depopulate:
-85c853b7043657d Jorge Ramirez-Ortiz 2025-08-14  515  	of_platform_depopulate(dev);
-85c853b7043657d Jorge Ramirez-Ortiz 2025-08-14  516  err_remove_dynamic_nodes:
-85c853b7043657d Jorge Ramirez-Ortiz 2025-08-14  517  	venus_remove_dynamic_nodes(core);
-523cea3a19f0b3b Loic Poulain        2025-03-27  518  err_core_deinit:
-523cea3a19f0b3b Loic Poulain        2025-03-27  519  	hfi_core_deinit(core, false);
-af2c3834c8ca7cc Stanimir Varbanov   2017-06-15  520  err_venus_shutdown:
-df381dc8e475204 Vikash Garodia      2018-10-17  521  	venus_shutdown(core);
-8cc7a1b2aca0673 Christophe JAILLET  2021-08-19  522  err_firmware_deinit:
-8cc7a1b2aca0673 Christophe JAILLET  2021-08-19  523  	venus_firmware_deinit(core);
-af2c3834c8ca7cc Stanimir Varbanov   2017-06-15  524  err_runtime_disable:
-bbe516e976fce53 Dinghao Liu         2020-06-28  525  	pm_runtime_put_noidle(dev);
-af2c3834c8ca7cc Stanimir Varbanov   2017-06-15  526  	pm_runtime_disable(dev);
-2a20869f7d798aa Jinjie Ruan         2024-11-01  527  	pm_runtime_set_suspended(dev);
-523cea3a19f0b3b Loic Poulain        2025-03-27  528  	v4l2_device_unregister(&core->v4l2_dev);
-523cea3a19f0b3b Loic Poulain        2025-03-27  529  err_hfi_destroy:
-af2c3834c8ca7cc Stanimir Varbanov   2017-06-15  530  	hfi_destroy(core);
-98cd831088c64aa Rajendra Nayak      2020-07-29  531  err_core_put:
-98cd831088c64aa Rajendra Nayak      2020-07-29  532  	if (core->pm_ops->core_put)
-08b1cf474b7f727 Bryan O'Donoghue    2021-02-05  533  		core->pm_ops->core_put(core);
-af2c3834c8ca7cc Stanimir Varbanov   2017-06-15  534  	return ret;
-af2c3834c8ca7cc Stanimir Varbanov   2017-06-15  535  }
-af2c3834c8ca7cc Stanimir Varbanov   2017-06-15  536  
+Reviewed-by: Taniya Das <taniya.das@oss.qualcomm.com>
+-- 
+Thanks,
+Taniya Das
 
---
-0-DAY CI Kernel Test Service
-https://github.com/intel/lkp-tests/wiki
