@@ -1,89 +1,82 @@
-Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8C8334E80B0
-	for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 13:02:33 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.171.202.116
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 13BA339EF0C
+	for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 13:14:03 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789563756; cv=none; b=C9rfp4YHF5TCmqGkJ/AP2RxVsxrAywVXYRuQIHySyEmIYCuj+rrZYezSnckInq1ZZlc1zwgyRyQxmZJF6VCzRxLwqP/UJ5aQ4J8QgH/Frq329stkzPOdLcUc5qpXcxPWa5xYym8a9Ty9UjWx3r0va6Fm3zJT51Bto+sXH41jujI=
+	t=1789564444; cv=none; b=lKda8ROEElTaIA/G6dvdf9mvL+YJ7e6xtO3W0OuWYiV1LaJltN82dJ4F166k7lZ1qO65D8qpQhdutoqNNlZ+hqNgM1JU8WgOPqmDgGIL3bTCmdlgOb/A0xX3sAxKBE32bbstVCoSkTl06fA73EYa2MSX29gOweQ47qYOC68Ppu8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789563756; c=relaxed/simple;
-	bh=/iA1i+fEz1OGwBmOfoih5OvcxjKj5L5pH1QANttn9/M=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=Om1FLeamzPWdR1IgWrv1FhEIkmCSRTr1B3UWxzPRhtvYAAFOihxigJljwbl/wZYKCevc/4mAkirofsWWdnPDiMohrwQ80wvR4/NDievo1oSc2K+YUxTuo0Tan3jD8rk1WGGRCPIr3Alr2AWN6WtctAtvFRgkLNPy2MeFFX7bLAY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=LbQIxnE5; arc=none smtp.client-ip=185.171.202.116
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
+	s=arc-20240116; t=1789564444; c=relaxed/simple;
+	bh=pihBz4gn+5eleCo7xhCNM4+VAMRmVbSp72bOE4FVM2U=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=OSDULnKrJ+3+ldIDYGnqEVHTdK9ZCvlpZRB+3XQC0q5h9lGc+djHh1MAiXttvSxsCrRGaZtzp++ghuGb76rnphHACdwTovNhPELKH9jqWEiM6Ycg3aSCH0pYB7+QAiZ0EQQvN8kz/7a9HoL9iysm9y976UiQz0nTUdjoJbFmU+U=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=MKaGm4Xk; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="LbQIxnE5"
-Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
-	by smtpout-04.galae.net (Postfix) with ESMTPS id 86628C5CD5A;
-	Wed, 16 Sep 2026 13:03:15 +0000 (UTC)
-Received: from mail.galae.net (mail.galae.net [212.83.136.155])
-	by smtpout-01.galae.net (Postfix) with ESMTPS id 8268F60337;
-	Wed, 16 Sep 2026 13:02:31 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id 2C54811C7B01E;
-	Wed, 16 Sep 2026 15:02:16 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
-	t=1789563746; h=from:subject:date:message-id:to:cc:mime-version:content-type:
-	 content-transfer-encoding:content-language:in-reply-to:references;
-	bh=Ob+rWI8KnN+HI9KrEep3pQqea5Fog14Wdci4nh+7dCY=;
-	b=LbQIxnE5GkwaTQBhNYc0u473Lluj0FyRcGGYeSdTAiGzC1Ostl3ejYmmyZo2TMjEJiWZM4
-	Y9i00svqukaLhVdDZb77FcmuqJtyeJTdIQ5FLcvzMTTGMpR2izmF8hcr4ZvkJFAZzd1Qjf
-	F0g0biJrSj5vvG2gQvuOEbB7QqIQdiNGjgvftWWU1Hy9rHWhRg8G1nB2wjyE8wOXkALpZf
-	d2VkQM1uS2rvVwf4geHuIv5S/yw3OmlqL9OwncapVJAyWhKSifh4HZz2y9zbk9Rv2O3GyP
-	WDFEUpcwVJmYX7Jo3BD6x9+/o3CTloAgpTiPx4RzsNZzOx/Uv5pu9/fmIItXDQ==
-Message-ID: <2377467b-5379-4759-a6ce-1d129c2b41ff@bootlin.com>
-Date: Wed, 16 Sep 2026 15:02:15 +0200
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="MKaGm4Xk"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id EED171F00898
+	for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 13:14:02 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1789564443;
+	bh=pihBz4gn+5eleCo7xhCNM4+VAMRmVbSp72bOE4FVM2U=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc;
+	b=MKaGm4XkzhjIvGy3MsoJBhYi+Q9WmpIC4kMKncgXqmyRHFPCccRYigQ9nf0W9gFBV
+	 frVlX9zYqHtJOG7B2Vr1RiJwZLjBmGyo4ct/2UBzU+GfWylOICqGPotqd0XCLsGjg1
+	 lsfjZIDmIdAJHSppF0cXKoOt4hk7X4sLKalUqSWMsg7q8ZkdUXehwzyuPOJcpLjuQF
+	 TLZtpHzxcwZjrozHHSoIbOp9A1GoV6v+K5zYPay4yXJuFUYcsXNy7bh/A3LS+7rPK5
+	 UEhTvVmHSeUj3ZZmd7r1LrzGf0ccEgus3Yaf1VyUjlOW3xSypRw88UG4g8b20DKLxi
+	 KLI5geUJFBySg==
+Received: by mail-lr2-f12.google.com with SMTP id 38308e7fff4ca-3a36de66c0dso8065281fa.0
+        for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 06:14:02 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AKwUvBzA9kkXGYEs/79Lir7oaqOwAOgPPlKw/MNcYcQsFAMbarf4ZOM1WT8aN7DxiNaFlCLNiOHwX0xz8SZCW7Eg@vger.kernel.org
+X-Gm-Message-State: AFuF++nNWzgw7b7MyEgnepoWdx0sGo9V6hVrAuk/tBJ2qm73+fexZh8z
+	Tr5e47KcBptWpxMnskunDKIyxeWhysUFwHjp1f3/pl4xr/vRJExB3TaPc/uWMka+1oM71hBprN+
+	vSe7BkKOwFZvOCqAsUn2aRojllyz9QFc=
+X-Received: by 2002:a05:6512:3e07:b0:5b7:651b:1cc0 with SMTP id
+ 2adb3069b0e04-5b8b660c2bfmr761601e87.4.1789564441313; Wed, 16 Sep 2026
+ 06:14:01 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH net 1/2] net: stmmac: propagate platform mac_finish errors
-To: Thomas Karpiniec <tom.karpiniec@outlook.com>, netdev@vger.kernel.org
-Cc: Mohd Ayaan Anwar <mohd.anwar@oss.qualcomm.com>,
- Russell King <linux@armlinux.org.uk>, Andrew Lunn <andrew+netdev@lunn.ch>,
- "David S . Miller" <davem@davemloft.net>, Eric Dumazet
- <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>,
- Paolo Abeni <pabeni@redhat.com>,
- Choong Yong Liang <yong.liang.choong@linux.intel.com>,
- Bartosz Golaszewski <brgl@kernel.org>, linux-arm-msm@vger.kernel.org,
- linux-kernel@vger.kernel.org
-References: <CH3PR11MB8413FCBA598F7FABC04ADCFEE4B92@CH3PR11MB8413.namprd11.prod.outlook.com>
- <CH3PR11MB8413069BD77B03793D1A9B42E4B92@CH3PR11MB8413.namprd11.prod.outlook.com>
-Content-Language: en-US
-From: Maxime Chevallier <maxime.chevallier@bootlin.com>
-In-Reply-To: <CH3PR11MB8413069BD77B03793D1A9B42E4B92@CH3PR11MB8413.namprd11.prod.outlook.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Last-TLS-Session-Version: TLSv1.3
+References: <20260901-q8b-dts-v1-0-7de0b6a73d08@radxa.com> <20260901-q8b-dts-v1-5-7de0b6a73d08@radxa.com>
+In-Reply-To: <20260901-q8b-dts-v1-5-7de0b6a73d08@radxa.com>
+From: Linus Walleij <linusw@kernel.org>
+Date: Wed, 16 Sep 2026 15:13:46 +0200
+X-Gmail-Original-Message-ID: <CAD++jLnuNCcaY+GW5Qzv1caSZfi0CGx_3Hx33x8MVpR6iS0wtg@mail.gmail.com>
+X-Gm-Features: AcwNN1Vw67ZSGXweqRIWzw8TAfqqxjv5DWNR5PtBCdGSa2CfcBJrR47asGFCEnY
+Message-ID: <CAD++jLnuNCcaY+GW5Qzv1caSZfi0CGx_3Hx33x8MVpR6iS0wtg@mail.gmail.com>
+Subject: Re: [PATCH 5/6] dt-bindings: pinctrl: qcom,sc8280xp-tlmm: allow gpio-line-names
+To: Xilin Wu <sophon@radxa.com>
+Cc: Bjorn Helgaas <bhelgaas@google.com>, Andrzej Hajda <andrzej.hajda@intel.com>, 
+	Neil Armstrong <neil.armstrong@linaro.org>, Robert Foss <rfoss@kernel.org>, 
+	Laurent Pinchart <Laurent.pinchart@ideasonboard.com>, Jonas Karlman <jonas@kwiboo.se>, 
+	Jernej Skrabec <jernej.skrabec@gmail.com>, Luca Ceresoli <luca.ceresoli@bootlin.com>, 
+	David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, 
+	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, 
+	Thomas Zimmermann <tzimmermann@suse.de>, Rob Herring <robh@kernel.org>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	Bjorn Andersson <andersson@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>, 
+	Bartosz Golaszewski <brgl@kernel.org>, linux-pci@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	dri-devel@lists.freedesktop.org, devicetree@vger.kernel.org, 
+	linux-arm-msm@vger.kernel.org, linux-gpio@vger.kernel.org, 
+	Stephen Chen <stephen@radxa.com>, Junhao Xie <bigfoot@radxa.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Hi,
+On Tue, Sep 1, 2026 at 10:48=E2=80=AFAM Xilin Wu <sophon@radxa.com> wrote:
 
-On 9/16/26 12:39, Thomas Karpiniec wrote:
-> From: Thomas Karpiniec <tom@wendy.sh>
-> 
-> stmmac_mac_finish() discards the platform callback's return value and
-> always reports success to phylink. For example, the Qualcomm ETHQOS
-> callback can return an error from phy_set_mode_ext() if SerDes
-> configuration fails. Phylink then treats the interface as successfully
-> configured and can report carrier even though the SerDes is not ready.
-> 
-> Return the platform callback's result so that phylink can report the
-> failure and keep the link down until a subsequent configuration succeeds.
-> Keep returning zero when no platform callback is installed.
-> 
-> Fixes: e654cfc718d4 ("net: stmmac: configure SerDes on mac_finish")
-> Cc: stable@vger.kernel.org
-> Assisted-by: LLM sparse
-> Signed-off-by: Thomas Karpiniec <tom@wendy.sh>
+> The SC8280XP TLMM GPIO controller exposes 230 GPIO lines. Allow boards to
+> provide descriptive names for these lines and constrain the list to the
+> number of GPIOs exposed by the controller.
+>
+> Signed-off-by: Xilin Wu <sophon@radxa.com>
 
-Let's see if this uncovers other dirt under the stmmac phylink carpet :)
+Sophon, right I got that reference ;)
 
-Reviewed-by: Maxime Chevallier <maxime.chevallier@bootlin.com>
+Reviewed-by: Linus Walleij <linusw@kernel.org>
 
-Maxime
-
+Yours,
+Linus Walleij
