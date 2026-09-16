@@ -1,207 +1,169 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from lahtoruutu.iki.fi (lahtoruutu.iki.fi [185.185.170.37])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EC86E4908B7
-	for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 09:15:41 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9B7354A387A;
+	Wed, 16 Sep 2026 09:17:11 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=185.185.170.37
 ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789550157; cv=pass; b=XxaBpEJOqq8jEcJKQuG3U/qcz9p25LXxlsGW1IT1mYX49VsbyKj2lhXXsnYIFlQ2ex7mPjvZ1qGtqOLMXydV3pa65yWZ8rmB0yKwjuhzfxrO1AG7TNo4N7cMJMdfGQszXLYUjxTOHHgH4eS8xYgbKtRmcXGXg6aagMnVzQ0C1v0=
+	t=1789550248; cv=pass; b=lHHuB2u46bp0YcEBoAJuynWTDDHQQgWCc8gtER6AXpRQeD+OGxg4NtTejHZPQiTbso2XLAbu5LdJq0cqTkVzJBNDga/fqcjya3f6a5okxHWnrLityy1q/jO6ILZCsxYY1N59RvL24aNcI+KX+9jclJ2lePkIQDusLcTBfQFNxIE=
 ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789550157; c=relaxed/simple;
-	bh=eUKhNcWpU2ARzdkZDtwBSmH3wpzbtiCR0j9k5GGyr8o=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=UqBwOXdd3ids420bqePY73Of7hA4G159UkloLzRKwojpRGiLy1UQLSekyehNoKNABlJjEk3EE+KDNvgnO0F6n7tGwnC0UDHhFMYxV2hi0ufauzdLHySUIC+98i8NRIdOvdMk+37MiahSIZYiQQDBSSOFBv17xa0wKR3Odw9SBj8=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=Zvc8Bs5i; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=GP9Hg8Tn; arc=pass smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1789550248; c=relaxed/simple;
+	bh=9apGcAGF+qN+WdJNOYa47ONmDgzcaDL77nJ6s3G6f94=;
+	h=MIME-Version:Date:From:To:Cc:Message-Id:In-Reply-To:References:
+	 Subject:Content-Type; b=KaXSUeuH2XXuRMeKOEF5hrmLW+mxdcmyipF2MttjZaEKl3ofZpfc+ubrjRmEUL1LIhtdNhozloH3xUNuG2QownNbBRNSqusDHRLyRrrskvIlLZ2v2dRfyFKRhFQElBeC54tsmmLlG7FsSoEBgYlN3ZPr5wqe4RnJPSlu+WovV/k=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=iki.fi; spf=pass smtp.mailfrom=iki.fi; dkim=pass (2048-bit key) header.d=iki.fi header.i=@iki.fi header.b=LOgzLAs4; arc=pass smtp.client-ip=185.185.170.37
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=iki.fi
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=iki.fi
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="Zvc8Bs5i";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="GP9Hg8Tn"
-Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68G930352822773
-	for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 09:15:35 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	USktFg+8SniSggZb7tvnYYwJ4/8bjyzpvcoyUOBNeTY=; b=Zvc8Bs5ipRjbNbxZ
-	GXqUEMb4SfYTUx56DvNHUA2kzqVDMtdmZ0CrBI0Rz1gYI4yKPPDv+77dYySl4Svb
-	LipDZpsaI4jTBVMdF/j+M4R/USG8O0yvN6/nIhUjJeabRdeMtPO5F0IKUc4Lv4lm
-	QJ2q2uGXOiY/e08ax/VH/cc4+b3Fwmqj7+f/dNuVYIQm2ewF2zS9UGN+S+ZsQTZP
-	7xPa7wuEyEXY6cRGnvfFY2bji9Ct3b/qv+S9kUIV/fkymi8sGjVaJ3VGocZ5UesJ
-	8KydK1JPZNM7FV8+8GnIJHh4jTUit1CWkqFRuG2UN/9hsqhqfoGAExitP44mIVj3
-	486qLQ==
-Received: from mail-yw1-f200.google.com (mail-yw1-f200.google.com [209.85.128.200])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gqfvfj137-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 09:15:35 +0000 (GMT)
-Received: by mail-yw1-f200.google.com with SMTP id 00721157ae682-86e8abd7136so61477317b3.0
-        for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 02:15:35 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1789550135; cv=none;
-        d=google.com; s=arc-20260327;
-        b=VY4jxmppdOKujnDsCh5NvVUGWJIOj7lC1KxvW0/mPdJjIWNuvi0ySWJNdvJPeOd5mF
-         1n5m9ah8tUWZPSN9jL4kKSMJ8q+AFQmPx0rZ4QHFL5sPR0h/k6HdxHCgaNeZo+yrZbJT
-         qQQnRDDpJohoRGZty69RCU1syN+wBSSzGz9ZqG36EK830uOoAtm9kxeHdGQm8yCol7VE
-         8nVnEwqpMmRY5aa0EVDaDFn/ka2T9rhI2e6Z/WW7yKTchJ/3nCSLZq+6TDsu7kEmhjpP
-         FEvoPl8RullohAnfnCUpjpRZ6jrTtH/MPRRaclRTgQjPHVeeOweNuoI+MjUqzV9ApZeL
-         kzmw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=USktFg+8SniSggZb7tvnYYwJ4/8bjyzpvcoyUOBNeTY=;
-        fh=PxV/9g2ZQ5xJlM4wXANISALprqAaHW+PfNu4Q1vteEI=;
-        b=lNCORNuaWRa0iOr7btcr1rSJ2LppwU7Fu3iOBDk/OxNhb9VHQZPn70UMppbdDMP/Tp
-         nFCSWm9TFHjnDliA7H2nbGIRrsm/NwoxHYrXMWDtiDvMdvK9GiFTAjd4n8LoYz4eIkwd
-         vO+aC19QoxODZxb/tqpgQd/hfLCg9pda7aWVuEZ7VWeQssOoKhpbH2DuK25/qQkeGxjG
-         00mMVl5xB9XUWv30JtymbXpOUSG1pd7YZ1chwM4Z1Jqao6bvnur4EBIhubWZx6cIcgGg
-         SD/pqj7Po8mCQzwopv0k+CoCs/cTqiZfQy0bgrne9x+MJ1u4mhYldn0DdStpzcWxyw/O
-         PShA==;
-        darn=vger.kernel.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1789550135; x=1790154935; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=USktFg+8SniSggZb7tvnYYwJ4/8bjyzpvcoyUOBNeTY=;
-        b=GP9Hg8TnCWqXcDzkdRS2o1tEs/HcqghREiQCAzF3S+vgrkAPfOABtFpSk9WqZVw2or
-         /nyX2gTcjmR6ZCdDEQ9b24YcZeDRt6qFj1SRXUaJwSMWYE82BRviOW0RCtQ3y7L98be3
-         uirh4zrUWhlYccoK3o5mYvUpsNqkv50pTHPw7EN1Zcs+jXl6MqaPGyq3l97/aX5h4/Cm
-         R1wJF71gcc1jyQnQBHKcVjLqvbnjWanjdFFnPSuQYvH6wkWtF+kjHxF47r9IrF/Qlm2b
-         NQF+j0IkxH4rymGJXXK/PHLL05fWhtwfQnblF+1b17O8HInaKZxQ62LPxh0F6uDTuBEY
-         YQYw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1789550135; x=1790154935;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=USktFg+8SniSggZb7tvnYYwJ4/8bjyzpvcoyUOBNeTY=;
-        b=HeTz8lfr7aorKuQHqQDaH6yTe73otGeapj6mL1Wr/1gggzueYs8gNKRaOcyd67FVxw
-         7j+Nmo3Zf8MRkgQzIAoS3phT8xGWr/Tdp/ml6y6A/P1meVocVZvuk0cTMSmTGY1blEjY
-         VlyZysy5C0Wfu/678JOtLvjXclBo+hnfd6CJNJv8lE8+fcfrCt7RehB+sUo+4Dn3wsnk
-         QvZVHxe4R41VqIzNFnwYhyjMcS9T5TSorN69dhpy6bLsoKGhk2MecsLGH/Uct49l/wIF
-         ZeNDgLAj7bA/w/b6Q1gxTYiq1iJKxIZuVkXFbwLnJfp68q46ykhL56H0kdSwbZHMXz4S
-         vE/Q==
-X-Forwarded-Encrypted: i=1; AKwUvBwkmJa8QtKpn5SDt0rkb1Q8urpOd9Qo2af9FB1yopyztNdmsrNUI4biFWAUS8dLLuSjcZHMWYeBNjFQubZ2@vger.kernel.org
-X-Gm-Message-State: AFuF++kwAY6S0V/sqaJDkyC2jgklvFEm9wod5JxAzIXS9LhLDyirEJ/e
-	trBSkRgLCURpTknEWEVy6g9wYJ0enwN0H16QfuWXHkMcgoC0VMva0vdWI9Kwf209IVBlUoEeAk0
-	OwRP9AWLVrkEsgyuo1sECX/yfHM7ZfSNZq6lagXFoEUXW4e0wUinr/e5+jAAn4JNzjJUexeA51b
-	H25PkaSxezZClwwMRzqzVrLKnbD1Z6e3q/Iiubmzwc3DgtvBqEc1w9Yg==
-X-Gm-Gg: AYBFou27Vs5QMQ1+kDQX2V45/Muu1EUxxaeMQ2qy99SsGuD6h82tI8R3ZNypYCWjn/B
-	INQYWcPPlgxPg72oyyTKpke4lD4IPylZsXFKr1nH+KDZTX+OHtARVRuW0h2RUPQVa6K5vTyGKuV
-	GcZxLGiQPvvpYlgY0ZMR30KvTAk9thmIbqRODFsiDDbS6T3fJzXOxT5OE=
-X-Received: by 2002:a05:690c:385:b0:873:5bb2:6c1a with SMTP id 00721157ae682-89226db1a37mr4902887b3.68.1789550135184;
-        Wed, 16 Sep 2026 02:15:35 -0700 (PDT)
-X-Received: by 2002:a05:690c:385:b0:873:5bb2:6c1a with SMTP id
- 00721157ae682-89226db1a37mr4902807b3.68.1789550134775; Wed, 16 Sep 2026
- 02:15:34 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=iki.fi header.i=@iki.fi header.b="LOgzLAs4"
+Received: from fauth-c2-smtp.messagingengine.com (fauth-c2-smtp.messagingengine.com [204.75.18.201])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange x25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	(Authenticated sender: jmtilli)
+	by lahtoruutu.iki.fi (Postfix) with ESMTPSA id 4hlCvL4YHpz49Q5T;
+	Wed, 16 Sep 2026 12:17:02 +0300 (EEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iki.fi; s=lahtoruutu;
+	t=1789550224;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=9ZXpwDz6DoWWBmQ6vDNVRxdpcZSSALaEWv74i0upVdU=;
+	b=LOgzLAs4BikP/sgnQAfLugwVmoLTCaaR6pBGXA1afPjrpCv8xZ/XnHqdolLosB9Z928jgz
+	gUC1WbzWA3saYj/NlMXzY9Fx2IsiRZ+G1d/NRMZsLjMl6mixZRfJxp4/HOFQvH0OX9fr5M
+	fIExVqAoITO+kWu0iRMKXxdqsywyX0yt4e4HeIfupMcULbcornYNcOAeF53fr4xae0tZOi
+	cogbMyXpR/kYZ+yd1EWN0o65wR6CWx3xqmJnwO1aTVTv7yozoIYp+Omz6mQxHSKPmqL/CW
+	Hf2JQUn0Revkw1uCxFo+keDNbJ8/sbDMdgSv+FcoEwNk+Q/+ZjNME7Pae+ENEA==
+ARC-Seal: i=1; a=rsa-sha256; d=iki.fi; s=lahtoruutu; cv=none; t=1789550224;
+	b=NGsvDT5a/D5ir8PsCu1YTvoejFwVxfILAw8mbusf8jcy0Befo7S6EgbCGn2XYE5e3NUEdq
+	kvgfjp4IsId7XRwGXOfaW0XGlS+RVtTO/xfLLlaTvN3yWoizUDYa7FKexRFFDuVwQYlBSb
+	kE3qEYw9DUxj8JcdEqiJghgJ3YpQGsjpo4dIuUnc4k+/i0jGkxyBLl5BpOdbkdO3CvXAQl
+	loqkxHgAtHbnqwGU4ZOjlO8+VTx2lrjcgCe8DKlx/OLWzFsLBzMse2BncHy9xV7iitf99+
+	56uvEQlqXRy6s8kAOcLVijWW2z5Mai/pMMYpJ9Z/ma/fuP5spzz+kVgHJ/qmYA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=iki.fi;
+	s=lahtoruutu; t=1789550224;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=9ZXpwDz6DoWWBmQ6vDNVRxdpcZSSALaEWv74i0upVdU=;
+	b=QaZDi5PRFHJw2YLEriC+I9FJuecvdYIKGxF2MwFomYnNj/WiyC04XmYLvrQR9TT1YrMnBW
+	XvM5KBxSJftPOuuDw48YeC0bvLzaRjRThXIUIg1RC2ihUI6eqVVp0zLe0C4rQyKqvXn2EQ
+	tG/jrxZT5asy1ZPaZ3OQxbdDWuUS0jotYa/kv7LLO5xfkhTJ4vMp7J1iz6zEJR6GmWtdSz
+	pmQOvF+SQ1AWYwyXTY0kb0H6JT7v2FXyDNsXL5s/ybHq9rHdH6BAnvKTcqJfwJD5ICGkp6
+	O/uNL1xpjDFaQzOUPayvoSjgNagiqCR1WE+Pyr5oLwyA5jWTwfW8koJ7rKsL5Q==
+ARC-Authentication-Results: i=1;
+	ORIGINATING;
+	auth=pass smtp.auth=jmtilli smtp.mailfrom=juha-matti.tilli@iki.fi
+Received: from ams-compute-02.internal (ams-compute-02.internal [10.64.2.62])
+	by mailfauth.ams.internal (Postfix) with ESMTP id 8E28B198003A;
+	Wed, 16 Sep 2026 05:17:01 -0400 (EDT)
+Received: from ams-imap-13 ([10.64.2.33])
+  by ams-compute-02.internal (MEProxy); Wed, 16 Sep 2026 05:17:01 -0400
+X-ME-Sender: <xms:iV6qag3fwJZVElS11KOnACeO3JGDmX_uwUJvl8TgfoB81E3A3vBJTg>
+    <xme:iV6qal56Dzqp_NRsS9Es8Vuey_S8mDBuDqKiHnugv7udTKHByS_h2x7KhaWC9KEU3
+    ZFj6u_mUwXrGGZgRvLUvPqFAckzru_7RfuhLscUhqlA1JtFSH91NSE>
+X-ME-Proxy-Cause: dmFkZTGNFtvyF6MZNYMeLjLWJ41+we1JJ2Ix4Ro8hXfbflboz9ZBw6ovM/eey9Gijq0/Iq
+    aPwhDw8Qs0gEeTKSlITUHQSLt0dbFE5HrptM2obUWfKKcjNRHWOJjELo9P5f3QEsYpsE6d
+    hrW5Y+e/1UX012oUQk2r8ajWj1yE2k4hnhEzGiUXQ2NZpcbroifSXrsO8hYkY4GZvOPXW5
+    babRbJSvfgsF0DJ+bk/amnon7PS+3s261lu//dm2pq9kX+yE0j/XwQTCgkJ5QWBcdzXRyp
+    IvmjBKmjAjCc36wGn77wxm/mB3uS0XnN641PdGPuNW6NRJnwXoV5AaGiTKSGXWUb2sv2kW
+    srTKTE258K+d/Dwk2y/m0SKBTkVT7iUPkU1kdUtkFDK9au+RML61NpjAQSvMuS2QklOCAT
+    UAE0Hclbs+lQFAMq3R/mv2I+geAjMoF/L4gApGDO6Ok4deMGQcUNbcrZ2rTidFmHrHZzx/
+    gQMgSOeBNDvD9iy9e0dl1J5ZBX04VAXhXHLTuesqaH0VHp1GqpyU+6RzZ9I6Vnu/y6GVaA
+    BUHGfOrmUhAdNu0TKM/MpcKO7bndP+Kp/1Gmkn31I3yzIkbIc5y04Ohkm3zMV2cLZp4SOD
+    mE6ShLsWg4EeG8xoB2+/E/2wMsc/KbkcfJAiIpiyOo86TfLmsaLXCTMeEgZg
+X-ME-Proxy: <xmx:jV6qag_xAfBF4b7JfLUzVt_CTM_U8mWr7A_Fmw2jJJINzbR-C7OltQ>
+    <xmx:jV6qakIvhColpei7gd9PzH58eLkXDhYxtHsZOf4mSPorf1AdaldRnA>
+    <xmx:jV6qakuRhvl58_-z8GXRpFgARl3MkEUjJMCJkpvj-5fzdjVRb-5nDw>
+    <xmx:jV6qatltm3i7OvXc1xh20Y-yn0KjYy3bt86NYaMQOUa0ni1awM2SLg>
+    <xmx:jV6qarkHNZlZSzvbVHQJBCQkSeFEKTwE3m9W_toSFDjvBi2RYo-4MH1r>
+Feedback-ID: i02414972:Fastmail
+Received: by mailuser.ams.internal (Postfix, from userid 501)
+	id C76DFF80089; Wed, 16 Sep 2026 05:16:57 -0400 (EDT)
+X-Mailer: MessagingEngine.com Webmail Interface
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <c21803b3f2ea1522bb930dc1dcab79c2627f2234.1781620559.git.u.kleine-koenig@baylibre.com>
- <6971c4b5-d091-4fe2-b843-60da8b32d48b@oss.qualcomm.com>
-In-Reply-To: <6971c4b5-d091-4fe2-b843-60da8b32d48b@oss.qualcomm.com>
-From: Jens Wiklander <jens.wiklander@oss.qualcomm.com>
-Date: Wed, 16 Sep 2026 11:15:24 +0200
-X-Gm-Features: AcwNN1V0NqIJsL73RdN3OTwvvhD8xwl5xJI8ynUXzUOj0tI1Mn5j1g_pzOzGjfw
-Message-ID: <CAGgiveVKnWZCGMy4WrHn3szmC5HuYzf6kSb5-0wvOdVntBPJGw@mail.gmail.com>
-Subject: Re: [PATCH v1] tee: qcomtee: Drop unused assignment of
- platform_device_id driver data
-To: Amirreza Zarrabi <amirreza.zarrabi@oss.qualcomm.com>
-Cc: =?UTF-8?Q?Uwe_Kleine=2DK=C3=B6nig_=28The_Capable_Hub=29?= <u.kleine-koenig@baylibre.com>,
-        Jens Wiklander <jens.wiklander@linaro.org>,
-        Sumit Garg <sumit.garg@kernel.org>, linux-arm-msm@vger.kernel.org,
-        op-tee@lists.trustedfirmware.org, linux-kernel@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Authority-Analysis: v=2.4 cv=JYkpPkKV c=1 sm=1 tr=0 ts=6aaa5e37 cx=c_pps
- a=NMvoxGxYzVyQPkMeJjVPKg==:117 a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10
- a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
- a=3WHJM1ZQz_JShphwDgj5:22 a=EUspDBNiAAAA:8 a=IpJZQVW2AAAA:8
- a=FvL8mTaZ2_32tAcSk_IA:9 a=QEXdDO2ut3YA:10 a=kLokIza1BN8a-hAJ3hfR:22
- a=IawgGOuG5U0WyFbmm1f5:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTE2MDExOSBTYWx0ZWRfX2wtmrlq+k5xt
- 9+soqUIbVdM7x8PY7gm2S7Dg2xkZhzVFksSMgLnZyyrtGIph4ju4WBfdrDSJv4XrWlOvVd7Lmbh
- ugzMqRuy5sSLLyyFLmDsnBX4z4YRlkPqeetKItlbFaITXrhPo9oLxKwIwhlP5/DZ+VL5oUaY2/v
- tMWF4ZmdplG+QnlaOWRcS+MsYZcGBVl/pD+xjs2xWeg8to1bL40zNpIA8F/e6e7tGu2Af9tvlSf
- jWzsexuKcRQWqfFzJ/TKwBUTHdzq68l9YFre3JrwiVPu9hAxMJhoheVxxnwuSSydqVRe9iAD93L
- O/+JFFlTxJs+X0BWLqwLSxUUl6GXt9Ogl0koPd0lCfkW4eRQAL7XyWQ7FnFWns/Q/Gt8j2SPQjs
- OMhvy8JHaTw2VL+KcIVUF/UxspgnN0bnI7yCNeE0oaSyBm4dEEDU8zfJ9i+Vza3fknfyR5v3CwX
- 9qk0mDaXWCn6phhNXFA==
-X-Proofpoint-GUID: BaUBQYF4SU72u-tYZDJMv6a-3NduGiWT
-X-Proofpoint-ORIG-GUID: BaUBQYF4SU72u-tYZDJMv6a-3NduGiWT
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTE2MDExOSBTYWx0ZWRfX+rvZy9FGq4D4
- a6/mK+GI5ZYXN1az+dQ7M8VmAq2vl693ZsEQigSBJQqbl52EBW7lxeYP+LM/1Lq5lbMpMB33XTo
- cK3lt0r2D4gIT2b5bpha0qt9bi2vwwM=
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-15_05,2026-09-15_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0 phishscore=0 impostorscore=0 priorityscore=1501
- spamscore=0 malwarescore=0 adultscore=0 clxscore=1015 bulkscore=0
- suspectscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2609040000
- definitions=main-2609160119
+X-ThreadId: AaJBIn-uFwMB
+Date: Wed, 16 Sep 2026 12:16:37 +0300
+From: "Juha-Matti Tilli" <juha-matti.tilli@iki.fi>
+To: "Manivannan Sadhasivam" <mani@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, "Jeff Hugo" <jeff.hugo@oss.qualcomm.com>,
+ "Jeff Johnson" <jjohnson@kernel.org>,
+ "Bjorn Andersson" <andersson@kernel.org>,
+ "Konrad Dybcio" <konradybcio@kernel.org>,
+ "Eric Dumazet" <edumazet@google.com>,
+ "Kuniyuki Iwashima" <kuniyu@google.com>, "Paolo Abeni" <pabeni@redhat.com>,
+ "Willem de Bruijn" <willemb@google.com>,
+ "David S . Miller" <davem@davemloft.net>, "Jakub Kicinski" <kuba@kernel.org>,
+ "Simon Horman" <horms@kernel.org>, "Mihai Moldovan" <ionic@ionic.de>,
+ "Denis Kenzior" <denkenz@gmail.com>, "Marcel Holtmann" <marcel@holtmann.org>,
+ "Andy Gross" <agross@kernel.org>, linux-kernel@vger.kernel.org,
+ mhi@lists.linux.dev, linux-wireless@vger.kernel.org,
+ ath11k@lists.infradead.org, ath12k@lists.infradead.org,
+ netdev@vger.kernel.org
+Message-Id: <9ffaeae1-3768-408b-8434-9f1704412fbe@app.fastmail.com>
+In-Reply-To: 
+ <bjfwy4usrfbrabmcp4xsr65nqwdpuryvmrb6tzp6k2ckmdx27h@kvf7idvsugsm>
+References: <20260915054207.2513877-1-juha-matti.tilli@iki.fi>
+ <20260915054207.2513877-4-juha-matti.tilli@iki.fi>
+ <bjfwy4usrfbrabmcp4xsr65nqwdpuryvmrb6tzp6k2ckmdx27h@kvf7idvsugsm>
+Subject: Re: [PATCH v7 03/15] net: qrtr: fit node ID + port number combination into
+ unsigned long
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-Hi,
+On Wed, Sep 16, 2026, at 10:01, Manivannan Sadhasivam wrote:
+> On Tue, Sep 15, 2026 at 08:41:55AM +0300, Juha-Matti Tilli wrote:
+> > From: Mihai Moldovan <ionic@ionic.de>
+> > 
+> > The flow control implementation uses a radix tree to store node ID and
+> > port number combinations and the key length is hardcoded to unsigned
+> > long.
+> > 
+> > The original implementation shifted the node ID up by 32 bits and added
+> > the port number to the lower 32 bits of the unsigned long value to
+> > create a key.
+> > 
+> > Unfortunately, since both node IDs and port numbers are defined as u32,
+> > this will overflow on platforms where sizeof(unsigned long) < 8 (which
+> > are most 32 bit platforms) and essentially just drop the node ID part.
+> > 
+> > To fix this, build the key in a generic way, using half of the unsigned
+> > long space for the node ID and the other half for the port number.
+> > 
+> > This will be transparent to platforms where sizeof(unsigned long) >= 8
+> > and fix overflow issues otherwise.
+> > 
+> > The caveat, of course, is that, for platforms where
+> > sizeof(unsigned long) < 8, the supported amount of node IDs and port
+> > numbers will be severely limited - to half of sizeof(unsigned long),
+> > which typically will be 16 bits. Needless to say, we have to check if
+> > both values fit into this limit.
+> > 
+> > This limitation is probably not going to be an issue in real-world
+> > scenarios, but if it turns out to be one after all, we could switch from
+> > a radix tree implementation to an XArray implementation.
+> > 
+> 
+> Documentation/core-api/xarray.rst says:
+> 
+> "If your index can be larger than ``ULONG_MAX`` then the XArray is not the data
+> type for you."
+> 
+> So the fix is to not make XArray work, but switch over to some other storage
+> mechanism instead of XArray, like hashtable.
 
-On Fri, Sep 11, 2026 at 9:36=E2=80=AFAM Amirreza Zarrabi
-<amirreza.zarrabi@oss.qualcomm.com> wrote:
->
-> Hi,
->
-> On 6/17/2026 12:38 AM, Uwe Kleine-K=C3=B6nig (The Capable Hub) wrote:
-> > The driver explicitly sets the .driver_data member of struct
-> > platform_device_id to zero without relying on that value. Drop this
-> > unused assignment.
-> >
-> > While touching this array unify spacing and usage of commas and use
-> > a named initializer for .name for improved readability.
-> >
-> > Signed-off-by: Uwe Kleine-K=C3=B6nig (The Capable Hub) <u.kleine-koenig=
-@baylibre.com>
-> > ---
-> > Hello,
-> >
-> > while this is a cleanup that can stand on its own, it is also a
-> > preparation for a change to struct platform_device_id that requires tha=
-t
-> > .driver_data isn't assigned by a list initializer.
-> >
-> > Best regards
-> > Uwe
-> >
-> >  drivers/tee/qcomtee/call.c | 7 ++++++-
-> >  1 file changed, 6 insertions(+), 1 deletion(-)
-> >
-> > diff --git a/drivers/tee/qcomtee/call.c b/drivers/tee/qcomtee/call.c
-> > index 0efc5646242a..4a597eeaf174 100644
-> > --- a/drivers/tee/qcomtee/call.c
-> > +++ b/drivers/tee/qcomtee/call.c
-> > @@ -798,7 +798,12 @@ static void qcomtee_remove(struct platform_device =
-*pdev)
-> >       kfree(qcomtee);
-> >  }
-> >
-> > -static const struct platform_device_id qcomtee_ids[] =3D { { "qcomtee"=
-, 0 }, {} };
-> > +static const struct platform_device_id qcomtee_ids[] =3D {
-> > +     {
-> > +             .name =3D "qcomtee",
-> > +     },
-> > +     { }
-> > +};
-> >  MODULE_DEVICE_TABLE(platform, qcomtee_ids);
-> >
->
-> Looks good to me, thanks.
->
-> Reviewed-by: Amirreza Zarrabi <amirreza.zarrabi@oss.qualcomm.com>
+I think I will drop this along with patch 04/15 from the next series,
+as it fixes one bug but introduces another, and those bugs should
+probably be irrelevant for this patch series.
 
-I'm picking this up.
+Indeed, that commit message by Mihai wasn't entirely correct: XArray
+will not work here.
 
-Thanks,
-Jens
+BR, Juha-Matti
