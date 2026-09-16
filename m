@@ -1,412 +1,163 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from PNYPR01CU001.outbound.protection.outlook.com (mail-centralindiaazon11020096.outbound.protection.outlook.com [52.101.225.96])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C30D134F46F
-	for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 05:45:45 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789537547; cv=none; b=CzX/h+dEZ6jl4zPk0QTiGM8xadvYAncMbv3R4zQ2CCO1TLPdNdNos5AGS6jyQ8bfH45Zol1hjHXDNjOlnoaV4U4QVV+5BfMux9WbrkKDMGDML1klYMFP65A7Issfhn3TO6o+yZp2yc0Eh5w+VZkZewUgriuXATcffnVe0c2+jFE=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789537547; c=relaxed/simple;
-	bh=rmypXG8PkZQdVlXsiCTpd3+Q/qn4BKM993nWuXndS3c=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=r89IyZFhvIYUvOvzIaAEiD5xwuakPNLqNNTvU4sU66R26mWg0PAGVrFkHZIXYDaKmNgAKvvhcNg+pDtIeNCCU9vPOjB/M79KwQ+O2REqOTtGQV25HdUMKHmVwaJDjTScdVOxP4oxMEJ95LGrWolndoaQeM0PjWE2BoW8AY7pzto=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=dO81Th85; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=C5+gsQwU; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="dO81Th85";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="C5+gsQwU"
-Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68G5i3Qr225137
-	for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 05:45:45 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	/NcY3STC/C/9sw5F0QDYnAfTg988+vE1o8LJr3uPSwE=; b=dO81Th85udY0UF0W
-	jAdxBUyhQhWQPsmCaDHTThpkAesvVQyb4YQamTLzX+EXL5b0qZFXGAh8y8hgcfa6
-	+xso9/S0qJRGvCHGd3w2LjMEc0wTmrUtVwt98FUN8Dpy30N0QyLT6NfGO95w63ua
-	iUxB/q5gCISSENm9PdmEK2F5XSwL3MrZe2rdcHKnbSzWwMzQiagxP+NJG9TpeT4M
-	9ktEs2ZFgT/DPSLeoRtkEdJ5v9355WncrO/KXJlzAp4T/ZHoAMW9mWEm+hNR7r+q
-	C8SSgxgigkuFgqA7P5F9MuMSW8WQrpn0LFaOvk5/WQpCOrySQBy3KdStI52q8GIT
-	oY15rw==
-Received: from mail-pj1-f70.google.com (mail-pj1-f70.google.com [209.85.216.70])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gqbmnj6av-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 05:45:44 +0000 (GMT)
-Received: by mail-pj1-f70.google.com with SMTP id 98e67ed59e1d1-39b6416441eso10095044a91.1
-        for <linux-arm-msm@vger.kernel.org>; Tue, 15 Sep 2026 22:45:44 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1789537544; x=1790142344; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=/NcY3STC/C/9sw5F0QDYnAfTg988+vE1o8LJr3uPSwE=;
-        b=C5+gsQwUo9aDzkSb1/y91vivPoxlMgESHDZIPzPwrV+YFp7/8r9YNyeMX+BiEDucI8
-         6VRGF4Yj9iPe6jipoF9BJ72bWMk8qfzedeC4nLmU6Z8dvHysQd/j6HGKigAb9f69WzHg
-         EVxx9cXRYzy4nS1wFTdJkC1X6Kr3Jfe3kuxOSHH0t81jvDE6AKjBRkxbVmn2cUa1qMRT
-         kIXBy/hK7NdyKyR7WSx6s1Uqx3u7n/ecwyY0JkcIgj6eNeTQEz2wUU4jypkPVNb/BFUo
-         1lcwW3q8hM9hmINuSxd9R0PWifhsfda42u90HYq4bC64WxRIyAyQAhlBNhD1vl5cbysK
-         gohg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1789537544; x=1790142344;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=/NcY3STC/C/9sw5F0QDYnAfTg988+vE1o8LJr3uPSwE=;
-        b=cX4LKyD5ff8sBnH/+CcX2gMLWXmTcvKKTscAGye4WRfnSNUHiFqPlmrdPBSREGqJqb
-         GeQA7e38smznHnBE4D7PmsFwn2B2sNIas8Wp5asnGq9IYxXUZiMATmQv6FWmTG6R/zsq
-         SCVO4Eoz4VPjRwQTNyxhScMwHxDpKl1cC+RceDOyuRim4pDgwG/EVAH+cfJ/wt7sEB1p
-         oZ+T3KPTatChMm5fl3dqHRVOv7niI/jgHXJmx/faSOUjZdFT/Icy55N0XcdjfrFXEA4/
-         lkHBc8Mc1kyAHMa5n3LADSkp70QnQy3HBbUIdkm+645UiadHjmlnOnieTUREpT0Ft8Yr
-         eqig==
-X-Gm-Message-State: AFuF++lACr+rKVaOHOjB8fl6TIiPckm+LrG95kVXGbYis1RJ6p5+xkx6
-	UP5IvqXyVg1mrstsGfyAh9x4tuRLFr/zLwxSKQtdDyqSfz/NifBO9K8Wun1VYvBSZZq1S93nvWS
-	ElCM1CN0/zvnMXIZsPh3Bx17DD+Wf1AeOMV6Cd+mOOX2lYAKRW9zGNzAFT1Bk7/a9SrVi
-X-Gm-Gg: AYBFou2vNEOvM5Yg0Rd1X6JRX0fgEsldSdqvERaSTI1fjKgr1CPHjrtP6N2OrZkv0nF
-	D8kO76cGrG6OQUHh3xowItKaDB1psq78MRvHrNHOOQwlGk+lDL0xeLt3pRaMl6+fWKbKXLXbQ/S
-	Mhuikscg9NbDfvKJvqN3SDkahRon37MkuaU6PWoqBSWFfgSwPxzcCoGADbqdPqfAWHgeY2vrWG4
-	6mUpVxTYa0uWenvzJz8GTFRssICjuZ22mQ7HHsxbB51ToAwibNE3MJI4vczQy+yGR5R8Q0r03Qs
-	01AzyelaeCJSHbW0zvzVwFaTH0sPdqIR2uOgfsDV3/Dr7XRGo100pHSm05qCEPQv+k/U3PYHFGj
-	eyVpCsVatuVwPJAo9zjmGU+k3+8wXhls=
-X-Received: by 2002:a17:90b:1a8f:b0:39b:61f1:8032 with SMTP id 98e67ed59e1d1-39e1e42497cmr3125727a91.16.1789537544146;
-        Tue, 15 Sep 2026 22:45:44 -0700 (PDT)
-X-Received: by 2002:a17:90b:1a8f:b0:39b:61f1:8032 with SMTP id 98e67ed59e1d1-39e1e42497cmr3125662a91.16.1789537543598;
-        Tue, 15 Sep 2026 22:45:43 -0700 (PDT)
-Received: from hu-jkona-hyd.qualcomm.com ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-33bf5b030aesm4357492eec.26.2026.09.15.22.45.38
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 15 Sep 2026 22:45:43 -0700 (PDT)
-From: Jagadeesh Kona <jagadeesh.kona@oss.qualcomm.com>
-Date: Wed, 16 Sep 2026 11:15:24 +0530
-Subject: [PATCH v2 2/2] clk: qcom: Add support for camera clock controller
- on Maili
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 28A8C349CD2;
+	Wed, 16 Sep 2026 05:54:00 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=52.101.225.96
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1789538042; cv=fail; b=RAucLh3ZhAu5SsI4rYNppMSmxIMbR9bo5Onew+vCo4QsK5qMQhlZ3Dyafex5lffD734XCiavb5Fc3bZrvvfoPVTf6/oH3twWVeKzBy0pITEC/fqBHI9WQo1wFRHDrYh9j/dNxmCapCyFa2L+ln8/kXZu0sIWdMii8NcxsbkfLeE=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1789538042; c=relaxed/simple;
+	bh=1/+ACbYpEBng2t4qWNxJZzQ92PJmBdqIggqBak3Qkbc=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 Content-Type:MIME-Version; b=JajyXQfbPNeyFzkeGTryeXLzB87SlC66aiYSxPUn4+wAlxOMvSvEphi5026M+z3kdH8zYtEgXabEQuPbeHrbQkfV+Sb3J8t8agm5rz++KvqW3vU2De2rkNH1xquOpQ6ETOzCHUmrgXGgQMVqG5SNUVQLfytfTuP2VUlxi2nxbNw=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=ebytelogic.com; spf=pass smtp.mailfrom=ebytelogic.com; arc=fail smtp.client-ip=52.101.225.96
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=ebytelogic.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ebytelogic.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=Csa7asPPW9CzNVVP30Fk9mK0KHbGcjLHmDO+iT+3UvvSFfgFlI671c7SwtII4sQrLfsb0yQMvPanNap1fYP3UkSQ6h8ILXcUPJx8AfnUNTf7yOu4YnjonbuHC/pBzPqgKjk4+a5zGrqCjGsMKGg8LIQO1tNn2HKEp706TUvotHfpDLaNYOt1FI5Rfj2n8vHTdwjGEkEaILNCdLkaPoTzsRU8FxQDHqtUClI9OcLF8JQLBUZIbLocxIioR9OISBJMcM4y7jreQ4WM4/e9P4WzQEg/KW1UvtLKhLlu5NETv3U1xRysUeBajRPLHJRbHu3QTbCeZShC0iTVvJub5NL+Xg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=PbQOIOZh4WJJ87DhgL1nYOKMZkHNc6sqQvvuGsP+ZB8=;
+ b=m7OBafNKMFkIpAUOYpkQwag21L8A3UZk7KdB//5Zs4GnSdmOefbVXVlAtxxbXgldAC/mpe92IFKDrapf7bAjJwUFoWAkzCLkAGnlRzT+S3Jjczrwvebew+kRlmwasLFJhWjkUvEoPUsisqrpBu1QX8ZORxFTrjBup8TObdUY5jQcOTP6/r586CzuyiHD22lcp3L33rt6mCWvt/ZQEXEkYbZQLq5uraba84uEHj3K6jA2V9MkMJRtSjZ2+8OMMn9BlS1lW3rA3WjqczvUcpw9VNsk2ZuVCfFkyw7V5u/b9ERIYBnHfbts6J8gdyB6nbCVWN1DD4PmmH2wDpXVam1HDA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=ebytelogic.com; dmarc=pass action=none
+ header.from=ebytelogic.com; dkim=pass header.d=ebytelogic.com; arc=none
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=ebytelogic.com;
+Received: from PN3PPF28092842E.INDP287.PROD.OUTLOOK.COM (2603:1096:c04:1::97)
+ by MA5P287MB4465.INDP287.PROD.OUTLOOK.COM (2603:1096:a01:195::13) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.428.11; Wed, 16 Sep
+ 2026 05:53:56 +0000
+Received: from PN3PPF28092842E.INDP287.PROD.OUTLOOK.COM
+ ([fe80::df75:6e8c:7def:a08e]) by PN3PPF28092842E.INDP287.PROD.OUTLOOK.COM
+ ([fe80::df75:6e8c:7def:a08e%6]) with mapi id 15.21.0428.009; Wed, 16 Sep 2026
+ 05:53:55 +0000
+From: Hitesh Patel <hitesh@ebytelogic.com>
+To: Gjorgji Rosikopulos <gjorgji.rosikopulos@oss.qualcomm.com>
+Cc: Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
+	Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
+	Loic Poulain <loic.poulain@oss.qualcomm.com>,
+	Mauro Carvalho Chehab <mchehab@kernel.org>,
+	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+	Atanas Filipov <atanas.filipov@oss.qualcomm.com>,
+	Jigarkumar Zala <jigarkumar.zala@oss.qualcomm.com>,
+	linux-media@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	ravi@ebytelogic.com,
+	Hitesh Patel <hitesh@ebytelogic.com>
+Subject: [PATCH v2 0/2] media: qcom: camss: SC7280 fixes for the streams API series
+Date: Wed, 16 Sep 2026 11:23:44 +0530
+Message-ID: <20260916055346.520826-1-hitesh@ebytelogic.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260915121536.19207-1-hitesh@ebytelogic.com>
+References: <20260915121536.19207-1-hitesh@ebytelogic.com>
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: PNYP287CA0104.INDP287.PROD.OUTLOOK.COM
+ (2603:1096:c01:2bb::9) To PN3PPF28092842E.INDP287.PROD.OUTLOOK.COM
+ (2603:1096:c04:1::97)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260916-maili_camcc-v2-2-f30b394bfd50@oss.qualcomm.com>
-References: <20260916-maili_camcc-v2-0-f30b394bfd50@oss.qualcomm.com>
-In-Reply-To: <20260916-maili_camcc-v2-0-f30b394bfd50@oss.qualcomm.com>
-To: Bjorn Andersson <andersson@kernel.org>,
-        Michael Turquette <mturquette@baylibre.com>,
-        Stephen Boyd <sboyd@kernel.org>, Brian Masney <bmasney@redhat.com>,
-        Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>,
-        Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
-        Jagadeesh Kona <quic_jkona@quicinc.com>,
-        Taniya Das <taniya.das@oss.qualcomm.com>,
-        Abel Vesa <abelvesa@kernel.org>, Brian Masney <bmasney+clk@redhat.com>,
-        Jerome Brunet <jbrunet+clk@baylibre.com>
-Cc: linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org,
-        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-        Jagadeesh Kona <jagadeesh.kona@oss.qualcomm.com>
-X-Mailer: b4 0.14.2
-X-Authority-Analysis: v=2.4 cv=POyaavqC c=1 sm=1 tr=0 ts=6aaa2d08 cx=c_pps
- a=0uOsjrqzRL749jD1oC5vDA==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
- a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
- a=EUspDBNiAAAA:8 a=x7oLaaGiLmRgSqN1hWIA:9 a=QEXdDO2ut3YA:10
- a=mQ_c8vxmzFEMiUWkPHU9:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTE2MDA3MiBTYWx0ZWRfX2RrSHpmpzFVo
- 6o44OuPEYy5wBXhkpvaFhldyWDusHYGDhqdGNBnBI4XHmYNONY9Bn1Fs74TA9oiEwC6w9OXSQjd
- D3buCkF4+obTjgqVwFqrZo00LJkd2toPrVQgL/R6Dfr+7A4TYfeqbawYbXizn/rPZZKH78ZAmZ5
- ukczNAr/Xh9JZO65bDXCR2jn0f7xES79CW4n4NNCF6KLtCx2ult8ARGgYEfJqgpVHu2OSmftvG7
- 4hC+7N8vZ/pOltzUZ9nA2yx/troaznD4SumI/HGj4+V2ZFZ57GuhvmxsK9jrZvUUKPBmW9bhmUn
- P1Aqzp/Op+YnebEH4+VqJoR5foxKhlH4RERvB4jNvwKoJdELHTU4BiljxyRIGIpXm5MXnYsnRJw
- VHSiCTlW5Z+X+xEDMpfuLHenlDYyHxy1M9OBiPZ8rUHVlKJ067RSxNvloc0jMfS/jSf1X35jEuh
- 6gv4wLsZQqadDwDguNg==
-X-Proofpoint-GUID: eFDxPT4FLS9vqbmyCTUVvlbRRoRrOq3c
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTE2MDA3MiBTYWx0ZWRfX4S9C6mzkK0IV
- 0qYpHE1Nsej7S/hSPtKSR2cURHgxJpzCFPWDEb84z+feagnz6EaqIdHIfkPskXuc163+CGD2O6K
- W1P9xoUgUxq2l740d/+5IFVMsPMAm+g=
-X-Proofpoint-ORIG-GUID: eFDxPT4FLS9vqbmyCTUVvlbRRoRrOq3c
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-15_05,2026-09-15_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 adultscore=0 bulkscore=0 clxscore=1015 phishscore=0
- suspectscore=0 impostorscore=0 spamscore=0 lowpriorityscore=0 malwarescore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609160072
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PN3PPF28092842E:EE_|MA5P287MB4465:EE_
+X-MS-Office365-Filtering-Correlation-Id: 79850c8b-6bc4-41ec-2ee2-08df13b6e4e4
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|7416014|376014|52116014|23010399003|1800799024|366016|10070799003|22082099003|18002099003|56012099006|10067099003;
+X-Microsoft-Antispam-Message-Info:
+	xsdLhrBIMH2O4lKoI3omJRTMwEL0G0SyCqakRraf/p7akIzWofPVeUMHHt2Hb3/EmbqlvcQFalqht8F5DIgaKMPgNrE/WmJ2WEa5MzOmX73RxvmLwFqtrbj11409LY4oxpJvyUh+vQu5b5CZCLBE7aO4UOoAHIrvGYuQOQXCfjP/XlonSvtprclyMpNXnHOoJnfUYOSte84KYZAwVHt04n30Kfek4e84NIX9aMwOpKldHDO4PeryvK/L5lqd4hNKCYqSL2eiWfx9vlOd3M4FLPgf8WRQwgAol1zwqmKgMqHKoIqWZtwdziqqd9T5UezkJ0w92XTrZMVB/1p3f69zu3Qy9l14LmngEYKURsmY9FGPm1su+kRpUfam6sXmc3/CDRswDwUveqKhVBrg1ZkDDtrhyL8qpKIviGbQMmt5CcOMPPawFtNylad76XLnfrf/a569xqciZ9XO0CfYU2tBrVa0Ac27OKyYuXUFCI1EeMYSSI4H0EEaYs8TIpwUeimF+W/S8vuY99rvrzF43/nU9if7n4M/7zgjQ+E61Asrsaq6XWe4hFzBIXY5kRVFTTO0GANFV171/wPut+P+tWE1tP3ZxQwxsSpB/aBUg2ObqG+WtMNmARBouaqVlp73AtbBhAXDVwXWOW02ctLZt/BTuK3PjCpinUrtn6LFZVFdbuo=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PN3PPF28092842E.INDP287.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(7416014)(376014)(52116014)(23010399003)(1800799024)(366016)(10070799003)(22082099003)(18002099003)(56012099006)(10067099003);DIR:OUT;SFP:1102;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 2
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?us-ascii?Q?GorVLxtDcP+xsyehkz/VgheF8nqsXFsseZABK1YGpvPH/TlY1HXwWyxKl2KS?=
+ =?us-ascii?Q?GXYXxRoQJzehNFcF2UIjBZ6trH6ytAjslvvF+UzO/lSf8a7GBsDKLv6ly1At?=
+ =?us-ascii?Q?jigDjZh2dKFZ4lbOcpTy9FmAJA3F+k6BpYo6w7UUvcLWNCFKWm8U6DWbWSvK?=
+ =?us-ascii?Q?mPSQs5dN7DPBejycx4kSaJCcM9pRefZ5vEkD8+MvblVdGMoypwSsEUEdiRpZ?=
+ =?us-ascii?Q?q8XtpUeoJD0Gyu9K1QVmZwdCqOif3gp/wN0sB41ksh8M/RO6xao6D1fcx06m?=
+ =?us-ascii?Q?x21Qt5FijeJBNtSm1yXWNP+BnDtSEWQ0QtF+tw/5VfyxkMOa8o5E6FMz6x6R?=
+ =?us-ascii?Q?R0jyrvyjFNWyzCSWjT24LaoYDPZQgNp64n4da0Y8iD/q4opiJlSxMW8gXqsC?=
+ =?us-ascii?Q?pZ5iXzXaF81m/wL6u7JSaQnFGNwcQB7UOQKkteaWm9RD4/7uMtUy1o3wiDJH?=
+ =?us-ascii?Q?XCvQ2JA26K3hgEnYuulZ7IT5r3oH6rS4rWEQEoa57h/yZH7t+WDzff4MP9c3?=
+ =?us-ascii?Q?7d4mlkt41ZQFCxCw3rcQPetGx0OnIMTUUg0NokrSiW7WZTg7LUbjGRLsH70D?=
+ =?us-ascii?Q?g29KWpQGK6Y5X1JNeti0oxuTqwM7fPr2KXucvNi0nLhBDa91CMNAjq6/6Slr?=
+ =?us-ascii?Q?rFwZEwuLodsczqtXL50xMpC1UbNfuMbWjsHQQrvSIhn6SsmJz5ppOzE443c6?=
+ =?us-ascii?Q?49ytdCF6J+xwZRw8g/38bFe87Mva3gHEAgU1uzJQ2QKrpCNiehaR1P5RdyQG?=
+ =?us-ascii?Q?a0PZwCvlbOYregszr9fVC8xm+kdPjNuOCWeWG0Rxpa95mpe5NwtI8YvCnWyb?=
+ =?us-ascii?Q?u0HthquToe9lRMk9Gg7pLj3LkqroGNd+fhPhwkBU7gziPswZMPNNqQKXmht+?=
+ =?us-ascii?Q?/8qy1O33vLzGA9yuA1qDaKMxWXGTr7G1nLF9M3OckjpcuOyx3I/swzpsBuBT?=
+ =?us-ascii?Q?lRvafWWTq2IWTUOwnnq9UGHgQrkSNMZeXrxFR1mUkgkQmO3s9Cjv5XBoXgI0?=
+ =?us-ascii?Q?XkhPa/onfGrsCm1k85on7pXNdAeAsDvE7Tv3mqx6A1O20HuJ2kGFLwR0hDFO?=
+ =?us-ascii?Q?EYbAIrCzSxkwEOG0XuLkJH+ktEUKhtEbLjZLypYv3s020V6XZFDjJK/szyXZ?=
+ =?us-ascii?Q?1M7t1Gz4PWxjrLZWxcYqYYKbUwPOWFc2D9rqKINajhkUSNB7cWKgoTJWFgmh?=
+ =?us-ascii?Q?UCuiyzdDSUx7DW5mWYgEKC06H426xTxF3pB6TMxnTVMrwMqlyUViIn7MxiOg?=
+ =?us-ascii?Q?OFP1aHeluQ226A7PhBsHBW2buXrsstmz9seNLkaqfD8RTA+Dj2brdNq+CPDq?=
+ =?us-ascii?Q?nnE9iTXPPOTfFc3ZQYWh6a227mJPZwQVs1DlQKkSpbbXbGrgzgdPBCSBazRj?=
+ =?us-ascii?Q?h1l9DcU9nwG7HPv1R3Bvlslxw6hgY81BQa6T5QjpFo7XhlEunc0gXbDui8VG?=
+ =?us-ascii?Q?OpipTQB5l6NPDRzk3i4zCKZ4L/NW1dDdi8Yz9jb1z9ASaa/4s/fxphtnVMZr?=
+ =?us-ascii?Q?BRy91wu43F2E2ne+jLxzkMwfgmQcY0WOx64GWalpW7uHu038NNfYfW3x8owW?=
+ =?us-ascii?Q?QuZG5pZ1em+q7wG0r2PNLR1fdS6BCEgLKMS49Q8YjLEc267r3oO6yUtb4OgV?=
+ =?us-ascii?Q?VUivE8xTc4BMq4ynUiS9aNVPvuvphD/HcOwG+2b9hWWsLt0ONaEe216C2L4S?=
+ =?us-ascii?Q?blJl4hl6yAmUW6QRH2FToQjKz/EfALX78eB//TtdRq5RxHK8cS1qZaC74Ob5?=
+ =?us-ascii?Q?MF4FUFcRksB6vblZg5iuSxHqBr3t7iz01ejcHudwT3Ee99CDVVeWNLm7vi5m?=
+X-MS-Exchange-AntiSpam-MessageData-1: lkc7dCkjrXy+pQ==
+X-OriginatorOrg: ebytelogic.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 79850c8b-6bc4-41ec-2ee2-08df13b6e4e4
+X-MS-Exchange-CrossTenant-AuthSource: PN3PPF28092842E.INDP287.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Sep 2026 05:53:55.8007
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 13bdb17c-4ae8-490c-90c1-ec8121ef96ee
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: hfEUUALsScoDPDdpYovDeX8Bu9o/whCNeuSIYwWMzrt+ZonIF9ksHjoaiRC2F2FawK+xqaqVbteiCfhP06CHow==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MA5P287MB4465
 
-Maili camcc is mostly identical to Hawi camcc, with a few clocks
-removed, frequency table updates for a few other clocks, and PLL
-configuration changes. Hence, reuse the Hawi camera clock controller
-driver and extend it for the Qualcomm Maili SoC.
+Hi Gjorgji,
 
-Reviewed-by: Taniya Das <taniya.das@oss.qualcomm.com>
-Signed-off-by: Jagadeesh Kona <jagadeesh.kona@oss.qualcomm.com>
----
- drivers/clk/qcom/camcc-hawi.c | 158 ++++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 158 insertions(+)
+these two patches are the ones I sent on top of your "add V4L2 subdev
+streams API support" series [1] yesterday; resent as v2 because the
+Media CI picked them up as a standalone series and, of course, they do
+not build without your series: every error in the CI report is a symbol
+your series adds (streams_enable, csid_hw_ops.configure_rx/enable_stream/
+disable_stream). No code changed, v2 only spells the dependency out in
+the commit messages and in base-commit/prerequisite-patch-id trailers so
+patchwork and the CI apply them onto your series. I will mark v1 as
+superseded on patchwork.
 
-diff --git a/drivers/clk/qcom/camcc-hawi.c b/drivers/clk/qcom/camcc-hawi.c
-index aa52b99aec003f7b9224bb89a15783dcf3889044..dc5c108ce608c2c1131d8e7edd236becc9fbe909 100644
---- a/drivers/clk/qcom/camcc-hawi.c
-+++ b/drivers/clk/qcom/camcc-hawi.c
-@@ -66,6 +66,18 @@ static const struct alpha_pll_config cam_cc_pll0_config = {
- 	.user_ctl_hi_val = 0x00000002,
- };
- 
-+/* 1200.0 MHz Configuration */
-+static const struct alpha_pll_config cam_cc_pll0_config_maili = {
-+	.l = 0x3e,
-+	.cal_l = 0x42,
-+	.alpha = 0x8000,
-+	.config_ctl_val = 0xa5c400e7,
-+	.config_ctl_hi_val = 0x0a806160,
-+	.config_ctl_hi1_val = 0xf51dea20,
-+	.user_ctl_val = 0x00008400,
-+	.user_ctl_hi_val = 0x00000002,
-+};
-+
- static struct clk_alpha_pll cam_cc_pll0 = {
- 	.offset = 0x0,
- 	.config = &cam_cc_pll0_config,
-@@ -141,6 +153,18 @@ static const struct alpha_pll_config cam_cc_pll1_config = {
- 	.user_ctl_hi_val = 0x00000002,
- };
- 
-+/* 493.2 MHz Configuration */
-+static const struct alpha_pll_config cam_cc_pll1_config_maili = {
-+	.l = 0x19,
-+	.cal_l = 0x42,
-+	.alpha = 0xb000,
-+	.config_ctl_val = 0xa5c400e7,
-+	.config_ctl_hi_val = 0x0a806160,
-+	.config_ctl_hi1_val = 0xf51dea20,
-+	.user_ctl_val = 0x00000400,
-+	.user_ctl_hi_val = 0x00000002,
-+};
-+
- static struct clk_alpha_pll cam_cc_pll1 = {
- 	.offset = 0x1000,
- 	.config = &cam_cc_pll1_config,
-@@ -193,6 +217,18 @@ static const struct alpha_pll_config cam_cc_pll2_config = {
- 	.user_ctl_hi_val = 0x00000002,
- };
- 
-+/* 600.0 MHz Configuration */
-+static const struct alpha_pll_config cam_cc_pll2_config_maili = {
-+	.l = 0x1f,
-+	.cal_l = 0x42,
-+	.alpha = 0x4000,
-+	.config_ctl_val = 0xa5c400e7,
-+	.config_ctl_hi_val = 0x0a806160,
-+	.config_ctl_hi1_val = 0xf51dea20,
-+	.user_ctl_val = 0x00000400,
-+	.user_ctl_hi_val = 0x00000002,
-+};
-+
- static struct clk_alpha_pll cam_cc_pll2 = {
- 	.offset = 0x2000,
- 	.config = &cam_cc_pll2_config,
-@@ -245,6 +281,18 @@ static const struct alpha_pll_config cam_cc_pll3_config = {
- 	.user_ctl_hi_val = 0x00000002,
- };
- 
-+/* 476.4 MHz Configuration */
-+static const struct alpha_pll_config cam_cc_pll3_config_maili = {
-+	.l = 0x18,
-+	.cal_l = 0x42,
-+	.alpha = 0xd000,
-+	.config_ctl_val = 0xa5c400e7,
-+	.config_ctl_hi_val = 0x0a806160,
-+	.config_ctl_hi1_val = 0xf51dea20,
-+	.user_ctl_val = 0x00000400,
-+	.user_ctl_hi_val = 0x00000002,
-+};
-+
- static struct clk_alpha_pll cam_cc_pll3 = {
- 	.offset = 0x3000,
- 	.config = &cam_cc_pll3_config,
-@@ -297,6 +345,18 @@ static const struct alpha_pll_config cam_cc_pll4_config = {
- 	.user_ctl_hi_val = 0x00000002,
- };
- 
-+/* 476.4 MHz Configuration */
-+static const struct alpha_pll_config cam_cc_pll4_config_maili = {
-+	.l = 0x18,
-+	.cal_l = 0x42,
-+	.alpha = 0xd000,
-+	.config_ctl_val = 0xa5c400e7,
-+	.config_ctl_hi_val = 0x0a806160,
-+	.config_ctl_hi1_val = 0xf51dea20,
-+	.user_ctl_val = 0x00000400,
-+	.user_ctl_hi_val = 0x00000002,
-+};
-+
- static struct clk_alpha_pll cam_cc_pll4 = {
- 	.offset = 0x4000,
- 	.config = &cam_cc_pll4_config,
-@@ -349,6 +409,18 @@ static const struct alpha_pll_config cam_cc_pll5_config = {
- 	.user_ctl_hi_val = 0x00000002,
- };
- 
-+/* 476.4 MHz Configuration */
-+static const struct alpha_pll_config cam_cc_pll5_config_maili = {
-+	.l = 0x18,
-+	.cal_l = 0x42,
-+	.alpha = 0xd000,
-+	.config_ctl_val = 0xa5c400e7,
-+	.config_ctl_hi_val = 0x0a806160,
-+	.config_ctl_hi1_val = 0xf51dea20,
-+	.user_ctl_val = 0x00000400,
-+	.user_ctl_hi_val = 0x00000002,
-+};
-+
- static struct clk_alpha_pll cam_cc_pll5 = {
- 	.offset = 0x5000,
- 	.config = &cam_cc_pll5_config,
-@@ -401,6 +473,18 @@ static const struct alpha_pll_config cam_cc_pll6_config = {
- 	.user_ctl_hi_val = 0x00000002,
- };
- 
-+/* 960.0 MHz Configuration */
-+static const struct alpha_pll_config cam_cc_pll6_config_maili = {
-+	.l = 0x32,
-+	.cal_l = 0x42,
-+	.alpha = 0x0,
-+	.config_ctl_val = 0xa5c400e7,
-+	.config_ctl_hi_val = 0x0a806160,
-+	.config_ctl_hi1_val = 0xf51dea20,
-+	.user_ctl_val = 0x00008400,
-+	.user_ctl_hi_val = 0x00000002,
-+};
-+
- static struct clk_alpha_pll cam_cc_pll6 = {
- 	.offset = 0x6000,
- 	.config = &cam_cc_pll6_config,
-@@ -476,6 +560,18 @@ static const struct alpha_pll_config cam_cc_pll7_config = {
- 	.user_ctl_hi_val = 0x00000002,
- };
- 
-+/* 345.0 MHz Configuration */
-+static const struct alpha_pll_config cam_cc_pll7_config_maili = {
-+	.l = 0x11,
-+	.cal_l = 0x42,
-+	.alpha = 0xf800,
-+	.config_ctl_val = 0xa5c400e7,
-+	.config_ctl_hi_val = 0x0a806160,
-+	.config_ctl_hi1_val = 0xf51dea20,
-+	.user_ctl_val = 0x00000000,
-+	.user_ctl_hi_val = 0x00000002,
-+};
-+
- static struct clk_alpha_pll cam_cc_pll7 = {
- 	.offset = 0x7000,
- 	.config = &cam_cc_pll7_config,
-@@ -505,6 +601,18 @@ static const struct alpha_pll_config cam_cc_pll8_config = {
- 	.user_ctl_hi_val = 0x00000002,
- };
- 
-+/* 493.2 MHz Configuration */
-+static const struct alpha_pll_config cam_cc_pll8_config_maili = {
-+	.l = 0x19,
-+	.cal_l = 0x42,
-+	.alpha = 0xb000,
-+	.config_ctl_val = 0xa5c400e7,
-+	.config_ctl_hi_val = 0x0a806160,
-+	.config_ctl_hi1_val = 0xf51dea20,
-+	.user_ctl_val = 0x00000400,
-+	.user_ctl_hi_val = 0x00000002,
-+};
-+
- static struct clk_alpha_pll cam_cc_pll8 = {
- 	.offset = 0x8000,
- 	.config = &cam_cc_pll8_config,
-@@ -682,6 +790,17 @@ static const struct freq_tbl ftbl_cam_cc_camnoc_rt_axi_clk_src[] = {
- 	{ }
- };
- 
-+static const struct freq_tbl ftbl_cam_cc_camnoc_rt_axi_clk_src_maili[] = {
-+	F(19200000, P_BI_TCXO, 1, 0, 0),
-+	F(200000000, P_CAM_CC_PLL0_OUT_MAIN, 6, 0, 0),
-+	F(240000000, P_CAM_CC_PLL0_OUT_MAIN, 5, 0, 0),
-+	F(300000000, P_CAM_CC_PLL0_OUT_MAIN, 4, 0, 0),
-+	F(400000000, P_CAM_CC_PLL0_OUT_MAIN, 3, 0, 0),
-+	F(480000000, P_CAM_CC_PLL0_OUT_MAIN, 2.5, 0, 0),
-+	F(600000000, P_CAM_CC_PLL0_OUT_MAIN, 2, 0, 0),
-+	{ }
-+};
-+
- static struct clk_rcg2 cam_cc_camnoc_rt_axi_clk_src = {
- 	.cmd_rcgr = 0x212cc,
- 	.mnd_width = 0,
-@@ -703,6 +822,11 @@ static const struct freq_tbl ftbl_cam_cc_cci_0_clk_src[] = {
- 	{ }
- };
- 
-+static const struct freq_tbl ftbl_cam_cc_cci_0_clk_src_maili[] = {
-+	F(37500000, P_CAM_CC_PLL0_OUT_EVEN, 16, 0, 0),
-+	{ }
-+};
-+
- static struct clk_rcg2 cam_cc_cci_0_clk_src = {
- 	.cmd_rcgr = 0x21250,
- 	.mnd_width = 8,
-@@ -1076,6 +1200,17 @@ static const struct freq_tbl ftbl_cam_cc_ofe_clk_src[] = {
- 	{ }
- };
- 
-+static const struct freq_tbl ftbl_cam_cc_ofe_clk_src_maili[] = {
-+	F(300000000, P_CAM_CC_PLL2_OUT_EVEN, 1, 0, 0),
-+	F(376000000, P_CAM_CC_PLL2_OUT_EVEN, 1, 0, 0),
-+	F(445000000, P_CAM_CC_PLL2_OUT_EVEN, 1, 0, 0),
-+	F(500000000, P_CAM_CC_PLL2_OUT_EVEN, 1, 0, 0),
-+	F(609000000, P_CAM_CC_PLL2_OUT_EVEN, 1, 0, 0),
-+	F(688000000, P_CAM_CC_PLL2_OUT_EVEN, 1, 0, 0),
-+	F(841000000, P_CAM_CC_PLL2_OUT_EVEN, 1, 0, 0),
-+	{ }
-+};
-+
- static struct clk_rcg2 cam_cc_ofe_clk_src = {
- 	.cmd_rcgr = 0x20120,
- 	.mnd_width = 0,
-@@ -2970,12 +3105,35 @@ static const struct qcom_cc_desc cam_cc_hawi_desc = {
- 
- static const struct of_device_id cam_cc_hawi_match_table[] = {
- 	{ .compatible = "qcom,hawi-camcc" },
-+	{ .compatible = "qcom,maili-camcc" },
- 	{ }
- };
- MODULE_DEVICE_TABLE(of, cam_cc_hawi_match_table);
- 
- static int cam_cc_hawi_probe(struct platform_device *pdev)
- {
-+	if (device_is_compatible(&pdev->dev, "qcom,maili-camcc")) {
-+		cam_cc_pll0.config = &cam_cc_pll0_config_maili;
-+		cam_cc_pll1.config = &cam_cc_pll1_config_maili;
-+		cam_cc_pll2.config = &cam_cc_pll2_config_maili;
-+		cam_cc_pll3.config = &cam_cc_pll3_config_maili;
-+		cam_cc_pll4.config = &cam_cc_pll4_config_maili;
-+		cam_cc_pll5.config = &cam_cc_pll5_config_maili;
-+		cam_cc_pll6.config = &cam_cc_pll6_config_maili;
-+		cam_cc_pll7.config = &cam_cc_pll7_config_maili;
-+		cam_cc_pll8.config = &cam_cc_pll8_config_maili;
-+
-+		cam_cc_camnoc_rt_axi_clk_src.freq_tbl = ftbl_cam_cc_camnoc_rt_axi_clk_src_maili;
-+		cam_cc_cci_0_clk_src.freq_tbl = ftbl_cam_cc_cci_0_clk_src_maili;
-+		cam_cc_ofe_clk_src.freq_tbl = ftbl_cam_cc_ofe_clk_src_maili;
-+
-+		cam_cc_hawi_clocks[CAM_CC_CCI_2_CLK_SRC] = NULL;
-+		cam_cc_hawi_clocks[CAM_CC_CCI_2_CLK] = NULL;
-+		cam_cc_hawi_clocks[CAM_CC_CSI5PHYTIMER_CLK_SRC] = NULL;
-+		cam_cc_hawi_clocks[CAM_CC_CSI5PHYTIMER_CLK] = NULL;
-+		cam_cc_hawi_clocks[CAM_CC_CSIPHY5_CLK] = NULL;
-+	}
-+
- 	return qcom_cc_probe(pdev, &cam_cc_hawi_desc);
- }
- 
+Since patch 1 is a fix to the series itself (every platform that links
+all CSIDs to all VFEs fails to probe once streams_enable is set on a
+non-lite CSID), feel free to fold both into your v2 instead of carrying
+them separately; whichever you prefer.
 
--- 
-2.34.1
+Both tested on RB3 Gen2 (QCS6490/SC7280) with two GMSL cameras behind a
+MAX9296A, as described in my earlier report on this thread.
 
+[1] https://lore.kernel.org/linux-media/20260911062213.195007-1-gjorgji.rosikopulos@oss.qualcomm.com/
+
+Hitesh Patel (2):
+  media: qcom: camss: Do not link CSID source pads the CSID does not have
+  media: qcom: camss: Enable the streams API on SC7280
+
+ drivers/media/platform/qcom/camss/camss.c | 18 ++++++++++++++++++
+ 1 file changed, 18 insertions(+)
+
+
+base-commit: 68142f986ff04b2b70b31db00f719bf690f64a9a
+prerequisite-patch-id: 285e8b983e45d4184863e92ae99ebe46bb4f7020
+prerequisite-patch-id: e8dce2cee0678cc20446f3a4a286c4a3c10d19f6
+prerequisite-patch-id: d0bf82158d99863344c206a543d3e381b24a3b51
+prerequisite-patch-id: ddffbfdffba948a608fc556a5ca81b9dabae7e00
+prerequisite-patch-id: dca159c5eecf280ea7ce7c67f5da2364c8449759
+prerequisite-patch-id: 220ee607579892058879cad0ed9344f6696313c8
+prerequisite-patch-id: d7665451d090c8d4684c79736ac517d6c7ddc1fc
+prerequisite-patch-id: f297c801f0254862e4fc8440dbd27473a8b78159
