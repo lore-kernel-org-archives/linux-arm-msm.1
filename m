@@ -1,299 +1,97 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from cstnet.cn (smtp81.cstnet.cn [159.226.251.81])
+	(using TLSv1.2 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8626C490BE3
-	for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 09:29:57 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AC7D33DB960;
+	Wed, 16 Sep 2026 09:31:05 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=159.226.251.81
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789551011; cv=none; b=ubyyzxUrPZ7kvsyMKzIjchlWXYGkVz0KqQJgGVrJ4Qh2k09Trhj+IbqWsCingge5VpW0vKb4zHZXAZ5JdUuCLSYEphuLJnh8cc9vsLz0dYsOsUO0vsfVHT82//aJ0EW7kdqWkF/+SalhsmuKlp0Wb+leXZMWtN20+G4ZjiK+rp0=
+	t=1789551078; cv=none; b=EmUC4eCL1rvjWHkMZaEGgCZpohYZ0iSUnwEt/+b+KacJfX1x3OS7uOKo027KJL3nQPx2zLsWxF5REy9TMY3a6aSZfMGprNlbrjoawZL3zzUmOFj6/9OeY4DJDknLZ+OwwWZjQcVztxLtYSyFtJgMM/uw5C+0P/bSGtEIn9nf9dM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789551011; c=relaxed/simple;
-	bh=KcHEfI9rixpKBPc2Zf2uhft6io/djkgQNFyeA0Lvo8Q=;
-	h=From:In-Reply-To:MIME-Version:References:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=B6JUIF0h8galvTEkTSjx7LWumBhCldojguZJ01uhrT1mou9Za4H8uliu3QpEdOvEpb5vbkQPf2LfauLBaXY1MRy9WccaSqKXe9UThjleKVDZ8gyygWfWqG/YA6WSv9FzbhLptGZ7fiMgv3Qae1JN+RobGK3YHxbmLylYiGfmb7A=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=RXGN6Q6O; arc=none smtp.client-ip=100.103.45.18
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="RXGN6Q6O"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id CB4511F00906
-	for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 09:29:53 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1789550993;
-	bh=HbNOQo+fITL/YezhDRnlIYKOUp70KJL8OxpPSgtnAR4=;
-	h=From:In-Reply-To:References:Date:Subject:To:Cc;
-	b=RXGN6Q6OG3ZqmOA+EqOmYMjzyXsouT9/duqse6VVDy6txHKqr4rsi+IwqT7Nbrz47
-	 k8Z51jWHxL/XUhmUR7t+S3foO9mlS/tSggJOpQVFfcHqXbWS8CpBwCWxmcACeDF2aj
-	 BxpkRO7bmpj1nhb4WegvhExiNrSZqAnhu0H3xjIBcZ2dzHV6+ceLNSmsoGa/aEjwKD
-	 OgoAUxAUzLHvJjUOF9Tbh1Ox/3/knMWDyVQT600LmsSKHRFcZZFAgL1BSh+RJrSl7I
-	 om2+u+TJVVTY7GeNqPDsgFptzqcmTTynlhkkxA1JfsslXkuVOGr50PDDnKikS1vCh1
-	 Dazs1KLksmMIA==
-Received: by mail-lr2-f21.google.com with SMTP id 38308e7fff4ca-3a2ff148dfdso5496051fa.1
-        for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 02:29:53 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AKwUvBxSs4ulT1b+5NB0BIX1G+Uhdf9ESViSvRGoMiol+rm/VLUBPbxbv0eKyhBlXAopfB8lQdtr/DYvlyZbASAp@vger.kernel.org
-X-Gm-Message-State: AFuF++k9gKxznJJfnNHCFkcoPMLjXwnCM9q/wDETgs+DAu936HXx189H
-	A4VK0nV326F34BOAMBjr88EkgwcRuYkzGxQ0xrjKxDsFyMbXUMV/E78T61F/VaoGIOBJU99Wbsn
-	Ox0ogn/w66giiRlkEL+EJFprX00NFCKkX1fKkZuOK6g==
-X-Received: by 2002:a05:651c:2107:b0:3a5:a106:ee0 with SMTP id
- 38308e7fff4ca-3a5dca17909mr3885151fa.24.1789550992173; Wed, 16 Sep 2026
- 02:29:52 -0700 (PDT)
-Received: from 969154062570 named unknown by gmailapi.google.com with
- HTTPREST; Wed, 16 Sep 2026 04:29:50 -0500
-Received: from 969154062570 named unknown by gmailapi.google.com with
- HTTPREST; Wed, 16 Sep 2026 04:29:50 -0500
-From: Bartosz Golaszewski <brgl@kernel.org>
-In-Reply-To: <20260914-arm-psci-system_reset2-vendor-reboots-v25-4-4aaf5c09b5c2@oss.qualcomm.com>
+	s=arc-20240116; t=1789551078; c=relaxed/simple;
+	bh=D4/yxHDCi9fKK4WTqUyWO6Tvmy7Pl2foyKhacLVNWvc=;
+	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=ssnINvFmQJkacO97pwVtNmZBcC1Vi2jELh7kJGv7FePY3qdHM7wVZ9qv5dXkkp8RmdCBwODmkvL0XMtV+jBk+eaS7u7hT4GRot3DVHSc2UhiPqx4IJWWYG0rjN0ideXTFc9tnF4qlNd/XwHh6O3Yu1iEH9a9xCvrx/4B7TVm1U8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=iscas.ac.cn; spf=pass smtp.mailfrom=iscas.ac.cn; arc=none smtp.client-ip=159.226.251.81
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=iscas.ac.cn
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=iscas.ac.cn
+Received: from dfae2b116770.home.arpa (unknown [36.110.52.2])
+	by APP-03 (Coremail) with SMTP id rQCowAAnKjjUYapqg13gBw--.41217S2;
+	Wed, 16 Sep 2026 17:31:01 +0800 (CST)
+From: Wentao Liang <vulab@iscas.ac.cn>
+To: Frank.Li@kernel.org
+Cc: andy.shevchenko@gmail.com,
+	dmaengine@vger.kernel.org,
+	linux-arm-kernel@lists.infradead.org,
+	linux-arm-msm@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	okaya@kernel.org,
+	vkoul@kernel.org,
+	Wentao Liang <vulab@iscas.ac.cn>,
+	stable@vger.kernel.org
+Subject: [PATCH] dmaengine: qcom_hidma: Fix runtime PM leak in hidma_issue_task()
+Date: Wed, 16 Sep 2026 09:30:32 +0000
+Message-Id: <20260916093032.2003397-1-vulab@iscas.ac.cn>
+X-Mailer: git-send-email 2.34.1
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260914-arm-psci-system_reset2-vendor-reboots-v25-0-4aaf5c09b5c2@oss.qualcomm.com>
- <20260914-arm-psci-system_reset2-vendor-reboots-v25-4-4aaf5c09b5c2@oss.qualcomm.com>
-Date: Wed, 16 Sep 2026 04:29:50 -0500
-X-Gmail-Original-Message-ID: <CAMRc=MdCWHQZ+CgW05jYA1GGJdMUwKJEBAiAvRCvx=UqvjLiUg@mail.gmail.com>
-X-Gm-Features: AcwNN1XQMfOQSPN80c7M_tcu2-hP7ZzKFwZrSM1EUb4ujYz2zvehzw9bQteJEXc
-Message-ID: <CAMRc=MdCWHQZ+CgW05jYA1GGJdMUwKJEBAiAvRCvx=UqvjLiUg@mail.gmail.com>
-Subject: Re: [PATCH v25 04/10] firmware: psci: Add support for PSCI auxiliary devices
-To: Shivendra Pratap <shivendra.pratap@oss.qualcomm.com>
-Cc: Florian Fainelli <florian.fainelli@broadcom.com>, Krzysztof Kozlowski <krzk@kernel.org>, 
-	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>, 
-	Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>, Andre Draszik <andre.draszik@linaro.org>, 
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>, 
-	Kathiravan Thirumoorthy <kathiravan.thirumoorthy@oss.qualcomm.com>, linux-pm@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org, 
-	linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
-	mfd@lists.linux.dev, Srinivas Kandagatla <srini@kernel.org>, 
-	Ulf Hansson <ulf.hansson@oss.qualcomm.com>, 
-	Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>, 
-	Lorenzo Pieralisi <lpieralisi@kernel.org>, Arnd Bergmann <arnd@arndb.de>, 
-	Bjorn Andersson <andersson@kernel.org>, Sebastian Reichel <sre@kernel.org>, Rob Herring <robh@kernel.org>, 
-	Souvik Chakravarty <Souvik.Chakravarty@arm.com>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
-	Andy Yan <andy.yan@rock-chips.com>, Matthias Brugger <matthias.bgg@gmail.com>, 
-	Mark Rutland <mark.rutland@arm.com>, Conor Dooley <conor+dt@kernel.org>, 
-	Konrad Dybcio <konradybcio@kernel.org>, John Stultz <john.stultz@linaro.org>, 
-	Moritz Fischer <moritz.fischer@ettus.com>, "Rafael J. Wysocki" <rafael@kernel.org>, 
-	Daniel Lezcano <daniel.lezcano@kernel.org>, Christian Loehle <christian.loehle@arm.com>, 
-	Lee Jones <lee@kernel.org>, Ulf Hansson <ulfh@kernel.org>, 
-	Pavan Kondeti <pavan.kondeti@oss.qualcomm.com>, Abel Vesa <abelvesa@kernel.org>, 
-	Bartosz Golaszewski <brgl@kernel.org>, Sudeep Holla <sudeep.holla@kernel.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID:rQCowAAnKjjUYapqg13gBw--.41217S2
+X-Coremail-Antispam: 1UD129KBjvJXoW7AFWxtrW7JF1DJw4UJrWfuFg_yoW8Gw1Up3
+	9IqFWFkr90gw1293Wjkw4qqF90939xGFW3KrykK34kurs5XFy2g348ArWjqF10yrWrAanF
+	k3W7t3y3uF1xAaDanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+	9KBjDU0xBIdaVrnRJUUU9I14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+	rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
+	1l84ACjcxK6xIIjxv20xvE14v26ryj6F1UM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26F4j
+	6r4UJwA2z4x0Y4vEx4A2jsIE14v26rxl6s0DM28EF7xvwVC2z280aVCY1x0267AKxVW0oV
+	Cq3wAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0
+	I7IYx2IY67AKxVWUAVWUtwAv7VC2z280aVAFwI0_Gr1j6F4UJwAm72CE4IkC6x0Yz7v_Jr
+	0_Gr1lF7xvr2IYc2Ij64vIr41lF7I21c0EjII2zVCS5cI20VAGYxC7M4IIrI8v6xkF7I0E
+	8cxan2IY04v7MxkF7I0En4kS14v26r1q6r43MxAIw28IcxkI7VAKI48JMxC20s026xCaFV
+	Cjc4AY6r1j6r4UMI8I3I0E5I8CrVAFwI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWl
+	x4CE17CEb7AF67AKxVWUtVW8ZwCIc40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1I6r
+	4UMIIF0xvE2Ix0cI8IcVCY1x0267AKxVWxJVW8Jr1lIxAIcVCF04k26cxKx2IYs7xG6r1j
+	6r1xMIIF0xvEx4A2jsIE14v26r4j6F4UMIIF0xvEx4A2jsIEc7CjxVAFwI0_Gr1j6F4UJb
+	IYCTnIWIevJa73UjIFyTuYvjfUrrWFUUUUU
+X-CM-SenderInfo: pyxotu46lvutnvoduhdfq/1tbiBgcMA2qqPpSX9QAAsG
 
-On Mon, 14 Sep 2026 16:59:08 +0200, Shivendra Pratap
-<shivendra.pratap@oss.qualcomm.com> said:
-> PSCI has multiple kernel consumers, such as cpuidle-psci-domain.
-> Currently, both the PSCI core driver and cpuidle-psci-domain bind
-> directly to the same PSCI node "arm,psci-1.0". Additional consumers, if
-> introduced, would also need to bind in the same way, leading to multiple
-> drivers attached to a single device node.
->
-> Introduce a PSCI auxiliary-device provider that binds to "arm,psci-1.0"
-> and registers PSCI child devices on the auxiliary bus. As the first
-> user, register cpuidle-psci-domain as an auxiliary device.
->
-> Update cpuidle-psci-domain to probe as an auxiliary driver and use
-> the PSCI device node for power-domain traversal.
->
-> Suggested-by: Ulf Hansson <ulf.hansson@oss.qualcomm.com>
-> Suggested-by: Lee Jones <lee@kernel.org>
-> Suggested-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
-> Signed-off-by: Shivendra Pratap <shivendra.pratap@oss.qualcomm.com>
-> ---
->  MAINTAINERS                           |  1 +
->  drivers/cpuidle/Kconfig.arm           |  1 +
->  drivers/cpuidle/cpuidle-psci-domain.c | 31 +++++++++++++++-----------
->  drivers/firmware/psci/Kconfig         | 14 ++++++++++++
->  drivers/firmware/psci/Makefile        |  1 +
->  drivers/firmware/psci/psci-devices.c  | 41 +++++++++++++++++++++++++++++++++++
->  6 files changed, 76 insertions(+), 13 deletions(-)
->
-> diff --git a/MAINTAINERS b/MAINTAINERS
-> index 207a6e2db70c..9c0334ee2ed2 100644
-> --- a/MAINTAINERS
-> +++ b/MAINTAINERS
-> @@ -21932,6 +21932,7 @@ L:	linux-arm-kernel@lists.infradead.org (moderated for non-subscribers)
->  S:	Maintained
->  F:	Documentation/devicetree/bindings/arm/psci.yaml
->  F:	drivers/firmware/psci/
-> +F:	drivers/firmware/psci/psci-devices.c
->  F:	include/linux/psci.h
->  F:	include/uapi/linux/psci.h
->
-> diff --git a/drivers/cpuidle/Kconfig.arm b/drivers/cpuidle/Kconfig.arm
-> index b88b01aa5829..f22e18b05053 100644
-> --- a/drivers/cpuidle/Kconfig.arm
-> +++ b/drivers/cpuidle/Kconfig.arm
-> @@ -36,6 +36,7 @@ config ARM_PSCI_CPUIDLE_DOMAIN
->  	bool "PSCI CPU idle Domain"
->  	depends on ARM_PSCI_CPUIDLE
->  	depends on PM_GENERIC_DOMAINS_OF
-> +	depends on ARM_PSCI_DEVICES
->  	select DT_IDLE_GENPD
->  	default y
->  	help
-> diff --git a/drivers/cpuidle/cpuidle-psci-domain.c b/drivers/cpuidle/cpuidle-psci-domain.c
-> index b9e4ad7d43a3..0ce6a83f6588 100644
-> --- a/drivers/cpuidle/cpuidle-psci-domain.c
-> +++ b/drivers/cpuidle/cpuidle-psci-domain.c
-> @@ -9,10 +9,11 @@
->
->  #define pr_fmt(fmt) "CPUidle PSCI: " fmt
->
-> +#include <linux/auxiliary_bus.h>
->  #include <linux/cpu.h>
->  #include <linux/device.h>
->  #include <linux/kernel.h>
-> -#include <linux/platform_device.h>
-> +#include <linux/module.h>
->  #include <linux/pm_domain.h>
->  #include <linux/pm_runtime.h>
->  #include <linux/psci.h>
-> @@ -122,14 +123,10 @@ static void psci_pd_remove(void)
->  	}
->  }
->
-> -static const struct of_device_id psci_of_match[] = {
-> -	{ .compatible = "arm,psci-1.0" },
-> -	{}
-> -};
-> -
-> -static int psci_cpuidle_domain_probe(struct platform_device *pdev)
-> +static int psci_cpuidle_domain_probe(struct auxiliary_device *auxdev,
-> +				     const struct auxiliary_device_id *id)
->  {
-> -	struct device_node *np = pdev->dev.of_node;
-> +	struct device_node *np = auxdev->dev.of_node;
->  	bool use_osi = psci_has_osi_support();
->  	int ret = 0, pd_count = 0;
->
-> @@ -177,16 +174,24 @@ static int psci_cpuidle_domain_probe(struct platform_device *pdev)
->  	return ret;
->  }
->
-> -static struct platform_driver psci_cpuidle_domain_driver = {
-> -	.probe  = psci_cpuidle_domain_probe,
-> +static const struct auxiliary_device_id psci_cpuidle_domain_id_table[] = {
-> +	{ .name = "arm-psci.psci-cpuidle-domain" },
-> +	{ }
-> +};
-> +MODULE_DEVICE_TABLE(auxiliary, psci_cpuidle_domain_id_table);
-> +
-> +static struct auxiliary_driver psci_cpuidle_domain_driver = {
-> +	.probe = psci_cpuidle_domain_probe,
->  	.driver = {
-> -		.name = "psci-cpuidle-domain",
-> -		.of_match_table = psci_of_match,
-> +		.suppress_bind_attrs = true,
->  	},
-> +	.id_table = psci_cpuidle_domain_id_table,
->  };
->
->  static int __init psci_idle_init_domains(void)
->  {
-> -	return platform_driver_register(&psci_cpuidle_domain_driver);
-> +	return __auxiliary_driver_register(&psci_cpuidle_domain_driver,
-> +					   THIS_MODULE,
-> +					   "psci-cpuidle-domain");
->  }
->  core_initcall(psci_idle_init_domains);
-> diff --git a/drivers/firmware/psci/Kconfig b/drivers/firmware/psci/Kconfig
-> index 97944168b5e6..68e381f1a618 100644
-> --- a/drivers/firmware/psci/Kconfig
-> +++ b/drivers/firmware/psci/Kconfig
-> @@ -2,6 +2,20 @@
->  config ARM_PSCI_FW
->  	bool
->
-> +config ARM_PSCI_DEVICES
-> +	bool "PSCI auxiliary device support"
-> +	depends on ARM_PSCI_FW
-> +	depends on OF
-> +	select AUXILIARY_BUS
-> +	default y
-> +	help
-> +	  Say Y here to enable auxiliary device support for PSCI.
-> +
-> +	  This creates auxiliary devices for PSCI functionality implemented
-> +	  outside the core PSCI firmware driver. These devices allow PSCI
-> +	  child drivers to bind through the auxiliary bus while sharing the
-> +	  PSCI firmware device as their parent.
-> +
->  config ARM_PSCI_CHECKER
->  	bool "ARM PSCI checker"
->  	depends on ARM_PSCI_FW && HOTPLUG_CPU && CPU_IDLE && !TORTURE_TEST
-> diff --git a/drivers/firmware/psci/Makefile b/drivers/firmware/psci/Makefile
-> index 1956b882470f..8e75a0ed6f74 100644
-> --- a/drivers/firmware/psci/Makefile
-> +++ b/drivers/firmware/psci/Makefile
-> @@ -1,4 +1,5 @@
->  # SPDX-License-Identifier: GPL-2.0
->  #
->  obj-$(CONFIG_ARM_PSCI_FW)	+= psci.o
-> +obj-$(CONFIG_ARM_PSCI_DEVICES)	+= psci-devices.o
->  obj-$(CONFIG_ARM_PSCI_CHECKER)	+= psci_checker.o
-> diff --git a/drivers/firmware/psci/psci-devices.c b/drivers/firmware/psci/psci-devices.c
-> new file mode 100644
-> index 000000000000..f1eca61e3269
-> --- /dev/null
-> +++ b/drivers/firmware/psci/psci-devices.c
-> @@ -0,0 +1,41 @@
-> +// SPDX-License-Identifier: GPL-2.0-only
-> +/*
-> + * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
-> + */
-> +
-> +#include <linux/auxiliary_bus.h>
-> +#include <linux/init.h>
+hidma_issue_task() bumps the device usage counter with
+pm_runtime_get_sync() without checking the return value. The counter
+is incremented even when the resume fails, e.g. when runtime PM has
+been disabled or the device is suspending, and nothing drops it in
+that case, so each failure leaves the device with an elevated usage
+count and it can no longer runtime suspend.
 
-I think you need module.h not init.h.
+Bail out and drop the leaked increment with pm_runtime_put_noidle()
+when the resume fails, and only start the transfer when the device is
+actually resumed. The counter for a successful resume is still
+dropped by hidma_callback() as before.
 
-> +#include <linux/of.h>
-> +#include <linux/platform_device.h>
-> +
-> +static int arm_psci_probe(struct platform_device *pdev)
-> +{
-> +	struct auxiliary_device *auxdev;
-> +
-> +	auxdev = __devm_auxiliary_device_create(&pdev->dev, "arm-psci",
-> +						"psci-cpuidle-domain", NULL, 0);
-> +	if (!auxdev)
-> +		return -ENOMEM;
-> +
-> +	return 0;
-> +}
+Fixes: 67a2003e0607 ("dmaengine: add Qualcomm Technologies HIDMA channel driver")
+Cc: stable@vger.kernel.org
+Signed-off-by: Wentao Liang <vulab@iscas.ac.cn>
+---
+ drivers/dma/qcom/hidma.c | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
 
-I would prefer you to move the code between the patches a bit. This patch
-should already be introducing the full, future-proof infrastructure for
-registering multiple auxiliary devices, so maybe add a static table with device
-info? Then in patch 10/10 you'd just extend it for reboot modes.
+diff --git a/drivers/dma/qcom/hidma.c b/drivers/dma/qcom/hidma.c
+index 5a8dca8db5ce..03a73dc9b066 100644
+--- a/drivers/dma/qcom/hidma.c
++++ b/drivers/dma/qcom/hidma.c
+@@ -220,7 +220,10 @@ static void hidma_issue_task(struct tasklet_struct *t)
+ {
+ 	struct hidma_dev *dmadev = from_tasklet(dmadev, t, task);
+ 
+-	pm_runtime_get_sync(dmadev->ddev.dev);
++	if (pm_runtime_get_sync(dmadev->ddev.dev) < 0) {
++		pm_runtime_put_noidle(dmadev->ddev.dev);
++		return;
++	}
+ 	hidma_ll_start(dmadev->lldev);
+ }
+ 
+-- 
+2.34.1
 
-I'd also not add any ifdef guards here and lesses the build-time dependencies.
-You can register the device alright, it just won't get probed if the reboot-mode
-support is not there.
-
-Bart
-
-> +
-> +static const struct of_device_id arm_psci_of_match[] = {
-> +	{ .compatible = "arm,psci-1.0" },
-> +	{ }
-> +};
-> +
-> +static struct platform_driver arm_psci_driver = {
-> +	.probe = arm_psci_probe,
-> +	.driver = {
-> +		.name = "arm-psci",
-> +		.of_match_table = arm_psci_of_match,
-> +		.suppress_bind_attrs = true,
-> +	},
-> +};
-> +
-> +static int __init arm_psci_init(void)
-> +{
-> +	return platform_driver_register(&arm_psci_driver);
-> +}
-> +core_initcall(arm_psci_init);
->
-> --
-> 2.34.1
->
->
