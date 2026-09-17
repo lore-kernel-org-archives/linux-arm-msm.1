@@ -1,402 +1,348 @@
-Received: from PA4PR04CU001.outbound.protection.outlook.com (mail-francecentralazon11013011.outbound.protection.outlook.com [40.107.162.11])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5EF2E4E4C5A;
-	Thu, 17 Sep 2026 16:04:02 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=40.107.162.11
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789661044; cv=fail; b=lVzkjJwtsgqtSL+X6F2th7qKjKupFL5gp47Ecuy19ZMfWHAdSI15k1aqPkTshLIFTysXy+Ssk6pjFFHZ0AnNVWrB2k22sq0idEPOHS2P2FiDxicqat07GLXEXhybQNGD5OEvSxBgaLicRxnUylrsbHGEZEpNNAZa/t1s7IHHQtc=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789661044; c=relaxed/simple;
-	bh=A+MtAbFH8dSljJDOMQCNyo8tBJ/EZ/AobCxaPFHoOiY=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:Content-Type:
-	 Content-Disposition:In-Reply-To:MIME-Version; b=JUvIirYoLIhqjBn540Gs7/n2Kpdni/FsZDw4Gh9/T+Gi6IXKTk56L4D20bGztNjtG1G6WSU6M/rYplTYwDqgKezPcrXOeytm+cZVHOPZyZ6WOqHmex8iAJpTtxwnFuEaHl+/HEMR9FKLg0Prj7MnleiyXxiawFhQ+SUDkbresu4=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.nxp.com; spf=pass smtp.mailfrom=oss.nxp.com; dkim=pass (2048-bit key) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b=UNhpCiy3; arc=fail smtp.client-ip=40.107.162.11
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.nxp.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.nxp.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A1FAE4C10EC
+	for <linux-arm-msm@vger.kernel.org>; Thu, 17 Sep 2026 16:08:24 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1789661306; cv=none; b=j0WH4h2WJzfHvpyKgRDYUnmpRsUc4Itl/wQVd6Tp+KwVHhj0FZIa3G1QtIxy37Wt5gfJ2WChBMoxMKQ8gU2zof+6l+DnOgAIBOpsSyUdaqF8vJCpmsNX8RR1d8lTAXZfE56IsxVDfLcO2ECXmTMnWh6K7xYZzDmfeSD3Z86OgPs=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1789661306; c=relaxed/simple;
+	bh=JC7H+pm58E1n6/Bw2bKd0g05pNgc7ySxorvePFWsxGc=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=V4ty+eg7xc9fnwRnkEGWC4f6SB3guMpxMmxXyPMcMJiFSnYAtU5TYrwjEXMAgW6C5BkI0Ru2XPLCAjWzy/SedIJ0L3DomZL93qHCXq9p5rl/8td41IIbYiol3q4NvpQmjGNy0bNz4kUHBC1H05QcZyKf2gI3XRJF5bvBKWRG+j0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=PwMISGum; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=IlaIrm8/; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="UNhpCiy3"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=VEOZXICsd8MwhWXqzMp/wfher43TmDxi0thfTn9ctqpoS2/10URXHUEogqadPD0bth6A94ykzuaD+HPv2z4cnMjz0Lz6pAwVFX5Nu3aWb0VrlEZzEp8uAaKiuiewV+6/jmOjFjC63C5avXfImPflqlfNA/14809aLQNTXf0SqH+GjikunM1Z8gamwAds31Pd9Tazg7pdh2ENl0GBQ0eBZgRnog1vFOPjG/90V5sYhWfC1OX0NZxMFBO6sPVl1BBkBjtOEFrA1giegAjgYui9I6Zbkz6SAWNsX477hiol1io8U/SaYb0iv92+VUfhpCdLNJoL1b4m40X7fo8mi/qmeA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=3pVuUX6eWjeFkXe2CNgyoAyvhETAc5N0ln0OmGsf5bI=;
- b=NeRovmchWR06msF5WcJlvePy3+/p5ZVNQv1fhvpKHYHCsO0btpPC73OZi3k84TlNq9I/PmvKG2IJsRACs2Syu5/fgr0XeA8t45DVbKtunH1TDsNe9N6DY5TR9cbidDGLRuprwt42OUoPzcaww/AloPopA5DADuY9RDHqKVlzxaPyfFBeSNh0R/QFM6ytU83zFaDPUkS5qbXAk7kiIKWFDY+sWEbPG6gqGQ4kwmvO9sc35CBlBa41gEP/4+VNM4lNJeXBJQ+HOOnP9SQfozQOWAQr2JKe49p4vgaYvnn+i3v2T9SevKdGe6WIifZhDEg/Fl6IxBEEIJhFT+f1WaPSrg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
- dkim=pass header.d=oss.nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com;
- s=selector1-NXP1-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=3pVuUX6eWjeFkXe2CNgyoAyvhETAc5N0ln0OmGsf5bI=;
- b=UNhpCiy3PmfNWO7S6cslgSzw08kVUdbc3PGC7YTeTepQvC/QjZhn/uHDqwElDjMBI+P58GxbSTTRmzX73cA9rTjlp7+QfThzZxY4k0Adq1pVA/QQ2vxgyS3+7282VLStzJJF5T43zQShVw8lS6Xh0CANsqOPlvq2frBmMYNWFHy4WU+8EL6TvPgS1JEU/ToJJZR++0bI3LW+VXAJlB4BZ2lZF6HyQSnjG1CgiOctL+fgN9zidRjmS6l2yyICN20qs1tzZBQpIpTV9mPSHShGsWPZBJqqEBRIzi8nohTaBaiPg+Pl4RICj9CnlV87xbn+uTtuJVDpbKCUOxK8NtVHkQ==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=oss.nxp.com;
-Received: from GV2PR04MB11799.eurprd04.prod.outlook.com (2603:10a6:150:2cf::9)
- by GV2PR04MB12338.eurprd04.prod.outlook.com (2603:10a6:150:321::15) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.428.9; Thu, 17 Sep
- 2026 16:03:57 +0000
-Received: from GV2PR04MB11799.eurprd04.prod.outlook.com
- ([fe80::2146:83a2:5329:b7c]) by GV2PR04MB11799.eurprd04.prod.outlook.com
- ([fe80::2146:83a2:5329:b7c%7]) with mapi id 15.21.0406.012; Thu, 17 Sep 2026
- 16:03:57 +0000
-Date: Thu, 17 Sep 2026 11:03:44 -0500
-From: Frank Li <Frank.li@oss.nxp.com>
-To: Larisa Grigore <larisa.grigore@oss.nxp.com>
-Cc: NXP S32 Linux Team <s32@nxp.com>, Alim Akhtar <alim.akhtar@samsung.com>,
-	Avri Altman <avri.altman@sandisk.com>,
-	Bart Van Assche <bvanassche@acm.org>, Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>, Frank Li <Frank.Li@nxp.com>,
-	Sascha Hauer <s.hauer@pengutronix.de>,
-	Pengutronix Kernel Team <kernel@pengutronix.de>,
-	Fabio Estevam <festevam@gmail.com>,
-	"James E.J. Bottomley" <James.Bottomley@hansenpartnership.com>,
-	"Martin K. Petersen" <mkp@kernel.org>,
-	Sai Krishna Potthuri <sai.krishna.potthuri@amd.com>,
-	Ajay Neeli <ajay.neeli@amd.com>,
-	Manivannan Sadhasivam <mani@kernel.org>,
-	Pedro Sousa <pedrom.sousa@synopsys.com>, linux-scsi@vger.kernel.org,
-	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-	imx@lists.linux.dev, linux-arm-kernel@lists.infradead.org,
-	linux-arm-msm@vger.kernel.org, clizzi@redhat.com,
-	aruizrui@redhat.com, eballetb@redhat.com, echanude@redhat.com
-Subject: Re: [PATCH v4 04/11] ufs: host: Add common Hibern8 TX FSM polling
- helper
-Message-ID: <aqwPYEvGiamxNW3T@SMW015318>
-References: <20260917091555.1443076-1-larisa.grigore@oss.nxp.com>
- <20260917091555.1443076-5-larisa.grigore@oss.nxp.com>
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260917091555.1443076-5-larisa.grigore@oss.nxp.com>
-X-ClientProxiedBy: PH8PR22CA0012.namprd22.prod.outlook.com
- (2603:10b6:510:2d1::8) To GV2PR04MB11799.eurprd04.prod.outlook.com
- (2603:10a6:150:2cf::9)
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="PwMISGum";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="IlaIrm8/"
+Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68HDk0WV1954829
+	for <linux-arm-msm@vger.kernel.org>; Thu, 17 Sep 2026 16:08:23 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	de63mvokSx0mtHbiaRS5gUbMbE5xdFNiC2Y2uI3lIvQ=; b=PwMISGumlDQw7ola
+	XatjSPFVjAFjgAnxCCRdSt0X/+CBgsmAzIpKQ+EJejBJIC+7zdQDlkGMR7Pt3sxn
+	nfhlztJSxKjgOlcm0SLduaUZO9d3ZE/4qibCJISJruOY4MPqq1XQJDddfC7YxCGn
+	c6kLBaCg1rVGUudqE1OfE/X/k4Rq1/Nyhbnumt6PJVOdWONV24e4e42GAYOsUJsw
+	UcXFwe2WMST0lVIno6xN5od651yVP0esrujxqrvjzSz3asQ6krSmYvJ0XJzqEm+R
+	mWUb1WYa1dp3Cf0666LGl6jTwb7zOuby7DVWbiMhhH6vGFdv7M93WzAXxr542DZi
+	m4uHyQ==
+Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com [209.85.222.198])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4grgu5gwt4-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 17 Sep 2026 16:08:23 +0000 (GMT)
+Received: by mail-qk1-f198.google.com with SMTP id af79cd13be357-9393ac4961fso124203685a.2
+        for <linux-arm-msm@vger.kernel.org>; Thu, 17 Sep 2026 09:08:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1789661302; x=1790266102; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=de63mvokSx0mtHbiaRS5gUbMbE5xdFNiC2Y2uI3lIvQ=;
+        b=IlaIrm8/Hts7zsMsiApLZusis0PDub0roee6SeqG6vG1CMLkt+t4n4yeT2UNVFNHwN
+         rJli6QwVL9cT+hom9mlsPwhTG2O+qKpNXZhrqvQXCjY7s0IxUGnOtUOZU0lncHfTZE+j
+         d5ogtVQNYDk5rR3IfhTIfFy5O97E1DJOEZGH9uzapTMJLiPNywDJiW6YzHKqQXZZXjdm
+         Kn7AaftWeN4IeSKKffqH92qltpO24FzrRbeHJ/jcGY7ttxJkyAtzUwiDYnFA24GX7eEI
+         YHLQ1bsbmCgAY3E8SqTyweArHFpHJdZ8mqiTTCwCzSf2j2kAHfoDhJYTl2uHlFcy4AbS
+         pGJw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1789661302; x=1790266102;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=de63mvokSx0mtHbiaRS5gUbMbE5xdFNiC2Y2uI3lIvQ=;
+        b=ipkk/BlwuVsBBGNx3SD/EcuTK0lYkVUdG7YVtiy9PTfARmiQHqnkoBpHKQYs+Sbcha
+         70ADeZtiz5hDbcdkzdKsL3R77IsvAEWKfThr2CYksBKpSOBQ2ycPvlft7Gfyxoveo7W9
+         BQJ4/+/k1qRsASVEOf/RD04HVrP9TXcLbUpArf+7sPixcEijskyTDr92j4R7LRODt1yw
+         bS8OKS+UajqFR4yA7RH6K/7SEP7Aq6sryG9s1vHK2V6fA4ktyuWfFqztr95UIhZSCoRl
+         /V4sz/wDwfQVG1CDJJgLZbDZh8sXHHxrJS6BCtKx7LvL2CPoqm7efAkErXd64VrCA+bH
+         mCwA==
+X-Gm-Message-State: AFuF++mR+woNnTByKP9wtap+Jxu0+z1zsOHn0uBkzYe1ahW6kopXILhX
+	5RnSkM83vdwUzwQnRPOY0eIaRC3vwQZLufFqywKyUwv/njic3+SPtS9TktYT7EuI0u/TqT1NHq7
+	zzdnqJtPdyMkWb7fIy5KZH8DjsXzhIsyBhuKO6Axg69z6na+5ClCjKB5pjqeRlvH2KpMs
+X-Gm-Gg: AYBFou33oUs4O4vfLd3KA8SRIjlMxLi983x2Y7Vfhv3o6binU5eyR85Q4p6ZT7v/jSp
+	8wt/FattL7llcqJQoB1lOjv9g0FNosZRqZqklwuowraDq5Qhq5OMg5k3y9c2z0wZzpp3xZxu4fW
+	WyYgnJF2VLuouXuFAbURpJlUxu6JfJk6pkAg7dnavb1iPrLj6M5bS/UJlxk19FPz/CLuk455C6f
+	2ekIp+kA3Y0T/+SV8KcdSJXzR8PNKrmnG1kpSjK8d/Qif+XekfdcFAaMEr+TH1UMPlnWC4nfp1o
+	hihAnQ2PznbrWCTKWRp8jpqq7fZa6T1L7Ug357q3QNbDQNcXhc3oH2sGHXY/hixcANXF/eunssQ
+	Gy2/By9gxKMb0jMA2+UmcRNS9y9o=
+X-Received: by 2002:a05:620a:2a08:b0:939:ff11:5328 with SMTP id af79cd13be357-93bb791aa13mr1214287385a.24.1789661302429;
+        Thu, 17 Sep 2026 09:08:22 -0700 (PDT)
+X-Received: by 2002:a05:620a:2a08:b0:939:ff11:5328 with SMTP id af79cd13be357-93bb791aa13mr1214277985a.24.1789661301792;
+        Thu, 17 Sep 2026 09:08:21 -0700 (PDT)
+Received: from [192.168.68.120] ([5.133.47.210])
+        by smtp.googlemail.com with ESMTPSA id ffacd0b85a97d-4870bf2797csm15865882f8f.16.2026.09.17.09.08.20
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 17 Sep 2026 09:08:21 -0700 (PDT)
+Message-ID: <a9ad0ebd-2b6f-45fe-9ea9-c24ad7a30bae@oss.qualcomm.com>
+Date: Thu, 17 Sep 2026 17:08:20 +0100
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: GV2PR04MB11799:EE_|GV2PR04MB12338:EE_
-X-MS-Office365-Filtering-Correlation-Id: 299f4c8b-b0ee-4444-0835-08df14d54792
-X-LD-Processed: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635,ExtAddr
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
- BCL:0;ARA:13230040|7416014|1800799024|19092799006|376014|366016|23010399003|11063799006|18002099003|22082099003|10067099003|4143699003|56012099006;
-X-Microsoft-Antispam-Message-Info:
- c6KYmnsYBEyMGLmrgsdUXvaDo78yuJmy4rfIp4h7qgzWNiiwd21ylXvgUclRcSRLSEo69qGgbqPofLNu1Z8PpXbNFOPwXqOTpr19UAJ1WYNWbFlOVww9zaJAWTmI/kGu5zIIBn0BjnDY+Z15RVrnoe3RklXjgtzDHCQRD59rA8yqBqzMRdQYuVllm3Sw6+7wxpb/VBfWDedvIqR6qvVwzH2/VLXL6kMhz1C+HEnY8ICgZQtFAsKsX9PiVbaY2fGXK7Oh9hCC175oM9sBaAwalYOmBNwqA8phs3bEw3d1gtu+ArV/B/ek1wmowvJ3x0Qh+ea/xf6T2jFtStvd/pZCg8bAVB0JnH3GC68fTBuEhR9g+b5VKcgE05nDVuhhff92amD1H+ppRZKFEnCWE3PGIjGkmGfANgMSm1PEAzrwefaPjrDR7XqM+DktwRsNLy7YZmEfUdbzW9Gvd0zfVW2PiE4RJIdqiYw5fzZRlk5FKFpLQ2hY9jZ0CuTJH199VrH2PvO2ckSXFl9Pq/hz0VFj54PM+ykRY7XJdGmFp5Iui3uR5vhv4cdZN39cFdBAgaf8Q19zj0khbUG3VbQZC4DmpnjxbenHckDvLEhYRjqLdduVZYeZDEenRw3u3rKleKjfB8vAV5LsiEtwJjklVOMw3nqPS60icSUyk/YGvoVrIRM=
-X-Forefront-Antispam-Report:
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:GV2PR04MB11799.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(7416014)(1800799024)(19092799006)(376014)(366016)(23010399003)(11063799006)(18002099003)(22082099003)(10067099003)(4143699003)(56012099006);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
- =?us-ascii?Q?vgll2SUJiEDORxpvk4GaHWau4VRQCnkjGA19TuILvijJmZm8r4v5mK9+kLN0?=
- =?us-ascii?Q?xt1J1QG0/STJPyaM92xx1Pn/lVD5d62TZBX90rsMk6zemjVxb+/nkwfarooX?=
- =?us-ascii?Q?jyhayK+x3fdxSNC8vbMUgZAO3jEirdTTHY0XghjSwH1zqyAJ/uSQZJYfsnNG?=
- =?us-ascii?Q?vMeEPZxqxKqFDwe+nNzU7ncZHm7MmMGqo5KEWqlOYUIG/Ps6pz/PzRRRX+Yn?=
- =?us-ascii?Q?ZeN5Ugk7B5EzS+rFIiJgoYuL+Ek/byf1lM8fKy0G2eNVzolV5kv2hw48Uktq?=
- =?us-ascii?Q?Pbba2UKfqcLh5ar1qsNZwPZEHqDjqtdDufmKU/+2DNyjYr0CRta4rKE0sPRF?=
- =?us-ascii?Q?O/8cM/1NXXglaIqxOSvnqEylzxuKvHNs+VyCKhiYxuuAK7EQGt68UW8G+6nu?=
- =?us-ascii?Q?/i+vFYtvPIgM8mqPq4/kITfxeH6s8c2cmDjo7nbKltp4HsR3h+qIL3h1Nqp4?=
- =?us-ascii?Q?Ufey3zmvjzqmiM4sgdRB6ZBy51MRMVfnS5Xz07NGNpoGdIHgTFa8LUf8kvLq?=
- =?us-ascii?Q?NAVyUuqfeFhaVbZqfJ/Hi28TlKB+5LpcJT7bHk6lAPS/+FAY52fY4jv/EYu6?=
- =?us-ascii?Q?RSHGaMIfJeEAzhzTRQl+ZiCeCFcbuXOPN/j6aLCqEQp1Xa1XdyIphmapuDm6?=
- =?us-ascii?Q?xNHjXHzcSgZF9VcB8ipaHDzzl2MUIgwhrvUYgGxY326+TRC8bQyO7DmdPoGG?=
- =?us-ascii?Q?w+1v2t78rbtjGtgRTxI2cKDLKBYFsjtnuga4/Gp6TSA/+2ioY4eb81uox679?=
- =?us-ascii?Q?fD91R7KJpm5YU1oFgPMpmVed4ZBjpuTvJsyEyEYEKRA8egGsN7Su1CMTij0X?=
- =?us-ascii?Q?ZKU3PTmMIdoKnuRFTzCJXCCXyV9pHyAh9PRm2h0rx9Em8NyNuhggEeldBzXX?=
- =?us-ascii?Q?JBqh/pHphyA8JU4L7DudGMMefFiS8gEswoX+FH/fUon6tseIKBMSnnTrz14x?=
- =?us-ascii?Q?AEx7ODXwyFm3Pfk4kFbgloH8lPmdJrmj+PdFK2Vc4W+uDPtAHkF8UBoqASFj?=
- =?us-ascii?Q?aPtUIzpuIj0u9vgmyt5uJMUIPZCkt2hPapu6xQp7jQMvUE5tSG5IFA9TQL1L?=
- =?us-ascii?Q?26P8WMlQe8QzJjt5xqvjAIQ92FWLki+yh3mRM2e5ywTxLgc8ju0R/yT9BRsU?=
- =?us-ascii?Q?4pyUM3NqMrWc4MdKWRGJ5WHn8tYFXF77qq5T0sJt0A1CtKgC8+Nu9Y/jlI7k?=
- =?us-ascii?Q?5oUvSTu/QjmRDt2gB9LhNLkPCmnqRJoIRlFGVHLSQg5fxskvLi7sq8MMrI1e?=
- =?us-ascii?Q?/Wyc88ibnMMmLaSAJRHlsvUgp5TXi6mjtozvp133UppTuJV5ZayeAfywTD9M?=
- =?us-ascii?Q?mKQRTSx03O2uMq1OGX2HkB4HyjRE1CuhEEJ6ikhwp6OFUxrjavJY3DXBCOrr?=
- =?us-ascii?Q?NHCtvZBeD17toAmmA80rq3Tv0jjHnHx+oQ+HH7411YE3RGiOhXAtcpQVfenZ?=
- =?us-ascii?Q?WeSSAdiIIDptZCN0bnh3+XQyJ3CGxYMgKOqZ5SyVqwCGxPKLtEP7i2NXiwgq?=
- =?us-ascii?Q?t9qbqFMlRx+Uj8BEln192KR3WtHXXumcreWU2+nSDGKnBUsks6lhU3T1K8W8?=
- =?us-ascii?Q?1/qyP4YufKvR3BgWzguR3YpuAJcRLgFdrPgCDDtxP07OqzJk/FN7/Yq+Nt/b?=
- =?us-ascii?Q?bMYIdsvRhJhR05M4sKKV65AEYZlAvSkEjdzeiyhPRDK7BWpwPy+jdl7tIlC9?=
- =?us-ascii?Q?LFa8vHDgKFnK64WDoxX7Rrk4q+Y0B/uCAjtXR2sgnV6mdCTQgI/8fSxVN6MU?=
- =?us-ascii?Q?ySMOjCl3TsuY9BcRwGsS6BQehc0dJP139ekyGsqayWCFJnNnPYpo?=
-X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 299f4c8b-b0ee-4444-0835-08df14d54792
-X-MS-Exchange-CrossTenant-AuthSource: GV2PR04MB11799.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Sep 2026 16:03:57.4363
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: sQ8HRffxVBK1yqCNDyIa3io5EwtJLjgVWRf0fkxG6qj3sroInDDUYTcUIeC325t8Mi+9vj/bpxpWSN68OD69hrFz93tFR/lwCbnZpUAT+0e5IYf4F06e5hv1q57S3uBr
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV2PR04MB12338
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v8 2/2] clk: qcom: Add LPASS VA CSR heartbeat pulse clock
+To: sarath.ganapathiraju@oss.qualcomm.com, andersson@kernel.org,
+        abelvesa@kernel.org, sboyd@kernel.org, bmasney+clk@redhat.com,
+        jbrunet+clk@baylibre.com, robh@kernel.org, krzk+dt@kernel.org,
+        conor+dt@kernel.org
+Cc: linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org,
+        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+        prasad.kumpatla@oss.qualcomm.com
+References: <20260917-master-v8-0-823d2c5d090a@oss.qualcomm.com>
+ <20260917-master-v8-2-823d2c5d090a@oss.qualcomm.com>
+Content-Language: en-US
+From: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
+In-Reply-To: <20260917-master-v8-2-823d2c5d090a@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTE3MDIyOCBTYWx0ZWRfX5/d93OZT9rSs
+ 6YHfUfKXycF6JCCr+aOc709UelVaN+Hxvl41MqCmuieQ10zVSd0c9tsNQEci83ypMW/0gS1zWkj
+ qWa7mNVc+JNNPVECTImAp2J5t+Ve6gA=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTE3MDIyOCBTYWx0ZWRfX0LZRFlzLvNmB
+ tcC1v2lxwu9myQee5XQZtyn7vj8G0PXE50TzrYETk0L7xTP628B0qO0OLNjv6uTooANFRj0xTmu
+ PJMDCES6iUnnIhgEttg6LdJS0FLMAXr8jp3J+Az52AlNRlfMQlqYt/WNiD5Aw0ujP82nA2lr3vX
+ BKSpeb4bwEeWGsaik1lgkxpZ0/ZIp8NuxBUaRxt+Wz5pnn60QxrCxmVVwzk8Zc+vmPFy7AuGLAF
+ CZvdLowjvFK44QVt3PfA5VoTtiHmtwxeFIz74/juzU7IO98suO1M0B/YecuTnclsf145gniBgD1
+ hsSgJRSjiPkAz6B+/1ak7DK65PhRNxlVDxKIGPI1os+N3MxfYEZtDXIK0+lb4RZ7BMFhTBZq6AC
+ kJeEONB9rVErhGu2dcJDhNa8Vqh8m+Ltb5Rs8pej8wlKgPKbTv0NFr9jfmNnmXs0JeubprPHGFv
+ wEDJBvFvhJ4CBsohltQ==
+X-Proofpoint-GUID: oW404Y-h8O1HdvkmWG2F4Wdz6Z5qIXcS
+X-Authority-Analysis: v=2.4 cv=GvbXaU1C c=1 sm=1 tr=0 ts=6aac1077 cx=c_pps
+ a=qKBjSQ1v91RyAK45QCPf5w==:117 a=ZsC4DHZuhs/kKio7QBcDoQ==:17
+ a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22
+ a=EUspDBNiAAAA:8 a=Kn2qpGTL2itX_U7O_l0A:9 a=QEXdDO2ut3YA:10
+ a=NFOGd7dJGGMPyQGDc5-O:22
+X-Proofpoint-ORIG-GUID: oW404Y-h8O1HdvkmWG2F4Wdz6Z5qIXcS
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-09-17_03,2026-09-16_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ priorityscore=1501 phishscore=0 adultscore=0 spamscore=0 impostorscore=0
+ bulkscore=0 clxscore=1015 suspectscore=0 lowpriorityscore=0 malwarescore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609170228
 
-On Thu, Sep 17, 2026 at 11:15:48AM +0200, Larisa Grigore wrote:
-> Factor out the common logic used to poll TX_FSM_STATE until the TX lanes
-> enter Hibern8 into ufshcd_check_hibern8().
->
-> The HiSilicon and Qualcomm drivers currently implement similar checks
-> using the UniPro TX_FSM_STATE attribute after link/PHY bring-up. Move
-> this logic to a common helper in ufshcd so it can be shared across host
-> controller drivers.
->
-> Switch the HiSilicon and Qualcomm drivers to use the new helper and drop
-> their local implementations. While at it, normalize the "TX lane failed to
-> reach Hibern8" error path to return -ETIMEDOUT instead of the raw
-> TX_FSM_STATE value (qcom) or -1 (hisi), so all callers get a proper errno.
-> This is an intentional, harmless change of the returned error value; the
-> pass/fail behaviour at the call sites is unchanged.
->
-> Unlike the initial implementation, the timeout error is now reported only
-> once by ufshcd_dme_check_tx_hibern8() after its final check, instead of
-> per lane.
->
-> This also prepares for reusing the same UniPro-specific Hibern8 check in
-> a subsequent commit.
->
-> Signed-off-by: Larisa Grigore <larisa.grigore@oss.nxp.com>
+On 9/17/26 2:57 PM, Sarath Ganapathiraju via B4 Relay wrote:
+> From: Sarath Ganapathiraju <sarath.ganapathiraju@oss.qualcomm.com>
+> 
+> The HeartBeat Pulse, also known as RateGen Pulse, synchronizes the
+> start of DMAs and Codec Interfaces for the audio usecases and can
+> serve as a periodic wakeup source for the DSP.
+> 
+> Add the LPASS VA CSR driver that models the rate generator as a clock
+> provider so it is enabled and disabled automatically alongside the
+> other clocks during runtime PM resume and suspend.
+> 
+> Attach the DT vote clocks to runtime PM and resume the device before
+> programming the rate generator registers, so register accesses happen
+> only after the LPASS votes are active.
+> 
+> Signed-off-by: Sarath Ganapathiraju <sarath.ganapathiraju@oss.qualcomm.com>
+
+Lgtm,
+
+
+Reviewed-by: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
+
+--srini
+
 > ---
->  drivers/ufs/core/ufshcd.c   | 73 +++++++++++++++++++++++++++++++++++++
->  drivers/ufs/host/ufs-hisi.c | 48 +-----------------------
->  drivers/ufs/host/ufs-qcom.c | 42 +--------------------
->  include/ufs/ufshcd.h        |  3 ++
->  4 files changed, 78 insertions(+), 88 deletions(-)
->
-> diff --git a/drivers/ufs/core/ufshcd.c b/drivers/ufs/core/ufshcd.c
-> index 2ba244cf40ac..c1c61377e28a 100644
-> --- a/drivers/ufs/core/ufshcd.c
-> +++ b/drivers/ufs/core/ufshcd.c
-> @@ -4448,6 +4448,79 @@ int ufshcd_dme_get_attr(struct ufs_hba *hba, u32 attr_sel,
->  }
->  EXPORT_SYMBOL_GPL(ufshcd_dme_get_attr);
->
-> +/**
-> + * ufshcd_poll_tx_hibern8_lanes - Check TX_FSM_STATE of all TX lanes once
-> + * @hba: host controller instance
-> + * @num_lanes: number of TX lanes to check
-> + *
-> + * Read TX_FSM_STATE for every lane and verify it reached Hibern8.
-> + *
-> + * Return: 0 if all lanes are in Hibern8, -EAGAIN if any lane is not (yet)
-> + * in Hibern8, or a negative errno (e.g. -ETIMEDOUT from a hard UIC command
-> + * timeout) if the attribute read fails.
+>  drivers/clk/qcom/Kconfig        |  14 ++++
+>  drivers/clk/qcom/Makefile       |   1 +
+>  drivers/clk/qcom/lpass-va-csr.c | 140 ++++++++++++++++++++++++++++++++++++++++
+>  3 files changed, 155 insertions(+)
+> 
+> diff --git a/drivers/clk/qcom/Kconfig b/drivers/clk/qcom/Kconfig
+> index 6ef083f5d9e2..32172f2dfe3c 100644
+> --- a/drivers/clk/qcom/Kconfig
+> +++ b/drivers/clk/qcom/Kconfig
+> @@ -2116,6 +2116,20 @@ config CLK_GFM_LPASS_SM8250
+>  	  Support for the Glitch Free Mux (GFM) Low power audio
+>            subsystem (LPASS) clocks found on SM8250 SoCs.
+>  
+> +config QCOM_CLK_LPASS_HEARTBEAT_PULSE
+> +	tristate "Qualcomm LPASS VA CSR heartbeat pulse clock provider"
+> +	depends on COMMON_CLK
+> +	depends on ARM64 || COMPILE_TEST
+> +	select REGMAP_MMIO
+> +	default m if ARCH_QCOM
+> +	help
+> +	  Qualcomm LPASS VA CSR block contains the rate generator hardware
+> +	  that produces the HeartBeat Pulse (also known as RateGen Pulse).
+> +	  This driver models the rate generator as a clock provider so
+> +	  that consumers can enable or disable it via the common clock
+> +	  framework, and it can be used to synchronize the start of DMAs
+> +	  and Codec Interfaces or as a periodic wakeup source for the DSP.
+> +
+>  config SM_VIDEOCC_8450
+>  	tristate "SM8450 Video Clock Controller"
+>  	depends on ARM64 || COMPILE_TEST
+> diff --git a/drivers/clk/qcom/Makefile b/drivers/clk/qcom/Makefile
+> index a6c676f68b79..66c8501c21a3 100644
+> --- a/drivers/clk/qcom/Makefile
+> +++ b/drivers/clk/qcom/Makefile
+> @@ -28,6 +28,7 @@ obj-$(CONFIG_CLK_ELIZA_GPUCC) += gpucc-eliza.o
+>  obj-$(CONFIG_CLK_ELIZA_TCSRCC) += tcsrcc-eliza.o
+>  obj-$(CONFIG_CLK_ELIZA_VIDEOCC) += videocc-eliza.o
+>  obj-$(CONFIG_CLK_GFM_LPASS_SM8250) += lpass-gfm-sm8250.o
+> +obj-$(CONFIG_QCOM_CLK_LPASS_HEARTBEAT_PULSE) += lpass-va-csr.o
+>  obj-$(CONFIG_CLK_GLYMUR_CAMCC) += camcc-glymur.o
+>  obj-$(CONFIG_CLK_GLYMUR_DISPCC) += dispcc-glymur.o
+>  obj-$(CONFIG_CLK_GLYMUR_EVACC) += evacc-glymur.o
+> diff --git a/drivers/clk/qcom/lpass-va-csr.c b/drivers/clk/qcom/lpass-va-csr.c
+> new file mode 100644
+> index 000000000000..3c87c3319f15
+> --- /dev/null
+> +++ b/drivers/clk/qcom/lpass-va-csr.c
+> @@ -0,0 +1,140 @@
+> +// SPDX-License-Identifier: GPL-2.0-only
+> +/*
+> + * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 > + */
-> +static int ufshcd_poll_tx_hibern8_lanes(struct ufs_hba *hba,
-> +					unsigned int num_lanes)
+> +
+> +#include <linux/clk-provider.h>
+> +#include <linux/device.h>
+> +#include <linux/module.h>
+> +#include <linux/of_clk.h>
+> +#include <linux/pm_clock.h>
+> +#include <linux/platform_device.h>
+> +#include <linux/pm_runtime.h>
+> +#include <linux/regmap.h>
+> +
+> +#include "clk-branch.h"
+> +#include "clk-regmap.h"
+> +
+> +#define LPASS_RATE_GEN_CTRL		0xd000
+> +#define LPASS_RATE_GEN_COUNTER_0	0xd004
+> +#define LPASS_RATE_GEN_DELAY		0xd010
+> +
+> +#define LPASS_RATE_GEN_MAX_REG		LPASS_RATE_GEN_DELAY
+> +
+> +#define LPASS_RG_CTRL_EN		BIT(0)
+> +
+> +struct lpass_va_csr_data {
+> +	u32 counter_0;
+> +	u32 delay;
+> +};
+> +
+> +static const struct lpass_va_csr_data hawi_csr_data = {
+> +	.counter_0 = 0x960,
+> +	.delay = 0x16,
+> +};
+> +
+> +static const struct regmap_config lpass_rate_gen_regmap_config = {
+> +	.name = "lpass_rate_gen",
+> +	.reg_bits = 32,
+> +	.val_bits = 32,
+> +	.reg_stride = 4,
+> +	.max_register = LPASS_RATE_GEN_MAX_REG,
+> +	.cache_type = REGCACHE_MAPLE,
+> +};
+> +
+> +struct lpass_va_csr {
+> +	struct clk_regmap hb;
+> +};
+> +
+> +static int lpass_va_csr_probe(struct platform_device *pdev)
 > +{
-> +	u32 tx_fsm_val = 0;
-> +	unsigned int i;
-> +	int err;
+> +	struct device *dev = &pdev->dev;
+> +	const struct lpass_va_csr_data *data = of_device_get_match_data(dev);
+> +	struct lpass_va_csr *csr;
+> +	struct clk_init_data init = {
+> +		.name = "lpass_heartbeat_pulse",
+> +		.ops = &clk_branch_simple_ops,
+> +	};
+> +	struct regmap *regmap;
+> +	void __iomem *base;
+> +	int ret;
 > +
-> +	for (i = 0; i < num_lanes; i++) {
-> +		err = ufshcd_dme_get(hba,
-> +				UIC_ARG_MIB_SEL(TX_FSM_STATE,
-> +					UIC_ARG_MPHY_TX_GEN_SEL_INDEX(i)),
-> +				&tx_fsm_val);
-> +		if (err) {
-> +			dev_err(hba->dev,
-> +				"%s: unable to get TX_FSM_STATE for lane %u, err %d\n",
-> +				__func__, i, err);
-> +			return err;
-> +		}
+> +	csr = devm_kzalloc(dev, sizeof(*csr), GFP_KERNEL);
+> +	if (!csr)
+> +		return -ENOMEM;
 > +
-> +		if (tx_fsm_val != TX_STATE_HIBERN8)
-> +			return -EAGAIN;
-> +	}
+> +	base = devm_platform_ioremap_resource(pdev, 0);
+> +	if (IS_ERR(base))
+> +		return PTR_ERR(base);
+> +
+> +	regmap = devm_regmap_init_mmio(dev, base,
+> +				       &lpass_rate_gen_regmap_config);
+> +	if (IS_ERR(regmap))
+> +		return dev_err_probe(dev, PTR_ERR(regmap),
+> +				     "failed to init regmap\n");
+> +
+> +	ret = devm_pm_runtime_enable(dev);
+> +	if (ret)
+> +		return dev_err_probe(dev, ret, "failed to enable PM runtime\n");
+> +
+> +	ret = devm_pm_clk_create(dev);
+> +	if (ret)
+> +		return ret;
+> +
+> +	ret = of_pm_clk_add_clks(dev);
+> +	if (ret < 0)
+> +		return dev_err_probe(dev, ret, "failed to get vote clocks\n");
+> +
+> +	ret = pm_runtime_resume_and_get(dev);
+> +	if (ret)
+> +		return ret;
+> +
+> +	ret = regmap_write(regmap, LPASS_RATE_GEN_COUNTER_0, data->counter_0);
+> +	if (ret)
+> +		goto err_pm_runtime_put;
+> +
+> +	ret = regmap_write(regmap, LPASS_RATE_GEN_DELAY, data->delay);
+> +	if (ret)
+> +		goto err_pm_runtime_put;
+> +
+> +	csr->hb.regmap = regmap;
+> +	csr->hb.enable_reg = LPASS_RATE_GEN_CTRL;
+> +	csr->hb.enable_mask = LPASS_RG_CTRL_EN;
+> +	csr->hb.hw.init = &init;
+> +
+> +	ret = devm_clk_register_regmap(dev, &csr->hb);
+> +	if (ret)
+> +		goto err_pm_runtime_put;
+> +
+> +	ret = devm_of_clk_add_hw_provider(dev, of_clk_hw_simple_get, &csr->hb.hw);
+> +	if (ret)
+> +		goto err_pm_runtime_put;
+> +
+> +	pm_runtime_put(dev);
 > +
 > +	return 0;
+> +
+> +err_pm_runtime_put:
+> +	pm_runtime_put(dev);
+> +
+> +	return ret;
 > +}
 > +
-> +/**
-> + * ufshcd_dme_check_tx_hibern8 - Check if all TX lanes entered Hibern8 state
-> + * @hba: host controller instance
-> + * @num_lanes: number of TX lanes to check
-> + * @timeout_ms: overall timeout in milliseconds shared by all lanes
-> + *
-> + * Return: 0 on success, negative errno on failure.
-> + */
-> +int ufshcd_dme_check_tx_hibern8(struct ufs_hba *hba, unsigned int num_lanes,
-> +				unsigned int timeout_ms)
-> +{
-> +	int err, ret;
+> +static const struct of_device_id lpass_va_csr_dt_match[] = {
+> +	{ .compatible = "qcom,hawi-lpass-va-csr", .data = &hawi_csr_data },
+> +	{}
+> +};
+> +MODULE_DEVICE_TABLE(of, lpass_va_csr_dt_match);
 > +
-> +	if (!num_lanes)
-> +		return -EINVAL;
+> +static struct platform_driver lpass_va_csr_driver = {
+> +	.driver = {
+> +		.name = "qcom-lpass-va-csr",
+> +		.of_match_table = lpass_va_csr_dt_match,
+> +	},
+> +	.probe = lpass_va_csr_probe,
+> +};
 > +
-> +	/*
-> +	 * Poll every lane until ufshcd_poll_tx_hibern8_lanes() stops returning
-> +	 * -EAGAIN, i.e. all lanes reached HIBERN8 (err == 0) or a real error
-> +	 * was hit.
-> +	 */
-> +	ret = read_poll_timeout(ufshcd_poll_tx_hibern8_lanes, err,
-> +				err != -EAGAIN, 200,
-> +				(u64)timeout_ms * USEC_PER_MSEC, false,
-> +				hba, num_lanes);
-> +	if (ret) {
-> +		dev_err(hba->dev,
-> +			"%s: timeout waiting for TX lanes to enter HIBERN8\n",
-> +			__func__);
-> +		return -ETIMEDOUT;
+> +module_platform_driver(lpass_va_csr_driver);
+> +
+> +MODULE_DESCRIPTION("Qualcomm LPASS VA CSR heartbeat pulse clock provider");
+> +MODULE_LICENSE("GPL");
+> 
 
-nit: return ret;
-
-Reviewed-by: Frank Li <Frank.Li@nxp.com>
-
-> +	}
-> +
-> +	return err;
-> +}
-> +EXPORT_SYMBOL_GPL(ufshcd_dme_check_tx_hibern8);
-> +
->  /**
->   * ufshcd_dme_rmw - get modify set a DME attribute
->   * @hba: per adapter instance
-> diff --git a/drivers/ufs/host/ufs-hisi.c b/drivers/ufs/host/ufs-hisi.c
-> index bd223bda1ce2..b84075dfe00d 100644
-> --- a/drivers/ufs/host/ufs-hisi.c
-> +++ b/drivers/ufs/host/ufs-hisi.c
-> @@ -22,50 +22,6 @@
->  #include <ufs/ufshci.h>
->  #include <ufs/ufs_quirks.h>
->
-> -static int ufs_hisi_check_hibern8(struct ufs_hba *hba)
-> -{
-> -	int err = 0;
-> -	u32 tx_fsm_val_0 = 0;
-> -	u32 tx_fsm_val_1 = 0;
-> -	unsigned long timeout = jiffies + msecs_to_jiffies(HBRN8_POLL_TOUT_MS);
-> -
-> -	do {
-> -		err = ufshcd_dme_get(hba, UIC_ARG_MIB_SEL(TX_FSM_STATE, 0),
-> -				      &tx_fsm_val_0);
-> -		err |= ufshcd_dme_get(hba,
-> -		    UIC_ARG_MIB_SEL(TX_FSM_STATE, 1), &tx_fsm_val_1);
-> -		if (err || (tx_fsm_val_0 == TX_STATE_HIBERN8 &&
-> -			tx_fsm_val_1 == TX_STATE_HIBERN8))
-> -			break;
-> -
-> -		/* sleep for max. 200us */
-> -		usleep_range(100, 200);
-> -	} while (time_before(jiffies, timeout));
-> -
-> -	/*
-> -	 * we might have scheduled out for long during polling so
-> -	 * check the state again.
-> -	 */
-> -	if (time_after(jiffies, timeout)) {
-> -		err = ufshcd_dme_get(hba, UIC_ARG_MIB_SEL(TX_FSM_STATE, 0),
-> -				     &tx_fsm_val_0);
-> -		err |= ufshcd_dme_get(hba,
-> -		 UIC_ARG_MIB_SEL(TX_FSM_STATE, 1), &tx_fsm_val_1);
-> -	}
-> -
-> -	if (err) {
-> -		dev_err(hba->dev, "%s: unable to get TX_FSM_STATE, err %d\n",
-> -			__func__, err);
-> -	} else if (tx_fsm_val_0 != TX_STATE_HIBERN8 ||
-> -			 tx_fsm_val_1 != TX_STATE_HIBERN8) {
-> -		err = -1;
-> -		dev_err(hba->dev, "%s: invalid TX_FSM_STATE, lane0 = %d, lane1 = %d\n",
-> -			__func__, tx_fsm_val_0, tx_fsm_val_1);
-> -	}
-> -
-> -	return err;
-> -}
-> -
->  static void ufs_hisi_clk_init(struct ufs_hba *hba)
->  {
->  	struct ufs_hisi_host *host = ufshcd_get_variant(hba);
-> @@ -224,9 +180,7 @@ static int ufs_hisi_link_startup_pre_change(struct ufs_hba *hba)
->
->  	/* Unipro VS_mphy_disable */
->  	ufshcd_dme_set(hba, UIC_ARG_MIB_SEL(0xD0C1, 0x0), 0x0);
-> -	err = ufs_hisi_check_hibern8(hba);
-> -	if (err)
-> -		dev_err(hba->dev, "ufs_hisi_check_hibern8 error\n");
-> +	err = ufshcd_dme_check_tx_hibern8(hba, 2, HBRN8_POLL_TOUT_MS);
->
->  	if (!(host->caps & UFS_HISI_CAP_PHY10nm))
->  		ufshcd_writel(hba, UFS_HCLKDIV_NORMAL_VALUE, UFS_REG_HCLKDIV);
-> diff --git a/drivers/ufs/host/ufs-qcom.c b/drivers/ufs/host/ufs-qcom.c
-> index 1e492dac8d93..815ca82a0878 100644
-> --- a/drivers/ufs/host/ufs-qcom.c
-> +++ b/drivers/ufs/host/ufs-qcom.c
-> @@ -382,46 +382,6 @@ static int ufs_qcom_init_lane_clks(struct ufs_qcom_host *host)
->  	return 0;
->  }
->
-> -static int ufs_qcom_check_hibern8(struct ufs_hba *hba)
-> -{
-> -	int err;
-> -	u32 tx_fsm_val;
-> -	unsigned long timeout = jiffies + msecs_to_jiffies(HBRN8_POLL_TOUT_MS);
-> -
-> -	do {
-> -		err = ufshcd_dme_get(hba,
-> -				UIC_ARG_MIB_SEL(TX_FSM_STATE,
-> -					UIC_ARG_MPHY_TX_GEN_SEL_INDEX(0)),
-> -				&tx_fsm_val);
-> -		if (err || tx_fsm_val == TX_STATE_HIBERN8)
-> -			break;
-> -
-> -		/* sleep for max. 200us */
-> -		usleep_range(100, 200);
-> -	} while (time_before(jiffies, timeout));
-> -
-> -	/*
-> -	 * we might have scheduled out for long during polling so
-> -	 * check the state again.
-> -	 */
-> -	if (time_after(jiffies, timeout))
-> -		err = ufshcd_dme_get(hba,
-> -				UIC_ARG_MIB_SEL(TX_FSM_STATE,
-> -					UIC_ARG_MPHY_TX_GEN_SEL_INDEX(0)),
-> -				&tx_fsm_val);
-> -
-> -	if (err) {
-> -		dev_err(hba->dev, "%s: unable to get TX_FSM_STATE, err %d\n",
-> -				__func__, err);
-> -	} else if (tx_fsm_val != TX_STATE_HIBERN8) {
-> -		err = tx_fsm_val;
-> -		dev_err(hba->dev, "%s: invalid TX_FSM_STATE = %d\n",
-> -				__func__, err);
-> -	}
-> -
-> -	return err;
-> -}
-> -
->  static void ufs_qcom_select_unipro_mode(struct ufs_qcom_host *host)
->  {
->  	ufshcd_rmwl(host->hba, QUNIPRO_SEL, QUNIPRO_SEL, REG_UFS_CFG1);
-> @@ -607,7 +567,7 @@ static int ufs_qcom_hce_enable_notify(struct ufs_hba *hba,
->  		break;
->  	case POST_CHANGE:
->  		/* check if UFS PHY moved from DISABLED to HIBERN8 */
-> -		err = ufs_qcom_check_hibern8(hba);
-> +		err = ufshcd_dme_check_tx_hibern8(hba, 1, HBRN8_POLL_TOUT_MS);
->  		ufs_qcom_enable_hw_clk_gating(hba);
->  		ufs_qcom_ice_enable(host);
->  		ufs_qcom_config_ice_allocator(host);
-> diff --git a/include/ufs/ufshcd.h b/include/ufs/ufshcd.h
-> index dfd302f2dc7c..0d9d0a26eb20 100644
-> --- a/include/ufs/ufshcd.h
-> +++ b/include/ufs/ufshcd.h
-> @@ -1556,6 +1556,9 @@ extern int ufshcd_dme_set_attr(struct ufs_hba *hba, u32 attr_sel,
->  			       u8 attr_set, u32 mib_val, u8 peer);
->  extern int ufshcd_dme_get_attr(struct ufs_hba *hba, u32 attr_sel,
->  			       u32 *mib_val, u8 peer);
-> +extern int ufshcd_dme_check_tx_hibern8(struct ufs_hba *hba,
-> +				       unsigned int num_lanes,
-> +				       unsigned int timeout_ms);
->  extern int ufshcd_change_power_mode(struct ufs_hba *hba,
->  				    struct ufs_pa_layer_attr *pwr_mode,
->  				    enum ufshcd_pmc_policy pmc_policy);
-> --
-> 2.43.0
->
->
