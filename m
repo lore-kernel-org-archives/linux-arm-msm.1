@@ -1,89 +1,122 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wm2-f12.google.com (mail-wm2-f12.google.com [74.125.225.140])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9A95A4E9C1B;
-	Thu, 17 Sep 2026 18:09:59 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AE4283B71D3
+	for <linux-arm-msm@vger.kernel.org>; Thu, 17 Sep 2026 18:13:06 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.225.140
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789668601; cv=none; b=ACFW39c78eXwEnjkcUjGVr0bATdk6N8+rD+tAQoWmqbtmama2tRSb+x9x2gxzZinTcSVuC8S+RmbFpDr/pSVsRGpt8TleA1TuGPbA55o4Y1DItUkWhToZyV9UZPZxrR0kiR3pZP+0ZlpPhXLfNnCMGLhha9HhHFWeya/9KFOydQ=
+	t=1789668788; cv=none; b=mYA1EIICDmLtWV/m6tsdJZfkfsAQPbOkTZ99qYrGDc/Mt9cRV2NRlNHlla2E8xKSqngI8qMvLJzmQAEiiR/DeDnPa1eVjr+kVOFtRehUATqZ31Pc+ku4thJ0UMi3u0tXIjlB5VHNuDN36Lv3EUG6an5FBb4t2rnuPvUVT4xbE0w=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789668601; c=relaxed/simple;
-	bh=oai6U0JbCD4GjPdMag8AoSuR0BOXNS/qIxk4AQoBcA4=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=YDAwNo/w3nFWMZ+WT2I2KwjKODb6FGtVeW0ERsepTvbTUPKCXpmtcGE01jlTTE8rGvVIEOu/SzHrEr4QcL+gj7I33c/Aex+xk5SrACNUBfVdm7KqW74r+o5uKJqUvIEf2HSZkxp8CGMhQHG1jYOKwAM1PDdXagQ/nTmEGYzwVgo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=WbPi5HkV; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1789668788; c=relaxed/simple;
+	bh=rBWaCN814kHmYVV+q8AElI0MqDoPN0IJdHskleXzFrM=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=mQrahi9CG+vKhrv0zTdKHaeLt3D3YZj7Ydm2svd4aSGiwIu4/SZp+mAnL7ZXkwxXPbwwFQq/Ro/4i/Rlt825fusMzj481iFXm/2rENsfEMWwG6z9lwwx+hrZ/10lTXqr+w+/ky8i6C7m434Ym/WUa02YUwcm89RgecbnhrKJQKA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=cigLMYHA; arc=none smtp.client-ip=74.125.225.140
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="WbPi5HkV"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4F0B51F00893;
-	Thu, 17 Sep 2026 18:09:58 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1789668599;
-	bh=4pYu5PJMwDbiD3YaUZzHgB4wN8SoNcJfUzk9qPUH13c=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=WbPi5HkVF8DSz0T2SCNJanVPF1hO+VUVNvlf7dZN/M+QGQZdaZZ++HiKXIdGawI0K
-	 HoNSeXerN+3x7/q2GZx9A1BCMFtT6htdqJZ48oJSZe5prgnajMVxTbrsV37XDsodIL
-	 nFgOSCtk9xLUnNo9T5jIw7b+hxZrEP2SI7saVA+3Tfuw89Qv7f66r2lozXtG1mM9N5
-	 /wB/fpo4qFySqnM6qYJ3bWJdhbhNrCwJd0ZXHgk1bBgE76Dt0bo4BxnnXXZCXNiwB4
-	 5I+uWXcHsxWWx3DRSbK05yRnPAhe00NkpmwlmO7L2NzHBqZ/zl4oPzq6bUmJ7fh5bU
-	 LcQRf0alicsEw==
-Date: Thu, 17 Sep 2026 23:39:54 +0530
-From: Vinod Koul <vkoul@kernel.org>
-To: Frank Li <Frank.li@oss.nxp.com>
-Cc: Andy Shevchenko <andriy.shevchenko@intel.com>,
-	Nuno =?iso-8859-1?Q?S=E1?= <nuno.sa@analog.com>,
-	linux-kernel@vger.kernel.org, dmaengine@vger.kernel.org,
-	linux-arm-msm@vger.kernel.org,
-	linux-stm32@st-md-mailman.stormreply.com,
-	linux-arm-kernel@lists.infradead.org, linux-iio@vger.kernel.org,
-	linux-sound@vger.kernel.org, linux-spi@vger.kernel.org,
-	Frank Li <Frank.Li@kernel.org>,
-	Lars-Peter Clausen <lars@metafoo.de>,
-	Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>,
-	=?iso-8859-1?Q?Am=E9lie?= Delaunay <amelie.delaunay@foss.st.com>,
-	Maxime Coquelin <mcoquelin.stm32@gmail.com>,
-	Alexandre Torgue <alexandre.torgue@foss.st.com>,
-	Jonathan Cameron <jic23@kernel.org>,
-	David Lechner <dlechner@baylibre.com>,
-	Andy Shevchenko <andy@kernel.org>, Jaroslav Kysela <perex@perex.cz>,
-	Takashi Iwai <tiwai@suse.com>, Mark Brown <broonie@kernel.org>
-Subject: Re: [PATCH v4 01/10] dmaengine: Move enum dma_slave_buswidth to a
- new header
-Message-ID: <aqws8pN2rfS9-dCC@parshuram>
-References: <20260911-dmaengine-support-wider-dma-masks-v4-0-72b8fd4cc78e@analog.com>
- <20260911-dmaengine-support-wider-dma-masks-v4-1-72b8fd4cc78e@analog.com>
- <aqgCQvRw9fns__0d@SMW015318>
- <aqjzvxI4ecoFvRLT@ashevche-desk.local>
- <aqlpoBJJXfZgsMxT@parshuram>
- <aqlwRkNcs_UqKjWs@parshuram>
- <aql6u3T0nnSVr-FC@SMW015318>
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="cigLMYHA"
+Received: by mail-wm2-f12.google.com with SMTP id 5b1f17b1804b1-49e69b9e16aso11491345e9.1
+        for <linux-arm-msm@vger.kernel.org>; Thu, 17 Sep 2026 11:13:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1789668785; x=1790273585; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:mime-version:references
+         :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=rBWaCN814kHmYVV+q8AElI0MqDoPN0IJdHskleXzFrM=;
+        b=cigLMYHAq3HXFTD8YjNTGkS3l4pmA1m6gU26q46GcNXpz7uYr/HnNYk3j18Wq5/BdE
+         ZyNe/1J+9ccrw+0b35rAuakTs7rdPX88fY6CDxGEDU0xof8eNHa26rELlxmvlA4Ztgsq
+         00InF7VnnyYhNLb83btDZnGREbBKK4HyRWvQ8Vi68UMP+YzYEtOlwf87dQ4iANeqXQRD
+         qGq20qiLByDUgH4Czb6Y9qCd2I3ACQiyiQXGfD0c5Kjy1YRmW4dVhfsZzVIUeVtc2THZ
+         75td/qiJXi5b5XyyxrTvGcoo/4cHPBafUOvKnGsKWeYiswhkZaK7foUwD8bG1ooXZcKb
+         zTUw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1789668785; x=1790273585;
+        h=content-transfer-encoding:content-type:mime-version:references
+         :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=rBWaCN814kHmYVV+q8AElI0MqDoPN0IJdHskleXzFrM=;
+        b=r5R9KzW+EnUtiAyxwRftDbVpXSnhrW5uR5iIL+/d9Tdk2ILQ74p/X1tv2FzYkbxG3P
+         uhiNCpkvBbZwCrQwVHhJT9bzwTGTk/uW7fNrL6gTNsYvluiBR7lR7H6dS/OA0RViPFF2
+         jR0z/2WveZb0r3OLYOsGKyNDcHXXHvraC4mNpOL59bVsBr0SrXRfQ2xESWBU6DAKuVCW
+         se/MWa7P1ZxC0wKVHigdK+Mtcp5dw3h8tNSGBUREwzmadp7068JsZILtn8Y4Vn8j4HFp
+         JmP7ATGU0KxErZkvOZjRrRxp9t3y9Ex8upOe70Xu6FLRi+/XNwTTp02YBbKamvwUbPhi
+         zb+w==
+X-Gm-Message-State: AFuF++m7wXZtvEoRdyFhu14UPu662Z79ewP/gtjFiUNmBBKK1FzEQvA+
+	n/IBcQhsUGSZcACHm+j5AIqZO2rM0og78Y3pbIGigNuubYMVSa84726g
+X-Gm-Gg: AYBFou0/v/s4wbDFWwshEu4ck5ktAYCzHGN6jlNJJ14mjDypkKd6tShCEqygJeSOIY3
+	ZsZa3SIOJg4VI2v58bYTo54fWoRZOiRQkC+eoXNG4VTTIM6B/uoiR/YATAxw6guoBfEJU3d/bTl
+	0JHqythAzAvZRufasvCkbk5IYdpCNAkww5zV8kyXxEvw6aV1PeptMU3eVNb7F9vMrbuwpXBI2tJ
+	1ORh8qckh/EgsydXD83Nh9vaR65oISkN0u/IhnY2g5IovdmtgHePqv8EKunQYTK1BKNCKct78Ss
+	g4fqnFR9tp5kZ4kd9AItlJDsYar9jGEbhUPMYWyFCQzevmB8ONTEz2cV1wHfO1wuQUz/Mox27yM
+	S11Tlu1SW4sZJrkbiimpAQwJAY6awJcbR5ZobotN8RhkPhV/HUJo0s3XWk4yMAmXlo1rYrBP2Hh
+	6AAf/QDeZXZ6ZxPt9KsoJlT3ZmqjQvEdnFedR3QkRQqi9GVxJeAhDI5mFpN4UG9z1Sr/U3j5H/Z
+	o77CMlt
+X-Received: by 2002:a05:600c:34c2:b0:49e:6c27:d093 with SMTP id 5b1f17b1804b1-49eb72f7043mr91713485e9.15.1789668784618;
+        Thu, 17 Sep 2026 11:13:04 -0700 (PDT)
+Received: from localhost.localdomain ([94.252.75.113])
+        by smtp.googlemail.com with ESMTPSA id 5b1f17b1804b1-49fc4855b92sm3165935e9.3.2026.09.17.11.13.02
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 17 Sep 2026 11:13:04 -0700 (PDT)
+From: Oleg Keri <okerixx@gmail.com>
+To: Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
+	Bjorn Andersson <andersson@kernel.org>,
+	Michael Turquette <mturquette@baylibre.com>,
+	Stephen Boyd <sboyd@kernel.org>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Robert Foss <rfoss@kernel.org>,
+	Todor Tomov <todor.too@gmail.com>,
+	Mauro Carvalho Chehab <mchehab@kernel.org>,
+	Konrad Dybcio <konradybcio@kernel.org>,
+	Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
+	Bryan O'Donoghue <bod@kernel.org>,
+	Loic Poulain <loic.poulain@oss.qualcomm.com>,
+	Vinod Koul <vkoul@kernel.org>,
+	Neil Armstrong <neil.armstrong@linaro.org>,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	Kishon Vijay Abraham I <kishon@kernel.org>,
+	Felipe Balbi <balbi@ti.com>,
+	Manivannan Sadhasivam <mani@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org,
+	linux-clk@vger.kernel.org,
+	devicetree@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	linux-media@vger.kernel.org,
+	linux-phy@lists.infradead.org,
+	Krzysztof Kozlowski <krzk@kernel.org>,
+	Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
+Subject: Re: [PATCH v19 0/5] Add phy_get_by_of_node and devm helper
+Date: Thu, 17 Sep 2026 20:12:54 +0200
+Message-ID: <178966877406.2239.2890857291530516772@gmail.com>
+X-Mailer: git-send-email 2.55.0
+In-Reply-To: <20260917-b4-linux-next-25-03-13-dtsi-x1e80100-camss-v19-0-21ad8a76e941@linaro.org>
+References: <20260917-b4-linux-next-25-03-13-dtsi-x1e80100-camss-v19-0-21ad8a76e941@linaro.org>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <aql6u3T0nnSVr-FC@SMW015318>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On 15-09-26, 12:04, Frank Li wrote:
-> On Tue, Sep 15, 2026 at 09:50:22PM +0530, Vinod Koul wrote:
-> > On 15-09-26, 21:22, Vinod Koul wrote:
+Hi Bryan,
 
-> > > > Traditional naming would be
-> > > > dma/engine/provider.h
-> > > > dma/engine/consumer.h
-> > >
-> > > consumer and provider and good names.. I would retain the full dmaengine
-> > > everywhere please. dma causes confusion already!
-> >
-> > Thinking about it again, drivers/dma/dmaengine.h should be the provider
-> 
-> There some dmaengine code outside drivers/dma directory, like
-> drivers/crypto/ccp/ccp-dmaengine.c
+On Thu, Sep 17, 2026, Bryan O'Donoghue wrote:
+> Add phy_get_by_of_node and devm helper
 
-They chose to be outside, their choice... They need to be updated as
-well to point to ../../dma/dmaengine.h :-)
+For the series:
 
--- 
-~Vinod
+Tested-by: Oleg Keri <okerixx@gmail.com> # Lenovo Yoga Slim 7x Gen 11 (Glymur)
+
+ov08x40 on CSIPHY4 through the standalone CSI2 PHY, two data lanes,
+data-lanes = <1 2> on both the PHY and the CAMSS endpoint, capturing with
+libcamera on next-20260916 with the x1e-csi2-phy v18, Kaanapali v16,
+SM8750 v6 and Nihal's Glymur CAMSS v3 series on top. Streams, including
+after the sensor is unbound and rebound at runtime.
+
+Thanks,
+Oleg
