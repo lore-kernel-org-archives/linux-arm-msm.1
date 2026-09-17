@@ -1,263 +1,157 @@
 Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A7C274B44B3
-	for <linux-arm-msm@vger.kernel.org>; Thu, 17 Sep 2026 15:29:35 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5DBE14E4C3E
+	for <linux-arm-msm@vger.kernel.org>; Thu, 17 Sep 2026 15:30:10 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789658982; cv=none; b=Kux9OOAx1bQbdORcllH4ye4xnNkE1XtyiCTmgvp6E8Ou/ZOqqRjTqqRZxXsUiUe0jx8BKMSIrVAWKHGsEpmCuF37Vzm/Jx2lL+EhBnIBksS1gxbJbMoZozLqGUWeaQMLBuY2CrVsXhrrPARPDWfezkZCfMm9s+UPqGxM9lDkwyg=
+	t=1789659019; cv=none; b=FEdgQZwG8Dt4fD6U2xR2WJsXkz0JuFFlyENOn3dhatySP7fR4Acd8B/ZSBVyJsjKWPc25Cih/oOUR6JLkDVhpQUX4KzhN4U1fAs5Jn3I2HWtTW/iklr5FyPusqV1wfHrv5CzoLUWNtPSU0yvHDwxQEb8L0PcrvGUp87huZhosnA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789658982; c=relaxed/simple;
-	bh=afCLU5fxI03J9D9nLtH4Td2enen0wBmzqGDH5gE8voo=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=kBrYyMuTG0T8FskndShE9XcwgRQUlEiTAapvVd9oRuF2+sY5mSAuUmoHONL+KSOqxAOx5xoxNUhU+lGR8l6mHo5yDpUeI8tVR7DVN0uHAO1i+aGk8GoGU9SlBk2C3FGZJvYp8ICU6LCau3qqfmtc2wscpJszIa78ackQrcm/O3c=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=jnpRfSJ4; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=aZCPAdat; arc=none smtp.client-ip=205.220.180.131
+	s=arc-20240116; t=1789659019; c=relaxed/simple;
+	bh=EWDDxvLh/ajUORqgSDl2rZ8ViAb2Wg2kGEU9j2QUOOU=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=WaSn4bF3wSTHNrd8ENlFaKCntvAH65Dn+ENOtuMg2v0iMGg3/W0JVZaXZzzqUHreqKcQ007W5WWpyUmEeRcCTsfZ3y6XMhAWJsOCL2BCtvhcvmgSdobePiNxPSCHfwDDFBYig6jsOh5niumNei5R2eTsmQqFTBEtvPVx/QzuqfQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=PDsyaP0e; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=GQMYTvPL; arc=none smtp.client-ip=205.220.180.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="jnpRfSJ4";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="aZCPAdat"
-Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68HDiWkm2265088
-	for <linux-arm-msm@vger.kernel.org>; Thu, 17 Sep 2026 15:29:31 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="PDsyaP0e";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="GQMYTvPL"
+Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68HDjDW21175976
+	for <linux-arm-msm@vger.kernel.org>; Thu, 17 Sep 2026 15:30:07 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	8OUOF3KkA/tkt+9vyyn8ikxcgLqvceoLwvPfCfImShY=; b=jnpRfSJ4rjCbNWS0
-	xiiILtPf06hva7AOteF0kErGZPSFvTM1Rr0T6xNf+48zRaxmx+mz67Z0W4Oty8he
-	RV8Di2Bno/stUGAU2ulD0ECZ/OkEXnhj6c2/6Q9ADh3CYU/IMfgrU+8r1yHwZMqa
-	NwVd6xUsxpxV3IJXI0cNNZ7OpWj6bW2SCqyxIhmf6/ENZIkWZtv1nmo/g1FLu4J6
-	sWon1lqcxblCkr5XNIXyAgtn90Yj2e30wJsDqnaRNYJ+LAQgfBBhaR4o0ve3IHNH
-	uqGFGcsv0zajuDmDmqvOwk8gyfuRyC5UmZX8lfnSvEp/riMFO3mjk/FHkXrHg2G/
-	2wZbpA==
-Received: from mail-pj1-f69.google.com (mail-pj1-f69.google.com [209.85.216.69])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4grfpph1a5-1
+	cc:content-type:date:from:in-reply-to:message-id:mime-version
+	:references:subject:to; s=qcppdkim1; bh=ri1E8u+BKFp8OWjyXvh+uMJ4
+	co8edga6jii1ZtQDCCU=; b=PDsyaP0eFQq0gY9bRGD1dBPRKI+Mti6Fa6Mjx9P4
+	/khZUBYJ0eBzHeRoEwoD2BIAv1R1UYKV0L0YH6aTLI9OE8jA57mYaHLv3jelQ66Q
+	2vN1baVoBfaUxZfXQRxJ/MWfg9+zKIqYi32F18ewUXW3XhPsDW8hgyuXpm/npdUE
+	eh0kwUF0zhAS1AO10UaJngpkjcqIA6sQmOMEqu1EZHf5tTw+UyGNX1M69T6FYH3D
+	uwGIaJSJ0XTUBI2Zmu0T4rdQOuc6mYtXsJoD+KwwihlcaBfW0YWoUGIcpm7N5LLS
+	pvypELLWoJjYJxxdP5Alw0GmTnYKP+QNFEMG4ZsO5NFlPg==
+Received: from mail-qk1-f200.google.com (mail-qk1-f200.google.com [209.85.222.200])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4grca0sykv-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Thu, 17 Sep 2026 15:29:31 +0000 (GMT)
-Received: by mail-pj1-f69.google.com with SMTP id 98e67ed59e1d1-39533bb224cso1719996a91.3
-        for <linux-arm-msm@vger.kernel.org>; Thu, 17 Sep 2026 08:29:31 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 17 Sep 2026 15:30:07 +0000 (GMT)
+Received: by mail-qk1-f200.google.com with SMTP id af79cd13be357-93a05d645acso219933785a.2
+        for <linux-arm-msm@vger.kernel.org>; Thu, 17 Sep 2026 08:30:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1789658970; x=1790263770; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from:references
-         :cc:to:content-language:subject:user-agent:mime-version:date
-         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=8OUOF3KkA/tkt+9vyyn8ikxcgLqvceoLwvPfCfImShY=;
-        b=aZCPAdata71evZclEsf91hqJnw14MYjX7UfdSECnr3Dmgg5u+UJFix2ZNZNtx6MYpK
-         8RC1IdfaAwNNMz+cDtbcIUbMyvLhM791kHRDMS5Dik4nLB6t1FQFVkgPx8YyUhBWVdMx
-         ioGMGnscUrNJJYYLezglMGfwn6uvVJqB8PpNoHOiM8pSNJv21rrogXbAJSzGe11SPqtX
-         ha9xDxxSdICXmnYlrDAuE+EfhzHts/DvzRVafGwLWoygupo5GBpvBgnSjQOv9M34yesJ
-         lXUXYxl3SPJSYXrtebr75s3g1dK5TA7Ob9JD1fECFsVyQGBZWgttblLHKVZs1/f6h5eQ
-         V6Aw==
+        d=oss.qualcomm.com; s=google; t=1789659007; x=1790263807; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=ri1E8u+BKFp8OWjyXvh+uMJ4co8edga6jii1ZtQDCCU=;
+        b=GQMYTvPLu1a4ZBbD7WwWpX/WSxaTjHibIB/F3M+xX412BoDUspXI60DoS0vfAFphk2
+         tqdQG5gQyQOk/XmDBeyiJ0xNP2bUgtA53iYb9Mckodn8ly184M02OLcLsIz+TMYP8p/2
+         DoZpDeSgllJhlACJ1dcQdul79F/Tmxrma63ld8omWj8wyImMw5eYKi7hoAQEPFtC5ijG
+         3oD2TDV6AQjh9QcOgzMxIK92DMR/ZqmJQSTb8l4u+c4eR8kE8t0VzqkLGswXVnpY5Z98
+         RNKaHO8bO34W7EIxll3NnqCAeXWOBkK6vc5Jx87pWltlQZiiJqVzXkgDnswrpYURrxaj
+         H2iQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1789658970; x=1790263770;
-        h=content-transfer-encoding:content-type:in-reply-to:from:references
-         :cc:to:content-language:subject:user-agent:mime-version:date
-         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=8OUOF3KkA/tkt+9vyyn8ikxcgLqvceoLwvPfCfImShY=;
-        b=B68/p7kbRLP8VlPfxrSjQdC1/z0TGud/WYcl8CHLYpfMi1utq1C6JNZaKGLNn5vp+s
-         0tqNaQMYU6JPKpJocnz6X1mffIAAqoqpv0pbxUDgdBmbgeFJ5sIVNHy8A//gyMxKMBFF
-         SKFjxEmID3hy7cQwBBgH0lyJQwhJwo4GW48HD+cgs7hLb1aoUvygfjl77eumhSIw0X/T
-         85wmDbp0NUrajq2BtnlQasLRZcFoaMislmH3rQZqCAa3XDU25MQq07aYlk1PPha+T/2V
-         hrEcgGjQX25ZeK9VhOtL89cC3ohLbuaE3zRvyGGijGwnSGOfAN4XaizZDFyhy/Hzp8Bq
-         L5CA==
-X-Forwarded-Encrypted: i=1; AKwUvBzIZCtW9tVOqHrQWRRCL2c8WIDyJf6/7rw8JXU5A8j052owr3F6L734AY3wfyorPa/h6KPfVGvXnt3uciWD@vger.kernel.org
-X-Gm-Message-State: AFuF++loOtZGG+u16GikrQx6VKtjoLeO/lq1hgHK/gDnOjHt4vx8uVpS
-	BPokQfKveLVcM7nvzHFCMs+ft7IzD/tS/3KJsP2mFH5xnbCBc/4pKeHvNssNUMZMTjveNGMcs2r
-	N5d8JSylyCsyf8EZN8yleOpX+vQ5q4N55RrDRggbsCseqv+nWmbKurkalye7lRRpIZIDw
-X-Gm-Gg: AYBFou28vtEvB5LU9JFzgapBkOfjwQTdcls5x97/xxB81oICL7/pfnQcslDOQyd4Noj
-	U1AI9TLFRGOF4WwNpjHt09kuzkdhRG2iOPpuAKu4We5qGS09+94KEarHP6+EYdSQU5IEO8u6/zG
-	/xemSgxAotnD5mmp6fhYvtCZEiLachjWuBki423qrLPtwdP3SmiHRYLqAm9R7G88Jf5xDSsPSat
-	/kyl/92CNzp5P+1i9g7OHadP/LJVKELGx6ODwjV4oaeGA8xq66iIR1fftZgNrawbayDgbt/cEM1
-	Mqt6YqW3GDGxqKTZzPpDLvluKJliRcn2qNU+ZY1ATenjwEGLqay1eLc6SfufmHMymlFZpdyL8HI
-	hN6bAMboGRKc9m4BC3Mgl0c/LR9iQ5q6j
-X-Received: by 2002:a17:90b:2744:b0:37d:f983:7b5 with SMTP id 98e67ed59e1d1-39e1e30240amr14285370a91.9.1789658970023;
-        Thu, 17 Sep 2026 08:29:30 -0700 (PDT)
-X-Received: by 2002:a17:90b:2744:b0:37d:f983:7b5 with SMTP id 98e67ed59e1d1-39e1e30240amr14285316a91.9.1789658969424;
-        Thu, 17 Sep 2026 08:29:29 -0700 (PDT)
-Received: from [10.171.1.18] ([106.221.191.153])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-33bf5ac978esm15988035eec.18.2026.09.17.08.29.24
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 17 Sep 2026 08:29:28 -0700 (PDT)
-Message-ID: <70a79153-5acc-7826-b08b-6fd869ec34a3@oss.qualcomm.com>
-Date: Thu, 17 Sep 2026 20:59:22 +0530
+        d=1e100.net; s=20260707; t=1789659007; x=1790263807;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=ri1E8u+BKFp8OWjyXvh+uMJ4co8edga6jii1ZtQDCCU=;
+        b=mY+Ap6YVC2xhbTlqF20cJqzEXfMdnge60mIP6stI09S4B9o7fYuALlp9FA6TSMAmUs
+         +dtZ5FND4VyQFfmBiGy4fMTrJcPCF+5BPJoEnXerhZ3JWIqvOD1T/dGX930IZVsR02BS
+         FSudrz9elih0vQtP7UvN5eiflPYv3/CH2q8Jk9PCT7WTLj9KKvzuoKBxqYZ1l6rfKC42
+         0j3ZSXaetEbARX4PK8EGWa0/seZnTlsbhf52r2bAz++Qb4vmPHhrzJ9HwXriIBwMkw5F
+         Qqy0Ejd/u70UuqDAzMGWYc4/VCzxDyk4HJDGXrMZIFyvR0oKRY7TGMTOvtoEbIAbu1SI
+         xw4Q==
+X-Forwarded-Encrypted: i=1; AKwUvBzTp5z1wt24mMPraLTLTcbZhdV4BsfjP9skm70ETndwK9e0dMz3ylWpEUKClnaLZh5sMCopN0B2LjD6CRlL@vger.kernel.org
+X-Gm-Message-State: AFuF++mfwDh2N2XYHu9mfcog4q4hnEolUNDqmzNFoMEv7LwVYw7HumkH
+	XJCCXP7AmlX7jRmIdi8KBlwgp//CUBeeMtYFCeRoQeb/X1JCue4aAF5GwHNUCoxMhhqHVrLWHci
+	wtXqwSb+0tLSBXeCt5bIofd1Yona9gAr9OVM2haItU4F8+eQvOcyxSZZkVBLr7a3ivtRq
+X-Gm-Gg: AYBFou2817+0LY9R9lCN1RJxV+IUNgNoUu5nU88K0g+cvpJ/r5KRSK319dV7F598qtk
+	zmAKPCtNB5iyCR5I+jdHwNqt3lD6FXeihwfSDt+vG5M1m2ScwieehAgBksEvXUhzzO68mU9b9kR
+	tvmtb92U1208kL4ik5JK9BHSSTe89sBJuE+l/HASkpHZz5B+hpD08UbM6qE9Y5ygybNEZBV6XdT
+	DGT/mj6KpQMapZJ4Wwpu7fyN3wJ55DsS1NGMt54S43nGrWPLe7k/hso8A/z+rDeMXRJqn3h5o0Q
+	DiX1Ayr9ZIvlpjZZq9X8ZgTExDC9G4Fi0qYLGIfwE8o5E9YXwRsYtIC5TpI0+GUIXSbevxJzrpB
+	/1HXpd+F9I3rskQ==
+X-Received: by 2002:a05:620a:172c:b0:939:6de6:9517 with SMTP id af79cd13be357-93bb794e07dmr1288320785a.46.1789659006347;
+        Thu, 17 Sep 2026 08:30:06 -0700 (PDT)
+X-Received: by 2002:a05:620a:172c:b0:939:6de6:9517 with SMTP id af79cd13be357-93bb794e07dmr1288311585a.46.1789659005708;
+        Thu, 17 Sep 2026 08:30:05 -0700 (PDT)
+Received: from oss.qualcomm.com ([86.121.170.232])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-49fbd247809sm141129705e9.11.2026.09.17.08.30.03
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 17 Sep 2026 08:30:04 -0700 (PDT)
+Date: Thu, 17 Sep 2026 18:30:02 +0300
+From: Abel Vesa <abel.vesa@oss.qualcomm.com>
+To: Nihal Kumar Gupta <nihal.gupta@oss.qualcomm.com>
+Cc: Bryan O'Donoghue <bod@kernel.org>,
+        Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
+        Loic Poulain <loic.poulain@oss.qualcomm.com>,
+        Mauro Carvalho Chehab <mchehab@kernel.org>,
+        Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>, Robert Foss <rfoss@kernel.org>,
+        Andi Shyti <andi.shyti@kernel.org>,
+        Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>, Frank Li <Frank.Li@nxp.com>,
+        Sascha Hauer <s.hauer@pengutronix.de>,
+        Pengutronix Kernel Team <kernel@pengutronix.de>,
+        Fabio Estevam <festevam@gmail.com>, Abel Vesa <abelvesa@kernel.org>,
+        linux-arm-msm@vger.kernel.org, linux-media@vger.kernel.org,
+        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-i2c@vger.kernel.org, imx@lists.linux.dev,
+        linux-arm-kernel@lists.infradead.org,
+        Suresh Vankadara <quic_svankada@quicinc.com>,
+        Vikram Sharma <vikram.sharma@oss.qualcomm.com>
+Subject: Re: [PATCH v8 5/5] arm64: dts: qcom: shikra-iqs-evk-imx577-camera:
+ Add DT overlay for Shikra
+Message-ID: <ok2efl2jwkpm4etywz2w256gozewohaznorhhb6b3zed5ktr6f@vvqtflnebftn>
+References: <20260917-shikra-camss-review-v8-0-9b9596221cfa@oss.qualcomm.com>
+ <20260917-shikra-camss-review-v8-5-9b9596221cfa@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.8.0
-Subject: Re: [PATCH] media: iris: prevent sys_error_handler from restarting
- core during remove
-Content-Language: en-US
-To: Fan Wu <fanwu01@zju.edu.cn>, vikash.garodia@oss.qualcomm.com,
-        dikshita.agarwal@oss.qualcomm.com
-Cc: abhinav.kumar@linux.dev, bod@kernel.org, mchehab@kernel.org,
-        linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-        linux-kernel@vger.kernel.org, stable@vger.kernel.org
-References: <20260705032529.2439425-1-fanwu01@zju.edu.cn>
-From: Vishnu Reddy <busanna.reddy@oss.qualcomm.com>
-In-Reply-To: <20260705032529.2439425-1-fanwu01@zju.edu.cn>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Proofpoint-GUID: M3uDeHa4Z35mEq-fjfsYO624yQxINjRH
-X-Authority-Analysis: v=2.4 cv=YcYodARf c=1 sm=1 tr=0 ts=6aac075b cx=c_pps
- a=vVfyC5vLCtgYJKYeQD43oA==:117 a=BDBwzOTuoAJfZxoRWNzZ7Q==:17
- a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_glEPmIy2e8OvE2BGh3C:22
- a=VwQbUJbxAAAA:8 a=pGLkceISAAAA:8 a=JVhh-pDQcx9uSaxsvHEA:9 a=QEXdDO2ut3YA:10
- a=rl5im9kqc5Lf4LNbBjHf:22
-X-Proofpoint-ORIG-GUID: M3uDeHa4Z35mEq-fjfsYO624yQxINjRH
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTE3MDIyMCBTYWx0ZWRfX4nIcsrVpa0nG
- ntTavY24Z586FLFiG/4QWY/DC00OgkF0doEdMpPM9+83mz8Nxx0Ake/kVFISKh46YlhwqWkNwDr
- 4rHl0f16dNTC3oMhGh17FYKUcDjDNFck2gEDuKRjJXY5UO2ezhrlR7nXI5QOwbzyfIuC8vz8bgz
- 13ik4ecO4u3S55yUCHqpWtCvCOnsUzmly+870E2wf/Wf+3Rf1k8ra8/SgoV6w+EpOry3KAaX9zE
- KW2+EJyyKusdN+xjNrQ40Lz7ttVPp5FvUNsDYW04WNbzKfPllf1OMS2A/aD9M+AZJ24wLx/F+QR
- 4TVRFRRRWO+y7SbUFukVnuv0Fdi6NYEsq/FyhQYrQm9NycGltQDrVCsRcjjgyuZUXRyWoG/Zg8i
- uN5ZZ3pTuZ3k3ERYMtxvyHCEb4EjYUlXu/GhBkV2/k0AJ/1AjkokcWs77nXsPOLRvPYgoRVh1sC
- vJ18hAq8AbCIzkJQJUA==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTE3MDIyMCBTYWx0ZWRfX88vVJzAFlbcp
- 9IT5CwYalaE3Jjvl56fFp/0VTB9i143MmBnDLzvfpF1p3g2iV49uNpxoYmLpwDj/k7LeAczuvqr
- HbTVsRVMO9qTDRjShCzYPHyjb7gBsAw=
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260917-shikra-camss-review-v8-5-9b9596221cfa@oss.qualcomm.com>
+X-Proofpoint-ORIG-GUID: -E8TeTFUZL7bj5tGZ0t_fxPO8EmnRvAv
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTE3MDIyMCBTYWx0ZWRfX2v3IgXvWOeRb
+ sS05ebRAT0pH6BXLkZKxAlQzNRWQzyunG/+YomDQP8GPFz1bzjuhdk4YO/isi8dEY6PiiOHrnhd
+ WvxFKw4u3r5rb9bCqQH2lDvNKG7O7Oc=
+X-Proofpoint-GUID: -E8TeTFUZL7bj5tGZ0t_fxPO8EmnRvAv
+X-Authority-Analysis: v=2.4 cv=dOQzC+Zb c=1 sm=1 tr=0 ts=6aac077f cx=c_pps
+ a=hnmNkyzTK/kJ09Xio7VxxA==:117 a=po8fGBi+ks8MzcVQGuqtFQ==:17
+ a=kj9zAlcOel0A:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22
+ a=KKAkSRfTAAAA:8 a=EUspDBNiAAAA:8 a=XE-wypd_VeY0GsksmEIA:9 a=CjuIK1q_8ugA:10
+ a=PEH46H7Ffwr30OY-TuGO:22 a=cvBusfyB2V15izCimMoJ:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTE3MDIyMCBTYWx0ZWRfXyvnQMgq7T5Sw
+ fUISK4NJvzPXQxoYOGy+bfm5uoPAE7dzGv0qRtmcf8d9WwTGrKiYgf4tFcgvrhrTr1SCsEEBySk
+ CZWvpVoNnXTXC60tonPiPjPQNeIPrrlAja0vEXyctHiYMEMKZzZwIrmmyFYFQBhJbcKdu/YuvC4
+ fHqzS+RFHwmZ16j94WNUuvv89R8hguh60ZRThFbyFefPH4ZjM1kQ7BPbr2BMKMkRzUTQIBzXfN+
+ IyN1xhC1NSLhhF0oP+jjA5YkrpOUXRlJEFHubigbTHq4i7C4FQErBppQnxv/OaHroR/cVae3m4+
+ UEI92O0YzIoztVBkEq8kKhvKZZ746WsrqejBSxfu4Q9J+7kloCHVvc36Aiy9IXlGzOPdcLbDdaD
+ tvEzqtBsTbAmSu3DNsC8Ma21ZhAgtj61oNeJ4Y6QZTCl71POogNH6IW6iwhqR57AZE3rZz0TA8O
+ CsBvF4gsq98aqmw9/5Q==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-09-17_03,2026-09-16_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- adultscore=0 impostorscore=0 spamscore=0 suspectscore=0 phishscore=0
- clxscore=1015 bulkscore=0 priorityscore=1501 lowpriorityscore=0
- malwarescore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2609040000
- definitions=main-2609170220
+ bulkscore=0 suspectscore=0 malwarescore=0 priorityscore=1501 phishscore=0
+ spamscore=0 lowpriorityscore=0 clxscore=1015 impostorscore=0 adultscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609170220
 
+On 26-09-17 17:11:04, Nihal Kumar Gupta wrote:
+> Shikra IQS is an industrial-grade variant using PM8150 PMIC, requiring
+> different CSIPHY and sensor supply rails compared to the retail boards
+> (CQM and CQS) which use PM4125.
+> 
+> Add a dedicated overlay for optional IMX577 integration via CSIPHY1.
+> 
+> Reviewed-by: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
+> Reviewed-by: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>
+> Signed-off-by: Nihal Kumar Gupta <nihal.gupta@oss.qualcomm.com>
 
-On 7/5/2026 8:55 AM, Fan Wu wrote:
-> iris_remove() does not cancel the sys_error_handler delayed work, which is
-> armed from the HFI response path on system errors. The handler calls
-> iris_core_deinit() followed by iris_core_init(), so a pending handler can
-> restart the core after iris_remove() has started tearing it down.
->
-> Set an unregistering flag under the core mutex and make
-> iris_core_init() refuse to re-initialize the core once removal has begun.
-> Check the same flag while holding the core mutex in the HFI response
-> handlers before arming the delayed work, so a system-error interrupt
-> cannot queue new work after removal starts.
->
-> Cancel any delayed work that was queued before the flag was set before
-> destroying the core mutex.
->
-> Fixes: fb583a214337 ("media: iris: introduce host firmware interface with necessary hooks")
-> Cc: stable@vger.kernel.org
-> Signed-off-by: Fan Wu <fanwu01@zju.edu.cn>
-> ---
->  drivers/media/platform/qcom/iris/iris_core.c           |  5 +++++
->  drivers/media/platform/qcom/iris/iris_core.h           |  4 ++++
->  .../media/platform/qcom/iris/iris_hfi_gen1_response.c  |  5 +++--
->  .../media/platform/qcom/iris/iris_hfi_gen2_response.c  |  5 +++--
->  drivers/media/platform/qcom/iris/iris_probe.c          | 10 ++++++++++
->  5 files changed, 25 insertions(+), 4 deletions(-)
->
-> diff --git a/drivers/media/platform/qcom/iris/iris_core.c b/drivers/media/platform/qcom/iris/iris_core.c
-> index 52bf56e517f9..b843ab0d484c 100644
-> --- a/drivers/media/platform/qcom/iris/iris_core.c
-> +++ b/drivers/media/platform/qcom/iris/iris_core.c
-> @@ -48,6 +48,11 @@ int iris_core_init(struct iris_core *core)
->  	int ret;
->  
->  	mutex_lock(&core->lock);
-> +	if (core->unregistering) {
-> +		ret = -EINVAL;
-> +		goto exit;
-> +	}
-> +
->  	if (core->state == IRIS_CORE_INIT) {
->  		ret = 0;
->  		goto exit;
-> diff --git a/drivers/media/platform/qcom/iris/iris_core.h b/drivers/media/platform/qcom/iris/iris_core.h
-> index 24da60448cf2..a52d2a1f07c4 100644
-> --- a/drivers/media/platform/qcom/iris/iris_core.h
-> +++ b/drivers/media/platform/qcom/iris/iris_core.h
-> @@ -74,6 +74,9 @@ struct qcom_ubwc_cfg_data;
->   * @core_init_done: structure of signal completion for system response
->   * @intr_status: interrupt status
->   * @sys_error_handler: a delayed work for handling system fatal error
-> + * @unregistering: set under @lock in iris_remove() to block core re-init
-> + *	and sys_error re-arming; checked under @lock in iris_core_init() and
-> + *	the HFI system-error handlers
->   * @instances: a list_head of all instances
->   * @inst_fw_caps_dec: an array of supported instance capabilities by decoder
->   * @inst_fw_caps_enc: an array of supported instance capabilities by encoder
-> @@ -119,6 +122,7 @@ struct iris_core {
->  	struct completion			core_init_done;
->  	u32					intr_status;
->  	struct delayed_work			sys_error_handler;
-> +	bool					unregistering;
->  	struct list_head			instances;
->  	/* encoder and decoder have overlapping caps, so two different arrays are required */
->  	struct platform_inst_fw_cap		inst_fw_caps_dec[INST_FW_CAP_MAX];
-> diff --git a/drivers/media/platform/qcom/iris/iris_hfi_gen1_response.c b/drivers/media/platform/qcom/iris/iris_hfi_gen1_response.c
-> index bfd7495bf44f..c9100112d07b 100644
-> --- a/drivers/media/platform/qcom/iris/iris_hfi_gen1_response.c
-> +++ b/drivers/media/platform/qcom/iris/iris_hfi_gen1_response.c
-> @@ -230,9 +230,10 @@ iris_hfi_gen1_sys_event_notify(struct iris_core *core, void *packet)
->  	mutex_lock(&core->lock);
->  	list_for_each_entry(instance, &core->instances, list)
->  		iris_inst_change_state(instance, IRIS_INST_ERROR);
-> +	if (!core->unregistering)
-> +		schedule_delayed_work(&core->sys_error_handler,
-> +				      msecs_to_jiffies(10));
->  	mutex_unlock(&core->lock);
-> -
-> -	schedule_delayed_work(&core->sys_error_handler, msecs_to_jiffies(10));
->  }
->  
->  static void
-> diff --git a/drivers/media/platform/qcom/iris/iris_hfi_gen2_response.c b/drivers/media/platform/qcom/iris/iris_hfi_gen2_response.c
-> index 25162ae71357..7f0c121866f2 100644
-> --- a/drivers/media/platform/qcom/iris/iris_hfi_gen2_response.c
-> +++ b/drivers/media/platform/qcom/iris/iris_hfi_gen2_response.c
-> @@ -285,10 +285,11 @@ static int iris_hfi_gen2_handle_system_error(struct iris_core *core,
->  	mutex_lock(&core->lock);
->  	list_for_each_entry(instance, &core->instances, list)
->  		iris_inst_change_state(instance, IRIS_INST_ERROR);
-> +	if (!core->unregistering)
-> +		schedule_delayed_work(&core->sys_error_handler,
-> +				      msecs_to_jiffies(10));
->  	mutex_unlock(&core->lock);
->  
-> -	schedule_delayed_work(&core->sys_error_handler, msecs_to_jiffies(10));
-> -
->  	return 0;
->  }
->  
-> diff --git a/drivers/media/platform/qcom/iris/iris_probe.c b/drivers/media/platform/qcom/iris/iris_probe.c
-> index c2dcb50a2782..c8553bc7619f 100644
-> --- a/drivers/media/platform/qcom/iris/iris_probe.c
-> +++ b/drivers/media/platform/qcom/iris/iris_probe.c
-> @@ -200,7 +200,17 @@ static void iris_remove(struct platform_device *pdev)
->  	if (!core)
->  		return;
->  
-> +	/*
-> +	 * Prevent the system-error work from re-initializing the core once
-> +	 * teardown begins.  Then drain any work that was queued before the
-> +	 * flag was set, before destroying the mutex used by the work function.
-> +	 */
-> +	mutex_lock(&core->lock);
-> +	core->unregistering = true;
-> +	mutex_unlock(&core->lock);
-> +
-
-Calling cancel_delayed_work_sync() before iris_core_deinit() is sufficient. It
-already cancels any pending work and waits for a running handler to complete,
-so the unregistering flag and related checks are unnecessary.
-
-The patch below is sufficient to address this issue:
-https://lore.kernel.org/linux-media/20260604054708.42426-1-dennylin0707@gmail.com
-
->  	iris_core_deinit(core);
-> +	cancel_delayed_work_sync(&core->sys_error_handler);
->  
->  	video_unregister_device(core->vdev_dec);
->  	video_unregister_device(core->vdev_enc);
+Reviewed-by: Abel Vesa <abel.vesa@oss.qualcomm.com>
