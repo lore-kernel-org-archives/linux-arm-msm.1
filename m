@@ -1,215 +1,122 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wm2-f12.google.com (mail-wm2-f12.google.com [74.125.225.140])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B592126F2A0
-	for <linux-arm-msm@vger.kernel.org>; Thu, 17 Sep 2026 12:26:16 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BA70C4F55DA
+	for <linux-arm-msm@vger.kernel.org>; Thu, 17 Sep 2026 12:29:43 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.225.140
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789648013; cv=none; b=uDrFYT9zaXUZLHJJrn8tJlnRbSvhodF/l0Us7oq5YjTIxXuh0CjA2YH5HAdtDqrBIjpq1p+WoHinHpOcVQHFFBulgttTxAOU52jHbrhMteWmuKF6JPUtju4Fq+C8gZ7nilLdzJBogDK2w1xnEqXI5puTbA6gO2gWw4Ekf7T3kaA=
+	t=1789648195; cv=none; b=FvB2/Rk6d9t4i5Sb0GtiODYHPFzvXbpcnorNvi09gnJ/ccnvYNga+ZRp8N5zu7Akh9Jn1+dQQzF/Ka0H39SgZpp0BMLJ09HLGzmTRUwl6SYEtJNaO02TlY+MALwZz9Av4NSJWvLwsMLl13QBDz2PGYzRKB0ZMheLKedeldo2DO0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789648013; c=relaxed/simple;
-	bh=GifRTCwRpzqsop0m2POLFnGoYXAHL5ktB2gtfA2jizw=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=YToS97tTdW5MDT9jJqV9eYE8XASYicCEhwT0GE6EOM8jBQpOHb52xTZR61uoJ4560YuP60NYkKAtCozqWlayidqsGV2/lOe+9jNIbo8e4aNCCD1pBuP8frw9Ms+JvcUJIDvf0mzoDHYLz0ses+5uCLVnWiQKlR2xT8mZSjAXAkE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=RUbFLd/6; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=DnMqou35; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1789648195; c=relaxed/simple;
+	bh=NiBLOa+Ivz/MGMdtQtUORvBhVtPqCwg0j5rxwwVjFZI=;
+	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=iNfGfrbauQw59tNE3aocNjlxYO4ZokSDijqpMpHDgecQARb0ES/wQrwoTIHmGTXJefm3v+LIk/6sppFMBbhHAP2b6A5ReB6OaGUx99tQ22qS3VDjB2/pVTPmCMfPFsgJeXxTCZEH6YBKHWX0dJz2kFp7XwdEFZdpVXFkguddqL4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=gU+5HCb6; arc=none smtp.client-ip=74.125.225.140
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="RUbFLd/6";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="DnMqou35"
-Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68H9ZSxl2410420
-	for <linux-arm-msm@vger.kernel.org>; Thu, 17 Sep 2026 12:26:12 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	yUOy6GAph6O2ETb9t6iFoYYUzaFg/6VwQX0uCN/yRhs=; b=RUbFLd/6nS1jxJt/
-	cNJ5rAEOajz3HE9RghLVJMo7165H3KbuVytkoPFmvRJkyKHj9wDrDEkFvxEKKnrh
-	xCwKIO+H1EUkkebSEWIp+miDgTPuHNzojoL0Qzxin56PkZJRXFhCRluiMJ5MzqcR
-	iaxX37iAnFJn6tJNZ3/2/ky4P2VH0cKBH68ntvjMOusPoZ9+3PC8oMI6lBZvkOPM
-	+qBBjFwH3ipSj8TH1mUvPuBC+qsK5swtbjHS5I+CtLGFvi9Ek+PhoH8Na7dprkem
-	CeobcV7GWa31rgGPLt/q/dXquNSC/IAF6+7ZfnPeDftASJkl1bHKAHMbDFEbmVnU
-	r9fiWA==
-Received: from mail-pg1-f198.google.com (mail-pg1-f198.google.com [209.85.215.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4grdd6gqu0-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Thu, 17 Sep 2026 12:26:11 +0000 (GMT)
-Received: by mail-pg1-f198.google.com with SMTP id 41be03b00d2f7-cc1ca15334cso1020098a12.1
-        for <linux-arm-msm@vger.kernel.org>; Thu, 17 Sep 2026 05:26:11 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="gU+5HCb6"
+Received: by mail-wm2-f12.google.com with SMTP id 5b1f17b1804b1-49b912d37b5so4893665e9.2
+        for <linux-arm-msm@vger.kernel.org>; Thu, 17 Sep 2026 05:29:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1789647971; x=1790252771; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=yUOy6GAph6O2ETb9t6iFoYYUzaFg/6VwQX0uCN/yRhs=;
-        b=DnMqou35zLrTaBocnFR+3aj4KMExiH5CiAvUQ19C4k9FQIDqiACeV1pXdXID+dY/ZZ
-         vYo62VqwgwoHQ9kg7AB4l3oDxG4CKzBzMvVafPwpJXMfRhuskTM6mAH6m2XoDuAxLG7F
-         vx4JYdo+b9X3Tj7sFkrIsaGk0e2NTRJVzkgcNSx3Ayj13sdlCIDDGMfw0tWpJbmFIYjq
-         h2Ly4r+r0N1RrwykSSZm3D94IZw3zJQH4KmZ50M2r9t73wnnuESy21y7RBsQFQxqiRm0
-         2uPHV0TYK0xfJNLp5bi0+bRz+QqFzZkiJEofTvUvcSCiGhJFfvPp/mS+IsvQWXelmQZR
-         ZJtA==
+        d=gmail.com; s=20251104; t=1789648180; x=1790252980; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:mime-version:references
+         :in-reply-to:message-id:subject:cc:to:from:date:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=Dtz+Uqi8FvhezfQGwgUreP+CufNocr9p+NqbDN0Xcok=;
+        b=gU+5HCb6NEhmBQLVaLIqnXzYCbuW3y+9zP3j/sbrylZD7lHYyFw9pFNkQiORNKn2+9
+         ecpocjM18AVXqhmb2SxpKUeXm8j+Y5YY0eqe95Ju9PSzoqQDNVvagBBBRiHmAyaNxoSO
+         yrF2knA4eFqyBkfUVMqfIAaC170alJV/Ke3NfGe5vcT8LsMUz1AkGiyw4nqOt58DrBeH
+         edFMUx8EXzNK34fToowfRsGPhAcUCtwcD78tvPUV2sxZL80o7IO0qH+1j5wD8x1fouxk
+         3I6nNpgWk3sZfc3RW+iF7VrURE/zt9+KM6ybjY5XT/davL5nsM4B5Uuztt8JxBvsRJbA
+         86GQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1789647971; x=1790252771;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:x-gm-gg
+        d=1e100.net; s=20260707; t=1789648180; x=1790252980;
+        h=content-transfer-encoding:content-type:mime-version:references
+         :in-reply-to:message-id:subject:cc:to:from:date:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=yUOy6GAph6O2ETb9t6iFoYYUzaFg/6VwQX0uCN/yRhs=;
-        b=jcKWiqAdOCytc0BxHOuwr64r04ed2D68nh1u4FIlH+PNmTyou8FFBLDDvIY+CXuMix
-         jHCv6gVHJihZQFZ8hwLLArjJXNsJhqspn/DqBnsZ5iKC6IVw/6msxIgvTTD1lmyFUL2h
-         XA8Nm03WyVw80LebvWBUYIHUPx4OWFnb/QoTtoRFGtiSBZbj1nFNNj1nWfey9m4LeHk7
-         lxarx0+fqNhGgLEzXi9thtDZlSrxCF8UpGdUF2phF1wIgiJayNIso16raycFzdo2dfzq
-         nS7Q5HP+WEr8bJZQcg5wAtuour7Fg/oOZvMbxbsq6YQdhVSwk7Tn55S0/Rxb1qxVg7p0
-         CjuQ==
-X-Gm-Message-State: AFuF++llV6Wb+aq+8OcDDJI/SKCpzrm/MJY8tDbR29PU6PjWCuPB6D+G
-	6X8IjiPFA/iI1y11jOQrsR0AUk8KUDu18GJVe/EpyVu27T7Z+2YFdRUzNZXQCbdB7tTpmaWCMhD
-	3cgCAOU/8RvBL4gh2MuwAJCT9zMsa5fn3BrzDq29D0DtdV6M7t1WQjkZ43+HuUSEHxOy9
-X-Gm-Gg: AYBFou1JvAV2qRCWnA8QG7xL3OElHDz+kwVT6Iv5FR/QUF8+mNRRa2e7ze8aiOs9aic
-	awLbG+NSW/yqEP3H1VMqFfmg7dxtfI+UI0sfKX/N2Uov0mGG33+E0qhKZDNk9jIJc3ai8gd2zGn
-	8eEm006b/8TZ91iULMyYyCBqrtEQND8gmhhglyjns1Feijp0LDIo3/+KDQECf3av+nV9+AU4DDn
-	N3WNIhjgBHLx17rdr+Xw31RsGHazHtPwagCNWWisozlzy91FYtLPKKWIhKLvE+CiRbxDnq2Lgdp
-	mPeQUmjAAt/fE5VX1Ni/y1/o5pQ54qcMyBJS3eYOWAQD+iUPaA6dUBvzxXqUsFbCh4WMatNGfKP
-	FdxG76Wlap/GXvAEg4TUzzPqXsOvfj2sWi/o=
-X-Received: by 2002:a05:6a21:4a98:b0:3dd:5831:ef5c with SMTP id adf61e73a8af0-3dd5f5af371mr17005684637.17.1789647971294;
-        Thu, 17 Sep 2026 05:26:11 -0700 (PDT)
-X-Received: by 2002:a05:6a21:4a98:b0:3dd:5831:ef5c with SMTP id adf61e73a8af0-3dd5f5af371mr17005640637.17.1789647970908;
-        Thu, 17 Sep 2026 05:26:10 -0700 (PDT)
-Received: from hu-krichai-hyd.qualcomm.com ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-33bf5a6a175sm16380968eec.9.2026.09.17.05.26.07
+        bh=Dtz+Uqi8FvhezfQGwgUreP+CufNocr9p+NqbDN0Xcok=;
+        b=rSexr3C1jyRiA+9jCXvjMEREJ9pqwaWsdg1ksD9WuGtFpSpsjwR36J7ZLVA3ZkQaxY
+         51DXKabPfmPHyVuYIrgf7cvJzrUwVpsJjbJCMtsKW4K2VvtnqGhy+8YtgVJUbD9nAbKU
+         9CCrGEsM1ZDikGVshAZ/AsltnZFValm7oyd3OwyDgy2M/1tsljLD0v/8CNx1OY4KkMtu
+         wWno7DynsIoz9DrSW4yLcvV82dCOp8JTDL3KHYomXyzHtYmWeEPdXnKDUmsgNkBx4ZOW
+         vkfp+sbZcfXadZxNVunT6u+hiYlC9aOv4XzsqxXyCT2slXLncEqlQ1b0QL0T7P9XCYjS
+         jfeg==
+X-Forwarded-Encrypted: i=1; AKwUvBxAugEtN4tQpvTDmU1yBROTj8rwWdEolGg9MZHrG4a3JF8m4cdxZBqL2W1aH2+YcSl+KImxJmrHEEdGEGgt@vger.kernel.org
+X-Gm-Message-State: AFuF++l3P+VXE64USsv+AboMF+rppxys5J/C+GEV5Wpq+wGFC8J00yfd
+	qTtO3kdoCY3O9HrSoHha9dXI/DBe/zaCs8OfRMhTb/Vgvyu5pNX6z0fY
+X-Gm-Gg: AYBFou2qv2FuZwCSxijR3v113Fi7yTeF+CnIGfE4AjF1XgMLtBkvnYsPQUcWE0tr/1/
+	XtY/hnQmyC0ikcDdqetgSaYAFtrq8SQmAf1qt2DylRWOpREPbhW/3gVqjbcfD9ijiMjd8LExz2+
+	rPc28DRix+jsqGseeJDDj1CZTD36/912xZGwoKbo5ROtVe2kFk3uLtBAxUZjOqBYru982py/Ic3
+	oN89YSNY/yFwfMANVHizrM2vweXJA5QoX2YHFQPymbk1pMJ2lCf4D80C5o+JnnNi3eonZ5n78c6
+	SwmJuS08JrUv3PkR5NY37vHP0EWeQt3hU1SvV1jdRwVm+eRb4V3UuzaLqheCAluKlfTS48lPCvV
+	jvO6KDxYFIIIdkexkh4i9xztjq/v+sfJtcehOvistPtj+pmO4t6NnuLfVcaARS5EOaqwrX9x9Zs
+	jUuq1haFlbzKnHffKsuvkwLdvp3/G+hro8CHXwqn42T0UoZ4i+PRDWgCXq5rS9w9cVG0w2/5sjx
+	102QqjK6MraQYfPok+/w1pHrWx6CEkEEvDr
+X-Received: by 2002:a7b:c35a:0:b0:49f:bcb7:8e9 with SMTP id 5b1f17b1804b1-49fbcb70a1bmr64001725e9.9.1789648179633;
+        Thu, 17 Sep 2026 05:29:39 -0700 (PDT)
+Received: from pumpkin (82-69-66-36.dsl.in-addr.zen.co.uk. [82.69.66.36])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-49fbd1ce79csm82621135e9.0.2026.09.17.05.29.38
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 17 Sep 2026 05:26:10 -0700 (PDT)
-From: Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>
-Date: Thu, 17 Sep 2026 17:55:24 +0530
-Subject: [PATCH v2 10/15] arm64: dts: qcom: sm8450: Move PCIe phy and GPIOs
- to root port node
+        Thu, 17 Sep 2026 05:29:39 -0700 (PDT)
+Date: Thu, 17 Sep 2026 13:29:37 +0100
+From: David Laight <david.laight.linux@gmail.com>
+To: Christian Brauner <brauner@kernel.org>
+Cc: linux-fsdevel@vger.kernel.org, Alexander Viro <viro@zeniv.linux.org.uk>,
+ Jan Kara <jack@suse.cz>, linuxppc-dev@lists.ozlabs.org,
+ linux-gpio@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, freedreno@lists.freedesktop.org,
+ linux-media@vger.kernel.org, wine-devel@list.winehq.org,
+ linux-xfs@vger.kernel.org, io-uring@vger.kernel.org, bpf@vger.kernel.org,
+ linux-mm@kvack.org, netdev@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH 4/4] file: make struct fd_prepare const and kill its err
+ field
+Message-ID: <20260917132937.5a15904e@pumpkin>
+In-Reply-To: <20260917-work-file-fd_prepare-v1-4-b87534ca49f3@kernel.org>
+References: <20260917-work-file-fd_prepare-v1-0-b87534ca49f3@kernel.org>
+	<20260917-work-file-fd_prepare-v1-4-b87534ca49f3@kernel.org>
+X-Mailer: Claws Mail 4.1.1 (GTK 3.24.38; arm-unknown-linux-gnueabihf)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260917-root_port_v2-v2-10-6272b7caae9a@oss.qualcomm.com>
-References: <20260917-root_port_v2-v2-0-6272b7caae9a@oss.qualcomm.com>
-In-Reply-To: <20260917-root_port_v2-v2-0-6272b7caae9a@oss.qualcomm.com>
-To: Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org,
-        Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>,
-        Neil Armstrong <neil.armstrong@linaro.org>
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1789647930; l=2276;
- i=krishna.chundru@oss.qualcomm.com; s=20230907; h=from:subject:message-id;
- bh=GifRTCwRpzqsop0m2POLFnGoYXAHL5ktB2gtfA2jizw=;
- b=jSauZWymUF8c+qAwTEwDz95cxTjGpq5235fF+d9a54vILySKfgOO72TNOaECXMRicp3rg4eHe
- kMVZOXdgF+4BUUhq5lryyNZpwtWiCtbD/ONP7X4RrwBkD1gp2Mjwk6u
-X-Developer-Key: i=krishna.chundru@oss.qualcomm.com; a=ed25519;
- pk=10CL2pdAKFyzyOHbfSWHCD0X0my7CXxj8gJScmn1FAg=
-X-Proofpoint-GUID: tkHoLSzShcs01k3oFcr45BcCQjaeyD8c
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTE3MDE3NCBTYWx0ZWRfX+DY6P8dzlwOt
- CzmxKob6s6yDesBbzb+stotA4S/ugKavUUEAcBHFx7BHtgPK0kOSqeNeVNBLkJkDCJhvbHRXVNf
- zBjOdSPHNRfcdqVX64R2iSPKjc3sSvNMLOhY4UvfIqqqIqtWXnjpQfthNxdpFMNj6zgm9TZrtej
- St4goa56VS2Z59qyUM1oMDNryS5iAo4lCjarXf1yinvLFuB/1GCvMJKRtlvS/RMmPNq+EWRy45m
- hxx8yJpm4hAsH5cAVuc4qDHiy7LPue30dNfjrr1azfhPaqHOF5kTX1C2+HSnhOg4IWNOQ13eamZ
- 0b48UfQ67lK1NJwBCGVp0vnpZnvq26pgzWdfT/lnq4l8RELt2/LGY/ROG12U7YPviFAFvb2h6EG
- Cxy3x+0M2TJc4d2RyGDBHlvC6ws5Xgd/1g1GEkgvR25LYBxBmKkV5QTV+bjhOA9IELcIH2DB7Qu
- 7XyLZDpX2Gow6lvFjIQ==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTE3MDE3NCBTYWx0ZWRfX+uP6h3ejBss6
- YhNC5ShIv4sEmjc7gNEBjjGtz3xjcinjZ5DDOupgHzA/bOdHvmxgrk1/texBNfx1WuCsNO0LKmB
- 4j5qWPP/kNUg0f/LeYgFbHkoiE8TWd0=
-X-Authority-Analysis: v=2.4 cv=GeOCDgXL c=1 sm=1 tr=0 ts=6aabdc63 cx=c_pps
- a=Qgeoaf8Lrialg5Z894R3/Q==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
- a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22
- a=KKAkSRfTAAAA:8 a=EUspDBNiAAAA:8 a=bvY3E1ByFFb03tV5gjAA:9 a=QEXdDO2ut3YA:10
- a=x9snwWr2DeNwDh03kgHS:22 a=cvBusfyB2V15izCimMoJ:22
-X-Proofpoint-ORIG-GUID: tkHoLSzShcs01k3oFcr45BcCQjaeyD8c
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-17_02,2026-09-16_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 priorityscore=1501 lowpriorityscore=0 clxscore=1015
- phishscore=0 bulkscore=0 spamscore=0 suspectscore=0 adultscore=0
- malwarescore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2609040000
- definitions=main-2609170174
 
-The PCIe phy reference and the perst/wake GPIO properties are
-per root port and belong in the root port node (pcie@0), not in the
-RC controller node. Move phys, phy-names, perst-gpios, and wake-gpios
-from the controller to the existing pcieport0 and newly labeled
-pcie1_port0, allowing board-level overrides. Rename perst-gpios to
-reset-gpios to match the binding used in the root port context.
+On Thu, 17 Sep 2026 11:09:45 +0200
+Christian Brauner <brauner@kernel.org> wrote:
 
-Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
-Signed-off-by: Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>
----
- arch/arm64/boot/dts/qcom/sm8450.dtsi | 22 +++++++++-------------
- 1 file changed, 9 insertions(+), 13 deletions(-)
+> FD_PREPARE() releases the fd as soon as the file expression fails. The
+> fd either holds the descriptor or the error. The separate field is
+> redundant. Make fd and file plain members and struct fd_prepare simpler.
+> 
+> Callers of FD_PREPARE() get a const pointer to the guard. Simplify all
+> users as they can now easily access the trivial struct.
+> 
+...
+> @@ -191,35 +175,39 @@ static __always_inline struct fd_prepare __fd_prepare(int fd, struct file *file)
+>   * was allocated. If fd_publish() was called the fd and file are
+>   * published and cleanup becomes a nop.
+>   *
+> - * @_fdf: name of struct fd_prepare variable to define
+> + * @_fdf: name of the const struct fd_prepare pointer to define
+>   * @_fd_flags: flags for get_unused_fd_flags()
+>   * @_file_owned: struct file to take ownership of (can be expression)
+>   */
+> -#define FD_PREPARE(_fdf, _fd_flags, _file_owned)			\
+> -	struct fd_prepare _fdf __cleanup(__fd_prepare_cleanup) = ({	\
+> +#define __FD_PREPARE(_guard, _fdf, _fd_flags, _file_owned)		\
+> +	struct fd_prepare _guard __cleanup(__fd_prepare_cleanup) = ({	\
+>  		int __fd = get_unused_fd_flags(_fd_flags);		\
+>  		__fd_prepare(__fd, __fd < 0 ? NULL : (_file_owned));	\
+> -	})
+> +	});								\
+> +	const struct fd_prepare *const _fdf = &_guard
 
-diff --git a/arch/arm64/boot/dts/qcom/sm8450.dtsi b/arch/arm64/boot/dts/qcom/sm8450.dtsi
-index 7bc5f85e7ebc..05e852ed7995 100644
---- a/arch/arm64/boot/dts/qcom/sm8450.dtsi
-+++ b/arch/arm64/boot/dts/qcom/sm8450.dtsi
-@@ -2017,12 +2017,6 @@ &mc_virt SLAVE_EBI1 QCOM_ICC_TAG_ALWAYS>,
- 
- 			power-domains = <&gcc PCIE_0_GDSC>;
- 
--			phys = <&pcie0_phy>;
--			phy-names = "pciephy";
--
--			perst-gpios = <&tlmm 94 GPIO_ACTIVE_LOW>;
--			wake-gpios = <&tlmm 96 GPIO_ACTIVE_LOW>;
--
- 			pinctrl-names = "default";
- 			pinctrl-0 = <&pcie0_default_state>;
- 
-@@ -2063,6 +2057,10 @@ pcieport0: pcie@0 {
- 				reg = <0x0 0x0 0x0 0x0 0x0>;
- 				bus-range = <0x01 0xff>;
- 
-+				phys = <&pcie0_phy>;
-+				reset-gpios = <&tlmm 94 GPIO_ACTIVE_LOW>;
-+				wake-gpios = <&tlmm 96 GPIO_ACTIVE_LOW>;
-+
- 				#address-cells = <3>;
- 				#size-cells = <2>;
- 				ranges;
-@@ -2182,12 +2180,6 @@ &mc_virt SLAVE_EBI1 QCOM_ICC_TAG_ALWAYS>,
- 
- 			power-domains = <&gcc PCIE_1_GDSC>;
- 
--			phys = <&pcie1_phy>;
--			phy-names = "pciephy";
--
--			perst-gpios = <&tlmm 97 GPIO_ACTIVE_LOW>;
--			wake-gpios = <&tlmm 99 GPIO_ACTIVE_LOW>;
--
- 			pinctrl-names = "default";
- 			pinctrl-0 = <&pcie1_default_state>;
- 
-@@ -2263,11 +2255,15 @@ opp-32000000-4 {
- 				};
- 			};
- 
--			pcie@0 {
-+			pcie1_port0: pcie@0 {
- 				device_type = "pci";
- 				reg = <0x0 0x0 0x0 0x0 0x0>;
- 				bus-range = <0x01 0xff>;
- 
-+				phys = <&pcie1_phy>;
-+				reset-gpios = <&tlmm 97 GPIO_ACTIVE_LOW>;
-+				wake-gpios = <&tlmm 99 GPIO_ACTIVE_LOW>;
-+
- 				#address-cells = <3>;
- 				#size-cells = <2>;
- 				ranges;
+Since the struct is only written by its initialiser, can't it just
+be 'const' ?
 
--- 
-2.34.1
-
+David
