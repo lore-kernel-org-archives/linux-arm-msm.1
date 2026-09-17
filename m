@@ -1,251 +1,256 @@
-Received: from MW6PR02CU001.outbound.protection.outlook.com (mail-westus2azolkn19012021.outbound.protection.outlook.com [52.103.10.21])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 78181233929;
-	Thu, 17 Sep 2026 04:29:56 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=52.103.10.21
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789619398; cv=fail; b=r2TF5xBZEIPcLwzSVr62vRIFfs4+ufsLSp7kNq0BHBxq9QJStNPFf6ZkhdqIT50+AuoMOD3CjRKHx+JvkiraOCYj0D96mEvP5sBR5OySZYK7BmqS2v5fRUoR8ISUlPxoQXsUf7U5slEtjM/6CXALVtYDvq6QPHj27KH0VJIKnqE=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789619398; c=relaxed/simple;
-	bh=JXQPAGOD6AMAhjvy7iuTLbouibKrMIi3CWcrR80DhXE=;
-	h=Message-ID:Date:Subject:To:Cc:References:From:In-Reply-To:
-	 Content-Type:MIME-Version; b=jlF8vWijhTLaZVB6m65M5DIzgaQFkPlteuHPjmdy/k1DXXrrxRzOISLGGxEl/XRt5+c0tibqFWNYC+FfB2Dhk6q2rjy2/Gy40f1UNXcqxO8ffhEfDX5PrTLDhblSW4UBtLR8PCNlZK9schHcbVEvH17dkbFnfb2DWp3ZOfytwHE=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=outlook.com; spf=pass smtp.mailfrom=outlook.com; dkim=pass (2048-bit key) header.d=outlook.com header.i=@outlook.com header.b=FLAlFSDv; arc=fail smtp.client-ip=52.103.10.21
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=outlook.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=outlook.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8F3203BFAFA
+	for <linux-arm-msm@vger.kernel.org>; Thu, 17 Sep 2026 04:37:56 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1789619878; cv=none; b=XwmB5CPMnD8Ny2m+0aW6d5YFxh+z+PpF6TBWdFzkFscXB45o5euEwwrrjJnBsqFIP4mQwdRLWyeVU2ZXyKurvt0eIURyD4BE+7wOTwiGG5XFlR0zaedLCgTLWAR//4YI/UVmKEw9MLcjoSbBJTaU+O6UtvdAZlo4+yCNgeNVWBA=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1789619878; c=relaxed/simple;
+	bh=q36LZe75x2kivCZp9AOPOM+4GLHfit33SUz6p04Vow8=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=nQYcdq5K1kx4Ml1dggocc3Qw1uZfXxrq4puMhcJWSQ1M0QOneSYIiq8K7LfgM7prcwYI0A8xbMRiHmC4vKUUh4u6Wy6Q1YWMuDdINsQiYUAngjHQnyXTnXYgSA8OZ87iJ24wcLWLqV5GrPdJbrOOJgSnwJ6jcIjSwndd+tbFb2o=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=GJfU8mw/; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=ON9KbyOM; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=outlook.com header.i=@outlook.com header.b="FLAlFSDv"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=yzXhMIuvuUlul3GRcBvPQgsfUZR+O9CMUklGV3dB8AagFrHHLc8Zi0mYQ0LAGkSHc+gW82xFSFiPtPg7vgQ8UInmmXA2i2831VrQazTnNZ8FXtVKYoIurBJ6SFdhA1pnkm5rPsqeKaQ6eNtiGrVJCFHt1CeTF+V8wqsZM5tRgms9PzfhHEACinOgij0rT9MoA2rx//d82eIsGc+Fx6EseFmQYGt426o5qwbtj2FyK1ot0CgJuaYYhJd4SPTctRM9tGLg6dfK1D7CmIedFYMlzATdwwS+pcqFMQufyGPDCj4OQ/B1kaLX+kiQoCXEjEN2f5X3FbrRJFTSrMNJL+dbNw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=R2hIQ+k3tis04/tdYe96d3e0pY5s+3NQq1EruS4RBLA=;
- b=tpgpri2ADDfBOviHoBHFVCpzcrG6fNP/ASU5w54f9G0j0PY4vg115pic8oKi8jTdfF9u4cXwyF66SiXRBIutActH+6StNPro9SVf5+GJVnlw4MjenH2ZZs5SamjgcQTV5byWuXJgvkq3UGaS+2hDM0kVUDQQd0zVnBRY1Yj7PLYvK095EYXBfyKcbtH1GqVfFWppHeYxxTW2d3mHEEyiwsdZ5FObgvX635D1LCfKgbIoPSl2NOphLPYsCl4TrLrprpBSuX7Vm0VU7Tqg07HQ3b46HVuZdgv2hgtjz+VCcT7GkZdlsGIhtA3QYm7f+Bxnhsy+vvd9P0moTzq13bfCrQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
- dkim=none; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=outlook.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=R2hIQ+k3tis04/tdYe96d3e0pY5s+3NQq1EruS4RBLA=;
- b=FLAlFSDv5EkdqM+DAb9cz6/krMQpsRS/MXySAScL30WcvBiO0TYgbHW9NKkYi23XGhe2eoy64tRPEMa7GVbAijY5wYNeCwZhtzz9hS20d4WLtMERWU7esLJMVVDM8A5oYEmEmA8TXNo7XVvDBzAv4q56MNtd6BoTlyQeZgzDS99M3UJno9GJqluUdnXyiVwWIR7aTryYtQQCnjnDhTDOT2nT/uDfwq+ymNwTFH99XDL2qcHPcOHJYijskThvRNPsA81rV+Ldvdk4HrLQu5OjDBRiUExqwxobUlSjjrqUp7YVxi9I33ZbK4+Z3qoCW6XlnDZSaQzW7NLLDpAt0VCktw==
-Received: from SJ2PR11MB8401.namprd11.prod.outlook.com (2603:10b6:a03:539::19)
- by DSWPR11MB9692.namprd11.prod.outlook.com (2603:10b6:8:353::16) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.428.9; Thu, 17 Sep
- 2026 04:29:55 +0000
-Received: from SJ2PR11MB8401.namprd11.prod.outlook.com
- ([fe80::ccc8:68f:2e82:ab65]) by SJ2PR11MB8401.namprd11.prod.outlook.com
- ([fe80::ccc8:68f:2e82:ab65%5]) with mapi id 15.21.0406.013; Thu, 17 Sep 2026
- 04:29:55 +0000
-Message-ID:
- <CH3PR11MB8413131D50175690DF9FDAB0E4B82@CH3PR11MB8413.namprd11.prod.outlook.com>
-Date: Thu, 17 Sep 2026 14:29:44 +1000
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH net 2/2] net: stmmac: qcom-ethqos: advertise supported
- SerDes interfaces
-To: Maxime Chevallier <maxime.chevallier@bootlin.com>,
- Mohd Ayaan Anwar <mohd.anwar@oss.qualcomm.com>
-Cc: netdev@vger.kernel.org, Russell King <linux@armlinux.org.uk>,
- Andrew Lunn <andrew+netdev@lunn.ch>, "David S . Miller"
- <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>,
- Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
- Choong Yong Liang <yong.liang.choong@linux.intel.com>,
- Bartosz Golaszewski <brgl@kernel.org>,
- Russell King <rmk+kernel@armlinux.org.uk>, linux-arm-msm@vger.kernel.org,
- linux-kernel@vger.kernel.org
-References: <CH3PR11MB8413FCBA598F7FABC04ADCFEE4B92@CH3PR11MB8413.namprd11.prod.outlook.com>
- <CH3PR11MB841353E5708DDD7C5E2EA1D5E4B92@CH3PR11MB8413.namprd11.prod.outlook.com>
- <aqqI9wOnradk9d7K@oss.qualcomm.com>
- <97924d2f-45f9-44d5-b482-97fcbb70abdc@bootlin.com>
-Content-Language: en-US
-From: Thomas Karpiniec <tom.karpiniec@outlook.com>
-In-Reply-To: <97924d2f-45f9-44d5-b482-97fcbb70abdc@bootlin.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-X-ClientProxiedBy: MEWPR01CA0026.ausprd01.prod.outlook.com
- (2603:10c6:220:1e4::8) To CH3PR11MB8413.namprd11.prod.outlook.com
- (2603:10b6:610:170::8)
-X-Microsoft-Original-Message-ID:
- <7ec598a3-fa4f-4d1d-bd8e-1f0754dbd75b@outlook.com>
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="GJfU8mw/";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="ON9KbyOM"
+Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68GN1fRK3107058
+	for <linux-arm-msm@vger.kernel.org>; Thu, 17 Sep 2026 04:37:55 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=YGUd3GLZ0RHvdNeiIDSYYv
+	TGCTSHA5Vfyjiuz44SqOI=; b=GJfU8mw/auLGDMRyo+gJZcWv9GUwJIiQTBr/zY
+	jxujLEbt6IBiULmikLfUiXlp22e8BJDli1tmpIM9e2V37ErmEqXLZJTIIPF5Wpcv
+	19McHjJB8wFr+zPk32wc5OglqZwS2oVIfbEEKj/vMQUNY7f1VtILEjAn8Lj7+tLg
+	yY1FPSczAMaFeUVHVpOXwszMIA2Ld+a3eQBmYyO3oX0P2nsHElfDWnzVBGtPTurF
+	Fe15v7frmfgUE2CVt8V7c5bJgMlj0CorLwbGiPgSurLRyLe0s6fWYp0Ws3HuZd8m
+	NAZYP2wxhdwqhe6wVywcPYAx+DNUfSrzJI/cHoBzyO8QiaLw==
+Received: from mail-pj1-f69.google.com (mail-pj1-f69.google.com [209.85.216.69])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gquw2uegc-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 17 Sep 2026 04:37:54 +0000 (GMT)
+Received: by mail-pj1-f69.google.com with SMTP id 98e67ed59e1d1-396901263b6so814560a91.2
+        for <linux-arm-msm@vger.kernel.org>; Wed, 16 Sep 2026 21:37:54 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1789619874; x=1790224674; darn=vger.kernel.org;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=YGUd3GLZ0RHvdNeiIDSYYvTGCTSHA5Vfyjiuz44SqOI=;
+        b=ON9KbyOMgY6r1581k6yKv09wzyRf6QYq5W+yVv/yxOMLnj3FD2U84dnEbZZQ8HfWR/
+         p7wQ3pGsYVbEIQbAbBVcWkh+3rSn/NQ0qirSpvoKF1cL1nB5dU1JTF1mUPBCNxJzvHaO
+         oxaJ5H8hQjJ+Nut/HBm4Bb0sa9znO/yJFd7+GyH54nUUlmGAnNkQrreNiEhP1QKcxvQy
+         VPUb+lqkDIFNHJH8gCnRdLW3nIMSbkjLwWVDVJb60fIZAlD+wZ1+8k+ohUisT9HETpl0
+         +S082HwrmZxMbBKuRTwfgawkej1vRGTG+xDZOxXQh/ObdXnA8BqipAT467fK1l7cljTw
+         1fKw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1789619874; x=1790224674;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=YGUd3GLZ0RHvdNeiIDSYYvTGCTSHA5Vfyjiuz44SqOI=;
+        b=ZZU46rxhbhjb7uAq3OrVYW5OETP7+GzGVLNeLHFm8MlVAOQ1xMWXWW70xgs+RduYXD
+         ao2j/pEtiMyyL3nBzEE9pRVDjdCMNnEpyuO2xiWQJF8nqn1jrt2iEf6BrW/zH7OKy7DO
+         WDp2+CPcViXgbI4ouX1CJlwjl3qO3QaUt+P/pkjqvDmwuQ5POB0zszQGtJHTGtgPcmoR
+         be5r+X0jqULHxH5S5F0PuEk8VCripitqPyuRj4r6fqu2vnzHRUZBcqOzXJxiwojMjIb0
+         LmSwwNkPrl2bztFo6PhcldpjXQAMOMq28Bi7o+AOIiUwwtOi+bndC+O0kN1cer4Q8zVV
+         Jc3A==
+X-Forwarded-Encrypted: i=1; AKwUvByTYUJra/W0qoXGKp38rSvqE/dmgyJNwFAAP9fzjkxi7XhnpcyaZ+O3f3/bh8xYsj6MS8sc3j9Ae4rXdCaq@vger.kernel.org
+X-Gm-Message-State: AFuF++m0lmLn1wiY71Bf7xUj9OQfD6lF+rKBksN1VyQ3AS9+1VhEhx05
+	sMOUesRmAQlUm25SD74Ne305/9NI3jKF4HTFYBx/JPLyQiP18ctEzH0rtSfmTezQSsNzyaVrXpx
+	meRnuqp7YbjD8Z1E1Xb0prXAyVihEx3cflkSDifuyFvB6Yag2JCa0motKwvoHfa03WGLE
+X-Gm-Gg: AYBFou2Nz70al/maPlsb19vh70MmVlZTDCfODuwJEz4e0KQqT4LHUyoo5aPUdKyEiyd
+	gcqN/QaOEXrgr3+POoi79pYXAY7B2piqnrPieD7xTksNGw50E/nuu8NHRtZooipX7XugcQpQtBb
+	lQS2bY+AHXT5QbaTWjxumuF6/oo+p9Ss3vGMDdrAv1184LNMoLf1+iwZRnvX/fGtv7lfM+E4e6T
+	2dZsbbN65OEvfBjmimEYxDLPVnizTaKN9wSgvfPk1C5Md2ekdYxeRrlF6ka/aqzSPf7CfddwvGz
+	sCE0WVokAYGsiZGqMTdmTy7BjbTfMv+FRy8IHphFCH+6vXvYbCx2rb5rSBmDlxliHHB7AkBxUuO
+	4Cpzixz4bO0pZjqEka8Jatgk7mG8RwEXh5eTT
+X-Received: by 2002:a17:90b:390f:b0:39e:1c4e:5473 with SMTP id 98e67ed59e1d1-39e1e47ab6dmr14505888a91.16.1789619873749;
+        Wed, 16 Sep 2026 21:37:53 -0700 (PDT)
+X-Received: by 2002:a17:90b:390f:b0:39e:1c4e:5473 with SMTP id 98e67ed59e1d1-39e1e47ab6dmr14505741a91.16.1789619873117;
+        Wed, 16 Sep 2026 21:37:53 -0700 (PDT)
+Received: from hu-mohs-hyd.qualcomm.com ([202.46.23.25])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-33bf5a9fd38sm12357376eec.13.2026.09.16.21.37.47
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 16 Sep 2026 21:37:52 -0700 (PDT)
+From: Mohammad Rafi Shaik <mohammad.rafi.shaik@oss.qualcomm.com>
+Subject: [PATCH v3 0/8] arm64: dts: qcom: shikra: Enable audio on EVK
+ boards
+Date: Thu, 17 Sep 2026 10:07:29 +0530
+Message-Id: <20260917-shikra_audio_dts-v3-0-9a49e1ca6370@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ2PR11MB8401:EE_|DSWPR11MB9692:EE_
-X-MS-Office365-Filtering-Correlation-Id: f3ccc659-daa9-4fcd-4df0-08df14745103
-X-Microsoft-Antispam:
-	BCL:0;ARA:14566002|25010399006|12121999013|23021999003|15080799012|4140399003|41001999006|51005399006|24021099003|8060799015|5072599009|6090799003|19110799012|2607281247196008|1602099012|10035399007|40105399003|4302099013|3412199025|440099028;
-X-Microsoft-Antispam-Message-Info:
-	=?utf-8?B?Z0M5R1hRc2d5YjNZNnFramwxcDhjYjc2b0MvTTVJTW96bUlQdnJWS3FIdGhZ?=
- =?utf-8?B?M0ZXS0FRUmNTZ2hiWitqbkRKaXJ0cmEzeVRuQ3VhQTJUNVpiajhNODJHUnNN?=
- =?utf-8?B?UEpYZXV5QTRvOWFmQ1d0dVhCcWZOaUxzWW55dlBGVTVwOUhCSWM1aHFuWVhK?=
- =?utf-8?B?aVhJSjVHVU1kSHhCSTRib21VT1ByZjkweWJyOFhuT3dNYjhtdnVQRGFZNVc5?=
- =?utf-8?B?VFAydExLZmwreWpsT1YyZFR2bDdsZWRHSk1xUlByWHRtd3VEKzh0aitTZ0JZ?=
- =?utf-8?B?dllmY1J2UEZXbElhNnp1T1NRQVRhSnlYU1p6TlpheUtCbTc5a3lHcGdSSEkr?=
- =?utf-8?B?KzJRODZmbDlSNWxqWEtVbEFMV0UzVG5yaEZiTGdCY2RheHBoc2J0QUIveE1H?=
- =?utf-8?B?UHhwUE95Mm9BTXFMU0hSOWthdEpVbHJyTVJPZkpSR1JBVFB3UytrcCtFMk5U?=
- =?utf-8?B?ZTNuMmZFK3lGaW1BZ0E4b014QWxOdjc5VFJXOGxhYU9rUkJsVHhURmptSGhi?=
- =?utf-8?B?U3Q2Q3VMcXIwbkwyMFZUYnhvQjQ1NU5wdW1HYlptOFh6dU5SOVFHOHhwKzZR?=
- =?utf-8?B?b2dBVG96VzY3dTNYUUxFUnRRM1BycEU3VzBPUzN0RlIrS295Z1dqOElkKzhq?=
- =?utf-8?B?R1pJZWZlYkVDZ2o2RDRrSTl3SEZ3dVpwVU1iMHozWkhSNjMwdUVVTVdJQ0Fl?=
- =?utf-8?B?dCtaOUFXNCt6c2o4VGVKTmRMTzFaWUtkR0xzR0psNFJqdTRqUS9tdlE5M3la?=
- =?utf-8?B?K0tuZ2tsSzNqMVR0TDhzQTJvYUpJSU5PT1lRSnVhYU9EQWs5VDJPNmpOY21k?=
- =?utf-8?B?Vmx6c0lyN29qeERLT243TlNRcDdaTWY3djVuWDdsVUdoQk5sM3RTTmpIMEhZ?=
- =?utf-8?B?M2ZUOFlVa0IwYk0yVENXZlR3dG9UVVBhTmRtUFFZekRRYit4ZVhlNG1IOHY0?=
- =?utf-8?B?YUNQeFBEaW5LMGwwN0N3aEVDckNWOUVNV1FwL2tFcDZmNnRBZ2xVQStycE5u?=
- =?utf-8?B?RTFqS3NoVlpub2JpTEJ5ZGNac1NhYTVyMEtOZ0ZHd3FqVE04MzMxc0wxQ3JM?=
- =?utf-8?B?OXBPL2JWLzgvbTNsUHZyMUdvVDB2WXRYcW9sR2hqVGVtZktOakVhV1BRTmYr?=
- =?utf-8?B?cml5c3Jma0k1QkdjZ0hHYzl4RUJPSHdIVkxBWWJENmhKVzdTU3ptMDVGMzZx?=
- =?utf-8?B?TDBxMm9rRHlEZlYxTlJDRTViZGV1UXJ1WGp6bzU2b0R4aEk1V05tcjFVMVFi?=
- =?utf-8?B?eW56dUIvMjFzSTVnbEYxZTkzNFJXRWNMdGJ6cXBKKyt1enpkV1U3N1JGRStq?=
- =?utf-8?B?ZlhmZ0ttWU9HNDVPcWF5VUhVVG5HYWFFbi9halZ4WFcyejFWL0FlSzBEVllo?=
- =?utf-8?B?NGRENlpJNkE5d2RjV1dlYVU2ZFVPM0F6eWQzc1FIcjNzQjVmb0ZvemxlZlZz?=
- =?utf-8?B?elVLQkp1VVoxZ3k2dVhVQUNBMjloNkVTVzNtY3lBPT0=?=
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?cXkwcVg1NWpxUTNJcUpsd0RnckVkTWNHbTQxNU9EMFNYclIxYnA1Qk9BRUZ1?=
- =?utf-8?B?YWhldWJZUGRmVHNIMXY2TlhjVmhDTVljc3JKaUhxRk5oNWpEemxSTVJOQnNB?=
- =?utf-8?B?SkwwTXUrRGN6T2I3dStwUjNkd1Y4MVdVVUE0MzYyTVllUEFvZStxM1cwSjJ6?=
- =?utf-8?B?ZGZTRll0b3ZsekFkVXVsZUQzUDFZQkI1bXhndHp4WHVPVEJQRzNpQm5wNW0y?=
- =?utf-8?B?c1UwSUordi80TjR3Mm54WGNyQlZINk9qMkZpSGxRQVpJZytOT2UrK1BMaXhV?=
- =?utf-8?B?UHphWVIwWlh2YjNibEplQ0FCZHhZUEdRYXJNdy8rMU5wRFd3cDZxdkphYk5w?=
- =?utf-8?B?S2FFNkVmblRpS1FvVlBiRW9waXIyb2oreHkyQmxlenRlT1JYbHZ4aTc2UnZ2?=
- =?utf-8?B?RUpMK1E4cVJNRFhsendsSW54V0RrNE1WUHhLcm5IdVlqZGRjVlJzZ2lIVXdh?=
- =?utf-8?B?NG5oZDdReFJsRGlPalNQdXdaYkEyUmFQMmp4UmYrQmlKTm1NbjVRUjZPT2Ja?=
- =?utf-8?B?QlRvNmxGMGFCbG9MMEIybzh2ZmYwNTIyc2ZYQlVqK1ljM3ZtOVg2UENZUzFB?=
- =?utf-8?B?Y25Sdjgxa3hTUVNUaC9GZ1RnRWV5cUxvU0FzY0VsY0lqaUVQTy8vY2pPVUxy?=
- =?utf-8?B?cGh4UWJSK1RxbXB4d0NsWFNSNHBMd3FSR3hDVTFHL2xWOXB2L2lQOURJVkd0?=
- =?utf-8?B?YUtIMUNDS2tiSXFCZEx4T2dkY2tuZEErZmwvOGhsRHRVNi9NZ0JBdTdLWE5Y?=
- =?utf-8?B?UTA2SXFzNzlzOHltb0o3Z1owYjdCUUtaZStwTnQ4UVoxK3p6dS9zWDMvOUJE?=
- =?utf-8?B?b20yNnpMZG9RdWtQbGZEYWJuT1EyQ2c4S0JMa1pNZjkvL01qSEU3SGJXZXVp?=
- =?utf-8?B?Y3VkZ0xpQ0hZY1U1V21SaVozYkZNdHZ4cGNsSlR0ODRMSFFIMWJXTUI1MjBI?=
- =?utf-8?B?NjM1MDh3aUJqQjRkeUZoVVdGYWczM3RkbG4wUThCeVBRN3NNUndLb2J3MmhC?=
- =?utf-8?B?alF0Ni83SkhPUVNna21XZDdPYmVNeXNFVVEvT2lVQ1pSbGJjZm1iQ2dNcmJq?=
- =?utf-8?B?YS9aMm5UMFRGR3F4RDFTdUQxNzFsWXVkTVVMQUdmQUNURFNkckNZWVhzVkRK?=
- =?utf-8?B?bjk4RWdJWVRZL0IxRmRXZ2U3U2tpMFp5SERSaG5KYTg5SXdHb09Oa2hKL3k3?=
- =?utf-8?B?UWlJdGpjSTE1eVFtUExPeDNZVXVseU1SV3hGWjF2WTkvWG5Hc1pnclFwMFB1?=
- =?utf-8?B?TmF1L3E5UlhoNGtQUE1uV0haQUJpNE5uM0FraDBkQ0tCM1E0am52S3BMcUtj?=
- =?utf-8?B?WFIvUzhDNXZyWkF0MzQ5U28zYmlvYlZ1OGNQaUpYRGhlMmE2M0FwekNMNzlR?=
- =?utf-8?B?cHpWT2srdWF4bWE3bVJubW9lSmZWNVZ3T3FpWlJKckxMNVhUMVkvTmJISGRx?=
- =?utf-8?B?YU4xVStML3Vxcm8xcnU1OEZKWUFxSHpSQXBlaHdPYW5KbTA3UFNIM01uS2Mx?=
- =?utf-8?B?U2dBTjJ6ZmF2bEJBVEd2OHh4NVFic0FJcjhTeFRWcGduRlluL0lqNlZXQzAr?=
- =?utf-8?B?QmoxVHJJWklqcUMwVkZRWTZSK0RIU2hPbWFGTU9QUitBQU5xSjllWVJmL2E3?=
- =?utf-8?B?amV2QkVqZ0xVVlhHMzErYStjZ25ydUhCS1N5MGpjclhOQ25zNVRTMnJuRTJV?=
- =?utf-8?B?aGk2bXFnckxGTGdsMzJpaHFuVGNHcjRXTWozcXc5QVhWelVmMzJINDQycGcw?=
- =?utf-8?B?OTAzcUtqVmpJK3MzK2dQb2dxRk5UbTU2MVJaRjJSUTZ6bk42czhUdEdBMzQz?=
- =?utf-8?B?bTk3WWNMTEl5UlVFS3UvMVZXMDJSYjE3TjdsZ1U1bzJlWjBYWkMrYUlvTVg0?=
- =?utf-8?B?YVBlQ3E3UndaR2NKb0VOSG1nL0o5eEo4NWh6blBoSU5icHo2RkYyUU9OMWVU?=
- =?utf-8?Q?kK/jDX7VneSe4/rGkCDY3VrJ5o9B8Pwt?=
-X-OriginatorOrg: outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: f3ccc659-daa9-4fcd-4df0-08df14745103
-X-MS-Exchange-CrossTenant-AuthSource: CH3PR11MB8413.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Sep 2026 04:29:54.9052
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
-X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg:
-	00000000-0000-0000-0000-000000000000
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DSWPR11MB9692
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAItuq2oC/5WSS07DMBCGr1JlzUR2Xra74h6oisb2hBhI3NpJA
+ FW9O0naLBAglY2lkWa+/yGfk0jBUUz2u3MSaHLR+X4e8oddYlrsnwmcneckY1nFFBcQW/casMb
+ ROl/bIQLTspQ5U6rIMJnPjoEa97Einw7XOY76hcywcJaN1sXBh89Vc+LL3oZnWc6rIku5UIUqJ
+ HDofItdhzYN2Lg0tuheH32M6WnEN+O7Lp2f5HC56gQ6jXOC4SqeaIwEy5Ib9juqKC+VUEIIu5j
+ oKEZc4+13N3UOY9S3gDAJmCQwkCUnKrRhROan8l+gG2RtyfhAxsBUznE0a0yOWVZyg/fS2NZ59
+ GNv312gOo7How8DTNnssFHSKKwIOfH/MqFD07qeFtIKU7qpNNpSKivvhQlAa+vN5GYtX6zNtQl
+ l8oLjvXGZAF3ACV3zrcSlPgaVlWiVxtKo5rdvcPkCiyWY0NACAAA=
+X-Change-ID: 20260917-shikra_audio_dts-0b858309942a
+To: Srinivas Kandagatla <srini@kernel.org>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        Abel Vesa <abelvesa@kernel.org>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>
+Cc: Mohammad Rafi Shaik <mohammad.rafi.shaik@oss.qualcomm.com>,
+        linux-sound@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+        Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>,
+        Harendra Gautam <harendra.gautam@oss.qualcomm.com>,
+        Ajay Kumar Nandam <ajay.nandam@oss.qualcomm.com>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1789619867; l=6039;
+ i=mohammad.rafi.shaik@oss.qualcomm.com; s=20260424;
+ h=from:subject:message-id; bh=q36LZe75x2kivCZp9AOPOM+4GLHfit33SUz6p04Vow8=;
+ b=09S63zxECT8fGo4Feyf6KT/qG44iUNzRjz2PG97x/hp7NpDCpGWndbevx9kG4aWloLKqD2Glq
+ zHDd8y6ndrfB6zY6pVkYiDQOCZAcLgAreYj1h4IJx3FXWJjuPwrVo5A
+X-Developer-Key: i=mohammad.rafi.shaik@oss.qualcomm.com; a=ed25519;
+ pk=KZedmYgMGYOzuTpLGv56tdrL+pTLDP8pdmfQ91xemiA=
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTE3MDA1NiBTYWx0ZWRfX3Dg5+gV99DIS
+ EVPyRaBA4y+1VwAxaOuKJ7P4Pkocl64ZUJ+c4Pkn6lTc1cE8V3BUykVNNkuDawEhqbo16pT+x9P
+ wSSgxjN2bijOEwoYsBWh6BxANBjOqD0=
+X-Proofpoint-GUID: OXSF0GTpiKHCToYnkCKjCKzwI-ZKa3-P
+X-Authority-Analysis: v=2.4 cv=N4m8hG9B c=1 sm=1 tr=0 ts=6aab6ea3 cx=c_pps
+ a=vVfyC5vLCtgYJKYeQD43oA==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
+ a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
+ a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=bC-a23v3AAAA:8 a=bE3JMByYCCvey9M91WkA:9
+ a=QEXdDO2ut3YA:10 a=rl5im9kqc5Lf4LNbBjHf:22 a=FO4_E8m0qiDe52t0p3_H:22
+X-Proofpoint-ORIG-GUID: OXSF0GTpiKHCToYnkCKjCKzwI-ZKa3-P
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTE3MDA1NiBTYWx0ZWRfX1CNwLDuG5miX
+ p1pgngINvj5RW74KK9HksQQCYIrg1VeAHjZHeI7YtuDUG4lkwQQi074S5TxL3uUnjDnKirvd+3c
+ IGNko9VXU23pQLwipRL2qhzj3wvqwFoD+bY1NT0RsSEdXWgooucgQ4bspcy6DwQArS/5eZvD0ZK
+ 4mox77qJjK905BeMUfYlSn/iivOM6UiWvJSLyaaTE7muC7O2bznmPm6goF/nfjv0nLQPlmApoE0
+ xog+QZs/+1WmF/ai2Jdd4mJKxTe17iV3Hq5YLVPcWe1DPrbmfm+sYF7mHJuQH6yFw4kSpUImjWM
+ 8i94uKSMofq8IpozVa8hSlbAAy5TXK+35uFx8SmUM0rmuh2QIk6vLC68XM5KWbdpSFR38u1/2J5
+ YXEg7/mvWxPwH26xk8YAz/LS8Y+XNLj741y/NV+81KCMhaoP1lPAtdWOtnnl6LEGbHg7KvgzX9i
+ DDa31Nvn0B0X5EU8Egg==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-09-16_03,2026-09-16_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ bulkscore=0 priorityscore=1501 impostorscore=0 suspectscore=0 malwarescore=0
+ lowpriorityscore=0 clxscore=1015 phishscore=0 adultscore=0 spamscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609170056
 
-On 16/09/2026 10:58 pm, Maxime Chevallier wrote:
-> On 9/16/26 14:17, Mohd Ayaan Anwar wrote:
->> On Wed, Sep 16, 2026 at 08:39:50PM +1000, Thomas Karpiniec wrote:
->>> +static void ethqos_get_interfaces_serdes(struct stmmac_priv *priv, void *bsp_priv,
->>> +					 unsigned long *interfaces)
->>> +{
->>> +	struct qcom_ethqos *ethqos = bsp_priv;
->>> +
->>> +	if (!ethqos->serdes_phy)
->>> +		return;
->>> +
->>> +	/* PHYs such as QCA8081 switch between SGMII and 2500BASE-X with
->>> +	 * the negotiated copper speed. mac_finish reconfigures the SerDes
->>> +	 * accordingly; let phylink validate all modes that path supports.
->>> +	 */
->>> +	if (!phy_validate(ethqos->serdes_phy, PHY_MODE_ETHERNET,
->>> +			  PHY_INTERFACE_MODE_SGMII, NULL))
->>> +		__set_bit(PHY_INTERFACE_MODE_SGMII, interfaces);
->>> +	if (!phy_validate(ethqos->serdes_phy, PHY_MODE_ETHERNET,
->>> +			  PHY_INTERFACE_MODE_2500BASEX, NULL))
->>> +		__set_bit(PHY_INTERFACE_MODE_2500BASEX, interfaces);
->>> +}
->>> +
->>
->> So, I had proposed this exact change a while back:
->> https://lore.kernel.org/netdev/aMgootkPQ%2FGcdiXX@oss.qualcomm.com/
->>
->> As Russell noted, this behaviour is due to the messed-up integrated
->> PCS support in STMMAC/QCOM-ETHQOS.
->>
->> I would defer to him for this if he's around.
-> 
-> Indeed, but we haven't heard from him in a while, let's see if we can
-> figure this out.
-> 
-> Does this IP have an integrated PCS ? (i.e. dma_cap.pcs is set)
-> you can check that in debugfs :
-> 
-> mount -t debugfs none /sys/kernel/debug
-> cat /sys/kernel/debug/stmmaceth/eth0/dma_cap | grep PCS
-> 
-> if it's Y, then you have the integrated one.
-> 
-> Russell worked hard on that, it looks like a lot of the plumbing went
-> through.
-> 
-> I think the right approach here is to have the PCS itself report the
-> list of supported interfaces, instead of relying on the glue. looking
-> at stmmac_pcs.c :
-> 
-> 220 int stmmac_integrated_pcs_init(struct stmmac_priv *priv,
-> 221                                const struct stmmac_pcs_info *pcs_info)
-> 222 {
-> 223         struct stmmac_pcs *spcs;
-> 224
-> 225         spcs = devm_kzalloc(priv->device, sizeof(*spcs), GFP_KERNEL);
-> 226         if (!spcs)
-> 227                 return -ENOMEM;
-> 
-> [...]
->                                                               
-> 246         /* Only allow 2500BASE-X if the SerDes has support. */
-> 247         if (priv->plat->flags & STMMAC_FLAG_SERDES_SUPPORTS_2500M)
-> 248                 __set_bit(PHY_INTERFACE_MODE_2500BASEX,
-> 249                           spcs->pcs.supported_interfaces);
-> 250
-> 251         priv->integrated_pcs = spcs;
-> 252
-> 253         return 0;
-> 254 }
-> 
-> Can you test settung the STMMAC_FLAG_SERDES_SUPPORTS_2500M flag in
-> dwmac-qcom-ethqos ?
+This series enables the Shikra audio path on EVK targets by adding the QAIF
+CPU endpoint, GPR/APM/PRM services, SoundWire and LPASS macro nodes, and
+board-level sound card wiring for CQM, CQS and IQS variants.
 
-I can confirm that dma_cap.pcs = Y.
+Shikra EVK variants use different audio components and processing
+architectures:
+- CQM/CQS use an I2S-based path with WSA885x amplifiers and
+  PM4125 + Rouleur codec components.
+- CQS uses modem-DSP based audio processing.
+- IQS uses a third-party MAX98091 codec with modem-DSP support.
 
-I tested setting STMMAC_FLAG_SERDES_SUPPORTS_2500M on hardware and 
-unfortunately the flag alone doesn't solve the problem.
+The series depends on the following upstream patch sets:
+- SoundWire compatible support for Shikra (v2) [binding patch got Acked-by]
+  https://lore.kernel.org/all/20260910-shikra_soundwire_support-v2-0-f98c9a6ea1e1@oss.qualcomm.com/
+- Machine driver compatible support for Shikra (v2) [binding patch got reviewed-by]
+  https://lore.kernel.org/all/20260910-shikra-machine-v2-v2-0-9bf6bad589d8@oss.qualcomm.com/
+- RX/VA Macro codec compatible support (v3) [adds Shikra-compatible RX/VA macro support]
+  https://lore.kernel.org/all/20260917-add_shikra_support-v3-0-fc0e79c341aa@oss.qualcomm.com/
+- QAIF CPU binding and driver support (v5)
+  https://lore.kernel.org/all/20260907-b4-qaif-shikra-audio-v5-0-6d8ad9ba5c9f@oss.qualcomm.com/
+- USB support (v8) [got reviewed-by]
+  https://lore.kernel.org/all/20260911-usb-shikra-v7-v8-0-851ee4bc0eec@oss.qualcomm.com/
+- AudioCoreCC/CSR node support (v5) [AudioCoreCC patch got reviewed]
+  https://lore.kernel.org/all/20260911-shikra-audiocorecc-v5-1-b0fc3a2251ca@oss.qualcomm.com/
 
-I think there are a couple of things missing. stmmac_phylink_setup 
-doesn't use the integrated PCS bitmap to populate 
-config->supported_interfaces, so SGMII is still not advertised to 
-phylink as a usable host interface. Also stmmac_integrated_pcs_init is 
-adding 1000BASE-X unconditionally, which wouldn't be appropriate here.
+Signed-off-by: Mohammad Rafi Shaik <mohammad.rafi.shaik@oss.qualcomm.com>
+---
+Changes in v3:
+- Rebased on top of AudioCoreCC/CSR dependency series (v5)
+- Dropped v2 patch 2 and moved it to the driver series.
+- Updated the defconfig patch description for better clarity.
+- Link to v2: https://patch.msgid.link/20260910231642.1794948-1-mohammad.rafi.shaik@oss.qualcomm.com
 
-I did a proof-of-concept fixing those things and the end result looks a 
-little messy: config->supported_interfaces could come from either 
-get_interfaces _or_ the integrated PCS with unclear (to me) responsibility.
+Changes in v2:
+- Added GPR node for audio IPC
+- Added QAIF CPU node
+- Link to v1: https://patch.msgid.link/20260910231642.1794948-1-mohammad.rafi.shaik@oss.qualcomm.com
 
-This POC did show that STMMAC_FLAG_SERDES_SUPPORTS_2500M enabled phylink 
-to configure the integrated PCS for 2500BASE-X and a 2.5 Gbps link came 
-up with no apparent issues.
+To: Srinivas Kandagatla <srini@kernel.org>
+To: Bjorn Andersson <andersson@kernel.org>
+To: Konrad Dybcio <konradybcio@kernel.org>
+To: Abel Vesa <abelvesa@kernel.org>
+To: Rob Herring <robh@kernel.org>
+To: Krzysztof Kozlowski <krzk+dt@kernel.org>
+To: Conor Dooley <conor+dt@kernel.org>
+Cc: linux-sound@vger.kernel.org
+Cc: linux-arm-msm@vger.kernel.org
+Cc: devicetree@vger.kernel.org
+Cc: linux-kernel@vger.kernel.org
 
-Do you have any thoughts what the clean end-state should be?
+---
+Mohammad Rafi Shaik (8):
+      ASoC: dt-bindings: qcom,apr: Add modem_apps GLINK channel for shikra
+      arm64: dts: qcom: shikra: Add QAIF CPU node for audio
+      arm64: dts: qcom: shikra: Add gpr node
+      arm64: dts: qcom: shikra: Add soundwire and macro nodes
+      arm64: dts: qcom: shikra-cqm-evk: Enable sound card support
+      arm64: dts: qcom: shikra-cqs-evk: Enable sound card support
+      arm64: dts: qcom: shikra-iqs-evk: Enable sound card support
+      arm64: defconfig: Enable Qualcomm PM4125 and WSA885X drivers
 
-Tom
+ .../devicetree/bindings/soc/qcom/qcom,apr.yaml     |   4 +-
+ arch/arm64/boot/dts/qcom/shikra-cqm-evk.dts        | 199 ++++++++++++++++
+ arch/arm64/boot/dts/qcom/shikra-cqm-som.dtsi       |   5 +
+ arch/arm64/boot/dts/qcom/shikra-cqs-evk.dts        | 219 ++++++++++++++++++
+ arch/arm64/boot/dts/qcom/shikra-iqs-evk.dts        | 144 ++++++++++++
+ arch/arm64/boot/dts/qcom/shikra.dtsi               | 256 ++++++++++++++++++++-
+ arch/arm64/configs/defconfig                       |   2 +
+ 7 files changed, 827 insertions(+), 2 deletions(-)
+---
+base-commit: e6e35979777d646fe3c7c94dca7dd32fb25d45f4
+change-id: 20260917-shikra_audio_dts-0b858309942a
+prerequisite-message-id: 20260911-usb-shikra-v7-v8-0-851ee4bc0eec@oss.qualcomm.com
+prerequisite-patch-id: e2effa4c5f8618850fe8605bb27fe3988853b0bd
+prerequisite-patch-id: 0c36aa1d8fb2d428f9c09ff97103b903be32e6c0
+prerequisite-patch-id: 00c2a051a784b4a208877f4edd91ff90a0818dfb
+prerequisite-message-id: 20260911-shikra-audiocorecc-v5-1-b0fc3a2251ca@oss.qualcomm.com
+prerequisite-patch-id: 452a71e3b751420f1ec3ed42cc75ce509b9a0976
+prerequisite-message-id: 20260910-shikra_soundwire_support-v2-0-f98c9a6ea1e1@oss.qualcomm.com
+prerequisite-patch-id: 1ddc51582586120795d86a2ff9f0aef20c0e891e
+prerequisite-patch-id: 49e332280734b84a1819e52ea7905fc72fb946ba
+prerequisite-message-id: 20260910-shikra-machine-v2-v2-0-9bf6bad589d8@oss.qualcomm.com
+prerequisite-patch-id: 99245529321cadedd30d9e38845b53dba3725de8
+prerequisite-patch-id: ec6621f8f392aa46f365eae91a3a0f66b1628d0b
+prerequisite-patch-id: 3da6653022d716bb81b440cd472bd464082eae24
+prerequisite-patch-id: eb9cd5e7ba7fc4ea86f758e127775c70dfda59c0
+prerequisite-patch-id: 648c31f694cc711154d2cf2137259f39a398be74
+prerequisite-message-id: 20260917-add_shikra_support-v3-0-fc0e79c341aa@oss.qualcomm.com
+prerequisite-patch-id: e6735f29343dd80d0e7ad48b6874eab4a5d7efc6
+prerequisite-patch-id: ac7bc5ad958bb392a57871dde1f79c2fc520d482
+prerequisite-patch-id: 332b888996b9d6c58e8c90eada37dc14137755ea
+prerequisite-patch-id: 5c892af3c82a2f9aa4162415d047bbe96d5919d1
+prerequisite-patch-id: 6dd0ac28a23ec04024b50798d5a1ed84f2192b07
+prerequisite-message-id: 20260907-b4-qaif-shikra-audio-v5-0-6d8ad9ba5c9f@oss.qualcomm.com
+prerequisite-patch-id: fed9c089602a2ca2c9b1d421c08c20327bef3010
+prerequisite-patch-id: 6088996635d7f8aadefceecfd7dac583913a9483
+prerequisite-patch-id: 1740ab40c09b0211cf91a7f64c63d5970dc0a006
+prerequisite-patch-id: 58bfb68400119eb51b9a5d95d404894652096f85
+prerequisite-patch-id: eb22641112bad2a24e9991fa8077ac0383e3c4ca
+prerequisite-patch-id: 961e4e8c5b4a3a551e427495096203c8bf2bd030
+prerequisite-patch-id: fe8b5f03b7fab8a1732041d1c0d1d4c09d6839c9
+prerequisite-patch-id: 2ad40030bb03f282327fce0113a1ef45236c91da
+prerequisite-patch-id: aaedf5dde2d73641fc5d8197903a97c263cb506e
+prerequisite-patch-id: bc3f8e1b37f26a366c74743d5d6de50ee5f9f0fa
+
+Best regards,
+--  
+Mohammad Rafi Shaik <mohammad.rafi.shaik@oss.qualcomm.com>
+
