@@ -1,33 +1,68 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wm2-f12.google.com (mail-wm2-f12.google.com [74.125.225.140])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 399A13B42E6;
-	Thu, 17 Sep 2026 07:12:01 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C839145517D
+	for <linux-arm-msm@vger.kernel.org>; Thu, 17 Sep 2026 07:17:12 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.225.140
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789629122; cv=none; b=LNsTU0hQi9lSKd2OewdyAYFyc2LBIh0bHDbq2Wt4x6Uv1OWb/lNcFeESa52f6tVB+jF4+/aT15tFjuN9xx3BXMeO0SqpY0zmcOvgzZBIcL6k6aYupJ2p59VlDEAob4Eoae5qEHnqGjo6+8++XqgYv/DtmtLZK38bvok2uW1WmqA=
+	t=1789629434; cv=none; b=Ar9LhDnGzo606xp0DZEj1fWnxwqW+wskTvACiLLNAkJRyrvtShryLdbRQKsZAEeMlBUtfFo7iSXXxpbnra2V4fc+B25IHKEP1UkFQu4rFCoz5XBN2bbPOzmOViQ7k94klPB3Z1McOERi4oNPWRdlg1l9ee59DBXWuQG7mY/wVcY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789629122; c=relaxed/simple;
-	bh=Xn1OBadHWVaPTEqbMA1foV4rLoLSSPbQZxUyg+8DgOA=;
-	h=Message-ID:Date:MIME-Version:Subject:From:To:Cc:References:
-	 In-Reply-To:Content-Type; b=eRb0oCJPV6xf9Cx37YC20tmYCCl7Ff4l5x+gX/W+Z10qx2s8EOVXSMrS56jnDUdnKa1Kmmjc1OmGGmNsWfWpfVyW138OvHshhkpUDL/RxmiBSPyAmGLqKTzMTsjSKqSd+KT1cAGuPfKzzOmRugs5yyknVmQENN3SrGL3FZ7gxpc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=KXmVaRXz; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1789629434; c=relaxed/simple;
+	bh=gbriEj1Y6woab39WAV/2YSR43SgslkII3LkrcHz7PIE=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=XPVn7MlppL0mkEVyMQUa4jPgwY+4nr10X/phTON0cBpD+91wBpmEXYb8SfYmKzNgV0Oeo+8mTCt5ViCQB3Q1bG3D3VTNbOi+oNV1rARSocck5VMsEAJqcpUxNovf/wcSgkc3edVXPuAB8W8hmxXpRPFSeOdxviAhoSGNQ0twk0w=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=Gx8qIRON; arc=none smtp.client-ip=74.125.225.140
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="KXmVaRXz"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0805A1F000FF;
-	Thu, 17 Sep 2026 07:11:52 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1789629121;
-	bh=QZWvj0y2qYypNkhqYeG+rMh9NEA31Cl9OJ6XafQCJgo=;
-	h=Date:Subject:From:To:Cc:References:In-Reply-To;
-	b=KXmVaRXzE1da74MR6oQokswU3bLeCRwAHFedrXabp3UUCO9Kdvx/MeoI9kbDmWQUO
-	 qpEXLyjlVso3sqxxU8Uj72ZMRq2zLWFh5YeIeMy8BKf9sM2EadUMah8Ob5d+k4ewMa
-	 FBZmEdIxskTVIN5zwgQ8XYetPzqONy2GM5a6KuYkpoh3HoYDOXPa+kC6/jlD2lmMzS
-	 +W7K5JLQlqlPXAbxnSZ/BQ6vDZ716L47RkcoGHyRzQ5+rL4srEOOlUO2AnzkYKSSy2
-	 exiINVlRe+lg86z+EmDNHHYRWzJHJLUTZ6XOA4meMGwiSinqXmIoPEGcte+ClYw6tL
-	 KO84VWL75ywoA==
-Message-ID: <ad32f584-ea27-4da9-9397-147b887a7d68@kernel.org>
-Date: Thu, 17 Sep 2026 09:11:50 +0200
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="Gx8qIRON"
+Received: by mail-wm2-f12.google.com with SMTP id 5b1f17b1804b1-49e66390995so2433265e9.2
+        for <linux-arm-msm@vger.kernel.org>; Thu, 17 Sep 2026 00:17:12 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1789629431; x=1790234231; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=6sjRq5JwkomwjePlQI1kfNhFczaltRdPXNsYjKkX5UM=;
+        b=Gx8qIRONf1BkHfTUtSJYYSQDiccQNhmUGB8h3LIbYXB+lnl8/h6ubjVOXCjJKpzOmD
+         7gHZux9SbCqq/7rZSRLdWGq9Xx+uDkUTU5ySdrLOH2JfjV8aT/E0Vu06QuLSTot/ikpg
+         A1SZ9yQ79EULxdpXfMVOHcxAUyVSIzH5zGpOOrkO70rR0lbdfTBmgDMRii/6nMmwV4zB
+         0zQc+wFKYGbGsYtepNIIdNXY5e26TK83AbR7KrNiNoKUFVe4oZ9FHhPuraOUYBQNh2x6
+         UZgqIs8AxUBYIIB5DDBqGY7+UHC3bAz8Op+W51bdTAFCriIuM+8VVi529CvCJIXfDuIl
+         LBpw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1789629431; x=1790234231;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=6sjRq5JwkomwjePlQI1kfNhFczaltRdPXNsYjKkX5UM=;
+        b=UEOsZFYqgbZ3Fd4S5fznXf8ZxcqQIkvdqNPvXkC2dcru50DSxpZ9UPLcNBgv40i0NA
+         vrUHSjv5qtqaUZXxHjcbMfwilJ1jYuQYlCM1bNXj/3fv1hDf4Dum6W0EsUj+Ga9pa7sw
+         Yfo4OKG0NxxUKsCV36qlLlmpwtpiO0FOuB9Fjo8Uwcb4NO0k8YBnrLUQsWaYEktaQBhm
+         2NAlMFa+R0fFU7zuOU6+KVjEETjVchWBlPm1UokPog8FHBF1wqlT6PDDAUodknZGMWbT
+         2Lxy4P10RiOqNUXoj6HRIjKNiddoVr2AY4zga634hNI9ySS6XBhHoFSJkaAtYV7qjMPU
+         wmWg==
+X-Forwarded-Encrypted: i=1; AKwUvBy/mEGIVG+r01Tl6f7L+9+j4VkRGeyDGyYyPKznU0DTKpmpQzD31IJ8ADcbOWP8dRZnlD4iSC6O1JqH/mhs@vger.kernel.org
+X-Gm-Message-State: AFuF++m3aX3E8fHVXj8tww0B4NOnsNG1btbhC6z85YG1xyEl0DOUoq+N
+	4xFD6c3v5WmdueMTSSc2Yde5pRcGEnTtTrhX3DKC4TVgglgIcoyPsfR+
+X-Gm-Gg: AYBFou1w2lcrbJK+EtSklGe0kf6tQYD3mlnQ6pf4CU9RMdww93uj1XnonWHkCxdJbpj
+	5YRHkC23pV5v28CPoRJunRy5sgFZbDfcTjpyd+MURkpWW3z/yJXccFWaxOEt/6xtcnaCqOqxXDU
+	y/gaTJUzXjstVi6ZoEJ1H/+vlHfeWOQ6s7DCK2as6voJbp9/wMwXTzyu3KT87qpgKe4DtU54s9o
+	mXpKEnPtpaWih3U+hcDjL3rZeZsfsJoYJOTIS8ug+YfEwluatHuNColM+60fpbuX2/FeXRqOin7
+	pm6C+aWoVtQCJSe85lSV8LFufsU7lUZwtFeSfiOaT26YxrNRLVz+v28K2A+/RkVZLY3PbyB+4aZ
+	8Q5wRGO4AMM+m/YT7xYfzK+e64mY0ySlGOGnF+O2y+t2H69zcXdrGHkiWbzW66/HPekHfJ5Lp2R
+	k987gu0UZRbZLwoEKGpdndl8h+tpZ8qJZSXu5hMapHpF6pP/MVkJaMgiwZqAxeUBU1okQ9bC5se
+	GVUuLWfrQK+7vhhYm3fR0wOnv5fTuPCMAzdscM=
+X-Received: by 2002:a05:600c:4ec6:b0:49c:fea3:8633 with SMTP id 5b1f17b1804b1-49eb732aec0mr62000005e9.24.1789629430773;
+        Thu, 17 Sep 2026 00:17:10 -0700 (PDT)
+Received: from [192.168.20.170] (5403F394.catv.pool.telekom.hu. [84.3.243.148])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-49fbd1ce79csm59310085e9.0.2026.09.17.00.17.08
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 17 Sep 2026 00:17:10 -0700 (PDT)
+Message-ID: <70d620e5-b03a-48ff-9b56-e787d03b4aed@gmail.com>
+Date: Thu, 17 Sep 2026 09:17:07 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -35,153 +70,52 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v11 0/9] media: iris: Add support for glymur platform
-From: Krzysztof Kozlowski <krzk@kernel.org>
-To: Vishnu Reddy <busanna.reddy@oss.qualcomm.com>
-Cc: Bryan O'Donoghue <bod@kernel.org>,
- Vikash Garodia <vikash.garodia@oss.qualcomm.com>,
- Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>,
- Abhinav Kumar <abhinav.kumar@linux.dev>,
- Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
- Mauro Carvalho Chehab <mchehab@kernel.org>,
- "Joerg Roedel (AMD)" <joro@8bytes.org>, Will Deacon <will@kernel.org>,
- Robin Murphy <robin.murphy@arm.com>, Rob Herring <robh@kernel.org>,
- Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
- <conor+dt@kernel.org>, Stanimir Varbanov <stanimir.k.varbanov@gmail.com>,
- Bjorn Andersson <andersson@kernel.org>,
- Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>,
- linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
- iommu@lists.linux.dev, devicetree@vger.kernel.org,
- linux-kernel@vger.kernel.org, Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>,
- Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-References: <20260917-glymur-v11-0-e0c8bc914742@oss.qualcomm.com>
- <20260917-dangerous-illegal-honeybee-cf479a@quoll>
-Content-Language: en-US
-Autocrypt: addr=krzk@kernel.org; keydata=
- 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
-In-Reply-To: <20260917-dangerous-illegal-honeybee-cf479a@quoll>
+Subject: Re: [PATCH v2 2/2] spi: spi-qpic-snand: drop the redundant ECC
+ context handling
+To: Johan Alvarado <contact@c127.dev>, broonie@kernel.org,
+ md.alam@oss.qualcomm.com
+Cc: konradybcio@kernel.org, pengpeng@iscas.ac.cn, miquel.raynal@bootlin.com,
+ quic_varada@quicinc.com, quic_srichara@quicinc.com,
+ linux-spi@vger.kernel.org, linux-mtd@lists.infradead.org,
+ linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org
+References: <20260911184416.109790-1-contact@c127.dev>
+ <20260911184416.109790-3-contact@c127.dev>
+Content-Language: hu
+From: Gabor Juhos <j4g8y7@gmail.com>
+In-Reply-To: <20260911184416.109790-3-contact@c127.dev>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-On 17/09/2026 09:09, Krzysztof Kozlowski wrote:
-> On Thu, Sep 17, 2026 at 10:30:19AM +0530, Vishnu Reddy wrote:
->> ---
->> Mukesh Ojha (1):
->>       media: iris: Enable Secure PAS support with IOMMU managed by Linux
->>
->> Vishnu Reddy (8):
->>       dt-bindings: media: qcom,glymur-iris: Add glymur video codec
->>       media: iris: Replace enum-indexed clock and power domain tables with per-block structures
->>       media: iris: Add power sequence for glymur
->>       media: iris: Handle CPU_CS_SCIACMDARG3 register write via program bootup registers hook
->>       media: iris: Add support to select core for dual core platforms
->>       media: iris: Add platform data for glymur
->>       arm64: dts: qcom: glymur: Add iris video node
->>       arm64: dts: qcom: glymur-crd: Enable iris video codec node
->>
->>  .../bindings/media/qcom,glymur-iris.yaml           | 218 +++++++++++++++++++++
->>  .../bindings/media/qcom,sm8550-iris.yaml           |   6 +
->>  .../bindings/media/qcom,sm8750-iris.yaml           |   6 +
->>  .../bindings/media/qcom,venus-common.yaml          |  11 +-
->>  arch/arm64/boot/dts/qcom/glymur-crd.dtsi           |  10 +
->>  arch/arm64/boot/dts/qcom/glymur.dtsi               | 120 ++++++++++++
->>  drivers/media/platform/qcom/iris/Makefile          |   1 +
->>  drivers/media/platform/qcom/iris/iris_common.c     |  10 +
->>  drivers/media/platform/qcom/iris/iris_common.h     |   1 +
->>  drivers/media/platform/qcom/iris/iris_core.h       |  32 ++-
->>  drivers/media/platform/qcom/iris/iris_firmware.c   |  69 +++++--
->>  drivers/media/platform/qcom/iris/iris_hfi_common.h |   1 +
->>  .../platform/qcom/iris/iris_hfi_gen2_command.c     |  19 ++
->>  .../platform/qcom/iris/iris_hfi_gen2_defines.h     |   1 +
->>  drivers/media/platform/qcom/iris/iris_instance.h   |   2 +
->>  .../platform/qcom/iris/iris_platform_common.h      |  46 ++---
->>  .../platform/qcom/iris/iris_platform_glymur.c      |  78 ++++++++
->>  .../platform/qcom/iris/iris_platform_glymur.h      |  15 ++
->>  .../platform/qcom/iris/iris_platform_sc7280.h      |  28 ++-
->>  .../platform/qcom/iris/iris_platform_sm8250.h      |  26 ++-
->>  .../platform/qcom/iris/iris_platform_sm8550.h      |  26 ++-
->>  .../platform/qcom/iris/iris_platform_sm8750.h      |  29 ++-
->>  .../media/platform/qcom/iris/iris_platform_vpu2.c  |  20 +-
->>  .../media/platform/qcom/iris/iris_platform_vpu3x.c |  67 ++++---
->>  .../platform/qcom/iris/iris_platform_x1p42100.h    |  27 ++-
->>  drivers/media/platform/qcom/iris/iris_power.c      |  20 +-
->>  drivers/media/platform/qcom/iris/iris_probe.c      | 153 +++++++++++++--
->>  drivers/media/platform/qcom/iris/iris_resources.c  |  81 ++++----
->>  drivers/media/platform/qcom/iris/iris_resources.h  |   8 +-
->>  drivers/media/platform/qcom/iris/iris_utils.c      |  58 ++++--
->>  drivers/media/platform/qcom/iris/iris_utils.h      |   3 +-
->>  drivers/media/platform/qcom/iris/iris_vb2.c        |   4 +
->>  drivers/media/platform/qcom/iris/iris_vidc.c       |   6 +-
->>  drivers/media/platform/qcom/iris/iris_vpu3x.c      | 216 +++++++++++++++++---
->>  drivers/media/platform/qcom/iris/iris_vpu4x.c      | 137 ++-----------
->>  drivers/media/platform/qcom/iris/iris_vpu_common.c | 102 ++--------
->>  drivers/media/platform/qcom/iris/iris_vpu_common.h |   3 +
->>  .../platform/qcom/iris/iris_vpu_register_defines.h |  13 ++
->>  38 files changed, 1229 insertions(+), 444 deletions(-)
->> ---
->> base-commit: 0d9d0dbf2fddcff5859d623e90ca73c4054276e1
->> change-id: 20260917-glymur-627d049900e0
+2026. 09. 11. 20:44 keltezéssel, Johan Alvarado írta:
+> qcom_spi_ecc_init_ctx_pipelined() now publishes the ECC context to
+> snandc->qspi->ecc, so the assignment in
+> qcom_spi_ecc_prepare_io_req_pipelined() repeats what the pointer already
+> holds, and the zeroed struct qpic_ecc that qcom_spi_probe() allocates is
+> never read.
 > 
-> Look here:
-> https://lore.kernel.org/all/20260726-glymur-v10-0-de451559e88b@oss.qualcomm.com/
-> change-id: 20260601-glymur-4fcd4d832ecc
+> The pointer is non-NULL only between context creation and destruction,
+> and every reader runs inside that window. The ooblayout callbacks are
+> installed by init_ctx. The page read, write and program helpers run only
+> when prepare_io_req has set page_rw or oob_rw. qcom_spi_block_erase()
+> runs only while the mtd is registered, which happens after init_ctx and
+> ends before cleanup_ctx. The controller drives a single chip select, so
+> the per-controller pointer and the per-chip context cannot disagree.
 > 
-> so now does this work?
-> 	b4 diff '20260917-glymur-v11-1-e0c8bc914742@oss.qualcomm.com'
+> Remove both. No functional change.
 > 
-> No, it does not. You are sending bigger work, multi-version one, part of
-> even bigger work, so please get the process working correct to make
-> reviews easier.
-> 
+> Suggested-by: Gabor Juhos <j4g8y7@gmail.com>
+> Signed-off-by: Johan Alvarado <contact@c127.dev>
+> ---
+> Tested on a Mercusys MR80X (IPQ5018, ESMT F50D1G41LB) with both patches
+> backported to 6.18.44. Five boots, rootfs mounted every time, mtd
+> reported 0 ECC failures and 0 corrected bits, and a 4 MiB file on the
+> UBIFS overlay kept its sha256 across the reboots. Overlay churn raised
+> the UBI maximum erase counter from 13 to 15, so qcom_spi_block_erase()
+> ran repeatedly. Build-tested on this base with W=1 and sparse, no
+> warnings, patch 1 alone and both patches applied.
 
-And it is getting even better:
-v6 change id was:
-	change-id: 20260515-glymur-6e69bc258fb0
+Tested on Tp-Link Archer AX55 v1 built on top of 98100d83adc8 ("Merge
+remote-tracking branch 'spi/for-7.4' into spi-next"). No regressions observed.
 
-https://lore.kernel.org/all/20260515-glymur-v6-0-f6a99cb43a24@oss.qualcomm.com/
+Tested-by: Gabor Juhos <j4g8y7@gmail.com>
 
-???
-
-Best regards,
-Krzysztof
