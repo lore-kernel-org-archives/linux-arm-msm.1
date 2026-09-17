@@ -1,203 +1,194 @@
-Received: from mail-ed2-f35.google.com (mail-ed2-f35.google.com [74.125.228.99])
+Received: from mail-ed2-f3.google.com (mail-ed2-f3.google.com [74.125.228.67])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1E7E6388878
-	for <linux-arm-msm@vger.kernel.org>; Thu, 17 Sep 2026 08:11:30 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.228.99
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789632692; cv=none; b=E152fH0/qpz+ea1y0TIp48KJvbxxwWqf6u64CfRQuiHb+lpuPmCHVNayAkrCduDAvuJd5ZEXiMNNnw5Uac2uey5DgZLXxU7QbRzmao62IZmmzSSxEwjWG11xgF5KBt93vaXkR5sDnqfLYS9ZN/4ADQMOElof36kxuY1UwPK7ksI=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789632692; c=relaxed/simple;
-	bh=pPdt+eVUGT67x+IwAHC1ZsE6n9l1yCrm23aUxT3YHnQ=;
-	h=Mime-Version:Content-Type:Date:Message-Id:Cc:Subject:From:To:
-	 References:In-Reply-To; b=pOKVeNCw4mO8N/zO7O9N+0nWhYzdpPHjTE4J5GnRwBXfNUX2PEJ1aTpanAxxn2SvkFZ6ZRzSxjhufQw9uU/iOLE+uXLylHdarTf3PYe0JUs+4NRMuoo1Y+yz4yzm5eVqO7UqQB6QVwygjzGh4HXmvsSORaOu6bxh7hJ9vlGw8sY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=fairphone.com; spf=pass smtp.mailfrom=fairphone.com; dkim=pass (2048-bit key) header.d=fairphone.com header.i=@fairphone.com header.b=DdS/d1im; arc=none smtp.client-ip=74.125.228.99
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=fairphone.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=fairphone.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BB2CB391513
+	for <linux-arm-msm@vger.kernel.org>; Thu, 17 Sep 2026 08:21:17 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=74.125.228.67
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1789633279; cv=pass; b=mB7orAAWr3CA6NKcofqlzk4qdEMtcFh6aXXvNC9jLrG3dWnzU26pPUQ2bzuktionKFUqPgKtTmYRNFU+oOpztxPqaN727MRmn6aWqZ9S2ZeZpOlCYnDr5gtFdsW8Iw6vscMcNRNG8jHH0YiNftkuPvS91RViFYS2jmqgP85Fu4I=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1789633279; c=relaxed/simple;
+	bh=Mt2nG22gQ2VlhRCDsFPAMB9fHywKLlkANeCXC+o2mY4=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=adYk0vEwPHZ07dfkGD4rduKEY9P1la/qk8eqZZ9Mhm2Q4sBaTcf6nOCknJLbwyPS8KY3t3zPWNi0tzgj/NbkgO3ecZyqF1bc6qLzc7JRLiIpruA+3uQ/DgBpbIv28SECwSil2B7h01WWu5Mj5U7rzGZw74GyLHWNfaXPepDPJP4=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=LkNgSj6j; arc=pass smtp.client-ip=74.125.228.67
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=fairphone.com header.i=@fairphone.com header.b="DdS/d1im"
-Received: by mail-ed2-f35.google.com with SMTP id 4fb4d7f45d1cf-6aa22408406so876160a12.3
-        for <linux-arm-msm@vger.kernel.org>; Thu, 17 Sep 2026 01:11:29 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="LkNgSj6j"
+Received: by mail-ed2-f3.google.com with SMTP id 4fb4d7f45d1cf-6a5d1305572so41701a12.1
+        for <linux-arm-msm@vger.kernel.org>; Thu, 17 Sep 2026 01:21:17 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1789633275; cv=none;
+        d=google.com; s=arc-20260327;
+        b=PGkl8G4XxVZk8bwjifFTyThFF5fRFk37CdLUEqAORCrQ0Rn3/cZbImKx16kofkGq/N
+         cFnNGqI/fbzDcz+CFi2F25atmTQblriXPRaCBpepWkSFezDeRS/6VLonihXpFjLb3z5F
+         Li9Qmbfj/MIZCk4/DIVBH3ZQ8A56avNHRhYIIkMAlMEXa7OPg0n7Sxevk9qdgY3LZK9M
+         uLJw+HDMwO+SXPA95ZwN3pnTXHsPL+MlCq8OQRiY3rsWx9jOFbziMNCO6sP3aK3DnhqN
+         YFtG6thT41XcD1ESkU0LVT/0GOWrrXwJe6/PpAlhvrUL9X10i7ZXlUISlSV8PeYXovNt
+         YrRw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:dkim-signature;
+        bh=Mt2nG22gQ2VlhRCDsFPAMB9fHywKLlkANeCXC+o2mY4=;
+        fh=xWjrAUZtMG7DDUYCZN/bQcp6Mg82fx95WMDjsJrBI7c=;
+        b=fQbVbrHS8eRAb3XgSpYKR3hF8sxg+mGEyxynGc352xqh/Hahh4i1eBKcJMIZXDIUSK
+         BXOWXy9ycjfX/K5s4ueDD1dhCuNQJCEpXhcZI53hBOKB5iB83zbDUXC1JUHZVpDVq6O4
+         DmtCgdoAX62UTHt9EsXvX99U9xoMEriWGv0a+GSv227l4ylRS1c4X6tZj9fymp6QPZ9v
+         CoeCcx1NBsjWTMZd7sUiwMqnXQ+T2bhGTPrsROAuLo/5z60Uz8JJnmyzK9IyFOYCNln4
+         tBNq2dQ2m6C2quUQlznAGtcS5fkmxymBdOVnlTwGmC0NRW6qrqoE/+LAdv/4YGEWRBef
+         qqMQ==;
+        darn=vger.kernel.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=fairphone.com; s=fair; t=1789632688; x=1790237488; darn=vger.kernel.org;
-        h=in-reply-to:references:to:from:subject:cc:message-id:date
-         :content-type:content-transfer-encoding:mime-version:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=ul3iVroMFe8qrm8FbvVkT98nKEMOhIID1sGLRlIk0SE=;
-        b=DdS/d1im+3bA+AA9Lu42VlVpmPxNtXlgIPRFKAD47VPD9Qe7+Xb2xiJUDK500rI3tO
-         2HHchtXGLtIrjyKM917f1Tn+50aub71heMdA5oajEBlxOS4336me2BIsqpNMgOEtAGSl
-         tBZcqIeK1IHRvhV7ruTzESh98hjZsLFCKzadZj80B8K9tRRRpMEeAY60MK0VEemg1J4C
-         hhWZNh84o63jna4+eKr9hUycEaagfVYoGq7A2k/zUsBH8jOIgr4S4d4On32hKZdf5/en
-         eYLFYmzEy6PXi+xh3X9NgV/6DbpI66zDtGVz2++p3rIFBlNlpzGHVnD5SU4wKHCyZcp+
-         J4rg==
+        d=gmail.com; s=20251104; t=1789633275; x=1790238075; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=Mt2nG22gQ2VlhRCDsFPAMB9fHywKLlkANeCXC+o2mY4=;
+        b=LkNgSj6j1mh+t4RwWFqK0oZGmHByGzWfcY/zg1MYPjx1xJGUsm3Levzmg417PBZ/GX
+         lS4n4bDiQ7tLC+iV/ptYNIlTQKgCmtD1qqq8DZwX9nwKvUybD/WxwuNLq4XlqOFraN6J
+         e2pkajBHBVhw76hnQuSRkrcUSmYLUl2cuqQsGypWILVEmLEgyVf7iCYEaFBHfJOGlAVO
+         OkhaajhhQu9KyE5sB+km8AUYGVWRbxEDjZUgMUXB26aVb+rynQUFpvOtQ6Q6gekDOdPp
+         PhRf1Uhn6Mpea/EwRT/oMizBfmS2ibRJGktxgpXutOxCGzD+nfIksnWachRymFwffUsd
+         RH3g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1789632688; x=1790237488;
-        h=in-reply-to:references:to:from:subject:cc:message-id:date
-         :content-type:content-transfer-encoding:mime-version:x-gm-gg
+        d=1e100.net; s=20260707; t=1789633275; x=1790238075;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=ul3iVroMFe8qrm8FbvVkT98nKEMOhIID1sGLRlIk0SE=;
-        b=A+612uTiyP1JUFfN/pVy1m0oCIDLJ7Irlpg7GTXHr8CjVF6E4I8ICINwWfdTF87z2O
-         gXBPWwqSI9bM2n4/zRQZK3TTRnral1GFoKpnQwnScuVA9OgTWP+LAAemD7awR9K5hEgY
-         OIU2f+ejX/O3TDIR/NXPO9WrJ/ddwnT2xJGhiAhay2TnFw297C2o+qTImIvzKlvJ2QMF
-         GbIqMrII91KI0MMPsCjwDhQAjqgnpOTRLSg0ybxyUbmFnD6M529fN3Q+ZMTK/neF+Ag1
-         OKzBKVOrX4b0Th6bSSu7/9Sz+Hk4r8bRz473sjRn2HuxRcFyK+NVn5cRmUpWIHejjdvf
-         DS3g==
-X-Forwarded-Encrypted: i=1; AKwUvBz2wi2JcNT/6kyOFPKvCRc2T2aHbj1Vl0J1StN3If+Ec6Och5Uv5uDQ4CEHwD0tBOLi6p7/lpLKEGrFQdFd@vger.kernel.org
-X-Gm-Message-State: AFuF++mffxrzuU0srpaFCD2X1d7XHC+l/A694hUwWKiQnd6drkBqaLmZ
-	/RhvYbxLQ8pbGIp74riKYV8ey7V7mUnrkK2UryfoZdAO3yLbKblgAK9WBDiyGpr9Fd8=
-X-Gm-Gg: AYBFou0YOFanMN0VH4yqpMWHtqT+7LbOc5wLgz7QX1nPVDyJf2/6dFVGgSz6xugDpXd
-	TcvWcZnV++v0REkJZaRYdDt/sPsXs3iszVriJGJvpIOuP8MHnRoB3oADg8fizIr1b+N80yIFWh3
-	0CakHuBEm1qCETiw7DnQR/Bm8quz2Jti2mgCJNjXQUBAIaFWhXHimHndCIDwjeEAOzukZeyUj06
-	ji+W2Gh/+LOxESJXjxuD8qpTtKOb1uEAYHPnIW/0gOoOeAntUpnswoeOnn1ki796EBjnftaYZED
-	GoxfAPZHrThr26FmzFbV2BTlA3Dk0ir6BX5qwjWPPfTfFuu4HyoUn8BlxdseziXJhtRVmtxyFIX
-	ZFBTItFHQF7Nc2k05aqRn430i9217jimtqQ1riiLi1sns8TJxRKjxJeNydSaRHU8d2hPOOTkwk8
-	ri8QyQjJcMo9LOKdRCFxRv9X4lhxIXCzj1+MP5UaqsEo1MpNfrB4zcCBe3ox9neKCEs5FGy4/l6
-	omUmH3JCNCyrPob6b4lx3ZUHJBlwsMZJLZvjWvqkrA=
-X-Received: by 2002:a17:906:478a:b0:c29:1133:e17b with SMTP id a640c23a62f3a-c29e523e769mr435122166b.19.1789632688364;
-        Thu, 17 Sep 2026 01:11:28 -0700 (PDT)
-Received: from localhost (144-178-202-138.static.ef-service.nl. [144.178.202.138])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c29de63c5e7sm238690466b.53.2026.09.17.01.11.27
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 17 Sep 2026 01:11:28 -0700 (PDT)
+        bh=Mt2nG22gQ2VlhRCDsFPAMB9fHywKLlkANeCXC+o2mY4=;
+        b=BPe4WQ18wM8hyAWaLXo4RHzymylAyoNN4Rp0ES1Buwt/vI6CTCOR0yIhAlbMLaeTCf
+         8LrUwfJ5ZaKZf3NYZEfFlSGdE5LAtNhCpVVtKH/9So18dkD8UhtBDKFO5WN70Rzty5St
+         a0qYqgjQOEMbtkus1GGDKBwaZCapjn7WBhkjI01NLPTYYzC3dVrAcd8/vgDqsfUFAfu/
+         sWk1Fma/2Gtm+oM2WfSGJIxRkE02QC420/rUAinz8YZM5pTFGevk0M61WdfCFHxLMn/c
+         RCg3kF+3uP0SP1TfhcC/sLJ5Xavz4opDciSui420Iw4GjJMGUf+EmDryJMHL8hWKejn7
+         Bjaw==
+X-Forwarded-Encrypted: i=1; AKwUvBwn2WklOSceC9Y1x6NER7jFj3DL0MA3VJ/CJC9l0LrFOjIRDJTgLxOyrd2LlllNCbqxFlk4CDXHaT6q9w5Q@vger.kernel.org
+X-Gm-Message-State: AFuF++ntTcRS7GQoU+ml45aQNlCRYAnQZtVKAtH6o5fA/2wP0gPq71rf
+	ja4wQFPJdvHiJs/Oo8S1VfYcxMNmZJm1HGBYWOG+2Xwxs/gYwmU6mIUQj/bHfqHkDjKTzlUBtzi
+	FqDFHN71BRwYjOsCJ3J1VTwlNy0arUtQ=
+X-Gm-Gg: AYBFou2Pk3Bo38iKwKAjd8kycWmFCqHI1vsmzJbUqatXlNqVPVSW4lNxDgGEnCIGFXJ
+	QWJnWW/KBY3RhJErBvGmBu8/845BdKtA3vQH8jImOK3loj41mzmU6E9o8gpXE9Zu7gqlXsHS6Mp
+	sp9SZ2/ryy+lyrTKsNOo1DB4ICdauOoq04nwdCiej1GwEUSta9PwDJkjIwV7pklB1PKjV/jF2EH
+	wwtPmOBW7PbwWDp3jjyjgaZKDfYkqRl/TdfjQR9qGMQVYMuxau9p1welr78Gg3xbLgGTPaF3cFy
+	NgCVpZWJ3IiX5IDT+6y7s4ivwxMcWcAdG70YSJCvi7hzR+0MWheXlj1ZXBI8sLbixRE96w==
+X-Received: by 2002:a17:907:3f11:b0:c25:35cd:fdb2 with SMTP id
+ a640c23a62f3a-c29f526dd2dmr190379266b.7.1789633275095; Thu, 17 Sep 2026
+ 01:21:15 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
-Mime-Version: 1.0
+MIME-Version: 1.0
+References: <CH3PR11MB8413FCBA598F7FABC04ADCFEE4B92@CH3PR11MB8413.namprd11.prod.outlook.com>
+ <CH3PR11MB841353E5708DDD7C5E2EA1D5E4B92@CH3PR11MB8413.namprd11.prod.outlook.com>
+ <aqqI9wOnradk9d7K@oss.qualcomm.com> <97924d2f-45f9-44d5-b482-97fcbb70abdc@bootlin.com>
+ <CH3PR11MB8413131D50175690DF9FDAB0E4B82@CH3PR11MB8413.namprd11.prod.outlook.com>
+ <3bdf2ecc-9dd1-428c-8841-36b1f19916e7@bootlin.com>
+In-Reply-To: <3bdf2ecc-9dd1-428c-8841-36b1f19916e7@bootlin.com>
+From: Coia Prant <coiaprant@gmail.com>
+Date: Thu, 17 Sep 2026 16:21:03 +0800
+X-Gm-Features: AcwNN1XL07xRu5XXN3J_i5sQYnNCkDU2pPnYaE7rXj6dGCxz8rSrRM8IV9aR83Q
+Message-ID: <CALj3r0gXP0+bwsPVtuw=9RRQ6gpmuHzGc5PzF_a3XXXTTZYcqQ@mail.gmail.com>
+Subject: Re: [PATCH net 2/2] net: stmmac: qcom-ethqos: advertise supported
+ SerDes interfaces
+To: Maxime Chevallier <maxime.chevallier@bootlin.com>
+Cc: Thomas Karpiniec <tom.karpiniec@outlook.com>, 
+	Mohd Ayaan Anwar <mohd.anwar@oss.qualcomm.com>, netdev@vger.kernel.org, 
+	Russell King <linux@armlinux.org.uk>, Andrew Lunn <andrew+netdev@lunn.ch>, 
+	"David S . Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, 
+	Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, 
+	Choong Yong Liang <yong.liang.choong@linux.intel.com>, Bartosz Golaszewski <brgl@kernel.org>, 
+	Russell King <rmk+kernel@armlinux.org.uk>, linux-arm-msm@vger.kernel.org, 
+	linux-kernel@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
-Date: Thu, 17 Sep 2026 10:11:27 +0200
-Message-Id: <DLHFUAOHVWN7.1K596C038662Y@fairphone.com>
-Cc: "Joerg Roedel (AMD)" <joro@8bytes.org>, "Will Deacon" <will@kernel.org>,
- "Robin Murphy" <robin.murphy@arm.com>, "Rob Herring" <robh@kernel.org>,
- "Krzysztof Kozlowski" <krzk+dt@kernel.org>, "Conor Dooley"
- <conor+dt@kernel.org>, "Konrad Dybcio" <konradybcio@kernel.org>, "Rob
- Clark" <robin.clark@oss.qualcomm.com>, "Bjorn Andersson"
- <andersson@kernel.org>, <linux-arm-msm@vger.kernel.org>,
- <iommu@lists.linux.dev>, <devicetree@vger.kernel.org>,
- <linux-kernel@vger.kernel.org>, <linux-arm-kernel@lists.infradead.org>
-Subject: Re: [PATCH 00/12] iommu: qcom_iommu: implement support for
- instances on MSM8974
-From: "Luca Weiss" <luca.weiss@fairphone.com>
-To: "Dmitry Baryshkov" <dmitry.baryshkov@oss.qualcomm.com>, "Luca Weiss"
- <luca.weiss@fairphone.com>
-X-Mailer: aerc 0.22.0-0-gc2f86b7abde3-dirty
-References: <20260809-msm8974-iommu-upstream-v1-0-87f5cd492560@oss.qualcomm.com> <DKL6P7G0WTM7.UJ6KZERQZDFK@fairphone.com> <iv5radfllym2bjvkrdu4ffs25bqixyos7k3ymncpcdtc2uobn2@zlhsybrj3pwz> <DKX384NK76OS.3NNOMAH72PV2P@fairphone.com> <ssleznoahzs4wgf5irjiagss2rjwl2s2jjnqrrnlpp74rdkgfs@au6x63ykyjfs> <DLBKL8SJL58R.2XQ76X6JILZ8E@fairphone.com> <CAO9ioeUEQ+kzBLj3KTv+uayaE-5aw-aL49-0pJ-x_Vwq4nu9JA@mail.gmail.com>
-In-Reply-To: <CAO9ioeUEQ+kzBLj3KTv+uayaE-5aw-aL49-0pJ-x_Vwq4nu9JA@mail.gmail.com>
 
-On Thu Sep 10, 2026 at 4:20 PM CEST, Dmitry Baryshkov wrote:
-> On Thu, 10 Sept 2026 at 13:38, Luca Weiss <luca.weiss@fairphone.com> wrot=
-e:
->>
->> Hi Dmitry,
->>
->> On Tue Sep 8, 2026 at 3:28 PM CEST, Dmitry Baryshkov wrote:
->> > On Mon, Aug 24, 2026 at 12:04:57PM +0200, Luca Weiss wrote:
->> >> Hi Dmitry,
->> >>
->> >> On Tue Aug 11, 2026 at 2:43 PM CEST, Dmitry Baryshkov wrote:
->> >> > On Mon, Aug 10, 2026 at 12:16:19PM +0200, Luca Weiss wrote:
->> >> >> Hi Dmitry,
->> >> >>
->> >> >> Many thanks for working on this and sending this patch series!
->> >> >>
->> >> >> On Sun Aug 9, 2026 at 10:15 PM CEST, Dmitry Baryshkov wrote:
->> >> >> > Qualcomm MSM8974 platform has five SMMU instances, used by displ=
-ay, GPU,
->> >> >> > Venus, VFE (camera) and JPEG encoder. Each of them follows ARM S=
-MMU v1
->> >> >> > spec, however they differ from other Qualcomm platforms in the
->> >> >> > implementation-specific registers and also in interaction with T=
-Z.
->> >> >> > Venus, MDP and VFE SMMUs are secured and require programming onl=
-y of
->> >> >> > CBs, while GPU and JPEG require full programming.
->> >> >> >
->> >> >> > This series skips IOMMUs which can't be tested right now (VFE an=
-d JPEG),
->> >> >> > and adds only MDP, GPU and Venus (although untested, it is requi=
-red for
->> >> >> > display to work) SMMU instances.
->> >> >>
->> >> >> I do have a patch series (sent years ago to the mailing lists as w=
-ell)
->> >> >> for CAMSS so I can definitely test this in the future.
->> >> >
->> >> > Ok, let's land these first, unless VFE IOMMU blocks display on your
->> >> > platform (Venus was blocking display on APQ8074 DragonBoard).
->> >> >
->> >> >> > Note, to get display to work properly one fix is necessary, [1]
->> >> >> >
->> >> >> > [1] https://patch.msgid.link/20260809-msm8974-mmcc-fix-v1-1-50f2=
-dcf18d2e@oss.qualcomm.com
->> >> >>
->> >> >> I've applied this series on v7.2-rc7, with the extra commits betwe=
-en
->> >> >> that and linux-next for qcom_iommu.c backported so that your serie=
+Maxime Chevallier <maxime.chevallier@bootlin.com> =E4=BA=8E2026=E5=B9=B49=
+=E6=9C=8817=E6=97=A5=E5=91=A8=E5=9B=9B 13:36=E5=86=99=E9=81=93=EF=BC=9A
+>
+> Hi Thomas,
+>
+> +Coia
+>
+> On 9/17/26 06:29, Thomas Karpiniec wrote:
+>
+> >> Can you test settung the STMMAC_FLAG_SERDES_SUPPORTS_2500M flag in
+> >> dwmac-qcom-ethqos ?
+> >
+> > I can confirm that dma_cap.pcs =3D Y.
+>
+> Thanks for looking up :) This is a good start
+>
+> >
+> > I tested setting STMMAC_FLAG_SERDES_SUPPORTS_2500M on hardware and unfo=
+rtunately the flag alone doesn't solve the problem.
+>
+> Yeah, but it's still the right first move. Russell planned to do that as =
+well :
+>
+> https://lore.kernel.org/netdev/E1vvDJi-0000000ArhH-3ipf@rmk-PC.armlinux.o=
+rg.uk/#t
+>
+> >
+> > I think there are a couple of things missing. stmmac_phylink_setup does=
+n't use the integrated PCS bitmap to populate config->supported_interfaces,=
+ so SGMII is still not advertised to phylink as a usable host interface. Al=
+so stmmac_integrated_pcs_init is adding 1000BASE-X unconditionally, which w=
+ouldn't be appropriate here.
+>
+> Ok so, the missing bit seems to be that priv->integrated_pcs isn't taken
+> into account in stmmac_phylink_setup(). This needs to be added then :)
+>
+> Looks like there's also the inband support that needs addressing, that wa=
 s
->> >> >> applies without conflicts.
->> >> >>
->> >> >> So far I'm stuck with the GPU not being able to probe, adding some
->> >> >> printk's shows that in msm_iommu_new() the call for
->> >> >> iommu_attach_device() is failing.
->> >> >>
->> >> >> [    5.971154] msm_mdp fd900100.display-controller: failed to load=
- adreno gpu
->> >> >> [    5.972991] msm_mdp fd900100.display-controller: failed to bind=
- fdb00000.gpu (ops a3xx_ops [msm]): -16
->> >> >> [    5.974073] msm_mdp fd900100.display-controller: adev bind fail=
-ed: -16
->> >> >> [    5.974152] panel-s6d6fa1 fd922800.dsi.0: error -EBUSY: Failed =
-to attach to DSI host
->> >> >> [    5.974230] panel-s6d6fa1 fd922800.dsi.0: probe with driver pan=
-el-s6d6fa1 failed with error -16
->> >> >
->> >> > See the patch [1], it's picked up for 7.3
->> >>
->> >> I missed replying to you, with this patch the display lights up again=
-!
->> >>
->> >> Unfortunately the GPU still seems to have issues, I don't have a log
->> >> right now (I think even SSH was dropping then with a bunch of log lin=
-es
->> >> appearing in kernel log on screen). I assume kmscube + more complex
->> >> workloads worked fine for you?
->> >
->> > I was mostly using kmscube, but I can try running the CTS once I get
->> > back to it, sorry for the delays.
->>
->> Yeah, kmscube doesn't even work for me.
->>
->> Bootup works to a tty with screen on (mdss doesn't seem to have any
->> problems for me), but then as soon as I run kmscube the device shows a
->> few errors on the tty0 on the screen (USB stops working apparently since
->> my "dmesg -w" doesn't show anything) and a few seconds later the device
->> reboots.
+> part of his RFC here :
 >
-> Interesting. I wonder if it's TZ tripping on the VFE IOMMU.
-
-Do you have any suggestions for me to try?
-
+> https://lore.kernel.org/netdev/E1vvDJi-0000000ArhH-3ipf@rmk-PC.armlinux.o=
+rg.uk/#t
 >
->>
->> dmesg: https://public.lucaweiss.eu/tmp/fp2-iommu-dmesg.txt
->>
->> The SoC in my device should be MSM8974PRO-AA (a.k.a. MSM8974AB-AA).
->>
->> I know there are some differences for some bits between MSM8974
->> (Snapdragon 800) and MSM8974PRO (Snapdragon 801), which variant do you
->> have? Maybe that's relevant, also since downstream splits devicetree
->> based on 8974 and 8974pro.
+> > I did a proof-of-concept fixing those things and the end result looks a=
+ little messy: config->supported_interfaces could come from either get_inte=
+rfaces _or_ the integrated PCS with unclear (to me) responsibility.
 >
-> Mine is APQ8074, not sure if there were revisions.
+> There's only dwmac-intel, dwmac-spacemit and dwmac-rk that use the
+> .get_interfaces() API. Let me add Coia in CC, as they're working
+> on better PCS support specifically for Rockchip :
+>
+> https://lore.kernel.org/netdev/20260915123802.1561724-1-coiaprant@gmail.c=
+om/
+>
+> For spacemit, looks like it's not really a problem as there's no PCS
+> involved. For intel though, heh... Intel platforms with dwmac AND PCS
+> are hard to come by, but I think at that point let's roll with the
+> bitwise or'int of get_interfaces + pcs interfaces.
+>
+> > This POC did show that STMMAC_FLAG_SERDES_SUPPORTS_2500M enabled phylin=
+k to configure the integrated PCS for 2500BASE-X and a 2.5 Gbps link came u=
+p with no apparent issues.
+>
+> Maybe the blind spot is inband aneg. Mohd, you were quite involved in
+> this, do you remember where we stand on that front ?
+>
+> Thanks,
+>
+> Maxime
 
-Maybe /sys/devices/soc0/* or /sys/kernel/debug/qcom_socinfo/* has info
-about the revision? But maybe it's also not useful. I checked a bit more
-before and all msm8974-v2 downstream seem to have the same IOMMU config,
-just msm8974-v1 (which was barely shipped?) has different configs. So
-hopefully the SoC revisions shouldn't make a difference here.
+Thanks for adding me.
 
-Regards
-Luca
+For the Rockchip side, rk_get_interfaces() no longer needs to advertise
+SGMII: stmmac_phylink_setup() already OR's the PCS's supported_interfaces
+into config->supported_interfaces, and the XPCS driver provides SGMII
+there. I'll drop the SGMII line from rk_get_interfaces() so RGMII ports
+don't advertise SGMII unnecessarily.
+
+On the qcom issue: the missing bit seems to be that
+stmmac_phylink_setup() only looks at priv->hw->xpcs and
+priv->hw->phylink_pcs, not priv->integrated_pcs. Extending the existing
+OR to cover the integrated PCS would let qcom-ethqos work without a
+new get_interfaces() callback.
+
+Best,
+Coia
