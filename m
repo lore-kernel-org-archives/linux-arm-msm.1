@@ -1,200 +1,86 @@
-Received: from mail-ej2-f12.google.com (mail-ej2-f12.google.com [74.125.228.140])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from cstnet.cn (smtp25.cstnet.cn [159.226.251.25])
+	(using TLSv1.2 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 62E064B7A26
-	for <linux-arm-msm@vger.kernel.org>; Thu, 17 Sep 2026 15:25:19 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.228.140
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D32954E3237;
+	Thu, 17 Sep 2026 15:25:32 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=159.226.251.25
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789658735; cv=none; b=pVIseILdcT+RjQ97CjytjLgOmZCDJphXMA/ioJCALw3v8weTaSBWUhp3el8stIHWi/v7NJRpvvpmCNYfi1vuxjm35K5OClmbsqcQVPrsx6ewDwZXi+m7xBYZ8/3BITOL5ztEnBPxxUcKraA2W1X4Y+LjuUxJ6S8aTk7kxhr88ss=
+	t=1789658761; cv=none; b=L/3+EbDY1Vwnm2SaYfOPZ45hlW5gdOTwKO3tB/1qe1JhOzph46tEbj3AmkrgEFVeMPk28dVG8leEHlfaZDyUqN0F3BQrV/MiOyOeMhKKFR4p7FxaiXiF2Z8gCVxdQ34Y2aXmZHM3wmnKFfnWfSML/qKblPsL2EASfcLPd/fUcZM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789658735; c=relaxed/simple;
-	bh=cDzuifZ35uySk/UpiYP0iSj8OxDSP029LxC//N6wFuk=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=Cs85C6K+HYsLQQ6srU8/bckQZlpWW/lQ3JnbRZSH8fQJ9CVpPbJXtQQ1O4EqsmgP+y//tdBg8vGfivHkT5bypv5vcMo5fzLJCaYzky5/YIt3Hffci/Jg5aeMfAwD6/iltnx4Q6Yj8GCePTl9L4bQLy6M67RdTvkBdcBp7P8Uvlo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=TtJ8ZDz6; arc=none smtp.client-ip=74.125.228.140
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="TtJ8ZDz6"
-Received: by mail-ej2-f12.google.com with SMTP id a640c23a62f3a-c2953a01240so169654466b.0
-        for <linux-arm-msm@vger.kernel.org>; Thu, 17 Sep 2026 08:25:18 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1789658716; x=1790263516; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=NMwGESoTpoxCW93e8KzY70EiAiyUsNG/4JMq0LantCg=;
-        b=TtJ8ZDz69SGBUUx3acUjEswfKRJKS1KsNVBlSV+VQ0n1Y/Iz9PKCeFh2zq5Xjaj9vF
-         uqZxiulbtuis2jQKoq3X6ocqgPNMnkRKssEiRrp0sQ+1Lg4ZRUWct26O7TBS0aHEKwUR
-         BeAql+KPKR7w/yfmhFwBtl7akDX+IwM5d+l1Bedv1GmgkGKyE5eIodx3oDCFaBticnlI
-         1qQpZFLVF3ZM3zoGwyhBrIE08TLRZw5IFCIUtJ5gxoF+a6NAjFf+B1wwk7OgqU+9EsD4
-         ifkTfz+V5FpSwx5rDX4QI2MFMDiu4XOTS/Kf2VXQo8e/ZAdELnwbB9Ku12Xyjknid21u
-         nNHg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1789658716; x=1790263516;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=NMwGESoTpoxCW93e8KzY70EiAiyUsNG/4JMq0LantCg=;
-        b=ETho8QYaK5FeiHsl42nowwHa+hEmk0sLlYA1KpJ9nQ5gT51K7322O7QZzGxLWVJNMj
-         NECNYylyWIf23glgqx4f9BVtyk/BX39nyGeMyErlNGDjuvZtePvOjy37+h+qUnKZYBGw
-         blx2kxN6cCRyTBy3TYKPW36LhTHeYN1xlEPa7ZTS+n+VCEmzEzN425SRZ/RVwdSJ1oL5
-         bNejBYAOIT/nHRq8tdGhCzXrUXFEC7P+tVuhjYleU14SQiEi4WLVvD54Jzy6eq4VqLgP
-         /qF/A2kOKQy2yPCo2R8Zr74B5wPkA2kY2cGIJIUQ07Lv47bCidI2KLM35Zeg0R2oZBcI
-         akXQ==
-X-Gm-Message-State: AFuF++kwjbvf6UzEQplexFmYIevXC9yIMDba+zKaXQhZ2hBbVipIEAkn
-	3YQSU5G6es4SduiQ7mckLnvxaRkdZV4/AP0UJayjHoEutvVKrVs+mxbF8HBKShUg0H0=
-X-Gm-Gg: AYBFou3nATEhFZJuTm/rbXCKCapRr9fKnAwBBd9cfh2s+9QkmSkIPbZfETp7AuV41io
-	zgUXh+nyz9sjAlDwjQYVSAAkjGpGpfwOCXjU0dGizcbEAlNHMQr/1iU87L1kbI2GRSgHpxACvrz
-	GMn5uswj3VIThumf74luEjvE5Wn+epjbtxKvpzNKDvWj6pV0myOD+zPO3qw8Wn1lv0PHlUrIRcg
-	1gNKs/9UwIblhv3poCkgLKUrGhk670iP/Y5xwC8pxUHUE1zCdvpygJY+daoNSJopXEZkgKjYQKN
-	ZBwEtFTpUVH8e3ukHx/BO3/YpIJOFGmSTpcMMxXrXgP28y79fxNzvccCs0EmgScz5NVHsP1/Den
-	B8XvCGjc7pjgLroRax9LtjdlwlKbTXwy2vryjewe2d7z3osonbX4DreH2BlQDtAh8D47TofpJBy
-	Agawp+CUDQiIB0tdE2/IJyDnb44jJ52401w+cGa0pVjV2+eg3r1Z4nZInpnB+rP2dhA5sP9CCbq
-	ZNKbTSPF0Nms+hu7FB4
-X-Received: by 2002:a17:906:7948:b0:c29:3838:dd5e with SMTP id a640c23a62f3a-c29e530a3femr490991866b.40.1789658716124;
-        Thu, 17 Sep 2026 08:25:16 -0700 (PDT)
-Received: from [192.168.0.35] ([109.76.29.130])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c29de48755asm310587366b.24.2026.09.17.08.25.14
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 17 Sep 2026 08:25:15 -0700 (PDT)
-From: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
-Date: Thu, 17 Sep 2026 16:25:08 +0100
-Subject: [PATCH v19 3/5] phy: core: Add devm_phy_get_by_of_node()
+	s=arc-20240116; t=1789658761; c=relaxed/simple;
+	bh=b2tYbP9dEWbJQwP9zqMlozdzKLmVGmupdMg6XCPlg0s=;
+	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=pE1YfL4wTP29de/FQNnUguAUaMd9con5DipOC2tf41ItFlbuD5HdKJRObhEk0PI1WXlCdt6ARiOQHNoiexm1LOv8mO3009PFMWwc8r3JPMWoe//mrX32VoLQ/lXMjby7dUG3jX+JQxLiT9JMdGUrzUFmOKREEOhMoajZVXxJ0MQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=iscas.ac.cn; spf=pass smtp.mailfrom=iscas.ac.cn; arc=none smtp.client-ip=159.226.251.25
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=iscas.ac.cn
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=iscas.ac.cn
+Received: from dfae2b116770.home.arpa (unknown [36.110.52.2])
+	by APP-05 (Coremail) with SMTP id zQCowAAHcz1lBqxqu36DCA--.46214S2;
+	Thu, 17 Sep 2026 23:25:25 +0800 (CST)
+From: Wentao Liang <vulab@iscas.ac.cn>
+To: gregkh@linuxfoundation.org
+Cc: linux-arm-msm@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	linux-sound@vger.kernel.org,
+	srini@kernel.org,
+	vkoul@kernel.org,
+	Wentao Liang <vulab@iscas.ac.cn>,
+	stable@vger.kernel.org
+Subject: [PATCH] slimbus: ngd: Fix runtime PM leak in qcom_slim_ngd_xfer_msg_sync()
+Date: Thu, 17 Sep 2026 15:25:25 +0000
+Message-Id: <20260917152525.2160238-1-vulab@iscas.ac.cn>
+X-Mailer: git-send-email 2.34.1
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260917-b4-linux-next-25-03-13-dtsi-x1e80100-camss-v19-3-21ad8a76e941@linaro.org>
-References: <20260917-b4-linux-next-25-03-13-dtsi-x1e80100-camss-v19-0-21ad8a76e941@linaro.org>
-In-Reply-To: <20260917-b4-linux-next-25-03-13-dtsi-x1e80100-camss-v19-0-21ad8a76e941@linaro.org>
-To: Bjorn Andersson <andersson@kernel.org>, 
- Michael Turquette <mturquette@baylibre.com>, 
- Stephen Boyd <sboyd@kernel.org>, Rob Herring <robh@kernel.org>, 
- Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>, Robert Foss <rfoss@kernel.org>, 
- Todor Tomov <todor.too@gmail.com>, 
- Mauro Carvalho Chehab <mchehab@kernel.org>, 
- Konrad Dybcio <konradybcio@kernel.org>, 
- Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>, 
- Bryan O'Donoghue <bod@kernel.org>, 
- Loic Poulain <loic.poulain@oss.qualcomm.com>, Vinod Koul <vkoul@kernel.org>, 
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>, 
- Kishon Vijay Abraham I <kishon@kernel.org>, Felipe Balbi <balbi@ti.com>, 
- Manivannan Sadhasivam <mani@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org, 
- devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
- linux-media@vger.kernel.org, linux-phy@lists.infradead.org, 
- Bryan O'Donoghue <bryan.odonoghue@linaro.org>, 
- Krzysztof Kozlowski <krzk@kernel.org>, 
- Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2761;
- i=bryan.odonoghue@linaro.org; h=from:subject:message-id;
- bh=cDzuifZ35uySk/UpiYP0iSj8OxDSP029LxC//N6wFuk=;
- b=owEBbQKS/ZANAwAKASJxO7Ohjcg6AcsmYgBqrAZU/wHfXG/AsAs5KrgH5lFusNCZNVd+gD81A
- 7AhwLisQJiJAjMEAAEKAB0WIQTmk/sqq6Nt4Rerb7QicTuzoY3IOgUCaqwGVAAKCRAicTuzoY3I
- Om1dD/43gYbDziRG/DuUzuN10axrWDggX4LKPE8in+SbMC1NywaNlOiv1v9HkNmMyUOu4oVYUSM
- 2OCymKhNER21y5sVRJA2j5jBKIFmecAKnW52FHzSEkuoeFd15U3wwocAU6arz7MrEAD9bSVIvvX
- JL1dGNm5Ze/bGeiL/RAGDDPITyjnbVfCIrwwin8DfQw0zMXFyabDVPsysXNYSC/zZ5a6HxTrcqe
- hn5NBF+m08nF0ZDfbUEhUeKJGW3OsqgcThRINrR4ZRZFxHf6uYVfqdcLq+HTdtKtBdAnBvkHgOa
- SHVJQ79VuefwsnWvWsBrBEKnlja2iLBVo2q35FdTnd0ZqRI0QcXSuVcuBhua/zzQ1xCgC2/hi4/
- qX/Tts/1Fcj7r/h1w1RusuP3ySmiwo8ehmYuUKXFYBGFnEbKIepxYnloOZU8zgJtJU8A1qo/hb6
- lRc9sYBLwSuyh1UKQl5YcxF4hXi5wWrCY73MGp0Bz5m4UbYCt8dwbALJgAfvVeycpmMujRLKwEY
- P8EnYQtGfqvf8lBT1F6NzDMarmCp2lNsvV8Q/RwN5gSlJ8WxaYfGeP/EnoofIMJbdPyChKS/MNO
- 7V5+mYWP2F/UQZJatdHn3i8aBXbWmnP1Nx7lKBniOh6LhbC0kN8H9Z3v42Bbee252sNk1YYBZFx
- I9n6sWr9c3Jm6gQ==
-X-Developer-Key: i=bryan.odonoghue@linaro.org; a=openpgp;
- fpr=E693FB2AABA36DE117AB6FB422713BB3A18DC83A
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID:zQCowAAHcz1lBqxqu36DCA--.46214S2
+X-Coremail-Antispam: 1UD129KBjvdXoWrtry5GF13tr4UCFWUuFWfZrb_yoWftrcEka
+	4fXFn7AFy5CFnrAwnFqrs8ZrZ3ZayDWa48uwsFv343G34jvF15XF4SvrZ8Cr18W3y5tw18
+	Jwn8JrWvy397WjkaLaAFLSUrUUUUjb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
+	9fnUUIcSsGvfJTRUUUbfAYjsxI4VWDJwAYFVCjjxCrM7CY07I20VC2zVCF04k26cxKx2IY
+	s7xG6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4
+	kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_Xr0_Ar1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_
+	Cr0_Gr1UM28EF7xvwVC2z280aVAFwI0_GcCE3s1l84ACjcxK6I8E87Iv6xkF7I0E14v26r
+	xl6s0DM2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj
+	6xIIjxv20xvE14v26r1q6rW5McIj6I8E87Iv67AKxVWxJr0_GcWlOx8S6xCaFVCjc4AY6r
+	1j6r4UM4x0Y48IcxkI7VAKI48JM4x0x7Aq62Iq12xI8VA0II8E6IAqYI8I648v4I1lc7Cj
+	xVAaw2AFwI0_JF0_Jw1l42xK82IYc2Ij64vIr41l42xK82IY6x8ErcxFaVAv8VW8GFyrJr
+	1UJwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s026c02F40E14v26r1j6r18MI8I3I0E7480
+	Y4vE14v26r106r1rMI8E67AF67kF1VAFwI0_Jw0_GFylIxkGc2Ij64vIr41lIxAIcVC0I7
+	IYx2IY67AKxVWUCVW8JwCI42IY6xIIjxv20xvEc7CjxVAFwI0_Cr0_Gr1UMIIF0xvE42xK
+	8VAvwI8IcIk0rVWUJVWUCwCI42IY6I8E87Iv67AKxVW8Jr0_Cr1UMIIF0xvEx4A2jsIEc7
+	CjxVAFwI0_GcCE3sUvcSsGvfC2KfnxnUUI43ZEXa7IU1mLvtUUUUU==
+X-CM-SenderInfo: pyxotu46lvutnvoduhdfq/1tbiBwUNA2qr9tgk1AAAsT
 
-Add a devm variant of phy_get_by_of_node() to allow for the familiar
-pattern of having devres automatically release resources on the driver's
-exit path.
+The successful transfer path returns 0 without dropping the runtime PM
+usage counter taken by pm_runtime_get_sync().  The error paths all jump
+to pm_put, which releases the reference, but a completed transfer keeps
+it forever.
 
-Reviewed-by: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
-Signed-off-by: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
+Fall through to pm_put on success so the reference is always released.
+
+Fixes: 917809e2280bb ("slimbus: ngd: Add qcom SLIMBus NGD driver")
+Cc: stable@vger.kernel.org
+Signed-off-by: Wentao Liang <vulab@iscas.ac.cn>
 ---
- drivers/phy/phy-core.c  | 34 ++++++++++++++++++++++++++++++++++
- include/linux/phy/phy.h |  7 +++++++
- 2 files changed, 41 insertions(+)
+ drivers/slimbus/qcom-ngd-ctrl.c | 1 -
+ 1 file changed, 1 deletion(-)
 
-diff --git a/drivers/phy/phy-core.c b/drivers/phy/phy-core.c
-index 4a8e1d3cdfe75..e24a38662b484 100644
---- a/drivers/phy/phy-core.c
-+++ b/drivers/phy/phy-core.c
-@@ -1052,6 +1052,40 @@ struct phy *phy_get_by_of_node(struct device_node *np)
- }
- EXPORT_SYMBOL_GPL(phy_get_by_of_node);
+diff --git a/drivers/slimbus/qcom-ngd-ctrl.c b/drivers/slimbus/qcom-ngd-ctrl.c
+index 1ed6be6e85d2..be5640f45d7c 100644
+--- a/drivers/slimbus/qcom-ngd-ctrl.c
++++ b/drivers/slimbus/qcom-ngd-ctrl.c
+@@ -937,7 +937,6 @@ static int qcom_slim_ngd_xfer_msg_sync(struct slim_controller *ctrl,
+ 		ret = -ETIMEDOUT;
+ 		goto pm_put;
+ 	}
+-	return 0;
  
-+/**
-+ * devm_phy_get_by_of_node() - devm managed lookup and obtain phy reference by device node
-+ * @dev: device requesting the PHY
-+ * @np: device_node of the PHY provider
-+ *
-+ * Returns phy associated with the device_node or ERR_PTR. devres manages
-+ * releasing resources.
-+ */
-+struct phy *devm_phy_get_by_of_node(struct device *dev, struct device_node *np)
-+{
-+	struct phy **ptr, *phy;
-+	struct device_link *link;
-+
-+	ptr = devres_alloc(devm_phy_release, sizeof(*ptr), GFP_KERNEL);
-+	if (!ptr)
-+		return ERR_PTR(-ENOMEM);
-+
-+	phy = phy_get_by_of_node(np);
-+	if (IS_ERR(phy)) {
-+		devres_free(ptr);
-+		return phy;
-+	}
-+
-+	*ptr = phy;
-+	devres_add(dev, ptr);
-+	link = device_link_add(dev, &phy->dev, DL_FLAG_STATELESS);
-+	if (!link)
-+		dev_dbg(dev, "failed to create device link to %s\n",
-+			dev_name(phy->dev.parent));
-+
-+	return phy;
-+}
-+EXPORT_SYMBOL_GPL(devm_phy_get_by_of_node);
-+
- /**
-  * phy_create() - create a new phy
-  * @dev: device that is creating the new phy
-diff --git a/include/linux/phy/phy.h b/include/linux/phy/phy.h
-index 71c2e16397130..14b924a88411f 100644
---- a/include/linux/phy/phy.h
-+++ b/include/linux/phy/phy.h
-@@ -285,6 +285,7 @@ struct phy *devm_of_phy_optional_get(struct device *dev, struct device_node *np,
- struct phy *devm_of_phy_get_by_index(struct device *dev, struct device_node *np,
- 				     int index);
- struct phy *phy_get_by_of_node(struct device_node *np);
-+struct phy *devm_phy_get_by_of_node(struct device *dev, struct device_node *np);
- void of_phy_put(struct phy *phy);
- void phy_put(struct device *dev, struct phy *phy);
- void devm_phy_put(struct device *dev, struct phy *phy);
-@@ -499,6 +500,12 @@ static inline struct phy *phy_get_by_of_node(struct device_node *np)
- 	return ERR_PTR(-ENOSYS);
- }
- 
-+static inline struct phy *devm_phy_get_by_of_node(struct device *dev,
-+						  struct device_node *np)
-+{
-+	return ERR_PTR(-ENOSYS);
-+}
-+
- static inline void of_phy_put(struct phy *phy)
- {
- }
-
+ pm_put:
+ 	pm_runtime_put(ctrl->dev);
 -- 
-2.55.0
+2.34.1
 
