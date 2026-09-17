@@ -1,89 +1,86 @@
-Received: from mail-24416.protonmail.ch (mail-24416.protonmail.ch [109.224.244.16])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from cstnet.cn (smtp25.cstnet.cn [159.226.251.25])
+	(using TLSv1.2 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B62D058FD20;
-	Thu, 17 Sep 2026 14:21:53 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=109.224.244.16
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 20ACB58FD2D;
+	Thu, 17 Sep 2026 14:33:49 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=159.226.251.25
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789654915; cv=none; b=eBn4NMex0nS6gY9xRjis2HXoqOjIU09oQcJsQGoHkD8tbmPf5vmxN5XDBCAWtyeu6VmzX0/NsMFBMfmWHlTvZOCOYLpZjYfXrRLyE+o/EFxTCaEDysW9P5QrxIeZ/jtDBqSsFGm6N0vpAXIAEhfoxgEuYguzP/8U+lBC10Jd4zw=
+	t=1789655632; cv=none; b=MK68NLnNTHTN/gL57vKnEYXFwr/+X7L7+PYxOmgAJ6GI9AVQlP5zz7yElvpI19h+v2IRYUAI16nP2tHxWhOtVwLAjkmgOdIpyQ2bmDuQMmqNhBCWoNNnL1FU6GdIhUy28a2JzAy2h2r9nyvm6mSeZDAH2DMH8Cdujw6D0ErkoPc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789654915; c=relaxed/simple;
-	bh=+vgCc8pndNcFA20Sc3PJPDo3juv2YALtT4MKY1Xd28k=;
-	h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=J67RHeralSsHyyE03Z/YOZLXfVYIEzzbqhdZpZ+We3FuIvumtGfHmT2tmWb5B682ceezF70YdR1LAOLjrHaIKNXKEozn4BL1nzP4t1itwXt4k8ncrNrRGzyOcJZMKWHRIMqqijUcGFKiMLvl7v3mk3aOinUl8am/pfvpgRmZIyg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=pm.me; spf=pass smtp.mailfrom=pm.me; dkim=pass (2048-bit key) header.d=pm.me header.i=@pm.me header.b=QmAgfiwL; arc=none smtp.client-ip=109.224.244.16
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=pm.me
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=pm.me
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=pm.me header.i=@pm.me header.b="QmAgfiwL"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=pm.me;
-	s=protonmail3; t=1789654911; x=1789914111;
-	bh=+vgCc8pndNcFA20Sc3PJPDo3juv2YALtT4MKY1Xd28k=;
-	h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
-	 Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
-	 Message-ID:BIMI-Selector;
-	b=QmAgfiwLZtUbCfpQXIWLluH4XOqAWJA3w/+TJjpJm2eVWUNVUbCPAR4To1F5xwTyk
-	 ZTmg/jRb+UixBqTEDDpVf5C3yiunu+Ft3xmMiSXvY9afmwO8P6trMXY5AHB+eQla5I
-	 tScwz3CDyKqD8RwnFpdyEhqgktLp/mY6829RDgQiHa1vE84lIcHsMbPiV4qwkQ09Vx
-	 bI0yIZQmjvYHWKGRFyI3E1z4Hb7JbkM8jfJyOFcwuMrcgV06LvdeWWM83Ei2DMR9ib
-	 Q7qUdwi/IjI+hWMRS0koDUgSexXLcJS4Cr6ZdFVFFW3EYeiS9k3l6ikAQiqd9/0Yr3
-	 7BdEafwIfpv9w==
-Date: Thu, 17 Sep 2026 14:21:46 +0000
-To: Vikash Garodia <vikash.garodia@oss.qualcomm.com>
-From: Birk Skyum <birk.skyum@pm.me>
-Cc: Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>, Renjiang Han <renjiang.han@oss.qualcomm.com>, linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org
-Subject: Re: Question about Iris SID override assertion on Yoga Slim 7x
-Message-ID: <OoKudsYPY-u95rP5XMKUybXGVhJkH1D42R8fIGkv5Ls97TUXeuw6SREfrtyuUU52YDHb2msUDr_VsC7OJe_rD9vo-YXJ8tGt7zCta2b7FJk=@pm.me>
-In-Reply-To: <4e4acb29-0b3e-4b76-8179-b49745f53bf5@oss.qualcomm.com>
-References: <20260913194707.91885-1-birk.skyum@pm.me> <4e4acb29-0b3e-4b76-8179-b49745f53bf5@oss.qualcomm.com>
-Feedback-ID: 21326998:user:proton
-X-Pm-Message-ID: 59379bcf373598d55c5d90fd821d437f0db316a0
+	s=arc-20240116; t=1789655632; c=relaxed/simple;
+	bh=0CifYHpF4P3lIw7O5N0oKzN9TKKTgUgRGII2NQXFflE=;
+	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=B2WDXgnatNTJYCFrWTUKTkgsEdXjqtphNih3OSb7ugxHN0OhfI87oZ+jnyWT1R2lFY4Dj1HlkCVtGCRbeDMCPS/MKcPnVqEDOw7FkCTnlb/WM/VSW6v5Xigwlmv/09uOjbexN6jTZtasSApQPsVJXOT18Dw7/VPOeiybkkKdVUU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=iscas.ac.cn; spf=pass smtp.mailfrom=iscas.ac.cn; arc=none smtp.client-ip=159.226.251.25
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=iscas.ac.cn
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=iscas.ac.cn
+Received: from dfae2b116770.home.arpa (unknown [36.110.52.2])
+	by APP-05 (Coremail) with SMTP id zQCowACHuEJL+qtqp4+CCA--.4947S2;
+	Thu, 17 Sep 2026 22:33:47 +0800 (CST)
+From: Wentao Liang <vulab@iscas.ac.cn>
+To: andersson@kernel.org
+Cc: linux-arm-msm@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	linux-remoteproc@vger.kernel.org,
+	mathieu.poirier@linaro.org,
+	Wentao Liang <vulab@iscas.ac.cn>,
+	stable@vger.kernel.org
+Subject: [PATCH] rpmsg: qcom_smd: Fix edge of_node leak in qcom_smd_edge_release()
+Date: Thu, 17 Sep 2026 14:33:47 +0000
+Message-Id: <20260917143347.2157055-1-vulab@iscas.ac.cn>
+X-Mailer: git-send-email 2.34.1
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID:zQCowACHuEJL+qtqp4+CCA--.4947S2
+X-Coremail-Antispam: 1UD129KBjvdXoW7JFWrKFy7WFy5Zw17JrykAFb_yoWftrgEka
+	s7uwn3XFyUAr4fAw129FZ8Zr9avF1DXrZ7Zr4qqF4rZFWYqFs2gr9agwsYvrZxCr4Iqry3
+	uw1DJr4rAr429jkaLaAFLSUrUUUUjb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
+	9fnUUIcSsGvfJTRUUUbS8YjsxI4VWkCwAYFVCjjxCrM7CY07I20VC2zVCF04k26cxKx2IY
+	s7xG6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4
+	kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_Xr0_Ar1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_
+	Gr1j6F4UJwA2z4x0Y4vEx4A2jsIE14v26rxl6s0DM28EF7xvwVC2z280aVCY1x0267AKxV
+	W0oVCq3wAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv
+	7VC0I7IYx2IY67AKxVWUtVWrXwAv7VC2z280aVAFwI0_Cr1j6rxdMcvjeVCFs4IE7xkEbV
+	WUJVW8JwACjcxG0xvY0x0EwIxGrwACjI8F5VAI37AI020EjII2zVCS5cI20VAGYxC7MxkF
+	7I0En4kS14v26r126r1DMxAIw28IcxkI7VAKI48JMxAIw28IcVCjz48v1sIEY20_Gr43Wr
+	1UJr1l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s026x8G
+	jcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r126r1DMIIYrxkI7VAKI48JMIIF0xvE2I
+	x0cI8IcVAFwI0_JFI_Gr1lIxAIcVC0I7IYx2IY6xkF7I0E14v26F4j6r4UJwCI42IY6xAI
+	w20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Gr1j6F4UJwCI42IY6I8E87Iv6x
+	kF7I0E14v26rxl6s0DYxBIdaVFxhVjvjDU0xZFpf9x07UMq2NUUUUU=
+X-CM-SenderInfo: pyxotu46lvutnvoduhdfq/1tbiBgQNA2qr888PuAAAsG
 
-Hi Vikash and Renjiang,
+qcom_smd_parse_edge() stores an extra reference to the edge's device
+node in edge->of_node, and it is used after probe by
+qcom_smd_match_channel(). The error path drops that reference, but the
+success path does not, and qcom_smd_edge_release() only frees the edge,
+so the reference is leaked when the edge is unregistered.
 
-My previous reply was rejected by Qualcomm's mail gateway. I'm resending
-without the attachment and have made the reproducer bundle available here:
+Release the device node when the edge is freed.
 
-https://github.com/birkskyum/iris-sid-reproducer/releases/tag/2026-09-17
+Fixes: 53e2822e56c7 ("rpmsg: Introduce Qualcomm SMD backend")
+Cc: stable@vger.kernel.org
+Signed-off-by: Wentao Liang <vulab@iscas.ac.cn>
+---
+ drivers/rpmsg/qcom_smd.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-The archive is unchanged from the attachment. Its SHA256 is:
-5b38ccc616d8f1166334896e1840fa5546b59268569d0d226c2986edea64e97f
-
-It contains the original synthetic VP9 clip, the FFmpeg 9.0.1 patch and
-build options, the test harness, the exact Iris source changes, and the
-first-failure HFI/SFR trace. The files can also be browsed in the repositor=
-y.
-
-The FFmpeg fix requeues empty CAPTURE buffers marked ERROR but not LAST,
-rather than treating them as the end of decoding. The test starts a fresh
-FFmpeg process after each verified 100-second runtime-suspended interval an=
-d
-compares all 120 frames with software decoding. It stops at the first failu=
-re.
-
-On the firmware-logging boot, the warmup and first two idle trials passed.
-The third hit the SID assertion before producing a frame. The separate
-AV1-only partial-buffer guard removed the VP9 warning but did not prevent
-the assertion on another cold boot.
-
-This still reproduces on the modified stack described in my first mail.
-The bundle separates the baseline and experimental Iris sources and include=
-s
-the camera-kernel configuration and delta, so those differences are explici=
-t.
-
-Thanks for the GDSC lead. I haven't established whether that behavior
-explains this case. Please let me know if there is a particular baseline or
-targeted diagnostic you would prefer me to test next.
-
-Thanks,
-Birk
+diff --git a/drivers/rpmsg/qcom_smd.c b/drivers/rpmsg/qcom_smd.c
+index 3ac863f400ec..d98e8bbf9bd2 100644
+--- a/drivers/rpmsg/qcom_smd.c
++++ b/drivers/rpmsg/qcom_smd.c
+@@ -1452,6 +1452,7 @@ static void qcom_smd_edge_release(struct device *dev)
+ 		kfree(channel);
+ 	}
+ 
++	of_node_put(edge->of_node);
+ 	kfree(edge);
+ }
+ 
+-- 
+2.34.1
 
