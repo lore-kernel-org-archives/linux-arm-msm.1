@@ -1,86 +1,86 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B4B734F55DD
-	for <linux-arm-msm@vger.kernel.org>; Thu, 17 Sep 2026 12:26:06 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5B9314EE84E
+	for <linux-arm-msm@vger.kernel.org>; Thu, 17 Sep 2026 12:26:00 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789647969; cv=none; b=D/m1d16RtteUt+uzfvez/GV1PqOImjNFgMMuufda2HhXE3YGWXpWjHTY8irKUy38Wy6e1+CcxyJ18JVmpzPSOgJhP+oSNywGs5Mk03UqgE+WTL8i9MSZOHEN5YiRF/NrK8Mu6cwZzubKkK2NaKX9sfH1EoVjeND7iD1hnKurnDQ=
+	t=1789647972; cv=none; b=ZhnPvxgtq032oDpSUBZPG36Ym17yt7jaSsAYgGFguJFp4Tn5bE0Z3/G2z7du/LNXtzTWM1xuPBXxp/LA8lKN4xYNmQ0QAZaYE0xlZG2Wo9aa/U2QcsQgXs8UX+7ylgf7f4F+YuDnoE5hkO3JEtLFKNsyOvxQUXDvfDo/FixEJp0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789647969; c=relaxed/simple;
-	bh=Wgv/2XTDzwnVs0G21nQVV2p6Ay1DaT+vMpFJHJxR9lg=;
+	s=arc-20240116; t=1789647972; c=relaxed/simple;
+	bh=wcVvLfMlz5riSmWs553D19WWY81mEZP/GQQgeVrM1KA=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=HE2JtysAsCV4WwsCHrIwH8oZ92HroNNhA+/C9UQj0uMdkLOyNhqF542g0vImY+6GoIXocGhM0dOa3P+f4uL6MADW8p2LY4VkK2nIxWsSpCBrS1IFISiFl+TbBIKSnd/Ij+2o2ZV7q08TA8rGi5wtcf1hrg6OMSHdJD8jQcZYm24=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=nL9annXo; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=c0aX8iNI; arc=none smtp.client-ip=205.220.180.131
+	 In-Reply-To:To:Cc; b=I8ragM2PdYGK2X6TKspmYUScniawPKpbrjw6Ysserc5bUEnFloMi+ATeuYbZVXTqUjvtEbq9KNI5y7N2HxhnLUVTBkeEU4/Aj8QRmHjoTUZFXS5rmF7Kh62A0o96rCbJf6C3DtqHBBVc7pj0NT8LYzJ0bqJ4zuVUAvdCX4bonrs=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=MZImrOUp; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=Lyb+/6Zm; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="nL9annXo";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="c0aX8iNI"
-Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68H9ZWGV1257765
-	for <linux-arm-msm@vger.kernel.org>; Thu, 17 Sep 2026 12:26:05 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="MZImrOUp";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Lyb+/6Zm"
+Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68H9ZnHT2210949
+	for <linux-arm-msm@vger.kernel.org>; Thu, 17 Sep 2026 12:25:58 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	naqdCafc4DsJm0WCaMl+LPC01ocjUgQbPu1xHWOVHPw=; b=nL9annXo4PfYPDVU
-	/FN+YNYFtWa0FkU4XTiDCi6ti4BBmDkuUtlU3O/1dFHPiFtpmpF2bMiiNyJmxLvc
-	ndZOfTOIOKDmDwZyAK0OTo1qZHnWup+rlFrUD58wEnbMdDcI8BxUY3cNuNk91Qux
-	NAZ2v2FQZgMn27cEANo65UfFKHh/V8sI2bm2aMGwVdRcT0IXc/BB7epHZvwC9S4f
-	Z/8uzymK3kh9gzXvgnWuNF1f52Lqqab2oHSADvvlKqaNH8vU6/wNczhHI8uBaGKc
-	wcM9bJcZz4YiKKu8J7OFQtbVdcB5A6fKDwm5kuQJ49pxrT9lbeSK3DyAOAjM4KNV
-	Jszz/A==
-Received: from mail-pj1-f71.google.com (mail-pj1-f71.google.com [209.85.216.71])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4grdftgqar-1
+	XKULm6RU78Ys5LsZQmpXG27Sz2mKXEmSi8OnTIJfeLE=; b=MZImrOUpmrVaf8nI
+	kON8lorztGUMYsU8BfiKwFVWq9w8XHga8shDOGL3Eop4Ui5ViShPFooBHV6x4x6L
+	jJrsE3l6uMvvxBKjXERfyHH+tcAhDa7GTm9nN60/71ZOqnRzI3lg4LsedChQF1Xl
+	3OrXw8BbeaGG/JPvuCuHT1uOloMSN+2IYhlFc0vg28Ox1A7rWXcTjdyStdHsTX/F
+	W/k8m+E6Ic5ZNGnuyF+aOjmy/GduM/Jr0XubwlOPBlCY/tCB1KK/JovJipuODsFE
+	CChDmPWlBSJ1mqd7ewNxUGOdUCSmrEK9t+x2pTFKl5IFP9NfpS0AjnV5fpRmfdnm
+	uiszcg==
+Received: from mail-pg1-f197.google.com (mail-pg1-f197.google.com [209.85.215.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gr79m28h2-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Thu, 17 Sep 2026 12:26:05 +0000 (GMT)
-Received: by mail-pj1-f71.google.com with SMTP id 98e67ed59e1d1-38e8fee6af3so1126337a91.1
-        for <linux-arm-msm@vger.kernel.org>; Thu, 17 Sep 2026 05:26:05 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 17 Sep 2026 12:25:57 +0000 (GMT)
+Received: by mail-pg1-f197.google.com with SMTP id 41be03b00d2f7-cc132709c76so1059191a12.3
+        for <linux-arm-msm@vger.kernel.org>; Thu, 17 Sep 2026 05:25:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1789647964; x=1790252764; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1789647957; x=1790252757; darn=vger.kernel.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=naqdCafc4DsJm0WCaMl+LPC01ocjUgQbPu1xHWOVHPw=;
-        b=c0aX8iNIP4aGoMyHa91q8qdy0vlm+QUEnRZH01S8MMGmwE5YCmHTT56doUWoYOucez
-         9J/VYunMg74/a33QB2GnjgmUcW4tLEMPA7TCxx7XX7ToE4pkRoUsKGYYFOid3d2Fh6oc
-         a7yonCLUwd9Gu5FAPi5HqTPKyM5HMEqaSKp6X3JDJxkgEDayTHNQ/+FQxrqlu5NAmKYi
-         b33AYAoYvxxs10r/KFddIQS0RvuhZavi3WAoEJUde+1yXyIJknlRtCaFsiIsI0YwyLgZ
-         n6mnYuUdleVtisP4C/dU537Z/1bcbbCOHEIPBBbKLHgREzHkC+ygPca9qQpXizh5kYHf
-         BkjQ==
+        bh=XKULm6RU78Ys5LsZQmpXG27Sz2mKXEmSi8OnTIJfeLE=;
+        b=Lyb+/6ZmX9AdFDaUWbcCL4YtYLfAP5bx3fllOq9Q2rkBVJYtHQz5fPQ50gC88q/v9k
+         cwoZ8nCHb3slVMFpTM/qtNEJr2O3m/1KCWQqNZ+VzIXcSjzK1KZMkRxpKLJY1pxseDZw
+         OCt0xdV4hzDPs3JAKXhs1GyiLF/k7gaw5EBcmxsY6E2+VbGspFPJ1vw2jWr57UGCTFIy
+         0HCP15nsGu1U6UEbZywVV5a2m5l1Ld5ibr8UMeAeBfrGE/WK67/49eZaWlumVyy6mrAf
+         /TcKPOjPNrRmeekl/36d5rCvHs7JnRbi7blj8xSDdR393qe9fIBetkvPyT+lRkHFCIJh
+         N/mQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1789647964; x=1790252764;
+        d=1e100.net; s=20260707; t=1789647957; x=1790252757;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=naqdCafc4DsJm0WCaMl+LPC01ocjUgQbPu1xHWOVHPw=;
-        b=MyoN2325aZREVeHmkQK2DHGEpHQquSkdcpQw78hHmQIBY07zNxMQPy1IQVdXc9mZOM
-         kDggZs8mc++rLF+jtVOpu2DaIDRHHUkpHFp3eZ3/6E13k6IHZ6nJloct+zWWY7bkd0bI
-         Tf3fTDwNAulZ+pkGmRYckj4UtSCJJSBNPpsGVZG/K+wj6ax5T8ZYBAeBqpSsPJvlTPMs
-         pqzEO4XW9wkjQ5oibZntOBRVZyhPgqcCp7WkrwqIPl1nQCF4DM6pGvDsZnHiuQPP9qzV
-         Walz2/409RzyP8sMBQvPIqilRy3GBehu+GH7sNdWUecYk3n0PEoslctSu3vkNN8lbaZZ
-         grtQ==
-X-Gm-Message-State: AFuF++lYO8vt0VjM6l2TKnn1WBt34MFDGTMy5KpS0rtoRmeNvrcnziVp
-	N6dkXET6RXC59gJ1A+9CR8V7gmBN/q0BnJQH9qhcPCAcmPom6ad+Vev6hgchUVUheEKp3oO50qU
-	EdTHcI6i1FQS6Vjs68sBXMFQsC44WENCzHI47BYm1TYxSPe0vQW2xD82ezuvpkXGsvOxw
-X-Gm-Gg: AYBFou0LPiFOgR5oGagRqs6vL7y+b7sjSV68M7XZepp6P1ousDv6GuBAmgoCNqRwUvt
-	mZDlQTQD7V/jT1LSl+c4N92kN666r8pJ3tCP48PgzEaBZmyyLtAn7bWQLgUPmev8u16yfPOGY9X
-	fq57QRABnXo63G7oTk0O37qgIRRtgHJEe9OaKx+1LFVIuKx5//Pnz+gwZKQ6Bpf3RHg9byGTBgo
-	lNzikMMLxCJNLS049gbrl+3P2iQ+rLQdvY4lRkZk1A1t89tv2TE8d4H/Hje5Ug+Wxj7D0Nhhxk6
-	7xqTYlfuzv/81TENLod7kEd/MBrM4PYPi286AS59CblAloiJMeT494szjSzyuqjXFirstYHooze
-	nzhr5Tnuw3lJjoqanNwDmw2zUGq1pZpxNCPM=
-X-Received: by 2002:a17:90b:4a4f:b0:398:e86b:ce14 with SMTP id 98e67ed59e1d1-39e1e4d045cmr14455375a91.20.1789647964152;
-        Thu, 17 Sep 2026 05:26:04 -0700 (PDT)
-X-Received: by 2002:a17:90b:4a4f:b0:398:e86b:ce14 with SMTP id 98e67ed59e1d1-39e1e4d045cmr14455323a91.20.1789647963592;
-        Thu, 17 Sep 2026 05:26:03 -0700 (PDT)
+        bh=XKULm6RU78Ys5LsZQmpXG27Sz2mKXEmSi8OnTIJfeLE=;
+        b=XVnoWJC33D5FXBKtIM0vBIqxejDcB7YZA9sOV1Vd6YWYwheAN7jWNOZL4bS2uANjBt
+         2YYJprdW815FPcnopXkkVmzTGYOoWmKj63J0qxZ2MaUPpDgZjZ2qRV2wHrPpBiuGImDv
+         6RGjdk8CO3VHy7yTRu982WYMnyxdTfC/MyA8UqUjMr5hX9bBQCfrWG8na8pMaAEicC0M
+         36QBye7ksnLwTj6v38Sn8vjSBtSxzmbjce2pbf5/qDRxzqpZwdFqOjREfjCN3WhFBZQJ
+         5mDAVUxS52O4OHdwv+NQ0qjhxKHOOsV0sL/HMSMH1yyxWXdjAJyVI2yIvNM+Sfm+Obr0
+         jDQQ==
+X-Gm-Message-State: AFuF++kTjcadOJn5Xn5bhc4KS9VFK0rjPAprd3UlJMgR4a/10purkfBZ
+	RKfydoc8N2MWNTWaXxKs4js4xQFj9JctjLnRJx84eEb1oi2nJWNAQpkla4ABUEqgp9CUEM88/HY
+	bpCo20Kgo9seLhcj6lEgwtB1j0hznGLuDYxC2G4cy3746wQKMb4HkY+/7NQ8E6z4D6iSN
+X-Gm-Gg: AYBFou3tTA59vnjg0nQWYYxKXAdoVsjLPZDKxxSrfC2IFcK//XGUFYqGw7iph7NPdwx
+	Qvx3+0MsXVan95k3EXnaZp6MbwirAvNULqcfw3jXMW7Qvfv6KZV3iTZ1z5sT8fSueCEpRPjdYW7
+	eWwl1Iyi5THrIJv2oJ2MXR0u1ONuawA4ScsT1WLyrI+awdsxkoFjS9C7kBM8RByAIG13fKbFrNe
+	S5UvLiuk0uY69Y3wxnkxFljlLbvaONjnyp/YQ6CPOBQvNOw9njnbSbPdQfSu/dYAUI1B/fU6ClV
+	pju534+39y1m7vaxQb7btCL/kod781dZ6cJx+NVomkK+CCT+bC4EFgS7DkCh+F2fDoMETyGVLBy
+	05ewIPT+N6be0HPoiPpcOMF42BH86Vv1yVZM=
+X-Received: by 2002:a05:6a20:6f04:b0:3d3:aec2:4dc7 with SMTP id adf61e73a8af0-3dd5f724a7dmr17382250637.19.1789647957176;
+        Thu, 17 Sep 2026 05:25:57 -0700 (PDT)
+X-Received: by 2002:a05:6a20:6f04:b0:3d3:aec2:4dc7 with SMTP id adf61e73a8af0-3dd5f724a7dmr17382184637.19.1789647956559;
+        Thu, 17 Sep 2026 05:25:56 -0700 (PDT)
 Received: from hu-krichai-hyd.qualcomm.com ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-33bf5a6a175sm16380968eec.9.2026.09.17.05.26.00
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-33bf5a6a175sm16380968eec.9.2026.09.17.05.25.53
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 17 Sep 2026 05:26:03 -0700 (PDT)
+        Thu, 17 Sep 2026 05:25:56 -0700 (PDT)
 From: Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>
-Date: Thu, 17 Sep 2026 17:55:22 +0530
-Subject: [PATCH v2 08/15] arm64: dts: qcom: sm8250: Move PCIe phy and GPIOs
+Date: Thu, 17 Sep 2026 17:55:20 +0530
+Subject: [PATCH v2 06/15] arm64: dts: qcom: sdm845: Move PCIe phy and GPIOs
  to root port node
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
@@ -90,7 +90,7 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260917-root_port_v2-v2-8-6272b7caae9a@oss.qualcomm.com>
+Message-Id: <20260917-root_port_v2-v2-6-6272b7caae9a@oss.qualcomm.com>
 References: <20260917-root_port_v2-v2-0-6272b7caae9a@oss.qualcomm.com>
 In-Reply-To: <20260917-root_port_v2-v2-0-6272b7caae9a@oss.qualcomm.com>
 To: Bjorn Andersson <andersson@kernel.org>,
@@ -101,126 +101,176 @@ Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
         linux-kernel@vger.kernel.org,
         Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1789647930; l=2772;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1789647930; l=3803;
  i=krishna.chundru@oss.qualcomm.com; s=20230907; h=from:subject:message-id;
- bh=Wgv/2XTDzwnVs0G21nQVV2p6Ay1DaT+vMpFJHJxR9lg=;
- b=bTN3wysc0PBORZb5ZZ8hQ9mnvrfsB1bAGs4XY4fYnnNfsBgAFpBffGACVEZitweDtMHTVgkdF
- Z/bG86s0n/ABHm3LsPXWuWb73PIXrxqP6/bw7sELUoRyXFhHLwuA+Bs
+ bh=wcVvLfMlz5riSmWs553D19WWY81mEZP/GQQgeVrM1KA=;
+ b=86ZF4Ea/kEzihKao6RkKVEaYTkBEE7X5iDg1hFnl33qhmEgr1e8rdX7XWvF5+QyOQurq0Qh4g
+ LSeH3WHYCRNA0g9StLHaABVdzAyrls6nDHtPLTQyEby9kg1W/DJCZHm
 X-Developer-Key: i=krishna.chundru@oss.qualcomm.com; a=ed25519;
  pk=10CL2pdAKFyzyOHbfSWHCD0X0my7CXxj8gJScmn1FAg=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTE3MDE3NCBTYWx0ZWRfX7rLpE5LQbwta
- VuWjd5i7fVJPCqn28YDtrXnizljc664Y6WJfTa1HZCgLmFWAbfHe1v6TrklHwjMERpeRuCWNDtP
- IKkE9eaSUagyxm+52kz9U9VuBw4km+OvABAqPACe4Fx2H2VYfsLiiHTp1xPhxSW8kEc4w7BAhrK
- 3v/CZh/441Yi+RoVrgG/j8hspiW6PSj/m2q68B0PZx6YSM61qPw0b/5vGw9jH+mAkR9Mj1GNV2u
- qDFpLe2RvCdA3BK4o8kd75cx07jI8OVITIioD5MKaf5zoVMf+lgEj98ZCyEdW6vnr3ztbEXsi5x
- j0CKyRJa3lO6KwsueaYNShwm0DhNHi25o4Tb/07a4awMBR9pCfFNTb08gGk0c3Juupvvz08Slp3
- Gqzit+iIBRUI22zzv1ZQ0HbVSqZqT29t9y4xnFppw2vuI8pDiTZjJ6JtHC8g4cgcrpXqB8gDmIE
- Zocoa0Ndgo+iHH4tf/Q==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTE3MDE3NCBTYWx0ZWRfX7n8ByfKI//gJ
- +gA/mx+hTDq+KaQ7Rq6cKnFbc5brUZ7crMA8b6PmjhjkCISSBuLfOj1yBujwldvFaTm6FspFifH
- UD7s9X1EMFikCdIe2v9ovpx2bolPoUM=
-X-Proofpoint-GUID: okfH5SU1vI5ayGKNFiDj0TY-N2b24foO
-X-Proofpoint-ORIG-GUID: okfH5SU1vI5ayGKNFiDj0TY-N2b24foO
-X-Authority-Analysis: v=2.4 cv=K+W3jCWI c=1 sm=1 tr=0 ts=6aabdc5d cx=c_pps
- a=UNFcQwm+pnOIJct1K4W+Mw==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
+X-Authority-Analysis: v=2.4 cv=Qf7zLcbv c=1 sm=1 tr=0 ts=6aabdc55 cx=c_pps
+ a=rz3CxIlbcmazkYymdCej/Q==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
  a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
- a=EUspDBNiAAAA:8 a=bvY3E1ByFFb03tV5gjAA:9 a=0bXxn9q0MV6snEgNplNhOjQmxlI=:19
- a=QEXdDO2ut3YA:10 a=uKXjsCUrEbL0IQVhDsJ9:22
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22
+ a=EUspDBNiAAAA:8 a=qQkGquXN9PvF_GGjQ98A:9 a=QEXdDO2ut3YA:10
+ a=bFCP_H2QrGi7Okbo017w:22
+X-Proofpoint-GUID: 312a5ZPOjxgSAMxDaVSOYadmjrT4rxAB
+X-Proofpoint-ORIG-GUID: 312a5ZPOjxgSAMxDaVSOYadmjrT4rxAB
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTE3MDE3NCBTYWx0ZWRfX/Y2bRhD7OWh0
+ J3YqeI/escoRdkCeS7W/LLUfIUmziE4Z+2G43D46AUqaEmIbVEPoxxpV2xeHZm2rxc0gFnP+5+g
+ RfWGJ6avmnkdQwd8laqYNL8h3xYOBdhCqXZ5Q9rputPjSXqjV7SCFYoRRLZ4nLYKnyWIPJ03jZU
+ xh4rGGQSpn4r7ehn5HR0lKxneJGNV61ifk0R5qG2qDiCzx+7EqCq3iE+rk2bXVnyk1aw2Njr/0I
+ bsi0SjSGtdpY67UhU2Tb4OfexEqQQe/bgr3gEtZs0kXJNamKLj/W73TVTkEXT7ndYuw8oDF7u/B
+ 3rTgTJeBUBrpfyjFcoKjEHskuuKvAghJWNhHPOcusb6crHU6BZIDyT5m9QPDXiG2uoJ1xH/usnG
+ Mdy4NMMA4MWxp/XrLtdpH5goewHEAPtCbjdFw7K3VeIXdiFUs5tjeVJxPiAAvG802GUsWsgfVvZ
+ WSdfwGKbADsBQXC5QVQ==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTE3MDE3NCBTYWx0ZWRfX7p0lygvWj9Jk
+ wUU8PHS1GlXgevNqlVqJJrOL3c1MG9RP/DKLl4ltyqGDzzI+9ZjqEyBScAgOFwMTIAXZfLvHC/L
+ HI9Wicj7HTiiDRHADrBgPfS/8AnWHQM=
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-09-17_02,2026-09-16_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 phishscore=0 spamscore=0 lowpriorityscore=0 adultscore=0
- malwarescore=0 priorityscore=1501 suspectscore=0 clxscore=1015 bulkscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609170174
+ lowpriorityscore=0 priorityscore=1501 impostorscore=0 adultscore=0
+ phishscore=0 spamscore=0 bulkscore=0 suspectscore=0 malwarescore=0
+ clxscore=1015 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2609040000
+ definitions=main-2609170174
 
 The PCIe phy reference and the perst/wake GPIO properties are
 per root port and belong in the root port node (pcie@0), not in the
-RC controller node. Move phys, phy-names, perst-gpios, and wake-gpios
-from the controller to the existing pcieport0 and newly labeled
-pcie1_port0 and pcie2_port0, allowing board-level overrides. Rename
-perst-gpios to reset-gpios to match the binding used in the root
-port context.
+RC controller node. Move phys and phy-names from the controller to
+pcie0_port0 and pcie1_port0, adding labels to these nodes to allow
+board-level overrides. Move perst-gpios/wake-gpios from the
+controller overrides to the respective port nodes in the board files,
+renaming perst-gpios to reset-gpios to match the binding used in the
+root port context.
 
 Signed-off-by: Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>
 ---
- arch/arm64/boot/dts/qcom/sm8250.dtsi | 30 ++++++++++++------------------
- 1 file changed, 12 insertions(+), 18 deletions(-)
+ arch/arm64/boot/dts/qcom/sdm845-db845c.dts | 13 +++++++++----
+ arch/arm64/boot/dts/qcom/sdm845-mtp.dts    | 12 ++++++++----
+ arch/arm64/boot/dts/qcom/sdm845.dtsi       | 14 ++++++--------
+ 3 files changed, 23 insertions(+), 16 deletions(-)
 
-diff --git a/arch/arm64/boot/dts/qcom/sm8250.dtsi b/arch/arm64/boot/dts/qcom/sm8250.dtsi
-index e0c357222bc7..caabd201c0d9 100644
---- a/arch/arm64/boot/dts/qcom/sm8250.dtsi
-+++ b/arch/arm64/boot/dts/qcom/sm8250.dtsi
-@@ -2207,12 +2207,6 @@ pcie0: pcie@1c00000 {
+diff --git a/arch/arm64/boot/dts/qcom/sdm845-db845c.dts b/arch/arm64/boot/dts/qcom/sdm845-db845c.dts
+index 3e636926231d..02cb29afb246 100644
+--- a/arch/arm64/boot/dts/qcom/sdm845-db845c.dts
++++ b/arch/arm64/boot/dts/qcom/sdm845-db845c.dts
+@@ -618,9 +618,6 @@ &mss_pil {
+ 
+ &pcie0 {
+ 	status = "okay";
+-	perst-gpios = <&tlmm 35 GPIO_ACTIVE_LOW>;
+-	wake-gpios = <&tlmm 134 GPIO_ACTIVE_LOW>;
+-
+ 	vddpe-3v3-supply = <&pcie0_3p3v_dual>;
+ 
+ 	pinctrl-names = "default";
+@@ -634,9 +631,13 @@ &pcie0_phy {
+ 	vdda-pll-supply = <&vreg_l26a_1p2>;
+ };
+ 
++&pcie0_port0 {
++	reset-gpios = <&tlmm 35 GPIO_ACTIVE_LOW>;
++	wake-gpios = <&tlmm 134 GPIO_ACTIVE_LOW>;
++};
++
+ &pcie1 {
+ 	status = "okay";
+-	perst-gpios = <&tlmm 102 GPIO_ACTIVE_LOW>;
+ 
+ 	pinctrl-names = "default";
+ 	pinctrl-0 = <&pcie1_default_state>;
+@@ -649,6 +650,10 @@ &pcie1_phy {
+ 	vdda-pll-supply = <&vreg_l26a_1p2>;
+ };
+ 
++&pcie1_port0 {
++	reset-gpios = <&tlmm 102 GPIO_ACTIVE_LOW>;
++};
++
+ &pm8998_gpios {
+ 	gpio-line-names =
+ 		"NC",
+diff --git a/arch/arm64/boot/dts/qcom/sdm845-mtp.dts b/arch/arm64/boot/dts/qcom/sdm845-mtp.dts
+index c66df45eee64..88aa0b7de5fd 100644
+--- a/arch/arm64/boot/dts/qcom/sdm845-mtp.dts
++++ b/arch/arm64/boot/dts/qcom/sdm845-mtp.dts
+@@ -508,8 +508,6 @@ &mss_pil {
+ };
+ 
+ &pcie0 {
+-	perst-gpios = <&tlmm 35 GPIO_ACTIVE_LOW>;
+-
+ 	pinctrl-0 = <&pcie0_default_state>;
+ 	pinctrl-names = "default";
+ 
+@@ -523,9 +521,11 @@ &pcie0_phy {
+ 	status = "okay";
+ };
+ 
+-&pcie1 {
+-	perst-gpios = <&tlmm 102 GPIO_ACTIVE_LOW>;
++&pcie0_port0 {
++	reset-gpios = <&tlmm 35 GPIO_ACTIVE_LOW>;
++};
+ 
++&pcie1 {
+ 	pinctrl-names = "default";
+ 	pinctrl-0 = <&pcie1_default_state>;
+ 
+@@ -539,6 +539,10 @@ &pcie1_phy {
+ 	vdda-pll-supply = <&vreg_l26a_1p2>;
+ };
+ 
++&pcie1_port0 {
++	reset-gpios = <&tlmm 102 GPIO_ACTIVE_LOW>;
++};
++
+ &pm8998_adc {
+ 	channel@4c {
+ 		reg = <ADC5_XO_THERM_100K_PU>;
+diff --git a/arch/arm64/boot/dts/qcom/sdm845.dtsi b/arch/arm64/boot/dts/qcom/sdm845.dtsi
+index b1f6782a3ad9..cb7f93b02b5a 100644
+--- a/arch/arm64/boot/dts/qcom/sdm845.dtsi
++++ b/arch/arm64/boot/dts/qcom/sdm845.dtsi
+@@ -2395,16 +2395,15 @@ pcie0: pcie@1c00000 {
  
  			power-domains = <&gcc PCIE_0_GDSC>;
  
 -			phys = <&pcie0_phy>;
 -			phy-names = "pciephy";
 -
--			perst-gpios = <&tlmm 79 GPIO_ACTIVE_LOW>;
--			wake-gpios = <&tlmm 81 GPIO_ACTIVE_LOW>;
--
- 			pinctrl-names = "default";
- 			pinctrl-0 = <&pcie0_default_state>;
- 			dma-coherent;
-@@ -2224,6 +2218,10 @@ pcieport0: pcie@0 {
+ 			status = "disabled";
+ 
+-			pcie@0 {
++			pcie0_port0: pcie@0 {
+ 				device_type = "pci";
  				reg = <0x0 0x0 0x0 0x0 0x0>;
  				bus-range = <0x01 0xff>;
  
 +				phys = <&pcie0_phy>;
-+				reset-gpios = <&tlmm 79 GPIO_ACTIVE_LOW>;
-+				wake-gpios = <&tlmm 81 GPIO_ACTIVE_LOW>;
 +
  				#address-cells = <3>;
  				#size-cells = <2>;
  				ranges;
-@@ -2334,12 +2332,6 @@ pcie1: pcie@1c08000 {
+@@ -2525,16 +2524,15 @@ pcie1: pcie@1c08000 {
  
  			power-domains = <&gcc PCIE_1_GDSC>;
  
 -			phys = <&pcie1_phy>;
 -			phy-names = "pciephy";
 -
--			perst-gpios = <&tlmm 82 GPIO_ACTIVE_LOW>;
--			wake-gpios = <&tlmm 84 GPIO_ACTIVE_LOW>;
--
- 			pinctrl-names = "default";
- 			pinctrl-0 = <&pcie1_default_state>;
- 			dma-coherent;
-@@ -2351,6 +2343,10 @@ pcie@0 {
+ 			status = "disabled";
+ 
+-			pcie@0 {
++			pcie1_port0: pcie@0 {
+ 				device_type = "pci";
  				reg = <0x0 0x0 0x0 0x0 0x0>;
  				bus-range = <0x01 0xff>;
  
 +				phys = <&pcie1_phy>;
-+				reset-gpios = <&tlmm 82 GPIO_ACTIVE_LOW>;
-+				wake-gpios = <&tlmm 84 GPIO_ACTIVE_LOW>;
-+
- 				#address-cells = <3>;
- 				#size-cells = <2>;
- 				ranges;
-@@ -2461,12 +2457,6 @@ pcie2: pcie@1c10000 {
- 
- 			power-domains = <&gcc PCIE_2_GDSC>;
- 
--			phys = <&pcie2_phy>;
--			phy-names = "pciephy";
--
--			perst-gpios = <&tlmm 85 GPIO_ACTIVE_LOW>;
--			wake-gpios = <&tlmm 87 GPIO_ACTIVE_LOW>;
--
- 			pinctrl-names = "default";
- 			pinctrl-0 = <&pcie2_default_state>;
- 			dma-coherent;
-@@ -2478,6 +2468,10 @@ pcie@0 {
- 				reg = <0x0 0x0 0x0 0x0 0x0>;
- 				bus-range = <0x01 0xff>;
- 
-+				phys = <&pcie2_phy>;
-+				reset-gpios = <&tlmm 85 GPIO_ACTIVE_LOW>;
-+				wake-gpios = <&tlmm 87 GPIO_ACTIVE_LOW>;
 +
  				#address-cells = <3>;
  				#size-cells = <2>;
