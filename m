@@ -1,119 +1,267 @@
-Received: from cstnet.cn (smtp25.cstnet.cn [159.226.251.25])
-	(using TLSv1.2 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E51914DEC28;
-	Thu, 17 Sep 2026 16:48:58 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=159.226.251.25
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 519BB53B34A
+	for <linux-arm-msm@vger.kernel.org>; Thu, 17 Sep 2026 17:05:51 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789663741; cv=none; b=UERvl/NuYxhHod8zswbhnSaoPZfQnVhFWWIRZr4e6oyLJT888fcK5LFD78UPzjBvlfOlg59y4LRgxeDxrwJuLO/Z7s3la3uaQx/W1Qv3z3pXqyevj9sOWBxJi97sLUmxiKRHW0qecZDIFQ0VN5H6w/4MgEFJwFN2OSbOM+eAkhU=
+	t=1789664752; cv=none; b=qGCsFMLt1znz+fRer6wFy98GGyKySSGOtSmNpWssUApP6cEO+/+8ijX4eYJLeeWaYWnDhRbKBfLxqep4AfuYZN6CuHkps1jLwan61JnmT672HlnWQ+BP100ATszMTDOHl8cd0JYeKKFzBulFH6WhA8wQ7fgXEEp2wjtdkJX7nIk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789663741; c=relaxed/simple;
-	bh=jL5t8yN64zPRjybqoOuKkN7sxAGDrkfhr/U/m1luJ1c=;
-	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=tFsPUWXRw1wNdeJdSehgrpWj1m3/nprDLdoW2PKk8oZkhh6kUuUMINI4qeb2/SabQXI94xRnUD2QRc2Q83iosAhaknEqgXuyMkqCThB5G47xBZoaU8BrCxc/UqYUJrC9YGWek8BjM4FFbh0wEe+ZS+grc7mpAXrQJgEphetGDls=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=iscas.ac.cn; spf=pass smtp.mailfrom=iscas.ac.cn; arc=none smtp.client-ip=159.226.251.25
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=iscas.ac.cn
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=iscas.ac.cn
-Received: from dfae2b116770.home.arpa (unknown [36.110.52.2])
-	by APP-05 (Coremail) with SMTP id zQCowAAnlT_1Gaxq7smECA--.7305S2;
-	Fri, 18 Sep 2026 00:48:53 +0800 (CST)
-From: Wentao Liang <vulab@iscas.ac.cn>
-To: broonie@kernel.org
-Cc: lgirdwood@gmail.com,
-	linux-arm-msm@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	linux-sound@vger.kernel.org,
-	perex@perex.cz,
-	srini@kernel.org,
-	tiwai@suse.com,
-	vkoul@kernel.org,
-	Wentao Liang <vulab@iscas.ac.cn>,
-	stable@vger.kernel.org
-Subject: [PATCH] ASoC: codecs: wcd9335: Fix SLIM interface device leak in wcd9335_slim_status()
-Date: Thu, 17 Sep 2026 16:48:53 +0000
-Message-Id: <20260917164853.2163184-1-vulab@iscas.ac.cn>
-X-Mailer: git-send-email 2.34.1
+	s=arc-20240116; t=1789664752; c=relaxed/simple;
+	bh=K89NTdHV4s39TWMFaaBaEfSlU0LRczERuX7RTrIMNEM=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=ZTOgPmCal+E0peoN2RfD6I5UuL9HJvun3bHA9MfIMxyaNAvF4Q1sSmznARcxaRD8JNnAq+qG65T/LfXES8tu+0cuTM0+0CcUa/YueBTTdgs2gFbwYHbnRACR/w2NuKvEIaYyvMirGnPROoBP7UlNn7HG0g44dl7Tgt8h6TH7JRQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=Tgd3GC9W; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=hB3TWBzc; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="Tgd3GC9W";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="hB3TWBzc"
+Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68HH5KmZ1007358
+	for <linux-arm-msm@vger.kernel.org>; Thu, 17 Sep 2026 17:05:50 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	RDl35+VXelpsEbre9UpAeTzdT2GlQK1m33TbNXBDA+M=; b=Tgd3GC9WhKH7gyHB
+	3DIAh98G11HYVNgr+D7Tum/1A3Tz7K+TZxY4NV401TMseciyykXB269mWw6B6zbs
+	jHxfmNX3FPf5ya8EI+Lfq8xbUpWkMXjdf4EbKkadvKH6l7m1exjjyvY/gzDC5dU8
+	LaHRFEbpXRVi6QfKBXIC5pkGiUubaTcg1NNxtkEUXq0RcYfwi9b/FSuwcrvIzhFx
+	vSb29F9dshZnr0HRO+67md7iLZ/T3xQHEOYZi6dVvpSERUVTCzylr2lcS/gimN7R
+	CKyy5QN6+YXVNcjaK1+ZtC4f4DVzG2/F6nFJeK465yVXeVClC2/yU3RNeOTxoj1B
+	M4X/FA==
+Received: from mail-pl1-f200.google.com (mail-pl1-f200.google.com [209.85.214.200])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4grjttrg1n-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 17 Sep 2026 17:05:50 +0000 (GMT)
+Received: by mail-pl1-f200.google.com with SMTP id d9443c01a7336-2d9336581a2so20984335ad.3
+        for <linux-arm-msm@vger.kernel.org>; Thu, 17 Sep 2026 10:05:50 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1789664749; x=1790269549; darn=vger.kernel.org;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :content-type:mime-version:references:message-id:subject:cc:to:from
+         :date:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=RDl35+VXelpsEbre9UpAeTzdT2GlQK1m33TbNXBDA+M=;
+        b=hB3TWBzcuCbm+XSqIo3mL56lN+8S7OrQofItOzrIOutL/VqAnQ48znh3xtaqRWPWnt
+         SFyyI2ntGvSR/DSHNdcQIi9ZBrmZfI0x2CVAJjknAKfc2ELmDSwjA4cYOrbZVdqXSr1c
+         3HAgGtGtX6/LOD0BGrbiDybj7EsablNtZuV3SfJy7SlUzqh7EnYC9YWb1TrjyClXt/pX
+         RuVkHcGOka4IfZ3gj1BDJCzax5FPD8AGZwMgIFSNeKzABRQDDv9ZU83+Vn/hRB6CbMYX
+         9niYCYNp29Kt07o2g0TKp/e+PnCFcwmPRWPNAqdw1R4W363JvCAKMY8IjfrFcdNwlJt/
+         Mnyw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1789664749; x=1790269549;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :content-type:mime-version:references:message-id:subject:cc:to:from
+         :date:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=RDl35+VXelpsEbre9UpAeTzdT2GlQK1m33TbNXBDA+M=;
+        b=PH4DW5AYQd73qEzT5l3wa5rO8cgfKyjK5/FAB+MgryCrDdQkQnJvr08tAZQkAlLM3q
+         MxHeDx7FH9bFKcuzUcg6B3ZL1fcuwYLs0getGuVUj2iMmivOQTEkVbn2tY5SM9QhZRjN
+         4F71zl0V7g7EH8lFNXfk3w4SdbMeTnVg8VeG5gL4MGQoMkmVjLGEnDwKttLXfEvB+EKM
+         z+GNc3j1IdRz9ETcY7ySDZW6ohnBEXJc61BL2w3A4sYCkohdyTkaXYGcaMrXr75P+q/H
+         GchYGjoVosQ98o0nASA7W8TqmPPJ2Wmi+Pwm2HSt40Q9w5X3UGmzutVbPapMN3AdjQbK
+         4nCQ==
+X-Forwarded-Encrypted: i=1; AKwUvBz1qrjC5dKNzf1x5LFTAIBV1Qv/Aifrh/mbgf7jyqSciyA6kILSNrWV3b7DTWzdcJrJQNROZp2DtbOca2/5@vger.kernel.org
+X-Gm-Message-State: AFuF++l0pTm80ZpK7//CGKtP7r/SFbrTFZxyWQ6O4rW+1OTJ5fj7YxLj
+	jsfhBDjsLPHiaBx3nOWk1zXTKEj7bDs/Biz04iVGiJC769Gx6S9RVBIxTT7tg4tzefxLKAlAp/4
+	WDSFN/W2iW51ToRR8ERwqR3k1ROxn2bJAxrClg7JwLyoZQL12A1MVXK5GKjRsrJNppHI+
+X-Gm-Gg: AYBFou1O5XLm0ymWV3Qw1wFlGAT7SFAxe7nRf6yfGI6emQg6gHpbjV+/m5knehfXYwM
+	sLpYR0Cgjzw95oqbGj+6Ur1ir3TD8VHhbq+QGKehHEevBur/eDzvwjo2AkvibEm6GuW4e9vE+KE
+	pYn4L1JKwu7zwSQbrcnSZ6KNv2rzgv3tm9GO7+4opmBL8pVSZbAgBuOUJZ4wCDDPkT3CC0tdCKY
+	fyhs+bY+ONA0MeJazjSOq9MMSlY+nn1Mm0lo2VqHaRef5ezoIV8NEUmpX71ah+h/BS5ivSRc7L/
+	h0Kz03lvxaj7bqntoK+X6klZjGSHPqVfnRmVSPAWEexuP16M8Ys4p028fM4Wjl7qI6Dmnj/NYbW
+	WmnFE3oCUGBJP
+X-Received: by 2002:a17:903:96:b0:2dd:ad74:ac82 with SMTP id d9443c01a7336-2ddad74aeadmr12637545ad.29.1789664749509;
+        Thu, 17 Sep 2026 10:05:49 -0700 (PDT)
+X-Received: by 2002:a17:903:96:b0:2dd:ad74:ac82 with SMTP id d9443c01a7336-2ddad74aeadmr12637115ad.29.1789664748859;
+        Thu, 17 Sep 2026 10:05:48 -0700 (PDT)
+Received: from oss.qualcomm.com ([202.46.23.25])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2dd89ebf2e2sm30693095ad.42.2026.09.17.10.05.41
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 17 Sep 2026 10:05:48 -0700 (PDT)
+Date: Thu, 17 Sep 2026 22:35:39 +0530
+From: Mohd Ayaan Anwar <mohd.anwar@oss.qualcomm.com>
+To: netdev-bot+sashiko@kernel.org
+Cc: andrew+netdev@lunn.ch, davem@davemloft.net, edumazet@google.com,
+        kuba@kernel.org, pabeni@redhat.com, robh@kernel.org,
+        krzk+dt@kernel.org, conor+dt@kernel.org, afd@ti.com, andrew@lunn.ch,
+        hkallweit1@gmail.com, linux@armlinux.org.uk, richardcochran@gmail.com,
+        andersson@kernel.org, konradybcio@kernel.org,
+        alexandre.torgue@foss.st.com, peppe.cavallaro@st.com,
+        joabreu@synopsys.com, maxime.chevallier@bootlin.com,
+        mcoquelin.stm32@gmail.com, netdev@vger.kernel.org,
+        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-arm-msm@vger.kernel.org,
+        linux-stm32@st-md-mailman.stormreply.com,
+        linux-arm-kernel@lists.infradead.org
+Subject: Re: [PATCH net-next v2 4/9] net: stmmac: qcom-ethqos: convert
+ ethqos_rgmii_macro_init() to void
+Message-ID: <aqwd482ftepFnbJz@oss.qualcomm.com>
+References: <20260908-shikra_ethernet-v2-4-bbe3389d0652@oss.qualcomm.com>
+ <178912591286.219967.4678568368277035940@kernel.org>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID:zQCowAAnlT_1Gaxq7smECA--.7305S2
-X-Coremail-Antispam: 1UD129KBjvJXoW7Cw13tFWfAF45uryxAw43Wrg_yoW8CFyxp3
-	9rtFyYq345KrWfAr15tr4UJa4S9FW2gwn3Cr48K342kan0yryFk34kta4FvFyfKF95X3W3
-	JryDZa4UCr45uF7anT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-	9KBjDU0xBIdaVrnRJUUUBF1xkIjI8I6I8E6xAIw20EY4v20xvaj40_Wr0E3s1l1IIY67AE
-	w4v_Jr0_Jr4l8cAvFVAK0II2c7xJM28CjxkF64kEwVA0rcxSw2x7M28EF7xvwVC0I7IYx2
-	IY67AKxVW5JVW7JwA2z4x0Y4vE2Ix0cI8IcVCY1x0267AKxVW8Jr0_Cr1UM28EF7xvwVC2
-	z280aVAFwI0_Cr0_Gr1UM28EF7xvwVC2z280aVCY1x0267AKxVW8Jr0_Cr1UM2AIxVAIcx
-	kEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj6xIIjxv20xvE14v2
-	6r1q6rW5McIj6I8E87Iv67AKxVW8JVWxJwAm72CE4IkC6x0Yz7v_Jr0_Gr1lF7xvr2IYc2
-	Ij64vIr41lF7I21c0EjII2zVCS5cI20VAGYxC7M4IIrI8v6xkF7I0E8cxan2IY04v7MxkF
-	7I0En4kS14v26r1q6r43MxAIw28IcxkI7VAKI48JMxAIw28IcVCjz48v1sIEY20_Gr43Wr
-	1UJr1l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s026x8G
-	jcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r1q6r43MIIYrxkI7VAKI48JMIIF0xvE2I
-	x0cI8IcVAFwI0_JFI_Gr1lIxAIcVC0I7IYx2IY6xkF7I0E14v26F4j6r4UJwCI42IY6xAI
-	w20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Gr0_Cr1lIxAIcVC2z280aVCY1x
-	0267AKxVW8Jr0_Cr1UYxBIdaVFxhVjvjDU0xZFpf9x0JUDOz3UUUUU=
-X-CM-SenderInfo: pyxotu46lvutnvoduhdfq/1tbiDAENA2qr9nBUwgAAsS
+In-Reply-To: <178912591286.219967.4678568368277035940@kernel.org>
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTE3MDI0MyBTYWx0ZWRfX4zPXQOTb/QBI
+ S7Ctq5GV6dHuIPNPVov7XhD2wn/ckPvHaekrbihbxHbtL9kILkMfBggiRGMj0fT3irVUEZzLtJ/
+ 8LBLC8N1zZwKZw3U+eOwbvypZY/EnrpilZVklFGC0mieMMDjnasjnVJ/0Bw5kRFXtQ6TAYi9Dph
+ SU4zrGCjAbc7YNAC7CYdCI+s2BuHqHjlIyiVOnK+uu4vtnPZmjKOz/zxjNaiOwVsrP61vgFnlz5
+ Z0j7ODxoCZe2J5aS8bJPXhGfmszLfBtX/d6DgQB/QxHKkVhHJhsJ3mZtZ7i7Vv+9+QFZMLujQ/h
+ pbGmk8v/MvJ7KyQLPa6pgSa8LamzIx4jO9IbALwB7E1zSUxKMmoDyU0it7B16y7px6vj1bVHomg
+ Xd+MBWYsppFHVXvOHjTVv52UIOPaXb12YteSwPdl3v1/thVqk8dNW1XD8jIO56J+miLlJe1TQ0s
+ SD2UMqvJUPS8aGOXEyQ==
+X-Proofpoint-ORIG-GUID: WFMlJrMV9oDXSh_kCogxRnQaoGeHxesD
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTE3MDI0MyBTYWx0ZWRfX59G5u84gjAMp
+ ul9BBp/FhJIsoVWKp91AT6BeJghUza03mXPBMPnb6/855hlDZrmH/5k2B5uM+ZBwKhyEv4D42uK
+ B0vw1k4LQciwfmPn5fwvmtxHzH7NfCw=
+X-Authority-Analysis: v=2.4 cv=IP2XmQvG c=1 sm=1 tr=0 ts=6aac1dee cx=c_pps
+ a=IZJwPbhc+fLeJZngyXXI0A==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
+ a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
+ a=VwQbUJbxAAAA:8 a=qlcCTMnHKW_kJwwR1w0A:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+ a=uG9DUKGECoFWVXl0Dc02:22
+X-Proofpoint-GUID: WFMlJrMV9oDXSh_kCogxRnQaoGeHxesD
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-09-17_04,2026-09-16_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ clxscore=1015 phishscore=0 priorityscore=1501 suspectscore=0 malwarescore=0
+ adultscore=0 lowpriorityscore=0 impostorscore=0 spamscore=0 bulkscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609170243
 
-of_slim_get_device() returns a device with an elevated reference count,
-and wcd->slim_ifc_dev is intentionally kept for the codec lifetime on
-success. However, all the failure paths of wcd9335_slim_status() return
-without dropping that reference, leaking the SLIM interface device
-whenever the register maps cannot be created or the codec fails to come
-up.
+On Fri, Sep 11, 2026 at 11:25:12AM +0000, netdev-bot+sashiko@kernel.org wrote:
+> Thank you for your contribution! Sashiko AI review found 1 potential
+> issue(s) to consider:
+> 
+> Critical: 0 · High: 0 · Medium: 1 · Low: 0
+> 
+> - [Medium] In `ethqos_rgmii_macro_init()`
+>   (drivers/net/ethernet/stmicro/stmmac/dwmac-qcom-ethqos.c) the patch…
+> 
+> --
+> 
+> net: stmmac: qcom-ethqos: convert ethqos_rgmii_macro_init() to void
+> 
+> The patch changes ethqos_rgmii_macro_init() to return void because its only
+> caller ignores the return value, and it drops the speed validation from that
+> function on the grounds that the same check exists higher up the call stack.
+> 
+> > diff --git a/drivers/net/ethernet/stmicro/stmmac/dwmac-qcom-ethqos.c b/drivers/net/ethernet/stmicro/stmmac/dwmac-qcom-ethqos.c
+> > index ac7d6d3e205a1..44270c25d874f 100644
+> > --- a/drivers/net/ethernet/stmicro/stmmac/dwmac-qcom-ethqos.c
+> > +++ b/drivers/net/ethernet/stmicro/stmmac/dwmac-qcom-ethqos.c
+> > @@ -371,9 +371,8 @@ static int ethqos_dll_configure(struct qcom_ethqos *ethqos)
+> >  	return 0;
+> >  }
+> >  
+> > -static int ethqos_rgmii_macro_init(struct qcom_ethqos *ethqos, int speed)
+> > +static void ethqos_rgmii_macro_init(struct qcom_ethqos *ethqos, int speed)
+> >  {
+> > -	struct device *dev = &ethqos->pdev->dev;
+> >  	unsigned int prg_rclk_dly, loopback;
+> >  	unsigned int phase_shift;
+> >  
+> > @@ -384,11 +383,6 @@ static int ethqos_rgmii_macro_init(struct qcom_ethqos *ethqos, int speed)
+> >  	/* Select RGMII, write 0 to interface select */
+> >  	rgmii_clrmask(ethqos, RGMII_CONFIG_INTF_SEL, RGMII_IO_MACRO_CONFIG);
+> >  
+> > -	if (speed != SPEED_1000 && speed != SPEED_100 && speed != SPEED_10) {
+> > -		dev_err(dev, "Invalid speed %d\n", speed);
+> > -		return -EINVAL;
+> > -	}
+> > -
+> 
+> [Severity: Medium]
+> The commit message says "the speed validation duplicates a check higher up
+> the call stack".  Which check is that referring to?
+> 
+> The only path here is:
+> 
+>   stmmac_mac_link_up()
+>     -> priv->plat->fix_mac_speed()
+>       -> ethqos_fix_mac_speed_rgmii()
+>         -> ethqos_rgmii_macro_init()
+> 
+> stmmac_mac_link_up() only bails out in the default arm of its speed switch:
+> 
+> 	case SPEED_2500:
+> 		if (interface == PHY_INTERFACE_MODE_USXGMII)
+> 			ctrl |= priv->hw->link.xgmii.speed2500;
+> 		else
+> 			ctrl |= priv->hw->link.speed2500;
+> 		break;
+> 	...
+> 	default:
+> 		netdev_err(priv->dev,
+> 			   "unsupported speed %s on %s, leaving the MAC disabled\n",
+> 			   phy_speed_to_str(speed), phy_modes(interface));
+> 		return;
+> 	}
+> 
+> 	if (priv->plat->fix_mac_speed)
+> 		priv->plat->fix_mac_speed(priv->plat->bsp_priv, interface,
+> 					  speed, mode);
+> 
+> so SPEED_2500 and everything above it are accepted and forwarded verbatim to
+> fix_mac_speed() regardless of the interface mode.
+> 
+> ethqos_fix_mac_speed_rgmii() does no RGMII-specific speed validation either;
+> it only distinguishes speed == SPEED_1000 from speed == SPEED_100/SPEED_10
+> while restoring POR values and bringing up the DLL, then passes speed
+> straight through.
+> 
+> So the removed test rejected speeds that are invalid for RGMII, while what
+> remains upstream only rejects speeds the core does not recognise at all.
+> Are these really the same check?
+> 
+> A speed above 1000 does appear reachable on an RGMII port through a fixed
+> link.  phylink_parse_fixedlink() keeps the requested speed even when it does
+> not match the validated supported set:
+> 
+> 	if (c) {
+> 		...
+> 	} else {
+> 		phylink_warn(pl, "fixed link %s duplex %dMbps not recognised\n",
+> 			     pl->link_config.duplex == DUPLEX_FULL ? "full" : "half",
+> 			     pl->link_config.speed);
+> 	}
+> 
+> and phylink_get_fixed_state() then hands that speed to mac_link_up() via
+> *state = pl->link_config.  With phy-mode = "rgmii" plus
+> fixed-link { speed = <2500>; full-duplex; }, does 2500 now reach
+> ethqos_rgmii_macro_init() and silently take the non-1000 branches
+> (BYPASS_TX_ID_EN set, POS_NEG_DATA_SEL and PROG_SWAP cleared,
+> PRG_RCLK_DLY_CODE = 5, RX_PROG_SWAP cleared on pre-GE3 parts) while neither
+> MAX_SPD_PRG_2 nor MAX_SPD_PRG_9 is programmed, with the DLL already locked
+> by the caller?
+> 
+> The "Invalid speed %d" dev_err() was the only indication that the RGMII
+> configuration is unsupported.  Would it make sense to move the check into
+> ethqos_fix_mac_speed_rgmii(), before the POR restore and the DLL
+> reset/enable sequence, rather than dropping it?
+> 
+> For reference, no later patch in this series reinstates a speed check:
+> ethqos_fix_mac_speed_rgmii() and ethqos_rgmii_macro_init() still accept any
+> speed at the end of the series, and the newly added
+> ethqos_rgmii_id_macro_init() is equally unvalidated.
+> 
+> >  	rgmii_setmask(ethqos, RGMII_CONFIG_DDR_MODE, RGMII_IO_MACRO_CONFIG);
+> >  
+> >  	if (speed == SPEED_1000) {
+> 
+> [ ... ]
+> 
 
-Put the device on each of those error paths.
+In my opinion, there's something already very wrong if we have a
+fixed-link setup with phy-mode as RGMII and speed anything greater
+than 1000. So I am not sure this comment makes sense.
 
-Fixes: 20aedafdf492 ("ASoC: wcd9335: add support to wcd9335 codec")
-Cc: stable@vger.kernel.org
-Signed-off-by: Wentao Liang <vulab@iscas.ac.cn>
----
- sound/soc/codecs/wcd9335.c | 13 ++++++++++---
- 1 file changed, 10 insertions(+), 3 deletions(-)
-
-diff --git a/sound/soc/codecs/wcd9335.c b/sound/soc/codecs/wcd9335.c
-index e3ca5ca6de3d..b6d7606be863 100644
---- a/sound/soc/codecs/wcd9335.c
-+++ b/sound/soc/codecs/wcd9335.c
-@@ -5123,25 +5123,32 @@ static int wcd9335_slim_status(struct slim_device *sdev,
- 	slim_get_logical_addr(wcd->slim_ifc_dev);
- 
- 	wcd->regmap = regmap_init_slimbus(sdev, &wcd9335_regmap_config);
--	if (IS_ERR(wcd->regmap))
-+	if (IS_ERR(wcd->regmap)) {
-+		put_device(&wcd->slim_ifc_dev->dev);
- 		return dev_err_probe(dev, PTR_ERR(wcd->regmap),
- 				     "Failed to allocate slim register map\n");
-+	}
- 
- 	wcd->if_regmap = regmap_init_slimbus(wcd->slim_ifc_dev,
- 						  &wcd9335_ifc_regmap_config);
--	if (IS_ERR(wcd->if_regmap))
-+	if (IS_ERR(wcd->if_regmap)) {
-+		put_device(&wcd->slim_ifc_dev->dev);
- 		return dev_err_probe(dev, PTR_ERR(wcd->if_regmap),
- 				     "Failed to allocate ifc register map\n");
-+	}
- 
- 	ret = wcd9335_bring_up(wcd);
- 	if (ret) {
- 		dev_err(dev, "Failed to bringup WCD9335\n");
-+		put_device(&wcd->slim_ifc_dev->dev);
- 		return ret;
- 	}
- 
- 	ret = wcd9335_irq_init(wcd);
--	if (ret)
-+	if (ret) {
-+		put_device(&wcd->slim_ifc_dev->dev);
- 		return ret;
-+	}
- 
- 	wcd9335_probe(wcd);
- 
--- 
-2.34.1
-
+	Ayaan
