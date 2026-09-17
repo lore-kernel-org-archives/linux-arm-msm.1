@@ -1,175 +1,373 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C1A714E2F17
-	for <linux-arm-msm@vger.kernel.org>; Thu, 17 Sep 2026 12:06:18 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C60434E1C74
+	for <linux-arm-msm@vger.kernel.org>; Thu, 17 Sep 2026 12:18:51 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789646785; cv=none; b=pyn5QV96P44EOCR73JpULB0ezZ4xLWFqz2+OIwpvqAiTBqA1vRZHF+MTVt/qrVvWQWah/GtxZ6E0eHTQuyJXDSok36wPbzaol5OF3awTZZZy6TixaY+N4k2YmxuYuOMOazjHqszVwffnJx00nsqKUwygvlwMfHDj1oHcVnuYrHM=
+	t=1789647545; cv=none; b=lcoH4P/l50FP/qu62EOgoewl6QKQJYwguq1cxSv2Sre/wKjlQSCz9kQ8edG4r6uYCeb+rROwghg+wuXNlZ4x8ftAwFcSCoQUFFi5xPB74xl7sp4hWv1KuDD4onC6U8PbrUDyqn+AWVn6a7lL2alwsixMfX7iDSs3LBdVj9NGLPU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789646785; c=relaxed/simple;
-	bh=dRIORkLtErUy8tQv0r5xQE2yHwcn16W9lhrS1ITHzeE=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=ekZAeduToHoj2U9wNWLLeZVuIxMaBIBpmx/sKgpO8E8wxo9OHveEOGlHNGVV5g1Y84HnkhOjj+BXwbAa4JZBEZDcoft3huYa9sqILQiTZz33RWLA8q/URfyHt88aEiG9jsCWOAmZh0kpwM99iV0FkNgFkMIFknrsQJ/cgHc2eDA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=U7Uwg5eF; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=FzKI5Em3; arc=none smtp.client-ip=205.220.180.131
+	s=arc-20240116; t=1789647545; c=relaxed/simple;
+	bh=kcYWCICZxy4tVxR3vKSLEGl5RDtmSqe639LHqvGgn/s=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=j1rggnEdCiiaPe8Y26KO1AD7Zsd1mwVZH+IDNebEil2aaACSqO2lgirj4A3BX/3kGkIPGr3fWv+lhvHC8CuxNhhXNN7jNhZc506sRqg2Ql/j/X5Rqv7ar5/MYCR60NUEC5GQSI7+wwbzsaKvbZV7l+tslYo2kfOP8M0qzH+9mHE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=ol6zTXKF; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=SW+7PFku; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="U7Uwg5eF";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="FzKI5Em3"
-Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68H9Zc4O1257860
-	for <linux-arm-msm@vger.kernel.org>; Thu, 17 Sep 2026 12:06:16 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="ol6zTXKF";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="SW+7PFku"
+Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68H9Zro42211011
+	for <linux-arm-msm@vger.kernel.org>; Thu, 17 Sep 2026 12:18:46 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	nP3wcx2p80nx+Tohacyx3IYJwpEKwRThxmKFCg9vGIo=; b=U7Uwg5eFG/pmFsnM
-	xjn7dPDCxwjwcnMVZJ9pEha6boZUgOzeEhD0h0Jw+xbO+nHih2NI6K+0bwLOoREq
-	AoIzbhQHSD+uRSNkJga4b3wv71i5fHxey2c2sr1/nF4Wh0KSFK1omFIkTI3FurZn
-	oUsA2iw08xh80L1FV8YVvQ2azYF88oexBO6K9l/yZjBb90O0+7uLGGm5PJlswt5C
-	LXxD5ghUGbpYy7NvyK5KAXltBWQVND9V7GdPiWfH6O/aohR69wQKIjkXsYLtMcYq
-	iBkUKHrH5QXfU9M2+29tgnp2r5mAQsaVkAy+ozJr8NOxqI3sWsI72Vle4eTrOl6l
-	iqCjdg==
-Received: from mail-pj1-f69.google.com (mail-pj1-f69.google.com [209.85.216.69])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4grdftgn4c-1
+	pLidpK666Qo4PK2scTKJdMHZcsfWyON6rHKOqwd2TFY=; b=ol6zTXKFnD4JTeBU
+	LZXVlSGRIKpqvNI1JClyH012G5SMoW8Ppahz1raOklot6VsMWHMYfVhtpyAaWCPj
+	WTgTCywUIvGYku13D8HmsBIWW/pVIDGQJIdsMnS+tcIVHq2vjIvxPnsjrNYdbfc2
+	eJdfsaO7QUfPiJo0wGQwacAQnmbDxkhHKCuxMrRzI2R22cFj9V2UNjrDp93n5+pe
+	5mgoEIrhrg+Q+uTwPhqe6QR9gn627UkrHHGaXuEJLqd5iXgtBzxQiiCSNBYO8lNj
+	2UoeA8Oo6OkdXu07QvdSnKXptZhDFtDz/eoxuPlHLBdZqBIxlzIS//t1nIoX6nkv
+	xyuEHw==
+Received: from mail-pg1-f198.google.com (mail-pg1-f198.google.com [209.85.215.198])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gr79m27rs-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Thu, 17 Sep 2026 12:06:15 +0000 (GMT)
-Received: by mail-pj1-f69.google.com with SMTP id 98e67ed59e1d1-39b77130a7fso1450606a91.2
-        for <linux-arm-msm@vger.kernel.org>; Thu, 17 Sep 2026 05:06:15 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 17 Sep 2026 12:18:46 +0000 (GMT)
+Received: by mail-pg1-f198.google.com with SMTP id 41be03b00d2f7-cc4c1fc9ceaso663125a12.3
+        for <linux-arm-msm@vger.kernel.org>; Thu, 17 Sep 2026 05:18:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1789646775; x=1790251575; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=nP3wcx2p80nx+Tohacyx3IYJwpEKwRThxmKFCg9vGIo=;
-        b=FzKI5Em3ACbwlrSdfVBaBTqlCqdkwiOMpUVgiB45BUavS6wq1BaO8+jLg3tUsP7XjR
-         Kxy3htgA8A7jGXsoYO8hl3+SkaKbLUC3Ok/no0JeyklQB6fCH3Too2zbx40Kudb+9F7P
-         IzE1ZUQwpBvw7c4ER6+/RkoGSCMjM4MCwU93Kyw7vVk0SsqaWrJdOoaxXvbzsDBLE9C0
-         Bj43miPut5uu51hbGofNg95102P68ItoOTw+l/6sgejYwaxN+7NWzlwo6X7E8OsLVgQ4
-         H4WUqn2VgUmN8X3D6QyWXNaNc8Ye+0TMOD3CNQgbTG7+HgRxvKSz22bjTYHPMLIyQUEc
-         NM2Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1789646775; x=1790251575;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+        d=oss.qualcomm.com; s=google; t=1789647526; x=1790252326; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=nP3wcx2p80nx+Tohacyx3IYJwpEKwRThxmKFCg9vGIo=;
-        b=jTTs2nDyMj3aMIdg4SEJadChuaFlFOmg+4HTf/+cz3MRsqvq7I4o1zMY6/tFpq6+26
-         FkRiFp92YeitApzZySyPuqbxxBAaxgvQyG5sRknjAR8FXVsR1dVBoGTu0eQaqYzPasMy
-         Vf9+ABEPkg1MNoLfIVP3GIEpg10nPFRK+V1pbGh9SsBiZwOyupjlmwnpGKh5Uti5BKdU
-         a+VcS5ejAKZaPajfmIhLXsYvL/ZFM4BuDRG9o2ilYHwqhdbv7uQXhF5CdJ4ek+Lb5Wha
-         mT0PKVdTMbjntmLSzNCKb7XXEQVYH4w1GK7Ax1qF65+1IGoB/Q2MlEsUYfQeQExL4LWI
-         WUAA==
-X-Gm-Message-State: AFuF++nTKCvNVF+XTPC8itdM9FC1qEZH2ov1oeCrKiZ8Wo49I4XH1t8A
-	x2Bn5ldLN9CVlUz8p7D0Dw1RHJta3OxLrRVGAd+bmzoij+ZFRm70hStqiXzZrDhTvu5zNhnOOQP
-	fBOYZXSBUIFgfcjLaKgGGlwrtWYZmesxBHzhuAYtDQSnv/uYqfEgWRC24Fy/V+CNWI1ag
-X-Gm-Gg: AYBFou1gZgY9k+1h/broDlKAYXxw8GfRxLGayG8PSqO8XIQpk9Z7K2d/w07SGOOJghk
-	WGQjyzMvxvxjDTqleOHM8YH86MWO2VWIk0xsgfLk4mqgQ4fqoxzUHPRFswHRqQwaDJIBVTxKmcW
-	2We+7AIPmFtlQpHrlETWwkkmP3hhSNSw2evZFMFApXiLQL+BoeNmXTX3ssXICH9vhrkYLD+2eKE
-	RmiaNX5lxmlKMt0dmy2yp5+PtzObeZG4O/0JHsYChB/Yjft3/e+x7WxkvFK7k8AaM4hTwTNgv83
-	dovacYGhxKLVERcp2hWI0cdK5k0gObLsNkG635PwM6xSpnCycF6Pb8h/+RrqZDBq7SvZr9fzDgW
-	cVqCnfJdUiOnWEr9Sx5muP7KmbloqvA==
-X-Received: by 2002:a17:90b:4e88:b0:398:cb56:e92 with SMTP id 98e67ed59e1d1-39e1e30ba45mr15795509a91.11.1789646774864;
-        Thu, 17 Sep 2026 05:06:14 -0700 (PDT)
-X-Received: by 2002:a17:90b:4e88:b0:398:cb56:e92 with SMTP id 98e67ed59e1d1-39e1e30ba45mr15795404a91.11.1789646774273;
-        Thu, 17 Sep 2026 05:06:14 -0700 (PDT)
-Received: from hu-nihalkum-hyd.qualcomm.com ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-39e35d9869csm5007612a91.4.2026.09.17.05.06.08
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 17 Sep 2026 05:06:13 -0700 (PDT)
-From: Nihal Kumar Gupta <nihal.gupta@oss.qualcomm.com>
-Date: Thu, 17 Sep 2026 17:35:43 +0530
-Subject: [PATCH v3 3/3] media: qcom: camss: Add Glymur compatible
+        bh=pLidpK666Qo4PK2scTKJdMHZcsfWyON6rHKOqwd2TFY=;
+        b=SW+7PFkuNJAZM4NNNa6E955KvMmGJDX9F51djwiXRyhyHX5szhFiYutdXvi0owBigB
+         JQLqe+deKpSan1QKMnhaPFxeVqoC/Zd/g8jTw2hO1iMsfP+iJO1yQgynTsNlinBFDkPK
+         r3K4qAsD2FFv4QMfIRgbvQcuixVUHhSajXko7EiFhV3txtupnwYhp4lMghX+tJBc7VLb
+         8ySmxg7TLbauOQuQWBTj4ewlozXKei2WwEbVhKWA2PcyL5uiPSNRpY9iGGnJPVFteQhb
+         rrVp+Z24f68fPd0isb0g4FNB3w3Z5h0+bbNvJc5tpV4oFiRjtDY8aGoDgVo4QC7hp/pj
+         oWeQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1789647526; x=1790252326;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=pLidpK666Qo4PK2scTKJdMHZcsfWyON6rHKOqwd2TFY=;
+        b=GJT5ZKXXAyZtDZtnRCkiXCJwRbBjzwNh6CbMPdPJJRin66pDlwgczMiPy3lBr6fj0G
+         2tK/rq5YCBEt129shPr00fx0vmUOpSojCihogQeX4g+YzsBroFOPh5Qw+OLVyoc59/gt
+         LoyPJAYQkosQC3k6CxEG3edPsX3Xs8QRWQaSRaKrMYKMuIfaIsQSzhlDVbOsJbezkPQV
+         CHPZXMv0EYfkVnMBMGMQreajoMDyZQ1J/07Cb+ghJf5n6mRxFc1Vdnyrg+xLUR9252K+
+         8sNYOCScmuhK+bznkaQ2OwLqo6xi0DoRUHSLLi37y+XOaYHoNNo3qSpQR667x3z/E7qa
+         VEVw==
+X-Forwarded-Encrypted: i=1; AKwUvBxW99BLk7WDFX6AWJNGUSM3JtqUJm0imf3QN4znpeh1xmQBajfQevp9tk5TPalm4/wNTSqJjCpBmwNPm6sE@vger.kernel.org
+X-Gm-Message-State: AFuF++kaHQk/9z/YmUB2utIajIDFXa3q7MEkpHNTemzOv8X4WGnGKlvF
+	pQH1RCSx9XsBmz9wKB+TD9cR8YzLMRBtAsUR1bG715cqy07Ak6GtFNM3bkmUYa3GD1xrjE0W3UW
+	xvfF+bLAUl+2N76bKu++HkMq7tqd3ydimZ7N/9mC69fRVKQpqAccFmn6rJSXyKKtbGc6bvQbRGp
+	GN
+X-Gm-Gg: AYBFou1uvVLK6liUhrnFF9yMRfVTmdvAFsy5tfyUAp1BZXTbqretN+xrrT+ehbBIVVK
+	zEpmSbZqEJovCTuoYsbZlGBitLnlk95Gxvy7BmKnC21NyzPS2BASK2dwtRkMsXYsaQXDYAqDI3Q
+	Hv7xfaQdqQ7AYLAq2AAdpSl6Gh4lGXN7GGcjDAHEW+0v0nJcgsCM+wada5GdNvYPUYA/ehMV7Gf
+	CASopgERRI4hbnLPt691QNKB8rZUQjWCmUy5Q2OERVyBPhdocHL10af+m/G3Do1TJLlAH7BdYtt
+	QsfZFQ9QaLQ9U7yC0NgGtTl/F/grYJO4aAMVOVwEfRND7GmX+Zgnefaonuuj9Kaf+N4NaVx540z
+	/B3T4lcNZBlu9HCroetOI5qbni5aBRSU=
+X-Received: by 2002:a17:902:f686:b0:2da:ef81:37e7 with SMTP id d9443c01a7336-2dd8e76a15dmr143388005ad.21.1789647525387;
+        Thu, 17 Sep 2026 05:18:45 -0700 (PDT)
+X-Received: by 2002:a17:902:f686:b0:2da:ef81:37e7 with SMTP id d9443c01a7336-2dd8e76a15dmr143387145ad.21.1789647524708;
+        Thu, 17 Sep 2026 05:18:44 -0700 (PDT)
+Received: from [10.218.9.75] ([202.46.22.19])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2dd89c3316dsm25970945ad.0.2026.09.17.05.18.32
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 17 Sep 2026 05:18:44 -0700 (PDT)
+Message-ID: <f14f40ef-47dd-453a-875f-6cdc6804a9fd@oss.qualcomm.com>
+Date: Thu, 17 Sep 2026 17:48:31 +0530
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260917-glymur_camss-v3-3-1d0e2d47ad2e@oss.qualcomm.com>
-References: <20260917-glymur_camss-v3-0-1d0e2d47ad2e@oss.qualcomm.com>
-In-Reply-To: <20260917-glymur_camss-v3-0-1d0e2d47ad2e@oss.qualcomm.com>
-To: Bryan O'Donoghue <bod@kernel.org>, Rob Herring <robh@kernel.org>,
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v25 04/10] firmware: psci: Add support for PSCI auxiliary
+ devices
+To: Bartosz Golaszewski <brgl@kernel.org>
+Cc: Florian Fainelli <florian.fainelli@broadcom.com>,
+        Krzysztof Kozlowski <krzk@kernel.org>,
+        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+        Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>,
+        Andre Draszik <andre.draszik@linaro.org>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        Kathiravan Thirumoorthy <kathiravan.thirumoorthy@oss.qualcomm.com>,
+        linux-pm@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-arm-kernel@lists.infradead.org, linux-arm-msm@vger.kernel.org,
+        devicetree@vger.kernel.org, mfd@lists.linux.dev,
+        Srinivas Kandagatla <srini@kernel.org>,
+        Ulf Hansson <ulf.hansson@oss.qualcomm.com>,
+        Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>,
+        Lorenzo Pieralisi <lpieralisi@kernel.org>,
+        Arnd Bergmann <arnd@arndb.de>, Bjorn Andersson <andersson@kernel.org>,
+        Sebastian Reichel <sre@kernel.org>, Rob Herring <robh@kernel.org>,
+        Souvik Chakravarty <Souvik.Chakravarty@arm.com>,
         Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Andy Yan
+ <andy.yan@rock-chips.com>,
+        Matthias Brugger <matthias.bgg@gmail.com>,
+        Mark Rutland <mark.rutland@arm.com>,
         Conor Dooley <conor+dt@kernel.org>,
-        Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
-        Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
-        Loic Poulain <loic.poulain@oss.qualcomm.com>,
-        Nihal Kumar Gupta <nihal.gupta@oss.qualcomm.com>,
-        Vinod Koul <vkoul@kernel.org>,
-        Neil Armstrong <neil.armstrong@linaro.org>,
-        Manivannan Sadhasivam <mani@kernel.org>,
-        Mauro Carvalho Chehab <mchehab@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, linux-media@vger.kernel.org,
-        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-phy@lists.infradead.org,
-        Suresh Vankadara <svankada@qti.qualcomm.com>,
-        Vikram Sharma <vikram.sharma@oss.qualcomm.com>
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1789646750; l=1214;
- i=nihal.gupta@oss.qualcomm.com; s=20260608; h=from:subject:message-id;
- bh=dRIORkLtErUy8tQv0r5xQE2yHwcn16W9lhrS1ITHzeE=;
- b=nxyrFl9h4+kkxs5v1Hz/1ajWuTIr1Gc8gWV7jz5BGt7loaxka1cQ5RhKwkSGqRpfQ/S++FVgB
- BxTRaBQ3SFkAdZaZdLczev5MWeJ67nyhFZkOh7hCbvax5qVUeDTvpig
-X-Developer-Key: i=nihal.gupta@oss.qualcomm.com; a=ed25519;
- pk=DIbyFMNwqU/iMvU/0pCQp2wmRVgtHFBT3PcSu+A+Ncw=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTE3MDE2OSBTYWx0ZWRfX7ymtCjqtGfGD
- gbM0LxHmepMJpNeyrYrlM+76kyKSNghgMItATuc9BSP+5loWlRLMBox1oDbIEmzAdsT8Xss8p/R
- S1urL2xXrTqYzjCBe/0Ul2/xvBGL4FwphtpHa31SsG+gO8pyj7nm2mlGLLedFDVVNNQDgUeng5I
- ntoZhyDKMLZjv04PVYhts1OwXwUdEP9mywEpWOkBZGAdSEQp6Xm+e9Op5pt6Qaa5NdWwutNZAxg
- OCCvTIObQGRPyrGVLkY4d3Bg6uxAXwMzUb3GVadhvVwD4k9Fl7xX1/LbbDgF73UCkrisDr/axg/
- c9SeH11kVlDBmLQS8dzIKYnqtbtDBlnAb8uFRNJAgzruVkMqgxaxroP2E1s950hOhl0lUEuzfWS
- cmbHeGIGbyjCjC4UimZZVzsk2+Tm+sqS1nJqR+m5gK6lbyG9akSY8Kp8F3gdILfhw8VgSnELtGN
- rpV0FlhDq13J819zPzQ==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTE3MDE2OSBTYWx0ZWRfX1P88rlo7rVfA
- QMYeMTgu9+tYXpN6bCHbCfhA6FN0mVl8azj3yUARqvJ2AWgGgpAoNJhzcjJ8fKX/DYEnofvOZyr
- JZ5SEgOJo32JhD6XtT1TKXWbTGBzJ0g=
-X-Proofpoint-GUID: rrAIuPVFrOjtW4LheAJZ1E3b3Uekd1iD
-X-Proofpoint-ORIG-GUID: rrAIuPVFrOjtW4LheAJZ1E3b3Uekd1iD
-X-Authority-Analysis: v=2.4 cv=K+W3jCWI c=1 sm=1 tr=0 ts=6aabd7b7 cx=c_pps
- a=vVfyC5vLCtgYJKYeQD43oA==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
+        Konrad Dybcio <konradybcio@kernel.org>,
+        John Stultz
+ <john.stultz@linaro.org>,
+        Moritz Fischer <moritz.fischer@ettus.com>,
+        "Rafael J. Wysocki" <rafael@kernel.org>,
+        Daniel Lezcano <daniel.lezcano@kernel.org>,
+        Christian Loehle <christian.loehle@arm.com>,
+        Lee Jones <lee@kernel.org>, Ulf Hansson <ulfh@kernel.org>,
+        Pavan Kondeti
+ <pavan.kondeti@oss.qualcomm.com>,
+        Abel Vesa <abelvesa@kernel.org>,
+        Sudeep Holla <sudeep.holla@kernel.org>
+References: <20260914-arm-psci-system_reset2-vendor-reboots-v25-0-4aaf5c09b5c2@oss.qualcomm.com>
+ <20260914-arm-psci-system_reset2-vendor-reboots-v25-4-4aaf5c09b5c2@oss.qualcomm.com>
+ <CAMRc=MdCWHQZ+CgW05jYA1GGJdMUwKJEBAiAvRCvx=UqvjLiUg@mail.gmail.com>
+Content-Language: en-US
+From: Shivendra Pratap <shivendra.pratap@oss.qualcomm.com>
+In-Reply-To: <CAMRc=MdCWHQZ+CgW05jYA1GGJdMUwKJEBAiAvRCvx=UqvjLiUg@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Authority-Analysis: v=2.4 cv=Qf7zLcbv c=1 sm=1 tr=0 ts=6aabdaa6 cx=c_pps
+ a=Qgeoaf8Lrialg5Z894R3/Q==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
  a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
- a=EUspDBNiAAAA:8 a=xYyVevvQUQiUFKtwU9sA:9 a=QEXdDO2ut3YA:10
- a=rl5im9kqc5Lf4LNbBjHf:22
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22
+ a=EUspDBNiAAAA:8 a=VwQbUJbxAAAA:8 a=JfrnYn6hAAAA:8 a=mLyWk11G7CGH-Ip0H1gA:9
+ a=QEXdDO2ut3YA:10 a=x9snwWr2DeNwDh03kgHS:22 a=1CNFftbPRP8L7MoqJWF3:22
+X-Proofpoint-GUID: oLYhIla4hXyWl5xkFomzV20DaFfI0uct
+X-Proofpoint-ORIG-GUID: oLYhIla4hXyWl5xkFomzV20DaFfI0uct
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTE3MDE3MSBTYWx0ZWRfXyVmF/Jpwj96f
+ dG0bWBtHKLCLfXxT9TcCV0TSRBN4OU2wDpPPRKcYMjhgBlpjwMvhIzQuHrB2fGmppkHAzcDJcPU
+ 9nDY+Nx87JOjSZ3lLySs5M8X8GQSBwrQldXIigtxzRn0TVdAETu5svtSyWibKRN4mx5M3+ejT1O
+ UCm5UzEIrlZFw1fcF5q482VS2YH3iOEdm6EcqhKfFVcA3D1OLl9smZ1orWMbdTp9wUxcPxH+MSg
+ kBMa/5fQtdD3MhPlDYQZXk1hIGHhn2TngJvR1tMQ3/74QxNRi1nP676wOtPQacjoFNK9EBO3k5o
+ jWxMOtixqR/pzJzd/uZrGwtIUFDZIO5KfG8TkpZqqwb+ohXU88M26eP6SHhWfANFzXvf7zOCd0o
+ oR4JJ2RT5xX82vEnsco9cGacNNmj5Ex5+lSfgPrwmNmSVq87zvRdsKwkX0d8UYolYYnIoBUJziK
+ 8o5UGq0206xbloCLCSg==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTE3MDE3MSBTYWx0ZWRfX0gASHDH7fQGe
+ jBd8qUaHGsTqCZOyIDg0WOk6YI24jTRLEPFP516WLGXlQUqXzngG7O1FbiMOVtaRtq/nPYxoO8w
+ B3NJC2BqGn6X+W4GEYRjXPysJ2dnJXU=
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-09-17_02,2026-09-16_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 phishscore=0 spamscore=0 lowpriorityscore=0 adultscore=0
- malwarescore=0 priorityscore=1501 suspectscore=0 clxscore=1015 bulkscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609170169
+ lowpriorityscore=0 priorityscore=1501 impostorscore=0 adultscore=0
+ phishscore=0 spamscore=0 bulkscore=0 suspectscore=0 malwarescore=0
+ clxscore=1015 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2609040000
+ definitions=main-2609170171
 
-Glymur's camera subsystem hardware is a functional subset of X1E80100.
-TPG, CSID, VFE, CSID wrapper and ICC resources are shared; Glymur has
-three CSIPHY instances versus X1E80100's four.
 
-qcom,x1e80100-camss is not used as a fallback compatible since it is
-already claimed by its own binding schema, causing a duplicate
-compatible warning in the DT schema checker.
 
-Signed-off-by: Nihal Kumar Gupta <nihal.gupta@oss.qualcomm.com>
----
- drivers/media/platform/qcom/camss/camss.c | 1 +
- 1 file changed, 1 insertion(+)
+On 9/16/2026 2:59 PM, Bartosz Golaszewski wrote:
+> On Mon, 14 Sep 2026 16:59:08 +0200, Shivendra Pratap
+> <shivendra.pratap@oss.qualcomm.com> said:
+>> PSCI has multiple kernel consumers, such as cpuidle-psci-domain.
+>> Currently, both the PSCI core driver and cpuidle-psci-domain bind
+>> directly to the same PSCI node "arm,psci-1.0". Additional consumers, if
+>> introduced, would also need to bind in the same way, leading to multiple
+>> drivers attached to a single device node.
+>>
+>> Introduce a PSCI auxiliary-device provider that binds to "arm,psci-1.0"
+>> and registers PSCI child devices on the auxiliary bus. As the first
+>> user, register cpuidle-psci-domain as an auxiliary device.
+>>
+>> Update cpuidle-psci-domain to probe as an auxiliary driver and use
+>> the PSCI device node for power-domain traversal.
+>>
+>> Suggested-by: Ulf Hansson <ulf.hansson@oss.qualcomm.com>
+>> Suggested-by: Lee Jones <lee@kernel.org>
+>> Suggested-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+>> Signed-off-by: Shivendra Pratap <shivendra.pratap@oss.qualcomm.com>
+>> ---
+>>   MAINTAINERS                           |  1 +
+>>   drivers/cpuidle/Kconfig.arm           |  1 +
+>>   drivers/cpuidle/cpuidle-psci-domain.c | 31 +++++++++++++++-----------
+>>   drivers/firmware/psci/Kconfig         | 14 ++++++++++++
+>>   drivers/firmware/psci/Makefile        |  1 +
+>>   drivers/firmware/psci/psci-devices.c  | 41 +++++++++++++++++++++++++++++++++++
+>>   6 files changed, 76 insertions(+), 13 deletions(-)
+>>
+>> diff --git a/MAINTAINERS b/MAINTAINERS
+>> index 207a6e2db70c..9c0334ee2ed2 100644
+>> --- a/MAINTAINERS
+>> +++ b/MAINTAINERS
+>> @@ -21932,6 +21932,7 @@ L:	linux-arm-kernel@lists.infradead.org (moderated for non-subscribers)
+>>   S:	Maintained
+>>   F:	Documentation/devicetree/bindings/arm/psci.yaml
+>>   F:	drivers/firmware/psci/
+>> +F:	drivers/firmware/psci/psci-devices.c
+>>   F:	include/linux/psci.h
+>>   F:	include/uapi/linux/psci.h
+>>
+>> diff --git a/drivers/cpuidle/Kconfig.arm b/drivers/cpuidle/Kconfig.arm
+>> index b88b01aa5829..f22e18b05053 100644
+>> --- a/drivers/cpuidle/Kconfig.arm
+>> +++ b/drivers/cpuidle/Kconfig.arm
+>> @@ -36,6 +36,7 @@ config ARM_PSCI_CPUIDLE_DOMAIN
+>>   	bool "PSCI CPU idle Domain"
+>>   	depends on ARM_PSCI_CPUIDLE
+>>   	depends on PM_GENERIC_DOMAINS_OF
+>> +	depends on ARM_PSCI_DEVICES
+>>   	select DT_IDLE_GENPD
+>>   	default y
+>>   	help
+>> diff --git a/drivers/cpuidle/cpuidle-psci-domain.c b/drivers/cpuidle/cpuidle-psci-domain.c
+>> index b9e4ad7d43a3..0ce6a83f6588 100644
+>> --- a/drivers/cpuidle/cpuidle-psci-domain.c
+>> +++ b/drivers/cpuidle/cpuidle-psci-domain.c
+>> @@ -9,10 +9,11 @@
+>>
+>>   #define pr_fmt(fmt) "CPUidle PSCI: " fmt
+>>
+>> +#include <linux/auxiliary_bus.h>
+>>   #include <linux/cpu.h>
+>>   #include <linux/device.h>
+>>   #include <linux/kernel.h>
+>> -#include <linux/platform_device.h>
+>> +#include <linux/module.h>
+>>   #include <linux/pm_domain.h>
+>>   #include <linux/pm_runtime.h>
+>>   #include <linux/psci.h>
+>> @@ -122,14 +123,10 @@ static void psci_pd_remove(void)
+>>   	}
+>>   }
+>>
+>> -static const struct of_device_id psci_of_match[] = {
+>> -	{ .compatible = "arm,psci-1.0" },
+>> -	{}
+>> -};
+>> -
+>> -static int psci_cpuidle_domain_probe(struct platform_device *pdev)
+>> +static int psci_cpuidle_domain_probe(struct auxiliary_device *auxdev,
+>> +				     const struct auxiliary_device_id *id)
+>>   {
+>> -	struct device_node *np = pdev->dev.of_node;
+>> +	struct device_node *np = auxdev->dev.of_node;
+>>   	bool use_osi = psci_has_osi_support();
+>>   	int ret = 0, pd_count = 0;
+>>
+>> @@ -177,16 +174,24 @@ static int psci_cpuidle_domain_probe(struct platform_device *pdev)
+>>   	return ret;
+>>   }
+>>
+>> -static struct platform_driver psci_cpuidle_domain_driver = {
+>> -	.probe  = psci_cpuidle_domain_probe,
+>> +static const struct auxiliary_device_id psci_cpuidle_domain_id_table[] = {
+>> +	{ .name = "arm-psci.psci-cpuidle-domain" },
+>> +	{ }
+>> +};
+>> +MODULE_DEVICE_TABLE(auxiliary, psci_cpuidle_domain_id_table);
+>> +
+>> +static struct auxiliary_driver psci_cpuidle_domain_driver = {
+>> +	.probe = psci_cpuidle_domain_probe,
+>>   	.driver = {
+>> -		.name = "psci-cpuidle-domain",
+>> -		.of_match_table = psci_of_match,
+>> +		.suppress_bind_attrs = true,
+>>   	},
+>> +	.id_table = psci_cpuidle_domain_id_table,
+>>   };
+>>
+>>   static int __init psci_idle_init_domains(void)
+>>   {
+>> -	return platform_driver_register(&psci_cpuidle_domain_driver);
+>> +	return __auxiliary_driver_register(&psci_cpuidle_domain_driver,
+>> +					   THIS_MODULE,
+>> +					   "psci-cpuidle-domain");
+>>   }
+>>   core_initcall(psci_idle_init_domains);
+>> diff --git a/drivers/firmware/psci/Kconfig b/drivers/firmware/psci/Kconfig
+>> index 97944168b5e6..68e381f1a618 100644
+>> --- a/drivers/firmware/psci/Kconfig
+>> +++ b/drivers/firmware/psci/Kconfig
+>> @@ -2,6 +2,20 @@
+>>   config ARM_PSCI_FW
+>>   	bool
+>>
+>> +config ARM_PSCI_DEVICES
+>> +	bool "PSCI auxiliary device support"
+>> +	depends on ARM_PSCI_FW
+>> +	depends on OF
+>> +	select AUXILIARY_BUS
+>> +	default y
+>> +	help
+>> +	  Say Y here to enable auxiliary device support for PSCI.
+>> +
+>> +	  This creates auxiliary devices for PSCI functionality implemented
+>> +	  outside the core PSCI firmware driver. These devices allow PSCI
+>> +	  child drivers to bind through the auxiliary bus while sharing the
+>> +	  PSCI firmware device as their parent.
+>> +
+>>   config ARM_PSCI_CHECKER
+>>   	bool "ARM PSCI checker"
+>>   	depends on ARM_PSCI_FW && HOTPLUG_CPU && CPU_IDLE && !TORTURE_TEST
+>> diff --git a/drivers/firmware/psci/Makefile b/drivers/firmware/psci/Makefile
+>> index 1956b882470f..8e75a0ed6f74 100644
+>> --- a/drivers/firmware/psci/Makefile
+>> +++ b/drivers/firmware/psci/Makefile
+>> @@ -1,4 +1,5 @@
+>>   # SPDX-License-Identifier: GPL-2.0
+>>   #
+>>   obj-$(CONFIG_ARM_PSCI_FW)	+= psci.o
+>> +obj-$(CONFIG_ARM_PSCI_DEVICES)	+= psci-devices.o
+>>   obj-$(CONFIG_ARM_PSCI_CHECKER)	+= psci_checker.o
+>> diff --git a/drivers/firmware/psci/psci-devices.c b/drivers/firmware/psci/psci-devices.c
+>> new file mode 100644
+>> index 000000000000..f1eca61e3269
+>> --- /dev/null
+>> +++ b/drivers/firmware/psci/psci-devices.c
+>> @@ -0,0 +1,41 @@
+>> +// SPDX-License-Identifier: GPL-2.0-only
+>> +/*
+>> + * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+>> + */
+>> +
+>> +#include <linux/auxiliary_bus.h>
+>> +#include <linux/init.h>
+> 
+> I think you need module.h not init.h.
 
-diff --git a/drivers/media/platform/qcom/camss/camss.c b/drivers/media/platform/qcom/camss/camss.c
-index 2123f6388e3d7eafe669efd6b033e22d8eb5cf79..3585c63c45848793696fbdc3004ddc867a5f115c 100644
---- a/drivers/media/platform/qcom/camss/camss.c
-+++ b/drivers/media/platform/qcom/camss/camss.c
-@@ -5758,6 +5758,7 @@ static const struct of_device_id camss_dt_match[] = {
- 	{ .compatible = "qcom,sm8550-camss", .data = &sm8550_resources },
- 	{ .compatible = "qcom,sm8650-camss", .data = &sm8650_resources },
- 	{ .compatible = "qcom,x1e80100-camss", .data = &x1e80100_resources },
-+	{ .compatible = "qcom,glymur-camss", .data = &x1e80100_resources },
- 	{ }
- };
- 
+Ack.
 
--- 
-2.34.1
 
+> 
+>> +#include <linux/of.h>
+>> +#include <linux/platform_device.h>
+>> +
+>> +static int arm_psci_probe(struct platform_device *pdev)
+>> +{
+>> +	struct auxiliary_device *auxdev;
+>> +
+>> +	auxdev = __devm_auxiliary_device_create(&pdev->dev, "arm-psci",
+>> +						"psci-cpuidle-domain", NULL, 0);
+>> +	if (!auxdev)
+>> +		return -ENOMEM;
+>> +
+>> +	return 0;
+>> +}
+> 
+> I would prefer you to move the code between the patches a bit. This patch
+> should already be introducing the full, future-proof infrastructure for
+> registering multiple auxiliary devices, so maybe add a static table with device
+> info? Then in patch 10/10 you'd just extend it for reboot modes.
+
+Ack. will update it.
+
+> 
+> I'd also not add any ifdef guards here and lesses the build-time dependencies.
+> You can register the device alright, it just won't get probed if the reboot-mode
+> support is not there.
+
+Ack.
+
+thanks,
+Shivendra
