@@ -1,149 +1,187 @@
-Received: from meesny.iki.fi (meesny.iki.fi [195.140.195.201])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-qk2-f35.google.com (mail-qk2-f35.google.com [74.125.230.227])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D0F543955E3;
-	Fri, 18 Sep 2026 16:52:05 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=195.140.195.201
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789750327; cv=pass; b=DsT9c3+QK+q3sYqLDwT08g+dwcbBvB5uR7MxqVTJSSDjVpZJ6JkyHt3bRprLk7noiV7HflAQrwraKn6DU/ySkkcvSTOeRqS2sncsEP7Bne7WaFt83xmCTfsajaVxOs4nM388FEXCRatwkph+HG5t0x0wwxQlpHuV740BpvqMZG4=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789750327; c=relaxed/simple;
-	bh=ggW8CJoWtogF4vp7qmnYr+2cHYO378fD70zSL4eILSE=;
-	h=MIME-Version:Date:From:To:Cc:Message-Id:In-Reply-To:References:
-	 Subject:Content-Type; b=K5s6jgT1Ayr/gD7OU0rSNI99BoiBYLNDEvCv5tVGuFdqgsobzD1kz8tTOvfK/A4X7bw5423tQMj4/KBXBuzeWNms1FE/hUw/58YfqfP03hf89Qxtq4unw5clWChWC+MSFzXU4NjyJ8sjUoxgrUMBmtfDXryaRHUv1CwtZmFms4E=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=iki.fi; spf=pass smtp.mailfrom=iki.fi; dkim=pass (1024-bit key) header.d=iki.fi header.i=@iki.fi header.b=VhzfLo5S; arc=pass smtp.client-ip=195.140.195.201
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=iki.fi
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=iki.fi
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C7475547076
+	for <linux-arm-msm@vger.kernel.org>; Fri, 18 Sep 2026 16:52:42 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.230.227
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1789750365; cv=none; b=dKgZioNLlwyThR+VdWJ/oBwjOt8BDlUvHx33d9GG7skUGSIO64BREF/Dg0V/q5rHJeSpvTcTF6GZAXUUtLsReZVOZclH51p5cz/sLZOAErdSVNoN96ZwAYBxZp+exGjY9H3/4T6qVImgLkuYjcV5u3TIIKpSa1l9X/lLTRrjwf8=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1789750365; c=relaxed/simple;
+	bh=ut9bu0ogvOe3LaZe7HaU4YRdS8uXZFfbEqCnduNcrb0=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=UA+GjiPDp3635wYTTWuCTVuvRF96eBf1T6S9avpFEw9sZWIFfxF5m4n18KE/D5d7lZVHbpoxC2wx4eXDR09aXqT4zwZSRO9OrYg2NcMTnmyrKUa9hli5gYDdxwB0MGpLFruXaACU+CfLYBbfjYah31lVQ6LrLMh6QfMbwJA90wY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=riscstar.com; spf=pass smtp.mailfrom=riscstar.com; dkim=pass (2048-bit key) header.d=riscstar-com.20251104.gappssmtp.com header.i=@riscstar-com.20251104.gappssmtp.com header.b=E5JVYXGu; arc=none smtp.client-ip=74.125.230.227
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=riscstar.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=riscstar.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=iki.fi header.i=@iki.fi header.b="VhzfLo5S"
-Received: from fauth-c2-smtp.messagingengine.com (fauth-c2-smtp.messagingengine.com [204.75.18.201])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange x25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	(Authenticated sender: jmtilli)
-	by meesny.iki.fi (Postfix) with ESMTPSA id 4hmdvL4tQ9z10xl;
-	Fri, 18 Sep 2026 19:51:58 +0300 (EEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iki.fi; s=meesny;
-	t=1789750319;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=CFniBaOSSNu6ZtH5eqeRT+EniF5CxizeWe0To5zvrfE=;
-	b=VhzfLo5S4zh0u9wc0N2akvtg+8LkLb2zV7g+rlnt1F7jJA5M8VLZsTXxBiVTtkjH3y7Vbi
-	CtDGuE+/A0BS22iS/1wWAjk85WsBSDObsV3pH5gj2i0x+FonDkvIOmZEqfpCx3dN9cjaag
-	jBZwLfdXE5l6f+fULYigxLHimm2mJuc=
-ARC-Seal: i=1; a=rsa-sha256; d=iki.fi; s=meesny; cv=none; t=1789750319;
-	b=S0I0hwUNMpd7V2MfAi17dTDR6Sll29moaKL2IysYVw4MkmDD4bkPcNnAogQIGfNdVd1uc6
-	LQANxPhXS7LmKpMp6Gn75bEe/BuBO2nCrFwSrTKZ0heCwBtS4NusLgpADlXodgJ0uW/nen
-	xmjw2wsmy2iRJs+8bcgpIuuqrtS6N34=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=iki.fi;
-	s=meesny; t=1789750319;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=CFniBaOSSNu6ZtH5eqeRT+EniF5CxizeWe0To5zvrfE=;
-	b=QIktM2zi8H0JXvJzWz+bR7zDbMa/pGmgZOoZfFaHYuvzEilfQZ5s+zGiHGFR4vbwEFx00+
-	yLYbDM6scLow6FXE0beGVqOhAjY850Xfwfp8mvNrc2TGN33YHJtC1vrGcnf5WY95RDjPuj
-	gmXUyrs402doWlGJoR9MgNuQ2LyDM7c=
-ARC-Authentication-Results: i=1;
-	ORIGINATING;
-	auth=pass smtp.auth=jmtilli smtp.mailfrom=juha-matti.tilli@iki.fi
-Received: from ams-compute-02.internal (ams-compute-02.internal [10.64.2.62])
-	by mailfauth.ams.internal (Postfix) with ESMTP id B1C91198004A;
-	Fri, 18 Sep 2026 12:51:57 -0400 (EDT)
-Received: from ams-imap-13 ([10.64.2.33])
-  by ams-compute-02.internal (MEProxy); Fri, 18 Sep 2026 12:51:57 -0400
-X-ME-Sender: <xms:KmytapBsr5nVa4ZmIXQgAUHhnxcugE7AYvX-BVSdRtLb2oVUesP23w>
-    <xme:KmytaiVtidsR99LVGcbNAtdXQAYhwkcUG4u0grycuuQ5FPvFVWSMTBGw4_ZU8T3fh
-    HAkUljZQ7wbGcNEJyIUYUTqIkJt-xYLCBl6z2yXoGXwnFfDEO1ZH4it>
-X-ME-Proxy-Cause: dmFkZTGNcKeUoS6p/UeL/gMh5UWUFiVWwbx7ey0te+Xw5EsHIe1Jj1XU6ZjsITNOQ19Y+i
-    VO3vGx9rSUSiH+cpHXFrz3vu5iYTny/gJtxLwbH/A9AzR8Y28HIgvPhmGgZWvPjbakCjL2
-    N/asmkHvVR55YKiLvZhYMa8ulw8RrSp1bwaZQ30gIZBNOnaBO72XfV+QAA8qyaai2JgJ6j
-    v1WuIKrPMLrpJoYn143VO76r03KpZy6s4dklI1gj6XxQpxS3xtcj5UTJEoXyFvpBZHDbXa
-    saeU1eyzCus1XNzSNAQA2h6HR/HsRioTLJRfR9X/K7Fq0YTCvlqOn8VfTbE6/UOJBs8fcv
-    NIonDAHwo64bLyPRkOI1KQ3Elyb7xUBnKjpoOAB1+IXONZETBHmbVEJ0QTzk7jRt8qR8yQ
-    Z+U9yeeqKDFVw28zEXiQZd6qMN/w2modqQAR1FbHCE+FhfALnZ1WhwIzLQlEeitZJ1019k
-    Ei2/mry44zBMp0IhyvZw95OZZshGs5VmrpXbBEuOcmbhjvu8Dx4VN5LfsJaq2+foI6E6HN
-    DRXvPJkx24Ux1HGcZLPYjw6cRrWCIMnpYoaY17rorTQQ5WNW55oWBw1er3EuiwsZLuuL86
-    OkSR4QXXmiH/HG3sQA6sppP8DKHzFFSOKec3AO/BSFgp3+ZvqWbxmvdJhv/Q
-X-ME-Proxy: <xmx:LWytatbbSBa4wPl4UqfeGYn_EY5mEACuxOWO7uyDWJQM8F1Nn23bSA>
-    <xmx:LWytaggNcoj0hVvts8pFL-SuQYlbvb0qK--o2GnDbvFPgdccSR69wQ>
-    <xmx:LWytarwI76vUO6slFD6xsrxkI9YGluJ7sKm9vpfcVGz8GcOf1N593g>
-    <xmx:LWytak87TJ9aR6FgmiM4xxz-EUtbf1jjkplUArwf7nReTCSfdJA4Dg>
-    <xmx:LWytaozrkHyLbHBVUwu8yvRvxRwP-4_cmsNp0JVTE5oTWW_uyvTY24GF>
-Feedback-ID: i02414972:Fastmail
-Received: by mailuser.ams.internal (Postfix, from userid 501)
-	id 5863EF80089; Fri, 18 Sep 2026 12:51:54 -0400 (EDT)
-X-Mailer: MessagingEngine.com Webmail Interface
+	dkim=pass (2048-bit key) header.d=riscstar-com.20251104.gappssmtp.com header.i=@riscstar-com.20251104.gappssmtp.com header.b="E5JVYXGu"
+Received: by mail-qk2-f35.google.com with SMTP id af79cd13be357-93910cadeb3so76304585a.0
+        for <linux-arm-msm@vger.kernel.org>; Fri, 18 Sep 2026 09:52:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=riscstar-com.20251104.gappssmtp.com; s=20251104; t=1789750359; x=1790355159; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=oe9FkoIahCgEzPBuPDqtCAL2bGeR9kc9QC4Nw24cDKs=;
+        b=E5JVYXGu57Y/67BCAKxRz5yPwLfPxcgv6/MZt99eSldvuFl7BWxiWIO1RE4Y69QTK9
+         UajLCGadRl40RX3VDBkonBYkX1Em3iai0tdjS8rNdfyYc/lXfOmGWqlfL/M10Eq/SePg
+         y5L8zT7xvcKX1WcRIQRzukr/w3kx4nHxUNBmr2C9l/jF2D5dkPHGakBzVRPICV5jA9Wd
+         wM7s1h03hHoPUrcTuQiNnb6q5+uBqCR07Oexy15x/Osz/3e478tMvJwJDjc6CB0T00RQ
+         OkJcK1rjwlLDARKkNzi1/PYoGzdwg3TXYg42fVoPcZfZHl/7XAG2Nse/MIiSTXTbnCar
+         wB8g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1789750359; x=1790355159;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=oe9FkoIahCgEzPBuPDqtCAL2bGeR9kc9QC4Nw24cDKs=;
+        b=Y3xQ7MFeCzEM0Ro62+eHdM1ZNgIIwSLnCoYSAxKLKrATMQFqMfP0bjMxWQp4ByfvDg
+         Zfk4pIYbVhugTltKVxFB0sMeMiXYFxhrgKKenpZ2yZsZJwcv55AFFcmNMVTgYMB5ln74
+         Lg7pm/Rus0SsAgesSeM7b7QVQt7YCY+F0gjrBZCYrfP3H2ygtQb2xDwswwA3YEpn1nz4
+         DPLvAuviGEgCj+8SflSQQBVdeb8ZnFvXEijmqirAlOw0hDDn7FMVE7416sFnu54RhaUr
+         Fz+mJqzTDRsYn0QLBuO36WdXZdnaytWq9RSgTdZmr8Dpk0qSfEezrNmEFmdvBYddtmfr
+         ottA==
+X-Forwarded-Encrypted: i=1; AKwUvByhZy0KmOKyCeZ0G7UlJ3fjgsyGS9I+WhF3gVUKdWGXL7a5k3q0O8NhuXKpW0I27MYGtV4EmReNjSPSoP9h@vger.kernel.org
+X-Gm-Message-State: AFuF++k73YIOPcVth2lmaqAInXqLMDpLjLZU6+uThD3su53FJ4Ctqt2r
+	E2+9CMLUeyt4pIG5e525dM0fNA/0peFZcBjM+MiL0hz3l7UUh0gped+snaCccc4l6y0=
+X-Gm-Gg: AYBFou2Ad8rEV5fJHa143KipNaFv+umVzUTn0/JaKb+iWmS96j5AYsqQ8WnpqU+/6zV
+	2SJCYYOBZ1qhV5iEZPoExfU7e2KubTOLAKmB3hJlrh8x1Vca3SalJ8t2CYlNvz2wC150PqqCs3N
+	WhTlZGeJLa5mWKPn/XPgZh+jDRTeCiNJLr4qkMTzxqqksAnsBt8gPyPOcfd3ylAe+9cjcFZAFqT
+	ankjWd6ffANgUvCl6oQInjKZQ3vs772ZqeEL1c+264VDuT2BgxWiNFoV+/WIVLpBnFYf5UO650e
+	JfvVpKHgOuxSdEv0tyF90MB7iuIQESJKJbhz9mgRU2HDx3BSn1Q8LBiuv7uIsvhhEjdWZ9BFqft
+	nG4+CKTxXFGGRnHPTyn+HODHbaJlSuShCkJpJ/EHVSh8pYsWLIZqFTd4SaPMaz42Tn2rM63/NQJ
+	yk6k7R1lxsdhC/O/OYDzp5KdlS2yzxYLjsO4qM59QsDwvYkZissH0dRJJ29wjOiFVZsoSXsOj22
+	jI=
+X-Received: by 2002:a05:620a:4103:b0:93b:d7a2:dd39 with SMTP id af79cd13be357-93bdca3fb9cmr469299485a.73.1789750359512;
+        Fri, 18 Sep 2026 09:52:39 -0700 (PDT)
+Received: from zippy.localdomain ([73.62.185.64])
+        by smtp.gmail.com with ESMTPSA id af79cd13be357-93be0f0762dsm183582785a.39.2026.09.18.09.52.38
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 18 Sep 2026 09:52:39 -0700 (PDT)
+From: Alex Elder <elder@riscstar.com>
+To: sboyd@kernel.org,
+	bmasney+clk@redhat.com,
+	jbrunet+clk@baylibre.com,
+	robh@kernel.org,
+	krzk+dt@kernel.org,
+	conor+dt@kernel.org,
+	lee@kernel.org,
+	andersson@kernel.org,
+	konradybcio@kernel.org,
+	abelvesa@kernel.org,
+	kees@kernel.org,
+	gustavoars@kernel.org,
+	p.zabel@pengutronix.de
+Cc: daniel@riscstar.com,
+	mohd.anwar@oss.qualcomm.com,
+	lorenzo.bianconi@oss.qualcomm.com,
+	linux-clk@vger.kernel.org,
+	devicetree@vger.kernel.org,
+	mfd@lists.linux.dev,
+	linux-arm-msm@vger.kernel.org,
+	linux-hardening@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Subject: [PATCH 1/4] dt-bindings: mfd: introduce the TC9564 config syscon
+Date: Fri, 18 Sep 2026 11:52:30 -0500
+Message-ID: <20260918165234.687224-2-elder@riscstar.com>
+X-Mailer: git-send-email 2.53.0
+In-Reply-To: <20260918165234.687224-1-elder@riscstar.com>
+References: <20260918165234.687224-1-elder@riscstar.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-ThreadId: AbqzItSRZteg
-Date: Fri, 18 Sep 2026 19:51:33 +0300
-From: "Juha-Matti Tilli" <juha-matti.tilli@iki.fi>
-To: "Manivannan Sadhasivam" <manivannan.sadhasivam@oss.qualcomm.com>,
- "Manivannan Sadhasivam" <mani@kernel.org>,
- "David S . Miller" <davem@davemloft.net>,
- "Eric Dumazet" <edumazet@google.com>, "Jakub Kicinski" <kuba@kernel.org>,
- "Paolo Abeni" <pabeni@redhat.com>, "Simon Horman" <horms@kernel.org>,
- "Jeff Johnson" <jjohnson@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, netdev@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-wireless@vger.kernel.org,
- ath11k@lists.infradead.org, ath12k@lists.infradead.org,
- "Bjorn Andersson" <andersson@kernel.org>,
- "Chris Lew" <christopher.lew@oss.qualcomm.com>,
- "Deepak Kumar Singh" <deepak.singh@oss.qualcomm.com>,
- "Raj Kumar Bhagat" <raj.bhagat@oss.qualcomm.com>,
- "Jeff Hugo" <jeff.hugo@oss.qualcomm.com>, "Mihai Moldovan" <ionic@ionic.de>,
- david@3adesign.co.uk, nakonechnij.sergsj@gmail.com
-Message-Id: <cb6766f8-54b9-435f-a69a-e712727dabdb@app.fastmail.com>
-In-Reply-To: <20260918-qrtr-multi-ep-v1-4-8a06caa368d3@oss.qualcomm.com>
-References: <20260918-qrtr-multi-ep-v1-0-8a06caa368d3@oss.qualcomm.com>
- <20260918-qrtr-multi-ep-v1-4-8a06caa368d3@oss.qualcomm.com>
-Subject: Re: [PATCH 4/4] wifi: ath12k: Connect to the QMI server belonging to the
- device owned by this driver
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-On Fri, Sep 18, 2026, at 19:28, Manivannan Sadhasivam via B4 Relay wrote:
-> From: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
-> 
-> When two identical ath12k PCIe devices are connected to the same host, both
-> advertise the WLFW service with the same service and instance id. The QMI
-> lookup reports both servers to each device, so a device may connect to the
-> firmware running on the other device.
-> 
-> But now, QRTR provides each MHI endpoint a unique node id which is
-> different from the node id announced by the device. So use the same id to
-> pick the correct server. Add a get_qrtr_node_id() HIF callback that returns
-> the node id derived from the MHI controller index and zero for transports
-> that do not assign one. In the new_server callback, skip any service whose
-> node id does not match. A node id of zero disables the check, so transports
-> that do not assign one keep their current behavior.
-> 
-> Signed-off-by: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
+Define the binding for a system controller used in the Toshiba
+TC9564 SoC.
 
-CC'ing Mihai. He is known to have a platform with two ath12k cards,
-but he said he's been busy recently, so his testing input is uncertain.
+Co-developed-by: Daniel Thompson <daniel@riscstar.com>
+Signed-off-by: Daniel Thompson <daniel@riscstar.com>
+Signed-off-by: Alex Elder <elder@riscstar.com>
+---
+ .../bindings/mfd/toshiba,tc9564.yaml          | 56 +++++++++++++++++++
+ MAINTAINERS                                   |  1 +
+ 2 files changed, 57 insertions(+)
+ create mode 100644 Documentation/devicetree/bindings/mfd/toshiba,tc9564.yaml
 
-Also David and Serhii have found the bug at Bugzilla and may
-be able to help with testing. (CC'ing them too)
+diff --git a/Documentation/devicetree/bindings/mfd/toshiba,tc9564.yaml b/Documentation/devicetree/bindings/mfd/toshiba,tc9564.yaml
+new file mode 100644
+index 0000000000000..32e73a727c82a
+--- /dev/null
++++ b/Documentation/devicetree/bindings/mfd/toshiba,tc9564.yaml
+@@ -0,0 +1,56 @@
++# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
++%YAML 1.2
++---
++$id: http://devicetree.org/schemas/mfd/toshiba,tc9564.yaml#
++$schema: http://devicetree.org/meta-schemas/core.yaml#
++
++title: Toshiba TC9564 System Controller
++
++maintainers:
++  - Alex Elder <elder@riscstar.com>
++  - Daniel Thompson <daniel@riscstar.com>
++
++description: |
++  The Toshiba TC9564 is an SoC accessed by a host system through the
++  upstream PCIe port on the PCIe switch it implements.  The switch includes
++  an embedded PCIe endpoint on one of its downstream ports that provides
++  access to various SoC peripherals (including a clock and reset controller)
++  via one of its BARs.  A system controller provides managed access to the
++  first two pages of this memory region to ensure accesses made by these
++  peripherals produce well-defined results.
++
++properties:
++  compatible:
++    items:
++      - const: toshiba,tc9564-config
++      - const: syscon
++      - const: simple-mfd
++
++  reg:
++    maxItems: 1
++
++  ranges: true
++
++  '#address-cells':
++    const: 1
++
++  '#size-cells':
++    const: 1
++
++required:
++  - compatible
++  - reg
++
++unevaluatedProperties: false
++
++examples:
++  - |
++    syscon@0 {
++        compatible = "toshiba,tc9564-config",
++                     "syscon",
++                     "simple-mfd";
++        reg = <0x0 0x2000>;
++        #address-cells = <1>;
++        #size-cells = <1>;
++        ranges;
++    };
+diff --git a/MAINTAINERS b/MAINTAINERS
+index cf846853fdc79..b2d3257b8f892 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -27674,6 +27674,7 @@ TOSHIBA TC9564 PCI DRIVER
+ M:	Alex Elder <elder@kernel.org>
+ M:	Daniel Thompson <danielt@kernel.org>
+ S:	Maintained
++F:	Documentation/devicetree/bindings/mfd/toshiba,tc9564.yaml
+ F:	Documentation/devicetree/bindings/misc/pci1179,0220.yaml
+ F:	drivers/misc/tc9564-pci.c
+ 
+-- 
+2.53.0
 
-Bugzilla: https://bugzilla.kernel.org/show_bug.cgi?id=218480
-
-Here's the patchset in an easier-to-access format:
-https://github.com/Mani-Sadhasivam/linux/commits/qrtr-multi-ep/
-
-Also, I have suggested that at $DAYJOB we'd switch to a newer LTS kernel
-with better ath12k support. This may take some time, but there is a
-possibility I'll be able to finally get ath12k cards working. This might
-allow me to test this with ath12k cards, porting the patches to 6.12 or
-6.18 kernel. But that will take time (the kernel switch; backporting is
-easy for such simple patches).
-
-BR, Juha-Matti
