@@ -1,236 +1,126 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 708113E8C4C
-	for <linux-arm-msm@vger.kernel.org>; Fri, 18 Sep 2026 12:37:09 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7454336B934;
+	Fri, 18 Sep 2026 12:51:05 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789735031; cv=none; b=B4R0W5OgfKY7J0wvxZXSlcFuMPOSPm7gS5O9wMwtjmTMPrqJdr5kiBDzcTacOwrHlwErfP/2v8TwdQKg3YaPZ2mdbqDR+Bby7JvguhqDMF32V8rAtyybJmIks7KAhs1Fc8+Nz+i50Visoe7gRDC66yzgEZkHidoOVEsPzfAWSiM=
+	t=1789735866; cv=none; b=e116NjS+Lltpb/2h73vR00YKBjhHL+j7IGzjAdQ6jogP1qupLoOC07oUz7ZXUPM0BgxNlcXEOdxmhfq/xetVsaBf4RKbUZokmOdbm/A+TmQcqT7lj1/ihGYyyRs0YCQJVSNUbLAWwSZyMJeMLtOklgiQ101eM+51zCwxdmwK1Mo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789735031; c=relaxed/simple;
-	bh=x0Hsjck6fwiGjBmD4BTaV7uSs3/mId3DYyzS6qMGzL4=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=T8etw/rdJY+9zk0Lmr3/xL8vv/oe5jKlFzrihXyg/ytqJSGuiP69dOVKtQN/QppVQRZvhtCtHzhHUqJZRaNrZtwEKEeTFy5C0ZuZyE7e7ePj3P0tVSUcej8vlii02U0hAeB9vDikmdtCALBWW9agZLwL0hE5p5F8w3FLa0goY+Q=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=FQTDllXs; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=Dwccf3pu; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1789735866; c=relaxed/simple;
+	bh=PRahLbgCtHWClJ87WF7IG8TsO861nb3w+UcRAtpoCA8=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=VKucJbaT+bVCkt3ddtu6bbPftu+C18lEjmeO18xmEhgDCKaa7ROBh0iJUb86c2/bdmcdEkLY2++350UN/QIGu2QYl0KoIz47Awih61Fd6moxp4tSPiQSiDpr51sLN/f6FKPQJcCYlfcwWk9yBeNzuvJyhMKWsL4WTry0hLqCik0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=dnWDyoNw; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="FQTDllXs";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Dwccf3pu"
-Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68IA3aTc3208429
-	for <linux-arm-msm@vger.kernel.org>; Fri, 18 Sep 2026 12:37:08 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:message-id
-	:mime-version:subject:to; s=qcppdkim1; bh=KoSwLOQDyVXoDI2yhKSH9B
-	n+jDhW3ogPztYMI41HL68=; b=FQTDllXs467UR0k+K2OouqMmsFcIwTuKH9izjj
-	dIla+1/HZr705lDnkgUXV969U86Spn9H9aIuTnDIvg+OQ3lyco689jGfpFh3smVY
-	sp62YS83kSal1nX3LUnN1l2mCPJx5UxsGPQ8YVdkp4RRxuMNloSRKVg718eP4upJ
-	Ik+c5NmCcxR++A4VmFGL/yXs0XX8CCJ6/awiVPidKi6fSLNOFrhXPWPvE/CpmHCt
-	saxWU7LAla+qTWJcwdXYXoHtepUPjBNNOi/LhxvylaTyK0xR4ABFiN1pMG3UL7fy
-	scZhvS3X8TuvT7rBNV8e6ZxppGGSVT48Rb90TU2ZEB4pKZ3g==
-Received: from mail-pj1-f71.google.com (mail-pj1-f71.google.com [209.85.216.71])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gs37dghry-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Fri, 18 Sep 2026 12:37:08 +0000 (GMT)
-Received: by mail-pj1-f71.google.com with SMTP id 98e67ed59e1d1-39deb05ef51so1197894a91.3
-        for <linux-arm-msm@vger.kernel.org>; Fri, 18 Sep 2026 05:37:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1789735028; x=1790339828; darn=vger.kernel.org;
-        h=cc:to:message-id:content-transfer-encoding:content-type
-         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=KoSwLOQDyVXoDI2yhKSH9Bn+jDhW3ogPztYMI41HL68=;
-        b=Dwccf3puoStN4Xj3xHFnz4RhyEpscn27E3uiXx/uD5morWYndXSHexkGfwEtxUtwyT
-         0eWrKcr/WydSE7AjvZ3tUyhDAXiKvv1VeU72MxsmxF2nnWQxOirFmh5/3fh9XStIFGFN
-         p3OW2UsluWB8KOyetO++4QZ/pn/9hoF0mfRsPosmG6DBXXqTgUEF1zq5pOjuWYT70SKo
-         Nt9SfouN2Vg7E1mvVnA+utz/sOr6/PMskPTOpSQHeIagRDY+Dao6BYUiItyCoGbZAtDb
-         bqJXIdFecx1CWtCuV/EiSyTCbGszIeDaMVl73mogVlZrvO7RF3NSixEzR4spSPni/af3
-         TO+Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1789735028; x=1790339828;
-        h=cc:to:message-id:content-transfer-encoding:content-type
-         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to:content-type;
-        bh=KoSwLOQDyVXoDI2yhKSH9Bn+jDhW3ogPztYMI41HL68=;
-        b=UWUVLUoBWXZ0TDuQKHnciW1/Ywz4IjGDxz+rmfNgF7W7+9sK/+aoCwYmSJ/ZWiSA6X
-         VzcZh5D40lGR92afz4wTP60d9QZiLaSGUi1ccmgJ2vVMndMCwZhG5l7Br2TmYfXAcJtB
-         mZ7mQdz6wUUr5y386V/+QAZgijuG80CB6VfOK/62oLVZSt19uUqccS50X2Z/M8y4X0pQ
-         V6gqNwWBPhGINZo/f97in/XPtfS9F8mdNb54K0131MYGjHnEhU5zyKM/j8tYYSdwLVkV
-         Ve/vJ52Kw0O49VIt5H+DO1w85re81PmqWVDH/ordSHAxAwt125Y2kObCUoHjEo+6BXDq
-         tl1g==
-X-Gm-Message-State: AFuF++nX9KhcTK8PpVlZoh6VTSSVUOrj9jVGx/pXUi7nmXiWVJZHIc7y
-	rGQC8JY+3hjqIZqMkJDbA+31LR4+TDLlxgMywKw+//gA3PK55buMfiuIF3kHNxuCwR3SMar4XPg
-	z+oYtPLExiyfLP5BYz+3YERKMle+iwGORzBfxgLDN2tRNaH5uCVZo5gyR+Jrxi1+oIi9c
-X-Gm-Gg: AYBFou2c5XKkqyDeCZqH4zq94ozoscsc7nnVjKrm34Vn5szcHaaLhm8DGjs3dnkEkE2
-	1cQXVbPBTFOaJ0tWysO6l7oYvzctLG4evxJMUZn+GNpZeC4NwMwDao+YrqmXJMC2F2nXRhh/7g9
-	bZpQAw2ffi5EVs7+epOFIZP+ApxORyKk9oCte3w8i49gsaXbnaEAiwJph5jbXYZvHY0KJ1Ut+EK
-	fXd0QfnCxGqeKk/RSAt/Y/c4N5P1vnt4chGE79mTGeloWiJ2mfsElTaVRFyasChSPf7gqakg10P
-	hKqs0G53w6p57SBC3VJBziyBQqdn+67fDpVZiHW7xwqIoqbrpit+WDgC6SWUqAQkZNi4PPdqnzi
-	mlrKoYovZkRzswA==
-X-Received: by 2002:a17:90b:3bcb:b0:38e:bbf1:de3f with SMTP id 98e67ed59e1d1-39e54eab3e6mr9995097a91.12.1789735027889;
-        Fri, 18 Sep 2026 05:37:07 -0700 (PDT)
-X-Received: by 2002:a17:90b:3bcb:b0:38e:bbf1:de3f with SMTP id 98e67ed59e1d1-39e54eab3e6mr9995035a91.12.1789735027437;
-        Fri, 18 Sep 2026 05:37:07 -0700 (PDT)
-Received: from [10.213.101.118] ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-39e5a53a70bsm3104829a91.11.2026.09.18.05.37.03
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 18 Sep 2026 05:37:06 -0700 (PDT)
-From: Komal Bajaj <komal.bajaj@oss.qualcomm.com>
-Date: Fri, 18 Sep 2026 18:04:17 +0530
-Subject: [PATCH] arm64: dts: qcom: shikra: Add EL2 overlay for remoteproc
- SMMU mappings
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="dnWDyoNw"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 693121F000FF;
+	Fri, 18 Sep 2026 12:51:04 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1789735865;
+	bh=z1sVU9R9+x4//8cyuQAoI8VIvZltqOe2KgL9ZPE45nc=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=dnWDyoNwbV68RTnEchceD1+JKKl6RQ3G4EQzo1gFK+DbXTE1Yj64LUOrBpn1DwZal
+	 Ec7iZzPF7AQd/jVK7+0jPLq9iGy6P2kN+fQ3x8Ucsevr/1RXFyG1fXkFmv6/D60OeI
+	 FD0NtWv9YV9veyPlSoPvuOM0E9yfXJIvtx6YdMePDvJqaaFWcHtNKFXI3Rp5Eqg1LO
+	 4OcA6uJ6/P4dhEte2viYxOQ9VkmeCWtFMUurOgpjIIm8QESndV4llUPI4/kKphNgVL
+	 UI4I/GYJ9MhDPXJ4IS4RhQCWajy9OrWln7c5bXx17xymNuMmGcnLJCMAK0s5eEMVnA
+	 MqLOX45h2ncfw==
+Date: Fri, 18 Sep 2026 14:51:02 +0200
+From: Thierry Reding <thierry.reding@kernel.org>
+To: Kieran Bingham <kieran.bingham@ideasonboard.com>
+Cc: Mauro Carvalho Chehab <mchehab@kernel.org>, 
+	Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+	Conor Dooley <conor+dt@kernel.org>, Jacopo Mondi <jacopo@jmondi.org>, 
+	Sakari Ailus <sakari.ailus@linux.intel.com>, Jimmy Su <jimmy.su@intel.com>, 
+	Matthias Fend <matthias.fend@emfend.at>, Mikhail Rudenko <mike.rudenko@gmail.com>, 
+	Daniel Scally <dan.scally@ideasonboard.com>, Jacopo Mondi <jacopo.mondi@ideasonboard.com>, 
+	Michael Riesch <michael.riesch@collabora.com>, Benjamin Mugnier <benjamin.mugnier@foss.st.com>, 
+	Sylvain Petinot <sylvain.petinot@foss.st.com>, Laurent Pinchart <laurent.pinchart@ideasonboard.com>, 
+	Paul Elder <paul.elder@ideasonboard.com>, Martin Kepplinger <martin.kepplinger@puri.sm>, 
+	Quentin Schulz <quentin.schulz@theobroma-systems.com>, Tommaso Merciai <tomm.merciai@gmail.com>, 
+	Svyatoslav Ryhel <clamor95@gmail.com>, Richard Acayan <mailingradian@gmail.com>, 
+	Frank Li <Frank.Li@nxp.com>, Sascha Hauer <s.hauer@pengutronix.de>, 
+	Pengutronix Kernel Team <kernel@pengutronix.de>, Fabio Estevam <festevam@gmail.com>, 
+	Bjorn Andersson <andersson@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>, 
+	Geert Uytterhoeven <geert+renesas@glider.be>, Magnus Damm <magnus.damm@gmail.com>, 
+	Heiko Stuebner <heiko@sntech.de>, Jonathan Hunter <jonathanh@nvidia.com>, 
+	linux-media@vger.kernel.org, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	linux@ew.tq-group.com, imx@lists.linux.dev, linux-arm-kernel@lists.infradead.org, 
+	linux-arm-msm@vger.kernel.org, linux-renesas-soc@vger.kernel.org, 
+	linux-rockchip@lists.infradead.org, linux-tegra@vger.kernel.org, 
+	Kieran Bingham <kieran.bingham+renesas@ideasonboard.com>
+Subject: Re: [PATCH v6 5/6] ARM: tegra: Convert to new media orientation
+ definitions
+Message-ID: <aq0zSBPqnQaG-gJ_@orome>
+References: <20260918-kbingham-orientation-v6-0-5e8b1f01be29@ideasonboard.com>
+ <20260918-kbingham-orientation-v6-5-5e8b1f01be29@ideasonboard.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260918-shikra-el2-v1-1-07bb072baa31@oss.qualcomm.com>
-X-B4-Tracking: v=1; b=H4sIAMkvrWoC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
- vPSU3UzU4B8JSMDIzMDS0ML3eKMzOyiRN3UHCPd1EQLSzNLYwvTZONkJaCGgqLUtMwKsGHRsbW
- 1AP0o8qpcAAAA
-X-Change-ID: 20260918-shikra-el2-ea8969385c3c
-To: Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Abel Vesa <abelvesa@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org,
-        Bibek Kumar Patro <bibek.patro@oss.qualcomm.com>,
-        Komal Bajaj <komal.bajaj@oss.qualcomm.com>
-X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1789735023; l=3512;
- i=komal.bajaj@oss.qualcomm.com; s=20250710; h=from:subject:message-id;
- bh=x0Hsjck6fwiGjBmD4BTaV7uSs3/mId3DYyzS6qMGzL4=;
- b=Rvg5PIljTCvCMPgrHbv6vNzUiGtOwYMQ32DsDb/VPRbkx96JaJt6R0iupYGN4i2e2/KzlabW9
- TAoHahDSX/tCCAABjiGA7ppZcyk2+GuUdR7QGrJTCqAsh/figQ0Uiro
-X-Developer-Key: i=komal.bajaj@oss.qualcomm.com; a=ed25519;
- pk=wKh8mgDh+ePUZ4IIvpBhQOqf16/KvuQHvSvHK20LXNU=
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTE4MDE3NyBTYWx0ZWRfXzueZws1xAknz
- 4pSTioaOkM4/XwaEAwvbNtWkf06W+DPia+wAr6oVJQ4s8MYBy+KwOBZO/3C4zaVPdtXtM9tTWVS
- UJ5oLU/hQW0waY5u487BDc5W4LK6lB8=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTE4MDE3NyBTYWx0ZWRfXxQpvvE4K3xZh
- 9rn6r+NzrOAQUGj12ijfR5I5/qL5SNk9y0ny1y4l1a3z+JgwMPHomso66muWJx3ycHZ+5ocI68g
- f1E5DT9LBkg/xanu+w850QIqhpUQGm55iQd4iyPIIuN5smE9ivV2wKUMT0r5rfcLJhRax+umUUb
- HNxaHd1WAdN0rtVQGB1onsCdqFfklhMCTxf4AaXVK+Lpq+eTDCbrstKT/eXb/R6vmR+m3JjRHxg
- 4fQayU8qwErgdEfR+XswA3qyTgnXFxxzUIFS+PLkbj8gtXGtAtU7fry0NKVdRvb6LSKQ90i7K6s
- ooGFmW8HC0BBDtY2MZ3TFpAMZvPUOnOnT6Pn6pOYGGCqWr4dfh14ppTfuPw5M/v8GvDkc7dOZ7M
- lxsM8xsMMAkQzQ5oOL+FlENvmD/O7z7RgJs71fDD7KKWCFq/+UUgNKh4wTytwC8C/W9/TCKbnJ9
- y3eNkSLcbnJEXiA649w==
-X-Proofpoint-GUID: NXpG9l5gBRYxxWz4xM7qtnHqcEHKJipu
-X-Proofpoint-ORIG-GUID: NXpG9l5gBRYxxWz4xM7qtnHqcEHKJipu
-X-Authority-Analysis: v=2.4 cv=R+mWitRX c=1 sm=1 tr=0 ts=6aad3074 cx=c_pps
- a=UNFcQwm+pnOIJct1K4W+Mw==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
- a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
- a=EUspDBNiAAAA:8 a=f9U2glbQm_qsoaKGCbYA:9 a=QEXdDO2ut3YA:10
- a=uKXjsCUrEbL0IQVhDsJ9:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-18_03,2026-09-16_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0 adultscore=0 bulkscore=0 impostorscore=0 clxscore=1015
- spamscore=0 suspectscore=0 malwarescore=0 priorityscore=1501 phishscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609180177
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="3nge4cpqtpe6oayt"
+Content-Disposition: inline
+In-Reply-To: <20260918-kbingham-orientation-v6-5-5e8b1f01be29@ideasonboard.com>
 
-Shikra boards currently boot Linux under a hypervisor, where the
-remote processor firmware IOMMU streams are managed by the hypervisor.
-When booting Linux directly at EL2 without the hypervisor, the IOMMU
-is instead managed by the consumer of this DeviceTree, so the firmware
-streams for each remote processor need to be described explicitly.
 
-Add an EL2-specific DT overlay and apply it to all Shikra EVK variants
-devices to produce an -el2.dtb alongside the "normal" dtb.
+--3nge4cpqtpe6oayt
+Content-Type: text/plain; protected-headers=v1; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+Subject: Re: [PATCH v6 5/6] ARM: tegra: Convert to new media orientation
+ definitions
+MIME-Version: 1.0
 
-Co-developed-by: Bibek Kumar Patro <bibek.patro@oss.qualcomm.com>
-Signed-off-by: Bibek Kumar Patro <bibek.patro@oss.qualcomm.com>
-Signed-off-by: Komal Bajaj <komal.bajaj@oss.qualcomm.com>
----
-All existing Shikra EVK board variants boot Linux under a hypervisor,
-which means Linux typically runs at EL1. For EL2 boot without the
-hypervisor, remote processor firmware IOMMU streams must be described in
-the DeviceTree consumed by Linux.
+On Fri, Sep 18, 2026 at 11:44:17AM +0100, Kieran Bingham wrote:
+> From: Kieran Bingham <kieran.bingham+renesas@ideasonboard.com>
+>=20
+> The orientation property for video interface devices now has definitions
+> to prevent hardcoded integer values for the enum options.
+>=20
+> Update the users throughout the nvidia device trees to use the new
+> definitions.
+>=20
+> Reviewed-by: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
+> Signed-off-by: Kieran Bingham <kieran.bingham+renesas@ideasonboard.com>
+> ---
+> v2:
+>  - Fix MEDIA_ORIENTATION_REAR to MEDIA_ORIENTATION_BACK
+> ---
+>  arch/arm/boot/dts/nvidia/tegra30-asus-nexus7-grouper-common.dtsi | 3 ++-
+>  arch/arm/boot/dts/nvidia/tegra30-asus-transformer-common.dtsi    | 3 ++-
+>  arch/arm/boot/dts/nvidia/tegra30-lg-p895.dts                     | 4 +++-
+>  arch/arm/boot/dts/nvidia/tegra30-lg-x3.dtsi                      | 3 ++-
+>  4 files changed, 9 insertions(+), 4 deletions(-)
 
-Add a Shikra EL2-specific DT overlay and wire it up in the Makefile to
-produce -el2.dtb artifacts for the Shikra EVK variants alongside the
-regular dtbs.
+Looks like the include you're using here is only available in
+linux-next, so this should go through the same tree as the patch that
+adds the include, in which case:
 
-Komal Bajaj (1):
-  arm64: dts: qcom: shikra: Add EL2 overlay for remoteproc SMMU mappings
+Reviewed-by: Thierry Reding <treding@nvidia.com>
+Acked-by: Thierry Reding <treding@nvidia.com>
 
- arch/arm64/boot/dts/qcom/Makefile        | 12 ++++++++++++
- arch/arm64/boot/dts/qcom/shikra-el2.dtso | 23 +++++++++++++++++++++++
- 2 files changed, 35 insertions(+)
- create mode 100644 arch/arm64/boot/dts/qcom/shikra-el2.dtso
----
- arch/arm64/boot/dts/qcom/Makefile        | 12 ++++++++++++
- arch/arm64/boot/dts/qcom/shikra-el2.dtso | 23 +++++++++++++++++++++++
- 2 files changed, 35 insertions(+)
+--3nge4cpqtpe6oayt
+Content-Type: application/pgp-signature; name="signature.asc"
 
-diff --git a/arch/arm64/boot/dts/qcom/Makefile b/arch/arm64/boot/dts/qcom/Makefile
-index 5c19f945c785..686d37cab02f 100644
---- a/arch/arm64/boot/dts/qcom/Makefile
-+++ b/arch/arm64/boot/dts/qcom/Makefile
-@@ -359,8 +359,20 @@ dtb-$(CONFIG_ARCH_QCOM)	+= sdm850-lenovo-yoga-c630.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= sdm850-samsung-w737.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= sdx75-idp.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= shikra-cqm-evk.dtb
-+
-+shikra-cqm-evk-el2-dtbs	:= shikra-cqm-evk.dtb shikra-el2.dtbo
-+dtb-$(CONFIG_ARCH_QCOM)	+= shikra-cqm-evk-el2.dtb
-+
- dtb-$(CONFIG_ARCH_QCOM)	+= shikra-cqs-evk.dtb
-+
-+shikra-cqs-evk-el2-dtbs	:= shikra-cqs-evk.dtb shikra-el2.dtbo
-+dtb-$(CONFIG_ARCH_QCOM)	+= shikra-cqs-evk-el2.dtb
-+
- dtb-$(CONFIG_ARCH_QCOM)	+= shikra-iqs-evk.dtb
-+
-+shikra-iqs-evk-el2-dtbs	:= shikra-iqs-evk.dtb shikra-el2.dtbo
-+dtb-$(CONFIG_ARCH_QCOM)	+= shikra-iqs-evk-el2.dtb
-+
- dtb-$(CONFIG_ARCH_QCOM)	+= sm4250-oneplus-billie2.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= sm4450-qrd.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= sm6115-fxtec-pro1x.dtb
-diff --git a/arch/arm64/boot/dts/qcom/shikra-el2.dtso b/arch/arm64/boot/dts/qcom/shikra-el2.dtso
-new file mode 100644
-index 000000000000..d2f3186bd47d
---- /dev/null
-+++ b/arch/arm64/boot/dts/qcom/shikra-el2.dtso
-@@ -0,0 +1,23 @@
-+// SPDX-License-Identifier: BSD-3-Clause
-+/*
-+ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
-+ *
-+ * Shikra specific modifications required to boot in EL2.
-+ */
-+
-+/dts-v1/;
-+/plugin/;
-+
-+&gpu_zap_shader {
-+	status = "disabled";
-+};
-+
-+&remoteproc_cdsp {
-+	iommus = <&apps_smmu 0x0200 0x0>;
-+};
-+
-+&remoteproc_lpaicp {
-+	iommus = <&apps_smmu 0x0360 0x0005>,
-+		 <&apps_smmu 0x0366 0x0000>,
-+		 <&apps_smmu 0x00e7 0x0000>;
-+};
+-----BEGIN PGP SIGNATURE-----
 
----
-base-commit: e657a464aba873f5eaf3ca821b6e4016674492d6
-change-id: 20260918-shikra-el2-ea8969385c3c
+iQIzBAABCgAdFiEEiOrDCAFJzPfAjcif3SOs138+s6EFAmqtM7YACgkQ3SOs138+
+s6Gr/g//VOXb0tgMpx4OterUqb5K6gB0eoL8pDnZNWXwL0PdFOWg5P/ozvkIHTp6
+SW897Ifdf65UNCGVYXKCqHNBL6DH4Kvn2k/JI0DKerKx0VzQWlm4ojWsr2zBsLvy
+WDV2HeO2XzTiqaJqRGiXkB9GQYAn4asQXoobBSoIuRtm0Yh3w0lnhMYThKasCVxn
+CwbV8yLl5+cOnyp5aIRKBBfqV+C7RDwHzRlaTLWd0+Tha4hjgv5vtsml12jSrdb9
+VCT4xxjfIlt9yCBSpdYEa9LETBXfQRYcb7s9yjO5Koj6rWtd2iLEmoSw/gfi019H
+OAZPFULbLHmFV/QhzS/mPwQH5BPTshApCNBFf/uLtrhM9SsLfOBBUsW8jYJ+gjT3
+rx4ShbEX4bLsIT9POg1riSw+muXyNnnAvy/aG20ZM2Uq88u7eiG2TfnnQq2jujbV
+ZE8b/1r4rk8T5aIjnHsLfrztL8LqguWxb6Ni3YcEgQwheH1vAnOOppETs5a2KqW/
+LZXO3oW3IxH8qfBLTsO2dGvx9rafI3SBkRtE/LyAsV+C35sEODkNC57OswrL0ty0
+DqHxW09drdXNblN7hsWM/j8oD2/M1hEEiaeO9OuH90hWPxNe8m5TdkhFzkF+TLk2
+eTziMaYY4dcUYy81zglhvNT8ERnGG7mhiVXm6vbG4zI1FPJksXg=
+=khTn
+-----END PGP SIGNATURE-----
 
-Best regards,
--- 
-Komal Bajaj <komal.bajaj@oss.qualcomm.com>
-
+--3nge4cpqtpe6oayt--
