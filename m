@@ -1,128 +1,152 @@
-Received: from mail-ed1-f52.google.com (mail-ed1-f52.google.com [209.85.208.52])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 88C0549A3B0
-	for <linux-arm-msm@vger.kernel.org>; Fri, 18 Sep 2026 07:54:17 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.208.52
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0DDF74A2041
+	for <linux-arm-msm@vger.kernel.org>; Fri, 18 Sep 2026 07:58:21 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789718059; cv=none; b=Hju+K51dYwMQtMy3fpCdoYKg8BZCsSNzlqGiXKLgRLZEP2nOB3YMTBxxkGRLws0fM4uAg854Y4OliNsPpt76rE/ZIHqoW+AyztNsf5vWfeBk4Si370QOUq4tO0gq040/Pmibno++ffTcLzq8igfrsWnzLKQg3ZKwxWyAZjVRkN4=
+	t=1789718304; cv=none; b=nT8PE2MBrm1/Ywwu32GG0ifEYOSSO+sQ1KkD44Um2FwQAewGuJ6oYm/Sv6FjRjuggE5nDKq4O/Qafh8NYQDBj+OLUwVIrzrLHwBHRaJtuSGYzz9ygmF/AvEy+IHGLykuvK3NWnbADzmWzMcR57SdzdN8O+5+Txh/OulHIj1/GuE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789718059; c=relaxed/simple;
-	bh=kNjWH5+CMgW1Pl5h6a/fYwVArl9Y83OAw6Pl4E7UYmc=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=nFZuWXM8CNJQCbC/j7t4AGd3FUvVneVGpCe483onzlqBwUbnIgr5rTRlk8sUHUeSZv5fBe/Vtrw/3l2tPN2ETmDTjsWsqsordW7secKmxV2s0VOfuhVvbpTyLA+rqtm6jWn9mynBKIkcEnQaauAIxGIo9z/G8zuW6DmhA89qcLU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=AxIs2gZ6; arc=none smtp.client-ip=209.85.208.52
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	s=arc-20240116; t=1789718304; c=relaxed/simple;
+	bh=DZpCf3W7DYEFEAO5ppw8pHOndackIbF0C4IJ+5w6OPE=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=itUD8+vbVfG9eX6StxUvRfrqENl1qaIVUdjexF7RFpisHekqzC3RnoShha39UleBfPDfwVkKV3vRIRWb+E1+hbw6+CJMfzVzbuptngny1OEmGbvr1IvjUJKpVxH2RHd/SeDHgMrp1M9RgIPvYbg5ERj+7tVKIXRlrtlOBsqDwqU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=RwZ+z8ii; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=C8hbN/pn; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="AxIs2gZ6"
-Received: by mail-ed1-f52.google.com with SMTP id 4fb4d7f45d1cf-6aa487e2337so597795a12.0
-        for <linux-arm-msm@vger.kernel.org>; Fri, 18 Sep 2026 00:54:17 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="RwZ+z8ii";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="C8hbN/pn"
+Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68I60h8c362807
+	for <linux-arm-msm@vger.kernel.org>; Fri, 18 Sep 2026 07:58:19 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-type:date:from:in-reply-to:message-id:mime-version
+	:references:subject:to; s=qcppdkim1; bh=1Xl2xxpLKuZ3XVWrJWvIPGXk
+	jz6BT+vuek41WXdoj5c=; b=RwZ+z8iieRwrKdJ6HB2nBaKj2v9QEjr9vegvAOUC
+	BKIYz7PXGgHdLoryAHGMnkNfObtRfSBEdpt/QGDNccFbZw1iubvO0kEnJMHt5mrn
+	p/Rz+Xb31+S+W9+aeXyAdFuBDCJyke3niPa73efuibH+3/ieWxBX0e0ctAaL+0ZJ
+	2ciXl1B7NbLevOOchM19EKQCl9tqBLCwTB7kL6FjQBnoazDRg41FlPjhjN+CMOjl
+	iNWJ4YTqnPtUX0miOwSA2VLvn8HLWKV86iSsCKKoqhTIvWw23n78eU0uy29Ofw1K
+	aGGE9FlxHDEBzYQHWGMPH2AeuaZ8SFZCNpUVJplyQllXsA==
+Received: from mail-qv1-f69.google.com (mail-qv1-f69.google.com [209.85.219.69])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4grhs6m649-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 18 Sep 2026 07:58:19 +0000 (GMT)
+Received: by mail-qv1-f69.google.com with SMTP id 6a1803df08f44-90cdc69a7b5so11405246d6.2
+        for <linux-arm-msm@vger.kernel.org>; Fri, 18 Sep 2026 00:58:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1789718056; x=1790322856; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=drEHSSlhuZVaxkDlnBGA1Yj/cgZE9sePJP3czUIslhE=;
-        b=AxIs2gZ6VH5UgYIFr9Yw9EV0BCQ1R8qky6GwRmk7r36t663M3YjIgQ45OrUYfvv4XU
-         1xPInICkSV1b1a9Vdi5FMVoRtYq20V65xznc5G72rrvLXaNzISvbtExVX0apWPEvEN9M
-         4z+VqgE5GwR/bi4IuI0rzKmCkRiGDk2oF71M3VWMdbTsFGggVQn6A5qBg616EmD512HA
-         d2F6EczK4Tz+gjzGHGjLJKafFc7qINFjW7QTeRscKoKwLAoUWo3vJx4aVi6CVuzjq/zM
-         BNbeed+DRZDosI+MoHynG6tjI0BQXwrju6r6/VwkAZHbv+rKEmMCww4PmPsAL8TDVRWG
-         jNZg==
+        d=oss.qualcomm.com; s=google; t=1789718299; x=1790323099; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=1Xl2xxpLKuZ3XVWrJWvIPGXkjz6BT+vuek41WXdoj5c=;
+        b=C8hbN/pn8fWEQX4gpPFhIuL2pC4G5HbQTvFyA79ZGpg9jaIFxlD6TU6ytD6ydbwx5n
+         gIn8EYiuDzSGwtrUZAqHDcbtE3A/zNWIB+neTnalsSLyZ3QAz3IlOKD0qmaz+9muNOpB
+         YAxEN0pEBXT93da4W5ZmXLqYg2zgCSgXcR5H261CDabhZltMikqp1LK3Me0o4oFowNzh
+         /DdzroWDm2NFvfhCifFbIjEa5PPISZYDPO/40elleRwzMYEtGO1ldHzCYJbtnD2xDYQo
+         dG9fnV73CTJ9s11sgKJnG4s/p+TTKtdDqSFTIBfDDA7xu9zg0Ho5rLNicG011NzUUIdK
+         HLLA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1789718056; x=1790322856;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=drEHSSlhuZVaxkDlnBGA1Yj/cgZE9sePJP3czUIslhE=;
-        b=ed1+8b7NDlsw9tb55fqKpNJERg/OdHOZU+YIAZYZv2tizb+JmSK9Vg4GVQwzcYMrRb
-         QMe5JxMGIuvk5K9Ifqg63qzkDWTI83JojZKQtp4lQcfPQzcmq7VmOUmYA/psXqsPC6k2
-         Dsm4sPtvT08hqkWDEGkg7rI6LBRUAPIvXFtdj7igHQzybENhqUQzEnNoSGPHTQ1dr5Jd
-         SnXO21b8XDAtPYF01I33yRNAZHGpqVmWTKlPTG/6sB80NU8jVd85VKwwG3djx4n0AWrg
-         qnSiZZ/QmqjC6ZG+cmN9SApI64SmBQ1GtHHT71ufvhH95QkCgKAkFZIuCfm+2KNleuKR
-         MPLQ==
-X-Forwarded-Encrypted: i=1; AKwUvBzsMACs4HgZoyfCi7m+u5qWE+M7GuiAaQ7XldSnojuwPyGGNYPxKN/Kd9lPgtQCczKTmKZ2F/XMkDFXBZw8@vger.kernel.org
-X-Gm-Message-State: AFuF++niYprPRH9MLT5W3keRGK6/umKvIMr4HHRhI2NzKF+8NoeeauFf
-	+/LQvnOruYQKC1folVC+fl1Nv3InatHrVddEf2vuSfk1UcIcQ58WG1vk
-X-Gm-Gg: AYBFou3p35X+DdS79gsL7+meRDgEIFQ9UBDYsvGSbS/q946H/QWUyVfFRZ4PecqbTDL
-	IMD+k0YSD10y2lurutxHnhrsFRykEfHKVInMLGeoLM0a2SO1zuPIxFS9ljhx/I//9ZOOUiIM2/0
-	PkXswSKDZ1gd50YCXqfRH5gtKhQkNz11tQnfQanlIyXKC8kNm39xTmn0A34DwxUa0yKn1JixjKS
-	Y4imrjhz7JIdvIz7SUkuPC9zk3KsYIPfQhP91196jWBRDqee92aRzG5tbN/Oo/9zRzu7qoWFE8H
-	aP0bus+s+YfaKAdD0r7Kl74IeMYLVmNGDwuduAAlwlwXJtJIvMGdAXMUj3vBXBlZk/++3iZHbNl
-	JtiZ/X/Vy6ucRx5WpAGAQh/rYWbES7lph1YVV6l/Rp8FJtNtlsjefnVoKZrP0DoOSTgdxQ43Q1+
-	6pHd/ZkFo7nWOiIF6xYIj9LngSujE9b8SjzOb3IWa568TezmwjCeN8we08A6qJPWMNpGDZb8F2n
-	IPjnC3qe9+3aPEEQQ4ay3bT5oSZLlq46yM=
-X-Received: by 2002:aa7:cb1a:0:b0:6aa:1d71:4a7a with SMTP id 4fb4d7f45d1cf-6aa36e04b69mr2998119a12.12.1789718055453;
-        Fri, 18 Sep 2026 00:54:15 -0700 (PDT)
-Received: from [192.168.1.30] (161-53-210-87.ftth.glasoperator.nl. [87.210.53.161])
-        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-6aa59605618sm469752a12.11.2026.09.18.00.54.14
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 18 Sep 2026 00:54:14 -0700 (PDT)
-Message-ID: <c7fd0dfc-5da7-4bad-bfb0-308e3937b1cc@gmail.com>
-Date: Fri, 18 Sep 2026 09:54:14 +0200
+        d=1e100.net; s=20260707; t=1789718299; x=1790323099;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=1Xl2xxpLKuZ3XVWrJWvIPGXkjz6BT+vuek41WXdoj5c=;
+        b=s/j7CAR+HchVm0bZ1epRBB4PYyVJNo6XfESvZPVpuaMTgMx0zO8OfXhR9x8Vhpc7cs
+         Rl6c3mjWITu5aXbwNgn4M0ULWV2iL9UU6PhwpLsXr3yHXp9BHloKArP9pTVb3Sofd4i1
+         sL2A9JUtP8yALjn/Loy3Wsos+0ufT33n9kaQn6PyDqtCbAsDKKWltiY4XINkC7xNERe/
+         5btolfTv8Rw4CKcv1DSkHWeRN+njZqCuKxHOb0eyLgkE8RxUy4wJ3v8IufcOAJum46Zz
+         ZmHz/ZXpql2DSOZKJD9vbx8kYsnxGfoKpYvJPF/X/Ty0mh/+f5DwphXCuPxksYxm8N5o
+         qt9A==
+X-Forwarded-Encrypted: i=1; AKwUvByv2FhXTCLJXYln+RP9Syjy6jvnI737CnW25SiokzAMbrGwIo1Rp81loDvOHqL5TfOudHXjjmHw5vRz+qcM@vger.kernel.org
+X-Gm-Message-State: AFuF++n5cjT1rNA2U1/CY9Vo7TABg5YfcH9Ocz3slTZdit7Uzl1Zv9hn
+	+uUKHpYulzdiDGKu6HT+YWAXGoLDZp0OoTJj0x6aU52SkZ98XkPAAVHK5SEvfMF6sO9OTIJJs6r
+	An1UqGqiZXKmkfP3pHJ44X2FOu38tqAKwC2dOPhrR65QKlrf6sSwH0yL/A3BvzuDV1Ho2
+X-Gm-Gg: AYBFou3MpFYL+slUOcQCZ3Az0YrZvXWi2HBOLgNVcYf8tw13Td6ThWTN5X4rOnW+bFI
+	xTAARay2dTCuPtsuiYZ7aFdZrargeMFp1LOFCtZipJObqP/ATW2ls+DA4yuKr2HgRVoWXDQHvEt
+	MkJ0WvDlx65uztukcAJWZxznr6Qzk62P2RSeW2/yKbSjiqBera/Ift0S4gbVbSiLh6GI3gxqVNH
+	9g7q8ILnFoXmRa8fNvMjfhSkrfudxum6G6lSK6agExnmFyUMRNKa/Uy4coqr9FnFo2R0AuhJvxH
+	SN+NE7hKKKL+vM9/h2qRdAbNIwtGk2e0xqWVJQ7N4V84LPHc8QyzKDT8PhHZZV3L8Tq+MiXvgP7
+	jDlvzmlXZb0/H5g==
+X-Received: by 2002:a05:620a:44d4:b0:939:a45b:76ee with SMTP id af79cd13be357-93bdc70bf55mr230736785a.23.1789718298603;
+        Fri, 18 Sep 2026 00:58:18 -0700 (PDT)
+X-Received: by 2002:a05:620a:44d4:b0:939:a45b:76ee with SMTP id af79cd13be357-93bdc70bf55mr230734185a.23.1789718298021;
+        Fri, 18 Sep 2026 00:58:18 -0700 (PDT)
+Received: from oss.qualcomm.com ([86.121.170.232])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-49fc5755c40sm36534535e9.3.2026.09.18.00.58.15
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 18 Sep 2026 00:58:16 -0700 (PDT)
+Date: Fri, 18 Sep 2026 10:58:15 +0300
+From: Abel Vesa <abel.vesa@oss.qualcomm.com>
+To: Konrad Dybcio <konradybcio@kernel.org>
+Cc: Bjorn Andersson <andersson@kernel.org>, Abel Vesa <abelvesa@kernel.org>,
+        Stephen Boyd <sboyd@kernel.org>, Brian Masney <bmasney+clk@redhat.com>,
+        Jerome Brunet <jbrunet+clk@baylibre.com>,
+        Dmitry Baryshkov <lumag@kernel.org>,
+        Amit Nischal <quic_anischal@quicinc.com>,
+        Taniya Das <taniya.das@oss.qualcomm.com>,
+        linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org,
+        linux-kernel@vger.kernel.org,
+        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Subject: Re: [PATCH 1/3] clk: qcom: rcg2: Initialize shared floor clock state
+Message-ID: <4uetjsqcm4ozt62lgj6crwjqxhtbikicccw37mkmxs5xkobvya@u5uhjl5zs4o2>
+References: <20260917-topic-qc_clk_fixes-v1-0-5531cb00514b@oss.qualcomm.com>
+ <20260917-topic-qc_clk_fixes-v1-1-5531cb00514b@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 1/3] dt-bindings: soc: qcom: add
- xiaomi,taoyao-pmic-glink compatible
-To: Krzysztof Kozlowski <krzk@kernel.org>
-Cc: Bjorn Andersson <andersson@kernel.org>,
- Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
- Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
- <conor+dt@kernel.org>, Sebastian Reichel <sre@kernel.org>,
- linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-pm@vger.kernel.org
-References: <20260915084901.56622-1-zstaseg@gmail.com>
- <20260915084901.56622-2-zstaseg@gmail.com>
- <20260917-sticky-sheep-from-pluto-adf65b@quoll>
-Content-Language: en-US
-From: Stanislav Zaikin <zstaseg@gmail.com>
-In-Reply-To: <20260917-sticky-sheep-from-pluto-adf65b@quoll>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260917-topic-qc_clk_fixes-v1-1-5531cb00514b@oss.qualcomm.com>
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTE4MDEwNyBTYWx0ZWRfXxfdxTBVrbQlJ
+ 0QF6LVrBsM6fI66PuZ+VCL0nteGA5x5Vyt9WSKspP+/luPh8+VfTt2oAOBM8B+lwodG/u/6Z9+j
+ 4foh0sEtwxW8aLTUGdi0Y7taFMNgz1YSlbrUZPJ9Jekf7nNEf7CDpa0Ik70yOBi2S/Ow4MzfRll
+ yCK0Fdsjg6TEQdr4/ALupFzBHsUPPmq4trWEmjHAUdnahQ6TOxmNDr76caE4XO9QyB5UeZX9FAj
+ XkBY7vbaCbDEmzjQpsnw9wMKDueBMhIb7ZQoIgqCOwBEDZ/w/zhqjyxysC3w6umVpZuxKa39QRY
+ dIuzpmW0QRNkMSLqRj2jVMvGg+yAyVpzm14k9FQDqkHiF0+9jyfYROHdrlkbMiTp7eCwIaHVUu7
+ 28jSThpjFs703Smhs03P4w/7yzWbAXZnXTh8NFMXaI+MUatL/tP2OOjm9qxxRjRsL5Kj+1UKHam
+ fTSPXnmY4m+guz9SQzA==
+X-Proofpoint-GUID: EOFZ67f7daHcUGOsdWQl2vihxDZlRt90
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTE4MDEwNyBTYWx0ZWRfX9g6l3iJ3GCo3
+ FV2zFd2nc2p/jRnv4bAluXnKerNgkOCembpXkYj8WnG5p/a9mbRf0mTkbxs1bPFaqq+dHTNXM8Q
+ 4tp0yTbXJWMNtoGlBR19OTMoyNeSQSg=
+X-Proofpoint-ORIG-GUID: EOFZ67f7daHcUGOsdWQl2vihxDZlRt90
+X-Authority-Analysis: v=2.4 cv=cvwOAF4i c=1 sm=1 tr=0 ts=6aacef1b cx=c_pps
+ a=wEM5vcRIz55oU/E2lInRtA==:117 a=po8fGBi+ks8MzcVQGuqtFQ==:17
+ a=kj9zAlcOel0A:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22
+ a=EUspDBNiAAAA:8 a=HK8F92NRLrjYxt8c1QAA:9 a=CjuIK1q_8ugA:10
+ a=OIgjcC2v60KrkQgK7BGD:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-09-18_02,2026-09-16_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ bulkscore=0 malwarescore=0 adultscore=0 spamscore=0 suspectscore=0
+ lowpriorityscore=0 clxscore=1015 impostorscore=0 phishscore=0
+ priorityscore=1501 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2609040000
+ definitions=main-2609180107
 
-On 9/17/26 12:07 PM, Krzysztof Kozlowski wrote:
-> On Tue, Sep 15, 2026 at 10:48:59AM +0200, Stanislav Zaikin wrote:
->> Add the compatible string used by Xiaomi 12 Lite 5G (taoyao) so its
->> battery manager can be matched to a device-specific variant in
->> qcom_battmgr.
+On 26-09-17 11:06:53, Konrad Dybcio wrote:
+> From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
 > 
-> Previously you were asked if the device is compatible with qcm6490. You
-> responded about something completely else - that you need qcm6490. That
-> was not the question if you need it or not. The question was are they
-> compatible and you have entire commit msg to explain that.
+> Shared floor RCGs use the cached parked_cfg whenever CCF considers the
+> clock disabled. Unlike the other shared RCG variants, their ops do not
+> initialize that cache, leaving it zeroed until the first disable or rate
+> change. This can make registration report an undivided XO configuration
+> instead of the boot-programmed parent and divider.
 > 
-> Instead, describing standard Linux device driver matching in commit msg
-> is redundant.
+> Initialize parked_cfg from CFG_REG without parking or otherwise changing
+> the hardware. Propagate read failures so a clock with unknown initial
+> state is not registered.
 > 
-> Best regards,
-> Krzysztof
-> 
+> Fixes: aec8c0e28ce4 ("clk: qcom: rcg2: add clk_rcg2_shared_floor_ops")
+> Assisted-by: LLM
+> Signed-off-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
 
-Yes, apart from battmgr, the pmic-glink implementation on this device is 
-compatible with the QCM6490 platform (base communication & UCSI 
-implementation), and therefore should keep qcom,qcm6490-pmic-glink and 
-qcom,pmic-glink in the compatibles.
-
-I will adjust the commit message in the v5 to:
-
-dt-bindings: soc: qcom: qcom,pmic-glink: Document Xiaomi taoyao compatible
-
-The taoyao is the device compatible with the QCM6490 platform (apart 
-from battmgr). The device also requires both UCSI_NO_PARTNER_PDOS & 
-UCSI_DELAY_DEVICE_PDOS quirks.
-
-Document the PMIC GLINK firmware interface on the taoyao by using the 
-QCM6490 bindings as fallback.
-
--- 
-Best regards,
-Stanislav
-
+Reviewed-by: Abel Vesa <abel.vesa@oss.qualcomm.com>
