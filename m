@@ -1,88 +1,65 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6519A5C613;
-	Fri, 18 Sep 2026 06:32:29 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4C43C38E5C5;
+	Fri, 18 Sep 2026 06:45:02 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789713150; cv=none; b=i/rIa9dZUR5eWTFXCPaQfiSExD7GceHENenx4Yx8b9lvTYa/pyc/vEhcHQdB8DlcnW4wdS+1yTKgHcSUBSSlB9gZr73Xo9Y23mrQXOJUGEhusF2BUAsRzFtKkwFOudcW71oQNe3Dz+Pr1tKEeF2K40tWl/H7ZoIATj+Soarn2hc=
+	t=1789713904; cv=none; b=D9zgAgoGkTrKSRgEonMlGUFYDzUP6i4DjcOh264uilvWOxIXqfKUq6OBnne0pzgIZcqwJrpuRCxahd98AfsLSGkOeqt+SzkfCMf4RlsGKVpxp7YgDrNcdZ4f5Tey7PV6SkT5j/9m1AabTqpd05fOWjd/x4Z91RnUqmmsTRi0kNk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789713150; c=relaxed/simple;
-	bh=XwrqToWW6ds8H6Yd5khVB2HcPjOhh+PHQ2Jqml1GP70=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=oJYY3j3aYkWcAKvFQNmQw3nEn0LSHOUgrbW+RUHs0a4nJJWON6/rtbd6WiPbx/Ui6goKZqf6CUBA0G8FszdcfoT5UXJQsDAbT4pBHxo7wHqmNC1VRA3YaYrkK8UhnittV1iHYxqOQr7BqAHD2yLmANree/qDxbzchUOc9lTMjVs=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=eoO9iyAy; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1789713904; c=relaxed/simple;
+	bh=DzNuSGeZ/DolGL5u8O2gqaTmdQDHaPMhZDPatt02kO4=;
+	h=From:To:In-Reply-To:References:Subject:Message-Id:Date:
+	 MIME-Version:Content-Type; b=AfL9Tw1YGuQkRiQd+JUqSdZ8K+gNSYlcd/zxAtcJalQpLsCxm55gHeSD+Qk9kkc/4O5Z7Cgyib0LNDpxrBPgrkRtCfaRMt2Yh3p6CGRRuQCuUvUkU7jBab9YTH0TMjlb8hb8HSjRgAWXJ4c7/BL+nzqQk2bsD5XqJeoosQz0NtY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=QOq+HnsZ; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="eoO9iyAy"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 909751F000FF;
-	Fri, 18 Sep 2026 06:32:27 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="QOq+HnsZ"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id DE4361F000FF;
+	Fri, 18 Sep 2026 06:45:01 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1789713149;
-	bh=0jginng20HyEPfWE13UVglgNNNor7mab+3rUOQNhgOQ=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=eoO9iyAyKw4vPHgIfe582rvqtGVDyIGS6odDyEgr9ghn4gjNpF6DNxWwZlXpOuXZw
-	 YxAjG5qb3AJC27S+Y3dACN0DW+DvWjENeOB101YrMaruqm84aYSYoycQ4BzZq0nd/G
-	 Vbrr/Kygzk1tGet8AA2CbVikMoC3oJrRgON1lS7h6m7O3M3y/EAzphNY1wRZi0ER+p
-	 pELftNaX3BWN1cUrNcYq+jW6AyB5Sy/AvzmAIxYgE/6ezvKcOkayGTGlsCeCP9qqlf
-	 IKyVaf07svATccedfPCootfANNHq8OttyrPDEQp4mJOoAZ/LdczTA9KDRNlwXJRRKI
-	 EiBV45DQT0eNw==
-Message-ID: <5ce059cc-b408-49cd-96f8-85943ec9e51d@kernel.org>
-Date: Fri, 18 Sep 2026 07:32:26 +0100
+	s=k20260515; t=1789713902;
+	bh=BupREwgr8lIWPTO67ce1QyKMJSvgG137+DPZFjLq88U=;
+	h=From:To:In-Reply-To:References:Subject:Date;
+	b=QOq+HnsZgFvQ0FRxFgP9jioiA8WkxyQe2IRZZxNiteQZCF+wE1vpQfrSuaijLojvL
+	 WXPS6w/8eb8jUOIq/FFBbxnn/P6I5No/icMjocrphwJ0R7KraeC6IQi6+vWWivZXII
+	 773egRdRESr/qsrQGk0/iufHrngS1FB7LAD6IBtEVQ3wOXGfkD7kWfUucJBniOO+zF
+	 vwtFZuOZ0h4jcBHa6fZGheW6HgH5L1ngWQromEaQPBB9KghhKxOJpFiVtHk/zWZa8e
+	 NEww3iNkswbvrcf7lGd2H+9Pj6fnvadxzN5RKgkY8lojv09OrBkqzmE8QkPZZsJR09
+	 ExYoKoYoTgMYQ==
+From: Srinivas Kandagatla <srini@kernel.org>
+To: linux-arm-msm@vger.kernel.org, linux-sound@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, Pan Chuang <panchuang@vivo.com>
+In-Reply-To: <20260716132227.589778-1-panchuang@vivo.com>
+References: <20260716132227.589778-1-panchuang@vivo.com>
+Subject: Re: [PATCH] slimbus: qcom-ngd-ctrl: Remove redundant
+ dev_err_probe()
+Message-Id: <178971390167.472168.15708697692953474439.b4-ty@kernel.org>
+Date: Fri, 18 Sep 2026 07:45:01 +0100
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] slimbus: ngd: Fix runtime PM leak in
- qcom_slim_ngd_xfer_msg_sync()
-To: Wentao Liang <vulab@iscas.ac.cn>, gregkh@linuxfoundation.org
-Cc: linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-sound@vger.kernel.org, srini@kernel.org, vkoul@kernel.org,
- stable@vger.kernel.org
-References: <20260917152525.2160238-1-vulab@iscas.ac.cn>
-Content-Language: en-US
-From: Srinivas Kandagatla <srini@kernel.org>
-In-Reply-To: <20260917152525.2160238-1-vulab@iscas.ac.cn>
-Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.3
 
 
-
-On 9/17/26 4:25 PM, Wentao Liang wrote:
-> The successful transfer path returns 0 without dropping the runtime PM
-> usage counter taken by pm_runtime_get_sync().  The error paths all jump
-> to pm_put, which releases the reference, but a completed transfer keeps
-> it forever.
+On Thu, 16 Jul 2026 21:22:27 +0800, Pan Chuang wrote:
+> Since commit 55b48e23f5c4 ("genirq/devres: Add error handling in
+> devm_request_*_irq()"), devm_request_irq() automatically logs
+> detailed error messages on failure. Remove the now-redundant
+> driver-specific dev_err_probe() calls.
 > 
-What is the exact issue that you are seeing on your device?
-
-Is this AI generated code?
-
-Was this patch tested on the device?
-
---srini
-
-> Fall through to pm_put on success so the reference is always released.
 > 
-> Fixes: 917809e2280bb ("slimbus: ngd: Add qcom SLIMBus NGD driver")
-> Cc: stable@vger.kernel.org
-> Signed-off-by: Wentao Liang <vulab@iscas.ac.cn>
-> ---
->  drivers/slimbus/qcom-ngd-ctrl.c | 1 -
->  1 file changed, 1 deletion(-)
-> 
-> diff --git a/drivers/slimbus/qcom-ngd-ctrl.c b/drivers/slimbus/qcom-ngd-ctrl.c
-> index 1ed6be6e85d2..be5640f45d7c 100644
-> --- a/drivers/slimbus/qcom-ngd-ctrl.c
-> +++ b/drivers/slimbus/qcom-ngd-ctrl.c
-> @@ -937,7 +937,6 @@ static int qcom_slim_ngd_xfer_msg_sync(struct slim_controller *ctrl,
->  		ret = -ETIMEDOUT;
->  		goto pm_put;
->  	}
-> -	return 0;
->  
->  pm_put:
->  	pm_runtime_put(ctrl->dev);
+
+Applied, thanks!
+
+[1/1] slimbus: qcom-ngd-ctrl: Remove redundant dev_err_probe()
+      commit: 37052fa3297966e28e6f0903c6ba448b2afaf8f9
+
+Best regards,
+-- 
+Srinivas Kandagatla <srini@kernel.org>
 
