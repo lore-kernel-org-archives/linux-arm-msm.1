@@ -1,66 +1,69 @@
-Received: from mail-wm2-f12.google.com (mail-wm2-f12.google.com [74.125.225.140])
+Received: from mail-ed2-f35.google.com (mail-ed2-f35.google.com [74.125.228.99])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 990B92E5B02
-	for <linux-arm-msm@vger.kernel.org>; Fri, 18 Sep 2026 07:29:10 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.225.140
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AE8E83368B2
+	for <linux-arm-msm@vger.kernel.org>; Fri, 18 Sep 2026 07:29:57 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.228.99
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789716557; cv=none; b=jPFqDshIKhpOuv0k58HCfrStyLt7ncCJJkj4itDYNpDhsZA8EtYJWn3tfdwvYt7YVqv9KIeHI9xMSL4Ug/McNtlwiKPG62zwblSeIZSunWdb5r3FlrVvMK8HjStUmHzcz43oQSIkGbfgghXafqL3MtwbJ12hCWsfvmDPC+WBVr8=
+	t=1789716600; cv=none; b=QMpGuBKG5qlJvFHahO7264TG4NFHLvbbCoXeWs1GnVcfaBmvx/lj3KTudUW2ssKE05riVe0nIIYSO5cpj6F8IlEl1pKL3LKUd/qxmcoYfPwlPB96U2WwOQhJMMF4H0hvMt0bLrfl27YDWYliqc1lHJfrgdB1E+PhgVOfIP+ildk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789716557; c=relaxed/simple;
-	bh=CrfB5Rz0RrvGaZsIayezXrztszc5vqvtS3GZl43Wk9M=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=AdSNpioahpVcKhcx90oZJyFtIKofH2JRdnCBtHdpaViXK2aluot06yILpmaYWMxCkjR//m/nX76U3ZgP6exkTTm9uhd+te3DKqxDo+X7Ue6lG6wP3sK3hetIEXoQ3d3Sp21685vq2c7ZPo/drO8gzIKTXwrQq7WlPHJKoH6ikk0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=MYxEEq2F; arc=none smtp.client-ip=74.125.225.140
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
+	s=arc-20240116; t=1789716600; c=relaxed/simple;
+	bh=RuNvguTwwr2VuOUhAB3PD3uxO9vmyNSZMReZz28odaA=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=J4CKjad43XyXtbC9jHmAulPeSGlzrAPjo9vcPYaSxBrHJfaqoA563agT8Ju0nvU5xIfQdYjqyB/AKYuaLVyMp0SAk/TKijNkNM0Z9OceQcaHTw7YJhe3wpQxt5E4czg8PeM+n10aySKXbTuCtIflpFUvb9nU/DNgbVq3eXAu430=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=fairphone.com; spf=pass smtp.mailfrom=fairphone.com; dkim=pass (2048-bit key) header.d=fairphone.com header.i=@fairphone.com header.b=3/FTNKmB; arc=none smtp.client-ip=74.125.228.99
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=fairphone.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=fairphone.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="MYxEEq2F"
-Received: by mail-wm2-f12.google.com with SMTP id 5b1f17b1804b1-49cd38e0e5dso5617575e9.2
-        for <linux-arm-msm@vger.kernel.org>; Fri, 18 Sep 2026 00:29:09 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=fairphone.com header.i=@fairphone.com header.b="3/FTNKmB"
+Received: by mail-ed2-f35.google.com with SMTP id 4fb4d7f45d1cf-6aa1da63791so526760a12.1
+        for <linux-arm-msm@vger.kernel.org>; Fri, 18 Sep 2026 00:29:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1789716546; x=1790321346; darn=vger.kernel.org;
-        h=cc:to:message-id:content-transfer-encoding:content-type
-         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+        d=fairphone.com; s=fair; t=1789716596; x=1790321396; darn=vger.kernel.org;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:from:to:cc:subject:date:message-id
          :reply-to:content-type;
-        bh=vR5Hf5/Fo4mKQwK6kNI3oaShZRKQk0ZPQPkNgIO7ehQ=;
-        b=MYxEEq2FXBwujNIcVknT6GwPJwpD7/dsir0fEmS03YiyVeRr4n1bllnboY3Tc15/me
-         lCPKnXK1O/rVflsbFuXekjSe9geavGpV+FCbNryr9zYI/gd87VsEsctJquWDVDzylcv5
-         TjHPAGXJ5ypVrCCxXl6tCImMwdWZgFY8zOmszuiH+DgE6lo540ChEFnCDT8LnSxdePMa
-         0l0Cy1TBma583PAApDTHfUaZncNVe1Q5V5oNoasEmo4Tv2E8SLzNU40FZ4mvpgQ5LAWe
-         ZV67KXOlnCdNWfbD17mD32axEIYPOrc6grqV5FrCrPFD7uwi6E6iZ43k1PZaWA9cQg5d
-         Gcvw==
+        bh=8n3CU8yWz1Zuk0+R71ZKSDVgYHmxdTzcwMr6TT8Hzck=;
+        b=3/FTNKmBJY1YD6F8Of2+jKYodstX4L5z5+tnaYNuiLyLsNrjYFY/LwPSBeK9GNklPM
+         U1UmhQX/Lz3ynTaDbbnM79x5zg+KxjC1YLDjJA+9/NV6d3czr8syXVuBs836haqqwRst
+         +infEDXFlJ7Dt/Q1+Zhh/euvawTDHB8l4LCt3XEs1LDnlHCvCxcOIDBLNkiyXpT5+gtO
+         oP7Tw0cs9yi5jMbM5PNf+frX1dd6WqSDVuo8XBoSkj7k4uBWWX9Hq3LVKBEEPd1F36Wb
+         QGjCO2jqJiejtXaSrs5VCeLc+hSkpwDcPvrxt8/NKiOv6AvSIPduas3pUFGzZStyRXA+
+         q8yg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1789716546; x=1790321346;
-        h=cc:to:message-id:content-transfer-encoding:content-type
-         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to:content-type;
-        bh=vR5Hf5/Fo4mKQwK6kNI3oaShZRKQk0ZPQPkNgIO7ehQ=;
-        b=nD50GzvswZ8kjMvLmrOzFGiHpGrhyf3Ilyd0G9cPvc/CMtmgTobKgCLUwwTuVNM8nu
-         7BhcYdZXb5Gz+2AavtrrFIbP1i895NzJ3BHmdl6i3gNbVIZ1MCWsjfffDqPvKIB0VPSE
-         I9cBFXK/RocnQZ//6bbhh41EPFu9R2Cnk/j6MtRzJxf+QYgmB0fiyOxa1VLjDmt0rEXW
-         150N9/rfhOIgWCvRR+DxH67XWqyxzqEv0vaJoSasRkYrtggR5zP9xQJ//oxN7Gxd3H8X
-         G6MV1hHU83W87bumBy7HNod+s2cmHOjzw6E4NGLime/cTdLP8mhgxtsNxkgevmanJmkG
-         9vrA==
-X-Forwarded-Encrypted: i=1; AKwUvBzZmrqhEypr1/5/KvbzYLSOKHLPO/XzKZFsoMYb1M9sDPFbkoW8OQKWUu2f6ZNiEKYlqrT9IKewI60nUXQF@vger.kernel.org
-X-Gm-Message-State: AFuF++k2gyqSJBBoRYrU7MspLWvxZKYN5zY6IeZPfv2CxUEQHkDrZos3
-	EPBGCgHl0VL0bcTn1aCvPzlWOsYtgxI+gY8XrD3jbwO7pn0O9BrKSnUoK17ZHItI+3g=
-X-Gm-Gg: AYBFou2sPWQzuLga8NJDEzFd3NQBK5x7P0zhkHa6q/aC1zJ12gKSjQloy/KxkOeqdY1
-	/hg500tMcEAEJE2fAQZeoanKm570UG7/e0jFeGqgU86tzIWAllbLs2+XGggmZYQgWh7tfPco5jd
-	b5fQba0RozBFnTZbpgJiy4cY2/eAHmxdywwNnioz77IIJfUqaPfBXC5iEmSVqZBU/bL3YZuEfyc
-	CRggEDBzm3HUcazDx80TYEtcJ5ygUbgX49jWuNauGZnvntItoR5Tytr1sdNoj0gV7S7o159SVwv
-	cGgWRaEroVWWJaRClQ2APe8M+TmPB5TIjo0/qTjbbZTU6mliy6C3e22cqXbGE/rq/iUmYhJRMFv
-	Z3D7gnlB/odlNfUEAJ7V6Jf6G0cyUpvqLiqVS+ZcObbJl5LfaHaQsuX+ZvkW18fzxP95HYZSF0W
-	WpPQTC5QDBO/R6cOndWrshKDd5V7DkJacSfnkDbNg20GK7pCZGOH/y4Dkson2dEFvV40tB4w==
-X-Received: by 2002:a05:600c:a085:b0:49f:bd3c:bc23 with SMTP id 5b1f17b1804b1-49fc5747887mr16339405e9.30.1789716545734;
-        Fri, 18 Sep 2026 00:29:05 -0700 (PDT)
-Received: from arrakeen-2.home ([2a01:e0a:106d:1080:52eb:f6ff:feb3:451a])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-49fcab7e333sm8390505e9.7.2026.09.18.00.29.05
+        d=1e100.net; s=20260707; t=1789716596; x=1790321396;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=8n3CU8yWz1Zuk0+R71ZKSDVgYHmxdTzcwMr6TT8Hzck=;
+        b=Bq9EaBvj24pStSiwqqMJq+OKkl96UnXUUzQaAs+890/bogo55+hJ+1X3UOQep60Xai
+         dhTWZgcn0iRcS1TRNriMCQtpZqeElT8LNp93gAwNbKbh4CfpEsLiPrfJ8LeqzRYuR9cj
+         XJhb7KN+0Hp5jweJxbNRJs6HbfW7B2htWPw3M1AJUalm/szBpH1cFsc6Ez3WbjgY8um+
+         okEwngeom6gxks9ag16E5f5ETFsn1iHlttJQqcVXzQ9NlDJpmOIaZVNi8PRgpXuIfR1T
+         LDjK9+Sb5cyEEOkEMz4tPXQdgNk5grO9L0aAWS5CLAzFV4QZd2UgXbSb5LZrcZFnjwoe
+         5iVA==
+X-Forwarded-Encrypted: i=1; AKwUvBx96QBnyU/E8WasHFsBfpMIk48dVrxLT1DWKK/9LTd4KCZdT7rjteZbHV9SNPVkxf/En+ftxIaD+x2IZA+G@vger.kernel.org
+X-Gm-Message-State: AFuF++lZA5TFxVYTSNvbn+TIwpua49bNslcUMRzFO13ev3QrsHxXAkgn
+	jLlhJE7sjySVsGp1EIGpDlDgk9w1SBt+aaizVuQgsj08pEsJqhB+S8Q2IXMfxx/UxnRL/umhU52
+	e1G0v
+X-Gm-Gg: AYBFou2RIRuEYxsV/fazzHHzL+6o534CeljY6rmCKEkrCtnlw3R6EJf86ljQuADCSYk
+	xdnGTwGSQ530Zo7PjFWrWxsxVrtUQ9XBvqxIrLZ0dQyeUlzLaM2NmJEkYXeVuVACXWSp1HaGlAf
+	eQVioyjA6QuH3CrF1Bvyb39JOD/h2zTXmYXk4mru5RejAYAMVftg+bIz5w6sjSIThRARFvqb6lZ
+	G6nW3zJulxhTDDTB+JZbq8zlEN+QprdzQMfwQwZMmPzFbxIreEv/0d8AIHolBPrIF/wL3r61Xlv
+	Y2wughU+yS8ni3mTzR1pIXebbmhBMrOq99IdGLppL9fZ3xhzLD5k1E8NKJQDK+pqufYhzW5dza+
+	Wgl35xbvLMIDMHPHZQRcPeKWMNjkuEBF6mTXaMsZTHaZdTXlxxEX6+M0VRRmMbr8qDkB5fIm7y/
+	SJjDK+O36wm0r0aqgYcHoH7oV+B9WblbQF1zzfQBzLF5zcGGo0exvQkcJxnIVgNg8tibYM7hcA2
+	HfdXiTk2Jv6IN1S9yquwT9qb/38GpbWl7OxRvh4Bp6jL01qGAQy
+X-Received: by 2002:a05:6402:21d1:b0:6a9:a255:2555 with SMTP id 4fb4d7f45d1cf-6aa53102f8amr513503a12.4.1789716595790;
+        Fri, 18 Sep 2026 00:29:55 -0700 (PDT)
+Received: from [172.16.220.101] (144-178-202-138.static.ef-service.nl. [144.178.202.138])
+        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-6aa58d55cd3sm462048a12.2.2026.09.18.00.29.54
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 18 Sep 2026 00:29:05 -0700 (PDT)
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Date: Fri, 18 Sep 2026 09:29:04 +0200
-Subject: [PATCH v2] soc: qcom: geni-se: provide PROG_RAM_DEPTH for I2S HUB
- Serial Engines
+        Fri, 18 Sep 2026 00:29:55 -0700 (PDT)
+From: Luca Weiss <luca.weiss@fairphone.com>
+Subject: [PATCH v3 0/3] ESWIN EPH8621 touchscreen support for Fairphone
+ (Gen. 6)
+Date: Fri, 18 Sep 2026 09:29:51 +0200
+Message-Id: <20260918-eswin-eph8621-v3-0-514eb1f622c0@fairphone.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -69,127 +72,65 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260918-topic-sm8x50-i2c-hub-fw-ram-v2-1-30e960966802@linaro.org>
-X-B4-Tracking: v=1; b=H4sIAD/orGoC/42NSw6CMBQAr0K69pm2fCyuvIdhQcsDnlFKXgExh
- LsLeAGXk0xmFhGQCYO4RotgnCiQ7zbQp0i4tuwaBKo2FlrqTObqAoPvyUF4mTmVQNpBO1qo38D
- lC9LEpTK2mMnYiK3QM9Y0H/V78eMw2ge6YU/uRkth8Pw59pPavf9OkwIFdZJrk1XGmcrentSV7
- M+eG1Gs6/oFL3dp7tkAAAA=
-X-Change-ID: 20260917-topic-sm8x50-i2c-hub-fw-ram-54c503be6038
-To: Bjorn Andersson <andersson@kernel.org>, 
- Konrad Dybcio <konradybcio@kernel.org>, 
- Viken Dadhaniya <viken.dadhaniya@oss.qualcomm.com>
-Cc: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, 
- linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org, 
- Neil Armstrong <neil.armstrong@linaro.org>
-X-Mailer: b4 0.15.1
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3638;
- i=neil.armstrong@linaro.org; h=from:subject:message-id;
- bh=CrfB5Rz0RrvGaZsIayezXrztszc5vqvtS3GZl43Wk9M=;
- b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBqrOhA/Onzy+tSI55tdZlZKmFochJqBLEWXzBpLSnq
- gO6t9guJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCaqzoQAAKCRB33NvayMhJ0SYiD/
- 0XXgwC1XShHhiYscX4bnV3Ya0b6UwdrvxsKczU2SWnSjFKPOJNfOC10+rOAIFK8oOow+Eqn5fY92ke
- tqAu0eHeiqX3xNS82DDMceAHeNJvmHFeX54cJDY63e7G7NWlw5nLpLHBwqcs/lenwcqgJK7ojaNln1
- aOOLpPTPk0YsAiNUx9mpsNK483+fHHtDUrM5sLoczEfs1B3qTkFziCDQ3r5l0RLBpFMew1aFJkRHqy
- OiOpsrj9yibeCuTk+g9vI5aW2f2vnx1/gRds1o/FenHG1fIbNCIhO15k9zDrBzqPgNGuyoHdC//DZa
- ArYNM1cKr2qcVr8XIvzLIdFQzPte+1DKJmPvTui9SHDqDC1tcSNjsKWSNKMyD2AXOjxPv3+OPhysWq
- D8ws0ijfZqXS1E508Zbg6vWgUvmcqTLgiJ1pi3T5Us8aH5D8mjiJM2D5tX9hLnhxwYsHTBmJwVT4zI
- 6ZsDzYjSHTpkOB9Vh82RckCUI4WLhU6y8pQFOJvHoXrwjxwvRzkqpi3Z1H0wEyaBJzMxMsiy0/JIfS
- Rmkz3NCj9aZ38NdHexJmmzjlyhegmAT7uHuHNWtmn8FdLKIK6lhaLmtC1IRba1dwhmIsIczRpmndPJ
- EuNYo47odSYipK2LiGnPVPYv35/aJlzwKFRcS/PYrfICpa5o98iKa2jj9aVA==
-X-Developer-Key: i=neil.armstrong@linaro.org; a=openpgp;
- fpr=89EC3D058446217450F22848169AB7B1A4CFF8AE
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/3XOyw6CMBAF0F8hXVvTF+Wx8j+MCyhTGRMetlg1h
+ n+3ggtD4vIm956ZF/HgEDwpkxdxENDj0McgdwkxbdWfgWITMxFMaFZwTsHfsacwtrkWnKaNbDK
+ tQdTMkLgZHVh8LN7xtGZ/qy9gpg/ybTi43uKhaa2RuvJAzdB1OJVJyPaSOiPJZ92inwb3XJ4Lf
+ Cn/+SNwymhTK5VZW4BS6cFW6MZ26GEf6UUL4lfItoKIgk2lYjmrtJT5Vpjn+Q1F/mE3LgEAAA=
+ =
+X-Change-ID: 20260911-eswin-eph8621-5d3d766e2b0c
+To: Dmitry Torokhov <dmitry.torokhov@gmail.com>, 
+ Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, Henrik Rydberg <rydberg@bitmath.org>, 
+ Bjorn Andersson <andersson@kernel.org>, 
+ Konrad Dybcio <konradybcio@kernel.org>
+Cc: ~postmarketos/upstreaming@lists.sr.ht, phone-devel@vger.kernel.org, 
+ linux-input@vger.kernel.org, devicetree@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
+ Luca Weiss <luca.weiss@fairphone.com>, 
+ Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>, 
+ Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1789716594; l=1416;
+ i=luca.weiss@fairphone.com; s=20250611; h=from:subject:message-id;
+ bh=RuNvguTwwr2VuOUhAB3PD3uxO9vmyNSZMReZz28odaA=;
+ b=IdunNnHJc7fklXxaMRn0CrbST5HSDl79y+LgAxxlU59S7clmZaT/rqyE8Qp1kenHFzbzy7YQ9
+ tRz7MsAe1WZBs3k8UknSAwzpvDcNr3XL/SHMVV0KLYwds/p2X8YJDm7
+X-Developer-Key: i=luca.weiss@fairphone.com; a=ed25519;
+ pk=O1aw+AAust5lEmgrNJ1Bs7PTY0fEsJm+mdkjExA69q8=
 
-The I2C Hub serial elements lacks DMA, so the SE_HW_PARAM_2 register which
-is in the DMA register space doesn't exist for those instances.
+Add dt-bindings, driver and dts additions to support the touchscreen on
+Fairphone (Gen. 6).
 
-Provide the ram depth in the compatible data to be used instead
-of the reading the missing SE_HW_PARAM_2 register.
-
-Fixes: 522bfb4f33c0 ("soc: qcom: geni-se: Use HW PROG_RAM_DEPTH to validate firmware size")
-Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
+Signed-off-by: Luca Weiss <luca.weiss@fairphone.com>
 ---
+Changes in v3:
+- driver: return IRQ_NONE on error, adjust code style
+- Link to v2: https://patch.msgid.link/20260917-eswin-eph8621-v2-0-f534080a6338@fairphone.com
+
 Changes in v2:
-- Instead of ignoring the depth, use 1020 as the default HUB serial element depth
-- Link to v1: https://patch.msgid.link/20260917-topic-sm8x50-i2c-hub-fw-ram-v1-1-f49286d8c8db@linaro.org
----
- drivers/soc/qcom/qcom-geni-se.c | 14 ++++++++++++--
- 1 file changed, 12 insertions(+), 2 deletions(-)
-
-diff --git a/drivers/soc/qcom/qcom-geni-se.c b/drivers/soc/qcom/qcom-geni-se.c
-index 873bfbd6b2b7..893a917be527 100644
---- a/drivers/soc/qcom/qcom-geni-se.c
-+++ b/drivers/soc/qcom/qcom-geni-se.c
-@@ -101,22 +101,26 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(geni_se_regs);
-  * @base:		Base address of this instance of QUP wrapper core
-  * @clks:		Handle to the primary & optional secondary AHB clocks
-  * @num_clks:		Count of clocks
-+ * @prog_ram_depth:	Available CFG RAM depth for instance without SE_HW_PARAM_2
-  */
- struct geni_wrapper {
- 	struct device *dev;
- 	void __iomem *base;
- 	struct clk_bulk_data clks[MAX_CLKS];
- 	unsigned int num_clks;
-+	unsigned int prog_ram_depth;
- };
- 
- /**
-  * struct geni_se_desc - Data structure to represent the QUP Wrapper resources
-  * @clks:		Name of the primary & optional secondary AHB clocks
-  * @num_clks:		Count of clock names
-+ * @prog_ram_depth:	Available CFG RAM depth for instance without SE_HW_PARAM_2
-  */
- struct geni_se_desc {
- 	unsigned int num_clks;
- 	const char * const *clks;
-+	unsigned int prog_ram_depth;
- };
- 
- static const char * const icc_path_names[] = {"qup-core", "qup-config",
-@@ -1241,6 +1245,7 @@ EXPORT_SYMBOL_GPL(geni_se_resources_init);
- static struct se_fw_hdr *geni_find_protocol_fw(struct geni_se *se, const struct firmware *fw,
- 					       enum geni_se_protocol_type protocol)
- {
-+	struct geni_wrapper *wrapper = se->wrapper;
- 	struct device *dev = se->dev;
- 	const struct elf32_hdr *ehdr;
- 	const struct elf32_phdr *phdrs;
-@@ -1306,8 +1311,11 @@ static struct se_fw_hdr *geni_find_protocol_fw(struct geni_se *se, const struct
- 			sefw->fw_size_in_items = cpu_to_le16(fw_size);
- 		}
- 
--		prog_ram_depth = FIELD_GET(PROG_RAM_DEPTH_MSK,
--					   readl_relaxed(se->base + SE_HW_PARAM_2));
-+		if (wrapper->prog_ram_depth)
-+			prog_ram_depth = wrapper->prog_ram_depth;
-+		else
-+			prog_ram_depth = FIELD_GET(PROG_RAM_DEPTH_MSK,
-+					readl_relaxed(se->base + SE_HW_PARAM_2));
- 		if (fw_size >= prog_ram_depth) {
- 			dev_err(dev, "Firmware size (%u) exceeds RAM size (%u)\n",
- 				fw_size, prog_ram_depth);
-@@ -1617,6 +1625,7 @@ static int geni_se_probe(struct platform_device *pdev)
- 		return PTR_ERR(wrapper->base);
- 
- 	desc = device_get_match_data(&pdev->dev);
-+	wrapper->prog_ram_depth = desc->prog_ram_depth;
- 
- 	if (!has_acpi_companion(&pdev->dev) && desc->num_clks) {
- 		int i;
-@@ -1669,6 +1678,7 @@ static const char * const i2c_master_hub_clks[] = {
- static const struct geni_se_desc i2c_master_hub_desc = {
- 	.clks = i2c_master_hub_clks,
- 	.num_clks = ARRAY_SIZE(i2c_master_hub_clks),
-+	.prog_ram_depth = 1020,
- };
- 
- static const struct of_device_id geni_se_dt_match[] = {
+- dt-bindings: Move additionalProperties down just before the examples
+- driver: Fix some memcpy undefined behavior, and various potential
+  issues with malformed or malicious touchscreen response data
+- Pick up tags
+- Link to v1: https://patch.msgid.link/20260911-eswin-eph8621-v1-0-db447ff9e445@fairphone.com
 
 ---
-base-commit: fd73f4a6659897191fa0d40695fe370925dd3780
-change-id: 20260917-topic-sm8x50-i2c-hub-fw-ram-54c503be6038
+Luca Weiss (3):
+      dt-bindings: input: touchscreen: document ESWIN EPH8621
+      Input: Add driver for ESWIN EPH8621 touchscreen IC
+      arm64: dts: qcom: milos-fairphone-fp6: Add touchscreen
+
+ .../bindings/input/touchscreen/eswin,eph8621.yaml  |  79 +++++
+ arch/arm64/boot/dts/qcom/milos-fairphone-fp6.dts   |  29 +-
+ drivers/input/touchscreen/Kconfig                  |  12 +
+ drivers/input/touchscreen/Makefile                 |   1 +
+ drivers/input/touchscreen/eswin_eph8621.c          | 344 +++++++++++++++++++++
+ 5 files changed, 464 insertions(+), 1 deletion(-)
+---
+base-commit: c2cd463d6ee7d55a3ec0719d93c49ff99022d58f
+change-id: 20260911-eswin-eph8621-5d3d766e2b0c
 
 Best regards,
 --  
-Neil Armstrong <neil.armstrong@linaro.org>
+Luca Weiss <luca.weiss@fairphone.com>
 
