@@ -1,197 +1,352 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from relay.yourmailgateway.de (relay.yourmailgateway.de [188.68.63.98])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9FA882F7F15
-	for <linux-arm-msm@vger.kernel.org>; Fri, 18 Sep 2026 10:13:16 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 88E3D4F4CE1;
+	Fri, 18 Sep 2026 10:16:29 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=188.68.63.98
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789726400; cv=none; b=ac0633z4nA96HNHOgMibAP2JmYF2igDFE4FUc04CqbOhGOl/lHkRB+dFhDixxpwjsp4c8ToSgoX3Nzw+8iPuqbXeDLRzx1GqEEEVGenxh6ozyUsxQLrfJVxnx7bjVIYHFXD4LINCTAYG98JdJ4QzlE2LfGDDEfqFKytfGJq7AsE=
+	t=1789726597; cv=none; b=TcwU/1hwYWdRk3VQ82CyfsXCF4o9g6ShITNMvve5duIkK4FgAPQbe+FFMsa7br2ahLlISI0NzsA/+91Ub3DYmKUviYXviqneZCjb6fJUfa9EQ/AWqm6ykHWyLqLaO/fOa/+/QgrDqR0yR92eWUvGbpUQBUAbfLFXk4FHe568FHc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789726400; c=relaxed/simple;
-	bh=ItKb6XO2/XDUSUojUIMmcg3tfa5IbP14FHAxsC8QauM=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=NOE5fNREVk1LzC4FYxAtXXrj8Uk7hI2VF5MjtHwzHyK8nCSos5Ksszctz25pwEmmnbG9uFXzpFIUJQg4nqlhGCqyfbSpbRhhTnzWBKB/KXlz89q04gMKx/DIelf0AqmPYHU4vEyQIm8UOYKdLrJvzqZ3PKXpueSb9GrVXz4tb7k=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=GYrEFTaV; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=WgXMGXsz; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1789726597; c=relaxed/simple;
+	bh=UfI4GE9njGOAOXtVn00vzUVQJZx+xPULHfgtFi6mlTk=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=AL3xfg1+bFqUjb9g6V2pUtDqAP6R9jdd0VZ5f0Bu2J0v0fI7bl0eTkrBILbAyLwxUU/0o1cED0lhzxsMSAaehEaFq6ZB1duc2gi3wVRjLy7gFlExpawcXcBk+2e+UFSKX84SJHj9Dx0nVUKMTjrsilWnugk2mSIj/0GIUvqWpHM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=leemhuis.info; spf=pass smtp.mailfrom=leemhuis.info; dkim=pass (2048-bit key) header.d=leemhuis.info header.i=@leemhuis.info header.b=ZhWuacfj; arc=none smtp.client-ip=188.68.63.98
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=leemhuis.info
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=leemhuis.info
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="GYrEFTaV";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="WgXMGXsz"
-Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68I9dRhO860385
-	for <linux-arm-msm@vger.kernel.org>; Fri, 18 Sep 2026 10:13:13 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	J0Yw7Fx/hFGe8hAKBYaSSc1ucE/f9f698gB4GVeKBZ4=; b=GYrEFTaVKgXlmTVL
-	FdIUe/gOgfaQNgoApN9hwMcMyZYpiVb87js0w+jlRw5HZTJt2YA12liBgJ5avDWx
-	w6jnDY6sr/HfJ7qG2RRYllo0Zjc139ZmNufJTxmE9A3HhCUmyLtoCv/ub5l6Uw92
-	Ym9/7PYxLhrNPNpIQGCgSfOb1dlvJ56MlVo/nX8rsOG36fxRBbgYqhPHUaWZ4aXk
-	tr4/8JLjw43i+58RgJfNK2I0fFnPEK4eYzZFAVT3l0xAmZSAvCO6Ean2l4R2LbGV
-	heOvq67fpXSaHWc5nqD9HFOsgh2pdtMuX0juKA8vFnMB7I0F4f7cedysaUBjulgC
-	ei4tLQ==
-Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com [209.85.222.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gs2hv871w-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Fri, 18 Sep 2026 10:13:13 +0000 (GMT)
-Received: by mail-qk1-f197.google.com with SMTP id af79cd13be357-93a1b824e84so108526585a.2
-        for <linux-arm-msm@vger.kernel.org>; Fri, 18 Sep 2026 03:13:12 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1789726392; x=1790331192; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=J0Yw7Fx/hFGe8hAKBYaSSc1ucE/f9f698gB4GVeKBZ4=;
-        b=WgXMGXszMxAJJh1swuEiRTG0s7XYuCQOzBWDsNxFuJli+nlMVpR27eOQgKMSo/xCjd
-         6IOs4Awn5b2PfTKVDvYdmnjGFZHU9+sXuig8uSMCjO/rWqFAKOMylR4eOCEV6dwHZfI6
-         zekWWzQrafGATtl397T9YvvsGQC1VtRow/vMjHRxaiJBmZBNSghrYB0u0mWMjchyKgIK
-         d89fXBsaLTW516AD+7A2wwv3KFabLLhzTB4eCh9OnLxxNaIH2FTJ7eNV7cjITAj/WlpC
-         fkwliMpsQk9iS0U+yjb+SvOph3aEs3Hu/RXArtTSKcr/Eawwdm9KhoJN9H0/0nyWVjGd
-         1Nuw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1789726392; x=1790331192;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=J0Yw7Fx/hFGe8hAKBYaSSc1ucE/f9f698gB4GVeKBZ4=;
-        b=QABt7xT5afkP4OnlKCOgijvNxGeSXR7HMOnLKnCCssIHA1ytR5wiTMHGAFJf82I4zl
-         9c4Tusric2/wX2kJSVEzZq+FlgLEd3JIkPRQ7DI4zMO42/t155yBGW28JEr4Gp6RTF8/
-         UxzFoqOmMoZhnkxhV3gBBNksCkOZ7KrE9Wjej6pLBfQwIKpZ5aGeTGV00s2cTqI+/2L2
-         1vactIUDQXN1DqunW9tfGl3hE5jscJDparIpuKJrBW6p46ub/6eAdh5AtybneVLyKPy+
-         nprznrptDAG94wSngNZ+Hk/lIHJleOZD85QJSkgsxry6uNOaiKQpHNZkiH4ljv3PadK2
-         vtGQ==
-X-Forwarded-Encrypted: i=1; AKwUvBww2VoISAnNlzu/gM0bmQx21VeAREUowGwJ/4wktKHizOuJTYrKcXHqT1VNdAmA+i0aldHW5Wkby+FXU1nZ@vger.kernel.org
-X-Gm-Message-State: AFuF++mAbWmUJQ7UEKm2rUEzpbW0Wxra/w0Wbh8u/M1nhtpzJ2VhdFCC
-	nvL13R8ID3CQhGJNQY+8RHXkSVeN+LRjRM6TkmL6buREE711IOwMscqD3zCwc52FrTLgo/X1uSL
-	CloQW91djIoxACHQjLN/pMRv2Ee0FloLSX6IA+zrtf7bHZgHKtVxoYIVXSIQ3xdV9A8ZN
-X-Gm-Gg: AYBFou0ebyUwnPW+y/h9vqoqoLL8E+JmJqzYacujYBnOPmuXnXog7NgokzdjwvqQ2Lb
-	/WVBfOS1Mae6h2DIcxfzjIfz1GSn2Y8PudtB0e9e8qjnmvJ0Ac2v3dDvk6rg6a22YHivNvCXSeR
-	adwlOJ5iDiyluy3iUS9po3R7DYHjGmyUafyEI7xFG3WaKzXYqhNYNPDLFvFUTX9K92El9vGmlzt
-	DilliMt6ap9b7W6O+9fBEs5uviIPeqXLURAmwz0QVKvdW1dgaV4bKeKXA/trKB+7hzxZYvJPomY
-	RLu+o476k9BEkJlKujtqrGg6aAOtW+VUxuszuvHh5XdPNGJg4A7tle6OCQP+jyOyrp/1KhB5cBz
-	H+W4VjdJgWkqBHJsbJLCvwo7llOAnrl20PJQCZupBtDfBY3CGdgpUXRcW+WkgMFc=
-X-Received: by 2002:a05:620a:27d3:b0:939:710:536c with SMTP id af79cd13be357-93bdc8c8c09mr231185085a.43.1789726392492;
-        Fri, 18 Sep 2026 03:13:12 -0700 (PDT)
-X-Received: by 2002:a05:620a:27d3:b0:939:710:536c with SMTP id af79cd13be357-93bdc8c8c09mr231182085a.43.1789726392001;
-        Fri, 18 Sep 2026 03:13:12 -0700 (PDT)
-Received: from ?IPV6:2a05:6e02:1041:c10:82ae:cd75:d970:e66f? ([2a05:6e02:1041:c10:82ae:cd75:d970:e66f])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-49fc7b7a6d9sm36299205e9.2.2026.09.18.03.13.10
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 18 Sep 2026 03:13:11 -0700 (PDT)
-Message-ID: <3f51bf6c-5318-4e32-a1ca-3ce8cf8c4ceb@oss.qualcomm.com>
-Date: Fri, 18 Sep 2026 12:13:10 +0200
+	dkim=pass (2048-bit key) header.d=leemhuis.info header.i=@leemhuis.info header.b="ZhWuacfj"
+Received: from mors-relay-2501.netcup.net (localhost [127.0.0.1])
+	by mors-relay-2501.netcup.net (Postfix) with ESMTPS id 4hmT6y5JBBz6MpQ;
+	Fri, 18 Sep 2026 12:16:26 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=leemhuis.info;
+	s=key2; t=1789726586;
+	bh=UfI4GE9njGOAOXtVn00vzUVQJZx+xPULHfgtFi6mlTk=;
+	h=From:To:Cc:Subject:Date:From;
+	b=ZhWuacfjDBvo/GpF56emHhvMn9nD4S9IWCNHcD6tNxCGfcmDsHYKpZQsq7aUMVhy0
+	 fBeoYFjYgZXVUBsYhq7C9VLkSgLjJTvhkGWJsx0d/0xCGQnLipLvA8DU6n4OTOjl6c
+	 wLKZE+JgaF0B8TG1ipORQmT8mMWB0qZuaIzAllHXO7UVbEOZjPTBxQgRpO6fRHZzds
+	 URaWMb1I4qh1ZArhUw23ZJ5jHix3MJQFo36XGxyEmusvB67RkLVX0zF93anVAc46l7
+	 fHyxTmlG0bpYQhJF9+Z+e3x1LDCFe8XoAt8BbZpNN6pIC6zkEMrCV0fgmGkUKxp+2Q
+	 TKKWJiQhtP55Q==
+Received: from policy02-mors.netcup.net (unknown [46.38.225.35])
+	by mors-relay-2501.netcup.net (Postfix) with ESMTPS id 4hmT6y4XsXz4yLd;
+	Fri, 18 Sep 2026 12:16:26 +0200 (CEST)
+Received: from mxe9fb.netcup.net (unknown [10.243.12.53])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange ECDHE (P-256) server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by policy02-mors.netcup.net (Postfix) with ESMTPS id 4hmT6w4jfBz8sbC;
+	Fri, 18 Sep 2026 12:16:24 +0200 (CEST)
+Received: from luggage.fritz.box (unknown [IPv6:2a02:8108:8984:1d00:a8ad:ebd4:6fc6:160])
+	by mxe9fb.netcup.net (Postfix) with ESMTPSA id 5AA3A5FABA;
+	Fri, 18 Sep 2026 12:16:22 +0200 (CEST)
+Authentication-Results: mxe9fb;
+	spf=pass (sender IP is 2a02:8108:8984:1d00:a8ad:ebd4:6fc6:160) smtp.mailfrom=linux@leemhuis.info smtp.helo=luggage.fritz.box
+Received-SPF: pass (mxe9fb: connection is authenticated)
+From: Thorsten Leemhuis <linux@leemhuis.info>
+To: Jakub Kicinski <kuba@kernel.org>,
+	Paolo Abeni <pabeni@redhat.com>,
+	Simon Horman <horms@kernel.org>,
+	"David S . Miller" <davem@davemloft.net>,
+	Eric Dumazet <edumazet@google.com>,
+	Manivannan Sadhasivam <mani@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org,
+	netdev@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	regressions@lists.linux.dev,
+	Chris Lew <christopher.lew@oss.qualcomm.com>,
+	Deepak Kumar Singh <deepak.singh@oss.qualcomm.com>,
+	Pranav Mahesh Phansalkar <pranav.phansalkar@oss.qualcomm.com>,
+	Daniel J Blueman <daniel@quora.org>,
+	Takashi Iwai <tiwai@suse.de>,
+	Vlastimil Babka <vbabka@suse.com>,
+	Jeff Johnson <jeff.johnson@oss.qualcomm.com>
+Subject: [PATCH net] Revert "net: qrtr: Send HELLO message on endpoint
+ register"
+Date: Fri, 18 Sep 2026 12:16:21 +0200
+Message-ID: <20260918101621.2848322-1-linux@leemhuis.info>
+X-Mailer: git-send-email 2.55.0
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v7 1/2] module: add SCMI device table alias support
-To: Hans de Goede <johannes.goede@oss.qualcomm.com>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Cristian Marussi <cristian.marussi@arm.com>,
-        Sudeep Holla <sudeep.holla@kernel.org>
-Cc: Bjorn Andersson <bjorn.andersson@oss.qualcomm.com>, Frank.Li@kernel.org,
-        arm-scmi@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
-        linux-arm-msm@vger.kernel.org, imx@lists.linux.dev,
-        linux-kernel@vger.kernel.org
-References: <20260918092951.5656-1-johannes.goede@oss.qualcomm.com>
- <20260918092951.5656-2-johannes.goede@oss.qualcomm.com>
- <2104f437-e960-4e55-b0e1-2b37126e8c2f@oss.qualcomm.com>
- <82a72918-7bc7-4e2c-892c-0dcdd6dd5548@oss.qualcomm.com>
-Content-Language: en-US
-From: Daniel Lezcano <daniel.lezcano@oss.qualcomm.com>
-In-Reply-To: <82a72918-7bc7-4e2c-892c-0dcdd6dd5548@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTE4MDE0MSBTYWx0ZWRfX1fgjWi/wuZLb
- PdI9+uELR3mhpr5uYd3lWUAdl2nrQhYAqkG/yEuV8W82TGtDHxWTHyqw4YqfwTa6/XGoHL/j+FL
- scxXHMZ/kq8s1j+rg/34xZZ3tUz0JqQ=
-X-Authority-Analysis: v=2.4 cv=IOWXmQvG c=1 sm=1 tr=0 ts=6aad0eb9 cx=c_pps
- a=50t2pK5VMbmlHzFWWp8p/g==:117 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
- a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22 a=EUspDBNiAAAA:8
- a=OcJ0dzw6xdPU1XpcOr0A:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
- a=IoWCM6iH3mJn3m4BftBB:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTE4MDE0MSBTYWx0ZWRfX4zuIHNiBDKe0
- UfvvTG+qWYhrH5agsokZDVYM1tdLtqHYN7ZyzjYdBghD2ZaTpaw2zxrAdtdnuR/YOAGPzIg/f8H
- SPTYaRk3V8F0DXC3EQZx1gDOoFxIOwcH1fJniDz97kQz1mH9rbfQK82Q2CBGNHNKDPB2HScpcgo
- fOD8O7hfAizR0NcYcsCPpsTJmfIFR6jBX78/Cw0zThc/hzyw48sNltp801CWhjVa/FZLr/j8Q4c
- 1fMZo9Fkr9C7Rn1C3iax/lsoe2NJ8tZY50R9gF4X8Y5qoTpkedub7PvIl5jrIPFzr9fEJL7aloT
- s7nq/d1d3tbErckHGTSZNheWkOxEWq3IE1pEMmgfVuIWukO9yf4ZtTimgC769pGLM3zUWfPpTCf
- 6pfGxCnH0liX5vgi5XXQHOsljfX5j20b4rFSiIT8p6ZOkDi+NIaiqbjmt198Z+/sG+7Z8EuBkvd
- AKVfGtBQEUgyT6ggUFA==
-X-Proofpoint-ORIG-GUID: MQQZLaRQcnrlZMYSM1Y-3CwA7xLQm1f5
-X-Proofpoint-GUID: MQQZLaRQcnrlZMYSM1Y-3CwA7xLQm1f5
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-18_03,2026-09-16_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 adultscore=0 malwarescore=0 bulkscore=0 spamscore=0
- suspectscore=0 phishscore=0 clxscore=1015 lowpriorityscore=0
- priorityscore=1501 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2609040000
- definitions=main-2609180141
+X-PPP-Message-ID: <178972658291.632225.12105105254153465727@mxe9fb.netcup.net>
+X-NC-CID: DMvukkc/W+eeVYGBLC7WhtEXyYVvojXqlPZbqRsO/U6VwyWUT90=
 
-On 9/18/26 12:02, Hans de Goede wrote:
-> Hi Daniel,
-> 
-> On 18-Sep-26 11:53, Daniel Lezcano wrote:
->>
->> Hi Hans,
->>
->> thanks for taking care of that
->>
->>
->> On 9/18/26 11:29, Hans de Goede wrote:
->>> From: Bjorn Andersson <bjorn.andersson@oss.qualcomm.com>
->>>
->>> SCMI client drivers already describe their bus match data with
->>> MODULE_DEVICE_TABLE(scmi, ...), but modpost does not know how to consume
->>> SCMI device tables. As a result, SCMI modules do not get generated module
->>> aliases from their id tables.
->>>
->>> Move struct scmi_device_id to mod_devicetable.h so it has a fixed layout
->>> visible to modpost, add the corresponding generated offsets and teach
->>> file2alias to emit scmi:<protocol>:<name> aliases.
->>>
->>> Use the same stable alias format for SCMI device uevents and sysfs
->>> modaliases. The previous string included the instance-specific device
->>> name, which is not useful for matching modules.
->>>
->>> Assisted-by: Codex:GPT-5.5
->>> Reviewed-by: Hans de Goede <johannes.goede@oss.qualcomm.com>
->>> Tested-by: Hans de Goede <johannes.goede@oss.qualcomm.com>
->>> Signed-off-by: Bjorn Andersson <bjorn.andersson@oss.qualcomm.com>
->>> Signed-off-by: Hans de Goede <johannes.goede@oss.qualcomm.com>
->>> ---
->>
+This reverts commit 544d85de4dc22c01badfd8cefa59829ce35c4858.
 
-[ ... ]
+It causes suspend and resume problems for numerous people, including
+maintainers and developers of ath wifi drivers. A fix was proposed[1],
+but did not get any traction, so go for a revert instead.
 
->>>    #include <linux/bitfield.h>
->>> +#include <linux/device-id/scmi.h>
->>>    #include <linux/device.h>
->>>    #include <linux/notifier.h>
->>>    #include <linux/types.h>
->>> @@ -951,11 +952,6 @@ struct scmi_device {
->>>      #define to_scmi_dev(d) container_of_const(d, struct scmi_device, dev)
->>>    -struct scmi_device_id {
->>> -    u8 protocol_id;
->>> -    const char *name;
->>> -};
->>> -
->>
->> What is the reason of converting the char * to a fixed array? That limits the name and may result in truncation and potentially name collision, no ?
-> 
-> Because of how modpost works to generate modaliases inside the .ko
-> any string buffers in device_id structs need to have a fixed length.
-> 
-> So the truncation / name collision issue pretty much applies to all
-> foo_device_id structs in the kernel. People should now to make sure
-> that any strings used will fit inside the fixed string. And I would
-> expect the compiler to warn for overly long strings.
-Ok, thanks for the clarification
+Cc: Chris Lew <christopher.lew@oss.qualcomm.com>
+Cc: Deepak Kumar Singh <deepak.singh@oss.qualcomm.com>
+Cc: Pranav Mahesh Phansalkar <pranav.phansalkar@oss.qualcomm.com>
+Reported-by: Daniel J Blueman <daniel@quora.org>
+Link: https://lore.kernel.org/all/20260909055846.16539-1-daniel@quora.org/ [1]
+Reported-by: Takashi Iwai <tiwai@suse.de>
+Link: https://lore.kernel.org/all/87a4plsg4w.wl-tiwai@suse.de/
+Reported-by: Vlastimil Babka <vbabka@suse.com>
+Link: https://lore.kernel.org/all/ab1491bb-cca5-4145-ac7d-31c966abf7b4@suse.com/
+Reported-by: Jeff Johnson <jeff.johnson@oss.qualcomm.com>
+Link: https://lore.kernel.org/all/6257c447-788d-4362-851e-0d552bcf7c56@oss.qualcomm.com/
+Signed-off-by: Thorsten Leemhuis <linux@leemhuis.info>
+---
+
+I'm not affected by this, but due to all those reporters mentioned above
+it seems it would be good to get this fixed for 7.3-rc4, as Linus' rule
+of thumb wrt to fixing regressions is "generally be 'within a week',
+preferably before the next rc". Which is why I currently plan to ask
+Linus to pull this directly. If this is a bad idea, just tell me.
+
+The patch from Daniel linked above[1] could have fixed the problem, but
+none of the developers of the culprit or the maintainers for this area
+commented on it within a week, despite some "please fix this soon" and
+"Tested-by" replies from various maintainers of other subsystems. So
+let's go for a revert instead, the original change can later easily be
+reapplied in improved form. The change reverted looks like something
+that maybe shouldn't have been merged after -rc1 anyway, but this is not
+my area of expertise, so I might be totally wrong there, as mentioned
+earlier.
+
+Ciao, Thorsten
+---
+ net/qrtr/af_qrtr.c | 66 ++--------------------------------------------
+ net/qrtr/ns.c      | 35 +++++++++++++++++++++++-
+ 2 files changed, 36 insertions(+), 65 deletions(-)
+
+diff --git net/qrtr/af_qrtr.c net/qrtr/af_qrtr.c
+index 78347c937af76b..a30fa56e6aa31c 100644
+--- net/qrtr/af_qrtr.c
++++ net/qrtr/af_qrtr.c
+@@ -9,7 +9,6 @@
+ #include <linux/termios.h>	/* For TIOCINQ/OUTQ */
+ #include <linux/spinlock.h>
+ #include <linux/wait.h>
+-#include <linux/workqueue.h>
+ 
+ #include <net/sock.h>
+ 
+@@ -121,10 +120,8 @@ static DEFINE_XARRAY_ALLOC(qrtr_ports);
+  * @nid: node id
+  * @qrtr_tx_flow: xarray of qrtr_tx_flow, keyed by node << 32 | port
+  * @qrtr_tx_lock: lock for qrtr_tx_flow inserts
+- * @hello_sent: hello packet send successful
+  * @rx_queue: receive queue
+  * @item: list item for broadcast list
+- * @say_hello: delayed work for sending hello packet
+  */
+ struct qrtr_node {
+ 	struct mutex ep_lock;
+@@ -135,11 +132,8 @@ struct qrtr_node {
+ 	struct xarray qrtr_tx_flow;
+ 	struct mutex qrtr_tx_lock; /* for qrtr_tx_flow */
+ 
+-	bool hello_sent;
+-
+ 	struct sk_buff_head rx_queue;
+ 	struct list_head item;
+-	struct delayed_work say_hello;
+ };
+ 
+ /**
+@@ -193,8 +187,6 @@ static void __qrtr_node_release(struct kref *kref)
+ 	list_del(&node->item);
+ 	mutex_unlock(&qrtr_node_lock);
+ 
+-	cancel_delayed_work_sync(&node->say_hello);
+-
+ 	skb_queue_purge(&node->rx_queue);
+ 
+ 	/* Free tx flow counters */
+@@ -349,14 +341,6 @@ static int qrtr_node_enqueue(struct qrtr_node *node, struct sk_buff *skb,
+ 	size_t len = skb->len;
+ 	int rc, confirm_rx;
+ 
+-	mutex_lock(&node->ep_lock);
+-	if (!node->hello_sent && type != QRTR_TYPE_HELLO) {
+-		mutex_unlock(&node->ep_lock);
+-		kfree_skb(skb);
+-		return -EAGAIN;
+-	}
+-	mutex_unlock(&node->ep_lock);
+-
+ 	confirm_rx = qrtr_tx_wait(node, to->sq_node, to->sq_port, type);
+ 	if (confirm_rx < 0) {
+ 		kfree_skb(skb);
+@@ -369,7 +353,7 @@ static int qrtr_node_enqueue(struct qrtr_node *node, struct sk_buff *skb,
+ 	hdr->src_node_id = cpu_to_le32(from->sq_node);
+ 	hdr->src_port_id = cpu_to_le32(from->sq_port);
+ 	if (to->sq_port == QRTR_PORT_CTRL) {
+-		hdr->dst_node_id = cpu_to_le32(READ_ONCE(node->nid));
++		hdr->dst_node_id = cpu_to_le32(node->nid);
+ 		hdr->dst_port_id = cpu_to_le32(QRTR_PORT_CTRL);
+ 	} else {
+ 		hdr->dst_node_id = cpu_to_le32(to->sq_node);
+@@ -388,8 +372,6 @@ static int qrtr_node_enqueue(struct qrtr_node *node, struct sk_buff *skb,
+ 			rc = node->ep->xmit(node->ep, skb);
+ 		else
+ 			kfree_skb(skb);
+-		if (!rc && type == QRTR_TYPE_HELLO)
+-			node->hello_sent = true;
+ 		mutex_unlock(&node->ep_lock);
+ 	}
+ 	/* Need to ensure that a subsequent message carries the otherwise lost
+@@ -397,9 +379,6 @@ static int qrtr_node_enqueue(struct qrtr_node *node, struct sk_buff *skb,
+ 	if (rc && confirm_rx)
+ 		qrtr_tx_flow_failed(node, to->sq_node, to->sq_port);
+ 
+-	if (rc == -EAGAIN && type == QRTR_TYPE_HELLO)
+-		schedule_delayed_work(&node->say_hello, msecs_to_jiffies(100));
+-
+ 	return rc;
+ }
+ 
+@@ -437,7 +416,7 @@ static void qrtr_node_assign(struct qrtr_node *node, unsigned int nid)
+ 	spin_lock_irqsave(&qrtr_nodes_lock, flags);
+ 	radix_tree_insert(&qrtr_nodes, nid, node);
+ 	if (node->nid == QRTR_EP_NID_AUTO)
+-		WRITE_ONCE(node->nid, nid);
++		node->nid = nid;
+ 	spin_unlock_irqrestore(&qrtr_nodes_lock, flags);
+ }
+ 
+@@ -591,38 +570,6 @@ static struct sk_buff *qrtr_alloc_ctrl_packet(struct qrtr_ctrl_pkt **pkt,
+ 	return skb;
+ }
+ 
+-static void qrtr_hello_work(struct work_struct *work)
+-{
+-	struct sockaddr_qrtr from = {AF_QIPCRTR, 0, QRTR_PORT_CTRL};
+-	struct sockaddr_qrtr to = {AF_QIPCRTR, 0, QRTR_PORT_CTRL};
+-	struct qrtr_ctrl_pkt *pkt;
+-	struct qrtr_node *node;
+-	struct qrtr_sock *ctrl;
+-	struct sk_buff *skb;
+-
+-	node = container_of(to_delayed_work(work), struct qrtr_node, say_hello);
+-
+-	/* NS must be bound before we can send; retry with backoff if not ready */
+-	ctrl = qrtr_port_lookup(QRTR_PORT_CTRL);
+-	if (!ctrl) {
+-		schedule_delayed_work(&node->say_hello, msecs_to_jiffies(100));
+-		return;
+-	}
+-
+-	skb = qrtr_alloc_ctrl_packet(&pkt, GFP_KERNEL);
+-	if (!skb) {
+-		qrtr_port_put(ctrl);
+-		schedule_delayed_work(&node->say_hello, msecs_to_jiffies(100));
+-		return;
+-	}
+-
+-	pkt->cmd = cpu_to_le32(QRTR_TYPE_HELLO);
+-	from.sq_node = qrtr_local_nid;
+-	to.sq_node = node->nid;
+-	qrtr_node_enqueue(node, skb, QRTR_TYPE_HELLO, &from, &to);
+-	qrtr_port_put(ctrl);
+-}
+-
+ /**
+  * qrtr_endpoint_register() - register a new endpoint
+  * @ep: endpoint to register
+@@ -648,9 +595,6 @@ int qrtr_endpoint_register(struct qrtr_endpoint *ep, unsigned int nid)
+ 	node->nid = QRTR_EP_NID_AUTO;
+ 	node->ep = ep;
+ 
+-	node->hello_sent = false;
+-	INIT_DELAYED_WORK(&node->say_hello, qrtr_hello_work);
+-
+ 	xa_init(&node->qrtr_tx_flow);
+ 	mutex_init(&node->qrtr_tx_lock);
+ 
+@@ -661,9 +605,6 @@ int qrtr_endpoint_register(struct qrtr_endpoint *ep, unsigned int nid)
+ 	mutex_unlock(&qrtr_node_lock);
+ 	ep->node = node;
+ 
+-	/* Initiate HELLO handshake from the core layer */
+-	schedule_delayed_work(&node->say_hello, 0);
+-
+ 	return 0;
+ }
+ EXPORT_SYMBOL_GPL(qrtr_endpoint_register);
+@@ -938,9 +879,6 @@ static int qrtr_bcast_enqueue(struct qrtr_node *node, struct sk_buff *skb,
+ 
+ 	mutex_lock(&qrtr_node_lock);
+ 	list_for_each_entry(node, &qrtr_all_nodes, item) {
+-		/* Skip nodes with no assigned node ID yet. */
+-		if (READ_ONCE(node->nid) == QRTR_EP_NID_AUTO)
+-			continue;
+ 		skbn = pskb_copy(skb, GFP_KERNEL);
+ 		if (!skbn)
+ 			break;
+diff --git net/qrtr/ns.c net/qrtr/ns.c
+index bcb090ee79d494..c5e7e01db24984 100644
+--- net/qrtr/ns.c
++++ net/qrtr/ns.c
+@@ -212,7 +212,6 @@ static void lookup_notify(struct sockaddr_qrtr *to, struct qrtr_server *srv,
+ 		pr_err("failed to send lookup notification\n");
+ }
+ 
+-/* Announce the list of servers registered on the local node */
+ static int announce_servers(struct sockaddr_qrtr *sq)
+ {
+ 	struct qrtr_server *srv;
+@@ -327,8 +326,38 @@ static int server_del(struct qrtr_node *node, unsigned int port, bool bcast)
+ 	return 0;
+ }
+ 
++static int say_hello(struct sockaddr_qrtr *dest)
++{
++	struct qrtr_ctrl_pkt pkt;
++	struct msghdr msg = { };
++	struct kvec iv;
++	int ret;
++
++	iv.iov_base = &pkt;
++	iv.iov_len = sizeof(pkt);
++
++	memset(&pkt, 0, sizeof(pkt));
++	pkt.cmd = cpu_to_le32(QRTR_TYPE_HELLO);
++
++	msg.msg_name = (struct sockaddr *)dest;
++	msg.msg_namelen = sizeof(*dest);
++
++	ret = kernel_sendmsg(qrtr_ns.sock, &msg, &iv, 1, sizeof(pkt));
++	if (ret < 0)
++		pr_err("failed to send hello msg\n");
++
++	return ret;
++}
++
++/* Announce the list of servers registered on the local node */
+ static int ctrl_cmd_hello(struct sockaddr_qrtr *sq)
+ {
++	int ret;
++
++	ret = say_hello(sq);
++	if (ret < 0)
++		return ret;
++
+ 	return announce_servers(sq);
+ }
+ 
+@@ -745,6 +774,10 @@ int qrtr_ns_init(void)
+ 	qrtr_ns.bcast_sq.sq_node = QRTR_NODE_BCAST;
+ 	qrtr_ns.bcast_sq.sq_port = QRTR_PORT_CTRL;
+ 
++	ret = say_hello(&qrtr_ns.bcast_sq);
++	if (ret < 0)
++		goto err_wq;
++
+ 	/* As the qrtr ns socket owner and creator is the same module, we have
+ 	 * to decrease the qrtr module reference count to guarantee that it
+ 	 * remains zero after the ns socket is created, otherwise, executing
+
+base-commit: 5dd1818b15d98d4a20806cd00b1b40320b06004f
+-- 
+2.55.0
+
