@@ -1,65 +1,164 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4C43C38E5C5;
-	Fri, 18 Sep 2026 06:45:02 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id ACD6D374E73;
+	Fri, 18 Sep 2026 06:47:40 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789713904; cv=none; b=D9zgAgoGkTrKSRgEonMlGUFYDzUP6i4DjcOh264uilvWOxIXqfKUq6OBnne0pzgIZcqwJrpuRCxahd98AfsLSGkOeqt+SzkfCMf4RlsGKVpxp7YgDrNcdZ4f5Tey7PV6SkT5j/9m1AabTqpd05fOWjd/x4Z91RnUqmmsTRi0kNk=
+	t=1789714061; cv=none; b=iSeUS80/F0igo/AaWlFuVK2CY+U7EbnpQhM62l0n6tAefcwqFpH6iF0IpC5b3ygGN09dIGTenv1wPXTqa4PA15ki8j+4fT0uM/a4hLwuBN4JxLBWXN5pESA9vtK2Jw2G3U4JbagcyMUaS6+JVevFQ5uIL04Ow7cAr3G8WdLg/zo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789713904; c=relaxed/simple;
-	bh=DzNuSGeZ/DolGL5u8O2gqaTmdQDHaPMhZDPatt02kO4=;
-	h=From:To:In-Reply-To:References:Subject:Message-Id:Date:
-	 MIME-Version:Content-Type; b=AfL9Tw1YGuQkRiQd+JUqSdZ8K+gNSYlcd/zxAtcJalQpLsCxm55gHeSD+Qk9kkc/4O5Z7Cgyib0LNDpxrBPgrkRtCfaRMt2Yh3p6CGRRuQCuUvUkU7jBab9YTH0TMjlb8hb8HSjRgAWXJ4c7/BL+nzqQk2bsD5XqJeoosQz0NtY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=QOq+HnsZ; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1789714061; c=relaxed/simple;
+	bh=g7ivMlqpgV90jFk2m8nUKBEA2ydpFYXnDGsguWHttL8=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=BimwKGwgkvgU5/oot/3EDNWBrLRWZtYoK6pLYtNf3iDLDyBrmzsoRv7NZsSVEHQMUrWK/k+ugqf2pOQIr/B+6/HPZ+aTNPl/Vl1RFyfwgNqzs+DrCi5tJo21SaWGCTSwHkiaG1bi/VnKeIJCMYei5vepkAoFcwoKLNBckbWpmoo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ERc0YHty; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="QOq+HnsZ"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id DE4361F000FF;
-	Fri, 18 Sep 2026 06:45:01 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="ERc0YHty"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 646091F000FF;
+	Fri, 18 Sep 2026 06:47:34 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1789713902;
-	bh=BupREwgr8lIWPTO67ce1QyKMJSvgG137+DPZFjLq88U=;
-	h=From:To:In-Reply-To:References:Subject:Date;
-	b=QOq+HnsZgFvQ0FRxFgP9jioiA8WkxyQe2IRZZxNiteQZCF+wE1vpQfrSuaijLojvL
-	 WXPS6w/8eb8jUOIq/FFBbxnn/P6I5No/icMjocrphwJ0R7KraeC6IQi6+vWWivZXII
-	 773egRdRESr/qsrQGk0/iufHrngS1FB7LAD6IBtEVQ3wOXGfkD7kWfUucJBniOO+zF
-	 vwtFZuOZ0h4jcBHa6fZGheW6HgH5L1ngWQromEaQPBB9KghhKxOJpFiVtHk/zWZa8e
-	 NEww3iNkswbvrcf7lGd2H+9Pj6fnvadxzN5RKgkY8lojv09OrBkqzmE8QkPZZsJR09
-	 ExYoKoYoTgMYQ==
-From: Srinivas Kandagatla <srini@kernel.org>
-To: linux-arm-msm@vger.kernel.org, linux-sound@vger.kernel.org, 
- linux-kernel@vger.kernel.org, Pan Chuang <panchuang@vivo.com>
-In-Reply-To: <20260716132227.589778-1-panchuang@vivo.com>
-References: <20260716132227.589778-1-panchuang@vivo.com>
-Subject: Re: [PATCH] slimbus: qcom-ngd-ctrl: Remove redundant
- dev_err_probe()
-Message-Id: <178971390167.472168.15708697692953474439.b4-ty@kernel.org>
-Date: Fri, 18 Sep 2026 07:45:01 +0100
+	s=k20260515; t=1789714060;
+	bh=+BGxWg2fsybWxSlrAfMoRyi3OL6sdFJawHpb1+w2R8c=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To;
+	b=ERc0YHtyC9RU8cORTswTDlpfbvAh8G62/IZ7olNQonmoUsc1v8IRiMpD+Bj06dyWq
+	 hHrZRV+LAGgkZ+GZQGKeIsdz7lczX+89k1Y1XnnCfSVNhbAuEXtkZstU7y6gxXDvLi
+	 m4si3tauBnLV85TRk0ZwCN0FRFUkmZXK1m+4nVAW7wBzrTL64RXgaP33t1SVZhAvYK
+	 hoUh45Z2XrvTr6wOAzQqjjoPcO/ojjBHGym6F3gpcUWR5wCF1MCFXKBT8y29IwZ0WK
+	 ZBOIYQb4Adsi3uV77T3EzS+mPjHENHK7URoz7cSK7U0VKmrWUWXTo4p9QnAxB3EaLR
+	 dqT6sX8UvA9sg==
+Message-ID: <f6cb2a51-b385-4203-bd33-4b789cac5616@kernel.org>
+Date: Fri, 18 Sep 2026 08:47:32 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/6] dt-bindings: media: Add bindings for qcom,nord-camss
+To: Wenmeng Liu <wenmeng.liu@oss.qualcomm.com>
+Cc: Bryan O'Donoghue <bod@kernel.org>,
+ Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
+ Loic Poulain <loic.poulain@oss.qualcomm.com>,
+ Mauro Carvalho Chehab <mchehab@kernel.org>, Rob Herring <robh@kernel.org>,
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
+ <conor+dt@kernel.org>, Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
+ linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
+References: <20260915-nord-v1-0-20db41a7f1ff@oss.qualcomm.com>
+ <20260915-nord-v1-1-20db41a7f1ff@oss.qualcomm.com>
+ <20260917-active-strong-emu-bf8fbd@quoll>
+ <d89a7376-ffab-405a-a3b6-d3633cddd063@oss.qualcomm.com>
+From: Krzysztof Kozlowski <krzk@kernel.org>
+Content-Language: en-US
+Autocrypt: addr=krzk@kernel.org; keydata=
+ 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
+In-Reply-To: <d89a7376-ffab-405a-a3b6-d3633cddd063@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.3
 
-
-On Thu, 16 Jul 2026 21:22:27 +0800, Pan Chuang wrote:
-> Since commit 55b48e23f5c4 ("genirq/devres: Add error handling in
-> devm_request_*_irq()"), devm_request_irq() automatically logs
-> detailed error messages on failure. Remove the now-redundant
-> driver-specific dev_err_probe() calls.
+On 17/09/2026 14:37, Wenmeng Liu wrote:
+> Hi Krzysztof,
 > 
+> On 9/17/2026 6:13 PM, Krzysztof Kozlowski wrote:
+>> On Tue, Sep 15, 2026 at 05:34:11PM +0800, Wenmeng Liu wrote:
+>>> Add bindings for the camera subsystem (CAMSS) on the Qualcomm Nord
+>>> platform.
+>>>
+>>> The Nord platform provides:
+>>> - 3 x TPG (Test Pattern Generator)
+>>> - 3 x CSID (CSI Decoder)
+>>> - 10 x CSID Lite
+>>> - 3 x VFE (Video Front End)
+>>> - 10 x VFE Lite
+>>>
+>>> Signed-off-by: Wenmeng Liu <wenmeng.liu@oss.qualcomm.com>
+>>> ---
+>>>   .../devicetree/bindings/media/qcom,nord-camss.yaml | 393 +++++++++++++++++++++
+>>>   1 file changed, 393 insertions(+)
+>>
+>> A nit, subject: drop second/last, redundant "bindings for". The
+>> "dt-bindings" prefix is already stating that these are bindings.
+>> See also:
+>> https://elixir.bootlin.com/linux/v7.1-rc7/source/Documentation/devicetree/bindings/submitting-patches.rst#L23
+>>
+> ACK
 > 
+>> ...
+>>
+>>> +        description:
+>>> +          Input port for receiving CSI data.
+>>> +
+>>> +        properties:
+>>> +          endpoint:
+>>> +            $ref: video-interfaces.yaml#
+>>> +            unevaluatedProperties: false
+>>> +
+>>> +            properties:
+>>> +              data-lanes:
+>>> +                minItems: 1
+>>> +                maxItems: 4
+>>> +
+>>> +              bus-type:
+>>> +                enum:
+>>> +                  - 1 # MEDIA_BUS_TYPE_CSI2_CPHY
+>>> +                  - 4 # MEDIA_BUS_TYPE_CSI2_DPHY
+>>> +
+>>> +            required:
+>>> +              - data-lanes
+>>> +
+>>
+>> Missing supplies, altough maybe this is related to some other ongoing
+>> work, so would be useful to see explanation in commit msg.
+> 
+> At the moment, the Nord platform only supports TPG. Perhaps I should 
+> remove this part of the change for now and reintroduce it later when 
+> CSIPHY support is available, once the EVK board is ready.
 
-Applied, thanks!
-
-[1/1] slimbus: qcom-ngd-ctrl: Remove redundant dev_err_probe()
-      commit: 37052fa3297966e28e6f0903c6ba448b2afaf8f9
+Hm? So you added hardware for TPG? I do not see how such hardware is
+useful at all, thus I don't think we want the bindings for it. Bring
+real hardware, since the bindings should be complete.
 
 Best regards,
--- 
-Srinivas Kandagatla <srini@kernel.org>
-
+Krzysztof
