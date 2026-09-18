@@ -1,128 +1,94 @@
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.8])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 974C47083C;
-	Sat, 19 Sep 2026 07:35:15 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.8
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 10CA233B6F4;
+	Sat, 19 Sep 2026 09:04:08 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789803317; cv=none; b=kYypFOsk62zR85BDFmgeBqg/wqg0YrEpWlzQ9kq1mPSw8h3eZryew0BpG0iST/ccMYQokCxTX3Q29BBR9uRaHg7LGp6atow0sgFfUuTlRmDck4GBb4uHD6olj8eQZhe4tYYyYfDKVWJV48obHxnIQbTsbZ0c+NsN4813EjppINY=
+	t=1789808650; cv=none; b=S7bh2PL18Osn2u7HTybchRCXLPTLITH2w5xzQduFy0dghBwC/WnkwdzQ/1EO1X6UIa+M47DIv+lXSAHbrVIZpbadHMhbb3KMBMrPFbrv7kVZmvcQmDQrJEOGx0njLpCdG7MB8IU6aiXVzyDPRoTlEp31QjWFPDdy6OIyRGleqcA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789803317; c=relaxed/simple;
-	bh=XxiSV9KB15uxRCUse5WjXjM7dc35/5V4z8ZQW4Zp7c8=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=c6421mmvr8BCgKhpSpWmH7hmTpmvm4ZXmHe/ibyydKQklV5fJ0aqdMOXSgHMltMgUrsOBgtH+uTfapkKV+gCiM4DqPfRSwhw9hFIjd4KCD1cq92s1TTuKxqopsXGuPNqhdlfaru8B+x4KOxetsk1lQBPphtjFN0ipqIydM4PrZ8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=BgNfBydL; arc=none smtp.client-ip=192.198.163.8
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
+	s=arc-20240116; t=1789808650; c=relaxed/simple;
+	bh=07mMyxMsaP6e9rVOkNiufgr3Dwg5HIHOcIaZCo5Ccuo=;
+	h=From:To:Cc:In-Reply-To:References:Subject:Message-Id:Date:
+	 MIME-Version:Content-Type; b=PfXWDTEdUmNZyg235uK6P5ffW6G2yXX3TVNE0nZ16o5OlJvownmlh11CyDE6fE4To9pW2Kh6qOtQaTRfB4OmyYNG0ChOBXDcr3FJhvMr+v8GVJSFpJsNvurm2CuFOFU5cXJgnO+JE0iIi2VHfJtEPrXTBky2nfb/3AfCP6FsaUo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=gtY9+36Q; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="BgNfBydL"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1789803316; x=1821339316;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=XxiSV9KB15uxRCUse5WjXjM7dc35/5V4z8ZQW4Zp7c8=;
-  b=BgNfBydLE4BdrbsegmX/JR74P1UEk5Qx1dO96Sx+SDO2ug+pNB8Zd0Dq
-   A/BJoSDHLg0tNLkiYfF63Nceu1+4QNZ/vyeOYHLpCi7JJjwJfEvPdojt2
-   /azMdLutGlQkxSk7ErX6j0K8NlFWXGcq91HhkmcbM5GrMxcwDqrPDqFZT
-   KOBBOv5jgLGER3al2I40ljHTXLDOM8l2rsu0AlhoFshh6t7ZSUMqz0T8l
-   MaoYJK4JgRZ5friOwLCyRThqx3l1c0/+aeTJ67z2ie6PRNXJLlZFXkz9p
-   dbzvw3fU743hUKVllS4SwDY3SxiUAf/qe1WWCTmONujUcLNw3vXITSL3P
-   w==;
-X-CSE-ConnectionGUID: QBgzJU9JRSyvl2hdIAa45g==
-X-CSE-MsgGUID: mx/Gm1ZVSTeSuz/xKGrXzQ==
-X-IronPort-AV: E=McAfee;i="6800,10657,11909"; a="107842584"
-X-IronPort-AV: E=Sophos;i="6.27,109,1787036400"; 
-   d="scan'208";a="107842584"
-Received: from fmviesa002.fm.intel.com ([10.60.135.142])
-  by fmvoesa102.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 19 Sep 2026 00:35:14 -0700
-X-CSE-ConnectionGUID: ZLvkaXWbQ1mcTnyE200BSw==
-X-CSE-MsgGUID: O9PN042rRV6YzZkAkRxv0g==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.27,109,1787036400"; 
-   d="scan'208";a="298187384"
-Received: from lkp-server01.sh.intel.com (HELO 462990a40a85) ([10.239.97.150])
-  by fmviesa002.fm.intel.com with ESMTP; 19 Sep 2026 00:35:11 -0700
-Received: from kbuild by 462990a40a85 with local (Exim 4.98.2)
-	(envelope-from <lkp@intel.com>)
-	id 1x7pbI-00000000AjZ-3904;
-	Sat, 19 Sep 2026 07:35:08 +0000
-Date: Sat, 19 Sep 2026 15:34:37 +0800
-From: kernel test robot <lkp@intel.com>
-To: Guangshuo Li <lgs201920130244@gmail.com>,
-	Bjorn Andersson <andersson@kernel.org>,
-	Mathieu Poirier <mathieu.poirier@linaro.org>,
-	Sivaprakash Murugesan <sivaprak@codeaurora.org>,
-	Gokul Sriram Palanisamy <quic_gokulsri@quicinc.com>,
-	Govind Singh <govinds@codeaurora.org>,
-	linux-arm-msm@vger.kernel.org, linux-remoteproc@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Cc: llvm@lists.linux.dev, oe-kbuild-all@lists.linux.dev,
-	Guangshuo Li <lgs201920130244@gmail.com>, stable@vger.kernel.org
-Subject: Re: [PATCH] remoteproc: qcom: q6v5-wcss: remove all subdevices on
- unbind
-Message-ID: <202609191513.bywryVFw-lkp@intel.com>
-References: <20260918041321.3532355-1-lgs201920130244@gmail.com>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="gtY9+36Q"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 10EA21F000FF;
+	Sat, 19 Sep 2026 09:04:06 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1789808648;
+	bh=BBnavKyXduBDgDup2hJbOMSKrWBCyILhm4SU8REE7oQ=;
+	h=From:To:Cc:In-Reply-To:References:Subject:Date;
+	b=gtY9+36QQDLOAjld+dnCg2da7Sh9sWyFs4r67/H0RiQLIeaozrHAoxUgjK4bNHK/b
+	 WHUY279yatJ16otcvxSYTH3X9vF7qie7F1Jz4ooSeCRggZjL620zpTWftDGIJ9vLY0
+	 Z4a9mQfh9XjTtzwOG8xjbYjamL6yHzuS1wq/fwE1+qZfWpbYm7ZrcSCm/XBNN4I0gx
+	 7iGzdI8Cgee7Yx9zVGoMiok/dqno+gP/API9OwzaBctQAlJj//BYgEGpA/52W7iT6D
+	 IusCUOcKAhks32oGIV7CwmgEkyo/hj2ICPUdx3EV707q8UzIa2RCpiGbma05VZKETk
+	 FAKcq0x9hhtYw==
+From: Mark Brown <broonie@kernel.org>
+To: Gabor Juhos <j4g8y7@gmail.com>
+Cc: linux-spi@vger.kernel.org, linux-kernel@vger.kernel.org, 
+ Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>, 
+ Sricharan Ramabadhran <quic_srichara@quicinc.com>, 
+ Md Sadre Alam <md.alam@oss.qualcomm.com>, linux-spi@vger.kernel.org, 
+ linux-mtd@lists.infradead.org, linux-arm-msm@vger.kernel.org, 
+ linux-kernel@vger.kernel.org
+In-Reply-To: <20260918-qpic-snand-config_page_read-v1-1-a686c4657857@gmail.com>
+References: <20260918-qpic-snand-config_page_read-v1-1-a686c4657857@gmail.com>
+Subject: Re: [PATCH] spi: spi-qpic-snand: add qcom_spi_config_page_read()
+ helper
+Message-Id: <178976719898.1863384.8556438564232843245.b4-ty@b4>
+Date: Fri, 18 Sep 2026 23:33:18 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260918041321.3532355-1-lgs201920130244@gmail.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.17-dev
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1131; i=broonie@kernel.org;
+ h=from:subject:message-id; bh=07mMyxMsaP6e9rVOkNiufgr3Dwg5HIHOcIaZCo5Ccuo=;
+ b=owEBbQGS/pANAwAKASTWi3JdVIfQAcsmYgBqrlAECYDY8bpS7oTqenf0plXibSOVh5r1YS6tJ
+ sdPOdx2ek6JATMEAAEKAB0WIQSt5miqZ1cYtZ/in+ok1otyXVSH0AUCaq5QBAAKCRAk1otyXVSH
+ 0MXOCACGtIGO3qeCu0E8ocf6s0p8J5odLs/IVePHyKBnpef5RXVxGqvDE/HFGV92BLthlnT36JZ
+ tQGvsD3bzMl+T81bEinbr8pU3e4PxStdW+odHzGfM0C0u3kh41OTQ9t7EPHp7/gnurNN1SlaoIi
+ 0kGNTCBAC1Q9D+memFbzOq60THq72YkABcg4z15Zin26WGc/BiPaN3QnukH9jQtEJduN4dsOM+A
+ 5YEMNCuYkONxc3JjXt25ZOvrS/FKzBbMFgpMrRWB0sBIzu3lEqie3JrMYijDMRUHegzduPihmyX
+ baJ/XEZsTRbCNzE+5XUBGEsdY9t4lilkVkizdasm3qrn409u
+X-Developer-Key: i=broonie@kernel.org; a=openpgp;
+ fpr=3F2568AAC26998F9E813A1C5C3F436CA30F5D8EB
 
-Hi Guangshuo,
+On Fri, 18 Sep 2026 21:53:08 +0200, Gabor Juhos wrote:
+> spi: spi-qpic-snand: add qcom_spi_config_page_read() helper
 
-kernel test robot noticed the following build errors:
+Applied to
 
-[auto build test ERROR on remoteproc/rproc-next]
-[also build test ERROR on linus/master v7.3-rc3 next-20260918]
-[If your patch is applied to the wrong git tree, kindly drop us a note.
-And when submitting patch, we suggest to use '--base' as documented in
-https://git-scm.com/docs/git-format-patch#_base_tree_information]
+   https://git.kernel.org/pub/scm/linux/kernel/git/broonie/spi.git for-7.4
 
-url:    https://github.com/intel-lab-lkp/linux/commits/Guangshuo-Li/remoteproc-qcom-q6v5-wcss-remove-all-subdevices-on-unbind/20260918-121321
-base:   https://git.kernel.org/pub/scm/linux/kernel/git/remoteproc/linux.git rproc-next
-patch link:    https://lore.kernel.org/r/20260918041321.3532355-1-lgs201920130244%40gmail.com
-patch subject: [PATCH] remoteproc: qcom: q6v5-wcss: remove all subdevices on unbind
-config: arm64-allmodconfig (https://download.01.org/0day-ci/archive/20260919/202609191513.bywryVFw-lkp@intel.com/config)
-compiler: clang version 24.0.0git (https://github.com/llvm/llvm-project 7252edd9aa82ef1c570ff6694ef7f4763a8a5d2f)
-rustc: rustc 1.96.0 (ac68faa20 2026-05-25)
-reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20260919/202609191513.bywryVFw-lkp@intel.com/reproduce)
+Thanks!
 
-If you fix the issue in a separate patch/commit (i.e. not just a new version of
-the same patch/commit), kindly add following tags
-| Reported-by: kernel test robot <lkp@intel.com>
-| Closes: https://lore.kernel.org/oe-kbuild-all/202609191513.bywryVFw-lkp@intel.com/
+[1/1] spi: spi-qpic-snand: add qcom_spi_config_page_read() helper
+      https://git.kernel.org/broonie/spi/c/001cdc434aa8
 
-All errors (new ones prefixed by >>):
+All being well this means that it will be integrated into the linux-next
+tree (usually sometime in the next 24 hours) and sent to Linus during
+the next merge window (or sooner if it is a bug fix), however if
+problems are discovered then the patch may be dropped or reverted.
 
->> drivers/remoteproc/qcom_q6v5_wcss.c:1051:1: error: invalid argument type 'void' to unary expression
-    1051 | +       qcom_remove_ssr_subdev(rproc, &wcss->ssr_subdev);
-         | ^       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-   1 error generated.
+You may get further e-mails resulting from automated or manual testing
+and review of the tree, please engage with people reporting problems and
+send followup patches addressing any issues that are reported if needed.
 
+If any updates are required or you are submitting further changes they
+should be sent as incremental updates against current git, existing
+patches will not be replaced.
 
-vim +/void +1051 drivers/remoteproc/qcom_q6v5_wcss.c
+Please add any relevant lists and maintainers to the CCs when replying
+to this mail.
 
-  1039	
-  1040	static void q6v5_wcss_remove(struct platform_device *pdev)
-  1041	{
-  1042		struct rproc *rproc = platform_get_drvdata(pdev);
-  1043		struct q6v5_wcss *wcss = rproc->priv;
-  1044	
-  1045		rproc_del(rproc);
-  1046	
-  1047		qcom_q6v5_deinit(&wcss->q6v5);
-  1048		qcom_remove_glink_subdev(rproc, &wcss->glink_subdev);
-  1049		qcom_remove_pdm_subdev(rproc, &wcss->pdm_subdev);
-  1050		qcom_remove_sysmon_subdev(wcss->sysmon);
-> 1051	+	qcom_remove_ssr_subdev(rproc, &wcss->ssr_subdev);
-  1052	}
-  1053	
+Thanks,
+Mark
 
---
-0-DAY CI Kernel Test Service
-https://github.com/intel/lkp-tests/wiki
