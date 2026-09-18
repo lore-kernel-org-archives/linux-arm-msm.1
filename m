@@ -1,136 +1,98 @@
-Received: from meesny.iki.fi (meesny.iki.fi [195.140.195.201])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 97CA9518153;
-	Fri, 18 Sep 2026 16:39:42 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=195.140.195.201
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789749584; cv=pass; b=WGHibH4pYGw/msoisjQ4rCLfB82W/jx/Z1CqOcrblpYxeOwVSEwNRfO2DpIkPqmE8iRU+iMTX6Sjs8n5k9DhzS8JPuW+wwbZrv1/hpKmoanuLyvB0Hb00T2qXoRekutuSl9odKCODSCM1GB4qOjwyzc0Ym+cA5YHiJ38gBCFf1s=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789749584; c=relaxed/simple;
-	bh=OaTupvPSXjV4tcDSKwkLoCMZSghlDqaDma0/VaD1crE=;
-	h=MIME-Version:Date:From:To:Cc:Message-Id:In-Reply-To:References:
-	 Subject:Content-Type; b=TuY6sZOS9PVHVk0ju8nXWqBniaY/5ITlRdfuJDXOIg5H4Snv9wUoYi3AUB7kbzicGy6BIyn3OE5OQVZ4BLTB45nAyAMUPCOKnYHoBzfiXFvtwiQCGmSbxd1Gk32zpQcfL+0UB0SciDgr0T3sWVF5mZeK+NYC6F1bqTVvKQmTHio=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=iki.fi; spf=pass smtp.mailfrom=iki.fi; dkim=pass (1024-bit key) header.d=iki.fi header.i=@iki.fi header.b=bf+2ACRu; arc=pass smtp.client-ip=195.140.195.201
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=iki.fi
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=iki.fi
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8984F5187EB;
+	Fri, 18 Sep 2026 16:41:23 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1789749686; cv=none; b=ZgNBpvkwpfdmWYwQMslokecON2N9rNi8R7IYlae8euEfNO+0AJKtCntcEVL62QbotslH75qJKtuPdFvHZxLokaQ4ZZ52eNvL4rAKVyhoOZs3J6sJVM763gw0iar2VYSRW8YadR4aAVVYGV2a82AU3hugAUjwHpSwD5gMSf54T9c=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1789749686; c=relaxed/simple;
+	bh=4RloXI9MwBLbkIsa5xfHbhUxUKoOhgvJ9Woqo5A5AOU=;
+	h=Date:Content-Type:MIME-Version:From:Cc:To:In-Reply-To:References:
+	 Message-Id:Subject; b=tZkKtpct2ZDVo8gPQPQA/I4IZ/tK/QudT1FZDXprFU9wnC/2zl7oR5TUqEgsv3DWagHOCun0wWeozEVYYslPssnkYpbDHK7l1K4L2QjGleyS55C8NHhqJgj28U0GMlLuCd/bYL3KNCChiQlnDVu1YoaXzXS/R5o2OYq6FFXp0W8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=gYjqYTVE; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=iki.fi header.i=@iki.fi header.b="bf+2ACRu"
-Received: from fauth-c2-smtp.messagingengine.com (fauth-c2-smtp.messagingengine.com [204.75.18.201])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange x25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	(Authenticated sender: jmtilli)
-	by meesny.iki.fi (Postfix) with ESMTPSA id 4hmdd32HkDzyXg;
-	Fri, 18 Sep 2026 19:39:34 +0300 (EEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iki.fi; s=meesny;
-	t=1789749576;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=2bX1EKHp0Quhk+gq7adxCGKb0B+LghpMlLP0cmw2Iew=;
-	b=bf+2ACRuYJ2fLjm+2msGGbGyBWpuwPdl0J/6olAdVN80OhsIf6svGhpg41NpXebGPn4PJl
-	jMQQmAUOPgVSGrn32R+Nvpny5LimMu1kkGXdx52aYa2E+5Zu8Pb9ayvucz3m9grNN33pOw
-	c8Wr51FY4mxQShkXh+DwlwZUYHplXPw=
-ARC-Seal: i=1; a=rsa-sha256; d=iki.fi; s=meesny; cv=none; t=1789749576;
-	b=Y8eFqNiyGnTJ0qV6Sw3HLfPl8RF8bovGJvcPUpfJFU6J4mkfdjbVitbbTctY+yJ8IFKeid
-	Uaiu4HhhdcOsm30FtBgecuB3i7AC2YGOq5bTkVDnZrG55gy/2WoHQxymWyVTqP427j8iyL
-	SyBcBUUj7vimEuSDmPMvAlfebmq/ISs=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=iki.fi;
-	s=meesny; t=1789749576;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=2bX1EKHp0Quhk+gq7adxCGKb0B+LghpMlLP0cmw2Iew=;
-	b=jjaHAHKeb1upRQJbyxAknddVz6V1xYDLiyolN/iJL4gVd7wKfEKb5u1SB8zKb3fN1Cvdp8
-	NyA0HT4eNwNfIZ27kggQij4T+gNY16mVFkGbxNVnJvMh3mJkEtYpHnEQIJe0GRfWkpUlm8
-	Hrg6VO22PZcLkaSqTDYpeNuGkJptkmY=
-ARC-Authentication-Results: i=1;
-	ORIGINATING;
-	auth=pass smtp.auth=jmtilli smtp.mailfrom=juha-matti.tilli@iki.fi
-Received: from ams-compute-02.internal (ams-compute-02.internal [10.64.2.62])
-	by mailfauth.ams.internal (Postfix) with ESMTP id 3F094198005C;
-	Fri, 18 Sep 2026 12:39:33 -0400 (EDT)
-Received: from ams-imap-13 ([10.64.2.33])
-  by ams-compute-02.internal (MEProxy); Fri, 18 Sep 2026 12:39:33 -0400
-X-ME-Sender: <xms:QmmtaqeMMcYIM05pprdBHW9q_Dsel74suD6rURye1JW5lr8UZ7Icfw>
-    <xme:QmmtavDA-T64SwNcJBHTzegN1wUuft2p04NrdSjTH2Td-COBf2tNbcCPW0wO7cy0_
-    UvUUQfwIMd4W9XgByOhx8sOjRsMJ9QtOpMQ8_iL-HDUJLRWdTjGgavI>
-X-ME-Proxy-Cause: dmFkZTGgrfBZdGn7M8WQTKUJaj1D8vr0/YFLGS6Y6O+RkC9rVsC5GJqpFn3Fe27jJ2IIue
-    BBwj5693w5e8/4dplpgmEgLTfKlZju/Afuw2j/G5cDlzUYKQ3m1oRScdb9OKSPnEhdLAQv
-    vpSNDMP7t/mrrwfZsInHg6rHRdnv38WFBMZlvGNP27WkU/7TxW+HNM/1bFvB+hF9h7pjSo
-    u9rYWBkuhh6evLdJzeJEoEvusgi4E+MZxzPs6D0ZOp8TjeawU0BAKo4Z3c1e7tL+bjgkmi
-    XHW2GyJCOw/5cUEGDbOFwxooi7CDeA4mLH2M8Lk3GHU3YaoYR3qIFwQpN55RY3qksOyaYj
-    nJw8H0/I9oejv3/Wi8kTthvEAA7X0iz5qV/jphCnaX5S18R4bOouTM6MF6o4ElUX0VeCle
-    bGIFVWYuNkXCM8jOrOuL3CII5M4mksxH0+XcHGcxAy09OzKH0dO8DqIeabpCij9QyJ9UfM
-    DvbyRLw2ehOK+viHPEazsWsS5HG7t3EIZDQOGRVF2mJT0YsJlKABGbK4xmKYOBEIyjh9oo
-    ZtBT+VVvspCLCNZEhdLGi7BAM4CEomN5EX06KpCw9vTfJCASjgZxru+3FwZOfn9TaP4npj
-    4LDBn0mqjcWQ8pigmvosMMS68S+gTztclQigXTr6Ez6Bc1WIx1ZWRxeNOEHg
-X-ME-Proxy: <xmx:RWmtarOH03taGg0WXK9V0sd3CNzZ_fFd4j_VjgWortLKjD3xiDhqOA>
-    <xmx:RWmtagdBu8KwNJc95xcn6wihEDHA_xfRXCVPxKAPLfJdgcRsIHUPtw>
-    <xmx:RWmtanOXwHDGhX4MDbwUJmp2meJgvjutV7YIhbK_py5ANs81odKH2A>
-    <xmx:RWmtaiaVgn3sM9-jss19ME0I9SOYvYH2D9oecZCuVehoSAsZzGjsLw>
-    <xmx:RWmtarvoXwp5XTmR_ukN9c5jTfCAquAaPFysOWg11WiUVMfRdIP420h8>
-Feedback-ID: i02414972:Fastmail
-Received: by mailuser.ams.internal (Postfix, from userid 501)
-	id 7CDCEF80089; Fri, 18 Sep 2026 12:39:30 -0400 (EDT)
-X-Mailer: MessagingEngine.com Webmail Interface
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="gYjqYTVE"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0D23F1F00898;
+	Fri, 18 Sep 2026 16:41:21 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1789749682;
+	bh=5O5H/6gCgyAd9CwdY7SShygtNyXdOgdSx01FBNicM9I=;
+	h=Date:From:Cc:To:In-Reply-To:References:Subject;
+	b=gYjqYTVEEMN2sakWqtf5kvBPykQHxgvoN4kv/6dx9NnJS4P2lFM0WZk7eItTUqnwk
+	 jIRXppcVebBscVUSTZZnjZHA+bxD53EV17DQWekFZPiTDS01Q2ti9pgwF0f5x4hCpq
+	 kutR4tEM5jmIhZOKXwnpxUEoT4G9g3vsSJA5K5BGwaMMPT+MP2gEjOBMxFYWNdN7SS
+	 1pNq6Vngb6VqFxE8QqZbpuqKM4njrisbnzA/j5zMZjobeJn8BD0ohkZ7jERhGoKiCH
+	 yKIPiRuUTvSdtoPCrbqtmVZUCvPYu7Wj3TSYgLNKw0uJzssBjOE+kMsWA7s86axm2a
+	 UWiJAWtBu6HKg==
+Date: Fri, 18 Sep 2026 11:41:21 -0500
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-ThreadId: AbqzItSRZteg
-Date: Fri, 18 Sep 2026 19:39:09 +0300
-From: "Juha-Matti Tilli" <juha-matti.tilli@iki.fi>
-To: "Manivannan Sadhasivam" <manivannan.sadhasivam@oss.qualcomm.com>,
- "Manivannan Sadhasivam" <mani@kernel.org>,
- "David S . Miller" <davem@davemloft.net>,
- "Eric Dumazet" <edumazet@google.com>, "Jakub Kicinski" <kuba@kernel.org>,
- "Paolo Abeni" <pabeni@redhat.com>, "Simon Horman" <horms@kernel.org>,
- "Jeff Johnson" <jjohnson@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, netdev@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-wireless@vger.kernel.org,
- ath11k@lists.infradead.org, ath12k@lists.infradead.org,
- "Bjorn Andersson" <andersson@kernel.org>,
- "Chris Lew" <christopher.lew@oss.qualcomm.com>,
- "Deepak Kumar Singh" <deepak.singh@oss.qualcomm.com>,
- "Raj Kumar Bhagat" <raj.bhagat@oss.qualcomm.com>,
- "Jeff Hugo" <jeff.hugo@oss.qualcomm.com>
-Message-Id: <da0421b8-bf31-43d1-8d71-520753c8344c@app.fastmail.com>
-In-Reply-To: <20260918-qrtr-multi-ep-v1-3-8a06caa368d3@oss.qualcomm.com>
-References: <20260918-qrtr-multi-ep-v1-0-8a06caa368d3@oss.qualcomm.com>
- <20260918-qrtr-multi-ep-v1-3-8a06caa368d3@oss.qualcomm.com>
-Subject: Re: [PATCH 3/4] wifi: ath11k: Connect to the QMI server belonging to the
- device owned by this driver
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+From: "Rob Herring (Arm)" <robh@kernel.org>
+Cc: Vikash Garodia <vikash.garodia@oss.qualcomm.com>, 
+ Mauro Carvalho Chehab <mchehab@kernel.org>, 
+ Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>, 
+ Abhinav Kumar <abhinav.kumar@linux.dev>, Bryan O'Donoghue <bod@kernel.org>, 
+ linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, 
+ Conor Dooley <conor+dt@kernel.org>, linux-arm-msm@vger.kernel.org, 
+ Philipp Zabel <p.zabel@pengutronix.de>, 
+ Stanimir Varbanov <stanimir.k.varbanov@gmail.com>, 
+ devicetree@vger.kernel.org, Krzysztof Kozlowski <krzk+dt@kernel.org>
+To: Wangao Wang <wangao.wang@oss.qualcomm.com>
+In-Reply-To: <20260918-add_iris_for_hawi-v1-1-ac60fd15c98b@oss.qualcomm.com>
+References: <20260918-add_iris_for_hawi-v1-0-ac60fd15c98b@oss.qualcomm.com>
+ <20260918-add_iris_for_hawi-v1-1-ac60fd15c98b@oss.qualcomm.com>
+Message-Id: <178974864869.291097.14646474032150425870.robh@kernel.org>
+Subject: Re: [PATCH 1/6] dt-bindings: media: venus,common: relax
+ clock/power-domain/iommu limits for Hawi
 
-On Fri, Sep 18, 2026, at 19:28, Manivannan Sadhasivam via B4 Relay wrote:
-> From: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
+
+On Fri, 18 Sep 2026 12:28:40 +0800, Wangao Wang wrote:
+> The Hawi Soc Iris5 video codec requires more clocks, power domain
+> entries and IOMMU mappings than the current limits allow. Relax the
+> common schema constraints to accommodate it.
 > 
-> When two identical ath11k PCIe devices are connected to the same host, both
-> advertise the WLFW service with the same service and instance id. The QMI
-> lookup reports both servers to each device, so a device may connect to the
-> firmware running on the other device.
+> Signed-off-by: Wangao Wang <wangao.wang@oss.qualcomm.com>
+> ---
+>  .../devicetree/bindings/media/qcom,venus-common.yaml        | 13 +++++++------
+>  1 file changed, 7 insertions(+), 6 deletions(-)
 > 
-> But now, QRTR provides each MHI endpoint a unique node id which is
-> different from the node id announced by the device. So use the same id to
-> pick the correct server. Add a get_qrtr_node_id() HIF callback that returns
-> the node id derived from the MHI controller index and zero for transports
-> that do not assign one. In the new_server callback, skip any service whose
-> node id does not match. A node id of zero disables the check, so transports
-> that do not assign one keep their current behavior.
-> 
-> Signed-off-by: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
 
-Tested-by: Juha-Matti Tilli <juha-matti.tilli@iki.fi>
-Tested-on: 2x WCN6855 hw2.1 PCI WLAN.HSP.1.1-04685-QCAHSPSWPL_V1_V2_SILICONZ_IOE-1
+My bot found errors running 'make dt_binding_check' on your patch:
 
-(assuming the patch is the same and hasn't been updated since 17.9:
-https://github.com/Mani-Sadhasivam/linux/commits/qrtr-multi-ep/ )
+yamllint warnings/errors:
 
-BR, Juha-Matti
+dtschema/dtc warnings/errors:
+Documentation/devicetree/bindings/media/qcom,sm8550-iris.example.dtb: video-codec@aa00000 (qcom,sm8550-iris): non-pixel:iommu-ranges: [[629145600, 3128950784]] is too short
+	from schema $id: http://devicetree.org/schemas/media/qcom,sm8550-iris.yaml
+Documentation/devicetree/bindings/media/qcom,sm8550-iris.example.dtb: video-codec@aa00000 (qcom,sm8550-iris): Unevaluated properties are not allowed ('#address-cells', '#size-cells', 'dma-ranges', 'non-pixel', 'pixel' were unexpected)
+	from schema $id: http://devicetree.org/schemas/media/qcom,sm8550-iris.yaml
+Documentation/devicetree/bindings/media/qcom,sm8750-iris.example.dtb: video-codec@aa00000 (qcom,sm8750-iris): non-pixel:iommu-ranges: [[629145600, 3128950784]] is too short
+	from schema $id: http://devicetree.org/schemas/media/qcom,sm8750-iris.yaml
+Documentation/devicetree/bindings/media/qcom,sm8750-iris.example.dtb: video-codec@aa00000 (qcom,sm8750-iris): Unevaluated properties are not allowed ('#address-cells', '#size-cells', 'dma-ranges', 'interrupts', 'memory-region', 'non-pixel', 'pixel', 'reg' were unexpected)
+	from schema $id: http://devicetree.org/schemas/media/qcom,sm8750-iris.yaml
+
+doc reference errors (make refcheckdocs):
+
+See https://patchwork.kernel.org/project/devicetree/patch/20260918-add_iris_for_hawi-v1-1-ac60fd15c98b@oss.qualcomm.com
+
+The base for the series is generally the latest rc1. A different dependency
+should be noted in *this* patch.
+
+If you already ran 'make dt_binding_check' and didn't see the above
+error(s), then make sure 'yamllint' is installed and dt-schema is up to
+date:
+
+pip3 install dtschema --upgrade
+
+Please check and re-submit after running the above command yourself. Note
+that DT_SCHEMA_FILES can be set to your schema file to speed up checking
+your schema. However, it must be unset to test all examples with your schema.
+
