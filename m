@@ -1,189 +1,265 @@
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.9])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 456AC3AAF4A;
-	Fri, 18 Sep 2026 09:56:56 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.9
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 804D13515DC
+	for <linux-arm-msm@vger.kernel.org>; Fri, 18 Sep 2026 09:57:59 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789725424; cv=none; b=TG/URBgYlvBH+kEAmpvsdbUiY+aC6j4uOTYyT12IcNoAfOR/FEU8jzIndZadtp3V3Ye8/IHUY2AvcXR1BcM/Ud0sDnMQGpbRIvkZGXUFAjl0SVW/PzFKG51OpdaZvdJ3tLzqrylRJKTWIwo8QVIID07CNRCaiKKMDPNNHivHhkM=
+	t=1789725481; cv=none; b=XZFCc80tcuUeUl2wr/ANhUVHQFPrBGpNCpV80ktq4OFWruQnQlSCzUz3+l+XZLeRXKyL33BD9ogqXH15Z6IPDslYcxWA1KEhUL/WwhmmiX2IwKBk6/w15fJ+14ZcyDDGTMoUUNLxl84/dLbmfRwKGYquWKlNNHgcyjqTHhlV+KI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789725424; c=relaxed/simple;
-	bh=hZ1x00CmvH/v3SfkzJvQTSbvvIy+fDJWOOfZXXMnCSc=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=Nu/LaLnH9tkPNDr11OhHhKX0gRYLQuOqyqUeo/gowNNGyDv6rB9NZOFDCE6ZhlaJ/M4e92BgowPeHFPlIxZeGR0vmlx1SVLh6rIwkvTtSoMJxb/R1YNYM2buM3WOxs8j34xJ9l5tKzn/RCtxy/bmpmspP2Oqq1tWODrEDEDdrkk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=pass smtp.mailfrom=linux.intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=nM/Joy5T; arc=none smtp.client-ip=192.198.163.9
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.intel.com
+	s=arc-20240116; t=1789725481; c=relaxed/simple;
+	bh=fYQnJwvIDr0lMmuidC0MbYkc/xQ9sa+ACmO8nhT7Um4=;
+	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=tUpx6SLXrH/oW/NUImiIQmS7aAVw6bkOervhXPamFzzFCYACq70MMR01DNGl7x5amfQAMUje2tcGdSdor/G5KGJB/VOyuU+FuimjjdXm0CK9/3lfM18McvPSab+2xUq8nf5cGw2yqoGsDYbfKDG+s+bNo4F8nmTO1pOXMkVwfY8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=Wp8AUkEs; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=Zhasou+z; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="nM/Joy5T"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1789725420; x=1821261420;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=hZ1x00CmvH/v3SfkzJvQTSbvvIy+fDJWOOfZXXMnCSc=;
-  b=nM/Joy5Tx9d7T7IguFOUYEnEUsGtEz2HFbuuA5Fmd7xHiT2N2Scl0BMz
-   nYUwTPIQZR7OoSxnvqQvh2eIZOvINoxdebHQg7oDphsOMKZpXpUrfu/Fd
-   hpCvrT2GWqBOWfAZ0U5Owo5jeYOIo+seIfLPtDqcnfdrZBzooOrbxrQzO
-   Ldwpaftnt6nI1QJHgyBSpjN77ix0FdURhw5hkKsDblSJA6dAavy2raYqa
-   7VFrjKH+qP2sZpowjRjnCdrETalpEmTE6b2T1zI+WUY07CG5pduUkHqUa
-   muUv3uYJw5rlCkG2VIVSCSigCEjf+ww+mEHvkOTsRvDhNUPp1BSKUymi/
-   Q==;
-X-CSE-ConnectionGUID: 77026hMORE2kGrzHrfs4FA==
-X-CSE-MsgGUID: dLlbpJE+RAa+Obnl1UvnkA==
-X-IronPort-AV: E=McAfee;i="6800,10657,11905"; a="100882634"
-X-IronPort-AV: E=Sophos;i="6.27,103,1787036400"; 
-   d="scan'208";a="100882634"
-Received: from fmviesa001.fm.intel.com ([10.60.135.141])
-  by fmvoesa103.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 18 Sep 2026 02:56:54 -0700
-X-CSE-ConnectionGUID: TCzrHF1/RhWzhNMUEHoKGw==
-X-CSE-MsgGUID: 37tYMD3SSuClkfINO9FYoA==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.27,103,1787036400"; 
-   d="scan'208";a="299431634"
-Received: from black.igk.intel.com ([10.91.253.5])
-  by fmviesa001.fm.intel.com with ESMTP; 18 Sep 2026 02:56:51 -0700
-Received: by black.igk.intel.com (Postfix, from userid 1008)
-	id F08B999; Fri, 18 Sep 2026 11:56:50 +0200 (CEST)
-Date: Fri, 18 Sep 2026 11:56:50 +0200
-From: Heikki Krogerus <heikki.krogerus@linux.intel.com>
-To: jens.glathe@oldschoolsolutions.biz
-Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-	Abel Vesa <abelvesa@kernel.org>,
-	Bjorn Andersson <andersson@kernel.org>,
-	Konrad Dybcio <konradybcio@kernel.org>,
-	Sebastian Reichel <sre@kernel.org>, linux-usb@vger.kernel.org,
-	linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-	stable@vger.kernel.org, "Dr. David Alan Gilbert" <dave@treblig.org>,
-	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-Subject: Re: [PATCH v3 3/3] usb: typec: mux: ps883x: disable USB4 on
- incomplete USB4 platforms
-Message-ID: <aq0K4ryxva5sdbjr@black.igk.intel.com>
-References: <20260916-ps883x-disable-usb4-v3-0-8f19386456d0@oldschoolsolutions.biz>
- <20260916-ps883x-disable-usb4-v3-3-8f19386456d0@oldschoolsolutions.biz>
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="Wp8AUkEs";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Zhasou+z"
+Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68I9eE7a522593
+	for <linux-arm-msm@vger.kernel.org>; Fri, 18 Sep 2026 09:57:58 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:date:from:message-id:mime-version
+	:subject:to; s=qcppdkim1; bh=LlXnTjIgiRIy2Jyv97jSRe2p67ffz+Qkf4E
+	Z81jikDg=; b=Wp8AUkEs1A08wHTtaOVeV72N+8IcB3ZCnw0GlOHlmy2nyh7Nteq
+	t9s7zXVfOqrod6zkce75XF5naUMh1GlNtqgUUD+nXHkfdCP1EWmVwMohDNUXO5e4
+	H5yx1cyuhWOkwRrLdxNjtkgGB7iMXgU085RZIXOlrLCglAuQMu+aUPlQ0S/172J4
+	uJOcg67r+M118DGEi4KDjBn1/w1rzSrRNvClJgD3UCg5iEnrEm+avbCJG8RnOzyW
+	SEQd5AxN9f1b+gAYHm0KcVVL753N8oF4gZhw3+7c8dDluwygY7o2C7M2bYrTWT9J
+	4sgv/vXNvba8BsNWlZfIRPOHnisoQ6qTiaA==
+Received: from mail-pj1-f69.google.com (mail-pj1-f69.google.com [209.85.216.69])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4grnqebbcs-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 18 Sep 2026 09:57:58 +0000 (GMT)
+Received: by mail-pj1-f69.google.com with SMTP id 98e67ed59e1d1-398bb9a6408so168440a91.3
+        for <linux-arm-msm@vger.kernel.org>; Fri, 18 Sep 2026 02:57:58 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1789725477; x=1790330277; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=LlXnTjIgiRIy2Jyv97jSRe2p67ffz+Qkf4EZ81jikDg=;
+        b=Zhasou+zXH+WlzuvyMt7mP+afAIRjJriHRoOWya4k6sZ5DkGG2IN43MCk7wdILbrWK
+         W/VNeQPMRscSh96ErmLvL4OtUo1CQWkKZ0WDi4NGsCBUXd8nPO05DAE84IIR5xHnyEgy
+         lUr7NdeWxWi3MfpgknKhIN6W9mHtCPLG5uBiY/i/EWZrlFmabF0Gy2L4hPxnvCSjhh5d
+         xK04EKGupMeMBPv9AVdqaqnoAXZP7wOWndIu9wWDLqOapoWXwLRI5incjKp3IcNHvoPl
+         pX/keaLy2P+XYTUDG2SY63jHjLMneXjvNvYoqbZB4qkjeBmaZxLkMT9J2BNb6Ve/aqS/
+         DTJg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1789725477; x=1790330277;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=LlXnTjIgiRIy2Jyv97jSRe2p67ffz+Qkf4EZ81jikDg=;
+        b=G11BMQQq6uGSGdPGE24AUPLCjAQ5tZgqTbV8cjcmD2Rl6eNhEfuploPkSvVxdpUqtN
+         5cGor/f0OhlP4Nt8wzvln0hZA3EPXxSTP0AQWs2ptjzGA8H/jkfjL7yXWaXG1xG3WCs3
+         HxEW0E4IT1rdbQHJghTTWRGE+i6AOaJO5UXigfAeZfqTU1jr6pOTGpRTuJxR2OlFm7as
+         ivH2MD6MB7l1sJAogpmqoZM9Czut7CSAggep3Ybuj55zIoA2WjNQLpMCEyU6Q04Coyuk
+         C6YQ051iZItW6vAM74Nu+mZn9K+CUNPmv6AOCxCSy/HARY/4NnhQjizezcUqsoyTngEH
+         mIZQ==
+X-Gm-Message-State: AFuF++nfU6OQ0Q7ejUE2B3wpdTHJJW7ABC7vWqCtTjL5w0dN6jAUwg3X
+	JIeiz/YkFwiTUVJldMHKk2tkm8RSsn1mx5Bowpym830WwfvusqnsEAK3WoZPBXbHr7tIPT3iklP
+	cum6PcBgxY/zwkf5UK+/UB4kk8F8AkAnU4CZBxNjuR+twMpPtFYkR948ArEEi6L0PnapO
+X-Gm-Gg: AYBFou33oOKmO2ZzCxFdMLmDzfVIHbgb1mCCANQ6LO+SBZSYCRPWF4sBVPGOOje/vlZ
+	wOuC+QRzq1gKwXh7fFedHBpybzvvg9DjJ4Wnb0EW4/kaOd0WVhT88w/y5HB4nXT7LLiztc6itKI
+	809KN5C9E0aJwPgIMTqNAp0Uit81t+3qNN7/7wZbPs08xsWwSVpbBbTt+x5+TcT/Vm7JXTh293m
+	MrKQrpluZq7CFv5dmspaJe+F3EUc+wZ0CaK9EgdY7fFCNLEDrNUQqyNoEOudsUp/f2pgDSqCOJe
+	YD9qaKLtlUqC5DDyBnObBHKgZYb3Td1kAcUpggZo+JTxn6qGYcqy0qE6R5CPq2TosBU+JkKTsJz
+	gBKco4lo2dGywVlJ/kLqQZtlFN17ryLE=
+X-Received: by 2002:a17:90b:2e0e:b0:396:d28e:b52 with SMTP id 98e67ed59e1d1-39e598b6ccdmr2978132a91.3.1789725477084;
+        Fri, 18 Sep 2026 02:57:57 -0700 (PDT)
+X-Received: by 2002:a17:90b:2e0e:b0:396:d28e:b52 with SMTP id 98e67ed59e1d1-39e598b6ccdmr2978064a91.3.1789725476381;
+        Fri, 18 Sep 2026 02:57:56 -0700 (PDT)
+Received: from hu-uchheda-hyd.qualcomm.com ([202.46.23.25])
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-144ce02b063sm2892970c88.9.2026.09.18.02.57.48
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 18 Sep 2026 02:57:56 -0700 (PDT)
+From: Umang Chheda <umang.chheda@oss.qualcomm.com>
+To: andersson@kernel.org, konradybcio@kernel.org, robh@kernel.org,
+        krzk+dt@kernel.org, conor+dt@kernel.org, richardcochran@gmail.com,
+        Borislav Petkov <bp@alien8.de>,
+        Catalin Marinas <catalin.marinas@arm.com>,
+        Will Deacon <will@kernel.org>,
+        Lorenzo Pieralisi <lpieralisi@kernel.org>,
+        Sudeep Holla <sudeep.holla@kernel.org>,
+        "Rafael J . Wysocki" <rafael@kernel.org>, Len Brown <lenb@kernel.org>,
+        Tony Luck <tony.luck@intel.com>, Robin Murphy <robin.murphy@arm.com>,
+        Peter Zijlstra <peterz@infradead.org>,
+        James Morse <james.morse@arm.com>
+Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-edac@vger.kernel.org,
+        Ruidong Tian <tianruidong@linux.alibaba.com>,
+        umang.chheda@oss.qualcomm.com, avaneesh.dwivedi@oss.qualcomm.com
+Subject: [PATCH v3 0/5] arm: ras: Add DT frontend support for ARM RAS
+Date: Fri, 18 Sep 2026 15:27:41 +0530
+Message-Id: <20260918095746.3347893-1-umang.chheda@oss.qualcomm.com>
+X-Mailer: git-send-email 2.34.1
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260916-ps883x-disable-usb4-v3-3-8f19386456d0@oldschoolsolutions.biz>
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-ORIG-GUID: 0liqnxtxFC7se0dRZdEebIJKilEFajnE
+X-Authority-Analysis: v=2.4 cv=FfiiV5+6 c=1 sm=1 tr=0 ts=6aad0b26 cx=c_pps
+ a=vVfyC5vLCtgYJKYeQD43oA==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
+ a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22 a=NEAV23lmAAAA:8
+ a=VwQbUJbxAAAA:8 a=SRrdq9N9AAAA:8 a=LRrvzRMqVIShaiPshd4A:9
+ a=rl5im9kqc5Lf4LNbBjHf:22
+X-Proofpoint-GUID: 0liqnxtxFC7se0dRZdEebIJKilEFajnE
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTE4MDEzNyBTYWx0ZWRfXyMuHzaXSdeAC
+ KykV/HNoOCT1fCNlEC/0qkbZP8jwrtgSvVz6IGXUvnONd6lIw+mG1rYTJ5SuxpjMxf+lBI7kNDY
+ xlKrL4qjRqBBVeCr/BkjQZWrqbqWpnp+9dDJkW3THUPUJlbmeQeeVCWCrAyrvukC3vKPTSyherj
+ 8p2qTzFRzVFvOMzwMBJfXqpOZ7OQwe0kZL3tEmVPvtuLRIChbWVcS2ajW4L69QqFY610OABsuYP
+ FgMz7f8fEbRb7JZKcrANaoJ5I4UDxS7ZYtKCVq0HA9UQRwWzQCDNEpKDcTUM+mMFdGqRrzVIpnl
+ DncG5xXxoOblIP5NBl/WoIgYPRTtYkz8LoJ4XN60S2MJyQajug7YtajBRdrndqNJ1xejoXk+7B6
+ clcEqPc1/m5XqM4yoCORb0S9F8jTdx3AYdFwhb9wMCjqFwXpKgPd6hbnSNNj45tV2bjdozFts09
+ g6w7zDPeJX6Wk4TcKIQ==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTE4MDEzNyBTYWx0ZWRfX62flWSV0CvU+
+ p14DR5jlwOeQamukKHRJ/8MWti2LJgy4vTXXBlzz6hEBAZ3i6ORSAKMT/mDqk7RxBaBWiVA+Ctj
+ d+pY5uuBQ9YgyrPFWC+gh1Ss/C9WlrA=
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-09-18_03,2026-09-16_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ impostorscore=0 adultscore=0 clxscore=1015 priorityscore=1501 spamscore=0
+ bulkscore=0 lowpriorityscore=0 suspectscore=0 malwarescore=0 phishscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609180137
 
-On Wed, Sep 16, 2026 at 09:36:34PM +0200, Jens Glathe via B4 Relay wrote:
-> From: Jens Glathe <jens.glathe@oldschoolsolutions.biz>
-> 
-> On Qualcomm X1E80100 / X1P42100 platforms using the Parade PS883x
-> retimer, hotplugging USB4-capable docks such as the Lenovo 40B0 can
-> result in working USB but no DisplayPort output.
-> 
-> When the dock negotiates USB4, the retimer receives TYPEC_MODE_USB4
-> and forwards it via typec_mux_set(). The qmp-combo PHY then selects
-> USB3-only because no classic DP altmode SVID is present in the state,
-> leaving the DP transmitter and AUX channel disabled.
-> 
-> Reject USB4 with -EOPNOTSUPP on platforms whose USB4 / DP-tunneling
-> stack is not ready yet. The Type-C stack then falls back to USB3 + DP
-> Alt Mode. DP altmode configuration continues to use the existing
-> ps883x_set() path.
-> 
-> Use a machine-compatible table rather than a DT property so the quirk
-> stays inside the kernel and can be removed later without creating ABI.
-> 
-> Link: https://patch.msgid.link/20260312101431.2375709-1-krishna.kurapati@oss.qualcomm.com
-> Assisted-by: Grok(xAI):4.6
-> Tested-by: Dr. David Alan Gilbert <dave@treblig.org>
-> Signed-off-by: Jens Glathe <jens.glathe@oldschoolsolutions.biz>
+This series adds Device Tree support for the ARM64 RAS driver
+introduced by Ruidong Tian [1]. The existing driver supports ACPI-based
+platforms via the AEST table, this series extends it to DT-based
+platforms without any changes to the core driver.
 
-Acked-by: Heikki Krogerus <heikki.krogerus@linux.intel.com>
+How to test with QEMU
+--------------------------
+Tian Ruidong's QEMU fork [2] emulates AEST MMIO error records on the
+virt machine.  To test the DT frontend:
 
-> ---
->  drivers/usb/typec/mux/ps883x.c | 37 +++++++++++++++++++++++++++++++++++++
->  1 file changed, 37 insertions(+)
-> 
-> diff --git a/drivers/usb/typec/mux/ps883x.c b/drivers/usb/typec/mux/ps883x.c
-> index 15aee1d613b1a..2ec57cfe748a9 100644
-> --- a/drivers/usb/typec/mux/ps883x.c
-> +++ b/drivers/usb/typec/mux/ps883x.c
-> @@ -13,6 +13,7 @@
->  #include <linux/kernel.h>
->  #include <linux/module.h>
->  #include <linux/mutex.h>
-> +#include <linux/of.h>
->  #include <linux/regmap.h>
->  #include <linux/regulator/consumer.h>
->  #include <linux/usb/pd.h>
-> @@ -42,6 +43,22 @@
->  #define CONN_STATUS_2_TBT_UNIDIR_LSRX_ACT_LT	BIT(4)
->  #define CONN_STATUS_2_USB4_CONNECTED		BIT(7)
->  
-> +/*
-> + * Platforms where the USB4 / DP-tunneling stack is not ready yet. Rejecting
-> + * USB4 here lets the Type-C stack fall back to USB3 + DP Alt Mode instead of
-> + * negotiating USB4 and then failing to drive DisplayPort.
-> + *
-> + * This is a temporary, kernel-contained quirk (not DT ABI). Drop the entries
-> + * once the corresponding USB4 support is complete.
-> + */
-> +static const char * const ps883x_disable_usb4_compats[] = {
-> +	"qcom,x1e80100",
-> +	"qcom,x1p42100",
-> +	"qcom,hamoa",
-> +	"qcom,purwa",
-> +	NULL,
-> +};
-> +
->  struct ps883x_retimer {
->  	struct i2c_client *client;
->  	struct gpio_desc *reset_gpio;
-> @@ -63,8 +80,21 @@ struct ps883x_retimer {
->  
->  	enum typec_orientation orientation;
->  	bool in_reset;
-> +	bool disable_usb4;
->  };
->  
-> +static bool ps883x_should_disable_usb4(void)
-> +{
-> +	const char * const *compat;
-> +
-> +	for (compat = ps883x_disable_usb4_compats; *compat; compat++) {
-> +		if (of_machine_is_compatible(*compat))
-> +			return true;
-> +	}
-> +
-> +	return false;
-> +}
-> +
->  static int ps883x_enable_vregs(struct ps883x_retimer *retimer)
->  {
->  	struct device *dev = &retimer->client->dev;
-> @@ -260,6 +290,9 @@ static int ps883x_set(struct ps883x_retimer *retimer, struct typec_retimer_state
->  			cfg0 |= CONN_STATUS_0_USB_3_1_CONNECTED;
->  			break;
->  		case TYPEC_MODE_USB4:
-> +			if (retimer->disable_usb4)
-> +				return -EOPNOTSUPP;
-> +
->  			eudo_data = state->data;
->  
->  			cfg2 |= CONN_STATUS_2_USB4_CONNECTED;
-> @@ -389,6 +422,10 @@ static int ps883x_retimer_probe(struct i2c_client *client)
->  
->  	retimer->client = client;
->  
-> +	retimer->disable_usb4 = ps883x_should_disable_usb4();
-> +	if (retimer->disable_usb4)
-> +		dev_info(dev, "USB4 disabled until platform USB4 support is complete\n");
-> +
->  	mutex_init(&retimer->lock);
->  
->  	retimer->regmap = devm_regmap_init_i2c(client, &ps883x_retimer_regmap);
-> 
-> -- 
-> 2.53.0
-> 
+1. Build QEMU:
 
--- 
-heikki
+     git clone https://github.com/winterddd/qemu.git
+     cd qemu
+     git checkout c5e2d5dec9fd62ba622314c40bff0fbecb4dfb34
+     ./configure --target-list=aarch64-softmmu
+     make -j$(nproc)
+
+2. Build the kernel with:
+
+     CONFIG_ARM64_RAS_EXTN=y
+     CONFIG_RAS=y
+     CONFIG_ACPI_AEST=y
+     CONFIG_ARM64_RAS_DRIVER=y
+     CONFIG_ARM64_RAS_DT=y
+
+3. Add the following DT node to your virt machine DTB.  The QEMU
+   fork maps GIC error source at 0x017a00000 (SPI 0x0d).
+
+   ras-gic-dist@17a00000 {
+       compatible = "arm,ras-gic";
+       reg = <0x0 0x17a00000 0x0 0x10000>;
+       reg-names = "err-group";
+       arm,group-format = <ARM_RAS_GROUP_4K>;
+       arm,num-records = <1>;
+       arm,record-impl = /bits/ 64 <0x1>;
+       arm,status-reporting = /bits/ 64 <0x0>;
+       arm,gic-ref = <&gic>;
+       interrupts = <GIC_SPI 0x0d 0x04>;
+       interrupt-names = "fhi";
+   };
+
+4. Boot QEMU with acpi=off:
+
+     ./qemu-system-aarch64 \
+       -machine virt,accel=tcg,gic-version=3 \
+       -cpu cortex-a57 -m 2G -smp 4 \
+       -kernel Image -dtb virt-aest.dtb \
+       -append "console=ttyAMA0 acpi=off earlycon" \
+       -nographic
+
+5. Verify probe:
+
+     dmesg | grep "DT RAS"
+     # Expected: DT RAS: registered 1 RAS error source(s) from DT
+     ls /sys/kernel/debug/aest/
+
+6. Inject a CE error via the QEMU MMIO fault injection registers.
+   The QEMU device accepts 64-bit accesses only (use devmem with
+   the 64-bit width flag):
+
+   devmem 0x090e0808 64 0x40000001
+
+   This triggers QEMU's error_record_inj_write() which sets
+   ERR<n>STATUS.V=1 and asserts the IRQ.  The kernel driver's
+   aest_irq_func() fires, reads the status, and logs:
+
+   arm64_ras: {2}[Hardware Error]: Hardware error from AEST gic.90e0000
+   arm64_ras: {2}[Hardware Error]: Error from GIC type 0x0 instance 0x8005
+   arm64_ras: {2}[Hardware Error]: ERR0FR: 0x48a5
+   arm64_ras: {2}[Hardware Error]: ERR0CTRL: 0x108
+   arm64_ras: {2}[Hardware Error]: ERR0STATUS: 0x40000001
+
+Testing
+-------
+- Validated Processor error nodes/sources for L1-L2 and L3 caches error
+  on Qualcomm's lemans-evk, monaco-evk and shikra-cqm-evk boards with DT boot.
+- Validated CE and UE injection via debugfs soft_inject.
+- Validated GIC and SMMU error sources on QEMU.
+
+[1] https://lore.kernel.org/lkml/20260122094656.73399-1-tianruidong@linux.alibaba.com/
+[2] https://github.com/winterddd/qemu/tree/error_record
+
+---
+Changes in v3:
+ - Changed dt-bindings filename to "arm,ras.yaml" - Krzysztof.
+ - Dropped irrelavent nodes from dt-bindings example - Krzysztof.
+ - Changed node-name of ras-error sources to generic one - Krzysztof.
+ - Updated commit subject text of dt-bindings to drop redundant
+   "bindings" keyword - Krzysztof.
+ - Drop un-necesarry nodes added in Phandle description - Krzysztof.
+ - Fixed reg and reg-names to be same number of entries - Rob.
+ - Replaced interrupt property description as suggested by Rob.
+ - Defined the order for interrupt-property in bindings - Rob.
+ - Dropped re-defining iommu property in the bindings - Rob.
+ - Update commit text to be more elaborative and, change the ras node
+   name to be generic for monaco DT change - Bjorn.
+
+Changes in v2:
+  - Rebased on top of Ruidong Tian's v7 RAS driver series and reworked
+    the DT frontend to match the new driver architecture.
+  - Moved RAS error source nodes to the DT root, removed the arm,aest
+    container node as suggested by Rob Herring.
+  - Dropped arm,processor-flags and arm,resource-type properties, these
+    are now inferred from the interrupt type and cache phandle
+    respectively.
+  - Renamed compatible strings from arm,aest-* to arm,ras-* and the
+    dt-bindings header from aest.h to arm-ras.h to avoid ACPI terminology
+    in DT bindings.
+---
+
+Umang Chheda (5):
+  dt-bindings: arm: ras: Introduce ARM RAS error sources
+  arm64: ras: Add Device Tree frontend
+  arm64: dts: qcom: monaco: add RAS error source nodes
+  arm64: dts: qcom: lemans: add RAS error source nodes
+  arm64: dts: qcom: shikra: add RAS error source nodes
+
+ .../devicetree/bindings/arm/arm,ras.yaml      | 235 +++++++++++
+ arch/arm64/boot/dts/qcom/lemans.dtsi          |  30 ++
+ arch/arm64/boot/dts/qcom/monaco.dtsi          |  30 ++
+ arch/arm64/boot/dts/qcom/shikra.dtsi          |  20 +
+ drivers/ras/arm64/Kconfig                     |  25 +-
+ drivers/ras/arm64/Makefile                    |   2 +
+ drivers/ras/arm64/ras-of.c                    | 383 ++++++++++++++++++
+ include/dt-bindings/arm/arm,ras.h             |  11 +
+ 8 files changed, 731 insertions(+), 5 deletions(-)
+ create mode 100644 Documentation/devicetree/bindings/arm/arm,ras.yaml
+ create mode 100644 drivers/ras/arm64/ras-of.c
+ create mode 100644 include/dt-bindings/arm/arm,ras.h
+
+--
+2.34.1
+
