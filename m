@@ -1,150 +1,172 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from perceval.ideasonboard.com (perceval.ideasonboard.com [213.167.242.64])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 75C2B4C10C0
-	for <linux-arm-msm@vger.kernel.org>; Fri, 18 Sep 2026 10:04:43 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3561349890F;
+	Fri, 18 Sep 2026 10:05:41 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=213.167.242.64
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789725885; cv=none; b=ZE/Uy+1f11RltKMqfxSuylARmc4t47tIHxF7LBLRLYGyv5Bi/M1zGuSri2OoT6m7B+DkMQzvYAkShp3ft1uaHqM1LLwSXQU/J+woow++gGOv4YOHM1xCqCprw/H6/NSiouZ4n38X27HSkOtfl+BSahNg3rLDHs2uhN6GLcwpwv8=
+	t=1789725949; cv=none; b=bqz9LCgdWLcCv0tTqOhenJ0GG6LzGdTz0mwjVjjrNY/1so5XQImVGGW6AAV4d3UUPIEBk1PUoElfND2WYEnHR0oO4dtX1BLDkk+GLfERbVYTjXpFKBD9bX2qyQYYs1k4QHVfEFQLQnTIZzqve5LWRTLBfyPfkaBGKmO5bjHq17A=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789725885; c=relaxed/simple;
-	bh=yU0XvgwFhmxEqdBCP5BExwMxGrmilL6xdhhks9FDJ3Q=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=p2OZ93whsWUpeyuwFYsCan6rPEikMc+mRAYHet80Dfjv5KK0s3upABWYydC24E75CXsEh95D9edUIRF7vXMbsuw/zJ1M+UKe7UUkO1HQHOyksRg6QpbaRleCfHlniP5m5u+hy9u4N68eY+JKsQHjA6KLRsZopuvUWB8sZIJCTJU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=A5FHRnfz; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=C+Rk7xDx; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1789725949; c=relaxed/simple;
+	bh=0tWYUZiixVnvD59lVl7V1A+pe3zDJA5LsRCVuPk+vBk=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=JGjuLPzB0xwk7R1IPWsqqI75g023PRlN51ErGDm7ZGSMig9OJxO/n58Hr/kyNfalTNHtGUZAtqJSLIJajMBeJsuytJYonq9A/jr7BbbT/9L2YbIubmcxllccSNj2S8hgS2AoBMFcaOVtLCMIvGsC46HWrN9DXn69lqlreR42SBU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=ideasonboard.com; spf=pass smtp.mailfrom=ideasonboard.com; dkim=pass (1024-bit key) header.d=ideasonboard.com header.i=@ideasonboard.com header.b=qkVxBqHj; arc=none smtp.client-ip=213.167.242.64
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=ideasonboard.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ideasonboard.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="A5FHRnfz";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="C+Rk7xDx"
-Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68I9dd0t3801897
-	for <linux-arm-msm@vger.kernel.org>; Fri, 18 Sep 2026 10:04:41 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	UwL28xD/iIpbgrkPh+lIjoEQBoMne+PZ9nAWGlXztqA=; b=A5FHRnfzpsm4MLFi
-	/12A3razuwm4VtxAUQFMwCxuGY8vYaK+iv/ZHUu5ICCRMMX8J2Ribl7A1rE64of+
-	T8AxG01PWTLlzjsrLbg9n+PrHtaHMYxWqEOn5nsU24qtpYHMt2aSinVNorN1LPHy
-	C2rmUel/vNBSJhn/dJxMzA4jz6hiYc0vVUGVSJ4PVVUvBsnZ4F959K8fkfR4dhDR
-	3qKv4EG/e4ONVlusjzOtCO8VdEKvL0mWukgddcPuQepLel6fhCF9bbzVHm6HVjpT
-	SRoXN8+AlsG6VbV8De2uGGn4PrRATGLGpAwkzOBBb+YXDvcjaQgd5f5ZJLs6eqNg
-	ZYPIdQ==
-Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com [209.85.222.199])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4grq2ku0jk-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Fri, 18 Sep 2026 10:04:41 +0000 (GMT)
-Received: by mail-qk1-f199.google.com with SMTP id af79cd13be357-938fd633df7so14749185a.1
-        for <linux-arm-msm@vger.kernel.org>; Fri, 18 Sep 2026 03:04:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1789725881; x=1790330681; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=UwL28xD/iIpbgrkPh+lIjoEQBoMne+PZ9nAWGlXztqA=;
-        b=C+Rk7xDxIoiAMZF4gwmtsW7pYLTE409yAyBRSJYzqy93zF03s3OQA2kwkiLASaObS8
-         duL4hx+xjPm8Y/vNKfUdhbzdmmfICRbhv1f9OGyIw69b11os+lfJFFOODCtXe2kU9VBi
-         RXLPWvk/hH0WpwgwDqJ1Lu+lO4r0TFLuf4XIXjn9FdCRvcFr9RhKbx+XWIDamaumDiBe
-         qJUqOSoMj2ND8p5CRNXuKxILRgxykVqcueIUxGoIDPmZ2HbBoqCTLCXocpRm+7qxdATx
-         jFDMaYy2vmHZA4FszwiFSIaOPHG5gvGEEm1KyR3J7RwrycV1db/zCTn+WaqhG5m6pOzs
-         gV8Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1789725881; x=1790330681;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=UwL28xD/iIpbgrkPh+lIjoEQBoMne+PZ9nAWGlXztqA=;
-        b=xZjtiZfxuZ3ZDvCutv1ocRsnOS6GB2rVA2sCkM/GnuAxomUUMvaWv2Q98luarg0Wzk
-         k1qxgmc4vAOll+RYewinMCUm++QDeNLpvljTQH7SRCgR3XF2FLGk27xoyjFAhMXbeNxN
-         L/9WT1oV7x2ln2aB3XAjrzPGoZQKW8Ed/9Es6U1WWoT3RmBA0sW7lrTehYT9RVPn+SbM
-         VEkVrZv4fU/zFzr4KvxUXCIjcfARX4atEJX9iiCUd2L+ahv23LAs17617FWsY0Q+SlDF
-         aTtWqgpbyNTj6d6YC7/6IcIqNUD9/voy8s6+LIzI5NjvOsnt+MFskUsp9xaqEWlUy+fH
-         +kVA==
-X-Gm-Message-State: AFuF++mbrxGAvV8mqrRyglWwnXRYDDcNdS8aMT6TCyIFJiZwTZxPEUTU
-	qDYygS/BrTPZ3g2jP9Xmxmugbm+26vovf2r1DZTxBbRUoDicAGq4PdFihD0UvGZRC5OJCI0MnrK
-	rgEmJI9/n9XHi39nKyCj37TGRw5DznE+VDXdyDNdkbmZtNeWFEGK6yfm3h6X8V6HAsagS
-X-Gm-Gg: AYBFou30ASEcZbh0v02iOMEyamgUo4ND+M8ppFgi62O+fwMrqc/fbS5Tt/zchayKkHl
-	+ehgaggC085p+e4e88NMr2jQJ/kiPIvNZ05s+JQFWdiaB6IVmjw/x26kVrnOHIiugQvEHxOrk7C
-	7n5n/QTREfTs9fX81o/DYe9AK2nEmmOOm/0q/vvVM955KZVOfmKyuoYg377Rz0onwKWK8iskYeL
-	IjXJFUXCkXXA3864edZ4JdU9UynSmdXmCAqcLgfd77B4OElPZfYNYGFI75jCCgR1rxXG24MsEeP
-	zJOTl8lU4cnCBLiRicEfLZQIKgAydUGyv9u21TYc51lACji+9RLRtfHnXKghFrmIeBBdiTFRNij
-	l76kCAE0eRKhvD7Od5MFiLQ==
-X-Received: by 2002:a05:620a:4408:b0:934:95d9:85fe with SMTP id af79cd13be357-93be055f2fbmr184228085a.3.1789725880399;
-        Fri, 18 Sep 2026 03:04:40 -0700 (PDT)
-X-Received: by 2002:a05:620a:4408:b0:934:95d9:85fe with SMTP id af79cd13be357-93be055f2fbmr184221985a.3.1789725879785;
-        Fri, 18 Sep 2026 03:04:39 -0700 (PDT)
-Received: from [192.168.202.12] ([178.235.128.140])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c2a1b7a241bsm40094766b.6.2026.09.18.03.04.38
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 18 Sep 2026 03:04:39 -0700 (PDT)
-Message-ID: <c0095a4c-0f53-48f1-a81a-b411b8756ae7@oss.qualcomm.com>
-Date: Fri, 18 Sep 2026 12:04:37 +0200
+	dkim=pass (1024-bit key) header.d=ideasonboard.com header.i=@ideasonboard.com header.b="qkVxBqHj"
+Received: from ping.linuxembedded.co.uk (cpc89244-aztw30-2-0-cust6594.18-1.cable.virginm.net [86.31.185.195])
+	by perceval.ideasonboard.com (Postfix) with ESMTPSA id 41905236;
+	Fri, 18 Sep 2026 12:03:51 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ideasonboard.com;
+	s=mail; t=1789725832;
+	bh=0tWYUZiixVnvD59lVl7V1A+pe3zDJA5LsRCVuPk+vBk=;
+	h=From:Subject:Date:To:Cc:From;
+	b=qkVxBqHjmma1aIBSh/W1KRZfWIsingY4v8DrXgBkCLxfeDkvIXIRKAMdzwe4tqOS2
+	 l/u0x+ENIc7JM6rz1rL2W8mwVxpeh4AsZFojwy6XgP5wELKuIjczO6gLoTubTcuwln
+	 Jcyc6qhvMNe5BmxFjBUhsXgXacpClDHIJT2AbAbE=
+From: Kieran Bingham <kieran.bingham@ideasonboard.com>
+Subject: [PATCH v5 0/6] dt-bindings: Orientation defines
+Date: Fri, 18 Sep 2026 11:05:21 +0100
+Message-Id: <20260918-kbingham-orientation-v5-0-e1a134326988@ideasonboard.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 06/15] arm64: dts: qcom: sdm845: Move PCIe phy and
- GPIOs to root port node
-To: Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-References: <20260917-root_port_v2-v2-0-6272b7caae9a@oss.qualcomm.com>
- <20260917-root_port_v2-v2-6-6272b7caae9a@oss.qualcomm.com>
-Content-Language: en-US
-From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-In-Reply-To: <20260917-root_port_v2-v2-6-6272b7caae9a@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTE4MDE0MCBTYWx0ZWRfX8i3B23em+ThZ
- d2m7ywrWvDVOB7r9gjeCvRIOA68tRNXlzME0KmsbHhjvfQ7H6xWLOrL5AyLnzDatepes2P4IK4m
- ScuU5nkOVT6ohPJAeR+3iI3I9YqqX+9hXg06JgIIC1oBsRhl/3+VrvHb83olwvGg1oj4DL4ForP
- QaQcjT/QxdhEuNMR2YdQRDqbjwbdziETk4PIe9PnhfZYeWkgoSwRYcrXcRuAbfN0cm56+WXJQFA
- lPg5uG7JMBa+tm6TodB/ItvRMsey9Xdr8tSNTfMQScvwPRy9un0RwHoOalujBtnvvlHB10+W5n/
- 49kZP8HDA6ZlyFSFJggNbX1ZOjh/LsU2OYdAHkBl4CHs28TM9tBASqyXmGba2Impeu+sTpSwGTc
- ndeDdVQ8n7Wzj+5DXAUe1Rfzap4xRUvugL9BIC9VytppwWMKnXDEkyrVEw6A4ffnsdQzzYvLw3B
- sCsCdvb6cPlyhHNqEfw==
-X-Proofpoint-GUID: ZBhtf7RjbLs-oBSAda219rOsVK4wEP7Z
-X-Authority-Analysis: v=2.4 cv=bcD+w+PB c=1 sm=1 tr=0 ts=6aad0cb9 cx=c_pps
- a=HLyN3IcIa5EE8TELMZ618Q==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
- a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22
- a=EUspDBNiAAAA:8 a=6pHcnep46kEejBPVP2gA:9 a=QEXdDO2ut3YA:10
- a=bTQJ7kPSJx9SKPbeHEYW:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTE4MDE0MCBTYWx0ZWRfX3VBl9fTlFDTR
- 6ieWJ2c0C7z9QPdmjDIctpgsZxLHCCWPeVnSexZeFonuVO9Z7WBwT5Blp0D1hthjxIPkjhUcmxj
- Kav763WKIDHxWzev6BqITmx6XBIgdXc=
-X-Proofpoint-ORIG-GUID: ZBhtf7RjbLs-oBSAda219rOsVK4wEP7Z
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-18_03,2026-09-16_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- spamscore=0 clxscore=1015 adultscore=0 suspectscore=0 priorityscore=1501
- bulkscore=0 phishscore=0 impostorscore=0 lowpriorityscore=0 malwarescore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609180140
+X-B4-Tracking: v=1; b=H4sIAOEMrWoC/3XNTQ6DIBCG4asY1qWhiPx01Xs0XYCgThrBgCFtj
+ Hcvmibd2OU7yffMgpKL4BK6VguKLkOC4Es0pwq1g/a9w2BLI0ooJ5xI/DTg+0GPOJSdn/VcBpg
+ S3bWkM1w1ApXpFF0Hr529P0oPkOYQ3/uXTLfrF6T8GMwUE8zERUjjFBWG3cA6nYI3QUd7bsOIN
+ jeznyUJ+2OxYtU1V0pay+tDa13XD13jikMLAQAA
+X-Change-ID: 20260608-kbingham-orientation-20afc0fb6957
+To: Mauro Carvalho Chehab <mchehab@kernel.org>, 
+ Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, Jacopo Mondi <jacopo@jmondi.org>, 
+ Sakari Ailus <sakari.ailus@linux.intel.com>, Jimmy Su <jimmy.su@intel.com>, 
+ Matthias Fend <matthias.fend@emfend.at>, 
+ Mikhail Rudenko <mike.rudenko@gmail.com>, 
+ Daniel Scally <dan.scally@ideasonboard.com>, 
+ Jacopo Mondi <jacopo.mondi@ideasonboard.com>, 
+ Michael Riesch <michael.riesch@collabora.com>, 
+ Benjamin Mugnier <benjamin.mugnier@foss.st.com>, 
+ Sylvain Petinot <sylvain.petinot@foss.st.com>, 
+ Laurent Pinchart <laurent.pinchart@ideasonboard.com>, 
+ Paul Elder <paul.elder@ideasonboard.com>, 
+ Martin Kepplinger <martin.kepplinger@puri.sm>, 
+ Quentin Schulz <quentin.schulz@theobroma-systems.com>, 
+ Tommaso Merciai <tomm.merciai@gmail.com>, 
+ Svyatoslav Ryhel <clamor95@gmail.com>, 
+ Richard Acayan <mailingradian@gmail.com>, Frank Li <Frank.Li@nxp.com>, 
+ Sascha Hauer <s.hauer@pengutronix.de>, 
+ Pengutronix Kernel Team <kernel@pengutronix.de>, 
+ Fabio Estevam <festevam@gmail.com>, Bjorn Andersson <andersson@kernel.org>, 
+ Konrad Dybcio <konradybcio@kernel.org>, 
+ Geert Uytterhoeven <geert+renesas@glider.be>, 
+ Magnus Damm <magnus.damm@gmail.com>, Heiko Stuebner <heiko@sntech.de>, 
+ Thierry Reding <thierry.reding@kernel.org>, 
+ Jonathan Hunter <jonathanh@nvidia.com>
+Cc: linux-media@vger.kernel.org, devicetree@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, linux@ew.tq-group.com, imx@lists.linux.dev, 
+ linux-arm-kernel@lists.infradead.org, linux-arm-msm@vger.kernel.org, 
+ linux-renesas-soc@vger.kernel.org, linux-rockchip@lists.infradead.org, 
+ linux-tegra@vger.kernel.org, 
+ Kieran Bingham <kieran.bingham+renesas@ideasonboard.com>, 
+ Alexander Stein <alexander.stein@ew.tq-group.com>, 
+ David Heidelberg <david@ixit.cz>, 
+ Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>, 
+ Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, 
+ Laurent Pinchart <laurent.pinchart+renesas@ideasonboard.com>, 
+ Quentin Schulz <quentin.schulz@cherry.de>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1789725933; l=4234;
+ i=kieran.bingham@ideasonboard.com; s=20260207; h=from:subject:message-id;
+ bh=0tWYUZiixVnvD59lVl7V1A+pe3zDJA5LsRCVuPk+vBk=;
+ b=/NCC6ht+TiMEJOrDiWTCe63UziN/m3CKwxyK+5kXXDl3uVCHE+GHRtth7vbpOTtyf+MEK+Ev7
+ SNIhs1ck1JdCbMp2wVWxirResfZ7Sus0HogXDLaHlv5r0qlwL+BcX0t
+X-Developer-Key: i=kieran.bingham@ideasonboard.com; a=ed25519;
+ pk=FVXKN7YuwHc6UtbRUeTMAmranfsQomA+vnilfglWdaY=
 
-On 9/17/26 2:25 PM, Krishna Chaitanya Chundru wrote:
-> The PCIe phy reference and the perst/wake GPIO properties are
-> per root port and belong in the root port node (pcie@0), not in the
-> RC controller node. Move phys and phy-names from the controller to
-> pcie0_port0 and pcie1_port0, adding labels to these nodes to allow
-> board-level overrides. Move perst-gpios/wake-gpios from the
-> controller overrides to the respective port nodes in the board files,
-> renaming perst-gpios to reset-gpios to match the binding used in the
-> root port context.
-> 
-> Signed-off-by: Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>
-> ---
+Add a new dt-bindings/media/video-interface-devices.h header that
+initially supports the Orientation types and convert existing users
+throughout the code base.
 
-Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+v3 collects tags, and fixes the typo, but drops all hunks that do not
+apply on the media-next tree so that these changes can be merged. Once
+the core feature is accepted a second sweep will convert remaining (new)
+additions of the orientation field.
 
-Konrad
+v2:
+ - Now expands from the original v1 "dt-bindings: media: Add macros for
+   video interface devices" to update
+   Documentation/devicetree/bindings/media/video-interface-devices.yaml
+   and extend to actually change all users to the new types.
+ - Link to v2: https://lore.kernel.org/r/20260626-kbingham-orientation-v2-0-47178be927b4@ideasonboard.com
+
+v3:
+ - Fix the arch/arm/boot/dts/nvidia/tegra30-lg-x3.dtsi
+   MEDIA_ORIENTATION_REAR to MEDIA_ORIENTATION_BACK
+   - Though this patch is dropped from this series to post the main
+     integration through the media tree.
+ - Drop (temporarily) changes to:
+    - arch/arm/boot/dts/nvidia/tegra30-lg-x3.dtsi
+    - arch/arm64/boot/dts/qcom/sdm670-google-common.dtsi
+    - arch/arm64/boot/dts/rockchip/rk3588-rock-5b-plus-radxa-cam4k-cam0.dtso
+    - arch/arm64/boot/dts/rockchip/rk3588-rock-5b-plus-radxa-cam4k-cam1.dtso
+ - Non applying changes will be re-posted after the core feature
+   lands in linux-next, or after those changes appear in media-next.
+
+-v4:
+ - Rebased media-committers/next (v7.2-rc1)
+ - Reintroduced updates to:
+   - arch/arm/boot/dts/nvidia/tegra30-lg-x3.dtsi
+   - arch/arm64/boot/dts/qcom/sdm670-google-common.dtsi
+   - arch/arm64/boot/dts/rockchip/rk3588-rock-5b-plus-radxa-cam4k-cam0.dtso
+   - arch/arm64/boot/dts/rockchip/rk3588-rock-5b-plus-radxa-cam4k-cam1.dtso
+ - Squash header introduction and bindings updates
+ - Link to v4: https://lore.kernel.org/r/20260804-kbingham-orientation-v4-0-336998dd63b4@ideasonboard.com
+
+-v5:
+ - Definitions now accepted in linux-media, rebased to get conversions in.
+ - Converts new himax,hm1246 binding
+
+---
+Kieran Bingham (6):
+      arm64: dts: freescale: Convert to new media orientation definitions
+      arm64: dts: qcom: Convert to new media orientation definitions
+      arm64: dts: renesas: Convert to new media orientation definitions
+      arm64: dts: rockchip: Convert to new media orientation definitions
+      ARM: tegra: Convert to new media orientation definitions
+      dt-bindings: media: i2c: himax,hm1246: Use video-interface-devices
+
+ Documentation/devicetree/bindings/media/i2c/himax,hm1246.yaml        | 3 ++-
+ arch/arm/boot/dts/nvidia/tegra30-asus-nexus7-grouper-common.dtsi     | 3 ++-
+ arch/arm/boot/dts/nvidia/tegra30-asus-transformer-common.dtsi        | 3 ++-
+ arch/arm/boot/dts/nvidia/tegra30-lg-p895.dts                         | 4 +++-
+ arch/arm/boot/dts/nvidia/tegra30-lg-x3.dtsi                          | 3 ++-
+ .../boot/dts/freescale/imx8mp-tqma8mpql-mba8mp-ras314-imx219.dtso    | 3 ++-
+ arch/arm64/boot/dts/freescale/imx8mq-librem5.dtsi                    | 3 ++-
+ arch/arm64/boot/dts/qcom/qcm6490-fairphone-fp5.dts                   | 3 ++-
+ arch/arm64/boot/dts/qcom/sc8280xp-lenovo-thinkpad-x13s.dts           | 3 ++-
+ arch/arm64/boot/dts/qcom/sdm670-google-common.dtsi                   | 3 ++-
+ .../boot/dts/renesas/r8a779g3-sparrow-hawk-camera-j1-imx219.dtso     | 3 ++-
+ .../boot/dts/renesas/r8a779g3-sparrow-hawk-camera-j1-imx462.dtso     | 3 ++-
+ .../boot/dts/renesas/r8a779g3-sparrow-hawk-camera-j2-imx219.dtso     | 3 ++-
+ .../boot/dts/renesas/r8a779g3-sparrow-hawk-camera-j2-imx462.dtso     | 3 ++-
+ arch/arm64/boot/dts/rockchip/px30-pp1516.dtsi                        | 3 ++-
+ arch/arm64/boot/dts/rockchip/px30-ringneck-haikou-video-demo.dtso    | 3 ++-
+ arch/arm64/boot/dts/rockchip/rk3399-pinephone-pro.dts                | 5 +++--
+ .../boot/dts/rockchip/rk3588-rock-5b-plus-radxa-cam4k-cam0.dtso      | 3 ++-
+ .../boot/dts/rockchip/rk3588-rock-5b-plus-radxa-cam4k-cam1.dtso      | 3 ++-
+ 19 files changed, 40 insertions(+), 20 deletions(-)
+---
+base-commit: aedd77ea8168f00687c1248cdf115071e869cf93
+change-id: 20260608-kbingham-orientation-20afc0fb6957
+
+Best regards,
+-- 
+--
+Kieran
+
