@@ -1,150 +1,104 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from abb.hmeau.com (abb.hmeau.com [180.181.231.80])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CECAC4A0921;
-	Fri, 18 Sep 2026 08:40:18 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E6609547076;
+	Fri, 18 Sep 2026 09:03:30 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=180.181.231.80
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789720819; cv=none; b=oynzi43jKcNxLWT/4Y91AuftYGuA4L8TXhm99O3app3EKt3xWFrWStBfAZN+pTBvvc8jw57yFo4kt5eoLEYC01bVs/vWa4BfRG2UyXimZyofyMhUtDRMZxmhzGNfdg7WhPDYWJlRXEL2U11VFjgHpR5U7ucnfLDjKIK/+zHpDzE=
+	t=1789722213; cv=none; b=dt63gLpPj8zGMm9VIQRbk2XzOyz4AEwSMTVxjQEekPncN3PcrjN5QZr0YsIP42I+Kx991rh9BRJX3SNNgjLlxhWHvh+HVxQfS4wHIpv9dyvhK/cZnRkSp6KmV8ethnd0+RG7rOZTTRyPQf7Juvfj5H+7jpeHmjB/WVBULkUbMGA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789720819; c=relaxed/simple;
-	bh=/cN8uyQZ9nDnHW8G5wdiabquj0TfX4E7hMc2JFryRE4=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=WVgMP587gkqA3pgGCfMtlez6P7otSVo0iiyFPfw2EEJzQkhz5v760LrMbTtOFbTQ39unvxpBd90rupgHq1WerfczFr0T9DaZhmPsvz823dZxFAIzW7oOTj3V0zP4ElTX2nIL/ZgsxfzxVCKhY+GOQgWNQ2lDs5iyDl+EfCf7tf8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=NbsGideP; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1789722213; c=relaxed/simple;
+	bh=SmRpdnSy79TQXwRIfJf4QLYyNeoEKaT4lUq8NlSOkTw=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=WuGp+GpGFEfj+JBXmoARWydAsblQR8yBbBavJLWa6qgOI3UU8ZOJowbFCr6v6Zv0ONdJRJjMvSj1zzsAZirASc3HlpnXgiLh5vsirJhq/zkb7+glONK5U8m109DD5+xAvJ1btJLM/uyxNwdB7dk/KFuMOjYHu60jObQfO/qFuvA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=gondor.apana.org.au; spf=pass smtp.mailfrom=gondor.apana.org.au; dkim=pass (2048-bit key) header.d=gondor.apana.org.au header.i=@gondor.apana.org.au header.b=GuoDw64+; arc=none smtp.client-ip=180.181.231.80
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=gondor.apana.org.au
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gondor.apana.org.au
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="NbsGideP"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A94751F000FF;
-	Fri, 18 Sep 2026 08:40:14 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1789720818;
-	bh=gUKkL/xmF5f394jyQDECLCZfFEXGSwufYWfevSsRYy0=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=NbsGidePkrOEfa1hkwsufe7o/scVFbF32GHeCoZVuyKYNLxpCAWwvIB1k+nJWMHTd
-	 FMhRjiJnhSWFTMqF3wJfJty+HC2KTs+bXP9OFKkrbZvoU8InwXGO9LpyR3po/1uVNO
-	 tyy3N2IVQWuuG4z2pjHcWd5pgD4sNO8QZksLlBBGbNqS0dDICDhp4FXKUpcNZHzkfK
-	 DTec91szBuv97WarSiFKeSP0hWkXZcTSRropMi1PTDuiCRbdXppp7O8hLs2Bcniwh+
-	 VK1g772ZrgqwoqXeSqyFMGccuQVb/Owu/iKCe0rI3x2nSFqEq8eDH4kno2EeTYtTd4
-	 hsKaTXtLEOHpQ==
-Message-ID: <0fd3e0a5-33f7-4bc6-9146-dcaf035c3ef5@kernel.org>
-Date: Fri, 18 Sep 2026 10:40:11 +0200
+	dkim=pass (2048-bit key) header.d=gondor.apana.org.au header.i=@gondor.apana.org.au header.b="GuoDw64+"
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=gondor.apana.org.au; s=h01; h=In-Reply-To:Content-Type:MIME-Version:
+	References:Message-ID:Subject:Cc:To:From:Date:cc:to:subject:message-id:date:
+	from:content-type:reply-to; bh=iOgq4f3mB73kJ7lB0i+83zUxcceVtkVmTY4k5rR7t3A=; 
+	b=GuoDw64+dVeVW2fwE/a4rEbB/h+0ul99IEWoxKa+LY5aJEO9BbITD207ShQmF2XmjWefNp9IXeI
+	jgH1F11EW8rgbfEnDZ4IOj/+z3sQNSo4zMgaxCvATbq0UeUiaOy9t4y7PFBlKnk3mw6z4CHyEvYWU
+	WYM2UP79gsMZC+59EP3rDNMEac4uRIttXfTkU9ixPJYdZ1pNHMRqaYLiJu4bEEiYdpgl1YzAa4zd7
+	G4dSCvzfZnw1sG8IZW0hoD6xPgiB+PA+/GtVowuBtKAUsMDc0mvarboEHhB3UFpanCDQFYuORtkIa
+	fwoh5JgIOYEKbZEPuMNV0bNYJRv+oTUZcLJw==;
+Received: from loth.rohan.me.apana.org.au ([192.168.167.2])
+	by formenos.hmeau.com with smtp (Exim 4.98.2 #2 (Debian))
+	id 1x7UV7-0000000FKs9-3rfP;
+	Fri, 18 Sep 2026 17:03:22 +0800
+Received: by loth.rohan.me.apana.org.au (sSMTP sendmail emulation); Fri, 18 Sep 2026 19:03:21 +1000
+Date: Fri, 18 Sep 2026 19:03:21 +1000
+From: Herbert Xu <herbert@gondor.apana.org.au>
+To: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+Cc: Thara Gopinath <thara.gopinath@gmail.com>,
+	"David S. Miller" <davem@davemloft.net>,
+	Stanimir Varbanov <svarbanov@mm-sol.com>,
+	Eneas U de Queiroz <cotequeiroz@gmail.com>,
+	Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>,
+	Eric Biggers <ebiggers@kernel.org>,
+	Demi Marie Obenour <demiobenour@gmail.com>,
+	Bjorn Andersson <andersson@kernel.org>,
+	Konrad Dybcio <konradybcio@kernel.org>,
+	linux-crypto@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+	linux-kernel@vger.kernel.org, brgl@kernel.org,
+	stable@vger.kernel.org
+Subject: Re: [PATCH v7 00/12] crypto: qce - Fix crypto self-test failures
+Message-ID: <aqz-Wfa7sLNMlxym@gondor.apana.org.au>
+References: <20260910-qce-fix-self-tests-v7-0-cdbd2718af14@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/2] dt-bindings: arm: qcom: Add Xiaomi Mi 8 family
- compatibles
-To: David Heidelberg <david@ixit.cz>
-Cc: Bjorn Andersson <andersson@kernel.org>,
- Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
- Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
- <conor+dt@kernel.org>, Kees Cook <kees@kernel.org>,
- Tony Luck <tony.luck@intel.com>, "Guilherme G. Piccoli"
- <gpiccoli@igalia.com>, linux-arm-msm@vger.kernel.org,
- devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
- phone-devel@vger.kernel.org
-References: <20260915-dipper-v2-0-cbade54919ee@ixit.cz>
- <20260915-dipper-v2-1-cbade54919ee@ixit.cz>
- <20260917-heavenly-weasel-of-criticism-1add6b@quoll>
- <b324f0b8-0875-457f-936c-89b858d082fa@ixit.cz>
-From: Krzysztof Kozlowski <krzk@kernel.org>
-Content-Language: en-US
-Autocrypt: addr=krzk@kernel.org; keydata=
- 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
-In-Reply-To: <b324f0b8-0875-457f-936c-89b858d082fa@ixit.cz>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260910-qce-fix-self-tests-v7-0-cdbd2718af14@oss.qualcomm.com>
 
-On 17/09/2026 12:25, David Heidelberg wrote:
-> On 17/09/2026 12:21, Krzysztof Kozlowski wrote:
->> On Tue, Sep 15, 2026 at 04:32:24PM +0200, David Heidelberg wrote:
->>> +      - description: Xiaomi Mi 8 family
->>> +        items:
->>> +          - enum:
->>> +              - xiaomi,dipper
->>> +              - xiaomi,equuleus
->>> +              - xiaomi,ursa
->>> +          - const: xiaomi,dipper-common
->>
->> We do not make "common" compatibles.
->> git grep common -- Documentation/devicetree/bindings/arm/qcom.yaml
+On Thu, Sep 10, 2026 at 03:00:41PM +0200, Bartosz Golaszewski wrote:
+> This iteration - in addition to the previous fixes - proposes to split
+> the QCE driver into a core part necessary to bind to the QCE DT node and
+> enable runtime power management in order to allow to drop the
+> interconnect votes, and the crypto part registering the crypto
+> algorithms. The core module is then enabled in arm64 defconfig while the
+> crypto part stays disabled by default.
 > 
-> TBH I have mental issue with calling it xiaomi,dipper-dipper
+> The QCE hardware crypto engine has several limitations that cause it to
+> produce incorrect results or stall on certain inputs. This series fixes
+> several bugs and adds workaround allowing the deiver to pass crypto
+> self-tests.
 > 
-> All three devices are branded as own devices, just based on 99.9% same base.
+> The failures addressed are:
 > 
-> I'm not aware of any internal name which group these devices.
+> - HMAC self-test failures for empty messages
+> - AES-XTS returning success on zero-length input (should be -EINVAL)
+> - AES-CTR: partial final block causes the engine to stall, output IV
+>   derivation was incorrect
+> - AES-XTS with key1 == key2 is not supported by the CE
+> - AES-CCM: partial final block and fragmented payload both stall the
+>   engine
 > 
-> I could call it like xiaomi,common, but there is the polaris and beryllium, 
-> which aren't "that common" with these three.
+> All fixes were tested on an SM8650 QRD board with
+> CONFIG_CRYPTO_SELFTESTS=y and CONFIG_CRYPTO_SELFTESTS_FULL=y.
 > 
-> Do you have idea what to do in this situation?
+> Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+> ---
+> Changes in v7:
+> - Add follow-up changes converting the QCE crypto driver to auxiliary
+>   bus, adding the core QCE driver under drivers/soc/ registering the
+>   auxiliary device and removing the BROKEN Kconfig label
+> - Link to v6: https://patch.msgid.link/20260717-qce-fix-self-tests-v6-0-455775fe5f6c@oss.qualcomm.com
 
-Just don't use "common" or "generic" or anything close to it, because it
-confuses future contributors thinking "common" compatible is allowed.
-It's not.
+For some reason your patches do not apply, please fix this and
+resubmit:
 
-Except above, the actual names of compatibles are irrelevant, they just
-need to uniquely identify the device. Personally, I would not use
-nicknames at all for devices because they tell me nothing. Maybe they
-tell to you because you read internal source code, but not to me.
+https://sashiko.dev/#/patchset/20260910-qce-fix-self-tests-v7-0-cdbd2718af14%40oss.qualcomm.com
 
-And if you google for Xiaomi Dipper, you will find first forks of code,
-so again not source information but derivative. Only fifth result is
-gsmarena website, but weirdly it does not have even "dipper" text
-mentioned. So basically using such names is counter productive to me,
-confusing and bringing downstream - postmarketos or lineageos -
-practices to upstream. Basically downstream forks create some codename
-and you push it to the usptream. You can, but I don't find it useful.
-
-I would use proper model names, e.g. "xiaomi,mi-8" for final
-compatibles. Codename for family is fine, because simply there is no
-product which we could identify as common base...
-
-
-Best regards,
-Krzysztof
+Thanks,
+-- 
+Email: Herbert Xu <herbert@gondor.apana.org.au>
+Home Page: http://gondor.apana.org.au/~herbert/
+PGP Key: http://gondor.apana.org.au/~herbert/pubkey.txt
