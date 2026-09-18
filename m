@@ -1,158 +1,154 @@
-Received: from mail-ej2-f12.google.com (mail-ej2-f12.google.com [74.125.228.140])
+Received: from mail-ed2-f12.google.com (mail-ed2-f12.google.com [74.125.228.76])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 97D744FC330
-	for <linux-arm-msm@vger.kernel.org>; Fri, 18 Sep 2026 14:21:37 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.228.140
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 97F3C347500
+	for <linux-arm-msm@vger.kernel.org>; Fri, 18 Sep 2026 14:27:44 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.228.76
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789741299; cv=none; b=qUKA3LyM+xU8Iq3DqQLHKIYwIQh5ukvY5mlIjonWLLHkIlIU135KwT8ogowFphinB/NycDwXxOjSScgu1YRXBxzO8KrS86y7bNzHDTNpWqrEeRYxS1gueoSsb6WFTtLVsk5WF9B9Lun9P9wT1qh7pg+1tdGnOg/sYnN5E2g5J2Q=
+	t=1789741666; cv=none; b=gFrRLWE9BTfZKsJdGednwnF+Xx8atJxNOd1d094xPfcjgDjFNL9mCQOBRA40t+zYGZAwFzjoWz/jdPAA3r7S3j3QnzH4uTYPqEq72sUBOJUEqR57JLb7y9S3uQb7/b1ASRyaUd4cnMFejIQ/Cjc0tnYdp/VANWT1yBx4LyAI3fc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789741299; c=relaxed/simple;
-	bh=Zs0q3BB6FPEKrnEd2QcTPKWAEsGsAYzDdsgAWxcpX18=;
-	h=Mime-Version:Content-Type:Date:Message-Id:From:To:Cc:Subject:
-	 References:In-Reply-To; b=nV67lJ/MpkIL2UkUj1sPc5KqS3+tkg1M+rxf9RilIjRd3CRKphhd4RWTX23ZjX6lgBgrJOk3vTy2ZkihRrWGOJTHHLPQQ36Drhh08Og4X4yLECaMPT6FY7CHlQ+7uOK5pGe73Np4o27Gmdd1lsR77aQ/1XOpPASZbAZSd638z3c=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=fairphone.com; spf=pass smtp.mailfrom=fairphone.com; dkim=pass (2048-bit key) header.d=fairphone.com header.i=@fairphone.com header.b=DTneyczo; arc=none smtp.client-ip=74.125.228.140
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=fairphone.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=fairphone.com
+	s=arc-20240116; t=1789741666; c=relaxed/simple;
+	bh=sgunm2sNjagt46bq1ZIC/qX8k5vKqpE4P8hC394mvU8=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=t3ToGO2uCz2a3VMqekdHTBOJKFhy3YXAHn9NHJwJmQhkJiUetlJoIXU2LKemrez0fvBv7DsYKSlpU/i4pXoqSwtNaPZlhi5gt7Zwnf9N4+8d95JGuMQKjklxqm4Dh87cLWPv+c8q/nQFiwoaDr0Gi1z06UOA3aOOHffCfcWjZs4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=Q0c/haM4; arc=none smtp.client-ip=74.125.228.76
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=fairphone.com header.i=@fairphone.com header.b="DTneyczo"
-Received: by mail-ej2-f12.google.com with SMTP id a640c23a62f3a-c254f6c7a56so104884266b.1
-        for <linux-arm-msm@vger.kernel.org>; Fri, 18 Sep 2026 07:21:37 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="Q0c/haM4"
+Received: by mail-ed2-f12.google.com with SMTP id 4fb4d7f45d1cf-6a803458ba0so977965a12.0
+        for <linux-arm-msm@vger.kernel.org>; Fri, 18 Sep 2026 07:27:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=fairphone.com; s=fair; t=1789741296; x=1790346096; darn=vger.kernel.org;
-        h=in-reply-to:references:subject:cc:to:from:message-id:date
-         :content-type:content-transfer-encoding:mime-version:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=2t5ETH0BVW3gDZ+cs/uAotP/lQAVJkBPSTT8r5GG204=;
-        b=DTneyczoiM0wkdqGRDTwFWnc2vvUAJyd/2a2kKLGjmHRKxVTxX/emog/QBcXFPFhc8
-         tJ92+aiJzKBzHcOOSZ5iGG5m4DcDGK+t4ei7Wck2FWza//vDda2COTM3VjQ6jBfph8YI
-         cZWgETrMmYSTohD/b0QdP1M+3aLJzdcvjzGo5jzIJ1beEHY8SqgIokcXKuUQ7YMqr9oz
-         KmCa67L9TcpAo5dDOt5eJw7GaZNfMeLA109NHwVL4wb0YaQnRogMJLaY9M5Fg7UMQvc5
-         VV1zj2e18iZH0CJDEYijSuFcOXvVkgyOhY4cC2PJpDxxvDAvu/0BCKXP9Vw/zBjHzjsl
-         vg6Q==
+        d=linaro.org; s=google; t=1789741663; x=1790346463; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :from:references:cc:to:subject:user-agent:mime-version:date
+         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=BnD2Ei89mkiOFb1zZQQ79Aq7EmWfIQzBftxY+5mS48k=;
+        b=Q0c/haM434hFxRb9HrsA8HMhQ0aOYGv8PgHBrbqBJeyp/+aT5rApMn3T0JqghomwUW
+         q8y2OWHAWCdnBzrh1nqiidF/S8Hp98uwPim6fYZfFsVX690bH/yv3113Q00lT7nb3fNG
+         CRscyAc6emTw4eOnjRlzLsRVxc512gqkfkRZb8oypb7n9gFZJfIxA1B4OsUlwzlLOvFA
+         zJ12gqU0/I1Hr+dE+lUijjXGRIQ5yD3533ZduBBF9fOnaawbEWC3xH6nXnGF9l9rT3ua
+         qcY/rZJw9ABTJUHRati5Vdte22n0RM8V8fdXj/jf2ptSov9y9/iL+XoITfh6OSdpv4Ta
+         W04g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1789741296; x=1790346096;
-        h=in-reply-to:references:subject:cc:to:from:message-id:date
-         :content-type:content-transfer-encoding:mime-version:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=2t5ETH0BVW3gDZ+cs/uAotP/lQAVJkBPSTT8r5GG204=;
-        b=wqPR2DsHnD4V0o2gVlxNE2tRbHU2odMDG5tfyiiPxXNRvoXP56prxOpgVBoCup0FZK
-         PrHhZCdPOIYkbYVQk/rP+3ZE1IaZk5oJLQn7nmPLBa4nXCbh2kXQVmzha1q6RZfQ+7GZ
-         qHxQQHTRcMe7JrGAC7rly2zJOcxjDIlgW0tTNZLDTzEJwrwBae36KmIsI/xj75r5LeZ9
-         It24rWQdnqUXXTt1itdUGcrEXpOdzuwHKeBeCkiSnHMxFGxwZKGPCUODyB2EQPbyRzUG
-         lHh/jSY8Dg5K5/guxg9HrZTALW6uvTZf6iEZqY+0WNB2HkEpPzMu2j/ImT8Qh/AJFBID
-         UmPQ==
-X-Forwarded-Encrypted: i=1; AKwUvBxZfxmbFe7jurQNyPBMipj3r+lqU7KRKdlUJvaE13jySjW6gGBfzGpYnRyUo8TvQaJaKxMY5CrZnTx0bxBE@vger.kernel.org
-X-Gm-Message-State: AFuF++lNrOL5jWxVM0rongyn68lxCTInUdOZvqwZJTBEv2321x3V0Yn1
-	f6hYeeGtGc3pjAnkU2z6FunafgVbFCS6CZmhJTNzaIeA+JaM0z+xD+/NueiiioKALcE=
-X-Gm-Gg: AYBFou0RwSNVnatbEm/b/cF/9OmDkLtZL7uHLHJoXFvCXg6BpO0VgR+UZ9GcjkCUp8B
-	uxzN0Z+mW2gAlyXnXIDNGOp16CdnPGGK0oBM7UieLBLtgf7uWCUdyydkvLKBgocADMxfHxQwNvP
-	bJXftUrYUxXKgqzPADtdtmtTW8ZtHsQzasD87M0b+/DQE8h1I4zA9nzPvsdfPggApd821nNOJ3X
-	4TVsm28UbNnYSGdMPcVeeZPRhGUu5P7c8rPoejk5aFR/xV3ZtljRLbwkHR9EA1zEIGRm06dEXVa
-	fZmedynxRSLIya6fcuHWBGrma41JGy8i80euTBwTHSx55dtA2ysY4muXd2q91JDsC1ixF/h5C0J
-	T1dsoSrs3qNDCBL3vR7oA0BihtYnZNk/8Nk7pu8uihXsJpbAFk03i+nc/M5dV7wNyFA/AD07Ubo
-	Rw2u4euEme9jleTgNSg0lumXURTDeV4GN4LObu2xqHQbp6FfNazNg2HAv6z00W2P8w5KrM25lt3
-	m/z/G9tZM26vtDfn/hOYjwudx7Mh8nUe291FC0PF2w=
-X-Received: by 2002:a17:907:e0d2:10b0:c26:3107:71dd with SMTP id a640c23a62f3a-c2a2538ac4fmr66810866b.13.1789741295804;
-        Fri, 18 Sep 2026 07:21:35 -0700 (PDT)
-Received: from localhost (144-178-202-138.static.ef-service.nl. [144.178.202.138])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c2a1b424826sm61186066b.0.2026.09.18.07.21.35
+        d=1e100.net; s=20260707; t=1789741663; x=1790346463;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :from:references:cc:to:subject:user-agent:mime-version:date
+         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=BnD2Ei89mkiOFb1zZQQ79Aq7EmWfIQzBftxY+5mS48k=;
+        b=a8DmLlAwnBDHfkC7+UGa7K5DVdA/x9V7oUhyiPiwAdnyMggDRzesUtGvcvdnRvsGvo
+         z1mZLfVRPdaytuNi5qOe+l9QBog9C0A+O/1pgP5YGYLI14RDBpMaAwjD+d+O/iXAfubk
+         rlLoa+EuwrenIuaBNStFSX9QsAgvmGuTGsOPep/wwPb1nJl/Hx8yJuqajW7+I9pq4SH9
+         zzy3dvaXFnGtaZq0YJdx3GK0R65z3ZlIqhth9me7/ihleFLrj/BKKIppSvJ6Fe5wqHM3
+         pYZbSmIGrdcoucx9P36m5Qz74cAqui7pJPVGpP6wzNi0mG7AsP/1H2bDEyfryUBI8E1G
+         xJ2Q==
+X-Gm-Message-State: AFuF++k6m/kr6MUsbP9j8CB1lSO2iEx6Y83UU8rrAZqr6c6JEtFyvpwx
+	+NTGJvr8iLb2AeyAgZxgzisBsut8Cw7GNfaa33j9LJ50Z4/oDa/gAidth/pppUMartw=
+X-Gm-Gg: AYBFou34u86pLERuRN//YNnqO848GCTEBYNV9VkhYrkF9eQfEW6uSR5K+2PMq9JkcSX
+	C5RnjfJLi9Y7phtkG4au9AzC0CFu3ngamc8J4otm7xDcPwk1q1j5Ms2pbMPdkD93gnIf6qVWXBy
+	fvRRRsBIzjqsQlBL7eP99l+zGRhlwplOrlphUbNXR7pmzqd9Ex8elTJYPLxImmKyEpWIFNsA8Z5
+	icDevn4wIBmTncyqzq4yQfLGsi6mykQ7xrhhq7yMqhxXq5TPyeEwfsMjkpD6v80PQz+2B9JgeTu
+	Do2ILC11J4XWR4GM1CqZybVjPunSUIRlKChUQZ9f3+JeXwCPIw0rHCk+RQyBZ75FOYd0f8atPBF
+	ICmJ4K+PeXhyn0O2aQvcbos75pR1Ue+l+KksxsEtzvKbnFgpfq7t/0in7ek68Di8FIJOSMph8k7
+	DPpQlgUxGxS4hMesleMBrJGf34+VKQYZhjA4BWkg5udIXI+OqYHVulPEiXR+fgFLl1OgqC6Dtl4
+	dqcm2g8xw==
+X-Received: by 2002:a17:906:478d:b0:c29:5a76:72be with SMTP id a640c23a62f3a-c2a157c41a8mr252060066b.24.1789741662748;
+        Fri, 18 Sep 2026 07:27:42 -0700 (PDT)
+Received: from [192.168.0.167] ([109.76.4.225])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c2a1bb8ba5bsm61582566b.45.2026.09.18.07.27.41
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 18 Sep 2026 07:21:35 -0700 (PDT)
+        Fri, 18 Sep 2026 07:27:42 -0700 (PDT)
+Message-ID: <fd6bf432-0ce8-4793-821f-f08321b13a5b@linaro.org>
+Date: Fri, 18 Sep 2026 15:27:40 +0100
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
-Mime-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
-Date: Fri, 18 Sep 2026 16:21:34 +0200
-Message-Id: <DLIIC89MM6AK.L02JKTJKQSXZ@fairphone.com>
-From: "Luca Weiss" <luca.weiss@fairphone.com>
-To: "Konrad Dybcio" <konrad.dybcio@oss.qualcomm.com>, "Luca Weiss"
- <luca.weiss@fairphone.com>, "Liam Girdwood" <lgirdwood@gmail.com>, "Mark
- Brown" <broonie@kernel.org>, "Rob Herring" <robh@kernel.org>, "Krzysztof
- Kozlowski" <krzk+dt@kernel.org>, "Conor Dooley" <conor+dt@kernel.org>,
- "Bjorn Andersson" <andersson@kernel.org>, "Konrad Dybcio"
- <konradybcio@kernel.org>
-Cc: <~postmarketos/upstreaming@lists.sr.ht>, <phone-devel@vger.kernel.org>,
- "Krzysztof Kozlowski" <krzk@kernel.org>, <linux-arm-msm@vger.kernel.org>,
- <linux-kernel@vger.kernel.org>, <devicetree@vger.kernel.org>
-Subject: Re: [PATCH 3/4] regulator: qcom-rpmh: Add missing regulators in
- PM6350
-X-Mailer: aerc 0.22.0-0-gc2f86b7abde3-dirty
-References: <20260901-fp4-regulator-supply-v1-0-68288ab70aee@fairphone.com>
- <20260901-fp4-regulator-supply-v1-3-68288ab70aee@fairphone.com>
- <ef06178c-5c16-4cb4-8ef8-3a7e1ccbf260@oss.qualcomm.com>
-In-Reply-To: <ef06178c-5c16-4cb4-8ef8-3a7e1ccbf260@oss.qualcomm.com>
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v20 2/6] phy: core: Add phy_get_by_of_node()
+To: Neil Armstrong <neil.armstrong@linaro.org>,
+ Bjorn Andersson <andersson@kernel.org>,
+ Michael Turquette <mturquette@baylibre.com>, Stephen Boyd
+ <sboyd@kernel.org>, Rob Herring <robh@kernel.org>,
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
+ <conor+dt@kernel.org>, Robert Foss <rfoss@kernel.org>,
+ Todor Tomov <todor.too@gmail.com>, Mauro Carvalho Chehab
+ <mchehab@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>,
+ Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
+ Bryan O'Donoghue <bod@kernel.org>,
+ Loic Poulain <loic.poulain@oss.qualcomm.com>, Vinod Koul <vkoul@kernel.org>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+ Kishon Vijay Abraham I <kishon@kernel.org>, Felipe Balbi <balbi@ti.com>,
+ Manivannan Sadhasivam <mani@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org,
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-media@vger.kernel.org, linux-phy@lists.infradead.org,
+ Krzysztof Kozlowski <krzk@kernel.org>
+References: <20260918-b4-linux-next-25-03-13-dtsi-x1e80100-camss-v20-0-dc244e124e71@linaro.org>
+ <20260918-b4-linux-next-25-03-13-dtsi-x1e80100-camss-v20-2-dc244e124e71@linaro.org>
+ <211caa95-dfbc-427d-8ce8-49cc76c24124@linaro.org>
+From: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
+Content-Language: en-GB
+In-Reply-To: <211caa95-dfbc-427d-8ce8-49cc76c24124@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-Hi Konrad,
+On 18/09/2026 15:10, Neil Armstrong wrote:
+>>   EXPORT_SYMBOL_GPL(devm_of_phy_get_by_index);
+>> +/**
+>> + * phy_get_by_of_node() - lookup and obtain a reference to a phy by 
+>> device_node
+>> + * @np: node containing the phy
+>> + *
+>> + * Returns: the phy associated with the device node or ERR_PTR.
+>> + */
+>> +struct phy *phy_get_by_of_node(struct device_node *np)
+>> +{
+>> +    struct of_phandle_args args = { .np = np, .args_count = 0 };
+>> +    struct phy *phy;
+>> +
+>> +    mutex_lock(&phy_provider_mutex);
+> 
+> I don't really understand the usage of lockdep_assert_held(), but why
+> does _of_phy_get() uses lockdep_assert_held() and here you use mutex_lock()
+> like before patch 1 ?
+> 
+> Neil
 
-On Wed Sep 2, 2026 at 10:51 AM CEST, Konrad Dybcio wrote:
-> On 9/1/26 10:58 AM, Luca Weiss wrote:
->> Add the missing smps3-6 and ldo17 definitions. While smps3/5 and ldo17
->> are not used from the rpmh regulator driver on SM6350, the regulators do
->> exist, so add them with the types based on the datasheet.
->>=20
->> Signed-off-by: Luca Weiss <luca.weiss@fairphone.com>
->> ---
->>  drivers/regulator/qcom-rpmh-regulator.c | 7 +++++--
->>  1 file changed, 5 insertions(+), 2 deletions(-)
->>=20
->> diff --git a/drivers/regulator/qcom-rpmh-regulator.c b/drivers/regulator=
-/qcom-rpmh-regulator.c
->> index dd2265961151..7d20f3e47760 100644
->> --- a/drivers/regulator/qcom-rpmh-regulator.c
->> +++ b/drivers/regulator/qcom-rpmh-regulator.c
->> @@ -1591,7 +1591,10 @@ static const struct rpmh_vreg_init_data pm6150l_v=
-reg_data[] =3D {
->>  static const struct rpmh_vreg_init_data pm6350_vreg_data[] =3D {
->>  	RPMH_VREG("smps1",  SMPS, 1,  &pmic5_ftsmps510, "vdd-s1"),
->>  	RPMH_VREG("smps2",  SMPS, 2,  &pmic5_hfsmps510, "vdd-s2"),
->> -	/* smps3 - smps5 not configured */
->> +	RPMH_VREG("smps3",  SMPS, 3,  &pmic5_ftsmps510, "vdd-s3"),
->> +	RPMH_VREG("smps4",  SMPS, 4,  &pmic5_ftsmps510, "vdd-s4"),
->> +	RPMH_VREG("smps5",  SMPS, 5,  &pmic5_ftsmps510, "vdd-s5"),
->> +	RPMH_VREG("smps6",  SMPS, 6,  &pmic5_hfsmps510, "vdd-s6"),
->>  	RPMH_VREG("ldo1",   LDO,  1,  &pmic5_nldo,      "vdd-l1"),
->>  	RPMH_VREG("ldo2",   LDO,  2,  &pmic5_pldo,      "vdd-l2-l5-l7"),
->>  	RPMH_VREG("ldo3",   LDO,  3,  &pmic5_pldo,      "vdd-l3-l6-l8-l9-l10")=
-,
->> @@ -1608,7 +1611,7 @@ static const struct rpmh_vreg_init_data pm6350_vre=
-g_data[] =3D {
->>  	RPMH_VREG("ldo14",  LDO,  14, &pmic5_pldo,      "vdd-l12-l14"),
->>  	RPMH_VREG("ldo15",  LDO,  15, &pmic5_nldo,      "vdd-l15-l19-l22"),
->>  	RPMH_VREG("ldo16",  LDO,  16, &pmic5_nldo,      "vdd-l16"),
->> -	/* ldo17 not configured */
->> +	RPMH_VREG("ldo17",  LDO,  17, &pmic5_nldo,      "vdd-l17"),
->
-> L17 (and other NLDOs on this PMIC) can do 0.312 - 1.304 V, whereas
-> the pmic5_nldo config allows a range of 0.32 - 1.296 V. But I suppose
-> that is something to fix separately anyway
+assert_lockdep_held() is just an assertion that the lock is held, Loic 
+suggested adding it BTW. It ensures that when another function calls 
+this function it holds phy_provider_mutex.
 
-Can you help with what numbers from the data sheet we're supposed to
-use?
+i.e.
 
-In 80-PR887-1 Rev. G, Table 3-20 would suggest L17 is programmable from
-0.312V to 1.328V while "output voltage range" is 0.32V-1.304V.
+phy_get_by_of_node()
+{
+	mutex_lock(&phy_provider_mutex);
+	_of_phy_get();
+	mutex_unlock(&phy_provider_mutex);
+}
+EXPORT_SYMBOL(phy_get_by_of_node);
 
-But Table 3-11 does indeed show 0.312V - 1.304V as "Programming range"
-for this specific LDO.
+_of_phy_get()
+{
+	lockdep_assert_held(&phy_provider_mutex);
+	/* happy days */
+}
 
-So the voltages from the Table 3-11 are the ones to use? The other ones
-can be ignored completely? But e.g. the step size is only listed in
-3-20.
+phy_broken_locking()
+{
+	_of_phy_get();
+}
+EXPORT_SYMBOL(phy_broken_locking);
 
-Sidenote, are the step sizes for the SMPS listed anywhere?
+_of_phy_get()
+{
+	lockdep_assert_held(&phy_provider_mutex);
+	/* wails plaintively into the void */
+}
 
-Regards
-Luca
-
->
-> Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
->
-> Konrad
-
-
+---
+bod
