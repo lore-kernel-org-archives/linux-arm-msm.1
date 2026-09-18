@@ -1,128 +1,145 @@
-Received: from mail-wm2-f12.google.com (mail-wm2-f12.google.com [74.125.225.140])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 49D4050E595
-	for <linux-arm-msm@vger.kernel.org>; Fri, 18 Sep 2026 15:58:46 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.225.140
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6CB7E515988;
+	Fri, 18 Sep 2026 16:28:18 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789747128; cv=none; b=OpNOatGmwHiwVFieT/yO4VUqM+hdrw5y4IGHgKUtF9Qj6TlUL+Oe+P7rAtcyjHvl1YsHZmmtrzAx8dqxZlXQO1xLWSlrMfqYrjMzuO5pTewNxFYhfr+Iww3jYjo/Pr0C7K5nApK3Y0l+43r3O2sv9mFfiZF4VBQf7rC4yXYDjfs=
+	t=1789748898; cv=none; b=m9rBierl1pXGwI3HffRwwpJ+A1870K02t/k43KNt0VSETPpSlYQapumQaqS1REs1+ZBba/0A8c8YxAZXPT3XRZ8sGdMJLFbSELDAZS2LOuYjcXFwYhxGSNYv5VVQnZ/ysr476sY/egCWt2oyO80rqP1gY3yFskeNyV8OZcPpqKY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789747128; c=relaxed/simple;
-	bh=k6iD2D2etMihq1Ed/Z2D6Mnz744U4yuQqMUM1sM4K3I=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=OPAdCyfdJ3iIuaxyAgecDoidtBvV9u7Ukgc51Kp61IbZiXObIz6cumhxumz93AfDT1aUaXji1jBOGIEkff42uQ/RmljHMhxuce5CIJJqBg9noycQ1E8f0iMreNuCcWZQ1SYAIkPanEuOXwTpQL99bU45WV6pqmgz8UOOasHklvM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com; spf=pass smtp.mailfrom=baylibre.com; dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b=iN3bq48t; arc=none smtp.client-ip=74.125.225.140
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=baylibre.com
+	s=arc-20240116; t=1789748898; c=relaxed/simple;
+	bh=6Z8qKohBjG+nYdXMxSIz7GwXcSnl7h3FDD5QcnwlKuY=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=BZ+b62RjjpKMjLfIYdu5C7CDMQFQ/71cvjFZ5sFXFC46AtOq3B7PIv2/vw47VoUenH9WfjOjos80Ocagsd1vgiPFHY3N/W+GZ7WoDylM6peYB7VpSVI9PSKCYacNZU28wvmfMIqd1rImRkOhc+5YWxktKo/JKKOyxZoXhn5FdlE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=UB+YS1Us; arc=none smtp.client-ip=10.30.226.201
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b="iN3bq48t"
-Received: by mail-wm2-f12.google.com with SMTP id 5b1f17b1804b1-49cc9f581c4so3730885e9.0
-        for <linux-arm-msm@vger.kernel.org>; Fri, 18 Sep 2026 08:58:46 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=baylibre.com; s=google; t=1789747124; x=1790351924; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=k6iD2D2etMihq1Ed/Z2D6Mnz744U4yuQqMUM1sM4K3I=;
-        b=iN3bq48tlNrunPRtgjFkjHM4AQ4/oH2tuiZTIoQEtQDEEcKoYBONQUVBrbkbDD7X+O
-         yQo6MYyOdTofXubCwQpQDGmOT2v1HUA2iOpFnpKAwE2ZaY1cw4aYhooSdIWT+ppmrZ2l
-         mrrpkmHnO/SPN+/tush/TNFuUD5MZ5heHXtw2mXjeoqmpWRloJMP0TQkPEoZKxfpZ5XF
-         YWRodSb+PzDdcb2+DCx2Tlebeq4z5QOq4yPoGEs6aiLYGLl4fbyggGphDobBDlGVCtNB
-         W97ajsZhH8HDhFr7A+cIvwtOAkUz+2bVqjeMDWQ17Kw+jyGqELtjUI4meFo8nEZZi96d
-         7cUQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1789747124; x=1790351924;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=k6iD2D2etMihq1Ed/Z2D6Mnz744U4yuQqMUM1sM4K3I=;
-        b=X6bOCCY/wZ69bx8Gj6k/JTWKrbX6fqjM2cu0w6MGTSFzlUXO51/kvDoTCyNFKLPqRC
-         uNUOiFqKBtQ+SUjdsyNT/PgZWdh3hZRa9j7gsMUBpLJIwJIsWVVBxEGBrxItjaZmtBEC
-         Qe83ljMGkUCIuL9yeIdrdP4ngt3TpYW6p1kd/MLu8rotZSR1nKr/GNZfgZof0+B5VhDl
-         yAuO68YD/IXC1PDlBugz+qqC22wcpPGLVzmPEahRcuR27GGkustIksKrYCta42u0aHjM
-         3YcVJqunVsXiJUZbcRh00hbLtV3RMKiiJE0uwKXhmHBG3+LIfKJ2clDZHP4fm3HDwUyP
-         RM4Q==
-X-Forwarded-Encrypted: i=1; AKwUvBxFs59z6Xwll20tFg2m2li4m+NEzGPeDc6vTgBuyGVVGp+OG8NI2a1kILwbPc8U925i/PvCg5E4C9Ue6Mns@vger.kernel.org
-X-Gm-Message-State: AFuF++lMqXNe+HF5W/EYgP/jfEX0tB8i46pQfr75QWN9hVj/eLFgx3Fb
-	jx+IdUI7mE00d/3ooXFBA6movl564mXEvsJKObg4VNPveb2skNd1gEJro0BoL5XUHBs=
-X-Gm-Gg: AYBFou2/keAqP+0TIJcKNuZYebY3E7ybIeLYD2vuTjtcaJAx+Vv1lxSX5tZqFZSJ92B
-	N+o+zJuxFiLI+ezEYFJZrSvoRJPpclpv7j/SkPEpt8Ar9ejE8fExaHpnLXsLYhM55x0tRHnkAsq
-	1oCxZN+WG8ItGhYz+usrV4YKrCKgz9KJbs1lj5o5UM7sM1uKzrTMqkfziL9jNL1aEr0SXmbSkUD
-	59CWtd5Yk2ie/eayjH0H8jHa2lUoKx9Lfp1C1Lf7Jt6mOP0XN6D5kd5mAAeeiTlJm1Ep9fahi+E
-	EOSsBfrN7KdUbZGD+Rg70rpTX1DXmrv/jLjhc2QuwB5jQF/7rZuCWDJWjDu4/zk0tsrxSA4Nmld
-	sSURzKc/uCKtYJBH2X6BNLYt2HZlrefC2c9KvK8GJQHz364Gdb6XmdaeUOZnxvbxlGrjwj3aSG8
-	trcxAMhbTkc23XP3UwN8BLNSdvk2Wqqgksbw4f9qLMk401cRVSX474TETdJdhPabe6J17j3Ym40
-	zuLWy/fcJmlOS/d9Z2FaGfgGglHkL0UbvpMq2JBxXh9qxcWbsxaCCmUp1AFJQ==
-X-Received: by 2002:a05:600c:1389:b0:49d:2936:8ad1 with SMTP id 5b1f17b1804b1-49fc4f71c7dmr45192755e9.1.1789747124490;
-        Fri, 18 Sep 2026 08:58:44 -0700 (PDT)
-Received: from localhost (p200300f65f19a90444c8989fe13f5be4.dip0.t-ipconnect.de. [2003:f6:5f19:a904:44c8:989f:e13f:5be4])
-        by smtp.gmail.com with UTF8SMTPSA id 5b1f17b1804b1-49fc56eff84sm56426065e9.1.2026.09.18.08.58.43
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 18 Sep 2026 08:58:43 -0700 (PDT)
-Date: Fri, 18 Sep 2026 17:58:42 +0200
-From: Uwe =?utf-8?Q?Kleine-K=C3=B6nig?= <u.kleine-koenig@baylibre.com>
-To: Luca Weiss <luca.weiss@fairphone.com>
-Cc: Neil Armstrong <neil.armstrong@linaro.org>, 
-	Jessica Zhang <jesszhan0024@gmail.com>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
-	Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, 
-	David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, Rob Herring <robh@kernel.org>, 
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
-	Bjorn Andersson <andersson@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>, 
-	~postmarketos/upstreaming@lists.sr.ht, phone-devel@vger.kernel.org, dri-devel@lists.freedesktop.org, 
-	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org
-Subject: Re: [PATCH v2 2/4] drm/panel: Add driver for Novatek NT37705 panel
-Message-ID: <aq1erjmXLCFB3uoB@monoceros>
-References: <20260918-fp6-panel-v2-0-6695c4008920@fairphone.com>
- <20260918-fp6-panel-v2-2-6695c4008920@fairphone.com>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="UB+YS1Us"
+Received: by smtp.kernel.org (Postfix) with ESMTPS id BCFC9C2BCF5;
+	Fri, 18 Sep 2026 16:28:17 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1789748897;
+	bh=6Z8qKohBjG+nYdXMxSIz7GwXcSnl7h3FDD5QcnwlKuY=;
+	h=From:Subject:Date:To:Cc:Reply-To:From;
+	b=UB+YS1UsxCALsNwNH0jSBd7fW29V3RBvgybAQ4h/xGNdUH/X3IfqjYN8WdmgjfUB3
+	 A//A3CjxLTkRhlJA5ehoK03Lii1bxtQend0rG8TZ16NIEvS5JoRZkaQFsZWNbp18A/
+	 7CKgtAFNV9FjigLPhMQnQr6UxSr68hIbLTgUhVX27qM4AEjcFSW2oTLG6PKXhBXyTP
+	 JyHcm6IOKNzCKAEH7kO6H8xzm6C+jNRqRj8qXEarbrhIhghjCrZiloEq0phxz2yRD1
+	 pHtBIAa8t1f59BWhVVUSxWxh7EHNDVgHodvfTapYuVHhfF0hjKQaKDUzCbLFzX5y0Q
+	 Ly2l/SGGIUbBw==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 98C0CC982D7;
+	Fri, 18 Sep 2026 16:28:17 +0000 (UTC)
+From: Manivannan Sadhasivam via B4 Relay <devnull+manivannan.sadhasivam.oss.qualcomm.com@kernel.org>
+Subject: [PATCH 0/4] net: qrtr: Add support for using identical MHI
+ endpoint devices
+Date: Fri, 18 Sep 2026 18:28:12 +0200
+Message-Id: <20260918-qrtr-multi-ep-v1-0-8a06caa368d3@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="qruxh2qmdhupwtoy"
-Content-Disposition: inline
-In-Reply-To: <20260918-fp6-panel-v2-2-6695c4008920@fairphone.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+X-B4-Tracking: v=1; b=H4sIAJxmrWoC/yXMQQ6CQAxG4auQrm3CTECFqxgXUH61BhA7AyEh3
+ N1Rl9/ivY0CTBGozjYyLBr0NSa4Q0byaMY7WLtk8rk/5pU789ui8TD3URkTiz+Jb6UsAEepmQw
+ 3XX+/y/XvMLdPSPxOaN8/x3mQHnEAAAA=
+X-Change-ID: 20260918-qrtr-multi-ep-c27c2bc54ee1
+To: Manivannan Sadhasivam <mani@kernel.org>, 
+ "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, 
+ Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, 
+ Simon Horman <horms@kernel.org>, Jeff Johnson <jjohnson@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, netdev@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, linux-wireless@vger.kernel.org, 
+ ath11k@lists.infradead.org, ath12k@lists.infradead.org, 
+ Bjorn Andersson <andersson@kernel.org>, 
+ Chris Lew <christopher.lew@oss.qualcomm.com>, 
+ Deepak Kumar Singh <deepak.singh@oss.qualcomm.com>, 
+ Raj Kumar Bhagat <raj.bhagat@oss.qualcomm.com>, 
+ Juha-Matti Tilli <juha-matti.tilli@iki.fi>, 
+ Jeff Hugo <jeff.hugo@oss.qualcomm.com>, 
+ Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2798;
+ i=manivannan.sadhasivam@oss.qualcomm.com; h=from:subject:message-id;
+ bh=6Z8qKohBjG+nYdXMxSIz7GwXcSnl7h3FDD5QcnwlKuY=;
+ b=owEBbQGS/pANAwAKAVWfEeb+kc71AcsmYgBqrWad4ZoZAEk0cQeZgtJ6b+1eEpkYMcmutGWLA
+ bVHEQdUHwSJATMEAAEKAB0WIQRnpUMqgUjL2KRYJ5dVnxHm/pHO9QUCaq1mnQAKCRBVnxHm/pHO
+ 9ajuB/9glk15Vu0tJD0QCmDRJJUz3pwSef4SYXyEyq4KwQWyU8SLii0UBPrZAO8Qc0i91NTNI6o
+ U43q/76VuAhZFJW60hvtqrjwOgMelpnds+dpqZER0h26ie9F9MKmgRJLfNhW7Mp8JYMzYSsMBE7
+ zSydfaCl33EE+Paw/sQMO1ktG35sGcQSi6pIvTaWBL4pLDRfG2oQHqPkwIrNGXZZ3xNB82jh6aX
+ 9xv42TRFy9qRwDQ0/7M/1BpSV4WZ32GfSxzXFKAZoH4BITmySewHu92P1NeI0dsRitKiXZlk016
+ Z+Fbq1Hr4crb5FBljkXN4jfcjzVhgEmR4VWmIWBenBt0UcZP
+X-Developer-Key: i=manivannan.sadhasivam@oss.qualcomm.com; a=openpgp;
+ fpr=C668AEC3C3188E4C611465E7488550E901166008
+X-Endpoint-Received: by B4 Relay for
+ manivannan.sadhasivam@oss.qualcomm.com/default with auth_id=461
+X-Original-From: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
+Reply-To: manivannan.sadhasivam@oss.qualcomm.com
+
+Hi,
+
+This series reworks the QRTR driver to add support for using identical MHI
+endpoint devices at the same time. Currently, QRTR driver has a limitation on
+using more than one identical MHI endpoint devices like QCS6490 or any Qcom
+Endpoint device making use of QRTR at the same time. Because of the fact that
+these devices will have the identical QRTR node id, they cannot be used at the
+same time, on the same host machine.
+
+This limitation is a blocker for running upstream kernel on devices like Qcom
+based routers as they often have multiple identical WLAN Endpoint devices
+connected to the Router SoC.
+
+This series supersedes the following 2 series from Juha:
+https://lore.kernel.org/all/20260915054207.2513877-1-juha-matti.tilli@iki.fi
+https://lore.kernel.org/all/20260915074135.2567411-1-juha-matti.tilli@iki.fi
+
+Compared to the series from Juha, this series simplifies the multi-endpoint
+support by computing a unique node id for each MHI endpoint and uses it for the
+internal QRTR book keeping. This ensures that even if the MHI endpoint devices
+have same node ids, the host QRTR will always use a unique node id for each one
+of them.
+
+More details can be found in the individual patches.
+
+Testing
+=======
+
+Juha tested this series on multi ath11k setup by backporting this series to
+6.6.156 kernel. I'd appreciate a formal tested-by tag from Juha and other folks
+CCed to this series.
+
+Merge Strategy
+==============
+
+Since both QRTR and ath drivers are falling under the networking tree, the whole
+series can be merged through netdev tree.
+
+Signed-off-by: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
+---
+Manivannan Sadhasivam (4):
+      net: qrtr: Allow the host QRTR to assign a unique node id
+      net: qrtr: Assign unique node id for MHI endpoints
+      wifi: ath11k: Connect to the QMI server belonging to the device owned by this driver
+      wifi: ath12k: Connect to the QMI server belonging to the device owned by this driver
+
+ MAINTAINERS                           |  1 +
+ drivers/net/wireless/ath/ath11k/hif.h |  9 ++++++
+ drivers/net/wireless/ath/ath11k/pci.c |  9 ++++++
+ drivers/net/wireless/ath/ath11k/qmi.c | 10 ++++++
+ drivers/net/wireless/ath/ath12k/hif.h |  9 ++++++
+ drivers/net/wireless/ath/ath12k/pci.c |  9 ++++++
+ drivers/net/wireless/ath/ath12k/qmi.c | 11 +++++++
+ include/net/qrtr.h                    | 21 ++++++++++++
+ net/qrtr/af_qrtr.c                    | 61 +++++++++++++++++++++++++++++++----
+ net/qrtr/mhi.c                        |  4 ++-
+ 10 files changed, 136 insertions(+), 8 deletions(-)
+---
+base-commit: cee9395acd8043be0644b25c34bfa86623f2b935
+change-id: 20260918-qrtr-multi-ep-c27c2bc54ee1
+
+Best regards,
+--  
+மணிவண்ணன் சதாசிவம்
 
 
---qruxh2qmdhupwtoy
-Content-Type: text/plain; protected-headers=v1; charset=us-ascii
-Content-Disposition: inline
-Subject: Re: [PATCH v2 2/4] drm/panel: Add driver for Novatek NT37705 panel
-MIME-Version: 1.0
-
-On Fri, Sep 18, 2026 at 04:40:05PM +0200, Luca Weiss wrote:
-> +#include <linux/mod_devicetable.h>
-
-Please don't include that file. of_device_id is also provided by
-<drm/drm_mipi_dsi.h> (transitively via <linux/device.h> ->
-<linux/device/driver.h> -> <linux/device-id/of.h>) and you can rely on
-that.
-
-If you want to go full iwyu, please use <linux/device-id/of.h> instead
-of <linux/mod_devicetable.h>.
-
-<linux/mod_devicetable.h> is a dependency hog and will hopefully go away
-soon.
-
-Best regards
-Uwe
-
---qruxh2qmdhupwtoy
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAABCgAdFiEEP4GsaTp6HlmJrf7Tj4D7WH0S/k4FAmqtX7AACgkQj4D7WH0S
-/k45Dgf/cdIUUEx1eWlxLi0ByfmazBebC1gamR8J8DORRZZV6FdlLvHC+Xy2/RL4
-slct57z4ZQbBeYwbTEYHirry7VGiKwEpKPQDLmLDnPWad4IuhJyPJHWq1qextxYL
-Jr0wsKOilDFYPTydHs9WPS30t/IUFq+/EPzL5pa8ZeGgOVFoqNsW8b/ZrfoDFdJc
-O+3m9OwNRXXICF7BpJ5BeHKu3Npv3CiukAmilSjD8dyFd3JXZX3b02ursgRjuDyR
-4k+acvjvKFtZ9V4lJpvtwU/6XQxLiQNmLT4YYEYx0aH9JNlxjtie+CUXYEDKcNoU
-ynf/eUOrVnbj4s3Yoh1l7LkySt2lyA==
-=Sgj4
------END PGP SIGNATURE-----
-
---qruxh2qmdhupwtoy--
