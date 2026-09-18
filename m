@@ -1,156 +1,465 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wm2-f12.google.com (mail-wm2-f12.google.com [74.125.225.140])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 261BF49D5BF
-	for <linux-arm-msm@vger.kernel.org>; Fri, 18 Sep 2026 13:02:03 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 96EA949DBB9
+	for <linux-arm-msm@vger.kernel.org>; Fri, 18 Sep 2026 13:02:04 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.225.140
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789736525; cv=none; b=iBGRRzLLGlAeFj8UkRbqVhITPQN9WFrAC/Hx3v7W7MGDRjqImTQevLnrHe9VuuFYpPBgtiCW8K49WCjTw3Nk3qXxBne6nx/i5JkN/rnYMCIjFr/9PGsehibHShWXG53j9/wVOuBGmiiWrOSRJPoeiT0rldANSbkY857VtK9NE+I=
+	t=1789736528; cv=none; b=QmngULp1dxd/bq3LlnYW4Y7gotnlGloojuXIEBpTAPhOXmicX1bzx5RN8wvFMWkLYNyGkCKJB2lYEgVSm+zxglPBoZSdWAGFXmY5z1jL50CupAq2+Slh2jrVd+efBthNJheHcxWI3Byaw/PuGSvDtIQ4/nVt4v1ETZR7Ol9fcPA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789736525; c=relaxed/simple;
-	bh=y1bPt6F5nrd5HOptM2+x7SSdZZR6HwyHNglhGdwATAo=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=rh2IyfX+I12k6HBo54V6R4tQ5s6I58/LdUIIir5mjzoaNrU0yfr3IP96bQRfpmL1kg1cNuvEVrhdJUTviza5Dqy01nc8u+ySbHaHyUxJE17KCEdtWnILX+ScItJ6LBl6GbI/lIfLBdw2QMpl45BK5nuZpYhNkhKezC8n+Lc6Rd4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=Gh5dBrNY; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=YBC9XPDi; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1789736528; c=relaxed/simple;
+	bh=uQuDrQC54rH73rDKSYpShBEhGdmb7pu28vKNxMjdMYA=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
+	 In-Reply-To:To:Cc; b=JlPg3o+T/drI1lVeClG+hRhZIwspHOM8Oo+nOLcpent6Rbx6fxiy0nrS3gnKbDFi9tnmWmjTUIhTMfEZEOMFuKuFN5QtCAOgPCAGJdnYFigFuFcqP3/brKApf9SGgmsIkW+YRFuHc2FwWHCvMX1zBGV4GVSJsBiQ1JpjFUP/qGc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=thegoodpenguin.co.uk; spf=pass smtp.mailfrom=thegoodpenguin.co.uk; dkim=pass (2048-bit key) header.d=thegoodpenguin-co-uk.20251104.gappssmtp.com header.i=@thegoodpenguin-co-uk.20251104.gappssmtp.com header.b=GFVuniHD; arc=none smtp.client-ip=74.125.225.140
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=thegoodpenguin.co.uk
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=thegoodpenguin.co.uk
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="Gh5dBrNY";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="YBC9XPDi"
-Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68ICtv1N1291655
-	for <linux-arm-msm@vger.kernel.org>; Fri, 18 Sep 2026 13:02:03 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	CKF+BfwHstfALzVlcYgGwDp+dczQ45u3j4MVRIZQmGY=; b=Gh5dBrNYIsC2hxXS
-	6O8pqGCerH9URA9GezaB2NtNLgDy7tT81mqkbu+ZxArfztMFmlACeacbi6lnSU8J
-	vJWjze88rAH9ZHt8vRcLhdH4kmbexlGUG2P5HIvCIWH5sr0F5hZYDAFUZ0Yqmony
-	uelO/RAu+aZthmFXFS1GYiNvsF0H1fie0tqOIY4YKOxXrQlLTBQHjg9cVxHpdYCV
-	JD3A5r8KSgZHxkCT/smqduSH5sKnXaDogP932RMBvEXymmdwwwwVgG0akofCdLS4
-	XikZljYonIzJvn2vbQgZMFozQO3FYuRnwTycd69dc/bE3ywZBKFAz5su7fBgYm9G
-	vvH0rg==
-Received: from mail-oa1-f70.google.com (mail-oa1-f70.google.com [209.85.160.70])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gs2hv8tjs-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Fri, 18 Sep 2026 13:02:02 +0000 (GMT)
-Received: by mail-oa1-f70.google.com with SMTP id 586e51a60fabf-4485c1944e8so178768fac.2
-        for <linux-arm-msm@vger.kernel.org>; Fri, 18 Sep 2026 06:02:02 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=thegoodpenguin-co-uk.20251104.gappssmtp.com header.i=@thegoodpenguin-co-uk.20251104.gappssmtp.com header.b="GFVuniHD"
+Received: by mail-wm2-f12.google.com with SMTP id 5b1f17b1804b1-49e66390995so4194645e9.2
+        for <linux-arm-msm@vger.kernel.org>; Fri, 18 Sep 2026 06:02:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1789736522; x=1790341322; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=CKF+BfwHstfALzVlcYgGwDp+dczQ45u3j4MVRIZQmGY=;
-        b=YBC9XPDiPaCtsUBLt++1v7Y3OfiXdLweYOKXh4luKUe5l0mArUiMgnsynHMyE5pRf/
-         7f50Oi7U2fBoUWLWOlOF96uPeoFz/ZacpCk/m0JHtGbb2SjPVkFyQT6LqH6sicAHRAXR
-         OAQqWxqWjhjjGXfKAnQtozcfgyJC/SQjj6c83T3Bt894odFt6Uy3Fu2mUZwe18RuHFIQ
-         QsZgMJTM8n+Y6RB9E0F2B0yqMbmMt5/phqy/klzPXez0vZ8JTD1vpr0bA2mqUvOkb3o4
-         iss6nuaxBKYSuHi2hbZYfEe7bpedqgtkHP9+I3cKK7Lrhhr/iBo86ff/Te1B89voH6NU
-         1tkA==
+        d=thegoodpenguin-co-uk.20251104.gappssmtp.com; s=20251104; t=1789736522; x=1790341322; darn=vger.kernel.org;
+        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=EOCNg+dN98nBmxQbC7nXxjUH9WHqr4W+3IIRIsKj1vs=;
+        b=GFVuniHDah4aopXX8z7PFcNuHExd5YdzTtrRPzqBmxuhDvGVENCNtswS8+KGw/QJEa
+         ffjNcv+cyev2giK270WunYUT0/f0asCeoK+Ps1zRwTMa9Grzwfl/+/ZnSLSV6rTT7jNs
+         OmxQA9hT/t/V/ZM8tf4n9MvzrXgKKVpsSylty45n1lDJ/tWXIHeFeAIMthdltXah2Muc
+         xsMiiNoEr3zWLkaeREGTeZo4FWijZyp8I+QvzncbrvkzoKTsJsDD0065ATDtfN0h45AB
+         ADXqMahNoafOHiW2i1CyRcfhDzEEofqIXT7IAcRCZa2EZBIQ5z+3j7z/AbfP2qsL1g42
+         JgqQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20260707; t=1789736522; x=1790341322;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=CKF+BfwHstfALzVlcYgGwDp+dczQ45u3j4MVRIZQmGY=;
-        b=qSdS8MODwLQJBNFRKfsEUGXm/rS4EIq8QwEUPgL6ZziJ94Q5DDkb8qqYq+sj51x8FP
-         JvuztETzfayk/TacpVv8jCLcGmcIX8hEelpVp696Az7xPfjc12ahThk1Bw23PBzpPCHY
-         +oCU3fINheyV7yFB3ZJ1VnlYqoVeBowbbYhtzTmarqOmsg+ruW2W8MW5T7IVfQKotRYY
-         zHnHob6m4H7NZ0puCGWJqfrJm74Z8XG7yiZQydNUmg4GVJp9XWWyIHPt4RtHXX71LaXo
-         csn6Ifv8Wu+MnLrC2SzkqxrCZZ0TlZiUrMQ6a506Fld6l8tFEkn1ZPWmiJ5GUM9U75Ro
-         nqMQ==
-X-Gm-Message-State: AFuF++moLpt3yxEC8hzT7xWIn8AV8ynRWN6W8RXhoFExrcYrtZdSD7PF
-	ByZCAjPA0tPS6ePl57uqky+nl9PWNCFLmadO5ZhS48s8DzdasIxBtCY+SLGsfp8C30Mv5fMFVYJ
-	Q4MFdbEm58ELWE6ptJgcRuLYXwEq13gJlVSwy1h3bOUThF2J9GzZ28i94E96DDT/onVuL
-X-Gm-Gg: AYBFou3yLBeF+grKVPWcI8wbjGBND6nIe5clXknSzqTRNKT79HLZXXgYqCA9DS5dLZi
-	cyikM+ZX8rQ9RLVLvM7IVtrNrevElTLKwmvVwV3/Hdm8+064oqfv3f81YRmwpWxLftfF7WwisXI
-	eumpGAos0FdjpcoyrjDdgm80v0SG+TcWoc7JQT6ED9poUrfz/Y7RHdriAwt8dyUlGRcahkup/dF
-	rdwzxfWU7OCNFFu9UugpY9Lc5qKW+cG1IYEHLoip5coVGstsFkbT/l2FxUBgKNRg60XBr236n6Z
-	OjM+cCamerzb5H5Umfe1DUEqrGKWkIeehS4q17wHGrU66LZymefE7oKqskMPQRkfftbxbUCiOoN
-	dN3JYWg8I1EftVJlZ3gh8IQ==
-X-Received: by 2002:a4a:d857:0:b0:6bc:dd88:2782 with SMTP id 006d021491bc7-6cb1f3eb6camr1100913eaf.0.1789736521937;
+        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+         :content-type:mime-version:subject:date:from:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=EOCNg+dN98nBmxQbC7nXxjUH9WHqr4W+3IIRIsKj1vs=;
+        b=QVvuzEpjclCYiC1VBMa56F6ftdEKJaRVizks3klHBumJTVtB1uzXxtzlc8OjSjkAjN
+         VH4o+KsaxWualfdsKD8PC/oIRpB+pqHzGTI9EiDe2juscTxwxvLNhEZUH/TzDZrOQ1mw
+         1WGwF705FdOa3TJUU5hmQHpnIR77VGlRpMNCl8Nv3eTY/NdF2fOK/ZxG9gZWLc3jWUkJ
+         /7fCDvFJ5cn9V0z/JvCwi09qYjziMsrgF6QNC7fHJ4GvkuAfXprKL36IT2dHsUwCWg0U
+         nFKLW3FfjQPhWDKEDUIpO87T84dzzLdWFbheHf+hmtltyW/ZYFMCJzLeyS4w8nJd6UVs
+         YWtg==
+X-Forwarded-Encrypted: i=1; AKwUvBzoPwsDu/x0JyZBWNl6NXHY8HQtoFWwFqDW/6wwJxYSYzgF9fg4sy8invngSV2CPNQnFq0NlpJvaw629F1y@vger.kernel.org
+X-Gm-Message-State: AFuF++lVo70TJwsqBaIvF96U7H0Fx7sGxxtEzhQKabmEof8cYcQcmWq0
+	UtAo5G365NMsmADRa3aGJGlTET+OaP/e8vFp6S4i+tKjyJWOqLRWvrI+q3QNG4DwcZM=
+X-Gm-Gg: AYBFou37WiQLw3t59JSzDW1fvN+OEoHyKVetWZqFiKoxh4B2UqIEBpcXAt0L0cj9J8A
+	b5LvEtWdSCgS+Al6yJ/nFvWkiHkhV6yUL0BQFKBrPlV9GgcJx/cl5ePRQ9F+4/9/Ah0loGPXcR0
+	H1LXayJXshvt2XTyDa27myv6bECPqSuqUTw/2A027J1jGVkHVPyGjpTpRMZCiemVnImDqiWzVVs
+	VpMFIVJj6WdkugufZcWCZexOu8MZZFLhU9hycOma/t9s+rYH5Kl7poH/mTGAvUG3DJ5HtaWfTIy
+	+sNX6DCq9LuwiD1Yh+e2k/FGZEfWv+7MsrAHd3E8Lyj1XBaQPiwpdNwKKK55TasVX40k/6Ikmmw
+	xgXrf0sXAc0LneBwMLqbSB7sAh98RuTZSIX6uyWuv1HOiZgug/o8uZuh/pIyeY2Kfhc6SmDiS33
+	oKlO2rfClZi3UBBslcxbtg6HRs8zgz1etv5C7eIXWX1jTqItvPcXHhzLoqNuoiofUcAJtwbJGf6
+	JVctNtDHlUjCb4=
+X-Received: by 2002:a05:600c:8584:b0:49f:cbf1:e76d with SMTP id 5b1f17b1804b1-49fcbf1e9a5mr8437375e9.0.1789736522589;
+        Fri, 18 Sep 2026 06:02:02 -0700 (PDT)
+Received: from [10.42.0.1] ([2a00:23c7:1d1a:9c01:767:e33f:e8e7:bc85])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-49fbd24034esm188663345e9.15.2026.09.18.06.02.00
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
         Fri, 18 Sep 2026 06:02:01 -0700 (PDT)
-X-Received: by 2002:a4a:d857:0:b0:6bc:dd88:2782 with SMTP id 006d021491bc7-6cb1f3eb6camr1100874eaf.0.1789736521490;
-        Fri, 18 Sep 2026 06:02:01 -0700 (PDT)
-Received: from [192.168.202.12] ([178.235.128.140])
-        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-6aa58f3236esm815027a12.9.2026.09.18.06.01.57
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 18 Sep 2026 06:02:00 -0700 (PDT)
-Message-ID: <1229ea97-9972-4cd3-9697-ab03c64c3fe1@oss.qualcomm.com>
-Date: Fri, 18 Sep 2026 15:01:56 +0200
+From: Pawel Zalewski <pzalewski@thegoodpenguin.co.uk>
+Date: Fri, 18 Sep 2026 14:01:51 +0100
+Subject: [PATCH 2/2] i2c: busses: use named initializers for acpi_device_id
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 4/5] arm64: dts: qcom: glymur-qcb: Enable UFS
-To: Pradeep P V K <pradeep.pragallapati@oss.qualcomm.com>,
-        Vinod Koul <vkoul@kernel.org>,
-        Neil Armstrong <neil.armstrong@linaro.org>,
-        Manivannan Sadhasivam <mani@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley
- <conor+dt@kernel.org>,
-        Alim Akhtar <alim.akhtar@samsung.com>,
-        Avri Altman <avri.altman@sandisk.com>,
-        Bart Van Assche <bvanassche@acm.org>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
-        gopikrishna.garmidi@oss.qualcomm.com, jagadeesh.kona@oss.qualcomm.com,
-        Abel Vesa <abel.vesa@oss.qualcomm.com>
-Cc: linux-arm-msm@vger.kernel.org, linux-phy@lists.infradead.org,
-        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-scsi@vger.kernel.org, nitin.rawat@oss.qualcomm.com,
-        sibi.sankar@oss.qualcomm.com, Taniya Das <taniya.das@oss.qualcomm.com>
-References: <20260918-glymur_ufs_qcb_enablement-v2-0-16619f7e36a6@oss.qualcomm.com>
- <20260918-glymur_ufs_qcb_enablement-v2-4-16619f7e36a6@oss.qualcomm.com>
-Content-Language: en-US
-From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-In-Reply-To: <20260918-glymur_ufs_qcb_enablement-v2-4-16619f7e36a6@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTE4MDE4NCBTYWx0ZWRfX1vJnN9Oignk2
- yN5LFULdACo36Dd/9kCFtp52gZimBQA1uFLPKB51n8O/Aw+KrjcXPCED25XIeOSCvOvof67IbLp
- JuPtfRiNax1NmEkMUUgInkrdH8vk7/I=
-X-Authority-Analysis: v=2.4 cv=IOWXmQvG c=1 sm=1 tr=0 ts=6aad364a cx=c_pps
- a=nSjmGuzVYOmhOUYzIAhsAg==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
- a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22
- a=EUspDBNiAAAA:8 a=BBNwevgwxSeHGHzN-EcA:9 a=QEXdDO2ut3YA:10
- a=1zu1i0D7hVQfj8NKfPKu:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTE4MDE4NCBTYWx0ZWRfX1wD6e56RWjMl
- +9/OrY+a9XEzG8JINvLZy7LbuBxkjz1n7FA8fyYlMIXu6Tnk2aXd+lhTYpsIalMQF8mPqW7Xewu
- /EAI0urEaLCFiqdrvtd57B2RtMfcP/2qd+sfjeUFdKBK6lh/kH24TK9yf0SwOuc9LqR9CBi+xkg
- kNQ63JuYaWpWAMiu2BCI6Xq/bK7jPJnzrS4QH6zLyFX02hEKDY2nFTZaC0XDEj/KGyl96CezsUE
- yOsNlaag/+JhI2ks9YR3UZCxChORbXisKiccLoDpldZr02DqiMUodYQ13YT8ttrpaKgA6OLDMp0
- KOhZ2XAlBDiW7lHGONSGBjcbJGde/PhQVifxqW/9fDQ1UNN/75GYxojH4kP0stwvhvwFnjwrkXU
- o0DN2Ztl5IeblwdhpmZu46jFEIzL1k6I6KGGQDp7oZ9vikYx/v62/UzhvdCt2D4+uj3dtE30xfF
- iVibcR3hCUD9683ekSQ==
-X-Proofpoint-ORIG-GUID: Lwro-u1O0aCZPoWx-x1C8czjADLs5H7m
-X-Proofpoint-GUID: Lwro-u1O0aCZPoWx-x1C8czjADLs5H7m
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-18_03,2026-09-16_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 adultscore=0 malwarescore=0 bulkscore=0 spamscore=0
- suspectscore=0 phishscore=0 clxscore=1015 lowpriorityscore=0
- priorityscore=1501 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2609040000
- definitions=main-2609180184
+Message-Id: <20260918-acpi-i2c-v1-2-caf4bea4886c@thegoodpenguin.co.uk>
+References: <20260918-acpi-i2c-v1-0-caf4bea4886c@thegoodpenguin.co.uk>
+In-Reply-To: <20260918-acpi-i2c-v1-0-caf4bea4886c@thegoodpenguin.co.uk>
+To: Andi Shyti <andi.shyti@kernel.org>, 
+ Mika Westerberg <westeri@kernel.org>, 
+ Shyam Sundar S K <shyam-sundar.s-k@amd.com>, 
+ Elie Morisse <syniurge@gmail.com>, Benson Leung <bleung@chromium.org>, 
+ Guenter Roeck <groeck@chromium.org>, 
+ Mika Westerberg <mika.westerberg@linux.intel.com>, 
+ Andy Shevchenko <andriy.shevchenko@linux.intel.com>, 
+ Wolfram Sang <wsa+renesas@sang-engineering.com>, 
+ Devyn Liu <liudingyuan@h-partners.com>, 
+ Oleksij Rempel <o.rempel@pengutronix.de>, 
+ Pengutronix Kernel Team <kernel@pengutronix.de>, 
+ Frank Li <Frank.Li@nxp.com>, Sascha Hauer <s.hauer@pengutronix.de>, 
+ Fabio Estevam <festevam@gmail.com>, Binbin Zhou <zhoubinbin@loongson.cn>, 
+ Khalil Blaiech <kblaiech@nvidia.com>, Asmaa Mnebhi <asmaa@nvidia.com>, 
+ Mukesh Kumar Savaliya <mukesh.savaliya@oss.qualcomm.com>, 
+ Viken Dadhaniya <viken.dadhaniya@oss.qualcomm.com>, 
+ Ard Biesheuvel <ardb@kernel.org>, Laxman Dewangan <ldewangan@nvidia.com>, 
+ Dmitry Osipenko <digetx@gmail.com>, 
+ Thierry Reding <thierry.reding@kernel.org>, 
+ Jonathan Hunter <jonathanh@nvidia.com>, 
+ Israel Cepeda <israel.a.cepeda.lopez@intel.com>, 
+ Hans de Goede <hansg@kernel.org>, 
+ Sakari Ailus <sakari.ailus@linux.intel.com>, Hans Hu <hanshu@zhaoxin.com>, 
+ George Cherian <gcherian@marvell.com>
+Cc: linux-i2c@vger.kernel.org, linux-acpi@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, chrome-platform@lists.linux.dev, 
+ imx@lists.linux.dev, linux-arm-kernel@lists.infradead.org, 
+ linux-arm-msm@vger.kernel.org, linux-tegra@vger.kernel.org, 
+ Pawel Zalewski <pzalewski@thegoodpenguin.co.uk>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1789736516; l=13774;
+ i=pzalewski@thegoodpenguin.co.uk; s=20260430; h=from:subject:message-id;
+ bh=uQuDrQC54rH73rDKSYpShBEhGdmb7pu28vKNxMjdMYA=;
+ b=mmV8nSqpS6TG7XYJiURdQ7w4GuYjUmy7J6hKP9xFaptGqBL9K2aUTD5JRl3498IAVGRzuiIDc
+ 40THKzjx2INDZqWshrv7JhKZ+YsJJ55ouYgxNk+4VAUf1eFbdJpE0gL
+X-Developer-Key: i=pzalewski@thegoodpenguin.co.uk; a=ed25519;
+ pk=vHq4n9IonORH2GTzLv8r6CWAFHzgfBuNkQPXA8NSly0=
 
-On 9/18/26 12:39 PM, Pradeep P V K wrote:
-> Enable UFS for glymur-qcb board.
-> 
-> Reviewed-by: Abel Vesa <abel.vesa@oss.qualcomm.com>
-> Signed-off-by: Pradeep P V K <pradeep.pragallapati@oss.qualcomm.com>
-> ---
+Use a designated initializer for the acpi_device_id fields which makes the
+code more readable and consistent with how lists are initialized in the
+rest of the kernel code base. Also drop explicitly setting fields to 0
+where it is redundant.
 
-Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Unify the list terminator to have a single space between the brackets and
+no trailing comma.
 
-Konrad
+Unify list item alignment to have a single space padding between the
+brackets.
+
+Signed-off-by: Pawel Zalewski <pzalewski@thegoodpenguin.co.uk>
+---
+ drivers/i2c/busses/i2c-amd-asf-plat.c       |  2 +-
+ drivers/i2c/busses/i2c-amd-mp2-plat.c       |  2 +-
+ drivers/i2c/busses/i2c-cros-ec-tunnel.c     |  2 +-
+ drivers/i2c/busses/i2c-designware-platdrv.c | 42 ++++++++++++++---------------
+ drivers/i2c/busses/i2c-gpio.c               |  2 +-
+ drivers/i2c/busses/i2c-hisi.c               |  2 +-
+ drivers/i2c/busses/i2c-imx.c                |  2 +-
+ drivers/i2c/busses/i2c-ls2x.c               |  2 +-
+ drivers/i2c/busses/i2c-mlxbf.c              |  8 +++---
+ drivers/i2c/busses/i2c-qcom-geni.c          |  4 +--
+ drivers/i2c/busses/i2c-qup.c                |  2 +-
+ drivers/i2c/busses/i2c-scmi.c               |  8 +++---
+ drivers/i2c/busses/i2c-synquacer.c          |  4 +--
+ drivers/i2c/busses/i2c-tegra.c              |  8 +++---
+ drivers/i2c/busses/i2c-usbio.c              | 12 ++++-----
+ drivers/i2c/busses/i2c-viai2c-zhaoxin.c     |  2 +-
+ drivers/i2c/busses/i2c-xgene-slimpro.c      |  6 ++---
+ drivers/i2c/busses/i2c-xlp9xx.c             |  6 ++---
+ 18 files changed, 58 insertions(+), 58 deletions(-)
+
+diff --git a/drivers/i2c/busses/i2c-amd-asf-plat.c b/drivers/i2c/busses/i2c-amd-asf-plat.c
+index b0b40fe1d79bf..2a5711411ee5c 100644
+--- a/drivers/i2c/busses/i2c-amd-asf-plat.c
++++ b/drivers/i2c/busses/i2c-amd-asf-plat.c
+@@ -354,7 +354,7 @@ static int amd_asf_probe(struct platform_device *pdev)
+ }
+ 
+ static const struct acpi_device_id amd_asf_acpi_ids[] = {
+-	{ "AMDI001A" },
++	{ .id = "AMDI001A" },
+ 	{ }
+ };
+ MODULE_DEVICE_TABLE(acpi, amd_asf_acpi_ids);
+diff --git a/drivers/i2c/busses/i2c-amd-mp2-plat.c b/drivers/i2c/busses/i2c-amd-mp2-plat.c
+index 9fdd6a5fb8b65..cc5961364bcc0 100644
+--- a/drivers/i2c/busses/i2c-amd-mp2-plat.c
++++ b/drivers/i2c/busses/i2c-amd-mp2-plat.c
+@@ -341,7 +341,7 @@ static void i2c_amd_remove(struct platform_device *pdev)
+ }
+ 
+ static const struct acpi_device_id i2c_amd_acpi_match[] = {
+-	{ "AMDI0011" },
++	{ .id = "AMDI0011" },
+ 	{ }
+ };
+ MODULE_DEVICE_TABLE(acpi, i2c_amd_acpi_match);
+diff --git a/drivers/i2c/busses/i2c-cros-ec-tunnel.c b/drivers/i2c/busses/i2c-cros-ec-tunnel.c
+index 208ce4f9e782c..a83e735d2086c 100644
+--- a/drivers/i2c/busses/i2c-cros-ec-tunnel.c
++++ b/drivers/i2c/busses/i2c-cros-ec-tunnel.c
+@@ -300,7 +300,7 @@ static const struct of_device_id cros_ec_i2c_of_match[] __maybe_unused = {
+ MODULE_DEVICE_TABLE(of, cros_ec_i2c_of_match);
+ 
+ static const struct acpi_device_id cros_ec_i2c_tunnel_acpi_id[] __maybe_unused = {
+-	{ "GOOG0012", 0 },
++	{ .id = "GOOG0012" },
+ 	{ }
+ };
+ MODULE_DEVICE_TABLE(acpi, cros_ec_i2c_tunnel_acpi_id);
+diff --git a/drivers/i2c/busses/i2c-designware-platdrv.c b/drivers/i2c/busses/i2c-designware-platdrv.c
+index 447af5523c2e4..1da6b0314b6a0 100644
+--- a/drivers/i2c/busses/i2c-designware-platdrv.c
++++ b/drivers/i2c/busses/i2c-designware-platdrv.c
+@@ -260,27 +260,27 @@ static const struct of_device_id dw_i2c_of_match[] = {
+ MODULE_DEVICE_TABLE(of, dw_i2c_of_match);
+ 
+ static const struct acpi_device_id dw_i2c_acpi_match[] = {
+-	{ "80860F41", ACCESS_NO_IRQ_SUSPEND },
+-	{ "808622C1", ACCESS_NO_IRQ_SUSPEND },
+-	{ "AMD0010", ACCESS_INTR_MASK },
+-	{ "AMDI0010", ACCESS_INTR_MASK },
+-	{ "AMDI0019", ACCESS_INTR_MASK | ARBITRATION_SEMAPHORE },
+-	{ "AMDI0510", 0 },
+-	{ "APMC0D0F", 0 },
+-	{ "FUJI200B", 0 },
+-	{ "GOOG5000", 0 },
+-	{ "HISI02A1", 0 },
+-	{ "HISI02A2", 0 },
+-	{ "HISI02A3", 0 },
+-	{ "HJMC3001", ACCESS_INTR_MASK },
+-	{ "HYGO0010", ACCESS_INTR_MASK },
+-	{ "INT33C2", 0 },
+-	{ "INT33C3", 0 },
+-	{ "INT3432", 0 },
+-	{ "INT3433", 0 },
+-	{ "INTC10EF", 0 },
+-	{ "LECA0003", 0 },
+-	{}
++	{ .id = "80860F41", .driver_data = ACCESS_NO_IRQ_SUSPEND },
++	{ .id = "808622C1", .driver_data = ACCESS_NO_IRQ_SUSPEND },
++	{ .id = "AMD0010", .driver_data = ACCESS_INTR_MASK },
++	{ .id = "AMDI0010", .driver_data = ACCESS_INTR_MASK },
++	{ .id = "AMDI0019", .driver_data = ACCESS_INTR_MASK | ARBITRATION_SEMAPHORE },
++	{ .id = "AMDI0510" },
++	{ .id = "APMC0D0F" },
++	{ .id = "FUJI200B" },
++	{ .id = "GOOG5000" },
++	{ .id = "HISI02A1" },
++	{ .id = "HISI02A2" },
++	{ .id = "HISI02A3" },
++	{ .id = "HJMC3001", .driver_data = ACCESS_INTR_MASK },
++	{ .id = "HYGO0010", .driver_data = ACCESS_INTR_MASK },
++	{ .id = "INT33C2" },
++	{ .id = "INT33C3" },
++	{ .id = "INT3432" },
++	{ .id = "INT3433" },
++	{ .id = "INTC10EF" },
++	{ .id = "LECA0003" },
++	{ }
+ };
+ MODULE_DEVICE_TABLE(acpi, dw_i2c_acpi_match);
+ 
+diff --git a/drivers/i2c/busses/i2c-gpio.c b/drivers/i2c/busses/i2c-gpio.c
+index 6294b0b0cc8f7..56d6847cbf6d7 100644
+--- a/drivers/i2c/busses/i2c-gpio.c
++++ b/drivers/i2c/busses/i2c-gpio.c
+@@ -664,7 +664,7 @@ static const struct of_device_id i2c_gpio_dt_ids[] = {
+ MODULE_DEVICE_TABLE(of, i2c_gpio_dt_ids);
+ 
+ static const struct acpi_device_id i2c_gpio_acpi_match[] = {
+-	{ "LOON0005" }, /* LoongArch */
++	{ .id = "LOON0005" }, /* LoongArch */
+ 	{ }
+ };
+ MODULE_DEVICE_TABLE(acpi, i2c_gpio_acpi_match);
+diff --git a/drivers/i2c/busses/i2c-hisi.c b/drivers/i2c/busses/i2c-hisi.c
+index ba5c9579ae190..fca1ca011312d 100644
+--- a/drivers/i2c/busses/i2c-hisi.c
++++ b/drivers/i2c/busses/i2c-hisi.c
+@@ -516,7 +516,7 @@ static int hisi_i2c_probe(struct platform_device *pdev)
+ }
+ 
+ static const struct acpi_device_id hisi_i2c_acpi_ids[] = {
+-	{ "HISI03D1", 0 },
++	{ .id = "HISI03D1" },
+ 	{ }
+ };
+ MODULE_DEVICE_TABLE(acpi, hisi_i2c_acpi_ids);
+diff --git a/drivers/i2c/busses/i2c-imx.c b/drivers/i2c/busses/i2c-imx.c
+index 19ec056b00afe..e5fb493327b10 100644
+--- a/drivers/i2c/busses/i2c-imx.c
++++ b/drivers/i2c/busses/i2c-imx.c
+@@ -349,7 +349,7 @@ static const struct of_device_id i2c_imx_dt_ids[] = {
+ MODULE_DEVICE_TABLE(of, i2c_imx_dt_ids);
+ 
+ static const struct acpi_device_id i2c_imx_acpi_ids[] = {
+-	{"NXP0001", .driver_data = (kernel_ulong_t)&vf610_i2c_hwdata},
++	{ .id = "NXP0001", .driver_data = (kernel_ulong_t)&vf610_i2c_hwdata },
+ 	{ }
+ };
+ MODULE_DEVICE_TABLE(acpi, i2c_imx_acpi_ids);
+diff --git a/drivers/i2c/busses/i2c-ls2x.c b/drivers/i2c/busses/i2c-ls2x.c
+index af7bf61b0f4d7..ef2e2a26981e5 100644
+--- a/drivers/i2c/busses/i2c-ls2x.c
++++ b/drivers/i2c/busses/i2c-ls2x.c
+@@ -356,7 +356,7 @@ static const struct of_device_id ls2x_i2c_id_table[] = {
+ MODULE_DEVICE_TABLE(of, ls2x_i2c_id_table);
+ 
+ static const struct acpi_device_id ls2x_i2c_acpi_match[] = {
+-	{ "LOON0004" }, /* Loongson LS7A */
++	{ .id = "LOON0004" }, /* Loongson LS7A */
+ 	{ }
+ };
+ MODULE_DEVICE_TABLE(acpi, ls2x_i2c_acpi_match);
+diff --git a/drivers/i2c/busses/i2c-mlxbf.c b/drivers/i2c/busses/i2c-mlxbf.c
+index 24ccc4546ab88..0cc8b9e5f3336 100644
+--- a/drivers/i2c/busses/i2c-mlxbf.c
++++ b/drivers/i2c/busses/i2c-mlxbf.c
+@@ -2198,10 +2198,10 @@ static struct i2c_adapter_quirks mlxbf_i2c_quirks = {
+ };
+ 
+ static const struct acpi_device_id mlxbf_i2c_acpi_ids[] = {
+-	{ "MLNXBF03", (kernel_ulong_t)&mlxbf_i2c_chip[MLXBF_I2C_CHIP_TYPE_1] },
+-	{ "MLNXBF23", (kernel_ulong_t)&mlxbf_i2c_chip[MLXBF_I2C_CHIP_TYPE_2] },
+-	{ "MLNXBF31", (kernel_ulong_t)&mlxbf_i2c_chip[MLXBF_I2C_CHIP_TYPE_3] },
+-	{},
++	{ .id = "MLNXBF03", .driver_data = (kernel_ulong_t)&mlxbf_i2c_chip[MLXBF_I2C_CHIP_TYPE_1] },
++	{ .id = "MLNXBF23", .driver_data = (kernel_ulong_t)&mlxbf_i2c_chip[MLXBF_I2C_CHIP_TYPE_2] },
++	{ .id = "MLNXBF31", .driver_data = (kernel_ulong_t)&mlxbf_i2c_chip[MLXBF_I2C_CHIP_TYPE_3] },
++	{ }
+ };
+ 
+ MODULE_DEVICE_TABLE(acpi, mlxbf_i2c_acpi_ids);
+diff --git a/drivers/i2c/busses/i2c-qcom-geni.c b/drivers/i2c/busses/i2c-qcom-geni.c
+index 00013b41a6f59..37a071b885f0b 100644
+--- a/drivers/i2c/busses/i2c-qcom-geni.c
++++ b/drivers/i2c/busses/i2c-qcom-geni.c
+@@ -1303,8 +1303,8 @@ static const struct geni_i2c_desc sa8255p_geni_i2c = {
+ 
+ #ifdef CONFIG_ACPI
+ static const struct acpi_device_id geni_i2c_acpi_match[] = {
+-	{ "QCOM0220", (kernel_ulong_t)&geni_i2c},
+-	{ "QCOM0411", (kernel_ulong_t)&geni_i2c},
++	{ .id = "QCOM0220", .driver_data = (kernel_ulong_t)&geni_i2c },
++	{ .id = "QCOM0411", .driver_data = (kernel_ulong_t)&geni_i2c },
+ 	{ }
+ };
+ MODULE_DEVICE_TABLE(acpi, geni_i2c_acpi_match);
+diff --git a/drivers/i2c/busses/i2c-qup.c b/drivers/i2c/busses/i2c-qup.c
+index ee7915ee2ba2f..ce30634e1f402 100644
+--- a/drivers/i2c/busses/i2c-qup.c
++++ b/drivers/i2c/busses/i2c-qup.c
+@@ -1688,7 +1688,7 @@ static void qup_i2c_disable_clocks(struct qup_i2c_dev *qup)
+ }
+ 
+ static const struct acpi_device_id qup_i2c_acpi_match[] = {
+-	{ "QCOM8010"},
++	{ .id = "QCOM8010" },
+ 	{ }
+ };
+ MODULE_DEVICE_TABLE(acpi, qup_i2c_acpi_match);
+diff --git a/drivers/i2c/busses/i2c-scmi.c b/drivers/i2c/busses/i2c-scmi.c
+index 324a63efa1ab9..37442c9ee2229 100644
+--- a/drivers/i2c/busses/i2c-scmi.c
++++ b/drivers/i2c/busses/i2c-scmi.c
+@@ -42,10 +42,10 @@ static const struct smbus_methods_t ibm_smbus_methods = {
+ };
+ 
+ static const struct acpi_device_id acpi_smbus_cmi_ids[] = {
+-	{"SMBUS01", (kernel_ulong_t)&smbus_methods},
+-	{ACPI_SMBUS_IBM_HID, (kernel_ulong_t)&ibm_smbus_methods},
+-	{ACPI_SMBUS_MS_HID, (kernel_ulong_t)&smbus_methods},
+-	{"", 0}
++	{ .id = "SMBUS01", .driver_data = (kernel_ulong_t)&smbus_methods },
++	{ .id = ACPI_SMBUS_IBM_HID, .driver_data = (kernel_ulong_t)&ibm_smbus_methods },
++	{ .id = ACPI_SMBUS_MS_HID, .driver_data = (kernel_ulong_t)&smbus_methods },
++	{ }
+ };
+ MODULE_DEVICE_TABLE(acpi, acpi_smbus_cmi_ids);
+ 
+diff --git a/drivers/i2c/busses/i2c-synquacer.c b/drivers/i2c/busses/i2c-synquacer.c
+index 0216e398f2740..968cbe32161ed 100644
+--- a/drivers/i2c/busses/i2c-synquacer.c
++++ b/drivers/i2c/busses/i2c-synquacer.c
+@@ -622,8 +622,8 @@ MODULE_DEVICE_TABLE(of, synquacer_i2c_dt_ids);
+ 
+ #ifdef CONFIG_ACPI
+ static const struct acpi_device_id synquacer_i2c_acpi_ids[] = {
+-	{ "SCX0003" },
+-	{ /* sentinel */ }
++	{ .id = "SCX0003" },
++	{ }
+ };
+ MODULE_DEVICE_TABLE(acpi, synquacer_i2c_acpi_ids);
+ #endif
+diff --git a/drivers/i2c/busses/i2c-tegra.c b/drivers/i2c/busses/i2c-tegra.c
+index 9c281b4905ebd..76d21bc51c618 100644
+--- a/drivers/i2c/busses/i2c-tegra.c
++++ b/drivers/i2c/busses/i2c-tegra.c
+@@ -2486,10 +2486,10 @@ static const struct dev_pm_ops tegra_i2c_pm = {
+ };
+ 
+ static const struct acpi_device_id tegra_i2c_acpi_match[] = {
+-	{.id = "NVDA0101", .driver_data = (kernel_ulong_t)&tegra210_i2c_hw},
+-	{.id = "NVDA0201", .driver_data = (kernel_ulong_t)&tegra186_i2c_hw},
+-	{.id = "NVDA0301", .driver_data = (kernel_ulong_t)&tegra194_i2c_hw},
+-	{.id = "NVDA2017", .driver_data = (kernel_ulong_t)&tegra410_i2c_hw},
++	{ .id = "NVDA0101", .driver_data = (kernel_ulong_t)&tegra210_i2c_hw },
++	{ .id = "NVDA0201", .driver_data = (kernel_ulong_t)&tegra186_i2c_hw },
++	{ .id = "NVDA0301", .driver_data = (kernel_ulong_t)&tegra194_i2c_hw },
++	{ .id = "NVDA2017", .driver_data = (kernel_ulong_t)&tegra410_i2c_hw },
+ 	{ }
+ };
+ MODULE_DEVICE_TABLE(acpi, tegra_i2c_acpi_match);
+diff --git a/drivers/i2c/busses/i2c-usbio.c b/drivers/i2c/busses/i2c-usbio.c
+index 259754e5fd05b..66da1e90848ae 100644
+--- a/drivers/i2c/busses/i2c-usbio.c
++++ b/drivers/i2c/busses/i2c-usbio.c
+@@ -24,12 +24,12 @@ struct usbio_i2c {
+ };
+ 
+ static const struct acpi_device_id usbio_i2c_acpi_hids[] = {
+-	{ "INTC1008" }, /* MTL */
+-	{ "INTC10B3" }, /* ARL */
+-	{ "INTC10B6" }, /* LNL */
+-	{ "INTC10D2" }, /* MTL-CVF */
+-	{ "INTC10E3" }, /* PTL */
+-	{ "INTC1118" }, /* NVL */
++	{ .id = "INTC1008" }, /* MTL */
++	{ .id = "INTC10B3" }, /* ARL */
++	{ .id = "INTC10B6" }, /* LNL */
++	{ .id = "INTC10D2" }, /* MTL-CVF */
++	{ .id = "INTC10E3" }, /* PTL */
++	{ .id = "INTC1118" }, /* NVL */
+ 	{ }
+ };
+ 
+diff --git a/drivers/i2c/busses/i2c-viai2c-zhaoxin.c b/drivers/i2c/busses/i2c-viai2c-zhaoxin.c
+index 764a2dbc957ab..81f0bfdf919f8 100644
+--- a/drivers/i2c/busses/i2c-viai2c-zhaoxin.c
++++ b/drivers/i2c/busses/i2c-viai2c-zhaoxin.c
+@@ -345,7 +345,7 @@ static const struct dev_pm_ops zxi2c_pm = {
+ };
+ 
+ static const struct acpi_device_id zxi2c_acpi_match[] = {
+-	{"IIC1D17", 0 },
++	{ .id = "IIC1D17" },
+ 	{ }
+ };
+ MODULE_DEVICE_TABLE(acpi, zxi2c_acpi_match);
+diff --git a/drivers/i2c/busses/i2c-xgene-slimpro.c b/drivers/i2c/busses/i2c-xgene-slimpro.c
+index b29dec66b2c33..08a126aa83dfa 100644
+--- a/drivers/i2c/busses/i2c-xgene-slimpro.c
++++ b/drivers/i2c/busses/i2c-xgene-slimpro.c
+@@ -539,9 +539,9 @@ MODULE_DEVICE_TABLE(of, xgene_slimpro_i2c_dt_ids);
+ 
+ #ifdef CONFIG_ACPI
+ static const struct acpi_device_id xgene_slimpro_i2c_acpi_ids[] = {
+-	{"APMC0D40", XGENE_SLIMPRO_I2C_V1},
+-	{"APMC0D8B", XGENE_SLIMPRO_I2C_V2},
+-	{}
++	{ .id = "APMC0D40", .driver_data = XGENE_SLIMPRO_I2C_V1 },
++	{ .id = "APMC0D8B", .driver_data = XGENE_SLIMPRO_I2C_V2 },
++	{ }
+ };
+ MODULE_DEVICE_TABLE(acpi, xgene_slimpro_i2c_acpi_ids);
+ #endif
+diff --git a/drivers/i2c/busses/i2c-xlp9xx.c b/drivers/i2c/busses/i2c-xlp9xx.c
+index ad0e5cd218f0f..44cad95ee8abc 100644
+--- a/drivers/i2c/busses/i2c-xlp9xx.c
++++ b/drivers/i2c/busses/i2c-xlp9xx.c
+@@ -570,9 +570,9 @@ static void xlp9xx_i2c_remove(struct platform_device *pdev)
+ 
+ #ifdef CONFIG_ACPI
+ static const struct acpi_device_id xlp9xx_i2c_acpi_ids[] = {
+-	{"BRCM9007", 0},
+-	{"CAV9007",  0},
+-	{}
++	{ .id = "BRCM9007" },
++	{ .id = "CAV9007" },
++	{ }
+ };
+ MODULE_DEVICE_TABLE(acpi, xlp9xx_i2c_acpi_ids);
+ #endif
+
+-- 
+2.43.0
+
