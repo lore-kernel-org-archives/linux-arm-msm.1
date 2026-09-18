@@ -1,209 +1,149 @@
-Received: from MRWPR03CU001.outbound.protection.outlook.com (mail-francesouthazon11011008.outbound.protection.outlook.com [40.107.130.8])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0E7FF3A5E67;
-	Fri, 18 Sep 2026 09:45:31 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=40.107.130.8
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789724734; cv=fail; b=VBfnOlPgwCmBr0yDPLSzSUGk4Dqm9i7QKnjeDAxB3ajMztD2Co7oWIHcUnxR1l+KkvHwGh1Ze2Bnte03U5KuUnm5HiY5sTkaKq9FN8QPukUmcFZHKW+GCtB6SNDhJg0DDqfc+BE410wsJM9py5XeKbHrpDfQDyPcGwGEiWvR0qo=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789724734; c=relaxed/simple;
-	bh=CmYTuijUPwbZ0tOyiIoYZBKq5pxAcp0+hqtAWGUUF3g=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:Content-Type:
-	 Content-Disposition:In-Reply-To:MIME-Version; b=A0eNB1ApvjDra4JMi56F2CzJEVa0FBWvFt2w1JSVyBoupPadY6IjwkxG1ArF80LyKPbrmQ4ztNFPi9wCfOWm/zHRExXILdB8YnFrkmQ1l5ZblxlyzkNGrLy5zQCwpVrHZMdLbD54pQfx8FAP1QeNAFqSmKIIra2xaYh+r3IUq+A=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.nxp.com; spf=pass smtp.mailfrom=oss.nxp.com; dkim=pass (2048-bit key) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b=SIbisdFP; arc=fail smtp.client-ip=40.107.130.8
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.nxp.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.nxp.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 95E80481DD;
+	Fri, 18 Sep 2026 09:50:09 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1789725010; cv=none; b=E4IOpJGzpw2vMF+dQTQ/monZPGUiyE9xZ68QMiJmVRZKpLUhD8B962dENtAUv85LMTugBuu9eLRCN5bEL3QOX61g03rMmzqTQkOpYU1BNp1STKPX58Co+4MuZskHcPcynxv009OHx2DAM+ykcolyfZb8+/1fiOp4ZPRTHrRZFss=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1789725010; c=relaxed/simple;
+	bh=US4RU1Lildqob4gLKAwwkZ08g0rsh1LMlmWPwWgwIi0=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=S1u2MxLMum32kLhLMBeSdUQ6axCiR7lQB+s3eLTtget6Ju+B+JwAnlXiBZK3f5/NhntwsDrCWlcAbppPUUGT4yZLtrcxUR1UoU/WyB4ws0E6f9WJ+7QuXLlPDZawjQmSApWQQjgyUeuB0aeZNc7+BRs8WKU/E9UPQmO1GF3tpbE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=knaGV9Qv; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="SIbisdFP"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=tefWw6aEzOsz1a8ggS5RH/zWMaUUfhMGxsOM1dQ3z7e0TiX0m1VH49M0ztj118Zv9MN1R+x13ZN9It9ErGe2s/3isZSytJ6Wtinw35T7xYsnwis/vdWWk2o9uX/a6rBAAhWOYqBXoGIhQtWnNE1HsWg0LxHcAnM+kBTHs59UrUmYDXAq3gzMdxIeHAB7vcQxxeLKt0pSU9WXDBugRsSkCp7o98YgZclz4IPch0my6P7gl0fCNrKdfBfljhRSmtp+DzJRF/A1LZOrDAqBqKxMpUVR/Rbij8XerKfqxt6LFh5hGWToP7I+PSE0lI8lxbKvbxjAyN8gs6Ti7yggLCPrtA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=M/NhxfWPYhZYGTiyK+yy4m7aFDzKbGXnS4aPm3j9xfI=;
- b=FCAxXlAvZiYhrVYARWcdtTyAwfd7fEToPbYadksXvGQmRbQjud1M/sOHve/rfaue8WfJdixxaVvn+UYFC8OeEHodSlrAzM21m5SfOqz7rMebrNmKOvFIcbjbuIqB4ExuXRrznSQMRaINmzY1/DEc6Kz+VPLmukyhEKeHixN/x2V+avSvuT0wPx4Lx7RZgIfzPLoOAsagHLwpbHVvJj97H1Bf+Ub2kx4JCRMJVOwO2b3NMu8GJFHhHnNIsiaKUz7rCyCQ/29Xqb7sLpvKwnCDzpwvg+6CkFzDz2RynHUb4c1uoO0ROBRQKwVgopEi9RpW8vZKbp4EJYkIKR57QpmCVQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
- dkim=pass header.d=oss.nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com;
- s=selector1-NXP1-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=M/NhxfWPYhZYGTiyK+yy4m7aFDzKbGXnS4aPm3j9xfI=;
- b=SIbisdFPgAWryLq6WpTJ8xWrVof0nsR7DF2QPH8ARO1BiaTX7RYSEtB5wXOatOOkyicOwSrRwSkCNEM9vS29ojAL4mCukVwJh47HfVNji9Syv3hFQb9u8Rd6DN7gO6PYxVkiV3dtaPUUykoSp5Wj8zP/soGmmcoBwzDI27IqKo46ki0N6IDYOK2q4Oup0mTrAXmc+LOzRRwxf05yAugYxEfqbSjnDQiaFfBnHVWS99jTHTH/Bh1RRy36clWRQHO8C/ZClDWx07CGYgAUXJdchvKdwRLjCk01e/8bJSBXFPVuz4erJFIVJmfsb6WumL7RiNle+mB94trzr/d4lGp8HQ==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=oss.nxp.com;
-Received: from VI2PR04MB11276.eurprd04.prod.outlook.com (2603:10a6:800:296::7)
- by GV4PR04MB11893.eurprd04.prod.outlook.com (2603:10a6:150:2eb::5) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.428.13; Fri, 18 Sep
- 2026 09:45:26 +0000
-Received: from VI2PR04MB11276.eurprd04.prod.outlook.com
- ([fe80::60d7:a8e5:eb88:9be]) by VI2PR04MB11276.eurprd04.prod.outlook.com
- ([fe80::60d7:a8e5:eb88:9be%6]) with mapi id 15.21.0428.011; Fri, 18 Sep 2026
- 09:45:25 +0000
-Date: Fri, 18 Sep 2026 17:48:08 +0800
-From: Sherry Sun <sherry.sun@oss.nxp.com>
-To: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
-Cc: Marcel Holtmann <marcel@holtmann.org>, 
-	Luiz Augusto von Dentz <luiz.dentz@gmail.com>, Bartosz Golaszewski <brgl@kernel.org>, 
-	Manivannan Sadhasivam <mani@kernel.org>, Amitkumar Karwar <amitkumar.karwar@nxp.com>, 
-	Neeraj Kale <neeraj.sanjaykale@nxp.com>, Philipp Zabel <p.zabel@pengutronix.de>, 
-	linux-kernel@vger.kernel.org, linux-bluetooth@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
-	linux-pci@vger.kernel.org, linux-pm@vger.kernel.org, 
-	Rahul Samana <rahul.samana@oss.qualcomm.com>, Wei Deng <wei.deng@oss.qualcomm.com>, 
-	Loic Poulain <loic.poulain@oss.qualcomm.com>, Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-Subject: Re: [PATCH 0/5] Rework M.2 Bluetooth instantiation using the
- auxiliary bus
-Message-ID: <aq0IfMrMISvQUwbv@shlinux88>
-References: <20260915-pci-m2-bt-rework-v1-0-3c7d9cf9c010@oss.qualcomm.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <20260915-pci-m2-bt-rework-v1-0-3c7d9cf9c010@oss.qualcomm.com>
-X-ClientProxiedBy: SGAP274CA0020.SGPP274.PROD.OUTLOOK.COM (2603:1096:4:b6::32)
- To VI2PR04MB11276.eurprd04.prod.outlook.com (2603:10a6:800:296::7)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="knaGV9Qv"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 962201F00893;
+	Fri, 18 Sep 2026 09:49:59 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1789725009;
+	bh=8t9OftbKsTobXnf3HZvHCZsdWSxoy5fx/tJFxvybDRU=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To;
+	b=knaGV9QvGQiynXG5HrI+jeCbvMvDMWi2CEZrb4EGgcOBksSJ7czyD986T87Z6Stjt
+	 pYRk+fG1X6P3+NGmjAGkcYJBygJncs2Ti+z23H0CIiaVzr54tIOCrwcTMrENp1fZQ6
+	 T40WgW7ZGar5ltRLxmqQnEhaKQKQ9XTm15OOdrveSMlKtujZHctE/9PbpdZYPaslvj
+	 PNXCeOQAPJSzFh/a0fMN2VYiy0fB6gv5tgOOBnCmLdZHl2klqzGMV8mIvvSm5mE8Hl
+	 LcUfFvnHyqI+FQr8y6bWsjSjG1bO16BQJlQvaABD5VpL0WT1YBe53j4kpkgNBuKvcW
+	 uBkIX3Fw2O97g==
+Message-ID: <946fb909-8e21-4775-8328-c46e306f17c4@kernel.org>
+Date: Fri, 18 Sep 2026 11:49:57 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: VI2PR04MB11276:EE_|GV4PR04MB11893:EE_
-X-MS-Office365-Filtering-Correlation-Id: 757c3e92-7c8f-460d-ca27-08df156990ad
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|23010399003|366016|7416014|376014|19092799006|1800799024|56012099006|10067099003|11063799006|18002099003|22082099003;
-X-Microsoft-Antispam-Message-Info:
-	iepk4WcBxbXlf6+8VKYga2f1nnAOeNxugM69VdkJfEkewYR4nmZXr6Q1C6Yqucqc+gR6U9h4p2Q0Ve5MOZW+jBydeJuDIYCZRq5zDRJDDxSnlJ8L9mwLyw5jpyIZcbzSn5OuVAACZb5BQlxlgz9Gq/69xY8jNC44JNVYZuIFgz2jx6k/OtgBiHzhvlkGn2/IZX5w1QDnB7OFDqUKSXeM6rShxkIOj5H+sJGRAuOPZyoGrR83Nh6YUAzxkgPJLANa2hPEAWiOHjwATVG/z2Vew2fi4rCN0784wRKR/fwUrXwyOksXdaPx5xl9VIcBXUP1IwK+9xH3y3nnRmkQD2jqgLrBTBs2A+pJFUczFW6TdWcuM9CJb24HfdoF6byj44J110ryb6LyXV0bHzP2rAO2p5M4zcagkRZXhj22sGOaCAsovlWq4X6Z4d3iJkZyL+TUj9+GZH/TvZFfL37LA+laBNRWkEg1W7ddm2386OYjgiHujL3bTjfaX5vZGS0eZiYDRCprGIhi6bDMDa0tto0Kn1NixP5KjyyR+BjjGopBdRAV6FMydXUxJxF9fY6KXblHadStlNsKlhJOYJZ09Xw+f5k6OY3AA+g4S/RmokHgdnuI2Z3/0qG70YHsH85kmmo1xCCRKlxL31QvutcVoJoAr9a83mKryeMtzcBKSnmm4ZY=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VI2PR04MB11276.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(23010399003)(366016)(7416014)(376014)(19092799006)(1800799024)(56012099006)(10067099003)(11063799006)(18002099003)(22082099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?SHRIMXVKa205d2RLc3RZVW16R1gxWW5VOTljVW15UW4xQVljMUNocE5nUUQr?=
- =?utf-8?B?eS8wN1pDai9EUmRBYngrOUQ1N2pjVXlHdUoxMHQ2YkJrelUxQU9YRGQ1MUdk?=
- =?utf-8?B?emRoamIrQjhEczE0SmxhQ2J3ZTVhMHp3R3RPTDdDenM5MDVXc2l0MXNIK3Zh?=
- =?utf-8?B?bXQyWEF3QzMzS0FTck1IdFMwSGVnaHV0eEdYSDA4eWFjeUY0d0pyS0NyUzhP?=
- =?utf-8?B?TVdjWm5OTEFPc0kwU3YzTk93MTRmeG13RU1YMTkzY0JoSXA1ZkpIa2xlY1A1?=
- =?utf-8?B?RTY0cGticHp3ZzFOVTVPS0UvUjZmZGE5eDIzZXkwTzZJS3phUjR1RnVUK01m?=
- =?utf-8?B?b3Vmd0lnRHEvVUdpejhaRCttVGhMam5FQUJiRlRoM1NadHV5MndOWndlTHUz?=
- =?utf-8?B?VDRqWkREVWw2UjVSY3prcm9tcDFjYkxlMTZpZy92akZMRnVJWXF0WGdVWU44?=
- =?utf-8?B?dkZGSXM4ZkRzeWhUQVhlelVWMHpjSm40Rk9aVFdVTGlibmUwR0x2SVo0RDdT?=
- =?utf-8?B?QzZ0VXJpREQ5cWNNMFZnSnpLVmRXMmZyUnBUU0JXbTF0ZFNramF4blpBampi?=
- =?utf-8?B?bjl2TDdabWpyQjA4MjFIZkhWOU51U3hRVFByUDEvL3ZHaEJrYTV6Q0VmNFQ5?=
- =?utf-8?B?djA3NzJGeEZUSEV4M1Vud3NvZTd5Y1JGRUhmNUZkK28xVldhazAvNk1lUThT?=
- =?utf-8?B?Zi9DTUtZQTlKaUhBNEh1Qlg1U05LVnRmWkRKYjczbm1sQWR5MlZ3OVJmU1VE?=
- =?utf-8?B?cy95K2NheUZ6eUhtNlhyQXBMMTRvM2FOdnQrcFFJQUJhbjNCSHFQU3BKNmYw?=
- =?utf-8?B?SG9EWDJmaTlwUzZMQ3Q1cmNNaS9uc1RPelZDQk5ZTnpzbXZEYUZ1aEorczZ5?=
- =?utf-8?B?RC9GVFFjZ1AxaWJhR3lmQ3FoMnFtaTFrV1loMmhmbmdkS0ZZcU12VmtGR3ZR?=
- =?utf-8?B?bjB0R1NqRERsK1VlUzFwdkllOFdxcDZCNkJ3TDh0ZG4zdzlFcWIyaGI5RG1W?=
- =?utf-8?B?NE1FRFIzcE5Ub29TOVFYWjBzNEVTWHhKY0pncDNaVFNsUEo0MjViSjFYOGlo?=
- =?utf-8?B?V1ltNVQzS1FkUFhaK1RVQmNGWGV5SEFpTmhyZE5iNnZXYkZja0F2OVlqNEtW?=
- =?utf-8?B?WVIxMDY0RXhaekwySS9NYVdUWkpvb1JCbkdvN1VLL2xDSG8zSmw3V1pnVnd0?=
- =?utf-8?B?RE5ZWWRXWGZuVGxWaE5GWEw3K0M2MUZ0UHMzSDBPM3F5ZGZxbUR4dHd4WEI4?=
- =?utf-8?B?NG82TGhnKzZMK280eGdKUnNZdUd1YmlyLzhCT3ZSVENlcmVFc3dFVlFkeFBX?=
- =?utf-8?B?V2s1MWo0MUtEamhFa3JKMkRkRGZOYTQ5MGdybnZJZkIyQWRldVBteVJBZkFl?=
- =?utf-8?B?RGZJMlRGVVppL0p2K0VReWVpeEg5YkpXRjlDbVNxUXV4WVpWbUZZdDlCWWJz?=
- =?utf-8?B?dVVuVDJEc2VkdUpTSVJFOW81Z2FmN2xJcFFXUHIzNWsxakowb3RhMUVSTkgr?=
- =?utf-8?B?b3J1eWZ3UUdUWnIreHpvQS9iOEJXZFJXcFVrVVFQenc3cmVENU10OTJDM3JP?=
- =?utf-8?B?V0c4V1hLS3NjQzUrQ2U4LzN1bTRORFRJOTJCQXpST2FXNkVhcnR3VUN5dXp1?=
- =?utf-8?B?S2dva3pwMVNjbmloeXhBNnh0T0FBWlA1NCtualk2M2YzZW9qTlI1R2xUeHlp?=
- =?utf-8?B?MUtvSnRKN25XYjRlTU1EUkVYT0hDQUVNV3Jmb3hNTHVqVUdrSmlJd1A4SHg3?=
- =?utf-8?B?K1JsR2Q2WlhEODJwcjNoQlZNUURJWGJoOGJPRklVZHZvTGN3L0lWZjJCUklO?=
- =?utf-8?B?NXFhSUdUZTlURm1SVHRlejBrVCtJTTFvc0tVcWMxZ282aGVaUTNabVhBZXlp?=
- =?utf-8?B?cEJzeHErTnlpajFNN1cyMlFDVHJVWUN0Mzc4TG1jWTdwNFNaN3FUUlV5VUlx?=
- =?utf-8?B?U3d3a0poclE2UVNHSG92Q2dsTmthdnE2cFprbE5nUHBCZmhjWk04SHZPRGJs?=
- =?utf-8?B?RUNHdEJGeEh1OFlWZjJWcG9rTHd4bVZ0VWF2VmNrczNGTFlKZks0cmVCVkZw?=
- =?utf-8?B?TFdnbVNNN3FNQ28zQzhjcExUQ0dRY3pLeE9WVXgxOUNzOFRVMnZsZVdzeGRH?=
- =?utf-8?B?Rk93WjFKWjRtVGphM3pFUzkvQ1JzWEJyTjkzdkRHZUZUT0NnYlRoMGlVb0hT?=
- =?utf-8?B?VVVCb0ZneG1OU3FmVUlqa3FyVTZ0MmhpaE93NU5ab2QrT25FOE05SjBuVzg3?=
- =?utf-8?B?UVd0Q0MzRHZkZlYxNUlMNUFsVVdpbGJZL2ZVMzZpTG92dGx3SWhoSnRRdFc4?=
- =?utf-8?B?R0thZVdBZ0Z6QzZEQ3FQVTdtVlROSU5KRHBBU0RDUGFVSWJxeks2dnV0VzNt?=
- =?utf-8?Q?PO46fl69R6v+SqUEUKBChLm56tehvZSud/C6L?=
-X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 757c3e92-7c8f-460d-ca27-08df156990ad
-X-MS-Exchange-CrossTenant-AuthSource: VI2PR04MB11276.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Sep 2026 09:45:25.8121
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: JNaaaIHHPwYR5p5cCTcEqOQPanJ+rQygQgyR1zox8eTs6qMV3bg2+f7wVwL7zmc3fmBOGxn4yQ7I9vs47f9guy7LJFSlsHdiLa9vbuqFPCpy9Rvm8FLrMAQLI2xvz4KJ
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV4PR04MB11893
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 07/11] dt-bindings: ufs: Add NXP S32N79 UFS host
+ controller
+To: Larisa Grigore <larisa.grigore@oss.nxp.com>,
+ NXP S32 Linux Team <s32@nxp.com>, Alim Akhtar <alim.akhtar@samsung.com>,
+ Avri Altman <avri.altman@sandisk.com>, Bart Van Assche <bvanassche@acm.org>,
+ Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
+ Conor Dooley <conor+dt@kernel.org>, Frank Li <Frank.Li@nxp.com>,
+ Sascha Hauer <s.hauer@pengutronix.de>,
+ Pengutronix Kernel Team <kernel@pengutronix.de>,
+ Fabio Estevam <festevam@gmail.com>,
+ "James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>,
+ "Martin K. Petersen" <mkp@kernel.org>,
+ Sai Krishna Potthuri <sai.krishna.potthuri@amd.com>,
+ Ajay Neeli <ajay.neeli@amd.com>, Manivannan Sadhasivam <mani@kernel.org>,
+ Pedro Sousa <pedrom.sousa@synopsys.com>
+Cc: linux-scsi@vger.kernel.org, devicetree@vger.kernel.org,
+ linux-kernel@vger.kernel.org, imx@lists.linux.dev,
+ linux-arm-kernel@lists.infradead.org, linux-arm-msm@vger.kernel.org,
+ clizzi@redhat.com, aruizrui@redhat.com, eballetb@redhat.com,
+ echanude@redhat.com
+References: <20260917091555.1443076-1-larisa.grigore@oss.nxp.com>
+ <20260917091555.1443076-8-larisa.grigore@oss.nxp.com>
+From: Krzysztof Kozlowski <krzk@kernel.org>
+Content-Language: en-US
+Autocrypt: addr=krzk@kernel.org; keydata=
+ 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
+In-Reply-To: <20260917091555.1443076-8-larisa.grigore@oss.nxp.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Tue, Sep 15, 2026 at 04:24:01PM +0200, Manivannan Sadhasivam wrote:
->Hi,
->
->This series reworks the PCIe M.2 Bluetooth instantiation using the auxiliary
->bus.
->
->The Bluetooth interface of the QCA2066, WCN6855, WCN7850 and NXP 88W8987
->M.2 modules is accessed over UART, but the modules show up at runtime over
->PCIe and are not described in firmware like devicetree. To make the serdev
->bus match the Bluetooth driver, the power sequencing driver was creating a
->devicetree node at runtime using an of_changeset. But, creating a node just for
->driver matching is not recommended as per Krzysztof [1].
->
->So this series reworks the instantiation to use the auxiliary bus instead. The
->power sequencing driver still allocates the UART serdev, but now hands it over
->through an auxiliary device along with the power sequencing target. So this
->series adds auxiliary driver support to hci_qca and btnxpuart drivers binding to
->this device and brings up the controller over the existing UART transport.
->Finally, it drops the serdev based M.2 code from both BT drivers.
->
->Dependency
->==========
->
->This series depends on Monza series from Loic [2] and reuses its
->pwrseq_is_controllable() API.
->
->[1] https://lore.kernel.org/linux-pci/768142f0-2638-41f3-a34f-dc80bb99eb7f@kernel.org
->[2] https://lore.kernel.org/all/20260904-monza-wireless-v6-0-d8c5042b3efd@oss.qualcomm.com
->
+On 17/09/2026 11:15, Larisa Grigore wrote:
+> +
+> +properties:
+> +  compatible:
+> +    items:
+> +      - const: nxp,s32n79-ufshc
+> +      - const: jedec,ufs-2.0
 
-For the NXP 88W8987 M.2 module related changes:
-Tested-by: Sherry Sun <sherry.sun@nxp.com>
+Continuing discussion from v1, why replacing one fallback with another?
+So previously it was compatible with 3.0, but now it is not and it
+became compatible with 2.0?
 
-Best Regards
-Sherry Sun
+I cannot find any software user of any of these fallbacks, thus IMO it
+should be dropped, unless UFS folks have some arguments for keeping it?
 
->Signed-off-by: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
->---
->Manivannan Sadhasivam (5):
->      Bluetooth: hci_qca: Add auxiliary driver for PCIe M.2 modules
->      Bluetooth: btnxpuart: Add auxiliary driver for PCIe M.2 modules
->      power: sequencing: pcie-m2: Create auxiliary device for the M.2 BT interface
->      Bluetooth: hci_qca: Drop serdev based M.2 power sequencing code
->      Bluetooth: btnxpuart: Drop serdev based M.2 power sequencing code
->
-> MAINTAINERS                               |   1 +
-> drivers/bluetooth/Kconfig                 |   2 +
-> drivers/bluetooth/btnxpuart.c             | 193 +++++++++++++++++++-----------
-> drivers/bluetooth/hci_qca.c               | 138 +++++++++++++++------
-> drivers/power/sequencing/Kconfig          |   2 +-
-> drivers/power/sequencing/pwrseq-pcie-m2.c | 137 +++++++++++----------
-> include/linux/pwrseq/pcie-m2-bt.h         |  38 ++++++
-> 7 files changed, 343 insertions(+), 168 deletions(-)
->---
->base-commit: e5e04726cdd043e309677071ab1b65a4b18f422b
->change-id: 20260806-pci-m2-bt-rework-78dc2c926f00
->prerequisite-message-id: 20260904-monza-wireless-v6-0-d8c5042b3efd@oss.qualcomm.com
->prerequisite-patch-id: c4e777757ca9358cc4dd35e23738cd7dc1ead1a0
->prerequisite-patch-id: 09600595c2e80b12eda3aae39af192847d0f03d0
->prerequisite-patch-id: afe88432c4d459e9094c0e6dd31ebeab6c9f2f08
->prerequisite-patch-id: 60fd7b13447ccad7546fa8e5b5609d8f133f788f
->prerequisite-patch-id: 61dcbe55fdb6f33a3229c197f16a678785aa16d8
->prerequisite-patch-id: 14099e5c573d7c41b899c3f9bb9126aa23f1553e
->prerequisite-patch-id: 647ee15b77671054b4bb012afa9ba8694b6c86c5
->prerequisite-patch-id: c3a774cae81a6fad287731a38f1b76c7e8babc4c
->prerequisite-patch-id: 18b0fa62060a1a2c96e76051944d692699035572
->prerequisite-patch-id: df02ab167976ac1f0d5a38c78e559a7372b16c1f
->prerequisite-patch-id: 3f2dddd108677252a539cdb1eb661912836289ca
->
->Best regards,
->--
->மணிவண்ணன் சதாசிவம்
->
+> +
+> +  reg:
+> +    items:
+> +      - description: UFS Host Controller registers
+> +      - description: System Control Module registers
+> +
+> +  reg-names:
+> +    items:
+> +      - const: ufshc
+> +      - const: scm
+> +
+> +  clocks:
+> +    maxItems: 1
+> +    description: UFS core clock
+
+Drop description, redundant.
+
+> +
+> +required:
+> +  - compatible
+> +  - reg
+> +  - reg-names
+> +  - clocks
+> +
+Best regards,
+Krzysztof
