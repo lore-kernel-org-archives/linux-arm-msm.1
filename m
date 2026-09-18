@@ -1,231 +1,243 @@
-Received: from mail-ed2-f29.google.com (mail-ed2-f29.google.com [74.125.228.93])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8AD344E7814
-	for <linux-arm-msm@vger.kernel.org>; Fri, 18 Sep 2026 14:07:01 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.228.93
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4045335C69D
+	for <linux-arm-msm@vger.kernel.org>; Fri, 18 Sep 2026 14:09:41 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789740424; cv=none; b=CoOg5oN9FkHXp/wl5zItN1h75JmRMOo6tjTTecEYzWlPCCJqfLYWuFy7jT6My4FVpgODJ+MIqoqydKy5JOQjQ//rB6Jj0HIZFOQjse6WUaVhhDPwDwtChwyAEubbLJ9O6edjUaqvMzoZOw0owl6usrSkOKCU3CFpB3lFRNIfHbE=
+	t=1789740583; cv=none; b=O8rmFL7GK0hYzI+Y7XrVhVnI0cp0XhG6Y1RB33rX9BUMl/F7siu335xJdlQYwg4Zz6Vq09i2W4H49Ajnz9fMro9JArTa6fUVjQuRcrW1YzkF6PhInJfFLPYqMHuN9jlmVKf966Sxpr/OPLjZXeBB1Cnc7gX+qvgT1bjdtunuzww=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789740424; c=relaxed/simple;
-	bh=rd7gj1zXN/3rpk3xfVsvYTIz6ugycXx27jtR2oCkAMU=;
-	h=Mime-Version:Content-Type:Date:Message-Id:Cc:Subject:From:To:
-	 References:In-Reply-To; b=h/NoscyxPFxAvvT54OWfKZ+eW7rTtbJkmWDf1RLWp027CHSwnV/DkHr73VcYOopkrZmOUFzxFuwabdxxrfFmKLK5DV3kjQKdyqb9M6CayC/88Vj5Q7/jQwqJRQ/hmw2PKmbuM6Yr96H0ji3Hv+PLq3qa6sSsqrxRp+AVekHWdew=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=fairphone.com; spf=pass smtp.mailfrom=fairphone.com; dkim=pass (2048-bit key) header.d=fairphone.com header.i=@fairphone.com header.b=ZwhAmNZd; arc=none smtp.client-ip=74.125.228.93
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=fairphone.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=fairphone.com
+	s=arc-20240116; t=1789740583; c=relaxed/simple;
+	bh=cnZiEV9qRv1m/yHobliIfyHOjF7ER5ZdH2Zqgn45D0E=;
+	h=Message-ID:Date:MIME-Version:From:Subject:To:Cc:References:
+	 In-Reply-To:Content-Type; b=Yyb59a6ElgjL9ohKHDPobbAyghYOA0qF0CAacFUzWnvOQClLFZnJRMIY6GgYwXBJK4psL1Cu26oSj4qjIO0khblTbeLPtOmlrQ3zmJL/IQf9dFPc2aJ8LC78cP7Z5nTqUvyQoUNC1OFXruA7f4aeVVelMUhl1Qc8/wlzQkpw1c4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=k2LhjmS5; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=VWDvjZDd; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=fairphone.com header.i=@fairphone.com header.b="ZwhAmNZd"
-Received: by mail-ed2-f29.google.com with SMTP id 4fb4d7f45d1cf-6aa0ee64afdso903741a12.0
-        for <linux-arm-msm@vger.kernel.org>; Fri, 18 Sep 2026 07:07:01 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="k2LhjmS5";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="VWDvjZDd"
+Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68IDOWwN1900384
+	for <linux-arm-msm@vger.kernel.org>; Fri, 18 Sep 2026 14:09:40 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	4SEZETyE0PARh6/jC3pFbG8uSXzUDG4JFO/9Ng3zjDc=; b=k2LhjmS5ACIvI3NX
+	unsTFOy+rADBx+5G3nXHA0JV0jlaGnpZWpyp9ueVVrR94fWvvh550HL57gV+PIzW
+	9jn+4LTQyoqQ7+v9sYn99cdpqsD6x40N6ccYcxvGX8kEHQ0RhaIYdgUpqWEhyY+d
+	0hD0E52MCW3XfUrrSHMujLsnI1+qEs4XnQtXD/V7BKsWd+MqH19iAOiQzx1VFWzd
+	ubVnbwrCmRJmbYPuxGgopGA7kn1SYxBefIOIn9Gc8r5XoKDY9VqKGFAeX0dZQfNK
+	UzTWUpJqYW602hTtFERrNhlz1HcZxhgEv86Gt8Y6Bwa63x2cx70qmRqZGWsApQdS
+	XUuqEg==
+Received: from mail-vs1-f72.google.com (mail-vs1-f72.google.com [209.85.217.72])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4grtdpu0rq-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 18 Sep 2026 14:09:40 +0000 (GMT)
+Received: by mail-vs1-f72.google.com with SMTP id ada2fe7eead31-7a04805f8f1so730872137.3
+        for <linux-arm-msm@vger.kernel.org>; Fri, 18 Sep 2026 07:09:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=fairphone.com; s=fair; t=1789740419; x=1790345219; darn=vger.kernel.org;
-        h=in-reply-to:references:to:from:subject:cc:message-id:date
-         :content-type:content-transfer-encoding:mime-version:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=d+yltdctt5ruCa6iMGQXqYgwXkTVwncfcwBwCdKyoY4=;
-        b=ZwhAmNZdU3JQaD52s3Oe2rKHYClHHOMX1Qsfqa6pEy5GG1PPWQDEsvSRggOnuCztPz
-         Lr1ZdytPUUoJKNGttvUEHltPveZOZHLkozBDba08tQSd221XfwqkCEH7Et89yRfuKuSM
-         3KAALHcLIE1tPSdUXzCRmHTdsY/F8K0k2q84DKF+UOei/D3nQdlzmZd4sF0QETVkeZy/
-         nJMFu9onZviL8CCUu2jkXmveWYpGrOLcNGd7jHqUGHtas8IWltKJn9ka7FFOtSm4eqIV
-         WQslVcZF4xm5ztDzHLze1n240fIHtuAAoET4yWKTE0f4Agr3b4m4VlUrbkaqTeAqzLZx
-         hXuA==
+        d=oss.qualcomm.com; s=google; t=1789740579; x=1790345379; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :references:cc:to:subject:from:user-agent:mime-version:date
+         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=4SEZETyE0PARh6/jC3pFbG8uSXzUDG4JFO/9Ng3zjDc=;
+        b=VWDvjZDdiVxeH5AoMPRXqH8ocgGq5Rv9tsFHMpWTNgbeyMvjDr2/Ary77UVWUO3iDy
+         XI7W+us3o32Z6o0q0V+RMQbtX6JXQTV8idXxfuGAEgC+szBTw9iNMuLdxqf52TrxPO+k
+         mBCPq+2SsNVHKZdMDCfRgUb3/mYQhUbLJaYbn9fAK+4PGTUcNDGaHxxTr5RUdP2f7oFf
+         ugphDhB97s3HfmzOVHSAtZkCfh+P1lTGza0O2FOTTXJkzNyrUFgs+S2lqciSfk4ofeth
+         l5rndUsLcu3kinMR+9ViWRlBtk7aP14AvoOgcuSTzIlXlW4MkiK6CLbxy+VrRFapEFI5
+         fsbQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1789740419; x=1790345219;
-        h=in-reply-to:references:to:from:subject:cc:message-id:date
-         :content-type:content-transfer-encoding:mime-version:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=d+yltdctt5ruCa6iMGQXqYgwXkTVwncfcwBwCdKyoY4=;
-        b=1NExD3/hEK+p7gB/HSftOJkzKdyRhzaMDG+pLG45/RfDZ3ogU3ZfzqZD0ooScuKrtY
-         F+a6QfxA6iU6eCY5FqjQvyPJ4BQpLGnlfsuo3/vbautYuxrtiXjjYsnoiwv4X+FbqzHA
-         6B/H/2YlZZdDRnvMWkmOTlBFLl1AftQaCRA1RVomUvZtAzS6NzZMG/7QXDRIVwkBE1Q6
-         YFhdauDr1SDfrkmXzlb15UjDdQwHCMJFckTeplvz/yVcKbPYC3tQ4NRHHOf0BbHplAwh
-         VIHUpOtflluuaSDE/hp25LEVS1XMtXZ10e52CF2yuC6XOGReKGdW/hJs4Vmxh6EC7cnL
-         hwHQ==
-X-Forwarded-Encrypted: i=1; AKwUvByt96xotMksJX76cfzP97UC5hdY0IOTKxuv6Ge7x8LpcCJ4Fh9VoS+xVeRne6ActjGSntim+WMgLPx0rLkd@vger.kernel.org
-X-Gm-Message-State: AFuF++kLmX+K/+WFt05J5zfBnee24W4MReq1fPTDzZ1YpFu6MmiRa5L3
-	qsE9odDHatDI7EhzRlAYZzDK5LPFMIWH+MLufOw8o7m8RrdCFwhvSnsdO2EtL825Zn0=
-X-Gm-Gg: AYBFou3NJKAA4xEz+fBN/iP3M/7AKCNGnOL9rPzYq4EmJud6imSWm8lBqF9/QfBjg7i
-	r5dGc2oao1KwN5axRjdsPr8bslBLfZNltXLNu7DzMN7vkowj8OvAHTULn10R57vRv4F1nNaXslv
-	0Qbg7NZ/HTZvcWmSLxdekIiC/NKkp5OxEJAeUj1oz0NXnsDb+7yHii3TeyqGz9ghcaUEdLIrFlF
-	9ctQ8XEOGgyazeTpZeK93QLGKtiutz/4PVUPKWTqFMvCe6WhGETbYVMaAhO1K6S7Lb5Y+NIB1jC
-	+064Fl8EQxGQ/J1TMQChHJfW/Ji+v6eK8cJBdCRf8LonJbhQ1CfntZXsaegNC9NRkZi9LUzWbnZ
-	LOHTaNv1yy9AQdkPYG7I7OLq4SLMJAElmtPKt9d6pXhUXWgnL6nCg0gWH3fYqyQaFVaBo5CkJEr
-	uZJZJ9Ckdjg1IkAAoor7TDirnT/ATzL4hGcAU6HNQ8SRt/AmxDwkhfCUwwK//w1Ggve94HjS3N5
-	TjHPprVyPw4qeehX3Z4xEmjbYSWo5wOYhc4oooheo5NnhYNt6QNGw==
-X-Received: by 2002:a05:6402:4290:b0:6a8:6390:945f with SMTP id 4fb4d7f45d1cf-6aa5798614emr3549288a12.10.1789740419612;
-        Fri, 18 Sep 2026 07:06:59 -0700 (PDT)
-Received: from localhost (144-178-202-138.static.ef-service.nl. [144.178.202.138])
-        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-6aa59753cc1sm944353a12.21.2026.09.18.07.06.58
+        d=1e100.net; s=20260707; t=1789740579; x=1790345379;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :references:cc:to:subject:from:user-agent:mime-version:date
+         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=4SEZETyE0PARh6/jC3pFbG8uSXzUDG4JFO/9Ng3zjDc=;
+        b=j9bK8Rg3skrLZ5bhxhecJ7ncR6/JwaerMXRFSeIBvUtW/KR23yUxnw9aAf928FiM/h
+         WXWvBjFbCsLRFc5Ucy5bLP9XNjj+dcQNyjv14hc9DM7wb6+NDLGRis/fM85FpavszU2j
+         DKN+QymC+TZUoGQ9WDpgx11n9hxRQgJAiQq2Dto1T2bJIQ3E/tB1YivADt5aCjbYK/6Y
+         iLcyZJyw4v5DBIkvreI+FzdL9zIlnhZ+TqHc4gS82Q3N1nyxQ4eqaDY2Hk5k/KU6D0EG
+         rT6N+LWvjZ8OdfgN3OBD7Sjnor+uJl0GY0Q3TMnD6UcRdvvxiZbvcKaISsWhXEbjlqZF
+         fJng==
+X-Forwarded-Encrypted: i=1; AKwUvBzFI9UNBnrGCLarr5quHAqL6BgvSbRHq5qkp9kabGrRIM/OLnXsFiGFG3xAIXXHENBgfjqcGDECLorE4jQR@vger.kernel.org
+X-Gm-Message-State: AFuF++kSoizNy5KnmG5vGeqyAXH0NE7EZiLn2SmrmNLeLE0WuPMRrEkw
+	IjMoErW61Wszmnn1uKGgWae21zzxZwlLtE9s+PnSmnD3/0UWoAR5asiMeAQSV2OTuIZp/Fps6kj
+	wVwgVrqbBcpkvbx7MOMVO+ALukQjOUymJ5yYxZgIZa7jlj0gHbaVDfXy79PiKgpPj9bp1
+X-Gm-Gg: AYBFou3ZOMDbPE3D2YAu96Yqkw/GtPuo2y4HGm5Ezz/mI5mCBP/Eq1zQQ+kEiEKrADL
+	Nn7iAVpuismdbrg52Q5Dh8EXgFDdlehf0JYvEw8nRk+hTdmCeboQtVrxsBceYWgft7/oDWwKli8
+	xe7pgg3gyU5Sl/qMh/0wb9hiZLZsM1KQBN+USi9P6ZMP0v+UppV4kk6CiQidt9BuTNV7TjorSYw
+	4aeIi3VRMYcq+Sjq9W8kYnIs75/oqVnbloeWiGL7fJPcIyTaDD8JXos4ce3hhqEF5h7i9c+Hvi2
+	hs7bP+mIFPuYuX+FwLTlCU1YXtmmufbyDpFx2fAQbFm+P6t/FZW6bGdsObO010MtxBCp19xPbX+
+	o/iXhATojYu55u3R5HacutmwXkoWTcoorFkS6VgnoGNQ0YsA3Sg65NUayPgtv4vtsZOdFJEU99g
+	fLy//A8LUBcfIfFPDJVksVa0F3X77vuFpoURklCIg5doP5TqYoh3UwRjbbWHmxAHSiiw==
+X-Received: by 2002:a05:6102:578e:b0:7a2:2a6d:2d7e with SMTP id ada2fe7eead31-7a55b1407dcmr1308029137.8.1789740579196;
+        Fri, 18 Sep 2026 07:09:39 -0700 (PDT)
+X-Received: by 2002:a05:6102:578e:b0:7a2:2a6d:2d7e with SMTP id ada2fe7eead31-7a55b1407dcmr1307923137.8.1789740578364;
+        Fri, 18 Sep 2026 07:09:38 -0700 (PDT)
+Received: from ?IPV6:2001:1c00:c32:7800:5bfa:a036:83f0:f9ec? (2001-1c00-0c32-7800-5bfa-a036-83f0-f9ec.cable.dynamic.v6.ziggo.nl. [2001:1c00:c32:7800:5bfa:a036:83f0:f9ec])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c2a1b7a3a06sm58558766b.2.2026.09.18.07.09.37
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 18 Sep 2026 07:06:58 -0700 (PDT)
+        Fri, 18 Sep 2026 07:09:37 -0700 (PDT)
+Message-ID: <dca62a09-2af7-463e-9ba0-1be935a95502@oss.qualcomm.com>
+Date: Fri, 18 Sep 2026 16:09:36 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
-Mime-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+From: Hans de Goede <johannes.goede@oss.qualcomm.com>
+Subject: Re: [PATCH v7 1/2] module: add SCMI device table alias support
+To: Sudeep Holla <sudeep.holla@kernel.org>,
+        =?UTF-8?Q?Uwe_Kleine-K=C3=B6nig?= <u.kleine-koenig@baylibre.com>
+Cc: Bjorn Andersson <andersson@kernel.org>,
+        Cristian Marussi <cristian.marussi@arm.com>,
+        Daniel Lezcano <daniel.lezcano@oss.qualcomm.com>,
+        Bjorn Andersson <bjorn.andersson@oss.qualcomm.com>,
+        Frank.Li@kernel.org, arm-scmi@vger.kernel.org,
+        linux-arm-kernel@lists.infradead.org, linux-arm-msm@vger.kernel.org,
+        imx@lists.linux.dev, linux-kernel@vger.kernel.org
+References: <20260918092951.5656-1-johannes.goede@oss.qualcomm.com>
+ <20260918092951.5656-2-johannes.goede@oss.qualcomm.com>
+ <20260918-impetuous-daring-barnacle-1ea4d0@sudeepholla>
+Content-Language: en-US, nl
+In-Reply-To: <20260918-impetuous-daring-barnacle-1ea4d0@sudeepholla>
 Content-Type: text/plain; charset=UTF-8
-Date: Fri, 18 Sep 2026 16:06:57 +0200
-Message-Id: <DLII11BAGLSU.OV8H9AA3AWN2@fairphone.com>
-Cc: "Liam Girdwood" <lgirdwood@gmail.com>, "Mark Brown"
- <broonie@kernel.org>, "Rob Herring" <robh@kernel.org>, "Krzysztof
- Kozlowski" <krzk+dt@kernel.org>, "Conor Dooley" <conor+dt@kernel.org>,
- "Konrad Dybcio" <konradybcio@kernel.org>,
- <~postmarketos/upstreaming@lists.sr.ht>, <phone-devel@vger.kernel.org>,
- "Krzysztof Kozlowski" <krzk@kernel.org>, <linux-arm-msm@vger.kernel.org>,
- <linux-kernel@vger.kernel.org>, <devicetree@vger.kernel.org>
-Subject: Re: [PATCH 4/4] arm64: dts: qcom: sm7225-fairphone-fp4: Add parent
- supply for regulators
-From: "Luca Weiss" <luca.weiss@fairphone.com>
-To: "Bjorn Andersson" <andersson@kernel.org>, "Luca Weiss"
- <luca.weiss@fairphone.com>
-X-Mailer: aerc 0.22.0-0-gc2f86b7abde3-dirty
-References: <20260901-fp4-regulator-supply-v1-0-68288ab70aee@fairphone.com>
- <20260901-fp4-regulator-supply-v1-4-68288ab70aee@fairphone.com>
- <apmLYmMgGZVhqU8o@baldur>
-In-Reply-To: <apmLYmMgGZVhqU8o@baldur>
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTE4MDIwMSBTYWx0ZWRfX3lc2H+sPLViE
+ XP1ipGkhrZhLdF9ghtTfcTWHrvCsdPA7OnmwV/38G6Sfxl+16hpsR2k60IRSzdoDm3LhTlIvXES
+ TuGVQitqwCNqrtYS/IRZW4Zo7zDlx3/RetjEOo3iKDmqJYZurGPL1ov1BP1fS2eJwiMZLDz8F2q
+ pWJhP0fmV9HPVpC4nlMqs8A7LcDR8Pt9Mi7pQLP1RW1nQeS/GWnhQ1W4BwyMXIbdjpsfSyjTWSE
+ xWZD2g1zV6xwx8q/36iU63SLK7w6r3lSfSFHESpC7u5NRmcaZC1f8NaF4jZuID/6jhtswNRekY5
+ OtxTFc85NQ9UzU4JjQRNIYJgEWa+W1FLa07knszB3TbgtGS/f1pXkiQ4BAhj0SBbe3HhtI9TSNO
+ F68Bt4u9EvyxoE72vhLJDolBCynGHwEPb5ANmQvgbH5Ekp98ug9FCNvSRr5TFRD+EJBwEh1MXJg
+ pVaSaX/0Pp7UrBINnpA==
+X-Authority-Analysis: v=2.4 cv=N+e8hG9B c=1 sm=1 tr=0 ts=6aad4624 cx=c_pps
+ a=DUEm7b3gzWu7BqY5nP7+9g==:117 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
+ a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22 a=VwQbUJbxAAAA:8
+ a=vTr9H3xdAAAA:8 a=2jV7UpksSA8eYliVEwMA:9 a=QEXdDO2ut3YA:10
+ a=-aSRE8QhW-JAV6biHavz:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTE4MDIwMSBTYWx0ZWRfX/AQyYDui34c4
+ ZPxP4MvmTwRuKzvDWqBr1OqOWZYSJ1hwGMXIOgNY9GuJwkBl9K6FnCYkPVub1A5Zzueh5rdeV8C
+ odaPOcuOPcrUGvBdlSSF5bvIazwDcEI=
+X-Proofpoint-ORIG-GUID: -bP-YltVLtjsgUppneZH1dFhao741nCj
+X-Proofpoint-GUID: -bP-YltVLtjsgUppneZH1dFhao741nCj
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-09-18_04,2026-09-16_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ phishscore=0 suspectscore=0 lowpriorityscore=0 priorityscore=1501
+ malwarescore=0 clxscore=1015 spamscore=0 adultscore=0 impostorscore=0
+ bulkscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
+ adjust=0 reason=mlx scancount=1 engine=8.22.0-2609040000
+ definitions=main-2609180201
 
-Hi Bjorn,
+Hi Sudeep,
 
-On Thu Sep 3, 2026 at 5:01 PM CEST, Bjorn Andersson wrote:
-> On Tue, Sep 01, 2026 at 10:58:59AM +0200, Luca Weiss wrote:
->> Add the vdd-*-supply properties to the rpmh-regulators nodes, so that
->> the parent regulators can be enabled when needed.
->>=20
->
-> https://docs.kernel.org/process/submitting-patches.html#describe-your-cha=
-nges
-> starts with "Describe your problem.". Is there an actual problem observed=
-?
+On 18-Sep-26 15:32, Sudeep Holla wrote:
 
-No, this was noticed just in 'code', that other (also rpmh) devices have
-the -supply properties, but not this device.
+[...]
 
-> I've been told that rpmh will have your back here, so you should not
-> need to explicitly vote for these resources from Linux.
+>> diff --git a/include/linux/device-id/scmi.h b/include/linux/device-id/scmi.h
+>> new file mode 100644
+>> index 000000000000..1b4ccfa9dcc5
+>> --- /dev/null
+>> +++ b/include/linux/device-id/scmi.h
+>> @@ -0,0 +1,17 @@
+>> +/* SPDX-License-Identifier: GPL-2.0-only */
+>> +#ifndef LINUX_DEVICE_ID_SCMI_H
+>> +#define LINUX_DEVICE_ID_SCMI_H
+>> +
+>> +#ifdef __KERNEL__
+>> +#include <linux/types.h>
+>> +#endif
+>> +
+>> +#define SCMI_NAME_SIZE		32
+>> +#define SCMI_MODULE_PREFIX	"scmi:"
+>> +
+>> +struct scmi_device_id {
+>> +	__u8 protocol_id;
+>> +	char name[SCMI_NAME_SIZE];
+>> +};
+>> +
+>> +#endif /* ifndef LINUX_DEVICE_ID_SCMI_H */
+> 
+> You need to include this above file in include/linux/mod_devicetable.h
+> to avoid duplication of its inclusion elsewhere. That's the pattern followed
+> I see.
 
-Then, this change still makes
-/sys/kernel/debug/regulator/regulator_summary have a nice hierachy of
-regulators and not all of them parented to regulator-dummy.
+That is what I did for v3, but Uwe, who is leading the splitting
+of mod_devicetable.h from one large monster include to smaller
+per subsystem/bus includes explicitly requested me to follow this
+pattern, see:
 
-Shall I send a v2 with this justification in the commit message? Or is
-it okay to pick it up as-is?
+https://lore.kernel.org/arm-scmi/aow2GFAfy84k-N2B@monoceros/
 
-Regards
-Luca
+[...]
 
->
-> Regards,
-> Bjorn
->
->> The regulators s4a and s6a are a bit special. They feed back into
->> PM6350, but are not modelled as regulators (or anything else?), so they
->> also can't be added as vdd-*-supply. It would seem to be possible to add
->> them with their "Default on booting voltage" from the PM6350 Data Sheet
->> in the dts, but I'm not sure this is desired.
->>=20
->> And document what the "missing" regulators are used for.
->>=20
->> Signed-off-by: Luca Weiss <luca.weiss@fairphone.com>
->> ---
->>  arch/arm64/boot/dts/qcom/sm7225-fairphone-fp4.dts | 46 ++++++++++++++++=
-+++++++
->>  1 file changed, 46 insertions(+)
->>=20
->> diff --git a/arch/arm64/boot/dts/qcom/sm7225-fairphone-fp4.dts b/arch/ar=
-m64/boot/dts/qcom/sm7225-fairphone-fp4.dts
->> index 5d20ad93b0c5..a1556d802a8b 100644
->> --- a/arch/arm64/boot/dts/qcom/sm7225-fairphone-fp4.dts
->> +++ b/arch/arm64/boot/dts/qcom/sm7225-fairphone-fp4.dts
->> @@ -78,6 +78,17 @@ lcdb_dummy: regulator-lcdb-dummy {
->>  		regulator-max-microvolt =3D <5500000>;
->>  	};
->> =20
->> +	vph_pwr: regulator-vph-pwr {
->> +		compatible =3D "regulator-fixed";
->> +
->> +		regulator-name =3D "vph_pwr";
->> +		regulator-min-microvolt =3D <3700000>;
->> +		regulator-max-microvolt =3D <3700000>;
->> +
->> +		regulator-always-on;
->> +		regulator-boot-on;
->> +	};
->> +
->>  	reserved-memory {
->>  		/*
->>  		 * The rmtfs memory region in downstream is 'dynamically allocated'
->> @@ -296,6 +307,15 @@ &adsp {
->>  &apps_rsc {
->>  	regulators-0 {
->>  		compatible =3D "qcom,pm6350-rpmh-regulators";
->> +
->> +		vdd-l2-l5-l7-supply =3D <&vreg_s2a>;
->> +		vdd-l3-l6-l8-l9-l10-supply =3D <&vreg_bob>;
->> +		vdd-l11-supply =3D <&vreg_s2a>;
->> +		vdd-l12-l14-supply =3D <&vreg_s2a>;
->> +		vdd-l15-l19-l22-supply =3D <&vreg_s8e>;
->> +		vdd-s1-supply =3D <&vph_pwr>;
->> +		vdd-s2-supply =3D <&vph_pwr>;
->> +
->>  		qcom,pmic-id =3D "a";
->> =20
->>  		vreg_s1a: smps1 {
->> @@ -310,6 +330,14 @@ vreg_s2a: smps2 {
->>  			regulator-max-microvolt =3D <2048000>;
->>  		};
->> =20
->> +		/*
->> +		 * s3a (smps3) is gfx.lvl
->> +		 * s4a (smps4) is supply for vdd-l4 & vdd-l13
->> +		 * s5a (smps5) is mx.lvl
->> +		 * s6a (smps6) is supply for vdd-l16 & vdd-l18-l20-l21
->> +		 * l1a (ldo1) is lcx.lvl
->> +		 */
->> +
->>  		vreg_l2a: ldo2 {
->>  			regulator-name =3D "vreg_l2a";
->>  			regulator-min-microvolt =3D <1503000>;
->> @@ -408,6 +436,8 @@ vreg_l16a: ldo16 {
->>  			regulator-initial-mode =3D <RPMH_REGULATOR_MODE_HPM>;
->>  		};
->> =20
->> +		/* l17a (ldo17) is lmx.lvl */
->> +
->>  		vreg_l18a: ldo18 {
->>  			regulator-name =3D "vreg_l18a";
->>  			regulator-min-microvolt =3D <788000>;
->> @@ -446,8 +476,24 @@ vreg_l22a: ldo22 {
->> =20
->>  	regulators-1 {
->>  		compatible =3D "qcom,pm6150l-rpmh-regulators";
->> +
->> +		vdd-bob-supply =3D <&vph_pwr>;
->> +		vdd-l1-l8-supply =3D <&vreg_s2a>;
->> +		vdd-l2-l3-supply =3D <&vreg_s8e>;
->> +		vdd-l4-l5-l6-supply =3D <&vreg_bob>;
->> +		vdd-l7-l11-supply =3D <&vreg_bob>;
->> +		vdd-l9-l10-supply =3D <&vreg_bob>;
->> +		vdd-s8-supply =3D <&vph_pwr>;
->> +
->>  		qcom,pmic-id =3D "e";
->> =20
->> +		/*
->> +		 * s1e-s2e (smps1-smps2) is cx.lvl
->> +		 * s3e-s4e (smps3-smps4) is VDD_APC1
->> +		 * s5e (smps5) is VDD_APC0
->> +		 * s6e-s7e (smps6-smps7) is mss.lvl
->> +		 */
->> +
->>  		vreg_s8e: smps8 {
->>  			regulator-name =3D "vreg_s8e";
->>  			regulator-min-microvolt =3D <313000>;
->>=20
->> --=20
->> 2.55.0
->>=20
+>> diff --git a/scripts/mod/devicetable-offsets.c b/scripts/mod/devicetable-offsets.c
+>> index b4178c42d08f..91ec3704ee2b 100644
+>> --- a/scripts/mod/devicetable-offsets.c
+>> +++ b/scripts/mod/devicetable-offsets.c
+>> @@ -1,5 +1,6 @@
+>>  // SPDX-License-Identifier: GPL-2.0
+>>  #define COMPILE_OFFSETS
+>> +#include <linux/device-id/scmi.h>
+> 
+> Drop this for above mentioned reason.
+
+This was explictly added at request of Uwe because the goal is to
+get rid of mod_devicetable.h including all the device-id headers
+in a big single catch-all include. This is done because currently
+many files include mod_devicetable.h and then if any of the device-id
+headers changes everything needs to be rebuild, making incremental
+kernel builds much slower.
+
+(and the same for the second include you point out)
+
+Also replying to your other question here:
+
+> Not related to above topic, but just wanted to check with Daniel if this
+> solves module auto-loading for you. Was there someone else who was testing
+> this series and was having issue with earlier versions or its you only
+> Hans de Goede and it was with v1/v2 when Bjorn posted them. I remember
+> something vaguely and couldn't trace back all the versions easily.
+
+I tested Bjorn's original patch-series but since that makes the kernel
+call modprobe it does not work when the scmi bus is enumerated during
+the initramfs phase and the modules are only part of the rootfs.
+
+So I've replaced this with a rewrite of Christian's approach to always
+instantiate standard protocol devices. The rewrite was done because
+of various lifetime management issues with Cristian's original approach
+found by Shashiko.
+
+Note that Bjorn's modprobe approach also only used the protocol id
+as modalias, which means that if a vendor protocol id of say 0x80
+were used and we have multiple vendor protocol drivers in kernel
+which share 0x80 as id, modules from both vendors would get loaded.
+This is something which I did not realize at the time, but this is
+another good reason to go with the new approach from this version
+of the series.
+
+As for testing, I was the main reporter of this issue since I'm
+trying to get Qualcomm Snapdragon laptops to work OOTB with standard
+unmodified Fedora aarch64 live/installer media and scmi_cpufreq
+needs a workaround to be manually loaded there, see:
+
+https://fedoraproject.org/wiki/Snapdragon_WoA_Laptop_Install_(Fedora_Beta)
+
+As you can see only a few workarounds are still necessary and
+manual SCMI auto-loading is one of them. So I really hope that we
+can get this series merged in time for 7.4 .
+
+Regards,
+
+Hans
+
 
 
