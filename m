@@ -1,202 +1,142 @@
-Received: from mail-ej2-f12.google.com (mail-ej2-f12.google.com [74.125.228.140])
+Received: from mail-ed2-f35.google.com (mail-ed2-f35.google.com [74.125.228.99])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 67462385D7B
-	for <linux-arm-msm@vger.kernel.org>; Fri, 18 Sep 2026 14:40:14 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.228.140
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2330D4E13EA
+	for <linux-arm-msm@vger.kernel.org>; Fri, 18 Sep 2026 14:43:25 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.228.99
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789742418; cv=none; b=IFxnS0NB/sO2Lo6qhMuXxD7cslvZqSEF4qzP7Eqp+j6TkmAdOmdEBmxAyLd2Fio13Ptu3pI2dNmURIkW1qNYHQL+wHb6+/h8X41u999JCQ1s8ACRs51uOT5UA/B44aEg7Ck+DsKdzXl12u9hiMyBF227BmRvViOfos4OS9ElGp8=
+	t=1789742607; cv=none; b=i9x58j47K5Chk24GlZah8Pqf4SXOJdnfOZ+2ozE6M5STBCCDz/RMwMHGbSc7Jt8QWxFJeMgwBlQv2t5DDbaMCbE4e8MQupmZvc7QQPPTYwAx1rCAlaTceBSi82ekpXbBcS641AgfQ/Cl4TOWkr4ECftsSJdRsFCPau+QTVpgJ8A=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789742418; c=relaxed/simple;
-	bh=rOIM11VEoZADWcbRxJB4CDrlUSZEECHpM7XwHlAs5pk=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=HgFo7L+VYxmgUri7ebkgP0JXm9aHmACQmiOjpHKP9vUfjXuEDnIvnGkFJmQRPIK0DPcOU6c/3gkOzalVSp/V4hvj11Vgn54v9WPdQmDWuEIER9u5bu57Dff0GkCmFECGCfAVC7/sXfbdqjItz0fazF/CxTYz7AeY7HxxWJJcbns=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=fairphone.com; spf=pass smtp.mailfrom=fairphone.com; dkim=pass (2048-bit key) header.d=fairphone.com header.i=@fairphone.com header.b=Vzgj1t6x; arc=none smtp.client-ip=74.125.228.140
+	s=arc-20240116; t=1789742607; c=relaxed/simple;
+	bh=Iryp186ezY+gCaEJKKJAixL+bjwtfJ0T/atOJE5WaQA=;
+	h=Mime-Version:Content-Type:Date:Message-Id:Subject:From:To:Cc:
+	 References:In-Reply-To; b=n/v/9mOY+k3vUfzCfagRmRXWx6Ytrwq8Kp69UgVhXBiTYapJLRw8tw4DgET9GpiZ6sQfWzu6W/hWfWb6xSVg31rSODalQmML36fx52A8IT6lgys2gbE1lQsWw0P3RYCMzvpG0ZUt1zSh0FXAN5A2hvAOQ+sO8++lxYeJk7Kd1p4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=fairphone.com; spf=pass smtp.mailfrom=fairphone.com; dkim=pass (2048-bit key) header.d=fairphone.com header.i=@fairphone.com header.b=bhpqsMSp; arc=none smtp.client-ip=74.125.228.99
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=fairphone.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=fairphone.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=fairphone.com header.i=@fairphone.com header.b="Vzgj1t6x"
-Received: by mail-ej2-f12.google.com with SMTP id a640c23a62f3a-c254f9f7dbfso93096566b.2
-        for <linux-arm-msm@vger.kernel.org>; Fri, 18 Sep 2026 07:40:14 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=fairphone.com header.i=@fairphone.com header.b="bhpqsMSp"
+Received: by mail-ed2-f35.google.com with SMTP id 4fb4d7f45d1cf-6a6056ac81fso1317783a12.2
+        for <linux-arm-msm@vger.kernel.org>; Fri, 18 Sep 2026 07:43:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=fairphone.com; s=fair; t=1789742412; x=1790347212; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=DBZrkz/d6rH1GgwzTo9HcGaBMgfKERMXTNzWP9DGQww=;
-        b=Vzgj1t6x8FL4ln8WwHGb/Q/IiWoBBf+kmxcOymBK4REczICcZv+QjAdoA5QkiXY704
-         W19GFz4e7hB7ENn4N+gw6nEUvxzEd6qNemw0SjADVT+mbEowFI2ohvdKs7geEN6vLWZq
-         d6NgngTjPzRaoA67Ig1iLWFh6pCJTjxoY/GhKpaHp7kLliUQd/Eh9mq/w02+xHadFELn
-         6lz6+77kwna4WDXbVzjMhIxHtoLf5EvJTl3sDFGzGA9GpUhPOGrbrbsxt+BR8J1EI7rP
-         gvkkWGX8N0sre9Rw3YoOlyPh7tuiUyiQGXW2MwROsYevvjJLwYEJSnW2sElzIKropJzO
-         Eq3A==
+        d=fairphone.com; s=fair; t=1789742603; x=1790347403; darn=vger.kernel.org;
+        h=in-reply-to:references:cc:to:from:subject:message-id:date
+         :content-type:content-transfer-encoding:mime-version:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=Iryp186ezY+gCaEJKKJAixL+bjwtfJ0T/atOJE5WaQA=;
+        b=bhpqsMSppMXS57/rwie8aIPBboNhq43ehVhkULnvPa175uVXt/MpzOT9JFAr2kUNNe
+         DkPCRPkKsoGVnHdYl61k5IMGAeUM72QS0zEOVKdaulXWmVqJ8l7IA65JogktZnZIFhJi
+         bSzVzs3BM1lJ4W17eHfutGUJNO41Bm6NAqs+NE6AbInBEMEnKKztopefxcLk1heRFQ3M
+         lDwZhHqtzdqxUQ0xnL185CVb2U7BXVtpoSAuJseN7eyjVQ8A22A1HZi0BuuVtuBplWq/
+         vEEfRjsKnkdTDeFEHQRWfLLcbWgLKGnIRiuz6/fsdMgLq8FbG8+wjnPRXeg2VGZErN4u
+         Xtwg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1789742412; x=1790347212;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:x-gm-gg
+        d=1e100.net; s=20260707; t=1789742603; x=1790347403;
+        h=in-reply-to:references:cc:to:from:subject:message-id:date
+         :content-type:content-transfer-encoding:mime-version:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=DBZrkz/d6rH1GgwzTo9HcGaBMgfKERMXTNzWP9DGQww=;
-        b=krojWVIKdfm7AfnEvNLkoEpty9ccrMA6RfHrpIEJJfl1OSLmficJlVEwtfdkK9r7Mp
-         XGn7roUi52UOP+a28BuRs66fWJVK7vfC63zLJlHw8zPR8LGyi152hX1oAhDnO1Cskfss
-         wk/uHIw/jRMkNXa7iPMK0bFV7l+rhTZ4e02RLJmPZz/xjBZZXKe+5CBTXj2xTFe9QqOo
-         Wk55fFBaGkAnslbEIw9hxXrqzodqxOQmhLkcOK6b4g2BW6R5hNEEa360+SoMABSnZpMC
-         T2aS8mRHxqQzC+pjOJjUfS2HS8pckhnR0aEP5/sAS0MVQgSxZpfA7qxsPK5Kl/1UdO5T
-         9CEA==
-X-Forwarded-Encrypted: i=1; AKwUvByziI6DG5u/++KnxlbuM2Ni/HLneTHO/qpU4hZMaT7SZm5Qs8Ja90mGfxHA4WFaV3WUpbDFPlYovtS8JxbW@vger.kernel.org
-X-Gm-Message-State: AFuF++mDkw6zt3zstQQ6ak5H9gyqopEgrew5QMuziwKJtvuRoenve/iB
-	xF1J+HkLNHLzEdPplGt5KaKLBmrwykv9RclT5doPdHgsW1vlH+ju/mFkRJBMXdBULx4=
-X-Gm-Gg: AYBFou3rw2FUs1Qmkxw8M9G5RBuw174+Avl1IP4FzJ/DfWu8rZ/GpzDDwKvP6GBSx/B
-	FNLqUdtdAysWit8Y9dOde4/maYXQZb1lmvy9N2N2hXF6ncp4Bbx9ENqtAvC70krCIKDGh0W3S36
-	u4zAetLT7xJfmCfT+5IApyy/NHAGpF1Uf/PrhE3WdltDr1k/jWZbrteTvTcPcd5eTmPk+x6g/v0
-	1Im6aiwGw9o6Lb/wWdjxb78EQTmzvvtpAtjo+w6i99r2MNaXOt/90cL3SlD+WsXnmp8S8UEPaKs
-	CBKhw5/Gy/kyQBbuAGTViha09r7EZyWfl16lNb7dEwhj4JbW+p22bRnsJCdzz4hhNQtH8uIQig7
-	3QdltbmS/HPKO1nOu26OQQF/SJiw9/6vEdHziwHRKrB5eMtvkXqvckqk/wJ8m46IqywHrdQAdCZ
-	V8KcF0CpkixA4qlDwspLx17I2r36HU16P+BzGUYIxtwIPG3R/Ze1ymzssY0EW7E9w355BLC+nPE
-	ulEnwM9r6/4TOc0qMgWb7lEGtB76hFqetjtEHStDVRFhOjSSvVg
-X-Received: by 2002:a17:906:9c95:b0:c29:3c97:c994 with SMTP id a640c23a62f3a-c2a158269a8mr262337166b.35.1789742412068;
-        Fri, 18 Sep 2026 07:40:12 -0700 (PDT)
-Received: from [172.16.220.101] (144-178-202-138.static.ef-service.nl. [144.178.202.138])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c2a1b7a369esm64244966b.9.2026.09.18.07.40.11
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 18 Sep 2026 07:40:11 -0700 (PDT)
-From: Luca Weiss <luca.weiss@fairphone.com>
-Date: Fri, 18 Sep 2026 16:40:07 +0200
-Subject: [PATCH v2 4/4] arm64: dts: qcom: milos-fairphone-fp6: Enable
- display
+        bh=Iryp186ezY+gCaEJKKJAixL+bjwtfJ0T/atOJE5WaQA=;
+        b=yMV+5xsq5TL1SDb1H4ajX73FG+ITFfBQNK890yn/80p8wlzaFssPZTVuQEQvup0au1
+         aAEpyzqwsoQE2PCMmWzeNI6+ktlO0vcM8dZSySiRJsWKwJycg8u3WwUIX4ib4BtJ5Gpz
+         yV8W+aH+tIk2r+wQCYcKKkUYd8jakll/5HqI5X7u85/sHhjike5sVuZEaofK4EQa1DqH
+         lIlQskYaV9YblpGAsEp3FVE98nuWyRHwBeN3sTgaPw4SviEmUUDRURSoTfc79gb+nJ1R
+         7Q5XPgdWMk0k5Cjls7EpR78kTYEQN46AQfQM4pdKt1b8aEmOz19E4U3ia8pmiuoG4viJ
+         Zzsw==
+X-Forwarded-Encrypted: i=1; AKwUvBwaWvAK+2bznGlC81QFF+hGR11QyCcCfxQNxE3Da0cSKksIT9srPHGV4B549d1s0SKv5EvBcsNWJmArftNH@vger.kernel.org
+X-Gm-Message-State: AFuF++mC3GXgvrml7RxXVTxtDOyBRYYeAyTAeU+xAU2NIpuOwadciWSM
+	t70LpifJ8wQMddDcEo8ZsucAzxIHSpYy9gQsly9A5woNUUWx9N9TMUdmgZsnX4aezik=
+X-Gm-Gg: AYBFou1dPKDjVZm8mYZxf+KsnECfPAWAwM/IJ1RjZscWFwdpfSYU/s+fADkinw13aXY
+	ttRI+ON3geYhzbMMdQ2BL98rKo/V0A1D3LQp3uIfd9rnS46MwhDwmptMQwrXqu7459CzhYZBsfI
+	cZqMIFGTiw/VdXOJ/hEHEwzAwYH+Nuyo6n4B/nGdasGsIqUHCVgeAzzudnUSG1aguXjwjCQ2b9h
+	DK9x8oMUBiamXBrQcBy+Tpa/9GztkfGSD8jwq5W0kE5100qJZ3JgQ/DOUtWqw5HBIQLoue5hvzi
+	kxkZsRHj83w4daIKgddwqC7ckDBH5hz5zX0OOOZW0OdatBarfsoqTOV81ewu1oDpD0d5i5qoPB1
+	lz8MOAaYqJAT5RsJczk9bZbK1fU42SRb1ydXHc+DKJil3FOolJfW0ltQsorQBo0xqu4Ib9VO9k6
+	RAuI/sfHNVmoQXmhPtrdAh4y7BSIKDJbKHvU1y6Y8reu6YxwftPSg/WJ4OiIy/LCT0L7UqSkhiz
+	8PIytXoSsAFlQD7ccHAe0ijkDXG9UsjvdBpeSkPLzU=
+X-Received: by 2002:a05:6402:5111:b0:6a9:ab6a:640f with SMTP id 4fb4d7f45d1cf-6aa531c28c8mr1640375a12.37.1789742603374;
+        Fri, 18 Sep 2026 07:43:23 -0700 (PDT)
+Received: from localhost (144-178-202-138.static.ef-service.nl. [144.178.202.138])
+        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-6aa59605618sm991778a12.11.2026.09.18.07.43.22
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Fri, 18 Sep 2026 07:43:23 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
-MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260918-fp6-panel-v2-4-6695c4008920@fairphone.com>
-References: <20260918-fp6-panel-v2-0-6695c4008920@fairphone.com>
-In-Reply-To: <20260918-fp6-panel-v2-0-6695c4008920@fairphone.com>
-To: Neil Armstrong <neil.armstrong@linaro.org>, 
- Jessica Zhang <jesszhan0024@gmail.com>, 
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
- Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, 
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, 
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>, Bjorn Andersson <andersson@kernel.org>, 
- Konrad Dybcio <konradybcio@kernel.org>
-Cc: ~postmarketos/upstreaming@lists.sr.ht, phone-devel@vger.kernel.org, 
- dri-devel@lists.freedesktop.org, devicetree@vger.kernel.org, 
- linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
- Luca Weiss <luca.weiss@fairphone.com>, 
- Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>, 
- Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1789742407; l=2284;
- i=luca.weiss@fairphone.com; s=20250611; h=from:subject:message-id;
- bh=rOIM11VEoZADWcbRxJB4CDrlUSZEECHpM7XwHlAs5pk=;
- b=5nrVe28d0+ILTAO21B6rnbOXqb369AcBA5MBYd6C1/4tJwe3W4233FgK8LXQ5jFlzlGaDbLNM
- +zuTWxGcU6aCgO5/FWz5kICtxX7zmlmf7rBCkpqypmiwXLGPoDKBW/M
-X-Developer-Key: i=luca.weiss@fairphone.com; a=ed25519;
- pk=O1aw+AAust5lEmgrNJ1Bs7PTY0fEsJm+mdkjExA69q8=
+Mime-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Date: Fri, 18 Sep 2026 16:43:22 +0200
+Message-Id: <DLIISWYS60TX.BBXK30H05VRL@fairphone.com>
+Subject: Re: [PATCH] arm64: dts: qcom: kodiak: Elite-ify LPASS macros
+From: "Luca Weiss" <luca.weiss@fairphone.com>
+To: "Luca Weiss" <luca.weiss@fairphone.com>, "Konrad Dybcio"
+ <konrad.dybcio@oss.qualcomm.com>, "Bjorn Andersson" <andersson@kernel.org>,
+ "Konrad Dybcio" <konradybcio@kernel.org>, "Rob Herring" <robh@kernel.org>,
+ "Krzysztof Kozlowski" <krzk+dt@kernel.org>, "Conor Dooley"
+ <conor+dt@kernel.org>, <cros-qcom-dts-watchers@chromium.org>
+Cc: <~postmarketos/upstreaming@lists.sr.ht>, <phone-devel@vger.kernel.org>,
+ <linux-arm-msm@vger.kernel.org>, <devicetree@vger.kernel.org>,
+ <linux-kernel@vger.kernel.org>
+X-Mailer: aerc 0.22.0-0-gc2f86b7abde3-dirty
+References: <20260522-kodiak-elite-macros-v1-1-487661ac1270@fairphone.com>
+ <b39e4b4f-c166-48e1-901c-51694cf8172b@oss.qualcomm.com>
+ <DJFFMB9BO7GF.3CIRW26SHUSD@fairphone.com>
+In-Reply-To: <DJFFMB9BO7GF.3CIRW26SHUSD@fairphone.com>
 
-Configure the MDSS nodes for the phone and add the panel node.
+Hi Konrad,
 
-Reviewed-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-Signed-off-by: Luca Weiss <luca.weiss@fairphone.com>
----
- arch/arm64/boot/dts/qcom/milos-fairphone-fp6.dts | 64 ++++++++++++++++++++++++
- 1 file changed, 64 insertions(+)
+On Mon Jun 22, 2026 at 10:23 AM CEST, Luca Weiss wrote:
+> On Wed Jun 17, 2026 at 12:05 PM CEST, Konrad Dybcio wrote:
+>> On 5/22/26 4:46 PM, Luca Weiss wrote:
+>>> Due to initial kodiak/sc7280 bringup being done for Chrome platforms,
+>>> some Chrome-specific bits still remain in kodiak.dtsi, like the clocks
+>>> and power-domains for the LPASS RX/TX/WSA/VA macros.
+>>>=20
+>>> Move them to sc7280-chrome-common.dtsi and put Elite (q6afecc)
+>>> equivalents in its place. The qcs6490-audioreach.dtsi file can also dro=
+p
+>>> deletion of power-domains properties then.
+>>>=20
+>>> This follows previous commits moving Chrome-specific configuration to
+>>> the correct file, leaving kodiak.dtsi for Elite and
+>>> qcs6490-audioreach.dtsi for AudioReach.
+>>>=20
+>>> No functional change intended. The clock-output-names property will now
+>>> exist for both Chrome and AudioReach devices but this shouldn't have an=
+y
+>>> relevant effect. And WSA macro clocks weren't added to Chrome because I
+>>> don't believe this would've ever worked given it already referenced
+>>> q6afecc and the nodes were originally added during AudioReach bringup.
+>>
+>> I think it's better to keep them, if only to make sure that the result
+>> of dtx_diff isn't outside the expectation of a commit that claims to
+>> only reshuffle data for these platforms
+>
+> I documented this in the commit message for this purpose.
+>
+> But I'd argue not putting (likely incorrect) wsa_macro overrides there
+> is the better thing to do. Probably somebody should've taken care of the
+> Chrome platforms when adding the wsa nodes in the first place.
 
-diff --git a/arch/arm64/boot/dts/qcom/milos-fairphone-fp6.dts b/arch/arm64/boot/dts/qcom/milos-fairphone-fp6.dts
-index 4e8777162b53..11015c3fa331 100644
---- a/arch/arm64/boot/dts/qcom/milos-fairphone-fp6.dts
-+++ b/arch/arm64/boot/dts/qcom/milos-fairphone-fp6.dts
-@@ -709,6 +709,49 @@ &ipa {
- 	status = "okay";
- };
- 
-+&mdss {
-+	status = "okay";
-+};
-+
-+&mdss_dsi0 {
-+	vdda-supply = <&vreg_l4b>;
-+
-+	status = "okay";
-+
-+	panel@0 {
-+		compatible = "boe,bj631jhm-t71-d900";
-+		reg = <0>;
-+
-+		reset-gpios = <&tlmm 12 GPIO_ACTIVE_LOW>;
-+
-+		vci-supply = <&vreg_l19b>;
-+		vddio-supply = <&vreg_l9b>;
-+		dvdd-supply = <&vreg_oled_dvdd_1p2>;
-+
-+		pinctrl-0 = <&disp_reset_n_active>, <&mdp_vsync>;
-+		pinctrl-1 = <&disp_reset_n_suspend>, <&mdp_vsync>;
-+		pinctrl-names = "default",
-+				"sleep";
-+
-+		port {
-+			panel_in: endpoint {
-+				remote-endpoint = <&mdss_dsi0_out>;
-+			};
-+		};
-+	};
-+};
-+
-+&mdss_dsi0_out {
-+	data-lanes = <0 1 2 3>;
-+	remote-endpoint = <&panel_in>;
-+};
-+
-+&mdss_dsi0_phy {
-+	vdds-supply = <&vreg_l2b>;
-+
-+	status = "okay";
-+};
-+
- &pm8550vs_c {
- 	status = "okay";
- };
-@@ -872,6 +915,20 @@ &tlmm {
- 			       <13 1>, /* NC */
- 			       <63 2>; /* WLAN UART */
- 
-+	disp_reset_n_active: disp-reset-n-active-state {
-+		pins = "gpio12";
-+		function = "gpio";
-+		drive-strength = <8>;
-+		bias-disable;
-+	};
-+
-+	disp_reset_n_suspend: disp-reset-n-suspend-state {
-+		pins = "gpio12";
-+		function = "gpio";
-+		drive-strength = <2>;
-+		bias-pull-down;
-+	};
-+
- 	sdc2_card_det_n: sdc2-card-det-state {
- 		pins = "gpio65";
- 		function = "gpio";
-@@ -906,6 +963,13 @@ pm8008_int_default: pm8008-int-default-state {
- 		drive-strength = <2>;
- 		bias-disable;
- 	};
-+
-+	mdp_vsync: mdp-vsync-state {
-+		pins = "gpio129";
-+		function = "mdp_vsync";
-+		drive-strength = <2>;
-+		bias-pull-down;
-+	};
- };
- 
- &uart5 {
+Is that okay, or do you want me to change this? I'm still of the opinion
+that adding a very-likely-broken WSA macro to chrome is not great.
 
--- 
-2.55.0
+Anything else to note? R-b would be nice :)
+
+Regards
+Luca
+
+>
+>>
+>> It looks OK as-is for Elite and Audioreach platforms (for the record, I
+>> checked rb3gen2 and FP5)
+>
+> Thanks!
+>
+> Regards
+> Luca
+
 
