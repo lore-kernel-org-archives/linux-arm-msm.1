@@ -1,62 +1,64 @@
 Received: from mail-qk2-f43.google.com (mail-qk2-f43.google.com [74.125.230.235])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B91EC519913
-	for <linux-arm-msm@vger.kernel.org>; Fri, 18 Sep 2026 16:52:41 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9588D519E16
+	for <linux-arm-msm@vger.kernel.org>; Fri, 18 Sep 2026 16:52:44 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.230.235
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789750367; cv=none; b=AP2L7t95BC4sxhXuki4KdjHEp1I1wJPVoTEKC8NA5QHJ2ZZ5vFmZaYr//NDLHOkUdNWkrIkIaSpb2m2BYZXa0VXk+iMTKaURs0L+4AxMKESFNGNsm6YRTgw1xdNNHVreIwacRTH2TcuAET3Ym/qd2oxi4dmebnHZ6+nf3f310UM=
+	t=1789750370; cv=none; b=I4gQsDNJ9xARNY+QiLr3DbKy7DClC1Di4uBjQaRy2JHGulAPfL0SkXtGMbByPe0bNl8T+oV9eTVJI5/Vt72mt4iQIvZzAsWTBY6S/PxiyOnvgZjT7R+Dmlz5+LruI7GEZbJed/bEAU2r1jTa5QgFvU5tmjos4gstSKN5oXuq2dY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789750367; c=relaxed/simple;
-	bh=im7bHLtGYT9Yz0ql8qKBFhgsMiDZmM4stEa2+3CQjmg=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=inWJrYdsbkxptzlQoA389LvXyTjtkKVpH3RX1SHvC1LvYgIaX3pbiMJYtPJx38+APKc2EcQkQOgjKE+gfhrea5ePYkSQUybMFzBxxPjsQHsDdJAHxk2ZYngZMAeTDCP0UCS4yRZ/ixjTLGkjrcZV7BiMHHqVn8wUHl8O0pz1HRU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=riscstar.com; spf=pass smtp.mailfrom=riscstar.com; dkim=pass (2048-bit key) header.d=riscstar-com.20251104.gappssmtp.com header.i=@riscstar-com.20251104.gappssmtp.com header.b=K3bTltgi; arc=none smtp.client-ip=74.125.230.235
+	s=arc-20240116; t=1789750370; c=relaxed/simple;
+	bh=cgdTIsvLN3k4z3Fy399y3RouzNXlDfdM4GxnaFqKo1k=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=h8L9Lv9cFxQnt9AKyXzAD8HC6qVnF0iCex08UusPLKfihrxMKzo3KufCEWn2FBL6tjkQamHX3uE6AY+CUsdUDwe4IA4YAhJUqSLkSIOQS2FEmA0tDyMetR5FaWJAxcbXTc/+FvS0RjrPu3DDx8eZyWArHrKN7y/WD6DEoBTNf1g=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=riscstar.com; spf=pass smtp.mailfrom=riscstar.com; dkim=pass (2048-bit key) header.d=riscstar-com.20251104.gappssmtp.com header.i=@riscstar-com.20251104.gappssmtp.com header.b=ZGuBLRhE; arc=none smtp.client-ip=74.125.230.235
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=riscstar.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=riscstar.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=riscstar-com.20251104.gappssmtp.com header.i=@riscstar-com.20251104.gappssmtp.com header.b="K3bTltgi"
-Received: by mail-qk2-f43.google.com with SMTP id af79cd13be357-939eb3249c1so84638385a.2
-        for <linux-arm-msm@vger.kernel.org>; Fri, 18 Sep 2026 09:52:41 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=riscstar-com.20251104.gappssmtp.com header.i=@riscstar-com.20251104.gappssmtp.com header.b="ZGuBLRhE"
+Received: by mail-qk2-f43.google.com with SMTP id d75a77b69052e-530301ff353so10544011cf.2
+        for <linux-arm-msm@vger.kernel.org>; Fri, 18 Sep 2026 09:52:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=riscstar-com.20251104.gappssmtp.com; s=20251104; t=1789750358; x=1790355158; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=UsHLj9guVGOwJ1+byqEfFywik/JH+zBDqG7OfDqa/L8=;
-        b=K3bTltgij+YGsuW8NBaMUplLapyFfvvlGqIe2hFCNzdFwnw0Dj2uMDuHJP5av5L7Mt
-         GgSqVNn1H3J3eFwjnNjqAbjvKH7XlekR/s51bFgHeYzmsY/3grrdZrfRYtybBhZuwA2I
-         lRf7zXLMIL5PbsN9OVcKeaGqHY6vGWf896uwEnPyYY2qdLZfdQkWzLHErbreweevaFQy
-         r1Y4etaFcrp8p1f9Fpb6PBDN8WFc+LtMgBB/cXhdLC9gaRyf+T+49IziLnZVwGwJVJ3l
-         PglLQjQy49HWbSBR8RvpQi6KiwnZFA3SCd6E1ds19hjz0FyLAPvQu6QTAv0eMC9uMrXV
-         8Jmw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1789750358; x=1790355158;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=riscstar-com.20251104.gappssmtp.com; s=20251104; t=1789750363; x=1790355163; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=UsHLj9guVGOwJ1+byqEfFywik/JH+zBDqG7OfDqa/L8=;
-        b=nRYlXDgmFN9V9cs237BqB1h+G8TpTqHM2dSeSjjcgcudNiCcbvK0+jnj196moq5FMx
-         ySw8T4G7rWWpKH4ZtVbscv507FU49KIdUfyzuaTM3swPae4nG16awIIpFYSP2XgCaivH
-         +Z4j8sFQH8qCKGPHm/eiw8hME3q5iEYGkjtMZHf1hClpDYWmELnz6kWqaQ+h8HZtghn5
-         LA8U14gbVZGva9IsP+FavsYMsxA7WqI/jkCtOC9iD6kWdSsi71tGN5wrqoIwtxh/9wPN
-         xjVzTWlwZigir46IQgQ0LzV+BRsEf67sKqVVIt25D/od53SgOwd/VdA99IsMh1P/dUGL
-         Q84A==
-X-Forwarded-Encrypted: i=1; AKwUvBwh8LXK7LZSimiV3oXpbatHRt48hSZl9CshPpO5+jTmK/BAVvl4DXGBpJTsBZvUt1lbKQ6CZa7TuzN7ufxv@vger.kernel.org
-X-Gm-Message-State: AFuF++l4m12iiWe5K5ey3t9iSuxLf3t9hJcjdZXtGRORYFO05YsP8BIQ
-	rwDa9DifcUfDylK5jLPd3gyVppNiWnE6M1fA0RmOZCFojLtTL4eD4oUa4WUS5CknmVU=
-X-Gm-Gg: AYBFou37nNQ505PrK2HAE0/CcusSFE///+gdgtaE+NtRczvFi1u9h/gfgSoaoAOas0K
-	nCrN7KeqfH0ICU656qY3kYKLTh8o5rbJFEaGwJAyPKvpG60GH2HyBEGlwo/Sisiob5TiC3l2Gy0
-	arIesZ7yl3HhoTFUl3FqpsWNGkeO9xVjic339jsMi+uChdgVh0CZnRsDNp5p6notbf1yT0DX0zb
-	Xk2qtU/Hh4TFcf5HwXeIKyCW1I0iHIX2qZ4Y1yOOTTJ/loG8VBnQ95YjG09ZluKDzkf7meVCLjk
-	HPLDSYAZY6gZ97pkvCOidIDp9pyenZkk05iS/gUD9kOMNP+iRlx1ZcHxkxFqsErE7Ah9V3v3XGg
-	hWqCA8PIKUpyRexO5IyUL7C/6r0zEKAXbRxuZEBE4JOpXPolA64nIy4p2c4UiuZg52HvkKXLT3a
-	s2T8tVGA450RkuLAZVklLz6VsE0ik5MozuXSjsaCMPybTAEcuZbdRS98Wb6qgWgYEBNL+Z3SQ8n
-	xY=
-X-Received: by 2002:a05:620a:a0da:20b0:93b:e412:8cee with SMTP id af79cd13be357-93be412aa37mr210118885a.73.1789750357966;
-        Fri, 18 Sep 2026 09:52:37 -0700 (PDT)
+        bh=gz0Z8UG5CcnMHKyka9HjZDC5AoEUzK6J1rcdnedS7dE=;
+        b=ZGuBLRhEWxWTofIWK9EjJQXgcSEQTXyA69bDSRqmg90Hdp6XXFj7PA2J4ra1QqC1fi
+         KmMaH9+EaT5qZtxfexMRB0/LrdSdI1mxYKk1wzpQPROE/18Qjx6qhRtA2lO1jtAAagvc
+         rq3lfn0x6jY+CFVBJzfsnRTRFQgENQvHhct+hDxDj0DBp0ZfJv5xNpVjsQ9S2IG4JXBx
+         VmMbE5f0k4m4PoTIgj/hew+TAOL454A0D6vWp7UPwVYGk8jt6qUzQdxFgXfjLAWC8JRM
+         +KC384/g2hoOAC9WLAdOzFmHwLAZDXhxpP+c1BUvknMRfMq6zj42G9R9MeOzIpne3RRr
+         74qA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1789750363; x=1790355163;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=gz0Z8UG5CcnMHKyka9HjZDC5AoEUzK6J1rcdnedS7dE=;
+        b=Lh0cY48uXlbocXvUy/VsYjQh6mq1+snTgLwrkh5tQvJTQ7Uwj2yvf/a4kbHPdrCEif
+         az4ea4nqN6BU/uhGxavHFY8PhepJ6L4M5AoNvYCADspJCh/NtParH0LpD//DDNUOG/nq
+         MGr4eMbHlyYkmt0GxaGycRILytYVX0PikOju3Qdu0BnG/aio46C+ldCRAm3Zqp5Fh5bC
+         bsSNjol0etrC9amZMe5RRMoksPkXn0SGDORNfV41WGBBMAlMaO1XNAEgj9xSnoTWjvd8
+         5jPspf0WPHGgfbKq/vnBm8FbfWTTk8qH6WLskHfaZgGqcwQ0HZr3LwA22qgabdKzHBSF
+         g/HA==
+X-Forwarded-Encrypted: i=1; AKwUvBwWCzX0pnc6+IwYHtXXlXdriXqtvFjCwSj9iHGXOt4r4ZmimH9FwsgqA9BudWFTcw7kNN2+Ln2zTQNOKw1f@vger.kernel.org
+X-Gm-Message-State: AFuF++nuzPjB+WfFOKidKSjPVCgVCthw1w9Cet5AUqedYt5Ki9pthm2f
+	EIZ3IvcHx5wf8bgtaLizG+ALj3ZNxcNzLfxuVwRTBbINwAyYIUlP8UMCUjsFi2S+qRo=
+X-Gm-Gg: AYBFou0RkoSrrbHetjhl6tCelFygD6x0pY/UGIdZE5JE6i/qPxrwZeGW+WFNs3ywv0O
+	U6JkGkX+400a9lSrtHZMNPOYRD3IsGRQv13bO6hkVF1Rpx2f/wEfPWI8ZJ8a/0RSaVqnAUhOB9I
+	nk7SP33sB5+y3Ri3JKpFXNFqTDpgSQvbwtNfuFKxCHw62WuF2mu8D39zG+aH4bAtzuy4JAjT2gK
+	0653Gx/Pi71YvJu2wLIegiFPIf+NW6BrA4FElPv7WJRixGb4kJi0edHiftXRfbr1/wn9fTu2xCn
+	aQolkWy2LUVeegiZHOUqyYtudQ2b963TBzpKYCuMOKpZT5o/6f2D+8DaxCk+LmXczM3qcXGyysK
+	wo6fQwvrzI33AiCxDtrh+tSUDVE6KW6i3vLrEyTY6fvPP53BRJx4REbAZZp2gNI/mVZbuxkCngh
+	uIQErIIisAjm8kacOwI3KmC3A2FZYJQEqHvH9RypnSUmgQfOZKogtwpDyxbqoaKPJzXyI5zjAcn
+	7l5
+X-Received: by 2002:a05:620a:2587:b0:939:6dea:374c with SMTP id af79cd13be357-93bdc8cb85dmr437348985a.48.1789750362574;
+        Fri, 18 Sep 2026 09:52:42 -0700 (PDT)
 Received: from zippy.localdomain ([73.62.185.64])
-        by smtp.gmail.com with ESMTPSA id af79cd13be357-93be0f0762dsm183582785a.39.2026.09.18.09.52.36
+        by smtp.gmail.com with ESMTPSA id af79cd13be357-93be0f0762dsm183582785a.39.2026.09.18.09.52.41
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 18 Sep 2026 09:52:37 -0700 (PDT)
+        Fri, 18 Sep 2026 09:52:42 -0700 (PDT)
 From: Alex Elder <elder@riscstar.com>
 To: sboyd@kernel.org,
 	bmasney+clk@redhat.com,
@@ -80,10 +82,12 @@ Cc: daniel@riscstar.com,
 	linux-arm-msm@vger.kernel.org,
 	linux-hardening@vger.kernel.org,
 	linux-kernel@vger.kernel.org
-Subject: [PATCH 0/4] clk: introduce TC9564 clock and reset
-Date: Fri, 18 Sep 2026 11:52:29 -0500
-Message-ID: <20260918165234.687224-1-elder@riscstar.com>
+Subject: [PATCH 3/4] clk: toshiba: introduce a TC9564 SoC clock and reset driver
+Date: Fri, 18 Sep 2026 11:52:32 -0500
+Message-ID: <20260918165234.687224-4-elder@riscstar.com>
 X-Mailer: git-send-email 2.53.0
+In-Reply-To: <20260918165234.687224-1-elder@riscstar.com>
+References: <20260918165234.687224-1-elder@riscstar.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -92,51 +96,452 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-This series adds support for the clock and reset controller present
-within the TC9564 SoC.
+Define a new platform driver that manages clock and reset signals
+within the TC9564 SoC.  There are 21 clocks, which can only be
+enabled and disabled, as well as 13 reset signals.
 
-This SoC attaches to a host system via PCIe.  It includes a PCIe
-switch with three downstream ports.  To one of these ports an
-embedded PCIe endpoint is attached, and it implements two PCI
-functions.  BAR 4 for both of these PCI functions provides access
-to the registers that enable or disable a number of clock signals,
-and assert or deassert a set of reset lines.
+Two registers manage the state of the clocks and two others manage
+the state of the resets.  The registers are accessed via a regmap
+supplied by a system controller, which coordinates access to a
+region of memory that will be shared with another driver.
 
-The TC9564 PCI functions provide PCI endpoint buses via devicetree.
-This allows a PCI function to use devicetree to define subordinate
-devices accessible using one or more of the function's BARs.  The
-clock/reset driver binds with a device defined this way.  Only one
-of the two PCI functions is permitted to define the clock/reset
-device node.
+Access to the memory region is provided via a BAR on a PCIe endpoint
+function embedded in the TC9564 SoC.  For that reason, neither the
+PCIe clock nor PCIe reset can be manipulated by this driver (they
+are assumed always on and deasserted, respectively).
 
-					-Alex
+Similarly, control is not available for the I2C clock and reset,
+because the PCIe subsystem on the TC9564 relies on I2C
 
-Note: to work correctly, this series depends on this:
-  https://lore.kernel.org/lkml/20260918152659.413268-1-elder@riscstar.com/
-
-
-Alex Elder (4):
-  dt-bindings: mfd: introduce the TC9564 config syscon
-  dt-bindings: clock: introduce toshiba,tc9564-clock.yaml
-  clk: toshiba: introduce a TC9564 SoC clock and reset driver
-  arm64: dts: qcom: qcs6490-rb3gen2: add the clock controller
-
- .../bindings/clock/toshiba,tc9564-clock.yaml  |  64 +++
- .../bindings/mfd/toshiba,tc9564.yaml          |  56 +++
- MAINTAINERS                                   |   9 +
- arch/arm64/boot/dts/qcom/qcs6490-rb3gen2.dts  |  22 +-
- drivers/clk/Kconfig                           |  11 +
- drivers/clk/Makefile                          |   1 +
- drivers/clk/clk-tc9564.c                      | 366 ++++++++++++++++++
- include/dt-bindings/clock/toshiba,tc9564.h    |  54 +++
- 8 files changed, 582 insertions(+), 1 deletion(-)
- create mode 100644 Documentation/devicetree/bindings/clock/toshiba,tc9564-clock.yaml
- create mode 100644 Documentation/devicetree/bindings/mfd/toshiba,tc9564.yaml
+Co-developed-by: Daniel Thompson <daniel@riscstar.com>
+Signed-off-by: Daniel Thompson <daniel@riscstar.com>
+Signed-off-by: Alex Elder <elder@riscstar.com>
+---
+ MAINTAINERS              |   1 +
+ drivers/clk/Kconfig      |  11 ++
+ drivers/clk/Makefile     |   1 +
+ drivers/clk/clk-tc9564.c | 366 +++++++++++++++++++++++++++++++++++++++
+ 4 files changed, 379 insertions(+)
  create mode 100644 drivers/clk/clk-tc9564.c
- create mode 100644 include/dt-bindings/clock/toshiba,tc9564.h
 
-
-base-commit: 79d34e34e9ab629be19e588ec2eb7e1855d6dc46
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 66d0e7e65adcb..39346a5cd9a7f 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -27675,6 +27675,7 @@ M:	Alex Elder <elder@kernel.org>
+ M:	Daniel Thompson <danielt@kernel.org>
+ S:	Maintained
+ F:	Documentation/devicetree/bindings/clock/toshiba,tc9564-clock.yaml
++F:	drivers/clk/clk-tc9564.c
+ F:	include/dt-bindings/clock/toshiba,tc9564.h
+ 
+ TOSHIBA TC9564 PCI DRIVER
+diff --git a/drivers/clk/Kconfig b/drivers/clk/Kconfig
+index f9592fd9ec2bb..50efa10d48450 100644
+--- a/drivers/clk/Kconfig
++++ b/drivers/clk/Kconfig
+@@ -292,6 +292,17 @@ config COMMON_CLK_S2MPS11
+ 	  clock. These multi-function devices have two (S2MPS14) or three
+ 	  (S2MPS11, S5M8767) fixed-rate oscillators, clocked at 32KHz each.
+ 
++config COMMON_CLK_TC9564
++	tristate "Toshiba TC9564 clock support"
++	depends on TC9564_PCI
++	default m
++	help
++	  This enables support for the clock and reset controller embedded
++	  in the Toshiba TC9564 (and Qualcomm QPS615) SoC.  The state of
++	  clock and reset lines is controlled by MMIO to a region managed
++	  by a system controller; this ensures access to the region is
++	  coordinated between this and other drivers.
++
+ config CLK_TWL
+ 	tristate "Clock driver for the TWL PMIC family"
+ 	depends on TWL4030_CORE
+diff --git a/drivers/clk/Makefile b/drivers/clk/Makefile
+index b18af485d7f03..a98ea8ff92066 100644
+--- a/drivers/clk/Makefile
++++ b/drivers/clk/Makefile
+@@ -110,6 +110,7 @@ obj-$(CONFIG_COMMON_CLK_SI570)		+= clk-si570.o
+ obj-$(CONFIG_COMMON_CLK_SP7021)		+= clk-sp7021.o
+ obj-$(CONFIG_COMMON_CLK_STM32F)		+= clk-stm32f4.o
+ obj-$(CONFIG_COMMON_CLK_STM32H7)	+= clk-stm32h7.o
++obj-$(CONFIG_COMMON_CLK_TC9564)		+= clk-tc9564.o
+ obj-$(CONFIG_COMMON_CLK_TPS68470)      += clk-tps68470.o
+ obj-$(CONFIG_CLK_TWL6040)		+= clk-twl6040.o
+ obj-$(CONFIG_CLK_TWL)			+= clk-twl.o
+diff --git a/drivers/clk/clk-tc9564.c b/drivers/clk/clk-tc9564.c
+new file mode 100644
+index 0000000000000..4f900bc8994a7
+--- /dev/null
++++ b/drivers/clk/clk-tc9564.c
+@@ -0,0 +1,366 @@
++// SPDX-License-Identifier: GPL-2.0-only
++
++/*
++ * Copyright (C) 2026 by RISCstar Solutions Corporation.  All rights reserved.
++ */
++
++#include <linux/bits.h>
++#include <linux/clk-provider.h>
++#include <linux/mfd/syscon.h>
++#include <linux/mod_devicetable.h>
++#include <linux/module.h>
++#include <linux/platform_device.h>
++#include <linux/regmap.h>
++#include <linux/reset-controller.h>
++
++#include <dt-bindings/clock/toshiba,tc9564.h>
++
++#define CLK_CTRL0_OFFSET	0x1004
++#define RST_CTRL0_OFFSET	0x1008
++#define CLK_CTRL1_OFFSET	0x100c
++#define RST_CTRL1_OFFSET	0x1010
++
++struct tc9564_clock_init {
++	const char *name;	/* NULL means unused entry */
++	u32 offset;
++	u32 mask;
++};
++
++struct tc9564_clock {
++	struct clk_hw hw;
++	u32 which;
++	u32 offset;		/* CLK_CTRL0_OFFSET or CLK_CTRL1_OFFSET */
++	u32 mask;		/* Zero means undefined clock */
++};
++
++struct tc9564_reset {
++	u32 offset;		/* RST_CTRL0_OFFSET or RST_CTRL1_OFFSET */
++	u32 mask;		/* Zero means undefined reset */
++};
++
++struct tc9564_clocks {
++	struct device *dev;
++	struct regmap *regmap;
++	struct reset_controller_dev rcdev;
++	size_t clock_count;
++	struct tc9564_clock clocks[] __counted_by(clock_count);
++};
++
++#define TC9564_CLOCK_INIT0(_name, _bit)	__TC9564_CLOCK_INIT(_name, 0, _bit)
++#define TC9564_CLOCK_INIT1(_name, _bit)	__TC9564_CLOCK_INIT(_name, 1, _bit)
++
++#define __TC9564_CLOCK_INIT(_name, _reg, _bit)		\
++	[CLOCK_##_name] = {				\
++		.name	= #_name,			\
++		.offset	= CLK_CTRL ## _reg ## _OFFSET,	\
++		.mask	= BIT(_bit),			\
++	}
++
++#define TC9564_RESET_INIT0(_name, _bit)	__TC9564_RESET_INIT(_name, 0, _bit)
++#define TC9564_RESET_INIT1(_name, _bit)	__TC9564_RESET_INIT(_name, 1, _bit)
++
++#define __TC9564_RESET_INIT(_name, _reg, _bit)		\
++	[RESET_##_name] = {				\
++		.offset	= RST_CTRL ## _reg ## _OFFSET,	\
++		.mask = BIT(_bit),			\
++	}
++
++static const struct tc9564_clock_init tc9564_clock_init[] = {
++	TC9564_CLOCK_INIT0(MCU, 0),
++	TC9564_CLOCK_INIT0(INTC, 4),
++	/* TC9564_CLOCK_INIT0(PCIE, 9), */
++	/* TC9564_CLOCK_INIT0(I2C, 12), */
++	TC9564_CLOCK_INIT0(SRAM, 13),
++	TC9564_CLOCK_INIT0(UART, 16),
++	TC9564_CLOCK_INIT0(MSIGEN, 18),
++	TC9564_CLOCK_INIT0(PLL, 24),
++	TC9564_CLOCK_INIT0(SGMII, 25),
++	TC9564_CLOCK_INIT0(REFCLKO, 26),
++
++	TC9564_CLOCK_INIT0(MAC0_TX, 7),
++	TC9564_CLOCK_INIT0(MAC0_RX, 14),
++	TC9564_CLOCK_INIT0(MAC0_125M, 29),
++	TC9564_CLOCK_INIT0(MAC0_312_5M, 30),
++	TC9564_CLOCK_INIT0(MAC0_ALL, 31),
++
++	TC9564_CLOCK_INIT1(MAC1_TX, 7),
++	TC9564_CLOCK_INIT1(MAC1_RX, 14),
++	TC9564_CLOCK_INIT1(MAC1_RMII, 15),
++	TC9564_CLOCK_INIT1(MAC1_125M, 29),
++	TC9564_CLOCK_INIT1(MAC1_312_5M, 30),
++	TC9564_CLOCK_INIT1(MAC1_ALL, 31),
++};
++#define TC9564_CLOCK_COUNT	ARRAY_SIZE(tc9564_clock_init)
++
++static const struct tc9564_reset tc9564_reset[] = {
++	TC9564_RESET_INIT0(MCU, 0),
++	TC9564_RESET_INIT0(MCU1, 1),
++	TC9564_RESET_INIT0(INTC, 4),
++	/* TC9564_RESET_INIT0(PCIE, 9), */
++	/* TC9564_RESET_INIT0(I2C, 12), */
++	TC9564_RESET_INIT0(UART, 16),
++	TC9564_RESET_INIT0(MSIGEN, 18),
++
++	TC9564_RESET_INIT0(MAC0_MAC, 7),
++	TC9564_RESET_INIT0(MAC0_PMA, 30),
++	TC9564_RESET_INIT0(MAC0_XPCS, 31),
++
++	TC9564_RESET_INIT1(MAC1_MAC, 7),
++	TC9564_RESET_INIT1(MAC1_PMA, 30),
++	TC9564_RESET_INIT1(MAC1_XPCS, 31),
++};
++#define TC9564_RESET_COUNT	ARRAY_SIZE(tc9564_reset)
++
++static const struct tc9564_clock *hw_to_tc9564_clock(struct clk_hw *hw)
++{
++	return container_of_const(hw, struct tc9564_clock, hw);
++}
++
++static const struct tc9564_clocks *
++tc9564_clock_to_clocks(const struct tc9564_clock *clock)
++{
++	u32 which = clock->which;
++
++	if (which >= TC9564_CLOCK_COUNT)
++		return ERR_PTR(-ENXIO);
++
++	return container_of_const(clock, struct tc9564_clocks, clocks[which]);
++}
++
++static int tc9564_clk_manage(struct clk_hw *hw, bool enable)
++{
++	const struct tc9564_clock *clock = hw_to_tc9564_clock(hw);
++	const struct tc9564_clocks *clocks;
++	u32 offset = clock->offset;
++	u32 mask = clock->mask;
++
++	clocks = tc9564_clock_to_clocks(clock);
++	if (IS_ERR(clocks) || !mask) {
++		dev_err(clk_hw_get_dev(hw), "invalid clock (%s id %u)\n",
++			enable ? "enable" : "disable", clock->which);
++		return -ENXIO;
++	}
++
++	return regmap_update_bits(clocks->regmap, offset, mask,
++				  enable ? mask : 0);
++}
++
++static int tc9564_clk_enable(struct clk_hw *hw)
++{
++	return tc9564_clk_manage(hw, true);
++}
++
++static void tc9564_clk_disable(struct clk_hw *hw)
++{
++	(void)tc9564_clk_manage(hw, false);
++}
++
++static const struct clk_ops tc9564_clk_ops = {
++	.enable = tc9564_clk_enable,
++	.disable = tc9564_clk_disable,
++};
++
++static void tc9564_clock_disable_all(struct tc9564_clocks *clocks)
++{
++	for (int i = 0; i < clocks->clock_count; i++) {
++		const struct tc9564_clock *clock = &clocks->clocks[i];
++
++		if (clock->mask)
++			regmap_update_bits(clocks->regmap, clock->offset,
++					   clock->mask, 0);
++	}
++}
++
++static struct clk_hw *tc9564_clk_hw_get(struct of_phandle_args *clkspec,
++					void *data)
++{
++	struct tc9564_clocks *clocks = data;
++	unsigned int i = clkspec->args[0];
++
++	if (i < clocks->clock_count)
++		return &clocks->clocks[i].hw;
++
++	dev_err(clocks->dev, "invalid index %u\n", i);
++
++	return ERR_PTR(-EINVAL);
++}
++
++static struct tc9564_clocks *tc9564_clk_init(struct device *dev)
++{
++	struct tc9564_clocks *clocks;
++	size_t clocks_size;
++	int ret;
++
++	clocks_size = struct_size(clocks, clocks, TC9564_CLOCK_COUNT);
++	clocks = devm_kzalloc(dev, clocks_size, GFP_KERNEL);
++	if (!clocks)
++		return ERR_PTR(-ENOMEM);
++
++	clocks->dev = dev;
++	clocks->clock_count = TC9564_CLOCK_COUNT;
++
++	clocks->regmap = syscon_node_to_regmap(dev_of_node(dev->parent));
++	if (IS_ERR(clocks->regmap)) {
++		dev_err(dev, "failed to get config regmap\n");
++		return ERR_CAST(clocks->regmap);
++	}
++
++	for (u32 i = 0; i < TC9564_CLOCK_COUNT; i++) {
++		const struct tc9564_clock_init *clock_init;
++		struct clk_init_data init = { };
++		struct tc9564_clock *clock;
++
++		clock_init = &tc9564_clock_init[i];
++		if (!clock_init->name)
++			continue;
++
++		init.name = clock_init->name;
++		init.ops = &tc9564_clk_ops;
++
++		clock = &clocks->clocks[i];
++		clock->hw.init = &init;
++
++		ret = devm_clk_hw_register(dev, &clock->hw);
++		if (ret) {
++			dev_err(dev, "failed to register clock \"%s\"\n",
++				init.name);
++			return ERR_PTR(ret);
++		}
++
++		clock->which = i;
++		clock->offset = clock_init->offset;
++		clock->mask = clock_init->mask;
++	}
++
++	ret = devm_of_clk_add_hw_provider(dev, tc9564_clk_hw_get, clocks);
++	if (ret) {
++		dev_err(dev, "failed to add clock hardware provider\n");
++		return ERR_PTR(ret);
++	}
++
++	return clocks;
++}
++
++static const struct tc9564_clocks *
++rcdev_to_tc9564_clocks(struct reset_controller_dev *rcdev)
++{
++	return container_of_const(rcdev, struct tc9564_clocks, rcdev);
++}
++
++static int tc9564_reset_manage(struct reset_controller_dev *rcdev,
++			       unsigned long id, bool assert)
++{
++	const struct tc9564_clocks *clocks = rcdev_to_tc9564_clocks(rcdev);
++
++	if (id < rcdev->nr_resets) {
++		const struct tc9564_reset *reset = &tc9564_reset[id];
++		u32 mask = reset->mask;
++
++		if (mask)
++			return regmap_update_bits(clocks->regmap,
++						  reset->offset, mask,
++						  assert ? mask : 0);
++	}
++
++	dev_err(clocks->dev, "invalid reset (%sassert id %lu)\n",
++		assert ? "" : "de", id);
++
++	return -ENXIO;
++}
++
++static int tc9564_reset_assert(struct reset_controller_dev *rcdev,
++			       unsigned long id)
++{
++	return tc9564_reset_manage(rcdev, id, true);
++}
++
++static int tc9564_reset_deassert(struct reset_controller_dev *rcdev,
++				 unsigned long id)
++{
++	return tc9564_reset_manage(rcdev, id, false);
++}
++
++static const struct reset_control_ops tc9564_reset_control_ops = {
++	.assert		= tc9564_reset_assert,
++	.deassert	= tc9564_reset_deassert,
++};
++
++static void tc9564_reset_assert_all(struct tc9564_clocks *clocks)
++{
++	for (u32 id = 0; id < TC9564_RESET_COUNT; id++)
++		if (tc9564_reset[id].mask)
++			tc9564_reset_manage(&clocks->rcdev, id, true);
++}
++
++static int tc9564_reset_init(struct tc9564_clocks *clocks)
++{
++	struct reset_controller_dev *rcdev = &clocks->rcdev;
++
++	rcdev->ops = &tc9564_reset_control_ops;
++	rcdev->owner = THIS_MODULE;
++	rcdev->dev = clocks->dev;
++	rcdev->of_node = dev_of_node(clocks->dev);
++	rcdev->nr_resets = TC9564_RESET_COUNT;
++
++	return devm_reset_controller_register(clocks->dev, rcdev);
++}
++
++static int tc9564_clk_probe(struct platform_device *pdev)
++{
++	struct device *dev = &pdev->dev;
++	struct tc9564_clocks *clocks;
++	int ret;
++
++	if (!dev_of_node(dev))
++		return dev_err_probe(dev, -EINVAL, "no devicetree node\n");
++
++	clocks = tc9564_clk_init(dev);
++	if (IS_ERR(clocks))
++		return dev_err_probe(dev, PTR_ERR(clocks),
++				     "failed to initialize clocks\n");
++
++	ret = tc9564_reset_init(clocks);
++	if (ret)
++		return dev_err_probe(dev, ret, "failed to initialize resets\n");
++
++	/* Force all resets to be initially asserted */
++	tc9564_reset_assert_all(clocks);
++
++	/* Force all clocks to be initially disabled */
++	tc9564_clock_disable_all(clocks);
++
++	platform_set_drvdata(pdev, clocks);
++
++	return 0;
++}
++
++static void tc9564_clk_remove(struct platform_device *pdev)
++{
++	struct tc9564_clocks *clocks = platform_get_drvdata(pdev);
++
++	/* Leave all resets to be deasserted when done */
++	tc9564_reset_assert_all(clocks);
++
++	/* Leave all clocks disabled when done */
++	tc9564_clock_disable_all(clocks);
++}
++
++static const struct of_device_id tc9564_clk_ids[] = {
++	{ .compatible = "toshiba,tc9564-clock" },
++	{ },
++};
++MODULE_DEVICE_TABLE(of, tc9564_clk_ids);
++
++static struct platform_driver tc9564_clk_driver = {
++	.probe	= tc9564_clk_probe,
++	.remove	= tc9564_clk_remove,
++	.driver	= {
++		.name		= KBUILD_MODNAME,
++		.of_match_table = tc9564_clk_ids,
++		.probe_type	= PROBE_PREFER_ASYNCHRONOUS,
++	},
++};
++module_platform_driver(tc9564_clk_driver);
++
++MODULE_DESCRIPTION("Toshiba TC9564 Clock and Reset Driver");
++MODULE_LICENSE("GPL");
 -- 
 2.53.0
 
