@@ -1,49 +1,52 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 61CE525C818;
-	Fri, 18 Sep 2026 21:22:54 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CF66D35674A;
+	Fri, 18 Sep 2026 21:35:20 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789766575; cv=none; b=f5sdaH3Kpmy5VtgAieDQRvUlwF54vjkU0A3EOkx58IFR3QDZ0RZGV9RJ/AQTNyslz1UCSf/CBPnamQ7BuGDreZG6rRfCoE13av1t8deSckEpwUr3ibaNCx1e/EKWwoUMmIGxxGnBy4BN9kdgNtUAvsHOej0xS5Mz1fbGHnGmYAA=
+	t=1789767322; cv=none; b=DNe4Pi9dSwJb9sokug6ZDP4GZv859Lw1oA0r7Nfr/xB6YSrF4qa0lfsdV8RONc0m9fF3p+Kbszd89I8uNwscaK37E/tkStVXUohoHjfKWAUfRA5GMnPLPnCzUtKK9HUbFECSI3LAA1ZxUyHSOTukNcUOO/u+Ef/F1KHUzeSRc8Q=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789766575; c=relaxed/simple;
-	bh=krTl9gy5WAWQ2E0Ab2wQOTrZCi5f+MXRi+LzOKMWU94=;
+	s=arc-20240116; t=1789767322; c=relaxed/simple;
+	bh=cRJ+PVM/y4zy/Zu1yfhqH5rqt0ISqNKOL1eFVVH+e3o=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=Pp7/TIxbLJLuY5lWUJQFsN2KoAr/WjpiPhioG0uHF1dnrAo8k9iR4HFSkS36m2Opt3o5rBX7bn6XUYil1f+BwcHB+Gt+z7/QTajk6lEIAWEZk5h9ECs0zAfWesSqRSw/XcH9E4kLOVDwP7t68o+6WSjrnf3tNt5vi5pFJKHNZtQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ObNJCzNx; arc=none smtp.client-ip=100.103.45.18
+	 Content-Type:Content-Disposition:In-Reply-To; b=ZSr8dL1+vdNIuXu6WZ0EntSS2uoDg3rLSL1fUQromNBGLLctDSi4lD52SVinrCdADLzQaEZeqTaAf9Y33BFDz3WTwTP33CqAL5miUs2lvKiy3vKua/3l6EbWSXLd0H/CKUy0dFlCpi1iILMGXy5L5yoN+YzsVRU/Ujprwsa8JxU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=U3D8k9lf; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="ObNJCzNx"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id C80B71F000FF;
-	Fri, 18 Sep 2026 21:22:53 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="U3D8k9lf"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 333951F000FF;
+	Fri, 18 Sep 2026 21:35:20 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1789766574;
-	bh=s4bY/lwMBPYFBKAC6dm6oIbJefCADIz69WJC7Hc6mg0=;
+	s=k20260515; t=1789767320;
+	bh=ej3xKpckrpjvUc2u6qoLx+3TMAOcBxUdzeIFFyYah/c=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=ObNJCzNxtIoISUL+7iKZWeuy7/awVKJ37kCAQbFyqR8Hj0H+6e3/MYkCZ+smzZMBD
-	 yYJpixbKavYzU2tzBkGxVdVrCzYPgwMww7CNwYYkQXRjoQjafdL4J1gW/R9JEV5Yyi
-	 Rn4+YczuZDyZiN2Y4eot0Qd3ShUSPYHvr+6GneY3nrAE9RqktQ8IuRSkgIMLWblj6W
-	 PjilhkzUGI1GfiJ3jlqwfIAgRMK5XwX7L/OLlHP8I7qSsWD+XQPb/XusJB28bHZt4P
-	 Bbm4oa0eISRIGo+bBbwHO1wvZOK6km4pQuirYwDAM3SqYJqVudK70Cm/GU5f+9/T5c
-	 1J+c0m+/5S8XQ==
-Date: Fri, 18 Sep 2026 16:22:52 -0500
+	b=U3D8k9lfVGUmG3mrLdr956SF7/Qr5CBRsP2flicGDEQ75+/x23Gz7gEdh0FeSfeOc
+	 PtLQM0QAfD4jSijXXjL4vzXI/6kdfmRD88xSJ3dmf+R3sAyp21mlzRfKw1lTn0TlzF
+	 hqAhbwz9JnTygIoS1AqYKAxjH+LxQNrOjuS/SYtCmlfLlojf8j18w8Z9scv2QOkyBp
+	 atgWD6pI9o9jsvuHdvoiMD7K1I57B49g/DdD+oFyuxRM89OeePA1MRjBeXiiHtFqZP
+	 1dax3Bv/8ODg6IBwW/ZFtA5wD5LFllEGvbfA4UlFc84SJQItxe8xF9MlnBv/5mbZST
+	 GvNXUIA+atX0A==
+Date: Fri, 18 Sep 2026 16:35:18 -0500
 From: Rob Herring <robh@kernel.org>
-To: Ajay Kumar Nandam <ajay.nandam@oss.qualcomm.com>
-Cc: Srinivas Kandagatla <srini@kernel.org>,
-	Liam Girdwood <lgirdwood@gmail.com>,
-	Mark Brown <broonie@kernel.org>, Jaroslav Kysela <perex@perex.cz>,
-	Takashi Iwai <tiwai@suse.com>,
-	Pierre-Louis Bossart <pierre-louis.bossart@linux.dev>,
+To: Luca Weiss <luca.weiss@fairphone.com>
+Cc: Neil Armstrong <neil.armstrong@linaro.org>,
+	Jessica Zhang <jesszhan0024@gmail.com>,
+	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+	Maxime Ripard <mripard@kernel.org>,
+	Thomas Zimmermann <tzimmermann@suse.de>,
+	David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
 	Krzysztof Kozlowski <krzk+dt@kernel.org>,
 	Conor Dooley <conor+dt@kernel.org>,
-	Mohit Sharma <mohit.sharma@oss.qualcomm.com>,
-	linux-sound@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-	linux-kernel@vger.kernel.org, devicetree@vger.kernel.org
-Subject: Re: [PATCH v3 3/3] ASoC: qcom: q6apm-dai: add SCM buffer assignment
- for mDSP platforms
-Message-ID: <20260918212252.GA2258003-robh@kernel.org>
-References: <20260918-vmid-v3-v3-0-f1cbf47bf173@oss.qualcomm.com>
- <20260918-vmid-v3-v3-3-f1cbf47bf173@oss.qualcomm.com>
+	Bjorn Andersson <andersson@kernel.org>,
+	Konrad Dybcio <konradybcio@kernel.org>,
+	~postmarketos/upstreaming@lists.sr.ht, phone-devel@vger.kernel.org,
+	dri-devel@lists.freedesktop.org, devicetree@vger.kernel.org,
+	linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+	Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+Subject: Re: [PATCH v2 1/4] dt-bindings: display: panel: Add Novatek NT37705
+Message-ID: <20260918213518.GA2337779-robh@kernel.org>
+References: <20260918-fp6-panel-v2-0-6695c4008920@fairphone.com>
+ <20260918-fp6-panel-v2-1-6695c4008920@fairphone.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -52,61 +55,107 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20260918-vmid-v3-v3-3-f1cbf47bf173@oss.qualcomm.com>
+In-Reply-To: <20260918-fp6-panel-v2-1-6695c4008920@fairphone.com>
 
-On Fri, Sep 18, 2026 at 07:19:37PM +0530, Ajay Kumar Nandam wrote:
-> On platforms such as Qualcomm Shikra, audio is served by the modem DSP
-> (mDSP) which runs in a stage-2 protected context. Unlike ADSP targets
-> where SMMU-mapped system RAM is directly accessible, the mDSP cannot
-> reach the PCM buffers unless they are explicitly SCM-assigned to the
-> appropriate Virtual Machine IDs (VMIDs). Without this assignment, audio
-> does not function on these platforms.
+On Fri, Sep 18, 2026 at 04:40:04PM +0200, Luca Weiss wrote:
+> Novatek NT37705 is a display driver IC used to drive AMOLED DSI panels.
 > 
-> At probe time, the driver reads the GPR domain_id from the parent APM
-> device to determine which DSP serves audio. When domain_id matches
-> GPR_DOMAIN_ID_ADSP the existing SMMU/iommus path is taken and no new
-> code is exercised. When domain_id matches GPR_DOMAIN_ID_MODEM, the
-> driver verifies that qcom_scm is available (deferring otherwise) and
-> that iommus is absent (the two mechanisms are mutually exclusive), then
-> enables the SCM assignment path.
+> Describe it and the panel in the Fairphone (Gen. 6) (BJ631JHM-T71-D900
+> from BOE) using it.
 > 
-> In the SCM path the driver parses the optional memory-region entries in
-> DT. The first entry (memory-region[0] / audio_heap_mem) is the
-> control-path carveout used by the DSP firmware for command traffic; since
-> the mDSP operates on stage-2 protected memory, this carveout must be
-> SCM-assigned at probe time itself for the firmware to function. It is
-> SCM-assigned to HLOS (retained as source owner, RW) plus MSS_MSA and
-> LPASS (consumer VMIDs, both RW) and restored to HLOS-only ownership via
-> devm_add_action_or_reset() at device removal. The second entry
-> (memory-region[1]) is the data-path buffer pool from which per-stream
-> DMA buffers are carved out. This pool is attached via
-> of_reserved_mem_device_init_by_idx() so that PCM buffers allocate
-> directly from the carveout instead of system RAM. Individual buffer
-> slices are SCM-assigned in pcm_new() after allocation and unassigned in
-> pcm_free(), so only the actively used slices are shared with the modem
-> and unused carveout memory remains HLOS-owned.
-> 
-> The VMIDs are static per SoC and hardcoded in the driver (HLOS, MSS_MSA,
-> LPASS) rather than read from DT, following the upstream pattern used by
-> rmtfs_mem and qcom_q6v5_pas. Buffer constraints are capped at
-> reserved_buf_size when the data-path pool is present, and
-> snd_pcm_set_fixed_buffer_all() is used for both paths so the carveout is
-> not subject to the preallocate_dma module parameter.
-> 
-> The DT binding is updated to add an optional memory-region property (1-2
-> entries) and to make iommus optional (removed from the required list),
-> since mDSP platforms have neither IOMMU nor VMID DT properties.
-> 
-> All new code paths are gated on use_scm_assign (false when domain_id is
-> not GPR_DOMAIN_ID_MODEM), ensuring existing ADSP/iommus targets are
-> completely unaffected.
-> 
-> Signed-off-by: Ajay Kumar Nandam <ajay.nandam@oss.qualcomm.com>
+> Reviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+> Link: https://lore.kernel.org/r/81a3c207-4d8f-490f-8e2a-6f3f4c2acd35@kernel.org/
+> Signed-off-by: Luca Weiss <luca.weiss@fairphone.com>
 > ---
->  .../devicetree/bindings/sound/qcom,q6apm-dai.yaml  |  12 +-
+>  .../bindings/display/panel/novatek,nt37705.yaml    | 72 ++++++++++++++++++++++
+>  1 file changed, 72 insertions(+)
+> 
+> diff --git a/Documentation/devicetree/bindings/display/panel/novatek,nt37705.yaml b/Documentation/devicetree/bindings/display/panel/novatek,nt37705.yaml
+> new file mode 100644
+> index 000000000000..1c796599f6fc
+> --- /dev/null
+> +++ b/Documentation/devicetree/bindings/display/panel/novatek,nt37705.yaml
 
-Bindings are separate patches. Run checkpatch.pl, it will tell you this.
+Did novatek,nt37705 get dropped as a compatible, but the filename 
+remains?
 
->  sound/soc/qcom/Kconfig                             |   1 +
->  sound/soc/qcom/qdsp6/q6apm-dai.c                   | 260 +++++++++++++++++++--
->  3 files changed, 252 insertions(+), 21 deletions(-)
+> @@ -0,0 +1,72 @@
+> +# SPDX-License-Identifier: GPL-2.0-only OR BSD-2-Clause
+> +%YAML 1.2
+> +---
+> +$id: http://devicetree.org/schemas/display/panel/novatek,nt37705.yaml#
+> +$schema: http://devicetree.org/meta-schemas/core.yaml#
+> +
+> +title: Novatek NT37705-based DSI display panels
+> +
+> +maintainers:
+> +  - Luca Weiss <luca.weiss@fairphone.com>
+> +
+> +description:
+> +  The Novatek NT37705 is a generic DSI Panel IC used to control AMOLED panels.
+> +
+> +allOf:
+> +  - $ref: panel-common.yaml#
+> +
+> +properties:
+> +  compatible:
+> +    contains:
+
+As sashiko reports, "contains" is too loose.
+
+> +      const: boe,bj631jhm-t71-d900
+> +
+> +  reg:
+> +    maxItems: 1
+> +
+> +  vddio-supply:
+> +    description: I/O voltage rail
+> +
+> +  dvdd-supply:
+> +    description: Digital voltage rail
+> +
+> +  vci-supply:
+> +    description: Analog voltage rail
+> +
+> +required:
+> +  - compatible
+> +  - reg
+> +  - reset-gpios
+> +  - vddio-supply
+> +  - dvdd-supply
+> +  - vci-supply
+> +  - port
+> +
+> +unevaluatedProperties: false
+> +
+> +examples:
+> +  - |
+> +    #include <dt-bindings/gpio/gpio.h>
+> +
+> +    dsi {
+> +        #address-cells = <1>;
+> +        #size-cells = <0>;
+> +
+> +        panel@0 {
+> +            compatible = "boe,bj631jhm-t71-d900";
+> +            reg = <0>;
+> +
+> +            reset-gpios = <&tlmm 12 GPIO_ACTIVE_LOW>;
+> +
+> +            vci-supply = <&vreg_l19b>;
+> +            vddio-supply = <&vreg_l9b>;
+> +            dvdd-supply = <&vreg_oled_dvdd_1p2>;
+> +
+> +            port {
+> +                panel_in_0: endpoint {
+> +                    remote-endpoint = <&dsi0_out>;
+> +                };
+> +            };
+> +        };
+> +    };
+> +
+> +...
+> 
+> -- 
+> 2.55.0
+> 
