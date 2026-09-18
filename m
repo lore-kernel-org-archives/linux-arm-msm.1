@@ -1,79 +1,103 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BDE5F4FD26B;
-	Fri, 18 Sep 2026 17:06:04 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B22C3434408;
+	Fri, 18 Sep 2026 17:30:07 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789751165; cv=none; b=te6qYVCj5BqYaxIsx8s44fgr3B7MDuOAbG5+NCrQaBWNzxS3nCTvhW7j/SbUjXFj9RGHPe4bANbLufbGMvYm6KxdE5z5LXfcjzdi4oLfXQXaPgYn20i2NUQDTcSpyVH2dcR/IBtN5/ChMG7MYDk1wz+DUKYGP/ZHKFhlka8066A=
+	t=1789752609; cv=none; b=FswZJU9oOHjgtJrfu4De7wBd1DAnO8Z06MyWNMsjlKtbgCj894K/7O692RSMPLZMWdZA22DkL3xikJ7cP01k4xqWnpgjflWCCOM+0R2nIqGDJ6UVAWDUgk7c4glUmf5l5AIxZLrSUQydFqb2Rl0sOw1WSWKKoxsFMfsHl3OI5Hk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789751165; c=relaxed/simple;
-	bh=TxT401mbN/X0oQrmivqXL24TjETstKfpLXf1ZASP1uM=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=LWTRlHoZe6AweU12w+AIHzRxO4oc+5KFIBg3XcUGpimbX+oDZV6rQzucC6yL5UkdsYNoxL4eixTp/gsPz9mbOkCSrhX2Yz+BQU/eR2XDfgyNIY0ZSfCk2udPZKML3/JoepHlLvCtJT3JWbnRz08WGIu07a1tXWKCuGVQjRtz9Ps=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=eXV77aVe; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1789752609; c=relaxed/simple;
+	bh=x8wldGWyyWMnCdarHhJEE25eWE8oOrYPjZIjxCuS3mg=;
+	h=Date:From:To:Cc:Subject:Message-ID:MIME-Version:Content-Type:
+	 Content-Disposition:In-Reply-To; b=kDcWU+G2u7HAfpa9GC6LkW2uLXIf7ep+0lYxsMeYYZG87NAAuSRYdC0X43dyTjojdrl09vevB8Jk4ydlFxYO8XzcYUTwace4GEpKH9aqSwDKbFX+vgvxqVki7Ixa3EnVZagACkiYRRRG9jCycpGyLSfbnGzybjpG2omG7z8RS/c=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=A8BvtwGR; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="eXV77aVe"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 718051F000FF;
-	Fri, 18 Sep 2026 17:06:00 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="A8BvtwGR"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 08ED71F00899;
+	Fri, 18 Sep 2026 17:30:04 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1789751164;
-	bh=gcICjSK5IyD2t7/b90H8nOlZ5YYvxRv6ttDXIKR/d5g=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=eXV77aVe2J7JfuJG/8WQDEkapbHcXL6YHmVRTiuNf9B5FtlqQS9BIeyYR3T8Sl2LY
-	 C31173QQsl/bhC5hoUd6y8CNfy2Wzcecn7RMnBlBQb43tYrzLkHQuuFSKJgss3HH2x
-	 Hd8LkuLOfJmhlx8CwPJ4/D5FyPaSM+MxKnkgV+dp0W0PoQus5SnU+61Dhyu2Qmg1eO
-	 Nkx9+J7jhpab7yoIz6kk0gLwYsPyx0toSTQNKwGmaA2ir7XowaPq5kgQhYOJyM2yZr
-	 T4tIXWhbWsk/nPIng9za29JQ82BMe/l1aWco+uyX7e9Cna2r3Y6s0PTCRQnDICFN15
-	 ys0/WeCIMf9Ow==
-Date: Fri, 18 Sep 2026 19:05:46 +0200
-From: Manivannan Sadhasivam <mani@kernel.org>
-To: Daniel J Blueman <daniel@quora.org>, netdev@vger.kernel.org
-Cc: "David S. Miller" <davem@davemloft.net>, 
-	Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>, 
-	Paolo Abeni <pabeni@redhat.com>, Simon Horman <horms@kernel.org>, 
-	Chris Lew <christopher.lew@oss.qualcomm.com>, Pranav Mahesh Phansalkar <pranav.phansalkar@oss.qualcomm.com>, 
-	Deepak Kumar Singh <deepak.singh@oss.qualcomm.com>, linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH] net: qrtr: resend HELLO on MHI resume
-Message-ID: <nhbc6epjziyb455l6z4xqunfb74bdboycuq52vt6nrr7fqjo3z@ruh4isxdkyom>
-References: <20260909055846.16539-1-daniel@quora.org>
+	s=k20260515; t=1789752605;
+	bh=GYT0EMLGU7b7a+ogC9A2xX9O2g8gH12f0FUa3uckf9o=;
+	h=Date:From:To:Cc:Subject:In-Reply-To;
+	b=A8BvtwGRXq3vPV2/CyMddj0V1n/JQHEh25sEotzwKQuZ1HzEapSyd2q1JC67j+cKp
+	 +ju2TqnulTVTZ7BK9FlxDQqR3fgYy6w7c7434tsCd0ql+3o98zWFovv+Vv0RXfysjE
+	 A6CfgQnUQY1ZyyO6rg4URqTaakH0iGtZV86SPPSUPszW4z/LNreRwMmfAFassQ97De
+	 APwq+KOwFr5qZMbkfhlmk0W4Mpr0m0SAG7BgDemwpJTbpeRUbKzMLTYxh+WBH4wvqR
+	 VU8eWoXudlUHxdram+Q0/iUj8rPzVHoO4vaTxXZiRcX/f2GepNwHUJ1inD0hmxlAqX
+	 iqjz5hZtRINYQ==
+Date: Fri, 18 Sep 2026 12:30:03 -0500
+From: Bjorn Helgaas <helgaas@kernel.org>
+To: Alex Elder <elder@riscstar.com>
+Cc: robh@kernel.org, krzk+dt@kernel.org, conor+dt@kernel.org, arnd@arndb.de,
+	gregkh@linuxfoundation.org, bhelgaas@google.com,
+	andersson@kernel.org, konradybcio@kernel.org, abelvesa@kernel.org,
+	daniel@riscstar.com, mohd.anwar@oss.qualcomm.com,
+	lorenzo.bianconi@oss.qualcomm.com, devicetree@vger.kernel.org,
+	linux-pci@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	Andrea della Porta <andrea.porta@suse.com>,
+	Herve Codina <herve.codina@bootlin.com>,
+	Lizhi Hou <lizhi.hou@amd.com>
+Subject: Re: [PATCH v4 2/3] misc: tc9564: introduce base PCI driver
+Message-ID: <20260918173003.GA1166280@bhelgaas>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <20260909055846.16539-1-daniel@quora.org>
+In-Reply-To: <20260918152659.413268-3-elder@riscstar.com>
 
-+ netdev
+[+cc Andrea, Herve, Lizhi for of_pci_make_dev_node() quirks]
 
-On Wed, Sep 09, 2026 at 01:58:44PM +0800, Daniel J Blueman wrote:
-> Since the MHI HELLO exchange was relocated, it is sent only at device
-> registration. During a suspend-resume cycle, the firmware in WiFi
-> cards such as WCN7850 indefinitely waits for another HELLO,
-> triggering:
+On Fri, Sep 18, 2026 at 10:26:57AM -0500, Alex Elder wrote:
+> The Toshiba TC9564 is small and highly-specialized SoC that implements
+> a PCIe switch as well as an Ethernet AVB/TSN bridge.  In addition to
+> these, the SoC implements other functions, including a reset and clock
+> controller, an address translation unit, and a few other devices.  PCIe
+> BARs provide access to registers that manage these IP blocks, and the
+> SoC is modeled using a PCI endpoint bus in devicetree.  This allows the
+> IP blocks to be bound to platform drivers that do MMIO via the PCI BARs.
 > 
->   ath12k_wifi7_pci 0004:01:00.0: timeout while waiting for restart complete
->   ath12k_wifi7_pci 0004:01:00.0: failed to resume core: -110
+> Create a new PCI driver under drivers/misc that binds with the embedded
+> PCI endpoint functions within the TC9564 SoC.  Because these functions
+> will use devicetree pci-ep-bus to provide access to other IP blocks
+> within the TC9564 chip, the main purpose of this driver is to do basic
+> PCI initialization, then call of_platform_default_populate() to scan for
+> the any endpoint bus children, and probe all devices defined therein.
 > 
-> Fix this by triggering the handshake from resume_early in the MHI
-> transport.
+> Because we're using pci-ep-bus, we need to use the PCI quirks mechanism
+> to have of_pci_make_dev_node() be called for each endpoint device in
+> pci_bus_add_device() (via pci_fixup_device(pci_fixup_final, dev)).
 > 
-> Validated on Qualcomm X1E-801800 on Lenovo Slim 7x across 10
-> suspend-resume cycles.
+> Co-developed-by: Daniel Thompson <daniel@riscstar.com>
+> Signed-off-by: Daniel Thompson <daniel@riscstar.com>
+> Signed-off-by: Alex Elder <elder@riscstar.com>
+
+Acked-by: Bjorn Helgaas <bhelgaas@google.com>	# quirks.c
+
+Not an issue for this patch, but I'm not sure the quirk mechanism is
+the best mechanism for doing this.  It's not working around a device
+defect like most quirks do.
+
+I wonder if pci_bus_add_device() should unconditionally call a wrapper 
+that calls of_pci_make_dev_node() for bridges and any device that
+appears in an allow-list.  I guess it sort of amounts to the same
+thing in the end, but it might be a little more explicit and not
+subject to CONFIG_PCI_QUIRKS.
+
+> +++ b/drivers/pci/quirks.c
+> @@ -6391,6 +6391,7 @@ DECLARE_PCI_FIXUP_FINAL(PCI_VENDOR_ID_XILINX, 0x5020, of_pci_make_dev_node);
+>  DECLARE_PCI_FIXUP_FINAL(PCI_VENDOR_ID_XILINX, 0x5021, of_pci_make_dev_node);
+>  DECLARE_PCI_FIXUP_FINAL(PCI_VENDOR_ID_REDHAT, 0x0005, of_pci_make_dev_node);
+>  DECLARE_PCI_FIXUP_FINAL(PCI_VENDOR_ID_EFAR, 0x9660, of_pci_make_dev_node);
+> +DECLARE_PCI_FIXUP_FINAL(PCI_VENDOR_ID_TOSHIBA, 0x0220, of_pci_make_dev_node);
+>  
+>  /*
+>   * Devices known to require a longer delay before first config space access
+> -- 
+> 2.53.0
 > 
-> Fixes: 544d85de4dc2 ("net: qrtr: Send HELLO message on endpoint register")
-> Signed-off-by: Daniel J Blueman <daniel@quora.org>
-
-Reviewed-by: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
-
-Since this patch fixes a regression in linux-next, it'd be good to get it merged
-asap.
-
-- Mani
-
--- 
-மணிவண்ணன் சதாசிவம்
