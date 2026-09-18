@@ -1,98 +1,136 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from meesny.iki.fi (meesny.iki.fi [195.140.195.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A88955172D7;
-	Fri, 18 Sep 2026 16:38:14 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789749495; cv=none; b=FF9cRNLnoBnm9D5bCiLS0JJ/ZGtntd92Go88skoSGn0UoQ2j3UELczujhnYUfrqsMDqvSqGNF0iqbJ+yW2Ohb2Lkrapws91aO4QwxRoihYvX/T/6h+SUYJd6eEbbVJl7vuqj415XbxVBiVTRwhMDKAs63WPHxbAks7NiIfJyoHw=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789749495; c=relaxed/simple;
-	bh=QLRvLTdFBHVr7X10cKNaAGFOnTS1+KBvwf5jbrECKU4=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=DsgY7K/6V961lgYz3NzureXQ+6qjVIv0Ya+lRo7tx+fgcUVDgHPHocJt6srSao7MZYd7bfJ5pwi+/GW0sTiVe/RXQfBhicqSRJ67eyKFmUkb8oSgHzSGZmE24OGCcx6pE6RCgzlEC72YxNsCM0GlBVwpoCp4VfX+iTsKld866vg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=JkRD28H2; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 97CA9518153;
+	Fri, 18 Sep 2026 16:39:42 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=195.140.195.201
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1789749584; cv=pass; b=WGHibH4pYGw/msoisjQ4rCLfB82W/jx/Z1CqOcrblpYxeOwVSEwNRfO2DpIkPqmE8iRU+iMTX6Sjs8n5k9DhzS8JPuW+wwbZrv1/hpKmoanuLyvB0Hb00T2qXoRekutuSl9odKCODSCM1GB4qOjwyzc0Ym+cA5YHiJ38gBCFf1s=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1789749584; c=relaxed/simple;
+	bh=OaTupvPSXjV4tcDSKwkLoCMZSghlDqaDma0/VaD1crE=;
+	h=MIME-Version:Date:From:To:Cc:Message-Id:In-Reply-To:References:
+	 Subject:Content-Type; b=TuY6sZOS9PVHVk0ju8nXWqBniaY/5ITlRdfuJDXOIg5H4Snv9wUoYi3AUB7kbzicGy6BIyn3OE5OQVZ4BLTB45nAyAMUPCOKnYHoBzfiXFvtwiQCGmSbxd1Gk32zpQcfL+0UB0SciDgr0T3sWVF5mZeK+NYC6F1bqTVvKQmTHio=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=iki.fi; spf=pass smtp.mailfrom=iki.fi; dkim=pass (1024-bit key) header.d=iki.fi header.i=@iki.fi header.b=bf+2ACRu; arc=pass smtp.client-ip=195.140.195.201
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=iki.fi
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=iki.fi
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="JkRD28H2"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 940151F000FF;
-	Fri, 18 Sep 2026 16:38:08 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1789749494;
-	bh=1jguSdZKVQAzVJWlUAqUKfAANJh6/U827CisOt7PoEo=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=JkRD28H2C6Q6mO9N1fNjEs9X5ijRGwgAs+3y3CS7zBTPr4yNaUyaUviLNj9Ox1EZC
-	 LVTuu/+cv0rV00CarPU8rZtBj1D3Mluxs/wijbgxpTrjZBMm0o3ewr5PaDSCvEbiiw
-	 og4wtspCk2K0p6DPPk7VMaL1+ICBf95PxuCc7ZlA40JmXtbkYpjtoZyXbhTDqS4IdB
-	 TVuaZyuwvD0z7Wj66Qf/yfBxgZC7Pvdj3V4lPEg4qWr+ER6Raxa+bx/SPtY49/dUdz
-	 cdZ8HUzyHJHHd0648e3W1K6U7iUNy+tXYGh7j5+oWBtXJe5IMe5TJLqXZgS5D2No7Z
-	 Ow4voCum2bHMQ==
-Date: Fri, 18 Sep 2026 18:37:54 +0200
-From: Manivannan Sadhasivam <mani@kernel.org>
-To: Thorsten Leemhuis <linux@leemhuis.info>
-Cc: Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, 
-	Simon Horman <horms@kernel.org>, "David S . Miller" <davem@davemloft.net>, 
-	Eric Dumazet <edumazet@google.com>, linux-arm-msm@vger.kernel.org, netdev@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, regressions@lists.linux.dev, 
-	Chris Lew <christopher.lew@oss.qualcomm.com>, Deepak Kumar Singh <deepak.singh@oss.qualcomm.com>, 
-	Pranav Mahesh Phansalkar <pranav.phansalkar@oss.qualcomm.com>, Daniel J Blueman <daniel@quora.org>, 
-	Takashi Iwai <tiwai@suse.de>, Vlastimil Babka <vbabka@suse.com>, 
-	Jeff Johnson <jeff.johnson@oss.qualcomm.com>
-Subject: Re: [PATCH net] Revert "net: qrtr: Send HELLO message on endpoint
- register"
-Message-ID: <lgyho3avi65edtr4xggbsrja47cjhqbamrnmchnfh4blmyygd6@bhotovqqqubj>
-References: <20260918101621.2848322-1-linux@leemhuis.info>
+	dkim=pass (1024-bit key) header.d=iki.fi header.i=@iki.fi header.b="bf+2ACRu"
+Received: from fauth-c2-smtp.messagingengine.com (fauth-c2-smtp.messagingengine.com [204.75.18.201])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange x25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	(Authenticated sender: jmtilli)
+	by meesny.iki.fi (Postfix) with ESMTPSA id 4hmdd32HkDzyXg;
+	Fri, 18 Sep 2026 19:39:34 +0300 (EEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iki.fi; s=meesny;
+	t=1789749576;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=2bX1EKHp0Quhk+gq7adxCGKb0B+LghpMlLP0cmw2Iew=;
+	b=bf+2ACRuYJ2fLjm+2msGGbGyBWpuwPdl0J/6olAdVN80OhsIf6svGhpg41NpXebGPn4PJl
+	jMQQmAUOPgVSGrn32R+Nvpny5LimMu1kkGXdx52aYa2E+5Zu8Pb9ayvucz3m9grNN33pOw
+	c8Wr51FY4mxQShkXh+DwlwZUYHplXPw=
+ARC-Seal: i=1; a=rsa-sha256; d=iki.fi; s=meesny; cv=none; t=1789749576;
+	b=Y8eFqNiyGnTJ0qV6Sw3HLfPl8RF8bovGJvcPUpfJFU6J4mkfdjbVitbbTctY+yJ8IFKeid
+	Uaiu4HhhdcOsm30FtBgecuB3i7AC2YGOq5bTkVDnZrG55gy/2WoHQxymWyVTqP427j8iyL
+	SyBcBUUj7vimEuSDmPMvAlfebmq/ISs=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=iki.fi;
+	s=meesny; t=1789749576;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=2bX1EKHp0Quhk+gq7adxCGKb0B+LghpMlLP0cmw2Iew=;
+	b=jjaHAHKeb1upRQJbyxAknddVz6V1xYDLiyolN/iJL4gVd7wKfEKb5u1SB8zKb3fN1Cvdp8
+	NyA0HT4eNwNfIZ27kggQij4T+gNY16mVFkGbxNVnJvMh3mJkEtYpHnEQIJe0GRfWkpUlm8
+	Hrg6VO22PZcLkaSqTDYpeNuGkJptkmY=
+ARC-Authentication-Results: i=1;
+	ORIGINATING;
+	auth=pass smtp.auth=jmtilli smtp.mailfrom=juha-matti.tilli@iki.fi
+Received: from ams-compute-02.internal (ams-compute-02.internal [10.64.2.62])
+	by mailfauth.ams.internal (Postfix) with ESMTP id 3F094198005C;
+	Fri, 18 Sep 2026 12:39:33 -0400 (EDT)
+Received: from ams-imap-13 ([10.64.2.33])
+  by ams-compute-02.internal (MEProxy); Fri, 18 Sep 2026 12:39:33 -0400
+X-ME-Sender: <xms:QmmtaqeMMcYIM05pprdBHW9q_Dsel74suD6rURye1JW5lr8UZ7Icfw>
+    <xme:QmmtavDA-T64SwNcJBHTzegN1wUuft2p04NrdSjTH2Td-COBf2tNbcCPW0wO7cy0_
+    UvUUQfwIMd4W9XgByOhx8sOjRsMJ9QtOpMQ8_iL-HDUJLRWdTjGgavI>
+X-ME-Proxy-Cause: dmFkZTGgrfBZdGn7M8WQTKUJaj1D8vr0/YFLGS6Y6O+RkC9rVsC5GJqpFn3Fe27jJ2IIue
+    BBwj5693w5e8/4dplpgmEgLTfKlZju/Afuw2j/G5cDlzUYKQ3m1oRScdb9OKSPnEhdLAQv
+    vpSNDMP7t/mrrwfZsInHg6rHRdnv38WFBMZlvGNP27WkU/7TxW+HNM/1bFvB+hF9h7pjSo
+    u9rYWBkuhh6evLdJzeJEoEvusgi4E+MZxzPs6D0ZOp8TjeawU0BAKo4Z3c1e7tL+bjgkmi
+    XHW2GyJCOw/5cUEGDbOFwxooi7CDeA4mLH2M8Lk3GHU3YaoYR3qIFwQpN55RY3qksOyaYj
+    nJw8H0/I9oejv3/Wi8kTthvEAA7X0iz5qV/jphCnaX5S18R4bOouTM6MF6o4ElUX0VeCle
+    bGIFVWYuNkXCM8jOrOuL3CII5M4mksxH0+XcHGcxAy09OzKH0dO8DqIeabpCij9QyJ9UfM
+    DvbyRLw2ehOK+viHPEazsWsS5HG7t3EIZDQOGRVF2mJT0YsJlKABGbK4xmKYOBEIyjh9oo
+    ZtBT+VVvspCLCNZEhdLGi7BAM4CEomN5EX06KpCw9vTfJCASjgZxru+3FwZOfn9TaP4npj
+    4LDBn0mqjcWQ8pigmvosMMS68S+gTztclQigXTr6Ez6Bc1WIx1ZWRxeNOEHg
+X-ME-Proxy: <xmx:RWmtarOH03taGg0WXK9V0sd3CNzZ_fFd4j_VjgWortLKjD3xiDhqOA>
+    <xmx:RWmtagdBu8KwNJc95xcn6wihEDHA_xfRXCVPxKAPLfJdgcRsIHUPtw>
+    <xmx:RWmtanOXwHDGhX4MDbwUJmp2meJgvjutV7YIhbK_py5ANs81odKH2A>
+    <xmx:RWmtaiaVgn3sM9-jss19ME0I9SOYvYH2D9oecZCuVehoSAsZzGjsLw>
+    <xmx:RWmtarvoXwp5XTmR_ukN9c5jTfCAquAaPFysOWg11WiUVMfRdIP420h8>
+Feedback-ID: i02414972:Fastmail
+Received: by mailuser.ams.internal (Postfix, from userid 501)
+	id 7CDCEF80089; Fri, 18 Sep 2026 12:39:30 -0400 (EDT)
+X-Mailer: MessagingEngine.com Webmail Interface
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <20260918101621.2848322-1-linux@leemhuis.info>
+X-ThreadId: AbqzItSRZteg
+Date: Fri, 18 Sep 2026 19:39:09 +0300
+From: "Juha-Matti Tilli" <juha-matti.tilli@iki.fi>
+To: "Manivannan Sadhasivam" <manivannan.sadhasivam@oss.qualcomm.com>,
+ "Manivannan Sadhasivam" <mani@kernel.org>,
+ "David S . Miller" <davem@davemloft.net>,
+ "Eric Dumazet" <edumazet@google.com>, "Jakub Kicinski" <kuba@kernel.org>,
+ "Paolo Abeni" <pabeni@redhat.com>, "Simon Horman" <horms@kernel.org>,
+ "Jeff Johnson" <jjohnson@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, netdev@vger.kernel.org,
+ linux-kernel@vger.kernel.org, linux-wireless@vger.kernel.org,
+ ath11k@lists.infradead.org, ath12k@lists.infradead.org,
+ "Bjorn Andersson" <andersson@kernel.org>,
+ "Chris Lew" <christopher.lew@oss.qualcomm.com>,
+ "Deepak Kumar Singh" <deepak.singh@oss.qualcomm.com>,
+ "Raj Kumar Bhagat" <raj.bhagat@oss.qualcomm.com>,
+ "Jeff Hugo" <jeff.hugo@oss.qualcomm.com>
+Message-Id: <da0421b8-bf31-43d1-8d71-520753c8344c@app.fastmail.com>
+In-Reply-To: <20260918-qrtr-multi-ep-v1-3-8a06caa368d3@oss.qualcomm.com>
+References: <20260918-qrtr-multi-ep-v1-0-8a06caa368d3@oss.qualcomm.com>
+ <20260918-qrtr-multi-ep-v1-3-8a06caa368d3@oss.qualcomm.com>
+Subject: Re: [PATCH 3/4] wifi: ath11k: Connect to the QMI server belonging to the
+ device owned by this driver
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-On Fri, Sep 18, 2026 at 12:16:21PM +0200, Thorsten Leemhuis wrote:
-> This reverts commit 544d85de4dc22c01badfd8cefa59829ce35c4858.
+On Fri, Sep 18, 2026, at 19:28, Manivannan Sadhasivam via B4 Relay wrote:
+> From: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
 > 
-> It causes suspend and resume problems for numerous people, including
-> maintainers and developers of ath wifi drivers. A fix was proposed[1],
-> but did not get any traction, so go for a revert instead.
+> When two identical ath11k PCIe devices are connected to the same host, both
+> advertise the WLFW service with the same service and instance id. The QMI
+> lookup reports both servers to each device, so a device may connect to the
+> firmware running on the other device.
 > 
-> Cc: Chris Lew <christopher.lew@oss.qualcomm.com>
-> Cc: Deepak Kumar Singh <deepak.singh@oss.qualcomm.com>
-> Cc: Pranav Mahesh Phansalkar <pranav.phansalkar@oss.qualcomm.com>
-> Reported-by: Daniel J Blueman <daniel@quora.org>
-> Link: https://lore.kernel.org/all/20260909055846.16539-1-daniel@quora.org/ [1]
-> Reported-by: Takashi Iwai <tiwai@suse.de>
-> Link: https://lore.kernel.org/all/87a4plsg4w.wl-tiwai@suse.de/
-> Reported-by: Vlastimil Babka <vbabka@suse.com>
-> Link: https://lore.kernel.org/all/ab1491bb-cca5-4145-ac7d-31c966abf7b4@suse.com/
-> Reported-by: Jeff Johnson <jeff.johnson@oss.qualcomm.com>
-> Link: https://lore.kernel.org/all/6257c447-788d-4362-851e-0d552bcf7c56@oss.qualcomm.com/
-> Signed-off-by: Thorsten Leemhuis <linux@leemhuis.info>
-> ---
+> But now, QRTR provides each MHI endpoint a unique node id which is
+> different from the node id announced by the device. So use the same id to
+> pick the correct server. Add a get_qrtr_node_id() HIF callback that returns
+> the node id derived from the MHI controller index and zero for transports
+> that do not assign one. In the new_server callback, skip any service whose
+> node id does not match. A node id of zero disables the check, so transports
+> that do not assign one keep their current behavior.
 > 
-> I'm not affected by this, but due to all those reporters mentioned above
-> it seems it would be good to get this fixed for 7.3-rc4, as Linus' rule
-> of thumb wrt to fixing regressions is "generally be 'within a week',
-> preferably before the next rc". Which is why I currently plan to ask
-> Linus to pull this directly. If this is a bad idea, just tell me.
-> 
-> The patch from Daniel linked above[1] could have fixed the problem, but
-> none of the developers of the culprit or the maintainers for this area
-> commented on it within a week
+> Signed-off-by: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
 
-Really?
-https://lore.kernel.org/all/hcr4woicsnz3pbhzlguuwjlego7yli3znhjmsx4cdz66xa74zd@wjtle2yslc4b/
+Tested-by: Juha-Matti Tilli <juha-matti.tilli@iki.fi>
+Tested-on: 2x WCN6855 hw2.1 PCI WLAN.HSP.1.1-04685-QCAHSPSWPL_V1_V2_SILICONZ_IOE-1
 
-FWIW, I don't mind a revert too, but the comment was misleading.
+(assuming the patch is the same and hasn't been updated since 17.9:
+https://github.com/Mani-Sadhasivam/linux/commits/qrtr-multi-ep/ )
 
-In any case,
-
-Acked-by: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
-
-- Mani
-
--- 
-மணிவண்ணன் சதாசிவம்
+BR, Juha-Matti
