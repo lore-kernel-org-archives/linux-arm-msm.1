@@ -1,82 +1,83 @@
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5AD9B3C414F
-	for <linux-arm-msm@vger.kernel.org>; Fri, 18 Sep 2026 13:19:32 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E726F4F4CFD
+	for <linux-arm-msm@vger.kernel.org>; Fri, 18 Sep 2026 13:19:33 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789737574; cv=none; b=XM10pQcdyBQmLs7aiN+zBDilPhLDbaFQjbM7ajHGyd3joSTkjhoXicIsdvlrnroUo5q04T78vGiI3NUkXFO6sRZYJV0CuBveXbDhp/iDEGWA1ti9lfxZsQ4xotBSCMmvbmwaPIET+F87EkBspDO7aKYsWPpjbAQ6lf24hC7TS70=
+	t=1789737577; cv=none; b=PwHgueuRlaHwvDjDyXDIoP2hZF8i4dd5ECk1uHkst0UfQ6jzA/l5Ws4m6luSQ6KIVc9/dNfqilpJdSY8p+G9f7pvAjdAtllNlzpPOzd4+iTkEvRG3sutnXt2eQgGAy673lgdbi63UJbOdxVtz/yhUP470+3UTpbs7bRM80/cFjE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789737574; c=relaxed/simple;
-	bh=xEA5Mk7c5Lfp+mhJS1CZAxH/COdBNxDQFdboHwJ6tfU=;
+	s=arc-20240116; t=1789737577; c=relaxed/simple;
+	bh=DX/k2+cTu6rvPz9eR+rvoARBCOb7oGx3eJBOQvcqBx8=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=YYh5NhyixL076388vTRkLLFavzfdJ1UB4K1To7UH2VyNiSJtgSFmZsm4qEzdN45I7qy9Q9r22hJ3X8mNP4FhPrnX7BBzpYSNVRxFlkKD4Kgygu4wCfku9RAbOEvSYUykJ/vjbfOPc2rP1SGJBwe2c9myEHijUJcS5gQS2m6NBvg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=GrwdJnBy; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=VNEZCDTt; arc=none smtp.client-ip=205.220.168.131
+	 MIME-Version; b=qnVveAuItNVghKEfj0x49ItUeQPzbehJLVW/0aS1naO1JktGwxXJRDBArhChPKd45jIZyGV4OmwKsvEBu4mANGwSsYHOXy3gQ5W2pUddGYBdkNptoC+sAY1mW9/Hv9FXPD2GPNLfU+Tp08mHKhFlvOgEt908GWG48qyOqZQCisA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=nii4CUWj; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=DE19lT6c; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="GrwdJnBy";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="VNEZCDTt"
-Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68ICuEBT1650044
-	for <linux-arm-msm@vger.kernel.org>; Fri, 18 Sep 2026 13:19:31 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="nii4CUWj";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="DE19lT6c"
+Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68ICtxsb3584218
+	for <linux-arm-msm@vger.kernel.org>; Fri, 18 Sep 2026 13:19:33 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:date:from:in-reply-to:message-id
-	:mime-version:references:subject:to; s=qcppdkim1; bh=gHRWnsaqzVv
-	rj/VfSil1Z7BTKXXu2Ot1oVvsS3nZvA4=; b=GrwdJnByo5ysRxPAlqZXP+nPedX
-	xnEKf2eBVbEXQgS615HEA7AbTYIfpKUuxv+ii/z3vipgmPXpmdOrpxbUEHOKtMOb
-	cHmluvI5sIGVif9AzIpTGUMsBY+T4YJMo0Aonqf+g9vmxfU+0zCjDt/rIzwhl30x
-	jqezEN86tZGD1hKyRr29nPUMyj3sMa7ltf0ZBl0a+WIp7y33mLqjGycYonWUhqir
-	b/+6+M/idopoDpPZneIo9ERCrReJK26EK413b5ChvL0O3H+X5rylUVJKdWSGboQU
-	jhV1hIkfPSd/fkoH2MYMDPg+LD1cr+xM5rIXuK97Ex1NRbqfna4MkzfGlZg==
-Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com [209.85.222.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4grrg43an3-1
+	:mime-version:references:subject:to; s=qcppdkim1; bh=AAXGraH2Q+c
+	EaofkWeUO4doE1Ao8y1Vg8kmDtzDBeow=; b=nii4CUWj8WbCxPkAWdf2bEU/VoF
+	rg7eX/S4pZUEiT56LBWT5LxSliMJ/QiPyswGFaUSHXxEhKhzUEmsN1cLbFs7Og+n
+	GJ8rkGQOyQfpITChxvWPfJ9PQUEj+kyWsSMBU8iZav8FnE5gMXdbtPX51hNLj0F9
+	KGLZt9sja3q11iIf9oLl5Ji6FwjR62xK95IbwAEsVdq+s3GwD7FmTgD4ySGbrYiq
+	PB/D2mOqzbcdh03tDbP0JbQy6El0HjWrzwk8uQfWzRTTMwCs1S9t8NiODwDA0g0W
+	kbrmj92hcjyGAZOHP7joCcYVwMSEUmElGh2JWr/bt3JQ1mybvPltnXyvxeg==
+Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com [209.85.222.199])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gs37dgpr9-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Fri, 18 Sep 2026 13:19:31 +0000 (GMT)
-Received: by mail-qk1-f198.google.com with SMTP id af79cd13be357-939d6c515deso158472585a.3
-        for <linux-arm-msm@vger.kernel.org>; Fri, 18 Sep 2026 06:19:31 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 18 Sep 2026 13:19:32 +0000 (GMT)
+Received: by mail-qk1-f199.google.com with SMTP id af79cd13be357-93909014c85so141533785a.0
+        for <linux-arm-msm@vger.kernel.org>; Fri, 18 Sep 2026 06:19:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1789737570; x=1790342370; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1789737572; x=1790342372; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=gHRWnsaqzVvrj/VfSil1Z7BTKXXu2Ot1oVvsS3nZvA4=;
-        b=VNEZCDTtEGQ63k9XtN8vZvl+bkC6aTjE9kwU0H46PmJw41MPlr/nQdp01EeCdFSUjZ
-         bkBiKeEZYczDUSiuFEJiRKgy7ow/AShVz/T0lM2wXdZqejMnqLzf/93ukXOjtq/wpp4h
-         DyE9Q3swk2rfmZ/KZZbjkDgNSB9wXkNo6+i1i8mi6nlNBtDxIr2aPHPvQgjhVtLw2y1S
-         /nIsUB+BVGlFs+v6hAboDa+CEL/GJvXU008J344DaSBSUNRacyd6hMufhwEeT6vvNLNP
-         DEjT8c4gUNNEuPV5wPMG3ExBSdgmxVwa6tgwSqcD7YBEVTDXVPwt2S8tF3f0OXCz+n5f
-         wQrA==
+        bh=AAXGraH2Q+cEaofkWeUO4doE1Ao8y1Vg8kmDtzDBeow=;
+        b=DE19lT6cNXK7HufNih5FhK0EbHhluLxlhm2G2TnDNEz/+rqqZLTPmT6FpDpflgeL6x
+         ztn3FErRkGuSVhmFmaT78tZbHDUmoaSA1X9KqI+qPIYUHOxMyN1MTacYkqjsVzEK2RWj
+         Yn1108MWhaPD67Sw7QAMk8nv3FIkh22YdeunwnFrcDvLY5lxYOLun1+5RgNduiFeUP9+
+         +ATajoD0CmnAFoiinVgL0/8/VAfqtrR1faZWSZtpP0n276jloT83RHWLazCFsM1PF9hy
+         SrMdLvpAVuQY8KSydiKYreGg3qDDEzhHtKEntIEDXhMMFn7M7SemCRYxQ1nulgSCiM+v
+         itfg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1789737570; x=1790342370;
+        d=1e100.net; s=20260707; t=1789737572; x=1790342372;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=gHRWnsaqzVvrj/VfSil1Z7BTKXXu2Ot1oVvsS3nZvA4=;
-        b=1FjMwE28/W2rKrmF0qV4HEvSKIaK5ZJpVptrCJwfWqlMNs0CVp3Xwnpm3hgtmDskDy
-         i73rnGc9l7CwBuJA52A60JYow9la6U9BLRoDZMf+zZgMZVP14ybDodzbhR3LyVyZaxnr
-         gZn6xZgpFloX1AnAdbPF38y7+rsBxHaEhPaDaPgbUqwhKew4nv1X5EJh90glcRCQ2L0S
-         xQYT6M4OejKbm1aRKBa7kYf35RRPW3TXwat5mnFsnhCV1vzA0eR31pTQhUnlmaDQJQEh
-         vFIUDwVhkuBkdnCMQCpWmdIS+u4qM6srBlO/gfV+A77QBpO239xC7ZPezxITmbKGyuAL
-         eW+A==
-X-Forwarded-Encrypted: i=1; AKwUvBxTqg7qto2jj8KX5v3VuowhcjNqRVT1sZo7KzA9fwuQ43yK56WvfESLciggSFn0PZP3MZNqDzwL0QtxTfA8@vger.kernel.org
-X-Gm-Message-State: AFuF++nnhCMkTWyGd+4b6hzirey/Wd0VX0+aV8ukvZ5R0l9YIgrqQlDu
-	0IwAyAWv+g/rdzWmWQO8RUInCmI5lJk5JZv+n9+J2zAgcbyUAgcna6su2jnwI9NAjZ5KN+2ffZL
-	74PsCiNtLcytM5j8q6v8aQ2UcE7VNDswqRrxK5xXFjmrdZqwSTB86FX3eB+8iu/q12RAF
-X-Gm-Gg: AYBFou3fRkWz6kZfnyN+Pkub+Q+gMQOadk540i99okDYBbPNXVlYsb/xJMHtqQ43TD8
-	AXG6gsshChF/1ezDRW6MkF9Z58tJSuiZCuB8Ja7VWUWbwTGgTLa+U6//Lrb1i/g5Q6oJu7u8t67
-	5/Yx/mnn8YnjOQR35bB2i7g3nRXlLa9g58rXKLoevv1H98mRPYuFpQIAKyMRzEvjKth9TzDJFLn
-	bPrkqIXmv9oNrDwBz+y8eZ+f+0SaNCQgvTtlbh8Kh/pu0lgi05qE7XzIt3+AgD8bnrtPPaCUbvd
-	2G6UGXvpnCC2GAVGevQp0+pPd0gyVliN9p3qABVAp3o9VM17cS+euvk/n9LJXFOtPmyCgLHdyRC
-	5XHUufF+qteKl/Q==
-X-Received: by 2002:a05:620a:4512:b0:93b:d7b0:c96b with SMTP id af79cd13be357-93bdca329e2mr323687585a.76.1789737570147;
-        Fri, 18 Sep 2026 06:19:30 -0700 (PDT)
-X-Received: by 2002:a05:620a:4512:b0:93b:d7b0:c96b with SMTP id af79cd13be357-93bdca329e2mr323682085a.76.1789737569601;
-        Fri, 18 Sep 2026 06:19:29 -0700 (PDT)
+        bh=AAXGraH2Q+cEaofkWeUO4doE1Ao8y1Vg8kmDtzDBeow=;
+        b=ExbdppXT0reX8lZY9BHXEr7z9ses5p7EY7M8PHv0u4trRN2TUB9wOBlwh1kedyFV6n
+         O77oq7yBfm/5LcJJvMFmBFAJ3qtJPW3bczRA0X5WENjGB0RQgFEjlkoO5VkynCr1W81P
+         8G58Wej0O1NxzqBubNwZKb7MPyKwNTGR75ITW5iSQk1jJ8G2pijgkhz7P6TyTwubt15P
+         FawmvQvJjHAIZ2GUiOb7KVg5BEuXklBrVCu2RMRBWL2nelK3ohu1xcv85IHHe8oNalqk
+         TlCfmKc5DENmJfuMDL+oNfpSmKqhdRWRMq7MoOI3aJc/clxw9x10fOlADvy5BWthDtD6
+         02og==
+X-Forwarded-Encrypted: i=1; AKwUvByIcVpxx4yzA3i+twCdA4jrUOGsE9mi0gIx6JBo6phomtDbbl8OyHP92pW86i3Jmy6rOV+JeZTqJhw6ty63@vger.kernel.org
+X-Gm-Message-State: AFuF++mObePRuOcu3VBnN8qNr3JXz6EvtL5rPM62F/r771x2rfYgmeyc
+	yyfr88fS+aNOLrt8WyB6bi0SyF/NpeKGGaR+Zs/SetNOHdMUQeCoPWdlWBefmzGneyJ5A1cVj73
+	FHTI6IFV5o9GyeTv6DKMBU9yOcLe5erASOaRUgdDNMs18as50fgDpBJM3CuYm4rU7lBdAU+5RNy
+	26
+X-Gm-Gg: AYBFou0xYhhzmE3nWgzgTuYBBoSpb0SN+HrCNVSfrokC9DaafYWLTpDtq9D//10Bwzd
+	lrNZxjtCh4wRSra8KAWh7B6q6rmnKUVBXvt4m536wgRdiC6XnVy14TtwDh0b0YB2up1KwXCk+UJ
+	avOnT4SylVxKxqMRmDpIoM4JF5TrHqojj65ufT+JLd/HIHejVI/V670GfW286lAp2ybdR+gmzSl
+	rpnYDMGLTKskeBTdV9XO1EQHyvkuZUl7rCkNGhMpEiAfh2ggP/T3MAJe6gvPAJz8F5bigsmSWL7
+	Es+MbtjI/TQGsC3LkDeFq9EkSrfaaWGNEK4s3lYKN1nW6yCtPtKbfqJrScm1zMg1+Kn1oO/XBbu
+	IhygoDJDm8O5PFQ==
+X-Received: by 2002:a05:620a:268d:b0:939:abe1:ed1b with SMTP id af79cd13be357-93bdc468cd5mr318317485a.0.1789737571774;
+        Fri, 18 Sep 2026 06:19:31 -0700 (PDT)
+X-Received: by 2002:a05:620a:268d:b0:939:abe1:ed1b with SMTP id af79cd13be357-93bdc468cd5mr318310885a.0.1789737571204;
+        Fri, 18 Sep 2026 06:19:31 -0700 (PDT)
 Received: from debian ([5.133.47.210])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-49fc7cebae2sm48254015e9.8.2026.09.18.06.19.28
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-49fc7cebae2sm48254015e9.8.2026.09.18.06.19.29
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 18 Sep 2026 06:19:28 -0700 (PDT)
+        Fri, 18 Sep 2026 06:19:30 -0700 (PDT)
 From: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
 To: Mark Brown <broonie@kernel.org>, Liam Girdwood <lgirdwood@gmail.com>,
         Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>,
@@ -91,9 +92,9 @@ Cc: linux-sound@vger.kernel.org, linux-arm-msm@vger.kernel.org,
         devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
         patches@opensource.cirrus.com,
         Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
-Subject: [PATCH v4 1/8] ASoC: SDCA: allow building without ACPI
-Date: Fri, 18 Sep 2026 14:19:06 +0100
-Message-ID: <20260918131914.681588-2-srinivas.kandagatla@oss.qualcomm.com>
+Subject: [PATCH v4 2/8] ASoC: SDCA: export PM helpers keyed on sdca_class_drv
+Date: Fri, 18 Sep 2026 14:19:07 +0100
+Message-ID: <20260918131914.681588-3-srinivas.kandagatla@oss.qualcomm.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260918131914.681588-1-srinivas.kandagatla@oss.qualcomm.com>
 References: <20260918131914.681588-1-srinivas.kandagatla@oss.qualcomm.com>
@@ -104,158 +105,261 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-GUID: RzuGAlwBEeL-klVKOjLcO8jxeqJ4t-fe
-X-Authority-Analysis: v=2.4 cv=ZO9CCn7b c=1 sm=1 tr=0 ts=6aad3a63 cx=c_pps
- a=qKBjSQ1v91RyAK45QCPf5w==:117 a=ZsC4DHZuhs/kKio7QBcDoQ==:17
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTE4MDE4OSBTYWx0ZWRfX8TqLqxhu1HHJ
+ b3DdVrEU90tTD8TavmIJJod2FDbzpzuQHV3FnYXjdzmedkU6TT95vtNV8aCXKFRCRRbwSWIREFc
+ 4wJ67hO0o6LjEJJ16b0T8OOUdwtTSc4=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTE4MDE4OSBTYWx0ZWRfXwi/FhzfQc+1b
+ Qpn08Nhkp0hllUZEk0upziGaZCI0INR0qYLWqd96Gj7xpx/f+5lgDILti6Ua6qFkf4UXtgTp0Ds
+ tmDd259nDJpg+U0u3apHW8ebfk1xp0UIU+Omf3K7UVPt1/FFfgIWLgk1p2XTVCDTPleIQ4xcnMC
+ o+/N6FXgCiPFur+OFlu+sqbt070t2Lbc07MOHfLHUM1KhxJIRjR9cp8zmeBvfxDdGqvwjrQl+tn
+ mtVEZ4bxkAYeF2OtcILe4fe4NMjy3GUv5Xvdn/NOFmcy+Tq+guAwzZmzmWGDQtVRZSazgaP8q7C
+ 42ntY5XEs5SBcISPXEJoSFn8HdSf5BpsKmFyOg+n79dj4iAyzxsNWQC/k+HzXSmid+4k5dEInxA
+ 6GmISJdpxA1nAAN3xvmPWq86AYGBaXQlXATfAhekGZjk4HZLmnbcL0WpRBzo7srB/pijuNw0Y6R
+ oimzno5BX+NVMbKlL6A==
+X-Proofpoint-GUID: 3d6hmpQPXHHfOGgcWxT7mOHk6bWJ2y7x
+X-Proofpoint-ORIG-GUID: 3d6hmpQPXHHfOGgcWxT7mOHk6bWJ2y7x
+X-Authority-Analysis: v=2.4 cv=R+mWitRX c=1 sm=1 tr=0 ts=6aad3a64 cx=c_pps
+ a=HLyN3IcIa5EE8TELMZ618Q==:117 a=ZsC4DHZuhs/kKio7QBcDoQ==:17
  a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22 a=EUspDBNiAAAA:8
- a=RY6toyVs4qztpF5PSasA:9 a=NFOGd7dJGGMPyQGDc5-O:22
-X-Proofpoint-ORIG-GUID: RzuGAlwBEeL-klVKOjLcO8jxeqJ4t-fe
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTE4MDE4OSBTYWx0ZWRfX+Ljd6/7DF6jm
- bUdwh3CNUlXZfX3w9YAWOpKDp626qQTEEqIj+opeCJ4gKV50KjKTf/vlXZ1xam2+V+3THYL2jYN
- 7gANxRmgMmkHNJu4ibWM+iYSY8Wai7UcO88d5q9NuGwsYYpWk99pahFrOzfdLymff4m+DTklBjL
- XgEovTmYyShFf5tjf2K7vgbn1gXfi0G4Us4LdpOLtSbSzc6irw9vVMDtvQVjd3CukfwZR3BBkng
- HgcggvyzDxRSkDOFoQaIkBAzFle2wCqoRv0uOJ0IIZ+qBy/FgJtY/pUntb4R+zzBjcOk+bOmblQ
- VbMhht1+pXrAHajuLBg7+C9xp9RYZ8LEsYwcgcxK8toA3e5dLp+pG5FlXXO6p1gJZtoRXeRKmvA
- RPrYu41yY8MjkXvV2DO7ykEh5mrK1PyUyXTVPvgVqLctcbv5UkqYqEkUNmouOZiZ+qx/UcG24JY
- qFgKC2a/+cBIyTz4iLA==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTE4MDE4OSBTYWx0ZWRfX/BKUDpnkD+8A
- W1nmpbRMOCkkWkoOshN0nF42EmsZOXqt29YMDvVRUXJePrwprBL9fDz+p48oWsRCev4uTgrBmmg
- Vd0w2Xt7LlveIiAIQAVRedrTJcXtQ6A=
+ a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22 a=EUspDBNiAAAA:8
+ a=3PQulrMEHypX3zRcvmEA:9 a=bTQJ7kPSJx9SKPbeHEYW:22
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-09-18_03,2026-09-16_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 phishscore=0 priorityscore=1501 suspectscore=0 adultscore=0
- spamscore=0 lowpriorityscore=0 impostorscore=0 bulkscore=0 malwarescore=0
+ lowpriorityscore=0 adultscore=0 bulkscore=0 impostorscore=0 clxscore=1015
+ spamscore=0 suspectscore=0 malwarescore=0 priorityscore=1501 phishscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609180189
 
-The SDCA class driver is useful on non-ACPI platforms where the
-topology is supplied statically via sdca_class_hw_ops.get_function_data.
+The class PM callbacks pull sdca_class_drv out of drvdata, so the
+built-in class_sdw_driver owns the drvdata slot.  That works for the
+generic case but blocks codec drivers that want to embed
+sdca_class_drv in their own private struct -- they need drvdata for
+their codec priv.
 
-Drop 'depends on ACPI' from SND_SOC_SDCA and guard the
-ACPI-parsing implementations in sdca_device.c and sdca_functions.c
-with IS_ENABLED(CONFIG_ACPI), providing empty stubs when ACPI is off.
+Split the four callbacks into exported helpers that take a
+struct sdca_class_drv * directly:
+
+  sdca_class_system_suspend()
+  sdca_class_system_resume()
+  sdca_class_runtime_suspend()
+  sdca_class_runtime_resume()
+
+Codec drivers can now compose these into their own dev_pm_ops without
+going through drvdata.
+
+For the built-in class_sdw_driver, add small dev_pm_ops wrappers that
+fetch drv from drvdata, wire them into sdca_class_pm_ops, and export
+the ops so any generic SDCA slave can pick them up as-is.
+
+No functional change: the built-in class_sdw_driver keeps the same PM
+semantics; only the internal plumbing shifts to operate on
+sdca_class_drv instead of struct device *dev.
 
 Signed-off-by: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
 ---
- include/sound/sdca.h            | 23 ++++++++++++++++++-----
- sound/soc/sdca/Kconfig          |  6 ++++--
- sound/soc/sdca/sdca_device.c    |  4 ++++
- sound/soc/sdca/sdca_functions.c |  2 ++
- 4 files changed, 28 insertions(+), 7 deletions(-)
+ .../soc/sdca => include/sound}/sdca_class.h   | 15 ++++
+ sound/soc/sdca/sdca_class.c                   | 81 ++++++++++++++-----
+ sound/soc/sdca/sdca_class_function.c          |  2 +-
+ 3 files changed, 79 insertions(+), 19 deletions(-)
+ rename {sound/soc/sdca => include/sound}/sdca_class.h (57%)
 
-diff --git a/include/sound/sdca.h b/include/sound/sdca.h
-index 2bdf4e333e04..db2672b3aae2 100644
---- a/include/sound/sdca.h
-+++ b/include/sound/sdca.h
-@@ -60,20 +60,16 @@ enum sdca_quirk {
- 	SDCA_QUIRKS_SKIP_FUNC_TYPE_PATCHING,
+diff --git a/sound/soc/sdca/sdca_class.h b/include/sound/sdca_class.h
+similarity index 57%
+rename from sound/soc/sdca/sdca_class.h
+rename to include/sound/sdca_class.h
+index 57f7f8d08f49..ce2ed5f33e7a 100644
+--- a/sound/soc/sdca/sdca_class.h
++++ b/include/sound/sdca_class.h
+@@ -15,6 +15,7 @@
+ #include <linux/workqueue.h>
+ 
+ struct device;
++struct dev_pm_ops;
+ struct regmap;
+ struct sdw_slave;
+ struct sdca_function_data;
+@@ -32,4 +33,18 @@ struct sdca_class_drv {
+ 	struct work_struct boot_work;
  };
  
--#if IS_ENABLED(CONFIG_ACPI) && IS_ENABLED(CONFIG_SND_SOC_SDCA)
-+#if IS_ENABLED(CONFIG_SND_SOC_SDCA)
- 
--void sdca_lookup_functions(struct sdw_slave *slave);
- void sdca_lookup_swft(struct sdw_slave *slave);
--void sdca_lookup_interface_revision(struct sdw_slave *slave);
- bool sdca_device_quirk_match(struct sdw_slave *slave, enum sdca_quirk quirk);
- int sdca_dev_register_functions(struct sdw_slave *slave);
- void sdca_dev_unregister_functions(struct sdw_slave *slave);
- 
- #else
- 
--static inline void sdca_lookup_functions(struct sdw_slave *slave) {}
- static inline void sdca_lookup_swft(struct sdw_slave *slave) {}
--static inline void sdca_lookup_interface_revision(struct sdw_slave *slave) {}
- static inline bool sdca_device_quirk_match(struct sdw_slave *slave, enum sdca_quirk quirk)
- {
- 	return false;
-@@ -88,4 +84,21 @@ static inline void sdca_dev_unregister_functions(struct sdw_slave *slave) {}
- 
- #endif
- 
 +/*
-+ * Called from the SoundWire bus during peripheral enumeration; gated on
-+ * ACPI to avoid a soundwire_bus <-> snd_soc_sdca module cycle on DT builds
-+ * (where the bodies are stubs anyway).
++ * PM helpers.  Codec drivers embed sdca_class_drv in their own priv,
++ * own dev_set_drvdata(), and compose these into their own dev_pm_ops:
++ *
++ *	static int wcd_runtime_suspend(struct device *dev) {
++ *		struct wcd_priv *priv = dev_get_drvdata(dev);
++ *		return sdca_class_runtime_suspend(&priv->class);
++ *	}
 + */
-+#if IS_ENABLED(CONFIG_ACPI) && IS_ENABLED(CONFIG_SND_SOC_SDCA)
++int sdca_class_runtime_suspend(struct sdca_class_drv *drv);
++int sdca_class_runtime_resume(struct sdca_class_drv *drv);
++int sdca_class_system_suspend(struct sdca_class_drv *drv);
++int sdca_class_system_resume(struct sdca_class_drv *drv);
 +
-+void sdca_lookup_functions(struct sdw_slave *slave);
-+void sdca_lookup_interface_revision(struct sdw_slave *slave);
-+
-+#else
-+
-+static inline void sdca_lookup_functions(struct sdw_slave *slave) {}
-+static inline void sdca_lookup_interface_revision(struct sdw_slave *slave) {}
-+
-+#endif
-+
- #endif
-diff --git a/sound/soc/sdca/Kconfig b/sound/soc/sdca/Kconfig
-index 4c0dcb9ff3b9..72c02943c49e 100644
---- a/sound/soc/sdca/Kconfig
-+++ b/sound/soc/sdca/Kconfig
-@@ -3,11 +3,13 @@ menu "SoundWire (SDCA)"
- 
- config SND_SOC_SDCA
- 	tristate "SDCA core support"
--	depends on ACPI
- 	select AUXILIARY_BUS
- 	help
- 	  This option enables support for the MIPI SoundWire Device
--	  Class for Audio (SDCA).
-+	  Class for Audio (SDCA).  The ACPI/DisCo topology parser is
-+	  only built when CONFIG_ACPI is enabled; on non-ACPI platforms
-+	  (e.g. ARM/DT) codec drivers supply the SDCA function data
-+	  via sdca_class_hw_ops.populate_function.
- 
- config SND_SOC_SDCA_HID
- 	bool "SDCA HID support"
-diff --git a/sound/soc/sdca/sdca_device.c b/sound/soc/sdca/sdca_device.c
-index 4bcd8d1fdff8..3f302bfa5457 100644
---- a/sound/soc/sdca/sdca_device.c
-+++ b/sound/soc/sdca/sdca_device.c
-@@ -15,6 +15,7 @@
- #include <sound/sdca.h>
+ #endif /* __SDCA_CLASS_H__ */
+diff --git a/sound/soc/sdca/sdca_class.c b/sound/soc/sdca/sdca_class.c
+index d7444f442c71..a092ebaa620a 100644
+--- a/sound/soc/sdca/sdca_class.c
++++ b/sound/soc/sdca/sdca_class.c
+@@ -20,7 +20,7 @@
  #include <sound/sdca_function.h>
+ #include <sound/sdca_interrupts.h>
+ #include <sound/sdca_regmap.h>
+-#include "sdca_class.h"
++#include <sound/sdca_class.h>
  
-+#if IS_ENABLED(CONFIG_ACPI)
- void sdca_lookup_interface_revision(struct sdw_slave *slave)
- {
- 	struct fwnode_handle *fwnode = slave->dev.fwnode;
-@@ -45,6 +46,9 @@ void sdca_lookup_swft(struct sdw_slave *slave)
- 		devm_add_action_or_reset(&slave->dev, devm_acpi_table_put,
- 					 slave->sdca_data.swft);
+ #define CLASS_SDW_ATTACH_TIMEOUT_MS	5000
+ 
+@@ -194,30 +194,41 @@ static void class_sdw_remove(struct sdw_slave *sdw)
+ 	cancel_work_sync(&drv->boot_work);
  }
-+#else
-+void sdca_lookup_swft(struct sdw_slave *slave) { }
-+#endif
- EXPORT_SYMBOL_NS(sdca_lookup_swft, "SND_SOC_SDCA");
  
- static bool sdca_device_quirk_rt712_vb(struct sdw_slave *slave)
-diff --git a/sound/soc/sdca/sdca_functions.c b/sound/soc/sdca/sdca_functions.c
-index f39008ac0e7d..1eb6418e132d 100644
---- a/sound/soc/sdca/sdca_functions.c
-+++ b/sound/soc/sdca/sdca_functions.c
-@@ -25,6 +25,7 @@
-  */
- #define SDCA_PROPERTY_LENGTH 64
- 
-+#if IS_ENABLED(CONFIG_ACPI)
- static int patch_sdca_function_type(u32 interface_revision, u32 *function_type)
+-static int class_suspend(struct device *dev)
++/**
++ * sdca_class_system_suspend - SDCA class system suspend helper
++ * @drv: caller-owned sdca_class_drv.
++ *
++ * Codec drivers compose this into their own dev_pm_ops.  Disables the
++ * SoundWire interrupt and forces runtime suspend of the underlying
++ * class regmap.
++ */
++int sdca_class_system_suspend(struct sdca_class_drv *drv)
  {
+-	struct sdca_class_drv *drv = dev_get_drvdata(dev);
+ 	int ret;
+ 
+ 	disable_irq(drv->sdw->irq);
+ 
+-	ret = pm_runtime_force_suspend(dev);
++	ret = pm_runtime_force_suspend(drv->dev);
+ 	if (ret) {
+-		dev_err(dev, "failed to force suspend: %d\n", ret);
++		dev_err(drv->dev, "failed to force suspend: %d\n", ret);
+ 		return ret;
+ 	}
+ 
+ 	return 0;
+ }
++EXPORT_SYMBOL_NS_GPL(sdca_class_system_suspend, "SND_SOC_SDCA_CLASS");
+ 
+-static int class_resume(struct device *dev)
++/**
++ * sdca_class_system_resume - SDCA class system resume helper
++ * @drv: caller-owned sdca_class_drv.
++ */
++int sdca_class_system_resume(struct sdca_class_drv *drv)
+ {
+-	struct sdca_class_drv *drv = dev_get_drvdata(dev);
+ 	int ret;
+ 
+-	ret = pm_runtime_force_resume(dev);
++	ret = pm_runtime_force_resume(drv->dev);
+ 	if (ret) {
+-		dev_err(dev, "failed to force resume: %d\n", ret);
++		dev_err(drv->dev, "failed to force resume: %d\n", ret);
+ 		return ret;
+ 	}
+ 
+@@ -225,11 +236,14 @@ static int class_resume(struct device *dev)
+ 
+ 	return 0;
+ }
++EXPORT_SYMBOL_NS_GPL(sdca_class_system_resume, "SND_SOC_SDCA_CLASS");
+ 
+-static int class_runtime_suspend(struct device *dev)
++/**
++ * sdca_class_runtime_suspend - SDCA class runtime suspend helper
++ * @drv: caller-owned sdca_class_drv.
++ */
++int sdca_class_runtime_suspend(struct sdca_class_drv *drv)
+ {
+-	struct sdca_class_drv *drv = dev_get_drvdata(dev);
+-
  	/*
-@@ -201,6 +202,7 @@ void sdca_lookup_functions(struct sdw_slave *slave)
- 	acpi_dev_for_each_child(adev, find_sdca_function, &slave->sdca_data);
- }
- EXPORT_SYMBOL_NS(sdca_lookup_functions, "SND_SOC_SDCA");
-+#endif
+ 	 * Whilst the driver doesn't power the chip down here, going into runtime
+ 	 * suspend lets the SoundWire bus power down, which means the driver
+@@ -239,10 +253,14 @@ static int class_runtime_suspend(struct device *dev)
  
- struct raw_init_write {
- 	__le32 addr;
+ 	return 0;
+ }
++EXPORT_SYMBOL_NS_GPL(sdca_class_runtime_suspend, "SND_SOC_SDCA_CLASS");
+ 
+-static int class_runtime_resume(struct device *dev)
++/**
++ * sdca_class_runtime_resume - SDCA class runtime resume helper
++ * @drv: caller-owned sdca_class_drv.
++ */
++int sdca_class_runtime_resume(struct sdca_class_drv *drv)
+ {
+-	struct sdca_class_drv *drv = dev_get_drvdata(dev);
+ 	int ret;
+ 
+ 	ret = sdw_slave_wait_for_init(drv->sdw, CLASS_SDW_ATTACH_TIMEOUT_MS);
+@@ -265,10 +283,37 @@ static int class_runtime_resume(struct device *dev)
+ 
+ 	return ret;
+ }
++EXPORT_SYMBOL_NS_GPL(sdca_class_runtime_resume, "SND_SOC_SDCA_CLASS");
++
++/*
++ * Convenience dev_pm_ops used by the built-in class_sdw_driver, which
++ * stashes its sdca_class_drv in drvdata directly.  Codec drivers that
++ * embed sdca_class_drv in their own priv compose their own dev_pm_ops
++ * using the sdca_class_*_suspend/resume helpers above.
++ */
++static int class_pm_system_suspend(struct device *dev)
++{
++	return sdca_class_system_suspend(dev_get_drvdata(dev));
++}
++
++static int class_pm_system_resume(struct device *dev)
++{
++	return sdca_class_system_resume(dev_get_drvdata(dev));
++}
++
++static int class_pm_runtime_suspend(struct device *dev)
++{
++	return sdca_class_runtime_suspend(dev_get_drvdata(dev));
++}
++
++static int class_pm_runtime_resume(struct device *dev)
++{
++	return sdca_class_runtime_resume(dev_get_drvdata(dev));
++}
+ 
+-static const struct dev_pm_ops class_pm_ops = {
+-	SYSTEM_SLEEP_PM_OPS(class_suspend, class_resume)
+-	RUNTIME_PM_OPS(class_runtime_suspend, class_runtime_resume, NULL)
++static const struct dev_pm_ops sdca_class_pm_ops = {
++	SYSTEM_SLEEP_PM_OPS(class_pm_system_suspend, class_pm_system_resume)
++	RUNTIME_PM_OPS(class_pm_runtime_suspend, class_pm_runtime_resume, NULL)
+ };
+ 
+ static const struct sdw_device_id class_sdw_id[] = {
+@@ -282,7 +327,7 @@ MODULE_DEVICE_TABLE(sdw, class_sdw_id);
+ static struct sdw_driver class_sdw_driver = {
+ 	.driver = {
+ 		.name		= "sdca_class",
+-		.pm		= pm_ptr(&class_pm_ops),
++		.pm		= pm_ptr(&sdca_class_pm_ops),
+ 	},
+ 
+ 	.probe		= class_sdw_probe,
+diff --git a/sound/soc/sdca/sdca_class_function.c b/sound/soc/sdca/sdca_class_function.c
+index 1d7fd6603882..411e3d717bb6 100644
+--- a/sound/soc/sdca/sdca_class_function.c
++++ b/sound/soc/sdca/sdca_class_function.c
+@@ -26,7 +26,7 @@
+ #include <sound/soc-component.h>
+ #include <sound/soc-dai.h>
+ #include <sound/soc.h>
+-#include "sdca_class.h"
++#include <sound/sdca_class.h>
+ #include "sdca_function_device.h"
+ 
+ struct class_function_drv {
 -- 
 2.53.0
 
