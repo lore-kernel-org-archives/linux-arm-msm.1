@@ -1,52 +1,70 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CF66D35674A;
-	Fri, 18 Sep 2026 21:35:20 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 643AC2E229F;
+	Fri, 18 Sep 2026 22:06:36 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789767322; cv=none; b=DNe4Pi9dSwJb9sokug6ZDP4GZv859Lw1oA0r7Nfr/xB6YSrF4qa0lfsdV8RONc0m9fF3p+Kbszd89I8uNwscaK37E/tkStVXUohoHjfKWAUfRA5GMnPLPnCzUtKK9HUbFECSI3LAA1ZxUyHSOTukNcUOO/u+Ef/F1KHUzeSRc8Q=
+	t=1789769197; cv=none; b=ugttG3mRhnCTSrLZWSX2uraHFE6FMXO+sEt8kKXim+BWzIy9V23ODWFy7/WYTJfUVRMNJZnPvhMNx2Z5lyTJoiKoUqn22ls3ycSHgaP5yVeeleEpNKyMDyLGAgoeMyANuwtQr0vkL5USYuetCaQV3K4b7Rm6sNeo9BmGmZyQDEE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789767322; c=relaxed/simple;
-	bh=cRJ+PVM/y4zy/Zu1yfhqH5rqt0ISqNKOL1eFVVH+e3o=;
+	s=arc-20240116; t=1789769197; c=relaxed/simple;
+	bh=xnLsNoSw5HMqOCWdSt6MKGnhKvFUd5872n1Ks2lzvi4=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=ZSr8dL1+vdNIuXu6WZ0EntSS2uoDg3rLSL1fUQromNBGLLctDSi4lD52SVinrCdADLzQaEZeqTaAf9Y33BFDz3WTwTP33CqAL5miUs2lvKiy3vKua/3l6EbWSXLd0H/CKUy0dFlCpi1iILMGXy5L5yoN+YzsVRU/Ujprwsa8JxU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=U3D8k9lf; arc=none smtp.client-ip=100.103.45.18
+	 Content-Type:Content-Disposition:In-Reply-To; b=fh5ehb/KT5+kVJN0g3EmcLN9BJpF8rUgyBRnHh0hJ5/zm8kQl0g+5XmQ/qPArGkoNw9Q4hepsB4cldmLsAynPn/86GqTtMyJn4iHBBUnw+z0hV6xJLQFNnAD7btEgxUPQPHNMgf0YQl1Oksgjb3yxtN2OXBy8h2tIUcit8BK7nc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=dlVldnl7; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="U3D8k9lf"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 333951F000FF;
-	Fri, 18 Sep 2026 21:35:20 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="dlVldnl7"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B5D6B1F000FF;
+	Fri, 18 Sep 2026 22:06:35 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1789767320;
-	bh=ej3xKpckrpjvUc2u6qoLx+3TMAOcBxUdzeIFFyYah/c=;
+	s=k20260515; t=1789769196;
+	bh=sdkH+9Eyo8lwBnyWL3D0AXJdYxWgcTzyUyAN9ex0Fds=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=U3D8k9lfVGUmG3mrLdr956SF7/Qr5CBRsP2flicGDEQ75+/x23Gz7gEdh0FeSfeOc
-	 PtLQM0QAfD4jSijXXjL4vzXI/6kdfmRD88xSJ3dmf+R3sAyp21mlzRfKw1lTn0TlzF
-	 hqAhbwz9JnTygIoS1AqYKAxjH+LxQNrOjuS/SYtCmlfLlojf8j18w8Z9scv2QOkyBp
-	 atgWD6pI9o9jsvuHdvoiMD7K1I57B49g/DdD+oFyuxRM89OeePA1MRjBeXiiHtFqZP
-	 1dax3Bv/8ODg6IBwW/ZFtA5wD5LFllEGvbfA4UlFc84SJQItxe8xF9MlnBv/5mbZST
-	 GvNXUIA+atX0A==
-Date: Fri, 18 Sep 2026 16:35:18 -0500
+	b=dlVldnl793sIzCA+QOGOpldMSTPn+NoZMEZeCGm5bhJCO8q2JcX7ccwfRYmlVBKT/
+	 +8uQjid3nEOdVeZrg8T5nlETCUAVjTreiu0IP2BEz+aYFlKOS6J14Tu24PWqd2Gh2w
+	 KxEvQJwf1TV+FrjB16PbBRzFK/5rauXPTzc7e5dOMd+/XxY2AYQaz3N5EwkHd/mjix
+	 /UN4o5DDWRVqQ2yj06BKUXrTriaZx2AVekXsV1SsEuNrUW6EvP/ru3omAjVf3HS8fk
+	 7PFRofebNSd1Q4ovkxbWzaFZ5d4QgSEx1uKhRjh74tVxEZURcKNXlqI+DPPOduAmVz
+	 n9xCx7E6n4WrA==
+Date: Fri, 18 Sep 2026 17:06:34 -0500
 From: Rob Herring <robh@kernel.org>
-To: Luca Weiss <luca.weiss@fairphone.com>
-Cc: Neil Armstrong <neil.armstrong@linaro.org>,
-	Jessica Zhang <jesszhan0024@gmail.com>,
-	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
-	Maxime Ripard <mripard@kernel.org>,
-	Thomas Zimmermann <tzimmermann@suse.de>,
-	David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
+To: Shivendra Pratap <shivendra.pratap@oss.qualcomm.com>
+Cc: Lorenzo Pieralisi <lpieralisi@kernel.org>,
+	Arnd Bergmann <arnd@arndb.de>,
 	Bjorn Andersson <andersson@kernel.org>,
+	Sebastian Reichel <sre@kernel.org>,
+	Souvik Chakravarty <Souvik.Chakravarty@arm.com>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Andy Yan <andy.yan@rock-chips.com>,
+	Matthias Brugger <matthias.bgg@gmail.com>,
+	Mark Rutland <mark.rutland@arm.com>,
+	Conor Dooley <conor+dt@kernel.org>,
 	Konrad Dybcio <konradybcio@kernel.org>,
-	~postmarketos/upstreaming@lists.sr.ht, phone-devel@vger.kernel.org,
-	dri-devel@lists.freedesktop.org, devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-	Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
-Subject: Re: [PATCH v2 1/4] dt-bindings: display: panel: Add Novatek NT37705
-Message-ID: <20260918213518.GA2337779-robh@kernel.org>
-References: <20260918-fp6-panel-v2-0-6695c4008920@fairphone.com>
- <20260918-fp6-panel-v2-1-6695c4008920@fairphone.com>
+	John Stultz <john.stultz@linaro.org>,
+	Moritz Fischer <moritz.fischer@ettus.com>,
+	"Rafael J. Wysocki" <rafael@kernel.org>,
+	Daniel Lezcano <daniel.lezcano@kernel.org>,
+	Christian Loehle <christian.loehle@arm.com>,
+	Lee Jones <lee@kernel.org>, Ulf Hansson <ulfh@kernel.org>,
+	Pavan Kondeti <pavan.kondeti@oss.qualcomm.com>,
+	Abel Vesa <abelvesa@kernel.org>,
+	Bartosz Golaszewski <brgl@kernel.org>,
+	Sudeep Holla <sudeep.holla@kernel.org>,
+	Florian Fainelli <florian.fainelli@broadcom.com>,
+	Krzysztof Kozlowski <krzk@kernel.org>,
+	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+	Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>,
+	Andre Draszik <andre.draszik@linaro.org>,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	Kathiravan Thirumoorthy <kathiravan.thirumoorthy@oss.qualcomm.com>,
+	linux-pm@vger.kernel.org, linux-kernel@vger.kernel.org,
+	linux-arm-kernel@lists.infradead.org, linux-arm-msm@vger.kernel.org,
+	devicetree@vger.kernel.org, mfd@lists.linux.dev,
+	Srinivas Kandagatla <srini@kernel.org>
+Subject: Re: [PATCH v25 05/10] dt-bindings: arm: Document reboot mode magic
+Message-ID: <20260918220634.GA2441717-robh@kernel.org>
+References: <20260914-arm-psci-system_reset2-vendor-reboots-v25-0-4aaf5c09b5c2@oss.qualcomm.com>
+ <20260914-arm-psci-system_reset2-vendor-reboots-v25-5-4aaf5c09b5c2@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -55,107 +73,108 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20260918-fp6-panel-v2-1-6695c4008920@fairphone.com>
+In-Reply-To: <20260914-arm-psci-system_reset2-vendor-reboots-v25-5-4aaf5c09b5c2@oss.qualcomm.com>
 
-On Fri, Sep 18, 2026 at 04:40:04PM +0200, Luca Weiss wrote:
-> Novatek NT37705 is a display driver IC used to drive AMOLED DSI panels.
+On Mon, Sep 14, 2026 at 08:29:09PM +0530, Shivendra Pratap wrote:
+> Add bindings to describe vendor-specific reboot modes. Values here
+> correspond to valid parameters to vendor-specific reset types in PSCI
+> SYSTEM_RESET2 call.
 > 
-> Describe it and the panel in the Fairphone (Gen. 6) (BJ631JHM-T71-D900
-> from BOE) using it.
-> 
-> Reviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
-> Link: https://lore.kernel.org/r/81a3c207-4d8f-490f-8e2a-6f3f4c2acd35@kernel.org/
-> Signed-off-by: Luca Weiss <luca.weiss@fairphone.com>
+> Signed-off-by: Shivendra Pratap <shivendra.pratap@oss.qualcomm.com>
 > ---
->  .../bindings/display/panel/novatek,nt37705.yaml    | 72 ++++++++++++++++++++++
->  1 file changed, 72 insertions(+)
+>  Documentation/devicetree/bindings/arm/psci.yaml | 60 +++++++++++++++++++++++++
+>  1 file changed, 60 insertions(+)
 > 
-> diff --git a/Documentation/devicetree/bindings/display/panel/novatek,nt37705.yaml b/Documentation/devicetree/bindings/display/panel/novatek,nt37705.yaml
-> new file mode 100644
-> index 000000000000..1c796599f6fc
-> --- /dev/null
-> +++ b/Documentation/devicetree/bindings/display/panel/novatek,nt37705.yaml
+> diff --git a/Documentation/devicetree/bindings/arm/psci.yaml b/Documentation/devicetree/bindings/arm/psci.yaml
+> index 0d04389c81fa..8b6a28b81ed7 100644
+> --- a/Documentation/devicetree/bindings/arm/psci.yaml
+> +++ b/Documentation/devicetree/bindings/arm/psci.yaml
+> @@ -98,6 +98,43 @@ properties:
+>        [1] Kernel documentation - ARM idle states bindings
+>          Documentation/devicetree/bindings/cpu/idle-states.yaml
+>  
+> +  reboot-mode:
+> +    type: object
+> +    $ref: /schemas/power/reset/reboot-mode.yaml#
+> +    unevaluatedProperties: false
+> +    properties:
+> +      # "mode-normal" is just SYSTEM_RESET
+> +      mode-normal: false
+> +    patternProperties:
+> +      "^mode-.*$":
+> +        $ref: /schemas/types.yaml#/definitions/uint32-array
+> +        minItems: 2
+> +        items:
+> +          - description: arg1 (vendor-specific SYSTEM_RESET2 reset_type)
+> +            $ref: /schemas/types.yaml#/definitions/uint32
+> +            minimum: 0x80000000
+> +          - description:
+> +              arg2 (cookie_lo in 2-cell form, cookie_hi in 3-cell form)
+> +            $ref: /schemas/types.yaml#/definitions/uint32
 
-Did novatek,nt37705 get dropped as a compatible, but the filename 
-remains?
+Drop. Types are per property, not per item.
 
-> @@ -0,0 +1,72 @@
-> +# SPDX-License-Identifier: GPL-2.0-only OR BSD-2-Clause
-> +%YAML 1.2
-> +---
-> +$id: http://devicetree.org/schemas/display/panel/novatek,nt37705.yaml#
-> +$schema: http://devicetree.org/meta-schemas/core.yaml#
-> +
-> +title: Novatek NT37705-based DSI display panels
-> +
-> +maintainers:
-> +  - Luca Weiss <luca.weiss@fairphone.com>
-> +
-> +description:
-> +  The Novatek NT37705 is a generic DSI Panel IC used to control AMOLED panels.
-> +
-> +allOf:
-> +  - $ref: panel-common.yaml#
-> +
-> +properties:
-> +  compatible:
-> +    contains:
+> +          - description: arg3 (cookie_lo in 3-cell form)
+> +            $ref: /schemas/types.yaml#/definitions/uint32
 
-As sashiko reports, "contains" is too loose.
+Drop.
 
-> +      const: boe,bj631jhm-t71-d900
+> +        description: |
+> +          Describes a PSCI SYSTEM_RESET2 vendor-specific reset type. The string
+> +          after "mode-" maps a reboot mode to a vendor-specific reset.
 > +
-> +  reg:
-> +    maxItems: 1
+> +          A vendor-specific reset takes two arguments, a 32-bit reset_type and a
+> +          64-bit cookie. The arguments are encoded as up to three 32-bit cells.
+> +          Each mode property is encoded as mode-xxx = <arg1 arg2[, arg3]>,
+> +          where:
 > +
-> +  vddio-supply:
-> +    description: I/O voltage rail
+> +            - arg1 is reset_type and must be >= 0x80000000.
+> +            - In 2-cell form, arg2 is lower 32 bits of cookie.
+> +            - In 3-cell form, arg2 is high 32 bits of cookie
+> +              and arg3 is low 32 bits of cookie.
 > +
-> +  dvdd-supply:
-> +    description: Digital voltage rail
+> +          All values should be provided as per the PSCI SYSTEM_RESET2
+> +          specification.
 > +
-> +  vci-supply:
-> +    description: Analog voltage rail
+>  patternProperties:
+>    "^power-domain-":
+>      $ref: /schemas/power/power-domain.yaml#
+> @@ -137,6 +174,15 @@ allOf:
+>        required:
+>          - cpu_off
+>          - cpu_on
+> +  - if:
+> +      not:
+> +        properties:
+> +          compatible:
+> +            contains:
+> +              const: arm,psci-1.0
+> +    then:
+> +      properties:
+> +        reboot-mode: false
+>  
+>  additionalProperties: false
+>  
+> @@ -260,4 +306,18 @@ examples:
+>          domain-idle-states = <&cluster_ret>, <&cluster_pwrdn>;
+>        };
+>      };
 > +
-> +required:
-> +  - compatible
-> +  - reg
-> +  - reset-gpios
-> +  - vddio-supply
-> +  - dvdd-supply
-> +  - vci-supply
-> +  - port
+> +  - |+
 > +
-> +unevaluatedProperties: false
+> +    // Case 5: SYSTEM_RESET2 vendor resets
+> +    psci {
+> +      compatible = "arm,psci-1.0";
+> +      method = "smc";
 > +
-> +examples:
-> +  - |
-> +    #include <dt-bindings/gpio/gpio.h>
-> +
-> +    dsi {
-> +        #address-cells = <1>;
-> +        #size-cells = <0>;
-> +
-> +        panel@0 {
-> +            compatible = "boe,bj631jhm-t71-d900";
-> +            reg = <0>;
-> +
-> +            reset-gpios = <&tlmm 12 GPIO_ACTIVE_LOW>;
-> +
-> +            vci-supply = <&vreg_l19b>;
-> +            vddio-supply = <&vreg_l9b>;
-> +            dvdd-supply = <&vreg_oled_dvdd_1p2>;
-> +
-> +            port {
-> +                panel_in_0: endpoint {
-> +                    remote-endpoint = <&dsi0_out>;
-> +                };
-> +            };
-> +        };
+> +      reboot-mode {
+> +        mode-edl = <0x80000000 0x00000001>;
+> +        mode-bootloader = <0x80010001 0x00000002>;
+> +        mode-vendor = <0x80000000 0x00000001 0x00000002>;
+> +      };
 > +    };
-> +
-> +...
+>  ...
 > 
 > -- 
-> 2.55.0
+> 2.34.1
 > 
