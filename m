@@ -1,161 +1,166 @@
-Received: from mail-qk2-f12.google.com (mail-qk2-f12.google.com [74.125.230.204])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from relay.yourmailgateway.de (relay.yourmailgateway.de [188.68.63.98])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5FE395187E1
-	for <linux-arm-msm@vger.kernel.org>; Fri, 18 Sep 2026 16:52:50 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.230.204
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A2FE651A73C;
+	Fri, 18 Sep 2026 16:56:30 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=188.68.63.98
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789750376; cv=none; b=uubLuezAaavUkuGTkfHnDiFSSYYTdDbdOIAN7boUpdXe2ymhPukcSq56wzHU1WFsm7tCAg2KdOXPNFl5UTHz1qDLnlzCovFqCK48o941dhlVzVDgiYu4jyAaSwRG82T7bJl88YkIjUg/KQcJ9S4S3NIBDc1DPZAS3NecNHA7U/Y=
+	t=1789750594; cv=none; b=GeFkE5IdhiRXS8K9xQaykqz5jGgL1jwlh49tju9plZX0LANnY+6iKaFkgCnaoSJp3am/KUVCBUcSmIlldGAZBAYiVyM4K0xdjNA78P0bb6ozOdbzfOlAhZ1ZKh/rUf9wQmSkPI3a8T4WlCQlMTRYcD+xHXZKx8AFTAGX7Hq99Wo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789750376; c=relaxed/simple;
-	bh=irc5KYR38IOfRRboX+pEvk8I8NbKQWukGj6S5mf7trQ=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=sw74WmdYMgClZvew+NsXP8RTYLF5ZMKjAMxuLX9hsXU+X4mhVY6JUeZMPKahX4y/5aB6g4ilVltmSSN+nE08cKk6uHBy5BRQbXm63kASWd1sDWiPcM+JdMQlQpXPfFMheujFAabF1PRVtIf+7eghxzo/wCH7nm1ND5G8iaBBQH0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=riscstar.com; spf=pass smtp.mailfrom=riscstar.com; dkim=pass (2048-bit key) header.d=riscstar-com.20251104.gappssmtp.com header.i=@riscstar-com.20251104.gappssmtp.com header.b=xIc40cFB; arc=none smtp.client-ip=74.125.230.204
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=riscstar.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=riscstar.com
+	s=arc-20240116; t=1789750594; c=relaxed/simple;
+	bh=XojK1aH6MJS/F4EwychKrgpBrWRhiK+a+PkzJpETGJc=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=lAqAz0RQ/PUnTAcxrK9m2fJokEC/GDpmtGeifdQT053896hqNHIa+WsRpnev37RWsn3SJtH+Dl4KhbuGpK6AWHYuVuJHcWoGpxup17IYwaMb5c2IGUuBCgh0ZlQZtDBaXf9u+jJ9ti4PPD1qI2mdizJvx4MeCekstEfLO8ESvwc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=leemhuis.info; spf=pass smtp.mailfrom=leemhuis.info; dkim=pass (2048-bit key) header.d=leemhuis.info header.i=@leemhuis.info header.b=JHtwdE0R; arc=none smtp.client-ip=188.68.63.98
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=leemhuis.info
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=leemhuis.info
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=riscstar-com.20251104.gappssmtp.com header.i=@riscstar-com.20251104.gappssmtp.com header.b="xIc40cFB"
-Received: by mail-qk2-f12.google.com with SMTP id af79cd13be357-939109f067fso122730385a.2
-        for <linux-arm-msm@vger.kernel.org>; Fri, 18 Sep 2026 09:52:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=riscstar-com.20251104.gappssmtp.com; s=20251104; t=1789750364; x=1790355164; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=y6nMczNQ3DZBT2HE1Ncd8RUTZxVgA7izY3+gfm5mgsI=;
-        b=xIc40cFB9r9Bciz3/O4jgdF/VXwoJqm+LTi8lZW1dc0eGceLGmIkT4hmPucK07HAjl
-         ftZnHchBWgdG1SVWQbHWckNGvE5Qchsyr9AV9DTLN1wrWj4rmpvGZMjQklOiiq7I/SgA
-         1wr8+91908TJbhbMkN7D+Y29hDMKgtQ9n3CprcyUxVQ2ZKx07ATX8zL1oG0s0TpnndSM
-         XvrsurvY3gxS7iKyNTV9teaXtFqpasaCt+vS0e7uGLUfEA2Rm14zKxQU0rWoHvouPGiH
-         YsmbqSgoe08avt5OAbRT3hT9RLgNtxewvy5jkWD+tZ8dqzii58nD54d9Ts/Wo1yzKrEw
-         F5Vg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1789750364; x=1790355164;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=y6nMczNQ3DZBT2HE1Ncd8RUTZxVgA7izY3+gfm5mgsI=;
-        b=t3D4vxlnOf8B2igEU1DOgKW0s4ANkUHT7c+jfpB39uRV0wdbvXpcvURsbDD7vjidLl
-         ZGlaiIsELTWg/2Grt2PGWw0DJtOq4TDWKgsc0CHZlVdHF7dVzuwTIddnQLoPYqCO424i
-         KwI/HEPQSCQSSGYnXgAV75gtU2U7nX3wrpVlA3GDLlIY3mxoJOQL+JEQdF8WIrf7cRSu
-         UQB9AL22O+sieoZquhJwezeMTjItJME941TPRjxcja8Ke2G4WLBKVfXSNX5c2IlXw4Dv
-         7TKvmi9VVn2hXFGIU1TqYtcxD/7M7rxb0TzS6NGDqEo+FAHBEdUb0hl6mSYK33bpxFHZ
-         UWiQ==
-X-Forwarded-Encrypted: i=1; AKwUvBx0Ba8mFt4kmsCjWe7plKv65Sh7wJFWCW6JScsSibjT+wGWC3OLZd9maa6scWBX2PKfLrlieDmk/xyUy8zz@vger.kernel.org
-X-Gm-Message-State: AFuF++lMwD7Zzv6Yg0VBSDTUPB402zPBAH4eSolpQwV7Z+Age8Gt6s/v
-	TM1tgL6QOITVmR6Z0Q/K2+g6uZ2CvPbIWG7JLBUnB9LL5hkEraXyZ3WMSM9uspTkoqk=
-X-Gm-Gg: AYBFou1BPt8113dMojwsb1V/ZRfpJL9GcL7R+oGpDbbE6KgxYDcqLYdaN7k9hAYVDXH
-	utaKET83NIsRZhC3sN0+eDlifujxAzYEYfkzZKJ51qj0/JHrXprsCn8OCMbT/mrxqUqGfUoyWUX
-	taFh9NOfz1WH7zkuLzV9kYoPjY9VNNhDPxwCIvufZEcb7fwsdhrY0jJBgjrsud86xT1DeRk59Jc
-	MAWpQ7CWB1t/UkpH4Cg7E7KenNoPAZmvCHnt3WOYOYYK93TUKXIzZ/CL5eLxI9YW2jEqqHfojl7
-	teLP8IrtxxgGhOUtIM79rUHj4ffLv/7SGPjcjBWpikWQ42cubGRxRpEBQjTmSZDv9Zl6YdOwr2J
-	3ORSdOIoU7Wv4rr9sLsgA7QEkhz2yQscK6f0lSHWsSAUVQnz1cxhhKxA+kCRjG/VthvbRePcz7M
-	QeJWFMz2rO/oKK3MTtd9xwb+bdwwKC0cer3sYVjvq/m9hStVSLSbUL5Q6lVsD+Gyh9sALAEvWfU
-	7o=
-X-Received: by 2002:a05:620a:a40f:10b0:93b:eac0:ddd5 with SMTP id af79cd13be357-93beac0de5amr98270485a.51.1789750364309;
-        Fri, 18 Sep 2026 09:52:44 -0700 (PDT)
-Received: from zippy.localdomain ([73.62.185.64])
-        by smtp.gmail.com with ESMTPSA id af79cd13be357-93be0f0762dsm183582785a.39.2026.09.18.09.52.42
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 18 Sep 2026 09:52:44 -0700 (PDT)
-From: Alex Elder <elder@riscstar.com>
-To: sboyd@kernel.org,
-	bmasney+clk@redhat.com,
-	jbrunet+clk@baylibre.com,
-	robh@kernel.org,
-	krzk+dt@kernel.org,
-	conor+dt@kernel.org,
-	lee@kernel.org,
-	andersson@kernel.org,
-	konradybcio@kernel.org,
-	abelvesa@kernel.org,
-	kees@kernel.org,
-	gustavoars@kernel.org,
-	p.zabel@pengutronix.de
-Cc: daniel@riscstar.com,
-	mohd.anwar@oss.qualcomm.com,
-	lorenzo.bianconi@oss.qualcomm.com,
-	linux-clk@vger.kernel.org,
-	devicetree@vger.kernel.org,
-	mfd@lists.linux.dev,
-	linux-arm-msm@vger.kernel.org,
-	linux-hardening@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: [PATCH 4/4] arm64: dts: qcom: qcs6490-rb3gen2: add the clock controller
-Date: Fri, 18 Sep 2026 11:52:33 -0500
-Message-ID: <20260918165234.687224-5-elder@riscstar.com>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260918165234.687224-1-elder@riscstar.com>
-References: <20260918165234.687224-1-elder@riscstar.com>
+	dkim=pass (2048-bit key) header.d=leemhuis.info header.i=@leemhuis.info header.b="JHtwdE0R"
+Received: from mors-relay-2501.netcup.net (localhost [127.0.0.1])
+	by mors-relay-2501.netcup.net (Postfix) with ESMTPS id 4hmf0X0NG9z6LmM;
+	Fri, 18 Sep 2026 18:56:28 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=leemhuis.info;
+	s=key2; t=1789750588;
+	bh=XojK1aH6MJS/F4EwychKrgpBrWRhiK+a+PkzJpETGJc=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+	b=JHtwdE0Ro0nfZfESGhetZliNaMXZJlll83bNUMjUk4Uw4qgzTCRrDobrFfkNphgdU
+	 ORz9sK3Zfphhcu5iCUeCSCvf1zYJYB6yL40lHI5/WiYa83NoTOFeigJhJcCN8w7qfW
+	 hSWJSDbl6vbZfVondy0HpnOcnPH3Tx9wt+xKnrWfQsQO/5ZqhDJPtBJ5LwY6x86X/i
+	 t+LIdy6668sHd4ghJjC1X0PFXM9GNJ1f0ZwH9t60rnn7L/wZ4zuKOLs0JVYdpws79m
+	 Y4SEtHkNLdJX29PQ4dWUBcsudlK9Na5eu74aqiG0QaNTq78lap/ezdpeuNRd1hWkR1
+	 nOKOvtkTcocvA==
+Received: from policy02-mors.netcup.net (unknown [46.38.225.35])
+	by mors-relay-2501.netcup.net (Postfix) with ESMTPS id 4hmf0W6ksVz4y71;
+	Fri, 18 Sep 2026 18:56:27 +0200 (CEST)
+Received: from mxe9fb.netcup.net (unknown [10.243.12.53])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange ECDHE (P-256) server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by policy02-mors.netcup.net (Postfix) with ESMTPS id 4hmf0V3cJ5z8svY;
+	Fri, 18 Sep 2026 18:56:26 +0200 (CEST)
+Received: from [IPV6:2a02:8108:8984:1d00:a0cf:1912:4be:477f] (unknown [IPv6:2a02:8108:8984:1d00:a0cf:1912:4be:477f])
+	by mxe9fb.netcup.net (Postfix) with ESMTPSA id E7D6A5FA75;
+	Fri, 18 Sep 2026 18:56:20 +0200 (CEST)
+Authentication-Results: mxe9fb;
+        spf=pass (sender IP is 2a02:8108:8984:1d00:a0cf:1912:4be:477f) smtp.mailfrom=linux@leemhuis.info smtp.helo=[IPV6:2a02:8108:8984:1d00:a0cf:1912:4be:477f]
+Received-SPF: pass (mxe9fb: connection is authenticated)
+Message-ID: <85c50e6f-a270-4755-8576-c4ba2b961e26@leemhuis.info>
+Date: Fri, 18 Sep 2026 18:56:19 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH net] Revert "net: qrtr: Send HELLO message on endpoint
+ register"
+To: Manivannan Sadhasivam <mani@kernel.org>
+Cc: Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
+ Simon Horman <horms@kernel.org>, "David S . Miller" <davem@davemloft.net>,
+ Eric Dumazet <edumazet@google.com>, linux-arm-msm@vger.kernel.org,
+ netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
+ regressions@lists.linux.dev, Chris Lew <christopher.lew@oss.qualcomm.com>,
+ Deepak Kumar Singh <deepak.singh@oss.qualcomm.com>,
+ Pranav Mahesh Phansalkar <pranav.phansalkar@oss.qualcomm.com>,
+ Daniel J Blueman <daniel@quora.org>, Takashi Iwai <tiwai@suse.de>,
+ Vlastimil Babka <vbabka@suse.com>,
+ Jeff Johnson <jeff.johnson@oss.qualcomm.com>
+References: <20260918101621.2848322-1-linux@leemhuis.info>
+ <lgyho3avi65edtr4xggbsrja47cjhqbamrnmchnfh4blmyygd6@bhotovqqqubj>
+From: Thorsten Leemhuis <linux@leemhuis.info>
+Content-Language: de-DE, en-US
+Autocrypt: addr=linux@leemhuis.info; keydata=
+ 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 MEK4
+In-Reply-To: <lgyho3avi65edtr4xggbsrja47cjhqbamrnmchnfh4blmyygd6@bhotovqqqubj>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-PPP-Message-ID: <178975058160.2895271.1887392753712195921@mxe9fb.netcup.net>
+X-Rspamd-Server: rspamd-worker-8404
+X-Rspamd-Queue-Id: E7D6A5FA75
+X-NC-CID: JT6oaaAe5xXcb6MDvAu5WoBsYUw6B6puDrFY4xUydwv4Kb1OK3k=
 
-The clock (and reset) controller within the TC9564 SoC is accessed
-via a PCI endpoint bus through BAR 4 of the first embedded PCIe
-function.  A syscon node is created to provide access to a range
-of memory that is used by the clock/reset controller and shared
-by other devices.
+On 9/18/26 18:37, Manivannan Sadhasivam wrote:
+> On Fri, Sep 18, 2026 at 12:16:21PM +0200, Thorsten Leemhuis wrote:
+>> This reverts commit 544d85de4dc22c01badfd8cefa59829ce35c4858.
+>>
+>> It causes suspend and resume problems for numerous people, including
+>> maintainers and developers of ath wifi drivers. A fix was proposed[1],
+>> but did not get any traction, so go for a revert instead.
+>>
+>> Cc: Chris Lew <christopher.lew@oss.qualcomm.com>
+>> Cc: Deepak Kumar Singh <deepak.singh@oss.qualcomm.com>
+>> Cc: Pranav Mahesh Phansalkar <pranav.phansalkar@oss.qualcomm.com>
+>> Reported-by: Daniel J Blueman <daniel@quora.org>
+>> Link: https://lore.kernel.org/all/20260909055846.16539-1-daniel@quora.org/ [1]
+>> Reported-by: Takashi Iwai <tiwai@suse.de>
+>> Link: https://lore.kernel.org/all/87a4plsg4w.wl-tiwai@suse.de/
+>> Reported-by: Vlastimil Babka <vbabka@suse.com>
+>> Link: https://lore.kernel.org/all/ab1491bb-cca5-4145-ac7d-31c966abf7b4@suse.com/
+>> Reported-by: Jeff Johnson <jeff.johnson@oss.qualcomm.com>
+>> Link: https://lore.kernel.org/all/6257c447-788d-4362-851e-0d552bcf7c56@oss.qualcomm.com/
+>> Signed-off-by: Thorsten Leemhuis <linux@leemhuis.info>
+>> ---
+>>
+>> I'm not affected by this, but due to all those reporters mentioned above
+>> it seems it would be good to get this fixed for 7.3-rc4, as Linus' rule
+>> of thumb wrt to fixing regressions is "generally be 'within a week',
+>> preferably before the next rc". Which is why I currently plan to ask
+>> Linus to pull this directly. If this is a bad idea, just tell me.
+>>
+>> The patch from Daniel linked above[1] could have fixed the problem, but
+>> none of the developers of the culprit or the maintainers for this area
+>> commented on it within a week
+> 
+> Really?
+> https://lore.kernel.org/all/hcr4woicsnz3pbhzlguuwjlego7yli3znhjmsx4cdz66xa74zd@wjtle2yslc4b/
 
-Co-developed-by: Daniel Thompson <daniel@riscstar.com>
-Signed-off-by: Daniel Thompson <daniel@riscstar.com>
-Signed-off-by: Alex Elder <elder@riscstar.com>
----
- arch/arm64/boot/dts/qcom/qcs6490-rb3gen2.dts | 22 +++++++++++++++++++-
- 1 file changed, 21 insertions(+), 1 deletion(-)
+Apologies, I had forgotten about that one.
+> FWIW, I don't mind a revert too, but the comment was misleading.
+Just tell me what you would prefer, you are likely the best one to judge
+here. I just think it would be great to get this resolved for -rc4 and
+your option would really help there. Sounds like you would prefer that
+fix, is that right?
 
-diff --git a/arch/arm64/boot/dts/qcom/qcs6490-rb3gen2.dts b/arch/arm64/boot/dts/qcom/qcs6490-rb3gen2.dts
-index 5b7f5292a8864..a99ee153e2473 100644
---- a/arch/arm64/boot/dts/qcom/qcs6490-rb3gen2.dts
-+++ b/arch/arm64/boot/dts/qcom/qcs6490-rb3gen2.dts
-@@ -9,6 +9,7 @@
- #define PM7250B_SID 8
- #define PM7250B_SID1 9
- 
-+#include <dt-bindings/clock/toshiba,tc9564.h>
- #include <dt-bindings/iio/qcom,spmi-adc7-pmk8350.h>
- #include <dt-bindings/iio/qcom,spmi-adc7-pm7325.h>
- #include <dt-bindings/leds/common.h>
-@@ -983,7 +984,7 @@ dev@0,1 {
- 					 <0x2 0x0 0x0  0x83050100 0x0 0x4000  0x0 0x80000>,
- 					 <0x4 0x0 0x0  0x83050100 0x0 0x84000  0x0 0x200000>;
- 
--				pci-ep-bus@4 {
-+				pcie_s1b5d0f0_bar4_bus: pci-ep-bus@4 {
- 					compatible = "simple-bus";
- 					#address-cells = <1>;
- 					#size-cells = <1>;
-@@ -995,6 +996,25 @@ pci-ep-bus@4 {
- 	};
- };
- 
-+&pcie_s1b5d0f0_bar4_bus {
-+	syscon@0 {
-+		compatible = "toshiba,tc9564-config",
-+			     "syscon",
-+			     "simple-mfd";
-+		reg = <0x0 0x2000>;
-+		#address-cells = <1>;
-+		#size-cells = <1>;
-+		ranges;
-+
-+		tc9564_clock0: clock@1004 {
-+			compatible = "toshiba,tc9564-clock";
-+			reg = <0x1004 0x10>;
-+			#clock-cells = <1>;
-+			#reset-cells = <1>;
-+		};
-+	};
-+};
-+
- &pm7325_gpios {
- 	kypd_vol_up_n: kypd-vol-up-n-state {
- 		pins = "gpio6";
--- 
-2.53.0
-
+Ciao, Thorsten
