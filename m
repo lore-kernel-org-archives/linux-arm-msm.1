@@ -1,33 +1,87 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 06B094BF94F;
-	Fri, 18 Sep 2026 10:46:29 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 36DD84D7D45
+	for <linux-arm-msm@vger.kernel.org>; Fri, 18 Sep 2026 10:52:25 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789728391; cv=none; b=qSGC5K8Fql6NcbJ4+iLyYBgaxjIp2+vSne0rVk5bFC5OGt7Jbd4OuYBl0Ye0Vf4vqfchR5Hy8toU78GLVo09IESg380mYVzjrKtp+0am9ZoaUOGRKr/M5t4kqFx2VUD5vTMLZsreJtE3y/4vw25QBbe6EqZ/5d4OoxFU/F+Kka0=
+	t=1789728747; cv=none; b=a3Mtglq5GkPhkBuEAvzI2yTwBq1dpr3eUgJqhhEqzU6h5wdBcjwvnvwTDas+7Fjwhtu5yf+fpGzSsqVq9S1mzVHU8gv56kBcjJF0hglXujTGtYPdr12DxTodZCsYndGKlxsvGoHo6cMt94FRGSWaALbBp5ZyMIk5BSv/QS5V53o=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789728391; c=relaxed/simple;
-	bh=f9HZq1mmoFOFmVbL/4evuLOONhtuNXvrvfaZKVsljZo=;
-	h=Message-ID:Date:MIME-Version:Subject:To:References:From:
-	 In-Reply-To:Content-Type; b=dhgvjqdAFhmVHY8B+h6q7SMeA6EqCgwYXTdjHeXU9bnimmrsZp6xDOwZcgK1Boz72DRz1udb62jMiIec+t2UHiEktJRgS2KWvzY8f575LQfqjrsj4SKcs9irfyR6jiRIQb3Oibba4GSarDKZlJEndtN+0JfzLleeb2ARYhpH250=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=IJPDJdpi; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1789728747; c=relaxed/simple;
+	bh=KmN1ZuicIl3zQnKA23ZR6JOVKKX7TbTIEnZT1K3ikZI=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=Kwvfek8W5a6yFYV+anNoRCOARKyk9GFIpbTkvPNKEckWX+0+Mbsx1WrwSpADyYf+AZsRs/KkjLqm4coBIx9cjx9OyevTxvvvqhqNzy0k304pKMqymTA8enqxkT5d+8PppDelFY32VOTatzjg62GsG1EzYDefXrjcGzonAuXQNKM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=LNyehHMm; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=RFXxIIgT; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="IJPDJdpi"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9C93B1F000FF;
-	Fri, 18 Sep 2026 10:46:23 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1789728389;
-	bh=mT+NMygNmsXH7gF8PxoVkaZFM13sJt1FS65AWCMQWnw=;
-	h=Date:Subject:To:References:From:In-Reply-To;
-	b=IJPDJdpiNMELRQQI7Cf8CB5CQWpFm+sNVRPgJ/z0zd8YFV7qAOl1/skzO7CSEc1BT
-	 xwbmfJBxwrOLPEsNULqncQ5dXvXNB+nwg1o/n4xJ7HflNbkupUUjspGRXPqiaoefGm
-	 ISdZGxki7VdldwJ9vQUVNFD1pyFSao6rn5LxfqYkLQLdna/aa0DppFuhJHEtf17+V/
-	 U+7rgX5T8rTh6r9QmZ3rLSvYcGWuc/kthuBDRApCH//VoXwj5Y82IZHbY1JBomBUbj
-	 wIh3H64ABBiQpzdul7AMKAsLC6St6GgfGj4RNZZEro7vaT2q2FEUpcg1M0Tlg9l+K1
-	 TRJEUA3yYj5aw==
-Message-ID: <1505ca0c-4a31-4673-bbe0-8474133fc504@kernel.org>
-Date: Fri, 18 Sep 2026 12:46:20 +0200
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="LNyehHMm";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="RFXxIIgT"
+Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68IAXIto372366
+	for <linux-arm-msm@vger.kernel.org>; Fri, 18 Sep 2026 10:52:25 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	KmN1ZuicIl3zQnKA23ZR6JOVKKX7TbTIEnZT1K3ikZI=; b=LNyehHMmb+JfDwnk
+	sBDEIrsc97u5Id9GEQVz82GsTG1DwAl5yduCOUaw0ROZDq2FkAyDN8aRnHadQMeg
+	b2HH3DztU9KKK4bbVrUCTGdz/yjeHECsZvLwpQXp7LTGcIP7NJMAaao0B4ZsvzMH
+	IIPC+RIYbULQlaQU17BNBAZKZmdBx3APYpoF5KrUX9p0CcNg6S6ECrxMbVEHUupz
+	XAmkBPTjJa6N3xJvcBBWdyubmXmnenonutrStYGlbpLXX9mgpiJnt1A08ee7vqm4
+	36Dwh7XZv80y4vjjbDI5dXxtn7gpC1zJ2XHfc5BPj40/w6KUAkju5YGuVeiX9kEA
+	j/UpmA==
+Received: from mail-pg1-f198.google.com (mail-pg1-f198.google.com [209.85.215.198])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gs2390ga6-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 18 Sep 2026 10:52:24 +0000 (GMT)
+Received: by mail-pg1-f198.google.com with SMTP id 41be03b00d2f7-cc4ac5feaa4so816707a12.1
+        for <linux-arm-msm@vger.kernel.org>; Fri, 18 Sep 2026 03:52:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1789728744; x=1790333544; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=KmN1ZuicIl3zQnKA23ZR6JOVKKX7TbTIEnZT1K3ikZI=;
+        b=RFXxIIgT8TFnpVSk0DzhFS1+AVrzQ7GE4VLoPhFEYEDfOJx8WRN639hcxu8t+4eYRu
+         K+507eV8d9Gbt3dl21NbG/DPtlwEFFm/PmIuhgbypF1V2VVzVaOX/5J2Qw9p14xp4+01
+         DLYwN0n5Ax9gblx6ttsN1GA+vuDINyGEzlprOBV6+fXjaTs+xyhmVZ5rDPgiTSq70fTw
+         cCLr1PIXgPw3bbyy/KPDhfq4TPCVuLc3JXnzZbYO6aoblLYfNEtFHnLIHVp7RnJLr4Xf
+         HXe0N4kCumvVERXsnBXOhXdk6o32Mp8WMNhrV1QIrhJgRj7nlgUPZFJ4xzQ/yiI4X9rX
+         G/qA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1789728744; x=1790333544;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=KmN1ZuicIl3zQnKA23ZR6JOVKKX7TbTIEnZT1K3ikZI=;
+        b=M6ev6EVSOVX9f5KSOGTcXO/kHrYFeIu10QaQExyHE34lTmcru5fhff+oNrtE91aqNX
+         YPWVmu0sCyIhKCZ5VtH4j/pQghx3Uj99zzjgkAuPUOCNtSeQ8kHEaC1tZcKQG9OUjJI/
+         MFjMX1bxYsTTiOyN1O/8KzCOgKB4IPFV3yZRnlHuUOumrm/bDxGG+mxQz6qK/cLGJvZi
+         S6w6xHJLx4b4cad0VOGcvBETlTs0e27jpx0Ym94nL4mF2QYoHPlzsb/7ebCaRFDJxffy
+         3i+dfwwiibfxTXYm5IFiL7iUanJSEKgEGzcOk5BhF+9p6eBy8goeGDm62QAVRRc3v1G3
+         x/Fg==
+X-Forwarded-Encrypted: i=1; AKwUvBz4iWzLgvbGLEQ2ueWkOfjyv/Ai5VEi6AwKGInEJqGNgXaiji9T9jhDCJvk8d88RtrPAPjmhqlewI5tvhD+@vger.kernel.org
+X-Gm-Message-State: AFuF++nM6CLSCJcxvZ3o+PHbNdxqZKncot6q+cb2bSnIzb9azrRQOXCO
+	sLKBWfe+mbkwA1AY3WP6H4Q20c1Qb8P8WXkr5fwpuiBy8btjC9En3KZJzTs4cZGVviKk4fTk/il
+	+9G7+0sK9MyG/Jf4YkMVSL+8OnF76I8WjLaf4Wb2YS4OfXLjsrhRci+nz4hgnCUCIv5KS
+X-Gm-Gg: AYBFou2m9Nfo5zjbqgwQazB5DeQAKmvdphDNSdnrQ/J9IPs690R4GveRje82hCPOdGT
+	Dq9oNNTlgSMndOgmmUyFXppDlQlofk2+gBy1qEc4fMbrIrl0dKdlfIO8BQ2Tm1eeQqZbkfK3mK2
+	ZeJUv8R+CY1yPCUEa9mWYrbjQSNogoQZsTi8ZgoU5eWS8qAHsztdoBD5qn1HipBNqrCLbt+3jIT
+	PI1gaSOftJrQWrS3TDzwN3QosnyYlbdHwN3gHMZwnH2QSpFU0BZZpWHEvdaaMcHzi6reABQdfLD
+	WlrGxSehZ3hWlqwbAkW8t+D+uPvTJvzGl1dUD0lUiJKWKFPerC9Lm5fLTXy33/L944w5GDZiWwX
+	hWU+3+wzeD9kJkWEmX8io60FucClLk0l9dA==
+X-Received: by 2002:a05:6a20:6f09:b0:3d0:abdb:de03 with SMTP id adf61e73a8af0-3dd8c3f26a2mr4358673637.2.1789728743854;
+        Fri, 18 Sep 2026 03:52:23 -0700 (PDT)
+X-Received: by 2002:a05:6a20:6f09:b0:3d0:abdb:de03 with SMTP id adf61e73a8af0-3dd8c3f26a2mr4358630637.2.1789728743466;
+        Fri, 18 Sep 2026 03:52:23 -0700 (PDT)
+Received: from [10.218.42.145] ([202.46.22.19])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-33c287b023bsm4369596eec.23.2026.09.18.03.52.18
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Fri, 18 Sep 2026 03:52:23 -0700 (PDT)
+Message-ID: <6e314a3f-c73c-461b-86c7-472ef02e440a@oss.qualcomm.com>
+Date: Fri, 18 Sep 2026 16:22:16 +0530
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -35,100 +89,75 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] media: dt-bindings: Correct white-space style
-To: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>,
- Keke Li <keke.li@amlogic.com>, Mauro Carvalho Chehab <mchehab@kernel.org>,
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
- Conor Dooley <conor+dt@kernel.org>, Zhi Mao <zhi.mao@mediatek.com>,
- Tiffany Lin <tiffany.lin@mediatek.com>,
- Andrew-CT Chen <andrew-ct.chen@mediatek.com>,
- Yunfei Dong <yunfei.dong@mediatek.com>, Bin Liu <bin.liu@mediatek.com>,
- Vikash Garodia <vikash.garodia@oss.qualcomm.com>,
- Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>,
- Bryan O'Donoghue <bod@kernel.org>,
- Jacopo Mondi <jacopo.mondi@ideasonboard.com>,
- Raspberry Pi Kernel Maintenance <kernel-list@raspberrypi.com>,
- Florian Fainelli <florian.fainelli@broadcom.com>,
- Broadcom internal kernel review list
- <bcm-kernel-feedback-list@broadcom.com>,
- Matthias Brugger <matthias.bgg@gmail.com>,
- AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>,
- Xia Jiang <xia.jiang@mediatek.com>,
- Stanimir Varbanov <stanimir.varbanov@linaro.org>,
- linux-media@vger.kernel.org, devicetree@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org,
- linux-rpi-kernel@lists.infradead.org, linux-arm-kernel@lists.infradead.org,
- linux-mediatek@lists.infradead.org
-References: <20260801195528.235230-2-krzysztof.kozlowski@oss.qualcomm.com>
-From: Krzysztof Kozlowski <krzk@kernel.org>
+Subject: Re: [PATCH v3 0/6] bus: mhi: host: mhi_phc: Add support for PHC over
+ MHI
+To: Jakub Kicinski <kuba@kernel.org>
+Cc: Manivannan Sadhasivam <mani@kernel.org>,
+        Jeff Hugo <jeff.hugo@oss.qualcomm.com>,
+        Richard Cochran <richardcochran@gmail.com>, mhi@lists.linux.dev,
+        linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
+        netdev@vger.kernel.org,
+        Vivek Pernamitta
+ <vivek.pernamitta@oss.qualcomm.com>,
+        Sivareddy Surasani <sivareddy.surasani@oss.qualcomm.com>,
+        Taniya Das <taniya.das@oss.qualcomm.com>,
+        Imran Shaik <imran.shaik@oss.qualcomm.com>,
+        Vivek Pernamitta <quic_vpernami@quicinc.com>
+References: <20260917-tsc_timesync-v3-0-6826d5d2d527@oss.qualcomm.com>
+ <20260917074804.08818813@kernel.org>
 Content-Language: en-US
-Autocrypt: addr=krzk@kernel.org; keydata=
- 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
-In-Reply-To: <20260801195528.235230-2-krzysztof.kozlowski@oss.qualcomm.com>
+From: Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>
+In-Reply-To: <20260917074804.08818813@kernel.org>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTE4MDE1MSBTYWx0ZWRfX27Q3HNdXIlhA
+ Z7jEQPIOlWA5qq5G7wSeR7P+Z7yRQ9Ag94gHIXbQjkYB2yan46k64ftxE2x+1jKGKuT1IUKsJNe
+ uKlfhv/3e8VH4/NKQWa+aUVepzxrPAk=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTE4MDE1MSBTYWx0ZWRfX3JqkoVPOYnbQ
+ +y1skbaWDBhhic7IkuOfZQYfnXvWjbf3d2Fe0ojUp/sz5mtPCqyFbbhxBZX0CtcVE9AR4eYIRHJ
+ 5yb2wmhnLHYYnc8JiUeOz99eSLmssDgMOlyhaa6YgK6rH4MKKc+jhvfXIOfQkpW9Gj/CIM2eIUT
+ sc//rBF6CKtrnPjZvUn1PJEgkadxC8I2k0ln5HWHtqQR4XADwrIzpOS8BREfBNxxx8ddaGGHFgT
+ KXufYWriKpBrB4HFFPysyMhS0cjdC4wnAViT/ubuHLdLBfdz5iJ7OFDqkr71E3GWwhAVqprX0qM
+ 93wTKLWfnJEwwgKMwru+7WnPD7uIC1NMdzoP3Tu7EbUbOvo+sRJ/aEcIHVX24UOj3fCRNiZnWxG
+ GUD04q0yVWsGnCP4w/NKXY09HH9RIDmLMhCfmYyZvVQco2lLfe6e1ko2bVZfOv/6w0U/gPaj280
+ QFypPvrDQk4gJC1ZsNg==
+X-Proofpoint-ORIG-GUID: ndPigEp43Iq9-i9iDADCCzi4rISWs6DA
+X-Authority-Analysis: v=2.4 cv=I7zw19gg c=1 sm=1 tr=0 ts=6aad17e8 cx=c_pps
+ a=Qgeoaf8Lrialg5Z894R3/Q==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
+ a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
+ a=VwQbUJbxAAAA:8 a=BgRFT2qS3vt3802lDrkA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+ a=x9snwWr2DeNwDh03kgHS:22
+X-Proofpoint-GUID: ndPigEp43Iq9-i9iDADCCzi4rISWs6DA
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-09-18_03,2026-09-16_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ lowpriorityscore=0 suspectscore=0 bulkscore=0 clxscore=1015 impostorscore=0
+ priorityscore=1501 adultscore=0 phishscore=0 malwarescore=0 spamscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609180151
 
-On 01/08/2026 21:55, Krzysztof Kozlowski wrote:
-> Correct a few white-space issues, like double space after '=' or before
-> bracket '{' characters, which will be flagged by dt-check-style.  No
-> functional changes.
-> 
-> Signed-off-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
-> ---
->  .../bindings/media/amlogic,c3-mipi-csi2.yaml  |  4 +-
->  .../bindings/media/i2c/galaxycore,gc05a2.yaml |  2 +-
->  .../media/mediatek,vcodec-encoder.yaml        |  2 +-
->  .../bindings/media/mediatek-jpeg-decoder.yaml |  4 +-
->  .../bindings/media/mediatek-jpeg-encoder.yaml |  2 +-
->  .../bindings/media/qcom,msm8996-venus.yaml    | 40 +++++++++----------
->  .../bindings/media/raspberrypi,pispbe.yaml    |  2 +-
->  7 files changed, 28 insertions(+), 28 deletions(-)
 
-This received reviews, is trivial, waits on the lists for 1.5 monts and
-it seems people are repeating what I did.
 
-I understand this won't be picked up by media.
+On 9/17/2026 8:18 PM, Jakub Kicinski wrote:
+> On Thu, 17 Sep 2026 12:38:01 +0530 Krishna Chaitanya Chundru wrote:
+>> Subject: [PATCH v3 0/6] bus: mhi: host: mhi_phc: Add support for PHC over MHI
+> The MHI "bus" is the worst abstraction I've seen. You're turning it
+> into "qualcomms corner of the kernel". The PHC drivers belong in
+> drivers/ptp/
+>
+> Carry this until told otherwise:
+>
+> Nacked-by: Jakub Kicinski <kuba@kernel.org>
+Thanks for the feedback.
 
-Best regards,
-Krzysztof
+We agree that the PHC driver does not belong under the MHI bus.
+In the next revision, we'll move the PHC driver to drivers/ptp 
+
+Since the concern raised by the NAK is being addressed by moving the
+driver out of drivers/bus/mhi, I'll drop the Nacked-by tag in the next
+revision.
+
+- Krishna Chaitanya.
+
