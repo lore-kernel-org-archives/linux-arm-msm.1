@@ -1,116 +1,195 @@
-Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wm2-f12.google.com (mail-wm2-f12.google.com [74.125.225.140])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1352149C4B2
-	for <linux-arm-msm@vger.kernel.org>; Fri, 18 Sep 2026 07:11:47 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.171.202.116
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 990B92E5B02
+	for <linux-arm-msm@vger.kernel.org>; Fri, 18 Sep 2026 07:29:10 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.225.140
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789715512; cv=none; b=LQOeUFB3p5902+lnl0d3CY9Lr3IKArwVyFlKNGYXPGtRViUY3WQsTE1wTg59f6nISGhPCz9EuEOtduYPEFCrXDNQplJuOMI8Zfc1fbn7LpqV2yWDX+4wqQv2z+7vtDvpOn0rHqzXhzJ1r4m0xEI0tOxcvYdKtGJwVbXyTkKFFj0=
+	t=1789716557; cv=none; b=jPFqDshIKhpOuv0k58HCfrStyLt7ncCJJkj4itDYNpDhsZA8EtYJWn3tfdwvYt7YVqv9KIeHI9xMSL4Ug/McNtlwiKPG62zwblSeIZSunWdb5r3FlrVvMK8HjStUmHzcz43oQSIkGbfgghXafqL3MtwbJ12hCWsfvmDPC+WBVr8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789715512; c=relaxed/simple;
-	bh=RZtsoVxa1xJ+1U2wH9GbRQgtGgSK3nZ1kCLsz2PhByg=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=m0nbzlzvPLcwt6LjPuGstRQziRokPKEb2Lv5sggeGpPy4/xcX7bj8sLQ2d1iovwWga336vpRu6+16Ie21Qke7Fo9U3UWkjMBAKtukDp942rVkdexHnMqMUPATbqfWfJkdgaybUaleruE8I38g9+Sku+SSH25KzdU7AxOPAkYafM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=BOn559NG; arc=none smtp.client-ip=185.171.202.116
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
+	s=arc-20240116; t=1789716557; c=relaxed/simple;
+	bh=CrfB5Rz0RrvGaZsIayezXrztszc5vqvtS3GZl43Wk9M=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=AdSNpioahpVcKhcx90oZJyFtIKofH2JRdnCBtHdpaViXK2aluot06yILpmaYWMxCkjR//m/nX76U3ZgP6exkTTm9uhd+te3DKqxDo+X7Ue6lG6wP3sK3hetIEXoQ3d3Sp21685vq2c7ZPo/drO8gzIKTXwrQq7WlPHJKoH6ikk0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=MYxEEq2F; arc=none smtp.client-ip=74.125.225.140
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="BOn559NG"
-Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
-	by smtpout-04.galae.net (Postfix) with ESMTPS id BFAA3C58469;
-	Fri, 18 Sep 2026 07:12:29 +0000 (UTC)
-Received: from mail.galae.net (mail.galae.net [212.83.136.155])
-	by smtpout-01.galae.net (Postfix) with ESMTPS id E270960649;
-	Fri, 18 Sep 2026 07:11:44 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id 8FDDB11C7B021;
-	Fri, 18 Sep 2026 09:11:33 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
-	t=1789715503; h=from:subject:date:message-id:to:cc:mime-version:content-type:
-	 content-transfer-encoding:content-language:in-reply-to:references;
-	bh=ONcQ26rozGTeYTFN4AmRp548glZjumb6wG79sSd/wGw=;
-	b=BOn559NGFM4JJTDaDZomXpW+HeR6L1FpzuDZcpegacC0EWH17CgOUh8GaZeLbsSQA+OKgI
-	YJqBv3xsMKPOjMOSHWrbzoJz6mPq8JbhfWjuIQhyAJOi23et+j6/9UkTWFXjrVbEo+DXBA
-	LAHVKlG8pvIOHGBjNnC8FqtxEt6J2+/6uHVGmb2y5eHgB1/ziSBondVCal7Tk1qz3mhkpx
-	roCnuoCqnGySL7UjrqsowJSlJEqVDnviYjtCb7Rt0e71lCmECtuljGFyXLbqKlKmp+HlbT
-	zlpmRCdB42oHn9bH3HrcRcJC6LclwNeN7n8bUBjVSUtQXqS+mt3VqKtAijKPrA==
-Message-ID: <986afd25-f69d-4b73-9e7d-f1403a1c6e6e@bootlin.com>
-Date: Fri, 18 Sep 2026 09:11:32 +0200
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="MYxEEq2F"
+Received: by mail-wm2-f12.google.com with SMTP id 5b1f17b1804b1-49cd38e0e5dso5617575e9.2
+        for <linux-arm-msm@vger.kernel.org>; Fri, 18 Sep 2026 00:29:09 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google; t=1789716546; x=1790321346; darn=vger.kernel.org;
+        h=cc:to:message-id:content-transfer-encoding:content-type
+         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=vR5Hf5/Fo4mKQwK6kNI3oaShZRKQk0ZPQPkNgIO7ehQ=;
+        b=MYxEEq2FXBwujNIcVknT6GwPJwpD7/dsir0fEmS03YiyVeRr4n1bllnboY3Tc15/me
+         lCPKnXK1O/rVflsbFuXekjSe9geavGpV+FCbNryr9zYI/gd87VsEsctJquWDVDzylcv5
+         TjHPAGXJ5ypVrCCxXl6tCImMwdWZgFY8zOmszuiH+DgE6lo540ChEFnCDT8LnSxdePMa
+         0l0Cy1TBma583PAApDTHfUaZncNVe1Q5V5oNoasEmo4Tv2E8SLzNU40FZ4mvpgQ5LAWe
+         ZV67KXOlnCdNWfbD17mD32axEIYPOrc6grqV5FrCrPFD7uwi6E6iZ43k1PZaWA9cQg5d
+         Gcvw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1789716546; x=1790321346;
+        h=cc:to:message-id:content-transfer-encoding:content-type
+         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to:content-type;
+        bh=vR5Hf5/Fo4mKQwK6kNI3oaShZRKQk0ZPQPkNgIO7ehQ=;
+        b=nD50GzvswZ8kjMvLmrOzFGiHpGrhyf3Ilyd0G9cPvc/CMtmgTobKgCLUwwTuVNM8nu
+         7BhcYdZXb5Gz+2AavtrrFIbP1i895NzJ3BHmdl6i3gNbVIZ1MCWsjfffDqPvKIB0VPSE
+         I9cBFXK/RocnQZ//6bbhh41EPFu9R2Cnk/j6MtRzJxf+QYgmB0fiyOxa1VLjDmt0rEXW
+         150N9/rfhOIgWCvRR+DxH67XWqyxzqEv0vaJoSasRkYrtggR5zP9xQJ//oxN7Gxd3H8X
+         G6MV1hHU83W87bumBy7HNod+s2cmHOjzw6E4NGLime/cTdLP8mhgxtsNxkgevmanJmkG
+         9vrA==
+X-Forwarded-Encrypted: i=1; AKwUvBzZmrqhEypr1/5/KvbzYLSOKHLPO/XzKZFsoMYb1M9sDPFbkoW8OQKWUu2f6ZNiEKYlqrT9IKewI60nUXQF@vger.kernel.org
+X-Gm-Message-State: AFuF++k2gyqSJBBoRYrU7MspLWvxZKYN5zY6IeZPfv2CxUEQHkDrZos3
+	EPBGCgHl0VL0bcTn1aCvPzlWOsYtgxI+gY8XrD3jbwO7pn0O9BrKSnUoK17ZHItI+3g=
+X-Gm-Gg: AYBFou2sPWQzuLga8NJDEzFd3NQBK5x7P0zhkHa6q/aC1zJ12gKSjQloy/KxkOeqdY1
+	/hg500tMcEAEJE2fAQZeoanKm570UG7/e0jFeGqgU86tzIWAllbLs2+XGggmZYQgWh7tfPco5jd
+	b5fQba0RozBFnTZbpgJiy4cY2/eAHmxdywwNnioz77IIJfUqaPfBXC5iEmSVqZBU/bL3YZuEfyc
+	CRggEDBzm3HUcazDx80TYEtcJ5ygUbgX49jWuNauGZnvntItoR5Tytr1sdNoj0gV7S7o159SVwv
+	cGgWRaEroVWWJaRClQ2APe8M+TmPB5TIjo0/qTjbbZTU6mliy6C3e22cqXbGE/rq/iUmYhJRMFv
+	Z3D7gnlB/odlNfUEAJ7V6Jf6G0cyUpvqLiqVS+ZcObbJl5LfaHaQsuX+ZvkW18fzxP95HYZSF0W
+	WpPQTC5QDBO/R6cOndWrshKDd5V7DkJacSfnkDbNg20GK7pCZGOH/y4Dkson2dEFvV40tB4w==
+X-Received: by 2002:a05:600c:a085:b0:49f:bd3c:bc23 with SMTP id 5b1f17b1804b1-49fc5747887mr16339405e9.30.1789716545734;
+        Fri, 18 Sep 2026 00:29:05 -0700 (PDT)
+Received: from arrakeen-2.home ([2a01:e0a:106d:1080:52eb:f6ff:feb3:451a])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-49fcab7e333sm8390505e9.7.2026.09.18.00.29.05
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 18 Sep 2026 00:29:05 -0700 (PDT)
+From: Neil Armstrong <neil.armstrong@linaro.org>
+Date: Fri, 18 Sep 2026 09:29:04 +0200
+Subject: [PATCH v2] soc: qcom: geni-se: provide PROG_RAM_DEPTH for I2S HUB
+ Serial Engines
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH net v2 2/3] net: stmmac: advertise integrated PCS
- interfaces to phylink
-To: Thomas Karpiniec <tom.karpiniec@outlook.com>, netdev@vger.kernel.org
-Cc: Mohd Ayaan Anwar <mohd.anwar@oss.qualcomm.com>,
- Maxime Coquelin <mcoquelin.stm32@gmail.com>,
- Alexandre Torgue <alexandre.torgue@foss.st.com>,
- Russell King <linux@armlinux.org.uk>, Andrew Lunn <andrew+netdev@lunn.ch>,
- "David S . Miller" <davem@davemloft.net>, Eric Dumazet
- <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>,
- Paolo Abeni <pabeni@redhat.com>,
- Choong Yong Liang <yong.liang.choong@linux.intel.com>,
- Bartosz Golaszewski <brgl@kernel.org>, Coia Prant <coiaprant@gmail.com>,
- linux-arm-msm@vger.kernel.org, linux-stm32@st-md-mailman.stormreply.com,
- linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org
-References: <SJ2PR11MB8401F5C3A075DE2A0013E063E4872@SJ2PR11MB8401.namprd11.prod.outlook.com>
- <SJ2PR11MB8401D53F5519472525156BA9E4872@SJ2PR11MB8401.namprd11.prod.outlook.com>
-Content-Language: en-US
-From: Maxime Chevallier <maxime.chevallier@bootlin.com>
-In-Reply-To: <SJ2PR11MB8401D53F5519472525156BA9E4872@SJ2PR11MB8401.namprd11.prod.outlook.com>
-Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-Last-TLS-Session-Version: TLSv1.3
+Message-Id: <20260918-topic-sm8x50-i2c-hub-fw-ram-v2-1-30e960966802@linaro.org>
+X-B4-Tracking: v=1; b=H4sIAD/orGoC/42NSw6CMBQAr0K69pm2fCyuvIdhQcsDnlFKXgExh
+ LsLeAGXk0xmFhGQCYO4RotgnCiQ7zbQp0i4tuwaBKo2FlrqTObqAoPvyUF4mTmVQNpBO1qo38D
+ lC9LEpTK2mMnYiK3QM9Y0H/V78eMw2ge6YU/uRkth8Pw59pPavf9OkwIFdZJrk1XGmcrentSV7
+ M+eG1Gs6/oFL3dp7tkAAAA=
+X-Change-ID: 20260917-topic-sm8x50-i2c-hub-fw-ram-54c503be6038
+To: Bjorn Andersson <andersson@kernel.org>, 
+ Konrad Dybcio <konradybcio@kernel.org>, 
+ Viken Dadhaniya <viken.dadhaniya@oss.qualcomm.com>
+Cc: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, 
+ linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org, 
+ Neil Armstrong <neil.armstrong@linaro.org>
+X-Mailer: b4 0.15.1
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3638;
+ i=neil.armstrong@linaro.org; h=from:subject:message-id;
+ bh=CrfB5Rz0RrvGaZsIayezXrztszc5vqvtS3GZl43Wk9M=;
+ b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBqrOhA/Onzy+tSI55tdZlZKmFochJqBLEWXzBpLSnq
+ gO6t9guJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCaqzoQAAKCRB33NvayMhJ0SYiD/
+ 0XXgwC1XShHhiYscX4bnV3Ya0b6UwdrvxsKczU2SWnSjFKPOJNfOC10+rOAIFK8oOow+Eqn5fY92ke
+ tqAu0eHeiqX3xNS82DDMceAHeNJvmHFeX54cJDY63e7G7NWlw5nLpLHBwqcs/lenwcqgJK7ojaNln1
+ aOOLpPTPk0YsAiNUx9mpsNK483+fHHtDUrM5sLoczEfs1B3qTkFziCDQ3r5l0RLBpFMew1aFJkRHqy
+ OiOpsrj9yibeCuTk+g9vI5aW2f2vnx1/gRds1o/FenHG1fIbNCIhO15k9zDrBzqPgNGuyoHdC//DZa
+ ArYNM1cKr2qcVr8XIvzLIdFQzPte+1DKJmPvTui9SHDqDC1tcSNjsKWSNKMyD2AXOjxPv3+OPhysWq
+ D8ws0ijfZqXS1E508Zbg6vWgUvmcqTLgiJ1pi3T5Us8aH5D8mjiJM2D5tX9hLnhxwYsHTBmJwVT4zI
+ 6ZsDzYjSHTpkOB9Vh82RckCUI4WLhU6y8pQFOJvHoXrwjxwvRzkqpi3Z1H0wEyaBJzMxMsiy0/JIfS
+ Rmkz3NCj9aZ38NdHexJmmzjlyhegmAT7uHuHNWtmn8FdLKIK6lhaLmtC1IRba1dwhmIsIczRpmndPJ
+ EuNYo47odSYipK2LiGnPVPYv35/aJlzwKFRcS/PYrfICpa5o98iKa2jj9aVA==
+X-Developer-Key: i=neil.armstrong@linaro.org; a=openpgp;
+ fpr=89EC3D058446217450F22848169AB7B1A4CFF8AE
 
-Hello Thomas,
+The I2C Hub serial elements lacks DMA, so the SE_HW_PARAM_2 register which
+is in the DMA register space doesn't exist for those instances.
 
-On 9/18/26 06:50, Thomas Karpiniec wrote:
-> From: Thomas Karpiniec <tom@wendy.sh>
-> 
-> stmmac_phylink_setup() adds interfaces reported by platform
-> get_interfaces() and non-integrated PCS instances to
-> config->supported_interfaces, but omits the integrated PCS.
-> 
-> On qcom-ethqos with 2500BASE-X selected by firmware, this leaves SGMII
-> out of the supported interface bitmap, causing phylink to remove the
-> lower-speed modes of a switching PHY such as QCA8081.
-> 
-> Add the integrated PCS interface bitmap to config->supported_interfaces.
-> 
-> Fixes: 68cff4fff61f ("net: stmmac: add BASE-X support to integrated PCS")
-> Cc: stable@vger.kernel.org # 7.0+
-> Assisted-by: LLM sparse
-> Signed-off-by: Thomas Karpiniec <tom@wendy.sh>
+Provide the ram depth in the compatible data to be used instead
+of the reading the missing SE_HW_PARAM_2 register.
 
-Looks good to me, thanks !
+Fixes: 522bfb4f33c0 ("soc: qcom: geni-se: Use HW PROG_RAM_DEPTH to validate firmware size")
+Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
+---
+Changes in v2:
+- Instead of ignoring the depth, use 1020 as the default HUB serial element depth
+- Link to v1: https://patch.msgid.link/20260917-topic-sm8x50-i2c-hub-fw-ram-v1-1-f49286d8c8db@linaro.org
+---
+ drivers/soc/qcom/qcom-geni-se.c | 14 ++++++++++++--
+ 1 file changed, 12 insertions(+), 2 deletions(-)
 
-Reviewed-by: Maxime Chevallier <maxime.chevallier@bootlin.com>
+diff --git a/drivers/soc/qcom/qcom-geni-se.c b/drivers/soc/qcom/qcom-geni-se.c
+index 873bfbd6b2b7..893a917be527 100644
+--- a/drivers/soc/qcom/qcom-geni-se.c
++++ b/drivers/soc/qcom/qcom-geni-se.c
+@@ -101,22 +101,26 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(geni_se_regs);
+  * @base:		Base address of this instance of QUP wrapper core
+  * @clks:		Handle to the primary & optional secondary AHB clocks
+  * @num_clks:		Count of clocks
++ * @prog_ram_depth:	Available CFG RAM depth for instance without SE_HW_PARAM_2
+  */
+ struct geni_wrapper {
+ 	struct device *dev;
+ 	void __iomem *base;
+ 	struct clk_bulk_data clks[MAX_CLKS];
+ 	unsigned int num_clks;
++	unsigned int prog_ram_depth;
+ };
+ 
+ /**
+  * struct geni_se_desc - Data structure to represent the QUP Wrapper resources
+  * @clks:		Name of the primary & optional secondary AHB clocks
+  * @num_clks:		Count of clock names
++ * @prog_ram_depth:	Available CFG RAM depth for instance without SE_HW_PARAM_2
+  */
+ struct geni_se_desc {
+ 	unsigned int num_clks;
+ 	const char * const *clks;
++	unsigned int prog_ram_depth;
+ };
+ 
+ static const char * const icc_path_names[] = {"qup-core", "qup-config",
+@@ -1241,6 +1245,7 @@ EXPORT_SYMBOL_GPL(geni_se_resources_init);
+ static struct se_fw_hdr *geni_find_protocol_fw(struct geni_se *se, const struct firmware *fw,
+ 					       enum geni_se_protocol_type protocol)
+ {
++	struct geni_wrapper *wrapper = se->wrapper;
+ 	struct device *dev = se->dev;
+ 	const struct elf32_hdr *ehdr;
+ 	const struct elf32_phdr *phdrs;
+@@ -1306,8 +1311,11 @@ static struct se_fw_hdr *geni_find_protocol_fw(struct geni_se *se, const struct
+ 			sefw->fw_size_in_items = cpu_to_le16(fw_size);
+ 		}
+ 
+-		prog_ram_depth = FIELD_GET(PROG_RAM_DEPTH_MSK,
+-					   readl_relaxed(se->base + SE_HW_PARAM_2));
++		if (wrapper->prog_ram_depth)
++			prog_ram_depth = wrapper->prog_ram_depth;
++		else
++			prog_ram_depth = FIELD_GET(PROG_RAM_DEPTH_MSK,
++					readl_relaxed(se->base + SE_HW_PARAM_2));
+ 		if (fw_size >= prog_ram_depth) {
+ 			dev_err(dev, "Firmware size (%u) exceeds RAM size (%u)\n",
+ 				fw_size, prog_ram_depth);
+@@ -1617,6 +1625,7 @@ static int geni_se_probe(struct platform_device *pdev)
+ 		return PTR_ERR(wrapper->base);
+ 
+ 	desc = device_get_match_data(&pdev->dev);
++	wrapper->prog_ram_depth = desc->prog_ram_depth;
+ 
+ 	if (!has_acpi_companion(&pdev->dev) && desc->num_clks) {
+ 		int i;
+@@ -1669,6 +1678,7 @@ static const char * const i2c_master_hub_clks[] = {
+ static const struct geni_se_desc i2c_master_hub_desc = {
+ 	.clks = i2c_master_hub_clks,
+ 	.num_clks = ARRAY_SIZE(i2c_master_hub_clks),
++	.prog_ram_depth = 1020,
+ };
+ 
+ static const struct of_device_id geni_se_dt_match[] = {
 
-Maxime
+---
+base-commit: fd73f4a6659897191fa0d40695fe370925dd3780
+change-id: 20260917-topic-sm8x50-i2c-hub-fw-ram-54c503be6038
 
-
-> ---
->  drivers/net/ethernet/stmicro/stmmac/stmmac_main.c | 6 ++++++
->  1 file changed, 6 insertions(+)
-> 
-> diff --git a/drivers/net/ethernet/stmicro/stmmac/stmmac_main.c b/drivers/net/ethernet/stmicro/stmmac/stmmac_main.c
-> index 1350e92943ac..f956e0d2ec64 100644
-> --- a/drivers/net/ethernet/stmicro/stmmac/stmmac_main.c
-> +++ b/drivers/net/ethernet/stmicro/stmmac/stmmac_main.c
-> @@ -1414,6 +1414,12 @@ static int stmmac_phylink_setup(struct stmmac_priv *priv)
->  		__set_bit(priv->plat->phy_interface,
->  			  config->supported_interfaces);
->  
-> +	/* If we have an integrated PCS, add the interfaces it supports. */
-> +	if (priv->integrated_pcs)
-> +		phy_interface_or(config->supported_interfaces,
-> +				 config->supported_interfaces,
-> +				 priv->integrated_pcs->pcs.supported_interfaces);
-> +
->  	/* If we have an xpcs, it defines which PHY interfaces are supported. */
->  	if (priv->hw->xpcs)
->  		pcs = xpcs_to_phylink_pcs(priv->hw->xpcs);
+Best regards,
+--  
+Neil Armstrong <neil.armstrong@linaro.org>
 
