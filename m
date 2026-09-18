@@ -1,179 +1,213 @@
-Received: from PH8PR06CU001.outbound.protection.outlook.com (mail-westus3azolkn19012008.outbound.protection.outlook.com [52.103.23.8])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4129443498F;
-	Fri, 18 Sep 2026 04:51:41 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=52.103.23.8
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789707102; cv=fail; b=P7lYs9LvdwQS8sT+4mauaCWAFehg05jM1gK9X51/9Zllp7us2orHOtzD/uxvaCZmKdi1gpSIFf1huh0CSJrD56jr5xWzvo0mBXaclI37zBuJCaMvcla885yk2hCUZySe1Xki2cf2jA8ERQHXU0ZAoitWFfrrREPSqqjaZgPDWRA=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789707102; c=relaxed/simple;
-	bh=YnRWi8893fMkEiYYw9ZbOV0GSJciiAUkMvboO0vGd1g=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 Content-Type:MIME-Version; b=ql9gwUHg4mtzbIXCNKv/c2uIiaKk/3+2xdlrhzM4VJCpvOpaSbHZj/P6mhk5G46Kogi9vfqu2Vn0+hM1GmOPIPuXamrrrzVgyNX4q8uUetG1ZxEhiTEwQufScYc/Z05uTnOBzAryY6o01PpiqKk+77kZfbgEDxaNzmTqWt7ZAWw=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=outlook.com; spf=pass smtp.mailfrom=outlook.com; dkim=pass (2048-bit key) header.d=outlook.com header.i=@outlook.com header.b=BxsTnD6J; arc=fail smtp.client-ip=52.103.23.8
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=outlook.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=outlook.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3A18933B6F4
+	for <linux-arm-msm@vger.kernel.org>; Fri, 18 Sep 2026 05:18:19 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1789708700; cv=none; b=b1/prCtAIauzv2vsxXUrSIef1aHh3iG7JWEHMQj3F49tZIgPpNw6HqHFa2G37oa+nF8CCBfbCAub0Fn7knUAZ4QrfqCDRLBcOPGbGk+XrWGUhzlY0Bh4Xid5xMCmtCpjFWPvuZRSHfsaUHyKo6Df8qLC1dfQ+twd0tZ6vp1+T6U=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1789708700; c=relaxed/simple;
+	bh=KpCOGBtg1kn7vEKf3x1UtZtSMIts6JSL1bQ3R6nvIMU=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=LVd/iM+K54SfykngGQ/L1UXtl3s2xD87IR8uRuBkTeCgwGdOYgBHhUMMfHEdF3+DgSp29RhsH/S0oZrHLRxzkf5UVXZM9tH/y+gTpMOAs9ymM4LxJB9u+q7SGZXRd/b+qyD9bHOgsdmLCjQNcw+ARrprarGrTEdGhFVm86+/n7M=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=INqJ3+Oa; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=fuiiAUNy; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=outlook.com header.i=@outlook.com header.b="BxsTnD6J"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=vxi+J8x0fFvglxw0JmG8C8eGFZTRryt1AtOR7oxG250gp+YmxQgT+27iS4HRZp1lbxClvkFJB2hhPjdf4FvYE70IBWZLf3xKKlNHzjBaTmCPZ2uzr8glVEBw/rfCWudv9lxdfZh6uoaU9sG9vmcYDKF3+ZudC+L6Jd4AnGIbyX/f9LvoGg9G4H/yjnRqz+Z/VBTC45qj+ENUCbkSmHR5KY7jvCmTqWZSvYOOKKT58xl81w73GVi977OXli21oqWBzokrfwL+ccSMeC+32f70d4VAg4Kfz/kbF5qmV/JoXUj3FcNRe67izYnl3CsCMYHW7q+IE9GVDInZLk2sEcIAvA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ybZ3sPWA8J+vJwvsCr60f7Mstcrqgfg/D6UA9IcigTE=;
- b=NfJ1aRhwn0ycL6bz5Kzj/hte8DcnUkG0wPB0ie0c3MeUKtvjIdaiEc2tZUFSrhCnS/PqkGoUXXPB8O/NFhr7K+Ymnf2+FkDr46hAOZV90D1rjTWY2khPOV5jv2iXLUsn7uynk6zT1pcSFkRQWdLrxcIB3Oh8+ZKso1ykme7m/nYap6g9Be+xS3X2A4VqFRPTACpbT2FlG94ZZGdp/k/TOTyua8VtZaeqv4w1ct5qsqxu6hUKg3js5nGQIVeJIaQM9HimEwNws0T15BV50lDRaraxD3qPMRYWh0si3Ps+TKB3nTeUjSVcFHCHQrHS6o4rtPedfzyTwTt8Bot916QQ9Q==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
- dkim=none; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=outlook.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ybZ3sPWA8J+vJwvsCr60f7Mstcrqgfg/D6UA9IcigTE=;
- b=BxsTnD6JBmakgblzqUDa7YmuC/4q5/vMRhzvt2C45xVffx+2OYO6uPGy7GDC6qCIecUYiw2xNhdD223Lz7nv76RG+6qOIKu5H7Mj1OUqIaPw8BXOogEsRnKqCTdFnf8iqbAAvbThZYFTLDfIF7n/gdBNax5uBCXdWZozIY8emJfuIuvp3J1mxlmS6rMP00ihGJDhq6yGR8xrGzT2tJpdyHd71oUpmjAJfkP1yI4AEjdj/Jd7SXdsQJy34S0m9V8RPo0+BnQPi7ZEx1md5+qw9/nf2jrsoz8sO6M3EBSVhdOlT7fogx3m0eq3G8O1tf5xCTAfjbq41ZMrrVqW1qLfkw==
-Received: from SJ2PR11MB8401.namprd11.prod.outlook.com (2603:10b6:a03:539::19)
- by PH7PR11MB7145.namprd11.prod.outlook.com (2603:10b6:510:1ec::17) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.406.12; Fri, 18 Sep
- 2026 04:51:38 +0000
-Received: from SJ2PR11MB8401.namprd11.prod.outlook.com
- ([fe80::ccc8:68f:2e82:ab65]) by SJ2PR11MB8401.namprd11.prod.outlook.com
- ([fe80::ccc8:68f:2e82:ab65%5]) with mapi id 15.21.0406.014; Fri, 18 Sep 2026
- 04:51:38 +0000
-From: Thomas Karpiniec <tom.karpiniec@outlook.com>
-To: netdev@vger.kernel.org
-Cc: Mohd Ayaan Anwar <mohd.anwar@oss.qualcomm.com>,
-	Maxime Chevallier <maxime.chevallier@bootlin.com>,
-	Maxime Coquelin <mcoquelin.stm32@gmail.com>,
-	Alexandre Torgue <alexandre.torgue@foss.st.com>,
-	Russell King <linux@armlinux.org.uk>,
-	Andrew Lunn <andrew+netdev@lunn.ch>,
-	"David S . Miller" <davem@davemloft.net>,
-	Eric Dumazet <edumazet@google.com>,
-	Jakub Kicinski <kuba@kernel.org>,
-	Paolo Abeni <pabeni@redhat.com>,
-	Choong Yong Liang <yong.liang.choong@linux.intel.com>,
-	Bartosz Golaszewski <brgl@kernel.org>,
-	Coia Prant <coiaprant@gmail.com>,
-	linux-arm-msm@vger.kernel.org,
-	linux-stm32@st-md-mailman.stormreply.com,
-	linux-arm-kernel@lists.infradead.org,
-	linux-kernel@vger.kernel.org
-Subject: [PATCH net v2 3/3] net: stmmac: qcom-ethqos: enable 2500BASE-X in integrated PCS
-Date: Fri, 18 Sep 2026 14:50:56 +1000
-Message-ID:
- <SJ2PR11MB84018DBB1F18F07D79DBC5E3E4872@SJ2PR11MB8401.namprd11.prod.outlook.com>
-X-Mailer: git-send-email 2.54.0
-In-Reply-To: <SJ2PR11MB8401F5C3A075DE2A0013E063E4872@SJ2PR11MB8401.namprd11.prod.outlook.com>
-References: <SJ2PR11MB8401F5C3A075DE2A0013E063E4872@SJ2PR11MB8401.namprd11.prod.outlook.com>
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: MEWP282CA0188.AUSP282.PROD.OUTLOOK.COM
- (2603:10c6:220:1d6::16) To SJ2PR11MB8401.namprd11.prod.outlook.com
- (2603:10b6:a03:539::19)
-X-Microsoft-Original-Message-ID:
- <20260918045056.4294-4-tom.karpiniec@outlook.com>
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="INqJ3+Oa";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="fuiiAUNy"
+Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68I2UUqP2972503
+	for <linux-arm-msm@vger.kernel.org>; Fri, 18 Sep 2026 05:18:18 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	HsKz2/5LlR7nT+hESyfXy9LutazAFBvD636fITNFVss=; b=INqJ3+OaRZXqNIYA
+	n6WQvl7GM6ZXVB7ZmEAT9qRWU5sq911XCkwihzWGZs9FTioZJwhN1OeUc+WEt8T4
+	jTYUi+0NzQ2erJ3GkPeUVMSTNuvecWq2xh9zV0Td0jpD50Le3mQyVkIo9py94O6l
+	uFar4yzNvwwVfSu078qqGINrmsvyTqLw4Dfsx5l1U8zi5ROY/uHgMkP4AEB0s7Mq
+	z1znaSbAQ9oEpnO1d1zdsK9nmf5DMPrtVqmt1Dn4tXPrZbiN2TF/AbGLHjY/njmm
+	0rQtqN6RyD0Z7WHJt65ZsGWEke5q0Cs9LPWuF2lrRTprzYMsLnHA/n2OQg10ednG
+	fZ83ww==
+Received: from mail-pg1-f198.google.com (mail-pg1-f198.google.com [209.85.215.198])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4grrjdsf9k-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 18 Sep 2026 05:18:18 +0000 (GMT)
+Received: by mail-pg1-f198.google.com with SMTP id 41be03b00d2f7-cb48f41343aso1386121a12.1
+        for <linux-arm-msm@vger.kernel.org>; Thu, 17 Sep 2026 22:18:18 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1789708698; x=1790313498; darn=vger.kernel.org;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :content-type:mime-version:references:message-id:subject:cc:to:from
+         :date:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=HsKz2/5LlR7nT+hESyfXy9LutazAFBvD636fITNFVss=;
+        b=fuiiAUNyu9rnmV64fRFgGZ6Zo0Ar4Cpm+/bHQIsfi1rktH4WuiZwql2NobCPwqINlV
+         2aOyE0FyjlM4aMPR42lSdnT+k+IxhrFLYyCXQnQjpR9qRiNJ5V2C3s+2fOYKupixQyrT
+         XbaNp5x0ChZ4LdkTIPs9T28IwHGS7LNyON8MGyLLHtzntbpFehE3RAxQFMibJlKHjPMH
+         d8Kf5k/dCajVNivxxbo/mphzudrSMcPJhYv6xmMXwOAtNff6SW8zdk/nxCQfhCo51XB6
+         ktpzvTo4ZQggjIYa/vrNIU5BuZxUgjvis5O42qQxBYqb/aB9MdJVPwtOBo3NqqZFPo9f
+         ZCaA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1789708698; x=1790313498;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :content-type:mime-version:references:message-id:subject:cc:to:from
+         :date:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=HsKz2/5LlR7nT+hESyfXy9LutazAFBvD636fITNFVss=;
+        b=oAC0XmxY5pNeaWLKi9OLzuLZ8lkJlNBWEsFgZn4c1aQBCHJt9E0XgoniDYM1LF2Fb7
+         cVFmQimKGCJNfKEwoV3+Rt/GvtyKwCyTk3k+2mON2lNTKkx6WFvlvxuYyTypnwGTBMGl
+         tbV5Ftbau+YeXrM90hCYZCUWsNwCKpqmFZNDniNuCP9lPMlSCNfiJNQZ2MNNALegThtf
+         iN0g/xiGBwyO1z5I0u9Jxr5k/jG/ujWyKgHqd72L/mpkgxyNJvnsdYNOR/TkpSBGa+Yr
+         s+lhZiP1xtbYwm2SSkGxxpWmktKZhgqDZ1U9digS98NNG56eXofCzAL82A5Ohe3mx+R3
+         eO0A==
+X-Forwarded-Encrypted: i=1; AKwUvBxRS6PGFXQssi5BQ514HJaJmBpGb/0LFGE7fxgK7bUQFrdOToutnAKHXP/XWzIDUuYut5ibzBuU8Yfy2WwO@vger.kernel.org
+X-Gm-Message-State: AFuF++kg8DM4sWOoL8GbWupq7xqhgAle70QvKl07FRJL1oMRsWXDV/d9
+	YIJ+L8OW1TE1C/szXfNuNymEyru+JBuX2wDOj21KkQDLd/Fn4/Ixri8SiUrSYkzUIOw4EpKvV62
+	iMMD5TRPRu6QWgq5Rj+QA8eWfVlWpNwGgJFvj0pfo+/ejHBTQEsEOTlEzTuv4vhYeSsrG
+X-Gm-Gg: AYBFou2oHD5vnjt+q9/xG+S6bH3rssmSj2gpmvIKMEMoXDg7ptu9EUW3SIgDJCRKg0y
+	UcHJXWXsDAYqf7Db0O+r4sMCeiy+V3Hd8jJapnzDmICWI3QEq0pj5suNc8bHbTAOdSQmVZgtzc4
+	SFghKwoUXUIxuI9XX0OrKKtnmzoPOgsMYit4aHmzVu3yXN04PKJH14c/WmSg/MQdI/Ao9oEonFL
+	fuaKI+ztX6Gb1TAFR5gztzBISmDXsJclEsdf4zp0LIBmYdEZVdrW8jOqOYqqo3T30QUma8rlBwC
+	j+nGnfqHkyYK7WrldqfN+9WrMJzaaeNOBdpfdtAD8EDHqR4SNZkeEjM6dSOuC8OFq/goE/v5yy6
+	Sp/CUi0q21QG5eA==
+X-Received: by 2002:a17:902:f68b:b0:2d0:401c:2edc with SMTP id d9443c01a7336-2dd9c6b9174mr80332935ad.1.1789708697643;
+        Thu, 17 Sep 2026 22:18:17 -0700 (PDT)
+X-Received: by 2002:a17:902:f68b:b0:2d0:401c:2edc with SMTP id d9443c01a7336-2dd9c6b9174mr80332495ad.1.1789708697155;
+        Thu, 17 Sep 2026 22:18:17 -0700 (PDT)
+Received: from oss.qualcomm.com ([202.46.23.25])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-33c286d98c6sm1220454eec.5.2026.09.17.22.18.12
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 17 Sep 2026 22:18:16 -0700 (PDT)
+Date: Fri, 18 Sep 2026 10:48:09 +0530
+From: Mohd Ayaan Anwar <mohd.anwar@oss.qualcomm.com>
+To: Thomas Karpiniec <tom.karpiniec@outlook.com>
+Cc: Coia Prant <coiaprant@gmail.com>,
+        Maxime Chevallier <maxime.chevallier@bootlin.com>,
+        netdev@vger.kernel.org, Russell King <linux@armlinux.org.uk>,
+        Andrew Lunn <andrew+netdev@lunn.ch>,
+        "David S . Miller" <davem@davemloft.net>,
+        Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>,
+        Paolo Abeni <pabeni@redhat.com>,
+        Choong Yong Liang <yong.liang.choong@linux.intel.com>,
+        Bartosz Golaszewski <brgl@kernel.org>,
+        Russell King <rmk+kernel@armlinux.org.uk>,
+        linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH net 2/2] net: stmmac: qcom-ethqos: advertise supported
+ SerDes interfaces
+Message-ID: <aqzJkYqRgpBTOB9N@oss.qualcomm.com>
+References: <CH3PR11MB8413FCBA598F7FABC04ADCFEE4B92@CH3PR11MB8413.namprd11.prod.outlook.com>
+ <CH3PR11MB841353E5708DDD7C5E2EA1D5E4B92@CH3PR11MB8413.namprd11.prod.outlook.com>
+ <aqqI9wOnradk9d7K@oss.qualcomm.com>
+ <97924d2f-45f9-44d5-b482-97fcbb70abdc@bootlin.com>
+ <CH3PR11MB8413131D50175690DF9FDAB0E4B82@CH3PR11MB8413.namprd11.prod.outlook.com>
+ <3bdf2ecc-9dd1-428c-8841-36b1f19916e7@bootlin.com>
+ <CALj3r0gXP0+bwsPVtuw=9RRQ6gpmuHzGc5PzF_a3XXXTTZYcqQ@mail.gmail.com>
+ <SJ2PR11MB840156009D655CB83CD04EF8E4872@SJ2PR11MB8401.namprd11.prod.outlook.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ2PR11MB8401:EE_|PH7PR11MB7145:EE_
-X-MS-Office365-Filtering-Correlation-Id: 08cfe103-90be-40a1-5f35-08df154085ac
-X-Microsoft-Antispam:
-	BCL:0;ARA:14566002|23021999003|5072599009|15080799012|16051099003|25010399006|51005399006|8060799015|19110799012|24021099003|37011999003|440099028|3412199025|40105399003|2607281247196008;
-X-Microsoft-Antispam-Message-Info:
-	=?us-ascii?Q?Az/V1coEwPoBOcj38rgEteMBUnPszltvEnUdoJZeq35GdNr31Zuu1p4CajoE?=
- =?us-ascii?Q?Pv4cCqrmAT5vpNofThs5N0EwHbV3AcQpGZB7j34huLDGnk4/HF83Sb3zwpIH?=
- =?us-ascii?Q?+miinNavKBo40DsgLd2TuZxUXT/vypSh5dCLegMTVr3IPQiZn2K3Wo8nYRiU?=
- =?us-ascii?Q?OSO/Ft7DyYBMjTIW8DRDo0AFLBSe8c4hjWwTUsQ5D1Wfwf4w2CVUhRHiFSnZ?=
- =?us-ascii?Q?4XwBeRSW+sYHPHaiH720hWdosDfO9rzi3jICgjhhRKhcon5i+/7YIirnW8TL?=
- =?us-ascii?Q?qRvXyTz8zrXB9oTwWugwY8A5NBAhse45B8ewomtKv1cGVBvjBZikF5Hj1OR5?=
- =?us-ascii?Q?+/oFL0DbcXOQVhg4AMQPutNpF61R7iQHjvjGvvJK/TYaTVAPwARBgBdZlEi9?=
- =?us-ascii?Q?CRWfCDHg4jwcX9sIUm6orPFtlTrMRt4iPOmX/0j5wQTlCIqVQvMiYQaSJvoX?=
- =?us-ascii?Q?KOiaj6UKtEsLi0GhoLd5M66zOgriS//PozR1KZiUb2VvQbQ6F4f24X+CxFeM?=
- =?us-ascii?Q?VqarItVkl1LpQ3IaPAb6tj5OLxrXQriQ3WYapdt/nC8jSNUGLvn1PgzvYH1X?=
- =?us-ascii?Q?PJsRY14W3IVV2nqEREaytbalDvFRfQalUVBhJYfLI/ayYHjlcKFNyv2TxSoF?=
- =?us-ascii?Q?Xkf/JfI+yKcEFusDv7w6Af9kdFh0rQwB5+hSzoMJwxBEBx4MoHXT3WhAyqfA?=
- =?us-ascii?Q?0TAN3FS1RMDu4b3KD8UDd0hrBoQwhZsgkj4YWRLKOOWdcjHMGz3M+BlKWDtG?=
- =?us-ascii?Q?z3CgJqQDlchr1ngg0++OyTEgXwpkLqTQnnvZ75YEhtLhzKgp/ZP3pmzWkL5T?=
- =?us-ascii?Q?vibQ6iI2bG8TxSgFRT6LsZSFdjwNwTAYGCoXfWAvy36JPqEJvAQYPXSj4EE/?=
- =?us-ascii?Q?/zbQhBjNfIsUKb3k82U7nmdEZRqE5AZJeJaT2OzM10Z5iQfX/z0LN+qsIz2U?=
- =?us-ascii?Q?TzV9M6Rz7FGbrXiYcylUWq/B+KqKo1Zg1IiAhysJDTy7G53z1GEtDcQCvjrJ?=
- =?us-ascii?Q?BGhy?=
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?+uMYk0AfzRwAaqckG8AVyN2ifY1V92Fuz6JIX8ZQqGDtjkhErERsHR2I22gQ?=
- =?us-ascii?Q?+l68ZSCaBGMzkSbCbp9368fl1m24FZQMQNr++qYUw9o0yBKcqkaiWr8Ye/Kv?=
- =?us-ascii?Q?vp6IM56X5Ki0eivuiKEVvRY7H6UqUObDkm2BXcFsi0gUY8IWisM/Wm/tWRqJ?=
- =?us-ascii?Q?awgcpfuPKG55829iheaTqcnTdFVqHJd947G1UMPWf3hUMDEU/64X/A6zB4lg?=
- =?us-ascii?Q?w5x4p1OMs3dmtCMhZYbVdxoDA+MwF3vGYUEOeMEaRqxxShFbB4kHPbD78LnC?=
- =?us-ascii?Q?TXUUHJd2c8ZUi+fq1SSzGK/Uh+WTzKFv3PrBe1g0TMq+kIauusducG2eDh5f?=
- =?us-ascii?Q?60WZfqBmRJlWUfDdk2+3ifOPKX8WqMJRGukkw/k6zfCr9gJkksxEuTMLJ+Eq?=
- =?us-ascii?Q?Tc2de797nzyGvPva0ypVuUrZHI8rIWAGvFpHD+EszVe+165LKNOeFoLVoFCn?=
- =?us-ascii?Q?fDbc9Mu2K13a3Jn3Jbyn/OBLacWfQMH9V7eY9LxdZMQdOoTzEt3hcs3C9FC7?=
- =?us-ascii?Q?9byd5h0uiFF3qF0WOf8a+U91RkguO4Gfwx++niRQfsP8A3D131IeEpU6hD/d?=
- =?us-ascii?Q?DC9EEbOlJWMiFRoj24e6yiIaMAiZu9Q/YE26NfkUPPn8aXNaMBrraln5syGo?=
- =?us-ascii?Q?o8WJoo+TYSCuoF1rxfa2xER7bUFcLLy17Ila5RY+nvpIE6vKFovYHQrp6TZz?=
- =?us-ascii?Q?b9kNyucQ8OUnoVDPo4CiBAFDxwUJfRIadRgnrxa0CSeXOfF0ALVw+W6vSjsD?=
- =?us-ascii?Q?4GnGb8jXRV8RnTpukPJggIoiGPLsP304Vy4d5PKZqcD03MNvPfk0Y6AEJLKN?=
- =?us-ascii?Q?Q3lxGMog+SrUFNtrCzziRt1mPMXorNE67MmcMywIBiV3wga6EyBjOWZMkBB6?=
- =?us-ascii?Q?GtewphqJn8XTItRsO5FMbPHRLTn78y4yMgaL96U3XSg1+kFS8WmMxOkzxQID?=
- =?us-ascii?Q?AqmIB49VyYvVPZHuy5FZhDQ+0pj01CSV+zQbDd4pC54dusZRN+4JYm0KoIWC?=
- =?us-ascii?Q?xB8zK23EcSBvbgUbRxXEf1pedQUTr5zwKYvwdQk+Dl32ryqX983mnhNZgJvs?=
- =?us-ascii?Q?MeF9ENptEQ+4JAeGej02OolhKm/SxgLtakG9Zm+ju4icRY2jGEWfHQ04JlNU?=
- =?us-ascii?Q?xvydHu/nrSyOa70ZTbEBGy3TzQLbZ0YOC2n0zzaHuRKI0X1Py+JIDD/udGdJ?=
- =?us-ascii?Q?vMpcvV5Xj+f5dTDHC+8j5n7H16nr6Sqt98AZfUI7rpU/0+5iN6bfl2j7qo4N?=
- =?us-ascii?Q?mjlkVe6g6UJkq6aF+o6BZP559TUo3nCrCgIwOCATG31/L7Q9k8sOPCwslqMk?=
- =?us-ascii?Q?F2/l4TCtgChDLoRqlIKHN1pc3qJrVRzzS4nAWMeNidXMkEye7TNry3T2KgYh?=
- =?us-ascii?Q?ZXZMag6WKaKV3l4sq6YfFkeUo1j4oOUDFM9QF+7JUcSZvDIKSwsrmQMQQBl3?=
- =?us-ascii?Q?90tMq6Lfmv9vmH9dmbV2iJfjk6M3W33I?=
-X-OriginatorOrg: outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 08cfe103-90be-40a1-5f35-08df154085ac
-X-MS-Exchange-CrossTenant-AuthSource: SJ2PR11MB8401.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Sep 2026 04:51:38.2221
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
-X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg:
-	00000000-0000-0000-0000-000000000000
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR11MB7145
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <SJ2PR11MB840156009D655CB83CD04EF8E4872@SJ2PR11MB8401.namprd11.prod.outlook.com>
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTE4MDA2NyBTYWx0ZWRfX/0U0UZ7h8HT+
+ F7G1msAZ7G6OxmtsYKsROgcvLc8nFCTw48jFfIuass9Nax0SjoDxtiy08c2NwUAjdEt/jksL8om
+ f3p7zpZRUdM36ofySDvHgpUtCmulgsUnEC7d5OZnwO+wBoOaDLNOAhsQ654Wg4C32fA3nx9K3LE
+ CeOQ1mZL50QAKqz6LGW5mZScZ/2+ZA3I3UbgCitOMfZ18YsMXbfgzhoSQw1qPNR8BYfgjigAFk5
+ rWmuYnOyKclV6mZLSy68PT2od0A/glCwDPz2OP94cKwUGaDcVZ/EXYnb1WI41BJtYFCx3xEkq/m
+ nIztCJMW6AlyctBEhi/ya69mC2dAsP0E2icAhCxRwe6Clf4WusB/SgDoz7rNZsx1tE3vsqh+NQJ
+ 5WhFTzj96NbYgomMn0rVFxsAQ7IxzZuOwlCqmkbrRA3JHS/5YgafHflfuhPz0FjjRwztaiflS35
+ dTROl4/ghnDI4XE0isw==
+X-Proofpoint-ORIG-GUID: FxkR_1kaO7nLmQSSWNXUussZiOCHaor3
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTE4MDA2NyBTYWx0ZWRfX2wlDMjAan0JU
+ bS4cmQ7LEWAmAeyUcYsNFqV1eIIAfWJ2wFpgbwdH+u9TdZ4FXbeB5kDF8WDk44ZutOcbAx0s3pj
+ 2eHxkkpVbBm6ILG0MDgtCYpTidGRTy8=
+X-Authority-Analysis: v=2.4 cv=J9Q/fwnS c=1 sm=1 tr=0 ts=6aacc99a cx=c_pps
+ a=Qgeoaf8Lrialg5Z894R3/Q==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
+ a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
+ a=P-IC7800AAAA:8 a=zWtJOzQAR9QYW-IJ8IAA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+ a=x9snwWr2DeNwDh03kgHS:22 a=d3PnA9EDa4IxuAV0gXij:22
+X-Proofpoint-GUID: FxkR_1kaO7nLmQSSWNXUussZiOCHaor3
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-09-18_01,2026-09-16_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ lowpriorityscore=0 adultscore=0 impostorscore=0 clxscore=1015 suspectscore=0
+ phishscore=0 priorityscore=1501 bulkscore=0 malwarescore=0 spamscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609180067
 
-From: Thomas Karpiniec <tom@wendy.sh>
+On Fri, Sep 18, 2026 at 02:36:04PM +1000, Thomas Karpiniec wrote:
+> On 17/09/2026 6:21 pm, Coia Prant wrote:
+> > Maxime Chevallier <maxime.chevallier@bootlin.com> 于2026年9月17日周四 13:36写道：
+> > > On 9/17/26 06:29, Thomas Karpiniec wrote:
+> > > > I tested setting STMMAC_FLAG_SERDES_SUPPORTS_2500M on hardware and unfortunately the flag alone doesn't solve the problem.
+> > > 
+> > > Yeah, but it's still the right first move. Russell planned to do that as well
+> 
+> > > > I think there are a couple of things missing. stmmac_phylink_setup doesn't use the integrated PCS bitmap to populate config->supported_interfaces, so SGMII is still not advertised to phylink as a usable host interface. Also stmmac_integrated_pcs_init is adding 1000BASE-X unconditionally, which wouldn't be appropriate here.
+> > > 
+> > > Ok so, the missing bit seems to be that priv->integrated_pcs isn't taken
+> > > into account in stmmac_phylink_setup(). This needs to be added then :)
+> > > 
+> > > Looks like there's also the inband support that needs addressing
+> 
+> > On the qcom issue: the missing bit seems to be that
+> > stmmac_phylink_setup() only looks at priv->hw->xpcs and
+> > priv->hw->phylink_pcs, not priv->integrated_pcs. Extending the existing
+> > OR to cover the integrated PCS would let qcom-ethqos work without a
+> > new get_interfaces() callback.
+> Thanks all for the feedback! Including the integrated PCS in
+> stmmac_phylink_setup makes sense and I've now confirmed that this works
+> end-to-end on my QCA8081 board.
+> 
+> I've prepared a v2 that replaces the get_interfaces change with two commits:
+> one to set STMMAC_FLAG_SERDES_SUPPORTS_2500M in qcom-ethqos, and one to
+> include the integrated PCS in config->supported_interfaces
+> 
+> I reviewed the work that Russell was doing and I see the problem. Both the
+> integrated PCS and the ethqos code are configuring in-band negotiation. On
+> SGMII this occurs twice - both turn it on - and on 2500BASE-X the PCS
+> briefly turns it on before ethqos turns it off. On my board, it finishes in
+> the correct state.
 
-The Qualcomm ETHQOS SerDes supports SGMII, 1000BASE-X and
-2500BASE-X. However, the integrated PCS only includes 2500BASE-X in its
-supported interface bitmap when the platform sets
-STMMAC_FLAG_SERDES_SUPPORTS_2500M.
+Right, I think that was the primary concern at the time. Ideally, ethqos
+shouldn't have to touch any PCS setting.
 
-Set the flag when the optional SerDes is present. This allows stmmac to
-select and configure the integrated PCS for 2500BASE-X and, once its
-interface bitmap is propagated to phylink, preserves both the
-lower-speed SGMII modes and 2500BASE-T.
+> 
+> I have tested cold boot connected at both 1 Gbps and 2.5 Gbps, and
+> transitions in both directions. However, this is a slow transition where I
+> am physically unplugging the cable.
+> 
+> I attached kprobes to dwmac_integrated_pcs_config and
+> ethqos_fix_mac_speed_sgmii, which are the generic and Qualcomm functions
+> leading to ANE configuration. We see this on 1 -> 2.5 Gbps:
+> 
+> 464.233469 integrated_pcs_config interface=2500BASE-X neg_mode=OUTBAND
+> 464.234778 fix_speed interface=2500BASE-X speed=2500
+> 
+> 2.5 Gbps -> 1 Gbps:
+> 
+> 279.018122 integrated_pcs_config interface=SGMII neg_mode=OUTBAND
+> 279.019708 fix_speed interface=SGMII speed=1000
+> 
+> During the cable swaps, Linux briefly reasserted carrier at the previous
+> speed before the link went down again and came up at the new speed. The log
+> contained several PCS Link Down/Up and ANE-complete interrupts. I'm not
+> seeing any evidence of churn or link instability once connected.
+> 
+> Russell's wider change is compelling but affects a much wider range of
+> hardware. I believe this targeted fix can work separately.
+> 
+> I'll post the updated version shortly. Thanks for your time.
+> 
 
-Fixes: 61e9be0efbe8 ("net: stmmac: qcom-ethqos: add support for 2.5G BASEX mode")
-Cc: stable@vger.kernel.org # 7.0+
-Assisted-by: LLM sparse
-Signed-off-by: Thomas Karpiniec <tom@wendy.sh>
----
- drivers/net/ethernet/stmicro/stmmac/dwmac-qcom-ethqos.c | 1 +
- 1 file changed, 1 insertion(+)
+Sure, I will share some test results of my own (with v2) in a couple of
+days.
 
-diff --git a/drivers/net/ethernet/stmicro/stmmac/dwmac-qcom-ethqos.c b/drivers/net/ethernet/stmicro/stmmac/dwmac-qcom-ethqos.c
-index ac7d6d3e205a..0e07225a70ca 100644
---- a/drivers/net/ethernet/stmicro/stmmac/dwmac-qcom-ethqos.c
-+++ b/drivers/net/ethernet/stmicro/stmmac/dwmac-qcom-ethqos.c
-@@ -786,6 +786,7 @@ static int qcom_ethqos_probe(struct platform_device *pdev)
- 		plat_dat->host_dma_width = data->dma_addr_width;
- 
- 	if (ethqos->serdes_phy) {
-+		plat_dat->flags |= STMMAC_FLAG_SERDES_SUPPORTS_2500M;
- 		plat_dat->serdes_powerup = qcom_ethqos_serdes_powerup;
- 		plat_dat->serdes_powerdown  = qcom_ethqos_serdes_powerdown;
- 	}
--- 
-2.54.0 (Apple Git-157)
-
+	Ayaan
