@@ -1,104 +1,128 @@
-Received: from sonic312-25.consmr.mail.ne1.yahoo.com (sonic312-25.consmr.mail.ne1.yahoo.com [66.163.191.206])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.8])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1DABB25B090
-	for <linux-arm-msm@vger.kernel.org>; Sat, 19 Sep 2026 05:41:59 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=66.163.191.206
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 974C47083C;
+	Sat, 19 Sep 2026 07:35:15 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.8
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789796521; cv=none; b=C/ulQ3XaR9BvkJqoq51QBQVlAxwftolbDvCGncLA7nYv99rEkIrAQub55CIehpVd8N+/z9o2WpJ4Wz/dNWt1sIJwCSI5JkEIAxBOLcV5oOrAid8XKKzpNCyiiAEo0YxgYA8xL+gNEmyEBM9pJE15KwU1qDrGFnt3ENUsRGBEdKo=
+	t=1789803317; cv=none; b=kYypFOsk62zR85BDFmgeBqg/wqg0YrEpWlzQ9kq1mPSw8h3eZryew0BpG0iST/ccMYQokCxTX3Q29BBR9uRaHg7LGp6atow0sgFfUuTlRmDck4GBb4uHD6olj8eQZhe4tYYyYfDKVWJV48obHxnIQbTsbZ0c+NsN4813EjppINY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789796521; c=relaxed/simple;
-	bh=MMjUtHCs4/yDpCGHhPdiiHBAMqlZNMH0PrNv5RE8WeM=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=Go5kZ5k2NpWXDyLqvQN4tqb3QfdeIsqoNESQr/XEte/gi5Xg/0RzXG4+awFLOg8h72HOBUq2R/P1ebBMpTyOMxphzRwTUQbNKyPoRyF0AJUaidDFnIKzx//XmD+jMOW920Nhi5fXzUTPcNBLenf6QBe15lW6stgn31Fxqtf7Vuw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=yahoo.com; spf=pass smtp.mailfrom=yahoo.com; dkim=pass (2048-bit key) header.d=yahoo.com header.i=@yahoo.com header.b=LxlF5Gcb; arc=none smtp.client-ip=66.163.191.206
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=yahoo.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=yahoo.com
+	s=arc-20240116; t=1789803317; c=relaxed/simple;
+	bh=XxiSV9KB15uxRCUse5WjXjM7dc35/5V4z8ZQW4Zp7c8=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=c6421mmvr8BCgKhpSpWmH7hmTpmvm4ZXmHe/ibyydKQklV5fJ0aqdMOXSgHMltMgUrsOBgtH+uTfapkKV+gCiM4DqPfRSwhw9hFIjd4KCD1cq92s1TTuKxqopsXGuPNqhdlfaru8B+x4KOxetsk1lQBPphtjFN0ipqIydM4PrZ8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=BgNfBydL; arc=none smtp.client-ip=192.198.163.8
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=yahoo.com header.i=@yahoo.com header.b="LxlF5Gcb"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048; t=1789796519; bh=MMjUtHCs4/yDpCGHhPdiiHBAMqlZNMH0PrNv5RE8WeM=; h=Date:Subject:To:Cc:References:From:In-Reply-To:From:Subject:Reply-To; b=LxlF5GcbcJsP+FP4E/VTcPqJfgVMnTbYxSLZ+gI6/HfoGUMh/iG8xk/ayyL2yWk9p+J5ePqMPDaDMloTkD1EIGPUu/GFmq9lQJf5tlMVlK2SIDmdKV/81xf+j76/Rxf9w9lFhAdQwYwpvn+mYehTXetYxmD4s9Ez4EDs6/JVvm0KHN6Bfl5T37IGvlVxHWctAVbqUY422F9YbnsFAwbFXU6DPNA0hi3zBy61CaZYXZ0BHpIN+67JwUKiMLWZc3tniRkH4RSVeCSZOAbrwqDH9Dw/c6SKteVwUQcrPWrMAAQk4+8S+6SUm1UPYdSO5Hb3WN3NewWVxYLuFXOex0LqUw==
-X-SONIC-DKIM-SIGN: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048; t=1789796519; bh=Vik0Pm5PrM/rdtLd6V8ua4Xibxu+X/laNfeVN1qNDEC=; h=X-Sonic-MF:Date:Subject:To:From:From:Subject; b=tLwEGCYueoA4wr/HzI54OIW9hbKGPK4CXtEPHT2wcHNqa1L80KlzlCMhvnvnbxNdoQreU4h0G1jOLfqj/zEDM0Z87aIARHZ+uJIhm/PzpmTMFD8zON69kyZVJv4PNoEW9aHI/Ila3guL1gsEakjilGb5aaHq3cGmZrO+IhtB9KpIXGKilMDeQI7oaaolNmwZAzNNbKmWFuBAMcbc6JwPDa3pzTPFKu0BXFMRV+uD8Wr+TxF4HdXrXksYByYgJ2VkLqIQsFmiE1xn1BL2IWWT2T0RR3wjvgiIicAyyUG0QuRdrv+MJbwIjA4rdyCi+WR2dFcckHpIWPTFzhaGCsCc5w==
-X-YMail-OSG: _OWMhakVM1mD4R8z4djYc7GWo3kFWQarpT_qVqscZRjEAFpyVp.frhqu5z9EfxQ
- GxZfdCHsBkhr_0Fpmn5RCXq696_ZGvhOhskItxR9Jl0ejtHsqbCRZLHNnnJcUF9qLsZPA32PzDeD
- J1Y2MerrEY30XyNLgCdoaUfCqRzKX0sZ.jQXligC4eXmn8WsiRIHT43TD9WzCqd4eKZKa9UzvKPn
- NkHzUU3DyBvRHj_AqLruCerxLKvPzbyB5PHh84w8InlHsKcPCLO_eHeGwmEby_uwAB60pA65TrnN
- peFP7B0iLDgCpkl0x2GB4cG8q_wrCsaH9mGxPj2bvoChkSsPH2DQ5j1IgzCNyToJZjp12jvUk3mE
- UTkh0y3e8ldvaOSY3yWrzjxamI_SgLhVN5hav1iQXK6CQ_1YYtmwvsRVKkGbDKGlIKXT.u7a1Arh
- oKO8jw16p0LfYqXei_jzH_9h4AkjNF_JzUDfiYc5aMxjaHeVty73nb.o.9oEsL9jAIqxI8HlA3A2
- uEAHH0mIcni4SZ.vzg48vB2szMbeIkMYS3oMY6guCkTOysGHMeyxSp1RDEfCSpMz7ZBpwMQgN83D
- r9u0GMxOShO0tVynLxMMG_shUHM.jGzTdrPpXAIiJ8_jRs2sfkNP0F5Cps.Mdk8JI2vstN9NQ8Yi
- uQW9wbObprNJVEQUQHF8QdFARm8tnuO.M2GcdIO3pHEf_YApm3cd.IvKY2fa3zZZKvE00UKA45Aa
- 0rAG2V0kPgC7w4dT5GxgwngpGtNfhfebVg_lKeQA.UAeIfPJO.oEwFvnYlr34T71ECEHwjJ4a532
- uZf_LNHfSBjJiuYLki3UCAiBg18kmNWwaLCw.5IqlsyZUnb7selAdoTajKg1lo.jh1akGyjFPuqg
- tq0wmdoX.5dTHyW9PZ0MgHNC1fT_liz0JYU6IahKZ8rbOLytXrF7XMJCZoc4Y0gLu4rcw9LiRVQY
- jilRyacMlQdu_WOppMDVpWGptY2ID001k6vO6.JRmUBKB_MkvxOBsOXTPlbGD_8OwG_YmiOvaNyv
- tS4Jw6Jni7479XE5vMlcPMEJj0Dst_klslI93OYzerlUnkMiixy06FmNXLv1MDJns7w7ba_v9pwj
- 876vUT5S26HGTbeuXTqTALVXh42nPHwcTe_ZKPwKwn3v8IkzaiFRdEbZgNTHl047gouBlPyZ9hLX
- 2qpmdbFyvrWEW3J1nFccqa6245Cq88N7TW8LyfFeTnm4EFLbqDZA41EpgoOpY2o4XFhFFRZ19dUx
- bwi770GrjROL5.Wi8Ul8P6ZhXcvl1sOHA_dfucsnW6BFBfR5ohVtLg2_qN5ZpnMHEDxsjsux8svc
- vS3z4NOnLvVXdnD4XcCINUOqxSyGephfXM1c55RxdlbF62sJ6rfI4BMCW9KB9IX0k0YC8nN0fels
- 9zq_P3sIeSrIvZifVs4U8RNvV0mDmIxgaTuGzjXAc4ky2ezQnG6J3GI8m6NJQY5wLKkn2FkEYBt_
- iB9cJtMoby.yTQASm2Yqp98QqM.7aZiMXwnUL7BZ622X7iIBwEVWoEYDYfxyZXCcBg5Kp2n2G05W
- wKDYmYbELZmssC68vVmqEf2uWtvgJxhLDP2RRsotq9XHfKsnbz1AmBGXaXKF05isK4xJMVFlVRcz
- etus.3l0jXwkmeC_EXY1zqbYbT1YkPXQjg8lNP90wYo8m40GRIY7xXsREwrWiZ9.3.yHzEFhPs4M
- 67HxvYIU4HdQppwfX.OjXkZ4NbbMPwLQWY0ubKIt5hHghtVB7C3.85YDk3RtPemG_vOE7X_iavqk
- tzYRGPEKR4EJvnhYL4yzzNEQo5R23W2nqGgroC5a1JVxSLkJFlX8pwU3zt.1UpeU_hBd6maedRmA
- KStkvNmiLA3yVyjrynT58phi7qDcCF6DEnuv3z27l0JZqtv1DcVQYaHvsVkpEvhHGYb7QiYkyufr
- 96_BNxL.RlQ3hnBYYk.VwQYEX5g4VoYtJOWyUkngFtSDER5v3XV.zAVx0n.WWC53_g_Eqfu_Rr7L
- nNHSHu2G03pzmivXTXsltbov3t6XUR3mwb9JWEALKg9.ivCbZw4y1MuJvOLrUqKvcxY1TJkCf.KU
- mB.Uy314B5Yzz9MFv3evYcZLUYT.fZV3c20u6TnbKslsaLfuhYPKStGYT5I0sXc5j8_D9jGyjgPt
- sgAgtWXUM.FUBsv.G7HrUHqJJQRlYSFDfkGaQnkSQu9V.6NfYwUbBgv0Cx9UDNMJHL1CimvO12rj
- YE5jXwZygeyjcpozHf6gCWVn6eIRwySmEiO8UzcZJZtqdVyLf2lA7UqMsruB0FIIQB.nAHMMmUlW
- MYuh6ckuOqcnMVZpiLv7H__akYWjGIz2YruOC
-X-Sonic-MF: <namiltd@yahoo.com>
-X-Sonic-ID: fce36edf-97d5-4a87-9139-ccd619c6cdab
-Received: from sonic.gate.mail.ne1.yahoo.com by sonic312.consmr.mail.ne1.yahoo.com with HTTP; Sat, 19 Sep 2026 05:41:59 +0000
-Received: by hermes--production-ir2-cddf86dcf-fr2gr (Yahoo Inc. Hermes SMTP Server) with ESMTPA ID e73ad44338b916ed2b4d933f7288d92d;
-          Sat, 19 Sep 2026 05:21:18 +0000 (UTC)
-Message-ID: <a1c85a02-dd0b-4528-b31e-ccbebd7b84ce@yahoo.com>
-Date: Sat, 19 Sep 2026 07:21:15 +0200
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="BgNfBydL"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1789803316; x=1821339316;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=XxiSV9KB15uxRCUse5WjXjM7dc35/5V4z8ZQW4Zp7c8=;
+  b=BgNfBydLE4BdrbsegmX/JR74P1UEk5Qx1dO96Sx+SDO2ug+pNB8Zd0Dq
+   A/BJoSDHLg0tNLkiYfF63Nceu1+4QNZ/vyeOYHLpCi7JJjwJfEvPdojt2
+   /azMdLutGlQkxSk7ErX6j0K8NlFWXGcq91HhkmcbM5GrMxcwDqrPDqFZT
+   KOBBOv5jgLGER3al2I40ljHTXLDOM8l2rsu0AlhoFshh6t7ZSUMqz0T8l
+   MaoYJK4JgRZ5friOwLCyRThqx3l1c0/+aeTJ67z2ie6PRNXJLlZFXkz9p
+   dbzvw3fU743hUKVllS4SwDY3SxiUAf/qe1WWCTmONujUcLNw3vXITSL3P
+   w==;
+X-CSE-ConnectionGUID: QBgzJU9JRSyvl2hdIAa45g==
+X-CSE-MsgGUID: mx/Gm1ZVSTeSuz/xKGrXzQ==
+X-IronPort-AV: E=McAfee;i="6800,10657,11909"; a="107842584"
+X-IronPort-AV: E=Sophos;i="6.27,109,1787036400"; 
+   d="scan'208";a="107842584"
+Received: from fmviesa002.fm.intel.com ([10.60.135.142])
+  by fmvoesa102.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 19 Sep 2026 00:35:14 -0700
+X-CSE-ConnectionGUID: ZLvkaXWbQ1mcTnyE200BSw==
+X-CSE-MsgGUID: O9PN042rRV6YzZkAkRxv0g==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.27,109,1787036400"; 
+   d="scan'208";a="298187384"
+Received: from lkp-server01.sh.intel.com (HELO 462990a40a85) ([10.239.97.150])
+  by fmviesa002.fm.intel.com with ESMTP; 19 Sep 2026 00:35:11 -0700
+Received: from kbuild by 462990a40a85 with local (Exim 4.98.2)
+	(envelope-from <lkp@intel.com>)
+	id 1x7pbI-00000000AjZ-3904;
+	Sat, 19 Sep 2026 07:35:08 +0000
+Date: Sat, 19 Sep 2026 15:34:37 +0800
+From: kernel test robot <lkp@intel.com>
+To: Guangshuo Li <lgs201920130244@gmail.com>,
+	Bjorn Andersson <andersson@kernel.org>,
+	Mathieu Poirier <mathieu.poirier@linaro.org>,
+	Sivaprakash Murugesan <sivaprak@codeaurora.org>,
+	Gokul Sriram Palanisamy <quic_gokulsri@quicinc.com>,
+	Govind Singh <govinds@codeaurora.org>,
+	linux-arm-msm@vger.kernel.org, linux-remoteproc@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Cc: llvm@lists.linux.dev, oe-kbuild-all@lists.linux.dev,
+	Guangshuo Li <lgs201920130244@gmail.com>, stable@vger.kernel.org
+Subject: Re: [PATCH] remoteproc: qcom: q6v5-wcss: remove all subdevices on
+ unbind
+Message-ID: <202609191513.bywryVFw-lkp@intel.com>
+References: <20260918041321.3532355-1-lgs201920130244@gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] clk: qcom: gcc-ipq5018: mark 'gpll0_main' clock as
- critical
-To: Gabor Juhos <j4g8y7@gmail.com>, Bjorn Andersson <andersson@kernel.org>,
- Stephen Boyd <sboyd@kernel.org>, Brian Masney <bmasney+clk@redhat.com>,
- Jerome Brunet <jbrunet+clk@baylibre.com>,
- Konrad Dybcio <konradybcio@kernel.org>,
- Abel Vesa <abel.vesa@oss.qualcomm.com>,
- Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>,
- Gokul Sriram Palanisamy <quic_gokulsri@quicinc.com>,
- Sricharan Ramabadhran <quic_srichara@quicinc.com>
-Cc: Stanislaw Pal <kuncy7@gmail.com>, Jie Luo <jie.luo@oss.qualcomm.com>,
- Georg Seema <georgseema@gmail.com>, linux-arm-msm@vger.kernel.org,
- linux-clk@vger.kernel.org, linux-kernel@vger.kernel.org,
- stable@vger.kernel.org
-References: <20260918-ipq5018-mark-gpll0_main-critical-v1-1-fbe8f27a0106@gmail.com>
-Content-Language: pl
-From: Mieczyslaw Nalewaj <namiltd@yahoo.com>
-In-Reply-To: <20260918-ipq5018-mark-gpll0_main-critical-v1-1-fbe8f27a0106@gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Mailer: WebService/1.1.26541 mail.backend.jedi.jws.acl:role.jedi.acl.token.atz.jws.hermes.yahoo
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260918041321.3532355-1-lgs201920130244@gmail.com>
 
-On 9/18/2026 11:27 AM, Gabor Juhos wrote:
-> On IPQ5018, the APCS core clock feeds the CPUs. It can use
-> different clocks as its parent, but during system boot it
-> utilizes GPLL0.
->
-> Under some cicumstances, the 'gpll0_main' clock is getting
-> disabled during kernel start which results in a system hang
-> then the hardware watchdog restarts the board after a while.
-[...]
-> Mark the clock as critical in order to avoid such hangs.
->
-> Cc: stable@vger.kernel.org
-> Fixes: e3fdbef1bab8 ("clk: qcom: Add Global Clock controller (GCC) driver for IPQ5018")
-> Signed-off-by: Gabor Juhos <j4g8y7@gmail.com>
+Hi Guangshuo,
 
-Reviewed-by: Mieczyslaw Nalewaj <namiltd@yahoo.com>
+kernel test robot noticed the following build errors:
+
+[auto build test ERROR on remoteproc/rproc-next]
+[also build test ERROR on linus/master v7.3-rc3 next-20260918]
+[If your patch is applied to the wrong git tree, kindly drop us a note.
+And when submitting patch, we suggest to use '--base' as documented in
+https://git-scm.com/docs/git-format-patch#_base_tree_information]
+
+url:    https://github.com/intel-lab-lkp/linux/commits/Guangshuo-Li/remoteproc-qcom-q6v5-wcss-remove-all-subdevices-on-unbind/20260918-121321
+base:   https://git.kernel.org/pub/scm/linux/kernel/git/remoteproc/linux.git rproc-next
+patch link:    https://lore.kernel.org/r/20260918041321.3532355-1-lgs201920130244%40gmail.com
+patch subject: [PATCH] remoteproc: qcom: q6v5-wcss: remove all subdevices on unbind
+config: arm64-allmodconfig (https://download.01.org/0day-ci/archive/20260919/202609191513.bywryVFw-lkp@intel.com/config)
+compiler: clang version 24.0.0git (https://github.com/llvm/llvm-project 7252edd9aa82ef1c570ff6694ef7f4763a8a5d2f)
+rustc: rustc 1.96.0 (ac68faa20 2026-05-25)
+reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20260919/202609191513.bywryVFw-lkp@intel.com/reproduce)
+
+If you fix the issue in a separate patch/commit (i.e. not just a new version of
+the same patch/commit), kindly add following tags
+| Reported-by: kernel test robot <lkp@intel.com>
+| Closes: https://lore.kernel.org/oe-kbuild-all/202609191513.bywryVFw-lkp@intel.com/
+
+All errors (new ones prefixed by >>):
+
+>> drivers/remoteproc/qcom_q6v5_wcss.c:1051:1: error: invalid argument type 'void' to unary expression
+    1051 | +       qcom_remove_ssr_subdev(rproc, &wcss->ssr_subdev);
+         | ^       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   1 error generated.
+
+
+vim +/void +1051 drivers/remoteproc/qcom_q6v5_wcss.c
+
+  1039	
+  1040	static void q6v5_wcss_remove(struct platform_device *pdev)
+  1041	{
+  1042		struct rproc *rproc = platform_get_drvdata(pdev);
+  1043		struct q6v5_wcss *wcss = rproc->priv;
+  1044	
+  1045		rproc_del(rproc);
+  1046	
+  1047		qcom_q6v5_deinit(&wcss->q6v5);
+  1048		qcom_remove_glink_subdev(rproc, &wcss->glink_subdev);
+  1049		qcom_remove_pdm_subdev(rproc, &wcss->pdm_subdev);
+  1050		qcom_remove_sysmon_subdev(wcss->sysmon);
+> 1051	+	qcom_remove_ssr_subdev(rproc, &wcss->ssr_subdev);
+  1052	}
+  1053	
+
+--
+0-DAY CI Kernel Test Service
+https://github.com/intel/lkp-tests/wiki
