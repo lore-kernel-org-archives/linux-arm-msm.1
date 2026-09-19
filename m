@@ -1,162 +1,152 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from mail.ionic.de (ionic.de [145.239.234.145])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 914BE342524
-	for <linux-arm-msm@vger.kernel.org>; Sat, 19 Sep 2026 14:14:38 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CD59E1E7C18;
+	Sat, 19 Sep 2026 15:55:26 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=145.239.234.145
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789827280; cv=none; b=PawGq5dQCox37UKEU0lmBcmuJ5u6vBLedo+Mt+SwsaS80HOk7ER6BQKonTwTbRjkHz2jNwVjWMJ1Hegxzl69vYhv+iaseSSIUhSr50Ae7F5bp4CCnUbQhBv1WbsxUylnA+u052HpOzbAxJ3krfeVP/hGOAf+K3RWziE0l2OsDdU=
+	t=1789833331; cv=none; b=iCvDWmdHFUT5EW/mVj4YuWk+HaiuyooRlVuMqkR7omSLk4b8EDtC/xEUH6Qd1W0OIVQ4m19s8aT17e5ieEFHZ2zcYP4FG52Ufag8Wi9vpHa5kcLIOgWOEvZMIV/AQC7c/IVX4YidWqgcacT9ljsZTHq6GTzvp/KS+0DC72Zykvs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789827280; c=relaxed/simple;
-	bh=Q5L6F3y5YYrpJvuR8h1skYv9DtKr1aU1rVKze+Cw4JU=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=XE2C73lzW4hNJCjGxIlmKZ6IOdczRkX4ItkfLdUMjonKcwnKJEhxepte6L1kgO6I1KQRXQR8F/5R4VEf/J8qVhMFcAxcDQAZ74ekNrTxGfD4ARIx6fXerZU5kowpaECehR0/Fr3b0N1U7b7n4kun9M3I8vKkXwTdLP3wgYp64ok=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=gCo6XeDu; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=UwURnZmB; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1789833331; c=relaxed/simple;
+	bh=adUDFqO22StJ6ilTA57a3K94u917eEMrpj1AlJLZDrE=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=eUO6W6OI6DynnuUi5t+eUxUE4liFyXPVSBxpLEsO3jhfXWFaJCUP++8ssa0yMNgAob83ra4vi3yplBpcVfTbircQgueWrkRv5aq+vcxONtYp7ijCKnbkiv1ZBpLC97YuDDC79ZjPCllMKRtQwfl5k0M4Db/A5MPFt1WmAZV1Mw8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=ionic.de; spf=pass smtp.mailfrom=ionic.de; dkim=pass (1024-bit key) header.d=ionic.de header.i=@ionic.de header.b=MHqaz3MO; arc=none smtp.client-ip=145.239.234.145
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=ionic.de
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ionic.de
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="gCo6XeDu";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="UwURnZmB"
-Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68JDK0KX3674442
-	for <linux-arm-msm@vger.kernel.org>; Sat, 19 Sep 2026 14:14:37 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:date:from:message-id:mime-version
-	:subject:to; s=qcppdkim1; bh=vg1Pxt23ysh+GHQlArRexPb5cSwK0994P+V
-	BXsKz6SM=; b=gCo6XeDuZQHxCDSA+HEJga/uYD2G5VsrJalhgvZ/9/YhJRMmBOq
-	NKqb0avNbFLQUHGMEUD/Pgyflp82dr0ZuMAY69hKonr6dXZWoTGs6dT1FEDuemAw
-	sjvh1iKIHqtclvMFuJ3VXVtmxb9SAlTn2yCELNg7T53fgrjW5wreplZ/FD3lDp2L
-	zL9aG4HVHD7g7MMfAF5jlkfbLlshBKXwLZm4wbwkHY5NsuyGmJR8K9NXjAYeZsrS
-	V5Itp1hEOV7aZjKH6fQbojfR8nkEtqb3HXaudlxQXz/Mzc2VU/WoxmJUatdrHxEr
-	9rhASFePuVt4IYfy7pFQrc22w4hNNMli2vg==
-Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com [209.85.222.199])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gshqfs47g-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Sat, 19 Sep 2026 14:14:37 +0000 (GMT)
-Received: by mail-qk1-f199.google.com with SMTP id af79cd13be357-93a0312937eso223260385a.1
-        for <linux-arm-msm@vger.kernel.org>; Sat, 19 Sep 2026 07:14:37 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1789827276; x=1790432076; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=vg1Pxt23ysh+GHQlArRexPb5cSwK0994P+VBXsKz6SM=;
-        b=UwURnZmBK3DLcTxeSvfxnT3FwZGyllS1B9Zi5S24Mhj4Js5h3WytS2NI23WrqhcEvS
-         3vs2+K7Cp229WwA0dxTpLURrXp/+ggdRWPHCfOyxWP2C/hq+twhuVwARl2tfrp+xuaTc
-         LB/8RfnkopG20zmylH10L/H0BngjFY687JKYeqYy+U0XCcATY/V0UyKVJdW5QTRqv8Ud
-         Qv+6HqZo31FX85hvtNTtJSe3Ixx0P+qTT5mjfYQ3BEyywsX/oF7kLee/IxGVRMrq+bZT
-         G9qhZuYKyrDYfKL4xixVOq+LV5Q4RbD2y/AuBqbqR6HukNjAXIoGEjxxukGVd1GevBzZ
-         NUHQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1789827276; x=1790432076;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=vg1Pxt23ysh+GHQlArRexPb5cSwK0994P+VBXsKz6SM=;
-        b=aeg4OLCF8exqQ1yfKxU6IDFBYxl8l7p/On+dkg4GK+gvMs8Mfdz5mDf8KWcTngSZWp
-         5c5bKJdRp1vpVqZG7IafE+5zGs9EPb3jduNjeqw9YMmLJ41w5nzFSXwKNA6tGXtCerBs
-         IciC2ZNYANjtBTHaO9Zk5c+2nq2dWUXyp6CGJIGAdzpzj0z9x5EyH4tweibovnIdO0VK
-         Ow102HktdKRBOtox/byLkODJer38qE7DXeX/5cpaA4Rg9rl3Ek9NjZDaROgYd26/H4aT
-         12VNvcdH+fvbBVIUdRpQXA9vk+tLvu4HDPx1NIWGAjWOXruEaG04v4ijh4yEY5h7GDbV
-         4MHw==
-X-Forwarded-Encrypted: i=1; AKwUvBwm9yHKYlRvXg+CZdSv1gXon9lqZqtMJdgxupNFlGjGu3hoSzR0Wkm1IBItYk+cMcMaW1OewlM6TM1OWy0Y@vger.kernel.org
-X-Gm-Message-State: AFuF++nXgrefcnl/1ecx3pRhCAtI5Q4BO/YSpl2PF0iw1dvCi8T+hghn
-	n1KxYV1fSiucuTMSdPYfv7dpoAZvFdVYxqIK7eFr0AwxaRGMy+NCV4OOZADGqXUiLnDUEZJzeHJ
-	4HPEup6FQF4nyik+2NKNd+OzHu/pDVwNMHJInB6YUvcZkOhhr7oFESHMIadjqqXJzzimT
-X-Gm-Gg: AYBFou3UgE5IUBPjpGmdFs6oYZ0W8RSl6OdVPIhgT2KsgyWP0yMk4D/DZ5lAB2OSUz9
-	oixrg4JZQlv8790vkZogoC5Qhy6lJDgbOnnjR2YfzSANNBRliE7pYNyQu4qax7vrkBYD8TW7aA2
-	YpuZqTFcFFldD8hw8yi+DhjjgsPrsLYionpfk60lTiUKv5wz/e2WtN+4n12ZDHUaNyA5eTkxzAW
-	v8qOYYRg82QQAeCVxxQF1DYyQlcFX5lgo5Le4Lov2e7fR6NiUurwEMkNK4q9pHWYlpGlBp6eDti
-	Sjko4XycEYLUKiXwdZrOYb0TrZzzF9id+5uZTOIHMsr2j4SN/llzD264n0Z3DfKGcNoGmtbR6x+
-	pliDajCZiIZplefFJ0jhtaUVzmCkKaO+mHFTVOi3jY4MFdEwutslQnEw+NQ73ikPB7yRSlwblmp
-	t47Ugm8Efk2Vrgzgg=
-X-Received: by 2002:a05:620a:a0cb:20b0:93b:fae3:7fdc with SMTP id af79cd13be357-93bfae38002mr16672585a.71.1789827276486;
-        Sat, 19 Sep 2026 07:14:36 -0700 (PDT)
-X-Received: by 2002:a05:620a:a0cb:20b0:93b:fae3:7fdc with SMTP id af79cd13be357-93bfae38002mr16669585a.71.1789827275781;
-        Sat, 19 Sep 2026 07:14:35 -0700 (PDT)
-Received: from shalem (2001-1c00-0c32-7800-5bfa-a036-83f0-f9ec.cable.dynamic.v6.ziggo.nl. [2001:1c00:c32:7800:5bfa:a036:83f0:f9ec])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c2a358e31fcsm84307866b.59.2026.09.19.07.14.34
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 19 Sep 2026 07:14:34 -0700 (PDT)
-From: Hans de Goede <johannes.goede@oss.qualcomm.com>
-To: Mukesh Kumar Savaliya <mukesh.savaliya@oss.qualcomm.com>,
-        Viken Dadhaniya <viken.dadhaniya@oss.qualcomm.com>,
-        Andi Shyti <andi.shyti@kernel.org>
-Cc: Hans de Goede <johannes.goede@oss.qualcomm.com>, linux-i2c@vger.kernel.org,
-        linux-arm-msm@vger.kernel.org
-Subject: [PATCH resend] i2c: qcom-geni: Use device_set_node() helper
-Date: Sat, 19 Sep 2026 16:14:34 +0200
-Message-ID: <20260919141434.22999-1-johannes.goede@oss.qualcomm.com>
-X-Mailer: git-send-email 2.55.0
+	dkim=pass (1024-bit key) header.d=ionic.de header.i=@ionic.de header.b="MHqaz3MO"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ionic.de; s=default;
+	t=1789832738; bh=adUDFqO22StJ6ilTA57a3K94u917eEMrpj1AlJLZDrE=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+	b=MHqaz3MOS0UJVLgEDnlQ0sUPeaydyOSC8WzdXtCWrEQwlUAL+C/I2KMthIoGENSOP
+	 uDwWLSddV34njdRoxXiBUGoL9/opSYuroBEXHhtRpncCZfFnjSyeTz0O174TcqzQkp
+	 CwlaGNYfCSVyjJ39li9HkDfARb8gaw4hY49OdNIE=
+Received: from [172.24.215.49] (unknown [185.102.219.57])
+	by mail.ionic.de (Postfix) with ESMTPSA id 9FBCC1480E15;
+	Sat, 19 Sep 2026 17:45:38 +0200 (CEST)
+Message-ID: <a13e783a-1c55-4e9d-92e0-634f8fbb10d1@ionic.de>
+Date: Sat, 19 Sep 2026 17:45:37 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTE5MDIwNyBTYWx0ZWRfX1ltvx4NlZE4b
- svod3ul+XaL5VW5WLtpzuWUwPU8ifOXcqIx/IzGhh2iZ6ftAVjA2eGKnhjYylkYScmOXTSPEDds
- J2rDpUz3DdW2G+2s38t+etqwtd7cRvvWOWj+heSc00ElL3D1zjtKLElyyuwsZhunpxS6Q1VQqKh
- Vw6leABLma3XePFpK/1H+QoEMWc2NseUyQ2Dh1ZA0DOeJlOcKG5Xo/5ai9oDhiMua+onVpv4xiO
- P8PuNbQTAWLc8LoreFOBSGwsf1PWPRsMAaG6paJXLQvIEq2A4XJAzWoGVYOl4Uk57deOq616hQe
- 0Lbh1F8xrjn3ht8F2IRoqn/CGFGgxfUZvh4EvIRhovPP0ZQiS7J/pu9LBqLS1vbPrzDZc7e+vyw
- xGJWOcRBvFaplhndOb5VK+PFIPbtWpqtDEjIzxKS2wr9uYmmkWkx3rz4dsdg+xyzhUO93ZzqTyf
- B+OxaT7B1y9JOZaVuJQ==
-X-Proofpoint-GUID: rPM8IQA2bFYKe7pxUC4Pz5hREWij4ryo
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTE5MDIwNyBTYWx0ZWRfXyD59iH+KPCDc
- h+5HB9HfC9MJmXz2xQoUeTnGrS8reomfhufcVdB2YWmk90dpRUAGkDoBhBYNvLgyF+DgvylqS2j
- YAVlrEosWdk/rC7N6ns42KFyAA0WMaQ=
-X-Proofpoint-ORIG-GUID: rPM8IQA2bFYKe7pxUC4Pz5hREWij4ryo
-X-Authority-Analysis: v=2.4 cv=XegcX455 c=1 sm=1 tr=0 ts=6aae98cd cx=c_pps
- a=HLyN3IcIa5EE8TELMZ618Q==:117 a=xqWC_Br6kY4A:10 a=VdqzKS8jKosA:10
- a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
- a=ZpdpYltYx_vBUK5n70dp:22 a=EUspDBNiAAAA:8 a=2VF4tGTWRqxSFCeSHQ8A:9
- a=bTQJ7kPSJx9SKPbeHEYW:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-19_04,2026-09-16_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0 bulkscore=0 clxscore=1015 adultscore=0 spamscore=0
- phishscore=0 priorityscore=1501 suspectscore=0 malwarescore=0 impostorscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609190207
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 4/4] wifi: ath12k: Connect to the QMI server belonging to
+ the device owned by this driver
+To: Juha-Matti Tilli <juha-matti.tilli@iki.fi>,
+ Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>,
+ Manivannan Sadhasivam <mani@kernel.org>,
+ "David S . Miller" <davem@davemloft.net>, Eric Dumazet
+ <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>,
+ Paolo Abeni <pabeni@redhat.com>, Simon Horman <horms@kernel.org>,
+ Jeff Johnson <jjohnson@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, netdev@vger.kernel.org,
+ linux-kernel@vger.kernel.org, linux-wireless@vger.kernel.org,
+ ath11k@lists.infradead.org, ath12k@lists.infradead.org,
+ Bjorn Andersson <andersson@kernel.org>,
+ Chris Lew <christopher.lew@oss.qualcomm.com>,
+ Deepak Kumar Singh <deepak.singh@oss.qualcomm.com>,
+ Raj Kumar Bhagat <raj.bhagat@oss.qualcomm.com>,
+ Jeff Hugo <jeff.hugo@oss.qualcomm.com>, david@3adesign.co.uk,
+ nakonechnij.sergsj@gmail.com
+References: <20260918-qrtr-multi-ep-v1-0-8a06caa368d3@oss.qualcomm.com>
+ <20260918-qrtr-multi-ep-v1-4-8a06caa368d3@oss.qualcomm.com>
+ <cb6766f8-54b9-435f-a69a-e712727dabdb@app.fastmail.com>
+Content-Language: en-US
+From: Mihai Moldovan <ionic@ionic.de>
+Autocrypt: addr=ionic@ionic.de; keydata=
+ xsFNBEjok5sBEADlDP0MwtucH6BJN2pUuvLLuRgVo2rBG2TsE/Ijht8/C4QZ6v91pXEs02m0
+ y/q3L/FzDSdcKddY6mWqplOiCAbT6F83e08ioF5+AqBs9PsI5XwohW9DPjtRApYlUiQgofe9
+ 0t9F/77hPTafypycks9buJHvWKRy7NZ+ZtYv3bQMPFXVmDG7FXJqI65uZh2jH9jeJ+YyGnBX
+ j82XHHtiRoR7+2XVnDZiFNYPhFVBEML7X0IGICMbtWUd/jECMJ6g8V7KMyi321GP3ijC9ygh
+ 3SeT+Z+mJNkMmq2ii6Q2OkE12gelw1p0wzf7XF4Pl014pDp/j+A99/VLGyJK52VoNc8OMO5o
+ gZE0DldJzzEmf+xX7fopNVE3NYtldJWG6QV+tZr3DN5KcHIOQ7JRAFlYuROywQAFrQb7TG0M
+ S/iVEngg2DssRQ0sq9HkHahxCFyelBYKGAaljBJ4A4T8DcP2DoPVG5cm9qe4jKlJMmM1JtZz
+ jNlEH4qp6ZzdpYT/FSWQWg57S6ISDryf6Cn+YAg14VWm0saE8NkJXTaOZjA+7qI/uOLLTUaa
+ aGjSEsXFE7po6KDjx+BkyOrp3i/LBWcyClfY/OUvpyKT5+mDE5H0x074MTBcH9p7Zdy8DatA
+ Jryb0vt2YeEe3vE4e1+M0kn8QfDlB9/VAAOmUKUvGTdvVlRNdwARAQABzR9NaWhhaSBNb2xk
+ b3ZhbiA8aW9uaWNAaW9uaWMuZGU+wsGfBBMBCABJAhsjAh4BAheAAhkBCwsKDQkMCAsHAQMC
+ BxUKCQgLAwIFFgIDAQAWIQRuEdCPdTOBx0TxyDwf1i7ZbiU6hwUCaOKkhQUJIdyV6gAKCRAf
+ 1i7ZbiU6hzYoEACQjusY4uxEtHEVHGIFxRMHV1UEOL5sJYNSSB6dDDjNFBVl159AfjubC6Pp
+ oArcQsIRHt4N2LXxZ1Q0x9KzjtIAIT6Ht0e4uGxkgBrLI6qL66SymguiXa5mLB+cOnO0H2rP
+ fkIP7ReC8raZAWjvwyp2nVwayvut4dQkgIgbfU1Cosdg3iWfQbGioDpLDZ65c4v0tUGGdCW+
+ /v+VwbpG3D2HTAYFTrViZXrKIwFQsuUA23rCvlhSmMe8OtP47S1d/ToMC9Xx4Mv37QxvkI0J
+ hUV6vAvtLnp0M4bb9An84vzBx9R+nqSoXKLbyV0WI6tifvKYradup7/K+mBNxBeJEfwLvZbx
+ 7BLAXQpCD2frwqlnEyJcZJBWeAPlJ7MFGHgZQxED57q5zE+BmSEUzapsA93n2lI6lL3nYRvL
+ bh315nNN03Bpyim0iNVHSMRTc3Yd7CdzIvv1XavxETTnYgGVaRciN/y/uSfVM8o5nBwRSfhy
+ jE7FOdEA0yBbTdkcm1byNgTL6RH97C3AKXcKkvb9nxFEpv0n1Vp3cEt9tYk3Uti1I4ZABAmY
+ DuIBJ9VJ69OgejTBld2Ew5P5b/l1t20KcT3nzwSefbBYzgJp49n+JA9501rLmBLrif/M4un3
+ dbisAnC7esjq2KAz87rYxTL60BnYjDIH7MSb37F4aG7/Hxjrqs7BTQRI6JObARAA8Prkme+B
+ PwRqallmmNUuWC8Yt+J6XjYAH+Uf0k/H6MLA7Z+ZL8AHQ+0N306r/YFVnw2SjhaDODwhRoMv
+ dOKtoIcJZ9L0LQAtizhZMbHCb+CMtcezGZXamXXpk10TzrbI9gnROz1xBnTkzpuOkgo43HRx
+ 7GuYy+imM4Lxh/hfgRM6MFjQlcIsUd0UGRCxuq8QmxRqQpRougCwPeXjfOeMRkaQUI7A8kLJ
+ 7bTmSzjB9fSBv63b7bajhFHid1COYGe3EZOYRi1RTzblTnq2Fdv+BN/ve/9BdZgApfRSX8Qk
+ uLsuZF9OWHxIs3wwpvqFoyBXR29CqgrcQFFA/Lm3i/de3kFuXJUVFTYM4tLwV85J9yGtK6nU
+ sA/v6LXcaTGrQ9P3rJ3iVPYKuyF2w8IMqvFTnHu6+nCvBJxLymOsYJFN4W/5TYdWk1hdIYmm
+ NlM/PH+RWL8z+1WWZgZOBPFJ0FQQbDvTMP6m0/GZT1ZFUVoBG/FAiIQ9UDl8gRsGfe0wS6gz
+ k2evXeAZQyZCii3Dni7Di2KjaPpnl/1F7Zelueb7VbgdoPRmND9rFixI6bFC4yjlSnL5iwIi
+ ULDkLDJN5lcRHI5FO/6bzwVSgHmI+eMlNA/hysdTtp9AjE7VkVxeC9TJ+kEZDv5VUTSxUpNs
+ Wj922PkX+78EYPPGTOG4xx7PMqcAEQEAAcLBfAQYAQgAJgIbDBYhBG4R0I91M4HHRPHIPB/W
+ LtluJTqHBQJo4qRsBQkh3JXRAAoJEB/WLtluJTqHYGIP/AiuIusP2DHYuBqI4W6q0i114jmd
+ xLyzQuZgKsuNSYO2suLS0d47E73Bb941mwC/2zm0yAEk7PAGZdQzRkyMVutwXFryUhBzF+QI
+ RsQ80K80glCCe1HGLi8MHgtclZmjrjc26xEtlr1VAK3o61yZ1cSORnRxI328PMXtaol5R+Pn
+ 3+JIZZ3Rn3eVfwrX7sWTrfohCxIEDQoJaCE3j7h6fD1CX1/z/mRQt/gU1ptkys+CN1n+FVOj
+ H9aIYSmwKw2KpC0KmzJNeI7a9OLXmW2IMW/8VQT5PeB07wTdScprmAcqseUvNlZk+d/LKxGH
+ 5y64JDP4mHukzI+k7A6oSN3jGCyejRmKoWXuqHbhMzQA8E6RRL1DT/QI2zkUw6WoBgnQXiN4
+ iEnOF4sA5KFxPQQ2M0wWwEgkSBfzQFLcdgc7RCxEGPAMED0g/qDp3TI69BsEQUEtVe5i2At6
+ /p96BYVLw5blbsycn2jbWPAlBJTkM8xlgabAhOXhVS8omSRJvlAIxe+f3wU2Glzp76d4saHw
+ SLJ94IoJdcHtzUWAseBOV2x+IzaIcO0jfdc37vMGCKTpOms1JhJUpyAmfvIca62G6C1c4+6e
+ +FV0CaE74iU1Z6mG9+EPoB6MohOg/iDUaxf1faKF+iKZLjN16fDxCUDfR2uKikOy7PVb1OVt
+ tS48DBVD
+In-Reply-To: <cb6766f8-54b9-435f-a69a-e712727dabdb@app.fastmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Use the device_set_node() helper instead of manually setting
-adap.dev.of_node, this:
+* On 9/18/26 18:51, Juha-Matti Tilli wrote:
+>> But now, QRTR provides each MHI endpoint a unique node id which is
+>> different from the node id announced by the device. So use the same id to
+>> pick the correct server. Add a get_qrtr_node_id() HIF callback that returns
+>> the node id derived from the MHI controller index and zero for transports
+>> that do not assign one. In the new_server callback, skip any service whose
+>> node id does not match. A node id of zero disables the check, so transports
+>> that do not assign one keep their current behavior.
+>>
+>> Signed-off-by: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
+> 
+> CC'ing Mihai. He is known to have a platform with two ath12k cards,
+> but he said he's been busy recently, so his testing input is uncertain.
 
-1. Ensures that in if he parent has an of_node adap.dev.fwnode also
-gets set to point to the parent of_node, rather then leaving it NULL.
+I probably could change the setup to use 2 x ath12k modules, yes, but really I 
+have always been testing with one module using ath11k and the other module using 
+ath12k. Never tested two ath11k or ath12k at a time. There might be even more 
+obstacles to getting that to work correctly.
 
-2. Removes the need the specially handle the parent having an ACPI
-fwnode, since the generic helpers take care of this too.
+My "test setup" is in the new flat where I don't have a proper networking setup, 
+though, so... meh. Don't count on me testing it this year still.
 
-Signed-off-by: Hans de Goede <johannes.goede@oss.qualcomm.com>
----
- drivers/i2c/busses/i2c-qcom-geni.c | 5 +----
- 1 file changed, 1 insertion(+), 4 deletions(-)
+The proposed code looks simple enough, though, and generally makes sense. It 
+also does away with aux data on the qrtr socket, and if both endpoints can 
+access the same MHI data, it probably makes sense to let them both determine the 
+node ID via the shared MHI controller index (the important part here is that the 
+node ID knowledge is not stored or passed through anywhere in a common qrtr data 
+structure, but essentially becomes a "shared secret" that both end points 
+determine individually, but also in a deterministic, matching way).
 
-diff --git a/drivers/i2c/busses/i2c-qcom-geni.c b/drivers/i2c/busses/i2c-qcom-geni.c
-index 00013b41a6f5..50d3a48a4644 100644
---- a/drivers/i2c/busses/i2c-qcom-geni.c
-+++ b/drivers/i2c/busses/i2c-qcom-geni.c
-@@ -1145,9 +1145,6 @@ static int geni_i2c_probe(struct platform_device *pdev)
- 		gi2c->clk_freq_out = I2C_MAX_STANDARD_MODE_FREQ;
- 	}
- 
--	if (has_acpi_companion(dev))
--		ACPI_COMPANION_SET(&gi2c->adap.dev, ACPI_COMPANION(dev));
--
- 	gi2c->irq = platform_get_irq(pdev, 0);
- 	if (gi2c->irq < 0)
- 		return gi2c->irq;
-@@ -1173,7 +1170,7 @@ static int geni_i2c_probe(struct platform_device *pdev)
- 
- 	i2c_set_adapdata(&gi2c->adap, gi2c);
- 	gi2c->adap.dev.parent = dev;
--	gi2c->adap.dev.of_node = dev->of_node;
-+	device_set_node(&gi2c->adap.dev, dev_fwnode(dev));
- 	strscpy(gi2c->adap.name, "Geni-I2C", sizeof(gi2c->adap.name));
- 
- 	pm_runtime_set_suspended(dev);
--- 
-2.55.0
+Since this changes the endpoint ID completely, this might even make the 
+user-space qrtr tools work transparently with multiple devices, i.e., not 
+requiring any changes to that part. That would be my hope at least. Definitely 
+needs testing, though. It would be great if the user-space tools could directly 
+communicate with the servers on the modules, but I'm not quite sure how the 
+user-space tools would come to the correct node ID conclusion. This might be one 
+drawback of the "shared knowledge" architecture - it might be difficult to make 
+it work outside of the driver realm.
 
+
+Indeed a cleaner and more simple approach, though.
+
+
+
+Mihai
