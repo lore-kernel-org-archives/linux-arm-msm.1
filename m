@@ -1,112 +1,127 @@
-Received: from mail-wm2-f12.google.com (mail-wm2-f12.google.com [74.125.225.140])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.15])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 86E5425DB12
-	for <linux-arm-msm@vger.kernel.org>; Sat, 19 Sep 2026 13:01:41 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.225.140
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BB198376A03;
+	Sat, 19 Sep 2026 13:13:39 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.15
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789822903; cv=none; b=AesB4uZoanHJ8R77eff06CbdXfn9SVleeDWlYKJkCQLzg837GzMPUmaSXCz9ultTvtU8LNI4aJja2ytlil0pN/gMBY7XmRHoht4FrEBVqOLGGJgG6oTYOuSiPx4DKR2Hydbg296n9/m136gz81E+7FDA8WZNivo586C206SJ8+c=
+	t=1789823621; cv=none; b=HJvMcqPS09aDS/xyotL3VoraNqgnoA80ZThdtl8LwlDK4p5emBEDx+2rKJ5IzWnP6cuxU85oPOikBDABLuZRBGYLhu2wUCOpwmN79qZ/8snLqjX9a1N2yMA+En89hlE9lYjJ0L/fmiNcyiQz4tGlm8gabrH458GEVqjD4VQeMZc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789822903; c=relaxed/simple;
-	bh=uA+HoBevpg+o3pjy8ENPdza6Bd76MyHGiCyS2GIOcHw=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=q8D1CfjrhuuIqBttZEYhr98mC/7LAqfoF3pKQvofKQIrRqOsauJldYK7pLIz9uXieSES/gAQQOQdkQvFLPCyqmvLD3GAsMx6KyLd3y+VWAAF/zVEaBLBaBkEdn8KI37WnWpBdEwwdHvRoqhIFHTCBbCS/Tv3UE4pJiaHYQ15o7Y=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=UXdyBIrb; arc=none smtp.client-ip=74.125.225.140
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	s=arc-20240116; t=1789823621; c=relaxed/simple;
+	bh=K016Xuspy0+i4gvt1BjSnZ/7rNHp4XWw8iWjdQD++EY=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=mGZ4FI/nR1Be9vecLEkgR28UqDSVJVnhimA5h5btIdoOmPlR269DqmnlJzoZp5exSrqvPs3ANseWM7v+yp2LmHM4DrbEmZjFk/NJb6mdLBSuRbDtjpHimjmm6jNdxB0j3B2w0EB/WY1LVVICRu8ANbR9yPm3NTn17qQkNpe9R+Y=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=aXD6mpca; arc=none smtp.client-ip=192.198.163.15
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="UXdyBIrb"
-Received: by mail-wm2-f12.google.com with SMTP id 5b1f17b1804b1-49e6598dd44so8384595e9.1
-        for <linux-arm-msm@vger.kernel.org>; Sat, 19 Sep 2026 06:01:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1789822900; x=1790427700; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:mime-version:references
-         :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=uA+HoBevpg+o3pjy8ENPdza6Bd76MyHGiCyS2GIOcHw=;
-        b=UXdyBIrbzpBh1E77+g/CtssQ1/m0/osSFpCQH/9bZhhZnbwji0JMcFCd6vr7zWjhhu
-         OSco+zmhnmhSdrtj7TLuXYa4zUB1KZuuUiD9md2H6d3s3LlAdfHs3SVUd2otPG42+9GC
-         ViJeidk3BhQZbRR3/D3O111KYtdV3ltjfVd3YflSDFj8ggT3XzlgPhMD4SKHnYFXOkCK
-         La6EKZT4EhFxybk8b5vg/Rb9oBOYUYWv/THvvU9VDQHmkXmmEmUgNOF9k613ITleCx46
-         g2xkt6I1YgdhF/5JJmFyHpubOzCiWhT6puaw1n6nR27QjkWX+MqEQoua/o2nkgCcAlbE
-         4zbg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1789822900; x=1790427700;
-        h=content-transfer-encoding:content-type:mime-version:references
-         :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=uA+HoBevpg+o3pjy8ENPdza6Bd76MyHGiCyS2GIOcHw=;
-        b=sLGM5A4WSSlD02aNrSZwCmICKy3boZ9YkqnCPvjLMYyBvFCam79cRodij+vUayvnrT
-         Dj/uQwmTEviHlUbrKR5hhitnawt3m3jcm3l2QAkSkReYBYTctWAnadnpVr7Q307kvpnD
-         rtD+gUEFjrH4s7JBJDQ/N5tlNv4yQ61gi0Hn7h0DAf0cnTLSegKfnrrW6rOseLEHqQel
-         dOhZc2MkRY2RCKyufkHUjAEJQsFyro57I7Nhf9GZ+IW4fxCBmxl+R/lrCxI38Y/OlEuv
-         vbe4d5GDEFJ+XzpRToJRut9ne4hy5Ew4q2TUMjyAhf2Nbu+JUBHJOt5Pp5ouY0BwzhgP
-         dj+Q==
-X-Gm-Message-State: AFuF++mOLQ4f1e6la6v+ru3wv0vFacCacepQ8EWNrMpNbBXDXL4662An
-	zBDmQBZ2m8QAlHj855iqvPPf8DOBvj7phg6IF5H0r2sgRXSbHCk2NOjm
-X-Gm-Gg: AYBFou0RUswTSwPGQVcxwlq+bvA1XN+TAuRonxpDn6OBy7dr6peT1CbjDEd5wOsmh1A
-	4UJvQTyVegG5rpjf5AA5x2mLN2m+R4VqsJSpDkzoz3HmlV8YG0w+qB+XGu2D+1rv+LduPEx69jA
-	gbtRhJGNvn5ST/Jnzp9Y38Ki7dTslu1Fb75gXh/9Fa+EwDlTvKZCIDb7OB67M02eWfMn9wf8Byj
-	yw0SHTU+YkKuykbjm6mbUNivL58pBy/bPVwbeUGVKabFZ7fHYsh+CJw+Qh8DIsiuf9eL9vNxe5J
-	cic68lxQy3sbBF9Hoca5Oy4hueC4ExGN/7JRSA3RQbi8mCxBQ1xMD7iPBG7GOPqmnoglFYOyyPH
-	gYB3ZjvF0rzAjd+rzQ25R5QtmV4urwnu5xft2aI4PUJbtK1M+6VsxE6sqQH+IqGDFSKzQKt30O7
-	QJh6UwksJB96HZYq15Ds2nKXF4hfyYYQt0kMeGOQ60gFMOUtzC8SMQGdo7rL86Jw55AdxsIBrcp
-	+hXWpf/
-X-Received: by 2002:a05:600c:3b05:b0:49e:6249:268b with SMTP id 5b1f17b1804b1-49fc574194amr69801595e9.32.1789822899376;
-        Sat, 19 Sep 2026 06:01:39 -0700 (PDT)
-Received: from localhost.localdomain ([185.40.61.191])
-        by smtp.googlemail.com with ESMTPSA id 5b1f17b1804b1-49fc52a5b6esm65037995e9.4.2026.09.19.06.01.37
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 19 Sep 2026 06:01:38 -0700 (PDT)
-From: Oleg Keri <okerixx@gmail.com>
-To: Jishnu Prakash <jishnu.prakash@oss.qualcomm.com>,
-	Lee Jones <lee@kernel.org>,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Guru Das Srinagesh <linux@gurudas.dev>,
-	Liam Girdwood <lgirdwood@gmail.com>,
-	Mark Brown <broonie@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org,
-	mfd@lists.linux.dev,
-	devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
-	Dhruvin Rajpura <drajpura@qti.qualcomm.com>,
-	Nihal Kumar Gupta <nihal.gupta@oss.qualcomm.com>,
-	Kamal Wadhwa <kamal.wadhwa@oss.qualcomm.com>
-Subject: Re: [PATCH 0/6] mfd: qcom-pm8008: Add support for PM8010 over I2C
-Date: Sat, 19 Sep 2026 15:01:28 +0200
-Message-ID: <178982288839.2267.636188297415440296@gmail.com>
-X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20260918-pm8010_i2c_support-v1-0-de33d78fad9d@oss.qualcomm.com>
-References: <20260918-pm8010_i2c_support-v1-0-de33d78fad9d@oss.qualcomm.com>
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="aXD6mpca"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1789823620; x=1821359620;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=K016Xuspy0+i4gvt1BjSnZ/7rNHp4XWw8iWjdQD++EY=;
+  b=aXD6mpcagrWDyT4Eyhidxz2yYEKb2w2a2LCYiudvPJc7HpQu2edZyVnh
+   sGmcIYu0px9SpAg8HIM6Waf0mlrOG9P0uecyZ97A8kHwDrDBreY5+YnQ2
+   /vykwXnqLsnM3PFY7hPpA3aHmWFQvHERm+gYVSPr9I2ldU8CaQXLivkjk
+   m9SehQ917AH1TBx79Wpfeo/DAsn8h7W06SoRNooTWPpE5sTWWN8b/jrHF
+   VPcmYzSz4FcJvspHur2u6KLmgbHVTSELtgWndqM/WYjqjeUxoPO1X8+Q4
+   LXNeyqh6YF0xdY/OKp2mC4W/gmdPkBlcZdWxxsvWG5yvoBJsSSYHjhVPQ
+   w==;
+X-CSE-ConnectionGUID: TrYM4lyXTl6TIhpwEPWemg==
+X-CSE-MsgGUID: wvBhi80VQb+STLjWgD/4pA==
+X-IronPort-AV: E=McAfee;i="6800,10657,11909"; a="90478348"
+X-IronPort-AV: E=Sophos;i="6.27,111,1787036400"; 
+   d="scan'208";a="90478348"
+Received: from fmviesa006.fm.intel.com ([10.60.135.146])
+  by fmvoesa109.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 19 Sep 2026 06:13:39 -0700
+X-CSE-ConnectionGUID: FXgk4xsOTbyvnrr1GehSDQ==
+X-CSE-MsgGUID: WhW5rkOxRee7qkVSAOOVjw==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.27,111,1787036400"; 
+   d="scan'208";a="270519051"
+Received: from lkp-server01.sh.intel.com (HELO 462990a40a85) ([10.239.97.150])
+  by fmviesa006.fm.intel.com with ESMTP; 19 Sep 2026 06:13:37 -0700
+Received: from kbuild by 462990a40a85 with local (Exim 4.98.2)
+	(envelope-from <lkp@intel.com>)
+	id 1x7usn-00000000Aw9-4374;
+	Sat, 19 Sep 2026 13:13:33 +0000
+Date: Sat, 19 Sep 2026 21:13:19 +0800
+From: kernel test robot <lkp@intel.com>
+To: Guangshuo Li <lgs201920130244@gmail.com>,
+	Bjorn Andersson <andersson@kernel.org>,
+	Mathieu Poirier <mathieu.poirier@linaro.org>,
+	Sivaprakash Murugesan <sivaprak@codeaurora.org>,
+	Gokul Sriram Palanisamy <quic_gokulsri@quicinc.com>,
+	Govind Singh <govinds@codeaurora.org>,
+	linux-arm-msm@vger.kernel.org, linux-remoteproc@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Cc: oe-kbuild-all@lists.linux.dev, Guangshuo Li <lgs201920130244@gmail.com>,
+	stable@vger.kernel.org
+Subject: Re: [PATCH] remoteproc: qcom: q6v5-wcss: remove all subdevices on
+ unbind
+Message-ID: <202609192136.6T6AV8Dt-lkp@intel.com>
+References: <20260918041321.3532355-1-lgs201920130244@gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260918041321.3532355-1-lgs201920130244@gmail.com>
 
-Hi Jishnu,
+Hi Guangshuo,
 
-On Fri, Sep 18, 2026, Jishnu Prakash wrote:
-> PM8010 is the next generation PMIC following PM8008 and has similar
-> functionality, providing 7 LDOs that power camera sensors and associated
-> hardware, with some differences from PM8008 LDOs. The series also adds
-> support for skipping interrupt configurations which is needed to support
-> SoCs where the PMIC's interrupt pin is grounded, such as Glymur.
+kernel test robot noticed the following build errors:
 
-For the series:
+[auto build test ERROR on remoteproc/rproc-next]
+[also build test ERROR on linus/master v7.3-rc3 next-20260918]
+[If your patch is applied to the wrong git tree, kindly drop us a note.
+And when submitting patch, we suggest to use '--base' as documented in
+https://git-scm.com/docs/git-format-patch#_base_tree_information]
 
-Tested-by: Oleg Keri <okerixx@gmail.com> # Lenovo Yoga Slim 7x Gen 11 (Glymur)
+url:    https://github.com/intel-lab-lkp/linux/commits/Guangshuo-Li/remoteproc-qcom-q6v5-wcss-remove-all-subdevices-on-unbind/20260918-121321
+base:   https://git.kernel.org/pub/scm/linux/kernel/git/remoteproc/linux.git rproc-next
+patch link:    https://lore.kernel.org/r/20260918041321.3532355-1-lgs201920130244%40gmail.com
+patch subject: [PATCH] remoteproc: qcom: q6v5-wcss: remove all subdevices on unbind
+config: arm-allyesconfig (https://download.01.org/0day-ci/archive/20260919/202609192136.6T6AV8Dt-lkp@intel.com/config)
+compiler: arm-linux-gnueabi-gcc (GCC) 16.1.0
+reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20260919/202609192136.6T6AV8Dt-lkp@intel.com/reproduce)
 
-PM8010 at 0x8 on the camera CCI bus with no interrupt line, on
-next-20260918. The MFD and the regulator probe, L2, L4 and L7 power an
-ov08x40 and the camera streams with libcamera.
+If you fix the issue in a separate patch/commit (i.e. not just a new version of
+the same patch/commit), kindly add following tags
+| Reported-by: kernel test robot <lkp@intel.com>
+| Closes: https://lore.kernel.org/oe-kbuild-all/202609192136.6T6AV8Dt-lkp@intel.com/
 
-Thanks,
-Oleg
+All errors (new ones prefixed by >>):
+
+   drivers/remoteproc/qcom_q6v5_wcss.c: In function 'q6v5_wcss_remove':
+>> drivers/remoteproc/qcom_q6v5_wcss.c:1051:1: error: invalid use of void expression
+    1051 | +       qcom_remove_ssr_subdev(rproc, &wcss->ssr_subdev);
+         | ^
+
+
+vim +1051 drivers/remoteproc/qcom_q6v5_wcss.c
+
+  1039	
+  1040	static void q6v5_wcss_remove(struct platform_device *pdev)
+  1041	{
+  1042		struct rproc *rproc = platform_get_drvdata(pdev);
+  1043		struct q6v5_wcss *wcss = rproc->priv;
+  1044	
+  1045		rproc_del(rproc);
+  1046	
+  1047		qcom_q6v5_deinit(&wcss->q6v5);
+  1048		qcom_remove_glink_subdev(rproc, &wcss->glink_subdev);
+  1049		qcom_remove_pdm_subdev(rproc, &wcss->pdm_subdev);
+  1050		qcom_remove_sysmon_subdev(wcss->sysmon);
+> 1051	+	qcom_remove_ssr_subdev(rproc, &wcss->ssr_subdev);
+  1052	}
+  1053	
+
+--
+0-DAY CI Kernel Test Service
+https://github.com/intel/lkp-tests/wiki
