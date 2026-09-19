@@ -1,318 +1,140 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from m16.mail.163.com (m16.mail.163.com [117.135.210.3])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B588840B102
-	for <linux-arm-msm@vger.kernel.org>; Sat, 19 Sep 2026 09:54:39 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 66EEE34216C;
+	Sat, 19 Sep 2026 09:55:45 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=117.135.210.3
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789811685; cv=none; b=St4AYpqy6kKZsCVAPq/Ttx8GC6M1I1YFrO+iWXRWVHBY8JvNUh3oTEKRDGGLAAhszmAyabIqkBhMsxCN889U/BlLvoIU/8qs++dtvg0i88ziMVq/TYBnjUQeeYLIGuZJB69GTloIP2RfvmYiRn8h05ZhIK/pFSe00vJ5w39zcuI=
+	t=1789811748; cv=none; b=Ox4nXa8hA8AkrLkzsXyXoxud5bXIwebqJKawXyrVkXsRXzAS/UzQppTD0VVczUrQ9zzim2qiyhGlxTOH37CKBsfjYLYq2EwKD34UrUvYX7cdVwi5jyfbwIvSO9YlycDIEfpkrt3nCWQgxDjTDVfQVibI3LMZFPH6CtY7FNlvmRI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789811685; c=relaxed/simple;
-	bh=z/qQL0CPK3fkdmYWyHcS9nuOhJqJmsrxtpGJPsiPrxg=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=uT/Rb0vpn+8EJs6nZSbtRojlzi7/XjiHHGTIzHwTgq9IGPJvEibWs2gdcoSaL4wYSEAjd77fG6Gk7SRbnAgZHHJ/AQwrQsCDZF92NC9b5ZlYptFc0xJ/A9fK/oG/uanXXVw+miH4xlQQYhxzDPegDggzrmvb/1HK/8qyuRQvvjQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=kHHgbV8X; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=U5IUZO7f; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1789811748; c=relaxed/simple;
+	bh=r8CSeQaS8639wzQAlEK18yri1+jPrDdp6NvgWAn5mRY=;
+	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=mr5J5gdAyrHvnpgQQVUtUGuGc/SxRAy+sbk0+k1eJ8tmPwvRUTZSjdCw0kdFiMRIRIOkbH+rGYEa/rhvgd+YquuJtoRONRI8st3rncTw0taX+C86jco61mUEHcXsMvSSSNaWOj18FytGbv3HsBwqkiCANV24NsMsuwT2XsNLIyg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com; spf=pass smtp.mailfrom=163.com; dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b=HDzAaxXn; arc=none smtp.client-ip=117.135.210.3
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=163.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="kHHgbV8X";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="U5IUZO7f"
-Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68J6eljr4125878
-	for <linux-arm-msm@vger.kernel.org>; Sat, 19 Sep 2026 09:54:36 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	53ePU/EqYBKQnQJgkF/MFGCIZg32zoI4VYtyTC3M5fU=; b=kHHgbV8XW4BLQhwR
-	zhwf8R2pzBNi0nMPRSWluKnWhOR5SaFGHIaE3NhNxRofWIsnIcqj/efXEKyUwlZu
-	9fGHhf/1rih7ZrN4SjHVVntrX+tnDM/FLVorSEDFA05otRPX0kRz5G4GB/n++5W5
-	G2liyMqDBG5BPG1aiOQyrOYi/cjlYmDnXwpfP/RjGVHtBi0HncuwWTLYTgsS9SGJ
-	XhgxwqRp33OfjqFQ/CTb8Ua+vokjppBzyZtDJL0IC346edBPHiPhTEXGCwIoaSmB
-	wkPzOlpqnTGhNMWINX4pH8yuYT6W1PJCV8p+3aOmpDw3gs7yhqbfE8TAYD1EYyOM
-	Oei6Yg==
-Received: from mail-pj1-f72.google.com (mail-pj1-f72.google.com [209.85.216.72])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gsg3f0xvt-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Sat, 19 Sep 2026 09:54:36 +0000 (GMT)
-Received: by mail-pj1-f72.google.com with SMTP id 98e67ed59e1d1-39b77130a7fso2939686a91.2
-        for <linux-arm-msm@vger.kernel.org>; Sat, 19 Sep 2026 02:54:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1789811676; x=1790416476; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=53ePU/EqYBKQnQJgkF/MFGCIZg32zoI4VYtyTC3M5fU=;
-        b=U5IUZO7fTE1AxCC9rKBOG3furOaEcWddXHITeFe2ayPr9JANW4qEuoOoGy6vQP0Ncs
-         4bQIj5QPDgYymUpsUF8xbRuc7GYh2FzLqxady7iMQcHXQg0836fptsZPyb7Y4PDf0FTW
-         rp/7m3bvf/6D+oqMk0GCvGSTIlg0pPjlUBUeQ/sTE8cDxB6n3wme1PTa9uA1GhVItJCP
-         niuoklfLi59IJPa9rbZEK0SLK5F/nxupw4NKW5+lyeB6WBMcxUaCxCGg/9k72P27z5yN
-         jlG/dXaY558UJFKyXtG01iOBUUQLNQymUtLa0I1gK9lBTM5ULf/ZCA271UqM83pvOBp/
-         sHWg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1789811676; x=1790416476;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=53ePU/EqYBKQnQJgkF/MFGCIZg32zoI4VYtyTC3M5fU=;
-        b=vaDDr0zFbliOcNAL1qYBKcQlcBpQzpaVPTcL8OETvwK/BSDDRQtSyM+APrD3VhNU0y
-         Deef5k+kfHCo/E+s1Cx6KbvtN2qTcQggBX4ln2furu0dSDTTDKX9ixHHL1vmyhYBsqwr
-         SFZT+A7hPebHlnyt+RuHNYjY87xPE8ntDdDEamkfD/7lr87p4sjZUugyqcjgRpecHzmi
-         m227memna070bYeKIKHrK44PHRtTGdjzeUZBW4OBeBgpjH8eBSXJCPxJtd2nXIMobKI2
-         RY8XYTr9QdEJDf805bNM/fRoXfW4SPdRJhJUe9M1XxJjldspPQfMm//1c5kG9ueJxtdb
-         Fl6g==
-X-Forwarded-Encrypted: i=1; AKwUvBxsmkAWvOaBKVCmN1TWoZHSGofAT7Kv5AQABRB+welNqJO6krzSxpx4MxpHTWxZbjaObRsFW0ehQlsjTRFZ@vger.kernel.org
-X-Gm-Message-State: AFuF++mQCIUwA1nZQAo6PcKM4znXxPVe1aoVdsy/augralAtG74QoiZz
-	Cc7LonLt2Yomy5WyK39DP3ox878spmE6FhdCR3W8ZS6jjjXow+FWsIu0n0qXhqyTnaQGrurOoPR
-	Ro+EZKFBqh+HHf6rFnih9pvXKhGw5rTUNa0TF7qDW+58Vidmhku0Ip5b2abh49GcFX88i
-X-Gm-Gg: AYBFou3WNvtJUBIUfPeSeLZ0zc4E+239HwW5y+E5heiQSNSKqge6zc96yb4oyqh2uMw
-	2Y5LB7u7LecqZaSusgB1CocxJmD5fy59umYfO7krSUDgMiURjx9PVcLMhX4tNwgItXBQOnZPHmz
-	WrDSWMIBQ6BIauYvgDK5LBgpVMWn4VVh4yQTiLr2pcqfNFWBSJh94FFKVnQn6xMsmQB1DQkXcGC
-	rARiX5H965eH0THgGv8r3j124ko5GuiT/ga7n4k6fq+rl/KkBEwHgyz73ENKSs0LwtsscYeedxs
-	+IeHn6Y2ffUFP2I12Lom4IumDO4iPFZy9p8999701xRW1gGyOSk4qnL5fHJ+tWa37fJukLdZmpU
-	hZGRzdlH1398h+1Sp+MlWI4FS16b9KO+coL6X
-X-Received: by 2002:a17:90a:bd6:b0:39e:6a81:5a97 with SMTP id 98e67ed59e1d1-39e6a815e70mr2667651a91.43.1789811675948;
-        Sat, 19 Sep 2026 02:54:35 -0700 (PDT)
-X-Received: by 2002:a17:90a:bd6:b0:39e:6a81:5a97 with SMTP id 98e67ed59e1d1-39e6a815e70mr2667631a91.43.1789811675424;
-        Sat, 19 Sep 2026 02:54:35 -0700 (PDT)
-Received: from [192.168.0.116] ([124.123.146.251])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-144d55d45a6sm4526951c88.9.2026.09.19.02.54.28
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Sat, 19 Sep 2026 02:54:34 -0700 (PDT)
-Message-ID: <697a7c7b-5bf7-4279-898d-a8310f5a0a64@oss.qualcomm.com>
-Date: Sat, 19 Sep 2026 15:24:26 +0530
+	dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b="HDzAaxXn"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
+	s=s110527; h=From:To:Subject:Date:Message-Id:MIME-Version; bh=bV
+	P6QM0ulyN94OMV46BEmxLAiT/+F1gDD647DjWHW6Q=; b=HDzAaxXnwMHMVJgE+Q
+	x3Jwee7id/W30P/Ys737ikra9qjhgZIp9Z1bAL0qKmea41lfimeXqURSlmdofv7G
+	K3sST55f81okTbVkb56D5kCXVxrCOrVNsQw9lkKeABA36irniyk/Lj/M+YQ4t4UP
+	y6LrVWawwLHGrrARrauLKe6GU=
+Received: from localhost.localdomain (unknown [])
+	by gzsmtp5 (Coremail) with SMTP id QCgvCgDnD4r7W65qhGnwAA--.46194S2;
+	Sat, 19 Sep 2026 17:55:08 +0800 (CST)
+From: Slark Xiao <slark_xiao@163.com>
+To: mani@kernel.org,
+	jeff.hugo@oss.qualcomm.com
+Cc: mhi@lists.linux.dev,
+	linux-arm-msm@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	Slark Xiao <slark_xiao@163.com>
+Subject: [PATCH] bus: mhi: host: pci_generic: Add autosuspend_delay customized support
+Date: Sat, 19 Sep 2026 17:55:06 +0800
+Message-Id: <20260919095506.9570-1-slark_xiao@163.com>
+X-Mailer: git-send-email 2.25.1
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/2] net: wwan: qcom_bam_dmux: Alloc RX buffers as a
- single coherent block
-To: Stephan Gerhold <stephan.gerhold@linaro.org>
-Cc: Stephan Gerhold <stephan@gerhold.net>,
-        Andrew Lunn
- <andrew+netdev@lunn.ch>,
-        "David S. Miller" <davem@davemloft.net>,
-        Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>,
-        Paolo Abeni <pabeni@redhat.com>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley
- <conor+dt@kernel.org>,
-        Loic Poulain <loic.poulain@oss.qualcomm.com>,
-        Sergey Ryazanov <ryazanov.s.a@gmail.com>,
-        Johannes Berg <johannes@sipsolutions.net>,
-        linux-arm-msm@vger.kernel.org, netdev@vger.kernel.org,
-        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-        chris.lew@oss.qualcomm.com,
-        Deepak Kumar Singh <deepak.singh@oss.qualcomm.com>
-References: <20260714-qcom-bam-dmux-vmid-ext-v1-0-3f29da7cca76@oss.qualcomm.com>
- <20260714-qcom-bam-dmux-vmid-ext-v1-2-3f29da7cca76@oss.qualcomm.com>
- <alXm0rp3NK62G3-3@linaro.org>
- <c8417ff3-db92-446a-acf8-8c73c83b85de@oss.qualcomm.com>
- <amMxkrW3mu48HIOr@linaro.org>
- <63bae39b-1256-4e19-a9de-840d8752ec69@oss.qualcomm.com>
- <an27PVxkCpD09xSR@linaro.org>
-Content-Language: en-US
-From: Vishnu Santhosh <vishnu.santhosh@oss.qualcomm.com>
-In-Reply-To: <an27PVxkCpD09xSR@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTE5MDE0MSBTYWx0ZWRfXy9saKB7Yk+Gs
- sn3dGQ75u4Gzg2fv6WaqshbOHCIonGp9KBygngtLRGNJ0rukIql8vO8YLr2259dCexB3LDTAtT1
- o/0xAOeIhopgJaO8rt5N77IHNFLwFGA=
-X-Proofpoint-ORIG-GUID: boB9ZdpHOm9eJdmbq_LSinL0r0RJKSqi
-X-Proofpoint-GUID: boB9ZdpHOm9eJdmbq_LSinL0r0RJKSqi
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTE5MDE0MSBTYWx0ZWRfXzAZ1kh8AoAch
- SV2X+j5+Z+wnEc0j2Kco5dixTWVL3HcE6ZoggobdqW25/aPOImxz+cTMIZIUvXgs7DGtT75IvHa
- NkVid4sJlxAxR+l63JB2rsMETyLnCkOEV7jn1NRoUyxl6f803r6LU9/xXPtaLxLd5D47PR+N5MJ
- AUl9YYMfJl317LfUyABqX/JMwRPsiPt6CqjO9IvpBLGzphaWKjZUsqYF9K+Q87ecVcqIa1MQGQ8
- D6SFmXqdcbFDjU0WvpwFk3n/dPGb1DkBnbjcNckScJLLy4uI46inpLEkPwXmjOBVjvIJqLclF3O
- ypxSp4jXQJrRHp+8CpI+RIduqhEDeVY67vfoGHa1brEQ/84HIfKlpRyamFavCINEesjP3/mDvxx
- ktL784czopTQxxyNajdn3/Krca7wXUkCvtYIu/Gaj0/w3zCydAKaYoSwaPmX9No81hxQjsKUX/6
- Do4vbXFyrsTmwGrNStA==
-X-Authority-Analysis: v=2.4 cv=N6S8hG9B c=1 sm=1 tr=0 ts=6aae5bdc cx=c_pps
- a=RP+M6JBNLl+fLTcSJhASfg==:117 a=K/78aEDNEn2Q/Yuv7mVN5Q==:17
- a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22
- a=07d9gI8wAAAA:8 a=EUspDBNiAAAA:8 a=vzY3hVqx5U8Bfi6rXLEA:9 a=QEXdDO2ut3YA:10
- a=iS9zxrgQBfv6-_F4QbHw:22 a=e2CUPOnPG4QKp8I52DXD:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-19_02,2026-09-16_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- bulkscore=0 phishscore=0 adultscore=0 spamscore=0 suspectscore=0
- priorityscore=1501 clxscore=1015 impostorscore=0 lowpriorityscore=0
- malwarescore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2609040000
- definitions=main-2609190141
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID:QCgvCgDnD4r7W65qhGnwAA--.46194S2
+X-Coremail-Antispam: 1Uf129KBjvJXoWxAFW3uFWxurWUGFy5tFW7twb_yoW5KFyUpF
+	WF9F43trW0gry2k34qyws5XF1fGryag3yYkrZrC3y0k3sxKFyFqry8tFy5t3WI9FZ3uF13
+	Ar1jq3yUursrtaUanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+	9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x0pRWa0gUUUUU=
+X-CM-SenderInfo: xvod2y5b0lt0i6rwjhhfrp/xtbC6B1cwGquW-1KRAAA3F
 
+For some WWAN device, it may get a SYS ERROR issue when resuming
+from suspend state frequently. Refer to the Qualcomm Windows
+driver, the default value of autosuspend_delay_ms is set as 5000
+ms. But in Linux side, all WWAN device were set as 2000ms. We
+tried to set this value to 5000ms and we can get a positive test
+result.
 
-On 13-08-2026 06:10 pm, Stephan Gerhold wrote:
-> On Thu, Aug 13, 2026 at 02:35:01PM +0530, Vishnu Santhosh wrote:
->> On 24-07-2026 03:04 pm, Stephan Gerhold wrote:
->>> On Fri, Jul 24, 2026 at 10:16:31AM +0530, Vishnu Santhosh wrote:
->>>> On 14-07-2026 01:05 pm, Stephan Gerhold wrote:
->>>>> On Tue, Jul 14, 2026 at 11:02:32AM +0530, Vishnu Santhosh wrote:
->>>>>> On Qualcomm SoCs where the modem (e.g. the mDSP on Shikra, VMID 43 /
->>>>>> NAV) is the AXI master for BAM-DMUX RX transfers and the XPU enforces
->>>>>> per-region access control, each individually DMA-mapped RX buffer
->>>>>> requires its own XPU resource group (RG). With ~16 RGs available, the
->>>>>> 32 per-buffer dma_map_single() calls exhaust the table and the first
->>>>>> inbound transfer faults with an XPU violation.
->>>>>>
->>>>>> BAM-DMUX is a singleton (exactly one instance per SoC), so the
->>>>>> destination VMID does not need to be a DT property; it is looked up
->>>>>> from the compatible string's match data instead. Add struct
->>>>>> bam_dmux_data with a single vmid field, and a shikra_data instance
->>>>>> hardcoding QCOM_SCM_VMID_NAV for qcom,shikra-bam-dmux.
->>>>>>
->>>>>> When match data is present, allocate all BAM_DMUX_NUM_SKB RX buffers as
->>>>>> a single contiguous dma_alloc_coherent() block and SCM-assign that
->>>>>> block to HLOS plus the VMID once at probe. This reduces RG consumption
->>>>>> from 32 to 1. The block is never reclaimed across a modem power cycle
->>>>>> (bam_dmux_power_off() does not touch it), so the probe-time assignment
->>>>>> covers every subsequent restart without re-assigning or reclaiming. It
->>>>>> is reclaimed to HLOS only once, at remove or on a probe error, and if
->>>>>> that reclaim fails it is leaked rather than returned to the page
->>>>>> allocator.
->>>>>>
->>>>>> Each rx_skbs[] slot is pre-assigned its virtual and DMA address from
->>>>>> the block, so no per-buffer mapping is needed at power-on. Because the
->>>>>> coherent block is not page-backed, received payload is copied into a
->>>>>> regular netdev skb before handoff to the network stack; this is an
->>>>>> unavoidable extra copy on the XPU-enforced RX path.
->>>>>>
->>>>>> Platforms without match data are unaffected: rx_virt stays NULL, no
->>>>>> coherent memory is allocated, and the per-buffer dma_map_single() path
->>>>>> is unchanged.
->>>>>>
->>>>>> Co-developed-by: Deepak Kumar Singh <deepak.singh@oss.qualcomm.com>
->>>>>> Signed-off-by: Deepak Kumar Singh <deepak.singh@oss.qualcomm.com>
->>>>>> Signed-off-by: Vishnu Santhosh <vishnu.santhosh@oss.qualcomm.com>
->>>>> So how do you handle TX buffers? Right now, they are just passed on from
->>>>> the net subsystem. There can be up to 32 TX buffers in progress as well.
->>>>>
->>>>> Overall, I have mixed feelings about this patch. It looks reasonably
->>>>> simple, but fundamentally I don't understand why we need to go back to
->>>>> the old days of implementing protection using a highly limited MPU (in
->>>>> your case: the xPU).
->>>>>
->>>>> Why does the setup of BAM-DMUX differ e.g. from the setup for the crypto
->>>>> engine? Crypto is also using bam-dma, but it avoids this inflexibility
->>>>> by making use of the &apps_smmu. Is BAM-DMUX not covered by the SMMU? Or
->>>>> did you just decide to bypass the SMMU in this case? (If so: Why?)
->>>> I checked with secure systems team on this. Crypto BAM is
->>>> behind apps_smmu, so protection is enforced through the SMMU's Stage-2
->>>> page tables.
->>>>
->>>> A2 BAM (used by BAM-DMUX) is present in secure domain and does not
->>>> support Stage-2 translation on this SoC, and there is no IOMMU domain
->>>> that can be attached to it. The only protection mechanism available is
->>>> the xPU.
->>>>
->>> Thanks for investigating this!
->>>
->>> So is this a hardware limitation or something you could change with a
->>> firmware update? Could you move the A2 BAM out of the secure domain and
->>> protect it via the IOMMU instead of the xPU mechanism? The other modern
->>> platforms with IPA do not have this limitation, they can use the IOMMU
->>> for this.
->>>
->>> We can try to support the xPU protection mechanism in the BAM-DMUX
->>> driver, but it's pretty bad from a performance and memory usage point of
->>> view if you need to copy buffers around multiple times. So if you have
->>> some way to change this in the firmware (and there is still time to do
->>> so before production boards ship), I would strongly recommend to
->>> investigate that.
->>>
->> Based on what we confirmed with the Secure Systems team, this is a limitation
->> of the current Shikra platform rather than something that can be addressed
->> through a firmware-only update.
->>
->> The A2 BAM used by BAM-DMUX is not connected to an SMMU/IOMMU domain on Shikra,
->> which means Stage-2 translation is not available for this path. As a result,
->> it is not possible to move this path behind an IOMMU.
->>
->> Modern IPA-based platforms differ because their data paths are physically routed
->> through SMMU interfaces and therefore do not rely on VMID/xPU ownership assignment
->> for this type of access control. On Shikra, the A2 BAM path is protected using the
->> xPU3 VM-based access-control model, where DDR memory access is restricted and
->> granted through the request-based Hypervisor VM assignment framework. In contrast,
->> older targets relied on the earlier xPU2 resource-sharing model, in which modem
->> access did not require this type of explicit VM ownership configuration. This
->> architectural difference explains why the issue does not occur on those older platforms.
->>
->> So, for this path on Shikra, SCM-driven VMID assignment remains the only practical solution.
->>
-> Ok, thanks for looking into this further.
->
-> Can you please try the following as alternative for the implementation?
->
-> 1. Make sure that you have CONFIG_DMA_RESTRICTED_POOL=y.
-> 2. Define a restricted DMA pool for BAM-DMUX, e.g.:
->
-> &{/reserved-memory} {
->          bam_dmux_pool: restricted-dma-pool {
-> 	    compatible = "restricted-dma-pool";
->              size = <0x40000>;	/* 32*2K*2 = 128K minimum, but 256K might be safer */
-> 	    alignment = <...>;	/* Check xPU alignment requirements */
->          };
-> };
->
-> 3. Assign to BAM-DMUX together with the qcom,vmid:
->
-> &bam_dmux {
-> 	memory-region = <&bam_dmux_pool>;
-> 	qcom,vmid = <QCOM_SCM_VMID_NAV>;
-> };
->
-> 4. Extend qcom_bam_dmux.c to look up the DMA pool address and make it
->     accessible using SCM: Call of_reserved_mem_lookup() to get the
->     region, then invoke qcom_scm_assign_mem() with that.
->
-> 5. Keep RX/TX DMA code paths in qcom_bam_dmux.c unchanged.
->
-> 6. When testing, make sure the kernel log contains
->     "Reserved memory: created restricted DMA pool at %pa, size %ld MiB"
->
-> 7. Add memory-region and qcom,vmid as optional in dt-bindings.
->     Add dependency: if qcom,vmid is specified, memory-region must be
->     specified.
->
-> In a quick test (without the VMID stuff) this worked quite well for me,
-> SWIOTLB should handle the copying behind the scenes without further
-> changes to the qcom_bam_dmux driver.
->
-> I would prefer that over complicating the driver with two separate ways
-> of buffer management. AFAICT, the restricted DMA feature is meant for
-> this kind of setup where there is no IOMMU but the firmware can still
-> restrict memory accesses to a limited amount of regions, see
-> https://lwn.net/Articles/841916/ for a short introduction.
->
-> Thanks,
-> Stephan
+So we add a support to allow vendor to set a difference value for
+specific WWAN device.
 
-Thanks for the detailed steps. I tested this approach on the Qualcomm Shikra
-platform, and it works as expected.
+BTW, based on the principle of structure alignment, I moved the
+location of 'trigger_edl'.
 
-With CONFIG_DMA_RESTRICTED_POOL enabled, following the approach, the kernel reports:
+Signed-off-by: Slark Xiao <slark_xiao@163.com>
+---
+ drivers/bus/mhi/host/pci_generic.c | 14 +++++++++++---
+ 1 file changed, 11 insertions(+), 3 deletions(-)
 
-software IO TLB: Reserved memory: created restricted DMA pool at 0x00000000fffc0000, size 0 MiB
-OF: reserved mem: initialized node restricted-dma-pool, compatible id restricted-dma-pool
-OF: reserved mem: 0x00000000fffc0000..0x00000000ffffffff (256 KiB) map non-reusable restricted-dma-pool
-
-
-The BAM DMA controller also reports:
-
-bam-dma-engine 6044000.dma-controller: assigned reserved memory node restricted-dma-pool
-
-The BAM-DMUX TX/RX DMA paths are working with this configuration. I will update
-v2 to use the restricted DMA pool approach as suggested.
-
-
-Thanks,
-Vishnu
+diff --git a/drivers/bus/mhi/host/pci_generic.c b/drivers/bus/mhi/host/pci_generic.c
+index b636e2c23b4d..3339b9b2d16d 100644
+--- a/drivers/bus/mhi/host/pci_generic.c
++++ b/drivers/bus/mhi/host/pci_generic.c
+@@ -23,6 +23,8 @@
+ 
+ #define HEALTH_CHECK_PERIOD (HZ * 2)
+ 
++#define AUTOSUSPEND_DELAY_MS 2000
++
+ /* PCI VID definitions */
+ #define PCI_VENDOR_ID_THALES	0x1269
+ #define PCI_VENDOR_ID_QUECTEL	0x1eac
+@@ -38,11 +40,12 @@
+  * @name: name of the PCI module
+  * @fw: firmware path (if any)
+  * @edl: emergency download mode firmware path (if any)
+- * @edl_trigger: capable of triggering EDL mode in the device (if supported)
+  * @bar_num: PCI base address register to use for MHI MMIO register space
+  * @dma_data_width: DMA transfer word size (32 or 64 bits)
+  * @vf_dma_data_width: DMA transfer word size for VF's (optional)
+  * @mru_default: default MRU size for MBIM network packets
++ * @autosuspend_delay: customized autosuspend_delay_ms value for specific mhi device
++ * @edl_trigger: capable of triggering EDL mode in the device (if supported)
+  * @sideband_wake: Devices using dedicated sideband GPIO for wakeup instead
+  *		   of inband wake support (such as sdx24)
+  * @no_m3: M3 not supported
+@@ -54,11 +57,12 @@ struct mhi_pci_dev_info {
+ 	const char *name;
+ 	const char *fw;
+ 	const char *edl;
+-	bool edl_trigger;
+ 	unsigned int bar_num;
+ 	unsigned int dma_data_width;
+ 	unsigned int vf_dma_data_width;
+ 	unsigned int mru_default;
++	unsigned int autosuspend_delay;
++	bool edl_trigger;
+ 	bool sideband_wake;
+ 	bool no_m3;
+ 	bool reset_on_remove;
+@@ -1369,6 +1373,7 @@ static int mhi_pci_probe(struct pci_dev *pdev, const struct pci_device_id *id)
+ 	struct mhi_pci_device *mhi_pdev;
+ 	struct mhi_controller *mhi_cntrl;
+ 	unsigned int dma_data_width;
++	unsigned int autosuspend_delay;
+ 	int err;
+ 
+ 	dev_info(&pdev->dev, "MHI PCI device found: %s\n", info->name);
+@@ -1394,6 +1399,9 @@ static int mhi_pci_probe(struct pci_dev *pdev, const struct pci_device_id *id)
+ 	dma_data_width = (pdev->is_virtfn && info->vf_dma_data_width) ?
+ 			  info->vf_dma_data_width : info->dma_data_width;
+ 
++	autosuspend_delay = info->autosuspend_delay ? info->autosuspend_delay :
++			  AUTOSUSPEND_DELAY_MS;
++
+ 	mhi_cntrl->cntrl_dev = &pdev->dev;
+ 	mhi_cntrl->iova_start = 0;
+ 	mhi_cntrl->iova_stop = (dma_addr_t)DMA_BIT_MASK(dma_data_width);
+@@ -1463,7 +1471,7 @@ static int mhi_pci_probe(struct pci_dev *pdev, const struct pci_device_id *id)
+ 
+ 	/* Allow runtime suspend only if both PME from D3Hot and M3 are supported */
+ 	if (pci_pme_capable(pdev, PCI_D3hot) && !(info->no_m3)) {
+-		pm_runtime_set_autosuspend_delay(&pdev->dev, 2000);
++		pm_runtime_set_autosuspend_delay(&pdev->dev, autosuspend_delay);
+ 		pm_runtime_use_autosuspend(&pdev->dev);
+ 		pm_runtime_mark_last_busy(&pdev->dev);
+ 		pm_runtime_put_noidle(&pdev->dev);
+-- 
+2.25.1
 
