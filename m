@@ -1,95 +1,149 @@
-Received: from mail-pl1-f197.google.com (mail-pl1-f197.google.com [209.85.214.197])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EF5DB47044C
-	for <linux-arm-msm@vger.kernel.org>; Sun, 20 Sep 2026 17:05:28 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.197
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5266A3DF01C;
+	Sun, 20 Sep 2026 18:18:45 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789923930; cv=none; b=IvipzA5oG0U3hR37uEZr77nNFymII+nrq1RCCXtGlluoCIogtFroOvhvd0iiCygYW8OrDTyze4PS0KI2YxyEIA52XM00r2+7ra5cjbDMuyr6PCpUfq0FclCN8yEaZVDjedHNB87e+owkUfTj++RQ1YoAaV8fF6KMscmZzHeWFLI=
+	t=1789928326; cv=none; b=oR1BqfTDPqhE6Oa8j90eEBa9R7cjNzk0TiWoZamNbRbWKW3j0+KP3yBtYJrZsjulaxhYNfCS5mUZOXgLR3V3g6Io2SLZp72dxGo7aHM0sk/ikXmSwEr7d/Z+B2lhatspvtb7MN1lyvRhy+r7RoEpklSBhribLfHPKzqJJiI/OUA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789923930; c=relaxed/simple;
-	bh=UB7DMGZ+FxW0l1Fy8c9IR09ZvHOP2nrs1Rzs5/zvHbM=;
-	h=Date:In-Reply-To:Mime-Version:References:Message-ID:Subject:From:
-	 To:Cc:Content-Type; b=HgI8uPhYBfM+i/RSDEaYbUjLOt61y0c2wzDvWhdyNl10JMefUEIKdt5t1xOMdZ8DNn4QxuAXIV70Dbl/VIYABEiCqMU6yntrl5NeJ5h7j6Bx2RsL31jYeT/FYXhADZkkeNWgQ2f3grPOcbzT0pa6NrG2HkCS40wbM2i2EIA7RgE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=flex--stanleyjhu.bounces.google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=q1G8OZed; arc=none smtp.client-ip=209.85.214.197
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=flex--stanleyjhu.bounces.google.com
+	s=arc-20240116; t=1789928326; c=relaxed/simple;
+	bh=oColPJm7byDapCx6KUmBg6fWkywzUvd2Yt8UBbtrxIQ=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=JF+YLi3KJ+UG7Bo3r2kCdsqycLcszk1rZfjin5j0qHVTHYH6HeYLkvFOYNQuz6iI7TgRyter7oPZai7FqKcb64uvi/dVrUNCqCelUCdQ+D+mr0qlAfNYA5mSDdGKwpsaLEDih73bJvwtUWtX7vVzXY72m4oa1pQyDxeknF+DaoI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=dW0QsLK1; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="q1G8OZed"
-Received: by mail-pl1-f197.google.com with SMTP id d9443c01a7336-2d7443e0f0bso44265255ad.1
-        for <linux-arm-msm@vger.kernel.org>; Sun, 20 Sep 2026 10:05:28 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20251104; t=1789923928; x=1790528728; darn=vger.kernel.org;
-        h=content-type:cc:to:from:subject:message-id:references:mime-version
-         :in-reply-to:date:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=vC56C3EjHy57yP07NvUm+ZJd8lFbjzDpbgEVI6VNNtY=;
-        b=q1G8OZedTUdvxYWwPF0IiNk2HTpESpBqxQsTTwA0rFEP+3qCI5Ayvjrwj55Zf+92bE
-         GM1Sw4Gr+jZOrEx8Nj6+XZwIYjQjcqDosG+L+N5WJsvIp+0NyOAvMELIbS8xXgXMhWz3
-         LBk2apB4zv3beYytxuo4eJp3l0RPeZccQM4g5lus+kj6VOjGr1wDA80O0EpUR3I6wSWM
-         /vA9wsXptYREdhDdWAZ9bFY3I2aF0Jn4i6jgHGKYxNxKUGKiZTfMEqZ3KMtu9Cv9zs6u
-         eAYRCMmh3Jm/P4JfcUgGvWIAnafXTZnllJE3nWZRXaax7O8XMr9vi0nUKqrFsoOSWizs
-         3DOQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1789923928; x=1790528728;
-        h=content-type:cc:to:from:subject:message-id:references:mime-version
-         :in-reply-to:date:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=vC56C3EjHy57yP07NvUm+ZJd8lFbjzDpbgEVI6VNNtY=;
-        b=jC9K5yVE4k6sLYQbocn7gK5vQMwtISKep+SXSWPptndQ4q3yMA8r7oVsNo4BXirYkl
-         1+JatGrHHuCxfrwklZvIgatVilCnJiT+4dP4V0KTLrhB0aWhNdD8cBhczaeWfWGWsiYe
-         v1coPdy9erSvnmaShOaWPWRaK4GvpdZoKiRpyj5o/wQAXAuxEnIDdO1N9QFskrGN1Peq
-         NyKzQ/aG3qVQ72ArE3gk27LZQzWT/1Q31WnXbtGtC1jMwyN4YI7dpH0a8J9qKVddzlTI
-         hUBNf5Jgr9E4sg8mPfjnCKtF7IohV4njOBqVHzqP0rPLOPo0sIzpaCkoKLX5QIEHwPQd
-         BHug==
-X-Forwarded-Encrypted: i=1; AKwUvBxV11CpE1Do5dlAepsfUXn3nqgkvwnINFCCMXF6bTIzLRn3hFGhuBDQo36uidRKyYyThPUURF5MHYd4lIHT@vger.kernel.org
-X-Gm-Message-State: AFuF++lWwZtqA+kI4c215yv4WrdyF2m5Kqy8bwlczeOYl7oA0BQ1x+Xc
-	j81VzwjrK748X6ErAWJEB7RLVjILWbsBxki47MN8WfwwB8AE6qTSQ7aAg24/nLQes3BvGKKWBPh
-	F5Cxz3+IBhtjlDnWU5voc3Q==
-X-Received: from plao21.prod.google.com ([2002:a17:903:3015:b0:2dd:4fa9:1919])
- (user=stanleyjhu job=prod-delivery.src-stubby-dispatcher) by
- 2002:a17:903:2447:b0:2db:5c0a:f184 with SMTP id d9443c01a7336-2ddb1b78d26mr124832455ad.17.1789923928078;
- Sun, 20 Sep 2026 10:05:28 -0700 (PDT)
-Date: Mon, 21 Sep 2026 01:05:26 +0800
-In-Reply-To: <20260920-fix-ufs-rpmb-v1-1-560b842c589d@oss.qualcomm.com>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="dW0QsLK1"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5E6401F000FF;
+	Sun, 20 Sep 2026 18:18:44 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1789928324;
+	bh=mHGhS5D3hwDg2bZdL0zyDjYJ+/3CST/aN6uzLGqVjq0=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=dW0QsLK1o62TrLNh2bC1MdK9kcwGTMIPy+Wo4jcbbAjmzwhTnwFKT6NzjKkLGnBX2
+	 vnQdvIf7Cqum22EdvRwXCB5C8xUGxpUrbmQzv8f3Bu6ASz7DenPt53PO7PSJpFeKI4
+	 9hZaOABik7O+MjcOiEG4fLjqj99XRFZ5d/sAndzQXhRB8NV/EAP7DfSJAlaKVwnRxW
+	 k27M/6A2yMmxo+BDZpnqhOWEBeP4l2lbFGt2TkfasXhoqUIYa3Te3S4Xv0LGt3EB/o
+	 Ok3KiX6d8CokRGm8ghHTUU64cDCltyrF8k23OUi+R+UghqYfKH4S2kSrMg+bJHjN2r
+	 dml0Np+kcX/OQ==
+Date: Sun, 20 Sep 2026 20:18:42 +0200
+From: Krzysztof Kozlowski <krzk@kernel.org>
+To: Alex Elder <elder@riscstar.com>
+Cc: sboyd@kernel.org, bmasney+clk@redhat.com, jbrunet+clk@baylibre.com, 
+	robh@kernel.org, krzk+dt@kernel.org, conor+dt@kernel.org, lee@kernel.org, 
+	andersson@kernel.org, konradybcio@kernel.org, abelvesa@kernel.org, kees@kernel.org, 
+	gustavoars@kernel.org, p.zabel@pengutronix.de, daniel@riscstar.com, 
+	mohd.anwar@oss.qualcomm.com, lorenzo.bianconi@oss.qualcomm.com, linux-clk@vger.kernel.org, 
+	devicetree@vger.kernel.org, mfd@lists.linux.dev, linux-arm-msm@vger.kernel.org, 
+	linux-hardening@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH 1/4] dt-bindings: mfd: introduce the TC9564 config syscon
+Message-ID: <20260920-fiery-fanatic-manticore-6abf0a@quoll>
+References: <20260918165234.687224-1-elder@riscstar.com>
+ <20260918165234.687224-2-elder@riscstar.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
-Mime-Version: 1.0
-References: <20260920-fix-ufs-rpmb-v1-1-560b842c589d@oss.qualcomm.com>
-X-Mailer: git-send-email 2.55.0.1082.g2b9226bbc0-goog
-Message-ID: <20260920170526.4039553-1-stanleyjhu@google.com>
-Subject: Re: [PATCH] scsi: ufs: rpmb: register and unregister the ufs_rpmb bus
-From: Stanley Jhu <stanleyjhu@google.com>
-To: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-Cc: Stanley Jhu <stanleyjhu@google.com>, Alim Akhtar <alim.akhtar@samsung.com>, 
-	Avri Altman <avri.altman@sandisk.com>, Bart Van Assche <bvanassche@acm.org>, 
-	"James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>, 
-	"Martin K. Petersen" <mkp@kernel.org>, Can Guo <can.guo@oss.qualcomm.com>, Bean Huo <beanhuo@micron.com>, 
-	Jens Wiklander <jens.wiklander@linaro.org>, linux-scsi@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <20260918165234.687224-2-elder@riscstar.com>
 
-On Sun, 20 Sep 2026 17:50:18 +0300, Dmitry Baryshkov wrote:
-> The ufs_rpmb bus isn't registered in the device framework, so any
-> attempt to register RPMB devices on UFS will fail with:
->
->  bus_add_device: cannot add device 'ufs_rpmb0' to unregistered bus 'ufs_rpmb'
->  ufshcd-qcom 1d84000.ufshc: Failed to register UFS RPMB device 0
->
-> Add module_init() / exit() functions to handle bus registration and
-> unregistration.
+On Fri, Sep 18, 2026 at 11:52:30AM -0500, Alex Elder wrote:
+> Define the binding for a system controller used in the Toshiba
+> TC9564 SoC.
+> 
+> Co-developed-by: Daniel Thompson <daniel@riscstar.com>
+> Signed-off-by: Daniel Thompson <daniel@riscstar.com>
+> Signed-off-by: Alex Elder <elder@riscstar.com>
+> ---
+>  .../bindings/mfd/toshiba,tc9564.yaml          | 56 +++++++++++++++++++
+>  MAINTAINERS                                   |  1 +
+>  2 files changed, 57 insertions(+)
+>  create mode 100644 Documentation/devicetree/bindings/mfd/toshiba,tc9564.yaml
+> 
+> diff --git a/Documentation/devicetree/bindings/mfd/toshiba,tc9564.yaml b/Documentation/devicetree/bindings/mfd/toshiba,tc9564.yaml
+> new file mode 100644
+> index 0000000000000..32e73a727c82a
+> --- /dev/null
+> +++ b/Documentation/devicetree/bindings/mfd/toshiba,tc9564.yaml
+> @@ -0,0 +1,56 @@
+> +# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
+> +%YAML 1.2
+> +---
+> +$id: http://devicetree.org/schemas/mfd/toshiba,tc9564.yaml#
+> +$schema: http://devicetree.org/meta-schemas/core.yaml#
+> +
+> +title: Toshiba TC9564 System Controller
+> +
+> +maintainers:
+> +  - Alex Elder <elder@riscstar.com>
+> +  - Daniel Thompson <daniel@riscstar.com>
+> +
+> +description: |
 
-We have an existing patch on the list addressing this from the opposite
-direction (`[PATCH v5 3/3]`, Reviewed-by Bean Huo) [1]:
+Do not need '|' unless you need to preserve formatting.
 
-Since ufs_rpmb_bus_type declares no .match and no .probe and consumers
-access RPMB devices via /sys/class/rpmb/, patch 3/3 drops
-ufs_rpmb_bus_type (leaving ufs_rpmb->dev.bus NULL) rather than
-registering an empty bus.
+> +  The Toshiba TC9564 is an SoC accessed by a host system through the
+> +  upstream PCIe port on the PCIe switch it implements.  The switch includes
+> +  an embedded PCIe endpoint on one of its downstream ports that provides
+> +  access to various SoC peripherals (including a clock and reset controller)
+> +  via one of its BARs.  A system controller provides managed access to the
+> +  first two pages of this memory region to ensure accesses made by these
+> +  peripherals produce well-defined results.
+> +
+> +properties:
+> +  compatible:
+> +    items:
+> +      - const: toshiba,tc9564-config
+> +      - const: syscon
+> +      - const: simple-mfd
+> +
+> +  reg:
+> +    maxItems: 1
+> +
+> +  ranges: true
+> +
+> +  '#address-cells':
+> +    const: 1
+> +
+> +  '#size-cells':
+> +    const: 1
 
-Could you take a look at [1] and let us know which approach you prefer?
+Both properties and simple-mfd are redundant. You do not have children.
 
-[1] https://lore.kernel.org/linux-scsi/20260914144943.2571104-1-stanleyjhu@google.com/
+> +
+> +required:
+> +  - compatible
+> +  - reg
+> +
+> +unevaluatedProperties: false
+
+And this should be additionalProperties instead
+
+> +
+> +examples:
+> +  - |
+> +    syscon@0 {
+> +        compatible = "toshiba,tc9564-config",
+> +                     "syscon",
+> +                     "simple-mfd";
+> +        reg = <0x0 0x2000>;
+> +        #address-cells = <1>;
+> +        #size-cells = <1>;
+> +        ranges;
+
+As you can see here - no children.
+
+I also have doubts that this is needed - I see no updates to the misc
+binding, which would be referencing it. But then another point would be,
+that you do not need separate child node, which has no properties.
+
+Well, has one - address space.
+
+Lack of full picture is not helping here.
+
+Best regards,
+Krzysztof
+
