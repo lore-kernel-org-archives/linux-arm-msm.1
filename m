@@ -1,175 +1,113 @@
-Received: from mail-yx2-f10.google.com (mail-yx2-f10.google.com [74.125.224.138])
+Received: from mail-qk2-f13.google.com (mail-qk2-f13.google.com [74.125.230.205])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A41EB29B76C
-	for <linux-arm-msm@vger.kernel.org>; Sun, 20 Sep 2026 19:33:18 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.224.138
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A72FB37187B
+	for <linux-arm-msm@vger.kernel.org>; Sun, 20 Sep 2026 19:34:09 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.230.205
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789932800; cv=none; b=SzaD2zyiY5ROw5+N7WRdnpIcvrceKQe18l+Jo2ZWlbgdXlwzMSY1Ucv99qocv9uLKmfpXW7PEJPZUEFvSQbDTS6iqdW/hKJLwQtcv88o3uln9gGR7ULJqLaJsOKmtASZODR22MCy33xdHh5FZzmXjEAdd9Nf942khnkWphbYE7k=
+	t=1789932851; cv=none; b=E6eW3Jl6yHpVRFsDdOPxF6qZvIfCyYADVOlwUlnwF92MCgJ4XFQRGz9ga+3fxxNLVkvfR7ZUonAuFY+VnCMN7c3ffEm6GW/bktCxqTukSbAmCMwmC6f7O/DzPWRnZkw/X3EQWC1l/RrnONLsnh2+egr7g4XMorvYRQyMMwQGU1U=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789932800; c=relaxed/simple;
-	bh=GkuXYxzwfyqpDMVLmSMx2O0wFNYfK7zgRRp/qShPnZ4=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=PHmO/j8KDcVGj0vjSNhVp9w0lquCBRNvi3hZm5gTsXRTNtjgVGz1iUsMI8PKwLXiR4CAsEFOKQIOgjMpFzRu25T3sRKWzh+G3f0fd5NpdSILdcZixYSIQJoALWohHH8YMD0Y0uDRj9OcMxUn3Xp569eWzisXiBgLyt53t0ICaZ4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=lizi.moe; spf=pass smtp.mailfrom=gmail.com; arc=none smtp.client-ip=74.125.224.138
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=lizi.moe
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-yx2-f10.google.com with SMTP id 956f58d0204a3-66e56a1fe8aso827851d50.0
-        for <linux-arm-msm@vger.kernel.org>; Sun, 20 Sep 2026 12:33:18 -0700 (PDT)
+	s=arc-20240116; t=1789932851; c=relaxed/simple;
+	bh=X3rqSikcBZJJ2f84P/B10FJEqed1uxkrii+ko1G+OFo=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=llEzDihHlvmsxssqC2zKsp17Mvs02AKeVEC60i2jSNq8NyjxsgUTdNY6gQ+EUdm5jXNpaNqoBkcOCXJAOF4Odgsw1Nsdv6abivNVpALkNFHO1uwaMOKIJp1DlMfEe+cFgF40tBPpIVF9/m4YkJR+AjxSN3npeplxTsXTtewuyjQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=thinkoid.org; spf=none smtp.mailfrom=thinkoid.org; dkim=pass (2048-bit key) header.d=thinkoid-org.20251104.gappssmtp.com header.i=@thinkoid-org.20251104.gappssmtp.com header.b=uiodp19m; arc=none smtp.client-ip=74.125.230.205
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=thinkoid.org
+Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=thinkoid.org
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=thinkoid-org.20251104.gappssmtp.com header.i=@thinkoid-org.20251104.gappssmtp.com header.b="uiodp19m"
+Received: by mail-qk2-f13.google.com with SMTP id af79cd13be357-93910ad2273so303273685a.0
+        for <linux-arm-msm@vger.kernel.org>; Sun, 20 Sep 2026 12:34:09 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=thinkoid-org.20251104.gappssmtp.com; s=20251104; t=1789932848; x=1790537648; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=oV+u2mUvdtVEqdjAmArbK2l37Qrm6P7TusAdIx4BPHU=;
+        b=uiodp19myxAbDPa3KB+4ZfLcyS/yHTIbc/S8fot91iX+Uc/VV0kg/VohrwtslYbrvE
+         fdJqV8qmgC9ut0sK5BVC/AKRLVOhH7wEbbqkrgV8iY3ayK0sv4rdT6ZQD/gzRvsXDIri
+         e2e+DMVHYjMf/d9tRcLwZtKYo5q2Wk/2lF4IMzBBzAPe2YxN+GPG8fX7s4xqcm2OYhQ0
+         Bj1/MrWDHtoIA9xmlW8jTPsw56aE56/DaPIVBK+KFe3iqWhGQqUWdL1+UEC4lG9dn32N
+         DVSU5bSWullVlJJ+DxFRoN8K2j/h0HS1NmA45ZGKl6DfmXtcHI5j4WiWX3YgaqKSsIwv
+         eoog==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1789932797; x=1790537597;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=v6Swky4LrvS7CuMJp/QS0OJof1ZhY4lFCOIL0gHGn5E=;
-        b=cjDAFfn5MtvTxOyUyfHozwT5X/rj03SsAZHWXq1RSZlKprjNz7F72Sye2t64DTytqY
-         TYvDIBD0QJFNAITUcU4RcYbowP7/uJQlHPMzYQcHfbHKBVPmi470/kDoC+/Qamt20KsU
-         8mBesvqEKsvdDbumxlhc3rDSKgZpI5W7HT/sS8aJ9PWTl9ok+LAALq9WbFxVdPT5qtpT
-         YHCUVgSxz/fyF6hlN7A/MquCgXDo4dfDNfxsWbTV8q2V4zqOOFYcSkw4mbEdGVlJAFQ5
-         fH2pla4Z422FqzfiTFb1BDg8WSanY95TOXgKThU0rjgc/BPJ5ocZxwPUvjGxeGY4U6wO
-         3fkg==
-X-Forwarded-Encrypted: i=1; AKwUvByr4GGYe8XqjNN9e068VkywkuC0fyCDmoKGlWnC0xlcDdc3xzok2VhB0pBTMQ6iYvSxn9vV60Q0R+f38+Vz@vger.kernel.org
-X-Gm-Message-State: AFuF++mk1MYmrIT1FsHqUtPPE2NQonXPQK6TZPTvlkQFsWaQIn4SVIbH
-	oOsZ+VwXfIFNROboFUq3nEcLz9sOLFV9sqaG8hvt7Ev6ZVWB3JuE87MvFV5UG2OJdVfkmg==
-X-Gm-Gg: AYBFou3ifFi/2O1e+NuKyDQV9veuic+dpUuY1vETKrZBTvguo1fFaPti3F3HvyTz2lM
-	hO0iPOONTXYIPcD1AiO/aczpwHwSURMCLFoxZOcYP1tHZiM1/j0whLjNiGgIj1nCkaE0vbVnqFm
-	oXltp5gWO64FHkzOvOsQrnVvEsNsHFjj+nUFkIS/GfUvs0wNBc7QnYJe6QlZMfZa3LcDrRQ/k24
-	u9bZja/4k4eHBeyqZ2G+uMOVLB2wy8EW+I/zkJAfVFK5zmiQ7KWWtGSFQqZgx5+halOVC7kur5E
-	wyOdaqB22D1lrPsBCVGRAHn5Dlfh9JbB9mZ2xF9TLBUa6bogJqmIUdI41rUPa//dgpZpzaaYy6W
-	M92MzMrmsFknXrodQcv04/AqQUu8mKwUmEYd6/aA4YfFM41d38ZLArrCQQieduBFNAYjGSMMC9z
-	/OxF0wjGTDm9gxDoRUteFLITkpFLpFr9Thn0OooeabrPnB56QQbsNi+1DQplgpLbeYO4xcKYnpL
-	m6b5utxdMihLHn5vcmEplwldQ==
-X-Received: by 2002:a05:690c:dd5:b0:880:759f:7158 with SMTP id 00721157ae682-8973674789cmr29491807b3.46.1789932797395;
-        Sun, 20 Sep 2026 12:33:17 -0700 (PDT)
-Received: from mail-yx2-f12.google.com (mail-yx2-f12.google.com. [74.125.224.140])
-        by smtp.gmail.com with ESMTPSA id 00721157ae682-89a415208b4sm19085077b3.7.2026.09.20.12.33.16
-        for <linux-arm-msm@vger.kernel.org>
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Sun, 20 Sep 2026 12:33:16 -0700 (PDT)
-Received: by mail-yx2-f12.google.com with SMTP id 00721157ae682-85d43ac8d1fso15020047b3.0
-        for <linux-arm-msm@vger.kernel.org>; Sun, 20 Sep 2026 12:33:16 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AKwUvBwtb8Cl1JlLgqNBU4y9ItCSzYHTmxbUqmYctCnNyzu9TNPABaVVaVLCAgUMPWSQxSZ9s4AFObo/OLpHq15L@vger.kernel.org
-X-Received: by 2002:a05:690c:c507:b0:882:1d1e:88ca with SMTP id
- 00721157ae682-897320902a1mr28886997b3.10.1789932796607; Sun, 20 Sep 2026
- 12:33:16 -0700 (PDT)
+        d=1e100.net; s=20260707; t=1789932848; x=1790537648;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=oV+u2mUvdtVEqdjAmArbK2l37Qrm6P7TusAdIx4BPHU=;
+        b=e0yDvTNxCKn7bLXa4ffdLWYMKmq/hkaMC+JNylBKTBaPILoQZp1tfOJty/dzHt6tJA
+         1eOF05tt6t5I51Qnam5vunFjUc8vpP0ODabH4ZupDzD0Tp/rRY1elXuLWak2mQ+EXbwd
+         BjGhnPWalQsDwzP8NgDCPTnVrS948aGeFbnz7V1VEWDvr8esb/5Ir1Uf4/4IDSz1Tn57
+         EWCv7bF9BVVHchh6uGKC60x2rH/H/9A9mkIm36tfF9hdpwanC7lzO1OZoVjXdjb1LT8s
+         vHRgAzXQ0aEbhQe7vtIxfyEATv0IoX/kjYFlX4QUaK4RK9Tx+FIS33fsPSdJnSfymQga
+         otcw==
+X-Forwarded-Encrypted: i=1; AKwUvByDh+XkffJIkq3XZWU/OIKfJeqYszhLDmo38lVe26W4S6X/4AztawIRLCjPc8Low9BO1uzEBiceGYQKDGsZ@vger.kernel.org
+X-Gm-Message-State: AFuF++kzedmhY3WKmbNTourm4PvsZK1nP2Y0+kbrXklD35a07kG8KD6b
+	VDfLbeZYECh14Y5KCBA/oPRxUFUAyMp4RgAy5ZjHrRKWwxAAyx6+0p2vqPceWX4cfIw=
+X-Gm-Gg: AYBFou3N5XURuvHy0+YLPsKDAn+xf/+rvRcYUi1mIZ1BaaeTOW5c43vYbNlxmBf7qQC
+	pon6R39p3W0DjKCeD8rJVZJWnh4zCWd6XjR0HfErJossNItYmEJ3PuTRhSG9qRrocgfhXgInTrv
+	XTeQJrXcOBZFy+y7aERlEWWFtFkQt0KcVAOUmVICGvI6Z22eya7zE96Ogborug+cLEF4RJhihJV
+	Ubhfz/DsbmMRPxrclzNgUbxddyN2oqRqybUdWzFncvrSNUPCzKjEOFfR5EuMJXwWWQ5Ct8vVEUS
+	p9Fymt1Xkh0UNj8GeEI1VTU+N9DH9CKzbhf4S9OTRAUH0Dof4GbKdQddgMtm8c5oNz26hcKffLi
+	MHaOhzJ3LLH38RG5O/Fz1SSsh0IjrlEma7aAa8VyIrVsa4d5cA2KZvwTkx21FJ7v7qHRPzjTkNc
+	xV7d4j6THQCghwzU464w2eCqiT/V0aJ1ZNmcKPyzRIdgzlRicuej5ig8RwBgnPSXjI0+bY7UikF
+	tbIhAU=
+X-Received: by 2002:a05:620a:4623:b0:939:6de8:43de with SMTP id af79cd13be357-93bf573f833mr703804685a.50.1789932848310;
+        Sun, 20 Sep 2026 12:34:08 -0700 (PDT)
+Received: from localhost.localdomain ([2605:a601:a61d:7a00::2])
+        by smtp.gmail.com with ESMTPSA id af79cd13be357-93bedb05a2esm464413685a.33.2026.09.20.12.34.07
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 20 Sep 2026 12:34:08 -0700 (PDT)
+From: Liviu Nicoara <lnicoara@thinkoid.org>
+To: Sebastian Reichel <sre@kernel.org>
+Cc: linux-pm@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	Liviu Nicoara <lnicoara@thinkoid.org>
+Subject: [PATCH] power: supply: qcom_battmgr: Report capacity on X1E80100
+Date: Sun, 20 Sep 2026 15:34:02 -0400
+Message-ID: <20260920193402.2402-1-lnicoara@thinkoid.org>
+X-Mailer: git-send-email 2.55.0
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260920145848.44521-1-me@lizi.moe> <393a1343-cef7-4fe2-8236-8946185bb394@oss.qualcomm.com>
-In-Reply-To: <393a1343-cef7-4fe2-8236-8946185bb394@oss.qualcomm.com>
-From: Zimeng Li <me@lizi.moe>
-Date: Mon, 21 Sep 2026 03:33:05 +0800
-X-Gmail-Original-Message-ID: <CAGFxjKKG_AZ7n59vWfFY-at0-AKXJ7maCOxTseVp3=_JbHhQuw@mail.gmail.com>
-X-Gm-Features: AclHuK9we0KMkaoHHPoZOe6GB6anvoi-tuFPPwIk9CS2LHJ7CNwJddBj7GdmBjQ
-Message-ID: <CAGFxjKKG_AZ7n59vWfFY-at0-AKXJ7maCOxTseVp3=_JbHhQuw@mail.gmail.com>
-Subject: Re: [PATCH] ASoC: qcom: lpass-cpu: use DAI table index for playback constraints
-To: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
-Cc: srini@kernel.org, broonie@kernel.org, lgirdwood@gmail.com, tiwai@suse.com, 
-	linux-sound@vger.kernel.org, linux-arm-msm@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 
-Hi Srinivas,
+Commit 3f87baacea4d ("power: supply: qcom_battmgr: Report battery
+capacity") added POWER_SUPPLY_PROP_CAPACITY to the SC8280XP battery
+properties, computed from the firmware's charge and last-full values.
+When commit cc3e883a0625 ("power: supply: qcom_battmgr: Add charge
+control support") later gave X1E80100 a property table of its own, the
+table was copied without the capacity property, so X1E80100 machines
+expose energy_now and energy_full but no capacity.
 
-No, I have not tested this patch on hardware. So far I have only
-compile-tested the ARM objects listed below the commit message.
+The percentage is already computed for this variant in the shared
+SC8280XP callback; only the property list is missing it. Add it, in the
+same place it sits in the SC8280XP table.
 
-The IPQ806x example is based on static analysis. Its DAI table contains
-one entry with hardware ID 4. If that DAI is configured for QUAD01 and
-probe reaches this branch, dai_driver[dai_id] accesses beyond that
-single entry. I have not reproduced this on an IPQ806x board, and I
-have not found an in-tree IPQ806x DTS explicitly selecting this mode.
+Tested on a Dell XPS 13 9345: capacity reads 94 with energy_now
+52640000 and energy_full 55540000.
 
-I do have access to a SC7180 device, but its relevant DAI table index
-and hardware ID are both 1. Testing there could provide regression
-coverage for the changed code, but would not exercise the sparse-ID
-case.
+Fixes: cc3e883a0625 ("power: supply: qcom_battmgr: Add charge control support")
+Signed-off-by: Liviu Nicoara <lnicoara@thinkoid.org>
+---
+ drivers/power/supply/qcom_battmgr.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-I will add Cc stable and identify the model as
-GPT-6 Astra in the Assisted-by trailer in v2.
+diff --git a/drivers/power/supply/qcom_battmgr.c b/drivers/power/supply/qcom_battmgr.c
+index 7716eb9e1..a7237ba09 100644
+--- a/drivers/power/supply/qcom_battmgr.c
++++ b/drivers/power/supply/qcom_battmgr.c
+@@ -830,6 +830,7 @@ static const enum power_supply_property x1e80100_bat_props[] = {
+ 	POWER_SUPPLY_PROP_STATUS,
+ 	POWER_SUPPLY_PROP_PRESENT,
+ 	POWER_SUPPLY_PROP_TECHNOLOGY,
++	POWER_SUPPLY_PROP_CAPACITY,
+ 	POWER_SUPPLY_PROP_CYCLE_COUNT,
+ 	POWER_SUPPLY_PROP_VOLTAGE_MAX_DESIGN,
+ 	POWER_SUPPLY_PROP_VOLTAGE_NOW,
+-- 
+2.55.0
 
-Would regression testing on SC7180 be useful here, given that it does
-not exercise the sparse-ID case? If testing on IPQ806x is required,
-I currently do not have access to suitable hardware.
-
-Thanks,
-Li
-
-Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
-=E4=BA=8E2026=E5=B9=B49=E6=9C=8821=E6=97=A5=E5=91=A8=E4=B8=80 00:05=E5=86=
-=99=E9=81=93=EF=BC=9A
->
->
->
-> On 9/20/26 3:58 PM, Zimeng Li wrote:
-> > The DAI ID is a hardware port ID and is not necessarily the index of
-> > the corresponding entry in variant->dai_driver.
-> >
-> > When configuring a DAI with LPAIF_I2SCTL_MODE_QUAD01, the probe code
-> > currently uses dai_id to index variant->dai_driver. This is incorrect
-> > for platforms where DAI IDs are sparse. For example, the IPQ806x MI2S
-> > DAI has ID 4 while it is the only entry in the DAI driver table, so
-> > the current code accesses dai_driver[4] instead of the DAI being
-> > processed.
->
-> This looks like a bug, however the code has been written in assumption
-> that the dai_drive.
->
-> That also raises the question that was this patch actually tested on any
-> hardware?
->
-> >
-> > Use the loop index i when updating the current DAI's playback channel
-> > constraints, while retaining dai_id for indexing the hardware-port
-> > specific playback SD-line mode array.
-> >
-> > This fixes the incorrect DAI table access for platforms where the DAI
-> > ID does not match its position in the driver table.
-> >
-> > Fixes: c223f41c1a52 ("ASoC: qcom: Add four speaker support on MI2S seco=
-ndary")
->
-> Cc Stable ?
->
-> > Signed-off-by: Zimeng Li <me@lizi.moe>
-> > Assisted-by: LLM
-> Can you please add the actual model name as others do.
->
-> > ---
-> > Compile-tested with LLVM for ARM using multi_v7_defconfig with
-> > CONFIG_SND_SOC_STORM=3Dm. The lpass-cpu.o, lpass-ipq806x.o and
-> > lpass-platform.o targets built successfully. Not hardware-tested;
-> > the IPQ806x example is based on static analysis, not a reproduced crash=
-.
-> >
-> >  sound/soc/qcom/lpass-cpu.c | 4 ++--
-> >  1 file changed, 2 insertions(+), 2 deletions(-)
-> >
-> > diff --git a/sound/soc/qcom/lpass-cpu.c b/sound/soc/qcom/lpass-cpu.c
-> > index 242bc16da..079177a6d 100644
-> > --- a/sound/soc/qcom/lpass-cpu.c
-> > +++ b/sound/soc/qcom/lpass-cpu.c
-> > @@ -1234,8 +1234,8 @@ int asoc_qcom_lpass_cpu_platform_probe(struct pla=
-tform_device *pdev)
-> >               }
-> >               if (drvdata->mi2s_playback_sd_mode[dai_id] =3D=3D
-> >                       LPAIF_I2SCTL_MODE_QUAD01) {
-> > -                     variant->dai_driver[dai_id].playback.channels_min=
- =3D 4;
-> > -                     variant->dai_driver[dai_id].playback.channels_max=
- =3D 4;
-> > +                     variant->dai_driver[i].playback.channels_min =3D =
-4;
-> > +                     variant->dai_driver[i].playback.channels_max =3D =
-4;
-> >               }
-> >       }
-> >
-> >
-> > base-commit: 0ed6f7f62318a581fe9698f8a4e98c7ca01160e4
->
->
