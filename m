@@ -1,857 +1,184 @@
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 126D143A80B
-	for <linux-arm-msm@vger.kernel.org>; Sun, 20 Sep 2026 12:07:31 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4DC5030EF92
+	for <linux-arm-msm@vger.kernel.org>; Sun, 20 Sep 2026 13:08:34 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789906062; cv=none; b=qbAo3D085aX6H6feyiERJr8tn59U92rf/BybeeUGT0aOm/Upqdh8vlTnj2vtsGuESwwezbR1ySWn9wM4xjeE7/1jncDpLRjykh7Wh3SoDsfolIlPI+gB0e/JqIKBIWRp2qhxTAe7kGAD4zSFuIbFgYY/gGXtn9TsFBd7odpYAE4=
+	t=1789909716; cv=none; b=P7MiqGyOyUkqpxqH2ot/jIwmMBWGP+/Sx1eLoweah56SeAY+AxzYz9f+023zff9YJP2asEWPdEDFNVDnypHh6WK3qFbHofV99OqXNSpOJiIr3A7iG1WhrAzPYdZ3tfxWKeWKzkmFM/6kzD2r/vTieFKb8KGXIG1BSSmh9jfAg2Q=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789906062; c=relaxed/simple;
-	bh=wMIMqVYVcUuk3I2WR9qBH0mF9g0ILjNSose0cq0pFGU=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=BuLeACRxJ0Uz/KGcnic9UrAJRPMENMBj+uFkJNdejI+ka/S+Bb05hZlvDr3Z+ll5Vo+tCzCHqtXx5lN+9KxLgm2UIUlDlT01kK/LD4flcya3bu976VLKq+hCbsCl21Qy4gKR/Ha2KuyUgttGNJi8x9NP4ikXe2W7DOBpXL5GXb8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=gJOJIipM; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=InanenXQ; arc=none smtp.client-ip=205.220.168.131
+	s=arc-20240116; t=1789909716; c=relaxed/simple;
+	bh=ZIXgHM7PiqRYHQkQOzZqHLX9M4bZPIUL90nLso2dV24=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=gwhym1Ynn1Keh1pLzpHR9ezUv78B8Z4Ay6rrufEtU1LkDRngJoH7ifPF3RiPGFQfYGDO7j1qJm4qby/54KNCHYQ1aTq3TRMsNSmE4g2IVZJdWiAG4/UPOQguzOx32fZOlkwlzmS1fvwOo4QAeix/LGLb0F2IhHk3BLOXa/kWvLo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=IQowgj2S; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=UHq8fa8P; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="gJOJIipM";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="InanenXQ"
-Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68KBo2qL975498
-	for <linux-arm-msm@vger.kernel.org>; Sun, 20 Sep 2026 12:07:26 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="IQowgj2S";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="UHq8fa8P"
+Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68KBnv1E1572200
+	for <linux-arm-msm@vger.kernel.org>; Sun, 20 Sep 2026 13:08:32 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	Q44BARlj5l9YGAlj+x+tZB6yMYyY94DbD3TNED9Jnj0=; b=gJOJIipMcz7C0QCO
-	NB1NYlhvVY81vNoyHR0OYrBKxk7L/0oPRb/KEKlhkbWzHNJUVbOq8AqoY7qLcTHG
-	b64OwIq29ufVV5PEVD0P9fRV4waR9qLZLZYJhYNL4de2V9R2BRLQvdprsLHbaoqs
-	bFiaSAKR49rmZpG5xcaDz1Ytte7SWx9lQwSMYnBPM80C9lJ2by88LWf4TFZZO3EI
-	JOihPNc6odiqva5z3kiNRxByF5kJh72rPT5MpojuiJ+UEqUAGHgEuNuZQlReYE39
-	C+IiNSPtORvISqYaypQCQuEGfTZdVy829BJp4bey+Jz1ChnvvDCV3JMq4Ap9y8c5
-	k6RhZA==
-Received: from mail-pj1-f71.google.com (mail-pj1-f71.google.com [209.85.216.71])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gskjk2tja-1
+	cc:content-type:date:from:in-reply-to:message-id:mime-version
+	:references:subject:to; s=qcppdkim1; bh=+fWQ93GWSWlpqI9jaUvjBtkH
+	zf6rpJ3Yfwxd9B7T2oU=; b=IQowgj2SLqfFWsacIlxcY0XUvAq/uKUiH/jFfU8d
+	BUZb+3AVcMyKBHGvPBKcdlT5uF08XadbMbwHpoo/RJIDMq7G195IJjhSDemAY/m+
+	xrJXJlDefKRjTbp6JOuonrSK5C6oyCcusOGPoS6hs+uz0Km7WkDGtzTLWvWkmuGr
+	6jVKlUgwC/SJ0aGi/slNmoLdBHp9SYp03Fm6gWSKdnAsWr68VsOtX3Vwj4t43NZW
+	HFPEb6yRzbp5r7YYOCLyylki4/Dykx/j+gA0/0mgRuW3z+9S1JckLeG7npnr/Ssk
+	qfhc8s7Di+WM0VLH4TL8PKeYCbcHdtUu9y6G+nC+iShj3g==
+Received: from mail-pj1-f72.google.com (mail-pj1-f72.google.com [209.85.216.72])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gskp9tvf8-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Sun, 20 Sep 2026 12:07:25 +0000 (GMT)
-Received: by mail-pj1-f71.google.com with SMTP id 98e67ed59e1d1-395543dc382so2783168a91.0
-        for <linux-arm-msm@vger.kernel.org>; Sun, 20 Sep 2026 05:07:25 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Sun, 20 Sep 2026 13:08:32 +0000 (GMT)
+Received: by mail-pj1-f72.google.com with SMTP id 98e67ed59e1d1-39b6416441eso3771318a91.1
+        for <linux-arm-msm@vger.kernel.org>; Sun, 20 Sep 2026 06:08:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1789906045; x=1790510845; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=Q44BARlj5l9YGAlj+x+tZB6yMYyY94DbD3TNED9Jnj0=;
-        b=InanenXQAPsghWE36SZAA9HabYIrQajFDEq4GbqDzjZtKDHLJcJsfyIMkjR8YVB4Sp
-         +9cyrRqJqCmvBE4xaR9p/OHmzWDfg1dHcbM0uwd+wybko5De07jmrrLGp+nDGejSxkwS
-         nBV33ZiGDoirj0mC1qV6RZ86/e3zunqsFaowXA5C1bbyWcgwqIFydOSmMVR1MFIY4vgs
-         eGtvXdOWMmlmdL61JYmEvvRoe8/NoY250kZosrCsGo8g3msCpGTdyrrTG0XkP+3aIELa
-         n+lsgMNBU9lgrMxw0VGCs/r19FKfLEuJAga4hAAWRLMAQYyPdQuwuTJiVjKM4MVtwOMp
-         O14Q==
+        d=oss.qualcomm.com; s=google; t=1789909712; x=1790514512; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=+fWQ93GWSWlpqI9jaUvjBtkHzf6rpJ3Yfwxd9B7T2oU=;
+        b=UHq8fa8Pz0XL4Ykv2Pk142BeTpYyrSvZIolyH7W+bcIb7JW5+b9e6HwPhROzIsnUTg
+         7H9Colaw1qxpHIlr1F5fcOilo3Vhap5tjYUoV4Ujwwt5hhkPZ154qVecHHcja9ptDVA5
+         FUcDGLXBYu9yRhSj1vpPB/qSDbCZCto7Dd2yLPq1j77vXsIU4iaJiTkDNSjxU+FZvfdu
+         JMkQQ0g0xFipGD1IFt7AarcafxZ9HCSkQYjgfL2HbKiOBeilO21KP4/R4Unwda1lAXu8
+         3P4REj2IZfrVvYj/ZgzRAg7ivjhrDB3Ym99mU7FUr7jLInuhxnp/kXZvV5bQg1GIxCrz
+         VHng==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1789906045; x=1790510845;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=Q44BARlj5l9YGAlj+x+tZB6yMYyY94DbD3TNED9Jnj0=;
-        b=JsGnUyHI2wOHYLaYBVkEtwkRA/lwFSfx5FKgRwDExyfqaolybW2fmko+Fb8h0GBygq
-         su8LGYQhFeYp5xSBbPlh1zn2jFmFEcLJpTNe9LnLPg2WMfIUo1ZPQRI9l7xPPSWpWMQF
-         0+RPl8Wcj6v5CDBbTpMOQjDafjD3hs8tVI5T0tCaRkWmaHoOHVxEuMIK2nLSG0PgC5Xe
-         cbbrDQFzEfGYY++lF4QtLNAkYerCLfjpC875FFjErhazem7GdGRcDDjNg30hzX9a3TYT
-         EVAe3m9Fes8Q3hRaPi6ub2z3dwWEXB+cNXqv2YZe1ciXJAZFlkPiamGMWbVufO6NvvnZ
-         x2QQ==
-X-Gm-Message-State: AFuF++mpzBKSDwTHRkKxByrQ8XXxp2szTgU/eJzIu91G678leKcY9OJm
-	1iY+aY/GsuP+1+g4QFjR9miYQoEPC0VZsYj/8u59BD/WIpA69e8ZOY5n1kIklrYfSeQcubzq+TK
-	/QYBZCPRHS8VfurYZIdzjcRnCLKyJfZsZB3/2jzd9iysSjJLiF6W6LZXCM0an/UVfoctl
-X-Gm-Gg: AYBFou2ZUcIZ9mpwYfy6zcwX4af4S/IglEbrOYk/9CjDQvKJ3e0Zz8Bvg9uH9rx8pyk
-	yKhr7sOCAF6qIxQtCrrNBo4LLPArVAZFfAgSGKMM7dCmoNxrjg/2VqrZfGX1o4HYNEALRbNAVbg
-	SXbjKYk0toichPXZFy29/PRNCYNTTc6+GNbREOG9KKrk01p/r3vvmvTspS4hglPg1iXW2y8WYzk
-	U2qo6A0XEGGexJTTtEay7KZ2NWD6TdtNr2xdSfMeVrgNq661HPVq6hn1o6bEKI/uBbiz/NiPNVO
-	v+IgorPUJhjSJbEboQcmP3ni/9Vw9OK6B2QCIBHyoxjdt53Y+HDzQZJ+AGAnA/pXk41VNyjtZs8
-	Oq/fSOuRBP8c/rDGpmNg+M9gNHtkBvGOH5Q==
-X-Received: by 2002:a17:90b:4c46:b0:366:3517:1aa2 with SMTP id 98e67ed59e1d1-39e54922644mr17295756a91.0.1789906044983;
-        Sun, 20 Sep 2026 05:07:24 -0700 (PDT)
-X-Received: by 2002:a17:90b:4c46:b0:366:3517:1aa2 with SMTP id 98e67ed59e1d1-39e54922644mr17295718a91.0.1789906044272;
-        Sun, 20 Sep 2026 05:07:24 -0700 (PDT)
-Received: from [192.168.1.9] ([106.222.235.240])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-144d55cef9bsm12317623c88.10.2026.09.20.05.07.20
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Sun, 20 Sep 2026 05:07:23 -0700 (PDT)
-Message-ID: <565ae1e8-22f0-4bfc-8d1b-a453026961e8@oss.qualcomm.com>
-Date: Sun, 20 Sep 2026 17:37:18 +0530
+        d=1e100.net; s=20260707; t=1789909712; x=1790514512;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=+fWQ93GWSWlpqI9jaUvjBtkHzf6rpJ3Yfwxd9B7T2oU=;
+        b=b4lOIYlq70i8fBlxLXy5Fdc89Jr8IFBtnIa5o3vEEXMo3rSGNxcb0rLFLFLrWb0QDD
+         TgMBPX7QI7pQcEFRIyiX271r5bcWs6S3yaRpSwRaJ4dFb4AAkOnFvjUFGirmsWqq7T++
+         YMYnuJu0oCXI0+V0ZRWPCKmwaZ819Pa94JDTZMVXm2C9KzX2vURW9G7w1zuhTIj+/Ydu
+         vrM8K1a2MqZYRns+aa+IHdKmEiTZU3CJRJvCc9o3brUOq03wYuhQjmjrdKs77zb0YeQJ
+         73SizcBurNPYV+654dRLR3I0eGE4kb87DWGE3FppQ0QJz4kjzOw+Wzpx/q9i02ilUzX/
+         6w2A==
+X-Forwarded-Encrypted: i=1; AKwUvBxGYwfk7vq1oR5feiFPNyRZH2cDUn50V7QolyUVeMzpuZnUipICNs/Jz5DAKK4rfgvUePLLtnyx8Av8AHdF@vger.kernel.org
+X-Gm-Message-State: AFuF++kKlPOhG6s1dZYeLBKmZlkmMXnVsKxbBxQKo8NE9cZyNO9SKcGf
+	SgD47uLtk4ECnbLza4nF7+aXDp6HVYTTHgaAe/dZYC//GBQ53iZB34o+FgPSGdqmLM7A8xM9DnB
+	NE1cplHpiy04zyvHtUjZ40ERYGezRcnhs+Fvr05q5GIQvgA29zCF4dB8ov4Wbh0twG9vy
+X-Gm-Gg: AYBFou27dfMVTJpqG1Tw3eEQoDb7fBzPLio0qR/eDVdaPFiSTxYSv/ow0HaBH1BvMGQ
+	ZBd2mGh+AFbGII8/wI37EhHk9iRlyjeiiZvQinTi84lK2rTp+wQDaml7c8b8ouwQwrz55iy4UGY
+	+CDR/EeCLX5bsDlTNltyq3Ue3i84B48PAmFtzMCVJ6VsZXj4pa+aOCrV40DYAeFR5PaHpdiUwkz
+	Z/Ufau6ikYNQoH6bn0m04iTWrD7KsMWhDr5CzAVto+YF6Pgk87pDu8QeEyx42czpETCcokdmj0Q
+	o3+sqg9rR/A82Y6tibrCWgRu0RdL2TQZ+bP0mAQ7HjN/CbGj+MRBBqXokQpQs0YliiglI8LXLQ9
+	PirpAVjnfrnhtXHv9g8d5reVr8fxwyujf0uiTr2EJ854=
+X-Received: by 2002:a17:90b:534d:b0:39e:6c68:c77c with SMTP id 98e67ed59e1d1-39e6c68cad0mr6358929a91.50.1789909711597;
+        Sun, 20 Sep 2026 06:08:31 -0700 (PDT)
+X-Received: by 2002:a17:90b:534d:b0:39e:6c68:c77c with SMTP id 98e67ed59e1d1-39e6c68cad0mr6358903a91.50.1789909711121;
+        Sun, 20 Sep 2026 06:08:31 -0700 (PDT)
+Received: from QCOM-aGQu4IUr3Y (i-global052.qualcomm.com. [199.106.103.52])
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-144e16a7f71sm2602239c88.8.2026.09.20.06.08.26
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 20 Sep 2026 06:08:30 -0700 (PDT)
+Date: Sun, 20 Sep 2026 21:08:24 +0800
+From: Shawn Guo <shengchao.guo@oss.qualcomm.com>
+To: Vishnu Reddy <busanna.reddy@oss.qualcomm.com>
+Cc: Vikash Garodia <vikash.garodia@oss.qualcomm.com>,
+        Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>,
+        Abhinav Kumar <abhinav.kumar@linux.dev>,
+        Bryan O'Donoghue <bod@kernel.org>,
+        Mauro Carvalho Chehab <mchehab@kernel.org>,
+        Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        Abel Vesa <abelvesa@kernel.org>, linux-media@vger.kernel.org,
+        linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+Subject: Re: [PATCH 1/4] dt-bindings: media: qcom,nord-iris: Add nord video
+ codec
+Message-ID: <aq_ayLVdWc1Mt0Wu@QCOM-aGQu4IUr3Y>
+References: <20260919-nord-iris-v1-0-94428761ec06@oss.qualcomm.com>
+ <20260919-nord-iris-v1-1-94428761ec06@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 2/2] i2c: qcom-target: Add driver for Qualcomm I2C
- target controller
-To: Mukesh Savaliya <mukesh.savaliya@oss.qualcomm.com>,
-        Andi Shyti <andi.shyti@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, linux-i2c@vger.kernel.org,
-        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
-References: <20260813-i2c-qcom-slave-v3-0-1d3742e2ad47@oss.qualcomm.com>
- <20260813-i2c-qcom-slave-v3-2-1d3742e2ad47@oss.qualcomm.com>
- <bead05f4-6df9-49ac-88e3-0a8758e7b78b@oss.qualcomm.com>
-Content-Language: en-US
-From: Viken Dadhaniya <viken.dadhaniya@oss.qualcomm.com>
-In-Reply-To: <bead05f4-6df9-49ac-88e3-0a8758e7b78b@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-Authority-Analysis: v=2.4 cv=H6JOUOYi c=1 sm=1 tr=0 ts=6aafcc7e cx=c_pps
- a=UNFcQwm+pnOIJct1K4W+Mw==:117 a=pmtpKdcgZ0pbyg+hYGrA9w==:17
- a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
- a=EUspDBNiAAAA:8 a=VwQbUJbxAAAA:8 a=jE1y32YtHgH84QjmgL4A:9
- a=inJLjF9DGj1vjSAe:21 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
- a=uKXjsCUrEbL0IQVhDsJ9:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTIwMDE3NSBTYWx0ZWRfXydgTlCTMEIY/
- z3riLS+KhxZWDjCm8bC4GAbqZUFY4AD6Q0wnDQ53Zqu9qXPfKGAuggvBYmuQKRfUnhLEID791WK
- 9Z6TeageQtIP3V1OhA7RoYRIKFrUWk+nND38Tg33gOdxa5yRteb0V1ZDekf03ggU2Tl8517kcpQ
- 8wjOq1GC0qB8SoPjZiZyJw2AG1czeQ7l6FAtZQ+9592b+4YsCtFbmPPAVYoe/s86BOUwZSkU+yQ
- CKUotkCRALc0yanq1TDkbPBlLzSM6SwzbQYhUw25PPytbSTL6jg+66v8J6NwaSPdnmHz5C6kzhy
- DFsk+QYratzvHjY1TCQMy48ke6x1C/+hHabw2SvS6+FgFMCE3csx5odnx78OcpEfuKvXBcIaP2P
- nU5zaADSEI1DHnxfL2lNkARtFgl58PY1v67rf/XQ8p7ICpWZOn8+1D8kBOEc8to+Uh9zqq4DOYM
- SivWNkfmIAuLUJeuTJA==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTIwMDE3NSBTYWx0ZWRfX1T41GATqNW0o
- 2kfHeFPx4vkTAlFdlAriWytZv9fUFlAZqkgYr5w8nFYqj0zwZy5AJ8d6oTirv1Dg2L2K8uevCX7
- Uc1k4tzwXOXp59bPnKDAT/0BmmwCJc4=
-X-Proofpoint-ORIG-GUID: AehuowL4Kef8XfwjID0HIaePHC6L72o4
-X-Proofpoint-GUID: AehuowL4Kef8XfwjID0HIaePHC6L72o4
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260919-nord-iris-v1-1-94428761ec06@oss.qualcomm.com>
+X-Proofpoint-ORIG-GUID: NknCVP2yNxdJKdhKvnJRytq1g04fQoJg
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTIwMDE5MCBTYWx0ZWRfXzeYfvHlEXFbh
+ 4vlyUyYyowg6k/SZleNdf9W+LYqV4BTOQg0vWEqJgCNom6CdcIKyJklFEt3vveE1m+xSA0YQDln
+ jv8Q/RyFkYV0bttJFiOnGnu2q+Cy8npSPq1mC7y9L6DV6iq+x44wZ7XSys4UDCiaxGSTAl/q4CE
+ lFFlaR4MlZMnmEvajszG7hqvyZb6EI4rbsHnL3gh4owzKZt/Bc1ndaf6mIMSh07XDewX808m5VH
+ kSh5wpJhNJMrj95qIsmAh/0V3qGHvEvl6Yca76TM24+66HKulvSiGM3OaPLTJ4qTCNxNEvhz/4C
+ UMCnbdKxD3/4ybKaVBJ3EDqKQ1O/174FNpejjUaQzq0UE1s+C3UUO7J3ODARiT1nknxz6gWp/cN
+ UpcPf/PaJRhnBD01NgsOI7dGUWv7XKCKdBvB88+KqbYFHZ/oza2B95EpUQz70yU3jjdsFZxvKYU
+ aS54YZRdd+M83/GW+KQ==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTIwMDE5MCBTYWx0ZWRfX9Ve6ejTHd0/H
+ hHatcf252M16EfXnlz01mhP82fbn38Eacuhpqg1lGqiWady/x26yVUQNi9R5ora5En1SNR+y5RQ
+ 91/heP9Ul/HlWA71QwgaqYBr5yHXj9Q=
+X-Authority-Analysis: v=2.4 cv=BKAmP1QG c=1 sm=1 tr=0 ts=6aafdad0 cx=c_pps
+ a=RP+M6JBNLl+fLTcSJhASfg==:117 a=b9+bayejhc3NMeqCNyeLQQ==:17
+ a=kj9zAlcOel0A:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22
+ a=gEfo2CItAAAA:8 a=EUspDBNiAAAA:8 a=bt1g-dDAHYZoXwUorAEA:9 a=CjuIK1q_8ugA:10
+ a=iS9zxrgQBfv6-_F4QbHw:22 a=sptkURWiP4Gy88Gu7hUp:22
+X-Proofpoint-GUID: NknCVP2yNxdJKdhKvnJRytq1g04fQoJg
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-09-20_04,2026-09-16_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 phishscore=0 suspectscore=0 bulkscore=0 lowpriorityscore=0
- impostorscore=0 adultscore=0 spamscore=0 malwarescore=0 clxscore=1015
+ clxscore=1015 priorityscore=1501 suspectscore=0 impostorscore=0 spamscore=0
+ malwarescore=0 bulkscore=0 adultscore=0 lowpriorityscore=0 phishscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609200175
+ reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609200190
 
+On Sat, Sep 19, 2026 at 10:14:55AM +0530, Vishnu Reddy wrote:
+> The nord platform uses the same dual-core iris video codec hardware as
+> glymur, with matching clocks and power domains. Add a qcom,nord-iris
+> compatible string that falls back to qcom,glymur-iris, allowing nord to
+> reuse the existing glymur iris devicetree schema.
+> 
+> Signed-off-by: Vishnu Reddy <busanna.reddy@oss.qualcomm.com>
+> ---
+>  Documentation/devicetree/bindings/media/qcom,glymur-iris.yaml | 6 +++++-
+>  1 file changed, 5 insertions(+), 1 deletion(-)
+> 
+> diff --git a/Documentation/devicetree/bindings/media/qcom,glymur-iris.yaml b/Documentation/devicetree/bindings/media/qcom,glymur-iris.yaml
+> index de4792f3b658..558b85ef9ea0 100644
+> --- a/Documentation/devicetree/bindings/media/qcom,glymur-iris.yaml
+> +++ b/Documentation/devicetree/bindings/media/qcom,glymur-iris.yaml
+> @@ -15,7 +15,11 @@ description:
+>  
+>  properties:
+>    compatible:
+> -    const: qcom,glymur-iris
+> +    oneOf:
+> +      - items:
+> +          - const: qcom,nord-iris
+> +          - const: qcom,glymur-iris
+> +      - const: qcom,glymur-iris
 
+It might be a problem of prerequisite change instead of this patch
+itself. But I'm seeing a CHECK_DTBS issue here.
 
-On 8/27/2026 3:51 PM, Mukesh Savaliya wrote:
+Documentation/devicetree/bindings/media/qcom,venus-common.yaml: iommu-ranges: missing type definition
+  DTC [C] arch/arm64/boot/dts/qcom/nord-ride-embedded.dtb
+out/arch/arm64/boot/dts/qcom/nord-ride-embedded.dtb: video-codec@aa00000 (qcom,nord-iris): non-pixel:iommu-ranges: [629145600, 3663724544] is too long
+        from schema $id: http://devicetree.org/schemas/media/qcom,glymur-iris.yaml
+out/arch/arm64/boot/dts/qcom/nord-ride-embedded.dtb: video-codec@aa00000 (qcom,nord-iris): Unevaluated properties are not allowed ('#address-cells', '#size-cells', 'dma-ranges', 'firmware-name', 'interrupts', 'memory-region', 'pixel', 'reg' were unexpected)
+        from schema $id: http://devicetree.org/schemas/media/qcom,glymur-iris.yaml
+
+Shawn
+
+>  
+>    clocks:
+>      maxItems: 9
+> 
+> -- 
+> 2.34.1
 > 
 > 
-> On 8/13/2026 9:22 PM, Viken Dadhaniya wrote:
->> QDU1000 and related Qualcomm SoCs include a dedicated I2C target
->> controller that operates exclusively in target mode. The existing
->> Qualcomm I2C controller drivers (GENI, QUP) are master-only and cannot
->> serve systems where the SoC must respond as an I2C target on the bus.
->>
->> Register the controller with the Linux I2C slave framework via
->> i2c_algorithm.reg_target and i2c_algorithm.unreg_target so that any
->> standard slave backend (e.g. slave-24c02) can be attached at runtime
->> via i2c_slave_register(). Handle IRQ events for RX FIFO service, clock
->> stretching during read and write phases, STOP and repeated-start
->> conditions, and error recovery with SW reset. Enable the required AHB
->> and XO clocks, vote for interconnect bandwidth, and restore hardware
->> state across suspend and resume using the noirq PM callbacks.
-> Neat:
-> Though second paragraph gives good information, but i would suggest to keep  new lines to make it easier and simpler.>
-
-Updated in v4.
-
->> Signed-off-by: Viken Dadhaniya <viken.dadhaniya@oss.qualcomm.com>
->> ---
->>   MAINTAINERS                          |   9 +
->>   drivers/i2c/busses/Kconfig           |  15 +
->>   drivers/i2c/busses/Makefile          |   1 +
->>   drivers/i2c/busses/i2c-qcom-target.c | 588 +++++++++++++++++++++++++++++++++++
->>   4 files changed, 613 insertions(+)
->>
->> diff --git a/MAINTAINERS b/MAINTAINERS
->> index fe67f7bfa44c..7a2d66385e36 100644
->> --- a/MAINTAINERS
->> +++ b/MAINTAINERS
->> @@ -22380,6 +22380,15 @@ S:    Maintained
->>   F:    Documentation/devicetree/bindings/i2c/qcom,i2c-geni-qcom.yaml
->>   F:    drivers/i2c/busses/i2c-qcom-geni.c
->>   +QUALCOMM I2C TARGET CONTROLLER DRIVER
->> +M:    Viken Dadhaniya <viken.dadhaniya@oss.qualcomm.com>
->> +M:    Mukesh Kumar Savaliya <mukesh.savaliya@oss.qualcomm.com>
->> +L:    linux-i2c@vger.kernel.org
->> +L:    linux-arm-msm@vger.kernel.org
->> +S:    Maintained
->> +F:    Documentation/devicetree/bindings/i2c/qcom,qdu1000-i2c-target.yaml
->> +F:    drivers/i2c/busses/i2c-qcom-target.c
->> +
->>   QUALCOMM I2C CCI DRIVER
->>   M:    Loic Poulain <loic.poulain@oss.qualcomm.com>
->>   M:    Robert Foss <rfoss@kernel.org>
->> diff --git a/drivers/i2c/busses/Kconfig b/drivers/i2c/busses/Kconfig
->> index d7b89508311f..2e18238e0ae6 100644
->> --- a/drivers/i2c/busses/Kconfig
->> +++ b/drivers/i2c/busses/Kconfig
->> @@ -1070,6 +1070,21 @@ config I2C_QCOM_GENI
->>         This driver can also be built as a module.  If so, the module
->>         will be called i2c-qcom-geni.
->>   +config I2C_QCOM_TARGET
->> +    tristate "Qualcomm I2C target controller"
->> +    depends on ARCH_QCOM || COMPILE_TEST
->> +    depends on COMMON_CLK
->> +    depends on INTERCONNECT
->> +    select I2C_SLAVE
->> +    help
->> +      This driver supports I2C target mode on Qualcomm Technologies
->> +      SoCs. If you say yes to this option, support will be included
->> +      for the built-in I2C target controller on QDU1000 and other
->> +      compatible Qualcomm SoCs.
->> +
->> +      This driver can also be built as a module. If so, the module
->> +      will be called i2c-qcom-target.
->> +
->>   config I2C_QUP
->>       tristate "Qualcomm QUP based I2C controller"
->>       depends on ARCH_QCOM || COMPILE_TEST
->> diff --git a/drivers/i2c/busses/Makefile b/drivers/i2c/busses/Makefile
->> index 3755c54b3d82..ab3070cdb144 100644
->> --- a/drivers/i2c/busses/Makefile
->> +++ b/drivers/i2c/busses/Makefile
->> @@ -101,6 +101,7 @@ obj-$(CONFIG_I2C_PXA)        += i2c-pxa.o
->>   obj-$(CONFIG_I2C_PXA_PCI)    += i2c-pxa-pci.o
->>   obj-$(CONFIG_I2C_QCOM_CCI)    += i2c-qcom-cci.o
->>   obj-$(CONFIG_I2C_QCOM_GENI)    += i2c-qcom-geni.o
->> +obj-$(CONFIG_I2C_QCOM_TARGET)    += i2c-qcom-target.o
->>   obj-$(CONFIG_I2C_QUP)        += i2c-qup.o
->>   obj-$(CONFIG_I2C_RIIC)        += i2c-riic.o
->>   obj-$(CONFIG_I2C_RK3X)        += i2c-rk3x.o
->> diff --git a/drivers/i2c/busses/i2c-qcom-target.c b/drivers/i2c/busses/i2c-qcom-target.c
->> new file mode 100644
->> index 000000000000..277ea944eedb
->> --- /dev/null
->> +++ b/drivers/i2c/busses/i2c-qcom-target.c
->> @@ -0,0 +1,588 @@
->> +// SPDX-License-Identifier: GPL-2.0-only
->> +/*
->> + * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
->> + */
->> +
->> +#include <linux/bitfield.h>
->> +#include <linux/clk.h>
->> +#include <linux/delay.h>
->> +#include <linux/i2c.h>
->> +#include <linux/interconnect.h>
->> +#include <linux/interrupt.h>
->> +#include <linux/io.h>
->> +#include <linux/module.h>
->> +#include <linux/platform_device.h>
->> +
->> +/* Register offsets */
->> +#define I2C_S_DEVICE_ADDR            0x00
->> +#define I2C_S_IRQ_STATUS            0x08
->> +#define I2C_S_IRQ_CLR                0x0C
->> +#define I2C_S_IRQ_EN                0x10
->> +#define I2C_S_CONFIG                0x18
->> +#define I2C_S_CONTROL                0x1C
->> +#define I2C_S_FIFOS_STATUS            0x20
->> +#define I2C_S_TX_FIFO                0x24
->> +#define I2C_S_RX_FIFO                0x28
->> +#define I2C_S_DEBUG_REG1            0x3C
->> +#define I2C_S_DEBUG_REG2            0x40
->> +#define I2C_S_SW_RESET_REG            0x4C
->> +#define I2C_S_CLK_LOW_TIMEOUT            0x50
->> +#define I2C_S_CLK_RELEASE_DELAY_CNT_VAL    0x54
->> +#define I2C_S_SDA_HOLD_CNT_VAL            0x58
->> +
->> +/* I2C_S_CONFIG register fields */
->> +#define I2C_S_CORE_EN                BIT(0)
->> +
->> +/* I2C_S_CONTROL register fields */
->> +#define CLEAR_RX_FIFO                BIT(0)
->> +#define CLEAR_TX_FIFO                BIT(1)
->> +#define NACK                    BIT(2)
->> +#define ACK_RESUME                BIT(3)
->> +
->> +/* I2C_S_SW_RESET_REG register fields */
->> +#define SW_RESET                BIT(0)
->> +
->> +/* I2C_S_FIFOS_STATUS register fields */
->> +#define RX_FIFO_COUNT_MASK            GENMASK(31, 16)
->> +
->> +/* Interconnect bandwidth vote in bytes per second */
->> +#define APPS_PROC_TO_I2C_TARGET_VOTE        1190000
->> +
->> +/**
->> + * enum qcom_i2c_target_irq - IRQ bit positions in I2C_S_IRQ_STATUS
->> + * @STOP_DETECTED:    I2C stop condition detected on the bus
->> + * @RX_FIFO_FULL:    receive FIFO has reached capacity
->> + * @TX_FIFO_EMPTY:    transmit FIFO is empty
->> + * @RX_DATA_AVAIL:    receive data is available in the RX FIFO
->> + * @CLOCK_LOW_TIMEOUT:    SCL held low longer than the configured timeout
->> + * @STRCH_WR:        clock stretching during a write (Rx) phase
->> + * @STRCH_RD:        clock stretching during a read (Tx) phase
->> + * @GCA_DETECTED:    general call address detected (not used)
->> + * @ERR_CONDITION:    unexpected start or stop bit detected (error)
->> + * @RESTART_DETECTED:    repeated start condition detected
->> + */
->> +enum qcom_i2c_target_irq {
->> +    STOP_DETECTED,
->> +    RX_FIFO_FULL,
->> +    TX_FIFO_EMPTY,
->> +    RX_DATA_AVAIL,
->> +    CLOCK_LOW_TIMEOUT,
->> +    STRCH_WR,
->> +    STRCH_RD,
->> +    GCA_DETECTED,
->> +    ERR_CONDITION,
->> +    RESTART_DETECTED,
->> +};
->> +
->> +/*
->> + * TX_FIFO_EMPTY is excluded: this driver fills the TX FIFO one byte at a
->> + * time in response to STRCH_RD (clock-stretch during read phase), so
->> + * TX_FIFO_EMPTY adds no value and would double the interrupt rate.
->> + * GCA (general call address) is unsupported.
->> + */
->> +#define QCOM_I2C_TARGET_ALL_IRQ    (GENMASK(RESTART_DETECTED, STOP_DETECTED) \
->> +                 & ~(BIT(GCA_DETECTED) | BIT(TX_FIFO_EMPTY)))
->> +
->> +/* Bit indices for the status bitmask, used with set_bit/test_bit/clear_bit */
->> +enum qcom_i2c_target_status {
->> +    READ_IN_PROGRESS,
->> +    WRITE_IN_PROGRESS,
->> +};
->> +
->> +/**
->> + * struct qcom_i2c_target - Qualcomm I2C target controller private data
->> + * @dev:        driver model device node
->> + * @base:        base address of HW registers
->> + * @adap:        I2C adapter (slave mode)
->> + * @ahb_clk:        AHB bus clock
->> + * @xo_clk:        XO reference clock
->> + * @icc_path:        interconnect bandwidth path
->> + * @slave:        currently registered slave backend client; written only
->> + *            under disable_irq() in reg_slave()/unreg_slave() so the
->> + *            ISR sees a stable pointer for its entire execution
->> + * @status:        bitmask of enum qcom_i2c_target_status flags; must be
->> + *            unsigned long for set_bit/test_bit/clear_bit; accessed
->> + *            only from the ISR and from reg_slave()/unreg_slave()
->> + *            under disable_irq(), so no additional lock is needed
->> + * @irq:        interrupt line number
->> + */
->> +struct qcom_i2c_target {
->> +    struct device        *dev;
->> +    void __iomem        *base;
->> +    struct i2c_adapter    adap;
->> +    struct clk        *ahb_clk;
->> +    struct clk        *xo_clk;
->> +    struct icc_path        *icc_path;
->> +    struct i2c_client    *slave;
->> +    unsigned long        status;
->> +    int            irq;
->> +};
->> +
->> +static void qcom_i2c_target_dump_regs(struct qcom_i2c_target *target)
->> +{
->> +    dev_dbg(target->dev, "I2C_S_DEVICE_ADDR:               0x%x\n",
->> +        readl_relaxed(target->base + I2C_S_DEVICE_ADDR));
->> +    dev_dbg(target->dev, "I2C_S_IRQ_STATUS:                0x%x\n",
->> +        readl_relaxed(target->base + I2C_S_IRQ_STATUS));
->> +    dev_dbg(target->dev, "I2C_S_CONFIG:                    0x%x\n",
->> +        readl_relaxed(target->base + I2C_S_CONFIG));
->> +    dev_dbg(target->dev, "I2C_S_IRQ_EN:                    0x%x\n",
->> +        readl_relaxed(target->base + I2C_S_IRQ_EN));
->> +    dev_dbg(target->dev, "I2C_S_FIFOS_STATUS:              0x%x\n",
->> +        readl_relaxed(target->base + I2C_S_FIFOS_STATUS));
->> +    dev_dbg(target->dev, "I2C_S_DEBUG_REG1:                0x%x\n",
->> +        readl_relaxed(target->base + I2C_S_DEBUG_REG1));
->> +    dev_dbg(target->dev, "I2C_S_DEBUG_REG2:                0x%x\n",
->> +        readl_relaxed(target->base + I2C_S_DEBUG_REG2));
->> +    dev_dbg(target->dev, "I2C_S_CLK_LOW_TIMEOUT:           0x%x\n",
->> +        readl_relaxed(target->base + I2C_S_CLK_LOW_TIMEOUT));
->> +    dev_dbg(target->dev, "I2C_S_CLK_RELEASE_DELAY_CNT_VAL: 0x%x\n",
->> +        readl_relaxed(target->base + I2C_S_CLK_RELEASE_DELAY_CNT_VAL));
->> +    dev_dbg(target->dev, "I2C_S_SDA_HOLD_CNT_VAL:          0x%x\n",
->> +        readl_relaxed(target->base + I2C_S_SDA_HOLD_CNT_VAL));
->> +}
->> +
->> +static void qcom_i2c_target_hw_init(struct qcom_i2c_target *target)
->> +{
->> +    dev_dbg(target->dev, "HW init: resetting FIFOs, enabling IRQs\n");
->> +    writel(CLEAR_TX_FIFO | CLEAR_RX_FIFO, target->base + I2C_S_CONTROL);
->> +    writel(QCOM_I2C_TARGET_ALL_IRQ, target->base + I2C_S_IRQ_EN);
->> +}
->> +
->> +static void qcom_i2c_target_write_requested(struct qcom_i2c_target *target)
->> +{
->> +    u8 val = 0;
->> +
->> +    if (!test_and_set_bit(WRITE_IN_PROGRESS, &target->status)) {
->> +        dev_dbg(target->dev, "Write phase started\n");
->> +        i2c_slave_event(target->slave, I2C_SLAVE_WRITE_REQUESTED, &val);
->> +    }
->> +}
->> +
->> +static int qcom_i2c_target_drain_rx_fifo(struct qcom_i2c_target *target)
->> +{
->> +    unsigned int rx_count;
->> +    int ret = 0;
->> +    u8 val;
->> +
->> +    while (!ret) {
->> +        rx_count = FIELD_GET(RX_FIFO_COUNT_MASK,
->> +                     readl_relaxed(target->base + I2C_S_FIFOS_STATUS));
->> +        if (!rx_count)
->> +            break;
->> +
->> +        while (rx_count--) {
->> +            val = (u8)readl_relaxed(target->base + I2C_S_RX_FIFO);
->> +            dev_dbg(target->dev, "Data from RX FIFO: 0x%x\n", val);
->> +            ret = i2c_slave_event(target->slave, I2C_SLAVE_WRITE_RECEIVED, &val);
->> +            if (ret)
->> +                break;
->> +        }
->> +    }
->> +
->> +    return ret;
->> +}
->> +
->> +static void qcom_i2c_target_hw_reset(struct qcom_i2c_target *target)
->> +{
->> +    /* Clear error bits before SW_RESET; the reset may not be instantaneous */
->> +    writel(BIT(ERR_CONDITION) | BIT(CLOCK_LOW_TIMEOUT),
->> +           target->base + I2C_S_IRQ_CLR);
->> +    writel(SW_RESET, target->base + I2C_S_SW_RESET_REG);
-> 
-> line space > +    /*
-
-Added in v4.
-
->> +     * I2C_S_SW_RESET_REG is write-only so completion cannot be polled.
->> +     * Use a conservative delay to allow the reset to finish before
->> +     * reconfiguring the controller.
->> +     */
->> +    usleep_range(10, 20);
->> +    qcom_i2c_target_hw_init(target);
->> +    writel(target->slave->addr, target->base + I2C_S_DEVICE_ADDR);
->> +    writel(I2C_S_CORE_EN, target->base + I2C_S_CONFIG);
->> +}
->> +
->> +static irqreturn_t qcom_i2c_target_handle_error(struct qcom_i2c_target *target,
->> +                        u32 irq_stat)
->> +{
->> +    u8 val = 0;
->> +
->> +    if (irq_stat & BIT(ERR_CONDITION))
->> +        dev_err(target->dev, "Error condition: unexpected Start/Stop bits\n");
->> +    else
->> +        dev_err(target->dev, "Clock low timeout\n");
->> +    qcom_i2c_target_dump_regs(target);
->> +    qcom_i2c_target_hw_reset(target);
->> +    i2c_slave_event(target->slave, I2C_SLAVE_STOP, &val);
->> +    target->status = 0;
-> line space before return> +    return IRQ_HANDLED;
-
-Added in v4.
-
->> +}
->> +
->> +static irqreturn_t qcom_i2c_target_handle_stop(struct qcom_i2c_target *target,
->> +                           u32 irq_stat)
->> +{
->> +    u8 val = 0;
->> +
->> +    dev_dbg(target->dev, "Stop bit detected\n");
->> +    /*
->> +     * Short-write corner case: WRITE_IN_PROGRESS was never set because
->> +     * no RX_DATA_AVAIL or STRCH_WR fired before STOP. Do not call
->> +     * qcom_i2c_target_write_requested() here — STOP ends the transaction
->> +     * so setting WRITE_IN_PROGRESS now would leave a stale bit after
->> +     * target->status is cleared below.
->> +     */
->> +    if (!test_bit(WRITE_IN_PROGRESS, &target->status)) {
->> +        unsigned int rx_count;
->> +
->> +        rx_count = FIELD_GET(RX_FIFO_COUNT_MASK,
->> +                     readl_relaxed(target->base + I2C_S_FIFOS_STATUS));
->> +        if (rx_count)
->> +            i2c_slave_event(target->slave, I2C_SLAVE_WRITE_REQUESTED,
->> +                    &val);
->> +    }
-> minor as cleanup: give a line space > + qcom_i2c_target_drain_rx_fifo(target);
-
-Added in v4.
-
->> +    i2c_slave_event(target->slave, I2C_SLAVE_STOP, &val);
->> +    target->status = 0;
->> +    writel(CLEAR_RX_FIFO, target->base + I2C_S_CONTROL);
->> +    /*
->> +     * STOP terminates the transaction, so any other Rx or clock
->> +     * stretch bits latched in this same status read have already
->> +     * been serviced by the drain above or are now stale. Ack the
->> +     * whole word rather than just STOP_DETECTED; clearing only STOP
->> +     * would leave those bits set and immediately re-enter the
->> +     * handler, which for a co-asserted STRCH_RD would push a stale
->> +     * byte into the TX FIFO.
->> +     */
->> +    writel(irq_stat, target->base + I2C_S_IRQ_CLR);
-> 
-> give a line space before returning.> +    return IRQ_HANDLED;
-
-Added in v4.
-
->> +}
->> +
->> +static void qcom_i2c_target_handle_rx_data(struct qcom_i2c_target *target,
->> +                       u32 rx_irq_bits)
->> +{
->> +    int ret;
->> +
->> +    dev_dbg(target->dev, "Rx data event (rx_irq_bits=0x%x)\n", rx_irq_bits);
->> +    qcom_i2c_target_write_requested(target);
->> +    ret = qcom_i2c_target_drain_rx_fifo(target);
->> +    if (ret)
->> +        dev_dbg(target->dev, "Backend requested NACK\n");
-> line space for neat> +    writel(ret ? NACK | CLEAR_RX_FIFO : ACK_RESUME,
->> +           target->base + I2C_S_CONTROL);
->> +    writel(rx_irq_bits, target->base + I2C_S_IRQ_CLR);
->> +}
->> +
->> +static void qcom_i2c_target_handle_strch_rd(struct qcom_i2c_target *target)
->> +{
->> +    enum i2c_slave_event event = I2C_SLAVE_READ_PROCESSED;
->> +    u8 val = 0;
->> +
->> +    dev_dbg(target->dev, "Clock stretching during read (Tx) phase\n");
->> +    if (!test_and_set_bit(READ_IN_PROGRESS, &target->status)) {
->> +        /* Repeated-start: master switched direction from write to read */
->> +        clear_bit(WRITE_IN_PROGRESS, &target->status);
->> +        event = I2C_SLAVE_READ_REQUESTED;
->> +    }
-> line space> +    i2c_slave_event(target->slave, event, &val);
-
-Added in v4.
-
->> +    dev_dbg(target->dev, "Data to TX FIFO: 0x%x\n", val);
->> +    writel(val, target->base + I2C_S_TX_FIFO);
->> +    writel(ACK_RESUME, target->base + I2C_S_CONTROL);
->> +    writel(BIT(STRCH_RD), target->base + I2C_S_IRQ_CLR);
->> +}
->> +
->> +static irqreturn_t qcom_i2c_target_irq(int irq, void *dev)
->> +{
->> +    struct qcom_i2c_target *target = dev;
->> +    u32 irq_stat, rx_bits;
->> +
->> +    /*
->> +     * Dispatch priority (highest first):
->> +     *   ERR_CONDITION / CLOCK_LOW_TIMEOUT  — hardware error, triggers SW reset
->> +     *   STOP_DETECTED                      — end of transaction, clears all state
->> +     *   RESTART_DETECTED                   — repeated start, resets state before
->> +     *                                        any data phase in the same snapshot
->> +     *   STRCH_RD                           — read-phase data supply
->> +     *   RX_FIFO_FULL / RX_DATA_AVAIL /
->> +     *   STRCH_WR                           — write-phase Rx, coalesced into one drain
->> +     */
->> +    irq_stat = readl_relaxed(target->base + I2C_S_IRQ_STATUS);
->> +    if (!irq_stat)
->> +        return IRQ_NONE;
->> +
->> +    dev_dbg(target->dev, "IRQ status: 0x%x\n", irq_stat);
->> +
->> +    /*
->> +     * Load target->slave once. Both reg_slave() and unreg_slave() disable
->> +     * the IRQ before writing the pointer, so it cannot change while this
->> +     * handler runs. Sub-handlers may dereference target->slave directly.
->> +     *
->> +     * The core is enabled only in reg_slave() and disabled in unreg_slave(),
->> +     * so no bus activity is expected here. Clear and discard any stale IRQ.
->> +     */
->> +    if (!READ_ONCE(target->slave)) {
->> +        writel(irq_stat, target->base + I2C_S_IRQ_CLR);
->> +        return IRQ_HANDLED;
->> +    }
->> +
->> +    if (irq_stat & (BIT(ERR_CONDITION) | BIT(CLOCK_LOW_TIMEOUT)))
->> +        return qcom_i2c_target_handle_error(target, irq_stat);
->> +
->> +    if (irq_stat & BIT(STOP_DETECTED))
->> +        return qcom_i2c_target_handle_stop(target, irq_stat);
->> +
->> +    if (irq_stat & BIT(RESTART_DETECTED)) {
->> +        dev_dbg(target->dev, "Repeated start bit detected\n");
->> +        target->status = 0;
->> +        writel(ACK_RESUME, target->base + I2C_S_CONTROL);
->> +        writel(BIT(RESTART_DETECTED), target->base + I2C_S_IRQ_CLR);
->> +    }
->> +
->> +    if (irq_stat & BIT(STRCH_RD))
->> +        qcom_i2c_target_handle_strch_rd(target);
->> +
->> +    /*
->> +     * Coalesce all write-phase Rx bits into a single drain+ACK. When the
->> +     * RX FIFO fills at threshold, RX_FIFO_FULL, RX_DATA_AVAIL and STRCH_WR
->> +     * can all assert in the same irq_stat snapshot. Pass the combined mask
->> +     * so ACK_RESUME is written exactly once and all bits are cleared together.
->> +     */
->> +    rx_bits = irq_stat & (BIT(RX_FIFO_FULL) | BIT(RX_DATA_AVAIL) |
->> +                  BIT(STRCH_WR));
->> +    if (rx_bits)
->> +        qcom_i2c_target_handle_rx_data(target, rx_bits);
->> +
->> +    return IRQ_HANDLED;
->> +}
->> +
->> +static int qcom_i2c_target_reg_slave(struct i2c_client *slave)
->> +{
->> +    struct qcom_i2c_target *target = i2c_get_adapdata(slave->adapter);
->> +
->> +    if (target->slave)
->> +        return -EBUSY;
->> +
->> +    if (slave->flags & I2C_CLIENT_TEN)
->> +        return -EAFNOSUPPORT;
->> +
->> +    disable_irq(target->irq);
->> +    WRITE_ONCE(target->slave, slave);
->> +    writel(slave->addr, target->base + I2C_S_DEVICE_ADDR);
->> +    writel(I2C_S_CORE_EN, target->base + I2C_S_CONFIG);
->> +    enable_irq(target->irq);
->> +
->> +    return 0;
->> +}
->> +
->> +static int qcom_i2c_target_unreg_slave(struct i2c_client *slave)
->> +{
->> +    struct qcom_i2c_target *target = i2c_get_adapdata(slave->adapter);
->> +
->> +    if (!target->slave)
->> +        return -EINVAL;
-> minor comment: line space > +    disable_irq(target->irq);
-
-Added in v4.
-
->> +    writel(0, target->base + I2C_S_CONFIG);
->> +    WRITE_ONCE(target->slave, NULL);
->> +    target->status = 0;
->> +    writel(0, target->base + I2C_S_DEVICE_ADDR);
->> +    enable_irq(target->irq);
->> +
->> +    return 0;
->> +}
->> +
->> +static int qcom_i2c_target_icc_init(struct qcom_i2c_target *target)
->> +{
->> +    int ret;
->> +
->> +    target->icc_path = devm_of_icc_get(target->dev, NULL);
->> +    if (IS_ERR(target->icc_path))
->> +        return dev_err_probe(target->dev, PTR_ERR(target->icc_path),
->> +                     "failed to get ICC path\n");
->> +
->> +    /*
->> +     * The controller only needs interconnect bandwidth while it is
->> +     * powered. The vote is placed here and across resume with
->> +     * icc_set_bw(), and dropped with icc_set_bw(path, 0, 0) on suspend
->> +     * and remove, so the vote and unvote are always symmetric.
->> +     */
->> +    ret = icc_set_bw(target->icc_path, APPS_PROC_TO_I2C_TARGET_VOTE,
->> +             APPS_PROC_TO_I2C_TARGET_VOTE);
->> +    if (ret)
->> +        return dev_err_probe(target->dev, ret, "icc_set_bw failed\n");
->> +
->> +    return 0;
->> +}
->> +
->> +static u32 qcom_i2c_target_func(struct i2c_adapter *adap)
->> +{
->> +    return I2C_FUNC_SLAVE;
->> +}
->> +
->> +static const struct i2c_algorithm qcom_i2c_target_algo = {
->> +    .reg_target    = qcom_i2c_target_reg_slave,
->> +    .unreg_target    = qcom_i2c_target_unreg_slave,
->> +    .functionality    = qcom_i2c_target_func,
->> +};
->> +
->> +static int qcom_i2c_target_adap_init(struct qcom_i2c_target *target)
->> +{
->> +    target->adap.algo = &qcom_i2c_target_algo;
->> +    target->adap.dev.parent = target->dev;
->> +    target->adap.dev.of_node = target->dev->of_node;
->> +    strscpy(target->adap.name, "qcom-i2c-target",
->> +        sizeof(target->adap.name));
->> +    i2c_set_adapdata(&target->adap, target);
->> +
->> +    return i2c_add_adapter(&target->adap);
->> +}
->> +
->> +static int qcom_i2c_target_probe(struct platform_device *pdev)
->> +{
->> +    struct qcom_i2c_target *target;
->> +    struct device *dev = &pdev->dev;
->> +    int ret;
->> +
->> +    target = devm_kzalloc(dev, sizeof(*target), GFP_KERNEL);
->> +    if (!target)
->> +        return -ENOMEM;
->> +
->> +    target->dev = dev;
->> +
->> +    target->base = devm_platform_ioremap_resource(pdev, 0);
->> +    if (IS_ERR(target->base))
->> +        return dev_err_probe(dev, PTR_ERR(target->base),
->> +                     "failed to map registers\n");
->> +
->> +    target->xo_clk = devm_clk_get(dev, "xo");
->> +    if (IS_ERR(target->xo_clk))
->> +        return dev_err_probe(dev, PTR_ERR(target->xo_clk),
->> +                     "failed to get XO clock\n");
->> +
->> +    target->ahb_clk = devm_clk_get(dev, "ahb");
->> +    if (IS_ERR(target->ahb_clk))
->> +        return dev_err_probe(dev, PTR_ERR(target->ahb_clk),
->> +                     "failed to get AHB clock\n");
->> +
->> +    ret = clk_prepare_enable(target->xo_clk);
->> +    if (ret)
->> +        return dev_err_probe(dev, ret, "failed to enable XO clock\n");
->> +
->> +    ret = clk_prepare_enable(target->ahb_clk);
->> +    if (ret) {
->> +        clk_disable_unprepare(target->xo_clk);
->> +        return dev_err_probe(dev, ret, "failed to enable AHB clock\n");
->> +    }
->> +
->> +    target->irq = platform_get_irq(pdev, 0);
->> +    if (target->irq < 0)
->> +        return target->irq;
->> +
->> +    ret = qcom_i2c_target_icc_init(target);
->> +    if (ret)
->> +        return ret;
->> +
->> +    ret = devm_request_irq(dev, target->irq, qcom_i2c_target_irq, 0,
->> +                   dev_name(dev), target);
->> +    if (ret)
->> +        return dev_err_probe(dev, ret, "request_irq failed for IRQ %d\n",
->> +                     target->irq);
->> +
->> +    qcom_i2c_target_hw_init(target);
->> +
->> +    platform_set_drvdata(pdev, target);
->> +
->> +    ret = qcom_i2c_target_adap_init(target);
->> +    if (ret)
->> +        return dev_err_probe(dev, ret, "i2c_add_adapter failed\n");
->> +
->> +    return 0;
->> +}
->> +
->> +static void qcom_i2c_target_remove(struct platform_device *pdev)
->> +{
->> +    struct qcom_i2c_target *target = platform_get_drvdata(pdev);
->> +
->> +    writel(0, target->base + I2C_S_CONFIG);
->> +    i2c_del_adapter(&target->adap);
->> +    icc_set_bw(target->icc_path, 0, 0);
->> +    clk_disable_unprepare(target->xo_clk);
->> +    clk_disable_unprepare(target->ahb_clk);
->> +}
->> +
->> +static int qcom_i2c_target_suspend(struct device *dev)
->> +{
->> +    struct qcom_i2c_target *target = dev_get_drvdata(dev);
->> +    int ret;
->> +
->> +    ret = icc_set_bw(target->icc_path, 0, 0);
->> +    if (ret)
->> +        dev_err(dev, "icc_set_bw failed on suspend: %d\n", ret);
->> +
->> +    clk_disable_unprepare(target->xo_clk);
->> +    clk_disable_unprepare(target->ahb_clk);
->> +
->> +    return 0;
->> +}
->> +
->> +static int qcom_i2c_target_resume(struct device *dev)
->> +{
->> +    struct qcom_i2c_target *target = dev_get_drvdata(dev);
->> +    int ret;
->> +
->> +    ret = clk_prepare_enable(target->ahb_clk);
->> +    if (ret) {
->> +        dev_err(dev, "failed to enable AHB clock\n");
->> +        return ret;
->> +    }
->> +
->> +    ret = clk_prepare_enable(target->xo_clk);
->> +    if (ret) {
->> +        dev_err(dev, "failed to enable XO clock\n");
->> +        goto err_disable_ahb;
->> +    }
->> +
->> +    ret = icc_set_bw(target->icc_path, APPS_PROC_TO_I2C_TARGET_VOTE,
->> +             APPS_PROC_TO_I2C_TARGET_VOTE);
->> +    if (ret) {
->> +        dev_err(dev, "icc_set_bw failed\n");
->> +        goto err_disable_xo;
->> +    }
->> +
->> +    qcom_i2c_target_hw_init(target);
->> +    target->status = 0;
-> if the status is 0 here after target init, what about other places ? does it need to change status ? OR is it inherent to framework ?
-> 
-> Any comment can be help while changing status ?> +    if (target->slave) {
-
-Status is private transaction state owned by this driver; it is not
-managed by the I2C slave framework. It is cleared on STOP, error reset,
-repeated START, slave unregister, and resume. Resume clears it because the
-controller/FIFOs are reinitialized and any transaction state from before
-suspend is no longer valid. The initial probe value is already zeroed by
-devm_kzalloc().
-
->> +        writel(target->slave->addr, target->base + I2C_S_DEVICE_ADDR);
->> +        writel(I2C_S_CORE_EN, target->base + I2C_S_CONFIG);
->> +    }
->> +
->> +    return 0;
->> +
->> +err_disable_xo:
->> +    clk_disable_unprepare(target->xo_clk);
->> +err_disable_ahb:
->> +    clk_disable_unprepare(target->ahb_clk);
-> line space before return> +    return ret;
->> +}
->> +
->> +static const struct dev_pm_ops qcom_i2c_target_pm_ops = {
->> +    SET_NOIRQ_SYSTEM_SLEEP_PM_OPS(qcom_i2c_target_suspend,
->> +                      qcom_i2c_target_resume)
->> +};
->> +
-> 
-> can we also add reason here to add NOIRQ callbacks ? My generic question would be why not system PM or Runtime PM callbacks ?
-> This will help later stage for any futurstic changes.
-
-Updated in v4.
-
-> 
->> +static const struct of_device_id qcom_i2c_target_dt_match[] = {
->> +    { .compatible = "qcom,qdu1000-i2c-target" },
->> +    {}
->> +};
->> +MODULE_DEVICE_TABLE(of, qcom_i2c_target_dt_match);
->> +
->> +static struct platform_driver qcom_i2c_target_driver = {
->> +    .driver = {
->> +        .name        = "qcom-i2c-target",
->> +        .pm        = &qcom_i2c_target_pm_ops,
->> +        .of_match_table    = qcom_i2c_target_dt_match,
->> +    },
->> +    .probe    = qcom_i2c_target_probe,
->> +    .remove    = qcom_i2c_target_remove,
->> +};
->> +module_platform_driver(qcom_i2c_target_driver);
->> +
->> +MODULE_DESCRIPTION("Qualcomm I2C target controller driver");
->> +MODULE_AUTHOR("Viken Dadhaniya <viken.dadhaniya@oss.qualcomm.com>");
->> +MODULE_LICENSE("GPL");
->>
-> 
-
