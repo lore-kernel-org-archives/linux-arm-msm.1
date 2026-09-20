@@ -1,235 +1,219 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wr2-f12.google.com (mail-wr2-f12.google.com [74.125.225.76])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 095FD3C3F5E
-	for <linux-arm-msm@vger.kernel.org>; Sun, 20 Sep 2026 09:20:15 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C1AE63812C7
+	for <linux-arm-msm@vger.kernel.org>; Sun, 20 Sep 2026 10:18:51 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.225.76
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789896018; cv=none; b=NLb0qfrYR2c2tlERn2XjG4SCeGY80oYejbh0Wxa9NVHrc8GgKJg68P2/jqZ28XYjvPHPi+6ZoUQgL1sqtomjB9GfIugS3gqCxpuU8AVt5tcvrEDoDPNBNymxdrvM/aJVQtWHmoJmoVWT/KIaiA8ycnMP+1gu19Yxfr3bhB+7LxE=
+	t=1789899535; cv=none; b=HhRSPgrSZ6NdvfLq0HkIrXv3DTDHgsoBj6Z3mtE7ZXFQj1qJ7yTjhOgczlqkzEF+GPt2oO0Qn998PPXGOTxaRyecLwvdBsjuKyJi3yfrKCbJXYccZFF8Xc6vPgNZHnGsfkeFEHlDEbYj8kKK4pW6FO4lMfzD+Rn5WdOp4fsFgkQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789896018; c=relaxed/simple;
-	bh=BySI5VmNu0XMsBrJdklikPENZUstY6BjektoLcaVQcs=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=hQAu2mglNJVfggVoxwkST37R4vLYee3tMnBiFzEeVvVxjQ8lg1M1vPGXv0UHYGa84+EbLZzvoNGoMKHLMpwdNKZqQuwSya03mAXBHOcRki1Fqb+i4mFbrgalq2sTixE0tCNGMsUl4r+NOCXs/Vl5RM0OJhBYZHbOuzyMSiJA+AU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=iwLTz2OH; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=Edlw6GO5; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1789899535; c=relaxed/simple;
+	bh=HqP7BQVzVu/qEMR55V44Bfd8uKv6sm747Y9t+oz3hvE=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=dRXdQsypI0aCrijkEF1sdPY7pvt+isz220iPRGXwMc8HD4aBBanW8M6RLcVeGZ/K1A//jkCm+itPywKv/G56eYGEcm3U5RkvONlABnAynNhVd7SsyXZKDPnLXVfCO6ABLy2rVObiZSC1GFKfiaPUXnXt9WQHiZMOzqlBAmYQ96U=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com; spf=pass smtp.mailfrom=baylibre.com; dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b=V5KgARmi; arc=none smtp.client-ip=74.125.225.76
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=baylibre.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="iwLTz2OH";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Edlw6GO5"
-Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68K8W2hc2172449
-	for <linux-arm-msm@vger.kernel.org>; Sun, 20 Sep 2026 09:20:14 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:date:from:in-reply-to:message-id
-	:mime-version:references:subject:to; s=qcppdkim1; bh=7lobyN1OUJy
-	jnVa2esTQNCM5aKbLBwwEc/VQBoz4IIY=; b=iwLTz2OHElynWyqQ1hrI2NV35UR
-	Qy89V72Quc0DEG6bOzybea8kMSmPDVnlMWtG71sVGiREGsLVJpRetfe9s261Stsg
-	CFcoOBcRt95JubJLuyYu4ypKJIUG4w2Fi68KJ8ykQtOF6CUJ3s368gN5id2SetUX
-	JSAmK4qC9aPJSCP4MKD05clJhbtgNTPUeea5XBtOG1O5Ch9QyD4q19eFv9bkRIyd
-	3trzf/nzsQ93/0gZ3xY5HtCXGd6S690dkWXQHZLwSx7UxCDiDVrJmX7VI6nAPNh+
-	m4x5hZs1z8HpJTikvsh/XVEazOBZH0ckIpX36zXzfLvL08xAM6PHUFYeBKQ==
-Received: from mail-pg1-f200.google.com (mail-pg1-f200.google.com [209.85.215.200])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gsjfujnfr-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Sun, 20 Sep 2026 09:20:14 +0000 (GMT)
-Received: by mail-pg1-f200.google.com with SMTP id 41be03b00d2f7-cc4c1fc9ceaso1699840a12.3
-        for <linux-arm-msm@vger.kernel.org>; Sun, 20 Sep 2026 02:20:14 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b="V5KgARmi"
+Received: by mail-wr2-f12.google.com with SMTP id ffacd0b85a97d-485933b2522so1438282f8f.0
+        for <linux-arm-msm@vger.kernel.org>; Sun, 20 Sep 2026 03:18:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1789896013; x=1790500813; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=7lobyN1OUJyjnVa2esTQNCM5aKbLBwwEc/VQBoz4IIY=;
-        b=Edlw6GO54X3GnhhW9W8ivqbiczmmcxyWbEI4/lQNzHw2sn881ctEariETv2qhBnvDT
-         3mnOCCxoGV17Oi2q5H9BvpNeXUxWquz0JZ3Xed4c8Cnx8ROgQSBo13EeMrFYOD+DE4nn
-         pOP+w1ZSgLnplfxNoggR0h2273iIgTNgBPr9OxtgxSJSlgfpL6JCk6hIgSpnccQeQlJh
-         cXyzyDhSq0H4NOPetlyxXHKGl6UR96293JqUMJfpid1pPiQskEE4Dw5SuP5yLjsxvf/c
-         /RLDkPXcuN0WU1fPJ3lA0fyirYn8iu9LtSm/tkC2Wu3+xo45d454mlpkrr3FKMDD+zyA
-         WTlw==
+        d=baylibre.com; s=google; t=1789899530; x=1790504330; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=AqS01F0fHUCNlMjJzLaTQZMMSglpdCcpPbBa80dW1pk=;
+        b=V5KgARmi1zCn7xG7bajNWyLH2Wzdwl/vEdFsokMYQiqSfAfCymePN1UxEZ56hTrWGO
+         x1F9ljrjkH0nqyOjUyegzw5lomDnfwe3WjCWLQ5/j9rfcF7v4iR1ky+sK4zmYdor1llo
+         rlwX4xbxG22ZT99oE37V9GDUXEnCwFeEX8BlOcXFW8IrHmw1nyRJUa75SuriHpHvi/bI
+         5k9He1XcGaicI4cBSRpL0CUWxigVLxJbIcR7N+b92ztMmmy7V6t/HEuSz/g2mgWlXqsW
+         Tnf0kGc4QRPrli0iyezvdGzozqSzkCRh3cGp2lVv8r2LhRPs1JxdNIUQI1WTMVMCI5gC
+         PKfg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1789896013; x=1790500813;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=7lobyN1OUJyjnVa2esTQNCM5aKbLBwwEc/VQBoz4IIY=;
-        b=bif2goxksvCRtSnDG9zb1STJM9Fr3nFRjM7/WQDC3H46XUbxdPf8z/hDKiOssYo1o7
-         rUdK3wa89WWh57AAuZhPulDIQY9otAkChbme+dFOAYyXVj6Z+6LwJokg7oGPVAL19b3K
-         8qgY6z6i+QltJeDqxY131nJLL35AKkvxH7Z3CZnMbbNOklBvZIY42aveAm1ilbCnxFyp
-         axi3h6u8c3dqsx2S49LHdG6oad80RF9vD3XRFJNppYbj+X0CerekOklyUF6WjMZSXj6b
-         uUf0nYh7Uk6sSiygtVbxs6upxAog5VlUX4rKRfw0UXe3vdlch29LBGdUGfyCIK7DHd1w
-         LCXw==
-X-Forwarded-Encrypted: i=1; AKwUvBwBMVzl34svN5+6emGiAx9uRqoOjdhd7QIS6Dz8DdbF9zTNROi48/huD+01dpnTsiUw51+DbGWHWrfT8Bx4@vger.kernel.org
-X-Gm-Message-State: AFuF++nyMrTIqp5/zw8FH0Jmz2l/RHMYeQYgI7AsjUz6P1mPjsGXTLLu
-	m4y/jQKhW26uSRcwvjjeycuMAOVfeng2Pf0BY/5gkQcOmMCGXGrA9rvxE2ZrAdbOXOZuvz9VAk9
-	5CHV9FUuJPzSaoXfcWFHhXnYiYO1NsP4OSD9IKlFwPSd8CXvl6qt8+TcHAjteBwSM9cLb
-X-Gm-Gg: AYBFou1Zzqw2JG9HWt4/ItRV2RPBaGDar4Ld62qF5qjigERMkONuiMQ4iM2v4d9/IqN
-	F1wrrPuj6YMsCDIuTGI6KKjEtGLB1twrXRtYH7hR7DWBWxaY6BdNfOagNyaSkVGMBiBen7jtz1m
-	DEOu514OLWSuuJHeX6UpSu6k1tDMkixTvVECd1A1wqsK9J7OToDpWXFp/P18lZaFkB5ra7UdeP6
-	jiPniwgL9uLZUku2zVviGS80w/Z2vsiCvPY33BobixPJpXRuRdZIhtrv1zM7zrtG5c+cAofoww9
-	U8sdppaefb/oseXo1W3ZOJFpicG3YKid3aPF+1Pmo9F6rFtST1pu1LpkAzGWo3QwzwE13tSz0ao
-	3tJHayrjQcf/FUFQBYZWJwPNSdyqrgZJcKcM7/sAOaLe73hH5XH4upepG49ax
-X-Received: by 2002:a05:6300:279a:10b0:3dd:a195:fa25 with SMTP id adf61e73a8af0-3dda195fd8amr3737685637.74.1789896013420;
-        Sun, 20 Sep 2026 02:20:13 -0700 (PDT)
-X-Received: by 2002:a05:6300:279a:10b0:3dd:a195:fa25 with SMTP id adf61e73a8af0-3dda195fd8amr3737669637.74.1789896013020;
-        Sun, 20 Sep 2026 02:20:13 -0700 (PDT)
-Received: from QCOM-aGQu4IUr3Y.qualcomm.com (i-global052.qualcomm.com. [199.106.103.52])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-33c331d3f2csm9353630eec.28.2026.09.20.02.20.09
+        d=1e100.net; s=20260707; t=1789899530; x=1790504330;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=AqS01F0fHUCNlMjJzLaTQZMMSglpdCcpPbBa80dW1pk=;
+        b=sIc51Kvmy6op1kicDyOQMind4sxK5OTj8DO/XdYJVdqUki3sxwQXwOV653fNqZ0o5V
+         3nVovXNAvn8lE/V0cdhx0eOiFw5/+5pdOkzfShHggiRjOep1jerWV0hWq2fHlNyPKWEB
+         HXCK0JXH9hCM1cJOln5WBhLRBEdW9FSwBE+70yiJKmRTzEN+3kAvmdWNBAld4JVFL2+L
+         7tBm8ovJnx3FxSfDM2e88c/VnecNlLnJr+EBcvXWo4TMpLMjRtj3Z5VcAE3T3TjT1mvO
+         EWv3VDpZ8dQAuPChs5sEjUiD6rbEWmEkx45WzoCTxRJWvaRiv4WmLXVNpO4slDT8/Wkj
+         jLRg==
+X-Forwarded-Encrypted: i=1; AKwUvBwX5wXBqySLB5nEBNPoPodADx1V88xmEpqOfZXnK99YeiBcABj0MFCmUT307g8O6mxULqRpWyl10NvZgS7x@vger.kernel.org
+X-Gm-Message-State: AFuF++nT5XW4pBc9BDzxh7wa4iHjsn1OiMKrXkh2hYHG48U/50aIoDye
+	ZZOCTj5518kVIqn04SxppXgu00WeHGQCmd17VR7/4jqPuG9XHhKd9TTuyGoO//kf+V4=
+X-Gm-Gg: AYBFou3HWAtv+/vOvecA1TCrnNCYVhxJFLW+Nio+1rc1OWbfhGXXAS1BSTl+73yOCox
+	Y47+mJQ7RHLvxe4C6GQElcW2NokiVVlTI3ZkVWqPie5CMuhZhW4WKs6L/5LuBN1mc6w1KP6yAO1
+	urXF5z0WzmuNE/ZkaKU6knYfRrsGq5+MKXde6eJve4M0vlP0SF3CHa1pcl90aSjmLf6MaKGOe9t
+	m8GCLFSY3yO87hHzh41vqQQHEPDJO4fGXs38zWia/kwgNwSzynIpRYfnvB34xdu3e4csPdlFSo0
+	zZBmHYY/V99ke9Gh2yvunb9iRs1YhPZ8yFP69s+dJ/0q14tEc+pkvLVMRW+617L4/AqGon1Zoxp
+	GzyW1q+FU+leIz1upDnmtBEz1bbUTaWf3Bz1mrOOH/4dYkDnZFYWYTt9s0AZVV/tM5/EsrX3/ZV
+	gcCjRAuicjZ9Rw0lkwxvNhOsgT3McwXUofl9pvjIxCp3JmvRCbzlTYbR4hu8T/EsiVRXOxeXgNd
+	oc=
+X-Received: by 2002:a05:6000:310d:b0:487:27f9:82a with SMTP id ffacd0b85a97d-48727f90ab5mr5715729f8f.31.1789899529909;
+        Sun, 20 Sep 2026 03:18:49 -0700 (PDT)
+Received: from localhost ([2a02:8071:56d1:2de0:1d24:d58d:2b65:c291])
+        by smtp.gmail.com with UTF8SMTPSA id ffacd0b85a97d-4872459f446sm12973334f8f.35.2026.09.20.03.18.48
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 20 Sep 2026 02:20:12 -0700 (PDT)
-From: Shawn Guo <shengchao.guo@oss.qualcomm.com>
-To: Bjorn Andersson <andersson@kernel.org>
-Cc: Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>,
-        Bartosz Golaszewski <brgl@kernel.org>,
-        Taniya Das <taniya.das@oss.qualcomm.com>,
-        Ritesh Kumar <ritesh.kumar@oss.qualcomm.com>,
-        Mahadevan P <mahadevan.p@oss.qualcomm.com>,
-        Nabige Aala <nabige.aala@oss.qualcomm.com>, devicetree@vger.kernel.org,
-        linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
-        Shawn Guo <shengchao.guo@oss.qualcomm.com>
-Subject: [PATCH v2 3/3] arm64: dts: qcom: nord-rrd: Enable eDP0/1 display output
-Date: Sun, 20 Sep 2026 17:19:30 +0800
-Message-ID: <20260920091930.2215803-4-shengchao.guo@oss.qualcomm.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260920091930.2215803-1-shengchao.guo@oss.qualcomm.com>
-References: <20260920091930.2215803-1-shengchao.guo@oss.qualcomm.com>
+        Sun, 20 Sep 2026 03:18:49 -0700 (PDT)
+Date: Sun, 20 Sep 2026 12:18:47 +0200
+From: Uwe =?utf-8?Q?Kleine-K=C3=B6nig?= <u.kleine-koenig@baylibre.com>
+To: Sudeep Holla <sudeep.holla@kernel.org>
+Cc: Hans de Goede <johannes.goede@oss.qualcomm.com>, 
+	Bjorn Andersson <andersson@kernel.org>, Cristian Marussi <cristian.marussi@arm.com>, 
+	Daniel Lezcano <daniel.lezcano@oss.qualcomm.com>, Bjorn Andersson <bjorn.andersson@oss.qualcomm.com>, 
+	Frank.Li@kernel.org, arm-scmi@vger.kernel.org, linux-arm-kernel@lists.infradead.org, 
+	linux-arm-msm@vger.kernel.org, imx@lists.linux.dev, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v7 1/2] module: add SCMI device table alias support
+Message-ID: <aq-xJE196Skvk2pX@monoceros>
+References: <20260918092951.5656-1-johannes.goede@oss.qualcomm.com>
+ <20260918092951.5656-2-johannes.goede@oss.qualcomm.com>
+ <20260918-impetuous-daring-barnacle-1ea4d0@sudeepholla>
+ <dca62a09-2af7-463e-9ba0-1be935a95502@oss.qualcomm.com>
+ <aq2g9otvja7xQqJ_@monoceros>
+ <20260920-hippo-of-immense-assurance-50a5fd@sudeepholla>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTIwMDEzNCBTYWx0ZWRfX9ukd91uYc+T/
- hn92i2HjsgeCf+gy1wTFx91fhM7VtNqt75Hk18NNTJaW2fcPONtad8NHEjo84YU55RDAffb+c8G
- 3TMALJJU9sUqQvOwtYRztEX5cHRuU6A=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTIwMDEzNCBTYWx0ZWRfX7JsnHvLGw5c2
- UxCuuAuxmgJh9UeZ+iCYjbT4GuhjgGphTNKadmi/0guoRwgwsZ9Dd/9mOCTPvIug9x96dRZy9KT
- /TmZTKTK9CpzQawWLqQCQsKUiIAZDPEvlMxCxnw5obG+xJTz3dYdPJKvb+CM+qqgU38WyJzve8m
- CIBxN2S1CvjOx4wAIkMUE2DyXjUuUQakD0Sbxa+IGh5NgCYbct1arR4QcxqctKaOWu4MQoR2gbN
- gqFScwceeJqOu+9JmmKaBYFjHWgEO8qBpUIsmEUNPKML5UAQPbUjDSbagl3aueCmLEE8ZM8mm2t
- UkJm7qdYUcJAefm8r1wIm16mgM8NNCw00WwdZp7H+HBvAehjDYsiU746A4KtohdyXqJuLugXj2j
- hKbrI+VQJkSCAbBCooJaakE5z+ZnfmTHMH8TC3Jd1AiHKIiJ4KPvyA9T8wN1Ksb4uL6NMWYJfC6
- 8PWQpt4BahanZUHBJ4A==
-X-Proofpoint-ORIG-GUID: Ljz1xR02mA9ezIgtKlq01WYjVbedEmUO
-X-Proofpoint-GUID: Ljz1xR02mA9ezIgtKlq01WYjVbedEmUO
-X-Authority-Analysis: v=2.4 cv=QKv91QLL c=1 sm=1 tr=0 ts=6aafa54e cx=c_pps
- a=oF/VQ+ItUULfLr/lQ2/icg==:117 a=b9+bayejhc3NMeqCNyeLQQ==:17
- a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22 a=EUspDBNiAAAA:8
- a=wlBrTx1nK-2z6_sN8T0A:9 a=3WC7DwWrALyhR5TkjVHa:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-20_03,2026-09-16_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 lowpriorityscore=0 clxscore=1015 priorityscore=1501
- impostorscore=0 malwarescore=0 spamscore=0 bulkscore=0 adultscore=0
- suspectscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2609040000
- definitions=main-2609200134
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="va5epoaani5qcgwk"
+Content-Disposition: inline
+In-Reply-To: <20260920-hippo-of-immense-assurance-50a5fd@sudeepholla>
 
-From: Ritesh Kumar <ritesh.kumar@oss.qualcomm.com>
 
-Enable the MDSS, DP0/1 controllers and eDP0/1 PHYs on the Nord RRD
-board and describe the eDP0/1 connector, its 4 data lanes and supported
-link frequencies.
+--va5epoaani5qcgwk
+Content-Type: text/plain; protected-headers=v1; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+Subject: Re: [PATCH v7 1/2] module: add SCMI device table alias support
+MIME-Version: 1.0
 
-Signed-off-by: Ritesh Kumar <ritesh.kumar@oss.qualcomm.com>
-Signed-off-by: Nabige Aala <nabige.aala@oss.qualcomm.com>
-Signed-off-by: Shawn Guo <shengchao.guo@oss.qualcomm.com>
----
- arch/arm64/boot/dts/qcom/nord-rrd.dts | 62 +++++++++++++++++++++++++++
- 1 file changed, 62 insertions(+)
+On Sun, Sep 20, 2026 at 08:36:10AM +0100, Sudeep Holla wrote:
+> On Fri, Sep 18, 2026 at 10:39:46PM +0200, Uwe Kleine-K=F6nig wrote:
+> > On Fri, Sep 18, 2026 at 04:09:36PM +0200, Hans de Goede wrote:
+> > > Hi Sudeep,
+> > >=20
+> > > On 18-Sep-26 15:32, Sudeep Holla wrote:
+> > >=20
+> > > [...]
+> > >=20
+> > > >> diff --git a/include/linux/device-id/scmi.h b/include/linux/device=
+-id/scmi.h
+> > > >> new file mode 100644
+> > > >> index 000000000000..1b4ccfa9dcc5
+> > > >> --- /dev/null
+> > > >> +++ b/include/linux/device-id/scmi.h
+> > > >> @@ -0,0 +1,17 @@
+> > > >> +/* SPDX-License-Identifier: GPL-2.0-only */
+> > > >> +#ifndef LINUX_DEVICE_ID_SCMI_H
+> > > >> +#define LINUX_DEVICE_ID_SCMI_H
+> > > >> +
+> > > >> +#ifdef __KERNEL__
+> > > >> +#include <linux/types.h>
+> > > >> +#endif
+> > > >> +
+> > > >> +#define SCMI_NAME_SIZE		32
+> > > >> +#define SCMI_MODULE_PREFIX	"scmi:"
+> > > >> +
+> > > >> +struct scmi_device_id {
+> > > >> +	__u8 protocol_id;
+> > > >> +	char name[SCMI_NAME_SIZE];
+> > > >> +};
+> > > >> +
+> > > >> +#endif /* ifndef LINUX_DEVICE_ID_SCMI_H */
+> > > >=20
+> > > > You need to include this above file in include/linux/mod_devicetabl=
+e.h
+> > > > to avoid duplication of its inclusion elsewhere. That's the pattern=
+ followed
+> > > > I see.
+> > >=20
+> > > That is what I did for v3, but Uwe, who is leading the splitting
+> > > of mod_devicetable.h from one large monster include to smaller
+> > > per subsystem/bus includes explicitly requested me to follow this
+> > > pattern, see:
+> > >=20
+> > > https://lore.kernel.org/arm-scmi/aow2GFAfy84k-N2B@monoceros/
+> > >=20
+> > > [...]
+> > >=20
+> > > >> diff --git a/scripts/mod/devicetable-offsets.c b/scripts/mod/devic=
+etable-offsets.c
+> > > >> index b4178c42d08f..91ec3704ee2b 100644
+> > > >> --- a/scripts/mod/devicetable-offsets.c
+> > > >> +++ b/scripts/mod/devicetable-offsets.c
+> > > >> @@ -1,5 +1,6 @@
+> > > >>  // SPDX-License-Identifier: GPL-2.0
+> > > >>  #define COMPILE_OFFSETS
+> > > >> +#include <linux/device-id/scmi.h>
+> > > >=20
+> > > > Drop this for above mentioned reason.
+> > >=20
+> > > This was explictly added at request of Uwe because the goal is to
+> > > get rid of mod_devicetable.h including all the device-id headers
+> > > in a big single catch-all include. This is done because currently
+> > > many files include mod_devicetable.h and then if any of the device-id
+> > > headers changes everything needs to be rebuild, making incremental
+> > > kernel builds much slower.
+> > >=20
+> > > (and the same for the second include you point out)
+> >=20
+> > FTR: That all sounds right.
+> >=20
+> > Let's not add the the dependency mess that is mod_devicetable.h.
+> >=20
+>=20
+> I am confused. I am asking to align with what's done in
+> Commit ad428f5811bd ("mod_devicetable.h: Split into per subsystem headers=
+")
+> and you are disagreeing with that ?
+>=20
+> I am not comfortable taking this patch unless there are other similar
+> examples that are agreed upon to break the pattern followed in the above
+> mentioned commit.
+>=20
+> Uwe, please suggest.
 
-diff --git a/arch/arm64/boot/dts/qcom/nord-rrd.dts b/arch/arm64/boot/dts/qcom/nord-rrd.dts
-index c547963371b4..3b0fbd3b6e7a 100644
---- a/arch/arm64/boot/dts/qcom/nord-rrd.dts
-+++ b/arch/arm64/boot/dts/qcom/nord-rrd.dts
-@@ -53,6 +53,30 @@ bi_tcxo_ao_div2: bi-tcxo-ao-div2-clk {
- 			clock-div = <2>;
- 		};
- 	};
-+
-+	dp0_connector: connector-dp0 {
-+		compatible = "dp-connector";
-+		label = "eDP0";
-+		type = "full-size";
-+
-+		port {
-+			dp0_connector_in: endpoint {
-+				remote-endpoint = <&mdss0_dp0_out>;
-+			};
-+		};
-+	};
-+
-+	dp1_connector: connector-dp1 {
-+		compatible = "dp-connector";
-+		label = "eDP1";
-+		type = "full-size";
-+
-+		port {
-+			dp1_connector_in: endpoint {
-+				remote-endpoint = <&mdss0_dp1_out>;
-+			};
-+		};
-+	};
- };
- 
- &apps_rsc {
-@@ -366,6 +390,20 @@ vreg_l3l_1p8: ldo3 {
- 	};
- };
- 
-+&dp0_phy {
-+	vdda-phy-supply = <&vreg_l2h_1p2>;
-+	vdda-pll-supply = <&vreg_l1h_0p9>;
-+
-+	status = "okay";
-+};
-+
-+&dp1_phy {
-+	vdda-phy-supply = <&vreg_l2h_1p2>;
-+	vdda-pll-supply = <&vreg_l1h_0p9>;
-+
-+	status = "okay";
-+};
-+
- &i2c7 {
- 	clock-frequency = <400000>;
- 
-@@ -377,6 +415,30 @@ rtc@32 {
- 	};
- };
- 
-+&mdss0 {
-+	status = "okay";
-+};
-+
-+&mdss0_dp0 {
-+	status = "okay";
-+};
-+
-+&mdss0_dp0_out {
-+	data-lanes = <0 1 2 3>;
-+	link-frequencies = /bits/ 64 <1620000000 2700000000 5400000000 8100000000>;
-+	remote-endpoint = <&dp0_connector_in>;
-+};
-+
-+&mdss0_dp1 {
-+	status = "okay";
-+};
-+
-+&mdss0_dp1_out {
-+	data-lanes = <0 1 2 3>;
-+	link-frequencies = /bits/ 64 <1620000000 2700000000 5400000000 8100000000>;
-+	remote-endpoint = <&dp1_connector_in>;
-+};
-+
- &qupv3_0 {
- 	firmware-name = "qcom/nord/qupv3fw.elf";
- 
--- 
-2.43.0
+I didn't start removing stuff from mod_devicetable.h yet, as changes
+there are expensive (regarding build dependencies). So the plan is to
+stop drivers consuming mod_devicetable.h and then drop it. (Not sure
+this is sensible as new users come in faster than I can fight them, but
+I didn't give up yet.)
 
+So while adding new device_id structures to mod_devicetable.h is
+consistent with the existing practise, it still makes the situation
+worse, as every consumer of mod_devicetable.h then also depends on the
+new header for the new structure. That's why I think it's a good idea to
+deviate here, even if you're the first one doing so, to not worsen the
+already bad situation.
+
+If it helps you, I can propose a patch changing modpost to not use that
+catch-(nearly)-all header and use the needed linux/device-id/*.h
+instead. I put this on my list for tomorrow.
+
+Best regards
+Uwe
+
+--va5epoaani5qcgwk
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAABCgAdFiEEP4GsaTp6HlmJrf7Tj4D7WH0S/k4FAmqvswQACgkQj4D7WH0S
+/k63ZQf/c1EcLMBypE8L0sxQ62078sgY69oGq5tDdBhnBZ+z4IPNuVUBpEsbf6CY
+hV/ZDy6EEWrIof70NynUSSft8Na4sKCCNoUAX0miGwkgyse7NXgu/+kfxKnYamH8
+prDFe1BuWUgOnkVQz30liiPP2R54mXHS98TbV36hRU3VaKmT15gSgmQlaPwKiYud
+z/8blCaDCvt1oUpT1fLuAd6Ou3zvU9zLm/OpGl5sEMIHcJaTL+/+pJaJOyH34wg/
+kfTaQUIXa9gYIwXzC+1IN7VLF1N0CVDKdSABYE1o+07SHdmM4GweLPPNshAaHSN6
+N4WYHrSbicQ23mz2Vai55R+WDm/WKA==
+=3lua
+-----END PGP SIGNATURE-----
+
+--va5epoaani5qcgwk--
