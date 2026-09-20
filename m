@@ -1,167 +1,141 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B1CB3391E76
-	for <linux-arm-msm@vger.kernel.org>; Sun, 20 Sep 2026 07:19:35 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2C0DB3E0C77;
+	Sun, 20 Sep 2026 07:36:16 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789888777; cv=none; b=l/gv3jUY/0VLQNRzVzSJl+q6Ow1eGak8xrdjlgk9HEwHtLTRA9LZ4IDY0jrOUmSIl79qZvRRKLzgKZ/IdJCTE6+RXM4jdvY9y7hq/pZ6zlB4OvMrLGQtZ6AsMDj0n43PvT1Q2C8cW3eBN3O26//K/T7EUwmyPWiSEvZOtTTfDxU=
+	t=1789889778; cv=none; b=sPRXZWjBdTXlVLvv/I2NhIIIP1ITE+yvrvA7U55EtFu5GvJQ05cv8u3uE7wCmTtn77pw9QxN5quxRZkoOqSy7JKSyOlCpHqD6q7mQDqY84W8bXyA5gXE0kZZitmMaaVcCnteWM8FRyByQc2ew2yavFSNaba7MKCW+f1uwj+V7To=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789888777; c=relaxed/simple;
-	bh=1AHr/cZDLYgzWqzLtsRYID/EwEqOKpAqpoxbl9StNXQ=;
+	s=arc-20240116; t=1789889778; c=relaxed/simple;
+	bh=xX1LSEoZ3dwDjDnKmuIHZWYp43YUm/oJAA45zvpoARg=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=XcTckhEU4upVrfIWYoGVg8/Pcne+nevPqg8P6YdpGubuN9xcLA5gthTe04FTt4OF2YcRxtHoLKTaf52ueWCAt7IZnc2j4RdPyb7csBK7Wdmv2tX+oygLPs0R6KNTUgCAbbPkcrza5X52Woh8OWJzflTAHCoJSw2F0atp38pCBGA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=Hxq6XZli; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=K3nzGc0y; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	 Content-Type:Content-Disposition:In-Reply-To; b=qqBUPMXA3kmF2sQLrPmZEOCZr9LhBisAYvp61Bx+FSkeouBhWw5sa7fW7i3yDNE1vo3o5xXLTi2w76s0WOF6ZfwKlkAV4DCY1CjZTqtFAF8vcURcT9gJnkM7V/uhQcrvTGYtj3FqtonksL6bMT13HMk14ffYWVNyV3FjXu8gTfE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=X068IliF; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="Hxq6XZli";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="K3nzGc0y"
-Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68K553k6826230
-	for <linux-arm-msm@vger.kernel.org>; Sun, 20 Sep 2026 07:19:34 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-type:date:from:in-reply-to:message-id:mime-version
-	:references:subject:to; s=qcppdkim1; bh=X6Czf91RlGu4QgdZcqEUbxtU
-	bWcfp1ToKAncC62o/K8=; b=Hxq6XZliJ05+3Kc8PEG2G7SFpszYPuZR+EoPbpQz
-	3nvFbt53Noz8RYQf6fZ7aNXJJ/VGTXlma9j6ho2u/t/HSd/PteE4U0Q1wxUw4i3x
-	K3XxcrQgNTgBbiiw7HZgubolBuu+n105aK/xsddb/NRjOjszd86uUP6Yygq0NoI+
-	L8iVJgnegtMFqy9qkvww8l7YXLzRqYrB7wc7++tetJekgcn6rlc2B3gAkf6zP3e7
-	Yasyp3Y3PxvbYSptiBJEWy4qtOGwF3sXcMwpl62hUmvB9pV//i3gfy28rQVvt8G+
-	nZFCLS5Srge5og1vREgulrXIcAPY1GAZiYUucsSddqWxiA==
-Received: from mail-pg1-f197.google.com (mail-pg1-f197.google.com [209.85.215.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gsjs82dtd-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Sun, 20 Sep 2026 07:19:34 +0000 (GMT)
-Received: by mail-pg1-f197.google.com with SMTP id 41be03b00d2f7-cc1cdfb337eso2876426a12.0
-        for <linux-arm-msm@vger.kernel.org>; Sun, 20 Sep 2026 00:19:34 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1789888773; x=1790493573; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=X6Czf91RlGu4QgdZcqEUbxtUbWcfp1ToKAncC62o/K8=;
-        b=K3nzGc0yLEjICeDODEH2fWJKPVZRqQJqY+JfDh33SHPuNIGN1KugfWex1LlLReMrFH
-         axpjQ//cg94e+c8QjD9oqaHQFT0Rm40Rh0KYIG5COiCbEFktKYm+fqgU3PE37xIWnLFO
-         E9TBoKb68aLt/rsyr/0s1HxnGRlo6kQZxT/cEcrSl8vi5aCZ6cMgRxmo9y9ClOGG5Gbi
-         5jHHwzwNisUT+SU0tC1WEphLgriMEShVhNG/9i7JubkwA95cHAlAjoNJ/Mw8G2rSaG+6
-         v8INNWF3ScPLQIx1T4yJz46DbEBmQAFviBZSwD/88FLKMmAG9OzQo9zSpWBC5qEfvlqC
-         EPZQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1789888773; x=1790493573;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=X6Czf91RlGu4QgdZcqEUbxtUbWcfp1ToKAncC62o/K8=;
-        b=rFsDRBf/e+Ha67NrLtyt3uKfZSiDiiDcPOHs5NRkhv86aG2Zc2NpiYAYhg7pcbnZBT
-         yc6QPw+uk+CXUYgYpLE4B9Itorr3rknPtSUWTjd5CIshEHeM2a1tdzLnSQ76Ho5Y/hNn
-         Y9o390yh462gMrtPUtcxmwR32EYUITfC8dRlwJGK2mNaJVkuCBvjnLmwhFPVm0xFbNPD
-         GHHKPYySpMyK9jAximx63/9cNR+1hi5OmFdQftffOZ7J3937+VnuHf3LidObYlS7U8wX
-         XVIsEzdUm8yakmoV21AetKzXE4ScRlCl4tZY0q+ppF2ZMfKqdTvi3ZRvRxaAPsot1u6d
-         gGMA==
-X-Forwarded-Encrypted: i=1; AKwUvBwSrFd1BeCfCAB5plohHw0pqZF2ka5keMFRHeeS0XIZYzxDX1FVLxyQVDERZm8IMaXoyW1gvJdH1BtzprNZ@vger.kernel.org
-X-Gm-Message-State: AFuF++nhq7PM2YBfO5xQRebLuMqqRoziwY5Nt640iKW2FqXcq0HFqV6c
-	ie3fKkxr7uwepiwLXeFFHnSx7M1IGMROb3HIZo1WHyuvSygc9kGY837JtoLTADdkulweeVRlvQT
-	yeGhKTmMQF6uICx6SdoIBsImcYiXCKLfaQkf4EvX8sDYMJgUNIRpoMlOppfaf40OyRAxB
-X-Gm-Gg: AYBFou0gz+NBpvXzXSrMt1hcoDOqh6+FDn5ZosJchs2e/f1uAarv2I7a87rn7TJmQsC
-	qiz78tHYsc7qmc3yVN2UyzlWYwWXWkVeLTp/StqmYKbGDhFbUltBizjcP1VRhQ19TR/O+plXMCJ
-	7ZwtwXQyGdcUXMjKe4Bgw1Y8IDgfXtX3Wn0ZVKBlD3ZRLCyPwOfY0VHU/KHh0bdgWvLImZ+P0ud
-	E8TFDAu86FafUT8jA3h8Olzi2NIoYjdrc0Nm2mSsDkUujotATW65MNnLoz2qZAAAFAIuBt6alUH
-	8Vfs4428glLP0THdSAo+DqwndBgJclTo/CRj4wqNqc8DdMIohumvxCbzTPiQrjqBSG0QH5omFud
-	o/xCu5v5Y7QvDwax4pzcSfy1B7feL4FhEPhU1ZzXfRg==
-X-Received: by 2002:a05:6a21:178a:b0:3dd:85a8:4c58 with SMTP id adf61e73a8af0-3dd8c57a4f5mr11492530637.31.1789888773433;
-        Sun, 20 Sep 2026 00:19:33 -0700 (PDT)
-X-Received: by 2002:a05:6a21:178a:b0:3dd:85a8:4c58 with SMTP id adf61e73a8af0-3dd8c57a4f5mr11492511637.31.1789888772891;
-        Sun, 20 Sep 2026 00:19:32 -0700 (PDT)
-Received: from QCOM-aGQu4IUr3Y (i-global052.qualcomm.com. [199.106.103.52])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-144d55e29absm16867920c88.12.2026.09.20.00.19.28
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 20 Sep 2026 00:19:32 -0700 (PDT)
-Date: Sun, 20 Sep 2026 15:19:26 +0800
-From: Shawn Guo <shengchao.guo@oss.qualcomm.com>
-To: Wenmeng Liu <wenmeng.liu@oss.qualcomm.com>
-Cc: Bryan O'Donoghue <bod@kernel.org>,
-        Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
-        Loic Poulain <loic.poulain@oss.qualcomm.com>,
-        Mauro Carvalho Chehab <mchehab@kernel.org>,
-        Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>,
-        Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
-        linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-        Hangxiang Ma <hangxiang.ma@oss.qualcomm.com>,
-        Atiya Kailany <atiya.kailany@oss.qualcomm.com>
-Subject: Re: [PATCH 3/6] media: qcom: camss: vfe: Add support for VFE gen4
-Message-ID: <aq-I_nDC_ua3elhY@QCOM-aGQu4IUr3Y>
-References: <20260915-nord-v1-0-20db41a7f1ff@oss.qualcomm.com>
- <20260915-nord-v1-3-20db41a7f1ff@oss.qualcomm.com>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="X068IliF"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7DCF71F000FF;
+	Sun, 20 Sep 2026 07:36:12 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1789889775;
+	bh=4Qqpemvz6WSIKkr9IPGGKele4il1P3GXbI51Zv8b8OE=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=X068IliFC9A6G7ylGRiKhN/uzpjpy82ovm6g6ki3vlZ4vNIcz7JtkA/61v2y14xaK
+	 64ZkVVQm1I1j6kpePue9XzmixDWRRtJaGhjEl+eLvmVPvJY+l8P3h8yUoSl6/Wd+Ww
+	 MFwA371JMy7qspAYz+BSIYNKUmypSDcAtOWRYqjamORQIwU3qFamQEiM5Xp8qJtj6+
+	 HoUjhsgjJHxyafszzcdWt0bCl36nUejf7n86PUckpY1C+yTIoFuMfEaTY/0t3l8BP3
+	 JZ1TsJXlNy8v0CT8Lhez6aZybJRUG+ekWwpHNffJdsvpEC639Wlgq+FiAwA6QsN6R6
+	 4SKfKicgoQUKA==
+Date: Sun, 20 Sep 2026 08:36:10 +0100
+From: Sudeep Holla <sudeep.holla@kernel.org>
+To: Uwe =?iso-8859-1?Q?Kleine-K=F6nig?= <u.kleine-koenig@baylibre.com>
+Cc: Hans de Goede <johannes.goede@oss.qualcomm.com>,
+	Bjorn Andersson <andersson@kernel.org>,
+	Sudeep Holla <sudeep.holla@kernel.org>,
+	Cristian Marussi <cristian.marussi@arm.com>,
+	Daniel Lezcano <daniel.lezcano@oss.qualcomm.com>,
+	Bjorn Andersson <bjorn.andersson@oss.qualcomm.com>,
+	Frank.Li@kernel.org, arm-scmi@vger.kernel.org,
+	linux-arm-kernel@lists.infradead.org, linux-arm-msm@vger.kernel.org,
+	imx@lists.linux.dev, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v7 1/2] module: add SCMI device table alias support
+Message-ID: <20260920-hippo-of-immense-assurance-50a5fd@sudeepholla>
+References: <20260918092951.5656-1-johannes.goede@oss.qualcomm.com>
+ <20260918092951.5656-2-johannes.goede@oss.qualcomm.com>
+ <20260918-impetuous-daring-barnacle-1ea4d0@sudeepholla>
+ <dca62a09-2af7-463e-9ba0-1be935a95502@oss.qualcomm.com>
+ <aq2g9otvja7xQqJ_@monoceros>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
-In-Reply-To: <20260915-nord-v1-3-20db41a7f1ff@oss.qualcomm.com>
-X-Proofpoint-ORIG-GUID: igUvepSATu4CyCFIN5LDc6oTgL4NHPcL
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTIwMDEwNCBTYWx0ZWRfX8mCGqxo1iCti
- 9Y8mkOLMX3cxLuobKecyaRkYzusc2e9g48+198yiDyIu2hE9tDjaoUSlOtY5rKbVcDjOnIW2iE8
- lnQwwt+AgiTD0XTGCuXdk0DGr7Sa7/E=
-X-Authority-Analysis: v=2.4 cv=YqWa1IYX c=1 sm=1 tr=0 ts=6aaf8906 cx=c_pps
- a=rz3CxIlbcmazkYymdCej/Q==:117 a=b9+bayejhc3NMeqCNyeLQQ==:17
- a=kj9zAlcOel0A:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22
- a=EUspDBNiAAAA:8 a=l4MyZbu1PlRJkBM_CE0A:9 a=CjuIK1q_8ugA:10
- a=bFCP_H2QrGi7Okbo017w:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTIwMDEwNCBTYWx0ZWRfX88aK12uvCc4I
- hgm4KnaU6WX8s7fKFRr+ZOQh3gZT5jeWDAl9/g+evoyOzQddgCwgIFmehoMF5VL4J9MernB44+T
- gbnlICy3J0ClkfO/hYL8AHjWqdYLuL6yvdtnxk2NO360YXOevKRAJJfTWDZIfJwX+jWF6/HOzTR
- a5PoJbJ+dzuktVO0WXkCfqN325tMEyatDJPf9W+NDgNzDK0O7dEAQJdT+xVP5vsFyJ8vReQbVQH
- ZXQ9PNkbBf10lZpqyT2xKhmPQLS4B9EwfBmi4/IXUC7EtJnJe3TzVv+UZV3r2vB2y20Pe/MCixB
- bC2AjmQOTzSKzaEPEDXx9FjEZLgroV1gmIFoLLAvuHf5FQabcpE670azTy/mTx6Eg5M0V0Q1k1s
- +vSONkUX/V7988JqpF1PV+PYZ1DlYt9/ZdolLJ7dlOAJgAoYBHeEMes+baBINBjUTPNNhztb8oJ
- azVEQjDu3nJk/aP2hfQ==
-X-Proofpoint-GUID: igUvepSATu4CyCFIN5LDc6oTgL4NHPcL
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-20_02,2026-09-16_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- suspectscore=0 clxscore=1015 lowpriorityscore=0 spamscore=0 phishscore=0
- malwarescore=0 priorityscore=1501 bulkscore=0 impostorscore=0 adultscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609200104
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <aq2g9otvja7xQqJ_@monoceros>
 
-On Tue, Sep 15, 2026 at 05:34:13PM +0800, Wenmeng Liu wrote:
-> From: Hangxiang Ma <hangxiang.ma@oss.qualcomm.com>
+On Fri, Sep 18, 2026 at 10:39:46PM +0200, Uwe Kleine-König wrote:
+> On Fri, Sep 18, 2026 at 04:09:36PM +0200, Hans de Goede wrote:
+> > Hi Sudeep,
+> > 
+> > On 18-Sep-26 15:32, Sudeep Holla wrote:
+> > 
+> > [...]
+> > 
+> > >> diff --git a/include/linux/device-id/scmi.h b/include/linux/device-id/scmi.h
+> > >> new file mode 100644
+> > >> index 000000000000..1b4ccfa9dcc5
+> > >> --- /dev/null
+> > >> +++ b/include/linux/device-id/scmi.h
+> > >> @@ -0,0 +1,17 @@
+> > >> +/* SPDX-License-Identifier: GPL-2.0-only */
+> > >> +#ifndef LINUX_DEVICE_ID_SCMI_H
+> > >> +#define LINUX_DEVICE_ID_SCMI_H
+> > >> +
+> > >> +#ifdef __KERNEL__
+> > >> +#include <linux/types.h>
+> > >> +#endif
+> > >> +
+> > >> +#define SCMI_NAME_SIZE		32
+> > >> +#define SCMI_MODULE_PREFIX	"scmi:"
+> > >> +
+> > >> +struct scmi_device_id {
+> > >> +	__u8 protocol_id;
+> > >> +	char name[SCMI_NAME_SIZE];
+> > >> +};
+> > >> +
+> > >> +#endif /* ifndef LINUX_DEVICE_ID_SCMI_H */
+> > > 
+> > > You need to include this above file in include/linux/mod_devicetable.h
+> > > to avoid duplication of its inclusion elsewhere. That's the pattern followed
+> > > I see.
+> > 
+> > That is what I did for v3, but Uwe, who is leading the splitting
+> > of mod_devicetable.h from one large monster include to smaller
+> > per subsystem/bus includes explicitly requested me to follow this
+> > pattern, see:
+> > 
+> > https://lore.kernel.org/arm-scmi/aow2GFAfy84k-N2B@monoceros/
+> > 
+> > [...]
+> > 
+> > >> diff --git a/scripts/mod/devicetable-offsets.c b/scripts/mod/devicetable-offsets.c
+> > >> index b4178c42d08f..91ec3704ee2b 100644
+> > >> --- a/scripts/mod/devicetable-offsets.c
+> > >> +++ b/scripts/mod/devicetable-offsets.c
+> > >> @@ -1,5 +1,6 @@
+> > >>  // SPDX-License-Identifier: GPL-2.0
+> > >>  #define COMPILE_OFFSETS
+> > >> +#include <linux/device-id/scmi.h>
+> > > 
+> > > Drop this for above mentioned reason.
+> > 
+> > This was explictly added at request of Uwe because the goal is to
+> > get rid of mod_devicetable.h including all the device-id headers
+> > in a big single catch-all include. This is done because currently
+> > many files include mod_devicetable.h and then if any of the device-id
+> > headers changes everything needs to be rebuild, making incremental
+> > kernel builds much slower.
+> > 
+> > (and the same for the second include you point out)
 > 
-> Add support for the VFE (Video Front End) Gen4 found on Kaanapali SoC.
+> FTR: That all sounds right.
 > 
-> In the Kaanapali camera subsystem, the front-end blocks are referred to
-> as TFEs (Thin Front Ends). This driver continues to use the VFE naming
-> in some places to preserve consistency with the existing code and avoid
-> unnecessary renaming. Support is currently limited to three output lines,
-> matching the constraints of the CAMSS framework.
+> Let's not add the the dependency mess that is mod_devicetable.h.
 > 
-> Kaanapali requires REG_UPDATE and AUP_UPDATE to be issued only after all
-> CSID configuration has completed. In addition, the number of AUP_UPDATE
-> requests must match the number of buffers queued to the write master
-> while it is being enabled.
-> 
-> Although real-time TFE traffic is routed through RT_CAMNOC, both
-> camnoc_rt_axi and camnoc_nrt_axi clocks must be enabled. This ensures
 
-Neither the binding's clock-names nor vfe_res_nord seems to have
-camnoc_nrt_axi.
+I am confused. I am asking to align with what's done in
+Commit ad428f5811bd ("mod_devicetable.h: Split into per subsystem headers")
+and you are disagreeing with that ?
 
-Shawn
+I am not comfortable taking this patch unless there are other similar
+examples that are agreed upon to break the pattern followed in the above
+mentioned commit.
 
-> that the PDX_NOC, which sits downstream of both RT and NRT NOCs, exits
-> reset in a fully idle state.
-> 
-> Co-developed-by: Atiya Kailany <atiya.kailany@oss.qualcomm.com>
-> Signed-off-by: Atiya Kailany <atiya.kailany@oss.qualcomm.com>
-> Signed-off-by: Hangxiang Ma <hangxiang.ma@oss.qualcomm.com>
-> Signed-off-by: Wenmeng Liu <wenmeng.liu@oss.qualcomm.com>
+Uwe, please suggest.
+
+-- 
+Regards,
+Sudeep
