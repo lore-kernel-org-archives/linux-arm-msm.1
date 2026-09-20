@@ -1,54 +1,54 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A12713AFB07
-	for <linux-arm-msm@vger.kernel.org>; Sun, 20 Sep 2026 22:26:15 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 985C3480948
+	for <linux-arm-msm@vger.kernel.org>; Sun, 20 Sep 2026 22:32:01 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789943177; cv=none; b=Fef9qvtZkt9GYQar4phQU1v8QbnZbP22br2RslUi7+YTeqKQGQ21Zq4xnrk1khXQSDk+dN+GtOeRmEcl/LQzaNOGiGD+gbYAvsr4nqmkWBDoxYvNnjqZIl1NQYVWiM3lXaBtpcBh+VT17wMUCI4lC1trMtfxDAY+mAW6Taus46s=
+	t=1789943525; cv=none; b=Ej7iy1eLgIIY1rtdLnD6hnj6dlliqmGZJ6yT1JCbrrap/kj3PB/yznNb66N2IW/K7szzRQMserybgc3T3b3OBUltTKrF/Ml42fEO7aMycBNwf8xlIr0/dse6VAFs3iij8mldLJrF905Ub5A6iAJSoEtYW+k8lf3gurD8S0e3ow0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789943177; c=relaxed/simple;
-	bh=OZ0jYotdh7ql4qVQopBl9OhnmROuW0b1nFBPITg46xA=;
+	s=arc-20240116; t=1789943525; c=relaxed/simple;
+	bh=H1RxdKnl+mgp+J5mdKqwKEcwtM2QvVr2AoIW/SdfGVs=;
 	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=MUuFXADzOcxwl0QrlF14a5ISsmpRW9uTrjuUOUI1ckViZFENXzu1QKXZMoXTvoKw2pE5lUwSROp+yF2EqUsi3mc9LfgsfAvtGxEkUipw/E4WLIOC18kcVGh+Wi6d3+I4TwgmM82fZvHx7DZv0Q+uR2CT43nSfy6OBlQlWGWyQxQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=OcHgpT1x; arc=none smtp.client-ip=100.103.45.18
+	 To:Cc:Content-Type; b=exqlBBzlkMP2UKV/3DwFbK37FLTPetSVMfaitzRdXvMzHhNx3Wqf1iLFOzYIPcURMel1mged7JBs0qFaoMMnizHbRwCBVHwKTXFqXpXvouxzb5d2+iWi54vIEyABEXAEZquLaisdzPU1K/yCEkGLiARwViiTZcvei7+n/JfCgyc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=P3iLt3zU; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="OcHgpT1x"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5E8541F000FF
-	for <linux-arm-msm@vger.kernel.org>; Sun, 20 Sep 2026 22:26:15 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="P3iLt3zU"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 068901F000FF
+	for <linux-arm-msm@vger.kernel.org>; Sun, 20 Sep 2026 22:31:59 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1789943175;
-	bh=OZ0jYotdh7ql4qVQopBl9OhnmROuW0b1nFBPITg46xA=;
+	s=k20260515; t=1789943519;
+	bh=H1RxdKnl+mgp+J5mdKqwKEcwtM2QvVr2AoIW/SdfGVs=;
 	h=References:In-Reply-To:From:Date:Subject:To:Cc;
-	b=OcHgpT1xwIO6XWROQZZtX0pP7rtvLkq5r+4C9tDUCySI/aHerQeHmuoGb280LlR7k
-	 kFhNUn+GqhwuRliePOfHEBYyn7A1//D2+tB41XNUVXh8fVuQJNgDDpOfzagYu7lTeS
-	 vTmTNWBIwMt61BJSLWQJ2F3TAkuAQ4/QUOU8MTxm8x+uS7KL+YfwjMsf02PjLHE5TE
-	 zHjXQDvyHm9RemWH9GeXYHwPrZ3I+Er3ID5hNWumjVobOl5SNWq+3ROOk7f0eqweOC
-	 yvedHq1a3zS00PZfnmfBlJv+8Y56bRJschNdI1KFW2dqtDkPS3UU3dTmtSLndujkca
-	 /eIM6LOzE+ybA==
-Received: by mail-lf2-f13.google.com with SMTP id 2adb3069b0e04-5b8c1b8d7b5so1808232e87.0
-        for <linux-arm-msm@vger.kernel.org>; Sun, 20 Sep 2026 15:26:15 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AKwUvByDypibX2ud+7XGao3k+sTaT9KFIikWUmg5EoMo+7QVCDDL7nlfq0aGbEGkqbaHLQ2SfzO1Tgptv5Gs53xQ@vger.kernel.org
-X-Gm-Message-State: AFuF++lSULWEc6DWlhqxVHVRC2FfCpNr9fq3fkEYpvYJnBZvmFn+Iku9
-	0k9EfxWeYItkpkdGcsboQgAf4zwvgKKqx7XA5C8e20E0xRJNeoR6O0lu+xmY4XJeGGbuqxPYv9C
-	c1pMneXb8fRf8VxRxPa2LH860bAY6fWM=
-X-Received: by 2002:a05:6512:1293:b0:5b8:9ee1:10fd with SMTP id
- 2adb3069b0e04-5b8c195b2a3mr2597654e87.32.1789943174146; Sun, 20 Sep 2026
- 15:26:14 -0700 (PDT)
+	b=P3iLt3zUTjFFgdks8BlwU4VmFyNpw0LSZkE+xZhvVXpSMeORe8mWbUqvJjVDxfbHw
+	 8LtoNZam0QADhFpcOmFZeo8y8ia0U63KqXCuTjDg+ohT1IHJ0bTqmWP+eravZxMeCK
+	 t8JtDdR3PkFjYTLW5Vi+aPvx485rdVxK6SJdWs0bPUrO0+3ztFtgSh7Ttx9Fvijf8q
+	 q91Tl2jTx25o+RmugsBSEpJOgoviRgd/kUvV7SGVi0K7Q402T2eKUhQPb2VVH88UFR
+	 FkWDUMO5e5vBoSq3lKpBWGzsibM2tN5Mh6uYt+pfhsj4Uir7jEEmCV2F/0L8gugX1R
+	 3TBcDjKkvKMiA==
+Received: by mail-lf2-f12.google.com with SMTP id 2adb3069b0e04-5b5e4f16c72so1877364e87.0
+        for <linux-arm-msm@vger.kernel.org>; Sun, 20 Sep 2026 15:31:58 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AKwUvBzfKKXccJzF0ulFqFQsLbqiD2ACztzWisVOcC0SudmpQqWDfKtPsbyUZu+62gZScYLMXbPRQBJBd1ECpDpF@vger.kernel.org
+X-Gm-Message-State: AFuF++lgamjFsDemRbMn9iIgmeXhbTsc1y1Ew+IWm3ZL85Lr7TOMhx27
+	aW8SwUOct1BSATvFq5r2ohQ4bOBjayXAV56gpjUxSB3se77OubG3Sv/nE+k7ke2xwc29Xg8huMy
+	UBDi0pdlzn7QzhlMNWxj7GEAhZveEVrQ=
+X-Received: by 2002:ac2:4e14:0:b0:5b6:95e:87ee with SMTP id
+ 2adb3069b0e04-5b8c18137b6mr2715966e87.13.1789943193023; Sun, 20 Sep 2026
+ 15:26:33 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260916-drm-bridge-every-panel-v3-0-83afb4f1a707@bootlin.com> <20260916-drm-bridge-every-panel-v3-11-83afb4f1a707@bootlin.com>
-In-Reply-To: <20260916-drm-bridge-every-panel-v3-11-83afb4f1a707@bootlin.com>
+References: <20260916-drm-bridge-every-panel-v3-0-83afb4f1a707@bootlin.com> <20260916-drm-bridge-every-panel-v3-12-83afb4f1a707@bootlin.com>
+In-Reply-To: <20260916-drm-bridge-every-panel-v3-12-83afb4f1a707@bootlin.com>
 From: Linus Walleij <linusw@kernel.org>
-Date: Mon, 21 Sep 2026 00:26:00 +0200
-X-Gmail-Original-Message-ID: <CAD++jL=Hu4XDUoBK5RfaQ9K3Jh4NfPkGFfoxa2tL_zSekPEUBA@mail.gmail.com>
-X-Gm-Features: AcwNN1UOMCqRmdLLuJ0tewhusvy6SfVdZOwl8-NuoTCzIELTWmTcNqdeLCv7gec
-Message-ID: <CAD++jL=Hu4XDUoBK5RfaQ9K3Jh4NfPkGFfoxa2tL_zSekPEUBA@mail.gmail.com>
-Subject: Re: [PATCH v3 11/19] drm/mcde: dsi: remove unused includes
+Date: Mon, 21 Sep 2026 00:26:20 +0200
+X-Gmail-Original-Message-ID: <CAD++jLk66Xj=4qTigoM6ha4G=+E5j7wOQCWEDq_x5BgoxKbqSw@mail.gmail.com>
+X-Gm-Features: AcwNN1Xl2NMg3RCxeoynlYH4VMsnJTqdPMGzMe_YYek3k1zZ_YWzrrvsVntgttg
+Message-ID: <CAD++jLk66Xj=4qTigoM6ha4G=+E5j7wOQCWEDq_x5BgoxKbqSw@mail.gmail.com>
+Subject: Re: [PATCH v3 12/19] drm/mcde: dsi: don't create a panel_bridge
 To: Luca Ceresoli <luca.ceresoli@bootlin.com>
 Cc: Andrzej Hajda <andrzej.hajda@intel.com>, Neil Armstrong <neil.armstrong@linaro.org>, 
 	Robert Foss <rfoss@kernel.org>, Laurent Pinchart <Laurent.pinchart@ideasonboard.com>, 
@@ -78,11 +78,14 @@ Content-Transfer-Encoding: quoted-printable
 On Wed, Sep 16, 2026 at 3:47=E2=80=AFPM Luca Ceresoli <luca.ceresoli@bootli=
 n.com> wrote:
 
-> The helpers are included but unused.
+> Now a panel_bridge is automatically created for every drm_panel and the
+> panel-bridge API is just a deprecated wrapper to access it.
 >
-> However symbols from drm_atomic_helper.h are used, and were previously
-> available as a side effect of drm_atomic_helper.h including
-> drm_atomic_state_helper.h. Add drm_atomic_state_helper.h.
+> Update and simplify the code by just getting a reference to the
+> already-existing bridge using of_drm_find_and_get_bridge().
+>
+> Also keep the "connected to non-panel bridge (unsupported)\n" error logic
+> by using the drm_bridge_is_panel() function.
 >
 > Signed-off-by: Luca Ceresoli <luca.ceresoli@bootlin.com>
 
