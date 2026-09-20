@@ -1,126 +1,138 @@
-Received: from mail-pz2-f9.google.com (mail-pz2-f9.google.com [74.125.228.9])
+Received: from mail-wm2-f12.google.com (mail-wm2-f12.google.com [74.125.225.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C2245477E4B
-	for <linux-arm-msm@vger.kernel.org>; Sun, 20 Sep 2026 19:38:53 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.228.9
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2303147A870
+	for <linux-arm-msm@vger.kernel.org>; Sun, 20 Sep 2026 19:39:45 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.225.140
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789933135; cv=none; b=YuUEbbqN3rFQfwwIR7QBhaZRb5ZKtTQlh39aw2Uz4R0abRjF8kOm9FB6uJDDWMim+quki5Axg20jwPJ6XONKvwCM9ASGtvC5127lU+FennI/0aGaDxjeSAMDIjCENrgvxKScMyCVtkh5qRgH7A3wCHbVZZ2k/gG+jFFw39/eRK0=
+	t=1789933187; cv=none; b=lcifvXHpKZ8A64ybhgmO+VnT4X1nJCFKYal/6bnGSuBUnFImEoFQ4/b1XiFVEIgzqbJOgV47QgytDDgigGm6EEtGm2hsQ4LIwYbAiLWr7TNER74ADbrP2/zmmGBQrR1rQeLYmS9XqZAGVvPKlhQ9motC8sDR+DMERyIEsZ7pmVg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789933135; c=relaxed/simple;
-	bh=19HvXXEGNkAEh7k742QsXcb6guSh20svj/hb0jKC2xw=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=GJgsGbJHy3Np5rF9RAsbAahx5IFYTBQ/ufLDaF/l2//yGuNGEO3H536JYns0MgSM+xHn9x6841ebg6TOyLDJODinHHzIhkbrgGC25jr8siOrSGrjhlDzEMvwEuyq2Z2mVOIGFHfOh4LuXijFdGV3VeW/Q1qoUgO6zzJXrWyvflY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=lizi.moe; spf=pass smtp.mailfrom=gmail.com; arc=none smtp.client-ip=74.125.228.9
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=lizi.moe
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-pz2-f9.google.com with SMTP id 41be03b00d2f7-cc4f2a5c3c8so1697759a12.1
-        for <linux-arm-msm@vger.kernel.org>; Sun, 20 Sep 2026 12:38:53 -0700 (PDT)
+	s=arc-20240116; t=1789933187; c=relaxed/simple;
+	bh=BFGYGg6hFd6brXc8be9Lc+zgUDV/5uBkffDvcSv8+Yc=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=L0AQwq5Fmhi8vUrdn5bBVRBvoM7V30mTLx63e3Q+prHeDauvm3IZ+h0DK9GpmLWtQ8cwgiyx51nVq7reDoe/1qeb/O9A/706uJrS8n6xNHZbGKmEQpJLp92Pbm8Y7VbyzFlnZLBlWeW0QlYCX4/XbNEjkxcYFf3qUOTt7ReEtkY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com; spf=pass smtp.mailfrom=baylibre.com; dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b=UpoFBPzf; arc=none smtp.client-ip=74.125.225.140
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=baylibre.com
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b="UpoFBPzf"
+Received: by mail-wm2-f12.google.com with SMTP id 5b1f17b1804b1-49b912e64ccso16577625e9.0
+        for <linux-arm-msm@vger.kernel.org>; Sun, 20 Sep 2026 12:39:44 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=baylibre.com; s=google; t=1789933183; x=1790537983; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=rF0vHV+0AKSYzey1/84t/+UqW00wC12/mV03L9JGZxk=;
+        b=UpoFBPzfbKfC+4D8uflO29K6XHkW8qdKbdmVDw1tYoj/eKVt3nHP1MzSXaY6ZUoCSd
+         p7hnNsIT0zNI93b4eLYUjHEF5kj5qiFRMHoCEJ0RctULJQGIayodEkpeVDguNPIemR0F
+         4a9/J0UHrJJ1SBRjff6BwtlzH9/TNGQQzYo8BACplxYsL16n6FTodRlhOfj6T5kX0QGR
+         HO1EDuCwCngljo+Cg7FOgqJ10xVvo/rTSmAkZL+Top0iJsN5CvBonZJEI0PHxHaJ1/0y
+         Amw8ZCKeN5OgC3V7TQ1LLNL+gFdjpLFNtKDlEI+/6Y1LYACCGO6hUQI0RYL9fQTOt3YW
+         5CKQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1789933133; x=1790537933;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=f7TXkf8HfG5PaX8N7Gibawm3cKOzVqiXxqGBVj7YLTM=;
-        b=lnOs/Ivd0G0lDl3SZ5n/8rH9UTRkkniGOzwqDXNTPdetfk6aCh7GT3b41uiGfHGJNY
-         S0HXGVdq+Blu++GxQtQAg6r7EstaMMzRSl6W1SBVcv806+fbduG5lIG/96o4rt9EjPZs
-         9QNjUdcQ0OdELQa+zHLVxaKCCK4qSi+R98cBrtjeYwMo2f3keTF9F59JSBFEaQwhqHue
-         YBJvT/3jysQ5fAzq68RFR2C2hxutriCXgbR8Pyi9XmE7uNYU2S4PvyU6lvkGYhWiLbVn
-         4Fi5k3xzVrvTc100/DpUhhHKCJKskyhMzKv8b9r0vDSsdGKeec+pjGfg5HOkYDki+zzo
-         8u0Q==
-X-Forwarded-Encrypted: i=1; AKwUvBxNZ/yCaezHbn22lkY722t49tXsauMmDeRhZiE1ulnD030Guimyezds5JRGW2cwyrq7hcZIIX7rpA5DqYo0@vger.kernel.org
-X-Gm-Message-State: AFuF++k0Ijz++4U963uIi0wrOFHQV/HOVAX2Te/n3Zv4guQmY6R90N0L
-	00x37f+/VmFf744bT/kHphtLVN6sluJ8wQOK6IYom+bSTejeYNjpAUtQ
-X-Gm-Gg: AYBFou23rxsAgW10RcPSp7UvTQ2uJBOuRiVA0ucs01XhwdDMuF4Kfv2BCx7ppSIueL6
-	udOZC4vsJMfvRGym5Ln7toLN5TLRfCyw49bpQ/MmyMhVeEvuzHnioZXvkH7fTTtNLYBBOeyrjYv
-	CFsISe66AJvES6PEsthTX1ezz6HW8xgvvUOVmBu5uS3diUUHdp9kkLXhWtthLK1cBMTSgBOTwZt
-	UeKUaMuW66Hnk55VFlN/TOqd/zVCplxXMwwUBS4Qb6sTPlm7P/X0BKkwuFvespJtjpg+NX1E6Tp
-	leDJR3Uyyz08WNBq+bpGvyutYT5aM8VGvxdMYAEoiBdiP/O/6bO6ZdJ35YQQnN5WPB1Gbts4Wfm
-	9DePTFLq33XWt/gslcy0D1AOaVVPVfjUv5N+spZtCno/ZItFLbKcvYWXh9Ky9QJWeEOOkJF1Peu
-	mOPkiWfyCJ5aEjtLgZxc1mhBZ2alLQgvIAfdsmLI6q51EPeF+73qXDDOfaKMmRjg==
-X-Received: by 2002:a05:6a00:f86:b0:848:76c4:fba9 with SMTP id d2e1a72fcca58-874dbee3c12mr12028698b3a.7.1789933133005;
-        Sun, 20 Sep 2026 12:38:53 -0700 (PDT)
-Received: from navi ([61.185.198.198])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-877a9b0c516sm2222132b3a.34.2026.09.20.12.38.48
+        d=1e100.net; s=20260707; t=1789933183; x=1790537983;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=rF0vHV+0AKSYzey1/84t/+UqW00wC12/mV03L9JGZxk=;
+        b=ZtMeCk7syj4xvccM6PL3tBicT9XWBeXS3zktX7mCXoHyRD0Q6jNDDscYfa+nzkOFqO
+         O3YJgIJCoNF63s0CM+mNXxvNLTONkyJO0zfAG4gf60UqEKPj4wMNyhQpdQbeh324EV5o
+         1ug+FOSvYKU8ZbdEZfqZQGCb3Q2iGCKIFgGSdPA7OgBnfP68nDQ3GHQBP07NRo1DQIRy
+         5JiBDq+HW6zCXNSDpl7NOVMhjZQPp/5ja8YIkzRu8l/NEc2+NOM/qf6/g9wNzkW6lJir
+         q0EmOBZXkmjTlpK/GMpyDSix+ZoiLifu8x9AIeVZ/JE8BLPUgkMyUz/xAqWZiN6stuKD
+         9Lqw==
+X-Forwarded-Encrypted: i=1; AKwUvByJOUEgpRzORQgK9xqOtrfQ85KeEWjxSCCX0Pngedurl2rEH4Ix6l5mO02r3xbeC9oQSB55XvBgpmvpkrcD@vger.kernel.org
+X-Gm-Message-State: AFuF++lNqF3iUCfs2cHT/FcsaVm6bDim9tFNd4lGoDMRvvAdLfqyvBGD
+	lWxfVLOeTzBDgBN+hEZRR6HciuRJe8dr+Q6VNDxyzp7K+Z7jvY6Oq+SM5p5AWA1yLmw=
+X-Gm-Gg: AYBFou1xpBAZKhrrGD+xumLBE8FW6DFykiFRNDY8SbMPQLp/q2yXbAUmlDhN4JbwZ7Y
+	VgeqEa79RAjCVLFHIMactNeHwWG4H5SeuK6SxccuAid0+fjS9ECFkjIaHTo6oSr/IzfsIKtNFZj
+	pT+h9CWmkDY3Cde6ki5RjffLTeD0jgXCzA3tPN2uAiRmc1JVp9ZoPD4vhF2xgLQZsDJ+IawDpto
+	y39lpt8I3YzxwQpaJm3iDD6KU26/J6kg77ZweQzN+ESc9lba2+09miQImZmm2CdHEr9iUd/4roi
+	Mz+jkg2wlGFtHgw05inCv2QMmYQL1PZTFuZFvtgTiGo8cyxV+WklbyK2WALzgLv131vPdwrgc6b
+	TBUYgOKa3bhypCYd/m+jMQXCj0XVegbJP3NRibnYZMc9h+9xm/iR7CKPWpK17Zoli4ue3ZLv1dU
+	IsZu86vFu0n6q30OiUkvd2Wx4q9EJJgmbAKcY5dosKCh9mxud5Lizb9Kn3qpmF4GMIhfSDsmGmJ
+	ag=
+X-Received: by 2002:a05:600c:3e19:b0:49f:bd3c:bc1a with SMTP id 5b1f17b1804b1-49fc572f27fmr119630965e9.21.1789933183359;
+        Sun, 20 Sep 2026 12:39:43 -0700 (PDT)
+Received: from localhost ([2a02:8071:56d1:2de0:1d24:d58d:2b65:c291])
+        by smtp.gmail.com with UTF8SMTPSA id 5b1f17b1804b1-49fcd0ece6esm234353675e9.2.2026.09.20.12.39.40
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 20 Sep 2026 12:38:52 -0700 (PDT)
-From: Zimeng Li <me@lizi.moe>
-To: srini@kernel.org,
-	broonie@kernel.org
-Cc: lgirdwood@gmail.com,
-	tiwai@suse.com,
-	linux-sound@vger.kernel.org,
-	linux-arm-msm@vger.kernel.org,
-	stable@vger.kernel.org,
-	Zimeng Li <me@lizi.moe>
-Subject: [PATCH v2] ASoC: qcom: lpass-cpu: use DAI table index for playback constraints
-Date: Mon, 21 Sep 2026 03:38:30 +0800
-Message-ID: <20260920193830.53706-1-me@lizi.moe>
-X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20260920145848.44521-1-me@lizi.moe>
-References: <20260920145848.44521-1-me@lizi.moe>
+        Sun, 20 Sep 2026 12:39:41 -0700 (PDT)
+Date: Sun, 20 Sep 2026 21:39:39 +0200
+From: Uwe =?utf-8?Q?Kleine-K=C3=B6nig?= <u.kleine-koenig@baylibre.com>
+To: Alex Elder <elder@riscstar.com>
+Cc: sboyd@kernel.org, bmasney+clk@redhat.com, jbrunet+clk@baylibre.com, 
+	robh@kernel.org, krzk+dt@kernel.org, conor+dt@kernel.org, lee@kernel.org, 
+	andersson@kernel.org, konradybcio@kernel.org, abelvesa@kernel.org, kees@kernel.org, 
+	gustavoars@kernel.org, p.zabel@pengutronix.de, daniel@riscstar.com, 
+	mohd.anwar@oss.qualcomm.com, lorenzo.bianconi@oss.qualcomm.com, linux-clk@vger.kernel.org, 
+	devicetree@vger.kernel.org, mfd@lists.linux.dev, linux-arm-msm@vger.kernel.org, 
+	linux-hardening@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH 3/4] clk: toshiba: introduce a TC9564 SoC clock and reset
+ driver
+Message-ID: <arA1svdQzaj3VanR@monoceros>
+References: <20260918165234.687224-1-elder@riscstar.com>
+ <20260918165234.687224-4-elder@riscstar.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="tk4w7pucaicwka36"
+Content-Disposition: inline
+In-Reply-To: <20260918165234.687224-4-elder@riscstar.com>
 
-The DAI ID is a hardware port ID and is not necessarily the index of
-the corresponding entry in variant->dai_driver.
 
-When configuring a DAI with LPAIF_I2SCTL_MODE_QUAD01, the probe code
-currently uses dai_id to index variant->dai_driver. This is incorrect
-for platforms where DAI IDs are sparse. For example, the IPQ806x MI2S
-DAI has ID 4 while it is the only entry in the DAI driver table. If
-that DAI is configured for QUAD01 and probe reaches this branch, the
-code writes beyond that single entry via dai_driver[4] instead of
-updating the DAI being processed.
+--tk4w7pucaicwka36
+Content-Type: text/plain; protected-headers=v1; charset=us-ascii
+Content-Disposition: inline
+Subject: Re: [PATCH 3/4] clk: toshiba: introduce a TC9564 SoC clock and reset
+ driver
+MIME-Version: 1.0
 
-Use the loop index i when updating the current DAI's playback channel
-constraints, while retaining dai_id for indexing the hardware-port
-specific playback SD-line mode array.
+Hello Alex,
 
-This fixes the incorrect DAI table access for platforms where the DAI
-ID does not match its position in the driver table.
+On Fri, Sep 18, 2026 at 11:52:32AM -0500, Alex Elder wrote:
+> +#include <linux/bits.h>
+> +#include <linux/clk-provider.h>
+> +#include <linux/mfd/syscon.h>
+> +#include <linux/mod_devicetable.h>
+> +#include <linux/module.h>
+> +#include <linux/platform_device.h>
+> +#include <linux/regmap.h>
+> +#include <linux/reset-controller.h>
 
-Fixes: c223f41c1a52 ("ASoC: qcom: Add four speaker support on MI2S secondary")
-Cc: stable@vger.kernel.org
-Signed-off-by: Zimeng Li <me@lizi.moe>
-Assisted-by: GPT-6 Astra
----
-Changes in v2:
-- Add stable to Cc.
-- Identify the model in the Assisted-by trailer.
-- Clarify that the IPQ806x out-of-bounds access requires QUAD01 mode
-  and probe to reach the affected branch.
+Please rely on linux/platform_device.h to provide of_device_id and drop
+including <linux/mod_devicetable.h>. (If you want to go full iwyu,
+include <linux/device-id/of.h> instead.)
 
-Compile-tested with LLVM for ARM using multi_v7_defconfig with
-CONFIG_SND_SOC_STORM=m. The lpass-cpu.o, lpass-ipq806x.o and
-lpass-platform.o targets built successfully. Not hardware-tested;
-the IPQ806x example is based on static analysis, not a reproduced crash.
-The code change is unchanged from v1.
+> +static const struct of_device_id tc9564_clk_ids[] = {
+> +	{ .compatible = "toshiba,tc9564-clock" },
+> +	{ },
+> +};
 
- sound/soc/qcom/lpass-cpu.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+Drop the trailing comma after the list terminator please.
 
-diff --git a/sound/soc/qcom/lpass-cpu.c b/sound/soc/qcom/lpass-cpu.c
-index 242bc16da..079177a6d 100644
---- a/sound/soc/qcom/lpass-cpu.c
-+++ b/sound/soc/qcom/lpass-cpu.c
-@@ -1234,8 +1234,8 @@ int asoc_qcom_lpass_cpu_platform_probe(struct platform_device *pdev)
- 		}
- 		if (drvdata->mi2s_playback_sd_mode[dai_id] ==
- 			LPAIF_I2SCTL_MODE_QUAD01) {
--			variant->dai_driver[dai_id].playback.channels_min = 4;
--			variant->dai_driver[dai_id].playback.channels_max = 4;
-+			variant->dai_driver[i].playback.channels_min = 4;
-+			variant->dai_driver[i].playback.channels_max = 4;
- 		}
- 	}
- 
+Best regards
+Uwe
 
-base-commit: 0ed6f7f62318a581fe9698f8a4e98c7ca01160e4
--- 
-2.55.0
+--tk4w7pucaicwka36
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAABCgAdFiEEP4GsaTp6HlmJrf7Tj4D7WH0S/k4FAmqwNngACgkQj4D7WH0S
+/k6pNwf+Lem5dcJHNqZeQwO1vn2EY3m9bTRWfD8WbvhlPJ79o5a3UXt/dBcaMHqJ
+RquJw/Iwe5AOARXNI2za1AWXKNpjbTyEXg0PG0/xV0FiyYXR+lz33BXvcKDWPl2S
+0SilXiIV0VuCARwFkjcibTk4qZaP5tvRg/cD2nsoiDmMdl/2EbQpD5KqEVu1+v/b
+ZPj9we1Tm9elAc76W5CGrKLynb8dLHe5kI7balWhxGgV94XZhJCKLvK7Laa9ucYc
+abBaruwJGES79c9Uz6Fkn4CxZIcnhc5DwXHEzoTkQMMPt1u1L9ZaAxpPojFCv+D6
+SBroUn8lSetw56k5hBWYPlyq5qgKAw==
+=ddJ0
+-----END PGP SIGNATURE-----
+
+--tk4w7pucaicwka36--
