@@ -1,159 +1,185 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from linkmauve.fr (linkmauve.fr [82.65.109.163])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8F213274FDF;
-	Sun, 20 Sep 2026 11:13:39 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B429A3F5BE4;
+	Sun, 20 Sep 2026 11:18:47 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=82.65.109.163
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789902820; cv=none; b=Jrq5z1ZIrGnuC8PBEPU+5BtZjiJxKgUJeAUd50VKA1Gg3OYGKlJMAfoYpsyCkqPjosdo4IM1W/CahS1NrXuU1AhQr3TUZJYBxr16XZjPiKYeA86++MTlbyptBzDxl97iNLQ9+nyaiz73/UoRNCU23Ik4nT1jgKRCGKJhHS4NlXs=
+	t=1789903132; cv=none; b=eN6HNk+bcf06uSLB3JjMIJPYDjha6sfhm4zcA0GMNz01AbYnuV/NutxdEmdYzakhzo7VSOir/YURXJrHfNVmSfUPRmCMx7PMWvKtW9bngM09mSelILpPn5wbnmwbvLh2NYUvO2JFZ33ATStPPE7p3CdEzjj5fsBZifh9xn5xzSA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789902820; c=relaxed/simple;
-	bh=gOYER6IUHXkL7jv8ZD1iRnGsJ3p9JkO/AqmkTPt1gxw=;
-	h=Subject:From:To:Cc:Date:Message-ID:In-Reply-To:References:
-	 Content-Type:MIME-Version; b=ClxYL6B2uX30t1u5NEFL0YglEp8Di88oT0YkL4tt+O1kdnl88ZWJ3NTbkE4WZii8yv0n95ffNWPKOPRtDI7Nxw+Z3ipxkzrOs2CqSFI5KaFzETTdF799aasZRf365CgDHOA8NpysUijd+4PCXUYS0ZoyLsnJGsqfwnx1u4dQEic=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=VKLtuZB+; arc=none smtp.client-ip=100.103.45.18
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="VKLtuZB+"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6C00D1F00893;
-	Sun, 20 Sep 2026 11:13:38 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1789902819;
-	bh=hNJ2LbS/20qvrKMUhXuYqKizXYn9BXYfiVTMkSUbS3o=;
-	h=Subject:From:To:Cc:Date:In-Reply-To:References;
-	b=VKLtuZB+WOCGGrb/Yf/q/v9TCvGveDo6wZ7zA2ZmRk7FtYVhwtMnrTYM1Ol5vl6yV
-	 42rePEX8+XezFoiJZBi48VZ++sCmLBlMN7W6VW3fO8REm8Jf2BdSE/5LhQtdaUg2CY
-	 YbLcN3/VM0k8PQf/ZyWeMaCCoV/gWYoWTRm7NVBA8gTzkliVIfELnO+Axo9eY9WOXc
-	 1XZHUwoeyelAQeG6DQjCnJhI8w4PnvwEbwsD0OC+rBBfX7IyZRyhG3M5zEvaCkYpnO
-	 trPAlxEl4D1Ix7e9JImCMRRDNbkbST5l8KjTpeS3KPhT1Bo2dE9XWNypGPX1vIZR8H
-	 fAyKfpX5+DHGg==
-Subject: Re: [PATCH net 1/2] net: stmmac: propagate platform mac_finish errors
-From: netdev-bot+sashiko@kernel.org
-To: tom.karpiniec@outlook.com
-Cc: netdev@vger.kernel.org, maxime.chevallier@bootlin.com,
- mohd.anwar@oss.qualcomm.com, linux@armlinux.org.uk, andrew+netdev@lunn.ch,
- davem@davemloft.net, edumazet@google.com, kuba@kernel.org, pabeni@redhat.com,
- yong.liang.choong@linux.intel.com, brgl@kernel.org,
- linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org
-Date: Sun, 20 Sep 2026 11:13:37 +0000
-Message-ID: <178990281791.2160803.4738243247711956388@kernel.org>
-In-Reply-To: =?utf-8?q?=3CCH3PR11MB8413069BD77B03793D1A9B42E4B92=40CH3PR11MB?=
- =?utf-8?q?8413=2Enamprd11=2Eprod=2Eoutlook=2Ecom=3E?=
-References: =?utf-8?q?=3CCH3PR11MB8413069BD77B03793D1A9B42E4B92=40CH3PR11MB8?=
- =?utf-8?q?413=2Enamprd11=2Eprod=2Eoutlook=2Ecom=3E?=
-X-sashiko-severity: High
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
+	s=arc-20240116; t=1789903132; c=relaxed/simple;
+	bh=YHFSIfa4pVKxrlhxSffj9dcUAOSEVU/P5QMiQksQiaU=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=s2P+lz7hc3tAtJ9tyK3Hv9PnJCVZc1Om3GbZD1dCVhyJjtaUd/+vzDJbiIyR+2AxQcRXhhfLN1C0VT2PTDI4e1HW0pX4rRSt40+OTkaUAppL0nq7CJcCWhtfk8v8v2eBQCQwhLkjsE2lGZlJKssdu1YuU0Jdi7M5q8uggyZHIrI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=linkmauve.fr; spf=pass smtp.mailfrom=linkmauve.fr; arc=none smtp.client-ip=82.65.109.163
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=linkmauve.fr
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linkmauve.fr
+Received: by linkmauve.fr (Postfix, from userid 1000)
+	id 8CCBF7189A90; Sun, 20 Sep 2026 13:18:45 +0200 (CEST)
+Date: Sun, 20 Sep 2026 13:18:45 +0200
+From: Link Mauve <linkmauve@linkmauve.fr>
+To: Link Mauve <linkmauve@linkmauve.fr>
+Cc: Srinivas Kandagatla <srini@kernel.org>,
+	Sasha Finkelstein <k@chaosmail.tech>,
+	Andy Shevchenko <andriy.shevchenko@intel.com>,
+	Neil Armstrong <neil.armstrong@linaro.org>,
+	Kevin Hilman <khilman@baylibre.com>,
+	Jerome Brunet <jbrunet@baylibre.com>,
+	Martin Blumenstingl <martin.blumenstingl@googlemail.com>,
+	Sven Peter <sven@kernel.org>, Janne Grunau <j@jannau.net>,
+	Neal Gompa <neal@gompa.dev>, Frank Li <Frank.Li@nxp.com>,
+	Sascha Hauer <s.hauer@pengutronix.de>,
+	Pengutronix Kernel Team <kernel@pengutronix.de>,
+	Fabio Estevam <festevam@gmail.com>,
+	Vladimir Zapolskiy <vz@mleia.com>,
+	=?iso-8859-1?Q?Andr=E9?= Draszik <andre.draszik@linaro.org>,
+	Orson Zhai <orsonzhai@gmail.com>,
+	Baolin Wang <baolin.wang@linux.alibaba.com>,
+	Chunyan Zhang <zhang.lyra@gmail.com>,
+	Maxime Coquelin <mcoquelin.stm32@gmail.com>,
+	Alexandre Torgue <alexandre.torgue@foss.st.com>,
+	Kalyani Akula <kalyani.akula@amd.com>,
+	Michal Simek <michal.simek@amd.com>,
+	Miguel Ojeda <ojeda@kernel.org>, Boqun Feng <boqun@kernel.org>,
+	Gary Guo <gary@garyguo.net>,
+	=?iso-8859-1?Q?Bj=F6rn?= Roy Baron <bjorn3_gh@protonmail.com>,
+	Benno Lossin <lossin@kernel.org>,
+	Andreas Hindborg <a.hindborg@kernel.org>,
+	Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>,
+	Danilo Krummrich <dakr@kernel.org>,
+	Daniel Almeida <daniel.almeida@collabora.com>,
+	Tamir Duberstein <tamird@kernel.org>,
+	Alexandre Courbot <acourbot@nvidia.com>,
+	Onur =?iso-8859-1?Q?=D6zkan?= <work@onurozkan.dev>,
+	Johan Hovold <johan@kernel.org>,
+	Ronald Claveau <linux-kernel-dev@aliel.fr>,
+	Daniel Lezcano <daniel.lezcano@kernel.org>,
+	linux-arm-kernel@lists.infradead.org,
+	linux-amlogic@lists.infradead.org, linux-kernel@vger.kernel.org,
+	asahi@lists.linux.dev, imx@lists.linux.dev,
+	linux-arm-msm@vger.kernel.org,
+	linux-stm32@st-md-mailman.stormreply.com,
+	rust-for-linux@vger.kernel.org
+Subject: Re: [PATCH v6 0/4] nvmem: migrate to const void * in reg_write
+Message-ID: <aq_BFQ4wgnJqGngQ@desktop>
+References: <20260920111000.2404131-1-linkmauve@linkmauve.fr>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <20260920111000.2404131-1-linkmauve@linkmauve.fr>
+Jabber-ID: linkmauve@linkmauve.fr
 
-Thank you for your contribution! Sashiko AI review found 2 potential
-issue(s) to consider.
+Oops, I forgot to carry the tag I got in v5…
 
-Critical: 0 · High: 1 · Medium: 0 · Low: 1
+Here it is:
+Reviewed-by: Andy Shevchenko <andriy.shevchenko@intel.com>
 
-If you believe none of the issues are legitimate, please reply to each
-issue of Medium severity or higher and explain why the AI is wrong.
-If any of them are legitimate and you plan to respin, please let patchwork
-know by including "pw-bot: cr" as a separate line at the end of your reply
-(one such reply per series is enough).
-
-- [High] The commit's stated goal — stop phylink from treating an
-  interface as successfully configured when the SerDes is not ready — is…
-- [Low] The continuation line of the newly returned call is misaligned by
-  one column.
-
---
-
-net: stmmac: propagate platform mac_finish errors
-
-stmmac_mac_finish() previously dropped the return value of the platform
-mac_finish callback and always told phylink the interface was configured
-successfully.  The patch forwards the callback's result instead, keeping the
-zero return when no callback is installed.
-
-> diff --git a/drivers/net/ethernet/stmicro/stmmac/stmmac_main.c b/drivers/net/ethernet/stmicro/stmmac/stmmac_main.c
-> index 1fb5f804ea234..1350e92943ac1 100644
-> --- a/drivers/net/ethernet/stmicro/stmmac/stmmac_main.c
-> +++ b/drivers/net/ethernet/stmicro/stmmac/stmmac_main.c
-> @@ -1048,8 +1048,8 @@ static int stmmac_mac_finish(struct phylink_config *config, unsigned int mode,
->  	struct stmmac_priv *priv = netdev_priv(ndev);
->  
->  	if (priv->plat->mac_finish)
-> -		priv->plat->mac_finish(ndev, priv->plat->bsp_priv, mode,
-> -				       interface);
-> +		return priv->plat->mac_finish(ndev, priv->plat->bsp_priv, mode,
-> +					     interface);
-
-[Severity: High]
-The changelog says phylink "can report carrier even though the SerDes is
-not ready", and that after this change phylink can "keep the link down
-until a subsequent configuration succeeds".  Does that hold for the other
-in-tree user of plat->mac_finish?
-
-intel_mac_finish() in dwmac-intel.c ends with:
-
-	ret = intel_set_reg_access(regs, max_regs);
-	if (ret < 0)
-		return ret;
-
-	priv->plat->phy_interface = interface;
-
-	intel_serdes_powerdown(ndev, intel_priv);
-	intel_serdes_powerup(ndev, intel_priv);
-
-	return ret;
-
-ret is the zero left by intel_set_reg_access(), and the result of
-intel_serdes_powerup() is never assigned, so the callback returns 0 even
-when the SerDes bring-up failed.
-
-intel_serdes_powerup() returns the -ETIMEDOUT from serdes_status_poll()
-(ten polls of SERDES_GSR0) at three points:
-
-	if (data) {
-		dev_err(priv->device, "Serdes PLL clk request timeout\n");
-		return data;
-	}
-	...
-	if (data) {
-		dev_err(priv->device, "Serdes assert lane reset timeout\n");
-		return data;
-	}
-	...
-	if (data) {
-		dev_err(priv->device, "Serdes power state P0 timeout.\n");
-		return data;
-	}
-
-In each of those cases the preceding intel_serdes_powerdown() has already
-put the lane in SERDES_PWR_ST_P3 (and gated SERDES_PHY_RX_CLK on PSE
-parts), and plat->phy_interface has already been overwritten with no
-rollback.
-
-Since the Intel callback discards the status itself, can forwarding its
-return value in stmmac_mac_finish() surface anything for the EHL/ADL-N
-SGMII configurations that install intel_mac_finish (ehl_sgmii_data,
-ehl_pse0/1_sgmii1g_data, adln_sgmii_phy0_data)?  The mac_finish contract
-in include/linux/phylink.h states "Returns zero on success, or negative
-errno on failure which will be reported to the kernel log", so should
-intel_mac_finish() also return the intel_serdes_powerup() result for the
-described behaviour to materialise on that platform?
-
-[Severity: Low]
-This isn't a bug, but the continuation line looks off by one column now.
-The statement is two tabs deep, plus "return " and
-"priv->plat->mac_finish(", which puts ndev at column 46, while the
-continuation uses five tabs plus five spaces, i.e. column 45.  checkpatch
---strict should emit "CHECK: Alignment should match open parenthesis" for
-this.
-
->  
->  	return 0;
->  }
+On Sun, Sep 20, 2026 at 01:09:53PM +0200, Link Mauve wrote:
+> This callback used to take a mutable void * for no reason, which causes
+> the compiler to be unaware that the val buffer should never be modified
+> by the callback.
+> 
+> This was found while drafting the nvmem-provider Rust abstraction.
+> 
+> Thanks to the guidance of Andy Shevchenko, this now introduces a new
+> callback and deprecates the existing one, with the goal of renaming the
+> new one into the old one once no user remains in the kernel.
+> 
+> Changes since v5:
+> - Link to v5:
+>   https://lore.kernel.org/rust-for-linux/20260804135940.2378737-1-linkmauve@linkmauve.fr/T/
+> - Add a dev_warn() when registering a nvmem driver with a deprecated
+>   reg_write callback.
+> - Add a fourth patch enabling COMPILE_TEST on three more nvmem drivers,
+>   which forgot to depend on that config.
+> - Remove a few unneeded (void *) and (const void *) casts in core.c.
+> 
+> Changes since v4:
+> - Link to v4:
+>   https://lore.kernel.org/rust-for-linux/20260726131724.15299-1-linkmauve@linkmauve.fr/T/
+> - Rebase on top of linux-next 20260803, the previous series didn’t apply
+>   any more due to changes in core.c.
+> - Also convert the at24, at25, eeprom_93xx46 and m24lr drivers to the
+>   new reg_write_const callback, these were missed because they got moved
+>   to the nvmem directory in linux-next between v3 and v4.
+> 
+> Changes since v3:
+> - Link to v3:
+>   https://lore.kernel.org/rust-for-linux/20260716142415.28718-1-linkmauve@linkmauve.fr/T/
+> - Drop Apple SPMI patch, which had already been independently included
+>   in linux-next as 7089170e1df160f5f8fb395bc5aa2e2697b4e896.
+> - Reword the cover letter’s subject.
+> - Reorder the meson firmware patch before the other ones, so that every
+>   commit is always working correctly.
+> 
+> Changes since v2:
+> - Link to v2:
+>   https://lore.kernel.org/rust-for-linux/aljAqBNVXV1aVJqx@luna/T/
+> - Rebase on top of linux-next/master.
+> - Fix logic error which made all devices read-only.
+> - Remove a blanket cast of function pointers to void * in
+>   apple-spmi-nvmem (patch 3).
+> - Also fix constness of write buffer in firmware: meson, which is used
+>   exclusively by meson-efuse (patch 4).
+> - Re-review all changes to make sure the passed types are more correct
+>   than they were before.
+> - Actually test with COMPILE_TEST, which I forgot to enable before…
+> 
+> Changes since v1:
+> - Link to v1:
+>   https://lore.kernel.org/rust-for-linux/20260715175229.24672-1-linkmauve@linkmauve.fr/
+> - Removed all changes to other subsystems than nvmem.
+> - Added a new reg_write_const callback instead of changing the exisitng
+>   reg_write.
+> - Deprecated the existing reg_write callback, it will get removed once
+>   all users in the kernel will be done migrating to the new one.
+> 
+> Link Mauve (4):
+>   firmware: meson: pass a const buffer to meson_sm_call_write()
+>   nvmem: core: deprecate reg_write callback with reg_write_const
+>   nvmem: make all reg_write callbacks take const void *
+>   nvmem: enable COMPILE_TEST for more drivers
+> 
+>  drivers/firmware/meson/meson_sm.c       |  2 +-
+>  drivers/nvmem/Kconfig                   |  6 +++---
+>  drivers/nvmem/apple-spmi-nvmem.c        |  4 ++--
+>  drivers/nvmem/at24.c                    |  6 +++---
+>  drivers/nvmem/at25.c                    |  4 ++--
+>  drivers/nvmem/bcm-ocotp.c               |  8 ++++----
+>  drivers/nvmem/core.c                    | 26 ++++++++++++++++---------
+>  drivers/nvmem/eeprom_93xx46.c           |  6 +++---
+>  drivers/nvmem/imx-ocotp-scu.c           |  6 +++---
+>  drivers/nvmem/imx-ocotp.c               |  6 +++---
+>  drivers/nvmem/internals.h               |  1 +
+>  drivers/nvmem/lan9662-otpc.c            |  6 +++---
+>  drivers/nvmem/lpc18xx_eeprom.c          |  6 +++---
+>  drivers/nvmem/m24lr.c                   |  4 ++--
+>  drivers/nvmem/max77759-nvmem.c          |  4 ++--
+>  drivers/nvmem/meson-efuse.c             |  8 ++++----
+>  drivers/nvmem/qcom-spmi-sdam.c          |  6 +++---
+>  drivers/nvmem/qfprom.c                  |  6 +++---
+>  drivers/nvmem/rave-sp-eeprom.c          |  6 +++---
+>  drivers/nvmem/snvs_lpgpr.c              |  4 ++--
+>  drivers/nvmem/sprd-efuse.c              |  6 +++---
+>  drivers/nvmem/stm32-bsec-optee-ta.c     |  2 +-
+>  drivers/nvmem/stm32-bsec-optee-ta.h     |  4 ++--
+>  drivers/nvmem/stm32-romem.c             | 10 +++++-----
+>  drivers/nvmem/zynqmp_nvmem.c            |  6 +++---
+>  include/linux/firmware/meson/meson_sm.h |  2 +-
+>  include/linux/nvmem-provider.h          |  6 +++++-
+>  27 files changed, 87 insertions(+), 74 deletions(-)
+> 
+> 
+> base-commit: 3f2425f5b5bbbdd991ca9cdfd5502e68d8895998
+> -- 
+> 2.55.0
+> 
 
 -- 
-Sashiko AI review · https://netdev-ai.bots.linux.dev/sashiko/#/patchset/CH3PR11MB8413FCBA598F7FABC04ADCFEE4B92%40CH3PR11MB8413.namprd11.prod.outlook.com
+Link Mauve
