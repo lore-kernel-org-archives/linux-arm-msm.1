@@ -1,84 +1,38 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1A754446821
-	for <linux-arm-msm@vger.kernel.org>; Mon, 21 Sep 2026 11:20:00 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 38E1648988D;
+	Mon, 21 Sep 2026 11:23:33 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789989602; cv=none; b=Rvpx7DBli8klAjgw75IhZrZi2WhkVv+DXoBjCpxZwm6Q1HypPTiC/6qJlg78dgQrKeXyrPKY7K3aT0vuXDIGv6hm02X2Sh6TiDsFdaM+vybo0i05UBEVypWnia1c7BuZ4GTq6d4KfdA/xOKUj9e6RPKzyYf7vhtYS6w9M+zxJhE=
+	t=1789989813; cv=none; b=XrZl2mWLWwuKwWaH4svFdUAkXWRJ/NEjJBHmssAXExh8DTzfK62bpqESXPo20ZF8vT2CYtbrSlXO8tHtBGNLzcUlxu704bZdN26tM0N7mH2In2HHJ3XboSA/+5zOOvKaY/rJ747LbF4Pmq7ZcmpiFGLpwCboQLtxpR7KJN/CJDE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789989602; c=relaxed/simple;
-	bh=Q0G7YNbj2kfMO1cVV8mx/fxMq/j/xlphxp53srsMh3I=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=DZTsOlFxqUDFx53W1gZPer5J1WW3YGR3jd4EzhvTVRuX/I7EdMDQ9WszyCI03iIzvRfGQMs2CmHTyMmkylOSSe9ZmlafngJoR1gIGt2wj8q+OuaONLRpyxcnOHk37yAkJZaDX1e8h4C19g4Ld6mqYZjBkps7IcY/pjFxwFsxy0A=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=EdCdpnY3; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=cSAY5Bc/; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1789989813; c=relaxed/simple;
+	bh=fdjlnrJ3LToW7onxkiWd5XchU6A7o130iGBmLyfFfkE=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
+	 In-Reply-To:To:Cc; b=HNaCRmYITNPaKspKGD7KaFQZLdZvhKzZLZQEqzaH64taPBloBmqXYu8bHC5bbXWL163uLqeEycYxcIDuhIxJggqBdlDPNvGURzG9wj+ZVKUTm4avxRomMB8ZVy9jExONWGS083bbCTdTLiPpCZVkLAki0h7PnImRoKjDyoBgN0Q=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Ap+4NXlQ; arc=none smtp.client-ip=10.30.226.201
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="EdCdpnY3";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="cSAY5Bc/"
-Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68LAdv3o3818651
-	for <linux-arm-msm@vger.kernel.org>; Mon, 21 Sep 2026 11:20:00 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:message-id
-	:mime-version:subject:to; s=qcppdkim1; bh=QaRYYlHdJR0pZuCfEcUByL
-	7RAlyPg9Deju/matmfvSg=; b=EdCdpnY38vnM4TygRqLFLbGpL60VuXlxdJk3OW
-	hhHtKk/aYMgt39PySPoOMEVqbbaruMxH/w/nfuIK0CgIk3BprjuWnoYFcmzGkawC
-	suMuV6E2rcXjK5YZpF7QGjiykEq3bi0EF+F2hWkqkMhv1nbWUS28jwSIgswjFqap
-	3xXlkifzqO0/ExMV6RDbUhvnHDQ9LCT477rpYkWWeeimG14ATqFtyxK/hgVJZJm5
-	MwkbWEETDhdmzY8QNCj4/yvUMSJjLyVlO2DMOSL2SoLi7go3scZ5kVH+sdWRwX7f
-	cJ0T0h5haf4e32onnM5DVdrWXc945xY4DzK7h5os4ZNrWWCA==
-Received: from mail-pj1-f70.google.com (mail-pj1-f70.google.com [209.85.216.70])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gtq79accr-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Mon, 21 Sep 2026 11:19:59 +0000 (GMT)
-Received: by mail-pj1-f70.google.com with SMTP id 98e67ed59e1d1-39aee9b4cf2so5275284a91.0
-        for <linux-arm-msm@vger.kernel.org>; Mon, 21 Sep 2026 04:19:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1789989599; x=1790594399; darn=vger.kernel.org;
-        h=cc:to:message-id:content-transfer-encoding:content-type
-         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=QaRYYlHdJR0pZuCfEcUByL7RAlyPg9Deju/matmfvSg=;
-        b=cSAY5Bc/4o5RxiUFiAffBKdUr6doNAAuaxNZEvU8m3DJRZK1cgcjOIGdncrru0FGlo
-         tCk4Or/UQAjLnt7XUZbfXrTIagnyZxJntBQ4ki2ipHuFCXErHR3/jYaHBkCaqx+16tXc
-         7mYTqOdrz9inPp1t8PuROAFHHqilBwp52ejaxCHACCzCSp0hCQTIj32yW8q0VrgjTUgt
-         LBuaReshzF90muqz5AiXIUd4dDLXvWlXQ30ShAg5DMcgkHT3mnDUnbgYjAlVHDU9rCOm
-         tU5YGmdFSFryhDjej/yM5BKnv4whkcWtuq4WphzOoS6GqOVKJ1/3bAxpPtQ/5TYFN8VR
-         cIug==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1789989599; x=1790594399;
-        h=cc:to:message-id:content-transfer-encoding:content-type
-         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to:content-type;
-        bh=QaRYYlHdJR0pZuCfEcUByL7RAlyPg9Deju/matmfvSg=;
-        b=gkVXHlKBKJQ34ojpCct3LhpC9H+3Em2uPRw/1k9XZphmmfc6mRDMPk0Rli7mTvm6DU
-         Sx9m0UDPsOOxOIaJTD+1EvRam8QzwczsxqVXCCLkLDjSZ6dtjZcYPEm9BGWaNE87bRN8
-         1etaceQaIek2y6Kaoch9UTV/4R23mPxtzHxwoFgjK/S3gINYhJP+zNwIn2wAlThSuTqZ
-         Bh7aRLxJK+9pmWYmNtsqSV+M2ajG0ny0krtKgMadqn3UwjBAf8437hXwl5nINvXzmXdI
-         qpi7Ufm0ioXUD8/+NnFLpG8+dLi6uyvunPLosqXl1vgT9oth1pSI5AecdUVCWKhb1RM6
-         GGhA==
-X-Gm-Message-State: AFuF++ntteDaU0CxCfDArdxm5bGbTeuerAHlJ114F7ns/Og1PAfrbMsL
-	WSbKg3F04jkCWusk7924K2b3La6BPAnO73GrK5lPKF0JdNlFNCH9q7CGqjyQIbjOc+JmKt93b2Y
-	yGEY2iUp1X4p2/NUv0+7kZX+8h41BmAvDh6NkEy+w50K1eccYvmlzb4EGHFu1IG6m/Veo
-X-Gm-Gg: AYBFou1E4JHOB414nItLo+PD0f6D2rSe5tgP4aWllG+57mqa43gI91Pv7yTFAU/B7Ec
-	3eBEpHdEoGdyJTxwiuWjT2HvYyUGpuyAq8sDR6QkFJdKtOk+8PO/hV5Us7h/LOpepvSY3Oz9iO+
-	fWV1kMCSbxoXsIOLe0ICOawtoOJiOTTd8BQ/nchJHup7FlffBGlX1GsBH8BkmCVzgIHYfpFzFqP
-	X75yqv9Mu/y/BCvULuWPepcvbx5cdxpdoIVoRentoyNXgsuxDqqCx9R+7hLqohmiC8kzvv8Lpsz
-	VqcAOsH+C2BC7glQIoCs53zEINSacfq2a5VmGncN8wB0OoxwDMx62bsOCLps6pFTv5uqXuMvAZW
-	zg12HtSA2EzPBTt1vXaQoYvxf+Q==
-X-Received: by 2002:a17:90b:4b85:b0:3a0:42a9:9c73 with SMTP id 98e67ed59e1d1-3a042a99fd2mr3762009a91.38.1789989599193;
-        Mon, 21 Sep 2026 04:19:59 -0700 (PDT)
-X-Received: by 2002:a17:90b:4b85:b0:3a0:42a9:9c73 with SMTP id 98e67ed59e1d1-3a042a99fd2mr3761984a91.38.1789989598664;
-        Mon, 21 Sep 2026 04:19:58 -0700 (PDT)
-Received: from hu-mahap-hyd.qualcomm.com ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-33c3318c49dsm18841601eec.22.2026.09.21.04.19.53
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 21 Sep 2026 04:19:58 -0700 (PDT)
-From: Mahadevan P <mahadevan.p@oss.qualcomm.com>
-Date: Mon, 21 Sep 2026 16:49:52 +0530
-Subject: [PATCH v3] drm/atomic-helper: tear down HPD/polling in
- drm_atomic_helper_shutdown()
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Ap+4NXlQ"
+Received: by smtp.kernel.org (Postfix) with ESMTPS id D1A03C2BCF6;
+	Mon, 21 Sep 2026 11:23:32 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1789989812;
+	bh=fdjlnrJ3LToW7onxkiWd5XchU6A7o130iGBmLyfFfkE=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
+	b=Ap+4NXlQt7jA0vv+EHGlsWu6+W+JQiiR7XqVa56aCE+8/eEvr+pWvfYPpQy2tm67O
+	 MjmwoplfurNTgCcsD+hibRmBJXNDd6Q3pmMTudbCqXmo2OBPP4+0V3etU5v+Lbo2N7
+	 Q1U8rr/E50SKGDD+tLJi6yrRCpT7nIlpGiCq/3w/eCX376JdLG6N5YIr4LQ+Nxl5mP
+	 lcrDuQjVsLQMwTaINf3e3Wex3zN8SIOmHquPmInmFm///c9dfori0YR6/XoeocdFpu
+	 GOGyQKcbR/kglyJ0aPRk/y3vzYEE856sgV2PjoiIZEJaykCCH1UswOVRMsSm/0ur8a
+	 g0TwB+SU3MD/Q==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BA890C982E1;
+	Mon, 21 Sep 2026 11:23:32 +0000 (UTC)
+From: Manivannan Sadhasivam via B4 Relay <devnull+manivannan.sadhasivam.oss.qualcomm.com@kernel.org>
+Date: Mon, 21 Sep 2026 13:23:27 +0200
+Subject: [PATCH v2 1/4] net: qrtr: Allow the host QRTR to assign a unique
+ node id
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -87,172 +41,195 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260921-dpshutdown-v3-1-e456ff7fbe4c@oss.qualcomm.com>
-X-B4-Tracking: v=1; b=H4sIANcSsWoC/23MTQ6CMBCG4auQri1ph0KjK+9hXNA/aaIUO1A1h
- LtbWGnCZpJ3ku+ZCdroLZJTMZNok0cf+hzVoSC6a/ubpd7kJsCgYZJLagbsptGEV0+ZkEcOTru
- GKZIHQ7TOvzfscs3deRxD/Gx24ut3l0mccqpYAxqcNE7xc0Asn1N71+HxKPMhq5bgR6jYnwBZE
- II7XdeiUtbsCMuyfAF2Vfsb7QAAAA==
-X-Change-ID: 20260717-dpshutdown-047912fcf60b
-To: Rob Clark <robin.clark@oss.qualcomm.com>,
-        Dmitry Baryshkov <lumag@kernel.org>,
-        Abhinav Kumar <abhinav.kumar@linux.dev>,
-        Jessica Zhang <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>,
-        Marijn Suijten <marijn.suijten@somainline.org>,
-        David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
-        Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
-        Maxime Ripard <mripard@kernel.org>,
-        Thomas Zimmermann <tzimmermann@suse.de>
-Cc: linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org,
-        freedreno@lists.freedesktop.org, linux-kernel@vger.kernel.org,
-        Mahadevan P <mahadevan.p@oss.qualcomm.com>
-X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1789989593; l=4926;
- i=mahadevan.p@oss.qualcomm.com; s=20250923; h=from:subject:message-id;
- bh=Q0G7YNbj2kfMO1cVV8mx/fxMq/j/xlphxp53srsMh3I=;
- b=b9aBRD5L+zkU1K8wu9nPTEKi0SNETznDzFKwF8EzrwNJ6bnMOaMco77WyLhIszFEPtV/QZCQ6
- nmQJiG+8FWjB5ojpKLbNR/KnLsTIgCdEtXT8VxQ/bljDQZNa0bdgqJg
-X-Developer-Key: i=mahadevan.p@oss.qualcomm.com; a=ed25519;
- pk=wed9wuAek0VbCYfkANx7ujIG4VY0XfCYrffFKPN2p0Y=
-X-Authority-Analysis: v=2.4 cv=aJ9lOr9m c=1 sm=1 tr=0 ts=6ab112df cx=c_pps
- a=0uOsjrqzRL749jD1oC5vDA==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
- a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
- a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=olRUzlJ4id4ZNEiLAuQA:9 a=QEXdDO2ut3YA:10
- a=mQ_c8vxmzFEMiUWkPHU9:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTIxMDE2NCBTYWx0ZWRfX36pAo7tUguLv
- YSAQ2mqwOn8nzjhbZgF0g3GdqSzeW968jCL8oQ3fQXBnlhSvcJZc+BR5NvBpmZYBHfl09jnjZuv
- SgUncary2tC/MM8vT4ZG4LjqZhmzhbk=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTIxMDE2NCBTYWx0ZWRfXyVXRRHnO3Xnn
- SN0i0tyBijqphIyMmwSdnT5bQWG4IrXe5lq6DYFnlmLLrvZhYllKxkNBcttSOh3DfaaM+NwofNf
- mmRwlSq+bSLqixvXGDKssYMCKvVFye1LecleErr3kJdZW+k7R1CZP8M5vXXFPZa4n1EQXC7400v
- yBFDZGXX+9chaiIwlEfL/a/rSqgyYyYy8PrBTZ6RaxhxZ+qoOcwTzySYsTbuqL9k8Wf9cD7ArJx
- D2nYbWT8XYT0m+zOv3Eg0HLndykxGtK4BbRTZE3vUNDvJ25tr8aMYzEkbVnwvUq/nndSMlJiQgZ
- i793/Nc3NPIakgd1o2ATi9Fw+LpTrgXa6i6UE469kuuX7L2Ky/00HCjME9dnvD8ip+y5zjcks4I
- t7pSHrbHNkDprqyU8w4M5iE6ki/FLQkDqcuvBskSAKtqNNtgThYwpkHKCm5ia/YcAJR0kvrVtQ5
- LED7uJjNgKStM/9L9aw==
-X-Proofpoint-ORIG-GUID: HugADYV4JJtU7dj4pPMH_FsmQ9TOLQmb
-X-Proofpoint-GUID: HugADYV4JJtU7dj4pPMH_FsmQ9TOLQmb
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-21_04,2026-09-16_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- spamscore=0 lowpriorityscore=0 phishscore=0 clxscore=1015 bulkscore=0
- priorityscore=1501 suspectscore=0 adultscore=0 impostorscore=0 malwarescore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609210164
+Message-Id: <20260921-qrtr-multi-ep-v2-1-27dd80d841a0@oss.qualcomm.com>
+References: <20260921-qrtr-multi-ep-v2-0-27dd80d841a0@oss.qualcomm.com>
+In-Reply-To: <20260921-qrtr-multi-ep-v2-0-27dd80d841a0@oss.qualcomm.com>
+To: Manivannan Sadhasivam <mani@kernel.org>, 
+ "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, 
+ Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, 
+ Simon Horman <horms@kernel.org>, Jeff Johnson <jjohnson@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, netdev@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, linux-wireless@vger.kernel.org, 
+ ath11k@lists.infradead.org, ath12k@lists.infradead.org, 
+ Bjorn Andersson <andersson@kernel.org>, 
+ Chris Lew <christopher.lew@oss.qualcomm.com>, 
+ Deepak Kumar Singh <deepak.singh@oss.qualcomm.com>, 
+ Raj Kumar Bhagat <raj.bhagat@oss.qualcomm.com>, 
+ Juha-Matti Tilli <juha-matti.tilli@iki.fi>, 
+ Jeff Hugo <jeff.hugo@oss.qualcomm.com>, 
+ Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=openpgp-sha256; l=5669;
+ i=manivannan.sadhasivam@oss.qualcomm.com; h=from:subject:message-id;
+ bh=bkqF9LbWdL45ipEr0xLieI3UD5ICmD54p2NVl4pcadA=;
+ b=owGbwMvMwMUYOl/w2b+J574ynlZLYsjaKLxx6fdy601hF/d6Hw+Y5NN8fVXRPPaXHRMEY8w0g
+ nus9VR3djIaszAwcjHIiimypC911mr0OH1jSYT6dJhBrEwgUxi4OAVgIm+zORi6LMJ1ZvnvdRRQ
+ W23spem4yGhS7/VgnvUpz3evO1m8r97gIavC/1c6nLkz/rxS2xWT4hiRavY95n3KhGlLy357Mtu
+ 9tHwR+9/r4HzXRu+WYxzuTmL9Mbc2S6TYcVdGTO1p2sf9U6Hd7Y1VT7nw0Q/sBd0nyxzOFztc36
+ xvn+MswF/L5F6bJ5Gj0MBlHtvt6+/QkLR20VnP8HP7tBMurlQ9xSHxXNyee8+WzkuSD89xJb2pU
+ Fm8Z1Ol2BGR1uMV9snm8i8WHGDal+WxO+QgQ7/EkZfZ6frbH/teEJ6fv3xbX0NDEIfQ3Om1H5sn
+ nl3UezakNkJ0O5/nv+y/m3b1tPx5YRJTq9a5+vGD6cFzAQ==
+X-Developer-Key: i=manivannan.sadhasivam@oss.qualcomm.com; a=openpgp;
+ fpr=C668AEC3C3188E4C611465E7488550E901166008
+X-Endpoint-Received: by B4 Relay for
+ manivannan.sadhasivam@oss.qualcomm.com/default with auth_id=461
+X-Original-From: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
+Reply-To: manivannan.sadhasivam@oss.qualcomm.com
 
-drm_atomic_helper_shutdown() disables all CRTCs but leaves output
-polling and IRQ-driven hot-plug detection running. On reboot, a late
-DP hot-plug-detect (HPD) IRQ can fire after apps_smmu has already
-disabled translation for the display subsystem, causing the HPD
-thread to kick off a new modeset that drives DPU/DP hardware and DMA
-through a stale IOMMU mapping.
+From: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
 
-drm_atomic_helper_shutdown() disables all CRTCs first, but a pending
-HPD IRQ thread wakes up afterwards, reads the DPCD, and fires an
-unsolicited hotplug event that triggers a second atomic commit
-turning the display back on -- right as the IOMMU is disabling
-translation:
+Currently, QRTR identifies each remote node by the value of the
+'src_node_id' field in the received packet and uses the node id as the key
+to store the node to the internal 'qrtr_nodes' radix tree.
 
-  systemd-shutdown[1]: Rebooting.
-  msm_dpu: drm_atomic_commit: committing (shutdown disabling CRTCs)
-  arm-smmu 3da0000.iommu: disabling translation
-  msm_dpu: drm_dp_read_dpcd_caps (late HPD IRQ thread wakes up)
-  msm_dpu: drm_sysfs_connector_hotplug_event: DP-1 hotplug event
-  msm_dpu: drm_client_modeset_probe: DP-1 found preferred mode
-  msm_dpu: drm_atomic_commit: committing (unsolicited, re-enables display)
-  dpu_crtc_commit_kickoff: crtc94 first commit
-  arm-smmu 15200000.iommu: disabling translation
+But this approach comes with a limitation. When more than one remote node
+share the same id, then QRTR can only add the first node to the radix tree
+and has to drop the successive nodes with the same node id as the 'key' in
+radix tree has to be unique. This prevents connecting identical Qcom PCIe
+WLAN devices to a single host at the same time.
 
-Call drm_kms_helper_poll_disable() to tear this down: it stops the
-output poll worker and calls each connector's
-&drm_connector_helper_funcs.disable_hpd, which for HPD-capable bridges
-masks the interrupt in hardware and then waits for an in-flight HPD
-handler under bridge->hpd_mutex. Suspend the in-kernel clients as
-well, so that a hotplug event which still gets through is recorded in
-client->hotplug_pending instead of being probed and committed.
+To fix this limitation, allow the host QRTR to use the node id (nid)
+received from the endpoint driver during qrtr_endpoint_register() as the
+unique node id and use it as the 'key' for the internal radix tree. Also,
+store the received 'src_id' in a new 'qrtr_node->ep_nid' field and replace
+the 'ep_nid' with the unique 'nid' in the QRTR control packets if both
+differ i.e., an endpoint driver has passed a unique 'nid' during
+qrtr_endpoint_register(). To maintain symmetry, replace the 'nid' with the
+'ep_nid' while sending the packet back to the remote node if both differ.
 
-Reported on Qualcomm platforms such as lemans-evk and monaco-evk
-during reboot stress testing.
+Currently, all QRTR endpoint drivers pass 'QRTR_EP_NID_AUTO' as the 'nid'
+during qrtr_endpoint_register(). So 'ep_nid' and 'nid' are same and the
+functionality is not changed.
 
-Assisted-by: LLM
-Signed-off-by: Mahadevan P <mahadevan.p@oss.qualcomm.com>
+Signed-off-by: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
 ---
-Changes in v3:
-- Use drm_kms_helper_poll_disable() instead of drm_kms_helper_poll_fini(),
-  guarded on mode_config.poll_enabled. (Sashiko AI review)
-- Also suspend the in-kernel clients. Masking HPD is not sufficient on its
-  own: it only covers connectors notifying through drm_bridge_hpd_notify(),
-  and a forced GETCONNECTOR re-arms HPD via
-  drm_helper_probe_single_connector_modes() while poll_enabled is still set.
-  drm_client_dev_suspend() keeps the resulting event from reaching a commit,
-  which is the drm_client_modeset_probe() path. (Sashiko AI review)
-- Reworded the kerneldoc; v2 claimed only that polling and HPD were torn down
-  via drm_kms_helper_poll_fini().
-- Link to v2: https://lore.kernel.org/r/20260730-dpshutdown-v2-1-441fc5543bed@oss.qualcomm.com
+ net/qrtr/af_qrtr.c | 61 +++++++++++++++++++++++++++++++++++++++++++++++-------
+ 1 file changed, 54 insertions(+), 7 deletions(-)
 
-Changes in v2:
-- Dropped the drm/msm/dp local .shutdown patch (disable_irq()/
-  synchronize_irq() in dp_display.c)., fixed this at the DRM core
-  level instead so every driver benefits, not just msm_dp.(Dmitry).
-- Link to v1: https://lore.kernel.org/r/20260717-dpshutdown-v1-1-b062c2f7dfb1@oss.qualcomm.com
----
- drivers/gpu/drm/drm_atomic_helper.c | 15 +++++++++++++++
- 1 file changed, 15 insertions(+)
-
-diff --git a/drivers/gpu/drm/drm_atomic_helper.c b/drivers/gpu/drm/drm_atomic_helper.c
-index 9d006f98413a..3a23777aa00f 100644
---- a/drivers/gpu/drm/drm_atomic_helper.c
-+++ b/drivers/gpu/drm/drm_atomic_helper.c
-@@ -35,6 +35,7 @@
- #include <drm/drm_atomic_uapi.h>
- #include <drm/drm_blend.h>
- #include <drm/drm_bridge.h>
-+#include <drm/drm_client_event.h>
- #include <drm/drm_colorop.h>
- #include <drm/drm_damage_helper.h>
- #include <drm/drm_device.h>
-@@ -42,6 +43,7 @@
- #include <drm/drm_framebuffer.h>
- #include <drm/drm_gem_atomic_helper.h>
- #include <drm/drm_print.h>
-+#include <drm/drm_probe_helper.h>
- #include <drm/drm_self_refresh_helper.h>
- #include <drm/drm_vblank.h>
- #include <drm/drm_writeback.h>
-@@ -3676,6 +3678,11 @@ EXPORT_SYMBOL(drm_atomic_helper_reset_crtc);
-  *
-  * This is just a convenience wrapper around drm_atomic_helper_disable_all(),
-  * and it is the atomic version of drm_helper_force_disable_all().
-+ *
-+ * Before disabling the CRTCs this stops output polling, masks hot-plug
-+ * detection and suspends the in-kernel clients, so that a hotplug event cannot
-+ * probe and commit a new mode once the CRTCs are down. Polling is disabled but
-+ * not finalized; drivers must still call drm_kms_helper_poll_fini().
-  */
- void drm_atomic_helper_shutdown(struct drm_device *dev)
+diff --git a/net/qrtr/af_qrtr.c b/net/qrtr/af_qrtr.c
+index 78347c937af7..ad62f3caede8 100644
+--- a/net/qrtr/af_qrtr.c
++++ b/net/qrtr/af_qrtr.c
+@@ -118,7 +118,8 @@ static DEFINE_XARRAY_ALLOC(qrtr_ports);
+  * @ep_lock: lock for endpoint management and callbacks
+  * @ep: endpoint
+  * @ref: reference count for node
+- * @nid: node id
++ * @nid: node id assigned by the host QRTR
++ * @ep_nid: endpoint's own node id as received
+  * @qrtr_tx_flow: xarray of qrtr_tx_flow, keyed by node << 32 | port
+  * @qrtr_tx_lock: lock for qrtr_tx_flow inserts
+  * @hello_sent: hello packet send successful
+@@ -131,6 +132,7 @@ struct qrtr_node {
+ 	struct qrtr_endpoint *ep;
+ 	struct kref ref;
+ 	unsigned int nid;
++	unsigned int ep_nid;
+ 
+ 	struct xarray qrtr_tx_flow;
+ 	struct mutex qrtr_tx_lock; /* for qrtr_tx_flow */
+@@ -347,6 +349,7 @@ static int qrtr_node_enqueue(struct qrtr_node *node, struct sk_buff *skb,
  {
-@@ -3685,6 +3692,14 @@ void drm_atomic_helper_shutdown(struct drm_device *dev)
- 	if (dev == NULL)
- 		return;
+ 	struct qrtr_hdr_v1 *hdr;
+ 	size_t len = skb->len;
++	unsigned int dst_node;
+ 	int rc, confirm_rx;
  
-+	/*
-+	 * Don't disable polling if it was never initialized
-+	 */
-+	if (dev->mode_config.poll_enabled)
-+		drm_kms_helper_poll_disable(dev);
-+
-+	drm_client_dev_suspend(dev);
-+
- 	DRM_MODESET_LOCK_ALL_BEGIN(dev, ctx, 0, ret);
+ 	mutex_lock(&node->ep_lock);
+@@ -369,10 +372,14 @@ static int qrtr_node_enqueue(struct qrtr_node *node, struct sk_buff *skb,
+ 	hdr->src_node_id = cpu_to_le32(from->sq_node);
+ 	hdr->src_port_id = cpu_to_le32(from->sq_port);
+ 	if (to->sq_port == QRTR_PORT_CTRL) {
+-		hdr->dst_node_id = cpu_to_le32(READ_ONCE(node->nid));
++		hdr->dst_node_id = cpu_to_le32(READ_ONCE(node->ep_nid));
+ 		hdr->dst_port_id = cpu_to_le32(QRTR_PORT_CTRL);
+ 	} else {
+-		hdr->dst_node_id = cpu_to_le32(to->sq_node);
++		/* Put back the endpoint's own node id */
++		dst_node = to->sq_node;
++		if (dst_node == READ_ONCE(node->nid))
++			dst_node = node->ep_nid;
++		hdr->dst_node_id = cpu_to_le32(dst_node);
+ 		hdr->dst_port_id = cpu_to_le32(to->sq_port);
+ 	}
  
- 	ret = drm_atomic_helper_disable_all(dev, &ctx);
+@@ -441,6 +448,32 @@ static void qrtr_node_assign(struct qrtr_node *node, unsigned int nid)
+ 	spin_unlock_irqrestore(&qrtr_nodes_lock, flags);
+ }
+ 
++/* Replace the node id in the control packet with 'node->nid', if both are
++ * different.
++ */
++static void qrtr_node_rewrite_ctrl(struct qrtr_node *node, unsigned int type,
++				   struct sk_buff *skb)
++{
++	struct qrtr_ctrl_pkt *pkt;
++	__le32 *nid;
++
++	if (node->nid == node->ep_nid)
++		return;
++
++	if (skb->len < sizeof(*pkt))
++		return;
++
++	pkt = (struct qrtr_ctrl_pkt *)skb->data;
++	if (type == QRTR_TYPE_DEL_CLIENT)
++		nid = &pkt->client.node;
++	else
++		nid = &pkt->server.node;
++
++	/* Rewrite only the endpoint's node id, not those of bridged nodes */
++	if (le32_to_cpu(*nid) == node->ep_nid)
++		*nid = cpu_to_le32(node->nid);
++}
++
+ /**
+  * qrtr_endpoint_post() - post incoming data
+  * @ep: endpoint handle
+@@ -531,16 +564,29 @@ int qrtr_endpoint_post(struct qrtr_endpoint *ep, const void *data, size_t len)
+ 
+ 	skb_put_data(skb, data + hdrlen, size);
+ 
+-	qrtr_node_assign(node, cb->src_node);
++	if (node->ep_nid == QRTR_EP_NID_AUTO)
++		WRITE_ONCE(node->ep_nid, cb->src_node);
++
++	if (node->nid == QRTR_EP_NID_AUTO || node->nid == cb->src_node)
++		qrtr_node_assign(node, cb->src_node);
+ 
+ 	if (cb->type == QRTR_TYPE_NEW_SERVER) {
+ 		/* Remote node endpoint can bridge other distant nodes */
+-		const struct qrtr_ctrl_pkt *pkt;
++		const struct qrtr_ctrl_pkt *pkt = data + hdrlen;
++		unsigned int server_node = le32_to_cpu(pkt->server.node);
+ 
+-		pkt = data + hdrlen;
+-		qrtr_node_assign(node, le32_to_cpu(pkt->server.node));
++		if (server_node != node->ep_nid)
++			qrtr_node_assign(node, server_node);
+ 	}
+ 
++	if (cb->src_node == node->ep_nid)
++		cb->src_node = node->nid;
++
++	if (cb->type == QRTR_TYPE_NEW_SERVER ||
++	    cb->type == QRTR_TYPE_DEL_SERVER ||
++	    cb->type == QRTR_TYPE_DEL_CLIENT)
++		qrtr_node_rewrite_ctrl(node, cb->type, skb);
++
+ 	if (cb->type == QRTR_TYPE_RESUME_TX) {
+ 		qrtr_tx_resume(node, skb);
+ 	} else {
+@@ -646,6 +692,7 @@ int qrtr_endpoint_register(struct qrtr_endpoint *ep, unsigned int nid)
+ 	mutex_init(&node->ep_lock);
+ 	skb_queue_head_init(&node->rx_queue);
+ 	node->nid = QRTR_EP_NID_AUTO;
++	node->ep_nid = QRTR_EP_NID_AUTO;
+ 	node->ep = ep;
+ 
+ 	node->hello_sent = false;
 
----
-base-commit: 3f2425f5b5bbbdd991ca9cdfd5502e68d8895998
-change-id: 20260717-dpshutdown-047912fcf60b
-
-Best regards,
 -- 
-Mahadevan P <mahadevan.p@oss.qualcomm.com>
+2.43.0
+
 
