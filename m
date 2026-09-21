@@ -1,111 +1,113 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 02A1448EC97
-	for <linux-arm-msm@vger.kernel.org>; Mon, 21 Sep 2026 11:16:10 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 11968484239;
+	Mon, 21 Sep 2026 11:17:03 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789989372; cv=none; b=sEn8h3AfjQ+f3PNwRr7ZP6lQ447lpD1LXjlykaqy1FoRvE/aOMpiWct7H/ZDoCQQbGOQUC9+/2jDzc99gaMhdFHoLnYC4g2zrJJInMnX8jlKqBauCUIX2cQeuSAE+xKTVnryhTNxIE1G3gi2+N0CKQc9VFZ2eL2qV4959Jgzh14=
+	t=1789989426; cv=none; b=lMevxPubRd+L+nfjnTH9hb4x4BNgggHLT4Qvod8JxsA93y20QohNHKlsYfvU9YKppzHHNF5U5WGKGx3TdHyH3obo//v533n+Bj52NWX5kS2vQRoqpxlo+Ndw8TG7nUIMJKOFzpacxSwYJaQxo87TS1cZGHug04FOOXD3aBqGsW8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789989372; c=relaxed/simple;
-	bh=8ZrL1Qk82JC/DsKJBv6clrtjkiFR/oATgqHqtfCf7TQ=;
-	h=From:In-Reply-To:MIME-Version:References:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=Ymj5QqnP+c/GEwiE8uZQroQXgQGxOHxk11isZaez0DQEiViKKHNMh/lCWO/EfHg4AmyzcTQSp0owHoOaspHc6t+7yd9GL4ZDm9lKrb1i+epaDRfngGqk7OjSSu9ubQDN0WCH2kgSM3Oqr/eoc++GJZVm6IrF+gPqb8K2ee80AF4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Gpzo2vlj; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1789989426; c=relaxed/simple;
+	bh=FPcITbEeIe3Lobqhom3a6DbS0CEVv1Mv3OpksN4M5LU=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=ZvlMz27a6oAmvgHmNx7CIzbslkEuu2EH+N13mQtPRTjEHpOSqb+qRf3SKB6R5TQ38Pip7I+59pV67UVCWFfw/c6TVnv26BBu9dfD7c9l7Sad5m5xFV0JpbwSTfbk0UxSYJZwspw+/alhUepWYLHWiR7EUyATdE8cjSeC3EuS7nM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=LhfZ6J3S; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Gpzo2vlj"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B23471F008A2
-	for <linux-arm-msm@vger.kernel.org>; Mon, 21 Sep 2026 11:16:10 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="LhfZ6J3S"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9BA791F00893;
+	Mon, 21 Sep 2026 11:16:59 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1789989370;
-	bh=Kx+QAr4ToKGYlWngvHHV4j0mm9EDwxDdHyCjQotbmHw=;
-	h=From:In-Reply-To:References:Date:Subject:To:Cc;
-	b=Gpzo2vljT2HuymoqbCrtcFV0Ilc4qveze20AdFQvj2VVTBe3FjupreimH2/6MSYxt
-	 TPbGFRznhxEn8LYS3J16BMBU4MgtmNdrhRpH38vyaCX0PfaDWLb9Z1FhCgLqrNov/p
-	 x4r4ZxUuNOUdHpDGt1fqrn5yQtM29krNQ0e0aihkDqe+P11SOTDMaITR0QlP2L2M4M
-	 H7SXJ3yGMCsg4cpoJjUZaKNhFTB26KWwE/3xWndiVUidgs4BzbV7WhrC1nnTOVrCGi
-	 pxxiQkgSGY8bCOSldOyLh3EY5nVMPo9t1vD5vJT6IRCv0LE8Fq9I5XYSOycewPyd7Q
-	 Dn9Cs1GgK2NEA==
-Received: by mail-lr2-f12.google.com with SMTP id 38308e7fff4ca-3a30521ef15so19598651fa.0
-        for <linux-arm-msm@vger.kernel.org>; Mon, 21 Sep 2026 04:16:10 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AKwUvByzLhsarV6z+8liAhNtNYOZIjJFgyJS6pT8plIwDmrWG/4zfCOpBoFNBRzlzrekkVVgKIciDG3kq/2s7yU/@vger.kernel.org
-X-Gm-Message-State: AFuF++nSbrVN3//v5dpdg8KeEABu2p0q7toY2sfFoIOGxwM6rnSPoHPZ
-	aiKO/j0Dxp0K14ie81zrdORsoYL0dHFQqXkMUdbuvYlwEt8vibPKRKUhwOduuEJC7TdkborjsH2
-	akC6y2h17Rc97LlyvAjshaO8lWSD0wH/VvPX3WNcyQQ==
-X-Received: by 2002:a2e:beab:0:b0:3a3:7681:6d6b with SMTP id
- 38308e7fff4ca-3a5fc0898f4mr24620201fa.20.1789989369291; Mon, 21 Sep 2026
- 04:16:09 -0700 (PDT)
-Received: from 969154062570 named unknown by gmailapi.google.com with
- HTTPREST; Mon, 21 Sep 2026 07:16:07 -0400
-Received: from 969154062570 named unknown by gmailapi.google.com with
- HTTPREST; Mon, 21 Sep 2026 07:16:07 -0400
-From: Bartosz Golaszewski <brgl@kernel.org>
-In-Reply-To: <aqz-Wfa7sLNMlxym@gondor.apana.org.au>
+	s=k20260515; t=1789989423;
+	bh=EWpvnS9sJSHrGCy+MFZE6qg3yzgkz6vfigCSQ78iMBA=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=LhfZ6J3SDa1TNs3WY8M7GWvBfvuJ1Gf+IzRAbT9jLnwEskR2+sCXEQki59C3fFHNM
+	 kCWJk1MOaJlXTnuPx6JT9+Jv76qTZgTspxBO1ZEi7SO/OA1u+mUTFFO+ZkLJrh8x+M
+	 T6uxRFUx23szXsImepIHkY4328i7Wf0zquQ98Odwki9IFnVTdVyBsl9lr5ApuLDL3Q
+	 eP94wzVnqzBxJ5SvV/gMgisLtWrp9CnD2TdhuOTvg3bgw67Qyd9pKUp/4wNbnprZbC
+	 dS8+e+ucvdBdDMUNCryhioCUoZ0zHg3bDANz4nOp9fzanrjZxwxTw+d1tmMA6tYhzy
+	 Rg4xDX07oikPg==
+Date: Mon, 21 Sep 2026 13:16:55 +0200
+From: Manivannan Sadhasivam <mani@kernel.org>
+To: Bjorn Helgaas <helgaas@kernel.org>
+Cc: Qiang Yu <qiang.yu@oss.qualcomm.com>, 
+	Lorenzo Pieralisi <lpieralisi@kernel.org>, Krzysztof =?utf-8?Q?Wilczy=C5=84ski?= <kwilczynski@kernel.org>, 
+	Rob Herring <robh@kernel.org>, Bjorn Helgaas <bhelgaas@google.com>, 
+	Vinod Koul <vkoul@kernel.org>, Neil Armstrong <neil.armstrong@linaro.org>, 
+	Philipp Zabel <p.zabel@pengutronix.de>, linux-arm-msm@vger.kernel.org, linux-pci@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, linux-phy@lists.infradead.org
+Subject: Re: [PATCH 0/4] PCI: qcom: Align PHY init sequence with HPG
+Message-ID: <u76xfze53ilx6pd7wydsutax7urcbvlhlos64o6cvzku6e5wrs@jugdukoksabu>
+References: <20260915-align_pcie_init_sequence_0916-v1-0-0b2195836f30@oss.qualcomm.com>
+ <20260916155504.GA926264@bhelgaas>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260910-qce-fix-self-tests-v7-0-cdbd2718af14@oss.qualcomm.com> <aqz-Wfa7sLNMlxym@gondor.apana.org.au>
-Date: Mon, 21 Sep 2026 07:16:07 -0400
-X-Gmail-Original-Message-ID: <CAMRc=MdtL_djqfHqh0fx4Y3B2e33mvKDsVb4bUVAAutyOULqMg@mail.gmail.com>
-X-Gm-Features: AcwNN1VdFJqsdmLtUEpvvQalKYJeC0bqhIxDdP6vo3jg0p3p6d92YvZG7ppnXWE
-Message-ID: <CAMRc=MdtL_djqfHqh0fx4Y3B2e33mvKDsVb4bUVAAutyOULqMg@mail.gmail.com>
-Subject: Re: [PATCH v7 00/12] crypto: qce - Fix crypto self-test failures
-To: Herbert Xu <herbert@gondor.apana.org.au>
-Cc: Thara Gopinath <thara.gopinath@gmail.com>, "David S. Miller" <davem@davemloft.net>, 
-	Stanimir Varbanov <svarbanov@mm-sol.com>, Eneas U de Queiroz <cotequeiroz@gmail.com>, 
-	Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>, Eric Biggers <ebiggers@kernel.org>, 
-	Demi Marie Obenour <demiobenour@gmail.com>, Bjorn Andersson <andersson@kernel.org>, 
-	Konrad Dybcio <konradybcio@kernel.org>, linux-crypto@vger.kernel.org, 
-	linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org, brgl@kernel.org, 
-	stable@vger.kernel.org, 
-	Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <20260916155504.GA926264@bhelgaas>
 
-On Fri, 18 Sep 2026 11:03:21 +0200, Herbert Xu
-<herbert@gondor.apana.org.au> said:
-> On Thu, Sep 10, 2026 at 03:00:41PM +0200, Bartosz Golaszewski wrote:
->> This iteration - in addition to the previous fixes - proposes to split
->> the QCE driver into a core part necessary to bind to the QCE DT node and
->> enable runtime power management in order to allow to drop the
->> interconnect votes, and the crypto part registering the crypto
->> algorithms. The core module is then enabled in arm64 defconfig while the
->> crypto part stays disabled by default.
->>
->> The QCE hardware crypto engine has several limitations that cause it to
->> produce incorrect results or stall on certain inputs. This series fixes
->> several bugs and adds workaround allowing the deiver to pass crypto
->> self-tests.
->>
->> The failures addressed are:
->>
->> - HMAC self-test failures for empty messages
->> - AES-XTS returning success on zero-length input (should be -EINVAL)
->> - AES-CTR: partial final block causes the engine to stall, output IV
->>   derivation was incorrect
->> - AES-XTS with key1 == key2 is not supported by the CE
->> - AES-CCM: partial final block and fragmented payload both stall the
->>   engine
->>
->> All fixes were tested on an SM8650 QRD board with
->> CONFIG_CRYPTO_SELFTESTS=y and CONFIG_CRYPTO_SELFTESTS_FULL=y.
->>
->> Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
->> ---
->> Changes in v7:
->> - Add follow-up changes converting the QCE crypto driver to auxiliary
->>   bus, adding the core QCE driver under drivers/soc/ registering the
->>   auxiliary device and removing the BROKEN Kconfig label
->> - Link to v6: https://patch.msgid.link/20260717-qce-fix-self-tests-v6-0-455775fe5f6c@oss.qualcomm.com
->
-> For some reason your patches do not apply, please fix this and
-> resubmit:
->
-> https://sashiko.dev/#/patchset/20260910-qce-fix-self-tests-v7-0-cdbd2718af14%40oss.qualcomm.com
->
+On Wed, Sep 16, 2026 at 10:55:04AM -0500, Bjorn Helgaas wrote:
+> On Tue, Sep 15, 2026 at 11:04:20PM -0700, Qiang Yu wrote:
+> > HPG requires the controller/PHY GDSCs to be powered up and all
+> > clocks enabled, then the controller's reset and the PHY's reset
+> > toggled together as one group, with PARF_DEVICE_TYPE set right
+> > after. This series adds the callbacks needed on both sides to
+> > realize that sequence: a phy_reset() call the controller makes as
+> > part of its own reset, and matching phy_ops::init/phy_ops::reset on
+> > the PHY side.
+> 
+> This observation is not related to this series; it's a question about
+> PCI host controller initialization ordering in general because it
+> seems like this is a perennial issue.  Is there anything we can do to
+> converge on some sort of generic standard or typical ordering across
+> drivers?
+> 
+> For example, while looking at a patch that changed ordering in a
+> different driver (not qcom), I asked Gemini for some guidance and it
+> came up with the following ordering recommendations, which seem
+> pretty generic:
+> 
+>   - assert downstream PERST# so physical lanes remain quiet while
+>     setting up the host
+> 
+>   - assert local resets (core & PHY)
+> 
+>   - enable and stabilize power (IP core, I/O rails, PHYs)
+> 
+>   - enable and stabilize clocks, including refclk and T_PERST_CLK
+> 
+>   - initialize PHYs
+> 
+>     - deassert PHY reset or allow register access to PHY
+> 
+>     - wait for PHY PLL lock to refclk
+> 
+>     - program PHY parameters & calibration
+> 
+>     - verify PHY ready
+> 
+>   - deassert local core reset
+> 
+>   - configure RC (device type, MPS, max link speed, width, etc)
+> 
+>   - deassert downstream PERST#
+> 
+>   - enable LTSSM
+> 
+> If this could be made generic enough, maybe something like it could be
+> included in Documentation/PCI/controller/pci-controller-drivers.rst?
 
-Weird, I did base the series on current linux-next. I'll do the same for v8.
+Some of these sequences could be generalised, but the problem is, pretty much
+each controller sequence follow a hardware reference manual and those
+recommend a specific sequence. So if we diverge from that recommended sequence,
+then getting help from the hardware team for any issue would be tricky. Atleast,
+this is the case with Qcom controllers.
 
-Bart
+- Mani
+
+-- 
+மணிவண்ணன் சதாசிவம்
