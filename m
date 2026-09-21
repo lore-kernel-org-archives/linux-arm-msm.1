@@ -1,83 +1,111 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2555B44F54B;
-	Mon, 21 Sep 2026 08:27:31 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8753F1A683D;
+	Mon, 21 Sep 2026 08:28:53 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789979253; cv=none; b=toThGxTZb3cqVgpy25fkI8Rj+IPalCRHsj3eXxJFszNFxjSRVaVwpqmbRqLFZB2ap+7rR+iYFsOs83VDNuCXTU8rc+bdcnEGNcqaGUFcTv3/OPICmLufJ2dOZ7gpFtZXhRl7tiMngxxKYTBpj5ZkWHnhAMibROd3EwKzs/+yDKw=
+	t=1789979334; cv=none; b=UW6WXgqX0yB/B/jSLJQ1a+7m/tptqXcbdsseRMxrb3dI4bwsKeW+/vNPmT0eDdnY+luE8rLC5YlEvBs/Xf0vEHbhX9YYwZVInvTsNwQqv6uiKD09vbAuRzB5Dw65gW2VupzUzXTHwDnNeJ3oUVfGUZaVi362SURo/0L1bLGK/wQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789979253; c=relaxed/simple;
-	bh=pkyPTuTH+YKoglPBpvQOIpWF3ngNlLjfGTpiCPkEPZQ=;
+	s=arc-20240116; t=1789979334; c=relaxed/simple;
+	bh=dYYtzn0w3XQdZ4MHR5M9HDRmG23OEzjiFt00L9yw2FQ=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=OobRTyn4BlHUXLhLniHvEoDxfDi5lVec4eZMcr71ENRTmZFr//OfA6o6grGM/IvGeN/ELY06ew7kLQkZNpRx4+RAmLGJvsRRMLiH65x3otq5nOj5DH5wgiit7g9j2HSzxfao8cztPaplPQ7xpVp1DCC/R+Lb1nYt4jZp49i1o/A=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=bSuy99SE; arc=none smtp.client-ip=100.103.45.18
+	 Content-Type:Content-Disposition:In-Reply-To; b=j1aYeWmSq1BfRTjiwHCr3Molu1PLehppM0C8VmLgr1cfmezanpcjB6919qox+fIIpXc9YcFg+cW1OAR4FGg8dG/xjF3o/VuXfeuXeidkT4iHLr/a4o7Esz2+xSCgYLMHa//8ajnZz+Tc4Q5chKg6h2t/nGQbOQFMFjJN+cpTZHo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=dIS3AeOy; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="bSuy99SE"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 80F7A1F000FF;
-	Mon, 21 Sep 2026 08:27:31 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="dIS3AeOy"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 101EE1F000FF;
+	Mon, 21 Sep 2026 08:28:50 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1789979251;
-	bh=pkyPTuTH+YKoglPBpvQOIpWF3ngNlLjfGTpiCPkEPZQ=;
+	s=k20260515; t=1789979333;
+	bh=biIIPAL+udhZqFXOwfaaMfkq0a6RVhD5vW+C4HMFAiQ=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=bSuy99SEHzRPu4717uVG/gx9vYsFT1M9CYXNrj64Q7b2+sf3EESpOgJzYlQAIS8FX
-	 i6NrPwq5nk9Hfl4ZGs4ISyHZRWF78WenSHzpLShOSOjyYI+Qs6H89UxTifTgE7YgxB
-	 2W+7Ltuv0V9vL1Rt06fNrQbsAP7F+vAdYobkMso45ud+a8pasqyQY8o+GkW3bI3UPu
-	 7jeFa8AKtMHHZmMAtZXPJOdMGciOVyxK+t9MUeYB9ovkBCPrnM/5d9oBVOA12770pr
-	 MSYs+j9kPOh1VlE5d7bEeZVtyng/+vV/E9ecY8VghvVxcMKgs5q/5EucT8b3r7g5Xc
-	 ELhTUFdXUsClw==
-Received: by finisterre.sirena.org.uk (Postfix, from userid 1000)
-	id 560191AC52F3; Mon, 21 Sep 2026 09:27:28 +0100 (BST)
-Date: Mon, 21 Sep 2026 10:27:28 +0200
-From: Mark Brown <broonie@kernel.org>
-To: Zimeng Li <me@lizi.moe>
-Cc: srini@kernel.org, lgirdwood@gmail.com, tiwai@suse.com,
-	linux-sound@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-	stable@vger.kernel.org
-Subject: Re: [PATCH v2] ASoC: qcom: lpass-cpu: use DAI table index for
- playback constraints
-Message-ID: <arDqcJ5AbDjGHd-b@sirena.co.uk>
-References: <20260920145848.44521-1-me@lizi.moe>
- <20260920193830.53706-1-me@lizi.moe>
+	b=dIS3AeOyFkaJxlhFNs+dL5RL/IpOu6aZCdV/ELU0ngWedExwC72kqNR6GjJDGQi1Y
+	 vzm/oO4cDvW37S8Agtxf33GzaLU5eGIQVURLMNjOn7BtWii8WUGWcMOQ+X/QKz/n84
+	 RWX00CMbYneHmZkSBQkzIdC8NXtr/YgDa+mZiz4X4wIeRPNzofmqSmjQtWgXQzlnEK
+	 nqJdQdp6VA3YSf5qW/CNB4UgRLyN0Z5yxZ5esT7ZrY0v+zRxEbNitxEkUnlVEb9gQn
+	 LgB2Wj2uKAiqxn7K0w9EbLs3AQpyql1pKjX1tIKVxXIVaxh6fsqfaoT3zorQLqxISJ
+	 VHMa0ivbHQCAw==
+Date: Mon, 21 Sep 2026 09:28:48 +0100
+From: Sudeep Holla <sudeep.holla@kernel.org>
+To: Uwe =?iso-8859-1?Q?Kleine-K=F6nig?= <u.kleine-koenig@baylibre.com>
+Cc: Hans de Goede <johannes.goede@oss.qualcomm.com>,
+	Bjorn Andersson <andersson@kernel.org>,
+	Sudeep Holla <sudeep.holla@kernel.org>,
+	Cristian Marussi <cristian.marussi@arm.com>,
+	Daniel Lezcano <daniel.lezcano@oss.qualcomm.com>,
+	Bjorn Andersson <bjorn.andersson@oss.qualcomm.com>,
+	Frank.Li@kernel.org, arm-scmi@vger.kernel.org,
+	linux-arm-kernel@lists.infradead.org, linux-arm-msm@vger.kernel.org,
+	imx@lists.linux.dev, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v7 1/2] module: add SCMI device table alias support
+Message-ID: <20260921-jumping-affable-agama-023caf@sudeepholla>
+References: <20260918092951.5656-1-johannes.goede@oss.qualcomm.com>
+ <20260918092951.5656-2-johannes.goede@oss.qualcomm.com>
+ <20260918-impetuous-daring-barnacle-1ea4d0@sudeepholla>
+ <dca62a09-2af7-463e-9ba0-1be935a95502@oss.qualcomm.com>
+ <aq2g9otvja7xQqJ_@monoceros>
+ <20260920-hippo-of-immense-assurance-50a5fd@sudeepholla>
+ <aq-xJE196Skvk2pX@monoceros>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="nvsmE6McXcB+JTG+"
+Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
-In-Reply-To: <20260920193830.53706-1-me@lizi.moe>
-X-Cookie: Too clever is dumb.
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <aq-xJE196Skvk2pX@monoceros>
+
+On Sun, Sep 20, 2026 at 12:18:47PM +0200, Uwe Kleine-König wrote:
+> On Sun, Sep 20, 2026 at 08:36:10AM +0100, Sudeep Holla wrote:
+
+[...]
+
+> > 
+> > I am confused. I am asking to align with what's done in
+> > Commit ad428f5811bd ("mod_devicetable.h: Split into per subsystem headers")
+> > and you are disagreeing with that ?
+> > 
+> > I am not comfortable taking this patch unless there are other similar
+> > examples that are agreed upon to break the pattern followed in the above
+> > mentioned commit.
+> > 
+> > Uwe, please suggest.
+> 
+> I didn't start removing stuff from mod_devicetable.h yet, as changes
+> there are expensive (regarding build dependencies). So the plan is to
+> stop drivers consuming mod_devicetable.h and then drop it. (Not sure
+> this is sensible as new users come in faster than I can fight them, but
+> I didn't give up yet.)
+> 
+> So while adding new device_id structures to mod_devicetable.h is
+> consistent with the existing practise, it still makes the situation
+> worse, as every consumer of mod_devicetable.h then also depends on the
+> new header for the new structure. That's why I think it's a good idea to
+> deviate here, even if you're the first one doing so, to not worsen the
+> already bad situation.
+> 
+
+It would be good if you provide your reviewed-by for mod_devicetable.h
+and associated parts specifically here.
+
+Also there is another patch under discussion [1], it would be good to have
+similar suggestion there as well, so that there is less divergence in the
+newly added code from now on.
+
+> If it helps you, I can propose a patch changing modpost to not use that
+> catch-(nearly)-all header and use the needed linux/device-id/*.h
+> instead. I put this on my list for tomorrow.
+> 
+
+That's helpful too, but for the things that are being planned to be in
+v7.4, they may not see that unless you push that as a fix.
+
+-- 
+Regards,
+Sudeep
 
 
---nvsmE6McXcB+JTG+
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-
-On Mon, Sep 21, 2026 at 03:38:30AM +0800, Zimeng Li wrote:
-> The DAI ID is a hardware port ID and is not necessarily the index of
-> the corresponding entry in variant->dai_driver.
-
-Please don't send new patches in reply to old patches or serieses, this
-makes it harder for both people and tools to understand what is going
-on - it can bury things in mailboxes and make it difficult to keep track
-of what current patches are, both for the new patches and the old ones.
-
---nvsmE6McXcB+JTG+
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAABCgAdFiEEreZoqmdXGLWf4p/qJNaLcl1Uh9AFAmqw6m8ACgkQJNaLcl1U
-h9CJ1wf/Ww94F+jwBTs/9sMxb/9ORNRKgONadzCcCAb8XI4ncPtsAoqFoppP1oHg
-8DJCzqqoMNJj1U52WtRGlcTZQAU1AFp5EvG0vmKk/1iUaPyDfDRopLBO5ftW+Ar1
-jR4xWmjg2s3qQTpTsv11I3eL/7SaQfZKXV3Zb15iezHajhc085MeFFner9nEIZZZ
-/bEDcWBopPAmAJYVi1yq4nouQHJtiOQIf3qi7eqPgHTScy57Jv2EaK6vgwTGjaHZ
-DnafNsFMQFBAzjlQUGdK7saKtVTUu1htBL67iTk+H+jtf+X54qCMPelcySIOtule
-JluIo0xD8AR6yfsc7Mq3CPB0/QpAIQ==
-=P1Rl
------END PGP SIGNATURE-----
-
---nvsmE6McXcB+JTG+--
+[1] https://lore.kernel.org/all/20260921053807.354802-2-aneesh.kumar@kernel.org
