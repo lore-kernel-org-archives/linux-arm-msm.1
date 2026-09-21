@@ -1,38 +1,84 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E04B041F5FC;
-	Mon, 21 Sep 2026 10:46:25 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 04EE249159D
+	for <linux-arm-msm@vger.kernel.org>; Mon, 21 Sep 2026 10:58:32 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789987586; cv=none; b=LpEzdYXmtdsO+rhAcIjVlN0qbF0x7eegsFV96R7hQ6tZ6DTaiG7DKlDG+unnjk5K+DYN3kMXI8xa43W9rQi/SFHHsLWAtdRKOCgym1h1UAuAhbGGGmZU2nJPkOSMwHzt2jPs53mc8+9eUT8adpJxW623yzRirahWWUaPFYtT7co=
+	t=1789988314; cv=none; b=lwhfVCQ2gMPLEb+q6UqpYqk7W9lA2Xfyw/wrPJsCgUeXsOg8fxrdBYK09dl+56+H5k17FsipNpuxSYts5iOsHTinsuWIH5+aPxdvw7PArPzlar/996twGr5qLvaRi60YamHNSgHk4y3CZR7CQCimLCAFwwCKgkQZtddMWHTETNI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789987586; c=relaxed/simple;
-	bh=n5z+D92Tf4v9853MGiqmofw4VuQ92a5uY5YoXMvv1HM=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=A+nlyJKeiBBvsxeK5eVoD6VC2DCYe8xB6ZzJM0wetF9JEHMMY50domNg7Vr1KDxtJKpp3p/KCk4sPhS5fN3fQgaWDlVFC8YcmPUQIsc+g+wL/UirW3ux4ft1qrycdGJ77UYyAWKm+m0HsJ/X+8+gxjz+E+wa+tknjW+Xtc8TNDA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=LdsBzRI0; arc=none smtp.client-ip=10.30.226.201
+	s=arc-20240116; t=1789988314; c=relaxed/simple;
+	bh=peVqRNezccL7XCLjXAEvt4zPOCLA8KyAaMpzFXvC9Bk=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=ptDGfPxtmbH3pWVU/GBHYnRQTdAe4YIb2lnaDMy3AHrg/ZCSZ8c6K86CAiZP+BBlVizMsUkDxZ98Dl4UOqY1QMYTNIY9pJEEjGI+0b7vXPiFVuvZHPskR8a8cDXS8UYGNgGMunZNsqOeBnb9kyllfvh5/TP70KdjZRRoaqMZpZw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=UjUuvhP+; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=QEWImqsW; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="LdsBzRI0"
-Received: by smtp.kernel.org (Postfix) with ESMTPS id A8F2DC2BD01;
-	Mon, 21 Sep 2026 10:46:25 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1789987585;
-	bh=n5z+D92Tf4v9853MGiqmofw4VuQ92a5uY5YoXMvv1HM=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
-	b=LdsBzRI0poE8Pac0jEJIHy0xETKGcgs1X8jPzVOnpRfMcsuHEjlyFUlEfsLlUDlCt
-	 5faZuG06K6sLYL6OGHiNsX1YWrAVf2xVLUEqXAn/WdkLwXgOBwOjrCnGDd4Cwu56IA
-	 O9mOK5DLy0Ae9IPfVExTbpdu33pimXfmoir++82S/O4ke8aW89N0kww/P/liEWgrBm
-	 FCYy/isODMU5FP+UrQrNreRPb8r+vSAgG7g4rKilfxSSq/feA0ZPtzKNbZkgBaJsZa
-	 bNQn/v2oMGR02gQfymrJCi/fJXVD8yEXMmOSlMqobbRVQPZOYYNxrbswIvxu9QNZwg
-	 5yyr0peM+B8lA==
-Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 90C3AC982F1;
-	Mon, 21 Sep 2026 10:46:25 +0000 (UTC)
-From: David Heidelberg via B4 Relay <devnull+david.ixit.cz@kernel.org>
-Date: Mon, 21 Sep 2026 12:46:25 +0200
-Subject: [PATCH v4 4/4] backlight: qcom-wled: Read back the programmed
- brightness at probe
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="UjUuvhP+";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="QEWImqsW"
+Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68LAdu03287294
+	for <linux-arm-msm@vger.kernel.org>; Mon, 21 Sep 2026 10:58:31 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=JPpwA4CKVsWowfWLA8IiUg
+	S5i1q1YmC4GCe/GawbpzM=; b=UjUuvhP+afkcbhGiOqqkSP2ufcdIX/K7rSlX6Z
+	RHMaHbTHjT0t1BOYcar9AL8gHNzAyckAHe9TihdEK6MIp+qQPHVuc6hvtiRDSoJF
+	NmCp4ddDC1XqWAkBD8KFuoiPvl5xhYcXo9rfxd0vn0YOh/IWxVem16HkxzCCLYj9
+	flJ8+XBjuShXkIbskmJqANZPld5p4ZK2x4zIi5JgWI3zWZLm3Y9XRMTAuuRGzs//
+	I7M5SM4CreAj7OB4N+BXc2pMs6of3Gzvxc1qKUKiEzS95xO+oPsn6fb8nCdsxR9+
+	FDw4SqhEo1/AxMlBpz0T7b/bWyhK6P8tws8rmqVsmX3PtfMw==
+Received: from mail-pf1-f199.google.com (mail-pf1-f199.google.com [209.85.210.199])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gu0rj0q37-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Mon, 21 Sep 2026 10:58:31 +0000 (GMT)
+Received: by mail-pf1-f199.google.com with SMTP id d2e1a72fcca58-86a59faf521so4744412b3a.2
+        for <linux-arm-msm@vger.kernel.org>; Mon, 21 Sep 2026 03:58:31 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1789988311; x=1790593111; darn=vger.kernel.org;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=JPpwA4CKVsWowfWLA8IiUgS5i1q1YmC4GCe/GawbpzM=;
+        b=QEWImqsWsK884t99sEE0mBYuGptIxIZmNuseb1dJWKOGNT5mYD3pAr9Vym+WdQUaqV
+         6pawCC28FtVaitN9qcjFGIw3SUrwV3yURnVhplumZD7Q6vn0TRSvjBHcb2Ux/e7VQ8zl
+         +Qn7Yefelb04Mss2DcIoSJL+5i/g0iKUt/aj+TqsIViP+pQPYpBDV5fxbH5w8BzBmAoV
+         bhfmg7UQ4fK/gbFgBSOHEdB+667y4GH6SIlrdoUgKYyJ18c3VWYSxDg9ne838cwJoma8
+         pvKniZsVdOMraDEwvMQBNEBeJRxFF8fuIyPDxv/S8RiWacvaVAGoP+RB5V6Iixvpb3qX
+         wiXA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1789988311; x=1790593111;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=JPpwA4CKVsWowfWLA8IiUgS5i1q1YmC4GCe/GawbpzM=;
+        b=DMOJHOC7XcazpPpG1PQUAsLmiW8frIzGBFZkrs7AL3rmK1HMPU5ZWA9HtuzCn5IoVh
+         qacoAIInozBD37kZkZTjPy/zFq1NqD8tMjgyR8A3hmzVEnO3kRzu8mHse/l1b7yYGhx/
+         LozmKF6xSEhqr+qCQA2TVU+0L3aZHD2vb55TNhLjT+PavlRXVjw1fy+7v6qhzSDlnT76
+         dkLzpLbR/rbwUzQMlC1VRafC9xkeiJpMM5B+X+IxjZrnMueHQjGzGEMyNrIltoQPLuRh
+         a7PkHs6rF/OdkJgeQ2x4kzBi4vtu7Sv17fe7X+is85E3gBtRXdqUOqmXoQwZfDbMfQm5
+         PJTw==
+X-Gm-Message-State: AFuF++nCokwrefa38zNAgPyZppeuKkmXoOJXsz9UmjlkGtcFrrnbyVe0
+	yr/kxb1gU7wGIsvJaV9ivKuXkIhaeuWC1DB4L7iuzmsFsfWUBoIq9RRZ7L+qywBbcpMWU5RHSnS
+	wO8XN0qZIW8HLQE1/qcbeHXZshQgghT14CMVhRyIQ4XvbrQm1B0MEPZBGIEU7OUbSVxkv
+X-Gm-Gg: AYBFou2fqOvjnAdNONqYB4Gr/xQXwV8xAHGAOr4EmtRHHgc1+3dO9FT86rT69jz3yBU
+	67KVSUDuKVEVPJGZCJjIoTOqDkIEtgazr0Lr+qHesJNAW6TkG5ANhupBkGLM5y3dXbis27FchUW
+	uCvwjxMHapCNOxXgB7XAzKDTmoVKOxVVCGBeCmUAZs4MBHIsrEthz77uN5kSAenphy78geQOTde
+	z39fkVPJ62qZdFM7BnfFu6pBi3VCluJTuAvXSBacYOx2glgSFgPkdEvFErP5fxAG30eH4tBFnBg
+	0tIwwJA9O7IMmEY/pTetS0WDyXx8ry2t4A0LP4L3nM7Rrzyczk46VwlCjV56DHBgmJJrgFgxx+r
+	T7znHbHUMwLJAHw6e8Y9y1F46/uGU1wtGTw==
+X-Received: by 2002:a05:6a21:e8b:b0:3d3:ae40:51e3 with SMTP id adf61e73a8af0-3dd8c53b507mr14688674637.23.1789988310694;
+        Mon, 21 Sep 2026 03:58:30 -0700 (PDT)
+X-Received: by 2002:a05:6a21:e8b:b0:3d3:ae40:51e3 with SMTP id adf61e73a8af0-3dd8c53b507mr14688644637.23.1789988310229;
+        Mon, 21 Sep 2026 03:58:30 -0700 (PDT)
+Received: from hu-krichai-hyd.qualcomm.com ([202.46.23.25])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-33c331d55cfsm23544128eec.30.2026.09.21.03.58.24
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 21 Sep 2026 03:58:29 -0700 (PDT)
+From: Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>
+Subject: [PATCH 0/6] PCI: qcom-ep: Add PCIe Endpoint support for Monaco
+Date: Mon, 21 Sep 2026 16:28:11 +0530
+Message-Id: <20260921-monaco_ep-v1-0-63c5282fb0db@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -41,240 +87,103 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260921-qcom-wled-backlight-v4-4-bab8c7ef73cb@ixit.cz>
-References: <20260921-qcom-wled-backlight-v4-0-bab8c7ef73cb@ixit.cz>
-In-Reply-To: <20260921-qcom-wled-backlight-v4-0-bab8c7ef73cb@ixit.cz>
-To: Lee Jones <lee@kernel.org>, Daniel Thompson <danielt@kernel.org>, 
- Jingoo Han <jingoohan1@gmail.com>, Helge Deller <deller@gmx.de>, 
- Kiran Gunda <quic_kgunda@quicinc.com>, 
- Marco Mattiolo <marco.mattiolo@hotmail.it>, 
- =?utf-8?q?Barnab=C3=A1s_Cz=C3=A9m=C3=A1n?= <barnabas.czeman@mainlining.org>
-Cc: linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org, 
- linux-fbdev@vger.kernel.org, linux-kernel@vger.kernel.org, 
- phone-devel@vger.kernel.org, Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, 
- Joel Selvaraj <foss@joelselvaraj.com>, David Heidelberg <david@ixit.cz>
-X-Mailer: b4 0.16.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=6134; i=david@ixit.cz;
- h=from:subject:message-id;
- bh=Vd0mK0QtPcwQRIQctDNdJy4/aT9MYS6AbqA9R9Lgs7M=;
- b=owEBbQKS/ZANAwAIAWACP8TTSSByAcsmYgBqsQr/SPXXhzir5slfNf//B0RQVNzZfsL8bCu40
- sNHQe0OfyqJAjMEAAEIAB0WIQTXegnP7twrvVOnBHRgAj/E00kgcgUCarEK/wAKCRBgAj/E00kg
- cohSD/43ZwcZK12PiDRqLFQ1BSQj/qpvka/d9RpoDqvnRgqK4kf2y0NM4dS2TQK/FdW5WZ+/Yi6
- y31aalt+YjK/Bq+IGnkO6rBIQHuRhNA6r3pDZKFVV2t0IG8sYVENY97njnDu2/NTvsBQ3UsSv4j
- pK9l2rU88hLobLSxO1zzEYAUrApOR/ibpYipJ12A7jwGrVUeJNF5eKYaLAudIO7AZv+B7UUms/h
- ssYYHA8EeTaukyFUvWw8PDd0KJsuEHa8GqolTOJxdQND6CJdl5Lx0Mlg7jWry/2wZZmtxPMjVBR
- JBZBXFs+8EeMXM9QapCVLV/aIgVeO+xUcOoQbMyQBMauFfXF0e/YDW/PR7Qhk4SlpHW8TMCvPWg
- ZYbG23sGon4Qo54P9PNe9IAQuwaHXq3eQJWZxkmfL0ExRhPhas0EUGledpjCjvTuiOOSNBnl4jW
- E6VPMZpoTLa1X5wUymOunEKw1tq8BWTDaw8Ic0mdjY0UhOahKxEhQ9AhiaJxPa9nouVdKZJnGSt
- rRS1pntI1oWsfwPcJClyNmXPLt51XZygdR1JLCUo65JPn5rqBWvMQLba4eXLY7xSCSKNToM1/2K
- BJMD71JkHf15/fCsvsPbv1dPF0z71Z2d1YZZTa5AoRBjjg6sTfUal+29YX7AOYBax7jxN95Hlzv
- F3B9oCckP7WZJdg==
-X-Developer-Key: i=david@ixit.cz; a=openpgp;
- fpr=D77A09CFEEDC2BBD53A7047460023FC4D3492072
-X-Endpoint-Received: by B4 Relay for david@ixit.cz/default with auth_id=355
-X-Original-From: David Heidelberg <david@ixit.cz>
-Reply-To: david@ixit.cz
+X-B4-Tracking: v=1; b=H4sIAMMNsWoC/yXM0QpAMBSA4VfRubbaJOFVJM1xxlE2bUjJuxsuv
+ /r7LwjkmQLUyQWeDg7sbIRKE8BJ25EED9GQyayQlSrF4qxG19EqTK9yo80gCRFiv3oyfH6vpv0
+ d9n4m3N4B3PcDBnaa920AAAA=
+X-Change-ID: 20260918-monaco_ep-fb14fafd0ecc
+To: Vinod Koul <vkoul@kernel.org>, Neil Armstrong <neil.armstrong@linaro.org>,
+        Manivannan Sadhasivam <mani@kernel.org>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>,
+        Bjorn Helgaas <bhelgaas@google.com>,
+        Lorenzo Pieralisi <lpieralisi@kernel.org>,
+        =?utf-8?q?Krzysztof_Wilczy=C5=84ski?= <kwilczynski@kernel.org>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, linux-phy@lists.infradead.org,
+        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-pci@vger.kernel.org,
+        Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1789988304; l=2427;
+ i=krishna.chundru@oss.qualcomm.com; s=20230907; h=from:subject:message-id;
+ bh=peVqRNezccL7XCLjXAEvt4zPOCLA8KyAaMpzFXvC9Bk=;
+ b=2j+QB7Yy6u1A0kRk0gX0z2/49ykQ8g6PYURbir7tJ/F3c9vl0NRtyLJuDHkaNoZAjuUV7kxfh
+ fdg+mSGQVK8A5uVGyHf48EsrBVwPdUfECFD6Tcn9Giqwxde1MM3LjN+
+X-Developer-Key: i=krishna.chundru@oss.qualcomm.com; a=ed25519;
+ pk=10CL2pdAKFyzyOHbfSWHCD0X0my7CXxj8gJScmn1FAg=
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTIxMDE1NyBTYWx0ZWRfX17NO2B21DDdS
+ 7SSElVVWMCeMjRG6xUTuRZmF2KV76/tbhJivXU70aCmsXcJmQng2MnJoxOQLbgRNr5HUGY+rGmv
+ b7fnqfTYzDAk8ZpskcxBSp3BPfVe0gI=
+X-Authority-Analysis: v=2.4 cv=AsR7T+9P c=1 sm=1 tr=0 ts=6ab10dd7 cx=c_pps
+ a=WW5sKcV1LcKqjgzy2JUPuA==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
+ a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22
+ a=EUspDBNiAAAA:8 a=Fm6EAR0vVewXWd2bb8wA:9 a=QEXdDO2ut3YA:10
+ a=OpyuDcXvxspvyRM73sMx:22
+X-Proofpoint-GUID: q6WF6pO2vwML9aygsHtPIrjfaeqAIYwm
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTIxMDE1NyBTYWx0ZWRfX4VNqdzjRpt1F
+ rboLtwC3zLGJo/hO/kbOsBvDxx8JIyMQqb5IzmvogZp9YEuFTfp27On/2vvVZQNDa+tUL5LKaQ8
+ 1CQyIK2yaSgS7we0R44tXGnsy4bHwoILXshLsaDFFDW+hYSa1CfknTD/nf38ZYqUv7TCQGD0xZC
+ uQIbz5KVBrPTUu8JAoMOWVfmANgZk9/yiOR4fazKDR+XUTqXaTYrk2bthuhuzPKiIDZ57/H1HMS
+ bexPnCSLx7wo2m5vG8uY8nn1ohEoxneoRViEDU33BWBXt8irIUNaAe57HnwRF5mkCaJTMzBkfVe
+ XelBYhvOFADLL2cCzYXJQ2ddx5TXcfPBYZTt69guaI6S0y8g3AldH9Fh66rhfNuoDDFaUt3SArg
+ 6y6QdftE5dPtBt1E6Uc7XkCwFgio3Ys48dSd5mP1NNgQaODhOnqbVDHp2enCAW4/vojqIBiVc6v
+ +s16E0hzTKSWRv9JMLg==
+X-Proofpoint-ORIG-GUID: q6WF6pO2vwML9aygsHtPIrjfaeqAIYwm
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-09-21_04,2026-09-16_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ priorityscore=1501 spamscore=0 malwarescore=0 suspectscore=0 clxscore=1015
+ impostorscore=0 adultscore=0 lowpriorityscore=0 phishscore=0 bulkscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609210157
 
-From: David Heidelberg <david@ixit.cz>
+This series adds PCIe Endpoint mode support for the Monaco (QCS8300)
+SoC, which has two PCIe controllers capable of operating as Endpoints.
 
-Since the previous change wled_probe() seeds wled->brightness from
-MOD_EN, but with default-brightness rather than the level the hardware
-is actually driving, so a backlight left lit by the bootloader still
-visibly steps on the first update, and actual_brightness reports the
-last value written rather than what the panel shows.
+- Patch 1 documents the dedicated 16 GT/s x4 QMP PCIe PHY compatible
+  for QCS8300, correcting an earlier gap where this PHY variant had no
+  QCS8300-specific compatible of its own.
+- Patch 2 documents the QCS8300 compatible for the PCIe Endpoint
+  controller binding, with SA8775P as its fallback.
+- Patch 3 adds the corresponding Endpoint PHY register configuration
+  to the QMP PCIe PHY driver, reusing the existing SA8775P programming
+  for the 16 GT/s x2 PHY and adding a new configuration for the 16
+  GT/s x4 PHY.
+- Patch 4 fixes clock-enable ordering in the qcom-ep controller driver:
+  some platforms require the interconnect bandwidth vote to be set
+  before enabling clocks, otherwise certain clocks can get stuck off.
+- Patch 5 fixes the existing pcie1_phy node's compatible string to
+  list the new QCS8300-specific compatible first, ahead of the
+  SA8775P fallback, matching the order used elsewhere in this series.
+- Patch 6 adds the Endpoint device tree nodes for both Monaco PCIe
+  controllers, covering register regions, clocks, interrupts,
+  interconnects, IOMMU mappings, resets, power domains, and PHY
+  connections.
 
-Add wled_read_brightness(), which returns 0 when MOD_EN is clear and
-otherwise reads the brightness register the matching
-wledN_set_brightness() writes: the first enabled string on WLED3 and
-WLED4, the selected modulator on WLED5. Use it to seed both
-wled->brightness and the initial backlight property, and expose it as
-backlight_ops.get_brightness so that actual_brightness reflects the
-hardware too.
-
-A module that is enabled with the brightness registers at zero, which
-wled4_setup() and wled_auto_string_detection() can leave behind on a
-cold boot, now reads back as off. The OVP interrupt is then armed by the
-first brightness update rather than from probe, which is what happens
-on every other board where the module starts out disabled.
-
-Suggested-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-Assisted-by: LLM
-Signed-off-by: David Heidelberg <david@ixit.cz>
+Signed-off-by: Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>
 ---
- drivers/video/backlight/qcom-wled.c | 74 +++++++++++++++++++++++++++++++------
- 1 file changed, 63 insertions(+), 11 deletions(-)
+Krishna Chaitanya Chundru (6):
+      dt-bindings: phy: qcom,sc8280xp-qmp-pcie-phy: Add qcs8300 16 GT/s PHY
+      dt-bindings: PCI: qcom-ep: Add QCS8300 compatible
+      phy: qcom: qmp-pcie: Add endpoint PHY configuration for QCS8300
+      PCI: qcom-ep: Set initial interconnect bandwidth before enabling clocks
+      arm64: qcom: monaco: Fix pcie1_phy compatible to list qcs8300 first
+      arm64: qcom: monaco: Add PCIe Endpoint nodes
 
-diff --git a/drivers/video/backlight/qcom-wled.c b/drivers/video/backlight/qcom-wled.c
-index 3ce3bade3b8dd..ca350f320e177 100644
---- a/drivers/video/backlight/qcom-wled.c
-+++ b/drivers/video/backlight/qcom-wled.c
-@@ -285,16 +285,60 @@ static int wled5_set_brightness(struct wled *wled, u16 brightness)
- 		  WLED5_SINK_REG_MOD_A_BRIGHTNESS_LSB :
- 		  WLED5_SINK_REG_MOD_B_BRIGHTNESS_LSB;
- 
- 	rc = regmap_bulk_write(wled->regmap, wled->sink_addr + offset,
- 			       &v, sizeof(v));
- 	return rc;
- }
- 
-+static int wled_read_brightness(struct wled *wled)
-+{
-+	u16 addr, mask;
-+	__le16 v;
-+	u32 val;
-+	int rc;
-+
-+	rc = regmap_read(wled->regmap, wled->ctrl_addr + WLED3_CTRL_REG_MOD_EN,
-+			 &val);
-+	if (rc < 0)
-+		return rc;
-+
-+	if (!(val & WLED3_CTRL_REG_MOD_EN_MASK))
-+		return 0;
-+
-+	switch (wled->version) {
-+	case 3:
-+		addr = wled->sink_addr +
-+		       WLED3_SINK_REG_BRIGHT(wled->cfg.enabled_strings[0]);
-+		mask = WLED3_SINK_REG_BRIGHT_MAX;
-+		break;
-+	case 4:
-+		addr = wled->sink_addr +
-+		       WLED4_SINK_REG_BRIGHT(wled->cfg.enabled_strings[0]);
-+		mask = WLED3_SINK_REG_BRIGHT_MAX;
-+		break;
-+	case 5:
-+		addr = wled->sink_addr + (wled->cfg.mod_sel == MOD_A ?
-+					  WLED5_SINK_REG_MOD_A_BRIGHTNESS_LSB :
-+					  WLED5_SINK_REG_MOD_B_BRIGHTNESS_LSB);
-+		mask = WLED5_SINK_REG_BRIGHT_MAX_15B;
-+		break;
-+	default:
-+		dev_err(wled->dev, "Invalid WLED version\n");
-+		return -EINVAL;
-+	}
-+
-+	rc = regmap_bulk_read(wled->regmap, addr, &v, sizeof(v));
-+	if (rc < 0)
-+		return rc;
-+
-+	return min_t(u32, le16_to_cpu(v) & mask, wled->max_brightness);
-+}
-+
- static void wled_ovp_work(struct work_struct *work)
- {
- 	struct wled *wled = container_of(work,
- 					 struct wled, ovp_work.work);
- 	enable_irq(wled->ovp_irq);
- }
- 
- static int wled_module_enable(struct wled *wled, int val)
-@@ -475,16 +519,28 @@ static int wled_update_status(struct backlight_device *bl)
- 	wled->brightness = brightness;
- 
- unlock_mutex:
- 	mutex_unlock(&wled->lock);
- 
- 	return rc;
- }
- 
-+static int wled_get_brightness(struct backlight_device *bl)
-+{
-+	struct wled *wled = bl_get_data(bl);
-+	int rc;
-+
-+	mutex_lock(&wled->lock);
-+	rc = wled_read_brightness(wled);
-+	mutex_unlock(&wled->lock);
-+
-+	return rc;
-+}
-+
- static int wled4_cabc_config(struct wled *wled, bool enable)
- {
- 	int i, j, rc;
- 	u8 val;
- 
- 	for (i = 0; i < wled->cfg.num_strings; i++) {
- 		j = wled->cfg.enabled_strings[i];
- 
-@@ -1646,25 +1702,25 @@ static int wled_configure_ovp_irq(struct wled *wled,
- 	if (!wled->brightness)
- 		disable_irq(wled->ovp_irq);
- 
- 	return 0;
- }
- 
- static const struct backlight_ops wled_ops = {
- 	.update_status = wled_update_status,
-+	.get_brightness = wled_get_brightness,
- };
- 
- static int wled_probe(struct platform_device *pdev)
- {
- 	struct backlight_properties props;
- 	struct backlight_device *bl;
- 	struct wled *wled;
- 	struct regmap *regmap;
--	u32 mod_en;
- 	u32 val;
- 	int rc;
- 
- 	regmap = dev_get_regmap(pdev->dev.parent, NULL);
- 	if (!regmap) {
- 		dev_err(&pdev->dev, "Unable to get regmap\n");
- 		return -EINVAL;
- 	}
-@@ -1729,41 +1785,37 @@ static int wled_probe(struct platform_device *pdev)
- 	}
- 
- 	INIT_DELAYED_WORK(&wled->ovp_work, wled_ovp_work);
- 
- 	val = WLED_DEFAULT_BRIGHTNESS;
- 	of_property_read_u32(pdev->dev.of_node, "default-brightness", &val);
- 
- 	/*
--	 * The module may already be enabled, either by a bootloader that left
--	 * the backlight lit or by the setup above. Record that, so that the
--	 * first brightness update does not enable an already enabled module,
--	 * and so that the OVP irq is armed from probe rather than from that
--	 * first update.
-+	 * The module may already be lit, either by the bootloader or by the
-+	 * setup above. Start from what the hardware is driving, so that the
-+	 * first brightness update does not step the brightness.
- 	 */
--	rc = regmap_read(wled->regmap, wled->ctrl_addr + WLED3_CTRL_REG_MOD_EN,
--			 &mod_en);
-+	rc = wled_read_brightness(wled);
- 	if (rc < 0)
- 		return rc;
- 
--	if (mod_en & WLED3_CTRL_REG_MOD_EN_MASK)
--		wled->brightness = val;
-+	wled->brightness = rc;
- 
- 	rc = wled_configure_short_irq(wled, pdev);
- 	if (rc < 0)
- 		return rc;
- 
- 	rc = wled_configure_ovp_irq(wled, pdev);
- 	if (rc < 0)
- 		return rc;
- 
- 	memset(&props, 0, sizeof(struct backlight_properties));
- 	props.type = BACKLIGHT_RAW;
--	props.brightness = val;
-+	props.brightness = wled->brightness ?: val;
- 	props.max_brightness = wled->max_brightness;
- 	bl = devm_backlight_device_register(&pdev->dev, wled->name,
- 					    &pdev->dev, wled,
- 					    &wled_ops, &props);
- 	return PTR_ERR_OR_ZERO(bl);
- };
- 
- static void wled_remove(struct platform_device *pdev)
+ .../devicetree/bindings/pci/qcom,pcie-ep.yaml      |   5 +
+ .../bindings/phy/qcom,sc8280xp-qmp-pcie-phy.yaml   |  87 ++++++------
+ arch/arm64/boot/dts/qcom/monaco.dtsi               | 147 ++++++++++++++++++++-
+ drivers/pci/controller/dwc/pcie-qcom-ep.c          |  34 ++---
+ drivers/phy/qualcomm/phy-qcom-qmp-pcie.c           | 105 +++++++++++++++
+ 5 files changed, 319 insertions(+), 59 deletions(-)
+---
+base-commit: feaece109e78a40818d20528ffaa95d2f22227a9
+change-id: 20260918-monaco_ep-fb14fafd0ecc
 
--- 
-2.55.0
-
+Best regards,
+--  
+Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>
 
