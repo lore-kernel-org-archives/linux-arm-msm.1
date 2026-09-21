@@ -1,168 +1,151 @@
-Received: from mail-m12784.qiye.163.com (mail-m12784.qiye.163.com [115.236.127.84])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 938B5371043;
-	Mon, 21 Sep 2026 06:40:21 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=115.236.127.84
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 74A4F36B93D
+	for <linux-arm-msm@vger.kernel.org>; Mon, 21 Sep 2026 06:52:14 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789972828; cv=none; b=TMTUZOHAHWKtlGHdAtg0JSccLLhwkrl8YKJCS3lCccqg3Q5NpfkKnRr6qF65s3GtL6ntJNECBFNDH587i9z9xLMgR6e0mSv9lDAdcBwmfae8AK4R5MM6KzEGZnnRyKsqo9fFvFmGli9PpRWQU5xrjIi9eUBHQU4lJUXX4Hs8o/E=
+	t=1789973535; cv=none; b=QOlORSsPRp8ux7A++lsGPjxRmPf4s9PLcb/nBWxWp0RH6QmTMdGydub1pciD4LKMEE0Z0D65xk1CQwdvY5un9BRNB7iHdcGngMYhsyxVnz73SCeWlFybl9C0VWKmzE+n7spIeSp1e8wjmUWVaFFVV4RP5oLxcpykJqNemOhZdK0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789972828; c=relaxed/simple;
-	bh=zogB3eIaVFO5Hr0oK5SvadmLRtsVFE2O34heUjlZQ/c=;
-	h=Message-ID:Date:MIME-Version:Subject:From:To:Cc:References:
-	 In-Reply-To:Content-Type; b=Pg4yGT+GR2MdTakO4KG7FTxHGxxtobPWrlujkIBr+XwGLzL1jQAcLybiDyaOVuhNEc8JK+oKJsG6Wc9c0SrKka+4JT+KfDdAFOJC543ZKnaYfg5NniP7VsV6vfPmrqsWI68PO/z26SAcKcx+jCrF1GoRHT2POILHNx/av9YSXJE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=rock-chips.com; spf=pass smtp.mailfrom=rock-chips.com; dkim=pass (1024-bit key) header.d=rock-chips.com header.i=@rock-chips.com header.b=ZHOwku2D; arc=none smtp.client-ip=115.236.127.84
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=rock-chips.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=rock-chips.com
+	s=arc-20240116; t=1789973535; c=relaxed/simple;
+	bh=M9wKcZRx+UctBcFXzOs619bBCYQFQfI4WYmoZUzWH7w=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=Xtu6WqDmcKvDgI2A4GJ30jvkniljhmm0oPJ7KPrn2iAkVB4kdIJeW1ZG5D/ZHJtWSwOZz0/HXhUWEGx4iaFsXek8GqJBDa5H4Nq8YEaAK4O02ffh6kyl5gw+PRuY8+CCRQI2nZ8GkIR8OKh15nkpMen2CcWH2d3i3nCrzN11/aE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=Zh3TgV8s; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=QjUSD+x/; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=rock-chips.com header.i=@rock-chips.com header.b="ZHOwku2D"
-Received: from [172.16.12.74] (unknown [61.154.14.86])
-	by smtp.qiye.163.com (Hmail) with ESMTP id 4e87d7a93;
-	Mon, 21 Sep 2026 14:34:59 +0800 (GMT+08:00)
-Message-ID: <96882735-091f-49c6-a47b-5da8be711818@rock-chips.com>
-Date: Mon, 21 Sep 2026 14:34:57 +0800
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="Zh3TgV8s";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="QjUSD+x/"
+Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68L3Yv1l1162082
+	for <linux-arm-msm@vger.kernel.org>; Mon, 21 Sep 2026 06:52:13 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=kmVizujLsrgmM/SgR/HB3+
+	HMHu7OihCsv3vpcpmpjj0=; b=Zh3TgV8svLg+7k3rr1Yagf6gKX40efPetnaxg/
+	UEx+BKM2jbV3Pm/Bn5HqV/hT0lbNS7tjimsLLLbNFubnRIPqhe1SD5f2c6VUk5ju
+	/FyWiD/PGaWJ8wzHU9MQhOpJkcMY8jdjXvqYQBiaWJmqeXbZZlefGwKYoFTexiXR
+	H0TrEDoyekoWypOg4G4ML4lGY8TfeGmAqbhMOFfd1Gfl2Y/y8eczl/vZ2mAmlhwA
+	Not0NEEW3uJZtZ2on9SHXnOZn0SSCMwKVoesexEtf64pPdMZ+feAfY4T9Od9PVNP
+	LID+O7riS/DgLifDINoTZTzlJkH2Ngcvl1RCHbHxSeJE8VyA==
+Received: from mail-pg1-f197.google.com (mail-pg1-f197.google.com [209.85.215.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gtt3ws12e-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Mon, 21 Sep 2026 06:52:13 +0000 (GMT)
+Received: by mail-pg1-f197.google.com with SMTP id 41be03b00d2f7-cc4922b7c31so2686838a12.1
+        for <linux-arm-msm@vger.kernel.org>; Sun, 20 Sep 2026 23:52:13 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1789973533; x=1790578333; darn=vger.kernel.org;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=kmVizujLsrgmM/SgR/HB3+HMHu7OihCsv3vpcpmpjj0=;
+        b=QjUSD+x/57gv5Qm8SscdlJWZ0xy+J+AOAns6BVr+UZBFbKmPPkRLG8nHaORTfQ3uvF
+         cR6JbK8rn/tJjRoIUxsje4DY4UnU+kRaaSlMDFbePI0X0q/JWhDk7+0ilwOOvduoM+yj
+         6QgP/m1uTWXMb+gnOtPmwngP+FMDZtD/b6O+tc7gYXNXygfeva7qOJXlEbM1CIsVnDaV
+         4GrkOdv7w9D4Hn0TIKkSi8OJx7OI82a7H7+719cG2MjrM6Mv7AbN816QrG2968u/roC1
+         /PxB9bo/9BKILpHgHHxTMgrgutIy18nzrbGHxBMG9vekIOP59YF9qZvHyfehPZ8asg8X
+         5wGw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1789973533; x=1790578333;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=kmVizujLsrgmM/SgR/HB3+HMHu7OihCsv3vpcpmpjj0=;
+        b=pEfaVmtjXyObsnBxTFNDnIfLILfepfq9DoD9qX0VmwJrcNcH5lVUBcXr429ftFoofS
+         tpP6VkFvRctOPgfwRBLjYs+LlP6OEFDXLNePPXN3yHlkWHpQzpNqZcPqfLN5tqO0x18I
+         ixkxJXGZ9ZvTcBp4VJ3j+7B+T8ZRF21OMeCeqUy23yoQnexwdmFyKJ73H6QTuslOR8+f
+         L0A2/jaqlYbCM+s5TlULBqJnmp0vDd6LdFvCwOpuxjtIu1te+etVUc4g0benUvlr23Xn
+         ZlE0I6UDw/EIP4bV6biuyPrmzuxuUcTXn3z7MueZurbfzyWblIIIUEBOi3S1y/1TH/sF
+         yxSQ==
+X-Gm-Message-State: AFuF++llTNy9KgLm5qlNKwIVKIWyno+5g3G9fkMumsBB3/ex4xqwa74O
+	37gWGbXn4lfMXg6AjNWqpmxHCqhEvzJNCD8S7MUmaWvHzhGZpoo4az5Pt64iye7D4cBhcL6fHmb
+	is+OT6tCS/EmsrmCy27hPSdBBzgQG+h+wnnOgvyDKUEeZZp30xcsCjw0mqG9zXORodd10
+X-Gm-Gg: AYBFou206c07kT1rhFWjsKaHtn1M8VjzJaIYYzqI4mzmhCmNyl+qmYf3qoJumLNuopk
+	v8DaX9ImJtWHMvz+AKqeagNf8YIWbYJlr35qOSCWsZ26W1pg9+Dc6toUsqO0SboZB5YUoGXCuHv
+	9GwkeAFeDw9YyYMnGfBT0LnXLpB8zvl6t6UlzdEDEu4GDbLtglUekcpELZRhAgj53Z73yZv7A9+
+	CWe+W5v7cIVTIvNEWmBZDcym9E31BrhGoV5LArJXhtOOQipU9Jrow9uqMLP+bIsjbj7wZMs/uJe
+	TGKqug1J60dFy0Tax+j3bDczPkQj+fbaoCiwcB7AY9nrClxCyIOBVXtoS3svLEhhFrgPLk+XF4+
+	Pi/jbQFOiH+w6Aenih4vHPWPFHFvJpOGL/gazMieV5IJOAkfFJ/+wmmVmaSx8X9WRVq1hTYk0JU
+	YEvxO+baRksJvJOokZ7Flhcu85QXKZ6DcJzw==
+X-Received: by 2002:a05:6a20:5483:b0:3dd:a196:3090 with SMTP id adf61e73a8af0-3dda19633c6mr10931930637.64.1789973533055;
+        Sun, 20 Sep 2026 23:52:13 -0700 (PDT)
+X-Received: by 2002:a05:6a20:5483:b0:3dd:a196:3090 with SMTP id adf61e73a8af0-3dda19633c6mr10931912637.64.1789973532638;
+        Sun, 20 Sep 2026 23:52:12 -0700 (PDT)
+Received: from hu-kathirav-blr.qualcomm.com (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-144d55f299fsm31342975c88.15.2026.09.20.23.52.09
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 20 Sep 2026 23:52:12 -0700 (PDT)
+From: Kathiravan Thirumoorthy <kathiravan.thirumoorthy@oss.qualcomm.com>
+Subject: [PATCH 0/2] Add few more SOC IDs for IPQ5210 family
+Date: Mon, 21 Sep 2026 12:21:51 +0530
+Message-Id: <20260921-ipq52xx_new_ids-v1-0-63d68a11bbff@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 19/19] drm/bridge: analogix_dp: don't create a
- panel_bridge
-From: Damon Ding <damon.ding@rock-chips.com>
-To: Luca Ceresoli <luca.ceresoli@bootlin.com>,
- Andrzej Hajda <andrzej.hajda@intel.com>,
- Neil Armstrong <neil.armstrong@linaro.org>, Robert Foss <rfoss@kernel.org>,
- Laurent Pinchart <Laurent.pinchart@ideasonboard.com>,
- Jonas Karlman <jonas@kwiboo.se>, Jernej Skrabec <jernej.skrabec@gmail.com>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
- Jessica Zhang <jesszhan0024@gmail.com>,
- Laurentiu Palcu <laurentiu.palcu@oss.nxp.com>,
- Lucas Stach <l.stach@pengutronix.de>, Frank Li <Frank.Li@nxp.com>,
- Sascha Hauer <s.hauer@pengutronix.de>,
- Pengutronix Kernel Team <kernel@pengutronix.de>,
- Fabio Estevam <festevam@gmail.com>, Paul Cercueil <paul@crapouillou.net>,
- Paul Kocialkowski <paulk@sys-base.io>, Linus Walleij <linusw@kernel.org>,
- Inki Dae <inki.dae@samsung.com>, Jagan Teki <jagan@amarulasolutions.com>,
- Marek Szyprowski <m.szyprowski@samsung.com>, Sean Paul <sean@poorly.run>,
- Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>,
- Randy Dunlap <rdunlap@infradead.org>
-Cc: Albert Esteve <aesteve@redhat.com>, Anusha Srivatsa
- <asrivats@redhat.com>, Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
- Hui Pu <Hui.Pu@gehealthcare.com>, Ian Ray <ian.ray@gehealthcare.com>,
- Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
- dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- imx@lists.linux.dev, linux-arm-kernel@lists.infradead.org,
- linux-mips@vger.kernel.org, linux-rockchip@lists.infradead.org,
- linux-stm32@st-md-mailman.stormreply.com, asahi@lists.linux.dev,
- linux-arm-msm@vger.kernel.org, freedreno@lists.freedesktop.org,
- linux-tegra@vger.kernel.org, linux-doc@vger.kernel.org,
- linux-samsung-soc@vger.kernel.org, Heiko Stuebner <heiko@sntech.de>
-References: <20260916-drm-bridge-every-panel-v3-0-83afb4f1a707@bootlin.com>
- <20260916-drm-bridge-every-panel-v3-19-83afb4f1a707@bootlin.com>
- <975a4d45-9a61-4858-b498-8bc0a1e44746@rock-chips.com>
-Content-Language: en-US
-In-Reply-To: <975a4d45-9a61-4858-b498-8bc0a1e44746@rock-chips.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-HM-Tid: 0aa0c2acc9e403a8kunm657b9e77980220
-X-HM-MType: 1
-X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
-	tZV1koWUFITzdXWRgWCB1ZQUpXWS1ZQUlXWQ8JGhUIEh9ZQVkZQx9KVh9PGB9MT0kfGB1ITFYVFA
-	kWGhdVEwETFhoSFyQUDg9ZV1kYEgtZQVlNSlVKTk9VSk9VQ01ZV1kWGg8SFR0UWUFZT0tIVUpLSE
-	pKQkxVSktLVUpCS0tZBg++
-DKIM-Signature: a=rsa-sha256;
-	b=ZHOwku2DSYkcme2HF6miD3tsHrohcDCgQN32pWRYnUFFJhMdcqTLpQQOBt1nASCVshzWCK1Rf2jUBn74aj5YAYiAlPuBMp3c1pQ2RZPJiSymLL/avNTAW5fYkrdsl8AUfIfftyZEjxzoezMDLxmwH2o4F6DAq4wXT1lyFhMzJFI=; c=relaxed/relaxed; s=default; d=rock-chips.com; v=1;
-	bh=TrLtgz6x2U7PEO6IDlWwEQdJyY8ByiWJ0svyu3eBk3I=;
-	h=date:mime-version:subject:message-id:from;
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAfUsGoC/yXMTQqDMBBA4avIrA2YYPzpVUSkiaOOi2gz2gbEu
+ zfq8lu8dwCjJ2R4JQd4/BLT4iJkmoCd3m5EQX00qEwVWS1LQetHqxA6h7+OehbS6Co3VuclVhC
+ r1eNA4T427WPezYx2uzZwnn8c4gp6cwAAAA==
+X-Change-ID: 20260917-ipq52xx_new_ids-1b584bc547e8
+To: Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        Abel Vesa <abelvesa@kernel.org>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
+        linux-kernel@vger.kernel.org,
+        Kathiravan Thirumoorthy <kathiravan.thirumoorthy@oss.qualcomm.com>
+X-Mailer: b4 0.15.2
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTIxMDA5NyBTYWx0ZWRfX/0L+YYdwYITJ
+ kqRLb4hwF8LV/PgbfMrO2a1o874zQd29qHQEdiVlwTVkdPswC8jTJusiLv6u7IOcCa6hUKs5K07
+ Yl38bpW51YNBxjZOOqNEIegkXjSC0NA7dqHSu/01TN+fgiVRPxEUXch6bqlSwzCg6QKo91IaEWr
+ LsSA6eD6DVYeDrHSs4ky5nQVTb+nrbjYchkKA47er4HyCKltbySlOWVMF0qpM2Isqd1eqTxvqY3
+ qhjRVJRWzLM3n4wu1GaW/vOM4q2xrn9tpZDrlh/vs6vrXslz9X2+KDD9kqKEw+OrK8KgIHAKgAy
+ yIck5O1/W5rAq7dLcd+zIJAHn8bOIAR5RIBwY6trR/E9eX1u3X5NqahPyzS73fGuUMNmboQDL9J
+ YUyWldj03YyNP2oL5jUpEDmib9+yBPTmT1qOCtlKbaU0DhxeJR/5VMngo4Xe0Pwuwr76QS4F4zw
+ FAQqjuuOXffPbuRsF4g==
+X-Proofpoint-ORIG-GUID: eKOIu90dW1uokKocVU7tnhD4tnZl4GcE
+X-Proofpoint-GUID: eKOIu90dW1uokKocVU7tnhD4tnZl4GcE
+X-Authority-Analysis: v=2.4 cv=dakVTnXe c=1 sm=1 tr=0 ts=6ab0d41d cx=c_pps
+ a=rz3CxIlbcmazkYymdCej/Q==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+ a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22
+ a=EUspDBNiAAAA:8 a=RD-zy9ve7f5AjEsD0N8A:9 a=QEXdDO2ut3YA:10
+ a=bFCP_H2QrGi7Okbo017w:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTIxMDA5NyBTYWx0ZWRfXxx+wT69unnzb
+ 7CURLyK2e30X+TKj3ffiBa+GWH6YdSnR1lGIVDbLnIxRA8Rsm6L18G+d5fclTXahAWs3Fh2RN4Y
+ HB7Wrt9Pod4R08SxCoOmJBdszKqfwsk=
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-09-21_02,2026-09-16_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ clxscore=1015 lowpriorityscore=0 spamscore=0 adultscore=0 phishscore=0
+ bulkscore=0 priorityscore=1501 impostorscore=0 suspectscore=0 malwarescore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609210097
 
-On 9/21/2026 11:07 AM, Damon Ding wrote:
-> Hi Luca,
-> 
-> On 9/16/2026 9:45 PM, Luca Ceresoli wrote:
->> Now a panel_bridge is automatically created for every drm_panel and the
->> panel-bridge API is just a deprecated wrapper to access it.
->>
->> Update and simplify the code by just getting a reference to the
->> already-existing bridge using of_drm_get_bridge_by_endpoint().
->>
->> As of_drm_get_bridge_by_endpoint() returns a refcounted bridge, take care
->> of putting the bridge reference. This is not easily done in the remove 
->> path
->> due to the different probe paths of the user drivers, so add a devm 
->> action
->> to ensure the reference is put only when it was taken.
->>
->> Assisted-by: opencode:deepseek-v4-flash-0731
->> Signed-off-by: Luca Ceresoli <luca.ceresoli@bootlin.com>
->> ---
->>   drivers/gpu/drm/bridge/analogix/Kconfig            |  1 -
->>   drivers/gpu/drm/bridge/analogix/analogix_dp_core.c | 40 ++++++++++++ 
->> +---------
->>   drivers/gpu/drm/exynos/exynos_dp.c                 | 36 + 
->> +-----------------
->>   drivers/gpu/drm/rockchip/analogix_dp-rockchip.c    |  9 -----
->>   include/drm/bridge/analogix_dp.h                   |  1 -
->>   5 files changed, 25 insertions(+), 62 deletions(-)
->>
+QCF3211 and IPQ5211 are the new SoCs based on the IPQ5210 family. Add
+the SoC IDs for the same.
 
-[snip]
+Signed-off-by: Kathiravan Thirumoorthy <kathiravan.thirumoorthy@oss.qualcomm.com>
+---
+Kathiravan Thirumoorthy (2):
+      dt-bindings: arm: qcom,ids: add few more SOC IDs for IPQ5210 family
+      soc: qcom: socinfo: add few more SOC IDs for IPQ5210 family
 
->> @@ -488,14 +487,6 @@ static void rockchip_dp_remove(struct 
->> platform_device *pdev)
->>   {
->>       struct rockchip_dp_device *dp = platform_get_drvdata(pdev);
-
-The above unused &rockchip_dp_device could be also remved.
-
->> -    /*
->> -     * Release the probe-time reference from of_drm_find_panel(). If 
->> bind
->> -     * ran, the panel_bridge holds a second reference that devm cleanup
->> -     * will release when the bridge is destroyed after remove() returns.
->> -     */
->> -    if (dp->plat_data.panel)
->> -        drm_panel_put(dp->plat_data.panel);
->> -
->>       component_del(&pdev->dev, &rockchip_dp_component_ops);
->>   }
->> diff --git a/include/drm/bridge/analogix_dp.h b/include/drm/bridge/ 
->> analogix_dp.h
->> index 0e0b87abee59..6033137b651e 100644
->> --- a/include/drm/bridge/analogix_dp.h
->> +++ b/include/drm/bridge/analogix_dp.h
->> @@ -35,7 +35,6 @@ static inline bool analogix_dp_is_rockchip(enum 
->> analogix_dp_devtype type)
->>   struct analogix_dp_plat_data {
->>       enum analogix_dp_devtype dev_type;
->> -    struct drm_panel *panel;
->>       struct drm_bridge *next_bridge;
->>       struct drm_encoder *encoder;
->>       struct drm_connector *connector;
->>
-> 
-> I apply this patch series with the related one[0], and the eDP work well 
-> on my RK3576 board.
-> 
-> Tested-by: Damon Ding <damon.ding@rock-chips.com>
-> 
-> In my patch series for Analogix DP HPD support, Heiko also pointed out 
-> that devm_drm_of_get_bridge()(deprecated now) can be used to get the 
-> panel bridge directly, and the redundant &analogix_dp_plat_data.panel 
-> can be removed[1]. Since your patch series already contains these 
-> optimizations, I will rebase my patch series on top of yours for 
-> subsequent updates.
-> 
-> Reviewed-by: Damon Ding <damon.ding@rock-chips.com>
-> 
-> [0] https://lore.kernel.org/all/20260915-drm-bridge-drm_panel-cleanup- 
-> v4-0-30401d9406f3@bootlin.com/
-> [1] https://lore.kernel.org/all/5609825.iZASKD2KPV@diego/
-> 
+ drivers/soc/qcom/socinfo.c         | 2 ++
+ include/dt-bindings/arm/qcom,ids.h | 2 ++
+ 2 files changed, 4 insertions(+)
+---
+base-commit: 3f2425f5b5bbbdd991ca9cdfd5502e68d8895998
+change-id: 20260917-ipq52xx_new_ids-1b584bc547e8
 
 Best regards,
-Damon
+--  
+Kathiravan Thirumoorthy <kathiravan.thirumoorthy@oss.qualcomm.com>
 
