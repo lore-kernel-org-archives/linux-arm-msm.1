@@ -1,99 +1,131 @@
-Received: from bali.collaboradmins.com (bali.collaboradmins.com [148.251.105.195])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 74A08429037;
-	Mon, 21 Sep 2026 10:43:06 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=148.251.105.195
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E069D47FAEA;
+	Mon, 21 Sep 2026 10:46:25 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789987388; cv=none; b=klpbEYGgvXV5Hb7vNqjUCxBczCLTbKld0qVJCelGoaP80/TSLa1uNwimucNkNLfdQasl06wWvYqr9dlhjAM/Fv/YQDHltigG8Nvvu1ZO3fwi2KfGCi6q0crpiFYf/gSobzxYx2L0pNapPqq53oHV47k8FyPOrZHXFgmK7IPOOa0=
+	t=1789987586; cv=none; b=dYHsGjQ0SUPyHwtoYNQd+8D00yyBHdUC6B7+EiexMFjWpnkSZ0a1L/atSbNw/mSE87MOYpBqIEnUih2rAnGoOETQlqAl4Jlcuivh+PZ2GWTSMPL3C1LtVrWfNuwugM6YHJPKIGkDOwQXKu+ZBjLmiSaXNBhSLSiPrjRBY2N3Yzw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789987388; c=relaxed/simple;
-	bh=Jgwpcker6k9rDea0kRKtirRFxf58xRqNK/1bFIhkyeg=;
-	h=Message-ID:Date:MIME-Version:Subject:To:References:From:
-	 In-Reply-To:Content-Type; b=YQcD2If1VEMHxC3iHH5tFKyVrEI8nJSK/4nU7QBMoJ6kXB2KJu8ddfvzCWY2r0UB7JhRyW8bYb1IAiQZ9uNJOqFwMAQIbCtkFm5oov+ofmGBMb7H18C2EGspkTYWKM9imgo/2tODmBKysmgJfLeb0dNv/2HqwvblD1u5Vw+mSw4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=collabora.com; spf=pass smtp.mailfrom=collabora.com; dkim=pass (2048-bit key) header.d=collabora.com header.i=@collabora.com header.b=oMTNaCUU; arc=none smtp.client-ip=148.251.105.195
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=collabora.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=collabora.com
+	s=arc-20240116; t=1789987586; c=relaxed/simple;
+	bh=VzG9WGvgbCSaoayzd2ht++Y85jlKLhif3VYGTpEVkAM=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
+	 In-Reply-To:To:Cc; b=h9SX02S7dW03m3XIsxWBcKMgCTotJtJ2X3jwvdzS8H8liopx81DhaEgaSjoA7gVQL85nYDKKZNQsxxLaFX4U8jqMATsC85QZI3fyNrUrGo4qfJMVoQzlc7Q/EoW4tYnyOfPvRANPpTFaS/OdWWHHhCn1oJwRXs++ug7rx4aaf8Q=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=OKAJTj0g; arc=none smtp.client-ip=10.30.226.201
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=collabora.com header.i=@collabora.com header.b="oMTNaCUU"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
-	s=mail; t=1789987384;
-	bh=Jgwpcker6k9rDea0kRKtirRFxf58xRqNK/1bFIhkyeg=;
-	h=Date:Subject:To:References:From:In-Reply-To:From;
-	b=oMTNaCUUQMOFVvWtgJ8FpNZ78+radWm4cFtglDxYayHg0KljOdwH8twiOXi86vS+U
-	 P3VUGiXZmygGnudp9xbNeTLWgolxWIBtpw50uZp180Qt5J6bwhxGXRSHalytZTM+6E
-	 2zxNom4zWTDpnpi/BFF1YgFfhfMoLnQE3suBwwbogv6IekEHfTDrFHDuJrXjjSDohm
-	 6v50HbEataNqYDAVG6gHO69vfRYaEz3UtKyFlL7EmlZNEoGJ11fi/hJYypEtBORh4u
-	 xNxx8Qt4b9iGK7fOa/1MsShkRNlvXC0pUMqKDGSQLNt3bI4p447TOs6WYGN4plBFxQ
-	 2eNtJ8McJQ3/g==
-Received: from [100.64.1.21] (unknown [100.64.1.21])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange x25519)
-	(No client certificate requested)
-	(Authenticated sender: kholk11)
-	by bali.collaboradmins.com (Postfix) with ESMTPSA id 3C7EA17E09D6;
-	Mon, 21 Sep 2026 12:43:03 +0200 (CEST)
-Message-ID: <bffc0927-26c0-4b36-9d66-d75dc5aa3b89@collabora.com>
-Date: Mon, 21 Sep 2026 12:43:02 +0200
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="OKAJTj0g"
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 8D66EC2BCF6;
+	Mon, 21 Sep 2026 10:46:25 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1789987585;
+	bh=VzG9WGvgbCSaoayzd2ht++Y85jlKLhif3VYGTpEVkAM=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
+	b=OKAJTj0gsMArSCKuEkyPR5bwygqGrSR0Za+XqKxc0jUpjdk23viwlw8+9PNAhat8J
+	 GpnA6NBC7QaPJMqiI3luFdzpPQEDJGVQwi8YWTO9TSmVABAau65/wthw0DYxIDmGow
+	 L4r7iH/1zsQvGdLtB1BZBFcvGT7eUPBg7crsO+1d3fBYOKEfyu0S+CO7a4hIDRJxXh
+	 N1g9uKoOStWdyJNiSPp18+7DWxOyvmG3JZHMjP0Vhab2z6oxifKCXPLmCCbnWeQJ6Y
+	 uSV5upNz0v+c9je0wS6XPDjPEQciLkZ3AwItXvJUFjPFpjg3kg1LLumtsQDuO9sxzl
+	 fiynr6catAcJQ==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6D545C982ED;
+	Mon, 21 Sep 2026 10:46:25 +0000 (UTC)
+From: David Heidelberg via B4 Relay <devnull+david.ixit.cz@kernel.org>
+Date: Mon, 21 Sep 2026 12:46:23 +0200
+Subject: [PATCH v4 2/4] backlight: qcom-wled: Fix WLED3 brightness register
+ stride
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] media: dt-bindings: Correct white-space style
-To: Krzysztof Kozlowski <krzk@kernel.org>,
- Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>,
- Keke Li <keke.li@amlogic.com>, Mauro Carvalho Chehab <mchehab@kernel.org>,
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
- Conor Dooley <conor+dt@kernel.org>, Zhi Mao <zhi.mao@mediatek.com>,
- Tiffany Lin <tiffany.lin@mediatek.com>,
- Andrew-CT Chen <andrew-ct.chen@mediatek.com>,
- Yunfei Dong <yunfei.dong@mediatek.com>, Bin Liu <bin.liu@mediatek.com>,
- Vikash Garodia <vikash.garodia@oss.qualcomm.com>,
- Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>,
- Bryan O'Donoghue <bod@kernel.org>,
- Jacopo Mondi <jacopo.mondi@ideasonboard.com>,
- Raspberry Pi Kernel Maintenance <kernel-list@raspberrypi.com>,
- Florian Fainelli <florian.fainelli@broadcom.com>,
- Broadcom internal kernel review list
- <bcm-kernel-feedback-list@broadcom.com>,
- Matthias Brugger <matthias.bgg@gmail.com>, Xia Jiang
- <xia.jiang@mediatek.com>, Stanimir Varbanov <stanimir.varbanov@linaro.org>,
- linux-media@vger.kernel.org, devicetree@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org,
- linux-rpi-kernel@lists.infradead.org, linux-arm-kernel@lists.infradead.org,
- linux-mediatek@lists.infradead.org
-References: <20260801195528.235230-2-krzysztof.kozlowski@oss.qualcomm.com>
- <1505ca0c-4a31-4673-bbe0-8474133fc504@kernel.org>
-From: AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>
-Content-Language: en-US
-In-Reply-To: <1505ca0c-4a31-4673-bbe0-8474133fc504@kernel.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+Message-Id: <20260921-qcom-wled-backlight-v4-2-bab8c7ef73cb@ixit.cz>
+References: <20260921-qcom-wled-backlight-v4-0-bab8c7ef73cb@ixit.cz>
+In-Reply-To: <20260921-qcom-wled-backlight-v4-0-bab8c7ef73cb@ixit.cz>
+To: Lee Jones <lee@kernel.org>, Daniel Thompson <danielt@kernel.org>, 
+ Jingoo Han <jingoohan1@gmail.com>, Helge Deller <deller@gmx.de>, 
+ Kiran Gunda <quic_kgunda@quicinc.com>, 
+ Marco Mattiolo <marco.mattiolo@hotmail.it>, 
+ =?utf-8?q?Barnab=C3=A1s_Cz=C3=A9m=C3=A1n?= <barnabas.czeman@mainlining.org>
+Cc: linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org, 
+ linux-fbdev@vger.kernel.org, linux-kernel@vger.kernel.org, 
+ phone-devel@vger.kernel.org, Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, 
+ Joel Selvaraj <foss@joelselvaraj.com>, David Heidelberg <david@ixit.cz>, 
+ stable@vger.kernel.org
+X-Mailer: b4 0.16.0
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1776; i=david@ixit.cz;
+ h=from:subject:message-id;
+ bh=7dg4sNfoJUcVQTg/pZrE7IUtjXq8Oym1qNiml++xiMI=;
+ b=owEBbQKS/ZANAwAIAWACP8TTSSByAcsmYgBqsQr/sPC+A2M95fdj4NxWG/mcIHavg1o987p1L
+ ijk5700k3GJAjMEAAEIAB0WIQTXegnP7twrvVOnBHRgAj/E00kgcgUCarEK/wAKCRBgAj/E00kg
+ coGhEADMtxTn4ww2WMUJwvEDnnzgSyczCpqyJrexzt3wfJ4e37ctZNxb2pOiekO2LXiWSozjtwM
+ Skk0DtVcB8jWMkIp0vtBnWxsjdApCsjudOgv65lXTY20YVP+4f3yvnbJZEBJaHy3HCimLSA3YO7
+ r07cgUnIsk4f8TWT2UO40uLxcMZjIEVaGakFHOwKHNeyd978d+x7mC4NAJvLFGILR3jRV73lX5D
+ QshqkGFGd6xVd+/L4KWq9TKzJKK3NoOsxDAnDMDRVrfvOcMOS/13VrMkIVX0OgN8gUrkn1/81xa
+ DOo3/sGebkYyoIYHUGEESJjOdN0cVkSk+jU3iBI6SqFksdCJdxnvRz2k4SS3PheAMqq+4c3dEBT
+ b7G17F9scwl9W0tjKq7Sfsi2aXa2WodI8TfDExIYAzI9hZkKSFSWmOdN9U2gtu2pvEQJHoF7adf
+ l6aWlOj7RFyVXbGDDOWWlZI5noqP2SO1mQk1Y0oV15bm0WJR7g0Ny6US01b00mPtS23pX+vbXpq
+ RsiBQUGr/YCy7LXeBMy8v8DLLwWwU5WzvThn28TSYgfyPLPrTvzUpWMfpwQy1SVQfSujBtYAHLy
+ Cp6T+3LBN9vMio/Ydu0HWPLnLV5E6URxcL4GqWOXlalslWw4Ys6jNYmkRXwr0Z/j47/g640reF3
+ HiyH8n2VkdXPI3Q==
+X-Developer-Key: i=david@ixit.cz; a=openpgp;
+ fpr=D77A09CFEEDC2BBD53A7047460023FC4D3492072
+X-Endpoint-Received: by B4 Relay for david@ixit.cz/default with auth_id=355
+X-Original-From: David Heidelberg <david@ixit.cz>
+Reply-To: david@ixit.cz
 
-On 9/18/26 12:46, Krzysztof Kozlowski wrote:
-> On 01/08/2026 21:55, Krzysztof Kozlowski wrote:
->> Correct a few white-space issues, like double space after '=' or before
->> bracket '{' characters, which will be flagged by dt-check-style.  No
->> functional changes.
->>
->> Signed-off-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
->> ---
->>   .../bindings/media/amlogic,c3-mipi-csi2.yaml  |  4 +-
->>   .../bindings/media/i2c/galaxycore,gc05a2.yaml |  2 +-
->>   .../media/mediatek,vcodec-encoder.yaml        |  2 +-
->>   .../bindings/media/mediatek-jpeg-decoder.yaml |  4 +-
->>   .../bindings/media/mediatek-jpeg-encoder.yaml |  2 +-
->>   .../bindings/media/qcom,msm8996-venus.yaml    | 40 +++++++++----------
->>   .../bindings/media/raspberrypi,pispbe.yaml    |  2 +-
->>   7 files changed, 28 insertions(+), 28 deletions(-)
-> 
-> This received reviews, is trivial, waits on the lists for 1.5 monts and
-> it seems people are repeating what I did.
-> 
-> I understand this won't be picked up by media.
-....in any case, for MediaTek:
+From: David Heidelberg <david@ixit.cz>
 
-Reviewed-by: AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>
+WLED3 has a 16-bit brightness register pair per string, at 0x40 + 2*n,
+which is what the pm8941-wled driver wrote to:
+
+	rc = regmap_bulk_write(wled->regmap,
+			wled->addr + WLED3_CTRL_REG_VAL_BASE + 2 * i,
+			v, 2);
+
+The restructuring for WLED3 turned that into WLED3_SINK_REG_BRIGHT(n),
+defined as 0x40 + n, so the two byte writes for consecutive strings
+overlap: string 1 overwrites the MSB of string 0 with its own LSB, and
+with the default three strings only string 1 ends up with the requested
+value.
+
+Use the 2 byte stride.
+
+Fixes: 775d2ffb4af6 ("backlight: qcom-wled: Restructure the driver for WLED3")
+Cc: stable@vger.kernel.org
+Assisted-by: LLM
+Signed-off-by: David Heidelberg <david@ixit.cz>
+---
+ drivers/video/backlight/qcom-wled.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/drivers/video/backlight/qcom-wled.c b/drivers/video/backlight/qcom-wled.c
+index 2281007bdd459..f452d328997ad 100644
+--- a/drivers/video/backlight/qcom-wled.c
++++ b/drivers/video/backlight/qcom-wled.c
+@@ -54,17 +54,17 @@
+ #define WLED3_SINK_REG_SYNC				0x47
+ #define  WLED3_SINK_REG_SYNC_CLEAR			0x00
+ 
+ #define WLED3_SINK_REG_CURR_SINK			0x4f
+ #define  WLED3_SINK_REG_CURR_SINK_MASK			GENMASK(7, 5)
+ #define  WLED3_SINK_REG_CURR_SINK_SHFT			5
+ 
+ /* WLED3 specific per-'string' registers below */
+-#define WLED3_SINK_REG_BRIGHT(n)			(0x40 + n)
++#define WLED3_SINK_REG_BRIGHT(n)			(0x40 + (n * 0x2))
+ 
+ #define WLED3_SINK_REG_STR_MOD_EN(n)			(0x60 + (n * 0x10))
+ #define  WLED3_SINK_REG_STR_MOD_MASK			BIT(7)
+ 
+ #define WLED3_SINK_REG_STR_FULL_SCALE_CURR(n)		(0x62 + (n * 0x10))
+ #define  WLED3_SINK_REG_STR_FULL_SCALE_CURR_MASK	GENMASK(4, 0)
+ 
+ #define WLED3_SINK_REG_STR_MOD_SRC(n)			(0x63 + (n * 0x10))
+
+-- 
+2.55.0
+
+
