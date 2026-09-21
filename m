@@ -1,276 +1,186 @@
-Received: from mail-vs2-f42.google.com (mail-vs2-f42.google.com [74.125.227.42])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 49CA94A8418
-	for <linux-arm-msm@vger.kernel.org>; Mon, 21 Sep 2026 15:15:14 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=74.125.227.42
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790003715; cv=pass; b=j5EWmH48NUpioAAi7eJ6O8oaTiYAx3KB015/cQhx9LC41Ib/+kAmQbPhOaPvixQxGyX4YLIY5EzWnZsT0R0Z/CHj7c7hCWjnBH1U4mdKJx6iRDDmwbwc8Fnwas+vYu7l+5rnhH150o532AbW9nGv252DDGAHDZmqco2HKOWHdtE=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790003715; c=relaxed/simple;
-	bh=E1DA6eJVvIMFAljzS7SN9tcSVSmcyDpJjIEWFM1xV2U=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=ml5TZhHx3+0Vgd0Q3gZ6V1X2xPSIk+u9MNLJIPAEbhhiQ5v3YEaxeusW1ele27YSo+769bSBE1MR2QBHM55EzqX/WvcPxr/5MFo54OvkXmvhwdyPZpWV7+geRACjO9nMUCR9cMMTUQX941VVy2/Ath57NCW/t01b6WGvkJuVw9g=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=YYcejnEZ; arc=pass smtp.client-ip=74.125.227.42
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 65BCA4B488E
+	for <linux-arm-msm@vger.kernel.org>; Mon, 21 Sep 2026 15:17:57 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1790003880; cv=none; b=ethjws8R03VCfDtJO7yZM0YCTEnRKfjszdV1piBGUjx0mTb7R50qvemTKsVsk7xfRuQRLfqBNOvdEfM/x+JC+i7o7SP14lRFtHyv8CxnhcZbLy1pTpBJl3HrRp4hsBcm7/PLx4wa8o+Nuln3iJvE7AC7Zwr+dSp7lcLQpR4KmUc=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1790003880; c=relaxed/simple;
+	bh=wL7ViQpOBQrR1TFI9V+XKos7/PiVSTRxCqAW2yNVG+s=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=RdGh2Ggw2kP1QHT8U7QZ9yTRcrwhTwlMK/ZEp+DK7kyUbX/x6FvZ4tJhx7EOkhqS36XxYEC2hs1OXCj2kgw+Td6/Z/G3l7oJFdO/NXWO8DZyu8d/bgtH9JJGr8AVv/kISSB6eTdC/0StebeOj9iSV4xR34zJj7x11PnOdumuea0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=jEEDJvvn; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=R4chrIRt; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="YYcejnEZ"
-Received: by mail-vs2-f42.google.com with SMTP id 71dfb90a1353d-5c6560f7a84so106117e0c.0
-        for <linux-arm-msm@vger.kernel.org>; Mon, 21 Sep 2026 08:15:14 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1790003713; cv=none;
-        d=google.com; s=arc-20260327;
-        b=XUVgOJ4wO5Ngh2bKXVOa9SQwnRlu+yJ0xGgUKtaD7zP0adhaUOByEczAjkR4QpAtxL
-         UkGD00upASUWUPiIM9tpkX0FTl4vuzxqJAhB9KaY946nECV9jL96PHoabHU10bp5WLwH
-         wk91FbOtDcqE4j5jcJRcWTcQMlttD3Cap9ybcXGxXaxhM4rL338mBK3fK80p9I74I05s
-         Ua45n66+Y6NT9I9gOLOk6EA65qmo+h9tYrRCFFIFkgg+7Fp+qjLYhMSG78gMtA0lvit0
-         1csDKp9qh2TlZ7kQzX6HoTj4IHrpvu3QdJxyMjCRJHrIXAT9K+C0rtrd3FAVErU/igAK
-         TPtQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=z6taRN1yfrJhXingP4b7nQEv0S92qILvbAb+oYWwjHI=;
-        fh=7O91Ns2STaNXG/DTNzqQmv7nnORcMT3lE5K/3Mt1i74=;
-        b=JuwB+YWgTsJcpRLkjSJtP+HFoJEO/xB42wfY++roDank3MOWRaZnwOGATq0ai8Hi7h
-         duCzesAzHaxx57TQcVgx1Hmcvy1O1ngLKoCQpaLxTAEEbMKRmm2owAZibQwRaT13zKUZ
-         X1QBck89AlrCoXYGB0OULG1+vGqk8Zonl5aiByxHichz0PMWBJ+shtiQHgxZeCE+U4Vr
-         nRSrYHtmOvLO9eMzsRz7U5UzYCifLnIEIeQMHnrS2PbX6PLqWkHxoGDl0jNpSwKzd5sF
-         /Qugp3aoLXfeA4PIvI2IsPHpkUqzpSevlot4fiwbCqYWg5JzuZf7D1MWNZmtAu9ojA02
-         1MOA==;
-        darn=vger.kernel.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="jEEDJvvn";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="R4chrIRt"
+Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68LFAEYX1677375
+	for <linux-arm-msm@vger.kernel.org>; Mon, 21 Sep 2026 15:17:56 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	lC++W42u9nXMDgVyRufwTJ5gNRl3aQXIvbYCUyx9A0M=; b=jEEDJvvnSuuAqf4k
+	BOCUoTtcZ3OXaYsV6vhNRuyrhmvayLSeHO6i3RMbBHL0C7eXq8L6Bg0LRqk1gPZF
+	zIh3OpoalkeT0DtNt0Myo1ZORVe8PlgxqkYWfSkqHOg9qVaxAwNkznPhF93TDbnh
+	/t+P4LiHBRSB/MMDhl1XkCNw+rMTg7b2OOySb3LRPRlR0gRaOuU/AA3JM3qYIe/B
+	DYhJOhWDnZr28JyD/bQGwuOMtZraVo4Gk9RpvS66XN6u8p797aSFcYMQFLY7StBR
+	FpxHsu0HwoIGf0lvYVgRvNLBf3k84RjjGw6KTRQR2i2sycRev47GDDAKpY/vP9Ox
+	qe7jDQ==
+Received: from mail-vs1-f70.google.com (mail-vs1-f70.google.com [209.85.217.70])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gu3csh2d1-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Mon, 21 Sep 2026 15:17:56 +0000 (GMT)
+Received: by mail-vs1-f70.google.com with SMTP id ada2fe7eead31-7a04805f8f1so3075290137.3
+        for <linux-arm-msm@vger.kernel.org>; Mon, 21 Sep 2026 08:17:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1790003713; x=1790608513; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=z6taRN1yfrJhXingP4b7nQEv0S92qILvbAb+oYWwjHI=;
-        b=YYcejnEZUgXmxS+DBiRdXO4VYJ3EkCmVURstwalAAXBeZyJcM53rKczeAGMIpyfnbE
-         lTZHz/YTf+kwkyuZ3lPn40CRhta35f1qzui/vUpObOnDKtNwJ2PBrHoxoavPvm2XaR17
-         pKGwpY44RO8uPDhkrOGkZ/28cPUegfJ5HQMqaKzA74G7Ze7sTRE3brsBgRgv5h8K7heq
-         Xwqiva/zVcyMZ8lDRpoYzwnr+99BS8CSZ/jDlTev+N7FVRBxaAFOTvsXzDEzRyFDkgiF
-         s7Djc5Gnd0xNDxiBkSO1MBJ0EArkcqMCU5PPeMZLL4B2P8NebjRm3o7FW9eU3eahZRvu
-         mYHw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790003713; x=1790608513;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+        d=oss.qualcomm.com; s=google; t=1790003875; x=1790608675; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=z6taRN1yfrJhXingP4b7nQEv0S92qILvbAb+oYWwjHI=;
-        b=ppFTJSXYeGLGKHFOEms3E+pnDc4pjbUCDnQTXW4rRvXZl3XMIO4wKW3JNUJPVE8cIt
-         wzbt/TUU05kScc+eebafULJarNbt5MUa0cO3Xl2AIVYfcw2+3td2eeYusG9ZxKqcoNAV
-         GoqhKwY2tha0QT8G3KXEG9HlwSBHFuT7VKbZLF5qjSbh/kPdp76whZcDW053NwdvxdhE
-         bpA+5j/LWy8MZxvKcGqiIgA6F2/kaV61zgtlsyV98CIRDctcSTK9sZfov+5BwQoMSMP8
-         T+dGxEUcCep9t90EJ2vr20k9NTsyPRvHfKr8AfZhh5k+ni80y0E+ycf6d9uYUE2EKZF0
-         gBTQ==
-X-Forwarded-Encrypted: i=1; AKwUvByAR2zHiK/U2+2IyuAvJtzebeADyccWjxqf7AW/ogmKDMZR1cz7iwu2RZC4ls421Ol9xtw4xPpwu9kMH5Hi@vger.kernel.org
-X-Gm-Message-State: AFuF++nQ3B+bkN77fbjov3bVe5pDF5bJZPHM0q05CvFtzw61QVCqrZNm
-	oPKrCnlsis9TQlqHLROKwDErA7zqaOFwd69FEFSlY9DGfW0nQqWa1JO+Y8niwfhkKsQY29szYuR
-	P4F9DedjJd60zVmkVFtE7PGBpBFbRCTI=
-X-Gm-Gg: AYBFou3ff56hf//ZmYQ2xJdO2ZI3vYpOlo44emKo3Ivs47xfQ9pgAKHa3Kbui4z5+Fg
-	PpO5gEnZZr8hjmxV5m4oU43NxIui8ydMqbz30wsNwdCa0vhnR/OG+fWEE/nU+flome1jWsbNtTE
-	87jeIobR4DfHOGpWu1PKz3bPdUP7ipfJKRFES9UzvOpfpuZedIv8Tw+UGkiRvnB7pjHYK4ZG61e
-	/Kd/2qfoLWxw2gZCqPy3ZhYjajj4a6/AU7czLsTQ1FZfOACh2BLcuh6f+trcaSETJ21A+uEVSCx
-	Xr90BpY+5gLKmsZra+jUUx0B/ojCx2RZb/0YAEjWxNHdyuY/MkYNWj/9UQ==
-X-Received: by 2002:ac5:c802:0:b0:5c9:937a:4670 with SMTP id
- 71dfb90a1353d-5c9b89cddc0mr4130358e0c.1.1790003712920; Mon, 21 Sep 2026
- 08:15:12 -0700 (PDT)
+        bh=lC++W42u9nXMDgVyRufwTJ5gNRl3aQXIvbYCUyx9A0M=;
+        b=R4chrIRt8mprrvBaTbFNZGWUwWGShiQmAJmOxvVaiNZxcD40HBsOYUJCAZ4ysNooBO
+         PGjbnxyzPjFBJKo08YLyOBuHCa3fjUtuMONT66f8pNrxDP2CLhtSEuCsWaEsKxRMSby7
+         jdzC9l/cHfqgfwgJpXgYjdhabhNMhtr8cv5qOvjLqGwlCBqDzvp4jdimYj1Up0b1srGz
+         ij0jGcrL8bPfCvawTycWU3CEbsW4o7HBb33n+yY5o1Fv5sxLM85cGMZVvfdoiE324L/c
+         +H3sMMezUsvX9KxuKFmfRTJ5cA1FMSEXSPZajR9fzSp3hpLlMNSzMTBT2ajCrJXGcoIW
+         Wfuw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1790003875; x=1790608675;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=lC++W42u9nXMDgVyRufwTJ5gNRl3aQXIvbYCUyx9A0M=;
+        b=zaaT+lfAkovfKV9jCwvOeCaypxlbgNydlFI93sVc4t0sgt6Teqn9j5i+Ciaa/R8zCI
+         RHrHs+BtyIjnnEVkCJFeNZtlYOfrhkufbFXbsEhmfJE+M8VUJXxn8lv+Qn/VI8DLaaMP
+         QU22XfUMa+AxyYM7Xbppw0n9TK38O/BP9+A22SdaRD30RMKd8l290PB3PDHSoGhukvEx
+         la0NkyQwYivb/MaXVxiAC4ysbFvSG0s+1lq/P/brrMgEMkMvgMtSvl4e9ngEpVhJaXpW
+         ptJpTwnM6VEdCoVcS7AqQhxRdqrgie6RNspp11EKnKomRTBuODGs4chqU7zU2RQismJ+
+         nFdg==
+X-Forwarded-Encrypted: i=1; AKwUvBxYfgdA0sL0rFcD3UnYVdUxe2110PaMG4FZRpuPTUuRHvaH7NEXDf19zd/CAQL4VnOWFmY1sPAWWsN6HowP@vger.kernel.org
+X-Gm-Message-State: AFuF++nDZwdGdHor8gsj9RpC1sToJf5hQIq//8tUfq9OfXM2aCQqGLVk
+	sj6vmUNOIyeCkeAOWs6XGJW2EJmXNzX2s18Sng/GIi36PJI3Th2U+3sq0PKNo56uMksnRxuvW5K
+	Pq2ganGXW7Q6HUMznrNHDrBipgNlkTKtrBidLFNWgguBcUnSvMRTgAQQofSQO4EsoZvFA
+X-Gm-Gg: AYBFou0hR3H2iYM6sQ4qFXTGxlxlCyQNnY441nM8mBtq7hDevx9EUDQhdhxUbwIFJZ4
+	1vaOaP5wS5B2za3ev1hUFyS5uwi8ogOPJ5i6iPKy1syliSi6xS5Hz7rYEw1FcSzYl1baeOtH3oS
+	hkKtq0r6TfHsCPXnO1ra8mORN0Jli4G+KVtM27sCQ7HqIAMud8VgXsMeKaYYpsn7gZK+wBTLj8d
+	wUbtGPc+rITYcw91Naag5Db4kEe8Q25yfQKz9FisInC0UdsnAzTDUMibFtIFQh5L+E09kBZ58Os
+	XfAQnsbCjXS/Fv/ZlerXd4ujq1QSAHxSK4bJZuTjlRYqOu682XxGVgLHuLUv1JT/C6F6L3nJXuE
+	mr8mcSejnN0xmxG7YbnmURStID8wLOh4yHZp4aSk6
+X-Received: by 2002:a05:6102:5123:b0:7a6:de9a:f4f1 with SMTP id ada2fe7eead31-7a6de9b098amr3369137137.27.1790003875413;
+        Mon, 21 Sep 2026 08:17:55 -0700 (PDT)
+X-Received: by 2002:a05:6102:5123:b0:7a6:de9a:f4f1 with SMTP id ada2fe7eead31-7a6de9b098amr3369092137.27.1790003875011;
+        Mon, 21 Sep 2026 08:17:55 -0700 (PDT)
+Received: from [192.168.1.31] ([85.196.172.179])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-49fc585920fsm630198645e9.4.2026.09.21.08.17.52
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 21 Sep 2026 08:17:53 -0700 (PDT)
+Message-ID: <a51d8129-0167-4b9f-89d6-9623e4d41c49@oss.qualcomm.com>
+Date: Mon, 21 Sep 2026 18:17:50 +0300
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260804181951.5206-1-saileshnandanavanam@gmail.com>
-In-Reply-To: <20260804181951.5206-1-saileshnandanavanam@gmail.com>
-From: Sailesh Nandanavanam <saileshnandanavanam@gmail.com>
-Date: Mon, 21 Sep 2026 20:45:01 +0530
-X-Gm-Features: AcwNN1UK3NxgU8L7a7p0OqKo7KlHJ1rZX_wdea6dW2DleRXUVx778GaLAT1KLDM
-Message-ID: <CAF+TLO1woWAd2WFKBV5T67OsmnV-7JbzAPyotRUz8azyn4+8Rg@mail.gmail.com>
-Subject: Re: [PATCH v4] remoteproc: qcom_q6v5_pas: Fix dtb firmware lifecycle
- and leak
-To: andersson@kernel.org, mathieu.poirier@linaro.org, 
-	mukesh.ojha@oss.qualcomm.com
-Cc: neil.armstrong@linaro.org, linux-arm-msm@vger.kernel.org, 
-	linux-remoteproc@vger.kernel.org, linux-kernel@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 2/3] interconnect: qcom: Add CAMNOC interconnect
+ provider driver
+To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+        Krzysztof Kozlowski <krzk@kernel.org>,
+        Atanas Filipov <atanas.filipov@oss.qualcomm.com>
+Cc: Georgi Djakov <djakov@kernel.org>, linux-arm-msm@vger.kernel.org,
+        linux-pm@vger.kernel.org, Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley
+ <conor+dt@kernel.org>, devicetree@vger.kernel.org,
+        linux-kernel@vger.kernel.org,
+        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+References: <20260819093211.1436275-1-atanas.filipov@oss.qualcomm.com>
+ <20260819093211.1436275-3-atanas.filipov@oss.qualcomm.com>
+ <20260827-adept-traditional-earwig-e2c8c6@quoll>
+ <4fc98d9e-5013-45b4-8fea-d0d6a8feea45@oss.qualcomm.com>
+ <07aeb266-927c-46f6-8363-f26fac7e3aab@oss.qualcomm.com>
+Content-Language: en-US
+From: "Gjorgji Rosikopulos (Consultant)"
+ <gjorgji.rosikopulos@oss.qualcomm.com>
+In-Reply-To: <07aeb266-927c-46f6-8363-f26fac7e3aab@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTIxMDIyMiBTYWx0ZWRfX0QWLNETwcW6/
+ WaHtv59+s/CHJUJy2lXTei64yggrbqXsPQnXNdakixErfnd8QXZEzv3DfYH2TDn2HxgiuqTYVrB
+ X+iP2gI+BiM/ZwycHELMyaNQGJXxBqo=
+X-Proofpoint-GUID: pf3VC5j857jmMQVvN-4Eymo_KdONFWrC
+X-Authority-Analysis: v=2.4 cv=QovLTlyd c=1 sm=1 tr=0 ts=6ab14aa4 cx=c_pps
+ a=N1BjEkVkxJi3uNfLdpvX3g==:117 a=Q/e3f29T3Hw2hnAEzBPF7w==:17
+ a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22
+ a=VwQbUJbxAAAA:8 a=KKAkSRfTAAAA:8 a=EUspDBNiAAAA:8 a=pKspbupdq_hDdIdxj9MA:9
+ a=QEXdDO2ut3YA:10 a=crWF4MFLhNY0qMRaF8an:22 a=cvBusfyB2V15izCimMoJ:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTIxMDIyMiBTYWx0ZWRfX3AjNAHKo4m9X
+ PGxBj8/Ixa96nbmhyMcH+b4AgcE1HMEpKdkaG4BhKwzxmvb3lp1j/1veLZOqCHkUoO/pem3JraK
+ vx3ZIZ5uMbjcS0O1aIamkDZ8muTqAX9qOyTDbPLfteXeDNczWOKfZu6I9oAaao5aYdvkwp7qBpn
+ eVCwd2gmSf3cyB5D5QRwtRi47qdaq0a7kS8mfkikMoXvk8qx7t9LDGe1Tr/kaoio8ftrC0+uKlH
+ 5wBVVe68Zgr9DxwhS5TocJBVzhvlyiyke8DcJ/sYOl57xEd1o60vvWSqAmtlWKpZOIwrkiI2wvK
+ NH5L7EvN1oId+HwSuj6CvTJiXB3n/ndjvJMVSTlGPwbqugCmWubTpuSQylQasdvN7+60AIcR77/
+ qpYsDNcwL4vV6fzAIjNKO4DE1l/jhT4z634iruSp8sj6U9IRE+7OQTNPxcWQsWK4DW7IzOsTY0y
+ k48jKfMNB3gnstGz9sw==
+X-Proofpoint-ORIG-GUID: pf3VC5j857jmMQVvN-4Eymo_KdONFWrC
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-09-21_05,2026-09-21_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ adultscore=0 suspectscore=0 bulkscore=0 impostorscore=0 priorityscore=1501
+ spamscore=0 lowpriorityscore=0 phishscore=0 malwarescore=0 clxscore=1015
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609210222
 
-Hi Mukesh, Bjorn, Mathieu,
+Hi Konrad,
 
-Gentle ping on this v4. It moves the DTB firmware request/release
-into qcom_pas_start() as Mukesh suggested on v1, so the reference is
-released on every failure path after the request, including a failure
-in qcom_q6v5_prepare(), and on the success path.
+On 9/21/2026 5:17 PM, Konrad Dybcio wrote:
+> On 9/9/26 2:58 PM, Gjorgji Rosikopulos (Consultant) wrote:
+>> Hi Krzysztof,
+>>
+>> Thanks for the review.
+>>
+>> On 8/27/2026 12:25 PM, Krzysztof Kozlowski wrote:
+>>> On Wed, Aug 19, 2026 at 12:32:10PM +0300, Atanas Filipov wrote:
+>>>> Add an ICC provider for the Qualcomm Camera NOC (CAMNOC). Multiple
+>>>> camera sub-devices share CAM_CC_CAMNOC_AXI_CLK; direct clk_set_rate()
+>>>> calls from each consumer cause a last-writer-wins race.
+>>>>
+>>>> Each consumer obtains an ICC path to SLAVE_CAMNOC_AXI and votes via
+>>>> icc_set_bw(). The ICC core aggregates votes (max peak_bw) and the
+>>>> set() callback converts the result to clk_set_rate(). Consumers
+>>>> encode the required frequency as peak_bw in kBps.
+>>>>
+>>>> Signed-off-by: Atanas Filipov <atanas.filipov@oss.qualcomm.com>
+>>>> ---
+> 
+> [...]
+> 
+>> Maybe those series should be marked as RFC. The basic idea is to manage clocks as interconnect providers,
+>> similar to this change: https://lore.kernel.org/all/20230512001334.2983048-3-dmitry.baryshkov@linaro.org/
+>>
+>> There is requirement to maintain higher clock rate on source clocks and some place to aggregate them.
+>> One example is camnoc axi clock which is used by jpeg, camss, ope and maybe other drivers.
+>> The interconnect has already functionality inplace to maintain higher
+>> bw per request which can be used for maintaining higher clock frequency from requested drivers.
+>>
+>> One option is to use already available icc-clk provider, but we have to add many icc providers
+>> instead one provider with many ports.
+> 
+> icc-clk provides N clocks, it has M clients voting on each one and
+> avg/peak bandwidth aggregation happens at the icc core so this
+> should just work - or are we thinking about different problems?
 
-It still applies cleanly on next-20260918 and builds for arm64.
-Mukesh, could you take another look and let me know if this now
-matches what you had in mind?
+That is correct thanks for pointing that, i have double checked, please ignore this series new version will use icc-clk.
 
-Thanks,
-Sailesh
-
-
-On Tue, Aug 4, 2026 at 11:50=E2=80=AFPM Sailesh Nandanavanam
-<saileshnandanavanam@gmail.com> wrote:
->
-> DTB co-firmware was previously requested and loaded in
-> qcom_pas_load(), but its lifetime did not match the actual
-> start/stop lifecycle of the remoteproc. As a result, the firmware
-> reference could be retained across restart cycles, leading to a
-> leak for each successful boot.
->
-> Additionally, if qcom_pas_start() failed after loading the DTB
-> firmware, the remoteproc core would not invoke .stop(), leaving
-> no opportunity to release the associated firmware reference.
->
-> Fix this by moving DTB firmware request and loading into
-> qcom_pas_start(), so that its lifetime is strictly tied to the
-> remoteproc start sequence.
->
-> Update qcom_pas_start() to ensure proper cleanup on all paths:
-> - release PAS metadata on failure
-> - release DTB firmware on both success and failure paths
-> - unmap DTB carveout where applicable
->
-> Remove DTB firmware handling from qcom_pas_load(), as it does not
-> match the correct ownership and lifecycle model.
->
-> With this change, request_firmware() and release_firmware() are
-> properly paired within the start path, avoiding leaks and ensuring
-> consistent behavior across restart and failure scenarios.
->
-> Fixes: 29814986b82e ("remoteproc: qcom_q6v5_pas: add support for dtb co-f=
-irmware loading")
-> Signed-off-by: Sailesh Nandanavanam <saileshnandanavanam@gmail.com>
-> ---
-> v4:
-> - Rebase onto linux-next
-> - Remove unused int ret from qcom_pas_load()
->
-> v3:
-> - Remove the unused release_dtb_firmware label
-> - Release DTB firmware under the existing dtb_pas_id check
->
-> v2:
-> - Move DTB firmware request/load from qcom_pas_load() to qcom_pas_start()
-> - Fix firmware reference leak across restart cycles
-> - Handle start() failure paths where .stop() is not invoked
-> - Ensure firmware is released on all success and failure paths
-> - Remove DTB handling from load() and drop release from stop()
-> ---
->  drivers/remoteproc/qcom_q6v5_pas.c | 47 +++++++++++++++++-------------
->  1 file changed, 26 insertions(+), 21 deletions(-)
->
-> diff --git a/drivers/remoteproc/qcom_q6v5_pas.c b/drivers/remoteproc/qcom=
-_q6v5_pas.c
-> index ca8e61254c44..864446a484f1 100644
-> --- a/drivers/remoteproc/qcom_q6v5_pas.c
-> +++ b/drivers/remoteproc/qcom_q6v5_pas.c
-> @@ -231,7 +231,6 @@ static int qcom_pas_unprepare(struct rproc *rproc)
->  static int qcom_pas_load(struct rproc *rproc, const struct firmware *fw)
->  {
->         struct qcom_pas *pas =3D rproc->priv;
-> -       int ret;
->
->         /* Store firmware handle to be used in qcom_pas_start() */
->         pas->firmware =3D fw;
-> @@ -241,23 +240,6 @@ static int qcom_pas_load(struct rproc *rproc, const =
-struct firmware *fw)
->         if (pas->lite_dtb_pas_id)
->                 qcom_pas_shutdown(pas->lite_dtb_pas_id);
->
-> -       if (pas->dtb_pas_id) {
-> -               ret =3D request_firmware(&pas->dtb_firmware, pas->dtb_fir=
-mware_name, pas->dev);
-> -               if (ret) {
-> -                       dev_err(pas->dev, "request_firmware failed for %s=
-: %d\n",
-> -                               pas->dtb_firmware_name, ret);
-> -                       return ret;
-> -               }
-> -
-> -               ret =3D qcom_mdt_pas_load(pas->dtb_pas_ctx, pas->dtb_firm=
-ware,
-> -                                       pas->dtb_firmware_name, &pas->dtb=
-_mem_reloc);
-> -               if (ret) {
-> -                       qcom_pas_metadata_release(pas->dtb_pas_ctx);
-> -                       release_firmware(pas->dtb_firmware);
-> -                       return ret;
-> -               }
-> -       }
-> -
->         return 0;
->  }
->
-> @@ -282,9 +264,23 @@ static int qcom_pas_start(struct rproc *rproc)
->         struct qcom_pas *pas =3D rproc->priv;
->         int ret;
->
-> +       if (pas->dtb_pas_id) {
-> +               ret =3D request_firmware(&pas->dtb_firmware, pas->dtb_fir=
-mware_name, pas->dev);
-> +               if (ret) {
-> +                       dev_err(pas->dev, "request_firmware failed for %s=
-: %d\n",
-> +                               pas->dtb_firmware_name, ret);
-> +                       return ret;
-> +               }
-> +
-> +               ret =3D qcom_mdt_pas_load(pas->dtb_pas_ctx, pas->dtb_firm=
-ware,
-> +                               pas->dtb_firmware_name, &pas->dtb_mem_rel=
-oc);
-> +               if (ret)
-> +                       goto release_dtb_metadata;
-> +       }
-> +
->         ret =3D qcom_q6v5_prepare(&pas->q6v5);
->         if (ret)
-> -               return ret;
-> +               goto release_dtb_metadata;
->
->         ret =3D qcom_pas_pds_enable(pas, pas->proxy_pds, pas->proxy_pd_co=
-unt);
->         if (ret < 0)
-> @@ -352,6 +348,11 @@ static int qcom_pas_start(struct rproc *rproc)
->         if (pas->dtb_pas_id)
->                 qcom_pas_metadata_release(pas->dtb_pas_ctx);
->
-> +       if (pas->dtb_pas_id) {
-> +               release_firmware(pas->dtb_firmware);
-> +               pas->dtb_firmware =3D NULL;
-> +       }
-> +
->         /* firmware is used to pass reference from qcom_pas_start(), drop=
- it now */
->         pas->firmware =3D NULL;
->
-> @@ -361,8 +362,6 @@ static int qcom_pas_start(struct rproc *rproc)
->         qcom_pas_unmap_carveout(rproc, pas->mem_phys, pas->mem_size);
->  release_pas_metadata:
->         qcom_pas_metadata_release(pas->pas_ctx);
-> -       if (pas->dtb_pas_id)
-> -               qcom_pas_metadata_release(pas->dtb_pas_ctx);
->
->  unmap_dtb_carveout:
->         if (pas->dtb_pas_id)
-> @@ -381,6 +380,12 @@ static int qcom_pas_start(struct rproc *rproc)
->         qcom_pas_pds_disable(pas, pas->proxy_pds, pas->proxy_pd_count);
->  disable_irqs:
->         qcom_q6v5_unprepare(&pas->q6v5);
-> +release_dtb_metadata:
-> +       if (pas->dtb_pas_id) {
-> +               qcom_pas_metadata_release(pas->dtb_pas_ctx);
-> +               release_firmware(pas->dtb_firmware);
-> +               pas->dtb_firmware =3D NULL;
-> +       }
->
->         /* firmware is used to pass reference from qcom_pas_start(), drop=
- it now */
->         pas->firmware =3D NULL;
-> --
-> 2.34.1
->
+Regards,
+~Gjorgji
