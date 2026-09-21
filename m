@@ -1,87 +1,39 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from ixit.cz (ixit.cz [84.42.129.46])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A7471421239
-	for <linux-arm-msm@vger.kernel.org>; Mon, 21 Sep 2026 11:10:52 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D7FAE42F709;
+	Mon, 21 Sep 2026 11:11:22 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=84.42.129.46
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789989054; cv=none; b=Vvj4MwJsoyMfRfSTZrc8gNvAr5x0KiD1z2fjN4bHG9xJSn4O7KJQJM7M23wIXS8xypsdshAnkGAP+IdJBMSuM3UcxKDyKJBkkf8yP1wbO9FULHxyPZxoeQ+C9Avv/KHYdUF7DmKLEz9F+WtFZCL6MYREXC3nDuFV2aFKzTR3IOs=
+	t=1789989085; cv=none; b=itIPDjksUHf+xcxfrRCxs5YOepeNzM2LHJ/8OFjdf+f5MrouDEyenG/UQbWzNShnGrdR2MhI1wJ6y6jH/LMyoMIJVzyp3ipCApgtQmGiEP2jPXwBU5pmaebUxI3Du2eHDoNXPPyR/XWL3/UMSmRTqtdec9OjGqwW4/oUyaUfEAI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789989054; c=relaxed/simple;
-	bh=zZANITfBAADxe2aXB4OWVwHM5pufoz95Xh2AMggtPoE=;
+	s=arc-20240116; t=1789989085; c=relaxed/simple;
+	bh=KVmw4/iCMEr46CN6E/02QkIGZ5qIw/ifaBePmcgBqkE=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=ZaxXmzJkvoqelo2iJPrs9+gXHwEUQYiUmskOGktSjcmlGC6eM/YQi7ritfgw8BsKkX6mDYz7dZFYeiXrkldBu8g0fp8AFzayoQcDk2izCdYlK6nTypBr63zvczW16Yd4UFZGYJ0TOYnHTA3SjQWB4TF64RQIEM3kE9LgKf++bFk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=i7e8JBON; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=XI4CGvgE; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	 In-Reply-To:Content-Type; b=nC0nHy9uGmaoLhqwYXlELYAB1NNHeMVz5FpRBGffWfcaSrn3rW/Icyyb8h/xeY3bEQ9qv8r71XK/rWNbLbZkXCxxFymgem8pzjDbY5xqAV1KuhMDaQfYL81e6yxIbatbN9iUNz8o8gC35m5lwW3GhB/NTyBLSWlgQ7v0tsPb+go=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=ixit.cz; spf=pass smtp.mailfrom=ixit.cz; dkim=pass (1024-bit key) header.d=ixit.cz header.i=@ixit.cz header.b=IuzV5ABl; arc=none smtp.client-ip=84.42.129.46
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=ixit.cz
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ixit.cz
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="i7e8JBON";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="XI4CGvgE"
-Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68LAdw38287340
-	for <linux-arm-msm@vger.kernel.org>; Mon, 21 Sep 2026 11:10:50 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	zZANITfBAADxe2aXB4OWVwHM5pufoz95Xh2AMggtPoE=; b=i7e8JBONAiXXKK4Q
-	lpdqo7alndneFLzoUNWLrBCZuoAeFmIkdBc2ILMSlRq3GNinlG4VAKSptMxAaher
-	N4mGx0oY6DbUidSUtvkgwQ+6apktN0UyMA+2LcOR2zW34Lm5ErBmbJIpUhCmrn7E
-	19eM1sJ9OSKcwglsEwQHBgOq/hzsjPp7niQUMpTRCE8eynuN5N+WiJBvgMkukvUT
-	hlEvsU0CAM4RPqG5vrNCy6MlEcj7GrCKGUC7QB3bRN/RzLP/jG5iPDvHwgdfw76p
-	q3wYIb8U5Zhy6mDDCYZaBkOvDEZTxyHFjZqe7WHPOR0zKhw40ng1uKxGHtzPydwN
-	ZHjK1w==
-Received: from mail-pj1-f69.google.com (mail-pj1-f69.google.com [209.85.216.69])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gu0rj0rdb-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Mon, 21 Sep 2026 11:10:50 +0000 (GMT)
-Received: by mail-pj1-f69.google.com with SMTP id 98e67ed59e1d1-39b77130a7fso5311866a91.2
-        for <linux-arm-msm@vger.kernel.org>; Mon, 21 Sep 2026 04:10:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1789989050; x=1790593850; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=zZANITfBAADxe2aXB4OWVwHM5pufoz95Xh2AMggtPoE=;
-        b=XI4CGvgECsv7jX40aXezwpby6V4FeAs5IYMPst4H1oFcrp7lYQAkID4jdbgU63zSeq
-         iGTgsDzokTD1kl7xIOarT3/ESqxAq6ELp+h0faLI961X0On+c0OgUzQfgTAVLQr8RNjt
-         1tijoNTI/vWvGoWuGRNF34DjZ+zR7BiZW4JHafAjeMciedVduL8IuROPyNfxPn32jugf
-         UiWnd880cz0a0Rt5UfpG9DbNweSlPLxVilynA/8v44BxjgOH9z/1m0qnY1UWKTZ/HVHC
-         y/rap1Xfk+FoPVHXwolrKmIt8xttg+UQNwylcw59z365XZL337uV8LaHFIYdOaxUxbk2
-         TXhw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1789989050; x=1790593850;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=zZANITfBAADxe2aXB4OWVwHM5pufoz95Xh2AMggtPoE=;
-        b=m6r59TzT5Ae2rm9WFP45GpsyHFahnj290wLKg4bRKrYakWD2W9cBNWIowIgk1hv+d8
-         RBEV3QdQgG7cmkOPtV2O/8R0CmGzXqBrwiyNcBA5yXURzDq261MS+M0UbE/4o5X31w8m
-         /YlTFHmnv0wvLMHQ/OCx+74HMviCsOo+2sRlgoouafDC+fvQgykttASczCOE80Xnpk/n
-         N1toto/KWX/7qsTrUYGCFjjaqgm+Dk5xtAWspoRvPD9aAAu4rjBxH02ziNGDR05u8To/
-         CXiGKmCbBDL/86K9BN5AF5mFgFf77du2jT/6URZnB8plTHMWlOE186oAzZe+4EnP8hHp
-         00EQ==
-X-Gm-Message-State: AFuF++nEYn/76+Owiprhh6QtdAOEitvnxsFEhY8uVIm3382EBzC1d2c0
-	PyhUNgCVfqEmutIH7YVMzyBW+Y1E/CQp8y95QXpyyYYS1funQhoD+0bgzltO8PQ8er938UlnPDF
-	uGRRXfc7Qm/3rEggUYIohTA+EcF5NR8yWexRJmqL+jRn3/VTEdD3I2H8dt4dDwxVtV5NV0agQu9
-	uf
-X-Gm-Gg: AYBFou10hz9kGCSMgzXxiwZkFLNEUw5lSIxEKTrqszklfxGOwZLT2hqZDBhHKQeBWqa
-	u7SIRNpLCu8abwzEyL9JLqm+ieFVmTDU8oNe9HusCBh6H3kzQZS1vcSIhudOONSj4RaRYY/DpY8
-	abMM/Ixvyh0GVJMHCDWelJQMTZclYyONFPyswaA4c74u+U1Fe9WIy5sjacm9A4Bsn5DfpL+qMrr
-	MX6rl68lqbEOvW8AgUEiGnBX9wR4gO9Sf2p4d60VOnoyDisQoankYG2Nz35eErM6/OHTbKHri6C
-	R2ALK89GLL+L20ZmecqBwomdprDtK6mBHLEzRm8FI2prJyuGdU3THGwNmfHrNejyg4lJMdsCUkq
-	f2jxmCISWA5bSa0nADI8XJtyeh17hjLoiHw==
-X-Received: by 2002:a17:90b:3fcc:b0:39e:6c69:34d8 with SMTP id 98e67ed59e1d1-39e6c6936a4mr9598892a91.60.1789989049657;
-        Mon, 21 Sep 2026 04:10:49 -0700 (PDT)
-X-Received: by 2002:a17:90b:3fcc:b0:39e:6c69:34d8 with SMTP id 98e67ed59e1d1-39e6c6936a4mr9598852a91.60.1789989049167;
-        Mon, 21 Sep 2026 04:10:49 -0700 (PDT)
-Received: from [10.218.42.145] ([202.46.22.19])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-144d55f299fsm34170227c88.15.2026.09.21.04.10.45
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 21 Sep 2026 04:10:48 -0700 (PDT)
-Message-ID: <f2324e26-88a3-4411-acd5-9645552c4a14@oss.qualcomm.com>
-Date: Mon, 21 Sep 2026 16:40:43 +0530
+	dkim=pass (1024-bit key) header.d=ixit.cz header.i=@ixit.cz header.b="IuzV5ABl"
+Received: from [IPV6:2a02:830a:f787:8f00:d622:eaa3:3dd6:8f5e] (unknown [IPv6:2a02:830a:f787:8f00:d622:eaa3:3dd6:8f5e])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange x25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by ixit.cz (Postfix) with ESMTPSA id 4704753406D6;
+	Mon, 21 Sep 2026 13:11:19 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ixit.cz; s=dkim;
+	t=1789989079;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+	bh=IecxrbI1Oxnp6UQdEsBFcFLuXx/aPYWQ+14ndTQaXH8=;
+	b=IuzV5ABlF2Hqnl2UjIxaHjpRF7887QNhwI1nyJit5VuxSJkEEU5y+SwAiglo02WsfREJd6
+	yOezSg/vXNFecdwryc1fl0z89Ge8pplzks8FFj9ntdMkygeeko5gm5/e5+1usvVvyUsq2t
+	ysSEn8nmOgPKXlxwPqEbAkdySsg5xdM=
+Message-ID: <426b6aeb-578f-43ee-865d-30e69b7bb2f2@ixit.cz>
+Date: Mon, 21 Sep 2026 13:11:18 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -89,87 +41,124 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 0/8] arm64: dts: qcom: Add t-power-on-us property for PCIe
- root ports
-To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org, mani@kernel.org
-References: <20260911-t_pwr_on-v1-0-c9eee197d082@oss.qualcomm.com>
- <d5821380-3006-4eb6-86fd-977d6e17a8bd@oss.qualcomm.com>
-Content-Language: en-US
-From: Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>
-In-Reply-To: <d5821380-3006-4eb6-86fd-977d6e17a8bd@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTIxMDE2MSBTYWx0ZWRfX6fG8EJLjfuDA
- EJo9zlSQqvkTZ0JTqhYondiwBFj6gsnv01PXmONfLmY7pBjCabfNepExeZJU8bZnpnvtKFjKbzT
- wrQJhFYKyJwBHKsGlDuNk2/sY2HwVMo=
-X-Authority-Analysis: v=2.4 cv=AsR7T+9P c=1 sm=1 tr=0 ts=6ab110ba cx=c_pps
- a=vVfyC5vLCtgYJKYeQD43oA==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
- a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22
- a=LDKDF4IIlJaBd5xfOUkA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
- a=rl5im9kqc5Lf4LNbBjHf:22
-X-Proofpoint-GUID: Jp-KnhENsnjEk_x2_ly-dgPmX-Xu4Mht
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTIxMDE2MSBTYWx0ZWRfX2lUtaHdXiDIK
- 7wyAhDu/73HT6yPFSDqeo00cPWxiAajmOmE/FSgiL177JqpmCeLzRukJrq8Qj2uVnIb5R+NjYuA
- zhT0NDzhk9IXyVcQ5uybFJfp8YQHRzHWW/6qjFlfj9+8d5oDP6XJR/+hXBrDnGGu5UpPocFxm12
- qm0ws7f1YF1DuAZMxZdiGnn1GxRDhS5dSjae4TYmV0gJYAD43MdfkpQamm3NtbTO+r3/eNWsmx2
- Z2cXFxaGkI2BZqEqsJpYDyyE3cevwjAYIpyClc/reK/Mjrmq9qa/+rCjyFl88x3WoYgBBGP/995
- iMvpY4QKC+8bKU/NIo8BPRal6Mh1Day3nBIFRPGbll/lLjWehd0BXNOIhnbZv9R8GnjwLF8lN6W
- +mcJDDC+HCUGcowXWnWMgPZy1yAB5JTXhUBAszNVNx6Ebxnz2f+hnluSa2WPC+gDWf9+vNoTvC/
- LUeWD/Rqn2GU8Bhpe4Q==
-X-Proofpoint-ORIG-GUID: Jp-KnhENsnjEk_x2_ly-dgPmX-Xu4Mht
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-21_04,2026-09-16_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 spamscore=0 malwarescore=0 suspectscore=0 clxscore=1015
- impostorscore=0 adultscore=0 lowpriorityscore=0 phishscore=0 bulkscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609210161
+Subject: Re: [PATCH v4 2/4] backlight: qcom-wled: Fix WLED3 brightness
+ register stride
+To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, Lee Jones
+ <lee@kernel.org>, Daniel Thompson <danielt@kernel.org>,
+ Jingoo Han <jingoohan1@gmail.com>, Helge Deller <deller@gmx.de>,
+ Kiran Gunda <quic_kgunda@quicinc.com>,
+ Marco Mattiolo <marco.mattiolo@hotmail.it>,
+ =?UTF-8?B?QmFybmFiw6FzIEN6w6ltw6Fu?= <barnabas.czeman@mainlining.org>
+Cc: linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ linux-fbdev@vger.kernel.org, linux-kernel@vger.kernel.org,
+ phone-devel@vger.kernel.org, Joel Selvaraj <foss@joelselvaraj.com>,
+ stable@vger.kernel.org
+References: <20260921-qcom-wled-backlight-v4-0-bab8c7ef73cb@ixit.cz>
+ <20260921-qcom-wled-backlight-v4-2-bab8c7ef73cb@ixit.cz>
+ <22355625-a2ea-4b6e-99b3-65cf93ac8034@oss.qualcomm.com>
+Content-Language: en-US, cs-CZ
+From: David Heidelberg <david@ixit.cz>
+Autocrypt: addr=david@ixit.cz; keydata=
+ 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
+In-Reply-To: <22355625-a2ea-4b6e-99b3-65cf93ac8034@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-
-
-On 9/21/2026 2:09 PM, Konrad Dybcio wrote:
-> On 9/11/26 8:50 AM, Krishna Chaitanya Chundru wrote:
->> The Qualcomm PCIe host controller driver added support for parsing the
->> -power-on-us property[1] from each Root Port node and programming it as
->> art of host initialization (PCI: qcom: Program T_POWER_ON) [2]. Prior to
->> this, T_POWER_ON was expected to be programmed correctly in hardware or
->> by the bootloader, but not all targets support this, which can lead to an
->> incorrectly calculated LTR_L1.2_THRESHOLD in aspm.c and improper L1.2 exit
->> behavior.
-> This is a good problem description. Does it have observable effects
-> that could also be mentioned here, beyond perhaps lspci reporting
-> an odd value?
-we haven't seen direct problem till now, but we might seen some issue due to
-incorrect LTR_L1.2_THRESHOLD value.
->> This series adds the t-power-on-us = <80>; property to the PCIe root
->> port node(s) on the following targets, so the controller programs the
->> correct T_POWER_ON value instead of relying on the (currently incorrect)
->> hardware default:
+On 21/09/2026 13:08, Konrad Dybcio wrote:
+> On 9/21/26 12:46 PM, David Heidelberg via B4 Relay wrote:
+>> From: David Heidelberg <david@ixit.cz>
 >>
->> - kodiak
->> - lemans
->> - monaco
->> - hamoa
->> - glymur
->> - talos
->> - sm8750
->> - kaanapali
-> Because you said "currently incorrect", it clearly applies to all of
-> these platforms. Are other ones that we support in the tree also
-> affected?
-yes all targets  will be affected, not sure about ipq platforms.
-I added mostly active targets which we are currently using, I can extend if
-recommended.
+>> WLED3 has a 16-bit brightness register pair per string, at 0x40 + 2*n,
+>> which is what the pm8941-wled driver wrote to:
+>>
+>> 	rc = regmap_bulk_write(wled->regmap,
+>> 			wled->addr + WLED3_CTRL_REG_VAL_BASE + 2 * i,
+>> 			v, 2);
+>>
+>> The restructuring for WLED3 turned that into WLED3_SINK_REG_BRIGHT(n),
+>> defined as 0x40 + n, so the two byte writes for consecutive strings
+>> overlap: string 1 overwrites the MSB of string 0 with its own LSB, and
+>> with the default three strings only string 1 ends up with the requested
+>> value.
+>>
+>> Use the 2 byte stride.
+>>
+>> Fixes: 775d2ffb4af6 ("backlight: qcom-wled: Restructure the driver for WLED3")
+>> Cc: stable@vger.kernel.org
+>> Assisted-by: LLM
+>> Signed-off-by: David Heidelberg <david@ixit.cz>
+>> ---
+>>   drivers/video/backlight/qcom-wled.c | 2 +-
+>>   1 file changed, 1 insertion(+), 1 deletion(-)
+>>
+>> diff --git a/drivers/video/backlight/qcom-wled.c b/drivers/video/backlight/qcom-wled.c
+>> index 2281007bdd459..f452d328997ad 100644
+>> --- a/drivers/video/backlight/qcom-wled.c
+>> +++ b/drivers/video/backlight/qcom-wled.c
+>> @@ -54,17 +54,17 @@
+>>   #define WLED3_SINK_REG_SYNC				0x47
+>>   #define  WLED3_SINK_REG_SYNC_CLEAR			0x00
+>>   
+>>   #define WLED3_SINK_REG_CURR_SINK			0x4f
+>>   #define  WLED3_SINK_REG_CURR_SINK_MASK			GENMASK(7, 5)
+>>   #define  WLED3_SINK_REG_CURR_SINK_SHFT			5
+>>   
+>>   /* WLED3 specific per-'string' registers below */
+>> -#define WLED3_SINK_REG_BRIGHT(n)			(0x40 + n)
+>> +#define WLED3_SINK_REG_BRIGHT(n)			(0x40 + (n * 0x2))
+> 
+> Ideally n would be wrapped in its own parentheses (doesn't
+> checkpatch warn against that?)
 
-- Krishna Chaitanya.
->
+Yeah it does, thou not sure it make sense here.
+If needed, I'll send another version with it... :)
+
+Thanks
+David
+
+> 
+> Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+> 
 > Konrad
 
