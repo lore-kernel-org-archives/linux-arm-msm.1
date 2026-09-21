@@ -1,323 +1,103 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C54DA43E07A
-	for <linux-arm-msm@vger.kernel.org>; Mon, 21 Sep 2026 20:36:06 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C8412466B03;
+	Mon, 21 Sep 2026 20:47:07 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790022968; cv=none; b=GQphN4TcgpsAr2A4SaLwCM8fBMLYfbdYPGxIAzATFAi7oX/ZMew4l0wJYz3lJGOzDcBawc39G/ed7xCLYEDAD5LheRP+AWTc7gBThw+I9FmbgX0glMvT0iBi3IyEyrHJZewXcFMJHQ/XhJ4IuZMooua84MDGsc9xKWaUZNUuzg8=
+	t=1790023629; cv=none; b=JAKqDYlJ1UdB1Jvl6mz+wnDnnKXA6Lp3mrcyYGPpeJobUZG1VoFSvhb9TBZAqR/oaKChcFy9+aEeBfRZ0qadWlXS0aujN88nsiyNg2XgkEoBPOrNMyrQa09oLfDUK6MS+HJmJSZh1YmHlXOp30znJYxTFH6+O3FqGTIaUXVn+6o=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790022968; c=relaxed/simple;
-	bh=8X0NcnAyyYZrxMbslV2a8BYmyIWH8krztSLCg+aMn6s=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=QFbyjy4XyOjX5/+CZPgSWtw7ga3NNDYswoIBJs2ml0O0iTofCYWHdlxb0RVZfwoj8u88ReVDWQuI1eQc+ePoLM2PzgjR1W9P+Oqryvu8kC5ijHru17IQSGDPydpGLcIc5uuX1mp+FrYou+DGOcw9qsNciphj5f4lRsxMkf47+Lc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=VefK8UL6; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=EVIyNnyG; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1790023629; c=relaxed/simple;
+	bh=ilpyVqJgSU3HEse/418iMePsxtaa4i5XQ3pcDEDgqMA=;
+	h=Date:Message-ID:From:To:Cc:Subject:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=iq9H1l1Hnm/UXmVqcUZwES7W1fGyNaE7X0OD5aViz6/UXKKx34tU2JJUbbKh7QRjHBQrHxeVq2wSgli56vufR5oqSAcljV2V28zCOsDK7rERunnwNX4c9uySwpSYDpge/ud+BsMD/R6l1FvQhL056GVPsAHLBgVZY5N3ysJv63c=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=A9MyW6Cl; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="VefK8UL6";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="EVIyNnyG"
-Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68LKWb0T827728
-	for <linux-arm-msm@vger.kernel.org>; Mon, 21 Sep 2026 20:36:06 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	x5AIKP1mP34Wx9dw84lO7Zn0zSS/9x6lk1WSUH1MKxg=; b=VefK8UL62syGlWw0
-	C4PlvfAlL6cxbSmQ9Cjig+H6SMW6jZDpQrSNe8cl9xZJMri2zT8KEcHjenoxv3g7
-	A/segX7gVa9yKyiJ6HkHE4Bxf/7m7oGiZsHJ2uWaBkAWxvlYKbwzmJ+me1u1+X+x
-	Nm6KzRnJVDJ7i68qlZ7jpPWXnpd3vd8rHTCIQEdQ/KFVMBy8q6hRRr51gNSenr1P
-	h8fbALFHlQTT8tS0oOd1qM411ZdXGstdEHzSfMobUNZa+mQ/cdZ8M9L008vEwKC/
-	JKAM6Ad4myRowaZEO32frdAHpZjMRCeY+d6mjSn5xaJJsvXb9Vp+23eAm6N6I5n/
-	YSZKFQ==
-Received: from mail-pj1-f71.google.com (mail-pj1-f71.google.com [209.85.216.71])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gu17gty44-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Mon, 21 Sep 2026 20:36:05 +0000 (GMT)
-Received: by mail-pj1-f71.google.com with SMTP id 98e67ed59e1d1-39d865b11b4so4647020a91.3
-        for <linux-arm-msm@vger.kernel.org>; Mon, 21 Sep 2026 13:36:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1790022965; x=1790627765; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=x5AIKP1mP34Wx9dw84lO7Zn0zSS/9x6lk1WSUH1MKxg=;
-        b=EVIyNnyG5EFumc9o5uEqZehUuk6FQoL6l9a34mG3A32INEX1qY/IuAxLCT7e+SlsTU
-         oFXZiMpmK8CDWrWwveo53NU5UCOSAolgvJKvQhHc3DwqpNkCyq3kfdXmFr6e86FDL6KL
-         nInKtIe1CrR7GixAOG4SH0R/XJhc4tGAKgiRziLBxKnRyJ9xMgGC0RbVQ+CuE5chVcqb
-         pPP/ag/RCgt8UJJrJ8mcKcZ3I83KY25bNpfRaXDDTvekK39axl8xYBnj8Se6+KiDBwDf
-         FY6LEp9kGU/VuPgsCEjo9hNgYHLqTZM0xUcfO8lTGI98X9QBozKw5tVZtE7bd6K3AmIV
-         rAbw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790022965; x=1790627765;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=x5AIKP1mP34Wx9dw84lO7Zn0zSS/9x6lk1WSUH1MKxg=;
-        b=teu0HC6BhXoDQCRMqnhUT+JrjbGm55k1DlJst7d1AFYnAIYjRag5iVxbXuNUwLqSvH
-         YcCI8M8G+7BOeJW1ZxB2CdNn9VRXDPKTObxSTpTZHJVWCPYng0k3+jYt12AhW1yeY84o
-         11gtOPJOIX88u3jdLS/ueeJFkLr6W1jpJ+5FeSpgZUoJC4ZSmcsTr0b4MP8ipAvCLwzW
-         G2Ty1MzMxzw4TdKkfuBwAGCKyTRBYYweCgGXsMp9tsHQjESUb4CPTyVLCPJPdtBhKzjv
-         6e/jJX1Tv1YUUbqGVFpNL/dOhpkHzphZ2pqZaZ5T8w6l+aa2sSQSTnst/MXtHOqI6K4D
-         7gZg==
-X-Forwarded-Encrypted: i=1; AKwUvByKmlJ9YvXo6lWsMf1QrVE/9EzLk3GZFgpj2EfGk+X30zGwwxKBnKTaX4jKgZMUlGrDat4QbEguXpjmP8pP@vger.kernel.org
-X-Gm-Message-State: AFuF++nVmEeV/8fxmH5zRtxfSq8MN+6DjiotzGXoaaqWa9o4v6q9m6Zl
-	AkILEqpeRtH1cT44jqhYtK/iS/kWFC26Se4EPyWmTLs6P7KCRjOj7Hv0qWxwfULwvUA28047HNA
-	eellytJ556grzTf9Pj5ikHb28ZdHbx0dBMTpn6435LfopVswSO5RDLcn4wanIwiF+whby
-X-Gm-Gg: AYBFou1nda5tFmQYI20oEtqnk7LXobBkYSOe12eCQ3xtpuMiIaVQ3o8wqhtPZmAnHai
-	mFLU1jRymDs9E+Q/GKAX59aGmcDzMGpCkcgPS6NRg4EDMUmxYI026SedvxXsm6PH77XT48yN779
-	cQdMQSMRWnJW+9wWq5eQUi7XkDOQG8Vkq8LyHLSMPCyN2NPKhDKORfGB93TIzMN1O2N2QqbUzBT
-	y1LSHXbaVx+F1vcXLyNrGibmsisaGagpQRmPBRYW6hWKD+wyqviP9R34MswEVnda9YZbJPrne8I
-	OtjD9efTPdKSIRY2JbJRndXgB/rledrjCkzB/OUYl/gDqGbovRcTlj0im03FZ5fA/h1RJ9N0pMm
-	tHApt8hBskoAf/RuASlJaiC+I8vh+T9Tkiw==
-X-Received: by 2002:a17:90b:17c2:b0:39e:6c69:f471 with SMTP id 98e67ed59e1d1-39e6c69f552mr11786916a91.48.1790022964958;
-        Mon, 21 Sep 2026 13:36:04 -0700 (PDT)
-X-Received: by 2002:a17:90b:17c2:b0:39e:6c69:f471 with SMTP id 98e67ed59e1d1-39e6c69f552mr11786876a91.48.1790022964357;
-        Mon, 21 Sep 2026 13:36:04 -0700 (PDT)
-Received: from [192.168.1.5] ([106.222.229.14])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3a0696b0d1fsm470437a91.1.2026.09.21.13.35.59
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 21 Sep 2026 13:36:03 -0700 (PDT)
-Message-ID: <9fc5a569-003b-4d5e-a943-04ebfdd1e9bd@oss.qualcomm.com>
-Date: Tue, 22 Sep 2026 02:05:57 +0530
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="A9MyW6Cl"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 32DC61F000FF;
+	Mon, 21 Sep 2026 20:47:07 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1790023627;
+	bh=Ko4Gf+zSQOcJcphHQgMnnkgQDY5pgWY7p9IyRHfB4/0=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References;
+	b=A9MyW6ClUIwiasLziBkZ+OyuPfsk9bbBKG4b+RgpCY+IyOnpO8MN9pQI9jbT3lytw
+	 h63Di1QbjriRdp6mSZj/zicNtlh09KHpt7vjsInlasLwulIbpM33IxoZdPMWhX/3hV
+	 ahobY/sPbiSbdW7LhjwQcfmWMJtY9/4PbKHaYV64OBYlNl1N2J2Vq1g0t70OFOS0o8
+	 t8OtHVn2cEAqiAFqdG9iCKA2gvp6FljiF3aihnn+xoxlgp9DyufOoS/ilxE5gbkffa
+	 wbx/ZRhHxSMwIZ6X1yGbEsQpUZ1WD/NHob5Yui+WYy05RORYqh21C7ETJIHPJBQ89m
+	 1KwfWpnmVP2vw==
+Received: from sofa.misterjones.org ([185.219.108.64] helo=goblin-girl.misterjones.org)
+	by disco-boy.misterjones.org with esmtpsa  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+	(Exim 4.98.2)
+	(envelope-from <maz@kernel.org>)
+	id 1x8kun-0000000Bj0s-04YP;
+	Mon, 21 Sep 2026 20:47:05 +0000
+Date: Mon, 21 Sep 2026 21:47:04 +0100
+Message-ID: <86y0cu49iv.wl-maz@kernel.org>
+From: Marc Zyngier <maz@kernel.org>
+To: Georgi Djakov <djakov@kernel.org>, linux-kernel@vger.kernel.org,
+  linux-pm@vger.kernel.org, linux-arm-msm@vger.kernel.org
+Cc:	Raviteja Laggyshetty <raviteja.laggyshetty@oss.qualcomm.com>,
+	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+	Abel Vesa <abelvesa@kernel.org>,
+	Bjorn Andersson <andersson@kernel.org>,
+	Mostafa Saleh <smostafa@google.com>,
+	Thorsten Leemhuis <regressions@leemhuis.info>
+Subject: Re: [PATCH] Revert "interconnect: qcom: x1e80100: enable QoS configuration"
+In-Reply-To: <20260915123703.3228329-1-maz@kernel.org>
+References: <20260915123703.3228329-1-maz@kernel.org>
+User-Agent: Wanderlust/2.15.9 (Almost Unreal) SEMI-EPG/1.14.7 (Harue)
+ FLIM-LB/1.14.9 (=?UTF-8?B?R29qxY0=?=) APEL-LB/10.8 EasyPG/1.0.0 Emacs/30.1
+ (aarch64-unknown-linux-gnu) MULE/6.0 (HANACHIRUSATO)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v6 2/3] i3c: master: Add Qualcomm I3C controller driver
-To: Mukesh Kumar Savaliya <quic_msavaliy@quicinc.com>,
-        Bjorn Andersson <andersson@kernel.org>
-Cc: alexandre.belloni@bootlin.com, robh@kernel.org, krzk+dt@kernel.org,
-        conor+dt@kernel.org, jarkko.nikula@linux.intel.com,
-        linux-i3c@lists.infradead.org, linux-arm-msm@vger.kernel.org,
-        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-        Frank.Li@nxp.com, wsa+renesas@sang-engineering.com,
-        alok.a.tiwari@oracle.com, konradybcio@kernel.org
-References: <20250701071852.2107800-1-mukesh.savaliya@oss.qualcomm.com>
- <20250701071852.2107800-3-mukesh.savaliya@oss.qualcomm.com>
- <h4c5oybkuxf2wmja2osm73ntpolx2ap3csskipbuyoks6xtdsi@5ihhj6ztn7mq>
- <9e3da313-ab1f-435d-8e3c-1a0c946a7790@quicinc.com>
-Content-Language: en-US
-From: Mukesh Savaliya <mukesh.savaliya@oss.qualcomm.com>
-In-Reply-To: <9e3da313-ab1f-435d-8e3c-1a0c946a7790@quicinc.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-GUID: T0unI1kwxSRIY7ZFlWmhymID4ZAMR2OF
-X-Authority-Analysis: v=2.4 cv=IewSymqa c=1 sm=1 tr=0 ts=6ab19536 cx=c_pps
- a=UNFcQwm+pnOIJct1K4W+Mw==:117 a=LKvw4eQ66EqDTtCUdPbf+g==:17
- a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22
- a=COk6AnOGAAAA:8 a=EUspDBNiAAAA:8 a=mqtUebdMckNC0E4VJ4YA:9 a=3ZKOabzyN94A:10
- a=QEXdDO2ut3YA:10 a=uKXjsCUrEbL0IQVhDsJ9:22 a=TjNXssC_j7lpFel5tvFf:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTIxMDMwMSBTYWx0ZWRfX+2uYJOP8Myoa
- TmJ0jW53GsUrDfeGoQGYGWSoGl7OHsk8AK/ypv4V8IuxVtFZ5QqBRoaKUjvzAyzushF6ylM6sCn
- uzchm1CzDgiAyK57/jdCDSNscWa0Ys+LP1BSCE/PrlGJ6sarcfpBIRsOnjxEUybiTTjnrW+cHl1
- qAbhvul0Kp06e7NaQkXldm2X5F2/3dxsiSfE1LfmvKkbf74kZfBt5FDPB6e6lBpK+NR9AFgjnSh
- 9Z6Zvhsx8oSxRJJdh8xhg2zluqxq3HkxKfTZhlzKVqXsZcbAqYfdH7LArd4tmTXZ2+N4vXNAHIw
- s0OXR5/hon/g0/hQUbx2vGVfYUvHGOB4v16TNdRwXlwitJ36lgq4iPT0Lahgh9wILYPNz/LjUyT
- j9eyshcZ54mhgLm85gzovqV+YG4Q1GH6OioW3SPA1RLiHjc17ghQvdutYW/E+XN66T/qqOzVTwB
- 8/yHdlOPwZQjbSd8uzQ==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTIxMDMwMSBTYWx0ZWRfXzDESwO//aG2b
- i05b7/0zmlbhxMBvhd9HJzYscTI2jeS26t2AxmiGPnD/d1p5sMmLqYsUAl7EmhbYlT3otjBeaTH
- qik01rawSJgU4Y3zXLOGYzTkY1R8U+M=
-X-Proofpoint-ORIG-GUID: T0unI1kwxSRIY7ZFlWmhymID4ZAMR2OF
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-21_05,2026-09-21_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- bulkscore=0 priorityscore=1501 impostorscore=0 suspectscore=0
- lowpriorityscore=0 spamscore=0 phishscore=0 malwarescore=0 adultscore=0
- clxscore=1015 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2609040000
- definitions=main-2609210301
+MIME-Version: 1.0 (generated by SEMI-EPG 1.14.7 - "Harue")
+Content-Type: text/plain; charset=US-ASCII
+X-SA-Exim-Connect-IP: 185.219.108.64
+X-SA-Exim-Rcpt-To: djakov@kernel.org, linux-kernel@vger.kernel.org, linux-pm@vger.kernel.org, linux-arm-msm@vger.kernel.org, raviteja.laggyshetty@oss.qualcomm.com, konrad.dybcio@oss.qualcomm.com, abelvesa@kernel.org, andersson@kernel.org, smostafa@google.com, regressions@leemhuis.info
+X-SA-Exim-Mail-From: maz@kernel.org
+X-SA-Exim-Scanned: No (on disco-boy.misterjones.org); SAEximRunCond expanded to false
 
-Hi Bjorn, Please find my responses inline below. I have migrated from my 
-@quicinc.com email address to @oss.qualcomm.com and could not locate the 
-original email thread.
+On Tue, 15 Sep 2026 13:37:03 +0100,
+Marc Zyngier <maz@kernel.org> wrote:
+> 
+> This reverts commit 5a8b2cc36e796d595c9d97eab23c2be22805cc1c.
+> 
+> Since the introduction of this QoS change, X1 machines based on the
+> Purwa SoC (such as the Lenovo Mini X) take a hard reset at boot time.
+> 
+> Other machines based on Hamoa (such as the X1E001DE Snapdragon Devkit)
+> end-up with a similar hard reset while under load, most likely due to
+> the PCIe ports being starved of traffic.
+> 
+> Revert the whole thing until someone figures out what magic parameters
+> allow QoS to work in a sensible manner, as a usable machine is somehow
+> preferable to one that crashes efficiently.
+> 
+> Link: https://lore.kernel.org/all/apgeBNSiP01YfNcs@google.com
+> Link: https://lore.kernel.org/all/86ld9d4h4n.wl-maz@kernel.org
+> Signed-off-by: Marc Zyngier <maz@kernel.org>
+> Cc: Georgi Djakov <djakov@kernel.org>
+> Cc: Raviteja Laggyshetty <raviteja.laggyshetty@oss.qualcomm.com>
+> Cc: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+> Cc: Abel Vesa <abelvesa@kernel.org>
+> Cc: Bjorn Andersson <andersson@kernel.org>
+> Cc: Mostafa Saleh <smostafa@google.com>
+> Cc: Thorsten Leemhuis <regressions@leemhuis.info>
+> ---
+>  drivers/interconnect/qcom/x1e80100.c | 485 ---------------------------
+>  1 file changed, 485 deletions(-)
 
-The replies below are from a draft I had saved earlier. I am sending 
-them now from my OSS account after resolving the slave setup and 
-validation issues that had delayed the response. I shall upload V7 
-cleanly with OSS ID.
+Any update on applying this? These machines have been broken for the
+past 4 release candidates, and it'd be great to get them back to a
+working state.
 
-On 3/5/2026 9:12 PM, Mukesh Kumar Savaliya wrote:
-> Thanks Bjorn !
-> I am sorry for the late reply, i was completely off from this work. I 
-> have restarted this series work and will continue now onwards.
-> 
-> On 7/2/2025 2:26 AM, Bjorn Andersson wrote:
->> On Tue, Jul 01, 2025 at 12:48:51PM +0530, Mukesh Kumar Savaliya wrote:
->>> Add support for the Qualcomm I3C controller driver, which implements
->>> I3C master functionality as defined in the MIPI Alliance Specification
->>> for I3C, Version 1.0.
->>>
->>> This driver supports master role in SDR mode.
->>>
->>> Unlike some other I3C master controllers, this implementation
->>> does not support In-Band Interrupts (IBI) and Hot-join requests.
->>
->> I believe the capitalization of the last feature is "Hot-Join"
->>
->> It's not entirely clear from this sentence if it's the controller or the
->> driver that doesn't support these features. Please update to make it
->> clear.
->>
-> Sure, let me clarify it and update the commit log.
-> It's the driver which doesn't support Hot-Join for now, we plan to add 
-> it in future.
-> 
-> I would rectify citing controller driver doesn't support these features.
->> [..]
->>> diff --git a/drivers/i3c/master/Makefile b/drivers/i3c/master/Makefile
->>> index 3e97960160bc..0e3ad9d96424 100644
->>> --- a/drivers/i3c/master/Makefile
->>> +++ b/drivers/i3c/master/Makefile
->>> @@ -1,5 +1,6 @@
->>>   # SPDX-License-Identifier: GPL-2.0-only
->>>   obj-$(CONFIG_CDNS_I3C_MASTER)        += i3c-master-cdns.o
->>> +obj-$(CONFIG_I3C_QCOM_GENI)        += i3c-qcom-geni.o
->>>   obj-$(CONFIG_DW_I3C_MASTER)        += dw-i3c-master.o
->>>   obj-$(CONFIG_AST2600_I3C_MASTER)    += ast2600-i3c-master.o
->>>   obj-$(CONFIG_SVC_I3C_MASTER)        += svc-i3c-master.o
->>> diff --git a/drivers/i3c/master/i3c-qcom-geni.c b/drivers/i3c/master/ 
->>> i3c-qcom-geni.c
->> [..]
->>> +
->>> +struct geni_i3c_i2c_dev_data {
->>> +    u32 ibi_keeping;  /* Plan to save IBI information, keep as dummy 
->>> for now */
->>
->> Commit message says that QUP doesn't support IBI, so what is this?
->>
-> No, i meant to say I3C driver doesn't support IBI along with Hot-Join. I 
-> have enhanced the commit log to make it clear.
-> 
->> Also, why "keep as dummy"?
->>
-> Removed it as we are not using it.
-> 
->>> +};
->>> +
->> [..]
->>> +static void qcom_geni_i3c_conf(struct geni_i3c_dev *gi3c, enum 
->>> i3c_bus_phase bus_phase)
->>> +{
->>> +    const struct geni_i3c_clk_settings *clk_idx = gi3c->clk_cfg;
->>> +    unsigned long freq;
->>> +    u32 val, dfs_idx;
->>> +    int ret;
->>> +
->>> +    if (bus_phase == OPEN_DRAIN_MODE)
->>> +        clk_idx = gi3c->clk_od_cfg;
->>> +
->>> +    ret = geni_se_clk_freq_match(&gi3c->se, clk_idx->clk_src_freq,
->>> +                     &dfs_idx, &freq, false);
->>> +    if (ret)
->>> +        dfs_idx = 0;
->>> +
->>> +    writel_relaxed(dfs_idx, gi3c->se.base + SE_GENI_CLK_SEL);
->>> +
->>> +    val = FIELD_PREP(CLK_DIV_VALUE_MASK, clk_idx->clk_div);
->>> +    val |= SER_CLK_EN;
->>> +    writel_relaxed(val, gi3c->se.base + GENI_SER_M_CLK_CFG);
->>> +
->>> +    val = FIELD_PREP(I2C_SCL_HIGH_COUNTER_MASK, clk_idx- 
->>> >i2c_t_high_cnt);
->>> +    val |= FIELD_PREP(I2C_SCL_LOW_COUNTER_MASK, clk_idx- 
->>> >i2c_t_low_cnt);
->>> +    val |= FIELD_PREP(I2C_SCL_CYCLE_COUNTER_MASK, clk_idx- 
->>> >i2c_t_cycle_cnt);
->>> +    writel_relaxed(val, gi3c->se.base + SE_I2C_SCL_COUNTERS);
->>> +
->>> +    writel_relaxed(clk_idx->i3c_t_cycle_cnt, gi3c->se.base + 
->>> SE_I3C_SCL_CYCLE);
->>> +    writel_relaxed(clk_idx->i3c_t_high_cnt, gi3c->se.base + 
->>> SE_I3C_SCL_HIGH);
->>> +
->>> +    writel_relaxed(M_IBI_IRQ_IGNORE, gi3c->se.base + 
->>> SE_GENI_HW_IRQ_IGNORE_ON_ACTIVE);
->>> +
->>> +    val = M_IBI_IRQ_PARAM_STOP_STALL | M_IBI_IRQ_PARAM_7E;
->>> +    writel_relaxed(val, gi3c->se.base + SE_GENI_HW_IRQ_CMD_PARAM_0);
->>> +
->>> +    writel_relaxed(M_IBI_IRQ_EN, gi3c->se.base + SE_GENI_HW_IRQ_EN);
->>
->> Don't you want a non-relaxed write here, to clarify that the ordering of
->> this write and the previous are significant?
->>
-> Do you mean for IBI_IRQ_EN or the whole function ? If yes, then i can 
-> change to ensure no re-ordering. But i don't see reordering for complete 
-> function is required.
->>
->> As above, the commit message says the controller doesn't do IBI, so why
->> are we enabling IBI interrupts? (Just guessing based on the IRQ names)
->>
-> Yes, commit message says rightly.
-> We are enabling just to ensure I3C controller works with IBI controller 
-> enabled. And that's mandatory per HW programming sequence as we don't 
-> disable IBI controller even we don't use IBI features like IBI interrupt.
->>> +}
->>> +
->> [..]
->>> +static int geni_i3c_master_attach_i2c_dev(struct i2c_dev_desc *dev)
->>> +{
->>> +    struct geni_i3c_i2c_dev_data *data;
->>> +
->>> +    data = kzalloc(sizeof(*data), GFP_KERNEL);
->>> +    if (!data)
->>> +        return -ENOMEM;
->>> +
->>> +    i2c_dev_set_master_data(dev, data);
->>
->> As far as I can tell, the master_data is private to the controller
->> driver, and the only thing I can find you do with it to free it again on
->> detach.
->>
->> Am I missing something or can these 4 optional functions be removed?
->>
-> Yes, right now these functions can be removed as it doesn't do anything.
-> I had kept it there to add something really required in future.
->>> +
->>> +    return 0;
->>> +}
->>> +
->>> +static void geni_i3c_master_detach_i2c_dev(struct i2c_dev_desc *dev)
->>> +{
->>> +    struct geni_i3c_i2c_dev_data *data = i2c_dev_get_master_data(dev);
->>> +
->>> +    i2c_dev_set_master_data(dev, NULL);
->>> +    kfree(data);
->>> +}
->>> +
->>> +static int geni_i3c_master_attach_i3c_dev(struct i3c_dev_desc *dev)
->>> +{
->>> +    struct geni_i3c_i2c_dev_data *data;
->>> +
->>> +    data = kzalloc(sizeof(*data), GFP_KERNEL);
->>> +    if (!data)
->>> +        return -ENOMEM;
->>> +
->>> +    i3c_dev_set_master_data(dev, data);
->>> +
->>> +    return 0;
->>> +}
->>> +
->>> +static void geni_i3c_master_detach_i3c_dev(struct i3c_dev_desc *dev)
->>> +{
->>> +    struct geni_i3c_i2c_dev_data *data = i3c_dev_get_master_data(dev);
->>> +
->>> +    i3c_dev_set_master_data(dev, NULL);
->>> +    kfree(data);
->>> +}
->>> +
->>
->> Regards,
->> Bjorn
->>
-> 
+Thanks,
 
+	M.
+
+-- 
+Without deviation from the norm, progress is not possible.
