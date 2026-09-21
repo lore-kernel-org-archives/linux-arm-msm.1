@@ -1,216 +1,159 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7EC55446821
-	for <linux-arm-msm@vger.kernel.org>; Mon, 21 Sep 2026 11:26:54 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CFADE346E74;
+	Mon, 21 Sep 2026 11:33:56 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789990016; cv=none; b=jyUyr/YgI+XC4T/tBk0egJRyywwvNRFB1QWVRPa11h+013JBCdLkNpZke9t6m7fAaXSGhS8h2DT+c6yxLGtdmvyLbZaStaaO5jK35UdwIwJLREYyVyKHQs0CdOr+n7CcqpViFnjweqWqqtNFkeB8rTYcVG64VDJJ4/RwTxjqTjk=
+	t=1789990438; cv=none; b=lYqk2hUXOaAP+GJIIl6msViXK+7sb2sPSfS59G6/238in+1TJn4yGYM9CFflCt2s92NAI+N/5gKh/TuvXp7D/mMmi2HjrnLG2j2/KTdlZgvbEu5bWSnYAPn37Cpu2ggp4NP8Z8+VMpRsE22Ql1/cjpgOwEp60xgFHd0HAppECDU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789990016; c=relaxed/simple;
-	bh=NyFEyYupsQqC9FmnuAyHOciufETAcPql7I1A4fZ++VU=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=RD2MS40BiscXqbNuFskJyeNeDY5gEwbhJFv69AqZjKIw36H6BoqI0VMU4W9wh0tITgV11fb+h/PD4gkbxfjhHE36mxa1w0mF5SCI4bKCky67TD5krLgdVgCbQo0eJX756j15F+aUv/XdozHCkj1g3Dvri8zpLE9tMfX4g6SohAA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=hPzYissF; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=KLHOiX6U; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1789990438; c=relaxed/simple;
+	bh=4PgdLDiKIVXTWGTu2jsrSR6qx/gSsOj410WrI/Vadek=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=OqOefsOEeP0lVegW0x3DXBFeMCSfvFq57+TnQfepKzt5swUN+8I4zNep4JcIxobzLVxkBMLWipANI2mcZcgUF8WLcAwp4gYiiPKZPl7M2XKzpKBGjPxdt6b3Zwt9nO1SHzaoyTJa9xPhEx+u6L9wedxjXEhRtIMamO/kDDbJY+I=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=MdJ1QI3y; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="hPzYissF";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="KLHOiX6U"
-Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68LAdxiM287357
-	for <linux-arm-msm@vger.kernel.org>; Mon, 21 Sep 2026 11:26:53 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	KkPM1XLiUoLDcoILla1/Ubfzxgq/Q7SN/cfaDwrB3vU=; b=hPzYissFujvFvApm
-	LTP03tiCFFSqKHF5DMo/Z89gQ8u97eoJajej1x/qCIKrjh6a4t6xL1a+GHt7y77T
-	yIxb9GgmgkKVyXheCd+ex11XzOutJf9ajnurggZFzCL5GLd2lGQMc7WXeU8D4YVq
-	QD68YT9t+GxhE3RiPQTBg5YYesDefbcOJoV+/amkUi+hYjK/w+Z9rkS45/E23KRR
-	U5KGw1OSqr853cyBqb24F769Yrf51AIHvtAD4GRVXUxSkrIlnHCFkQzDq/hIRnjN
-	ihJ36tBIWgX6qmHDbVGOZ4byTWjZw4w8Tk+/SVnpXdufzx2qqN9K160tP/LXy4/i
-	8hdk7g==
-Received: from mail-qv1-f71.google.com (mail-qv1-f71.google.com [209.85.219.71])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gu0rj0tcf-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Mon, 21 Sep 2026 11:26:53 +0000 (GMT)
-Received: by mail-qv1-f71.google.com with SMTP id 6a1803df08f44-90cc288296fso4453006d6.1
-        for <linux-arm-msm@vger.kernel.org>; Mon, 21 Sep 2026 04:26:53 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1789990013; x=1790594813; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=KkPM1XLiUoLDcoILla1/Ubfzxgq/Q7SN/cfaDwrB3vU=;
-        b=KLHOiX6UBloNzvebpjXur2UCpKy8nTrSXxYaViHmAwjlw45scH75TgLu2PhAocq0qw
-         l2jzkbvPWSLvdzVM2TBhT4U/CvImHaNUPU5kaszc3MyQaBlPDmxKntTxhkasUdnr0RAY
-         IF+08JizjiRXOHYx0LKFRgKFp/zLfSlHrhQK/tnq34foYwtbaZkw6VUe/Be8dGzlDeAA
-         bNRMUSnQyeMhy4Xr+J3fwKHGtYB1JSmLj/3AhNiLxNXjpNqoqk9Jh5TM6fd9YEDLcJEq
-         0EooBoMoivmt13tWggMxjUzdK+6j4GwWcF+UesiZx7r1aug5yjnS7kmEospgCUUEYrcY
-         22hA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1789990013; x=1790594813;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=KkPM1XLiUoLDcoILla1/Ubfzxgq/Q7SN/cfaDwrB3vU=;
-        b=Mk4jUzRi67CVn/7BCLTyGHxcqTMKot89cUUiuYpe+Qktujxu+9+rlN5zFEtaEC33iH
-         okx3yBxnr7vOrvL6iTtE3BnIENJzgJgdGMMeG+jTnSteYDTxtqCZVmQlIfdo+akHZ1Gx
-         mjDhf5RcqlhdJPJvdUp2H7PrlxSZZGwaDqxMHFZcpGe5PgmEjIb4U0vl/akRoqQeYAZ8
-         hcmpi/MEkt5Su6pz/MVJg9r7EznyFfdrLBUTrNnf7YBAopGgygEn91sKeB0SkNyFiz6q
-         A5rr6Wu0D/0S7shVfoO4KdbbdeUuqMK9FOQ6tbEdLlA1dNdmFIlP5WdDRB4c46SVWq11
-         iTnQ==
-X-Forwarded-Encrypted: i=1; AKwUvBylPeweVA0IxS4iRyPMh1JSqO1JsXLe1DVz1HCZV3Zp2Rg6UbRnU4XvyL17260D0ZYFtgXtNdpGd+fmRwa6@vger.kernel.org
-X-Gm-Message-State: AFuF++mjGnWD6qfyi9iq6mqO3QRp9A4ck4kQLH6VKIIg+1xew1McL9uo
-	lRsBDXsQDkBpWzvwb6CHPJIKvJKHt9Youh6z6Z+q5vpk3dutY6FQJsz139ManUlPFABYwOy6uXe
-	9XS1d+qOSbjaPAQ1+8AACWEIIPek+3UeD/ukv0eudGmU2dzjL9gBJMySJ4L6vrlNTDTQ/
-X-Gm-Gg: AYBFou3FXo6XAckcm5BOUVrJruPKPK7qcDD1Gzqo5+GTy4MHn6QFKGFKSN/wnjXcssK
-	SYsCNBiLi7+AQMFjvqUEQZR2n8oWoDfQFmkoJ9OsHbKYcinBnc00gH7rnnJkw236LyVlMe3KN/H
-	XQZL+ZaLPwLVUsq0ugPhTWrCWbxC6xJJKnCc2KnENuoJ+V4WsYILW9wBGTOlSTdSW/2g5lNrg/u
-	JS30JTYQW6HuDdFRypF5eNQUdp6lUhc+nDbTSoHcxwS4xY42QlRkqJD4BpD8bVsKLewxpWrSIfz
-	g4q/iEMGupGs38Pj5mO2bwWznDWnMrguHLO4mUf7JWnyKxb7EWdhV6G/F5az0RSewkirr9Q/fP9
-	9ABrRAJr25i6787Yo2naO9w==
-X-Received: by 2002:a05:6214:4b0d:b0:90e:969d:6ea1 with SMTP id 6a1803df08f44-913fc8a2523mr1004156d6.1.1789990012659;
-        Mon, 21 Sep 2026 04:26:52 -0700 (PDT)
-X-Received: by 2002:a05:6214:4b0d:b0:90e:969d:6ea1 with SMTP id 6a1803df08f44-913fc8a2523mr1003796d6.1.1789990012168;
-        Mon, 21 Sep 2026 04:26:52 -0700 (PDT)
-Received: from [192.168.202.12] ([178.235.128.140])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c2a3523a063sm282442566b.8.2026.09.21.04.26.46
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 21 Sep 2026 04:26:51 -0700 (PDT)
-Message-ID: <fe437142-eb1e-49d3-ad3f-704066bea53b@oss.qualcomm.com>
-Date: Mon, 21 Sep 2026 13:26:46 +0200
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="MdJ1QI3y"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D3B591F000FF;
+	Mon, 21 Sep 2026 11:33:55 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1789990436;
+	bh=MDIUNnJTr3U0Ey9p4etc55PGRbEZi0JsFTUGlPBKo5M=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=MdJ1QI3yp0m4W6wPjnpOlP/LuYDBBHyHtO6Zn5chWqo6r8O56zfzdu30oPxNYD7eA
+	 6NGIwnlNi7nbYAUpTe1nB9kvVWEiGBLoBvhjAHsDR6BvGuOtqTHJcPSCEiap+Uxct0
+	 XCeDFQD0PyS9iZgRDiVsh2TcunDaQiBgZY/9kjfjGSJr7L8n5Hmu9QWXs9J+wkqaLD
+	 OQSjmUuvVqsmZx1mUngxnmaYWwePogbProrqJV/yU2encACF0F3DNiP/Z86Sez1sve
+	 3bQh5KztIL9br8JUjHdDnn67RbY+tci0wjl5CYZnvUkpF+gfVLiTLCjAdHzsfTJzui
+	 Wb+6X6UdDhHpQ==
+Date: Mon, 21 Sep 2026 13:33:54 +0200
+From: Thierry Reding <thierry.reding@kernel.org>
+To: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
+Cc: Geert Uytterhoeven <geert@linux-m68k.org>, 
+	Kieran Bingham <kieran.bingham@ideasonboard.com>, Mauro Carvalho Chehab <mchehab@kernel.org>, 
+	Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+	Conor Dooley <conor+dt@kernel.org>, Jacopo Mondi <jacopo@jmondi.org>, 
+	Sakari Ailus <sakari.ailus@linux.intel.com>, Jimmy Su <jimmy.su@intel.com>, 
+	Matthias Fend <matthias.fend@emfend.at>, Mikhail Rudenko <mike.rudenko@gmail.com>, 
+	Daniel Scally <dan.scally@ideasonboard.com>, Jacopo Mondi <jacopo.mondi@ideasonboard.com>, 
+	Michael Riesch <michael.riesch@collabora.com>, Benjamin Mugnier <benjamin.mugnier@foss.st.com>, 
+	Sylvain Petinot <sylvain.petinot@foss.st.com>, Paul Elder <paul.elder@ideasonboard.com>, 
+	Martin Kepplinger <martin.kepplinger@puri.sm>, Quentin Schulz <quentin.schulz@theobroma-systems.com>, 
+	Tommaso Merciai <tomm.merciai@gmail.com>, Svyatoslav Ryhel <clamor95@gmail.com>, 
+	Richard Acayan <mailingradian@gmail.com>, Frank Li <Frank.Li@nxp.com>, 
+	Sascha Hauer <s.hauer@pengutronix.de>, Pengutronix Kernel Team <kernel@pengutronix.de>, 
+	Fabio Estevam <festevam@gmail.com>, Bjorn Andersson <andersson@kernel.org>, 
+	Konrad Dybcio <konradybcio@kernel.org>, Geert Uytterhoeven <geert+renesas@glider.be>, 
+	Magnus Damm <magnus.damm@gmail.com>, Heiko Stuebner <heiko@sntech.de>, 
+	Jonathan Hunter <jonathanh@nvidia.com>, linux-media@vger.kernel.org, devicetree@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, linux@ew.tq-group.com, imx@lists.linux.dev, 
+	linux-arm-kernel@lists.infradead.org, linux-arm-msm@vger.kernel.org, linux-renesas-soc@vger.kernel.org, 
+	linux-rockchip@lists.infradead.org, linux-tegra@vger.kernel.org, 
+	Kieran Bingham <kieran.bingham+renesas@ideasonboard.com>, Alexander Stein <alexander.stein@ew.tq-group.com>, 
+	David Heidelberg <david@ixit.cz>, Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>, 
+	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, Quentin Schulz <quentin.schulz@cherry.de>
+Subject: Re: [PATCH v6 0/6] dt-bindings: Orientation defines
+Message-ID: <arEVs0FDleyHeeLj@orome>
+References: <20260918-kbingham-orientation-v6-0-5e8b1f01be29@ideasonboard.com>
+ <CAMuHMdWWOB48AUCbXh=9ZGCK2qZyVH06kJ2paRY-wxkq5NC16A@mail.gmail.com>
+ <CAMuHMdVhK0vm_Ksze_=jG8D_=8Q45v+ezNbxwL7JntTt_v_fkg@mail.gmail.com>
+ <20260921073538.GA1466037@killaraus.ideasonboard.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH RFC 10/10] arm64: dts: qcom: sm6125-xiaomi-ginkgo: enable
- display, backlight and touchscreen
-To: kavakliyigitcan@gmail.com, Lee Jones <lee@kernel.org>,
-        Daniel Thompson <danielt@kernel.org>,
-        Jingoo Han <jingoohan1@gmail.com>, Pavel Machek <pavel@kernel.org>,
-        Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley
- <conor+dt@kernel.org>, Helge Deller <deller@gmx.de>,
-        Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>,
-        Sumit Semwal <sumit.semwal@linaro.org>,
-        Neil Armstrong <neil.armstrong@linaro.org>,
-        Jessica Zhang <jesszhan0024@gmail.com>,
-        Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
-        Maxime Ripard <mripard@kernel.org>,
-        Thomas Zimmermann <tzimmermann@suse.de>,
-        David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
-        Dmitry Torokhov <dmitry.torokhov@gmail.com>,
-        Henrik Rydberg <rydberg@bitmath.org>,
-        Rob Clark <robin.clark@oss.qualcomm.com>,
-        Dmitry Baryshkov
- <lumag@kernel.org>,
-        Abhinav Kumar <abhinav.kumar@linux.dev>, Sean Paul <sean@poorly.run>,
-        Marijn Suijten <marijn.suijten@somainline.org>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>
-Cc: dri-devel@lists.freedesktop.org, linux-leds@vger.kernel.org,
-        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-fbdev@vger.kernel.org, linux-input@vger.kernel.org,
-        linux-arm-msm@vger.kernel.org, freedreno@lists.freedesktop.org
-References: <20260911-ginkgo-submission-final-v1-0-0e68e63a18d4@gmail.com>
- <20260911-ginkgo-submission-final-v1-10-0e68e63a18d4@gmail.com>
-Content-Language: en-US
-From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-In-Reply-To: <20260911-ginkgo-submission-final-v1-10-0e68e63a18d4@gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTIxMDE2NSBTYWx0ZWRfXx7SCbQ3XMyDO
- STA4XDhQT+UmksWKS887kpuhPmJuHf9GT9zcMqc7t1JiH8S/lAn8R3o0Od2U/vTs4AXNyQojSnh
- MuwCkiuiBHPaUJZ1LL3XOsapK3EtmZs=
-X-Authority-Analysis: v=2.4 cv=AsR7T+9P c=1 sm=1 tr=0 ts=6ab1147d cx=c_pps
- a=UgVkIMxJMSkC9lv97toC5g==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
- a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22
- a=pGLkceISAAAA:8 a=1o3L4E6L0XnED3g1xlMA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
- a=1HOtulTD9v-eNWfpl4qZ:22
-X-Proofpoint-GUID: TBojyEvR3DyupzpMtOM9zw8nwGAtmu7O
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTIxMDE2NSBTYWx0ZWRfX//JCgyKwkhb0
- vojtEpHib0MVQEf5tuI0m0BADFApKDlktZByF8cWAsZLZGm58T0yGjwK6SFAeVWsXHGbGEEl7bL
- MNK0eNLJLjMKSFN2wycTT0Om+GQjJk0yP2dFCCbG4/9r8q5/frVvYEW3GJAGDwF1ENh0TW4GX+L
- oVpgDpkd+mbg7XMH2Pn0JLD4hVC8ueAnTABUn5fa4eITNUc/yonC5p0g3Mtk9Y7pO36yEGps5Ey
- +UOAdV5NLvhPjbyYe0Jpw3C4hmjpPjkQS+NztDwFKDLB3XolR4+WwCKMVD2ZI8me2gVG7AWuBAz
- zehlEMffTf8SldTSeSVspU/IOE4XDhNeERRtf+oshc8VkCVAo1ioErwAmZvkefTaAe++P/0jv8u
- XSNXjDEFBVg59p/EkDvTKP88lhV4XkBMo7wzNmKbDpOFE7a/5hDy2nDvLvpw39WOWRE7mSJI2hu
- 9au5XKwcUswunEOPlDw==
-X-Proofpoint-ORIG-GUID: TBojyEvR3DyupzpMtOM9zw8nwGAtmu7O
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-21_04,2026-09-16_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 spamscore=0 malwarescore=0 suspectscore=0 clxscore=1015
- impostorscore=0 adultscore=0 lowpriorityscore=0 phishscore=0 bulkscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609210165
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="rscvpqrbalagvufr"
+Content-Disposition: inline
+In-Reply-To: <20260921073538.GA1466037@killaraus.ideasonboard.com>
 
-On 9/11/26 10:51 AM, YİĞİTCAN KAVAKLI via B4 Relay wrote:
-> From: YİĞİTCAN KAVAKLI <kavakliyigitcan@gmail.com>
-> 
-> Enable the display subsystem (MDSS/MDP/DSI0), Kinetic KTD3136 backlight,
-> and Novatek NT36672A SPI touchscreen on the Xiaomi Redmi Note 8 (ginkgo).
-> 
-> Hardware nodes added:
-> - Fixed LCDB regulators (lcdb_lab and lcdb_ibb at +/- 5.5V)
-> - MDSS and DSI0 with Tianma 1080x2340 FHD+ video panel
-> - I2C1 backlight node at 0x36 with PMI632 GPIO 6 hardware enable
-> - SPI2 touchscreen node at CS0 with GPIO 88 interrupt and panel follower
->   reference
-> - Touchscreen active pinctrl definition on GPIO 88
-> 
-> Signed-off-by: YİĞİTCAN KAVAKLI <kavakliyigitcan@gmail.com>
-> ---
->  .../boot/dts/qcom/sm6125-xiaomi-ginkgo-common.dtsi | 100 +++++++++++++++++++++
->  1 file changed, 100 insertions(+)
-> 
-> diff --git a/arch/arm64/boot/dts/qcom/sm6125-xiaomi-ginkgo-common.dtsi b/arch/arm64/boot/dts/qcom/sm6125-xiaomi-ginkgo-common.dtsi
-> index 59042a5937535c4acda064fa0f865f4f5a52d01b..f4b9e2092a814e56cdc23218025cb4166dec110a 100644
-> --- a/arch/arm64/boot/dts/qcom/sm6125-xiaomi-ginkgo-common.dtsi
-> +++ b/arch/arm64/boot/dts/qcom/sm6125-xiaomi-ginkgo-common.dtsi
-> @@ -26,11 +26,30 @@ / {
->  	chassis-type = "handset";
->  
->  	qcom,msm-id = <QCOM_ID_SM6125 0x10000>;
-> +	qcom,board-id = <34 0>, <34 1>, <34 2>, <34 3>, <34 4>, <0 0>;
 
-This should be a separate patch with the reasoning for the change
+--rscvpqrbalagvufr
+Content-Type: text/plain; protected-headers=v1; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+Subject: Re: [PATCH v6 0/6] dt-bindings: Orientation defines
+MIME-Version: 1.0
 
->  
->  	aliases {
->  		serial0 = &uart4;
->  	};
->  
-> +	lcdb_lab: regulator-lcdb-lab {
-> +		compatible = "regulator-fixed";
-> +		regulator-name = "lcdb_lab";
-> +		regulator-min-microvolt = <5500000>;
-> +		regulator-max-microvolt = <5500000>;
-> +		regulator-boot-on;
-> +		regulator-always-on;
-> +	};
-> +
-> +	lcdb_ibb: regulator-lcdb-ibb {
-> +		compatible = "regulator-fixed";
-> +		regulator-name = "lcdb_ibb";
-> +		regulator-min-microvolt = <5500000>;
-> +		regulator-max-microvolt = <5500000>;
-> +		regulator-boot-on;
-> +		regulator-always-on;
-> +	};
+On Mon, Sep 21, 2026 at 10:35:38AM +0300, Laurent Pinchart wrote:
+> On Mon, Sep 21, 2026 at 09:07:01AM +0200, Geert Uytterhoeven wrote:
+> > On Mon, 21 Sept 2026 at 09:05, Geert Uytterhoeven wrote:
+> > > On Fri, 18 Sept 2026 at 12:55, Kieran Bingham wrote:
+> > > > Add a new dt-bindings/media/video-interface-devices.h header that
+> > > > initially supports the Orientation types and convert existing users
+> > > > throughout the code base.
+> > >
+> > > Just noticed these are already in since commit 6ab5acfb8dd38729
+> > > ("dt-bindings: media: Add macros for video interface devices") in
+> > > media/master (next-20260903 and later)?
+> > >
+> > > > v3 collects tags, and fixes the typo, but drops all hunks that do n=
+ot
+> > >
+> > > [...]
+> > >
+> > > > v2:
+> > >
+> > > Interesting changelog order ;-)
+> > >
+> > > [...]
+> > >
+> > > > v3:
+> > >
+> > > [...]
+> > >
+> > > > -v4:
+> > >
+> > > [...]
+> > >
+> > >
+> > > > -v5:
+> > > >  - Definitions now accepted in linux-media, rebased to get conversi=
+ons in.
+> > >
+> > > Oh, you say so here ;-)
+> > >
+> > > >       arm64: dts: renesas: Convert to new media orientation definit=
+ions
+> > >
+> > > So it's been safe for me to pick this up since v5?
+> >=20
+> > No it's not, there is a hard dependency.
+>=20
+> The whole series needs to be postponed by one kernel cycle :-/ It's not
+> urgent so it's not a big deal. Kieran will have the priviledge of
+> rebasing and sending a v7 :-)
 
-LAB/IBB and LCDB are separate hardware blocks, only LCDB is
-present on PMI632. It provides a pair of pos/neg bias
-voltages. Looks like downstream has a driver for controlling
-this block.
+If all platform maintainers Ack this series, they could go through the
+media tree where the shared include was already merged. Alternatively
+the media maintainers could provide a shared branch for everyone to pull
+into their platform trees.
 
-Konrad
+But given that this is simply replacing a literal with a preprocessor
+macro, maybe not worth the extra hassle.
+
+Thierry
+
+--rscvpqrbalagvufr
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCgAdFiEEiOrDCAFJzPfAjcif3SOs138+s6EFAmqxFiIACgkQ3SOs138+
+s6HA/BAAlTOuxN7hAGKsy7dYRPGn5XonD1CL3PrwL+ma3OlyhbTXIVe+Io6RW7J5
+zKfOah30Mnvem2LLH7Sg0m4pfm8rTX/nF7tQQihKyk5IU0/9OgH8/2J5VeB6WRmb
+7ekKOnFAQw9YQs1vcpGn4Jm1JvkIz1ari2ZXHx2qf3gfSi43gDwZ5ZLZSnL2NyTG
+ZaSMB+Sqiao0Q8YuY0UYuEi4jqGJr6qV0fpJKMaG+LHrPS42UG0PYDSbwLkkXALN
+GOz3A9wsFz58L3s92t3+L030Jl/WJEzrg9b6HzfbuS1YKX0mcG1FWRQB3k6waSQM
+lSVq/HZ2fzW31WglB118JZFVqyBGH8cHxXumpsOkOcPiga0dkUIkfCIdOm1GWP1J
+Q/CMLKNu3phGaXej8wIlhtZxUbhP1DYJmAWtYNSAbOg/Zgomo1Q4y+m2qxkO2VWr
+fq/UoozCz2rYlLcTDYB/ML7e2KZHsh7OTNwIGaJ3eIretaKyI+K9jOfOxLZ83SuJ
+yvkNTOAq9sRKiSQod41cgN4UWLsSEdLn6399hyFGHpcwazrebRKfnnfMUauRflSq
+sLokqJGJrk/Ck2uecD/pNXlBGztCR5Czxyf+R4CHNMKMa8HqYQS9OFvU32QnyD26
+6Nb3cTM0bMwTrWMTJVQnV+SVmqld3xVL6f9i1vImIvJAiEcxJQg=
+=n1ZD
+-----END PGP SIGNATURE-----
+
+--rscvpqrbalagvufr--
