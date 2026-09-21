@@ -1,33 +1,67 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-qk2-f43.google.com (mail-qk2-f43.google.com [74.125.230.235])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4EE9E3ACA41;
-	Mon, 21 Sep 2026 21:36:46 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4DCD4518125
+	for <linux-arm-msm@vger.kernel.org>; Mon, 21 Sep 2026 21:46:44 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.230.235
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790026607; cv=none; b=Utx7Eqr/bFjWJbyYyhJSCyilSsqTM9WUSZW9sj9UVi3TtVFEDDtoLv6qNT4fS+9ourbHeyQuYeJ5dSdLVvYAN3WGwLBNCFVKUNtlNyqzGrQc6g9nuyFfhvAKlG38rFESlopu1YDePqn1/ezxKofDB0t5VarP2cWON2m+CnuQwIM=
+	t=1790027208; cv=none; b=J/Bk1OdBG5xrcIAXJpa2ARLCZTqLLNHdh8rJuJgzPlLoARV8XF7lDFIH7Ufqio7YW1dC9cSKnLcLvEv/gSVu8cygyYIvTOCn1L3yESepzeubon557J/qZfooE+7x7pD18wA0Zst57CCc1sqcONOZGWKXHgy6/6c1EwRSfBQrS1Q=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790026607; c=relaxed/simple;
-	bh=KwPXynyHS2UagXRCNTbG9yWIUZvfJFfM8OpM9Eonpfw=;
+	s=arc-20240116; t=1790027208; c=relaxed/simple;
+	bh=Yc5Uc7ZFw+ABZqHHGfrsDtaZfnUyH0lPgtl/XXBBFbM=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=IsAE2Lfcej28bnGEKN8/VLd9IJNHNJwWFuk5g2BqkXoh9r8gPgifiUSvQttE40HBFBSLMx8gR5GVfhDdx4v7N31hi0X7q97lzC14faFQQQ1oSXVQXk7qMUxl6cwdHctyye0jYpeGazM1ekECptIuvJSeMLsS/LuwcZ+yydZQQ/g=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Qb8tIQ7J; arc=none smtp.client-ip=100.103.45.18
+	 In-Reply-To:Content-Type; b=RdgkS6oIwXoNJssKzHgoEZa4lIbrnpBDMYpLw5KDCziYOt/i6fhsgO6oMX0JdntPPdPKjpXu6d47xJR8x7jTiryLZdMVNyJdJ1IhAkORrVLqa/NI9x97s8t9pPN9O7Wk9Ow1SpSB9inFwW+tM8/eDSxoVjMqRgMcJynGmxyUnAo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=riscstar.com; spf=pass smtp.mailfrom=riscstar.com; dkim=pass (2048-bit key) header.d=riscstar-com.20251104.gappssmtp.com header.i=@riscstar-com.20251104.gappssmtp.com header.b=usOtonDa; arc=none smtp.client-ip=74.125.230.235
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=riscstar.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=riscstar.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Qb8tIQ7J"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id AE1141F000FF;
-	Mon, 21 Sep 2026 21:36:40 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1790026606;
-	bh=xULTrItvM78QwpURJTrqOt7JvDij45NylIm1v/3WIYQ=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=Qb8tIQ7JCIa03jC3bRG4tMPUgmfSAJuJYp3gP9LkZ9/cAzIC4/kSd48QerP+CYLgz
-	 GJk+fa1+MkHOCYaoAL8ST46dWt3dX3alDlY4L16qe7DVp6Lsy8KgSa7k5x3GiUpUsD
-	 ZbRCz9zIFJO3a5nTapWcF43G0IoZW9SPQt5Rw2LwPD3jZzBiLpIAdbVUgp6DOYdBaF
-	 9gU5nubqiNXUpdhkbB16Q8E1oXtqJu14eDu4e84GXaoUDGX49N8uWILY7iC+LNpCJ2
-	 NfncUDA7HQGMa+PL6hbBUTIk8/GeRDqDair3Hadx+R0zteIY4iRIovbyRekBccH9FQ
-	 WU41cJP7NsHQQ==
-Message-ID: <2e666363-9a57-41a0-9605-db0dee304f52@kernel.org>
-Date: Tue, 22 Sep 2026 00:36:36 +0300
+	dkim=pass (2048-bit key) header.d=riscstar-com.20251104.gappssmtp.com header.i=@riscstar-com.20251104.gappssmtp.com header.b="usOtonDa"
+Received: by mail-qk2-f43.google.com with SMTP id af79cd13be357-939109fafd7so279616885a.2
+        for <linux-arm-msm@vger.kernel.org>; Mon, 21 Sep 2026 14:46:44 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=riscstar-com.20251104.gappssmtp.com; s=20251104; t=1790027204; x=1790632004; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=MZyT8k12LGsI6T36jz5Fg5RlaOjRcJ/zSXFiTQ+h2nQ=;
+        b=usOtonDaMYeMX3ZXgZaMup8ty4PM3XVEiN6I9tL/g6jEtooQtrH3AtpmkoV3OKDhGI
+         CzO8IsyvLopA/W4KWaJDJ0TOuGFmA8BP5aFb7z0qnz4WqAxVWyAKeU8rBM4xeYv1Wq18
+         T8psDYuiEpG+4hSUXXCkBp+RV89Kcmoqqw2Sng4JI5oVqP3kwkGwZ4ry9UsZkw/rZ78E
+         MCAsCOanEbPyYgdzjH00LujvZA1sCg5Eh2qGEptbkdreLbkHvf4zp+zoX3NnUaXAemV/
+         fozqoRz9M+kei7U5YJmCTtEHdTltjJojezjJOZtxhLi6CThD0oYhRnRkxNUxjQ30v5sd
+         uEEA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1790027204; x=1790632004;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=MZyT8k12LGsI6T36jz5Fg5RlaOjRcJ/zSXFiTQ+h2nQ=;
+        b=Uj+cBjnIR7vkNvapbuTzUMM8PhK19zfZ1lXYoPTkQ6axpDkq/v25fs6YrL0U279b2X
+         tk/vGFP9OokjlCecdEFvcpfgXi7stcvDDs1QHmnUl+Y8KUDfok5YRGmjl1VKz0+fCesU
+         /Ta/wPvSe5wkT0DKLfXEzxwSEfvcXFSkSIUihAwr4pCHz1+sPpeC9eXo8Pc+DClPfL0S
+         FEvezvbP90vrC1/lk6dBLjRRFlbWWDGav+FQLopK0M7e7zoiifzOefJmjfXO3kctyU2x
+         XsJOvsMVqWFTfmGRLFOqTxYq2aUkeio1h7FCpP8nfddn/ufGS2dZe+1x+e/H3Yd5VeYW
+         MIVA==
+X-Forwarded-Encrypted: i=1; AKwUvBx0tzghNr4YgLJ06VQHl6kiTv3pc8A8LGbtIovH/w1dzZVU4SFE5OtX1S25+DhV37s047SiwFAe1rAZjs2J@vger.kernel.org
+X-Gm-Message-State: AFuF++m8YAd4Z6P3QI/jbgGk/xbq2h0vXv0+WqcdB7gvsPc70AcnuNmo
+	57N6+GlaT8S98pPEuBfUs49lAYDEMmpLlnOaeV/idVsaPNePwSHRkyVaK+S2Orx7oUg=
+X-Gm-Gg: AYBFou3Mxo6ir6W5y16xC1WaWKEM7RXIROg4GSE2kykwSBsCPBCSXiCKXIsnCRbLbcN
+	d7Z1Q5Uzu85FDfo87KKpIpJZbnMBcGDGT0sgUuJcOCcKzjqgRTPa0I3E94FJprkRRY0bUJNk7mT
+	OhCTwu8Sr0QslIqAnbQ7CHjxfUxTzarUffKkkiolSCvdsiNgm0zIFkQa3Jca6GeJ9as/N9smpNo
+	FhcbGsP0MysNiUTt5dWJ10QwW9M3e9H12KZ6WhHxfRoke7O2nQvGNRoef1+Zq32+H7mA7/buwrV
+	xPE+3eUBGcS5c2s/W1xBm5Q+vdKPVdOpUiPerB9yijsdBgXrAEX+Y/nUOj/JTf7znoq0Izk19w4
+	j213egAfjDAl+xBO5AM+mjEHLKgsTftFn+l9S8WlyOvdsHmtXNw/Sp5zC9JhadqgqRKwRSyAafx
+	xTxMQFaF16x6N7XlZhoUvKWP8AeOVHDZyotDthHa6iCDKbvlBuwlnUZ0mjF+bRy1Pn0EDlyeg=
+X-Received: by 2002:a05:620a:4496:b0:93b:d7d7:8739 with SMTP id af79cd13be357-93c15e4296bmr271488185a.46.1790027203515;
+        Mon, 21 Sep 2026 14:46:43 -0700 (PDT)
+Received: from [172.22.22.28] ([73.62.185.64])
+        by smtp.gmail.com with ESMTPSA id af79cd13be357-93c19a604dasm24653985a.11.2026.09.21.14.46.41
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 21 Sep 2026 14:46:43 -0700 (PDT)
+Message-ID: <85b0e7de-e4a8-4e08-b801-a9664d366e1a@riscstar.com>
+Date: Mon, 21 Sep 2026 16:46:41 -0500
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -35,60 +69,173 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] Revert "interconnect: qcom: x1e80100: enable QoS
- configuration"
-To: Marc Zyngier <maz@kernel.org>, linux-kernel@vger.kernel.org,
- linux-pm@vger.kernel.org, linux-arm-msm@vger.kernel.org
-Cc: Raviteja Laggyshetty <raviteja.laggyshetty@oss.qualcomm.com>,
- Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
- Abel Vesa <abelvesa@kernel.org>, Bjorn Andersson <andersson@kernel.org>,
- Mostafa Saleh <smostafa@google.com>,
- Thorsten Leemhuis <regressions@leemhuis.info>
-References: <20260915123703.3228329-1-maz@kernel.org>
- <86y0cu49iv.wl-maz@kernel.org>
-From: Georgi Djakov <djakov@kernel.org>
+Subject: Re: [PATCH 1/4] dt-bindings: mfd: introduce the TC9564 config syscon
+To: Krzysztof Kozlowski <krzk@kernel.org>
+Cc: sboyd@kernel.org, bmasney+clk@redhat.com, jbrunet+clk@baylibre.com,
+ robh@kernel.org, krzk+dt@kernel.org, conor+dt@kernel.org, lee@kernel.org,
+ andersson@kernel.org, konradybcio@kernel.org, abelvesa@kernel.org,
+ kees@kernel.org, gustavoars@kernel.org, p.zabel@pengutronix.de,
+ daniel@riscstar.com, mohd.anwar@oss.qualcomm.com,
+ lorenzo.bianconi@oss.qualcomm.com, linux-clk@vger.kernel.org,
+ devicetree@vger.kernel.org, mfd@lists.linux.dev,
+ linux-arm-msm@vger.kernel.org, linux-hardening@vger.kernel.org,
+ linux-kernel@vger.kernel.org
+References: <20260918165234.687224-1-elder@riscstar.com>
+ <20260918165234.687224-2-elder@riscstar.com>
+ <20260920-fiery-fanatic-manticore-6abf0a@quoll>
 Content-Language: en-US
-In-Reply-To: <86y0cu49iv.wl-maz@kernel.org>
+From: Alex Elder <elder@riscstar.com>
+In-Reply-To: <20260920-fiery-fanatic-manticore-6abf0a@quoll>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On 9/21/26 11:47 PM, Marc Zyngier wrote:
-> On Tue, 15 Sep 2026 13:37:03 +0100,
-> Marc Zyngier <maz@kernel.org> wrote:
+On 9/20/26 1:18 PM, Krzysztof Kozlowski wrote:
+> On Fri, Sep 18, 2026 at 11:52:30AM -0500, Alex Elder wrote:
+>> Define the binding for a system controller used in the Toshiba
+>> TC9564 SoC.
 >>
->> This reverts commit 5a8b2cc36e796d595c9d97eab23c2be22805cc1c.
->>
->> Since the introduction of this QoS change, X1 machines based on the
->> Purwa SoC (such as the Lenovo Mini X) take a hard reset at boot time.
->>
->> Other machines based on Hamoa (such as the X1E001DE Snapdragon Devkit)
->> end-up with a similar hard reset while under load, most likely due to
->> the PCIe ports being starved of traffic.
->>
->> Revert the whole thing until someone figures out what magic parameters
->> allow QoS to work in a sensible manner, as a usable machine is somehow
->> preferable to one that crashes efficiently.
->>
->> Link: https://lore.kernel.org/all/apgeBNSiP01YfNcs@google.com
->> Link: https://lore.kernel.org/all/86ld9d4h4n.wl-maz@kernel.org
->> Signed-off-by: Marc Zyngier <maz@kernel.org>
->> Cc: Georgi Djakov <djakov@kernel.org>
->> Cc: Raviteja Laggyshetty <raviteja.laggyshetty@oss.qualcomm.com>
->> Cc: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
->> Cc: Abel Vesa <abelvesa@kernel.org>
->> Cc: Bjorn Andersson <andersson@kernel.org>
->> Cc: Mostafa Saleh <smostafa@google.com>
->> Cc: Thorsten Leemhuis <regressions@leemhuis.info>
->> ---
->>   drivers/interconnect/qcom/x1e80100.c | 485 ---------------------------
->>   1 file changed, 485 deletions(-)
-> 
-> Any update on applying this? These machines have been broken for the
-> past 4 release candidates, and it'd be great to get them back to a
-> working state.
-> 
-The revert is in linux-next already and i will propagate it as a fix in
-a couple of days. Thank you for the report and for sending the patch!
+>> Co-developed-by: Daniel Thompson <daniel@riscstar.com>
+>> Signed-off-by: Daniel Thompson <daniel@riscstar.com>
+>> Signed-off-by: Alex Elder <elder@riscstar.com>
 
-BR,
-Georgi
+Thank you for your feedback, Krzysztof.
+
+>> ---
+>>   .../bindings/mfd/toshiba,tc9564.yaml          | 56 +++++++++++++++++++
+>>   MAINTAINERS                                   |  1 +
+>>   2 files changed, 57 insertions(+)
+>>   create mode 100644 Documentation/devicetree/bindings/mfd/toshiba,tc9564.yaml
+>>
+>> diff --git a/Documentation/devicetree/bindings/mfd/toshiba,tc9564.yaml b/Documentation/devicetree/bindings/mfd/toshiba,tc9564.yaml
+>> new file mode 100644
+>> index 0000000000000..32e73a727c82a
+>> --- /dev/null
+>> +++ b/Documentation/devicetree/bindings/mfd/toshiba,tc9564.yaml
+>> @@ -0,0 +1,56 @@
+>> +# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
+>> +%YAML 1.2
+>> +---
+>> +$id: http://devicetree.org/schemas/mfd/toshiba,tc9564.yaml#
+>> +$schema: http://devicetree.org/meta-schemas/core.yaml#
+>> +
+>> +title: Toshiba TC9564 System Controller
+>> +
+>> +maintainers:
+>> +  - Alex Elder <elder@riscstar.com>
+>> +  - Daniel Thompson <daniel@riscstar.com>
+>> +
+>> +description: |
+> 
+> Do not need '|' unless you need to preserve formatting.
+
+OK.
+
+>> +  The Toshiba TC9564 is an SoC accessed by a host system through the
+>> +  upstream PCIe port on the PCIe switch it implements.  The switch includes
+>> +  an embedded PCIe endpoint on one of its downstream ports that provides
+>> +  access to various SoC peripherals (including a clock and reset controller)
+>> +  via one of its BARs.  A system controller provides managed access to the
+>> +  first two pages of this memory region to ensure accesses made by these
+>> +  peripherals produce well-defined results.
+>> +
+>> +properties:
+>> +  compatible:
+>> +    items:
+>> +      - const: toshiba,tc9564-config
+>> +      - const: syscon
+>> +      - const: simple-mfd
+>> +
+>> +  reg:
+>> +    maxItems: 1
+>> +
+>> +  ranges: true
+>> +
+>> +  '#address-cells':
+>> +    const: 1
+>> +
+>> +  '#size-cells':
+>> +    const: 1
+> 
+> Both properties and simple-mfd are redundant. You do not have children.
+
+I think ranges, #address-cells, and #size-cells might have
+been left here by mistake, and I hadn't noticed.  (They are
+required to be included within a pci-ep-bus sub-node, but
+even if that's why they're here, they're in the wrong place.)
+
+I will remove these three properties, as well as the
+"simple-mfd" compatible string in version 2.
+
+>> +
+>> +required:
+>> +  - compatible
+>> +  - reg
+>> +
+>> +unevaluatedProperties: false
+> 
+> And this should be additionalProperties instead
+
+OK.
+>> +examples:
+>> +  - |
+>> +    syscon@0 {
+>> +        compatible = "toshiba,tc9564-config",
+>> +                     "syscon",
+>> +                     "simple-mfd";
+>> +        reg = <0x0 0x2000>;
+>> +        #address-cells = <1>;
+>> +        #size-cells = <1>;
+>> +        ranges;
+> 
+> As you can see here - no children.
+
+I have seen some examples of syscon nodes that incorporate
+sub-devices, while others do not.
+
+Our purpose for defining a syscon here is to coordinate
+access for multiple devices to several registers located
+within the same page of memory.
+
+I think this device was originally defined in a sub-node
+because the only memory accesses it requires are within
+the range covered by the syscon.
+
+Should we instead define the syscon to be a fairly trivial
+standalone thing, and then refer to it in the clock/reset
+device node by phandle?  (Or have the driver look it up
+by compatible string?)
+
+     tc9564_config_syscon0: syscon@0 {
+         compatible = "toshiba,tc9564-config",
+                      "syscon";
+         reg = <0x0 0x2000>;
+     };
+
+     clock@1004 {
+         compatible = "toshiba,tc9564-clock";
+         toshiba,config-syscon = <&tc9564_config_syscon0 0x1004>;
+         #clock-cells = <1>;
+         #reset-cells = <1>;
+     };
+> I also have doubts that this is needed - I see no updates to the misc
+> binding, which would be referencing it. But then another point would be,
+> that you do not need separate child node, which has no properties.
+
+I'm sorry if I'm missing something.  I saw other examples of
+syscon nodes being defined, and tried to copy what I saw, but
+obviously got it wrong.
+
+> Well, has one - address space.
+> 
+> Lack of full picture is not helping here.
+
+I will gladly provide a better picture, but I also want to
+stay focused on what's necessary for the binding.
+
+I have more in my next message.
+
+					-Alex
+
+> Best regards,
+> Krzysztof
+
