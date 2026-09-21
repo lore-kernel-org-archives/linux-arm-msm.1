@@ -1,155 +1,158 @@
-Received: from meesny.iki.fi (meesny.iki.fi [195.140.195.201])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5C2E048986E;
-	Mon, 21 Sep 2026 16:28:58 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=195.140.195.201
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790008140; cv=pass; b=foScxZkIULugl8XLkSMRxWNdiHfBBjlRY/bECeZmAVUAZNjbzgaWXZi/VLulfyMrb5+DdGcJEurCyqjdFtwZnzDwTpOAIyMYyTplYC/0tjX/Y7eBI+6v4XnUvkuQ70VytL2//d7qyR+Ka+YpG+k6DPH/ExSyMqkeSeyyoUXwbXM=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790008140; c=relaxed/simple;
-	bh=HthIKG4t4k3A6FmQ5qfFbGeb3MupGvT8gLoDy0k+nYU=;
-	h=MIME-Version:Date:From:To:Cc:Message-Id:In-Reply-To:References:
-	 Subject:Content-Type; b=KMMtE6NPuD2gWCQl90S6gFAer6WVUmBfR76MaHLykOJcEt1BtnFk8utAJ+ZyzbOIScNlBkFTVXV42r+pr7g3SPVHVN50izR0VpG7MwuD945yQSTalcPXQrXUNiIPCYVU7P89lrzmTngXg9pzR6e+rWF0KbVZTE/8/Ly3hPksM/s=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=iki.fi; spf=pass smtp.mailfrom=iki.fi; dkim=pass (1024-bit key) header.d=iki.fi header.i=@iki.fi header.b=mtXfzP/4; arc=pass smtp.client-ip=195.140.195.201
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=iki.fi
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=iki.fi
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2AAD54DD3A3
+	for <linux-arm-msm@vger.kernel.org>; Mon, 21 Sep 2026 16:36:26 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1790008591; cv=none; b=qrPlYjAbbKOH3/FU1aDipr2l+Rf3hfO76kGkezUmtt9zTTKjLiPi2DidqU4qM0tqZCvhrp0PHH/i+51pFpyAp329TvfljXOaD7C66XmBopLy179gQ+YeooiKeqKfJahAWQvZM29oe6ldH74JO35u0qHR4KnaQJfINMqXgLx39xc=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1790008591; c=relaxed/simple;
+	bh=ePj7LWHmvyDl/tdSqb4au0ZhhGQySssn8vaz+N9s7LM=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=p6ub3YCEeLTbcpxTHieQl/eXuk8JsP2A6RsKy8GdmjXFVEDeYzn5BlMRck7mvJc/sI4bo5e+0VKXIAjxf0+tHB1T7jY/601TEv8zd3VfrGEpL+0HE8oX1s0nvr2FV+F3OcXV2WE6i0FajryQJyfugTTdkX3xJfHb+lUPlwYC9co=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=cyQNeBXw; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=eJTjH3IS; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=iki.fi header.i=@iki.fi header.b="mtXfzP/4"
-Received: from fauth-c1-smtp.messagingengine.com (fauth-c1-smtp.messagingengine.com [204.75.18.200])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange x25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	(Authenticated sender: jmtilli)
-	by meesny.iki.fi (Postfix) with ESMTPSA id 4hpTFG57nVzyR1;
-	Mon, 21 Sep 2026 19:28:50 +0300 (EEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iki.fi; s=meesny;
-	t=1790008131;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=t5e0UaYgiorPsh4vDhqkUX8q8sFJG6i6HatLbRVZxtI=;
-	b=mtXfzP/4C2htinXFimBpk8Ag9qP+Ktfapg1Z2Ts+EjFzl1ErT33aHCTXr8gsmQDSLKQqYc
-	ZI27EL9MVklkjzWWiWIFdvSY7qHmmCYNEyBpiMsooVRQtXMy7crbnEL1QkzWsJKFsoj9ed
-	lrasc0BgcUk7YUWGIbsDc/vEpwlYWro=
-ARC-Seal: i=1; a=rsa-sha256; d=iki.fi; s=meesny; cv=none; t=1790008131;
-	b=ON1m2/W06Kkb7pcmKZp0rFzwzp+b5yUpJ3MXiff0sJH8nDBPuECx7DHCtlGQFVoOSag39T
-	1L31AiH5MveTImM0vhejukjtOInWhGleRukxA/xAT1YIBlBzeGniltlYiOJ7hiGyjChx/e
-	4RMzDpUPdhc8oFk4IzVkq7++HQ4jgao=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=iki.fi;
-	s=meesny; t=1790008131;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=t5e0UaYgiorPsh4vDhqkUX8q8sFJG6i6HatLbRVZxtI=;
-	b=CBmPLV+1UNzBdE73BYq0sLgWPxi1ZHZ/NDtd7Zve3308kFqL6A6WUoCTOEfDwa4FFLbqLi
-	yaOpfo/MR5KNl8SXmEEnhaNGDryY4pUICtL9/xD0o4r736Y+zmuw+X2HIQ9ER7GnFLIWtm
-	wrMo8Sp/QLvb2GcnAri8vWSAZ8gPiek=
-ARC-Authentication-Results: i=1;
-	ORIGINATING;
-	auth=pass smtp.auth=jmtilli smtp.mailfrom=juha-matti.tilli@iki.fi
-Received: from ams-compute-02.internal (ams-compute-02.internal [10.64.2.62])
-	by mailfauth.ams.internal (Postfix) with ESMTP id 03D67198004A;
-	Mon, 21 Sep 2026 12:28:49 -0400 (EDT)
-Received: from ams-imap-13 ([10.64.2.33])
-  by ams-compute-02.internal (MEProxy); Mon, 21 Sep 2026 12:28:50 -0400
-X-ME-Sender: <xms:PluxapFdnPTsBbay6N6HKMhJhGBTbwFLlmPs96Cv3_wMXCjhv4JjvQ>
-    <xme:PluxapLw3n1SIqOAyc9XeXqGMzMMuXZbFHfpDkKS-J8GJhk1HXUs2aY0G6Q7gZER8
-    4HHg3Oa7TKlAyp-tkwCv_nPu4KkIipGwBUJZo9eOJe4IcQzqIXFJhVb>
-X-ME-Proxy-Cause: dmFkZTEA0pTLxbRa6jupCZWu3EErz1OrCDSyeCVlhXZ7W/sCqaBzg46dX4FuWGAJJoLGPd
-    cnz6LrloAAUIROtdaTo5xAf3oEv2WejE8HnP9AtUmnKSeGT3XAPwQCXCpnylw5ykIdA3o8
-    jrMgY5tozSrSokeoHnTCJimUFt424HZ8e6gqXocEB3wVmw0Eo7pDbQSvl8XwS54666/C86
-    xMDrNbymyxb8LmGteFk9C9RbN9WdMxDmgwAPglctpIkTHVNB/HVJG4EfE2y/R7uTbHXRiP
-    bNNECZqyrYwklTwB8Y08RkxcqT5paHCRxOQGc7F/CjzFl0OP7KZ2XZVqOZjAThES47hjGa
-    ZOSxwpdi9xrnIDr+s/d5PbOxnX0XtNvFeqhyyIPj7FI9XOrtCtsYjB+NXQTcJQZlGyVpVF
-    TTqnrVb/Mq3oQSeStuF4oPXDwH3oWlYvHSNam+jgs5UiLXxmFk4LthQHsVTY26JyOB7Tni
-    gaTqSx+bC9A+DVQewDm8QQc0lMfG9Pr27qPgnrwPs6NIp72ubp6lVWSwMsDk58cYhAoYg8
-    2EZ7nYa1/iq4WBzvbX+RsnqCZDOmf6sVib2/bwEz5rSIYbehVFhhkui8CKyMcIN5d2zksQ
-    KfPpsGnYcidTFzMurNXzffDv5j4z1x37sWFIPinUrC4U4BGZzlDMcP/51sUg
-X-ME-Proxy: <xmx:QVuxau20FE2KXcKVX8Kj7yaRBQNe-6jdW3-z6B0Gl2YJzKEoFJPjXw>
-    <xmx:QVuxarmelWeufT1RA5Sua8GdBTuPh2yKrXIUZ1qdZYttUe-gyIZBUQ>
-    <xmx:QVuxaj1oAI4oJfhj7z5dPwfOEQENof2sSkNsX2xUkL8rI9uZOKzHEg>
-    <xmx:QVuxaij3e-1bDlt7IpPqgHWdjKse2jBrfAXwG4_uDOfimIxqDeenig>
-    <xmx:QVuxapVvdNvHZDByOswJUsJ16qc8ujprXn-Hb7i1RXjkFhnyN-kIui37>
-Feedback-ID: i02414972:Fastmail
-Received: by mailuser.ams.internal (Postfix, from userid 501)
-	id E189CF8008B; Mon, 21 Sep 2026 12:28:46 -0400 (EDT)
-X-Mailer: MessagingEngine.com Webmail Interface
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="cyQNeBXw";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="eJTjH3IS"
+Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68LFAuD61438714
+	for <linux-arm-msm@vger.kernel.org>; Mon, 21 Sep 2026 16:36:24 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=+5h/BTbGMLat3GlcUa7PND
+	asgDbF992dy/rhfglNTnY=; b=cyQNeBXwp0tObcEkXqTzL5/s0lmvHsHXZ1Ichv
+	P2uEm6IuXs90mVNe/qgZPHSHP8Pi6kJi7sBI+928NZnNFDk/as6Vu9vA6ShI1aps
+	rlEtCrTrf0+Wh8v2+75TU0r1MrdvFOkNR05BRjkdtb/lmYXRu2isDmTINXWmM58g
+	bNJ8cziPUeWz3U+HbIFS+KT71+umhKQhqWTTZG2BoEfSCULuH7HoEvIBYFQNbK0C
+	iMMg1Hf/AX9HoR/lJF59P3ILOpMaUnB9ShtmPE23QULmK5KYRewQg9gM1Hk8XI2f
+	DrWEDvW7rkZQJjT+fDwG1iiBJIpHKjxn25tOyYQq8cYrxA0Q==
+Received: from mail-pl1-f198.google.com (mail-pl1-f198.google.com [209.85.214.198])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gtwf5jw3p-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Mon, 21 Sep 2026 16:36:24 +0000 (GMT)
+Received: by mail-pl1-f198.google.com with SMTP id d9443c01a7336-2cec4226c70so39904045ad.1
+        for <linux-arm-msm@vger.kernel.org>; Mon, 21 Sep 2026 09:36:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1790008583; x=1790613383; darn=vger.kernel.org;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=+5h/BTbGMLat3GlcUa7PNDasgDbF992dy/rhfglNTnY=;
+        b=eJTjH3ISspJHKDEAHXqhPhRCQ6BIVu4t7Z3XgUGRDs6xJpM7Ri/cDHKXuzDwyaR38R
+         BiO6rHZKJ0Z3x/o/aHT9837yujS2v1b393ZqyPWyCreWn1eb0qHvpwhCOxdhGE3d9z//
+         DhYsSxdaFU9v/tY+R3skX/fcjpdemM49CREleQvgIsvPMhxmLx/pXshjtdFi63T07Te4
+         K90dipIaMLno41QE3sfhUIGkGdnL39mGNjY+1GGp0Vfd7KU1QKAJI0pTpf8fyla8KRdo
+         VVVZHP64aZucvNMP66eKUp9Ww/eUUsvZcp9ezhrkWxqCtQ047VlY7thUCFfCf2iNoURy
+         QdoA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1790008583; x=1790613383;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=+5h/BTbGMLat3GlcUa7PNDasgDbF992dy/rhfglNTnY=;
+        b=N29XPFXkpRqMw6+x/A6JM/kwoVEsqY8KOeIpP19R50J6o9Gc/P8vUBV37btp/qKcJ5
+         WFGo32XsUwTouRu4Rb76F859RbAvKAIrhqoNB/C2d94rZs0m80jvmFl5iYLgow+cDIK6
+         q0NLuA4zJKtxdpUVwxLya1Ve/fargLUn/j9+BjFXaipkhE2tSi6p9uNKy1V+Jzt6yQLY
+         SBIT8X9psUVGuWb6vBF0Cqi0iE35SmGt+5+ABSYRSNSouAEbfjJzJ+9xannV5o9jDcfw
+         ArZorUZsLhSG2Ec3WIphCdMWVn8s2+/M7CtUJJGaBmgB407ZvGGdDKCiL6O/dCaAFVg1
+         5YxQ==
+X-Gm-Message-State: AFuF++mhvN9v+HArCuvmmiIzYlZzcdIhgsYewC3aQ27f4S3mBc64VOpu
+	pDQhKtfMCg8xx2gjRkODQJb5wOdwdVCg2+EnKugtq6VKkmU5LK2VPzzFS0lIiCMl5F1k+ZEfYa7
+	esbQ3FtR/5pnLhbrSkX7QsQM2ChjtdT3P8wN/NbGHDb0eN2YhTBIKCS1BT0XX7Mksfcbl
+X-Gm-Gg: AYBFou08VA5xdwSMlOSMX17+em3uO/M5d5jo3Lo7knk7Y3vLBKy14BZm6RlnLqwvinG
+	fBkKQm0tVDJMyyVB8nRwNhWtt93fRRJRI0fIS/i3Z9WdVph6kFLkY+bkvZrpPalcDfrqXGG8OP+
+	QOfchBndFuTdPPzyvIBfQ1+QtLTqZ9YgMDjLq2CGajoJR9x/ga8/TGuMrhzB2V7xsdrtY322GjR
+	k83SPBwAwt0RATAjOb604HHvIFjqEIx8ZZhZe1UdrlYIxrcPpMkCS58X6sNQadhxXPaPCV7hghm
+	Txap14c6H9uKw4Kwx1Y3/qPrwP3WAPDfjMgv9NCPZPdGOadq+APsJNwCn4VfjbZAoiP2I+fdhpk
+	4PaID7D3W8PNyo8So3csUcDlGJeZWQn6pYH2O
+X-Received: by 2002:a17:903:1a70:b0:2dd:7ede:4c0e with SMTP id d9443c01a7336-2ddb1af333bmr167485085ad.12.1790008583271;
+        Mon, 21 Sep 2026 09:36:23 -0700 (PDT)
+X-Received: by 2002:a17:903:1a70:b0:2dd:7ede:4c0e with SMTP id d9443c01a7336-2ddb1af333bmr167484745ad.12.1790008582732;
+        Mon, 21 Sep 2026 09:36:22 -0700 (PDT)
+Received: from hu-anupvish-hyd.qualcomm.com ([202.46.23.25])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2ddc17ba2c5sm37192355ad.49.2026.09.21.09.36.20
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 21 Sep 2026 09:36:22 -0700 (PDT)
+From: Anup Vishwakarma <anup.vishwakarma@oss.qualcomm.com>
+Subject: [PATCH 0/2] remoteproc: qcom_q6v5: Fix 64-bit address truncation
+ in ADSP and PAS drivers
+Date: Mon, 21 Sep 2026 22:06:17 +0530
+Message-Id: <20260921-b4-q6v5_address_truncation_fixes_upstream-v1-0-f19b4b947bba@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-ThreadId: AtmlxWozq_rN
-Date: Mon, 21 Sep 2026 19:28:26 +0300
-From: "Juha-Matti Tilli" <juha-matti.tilli@iki.fi>
-To: "Manivannan Sadhasivam" <manivannan.sadhasivam@oss.qualcomm.com>,
- "Manivannan Sadhasivam" <mani@kernel.org>,
- "David S . Miller" <davem@davemloft.net>,
- "Eric Dumazet" <edumazet@google.com>, "Jakub Kicinski" <kuba@kernel.org>,
- "Paolo Abeni" <pabeni@redhat.com>, "Simon Horman" <horms@kernel.org>,
- "Jeff Johnson" <jjohnson@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, netdev@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-wireless@vger.kernel.org,
- ath11k@lists.infradead.org, ath12k@lists.infradead.org,
- "Bjorn Andersson" <andersson@kernel.org>,
- "Chris Lew" <christopher.lew@oss.qualcomm.com>,
- "Deepak Kumar Singh" <deepak.singh@oss.qualcomm.com>,
- "Raj Kumar Bhagat" <raj.bhagat@oss.qualcomm.com>,
- "Jeff Hugo" <jeff.hugo@oss.qualcomm.com>
-Message-Id: <43688c97-deef-477d-8e6c-f293ecccd37a@app.fastmail.com>
-In-Reply-To: <20260921-qrtr-multi-ep-v2-3-27dd80d841a0@oss.qualcomm.com>
-References: <20260921-qrtr-multi-ep-v2-0-27dd80d841a0@oss.qualcomm.com>
- <20260921-qrtr-multi-ep-v2-3-27dd80d841a0@oss.qualcomm.com>
-Subject: Re: [PATCH v2 3/4] wifi: ath11k: Connect to the QMI server belonging to the
- device owned by this driver
-Content-Type: text/plain
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAFdsWoC/yWN4QrCIBRGX2Xc3wlO0rJXiRCnd2WQrXt1BGPvP
+ lc/D5zvfAswUkKGS7cA4Zw4vXOD/tBBePh8R5FiY1BSGWlVL4aj+JhZOx8jIbMrVHPwpc3cmL7
+ Irk5cCP1LxKDtKPXJnq2B1psIf0bLXW9/5jo8MZT9ANZ1A2OLFIGNAAAA
+X-Change-ID: 20260921-b4-q6v5_address_truncation_fixes_upstream-dc59f0579896
+To: Bjorn Andersson <andersson@kernel.org>,
+        Mathieu Poirier <mathieu.poirier@linaro.org>
+Cc: linux-arm-msm@vger.kernel.org, linux-remoteproc@vger.kernel.org,
+        linux-kernel@vger.kernel.org,
+        Anup Vishwakarma <anup.vishwakarma@oss.qualcomm.com>
+X-Mailer: b4 0.16.0
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1790008580; l=890;
+ i=anup.vishwakarma@oss.qualcomm.com; s=20260805; h=from:subject:message-id;
+ bh=ePj7LWHmvyDl/tdSqb4au0ZhhGQySssn8vaz+N9s7LM=;
+ b=s70G5mBGeJ992pwQBrrWqbV8+WLEN9gIPMosXjC+aQ7y44rnOxpHSF4P/r7UZNsos9D4Wv9Pt
+ wjvn7hGZXolDbBeHR69dLbeNADtj/K2lZCIAPPvD95xNmEWyoko5XSL
+X-Developer-Key: i=anup.vishwakarma@oss.qualcomm.com; a=ed25519;
+ pk=Y9ilCu91UQrzHOM14SG2IjnmQ1QSroH5uVeBSWEmEDM=
+X-Authority-Analysis: v=2.4 cv=SJLXx+vH c=1 sm=1 tr=0 ts=6ab15d08 cx=c_pps
+ a=MTSHoo12Qbhz2p7MsH1ifg==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
+ a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
+ a=EUspDBNiAAAA:8 a=PwTnTnql7yQPMyGp394A:9 a=QEXdDO2ut3YA:10 a=zgiPjhLxNE0A:10
+ a=GvdueXVYPmCkWapjIL-Q:22
+X-Proofpoint-GUID: zz0xY49RhFVKz0_WdiKjDPWauJCoydIF
+X-Proofpoint-ORIG-GUID: zz0xY49RhFVKz0_WdiKjDPWauJCoydIF
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTIxMDI0MiBTYWx0ZWRfX4rDpL9xZJLdA
+ 8/DQCoh/ezeVy6soJDBqY4FhPfJ1Xyc91G0ya5LfaF4gNY8UutCgS8ODNyP0SIXpnl6OTuCcctK
+ UJZZnr225EKzfQgZ+/0inX0cXBNyChM=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTIxMDI0MiBTYWx0ZWRfX6fyYa9lOG392
+ JwtKDNW304Y/2AHPeVn7K35LoLNwRqwwtEuAQBr7qJw2Jpq25Ju7LVGrnuWsnIGDkDiUVwtfeNk
+ WYJD8I/ALC+ejOCGAo3iLfPD3q45h+m67yHwFo+cmBSfDNEOOpLG1W3WloOO8huKRa+Ot6PSu36
+ hwJMTWv8DwhBf4bc0r7psfmoDCsUuYTyWU4acWKdCrxlK2d5guTJEYGuVxgZIKBns2+/NbuPeKE
+ 08et8MUyjn/Vz/U1gyasXVznltNxc2WkmYH+1YjC+uV6ySejX1q+f14YhvSAZiaKuXiT8hnI3Uo
+ dy6oZiyHtM6E1TukoqWpxBaUhecNtp6zYr4GZtQLxE7QLsimvY6xwgjZ96mdRMuQ7dUyfJ/iciq
+ BJkWsWssJserCO4LhblijBS6uACnelZR2o+tYU0vEsxaoAEG2MdwsCQDgCQINuSE0cqBdtybAVv
+ o3Z1SLDGfNZhHKxGqKQ==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-09-21_05,2026-09-21_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ lowpriorityscore=0 priorityscore=1501 impostorscore=0 suspectscore=0
+ malwarescore=0 adultscore=0 clxscore=1015 bulkscore=0 spamscore=0
+ phishscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2609040000
+ definitions=main-2609210242
 
-On Mon, Sep 21, 2026, at 14:23, Manivannan Sadhasivam via B4 Relay wrote:
-> From: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
-> 
-> When two identical ath11k PCIe devices are connected to the same host, both
-> advertise the WLFW service with the same service and instance id. The QMI
-> lookup reports both servers to each device, so a device may connect to the
-> firmware running on the other device.
-> 
-> But now, QRTR provides each MHI endpoint a unique node id which is
-> different from the node id announced by the device. So use the same id to
-> pick the correct server. Add a get_qrtr_node_id() HIF callback that returns
-> the node id derived from the MHI controller index and zero for transports
-> that do not assign one. In the new_server callback, skip any service whose
-> node id does not match. A node id of zero disables the check, so transports
-> that do not assign one keep their current behavior.
+These two patches resolve signed 32-bit integer truncation bugs in
+the segment dump and address translation callbacks of the ADSP and
+PAS remoteproc drivers, using unsigned size_t offsets and explicit
+comparison-based bounds checking.
 
-Tested-by: Juha-Matti Tilli <juha-matti.tilli@iki.fi>
-Tested-on: 2x WCN6855 hw2.1 PCI WLAN.HSP.1.1-04685-QCAHSPSWPL_V1_V2_SILICONZ_IOE-1
+Signed-off-by: Anup Vishwakarma <anup.vishwakarma@oss.qualcomm.com>
+---
+Anup Vishwakarma (2):
+      remoteproc: qcom_q6v5_pas: Fix 64-bit address truncation in dump and translation
+      remoteproc: qcom_q6v5_adsp: Fix 64-bit address truncation in translation
 
-That's from the new rebased patches, v2, applied with git am.
+ drivers/remoteproc/qcom_q6v5_adsp.c |  7 +++++--
+ drivers/remoteproc/qcom_q6v5_pas.c  | 22 +++++++++++++++++-----
+ 2 files changed, 22 insertions(+), 7 deletions(-)
+---
+base-commit: 5c4d4169604b335c38bbc79bc1fc03042981fc6f
+change-id: 20260921-b4-q6v5_address_truncation_fixes_upstream-dc59f0579896
 
-Again, I picked the entire QRTR from net-next/main after your changes,
-and backported the ath11k and ath12k changes to 6.6.157 kernel. The
-conflicts in ath11k and ath12k are really simple to resolve. The QRTR is
-better to take as-is, as it's a large and substantially modified piece
-of code, and backporting could risk different behavior.
+Best regards,
+--  
+Anup Vishwakarma <anup.vishwakarma@oss.qualcomm.com>
 
-Unfortunately, it seems I'm locked to 6.6 kernel until I manage to boot
-a newer kernel. I tested 6.12 series and my perfectly valid gzipped
-initrd ext2 file system is recognised as gzipped, but mounting the root
-from /dev/ram0 fails due to -EBUSY. Why this happens with 6.12.x but not
-6.6.157 is a mystery to me. Prompting two AI models didn't help, they
-keep on just repeating the same useless points. So I have to resort to
-heavier weapons, printk and maybe even git bisect.
-
-So, because 6.6 kernel in our CPU doesn't work with ath12k due to lack
-of interrupts and I can't boot a newer kernel yet, you'll have to either
-find someone with two ath12k cards, or just accept to test the ath12k
-change with a single card and hope for the best.
-
-My understanding is that 6.12 would support just 1 interrupt in ath12k.
-If I could only boot it, that is.
-
-BR, Juha-Matti
