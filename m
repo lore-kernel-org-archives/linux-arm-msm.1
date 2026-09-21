@@ -1,151 +1,182 @@
-Received: from mail-qk2-f13.google.com (mail-qk2-f13.google.com [74.125.230.205])
+Received: from mail-wm2-f13.google.com (mail-wm2-f13.google.com [74.125.225.141])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4849F3AEF57
-	for <linux-arm-msm@vger.kernel.org>; Mon, 21 Sep 2026 07:11:45 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.230.205
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6706D400986
+	for <linux-arm-msm@vger.kernel.org>; Mon, 21 Sep 2026 07:32:57 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.225.141
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789974706; cv=none; b=j3do4UBxKTo/6/qsHxjkKbw6AmfqhMPg5ShSml7hYFRe26z2fa2ggKp8LhqZhxDioDyalofymyOBDMNvAcTC0ccFIDsLa0xaBvdxd8JR/0qsCHQ+27Ef5Zhguf7rpcyHpQwxLVnLX31J8U/JzTOZc/6gBPbTxoD9rC5e6tB867o=
+	t=1789975979; cv=none; b=R5FGkJZoc0gqXWIMnf2DNvrkfCCx4y1WjVes7OK3A+UlM7OIWZ6AGuDc7ZWMIl/1xfEn+2/+vJS7CgCO3Hgyd4yteRN9iq9oQ8kNrE3quVLjWzFEONPFmQdx0J5qQ/cVNysUxNPFNaM0eFWleRwKiaTaAww3pvFqFBlQFFoKxLs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789974706; c=relaxed/simple;
-	bh=IWy4s88MhDwNpHOdGe3jP1qXGMxg1e08ypz8dpiL9Dc=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=a/h1S2IDX+Mr3oQtmOTDSnlfDSSAvUXX7v/7AdUn14z3V7oJVnGiipCf7gZflk3Q4u7NZk762lh41NGED+/9BNIKbxAu/9rFjtOhzCu05ZzlO03qASaGapz+qNZDWOacWibmg7eBFs+Wj+Yt2DPMheNMcv9b5zXshtdh3Vthw0M=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=linux-m68k.org; spf=pass smtp.mailfrom=gmail.com; arc=none smtp.client-ip=74.125.230.205
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=linux-m68k.org
+	s=arc-20240116; t=1789975979; c=relaxed/simple;
+	bh=adZvlINEsMAvwxha5qZotDk5fgCUf4YSk8i9/nH5zvU=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=R1ZTNUH8OMzXwijqke+YHGN9kAEgfQvWmqukTKmEaqepTahrgRqN5YxCjmMoHdIzkRzOMo3KJt955xv9SbPaZG8uXWN9GJ5Ufi+eueudA9hTKw58dulyvDr9YSu7tv0abrxe5TrwFNXtQ+OLsN6cZ7fAvNeZTzTCfpiJHVBeSyI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=avlUYIXs; arc=none smtp.client-ip=74.125.225.141
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-qk2-f13.google.com with SMTP id af79cd13be357-93a2a8c29c4so287581685a.3
-        for <linux-arm-msm@vger.kernel.org>; Mon, 21 Sep 2026 00:11:45 -0700 (PDT)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="avlUYIXs"
+Received: by mail-wm2-f13.google.com with SMTP id 5b1f17b1804b1-49b91369d18so19096635e9.0
+        for <linux-arm-msm@vger.kernel.org>; Mon, 21 Sep 2026 00:32:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1789975975; x=1790580775; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=feqkDAo3psQqEeeV5D6w+0v2eNiDg14CK6zySTrGKK4=;
+        b=avlUYIXsFDdVrrmgj30kPR4NuzZ/TTzj1G/1xZeUehmyeSjKbDzxSouabat2HIlAkF
+         GC+ADrHUGotm5MlCG3bYlD+g56PFvEnFDMFnVPZTjguuigjBY6CCU8fA8eJ3qZg5zD8a
+         dxgmKRZs/51tcBeZAYTdHRsM7N4+aaw+qtk8NfY0aKR6Y6YbEpHWwUiHhTfD7V9P98z3
+         YaMhpmQlfurDnXyD5NbD3Tr2E06Fx57rlNFVA0yebY5ZB9/gJPPOp8XKo0Wm/d9m+uw3
+         1EJGSDqAAmd2ej1kWFQkFUR3dG4znjuyWVyoOFOXN3zcPtG1gNmEaO6IyH2d8uUPpLnI
+         I6Eg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1789974704; x=1790579504;
-        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
-         :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=kOgPfCklfblv+g6nVV8jDyWvhZtKrbscHFmS476/ss4=;
-        b=pyegseA8W92ykwYzA5jo886E5R7zE6FqjmTjcKbDS+1Zy4fgDDASVMkevw8sHhsAbY
-         EPWOOukXyUN6eEJgxB7WZ8HeAj/Mm4Dg+56VJx30tI3KJVyqKG4h7Z/vELUiEQo5qxgR
-         FLkl/nSFGbIo3Cl6HUSQXEMd4kE7ArGf4S0YDj6wEs7UIciHanspYTeK7ulfQN8z5t67
-         oPJmYK1Z/lZpCfvonO0fIP5V9IxMe8LVzIITl47du2Eo+CkpSGP5v+a2ICuklc43rZZh
-         FrZ8W7i7yYHgLsM7BNjs74+EL/KhYvdf2ffgHEpH1nIYgsQikbJaWvDV+3Swbl0iHk4q
-         5jNQ==
-X-Forwarded-Encrypted: i=1; AKwUvBzVNvMgspXmfdOlOI+CXy42RZxhJvtKMs6oDo4hp0TSI11SiZ2U4IPjpAp5L54Fmy/iAZSMhvXFC/DZERFo@vger.kernel.org
-X-Gm-Message-State: AFuF++kCVZokxXhVZQYOCDYS39oZimIzB5833iaC/qqX+IxxhLVDVWnJ
-	gtxI6RHlxA+3JHPsOTzUYiz6GV1ccxaP9ubtdwoBeMDVBH5q8HffycVF1mlHxIqs
-X-Gm-Gg: AYBFou00XKGTsF0v2adeNAzZdL2mpbRRi5rwh+Asp3dulam9FB2ABr1DMgq2zxdB+Ks
-	PXfAL5EelhxbfvSBV9Jr2z68LOdkrH+6fz1bNCRL0vwb9ntOiyM4ZxyMwFr/XDxcR6EyYA4UDaf
-	Gt7nfqaaMV0GHkSGK7RiVO3nJtFvzbodzWsvgQHMJFSkDRFq3xm66qZhUwuzYe0ZTBmD9Ooaanu
-	JImhjWANV7lms5hsF57GOHOZng0Ofzu/7h7unnAhDA2bdL+BPxVThmV6mCznqWGwoW9A6aGj7eW
-	I/VJzVAn/ybgB7kXh9S60gKS5b6JREdEOvOVxbqNnGKXGc3CXbPjZEkQGUuihO91vb2EoA1mUWa
-	7KtyMrCb2ZbvzDbhMbcU4qPOtVG4tUBalDZESZxN/Zs/MZ67BOeIevy88XYLgEWSDmsAtLFT8gX
-	MM59QcrErOYwgpUeqMfqY4W7S4TQcYrAnB5PprwMqPlSBDeW0GgO4TKmiIlxmKtciOs7veyQEBO
-	0FKVyOtVxNpbfkmlphAColbhFMaShXrs81Whg==
-X-Received: by 2002:a05:620a:4611:b0:93b:d7a2:83d6 with SMTP id af79cd13be357-93bf57b386amr897735885a.69.1789974704103;
-        Mon, 21 Sep 2026 00:11:44 -0700 (PDT)
-Received: from mail-qk2-f42.google.com (mail-qk2-f42.google.com. [74.125.230.234])
-        by smtp.gmail.com with ESMTPSA id af79cd13be357-93bedaaf3fbsm572994785a.19.2026.09.21.00.11.43
-        for <linux-arm-msm@vger.kernel.org>
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 21 Sep 2026 00:11:43 -0700 (PDT)
-Received: by mail-qk2-f42.google.com with SMTP id d75a77b69052e-52fb767cc97so29138111cf.3
-        for <linux-arm-msm@vger.kernel.org>; Mon, 21 Sep 2026 00:11:43 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AKwUvBypAlIKprbhzFcsklZe85DhSjVjiC4ofNy1aNc7vqE9Rmxz8g0+ZhZoonlvvT2E01bY+TTZ+xImec+DaYMj@vger.kernel.org
-X-Received: by 2002:a05:6102:c4f:b0:7a7:198b:674e with SMTP id
- ada2fe7eead31-7a7198b70eemr2080779137.35.1789974354429; Mon, 21 Sep 2026
- 00:05:54 -0700 (PDT)
+        d=1e100.net; s=20260707; t=1789975975; x=1790580775;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=feqkDAo3psQqEeeV5D6w+0v2eNiDg14CK6zySTrGKK4=;
+        b=mbDPknf9v0DNt1tVG4UiUpL33tgJ3x15D1cMFu2JLpHd+auof5DHmy0abj0Mm3JmJH
+         x/qDrzc0n3AsiFjUG8q63w9w1YVm4mzeZChnhg7jR3blIaloTYkuZFgblIbO6wL3ITf0
+         v0NDLvqTtxWEIcFSacCFvCdYe7Sj2oj0Zwzu0ZsrVu7G85hLLHmOEjYxjKepBmo4gCHs
+         Yfae1RI88Tjn4KAbc66W9N+EkiRD2EMEbRNkZYTm3xPv/EkciXoZPU2gag8k5lAobCV5
+         VMk/Z/UgQ9LUqSgEuYUHhgVfzANG7GwrJhH8tTLA1iBnLCs8pnAm8GlGr9rX0WsFbsvJ
+         DgJw==
+X-Gm-Message-State: AFuF++lmzomTXeikHT5L6Lq/j7KeWODuxUo5Dnq9AC80NUFcJ5qeRhgz
+	SiDl7alezUi2C0Axq6kcrR8CvqRTEfFR3ByqwIzN59ccAYTaIBeLbzf56s4VpnJayBf/lbLDsWM
+	=
+X-Gm-Gg: AYBFou0DMY8F8PYcfif/f9GYNmIf4IzHQOSmVVXo3l/It5KJISpEaQENBTjkRytzhG/
+	jd5VhV0DAaEDGxmwxonAhcGFGQ8KsfwVApDgCv6j00MYXSr5rOf0gDvDIiaAzT9FtnMYPYyNLZx
+	Q1kAZS8KZkAXE2cFSsjFvxSOyLxmyRWfEIHftohVQBJ+pPFWn1kqWEZnJG9BgSzgh9fUbRAd9D9
+	Mq9YkKcKy8z1W34SyOR2IR3FR9nmjl5ToMxb3SpMkr6gv99QodsccXdkWJ9Cn7F/mZESaVhj3yl
+	RLwMwO06q5IkCHMm90G4IQR7o3KFa4R+Z2WbqGZI1hbQDXDbTbxsjWIqu3CXo4oUEW4c3AkWBoG
+	gsOyVJLCR2zUaXM0p+JX1vB5enMcZl/cqMnVCKyKYVoa2MnwzeEgry+YrUi8UKHNZ34vuK27v0h
+	OV6oD00HsVleJmDomiaJsAD+2TM+e4t86d/Xb+69uNG3JVtF76ATMLIUpfJ+Y8NeTvTokFHYCp7
+	emL8YWFpUqIZsYSLYMgB1OjSIvyaAsZBO8=
+X-Received: by 2002:a05:600c:1552:b0:49c:fc6e:a3df with SMTP id 5b1f17b1804b1-49fcc2b2785mr119785285e9.30.1789975975149;
+        Mon, 21 Sep 2026 00:32:55 -0700 (PDT)
+Received: from royzah-ThinkPad-T14-Gen-4.tii.local ([213.42.107.24])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-49fcd068059sm219343885e9.5.2026.09.21.00.32.52
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 21 Sep 2026 00:32:53 -0700 (PDT)
+From: Royyan Zahir <royzah@gmail.com>
+To: linux-arm-msm@vger.kernel.org
+Cc: andersson@kernel.org,
+	konradybcio@kernel.org,
+	aesteve@redhat.com,
+	linux-kernel@vger.kernel.org,
+	Royyan Zahir <royzah@gmail.com>
+Subject: [PATCH] firmware: qcom: scm: clear download mode and SDI before a restart
+Date: Mon, 21 Sep 2026 11:32:31 +0400
+Message-ID: <20260921073231.3254159-1-royzah@gmail.com>
+X-Mailer: git-send-email 2.55.0
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260918-kbingham-orientation-v6-0-5e8b1f01be29@ideasonboard.com>
-In-Reply-To: <20260918-kbingham-orientation-v6-0-5e8b1f01be29@ideasonboard.com>
-From: Geert Uytterhoeven <geert@linux-m68k.org>
-Date: Mon, 21 Sep 2026 09:05:42 +0200
-X-Gmail-Original-Message-ID: <CAMuHMdWWOB48AUCbXh=9ZGCK2qZyVH06kJ2paRY-wxkq5NC16A@mail.gmail.com>
-X-Gm-Features: AcwNN1WjYVMR8LtQc9Hk29H2mvcKQfYOy_09b_XHHWkw76vwCkEFuElZphsH01o
-Message-ID: <CAMuHMdWWOB48AUCbXh=9ZGCK2qZyVH06kJ2paRY-wxkq5NC16A@mail.gmail.com>
-Subject: Re: [PATCH v6 0/6] dt-bindings: Orientation defines
-To: Kieran Bingham <kieran.bingham@ideasonboard.com>
-Cc: Mauro Carvalho Chehab <mchehab@kernel.org>, Rob Herring <robh@kernel.org>, 
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
-	Jacopo Mondi <jacopo@jmondi.org>, Sakari Ailus <sakari.ailus@linux.intel.com>, 
-	Jimmy Su <jimmy.su@intel.com>, Matthias Fend <matthias.fend@emfend.at>, 
-	Mikhail Rudenko <mike.rudenko@gmail.com>, Daniel Scally <dan.scally@ideasonboard.com>, 
-	Jacopo Mondi <jacopo.mondi@ideasonboard.com>, 
-	Michael Riesch <michael.riesch@collabora.com>, 
-	Benjamin Mugnier <benjamin.mugnier@foss.st.com>, 
-	Sylvain Petinot <sylvain.petinot@foss.st.com>, 
-	Laurent Pinchart <laurent.pinchart@ideasonboard.com>, 
-	Paul Elder <paul.elder@ideasonboard.com>, Martin Kepplinger <martin.kepplinger@puri.sm>, 
-	Quentin Schulz <quentin.schulz@theobroma-systems.com>, 
-	Tommaso Merciai <tomm.merciai@gmail.com>, Svyatoslav Ryhel <clamor95@gmail.com>, 
-	Richard Acayan <mailingradian@gmail.com>, Frank Li <Frank.Li@nxp.com>, 
-	Sascha Hauer <s.hauer@pengutronix.de>, Pengutronix Kernel Team <kernel@pengutronix.de>, 
-	Fabio Estevam <festevam@gmail.com>, Bjorn Andersson <andersson@kernel.org>, 
-	Konrad Dybcio <konradybcio@kernel.org>, Geert Uytterhoeven <geert+renesas@glider.be>, 
-	Magnus Damm <magnus.damm@gmail.com>, Heiko Stuebner <heiko@sntech.de>, 
-	Thierry Reding <thierry.reding@kernel.org>, Jonathan Hunter <jonathanh@nvidia.com>, 
-	linux-media@vger.kernel.org, devicetree@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, linux@ew.tq-group.com, imx@lists.linux.dev, 
-	linux-arm-kernel@lists.infradead.org, linux-arm-msm@vger.kernel.org, 
-	linux-renesas-soc@vger.kernel.org, linux-rockchip@lists.infradead.org, 
-	linux-tegra@vger.kernel.org, 
-	Kieran Bingham <kieran.bingham+renesas@ideasonboard.com>, 
-	Alexander Stein <alexander.stein@ew.tq-group.com>, David Heidelberg <david@ixit.cz>, 
-	Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>, 
-	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, 
-	Laurent Pinchart <laurent.pinchart+renesas@ideasonboard.com>, 
-	Quentin Schulz <quentin.schulz@cherry.de>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 
-Hi Kieran,
+With qcom_scm.download_mode=1 an IQ-9075 never completes a warm reboot.
+XBL stops in download mode and only a cold power cycle recovers the board:
 
-On Fri, 18 Sept 2026 at 12:55, Kieran Bingham
-<kieran.bingham@ideasonboard.com> wrote:
-> Add a new dt-bindings/media/video-interface-devices.h header that
-> initially supports the Orientation types and convert existing users
-> throughout the code base.
+  B -    857233 - TCSR reg value 0x10
+  B -    865071 - RamDump -  Image Load, Start
+  B -    884317 - boot_dload_entry
+  B -   6774477 - USB DUMP failed, because USB cable disconnect
 
-Just noticed these are already in since commit 6ab5acfb8dd38729
-("dt-bindings: media: Add macros for video interface devices") in
-media/master (next-20260903 and later)?
+0x10 is FIELD_PREP(QCOM_DLOAD_MASK, QCOM_DLOAD_FULLDUMP), so the cookie
+written at probe is still set when XBL reads it, even though systemd
+stopped every unit in order and nothing panicked.
 
-> v3 collects tags, and fixes the typo, but drops all hunks that do not
+Two latches have to come down and neither reliably does.
+qcom_scm_shutdown() clears the cookie from .shutdown, which
+device_shutdown() calls after the SCM device's own dependencies may
+already be torn down, so the write can fail with nothing left to report
+it to. SDI is disabled only from probe, and only when download_mode was
+zero at that moment, so a board booted with download mode on keeps
+watchdog debug armed for the life of the boot. Writing "off" to the
+module parameter later clears the cookie but never reaches SDI, which is
+why that runtime workaround does not restore warm reboot.
 
-[...]
+Clear both from a reboot notifier. kernel_restart_prepare() calls the
+reboot_notifier_list before device_shutdown(), so the SCM device and its
+interconnect path are still up. SYS_OFF_MODE_RESTART_PREPARE is not
+usable here: kernel_restart() runs do_kernel_restart_prepare() after
+kernel_restart_prepare(), which is after device_shutdown().
 
-> v2:
+The notifier reaches its instance with container_of() rather than the
+global, so it does not conflict with the series dropping __scm [1].
 
-Interesting changelog order ;-)
+Registration warns rather than failing probe, because the instance is
+already published at that point and callers may be using it.
 
-[...]
+.shutdown stays for the power-off path.
 
-> v3:
+Tested on an IQ-9075 EVK with download mode armed: warm reboot returns in
+~36s, and a console capture across a cold boot and the warm reboot shows
+two complete boot cycles with no TCSR cookie read and no boot_dload_entry.
 
-[...]
+[1] https://lore.kernel.org/linux-arm-msm/20260914-scm-device-api-v1-0-3573e2596c51@redhat.com/
 
-> -v4:
+Signed-off-by: Royyan Zahir <royzah@gmail.com>
+---
+ drivers/firmware/qcom/qcom_scm.c | 22 ++++++++++++++++++++++
+ 1 file changed, 22 insertions(+)
 
-[...]
-
-
-> -v5:
->  - Definitions now accepted in linux-media, rebased to get conversions in.
-
-Oh, you say so here ;-)
-
->       arm64: dts: renesas: Convert to new media orientation definitions
-
-So it's been safe for me to pick this up since v5?
-
-Gr{oetje,eeting}s,
-
-                        Geert
-
+diff --git a/drivers/firmware/qcom/qcom_scm.c b/drivers/firmware/qcom/qcom_scm.c
+index 3eaa4c9..06cba43 100644
+--- a/drivers/firmware/qcom/qcom_scm.c
++++ b/drivers/firmware/qcom/qcom_scm.c
+@@ -27,6 +27,7 @@
+ #include <linux/of_platform.h>
+ #include <linux/of_reserved_mem.h>
+ #include <linux/platform_device.h>
++#include <linux/reboot.h>
+ #include <linux/reset-controller.h>
+ #include <linux/remoteproc.h>
+ #include <linux/sizes.h>
+@@ -63,6 +64,8 @@ struct qcom_scm {
+ 
+ 	struct qcom_tzmem_pool *mempool;
+ 	unsigned int wq_cnt;
++
++	struct notifier_block reboot_nb;
+ };
+ 
+ struct qcom_scm_current_perm_info {
+@@ -2790,6 +2793,20 @@ static const struct kernel_param_ops minidump_dest_param_ops = {
+ module_param_cb(minidump_dest, &minidump_dest_param_ops, NULL, 0644);
+ MODULE_PARM_DESC(minidump_dest, "Minidump SRAM destination: usb (default) or storage");
+ 
++/* reboot_notifier_list runs before device_shutdown(); RESTART_PREPARE does not. */
++static int qcom_scm_reboot_notify(struct notifier_block *nb, unsigned long action,
++				  void *data)
++{
++	struct qcom_scm *scm = container_of(nb, struct qcom_scm, reboot_nb);
++
++	qcom_scm_set_download_mode(scm, QCOM_DLOAD_NODUMP);
++
++	/* Separate latch: probe only disables SDI when download mode is off. */
++	qcom_scm_disable_sdi();
++
++	return NOTIFY_DONE;
++}
++
+ static int qcom_scm_probe(struct platform_device *pdev)
+ {
+ 	struct qcom_tzmem_pool_config pool_config;
+@@ -2941,6 +2958,11 @@ static int qcom_scm_probe(struct platform_device *pdev)
+ 	/* Initialize the Gunyah watchdog platform device. */
+ 	qcom_scm_gunyah_wdt_init(scm);
+ 
++	scm->reboot_nb.notifier_call = qcom_scm_reboot_notify;
++	ret = devm_register_reboot_notifier(&pdev->dev, &scm->reboot_nb);
++	if (ret)
++		dev_warn(scm->dev, "failed to register reboot notifier: %d\n", ret);
++
+ 	return 0;
+ 
+ err_rmem:
 -- 
-Geert Uytterhoeven -- There's lots of Linux beyond ia32 -- geert@linux-m68k.org
+2.55.0
 
-In personal conversations with technical people, I call myself a hacker. But
-when I'm talking to journalists I just say "programmer" or something like that.
-                                -- Linus Torvalds
