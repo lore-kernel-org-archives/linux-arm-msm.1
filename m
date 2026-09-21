@@ -1,182 +1,137 @@
-Received: from mail-wm2-f13.google.com (mail-wm2-f13.google.com [74.125.225.141])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from perceval.ideasonboard.com (perceval.ideasonboard.com [213.167.242.64])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6706D400986
-	for <linux-arm-msm@vger.kernel.org>; Mon, 21 Sep 2026 07:32:57 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.225.141
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 70F6B42B301;
+	Mon, 21 Sep 2026 07:35:50 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=213.167.242.64
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789975979; cv=none; b=R5FGkJZoc0gqXWIMnf2DNvrkfCCx4y1WjVes7OK3A+UlM7OIWZ6AGuDc7ZWMIl/1xfEn+2/+vJS7CgCO3Hgyd4yteRN9iq9oQ8kNrE3quVLjWzFEONPFmQdx0J5qQ/cVNysUxNPFNaM0eFWleRwKiaTaAww3pvFqFBlQFFoKxLs=
+	t=1789976152; cv=none; b=B3HxzCiD6wCN18Qv3bpmzpewVL7ZTFCOqPQIdv1dvfOnIjScPfrDmlpf6fKkrJYa+JPZuhaZD4+aiw4/vtWwwpawzem0F2v6owMdUXZm27jvfonE0lKjwnnqI1dxA2DjEy5v4fQ6HEfszj/89Rzh/psncZlQeA+XaS8vbCkpOJs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789975979; c=relaxed/simple;
-	bh=adZvlINEsMAvwxha5qZotDk5fgCUf4YSk8i9/nH5zvU=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=R1ZTNUH8OMzXwijqke+YHGN9kAEgfQvWmqukTKmEaqepTahrgRqN5YxCjmMoHdIzkRzOMo3KJt955xv9SbPaZG8uXWN9GJ5Ufi+eueudA9hTKw58dulyvDr9YSu7tv0abrxe5TrwFNXtQ+OLsN6cZ7fAvNeZTzTCfpiJHVBeSyI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=avlUYIXs; arc=none smtp.client-ip=74.125.225.141
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	s=arc-20240116; t=1789976152; c=relaxed/simple;
+	bh=EgnOCBnnJ5SOs0ufuZFAwGK3a5ufdWOiG7rFGmgMKeU=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=MCSLaizLCkvvEqg4I2J7u+z5WxnSrosvc7V0kq09+El5aU31CNYqVutVAwfDkqt4S9M5YrSZLn2txM92gClExVhg5aWFY+X6qc32+VOS85+DraBlshZOWlk2UD5Wd24QNJ/qCUSNB0OFTHz7nk1HnCrTB7wk/VUbX6f95kwJwNI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=ideasonboard.com; spf=pass smtp.mailfrom=ideasonboard.com; dkim=pass (1024-bit key) header.d=ideasonboard.com header.i=@ideasonboard.com header.b=NYJnH9ji; arc=none smtp.client-ip=213.167.242.64
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=ideasonboard.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ideasonboard.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="avlUYIXs"
-Received: by mail-wm2-f13.google.com with SMTP id 5b1f17b1804b1-49b91369d18so19096635e9.0
-        for <linux-arm-msm@vger.kernel.org>; Mon, 21 Sep 2026 00:32:57 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1789975975; x=1790580775; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=feqkDAo3psQqEeeV5D6w+0v2eNiDg14CK6zySTrGKK4=;
-        b=avlUYIXsFDdVrrmgj30kPR4NuzZ/TTzj1G/1xZeUehmyeSjKbDzxSouabat2HIlAkF
-         GC+ADrHUGotm5MlCG3bYlD+g56PFvEnFDMFnVPZTjguuigjBY6CCU8fA8eJ3qZg5zD8a
-         dxgmKRZs/51tcBeZAYTdHRsM7N4+aaw+qtk8NfY0aKR6Y6YbEpHWwUiHhTfD7V9P98z3
-         YaMhpmQlfurDnXyD5NbD3Tr2E06Fx57rlNFVA0yebY5ZB9/gJPPOp8XKo0Wm/d9m+uw3
-         1EJGSDqAAmd2ej1kWFQkFUR3dG4znjuyWVyoOFOXN3zcPtG1gNmEaO6IyH2d8uUPpLnI
-         I6Eg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1789975975; x=1790580775;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=feqkDAo3psQqEeeV5D6w+0v2eNiDg14CK6zySTrGKK4=;
-        b=mbDPknf9v0DNt1tVG4UiUpL33tgJ3x15D1cMFu2JLpHd+auof5DHmy0abj0Mm3JmJH
-         x/qDrzc0n3AsiFjUG8q63w9w1YVm4mzeZChnhg7jR3blIaloTYkuZFgblIbO6wL3ITf0
-         v0NDLvqTtxWEIcFSacCFvCdYe7Sj2oj0Zwzu0ZsrVu7G85hLLHmOEjYxjKepBmo4gCHs
-         Yfae1RI88Tjn4KAbc66W9N+EkiRD2EMEbRNkZYTm3xPv/EkciXoZPU2gag8k5lAobCV5
-         VMk/Z/UgQ9LUqSgEuYUHhgVfzANG7GwrJhH8tTLA1iBnLCs8pnAm8GlGr9rX0WsFbsvJ
-         DgJw==
-X-Gm-Message-State: AFuF++lmzomTXeikHT5L6Lq/j7KeWODuxUo5Dnq9AC80NUFcJ5qeRhgz
-	SiDl7alezUi2C0Axq6kcrR8CvqRTEfFR3ByqwIzN59ccAYTaIBeLbzf56s4VpnJayBf/lbLDsWM
-	=
-X-Gm-Gg: AYBFou0DMY8F8PYcfif/f9GYNmIf4IzHQOSmVVXo3l/It5KJISpEaQENBTjkRytzhG/
-	jd5VhV0DAaEDGxmwxonAhcGFGQ8KsfwVApDgCv6j00MYXSr5rOf0gDvDIiaAzT9FtnMYPYyNLZx
-	Q1kAZS8KZkAXE2cFSsjFvxSOyLxmyRWfEIHftohVQBJ+pPFWn1kqWEZnJG9BgSzgh9fUbRAd9D9
-	Mq9YkKcKy8z1W34SyOR2IR3FR9nmjl5ToMxb3SpMkr6gv99QodsccXdkWJ9Cn7F/mZESaVhj3yl
-	RLwMwO06q5IkCHMm90G4IQR7o3KFa4R+Z2WbqGZI1hbQDXDbTbxsjWIqu3CXo4oUEW4c3AkWBoG
-	gsOyVJLCR2zUaXM0p+JX1vB5enMcZl/cqMnVCKyKYVoa2MnwzeEgry+YrUi8UKHNZ34vuK27v0h
-	OV6oD00HsVleJmDomiaJsAD+2TM+e4t86d/Xb+69uNG3JVtF76ATMLIUpfJ+Y8NeTvTokFHYCp7
-	emL8YWFpUqIZsYSLYMgB1OjSIvyaAsZBO8=
-X-Received: by 2002:a05:600c:1552:b0:49c:fc6e:a3df with SMTP id 5b1f17b1804b1-49fcc2b2785mr119785285e9.30.1789975975149;
-        Mon, 21 Sep 2026 00:32:55 -0700 (PDT)
-Received: from royzah-ThinkPad-T14-Gen-4.tii.local ([213.42.107.24])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-49fcd068059sm219343885e9.5.2026.09.21.00.32.52
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 21 Sep 2026 00:32:53 -0700 (PDT)
-From: Royyan Zahir <royzah@gmail.com>
-To: linux-arm-msm@vger.kernel.org
-Cc: andersson@kernel.org,
-	konradybcio@kernel.org,
-	aesteve@redhat.com,
-	linux-kernel@vger.kernel.org,
-	Royyan Zahir <royzah@gmail.com>
-Subject: [PATCH] firmware: qcom: scm: clear download mode and SDI before a restart
-Date: Mon, 21 Sep 2026 11:32:31 +0400
-Message-ID: <20260921073231.3254159-1-royzah@gmail.com>
-X-Mailer: git-send-email 2.55.0
+	dkim=pass (1024-bit key) header.d=ideasonboard.com header.i=@ideasonboard.com header.b="NYJnH9ji"
+Received: from killaraus.ideasonboard.com (2001-14ba-70f3-e800--a06.rev.dnainternet.fi [IPv6:2001:14ba:70f3:e800::a06])
+	by perceval.ideasonboard.com (Postfix) with ESMTPSA id DA348C36;
+	Mon, 21 Sep 2026 09:33:54 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ideasonboard.com;
+	s=mail; t=1789976035;
+	bh=EgnOCBnnJ5SOs0ufuZFAwGK3a5ufdWOiG7rFGmgMKeU=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=NYJnH9jiYSuPY+BwBDdOisWoegG0YGvrWBJuC91+Dqj36D8Ei+WW6V0hr2WdRLzA4
+	 ceTiFTS1Dko1IjjTrFjG3vY0NRiNYl6eVDHf1tdYPmY6GvW9EDDxObEKF12Kxkr7uO
+	 cfiq2l+XPxObD84mFWWDFi3fAyfeni8e6gtQ0o3Q=
+Date: Mon, 21 Sep 2026 10:35:38 +0300
+From: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
+To: Geert Uytterhoeven <geert@linux-m68k.org>
+Cc: Kieran Bingham <kieran.bingham@ideasonboard.com>,
+	Mauro Carvalho Chehab <mchehab@kernel.org>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Jacopo Mondi <jacopo@jmondi.org>,
+	Sakari Ailus <sakari.ailus@linux.intel.com>,
+	Jimmy Su <jimmy.su@intel.com>,
+	Matthias Fend <matthias.fend@emfend.at>,
+	Mikhail Rudenko <mike.rudenko@gmail.com>,
+	Daniel Scally <dan.scally@ideasonboard.com>,
+	Jacopo Mondi <jacopo.mondi@ideasonboard.com>,
+	Michael Riesch <michael.riesch@collabora.com>,
+	Benjamin Mugnier <benjamin.mugnier@foss.st.com>,
+	Sylvain Petinot <sylvain.petinot@foss.st.com>,
+	Paul Elder <paul.elder@ideasonboard.com>,
+	Martin Kepplinger <martin.kepplinger@puri.sm>,
+	Quentin Schulz <quentin.schulz@theobroma-systems.com>,
+	Tommaso Merciai <tomm.merciai@gmail.com>,
+	Svyatoslav Ryhel <clamor95@gmail.com>,
+	Richard Acayan <mailingradian@gmail.com>,
+	Frank Li <Frank.Li@nxp.com>, Sascha Hauer <s.hauer@pengutronix.de>,
+	Pengutronix Kernel Team <kernel@pengutronix.de>,
+	Fabio Estevam <festevam@gmail.com>,
+	Bjorn Andersson <andersson@kernel.org>,
+	Konrad Dybcio <konradybcio@kernel.org>,
+	Geert Uytterhoeven <geert+renesas@glider.be>,
+	Magnus Damm <magnus.damm@gmail.com>,
+	Heiko Stuebner <heiko@sntech.de>,
+	Thierry Reding <thierry.reding@kernel.org>,
+	Jonathan Hunter <jonathanh@nvidia.com>, linux-media@vger.kernel.org,
+	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+	linux@ew.tq-group.com, imx@lists.linux.dev,
+	linux-arm-kernel@lists.infradead.org, linux-arm-msm@vger.kernel.org,
+	linux-renesas-soc@vger.kernel.org,
+	linux-rockchip@lists.infradead.org, linux-tegra@vger.kernel.org,
+	Kieran Bingham <kieran.bingham+renesas@ideasonboard.com>,
+	Alexander Stein <alexander.stein@ew.tq-group.com>,
+	David Heidelberg <david@ixit.cz>,
+	Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
+	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+	Quentin Schulz <quentin.schulz@cherry.de>
+Subject: Re: [PATCH v6 0/6] dt-bindings: Orientation defines
+Message-ID: <20260921073538.GA1466037@killaraus.ideasonboard.com>
+References: <20260918-kbingham-orientation-v6-0-5e8b1f01be29@ideasonboard.com>
+ <CAMuHMdWWOB48AUCbXh=9ZGCK2qZyVH06kJ2paRY-wxkq5NC16A@mail.gmail.com>
+ <CAMuHMdVhK0vm_Ksze_=jG8D_=8Q45v+ezNbxwL7JntTt_v_fkg@mail.gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <CAMuHMdVhK0vm_Ksze_=jG8D_=8Q45v+ezNbxwL7JntTt_v_fkg@mail.gmail.com>
 
-With qcom_scm.download_mode=1 an IQ-9075 never completes a warm reboot.
-XBL stops in download mode and only a cold power cycle recovers the board:
+On Mon, Sep 21, 2026 at 09:07:01AM +0200, Geert Uytterhoeven wrote:
+> On Mon, 21 Sept 2026 at 09:05, Geert Uytterhoeven wrote:
+> > On Fri, 18 Sept 2026 at 12:55, Kieran Bingham wrote:
+> > > Add a new dt-bindings/media/video-interface-devices.h header that
+> > > initially supports the Orientation types and convert existing users
+> > > throughout the code base.
+> >
+> > Just noticed these are already in since commit 6ab5acfb8dd38729
+> > ("dt-bindings: media: Add macros for video interface devices") in
+> > media/master (next-20260903 and later)?
+> >
+> > > v3 collects tags, and fixes the typo, but drops all hunks that do not
+> >
+> > [...]
+> >
+> > > v2:
+> >
+> > Interesting changelog order ;-)
+> >
+> > [...]
+> >
+> > > v3:
+> >
+> > [...]
+> >
+> > > -v4:
+> >
+> > [...]
+> >
+> >
+> > > -v5:
+> > >  - Definitions now accepted in linux-media, rebased to get conversions in.
+> >
+> > Oh, you say so here ;-)
+> >
+> > >       arm64: dts: renesas: Convert to new media orientation definitions
+> >
+> > So it's been safe for me to pick this up since v5?
+> 
+> No it's not, there is a hard dependency.
 
-  B -    857233 - TCSR reg value 0x10
-  B -    865071 - RamDump -  Image Load, Start
-  B -    884317 - boot_dload_entry
-  B -   6774477 - USB DUMP failed, because USB cable disconnect
+The whole series needs to be postponed by one kernel cycle :-/ It's not
+urgent so it's not a big deal. Kieran will have the priviledge of
+rebasing and sending a v7 :-)
 
-0x10 is FIELD_PREP(QCOM_DLOAD_MASK, QCOM_DLOAD_FULLDUMP), so the cookie
-written at probe is still set when XBL reads it, even though systemd
-stopped every unit in order and nothing panicked.
-
-Two latches have to come down and neither reliably does.
-qcom_scm_shutdown() clears the cookie from .shutdown, which
-device_shutdown() calls after the SCM device's own dependencies may
-already be torn down, so the write can fail with nothing left to report
-it to. SDI is disabled only from probe, and only when download_mode was
-zero at that moment, so a board booted with download mode on keeps
-watchdog debug armed for the life of the boot. Writing "off" to the
-module parameter later clears the cookie but never reaches SDI, which is
-why that runtime workaround does not restore warm reboot.
-
-Clear both from a reboot notifier. kernel_restart_prepare() calls the
-reboot_notifier_list before device_shutdown(), so the SCM device and its
-interconnect path are still up. SYS_OFF_MODE_RESTART_PREPARE is not
-usable here: kernel_restart() runs do_kernel_restart_prepare() after
-kernel_restart_prepare(), which is after device_shutdown().
-
-The notifier reaches its instance with container_of() rather than the
-global, so it does not conflict with the series dropping __scm [1].
-
-Registration warns rather than failing probe, because the instance is
-already published at that point and callers may be using it.
-
-.shutdown stays for the power-off path.
-
-Tested on an IQ-9075 EVK with download mode armed: warm reboot returns in
-~36s, and a console capture across a cold boot and the warm reboot shows
-two complete boot cycles with no TCSR cookie read and no boot_dload_entry.
-
-[1] https://lore.kernel.org/linux-arm-msm/20260914-scm-device-api-v1-0-3573e2596c51@redhat.com/
-
-Signed-off-by: Royyan Zahir <royzah@gmail.com>
----
- drivers/firmware/qcom/qcom_scm.c | 22 ++++++++++++++++++++++
- 1 file changed, 22 insertions(+)
-
-diff --git a/drivers/firmware/qcom/qcom_scm.c b/drivers/firmware/qcom/qcom_scm.c
-index 3eaa4c9..06cba43 100644
---- a/drivers/firmware/qcom/qcom_scm.c
-+++ b/drivers/firmware/qcom/qcom_scm.c
-@@ -27,6 +27,7 @@
- #include <linux/of_platform.h>
- #include <linux/of_reserved_mem.h>
- #include <linux/platform_device.h>
-+#include <linux/reboot.h>
- #include <linux/reset-controller.h>
- #include <linux/remoteproc.h>
- #include <linux/sizes.h>
-@@ -63,6 +64,8 @@ struct qcom_scm {
- 
- 	struct qcom_tzmem_pool *mempool;
- 	unsigned int wq_cnt;
-+
-+	struct notifier_block reboot_nb;
- };
- 
- struct qcom_scm_current_perm_info {
-@@ -2790,6 +2793,20 @@ static const struct kernel_param_ops minidump_dest_param_ops = {
- module_param_cb(minidump_dest, &minidump_dest_param_ops, NULL, 0644);
- MODULE_PARM_DESC(minidump_dest, "Minidump SRAM destination: usb (default) or storage");
- 
-+/* reboot_notifier_list runs before device_shutdown(); RESTART_PREPARE does not. */
-+static int qcom_scm_reboot_notify(struct notifier_block *nb, unsigned long action,
-+				  void *data)
-+{
-+	struct qcom_scm *scm = container_of(nb, struct qcom_scm, reboot_nb);
-+
-+	qcom_scm_set_download_mode(scm, QCOM_DLOAD_NODUMP);
-+
-+	/* Separate latch: probe only disables SDI when download mode is off. */
-+	qcom_scm_disable_sdi();
-+
-+	return NOTIFY_DONE;
-+}
-+
- static int qcom_scm_probe(struct platform_device *pdev)
- {
- 	struct qcom_tzmem_pool_config pool_config;
-@@ -2941,6 +2958,11 @@ static int qcom_scm_probe(struct platform_device *pdev)
- 	/* Initialize the Gunyah watchdog platform device. */
- 	qcom_scm_gunyah_wdt_init(scm);
- 
-+	scm->reboot_nb.notifier_call = qcom_scm_reboot_notify;
-+	ret = devm_register_reboot_notifier(&pdev->dev, &scm->reboot_nb);
-+	if (ret)
-+		dev_warn(scm->dev, "failed to register reboot notifier: %d\n", ret);
-+
- 	return 0;
- 
- err_rmem:
 -- 
-2.55.0
+Regards,
 
+Laurent Pinchart
