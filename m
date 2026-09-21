@@ -1,179 +1,140 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2B898488DAF;
-	Mon, 21 Sep 2026 12:10:19 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C9A55492E48
+	for <linux-arm-msm@vger.kernel.org>; Mon, 21 Sep 2026 12:10:41 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789992621; cv=none; b=V1kOzRuh1x3pECSjJf1YXEtojjVi06KM0JB7Q7fjhNwiaSigzX1KBUmcYP4mBUDHpx7vUDKklglQl1shD8jTlKtGGGIasZ1bfbV31+uOAcPorLDqxlmhOYjIxwRxh8U0aAyDRACbW1nmv15IpJY0nf7YZkv2LOVY6HgaTn6V7Sk=
+	t=1789992643; cv=none; b=QEHa5jPYD/6wFYelA4FSllmXSbeXHvgf24v+Wh1lh+aim5SSoK+7VTHHPioKQGm8EORcRzK7joFsRDTNImlcI16wzuiXCAgKPZMIiB91LMeJawoQWNoPelO2s45t4TEcQEHm7BwMzp3CDEmI0+SPzEGeMyb0iE5HOtmVIllmo9k=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789992621; c=relaxed/simple;
-	bh=FG6tH/Y8T9b0/2uVNUkAWRpyGeXjSLQD/gEba+dtlXg=;
+	s=arc-20240116; t=1789992643; c=relaxed/simple;
+	bh=EbK6ODNmO0D3SZaqHghB8w5UPz7lhy68KwjWae3JCWU=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=UL1iKedbE6OPJ6F0SO3vyTO6uCWD5jpDFWKCNmPKEl3PnvKeuF4MhQMTCADZvsoWRc2JMztiXCcDI1gOr75+NKDYMx/CXRuq24XnTUTcpkRiD6AZuBu7C8USDRruJKcTuE76ZzLcucpc8IeGZVFrFk0XQlZoFQsC0hdxMexMVRg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=NOpaGtJ8; arc=none smtp.client-ip=100.103.45.18
+	 Content-Type:Content-Disposition:In-Reply-To; b=XbE3ck6VjLgJD2OwB/sh9pc1pkF93olRH8WqsRVC+f6PdMEMB1KSMBFTGKKvOMB1zy0zZFuWwL95f6UX6i/vWUzS2CwpKLkTtWXjnqw+YgmBFIVPpIBgseHUi2xkddvFbUQ//EwwKOd5GEPFIn28BaQYAU9EldbzUQBQdwVM0Lk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=VFyqWjTw; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=U3J4yaHB; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="NOpaGtJ8"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1FE441F000FF;
-	Mon, 21 Sep 2026 12:10:19 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1789992619;
-	bh=3uAtYTanQvdsf1B+VPerfl6h7vAqJMoph6hxUBqYX7Y=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=NOpaGtJ8d++Zjqk+UoXhakEjmOlnVQIsuHpbXfFYV7K8jr4hyOGCVgwc3IAF2ni5w
-	 p1uvEkfp9voac0b7T8ihJV0NM2Q68FaNxdCAGlv/f+CLHPK45HP7IzejYj81Ylz2HJ
-	 +QuWP1387BZap0C4UNLw1ceCBKNpcnPezEY5lbrThWRyOM/V0Phx4YqGxyGEc28xUH
-	 oZlcD8tzG9DuLVRxOdQnCR879W9saNzv26PHUVOQvaFhKpXpga0d2EnYJ2nIghTC/y
-	 twDPiKShfjwM90J4jSLynS47kyx0geFk9lM0oXqfT/xzzUqwL4OaH3pmkHFW2Yfcvj
-	 +xaneJMo9qBRQ==
-Date: Mon, 21 Sep 2026 14:10:17 +0200
-From: Thierry Reding <thierry.reding@kernel.org>
-To: Kieran Bingham <kieran.bingham@ideasonboard.com>
-Cc: Laurent Pinchart <laurent.pinchart@ideasonboard.com>, 
-	Geert Uytterhoeven <geert@linux-m68k.org>, Mauro Carvalho Chehab <mchehab@kernel.org>, 
-	Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
-	Conor Dooley <conor+dt@kernel.org>, Jacopo Mondi <jacopo@jmondi.org>, 
-	Sakari Ailus <sakari.ailus@linux.intel.com>, Jimmy Su <jimmy.su@intel.com>, 
-	Matthias Fend <matthias.fend@emfend.at>, Mikhail Rudenko <mike.rudenko@gmail.com>, 
-	Daniel Scally <dan.scally@ideasonboard.com>, Jacopo Mondi <jacopo.mondi@ideasonboard.com>, 
-	Michael Riesch <michael.riesch@collabora.com>, Benjamin Mugnier <benjamin.mugnier@foss.st.com>, 
-	Sylvain Petinot <sylvain.petinot@foss.st.com>, Paul Elder <paul.elder@ideasonboard.com>, 
-	Martin Kepplinger <martin.kepplinger@puri.sm>, Quentin Schulz <quentin.schulz@theobroma-systems.com>, 
-	Tommaso Merciai <tomm.merciai@gmail.com>, Svyatoslav Ryhel <clamor95@gmail.com>, 
-	Richard Acayan <mailingradian@gmail.com>, Frank Li <Frank.Li@nxp.com>, 
-	Sascha Hauer <s.hauer@pengutronix.de>, Pengutronix Kernel Team <kernel@pengutronix.de>, 
-	Fabio Estevam <festevam@gmail.com>, Bjorn Andersson <andersson@kernel.org>, 
-	Konrad Dybcio <konradybcio@kernel.org>, Geert Uytterhoeven <geert+renesas@glider.be>, 
-	Magnus Damm <magnus.damm@gmail.com>, Heiko Stuebner <heiko@sntech.de>, 
-	Jonathan Hunter <jonathanh@nvidia.com>, linux-media@vger.kernel.org, devicetree@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, linux@ew.tq-group.com, imx@lists.linux.dev, 
-	linux-arm-kernel@lists.infradead.org, linux-arm-msm@vger.kernel.org, linux-renesas-soc@vger.kernel.org, 
-	linux-rockchip@lists.infradead.org, linux-tegra@vger.kernel.org, 
-	Alexander Stein <alexander.stein@ew.tq-group.com>, David Heidelberg <david@ixit.cz>, 
-	Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>, Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, 
-	Quentin Schulz <quentin.schulz@cherry.de>
-Subject: Re: [PATCH v6 0/6] dt-bindings: Orientation defines
-Message-ID: <arEeG06MiZ_97uzH@orome>
-References: <20260918-kbingham-orientation-v6-0-5e8b1f01be29@ideasonboard.com>
- <CAMuHMdWWOB48AUCbXh=9ZGCK2qZyVH06kJ2paRY-wxkq5NC16A@mail.gmail.com>
- <CAMuHMdVhK0vm_Ksze_=jG8D_=8Q45v+ezNbxwL7JntTt_v_fkg@mail.gmail.com>
- <20260921073538.GA1466037@killaraus.ideasonboard.com>
- <arEVs0FDleyHeeLj@orome>
- <178999124332.1723501.13535584681937232110@ping.linuxembedded.co.uk>
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="VFyqWjTw";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="U3J4yaHB"
+Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68LAeC7k419389
+	for <linux-arm-msm@vger.kernel.org>; Mon, 21 Sep 2026 12:10:41 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-type:date:from:in-reply-to:message-id:mime-version
+	:references:subject:to; s=qcppdkim1; bh=tL8IyACdL/zO8BuJLGunz4pX
+	sGhD+T9jiJsqTTcZuvA=; b=VFyqWjTwW54GTNCnz2FKpdw20pT1oxAyyab+0Agy
+	FSdcsuxzuMfu5Oa7nxXGkQgU9mrvXECx2grs/OAVHnPgbHA8BrF/89/CV9OWBd3m
+	9R27Z4CEzmu85gokRnGzaKQoIPgYguh0dOfk4M4euUDhiV9di2201XccN1CfPIKl
+	bCUG+ol7CrRnXEeAaUbooBVbNpn5u1ZPJboPtxVfv32FdJEyJjjC9+G4sXFBGKct
+	ChnCpsB8SFElmEbR6y6OugjAzjZATqVFLTHak/OzPyvIGaO2KkdN+Z8jDWKN7iCu
+	ISihCh9M4mrCNC8DzLvnexyIfa2f9bM81g36NkKTRCi5dg==
+Received: from mail-ua1-f72.google.com (mail-ua1-f72.google.com [209.85.222.72])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gtyxq95qa-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Mon, 21 Sep 2026 12:10:40 +0000 (GMT)
+Received: by mail-ua1-f72.google.com with SMTP id a1e0cc1a2514c-980989f5030so2313459241.0
+        for <linux-arm-msm@vger.kernel.org>; Mon, 21 Sep 2026 05:10:40 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1789992640; x=1790597440; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=tL8IyACdL/zO8BuJLGunz4pXsGhD+T9jiJsqTTcZuvA=;
+        b=U3J4yaHBkM/mnZbtukwDB/5Viwi4eYDpCuKgE6JBlc9Kn6UDb2Z9SAfmHOU1i+Onzv
+         BC2bF5l76rkTzC9lZRTYcB6xpQr9ahyzCpG0QdJ7HoC1BGJ8ponZSyhallmSoyU2gA8U
+         fEFzzDclZ3jvHmQiI1bjWoZZF1+ICG4oixONzXIgOMvSQdMQenG98rEl3rzXL79Hx7gR
+         W6OPKQdnCAAotcqSP+9J6K524kwpRsgxy7d5Fwz5hmtZhCEPHP2EZM1HK9uIJQiCWdd1
+         s5+69mpRvnBgoAoywmvILCZ0s02wv/tMHxKhSYZinZ+EPX7Z+UtEr+314lgHALf54t7A
+         JRfg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1789992640; x=1790597440;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=tL8IyACdL/zO8BuJLGunz4pXsGhD+T9jiJsqTTcZuvA=;
+        b=kmR2CONdHofiCIdvhh6RB50UzSi73HodL/Vpg8ILXEiJ0g1gB3upM8w5K4iMb5rHhJ
+         NC5ByIH3FmPnJSYey3ojZPY0AJ1YAKSHD5bthD9FPPJ6kKzePIFj1zIZ2Opq0e+c6e/V
+         BDsb7FB5b8tlvmM//jNRcuLNmSx2qb+louhWxSRaYjBA+dg8GE56Kv1TqM9wRQiPlLhm
+         t9xE7buU71TYKqwLOlP94bzo8qACuxRosJkAmvSLXKVoY1UOdfEH9981BWy+xB95B1Ib
+         fnjBlfBMTVX42sU9pW64TGUiJkElcxK3+orzrEj4PTN3/TVJMNYdrVzzFvAFAE9WHRxR
+         4KbA==
+X-Forwarded-Encrypted: i=1; AKwUvBwNfZljf6T7ooIg9vqOlAfR04iCpxVLHhLNsC1+brM9oJAxl6MNzFVyhT1adCuwpWkDHxL8ECWtwO2ZKEjU@vger.kernel.org
+X-Gm-Message-State: AFuF++khOVdrLhdkEm3zFl81yjCpIo8BzEJ6jjhc8sDj05+iSfCpCBgG
+	QsWWjKRZ3Ww021ssyol0KuDqP97J0OGz1mirjo0OvxuGEVelVA3+w0J1yfPr4mq3P0zWmUZfB63
+	lVHYZH/93YMb4pxczQBcJik7X/gfmsCumVvubRyyd1E0p++DogGYy81f5FRRGuPvS/xkI
+X-Gm-Gg: AYBFou3IrrmNyrNJzjvMAOzliQLLqS3F2E/Q0AUc6Gf/Af+oCZN7f16dqswVUGBiuz/
+	ahS+Iuk08uPC1Y0ujEVPS1PgcNBt3i7vOlVAs3UPaLJ0Q7srIsAOLXKktUQ5SNRBzsJBe+bW4ZL
+	qWpqAuKcHg8vDTxftZqXcbVSw1+dOxWZj7Pu9J9gujNL5vv00ilJN+nA06E2sGEmyeC3xTnRYCP
+	9uzr+Q0/HgMmQaG6edGwCGBbzDutAynpLwSx8Ih1HxpDFGHxoA5fcfaXX14Lcviww+FxI9VSuID
+	YkfiM44aG3NUN2uiH5fItJw4TDJBb7F3wqqYL+cwfl8AHpjFB6ngqBkZpaZlu/7Ah9PKwh9tjlm
+	OxBI8HAQbJvtgew==
+X-Received: by 2002:a05:6102:370c:b0:7a2:568f:815d with SMTP id ada2fe7eead31-7a55c2891a3mr4038166137.18.1789992639887;
+        Mon, 21 Sep 2026 05:10:39 -0700 (PDT)
+X-Received: by 2002:a05:6102:370c:b0:7a2:568f:815d with SMTP id ada2fe7eead31-7a55c2891a3mr4038117137.18.1789992639421;
+        Mon, 21 Sep 2026 05:10:39 -0700 (PDT)
+Received: from oss.qualcomm.com ([86.121.170.232])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-49fc55cd8a8sm283004565e9.0.2026.09.21.05.10.37
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 21 Sep 2026 05:10:37 -0700 (PDT)
+Date: Mon, 21 Sep 2026 15:10:36 +0300
+From: Abel Vesa <abel.vesa@oss.qualcomm.com>
+To: Neil Armstrong <neil.armstrong@linaro.org>
+Cc: Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        Viken Dadhaniya <viken.dadhaniya@oss.qualcomm.com>,
+        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+        linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v2] soc: qcom: geni-se: provide PROG_RAM_DEPTH for I2S
+ HUB Serial Engines
+Message-ID: <ol2x2dw6akjc25o5kw4ji7h7niyqtpvjopg6xljy2rob6ays7u@n6ufsrlev3dw>
+References: <20260918-topic-sm8x50-i2c-hub-fw-ram-v2-1-30e960966802@linaro.org>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="vnshuij5kqlf56wu"
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <178999124332.1723501.13535584681937232110@ping.linuxembedded.co.uk>
+In-Reply-To: <20260918-topic-sm8x50-i2c-hub-fw-ram-v2-1-30e960966802@linaro.org>
+X-Proofpoint-GUID: jHpDGr96aq7Q4-Y1xMwHi4EFV8wcAHTy
+X-Proofpoint-ORIG-GUID: jHpDGr96aq7Q4-Y1xMwHi4EFV8wcAHTy
+X-Authority-Analysis: v=2.4 cv=OtraWC/t c=1 sm=1 tr=0 ts=6ab11ec0 cx=c_pps
+ a=ULNsgckmlI/WJG3HAyAuOQ==:117 a=po8fGBi+ks8MzcVQGuqtFQ==:17
+ a=kj9zAlcOel0A:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
+ a=KKAkSRfTAAAA:8 a=EUspDBNiAAAA:8 a=U8wyIeYwd4xs6rStnZoA:9 a=CjuIK1q_8ugA:10
+ a=1WsBpfsz9X-RYQiigVTh:22 a=cvBusfyB2V15izCimMoJ:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTIxMDE3NiBTYWx0ZWRfXwokGuTbUfNhM
+ ZIxftyOpUG6wQPbO/hJ4xGpD61lMmkrjYjupOHLuGHsXtjo7wiC9ZzJ6xTkQUt8kjgLeC8q8tNb
+ jg3iSs/opEx7jr2iUoQyl2EnJ2U+NjIz9IC/mWGKCKZOt0UWKIb7TLd62u5Al/d8jzsJAFClAjD
+ DiTDrLOCvFaM0ULHWvzFPT9mJCX+v2qT8gkHFVqjhUxJqNtTLo0zgUYg8EsmgNj42+3cn2Etzz/
+ BoSAga5GKYiSZ0wyRPciT/OkDbL9qJwz1Kh366iCHvY+I3fYwG88cEIMAPXIWeR4XyoOdLbsYG3
+ UwYygDSrtUz0WvB8wHoq+Fs5pyoWqWY51Bfsbuou0zwMvXOskI4/c2qnB8lDy6iCwVKB41CCDq9
+ T/5nV6mZK45GW4k416N/zVOZiDOYdf5QykQAz/czl1ExBAQuLjHoLKVIuywxRqAh1vEXUwKeFVo
+ 0sv7tBZPfHKVMxj2scw==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTIxMDE3NiBTYWx0ZWRfX3LkZof/hweb8
+ 4I3hYjGVJGAnSmQSrq67aSt1J4hpFHcJFaitJHnNSLpRxD1b4Z9J5sA2bZMKc98Mt9Q4sMFUZis
+ y6i1Sqm/ceexJpLjlxMrRMdjcas0NGs=
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-09-21_04,2026-09-16_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ priorityscore=1501 spamscore=0 lowpriorityscore=0 bulkscore=0 suspectscore=0
+ malwarescore=0 adultscore=0 phishscore=0 clxscore=1015 impostorscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609210176
 
+On 26-09-18 09:29:04, Neil Armstrong wrote:
+> The I2C Hub serial elements lacks DMA, so the SE_HW_PARAM_2 register which
+> is in the DMA register space doesn't exist for those instances.
+> 
+> Provide the ram depth in the compatible data to be used instead
+> of the reading the missing SE_HW_PARAM_2 register.
+> 
+> Fixes: 522bfb4f33c0 ("soc: qcom: geni-se: Use HW PROG_RAM_DEPTH to validate firmware size")
+> Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
 
---vnshuij5kqlf56wu
-Content-Type: text/plain; protected-headers=v1; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-Subject: Re: [PATCH v6 0/6] dt-bindings: Orientation defines
-MIME-Version: 1.0
-
-On Mon, Sep 21, 2026 at 12:47:23PM +0100, Kieran Bingham wrote:
-> Quoting Thierry Reding (2026-09-21 12:33:54)
-> > On Mon, Sep 21, 2026 at 10:35:38AM +0300, Laurent Pinchart wrote:
-> > > On Mon, Sep 21, 2026 at 09:07:01AM +0200, Geert Uytterhoeven wrote:
-> > > > On Mon, 21 Sept 2026 at 09:05, Geert Uytterhoeven wrote:
-> > > > > On Fri, 18 Sept 2026 at 12:55, Kieran Bingham wrote:
-> > > > > > Add a new dt-bindings/media/video-interface-devices.h header th=
-at
-> > > > > > initially supports the Orientation types and convert existing u=
-sers
-> > > > > > throughout the code base.
-> > > > >
-> > > > > Just noticed these are already in since commit 6ab5acfb8dd38729
-> > > > > ("dt-bindings: media: Add macros for video interface devices") in
-> > > > > media/master (next-20260903 and later)?
-> > > > >
-> > > > > > v3 collects tags, and fixes the typo, but drops all hunks that =
-do not
-> > > > >
-> > > > > [...]
-> > > > >
-> > > > > > v2:
-> > > > >
-> > > > > Interesting changelog order ;-)
-> > > > >
-> > > > > [...]
-> > > > >
-> > > > > > v3:
-> > > > >
-> > > > > [...]
-> > > > >
-> > > > > > -v4:
-> > > > >
-> > > > > [...]
-> > > > >
-> > > > >
-> > > > > > -v5:
-> > > > > >  - Definitions now accepted in linux-media, rebased to get conv=
-ersions in.
-> > > > >
-> > > > > Oh, you say so here ;-)
-> > > > >
-> > > > > >       arm64: dts: renesas: Convert to new media orientation def=
-initions
-> > > > >
-> > > > > So it's been safe for me to pick this up since v5?
-> > > >=20
-> > > > No it's not, there is a hard dependency.
-> > >=20
-> > > The whole series needs to be postponed by one kernel cycle :-/ It's n=
-ot
-> > > urgent so it's not a big deal. Kieran will have the priviledge of
-> > > rebasing and sending a v7 :-)
-> >=20
-> > If all platform maintainers Ack this series, they could go through the
-> > media tree where the shared include was already merged. Alternatively
-> > the media maintainers could provide a shared branch for everyone to pull
-> > into their platform trees.
-> >=20
-> > But given that this is simply replacing a literal with a preprocessor
-> > macro, maybe not worth the extra hassle.
->=20
-> Indeed, I'm not personally worried here. I thought that because Sakari
-> had accepted the main patches these could go in now, so I refreshed the
-> series.
->=20
-> I don't really care which route they go, or when. I'd rather not have to
-> re-re-rebase again in two months ... but I can cope whatever :D There's
-> certainly no urgency here.
-
-You already have my Acked-by and I'm fine with anyone picking up the
-Tegra DT changes. I don't think there's going to be any conflict with
-any other work in the Tegra tree. If they don't get applied, I'll pick
-it up for the next release.
-
-Thierry
-
---vnshuij5kqlf56wu
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCgAdFiEEiOrDCAFJzPfAjcif3SOs138+s6EFAmqxHqkACgkQ3SOs138+
-s6GCVA/8CTjCU06x7t4Mbm966PsuhGx8Q1j3ntV2PiowxzhJwEyb68oBkfVXTkrL
-9rGbkF8OnuoiY/uxupgsIUa+x2hplNqTs6J/OxG5LLbOhdnv1OpzXUBaXlg6ahe2
-+7XwSzG2TQcYExblLuZqsViN21+KOWOJAcTGTnxP/X0lbLQYLjSRmzkVlOPjhtEU
-uhszVibjBBSQjotx1SMbk0C2Mxmko7X+ocCxsZ+APwIO3xvrxRRefs3s5nWXRaZH
-mb8ywwgh0WqojUcfOLazhhfUQ/wIn5WTNutOymPP17QgoUVluJOu9TUz1KEnSDVg
-B5NLXtC37c4Ap7iy4ZZMbs95EpkH6c6Dg5qF6avcs3nDUt/g94yCb3eQ20JBveBj
-jOBT9Gpc5pz0s5wLzVzCNWmKk1tQYABslMzcS5aQLBy85HUIwDH/DcCXBOQMm5Tu
-ukBohOeV+nvFWVkT5gDK+zRzaHqPpYpajvemCYUJrw5eXZp53X0L8JV+4HvhGgnW
-uUHIqXFNgXiRGiSfAs+24+jaUhU/W8Wpj5svPEsD2/OeW2jjUTKpo58pQEo7X4up
-XVVNGOuxJaT/8Rh62gC7rHMnM2sVlBE9I0rpRtghOzA8EBdyFnq22rDy/xIx/86j
-aXnoCcK0YUHzkj4lzswo2sohi0nE4T9nDsfYTN14FxH3WvRPoFk=
-=3wJh
------END PGP SIGNATURE-----
-
---vnshuij5kqlf56wu--
+Reviewed-by: Abel Vesa <abel.vesa@oss.qualcomm.com>
