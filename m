@@ -1,73 +1,105 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 889A64B0C9E;
-	Mon, 21 Sep 2026 15:08:33 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5B3412F691D;
+	Mon, 21 Sep 2026 15:14:26 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790003314; cv=none; b=eE47HBjilpclI9x+Sn9nZcUGZG27Ba8acJs/3MMxv0fQtB4rS/RRfndRWFZ9KYuK72FP/GAut3LL5YXwJtE0AIQdP5sDKAzigRNVjfUm+7+QUgSR6owupC/jMzwESBR/xSr9kXUlhaDsU30jMfKUXQSHhniTrH7ZJnuPgqhdzuU=
+	t=1790003667; cv=none; b=ZvZ0qhAf2ADOMtWkNiPz1OrWdYwpx8ghe6gALnq86g84CURPs/z+HvvxBafKg5q1wY2UkBwDeP8sggELnCZb2+m/YMLQGke+OIXd+uzqGBXmvTQJrLkuAsf07fO+E8i1E2YhMrg8qaGP21S5jjh1Q6mREscwM9BDtz9WZaXJvdg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790003314; c=relaxed/simple;
-	bh=kzDnc5lvItBUDngVmmupbIrY+jhCddiSWbaRwsT4lfU=;
-	h=Message-ID:Date:From:To:Subject:In-Reply-To:References:Cc; b=brcKdhCOsv4fp82GZaVHU0VBlSQ4DBV6y61hfolD2nVTNDi7HRBZ8EpqiLCVj5ox1PZF3OJ0uYrINAkqH2lC3p2wLZfr8NgD0GxCCzNJY0VrfzbOGfcyN8T4RbAdFRo0Bu+TyMo49pJhTpKugWWh0yxVZDBwhGfFuId8lDXTHkk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=aZb+4j4+; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1790003667; c=relaxed/simple;
+	bh=IhIlpoErO6zQPf/LHi+a0obCzyy2h1v1zl7z4bCoLf8=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=JrbbrPLPiktY5b7lKDXULAtkN3qN0/yOzt1Nqu5ZtRmrWPRC1vx8ulzgZ6ZRu5TOe+elzYw1WqWFF30ZLZtP9z4BY+LJRH0BTt4Vqz7epe+51mh7sEIuuZD4zI+y9fkU7Qiuk2l/VEtNXOk+rrE28Y7mZDDEXhjhQv15s7b0xC8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=MfhoR/R/; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="aZb+4j4+"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 922D21F000FF;
-	Mon, 21 Sep 2026 15:08:32 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="MfhoR/R/"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id A8DE91F000FF;
+	Mon, 21 Sep 2026 15:14:24 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1790003313;
-	bh=9TmjMGDTZLmhGHy1jeBXvh1rXJH717aBKG34mJksDgE=;
-	h=Date:From:To:Subject:In-Reply-To:References:Cc;
-	b=aZb+4j4+OEWOE4VyDKl4afl8agNHzGeV4p+zI+BQvAX0/I8owT1oRDJw2glrNe72y
-	 DQzbASxzCYYsmB8hlA9196jbLcM89nSmWVSYU7v1zBocI8GAYTE2PEXv3UUQsUoY/G
-	 VLrZNq4TrzYGFvxMntWnki2G9GV+R7A/bI9Vho9DdX8rWEYe4HWGTNsuMsR9QW5b5O
-	 RkyhjjbdUKVhNtTrBUOROUGRuD2pqYCo/ISyQ9V7trih7T3dgM8/YdxPg6Gk83TBa5
-	 hmDuUlJyr3+/Su5WAh6+6t4L20vNOfPSzMswtVQTTSAka2FzjOXQT6zdq/MfQvDA63
-	 j8qAwZZ+VAgjQ==
-Message-ID: <77aa7ff935567f8f6e8a0f74fd276b95@kernel.org>
-Date: Mon, 21 Sep 2026 15:08:29 +0000
-From: "Maxime Ripard" <mripard@kernel.org>
-To: "Luca Ceresoli" <luca.ceresoli@bootlin.com>
-Subject: Re: [PATCH v3 04/19] drm/bridge: panel: move all code to
- drm_panel.c
-In-Reply-To: <20260916-drm-bridge-every-panel-v3-4-83afb4f1a707@bootlin.com>
-References: <20260916-drm-bridge-every-panel-v3-4-83afb4f1a707@bootlin.com>
-Cc: asahi@lists.linux.dev, dri-devel@lists.freedesktop.org, freedreno@lists.freedesktop.org, imx@lists.linux.dev, linux-arm-kernel@lists.infradead.org, linux-arm-msm@vger.kernel.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, linux-mips@vger.kernel.org, linux-rockchip@lists.infradead.org, linux-samsung-soc@vger.kernel.org, linux-stm32@st-md-mailman.stormreply.com, linux-tegra@vger.kernel.org, "Albert
- Esteve" <aesteve@redhat.com>, "Andrzej Hajda" <andrzej.hajda@intel.com>, "Anusha
- Srivatsa" <asrivats@redhat.com>, "David Airlie" <airlied@gmail.com>, "Dmitry
- Baryshkov" <dmitry.baryshkov@oss.qualcomm.com>, "Fabio Estevam" <festevam@gmail.com>, "Frank
- Li" <Frank.Li@nxp.com>, "Hui Pu" <Hui.Pu@gehealthcare.com>, "Ian Ray" <ian.ray@gehealthcare.com>, "Inki
- Dae" <inki.dae@samsung.com>, "Jagan Teki" <jagan@amarulasolutions.com>, "Jernej
- Skrabec" <jernej.skrabec@gmail.com>, "Jessica Zhang" <jesszhan0024@gmail.com>, "Jonas
- Karlman" <jonas@kwiboo.se>, "Jonathan Corbet" <corbet@lwn.net>, "Laurent
- Pinchart" <Laurent.pinchart@ideasonboard.com>, "Laurentiu Palcu" <laurentiu.palcu@oss.nxp.com>, "Linus
- Walleij" <linusw@kernel.org>, "Lucas Stach" <l.stach@pengutronix.de>, "Maarten
- Lankhorst" <maarten.lankhorst@linux.intel.com>, "Marek Szyprowski" <m.szyprowski@samsung.com>, "Maxime
- Ripard" <mripard@kernel.org>, "Neil Armstrong" <neil.armstrong@linaro.org>, "Paul
- Cercueil" <paul@crapouillou.net>, "Paul Kocialkowski" <paulk@sys-base.io>, "Pengutronix
- Kernel Team" <kernel@pengutronix.de>, "Randy Dunlap" <rdunlap@infradead.org>, "Robert
- Foss" <rfoss@kernel.org>, "Sascha Hauer" <s.hauer@pengutronix.de>, "Sean
- Paul" <sean@poorly.run>, "Shuah Khan" <skhan@linuxfoundation.org>, "Simona
- Vetter" <simona@ffwll.ch>, "Thomas Petazzoni" <thomas.petazzoni@bootlin.com>, "Thomas
- Zimmermann" <tzimmermann@suse.de>
-Content-Transfer-Encoding: 7bit
+	s=k20260515; t=1790003666;
+	bh=tpIxZoFZLYvOpLCQ29sIhaJI+A6RdgDAKvdZa2DVaz0=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=MfhoR/R/hLOP+JdkTPUvUbHpVbLShFnzEFRgffUkmroOdU31tNw8XSxqxD+cAPp2C
+	 bfzOXyOrnzLD7/Q4+I451qqTrJghuWBmXD4dVeo7Xu8U7KeFZLPfFkUYElqI2ee+YM
+	 otYDb6Mr6J7GkPleY9BrNmMfvxExfc4Xl7jgA6n/pAoVSBih+Jd5exuAPMcY/N8gZn
+	 8X470xxASVjXT7wu+hp1/R4ZkPOYglNKSEyH15m48gEb/mm0esqQW/pzMPRNkWKUaR
+	 tA3a78wkHcVsSmM4pStBoFHKS1d0MiEDMDZ67cz7AYCIf6K3LLNzuWXFGxjaP7Z+8l
+	 L2VFm9WeQ/Xzg==
+Date: Mon, 21 Sep 2026 17:14:21 +0200
+From: krzk@kernel.org
+To: Guangshuo Li <lgs201920130244@gmail.com>
+Cc: Bjorn Andersson <andersson@kernel.org>, stable@vger.kernel.org, 
+	linux-arm-msm@vger.kernel.org, Mathieu Poirier <mathieu.poirier@linaro.org>, 
+	Sivaprakash Murugesan <sivaprak@codeaurora.org>, Gokul Sriram Palanisamy <quic_gokulsri@quicinc.com>, 
+	linux-kernel@vger.kernel.org, linux-remoteproc@vger.kernel.org, 
+	Govind Singh <govinds@codeaurora.org>
+Subject: Re: [PATCH] remoteproc: qcom: q6v5-wcss: remove all subdevices on
+ unbind
+Message-ID: <arFJzYqY_mdeXr4C@quoll>
+References: <20260918041321.3532355-1-lgs201920130244@gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <20260918041321.3532355-1-lgs201920130244@gmail.com>
 
-On Wed, 16 Sep 2026 15:45:28 +0200, Luca Ceresoli wrote:
-> Work is in progress for every drm_panel to embed a drm_bridge, replacing
-> the panel_bridge entirely. However most of the panel_bridge code will be
-> reused for the drm_bridge embedded into the drm_panel, so just move the
-> code there.
+
+On Fri, 18 Sep 2026 12:13:21 +0800, Guangshuo Li wrote:
+> q6v5_wcss_probe() registers GLINK, PDM and SSR remoteproc subdevices,
+> and may also register a sysmon subdevice. The probe failure path
+> removes all of these subdevices, but q6v5_wcss_remove() only removes
+> the PDM subdevice.
 > 
+> As a result, GLINK, SSR and sysmon resources and registrations can
+> remain after the WCSS driver is removed.
 > 
-> [ ... ]
+> Call rproc_del() before tearing down the Qualcomm-specific resources,
+> matching the teardown order used by the other Qualcomm Q6 remoteproc
+> drivers, and remove the GLINK, sysmon and SSR subdevices together with
+> the existing PDM cleanup.
+> 
+> This issue was found by manual code inspection.
+> 
+> Fixes: 8a226e2c71bb ("remoteproc: wcss: add support for rpmsg communication")
+> Fixes: 0af65b9b915e ("remoteproc: qcom: wcss: Add non pas wcss Q6 support for QCS404")
+> Cc: stable@vger.kernel.org
+> Signed-off-by: Guangshuo Li <lgs201920130244@gmail.com>
+> ---
+>  drivers/remoteproc/qcom_q6v5_wcss.c | 6 +++++-
+>  1 file changed, 5 insertions(+), 1 deletion(-)
+> 
 
-Acked-by: Maxime Ripard <mripard@kernel.org>
 
-Thanks!
-Maxime
+You sent multiple independent patches, to multiple independent
+subsystems. The amount of these patches clearly suggest this was
+AI generated and most likely not tested.
+
+More importantly, you sent all this work without properly organizing
+relevant patches into patchsets. This makes reviewing difficult
+and might cause multiple reviewers to address the same issue.
+Replying to the entire set is impossible and requires handling each
+patch independently, instead of applying or discarding the set.
+Maintainers also won't see the bigger picture of your work. Quite
+worrying.
+
+This is on the verge of hostile patch: bomb us with so many
+contributions, we won't be able to handle them in efficient manner,
+like responding ONCE to ask you to slow down.  Considering all this
+is untested and LLM generated, I have even more doubts whether this
+should be considered for review.
+
+Please read kernel documentation BEFORE posting more work. It will
+explain you how to identify subsystems, how to organize your work per
+subsystem, how to document usage of LLM and how what you should not
+do if this was posted in a good faith.
+
+Best regards,
+Krzysztof
+
+
+
