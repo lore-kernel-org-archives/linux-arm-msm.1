@@ -1,95 +1,144 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 985C3480948
-	for <linux-arm-msm@vger.kernel.org>; Sun, 20 Sep 2026 22:32:01 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3670F1A268;
+	Mon, 21 Sep 2026 01:17:40 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789943525; cv=none; b=Ej7iy1eLgIIY1rtdLnD6hnj6dlliqmGZJ6yT1JCbrrap/kj3PB/yznNb66N2IW/K7szzRQMserybgc3T3b3OBUltTKrF/Ml42fEO7aMycBNwf8xlIr0/dse6VAFs3iij8mldLJrF905Ub5A6iAJSoEtYW+k8lf3gurD8S0e3ow0=
+	t=1789953462; cv=none; b=cMbVrJw4S4bGQg3fRHBBTOMLdLjE9ib472H6dfEzodxDSSEYg2p1fC9ISsENgDPvwl678k7gS4LuuZZJdE7DrU+Z0nCHb0Staoipf6Sm0lwC8H3G85HpRNxvyb940gtwpy7P6/Yns9ExeV62zYq5QpuZO0NMJvEYSdq5XnF0h3Y=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789943525; c=relaxed/simple;
-	bh=H1RxdKnl+mgp+J5mdKqwKEcwtM2QvVr2AoIW/SdfGVs=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=exqlBBzlkMP2UKV/3DwFbK37FLTPetSVMfaitzRdXvMzHhNx3Wqf1iLFOzYIPcURMel1mged7JBs0qFaoMMnizHbRwCBVHwKTXFqXpXvouxzb5d2+iWi54vIEyABEXAEZquLaisdzPU1K/yCEkGLiARwViiTZcvei7+n/JfCgyc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=P3iLt3zU; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1789953462; c=relaxed/simple;
+	bh=UQ8NBmTMd0E4UPS6zoz9vKry1PH3VwbAwCx0NIVupjM=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=D5/dYbWZNHnlRd/JfdtN/ZMEhVtrN9uKNFGQ83CdB1EE0Q2KBR9UtKdvCzcjFcmAC/rQaG/luOt9xH756A1mDdQzJsdvRSDHG2sXHx0rxLuYKO8MqYUHik5B3x9f05pfkZ6b/M9x2eyNFmFwo0zy+iKJ1yrDeymVYguL6mGW5nQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=OKkp+pe9; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="P3iLt3zU"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 068901F000FF
-	for <linux-arm-msm@vger.kernel.org>; Sun, 20 Sep 2026 22:31:59 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="OKkp+pe9"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id AACAB1F000FF;
+	Mon, 21 Sep 2026 01:17:34 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1789943519;
-	bh=H1RxdKnl+mgp+J5mdKqwKEcwtM2QvVr2AoIW/SdfGVs=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc;
-	b=P3iLt3zUTjFFgdks8BlwU4VmFyNpw0LSZkE+xZhvVXpSMeORe8mWbUqvJjVDxfbHw
-	 8LtoNZam0QADhFpcOmFZeo8y8ia0U63KqXCuTjDg+ohT1IHJ0bTqmWP+eravZxMeCK
-	 t8JtDdR3PkFjYTLW5Vi+aPvx485rdVxK6SJdWs0bPUrO0+3ztFtgSh7Ttx9Fvijf8q
-	 q91Tl2jTx25o+RmugsBSEpJOgoviRgd/kUvV7SGVi0K7Q402T2eKUhQPb2VVH88UFR
-	 FkWDUMO5e5vBoSq3lKpBWGzsibM2tN5Mh6uYt+pfhsj4Uir7jEEmCV2F/0L8gugX1R
-	 3TBcDjKkvKMiA==
-Received: by mail-lf2-f12.google.com with SMTP id 2adb3069b0e04-5b5e4f16c72so1877364e87.0
-        for <linux-arm-msm@vger.kernel.org>; Sun, 20 Sep 2026 15:31:58 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AKwUvBzfKKXccJzF0ulFqFQsLbqiD2ACztzWisVOcC0SudmpQqWDfKtPsbyUZu+62gZScYLMXbPRQBJBd1ECpDpF@vger.kernel.org
-X-Gm-Message-State: AFuF++lgamjFsDemRbMn9iIgmeXhbTsc1y1Ew+IWm3ZL85Lr7TOMhx27
-	aW8SwUOct1BSATvFq5r2ohQ4bOBjayXAV56gpjUxSB3se77OubG3Sv/nE+k7ke2xwc29Xg8huMy
-	UBDi0pdlzn7QzhlMNWxj7GEAhZveEVrQ=
-X-Received: by 2002:ac2:4e14:0:b0:5b6:95e:87ee with SMTP id
- 2adb3069b0e04-5b8c18137b6mr2715966e87.13.1789943193023; Sun, 20 Sep 2026
- 15:26:33 -0700 (PDT)
+	s=k20260515; t=1789953460;
+	bh=YDur6IwTSE7iTR0vxd9Zd48PXGF6FvROWSLYkOLIWkQ=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=OKkp+pe9xIpMgy2kIuEbPoZqVzeihqLQ6TA3Wyi8ZDStD+EeeVhcqIHBZahTRwweH
+	 gDuQGyJGgLjdjZeKSS1Q1f/mP/OAt00rp2UnpAd8x9JboiDWnWQRIXUlUpiKJF8xN2
+	 uwHi13TBks7vz1/jjQsf0kCMQguuDYhC7VISMQd34V/5j5d83h08IBRVk/3IwZOjm/
+	 A8Pk14VPuIQQgNsaq7jLHuIEtYcAs06ZD/uSm3S8MeS0erbL1pOp+iBVErmRdMfHUt
+	 vNURY/YTmu91VgAouiUqxw1RtA0ZShQcdOlUB40TQr1GYpNY2/Hla0iTqYRb6KzyPs
+	 uwzcExwxuI3ag==
+Date: Mon, 21 Sep 2026 03:17:24 +0200
+From: Manivannan Sadhasivam <mani@kernel.org>
+To: Jeff Johnson <jeff.johnson@oss.qualcomm.com>
+Cc: "David S. Miller" <davem@davemloft.net>, 
+	Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>, 
+	Paolo Abeni <pabeni@redhat.com>, Simon Horman <horms@kernel.org>, 
+	Jeff Johnson <jjohnson@kernel.org>, linux-arm-msm@vger.kernel.org, netdev@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, linux-wireless@vger.kernel.org, ath11k@lists.infradead.org, 
+	ath12k@lists.infradead.org, Bjorn Andersson <andersson@kernel.org>, 
+	Chris Lew <christopher.lew@oss.qualcomm.com>, Deepak Kumar Singh <deepak.singh@oss.qualcomm.com>, 
+	Raj Kumar Bhagat <raj.bhagat@oss.qualcomm.com>, Juha-Matti Tilli <juha-matti.tilli@iki.fi>, 
+	Jeff Hugo <jeff.hugo@oss.qualcomm.com>
+Subject: Re: [PATCH 0/4] net: qrtr: Add support for using identical MHI
+ endpoint devices
+Message-ID: <j22jk53fhr7nkbb5vcjgp3xw6zoklbt7afzvfetmoh3om3ttsl@pobyf4t3zcsv>
+References: <20260918-qrtr-multi-ep-v1-0-8a06caa368d3@oss.qualcomm.com>
+ <4e0481c1-9288-42d4-94c9-e18da5cf8e5d@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260916-drm-bridge-every-panel-v3-0-83afb4f1a707@bootlin.com> <20260916-drm-bridge-every-panel-v3-12-83afb4f1a707@bootlin.com>
-In-Reply-To: <20260916-drm-bridge-every-panel-v3-12-83afb4f1a707@bootlin.com>
-From: Linus Walleij <linusw@kernel.org>
-Date: Mon, 21 Sep 2026 00:26:20 +0200
-X-Gmail-Original-Message-ID: <CAD++jLk66Xj=4qTigoM6ha4G=+E5j7wOQCWEDq_x5BgoxKbqSw@mail.gmail.com>
-X-Gm-Features: AcwNN1Xl2NMg3RCxeoynlYH4VMsnJTqdPMGzMe_YYek3k1zZ_YWzrrvsVntgttg
-Message-ID: <CAD++jLk66Xj=4qTigoM6ha4G=+E5j7wOQCWEDq_x5BgoxKbqSw@mail.gmail.com>
-Subject: Re: [PATCH v3 12/19] drm/mcde: dsi: don't create a panel_bridge
-To: Luca Ceresoli <luca.ceresoli@bootlin.com>
-Cc: Andrzej Hajda <andrzej.hajda@intel.com>, Neil Armstrong <neil.armstrong@linaro.org>, 
-	Robert Foss <rfoss@kernel.org>, Laurent Pinchart <Laurent.pinchart@ideasonboard.com>, 
-	Jonas Karlman <jonas@kwiboo.se>, Jernej Skrabec <jernej.skrabec@gmail.com>, 
-	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, 
-	Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, 
-	Jessica Zhang <jesszhan0024@gmail.com>, Laurentiu Palcu <laurentiu.palcu@oss.nxp.com>, 
-	Lucas Stach <l.stach@pengutronix.de>, Frank Li <Frank.Li@nxp.com>, 
-	Sascha Hauer <s.hauer@pengutronix.de>, Pengutronix Kernel Team <kernel@pengutronix.de>, 
-	Fabio Estevam <festevam@gmail.com>, Paul Cercueil <paul@crapouillou.net>, 
-	Paul Kocialkowski <paulk@sys-base.io>, Inki Dae <inki.dae@samsung.com>, 
-	Jagan Teki <jagan@amarulasolutions.com>, Marek Szyprowski <m.szyprowski@samsung.com>, 
-	Sean Paul <sean@poorly.run>, Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>, 
-	Randy Dunlap <rdunlap@infradead.org>, Albert Esteve <aesteve@redhat.com>, 
-	Anusha Srivatsa <asrivats@redhat.com>, Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>, 
-	Hui Pu <Hui.Pu@gehealthcare.com>, Ian Ray <ian.ray@gehealthcare.com>, 
-	Thomas Petazzoni <thomas.petazzoni@bootlin.com>, dri-devel@lists.freedesktop.org, 
-	linux-kernel@vger.kernel.org, imx@lists.linux.dev, 
-	linux-arm-kernel@lists.infradead.org, linux-mips@vger.kernel.org, 
-	linux-rockchip@lists.infradead.org, linux-stm32@st-md-mailman.stormreply.com, 
-	asahi@lists.linux.dev, linux-arm-msm@vger.kernel.org, 
-	freedreno@lists.freedesktop.org, linux-tegra@vger.kernel.org, 
-	linux-doc@vger.kernel.org, linux-samsung-soc@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <4e0481c1-9288-42d4-94c9-e18da5cf8e5d@oss.qualcomm.com>
 
-On Wed, Sep 16, 2026 at 3:47=E2=80=AFPM Luca Ceresoli <luca.ceresoli@bootli=
-n.com> wrote:
+On Fri, Sep 18, 2026 at 11:13:42AM -0700, Jeff Johnson wrote:
+> On 9/18/2026 9:28 AM, Manivannan Sadhasivam via B4 Relay wrote:
+> > Hi,
+> > 
+> > This series reworks the QRTR driver to add support for using identical MHI
+> > endpoint devices at the same time. Currently, QRTR driver has a limitation on
+> > using more than one identical MHI endpoint devices like QCS6490 or any Qcom
+> > Endpoint device making use of QRTR at the same time. Because of the fact that
+> > these devices will have the identical QRTR node id, they cannot be used at the
+> > same time, on the same host machine.
+> > 
+> > This limitation is a blocker for running upstream kernel on devices like Qcom
+> > based routers as they often have multiple identical WLAN Endpoint devices
+> > connected to the Router SoC.
+> > 
+> > This series supersedes the following 2 series from Juha:
+> > https://lore.kernel.org/all/20260915054207.2513877-1-juha-matti.tilli@iki.fi
+> > https://lore.kernel.org/all/20260915074135.2567411-1-juha-matti.tilli@iki.fi
+> > 
+> > Compared to the series from Juha, this series simplifies the multi-endpoint
+> > support by computing a unique node id for each MHI endpoint and uses it for the
+> > internal QRTR book keeping. This ensures that even if the MHI endpoint devices
+> > have same node ids, the host QRTR will always use a unique node id for each one
+> > of them.
+> > 
+> > More details can be found in the individual patches.
+> > 
+> > Testing
+> > =======
+> > 
+> > Juha tested this series on multi ath11k setup by backporting this series to
+> > 6.6.156 kernel. I'd appreciate a formal tested-by tag from Juha and other folks
+> > CCed to this series.
+> > 
+> > Merge Strategy
+> > ==============
+> > 
+> > Since both QRTR and ath drivers are falling under the networking tree, the whole
+> > series can be merged through netdev tree.
+> > 
+> > Signed-off-by: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
+> > ---
+> > Manivannan Sadhasivam (4):
+> >       net: qrtr: Allow the host QRTR to assign a unique node id
+> >       net: qrtr: Assign unique node id for MHI endpoints
+> >       wifi: ath11k: Connect to the QMI server belonging to the device owned by this driver
+> >       wifi: ath12k: Connect to the QMI server belonging to the device owned by this driver
+> > 
+> >  MAINTAINERS                           |  1 +
+> >  drivers/net/wireless/ath/ath11k/hif.h |  9 ++++++
+> >  drivers/net/wireless/ath/ath11k/pci.c |  9 ++++++
+> >  drivers/net/wireless/ath/ath11k/qmi.c | 10 ++++++
+> >  drivers/net/wireless/ath/ath12k/hif.h |  9 ++++++
+> >  drivers/net/wireless/ath/ath12k/pci.c |  9 ++++++
+> >  drivers/net/wireless/ath/ath12k/qmi.c | 11 +++++++
+> >  include/net/qrtr.h                    | 21 ++++++++++++
+> >  net/qrtr/af_qrtr.c                    | 61 +++++++++++++++++++++++++++++++----
+> >  net/qrtr/mhi.c                        |  4 ++-
+> >  10 files changed, 136 insertions(+), 8 deletions(-)
+> > ---
+> > base-commit: cee9395acd8043be0644b25c34bfa86623f2b935
+> 
+> I see this is based upon v7.3-rc1 (current release tree).
+> This series doesn't cleanly apply on the net-next tree.
+> 
 
-> Now a panel_bridge is automatically created for every drm_panel and the
-> panel-bridge API is just a deprecated wrapper to access it.
->
-> Update and simplify the code by just getting a reference to the
-> already-existing bridge using of_drm_find_and_get_bridge().
->
-> Also keep the "connected to non-panel bridge (unsupported)\n" error logic
-> by using the drm_bridge_is_panel() function.
->
-> Signed-off-by: Luca Ceresoli <luca.ceresoli@bootlin.com>
+Ah, that's bad.
 
-Reviewed-by: Linus Walleij <linusw@kernel.org>
+> Are you planning on netdev taking this through current or next?
+> 
 
-Yours,
-Linus Walleij
+-next only. I will respin.
+
+> And an alternate merge strategy would be for netdev to take the first two
+> patches and then after wireless fast-forwards and ath fast-forwards, I could
+> take the last two though the ath tree.
+> 
+
+Unfortunately, ath patches depend on API introduced by the 2nd patch. So they
+can't be applied independently.
+
+I will respin this series on top of ath-next so that the series can be applied
+through netdev next.
+
+- Mani
+
+-- 
+மணிவண்ணன் சதாசிவம்
