@@ -1,87 +1,88 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 278CB35C6A0
-	for <linux-arm-msm@vger.kernel.org>; Mon, 21 Sep 2026 05:37:41 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D3A26357D09
+	for <linux-arm-msm@vger.kernel.org>; Mon, 21 Sep 2026 05:37:48 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789969062; cv=none; b=dXPFSNI22/v6lOjo4yw4pILBi4BAuBEOyBQKZA5lmcQPHDPNZWKCgB9VCu8uf9fkPj/p/sWnFC/iMiaRcTImjaIsSdB191OrE0Zsz118xIIlWofdCu8JblAEpxFROK8h5seySdkn9luPqaJjQ4i68UaQ0hnkCH1SSxj5K4ja5i0=
+	t=1789969070; cv=none; b=VU/325H6S0EAJFLZskktlmfd/hz4R6lPS8ph9oVEj3ynMtuU/SfrfxrYSU4TwO4KgJVbFGBHHuW5kwDD3h+PJD0O8dALnhd0AhEu8nQV7s5tELloi28DYD4dqfmVChhdHTdH5B2DMKMYIKHWaSlkwgMnOIIbVS5EO9tN8vTfvag=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789969062; c=relaxed/simple;
-	bh=z+Ya1VcXykQjtc7MvWy5pcQNsDt9baIxgws/kJipBlQ=;
+	s=arc-20240116; t=1789969070; c=relaxed/simple;
+	bh=JVlVGeKhznT32YmeKi+KOo08Sju82h7c5GfgcSDaseE=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=IaC7voGykt6yxmAw8mRyYxjFUrjeaZxgQ5q+Tcyw7tt2qD2bdeF2FvwNBPFvy7gkny0tYBGtBrkJ8VATAdxy9AUTgxTl0V0mNSkdrBBCQkUA9ZsQ6mjzXqX0qmxLDSAQGiBSyqavXffiwTVsDGZrYznLnjVz51PVHal1kd9cXEQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=M/l7wKnQ; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=hMkHILqu; arc=none smtp.client-ip=205.220.168.131
+	 In-Reply-To:To:Cc; b=kcBQwzykjMqkJ5XQ531T2JPospDscBRgQ2ThTQ+73q3zPJlriblPCbWi8KqtJYXLXXfqFkzWxYwzi/oR6DwzeiPe84Q5MqueOJP/bfJhGW1jUbE0Xt0czxLBFq37DlPcAdfvOvLKu4l1rZHd971P+GJKloshRtV+I+smhN6q1eU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=pvGD0wPr; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=C09OR1sV; arc=none smtp.client-ip=205.220.180.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="M/l7wKnQ";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="hMkHILqu"
-Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68L3ZCrC1162383
-	for <linux-arm-msm@vger.kernel.org>; Mon, 21 Sep 2026 05:37:40 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="pvGD0wPr";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="C09OR1sV"
+Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68L3ZLtB3550804
+	for <linux-arm-msm@vger.kernel.org>; Mon, 21 Sep 2026 05:37:47 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	AjvDOtrhl3XR15sbKhhIi5BKrmoRXrS0m7WZhaoqXIw=; b=M/l7wKnQmup7wJWA
-	HRzR6my0vJmjFlR/OQf2Z/Ll+6/XVmMv4YuXA5MwKN1lXgRkpzQk7weaMiQMKdOD
-	++QIG/QsYvB24T01uHPSCx2Tld00yzCtgAIRdOlISGIvkyiDicFwccQ2vhfSTUOz
-	KXGLlyJ0TMrWPZeCL6S5Fb1McxTN9qrmyMi/qBsMgeyy0YoxvqVEWgU0gFLfrygD
-	sXNzrSyjcyyIauPmlm53iQE3oW6nwAX0Y1t+a285BwMlfp4x6akGrdBBw8fV21dO
-	OzJAFRlWUd/TaJkEyq3bpgOUZFR4RhGZMeJ2As6FcPO2YCTkn2kC8R13CjFsrpDf
-	LnHEMA==
+	WBcOxYwQ0Dfv588IqbZmpmvVHvpvwD3Y7+aa5k+MiV8=; b=pvGD0wPrdaLOj9DH
+	SfB/evfCqStIV1oiC8xkQllyhwOP1N35oe9TYUtqHP0iwmhl+ZyxfD7oCSIJCs33
+	bstIMAKvz12L9uf7/+JxWDIvJoSWVV0e8PXDfxM+4JvEGjJXTtMpFHquDR6Ic/UD
+	JzXgqI/7soXAj/IYQgD4uIK+pu2VECVkcydkR/D8zWy5mW1EEnT8E1v1A+cKH3eV
+	3lg3XVItBoMxwcb8MFCX/2Xbur3WtOsrjgxqfpdQ2PhpKHyx58bbiZKolOhPacpX
+	oEVX50hDNUeYqYQzEnceFhuIkyRpMfbgY9KNX0eg/1SWNFcOcFjhsCJEmIO6Tc+b
+	LYG/RQ==
 Received: from mail-pj1-f69.google.com (mail-pj1-f69.google.com [209.85.216.69])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gtt3wrrsb-1
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gsjs84t40-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Mon, 21 Sep 2026 05:37:40 +0000 (GMT)
-Received: by mail-pj1-f69.google.com with SMTP id 98e67ed59e1d1-39deda201bcso3290632a91.2
-        for <linux-arm-msm@vger.kernel.org>; Sun, 20 Sep 2026 22:37:40 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Mon, 21 Sep 2026 05:37:47 +0000 (GMT)
+Received: by mail-pj1-f69.google.com with SMTP id 98e67ed59e1d1-39e3f521346so3107014a91.0
+        for <linux-arm-msm@vger.kernel.org>; Sun, 20 Sep 2026 22:37:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1789969060; x=1790573860; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1789969067; x=1790573867; darn=vger.kernel.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=AjvDOtrhl3XR15sbKhhIi5BKrmoRXrS0m7WZhaoqXIw=;
-        b=hMkHILquKS+xsIUOOnL3XpyhzzsoVYfMGTCFur9mfdQ7XUGmyJHnxb5BxQ0+gbpaoM
-         RIoczzBysHViaiOddlQpGOaqB9cb0YGpjS2mswUt+ZYL3+5dTxW+Ou4tD7z0MKFFdfo1
-         MmCScAlNKlxY3ucpCNzZqssC99tcmLyMCLefaajk8d7wKDSXwSrI1FdrfFDTLmfI68qU
-         aBuwkrTHtWAC9ojQkBJ3wkgz6KGfbeFwJHPfgTSsG5wXDabURrsVSN447fgKD+fwtVPg
-         5V7bVXsCTawnkyvbi6SJPimO62sIBGmavGrF8Le7XaaN8FUDdYFk27Qi+h7HrsptQHyr
-         IcVw==
+        bh=WBcOxYwQ0Dfv588IqbZmpmvVHvpvwD3Y7+aa5k+MiV8=;
+        b=C09OR1sVltOBZFJQgZ1V87iRXeGnOR2kz19z7XCb3vVsHvodcUIK3yu8H07CAkvoFD
+         WtGlpO3UAJc0P6htXHkbmfy4mdLFsj6LU9VYn/UHNbho9ewaul9PZL9DR4c86XYfqu+p
+         ExwvYkjWOVov62laOa2E9P5sxLTuVEt+hPcDy9AcGeRxiP2hnsgengM7bQ6JF356ULIR
+         ic7TXp3010COWpr2ld8lf4hWTwE6uliKuJG5OOb/PQ06Oog1cZOW6OpAXmWwQvG+JJDw
+         D90gS+8s5XZ2GaSTOpyq3080CwUPHF2R7AHO23rxPaqD3QHAa3zFjRPe6cuEKW3HEStM
+         BEkA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1789969060; x=1790573860;
+        d=1e100.net; s=20260707; t=1789969067; x=1790573867;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=AjvDOtrhl3XR15sbKhhIi5BKrmoRXrS0m7WZhaoqXIw=;
-        b=xT0Hz5f1/h9sJ2U+TBqdtcKGajrqhzrmySv5jp9EyflORSHfHA3mZbkZ9oQ5CkQpDY
-         K4vurbuxXRbIOR8ZZZjKW83d3AdUAAYrJlYJYBuk+fOwuKKfz37BkV59zVovRsLjgmFR
-         LqWMVFgjpcrb7bMBbMJfk9YYyO5StUzx6q+a8IPY1In+2suQFFMA6oO5fNn481nItVqY
-         7zZO22FWklK8EgPxqIcJY+xdAEyjV5ansJlF4RpGIZq7BlAd/Jdafw+6YpYQRAxCpe47
-         yK7jEXMyTv+eU3gqiVSttdSon9R07qx4azTOe9cxGOSPY+wIo4oIz50m9GGmH4fR+luZ
-         /CMw==
-X-Forwarded-Encrypted: i=1; AKwUvBy+bFdGVya8t9ykpbcMr0gn+u7jIyuSUodrjExxUpMlc/kdKvofNsnh39fM4/88U/nYIvkd18CTMa5/9k1C@vger.kernel.org
-X-Gm-Message-State: AFuF++n/kxTXYjt6ZV/xBa1Vh42UshOmSWyA5zeU45wJ6yDAo9G8I9Cu
-	KOK71TOOybLUMRYXUsY8VXeQKS5rGMn/I+HJlx3Ozw3iHzxZDrXfpCg/QA03F4NT9FYMlqfF9b/
-	69F9JcFextLti91ft0omAwtHyv3RxMWVzYtroQPGsVVrQntDgkifTyey0maZynA4R1qmk
-X-Gm-Gg: AYBFou3AIlCkgrp+K//eFGh6SQ0zkFbJsrmqnhM/sGJvUxuwWyb9UTCeSsoy23cI6Rh
-	F1SQLBC6wztDxsi0iFzOjZkJTfKBZ1/2KFeGbz5FfhasHqkQd7HrQM1MUim0Q7XH5dwMy7z0uTe
-	dZKasBmBj1xKQVf+KPiHS0AsXHbCygdQgjzgERtKfkiT4UXw+5uoyny2NqOdIunq4Rj1VI2nKpx
-	VRRwy9eaUV+j2qoz47BfEoJxbTMbFlGR+a678D7lCp0YiuXDLXCFHHcu+b9xZYP7+thgcQ/hpNT
-	Q1GKcgmcx5AxhgNqoyCaFxruNKJXSyk5EvvmTxiRBKekPnAndg7R26X/TW9VG47H3UFvofjs1CI
-	PpEprePM6x6Pz2pbsDgOCUdM7syVhP+4meA==
-X-Received: by 2002:a17:90a:e7d1:b0:39d:f2a1:31 with SMTP id 98e67ed59e1d1-39e54e77eb2mr15959713a91.17.1789969059697;
-        Sun, 20 Sep 2026 22:37:39 -0700 (PDT)
-X-Received: by 2002:a17:90a:e7d1:b0:39d:f2a1:31 with SMTP id 98e67ed59e1d1-39e54e77eb2mr15959687a91.17.1789969059264;
-        Sun, 20 Sep 2026 22:37:39 -0700 (PDT)
+        bh=WBcOxYwQ0Dfv588IqbZmpmvVHvpvwD3Y7+aa5k+MiV8=;
+        b=nswsgtov1XpCCTaKVMWSUTJE4a0YYtowd5EjucOq9RxctE8L0SSyXp9dbUh9yyqZBa
+         o0LQ5WxwCW9bdGqxEmd379KKjFDyYzPGciq7BVXfVGFIzh/KYAyAWnelKSyAnYNA7LEI
+         g40SI+W6F+AvoYFnpe8Aivr2OxDBGuE6NcGARrM74jRRnAGDCIwXfbts8S6INcJv93dj
+         i2scrH/3JFrdxvdcC/Z5hxzcehe+EuGVaTeoYVnRlS6JLaSdF34Nkx8WM1Xr2Sa6KT9M
+         ZNuOJ0p2p1DUYv2LTsneXQYzwrvxacYFnta+HPZDqRh0KI/aRyxDwDb422+2gW8e6zTS
+         6ShQ==
+X-Forwarded-Encrypted: i=1; AKwUvBy3FQtg53TvRDXbM6+eyjTF2pDvSE7OzHkvw8pIidrG0WWY7ovEUMWBe8qTKZHDiOa5wm3ae4Y3IGKYkm+9@vger.kernel.org
+X-Gm-Message-State: AFuF++lmBO+9ZtRd2zfQGICiepRAyY5uoViOYLiyeHcuhJoXaY97cxeO
+	BzDNU7lu52LR/6au0m/EGcyXkJpDsnKQYdBnY8e/W6CKS0Pjpr6hRhgwVFZYW4qVTHM+QKMZ/ms
+	HGXAbMhVjwUZrLu9ssH2jPY6b3lDL9+nd47/dfryY+k3lxxcfUuSpEJDMq4lsnUuuQBfa
+X-Gm-Gg: AYBFou1mRCjyBDRC6J3Kkoxz4oY9aU81i3r9Gz4Dfm5omLNjsnwanhWw3rAztl1J04W
+	u4gVxb9nMBGLFqZfzWVp6aqZwvnF8uBjjPRySnW3hwgvFWBWLIZPSbWiZwa3C3hkFGbRXU/QUrc
+	QzeWICkq0dRRpAcAL/33abcqETDAW9ohEeOSyGc7rOrh1nRZA/Thhoi4RUFu8rCvmLAfCppDekq
+	0dqRQBduNZTHBmVBqE74SYjZNLPoNlWRi1YlqYsYh3V9WLUntNN69xOCaW+Z7JS0BPiRXinhQTO
+	d4Fqpt5fwQsrcoCVeRRwQgX0PRSyxh16BdEuYKSXBUbDNtpA/CgGp0QKaKMLfZev9HPZTXoa2J5
+	XY86MBEcFK2a9AyQrMnQNqqZeL5CHlpLcUA==
+X-Received: by 2002:a17:90b:4e85:b0:39e:21a7:5df5 with SMTP id 98e67ed59e1d1-39e54d5ca4fmr14044691a91.24.1789969066446;
+        Sun, 20 Sep 2026 22:37:46 -0700 (PDT)
+X-Received: by 2002:a17:90b:4e85:b0:39e:21a7:5df5 with SMTP id 98e67ed59e1d1-39e54d5ca4fmr14044658a91.24.1789969065987;
+        Sun, 20 Sep 2026 22:37:45 -0700 (PDT)
 Received: from hu-krichai-hyd.qualcomm.com ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-144d55d45a6sm15054568c88.9.2026.09.20.22.37.33
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-144d55d45a6sm15054568c88.9.2026.09.20.22.37.39
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 20 Sep 2026 22:37:38 -0700 (PDT)
+        Sun, 20 Sep 2026 22:37:45 -0700 (PDT)
 From: Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>
-Date: Mon, 21 Sep 2026 11:07:11 +0530
-Subject: [PATCH v4 3/6] PCI: qcom: Add Nord PCIe controller support
+Date: Mon, 21 Sep 2026 11:07:12 +0530
+Subject: [PATCH v4 4/6] phy: qcom: qmp: Move qphy_setbits/clrbits/checkbits
+ to common header
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -90,7 +91,7 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260921-nord-v4-3-ed05c6e09240@oss.qualcomm.com>
+Message-Id: <20260921-nord-v4-4-ed05c6e09240@oss.qualcomm.com>
 References: <20260921-nord-v4-0-ed05c6e09240@oss.qualcomm.com>
 In-Reply-To: <20260921-nord-v4-0-ed05c6e09240@oss.qualcomm.com>
 To: Vinod Koul <vkoul@kernel.org>, Neil Armstrong <neil.armstrong@linaro.org>,
@@ -108,115 +109,326 @@ Cc: Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>,
         shengchao.guo@oss.qualcomm.com, linux-arm-msm@vger.kernel.org,
         linux-phy@lists.infradead.org, devicetree@vger.kernel.org,
         linux-kernel@vger.kernel.org, linux-pci@vger.kernel.org,
-        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+        Qiang Yu <qiang.yu@oss.qualcomm.com>,
+        Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1789969033; l=2648;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1789969033; l=8474;
  i=krishna.chundru@oss.qualcomm.com; s=20230907; h=from:subject:message-id;
- bh=z+Ya1VcXykQjtc7MvWy5pcQNsDt9baIxgws/kJipBlQ=;
- b=5HjTg6Kz8BbxPfLUWjxTYnh1/eVS+81rNP1VesBI3jHBobY9c24kL1vXGbibvm6gjg7qHlKW/
- dMW8nLJOuOtD9WA4uV9bct7Fs7LSUNualsKxKSWTLIjndB/Re3IQY/Y
+ bh=JVlVGeKhznT32YmeKi+KOo08Sju82h7c5GfgcSDaseE=;
+ b=dCttHvRw3vW02HbuvXqj4foXdaUtiebIdslRGRVKastwD6/pbNoOZEgyYTlLEt5QcZSnnD93z
+ GcnKK1rZBY6Db10O4Eo7CgUsz//r28WM1k3xbPF56JMYT/mmoiCi42S
 X-Developer-Key: i=krishna.chundru@oss.qualcomm.com; a=ed25519;
  pk=10CL2pdAKFyzyOHbfSWHCD0X0my7CXxj8gJScmn1FAg=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTIxMDA3OCBTYWx0ZWRfX9GkMbgFbst2/
- AezlMkOpUet2tQWHXdh0NP49Hqxu09OE0Bi0rBlPe6LlP+jDU1pRyNiudpK4IsH0jrYz1jKP6Lu
- fQKObIHwkXuCRyNRBld1oVIWd6+CLf3+0K8TB8C89YjBe2oVquCYMEQZMH+/7zua8yT0FzoPz0T
- 1/dnMVHwHuJ8egEGVhZv9jqDDboMK5BNNCIPOrbiny/2eMk8ix7cGf9wA9w3PR2ACHd7Tqa+l2t
- D6gomva7k/CPwb2eB79/EWs41GNT3Zn8MIph9+N/cmmFMPiwOxInpM0ZONZFmkbwzndWDwwhwos
- wri0OEy25+nN79j7pHs/7LEN//T94lanJ2HDZETi5HhUdqzMbHRQTflaYUN4Lm8NMr0Lm+FvmBq
- L3ddMsh3j2lf9Uq4NjTVk4ScqrU//ZAgbCjh40/pBUsxT2dT46a51yTnQmael4Tx9J6ov7OE83J
- iKvfnG1xaoebvBYdSRw==
-X-Proofpoint-ORIG-GUID: QWJ_QgWaIJYd-RY1f2IPHwpavymddnjl
-X-Proofpoint-GUID: QWJ_QgWaIJYd-RY1f2IPHwpavymddnjl
-X-Authority-Analysis: v=2.4 cv=dakVTnXe c=1 sm=1 tr=0 ts=6ab0c2a4 cx=c_pps
+X-Proofpoint-ORIG-GUID: J_dMCV-TzNIM4U3NQ7I3iQHtQ411Kv9U
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTIxMDA3OCBTYWx0ZWRfX+HLIRpNe4ERo
+ 8/dJIljDznS3dO03hCG6xbI3V6aOexIlnBc9iQ7//h/jbTzd8dsXrPiKUD88BjKGeaMSfgGBniu
+ JHJ4xvAt2G7CrLDfUx4wXZF6t0714hY=
+X-Authority-Analysis: v=2.4 cv=YqWa1IYX c=1 sm=1 tr=0 ts=6ab0c2ab cx=c_pps
  a=vVfyC5vLCtgYJKYeQD43oA==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
  a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22
- a=EUspDBNiAAAA:8 a=fhppCylznReUS4Xj7DkA:9 a=QEXdDO2ut3YA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22
+ a=EUspDBNiAAAA:8 a=NwoWoW-BFzdagI8Imy4A:9 a=QEXdDO2ut3YA:10
  a=rl5im9kqc5Lf4LNbBjHf:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTIxMDA3OCBTYWx0ZWRfX4gU8/5FZbs64
- +DU3b+oYW5tL/29qS2LzoSJwyyY3GQwSn1CBf+wknI0Nc6Pt3dD82WkAwekKWXPQd9NUPjubEbn
- dO1BzWtRiY7OjPToohZa2nY+oGNmmR8=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTIxMDA3OCBTYWx0ZWRfXzDUi1EZTEZ6x
+ BNpTDoDFeYaK114dDFGf6/k5aSR90smRWfiQIkECY7S/aiP6f3iX3/9BIvht81X7jMeu8e711v4
+ G6W8Toz6cZta/fJCHcpyEMd+QzdWXjZtAOnb5jO0jkDtY8L8OI+Wgni8Yp4PnBQi6xniJKfSRc9
+ m+7GWgKO9t1RmdT8Lwlo81xEZMSAxYENFB0TJdRahb535EhoAefIOmmAq5Ge7POCCMmvNWr0vl0
+ q9irRVcW61tKLzRN5+W6sospZRE28/ksHfUC+Bp9J12VU3gQGUjyaQ79/jwX3rJ7b7jED7L+FGD
+ dbglYnsLw14IKFSvF4zennGRYIPe+sHlnK9ii340h4m0d9KPBfgO/TVXpn4wDYaeuDRWZlIJvQ8
+ c2KrNKC25VhbQxwmMAAKSdNa5pc+Y2qI0VBL7HEaF+moiyJMWdpkCyUyXt56oyM/DNbZjAMgL6L
+ o1ge9hH7o3YV71kKkTA==
+X-Proofpoint-GUID: J_dMCV-TzNIM4U3NQ7I3iQHtQ411Kv9U
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-09-21_02,2026-09-16_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 lowpriorityscore=0 spamscore=0 adultscore=0 phishscore=0
- bulkscore=0 priorityscore=1501 impostorscore=0 suspectscore=0 malwarescore=0
+ suspectscore=0 clxscore=1015 lowpriorityscore=0 spamscore=0 phishscore=0
+ malwarescore=0 priorityscore=1501 bulkscore=0 impostorscore=0 adultscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609210078
 
-Add the Nord PCIe controller configuration and the platform-specific
-settings required for correct operation.
+qphy_setbits(), qphy_clrbits() and qphy_checkbits() were duplicated
+verbatim across phy-qcom-qmp-pcie.c, phy-qcom-qmp-pcie-msm8996.c,
+phy-qcom-qmp-ufs.c, phy-qcom-qmp-usb.c, phy-qcom-qmp-usbc.c and
+phy-qcom-qmp-combo.c. Move them to the shared phy-qcom-qmp-common.h,
+which all of these drivers already include, and drop the local copies.
 
-Nord requires the NO_SNOOP override and L0s to be disabled. It also
-requires a clock-gating-control (CGC) workaround to address a PCIe
-power-domain timing-convergence issue. Set the CORE_CLK_CGC_DIS and
-AUX_PWR_DET bits in PARF_SYS_CTRL after controller initialization.
-The SLV_ACLK_CGC_DIS bit is already configured by hardware reset.
+This also makes the helpers available to phy-qcom-qmp-pcie-multiphy.c
+without introducing yet another copy.
 
-This behavior is documented in the private QCTDD11972446 erratum,
-which is not publicly available.
-
-Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Suggested-by: Qiang Yu <qiang.yu@oss.qualcomm.com>
+Reviewed-by: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
 Reviewed-by: Shawn Guo <shengchao.guo@oss.qualcomm.com>
 Signed-off-by: Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>
 ---
- drivers/pci/controller/dwc/pcie-qcom.c | 16 ++++++++++++++++
- 1 file changed, 16 insertions(+)
+ drivers/phy/qualcomm/phy-qcom-qmp-combo.c        | 24 ------------------
+ drivers/phy/qualcomm/phy-qcom-qmp-common.h       | 32 ++++++++++++++++++++++++
+ drivers/phy/qualcomm/phy-qcom-qmp-pcie-msm8996.c | 24 ------------------
+ drivers/phy/qualcomm/phy-qcom-qmp-pcie.c         | 32 ------------------------
+ drivers/phy/qualcomm/phy-qcom-qmp-ufs.c          | 24 ------------------
+ drivers/phy/qualcomm/phy-qcom-qmp-usb.c          | 24 ------------------
+ drivers/phy/qualcomm/phy-qcom-qmp-usbc.c         | 24 ------------------
+ 7 files changed, 32 insertions(+), 152 deletions(-)
 
-diff --git a/drivers/pci/controller/dwc/pcie-qcom.c b/drivers/pci/controller/dwc/pcie-qcom.c
-index b58a607b713f..304628b57f33 100644
---- a/drivers/pci/controller/dwc/pcie-qcom.c
-+++ b/drivers/pci/controller/dwc/pcie-qcom.c
-@@ -281,6 +281,7 @@ struct qcom_pcie_cfg {
- 	bool override_no_snoop;
- 	bool firmware_managed;
- 	bool no_l0s;
-+	bool disable_cgc;
+diff --git a/drivers/phy/qualcomm/phy-qcom-qmp-combo.c b/drivers/phy/qualcomm/phy-qcom-qmp-combo.c
+index c39ced168d03..052d2f7cf671 100644
+--- a/drivers/phy/qualcomm/phy-qcom-qmp-combo.c
++++ b/drivers/phy/qualcomm/phy-qcom-qmp-combo.c
+@@ -2622,30 +2622,6 @@ static void qmp_v8_dp_aux_init(struct qmp_combo *qmp);
+ static int qmp_v8_configure_dp_clocks(struct qmp_combo *qmp);
+ static int qmp_v8_configure_dp_phy(struct qmp_combo *qmp);
+ 
+-static inline void qphy_setbits(void __iomem *base, u32 offset, u32 val)
+-{
+-	u32 reg;
+-
+-	reg = readl(base + offset);
+-	reg |= val;
+-	writel(reg, base + offset);
+-
+-	/* ensure that above write is through */
+-	readl(base + offset);
+-}
+-
+-static inline void qphy_clrbits(void __iomem *base, u32 offset, u32 val)
+-{
+-	u32 reg;
+-
+-	reg = readl(base + offset);
+-	reg &= ~val;
+-	writel(reg, base + offset);
+-
+-	/* ensure that above write is through */
+-	readl(base + offset);
+-}
+-
+ /* list of clocks required by phy */
+ static const char * const qmp_combo_phy_clk_l[] = {
+ 	"aux", "cfg_ahb", "ref", "com_aux",
+diff --git a/drivers/phy/qualcomm/phy-qcom-qmp-common.h b/drivers/phy/qualcomm/phy-qcom-qmp-common.h
+index b945fc14cece..3c0e47f4af75 100644
+--- a/drivers/phy/qualcomm/phy-qcom-qmp-common.h
++++ b/drivers/phy/qualcomm/phy-qcom-qmp-common.h
+@@ -59,4 +59,36 @@ static inline void qmp_configure(struct device *dev, void __iomem *base,
+ 	qmp_configure_lane(dev, base, tbl, num, 0xff);
+ }
+ 
++static inline void qphy_setbits(void __iomem *base, u32 offset, u32 val)
++{
++	u32 reg;
++
++	reg = readl(base + offset);
++	reg |= val;
++	writel(reg, base + offset);
++
++	/* ensure that above write is through */
++	readl(base + offset);
++}
++
++static inline void qphy_clrbits(void __iomem *base, u32 offset, u32 val)
++{
++	u32 reg;
++
++	reg = readl(base + offset);
++	reg &= ~val;
++	writel(reg, base + offset);
++
++	/* ensure that above write is through */
++	readl(base + offset);
++}
++
++static inline bool qphy_checkbits(const void __iomem *base, u32 offset, u32 val)
++{
++	u32 reg;
++
++	reg = readl(base + offset);
++	return (reg & val) == val;
++}
++
+ #endif
+diff --git a/drivers/phy/qualcomm/phy-qcom-qmp-pcie-msm8996.c b/drivers/phy/qualcomm/phy-qcom-qmp-pcie-msm8996.c
+index 37e96493b722..ed22b7a256ef 100644
+--- a/drivers/phy/qualcomm/phy-qcom-qmp-pcie-msm8996.c
++++ b/drivers/phy/qualcomm/phy-qcom-qmp-pcie-msm8996.c
+@@ -218,30 +218,6 @@ struct qcom_qmp {
+ 	int init_count;
  };
  
- struct qcom_pcie_perst {
-@@ -1097,11 +1098,18 @@ static int qcom_pcie_init_2_7_0(struct qcom_pcie *pcie)
- static int qcom_pcie_post_init_2_7_0(struct qcom_pcie *pcie)
- {
- 	const struct qcom_pcie_cfg *pcie_cfg = pcie->cfg;
-+	u32 val;
- 
- 	if (pcie_cfg->override_no_snoop)
- 		writel(WR_NO_SNOOP_OVERRIDE_EN | RD_NO_SNOOP_OVERRIDE_EN,
- 				pcie->parf + PARF_NO_SNOOP_OVERRIDE);
- 
-+	if (pcie_cfg->disable_cgc) {
-+		val = readl(pcie->parf + PARF_SYS_CTRL);
-+		val |= CORE_CLK_CGC_DIS | AUX_PWR_DET;
-+		writel(val, pcie->parf + PARF_SYS_CTRL);
-+	}
-+
- 	qcom_pcie_set_slot_cap(pcie->pci);
- 
- 	return 0;
-@@ -1630,6 +1638,13 @@ static const struct qcom_pcie_cfg cfg_2_9_0 = {
- 	.ops = &ops_2_9_0,
+-static inline void qphy_setbits(void __iomem *base, u32 offset, u32 val)
+-{
+-	u32 reg;
+-
+-	reg = readl(base + offset);
+-	reg |= val;
+-	writel(reg, base + offset);
+-
+-	/* ensure that above write is through */
+-	readl(base + offset);
+-}
+-
+-static inline void qphy_clrbits(void __iomem *base, u32 offset, u32 val)
+-{
+-	u32 reg;
+-
+-	reg = readl(base + offset);
+-	reg &= ~val;
+-	writel(reg, base + offset);
+-
+-	/* ensure that above write is through */
+-	readl(base + offset);
+-}
+-
+ /* list of clocks required by phy */
+ static const char * const msm8996_phy_clk_l[] = {
+ 	"aux", "cfg_ahb", "ref",
+diff --git a/drivers/phy/qualcomm/phy-qcom-qmp-pcie.c b/drivers/phy/qualcomm/phy-qcom-qmp-pcie.c
+index da83358c97ea..7fa9bb2b094a 100644
+--- a/drivers/phy/qualcomm/phy-qcom-qmp-pcie.c
++++ b/drivers/phy/qualcomm/phy-qcom-qmp-pcie.c
+@@ -4044,38 +4044,6 @@ struct qmp_pcie {
+ 	struct clk_fixed_rate aux_clk_fixed;
  };
  
-+static const struct qcom_pcie_cfg cfg_nord = {
-+	.ops = &ops_1_9_0,
-+	.override_no_snoop = true,
-+	.no_l0s = true,
-+	.disable_cgc = true,
-+};
-+
- static const struct qcom_pcie_cfg cfg_sc8280xp = {
- 	.ops = &ops_1_21_0,
- 	.no_l0s = true,
-@@ -2464,6 +2479,7 @@ static int qcom_pcie_resume_noirq(struct device *dev)
+-static bool qphy_checkbits(const void __iomem *base, u32 offset, u32 val)
+-{
+-	u32 reg;
+-
+-	reg = readl(base + offset);
+-	return (reg & val) == val;
+-}
+-
+-static inline void qphy_setbits(void __iomem *base, u32 offset, u32 val)
+-{
+-	u32 reg;
+-
+-	reg = readl(base + offset);
+-	reg |= val;
+-	writel(reg, base + offset);
+-
+-	/* ensure that above write is through */
+-	readl(base + offset);
+-}
+-
+-static inline void qphy_clrbits(void __iomem *base, u32 offset, u32 val)
+-{
+-	u32 reg;
+-
+-	reg = readl(base + offset);
+-	reg &= ~val;
+-	writel(reg, base + offset);
+-
+-	/* ensure that above write is through */
+-	readl(base + offset);
+-}
+-
+ /* list of clocks required by phy */
+ static const char * const qmp_pciephy_clk_l[] = {
+ 	"aux", "cfg_ahb", "ref", "refgen", "rchng", "phy_aux",
+diff --git a/drivers/phy/qualcomm/phy-qcom-qmp-ufs.c b/drivers/phy/qualcomm/phy-qcom-qmp-ufs.c
+index d4aca22c181e..d15db9ab9a90 100644
+--- a/drivers/phy/qualcomm/phy-qcom-qmp-ufs.c
++++ b/drivers/phy/qualcomm/phy-qcom-qmp-ufs.c
+@@ -1211,30 +1211,6 @@ struct qmp_ufs {
+ 	u32 submode;
+ };
  
- static const struct of_device_id qcom_pcie_match[] = {
- 	{ .compatible = "qcom,hawi-pcie", .data = &cfg_1_9_0 },
-+	{ .compatible = "qcom,nord-pcie", .data = &cfg_nord },
- 	{ .compatible = "qcom,pcie-apq8064", .data = &cfg_2_1_0 },
- 	{ .compatible = "qcom,pcie-apq8084", .data = &cfg_1_0_0 },
- 	{ .compatible = "qcom,pcie-ipq4019", .data = &cfg_2_4_0 },
+-static inline void qphy_setbits(void __iomem *base, u32 offset, u32 val)
+-{
+-	u32 reg;
+-
+-	reg = readl(base + offset);
+-	reg |= val;
+-	writel(reg, base + offset);
+-
+-	/* ensure that above write is through */
+-	readl(base + offset);
+-}
+-
+-static inline void qphy_clrbits(void __iomem *base, u32 offset, u32 val)
+-{
+-	u32 reg;
+-
+-	reg = readl(base + offset);
+-	reg &= ~val;
+-	writel(reg, base + offset);
+-
+-	/* ensure that above write is through */
+-	readl(base + offset);
+-}
+-
+ /* Regulator bulk data with load values for specific configurations */
+ static const struct regulator_bulk_data milos_ufsphy_vreg_l[] = {
+ 	{ .supply = "vdda-phy", .init_load_uA = 140120 },
+diff --git a/drivers/phy/qualcomm/phy-qcom-qmp-usb.c b/drivers/phy/qualcomm/phy-qcom-qmp-usb.c
+index b0790bcf0bc8..6a9faa0ce3bb 100644
+--- a/drivers/phy/qualcomm/phy-qcom-qmp-usb.c
++++ b/drivers/phy/qualcomm/phy-qcom-qmp-usb.c
+@@ -1441,30 +1441,6 @@ struct qmp_usb {
+ 	struct clk_fixed_rate pipe_clk_fixed;
+ };
+ 
+-static inline void qphy_setbits(void __iomem *base, u32 offset, u32 val)
+-{
+-	u32 reg;
+-
+-	reg = readl(base + offset);
+-	reg |= val;
+-	writel(reg, base + offset);
+-
+-	/* ensure that above write is through */
+-	readl(base + offset);
+-}
+-
+-static inline void qphy_clrbits(void __iomem *base, u32 offset, u32 val)
+-{
+-	u32 reg;
+-
+-	reg = readl(base + offset);
+-	reg &= ~val;
+-	writel(reg, base + offset);
+-
+-	/* ensure that above write is through */
+-	readl(base + offset);
+-}
+-
+ /* list of clocks required by phy */
+ static const char * const qmp_usb_phy_clk_l[] = {
+ 	"aux", "cfg_ahb", "ref", "com_aux",
+diff --git a/drivers/phy/qualcomm/phy-qcom-qmp-usbc.c b/drivers/phy/qualcomm/phy-qcom-qmp-usbc.c
+index e3465ab7c80e..548ec97373ac 100644
+--- a/drivers/phy/qualcomm/phy-qcom-qmp-usbc.c
++++ b/drivers/phy/qualcomm/phy-qcom-qmp-usbc.c
+@@ -474,30 +474,6 @@ struct qmp_usbc {
+ 	enum typec_orientation orientation;
+ };
+ 
+-static inline void qphy_setbits(void __iomem *base, u32 offset, u32 val)
+-{
+-	u32 reg;
+-
+-	reg = readl(base + offset);
+-	reg |= val;
+-	writel(reg, base + offset);
+-
+-	/* ensure that above write is through */
+-	readl(base + offset);
+-}
+-
+-static inline void qphy_clrbits(void __iomem *base, u32 offset, u32 val)
+-{
+-	u32 reg;
+-
+-	reg = readl(base + offset);
+-	reg &= ~val;
+-	writel(reg, base + offset);
+-
+-	/* ensure that above write is through */
+-	readl(base + offset);
+-}
+-
+ /* list of clocks required by phy */
+ static const char * const qmp_usbc_phy_clk_l[] = {
+ 	"aux", "cfg_ahb", "ref", "com_aux",
 
 -- 
 2.34.1
