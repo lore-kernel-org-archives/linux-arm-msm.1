@@ -1,186 +1,377 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wr2-f35.google.com (mail-wr2-f35.google.com [74.125.225.99])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 65BCA4B488E
-	for <linux-arm-msm@vger.kernel.org>; Mon, 21 Sep 2026 15:17:57 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5838B48EC92
+	for <linux-arm-msm@vger.kernel.org>; Mon, 21 Sep 2026 15:19:49 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.225.99
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790003880; cv=none; b=ethjws8R03VCfDtJO7yZM0YCTEnRKfjszdV1piBGUjx0mTb7R50qvemTKsVsk7xfRuQRLfqBNOvdEfM/x+JC+i7o7SP14lRFtHyv8CxnhcZbLy1pTpBJl3HrRp4hsBcm7/PLx4wa8o+Nuln3iJvE7AC7Zwr+dSp7lcLQpR4KmUc=
+	t=1790003992; cv=none; b=i5NzNxz1LbFIlgRR0yQSVYHn6aLyKHeQ16noFjauLy+71vdxg2pS+Qq2rnCXz9M7oKuuQZmNFjM5Tys3mrRCnjq3qkkHtNKV71Sh5iUd8nw3VEp2OEhMjDB69KJNcijk2d3rs0Q+2Wm/i1yfr/0hJ+F8h1u1NNeyqLp/ZePYTZE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790003880; c=relaxed/simple;
-	bh=wL7ViQpOBQrR1TFI9V+XKos7/PiVSTRxCqAW2yNVG+s=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=RdGh2Ggw2kP1QHT8U7QZ9yTRcrwhTwlMK/ZEp+DK7kyUbX/x6FvZ4tJhx7EOkhqS36XxYEC2hs1OXCj2kgw+Td6/Z/G3l7oJFdO/NXWO8DZyu8d/bgtH9JJGr8AVv/kISSB6eTdC/0StebeOj9iSV4xR34zJj7x11PnOdumuea0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=jEEDJvvn; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=R4chrIRt; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1790003992; c=relaxed/simple;
+	bh=T5uPgrfVPAdy5ijPsKrIrWo36pCK6jIM4tGNt0BFMlo=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=YHN6qbcsLEKdBlosQhMLIFr0+NR3tSIG70YeJBczTJmDJ1JkpSGCwaX2VyqjIUqJhyyH+pZsJy0dOlqaYSLVd6Zq8gmssGu/pqcabNso9tBHphy2PmA0LZcJsBtpIeVWwyctcU8yCI2Ps3ivoFVgprREftML+H7HJtDKzg2q6XY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com; spf=pass smtp.mailfrom=baylibre.com; dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b=MB/RkZOs; arc=none smtp.client-ip=74.125.225.99
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=baylibre.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="jEEDJvvn";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="R4chrIRt"
-Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68LFAEYX1677375
-	for <linux-arm-msm@vger.kernel.org>; Mon, 21 Sep 2026 15:17:56 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	lC++W42u9nXMDgVyRufwTJ5gNRl3aQXIvbYCUyx9A0M=; b=jEEDJvvnSuuAqf4k
-	BOCUoTtcZ3OXaYsV6vhNRuyrhmvayLSeHO6i3RMbBHL0C7eXq8L6Bg0LRqk1gPZF
-	zIh3OpoalkeT0DtNt0Myo1ZORVe8PlgxqkYWfSkqHOg9qVaxAwNkznPhF93TDbnh
-	/t+P4LiHBRSB/MMDhl1XkCNw+rMTg7b2OOySb3LRPRlR0gRaOuU/AA3JM3qYIe/B
-	DYhJOhWDnZr28JyD/bQGwuOMtZraVo4Gk9RpvS66XN6u8p797aSFcYMQFLY7StBR
-	FpxHsu0HwoIGf0lvYVgRvNLBf3k84RjjGw6KTRQR2i2sycRev47GDDAKpY/vP9Ox
-	qe7jDQ==
-Received: from mail-vs1-f70.google.com (mail-vs1-f70.google.com [209.85.217.70])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gu3csh2d1-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Mon, 21 Sep 2026 15:17:56 +0000 (GMT)
-Received: by mail-vs1-f70.google.com with SMTP id ada2fe7eead31-7a04805f8f1so3075290137.3
-        for <linux-arm-msm@vger.kernel.org>; Mon, 21 Sep 2026 08:17:56 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b="MB/RkZOs"
+Received: by mail-wr2-f35.google.com with SMTP id ffacd0b85a97d-4858bc96fabso2539728f8f.3
+        for <linux-arm-msm@vger.kernel.org>; Mon, 21 Sep 2026 08:19:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1790003875; x=1790608675; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=lC++W42u9nXMDgVyRufwTJ5gNRl3aQXIvbYCUyx9A0M=;
-        b=R4chrIRt8mprrvBaTbFNZGWUwWGShiQmAJmOxvVaiNZxcD40HBsOYUJCAZ4ysNooBO
-         PGjbnxyzPjFBJKo08YLyOBuHCa3fjUtuMONT66f8pNrxDP2CLhtSEuCsWaEsKxRMSby7
-         jdzC9l/cHfqgfwgJpXgYjdhabhNMhtr8cv5qOvjLqGwlCBqDzvp4jdimYj1Up0b1srGz
-         ij0jGcrL8bPfCvawTycWU3CEbsW4o7HBb33n+yY5o1Fv5sxLM85cGMZVvfdoiE324L/c
-         +H3sMMezUsvX9KxuKFmfRTJ5cA1FMSEXSPZajR9fzSp3hpLlMNSzMTBT2ajCrJXGcoIW
-         Wfuw==
+        d=baylibre.com; s=google; t=1790003987; x=1790608787; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=vV/yPDzhsjcBqB0No8n/B1gnDkpysOLtRQGRvwg7ZOw=;
+        b=MB/RkZOsAc8s+8K60hWxusTb9d998BLyw6pNj3KIlywhjqPEAbfau0BdIo/Y58L3W7
+         0tD/XREtYE+OhrM3m4MBR8w5n0YDNqZnD5EWshuiOzQvY9JpWf2hFyxmBAYe1KncL5X2
+         j4w8E2WmjQsSACQaOdtIJgwFqMPS0ZyFiVtFLedlUp8iorxw69RCah6FaZJZnRfcH6nP
+         QKNQ0ntJ7b5hMW2YluAWZWXMCdSqmNB5EXNIJjdEqcmJRfsHhg2eSOgx30MZJqorvUtU
+         qc50AcJh53Ol5PoRJlHL6bGqywZtx2d67yonc5UWZqyR4o1nrmQgF4V4VwMSYA8sQ84B
+         rGAA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790003875; x=1790608675;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=lC++W42u9nXMDgVyRufwTJ5gNRl3aQXIvbYCUyx9A0M=;
-        b=zaaT+lfAkovfKV9jCwvOeCaypxlbgNydlFI93sVc4t0sgt6Teqn9j5i+Ciaa/R8zCI
-         RHrHs+BtyIjnnEVkCJFeNZtlYOfrhkufbFXbsEhmfJE+M8VUJXxn8lv+Qn/VI8DLaaMP
-         QU22XfUMa+AxyYM7Xbppw0n9TK38O/BP9+A22SdaRD30RMKd8l290PB3PDHSoGhukvEx
-         la0NkyQwYivb/MaXVxiAC4ysbFvSG0s+1lq/P/brrMgEMkMvgMtSvl4e9ngEpVhJaXpW
-         ptJpTwnM6VEdCoVcS7AqQhxRdqrgie6RNspp11EKnKomRTBuODGs4chqU7zU2RQismJ+
-         nFdg==
-X-Forwarded-Encrypted: i=1; AKwUvBxYfgdA0sL0rFcD3UnYVdUxe2110PaMG4FZRpuPTUuRHvaH7NEXDf19zd/CAQL4VnOWFmY1sPAWWsN6HowP@vger.kernel.org
-X-Gm-Message-State: AFuF++nDZwdGdHor8gsj9RpC1sToJf5hQIq//8tUfq9OfXM2aCQqGLVk
-	sj6vmUNOIyeCkeAOWs6XGJW2EJmXNzX2s18Sng/GIi36PJI3Th2U+3sq0PKNo56uMksnRxuvW5K
-	Pq2ganGXW7Q6HUMznrNHDrBipgNlkTKtrBidLFNWgguBcUnSvMRTgAQQofSQO4EsoZvFA
-X-Gm-Gg: AYBFou0hR3H2iYM6sQ4qFXTGxlxlCyQNnY441nM8mBtq7hDevx9EUDQhdhxUbwIFJZ4
-	1vaOaP5wS5B2za3ev1hUFyS5uwi8ogOPJ5i6iPKy1syliSi6xS5Hz7rYEw1FcSzYl1baeOtH3oS
-	hkKtq0r6TfHsCPXnO1ra8mORN0Jli4G+KVtM27sCQ7HqIAMud8VgXsMeKaYYpsn7gZK+wBTLj8d
-	wUbtGPc+rITYcw91Naag5Db4kEe8Q25yfQKz9FisInC0UdsnAzTDUMibFtIFQh5L+E09kBZ58Os
-	XfAQnsbCjXS/Fv/ZlerXd4ujq1QSAHxSK4bJZuTjlRYqOu682XxGVgLHuLUv1JT/C6F6L3nJXuE
-	mr8mcSejnN0xmxG7YbnmURStID8wLOh4yHZp4aSk6
-X-Received: by 2002:a05:6102:5123:b0:7a6:de9a:f4f1 with SMTP id ada2fe7eead31-7a6de9b098amr3369137137.27.1790003875413;
-        Mon, 21 Sep 2026 08:17:55 -0700 (PDT)
-X-Received: by 2002:a05:6102:5123:b0:7a6:de9a:f4f1 with SMTP id ada2fe7eead31-7a6de9b098amr3369092137.27.1790003875011;
-        Mon, 21 Sep 2026 08:17:55 -0700 (PDT)
-Received: from [192.168.1.31] ([85.196.172.179])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-49fc585920fsm630198645e9.4.2026.09.21.08.17.52
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 21 Sep 2026 08:17:53 -0700 (PDT)
-Message-ID: <a51d8129-0167-4b9f-89d6-9623e4d41c49@oss.qualcomm.com>
-Date: Mon, 21 Sep 2026 18:17:50 +0300
+        d=1e100.net; s=20260707; t=1790003987; x=1790608787;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=vV/yPDzhsjcBqB0No8n/B1gnDkpysOLtRQGRvwg7ZOw=;
+        b=TEiAwpuBBkXySO0c3nlobDsToAIWO9sIvr3/P0xp3pGdb6/Az9AnaTToHedgLXUjO1
+         JW3m31jBINCu4AI0vd0tvqjpsema+dibU1OKkfBoy+hf/dL6jKGsv/h2TZneXBc1aafd
+         QroEmy3ox9akh4cu7jy18QHI0acL/9hZs7PtfZ14JsaEF4KRY7lgpBxj9yQd18i5OFW7
+         DZtP/gMZBivEFMJehXAxgy0GRXq4DC04B7OVz/KPxyEaxU2LNYbKQUcYtRXSLyJ6KGdg
+         G0QB7zhTjZxeyFO9LvdRJMfJkfSKFewAc07M776hcHBTY8MKugeYevfB6YfqoWGG2lph
+         AvWA==
+X-Forwarded-Encrypted: i=1; AKwUvBx7n89mLU8xd7pYwfa0Xuf59Zp2wCFDm1BpbpzECqg1qX/yTCI2BjUIsxqxqj9ZiQ+EM6ARj0zuKQRVp66r@vger.kernel.org
+X-Gm-Message-State: AFuF++mxI4P0oXAiXDsPKfU/pjGs1p6l9agTirf4Nypofv0OKSRdJ4dh
+	sph7D9bkJN0fe2D8PeHQ9pSGxYK4u/BT99IbbWEDgwn0oRmhmUTe13CrxsPDPB+f3GA=
+X-Gm-Gg: AYBFou2G7RozntbOZQu3e5K4KBJh79vpYe2tydFP+JyKSpooS/eEWdF4g13Wcqs9/5Z
+	Qcl8NvvgdRWmjW4wAhgRtLTv5yngS9h6A17FVmJsldMQ8k4zyKSKcPu8RmCm75CFMqsbKOtRSSt
+	gzRy1okwd7tYK9wa42s6dAO/f9rQbxA5rG+bhgYk5ACWrsEx1hueecHsJDOvfUtdlBawexL3g7f
+	Vr1nUcj5GQBP9HswqEPMwGcvT7w6k8dYgeMQdshnSz0f/hXo+EXIX8i9KeM3AoYKn5BsVqiYBsA
+	pDLi3bUzYPOsNnbSvkw7Yu+H2Ga7mHn4m2kAb3OrJDuP2HWR4AMnidVo4YZmtDqVE2lZ4Vf7pso
+	SW9rkZnKu367lCrHFRhyqW45FGXDPdij4cZ+G+SnYT6Cq9MmOBR0KwBMMWsN13z/xiGbCcdMGR6
+	ZM2gXMiYt7X2MVn9FVXsv68uI8Va9hh6Wz5WdIOl4uTmRqNsfKs0kQf9fOSuTJzOpd+p6UrZgaO
+	KRBuG2fZFH2XRVhZsug9gkmM82FoBCnkz+Dc5ahV4rVPoUKZnB16ljiTKlsfw==
+X-Received: by 2002:a05:6000:420a:b0:487:35c:6e6b with SMTP id ffacd0b85a97d-4871e244c95mr16766538f8f.12.1790003987507;
+        Mon, 21 Sep 2026 08:19:47 -0700 (PDT)
+Received: from localhost (p200300f65f19a904d4f76eed31f2ef79.dip0.t-ipconnect.de. [2003:f6:5f19:a904:d4f7:6eed:31f2:ef79])
+        by smtp.gmail.com with UTF8SMTPSA id ffacd0b85a97d-48724591eaasm23509562f8f.26.2026.09.21.08.19.46
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 21 Sep 2026 08:19:46 -0700 (PDT)
+Date: Mon, 21 Sep 2026 17:19:45 +0200
+From: Uwe =?utf-8?Q?Kleine-K=C3=B6nig?= <u.kleine-koenig@baylibre.com>
+To: Hans de Goede <johannes.goede@oss.qualcomm.com>
+Cc: Bjorn Andersson <andersson@kernel.org>, 
+	Cristian Marussi <cristian.marussi@arm.com>, Sudeep Holla <sudeep.holla@kernel.org>, 
+	Daniel Lezcano <daniel.lezcano@oss.qualcomm.com>, Bjorn Andersson <bjorn.andersson@oss.qualcomm.com>, 
+	Frank.Li@kernel.org, arm-scmi@vger.kernel.org, linux-arm-kernel@lists.infradead.org, 
+	linux-arm-msm@vger.kernel.org, imx@lists.linux.dev, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v7 1/2] module: add SCMI device table alias support
+Message-ID: <arFKVhlgJge5EZyj@monoceros>
+References: <20260918092951.5656-1-johannes.goede@oss.qualcomm.com>
+ <20260918092951.5656-2-johannes.goede@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/3] interconnect: qcom: Add CAMNOC interconnect
- provider driver
-To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
-        Krzysztof Kozlowski <krzk@kernel.org>,
-        Atanas Filipov <atanas.filipov@oss.qualcomm.com>
-Cc: Georgi Djakov <djakov@kernel.org>, linux-arm-msm@vger.kernel.org,
-        linux-pm@vger.kernel.org, Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley
- <conor+dt@kernel.org>, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org,
-        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-References: <20260819093211.1436275-1-atanas.filipov@oss.qualcomm.com>
- <20260819093211.1436275-3-atanas.filipov@oss.qualcomm.com>
- <20260827-adept-traditional-earwig-e2c8c6@quoll>
- <4fc98d9e-5013-45b4-8fea-d0d6a8feea45@oss.qualcomm.com>
- <07aeb266-927c-46f6-8363-f26fac7e3aab@oss.qualcomm.com>
-Content-Language: en-US
-From: "Gjorgji Rosikopulos (Consultant)"
- <gjorgji.rosikopulos@oss.qualcomm.com>
-In-Reply-To: <07aeb266-927c-46f6-8363-f26fac7e3aab@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTIxMDIyMiBTYWx0ZWRfX0QWLNETwcW6/
- WaHtv59+s/CHJUJy2lXTei64yggrbqXsPQnXNdakixErfnd8QXZEzv3DfYH2TDn2HxgiuqTYVrB
- X+iP2gI+BiM/ZwycHELMyaNQGJXxBqo=
-X-Proofpoint-GUID: pf3VC5j857jmMQVvN-4Eymo_KdONFWrC
-X-Authority-Analysis: v=2.4 cv=QovLTlyd c=1 sm=1 tr=0 ts=6ab14aa4 cx=c_pps
- a=N1BjEkVkxJi3uNfLdpvX3g==:117 a=Q/e3f29T3Hw2hnAEzBPF7w==:17
- a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22
- a=VwQbUJbxAAAA:8 a=KKAkSRfTAAAA:8 a=EUspDBNiAAAA:8 a=pKspbupdq_hDdIdxj9MA:9
- a=QEXdDO2ut3YA:10 a=crWF4MFLhNY0qMRaF8an:22 a=cvBusfyB2V15izCimMoJ:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTIxMDIyMiBTYWx0ZWRfX3AjNAHKo4m9X
- PGxBj8/Ixa96nbmhyMcH+b4AgcE1HMEpKdkaG4BhKwzxmvb3lp1j/1veLZOqCHkUoO/pem3JraK
- vx3ZIZ5uMbjcS0O1aIamkDZ8muTqAX9qOyTDbPLfteXeDNczWOKfZu6I9oAaao5aYdvkwp7qBpn
- eVCwd2gmSf3cyB5D5QRwtRi47qdaq0a7kS8mfkikMoXvk8qx7t9LDGe1Tr/kaoio8ftrC0+uKlH
- 5wBVVe68Zgr9DxwhS5TocJBVzhvlyiyke8DcJ/sYOl57xEd1o60vvWSqAmtlWKpZOIwrkiI2wvK
- NH5L7EvN1oId+HwSuj6CvTJiXB3n/ndjvJMVSTlGPwbqugCmWubTpuSQylQasdvN7+60AIcR77/
- qpYsDNcwL4vV6fzAIjNKO4DE1l/jhT4z634iruSp8sj6U9IRE+7OQTNPxcWQsWK4DW7IzOsTY0y
- k48jKfMNB3gnstGz9sw==
-X-Proofpoint-ORIG-GUID: pf3VC5j857jmMQVvN-4Eymo_KdONFWrC
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-21_05,2026-09-21_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- adultscore=0 suspectscore=0 bulkscore=0 impostorscore=0 priorityscore=1501
- spamscore=0 lowpriorityscore=0 phishscore=0 malwarescore=0 clxscore=1015
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609210222
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="x3f53yyge7gbc6ag"
+Content-Disposition: inline
+In-Reply-To: <20260918092951.5656-2-johannes.goede@oss.qualcomm.com>
 
-Hi Konrad,
 
-On 9/21/2026 5:17 PM, Konrad Dybcio wrote:
-> On 9/9/26 2:58 PM, Gjorgji Rosikopulos (Consultant) wrote:
->> Hi Krzysztof,
->>
->> Thanks for the review.
->>
->> On 8/27/2026 12:25 PM, Krzysztof Kozlowski wrote:
->>> On Wed, Aug 19, 2026 at 12:32:10PM +0300, Atanas Filipov wrote:
->>>> Add an ICC provider for the Qualcomm Camera NOC (CAMNOC). Multiple
->>>> camera sub-devices share CAM_CC_CAMNOC_AXI_CLK; direct clk_set_rate()
->>>> calls from each consumer cause a last-writer-wins race.
->>>>
->>>> Each consumer obtains an ICC path to SLAVE_CAMNOC_AXI and votes via
->>>> icc_set_bw(). The ICC core aggregates votes (max peak_bw) and the
->>>> set() callback converts the result to clk_set_rate(). Consumers
->>>> encode the required frequency as peak_bw in kBps.
->>>>
->>>> Signed-off-by: Atanas Filipov <atanas.filipov@oss.qualcomm.com>
->>>> ---
-> 
-> [...]
-> 
->> Maybe those series should be marked as RFC. The basic idea is to manage clocks as interconnect providers,
->> similar to this change: https://lore.kernel.org/all/20230512001334.2983048-3-dmitry.baryshkov@linaro.org/
->>
->> There is requirement to maintain higher clock rate on source clocks and some place to aggregate them.
->> One example is camnoc axi clock which is used by jpeg, camss, ope and maybe other drivers.
->> The interconnect has already functionality inplace to maintain higher
->> bw per request which can be used for maintaining higher clock frequency from requested drivers.
->>
->> One option is to use already available icc-clk provider, but we have to add many icc providers
->> instead one provider with many ports.
-> 
-> icc-clk provides N clocks, it has M clients voting on each one and
-> avg/peak bandwidth aggregation happens at the icc core so this
-> should just work - or are we thinking about different problems?
+--x3f53yyge7gbc6ag
+Content-Type: text/plain; protected-headers=v1; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+Subject: Re: [PATCH v7 1/2] module: add SCMI device table alias support
+MIME-Version: 1.0
 
-That is correct thanks for pointing that, i have double checked, please ignore this series new version will use icc-clk.
+On Fri, Sep 18, 2026 at 11:29:50AM +0200, Hans de Goede wrote:
+> From: Bjorn Andersson <bjorn.andersson@oss.qualcomm.com>
+>=20
+> SCMI client drivers already describe their bus match data with
+> MODULE_DEVICE_TABLE(scmi, ...), but modpost does not know how to consume
+> SCMI device tables. As a result, SCMI modules do not get generated module
+> aliases from their id tables.
+>=20
+> Move struct scmi_device_id to mod_devicetable.h so it has a fixed layout
+> visible to modpost, add the corresponding generated offsets and teach
+> file2alias to emit scmi:<protocol>:<name> aliases.
+>=20
+> Use the same stable alias format for SCMI device uevents and sysfs
+> modaliases. The previous string included the instance-specific device
+> name, which is not useful for matching modules.
+>=20
+> Assisted-by: Codex:GPT-5.5
+> Reviewed-by: Hans de Goede <johannes.goede@oss.qualcomm.com>
+> Tested-by: Hans de Goede <johannes.goede@oss.qualcomm.com>
+> Signed-off-by: Bjorn Andersson <bjorn.andersson@oss.qualcomm.com>
+> Signed-off-by: Hans de Goede <johannes.goede@oss.qualcomm.com>
+> ---
+> Changes in v7:
+> - Rebase on top of v7.3-rc3
+>=20
+> Changes in v4:
+> - Drop unused driver_data member from struct scmi_device_id (Uwe)
+> - Drop device-id/scmi.h include from mod_devicetable.h (Uwe)
+> - Add device-id/scmi.h to devicetable-offsets.c and file2alias.c (Uwe)
+>=20
+> Changes in v3:
+> - Adjust for ad428f5811bd ("mod_devicetable.h: Split into per subsystem
+>   headers")
+> - Add '\n' to modalias_show() output, matching other subsystems' modalias
+>=20
+> Changes in v2:
+> - Drop #include <linux/mod_devicetable.h> from scmi_protocol.h
+> - Link to v1: https://patch.msgid.link/20260616-scmi-modalias-v1-0-662b8d=
+d52ab2@oss.qualcomm.com
+> ---
+>  MAINTAINERS                       |  1 +
+>  drivers/firmware/arm_scmi/bus.c   | 21 ++++++++++-----------
+>  include/linux/device-id/scmi.h    | 17 +++++++++++++++++
+>  include/linux/scmi_protocol.h     |  6 +-----
+>  scripts/mod/devicetable-offsets.c |  5 +++++
+>  scripts/mod/file2alias.c          | 12 ++++++++++++
+>  6 files changed, 46 insertions(+), 16 deletions(-)
+>  create mode 100644 include/linux/device-id/scmi.h
+>=20
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index c2414447892c..f351ec56a2ec 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -26604,6 +26604,7 @@ F:	drivers/pmdomain/arm/
+>  F:	drivers/powercap/arm_scmi_powercap.c
+>  F:	drivers/regulator/scmi-regulator.c
+>  F:	drivers/reset/reset-scmi.c
+> +F:	include/linux/device-id/scmi.h
+>  F:	include/linux/sc[mp]i_protocol.h
+>  F:	include/trace/events/scmi.h
+>  F:	include/uapi/linux/virtio_scmi.h
+> diff --git a/drivers/firmware/arm_scmi/bus.c b/drivers/firmware/arm_scmi/=
+bus.c
+> index e060edbe7e83..51de50fbc382 100644
+> --- a/drivers/firmware/arm_scmi/bus.c
+> +++ b/drivers/firmware/arm_scmi/bus.c
+> @@ -12,11 +12,12 @@
+>  #include <linux/of.h>
+>  #include <linux/kernel.h>
+>  #include <linux/slab.h>
+> +#include <linux/string.h>
+>  #include <linux/device.h>
+> =20
+>  #include "common.h"
+> =20
+> -#define SCMI_UEVENT_MODALIAS_FMT	"%s:%02x:%s"
+> +#define SCMI_UEVENT_MODALIAS_FMT	SCMI_MODULE_PREFIX "%02x:%s"
+> =20
+>  BLOCKING_NOTIFIER_HEAD(scmi_requested_devices_nh);
+>  EXPORT_SYMBOL_GPL(scmi_requested_devices_nh);
+> @@ -185,7 +186,7 @@ static int scmi_protocol_table_register(const struct =
+scmi_device_id *id_table)
+>  	const struct scmi_device_id *entry;
+>  	int ret;
+> =20
+> -	for (entry =3D id_table; entry->name; entry++) {
+> +	for (entry =3D id_table; entry->name[0]; entry++) {
+>  		ret =3D scmi_protocol_device_request(entry);
+>  		if (ret)
+>  			goto err_unrequest;
+> @@ -205,7 +206,7 @@ scmi_protocol_table_unregister(const struct scmi_devi=
+ce_id *id_table)
+>  {
+>  	const struct scmi_device_id *entry;
+> =20
+> -	for (entry =3D id_table; entry->name; entry++)
+> +	for (entry =3D id_table; entry->name[0]; entry++)
+>  		scmi_protocol_device_unrequest(entry);
+>  }
+> =20
+> @@ -219,10 +220,10 @@ static int __scmi_dev_match_by_id_table(struct scmi=
+_device *scmi_dev,
+>  					const struct scmi_device_id *id_table,
+>  					bool skip_transport)
+>  {
+> -	if (!id_table || !id_table->name)
+> +	if (!id_table || !id_table->name[0])
+>  		return 0;
+> =20
+> -	for (; id_table->protocol_id && id_table->name; id_table++)
+> +	for (; id_table->protocol_id && id_table->name[0]; id_table++)
+>  		if (id_table->protocol_id =3D=3D scmi_dev->protocol_id &&
+>  		    !(skip_transport && scmi_device_is_transport(scmi_dev)) &&
+>  		    !strcmp(id_table->name, scmi_dev->name))
+> @@ -266,7 +267,7 @@ scmi_child_dev_find_get(struct device *parent, int pr=
+ot_id, const char *name)
+>  	struct device *dev;
+> =20
+>  	id_table[0].protocol_id =3D prot_id;
+> -	id_table[0].name =3D name;
+> +	strscpy(id_table[0].name, name, sizeof(id_table[0].name));
+> =20
+>  	dev =3D device_find_child(parent, &id_table, scmi_match_by_id_table);
+>  	if (!dev)
+> @@ -300,8 +301,7 @@ static int scmi_device_uevent(const struct device *de=
+v, struct kobj_uevent_env *
+>  	const struct scmi_device *scmi_dev =3D to_scmi_dev(dev);
+> =20
+>  	return add_uevent_var(env, "MODALIAS=3D" SCMI_UEVENT_MODALIAS_FMT,
+> -			      dev_name(&scmi_dev->dev), scmi_dev->protocol_id,
+> -			      scmi_dev->name);
+> +			      scmi_dev->protocol_id, scmi_dev->name);
+>  }
+> =20
+>  static ssize_t modalias_show(struct device *dev,
+> @@ -309,9 +309,8 @@ static ssize_t modalias_show(struct device *dev,
+>  {
+>  	struct scmi_device *scmi_dev =3D to_scmi_dev(dev);
+> =20
+> -	return sysfs_emit(buf, SCMI_UEVENT_MODALIAS_FMT,
+> -			  dev_name(&scmi_dev->dev), scmi_dev->protocol_id,
+> -			  scmi_dev->name);
+> +	return sysfs_emit(buf, SCMI_UEVENT_MODALIAS_FMT "\n",
+> +			  scmi_dev->protocol_id, scmi_dev->name);
+>  }
+>  static DEVICE_ATTR_RO(modalias);
+> =20
+> diff --git a/include/linux/device-id/scmi.h b/include/linux/device-id/scm=
+i.h
+> new file mode 100644
+> index 000000000000..1b4ccfa9dcc5
+> --- /dev/null
+> +++ b/include/linux/device-id/scmi.h
+> @@ -0,0 +1,17 @@
+> +/* SPDX-License-Identifier: GPL-2.0-only */
+> +#ifndef LINUX_DEVICE_ID_SCMI_H
+> +#define LINUX_DEVICE_ID_SCMI_H
+> +
+> +#ifdef __KERNEL__
+> +#include <linux/types.h>
+> +#endif
+> +
+> +#define SCMI_NAME_SIZE		32
+> +#define SCMI_MODULE_PREFIX	"scmi:"
+> +
+> +struct scmi_device_id {
+> +	__u8 protocol_id;
+> +	char name[SCMI_NAME_SIZE];
 
-Regards,
-~Gjorgji
+I wonder if you tried to keep this a char *. ISTR someone did something
+similar recently and they claimed it worked. That would get rid of the
+artificial name size limit and simplify this patch.
+
+> +};
+> +
+> +#endif /* ifndef LINUX_DEVICE_ID_SCMI_H */
+> diff --git a/include/linux/scmi_protocol.h b/include/linux/scmi_protocol.h
+> index 5ab73b1ab9aa..ba53302d95f5 100644
+> --- a/include/linux/scmi_protocol.h
+> +++ b/include/linux/scmi_protocol.h
+> @@ -9,6 +9,7 @@
+>  #define _LINUX_SCMI_PROTOCOL_H
+> =20
+>  #include <linux/bitfield.h>
+> +#include <linux/device-id/scmi.h>
+>  #include <linux/device.h>
+>  #include <linux/notifier.h>
+>  #include <linux/types.h>
+> @@ -951,11 +952,6 @@ struct scmi_device {
+> =20
+>  #define to_scmi_dev(d) container_of_const(d, struct scmi_device, dev)
+> =20
+> -struct scmi_device_id {
+> -	u8 protocol_id;
+> -	const char *name;
+> -};
+> -
+>  struct scmi_driver {
+>  	const char *name;
+>  	int (*probe)(struct scmi_device *sdev);
+> diff --git a/scripts/mod/devicetable-offsets.c b/scripts/mod/devicetable-=
+offsets.c
+> index b4178c42d08f..91ec3704ee2b 100644
+> --- a/scripts/mod/devicetable-offsets.c
+> +++ b/scripts/mod/devicetable-offsets.c
+> @@ -1,5 +1,6 @@
+>  // SPDX-License-Identifier: GPL-2.0
+>  #define COMPILE_OFFSETS
+> +#include <linux/device-id/scmi.h>
+>  #include <linux/kbuild.h>
+>  #include <linux/mod_devicetable.h>
+> =20
+> @@ -144,6 +145,10 @@ int main(void)
+>  	DEVID(rpmsg_device_id);
+>  	DEVID_FIELD(rpmsg_device_id, name);
+> =20
+> +	DEVID(scmi_device_id);
+> +	DEVID_FIELD(scmi_device_id, protocol_id);
+> +	DEVID_FIELD(scmi_device_id, name);
+> +
+>  	DEVID(i2c_device_id);
+>  	DEVID_FIELD(i2c_device_id, name);
+> =20
+> diff --git a/scripts/mod/file2alias.c b/scripts/mod/file2alias.c
+> index 8d36c74dec2d..5379b1def07b 100644
+> --- a/scripts/mod/file2alias.c
+> +++ b/scripts/mod/file2alias.c
+> @@ -121,6 +121,7 @@ typedef struct {
+>  /* Big exception to the "don't include kernel headers into userspace, wh=
+ich
+>   * even potentially has different endianness and word sizes, since
+>   * we handle those differences explicitly below */
+> +#include "../../include/linux/device-id/scmi.h"
+>  #include "../../include/linux/mod_devicetable.h"
+> =20
+>  struct devtable {
+> @@ -852,6 +853,16 @@ static void do_rpmsg_entry(struct module *mod, void =
+*symval)
+>  	module_alias_printf(mod, false, RPMSG_DEVICE_MODALIAS_FMT, *name);
+>  }
+> =20
+> +/* Looks like: scmi:NN:S */
+> +static void do_scmi_entry(struct module *mod, void *symval)
+> +{
+> +	DEF_FIELD(symval, scmi_device_id, protocol_id);
+> +	DEF_FIELD_ADDR(symval, scmi_device_id, name);
+> +
+> +	module_alias_printf(mod, false, SCMI_MODULE_PREFIX "%02x:%s",
+> +			    protocol_id, *name);
+> +}
+> +
+>  /* Looks like: i2c:S */
+>  static void do_i2c_entry(struct module *mod, void *symval)
+>  {
+> @@ -1491,6 +1502,7 @@ static const struct devtable devtable[] =3D {
+>  	{"virtio", SIZE_virtio_device_id, do_virtio_entry},
+>  	{"vmbus", SIZE_hv_vmbus_device_id, do_vmbus_entry},
+>  	{"rpmsg", SIZE_rpmsg_device_id, do_rpmsg_entry},
+> +	{"scmi", SIZE_scmi_device_id, do_scmi_entry},
+>  	{"i2c", SIZE_i2c_device_id, do_i2c_entry},
+>  	{"i3c", SIZE_i3c_device_id, do_i3c_entry},
+>  	{"slim", SIZE_slim_device_id, do_slim_entry},
+
+I wonder if this is supposed to be ordered alphabetically ...
+
+Best regards
+Uwe
+
+--x3f53yyge7gbc6ag
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAABCgAdFiEEP4GsaTp6HlmJrf7Tj4D7WH0S/k4FAmqxSw8ACgkQj4D7WH0S
+/k5lIQf+Pk0pBFCMv2UlNFoYrcnt7sDd37qCqzSchh+C4VDUQJUrS+U3++VDP+w9
+qQ1uz0pIZ08N7xrsAvI2b21w1QjBsVGfuA2K79Q66sHHNPWk2x4jLyXebehylwj7
+RqUjmFBRQ6OlpZtdOfcLG0mCopgIcOa+3LMWCkac4VENvzFOQ8aHkYLCM6F8Zr3T
+QHSpbWMHoPvXSbjW2ZgFDgQZbr9fVvHMcCiX1ronBbv2mqBXRzAOrjcR0IS4fqjM
+0Wt+9Tibbskx3/E7EaOFar9w+dVwvg89nGCWvz9ke6FgJhqfsM9UFyz0Vv7R1kbz
+gnmskjzm0NxgGlfZSipyOdiObLtMnw==
+=ZEo+
+-----END PGP SIGNATURE-----
+
+--x3f53yyge7gbc6ag--
