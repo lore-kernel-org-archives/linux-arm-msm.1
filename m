@@ -1,100 +1,421 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-lj1-f180.google.com (mail-lj1-f180.google.com [209.85.208.180])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 78E6C39FCBF;
-	Tue, 22 Sep 2026 13:32:31 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A6AC253F6A2
+	for <linux-arm-msm@vger.kernel.org>; Tue, 22 Sep 2026 13:33:51 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.208.180
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790083952; cv=none; b=VY/I9on28uJr8f2DzuELUKv7nUolz+t1X36LbbKY1wYEN9zoundHKXUMlJmKpv6fRe2P5ptgBtbA3vAwfd192QnSd9YuLpjM4jLQzHh8rkKUNytB0x9bUjiiZ9xSRbHCRTd9EY9ZOD1HJkpdfV/kkWmHsnJc+1/wy8zhJ5GsYVk=
+	t=1790084039; cv=none; b=c2eH0Qn6Fs6ByuKdefzCL9j1658M1aSTeLwqiPKs32d0/LCKIBBHeFLUccKbZKbwbG+1kgsyvbqfPuEVdRiT6XXQ2uhx3Jlm7BzWeq+DOOnPTpdLVv3wPvZ+AJE2XQ9yEk2/dOUeqspY7YWivhXqQWehxa3VitAq/KeSvodVoRI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790083952; c=relaxed/simple;
-	bh=LYo9expeQU1cCwYwOhTDwbg03nk/lQdkP6k+S5qLDAg=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=RCtp5rrd/Pl8DOycBzkfhJfZu3pDolkov/Z5a6FzjNBDVGqT6hIWuZAY3IJ1N1HOHY8A160J+/w269BrlMnakcN+DNy1vezqIKj+Fvs1WKhxH7IiA6DM6arrOe89AtEPygAzuhVWzCl0Vg5SwtbAObvED9ZjPxJBeLWHGIAfrMk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=W+hVf59p; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1790084039; c=relaxed/simple;
+	bh=WSdfeY/0K159TMJyPSbYWg5pgAkoB6b1mxTxk/rn788=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=ZAEuvEfkCKgKni52aBGFnHc7b4idiSghjOXgSXUW5AfxV2qM0p0Awj+4x4toF86RlUTXdnoKI1AtWgEDbuGOD1kJT5pE+OUBojrf6mfq+6Jo1Kw3f5Mkq8SMdTghrN5yMXl9KjITCiXQA39Zx0qbsEFgnp/s0IIaltreRYhRJaU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=riscstar.com; spf=pass smtp.mailfrom=riscstar.com; dkim=pass (2048-bit key) header.d=riscstar-com.20251104.gappssmtp.com header.i=@riscstar-com.20251104.gappssmtp.com header.b=Z0njjWgk; arc=none smtp.client-ip=209.85.208.180
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=riscstar.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=riscstar.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="W+hVf59p"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id CE7051F000FF;
-	Tue, 22 Sep 2026 13:32:30 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1790083951;
-	bh=P8U0LLjZbP/ePMrZWC1I+4FguivqM7VnbYyMmDfijc8=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=W+hVf59p3DbX3eT/fHbsgXUkOVlKotpbEIQ31NTnRI+eLAx32MIL6CELAEIQsIerW
-	 RabJ/p++KAAjRUssGmtUPpSvUNaIEeZoj3LpZJV8lwataAlv1JUds9DQsne1vf/bR7
-	 YfOQ/VvXDjwmyPFFSuBO4l3EVraMFCCMMjdd4YOH4DDCN1nZD6aK100cZzCTzZO9TV
-	 7MuOoUjQYUyj+oTpusc2zxMjKrPD9Una4IjDZb+56yC2SJewp5nwn48/61/fKOPLNK
-	 0ylkrib0mGnZNR9BJm0A2qNJFyp6hj5WJfn7ZoonTom9SCISVtJPD9+BHirD3eqfa6
-	 X8bvTmb4/CXXg==
-Received: by finisterre.sirena.org.uk (Postfix, from userid 1000)
-	id CE3861AC56C0; Tue, 22 Sep 2026 14:32:27 +0100 (BST)
-Date: Tue, 22 Sep 2026 15:32:27 +0200
-From: Mark Brown <broonie@kernel.org>
-To: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
-Cc: Liam Girdwood <lgirdwood@gmail.com>, Jaroslav Kysela <perex@perex.cz>,
-	Takashi Iwai <tiwai@suse.com>, Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Bard Liao <yung-chuan.liao@linux.intel.com>,
-	Pierre-Louis Bossart <pierre-louis.bossart@linux.dev>,
-	Charles Keepax <ckeepax@opensource.cirrus.com>,
-	Maciej Strozek <mstrozek@opensource.cirrus.com>,
-	linux-sound@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-	patches@opensource.cirrus.com
-Subject: Re: [PATCH v4 1/8] ASoC: SDCA: allow building without ACPI
-Message-ID: <arKDa69Aggoo32CE@sirena.co.uk>
-References: <20260918131914.681588-1-srinivas.kandagatla@oss.qualcomm.com>
- <20260918131914.681588-2-srinivas.kandagatla@oss.qualcomm.com>
+	dkim=pass (2048-bit key) header.d=riscstar-com.20251104.gappssmtp.com header.i=@riscstar-com.20251104.gappssmtp.com header.b="Z0njjWgk"
+Received: by mail-lj1-f180.google.com with SMTP id 38308e7fff4ca-3a49a40209dso5672361fa.0
+        for <linux-arm-msm@vger.kernel.org>; Tue, 22 Sep 2026 06:33:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=riscstar-com.20251104.gappssmtp.com; s=20251104; t=1790084026; x=1790688826; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=QydC7bgWG0EuejZPwcV3a+DqQPYaemecyt7vWNS1w14=;
+        b=Z0njjWgkxgYupjm7pTX6smX5zlEkJwBSvtmCHtMLVqa0ho0MyL9pbnU6MaZSUFQPfa
+         8HnKvZdrJ2dobHMZH4afa9CW5lNN+aVQytgUlOGIHwIHP+6g/cheR8/ZJtv4dB79uos4
+         0vposbqNRJ2MMvUGUXXDy74l9EEVfsmJ0bT08P1UTWiUDIcNZucuI3KMZm3KIRb4Tqt3
+         yN4H3lzYOtcW4J1qAFwDwmZTdO5w29ZBKCxpHfK/SiVFqDzPQEyDhzMg9J0TJiX4jurq
+         xClotg1HNK7qrm8669zzBtdVoeHQVThpFTUWqvRN8w8qPzyxdNYI1xHuir26qacQdfre
+         /Jzw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1790084026; x=1790688826;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=QydC7bgWG0EuejZPwcV3a+DqQPYaemecyt7vWNS1w14=;
+        b=jCahBTGWZUGbTaHZZqlkrUXxWDUv94VewbPqr8tS7GnOFT5LPJjd/sRUewLRXMs6JL
+         pzPvvwWHYVwCCXZgX3PEc9/gqeMTIL9ZhR4kG5Tl9vU16Gr7k91LB35wtp3IyMYybNsS
+         dErkUBi/fTyLCpxQB2KQGvStWbizl2+s4FpDGGlfjGQ8GCNLE1P5q3k1z2FyCkZWvPbd
+         pRsD6o4jc9ibDsb07l6cWiiVlawFBqb4IfsUn13nkz0y4UZRwh8gdHua/e0bNIvjsQZJ
+         667Y8zcz7+3l5pnxcnvxJdqsn21DlDaErR5g4EsrT0kGlscLRS5FXXIPmwdwXmNqHTIa
+         dMNw==
+X-Forwarded-Encrypted: i=1; AKwUvBzgSo5iK7VDsPgCgu0iI+dYN6VNsubxWMvOycZbBKWqCR1F89qAFj5NgnPSCg2eJB0CG7/twBtuPYd6Mv2u@vger.kernel.org
+X-Gm-Message-State: AFuF++mSgi1WuwRpC63jVURT43R0R8qmIX7922leUoZLPux2z8hXXSQ5
+	vabYnZQy+KX7wa3Wwu/MS7coKoPq4m7MZlEKQwySDeJBcL8z9BkCSePSwso/YpUL8OY=
+X-Gm-Gg: AYBFou22Pg2TFFOu/WI+QwoRV5wMTQwD5yWJijMPrVWkAsSYbB0GrhJIJ7KQVPjdD06
+	BbSD9rKq7YrpsK0BO2aY0l+t7C2xTSoYVIxrqxluLpy2xBj+/oXau2OREsYYsrX4BoHI0UCp159
+	osIog+WFWzZMPWcqKsG124/6lTlLDzdQkPFTsrzx6ghH//uPrEwEbMaxA79I+p2/oE/uqxc93dK
+	1qBd/aZudDQKPT62XeQck2FfEsa/rUdi9ppF9F3CrUPlrBGXd61k/7pAssDmms7DnkBKngIxku9
+	3yiTZxF3xhplATl+K7e49lnW74WcQ5CeyAsq68iJJsBo18UiILBUg1OkFDgXEmyYC616rifX7h6
+	1X6188tF9g1F0nwJ2hH8futn2cMfNs8lSf7YbsxYSfvAa/MoNupy41ChwAgmpkZN1fcEmKcsuge
+	21cNfKxuu0Voj353vNbLRhAHwkV9QEA9IJ/EMNV/iQapwmdyhA5tXZmjlhEyaszq6zRRhIKeg=
+X-Received: by 2002:a2e:bcc3:0:b0:3a5:d0c6:46c4 with SMTP id 38308e7fff4ca-3a624d70581mr7729801fa.15.1790084024945;
+        Tue, 22 Sep 2026 06:33:44 -0700 (PDT)
+Received: from [172.22.22.28] ([73.62.185.64])
+        by smtp.gmail.com with ESMTPSA id 38308e7fff4ca-3a627d82b71sm5924741fa.34.2026.09.22.06.33.40
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 22 Sep 2026 06:33:44 -0700 (PDT)
+Message-ID: <0785235b-de06-44d4-9068-ec706eeba848@riscstar.com>
+Date: Tue, 22 Sep 2026 08:33:37 -0500
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="V0vWP9UJNZF+i9I8"
-Content-Disposition: inline
-In-Reply-To: <20260918131914.681588-2-srinivas.kandagatla@oss.qualcomm.com>
-X-Cookie: Too clever is dumb.
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 3/4] clk: toshiba: introduce a TC9564 SoC clock and reset
+ driver
+To: Brian Masney <bmasney@redhat.com>
+Cc: sboyd@kernel.org, bmasney+clk@redhat.com, jbrunet+clk@baylibre.com,
+ robh@kernel.org, krzk+dt@kernel.org, conor+dt@kernel.org, lee@kernel.org,
+ andersson@kernel.org, konradybcio@kernel.org, abelvesa@kernel.org,
+ kees@kernel.org, gustavoars@kernel.org, p.zabel@pengutronix.de,
+ daniel@riscstar.com, mohd.anwar@oss.qualcomm.com,
+ lorenzo.bianconi@oss.qualcomm.com, linux-clk@vger.kernel.org,
+ devicetree@vger.kernel.org, mfd@lists.linux.dev,
+ linux-arm-msm@vger.kernel.org, linux-hardening@vger.kernel.org,
+ linux-kernel@vger.kernel.org
+References: <20260918165234.687224-1-elder@riscstar.com>
+ <20260918165234.687224-4-elder@riscstar.com> <arG238GS8bMB6DkW@redhat.com>
+Content-Language: en-US
+From: Alex Elder <elder@riscstar.com>
+In-Reply-To: <arG238GS8bMB6DkW@redhat.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
+On 9/21/26 5:59 PM, Brian Masney wrote:
+> Hi Alex,
+> 
+> On Fri, Sep 18, 2026 at 11:52:32AM -0500, Alex Elder wrote:
+>> Define a new platform driver that manages clock and reset signals
+>> within the TC9564 SoC.  There are 21 clocks, which can only be
+>> enabled and disabled, as well as 13 reset signals.
+>>
+>> Two registers manage the state of the clocks and two others manage
+>> the state of the resets.  The registers are accessed via a regmap
+>> supplied by a system controller, which coordinates access to a
+>> region of memory that will be shared with another driver.
+>>
+>> Access to the memory region is provided via a BAR on a PCIe endpoint
+>> function embedded in the TC9564 SoC.  For that reason, neither the
+>> PCIe clock nor PCIe reset can be manipulated by this driver (they
+>> are assumed always on and deasserted, respectively).
+>>
+>> Similarly, control is not available for the I2C clock and reset,
+>> because the PCIe subsystem on the TC9564 relies on I2C
+>>
+>> Co-developed-by: Daniel Thompson <daniel@riscstar.com>
+>> Signed-off-by: Daniel Thompson <daniel@riscstar.com>
+>> Signed-off-by: Alex Elder <elder@riscstar.com>
+>> ---
+>>   MAINTAINERS              |   1 +
+>>   drivers/clk/Kconfig      |  11 ++
+>>   drivers/clk/Makefile     |   1 +
+>>   drivers/clk/clk-tc9564.c | 366 +++++++++++++++++++++++++++++++++++++++
+>>   4 files changed, 379 insertions(+)
+>>   create mode 100644 drivers/clk/clk-tc9564.c
+>>
+>> diff --git a/MAINTAINERS b/MAINTAINERS
+>> index 66d0e7e65adcb..39346a5cd9a7f 100644
+>> --- a/MAINTAINERS
+>> +++ b/MAINTAINERS
+>> @@ -27675,6 +27675,7 @@ M:	Alex Elder <elder@kernel.org>
+>>   M:	Daniel Thompson <danielt@kernel.org>
+>>   S:	Maintained
+>>   F:	Documentation/devicetree/bindings/clock/toshiba,tc9564-clock.yaml
+>> +F:	drivers/clk/clk-tc9564.c
+>>   F:	include/dt-bindings/clock/toshiba,tc9564.h
+>>   
+>>   TOSHIBA TC9564 PCI DRIVER
+>> diff --git a/drivers/clk/Kconfig b/drivers/clk/Kconfig
+>> index f9592fd9ec2bb..50efa10d48450 100644
+>> --- a/drivers/clk/Kconfig
+>> +++ b/drivers/clk/Kconfig
+>> @@ -292,6 +292,17 @@ config COMMON_CLK_S2MPS11
+>>   	  clock. These multi-function devices have two (S2MPS14) or three
+>>   	  (S2MPS11, S5M8767) fixed-rate oscillators, clocked at 32KHz each.
+>>   
+>> +config COMMON_CLK_TC9564
+>> +	tristate "Toshiba TC9564 clock support"
+>> +	depends on TC9564_PCI
+> 
+> select RESET_CONTROLLER
 
---V0vWP9UJNZF+i9I8
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+Thank you.  The reset and clock drivers were previously separate
+and the reset only became available if RESET_CONTROLLER was enabled.
+Combining them means I need this.  I will add it.
 
-On Fri, Sep 18, 2026 at 02:19:06PM +0100, Srinivas Kandagatla wrote:
-> The SDCA class driver is useful on non-ACPI platforms where the
-> topology is supplied statically via sdca_class_hw_ops.get_function_data.
+I also need to select MFD_SYSCON to get syscon_node_to_regmap()
+(or perhaps something similar, depending on the answers to my
+questions about the proper way to define the syscon).
+> 
+>> +	default m
+> 
+> default n
 
->  config SND_SOC_SDCA
->  	tristate "SDCA core support"
-> -	depends on ACPI
->  	select AUXILIARY_BUS
->  	help
->  	  This option enables support for the MIPI SoundWire Device
-> -	  Class for Audio (SDCA).
-> +	  Class for Audio (SDCA).  The ACPI/DisCo topology parser is
-> +	  only built when CONFIG_ACPI is enabled; on non-ACPI platforms
-> +	  (e.g. ARM/DT) codec drivers supply the SDCA function data
-> +	  via sdca_class_hw_ops.populate_function.
+This depends on TC9564_PCI, and if TC9564_PCI is enabled I would
+like this to (automatically) be available (at least as a module).
 
-  $ git grep sdca_class_hw_ops
-  $
+Why do you recommend "n"?
 
---V0vWP9UJNZF+i9I8
-Content-Type: application/pgp-signature; name="signature.asc"
+>> +	help
+>> +	  This enables support for the clock and reset controller embedded
+>> +	  in the Toshiba TC9564 (and Qualcomm QPS615) SoC.  The state of
+>> +	  clock and reset lines is controlled by MMIO to a region managed
+>> +	  by a system controller; this ensures access to the region is
+>> +	  coordinated between this and other drivers.
+> 
+> Rather than 'other drivers', outline specifically which other drivers.
 
------BEGIN PGP SIGNATURE-----
+I was intentionally vague at this point because the one other driver
+has not yet gone out for upstream review for this iteration of the
+code.  But I do agree with you, so I'll change this to say:
 
-iQEzBAABCgAdFiEEreZoqmdXGLWf4p/qJNaLcl1Uh9AFAmqyg2oACgkQJNaLcl1U
-h9Bn/wf+OmRIs8u+VImvndxMDXckfSRECvmzvcGfxvXZ0gANIESYzRGy/mreuWYJ
-YpsQi5RX8nhaIH2KgUfUMInfAceUHPf0L4uf9HNrqWJNbwEjzJR4hEKYEvBI1Wpt
-dYuzGEfmCentFIlNEHuYtSLn5TrRtFayhk+dVh0b2pIw1SHcpoFNZYXT2l9a9I9X
-5k9MZDkM+MdHwHxmuvxrmRlIqgKABPBv618RoSXWPBUjtj4fvXAnJwBvvMmupb80
-Z90JXqwq7yL/JlQ6MsxvIIVRrKCgKZEaJf9iZ8wEhPkHN7ow5HpvjPUUWminfMIB
-jrZVM9ZVZU0EtnIKaE1SmrRg/XFA0A==
-=uwPS
------END PGP SIGNATURE-----
+    ... between this and the XGMAC (stmmac) driver.
 
---V0vWP9UJNZF+i9I8--
+Then it will be correct without modification once that driver goes
+out for review.  Is that better, or do you suggest something else?
+
+>> +
+>>   config CLK_TWL
+>>   	tristate "Clock driver for the TWL PMIC family"
+>>   	depends on TWL4030_CORE
+>> diff --git a/drivers/clk/Makefile b/drivers/clk/Makefile
+>> index b18af485d7f03..a98ea8ff92066 100644
+>> --- a/drivers/clk/Makefile
+>> +++ b/drivers/clk/Makefile
+>> @@ -110,6 +110,7 @@ obj-$(CONFIG_COMMON_CLK_SI570)		+= clk-si570.o
+>>   obj-$(CONFIG_COMMON_CLK_SP7021)		+= clk-sp7021.o
+>>   obj-$(CONFIG_COMMON_CLK_STM32F)		+= clk-stm32f4.o
+>>   obj-$(CONFIG_COMMON_CLK_STM32H7)	+= clk-stm32h7.o
+>> +obj-$(CONFIG_COMMON_CLK_TC9564)		+= clk-tc9564.o
+>>   obj-$(CONFIG_COMMON_CLK_TPS68470)      += clk-tps68470.o
+>>   obj-$(CONFIG_CLK_TWL6040)		+= clk-twl6040.o
+>>   obj-$(CONFIG_CLK_TWL)			+= clk-twl.o
+>> diff --git a/drivers/clk/clk-tc9564.c b/drivers/clk/clk-tc9564.c
+>> new file mode 100644
+>> index 0000000000000..4f900bc8994a7
+>> --- /dev/null
+>> +++ b/drivers/clk/clk-tc9564.c
+>> @@ -0,0 +1,366 @@
+>> +// SPDX-License-Identifier: GPL-2.0-only
+>> +
+>> +/*
+>> + * Copyright (C) 2026 by RISCstar Solutions Corporation.  All rights reserved.
+>> + */
+>> +
+>> +#include <linux/bits.h>
+>> +#include <linux/clk-provider.h>
+>> +#include <linux/mfd/syscon.h>
+>> +#include <linux/mod_devicetable.h>
+> 
+> Uwe already pointed out removing this.
+
+Yes, done.
+
+> 
+>> +#include <linux/module.h>
+>> +#include <linux/platform_device.h>
+>> +#include <linux/regmap.h>
+>> +#include <linux/reset-controller.h>
+>> +
+>> +#include <dt-bindings/clock/toshiba,tc9564.h>
+>> +
+>> +#define CLK_CTRL0_OFFSET	0x1004
+>> +#define RST_CTRL0_OFFSET	0x1008
+>> +#define CLK_CTRL1_OFFSET	0x100c
+>> +#define RST_CTRL1_OFFSET	0x1010
+>> +
+>> +struct tc9564_clock_init {
+>> +	const char *name;	/* NULL means unused entry */
+>> +	u32 offset;
+>> +	u32 mask;
+>> +};
+>> +
+>> +struct tc9564_clock {
+>> +	struct clk_hw hw;
+>> +	u32 which;
+>> +	u32 offset;		/* CLK_CTRL0_OFFSET or CLK_CTRL1_OFFSET */
+>> +	u32 mask;		/* Zero means undefined clock */
+>> +};
+>> +
+>> +struct tc9564_reset {
+>> +	u32 offset;		/* RST_CTRL0_OFFSET or RST_CTRL1_OFFSET */
+>> +	u32 mask;		/* Zero means undefined reset */
+>> +};
+>> +
+>> +struct tc9564_clocks {
+>> +	struct device *dev;
+>> +	struct regmap *regmap;
+>> +	struct reset_controller_dev rcdev;
+>> +	size_t clock_count;
+>> +	struct tc9564_clock clocks[] __counted_by(clock_count);
+>> +};
+>> +
+>> +#define TC9564_CLOCK_INIT0(_name, _bit)	__TC9564_CLOCK_INIT(_name, 0, _bit)
+>> +#define TC9564_CLOCK_INIT1(_name, _bit)	__TC9564_CLOCK_INIT(_name, 1, _bit)
+>> +
+>> +#define __TC9564_CLOCK_INIT(_name, _reg, _bit)		\
+>> +	[CLOCK_##_name] = {				\
+>> +		.name	= #_name,			\
+>> +		.offset	= CLK_CTRL ## _reg ## _OFFSET,	\
+>> +		.mask	= BIT(_bit),			\
+>> +	}
+>> +
+>> +#define TC9564_RESET_INIT0(_name, _bit)	__TC9564_RESET_INIT(_name, 0, _bit)
+>> +#define TC9564_RESET_INIT1(_name, _bit)	__TC9564_RESET_INIT(_name, 1, _bit)
+>> +
+>> +#define __TC9564_RESET_INIT(_name, _reg, _bit)		\
+>> +	[RESET_##_name] = {				\
+>> +		.offset	= RST_CTRL ## _reg ## _OFFSET,	\
+>> +		.mask = BIT(_bit),			\
+>> +	}
+>> +
+>> +static const struct tc9564_clock_init tc9564_clock_init[] = {
+>> +	TC9564_CLOCK_INIT0(MCU, 0),
+>> +	TC9564_CLOCK_INIT0(INTC, 4),
+>> +	/* TC9564_CLOCK_INIT0(PCIE, 9), */
+>> +	/* TC9564_CLOCK_INIT0(I2C, 12), */
+> 
+> A comment would be useful here to outline why these are commented out.
+> Is the PCIE one comment out because of what's outlined in the commit
+> message?
+
+Yes, that is why.  We are downstream of PCIe, and PCIe in this
+case depends on I2C.  So we don't want to mess with these two
+clocks or their reset counterparts.
+
+I only provide this for the benefit of documentation.  If someone
+happens to see bit 9 set in this register, it means the PCIe clock
+is enabled.
+
+Anyway, others have suggested simply removing these comments.
+So I'll do what you suggest, but I'm interested to know whether
+you would favor just deleting them instead.
+> 
+>> +	TC9564_CLOCK_INIT0(SRAM, 13),
+>> +	TC9564_CLOCK_INIT0(UART, 16),
+>> +	TC9564_CLOCK_INIT0(MSIGEN, 18),
+>> +	TC9564_CLOCK_INIT0(PLL, 24),
+>> +	TC9564_CLOCK_INIT0(SGMII, 25),
+>> +	TC9564_CLOCK_INIT0(REFCLKO, 26),
+
+. . .
+
+>> +static const struct reset_control_ops tc9564_reset_control_ops = {
+>> +	.assert		= tc9564_reset_assert,
+>> +	.deassert	= tc9564_reset_deassert,
+> 
+> I'd rather not have the extra spaces because sometimes these get out of
+> line with new members that need more space. Also tc9564_clk_ops above
+> doesn't have the extra spaces.
+
+That's OK with me.  I normally align assignments like this for
+readability, but it's obviously an arbitrary stylistic choice.
+I'll just use one space, no alignment (just as the clk_ops do
+above).  I'll do the same in the platform driver structure
+assignments.
+> 
+>> +};
+>> +
+>> +static void tc9564_reset_assert_all(struct tc9564_clocks *clocks)
+>> +{
+>> +	for (u32 id = 0; id < TC9564_RESET_COUNT; id++)
+>> +		if (tc9564_reset[id].mask)
+>> +			tc9564_reset_manage(&clocks->rcdev, id, true);
+>> +}
+>> +
+>> +static int tc9564_reset_init(struct tc9564_clocks *clocks)
+>> +{
+>> +	struct reset_controller_dev *rcdev = &clocks->rcdev;
+>> +
+>> +	rcdev->ops = &tc9564_reset_control_ops;
+>> +	rcdev->owner = THIS_MODULE;
+>> +	rcdev->dev = clocks->dev;
+>> +	rcdev->of_node = dev_of_node(clocks->dev);
+>> +	rcdev->nr_resets = TC9564_RESET_COUNT;
+>> +
+>> +	return devm_reset_controller_register(clocks->dev, rcdev);
+>> +}
+>> +
+>> +static int tc9564_clk_probe(struct platform_device *pdev)
+>> +{
+>> +	struct device *dev = &pdev->dev;
+>> +	struct tc9564_clocks *clocks;
+>> +	int ret;
+>> +
+>> +	if (!dev_of_node(dev))
+>> +		return dev_err_probe(dev, -EINVAL, "no devicetree node\n");
+>> +
+>> +	clocks = tc9564_clk_init(dev);
+>> +	if (IS_ERR(clocks))
+>> +		return dev_err_probe(dev, PTR_ERR(clocks),
+>> +				     "failed to initialize clocks\n");
+>> +
+>> +	ret = tc9564_reset_init(clocks);
+>> +	if (ret)
+>> +		return dev_err_probe(dev, ret, "failed to initialize resets\n");
+>> +
+>> +	/* Force all resets to be initially asserted */
+>> +	tc9564_reset_assert_all(clocks);
+>> +
+>> +	/* Force all clocks to be initially disabled */
+>> +	tc9564_clock_disable_all(clocks);
+>> +
+>> +	platform_set_drvdata(pdev, clocks);
+>> +
+>> +	return 0;
+>> +}
+>> +
+>> +static void tc9564_clk_remove(struct platform_device *pdev)
+>> +{
+>> +	struct tc9564_clocks *clocks = platform_get_drvdata(pdev);
+>> +
+>> +	/* Leave all resets to be deasserted when done */
+>> +	tc9564_reset_assert_all(clocks);
+> 
+> The comment says deasserted but the code calls assert_all.
+
+Oops.  Will fix.  Thank you very much for your review Brian.
+
+					-Alex
+
+> 
+> Brian
+> 
+> 
+>> +
+>> +	/* Leave all clocks disabled when done */
+>> +	tc9564_clock_disable_all(clocks);
+>> +}
+>> +
+>> +static const struct of_device_id tc9564_clk_ids[] = {
+>> +	{ .compatible = "toshiba,tc9564-clock" },
+>> +	{ },
+>> +};
+>> +MODULE_DEVICE_TABLE(of, tc9564_clk_ids);
+>> +
+>> +static struct platform_driver tc9564_clk_driver = {
+>> +	.probe	= tc9564_clk_probe,
+>> +	.remove	= tc9564_clk_remove,
+>> +	.driver	= {
+>> +		.name		= KBUILD_MODNAME,
+>> +		.of_match_table = tc9564_clk_ids,
+>> +		.probe_type	= PROBE_PREFER_ASYNCHRONOUS,
+>> +	},
+>> +};
+>> +module_platform_driver(tc9564_clk_driver);
+>> +
+>> +MODULE_DESCRIPTION("Toshiba TC9564 Clock and Reset Driver");
+>> +MODULE_LICENSE("GPL");
+>> -- 
+>> 2.53.0
+>>
+> 
+
