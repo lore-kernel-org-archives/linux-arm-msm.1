@@ -1,899 +1,266 @@
-Received: from mail-wm2-f13.google.com (mail-wm2-f13.google.com [74.125.225.141])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9F46156E046
-	for <linux-arm-msm@vger.kernel.org>; Tue, 22 Sep 2026 16:57:50 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.225.141
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 549D63BB11A
+	for <linux-arm-msm@vger.kernel.org>; Tue, 22 Sep 2026 16:58:31 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790096274; cv=none; b=DGT7yYyjsKv0W6oov6vmBf5fbZmh1L0ThbpwIkOHasyLUj8gRnpdvvsJX452FtHuF+pccjxyEj96VpqrzV03wTb9MWLxXUwCMNrUBRCPkDyvpI148arIxDe3IgeDc9m07aIp9cNP32sGcNy+KIA2/H0Sv9mXBkf3aXOpdYdNGZc=
+	t=1790096312; cv=none; b=D6QBHeiB6mIN8axW4Z2VqJFYujdCeK8FjB/AraeJVX6UARqOgdzX8vzCboHla0D/9UrZZ1FnqnNaXvBfH/0B/PyIeWY4tOQnbd79329gqtNotpOk/cEGPZlJV1NmgcGPnA+L6halx8sxyvmk5b9uaM0j5pFGlV9U/Zn0Drho7Qo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790096274; c=relaxed/simple;
-	bh=F6htOE/HRZVeijnC3jHjibN8ViFgtzxO8l90NZBgUss=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=uPfdqZ7Mr3gRXIw2fRwCPXSREgwpfduRycEDYv2/99DlotmPAXT2wCIrEFlINlj2NMCl++TW06rxFHTUQkf9Kv4yNgacHBNYak2h4oifLyn+aC3t58hypU46KsM7qAB2IQX6JLp+Nl04eoeTZ07kFphvnotb5ot1RzkZybQQCuM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=gk97ueVk; arc=none smtp.client-ip=74.125.225.141
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	s=arc-20240116; t=1790096312; c=relaxed/simple;
+	bh=Q2oNZnZF0RuwKE57dbelijaEFxtwpHSXaVnTUH56ErQ=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=pnGMHFYRSCl/YVAw9QtfhF3lJ1svyXMEPxIJ4nofg1vHhiz1bfYkCh5IO1RnYYKD/ch1TMJJvkjfgO0VTqqpNlySM2Jh3hRHwDGk/PDmrutosPbabpO2MAJeUs2FC7C/ZnzkXfWQpdsTixmuhiKe+BKau+T/Q4eQQjWNn6nSPAE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=O8Y20SBi; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=NqwtEX7/; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="gk97ueVk"
-Received: by mail-wm2-f13.google.com with SMTP id 5b1f17b1804b1-49e7bcb94d3so1455e9.2
-        for <linux-arm-msm@vger.kernel.org>; Tue, 22 Sep 2026 09:57:50 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="O8Y20SBi";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="NqwtEX7/"
+Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68MEjE6w4110023
+	for <linux-arm-msm@vger.kernel.org>; Tue, 22 Sep 2026 16:58:30 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=HWbXsFJPbLflZBrmECKjR7
+	5TjnySrlY4w+9Ig3q1ts0=; b=O8Y20SBiDAe1l1FvgDUe05bGa/ZxkhzlEgdy+g
+	myAoTRYGnBYpMGVp8ERaiWMVkHeS1qFWwiAaya13bTLO8eeltxXmf33ZbyhdD9Tx
+	5QnLqcZnv58R4tavu0liDN0GOscbwFt7w1kJze4dN/jrogCRYb0n4+SDUtUFzihA
+	/vq2HkqvVAni3zPL0EJK313HcrfqLdhvFs1JJ9o5DaCjzIxuQlFvbulBPVCpP8UO
+	65TWUIywpa395feghh86szO59Fwn+A3yfLVQwo/Tbmgk+XcNXoInppyXCVUwJypU
+	cCnWvqV26rIyjo0Pf/hEn3DWxyOBMfZog+zsOadinsH0vj3A==
+Received: from mail-pj1-f70.google.com (mail-pj1-f70.google.com [209.85.216.70])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gurnt9n7m-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Tue, 22 Sep 2026 16:58:30 +0000 (GMT)
+Received: by mail-pj1-f70.google.com with SMTP id 98e67ed59e1d1-38f97b3f853so124218a91.3
+        for <linux-arm-msm@vger.kernel.org>; Tue, 22 Sep 2026 09:58:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1790096269; x=1790701069; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=Pn8Ei1uL+/xRmAAxSxsGU249FRLrFn5bzMJ/RIWp/WY=;
-        b=gk97ueVkFVhKdrLL3MwdsLWvE1y9cWbh8/kVSdtaN+fDg6IDHQFA8+49DfKBWpapzb
-         PAEQIoaezZdZYCiV9ZUieW26cPRp7hXii6uwVPwIbljLAFgAFP+Y/bVECTVstA/U4hXk
-         E3E5UHbGHkxb7jTPn29LBtl1RBlQxkhlfdOX0Q41bX5Z6v7tvC9Xmrrz8+DMi6HtD3Ib
-         SDy12/blIPLBr+7lEtpqeuXFyMjKTt8k6uAlVUq5j/9lT5FhZu4of7Jx6YzVsd3lDa5u
-         /O9+jUG/LXwvCriC9z+//OTeg8QkiTrpAQ0DZYHKOOfVKWxMQ7hGmDPRVegEONvDOKod
-         j43A==
+        d=oss.qualcomm.com; s=google; t=1790096310; x=1790701110; darn=vger.kernel.org;
+        h=cc:to:message-id:content-transfer-encoding:content-type
+         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=HWbXsFJPbLflZBrmECKjR75TjnySrlY4w+9Ig3q1ts0=;
+        b=NqwtEX7/9Yx9or4W7FX+i4pgrGZ+6sD+RBzebQYMm1iAR6S+5XJxrsT1AcRQhPUy67
+         srNn3dadztpYxPUoMUT1yUWLRuQVtpmbSd4tVyiCDdmvEqJpyz6hF5QpA3OJcUsNX1H3
+         HuU3r5vra/KShhxXQcUI2qeeD/+bLvXiBVPKjHyPU+qe9y4zCHYyOX2RC8K+2RESZJXZ
+         7sKHabweStCY9WEBPrO0HVIDYgoq4Es4IktoA3aFEa9+Kwn07jpt8fWY4eTrLbK7EwG8
+         3nEnttrvD5B+VvH/UKwvrRNmwVGv3mtgblVS7TAYF/sWsUSi1k0KCjuM9zZuRqzEQbWy
+         aRGw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790096269; x=1790701069;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=Pn8Ei1uL+/xRmAAxSxsGU249FRLrFn5bzMJ/RIWp/WY=;
-        b=uVmiTER74g99yVBbc6wLHlw3a1tWUi1t4i2J/eB8C74jjpmVd1rKzznZtWoX99z9GW
-         FWRW7z1MkOB1cQ3qeWtY2gB1u86BQmEb1M4BJcWEvH0nIplDBEY3WgizSBR1H3pqFbRa
-         qRWIUxYAauzFo8nT05rioiJsQlphnBlQFfle/yy5AVDUauC7WbYOYnAmeosq5ObplBfV
-         sKiydBio9/3foK2BWciKuAVxlH61TIi4qkQ5jiLPGJ+xF1GJqM64woD061SOvcR7Opjw
-         XAtdzpbF7eoy5NE8SnSuryFz7MVNksm8G400+CQ539yDGMZUgt9Y74QvwCgnv9XLAYh/
-         z68Q==
-X-Gm-Message-State: AFuF++mBtChEatR5m3J06WbB0bkWTisdGgm9SUYLQBLAhI4bPyI9JYy1
-	9LPhcAgkslSVB1n2da59eK+7IUg+akxgXxS9CqB4RZ0PhrGGrG+L1+PY
-X-Gm-Gg: AYBFou2jOQIAQrfUle9gXdyPqJsBq5oP1vl+ONyKU1fbAJG1qAxbAQQay8HeRZLIxZI
-	Yoc20LuoElM6RxO9Z5SeQzKbF27y9H6deF1nEJ/u5bat3BTeDFS13M2w7tv+ErXKupaOre2cOx8
-	HNHN1rnzcPHXC0HO04dkDTdhS+PGDXWVuzMu02N34wLz9Hnwx/tXerxdzm0MJ2Qlxj5/qHElo5S
-	BF4CD9JM+VKOFbjgk8wOnPni8kJ5TKih67FivRwwHvjP6q7i57N8h9TAH/wwq8Z41EqsmJFQShB
-	mv5H2ntT0rhKNlbuRajnnOIxi79kU6UgtsHtnhyP//Lc95w0hUMI9+IphjF6nKjORItnXao3rXD
-	GLV9tS4bS2jNZp0rD0l80KtDNlI3GQvIbXO8nroX268BQ1Pxrc6tSHt6RLl0HisDj0HQu5QABpj
-	vI8mw5aBrU+2mMav/MaczeLYw/v4TMv8bWaf3leIyMVpPD2MpSCoXLFUguqHVuK58m+4gUyDYs1
-	eWLiAY=
-X-Received: by 2002:a05:600c:358c:b0:499:be2d:c290 with SMTP id 5b1f17b1804b1-49fc56b4ebemr254883965e9.9.1790096268759;
-        Tue, 22 Sep 2026 09:57:48 -0700 (PDT)
-Received: from localhost.localdomain ([94.252.75.113])
-        by smtp.googlemail.com with ESMTPSA id 5b1f17b1804b1-49fdabe8a2asm68693625e9.4.2026.09.22.09.57.47
+        d=1e100.net; s=20260707; t=1790096310; x=1790701110;
+        h=cc:to:message-id:content-transfer-encoding:content-type
+         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to:content-type;
+        bh=HWbXsFJPbLflZBrmECKjR75TjnySrlY4w+9Ig3q1ts0=;
+        b=jdBhbyAdiwQMnMm1D+AtNRWRhB5E45L5HngUibd/MHpEOBwCGhdTzoGDfkOpBAYD9T
+         QDCby2draZZXnpSp/UKmOTO+Dh3ND7VLaGacHo+BzXghtOnA8MBteXzdG7l0nAdQ2nyx
+         mi9dbU9v1TgkQKVIoZA2bgafyWVhvmX1uhSO9AnoLsY+RNkvokgreuaZnIBxbC/Wecsg
+         jdOJTDeLJvUhm5GRW8WugUVfxfVRWL6Y+P3/xA6K+BESEQv47sxRZ1nd1AmDtEVPO+xj
+         81WGmgveYfgQNmppciVm5GUkeTFZ+f0xH2M6wgsey3OKuWO7JX7nAfCM4mm4bNLNBeJI
+         t+0w==
+X-Gm-Message-State: AFuF++mZecVU088b+yjLtyu6z6YNFck0mC/Chiy5qIKd47VSbRevB3AI
+	4kfTe4IC7UzYDgpXcxVTtEypEDYCd38Npho7ZK0jPgCdQSxfO8plqvy/r7w5Y54O9UbELZEz/j+
+	6GqEnWyAAsJ6jQ6ZKflIVOKI1Vs5fbVK+NF0Az+YRi61uh99wWquXeHHObDfSY9MTdMF7
+X-Gm-Gg: AYBFou30JzWGhcB4gz1EDlB9MyYEbwZg6vCL26KBInZRW8u7Fh45TTyUZOb4gBwdI72
+	dqingA7H6tNJw4puLkh6OW6vGUR5n1r9eR0x9o68OFYD5dfXupoIVWP3vIsHHubYNqF34Sy0QYK
+	kqvu11adduZwWOnxcI6OUVt35IZWhmBLhaY87BHsDDdTAA9gLoqaJ08UgHBwF9Rb44Q5xxFaju5
+	5vMDgvDSB08U8QZVrlRKIDbJP3ahpzg63Y7K5gnSrZXvmq6JXZx/W4QgdusXVBJ3rlU8UP+wy/m
+	/wj4beTIh5xefQHIJCkaZu1j2N5o5LxSzGk/V9M8GvB3/SWGLzA0X+AAx8iUi+d/6ZqwiYccyXK
+	uM7+dvXwtSS7NrtwJ1iY798bGjQAxujEddUbhF5+rFbx8z0Q8nHeYGw==
+X-Received: by 2002:a17:90b:1c09:b0:39e:237c:50e0 with SMTP id 98e67ed59e1d1-3a07e4a2554mr94894a91.13.1790096309610;
+        Tue, 22 Sep 2026 09:58:29 -0700 (PDT)
+X-Received: by 2002:a17:90b:1c09:b0:39e:237c:50e0 with SMTP id 98e67ed59e1d1-3a07e4a2554mr94870a91.13.1790096309084;
+        Tue, 22 Sep 2026 09:58:29 -0700 (PDT)
+Received: from hu-jboody-lv.qualcomm.com (Global_NAT1.qualcomm.com. [129.46.96.20])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3a07dc7c7b0sm296927a91.2.2026.09.22.09.58.27
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 22 Sep 2026 09:57:48 -0700 (PDT)
-From: Oleg Keri <okerixx@gmail.com>
-To: Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Hans de Goede <hansg@kernel.org>,
-	=?UTF-8?q?Ilpo=20J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>,
-	"Bryan O'Donoghue" <bryan.odonoghue@linaro.org>,
-	Guenter Roeck <linux@roeck-us.net>,
-	Bjorn Andersson <andersson@kernel.org>,
-	Konrad Dybcio <konradybcio@kernel.org>,
-	Abel Vesa <abelvesa@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org,
-	devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	platform-driver-x86@vger.kernel.org,
-	linux-hwmon@vger.kernel.org
-Subject: [PATCH v4 2/3] platform/arm64: add Lenovo Yoga Slim 7x Gen 11 EC driver
-Date: Tue, 22 Sep 2026 18:57:36 +0200
-Message-ID: <20260922165737.260443-3-okerixx@gmail.com>
-X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20260922165737.260443-1-okerixx@gmail.com>
-References: <20260922165737.260443-1-okerixx@gmail.com>
+        Tue, 22 Sep 2026 09:58:28 -0700 (PDT)
+From: Jeffrey Boody <jeffrey.boody@oss.qualcomm.com>
+Date: Tue, 22 Sep 2026 09:57:33 -0700
+Subject: [PATCH v2] dma-fence: deliver set_deadline callback even if fence
+ is already signaled
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260922-dma-fence-set-deadline-v2-1-2338d6fac9aa@oss.qualcomm.com>
+X-B4-Tracking: v=1; b=H4sIAHyzsmoC/yXMQQrCQAxG4auUrA3UQTrWq4iLdPJXIzrKpBWh9
+ O6OuvwW7y3kKAanQ7NQwcvcHrkibBpKF8lnsGk1hTZ0bb+NrHfhETmBHRMrRG+WwRLjPu469DI
+ o1fhZMNr7Nz6e/vZ5uCJN3xut6weRyXDvegAAAA==
+X-Change-ID: 20260917-dma-fence-set-deadline-a778746e9abd
+To: Sumit Semwal <sumit.semwal@linaro.org>,
+        =?utf-8?q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
+        Rob Clark <robin.clark@oss.qualcomm.com>,
+        Dmitry Baryshkov <lumag@kernel.org>,
+        Abhinav Kumar <abhinav.kumar@linux.dev>,
+        Jessica Zhang <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>,
+        Marijn Suijten <marijn.suijten@somainline.org>,
+        David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>
+Cc: linux-arm-msm@vger.kernel.org, linux-media@vger.kernel.org,
+        dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org,
+        linux-kernel@vger.kernel.org, freedreno@lists.freedesktop.org,
+        Jeffrey Boody <jeffrey.boody@oss.qualcomm.com>,
+        Jeff Boody <jeffrey.boody@oss.qualcomm.com>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1790096307; l=5741;
+ i=jeffrey.boody@oss.qualcomm.com; s=20260917; h=from:subject:message-id;
+ bh=Q2oNZnZF0RuwKE57dbelijaEFxtwpHSXaVnTUH56ErQ=;
+ b=w7w69/znW7DKQRjZ64vTloJSfKKJbep3F6kIELhdQ43C15+UqWoC8tDpDZr9mYXQqim304Ylp
+ 5JqoOXZ97emD8q/IM9cYC+h1hALzXbDomS9D4tHSa2KBuNFFczDdZ7A
+X-Developer-Key: i=jeffrey.boody@oss.qualcomm.com; a=ed25519;
+ pk=jfv+xezpcWlcNCnNmb0YYQmKBN9R4nYNB4N6GyqTBkg=
+X-Proofpoint-ORIG-GUID: CAXGHGrkPU5UmyzDZKGkvcO6MrFAzYu9
+X-Authority-Analysis: v=2.4 cv=eauo7LEH c=1 sm=1 tr=0 ts=6ab2b3b6 cx=c_pps
+ a=0uOsjrqzRL749jD1oC5vDA==:117 a=ouPCqIW2jiPt+lZRy3xVPw==:17
+ a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
+ a=EUspDBNiAAAA:8 a=ymHyVybfssQjcaON3AkA:9 a=QEXdDO2ut3YA:10
+ a=mQ_c8vxmzFEMiUWkPHU9:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTIyMDI0NyBTYWx0ZWRfXzWUORIUXfqvz
+ Vxx2JH0aotyoWsgQi9cFFh2+/5XuPGhJp2+PVK+l6y89oBlKj2krM1z+hfsAWY3g/GxSPrkd+/M
+ Bm+DFalm8wyjWTv2Qw8EgRhjSEWmuGkgyleMEmg8Pv3KW/F4jATSP7AoWHwFTwA6H28J6MXF16s
+ 7SoDD2+b94J7nggfLTtHzky2XLS7xV4sG7KpVpR37aAS6VglgEQQyNn/jUvPy9MWdiUz8hJSx/S
+ 2k6tXf7cHmeL8rsIgk7jbmOlp7a28Xrxv/9VXaz+vRCAi79KsrhXSEXGNY5CReAVbG733JJ+xAI
+ zfpBMRgtrypUWpsFA+cRM3HXm7VMohCgOMfXKeMJm5VEaW64xLAvDjFuxEDsNcmKVDBHJSEBsGS
+ muFdObEitDIvZtttwbQxGNsROhyyBnhUDvVyh2urBQ5J8UUP+yL8lOMcxAT9xOegw40Ck7+Zpor
+ 8V2iobHPcpwRBBgQjYw==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTIyMDI0NyBTYWx0ZWRfX5YiE363HM7Cx
+ 2NGjXUKGdUgXfFQAZBF8L4cFFUIM9UpLPRAeFaTMYnpCyaaigf0aNsJpJEIdAUZpP7/SQx3IdMy
+ nhVYKzchcG+M1OCM/inCovvw9iNRu3k=
+X-Proofpoint-GUID: CAXGHGrkPU5UmyzDZKGkvcO6MrFAzYu9
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-09-22_02,2026-09-21_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ suspectscore=0 phishscore=0 lowpriorityscore=0 impostorscore=0 clxscore=1011
+ spamscore=0 malwarescore=0 bulkscore=0 adultscore=0 priorityscore=1501
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609220247
 
-The Lenovo Yoga Slim 7x Gen 11 (Qualcomm glymur / Snapdragon X2 Elite)
-carries a Compal EF06 embedded controller on I2C at address 0x70. The
-platform firmware describes it as an ACPI GenericSerialBus region, but the
-machine boots from device tree, so nothing otherwise talks to it.
+The set_deadline callback is currently skipped if the fence has already
+been signaled. This prevents GPU drivers from performing power
+management adjustments when the deadline hint arrives after fence
+completion.
 
-Commands are exchanged with two raw I2C block transfers: a 7 byte write to
-register 0x02 carrying the command and up to six arguments, then a 6 byte
-read of register 0x01 for the result, with a short delay in between before
-the result register is valid. The EC offers no way to match a result to
-its command; the delay is the one the vendor ACPI code uses, and the one
-value that lives in a mailbox shared with other EC activity, the cell
-voltages, is validated against a signature and retried.
+In triple-buffered rendering, a staged frame may be completed well
+ahead of the vblank deadline. When a display driver delivers the
+deadline hint, the fence has already been signaled and the callback is
+silently dropped. This leaves the GPU driver unable to evaluate the
+headroom between the fence signal time and the vblank deadline, and
+therefore unable to reduce GPU frequency when the target headroom is
+exceeded.
 
-Expose what the EC offers that the rest of the kernel does not already
-provide:
+Remove the dma_fence_is_signaled() guard from dma_fence_set_deadline()
+so that the callback is invoked unconditionally when ops->set_deadline
+is present. Implementations of set_deadline must already tolerate
+concurrent and repeated calls; handling a post-signal invocation
+requires no additional locking. The fence signaler can compare the fence
+signal time against the supplied deadline to determine whether frequency
+scaling is warranted.
 
-  - five board thermistors as hwmon temperature channels. These are
-    charger, CPU voltage regulator, 5 V rail and ambient sensors, not die
-    sensors, and read considerably cooler than tsens
-  - the four battery cell voltages, which live in a banked mailbox shared
-    with other EC activity; readings are validated against a signature and
-    retried, and cached briefly so that all four channels come from one
-    coherent sample
-  - CPU fan speed in RPM
-  - the keyboard backlight as an LED, off/low/high
-  - Fn-lock as a read/write sysfs attribute, matching the ideapad-laptop
-    interface. The EC reports Fn+Esc as an event but keeps no state of its
-    own, so the driver owns the bit and toggles it on the key
-  - the mic-mute and airplane-mode keys as KEY_MICMUTE and KEY_RFKILL.
-    These reach the host only as EC events; they are not on the keyboard's
-    HID interface and have no GPIO of their own
-
-The EC signals pending events on a dedicated line, and keeps pulsing it
-until they are read - so the queue must be drained completely on every
-interrupt, including codes this driver ignores. Leaving one behind makes
-the controller pulse indefinitely.
-
-Fan speed is reported but not controlled. The EC accepts a manual setpoint,
-however it enforces no thermal floor over it: with the fan pinned at
-roughly 2000 RPM under full load the SoC rose from 69 to 91 degrees in 30
-seconds without the EC ever overriding. Exposing pwm1_enable or fan1_target
-would therefore let userspace overheat the machine, so neither is
-implemented.
-
-Note this is the Gen 11 machine specifically. Its EC differs from the
-Qualcomm reference EC that the reference designs place at address 0x76,
-which is not populated here, and so EC_QCOM_HAMOA does not drive it.
-
-Signed-off-by: Oleg Keri <okerixx@gmail.com>
+Signed-off-by: Jeffrey Boody <jeffrey.boody@oss.qualcomm.com>
 ---
- .../sysfs-driver-lenovo-yoga-slim7x-gen11-ec  |  21 +
- drivers/platform/arm64/Kconfig                |  23 +
- drivers/platform/arm64/Makefile               |   1 +
- .../arm64/lenovo-yoga-slim7x-gen11-ec.c       | 671 ++++++++++++++++++
- 4 files changed, 716 insertions(+)
- create mode 100644 Documentation/ABI/testing/sysfs-driver-lenovo-yoga-slim7x-gen11-ec
- create mode 100644 drivers/platform/arm64/lenovo-yoga-slim7x-gen11-ec.c
+Signed-off-by: Jeff Boody <jeffrey.boody@oss.qualcomm.com>
+---
+ drivers/dma-buf/dma-fence.c     | 22 ++++++++++++++++++++--
+ drivers/gpu/drm/msm/msm_fence.c |  3 +++
+ include/linux/dma-fence.h       | 11 ++++++++++-
+ 3 files changed, 33 insertions(+), 3 deletions(-)
 
-diff --git a/Documentation/ABI/testing/sysfs-driver-lenovo-yoga-slim7x-gen11-ec b/Documentation/ABI/testing/sysfs-driver-lenovo-yoga-slim7x-gen11-ec
-new file mode 100644
-index 000000000000..155ed0252b47
---- /dev/null
-+++ b/Documentation/ABI/testing/sysfs-driver-lenovo-yoga-slim7x-gen11-ec
-@@ -0,0 +1,21 @@
-+What:		/sys/bus/i2c/devices/*/fn_lock
-+Date:		September 2026
-+KernelVersion:	7.4
-+Contact:	Oleg Keri <okerixx@gmail.com>
-+Description:
-+		Control fn-lock mode.
-+
-+			* 1 -> Switched On
-+			* 0 -> Switched Off
-+
-+		When switched on, the function keys act as F1..F12 and the
-+		multimedia functions require the Fn modifier.
-+
-+		The embedded controller reports the Fn+Esc key as an event but
-+		keeps no state of its own, so this attribute is the state: the
-+		driver toggles it when the key is pressed, and writing it takes
-+		effect immediately.
-+
-+		For example::
-+
-+		  # echo "0" > /sys/bus/i2c/devices/9-0070/fn_lock
-diff --git a/drivers/platform/arm64/Kconfig b/drivers/platform/arm64/Kconfig
-index e32e01b2a9bd..7581432e69b0 100644
---- a/drivers/platform/arm64/Kconfig
-+++ b/drivers/platform/arm64/Kconfig
-@@ -90,6 +90,29 @@ config EC_LENOVO_THINKPAD_T14S
+diff --git a/drivers/dma-buf/dma-fence.c b/drivers/dma-buf/dma-fence.c
+index bd58688b81a7..ebc7c5ca6f69 100644
+--- a/drivers/dma-buf/dma-fence.c
++++ b/drivers/dma-buf/dma-fence.c
+@@ -999,8 +999,19 @@ EXPORT_SYMBOL(dma_fence_wait_any_timeout);
+  * Multiple deadlines may be set on a given fence, even in parallel.  See the
+  * documentation for &dma_fence_ops.set_deadline.
+  *
++ * The deadline hint may also be delivered *after* the fence has already been
++ * signaled.  This is intentional and supports the case where a fence signaler
++ * aware of a periodic deadline (e.g. vblank) and the fence's signal time can
++ * evaluate the headroom between the two.  In triple-buffered rendering, for
++ * example, a staged frame that is completed well ahead of the vblank deadline
++ * represents excess headroom; delivering the deadline hint post-signal allows
++ * the fence signaler to consider reducing frequency for subsequent workloads,
++ * rather than holding an unnecessarily high frequency.  Implementations
++ * of &dma_fence_ops.set_deadline must therefore tolerate invocation on
++ * already-signaled fences.
++ *
+  * The deadline hint is just that, a hint.  The driver that created the fence
+- * may react by increasing frequency, making different scheduling choices, etc.
++ * may react by changing frequency, making different scheduling choices, etc.
+  * Or doing nothing at all.
+  */
  
- 	  Say M or Y here to include this support.
+@@ -1016,6 +1027,13 @@ EXPORT_SYMBOL(dma_fence_wait_any_timeout);
+  * to aid in power management decisions, such as boosting GPU frequency
+  * if a periodic vblank deadline is approaching but the fence is not
+  * yet signaled..
++ *
++ * This function may also be called after the fence has already been
++ * signaled.  In that case the fence signaler can compare the fence's signal
++ * time against the deadline to determine the available headroom.  If the
++ * fence was signaled significantly ahead of the deadline, the fence
++ * signaler may choose to reduce frequency for subsequent workloads to
++ * avoid unnecessarily high power consumption.
+  */
+ void dma_fence_set_deadline(struct dma_fence *fence, ktime_t deadline)
+ {
+@@ -1023,7 +1041,7 @@ void dma_fence_set_deadline(struct dma_fence *fence, ktime_t deadline)
  
-+config EC_LENOVO_YOGA_SLIM7X_GEN11
-+	tristate "Lenovo Yoga Slim 7x Gen 11 Embedded Controller driver"
-+	depends on ARCH_QCOM || COMPILE_TEST
-+	depends on I2C
-+	depends on INPUT
-+	depends on HWMON
-+	select NEW_LEDS
-+	select LEDS_CLASS
-+	help
-+	  Say Y here to enable the EC driver for the (Snapdragon X2 Elite,
-+	  glymur-based) Lenovo Yoga Slim 7x Gen 11 laptop. The EC provides
-+	  thermistors, battery cell voltages and CPU fan speed as hwmon
-+	  channels, and the keyboard backlight as an LED.
-+
-+	  This is the Gen 11 (glymur) machine specifically. Its EC is a Compal
-+	  design at i2c address 0x70 and speaks a different protocol from the
-+	  Qualcomm reference EC that the reference designs place at 0x76, so
-+	  EC_QCOM_HAMOA does not drive it - and conversely this driver does not
-+	  cover the X1E-based Yoga Slim 7x Gen 9.
-+
-+	  To compile this driver as a module, choose M here: the module will
-+	  be called lenovo-yoga-slim7x-gen11-ec.
-+
- config EC_QCOM_HAMOA
- 	tristate "Embedded Controller driver for Qualcomm Hamoa/Glymur reference devices"
- 	depends on ARCH_QCOM || COMPILE_TEST
-diff --git a/drivers/platform/arm64/Makefile b/drivers/platform/arm64/Makefile
-index 7681be4a46e9..605cca4d42a9 100644
---- a/drivers/platform/arm64/Makefile
-+++ b/drivers/platform/arm64/Makefile
-@@ -9,4 +9,5 @@ obj-$(CONFIG_EC_ACER_ASPIRE1)	+= acer-aspire1-ec.o
- obj-$(CONFIG_EC_HUAWEI_GAOKUN)	+= huawei-gaokun-ec.o
- obj-$(CONFIG_EC_LENOVO_YOGA_C630) += lenovo-yoga-c630.o
- obj-$(CONFIG_EC_LENOVO_THINKPAD_T14S) += lenovo-thinkpad-t14s.o
-+obj-$(CONFIG_EC_LENOVO_YOGA_SLIM7X_GEN11) += lenovo-yoga-slim7x-gen11-ec.o
- obj-$(CONFIG_EC_QCOM_HAMOA) += qcom-hamoa-ec.o
-diff --git a/drivers/platform/arm64/lenovo-yoga-slim7x-gen11-ec.c b/drivers/platform/arm64/lenovo-yoga-slim7x-gen11-ec.c
-new file mode 100644
-index 000000000000..a16849877dd7
---- /dev/null
-+++ b/drivers/platform/arm64/lenovo-yoga-slim7x-gen11-ec.c
-@@ -0,0 +1,671 @@
-+// SPDX-License-Identifier: GPL-2.0-only
-+
-+#include <linux/array_size.h>
-+#include <linux/bitfield.h>
-+#include <linux/bitops.h>
-+#include <linux/bits.h>
-+#include <linux/cleanup.h>
-+#include <linux/container_of.h>
-+#include <linux/delay.h>
-+#include <linux/dev_printk.h>
-+#include <linux/device.h>
-+#include <linux/err.h>
-+#include <linux/errno.h>
-+#include <linux/gfp_types.h>
-+#include <linux/hwmon.h>
-+#include <linux/i2c.h>
-+#include <linux/input.h>
-+#include <linux/interrupt.h>
-+#include <linux/jiffies.h>
-+#include <linux/kstrtox.h>
-+#include <linux/leds.h>
-+#include <linux/lockdep.h>
-+#include <linux/module.h>
-+#include <linux/mutex.h>
-+#include <linux/pm.h>
-+#include <linux/string.h>
-+#include <linux/sysfs.h>
-+#include <linux/types.h>
-+#include <linux/units.h>
-+
-+#define SLIM7X11_EC_BLOCK_READ	0x01
-+#define SLIM7X11_EC_BLOCK_WRITE	0x02
-+#define SLIM7X11_EC_RESP_LEN	6
-+#define SLIM7X11_EC_REQ_LEN		7
-+
-+#define SLIM7X11_EC_CMD_RAM_READ	0xb0
-+#define SLIM7X11_EC_CMD_RAM_WRITE	0xb1
-+#define SLIM7X11_EC_CMD_BANK_READ	0xb4
-+#define SLIM7X11_EC_CMD_FAN		0x46
-+#define SLIM7X11_EC_FAN_GET_SPEED	0x81
-+
-+#define SLIM7X11_EC_CMD_EVENT	0x84
-+#define SLIM7X11_EC_EVT_MAX_DRAIN	64
-+#define SLIM7X11_EC_EVT_FN_LOCK	0x0f
-+#define SLIM7X11_EC_EVT_MIC_MUTE	0x18
-+#define SLIM7X11_EC_EVT_FLIGHT_MODE	0x19
-+
-+#define SLIM7X11_EC_SCUK		0x1c
-+#define SLIM7X11_EC_SCUK_FN_LOCK	BIT(7)
-+#define SLIM7X11_EC_SCUK_FN_LOCK_IND	BIT(5)
-+#define SLIM7X11_EC_SCUK_FN_LOCK_MASK	(SLIM7X11_EC_SCUK_FN_LOCK | SLIM7X11_EC_SCUK_FN_LOCK_IND)
-+
-+#define SLIM7X11_EC_KBLT		0x03
-+#define SLIM7X11_EC_KBLT_LEVEL	GENMASK(1, 0)
-+#define SLIM7X11_EC_KBLT_AUTO	3
-+#define SLIM7X11_EC_KBLT_MAX	2
-+
-+#define SLIM7X11_EC_TEMP_FIRST	0x12
-+#define SLIM7X11_EC_NUM_TEMP	6
-+#define SLIM7X11_EC_TEMP_MAX	120
-+
-+#define SLIM7X11_EC_CELL_BANK	0x0b
-+#define SLIM7X11_EC_CELL_SIG_LO	0x02
-+#define SLIM7X11_EC_CELL_SIG_HI	0x0c
-+#define SLIM7X11_EC_CELL_FIRST	0x04
-+#define SLIM7X11_EC_NUM_CELL	4
-+#define SLIM7X11_EC_CELL_MIN_MV	2000
-+#define SLIM7X11_EC_CELL_MAX_MV	5000
-+#define SLIM7X11_EC_CELL_TRIES	10
-+
-+#define SLIM7X11_EC_CACHE_MS	2000
-+#define SLIM7X11_EC_STALE_MS	10000
-+
-+struct slim7x11_ec {
-+	struct i2c_client *client;
-+	/* serializes all EC access */
-+	struct mutex lock;
-+	unsigned long temp_present;
-+	unsigned long cell_read_at;
-+	u16 cell[SLIM7X11_EC_NUM_CELL];
-+	bool cell_cached;
-+	struct led_classdev kbd_led;
-+	u8 kblt_level;
-+	bool kblt_restore;
-+	struct input_dev *keys;
-+};
-+
-+static int slim7x11_ec_command(struct slim7x11_ec *ec, u8 cmd, u8 arg0, u8 arg1,
-+			       u8 resp[SLIM7X11_EC_RESP_LEN])
-+{
-+	u8 req[SLIM7X11_EC_REQ_LEN] = { cmd, arg0, arg1 };
-+	int ret;
-+
-+	lockdep_assert_held(&ec->lock);
-+
-+	ret = i2c_smbus_write_i2c_block_data(ec->client, SLIM7X11_EC_BLOCK_WRITE,
-+					     sizeof(req), req);
-+	if (ret < 0)
-+		return ret;
-+
-+	usleep_range(2000, 3000);
-+
-+	ret = i2c_smbus_read_i2c_block_data(ec->client, SLIM7X11_EC_BLOCK_READ,
-+					    SLIM7X11_EC_RESP_LEN, resp);
-+	if (ret < 0)
-+		return ret;
-+	if (ret != SLIM7X11_EC_RESP_LEN)
-+		return -EIO;
-+
-+	return 0;
-+}
-+
-+static int slim7x11_ec_ram_read(struct slim7x11_ec *ec, u8 addr, u8 *val)
-+{
-+	u8 resp[SLIM7X11_EC_RESP_LEN];
-+	int ret;
-+
-+	ret = slim7x11_ec_command(ec, SLIM7X11_EC_CMD_RAM_READ, addr, 0, resp);
-+	if (ret)
-+		return ret;
-+
-+	*val = resp[0];
-+	return 0;
-+}
-+
-+static int slim7x11_ec_bank_read(struct slim7x11_ec *ec, u8 bank, u8 addr, u8 *val)
-+{
-+	u8 resp[SLIM7X11_EC_RESP_LEN];
-+	int ret;
-+
-+	ret = slim7x11_ec_command(ec, SLIM7X11_EC_CMD_BANK_READ, bank, addr, resp);
-+	if (ret)
-+		return ret;
-+
-+	*val = resp[0];
-+	return 0;
-+}
-+
-+static int slim7x11_ec_ram_write(struct slim7x11_ec *ec, u8 addr, u8 val)
-+{
-+	u8 resp[SLIM7X11_EC_RESP_LEN];
-+
-+	return slim7x11_ec_command(ec, SLIM7X11_EC_CMD_RAM_WRITE, addr, val, resp);
-+}
-+
-+static int slim7x11_ec_fan_read(struct slim7x11_ec *ec, long *rpm)
-+{
-+	u8 resp[SLIM7X11_EC_RESP_LEN];
-+	int ret;
-+
-+	ret = slim7x11_ec_command(ec, SLIM7X11_EC_CMD_FAN, SLIM7X11_EC_FAN_GET_SPEED, 0,
-+				  resp);
-+	if (ret)
-+		return ret;
-+
-+	*rpm = resp[0] * 100;
-+	return 0;
-+}
-+
-+static int slim7x11_ec_refresh_cells(struct slim7x11_ec *ec)
-+{
-+	unsigned int try;
-+	int ret;
-+
-+	if (ec->cell_cached &&
-+	    time_before(jiffies, ec->cell_read_at + msecs_to_jiffies(SLIM7X11_EC_CACHE_MS)))
-+		return 0;
-+
-+	for (try = 0; try < SLIM7X11_EC_CELL_TRIES; try++) {
-+		u16 cell[SLIM7X11_EC_NUM_CELL];
-+		u8 sig[3];
-+		unsigned int i;
-+		bool ok = true;
-+
-+		ret = slim7x11_ec_bank_read(ec, SLIM7X11_EC_CELL_BANK,
-+					    SLIM7X11_EC_CELL_SIG_LO, &sig[0]);
-+		if (ret)
-+			return ret;
-+
-+		ret = slim7x11_ec_bank_read(ec, SLIM7X11_EC_CELL_BANK,
-+					    SLIM7X11_EC_CELL_SIG_LO + 1, &sig[1]);
-+		if (ret)
-+			return ret;
-+
-+		ret = slim7x11_ec_bank_read(ec, SLIM7X11_EC_CELL_BANK,
-+					    SLIM7X11_EC_CELL_SIG_HI, &sig[2]);
-+		if (ret)
-+			return ret;
-+
-+		if (sig[0] != 0x01 || sig[1] != 0x01 || sig[2] != 0x03)
-+			continue;
-+
-+		for (i = 0; i < ARRAY_SIZE(cell); i++) {
-+			u8 lsb, msb;
-+
-+			ret = slim7x11_ec_bank_read(ec, SLIM7X11_EC_CELL_BANK,
-+						    SLIM7X11_EC_CELL_FIRST + i * 2, &lsb);
-+			if (ret)
-+				return ret;
-+
-+			ret = slim7x11_ec_bank_read(ec, SLIM7X11_EC_CELL_BANK,
-+						    SLIM7X11_EC_CELL_FIRST + i * 2 + 1, &msb);
-+			if (ret)
-+				return ret;
-+
-+			cell[i] = lsb | (msb << 8);
-+			if (cell[i] < SLIM7X11_EC_CELL_MIN_MV ||
-+			    cell[i] > SLIM7X11_EC_CELL_MAX_MV)
-+				ok = false;
-+		}
-+
-+		if (!ok)
-+			continue;
-+
-+		memcpy(ec->cell, cell, sizeof(cell));
-+		ec->cell_cached = true;
-+		ec->cell_read_at = jiffies;
-+
-+		return 0;
-+	}
-+
-+	if (ec->cell_cached &&
-+	    time_before(jiffies, ec->cell_read_at + msecs_to_jiffies(SLIM7X11_EC_STALE_MS)))
-+		return 0;
-+
-+	return -EAGAIN;
-+}
-+
-+static umode_t slim7x11_ec_is_visible(const void *drvdata,
-+				      enum hwmon_sensor_types type,
-+				  u32 attr, int channel)
-+{
-+	const struct slim7x11_ec *ec = drvdata;
-+
-+	switch (type) {
-+	case hwmon_temp:
-+		if (!(ec->temp_present & BIT(channel)))
-+			return 0;
-+		return 0444;
-+	case hwmon_in:
-+		return 0444;
-+	case hwmon_fan:
-+		return 0444;
-+	default:
-+		return 0;
-+	}
-+}
-+
-+static int slim7x11_ec_read(struct device *dev, enum hwmon_sensor_types type,
-+			    u32 attr, int channel, long *val)
-+{
-+	struct slim7x11_ec *ec = dev_get_drvdata(dev);
-+	int ret;
-+	u8 raw;
-+
-+	guard(mutex)(&ec->lock);
-+
-+	switch (type) {
-+	case hwmon_temp:
-+		ret = slim7x11_ec_ram_read(ec, SLIM7X11_EC_TEMP_FIRST + channel, &raw);
-+		if (ret)
-+			return ret;
-+		if (!raw)
-+			return -ENODATA;
-+		if (raw > SLIM7X11_EC_TEMP_MAX)
-+			return -EIO;
-+		*val = raw * MILLIDEGREE_PER_DEGREE;
-+		return 0;
-+	case hwmon_in:
-+		ret = slim7x11_ec_refresh_cells(ec);
-+		if (ret)
-+			return ret;
-+		*val = ec->cell[channel];
-+		return 0;
-+	case hwmon_fan:
-+		return slim7x11_ec_fan_read(ec, val);
-+	default:
-+		return -EOPNOTSUPP;
-+	}
-+}
-+
-+static const char * const slim7x11_ec_temp_labels[SLIM7X11_EC_NUM_TEMP] = {
-+	"Charger A",
-+	"CPU VR",
-+	"5V rail",
-+	"Ambient",
-+	"Charger B",
-+	"Thermistor 6",
-+};
-+
-+static const char * const slim7x11_ec_cell_labels[SLIM7X11_EC_NUM_CELL] = {
-+	"Cell 1", "Cell 2", "Cell 3", "Cell 4",
-+};
-+
-+static int slim7x11_ec_read_string(struct device *dev, enum hwmon_sensor_types type,
-+				   u32 attr, int channel, const char **str)
-+{
-+	switch (type) {
-+	case hwmon_temp:
-+		*str = slim7x11_ec_temp_labels[channel];
-+		return 0;
-+	case hwmon_in:
-+		*str = slim7x11_ec_cell_labels[channel];
-+		return 0;
-+	case hwmon_fan:
-+		*str = "CPU fan";
-+		return 0;
-+	default:
-+		return -EOPNOTSUPP;
-+	}
-+}
-+
-+static enum led_brightness slim7x11_ec_kbd_led_get(struct led_classdev *led)
-+{
-+	struct slim7x11_ec *ec = container_of(led, struct slim7x11_ec, kbd_led);
-+	u8 raw;
-+
-+	guard(mutex)(&ec->lock);
-+
-+	if (slim7x11_ec_ram_read(ec, SLIM7X11_EC_KBLT, &raw))
-+		return 0;
-+
-+	raw = FIELD_GET(SLIM7X11_EC_KBLT_LEVEL, raw);
-+
-+	if (raw == SLIM7X11_EC_KBLT_AUTO)
-+		return SLIM7X11_EC_KBLT_MAX;
-+
-+	return raw;
-+}
-+
-+static int slim7x11_ec_kbd_led_level(struct slim7x11_ec *ec, u8 level, u8 *old)
-+{
-+	u8 raw;
-+	int ret;
-+
-+	ret = slim7x11_ec_ram_read(ec, SLIM7X11_EC_KBLT, &raw);
-+	if (ret)
-+		return ret;
-+
-+	if (old)
-+		*old = FIELD_GET(SLIM7X11_EC_KBLT_LEVEL, raw);
-+
-+	raw &= ~SLIM7X11_EC_KBLT_LEVEL;
-+	raw |= FIELD_PREP(SLIM7X11_EC_KBLT_LEVEL, level);
-+
-+	return slim7x11_ec_ram_write(ec, SLIM7X11_EC_KBLT, raw);
-+}
-+
-+static int slim7x11_ec_kbd_led_set(struct led_classdev *led,
-+				   enum led_brightness brightness)
-+{
-+	struct slim7x11_ec *ec = container_of(led, struct slim7x11_ec, kbd_led);
-+
-+	guard(mutex)(&ec->lock);
-+
-+	return slim7x11_ec_kbd_led_level(ec, brightness, NULL);
-+}
-+
-+static const struct hwmon_ops slim7x11_ec_hwmon_ops = {
-+	.is_visible = slim7x11_ec_is_visible,
-+	.read = slim7x11_ec_read,
-+	.read_string = slim7x11_ec_read_string,
-+};
-+
-+static const struct hwmon_channel_info * const slim7x11_ec_hwmon_info[] = {
-+	HWMON_CHANNEL_INFO(in,
-+			   HWMON_I_INPUT | HWMON_I_LABEL,
-+			   HWMON_I_INPUT | HWMON_I_LABEL,
-+			   HWMON_I_INPUT | HWMON_I_LABEL,
-+			   HWMON_I_INPUT | HWMON_I_LABEL),
-+	HWMON_CHANNEL_INFO(temp,
-+			   HWMON_T_INPUT | HWMON_T_LABEL,
-+			   HWMON_T_INPUT | HWMON_T_LABEL,
-+			   HWMON_T_INPUT | HWMON_T_LABEL,
-+			   HWMON_T_INPUT | HWMON_T_LABEL,
-+			   HWMON_T_INPUT | HWMON_T_LABEL,
-+			   HWMON_T_INPUT | HWMON_T_LABEL),
-+	HWMON_CHANNEL_INFO(fan,
-+			   HWMON_F_INPUT | HWMON_F_LABEL),
-+	NULL
-+};
-+
-+static const struct hwmon_chip_info slim7x11_ec_chip_info = {
-+	.ops = &slim7x11_ec_hwmon_ops,
-+	.info = slim7x11_ec_hwmon_info,
-+};
-+
-+static int slim7x11_ec_fn_lock_toggle(struct slim7x11_ec *ec)
-+{
-+	u8 raw;
-+	int ret;
-+
-+	ret = slim7x11_ec_ram_read(ec, SLIM7X11_EC_SCUK, &raw);
-+	if (ret)
-+		return ret;
-+
-+	if (raw & SLIM7X11_EC_SCUK_FN_LOCK)
-+		raw &= ~SLIM7X11_EC_SCUK_FN_LOCK_MASK;
-+	else
-+		raw |= SLIM7X11_EC_SCUK_FN_LOCK_MASK;
-+
-+	return slim7x11_ec_ram_write(ec, SLIM7X11_EC_SCUK, raw);
-+}
-+
-+static void slim7x11_ec_report_key(struct slim7x11_ec *ec, unsigned int code)
-+{
-+	if (!ec->keys)
+ 	rcu_read_lock();
+ 	ops = rcu_dereference(fence->ops);
+-	if (ops && ops->set_deadline && !dma_fence_is_signaled(fence))
++	if (ops && ops->set_deadline)
+ 		ops->set_deadline(fence, deadline);
+ 	rcu_read_unlock();
+ }
+diff --git a/drivers/gpu/drm/msm/msm_fence.c b/drivers/gpu/drm/msm/msm_fence.c
+index 3dca8e09c192..3c5de96d4092 100644
+--- a/drivers/gpu/drm/msm/msm_fence.c
++++ b/drivers/gpu/drm/msm/msm_fence.c
+@@ -136,6 +136,9 @@ static void msm_fence_set_deadline(struct dma_fence *fence, ktime_t deadline)
+ 	unsigned long flags;
+ 	ktime_t now;
+ 
++	if (dma_fence_is_signaled(fence))
 +		return;
 +
-+	input_report_key(ec->keys, code, 1);
-+	input_sync(ec->keys);
-+	input_report_key(ec->keys, code, 0);
-+	input_sync(ec->keys);
-+}
-+
-+static irqreturn_t slim7x11_ec_irq(int irq, void *data)
-+{
-+	struct slim7x11_ec *ec = data;
-+	unsigned int i;
-+
-+	guard(mutex)(&ec->lock);
-+
-+	for (i = 0; i < SLIM7X11_EC_EVT_MAX_DRAIN; i++) {
-+		u8 resp[SLIM7X11_EC_RESP_LEN];
-+
-+		if (slim7x11_ec_command(ec, SLIM7X11_EC_CMD_EVENT, 0, 0, resp))
-+			break;
-+		if (!resp[0])
-+			break;
-+
-+		switch (resp[0]) {
-+		case SLIM7X11_EC_EVT_FN_LOCK:
-+			slim7x11_ec_fn_lock_toggle(ec);
-+			break;
-+		case SLIM7X11_EC_EVT_MIC_MUTE:
-+			slim7x11_ec_report_key(ec, KEY_MICMUTE);
-+			break;
-+		case SLIM7X11_EC_EVT_FLIGHT_MODE:
-+			slim7x11_ec_report_key(ec, KEY_RFKILL);
-+			break;
-+		default:
-+			break;
-+		}
-+	}
-+
-+	return IRQ_HANDLED;
-+}
-+
-+static void slim7x11_ec_register_keys(struct slim7x11_ec *ec)
-+{
-+	struct device *dev = &ec->client->dev;
-+	struct input_dev *input;
-+	int ret;
-+
-+	input = devm_input_allocate_device(dev);
-+	if (!input) {
-+		dev_warn(dev, "no memory for the hotkey device\n");
-+		return;
-+	}
-+
-+	input->name = "Lenovo Yoga Slim 7x hotkeys";
-+	input->phys = "lenovo-yoga-slim7x-gen11-ec/input0";
-+	input->id.bustype = BUS_I2C;
-+	input_set_capability(input, EV_KEY, KEY_MICMUTE);
-+	input_set_capability(input, EV_KEY, KEY_RFKILL);
-+
-+	ret = input_register_device(input);
-+	if (ret) {
-+		dev_warn(dev, "cannot register the hotkey device: %d\n", ret);
-+		return;
-+	}
-+
-+	ec->keys = input;
-+}
-+
-+static ssize_t fn_lock_show(struct device *dev, struct device_attribute *attr,
-+			    char *buf)
-+{
-+	struct slim7x11_ec *ec = dev_get_drvdata(dev);
-+	u8 raw;
-+	int ret;
-+
-+	scoped_guard(mutex, &ec->lock)
-+		ret = slim7x11_ec_ram_read(ec, SLIM7X11_EC_SCUK, &raw);
-+
-+	if (ret)
-+		return ret;
-+
-+	return sysfs_emit(buf, "%u\n", !!(raw & SLIM7X11_EC_SCUK_FN_LOCK));
-+}
-+
-+static ssize_t fn_lock_store(struct device *dev, struct device_attribute *attr,
-+			     const char *buf, size_t count)
-+{
-+	struct slim7x11_ec *ec = dev_get_drvdata(dev);
-+	bool enable;
-+	u8 raw;
-+	int ret;
-+
-+	ret = kstrtobool(buf, &enable);
-+	if (ret)
-+		return ret;
-+
-+	guard(mutex)(&ec->lock);
-+
-+	ret = slim7x11_ec_ram_read(ec, SLIM7X11_EC_SCUK, &raw);
-+	if (ret)
-+		return ret;
-+
-+	if (enable)
-+		raw |= SLIM7X11_EC_SCUK_FN_LOCK_MASK;
-+	else
-+		raw &= ~SLIM7X11_EC_SCUK_FN_LOCK_MASK;
-+
-+	ret = slim7x11_ec_ram_write(ec, SLIM7X11_EC_SCUK, raw);
-+	if (ret)
-+		return ret;
-+
-+	return count;
-+}
-+static DEVICE_ATTR_RW(fn_lock);
-+
-+static struct attribute *slim7x11_ec_attrs[] = {
-+	&dev_attr_fn_lock.attr,
-+	NULL
-+};
-+ATTRIBUTE_GROUPS(slim7x11_ec);
-+
-+static int slim7x11_ec_probe(struct i2c_client *client)
-+{
-+	struct device *dev = &client->dev;
-+	struct device *hwmon;
-+	struct slim7x11_ec *ec;
-+	unsigned int i;
-+	int ret;
-+
-+	if (!i2c_check_functionality(client->adapter,
-+				     I2C_FUNC_SMBUS_I2C_BLOCK)) {
-+		return dev_err_probe(dev, -ENODEV,
-+				     "adapter does not support SMBus block transfers\n");
-+	}
-+
-+	ec = devm_kzalloc(dev, sizeof(*ec), GFP_KERNEL);
-+	if (!ec)
-+		return -ENOMEM;
-+
-+	ec->client = client;
-+	i2c_set_clientdata(client, ec);
-+
-+	ret = devm_mutex_init(dev, &ec->lock);
-+	if (ret)
-+		return ret;
-+
-+	scoped_guard(mutex, &ec->lock) {
-+		for (i = 0; i < SLIM7X11_EC_NUM_TEMP; i++) {
-+			u8 raw;
-+
-+			ret = slim7x11_ec_ram_read(ec, SLIM7X11_EC_TEMP_FIRST + i,
-+						   &raw);
-+			if (ret) {
-+				return dev_err_probe(dev, ret,
-+						     "failed to read thermistor %u\n",
-+						     i);
-+			}
-+
-+			if (raw > 0 && raw <= SLIM7X11_EC_TEMP_MAX)
-+				ec->temp_present |= BIT(i);
-+		}
-+	}
-+
-+	if (!ec->temp_present) {
-+		return dev_err_probe(dev, -ENODEV,
-+				     "no thermistor reported a usable value\n");
-+	}
-+
-+	dev_dbg(dev, "thermistors present: %#lx\n", ec->temp_present);
-+
-+	hwmon = devm_hwmon_device_register_with_info(dev, "yoga_slim7x_ec", ec,
-+						     &slim7x11_ec_chip_info, NULL);
-+	if (IS_ERR(hwmon))
-+		return PTR_ERR(hwmon);
-+
-+	ec->kbd_led.name = "platform::kbd_backlight";
-+	ec->kbd_led.max_brightness = SLIM7X11_EC_KBLT_MAX;
-+	ec->kbd_led.brightness_get = slim7x11_ec_kbd_led_get;
-+	ec->kbd_led.brightness_set_blocking = slim7x11_ec_kbd_led_set;
-+
-+	ret = devm_led_classdev_register(dev, &ec->kbd_led);
-+	if (ret) {
-+		return dev_err_probe(dev, ret,
-+				     "failed to register keyboard backlight\n");
-+	}
-+
-+	if (client->irq) {
-+		slim7x11_ec_register_keys(ec);
-+
-+		ret = devm_request_threaded_irq(dev, client->irq, NULL,
-+						slim7x11_ec_irq, IRQF_ONESHOT,
-+						"lenovo-yoga-slim7x-gen11-ec", ec);
-+		if (ret)
-+			return dev_err_probe(dev, ret, "cannot request the EC interrupt\n");
-+
-+		scoped_guard(mutex, &ec->lock) {
-+			for (i = 0; i < SLIM7X11_EC_EVT_MAX_DRAIN; i++) {
-+				u8 resp[SLIM7X11_EC_RESP_LEN];
-+
-+				if (slim7x11_ec_command(ec, SLIM7X11_EC_CMD_EVENT, 0, 0, resp))
-+					break;
-+				if (!resp[0])
-+					break;
-+			}
-+		}
-+	}
-+
-+	return 0;
-+}
-+
-+static int slim7x11_ec_suspend(struct device *dev)
-+{
-+	struct slim7x11_ec *ec = dev_get_drvdata(dev);
-+
-+	guard(mutex)(&ec->lock);
-+	ec->kblt_restore = !slim7x11_ec_kbd_led_level(ec, 0, &ec->kblt_level);
-+
-+	return 0;
-+}
-+
-+static int slim7x11_ec_resume(struct device *dev)
-+{
-+	struct slim7x11_ec *ec = dev_get_drvdata(dev);
-+
-+	guard(mutex)(&ec->lock);
-+	ec->cell_cached = false;
-+
-+	if (ec->kblt_restore) {
-+		ec->kblt_restore = false;
-+		slim7x11_ec_kbd_led_level(ec, ec->kblt_level, NULL);
-+	}
-+
-+	return 0;
-+}
-+
-+static DEFINE_SIMPLE_DEV_PM_OPS(slim7x11_ec_pm_ops, slim7x11_ec_suspend, slim7x11_ec_resume);
-+
-+static const struct of_device_id slim7x11_ec_of_match[] = {
-+	{ .compatible = "lenovo,yoga-slim7x-gen11-ec" },
-+	{ }
-+};
-+MODULE_DEVICE_TABLE(of, slim7x11_ec_of_match);
-+
-+static const struct i2c_device_id slim7x11_ec_i2c_id[] = {
-+	{ "slim7x-gen11-ec" },
-+	{ }
-+};
-+MODULE_DEVICE_TABLE(i2c, slim7x11_ec_i2c_id);
-+
-+static struct i2c_driver slim7x11_ec_driver = {
-+	.driver = {
-+		.name = "lenovo-yoga-slim7x-gen11-ec",
-+		.of_match_table = slim7x11_ec_of_match,
-+		.dev_groups = slim7x11_ec_groups,
-+		.pm = pm_sleep_ptr(&slim7x11_ec_pm_ops),
-+	},
-+	.probe = slim7x11_ec_probe,
-+	.id_table = slim7x11_ec_i2c_id,
-+};
-+module_i2c_driver(slim7x11_ec_driver);
-+
-+MODULE_AUTHOR("Oleg Keri <okerixx@gmail.com>");
-+MODULE_DESCRIPTION("Lenovo Yoga Slim 7x Gen 11 embedded controller");
-+MODULE_LICENSE("GPL");
--- 
-2.55.0
+ 	spin_lock_irqsave(&fctx->spinlock, flags);
+ 	now = ktime_get();
+ 
+diff --git a/include/linux/dma-fence.h b/include/linux/dma-fence.h
+index ffa99b930843..839ef2e5dad9 100644
+--- a/include/linux/dma-fence.h
++++ b/include/linux/dma-fence.h
+@@ -264,7 +264,16 @@ struct dma_fence_ops {
+ 	 * an upcoming deadline, such as vblank, by which point the waiter
+ 	 * would prefer the fence to be signaled by.  This is intended to
+ 	 * give feedback to the fence signaler to aid in power management
+-	 * decisions, such as boosting GPU frequency.
++	 * decisions, such as boosting GPU frequency if the deadline has
++	 * not yet been met, or reducing GPU frequency if the fence was
++	 * signaled significantly ahead of the deadline.
++	 *
++	 * This callback may be invoked even after the fence has been
++	 * signaled.  In this case, the signaler may use the deadline and
++	 * the fence's signal time to evaluate whether the GPU frequency
++	 * should be adjusted for future workloads.  Implementations must
++	 * therefore be prepared to handle calls on already-signaled fences
++	 * without error.
+ 	 *
+ 	 * This is called without &dma_fence.lock held, it can be called
+ 	 * multiple times and from any context.  Locking is up to the callee
+
+---
+base-commit: f0100363d8c374bd8e9ea7c9ba02744f0b802ca4
+change-id: 20260917-dma-fence-set-deadline-a778746e9abd
+
+Best regards,
+--  
+Jeff Boody <jeffrey.boody@oss.qualcomm.com>
 
