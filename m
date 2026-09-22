@@ -1,90 +1,111 @@
-Received: from mail-pz2-f41.google.com (mail-pz2-f41.google.com [74.125.228.41])
+Received: from mail-wm2-f13.google.com (mail-wm2-f13.google.com [74.125.225.141])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C23FE535FBC
-	for <linux-arm-msm@vger.kernel.org>; Tue, 22 Sep 2026 10:56:47 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.228.41
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 760A6446C1B
+	for <linux-arm-msm@vger.kernel.org>; Tue, 22 Sep 2026 11:00:19 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.225.141
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790074612; cv=none; b=GWWyhtv8gTCLs59H2TOACHgvEZP6e/KSGmNUGxbNs6ElSQVXkqVFdig7SgsROQzLp0dm+B7+C2yoFOJjUJRYB6IbGUEg1llzvfAMLRVq+VOE8VIXrddcpt7JObEsvpFf0BRSPGcVgxu8F0LOVwRK7y3l4EJOXkfHerwRHg7CqX0=
+	t=1790074822; cv=none; b=ociZ1zMmgLrlIbSWV9CsN8pvj8tWJ23uKJ1Hmz0AB3Mk9M5pmDBWSXQOU8h6A+sk17RX7aHLZfKXcNuO4ZZ/Cbpz1psdOphsyXE9mns/7F05ldIODQv9NThdneVXbW3O8WW6CX18PHz2StQP2YkfBjl9LN4RpHLT6oVpE+HJTMU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790074612; c=relaxed/simple;
-	bh=dPFDKwpLdYY6Xz8/aXlHfyZiX/t8VPMj0bgY4zGFzSQ=;
+	s=arc-20240116; t=1790074822; c=relaxed/simple;
+	bh=/0OHB51Px1kwmAioyURonbOhXzHFSra/T+tZss6z+H4=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=CR4X5FVELncHHl272s0ecEhsxIk9O3KJhdNcvsnujSUrzBJQe8i9wHa7adbc5ISVio98kXOLBYRyzoFo2ucv4tIxT7YNf3yBE/6n5n+o5LKVNsLIG/+vBVfZGzg9ARZIStpifPU2V+jPEDGe2VOdeOduw0mYqbZ4GdEOguatpHc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=Xc5zusmJ; arc=none smtp.client-ip=74.125.228.41
+	 MIME-Version:Content-Type; b=ngFweVOfWJ33l0t0HCTrPBpq3aBW6j+fSrynyuRj4ryNM5nDhwvJGI2wGWYoBIOh4Ycv2JjKj4A27JGV/KsgjTuw4GyHzW/wZ65YkOb/0dTnaKiOoazP51RJbhDDKxUClCIA+iPiwxCimUmP89WSaEYd9D6t7BaMlr6JV8rWH7M=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=eTXgxQSX; arc=none smtp.client-ip=74.125.225.141
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="Xc5zusmJ"
-Received: by mail-pz2-f41.google.com with SMTP id d2e1a72fcca58-85469b35611so2593696b3a.0
-        for <linux-arm-msm@vger.kernel.org>; Tue, 22 Sep 2026 03:56:47 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="eTXgxQSX"
+Received: by mail-wm2-f13.google.com with SMTP id 5b1f17b1804b1-49d1fb0cf5eso28064345e9.3
+        for <linux-arm-msm@vger.kernel.org>; Tue, 22 Sep 2026 04:00:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1790074604; x=1790679404; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=dPFDKwpLdYY6Xz8/aXlHfyZiX/t8VPMj0bgY4zGFzSQ=;
-        b=Xc5zusmJ1eWaGLIjBC2u9R9gwo0INyOkC3WgJhsX25ETi0brFfnUbVvClI5XbqTJ1X
-         sZ8RtTrcdiENGehZOawo6b3Do8CPG7cJUTEsrlyNYEpurdXXVjg/6nSi/SVc2rpj+2uo
-         rKmVp1JaYLzmCg021O7GkcoOFHKjKsWgNRm2LEW0uVdgQWWv49Ov3R/Y3vIO+yGZE+to
-         Si3c+OMlWJ99apZqQFOq/JZP1Uoa5ffJUj7uPUSCWImiAgiZvQdUrF/mz/DEcslod/cY
-         QeEYS8JQNBs21uY9NRqS46YyZf+YAQSTCxZH4BIClIgcOHMtOplIW1T2OmY+iFVvO10v
-         aSmA==
+        d=gmail.com; s=20251104; t=1790074816; x=1790679616; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:mime-version:references
+         :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=y7qcpIDKckcU+FwnXhQhXsF99jpMu30FwevkL1hVHm8=;
+        b=eTXgxQSXYLNbeq3veauTMJoR25hcNJJAbZG45LRWTaKufA5EjcDV7cCvNrBrzxuseW
+         HymyG9nUpJZdasZn8coe9RHJzgW6H1uS4gIY+crbN1Dhf4JKrsvYx7fj7Ts/lJD07Nnd
+         HgOkGHwo6zTQFnovKjxpZgqa3VP4I7OiqQILtR1h3v+AWtmnudHKYeUH/+PoI5Paz2YJ
+         N5ylma3SSZ9g/5cCd9bEi2qLhI5ej4hXPdnsz2DVcvsPjQQAtXaRWIJmHkHgOGD4Bxm3
+         ymOVZ3m0lDzniVbJE/iQNfMG7fgOclWZxyHXZztXLevvryGs9Cl5KWIUPonnRl6bM1vO
+         XtJg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790074604; x=1790679404;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=dPFDKwpLdYY6Xz8/aXlHfyZiX/t8VPMj0bgY4zGFzSQ=;
-        b=POQR3xEDokbZvXytwAnnokjkxU7/X0m13rQ0QGCZ8FMRyYm4gW8TFAd8QQPcl1FZ7M
-         Pd3ysdmA2ExRmCwOCsWr9LyFcUGiX3AD228RjAULSjltevlYOL1zM2uP+2kTyO3oPi3e
-         osbkmL2Cimzt7eF835FD7tWkB8ICG8sJ+QXCaCiwHFrz3u929IIUHkkpcp+6+giCbsuJ
-         uBNO2/c1DzdVgutzI1XZO4ZPUm8DoxtxLSGVnhujRXb7ztDmerKlt9EKkE5MdcHaWj9O
-         fQagQZPSHG6b58TjXkg929q7wN4ROIrlTOvw6l6CLs+szs4ITrs+DbLzg0ToRObbB7u3
-         N5lw==
-X-Forwarded-Encrypted: i=1; AKwUvBzlLfH5sWaFlL76OmEBrjRFE9MRBzRuOZZVV/cX7Ew4EX0qG+5tIl1ulaeEEN3386H7unEZ+NuR39FMxXz1@vger.kernel.org
-X-Gm-Message-State: AFuF++m6JzbHAHdoiF5QGyH2M0KflC8Kk5vaCLkpPQQD0v8xclRT0QOc
-	qTij9eMVP08W1KoUf7azEAVENWzm0VsJRYJzCYErieGCV3X/0RWL9ZyR
-X-Gm-Gg: AYBFou3/dEWkWuVnKVbrht7UlyyfQPRI+7ls5Q1uiGETvsH7cvAF7x8i9tE0JkX7Vl6
-	HXuL2BQ0ZFSFa7YT6qN4pHyal5lVAuvW4HWClWXye7MmOjKjKsjO15VmnLNMVlT80aZKwK1N32H
-	/STaxEZcWvlQP95EolqFI2YOKYK8WfocGnUUfqdGOYPRR3QnFpSWU6POzbGFtUPZbPYfM8lCjIU
-	2oesIJuN0uryV2sAoUd8gzUuXpj9Fqx/Cfmc5r0w8nYleDLKZNKpBs9LwkVIYwFhFAzk+Y+yqM3
-	e6nmaPcgkyqoHLdKED5RLFuQnTdYGWvC31ERqL7rXTbsoGD62EcVFE9vq/sml0sYuVtYffQ/sIW
-	/hW67mDOB0QT2r/1lcGaGi6Q5VPV/5G18Z0FocmB0OdMUZ8MA7D08qJI1y5fyZvSjA/8RkdJ1ZU
-	teWqhjayTULweUfgx+EPnzzjzc7A2KaVODXWirjjcuVKx+49CuI7Y0ohqInEDSDz6KSe8Lby5eh
-	9oNLTHPaMt7+fm9cUAym9kjd2Y=
-X-Received: by 2002:a05:6a00:3001:b0:872:cadc:bdf2 with SMTP id d2e1a72fcca58-87c81ec0039mr736727b3a.14.1790074603769;
-        Tue, 22 Sep 2026 03:56:43 -0700 (PDT)
-Received: from urmom ([1.54.70.106])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-87c2fc4baf1sm653791b3a.6.2026.09.22.03.56.41
+        d=1e100.net; s=20260707; t=1790074816; x=1790679616;
+        h=content-transfer-encoding:content-type:mime-version:references
+         :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=y7qcpIDKckcU+FwnXhQhXsF99jpMu30FwevkL1hVHm8=;
+        b=HukDuuScHSmQlfZEiIPGbridvjK1y8h8C7HfH4/bWxlsyBSFaDucGGbV/6ubTCAsaS
+         XKqTNGkUWDej91CdQSXpJPA27xW6OAOSBgYCI673awVzOd8GBeUKlPJ5kGsdbKMR+eCS
+         vn5U8wWK80fXxzyjNQoYqbRpyS3spHHNFYZnsAcHfUW63I4Vm8kycuZCmY6BIjTwow+R
+         ai2wzQtQ+fma+hstyIArzjpF7lQnu2NI1ije5QUxXjV+XqNVd8+plsvuefg/OuxarOWI
+         BjMWLXcC8+I4orUpyDt85Ku2cHKgbg82rF89Mm4wh3tlvL2WVxlkDqikaX0XHU8JlubT
+         KxTg==
+X-Forwarded-Encrypted: i=1; AKwUvByDlCzpsS0xT72wRYlm7CzRawSYosmE2ZW7nMTMWbFqZcXoJT1BO0PK7ZAVIAJOQbXsPtW4wv+sj4LGYE8P@vger.kernel.org
+X-Gm-Message-State: AFuF++lRuXvMl+hWD0dX3i+fJnfu2kFIx6KXuEr2wMPeuGYurIqqvBWO
+	kc1Dv5vBph8LjcAZKJyFzGDl0+jan+cVKIDA+eqLq+PDK/zTMCN/HD76
+X-Gm-Gg: AYBFou11Chr0jJpUUePHFzome4lyLtXlfHJAqpjP2omfEmDBwkJQYIw+yh3uByA9EHu
+	K/mrZTKoQMUxZHZzmRAid3gSI/7vyPZTYzuac3ECPzAUk3uCRDW2KwynmqIluWfqaQu4UqApoCj
+	UY6eX27G7S5ovXyVB2yk8zLn36u4H52tgGQq3JSJPuu2Bu8R7U0V98OTiDDaiN/CaG54bTAdYMr
+	tr739LjlUUpRY2P1oJJEtvYopyR8J0cBSLUCNiz9Md4raemLcPVwmgKD4dpX8Yx5GeesRCyA0zQ
+	OumxAbmjwGCa9n58uefs3wLFU11dYittk+5pbwHTaxOoL0AuXUZsJJrVKr5ng/v2Z+LXvfycNOV
+	x1itkVOVzTeFd9VZ4ZVDkKM7ScIVmiF+ORsYKPeRLpE85u+eoxQYBIerZUPpgh0Lnq4GiW9dJkW
+	iS3s0e2c5N8F/s5/uAD84W0K0Q4ITeNNUd/TTXWcGi/rYLUQEB3rY+x81SkvzC1G560gZr/S/Up
+	n7jphw=
+X-Received: by 2002:a05:600c:4e4c:b0:49f:bd3c:bc28 with SMTP id 5b1f17b1804b1-49fc574f456mr195177935e9.35.1790074814606;
+        Tue, 22 Sep 2026 04:00:14 -0700 (PDT)
+Received: from localhost.localdomain ([94.252.75.113])
+        by smtp.googlemail.com with ESMTPSA id 5b1f17b1804b1-49fdaa4e47csm85599365e9.1.2026.09.22.04.00.13
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 22 Sep 2026 03:56:42 -0700 (PDT)
-From: Lucas Sproule <lucas.sproule.42@gmail.com>
-To: Bjorn Andersson <andersson@kernel.org>,
-	Mathieu Poirier <mathieu.poirier@linaro.org>
+        Tue, 22 Sep 2026 04:00:14 -0700 (PDT)
+From: Oleg Keri <okerixx@gmail.com>
+To: Lee Jones <lee@kernel.org>
 Cc: Rob Herring <robh@kernel.org>,
-	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Guru Das Srinagesh <linux@gurudas.dev>,
 	linux-arm-msm@vger.kernel.org,
-	linux-remoteproc@vger.kernel.org,
+	mfd@lists.linux.dev,
+	devicetree@vger.kernel.org,
 	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v2] remoteproc: qcom_wcnss: Fix error check after devm_ioremap_wc() switch
-Date: Tue, 22 Sep 2026 17:56:36 +0700
-Message-ID: <20260922105637.1684691-1-lucas.sproule.42@gmail.com>
+Subject: Re: [PATCH 2/2] mfd: qcom-pm8008: support PMICs with no interrupt line
+Date: Tue, 22 Sep 2026 13:00:06 +0200
+Message-ID: <179007480602.173050.17097175603597060097@gmail.com>
 X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20260831-wcnss-is-err-fix-v2-1-5520fd4c6b50@gmail.com>
-References: <20260831-wcnss-is-err-fix-v2-1-5520fd4c6b50@gmail.com>
+In-Reply-To: <20260922101459.GB2730113@google.com>
+References: <20260922101459.GB2730113@google.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Hi Bjorn,
+Hi Lee,
 
-Gentle ping on this one. It's a small regression fix and already has
-Konrad's R-b. Happy to resend if that's easier.
+On Tue, Sep 22, 2026, Lee Jones wrote:
+> What on earth is going on here:
+>
+> https://lore.kernel.org/r/20260907-glymur_camss-v2-5-75f7982dc983@oss.qualcomm.com
 
-Thanks,
-Lucas
+Three postings for the same PMIC, in order:
+
+- Nihal's Glymur CAMSS v2 (7 Sep) carried PM8010 support for qcom-pm8008
+  as patches 3-6, including the no-interrupt case.
+- My series (8 Sep) was a strict subset of that, written without
+  checking the list first. I withdrew it the same day on the cover
+  letter [1]; please drop it.
+- Nihal dropped the PMIC patches from his v3 (17 Sep), and Jishnu posted
+  them as a dedicated series, "mfd: qcom-pm8008: Add support for PM8010
+  over I2C" (18 Sep) [2]. That is the one to review. It runs on my
+  board, PM8010 with no interrupt line, and I sent a Tested-by there.
+
+[1] https://lore.kernel.org/all/178887481187.4612.2819576206036967152@gmail.com/
+[2] https://lore.kernel.org/all/20260918-pm8010_i2c_support-v1-0-de33d78fad9d@oss.qualcomm.com/
+
+Sorry for the confusion,
+Oleg
