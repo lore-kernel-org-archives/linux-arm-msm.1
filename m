@@ -1,78 +1,96 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 74D7452ED5B
-	for <linux-arm-msm@vger.kernel.org>; Tue, 22 Sep 2026 08:42:01 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 52A475221D7
+	for <linux-arm-msm@vger.kernel.org>; Tue, 22 Sep 2026 08:48:32 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790066524; cv=none; b=lZtAODdroWXcCw08lzd1VC5nnc2HygniNcrbLQPO0nIv4BWgDwQfSybKVSwXaTtKIc9uXJPGS/VpkZdZm5QSYH9Vl7POULZLw3OU4p6KEwsM27rj8uND/HtFuChFlKH96qT/tjowAIwauGwC2MsZ/Oy/KxDpLZTzxyuLVMquHgo=
+	t=1790066913; cv=none; b=PTYV2odUn7d8q2/8zCW9sIAZ2fQSuTN0DixScXcMnN+nm0sxZtsIEW9vV8Aljg2POOZ0Z0JwJ74vcw2hCC+TneywFyQi9fRS8IK0rNmqm88ZzZ7KJfEtSPQfBKF61D4XMwPYwy1vSAMfQRpS6rhcUHZ7zOakk/TfwJQkh1GISJo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790066524; c=relaxed/simple;
-	bh=kck8L/NQRlysm6vgqjrDELzS09ugXw6JQ7kAARLdPTU=;
+	s=arc-20240116; t=1790066913; c=relaxed/simple;
+	bh=DIk4K8t7n3jCRIWpgVm8y0dvfQS2Okp1cwxCtR87N54=;
 	h=From:In-Reply-To:MIME-Version:References:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=U4yl1RK2NZI5VS8SUxtuxX2Jai4VT0/5gR26Bup5/Ta6aBC5mX5esiAAs+JKNmDYXIcCH6wRoKNNiUs2Xq4c605dANP78fIQQF+Wu4vayglI/HBBnUg70U2I122YBbjJnkTp4GtXoackVOE3WQE5nWhmYcoc/7KNETiicHuAXps=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=lFwFG7RC; arc=none smtp.client-ip=100.103.45.18
+	 To:Cc:Content-Type; b=QmIiU3kKqMVG/QJFLJv63CLy1E9/ijXLFIOxq2K2X13pcUDsqa4QQcJNIsIkddR3ugTv0TaF/MSXL2mtBdBmOeP+s4EOSW3PddZ0LOwhrp4AjDBsiWg5aldh7rXmVp+U4cdJ/O4Z1pwFxjWx965IE8jH0w7EXZ6HttWm0z9pEqM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=fVn5aAZZ; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="lFwFG7RC"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9BC781F00898
-	for <linux-arm-msm@vger.kernel.org>; Tue, 22 Sep 2026 08:42:00 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="fVn5aAZZ"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0DC461F00898
+	for <linux-arm-msm@vger.kernel.org>; Tue, 22 Sep 2026 08:48:32 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1790066520;
-	bh=kck8L/NQRlysm6vgqjrDELzS09ugXw6JQ7kAARLdPTU=;
+	s=k20260515; t=1790066912;
+	bh=xaYOqqiuhximCWN+b4H09mGRUg+IK9L18ExvostpRS4=;
 	h=From:In-Reply-To:References:Date:Subject:To:Cc;
-	b=lFwFG7RC1GPgBW9VpnjSHm5NG0xiYn4onuIj4qFX0pthMyjOfSAVi8Ruli9u/+OMX
-	 Qt0x6awz2B3LJ3xzyEsluI3gcXX5wJqJqCNUzrLsNS2xyw1hDmjGl289rYEKBF1ytj
-	 NOfyvO7G3RzYaqIzyQHzBF+qRa3MmBjIQSjlS1Hy3Tj/AfLcc9K0mpQFgZwRJ3msbx
-	 OI9+cfrNMxy2PumMkvRoS0Y7tw2n7K2jF/0izB3pFuSkyLkK30xCciyZ9WwAi6Q8cz
-	 mxUXC9DyWvt4cv2HxnSPackOPoK8/OHXjVotvvmUNtU+yQGF9p6eClzE/a2gLRf0pN
-	 UY51w+U/otGNQ==
-Received: by mail-lf2-f13.google.com with SMTP id 2adb3069b0e04-5b8c9954ccbso2229270e87.1
-        for <linux-arm-msm@vger.kernel.org>; Tue, 22 Sep 2026 01:42:00 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AKwUvBx6qWt2edGoc9PtYIlKmG1MXTlO5OOvESUd5wTtkoI0rQTxZW+AkKcuYOjvs4g5f2UPPxcFQiyssvIOFTi4@vger.kernel.org
-X-Gm-Message-State: AFuF++kam3Tgfjeb10m+ZTJUdIBVqek/a4MaUGqVmzSxU0xMnllmeE/E
-	X4m0BS7UI91/x0W3phQwO239avC3i+cqnne/jXUXFvhIXsswrZfgvPD35E9Szymd0x0+seR9v4b
-	SWNXYY3UmMYDopR8e1hn12XxOxGnr2i24rFpqMmGg7Q==
-X-Received: by 2002:a05:6512:b96:b0:5b6:1a7c:fd8d with SMTP id
- 2adb3069b0e04-5b8c196c1b5mr4813014e87.51.1790066519268; Tue, 22 Sep 2026
- 01:41:59 -0700 (PDT)
+	b=fVn5aAZZJCT3yR6xYahdUbVzmxMbAQdqRF2CMcExgm6rVKB+H7yXIPjG2GKPeLqXs
+	 M/cwWz8YjSPnynZhFipcDUX0uK2b6ZCXihI91UqTBP1VANWg2bvizCXkBRnx93w7y6
+	 i06nxasx+d+NDqoV6ZO0Z4Vvs35us2X0xmx3JkOpNi+bLE+nzor+qRqiUtmrT0LdSd
+	 PtNr/RN/PdowGGGdu3wSEVEVhEIr8v4KIjhPqPTJxvPMXt7g/5hML4IbuFRa2QAEGg
+	 zFCvmga2D6sZpq3oZNTgyOoHrvegV4otvxGKec8DMDuaJZMRQjuJyBFl/5HAYXRPeE
+	 BuC7A0eG6lgPQ==
+Received: by mail-lr2-f12.google.com with SMTP id 38308e7fff4ca-3a47f740839so32452241fa.2
+        for <linux-arm-msm@vger.kernel.org>; Tue, 22 Sep 2026 01:48:31 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AKwUvBzC8y7ZwOWrBGBbj690T7iofpbghyJ8q30i5cyOUI5VTQWBAtq6pDnxvRZaT950TFMCMgWBVhEfSjhq4EcG@vger.kernel.org
+X-Gm-Message-State: AFuF++mfD40s7J8IV5KE4X2HlRybbEbVs6dlcGKxk+kt6BYIPD0bm+MX
+	zgkNjG/X7CxV2MT5yGyoRjVqx4jrCLnP0M0NVVKBOnKhXxbesymVT36Ew4n9APBdRo3a+B4JL7S
+	6U8hAQf0k/x9d32lq+qhWnqC34bvKxzhjq+zdZtKCuA==
+X-Received: by 2002:a2e:be2b:0:b0:3a1:9562:732 with SMTP id
+ 38308e7fff4ca-3a5fbe36d93mr30039041fa.1.1790066910689; Tue, 22 Sep 2026
+ 01:48:30 -0700 (PDT)
 Received: from 969154062570 named unknown by gmailapi.google.com with
- HTTPREST; Tue, 22 Sep 2026 01:41:57 -0700
+ HTTPREST; Tue, 22 Sep 2026 01:48:28 -0700
 Received: from 969154062570 named unknown by gmailapi.google.com with
- HTTPREST; Tue, 22 Sep 2026 01:41:57 -0700
+ HTTPREST; Tue, 22 Sep 2026 01:48:28 -0700
 From: Bartosz Golaszewski <brgl@kernel.org>
-In-Reply-To: <20260921195636.1925869-2-mukesh.ojha@oss.qualcomm.com>
+In-Reply-To: <20260922020623.398913-1-shengchao.guo@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260921195636.1925869-1-mukesh.ojha@oss.qualcomm.com> <20260921195636.1925869-2-mukesh.ojha@oss.qualcomm.com>
-Date: Tue, 22 Sep 2026 01:41:57 -0700
-X-Gmail-Original-Message-ID: <CAMRc=Md2QehBNptfiKWfTSzhSf_bg8gpC4hbe60c9FOiZb_Avw@mail.gmail.com>
-X-Gm-Features: AcwNN1XFSj2Uxs-rWA0kn1vTTqk-pdkddBYgSD-ic__2gy87BQAfmxIi4VvGh_c
-Message-ID: <CAMRc=Md2QehBNptfiKWfTSzhSf_bg8gpC4hbe60c9FOiZb_Avw@mail.gmail.com>
-Subject: Re: [PATCH v2 2/3] firmware: qcom_scm: handle empty PAS resource table
-To: Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>
-Cc: Abel Vesa <abelvesa@kernel.org>, Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, 
-	Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>, linux-arm-msm@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, Bjorn Andersson <andersson@kernel.org>, 
-	Konrad Dybcio <konradybcio@kernel.org>, Bartosz Golaszewski <brgl@kernel.org>
+References: <20260922020623.398913-1-shengchao.guo@oss.qualcomm.com>
+Date: Tue, 22 Sep 2026 01:48:28 -0700
+X-Gmail-Original-Message-ID: <CAMRc=MfMNwJq_8NTLMx8dKEFysoc=MCQSoB9-L+KVbpDRnvmMw@mail.gmail.com>
+X-Gm-Features: AcwNN1UiGOaChY5GhBxT4uEewsZGB0XkC6bYDHLVJJ0u79sSo-qQkOABnAsjEk8
+Message-ID: <CAMRc=MfMNwJq_8NTLMx8dKEFysoc=MCQSoB9-L+KVbpDRnvmMw@mail.gmail.com>
+Subject: Re: [PATCH] interconnect: qcom: Skip get_bw on QoS programming providers
+To: Shawn Guo <shengchao.guo@oss.qualcomm.com>
+Cc: Neil Armstrong <neil.armstrong@linaro.org>, 
+	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>, Abel Vesa <abel.vesa@oss.qualcomm.com>, 
+	Luca Weiss <luca.weiss@fairphone.com>, Bartosz Golaszewski <brgl@kernel.org>, 
+	linux-arm-msm@vger.kernel.org, linux-pm@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, Georgi Djakov <djakov@kernel.org>
 Content-Type: text/plain; charset="UTF-8"
 
-On Mon, 21 Sep 2026 21:56:35 +0200, Mukesh Ojha
-<mukesh.ojha@oss.qualcomm.com> said:
-> The PAS resource-table query may successfully return a zero-sized
-> table. kmemdup() with a zero length returns ZERO_SIZE_PTR,
-> which is stored in rproc->table_ptr. The remoteproc core then
-> dereferences this invalid pointer while processing resources.
+On Tue, 22 Sep 2026 04:06:23 +0200, Shawn Guo
+<shengchao.guo@oss.qualcomm.com> said:
+> Programming the static QoS configuration in qcom_icc_rpmh_probe()
+> touches NoC registers directly, and nothing in that path clocks or
+> powers the NoC first.  It has been working only because the
+> interconnect core used to vote every node to INT_MAX while adding it,
+> and that vote stays in hardware until sync_state.
 >
-> Treat a zero-sized result as an absent resource table and return
-> NULL after releasing the TrustZone memory buffer. This allows the
-> remoteproc core to skip resource-table processing.
+> Reading the boot-time AMC votes back from RPMh removed that implicit
+> guarantee: a NoC whose BCMs come out of the bootloader unvoted is now
+> left unclocked, and the first QoS register access aborts.  On Qualcomm
+> Nord SoC, the MMSS NoC dies while programming qnm_camnoc_hf, taking the
+> board down before rootfs:
 >
-> Fixes: 8b9d2050cfa0 ("firmware: qcom_scm: Add qcom_scm_pas_get_rsc_table() to get resource table")
-> Signed-off-by: Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>
+>   Internal error: synchronous external abort: 0000000096001610
+>     regmap_mmio_read32le+0xc/0xa4
+>     regmap_update_bits_base+0x64/0x98
+>     qcom_icc_rpmh_probe+0x44c/0x540
+>
+> Only install the get_bw() callback for providers that do not program
+> QoS, i.e. those without a regmap config.  Providers that do program
+> QoS keep the previous INT_MAX initial votes, so their register
+> accesses stay safe, and the rest keep the benefit of honouring the
+> boot-time votes.
+>
+> Reported-by: Bartosz Golaszewski <brgl@kernel.org>
+> Fixes: 11a44c6087c6 ("interconnect: qcom: implement get_bw with rpmh_read")
+> Assisted-by: LLM
+> Signed-off-by: Shawn Guo <shengchao.guo@oss.qualcomm.com>
 > ---
 
 Reviewed-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+Tested-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
