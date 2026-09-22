@@ -1,421 +1,236 @@
-Received: from mail-lj1-f180.google.com (mail-lj1-f180.google.com [209.85.208.180])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A6AC253F6A2
-	for <linux-arm-msm@vger.kernel.org>; Tue, 22 Sep 2026 13:33:51 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.208.180
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DD0F443CE6A;
+	Tue, 22 Sep 2026 13:42:04 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790084039; cv=none; b=c2eH0Qn6Fs6ByuKdefzCL9j1658M1aSTeLwqiPKs32d0/LCKIBBHeFLUccKbZKbwbG+1kgsyvbqfPuEVdRiT6XXQ2uhx3Jlm7BzWeq+DOOnPTpdLVv3wPvZ+AJE2XQ9yEk2/dOUeqspY7YWivhXqQWehxa3VitAq/KeSvodVoRI=
+	t=1790084524; cv=none; b=nhi3cTaUo3MxFgPJVhHMYZ7ks4/AXMht2eEwnl77yfxc16XS6UBK2DoOTk4CdmKKcn/pSRUnKuQtR69Ox1XRoP2AAKL2bQKUY6gqzN+S0TxPChm0HX4vhlk7IKVsphtLnB6cxEN7UWfxWRF9F7MbmRDzjKCMHxrqyzh1oq7WCyU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790084039; c=relaxed/simple;
-	bh=WSdfeY/0K159TMJyPSbYWg5pgAkoB6b1mxTxk/rn788=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=ZAEuvEfkCKgKni52aBGFnHc7b4idiSghjOXgSXUW5AfxV2qM0p0Awj+4x4toF86RlUTXdnoKI1AtWgEDbuGOD1kJT5pE+OUBojrf6mfq+6Jo1Kw3f5Mkq8SMdTghrN5yMXl9KjITCiXQA39Zx0qbsEFgnp/s0IIaltreRYhRJaU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=riscstar.com; spf=pass smtp.mailfrom=riscstar.com; dkim=pass (2048-bit key) header.d=riscstar-com.20251104.gappssmtp.com header.i=@riscstar-com.20251104.gappssmtp.com header.b=Z0njjWgk; arc=none smtp.client-ip=209.85.208.180
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=riscstar.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=riscstar.com
+	s=arc-20240116; t=1790084524; c=relaxed/simple;
+	bh=ui+TXvwrceC03rroE/Q4o0li/haNQJon38ShWlc2EVE=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
+	 In-Reply-To:To:Cc; b=ZiBQhzexD6H3PZq+L2bFSiImS7nkdoroGGrUIkqF5b+oxbXWNLzXQZdOeYYYQN9Sgamgb87Gh+R8c0o87HXAOkXBUef08eReCHRcMo2bkAv6rS6EaGIQa3Jc8q5spE+6PzY/S9vYfkx1P3c3G23LgFWDsT0S0nREXv0PY5R7B8M=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=G6K2V3hf; arc=none smtp.client-ip=10.30.226.201
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=riscstar-com.20251104.gappssmtp.com header.i=@riscstar-com.20251104.gappssmtp.com header.b="Z0njjWgk"
-Received: by mail-lj1-f180.google.com with SMTP id 38308e7fff4ca-3a49a40209dso5672361fa.0
-        for <linux-arm-msm@vger.kernel.org>; Tue, 22 Sep 2026 06:33:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=riscstar-com.20251104.gappssmtp.com; s=20251104; t=1790084026; x=1790688826; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=QydC7bgWG0EuejZPwcV3a+DqQPYaemecyt7vWNS1w14=;
-        b=Z0njjWgkxgYupjm7pTX6smX5zlEkJwBSvtmCHtMLVqa0ho0MyL9pbnU6MaZSUFQPfa
-         8HnKvZdrJ2dobHMZH4afa9CW5lNN+aVQytgUlOGIHwIHP+6g/cheR8/ZJtv4dB79uos4
-         0vposbqNRJ2MMvUGUXXDy74l9EEVfsmJ0bT08P1UTWiUDIcNZucuI3KMZm3KIRb4Tqt3
-         yN4H3lzYOtcW4J1qAFwDwmZTdO5w29ZBKCxpHfK/SiVFqDzPQEyDhzMg9J0TJiX4jurq
-         xClotg1HNK7qrm8669zzBtdVoeHQVThpFTUWqvRN8w8qPzyxdNYI1xHuir26qacQdfre
-         /Jzw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790084026; x=1790688826;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=QydC7bgWG0EuejZPwcV3a+DqQPYaemecyt7vWNS1w14=;
-        b=jCahBTGWZUGbTaHZZqlkrUXxWDUv94VewbPqr8tS7GnOFT5LPJjd/sRUewLRXMs6JL
-         pzPvvwWHYVwCCXZgX3PEc9/gqeMTIL9ZhR4kG5Tl9vU16Gr7k91LB35wtp3IyMYybNsS
-         dErkUBi/fTyLCpxQB2KQGvStWbizl2+s4FpDGGlfjGQ8GCNLE1P5q3k1z2FyCkZWvPbd
-         pRsD6o4jc9ibDsb07l6cWiiVlawFBqb4IfsUn13nkz0y4UZRwh8gdHua/e0bNIvjsQZJ
-         667Y8zcz7+3l5pnxcnvxJdqsn21DlDaErR5g4EsrT0kGlscLRS5FXXIPmwdwXmNqHTIa
-         dMNw==
-X-Forwarded-Encrypted: i=1; AKwUvBzgSo5iK7VDsPgCgu0iI+dYN6VNsubxWMvOycZbBKWqCR1F89qAFj5NgnPSCg2eJB0CG7/twBtuPYd6Mv2u@vger.kernel.org
-X-Gm-Message-State: AFuF++mSgi1WuwRpC63jVURT43R0R8qmIX7922leUoZLPux2z8hXXSQ5
-	vabYnZQy+KX7wa3Wwu/MS7coKoPq4m7MZlEKQwySDeJBcL8z9BkCSePSwso/YpUL8OY=
-X-Gm-Gg: AYBFou22Pg2TFFOu/WI+QwoRV5wMTQwD5yWJijMPrVWkAsSYbB0GrhJIJ7KQVPjdD06
-	BbSD9rKq7YrpsK0BO2aY0l+t7C2xTSoYVIxrqxluLpy2xBj+/oXau2OREsYYsrX4BoHI0UCp159
-	osIog+WFWzZMPWcqKsG124/6lTlLDzdQkPFTsrzx6ghH//uPrEwEbMaxA79I+p2/oE/uqxc93dK
-	1qBd/aZudDQKPT62XeQck2FfEsa/rUdi9ppF9F3CrUPlrBGXd61k/7pAssDmms7DnkBKngIxku9
-	3yiTZxF3xhplATl+K7e49lnW74WcQ5CeyAsq68iJJsBo18UiILBUg1OkFDgXEmyYC616rifX7h6
-	1X6188tF9g1F0nwJ2hH8futn2cMfNs8lSf7YbsxYSfvAa/MoNupy41ChwAgmpkZN1fcEmKcsuge
-	21cNfKxuu0Voj353vNbLRhAHwkV9QEA9IJ/EMNV/iQapwmdyhA5tXZmjlhEyaszq6zRRhIKeg=
-X-Received: by 2002:a2e:bcc3:0:b0:3a5:d0c6:46c4 with SMTP id 38308e7fff4ca-3a624d70581mr7729801fa.15.1790084024945;
-        Tue, 22 Sep 2026 06:33:44 -0700 (PDT)
-Received: from [172.22.22.28] ([73.62.185.64])
-        by smtp.gmail.com with ESMTPSA id 38308e7fff4ca-3a627d82b71sm5924741fa.34.2026.09.22.06.33.40
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 22 Sep 2026 06:33:44 -0700 (PDT)
-Message-ID: <0785235b-de06-44d4-9068-ec706eeba848@riscstar.com>
-Date: Tue, 22 Sep 2026 08:33:37 -0500
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="G6K2V3hf"
+Received: by smtp.kernel.org (Postfix) with ESMTPS id A14E2C2BCFA;
+	Tue, 22 Sep 2026 13:42:04 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1790084524;
+	bh=ui+TXvwrceC03rroE/Q4o0li/haNQJon38ShWlc2EVE=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
+	b=G6K2V3hfxV8r+6ZtFmtnLu4ih7IPQs+y1XyytoQWBKS6m600IsltVrhtwrCBheq2I
+	 qUGX4r7XtKZKalpluawZjWH4qA3vmSnhGjF07qGWXHxxzqq+bWPFAo5w11YxWj9gmQ
+	 uVUHXJPfNrIYjD/bYxui47zSYqInlcy0a8E7EEfWVgb/kBd9Xd0qExY+zTai3lC8O/
+	 BQcccDntbL7pixs++cJwDag5HVo1kBLwt1kGxcBwc9PZ35i6y/zulJcz8UtvS4WrNU
+	 gTv0XqFIwh/tQftlYhAb2IHmr5qkEUf3RlNKgIQFgLbYkTGZ1uyS0QTBB9xj7TAp1w
+	 j9122tpLF1C3w==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7A37CC98304;
+	Tue, 22 Sep 2026 13:42:04 +0000 (UTC)
+From: Manivannan Sadhasivam via B4 Relay <devnull+manivannan.sadhasivam.oss.qualcomm.com@kernel.org>
+Date: Tue, 22 Sep 2026 15:41:45 +0200
+Subject: [PATCH v3 1/4] net: qrtr: Allow the host QRTR to assign a unique
+ node id
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 3/4] clk: toshiba: introduce a TC9564 SoC clock and reset
- driver
-To: Brian Masney <bmasney@redhat.com>
-Cc: sboyd@kernel.org, bmasney+clk@redhat.com, jbrunet+clk@baylibre.com,
- robh@kernel.org, krzk+dt@kernel.org, conor+dt@kernel.org, lee@kernel.org,
- andersson@kernel.org, konradybcio@kernel.org, abelvesa@kernel.org,
- kees@kernel.org, gustavoars@kernel.org, p.zabel@pengutronix.de,
- daniel@riscstar.com, mohd.anwar@oss.qualcomm.com,
- lorenzo.bianconi@oss.qualcomm.com, linux-clk@vger.kernel.org,
- devicetree@vger.kernel.org, mfd@lists.linux.dev,
- linux-arm-msm@vger.kernel.org, linux-hardening@vger.kernel.org,
- linux-kernel@vger.kernel.org
-References: <20260918165234.687224-1-elder@riscstar.com>
- <20260918165234.687224-4-elder@riscstar.com> <arG238GS8bMB6DkW@redhat.com>
-Content-Language: en-US
-From: Alex Elder <elder@riscstar.com>
-In-Reply-To: <arG238GS8bMB6DkW@redhat.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+Message-Id: <20260922-qrtr-multi-ep-v3-1-c00831e88957@oss.qualcomm.com>
+References: <20260922-qrtr-multi-ep-v3-0-c00831e88957@oss.qualcomm.com>
+In-Reply-To: <20260922-qrtr-multi-ep-v3-0-c00831e88957@oss.qualcomm.com>
+To: Manivannan Sadhasivam <mani@kernel.org>, 
+ "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, 
+ Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, 
+ Simon Horman <horms@kernel.org>, Jeff Johnson <jjohnson@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, netdev@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, linux-wireless@vger.kernel.org, 
+ ath11k@lists.infradead.org, ath12k@lists.infradead.org, 
+ Bjorn Andersson <andersson@kernel.org>, 
+ Chris Lew <christopher.lew@oss.qualcomm.com>, 
+ Deepak Kumar Singh <deepak.singh@oss.qualcomm.com>, 
+ Raj Kumar Bhagat <raj.bhagat@oss.qualcomm.com>, 
+ Juha-Matti Tilli <juha-matti.tilli@iki.fi>, 
+ Jeff Hugo <jeff.hugo@oss.qualcomm.com>, 
+ Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=openpgp-sha256; l=5742;
+ i=manivannan.sadhasivam@oss.qualcomm.com; h=from:subject:message-id;
+ bh=SBSrI+qlLmBFZ+dE+vFKRI0DdSkol2nyOzoeOTlj9jg=;
+ b=owEBbQGS/pANAwAKAVWfEeb+kc71AcsmYgBqsoWpbuOyoQKV02+GoxJrFYPlSGJH68jOs7wMr
+ CDEg/wp0rSJATMEAAEKAB0WIQRnpUMqgUjL2KRYJ5dVnxHm/pHO9QUCarKFqQAKCRBVnxHm/pHO
+ 9RcNB/9Imo5XHaW0CoxAo1arRjZkVC9Pi5NdmD5TJnnRtZtHPqJukKAgUq+T1QMDJODb9T4jQRI
+ l1HYvNzc0DY5/RtMUbmyhv8150KdgqfHDZgSL5laDLOLSitqRXvR+Xu9PeND9KOdMb75JY1H7cn
+ ix7DaTI9v/5ViUY39bUs3cpiLeEaSBRxU68SJieioxEzQBp4PqX6Se/r7FC+qBHZNpesj+l+ZWJ
+ Nuc15UcBm3gzpQ05Nr3X3T9nQc06uVuyyOYxBlL9Tt4uxtVnDRmNmAg4/tugcW/dTC2EauUEuNI
+ 4u72wA8v1E398uOzTvT0FwX1FyGRVXBYLyIPMS6fzA/4EkBs
+X-Developer-Key: i=manivannan.sadhasivam@oss.qualcomm.com; a=openpgp;
+ fpr=C668AEC3C3188E4C611465E7488550E901166008
+X-Endpoint-Received: by B4 Relay for
+ manivannan.sadhasivam@oss.qualcomm.com/default with auth_id=461
+X-Original-From: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
+Reply-To: manivannan.sadhasivam@oss.qualcomm.com
 
-On 9/21/26 5:59 PM, Brian Masney wrote:
-> Hi Alex,
-> 
-> On Fri, Sep 18, 2026 at 11:52:32AM -0500, Alex Elder wrote:
->> Define a new platform driver that manages clock and reset signals
->> within the TC9564 SoC.  There are 21 clocks, which can only be
->> enabled and disabled, as well as 13 reset signals.
->>
->> Two registers manage the state of the clocks and two others manage
->> the state of the resets.  The registers are accessed via a regmap
->> supplied by a system controller, which coordinates access to a
->> region of memory that will be shared with another driver.
->>
->> Access to the memory region is provided via a BAR on a PCIe endpoint
->> function embedded in the TC9564 SoC.  For that reason, neither the
->> PCIe clock nor PCIe reset can be manipulated by this driver (they
->> are assumed always on and deasserted, respectively).
->>
->> Similarly, control is not available for the I2C clock and reset,
->> because the PCIe subsystem on the TC9564 relies on I2C
->>
->> Co-developed-by: Daniel Thompson <daniel@riscstar.com>
->> Signed-off-by: Daniel Thompson <daniel@riscstar.com>
->> Signed-off-by: Alex Elder <elder@riscstar.com>
->> ---
->>   MAINTAINERS              |   1 +
->>   drivers/clk/Kconfig      |  11 ++
->>   drivers/clk/Makefile     |   1 +
->>   drivers/clk/clk-tc9564.c | 366 +++++++++++++++++++++++++++++++++++++++
->>   4 files changed, 379 insertions(+)
->>   create mode 100644 drivers/clk/clk-tc9564.c
->>
->> diff --git a/MAINTAINERS b/MAINTAINERS
->> index 66d0e7e65adcb..39346a5cd9a7f 100644
->> --- a/MAINTAINERS
->> +++ b/MAINTAINERS
->> @@ -27675,6 +27675,7 @@ M:	Alex Elder <elder@kernel.org>
->>   M:	Daniel Thompson <danielt@kernel.org>
->>   S:	Maintained
->>   F:	Documentation/devicetree/bindings/clock/toshiba,tc9564-clock.yaml
->> +F:	drivers/clk/clk-tc9564.c
->>   F:	include/dt-bindings/clock/toshiba,tc9564.h
->>   
->>   TOSHIBA TC9564 PCI DRIVER
->> diff --git a/drivers/clk/Kconfig b/drivers/clk/Kconfig
->> index f9592fd9ec2bb..50efa10d48450 100644
->> --- a/drivers/clk/Kconfig
->> +++ b/drivers/clk/Kconfig
->> @@ -292,6 +292,17 @@ config COMMON_CLK_S2MPS11
->>   	  clock. These multi-function devices have two (S2MPS14) or three
->>   	  (S2MPS11, S5M8767) fixed-rate oscillators, clocked at 32KHz each.
->>   
->> +config COMMON_CLK_TC9564
->> +	tristate "Toshiba TC9564 clock support"
->> +	depends on TC9564_PCI
-> 
-> select RESET_CONTROLLER
+From: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
 
-Thank you.  The reset and clock drivers were previously separate
-and the reset only became available if RESET_CONTROLLER was enabled.
-Combining them means I need this.  I will add it.
+Currently, QRTR identifies each remote node by the value of the
+'src_node_id' field in the received packet and uses the node id as the key
+to store the node to the internal 'qrtr_nodes' radix tree.
 
-I also need to select MFD_SYSCON to get syscon_node_to_regmap()
-(or perhaps something similar, depending on the answers to my
-questions about the proper way to define the syscon).
-> 
->> +	default m
-> 
-> default n
+But this approach comes with a limitation. When more than one remote node
+share the same id, then QRTR can only add the first node to the radix tree
+and has to drop the successive nodes with the same node id as the 'key' in
+radix tree has to be unique. This prevents connecting identical Qcom PCIe
+WLAN devices to a single host at the same time.
 
-This depends on TC9564_PCI, and if TC9564_PCI is enabled I would
-like this to (automatically) be available (at least as a module).
+To fix this limitation, allow the host QRTR to use the node id (nid)
+received from the endpoint driver during qrtr_endpoint_register() as the
+unique node id and use it as the 'key' for the internal radix tree. Also,
+store the received 'src_id' in a new 'qrtr_node->ep_nid' field and replace
+the 'ep_nid' with the unique 'nid' in the QRTR control packets if both
+differ i.e., an endpoint driver has passed a unique 'nid' during
+qrtr_endpoint_register(). To maintain symmetry, replace the 'nid' with the
+'ep_nid' while sending the packet back to the remote node if both differ.
 
-Why do you recommend "n"?
+Currently, all QRTR endpoint drivers pass 'QRTR_EP_NID_AUTO' as the 'nid'
+during qrtr_endpoint_register(). So 'ep_nid' and 'nid' are same and the
+functionality is not changed.
 
->> +	help
->> +	  This enables support for the clock and reset controller embedded
->> +	  in the Toshiba TC9564 (and Qualcomm QPS615) SoC.  The state of
->> +	  clock and reset lines is controlled by MMIO to a region managed
->> +	  by a system controller; this ensures access to the region is
->> +	  coordinated between this and other drivers.
-> 
-> Rather than 'other drivers', outline specifically which other drivers.
+Signed-off-by: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
+---
+ net/qrtr/af_qrtr.c | 62 ++++++++++++++++++++++++++++++++++++++++++++++++------
+ 1 file changed, 55 insertions(+), 7 deletions(-)
 
-I was intentionally vague at this point because the one other driver
-has not yet gone out for upstream review for this iteration of the
-code.  But I do agree with you, so I'll change this to say:
+diff --git a/net/qrtr/af_qrtr.c b/net/qrtr/af_qrtr.c
+index 78347c937af7..6387b85a7a2c 100644
+--- a/net/qrtr/af_qrtr.c
++++ b/net/qrtr/af_qrtr.c
+@@ -118,7 +118,8 @@ static DEFINE_XARRAY_ALLOC(qrtr_ports);
+  * @ep_lock: lock for endpoint management and callbacks
+  * @ep: endpoint
+  * @ref: reference count for node
+- * @nid: node id
++ * @nid: node id assigned by the host QRTR
++ * @ep_nid: endpoint's own node id as received
+  * @qrtr_tx_flow: xarray of qrtr_tx_flow, keyed by node << 32 | port
+  * @qrtr_tx_lock: lock for qrtr_tx_flow inserts
+  * @hello_sent: hello packet send successful
+@@ -131,6 +132,7 @@ struct qrtr_node {
+ 	struct qrtr_endpoint *ep;
+ 	struct kref ref;
+ 	unsigned int nid;
++	unsigned int ep_nid;
+ 
+ 	struct xarray qrtr_tx_flow;
+ 	struct mutex qrtr_tx_lock; /* for qrtr_tx_flow */
+@@ -347,6 +349,7 @@ static int qrtr_node_enqueue(struct qrtr_node *node, struct sk_buff *skb,
+ {
+ 	struct qrtr_hdr_v1 *hdr;
+ 	size_t len = skb->len;
++	unsigned int dst_node;
+ 	int rc, confirm_rx;
+ 
+ 	mutex_lock(&node->ep_lock);
+@@ -369,10 +372,14 @@ static int qrtr_node_enqueue(struct qrtr_node *node, struct sk_buff *skb,
+ 	hdr->src_node_id = cpu_to_le32(from->sq_node);
+ 	hdr->src_port_id = cpu_to_le32(from->sq_port);
+ 	if (to->sq_port == QRTR_PORT_CTRL) {
+-		hdr->dst_node_id = cpu_to_le32(READ_ONCE(node->nid));
++		hdr->dst_node_id = cpu_to_le32(READ_ONCE(node->ep_nid));
+ 		hdr->dst_port_id = cpu_to_le32(QRTR_PORT_CTRL);
+ 	} else {
+-		hdr->dst_node_id = cpu_to_le32(to->sq_node);
++		/* Put back the endpoint's own node id */
++		dst_node = to->sq_node;
++		if (dst_node == READ_ONCE(node->nid))
++			dst_node = node->ep_nid;
++		hdr->dst_node_id = cpu_to_le32(dst_node);
+ 		hdr->dst_port_id = cpu_to_le32(to->sq_port);
+ 	}
+ 
+@@ -441,6 +448,32 @@ static void qrtr_node_assign(struct qrtr_node *node, unsigned int nid)
+ 	spin_unlock_irqrestore(&qrtr_nodes_lock, flags);
+ }
+ 
++/* Replace the node id in the control packet with 'node->nid', if both are
++ * different.
++ */
++static void qrtr_node_rewrite_ctrl(struct qrtr_node *node, unsigned int type,
++				   struct sk_buff *skb)
++{
++	struct qrtr_ctrl_pkt *pkt;
++	__le32 *nid;
++
++	if (node->nid == node->ep_nid)
++		return;
++
++	if (skb->len < sizeof(*pkt))
++		return;
++
++	pkt = (struct qrtr_ctrl_pkt *)skb->data;
++	if (type == QRTR_TYPE_DEL_CLIENT || type == QRTR_TYPE_RESUME_TX)
++		nid = &pkt->client.node;
++	else
++		nid = &pkt->server.node;
++
++	/* Rewrite only the endpoint's node id, not those of bridged nodes */
++	if (le32_to_cpu(*nid) == node->ep_nid)
++		*nid = cpu_to_le32(node->nid);
++}
++
+ /**
+  * qrtr_endpoint_post() - post incoming data
+  * @ep: endpoint handle
+@@ -531,16 +564,30 @@ int qrtr_endpoint_post(struct qrtr_endpoint *ep, const void *data, size_t len)
+ 
+ 	skb_put_data(skb, data + hdrlen, size);
+ 
+-	qrtr_node_assign(node, cb->src_node);
++	if (node->ep_nid == QRTR_EP_NID_AUTO)
++		WRITE_ONCE(node->ep_nid, cb->src_node);
++
++	if (node->nid == QRTR_EP_NID_AUTO || node->nid == cb->src_node)
++		qrtr_node_assign(node, cb->src_node);
+ 
+ 	if (cb->type == QRTR_TYPE_NEW_SERVER) {
+ 		/* Remote node endpoint can bridge other distant nodes */
+-		const struct qrtr_ctrl_pkt *pkt;
++		const struct qrtr_ctrl_pkt *pkt = data + hdrlen;
++		unsigned int server_node = le32_to_cpu(pkt->server.node);
+ 
+-		pkt = data + hdrlen;
+-		qrtr_node_assign(node, le32_to_cpu(pkt->server.node));
++		if (server_node != node->ep_nid)
++			qrtr_node_assign(node, server_node);
+ 	}
+ 
++	if (cb->src_node == node->ep_nid)
++		cb->src_node = node->nid;
++
++	if (cb->type == QRTR_TYPE_NEW_SERVER ||
++	    cb->type == QRTR_TYPE_DEL_SERVER ||
++	    cb->type == QRTR_TYPE_DEL_CLIENT ||
++	    cb->type == QRTR_TYPE_RESUME_TX)
++		qrtr_node_rewrite_ctrl(node, cb->type, skb);
++
+ 	if (cb->type == QRTR_TYPE_RESUME_TX) {
+ 		qrtr_tx_resume(node, skb);
+ 	} else {
+@@ -646,6 +693,7 @@ int qrtr_endpoint_register(struct qrtr_endpoint *ep, unsigned int nid)
+ 	mutex_init(&node->ep_lock);
+ 	skb_queue_head_init(&node->rx_queue);
+ 	node->nid = QRTR_EP_NID_AUTO;
++	node->ep_nid = QRTR_EP_NID_AUTO;
+ 	node->ep = ep;
+ 
+ 	node->hello_sent = false;
 
-    ... between this and the XGMAC (stmmac) driver.
+-- 
+2.43.0
 
-Then it will be correct without modification once that driver goes
-out for review.  Is that better, or do you suggest something else?
-
->> +
->>   config CLK_TWL
->>   	tristate "Clock driver for the TWL PMIC family"
->>   	depends on TWL4030_CORE
->> diff --git a/drivers/clk/Makefile b/drivers/clk/Makefile
->> index b18af485d7f03..a98ea8ff92066 100644
->> --- a/drivers/clk/Makefile
->> +++ b/drivers/clk/Makefile
->> @@ -110,6 +110,7 @@ obj-$(CONFIG_COMMON_CLK_SI570)		+= clk-si570.o
->>   obj-$(CONFIG_COMMON_CLK_SP7021)		+= clk-sp7021.o
->>   obj-$(CONFIG_COMMON_CLK_STM32F)		+= clk-stm32f4.o
->>   obj-$(CONFIG_COMMON_CLK_STM32H7)	+= clk-stm32h7.o
->> +obj-$(CONFIG_COMMON_CLK_TC9564)		+= clk-tc9564.o
->>   obj-$(CONFIG_COMMON_CLK_TPS68470)      += clk-tps68470.o
->>   obj-$(CONFIG_CLK_TWL6040)		+= clk-twl6040.o
->>   obj-$(CONFIG_CLK_TWL)			+= clk-twl.o
->> diff --git a/drivers/clk/clk-tc9564.c b/drivers/clk/clk-tc9564.c
->> new file mode 100644
->> index 0000000000000..4f900bc8994a7
->> --- /dev/null
->> +++ b/drivers/clk/clk-tc9564.c
->> @@ -0,0 +1,366 @@
->> +// SPDX-License-Identifier: GPL-2.0-only
->> +
->> +/*
->> + * Copyright (C) 2026 by RISCstar Solutions Corporation.  All rights reserved.
->> + */
->> +
->> +#include <linux/bits.h>
->> +#include <linux/clk-provider.h>
->> +#include <linux/mfd/syscon.h>
->> +#include <linux/mod_devicetable.h>
-> 
-> Uwe already pointed out removing this.
-
-Yes, done.
-
-> 
->> +#include <linux/module.h>
->> +#include <linux/platform_device.h>
->> +#include <linux/regmap.h>
->> +#include <linux/reset-controller.h>
->> +
->> +#include <dt-bindings/clock/toshiba,tc9564.h>
->> +
->> +#define CLK_CTRL0_OFFSET	0x1004
->> +#define RST_CTRL0_OFFSET	0x1008
->> +#define CLK_CTRL1_OFFSET	0x100c
->> +#define RST_CTRL1_OFFSET	0x1010
->> +
->> +struct tc9564_clock_init {
->> +	const char *name;	/* NULL means unused entry */
->> +	u32 offset;
->> +	u32 mask;
->> +};
->> +
->> +struct tc9564_clock {
->> +	struct clk_hw hw;
->> +	u32 which;
->> +	u32 offset;		/* CLK_CTRL0_OFFSET or CLK_CTRL1_OFFSET */
->> +	u32 mask;		/* Zero means undefined clock */
->> +};
->> +
->> +struct tc9564_reset {
->> +	u32 offset;		/* RST_CTRL0_OFFSET or RST_CTRL1_OFFSET */
->> +	u32 mask;		/* Zero means undefined reset */
->> +};
->> +
->> +struct tc9564_clocks {
->> +	struct device *dev;
->> +	struct regmap *regmap;
->> +	struct reset_controller_dev rcdev;
->> +	size_t clock_count;
->> +	struct tc9564_clock clocks[] __counted_by(clock_count);
->> +};
->> +
->> +#define TC9564_CLOCK_INIT0(_name, _bit)	__TC9564_CLOCK_INIT(_name, 0, _bit)
->> +#define TC9564_CLOCK_INIT1(_name, _bit)	__TC9564_CLOCK_INIT(_name, 1, _bit)
->> +
->> +#define __TC9564_CLOCK_INIT(_name, _reg, _bit)		\
->> +	[CLOCK_##_name] = {				\
->> +		.name	= #_name,			\
->> +		.offset	= CLK_CTRL ## _reg ## _OFFSET,	\
->> +		.mask	= BIT(_bit),			\
->> +	}
->> +
->> +#define TC9564_RESET_INIT0(_name, _bit)	__TC9564_RESET_INIT(_name, 0, _bit)
->> +#define TC9564_RESET_INIT1(_name, _bit)	__TC9564_RESET_INIT(_name, 1, _bit)
->> +
->> +#define __TC9564_RESET_INIT(_name, _reg, _bit)		\
->> +	[RESET_##_name] = {				\
->> +		.offset	= RST_CTRL ## _reg ## _OFFSET,	\
->> +		.mask = BIT(_bit),			\
->> +	}
->> +
->> +static const struct tc9564_clock_init tc9564_clock_init[] = {
->> +	TC9564_CLOCK_INIT0(MCU, 0),
->> +	TC9564_CLOCK_INIT0(INTC, 4),
->> +	/* TC9564_CLOCK_INIT0(PCIE, 9), */
->> +	/* TC9564_CLOCK_INIT0(I2C, 12), */
-> 
-> A comment would be useful here to outline why these are commented out.
-> Is the PCIE one comment out because of what's outlined in the commit
-> message?
-
-Yes, that is why.  We are downstream of PCIe, and PCIe in this
-case depends on I2C.  So we don't want to mess with these two
-clocks or their reset counterparts.
-
-I only provide this for the benefit of documentation.  If someone
-happens to see bit 9 set in this register, it means the PCIe clock
-is enabled.
-
-Anyway, others have suggested simply removing these comments.
-So I'll do what you suggest, but I'm interested to know whether
-you would favor just deleting them instead.
-> 
->> +	TC9564_CLOCK_INIT0(SRAM, 13),
->> +	TC9564_CLOCK_INIT0(UART, 16),
->> +	TC9564_CLOCK_INIT0(MSIGEN, 18),
->> +	TC9564_CLOCK_INIT0(PLL, 24),
->> +	TC9564_CLOCK_INIT0(SGMII, 25),
->> +	TC9564_CLOCK_INIT0(REFCLKO, 26),
-
-. . .
-
->> +static const struct reset_control_ops tc9564_reset_control_ops = {
->> +	.assert		= tc9564_reset_assert,
->> +	.deassert	= tc9564_reset_deassert,
-> 
-> I'd rather not have the extra spaces because sometimes these get out of
-> line with new members that need more space. Also tc9564_clk_ops above
-> doesn't have the extra spaces.
-
-That's OK with me.  I normally align assignments like this for
-readability, but it's obviously an arbitrary stylistic choice.
-I'll just use one space, no alignment (just as the clk_ops do
-above).  I'll do the same in the platform driver structure
-assignments.
-> 
->> +};
->> +
->> +static void tc9564_reset_assert_all(struct tc9564_clocks *clocks)
->> +{
->> +	for (u32 id = 0; id < TC9564_RESET_COUNT; id++)
->> +		if (tc9564_reset[id].mask)
->> +			tc9564_reset_manage(&clocks->rcdev, id, true);
->> +}
->> +
->> +static int tc9564_reset_init(struct tc9564_clocks *clocks)
->> +{
->> +	struct reset_controller_dev *rcdev = &clocks->rcdev;
->> +
->> +	rcdev->ops = &tc9564_reset_control_ops;
->> +	rcdev->owner = THIS_MODULE;
->> +	rcdev->dev = clocks->dev;
->> +	rcdev->of_node = dev_of_node(clocks->dev);
->> +	rcdev->nr_resets = TC9564_RESET_COUNT;
->> +
->> +	return devm_reset_controller_register(clocks->dev, rcdev);
->> +}
->> +
->> +static int tc9564_clk_probe(struct platform_device *pdev)
->> +{
->> +	struct device *dev = &pdev->dev;
->> +	struct tc9564_clocks *clocks;
->> +	int ret;
->> +
->> +	if (!dev_of_node(dev))
->> +		return dev_err_probe(dev, -EINVAL, "no devicetree node\n");
->> +
->> +	clocks = tc9564_clk_init(dev);
->> +	if (IS_ERR(clocks))
->> +		return dev_err_probe(dev, PTR_ERR(clocks),
->> +				     "failed to initialize clocks\n");
->> +
->> +	ret = tc9564_reset_init(clocks);
->> +	if (ret)
->> +		return dev_err_probe(dev, ret, "failed to initialize resets\n");
->> +
->> +	/* Force all resets to be initially asserted */
->> +	tc9564_reset_assert_all(clocks);
->> +
->> +	/* Force all clocks to be initially disabled */
->> +	tc9564_clock_disable_all(clocks);
->> +
->> +	platform_set_drvdata(pdev, clocks);
->> +
->> +	return 0;
->> +}
->> +
->> +static void tc9564_clk_remove(struct platform_device *pdev)
->> +{
->> +	struct tc9564_clocks *clocks = platform_get_drvdata(pdev);
->> +
->> +	/* Leave all resets to be deasserted when done */
->> +	tc9564_reset_assert_all(clocks);
-> 
-> The comment says deasserted but the code calls assert_all.
-
-Oops.  Will fix.  Thank you very much for your review Brian.
-
-					-Alex
-
-> 
-> Brian
-> 
-> 
->> +
->> +	/* Leave all clocks disabled when done */
->> +	tc9564_clock_disable_all(clocks);
->> +}
->> +
->> +static const struct of_device_id tc9564_clk_ids[] = {
->> +	{ .compatible = "toshiba,tc9564-clock" },
->> +	{ },
->> +};
->> +MODULE_DEVICE_TABLE(of, tc9564_clk_ids);
->> +
->> +static struct platform_driver tc9564_clk_driver = {
->> +	.probe	= tc9564_clk_probe,
->> +	.remove	= tc9564_clk_remove,
->> +	.driver	= {
->> +		.name		= KBUILD_MODNAME,
->> +		.of_match_table = tc9564_clk_ids,
->> +		.probe_type	= PROBE_PREFER_ASYNCHRONOUS,
->> +	},
->> +};
->> +module_platform_driver(tc9564_clk_driver);
->> +
->> +MODULE_DESCRIPTION("Toshiba TC9564 Clock and Reset Driver");
->> +MODULE_LICENSE("GPL");
->> -- 
->> 2.53.0
->>
-> 
 
