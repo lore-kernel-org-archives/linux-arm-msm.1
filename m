@@ -1,161 +1,154 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1D4B13F210C
-	for <linux-arm-msm@vger.kernel.org>; Tue, 22 Sep 2026 04:34:00 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4E3C4276050;
+	Tue, 22 Sep 2026 05:05:51 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790051644; cv=none; b=pcGCO/U1zI2x4tZgyrbzKN8lTe6jy0VqjXveX7A2635oCI53PLviYIKj0haB9QDmINqGnvAZJV6CxG9cMtgJIGiYtzvGUHmXu3JVPRdRhyzJ7X1cIiKPkMNW6cZbkqMrcNuBGuNrWf/ujh49sW2f74zDX9oPEFT/g466n+KQ4gA=
+	t=1790053552; cv=none; b=s2cn4sydN52WNn0ZYbidmT/fPNnHbs+WrQdBFSI/RfuKG8vU83jffghemiyexXc9aG5mYFRHl/H+U+CThBVHTRGpXnm2TTcdW7wuCJgYnAVPkG+c8TKuF+QKhlxIHPahWlzA29H2DeCf0cv0eCK0z1k+7dIydfk4yl6V+3lQ/aA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790051644; c=relaxed/simple;
-	bh=WVV8y+rcjNFnB4LguK2GR1/TdwXx7ITLp4kAjYB9HTg=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=hKkZts5MNsUvkgiMKa7AXLd5QtUAMQiqaI3kM6X4PhZd8herX5bHuFXJg9D5hzl/DtX/ro9F78b/XVAucYo4Kl0bAI0IspxAQA5TNWm+X5g2fP2bfezJjonPNWpTsVMJw+1WjaRhaMBs6Tudgp09x4ZOsmGSAOmEgPddZGZmtbk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=gieDcc6m; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=M8QfadV6; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1790053552; c=relaxed/simple;
+	bh=SSugme39AaT4a7tjags5rgJx2pgXI2oH0edPTiycef4=;
+	h=Subject:From:To:Cc:Date:Message-ID:In-Reply-To:References:
+	 Content-Type:MIME-Version; b=fi99Ax4Chnc2AAZ/Eur5oWtkrHqWMuYSiqyu0+OXuBxW0MLle8eXZHqUOjpJC9smILMJxqIdTRKik9lYAW+CAWr7mB8dV/9K5GBx7YX8L9QSpCD/2tbY3PYff7PetRMLvw9aFrLU3X++1NLUuvs12dQQoEUnAU0Ymfl3ffgswh4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=cxzkTsg6; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="gieDcc6m";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="M8QfadV6"
-Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68M0F5eU3186661
-	for <linux-arm-msm@vger.kernel.org>; Tue, 22 Sep 2026 04:33:59 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	g2ZBm74Yk/Koo7aS1h6Sw1CThaL6RiYUvVn32kq3szE=; b=gieDcc6mprH9oWzA
-	QJEYFa/Xl61jZDFJd+deo8QUOYCXKpXe2AtVLQ4uPQYt4LUqUZufnWvwh/Y56WSC
-	WoYihXgTYVpQZYqL4sypS+QLC+uiKHcgdV3zTA5t/giGF9ym7qAWqpQ7yFC6ZYxu
-	llLyB1e3n7f8lAlncbkz0sgGuLNlgGDIJWMBZxnb9AiNmxYm5wXfAEObPzeIN4ma
-	8Y6RsONpGiFh5//d9TMenGvctA+T8YDDlw3IlwO4KylxBcYkA5AAY32ZVM/boVgG
-	BDe+k22z6ZFNS1v87izVyEIeDEqERM14y/3YEqjXfitHbGK7iH8GJc3snMd9hB4K
-	1uY1CQ==
-Received: from mail-pg1-f198.google.com (mail-pg1-f198.google.com [209.85.215.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gueybgsa3-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 22 Sep 2026 04:33:59 +0000 (GMT)
-Received: by mail-pg1-f198.google.com with SMTP id 41be03b00d2f7-cc44d708055so1392660a12.0
-        for <linux-arm-msm@vger.kernel.org>; Mon, 21 Sep 2026 21:33:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1790051638; x=1790656438; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=g2ZBm74Yk/Koo7aS1h6Sw1CThaL6RiYUvVn32kq3szE=;
-        b=M8QfadV64sEteaLZkZEJzOf7w3b4jNMOvp9cFVtrZZxLAsfJsCaX3e6hJ+BMNLWoKk
-         hU4szbm4RPrlb78LC57Y9IcnsRqpqA3R6O9rwZhAj0sch/1zbS03ZUD4Kibl38H2CD8N
-         6eFzaAh2VOdOy3WHzMulQx8JlIuk5PEpdFo8lejsBTimG1UpUy8P3uK9OC+nygSlV3VA
-         fEtXgr+j4OcxopvBwG7TYzreJaD24Cbdg3wTHmxDRGyL/LNLeDbTWBVMmYANTETpd8Ii
-         aiMN/CajCADNvwLmY/+VIb8APjyWHy3+2RstIwBBfNjk8HPTMbooTZyIELyUCKNF+6EA
-         yjTw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790051638; x=1790656438;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=g2ZBm74Yk/Koo7aS1h6Sw1CThaL6RiYUvVn32kq3szE=;
-        b=iuzBa7KRjYOjdBM6IUQn4zXXfQXYVYkQejksetX+IpKR2m5/U9uKlXpA8EHM/IIrbZ
-         KIxHqYP8J70NEC3yaR6Y28Wc1ECf0iribEY8s62ZPLs6Zzl9sGkwmPxB3uPfIwLfNuWA
-         y3p4xChsSo3pGvEQIqTp6ZDrKD0I6r7g1+4XvmhRx0XlkIa7BILl+Be/dngYalaKmJ+s
-         p+n/meTSNvgetjE2k2PsvTtfNOHKIoCEUqmqBQKH7P5D3SKAaaHEIE9dZhOamjl2E0ft
-         8zKLIdCCW7/9aDMLP6VdhCd9z25agtX2N1xLC2Ke9yh3OtCKc2P7NlTGGMcCGxgMBpZx
-         +j0Q==
-X-Gm-Message-State: AFuF++lOK7jNsYnZWtrHz1jsIOZHW3k7RpLSHMK7/NPcU1SZcFllpj0x
-	jRqwwmuP6ObBjXPl3oIqm+/bMBYLeWOm3AOC58v2xUiNJo/fKRiMwm+PjPhnjpzpg7ZNHkTQy7K
-	0s1/SRPROJmXWt9nm2XtmQiTCCE1zlq9CLRaPWUhoZxFkTiwd0OuBLo1iu5iqqWUPQbLO
-X-Gm-Gg: AYBFou10mw0Qe3dfxLuRzD+HaPiOdnu5QxqHx7VwRkaSmLsykHATSsySIe9DIVoydbT
-	3ddlsiC7vXp1l2fjsBRP7Bts8Z0DTZBc/5FVmbGnYnfPv77Pfd89ClntSop6rQIYoC8AiL3CpL0
-	pZ7CyFtTMp6r3EdRdD+FRfUy6BfOGMwnYIagQchO0rYNtmvnweLRKau26m2hg2Mkm/zhsDWVaM1
-	cIVG80ylLeSI6SdsNMXKUyZJ8aEGRSP4rS/zkeKQ+hOW1tqIVwIlNn63xcpgPFOi3z4yx0oy9UO
-	cmXRwb0Z62zywL+R1Ld4+yNlwYlfUFBVgorikroDipP+qWfCuRXeKtarElIV/FqndTO01fWB+fE
-	x3/FfkLMqqL9ATaHN+khNUCHkgX9D0myVLHv2gWpfFHUbyZmtthQonBzfxxlfOO3LJ1XcNA4LAz
-	i7DRoVSi3LfLN031B5DxXaah0ApGL1C9npQM8=
-X-Received: by 2002:a17:903:124e:b0:2dd:c100:313c with SMTP id d9443c01a7336-2ddc1003224mr123612705ad.56.1790051638387;
-        Mon, 21 Sep 2026 21:33:58 -0700 (PDT)
-X-Received: by 2002:a17:903:124e:b0:2dd:c100:313c with SMTP id d9443c01a7336-2ddc1003224mr123612265ad.56.1790051637903;
-        Mon, 21 Sep 2026 21:33:57 -0700 (PDT)
-Received: from hu-kathirav-blr.qualcomm.com (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-33e6129ad40sm1906375eec.12.2026.09.21.21.33.53
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 21 Sep 2026 21:33:57 -0700 (PDT)
-From: Kathiravan Thirumoorthy <kathiravan.thirumoorthy@oss.qualcomm.com>
-Date: Tue, 22 Sep 2026 10:03:16 +0530
-Subject: [PATCH v2 3/3] cpufreq: qcom-nvmem: add support for QCF3211 &
- IPQ5211
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="cxzkTsg6"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id CF2E81F000FF;
+	Tue, 22 Sep 2026 05:05:49 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1790053550;
+	bh=GJG6I5Clw5SCk/1VpkRKC4P7mxnCryzaJv4G7QIe0/Q=;
+	h=Subject:From:To:Cc:Date:In-Reply-To:References;
+	b=cxzkTsg6YpwwvdbpuJvSO/ID7WPyYAPxPa9VxLV/seFyHqIQcuYktPfzIZWv3Pn/r
+	 90tVtBDRiq3GJGXjb1/hB65AgHECqvX1kq0ukuddED6Rx+plCtncZ0sz7uLqvrPlXx
+	 vyOjEGpXaKqPZ61meUlQ5uUydsTCKMA6Ltzr0rpDamWSsy14HARnnb1cwOQ/0QMQnL
+	 zOky9+H9ruIRu0xY9YD5vkCA02BYOW63W/3qwbb02+mypTtgNB4nYjsSgKR1TPwTr1
+	 Q3TVsEt28jmOfWRA5KdOa5qh3p25iXvRWMyYc5ZQiuHb5Zy0+gyQJW0FofpPoraiCa
+	 +vdBYJSdico/w==
+Subject:
+ Re: [PATCH net v2 1/3] net: stmmac: propagate platform mac_finish errors
+From: netdev-bot+sashiko@kernel.org
+To: tom.karpiniec@outlook.com
+Cc: netdev@vger.kernel.org, mohd.anwar@oss.qualcomm.com,
+ maxime.chevallier@bootlin.com, mcoquelin.stm32@gmail.com,
+ alexandre.torgue@foss.st.com, linux@armlinux.org.uk, andrew+netdev@lunn.ch,
+ davem@davemloft.net, edumazet@google.com, kuba@kernel.org, pabeni@redhat.com,
+ yong.liang.choong@linux.intel.com, brgl@kernel.org, coiaprant@gmail.com,
+ linux-arm-msm@vger.kernel.org, linux-stm32@st-md-mailman.stormreply.com,
+ linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org
+Date: Tue, 22 Sep 2026 05:05:49 +0000
+Message-ID: <179005354933.2160803.8939564905853996739@kernel.org>
+In-Reply-To: =?utf-8?q?=3CSJ2PR11MB8401FFBBECB8FBBA9C002134E4872=40SJ2PR11MB?=
+ =?utf-8?q?8401=2Enamprd11=2Eprod=2Eoutlook=2Ecom=3E?=
+References: =?utf-8?q?=3CSJ2PR11MB8401FFBBECB8FBBA9C002134E4872=40SJ2PR11MB8?=
+ =?utf-8?q?401=2Enamprd11=2Eprod=2Eoutlook=2Ecom=3E?=
+X-sashiko-severity: High
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260922-ipq52xx_new_ids-v2-3-4b1a0f3d04b2@oss.qualcomm.com>
-References: <20260922-ipq52xx_new_ids-v2-0-4b1a0f3d04b2@oss.qualcomm.com>
-In-Reply-To: <20260922-ipq52xx_new_ids-v2-0-4b1a0f3d04b2@oss.qualcomm.com>
-To: Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Abel Vesa <abelvesa@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>, Ilia Lin <ilia.lin@kernel.org>,
-        "Rafael J. Wysocki" <rafael@kernel.org>,
-        Viresh Kumar <viresh.kumar@linaro.org>
-Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org,
-        Kathiravan Thirumoorthy <kathiravan.thirumoorthy@oss.qualcomm.com>,
-        linux-pm@vger.kernel.org
-X-Mailer: b4 0.15.2
-X-Authority-Analysis: v=2.4 cv=bP6Ds/+Z c=1 sm=1 tr=0 ts=6ab20537 cx=c_pps
- a=Qgeoaf8Lrialg5Z894R3/Q==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
- a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_glEPmIy2e8OvE2BGh3C:22
- a=EUspDBNiAAAA:8 a=y-kxD1SJUMLPT1neuUsA:9 a=QEXdDO2ut3YA:10
- a=x9snwWr2DeNwDh03kgHS:22
-X-Proofpoint-ORIG-GUID: 3ov0XuqWxiQWiqeeD3YprjVveOGigDha
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTIyMDA2MiBTYWx0ZWRfX/8BVSVE2e/3s
- ry9qDH9hf5AYuQ0tJsIhkIo4Q9eLateQl6GnJiLiLNZKBcX8Qc/zvpHwL/EMCeGWIG84VmmBDlY
- h0bAa8G+zrOhIAu54XF4sh1ZbJ//JeWcxeQCIcl3f/2lU7X6pqSY4IIEELrW59nljmXHmnXQcbP
- otmgP3MBfzU48YRXAUrY8f/QlHGLlHmd/K2p5mVSxbYMo/gSYMKK9UdJRvP+v/ufAU06yAlrfse
- T8bQ7Id8POcJg159P+fBKCkSjkWdZrODj0sYyK/a6WyVSnT99P3TbvQ3BZd6S1LeJwOt2rlqS2f
- zXtv1eiX95Oq35Zp2eMAj7rNZ6N+tQBGlF+SBDOIOHaWMR5F4S6ZMy8+TTE/smaYdAqwAz2YKje
- nQFjlLwZp0uxRaGMmzpgH4LIViY1mhDPNobzTqGIO+/wru09wvpHMsAmtlKzZIx0TMaG55mFd1U
- yWMFkhO/BONr0+MKU5w==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTIyMDA2MiBTYWx0ZWRfX4nzJzrI9YfNY
- H+/sHm8vYe07NP9+ZQ4zfGJPNLvv7sq1a5ZnLZ1HPu5llnuSYmElLisMTEB2pfybpVn1B5xhxJs
- 03LF4m0q5zdDFlt7l3TnBRFX34ec3Ug=
-X-Proofpoint-GUID: 3ov0XuqWxiQWiqeeD3YprjVveOGigDha
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-21_07,2026-09-21_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 malwarescore=0 priorityscore=1501 spamscore=0 bulkscore=0
- suspectscore=0 adultscore=0 phishscore=0 lowpriorityscore=0 impostorscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609220062
 
-Like all other SoCs in IPQ5210 family, cpufreq for QCF3211 & IPQ5211 is
-also determined by the eFuse. Add support for the same.
+Thank you for your contribution! Sashiko AI review found 2 potential
+issue(s) to consider.
 
-Signed-off-by: Kathiravan Thirumoorthy <kathiravan.thirumoorthy@oss.qualcomm.com>
----
- drivers/cpufreq/qcom-cpufreq-nvmem.c | 2 ++
- 1 file changed, 2 insertions(+)
+Critical: 0 · High: 1 · Medium: 0 · Low: 1
 
-diff --git a/drivers/cpufreq/qcom-cpufreq-nvmem.c b/drivers/cpufreq/qcom-cpufreq-nvmem.c
-index efa766e98d86..9f2e6e6c0905 100644
---- a/drivers/cpufreq/qcom-cpufreq-nvmem.c
-+++ b/drivers/cpufreq/qcom-cpufreq-nvmem.c
-@@ -205,6 +205,8 @@ static int qcom_cpufreq_kryo_name_version(struct device *cpu_dev,
- 	case QCOM_ID_QCF2200:
- 	case QCOM_ID_QCF3200:
- 	case QCOM_ID_QCF3210:
-+	case QCOM_ID_QCF3211:
-+	case QCOM_ID_IPQ5211:
- 		drv->versions = (*speedbin == 0xcd) ? BIT(1) : BIT(0);
- 		break;
- 	case QCOM_ID_IPQ5424:
+If you believe none of the issues are legitimate, please reply to each
+issue of Medium severity or higher and explain why the AI is wrong.
+If any of them are legitimate and you plan to respin, please let patchwork
+know by including "pw-bot: cr" as a separate line at the end of your reply
+(one such reply per series is enough).
+
+- [High] Incomplete fix: the bug class the commit message claims to close
+  ('Phylink then treats the interface as successfully configured and can…
+- [Low] Continuation-line misalignment introduced by the patch in
+  stmmac_mac_finish(): after adding 'return ', the open parenthesis of…
+
+--
+
+net: stmmac: propagate platform mac_finish errors
+
+stmmac_mac_finish() previously dropped the return value of the platform
+mac_finish callback and always told phylink the configuration succeeded.
+The patch returns the callback result instead, keeping the zero return for
+the case where no platform callback is installed.
+
+No Link: tags present in the commit header.
+
+> diff --git a/drivers/net/ethernet/stmicro/stmmac/stmmac_main.c b/drivers/net/ethernet/stmicro/stmmac/stmmac_main.c
+> index 1fb5f804ea23..1350e92943ac 100644
+> --- a/drivers/net/ethernet/stmicro/stmmac/stmmac_main.c
+> +++ b/drivers/net/ethernet/stmicro/stmmac/stmmac_main.c
+> @@ -1048,8 +1048,8 @@ static int stmmac_mac_finish(struct phylink_config *config, unsigned int mode,
+>  	struct stmmac_priv *priv = netdev_priv(ndev);
+>  
+>  	if (priv->plat->mac_finish)
+> -		priv->plat->mac_finish(ndev, priv->plat->bsp_priv, mode,
+> -				       interface);
+> +		return priv->plat->mac_finish(ndev, priv->plat->bsp_priv, mode,
+> +					     interface);
+
+[Severity: High]
+The commit message says that without this change "Phylink then treats the
+interface as successfully configured and can report carrier even though the
+SerDes is not ready".  Does that failure mode still remain reachable on the
+Intel mGbE ports after this patch?
+
+intel_mac_finish() in dwmac-intel.c is the other in-tree mac_finish
+implementer (installed by ehl_sgmii_data(), ehl_pse0_sgmii1g_data(),
+ehl_pse1_sgmii1g_data() and adln_sgmii_phy0_data()), and it ends with:
+
+drivers/net/ethernet/stmicro/stmmac/dwmac-intel.c:intel_mac_finish() {
+	...
+	priv->plat->phy_interface = interface;
+
+	intel_serdes_powerdown(ndev, intel_priv);
+	intel_serdes_powerup(ndev, intel_priv);
+
+	return ret;
+}
+
+ret here is the value from intel_set_reg_access(), normally zero, so the
+return value of intel_serdes_powerup() is dropped.  That function has three
+timeout exits fed by serdes_status_poll():
+
+	data = serdes_status_poll(priv, serdes_phy_addr,
+				  SERDES_GSR0,
+				  SERDES_PLL_CLK,
+				  SERDES_PLL_CLK);
+
+	if (data) {
+		dev_err(priv->device, "Serdes PLL clk request timeout\n");
+		return data;
+	}
+
+with the other two covering the lane reset reflection and the
+SERDES_PWR_ST_P0 transition.  serdes_status_poll() returns -ETIMEDOUT after
+10 retries.
+
+Since intel_serdes_powerdown() has already dropped the lane to P3, a timeout
+in intel_serdes_powerup() leaves the lane out of P0 or held in reset, yet
+intel_mac_finish() returns 0.  phylink_major_config() only records a failure
+for err < 0, so phylink still sees success and can raise carrier.
+
+Would it make sense to add a companion change so that intel_mac_finish()
+returns the intel_serdes_powerup() result, so that the propagation added
+here has an effect on this platform too?
+
+[Severity: Low]
+This isn't a bug, but the continuation line no longer lines up with the open
+parenthesis after "return " was inserted: the argument list now starts one
+column further right, so "interface);" needs one more space to satisfy
+checkpatch.pl --strict ("CHECK: Alignment should match open parenthesis").
+
+>  
+>  	return 0;
+>  }
 
 -- 
-2.34.1
-
+Sashiko AI review · https://netdev-ai.bots.linux.dev/sashiko/#/patchset/SJ2PR11MB8401F5C3A075DE2A0013E063E4872%40SJ2PR11MB8401.namprd11.prod.outlook.com
