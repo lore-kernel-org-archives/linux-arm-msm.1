@@ -1,188 +1,107 @@
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.5])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 31E584DE709;
-	Tue, 22 Sep 2026 12:29:48 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.5
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 107943C2786;
+	Tue, 22 Sep 2026 12:30:05 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790080189; cv=none; b=qllAtLmaxWUaTUJPBRVpnoOT6LyAuF9168cE4kZUCkuVUUWPRzjww82ssFB9xzBlxlimVnbWwGXdewE117ZzOjYU+671uGYG+jUgzeKrJ12db28CcKX0d+U+Igfm0dGY1mwIA2uixu1tkOYE4sr2iEBprxxtmJLPBDq9a0+FYSo=
+	t=1790080207; cv=none; b=UBZvUnAmEO/sMQWRk+tYf5cmoK9+g763+oEbNzvpFy992jMfL+qU8fKIkrm7wkcLHkJU/8ihiGWbaJCjs3MxGCed+DX0JS610yz7XDoRJQ4lGvPxMJv6PZlyotZ/tlWnJWzO8IBVX7jzyQr9CBZtZIZ5B0qZE/zsOuL+RM17Ey4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790080189; c=relaxed/simple;
-	bh=KU35ZgJCdQmM7U1D/p1QeRnDbQyUHADK+Jj6A02kj9U=;
+	s=arc-20240116; t=1790080207; c=relaxed/simple;
+	bh=PqAl+HVHkrrL9FczVZg0CI96bYcpxGqt/65ScF4a6Rs=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=mrnDp7nsM+Jw2W1syFXwOe/CziJulbqnOlhF45hCfoQq5G+IfH7oMAdjKi2ld1xODDGNDBv1AKcSEHPAul8YSsqqLGYrKvghexPNpF9cTENxKO8KaM4q0g7WPya4Ol9A5ej+3oE2/ZTyH24SODHrUcrDof2qKf0zzxRQ8ib6oKI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=pass smtp.mailfrom=linux.intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=dy/2+TNL; arc=none smtp.client-ip=192.198.163.5
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.intel.com
+	 Content-Type:Content-Disposition:In-Reply-To; b=mcM/PLKwCJsC7EsXVGrM2U+6fjO1+oqTbC47qIZCUQBWFW1DOlYm1KMCapFJ/9ga/QoArmLUambFY2wMIaXuDyqNjT8RIr3s3nk4y1ZBYvq5a0W1jCnJGFe/Km74eL6pIV6CAeoUMPEexgH095PkD5lPoqbmHLFJb1H7i4LdmT0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=KXq+uf+V; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="dy/2+TNL"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1790080188; x=1821616188;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=KU35ZgJCdQmM7U1D/p1QeRnDbQyUHADK+Jj6A02kj9U=;
-  b=dy/2+TNLOcGHs0s//Tl/v0qT78EeDSKk0I2jL5k/k0cGpu/nG84DPm9y
-   K/o1ZhVlWwaF6fEAyls5emiWPHUc8xYS35VjrX+nHAwP+0jYbQGDT8n6/
-   gH4Z2fcOaMMajdwrxmzBSZ9FiRUFPDXtBQSix+9mMX8FmmzyhG1Gyxhvn
-   EaMsGjvjB/N7fdx7hC2Ec3JC5/ZtU1HF8CPwr6kCifD4nj3o4zIqWsg/O
-   NrR0Uy8VzPQwhAGCsEAZZ6WQq4YS3Vvp/weBMJl2ruUFns5gZLu5lJWmH
-   5EHNbkKV3685TofNFfKoEtpWBJY9AMlzB4PsC+X3QTvKutnAwl2vBW4S4
-   g==;
-X-CSE-ConnectionGUID: W+1Qc2b6TlqWPdjdfglkaQ==
-X-CSE-MsgGUID: PwkB5JCNQ2iYt9t231iUBA==
-X-IronPort-AV: E=McAfee;i="6800,10657,11912"; a="1180596"
-X-IronPort-AV: E=Sophos;i="6.27,116,1787036400"; 
-   d="scan'208";a="1180596"
-Received: from fmviesa004.fm.intel.com ([10.60.135.144])
-  by fmvoesa115.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 22 Sep 2026 05:29:47 -0700
-X-CSE-ConnectionGUID: 78aOL48pQDaU1E51ZgVIhA==
-X-CSE-MsgGUID: ph9qbkGmTfOIDTZaOo5JrQ==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.27,116,1787036400"; 
-   d="scan'208";a="277897976"
-Received: from black.igk.intel.com ([10.91.253.5])
-  by fmviesa004.fm.intel.com with ESMTP; 22 Sep 2026 05:29:45 -0700
-Received: by black.igk.intel.com (Postfix, from userid 1008)
-	id 265BD99; Tue, 22 Sep 2026 14:29:40 +0200 (CEST)
-Date: Tue, 22 Sep 2026 14:29:40 +0200
-From: Heikki Krogerus <heikki.krogerus@linux.intel.com>
-To: jens.glathe@oldschoolsolutions.biz
-Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-	Abel Vesa <abelvesa@kernel.org>,
-	Bjorn Andersson <andersson@kernel.org>,
-	Konrad Dybcio <konradybcio@kernel.org>,
-	Sebastian Reichel <sre@kernel.org>, linux-usb@vger.kernel.org,
-	linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-	stable@vger.kernel.org, "Dr. David Alan Gilbert" <dave@treblig.org>,
-	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-Subject: Re: [PATCH v4 3/3] usb: typec: mux: ps883x: disable USB4 on
- incomplete USB4 platforms
-Message-ID: <arJ0tBDssBQOk8jT@black.igk.intel.com>
-References: <20260922-ps883x-disable-usb4-v4-0-0a7b5b70cba3@oldschoolsolutions.biz>
- <20260922-ps883x-disable-usb4-v4-3-0a7b5b70cba3@oldschoolsolutions.biz>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="KXq+uf+V"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 295E51F000FF;
+	Tue, 22 Sep 2026 12:30:05 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1790080205;
+	bh=nodtLQld92H/w+87PrKqNfiLf6/OH3/Vw26rljGaiF4=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=KXq+uf+VbaOn4N3HiwTtMMdh26MYFiYMJg4o7+mFAljlqysCl43T6C3U5UXVdm1Q0
+	 3/Mxcfnw50/GvLr64Zk0v0X0BxrvIl8pH3hD8Sor4t5sW1+6QFNuQbwxtAiSRByQ1m
+	 ZEvpT++srYAbrRE6YJM19HNa0r/hf0D+X7Wt5NKD+Isv1natB/1NB7rQoJKokWhZAw
+	 4nxCodcIqrTk4JaATRUd82BhO32bQ6dUiVDjU8F9onDSkr4urP5D9AMwOvpAifltpq
+	 CegDTJXenU72Z8Emu1AhPtnrShrCucZmX44GRpjpFCpuSR/VPAG/OMeqYctbBSrjPr
+	 iHKhKeQzMG4gw==
+Received: by finisterre.sirena.org.uk (Postfix, from userid 1000)
+	id C58D61AC56BF; Tue, 22 Sep 2026 13:30:00 +0100 (BST)
+Date: Tue, 22 Sep 2026 14:30:00 +0200
+From: Mark Brown <broonie@kernel.org>
+To: Ajay Kumar Nandam <ajay.nandam@oss.qualcomm.com>
+Cc: Srinivas Kandagatla <srini@kernel.org>,
+	Liam Girdwood <lgirdwood@gmail.com>,
+	Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>,
+	Pierre-Louis Bossart <pierre-louis.bossart@linux.dev>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>, linux-sound@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
+	devicetree@vger.kernel.org,
+	Mohit Sharma <mohit.sharma@oss.qualcomm.com>
+Subject: Re: [PATCH v5 4/4] ASoC: qcom: q6apm-dai: add SCM buffer assignment
+ for mDSP platforms
+Message-ID: <arJ0yBdeDfjYihRd@sirena.co.uk>
+References: <20260922-vmid-v4-v5-0-e79cfd7af5b3@oss.qualcomm.com>
+ <20260922-vmid-v4-v5-4-e79cfd7af5b3@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="+qbF2DyA2aioe+8b"
+Content-Disposition: inline
+In-Reply-To: <20260922-vmid-v4-v5-4-e79cfd7af5b3@oss.qualcomm.com>
+X-Cookie: Too clever is dumb.
+
+
+--+qbF2DyA2aioe+8b
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20260922-ps883x-disable-usb4-v4-3-0a7b5b70cba3@oldschoolsolutions.biz>
 
-On Tue, Sep 22, 2026 at 02:20:21PM +0200, Jens Glathe via B4 Relay wrote:
-> From: Jens Glathe <jens.glathe@oldschoolsolutions.biz>
-> 
-> On Qualcomm X1E80100 / X1P42100 platforms using the Parade PS883x
-> retimer, hotplugging USB4-capable docks such as the Lenovo 40B0 can
-> result in working USB but no DisplayPort output.
-> 
-> When the dock negotiates USB4, the retimer receives TYPEC_MODE_USB4
-> and forwards it via typec_mux_set(). The qmp-combo PHY then selects
-> USB3-only because no classic DP altmode SVID is present in the state,
-> leaving the DP transmitter and AUX channel disabled.
-> 
-> Reject USB4 with -EOPNOTSUPP on platforms whose USB4 / DP-tunneling
-> stack is not ready yet. The Type-C stack then falls back to USB3 + DP
-> Alt Mode. DP altmode configuration continues to use the existing
-> ps883x_set() path.
-> 
-> Use a machine-compatible table rather than a DT property so the quirk
-> stays inside the kernel and can be removed later without creating ABI.
-> 
-> Assisted-by: Grok(xAI):4.6
-> Tested-by: Dr. David Alan Gilbert <dave@treblig.org>
-> Signed-off-by: Jens Glathe <jens.glathe@oldschoolsolutions.biz>
+On Tue, Sep 22, 2026 at 12:38:12AM +0530, Ajay Kumar Nandam wrote:
+> On platforms such as Qualcomm Shikra, audio is served by the modem DSP
+> (mDSP) which runs in a stage-2 protected context. Unlike ADSP targets
+> where SMMU-mapped system RAM is directly accessible, the mDSP cannot
+> reach the PCM buffers unless they are explicitly SCM-assigned to the
+> appropriate Virtual Machine IDs (VMIDs). Without this assignment, audio
+> does not function on these platforms.
 
-Acked-by: Heikki Krogerus <heikki.krogerus@linux.intel.com>
-
-> ---
->  drivers/usb/typec/mux/ps883x.c | 37 +++++++++++++++++++++++++++++++++++++
->  1 file changed, 37 insertions(+)
-> 
-> diff --git a/drivers/usb/typec/mux/ps883x.c b/drivers/usb/typec/mux/ps883x.c
-> index 15aee1d613b1a..2ec57cfe748a9 100644
-> --- a/drivers/usb/typec/mux/ps883x.c
-> +++ b/drivers/usb/typec/mux/ps883x.c
-> @@ -13,6 +13,7 @@
->  #include <linux/kernel.h>
->  #include <linux/module.h>
->  #include <linux/mutex.h>
-> +#include <linux/of.h>
->  #include <linux/regmap.h>
->  #include <linux/regulator/consumer.h>
->  #include <linux/usb/pd.h>
-> @@ -42,6 +43,22 @@
->  #define CONN_STATUS_2_TBT_UNIDIR_LSRX_ACT_LT	BIT(4)
->  #define CONN_STATUS_2_USB4_CONNECTED		BIT(7)
->  
-> +/*
-> + * Platforms where the USB4 / DP-tunneling stack is not ready yet. Rejecting
-> + * USB4 here lets the Type-C stack fall back to USB3 + DP Alt Mode instead of
-> + * negotiating USB4 and then failing to drive DisplayPort.
-> + *
-> + * This is a temporary, kernel-contained quirk (not DT ABI). Drop the entries
-> + * once the corresponding USB4 support is complete.
-> + */
-> +static const char * const ps883x_disable_usb4_compats[] = {
-> +	"qcom,x1e80100",
-> +	"qcom,x1p42100",
-> +	"qcom,hamoa",
-> +	"qcom,purwa",
-> +	NULL,
-> +};
-> +
->  struct ps883x_retimer {
->  	struct i2c_client *client;
->  	struct gpio_desc *reset_gpio;
-> @@ -63,8 +80,21 @@ struct ps883x_retimer {
->  
->  	enum typec_orientation orientation;
->  	bool in_reset;
-> +	bool disable_usb4;
->  };
->  
-> +static bool ps883x_should_disable_usb4(void)
+> +static int q6apm_dai_scm_assign(struct q6apm_dai_data *pdata,
+> +				phys_addr_t addr, size_t size)
 > +{
-> +	const char * const *compat;
-> +
-> +	for (compat = ps883x_disable_usb4_compats; *compat; compat++) {
-> +		if (of_machine_is_compatible(*compat))
-> +			return true;
-> +	}
-> +
-> +	return false;
-> +}
-> +
->  static int ps883x_enable_vregs(struct ps883x_retimer *retimer)
->  {
->  	struct device *dev = &retimer->client->dev;
-> @@ -260,6 +290,9 @@ static int ps883x_set(struct ps883x_retimer *retimer, struct typec_retimer_state
->  			cfg0 |= CONN_STATUS_0_USB_3_1_CONNECTED;
->  			break;
->  		case TYPEC_MODE_USB4:
-> +			if (retimer->disable_usb4)
-> +				return -EOPNOTSUPP;
-> +
->  			eudo_data = state->data;
->  
->  			cfg2 |= CONN_STATUS_2_USB4_CONNECTED;
-> @@ -389,6 +422,10 @@ static int ps883x_retimer_probe(struct i2c_client *client)
->  
->  	retimer->client = client;
->  
-> +	retimer->disable_usb4 = ps883x_should_disable_usb4();
-> +	if (retimer->disable_usb4)
-> +		dev_info(dev, "USB4 disabled until platform USB4 support is complete\n");
-> +
->  	mutex_init(&retimer->lock);
->  
->  	retimer->regmap = devm_regmap_init_i2c(client, &ps883x_retimer_regmap);
-> 
-> -- 
-> 2.53.0
-> 
 
--- 
-heikki
+> +	r = &pdata->scm_regions[pdata->num_scm_regions++];
+
+This needs a lock.
+
+> @@ -1021,6 +1168,7 @@ static int q6apm_dai_probe(struct platform_device *pdev)
+>  {
+
+> +			if (per_stream <= POS_BUFFER_BYTES + PAGE_SIZE) {
+> +				dev_err(dev,
+> +					"reserved-memory pool too small: %llu bytes\n",
+> +					(u64)rmem->size);
+
+%pa
+
+--+qbF2DyA2aioe+8b
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAABCgAdFiEEreZoqmdXGLWf4p/qJNaLcl1Uh9AFAmqydMcACgkQJNaLcl1U
+h9BZpgf/XmDQSosVZWiiFhI9qhxndjmrRD2T1B1eUdBZEaqFVhup2hCgJ1QWIJdz
+/6CRhZ3M6nU1p055uykGpQYT38IEyAidvXQ5iDuFUuHrJqXU9odXo/ypOr31QZRx
+HVBofsbARP31irqFg+GqJj9YawvL0idJA5JIJRmmXWU47ox/pdMGYd8tnrsSlCRq
+SS71L4hq0Du2/7Z0bo6ySxVBwSKcWvclWAF1bR828WcKdzB3/gpyv7RCCf03ilcv
+jaq624qp6aCZoItwxPqzCVKsaZAv+PMS/ildbMxQ0ohkILuTpCelpBVhdPyZBgOj
+/r3fDG0ntChBQHhpWtGJFcdsizzmAg==
+=WtKL
+-----END PGP SIGNATURE-----
+
+--+qbF2DyA2aioe+8b--
