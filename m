@@ -1,71 +1,170 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BB4B73BFE3F;
-	Tue, 22 Sep 2026 12:38:05 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B05B2542EEB
+	for <linux-arm-msm@vger.kernel.org>; Tue, 22 Sep 2026 12:39:29 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790080686; cv=none; b=oTnBhD95hzatZK/+ZQ+9ofD5N21aLC3xXkqvyYXJMlM+qEwubTgcxIcLMeLa5YPp95U1wZOxtMqa5O2AJ9MKO4rSAcorvS9/kxjnTUWQOEvE/fOZmnxNnudExRG7hlHhv5fQUzBH7duDQTzF/Z7kOQytf4zVvxw4+jY3XgMN410=
+	t=1790080771; cv=none; b=BS21hXC9dluyuNo6At373ctjZDk6JDnUuKBBqumsBqRTDrXo2Cl2Z/viZ9M9iB1on7Kdogk3sZnGqXBRh1v7Ba21p+iuuxYkhZsjnOPBnRLP/Z9bjM7ySlrp5zcOV/Fduc8hMTNEXQXJDA0E01CfUZ/mjIFFy6wyJidMW0vHUQg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790080686; c=relaxed/simple;
-	bh=2A4lC32lS8scRN7uTcTXPY1AN63fKpTgCO4ThYXNRcE=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=Q+IBeCQR9f8tZWdI+CspgfMsEoIFxVwl2qkYgvhDoIKGfDnyrmE7n0OkIVTuBoPcUuBlFNI/8NXoqRZ45eMuNcnRyxxzcvlC562YufYAy6n6awYeiv9/WEBfH6MKCf2LVnafkx4RCo0WT6/uW5gRN0LK0zCjo4Dvrotpq7LHve0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Qunjsvms; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1790080771; c=relaxed/simple;
+	bh=G1rCVG0dFYgkD70jsqhOgIwiWXW8VEW9SvwYy5t2zgI=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=Vybnbj4o9mYHoRjGQx70fBwyaBnfr9UQGwX1fm1hlTyOu+NHWlpl9nLsmOIp2DMeH7Kgzl33cUcq9sKZKHSpA5Kc4NYzXTkTlQUfyQBgV4sWRckn7mG4DAJyfrx6LMZstfrmZf5c0WUjvgogp7qAuNFYJEPOLtB0/4q6z6WUYWc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=IFgxg8uZ; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=KCiRvG4M; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Qunjsvms"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 72D391F008A0;
-	Tue, 22 Sep 2026 12:37:57 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1790080685;
-	bh=J8+ca+gcpuLslZLTovu0Gzm9+ZZc7DYd8Nmf5QdLI6A=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=QunjsvmsZuEbdErQzbL2KnbidMZvxv7Kdr8MUmJ9yOICqRkOoZvEnZfPSsjl8ZSI5
-	 3FbgUpG8pDmZTil+8Py5ZK2ZhxoBNhrICg+mV1YGtfHBma6BEhAsyXQvKqmYrBoihC
-	 a8fdsFBAsvV1n/vcWSN7wH4T5eN/GOHOUBXFAHCIrhBARSH0fcQSmCkNq6YW9aPL5n
-	 42WDBjx8nxl99BG5A6H/lS14Ua6AAQsSCgMCL5qVPFDMGmZxCXhtDvU7CZrfW7QXiq
-	 bSlhmqip2n1wxBe0xmMrf9KRDfSTtnakaWcY7CqACBiLpqNbLRuSL0RSAboXPtzXeJ
-	 e3rECrvz5iaLQ==
-Date: Tue, 22 Sep 2026 14:37:53 +0200
-From: Manivannan Sadhasivam <mani@kernel.org>
-To: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
-Cc: Bjorn Andersson <andersson@kernel.org>, 
-	Michael Turquette <mturquette@baylibre.com>, Stephen Boyd <sboyd@kernel.org>, Rob Herring <robh@kernel.org>, 
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
-	Robert Foss <rfoss@kernel.org>, Todor Tomov <todor.too@gmail.com>, 
-	Mauro Carvalho Chehab <mchehab@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>, 
-	Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>, Bryan O'Donoghue <bod@kernel.org>, 
-	Loic Poulain <loic.poulain@oss.qualcomm.com>, Vinod Koul <vkoul@kernel.org>, 
-	Neil Armstrong <neil.armstrong@linaro.org>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, 
-	Kishon Vijay Abraham I <kishon@kernel.org>, Felipe Balbi <balbi@ti.com>, linux-arm-msm@vger.kernel.org, 
-	linux-clk@vger.kernel.org, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	linux-media@vger.kernel.org, linux-phy@lists.infradead.org, 
-	Krzysztof Kozlowski <krzk@kernel.org>
-Subject: Re: [PATCH v20 4/6] phy: core: Add missing kerneldoc colon in two
- locations
-Message-ID: <qjmvybdgxf7vpxhiqogzgwgaiz3klheil33lxohgrlbjaexm74@wvjxm6clvmfe>
-References: <20260918-b4-linux-next-25-03-13-dtsi-x1e80100-camss-v20-0-dc244e124e71@linaro.org>
- <20260918-b4-linux-next-25-03-13-dtsi-x1e80100-camss-v20-4-dc244e124e71@linaro.org>
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="IFgxg8uZ";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="KCiRvG4M"
+Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68MBPZF12869443
+	for <linux-arm-msm@vger.kernel.org>; Tue, 22 Sep 2026 12:39:29 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=YH0B3GIKgdIgYq6KPJcykm
+	lfsGe55OsoYn1Rw5B9E9w=; b=IFgxg8uZII+f3Sw3wUL3G4+WKHQJkEHjE8v4U2
+	KTL8x3zxM5fAkUkGVQnAYb5c+PiQXu8NjH6AQ+qvYHDeClTmAfiFr1Uegxel8FKu
+	jhpWfIW7zLLeF2wVElfoO0+k4NDjzmmVUb8Xt5MtnxIkDc6KOzo34IFPxlpTTP09
+	lAKHBt1ClS3cjRyB6ExlTcNnOjEap7tz/jt8dFG27Ecd9lknLmdAs4eUyB36tcMA
+	1P/vhwH4G43YXMNwIATS8Ch5hkPfa47vNMDQdC4le7okD6UqD+KPEx8ohtpeq4E+
+	P7X59MS3QN/A+WB1rkAEdd5Rjd4ztzwqEzEmDnu/TAeWdU7Q==
+Received: from mail-pl1-f197.google.com (mail-pl1-f197.google.com [209.85.214.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4guj111y4u-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Tue, 22 Sep 2026 12:39:28 +0000 (GMT)
+Received: by mail-pl1-f197.google.com with SMTP id d9443c01a7336-2d6fed0652bso46606715ad.2
+        for <linux-arm-msm@vger.kernel.org>; Tue, 22 Sep 2026 05:39:28 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1790080768; x=1790685568; darn=vger.kernel.org;
+        h=cc:to:message-id:content-transfer-encoding:content-type
+         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=YH0B3GIKgdIgYq6KPJcykmlfsGe55OsoYn1Rw5B9E9w=;
+        b=KCiRvG4MIFxB97ndlcrLoEcRMQYgO3jDcp9sLs+4/EmXR3iQf2C/JbiL+96sp+KBPC
+         FxEgfqOFYmVxbSrsG/7lhGtJzcVqAcWs7m9mnW++yvIh3w7TW3nzqsRy+giczC6z0G/C
+         /lcjOppqJpCygP0RdQQMMU4uy+GbfrWtF5Zf2N4e0Pe7VIpX/+Ybu4SSsfnJlzkZQv7s
+         dulQf5EkNBghPMmTT9g5nnQ0kI0GD7AKKZeuMKGw2+YpenYSuuVTdecojCtpA3qbK78z
+         n+vTDNpkSu7aarQg0egzanBMtQ/31AUoYAcFvcmLJpRdI5KXTBFKBKCLWy3647IZOikF
+         x+5g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1790080768; x=1790685568;
+        h=cc:to:message-id:content-transfer-encoding:content-type
+         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to:content-type;
+        bh=YH0B3GIKgdIgYq6KPJcykmlfsGe55OsoYn1Rw5B9E9w=;
+        b=zBGixzKUozGCGAT0Ko2leQU2QgxZxzE8riiGJL/HjkZ1lwgLOJTouP9SCRz7yi1xnK
+         0megelrOvjCXWWTlGvRmKQ/bNgmeEvUASOR4cEXAq1fm35OYHdc+u+EOQ6bEMV/RHNeC
+         VM2onMNMJOkAL/jjx8cK4zXH49kNeE4NCDq1oYi7XgisGU5X4OmJdHKzBBJ3L/ThrJdK
+         cUbKYqCsziC3ceg9PkqC3uf0avL7nXqmrLDCK28DxWwh6V1xG5znFJ0TpKAi9hqkBVDx
+         nOFj+vkF/wEpmivKZihp7TCVn8n+xI9mCkQ8jPZoBvBQHsXvGSbXywuM5H9JwIZj/xBe
+         tcNg==
+X-Gm-Message-State: AFuF++ngGzs40mDJrLYqkCUTcT+/AYJkwfJa2BN3sAurOsbXgRZ0B3gF
+	7vmqK5EfHLTkgSUdDXvJ32sJVfi8M7V/ZUPb2xxPPCJmDtvXifNIDHRYW76ElbJVwSKppBUD9v+
+	KQaUOUD5FUqW/9g4N4Qjz2uHs2ZCohIfiPPDPu1zV7Qg1+uskWEjvlqwIFCsZbuhC5gw=
+X-Gm-Gg: AYBFou2ycjhTH8tcSlVbc8d7MVdCTjYJD5FO4ffxhqhtG3kuyx89UxK6xPM47gQHi/6
+	RtKmk46wniZ/MoW1INCFjM5aPfcbO4provL4ddejmruqIiL6gxguNF9uq0JNlw5VyrZPK50V/zk
+	5lIKZSstvmSVqgD7Y6Gp+niQmQIPXCroQVyP4XOx3kKpMQZ2KzYy2w4wsVyjiuUBwz7EFwX9yfN
+	UKGo9ntGNb4Elnan6KBJfzOkKIzdFMR3sLR7P+888PGLSdp+eMUBPgHw5Gn5LVnOg/9Q7PAOBIA
+	NpS2JI8f8C7uGR2w/O5sAd9tCRZA9T3Y4tZDmVvZ8xqCGifNG7n+sD6QZegJP/XhVAWheZyWCl4
+	h3BagSMmt0q4gXFptycd0taC6sq33
+X-Received: by 2002:a17:903:1aa4:b0:2dd:c053:e0f8 with SMTP id d9443c01a7336-2df60b3c1afmr12055615ad.39.1790080768004;
+        Tue, 22 Sep 2026 05:39:28 -0700 (PDT)
+X-Received: by 2002:a17:903:1aa4:b0:2dd:c053:e0f8 with SMTP id d9443c01a7336-2df60b3c1afmr12055185ad.39.1790080767496;
+        Tue, 22 Sep 2026 05:39:27 -0700 (PDT)
+Received: from hu-kotarake-hyd.qualcomm.com ([202.46.23.25])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2df5d0308ccsm9265805ad.42.2026.09.22.05.39.23
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 22 Sep 2026 05:39:27 -0700 (PDT)
+From: Rakesh Kota <rakesh.kota@oss.qualcomm.com>
+Date: Tue, 22 Sep 2026 18:09:15 +0530
+Subject: [PATCH] arm64: dts: qcom: shikra-iqs-som: Correct PM8150 L10
+ voltage range
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <20260918-b4-linux-next-25-03-13-dtsi-x1e80100-camss-v20-4-dc244e124e71@linaro.org>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260922-fix_l10_max-v1-1-d0c99f063bf4@oss.qualcomm.com>
+X-B4-Tracking: v=1; b=H4sIAPJ2smoC/yXM7QpAMBTG8VvR+Ww1U5hbkcR2cOStDa2Wezd8/
+ PX0/D1YNIQWysiDwYssbWtAEkegxnYdkJEOBsFFxqUQrCfXzAlvltYxlaeSa5SFzlMIj91gmL9
+ aVf+2ZzehOt4E3PcDoZbBcW8AAAA=
+X-Change-ID: 20260922-fix_l10_max-c7390de98d73
+To: Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        Abel Vesa <abelvesa@kernel.org>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
+        linux-kernel@vger.kernel.org,
+        Kamal Wadhwa <kamal.wadhwa@oss.qualcomm.com>,
+        Jishnu Prakash <jishnu.prakash@oss.qualcomm.com>,
+        Rakesh Kota <rakesh.kota@oss.qualcomm.com>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1790080763; l=950;
+ i=rakesh.kota@oss.qualcomm.com; s=20250919; h=from:subject:message-id;
+ bh=G1rCVG0dFYgkD70jsqhOgIwiWXW8VEW9SvwYy5t2zgI=;
+ b=Fej1M6tLTP1ii0ZqzqmzwzgOIz8MDdbliCWGtJeUsmfjqC7G5AHeik9ihRMv+a2bN0u/ks/fO
+ lKvlNlix5tEAgh7fhY9dXaqwI6+nF9EP5oUZX7SuriIvOS5pzdN9ATu
+X-Developer-Key: i=rakesh.kota@oss.qualcomm.com; a=ed25519;
+ pk=dFhv9yPC8egZglsSLDMls08cOvZKZkG6QQn1a/ofwNU=
+X-Proofpoint-GUID: OClwxErEPwdA1JDxgpLg5OvU_lC52JnM
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTIyMDE4NCBTYWx0ZWRfX9Dn/Ud/Bez5t
+ m+ScJRNNvPtpFK5dlV0aqmELqgRvOq3ZL8SKeFqHjAHyLNLXeRndi0SNhIy+xeYjQZFqFaJ3PSe
+ V1ZbSgIYi2lS95BBXVuDu1A6s1Trt8M=
+X-Proofpoint-ORIG-GUID: OClwxErEPwdA1JDxgpLg5OvU_lC52JnM
+X-Authority-Analysis: v=2.4 cv=atQnmiZV c=1 sm=1 tr=0 ts=6ab27700 cx=c_pps
+ a=cmESyDAEBpBGqyK7t0alAg==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
+ a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
+ a=EUspDBNiAAAA:8 a=giemrxp5VU2KOmXfWaEA:9 a=QEXdDO2ut3YA:10
+ a=1OuFwYUASf3TG4hYMiVC:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTIyMDE4NCBTYWx0ZWRfX0KUV1bZ/Ll6I
+ 7vXRgygxPcxlvVt+WoUvWkMRLesHt2o3QuKT5R7GhggW7SZA5YxTX11+z6cpVdUhxqdJcp9IPrg
+ gpbQZ0fktx/mNuAv/uzCmUYIXUlZPXs5B5S6jl/Htfx4/rXxfAj9r67W26MyRoRZ5lrE5BhR156
+ HksMEVNWIPZVCxjYMjmB+5/XR9zTaVYwQk8OrWfrLAtWmYLmFnu/WXekKtB6Qv8SsBqaXrcWPDk
+ 8Z/5PvfnKGAJpMK0bEk7csUvXYq3OY4dhotVzpYNzyq8qztukjidb/193jID7rKJR6i940J11Wg
+ Tkd/AyLlfFWBaVF7sbJysUkw1HKiuv278g1xHMo10B4uFQc7OXL4NTMiKmX5Z6oSd9hw1km5+IA
+ NJAdizJQjQZnwJ0wUtK5Rueeew6nSvwt8X2yiR84dLqqnjwxAGioLVxx82a5/adELUkjUtX5fLz
+ IK7sHMRYdheqdf3dXcQ==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-09-22_01,2026-09-21_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ suspectscore=0 phishscore=0 lowpriorityscore=0 spamscore=0 malwarescore=0
+ clxscore=1015 priorityscore=1501 adultscore=0 bulkscore=0 impostorscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609220184
 
-On Fri, Sep 18, 2026 at 02:56:39PM +0100, Bryan O'Donoghue wrote:
-> Correct missing colon after Return in kernel doc.
-> 
-> Suggested-by: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
-> Signed-off-by: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
+Update the PM8150 L10 regulator maximum voltage from 3.544 V to
+3.3 V, matching the supported voltage range for the Shikra IQS SoM.
 
-Reviewed-by: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
+Signed-off-by: Rakesh Kota <rakesh.kota@oss.qualcomm.com>
+---
+ arch/arm64/boot/dts/qcom/shikra-iqs-som.dtsi | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-- Mani
+diff --git a/arch/arm64/boot/dts/qcom/shikra-iqs-som.dtsi b/arch/arm64/boot/dts/qcom/shikra-iqs-som.dtsi
+index e119ace54e58..ba8c93f01546 100644
+--- a/arch/arm64/boot/dts/qcom/shikra-iqs-som.dtsi
++++ b/arch/arm64/boot/dts/qcom/shikra-iqs-som.dtsi
+@@ -172,7 +172,7 @@ pm8150_l9: l9 {
+ 
+ 		pm8150_l10: l10 {
+ 			regulator-min-microvolt = <2700000>;
+-			regulator-max-microvolt = <3544000>;
++			regulator-max-microvolt = <3300000>;
+ 		};
+ 
+ 		pm8150_l11: l11 {
 
--- 
-மணிவண்ணன் சதாசிவம்
+---
+base-commit: 5c4d4169604b335c38bbc79bc1fc03042981fc6f
+change-id: 20260922-fix_l10_max-c7390de98d73
+
+Best regards,
+--  
+Rakesh Kota <rakesh.kota@oss.qualcomm.com>
+
