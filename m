@@ -1,150 +1,108 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 39C96424646
-	for <linux-arm-msm@vger.kernel.org>; Tue, 22 Sep 2026 08:14:59 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9CA5441A503
+	for <linux-arm-msm@vger.kernel.org>; Tue, 22 Sep 2026 08:21:57 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790064904; cv=none; b=PYT3Q6HWKQ2/0ImTx4SSLJHIIKRCE7NUsK7IiM4YPvrAJ0LTVe1d/zF976rP1re4rdfp9T+dcv8cWB3L7ZIn66/P5nBztUn//5KYq10uki25AL1lEzShNDA5BsqcQ4VOMn7xwlLPJjnXuDtNcJeqM6QMnZLYZfkRgwMhEVYIU6U=
+	t=1790065318; cv=none; b=BpCRMhEswNh856xEn/g3x+hBMN0rDGxXCzveX3L3nq6BdToPXM+I/YFQCAB8YqUNMDNkr2d2sJZpeV0rlsMT2hFUnzq6BzR4KYGpVhfdsyQsvPRVY7VWwXu/Jdum3tFX50pt9FOPhA92sJH5Jca85ARB1YSalc2Wxqlte4Y50qo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790064904; c=relaxed/simple;
-	bh=QdmMjDMXOUbf3uJAdob1pCjvy+MqJXcO6U0Kewq/5H4=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=eUfDWM36sCrHOkCJDl8xQyNt5MuKma9IkQnAlM0He7cquBEJwTduepBeffo5+lphI/4NtAbF6J7wg3ybdyeUs1zcUhKNbnNGq6bHERYZI/wHpzJVQg6Ne4S5nATLjFXuQh2WQKgF7ylHz57e2wpzyZTviLtzZuClq9xU9W5RpXc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=oupMneNz; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=DNHZ2xUe; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1790065318; c=relaxed/simple;
+	bh=PmnKH7lV0V+JoK1QDyZ8ECRxYMKhaupXPZ4PEr3rUjM=;
+	h=From:In-Reply-To:MIME-Version:References:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=NGGScX68NpsFDIihbej2WbYsSljkqhfcGJgHNhs2eIUgrL6XsAMeg9XloEklKS6noqvB4J+IzbVysc8usmlgTPiLI6NkyW0uhVbIaLPPAjkKYnVTu4qaBv5cayzHy2iYIBODC6pbMVHihHe0Do6mqov8wZGc90ijJol8uq7W/qA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=KQ7zXqB1; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="oupMneNz";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="DNHZ2xUe"
-Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68M6fwwk3840783
-	for <linux-arm-msm@vger.kernel.org>; Tue, 22 Sep 2026 08:14:56 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	nUVwl/Cqz9oHS9EDYzWm3E77+kKD/YiQILpCclthFpY=; b=oupMneNzioNcUTOs
-	MGAqMOc9eeKi6luGAIoBFRTNYc6i8Na92RGA7mpeup0bIouMmHX3Y3xziZO9nPiH
-	2aNVtft2mHjuaCxWclK5HuRc0eHXVCncEMRmIEGMLv6SD7RGkO2wQrFs77FE/MoP
-	cq1ATti7Q8q4eLNYyHNYQXKdHMiEPDT2/3i6/FcJjDyp0UqDr1b3xLPCXxM/45E/
-	7/EhwAlxvcAGZDWAztR9+RIlpB7FsQLkfgN97tS3UK2BP/irxIcAMuiDl+a4p1TW
-	emScBDB4LUWj2cKZCm+He8P3YvAoHWZRtkFxolUQiy+E2PT5w3fbA6iogNbpn8dp
-	DvoLXg==
-Received: from mail-qt1-f197.google.com (mail-qt1-f197.google.com [209.85.160.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gu8v530ru-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 22 Sep 2026 08:14:56 +0000 (GMT)
-Received: by mail-qt1-f197.google.com with SMTP id d75a77b69052e-532df0126f6so13140641cf.3
-        for <linux-arm-msm@vger.kernel.org>; Tue, 22 Sep 2026 01:14:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1790064895; x=1790669695; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:mime-version:references
-         :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=nUVwl/Cqz9oHS9EDYzWm3E77+kKD/YiQILpCclthFpY=;
-        b=DNHZ2xUeT8Rp9ULBGASsQ2YkTBJW09fFDm0wxIHQF58k+C14Di4ZXhoD7yp0p6l+QW
-         Z24+GQLrtBZxKp86rVRlZGQtVBJ2T0kV+rA63x0MahsKfr6VjmVDrI02vfBgFQBurcLo
-         Tu1FJXHThQC6uvlbRLyXu5nEzqve+DA3VnbqR6/AEsvfAP9WWUi6zkLCKabfmX/riRNU
-         2b5wLWz7sPLY2Ew0oH/pF209/7zfR+Sep8b1KKXiib4Ak5tXBkqiVnIAET475JMSv4zZ
-         +2ySwJkV/m7EF/c2aXiDq2o7EFqvAu4NUbNPM1BnCHF/t87O3WeYsPX6/31EkffpmTMz
-         AfCA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790064895; x=1790669695;
-        h=content-transfer-encoding:content-type:mime-version:references
-         :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=nUVwl/Cqz9oHS9EDYzWm3E77+kKD/YiQILpCclthFpY=;
-        b=RNK9ctWguqrI18hgWBwsrWzrLmhKAUYwHRWR7xapYoBkj+N0aErKJ2ZEZ9eUBVZqHi
-         LXfBAJTT+p0c9wjrBfC0Ow50e4wKJ4ho8fRMXG8V4WThRdcaaH/OzsT5Zhqb9SLhbsOV
-         DjM16PRASYZHYSkLmJWM3i9jzXmqG1JKX/IRFpwBPFl92x9FjREFozcfSn1L3QqNxWl2
-         NCcb2f0jWkGDNpRCIYRosmtSahgkpiQK5621EUcNoGbQF0MPfxLsB2dMG0X9hqCUbwMC
-         MA2DiPAXxZn3MCy8sE300Ty9aWbh+G7ffCrIb3pixIp8gwez5LjxCBNRuZcegwg3tDBl
-         u+vw==
-X-Forwarded-Encrypted: i=1; AKwUvBxkDRTtPfaLswN4dPLLsnEtW8+DC2DA7QsngL/lh/IquXfAmIxaD2IIftRUm8iWhdGH0+rSvuaK9Pq9x8Cx@vger.kernel.org
-X-Gm-Message-State: AFuF++nw3y/VrQioBslhX1Pd595eMyMnxmDk46oVAm9f1JnYphWh67gq
-	7XOqAam04W/bP1zPkvVELhM3mFF6L+cxqQY4jECxkGEG9aBaEafXg6bBfkEWzXa22zINyxsmY8K
-	Gac9nu525X8ReZgKjvWOpF2rw+OjAn4VFCDTxZU8TqZGcHk9VGxtLVsCjn8GoOIGn+aYT
-X-Gm-Gg: AYBFou2JFAB1eEx3aaZsUnbla1dFMbV76dsUU7EPt4hvILaURJrw3W+TiU2ZQgpLxcU
-	+VzR4uD/2tObRNzeG2LuTSqdKsrT6LbDlc/ifxlYE5rdaN6nEJEyoWK4PHRAgMD43LvYlRY+A1p
-	abdG9eWvM+5LuHD+EeUi3kis6rLWoU2sDzn8GBgWHjUKbzWOKkplGYglIaIgApwNItn/BspKhc3
-	uxoIbX9a2E+aJXqlG1l61/jJBEFxXlTlCpcFkkod8SrfFLMVV6DMSvovlsqrnFiE54OTq23BEn5
-	cLpTCCBYHZLvnqR/vzV/hlbUKHRq70YPFz8jyknqs8R0owMifyZwdcPN4aro+Q22lF0+PrAbL8m
-	7eIl+nN5nE86Jxk4IogbM1n5LKQ==
-X-Received: by 2002:a05:620a:2b88:b0:939:4a34:621e with SMTP id af79cd13be357-93c15dd29camr428478685a.28.1790064895456;
-        Tue, 22 Sep 2026 01:14:55 -0700 (PDT)
-X-Received: by 2002:a05:620a:2b88:b0:939:4a34:621e with SMTP id af79cd13be357-93c15dd29camr428477785a.28.1790064895059;
-        Tue, 22 Sep 2026 01:14:55 -0700 (PDT)
-Received: from brgl-qcom.home ([2a01:cb1d:dc:7e00:5105:ff9:e148:c440])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-49fdaaec8ebsm29624705e9.2.2026.09.22.01.14.52
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 22 Sep 2026 01:14:53 -0700 (PDT)
-From: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
-To: Bjorn Andersson <andersson@kernel.org>, Linus Walleij <linusw@kernel.org>,
-        Bartosz Golaszewski <brgl@kernel.org>,
-        Gilberto Conde <gilbertorconde@gmail.com>
-Cc: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>,
-        linux-arm-msm@vger.kernel.org, linux-gpio@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-Subject: Re: [PATCH] pinctrl: qcom: ipq5018: add missing pwm3 function on gpio13
-Date: Tue, 22 Sep 2026 10:14:51 +0200
-Message-ID: <179006480189.5296.14114612029159651511.b4-ty@oss.qualcomm.com>
-X-Mailer: git-send-email 2.47.3
-In-Reply-To: <20260921093419.2870168-1-gilbertorconde@gmail.com>
-References: <20260921093419.2870168-1-gilbertorconde@gmail.com>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="KQ7zXqB1"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 718711F008A3
+	for <linux-arm-msm@vger.kernel.org>; Tue, 22 Sep 2026 08:21:57 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1790065317;
+	bh=1YdFqoWebSHijCdc5KahaV/EzBXGxPmzQ4XgDu5XncA=;
+	h=From:In-Reply-To:References:Date:Subject:To:Cc;
+	b=KQ7zXqB1j1Kf2ZEWYkrHF6LB9KuvaX0ak30Bhwb/gll99KnJZrpaL2ASNa/GPoiuJ
+	 7XoIMP9JRqk6LgcsOsW6OvJYk9FtIQ0ChdC5XBOZQUFHEuYY5nfdKjLifGox+85L/M
+	 1Dr+e+LUh9wPpdBzvsCpwJAn9FcwSI6nucVfmnT1Y71MrgpT13FmlDTgIJJ+N06aSh
+	 aezP9GBIJ1k80OC9zX1K4muzUcd61JwAU6aESh4FwwtJsoUR6PTTM5ZmsM4xo2Wk3T
+	 01AQjOJnlPCVdRsnFJzGHRePubrXKoGSXk2wpxiba8Btqt332SzgGDvzOiM6iWixJt
+	 HkyHew/0/Q2dw==
+Received: by mail-lr2-f17.google.com with SMTP id 38308e7fff4ca-3a5d4688decso38683891fa.2
+        for <linux-arm-msm@vger.kernel.org>; Tue, 22 Sep 2026 01:21:57 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AKwUvBz+qj7uKqDbVzIdRPn8dKpF4LLnWwQUlnd5dfNEoO7fHeW/nD0uYC1M1/bps6BDQ7U+w5xqncMXLaa4YPsH@vger.kernel.org
+X-Gm-Message-State: AFuF++nxoi88KdEV5HSX7ksbq4JGYjRzhW6rw0jCu7/0R9Bt/vz3jc94
+	jkHSN4Dqw3pF5VBYuWAMd6Y/1NiH6altuyyHXNUO7KOxBRSr1EdylyiG/2EWylu81m2NQAtgwkC
+	Jos5FjyLGj6mc6yodaqAeyQTJiis857R8RYF5B9VUig==
+X-Received: by 2002:a2e:a99d:0:b0:3a3:7682:499e with SMTP id
+ 38308e7fff4ca-3a5fc0a7d91mr32468651fa.19.1790065315994; Tue, 22 Sep 2026
+ 01:21:55 -0700 (PDT)
+Received: from 969154062570 named unknown by gmailapi.google.com with
+ HTTPREST; Tue, 22 Sep 2026 01:21:54 -0700
+Received: from 969154062570 named unknown by gmailapi.google.com with
+ HTTPREST; Tue, 22 Sep 2026 01:21:54 -0700
+From: Bartosz Golaszewski <brgl@kernel.org>
+In-Reply-To: <71cba843-1643-4f5e-9830-9e60b5f1c334@gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-GUID: KHr8coUslWi27cULboDKGBVKyya6JwkG
-X-Authority-Analysis: v=2.4 cv=B+0sQ+tM c=1 sm=1 tr=0 ts=6ab23900 cx=c_pps
- a=EVbN6Ke/fEF3bsl7X48z0g==:117 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
- a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22 a=VwQbUJbxAAAA:8
- a=EUspDBNiAAAA:8 a=ywFeef63eliSz_rKYaIA:9 a=QEXdDO2ut3YA:10
- a=a_PwQJl-kcHnX1M80qC6:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTIyMDExOCBTYWx0ZWRfXz23YU0K+MeZV
- YVJ2cqAW+vxhknlwJrJq3FREflq2zbp5OSj2tHTZi02fcNxW9xipRSiRxYiOLyQ8dPAEexsbLzM
- xa8YdxO/rlk8NEXXX98rxtdq+aGbaTY=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTIyMDExOCBTYWx0ZWRfX10LdZTqTCr53
- GlXnZPEDJNCJg0GkW4bhCpiqDvrhfdTU1NF6+5qZe+mq+9W7QxEktUKRk+L7VaeDUhi/2makN0W
- 6JlrXuFZiroAKwqNrcJLsHOFhXeLvUTf0D9WGmAlvtLJgJK9dgSKjq9T0WCo68llH9NGnXJtTfQ
- ukB7+4Y43zN7Zwh6j9u6O7WGwdpZe39RUxPq2aTXtIfK2U9btdVCeVLczBwqNtcUr5SIKAtqnOj
- attiF8vZoFxBlKhIW4igYgem7UHmSadgXU28s0FH1/5Q+KCuLdZeTCY2SZ3HkK0yUdw/XTGNA3W
- Z79MJvGGZ8tQZK1MCK+aVXMnyo4dHrIZncjdhofnsRDC1gXAGxnnCd7UaTkMPCcn9SGMjZShzIT
- jkQcDK5QAbDsoDa0dxHm4CcqH2VM0ZJivJEEswUIjh6EEdMKl23ZJJq44oBgtfCJc0WndGKCS8p
- 3f2HpVQPYWGNaO3ZaJw==
-X-Proofpoint-ORIG-GUID: KHr8coUslWi27cULboDKGBVKyya6JwkG
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-21_07,2026-09-21_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 impostorscore=0 adultscore=0 bulkscore=0
- lowpriorityscore=0 suspectscore=0 clxscore=1015 phishscore=0 spamscore=0
- malwarescore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2609040000
- definitions=main-2609220118
+References: <20260921-qce-fix-self-tests-v8-0-107537869a72@oss.qualcomm.com>
+ <20260921-qce-fix-self-tests-v8-10-107537869a72@oss.qualcomm.com> <71cba843-1643-4f5e-9830-9e60b5f1c334@gmail.com>
+Date: Tue, 22 Sep 2026 01:21:54 -0700
+X-Gmail-Original-Message-ID: <CAMRc=MesPvie19NcaWmG6hM4zcT830JC2i9yWF6KmhqLHxyPCw@mail.gmail.com>
+X-Gm-Features: AcwNN1XHY68dvq7BbAnO76WN0R6Z1v7gC4G6geUb4OdqJjOqUYaJ5RfbVzMrXq8
+Message-ID: <CAMRc=MesPvie19NcaWmG6hM4zcT830JC2i9yWF6KmhqLHxyPCw@mail.gmail.com>
+Subject: Re: [PATCH v8 10/14] Revert "crypto: qce - Mark QCE as BROKEN"
+To: Demi Marie Obenour <demiobenour@gmail.com>
+Cc: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>, 
+	Thara Gopinath <thara.gopinath@gmail.com>, Herbert Xu <herbert@gondor.apana.org.au>, 
+	"David S. Miller" <davem@davemloft.net>, Stanimir Varbanov <svarbanov@mm-sol.com>, 
+	Eneas U de Queiroz <cotequeiroz@gmail.com>, Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>, 
+	Eric Biggers <ebiggers@kernel.org>, Bjorn Andersson <andersson@kernel.org>, 
+	Konrad Dybcio <konradybcio@kernel.org>, Russell King <linux@armlinux.org.uk>, 
+	Abel Vesa <abelvesa@kernel.org>, linux-crypto@vger.kernel.org, 
+	linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org, brgl@kernel.org, 
+	linux-arm-kernel@lists.infradead.org
+Content-Type: text/plain; charset="UTF-8"
 
+On Tue, 22 Sep 2026 07:42:28 +0200, Demi Marie Obenour
+<demiobenour@gmail.com> said:
+> On 9/21/26 08:58, Bartosz Golaszewski wrote:
+>>
+>>  config CRYPTO_DEV_QCE
+>> -	tristate "Qualcomm crypto engine accelerator"
+>> -	depends on (BROKEN && ARCH_QCOM) || COMPILE_TEST
+>> +	tristate "Qualcomm crypto engine offloader"
+>> +	depends on ARCH_QCOM || COMPILE_TEST
+>>  	depends on HAS_IOMEM
+>>  	help
+>> -	  This driver supports Qualcomm crypto engine accelerator
+>> -	  hardware. To compile this driver as a module, choose M here. The
+>> -	  module will be called qcrypto.
+>> +	  This driver supports Qualcomm crypto engine offloader hardware. To
+>> +	  compile this driver as a module, choose M here. The module will be
+>> +	  called qcrypto.
+>>
+>> -	  This driver does not have exclusive access to the
+>> -	  hardware, causing races with the secure world.  It
+>> -	  is also slower than the CPU.
+>> +	  NOTE: This driver does not have exclusive access to the hardware,
+>> +	  causing races with the secure world. It is also *slower* than the
+>> +	  CPU for the same algorithms. Use at your own risk!
+>
+> Would it make sense to clarify that this is only an issue if you pass
+> do_register_algos=1?  With do_register_algos=0 (the default), the
+> driver is perfectly safe (unless you made a mistake elsewhere) and
+> saves power, so most people want it on.
+>
+> Also, if I understand your previous messages correctly, Linux currently
+> doesn't use any of the features that would cause the races with the
+> secure world.
+>
 
-On Mon, 21 Sep 2026 10:34:19 +0100, Gilberto Conde wrote:
-> GPIO13 supports the PWM3 function at mux select value 4, but the
-> pingroup table leaves that slot empty and gpio13 is not listed in
-> pwm3_groups. Selecting pwm3 on gpio13 is therefore rejected by the
-> pinmux core:
-> 
->   ipq5018-tlmm: invalid group "gpio13" for function "pwm3"
-> 
-> [...]
+Yeah, I guess it makes sense. Sashiko still says the series fails to apply, so
+I need to see with Herbert if he wants me to resend or if the change you're
+requesting should be a follow-up.
 
-Applied, thanks!
-
-[1/1] pinctrl: qcom: ipq5018: add missing pwm3 function on gpio13
-      https://git.kernel.org/brgl/c/c6c159fcdb4e9a678eda0831f971e4a3a488ec47
-
-Best regards,
--- 
-Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+Bart
