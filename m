@@ -1,148 +1,154 @@
-Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2E7F33EBF16;
-	Tue, 22 Sep 2026 08:08:05 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.171.202.116
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 14FF318FDDE
+	for <linux-arm-msm@vger.kernel.org>; Tue, 22 Sep 2026 08:12:34 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790064496; cv=none; b=Z9IwKuCBliXgnqyH4qiJ3YS+Fc7qxvx3cu0aRO+mTx9VoF7wNnVvhikMwkVsSib9RHzSEuRKOFksCW9+eg+DMGsJM+05k87zQSOdw3KXxmS6lzobmEYBCDpSgBUFFhc7qFQvfi6CZlBS1pbFNGRjnmKqiQL2fpctB1iOAtRh6Bo=
+	t=1790064756; cv=none; b=Gn7kDS/vhcY1JlaGCXttgSC/Pi4RkMlRReODW7r1QlFR1LazIoqZzlDMwEafg3gbR4RFdXcDmZxoHgNnnDNYpNMqgB5/2i3OWS0YT2RHWYTujB/wI6wyGcMAJdyou+HmviZRJgCuddJ1VfnZsbiTcrmEpII8FBYO6V3Wi4zJlf0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790064496; c=relaxed/simple;
-	bh=zcp8tcZsfdsmxUcen5sJupr/nyZnxY5fTXf1NQWKnsw=;
-	h=Mime-Version:Content-Type:Date:Message-Id:Subject:Cc:To:From:
-	 References:In-Reply-To; b=VuJ2wrTAG5vTyrYAo0DOJn+QEXMFyoKSreJ4tDLIUqWNq039HOphUdHO/TsHJxvU8p4GaQtvCisE/Z267ISuSrkfhKHIJ/BpDHS9EHOqLbT82ZaaSVgmj5MSQK4OCyos8wI1ukUXEGc6t7iKagfyNOdTFCtMc9gBY1gYtyxc4AQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=FGUyk9MH; arc=none smtp.client-ip=185.171.202.116
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
+	s=arc-20240116; t=1790064756; c=relaxed/simple;
+	bh=FzwzCp2B3CQrL8UWS3VMy1GU1joePEyGfnMV0kBpM7A=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=fF2fxwcIJQRi1+D8NbOV+E3eJJOzDLuOTP8PA2lMnBFG6DwDwjyEQ8z0xV5VsqXTtLR1yKW3up7hOdOFW99CJwfyMM8GCYA0CIJVjTRb3L7vFvIJssYAsIMHkvFPmQVM89ZNg3LA8nO5rYO7Dr3Dkm4LqKqMSivsxJbUOiRdc2E=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=AOsZ5kLn; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=bvJKamrH; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="FGUyk9MH"
-Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
-	by smtpout-04.galae.net (Postfix) with ESMTPS id ED834C23DB6;
-	Tue, 22 Sep 2026 08:08:47 +0000 (UTC)
-Received: from mail.galae.net (mail.galae.net [212.83.136.155])
-	by smtpout-01.galae.net (Postfix) with ESMTPS id 468C860580;
-	Tue, 22 Sep 2026 08:08:01 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id 4056C1032925B;
-	Tue, 22 Sep 2026 10:07:38 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
-	t=1790064477; h=from:subject:date:message-id:to:cc:mime-version:content-type:
-	 content-transfer-encoding:in-reply-to:references;
-	bh=zcp8tcZsfdsmxUcen5sJupr/nyZnxY5fTXf1NQWKnsw=;
-	b=FGUyk9MHJzJ0m0z8YAThEo2DOBHDLTsuC25rLZr2qIfJay2Q0I+gVCvTxsv2nvY/dDnJb9
-	IgXAUJLDLFyWtCu0gq4m+hX3dLL+xecsNJ8WJa5QPeWS1Zy6AUoS89OPdFALC8X5Qo/SYt
-	P+8Axb3+Z77DYvypZw+Bo1A5RcA0P5rB/gomubC1yCw1+sui5hmFk5wLv6D9zSGNbH/9I3
-	BDo6gZcaNWSmUaB3MSGwrUc50FkG95rYvnEytrHx7tFcZXjfqgUddfJurME6kZVkekBte7
-	SOpxzk5wN3ckVBb+KRlg6NycfNY3+6MfShb4b9lHPUZw9BG8DyTys0vA4UWL/w==
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="AOsZ5kLn";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="bvJKamrH"
+Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68M7pIJi2173113
+	for <linux-arm-msm@vger.kernel.org>; Tue, 22 Sep 2026 08:12:34 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-type:date:from:in-reply-to:message-id:mime-version
+	:references:subject:to; s=qcppdkim1; bh=czex32aQLz7Wor3ZwCAP8jwK
+	GlUOBphDFuP6jLqE8W0=; b=AOsZ5kLnNaEZC6jEnx5gtyQv8DV0FjojSlMnM/Qw
+	M3NFGOApHMPDWFq/DqkvSgDF7amG+8R9DwLCQ2f4nNIXDUFqq6dxXIdKViN4XidJ
+	dAhF36NcPaqZWaNziG5WsVqkfIuT2tFSTCI5OENkHW3HYuw5Ck8aOpGT3u9pREnl
+	yONur2P7z8NxIAEqKiZbDzw7/eRzXLrUBsrloN0OQBWG2IlrhfKyLP+ucb20FE6k
+	+i36puQkjTSFJm+a+c98k7R4Gu9R/dUDaT3AojxuqhfHTOq0Vq5WRApFP42clcJZ
+	wRCR+JUcpYa4maq1gYyHE70LjCbJaUUN5FZroW3S4dJ0ug==
+Received: from mail-pj1-f72.google.com (mail-pj1-f72.google.com [209.85.216.72])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gufsq9dg2-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Tue, 22 Sep 2026 08:12:33 +0000 (GMT)
+Received: by mail-pj1-f72.google.com with SMTP id 98e67ed59e1d1-39aee9b4cf2so6883637a91.0
+        for <linux-arm-msm@vger.kernel.org>; Tue, 22 Sep 2026 01:12:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1790064753; x=1790669553; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=czex32aQLz7Wor3ZwCAP8jwKGlUOBphDFuP6jLqE8W0=;
+        b=bvJKamrHyqSONGVkFNdsgvbZGH9LlRb9qjNTpE361+mBvzAwT9u1PCbslPQwAsbAE5
+         gvF5kuBg3mHxyeHcfcKZERNyylW2HOYtriittnZSPvqcXc94CHHClBfKLE4xTKPizRPD
+         IMTJU9bCst6hDJac5i9hac/gpdpm+/GElD5lvqguUrcE8YG8jULHLlgzrNosMm/mR0VL
+         TbQ+uul+AL6EqKSRNNqbRn5/WJvgOMLTwYVxrSAEnt2fm7TvfxyYeMeAhsQElVCQRLM0
+         95kW7BvXwT4MNi1aJnbf19JQXhuUXSaYzVWajIdOGw8umhW/f20Dz5HiAjfBkNCy/LZ2
+         vmOA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1790064753; x=1790669553;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=czex32aQLz7Wor3ZwCAP8jwKGlUOBphDFuP6jLqE8W0=;
+        b=fCw28k+tEzvwY6ivMqgPP18AVtWbrkesjngasCXd8hJ9mKvtHLKAA0Osh+kZxQxmlY
+         br/1f8Q9V5kdHROAnM3fYNxXN1iRAdMX9E7Of0rHuw8+TMjLf0LeyTSzPwAqTsMha9XS
+         TAbL4rqnT/V+GPFRjuDZOa7iWwkTrZhnHJN7BU/S5S2IagiQ5lYm2thoVIK7y6MtWxcU
+         KZYmEDMTgAwpRRzUn8CBUbnbQnUhjHUFAtO0mOzuoJMew+m7BYVITp6hqomnQrKF0wI5
+         pZO19ACgro4mdDZn9f7LP3Qq+bDN18EBeyN0T4N6nvHyIeR5JEd18UEMn958R0FqzR8f
+         WHaw==
+X-Forwarded-Encrypted: i=1; AKwUvByK7YXglMeZS2eDJLfbD5WSPgnZ/3zZp5Mj2iGGekq0KpPr/3h/0rXbp0Mo2MnqhgkZQt2JI/dCgKx9UvjC@vger.kernel.org
+X-Gm-Message-State: AFuF++mM5WYlzkZ2dB1xnkM3iv10h0ivGIlWahjTAwtUdn3B25ZfuUyw
+	LqdKYY+V0lr4WDKbe6QzBaRlRpIVHgq3c6j7YQAHvDV6arNkAwgAqu6qREtSJ5nMVGk2k//67Kr
+	evaxPkCSK02sawILfolv0tnaOcdcDcIQPphMz25ec5SVFjI6Ti8kCHw1wXax/4B997wu2
+X-Gm-Gg: AYBFou3TKFe9qmZsP4/yoJXUhhZXMuS6t40mCHVHRfv1LXM7tgt4PBPnmW7KASPqWVq
+	mompmZWz4X3Uf0PYrgeHOG9ni6ozzpF4epy4YLP03kp4xIITQcK0hC5Px3h0EmG36OYCYcelvjO
+	T0Sfu5WtiYdCl7APMh96oCaTSWil6/4g9wQV2Rl1PVRSSHMXGpFJyi561Js28AFUGFxZP6aaiv4
+	Vyk0tWr0kHnGixsZXD34SQj13xeuFEDgiJyo5bQZiBDLpf9jXwpoE9q4ayv9/R/RePIP7xmHxuw
+	krCnPDC2Vz5D2zmHAXpoZ9zNb0SvJTKOCsX4KMCSqCPKUg3VHM4hzyBCuZxx0N2VmV3996PEygH
+	+2+CxLo63SSeP8D/aDwuB4kyr5NG5lXKhhTcW0zXLYA==
+X-Received: by 2002:a17:90b:574e:b0:39e:1fb6:9659 with SMTP id 98e67ed59e1d1-3a073116705mr395982a91.22.1790064752911;
+        Tue, 22 Sep 2026 01:12:32 -0700 (PDT)
+X-Received: by 2002:a17:90b:574e:b0:39e:1fb6:9659 with SMTP id 98e67ed59e1d1-3a073116705mr395943a91.22.1790064752305;
+        Tue, 22 Sep 2026 01:12:32 -0700 (PDT)
+Received: from QCOM-aGQu4IUr3Y (i-global052.qualcomm.com. [199.106.103.52])
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-144f2a44cc8sm3084889c88.13.2026.09.22.01.12.27
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 22 Sep 2026 01:12:31 -0700 (PDT)
+Date: Tue, 22 Sep 2026 16:12:24 +0800
+From: Shawn Guo <shengchao.guo@oss.qualcomm.com>
+To: Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>
+Cc: Vinod Koul <vkoul@kernel.org>, Neil Armstrong <neil.armstrong@linaro.org>,
+        Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>,
+        Lorenzo Pieralisi <lpieralisi@kernel.org>,
+        Krzysztof =?utf-8?Q?Wilczy=C5=84ski?= <kwilczynski@kernel.org>,
+        Manivannan Sadhasivam <mani@kernel.org>,
+        Bjorn Helgaas <bhelgaas@google.com>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Maxime Chevallier <maxime.chevallier@bootlin.com>,
+        Philipp Zabel <p.zabel@pengutronix.de>, linux-arm-msm@vger.kernel.org,
+        linux-phy@lists.infradead.org, devicetree@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-pci@vger.kernel.org
+Subject: Re: [PATCH v4 5/6] phy: qcom: qmp-pcie: Refactor common multiphy
+ handling
+Message-ID: <arI4aLn4GSnVQXO3@QCOM-aGQu4IUr3Y>
+References: <20260921-nord-v4-0-ed05c6e09240@oss.qualcomm.com>
+ <20260921-nord-v4-5-ed05c6e09240@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
-Mime-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
-Date: Tue, 22 Sep 2026 10:07:36 +0200
-Message-Id: <DLLOW2ROGP6L.3GTVT76VYPGAU@bootlin.com>
-Subject: Re: [PATCH v3 19/19] drm/bridge: analogix_dp: don't create a
- panel_bridge
-Cc: "Albert Esteve" <aesteve@redhat.com>, "Anusha Srivatsa"
- <asrivats@redhat.com>, "Dmitry Baryshkov"
- <dmitry.baryshkov@oss.qualcomm.com>, "Hui Pu" <Hui.Pu@gehealthcare.com>,
- "Ian Ray" <ian.ray@gehealthcare.com>, "Thomas Petazzoni"
- <thomas.petazzoni@bootlin.com>, <dri-devel@lists.freedesktop.org>,
- <linux-kernel@vger.kernel.org>, <imx@lists.linux.dev>,
- <linux-arm-kernel@lists.infradead.org>, <linux-mips@vger.kernel.org>,
- <linux-rockchip@lists.infradead.org>,
- <linux-stm32@st-md-mailman.stormreply.com>, <asahi@lists.linux.dev>,
- <linux-arm-msm@vger.kernel.org>, <freedreno@lists.freedesktop.org>,
- <linux-tegra@vger.kernel.org>, <linux-doc@vger.kernel.org>,
- <linux-samsung-soc@vger.kernel.org>, "Heiko Stuebner" <heiko@sntech.de>
-To: "Damon Ding" <damon.ding@rock-chips.com>, "Luca Ceresoli"
- <luca.ceresoli@bootlin.com>, "Andrzej Hajda" <andrzej.hajda@intel.com>,
- "Neil Armstrong" <neil.armstrong@linaro.org>, "Robert Foss"
- <rfoss@kernel.org>, "Laurent Pinchart" <Laurent.pinchart@ideasonboard.com>,
- "Jonas Karlman" <jonas@kwiboo.se>, "Jernej Skrabec"
- <jernej.skrabec@gmail.com>, "Maarten Lankhorst"
- <maarten.lankhorst@linux.intel.com>, "Maxime Ripard" <mripard@kernel.org>,
- "Thomas Zimmermann" <tzimmermann@suse.de>, "David Airlie"
- <airlied@gmail.com>, "Simona Vetter" <simona@ffwll.ch>, "Jessica Zhang"
- <jesszhan0024@gmail.com>, "Laurentiu Palcu" <laurentiu.palcu@oss.nxp.com>,
- "Lucas Stach" <l.stach@pengutronix.de>, "Frank Li" <Frank.Li@nxp.com>,
- "Sascha Hauer" <s.hauer@pengutronix.de>, "Pengutronix Kernel Team"
- <kernel@pengutronix.de>, "Fabio Estevam" <festevam@gmail.com>, "Paul
- Cercueil" <paul@crapouillou.net>, "Paul Kocialkowski" <paulk@sys-base.io>,
- "Linus Walleij" <linusw@kernel.org>, "Inki Dae" <inki.dae@samsung.com>,
- "Jagan Teki" <jagan@amarulasolutions.com>, "Marek Szyprowski"
- <m.szyprowski@samsung.com>, "Sean Paul" <sean@poorly.run>, "Jonathan
- Corbet" <corbet@lwn.net>, "Shuah Khan" <skhan@linuxfoundation.org>, "Randy
- Dunlap" <rdunlap@infradead.org>
-From: "Luca Ceresoli" <luca.ceresoli@bootlin.com>
-X-Mailer: aerc 0.22.0
-References: <20260916-drm-bridge-every-panel-v3-0-83afb4f1a707@bootlin.com>
- <20260916-drm-bridge-every-panel-v3-19-83afb4f1a707@bootlin.com>
- <975a4d45-9a61-4858-b498-8bc0a1e44746@rock-chips.com>
- <96882735-091f-49c6-a47b-5da8be711818@rock-chips.com>
-In-Reply-To: <96882735-091f-49c6-a47b-5da8be711818@rock-chips.com>
-X-Last-TLS-Session-Version: TLSv1.3
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260921-nord-v4-5-ed05c6e09240@oss.qualcomm.com>
+X-Proofpoint-ORIG-GUID: wqigtPsn3RI-dtWmSsplMNhkWGvnBlV7
+X-Proofpoint-GUID: wqigtPsn3RI-dtWmSsplMNhkWGvnBlV7
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTIyMDExNiBTYWx0ZWRfXzVKEgYGTEGk0
+ ZN1dJZI1YPmcXxfg0OmOITDNftDXHobQq9dH11v6paHr4AZYOuQ5dVEvk7QYauHYD7sp8BveXdA
+ uYN3ixPgeIQjItwkrWcXTN1Px9mas08=
+X-Authority-Analysis: v=2.4 cv=NKBAaE6g c=1 sm=1 tr=0 ts=6ab23871 cx=c_pps
+ a=RP+M6JBNLl+fLTcSJhASfg==:117 a=b9+bayejhc3NMeqCNyeLQQ==:17
+ a=kj9zAlcOel0A:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22
+ a=EUspDBNiAAAA:8 a=Y4sVft1UDeOkrP7wHAgA:9 a=CjuIK1q_8ugA:10
+ a=iS9zxrgQBfv6-_F4QbHw:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTIyMDExNiBTYWx0ZWRfX9PXaySgldKQn
+ DlnzYUyaMEHYG9f2DnOPaDUuLdZ9DxcU59N8UlIGX++szd3d67PRnXlE6TVRWWZq5wsFu2Lwt9i
+ 4pT6ZImlL+HY2K0BtjIZP5igCnE+HBX0DFV6DOEw8Yt43NiOG8A5wtfOtsrQkSAbT4LqyVkkXfB
+ O92azkJeLdmKZ5rkMXqjfVxd2+ThoiAg4g+xPHPU9ZAZjuRRI219ElQtKk+VoXHll55SF3O/hGe
+ RgMAg9soNr4D/ZyW1nIThlgPqk+VPqYXooLie+ZOg8ffqwE4X0Dt6WLKEiQDqGbEw2gCto/UEoY
+ muLyRI67gZ32QQmaHEhcTPy0dFd1GDqXKUp2mf0kbSuHxAnVZQ1NEjKNl9yTTUikffMnqgESa1g
+ otr1sdFRsswkUCVludnkncAIPPcsvzt7GNZRv3jTcgUNRokNcCmRBLSHmD0hmMRTDgiAerIjeqG
+ k9R/ANQudmWzAsa/mPw==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-09-21_07,2026-09-21_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ priorityscore=1501 bulkscore=0 suspectscore=0 adultscore=0 malwarescore=0
+ clxscore=1015 phishscore=0 spamscore=0 impostorscore=0 lowpriorityscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609220116
 
-Hello Damon,
+On Mon, Sep 21, 2026 at 11:07:13AM +0530, Krishna Chaitanya Chundru wrote:
+> Reuse the existing port resource arrays for Glymur register regions,
+> power domains, and NOCSR resets instead of maintaining duplicate
+> Glymur-specific lists.
+> 
+> Attach each PHY instance's power domains to the device created for that
+> PHY. This ensures that the associated GDSCs are managed with the
+> lifetime of the individual PHY device rather than the parent multiphy
+> platform device.
+> 
+> Validate the clock-output-names property before using its count for
+> allocation, and use a generic module description.
+> 
+> Signed-off-by: Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>
 
-On Mon Sep 21, 2026 at 8:34 AM CEST, Damon Ding wrote:
-> On 9/21/2026 11:07 AM, Damon Ding wrote:
->> Hi Luca,
->>
->> On 9/16/2026 9:45 PM, Luca Ceresoli wrote:
->>> Now a panel_bridge is automatically created for every drm_panel and the
->>> panel-bridge API is just a deprecated wrapper to access it.
->>>
->>> Update and simplify the code by just getting a reference to the
->>> already-existing bridge using of_drm_get_bridge_by_endpoint().
->>>
->>> As of_drm_get_bridge_by_endpoint() returns a refcounted bridge, take ca=
-re
->>> of putting the bridge reference. This is not easily done in the remove
->>> path
->>> due to the different probe paths of the user drivers, so add a devm
->>> action
->>> to ensure the reference is put only when it was taken.
->>>
->>> Assisted-by: opencode:deepseek-v4-flash-0731
->>> Signed-off-by: Luca Ceresoli <luca.ceresoli@bootlin.com>
->>> ---
->>> =C2=A0 drivers/gpu/drm/bridge/analogix/Kconfig=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 |=C2=A0 1 -
->>> =C2=A0 drivers/gpu/drm/bridge/analogix/analogix_dp_core.c | 40 ++++++++=
-++++
->>> +---------
->>> =C2=A0 drivers/gpu/drm/exynos/exynos_dp.c=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 | 36 +
->>> +-----------------
->>> =C2=A0 drivers/gpu/drm/rockchip/analogix_dp-rockchip.c=C2=A0=C2=A0=C2=
-=A0 |=C2=A0 9 -----
->>> =C2=A0 include/drm/bridge/analogix_dp.h=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0 |=C2=A0 1 -
->>> =C2=A0 5 files changed, 25 insertions(+), 62 deletions(-)
->>>
->
-> [snip]
->
->>> @@ -488,14 +487,6 @@ static void rockchip_dp_remove(struct
->>> platform_device *pdev)
->>> =C2=A0 {
->>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 struct rockchip_dp_device *dp =3D platfo=
-rm_get_drvdata(pdev);
->
-> The above unused &rockchip_dp_device could be also remved.
-
-Ah, indeed!
-
-I guess I can keep your review tags if applying this patch with only this
-line removed. Correct?
-
-Luca
-
---
-Luca Ceresoli, Bootlin
-Embedded Linux and Kernel engineering
-https://bootlin.com
+Reviewed-by: Shawn Guo <shengchao.guo@oss.qualcomm.com>
