@@ -1,320 +1,158 @@
-Received: from mail-wm2-f13.google.com (mail-wm2-f13.google.com [74.125.225.141])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D308C542ED5
-	for <linux-arm-msm@vger.kernel.org>; Tue, 22 Sep 2026 12:19:06 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.225.141
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F226A53F691;
+	Tue, 22 Sep 2026 12:20:32 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790079549; cv=none; b=OLeFl6KO4rZbeKEEXQ8k4H2vPTDDul0xY80D8LICuvoahWwGGViW12DHXgxNSJiCTWthPAY6LrecBu1qIMISvgLFrsXRKST48rCFxRA/sPZc002nAJVsyJRsFUHbNY/P38bAsF7vW7Fwg3TqIjYFSoV9dERYB1/xGmn25mOwGYg=
+	t=1790079633; cv=none; b=p4pDow7cCit7HgGfE9HZLUyrlHiR++p+pXQkNsMg3qloZ8c2OVccMfyQdOKqPKvId5R4ar1whipMkPpBiZnBL2sP1YyNNvejy5rnbM7+DF/dxYax2MgMVt5LPbuv8W9RXZtFw16jY82NNA2tdMej8PZxxbXnx8NNcbBi+nXGMek=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790079549; c=relaxed/simple;
-	bh=l/N4Obxa3qgIEYJcYmPAv8aHX52C8bN08nhVD2V0YFw=;
-	h=Message-ID:Date:MIME-Version:From:Subject:To:Cc:References:
-	 In-Reply-To:Content-Type; b=r61ijnkodEgFYdOS0/kg85Jbe9/LGnuolNq6mSxrItACodwR+jBMoASLmv9U3iFTgrEJh3bOVtlVaW7KZSh4LLhGvkhzAfUBLNu1leFQuUNW22xFm5k6ag4y17JPIVKpjYgJlXJo696vwGUNLbkiXVfL+m3fivfPHI8unr7Ip44=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=YA/2FEXW; arc=none smtp.client-ip=74.125.225.141
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
+	s=arc-20240116; t=1790079633; c=relaxed/simple;
+	bh=jT8Mc5dzMMu4StOp/AWxj502rk91paR2qgzaD1OGDhk=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=VJoes+xVFg9tNVFIaxeCytVKzxEsISeM79hZKzH+3+K7Eh9JqlyiycmsqOIRNqD6Qdu+jAbixig3/wWCM2ghBqYFFLVkqIvKu+Ky1VNjLnTHMcng3EkvYcoFKR766iyb3GfhilsxrFmZVoLPWxSrb3ncYq9THEgbMCju1vCbhsU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=X4fj4UPR; arc=none smtp.client-ip=10.30.226.201
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="YA/2FEXW"
-Received: by mail-wm2-f13.google.com with SMTP id 5b1f17b1804b1-49e79a408deso23404545e9.2
-        for <linux-arm-msm@vger.kernel.org>; Tue, 22 Sep 2026 05:19:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1790079545; x=1790684345; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:organization
-         :autocrypt:content-language:references:cc:to:subject:reply-to:from
-         :user-agent:mime-version:date:message-id:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=K5u3EIzpPsS1zIA0D9Df1lz7j9vWVWGBTpUVoDk4tGw=;
-        b=YA/2FEXWzCUrq6yRxSpeWWi/mOHKQDrO+7g//Y4YrQ4gRH9s/0B+tIogHV439r/aT/
-         hGxbRlVQ/R2CTvQF02pr87iUr9Od0MOyZjblai8OX6TwlSOm7lWFmOhJGsTazhMy85YH
-         uOhb79KjHCR1tnoBn73j2vBpqIcAT+pc545VXJeQvbwnyQy3qW7WNWwOAa92M1YFS5cD
-         Pvd4HpLJz8WAWDjQu34ES3gTcejPWU9+qkxvQWrgob7Cq0ccmQmoAXMWbOljxYJV0crO
-         0jjFLN1A/U1OREeCSl0IQyT8WqZWA/cSuQqEOSXk0RhwUjkI1vOVstfZIlqv0QO80oE4
-         2+/g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790079545; x=1790684345;
-        h=content-transfer-encoding:content-type:in-reply-to:organization
-         :autocrypt:content-language:references:cc:to:subject:reply-to:from
-         :user-agent:mime-version:date:message-id:x-gm-gg:x-gm-message-state
-         :from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=K5u3EIzpPsS1zIA0D9Df1lz7j9vWVWGBTpUVoDk4tGw=;
-        b=McMHm+EoNXUdGJPQkLvMfxzGZM4y9L2KkkK+0LGla1Vj/cA0DU1ndliJ91lXHZphEr
-         ikyRHFO92sWJWPGI05k/joRhaytOwSXRWLTh7m3bwpdkqUPq17CSZn/2wGn5mKLPlvGz
-         9N6gZDxrPQURqlOqBzfvbdr5Wg+R6D2h7Wa2W/tg4oM13rFXeu7g6cc3O/cNS0MQSfke
-         J/32pdOqVSJck55HCgHJ/S+j8sheXb5tM2afn7L5OOgyl8/A5pkdGYO6oNBLff5PamBv
-         +Ta5ZNsDjuVmL2FMRp/pZNe5ZZGfBsbfC7vYkZEbGtjkBlQucmynVh9whjq715T05Ju8
-         2SsQ==
-X-Gm-Message-State: AFuF++npRjDt3IPiIuKncgRQZoMzl/O1+yXRb6ITemNlLe8ZP/iqRAnt
-	+qXNN2QmmdxZZBCjT17/Z27wmfNc4/Gq88AbCWq/Y3POweSD56lDE3EB0Rp4H9Z9mCI=
-X-Gm-Gg: AYBFou1r57qUttktEQum3CPdfO09QH6/dX23d3YFkKBki9hkb8YXhvRJdLinbE52U14
-	3h/W9OW0YC5MEG0j0VzNIIs7LciwLujnLzAw+kIWZcS8KrTjmgJeES/SvmXIQi8OPmz/G8K7vgo
-	adNE9niIBiG8ELUgH+y+cmlLeC2f59IH+4DTbebjOWbO874XiEFQRPAmj8FpXSQKY7b5zv50TcW
-	kkvzJggzwxY2lJoJ7dvsWIt/vHqeugRdWOrOVX7ASN5S9E/zIKwNOGLu/W2423C1Hh3+Cv56cno
-	pG+/mroHqhKjkx6iSY6WkdHlTw7EpQ//rIvPpI6Hc2i+zXJ2yrWMFwI50y2ktlvhNOSKeUUWcvR
-	HxFPlQLroz8ZfKYPA2smqT4n5qOs3EDymuRaqGBv732rExzSGUpORyWKbT324HSR3w25x6Q4tRW
-	CVcrsI0ur62iLrg5Fhy+QbSvbjIaWLw6KrmuYs7PDpfnW+s4JcNO0meZ7lLfmek5XzZWDs9xjm7
-	EmGxZuU80Y92Sr3DEE2+Ag0Coi/34x0Ik3fFM3kIWUL1V3VuOBQiw==
-X-Received: by 2002:a05:600c:6088:b0:49d:1fd8:b874 with SMTP id 5b1f17b1804b1-49fd6f0406cmr64899245e9.19.1790079544988;
-        Tue, 22 Sep 2026 05:19:04 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:106d:1080:ddd0:8cc7:9887:fa82? ([2a01:e0a:106d:1080:ddd0:8cc7:9887:fa82])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48862775412sm4849378f8f.10.2026.09.22.05.19.03
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 22 Sep 2026 05:19:04 -0700 (PDT)
-Message-ID: <5cadf2e6-9dbb-4320-b866-cf2fad599c41@linaro.org>
-Date: Tue, 22 Sep 2026 14:19:03 +0200
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="X4fj4UPR"
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 8C626C2BCF6;
+	Tue, 22 Sep 2026 12:20:32 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1790079632;
+	bh=jT8Mc5dzMMu4StOp/AWxj502rk91paR2qgzaD1OGDhk=;
+	h=From:Subject:Date:To:Cc:Reply-To:From;
+	b=X4fj4UPRGnTK1BXxwldg6tXMPi0f2xWEbJ9y59hWemz8mQZJ+yh9MnAI2PPx18b6b
+	 /DOx+sj7t18d6hESHKQueVRf/zIw6v2mZc/nupjdj5nKxewbYmCu1P2pJPXvOTiqk1
+	 1YVqZybztkJAi2N8SAwejWpzxS3MrgzqjVT7bHpxL6Tabd/f+OYVIGyXUUpoOYM2Vq
+	 B9xnjWBT4GvBigqPfGwftwrYKq6f8RrFeHZTy2ySBDhcihdLbb3FD21jWm6hBNM6WX
+	 GztpM4XifUWJ4TVX32MWNRibNVCKLW+yOxz7T5g4UhHxYhOK7pVKDZjZ1FqGBLrMv6
+	 xz8Ygd8T/3bCw==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5ECB7C982F1;
+	Tue, 22 Sep 2026 12:20:32 +0000 (UTC)
+From: Jens Glathe via B4 Relay <devnull+jens.glathe.oldschoolsolutions.biz@kernel.org>
+Subject: [PATCH v4 0/3] usb: typec: ps883x: fixes for older Thunderbolt 4 /
+ USB4 docks
+Date: Tue, 22 Sep 2026 14:20:18 +0200
+Message-Id: <20260922-ps883x-disable-usb4-v4-0-0a7b5b70cba3@oldschoolsolutions.biz>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH v20 2/6] phy: core: Add phy_get_by_of_node()
-To: johannes.goede@oss.qualcomm.com,
- Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
- Bjorn Andersson <andersson@kernel.org>,
- Michael Turquette <mturquette@baylibre.com>, Stephen Boyd
- <sboyd@kernel.org>, Rob Herring <robh@kernel.org>,
- Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
- <conor+dt@kernel.org>, Robert Foss <rfoss@kernel.org>,
- Todor Tomov <todor.too@gmail.com>, Mauro Carvalho Chehab
- <mchehab@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>,
- Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
- Bryan O'Donoghue <bod@kernel.org>,
- Loic Poulain <loic.poulain@oss.qualcomm.com>, Vinod Koul <vkoul@kernel.org>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- Kishon Vijay Abraham I <kishon@kernel.org>, Felipe Balbi <balbi@ti.com>,
- Manivannan Sadhasivam <mani@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org,
- devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-media@vger.kernel.org, linux-phy@lists.infradead.org,
- Krzysztof Kozlowski <krzk@kernel.org>
-References: <20260918-b4-linux-next-25-03-13-dtsi-x1e80100-camss-v20-0-dc244e124e71@linaro.org>
- <20260918-b4-linux-next-25-03-13-dtsi-x1e80100-camss-v20-2-dc244e124e71@linaro.org>
- <211caa95-dfbc-427d-8ce8-49cc76c24124@linaro.org>
- <49c7b4d8-a8ec-44e1-ab06-220cf3698ea0@oss.qualcomm.com>
-Content-Language: en-US, fr
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro
-In-Reply-To: <49c7b4d8-a8ec-44e1-ab06-220cf3698ea0@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/33OTQ7CIBAF4Ks0rMXw1wquvIdxUWBqSYg0HSXVp
+ ncXu9GFunyTzPfeTBDGAEj21UxGyAFDupSgNhVxfXs5Aw2+ZCKYaNiOazqg1nKiPmBrI9AbWkW
+ 5saxzXNq6taR8DiN0YVrV46nkPuA1jfe1JPPX9b+XOWXUgdONZ9YwA4cUPbo+pYgp3q5lI25te
+ JAXnsUbNFx9B0UBayGdFFaB8ru/oPwEm++gLKDuuJG6UXWZ+RNcluUJIVbOh2UBAAA=
+X-Change-ID: 20260718-ps883x-disable-usb4-19b0fc13b5ab
+To: Heikki Krogerus <heikki.krogerus@linux.intel.com>, 
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>, 
+ Abel Vesa <abelvesa@kernel.org>, Bjorn Andersson <andersson@kernel.org>, 
+ Konrad Dybcio <konradybcio@kernel.org>, Sebastian Reichel <sre@kernel.org>
+Cc: linux-usb@vger.kernel.org, linux-kernel@vger.kernel.org, 
+ linux-arm-msm@vger.kernel.org, stable@vger.kernel.org, 
+ "Dr. David Alan Gilbert" <dave@treblig.org>, 
+ Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>, 
+ Jens Glathe <jens.glathe@oldschoolsolutions.biz>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1790079631; l=3900;
+ i=jens.glathe@oldschoolsolutions.biz; s=20240919;
+ h=from:subject:message-id;
+ bh=jT8Mc5dzMMu4StOp/AWxj502rk91paR2qgzaD1OGDhk=;
+ b=Ycc7ZNihcutzLG5bmFzTaJ2IbdSx9XZ1vp3A1M1dr/FXsxpZTnRlP3pOKXwisN/Sw1K79qLek
+ 5IWX0vS0rbVC4TX4SFkOY4ccW2LZPL9zIIYj5iabxKlGEyvJsQVnHbe
+X-Developer-Key: i=jens.glathe@oldschoolsolutions.biz; a=ed25519;
+ pk=JcRJqJc/y8LsxOlPakALD3juGfOKmFBWtO+GfELMJVg=
+X-Endpoint-Received: by B4 Relay for
+ jens.glathe@oldschoolsolutions.biz/20240919 with auth_id=216
+X-Original-From: Jens Glathe <jens.glathe@oldschoolsolutions.biz>
+Reply-To: jens.glathe@oldschoolsolutions.biz
 
-On 9/18/26 17:35, johannes.goede@oss.qualcomm.com wrote:
-> Hi Neil,
-> 
-> On 18-Sep-26 16:10, Neil Armstrong wrote:
->> On 9/18/26 15:56, Bryan O'Donoghue wrote:
->>> Add new function phy_get_by_of_node() allowing lookup of a phy by
->>> device_node. Separates existing logic in _of_phy_get() into an internal
->>> helper method _of_phy_get_with_args() to allow for reuse in new method.
->>>
->>> Signed-off-by: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
->>> ---
->>>    drivers/phy/phy-core.c  | 83 ++++++++++++++++++++++++++++++++++++++-----------
->>>    include/linux/phy/phy.h |  6 ++++
->>>    2 files changed, 71 insertions(+), 18 deletions(-)
->>>
->>> diff --git a/drivers/phy/phy-core.c b/drivers/phy/phy-core.c
->>> index 89addd732bff3..42c27a2b45159 100644
->>> --- a/drivers/phy/phy-core.c
->>> +++ b/drivers/phy/phy-core.c
->>> @@ -606,6 +606,38 @@ int phy_validate(struct phy *phy, enum phy_mode mode, int submode,
->>>    }
->>>    EXPORT_SYMBOL_GPL(phy_validate);
->>>    +/**
->>> + * _of_phy_get_with_args() - lookup and obtain a reference to a phy by of_phandle_args
->>> + * @args: of_phandle_args to the phy
->>> + *
->>> + * Returns: the phy from the provider's of_xlate, -ENODEV if disabled,
->>> + * -EPROBE_DEFER if the provider is not yet registered.
->>> + */
->>> +static struct phy *_of_phy_get_with_args(struct of_phandle_args *args)
->>> +{
->>> +    struct phy *phy;
->>> +    struct phy_provider *phy_provider;
->>> +
->>> +    lockdep_assert_held(&phy_provider_mutex);
->>> +
->>> +    phy_provider = of_phy_provider_lookup(args->np);
->>> +    if (IS_ERR(phy_provider) || !try_module_get(phy_provider->owner))
->>> +        return ERR_PTR(-EPROBE_DEFER);
->>> +
->>> +    if (!of_device_is_available(args->np)) {
->>> +        dev_warn(phy_provider->dev, "Requested PHY is disabled\n");
->>> +        phy = ERR_PTR(-ENODEV);
->>> +        goto out_put_module;
->>> +    }
->>> +
->>> +    phy = phy_provider->of_xlate(phy_provider->dev, args);
->>> +
->>> +out_put_module:
->>> +    module_put(phy_provider->owner);
->>> +
->>> +    return phy;
->>> +}
->>> +
->>>    /**
->>>     * _of_phy_get() - lookup and obtain a reference to a phy by phandle
->>>     * @np: device_node for which to get the phy
->>> @@ -620,8 +652,7 @@ EXPORT_SYMBOL_GPL(phy_validate);
->>>    static struct phy *_of_phy_get(struct device_node *np, int index)
->>>    {
->>>        int ret;
->>> -    struct phy_provider *phy_provider;
->>> -    struct phy *phy = NULL;
->>> +    struct phy *phy;
->>>        struct of_phandle_args args;
->>>          lockdep_assert_held(&phy_provider_mutex);
->>> @@ -637,22 +668,7 @@ static struct phy *_of_phy_get(struct device_node *np, int index)
->>>            goto out_put_node;
->>>        }
->>>    -    phy_provider = of_phy_provider_lookup(args.np);
->>> -    if (IS_ERR(phy_provider) || !try_module_get(phy_provider->owner)) {
->>> -        phy = ERR_PTR(-EPROBE_DEFER);
->>> -        goto out_put_node;
->>> -    }
->>> -
->>> -    if (!of_device_is_available(args.np)) {
->>> -        dev_warn(phy_provider->dev, "Requested PHY is disabled\n");
->>> -        phy = ERR_PTR(-ENODEV);
->>> -        goto out_put_module;
->>> -    }
->>> -
->>> -    phy = phy_provider->of_xlate(phy_provider->dev, &args);
->>> -
->>> -out_put_module:
->>> -    module_put(phy_provider->owner);
->>> +    phy = _of_phy_get_with_args(&args);
->>>      out_put_node:
->>>        of_node_put(args.np);
->>> @@ -1001,6 +1017,37 @@ struct phy *devm_of_phy_get_by_index(struct device *dev, struct device_node *np,
->>>    }
->>>    EXPORT_SYMBOL_GPL(devm_of_phy_get_by_index);
->>>    +/**
->>> + * phy_get_by_of_node() - lookup and obtain a reference to a phy by device_node
->>> + * @np: node containing the phy
->>> + *
->>> + * Returns: the phy associated with the device node or ERR_PTR.
->>> + */
->>> +struct phy *phy_get_by_of_node(struct device_node *np)
->>> +{
->>> +    struct of_phandle_args args = { .np = np, .args_count = 0 };
->>> +    struct phy *phy;
->>> +
->>> +    mutex_lock(&phy_provider_mutex);
->>
->> I don't really understand the usage of lockdep_assert_held(), but why
->> does _of_phy_get() uses lockdep_assert_held() and here you use mutex_lock()
->> like before patch 1 ?
-> 
-> Hi, not Bryan but I can answer this question.
-> 
-> lockdep_assert_held() check that the mutex is lock and triggers
-> a WARN() when not held.
-> 
-> So lockdep_assert_held() is used in functions which expect to
-> be called with the mutex already locked, like the new
-> _of_phy_get_with_args() helper which is added here.
-> 
-> This new helper factors out bits of _of_phy_get(), which itself
-> already has lockdep_assert_held(), but since this new helper
-> also is directly called from the new phy_get_by_of_node() it
-> is good for it to also check the mutex is locked itself.
-> 
-> And since the new phy_get_by_of_node() calls this new helper
-> it must lock the mutex.
-> 
-> Note that _of_phy_get() is already always called with the mutex
-> locked from of_phy_get(), phy_get(), or devm_of_phy_get_by_index().
+On Qualcomm X1E80100 / X1P42100 platforms using the Parade PS883x
+retimer, connecting USB4-capable docks such as the Lenovo 40B0 via a
+regular Type-C cable (Type-C fallback mode) often results in working
+USB but no DisplayPort output.
 
-Ok thanks for the detailed explanation, I missed that !
+This series addresses the issue with three driver-only changes:
 
-Neil
+- Support the legacy TYPEC_DP_STATE_F request (deprecated since DP Alt
+  Mode 1.0b) that docks such as the 40B0 and SSK SC220 still send.
+  Handle it in the existing DP altmode path in ps883x_set(). F is 
+  programmed like D; E is unchanged.
 
-> 
-> Regards,
-> 
-> Hans
-> 
-> 
-> 
-> 
->>
->> Neil
->>
->>> +
->>> +    phy = _of_phy_get_with_args(&args);
->>> +    if (IS_ERR(phy))
->>> +        goto out_unlock;
->>> +
->>> +    if (!try_module_get(phy->ops->owner)) {
->>> +        phy = ERR_PTR(-EPROBE_DEFER);
->>> +        goto out_unlock;
->>> +    }
->>> +
->>> +    get_device(&phy->dev);
->>> +
->>> +out_unlock:
->>> +    mutex_unlock(&phy_provider_mutex);
->>> +
->>> +    return phy;
->>> +}
->>> +EXPORT_SYMBOL_GPL(phy_get_by_of_node);
->>> +
->>>    /**
->>>     * phy_create() - create a new phy
->>>     * @dev: device that is creating the new phy
->>> diff --git a/include/linux/phy/phy.h b/include/linux/phy/phy.h
->>> index ea47975e288ae..71c2e16397130 100644
->>> --- a/include/linux/phy/phy.h
->>> +++ b/include/linux/phy/phy.h
->>> @@ -284,6 +284,7 @@ struct phy *devm_of_phy_optional_get(struct device *dev, struct device_node *np,
->>>                         const char *con_id);
->>>    struct phy *devm_of_phy_get_by_index(struct device *dev, struct device_node *np,
->>>                         int index);
->>> +struct phy *phy_get_by_of_node(struct device_node *np);
->>>    void of_phy_put(struct phy *phy);
->>>    void phy_put(struct device *dev, struct phy *phy);
->>>    void devm_phy_put(struct device *dev, struct phy *phy);
->>> @@ -493,6 +494,11 @@ static inline struct phy *devm_of_phy_get_by_index(struct device *dev,
->>>        return ERR_PTR(-ENOSYS);
->>>    }
->>>    +static inline struct phy *phy_get_by_of_node(struct device_node *np)
->>> +{
->>> +    return ERR_PTR(-ENOSYS);
->>> +}
->>> +
->>>    static inline void of_phy_put(struct phy *phy)
->>>    {
->>>    }
->>>
->>
->>
-> 
+- Add a post-configuration delay after writing the connection-status
+  registers so the analog front-end can settle. This makes DP Alt Mode
+  hotplug reliable on the 40B0.
+
+- On platforms whose USB4 / DP-tunneling stack is not ready yet, reject
+  TYPEC_MODE_USB4 with -EOPNOTSUPP. That forces the Type-C stack to
+  fall back to USB3 + DP Alt Mode. The quirk is a machine-compatible
+  table inside the driver, not a DT property.
+
+This is a temporary workaround until full USB4 DP tunneling support is
+available in the X1E USB4 controller and qmp-combo PHY stack.
+
+As an additional observation, the same dock with a Type-C cable works
+well on Thinkpad X13s, Thinkbook 16 G7 QOY and Ideapad 5 14Q8X9, which
+do not use this retimer.
+
+To: Heikki Krogerus <heikki.krogerus@linux.intel.com>
+To: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+To: Abel Vesa <abelvesa@kernel.org>
+To: Bjorn Andersson <andersson@kernel.org>
+To: Konrad Dybcio <konradybcio@kernel.org>
+To: Sebastian Reichel <sre@kernel.org>
+Cc: linux-usb@vger.kernel.org
+Cc: linux-kernel@vger.kernel.org
+Cc: linux-arm-msm@vger.kernel.org
+Cc: stable@vger.kernel.org
+Cc: Dr. David Alan Gilbert <dave@treblig.org>
+Cc: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+
+Assisted-by: Grok(xAI):4.6
+Signed-off-by: Jens Glathe <jens.glathe@oldschoolsolutions.biz>
+---
+Changes in v4:
+- remove ambiguous link in patch 3, pointing to a semi-related issue.
+- Link to v3: https://lore.kernel.org/r/20260916-ps883x-disable-usb4-v3-0-8f19386456d0@oldschoolsolutions.biz
+
+Changes in v3:
+- reduced the dp logic changein ps883x_set() to only adding 
+  TYPEC_DP_STATE_F handling grouped with TYPEC_DP_STATE_D.
+- picked up Tested-by tag from David, thanks for the re-test.
+- Link to v2: https://lore.kernel.org/r/20260914-ps883x-disable-usb4-v2-0-523c32b4e4d7@oldschoolsolutions.biz
+
+Changes in v2:
+- Drop the parade,disable-usb4 DT property, bindings and board DTS
+  changes (Sebastian Reichel, Krzysztof Kozlowski). DT describes
+  hardware; incomplete software support is not a board property.
+- Disable USB4 from the driver via of_machine_is_compatible() for
+  qcom,x1e80100, qcom,x1p42100, qcom,hamoa and qcom,purwa. The quirk
+  stays kernel-contained and can be dropped later without ABI.
+- Keep DP altmode handling in the existing ps883x_set() path instead
+  of extracting a helper (Konrad Dybcio). Treat STATE_F like STATE_D
+  and STATE_E like STATE_C, matching qcom-qmp-combo.
+- Replace usleep_range(20000, 30000) with fsleep(30000) and document
+  why the delay is required (Heikki Krogerus).
+- Drop the per-event "USB4 disabled via DT property" log; print once
+  at probe when the quirk is active.
+- Link to v1: https://lore.kernel.org/r/20260718-ps883x-disable-usb4-v1-0-cec86d0b909e@oldschoolsolutions.biz
+
+---
+Jens Glathe (3):
+      usb: typec: mux: ps883x: support TYPEC_DP_STATE_F
+      usb: typec: mux: ps883x: add a delay after writing config regs
+      usb: typec: mux: ps883x: disable USB4 on incomplete USB4 platforms
+
+ drivers/usb/typec/mux/ps883x.c | 48 ++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 48 insertions(+)
+---
+base-commit: 601057b3eec13d1f37e5b45dd1410facd7b1bdeb
+change-id: 20260718-ps883x-disable-usb4-19b0fc13b5ab
+
+Best regards,
+-- 
+Jens Glathe <jens.glathe@oldschoolsolutions.biz>
+
 
