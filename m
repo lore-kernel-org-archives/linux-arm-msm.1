@@ -1,140 +1,188 @@
-Received: from m16.mail.163.com (m16.mail.163.com [220.197.31.4])
+Received: from lahtoruutu.iki.fi (lahtoruutu.iki.fi [185.185.170.37])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B229B53CA70;
-	Tue, 22 Sep 2026 11:40:35 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=220.197.31.4
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790077241; cv=none; b=aFruNdHUluBD3bJ0BZuJ8S/+YiQiydBthoPZrswo4KHf3JiBMEUhT7kTYPR2hibvspzbaMmXrSyHtYVAf5V+OuZIj2mqiQeC4meHvnNJvKOA7Y6lJsL1nWgiHbygz+Z25419UmyJWc+OUsAPjrfcO7DN0WDShWcEL5rqGKTOOPM=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790077241; c=relaxed/simple;
-	bh=eWdskD3KxH6dOw44b7Wr9sO1tMT30b7LlqeJDS94SbY=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References:Content-Type:
-	 MIME-Version:Message-ID; b=nDEleKkrMs0UTFOeTbVqhJLePGdEi30bUFz2Kp7QRwa4Tl2EGBUW/rfFySTIeUdbSf1iAdS553/RcWbstXnDDHuUEySN9ICW8XSMPTKFV8gAHRqyaH2M/t+VlYxLE2y/bwlERBkk0qpcH5ajJ1rqwRf3zKtQ9uun/w7MGJSb0mo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com; spf=pass smtp.mailfrom=163.com; dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b=ZwuTgT33; arc=none smtp.client-ip=220.197.31.4
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=163.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 35CF54D4868
+	for <linux-arm-msm@vger.kernel.org>; Tue, 22 Sep 2026 11:43:51 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=185.185.170.37
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1790077433; cv=pass; b=jJ69cO1LPHbQBJHS4+5thRNY1diE8RAg0UGdENDwZO14V5wq5BrQuqZ9lnZ3v1G4E8JGz0itV0kXxXousRmO47NdmtzpVaTBz8UGLis/8KC+x1gjCtHHaeKbtNGaE8ITxU/RgSl5q56HIA+Oi3aa7wNnJK04zXduONkgHw6SVTc=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1790077433; c=relaxed/simple;
+	bh=kSDLKQ3fFz6Q2v+DGB/iXJKvLM0o4PsJsvctLJETZpc=;
+	h=MIME-Version:Date:From:To:Cc:Message-Id:In-Reply-To:References:
+	 Subject:Content-Type; b=BD2SGw7t1IL2iJydiqdsCJ5LyAJeBCp/LBXeuzwr9SjGL24hHnTVP6c7lSD89ZJqILSsOo97RPz2ZkSqAuEN/4wLFf4wckNZL5ydNCYTOfjGzEv5egQf3bkJwrXXTwutQkcYG2XUOJn3s6czPqUGnQmtsh6BryAPDo643I9SYLs=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=iki.fi; spf=pass smtp.mailfrom=iki.fi; dkim=pass (2048-bit key) header.d=iki.fi header.i=@iki.fi header.b=g5qP6zof; dkim=pass (1024-bit key) header.d=iki.fi header.i=@iki.fi header.b=BCJ9Sxji; arc=pass smtp.client-ip=185.185.170.37
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=iki.fi
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=iki.fi
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b="ZwuTgT33"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
-	s=s110527; h=Date:From:To:Subject:Content-Type:MIME-Version:
-	Message-ID; bh=eWdskD3KxH6dOw44b7Wr9sO1tMT30b7LlqeJDS94SbY=; b=Z
-	wuTgT33VE4a2FSGNE+u6+hJpYCCstsL6zVJwY4xH+v0FsZ9aHdvECRbMDAkGgJ1d
-	oWCNTO/ECt3IiGzU6THbpcWnks/+vnJ5PS0O3bV7gk6GDe3PE0GSu/l41FzLuJcN
-	PI8b28ljTpZWqqwZ2cvP0mqPGwtimHPIxoD8MDnF0c=
-Received: from slark_xiao$163.com (
- [2409:895b:3826:eb27:7d8b:e02e:d1a2:d0b4] ) by ajax-webmail-wmsvr-40-140
- (Coremail) ; Tue, 22 Sep 2026 19:39:53 +0800 (CST)
-Date: Tue, 22 Sep 2026 19:39:53 +0800 (CST)
-From: "Slark Xiao" <slark_xiao@163.com>
-To: "Krishna Chaitanya Chundru" <krishna.chundru@oss.qualcomm.com>
-Cc: mani@kernel.org, jeff.hugo@oss.qualcomm.com, mhi@lists.linux.dev,
-	linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re:Re: [PATCH] bus: mhi: host: pci_generic: Add autosuspend_delay
- customized support
-X-Priority: 3
-X-Mailer: Coremail Webmail Server Version 2023.4-cmXT build
- 20260511(2e539873) Copyright (c) 2002-2026 www.mailtech.cn 163com
-In-Reply-To: <bf94f351-777d-4dc0-98a2-7af77f832f2b@oss.qualcomm.com>
-References: <20260919095506.9570-1-slark_xiao@163.com>
- <bf94f351-777d-4dc0-98a2-7af77f832f2b@oss.qualcomm.com>
-X-NTES-SC: AL_Qu2SAvycuEki5SacY+kdnUYVh+s9WsW5uPUl34dUc94FnxDz9SIvZ0FcAULp/N22EAaDoQGeTTRi19ZFUIRlmuewOGA+jN6Wc/a375/4QQ==
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset=GBK
+	dkim=pass (2048-bit key) header.d=iki.fi header.i=@iki.fi header.b="g5qP6zof";
+	dkim=pass (1024-bit key) header.d=iki.fi header.i=@iki.fi header.b="BCJ9Sxji"
+Received: from meesny.iki.fi (meesny.iki.fi [IPv6:2001:67c:2b0:1c1::201])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange x25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by lahtoruutu.iki.fi (Postfix) with ESMTPS id 4hpysr71vDz49Pxq
+	for <linux-arm-msm@vger.kernel.org>; Tue, 22 Sep 2026 14:43:44 +0300 (EEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iki.fi; s=lahtoruutu;
+	t=1790077425;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=HDCJSXoI0WbQ0p3ihA1hkvhJFyDcDNp+TMZs8wSGHg4=;
+	b=g5qP6zofhgjxQT+sz5cb1vi7PstYo2M2z8VqRrOIJAu2vZHbqB1jss9qRlmvwpdfInzPI4
+	p/0pdIo7G+9pz8dbYk5n6aixlCpcxSeUZwW7hcLcq7uoaP0sL9CtU41IV0lOOIIf3mAubt
+	9b4wj1DI0cWYmVujh/nmKfCd00ChRvkvusf0RyjUsnuMQiNb8igC2Nwn9LfQiQjeZs9Cun
+	icuT8vsRwEvOJlqnn5f+rdKu1JJkuJLtyeYZylqGYPI+uh9teGlrXcd+8Yfn1EyXoDAQje
+	QSO/LTNGkuGnHgge5n6x5DUd4GEZXEjuGXKr0EtnClZGDz27GwEkcnehyyUi0A==
+Received: from fauth-c2-smtp.messagingengine.com (fauth-c2-smtp.messagingengine.com [204.75.18.201])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange x25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	(Authenticated sender: jmtilli)
+	by meesny.iki.fi (Postfix) with ESMTPSA id 4hpysb5nLyzyYL;
+	Tue, 22 Sep 2026 14:43:31 +0300 (EEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iki.fi; s=meesny;
+	t=1790077412;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=HDCJSXoI0WbQ0p3ihA1hkvhJFyDcDNp+TMZs8wSGHg4=;
+	b=BCJ9SxjiX5L3zhiWqa5ACtN52xDuZIM0VvoHqy6VOfbRqyVTs9eRUAUdz9/m9qubxeVgFS
+	dqvgDDyGvxq1wG0PIzQqOFjbHRgCd2A78eHNBp1uSRIiXp0czVaH9Nz/rAcVEjJDt0QlDG
+	+PEbz68y7gH42FFyT6Xqz/OXsPFz8P8=
+ARC-Seal: i=1; a=rsa-sha256; d=iki.fi; s=meesny; cv=none; t=1790077412;
+	b=vOXD8qHRpzpguhYhpMRx1e2Q/3rI/+1q3leSJumeMWL9RoJl0dxK6d6zcn3GNmDTxY9X+5
+	662JjFXwAZkTmz7fUH1JS0+qG/MY+BjXJAcPhkhNXJwu6RjBmkFxVgBfEgasTwFT9km7pR
+	HXNqJh9AH9W+sUko6KYCcsSaHqeQyJo=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=iki.fi;
+	s=meesny; t=1790077412;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=HDCJSXoI0WbQ0p3ihA1hkvhJFyDcDNp+TMZs8wSGHg4=;
+	b=M6wNbldMex6eNUuqwyCGhH/RsDQWLPylr1A++xuuM4KQmMja8OcahPi9gpYzURAp8+qwU4
+	3CewMnWDQg0bbUzChhbDO2vcu4S9SKyI5EEKgxPsBDQTIyQPY4miQQPas/M+skNa2wmIx2
+	XT1Ko2wqXH2YR8rxgGIK0TzxKwQkQKw=
+ARC-Authentication-Results: i=1;
+	ORIGINATING;
+	auth=pass smtp.auth=jmtilli smtp.mailfrom=juha-matti.tilli@iki.fi
+Received: from ams-compute-02.internal (ams-compute-02.internal [10.64.2.62])
+	by mailfauth.ams.internal (Postfix) with ESMTP id 794151980062;
+	Tue, 22 Sep 2026 07:43:30 -0400 (EDT)
+Received: from ams-imap-13 ([10.64.2.33])
+  by ams-compute-02.internal (MEProxy); Tue, 22 Sep 2026 07:43:30 -0400
+X-ME-Sender: <xms:32myatg49o2er3dLEHE4r7I9rXsYaGObsp32cn7WyFIZ8RMCdYb-qg>
+    <xme:32myas0Xlzs7SINZs582WaVh3NHceaIt_mfkk9PrpgJZ0sjaIll1l3HZRWoRGBNM5
+    BMbO2czBXLn0qo2YVS27LFjostcQP_vP4_8DYAs49WB2PTs8c47nfdx>
+X-ME-Proxy-Cause: dmFkZTEtbiTwXaJq8lyTxx63pXM8gv6tRPzvjR2XlgYzsPY53oPiafl5LAiPT+3EqcPRxj
+    v+lnvvbg4B8Av2KIvQrtjz0yr+Yq5f7CFnPLCrFT2IdzdKDplNdf8L8t7MZx3Cd/fIDKRA
+    s8ZACR28W2YjgpG0ngf+cr56Qgak+Lbi068lHJIEZWBixODjiI1oxDGT4AxdKTzzYaJL/z
+    jecy55fw/Ba0ydPGzUnkf7k8Xd2WKon0j+ZdBjpgyCnv5XBP0lEqPIChyId3c/E70ctqLW
+    ezkbv0P3olAwKi8GjrrFnskjocGLPncShuhlmTHbIlPxm5wc+VsIYo4qDP3LRm60ZhxrRU
+    UQG+3ayrCDzbUcm0I/qAM9LTWJXZLqJhUiHnvcCn0crK92EN48dWQbzKVxFWK6UqAYb1Ok
+    cotm9QPvuoD56VyyhLXJxuknc5itdvROGsFq3e2LaFnjciBYsgDaDvCtROBhps7EwFg5dE
+    yLxz9saybj0Ru87aZmKqTgp1073H2oEdLV/hJJyzVWl/UYJmvg8VxnM5+YaH6bI+BX9LBz
+    Sm90ijWfu3nY/1tXOMQt6xMt4pDtaM+HwWxJhOXsXtI8DpmPoJNWIR/le2GLmSJBttPEBw
+    E1lzIwDeQWRCwG40xq115NO2pqU7gWGrNVaNEVMvpzupOEaKf75gmaBS0r0A
+X-ME-Proxy: <xmx:4mmyauydh2N1Y6AboU5ILm0kGpsGkeUyAWIrQk4BPNDxzZPh4TNfeQ>
+    <xmx:4mmyakzt6yCgAfqi5gpyTsC75SC8YC0XdoVNMXRrxDjyOEwJJEuGHw>
+    <xmx:4mmyatTu2-u8iMHX_oChV13_xnlwREiNIeABWz4ReB1xVEqwAw1YGg>
+    <xmx:4mmyanPvEyQ1Y3PO_u0I9QwNqDtPpw7x5Al8EF_ZHOmQ-sgIRRqFlA>
+    <xmx:4mmyaoSJYJL9gXz42aPZALcY5cbEB_PMn2dlcjywAGEGIDjHliwnWCCo>
+Feedback-ID: i02414972:Fastmail
+Received: by mailuser.ams.internal (Postfix, from userid 501)
+	id 6F7D7F80089; Tue, 22 Sep 2026 07:43:27 -0400 (EDT)
+X-Mailer: MessagingEngine.com Webmail Interface
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Message-ID: <1bec2fd7.99f3.1a0c8ea4db6.Coremail.slark_xiao@163.com>
-X-Coremail-Locale: zh_CN
-X-CM-TRANSID:jCgvCgD3P5kJabJqrHZMAA--.59647W
-X-CM-SenderInfo: xvod2y5b0lt0i6rwjhhfrp/xtbC6AmjCGqyaQl3GgAA3f
-X-Coremail-Antispam: 1U5529EdanIXcx71UUUUU7vcSsGvfC2KfnxnUU==
+X-ThreadId: AtmlxWozq_rN
+Date: Tue, 22 Sep 2026 14:43:05 +0300
+From: "Juha-Matti Tilli" <juha-matti.tilli@iki.fi>
+To: "Manivannan Sadhasivam" <manivannan.sadhasivam@oss.qualcomm.com>,
+ "Manivannan Sadhasivam" <mani@kernel.org>,
+ "David S . Miller" <davem@davemloft.net>,
+ "Eric Dumazet" <edumazet@google.com>, "Jakub Kicinski" <kuba@kernel.org>,
+ "Paolo Abeni" <pabeni@redhat.com>, "Simon Horman" <horms@kernel.org>,
+ "Jeff Johnson" <jjohnson@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, netdev@vger.kernel.org,
+ linux-kernel@vger.kernel.org, linux-wireless@vger.kernel.org,
+ ath11k@lists.infradead.org, ath12k@lists.infradead.org,
+ "Bjorn Andersson" <andersson@kernel.org>,
+ "Chris Lew" <christopher.lew@oss.qualcomm.com>,
+ "Deepak Kumar Singh" <deepak.singh@oss.qualcomm.com>,
+ "Raj Kumar Bhagat" <raj.bhagat@oss.qualcomm.com>,
+ "Jeff Hugo" <jeff.hugo@oss.qualcomm.com>
+Message-Id: <e7e8a499-9e89-4efa-a99f-18ce7dc37ab5@app.fastmail.com>
+In-Reply-To: <20260921-qrtr-multi-ep-v2-4-27dd80d841a0@oss.qualcomm.com>
+References: <20260921-qrtr-multi-ep-v2-0-27dd80d841a0@oss.qualcomm.com>
+ <20260921-qrtr-multi-ep-v2-4-27dd80d841a0@oss.qualcomm.com>
+Subject: Re: [PATCH v2 4/4] wifi: ath12k: Connect to the QMI server belonging to the
+ device owned by this driver
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-CkF0IDIwMjYtMDktMjIgMTI6MTI6MzUsICJLcmlzaG5hIENoYWl0YW55YSBDaHVuZHJ1IiA8a3Jp
-c2huYS5jaHVuZHJ1QG9zcy5xdWFsY29tbS5jb20+IHdyb3RlOgo+Cj4KPk9uIDkvMTkvMjAyNiAz
-OjI1IFBNLCBTbGFyayBYaWFvIHdyb3RlOgo+PiBGb3Igc29tZSBXV0FOIGRldmljZSwgaXQgbWF5
-IGdldCBhIFNZUyBFUlJPUiBpc3N1ZSB3aGVuIHJlc3VtaW5nCj4+IGZyb20gc3VzcGVuZCBzdGF0
-ZSBmcmVxdWVudGx5LiBSZWZlciB0byB0aGUgUXVhbGNvbW0gV2luZG93cwo+PiBkcml2ZXIsIHRo
-ZSBkZWZhdWx0IHZhbHVlIG9mIGF1dG9zdXNwZW5kX2RlbGF5X21zIGlzIHNldCBhcyA1MDAwCj4+
-IG1zLiBCdXQgaW4gTGludXggc2lkZSwgYWxsIFdXQU4gZGV2aWNlIHdlcmUgc2V0IGFzIDIwMDBt
-cy4gV2UKPj4gdHJpZWQgdG8gc2V0IHRoaXMgdmFsdWUgdG8gNTAwMG1zIGFuZCB3ZSBjYW4gZ2V0
-IGEgcG9zaXRpdmUgdGVzdAo+PiByZXN1bHQuCj4+Cj4+IFNvIHdlIGFkZCBhIHN1cHBvcnQgdG8g
-YWxsb3cgdmVuZG9yIHRvIHNldCBhIGRpZmZlcmVuY2UgdmFsdWUgZm9yCj4+IHNwZWNpZmljIFdX
-QU4gZGV2aWNlLgo+eW91IGNhbiBjaGFuZ2UgYXV0byBzdXNwZW5kIGRlbGF5IGZyb20gc3lzZnMs
-IHBsZWFzZSB1c2UgdGhhdCB3YXkgaW5zdGVhZCBvZgo+ZG9pbmcgaW4gdGhlIGRyaXZlci4KPgo+
-LSBLcmlzaG5hIENoYWl0YW55YS4KWWVzLCB3ZSBjYW4gZG8gdGhpcyBieSBzZXR0aW5nIHRoZSBz
-eXNmcyBBUEkgLiBIb3dldmVyLCBub3QgYWxsIHVzZXJzIAphcmUgYXdhcmUgb2YgdGhpcyBtZXRo
-b2QuIEFkZGl0aW9uYWxseSwgdGhpcyBhcHByb2FjaCBpcyBvbmx5CmVmZmVjdGl2ZSBmb3IgYSBz
-aW5nbGUgaW5zdGFuY2U7IGl0IHJlcXVpcmVzIHJlY29uZmlndXJhdGlvbiBhZnRlciBlYWNoCnJl
-c3RhcnQsIHdoaWNoIGlzIHF1aXRlIGluY29udmVuaWVudC4KClRob3VnaCBJIHdhbnQgdG8gc2V0
-IHRoZSBkZWZhdWx0IHZhbHVlIGZyb20gMjAwMCB0byA1MDAwLCByZWZlciB0bwp0aGUgUXVhbGNv
-bW0gV2luZG93cyBkcml2ZXIsIEkgZG9uJ3Qgd2FudCB0aGlzIGNoYW5nZSB0byBhZmZlY3QKdGhl
-IGRlZmF1bHQgY29uZmlndXJhdGlvbiBvZiBvdGhlciB2ZW5kb3JzLiAKClRoaXMgYXR0cmlidXRl
-IHNob3VsZCBiZWxvbmcgdG8gc3BlY2lmaWMgV1dBTiBkZXZpY2VzLCBzdWNoIGFzClNEWDY1LCBT
-RFg3MiBvciBRRFUxMDAsIHJhdGhlciB0aGFuIHRvIHRoZSBzYW1lIGNhdGVnb3J5IG9mCmRldmlj
-ZXMsIGxpa2UgYWxsIE1ISSBkZXZpY2VzIHNoYXJpbmcgYSBzaW5nbGUgc2V0dGluZy4KCkJUVywg
-SSBzYXcgc29tZSBvbmUgYWRkICdub19tMycgZmxhZyBmb3IgdGhlaXIgU0RYN1ggZGV2aWNlLgpX
-aHkgY2FuIHRoZXkgZGlzYWJsZSBzdXNwZW5kIG9uIHRoZSBzYW1lIFNEWDdYIGRldmljZSwgd2hp
-bGUKSSBjYW4ndCBhZGp1c3QgdGhlIHN1c3BlbmQgZGVsYXkgdGltZT8gVGhhdCdzIGN1cmlvdXMu
-CgpUaGFua3MKPj4gQlRXLCBiYXNlZCBvbiB0aGUgcHJpbmNpcGxlIG9mIHN0cnVjdHVyZSBhbGln
-bm1lbnQsIEkgbW92ZWQgdGhlCj4+IGxvY2F0aW9uIG9mICd0cmlnZ2VyX2VkbCcuCj4+Cj4+IFNp
-Z25lZC1vZmYtYnk6IFNsYXJrIFhpYW8gPHNsYXJrX3hpYW9AMTYzLmNvbT4KPj4gLS0tCj4+ICBk
-cml2ZXJzL2J1cy9taGkvaG9zdC9wY2lfZ2VuZXJpYy5jIHwgMTQgKysrKysrKysrKystLS0KPj4g
-IDEgZmlsZSBjaGFuZ2VkLCAxMSBpbnNlcnRpb25zKCspLCAzIGRlbGV0aW9ucygtKQo+Pgo+PiBk
-aWZmIC0tZ2l0IGEvZHJpdmVycy9idXMvbWhpL2hvc3QvcGNpX2dlbmVyaWMuYyBiL2RyaXZlcnMv
-YnVzL21oaS9ob3N0L3BjaV9nZW5lcmljLmMKPj4gaW5kZXggYjYzNmUyYzIzYjRkLi4zMzM5Yjli
-MmQxNmQgMTAwNjQ0Cj4+IC0tLSBhL2RyaXZlcnMvYnVzL21oaS9ob3N0L3BjaV9nZW5lcmljLmMK
-Pj4gKysrIGIvZHJpdmVycy9idXMvbWhpL2hvc3QvcGNpX2dlbmVyaWMuYwo+PiBAQCAtMjMsNiAr
-MjMsOCBAQAo+PiAgCj4+ICAjZGVmaW5lIEhFQUxUSF9DSEVDS19QRVJJT0QgKEhaICogMikKPj4g
-IAo+PiArI2RlZmluZSBBVVRPU1VTUEVORF9ERUxBWV9NUyAyMDAwCj4+ICsKPj4gIC8qIFBDSSBW
-SUQgZGVmaW5pdGlvbnMgKi8KPj4gICNkZWZpbmUgUENJX1ZFTkRPUl9JRF9USEFMRVMJMHgxMjY5
-Cj4+ICAjZGVmaW5lIFBDSV9WRU5ET1JfSURfUVVFQ1RFTAkweDFlYWMKPj4gQEAgLTM4LDExICs0
-MCwxMiBAQAo+PiAgICogQG5hbWU6IG5hbWUgb2YgdGhlIFBDSSBtb2R1bGUKPj4gICAqIEBmdzog
-ZmlybXdhcmUgcGF0aCAoaWYgYW55KQo+PiAgICogQGVkbDogZW1lcmdlbmN5IGRvd25sb2FkIG1v
-ZGUgZmlybXdhcmUgcGF0aCAoaWYgYW55KQo+PiAtICogQGVkbF90cmlnZ2VyOiBjYXBhYmxlIG9m
-IHRyaWdnZXJpbmcgRURMIG1vZGUgaW4gdGhlIGRldmljZSAoaWYgc3VwcG9ydGVkKQo+PiAgICog
-QGJhcl9udW06IFBDSSBiYXNlIGFkZHJlc3MgcmVnaXN0ZXIgdG8gdXNlIGZvciBNSEkgTU1JTyBy
-ZWdpc3RlciBzcGFjZQo+PiAgICogQGRtYV9kYXRhX3dpZHRoOiBETUEgdHJhbnNmZXIgd29yZCBz
-aXplICgzMiBvciA2NCBiaXRzKQo+PiAgICogQHZmX2RtYV9kYXRhX3dpZHRoOiBETUEgdHJhbnNm
-ZXIgd29yZCBzaXplIGZvciBWRidzIChvcHRpb25hbCkKPj4gICAqIEBtcnVfZGVmYXVsdDogZGVm
-YXVsdCBNUlUgc2l6ZSBmb3IgTUJJTSBuZXR3b3JrIHBhY2tldHMKPj4gKyAqIEBhdXRvc3VzcGVu
-ZF9kZWxheTogY3VzdG9taXplZCBhdXRvc3VzcGVuZF9kZWxheV9tcyB2YWx1ZSBmb3Igc3BlY2lm
-aWMgbWhpIGRldmljZQo+PiArICogQGVkbF90cmlnZ2VyOiBjYXBhYmxlIG9mIHRyaWdnZXJpbmcg
-RURMIG1vZGUgaW4gdGhlIGRldmljZSAoaWYgc3VwcG9ydGVkKQo+PiAgICogQHNpZGViYW5kX3dh
-a2U6IERldmljZXMgdXNpbmcgZGVkaWNhdGVkIHNpZGViYW5kIEdQSU8gZm9yIHdha2V1cCBpbnN0
-ZWFkCj4+ICAgKgkJICAgb2YgaW5iYW5kIHdha2Ugc3VwcG9ydCAoc3VjaCBhcyBzZHgyNCkKPj4g
-ICAqIEBub19tMzogTTMgbm90IHN1cHBvcnRlZAo+PiBAQCAtNTQsMTEgKzU3LDEyIEBAIHN0cnVj
-dCBtaGlfcGNpX2Rldl9pbmZvIHsKPj4gIAljb25zdCBjaGFyICpuYW1lOwo+PiAgCWNvbnN0IGNo
-YXIgKmZ3Owo+PiAgCWNvbnN0IGNoYXIgKmVkbDsKPj4gLQlib29sIGVkbF90cmlnZ2VyOwo+PiAg
-CXVuc2lnbmVkIGludCBiYXJfbnVtOwo+PiAgCXVuc2lnbmVkIGludCBkbWFfZGF0YV93aWR0aDsK
-Pj4gIAl1bnNpZ25lZCBpbnQgdmZfZG1hX2RhdGFfd2lkdGg7Cj4+ICAJdW5zaWduZWQgaW50IG1y
-dV9kZWZhdWx0Owo+PiArCXVuc2lnbmVkIGludCBhdXRvc3VzcGVuZF9kZWxheTsKPj4gKwlib29s
-IGVkbF90cmlnZ2VyOwo+PiAgCWJvb2wgc2lkZWJhbmRfd2FrZTsKPj4gIAlib29sIG5vX20zOwo+
-PiAgCWJvb2wgcmVzZXRfb25fcmVtb3ZlOwo+PiBAQCAtMTM2OSw2ICsxMzczLDcgQEAgc3RhdGlj
-IGludCBtaGlfcGNpX3Byb2JlKHN0cnVjdCBwY2lfZGV2ICpwZGV2LCBjb25zdCBzdHJ1Y3QgcGNp
-X2RldmljZV9pZCAqaWQpCj4+ICAJc3RydWN0IG1oaV9wY2lfZGV2aWNlICptaGlfcGRldjsKPj4g
-IAlzdHJ1Y3QgbWhpX2NvbnRyb2xsZXIgKm1oaV9jbnRybDsKPj4gIAl1bnNpZ25lZCBpbnQgZG1h
-X2RhdGFfd2lkdGg7Cj4+ICsJdW5zaWduZWQgaW50IGF1dG9zdXNwZW5kX2RlbGF5Owo+PiAgCWlu
-dCBlcnI7Cj4+ICAKPj4gIAlkZXZfaW5mbygmcGRldi0+ZGV2LCAiTUhJIFBDSSBkZXZpY2UgZm91
-bmQ6ICVzXG4iLCBpbmZvLT5uYW1lKTsKPj4gQEAgLTEzOTQsNiArMTM5OSw5IEBAIHN0YXRpYyBp
-bnQgbWhpX3BjaV9wcm9iZShzdHJ1Y3QgcGNpX2RldiAqcGRldiwgY29uc3Qgc3RydWN0IHBjaV9k
-ZXZpY2VfaWQgKmlkKQo+PiAgCWRtYV9kYXRhX3dpZHRoID0gKHBkZXYtPmlzX3ZpcnRmbiAmJiBp
-bmZvLT52Zl9kbWFfZGF0YV93aWR0aCkgPwo+PiAgCQkJICBpbmZvLT52Zl9kbWFfZGF0YV93aWR0
-aCA6IGluZm8tPmRtYV9kYXRhX3dpZHRoOwo+PiAgCj4+ICsJYXV0b3N1c3BlbmRfZGVsYXkgPSBp
-bmZvLT5hdXRvc3VzcGVuZF9kZWxheSA/IGluZm8tPmF1dG9zdXNwZW5kX2RlbGF5IDoKPj4gKwkJ
-CSAgQVVUT1NVU1BFTkRfREVMQVlfTVM7Cj4+ICsKPj4gIAltaGlfY250cmwtPmNudHJsX2RldiA9
-ICZwZGV2LT5kZXY7Cj4+ICAJbWhpX2NudHJsLT5pb3ZhX3N0YXJ0ID0gMDsKPj4gIAltaGlfY250
-cmwtPmlvdmFfc3RvcCA9IChkbWFfYWRkcl90KURNQV9CSVRfTUFTSyhkbWFfZGF0YV93aWR0aCk7
-Cj4+IEBAIC0xNDYzLDcgKzE0NzEsNyBAQCBzdGF0aWMgaW50IG1oaV9wY2lfcHJvYmUoc3RydWN0
-IHBjaV9kZXYgKnBkZXYsIGNvbnN0IHN0cnVjdCBwY2lfZGV2aWNlX2lkICppZCkKPj4gIAo+PiAg
-CS8qIEFsbG93IHJ1bnRpbWUgc3VzcGVuZCBvbmx5IGlmIGJvdGggUE1FIGZyb20gRDNIb3QgYW5k
-IE0zIGFyZSBzdXBwb3J0ZWQgKi8KPj4gIAlpZiAocGNpX3BtZV9jYXBhYmxlKHBkZXYsIFBDSV9E
-M2hvdCkgJiYgIShpbmZvLT5ub19tMykpIHsKPj4gLQkJcG1fcnVudGltZV9zZXRfYXV0b3N1c3Bl
-bmRfZGVsYXkoJnBkZXYtPmRldiwgMjAwMCk7Cj4+ICsJCXBtX3J1bnRpbWVfc2V0X2F1dG9zdXNw
-ZW5kX2RlbGF5KCZwZGV2LT5kZXYsIGF1dG9zdXNwZW5kX2RlbGF5KTsKPj4gIAkJcG1fcnVudGlt
-ZV91c2VfYXV0b3N1c3BlbmQoJnBkZXYtPmRldik7Cj4+ICAJCXBtX3J1bnRpbWVfbWFya19sYXN0
-X2J1c3koJnBkZXYtPmRldik7Cj4+ICAJCXBtX3J1bnRpbWVfcHV0X25vaWRsZSgmcGRldi0+ZGV2
-KTsK
+On Mon, Sep 21, 2026, at 14:23, Manivannan Sadhasivam via B4 Relay wrote:
+> From: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
+> 
+> When two identical ath12k PCIe devices are connected to the same host, both
+> advertise the WLFW service with the same service and instance id. The QMI
+> lookup reports both servers to each device, so a device may connect to the
+> firmware running on the other device.
+> 
+> But now, QRTR provides each MHI endpoint a unique node id which is
+> different from the node id announced by the device. So use the same id to
+> pick the correct server. Add a get_qrtr_node_id() HIF callback that returns
+> the node id derived from the MHI controller index and zero for transports
+> that do not assign one. In the new_server callback, skip any service whose
+> node id does not match. A node id of zero disables the check, so transports
+> that do not assign one keep their current behavior.
+
+Tested-by: Juha-Matti Tilli <juha-matti.tilli@iki.fi>
+Tested-on: 2x WCN7850 hw2.0 WLAN.IOE_HMT.1.1-00018-QCAHMTSWPL_V1.0_V2.0_SILICONZ-1
+Tested-on: 1x WCN6855 ath11k + 1x WCN7850 ath12k
+
+I'm having some issues with regdb on ath12k cards so I had to test using
+the low-frequency 2.4GHz channels. I tried updating linux-firmware to
+20260810 to match my 6.12.110+multi-QRTR kernel, didn't help. The error
+is:
+
+ath12k_pci 0001:01:00.0: No reg rules available
+ath12k_pci 0001:01:00.0: failed to extract regulatory info from received event
+------------[ cut here ]------------
+WARNING: CPU: 0 PID: 12 at /drivers/net/wireless/ath/ath12k/wmi.c:5841 ath12k_reg_chan_list_event+0x171/0x1e0 [ath12k]
+Modules linked in: xt_gmmark(O) xt_bemark(O) w24e2identificator(O) qrtr_mhi ath12k mhi qmi_helpers mac80211 libarc4 cfg80211
+CPU: 0 UID: 0 PID: 12 Comm: kworker/u8:0 Tainted: G           O       6.12.110-yocto-standard-gec77603762c7 #1
+Tainted: [O]=OOT_MODULE
+Hardware name: Freescale LS1021A
+Workqueue: ath12k_qmi_driver_event ath12k_qmi_driver_event_work [ath12k]
+Call trace: 
+ unwind_backtrace from show_stack+0xb/0xc
+ show_stack from dump_stack_lvl+0x35/0x40
+ dump_stack_lvl from __warn+0xaf/0xb0
+ __warn from warn_slowpath_fmt+0xe5/0xe8
+ warn_slowpath_fmt from ath12k_reg_chan_list_event+0x171/0x1e0 [ath12k]
+ ath12k_reg_chan_list_event [ath12k] from ath12k_wmi_op_rx+0x219/0xc08 [ath12k]
+ ath12k_wmi_op_rx [ath12k] from ath12k_htc_rx_completion_handler+0x215/0x2d4 [ath12k]
+ ath12k_htc_rx_completion_handler [ath12k] from ath12k_ce_recv_process_cb+0x149/0x198 [ath12k]
+ ath12k_ce_recv_process_cb [ath12k] from ath12k_pci_ce_tasklet+0x13/0x28 [ath12k]
+ ath12k_pci_ce_tasklet [ath12k] from tasklet_action_common+0x87/0xa8
+ tasklet_action_common from handle_softirqs+0xbf/0x1b4
+ handle_softirqs from irq_exit+0x55/0x78
+ irq_exit from call_with_stack+0xd/0x10
+---[ end trace 0000000000000000 ]---
+
+This error happens with 2x ath12k and 1x ath12k 1x ath11k too.
+
+But, the dual ath12k setup works, and the errors are entirely different
+than what QRTR node id clash does.
+
+So, I believe the patch works.
+
+BR, Juha-Matti
