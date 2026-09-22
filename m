@@ -1,114 +1,99 @@
-Received: from mail-ej2-f12.google.com (mail-ej2-f12.google.com [74.125.228.140])
+Received: from mail-wm2-f12.google.com (mail-wm2-f12.google.com [74.125.225.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1AA20429037
-	for <linux-arm-msm@vger.kernel.org>; Tue, 22 Sep 2026 17:51:33 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.228.140
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id ED17B46D571
+	for <linux-arm-msm@vger.kernel.org>; Tue, 22 Sep 2026 17:51:46 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.225.140
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790099495; cv=none; b=U+Xmvg5TLXdMCpBOWFvAGyJO5aav9jMlUN8nOhkVxsHuMsqgeFsnoFNeeVY0h1gEs/brCmcW2wPTEVMBCgD2vpurr7Ixhq69QAez1VNJjpBDpd4wwy3rJqRg6QbrPObEqL53+HvzA+XzI44CqurH4cSHKEsJuenw8KIFu737HOg=
+	t=1790099508; cv=none; b=HTpzN3/dOQ9bMcKh5PNlMa1dpYWi/MFMMO25PYY0IiQjc6CAtUbBug6ol7akAGHaf3A5Dm6GxZ8wL0Uc6rKgwwih/PMy8EhRehQMX1LdT+cIQpj5qa6j9KqQx1f0OPkpfafAopoJy0zuYGe9EE3K9ImV58Vfo3Awm4xH+Mk2Kvs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790099495; c=relaxed/simple;
-	bh=mhp15rEr10af4+RWrkbjJfk18xdB/RokTRf2nziVRmg=;
-	h=From:Content-Type:Mime-Version:Subject:Message-Id:Date:Cc:To; b=eOV0KxLxEi05NyCLptoZawpG9g48vbLQPqP1+FyIrXlaPXAA4RweYahr8gkJZkDbSi5/TwWLipAuQdJE+HdvfyDlIvhi1mie0mgWT9lWoM4dghczDFrbjUgChPifDV54YnachbYlpeSyMCp42rgWKQZRO7QwdLbAAgCig4ntDEk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=hHw/st4Q; arc=none smtp.client-ip=74.125.228.140
+	s=arc-20240116; t=1790099508; c=relaxed/simple;
+	bh=EbP1v3Oa6Pp3U3S6vdLzzYTTcSx5iO6uWXxoR5VqFYM=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=Uuil+q1Sr6flMdeTbgJGtf6t+LuxoEVbv/8axFNbtGvx2kO/Lv7XG7Z3seSVtw+c0bMRTEoJIATgpu+W8RB0ovKu6zXLlw++ziBPIZC42/OOGsh5WE1wjlw1gtKIFkK07oEtkRUvdq40pUK0KKILoNjALcSDhalqP29hg7EV0OA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=T4ur/msL; arc=none smtp.client-ip=74.125.225.140
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="hHw/st4Q"
-Received: by mail-ej2-f12.google.com with SMTP id a640c23a62f3a-c29703cb796so8344266b.2
-        for <linux-arm-msm@vger.kernel.org>; Tue, 22 Sep 2026 10:51:33 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="T4ur/msL"
+Received: by mail-wm2-f12.google.com with SMTP id 5b1f17b1804b1-49b912d822dso354625e9.2
+        for <linux-arm-msm@vger.kernel.org>; Tue, 22 Sep 2026 10:51:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1790099492; x=1790704292; darn=vger.kernel.org;
-        h=to:cc:date:message-id:subject:mime-version
-         :content-transfer-encoding:content-type:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=I5GVayik6vqH9GZ7KjscgegMSEf/PjlQ21+zvo7CKvs=;
-        b=hHw/st4QGvjBW/YipD8UpSd8e0QwthVR/1FvroDAS72pJgXg9fQbyR/e1zXmUAcwyE
-         Iwpjl4cKP2vOQbeiBJrPYgi/JeuFhjLlXWxnVkqmuSKMQzAgfsMnQ9yPaEsYZ2Yxg4WG
-         gD6JN/+61dDYZHqERrvjau9+f5LTftLWx7WycYaM4vi6aahu+I9AvCF5IkVvHxF49zHR
-         C9grdP28xmZrC2ZRVnrbhd8YzSk8vhFFOUa1U71+QhhgwV1LlaNiW9+p+TOj/Xc4hCZL
-         jYYCAhsnPAIS6y6KubDQ45ABkGiDfkgaA/7gKbiE3Zpg+UwxsQFLXItF0wYUs3EsCF6w
-         7Ang==
+        d=gmail.com; s=20251104; t=1790099505; x=1790704305; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:mime-version:references
+         :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=EbP1v3Oa6Pp3U3S6vdLzzYTTcSx5iO6uWXxoR5VqFYM=;
+        b=T4ur/msLvaIvLk1TDYJtusmbXGtVSgX+6zHarAzlEKJzmwcgkHjf5tt0izYJqx/G87
+         iR5LLMMPup68k08zxxYu+R2EQTMiseF9Gt3P0F6HvWja0A69sXpwzKMIouOLG1YFrbM1
+         RXBkFq+u349ag8qGr2ADCUjXK50cKnpCgXi35AEdNMGxrGsWmaGk2R4Ib3dUEE5yOu1n
+         X/Mq6XVCrV75EVPZUBZPUJgn8NLgow1aiMluLhbxOTCh+yws4GflGI+GLUZwzV1EtCMO
+         4Rc+ny2RHizoi8ORV6zweprezCyFGxsA6KGdSuT49HitXDzVKNF9ZRzy2Uswjr/U8/Au
+         k+hw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790099492; x=1790704292;
-        h=to:cc:date:message-id:subject:mime-version
-         :content-transfer-encoding:content-type:from:x-gm-gg
+        d=1e100.net; s=20260707; t=1790099505; x=1790704305;
+        h=content-transfer-encoding:content-type:mime-version:references
+         :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=I5GVayik6vqH9GZ7KjscgegMSEf/PjlQ21+zvo7CKvs=;
-        b=Umg3rz17iW13jJwSn70hPf4F8nnlg6nPlWZ8OuNdK5lWYVDBEufTRHgEuWmTtgId16
-         s3KbCVsmh73+mhLaTOTKgBIfjhSCp58g1ZTBZ9Bw2O8CmvCKxyYRFYxld7r169/xiLCl
-         B+797euVW1Mard8AbB5sOSIjiot3uQGV/6dHKYA6IGR7UjmJLdQKFRNYwLwP/3Tmrwp3
-         Y7Q8kF3WuoHx3Ey6EeR0yOWp8kK65uf1a2Ucicq1XZ+BZj+t2K6jwymZIVNZoUotZ9IH
-         PcBhhPU+HP1qoVgCxp5Iv6qYZBWVt/KhHsWGFRs02GWDCtLYflQXSkP2CuO9zOfMIV1Z
-         XRTg==
-X-Gm-Message-State: AFuF++lHTU6vpQE1QyeBkQB8BfTvH7aB/7ShL4CVLYOg9xLeP/yRdcYt
-	+PGAxq7MROhdXrelyPTKktqCebTJ+VaZa/SekBIE3+g6POMwUi4oNR3JnXQBd6ta
-X-Gm-Gg: AYBFou0IfBnkU2U/2kaPoTwEFZfr5np/xhATNeSJWb7DCazjjJKm2u5FPvTpjiIUdYA
-	z2tos9ZLdkYjB1ynt7Yv5YNxflGLj7wjnOPNMOD2LGBJlQD1WtST7QOayO/stvvKESBnivYt3Im
-	i+iZX02B4Emx3uKeL4O99hB2t+wmdTAib0pL9kglUgU9dLewmoSObKBQfe23t50hBJ7sfna8g+E
-	wcXdaxIhYGG7p5AghuJety8bURZfATk1PyfII/b8Cl3Op9nQB+2rkGJl/7Jk2R0EfXXvnpJPBWJ
-	2lZsk7HN2xA3DlBXQKwxWQui+FZTGYD5VqKPySfSWQslEDW0KqU0p7+6m8Mzec3BUsTMkp1umFF
-	MI+1E/d/x0Q3NiGlQmTAUHMUlAYGlRrlotfVBEFzYipgzI0FFQaXyK0u+uaZIuKWVCDokm78RJQ
-	moDpLT0V5XwsfKCvEp7/OwKZV9OFJ0YSto6hOFG2M54nuf0+ApSeaHWCYNc8PO4tVOUIucrcmN3
-	X8zoORSkxKTZXfgvQaV1uvnlh8MuvrEkXv7vIC8e0lgKahWGeKagAXb
-X-Received: by 2002:a17:907:7b9f:b0:c29:d0a8:79dd with SMTP id a640c23a62f3a-c2a15e515eemr1301061666b.34.1790099492155;
-        Tue, 22 Sep 2026 10:51:32 -0700 (PDT)
-Received: from smtpclient.apple (89-66-237-154.dynamic.play.pl. [89.66.237.154])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c2aad6eb947sm2279366b.57.2026.09.22.10.51.31
-        (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
-        Tue, 22 Sep 2026 10:51:31 -0700 (PDT)
-From: Piotr Oniszczuk <piotr.oniszczuk@gmail.com>
-Content-Type: text/plain;
-	charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+        bh=EbP1v3Oa6Pp3U3S6vdLzzYTTcSx5iO6uWXxoR5VqFYM=;
+        b=L3g34y3yIQoNtDIDR30qcRvUYIG1u2Gj1BKBqK8qBC4eYu5+Cm/CExwWpql0pdy9H4
+         WXRBmmbiKEP1EiIfbG9kTjYjKTUBhWlGTvPcvZJGuSxqLmrYDFm7aqHoH4ghLkCxayfy
+         7L0RB6AIyj0M9iN319v651/AKR3MX5MCi86usXFnvx8w6YemHlF2Tg6zsPskZQZ+Q46f
+         dyv9aw0kwuS+3Ozf6PL6ETYehQSB5/0cAsOmtq8YPT3dvhQGn/i1/Jwv8rqKR3RBvoSq
+         Qdotn/MIZwnZRkThSE/0Gc1/0UKkvmPQ3QfLMwZHgSIwObBxz/OrCftUX9qd6/BrXZI1
+         reBw==
+X-Gm-Message-State: AFuF++mEnmHNmV2CX0Gij6gz/T68/0LshNf4oohyr9N78GK/2XgihHtE
+	GVh0Z/j22zxpDBB8eGK4HAqZ9EqDeg0h2DYqk8BxxQOXs5RTdD+bggXI
+X-Gm-Gg: AYBFou13Hurq5vTpFFzS6seoHkkHVQh8sk2G6H4PBFPdYxyh28D4qiOD8VEk+odV5xY
+	etFyGQNcLdwsjvwioeovnoxuolCtXULuF46PmJWC8ao+KK7ufhEkcHJ/wD4+kJbtRPiKfGmzDmV
+	fwBug6EPmlKTaI66EbfhU/7dKj79v/uWC2fbltP7OpVE1Sp8IqquOnR03tWe1bofjyrdEhNZbzx
+	WbYxVLBxsBmQwZK0u7t0+X7fthS34f4XRYqzVcX6LdmcTxtIQ42vwCmPEYlkcnMyXmY5/fLNV1a
+	PzvDp0rS20eCz6pBEeIiZiPuk7o365TvRCI8YOxDimhjU9bQded7yXnVjh1YpTzYBB2yoKkivQO
+	4LDGlBNpPdeRuEq6OXiLiqjAqmSFF/Kn0/4yxyfHbDAYkDMPwcfixzV+YktZuzYeJj2lykxv8dh
+	AJEWH+YCNNqOELpQ96nAXkzmeG0D0J/S0h6gZKZsriHO+wd31/kCGGCOc4Le52wtYj85MkYlx+T
+	GOfHRo=
+X-Received: by 2002:a05:600c:83cd:b0:49c:fa21:1c86 with SMTP id 5b1f17b1804b1-49fc573fa97mr180249605e9.27.1790099504457;
+        Tue, 22 Sep 2026 10:51:44 -0700 (PDT)
+Received: from localhost.localdomain ([94.252.75.113])
+        by smtp.googlemail.com with ESMTPSA id 5b1f17b1804b1-49fde18555bsm8294835e9.2.2026.09.22.10.51.42
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 22 Sep 2026 10:51:44 -0700 (PDT)
+From: Oleg Keri <okerixx@gmail.com>
+To: Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Hans de Goede <hansg@kernel.org>,
+	=?utf-8?q?Ilpo_J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>,
+	Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
+	Guenter Roeck <linux@roeck-us.net>,
+	Bjorn Andersson <andersson@kernel.org>,
+	Konrad Dybcio <konradybcio@kernel.org>,
+	Abel Vesa <abelvesa@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org,
+	devicetree@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	platform-driver-x86@vger.kernel.org,
+	linux-hwmon@vger.kernel.org,
+	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Subject: Re: [PATCH v4 3/3] arm64: dts: qcom: glymur-lenovo-yoga-slim7x: add the embedded controller
+Date: Tue, 22 Sep 2026 19:51:34 +0200
+Message-ID: <179009949426.334909.8218450300346111724@gmail.com>
+X-Mailer: git-send-email 2.55.0
+In-Reply-To: <20260922165737.260443-4-okerixx@gmail.com>
+References: <20260922165737.260443-4-okerixx@gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
-Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3864.700.51.1.1\))
-Subject: 7.3 boot hangs on qcs6490 / sc8280xp boards. Bisecting points to
- ga5218c6474df.
-Message-Id: <3EE7DAD2-F428-4233-86B1-7A79F013A074@gmail.com>
-Date: Tue, 22 Sep 2026 19:51:20 +0200
-Cc: bartosz.golaszewski@oss.qualcomm.com
-To: linux-arm-msm@vger.kernel.org
-X-Mailer: Apple Mail (2.3864.700.51.1.1)
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Hi,
+Konrad reviewed this patch on v3 [1], a few hours before v4 went out;
+the patch is unchanged since, so the tag applies here:
 
-At moving from well working 7.2.6 -> 7.3 I started to getting hangs like =
-https://gist.github.com/warpme/4d414d708a107532d6ae960173308013 =20
+Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
 
-It is on both my radxa boards: qcs6490 (dragon q6a) and sc8280xp (dragon =
-q8b).
-
-Bisecting 7.3 points to commit: ga5218c6474df. =20
-
-Looking (via git show) what this commit is changing makes no sense to =
-explain hangs. =20
-
-So i run diff on: bad commit -1 and bad commit (git diff =
-9642a5e84375...a5218c6474df > diff.diff). =20
-
-Diff it huge (50M).  So many changes may explain problem.
-
-I looked over ga5218c6474df to understand why =
-pwrseq-updates-for-v7.3-rc1-part2 is 50M of changed files.
-
-It looks to me because of merging: =
-https://git.kernel.org/pub/scm/linux/kernel/git/brgl/linux.git/log/?h=3Dpw=
-rseq-updates-for-v7.3-rc1-part2
-
-So why merge is changing 50M of files. =20
-
-I looked on this brach and i see it is based on 7.2-rc1 (isn=E2=80=99t =
-should be on 7.3-rc1)? =20
-
-Maybe this can explain why this commit breaks boot on mine both qcom =
-boards?
-
-May somebody look on this?
-
-
+[1] https://lore.kernel.org/all/69636cb8-5867-42db-a8fb-aa8b2d9301e2@oss.qualcomm.com/
