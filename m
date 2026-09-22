@@ -1,107 +1,122 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from gloria.sntech.de (gloria.sntech.de [185.11.138.130])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0668141A4F8
-	for <linux-arm-msm@vger.kernel.org>; Tue, 22 Sep 2026 08:22:33 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4A77539E196;
+	Tue, 22 Sep 2026 08:23:42 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.11.138.130
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790065355; cv=none; b=qzZgj8vyhtqM9yQ8VjOwUylxBDA7RyMLRkhbJZOipTuzXVNVwu1ghenb3aMAFA3v4HYg14XYvz+jRsTCnRl7g61cAE6qxkpmI6OQ0y44k2l+vBLKWp+BXOrGp0XYsAYOn/YSIbzwYl5TcGniQdHu8uoDhmn8ojTMBNfxfCNbIPA=
+	t=1790065426; cv=none; b=QZ7BMUJaJlbcLjLj0hYn/7S/jwkG/otMxoB0o9wH47G3JyFq3hN/BbdTZ75AaacfkGx8Z8QK0MHYyL39LBUWWFwYKKDJ9Ug48xSv+Ox5INlv+Qc7jeqP3rMDUBFr/szdZkw2iN+o7W66gjd2YmGldrtO6ZVOO040KorLM6cQ/Pg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790065355; c=relaxed/simple;
-	bh=NdzYMIksNJSWd6DZYV8PauoE6FhKGoc4oC8+l3TBidk=;
-	h=From:In-Reply-To:MIME-Version:References:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=UgcNTfiFOJMYMLza6eIswtir1fjJ/pH8lTVBmuYBgDtVaL8fn+I5VX/ZhnPIKxoHrBHahrIedUqKx0JqIUgxkrADsKZdgS8DbEnVKkJ+zB8LvBigLCZ5UZnjwjJRfPXpcm2YznpsYY+qRVUxZ1blhR1uBX4j2f3qfK8OZ5aNOzE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=eUQDEo/V; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1790065426; c=relaxed/simple;
+	bh=99I28I2AOtqL4yZ6o0lZKqdG2P1Q7R8wSRGf94VrOf0=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=BrVbLfGyWUm78vngBqobSVJfdijrxB7uHpMfBpWdl6jlHcGccN4NF5sHAO6uesxCwRVnXGXtJCHfr//K5Nt5hJ/Pf82hfRKGMX9DXm5+INYJMFAkQbm7NEL4QdZotcw6ygRw9GLdg6+6PBG1b9GgiHyysklPqC62eb4VR21Rnv8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=sntech.de; spf=pass smtp.mailfrom=sntech.de; dkim=pass (2048-bit key) header.d=sntech.de header.i=@sntech.de header.b=u2EoGzb0; arc=none smtp.client-ip=185.11.138.130
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=sntech.de
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=sntech.de
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="eUQDEo/V"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id C2F871F0089E
-	for <linux-arm-msm@vger.kernel.org>; Tue, 22 Sep 2026 08:22:33 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1790065353;
-	bh=EvmHxqXCLy9EWZ/6cZQhXtH5A4Fz3V8fxmDhtm5wIEY=;
-	h=From:In-Reply-To:References:Date:Subject:To:Cc;
-	b=eUQDEo/VyBbty7zYwjUEuWbUnVXyxrpFbehq+ywlN21JMUY5QY5LQyol2y8nxGy6M
-	 IFq4nNCNdU3YaoVEDrvipjNLXDzlOYWXTZ/bwFUEKnefzc+jvK2Z6XWkQf0o4BjWWv
-	 pL7h6Q14BIpmO8cuK2ybx54SzbuJpYlhtycA9cGoks05pERHJf/B71L/kpcz1oYBQi
-	 usl1PJNdfmXOYVJPWQN2SQuT6t7r0mXXHizDxoOU1pKAy2UXkdOlR7f2BOij2nL/Jf
-	 z62oKFFafcy3tUsGkSIkPhMt4u6pGgkXRVBmfCilFJ8FhC1nOhA0pioIvsbao0Kmmq
-	 EWvYD8/FEBiGg==
-Received: by mail-lr2-f27.google.com with SMTP id 38308e7fff4ca-3a5b6840edcso33862221fa.1
-        for <linux-arm-msm@vger.kernel.org>; Tue, 22 Sep 2026 01:22:33 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AKwUvBxkI+H3Q6o9/LroE/VQSrfaF1sa6nIOp1/kbt9Jqemt9Wq4wZqhnM8dB35ZI8HOIY9B/vrvMn2msX66I0c9@vger.kernel.org
-X-Gm-Message-State: AFuF++lDxrz9fzeHEYtrixPudGUh6KFuyaN1E+sookj3fUbzv89PTbzt
-	r8mVrFsdiNGdUJboWjBu+ttfbZb6rXDVa8M2qksNMzcwx2FmsYmEsW0OWXWRX/EUJIfMuVE2w63
-	DqEQbtc35rFGLkQsD3zebr2yklRSg//vU6jKhqsd0fg==
-X-Received: by 2002:a2e:bc16:0:b0:3a4:95f0:c5b7 with SMTP id
- 38308e7fff4ca-3a5fbebf807mr28969311fa.3.1790065352455; Tue, 22 Sep 2026
- 01:22:32 -0700 (PDT)
-Received: from 969154062570 named unknown by gmailapi.google.com with
- HTTPREST; Tue, 22 Sep 2026 01:22:31 -0700
-Received: from 969154062570 named unknown by gmailapi.google.com with
- HTTPREST; Tue, 22 Sep 2026 01:22:31 -0700
-From: Bartosz Golaszewski <brgl@kernel.org>
-In-Reply-To: <20260921-qce-fix-self-tests-v8-0-107537869a72@oss.qualcomm.com>
+	dkim=pass (2048-bit key) header.d=sntech.de header.i=@sntech.de header.b="u2EoGzb0"
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sntech.de;
+	s=gloria202408; h=Content-Type:Content-Transfer-Encoding:MIME-Version:
+	References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Reply-To;
+	bh=jhl12w2BK3T73bfh332u/N28Aqr0VzNZAxke4cgagwM=; b=u2EoGzb0ti7/TwOnyh9MQVstlN
+	w0Pg4/YOo2FcGHfMzDj6DJWTLAZl/q6wfb0gQBuemkKb1j0eeW+WYstTYzTZ6EoAxsccNubqQJUZN
+	+EareNsxJgvta6aTnqHlYNGYQ7C3eiT2vi9mBsUwMy++Rd5ky9sTpJAoeHrfvRv2Tdpzcd7STIENx
+	qSKtdU4j3clbqQeFKrx0t6PTBYYSXYjWGzr5u0CaUp+ZTrI5ngCU9xUwss//eYPvorO28GHHAVxC1
+	dHDdKIt8PuB9naKPeh9/KaHsg4R0I1BlucAmJM3BYHEO3lnkZ28rRXo9h86iKeESOIYIqjw9nbcN9
+	C7eDjFYw==;
+From: Heiko Stuebner <heiko@sntech.de>
+To: Damon Ding <damon.ding@rock-chips.com>,
+ Luca Ceresoli <luca.ceresoli@bootlin.com>,
+ Andrzej Hajda <andrzej.hajda@intel.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>, Robert Foss <rfoss@kernel.org>,
+ Laurent Pinchart <Laurent.pinchart@ideasonboard.com>,
+ Jonas Karlman <jonas@kwiboo.se>, Jernej Skrabec <jernej.skrabec@gmail.com>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+ Jessica Zhang <jesszhan0024@gmail.com>,
+ Laurentiu Palcu <laurentiu.palcu@oss.nxp.com>,
+ Lucas Stach <l.stach@pengutronix.de>, Frank Li <Frank.Li@nxp.com>,
+ Sascha Hauer <s.hauer@pengutronix.de>,
+ Pengutronix Kernel Team <kernel@pengutronix.de>,
+ Fabio Estevam <festevam@gmail.com>, Paul Cercueil <paul@crapouillou.net>,
+ Paul Kocialkowski <paulk@sys-base.io>, Linus Walleij <linusw@kernel.org>,
+ Inki Dae <inki.dae@samsung.com>, Jagan Teki <jagan@amarulasolutions.com>,
+ Marek Szyprowski <m.szyprowski@samsung.com>, Sean Paul <sean@poorly.run>,
+ Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>,
+ Randy Dunlap <rdunlap@infradead.org>,
+ Luca Ceresoli <luca.ceresoli@bootlin.com>
+Cc: Albert Esteve <aesteve@redhat.com>, Anusha Srivatsa <asrivats@redhat.com>,
+ Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+ Hui Pu <Hui.Pu@gehealthcare.com>, Ian Ray <ian.ray@gehealthcare.com>,
+ Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
+ dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ imx@lists.linux.dev, linux-arm-kernel@lists.infradead.org,
+ linux-mips@vger.kernel.org, linux-rockchip@lists.infradead.org,
+ linux-stm32@st-md-mailman.stormreply.com, asahi@lists.linux.dev,
+ linux-arm-msm@vger.kernel.org, freedreno@lists.freedesktop.org,
+ linux-tegra@vger.kernel.org, linux-doc@vger.kernel.org,
+ linux-samsung-soc@vger.kernel.org
+Subject:
+ Re: [PATCH v3 19/19] drm/bridge: analogix_dp: don't create a panel_bridge
+Date: Tue, 22 Sep 2026 10:22:37 +0200
+Message-ID: <1889588.TLkxdtWsSY@phil>
+In-Reply-To: <DLLOZYM6YWJ3.6Q0LRD1WABGW@bootlin.com>
+References:
+ <20260916-drm-bridge-every-panel-v3-0-83afb4f1a707@bootlin.com>
+ <975a4d45-9a61-4858-b498-8bc0a1e44746@rock-chips.com>
+ <DLLOZYM6YWJ3.6Q0LRD1WABGW@bootlin.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260921-qce-fix-self-tests-v8-0-107537869a72@oss.qualcomm.com>
-Date: Tue, 22 Sep 2026 01:22:31 -0700
-X-Gmail-Original-Message-ID: <CAMRc=MdWZhLy7AXd2OiVsaT92xTh1EF+B+LNo2b-1D2TO3rAmA@mail.gmail.com>
-X-Gm-Features: AcwNN1VBTSPEWx1h-ie8zLso64KBEpFrX6miRGn5DdROKODYpn6wzkN3-uBIp-k
-Message-ID: <CAMRc=MdWZhLy7AXd2OiVsaT92xTh1EF+B+LNo2b-1D2TO3rAmA@mail.gmail.com>
-Subject: Re: [PATCH v8 00/14] crypto: qce - Fix crypto self-test failures
-To: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
-Cc: linux-crypto@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, brgl@kernel.org, 
-	linux-arm-kernel@lists.infradead.org, stable@vger.kernel.org, 
-	Thara Gopinath <thara.gopinath@gmail.com>, Herbert Xu <herbert@gondor.apana.org.au>, 
-	"David S. Miller" <davem@davemloft.net>, Stanimir Varbanov <svarbanov@mm-sol.com>, 
-	Eneas U de Queiroz <cotequeiroz@gmail.com>, Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>, 
-	Eric Biggers <ebiggers@kernel.org>, Demi Marie Obenour <demiobenour@gmail.com>, 
-	Bjorn Andersson <andersson@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>, 
-	Russell King <linux@armlinux.org.uk>, Abel Vesa <abelvesa@kernel.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
 
-On Mon, 21 Sep 2026 14:58:09 +0200, Bartosz Golaszewski
-<bartosz.golaszewski@oss.qualcomm.com> said:
-> This iteration - in addition to the previous fixes - proposes to split
-> the QCE driver into a core part necessary to bind to the QCE DT node and
-> enable runtime power management in order to allow to drop the
-> interconnect votes, and the crypto part registering the crypto
-> algorithms. The core module is then enabled in arm64 defconfig while the
-> crypto part stays disabled by default. In addition: the actual
-> registration of crypto algos is gated with a module parameter that
-> default to false.
->
-> Note that remaining reported bugs will still be fixed in follow-up
-> series. This series addresses self-tests and disables the algos by
-> default.
->
-> The QCE hardware crypto engine has several limitations that cause it to
-> produce incorrect results or stall on certain inputs. This series fixes
-> several bugs and adds workaround allowing the deiver to pass crypto
-> self-tests.
->
-> The failures addressed are:
->
-> - HMAC self-test failures for empty messages
-> - AES-XTS returning success on zero-length input (should be -EINVAL)
-> - AES-CTR: partial final block causes the engine to stall, output IV
->   derivation was incorrect
-> - AES-XTS with key1 == key2 is not supported by the CE
-> - AES-CCM: partial final block and fragmented payload both stall the
->   engine
->
-> All fixes were tested on an SM8650 QRD board with
-> CONFIG_CRYPTO_SELFTESTS=y and CONFIG_CRYPTO_SELFTESTS_FULL=y.
->
-> Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
-> ---
+Hi Luca,
 
-Herbert: Sashiko still says it fails to apply. I have no idea why, it applies
-fine on top of current linux-next.
+Am Dienstag, 22. September 2026, 10:12:41 Mitteleurop=C3=A4ische Sommerzeit=
+ schrieb Luca Ceresoli:
+> On Mon Sep 21, 2026 at 5:07 AM CEST, Damon Ding wrote:
+> > On 9/16/2026 9:45 PM, Luca Ceresoli wrote:
 
-Bart
+[...]
+
+> >> @@ -163,18 +161,6 @@ static int exynos_dp_probe(struct platform_device=
+ *pdev)
+> >>   	 */
+> >>   	platform_set_drvdata(pdev, dp);
+> >>
+> >> -	/* This is for the backward compatibility. */
+> >> -	np =3D of_parse_phandle(dev->of_node, "panel", 0);
+> >> -	if (np) {
+> >> -		dp->plat_data.panel =3D of_drm_find_panel(np);
+> >> -
+> >> -		of_node_put(np);
+> >> -		if (IS_ERR(dp->plat_data.panel))
+> >> -			return PTR_ERR(dp->plat_data.panel);
+> >> -
+> >> -		goto out;
+> >> -	}
+> >> -
+> >
+> > TIP: In my WIP v3 patch series, I use of_drm_find_panel() together with
+> > devm_drm_panel_bridge_add() to maintain this backward compatibility. But
+> > I also think this old approach should be deprecated now. Shall we add
+> > some notes in the commit message to mention the deprecation of this met=
+hod?
+>=20
+> What is the "WIP v3" series exactly? Do you have a link (to v2 in case v3
+> is not yet public)?
+
+https://lore.kernel.org/linux-rockchip/20260804081717.741404-1-damon.ding@r=
+ock-chips.com/
+is the series in question.
+
+
+Heiko
+
+
