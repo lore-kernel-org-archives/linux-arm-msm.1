@@ -1,87 +1,67 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wm2-f13.google.com (mail-wm2-f13.google.com [74.125.225.141])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EBF2647A0B6
-	for <linux-arm-msm@vger.kernel.org>; Tue, 22 Sep 2026 12:07:46 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5E51E53F6B1
+	for <linux-arm-msm@vger.kernel.org>; Tue, 22 Sep 2026 12:14:10 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.225.141
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790078869; cv=none; b=IBom4genwX3F42yWcoK5aFigPuXHsnPHFPovbnsacESOiWNT08cyP0R1YjhVitbHzscYkgmbM+OveFBME2FvgqoQD/pTC9CR9v9tWNc0IM0/DYrxH4d4ve1ZOTvRQCDRqPfY8hh/z+eL5PvFsuBywev43lq5xhlG7NmzYNPjOGM=
+	t=1790079253; cv=none; b=SrJbySnsZnii/6V/Nv/Wq6kQw6q8T7QKCNVsvxSoGkHAOVQpNg/H3+XnHPzuUnvyP/3mT+X5bjS04r0cuk9mPFGu9gK5PjLAe7EIMaIa8zlD+ybe0fKB49DSR4GCxMum6p37cAg8wPIz9ZbjclBAKxjaOh2+pJQtr3162qL1ABk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790078869; c=relaxed/simple;
-	bh=TO/iZFkFwswzAF+yEhGFEaj1c8z776aBTq5j1ZXADlk=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=qLQpCKtXo6oY3Gwt3pWSfbc3WmC3uq+6Jg/yODIPnpsvNrBY+p0xEROc7p0jDsv+BPhnJ/EMMGdfTLLrdQNaPJ2KLEy/r7MCYjG2I6PbriMkyZPKQGbiqYAtRlqoLZt1uT/Atl1UPzeopJtzYB5eVrqv96aLZBp3wElXiQEWeDM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=SE4yMWaG; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=Xpg0+UFp; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1790079253; c=relaxed/simple;
+	bh=SdPbQy0dro8OwS7NrMmaCOy56WkMTmkPc9JluEiYx9A=;
+	h=Message-ID:Date:MIME-Version:From:Subject:To:Cc:References:
+	 In-Reply-To:Content-Type; b=delpiZw6/6/pJ/N14fxNKhv2IxY/VR4VVyaPwRgu3wehxM1EyIwPnhOynGXdbJruaW0SaZWbjlof5lgE0aLzBmMQAQAp7xFLbNPMbCULVbmNOy3fm9f1n9UNLRm/n6Bidr5hRjJCywjxoLoTRRe87iWGuXqc02v3wiPieXur0Xo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=CM+u+Ilr; arc=none smtp.client-ip=74.125.225.141
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="SE4yMWaG";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Xpg0+UFp"
-Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68MBPiZt269300
-	for <linux-arm-msm@vger.kernel.org>; Tue, 22 Sep 2026 12:07:45 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	vLEQt2ewQblpbzFMvdr6IfTSOQzmO1SxQA8MDwzNmvE=; b=SE4yMWaGoaYDcRFj
-	PjnpZ6e2N5mqFRASOBsWaiLFxrmWzXfcIEV13ibp44euS3p5yh9dd095S9rtalMx
-	SJdiaWrDgPKbEV3D2AMrD5YrTevCMbHDHtAM4oXnlVwv5DFuVrmgl7Fo6Jl/vQCG
-	FySren71Rs2rUY9jtvzA5oKJDIBnyPgtFacWb+dBN7Podz0jrKgj0sUnIYy+3vDm
-	knx8W7b8PjWzC4Uzz6Wz4Gd8FdrADbL46+B7v09hwAdBTGeHqhzAixpSQdrm5gA3
-	O/3d2XFK631Utdf1gPjwzKjLgq/o+hmlb6r3U6LYPw8FFcGSUWOB3+zPXlvIEBTL
-	A8Ejog==
-Received: from mail-pj1-f69.google.com (mail-pj1-f69.google.com [209.85.216.69])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gufbatfjn-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 22 Sep 2026 12:07:45 +0000 (GMT)
-Received: by mail-pj1-f69.google.com with SMTP id 98e67ed59e1d1-39aee9b4cf2so7205110a91.0
-        for <linux-arm-msm@vger.kernel.org>; Tue, 22 Sep 2026 05:07:45 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="CM+u+Ilr"
+Received: by mail-wm2-f13.google.com with SMTP id 5b1f17b1804b1-49b91369d18so30398995e9.0
+        for <linux-arm-msm@vger.kernel.org>; Tue, 22 Sep 2026 05:14:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1790078864; x=1790683664; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=vLEQt2ewQblpbzFMvdr6IfTSOQzmO1SxQA8MDwzNmvE=;
-        b=Xpg0+UFpN+oX0Gte/4R82IHf4vvFE0q0vwPjROuiT0/LC35FSyL11+/LgrkeJR/Wlp
-         sH//Ywt2BaHr4hui09f9Q/W0PuuTZAUuSkxaeJmZ22g9Cr9jYlyEHU5+iemZ1gJ9hsFo
-         UBCFoyB6uxIr3irABCerpbwpO+ragpeEmglp9I3lezGbNSFjNNn0//DbvPK8ebz6q+O2
-         YuptTTgOCI+CMUKRqg+aEG2BV7oWYw2yHG00KTZYyJSN0iQjX80v1UBvrs05Xc1KiAhl
-         SKEUYo6JIx0+n+COPZsPpqAbb3lw2eS/T/DUMNTY3STvZPR/Mwo4uyVieVRCjCRM1XRs
-         f8RQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790078864; x=1790683664;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=linaro.org; s=google; t=1790079248; x=1790684048; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:organization
+         :autocrypt:content-language:references:cc:to:subject:reply-to:from
+         :user-agent:mime-version:date:message-id:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=vLEQt2ewQblpbzFMvdr6IfTSOQzmO1SxQA8MDwzNmvE=;
-        b=P8l75p7KzJraYX8L2Elu3dCNdqFqtQeeY7vwOVqqxhZ/6N0QrdAjBlCUhW0R/liXZm
-         v1wEmBRm1a0IyL9giBnUQCIMlUwo9j+XNTJ2BSn/N4sbD22Y/cFgwtyuot67Xp8srMhE
-         3Kb+IYqVSdvH7SDb02o5MsfEQ/dhWaNYQ8GJ6/la7yDPBBIMkQvXOQMDcQxfVUAwjiYi
-         Q+xV3k8ekZWRvY7BoHj6qxMR+RFAVZZdQHoPggnY7xgTdrRsk2KGOAKQQGPLileHeYM5
-         sbCsbUcPpZy4B2GTdHLEUTFfsn5vtAFxAmImb6TB/ImMla4HRtwEnr1VVZB5wsaitfig
-         Rlkw==
-X-Forwarded-Encrypted: i=1; AKwUvBzGqiLKZocioSwSic6OOOyMlxn5hHA5AfA2snnkZt4gmRn5Ly8khAMZu83MqL2nkkAgG2bkB6zSEJYt7L4B@vger.kernel.org
-X-Gm-Message-State: AFuF++nl72qF9dlj7SrBxhU7WPt8Zn00EVwjla5TY80D14TrcFpsTSGy
-	J9YTrfNrdQcjGWaiMNID9hzLsyhW1lbSP8+hJ5MwXLyvC3DKy/pg6KaR8apoES+ou8puBl3lsK+
-	JvKm/ylL8RIb5bXBeF5mZpA3P6wJN5fSsrCTmMd0hrkQ8AEWmJU6XiKoCxpeB0FzqXzjj
-X-Gm-Gg: AYBFou2MY0NF0DShz9XpZWvnOES9Vs7TQCU71V8REeLyB3whrm9inzwzHjJXdAVGbyw
-	gH67M5Z9q0Xp/7l0+n/1cY51yjKhjpKAhIIgieL/pR5D8DxS6llZm0xqGxPOujVnmTSU6Zrwtlq
-	LVHJO9r3iboWtE687ANG/hv09tP1GeVO76+zzSsnGzAoYQTXL0gDO8c0pPoimCMK2zBbNPoFFCp
-	IMB20W+PJE8d+ppROF/TsWP5/EyakMYijcOkKGkf4B2E/iVm9S795V3KdAZQdqt31ACr+ea/j+Z
-	CL6hUfaz9BnMps7aLaS4wWpMK+6rs7dA3+p8VHLHLhL+5rCROd6LeOvFxpy4Lru/AABrt4++kl8
-	fb1I65xwmA6S5TfJGS2XylBiwwls=
-X-Received: by 2002:a17:90b:2f43:b0:39e:4c7e:f03d with SMTP id 98e67ed59e1d1-3a073116f1emr982110a91.26.1790078864202;
-        Tue, 22 Sep 2026 05:07:44 -0700 (PDT)
-X-Received: by 2002:a17:90b:2f43:b0:39e:4c7e:f03d with SMTP id 98e67ed59e1d1-3a073116f1emr982070a91.26.1790078863481;
-        Tue, 22 Sep 2026 05:07:43 -0700 (PDT)
-Received: from [10.219.57.63] ([202.46.23.19])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3a0715e9d5esm2483450a91.17.2026.09.22.05.07.39
+        bh=439w0jXQDSVQ/YyUnnVLCmsM8bZ02DVBQwb7bD5E5+c=;
+        b=CM+u+IlrykGaNfTeyPl3dq4foc71mfqSHNzqmdWyT/nFDzvIKC8OK4q8W9eOBTfCGS
+         dRhguMkJO4IHJjMCvkFE529M13fYmDVR3mxQrFVk2IZQFXRgwC/g9BYQAyntHGjjR+t/
+         JNvfZRXHkvF9firmG//VY6uNTr5iQXFUHUtmFIePcpCKCTSJ5cb5HbsofCImamV1vpDU
+         sGNqi8pWFOKfTytkg42CB7gJC3dzFcZ0O80uzrvUU9pUWGygun8w9X+LjPvQTteu3Zts
+         VURZ5NJCjO/5ZbXALl3LcNMLV/GWEUwXGf8Ax8k5rS8H1AYB5DaJckP5i9qnBoxvcpKk
+         wcCg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1790079248; x=1790684048;
+        h=content-transfer-encoding:content-type:in-reply-to:organization
+         :autocrypt:content-language:references:cc:to:subject:reply-to:from
+         :user-agent:mime-version:date:message-id:x-gm-gg:x-gm-message-state
+         :from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=439w0jXQDSVQ/YyUnnVLCmsM8bZ02DVBQwb7bD5E5+c=;
+        b=t5VysG+8pjJ0Yxy6tlUcF6L+tDc9oIdHlppyjd+l07Z80apguE+6l+iHyjmIDUyBKl
+         oXHxSE2hqW7ixuw5sEkDnG94/4JOskRtuOCfCqpxVVaH1gUQ9MS5dKPzMW0orT/iSh0j
+         JMXNFTUfbDEYevPE/Bth9m8liJ0GDtN0kM+izr/Xb/knYAWaHgOwMo6XbAVIyU3BsbG6
+         SdV7IH1+JVX3RChoTPu5oZuB6rqx6C56AAMIIX1ePfwsJd9NIlK6tHmtpY69pmAWMlsu
+         aYOM5/mQlxxYx8c/RlJpxVFylS0CBdhBxvtSaWYwnffOoQsbF6m2rx5SIG4CJqS4fE/e
+         huyg==
+X-Gm-Message-State: AFuF++nE1hahP2cgQDfkkb88BfmWP68PcaIWY/Vt19/coz9OXJ7kPhzj
+	pQj0F6jCihcnWAcAKw02szGzw1PfkH9MBxiXIXl0n0zAp8Pdq44eFwbkThxXD3ZA1z0=
+X-Gm-Gg: AYBFou3XXsMFSCJ4VAthbPxW6AJO/iOURwG9bnbAEIwF4/+yJEiRUovOklPZ+Wj9aLD
+	yvucPElcVmOrEsz1Lc+scZ5a+EhBMwEQlBsjRlk49v+Qjp6a+d320vwWwVz8PhWm49vJmIOSiDz
+	BkouKM803Mim6CxemhPCNhKywmBaOvUsJ3GQ8psO0XtFp6YzBmQlNJQuvJvDWfDcBpvo6LxxGV+
+	cW+P+AEWLSDgo8h4iSSl8e16Pjzu+ASgRhOxCdE/UPcDPoa/26147st3q4yY0jFEonsrHyOtzbz
+	NVY2j1/PuEkrnQCoX+qdK6Rifd2lODAkHdwLWQmK5UrJ1qpIJSTs78pmBihSWfTFOZ+tKFggNlv
+	JYZVhoK9/vYYTonLAXsX8RHPYciQ+8R+8t0K9PPFzgkv6ZFXl7KZlwESLOGZibctveUo10KZ4Zp
+	+HyDcH5VUs1yvnjXKgPIky0RUhmK+6Aq2RvWlrLh6Mju4k0DtjuRar+tmXOcMYwdIcxxnaDf+Pn
+	weS1LaN18KbgxbJg/9Gv3uFLU3sXe3yxKVS5CkkWr0oYX7WJNpacISTaZOqH4fY
+X-Received: by 2002:a05:600c:354e:b0:49c:fc6e:a3d8 with SMTP id 5b1f17b1804b1-49fc584f854mr189068335e9.23.1790079247126;
+        Tue, 22 Sep 2026 05:14:07 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:106d:1080:ddd0:8cc7:9887:fa82? ([2a01:e0a:106d:1080:ddd0:8cc7:9887:fa82])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-49fd8cd5214sm80191765e9.9.2026.09.22.05.14.06
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 22 Sep 2026 05:07:43 -0700 (PDT)
-Message-ID: <077cf4c6-9657-4e4e-b755-2f45a9fc67c6@oss.qualcomm.com>
-Date: Tue, 22 Sep 2026 17:37:38 +0530
+        Tue, 22 Sep 2026 05:14:06 -0700 (PDT)
+Message-ID: <0a9bfc33-057d-4ce0-9b00-b1fafcf0da03@linaro.org>
+Date: Tue, 22 Sep 2026 14:14:05 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -89,85 +69,212 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] arm64: dts: qcom: glymur: Fix fastrpc compute-cb reg
- values for cdsp
-To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Abel Vesa <abelvesa@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>,
-        Sibi Sankar <sibi.sankar@oss.qualcomm.com>
-Cc: Bharath Kumar <quic_bkumar@quicinc.com>,
-        Chenna Kesava Raju <quic_chennak@quicinc.com>,
-        linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org,
-        Mahima Bhattaram <mbhattar@qti.qualcomm.com>
-References: <20260922-glymur-dtfix-v1-1-159da6b0eed9@oss.qualcomm.com>
- <bc2c2121-0eef-467a-973e-019a9ba6a13b@oss.qualcomm.com>
-Content-Language: en-US
-From: Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>
-In-Reply-To: <bc2c2121-0eef-467a-973e-019a9ba6a13b@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8
+From: Neil Armstrong <neil.armstrong@linaro.org>
+Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
+Subject: Re: [PATCH v20 2/6] phy: core: Add phy_get_by_of_node()
+To: Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
+ Bjorn Andersson <andersson@kernel.org>,
+ Michael Turquette <mturquette@baylibre.com>, Stephen Boyd
+ <sboyd@kernel.org>, Rob Herring <robh@kernel.org>,
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
+ <conor+dt@kernel.org>, Robert Foss <rfoss@kernel.org>,
+ Todor Tomov <todor.too@gmail.com>, Mauro Carvalho Chehab
+ <mchehab@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>,
+ Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
+ Bryan O'Donoghue <bod@kernel.org>,
+ Loic Poulain <loic.poulain@oss.qualcomm.com>, Vinod Koul <vkoul@kernel.org>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+ Kishon Vijay Abraham I <kishon@kernel.org>, Felipe Balbi <balbi@ti.com>,
+ Manivannan Sadhasivam <mani@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org,
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-media@vger.kernel.org, linux-phy@lists.infradead.org,
+ Krzysztof Kozlowski <krzk@kernel.org>
+References: <20260918-b4-linux-next-25-03-13-dtsi-x1e80100-camss-v20-0-dc244e124e71@linaro.org>
+ <20260918-b4-linux-next-25-03-13-dtsi-x1e80100-camss-v20-2-dc244e124e71@linaro.org>
+Content-Language: en-US, fr
+Autocrypt: addr=neil.armstrong@linaro.org; keydata=
+ xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
+ GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
+ BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
+ qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
+ 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
+ AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
+ OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
+ Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
+ YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
+ GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
+ UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
+ GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
+ yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
+ QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
+ SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
+ 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
+ Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
+ oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
+ M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
+ 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
+ KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
+ 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
+ QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
+Organization: Linaro
+In-Reply-To: <20260918-b4-linux-next-25-03-13-dtsi-x1e80100-camss-v20-2-dc244e124e71@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTIyMDE3NSBTYWx0ZWRfX+ySt0r4DIIih
- hr13mYRZHrRN+bE6vylmWeMUpkpvUBEj2Zot7pjmBA6j4TdMMe9yhl/TfJYwXM8s22c9gcFl8nm
- BHNDfQBlzWbMEtUXt0w7WDvY1RFJhnS6oDad7BYEWFq2TvITEoFVOjk8l7M0ZLwq79gR49nxJxF
- 3SDVoCXRTPY7OB1D9/n0hSMehbAU5IHOLhGKHqFL1XabWGrTCEdYhlQrhvvpvCuf0nXMOdOOpl6
- /7O3IJKxV/bNtG8HlvrCNAO1gaiZuZ+k7K7kW+bltvWCQVzlOEnr+k6bGoqw/HHsj+bj+Mk//aW
- zcdYezaGGxYxqJ2kkE6RAX648sYVypXvB2L70PuYgUnGF3kB75to9jtToZqFNAdhRZOr2/8wClq
- VhRiUTphsRnkl32e04O5xnrmWoCIu7Ljbz8M904Noef7jtW+EUrDlIYYggD0JHo91Ha4qfAudVJ
- mMkPxlaDZNkkHiXQ5HQ==
-X-Authority-Analysis: v=2.4 cv=IYYSymqa c=1 sm=1 tr=0 ts=6ab26f91 cx=c_pps
- a=vVfyC5vLCtgYJKYeQD43oA==:117 a=j4ogTh8yFefVWWEFDRgCtg==:17
- a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
- a=EUspDBNiAAAA:8 a=SYeg_LyZQ0ZiSJgYx_IA:9 a=QEXdDO2ut3YA:10
- a=rl5im9kqc5Lf4LNbBjHf:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTIyMDE3NSBTYWx0ZWRfX19WVTQcvetVU
- 3ioSoCU4kpLry1+nAQHzRlpUb2r6S/xBRaSE+OmWWLXn+3iU/5v1CUqnUN1ZmCIfLtXPWV+vrXH
- KB3kVy06Syu736jat1ltVFNZKtU6sg8=
-X-Proofpoint-ORIG-GUID: y20dmkRGGtJ-M3i0w1U8VnoBuAtPmQBz
-X-Proofpoint-GUID: y20dmkRGGtJ-M3i0w1U8VnoBuAtPmQBz
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-22_01,2026-09-21_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- adultscore=0 impostorscore=0 suspectscore=0 priorityscore=1501 clxscore=1015
- bulkscore=0 spamscore=0 phishscore=0 malwarescore=0 lowpriorityscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609220175
 
-On 22-09-2026 14:31, Konrad Dybcio wrote:
-> On 9/22/26 8:40 AM, Ekansh Gupta wrote:
->> The reg value of a compute-cb node must match the SID (the lower
->> nibble of its IOMMU stream ID) it is associated with. In the cdsp
->> fastrpc node, compute-cb@10, compute-cb@11 and compute-cb@12 were
->> mistakenly given reg values of 10, 11 and 12 instead of 12, 13 and
->> 14, which don't match their SIDs and leads to SMMU translation errors.
->> Fix the reg values, and rename the nodes accordingly.
->>
->> Fixes: cd1d174c75f7 ("arm64: dts: qcom: glymur: Add ADSP and CDSP for Glymur SoC")
->> Co-developed-by: Mahima Bhattaram <mbhattar@qti.qualcomm.com>
->> Signed-off-by: Mahima Bhattaram <mbhattar@qti.qualcomm.com>
->> Signed-off-by: Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>
->> ---
->>  arch/arm64/boot/dts/qcom/glymur.dtsi | 12 ++++++------
->>  1 file changed, 6 insertions(+), 6 deletions(-)
->>
->> diff --git a/arch/arm64/boot/dts/qcom/glymur.dtsi b/arch/arm64/boot/dts/qcom/glymur.dtsi
->> index de7c395d9c35..51fea666efac 100644
->> --- a/arch/arm64/boot/dts/qcom/glymur.dtsi
->> +++ b/arch/arm64/boot/dts/qcom/glymur.dtsi
->> @@ -8471,9 +8471,9 @@ compute-cb@8 {
->>  
->>  					/* note: compute-cb@9 is secure */
->>  
->> -					compute-cb@10 {
->> +					compute-cb@12 {
+On 9/18/26 15:56, Bryan O'Donoghue wrote:
+> Add new function phy_get_by_of_node() allowing lookup of a phy by
+> device_node. Separates existing logic in _of_phy_get() into an internal
+> helper method _of_phy_get_with_args() to allow for reuse in new method.
 > 
-> The unit address is interpreted as hex
+> Signed-off-by: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
+> ---
+>   drivers/phy/phy-core.c  | 83 ++++++++++++++++++++++++++++++++++++++-----------
+>   include/linux/phy/phy.h |  6 ++++
+>   2 files changed, 71 insertions(+), 18 deletions(-)
 > 
-> Konrad
-Thanks for pointing this out, I followed other DT files for this. I'll
-change this one to hex (@c, @d, @e) in next revision.
+> diff --git a/drivers/phy/phy-core.c b/drivers/phy/phy-core.c
+> index 89addd732bff3..42c27a2b45159 100644
+> --- a/drivers/phy/phy-core.c
+> +++ b/drivers/phy/phy-core.c
+> @@ -606,6 +606,38 @@ int phy_validate(struct phy *phy, enum phy_mode mode, int submode,
+>   }
+>   EXPORT_SYMBOL_GPL(phy_validate);
+>   
+> +/**
+> + * _of_phy_get_with_args() - lookup and obtain a reference to a phy by of_phandle_args
+> + * @args: of_phandle_args to the phy
+> + *
+> + * Returns: the phy from the provider's of_xlate, -ENODEV if disabled,
+> + * -EPROBE_DEFER if the provider is not yet registered.
+> + */
+> +static struct phy *_of_phy_get_with_args(struct of_phandle_args *args)
+> +{
+> +	struct phy *phy;
+> +	struct phy_provider *phy_provider;
+> +
+> +	lockdep_assert_held(&phy_provider_mutex);
+> +
+> +	phy_provider = of_phy_provider_lookup(args->np);
+> +	if (IS_ERR(phy_provider) || !try_module_get(phy_provider->owner))
+> +		return ERR_PTR(-EPROBE_DEFER);
+> +
+> +	if (!of_device_is_available(args->np)) {
+> +		dev_warn(phy_provider->dev, "Requested PHY is disabled\n");
+> +		phy = ERR_PTR(-ENODEV);
+> +		goto out_put_module;
+> +	}
+> +
+> +	phy = phy_provider->of_xlate(phy_provider->dev, args);
+> +
+> +out_put_module:
+> +	module_put(phy_provider->owner);
+> +
+> +	return phy;
+> +}
+> +
+>   /**
+>    * _of_phy_get() - lookup and obtain a reference to a phy by phandle
+>    * @np: device_node for which to get the phy
+> @@ -620,8 +652,7 @@ EXPORT_SYMBOL_GPL(phy_validate);
+>   static struct phy *_of_phy_get(struct device_node *np, int index)
+>   {
+>   	int ret;
+> -	struct phy_provider *phy_provider;
+> -	struct phy *phy = NULL;
+> +	struct phy *phy;
+>   	struct of_phandle_args args;
+>   
+>   	lockdep_assert_held(&phy_provider_mutex);
+> @@ -637,22 +668,7 @@ static struct phy *_of_phy_get(struct device_node *np, int index)
+>   		goto out_put_node;
+>   	}
+>   
+> -	phy_provider = of_phy_provider_lookup(args.np);
+> -	if (IS_ERR(phy_provider) || !try_module_get(phy_provider->owner)) {
+> -		phy = ERR_PTR(-EPROBE_DEFER);
+> -		goto out_put_node;
+> -	}
+> -
+> -	if (!of_device_is_available(args.np)) {
+> -		dev_warn(phy_provider->dev, "Requested PHY is disabled\n");
+> -		phy = ERR_PTR(-ENODEV);
+> -		goto out_put_module;
+> -	}
+> -
+> -	phy = phy_provider->of_xlate(phy_provider->dev, &args);
+> -
+> -out_put_module:
+> -	module_put(phy_provider->owner);
+> +	phy = _of_phy_get_with_args(&args);
+>   
+>   out_put_node:
+>   	of_node_put(args.np);
+> @@ -1001,6 +1017,37 @@ struct phy *devm_of_phy_get_by_index(struct device *dev, struct device_node *np,
+>   }
+>   EXPORT_SYMBOL_GPL(devm_of_phy_get_by_index);
+>   
+> +/**
+> + * phy_get_by_of_node() - lookup and obtain a reference to a phy by device_node
+> + * @np: node containing the phy
+> + *
+> + * Returns: the phy associated with the device node or ERR_PTR.
+> + */
+> +struct phy *phy_get_by_of_node(struct device_node *np)
+> +{
+> +	struct of_phandle_args args = { .np = np, .args_count = 0 };
+> +	struct phy *phy;
+> +
+> +	mutex_lock(&phy_provider_mutex);
+> +
+> +	phy = _of_phy_get_with_args(&args);
+> +	if (IS_ERR(phy))
+> +		goto out_unlock;
+> +
+> +	if (!try_module_get(phy->ops->owner)) {
+> +		phy = ERR_PTR(-EPROBE_DEFER);
+> +		goto out_unlock;
+> +	}
+> +
+> +	get_device(&phy->dev);
+> +
+> +out_unlock:
+> +	mutex_unlock(&phy_provider_mutex);
+> +
+> +	return phy;
+> +}
+> +EXPORT_SYMBOL_GPL(phy_get_by_of_node);
+> +
+>   /**
+>    * phy_create() - create a new phy
+>    * @dev: device that is creating the new phy
+> diff --git a/include/linux/phy/phy.h b/include/linux/phy/phy.h
+> index ea47975e288ae..71c2e16397130 100644
+> --- a/include/linux/phy/phy.h
+> +++ b/include/linux/phy/phy.h
+> @@ -284,6 +284,7 @@ struct phy *devm_of_phy_optional_get(struct device *dev, struct device_node *np,
+>   				     const char *con_id);
+>   struct phy *devm_of_phy_get_by_index(struct device *dev, struct device_node *np,
+>   				     int index);
+> +struct phy *phy_get_by_of_node(struct device_node *np);
+>   void of_phy_put(struct phy *phy);
+>   void phy_put(struct device *dev, struct phy *phy);
+>   void devm_phy_put(struct device *dev, struct phy *phy);
+> @@ -493,6 +494,11 @@ static inline struct phy *devm_of_phy_get_by_index(struct device *dev,
+>   	return ERR_PTR(-ENOSYS);
+>   }
+>   
+> +static inline struct phy *phy_get_by_of_node(struct device_node *np)
+> +{
+> +	return ERR_PTR(-ENOSYS);
+> +}
+> +
+>   static inline void of_phy_put(struct phy *phy)
+>   {
+>   }
+> 
+
+Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
+
+Thanks,
+Neil
