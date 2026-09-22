@@ -1,88 +1,88 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8DEAF4BEE46
-	for <linux-arm-msm@vger.kernel.org>; Tue, 22 Sep 2026 09:43:44 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1858C484238
+	for <linux-arm-msm@vger.kernel.org>; Tue, 22 Sep 2026 09:43:48 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790070227; cv=none; b=JVwvRiKuz+/UNSzQP0ShOlXvfdJaIudehfP9h+h4i78WMvsKxnXH0yCKFMxF6mm1DeXR7AxhRdP2U+MhyB4BYsHeG/6vlNxopQe3WLGyfxmZEQtaRX2La1/9WhAl0KT+NyFgtT4McLoIxCvzI73UqFyN+m3llJqve8FJ/vNW0GY=
+	t=1790070232; cv=none; b=R57Otl5iGzjuWzphywsNLfJrxho2Awgl/IYa/0C48afbPx6GEHL/UkSw5lrIWtEwlzMFtPxyAXPWxmJGrBZrkSrxnEZIAge4RlJzq3D16W+SffPKAHcfx72MV8D4+EZXEbbRRikWHCOfC68vyfbmHoR4oTAZ1Sh4M6dmGrsb0Eo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790070227; c=relaxed/simple;
-	bh=EypEwZqDJrmJfCSNQLvIDdsPJdsMZpNBzjQHWYZ6PHE=;
+	s=arc-20240116; t=1790070232; c=relaxed/simple;
+	bh=1lZSGnPNgUW6lCoeybZ1SgZKOfBzc+qFGv0vS4XPsUA=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=EC4KsVBI2Y5c7AxM7CQ3m6yRHOaXhWhPI1Mh+H7UafWhxwZ6+ZYsgpThvSqq1/0jZTCdbd1j9vZouPFATG83RkH2YE4rgcDgU9IYxKDGexW1qTmI9KS5sVlzC/SpJ0rx6RWzxUKD4yCYHzC1AIsoKMEeU8rvNxmxZMTMwIfZcsY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=M6Fmmmng; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=iI/kCrI5; arc=none smtp.client-ip=205.220.180.131
+	 In-Reply-To:To:Cc; b=KJiLnL5DtrMPi1TckjJTnSqNMt7G3XNBsLp/Bx65MdMQh7y0yxKdvy0uGKrvfQ6kyHDgRV38Vn1u56KNQOGVB9ckRW9VAcV1UTbKb6wWM6SreApflYuXXkIWKS/ypnLA3d1lDITuRyjAmnxYWj+dLplbwSXOzyvUcuAGKJoBYcE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=IJDvBSJs; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=UdCiKfiy; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="M6Fmmmng";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="iI/kCrI5"
-Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68M7molC2174150
-	for <linux-arm-msm@vger.kernel.org>; Tue, 22 Sep 2026 09:43:43 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="IJDvBSJs";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="UdCiKfiy"
+Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68M6ve7c3677656
+	for <linux-arm-msm@vger.kernel.org>; Tue, 22 Sep 2026 09:43:47 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	AYszOwYMu9woHfuro6hh/8mQgNvNJfM3qxEOc3C2e2s=; b=M6Fmmmngt3+lBGIA
-	vC0gzic3VH8zvfZTyNnrHRBa26fWMJN23l+D7+3Ff1S9QDSQmUsx+xxMrdhQo3j0
-	/tvi4jju5Iw44tPpLkwKbShkYcSHfKzxJLYhglSdCziNyngxfpW8rxbaF9bwyUFn
-	/vFGVvxWLrcd76dn+3BQt8PbAAJRaKzV4Y4wjbLHlVnMaY+0fsLffuIZ5yMZKpgq
-	MO0TFd5VzLnLAr59seaUQ9zpWMIosxb1Z/FwTVGw32oqu4ECy8bCBb3tm4LjUzo2
-	/3p/o+hRIn8QdMBQipI4LwWkujQEPsqshJff/wdr/6+cjxh+cGxCtK1X1GvJqsjE
-	96BujQ==
-Received: from mail-pg1-f197.google.com (mail-pg1-f197.google.com [209.85.215.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gufsq9s4f-1
+	gpT+BmN3K7YyXf5LDWuXbBctqgxHBqFnTc99/u0KEng=; b=IJDvBSJsp+bcQINd
+	RZVDEG3dPeAlD1TZmXjztXb25SIHJx8GCT5JSd+JQtS6hpal/8ggbXetGq6ScQOR
+	DlbgWlNndzi5yKAXtgR/nSw8+ULIU3ec3Av8/fZNPwxbao1VAUV5lZ5sQRHq9kpK
+	yrPTe3ObrEMw5S58DAEXVkUqAEf7w9Ehkt08m6mWJgEzM1CKf4z4jxoP85FJQraF
+	K0ACvLwYWPbXN0vY15zTqrrDYPks36Q7Dz7ZbWEl8iGgM+DWLzIL6Nc58bqW5Ici
+	8YwWk15fve1TewQHAVp3fnxbTugW6HIGzgjsU/H3q76K+ufr1Q88LvpPLW6kuV4h
+	MmZgjw==
+Received: from mail-pg1-f198.google.com (mail-pg1-f198.google.com [209.85.215.198])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gu85vkhr1-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 22 Sep 2026 09:43:43 +0000 (GMT)
-Received: by mail-pg1-f197.google.com with SMTP id 41be03b00d2f7-cc4922b7c31so3786537a12.1
-        for <linux-arm-msm@vger.kernel.org>; Tue, 22 Sep 2026 02:43:43 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Tue, 22 Sep 2026 09:43:47 +0000 (GMT)
+Received: by mail-pg1-f198.google.com with SMTP id 41be03b00d2f7-cb48f41343aso640210a12.1
+        for <linux-arm-msm@vger.kernel.org>; Tue, 22 Sep 2026 02:43:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1790070222; x=1790675022; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1790070227; x=1790675027; darn=vger.kernel.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=AYszOwYMu9woHfuro6hh/8mQgNvNJfM3qxEOc3C2e2s=;
-        b=iI/kCrI58arMGgPnBpCQjgAKd+UXoS3+2ZMMGaD07FZE5kk65bHgCVTnahbYkb8Ocr
-         /XKcFMapZETt60VEGRjSipjl73FRf/7/vriTJUQrmjFCM6RdefyUkxxcMjijFlEhL3q3
-         mhrV0v9WfwYWTR4zUTcg62qwr3xW5kKt3eeFEH6ZLVT8GW1ix+awgf+FyLMtxIoX1f5j
-         EHz+nYV2lxG0Nd2YbHALPiIFAUk3XeCeVXVVc/sbm5WPyHw7firx4brdbtoqRIZ3Rr3z
-         tnEic2MIPTcxr4zJzSUNerHYCuH6k505HysQS4/6F4jxUficAapxJbfSxV0iyfARUg00
-         JpTQ==
+        bh=gpT+BmN3K7YyXf5LDWuXbBctqgxHBqFnTc99/u0KEng=;
+        b=UdCiKfiyg2GFDw0QIiFg5PRI6fSty5c6sJf9bGsqxqRavJ+ovRXnq9R/Jz67p+E93d
+         WM45Qwcg2jLvRNHGHVcBqvAIO7JLQ46P6RtP+LhynxTdKV1OAwyGhdLIMkEVbpB005Fb
+         yVcpayiLxA0wkXZGPAT6u4Sk7xIDhwEW+oUvvLB3yC/a5WtyrqfKI99+hBauZIbvJzuA
+         rDIxaNb1iTtmMmRLYxY8LlMoftpGkUyIAxmczAiNN3v6ptWRhcI5GEJyJqvlPFTPnhqe
+         uBWvemJH5GOiRfW/Jom9x10XnsForOSkntjtda9gDA6zGMTf4c4nopURowjCE68vK0YK
+         scRw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790070222; x=1790675022;
+        d=1e100.net; s=20260707; t=1790070227; x=1790675027;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=AYszOwYMu9woHfuro6hh/8mQgNvNJfM3qxEOc3C2e2s=;
-        b=2REz2hH4d9HGQuP9MkIS5XkHGcvYJvZx3Gr/6pkHy2HaXJRQ2GUfEdO2vxcZPrHnbn
-         X7Ru8Dm27U7MFJTOJiDiX81HGK8fEch1mfatqefuxxqfEkSLxng4nyZw1sNvYPKo3qt9
-         PBGcfGSPaaWbRtFXltnCzzJUTjLzq8fAs41zLWBO7/kmRgpcvpa9boQCWam7TEV62pFz
-         DlDujS19I8OHPwBFbMuf9nYvnLUI5rj4XTz860sfxEmiTgxND5k8TBa4fNS9hfIWKd4c
-         ZoDlfMjij0jHK0ZVyJ3/deerwir+WlKjsl4QZFQ7J2TYwCRXSgJRo5uBUDXOJeCjE4D1
-         b/KQ==
-X-Forwarded-Encrypted: i=1; AKwUvBwmHpqEWzcDOpmvmJ3rs1xilu/j+52LvXVjLfeRjBB9Io5QLRYIdH4raOhSOldh1ldkfklmjbgasdhnclxL@vger.kernel.org
-X-Gm-Message-State: AFuF++l/fDshJVNYcMO9kEkgSxAH0F6ZyYjmvgRexokZgXBWs6CTfesg
-	2XwInR5zifX1JWRk90EsWyRAhhkoDf2sE+xnxkBr3syWLUBV3xdC0ZhRykELqubPxdUz+nicdDJ
-	CPhGTsqGaT9uqcGjl4UgHm1Vv1D5MzTfsUMg/MSrkflLj+Dq76aKB1VsJhH8whb2SaVGn
-X-Gm-Gg: AYBFou2UfHgWEyDGtxUuXPEbzPof2ZLrjaaBuKN0MUA/BpXKkwmNzas87ikyxJwzP6b
-	mzM8P7mjlBs5SflK7rsKe/MRdySRohJu90Tj1rB/l4Iz7ABVNajpKDorOJ+SAuZVI/6ygIrOf+9
-	TGKVrmFPY/A0HucMMXWU6IUpNYTR8zW/ib/8qQ0O8g5g+9tVmxGgA79KHfGr/bwI/kYfCt9bvi7
-	LXNTq32n1KTgnaoq/Y325UXBZi2QevfDEtvgB4kgLqDar+rAQylMheXTz+DHWH4tMtFi8ToYUlW
-	a58PiwQ4unhNZpnQZTgOc0ZOTQMhXUg2e8u23qQHykpyxJjpEykeZXcE/4yOKH1W5SN+TdcK8Xa
-	y9EcOOwLlsL80Kv4PLa4Dfyy/PpPh7hQm3p0=
-X-Received: by 2002:a05:6a21:6086:b0:3d3:adbf:7781 with SMTP id adf61e73a8af0-3ddec6352cemr786243637.22.1790070222111;
-        Tue, 22 Sep 2026 02:43:42 -0700 (PDT)
-X-Received: by 2002:a05:6a21:6086:b0:3d3:adbf:7781 with SMTP id adf61e73a8af0-3ddec6352cemr786212637.22.1790070221602;
-        Tue, 22 Sep 2026 02:43:41 -0700 (PDT)
+        bh=gpT+BmN3K7YyXf5LDWuXbBctqgxHBqFnTc99/u0KEng=;
+        b=cCGFzRca6ouig6Usz+bNeumVkxTjke9im9RFTu8hd3VGCs1Pdvq3sTP8eIwa+kdnpZ
+         IIut5TovXDVsYqF18i48gAu+1T5NKT8Fq9nfpoB5KWy3J0uw1uF/yV5SxBGGV87X0BzR
+         gsDF4vMMXPumsFwUm4hQFPA6QG1lJFoO2u2mF8dXvC86rvuxT6y4PDq47d03+C1CGl1s
+         nzRZLdGPPA6WC+pYrcE+0zZBcmpqMALJKaQZu3VQUQyMM9cqoJ+YB9Ld0tpuMpIvk2gM
+         6h3A/FfvlwzEMWsLw+hLIsGUNyGmZvhwfjjqGt4c7xoGLT+ImVZpt2fbm7INGZ7bmH6Y
+         BDPw==
+X-Forwarded-Encrypted: i=1; AKwUvBzqPVyx8gz2LRnz4Gyk6pYZqcukM8IqKXZtp8hy6R0SuP41XaI/c3dVOiaA+X+7mRbCc2DQuvP+jks2zK/J@vger.kernel.org
+X-Gm-Message-State: AFuF++nuzOE73lI+ijhOvFKO1yNwEuw8uUqXwH9yWxZ45dZQU+pZfbW5
+	H7BmZhi9/j/K9cqBszfooJxOZ3l5IUTjJXa1QjlkzynYL+RevENnUyaLJm68WjkhlqnoTlV6rAE
+	vPxxBxM72iyTg8PTKgJfX2FF5i/X6mwEIG9jDtHwHEIM6TkyUsxIyVwvkhHhhmN/rrydT
+X-Gm-Gg: AYBFou2MtCa8F57tMKCWT7j0VP8rK0OGkJS9annfcJwTKbLscQ0X3BdKSEK09wxH+Xu
+	XTyiQVCy0DkWIBfHq9z6ECNHRcg+Q+t/H4Uro6WgLl17v5EsQhbrV9kOH4cBTIm6xJotxWJxgp0
+	QqzdDtS2mg0riwWD2ym2GmKjUO5xNwf9+ufsvdoQ6hJaPpiS5Oc1uGDmGjl+Wolt4u0wOBHTJ2R
+	0jV5Y3huixhIztQ5PVmUubfArKVai8cOhNbapiZMBXAvFMJaJm5YkBCWa6+qgiwmYiPYS9gysMe
+	pK+77FpJuMeGjhdAh3hHsiTC0cfnDmJvr9cgsINIX4LnBH2tuGHtNPbuNa8kTnm8snUnKmOjVrG
+	w+XfEphhVChlhuKH5Q/92lvKv16KuiUgbrFI=
+X-Received: by 2002:a17:90b:4a0a:b0:39e:16e3:44f7 with SMTP id 98e67ed59e1d1-3a07308cedamr563335a91.6.1790070226888;
+        Tue, 22 Sep 2026 02:43:46 -0700 (PDT)
+X-Received: by 2002:a17:90b:4a0a:b0:39e:16e3:44f7 with SMTP id 98e67ed59e1d1-3a07308cedamr563312a91.6.1790070226369;
+        Tue, 22 Sep 2026 02:43:46 -0700 (PDT)
 Received: from hu-mohs-hyd.qualcomm.com ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-144f2a44cc8sm3776183c88.13.2026.09.22.02.43.37
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-144f2a44cc8sm3776183c88.13.2026.09.22.02.43.41
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 22 Sep 2026 02:43:41 -0700 (PDT)
+        Tue, 22 Sep 2026 02:43:45 -0700 (PDT)
 From: Mohammad Rafi Shaik <mohammad.rafi.shaik@oss.qualcomm.com>
-Date: Tue, 22 Sep 2026 15:12:34 +0530
-Subject: [PATCH v4 5/8] ASoC: qcom: lpass-va-macro: Add SoundWire
- microphone support
+Date: Tue, 22 Sep 2026 15:12:35 +0530
+Subject: [PATCH v4 6/8] ASoC: dt-bindings: qcom: Add Hawi LPASS macro
+ codecs
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -91,7 +91,7 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260922-add_shikra_support-v1-5-6c6cb6444caf@oss.qualcomm.com>
+Message-Id: <20260922-add_shikra_support-v1-6-6c6cb6444caf@oss.qualcomm.com>
 References: <20260922-add_shikra_support-v1-0-6c6cb6444caf@oss.qualcomm.com>
 In-Reply-To: <20260922-add_shikra_support-v1-0-6c6cb6444caf@oss.qualcomm.com>
 To: Srinivas Kandagatla <srini@kernel.org>,
@@ -102,279 +102,174 @@ To: Srinivas Kandagatla <srini@kernel.org>,
         Takashi Iwai <tiwai@suse.com>
 Cc: Mohammad Rafi Shaik <mohammad.rafi.shaik@oss.qualcomm.com>,
         linux-sound@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
+        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+        Prasad Kumpatla <prasad.kumpatla@oss.qualcomm.com>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1790070192; l=9620;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1790070192; l=4222;
  i=mohammad.rafi.shaik@oss.qualcomm.com; s=20260424;
- h=from:subject:message-id; bh=EypEwZqDJrmJfCSNQLvIDdsPJdsMZpNBzjQHWYZ6PHE=;
- b=Y3CGqAaUq0e6KuzxUlEBDMkwLdRr9CQDy+n07yBJ4FqN3rE0fR9xR3i5IHL0oAaLWcijvZ4IM
- hAV8OzqR+7uA5fmI1KAVw2HIC0IL6XehMUv7vpJ7J2yV4C/rI4RXaml
+ h=from:subject:message-id; bh=KVgaVRGJbpLL89dqvffhwrk/D2FqT70NA6HkMKnCdwE=;
+ b=e4UagyTwv+76gXdrJcMQc1L6gMBVdCgkeTpPBHwxPf8ASkeSobe9fum54TROFlvAJwcb9kTne
+ F5fnQPUS8yPDlwDK5ofSRW3YDSQzgmu/KKKjR6ze4EXwRIPzN2H3+/M
 X-Developer-Key: i=mohammad.rafi.shaik@oss.qualcomm.com; a=ed25519;
  pk=KZedmYgMGYOzuTpLGv56tdrL+pTLDP8pdmfQ91xemiA=
-X-Proofpoint-ORIG-GUID: IM_5ZYMtalyVoY46aDAmPEabj1NxPwDy
-X-Proofpoint-GUID: IM_5ZYMtalyVoY46aDAmPEabj1NxPwDy
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTIyMDEzOSBTYWx0ZWRfX9vVHq/wHV22F
- wueRBktXCJ13LSrhx4LGIzTipIse7uR2E0kPvnxYRTq/Gqun88XU/bsn0B566Xxk+iXeXBKfkYZ
- eEhZiWPcRkoICo8SqT2vMAkttDU73bs=
-X-Authority-Analysis: v=2.4 cv=NKBAaE6g c=1 sm=1 tr=0 ts=6ab24dcf cx=c_pps
- a=rz3CxIlbcmazkYymdCej/Q==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTIyMDEzOSBTYWx0ZWRfXyvGw+qc3hxNB
+ bOkKnJTG5DbkDVs7VdrznSRFaLXXWejnB+hjbRKyusF2jlCWpPNqNt9/oiT8cnxuwKEM8Ou4wHL
+ O5/7GwH0twTM+mlPJ0B38HgJTk0hZhY=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTIyMDEzOSBTYWx0ZWRfX2aG/vvZm7t19
+ qx5sg+s6kLB1WYzhptJ9jTAbtdwlxEWOyNeh+vA0v+QXOUWrakKe0hZSRxuXqzsmjWDIWWygosP
+ UjC96KDt3ch6NfUyNzHGBmztN4rQBuBniV9uCQIjsh1N/scanClR0aw3raeHA6wZ3ErwtQ8q3J2
+ wPMvxOgKZIYCRZgjuiJ1hNr0C/uEYppAPadKZnPW17pDu96DTNG2cs9tdNi5yegj7+IgHaZobzY
+ KsLxpGbOv8cfYqw6JbW/kywM/2CQ1iyPS9FsXA0KBNs3bmQqOyCWXKpIawPc4gllH7lyNCqzG32
+ 8LyAJsuGDtfL30gWQJxJ6aV4x4LOPGEAwLAIa9IJKpdH/Q4C2uAg0eYpzn3yzattSU/p/hk92MP
+ vJrqQXZ1BbG3FVfwUfHEhzNoGZVZAUW03APj/GAqJCHgK6yNwV2MrQZzBzuzIE88xXrW59WLmc/
+ bTBd9t8fAt1Xffl0F0A==
+X-Authority-Analysis: v=2.4 cv=E8FYNqdl c=1 sm=1 tr=0 ts=6ab24dd3 cx=c_pps
+ a=Qgeoaf8Lrialg5Z894R3/Q==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
  a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22
- a=EUspDBNiAAAA:8 a=zFky0nD_-0bCEmkCyRUA:9 a=QEXdDO2ut3YA:10
- a=bFCP_H2QrGi7Okbo017w:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTIyMDEzOSBTYWx0ZWRfX9pTIvGU9M/1E
- 93axe6hsYtZ130McHevlQLSk6Ylvg0bQdEOt8yiU3Makv1nojSWcyRYWyEwcMVwY1ABpbv7KcwY
- dZa9HWLVtDhmleMzNrxH3LbkS4mbkgwuTI3IzvboNDETJoHo5m6i+M2T/R0AwosnWjFyfBFvDa4
- mIqnej0Wf42EOCk30uhse/zpopfXsXOcY/vfrtFrbaPv43BcvNQfYb9kjTHiJjZJJToHf+pB1FD
- EQIddTJADn90KteVWQ0f03N+kpvUliTVjR78l07nk2vyBh3tfmWpVuWN5/ttOVguGfllq7Yj7dB
- PAtJ++n3Cfwo6z3LJ+yl8vE7dSlnXxOZlPZBubZASNUCRmM1W2YNPZ2w1XowPuoLoMMqV9IF3fR
- hPFijl6M111s75FamEJHcX1xopiIwOIJVFiNs14FR+lzCwUJ+9UzvXg2S/Nu640vUWZhTudDFj9
- n8m8qvsEQrT0zbcA5iQ==
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22
+ a=EUspDBNiAAAA:8 a=MdR4w2dFWrRrHIxOyxQA:9 a=QEXdDO2ut3YA:10
+ a=x9snwWr2DeNwDh03kgHS:22
+X-Proofpoint-ORIG-GUID: 6Tl6tisjuD5WhHwB0zKMuIb5jKXWUJG8
+X-Proofpoint-GUID: 6Tl6tisjuD5WhHwB0zKMuIb5jKXWUJG8
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-09-21_07,2026-09-21_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 bulkscore=0 suspectscore=0 adultscore=0 malwarescore=0
- clxscore=1015 phishscore=0 spamscore=0 impostorscore=0 lowpriorityscore=0
+ bulkscore=0 clxscore=1015 spamscore=0 lowpriorityscore=0 impostorscore=0
+ phishscore=0 suspectscore=0 priorityscore=1501 malwarescore=0 adultscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609220139
 
-The VA decimators can currently capture audio only from DMIC inputs.
-Add support for routing audio from SoundWire microphone (SMIC) inputs
-as well.
+From: Prasad Kumpatla <prasad.kumpatla@oss.qualcomm.com>
 
-Update the decimator source selection logic to switch between DMIC and
-SMIC sources based on the active input path.
+Document compatibles for the RX, TX and VA macro codecs found in the
+Low Power Audio SubSystem (LPASS) of the Qualcomm Hawi SoC.
 
-The ADC_DMIC_SEL bit of CDC_VA_TXn_TX_PATH_CFG0 is shared by the DMIC and
-the SoundWire mic mux, so a mixer write to the mux that is not part of the
-active path can leave it stale. Program it from the resolved mux state
-when the decimator is enabled, so capture does not depend on the order in
-which userspace restores the two controls.
+All three macros differ from SM8550, so describe them as standalone
+compatibles with their own clock constraints rather than as SM8550
+fallbacks: the RX macro uses the 'lpr' clock instead of the 'macro'
+clock, the TX macro is based on Bolero v4.0, and the VA macro takes an
+additional "heartbeatpulse" clock sourced from the LPASS VA CSR rate
+generator.
 
-Add a helper to detect whether a decimator is using a SoundWire microphone
-input. Use this information to skip DMIC-specific HPF programming sequences
-when the decimator is configured for an SMIC source.
-
-This enables VA decimators to capture audio from either DMIC or SoundWire
-microphone inputs.
-
+Signed-off-by: Prasad Kumpatla <prasad.kumpatla@oss.qualcomm.com>
 Signed-off-by: Mohammad Rafi Shaik <mohammad.rafi.shaik@oss.qualcomm.com>
 ---
- sound/soc/codecs/lpass-va-macro.c | 144 +++++++++++++++++++++++++++++++++++---
- 1 file changed, 135 insertions(+), 9 deletions(-)
+ .../bindings/sound/qcom,lpass-rx-macro.yaml           | 18 ++++++++++++++++++
+ .../bindings/sound/qcom,lpass-tx-macro.yaml           | 19 +++++++++++++++++++
+ .../bindings/sound/qcom,lpass-va-macro.yaml           | 19 +++++++++++++++++++
+ 3 files changed, 56 insertions(+)
 
-diff --git a/sound/soc/codecs/lpass-va-macro.c b/sound/soc/codecs/lpass-va-macro.c
-index 02dc3346924f..79abbdd158b7 100644
---- a/sound/soc/codecs/lpass-va-macro.c
-+++ b/sound/soc/codecs/lpass-va-macro.c
-@@ -794,10 +794,22 @@ static int va_macro_put_dec_enum(struct snd_kcontrol *kcontrol,
- 		return -EINVAL;
- 	}
+diff --git a/Documentation/devicetree/bindings/sound/qcom,lpass-rx-macro.yaml b/Documentation/devicetree/bindings/sound/qcom,lpass-rx-macro.yaml
+index 69d7b7332d36..1d3945190c1d 100644
+--- a/Documentation/devicetree/bindings/sound/qcom,lpass-rx-macro.yaml
++++ b/Documentation/devicetree/bindings/sound/qcom,lpass-rx-macro.yaml
+@@ -13,6 +13,7 @@ properties:
+   compatible:
+     oneOf:
+       - enum:
++          - qcom,hawi-lpass-rx-macro
+           - qcom,sc7280-lpass-rx-macro
+           - qcom,shikra-lpass-rx-macro
+           - qcom,sm6115-lpass-rx-macro
+@@ -139,6 +140,23 @@ allOf:
+             - const: dcodec
+             - const: fsgen
  
--	if (val != 0)
--		snd_soc_component_update_bits(component, mic_sel_reg,
--					      CDC_VA_TX_PATH_ADC_DMIC_SEL_MASK,
--					      CDC_VA_TX_PATH_ADC_DMIC_SEL_DMIC);
-+	if (val != 0) {
-+		/*
-+		 * SMIC enums use shift 0 (lower nibble of CFG0),
-+		 * DMIC enums use shift 4 (upper nibble of CFG0).
-+		 * Use e->shift_l to distinguish them without relying
-+		 * on widget name comparisons.
-+		 */
-+		if (e->shift_l == 0)
-+			snd_soc_component_update_bits(component, mic_sel_reg,
-+						      CDC_VA_TX_PATH_ADC_DMIC_SEL_MASK,
-+						      CDC_VA_TX_PATH_ADC_DMIC_SEL_ADC);
-+		else
-+			snd_soc_component_update_bits(component, mic_sel_reg,
-+						      CDC_VA_TX_PATH_ADC_DMIC_SEL_MASK,
-+						      CDC_VA_TX_PATH_ADC_DMIC_SEL_DMIC);
-+	}
++  - if:
++      properties:
++        compatible:
++          enum:
++            - qcom,hawi-lpass-rx-macro
++    then:
++      properties:
++        clocks:
++          minItems: 4
++          maxItems: 4
++        clock-names:
++          items:
++            - const: mclk
++            - const: lpr
++            - const: dcodec
++            - const: fsgen
++
+   - if:
+       properties:
+         compatible:
+diff --git a/Documentation/devicetree/bindings/sound/qcom,lpass-tx-macro.yaml b/Documentation/devicetree/bindings/sound/qcom,lpass-tx-macro.yaml
+index d8682ff2e82c..2df72450d36f 100644
+--- a/Documentation/devicetree/bindings/sound/qcom,lpass-tx-macro.yaml
++++ b/Documentation/devicetree/bindings/sound/qcom,lpass-tx-macro.yaml
+@@ -13,6 +13,7 @@ properties:
+   compatible:
+     oneOf:
+       - enum:
++          - qcom,hawi-lpass-tx-macro
+           - qcom,sc7280-lpass-tx-macro
+           - qcom,sm6115-lpass-tx-macro
+           - qcom,sm8250-lpass-tx-macro
+@@ -142,6 +143,24 @@ allOf:
+             - const: dcodec
+             - const: fsgen
  
- 	return snd_soc_dapm_put_enum_double(kcontrol, ucontrol);
- }
-@@ -978,6 +990,16 @@ static int va_macro_enable_dmic(struct snd_soc_dapm_widget *w,
- 	return 0;
- }
++  - if:
++      properties:
++        compatible:
++          contains:
++            enum:
++              - qcom,hawi-lpass-tx-macro
++    then:
++      properties:
++        clocks:
++          minItems: 4
++          maxItems: 4
++        clock-names:
++          items:
++            - const: mclk
++            - const: lpr
++            - const: dcodec
++            - const: fsgen
++
+ unevaluatedProperties: false
  
-+static bool is_amic_enabled(struct snd_soc_component *comp, int decimator)
-+{
-+	u16 adc_mux_reg;
-+
-+	adc_mux_reg = CDC_VA_INP_MUX_ADC_MUX0_CFG1 +
-+		      VA_MACRO_ADC_MUX_CFG_OFFSET * decimator;
-+
-+	return snd_soc_component_read(comp, adc_mux_reg) & BIT(0);
-+}
-+
- static int va_macro_enable_dec(struct snd_soc_dapm_widget *w,
- 			       struct snd_kcontrol *kcontrol, int event)
- {
-@@ -987,7 +1009,6 @@ static int va_macro_enable_dec(struct snd_soc_dapm_widget *w,
- 	u16 tx_gain_ctl_reg;
- 	u16 adpt_ctrl_reg;
- 	u8 hpf_cut_off_freq;
--
- 	struct va_macro *va = snd_soc_component_get_drvdata(comp);
+ examples:
+diff --git a/Documentation/devicetree/bindings/sound/qcom,lpass-va-macro.yaml b/Documentation/devicetree/bindings/sound/qcom,lpass-va-macro.yaml
+index 683ebf702ba8..7d56f9c36056 100644
+--- a/Documentation/devicetree/bindings/sound/qcom,lpass-va-macro.yaml
++++ b/Documentation/devicetree/bindings/sound/qcom,lpass-va-macro.yaml
+@@ -13,6 +13,7 @@ properties:
+   compatible:
+     oneOf:
+       - enum:
++          - qcom,hawi-lpass-va-macro
+           - qcom,sc7280-lpass-va-macro
+           - qcom,shikra-lpass-va-macro
+           - qcom,sm6115-lpass-va-macro
+@@ -185,6 +186,24 @@ allOf:
+             - const: mclk
+             - const: npl
  
- 	decimator = w->shift;
-@@ -1004,6 +1025,17 @@ static int va_macro_enable_dec(struct snd_soc_dapm_widget *w,
++  - if:
++      properties:
++        compatible:
++          contains:
++            enum:
++              - qcom,hawi-lpass-va-macro
++    then:
++      properties:
++        clocks:
++          minItems: 4
++          maxItems: 4
++        clock-names:
++          items:
++            - const: mclk
++            - const: lpr
++            - const: dcodec
++            - const: heartbeatpulse
++
+ unevaluatedProperties: false
  
- 	switch (event) {
- 	case SND_SOC_DAPM_PRE_PMU:
-+		/*
-+		 * ADC_DMIC_SEL is shared by the DMIC and the SoundWire mic
-+		 * mux, so a mixer write to the mux that is not part of the
-+		 * active path can leave it stale. Program it from the mux
-+		 * state DAPM resolved for this decimator.
-+		 */
-+		snd_soc_component_update_bits(comp, dec_cfg_reg,
-+					      CDC_VA_TX_PATH_ADC_DMIC_SEL_MASK,
-+					      is_amic_enabled(comp, decimator) ?
-+					      CDC_VA_TX_PATH_ADC_DMIC_SEL_ADC :
-+					      CDC_VA_TX_PATH_ADC_DMIC_SEL_DMIC);
- 		snd_soc_component_update_bits(comp,
- 			dec_cfg_reg, CDC_VA_ADC_MODE_MASK,
- 			va->dec_mode[decimator] << CDC_VA_ADC_MODE_SHIFT);
-@@ -1018,9 +1050,10 @@ static int va_macro_enable_dec(struct snd_soc_dapm_widget *w,
- 		snd_soc_component_update_bits(comp, tx_vol_ctl_reg,
- 					      CDC_VA_TX_PATH_CLK_EN_MASK,
- 					      CDC_VA_TX_PATH_CLK_EN);
--		snd_soc_component_update_bits(comp, hpf_gate_reg,
--					      CDC_VA_TX_HPF_ZERO_GATE_MASK,
--					      CDC_VA_TX_HPF_ZERO_GATE);
-+		if (!is_amic_enabled(comp, decimator))
-+			snd_soc_component_update_bits(comp, hpf_gate_reg,
-+						      CDC_VA_TX_HPF_ZERO_GATE_MASK,
-+						      CDC_VA_TX_HPF_ZERO_GATE);
- 
- 		usleep_range(1000, 1010);
- 		hpf_cut_off_freq = (snd_soc_component_read(comp, dec_cfg_reg) &
-@@ -1046,7 +1079,6 @@ static int va_macro_enable_dec(struct snd_soc_dapm_widget *w,
- 				0x0);
- 		}
- 
--
- 		usleep_range(1000, 1010);
- 		snd_soc_component_update_bits(comp, hpf_gate_reg,
- 					      CDC_VA_TX_HPF_ZERO_GATE_MASK,
-@@ -1246,6 +1278,39 @@ static const char * const adc_mux_text[] = {
- 	"VA_DMIC", "SWR_MIC"
- };
- 
-+static const char * const smic_mux_text[] = {
-+	"ZERO", "ADC0", "ADC1", "ADC2", "ADC3", "SWR_MIC0", "SWR_MIC1",
-+	"SWR_MIC2", "SWR_MIC3", "SWR_MIC4", "SWR_MIC5", "SWR_MIC6", "SWR_MIC7"
-+};
-+
-+static SOC_ENUM_SINGLE_DECL(va_smic0_enum, CDC_VA_INP_MUX_ADC_MUX0_CFG0,
-+			0, smic_mux_text);
-+
-+static SOC_ENUM_SINGLE_DECL(va_smic1_enum, CDC_VA_INP_MUX_ADC_MUX1_CFG0,
-+			0, smic_mux_text);
-+
-+static SOC_ENUM_SINGLE_DECL(va_smic2_enum, CDC_VA_INP_MUX_ADC_MUX2_CFG0,
-+			0, smic_mux_text);
-+
-+static SOC_ENUM_SINGLE_DECL(va_smic3_enum, CDC_VA_INP_MUX_ADC_MUX3_CFG0,
-+			0, smic_mux_text);
-+
-+static const struct snd_kcontrol_new va_smic0_mux = SOC_DAPM_ENUM_EXT("va_smic0",
-+			 va_smic0_enum, snd_soc_dapm_get_enum_double,
-+			 va_macro_put_dec_enum);
-+
-+static const struct snd_kcontrol_new va_smic1_mux = SOC_DAPM_ENUM_EXT("va_smic1",
-+			 va_smic1_enum, snd_soc_dapm_get_enum_double,
-+			 va_macro_put_dec_enum);
-+
-+static const struct snd_kcontrol_new va_smic2_mux = SOC_DAPM_ENUM_EXT("va_smic2",
-+			 va_smic2_enum, snd_soc_dapm_get_enum_double,
-+			 va_macro_put_dec_enum);
-+
-+static const struct snd_kcontrol_new va_smic3_mux = SOC_DAPM_ENUM_EXT("va_smic3",
-+			 va_smic3_enum, snd_soc_dapm_get_enum_double,
-+			 va_macro_put_dec_enum);
-+
- static SOC_ENUM_SINGLE_DECL(va_dec0_enum, CDC_VA_INP_MUX_ADC_MUX0_CFG1,
- 		   0, adc_mux_text);
- static SOC_ENUM_SINGLE_DECL(va_dec1_enum, CDC_VA_INP_MUX_ADC_MUX1_CFG1,
-@@ -1381,6 +1446,11 @@ static const struct snd_soc_dapm_widget va_macro_dapm_widgets[] = {
- 	SND_SOC_DAPM_MUX("VA DMIC MUX2", SND_SOC_NOPM, 0, 0, &va_dmic2_mux),
- 	SND_SOC_DAPM_MUX("VA DMIC MUX3", SND_SOC_NOPM, 0, 0, &va_dmic3_mux),
- 
-+	SND_SOC_DAPM_MUX("VA SMIC MUX0", SND_SOC_NOPM, 0, 0, &va_smic0_mux),
-+	SND_SOC_DAPM_MUX("VA SMIC MUX1", SND_SOC_NOPM, 0, 0, &va_smic1_mux),
-+	SND_SOC_DAPM_MUX("VA SMIC MUX2", SND_SOC_NOPM, 0, 0, &va_smic2_mux),
-+	SND_SOC_DAPM_MUX("VA SMIC MUX3", SND_SOC_NOPM, 0, 0, &va_smic3_mux),
-+
- 	SND_SOC_DAPM_REGULATOR_SUPPLY("vdd-micb", 0, 0),
- 	SND_SOC_DAPM_INPUT("DMIC0 Pin"),
- 	SND_SOC_DAPM_INPUT("DMIC1 Pin"),
-@@ -1525,6 +1595,62 @@ static const struct snd_soc_dapm_route va_audio_map[] = {
- 	{"VA DMIC MUX3", "DMIC6", "VA DMIC6"},
- 	{"VA DMIC MUX3", "DMIC7", "VA DMIC7"},
- 
-+	{"VA DEC0 MUX", "SWR_MIC", "VA SMIC MUX0"},
-+	{"VA SMIC MUX0", "ADC0", "VA SWR_ADC0"},
-+	{"VA SMIC MUX0", "ADC1", "VA SWR_ADC1"},
-+	{"VA SMIC MUX0", "ADC2", "VA SWR_ADC2"},
-+	{"VA SMIC MUX0", "ADC3", "VA SWR_ADC3"},
-+	{"VA SMIC MUX0", "SWR_MIC0", "VA SWR_MIC0"},
-+	{"VA SMIC MUX0", "SWR_MIC1", "VA SWR_MIC1"},
-+	{"VA SMIC MUX0", "SWR_MIC2", "VA SWR_MIC2"},
-+	{"VA SMIC MUX0", "SWR_MIC3", "VA SWR_MIC3"},
-+	{"VA SMIC MUX0", "SWR_MIC4", "VA SWR_MIC4"},
-+	{"VA SMIC MUX0", "SWR_MIC5", "VA SWR_MIC5"},
-+	{"VA SMIC MUX0", "SWR_MIC6", "VA SWR_MIC6"},
-+	{"VA SMIC MUX0", "SWR_MIC7", "VA SWR_MIC7"},
-+
-+	{"VA DEC1 MUX", "SWR_MIC", "VA SMIC MUX1"},
-+	{"VA SMIC MUX1", "ADC0", "VA SWR_ADC0"},
-+	{"VA SMIC MUX1", "ADC1", "VA SWR_ADC1"},
-+	{"VA SMIC MUX1", "ADC2", "VA SWR_ADC2"},
-+	{"VA SMIC MUX1", "ADC3", "VA SWR_ADC3"},
-+	{"VA SMIC MUX1", "SWR_MIC0", "VA SWR_MIC0"},
-+	{"VA SMIC MUX1", "SWR_MIC1", "VA SWR_MIC1"},
-+	{"VA SMIC MUX1", "SWR_MIC2", "VA SWR_MIC2"},
-+	{"VA SMIC MUX1", "SWR_MIC3", "VA SWR_MIC3"},
-+	{"VA SMIC MUX1", "SWR_MIC4", "VA SWR_MIC4"},
-+	{"VA SMIC MUX1", "SWR_MIC5", "VA SWR_MIC5"},
-+	{"VA SMIC MUX1", "SWR_MIC6", "VA SWR_MIC6"},
-+	{"VA SMIC MUX1", "SWR_MIC7", "VA SWR_MIC7"},
-+
-+	{"VA DEC2 MUX", "SWR_MIC", "VA SMIC MUX2"},
-+	{"VA SMIC MUX2", "ADC0", "VA SWR_ADC0"},
-+	{"VA SMIC MUX2", "ADC1", "VA SWR_ADC1"},
-+	{"VA SMIC MUX2", "ADC2", "VA SWR_ADC2"},
-+	{"VA SMIC MUX2", "ADC3", "VA SWR_ADC3"},
-+	{"VA SMIC MUX2", "SWR_MIC0", "VA SWR_MIC0"},
-+	{"VA SMIC MUX2", "SWR_MIC1", "VA SWR_MIC1"},
-+	{"VA SMIC MUX2", "SWR_MIC2", "VA SWR_MIC2"},
-+	{"VA SMIC MUX2", "SWR_MIC3", "VA SWR_MIC3"},
-+	{"VA SMIC MUX2", "SWR_MIC4", "VA SWR_MIC4"},
-+	{"VA SMIC MUX2", "SWR_MIC5", "VA SWR_MIC5"},
-+	{"VA SMIC MUX2", "SWR_MIC6", "VA SWR_MIC6"},
-+	{"VA SMIC MUX2", "SWR_MIC7", "VA SWR_MIC7"},
-+
-+	{"VA DEC3 MUX", "SWR_MIC", "VA SMIC MUX3"},
-+	{"VA SMIC MUX3", "ADC0", "VA SWR_ADC0"},
-+	{"VA SMIC MUX3", "ADC1", "VA SWR_ADC1"},
-+	{"VA SMIC MUX3", "ADC2", "VA SWR_ADC2"},
-+	{"VA SMIC MUX3", "ADC3", "VA SWR_ADC3"},
-+	{"VA SMIC MUX3", "SWR_MIC0", "VA SWR_MIC0"},
-+	{"VA SMIC MUX3", "SWR_MIC1", "VA SWR_MIC1"},
-+	{"VA SMIC MUX3", "SWR_MIC2", "VA SWR_MIC2"},
-+	{"VA SMIC MUX3", "SWR_MIC3", "VA SWR_MIC3"},
-+	{"VA SMIC MUX3", "SWR_MIC4", "VA SWR_MIC4"},
-+	{"VA SMIC MUX3", "SWR_MIC5", "VA SWR_MIC5"},
-+	{"VA SMIC MUX3", "SWR_MIC6", "VA SWR_MIC6"},
-+	{"VA SMIC MUX3", "SWR_MIC7", "VA SWR_MIC7"},
-+
- 	{ "VA DMIC0", NULL, "DMIC0 Pin" },
- 	{ "VA DMIC1", NULL, "DMIC1 Pin" },
- 	{ "VA DMIC2", NULL, "DMIC2 Pin" },
+ examples:
 
 -- 
 2.34.1
