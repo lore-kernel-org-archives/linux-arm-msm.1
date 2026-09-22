@@ -1,67 +1,67 @@
-Received: from mail-yx2-f13.google.com (mail-yx2-f13.google.com [74.125.224.141])
+Received: from mail-lr2-f12.google.com (mail-lr2-f12.google.com [74.125.230.76])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0CE674915AF
-	for <linux-arm-msm@vger.kernel.org>; Tue, 22 Sep 2026 05:42:49 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.224.141
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B2F3D306B3D
+	for <linux-arm-msm@vger.kernel.org>; Tue, 22 Sep 2026 06:02:40 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.230.76
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790055773; cv=none; b=bKmK8ehYczJHic8kTukiAYSoG03ONgZh4SI3uJrUoWUNJNh/R68LiK56HnpP0UVVaNdeYk904TFrA2Fs8faPQggCWFl+xBysaGEdpUXGLjqswl0Y9abqdxCXt9mWla4HrT4iPOFlSjGOEhttql9XQevhHhnULkaU7K4vg02b9GA=
+	t=1790056962; cv=none; b=JNeX+a1Zl/Yd2IMnwDiJh4Y00g+d7IWXWg42Oe7AYEImJ4w6WO9woHwngDpZ/fiR0PgG1agTB9BiMZJ25UeMBG/6d/q2fPRwWYelStmBCmGyTPowgbdmw8kQROkXNT62aXUaZToCidSO2vdxYNrTLNU0udfdTAfd+vzes6cUFAg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790055773; c=relaxed/simple;
-	bh=c/faXrItK0j/8gDWnXDndDC81CuGn/Ff4NZ5bBIz3H0=;
+	s=arc-20240116; t=1790056962; c=relaxed/simple;
+	bh=Eff6vCn+phLOaigmyo7edToilcvWUJjQqErcl9hd4nY=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=fiQPLRyIVRT1JBSWGKql9/wObG0KgzD2yGb5XCW8Jdve96pYA80qwEPIAtBJhe/aYI3qXAr4iz0SgvVmCEMAq2RdtdRZGLte0cP/Y82Km8PsH9xfHaBGLpPV32k5wQRHqi5/pVZtubVcGmQxwv3/ZRYBj3WMuP1k82JhSj5x6pw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=VhcZmMhF; arc=none smtp.client-ip=74.125.224.141
+	 In-Reply-To:Content-Type; b=A7pPUrTpm2Nii+Ev2x0F9ZSZ5+2lL3TpeHUwsreOXvCkrTfN+UVdILhaBnn19IFR29r7qnpMHjfVE7fNnT1ZdaRseARtE4enUYWTuuIWJYm53Vj/RScGEyK/hsVIwvippkb3ZekMec4wGoblHAs5pWuQ6zr0N5YlEYmg87+dtY4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=Vk11riSP; arc=none smtp.client-ip=74.125.230.76
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="VhcZmMhF"
-Received: by mail-yx2-f13.google.com with SMTP id 00721157ae682-85d45ae011cso36336257b3.2
-        for <linux-arm-msm@vger.kernel.org>; Mon, 21 Sep 2026 22:42:48 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="Vk11riSP"
+Received: by mail-lr2-f12.google.com with SMTP id 38308e7fff4ca-3a49c068e85so32978361fa.2
+        for <linux-arm-msm@vger.kernel.org>; Mon, 21 Sep 2026 23:02:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1790055765; x=1790660565; darn=vger.kernel.org;
-        h=content-type:in-reply-to:autocrypt:from:content-language:references
-         :cc:to:subject:user-agent:mime-version:date:message-id:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=xOf8LHzCJGb9DLLbIqkHEB8RegxFEU+aj+xMEqBxFFI=;
-        b=VhcZmMhFekmHiofRFj1j6F5CZsflhLOoCS8EyQQNViYWUIAa1hxAL2gjY4zZsSdjKK
-         mP5B7jBIHcwFoW/ui67IuiGFaMl35VQpRH0N1rG0ypM/QP0tnCu78PVtHtoLQhCSxGtI
-         cGmC0XLRIPJiNUDVHraEoJIDYuKgpKOlUsRJpSAH9MXpr3eBQiKnsALzS+ueE4775/ji
-         PZRwSxmxUbnQoSPjwTks/Z3Fa+Q8f7FnNHu9m3Rxq6fdD4AhkoKFzFX3qAGu50EeRrfO
-         JDQLkueMkfOkGETyHywwulGgAl2r1ji3e+ffgCRbCwdvrg4OSen4Mfgur4BNCWTcHz2w
-         VJhA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790055765; x=1790660565;
-        h=content-type:in-reply-to:autocrypt:from:content-language:references
-         :cc:to:subject:user-agent:mime-version:date:message-id:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+        d=gmail.com; s=20251104; t=1790056959; x=1790661759; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=xOf8LHzCJGb9DLLbIqkHEB8RegxFEU+aj+xMEqBxFFI=;
-        b=Ew+7oKUaaWdFJvdNPf21G33EeEki+2+cd7WFg5dHj2zgEuHsv5tn43qPl7GBvAi70S
-         Gfjvlg18b01fhvXNzbvb/5p2aHZB7rMoornuWrDdMGaQ5BZ1ErbXio+HFhWA2d1entmJ
-         HdJf60qM4oZPATOD4R4Q686mDyPgIDjRwhPKOJOMrTN7fQAjSUEis/oQSw+u38RpWDok
-         LBNG8nQmagIPJOCLvzoBiLIWsMw/RkoYhKoM3jkKMt/e6KF8zR4yYhJLObW6HQKOkiey
-         aBt1gBnFg1s7W9XpkEGQcHmXboWWzhX50F/bTke05TmHxGrTnU3J0dbTqT7NFYCPgdmO
-         Vsmg==
-X-Forwarded-Encrypted: i=1; AKwUvBzwDk+JG5ott4s8tbThJcH1vMRAGbQZqAhQsTgu40529rdai3nIRjDm/Jj9iWxc6e4E42/1fBUue9YyoYfC@vger.kernel.org
-X-Gm-Message-State: AFuF++lbLI7K33QqifYAxmYaqjoQoUZ+ZiZaYCGmHt1yaT+62SAAYzBn
-	IGGR+8s/IPfkItD+ooNyvJN6Sbn0dS6G3uWKT32Vn9ROYrjK4OAS+JnV
-X-Gm-Gg: AYBFou2ovIQsVQF1NBxeNS8EWCjOBd1sVSEFzO66PLTrtdYS0Ku1lgOH5xOxzsjiBXv
-	3qd8bUUwqLZlmBM+ym/nIoLhsbp0qP4HG1CUnb6y4Sr7wu/mmDDEDe8GOF/x4Fc9ixtU0Rcm5Tr
-	AxrlHZdJepJMOnr7q+3b+yCT1bZRUJkR+m3HJIwUAm6feWHihACoxYwxzV6elKvl+D88pVXlpGM
-	9iJBTiFmh30aYnxv0LQAqihU0xhBRNTKcJ7sximqCtc5VT4NpxNvaBbbsby5hvTHLftUquDmmEh
-	XgqItMhhYXtaBFQD2c5BeUyNfBHXdB/G0aN8Jiytbhw3m7Fiybfes/YSzwK3sjEoJcZERs96HcT
-	SJl06/Are298ETjjX5+kNFZfFI+u6CVoJCvRqDLmIA4e3y8IrOTJBR5FuPbdpOT4t8e8e4KUgwZ
-	BbRGlA624Kb3H8T63tVlUjtrli05gaXwogz1DH30IMUVyTpvMnmndXvTWibFQVhUGR8XlTiapnZ
-	JIbR/NkBhfgfA==
-X-Received: by 2002:a05:690c:a756:b0:882:1d1e:d73a with SMTP id 00721157ae682-8973090270amr29013187b3.4.1790055765385;
-        Mon, 21 Sep 2026 22:42:45 -0700 (PDT)
-Received: from [10.138.10.6] ([185.98.168.14])
-        by smtp.gmail.com with ESMTPSA id 00721157ae682-8a2c24c4fa4sm2402157b3.21.2026.09.21.22.42.42
+        bh=xt+5g6YJ+qiwuKUi20nhfo5k0N4aMIWmvgMhNUyOULU=;
+        b=Vk11riSPh7mKFD7lFKVvzHwZH/kiFGDqyUWNO7SFoNK+M5V1Bd7xdcbwpyUh5MZOTM
+         WvWJxd1qRTIljOnXWf3xYVV+QYf5Lja+1cMHrHmnGPcESK3dzhJxfYKQgvbY0TtkRgWZ
+         Wtw6PwZsQNR1dm3c0zF9zwaIvs1plGsPt1m5tTPUS39QN/6jhQPTCBjbxpKjvbibz/SN
+         BpxCuVblN+HY9k2uxtymqf9s93eRcJH+9k0R1gI3JM+p+LzrHanw0K63OYzaa5qvvnR7
+         ymDBKEglu4p+GogHyFdYtoo3wfUpztb/AxXM54ZcTxX7xZLzEU7eHdXpNfdDRou2Ck9Q
+         V1Xg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1790056959; x=1790661759;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=xt+5g6YJ+qiwuKUi20nhfo5k0N4aMIWmvgMhNUyOULU=;
+        b=2L1E/IourP1tA9QxAr+R8YIlYMNAtWe9Mt08gQxLjbwlTRZII8YdaQLzAU6Rb+hhHB
+         7TuR6CsMgKvCpYE48eBGAHgYi9FQQUfu5NLEaNKa/coPEMiN0WJtrniNNzKlprTUmIMV
+         +kByPh+p6kd+2YgQCXmitSa87KK2XQUK+XYpfabGaSwZd/3eHLMLrL+V1ONn0mE5EVax
+         V18CpXafFcXPvoFBiUnjPpxnez0mV2EG6LwvxfsR3/yiJo/CPWn/OqjiNhILQtxjZ8mj
+         l7GtwxKeQwAL2XS/qgftRVhE9xb2As0EqpTwoG4SkDHvrvr70q0AMOKwP048JdnuCS5L
+         gzIw==
+X-Gm-Message-State: AFuF++nR+6Hl83HvaBSl6W7i3QfqWOf24pr4MRTYqnt6PEKY3Yxabuw9
+	FqBhQeHqpgUXWlaDQYPPEUNwGmGdnr2ZbbyZvb5ObJDYXXbKMeXsZL1T
+X-Gm-Gg: AYBFou33S0AyPvczMvmYyZrcjXxY64HEsPlCgLrN07bLV/XSSwJhwhF/8Z+BsCioMVc
+	F7bYnAD1Q4mQ+t1pU8zubiweyVnRxyNb60im6XmVyG9AxjTKEclK1imeUdezx9DY9uK6uZMiI0/
+	kJYmbeKr5UBG26AfZ6Rtvha9ZiwXa1zHaLRllmXDbiopjkIJtJ0WJMbT65UUfNwqJQXp6n83uFN
+	BWOJewpNAoNxE2JWbIvDe/9arsiGlzQNt2CGjC8R4eLKVTHOh3WWsg2ywsWuhfXkKnWoJxlix9Y
+	f8RqsxT64Dbar3H7RmMe4CHsHj06zO0/2XZ8QvxCnT3IPRCKT/up64rknm1i20yWH9Utw+KsVnL
+	HYdv4KXyW9TEesK6qysk6Vxir8F72PWt5ep/JOTzEOdkB/Bze/GAwWDnT1hmkni2yDbfVUY6AZU
+	B4NDur0vKr2XrrQUS5gYPJ6j4J98p4JEQWCCaBD6qhARuyryVUmjGn7zHmQbzMMt3W/KbN5Qq/N
+	ZWh8rupmzNl1y4Eg2OyWlHJR2osmigX7pJUgGl7wgYurPD/wrKgs4g=
+X-Received: by 2002:a2e:be8a:0:b0:3a3:462f:329a with SMTP id 38308e7fff4ca-3a5fc036a4bmr29953921fa.13.1790056958392;
+        Mon, 21 Sep 2026 23:02:38 -0700 (PDT)
+Received: from ?IPV6:2a10:a5c0:800d:dd00:8fdf:935a:2c85:d703? ([2a10:a5c0:800d:dd00:8fdf:935a:2c85:d703])
+        by smtp.gmail.com with ESMTPSA id 38308e7fff4ca-3a627d6b91dsm2501451fa.25.2026.09.21.23.02.37
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 21 Sep 2026 22:42:43 -0700 (PDT)
-Message-ID: <71cba843-1643-4f5e-9830-9e60b5f1c334@gmail.com>
-Date: Tue, 22 Sep 2026 01:42:28 -0400
+        Mon, 21 Sep 2026 23:02:37 -0700 (PDT)
+Message-ID: <f20e2299-4dc1-4902-b7ec-80f11cee3745@gmail.com>
+Date: Tue, 22 Sep 2026 09:02:36 +0300
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -69,261 +69,80 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v8 10/14] Revert "crypto: qce - Mark QCE as BROKEN"
-To: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>,
- Thara Gopinath <thara.gopinath@gmail.com>,
- Herbert Xu <herbert@gondor.apana.org.au>,
- "David S. Miller" <davem@davemloft.net>,
- Stanimir Varbanov <svarbanov@mm-sol.com>,
- Eneas U de Queiroz <cotequeiroz@gmail.com>,
- Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>,
- Eric Biggers <ebiggers@kernel.org>, Bjorn Andersson <andersson@kernel.org>,
- Konrad Dybcio <konradybcio@kernel.org>, Russell King
- <linux@armlinux.org.uk>, Abel Vesa <abelvesa@kernel.org>
-Cc: linux-crypto@vger.kernel.org, linux-arm-msm@vger.kernel.org,
- linux-kernel@vger.kernel.org, brgl@kernel.org,
- linux-arm-kernel@lists.infradead.org
-References: <20260921-qce-fix-self-tests-v8-0-107537869a72@oss.qualcomm.com>
- <20260921-qce-fix-self-tests-v8-10-107537869a72@oss.qualcomm.com>
-Content-Language: en-US
-From: Demi Marie Obenour <demiobenour@gmail.com>
-Autocrypt: addr=demiobenour@gmail.com; keydata=
- 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
- +MYSfkEjBz0E8CLOcAw7JIwAaeBT
-In-Reply-To: <20260921-qce-fix-self-tests-v8-10-107537869a72@oss.qualcomm.com>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------hZGDlRLrKnd03jrOhfI7ouRT"
+Subject: Re: [PATCH v14 1/6] power: Extend power_on_reason.h for upcoming
+ PSCRR framework
+To: Faruque Ansari <faruque.ansari@oss.qualcomm.com>,
+ Sebastian Reichel <sre@kernel.org>, Benson Leung <bleung@chromium.org>,
+ Tzung-Bi Shih <tzungbi@kernel.org>, Guenter Roeck <groeck@chromium.org>,
+ Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>,
+ "Rafael J. Wysocki" <rafael@kernel.org>,
+ Daniel Lezcano <daniel.lezcano@kernel.org>, Zhang Rui <rui.zhang@intel.com>,
+ Lukasz Luba <lukasz.luba@arm.com>, Oleksij Rempel <o.rempel@pengutronix.de>,
+ Pengutronix Kernel Team <kernel@pengutronix.de>
+Cc: linux-arm-msm@vger.kernel.org, linux-pm@vger.kernel.org,
+ linux-kernel@vger.kernel.org, chrome-platform@lists.linux.dev,
+ avaneesh.dwivedi@oss.qualcomm.com,
+ Umang Chheda <umang.chheda@oss.qualcomm.com>,
+ Sebastian Reichel <sebastian.reichel@collabora.com>
+References: <20260921-pscrr-framework-v14-0-a16290003b7c@oss.qualcomm.com>
+ <20260921-pscrr-framework-v14-1-a16290003b7c@oss.qualcomm.com>
+Content-Language: en-US, en-AU, en-GB, en-BW
+From: Matti Vaittinen <mazziesaccount@gmail.com>
+In-Reply-To: <20260921-pscrr-framework-v14-1-a16290003b7c@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------hZGDlRLrKnd03jrOhfI7ouRT
-Content-Type: multipart/mixed; boundary="------------hcBi0xuRtuG0C0y5h9SjgbL0";
- protected-headers="v1"; hp="clear"
-Message-ID: <71cba843-1643-4f5e-9830-9e60b5f1c334@gmail.com>
-Date: Tue, 22 Sep 2026 01:42:28 -0400
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v8 10/14] Revert "crypto: qce - Mark QCE as BROKEN"
-To: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>,
- Thara Gopinath <thara.gopinath@gmail.com>,
- Herbert Xu <herbert@gondor.apana.org.au>,
- "David S. Miller" <davem@davemloft.net>,
- Stanimir Varbanov <svarbanov@mm-sol.com>,
- Eneas U de Queiroz <cotequeiroz@gmail.com>,
- Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>,
- Eric Biggers <ebiggers@kernel.org>, Bjorn Andersson <andersson@kernel.org>,
- Konrad Dybcio <konradybcio@kernel.org>, Russell King
- <linux@armlinux.org.uk>, Abel Vesa <abelvesa@kernel.org>
-Cc: linux-crypto@vger.kernel.org, linux-arm-msm@vger.kernel.org,
- linux-kernel@vger.kernel.org, brgl@kernel.org,
- linux-arm-kernel@lists.infradead.org
-References: <20260921-qce-fix-self-tests-v8-0-107537869a72@oss.qualcomm.com>
- <20260921-qce-fix-self-tests-v8-10-107537869a72@oss.qualcomm.com>
-Content-Language: en-US
-From: Demi Marie Obenour <demiobenour@gmail.com>
-Autocrypt: addr=demiobenour@gmail.com; keydata=
- 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
- +MYSfkEjBz0E8CLOcAw7JIwAaeBT
-In-Reply-To: <20260921-qce-fix-self-tests-v8-10-107537869a72@oss.qualcomm.com>
+On 21/09/2026 20:44, Faruque Ansari wrote:
+> Prepare for the introduction of the Power State Change Reason Recorder
+> (PSCRR) framework by expanding the power_on_reason.h header. This
+> extension includes new power-on reasons:
+> - POWER_ON_REASON_OVER_CURRENT for over-current conditions.
+> - POWER_ON_REASON_REGULATOR_FAILURE for regulator failures.
+> - POWER_ON_REASON_OVER_TEMPERATURE for over temperature situations.
+> - POWER_ON_REASON_EC_PANIC for EC panics.
+> - POWER_ON_REASON_EXTERNAL for an external reset source.
+> 
+> Co-developed-by: Oleksij Rempel <o.rempel@pengutronix.de>
+> Signed-off-by: Oleksij Rempel <o.rempel@pengutronix.de>
+> Reviewed-by: Sebastian Reichel <sebastian.reichel@collabora.com>
+> Signed-off-by: Faruque Ansari <faruque.ansari@oss.qualcomm.com>
 
---------------hcBi0xuRtuG0C0y5h9SjgbL0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+Reviewed-by: Matti Vaittinen <mazziesaccount@gmail.com>
 
-On 9/21/26 08:58, Bartosz Golaszewski wrote:
-> The self-tests for this driver have been fixed. The crypto algorithms
-> are only registered if the user explicitly requests it with the provide=
-d
-> module parameter defaulting to false. There's no reason to further keep=
-
-> it unbuildable with the BROKEN label.
->=20
-> While at it: update the Kconfig description by saying this is an
-> "offloader" and not an "accelerator".
->=20
-> Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.co=
-m>
+> 
+> changes v12:
+> - add POWER_ON_REASON_EXTERNAL
+> changes v10:
+> - add Reviewed-by: Sebastian Reichel ...
+> changes v6:
+> - add POWER_ON_REASON_EC_PANIC
+> - s/POWER_ON_REASON_OVERTEMPERATURE/POWER_ON_REASON_OVER_TEMPERATURE
+> (cherry picked from commit a6fb08a81864e2ed17cebba9f249af3d44e42c3f)
 > ---
->  arch/arm/configs/multi_v7_defconfig |  1 +
->  arch/arm64/configs/defconfig        |  1 +
->  drivers/crypto/Kconfig              | 16 ++++++++--------
->  3 files changed, 10 insertions(+), 8 deletions(-)
->=20
-> diff --git a/arch/arm/configs/multi_v7_defconfig b/arch/arm/configs/mul=
-ti_v7_defconfig
-> index f9b8dbf9318c9d4947e56ef0159311634bf0c1ee..2d6292f8cab39596b540084=
-fbd8b30f4c25cd4ff 100644
-> --- a/arch/arm/configs/multi_v7_defconfig
-> +++ b/arch/arm/configs/multi_v7_defconfig
-> @@ -1323,6 +1323,7 @@ CONFIG_CRYPTO_DEV_ATMEL_AES=3Dm
->  CONFIG_CRYPTO_DEV_ATMEL_TDES=3Dm
->  CONFIG_CRYPTO_DEV_ATMEL_SHA=3Dm
->  CONFIG_CRYPTO_DEV_MARVELL_CESA=3Dm
-> +CONFIG_CRYPTO_DEV_QCE=3Dm
->  CONFIG_CRYPTO_DEV_ROCKCHIP=3Dm
->  CONFIG_CRYPTO_DEV_STM32_HASH=3Dm
->  CONFIG_CRYPTO_DEV_STM32_CRYP=3Dm
-> diff --git a/arch/arm64/configs/defconfig b/arch/arm64/configs/defconfi=
-g
-> index 982ea1758eb667a1949721140961764b3e9be1f6..55a2e8c3ae3522630df8c31=
-cb2b7c7663e973aed 100644
-> --- a/arch/arm64/configs/defconfig
-> +++ b/arch/arm64/configs/defconfig
-> @@ -1957,6 +1957,7 @@ CONFIG_CRYPTO_AES_ARM64_CE_CCM=3Dy
->  CONFIG_CRYPTO_DEV_SUN8I_CE=3Dm
->  CONFIG_CRYPTO_DEV_FSL_CAAM=3Dm
->  CONFIG_CRYPTO_DEV_FSL_DPAA2_CAAM=3Dm
-> +CONFIG_CRYPTO_DEV_QCE=3Dm
->  CONFIG_CRYPTO_DEV_TEGRA=3Dm
->  CONFIG_CRYPTO_DEV_ZYNQMP_AES=3Dm
->  CONFIG_CRYPTO_DEV_ZYNQMP_SHA3=3Dm
-> diff --git a/drivers/crypto/Kconfig b/drivers/crypto/Kconfig
-> index 0189dfdcbbe11098ead0ea194293422a31d8fe65..baf6c4a4c8aed663e89ae24=
-68a7e9ed9dcb66f34 100644
-> --- a/drivers/crypto/Kconfig
-> +++ b/drivers/crypto/Kconfig
-> @@ -527,17 +527,17 @@ source "drivers/crypto/marvell/Kconfig"
->  source "drivers/crypto/intel/Kconfig"
-> =20
->  config CRYPTO_DEV_QCE
-> -	tristate "Qualcomm crypto engine accelerator"
-> -	depends on (BROKEN && ARCH_QCOM) || COMPILE_TEST
-> +	tristate "Qualcomm crypto engine offloader"
-> +	depends on ARCH_QCOM || COMPILE_TEST
->  	depends on HAS_IOMEM
->  	help
-> -	  This driver supports Qualcomm crypto engine accelerator
-> -	  hardware. To compile this driver as a module, choose M here. The
-> -	  module will be called qcrypto.
-> +	  This driver supports Qualcomm crypto engine offloader hardware. To
-> +	  compile this driver as a module, choose M here. The module will be
-> +	  called qcrypto.
-> =20
-> -	  This driver does not have exclusive access to the
-> -	  hardware, causing races with the secure world.  It
-> -	  is also slower than the CPU.
-> +	  NOTE: This driver does not have exclusive access to the hardware,
-> +	  causing races with the secure world. It is also *slower* than the
-> +	  CPU for the same algorithms. Use at your own risk!
+>   include/linux/power/power_on_reason.h | 5 +++++
+>   1 file changed, 5 insertions(+)
+> 
+> diff --git a/include/linux/power/power_on_reason.h b/include/linux/power/power_on_reason.h
+> index 95a1ec0c403c..13e61ace14f5 100644
+> --- a/include/linux/power/power_on_reason.h
+> +++ b/include/linux/power/power_on_reason.h
+> @@ -15,5 +15,10 @@
+>   #define POWER_ON_REASON_XTAL_FAIL "crystal oscillator failure"
+>   #define POWER_ON_REASON_BROWN_OUT "brown-out reset"
+>   #define POWER_ON_REASON_UNKNOWN "unknown reason"
+> +#define POWER_ON_REASON_OVER_CURRENT "over current"
+> +#define POWER_ON_REASON_REGULATOR_FAILURE "regulator failure"
+> +#define POWER_ON_REASON_OVER_TEMPERATURE "over temperature"
+> +#define POWER_ON_REASON_EC_PANIC "EC panic"
+> +#define POWER_ON_REASON_EXTERNAL "external reset"
+>   
+>   #endif /* POWER_ON_REASON_H */
+> 
 
-Would it make sense to clarify that this is only an issue if you pass
-do_register_algos=3D1?  With do_register_algos=3D0 (the default), the
-driver is perfectly safe (unless you made a mistake elsewhere) and
-saves power, so most people want it on.
 
-Also, if I understand your previous messages correctly, Linux currently
-doesn't use any of the features that would cause the races with the
-secure world.
+-- 
+Matti Vaittinen
+Linux kernel developer at ROHM Semiconductors
+Oulu Finland
 
->  config CRYPTO_DEV_QCE_SKCIPHER
->  	bool
->=20
---=20
-Sincerely,
-Demi Marie Obenour (she/her/hers)
-
---------------hcBi0xuRtuG0C0y5h9SjgbL0--
-
---------------hZGDlRLrKnd03jrOhfI7ouRT
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAEBCgAdFiEEopQtqVJW1aeuo9/sszaHOrMp8lMFAmqyFU4ACgkQszaHOrMp
-8lNAXQ//aGdnZkkwqbte0yMCxsNvRT8fzkRkN+G6RbFCXrZTBTldeYeBFF9EVKHq
-BvXdeWWcgRF7ucW/m3up3k94kMaG2mPBhOqRQUeOWcxg2lFCACnwI2JIU9v+Q20l
-KQzbvfYAk3wGNqGmw3U8Be1ZycMZFtiiHqLlomXXzW0jyJVmlTyRJWUTH6MImFv5
-GUkzvLUI6rFNzl6D+RO5MjEEHQh1jnyDjuS5ANk6bs6aEixLDath60rcUqaxmppC
-KPSkylFQOQv1mLU/saPYw71WeomPTQivWvBBxaQJFC+acYmMpNp/SSzqMeH2HsIU
-cBtofkhBYEKtlwNB57ZGvwlJ24phrLrgR0G3ywdVROO22stuxtxe3H7roaLwEkNg
-GJkCWK7z6NePSivu/KDSAvprmirjZc6Ryb3uSpacaHQnFq67S6+IG03SZdKaDd+6
-9VQVY7yifSt2Gg97rb84BkqajHTa3qDKLbONIrH0x4tiYOZ3InKWGotNgwrr0T4/
-3fUb0WlNrJc5CEFcMS9OXNiI1rvNLKY0xRzcZjai+Kc+Xap1fSTstr4hIq8zAqBv
-yU5ktQvwFVBZrfrcKkHA1nTOr98978F65rP4QfLSvcGvATBWO3WBJuL/LZ5x5yxr
-F5oQzVPVA4m2qziCiS14ODLspfAFxb8d8u8mY7B0CYlPrqfGoj4=
-=rE7a
------END PGP SIGNATURE-----
-
---------------hZGDlRLrKnd03jrOhfI7ouRT--
+~~ When things go utterly wrong vim users can always type :help! ~~
