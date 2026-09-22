@@ -1,61 +1,50 @@
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F0F4A55D89C
-	for <linux-arm-msm@vger.kernel.org>; Tue, 22 Sep 2026 15:44:49 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.133.124
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E192054EEA4;
+	Tue, 22 Sep 2026 15:49:29 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790091892; cv=none; b=f4irRz34elJXInGpUo/Kb1gBWhBz1mK9vThXWIyFrCdt2uYL0wXH43nlHmeWSghfbjX6DrN8UiXtfrE/k2goUK7VVIyymZs9yw39FymwVfIpBoRRBO4iFhGvhjXn/Vh0njpc3IGxpSj8JwWrr7TwuCNqXaU5CRntJLfo7PWLpF4=
+	t=1790092171; cv=none; b=ZqoQuaEnce01HmX8rbbdvBXQ20f5/s0AA6aTZgFm1wayacOP3jdCN2RXiVJeluvyId1XsguwBkgMK7rW/h0oSKz621JC6v/HMwGQW5deSrJwP3mFihyUOVTHx/3LRYB8n6yov7HJcwpxQcJsV/VjGQKaAI//jHC6JpIwpa8QQno=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790091892; c=relaxed/simple;
-	bh=vPi0kK3q34yEBUQ23IrFLjnsFYhRDd5xnsAgeZA3PSw=;
+	s=arc-20240116; t=1790092171; c=relaxed/simple;
+	bh=lusiA89n3+ZBjBZaqDHKRwZ68pnDNciZFIw82Gre4a0=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=LyGgeW1eiI95GRNpgY30lHPAO+SAL32D08bDvRdfLhiiEX1FcuW4FgDDDi23dzPQvAGTre+ozKRl3dk5LklUR0QrWUGQOTejK7vOMYtC9KWIopgUJltWjymQmiE3AZXaqPzVSavjPF0b9LaGOl0Vc9sKA+Z9RLMK4p/C7Awrof4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=SMAN7Dtv; arc=none smtp.client-ip=170.10.133.124
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
+	 Content-Type:Content-Disposition:In-Reply-To; b=Ev7PmtpUY5b/2aWxCXuxwzG8SbF8AM5CKHnZ7/j+g7AgQ2unf2rvUQoVqWnqcnJYxg0livaoi7YTsOOWFscNDeHmndxiyhR19DPMRBBqDy8nS1A09rJCsjj9dNVI4mWB/cIyubjJPcddyYAxzPDCY+z6whVMD5cznoAJtaFb3p8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=GYYxh2ct; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="SMAN7Dtv"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1790091888;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=AJ/Vay7c5Bgi2O0k7N6fj3+pS1q8z/hYlkVBsoFvrJ4=;
-	b=SMAN7Dtv+3+L5TXa+DxPgYmEEYtbEBpQgie9n95XCGLFLISiAbQqcM/HTf2JGcTnYw675j
-	r1l6mh5k3/VxWuvYCH/70wqi/F02Kc4brP5O4dl4A+JTH5Vl5/soxC5Gz4H8CsOBDBWWIV
-	/G4+wjxhnrhk2HLPq68uaw9pR8TcTgU=
-Received: from mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
- relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-694-vpvdV80zMSaYR1xaPkxmyw-1; Tue,
- 22 Sep 2026 11:44:43 -0400
-X-MC-Unique: vpvdV80zMSaYR1xaPkxmyw-1
-X-Mimecast-MFC-AGG-ID: vpvdV80zMSaYR1xaPkxmyw_1790091881
-Received: from mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com (mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.93])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS id 9F7B018011E1;
-	Tue, 22 Sep 2026 15:44:41 +0000 (UTC)
-Received: from localhost (headnet04.pony-001.prod.iad2.dc.redhat.com [10.2.32.116])
-	by mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP id DD973180056E;
-	Tue, 22 Sep 2026 15:44:40 +0000 (UTC)
-Date: Thu, 17 Sep 2026 12:06:45 -0400
-From: Stefan Hajnoczi <stefanha@redhat.com>
-To: Cong Zhang <cong.zhang@oss.qualcomm.com>
-Cc: "Michael S. Tsirkin" <mst@redhat.com>,
-	Jason Wang <jasowangio@gmail.com>,
-	Eugenio =?iso-8859-1?Q?P=E9rez?= <eperezma@redhat.com>,
-	Xuan Zhuo <xuanzhuo@linux.alibaba.com>,
-	Paolo Bonzini <pbonzini@redhat.com>, Jens Axboe <axboe@kernel.dk>,
-	linux-arm-msm@vger.kernel.org,
-	virtualization@lists.linux.dev, linux-block@vger.kernel.org,
-	linux-kernel@vger.kernel.org, stable@vger.kernel.org
-Subject: Re: [PATCH v2] virtio_blk: use synchronous quiesce in
- virtblk_freeze_priv()
-Message-ID: <20260917160645.GA323825@fedora>
-References: <20260912-virtblk_sync_quiesce-v2-1-09a001549b72@oss.qualcomm.com>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="GYYxh2ct"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4D3741F00893;
+	Tue, 22 Sep 2026 15:49:29 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1790092169;
+	bh=dFHGbR/j7IpZnrkF5xSgQFbZ+Wn4X684fiKHsZbkh8w=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=GYYxh2ctELmLJj6hoKigIQKb6IoarGn26DdO1NqYlvwYtTTBF6KRbjJ77MZxsn7Js
+	 PsHo2pjXnSNJCkANQaWUrDwVhzWnIrgOFt118qe4t2EmIyY7+JddTIM+3oJ27zLdPC
+	 nNCB8vfe4hlMOzLO9+Sj/XfyTzsNu+wYtv4UomS0MLJTEjYXb2wv31wqjheDe2jSBl
+	 Lg3M6XqhKXHSQrdEkJxDlpa25Mkle2LB794JPgCdLnwTREyMVFeiu8ew6F+1PR5sTM
+	 Sbqo8m+xusrChE94hJ17oUsFD1pHiZYDWMDgYGX9AyxBnurIQJMv90PPaU+1FZR2/4
+	 z+KUKWAy8D1oA==
+Received: by finisterre.sirena.org.uk (Postfix, from userid 1000)
+	id 83AEB1AC56E2; Tue, 22 Sep 2026 16:49:26 +0100 (BST)
+Date: Tue, 22 Sep 2026 17:49:26 +0200
+From: Mark Brown <broonie@kernel.org>
+To: Mohammad Rafi Shaik <mohammad.rafi.shaik@oss.qualcomm.com>
+Cc: Srinivas Kandagatla <srini@kernel.org>,
+	Liam Girdwood <lgirdwood@gmail.com>, Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>,
+	linux-sound@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+	Prasad Kumpatla <prasad.kumpatla@oss.qualcomm.com>,
+	Sarath Ganapathiraju <sarath.ganapathiraju@oss.qualcomm.com>
+Subject: Re: [PATCH v4 7/8] ASoC: qcom: lpass-tx-macro: Add support for
+ Bolero v4.0
+Message-ID: <arKjhitHzi1rqKCV@sirena.co.uk>
+References: <20260922-add_shikra_support-v1-0-6c6cb6444caf@oss.qualcomm.com>
+ <20260922-add_shikra_support-v1-7-6c6cb6444caf@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -63,69 +52,46 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="dy8Z7Idm8RuWqAdu"
+	protocol="application/pgp-signature"; boundary="TNUS4WmuFywvXt+E"
 Content-Disposition: inline
-In-Reply-To: <20260912-virtblk_sync_quiesce-v2-1-09a001549b72@oss.qualcomm.com>
-X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.93
+In-Reply-To: <20260922-add_shikra_support-v1-7-6c6cb6444caf@oss.qualcomm.com>
+X-Cookie: Too clever is dumb.
 
---dy8Z7Idm8RuWqAdu
+
+--TNUS4WmuFywvXt+E
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
 
-On Sat, Sep 12, 2026 at 04:52:44PM +0800, Cong Zhang wrote:
-> Replace blk_mq_quiesce_queue_nowait() with blk_mq_quiesce_queue() in
-> virtblk_freeze_priv().
->=20
-> Keep the existing freeze and unfreeze order. The synchronous call waits
-> for dispatch code that was already running. The queue remains quiesced
-> until virtblk_restore_priv() calls blk_mq_unquiesce_queue().
->=20
-> Fixes: 7678abee0867 ("virtio-blk: don't keep queue frozen during system s=
-uspend")
->=20
-> Signed-off-by: Cong Zhang <cong.zhang@oss.qualcomm.com>
-> ---
-> blk_mq_run_work_fn() can call blk_mq_sched_dispatch_requests() through
-> blk_mq_run_dispatch_ops(). The dispatcher checks QUEUE_FLAG_QUIESCED
-> while the flag is clear. It can then be preempted before it gets a
-> request. At that time, it has no queue usage reference, so
-> blk_mq_freeze_queue() does not wait for it.
->=20
-> virtblk_freeze_priv() then calls blk_mq_quiesce_queue_nowait() and
-> blk_mq_unfreeze_queue(). A new request can enter the queue. The old
-> dispatcher can run again, use its old flag check, get the new request,
-> and call virtio_queue_rq(). At the same time, virtblk_freeze_priv() can
-> reset the device, delete the virtqueues, and free vblk->vqs. The old
-> dispatcher can then use a deleted virtqueue or a NULL vblk->vqs, and the
-> kernel can crash.
-> ---
-> Changes in v2:
-> - Cc stable@vger.kernel.org.
-> - Link to v1: https://lore.kernel.org/20260911-virtblk_sync_quiesce-v1-1-=
-a883f8f31258@oss.qualcomm.com
-> ---
->  drivers/block/virtio_blk.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+On Tue, Sep 22, 2026 at 03:12:36PM +0530, Mohammad Rafi Shaik wrote:
 
-Modulo Michael's comments about the commit message:
+> +static const struct snd_soc_dapm_widget tx_macro_dapm_widgets_v15[] = {
+> +	SND_SOC_DAPM_MUX("TX DEC0 MUX", SND_SOC_NOPM, 0, 0, &tx_dec0_mux_v9_3),
+> +	SND_SOC_DAPM_MUX("TX DEC1 MUX", SND_SOC_NOPM, 0, 0, &tx_dec1_mux_v9_3),
+> +	SND_SOC_DAPM_MUX("TX DEC2 MUX", SND_SOC_NOPM, 0, 0, &tx_dec2_mux_v9_3),
+> +	SND_SOC_DAPM_MUX("TX DEC3 MUX", SND_SOC_NOPM, 0, 0, &tx_dec3_mux_v9_3),
+> +	SND_SOC_DAPM_MUX("TX DEC4 MUX", SND_SOC_NOPM, 0, 0, &tx_dec4_mux_v9_3),
+> +	SND_SOC_DAPM_MUX("TX DEC5 MUX", SND_SOC_NOPM, 0, 0, &tx_dec5_mux_v9_3),
+> +	SND_SOC_DAPM_MUX("TX DEC6 MUX", SND_SOC_NOPM, 0, 0, &tx_dec6_mux_v9_3),
+> +	SND_SOC_DAPM_MUX("TX DEC7 MUX", SND_SOC_NOPM, 0, 0, &tx_dec7_mux_v9_3),
 
-Reviewed-by: Stefan Hajnoczi <stefanha@redhat.com>
+There are existing widgets of these names in the base widgets that are
+unconditionally registered so these should collide and get an -EBUSY
+during registration.  If you need something different for the newer
+devices you should move the base copy out of the shared table.
 
---dy8Z7Idm8RuWqAdu
-Content-Type: application/pgp-signature; name=signature.asc
+--TNUS4WmuFywvXt+E
+Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQEzBAEBCgAdFiEEhpWov9P5fNqsNXdanKSrs4Grc8gFAmqsEBUACgkQnKSrs4Gr
-c8jtiQf+NiukvAMH5bpSidfRu2qrf4zKvGkbv2VSKit/fEDilUft7I8qpykjAPGS
-BlbLHO+oPNWA/fSA/7B5dNjUbfrTM28UcZvwdwMJufhE3QBB4Yz7cO1L8B/6Y+wn
-DFfYmokCTJOFqZJGwEYoZDatSYMcd4tfMuOH+bCZ1t5gvFl5H1BOlEtOKj/dnmes
-l8ofbMgmdhKGff+y6lwV4W3VQo3lFjUsbI6FxnLjQNkixQQspyuA7GIVwroPCrOE
-FKBC8DXgWrDevRRgn+Fwj2b8ZIg0ngtiQditXDqK14UTfnyyckC2gNszvanVbwhm
-/olV3bkhIcdgL8bKvgqJ3ZSYtut3cQ==
-=TD0g
+iQEzBAABCgAdFiEEreZoqmdXGLWf4p/qJNaLcl1Uh9AFAmqyo4UACgkQJNaLcl1U
+h9BCaQf+LEopVYB106VRfJ4chXp/VRdl1auKfVZQwHrrJLtAyvhXwvTH0oM4NamF
+QuklMuXq9wAi0xnHfhSfjR9ZH4ILHw74X0ue/NAzBNhX+OA+KIRetFhx0m5igjPH
+XQuGtiAInwroYY9Zqgvo/lFouGllUY86RehZVudPWrT7gP3858lvgc6TdCg0t3Hw
+bw11oo6wVc0iuL8Dq4IoT5n86kFSsQrhQL3HvKkNfX43tE7oaZFEz1KXJVpX7oXU
+e7raiCWDwc4eVGdF7ayp980LGn3VPIv68hoNAPPRSXwpnflfMudVLoobPeYwetYx
+x5IbGzGfV/KG6pmdxuhe5YlLm3mIyg==
+=tQMg
 -----END PGP SIGNATURE-----
 
---dy8Z7Idm8RuWqAdu--
-
+--TNUS4WmuFywvXt+E--
