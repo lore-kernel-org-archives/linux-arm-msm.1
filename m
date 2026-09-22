@@ -1,87 +1,87 @@
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 47E403563EB
-	for <linux-arm-msm@vger.kernel.org>; Tue, 22 Sep 2026 10:36:01 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1269133C18B
+	for <linux-arm-msm@vger.kernel.org>; Tue, 22 Sep 2026 10:36:04 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790073368; cv=none; b=QNonGryVzC5tAiF8ZdJY+5kCG4IBMNSs/HmVk53BbrBVKXh+rxeWIZUIG5qhU5n4kMxZAUiwIWK/l0j/QYnUfvEpxswMW1uy8TgywxhWFkFu09nv7FXAYeQLN2i6o9g/ZQU17BXKVYwJ8XJFSaJIaFS1QzpctRxDXaNdVCzeWv8=
+	t=1790073370; cv=none; b=okKK5WrPgVUlx9ucYQ/TaEzxQfwusIRfjjP29BFvfi9pBPI4fmPJRwUOys0LdLSpk7lhBIqzrzAxr5aVdjyo6x1PuRU6qp8Bh54mB5ujIjwnbrPvxRUi07oGXTuBdjlCytfh2jWx7WDurmEIE17iEKE5A5OaYzbwPEPjZCc/BqM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790073368; c=relaxed/simple;
-	bh=zSi9YiVu9JgfZkE53jRMFtXpt/O8U4opnTppTkE6Ewg=;
+	s=arc-20240116; t=1790073370; c=relaxed/simple;
+	bh=waKLqkLAlFWt5di+TQ3hvW0MaNOMOU81PirTXjGctXU=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=unuRki7cbEEw2pZ8IEuqKcE8EfAiV8HZRDAGAHONVdceu3xu63fc63UMI0VcyirdS5a5eFt3sQJAIUdEvg7rywrF3ZTjk1QEe7Zu5pdezq73bnQrSjZHIEixOyw8IMhFa4aHvet8PGWAr3PUCTYlB646n+jJwdIvjneSCkVl5kA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=msCDNnBS; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=Urtm95/z; arc=none smtp.client-ip=205.220.168.131
+	 In-Reply-To:To:Cc; b=QEsWuy7+3adCuzMuUogS6jnHT4C23Vb5yEMEKNmMEbAujn6NJFW5vP+mpsGiUj5Qv6pP0zpQREk2nBT3SwTHtZIpUhX1RTMSmi3GFyRyV0LOcQavYfKZpAR2bV6u0qaxxJZbk/oEfzg8YrdV92SYwZdCyfe7f5YE3sRtRPMKv9o=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=oM/UZs5M; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=DS8xkS35; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="msCDNnBS";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Urtm95/z"
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="oM/UZs5M";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="DS8xkS35"
 Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68M9jUXK3382918
-	for <linux-arm-msm@vger.kernel.org>; Tue, 22 Sep 2026 10:35:58 GMT
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68M9jUXM3382918
+	for <linux-arm-msm@vger.kernel.org>; Tue, 22 Sep 2026 10:36:02 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	oekZfJz0He5+cv1c3s4QpqZ6kH+Fm6fqrARvnG5wBU4=; b=msCDNnBSbzh3aYB5
-	TDsg+pfHdPEU+MwxBunfm9dbjTqI7yJU/dR7Kemj3umH/HktP5irx/Yt4dH0W2KV
-	xaJDrCQxfcrapD2Ap4Mb5TZxY9PjU4cn20uknRMXQjFIGhli2OSytPqZkh8WTsNh
-	Do62stC2VVNBaU+pCLeNTbGD5Xl36SSNRXPBmLgMFK2hdFWAXFhzushk797vBb3O
-	h+Yzx3C0c3t458fmK34CVOYhxxU9z4nklnJZjPSd09dADcjUlqX9BnK7Un7nAOZ+
-	gy5iS0s0UKF9sTVgWf1NLrfZi5vMcJt0dHt/jvxlS4kdqmJgCHRMkswN3WwJ3BXZ
-	QFgNNA==
-Received: from mail-pj1-f69.google.com (mail-pj1-f69.google.com [209.85.216.69])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gujkj9egs-1
+	opNeGLuDsdYVt+4xHWJYFRw0Acs4NXd6K1r2bCdSmpU=; b=oM/UZs5M9DqlTAUM
+	opgfqB7Zu7ov8vSK/PQ8UiI//cAPQo9x9D5RV/FyFr62CEehKO5pFZ99qUQNmEkN
+	sRB5VFM1BCbaOdh8vYY9basidbv6l1KMJQJFcA0jGp60N5D0UBr0vk52dc3jMsC+
+	jzEOCNkSWdEesUMgUKdVRQlqFO0D9W3vNyhsB3SHncr9x4ePofESJ8NZHQrgni4i
+	Mr8lYQ8kna8ajUeIFSzsw+jDr6QekxsXB43zrdxYhuEaNpMYEfFJSl24ITJGAxsC
+	p2WV/NjyhBGZR2h8x3NkDcmhi5GOgpQoBjnS7BwRbyyUPJcQ/i612IUG8bVontew
+	HDYj+A==
+Received: from mail-pj1-f72.google.com (mail-pj1-f72.google.com [209.85.216.72])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gujkj9eh4-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 22 Sep 2026 10:35:58 +0000 (GMT)
-Received: by mail-pj1-f69.google.com with SMTP id 98e67ed59e1d1-3965ba1ba3eso4577946a91.2
-        for <linux-arm-msm@vger.kernel.org>; Tue, 22 Sep 2026 03:35:58 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Tue, 22 Sep 2026 10:36:02 +0000 (GMT)
+Received: by mail-pj1-f72.google.com with SMTP id 98e67ed59e1d1-39d865b11b4so5315523a91.3
+        for <linux-arm-msm@vger.kernel.org>; Tue, 22 Sep 2026 03:36:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1790073357; x=1790678157; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1790073361; x=1790678161; darn=vger.kernel.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=oekZfJz0He5+cv1c3s4QpqZ6kH+Fm6fqrARvnG5wBU4=;
-        b=Urtm95/zzK2JNBjRyM85A7taMGcNIt0RoOU/UmuTKnzlTXdPXXTg2eqd3IPoeXOYoj
-         y5HspwWTcMSh2Xt9/8FpcoftuBl0Bulj/3Z6uAdeC7q3GwMweFI3qU5Ev7B7rJSLiH9m
-         xYEM3SJzLuTmURDAWEAnxT+7LAE50HdPiEs+KxQ9QzaoB21aB8v0y1X8DJSGCrLTi8Cb
-         ZSgkITWaj1oS54GGt+zlTYVeivhpRF7tU4rXu/LqU4cf1cjIAM9An3sGQvD6eb2uRdIz
-         rQSwCNn/DdYozZRKLn1aHUtVlWnA7wfRjYgEIOqD9UURyfXPS07jEiGpdS8gHAUCrCPf
-         /mJg==
+        bh=opNeGLuDsdYVt+4xHWJYFRw0Acs4NXd6K1r2bCdSmpU=;
+        b=DS8xkS35q7IVmuoFS/r4IHnB2NhLrorA6cUl94yJ5dsLGSlnqARcgoAYUPhQgNyEp2
+         LfbKXadF5yXeVXgXsKDcp+ti47l5cMXFO3XSWt751jUnJ7eMo6RO0lSEMz7zA8nGfdNe
+         yxzWUltZnej+tswJJUSvlyOm87cyQmQnfO4GO4rE5l0OzpjiFVhn5vzHIuv0aQ5t0dxs
+         DkzuSzgFtR6WDZbIDuS/EWzc2cyRAnvRLXBNGyO/B6UkYl+fFeHOLtheiEZe9kUilw/D
+         ffDa6ztc/n80aqn5iT3IeTjvDoCX118/bOLq4zIj0VSQNyTOiw7RGmXcfB1fw8wCPWay
+         6+Rg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790073357; x=1790678157;
+        d=1e100.net; s=20260707; t=1790073361; x=1790678161;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=oekZfJz0He5+cv1c3s4QpqZ6kH+Fm6fqrARvnG5wBU4=;
-        b=11ApgyZd+82PQ4phhkIIeNGP9Pxqa2sefPtawhQDMxcmegOH5+5z8hpruB7HbBZ0xu
-         8RRYxROl6w72YeEOaLXH2gsUq5LU0b7pbyJor28f1bvcZLl3h5datCciO1sbjzXwFUiS
-         XoKo0+scgTUZo9FKvZ9hEqEbReU200GiLzTOX+zbwYVJhYIq5ls621kduHOfsws+gG/O
-         n8JqrE1qfzF6wM0tXJCwSxK0+p+x+q6rG8OdmXZ4KTSxvYjN9W4dD8b3pJ/QARcwni5F
-         k8afv1Iyow7Z6OF1Ha8TqsGStyWBZwbdJ0u8ycOecQfBO4hmLIH1yjKUL2s1NTS2C+JR
-         x/Kw==
-X-Gm-Message-State: AFuF++mRvhAMlHHentCsFbiv02M190+FhYYJTnT0TLm2sdVpaI0QX9d6
-	tgRRSZNMJkZEO9UcNlxHFPF/O7+loiMVvzbD5Zgk7fVwHAh88Utg4wieqXJ10M2ylcqA3OG/atC
-	tFdoRSwthTK9cQOI0PQudybSxfWFNifcikPgxihE36JJZOz2ZyHx0sai00XE2AJzMiayQ
-X-Gm-Gg: AYBFou2HvoA0AKVMnqhJZNszDtd8rKYhA2X6yFHybPgkjAJMsUDN9pBTJg1iJlDCYmC
-	ey8D623pMT5JHguYHC5AhsAYpAsFNe42L+XyZP45o46kQejsxp793u3asoPpdkWZr6dSOcPThGY
-	0Sz8HG3TpfTXz4X4fIrK4ifHKkwYNAPhesZizZTMD/Xi1Oe4hLuUgh4hH+wz3zEFU1ITuR+2ksA
-	1kTdSbtopLUExRLcNfJaJ5ZWU+nYnvF5ORMAYpHSGwlfVy5+f0CgbAs5GHLAE7vgSLanynSJc+1
-	oyKj9dvyZ8lcnIbuUflWdwDooAwcYwoy3s8+5Ln+GqbvGrTo5/MnWnDe/qVF6Pf/64qito7yFIi
-	REBCvLKoEtddMZxH3nuKc72YEUgMayPXIe7SkQXYAarDDWJKZ0b3oO9f2SV1GYzc=
-X-Received: by 2002:a17:90b:55ce:b0:39d:f08e:e6e7 with SMTP id 98e67ed59e1d1-3a0730aabedmr769849a91.9.1790073357340;
-        Tue, 22 Sep 2026 03:35:57 -0700 (PDT)
-X-Received: by 2002:a17:90b:55ce:b0:39d:f08e:e6e7 with SMTP id 98e67ed59e1d1-3a0730aabedmr769822a91.9.1790073356811;
-        Tue, 22 Sep 2026 03:35:56 -0700 (PDT)
+        bh=opNeGLuDsdYVt+4xHWJYFRw0Acs4NXd6K1r2bCdSmpU=;
+        b=XFcarOnAqoRvw5yl4YCnrTafGjtwPkRqi4eF+liTIQImMTTMi59tnaG3vXeQZqa9n0
+         2LmpX5dhFBK6uQ8cCBCIePpWWwNGMjGHLp3OQNcREF9CB1SLffuqE+hpFNlsHFb/411G
+         8NbSJM4/aY7DyDlFpm29Xl5U6mObce15jAgG/9QuqahFeduUN63oM39xXth+1pXsMPwN
+         HtYqC9z9gtuLj99z7V8N1kPNF/8cG4q2035MeHE79XNhzDjuIBy2vz1wWKm7tmvKOzam
+         sXbc0pr7CzIfd9+vGJwWuaFhv8qNmlagzSl24gdye6epgfZXcdNlNgLA+gksXEC8y0UW
+         7+2A==
+X-Gm-Message-State: AFuF++nBWG9/RGlSqFy3NVrLApaKDO1nXaLuJxltdV1qpHJzTHrNMU8Z
+	Tqjm52RjKOA9krhOx93cWgzpAzT7rec+yVALlENFAcJyg8aXZ6MacMoGVgtlFd4vbN32aO8Ey6N
+	qqYdtQhF/U//eg+FmMg+cgRUYsrUL0P8E5CBkjvjIJIzHBvRJSGLB8j2ch0lmLwty/nZz
+X-Gm-Gg: AYBFou25Tdu2IHSR1dcTYTyW724A1QhcJXT8+quZ9bYjAMZhceH9LfV+XeTkqmc85s+
+	vCK0xF2uEu3R9LALohKIDcbWspHsviF6B+OsLhIZYlZu4yM1FvcXteCyUjMEt7D0xOK/xUaoC/6
+	/lwAA52GaqLxqth72Q+T9Qq9cmOAf48q9xF7RjWIcWjnIiSonsDBOlrN3NfVeYlKvcwBd29LR67
+	VusIjKlZ89Pc8eDQL5vRGA6uQIM+ox2QmhSPn95Gdo0UcQpzTXrQEs76WcTTrJdcqOuVUQ23ccD
+	w+/dbOJHG4ailm2wNBsnghGGmvotQM+ExcOe6dAok92uJNaV1K8C2YhryyEyvQG9VzMb+wDySta
+	T1aXPXokgjsmt3k2Q/qLwj4h55XTEEvYrsJzVR2j2jjrAvdEX8q6oPK84UKftSps=
+X-Received: by 2002:a17:90b:288d:b0:3a0:22bd:6ec8 with SMTP id 98e67ed59e1d1-3a0730d3c6fmr891463a91.16.1790073361115;
+        Tue, 22 Sep 2026 03:36:01 -0700 (PDT)
+X-Received: by 2002:a17:90b:288d:b0:3a0:22bd:6ec8 with SMTP id 98e67ed59e1d1-3a0730d3c6fmr891431a91.16.1790073360532;
+        Tue, 22 Sep 2026 03:36:00 -0700 (PDT)
 Received: from jiegan-gv.ap.qualcomm.com (tpe-colo-wan-fw-bordernet.qualcomm.com. [103.229.16.4])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3a0699aa221sm3670692a91.9.2026.09.22.03.35.53
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3a0699aa221sm3670692a91.9.2026.09.22.03.35.57
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 22 Sep 2026 03:35:55 -0700 (PDT)
+        Tue, 22 Sep 2026 03:35:59 -0700 (PDT)
 From: Jie Gan <jie.gan@oss.qualcomm.com>
-Date: Tue, 22 Sep 2026 18:35:23 +0800
-Subject: [PATCH 3/4] arm64: dts: qcom: kaanapali: Add CoreSight nodes for
- APSS debug block
+Date: Tue, 22 Sep 2026 18:35:24 +0800
+Subject: [PATCH 4/4] arm64: dts: qcom: glymur: Add CoreSight nodes for APSS
+ debug block
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -90,7 +90,7 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260922-add-etm-devices-for-multiple-qcom-platforms-v1-3-c2a8c3225a2e@oss.qualcomm.com>
+Message-Id: <20260922-add-etm-devices-for-multiple-qcom-platforms-v1-4-c2a8c3225a2e@oss.qualcomm.com>
 References: <20260922-add-etm-devices-for-multiple-qcom-platforms-v1-0-c2a8c3225a2e@oss.qualcomm.com>
 In-Reply-To: <20260922-add-etm-devices-for-multiple-qcom-platforms-v1-0-c2a8c3225a2e@oss.qualcomm.com>
 To: Bjorn Andersson <andersson@kernel.org>,
@@ -101,32 +101,32 @@ To: Bjorn Andersson <andersson@kernel.org>,
 Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
         linux-kernel@vger.kernel.org, Jie Gan <jie.gan@oss.qualcomm.com>
 X-Mailer: b4 0.14.0
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1790073340; l=12570;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1790073341; l=26045;
  i=jie.gan@oss.qualcomm.com; s=20250909; h=from:subject:message-id;
- bh=zSi9YiVu9JgfZkE53jRMFtXpt/O8U4opnTppTkE6Ewg=;
- b=HgBxJtFHjcUIL1dyYHRG0s7ru0iL3tSPD/4xXhntBxXeN7BgEx0Y3TS1jCNGxrINGJT2EyLwn
- 5zQ4GEIxGykBb7SmC2lpnwP1GUF+e6dgRb/Hikl9Pyt33ojWGYF4ho9
+ bh=waKLqkLAlFWt5di+TQ3hvW0MaNOMOU81PirTXjGctXU=;
+ b=XVMnlG+HVSaTI7uCo7Rn/UGdxqcnCeDB2WwnHdtBlNhFKPHGq4oaPxow4snQ4BrKr5S6ADOyU
+ Vzm43kNBLS4Auw2AR/UwEZ0w91ZK2GnSVLrdLPaVIvF4ekQlHfwJOSG
 X-Developer-Key: i=jie.gan@oss.qualcomm.com; a=ed25519;
  pk=3LxxUZRPCNkvPDlWOvXfJNqNO4SfGdy3eghMb8puHuk=
-X-Proofpoint-GUID: kpklIqn6yKt5B1_NxiKMvbxRWOQ8m5jm
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTIyMDE1MiBTYWx0ZWRfX3v+O1TzGZOGh
- 7PT7gbY9pVbVZdvap+1pTDU2lHy2JDtMiImcjOMKS+F7+LaboHyIBNTQmBxtiYRdhgZAV8Sdi2z
- SBltjGSezC/Nfk2tByGudQA8BylPAO0aV94Kvpo0MJH53ykTxizqwQDLWpAlwHyJ0Z/Uj1lDKYn
- 2Svjh893SBD0HcAtq3uL+ktsV0iF/zvT7urQZXQZoqi6FVbK/IBHsRGpRWDuftiOImQlW/LMQAz
- wKz3NuU/FDHOnev/VZimECGwSoc+NycjnqsRFWnXsumw2fI/QlAQH6dMIulxQ2QZqdkm/JKxWuM
- r58Qzqo0cxMgFjqAprHU8bIEdvPPmYcyafIgFr2Hpc7qhA07vEAZnTg1W8iwAvTq3OQ6XHbxRbN
- ca2E+S5Q1CZa2LYY8eHWLFCAlhklkgQyPl5xL/xVfQYH5rDQCb3i6i2ZAkJeELDDXkykNPTQaYe
- UTMAvRCOzVJN/MZn4UQ==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTIyMDE1MiBTYWx0ZWRfXyqjcaBLm0dHO
- mY2+X34UeBBBQuGqP+EpspHPm+YRfOUHU0r+ZYUW6k6GT99zxpcHiUPEuLa9nltJpx3p/nJa2UA
- I4957dmVuVQU5VNjGu0juFlN7usYhjg=
-X-Authority-Analysis: v=2.4 cv=SuAFe/O0 c=1 sm=1 tr=0 ts=6ab25a0e cx=c_pps
- a=vVfyC5vLCtgYJKYeQD43oA==:117 a=nuhDOHQX5FNHPW3J6Bj6AA==:17
+X-Proofpoint-GUID: lpar46XSgYdmz5E_WlaY4H80RLSo0tQR
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTIyMDE1MiBTYWx0ZWRfX2ymjtQkZSOIy
+ J9X8p1XHFE/gzY2lS39BcvyekErcn5r6bB/uMEUpI1VmVyVuirIARcDSKMGt9q6iDhRXYfxvVIC
+ OH8qG6IPMXobcFKmLqMJnpy34mZVNxyenHRolbH6LlVx4N3GVRY+H8S7LDUJ9NBX1CqoMAxH0h5
+ xUBu0Xi15hGc0IrfPGi0dY3GW9ACMDmqS8ucS4x7MpCcY/JnhB+iw0f1RKOHY0eJ/WXJAtamSpv
+ XOc99ClV8NgmJZ3nmxAGtgCjG9OPJwjDwlO6bVNZGNjd/NDJech+/52F43WMmodtWpJ5XqQNn4J
+ S9feXb+6i6ck8cMSFaJ04GSNHNFFUnauXyGbGDdJJgBieX4L2RyvpBcR+je1WS1brQLgu0z4kYt
+ yY2W/+6KRKzmrslkzC8gc15fBWO2nKPnlcxEXkABQV/pIUndoLjsHJjsuVaPpXZGZsFcxdxK6qk
+ lifvHN+MFriExRHXROA==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTIyMDE1MiBTYWx0ZWRfXx12OfsYEnVN/
+ 2ER8kbWxusNRDwb6kkkbVijgbPi1L8Y2HxzUaVdAWrhXhU8zn4iAFYBW5sL1kJSxbrzrqMFZ8Jo
+ KOajE6yvIiAKNNqAoNq6IHlaXXKOzTA=
+X-Authority-Analysis: v=2.4 cv=SuAFe/O0 c=1 sm=1 tr=0 ts=6ab25a12 cx=c_pps
+ a=RP+M6JBNLl+fLTcSJhASfg==:117 a=nuhDOHQX5FNHPW3J6Bj6AA==:17
  a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
  a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22
- a=EUspDBNiAAAA:8 a=OUbgBpunvq_OnP_L4kAA:9 a=QEXdDO2ut3YA:10
- a=rl5im9kqc5Lf4LNbBjHf:22
-X-Proofpoint-ORIG-GUID: kpklIqn6yKt5B1_NxiKMvbxRWOQ8m5jm
+ a=EUspDBNiAAAA:8 a=qXIjyuVdT6Q6OzA_mM0A:9 a=QEXdDO2ut3YA:10
+ a=iS9zxrgQBfv6-_F4QbHw:22
+X-Proofpoint-ORIG-GUID: lpar46XSgYdmz5E_WlaY4H80RLSo0tQR
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-09-21_07,2026-09-21_02,2025-10-01_01
@@ -136,33 +136,43 @@ X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609220152
 
-The APSS debug block is built with CoreSight devices like ETE,
-replicator, funnel and TMC ETF. Add dt nodes for these devices to enable
-ETM trace.
+The APSS debug block is built with CoreSight devices like ETM,
+replicator, funnel and TMC ETF. Add dt nodes for these devices to
+enable ETM trace.
 
 The replicator, funnel and TMC ETF nodes in this block are physically
-powered by the CPU cluster power rail rather than by a dedicated always-on
-rail. Add a power-domains property referencing the cluster_pd domain to
-each of these nodes, so their power state is tied to the CPU cluster
-domain and the runtime PM core can power the domain on before the
-devices are accessed and let it be powered off otherwise.
+powered by the CPU cluster power rail rather than by a dedicated
+always-on rail. Add a power-domains property referencing the
+corresponding cluster_pdN domain to each of these nodes, so their
+power state is tied to the CPU cluster domain and the runtime PM core
+can power the domain on before the devices are accessed and let it be
+powered off otherwise.
+
+Mahua is based on glymur but only has 12 CPUs across two clusters
+instead of 18 across three, so delete the ETM and cluster2 CoreSight
+nodes that have no corresponding CPUs on that platform.
 
 Signed-off-by: Jie Gan <jie.gan@oss.qualcomm.com>
 ---
- arch/arm64/boot/dts/qcom/kaanapali.dtsi | 567 ++++++++++++++++++++++++++++++++
- 1 file changed, 567 insertions(+)
+ arch/arm64/boot/dts/qcom/glymur.dtsi | 1184 ++++++++++++++++++++++++++++++++++
+ arch/arm64/boot/dts/qcom/mahua.dtsi  |   16 +
+ 2 files changed, 1200 insertions(+)
 
-diff --git a/arch/arm64/boot/dts/qcom/kaanapali.dtsi b/arch/arm64/boot/dts/qcom/kaanapali.dtsi
-index 131fd2a16c54..d9313de53ee5 100644
---- a/arch/arm64/boot/dts/qcom/kaanapali.dtsi
-+++ b/arch/arm64/boot/dts/qcom/kaanapali.dtsi
-@@ -218,6 +218,110 @@ domain_ss3: domain-sleep-0 {
+diff --git a/arch/arm64/boot/dts/qcom/glymur.dtsi b/arch/arm64/boot/dts/qcom/glymur.dtsi
+index de7c395d9c35..049bebbb80f9 100644
+--- a/arch/arm64/boot/dts/qcom/glymur.dtsi
++++ b/arch/arm64/boot/dts/qcom/glymur.dtsi
+@@ -397,6 +397,312 @@ eud_in: endpoint {
  		};
  	};
  
-+	ete-0 {
-+		compatible = "arm,embedded-trace-extension";
++	etm-0 {
++		compatible = "arm,coresight-etm4x-sysreg";
++
++		clocks = <&aoss_qmp>;
++		clock-names = "apb_pclk";
 +		cpu = <&cpu0>;
++		qcom,skip-power-up;
 +
 +		out-ports {
 +			port {
@@ -173,9 +183,13 @@ index 131fd2a16c54..d9313de53ee5 100644
 +		};
 +	};
 +
-+	ete-1 {
-+		compatible = "arm,embedded-trace-extension";
++	etm-1 {
++		compatible = "arm,coresight-etm4x-sysreg";
++
++		clocks = <&aoss_qmp>;
++		clock-names = "apb_pclk";
 +		cpu = <&cpu1>;
++		qcom,skip-power-up;
 +
 +		out-ports {
 +			port {
@@ -186,9 +200,13 @@ index 131fd2a16c54..d9313de53ee5 100644
 +		};
 +	};
 +
-+	ete-2 {
-+		compatible = "arm,embedded-trace-extension";
++	etm-2 {
++		compatible = "arm,coresight-etm4x-sysreg";
++
++		clocks = <&aoss_qmp>;
++		clock-names = "apb_pclk";
 +		cpu = <&cpu2>;
++		qcom,skip-power-up;
 +
 +		out-ports {
 +			port {
@@ -199,9 +217,13 @@ index 131fd2a16c54..d9313de53ee5 100644
 +		};
 +	};
 +
-+	ete-3 {
-+		compatible = "arm,embedded-trace-extension";
++	etm-3 {
++		compatible = "arm,coresight-etm4x-sysreg";
++
++		clocks = <&aoss_qmp>;
++		clock-names = "apb_pclk";
 +		cpu = <&cpu3>;
++		qcom,skip-power-up;
 +
 +		out-ports {
 +			port {
@@ -212,9 +234,13 @@ index 131fd2a16c54..d9313de53ee5 100644
 +		};
 +	};
 +
-+	ete-4 {
-+		compatible = "arm,embedded-trace-extension";
++	etm-4 {
++		compatible = "arm,coresight-etm4x-sysreg";
++
++		clocks = <&aoss_qmp>;
++		clock-names = "apb_pclk";
 +		cpu = <&cpu4>;
++		qcom,skip-power-up;
 +
 +		out-ports {
 +			port {
@@ -225,9 +251,13 @@ index 131fd2a16c54..d9313de53ee5 100644
 +		};
 +	};
 +
-+	ete-5 {
-+		compatible = "arm,embedded-trace-extension";
++	etm-5 {
++		compatible = "arm,coresight-etm4x-sysreg";
++
++		clocks = <&aoss_qmp>;
++		clock-names = "apb_pclk";
 +		cpu = <&cpu5>;
++		qcom,skip-power-up;
 +
 +		out-ports {
 +			port {
@@ -238,9 +268,13 @@ index 131fd2a16c54..d9313de53ee5 100644
 +		};
 +	};
 +
-+	ete-6 {
-+		compatible = "arm,embedded-trace-extension";
++	etm-6 {
++		compatible = "arm,coresight-etm4x-sysreg";
++
++		clocks = <&aoss_qmp>;
++		clock-names = "apb_pclk";
 +		cpu = <&cpu6>;
++		qcom,skip-power-up;
 +
 +		out-ports {
 +			port {
@@ -251,9 +285,13 @@ index 131fd2a16c54..d9313de53ee5 100644
 +		};
 +	};
 +
-+	ete-7 {
-+		compatible = "arm,embedded-trace-extension";
++	etm-7 {
++		compatible = "arm,coresight-etm4x-sysreg";
++
++		clocks = <&aoss_qmp>;
++		clock-names = "apb_pclk";
 +		cpu = <&cpu7>;
++		qcom,skip-power-up;
 +
 +		out-ports {
 +			port {
@@ -264,14 +302,183 @@ index 131fd2a16c54..d9313de53ee5 100644
 +		};
 +	};
 +
++	etm-8 {
++		compatible = "arm,coresight-etm4x-sysreg";
++
++		clocks = <&aoss_qmp>;
++		clock-names = "apb_pclk";
++		cpu = <&cpu8>;
++		qcom,skip-power-up;
++
++		out-ports {
++			port {
++				etm8_out: endpoint {
++					remote-endpoint = <&ncc1_2_rep_in>;
++				};
++			};
++		};
++	};
++
++	etm-9 {
++		compatible = "arm,coresight-etm4x-sysreg";
++
++		clocks = <&aoss_qmp>;
++		clock-names = "apb_pclk";
++		cpu = <&cpu9>;
++		qcom,skip-power-up;
++
++		out-ports {
++			port {
++				etm9_out: endpoint {
++					remote-endpoint = <&ncc1_3_rep_in>;
++				};
++			};
++		};
++	};
++
++	etm-10 {
++		compatible = "arm,coresight-etm4x-sysreg";
++
++		clocks = <&aoss_qmp>;
++		clock-names = "apb_pclk";
++		cpu = <&cpu10>;
++		qcom,skip-power-up;
++
++		out-ports {
++			port {
++				etm10_out: endpoint {
++					remote-endpoint = <&ncc1_4_rep_in>;
++				};
++			};
++		};
++	};
++
++	etm-11 {
++		compatible = "arm,coresight-etm4x-sysreg";
++
++		clocks = <&aoss_qmp>;
++		clock-names = "apb_pclk";
++		cpu = <&cpu11>;
++		qcom,skip-power-up;
++
++		out-ports {
++			port {
++				etm11_out: endpoint {
++					remote-endpoint = <&ncc1_5_rep_in>;
++				};
++			};
++		};
++	};
++
++	etm12: etm-12 {
++		compatible = "arm,coresight-etm4x-sysreg";
++
++		clocks = <&aoss_qmp>;
++		clock-names = "apb_pclk";
++		cpu = <&cpu12>;
++		qcom,skip-power-up;
++
++		out-ports {
++			port {
++				etm12_out: endpoint {
++					remote-endpoint = <&ncc2_0_rep_in>;
++				};
++			};
++		};
++	};
++
++	etm13: etm-13 {
++		compatible = "arm,coresight-etm4x-sysreg";
++
++		clocks = <&aoss_qmp>;
++		clock-names = "apb_pclk";
++		cpu = <&cpu13>;
++		qcom,skip-power-up;
++
++		out-ports {
++			port {
++				etm13_out: endpoint {
++					remote-endpoint = <&ncc2_1_rep_in>;
++				};
++			};
++		};
++	};
++
++	etm14: etm-14 {
++		compatible = "arm,coresight-etm4x-sysreg";
++
++		clocks = <&aoss_qmp>;
++		clock-names = "apb_pclk";
++		cpu = <&cpu14>;
++		qcom,skip-power-up;
++
++		out-ports {
++			port {
++				etm14_out: endpoint {
++					remote-endpoint = <&ncc2_2_rep_in>;
++				};
++			};
++		};
++	};
++
++	etm15: etm-15 {
++		compatible = "arm,coresight-etm4x-sysreg";
++
++		clocks = <&aoss_qmp>;
++		clock-names = "apb_pclk";
++		cpu = <&cpu15>;
++		qcom,skip-power-up;
++
++		out-ports {
++			port {
++				etm15_out: endpoint {
++					remote-endpoint = <&ncc2_3_rep_in>;
++				};
++			};
++		};
++	};
++
++	etm16: etm-16 {
++		compatible = "arm,coresight-etm4x-sysreg";
++
++		clocks = <&aoss_qmp>;
++		clock-names = "apb_pclk";
++		cpu = <&cpu16>;
++		qcom,skip-power-up;
++
++		out-ports {
++			port {
++				etm16_out: endpoint {
++					remote-endpoint = <&ncc2_4_rep_in>;
++				};
++			};
++		};
++	};
++
++	etm17: etm-17 {
++		compatible = "arm,coresight-etm4x-sysreg";
++
++		clocks = <&aoss_qmp>;
++		clock-names = "apb_pclk";
++		cpu = <&cpu17>;
++		qcom,skip-power-up;
++
++		out-ports {
++			port {
++				etm17_out: endpoint {
++					remote-endpoint = <&ncc2_5_rep_in>;
++				};
++			};
++		};
++	};
++
  	firmware {
  		scm: scm {
- 			compatible = "qcom,scm-kaanapali", "qcom,scm";
-@@ -5292,6 +5396,14 @@ tn_ag_in37: endpoint {
- 						remote-endpoint = <&tpdm_ipcc_cmb3_out>;
+ 			compatible = "qcom,scm-glymur", "qcom,scm";
+@@ -7244,6 +7550,14 @@ tn_ag_in53: endpoint {
  					};
  				};
-+
+ 
 +				port@36 {
 +					reg = <0x36>;
 +
@@ -279,10 +486,11 @@ index 131fd2a16c54..d9313de53ee5 100644
 +						remote-endpoint = <&apss_funnel_out>;
 +					};
 +				};
- 			};
++
+ 				port@3f {
+ 					reg = <0x3f>;
  
- 			out-ports {
-@@ -5577,6 +5689,43 @@ tpdm_ipa_out: endpoint {
+@@ -7625,6 +7939,51 @@ pcie_rscc_tpda_out: endpoint {
  			};
  		};
  
@@ -312,6 +520,14 @@ index 131fd2a16c54..d9313de53ee5 100644
 +						remote-endpoint = <&ncc1_etf_out>;
 +					};
 +				};
++
++				port@2 {
++					reg = <2>;
++
++					apss_funnel_in2: endpoint {
++						remote-endpoint = <&ncc2_etf_out>;
++					};
++				};
 +			};
 +
 +			out-ports {
@@ -323,10 +539,10 @@ index 131fd2a16c54..d9313de53ee5 100644
 +			};
 +		};
 +
- 		sram@14680000 {
- 			compatible = "qcom,kaanapali-imem", "mmio-sram";
- 			reg = <0x0 0x14680000 0x0 0x1000>;
-@@ -5970,6 +6119,424 @@ rpmhpd_opp_super_turbo_no_cpr: opp-480 {
+ 		tpdm@11c03000 {
+ 			compatible = "qcom,coresight-tpdm", "arm,primecell";
+ 			reg = <0x0 0x11c03000 0x0 0x1000>;
+@@ -8286,6 +8645,831 @@ rpmhpd_opp_turbo_l1: opp-416 {
  			};
  		};
  
@@ -336,7 +552,7 @@ index 131fd2a16c54..d9313de53ee5 100644
 +
 +			clocks = <&aoss_qmp>;
 +			clock-names = "apb_pclk";
-+			power-domains = <&cluster_pd>;
++			power-domains = <&cluster0_pd>;
 +
 +			in-ports {
 +				#address-cells = <1>;
@@ -366,7 +582,7 @@ index 131fd2a16c54..d9313de53ee5 100644
 +
 +			clocks = <&aoss_qmp>;
 +			clock-names = "apb_pclk";
-+			power-domains = <&cluster_pd>;
++			power-domains = <&cluster0_pd>;
 +
 +			in-ports {
 +				port {
@@ -391,7 +607,7 @@ index 131fd2a16c54..d9313de53ee5 100644
 +
 +			clocks = <&aoss_qmp>;
 +			clock-names = "apb_pclk";
-+			power-domains = <&cluster_pd>;
++			power-domains = <&cluster0_pd>;
 +
 +			in-ports {
 +				#address-cells = <1>;
@@ -461,7 +677,7 @@ index 131fd2a16c54..d9313de53ee5 100644
 +
 +			clocks = <&aoss_qmp>;
 +			clock-names = "apb_pclk";
-+			power-domains = <&cluster_pd>;
++			power-domains = <&cluster0_pd>;
 +
 +			in-ports {
 +				port {
@@ -486,7 +702,7 @@ index 131fd2a16c54..d9313de53ee5 100644
 +
 +			clocks = <&aoss_qmp>;
 +			clock-names = "apb_pclk";
-+			power-domains = <&cluster_pd>;
++			power-domains = <&cluster0_pd>;
 +
 +			in-ports {
 +				port {
@@ -511,7 +727,7 @@ index 131fd2a16c54..d9313de53ee5 100644
 +
 +			clocks = <&aoss_qmp>;
 +			clock-names = "apb_pclk";
-+			power-domains = <&cluster_pd>;
++			power-domains = <&cluster0_pd>;
 +
 +			in-ports {
 +				port {
@@ -536,7 +752,7 @@ index 131fd2a16c54..d9313de53ee5 100644
 +
 +			clocks = <&aoss_qmp>;
 +			clock-names = "apb_pclk";
-+			power-domains = <&cluster_pd>;
++			power-domains = <&cluster0_pd>;
 +
 +			in-ports {
 +				port {
@@ -561,7 +777,7 @@ index 131fd2a16c54..d9313de53ee5 100644
 +
 +			clocks = <&aoss_qmp>;
 +			clock-names = "apb_pclk";
-+			power-domains = <&cluster_pd>;
++			power-domains = <&cluster0_pd>;
 +
 +			in-ports {
 +				port {
@@ -586,7 +802,7 @@ index 131fd2a16c54..d9313de53ee5 100644
 +
 +			clocks = <&aoss_qmp>;
 +			clock-names = "apb_pclk";
-+			power-domains = <&cluster_pd>;
++			power-domains = <&cluster0_pd>;
 +
 +			in-ports {
 +				port {
@@ -611,7 +827,7 @@ index 131fd2a16c54..d9313de53ee5 100644
 +
 +			clocks = <&aoss_qmp>;
 +			clock-names = "apb_pclk";
-+			power-domains = <&cluster_pd>;
++			power-domains = <&cluster1_pd>;
 +
 +			in-ports {
 +				#address-cells = <1>;
@@ -641,7 +857,7 @@ index 131fd2a16c54..d9313de53ee5 100644
 +
 +			clocks = <&aoss_qmp>;
 +			clock-names = "apb_pclk";
-+			power-domains = <&cluster_pd>;
++			power-domains = <&cluster1_pd>;
 +
 +			in-ports {
 +				port {
@@ -666,7 +882,7 @@ index 131fd2a16c54..d9313de53ee5 100644
 +
 +			clocks = <&aoss_qmp>;
 +			clock-names = "apb_pclk";
-+			power-domains = <&cluster_pd>;
++			power-domains = <&cluster1_pd>;
 +
 +			in-ports {
 +				#address-cells = <1>;
@@ -687,6 +903,38 @@ index 131fd2a16c54..d9313de53ee5 100644
 +						remote-endpoint = <&ncc1_1_rep_out>;
 +					};
 +				};
++
++				port@2 {
++					reg = <2>;
++
++					ncc1_1_funnel_in2: endpoint {
++						remote-endpoint = <&ncc1_2_rep_out>;
++					};
++				};
++
++				port@3 {
++					reg = <3>;
++
++					ncc1_1_funnel_in3: endpoint {
++						remote-endpoint = <&ncc1_3_rep_out>;
++					};
++				};
++
++				port@4 {
++					reg = <4>;
++
++					ncc1_1_funnel_in4: endpoint {
++						remote-endpoint = <&ncc1_4_rep_out>;
++					};
++				};
++
++				port@5 {
++					reg = <5>;
++
++					ncc1_1_funnel_in5: endpoint {
++						remote-endpoint = <&ncc1_5_rep_out>;
++					};
++				};
 +			};
 +
 +			out-ports {
@@ -704,7 +952,7 @@ index 131fd2a16c54..d9313de53ee5 100644
 +
 +			clocks = <&aoss_qmp>;
 +			clock-names = "apb_pclk";
-+			power-domains = <&cluster_pd>;
++			power-domains = <&cluster1_pd>;
 +
 +			in-ports {
 +				port {
@@ -729,7 +977,7 @@ index 131fd2a16c54..d9313de53ee5 100644
 +
 +			clocks = <&aoss_qmp>;
 +			clock-names = "apb_pclk";
-+			power-domains = <&cluster_pd>;
++			power-domains = <&cluster1_pd>;
 +
 +			in-ports {
 +				port {
@@ -748,9 +996,420 @@ index 131fd2a16c54..d9313de53ee5 100644
 +			};
 +		};
 +
- 		nsp_noc: interconnect@260c0000 {
- 			compatible = "qcom,kaanapali-nsp-noc";
- 			reg = <0x0 0x260c0000 0x0 0x21280>;
++		replicator@1d1b0000 {
++			compatible = "arm,coresight-dynamic-replicator", "arm,primecell";
++			reg = <0x0 0x1d1b0000 0x0 0x1000>;
++
++			clocks = <&aoss_qmp>;
++			clock-names = "apb_pclk";
++			power-domains = <&cluster1_pd>;
++
++			in-ports {
++				port {
++					ncc1_2_rep_in: endpoint {
++						remote-endpoint = <&etm8_out>;
++					};
++				};
++			};
++
++			out-ports {
++				port {
++					ncc1_2_rep_out: endpoint {
++						remote-endpoint = <&ncc1_1_funnel_in2>;
++					};
++				};
++			};
++		};
++
++		replicator@1d1c0000 {
++			compatible = "arm,coresight-dynamic-replicator", "arm,primecell";
++			reg = <0x0 0x1d1c0000 0x0 0x1000>;
++
++			clocks = <&aoss_qmp>;
++			clock-names = "apb_pclk";
++			power-domains = <&cluster1_pd>;
++
++			in-ports {
++				port {
++					ncc1_3_rep_in: endpoint {
++						remote-endpoint = <&etm9_out>;
++					};
++				};
++			};
++
++			out-ports {
++				port {
++					ncc1_3_rep_out: endpoint {
++						remote-endpoint = <&ncc1_1_funnel_in3>;
++					};
++				};
++			};
++		};
++
++		replicator@1d1d0000 {
++			compatible = "arm,coresight-dynamic-replicator", "arm,primecell";
++			reg = <0x0 0x1d1d0000 0x0 0x1000>;
++
++			clocks = <&aoss_qmp>;
++			clock-names = "apb_pclk";
++			power-domains = <&cluster1_pd>;
++
++			in-ports {
++				port {
++					ncc1_4_rep_in: endpoint {
++						remote-endpoint = <&etm10_out>;
++					};
++				};
++			};
++
++			out-ports {
++				port {
++					ncc1_4_rep_out: endpoint {
++						remote-endpoint = <&ncc1_1_funnel_in4>;
++					};
++				};
++			};
++		};
++
++		replicator@1d1e0000 {
++			compatible = "arm,coresight-dynamic-replicator", "arm,primecell";
++			reg = <0x0 0x1d1e0000 0x0 0x1000>;
++
++			clocks = <&aoss_qmp>;
++			clock-names = "apb_pclk";
++			power-domains = <&cluster1_pd>;
++
++			in-ports {
++				port {
++					ncc1_5_rep_in: endpoint {
++						remote-endpoint = <&etm11_out>;
++					};
++				};
++			};
++
++			out-ports {
++				port {
++					ncc1_5_rep_out: endpoint {
++						remote-endpoint = <&ncc1_1_funnel_in5>;
++					};
++				};
++			};
++		};
++
++		cluster2_funnel_l2: funnel@1d221000 {
++			compatible = "arm,coresight-dynamic-funnel", "arm,primecell";
++			reg = <0x0 0x1d221000 0x0 0x1000>;
++
++			clocks = <&aoss_qmp>;
++			clock-names = "apb_pclk";
++			power-domains = <&cluster2_pd>;
++
++			in-ports {
++				#address-cells = <1>;
++				#size-cells = <0>;
++
++				port@2 {
++					reg = <2>;
++
++					ncc2_2_funnel_in2: endpoint {
++						remote-endpoint = <&ncc2_1_funnel_out>;
++					};
++				};
++			};
++
++			out-ports {
++				port {
++					ncc2_2_funnel_out: endpoint {
++						remote-endpoint = <&ncc2_etf_in>;
++					};
++				};
++			};
++		};
++
++		cluster2_etf: tmc@1d229000 {
++			compatible = "arm,coresight-tmc", "arm,primecell";
++			reg = <0x0 0x1d229000 0x0 0x1000>;
++
++			clocks = <&aoss_qmp>;
++			clock-names = "apb_pclk";
++			power-domains = <&cluster2_pd>;
++
++			in-ports {
++				port {
++					ncc2_etf_in: endpoint {
++						remote-endpoint = <&ncc2_2_funnel_out>;
++					};
++				};
++			};
++
++			out-ports {
++				port {
++					ncc2_etf_out: endpoint {
++						remote-endpoint = <&apss_funnel_in2>;
++					};
++				};
++			};
++		};
++
++		cluster2_funnel_l1: funnel@1d281000 {
++			compatible = "arm,coresight-dynamic-funnel", "arm,primecell";
++			reg = <0x0 0x1d281000 0x0 0x1000>;
++
++			clocks = <&aoss_qmp>;
++			clock-names = "apb_pclk";
++			power-domains = <&cluster2_pd>;
++
++			in-ports {
++				#address-cells = <1>;
++				#size-cells = <0>;
++
++				port@0 {
++					reg = <0>;
++
++					ncc2_1_funnel_in0: endpoint {
++						remote-endpoint = <&ncc2_0_rep_out>;
++					};
++				};
++
++				port@1 {
++					reg = <1>;
++
++					ncc2_1_funnel_in1: endpoint {
++						remote-endpoint = <&ncc2_1_rep_out>;
++					};
++				};
++
++				port@2 {
++					reg = <2>;
++
++					ncc2_1_funnel_in2: endpoint {
++						remote-endpoint = <&ncc2_2_rep_out>;
++					};
++				};
++
++				port@3 {
++					reg = <3>;
++
++					ncc2_1_funnel_in3: endpoint {
++						remote-endpoint = <&ncc2_3_rep_out>;
++					};
++				};
++
++				port@4 {
++					reg = <4>;
++
++					ncc2_1_funnel_in4: endpoint {
++						remote-endpoint = <&ncc2_4_rep_out>;
++					};
++				};
++
++				port@5 {
++					reg = <5>;
++
++					ncc2_1_funnel_in5: endpoint {
++						remote-endpoint = <&ncc2_5_rep_out>;
++					};
++				};
++			};
++
++			out-ports {
++				port {
++					ncc2_1_funnel_out: endpoint {
++						remote-endpoint = <&ncc2_2_funnel_in2>;
++					};
++				};
++			};
++		};
++
++		cluster2_rep_2_0: replicator@1d290000 {
++			compatible = "arm,coresight-dynamic-replicator", "arm,primecell";
++			reg = <0x0 0x1d290000 0x0 0x1000>;
++
++			clocks = <&aoss_qmp>;
++			clock-names = "apb_pclk";
++			power-domains = <&cluster2_pd>;
++
++			in-ports {
++				port {
++					ncc2_0_rep_in: endpoint {
++						remote-endpoint = <&etm12_out>;
++					};
++				};
++			};
++
++			out-ports {
++				port {
++					ncc2_0_rep_out: endpoint {
++						remote-endpoint = <&ncc2_1_funnel_in0>;
++					};
++				};
++			};
++		};
++
++		cluster2_rep_2_1: replicator@1d2a0000 {
++			compatible = "arm,coresight-dynamic-replicator", "arm,primecell";
++			reg = <0x0 0x1d2a0000 0x0 0x1000>;
++
++			clocks = <&aoss_qmp>;
++			clock-names = "apb_pclk";
++			power-domains = <&cluster2_pd>;
++
++			in-ports {
++				port {
++					ncc2_1_rep_in: endpoint {
++						remote-endpoint = <&etm13_out>;
++					};
++				};
++			};
++
++			out-ports {
++				port {
++					ncc2_1_rep_out: endpoint {
++						remote-endpoint = <&ncc2_1_funnel_in1>;
++					};
++				};
++			};
++		};
++
++		cluster2_rep_2_2: replicator@1d2b0000 {
++			compatible = "arm,coresight-dynamic-replicator", "arm,primecell";
++			reg = <0x0 0x1d2b0000 0x0 0x1000>;
++
++			clocks = <&aoss_qmp>;
++			clock-names = "apb_pclk";
++			power-domains = <&cluster2_pd>;
++
++			in-ports {
++				port {
++					ncc2_2_rep_in: endpoint {
++						remote-endpoint = <&etm14_out>;
++					};
++				};
++			};
++
++			out-ports {
++				port {
++					ncc2_2_rep_out: endpoint {
++						remote-endpoint = <&ncc2_1_funnel_in2>;
++					};
++				};
++			};
++		};
++
++		cluster2_rep_2_3: replicator@1d2c0000 {
++			compatible = "arm,coresight-dynamic-replicator", "arm,primecell";
++			reg = <0x0 0x1d2c0000 0x0 0x1000>;
++
++			clocks = <&aoss_qmp>;
++			clock-names = "apb_pclk";
++			power-domains = <&cluster2_pd>;
++
++			in-ports {
++				port {
++					ncc2_3_rep_in: endpoint {
++						remote-endpoint = <&etm15_out>;
++					};
++				};
++			};
++
++			out-ports {
++				port {
++					ncc2_3_rep_out: endpoint {
++						remote-endpoint = <&ncc2_1_funnel_in3>;
++					};
++				};
++			};
++		};
++
++		cluster2_rep_2_4: replicator@1d2d0000 {
++			compatible = "arm,coresight-dynamic-replicator", "arm,primecell";
++			reg = <0x0 0x1d2d0000 0x0 0x1000>;
++
++			clocks = <&aoss_qmp>;
++			clock-names = "apb_pclk";
++			power-domains = <&cluster2_pd>;
++
++			in-ports {
++				port {
++					ncc2_4_rep_in: endpoint {
++						remote-endpoint = <&etm16_out>;
++					};
++				};
++			};
++
++			out-ports {
++				port {
++					ncc2_4_rep_out: endpoint {
++						remote-endpoint = <&ncc2_1_funnel_in4>;
++					};
++				};
++			};
++		};
++
++		cluster2_rep_2_5: replicator@1d2e0000 {
++			compatible = "arm,coresight-dynamic-replicator", "arm,primecell";
++			reg = <0x0 0x1d2e0000 0x0 0x1000>;
++
++			clocks = <&aoss_qmp>;
++			clock-names = "apb_pclk";
++			power-domains = <&cluster2_pd>;
++
++			in-ports {
++				port {
++					ncc2_5_rep_in: endpoint {
++						remote-endpoint = <&etm17_out>;
++					};
++				};
++			};
++
++			out-ports {
++				port {
++					ncc2_5_rep_out: endpoint {
++						remote-endpoint = <&ncc2_1_funnel_in5>;
++					};
++				};
++			};
++		};
++
+ 		nsi_noc: interconnect@1d600000 {
+ 			compatible = "qcom,glymur-nsinoc";
+ 			reg = <0x0 0x1d600000 0x0 0x14080>;
+diff --git a/arch/arm64/boot/dts/qcom/mahua.dtsi b/arch/arm64/boot/dts/qcom/mahua.dtsi
+index a59c5ed7b48e..77a456fb0772 100644
+--- a/arch/arm64/boot/dts/qcom/mahua.dtsi
++++ b/arch/arm64/boot/dts/qcom/mahua.dtsi
+@@ -6,8 +6,18 @@
+ /* Mahua is heavily based on Glymur, with some meaningful differences */
+ #include "glymur.dtsi"
+ 
++/delete-node/ &apss_funnel_in2;
+ /delete-node/ &bwmon_cluster2;
++/delete-node/ &cluster2_etf;
++/delete-node/ &cluster2_funnel_l1;
++/delete-node/ &cluster2_funnel_l2;
+ /delete-node/ &cluster2_pd;
++/delete-node/ &cluster2_rep_2_0;
++/delete-node/ &cluster2_rep_2_1;
++/delete-node/ &cluster2_rep_2_2;
++/delete-node/ &cluster2_rep_2_3;
++/delete-node/ &cluster2_rep_2_4;
++/delete-node/ &cluster2_rep_2_5;
+ /delete-node/ &cpu_map_cluster2;
+ /delete-node/ &cpu12;
+ /delete-node/ &cpu13;
+@@ -22,6 +32,12 @@
+ /delete-node/ &cpu_pd16;
+ /delete-node/ &cpu_pd17;
+ /delete-node/ &cti_wpss;
++/delete-node/ &etm12;
++/delete-node/ &etm13;
++/delete-node/ &etm14;
++/delete-node/ &etm15;
++/delete-node/ &etm16;
++/delete-node/ &etm17;
+ /delete-node/ &pcie3_phy;
+ /delete-node/ &pcie3a;
+ /delete-node/ &thermal_aoss_6;
 
 -- 
 2.34.1
