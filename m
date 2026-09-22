@@ -1,84 +1,86 @@
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C4E0755292C
-	for <linux-arm-msm@vger.kernel.org>; Tue, 22 Sep 2026 15:01:30 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E928339DBC9
+	for <linux-arm-msm@vger.kernel.org>; Tue, 22 Sep 2026 15:01:34 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790089292; cv=none; b=Fd7U0M7ZqomPMpM6pyZNMApj2W17DT6sWdWr/59LsDeXIpVqBCgMQGHLqL1newgTF56Vw9YDme1a0gjt2ngGD1YANPCeapobyR/0QMHX1q8SklpLem8SkcPwpYGrzXya9z4tC+X6CRwrUPA9OtFku7E991S7m9vkm1T8LD+nEIQ=
+	t=1790089297; cv=none; b=XyYmFpr5UpEna0b73Wc+98l48MMNXnNMSZGdPmU1yL7lPbUAEXhuYSYIRiAK4AE8ze+0097kewY1+2wm7N6EhYLsHnlDrlC9uu6CoIFhhPOZPZlT6oxFyqShjH2e0XqLSk9MTEJ8dNYgdRuubTamjQMmHT6cmJLqNNe1VOru4o8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790089292; c=relaxed/simple;
-	bh=FAjeZRneUS07YGI25/3Eh1Qgzc36kfOxzN6RMttVlqs=;
-	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=LaWqfOMHid/rhBUFG2yt2L/wqhiTHkSU4Ip0OcaG9Q5Ce69P3OMl0EWd8hiCV/hriSM/kyX2PptbhwJuh/wUe18fsrKMub6Nj8DvZtawp6IvHjE/AmPa8Un4mgUH15jdtL3BIdkeUtEAEktGOxZr1fQa608CXm61I9MvgRyBkeU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=H6vJ/OBK; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=ZxtdCaz/; arc=none smtp.client-ip=205.220.168.131
+	s=arc-20240116; t=1790089297; c=relaxed/simple;
+	bh=fdFTNi1JS574KVjsXFHOw9imMKbmWY7UN9NKmm0tCtA=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
+	 In-Reply-To:To:Cc; b=ojMkDmtlN8h1WFjtJha+7PA8sYolYfakItcnwIrVmAOYQPPP0rgeAFYJF9wdmxytfBrH87VQo4bYndp/UgFui4pEIeTPeAGr+fRpnE92vHLVOA2FGUigWsJSsueM+1uQVqBzOVYImzzBl7bs6wghAPLAbhc9xlzu7UDXwqNvmQ0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=lQPwP8sz; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=DZGDUGHy; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="H6vJ/OBK";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="ZxtdCaz/"
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="lQPwP8sz";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="DZGDUGHy"
 Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68MEijoI3924020
-	for <linux-arm-msm@vger.kernel.org>; Tue, 22 Sep 2026 15:01:30 GMT
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68MEj1Cf3924449
+	for <linux-arm-msm@vger.kernel.org>; Tue, 22 Sep 2026 15:01:34 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:message-id
-	:mime-version:subject:to; s=qcppdkim1; bh=FoeWl1cPaBMy+RKb+Xq99Z
-	3tlRXXvkelRP1fSd0n6ug=; b=H6vJ/OBKjfI4zxe+j7zdZaHg9hDfIttC8OMpi1
-	7nHoHok/oVY6OqK5xyr8UTSCisOq7weY7b2kaZb5xk5KCpIjXApsVW7KOjsfPx7C
-	/IX9pNPI4VQCjv8ibw/U9lIeksRwrN+lKo9eTliZJa4BZMe43jV+bt+nbecUJ/R8
-	WXtppEwPGKjFfs9P1nfb5pqfbbg6uf9kYBEmo8fB+TgiluljFDTLwIGr4Dp0HSRR
-	2cEreeJ/wwHlHyY7yvAgTbFkGzjCrgyFUKnrvTrVmber6JChh/eiiof6mBo/6e7r
-	WNgCPW/nou7Esab1uNtxLiEkDeJQk6nJuo15mt1gnz76+3WQ==
-Received: from mail-ua1-f70.google.com (mail-ua1-f70.google.com [209.85.222.70])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4guuec05ty-1
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	tTYb9zv7p/NEnfBX/yS3A3iM4dDzvTAqnirhEeFwt/s=; b=lQPwP8sz4QZqnxif
+	P+ps2FrTBW86jFnnQB+Ooynv5cIWBH31TjDMXQFTRM6H3BVMcu0BBntF5aVlvGoI
+	yYwCbN0SdJi4rjQtMOvyNXdkGIDL+Xe0YQi2NZWBNtkxSksadPZcHcgSEfYSd7tr
+	Q8irgx04OJlfHKslHYsXouA58yx9zwOxJ01lcJ0GX0MRZgmi2OOANWWK14gFcDpW
+	2CzflBJ/JG1TJCQOivSC3uz7KWa0ZlP9OiYk5vWArLVzdVqej0Re408Xwrb9peak
+	vOIAZ7J3NarzSukcMY2FX1ezRDwYtNoE/zZwOIyKEYfMZtZOdPAdD7XqlRDhXVX8
+	gJ7xpA==
+Received: from mail-vk1-f197.google.com (mail-vk1-f197.google.com [209.85.221.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4guuec05uv-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 22 Sep 2026 15:01:25 +0000 (GMT)
-Received: by mail-ua1-f70.google.com with SMTP id a1e0cc1a2514c-9806e283b0eso2964189241.3
-        for <linux-arm-msm@vger.kernel.org>; Tue, 22 Sep 2026 08:01:25 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Tue, 22 Sep 2026 15:01:34 +0000 (GMT)
+Received: by mail-vk1-f197.google.com with SMTP id 71dfb90a1353d-5c683ca769dso1309970e0c.2
+        for <linux-arm-msm@vger.kernel.org>; Tue, 22 Sep 2026 08:01:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1790089285; x=1790694085; darn=vger.kernel.org;
-        h=cc:to:content-transfer-encoding:content-type:mime-version
-         :message-id:date:subject:from:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=FoeWl1cPaBMy+RKb+Xq99Z3tlRXXvkelRP1fSd0n6ug=;
-        b=ZxtdCaz/ewXN9WBp+FBS++pxFLHkt6GvBGvMovJg3TtBhf32RimT2TOyG2RvBM1KkU
-         xJ8PPJxf64oYQCv8Fwf/uD+V+bYM7TdgVzsDJGYXRBQbkhj0LY7h6kXC+K6aB+GXxEmF
-         +xee4iqtZRZJvh5mfE/2qqy3x/ptM/1joQUbog45K+s5rr/4FpH34ti9ybtQdMb0TpaF
-         5NO/A7eFiR/9b8njyjdIJ+l563YFh0v7hYoVnfBEfXUEmzUBfPpfkn6MbBbrmereEgWn
-         BCZ5i8pWFn/4Vq4N26XRSlj5Zu6P0un2Gcr4NuIJVt9Sww77F86zaYOteien+1wCX1m1
-         3PKg==
+        d=oss.qualcomm.com; s=google; t=1790089293; x=1790694093; darn=vger.kernel.org;
+        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=tTYb9zv7p/NEnfBX/yS3A3iM4dDzvTAqnirhEeFwt/s=;
+        b=DZGDUGHy3LrDGT5mzmPa9KYgZAcGYwgqE6WdBYIi0bAFDksWTtr04HvwvnSICrJI85
+         zHPPwljoX28Y7xzuxlNXdC3uHX3TY7XwysvJiFw5gz8/CbIatIMMGm2czqEObw4Z+pTx
+         1nVSnYTj/D/XKbqZrGY5FJyR/xDX+6a2l1A+AhURHs1cwvGzKuAmUPgD8fH6ncLw172E
+         BSDlWcp4DMoheh4d2sazB4lJhM2Pe+hv4uAGs7MnYsHtAOxAdM8WYQLaSBrAXcRZndbi
+         DyxW+PzEQ+6qWqww0KfBkul/oAGG6uMsnVm8dqf6F620tuV9rwHq5M9txgsQO6z2tTEq
+         MnWw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790089285; x=1790694085;
-        h=cc:to:content-transfer-encoding:content-type:mime-version
-         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=FoeWl1cPaBMy+RKb+Xq99Z3tlRXXvkelRP1fSd0n6ug=;
-        b=QiAsnqpahi8BlTqG4pDPhIc0bfFNat6Dw4BR4kURE+fdMMU/RUXzRLh+/g9qbJSbD0
-         YIKvVXKq7j5QXCDs+D1hD75NWnRfLE7zZ5m+cdeO47YO2sj8KKc+IuLzqXXnBhcg4M+z
-         wCGFbQdcgXJ6qUeKSiJqNoNjsFEA6Hpegii4Y5u1ksyiWhAoAciIh556d6P8+jZIkw2M
-         M+m0bz1O8H8kROu+ys22Ej9qwkKWaKcLDLBlPyw3pLdXcs8FSgQ5BhJwgRhgl52gb6tP
-         0/+h4J1+Sc7P+EvtefhZwZQPRtVY3WYEka/4IK49xy1pU07GZl9oZqfJ2dkg7i6QznYM
-         u1/g==
-X-Gm-Message-State: AFuF++lU7MaCsIS9bhXGAsld8aOiTKJjemA92RwOVg5GYrE3IV/v32J2
-	UnEE3ZJEAYTWJdDBWKVFlC/wInF71a2GGtJKwjWvwf7XGm1EZi6cqnnuIP1sG0JNJGJOq6FSUwi
-	C+/Igus+r0g/RK+FCVJ0sXz1+a8KcVOJ9XQadftDEyV8yEwy7NOCL+vSVcvjdkQrE/NOA
-X-Gm-Gg: AYBFou3tuZYKcsMzGos2xD7Msdpk0FdK9CC4omrDhvFRKFkr6lnDIfX6mZU/su9eWed
-	++0O8FQSf5zbaeUt3IKQd5wlQ5HXA4gPVsuclzPakEFmR7rdZelmg9sPFXKGadj3f6Yu3d2iaVr
-	6GvDWEWiawOFBz46CiZ7TsNOVMusZzOPuE0IE45o6YHap0K2+QwpQKsrw4NizzNUrZBADd0pbmk
-	5CoxN59iXqtVayuKTeRAfJQzaTOXcWRYgdBuPX978kNgfPqqb7hnMcBaiZZJVUSrkXuL2x92tD9
-	tusgenlR46iWmz7NG5so4+UeQYWCKLY+xQ1HkyhEhriqxb3uXUXYkIQsmWRFpjYj0DhaY0i9LMg
-	2DpogbP38D4odVwuALSfdpky2kkY=
-X-Received: by 2002:a05:6122:e189:b0:5c9:a60b:e5a8 with SMTP id 71dfb90a1353d-5c9b5977bb1mr9753298e0c.10.1790089284420;
-        Tue, 22 Sep 2026 08:01:24 -0700 (PDT)
-X-Received: by 2002:a05:6122:e189:b0:5c9:a60b:e5a8 with SMTP id 71dfb90a1353d-5c9b5977bb1mr9753238e0c.10.1790089283835;
-        Tue, 22 Sep 2026 08:01:23 -0700 (PDT)
+        d=1e100.net; s=20260707; t=1790089293; x=1790694093;
+        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+         :content-type:mime-version:subject:date:from:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=tTYb9zv7p/NEnfBX/yS3A3iM4dDzvTAqnirhEeFwt/s=;
+        b=IbONB2Ki8dTZQwJcDoiJDWUyaoUCWFl/RWxBNs46w3Wx83J0p0q6nnO/XJJo7DZDrs
+         Uo69R4/GdUeNH8w94AsGbviqUub87Hsabw18M2Tmf1pLOb/doT2NANbEay+RjIL0ynoJ
+         j67I0yMGVv/fie3da4japu5XKibVKaFGMaQP5TRUbtUK8wmR5y4b8rBjuEHAegeZLvfb
+         dP/UHSXQvPJid7p8z/6OJshHTfI3LCFsWEwmazXsvNrk080lAF7vx4jsjM2/lEnS8zyc
+         5LdvnRPcJaeKNKisze76jLQyA9r1Ky1c90J1rX98OyUuYNOYSQdVRRLg91DLQ6opl/ZL
+         2crQ==
+X-Gm-Message-State: AFuF++nAEce0omEE5Oz00mdOVEnVMowtyCmwF2adUKM4Qr32AYzGYMuI
+	kfC1yDMHOvu327PA0hiB5otFDJ8e3WcbzS5fZ4iD68/FLx4MfpHi6XfimrifIm+El8Memz9Btzu
+	AtPHMpNEDI2cNvnlbZivEoRFdG4KLBEd8iWIRuraQpRh+QHOIQCWXqyDG8v3g9m0I3E4a
+X-Gm-Gg: AYBFou1tKOnUvv8sXJNs3Z9VOC7yUrvNdv+oqp4Y6qNZ7Ds3sTcyEJ1o75fZixDMBf/
+	NZVe7417hQrwOc46dYsEeyDU4edVaS6oUbzFEFAGWgISEW5JIS95+QpXRLBwk+NduOiLEw0befy
+	GjI2JdwuJhEmvjBzUl1Jr9iL1KVhUltyAWCBTVndtRm8k7dALLPRreB8cHZkzNPNBaakbKqmbPf
+	hV5UDbcYj4cJwHzg6JP2YCRbUIMZ58A7cU9RKribonFAfiwVLpvsJ7EMLtW1PBed+IY+kDfkBgy
+	9AEfGhgLbyCt1ZHfFNNeC6xY+ty8NwHTfnEhRohbNT0oeew4Byf1nT7sV64ErNmIyXFsvPlBjDI
+	nW75+GcZlJnYp4tZiQO/7Hj9OsHE=
+X-Received: by 2002:a05:6122:3281:b0:5c2:ac92:eb18 with SMTP id 71dfb90a1353d-5c9b58f163bmr9311619e0c.7.1790089293056;
+        Tue, 22 Sep 2026 08:01:33 -0700 (PDT)
+X-Received: by 2002:a05:6122:3281:b0:5c2:ac92:eb18 with SMTP id 71dfb90a1353d-5c9b58f163bmr9311556e0c.7.1790089292187;
+        Tue, 22 Sep 2026 08:01:32 -0700 (PDT)
 Received: from brgl-qcom.local ([2a01:cb1d:dc:7e00:5105:ff9:e148:c440])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-488627929a4sm4504298f8f.35.2026.09.22.08.01.21
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-488627929a4sm4504298f8f.35.2026.09.22.08.01.29
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 22 Sep 2026 08:01:22 -0700 (PDT)
+        Tue, 22 Sep 2026 08:01:30 -0700 (PDT)
 From: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
-Subject: [PATCH v2 0/4] arm64: dts: qcom: nord: Add USB support
-Date: Tue, 22 Sep 2026 17:01:06 +0200
-Message-Id: <20260922-nord-usb-dwc-dts-v2-0-ba2b39f1a843@oss.qualcomm.com>
+Date: Tue, 22 Sep 2026 17:01:09 +0200
+Subject: [PATCH v2 3/4] arm64: dts: qcom: nord-rrd: Enable USB ports
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -87,10 +89,9 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIADKYsmoC/x3MPQqAMAxA4atIZgMaUNSriIM2qWap0vgH4t0tj
- t/w3gMmUcWgyx6IcqrpGhIoz8AtY5gFlZOBCqqLlkoMa2Q8bEK+HPJu6Mj7uqm4obKFlG1RvN7
- /sh/e9wNYsoczYgAAAA==
-X-Change-ID: 20260921-nord-usb-dwc-dts-c2ff685d8219
+Message-Id: <20260922-nord-usb-dwc-dts-v2-3-ba2b39f1a843@oss.qualcomm.com>
+References: <20260922-nord-usb-dwc-dts-v2-0-ba2b39f1a843@oss.qualcomm.com>
+In-Reply-To: <20260922-nord-usb-dwc-dts-v2-0-ba2b39f1a843@oss.qualcomm.com>
 To: Bjorn Andersson <andersson@kernel.org>,
         Konrad Dybcio <konradybcio@kernel.org>,
         Abel Vesa <abelvesa@kernel.org>, Rob Herring <robh@kernel.org>,
@@ -102,123 +103,273 @@ Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
         Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>,
         Abel Vesa <abel.vesa@oss.qualcomm.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3150;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=5403;
  i=bartosz.golaszewski@oss.qualcomm.com; h=from:subject:message-id;
- bh=FAjeZRneUS07YGI25/3Eh1Qgzc36kfOxzN6RMttVlqs=;
- b=owEBbQKS/ZANAwAKAQWdLsv/NoTDAcsmYgBqspg4eZZ0G5vN7Wkdu1FJdOiY3SNlRsFADGJ4n
- VVvkFGxzuOJAjMEAAEKAB0WIQSR5RMt5bVGHXuiZfwFnS7L/zaEwwUCarKYOAAKCRAFnS7L/zaE
- wzY9D/9Jh5nK/C63c9ifJg8HwpmgzBuaWMkluwvFg73a/jl02wiEZ6wIOoaryeBX9N3M7dCdLie
- hFuKv12V1/fa5L8k4OPlisl2+1K2NNT8x6YNZS7acPzlF9l+bOtqKEMk0uo/fWNTbg3RC/xTOVY
- mogSLuj9DZWkmPa5zk10maUqO7U+JuLHbUf2QYbX/X2t8nr1GaSpcJNApBsCx2Heu/ZtyF5K+ko
- qZJHgjiuP2mvNelmsDJYoP0uRHyVZGrZwuEhS2pA6pKrP9ot6UEzJDExyi2nJsCRZc3bvCua6aw
- nMf0JSuM489NgnEoTf1vC/qdrMuE8EIuy7iylzefFrTU6i4VBCx9YtHynsriSbdidGR5+v1utmD
- erYRHggBWwgf0yk6RIiVyS2qOV5PbOs0YijLF0zXEXXUu9oXm4XG9Z7ziDlLxyb7WdP99d2qGoH
- dwiXf9M1+LhzRpzUbDQmf1jBi5jVjSBUtOr4upYCnEdTY0riKmCQfKb7DAOKxtJIAgmwkF0Sj3W
- AC+ZYsVSexzW0A9ZeqEqd7o/iy7yx/iaAup9U9PBc6poDJDMd2oGXM5uBwYhXSQyI3Z17Ujl9RN
- sFRUCv0fycwt+IBp4kV60CRgmhGX1hIKQloI+TcKTnoDUptUuqvXzJShcYIdi8MsozXbn4spDSF
- pNNv2wsijQbheAg==
+ bh=cPz6Ggdiwm4cLEyRzsRwJlv++jLipMcNhAETj9sBqsE=;
+ b=owEBbQKS/ZANAwAKAQWdLsv/NoTDAcsmYgBqspg/gpcxxU07nHkOyyI6w7bU+RatDW/Ag7CrV
+ gylMzSMeVCJAjMEAAEKAB0WIQSR5RMt5bVGHXuiZfwFnS7L/zaEwwUCarKYPwAKCRAFnS7L/zaE
+ w6V4EACwTiyUr8Nxn7W4OoiXDpSnPKuJAcc+Gu1hZpRu9Ca2/aiHMJKJ3kaaeqceDww/++gFuCT
+ w47DfTpqASjP7FHqDCVMCgs0Qbydh7qOaqisVaTBNUmbom33ashF8kb1SQm5sPoyGcbuSoVF2IN
+ 3k6McyCT7EHzdZ62g4rrKfsb4Sv4OE2QzuhDEuBywls72xTt9hFAWuVtp/ep0pMCY+B1t3GSu9H
+ T9PLETNqMEKkYztkRj/v+2OUIvIaKvtssJnGLeoJGP/F6W1bkeXyzLNrZglHxLRlPXKdie8L6dl
+ W1ELTpfjUPzUILWj1astPKvPNRMPp4vV5HzDK4LAp5D7QIKhxyb8lKRA5xWmBvqD9p4byZf2O7Z
+ Yzl8VZ17Hz66Ui3FX9Q/yPiXC/zJF5eCeXbRrOsQqgUHf+ewEqD9ht0a834xECYhWByPMJ9MTKd
+ kUERQivC51T3/+u3IY/xcWWALj0I8BXBPTPWgk68fAm5h289iPTl4H3GZy8kw9IHWBS06BfNlzo
+ +4b9RJ59C4GaixAdyTZEk8uacAlU5ZzEINysp+N06Nk00xgnW5q0eNtko5yttjQVYH2UPzZ7ppq
+ uLyK0y95A1wJB38Uju1LuoQDn84y1LTJ8x+SpQ8BbO87y3yHYecCQEtBLtJzVg4j3PVmf2evM+v
+ 2dM6xYY1G1aOJ3g==
 X-Developer-Key: i=bartosz.golaszewski@oss.qualcomm.com; a=openpgp;
  fpr=169DEB6C0BC3C46013D2C79F11A72EA01471D772
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTIyMDIxOSBTYWx0ZWRfX4TVBnvpA9WmV
- b7nVxg/fYelwt0BUl4uR9JT5xgG1MClzivcNlPEt/0RRNqFD9NxUq7JHIpHainLVek54wMHHKkU
- lS4b0g3xTZu3nmqUHN3AbVaoeHY2V68fRVSuFSpRpAyQm+ddPdhzkfH7S/y7uHVVCipanBWHlOp
- +MgxdZnfOaC2/A/159nXrub7AFkaPesyR66kShtgKFq9/g9I36nu08TwXblWZ9bB2VNYyx61iwt
- H5vmDxMWWqk5fzKt9nZRgTImlVFuqBmqty+AcCY2SUsH4AflCQw+HImcMk0mVqs7Nws7gTC1mI6
- XAI5oo6DdMEEWd0CdgtC5uhqXPuKbDX/uwsZ6W/yqr+JYzuXkLWxWCdFeCeWNMoiMdct88mpkwq
- sxuDnFPKagqldJJA/5cXuUn2CluvWw==
-X-Proofpoint-ORIG-GUID: IWlRVIlHay5UYbNC_ppTdE-K8xTrbUjB
-X-Authority-Analysis: v=2.4 cv=VKdIDNPX c=1 sm=1 tr=0 ts=6ab29845 cx=c_pps
- a=R6oCqFB+Yf/t2GF8e0/dFg==:117 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTIyMDIxOSBTYWx0ZWRfX6gd4d+M7O5J8
+ YBDWR+He2ywkdyDX5elumysC1rn0+F6Wkeq7fR7m8XBwo5px6ut7byoY018SNehaybHoLrE/AwW
+ wfT0IOYXQOQduPx8cEqB3ks4hSGSXMWcATDvQEisrED8R97oE5G2Lf2UGlYCHSLZDfDi6QV2LCP
+ k5vhgGFgiOupLd28n9nx3J+0+6AfNHreFAp3NHLFI5pDB5i+EgOfL4URz5iBASidxLloApiinPl
+ 9VwMphSO7z5NOU7HJZj0PCVel3AkQM9NWkb6parn1dK24I8IBNkn2NlXO9UJro3OJj5agmEZa2c
+ dLoDbvADQqeGNc0rVclYl90vxLJ9O3K4YPOmEahx0x+xH4USe7YMimFm04Xbl4iT8k+4ppWK33C
+ dEaP5YBOgEJBnB0rbkPi0bq4P7MfBBvxQFsN0xzqzgmUBTfLZyvaHww4l+yDbrt8QLRz1D1+Pny
+ pxEqkricO/vf9KDCh4A==
+X-Authority-Analysis: v=2.4 cv=VKdIDNPX c=1 sm=1 tr=0 ts=6ab2984e cx=c_pps
+ a=JIY1xp/sjQ9K5JH4t62bdg==:117 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
  a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22 a=VwQbUJbxAAAA:8
- a=EUspDBNiAAAA:8 a=7rNyl4BNHWs_c8C4O1EA:9 a=QEXdDO2ut3YA:10
- a=TD8TdBvy0hsOASGTdmB-:22
-X-Proofpoint-GUID: IWlRVIlHay5UYbNC_ppTdE-K8xTrbUjB
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTIyMDIxOSBTYWx0ZWRfX9MJhHNl/rYCg
- 32UBoExUJCZcF1Fa1/VEX1bfMLGhfscKsDLgEwG6Z+kIxihBI4CNr0xaNb19iVCc/FbVmDO+dAZ
- uDQUbxHu6Qwqcttq4kCyEJ3q9MYYxjg=
+ a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22 a=EUspDBNiAAAA:8
+ a=DIsXSFffBO_R8zc2K-IA:9 a=QEXdDO2ut3YA:10 a=tNoRWFLymzeba-QzToBc:22
+X-Proofpoint-GUID: S9lD6Kq_Smsz72zeHwpDFJ3aqc9I4gQV
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTIyMDIxOSBTYWx0ZWRfX1yxMODeajUIw
+ hzjFXf3CWRIrVLyFt4MSFl+gE0mBczOkl/x33fJOFUKyV8PTavc69d4skK2sO2Dci4KWJy6M8JC
+ JuRTwgyG2i/sUUNNUecCQoSyM7VQ8Ng=
+X-Proofpoint-ORIG-GUID: S9lD6Kq_Smsz72zeHwpDFJ3aqc9I4gQV
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-09-22_02,2026-09-21_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 spamscore=0 malwarescore=0 suspectscore=0 bulkscore=0
- adultscore=0 lowpriorityscore=0 classifier=typeunknown authscore=0 authtc=
- authcc= route=outbound adjust=0 reason=mlx scancount=1
- engine=8.22.0-2609040000 definitions=main-2609220219
+ priorityscore=1501 impostorscore=0 phishscore=0 spamscore=0 malwarescore=0
+ suspectscore=0 bulkscore=0 clxscore=1015 adultscore=0 lowpriorityscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609220219
 
-This series enables USB on the Qualcomm Nord platform which has three
-USB controllers:
+From: Shawn Guo <shengchao.guo@oss.qualcomm.com>
 
-  usb_0 (0xa600000)  eUSB2 + USB3/DP combo PHY
-  usb_1 (0xa400000)  eUSB2 + USB3/DP combo PHY
-  usb_2 (0xa200000)  eUSB2 only, high-speed
+Describe the RRD USB topology. Enable i2c9 and add the two NXP PTN3222
+eUSB2 repeaters for USB_0 and USB_1, supplied from vreg_l3l_1p8 and a new
+fixed 3.3 V pre-regulator, and reset through pmau0102_i GPIOs 9 and 10.
 
-The first patch is a fix for the i2c9/i2c10 pin functions, which is a
-prerequisite because the eUSB2 repeaters and the Type-C controller all
-sit on i2c9.
+Add the onsemi FUSB15201 Type-C controller at 0x50 with its interrupt and
+pinctrl state on pmau0102_i gpio8. Unlike RIDE, only port A of
+the controller is wired on this board, to USB_0, so a single
+usb-c-connector is described and port B is left out. USB_0 is configured
+for OTG with usb-role-switch and its HS and SS endpoints are linked to
+the dwc3 HS endpoint and the QMP combo PHY SS output.
 
-Patch 2 adds the three DWC3 controller nodes to nord.dtsi.  They are
-kept as far as possible free of anything variant specific, so the
-clocks, resets, power domains, interconnects and PHY references are
-added separately in patch 3 for the "embedded" variant, alongside the
-five PHY nodes (three eUSB2, two QMP combo).  Adding the QMP PHYs also
-lets the two pipe clock placeholders in negcc be filled in.
+USB_1 is a fixed host port feeding an on-board Genesys Logic GL3590 USB
+3.1 hub. Add the HS and SS hub pair as children of USB_1, linked with
+peer-hub, with the HS half reset via TLMM GPIO 170 and the SS half
+additionally supplied by a fixed 1.2 V rail.
 
-Patches 4 and 5 wire the ports up per board.
-
-Nord RRD:
-
-  usb_0  OTG, USB-C, FUSB15201 Type-C/PD controller
-  usb_1  host, Genesys GL3590 HS/SS onboard hub pair
-  usb_2  left disabled, not routed on this board
-
-Nord Ride Embedded:
-
-  usb_0  OTG, USB-C port 0 of a dual-port FUSB15201
-  usb_1  OTG, USB-C port 1 of the same FUSB15201
-  usb_2  host, USB Type-A, VBUS from a PMIC GPIO controlled
-         fixed regulator
-
-Both boards use NXP PTN3222 eUSB2 repeaters, one per enabled port.
-
-Dependencies:
-- PMIC DTS: https://lore.kernel.org/all/20260920084920.2201418-1-shengchao.guo@oss.qualcomm.com/
-- QUSB2 PHY reset: https://lore.kernel.org/all/20260901035322.654-1-shengchao.guo@oss.qualcomm.com/
-- USB PHY: https://lore.kernel.org/all/20260921-nord-usb-phy-v3-0-68aa02b12b96@oss.qualcomm.com/
-- DWC3: https://lore.kernel.org/all/20260917-nord-usb-dwc3-dt-v2-1-8f88aa30c434@oss.qualcomm.com/
-- FUSB15201: https://lore.kernel.org/all/20260916135918.1017527-1-shengchao.guo@oss.qualcomm.com/
-
+Assisted-by: LLM
+Reviewed-by: Abel Vesa <abel.vesa@oss.qualcomm.com>
+Signed-off-by: Shawn Guo <shengchao.guo@oss.qualcomm.com>
+Co-developed-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
 Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
 ---
-Changes in v2:
-- Drop pin control fix that was applied upstream
-- "otg" mode is the default dr_mode so drop it from nodes
-- move the usb-mode-switch to the SoC level .dtsi
-- Add hs_phy_irq to DWC3 nodes
-- Wire-up the USB2 type A connector
-- Extend the list of quirks in DWC3 nodes
-- Remove stray comments
-- Link to v1: https://lore.kernel.org/all/20260911142040.100263-1-shengchao.guo@oss.qualcomm.com/
+ arch/arm64/boot/dts/qcom/nord-rrd.dts | 166 ++++++++++++++++++++++++++++++++++
+ 1 file changed, 166 insertions(+)
 
----
-Bartosz Golaszewski (2):
-      arm64: dts: qcom: nord: Add the USB controller nodes
-      arm64: dts: qcom: nord-embedded: Add USB resources and PHYs
+diff --git a/arch/arm64/boot/dts/qcom/nord-rrd.dts b/arch/arm64/boot/dts/qcom/nord-rrd.dts
+index c547963371b4d05fad1028655a49a9f9cb952f64..46f6913b5808a4f230d61ed6de35efa6b4addca9 100644
+--- a/arch/arm64/boot/dts/qcom/nord-rrd.dts
++++ b/arch/arm64/boot/dts/qcom/nord-rrd.dts
+@@ -6,6 +6,7 @@
+ /dts-v1/;
+ 
+ #include <dt-bindings/gpio/gpio.h>
++#include <dt-bindings/interrupt-controller/irq.h>
+ #include <dt-bindings/regulator/qcom,rpmh-regulator.h>
+ 
+ #include "nord-embedded.dtsi"
+@@ -53,6 +54,22 @@ bi_tcxo_ao_div2: bi-tcxo-ao-div2-clk {
+ 			clock-div = <2>;
+ 		};
+ 	};
++
++	vreg_per_3p3: regulator-per-3p3 {
++		compatible = "regulator-fixed";
++		regulator-name = "vreg_per_3p3";
++		regulator-min-microvolt = <3300000>;
++		regulator-max-microvolt = <3300000>;
++		regulator-always-on;
++	};
++
++	vreg_hub_1p2: regulator-hub-1p2 {
++		compatible = "regulator-fixed";
++		regulator-name = "vreg_hub_1p2";
++		regulator-min-microvolt = <1200000>;
++		regulator-max-microvolt = <1200000>;
++		regulator-always-on;
++	};
+ };
+ 
+ &apps_rsc {
+@@ -377,6 +394,86 @@ rtc@32 {
+ 	};
+ };
+ 
++&i2c9 {
++	clock-frequency = <400000>;
++
++	status = "okay";
++
++	usb0_repeater: redriver@43 {
++		compatible = "nxp,ptn3222";
++		reg = <0x43>;
++		#phy-cells = <0>;
++		vdd1v8-supply = <&vreg_l3l_1p8>;
++		vdd3v3-supply = <&vreg_per_3p3>;
++		reset-gpios = <&pmau0102_i_gpios 9 GPIO_ACTIVE_LOW>;
++	};
++
++	usb1_repeater: redriver@4f {
++		compatible = "nxp,ptn3222";
++		reg = <0x4f>;
++		#phy-cells = <0>;
++		vdd1v8-supply = <&vreg_l3l_1p8>;
++		vdd3v3-supply = <&vreg_per_3p3>;
++		reset-gpios = <&pmau0102_i_gpios 10 GPIO_ACTIVE_LOW>;
++	};
++
++	typec@50 {
++		compatible = "onnn,fusb15201";
++		reg = <0x50>;
++		interrupts-extended = <&pmau0102_i_gpios 8 IRQ_TYPE_LEVEL_LOW>;
++
++		pinctrl-0 = <&usb_pd_int_default>;
++		pinctrl-names = "default";
++
++		#address-cells = <1>;
++		#size-cells = <0>;
++
++		/*
++		 * Only port A of the controller is wired up on this board, to
++		 * USB_0. Port B is left unconnected.
++		 */
++		connector@0 {
++			compatible = "usb-c-connector";
++			reg = <0>;
++			label = "USB-C0";
++			power-role = "dual";
++			data-role = "dual";
++			try-power-role = "sink";
++
++			ports {
++				#address-cells = <1>;
++				#size-cells = <0>;
++
++				port@0 {
++					reg = <0>;
++
++					usb_0_con_hs: endpoint {
++						remote-endpoint = <&usb_0_dwc3_hs>;
++					};
++				};
++
++				port@1 {
++					reg = <1>;
++
++					usb_0_con_ss: endpoint {
++						remote-endpoint = <&usb_0_qmpphy_usb_ss_out>;
++					};
++				};
++			};
++		};
++	};
++};
++
++&pmau0102_i_gpios {
++	usb_pd_int_default: usb-pd-int-state {
++		pins = "gpio8";
++		function = "normal";
++		input-enable;
++		bias-pull-up;
++		power-source = <0>;
++	};
++};
++
+ &qupv3_0 {
+ 	firmware-name = "qcom/nord/qupv3fw.elf";
+ 
+@@ -459,3 +556,72 @@ &ufs_mem_phy {
+ 
+ 	status = "okay";
+ };
++
++&usb_0 {
++	status = "okay";
++};
++
++&usb_0_dwc3_hs {
++	remote-endpoint = <&usb_0_con_hs>;
++};
++
++&usb_0_hsphy {
++	vdd-supply = <&vreg_l1h_0p9>;
++	vdda12-supply = <&vreg_l2h_1p2>;
++
++	phys = <&usb0_repeater>;
++
++	status = "okay";
++};
++
++&usb_0_qmpphy {
++	vdda-phy-supply = <&vreg_l2k_0p9>;
++	vdda-pll-supply = <&vreg_l2h_1p2>;
++
++	status = "okay";
++};
++
++&usb_0_qmpphy_usb_ss_out {
++	remote-endpoint = <&usb_0_con_ss>;
++};
++
++&usb_1 {
++	dr_mode = "host";
++
++	#address-cells = <1>;
++	#size-cells = <0>;
++
++	status = "okay";
++
++	hub_hs: hub@1 {
++		compatible = "usb5e3,610";
++		reg = <1>;
++		reset-gpios = <&tlmm 170 GPIO_ACTIVE_LOW>;
++		vdd-supply = <&vreg_per_3p3>;
++		peer-hub = <&hub_ss>;
++	};
++
++	hub_ss: hub@2 {
++		compatible = "usb5e3,625";
++		reg = <2>;
++		vdd-supply = <&vreg_per_3p3>;
++		vdd12-supply = <&vreg_hub_1p2>;
++		peer-hub = <&hub_hs>;
++	};
++};
++
++&usb_1_hsphy {
++	vdd-supply = <&vreg_l1h_0p9>;
++	vdda12-supply = <&vreg_l2h_1p2>;
++
++	phys = <&usb1_repeater>;
++
++	status = "okay";
++};
++
++&usb_1_qmpphy {
++	vdda-phy-supply = <&vreg_l2k_0p9>;
++	vdda-pll-supply = <&vreg_l2h_1p2>;
++
++	status = "okay";
++};
 
-Shawn Guo (2):
-      arm64: dts: qcom: nord-rrd: Enable USB ports
-      arm64: dts: qcom: nord-ride-embedded: Enable USB ports
-
- arch/arm64/boot/dts/qcom/nord-embedded.dtsi     | 311 +++++++++++++++++++++++-
- arch/arm64/boot/dts/qcom/nord-ride-embedded.dts | 309 +++++++++++++++++++++++
- arch/arm64/boot/dts/qcom/nord-rrd.dts           | 166 +++++++++++++
- arch/arm64/boot/dts/qcom/nord.dtsi              | 100 ++++++++
- 4 files changed, 884 insertions(+), 2 deletions(-)
----
-base-commit: 491d08c98db7ce0a90f229c7ad23638a3e071411
-change-id: 20260921-nord-usb-dwc-dts-c2ff685d8219
-
-Best regards,
 -- 
-Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+2.47.3
 
