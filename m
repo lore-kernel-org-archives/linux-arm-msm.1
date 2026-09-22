@@ -1,87 +1,87 @@
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9330C54DAC0
-	for <linux-arm-msm@vger.kernel.org>; Tue, 22 Sep 2026 12:58:12 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2E119548558
+	for <linux-arm-msm@vger.kernel.org>; Tue, 22 Sep 2026 12:58:17 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790081895; cv=none; b=Fye8I8kXPHjrurVSp2OvwmFyI6TSdoT3Iu+U4g+6OcIdP92NT2U6p8RHfSKZCwZ3srI06BKJUHtbbPuBLQTuIby1fFTEQ7bVtguEY7x0gQEDZwSRvvnMSHGzw96+en+UtRfxFqaqBmSSMZOyHM5tW5grbvCU+lrIvkqpTayrOT8=
+	t=1790081899; cv=none; b=Za+26XV8MzQx5CYgNY+Hoy5PJqm+hGSee6wsC5prdvLFmru4Hy+0FGlqZbMGBYxVlw+wFd16nzxf80I+gH3EfZCF2qh+Zfpj6y1T1StBxxlWLGLS/fV7wib19cEEATutt6PYxoxX6zvhvX10QdmJz8LXT4gb5PB9XGHK08/Zzhc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790081895; c=relaxed/simple;
-	bh=fY87isequqGi2vPc14TLa0uhOXluPBKFeKDCz57mcWg=;
+	s=arc-20240116; t=1790081899; c=relaxed/simple;
+	bh=bqQnj1sRd5YIguxyvb1woihF/gxO2qBMbQ6gsb6aEnM=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=BTSu1lNRrKmhKOQ07edwp5OZctpOyn9R2Hc17TwepPQtXTad/s7WEIvRK0jhReo/zLe4yDDgEXZrqXQ7SPZTa7+4tKH7F7pWNY/V2TnygBk965+304pMeiRm8baad4dVk5+n6Oz7tz7d+2iMk1sOf88oiujr7cMkOxtZHeN2ZWU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=Jnu3QQB8; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=bJXrNkDJ; arc=none smtp.client-ip=205.220.168.131
+	 In-Reply-To:To:Cc; b=HWi0iajwvLDzcvtnMzG5GJP2qJA+D8Xm26ZoDFO9xYruEkTjOYvMktILuZx+ykOQMoO23mjwWkVNaSJQ3MVbikZT4JK33PEDp0pYkjJCZqs+xfwYIZV2UNZFlP48/7zcDJF6uohU6Levr6tz/6Dv+faIcTrDM2fGtihkWv8nJK4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=YDTUGAMy; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=Jvqj1fn7; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="Jnu3QQB8";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="bJXrNkDJ"
-Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68MBPgh63487744
-	for <linux-arm-msm@vger.kernel.org>; Tue, 22 Sep 2026 12:58:11 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="YDTUGAMy";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Jvqj1fn7"
+Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68MBPhrt134476
+	for <linux-arm-msm@vger.kernel.org>; Tue, 22 Sep 2026 12:58:16 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	71x7x3a3jvjtRysKXeUju2pROKPOWXEvD0O9ovjM29c=; b=Jnu3QQB8IPRGxFfM
-	tJ6Av1ELS5xfKXzgEbIwMvlCSIb3Bq4dNkpx6iqYSP/A873wCvHRBezKTF94026H
-	JfMpeak+lgmxYru92EmceSA4IR1Ooa1BA02TqTmEo4m+M1D6xAb7W5vH2VpOMMf4
-	Ir608TsKahqUo7Y8FRc9mLey1UFdYgjKcMEz8gpIECkT+o/qDqz4/rGyNEdx5d4C
-	XKf4rDiYca9KlMZeaG2AALrvHGeqgMxg3X9M7M40BMrfYqM40u2ESN1reL35el8u
-	h9Odhe4BhtIiz+T00LS0MMfwBN+i/73HKnzWhU1a74RvzmVdWOpu0R/cJLDE3Js7
-	+Q1eSw==
-Received: from mail-vk1-f199.google.com (mail-vk1-f199.google.com [209.85.221.199])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gudw0jygk-1
+	tr6/L9XspX0mVolAtvJBefpD4SzsUnEqKEXPG9e6Y54=; b=YDTUGAMyvP6j2GnG
+	ZTRVYD04MFTmXcGQ+bXSJLNYJPAhYQGUN0i10rBQ9N55c0wPs5bm99g/Tr7B4gAN
+	1ldJU8oMOLi2t1n/NAlNeWHw+1PS1gzv9IG8jR3/xPr0GhGK2MMexNQL7XCcGIq8
+	CjMuECfqWoxuFdUi3dgk8rJlSnK1OtxXfRC9bUian+hMp69VEjytoxTVnSfco4hE
+	+pk0lrbQop1WVfHEY1yM4kjX2/qmZBVZjKmWty0fhVt7McM+7BYkD8klyMjuLHxh
+	ERKlKtHm2UMOvH5DvJx0EfSDJZZWUi9VniNWqyA+fW4uXRvLmCv/XurS61yyXEe/
+	tXs3tA==
+Received: from mail-vk1-f197.google.com (mail-vk1-f197.google.com [209.85.221.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gujkja0es-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 22 Sep 2026 12:58:11 +0000 (GMT)
-Received: by mail-vk1-f199.google.com with SMTP id 71dfb90a1353d-5c82c79466cso5233382e0c.2
-        for <linux-arm-msm@vger.kernel.org>; Tue, 22 Sep 2026 05:58:11 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Tue, 22 Sep 2026 12:58:16 +0000 (GMT)
+Received: by mail-vk1-f197.google.com with SMTP id 71dfb90a1353d-5c96449cbb2so1263646e0c.1
+        for <linux-arm-msm@vger.kernel.org>; Tue, 22 Sep 2026 05:58:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1790081890; x=1790686690; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1790081894; x=1790686694; darn=vger.kernel.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=71x7x3a3jvjtRysKXeUju2pROKPOWXEvD0O9ovjM29c=;
-        b=bJXrNkDJzSbOWrG/WCBV5+Oa1RB8ZU92RfUrwYknG2jCfv1J7upyfC8X9ULqS/nhNQ
-         5MUlW6oSy5a7LwrKaiUpznyeoqnfqWdOchjfQ3QA+zX48wedB3uHx4dKhFOfZW313pnv
-         cPNBdwRffGOhEYEbp41TzWjc6TChOCOdtvJporFE1iwTgcrougZ1mA7Ghb/7PXIr6Zfg
-         NQbWcqofzJdkiBO4Q1HbOko6wzYoSefUrP2qykEJFQvQLY39Kq+UpJ/nBrLWhRk3Fr/R
-         lBxYBEUTn99NA+/DSZioCYWjxR824Tpd8GBqEh77CiIGDfRtk6hj/AOxksUN9fFd/2p1
-         JykQ==
+        bh=tr6/L9XspX0mVolAtvJBefpD4SzsUnEqKEXPG9e6Y54=;
+        b=Jvqj1fn7Ah8KJZ4fCl/PNtYrNytOwcn4fGczGvwJlfkVPQprPTPE6NSblRd0BHqHAj
+         4Ad9DwSoWBXD0Z138x4iQECiJusi4JlFHp/9BRCyXkybOvz5YDuT9d310pS0xIycD7pj
+         7OGNwBfHwqOFLDpMPulFW7aL8aK4iEXoQrJV4qUZKELLaThYDTbchBTvNTn1S2NwSNr5
+         Ck1g9bu11ujBSb2C1yrdgHKqGo7NG/nHZJhqFh9Oc5H5zUDvCcDbP3+3TLiaY5SWVb5Q
+         qfKd4jlU2C1tx1pJMY/gakMoJUa7S7DsRAqF/iSJQkJWLkwBHFPMZV/A00aYGJ473BPu
+         znyw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790081890; x=1790686690;
+        d=1e100.net; s=20260707; t=1790081894; x=1790686694;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=71x7x3a3jvjtRysKXeUju2pROKPOWXEvD0O9ovjM29c=;
-        b=MwZUtyuY+UqSk+8ozOZElXp0EQbsic5GZULaAkxKFaxQVU0npEBX5azhDv2sKFfnWf
-         1pJLSD76PH6HCo1BcfAYjewBV6PapN66wtP02AicEoA69Tp+slyzr7uLVCPO7X6WAh9z
-         ZALoySVcalDB/haCbxR9Y8rT2ZqO2Gi4jS+vKesZ1zczzLeKUp9b17dK5n2QUc3TSbl8
-         wPd9VWBNS/2fW6zPVtHL2b7PGQLje4S1bsKkXjWKiJpniIf8tNMA9P+2025gKQBxdT+C
-         ibrtvMsWNlKahToW4tiNdmn1MbYWAAURZOgvm7BKZA0Hxcb2Ryg5cQyifz89mW5CVmU5
-         jorw==
-X-Forwarded-Encrypted: i=1; AKwUvByHZ5wETuMkxDr8/Kq99EU9U84oTsGHB0Z/pag/+FCRJLGxOopuk9o2k4sdHiJcM0RJstiD5S/JOUZmFnLt@vger.kernel.org
-X-Gm-Message-State: AFuF++lrVYAm3BkagJVhK1l1jELRqCOsCP+S4ohqLAY2a0uo/eSf8IeH
-	e6716fwSvMW0/S5Dk9uo7EI6z7Ki0vP2rsSxvxakRWSkY3RoYShMKgxBikcFK2H9sa5JUbRajLx
-	mencp3Utg0eip8lVFb1V2xWyxQIa7xV8VD//XfyLy/6lB6os0Pe16k8cS/g/nx2x9p17L
-X-Gm-Gg: AYBFou1w89hOutSFZtD692ueclweKKC5HeMpAUkwi8Wg58kUHoyKGI4wNqO4xajtz33
-	gdzDLxT1VevX3wZP6QrQ2nugJz+YhTksAXjfLebwxhgpNno25DvKIbEMYQA6AdOs4irfbsA65fS
-	Kzc5zaoujAj+SN6MZOpQYHVYlphT1G1a+lFk8jK/Zwpnwx/wkBH5Rnx3c+cxUBPltIVnJ9NG4pW
-	yF5xbrAGYq/zpbVMqmKupOiT8C+aAq/2xl0cDqesJ5fuEiUlYOVCpdQT9PUTFkfP5KlAKVUuQtS
-	9uX3gJ6xSoInD9du59ihNdBTK+8FdEPgK90pLfraoDhu8KQgTPh/5S4EbIQwzj3/cwPKk3Jz2dT
-	qJtpdE4Zdqxb9G6/Eo7mgzLdjE84=
-X-Received: by 2002:a05:6122:3486:b0:5c8:36a6:ddd0 with SMTP id 71dfb90a1353d-5c9b58e98c0mr8394466e0c.6.1790081890363;
-        Tue, 22 Sep 2026 05:58:10 -0700 (PDT)
-X-Received: by 2002:a05:6122:3486:b0:5c8:36a6:ddd0 with SMTP id 71dfb90a1353d-5c9b58e98c0mr8394408e0c.6.1790081889914;
-        Tue, 22 Sep 2026 05:58:09 -0700 (PDT)
+        bh=tr6/L9XspX0mVolAtvJBefpD4SzsUnEqKEXPG9e6Y54=;
+        b=C72qVo/CWy8ued9bTMKKK+q8fJ69oUlyuH+WQMU8sqMoCWUbwZmphs7Apzy50xpUm+
+         Q/wuTKrU6SePuiPL59bJtjGv/lpCOwzmR4RfEuWXLADzaEmYe7bpiw/KKRvwsyGEePLQ
+         C1l4h2/mURwZyHKVx60wV2M+v6IaGH5j1Ma/PHmD9HG92ryBsqDdqq2RIsHwdRdQlwGk
+         /74s3O9/HiV/tY3ozfmIHtvu5SwrweQjX4OVPcFIS/BWPD71kWIkZcJPFRQ1Q15hh3L6
+         10oTaB0mtYYMnqJETTfwVb0YqvHHL8/u7f4fSc3SBbwchpScIzk6S394FMezRVmh4JG0
+         0QCw==
+X-Forwarded-Encrypted: i=1; AKwUvBwEiZxtvieZS1eUWnQPlD4vez9uxxTiw7xbX796hqSniXZT/lA2uWwM276JFRrMrakbwQ1QLNw+YSGi4n23@vger.kernel.org
+X-Gm-Message-State: AFuF++mvUzFweav/AvKXmCiHB7wAvM0y1gWYEWDIale25TQ6LkQ9P/P9
+	ChPKjiIQZBTe4OpXVVx41Xm+YAmLKhX4k/PUWff1aWAJQqS99JIqKEEeCGpsKbn3J3noZIEwOkY
+	wHHpron8utJBimZugG/ptgds9See6WFTc7YKlVLrWtDLmjx9m6KOG0YUVARSpjDwPTYYo
+X-Gm-Gg: AYBFou3FHxNyIW4Jbycc9ee7Bd9n3HWMeXjibrgfZ67uHSHGTQDi/wriUbl5kdtP5y9
+	TWtl0lTTZ4UFXPCYairC4lcIRKeLXixN98v55PH2LihX/WzVauamTAczKqzlAxt71FC19Da+PfR
+	IUljIw1DtCi7rnM2AZg1Y3iXOazxijJ77vifx4xIHpUtt0TTSMkk5tq1axEnDeVTTteK6yNoxB1
+	O+lx6y9PM4CcSBGFuERDMcPPwOCqDRhYEtouYYN9N+eQYH34appfxvR7+tn47rzhcp1ZUr6RTKr
+	h6tOLSbj6rYv2MCkBbprXeCMGs8GJ/X+ZnnX3B+nbbqEWJaKMqsoBJYgmq403tfwehLJhitPBmf
+	bzP+TiNzKozqPegjfhuQT/MIIlvs=
+X-Received: by 2002:a05:6122:8c8a:b0:5c9:a60b:e5cf with SMTP id 71dfb90a1353d-5c9b59413bbmr7504826e0c.9.1790081894233;
+        Tue, 22 Sep 2026 05:58:14 -0700 (PDT)
+X-Received: by 2002:a05:6122:8c8a:b0:5c9:a60b:e5cf with SMTP id 71dfb90a1353d-5c9b59413bbmr7504775e0c.9.1790081893542;
+        Tue, 22 Sep 2026 05:58:13 -0700 (PDT)
 Received: from brgl-qcom.local ([2a01:cb1d:dc:7e00:5105:ff9:e148:c440])
-        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-6aaa4537b5dsm1097669a12.30.2026.09.22.05.58.07
+        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-6aaa4537b5dsm1097669a12.30.2026.09.22.05.58.10
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 22 Sep 2026 05:58:08 -0700 (PDT)
+        Tue, 22 Sep 2026 05:58:11 -0700 (PDT)
 From: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
-Date: Tue, 22 Sep 2026 14:57:25 +0200
-Subject: [PATCH v9 10/14] Revert "crypto: qce - Mark QCE as BROKEN"
+Date: Tue, 22 Sep 2026 14:57:26 +0200
+Subject: [PATCH v9 11/14] crypto: qce - convert to auxiliary bus
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -90,7 +90,7 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260922-qce-fix-self-tests-v9-10-b1aa742e79af@oss.qualcomm.com>
+Message-Id: <20260922-qce-fix-self-tests-v9-11-b1aa742e79af@oss.qualcomm.com>
 References: <20260922-qce-fix-self-tests-v9-0-b1aa742e79af@oss.qualcomm.com>
 In-Reply-To: <20260922-qce-fix-self-tests-v9-0-b1aa742e79af@oss.qualcomm.com>
 To: Thara Gopinath <thara.gopinath@gmail.com>,
@@ -109,124 +109,465 @@ Cc: linux-crypto@vger.kernel.org, linux-arm-msm@vger.kernel.org,
         linux-arm-kernel@lists.infradead.org,
         Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3276;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=14659;
  i=bartosz.golaszewski@oss.qualcomm.com; h=from:subject:message-id;
- bh=fY87isequqGi2vPc14TLa0uhOXluPBKFeKDCz57mcWg=;
- b=owEBbQKS/ZANAwAKAQWdLsv/NoTDAcsmYgBqsns/UZaT9h/s9Gz6OgARZ9rzxMS3ZQgZpCzKJ
- nnFi47SzJCJAjMEAAEKAB0WIQSR5RMt5bVGHXuiZfwFnS7L/zaEwwUCarJ7PwAKCRAFnS7L/zaE
- w7j8EAC8IgQUzRusHQCor89biXLZV6riqEpya1oT3nHoywVTkIzWNMVa2TgdT3hX1JjSlLR4MbI
- YVQNujKDgZV2UoAkZzeQpm9dh0row0mW5SQuUZkaG5N54xR41VB969wvJaF1G2cfXAVCUa99UAc
- uhJJ1l6epPuUUAXQMylCIA30yqhBFWYre3FYHj+YURx0Gbf9x9yEnm+1tuwStNkc6piZEmLHogw
- VvnqttPj+07kyCTzTNA2+YSyOsLX5IqOxyk24BdLHXCwEBCrNDySCunebNQHRIMVs2fXe2vpZla
- Z04tjzFEyI34eopJ387OJhAMAFi5ATjiaEwSHIlX5Z+JUO7U7uQdcAtc0Eoe3ZaYPLtZUFX5CAv
- RbRcTqU1VHH05QX2XUq0ZHH1zcpGu6m5ILm2eNiK8rG7uqvPcR3M+kLdasd1mk/+dK4wKit70jx
- cFUjTh0TsuLoMmCQfL4FawROIHMxwh4DXLx3Hfvp4M/r6Xoyo+kDoT0ejcujTMk153FAg4adgKC
- lN44tH60s5gx9JoAxBM2C8Ux6IzAd5dp4WvS78w4ZaQZu2qEXnkB9bpC8ZedIHuDSZnXh6i43xZ
- 0psjvcj48SOQT20dvEV3YFhSNKmeLh5/FVCMLzFoOnV7w8V7rYkKrlhGa9cTuc1gXQkXoml+HCc
- 7nnehYVdqWTXyEw==
+ bh=bqQnj1sRd5YIguxyvb1woihF/gxO2qBMbQ6gsb6aEnM=;
+ b=owEBbQKS/ZANAwAKAQWdLsv/NoTDAcsmYgBqsns/fmtMudlJlPuDfybMh5FEY5t72gLHhBK1U
+ hBwfv2oTOSJAjMEAAEKAB0WIQSR5RMt5bVGHXuiZfwFnS7L/zaEwwUCarJ7PwAKCRAFnS7L/zaE
+ w6IrD/9bM+Q8ghrImd49o8Z2DyY+PZEJk2Et03myE8G1kYPLrLlbYPhShQsBqqrMLcNhJBxDRGn
+ 0wQnXCZetayq0IuInO75OLF2vsa2Z3iR08hbHxzCmamW1u9KJ1JcK7q2Pj52U4Htg8yRXQKxcuS
+ Xztw1AVJrkpqmZWUxR66rwitkzWI5MqwQSIV+MIJMKMCWe2Iy+bYe9I5Lespzp0EVaxxCMGq5G2
+ yulUQiJ4GSqiZpLm5vqmHIlis7GBQ+e3yCJEr5eui3gE3TQD0APxVbzIU5Xs5NW6K0nE939IbGR
+ QUAKHsJsl8LrqTcWu0OLd7sO29ROBIIlOnBVb14q9sMlt20daO1YwXQeuotfOIjSIGNvSpvFo87
+ f4LB/kmDZTeXVLH429IOVGTdI0yDR/EU01Uf7dyWEVUouE+WAr60BOWf65fp9piPhTVv+juJD/8
+ /5yHo5G+3MIuVUbTJ/6q0f8kQDgsy1XDsFEw7A2z12dwGWjO/VpIdXmKha2oUV8LFoEjAQBZo6/
+ woRY9BAKqVZJYWGxi8cjJ3LpPKFpcwGOaWAhf4d9+Rz8erT05PrXzMHCP4kg0vDp3vPiGhV1lQR
+ uq2jus4Ok6BqWZEGKmcZn0NFRS/7K5tWuUjVpc/SAme4+XbOOh1+pWsDnvpDBZf05BRDmc9dVxd
+ vwDfmJlS8+t9LRw==
 X-Developer-Key: i=bartosz.golaszewski@oss.qualcomm.com; a=openpgp;
  fpr=169DEB6C0BC3C46013D2C79F11A72EA01471D772
-X-Proofpoint-ORIG-GUID: TAXDZPu8qURwB2sJvvmR_Ju0SwmkN8Rt
-X-Proofpoint-GUID: TAXDZPu8qURwB2sJvvmR_Ju0SwmkN8Rt
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTIyMDE4NyBTYWx0ZWRfX0PcBvd88/wMV
- dlZSf2WA1c7mtfU/FdDP/YQcYP9kMA67Dz8FdVVqFEA4PWHzLY7gMO4/XFfPag+xh0jJTJTLDjm
- DIHhJoknnXlcwdQ4Va/BhY+JaGHJd17KbJrq5cOaxvQZF10RUhUnn3l+YhPurcHAhawsFgMqnQp
- EKsEiWTMzeCwbaaC+cA6sIc63o4IjPkNnANoOgY+Bt4ak1OMPLnmet8FiczHUpJhKNXq6bxGFvE
- 1sGojbpEb79ZM2JScdpYPSiEgOY7mzkd97LJy5WHL6ql1Nwdnc2aW/6swaAKb82CI4xSGXQ0LCf
- qHnzjL6n2bfOzButlma+TWsvXFmwWnlcqO9fTJ+emQ3UcQnn4mSLNZfbD7MDtkLdFy5ETpUzDMN
- yihTL9ftGWAOERAwSFjHJ9Jw2KiKaWpRhGd38Algr68YYhbokZvHJ/tl7uKuac4in+U2rNqETKY
- nUVVNmaVCWxHMhEaCXw==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTIyMDE4NyBTYWx0ZWRfX8CP0lYpDiM89
- nB+bGtmSw6dyhbPRRnOUWbm1Q74HTA99oByAhzbOSISmowyB78L6ie90ElJkSbwJ8UFhtSOLDK+
- mGtH2wgqGPnJRXOzry+l4PMNrGMMpIk=
-X-Authority-Analysis: v=2.4 cv=TvFzFzXh c=1 sm=1 tr=0 ts=6ab27b63 cx=c_pps
- a=+D9SDfe9YZWTjADjLiQY5g==:117 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
+X-Proofpoint-GUID: zGj9-AONPxuqWq9o0ZTlS5lhcxyXnKEh
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTIyMDE4NyBTYWx0ZWRfXw0j3bkGoIKpT
+ Jt0qj1wIctR22mHNmC4WgywvGOahdGvuWWSBufYcUjptG/zAyGkQ7ANT/UUobvalqNumUj/MA7X
+ iQyLgyrG97ZyiBfzpRX56isaam7RYtlrboNE7PJwQMCfBERcXJ14mU8KZhwEYnwxqAenZZmadh9
+ lmEYVvOiUrOhnJyli1Pewq7XGsVyYCDtiw2ytJHKr5fT+SSO083sAbsY7XDK4QDNol27GYr/lsh
+ 4G0NV3eQ4FWxViBxb9qMh2+Ww1sRaYIItVkpMjKDMA1sCEy5PoiCRzj6y2pyo48T8jMF0SL7YUy
+ TZLcgGdbtoOxUIZNRbbnjzNh1xhOi7K0mBvjCP0+l7vLd8fVUsAzkGqfblNlALzjsno4ud1uyq4
+ fq8uI9zj9dV6eUarv+vofxPKVYCzdhlwMBV+1suzy1RBuUsu40PFj8txOBr5Q/jcUB9wAekzjqG
+ d/528CE5Yqv6B/3PK/A==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTIyMDE4NyBTYWx0ZWRfX4Am/K1WxEgB5
+ /eZouYl2cjCNHw/H9IitL2CzNNXxc5KCKkNdwiAvUilMUVcOmVd7IsepBsB6THZJlCEWdJeb4XI
+ /a4oGkeR63mSPEPFKaffemoBjtN2qn4=
+X-Authority-Analysis: v=2.4 cv=SuAFe/O0 c=1 sm=1 tr=0 ts=6ab27b68 cx=c_pps
+ a=JIY1xp/sjQ9K5JH4t62bdg==:117 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
  a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22 a=EUspDBNiAAAA:8
- a=W_IakApU47TVE70GsD8A:9 a=QEXdDO2ut3YA:10 a=vmgOmaN-Xu0dpDh8OwbV:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22 a=EUspDBNiAAAA:8
+ a=WPyFHUJR_z9Wl-EIX7EA:9 a=QEXdDO2ut3YA:10 a=tNoRWFLymzeba-QzToBc:22
+X-Proofpoint-ORIG-GUID: zGj9-AONPxuqWq9o0ZTlS5lhcxyXnKEh
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-09-22_01,2026-09-21_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 adultscore=0 priorityscore=1501 suspectscore=0 malwarescore=0
- lowpriorityscore=0 phishscore=0 bulkscore=0 clxscore=1015 spamscore=0
+ lowpriorityscore=0 clxscore=1015 suspectscore=0 spamscore=0 phishscore=0
+ malwarescore=0 priorityscore=1501 adultscore=0 impostorscore=0 bulkscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609220187
 
-The self-tests for this driver have been fixed. The crypto algorithms
-are only registered if the user explicitly requests it with the provided
-module parameter defaulting to false. There's no reason to further keep
-it unbuildable with the BROKEN label.
+This driver is disabled in arm64 defconfig but one of its
+functionalities - scaling down the interconnect votes to 0 when unused -
+will be moved to an always-enabled core qce driver. This upcoming core
+driver will also be in charge of registering the qcrypto device on the
+auxiliary bus so that it may be enabled if desired.
 
-While at it: update the Kconfig description by saying this is an
-"offloader" and not an "accelerator".
+As the first step: convert the driver to using the auxiliary bus and
+remove the interconnect management from the code. Update the power
+management as required and make sure to use the parent struct device
+for DMA.
 
 Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
 ---
- arch/arm/configs/multi_v7_defconfig |  1 +
- arch/arm64/configs/defconfig        |  1 +
- drivers/crypto/Kconfig              | 22 +++++++++++++---------
- 3 files changed, 15 insertions(+), 9 deletions(-)
+ drivers/crypto/Kconfig        |  2 +
+ drivers/crypto/qce/aead.c     | 12 +++---
+ drivers/crypto/qce/core.c     | 93 +++++++++++++++++++------------------------
+ drivers/crypto/qce/core.h     |  5 ++-
+ drivers/crypto/qce/sha.c      | 12 +++---
+ drivers/crypto/qce/skcipher.c | 12 +++---
+ 6 files changed, 66 insertions(+), 70 deletions(-)
 
-diff --git a/arch/arm/configs/multi_v7_defconfig b/arch/arm/configs/multi_v7_defconfig
-index f9b8dbf9318c9d4947e56ef0159311634bf0c1ee..2d6292f8cab39596b540084fbd8b30f4c25cd4ff 100644
---- a/arch/arm/configs/multi_v7_defconfig
-+++ b/arch/arm/configs/multi_v7_defconfig
-@@ -1323,6 +1323,7 @@ CONFIG_CRYPTO_DEV_ATMEL_AES=m
- CONFIG_CRYPTO_DEV_ATMEL_TDES=m
- CONFIG_CRYPTO_DEV_ATMEL_SHA=m
- CONFIG_CRYPTO_DEV_MARVELL_CESA=m
-+CONFIG_CRYPTO_DEV_QCE=m
- CONFIG_CRYPTO_DEV_ROCKCHIP=m
- CONFIG_CRYPTO_DEV_STM32_HASH=m
- CONFIG_CRYPTO_DEV_STM32_CRYP=m
-diff --git a/arch/arm64/configs/defconfig b/arch/arm64/configs/defconfig
-index 6ec8d3a69c98e0da38465010d11166bb0e058f4a..e80927f87ff26fe3f51db6409f509fb99ad614a0 100644
---- a/arch/arm64/configs/defconfig
-+++ b/arch/arm64/configs/defconfig
-@@ -1949,6 +1949,7 @@ CONFIG_CRYPTO_AES_ARM64_CE_CCM=y
- CONFIG_CRYPTO_DEV_SUN8I_CE=m
- CONFIG_CRYPTO_DEV_FSL_CAAM=m
- CONFIG_CRYPTO_DEV_FSL_DPAA2_CAAM=m
-+CONFIG_CRYPTO_DEV_QCE=m
- CONFIG_CRYPTO_DEV_TEGRA=m
- CONFIG_CRYPTO_DEV_ZYNQMP_AES=m
- CONFIG_CRYPTO_DEV_ZYNQMP_SHA3=m
 diff --git a/drivers/crypto/Kconfig b/drivers/crypto/Kconfig
-index 0189dfdcbbe11098ead0ea194293422a31d8fe65..adcbe15851899917fb3039efe89a77c8fe712bf1 100644
+index adcbe15851899917fb3039efe89a77c8fe712bf1..b3fa1f6135bce345cc58387aac7ba803a82aff69 100644
 --- a/drivers/crypto/Kconfig
 +++ b/drivers/crypto/Kconfig
-@@ -527,17 +527,21 @@ source "drivers/crypto/marvell/Kconfig"
- source "drivers/crypto/intel/Kconfig"
- 
- config CRYPTO_DEV_QCE
--	tristate "Qualcomm crypto engine accelerator"
--	depends on (BROKEN && ARCH_QCOM) || COMPILE_TEST
-+	tristate "Qualcomm crypto engine offloader"
-+	depends on ARCH_QCOM || COMPILE_TEST
+@@ -530,6 +530,8 @@ config CRYPTO_DEV_QCE
+ 	tristate "Qualcomm crypto engine offloader"
+ 	depends on ARCH_QCOM || COMPILE_TEST
  	depends on HAS_IOMEM
++	depends on PM
++	select AUXILIARY_BUS
  	help
--	  This driver supports Qualcomm crypto engine accelerator
--	  hardware. To compile this driver as a module, choose M here. The
--	  module will be called qcrypto.
--
--	  This driver does not have exclusive access to the
--	  hardware, causing races with the secure world.  It
--	  is also slower than the CPU.
-+	  This driver supports Qualcomm crypto engine offloader hardware. To
-+	  compile this driver as a module, choose M here. The module will be
-+	  called qcrypto.
-+
-+	  NOTE: With qcrypto.do_register_algos module parameter set to true,
-+	  this driver does not have exclusive access to the hardware, and may
-+	  cause races with the secure world. It is also *slower* than the
-+	  CPU for the same algorithms. By default it will not register crypto
-+	  algorithms and only scale down the interconnect bandwidth and disable
-+	  the relevant clocks. Use qcrypto.do_register_algos=1 at your own
-+	  risk!
+ 	  This driver supports Qualcomm crypto engine offloader hardware. To
+ 	  compile this driver as a module, choose M here. The module will be
+diff --git a/drivers/crypto/qce/aead.c b/drivers/crypto/qce/aead.c
+index 37199cb50744fa3932e3404448689451b0004b77..a7bb2b7b2139d43911a72dd0d0f089f2704047b5 100644
+--- a/drivers/crypto/qce/aead.c
++++ b/drivers/crypto/qce/aead.c
+@@ -44,9 +44,9 @@ static void qce_aead_done(void *data)
+ 		dev_dbg(qce->dev, "aead dma termination error (%d)\n",
+ 			error);
+ 	if (diff_dst)
+-		dma_unmap_sg(qce->dev, rctx->src_sg, rctx->src_nents, dir_src);
++		dma_unmap_sg(qce->dma_dev, rctx->src_sg, rctx->src_nents, dir_src);
  
- config CRYPTO_DEV_QCE_SKCIPHER
- 	bool
+-	dma_unmap_sg(qce->dev, rctx->dst_sg, rctx->dst_nents, dir_dst);
++	dma_unmap_sg(qce->dma_dev, rctx->dst_sg, rctx->dst_nents, dir_dst);
+ 
+ 	if (IS_CCM(rctx->flags)) {
+ 		if (req->assoclen) {
+@@ -442,14 +442,14 @@ qce_aead_async_req_handle(struct crypto_async_request *async_req)
+ 
+ 	if (ret)
+ 		return ret;
+-	dst_nents = dma_map_sg(qce->dev, rctx->dst_sg, rctx->dst_nents, dir_dst);
++	dst_nents = dma_map_sg(qce->dma_dev, rctx->dst_sg, rctx->dst_nents, dir_dst);
+ 	if (!dst_nents) {
+ 		ret = -EIO;
+ 		goto error_free;
+ 	}
+ 
+ 	if (diff_dst) {
+-		src_nents = dma_map_sg(qce->dev, rctx->src_sg, rctx->src_nents, dir_src);
++		src_nents = dma_map_sg(qce->dma_dev, rctx->src_sg, rctx->src_nents, dir_src);
+ 		if (src_nents < 0) {
+ 			ret = src_nents;
+ 			goto error_unmap_dst;
+@@ -478,9 +478,9 @@ qce_aead_async_req_handle(struct crypto_async_request *async_req)
+ 	qce_dma_terminate_all(&qce->dma);
+ error_unmap_src:
+ 	if (diff_dst)
+-		dma_unmap_sg(qce->dev, req->src, rctx->src_nents, dir_src);
++		dma_unmap_sg(qce->dma_dev, req->src, rctx->src_nents, dir_src);
+ error_unmap_dst:
+-	dma_unmap_sg(qce->dev, rctx->dst_sg, rctx->dst_nents, dir_dst);
++	dma_unmap_sg(qce->dma_dev, rctx->dst_sg, rctx->dst_nents, dir_dst);
+ error_free:
+ 	if (IS_CCM(rctx->flags) && rctx->assoclen) {
+ 		sg_free_table(&rctx->src_tbl);
+diff --git a/drivers/crypto/qce/core.c b/drivers/crypto/qce/core.c
+index 5b1bf7a50f88c890da1f0820fb9e070b3d3f4708..31f1ad8938ab3bbe76b2ae4799eb2797efe704ed 100644
+--- a/drivers/crypto/qce/core.c
++++ b/drivers/crypto/qce/core.c
+@@ -3,15 +3,16 @@
+  * Copyright (c) 2010-2014, The Linux Foundation. All rights reserved.
+  */
+ 
++#include <linux/auxiliary_bus.h>
+ #include <linux/cleanup.h>
+ #include <linux/clk.h>
+ #include <linux/device.h>
++#include <linux/device-id/auxiliary.h>
+ #include <linux/dma-mapping.h>
+-#include <linux/interconnect.h>
+ #include <linux/interrupt.h>
+ #include <linux/module.h>
+ #include <linux/moduleparam.h>
+-#include <linux/platform_device.h>
++#include <linux/of_address.h>
+ #include <linux/pm.h>
+ #include <linux/pm_runtime.h>
+ #include <linux/types.h>
+@@ -28,8 +29,6 @@ module_param(do_register_algos, bool, 0444);
+ 
+ #define QCE_QUEUE_LENGTH	1
+ 
+-#define QCE_DEFAULT_MEM_BANDWIDTH	393600
+-
+ static const struct qce_algo_ops *qce_ops[] = {
+ #ifdef CONFIG_CRYPTO_DEV_QCE_SKCIPHER
+ 	&skcipher_ops,
+@@ -93,11 +92,6 @@ static int qce_handle_queue(struct qce_device *qce,
+ 	struct crypto_async_request *async_req, *backlog;
+ 	int ret, err;
+ 
+-	PM_RUNTIME_ACQUIRE_AUTOSUSPEND(qce->dev, pm);
+-	ret = PM_RUNTIME_ACQUIRE_ERR(&pm);
+-	if (ret)
+-		return ret;
+-
+ 	scoped_guard(mutex, &qce->lock) {
+ 		if (req)
+ 			ret = crypto_enqueue_request(&qce->queue, req);
+@@ -120,8 +114,21 @@ static int qce_handle_queue(struct qce_device *qce,
+ 			crypto_request_complete(backlog, -EINPROGRESS);
+ 	}
+ 
++	/*
++	 * Hold the device resumed across that whole window instead of just
++	 * across this function, or autosuspend could gate the engine clocks
++	 * while the DMA is still in flight.
++	 */
++	err = pm_runtime_resume_and_get(qce->dev);
++	if (err) {
++		qce->result = err;
++		schedule_work(&qce->done_work);
++		return ret;
++	}
++
+ 	err = qce_handle_request(async_req);
+ 	if (err) {
++		pm_runtime_put_autosuspend(qce->dev);
+ 		qce->result = err;
+ 		schedule_work(&qce->done_work);
+ 	}
+@@ -154,6 +161,7 @@ static int qce_async_request_enqueue(struct qce_device *qce,
+ 
+ static void qce_async_request_done(struct qce_device *qce, int ret)
+ {
++	pm_runtime_put_autosuspend(qce->dev);
+ 	qce->result = ret;
+ 	schedule_work(&qce->done_work);
+ }
+@@ -194,10 +202,12 @@ static int qce_check_version(struct qce_device *qce)
+ 	return 0;
+ }
+ 
+-static int qce_crypto_probe(struct platform_device *pdev)
++static int qce_crypto_probe(struct auxiliary_device *auxdev,
++			    const struct auxiliary_device_id *id)
+ {
+-	struct device *dev = &pdev->dev;
++	struct device *dev = &auxdev->dev;
+ 	struct qce_device *qce;
++	struct resource res;
+ 	int ret;
+ 
+ 	qce = devm_kzalloc(dev, sizeof(*qce), GFP_KERNEL);
+@@ -205,13 +215,18 @@ static int qce_crypto_probe(struct platform_device *pdev)
+ 		return -ENOMEM;
+ 
+ 	qce->dev = dev;
+-	platform_set_drvdata(pdev, qce);
++	qce->dma_dev = dev->parent;
++	auxiliary_set_drvdata(auxdev, qce);
++
++	ret = of_address_to_resource(dev->of_node, 0, &res);
++	if (ret)
++		return ret;
+ 
+-	qce->base = devm_platform_ioremap_resource(pdev, 0);
++	qce->base = devm_ioremap_resource(dev, &res);
+ 	if (IS_ERR(qce->base))
+ 		return PTR_ERR(qce->base);
+ 
+-	ret = dma_set_mask_and_coherent(dev, DMA_BIT_MASK(32));
++	ret = dma_set_mask_and_coherent(qce->dma_dev, DMA_BIT_MASK(32));
+ 	if (ret < 0)
+ 		return ret;
+ 
+@@ -227,10 +242,6 @@ static int qce_crypto_probe(struct platform_device *pdev)
+ 	if (IS_ERR(qce->bus))
+ 		return PTR_ERR(qce->bus);
+ 
+-	qce->mem_path = devm_of_icc_get(dev, "memory");
+-	if (IS_ERR(qce->mem_path))
+-		return PTR_ERR(qce->mem_path);
+-
+ 	/*
+ 	 * Enable runtime PM after clocks and ICC path are acquired so that
+ 	 * the resume callback can enable clocks and apply the ICC bandwidth
+@@ -240,7 +251,10 @@ static int qce_crypto_probe(struct platform_device *pdev)
+ 	if (ret)
+ 		return ret;
+ 
+-	PM_RUNTIME_ACQUIRE_AUTOSUSPEND(dev, pm);
++	pm_runtime_set_autosuspend_delay(dev, 100);
++	pm_runtime_use_autosuspend(dev);
++
++	PM_RUNTIME_ACQUIRE_IF_ENABLED_AUTOSUSPEND(dev, pm);
+ 	ret = PM_RUNTIME_ACQUIRE_ERR(&pm);
+ 	if (ret)
+ 		return ret;
+@@ -269,31 +283,17 @@ static int qce_crypto_probe(struct platform_device *pdev)
+ 			return ret;
+ 	}
+ 
+-	/* Configure autosuspend after successful init */
+-	pm_runtime_set_autosuspend_delay(dev, 100);
+-	pm_runtime_use_autosuspend(dev);
+-	pm_runtime_mark_last_busy(dev);
+-
+ 	return 0;
+ }
+ 
+ static int qce_runtime_suspend(struct device *dev)
+ {
+ 	struct qce_device *qce = dev_get_drvdata(dev);
+-	int ret;
+ 
+ 	clk_disable_unprepare(qce->core);
+ 	clk_disable_unprepare(qce->iface);
+ 	clk_disable_unprepare(qce->bus);
+ 
+-	ret = icc_set_bw(qce->mem_path, 0, 0);
+-	if (ret) {
+-		clk_prepare_enable(qce->bus);
+-		clk_prepare_enable(qce->iface);
+-		clk_prepare_enable(qce->core);
+-		return ret;
+-	}
+-
+ 	return 0;
+ }
+ 
+@@ -302,14 +302,9 @@ static int qce_runtime_resume(struct device *dev)
+ 	struct qce_device *qce = dev_get_drvdata(dev);
+ 	int ret;
+ 
+-	ret = icc_set_bw(qce->mem_path, QCE_DEFAULT_MEM_BANDWIDTH,
+-			 QCE_DEFAULT_MEM_BANDWIDTH);
+-	if (ret)
+-		return ret;
+-
+ 	ret = clk_prepare_enable(qce->core);
+ 	if (ret)
+-		goto err_core;
++		return ret;
+ 
+ 	ret = clk_prepare_enable(qce->iface);
+ 	if (ret)
+@@ -325,8 +320,7 @@ static int qce_runtime_resume(struct device *dev)
+ 	clk_disable_unprepare(qce->iface);
+ err_iface:
+ 	clk_disable_unprepare(qce->core);
+-err_core:
+-	icc_set_bw(qce->mem_path, 0, 0);
++
+ 	return ret;
+ }
+ 
+@@ -335,25 +329,22 @@ static const struct dev_pm_ops qce_crypto_pm_ops = {
+ 	SYSTEM_SLEEP_PM_OPS(pm_runtime_force_suspend, pm_runtime_force_resume)
+ };
+ 
+-static const struct of_device_id qce_crypto_of_match[] = {
+-	{ .compatible = "qcom,crypto-v5.1", },
+-	{ .compatible = "qcom,crypto-v5.4", },
+-	{ .compatible = "qcom,qce", },
++static const struct auxiliary_device_id qce_crypto_ids[] = {
++	{ .name = "qce.crypto", },
+ 	{}
+ };
+-MODULE_DEVICE_TABLE(of, qce_crypto_of_match);
++MODULE_DEVICE_TABLE(auxiliary, qce_crypto_ids);
+ 
+-static struct platform_driver qce_crypto_driver = {
++static struct auxiliary_driver qce_crypto_driver = {
+ 	.probe = qce_crypto_probe,
++	.id_table = qce_crypto_ids,
+ 	.driver = {
+-		.name = KBUILD_MODNAME,
+-		.of_match_table = qce_crypto_of_match,
++		.name = "qce-crypto",
+ 		.pm = pm_ptr(&qce_crypto_pm_ops),
+ 	},
+ };
+-module_platform_driver(qce_crypto_driver);
++module_auxiliary_driver(qce_crypto_driver);
+ 
+ MODULE_LICENSE("GPL v2");
+ MODULE_DESCRIPTION("Qualcomm crypto engine driver");
+-MODULE_ALIAS("platform:" KBUILD_MODNAME);
+ MODULE_AUTHOR("The Linux Foundation");
+diff --git a/drivers/crypto/qce/core.h b/drivers/crypto/qce/core.h
+index eb6fa7a8b64a81daf9ad5304a3ae4e5e597a70b8..6eda6e617b811420c0c3cc53988cb15a23abafe2 100644
+--- a/drivers/crypto/qce/core.h
++++ b/drivers/crypto/qce/core.h
+@@ -20,6 +20,9 @@
+  * @result: result of current transform
+  * @base: virtual IO base
+  * @dev: pointer to device structure
++ * @dma_dev: pointer to the device to use for DMA mapping calls; this is the
++ *           auxiliary bus device's parent, which is the one that actually
++ *           went through DMA/IOMMU configuration
+  * @core: core device clock
+  * @iface: interface clock
+  * @bus: bus clock
+@@ -37,8 +40,8 @@ struct qce_device {
+ 	int result;
+ 	void __iomem *base;
+ 	struct device *dev;
++	struct device *dma_dev;
+ 	struct clk *core, *iface, *bus;
+-	struct icc_path *mem_path;
+ 	struct qce_dma_data dma;
+ 	int burst_size;
+ 	unsigned int pipe_pair_id;
+diff --git a/drivers/crypto/qce/sha.c b/drivers/crypto/qce/sha.c
+index 8c12c072f4a9da2d97a51f29cf8ca22a6411063e..58114d06e60cd5925d8445ec0e58d56433a8a67d 100644
+--- a/drivers/crypto/qce/sha.c
++++ b/drivers/crypto/qce/sha.c
+@@ -47,8 +47,8 @@ static void qce_ahash_done(void *data)
+ 	if (error)
+ 		dev_dbg(qce->dev, "ahash dma termination error (%d)\n", error);
+ 
+-	dma_unmap_sg(qce->dev, req->src, rctx->src_nents, DMA_TO_DEVICE);
+-	dma_unmap_sg(qce->dev, &rctx->result_sg, 1, DMA_FROM_DEVICE);
++	dma_unmap_sg(qce->dma_dev, req->src, rctx->src_nents, DMA_TO_DEVICE);
++	dma_unmap_sg(qce->dma_dev, &rctx->result_sg, 1, DMA_FROM_DEVICE);
+ 
+ 	memcpy(rctx->digest, result->auth_iv, digestsize);
+ 	if (req->result && rctx->last_blk)
+@@ -93,13 +93,13 @@ static int qce_ahash_async_req_handle(struct crypto_async_request *async_req)
+ 		return rctx->src_nents;
+ 	}
+ 
+-	ret = dma_map_sg(qce->dev, req->src, rctx->src_nents, DMA_TO_DEVICE);
++	ret = dma_map_sg(qce->dma_dev, req->src, rctx->src_nents, DMA_TO_DEVICE);
+ 	if (!ret)
+ 		return -EIO;
+ 
+ 	sg_init_one(&rctx->result_sg, qce->dma.result_buf, QCE_RESULT_BUF_SZ);
+ 
+-	ret = dma_map_sg(qce->dev, &rctx->result_sg, 1, DMA_FROM_DEVICE);
++	ret = dma_map_sg(qce->dma_dev, &rctx->result_sg, 1, DMA_FROM_DEVICE);
+ 	if (!ret) {
+ 		ret = -EIO;
+ 		goto error_unmap_src;
+@@ -121,9 +121,9 @@ static int qce_ahash_async_req_handle(struct crypto_async_request *async_req)
+ error_terminate:
+ 	qce_dma_terminate_all(&qce->dma);
+ error_unmap_dst:
+-	dma_unmap_sg(qce->dev, &rctx->result_sg, 1, DMA_FROM_DEVICE);
++	dma_unmap_sg(qce->dma_dev, &rctx->result_sg, 1, DMA_FROM_DEVICE);
+ error_unmap_src:
+-	dma_unmap_sg(qce->dev, req->src, rctx->src_nents, DMA_TO_DEVICE);
++	dma_unmap_sg(qce->dma_dev, req->src, rctx->src_nents, DMA_TO_DEVICE);
+ 	return ret;
+ }
+ 
+diff --git a/drivers/crypto/qce/skcipher.c b/drivers/crypto/qce/skcipher.c
+index 7abc1d7b1cf0403c456f3b3ce1f28820839a5473..37c16fbfe245c66aa12fb17fdd5d06d7aee2abba 100644
+--- a/drivers/crypto/qce/skcipher.c
++++ b/drivers/crypto/qce/skcipher.c
+@@ -49,8 +49,8 @@ static void qce_skcipher_done(void *data)
+ 			error);
+ 
+ 	if (diff_dst)
+-		dma_unmap_sg(qce->dev, rctx->src_sg, rctx->src_nents, dir_src);
+-	dma_unmap_sg(qce->dev, rctx->dst_sg, rctx->dst_nents, dir_dst);
++		dma_unmap_sg(qce->dma_dev, rctx->src_sg, rctx->src_nents, dir_src);
++	dma_unmap_sg(qce->dma_dev, rctx->dst_sg, rctx->dst_nents, dir_dst);
+ 
+ 	sg_free_table(&rctx->dst_tbl);
+ 
+@@ -139,14 +139,14 @@ qce_skcipher_async_req_handle(struct crypto_async_request *async_req)
+ 	sg_mark_end(sg);
+ 	rctx->dst_sg = rctx->dst_tbl.sgl;
+ 
+-	dst_nents = dma_map_sg(qce->dev, rctx->dst_sg, rctx->dst_nents, dir_dst);
++	dst_nents = dma_map_sg(qce->dma_dev, rctx->dst_sg, rctx->dst_nents, dir_dst);
+ 	if (!dst_nents) {
+ 		ret = -EIO;
+ 		goto error_free;
+ 	}
+ 
+ 	if (diff_dst) {
+-		src_nents = dma_map_sg(qce->dev, req->src, rctx->src_nents, dir_src);
++		src_nents = dma_map_sg(qce->dma_dev, req->src, rctx->src_nents, dir_src);
+ 		if (!src_nents) {
+ 			ret = -EIO;
+ 			goto error_unmap_dst;
+@@ -175,9 +175,9 @@ qce_skcipher_async_req_handle(struct crypto_async_request *async_req)
+ 	qce_dma_terminate_all(&qce->dma);
+ error_unmap_src:
+ 	if (diff_dst)
+-		dma_unmap_sg(qce->dev, req->src, rctx->src_nents, dir_src);
++		dma_unmap_sg(qce->dma_dev, req->src, rctx->src_nents, dir_src);
+ error_unmap_dst:
+-	dma_unmap_sg(qce->dev, rctx->dst_sg, rctx->dst_nents, dir_dst);
++	dma_unmap_sg(qce->dma_dev, rctx->dst_sg, rctx->dst_nents, dir_dst);
+ error_free:
+ 	sg_free_table(&rctx->dst_tbl);
+ 	return ret;
 
 -- 
 2.47.3
