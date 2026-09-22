@@ -1,266 +1,176 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 549D63BB11A
-	for <linux-arm-msm@vger.kernel.org>; Tue, 22 Sep 2026 16:58:31 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6A245572661
+	for <linux-arm-msm@vger.kernel.org>; Tue, 22 Sep 2026 17:08:17 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790096312; cv=none; b=D6QBHeiB6mIN8axW4Z2VqJFYujdCeK8FjB/AraeJVX6UARqOgdzX8vzCboHla0D/9UrZZ1FnqnNaXvBfH/0B/PyIeWY4tOQnbd79329gqtNotpOk/cEGPZlJV1NmgcGPnA+L6halx8sxyvmk5b9uaM0j5pFGlV9U/Zn0Drho7Qo=
+	t=1790096898; cv=none; b=cevf0XBavX3rWxDJahxZVJHD1qu+IkXYQsgJPfth7t55a+9pxUoN+NknXg1l270CrvxVvWU8LXGwxXVc3P4aA0HXkiYK/H4pCzZoxnbRAE9WxxXWqShG/NATo6ytHuAastnVSHL8fKCzz5dde17iRbnglaV3TEjLXLVYfpeHVBg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790096312; c=relaxed/simple;
-	bh=Q2oNZnZF0RuwKE57dbelijaEFxtwpHSXaVnTUH56ErQ=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=pnGMHFYRSCl/YVAw9QtfhF3lJ1svyXMEPxIJ4nofg1vHhiz1bfYkCh5IO1RnYYKD/ch1TMJJvkjfgO0VTqqpNlySM2Jh3hRHwDGk/PDmrutosPbabpO2MAJeUs2FC7C/ZnzkXfWQpdsTixmuhiKe+BKau+T/Q4eQQjWNn6nSPAE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=O8Y20SBi; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=NqwtEX7/; arc=none smtp.client-ip=205.220.168.131
+	s=arc-20240116; t=1790096898; c=relaxed/simple;
+	bh=iD/zzZgmRhJW4Nl5vQPx14/d2nileWoW87yndp3Ml1c=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=J08TBk2Cv1ud+cQSdSgqiK3FwhRL0TmVwkFC9pv9u1i7+chlArPAeKUJqIdIQgjJdbxo8j9OpWvvfymS1ZwnzANzhBc034CXnYdkPLDRjpx0vuCmLdwTxghjwea1VSaXJmgHHTwsQ9+J1ylJmFSMg9dVKhXSI5203cPcZhazlCc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=Svvt2SmY; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=YqtxHqxZ; arc=none smtp.client-ip=205.220.180.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="O8Y20SBi";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="NqwtEX7/"
-Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68MEjE6w4110023
-	for <linux-arm-msm@vger.kernel.org>; Tue, 22 Sep 2026 16:58:30 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="Svvt2SmY";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="YqtxHqxZ"
+Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68MEjgA8898632
+	for <linux-arm-msm@vger.kernel.org>; Tue, 22 Sep 2026 17:08:16 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:message-id
-	:mime-version:subject:to; s=qcppdkim1; bh=HWbXsFJPbLflZBrmECKjR7
-	5TjnySrlY4w+9Ig3q1ts0=; b=O8Y20SBiDAe1l1FvgDUe05bGa/ZxkhzlEgdy+g
-	myAoTRYGnBYpMGVp8ERaiWMVkHeS1qFWwiAaya13bTLO8eeltxXmf33ZbyhdD9Tx
-	5QnLqcZnv58R4tavu0liDN0GOscbwFt7w1kJze4dN/jrogCRYb0n4+SDUtUFzihA
-	/vq2HkqvVAni3zPL0EJK313HcrfqLdhvFs1JJ9o5DaCjzIxuQlFvbulBPVCpP8UO
-	65TWUIywpa395feghh86szO59Fwn+A3yfLVQwo/Tbmgk+XcNXoInppyXCVUwJypU
-	cCnWvqV26rIyjo0Pf/hEn3DWxyOBMfZog+zsOadinsH0vj3A==
-Received: from mail-pj1-f70.google.com (mail-pj1-f70.google.com [209.85.216.70])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gurnt9n7m-1
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	x8oRSt+sEOboeNFCv168cePKrrWr+FqZQJjlgNOUwk0=; b=Svvt2SmY3+ymXzIc
+	CWQFf9FtmUpvg7wLbV3aChiv1BvdzWYKR/XATRtCRlgqY2s232oIzC2ikWZSnQXu
+	vKmpSVO+G+nqMkEI7Qt5YfXiDjx+htW+pI164UPoJdMlFp3uP0aLazcfg0XJhp7w
+	gwPTVTV8fOUliKjD0nluzlof3bxyI6pEtCzXziTVhi4N3kf6Oi0E2dXu7Zon96Os
+	ZVDi5Y6Y5T+LYGee5fJ0vyUlGU6kCeTfIQCLO/hTzJUFMgKkvsIthosPABrg3MK4
+	8e6z3f8/giPGT/MNioYR4oltQpimlJdnMNmZa/7pbfyFqtxo0UAC9ovG0zBojsOe
+	EJChxw==
+Received: from mail-ua1-f72.google.com (mail-ua1-f72.google.com [209.85.222.72])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gueybkyk2-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 22 Sep 2026 16:58:30 +0000 (GMT)
-Received: by mail-pj1-f70.google.com with SMTP id 98e67ed59e1d1-38f97b3f853so124218a91.3
-        for <linux-arm-msm@vger.kernel.org>; Tue, 22 Sep 2026 09:58:30 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Tue, 22 Sep 2026 17:08:16 +0000 (GMT)
+Received: by mail-ua1-f72.google.com with SMTP id a1e0cc1a2514c-97cb18cfa04so46601241.0
+        for <linux-arm-msm@vger.kernel.org>; Tue, 22 Sep 2026 10:08:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1790096310; x=1790701110; darn=vger.kernel.org;
-        h=cc:to:message-id:content-transfer-encoding:content-type
-         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=HWbXsFJPbLflZBrmECKjR75TjnySrlY4w+9Ig3q1ts0=;
-        b=NqwtEX7/9Yx9or4W7FX+i4pgrGZ+6sD+RBzebQYMm1iAR6S+5XJxrsT1AcRQhPUy67
-         srNn3dadztpYxPUoMUT1yUWLRuQVtpmbSd4tVyiCDdmvEqJpyz6hF5QpA3OJcUsNX1H3
-         HuU3r5vra/KShhxXQcUI2qeeD/+bLvXiBVPKjHyPU+qe9y4zCHYyOX2RC8K+2RESZJXZ
-         7sKHabweStCY9WEBPrO0HVIDYgoq4Es4IktoA3aFEa9+Kwn07jpt8fWY4eTrLbK7EwG8
-         3nEnttrvD5B+VvH/UKwvrRNmwVGv3mtgblVS7TAYF/sWsUSi1k0KCjuM9zZuRqzEQbWy
-         aRGw==
+        d=oss.qualcomm.com; s=google; t=1790096895; x=1790701695; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=x8oRSt+sEOboeNFCv168cePKrrWr+FqZQJjlgNOUwk0=;
+        b=YqtxHqxZQbhoKmmMaEipVx19GlMYZcqpSAUTjC6SMlWIoGF726grZESiZ2VeAbtNN/
+         HaioNGT0h+vGjVu9t9E92XABA/yYsvneaxz3BUvmBvn/Mujm44c5EjJI7xRdy40f1r12
+         hVue2LCl1Yp9zsJgh+6FN4BQ7isFSc0XCchPOuxt/GqpHINhw5VCy/NLIlxduZHUiL3t
+         6zGv8p70tNTfhv0nn8T5DFOac7BuYNr4kyTZcU+w+BBc6TU0UpdP0G9lgx7jzqQPXXp4
+         PFWJ64ndEh+sM0yLwCiqGTmJ9+sYDNcCP8UPZnEi3pPVNRt3bDyiRnjBQQmgDwkWjl36
+         oGXA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790096310; x=1790701110;
-        h=cc:to:message-id:content-transfer-encoding:content-type
-         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to:content-type;
-        bh=HWbXsFJPbLflZBrmECKjR75TjnySrlY4w+9Ig3q1ts0=;
-        b=jdBhbyAdiwQMnMm1D+AtNRWRhB5E45L5HngUibd/MHpEOBwCGhdTzoGDfkOpBAYD9T
-         QDCby2draZZXnpSp/UKmOTO+Dh3ND7VLaGacHo+BzXghtOnA8MBteXzdG7l0nAdQ2nyx
-         mi9dbU9v1TgkQKVIoZA2bgafyWVhvmX1uhSO9AnoLsY+RNkvokgreuaZnIBxbC/Wecsg
-         jdOJTDeLJvUhm5GRW8WugUVfxfVRWL6Y+P3/xA6K+BESEQv47sxRZ1nd1AmDtEVPO+xj
-         81WGmgveYfgQNmppciVm5GUkeTFZ+f0xH2M6wgsey3OKuWO7JX7nAfCM4mm4bNLNBeJI
-         t+0w==
-X-Gm-Message-State: AFuF++mZecVU088b+yjLtyu6z6YNFck0mC/Chiy5qIKd47VSbRevB3AI
-	4kfTe4IC7UzYDgpXcxVTtEypEDYCd38Npho7ZK0jPgCdQSxfO8plqvy/r7w5Y54O9UbELZEz/j+
-	6GqEnWyAAsJ6jQ6ZKflIVOKI1Vs5fbVK+NF0Az+YRi61uh99wWquXeHHObDfSY9MTdMF7
-X-Gm-Gg: AYBFou30JzWGhcB4gz1EDlB9MyYEbwZg6vCL26KBInZRW8u7Fh45TTyUZOb4gBwdI72
-	dqingA7H6tNJw4puLkh6OW6vGUR5n1r9eR0x9o68OFYD5dfXupoIVWP3vIsHHubYNqF34Sy0QYK
-	kqvu11adduZwWOnxcI6OUVt35IZWhmBLhaY87BHsDDdTAA9gLoqaJ08UgHBwF9Rb44Q5xxFaju5
-	5vMDgvDSB08U8QZVrlRKIDbJP3ahpzg63Y7K5gnSrZXvmq6JXZx/W4QgdusXVBJ3rlU8UP+wy/m
-	/wj4beTIh5xefQHIJCkaZu1j2N5o5LxSzGk/V9M8GvB3/SWGLzA0X+AAx8iUi+d/6ZqwiYccyXK
-	uM7+dvXwtSS7NrtwJ1iY798bGjQAxujEddUbhF5+rFbx8z0Q8nHeYGw==
-X-Received: by 2002:a17:90b:1c09:b0:39e:237c:50e0 with SMTP id 98e67ed59e1d1-3a07e4a2554mr94894a91.13.1790096309610;
-        Tue, 22 Sep 2026 09:58:29 -0700 (PDT)
-X-Received: by 2002:a17:90b:1c09:b0:39e:237c:50e0 with SMTP id 98e67ed59e1d1-3a07e4a2554mr94870a91.13.1790096309084;
-        Tue, 22 Sep 2026 09:58:29 -0700 (PDT)
-Received: from hu-jboody-lv.qualcomm.com (Global_NAT1.qualcomm.com. [129.46.96.20])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3a07dc7c7b0sm296927a91.2.2026.09.22.09.58.27
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 22 Sep 2026 09:58:28 -0700 (PDT)
-From: Jeffrey Boody <jeffrey.boody@oss.qualcomm.com>
-Date: Tue, 22 Sep 2026 09:57:33 -0700
-Subject: [PATCH v2] dma-fence: deliver set_deadline callback even if fence
- is already signaled
+        d=1e100.net; s=20260707; t=1790096895; x=1790701695;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=x8oRSt+sEOboeNFCv168cePKrrWr+FqZQJjlgNOUwk0=;
+        b=ZgpVteFlnRnEVI7kVQAxGGULj7hRKDQP0A8EAZnDKBocOYn6MVObT4/yCm4YFaScVh
+         FtBIbpwken879pCSAzucScbc0N18RBmURza4ZfAHzDsRwx96ht8n9N4POzjl9/IXxxk0
+         uCf1bQTjFl/EUKhf3vOQ42SSAS3rzifW0rLNOhy0P9UzT11CJiL5a0eatG8EtpVtt68M
+         jpNQMPPI/Y7axsgyxtePPzUoegYgWBVcDdrz5tWBHypymo9h9Fz3kKql2U7hqf4DdenM
+         3/vsZ4xUto/G2sP/1E7bO1o9oQeb7OPz6nNL78vjfIgAokSCoS9k5+YJuaNSY1sDRM20
+         yx4Q==
+X-Gm-Message-State: AFuF++mj2b7unaVaAd+8FBLVL0dOQ2zMEGs8kbI5dqau9eJqwjRoD+tl
+	2Xu0lBEPMVnTANocfOnEAvjgfGwlET1FkfqZcup3sR/LyqvbGim/SPnIy5GHA5pkQd7zyC9OWbQ
+	LQAJ26Bh6GjWbxBC1ft+wVX0VMNngSxKxc8lt4sXB32/gPTKHkYksCqMyabRk+vizS/RY
+X-Gm-Gg: AYBFou0V1hvhwAwZY7LvyiYTfCjDRFmNW3sf3gm78hwQTDt3KE3xhFjio23axo2OarW
+	5vZVOq7fNRNP5GCsWIlXQtzDKdsCoFRAVxhKF/LGHzWuH6FWLudU7aLLA3PFmli2bc4OHdHeP6u
+	zYI+/5yBpFXA1DmbhOOcWHko+hxrjFBjJRyYge41MsOxWCQfH/gnTgH8R4etDIZ8uys36P+WHEM
+	6I9ANl4JCcJ4Hxvc+l/2FU20K0E15nNqzDVN4oj2p49VM/QXb+p9q47NzEI7lU43qpp/6Imm5tV
+	k3NYXYb+AYoe2raJVdus+Yre/FU9NJ2zB88sg1ns7QZle2QiNgIGCpGgh9HnrCYR4+ZwzDdwHQx
+	cOulSYFImuvt/HXJQ6xLprptFbivKc3FaEVQ+iY0=
+X-Received: by 2002:a05:6102:8094:b0:7a7:19aa:8a85 with SMTP id ada2fe7eead31-7a719aa90a9mr7105791137.32.1790096895156;
+        Tue, 22 Sep 2026 10:08:15 -0700 (PDT)
+X-Received: by 2002:a05:6102:8094:b0:7a7:19aa:8a85 with SMTP id ada2fe7eead31-7a719aa90a9mr7105724137.32.1790096894617;
+        Tue, 22 Sep 2026 10:08:14 -0700 (PDT)
+Received: from [10.243.142.186] ([212.136.9.4])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-49fde1c0f6csm5359905e9.3.2026.09.22.10.08.11
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 22 Sep 2026 10:08:13 -0700 (PDT)
+Message-ID: <3f5da6c9-7394-4452-92f8-b773cd34aecf@oss.qualcomm.com>
+Date: Tue, 22 Sep 2026 18:08:11 +0100
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 1/4] net: qrtr: Allow the host QRTR to assign a unique
+ node id
+To: manivannan.sadhasivam@oss.qualcomm.com,
+        Manivannan Sadhasivam <mani@kernel.org>,
+        "David S. Miller" <davem@davemloft.net>,
+        Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>,
+        Paolo Abeni <pabeni@redhat.com>, Simon Horman <horms@kernel.org>,
+        Jeff Johnson <jjohnson@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, netdev@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-wireless@vger.kernel.org,
+        ath11k@lists.infradead.org, ath12k@lists.infradead.org,
+        Bjorn Andersson <andersson@kernel.org>,
+        Chris Lew <christopher.lew@oss.qualcomm.com>,
+        Deepak Kumar Singh <deepak.singh@oss.qualcomm.com>,
+        Raj Kumar Bhagat <raj.bhagat@oss.qualcomm.com>,
+        Juha-Matti Tilli <juha-matti.tilli@iki.fi>,
+        Jeff Hugo <jeff.hugo@oss.qualcomm.com>
+References: <20260921-qrtr-multi-ep-v2-0-27dd80d841a0@oss.qualcomm.com>
+ <20260921-qrtr-multi-ep-v2-1-27dd80d841a0@oss.qualcomm.com>
+Content-Language: en-US
+From: Youssef Samir <youssef.abdulrahman@oss.qualcomm.com>
+In-Reply-To: <20260921-qrtr-multi-ep-v2-1-27dd80d841a0@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260922-dma-fence-set-deadline-v2-1-2338d6fac9aa@oss.qualcomm.com>
-X-B4-Tracking: v=1; b=H4sIAHyzsmoC/yXMQQrCQAxG4auUrA3UQTrWq4iLdPJXIzrKpBWh9
- O6OuvwW7y3kKAanQ7NQwcvcHrkibBpKF8lnsGk1hTZ0bb+NrHfhETmBHRMrRG+WwRLjPu469DI
- o1fhZMNr7Nz6e/vZ5uCJN3xut6weRyXDvegAAAA==
-X-Change-ID: 20260917-dma-fence-set-deadline-a778746e9abd
-To: Sumit Semwal <sumit.semwal@linaro.org>,
-        =?utf-8?q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
-        Rob Clark <robin.clark@oss.qualcomm.com>,
-        Dmitry Baryshkov <lumag@kernel.org>,
-        Abhinav Kumar <abhinav.kumar@linux.dev>,
-        Jessica Zhang <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>,
-        Marijn Suijten <marijn.suijten@somainline.org>,
-        David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>
-Cc: linux-arm-msm@vger.kernel.org, linux-media@vger.kernel.org,
-        dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org,
-        linux-kernel@vger.kernel.org, freedreno@lists.freedesktop.org,
-        Jeffrey Boody <jeffrey.boody@oss.qualcomm.com>,
-        Jeff Boody <jeffrey.boody@oss.qualcomm.com>
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1790096307; l=5741;
- i=jeffrey.boody@oss.qualcomm.com; s=20260917; h=from:subject:message-id;
- bh=Q2oNZnZF0RuwKE57dbelijaEFxtwpHSXaVnTUH56ErQ=;
- b=w7w69/znW7DKQRjZ64vTloJSfKKJbep3F6kIELhdQ43C15+UqWoC8tDpDZr9mYXQqim304Ylp
- 5JqoOXZ97emD8q/IM9cYC+h1hALzXbDomS9D4tHSa2KBuNFFczDdZ7A
-X-Developer-Key: i=jeffrey.boody@oss.qualcomm.com; a=ed25519;
- pk=jfv+xezpcWlcNCnNmb0YYQmKBN9R4nYNB4N6GyqTBkg=
-X-Proofpoint-ORIG-GUID: CAXGHGrkPU5UmyzDZKGkvcO6MrFAzYu9
-X-Authority-Analysis: v=2.4 cv=eauo7LEH c=1 sm=1 tr=0 ts=6ab2b3b6 cx=c_pps
- a=0uOsjrqzRL749jD1oC5vDA==:117 a=ouPCqIW2jiPt+lZRy3xVPw==:17
+X-Authority-Analysis: v=2.4 cv=bP6Ds/+Z c=1 sm=1 tr=0 ts=6ab2b600 cx=c_pps
+ a=ULNsgckmlI/WJG3HAyAuOQ==:117 a=dNlqnMcrdpbb+gQrTujlOQ==:17
  a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
- a=EUspDBNiAAAA:8 a=ymHyVybfssQjcaON3AkA:9 a=QEXdDO2ut3YA:10
- a=mQ_c8vxmzFEMiUWkPHU9:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTIyMDI0NyBTYWx0ZWRfXzWUORIUXfqvz
- Vxx2JH0aotyoWsgQi9cFFh2+/5XuPGhJp2+PVK+l6y89oBlKj2krM1z+hfsAWY3g/GxSPrkd+/M
- Bm+DFalm8wyjWTv2Qw8EgRhjSEWmuGkgyleMEmg8Pv3KW/F4jATSP7AoWHwFTwA6H28J6MXF16s
- 7SoDD2+b94J7nggfLTtHzky2XLS7xV4sG7KpVpR37aAS6VglgEQQyNn/jUvPy9MWdiUz8hJSx/S
- 2k6tXf7cHmeL8rsIgk7jbmOlp7a28Xrxv/9VXaz+vRCAi79KsrhXSEXGNY5CReAVbG733JJ+xAI
- zfpBMRgtrypUWpsFA+cRM3HXm7VMohCgOMfXKeMJm5VEaW64xLAvDjFuxEDsNcmKVDBHJSEBsGS
- muFdObEitDIvZtttwbQxGNsROhyyBnhUDvVyh2urBQ5J8UUP+yL8lOMcxAT9xOegw40Ck7+Zpor
- 8V2iobHPcpwRBBgQjYw==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTIyMDI0NyBTYWx0ZWRfX5YiE363HM7Cx
- 2NGjXUKGdUgXfFQAZBF8L4cFFUIM9UpLPRAeFaTMYnpCyaaigf0aNsJpJEIdAUZpP7/SQx3IdMy
- nhVYKzchcG+M1OCM/inCovvw9iNRu3k=
-X-Proofpoint-GUID: CAXGHGrkPU5UmyzDZKGkvcO6MrFAzYu9
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_glEPmIy2e8OvE2BGh3C:22
+ a=JX_TeLtU1EXCEf5LEwoA:9 a=QEXdDO2ut3YA:10 a=1WsBpfsz9X-RYQiigVTh:22
+X-Proofpoint-ORIG-GUID: qscWUD9F5-_BG7WDAongAkYGu8xbfvRm
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTIyMDI1MCBTYWx0ZWRfX+vUd16pkPrfO
+ aYXcTwUjMCpA1xjFz7qEQDnKwo/YSv9OyWUGC8iS53fir7NNBnhsWI89QL+/2LEhb080xmrG58F
+ 0TVGfk9v7uG/LWAzUP1Lz6NNbjjnx0bDX6WOYYSOp2HqoN21hFjdRNo40JqovS2o4MdNsQJcw5j
+ pi7jEScUCl08cl/q3XIpS3VVCXwF81YuGO++PM23K519PQgamQIh+BBR56vfz3yzoopz+FX/8Xb
+ wga2s2DkGaKH+wbuq27QgEClC7Ydy0WfgGNfkLxYGWwLKEieVCpgNAj1e8mqPZJbDBYrfGSOFXZ
+ EMeeeAWIiaHZUr5/q0ynlXCZMmXynXL15xcadn1BAweBFuW3km8DjpELQTVkRFCQI3xBkTJcYIg
+ VRaCnyhPKrmJHLgokOee6ATFNVzzel+hmsVwm7vG6j9UbjFsi76ixqMg3KnJUVhi17+eKUlIrC7
+ 9ze7IxnoWvR3Y6Lmk1A==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTIyMDI1MCBTYWx0ZWRfX7BbmfuedzKb3
+ A+/8V84qKvmHHB7DuCi75In7YmBWak1nCI/5gV2yzVYOBA7g4hl7w9Rk4vBbzWe4wz1mo/FUgH1
+ u/5M0yJPR++5ucx5ijYvJnlWmkkIUMw=
+X-Proofpoint-GUID: qscWUD9F5-_BG7WDAongAkYGu8xbfvRm
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-09-22_02,2026-09-21_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- suspectscore=0 phishscore=0 lowpriorityscore=0 impostorscore=0 clxscore=1011
- spamscore=0 malwarescore=0 bulkscore=0 adultscore=0 priorityscore=1501
+ clxscore=1015 malwarescore=0 priorityscore=1501 spamscore=0 bulkscore=0
+ suspectscore=0 adultscore=0 phishscore=0 lowpriorityscore=0 impostorscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609220247
+ reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609220250
 
-The set_deadline callback is currently skipped if the fence has already
-been signaled. This prevents GPU drivers from performing power
-management adjustments when the deadline hint arrives after fence
-completion.
 
-In triple-buffered rendering, a staged frame may be completed well
-ahead of the vblank deadline. When a display driver delivers the
-deadline hint, the fence has already been signaled and the callback is
-silently dropped. This leaves the GPU driver unable to evaluate the
-headroom between the fence signal time and the vblank deadline, and
-therefore unable to reduce GPU frequency when the target headroom is
-exceeded.
 
-Remove the dma_fence_is_signaled() guard from dma_fence_set_deadline()
-so that the callback is invoked unconditionally when ops->set_deadline
-is present. Implementations of set_deadline must already tolerate
-concurrent and repeated calls; handling a post-signal invocation
-requires no additional locking. The fence signaler can compare the fence
-signal time against the supplied deadline to determine whether frequency
-scaling is warranted.
-
-Signed-off-by: Jeffrey Boody <jeffrey.boody@oss.qualcomm.com>
----
-Signed-off-by: Jeff Boody <jeffrey.boody@oss.qualcomm.com>
----
- drivers/dma-buf/dma-fence.c     | 22 ++++++++++++++++++++--
- drivers/gpu/drm/msm/msm_fence.c |  3 +++
- include/linux/dma-fence.h       | 11 ++++++++++-
- 3 files changed, 33 insertions(+), 3 deletions(-)
-
-diff --git a/drivers/dma-buf/dma-fence.c b/drivers/dma-buf/dma-fence.c
-index bd58688b81a7..ebc7c5ca6f69 100644
---- a/drivers/dma-buf/dma-fence.c
-+++ b/drivers/dma-buf/dma-fence.c
-@@ -999,8 +999,19 @@ EXPORT_SYMBOL(dma_fence_wait_any_timeout);
-  * Multiple deadlines may be set on a given fence, even in parallel.  See the
-  * documentation for &dma_fence_ops.set_deadline.
-  *
-+ * The deadline hint may also be delivered *after* the fence has already been
-+ * signaled.  This is intentional and supports the case where a fence signaler
-+ * aware of a periodic deadline (e.g. vblank) and the fence's signal time can
-+ * evaluate the headroom between the two.  In triple-buffered rendering, for
-+ * example, a staged frame that is completed well ahead of the vblank deadline
-+ * represents excess headroom; delivering the deadline hint post-signal allows
-+ * the fence signaler to consider reducing frequency for subsequent workloads,
-+ * rather than holding an unnecessarily high frequency.  Implementations
-+ * of &dma_fence_ops.set_deadline must therefore tolerate invocation on
-+ * already-signaled fences.
-+ *
-  * The deadline hint is just that, a hint.  The driver that created the fence
-- * may react by increasing frequency, making different scheduling choices, etc.
-+ * may react by changing frequency, making different scheduling choices, etc.
-  * Or doing nothing at all.
-  */
- 
-@@ -1016,6 +1027,13 @@ EXPORT_SYMBOL(dma_fence_wait_any_timeout);
-  * to aid in power management decisions, such as boosting GPU frequency
-  * if a periodic vblank deadline is approaching but the fence is not
-  * yet signaled..
-+ *
-+ * This function may also be called after the fence has already been
-+ * signaled.  In that case the fence signaler can compare the fence's signal
-+ * time against the deadline to determine the available headroom.  If the
-+ * fence was signaled significantly ahead of the deadline, the fence
-+ * signaler may choose to reduce frequency for subsequent workloads to
-+ * avoid unnecessarily high power consumption.
-  */
- void dma_fence_set_deadline(struct dma_fence *fence, ktime_t deadline)
- {
-@@ -1023,7 +1041,7 @@ void dma_fence_set_deadline(struct dma_fence *fence, ktime_t deadline)
- 
- 	rcu_read_lock();
- 	ops = rcu_dereference(fence->ops);
--	if (ops && ops->set_deadline && !dma_fence_is_signaled(fence))
-+	if (ops && ops->set_deadline)
- 		ops->set_deadline(fence, deadline);
- 	rcu_read_unlock();
- }
-diff --git a/drivers/gpu/drm/msm/msm_fence.c b/drivers/gpu/drm/msm/msm_fence.c
-index 3dca8e09c192..3c5de96d4092 100644
---- a/drivers/gpu/drm/msm/msm_fence.c
-+++ b/drivers/gpu/drm/msm/msm_fence.c
-@@ -136,6 +136,9 @@ static void msm_fence_set_deadline(struct dma_fence *fence, ktime_t deadline)
- 	unsigned long flags;
- 	ktime_t now;
- 
-+	if (dma_fence_is_signaled(fence))
-+		return;
-+
- 	spin_lock_irqsave(&fctx->spinlock, flags);
- 	now = ktime_get();
- 
-diff --git a/include/linux/dma-fence.h b/include/linux/dma-fence.h
-index ffa99b930843..839ef2e5dad9 100644
---- a/include/linux/dma-fence.h
-+++ b/include/linux/dma-fence.h
-@@ -264,7 +264,16 @@ struct dma_fence_ops {
- 	 * an upcoming deadline, such as vblank, by which point the waiter
- 	 * would prefer the fence to be signaled by.  This is intended to
- 	 * give feedback to the fence signaler to aid in power management
--	 * decisions, such as boosting GPU frequency.
-+	 * decisions, such as boosting GPU frequency if the deadline has
-+	 * not yet been met, or reducing GPU frequency if the fence was
-+	 * signaled significantly ahead of the deadline.
-+	 *
-+	 * This callback may be invoked even after the fence has been
-+	 * signaled.  In this case, the signaler may use the deadline and
-+	 * the fence's signal time to evaluate whether the GPU frequency
-+	 * should be adjusted for future workloads.  Implementations must
-+	 * therefore be prepared to handle calls on already-signaled fences
-+	 * without error.
- 	 *
- 	 * This is called without &dma_fence.lock held, it can be called
- 	 * multiple times and from any context.  Locking is up to the callee
-
----
-base-commit: f0100363d8c374bd8e9ea7c9ba02744f0b802ca4
-change-id: 20260917-dma-fence-set-deadline-a778746e9abd
-
-Best regards,
---  
-Jeff Boody <jeffrey.boody@oss.qualcomm.com>
-
+On 9/21/2026 12:23 PM, Manivannan Sadhasivam via B4 Relay wrote:
+> +/* Replace the node id in the control packet with 'node->nid', if both are
+> + * different.
+> + */
+> +static void qrtr_node_rewrite_ctrl(struct qrtr_node *node, unsigned int type,
+> +				   struct sk_buff *skb)
+> +{
+> +	struct qrtr_ctrl_pkt *pkt;
+> +	__le32 *nid;
+> +
+> +	if (node->nid == node->ep_nid)
+> +		return;
+> +
+> +	if (skb->len < sizeof(*pkt))
+> +		return;
+> +
+> +	pkt = (struct qrtr_ctrl_pkt *)skb->data;
+> +	if (type == QRTR_TYPE_DEL_CLIENT)
+qrtr_tx_wait() will create a qrtr_tx_flow object keyed by qrtr_node->nid.
+qrtr_tx_resume will attempt to retrieve it with qrtr_node->ep_nid, which
+will fail. This leads to the HTD path pending packets reaching
+QRTR_TX_FLOW_HIGH and block indefinitely. QRTR_TYPE_RESUME_TX should
+be handled here.> +		nid = &pkt->client.node;
+> +	else
+> +		nid = &pkt->server.node;
+> +
+> +	/* Rewrite only the endpoint's node id, not those of bridged nodes */
+> +	if (le32_to_cpu(*nid) == node->ep_nid)
+> +		*nid = cpu_to_le32(node->nid);
+> +}
+> +
+Thanks,
+Youssef
