@@ -1,187 +1,266 @@
-Received: from DB3PR0202CU003.outbound.protection.outlook.com (mail-northeuropeazon11010045.outbound.protection.outlook.com [52.101.84.45])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-lr2-f35.google.com (mail-lr2-f35.google.com [74.125.230.99])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 76D984E4C4C;
-	Tue, 22 Sep 2026 07:34:12 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=52.101.84.45
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790062458; cv=fail; b=Fqpd9NsvJnyiBzMxBixRreuCnm9tWo1mTP3WQZIZBIjVJ+itK4RD6UaaQuvpJ0Zpe7UFztwFTV/z357JilWHpk8Y3aGlJph0OR0XIttLyGt9X/e9cz/vsdwiuE7/YBBo+hVEQWd4PCBYgobvPOfty37wgzXu1WRX2y2C0WIXjAI=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790062458; c=relaxed/simple;
-	bh=SlPckDvgmCgHI3K96wXmE3PZMKP1GnJCHi/dHGpHhM8=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 Content-Type:MIME-Version; b=ncDvU037tO6V6szi3ehYHLedlFaJtg60aBPmwyqCHd771vGfzK14eed/EYi4RncEpMepI6KF/BMMTSDcFtJaz0M4Ep/P4XqQdUqlzgTfuLD2/2MO/e73PLNEPQlg9mIzqv5r1Ts4fRQK+Vd7w+tnvI3o5oVPEO/J2smVRpkeR0s=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.nxp.com; spf=pass smtp.mailfrom=oss.nxp.com; dkim=pass (2048-bit key) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b=pKQT263M; arc=fail smtp.client-ip=52.101.84.45
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.nxp.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.nxp.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 704A02F7F17
+	for <linux-arm-msm@vger.kernel.org>; Tue, 22 Sep 2026 07:37:06 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.230.99
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1790062628; cv=none; b=VnbMtYIlSROSWHDIVaJDZEnlrWAYwNQmLm7TtgDeB34SBmKCAoyht0nn10XMzo2s5XOV6cPQIwfAupxEUUBk9DPZ/mBF084PJ/bF1Ty/QmY2OWAlEUj4crjjQyfPlWSU01OMmCNancjtzIt5/sc1LTXSKCLNvVC57ISWImn9RlQ=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1790062628; c=relaxed/simple;
+	bh=RCOAyYyJ+8UWrD8BLeNfubU6J7FHGPqwqVtqxhezK28=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=RNGaVnZmzJIFJM6dQ+kRuJD1YR7AEyhFhNQhIQlBy7HtEVWr8/ZGp7/2QszbWqfCwqtdDyi0vdc4vgL1Ope/rFN77WBRVDhcaA4z9uyZcYlPyuFlFjLVhrrk+cal76Ts/0DlTEs6DB7MDAlURVzwnTtqTWHHlShzVcl5HTMpNBQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=sM8MH6pE; arc=none smtp.client-ip=74.125.230.99
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="pKQT263M"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=jnbQmgw3XHsKN3rGTfR4Cr4e71NnMYcU4mnMLBThLwDB/2nmgCQCFHnA7YT+Ux2jqqBFxU3ufhQ4uWQ4mSZqCB3SSagFVIrg1lglRzxe1kjycIF+bK5puEoPx8n9hw/ZYTnKo1cInWLuadEnjo4MINK9MuqZQIuRmq7xz85age5s9HMo+IM/4Z7i3mYRjq1MSpLCocA7C8fF6ifBNZ/g+vR+iv8yAbydKtUxXGhurjE+bpdCYrIvGxC3L2+Zijk/7rnIs1g5e2LrdC6YUBSDSOjqAoqCvz3xmos7szE6i0WOogE7sL6FiKEFfV8xVhQeCfliruitG81yraPkVT3zVw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=2UOWV9fRxUwt8l0WY2hoefG5eR2DygWkQFZDWhOqVZ0=;
- b=Rpoye0rUQjxI+PxA476NypYWWZOsclnEe3LgMMkNEMtV4YFzE9lS4cHbYcQzmkVGVYXKUUOsI8dVPIBisvkG+AJDb74c9HZUlobIdyXwgkR4b0BdVr2EUDARipuSRQynj2WbrJNG4UqYC7EPRw0ue42f/ldicyc2jsJzY30599IXWTo3CzjmMoViUqklKsgAOfbq/dxuUgov45gw3I91AkX8bozKvdRGc1v58wrFgxhZa2KR7MgKL+6ggh77IxdJSRjuscASRo2VjVtgBfTXIXTXc1eA8bLJt7eSnAC/c6BwCM0MwZ/BTokIGnNh09UuOg2GfHNjC9UMjF2GLKQAmg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
- dkim=pass header.d=oss.nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com;
- s=selector1-NXP1-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=2UOWV9fRxUwt8l0WY2hoefG5eR2DygWkQFZDWhOqVZ0=;
- b=pKQT263MUISVJlqnA3EiHdXBXtZbgBe0sfgeJA0l4iENCmtR0YxgXDasScmmf0F0wWx8jYhG4Y5rAnN2zsRz//rrXwnS2EZe2LA7kVlyGLqyXPKZExHjSRcgBSfpy5u0QiwR9gXZM9/ZDFw5pPBwr7LI8oDd3vGE+PJJ16wFy28p770AbgeS1Ut4H5PyLqcuIt7mhRLNb6cVjaF6epWZbYH00dfm133CiNGQZIkIrqJxSPqgF/Gt1Njo6Vt6Q5QW2dC7l9kHsDd8XDWKLql44D7OwxYKOO12lvsGN8GBJr2TJM/UTqNPt92fMsbqH+5iOeHfljnf6srXoz6otTgBiw==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=oss.nxp.com;
-Received: from GV2PR04MB12558.eurprd04.prod.outlook.com
- (2603:10a6:150:368::10) by MMZPR04MB213195.eurprd04.prod.outlook.com
- (2603:10a6:190:4f::24) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.428.16; Tue, 22 Sep
- 2026 07:33:34 +0000
-Received: from GV2PR04MB12558.eurprd04.prod.outlook.com
- ([fe80::cd9f:102:ea58:4c49]) by GV2PR04MB12558.eurprd04.prod.outlook.com
- ([fe80::cd9f:102:ea58:4c49%6]) with mapi id 15.21.0428.015; Tue, 22 Sep 2026
- 07:33:34 +0000
-From: Larisa Grigore <larisa.grigore@oss.nxp.com>
-To: Larisa Grigore <larisa.grigore@oss.nxp.com>,
-	NXP S32 Linux Team <s32@nxp.com>,
-	Alim Akhtar <alim.akhtar@samsung.com>,
-	Avri Altman <avri.altman@sandisk.com>,
-	Bart Van Assche <bvanassche@acm.org>,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Frank Li <Frank.Li@nxp.com>,
-	Sascha Hauer <s.hauer@pengutronix.de>,
-	Pengutronix Kernel Team <kernel@pengutronix.de>,
-	Fabio Estevam <festevam@gmail.com>,
-	"James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>,
-	"Martin K. Petersen" <mkp@kernel.org>,
-	Sai Krishna Potthuri <sai.krishna.potthuri@amd.com>,
-	Ajay Neeli <ajay.neeli@amd.com>,
-	Manivannan Sadhasivam <mani@kernel.org>,
-	Pedro Sousa <pedrom.sousa@synopsys.com>,
-	Hannes Reinicke <hare@suse.de>,
-	Joao Pinto <Joao.Pinto@synopsys.com>
-Cc: linux-scsi@vger.kernel.org,
-	devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	imx@lists.linux.dev,
-	linux-arm-kernel@lists.infradead.org,
-	linux-arm-msm@vger.kernel.org,
-	clizzi@redhat.com,
-	aruizrui@redhat.com,
-	eballetb@redhat.com,
-	echanude@redhat.com
-Subject: [PATCH v5 11/12] arm64: dts: freescale: s32n79-rdb: Enable UFS
-Date: Tue, 22 Sep 2026 09:30:08 +0200
-Message-ID: <20260922073009.1449688-12-larisa.grigore@oss.nxp.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260922073009.1449688-1-larisa.grigore@oss.nxp.com>
-References: <20260922073009.1449688-1-larisa.grigore@oss.nxp.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: AM0P309CA0030.EURP309.PROD.OUTLOOK.COM
- (2603:10a6:20b:28f::32) To GV2PR04MB12558.eurprd04.prod.outlook.com
- (2603:10a6:150:368::10)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="sM8MH6pE"
+Received: by mail-lr2-f35.google.com with SMTP id 38308e7fff4ca-3a6287d59b2so2292181fa.2
+        for <linux-arm-msm@vger.kernel.org>; Tue, 22 Sep 2026 00:37:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1790062624; x=1790667424; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=jdAazOvNHDsZEwumcDHnCWyoCBwbu0/+HO8q4JOpYAE=;
+        b=sM8MH6pEfZNPYQOJAamMGfAEeO2gRFOInm8WUPkjab702L9lT/yWbtJddgeSgsLW14
+         DqYhDehfr0ZSzwJ12YTmWnbmRFSOacBrHbGqWN35L+XW13j+1ZhldLyULDdO9m7oyR3F
+         dbl8mEdpSebfgCaX6cmNsci/6v1xbUgOnWBtKGo1ICRYskUBuiP1ZuOIJrhz1h05fwE3
+         FAtNdZAhGy3OmLg5WVWsaun0d/Fdgx9VVPfl6LhGzX8wf9lISiS+5p6HeEXeBkxvzEnE
+         St14o90yH/vmoUUqXT9PdDOmzbrfG5i7IkaSF4g8+Ibjvao/+Ri5CYSpj1+VB/C1J9tj
+         Nchw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1790062624; x=1790667424;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=jdAazOvNHDsZEwumcDHnCWyoCBwbu0/+HO8q4JOpYAE=;
+        b=i/XvzY1klCqyts5mGlSpVuS82vZxrCI0LcLiSvUS0HS9Hjf6bdxlNenmg3KHH9i2On
+         PdURhlNWbEpoR1Ur6vGiocKuyMJQZ6hY4vTy/Cw+4nIeL/Jp/eF6CXoNJCaSjUpJ7ji8
+         MSYlPsm1rkvHw5HVxNJs8N9w91W6XVAWfsuBybbgJwLitEYS93frvFAbzhAlS0JERBYs
+         D7ExFmZoYVGd0HPUPZaRxbCkzt23ilVNevnVDRoUGGrwRz7/o7/I+FJxUHFG5WR3iiUS
+         5BxdX7RA5XmtTZFCFmPZ2bwx8W+lkIzYy6ljTtYSLTemF8EYFb/Zd+UllDX7HOB7MAGm
+         hsIA==
+X-Gm-Message-State: AFuF++kpbknXFkfLN63cB18AXtO0+yOFgMr2arQNHOAGxRyKamp6Cazr
+	dzs8mySD9CaTfDSDeqXQ+5VuqPFlh0+TGSvKZbpkbm8tK5KSTLDtnGqc
+X-Gm-Gg: AYBFou3Jy2N5x/IY4RSSYEfVYWXqLQbWLHgJvgMlQjZDsl+qt5g3u3apSUUjjNAeV4f
+	oQAvhg4fn//D2wYM3xG+Gg9tEQYJdo+ExRd3lGN7nyTrQS5pEU/pandpWRHo/Sdf58g66cerSYA
+	VLXPVOOArYBBFDheYn/HRuea8xhwCEUe+ore63i+wc1qAi0CVbIcSIEfW3Tq0fPYGdVH6qlNfjU
+	QDVQMi93eaqsNdl9D/QibFbAckVNA3RdbjNcuih3xEEUnLsfmnrC56IbwIt9li84jUWmlir2Zco
+	Qbkn1SDKDVS2xPeP8QMDrisH6uZdnUG4TVQOobrkQ9NcgKr8m4hFsfZAzC5PDX5v/W5x2vew8LV
+	1B3iSnxiyYN97Htbxs3ernZ/dDhwOlgve4NBsZw30SP8bldB8sry9MgR6V+BUBKggtG52R2hX2H
+	0IsOBzSQnDNhrmtvDjbASjnPY6y+9gCmeL4w1omJ15MfyIQ1agGxgVSTc78io43nXy+CNu1aEcr
+	+9DSN4B/FQ7guWfoLQJvY1wRQ0emCJ6LqlZ8CWqFU6CqhMh2blknQY=
+X-Received: by 2002:a05:651c:19a8:b0:3a3:74b7:fc07 with SMTP id 38308e7fff4ca-3a5fbfd7ab8mr30363061fa.19.1790062623831;
+        Tue, 22 Sep 2026 00:37:03 -0700 (PDT)
+Received: from ?IPV6:2a10:a5c0:800d:dd00:8fdf:935a:2c85:d703? ([2a10:a5c0:800d:dd00:8fdf:935a:2c85:d703])
+        by smtp.gmail.com with ESMTPSA id 38308e7fff4ca-3a627d28468sm3244951fa.9.2026.09.22.00.37.01
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 22 Sep 2026 00:37:03 -0700 (PDT)
+Message-ID: <f4d2e209-1c89-447a-a5d1-92696b51b614@gmail.com>
+Date: Tue, 22 Sep 2026 10:37:00 +0300
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: GV2PR04MB12558:EE_|MMZPR04MB213195:EE_
-X-MS-Office365-Filtering-Correlation-Id: 10d85a8e-5dee-4182-061f-08df187bcef4
-X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
-X-LD-Processed: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635,ExtAddr
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
- BCL:0;ARA:13230040|19092799006|1800799024|376014|7416014|23010399003|366016|921020|10067099003|56012099006|11063799006|18002099003|22082099003;
-X-Microsoft-Antispam-Message-Info:
- j3bQwdG9a7ZsS3vwSEoS1ILiygp9NbIPbO444YgyfN8dcJIaIM5qQsZQsTBAWMWIJGXGkBIjxcV8e2smFKhr7cB+AO8osw/8sWoT+jBZ2Zvgn7dL660KkdZ6uO0fRlLBnfdVcvCAgOpBrx+mqQwnHLXDPHmHjbVqA7yPWEmI+zp1j3573l9NHeU7M4fsCpCWc9/5+/WRAPxmSIku+rbVXUbSTQdR9f29HU44Zo0yoXW0ss7USC31Up9VQreh0To/av+fd5uSyUhMfXjKk825w8toDhddp4SsVuadXWRR/x1IbFZdEphymd6G1374AqtLICx4MS/e/lIboAUFlOS8Q49aaLalJDhiOt0TyBTqg7jiNuP7V7pASaDEaYSYV/eHSBw3LePDzYXuF0K7uZW9Ph7GEsjJluGLl9a2jG5vxVDStUyTfRTKUQLzakhCwwfPWLID86v8Kn/vw1HEk+bgyf9jluLnLWrZAguldnLezJOkRhiFr3lVPZs8N1lX1aXEbGtk+MOs1yxJe8gEVRswJi6m6bf6tvigOgYdrSrp9UJofM0P5KnVjsgaRKPd1rFphBgTimc5EleP0/W5dwssqXbsiC0j4loj73R1nCxsW9lu3Ofv0B0NzvEZ+jbgexDSLPZZRu5M7+pHWKdqygYGuDss+f4ELbobXNe6b9nfvsA6YzxdvHGVej+UuJLDFZwXCrnt+saaplhuml7/0QmyOQ==
-X-Forefront-Antispam-Report:
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:GV2PR04MB12558.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(19092799006)(1800799024)(376014)(7416014)(23010399003)(366016)(921020)(10067099003)(56012099006)(11063799006)(18002099003)(22082099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
- =?utf-8?B?c0VkRlVZWUJ1cEJkeE9kWDFHUXNtVW9TR2NCa3Q5UjdDSFhEUHloTzdSb2hG?=
- =?utf-8?B?bHBzQStUOUFFcHB0bFNnRVFUNlZudHoydUM5MnBFaHEwYi9XUnlnL2tGU3Zm?=
- =?utf-8?B?UEkrb2JuTTN0QXJ2SDU5YzZHbTV4QzRERGJ1L0RLbkh5cUR2bGpla3Y3bXdB?=
- =?utf-8?B?RUxRNlRmSzkwVC85N0FmT3EzVGozZVFsei9uYzhDVjkxQjd5U3lyLzN6Ny9D?=
- =?utf-8?B?dE8xdGtDZWhtK09VaVFNTlRRZEJhVWlEanRZbFUyS2N3czVxeUZidDdQVGxX?=
- =?utf-8?B?dnFkMnhybmM3eThjdkQ3SGxOUDk3bnNJazJWYXBxL3BqUnVCU1pQZCs5cXBO?=
- =?utf-8?B?SUlVYWNWd3hxNHZzZVV5OENhWFFnOWphNUh1aFlGaDlXYUorQlg3ZFZRMmJW?=
- =?utf-8?B?VURMeGg5VG93Z3pQTHFlVG0xRWJVSVZlSml3UytrSFIyVlRya0w0dnlXR21J?=
- =?utf-8?B?VUZEZ1Z6eElISitVTWsvNHNhV0xNcWMxVEh6eFlvWE1sbUl3dUV2Sm5zK0FI?=
- =?utf-8?B?emNYNWZiditnQ3FEOXJ0S0R1UXFLTllYTk91LzJTUUphMWJFQWlkR3RPUjlK?=
- =?utf-8?B?SjFiQmw4bkFmQWVNS0oyU0k4WWtVcnFlNG53dlMvZmxRbnYra3J5ekFHQUlC?=
- =?utf-8?B?clZtaGUvOFFUUEdrQkZ5UkUrMWNheCtrYWZGb0xiRzZWU2k1QXJjSU5aOEpC?=
- =?utf-8?B?eXFsd05ZQXgwZjRsVDZaOUx4OGZZdzBWMjBaSWdyTXBGdXBoTDl2TWJQVUgw?=
- =?utf-8?B?akFVSGFMOXA0YllmLzBIRWhxY3d2c0FTSjVsbVFNcGhhR1pWejF1NzZmc2lp?=
- =?utf-8?B?UHdqMGZnN1RUaGkrcHVwUEIrcW1wY1U5dWtrVDVNWit6WW9MVHh5WUpJUSt3?=
- =?utf-8?B?MFJ3UFVtWDBMWmt4eXBxRG1oRGdublpKa2Z4c3dyc1ZWYXc0V1VKVUVFVTRh?=
- =?utf-8?B?UFBQaDhPelJ2RkpiTEhPV0kzRDN3R2J0TXp3WGU3WTFHbUkrelQ3NGVkaDR6?=
- =?utf-8?B?c0Z4RnBSQVRlaXFrUml3aEFZV2NsM2pXZ3FKWWhlWElvS0dHTGpiaTBSMlpa?=
- =?utf-8?B?UUFaL0FQWlNFZDVpUUNQM1l2UlZDS2gwSXZtRzAzZWNEV0pXK0lOT2h3UFpB?=
- =?utf-8?B?eXBUZCttZzVxTjd4QlpsV210T1R0ck5jeWlma2xSQ3BpZUhyTEp5bzM0NGhI?=
- =?utf-8?B?OWVkVU5jbjJ2YS9HcTcwM2hHeWp0UnFlVXY4SHJrS1grZm5BbXVIMCtpem04?=
- =?utf-8?B?WDJtWkhXOHMzcGlNNmwrM1k2QzNtWlNvUFFZOTc2T0NiMDE3L3BSSm8wNXRl?=
- =?utf-8?B?OGhGYkg1VVUyUEMvRFNMNEwyMlZqajR1bWxMRWY4OS9iZVJBR1lGZW5TdndC?=
- =?utf-8?B?bUlnK1JGeTZ5Mm1CUEsyZGVPNWUzQTI4RGlRL3BYVUpYMTllVEFNNGFzMWFK?=
- =?utf-8?B?VFRQNDVBWkJRKzd3bVhYeWVqYzZlMkM5emduVk9IZTQ1S0swTHcwRkxmcm1p?=
- =?utf-8?B?N2V0ZFlvWE5vaStTeE5aUmNYVHJFSUJINEJjVW5VNk9oSUlGWEFHeXRYdHRR?=
- =?utf-8?B?RHJLR0FoMkk0MEF6ZjV0aVJhbmNmQWJxVUJrdmxzakhsQmpNdE4wYUJtVjZM?=
- =?utf-8?B?TG0zaGFrQitxS2dqVisxejdHR2w5OHpvUXdLQjJHOHBXMlpHTm5KTXBQdjVs?=
- =?utf-8?B?K1JIOGhQMFJmNDQ0TVkzUFFOTGZhUmIvREFFbWxqOXF4UHFRVTdQajJ6ZVJR?=
- =?utf-8?B?R0dROGRDZVBsS0VTU2dLcVd1VHBXVGlOMkFqZzFESDNhbnp3ditNTUJhRElM?=
- =?utf-8?B?VXlCUWlNSXhlU1dqNlgwWHFnRE15STV1bmkzaGV2ZWRMRGRQK0doMndQNVJ2?=
- =?utf-8?B?V0wvbnFTYWZBUVRKV1gvaGdCa3BMNDd6dTl5WlBVMTBGelRXUytKOFBSVHBY?=
- =?utf-8?B?bGY4Qkxvb0NEVkpjRm9BSkdnZVZ1eHpPNVl2NnB2ZDFWVDNER25wV0orWnJR?=
- =?utf-8?B?M3R1UFFhcVRzZUpabjJ0WFlSQWJxcEthU29RcElDNUNSWFhSRFdaTUEyVXpK?=
- =?utf-8?B?MHVMNzdkL1Z0bmp4VmZYRUR2RkNyVkxOMlVHYUV3RkdLYjVCTjlqTDNPcllP?=
- =?utf-8?B?R29mcndLUUN4bFdlaUFzSjEyTHA0SnU1ZFBwa0NyU2FRSnk1SHloeWY1TzhK?=
- =?utf-8?B?eDVqZXY1ZEZ6ak1Kc25tQ1FTMzhGeTU2S2NoWVVPUTg0akZ4RDVzM3JpUldk?=
- =?utf-8?B?a2h2WE4zMklHQWdzcldwcmNaaUpPNHUrNDc5TFdRbklPcTgwclFXVHl2N3Jp?=
- =?utf-8?B?QzZ6dnUvQUovcDZJOGUwWFdOY29nOVM5KzJsTVJ0a1NNYU91ZG1hSW1iOVpB?=
- =?utf-8?Q?hFEf2XnLr1FhrfD4=3D?=
-X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 10d85a8e-5dee-4182-061f-08df187bcef4
-X-MS-Exchange-CrossTenant-AuthSource: GV2PR04MB12558.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Sep 2026 07:33:34.2820
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: NAL4ylW3OxLCGT/YomayG/RxR9eR1EvkJbqsfqJ6nJXvXFB35W0uR8rRnD9tlQP5CA9KGixeK5WCOL7s+nxV9g==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MMZPR04MB213195
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v14 3/6] reboot: add parsable tokens for power state
+ change reasons
+To: Faruque Ansari <faruque.ansari@oss.qualcomm.com>,
+ Sebastian Reichel <sre@kernel.org>, Benson Leung <bleung@chromium.org>,
+ Tzung-Bi Shih <tzungbi@kernel.org>, Guenter Roeck <groeck@chromium.org>,
+ Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>,
+ "Rafael J. Wysocki" <rafael@kernel.org>,
+ Daniel Lezcano <daniel.lezcano@kernel.org>, Zhang Rui <rui.zhang@intel.com>,
+ Lukasz Luba <lukasz.luba@arm.com>, Oleksij Rempel <o.rempel@pengutronix.de>,
+ Pengutronix Kernel Team <kernel@pengutronix.de>
+Cc: linux-arm-msm@vger.kernel.org, linux-pm@vger.kernel.org,
+ linux-kernel@vger.kernel.org, chrome-platform@lists.linux.dev,
+ avaneesh.dwivedi@oss.qualcomm.com,
+ Umang Chheda <umang.chheda@oss.qualcomm.com>
+References: <20260921-pscrr-framework-v14-0-a16290003b7c@oss.qualcomm.com>
+ <20260921-pscrr-framework-v14-3-a16290003b7c@oss.qualcomm.com>
+Content-Language: en-US, en-AU, en-GB, en-BW
+From: Matti Vaittinen <mazziesaccount@gmail.com>
+In-Reply-To: <20260921-pscrr-framework-v14-3-a16290003b7c@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Enable the UFS host controller on the S32N79 RDB and configure it for
-two lanes per direction.
+On 21/09/2026 20:44, Faruque Ansari wrote:
+> psc_reason_to_str() returns human-readable labels that contain spaces
+> (e.g. "over temperature"). Those are fine for logs but unusable as
+> values in a space-separated sysfs list or as a write target.
+> 
+> Extend the single reason descriptor table with a stable, space-free
+> token next to the existing label, and add psc_reason_to_token() and
+> psc_reason_from_token() so consumers can emit and parse reasons without
+> inventing their own string table.
+> 
+> Co-developed-by: Oleksij Rempel <o.rempel@pengutronix.de>
+> Signed-off-by: Oleksij Rempel <o.rempel@pengutronix.de>
+> Signed-off-by: Faruque Ansari <faruque.ansari@oss.qualcomm.com>
+> 
+> changes v12:
+> - new patch
+> ---
+>   include/linux/reboot.h |  2 ++
+>   kernel/reboot.c        | 77 +++++++++++++++++++++++++++++++++++++++-----------
+>   2 files changed, 63 insertions(+), 16 deletions(-)
+> 
+> diff --git a/include/linux/reboot.h b/include/linux/reboot.h
+> index 08a7549bbc40..4c5327dd7645 100644
+> --- a/include/linux/reboot.h
+> +++ b/include/linux/reboot.h
+> @@ -244,6 +244,8 @@ enum psc_reason {
+>   #define PSCR_MAX_REASON	(PSCR_REASON_COUNT - 1)
+>   
+>   const char *psc_reason_to_str(enum psc_reason reason);
+> +const char *psc_reason_to_token(enum psc_reason reason);
+> +int psc_reason_from_token(const char *token, enum psc_reason *reason);
+>   
+>   /**
+>    * enum hw_protection_action - Hardware protection action
+> diff --git a/kernel/reboot.c b/kernel/reboot.c
+> index d5a45db82c3d..e53fb31bad06 100644
+> --- a/kernel/reboot.c
+> +++ b/kernel/reboot.c
+> @@ -1084,34 +1084,79 @@ void set_psc_reason(enum psc_reason reason)
+>   }
+>   EXPORT_SYMBOL_GPL(set_psc_reason);
+>   
+> -static const char * const pscr_reason_strs[] = {
+> -	[PSCR_UNKNOWN]            = POWER_ON_REASON_UNKNOWN,
+> -	[PSCR_UNDER_VOLTAGE]      = POWER_ON_REASON_BROWN_OUT,
+> -	[PSCR_OVER_CURRENT]       = POWER_ON_REASON_OVER_CURRENT,
+> -	[PSCR_REGULATOR_FAILURE]  = POWER_ON_REASON_REGULATOR_FAILURE,
+> -	[PSCR_OVER_TEMPERATURE]   = POWER_ON_REASON_OVER_TEMPERATURE,
+> -	[PSCR_EC_PANIC]           = POWER_ON_REASON_EC_PANIC,
+> +/**
+> + * struct psc_reason_desc - Descriptor for a power state change reason.
+> + * @token: Stable, parsable identifier without spaces (e.g. "over-temperature").
+> + *	   Suitable for use in sysfs values and as a user/kernel contract.
+> + * @label: Human-readable description (e.g. "over temperature"), for logs.
+> + */
+> +struct psc_reason_desc {
+> +	const char *token;
+> +	const char *label;
+> +};
+> +
+> +static const struct psc_reason_desc psc_reason_descs[] = {
+> +	[PSCR_UNKNOWN]		 = { "unknown",		  POWER_ON_REASON_UNKNOWN },
+> +	[PSCR_UNDER_VOLTAGE]	 = { "under-voltage",	  POWER_ON_REASON_BROWN_OUT },
+> +	[PSCR_OVER_CURRENT]	 = { "over-current",	  POWER_ON_REASON_OVER_CURRENT },
+> +	[PSCR_REGULATOR_FAILURE] = { "regulator-failure", POWER_ON_REASON_REGULATOR_FAILURE },
+> +	[PSCR_OVER_TEMPERATURE]	 = { "over-temperature",  POWER_ON_REASON_OVER_TEMPERATURE },
+> +	[PSCR_EC_PANIC]		 = { "ec-panic",	  POWER_ON_REASON_EC_PANIC },
+>   };
 
-Signed-off-by: Larisa Grigore <larisa.grigore@oss.nxp.com>
----
- arch/arm64/boot/dts/freescale/s32n79-rdb.dts | 5 +++++
- 1 file changed, 5 insertions(+)
+nit:
+Is there a reason for having the label as a define while token is a 
+plain string? It may be just me, but I would have expected the userland 
+contract to be defined in a header. (It may be just my false expectation 
+though!).
 
-diff --git a/arch/arm64/boot/dts/freescale/s32n79-rdb.dts b/arch/arm64/boot/dts/freescale/s32n79-rdb.dts
-index 1feccd61258e..38c5699e6d54 100644
---- a/arch/arm64/boot/dts/freescale/s32n79-rdb.dts
-+++ b/arch/arm64/boot/dts/freescale/s32n79-rdb.dts
-@@ -63,6 +63,11 @@ &uart7 {
- 	status = "okay";
- };
- 
-+&ufshc {
-+	lanes-per-direction = <2>;
-+	status = "okay";
-+};
-+
- &usdhc0 {
- 	disable-wp;
- 	no-sdio;
+>   
+>   /**
+> - * psc_reason_to_str - Converts a power state change reason enum to a string.
+> - * @reason: The `psc_reason` enum value to be converted.
+> - *
+> - * This function provides a human-readable string representation of the power
+> - * state change reason, making it easier to interpret logs and debug messages.
+> + * psc_reason_to_str - Human-readable label for a power state change reason.
+> + * @reason: The `psc_reason` value to convert.
+>    *
+> - * Return:
+> - * - A string corresponding to the given `psc_reason` value.
+> - * - `"Invalid"` if the value is not recognized.
+> + * Return: The label string, or "Invalid" if @reason is out of range. For a
+> + * stable, parsable form use psc_reason_to_token() instead.
+>    */
+>   const char *psc_reason_to_str(enum psc_reason reason)
+>   {
+>   	if (reason < 0 || reason >= PSCR_REASON_COUNT)
+>   		return "Invalid";
+> -	return pscr_reason_strs[reason];
+> +	return psc_reason_descs[reason].label;
+
+nit:
+I would feel a tad safer if the psc_reason_descs[] was always guaranteed 
+to be initialized up-to PSCR_REASON_COUNT. Having the enum and 
+PSCR_REASON_COUNT defined in one place, and psc_reason_descs[] 
+initialized here, adds a window for: "I added new enum value, forgot to 
+update the psc_reason_descs[]". Can we add a NULL check or are we on a 
+very performance critical path here?
+
+>   }
+>   EXPORT_SYMBOL_GPL(psc_reason_to_str);
+>   
+> +/**
+> + * psc_reason_to_token - Stable, parsable token for a power state change reason.
+> + * @reason: The `psc_reason` value to convert.
+> + *
+> + * Return: The token string (no spaces), or "invalid" if @reason is out of
+> + * range. Round-trips with psc_reason_from_token().
+> + */
+> +const char *psc_reason_to_token(enum psc_reason reason)
+> +{
+> +	if (reason < 0 || reason >= PSCR_REASON_COUNT)
+> +		return "invalid";
+> +	return psc_reason_descs[reason].token;
+
+Please, see my comment above.
+
+> +}
+> +EXPORT_SYMBOL_GPL(psc_reason_to_token);
+> +
+> +/**
+> + * psc_reason_from_token - Parse a reason token into a `psc_reason` value.
+> + * @token: A token as returned by psc_reason_to_token(). A trailing newline is
+> + *	   tolerated.
+> + * @reason: Output; set on success.
+> + *
+> + * Return: 0 on success or -EINVAL if @token matches no known reason.
+> + */
+> +int psc_reason_from_token(const char *token, enum psc_reason *reason)
+> +{
+> +	int i;
+> +
+> +	for (i = 0; i < PSCR_REASON_COUNT; i++) {
+> +		if (sysfs_streq(token, psc_reason_descs[i].token)) {
+
+I suppose my comment applies here as well.
+
+> +			*reason = i;
+> +			return 0;
+> +		}
+> +	}
+> +
+> +	return -EINVAL;
+> +}
+> +EXPORT_SYMBOL_GPL(psc_reason_from_token);
+> +
+>   /**
+>    * __hw_protection_trigger - Trigger an emergency system shutdown or reboot
+>    *
+
+After all these years in the business - it's hard to be as confident as 
+I used to. ;) So, I won't say [aloud] that my preferred way is the only 
+correct way. Please weigh my comments and decide as you see best, this 
+is "good enough" for me if you don't agree with my suggestions.
+
+Reviewed-by: Matti Vaittinen <mazziesaccount@gmail.com>
+
+Yours,
+   -- Matti
+
 -- 
-2.43.0
+Matti Vaittinen
+Linux kernel developer at ROHM Semiconductors
+Oulu Finland
 
+~~ When things go utterly wrong vim users can always type :help! ~~
