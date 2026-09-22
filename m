@@ -1,91 +1,120 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 79963542EC0;
-	Tue, 22 Sep 2026 12:21:12 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4F68F541E6D;
+	Tue, 22 Sep 2026 12:25:39 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790079673; cv=none; b=UdPSLXGGcPQ5vKxEyf8mkH/i/ORJsJ3yAMbRRzDxYsu3nqZZAZtFgyMF0YIEnkHYTLLzuZBOK0S4LcHzNuMuA+BLhnsfxLcjG91tZpwUVWVVnM9aX4FkoZkwWvZX7OEglaBw2ltcRJxoBjHw0LnJ+Pl+Hhcw3ulyk5xLh2DvvOc=
+	t=1790079939; cv=none; b=FDYwD3B9A+PITY4V+MWHBMYvBcr20pbRpdsXUJRDu/A0KAl7LkkDukfP4fixNRPANtVJNRc84penUCShzwVTua33IMndPtqILIjEeGur5TrnDziE2+ycg5WkglOCHcsgKt46IcIP13r11ecB92GMORFTc7ECn4jo44GtL0IWDWQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790079673; c=relaxed/simple;
-	bh=AksxY1uAGBNJ49x3ygb1UGk3X0aybJfvIojcMU57v4E=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=VCVIut5Hgz81+Q616lg4TgJyv0RPBmLCHwF5m+zOgLGefEBy7jwKV0+2Qva7aaJaVQV9wyNzGf3sVVgdtt7S5hmPNkgfa29u/X8rdrLklKDgbCtPmObu8cs+f7G1PWEcJqCegZYi+L4ysgFJX7V3Peq+ZPbfkZ8sRAQnwWbrmCk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=RMbbpLtD; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1790079939; c=relaxed/simple;
+	bh=iElfDspKaFxZAER9CiupajWCePulqE1zjuuE149+Hog=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
+	 In-Reply-To:To:Cc; b=S3RnAKwOEX9fLsIL7oGTfCEROpmN6ED2zt2BSNDghMCW5m8qwfbFeok5rHGLDCYbEr1UqgnnPAEb9S4/jsGENoNrn/GAPT+rMn/jaL/0ixap/isYqgsTF0Ak7U/Ebrs58AhlXRlTXv1fT6ln3YSZy+8JTzNBe/6WPTZILyrUyO8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ivYhLQWy; arc=none smtp.client-ip=10.30.226.201
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="RMbbpLtD"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id C28CA1F00893;
-	Tue, 22 Sep 2026 12:21:11 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1790079672;
-	bh=AksxY1uAGBNJ49x3ygb1UGk3X0aybJfvIojcMU57v4E=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=RMbbpLtDgIum719pZyr5Yl+MvvA0o+I9SrUdc3YMU8zN/Oz/UTOQ5EIrpzzHbj54O
-	 U4SmYJLHkfF2vbeuJPUNeLBHzOuigrpFTJLFewpCjygjC7zO2HMZ4V9UI2m6kCdMf2
-	 nZ/cOHWlSp5c2VZVuPrUfXSfpFdrlcht0GhIeNe58dQnq5RXcyUmnVwchJz6EIWh48
-	 imZ7Ma9tBKUKnqClerER+nHQa8OPhzFCOAvENNg7hw0ORGI98APpZxptHxzZ08VgDN
-	 Zyml1DKBzPN3L+gt6U2148DnlIyuaOl69rdOfU9JrJZbg6FHf/3wj3wlph9B4ZFOdq
-	 D7HGEQnI6jSdg==
-Received: by finisterre.sirena.org.uk (Postfix, from userid 1000)
-	id 533291AC56BF; Tue, 22 Sep 2026 13:21:08 +0100 (BST)
-Date: Tue, 22 Sep 2026 14:21:08 +0200
-From: Mark Brown <broonie@kernel.org>
-To: Ajay Kumar Nandam <ajay.nandam@oss.qualcomm.com>
-Cc: Srinivas Kandagatla <srini@kernel.org>,
-	Liam Girdwood <lgirdwood@gmail.com>,
-	Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>,
-	Pierre-Louis Bossart <pierre-louis.bossart@linux.dev>,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>, linux-sound@vger.kernel.org,
-	linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
-	devicetree@vger.kernel.org
-Subject: Re: [PATCH v5 3/4] dt-bindings: sound: qcom,q6apm-dai: add
- memory-region and relax iommus
-Message-ID: <arJytCJZZnIX835Q@sirena.co.uk>
-References: <20260922-vmid-v4-v5-0-e79cfd7af5b3@oss.qualcomm.com>
- <20260922-vmid-v4-v5-3-e79cfd7af5b3@oss.qualcomm.com>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="ivYhLQWy"
+Received: by smtp.kernel.org (Postfix) with ESMTPS id BF41EC2BCFF;
+	Tue, 22 Sep 2026 12:25:38 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1790079938;
+	bh=iElfDspKaFxZAER9CiupajWCePulqE1zjuuE149+Hog=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
+	b=ivYhLQWyVYEbwmlrLuRrPeP/td+aPVDq9hrwGfSQkixot9gippoGyPspWcSE9RSsW
+	 DcaY9SiQuZwJ4hvCympM3n/KFc2lMoZNI/BINO8yEeNZrs/d2djdDc+COHCfiy19HX
+	 bEldzxF0LUx+ja4AgBTp+N3h6+fbOlPeoi8fkxtJLUJY1MV+9AZqk7obqwsgAAOqIH
+	 eskvelrZ+WpzPcIfhRWBeyR97HC32Ad8H4mov8LOgXnMoPXRvBM0D0n2O8UYrqpsTt
+	 KKpD85DfzCwQNwL+vZMvEsE9cM9ipDyl9To2msZ+UIi9jJunPZKLSm6IdA03trpaKi
+	 xUfBRDDDfuzCQ==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 90F9AC98306;
+	Tue, 22 Sep 2026 12:25:38 +0000 (UTC)
+From: Jens Glathe via B4 Relay <devnull+jens.glathe.oldschoolsolutions.biz@kernel.org>
+Date: Tue, 22 Sep 2026 14:25:30 +0200
+Subject: [PATCH v5 2/3] usb: typec: mux: ps883x: add a delay after writing
+ config regs
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="LFiAsPWOjKfv+Nmx"
-Content-Disposition: inline
-In-Reply-To: <20260922-vmid-v4-v5-3-e79cfd7af5b3@oss.qualcomm.com>
-X-Cookie: Too clever is dumb.
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260922-ps883x-disable-usb4-v5-2-02c0414978e6@oldschoolsolutions.biz>
+References: <20260922-ps883x-disable-usb4-v5-0-02c0414978e6@oldschoolsolutions.biz>
+In-Reply-To: <20260922-ps883x-disable-usb4-v5-0-02c0414978e6@oldschoolsolutions.biz>
+To: Heikki Krogerus <heikki.krogerus@linux.intel.com>, 
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>, 
+ Abel Vesa <abelvesa@kernel.org>, Bjorn Andersson <andersson@kernel.org>, 
+ Konrad Dybcio <konradybcio@kernel.org>, Sebastian Reichel <sre@kernel.org>
+Cc: linux-usb@vger.kernel.org, linux-kernel@vger.kernel.org, 
+ linux-arm-msm@vger.kernel.org, stable@vger.kernel.org, 
+ "Dr. David Alan Gilbert" <dave@treblig.org>, 
+ Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>, 
+ Jens Glathe <jens.glathe@oldschoolsolutions.biz>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1790079937; l=1632;
+ i=jens.glathe@oldschoolsolutions.biz; s=20240919;
+ h=from:subject:message-id;
+ bh=bFSHfgooHbrl3Ye8+c5b+paG9lzebtfeVEngyUs0qtU=;
+ b=GhG2+ecP++TW6Mx/ciG9ONWmZN0mDUjY9xapBQOiaf65R7DE/f31PRvGOus1+zFSnWme3Z/Ku
+ 7XMuKIIfkUACsy8Fs32Ag2jQVLR0+klfLHPaHZQ+bQI7MhLbfyW+qbl
+X-Developer-Key: i=jens.glathe@oldschoolsolutions.biz; a=ed25519;
+ pk=JcRJqJc/y8LsxOlPakALD3juGfOKmFBWtO+GfELMJVg=
+X-Endpoint-Received: by B4 Relay for
+ jens.glathe@oldschoolsolutions.biz/20240919 with auth_id=216
+X-Original-From: Jens Glathe <jens.glathe@oldschoolsolutions.biz>
+Reply-To: jens.glathe@oldschoolsolutions.biz
+
+From: Jens Glathe <jens.glathe@oldschoolsolutions.biz>
+
+The connection-status registers need time to propagate through the
+analog front-end (PLLs, lane training) after they are written. A 30 ms
+delay after ps883x_configure() brings DisplayPort Alt Mode hotplug on
+the Lenovo 40B0 to a reliable success rate.
+
+Tested with T14s G6 and IdeaCentre Mini with the 40B0 dock on the HDMI
+port with a Type-C host cable. Qualcomm firmware that programs this
+retimer from an MCU uses a similar post-config delay.
+
+Assisted-by: Grok(xAI):4.6
+Acked-by: Heikki Krogerus <heikki.krogerus@linux.intel.com>
+Signed-off-by: Jens Glathe <jens.glathe@oldschoolsolutions.biz>
+---
+ drivers/usb/typec/mux/ps883x.c | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
+
+diff --git a/drivers/usb/typec/mux/ps883x.c b/drivers/usb/typec/mux/ps883x.c
+index a5696aef054ee..15aee1d613b1a 100644
+--- a/drivers/usb/typec/mux/ps883x.c
++++ b/drivers/usb/typec/mux/ps883x.c
+@@ -7,6 +7,7 @@
+ 
+ #include <drm/bridge/aux-bridge.h>
+ #include <linux/clk.h>
++#include <linux/delay.h>
+ #include <linux/gpio/consumer.h>
+ #include <linux/i2c.h>
+ #include <linux/kernel.h>
+@@ -184,6 +185,15 @@ static int ps883x_configure(struct ps883x_retimer *retimer, int cfg0,
+ 		return ret;
+ 	}
+ 
++	/*
++	 * The retimer needs time after the connection-status registers are
++	 * written for the analog front-end (PLLs, lane training) to settle.
++	 * Without this, DisplayPort Alt Mode hotplug is unreliable on some
++	 * docks (e.g. Lenovo 40B0). Qualcomm firmware on platforms that
++	 * program this chip from an MCU uses a similar post-config delay.
++	 */
++	fsleep(30000);
++
+ 	return 0;
+ }
+ 
+
+-- 
+2.53.0
 
 
---LFiAsPWOjKfv+Nmx
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-
-On Tue, Sep 22, 2026 at 12:38:11AM +0530, Ajay Kumar Nandam wrote:
-> On modem-DSP (mDSP) platforms the DSP runs in a stage-2 protected
-> context and cannot use the SMMU. PCM buffers must live in reserved-memory
-> carveouts that are SCM-assigned to the appropriate VMIDs.
-
-Please submit patches using subject lines reflecting the style for the
-subsystem, this makes it easier for people to identify relevant patches.
-Look at what existing commits in the area you're changing are doing and
-make sure your subject lines visually resemble what they're doing.
-There's no need to resubmit to fix this alone.
-
---LFiAsPWOjKfv+Nmx
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAABCgAdFiEEreZoqmdXGLWf4p/qJNaLcl1Uh9AFAmqycqwACgkQJNaLcl1U
-h9A/+gf/T8JL+RtFaRLxC8+bHI9qCoikjFfReVURxNayLiGcac5XMropiT7BHIZW
-Z0WHPWbRdxqGgBXPYixX7sfn6RBNCwUyPtbm33lfyv+ZmpEkzCxIXD6yP7iD674h
-80m9QdHKeskb0V23JDYnvxs7qN6hDC6GW9gZBjjUttyeaMmMKyeN2IFv+YIwI/vb
-AD4gQMaJQYkIfenZKYXot5V7kCrRjdz2o8gSHSHZdAQXhYPdNIQoOSO2toy72QrC
-mt33fbqZ2G5tqUtytiqsMGsqVWKZQNv3Q1LLm51cil0m/6hBk12tZ33ZgDyyIh7Y
-WiZGchDz2xKpytm4Rm73kT5q1omYqA==
-=5YX/
------END PGP SIGNATURE-----
-
---LFiAsPWOjKfv+Nmx--
