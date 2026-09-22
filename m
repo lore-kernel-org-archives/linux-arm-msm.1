@@ -1,63 +1,63 @@
-Received: from mail-wm2-f13.google.com (mail-wm2-f13.google.com [74.125.225.141])
+Received: from mail-wr2-f12.google.com (mail-wr2-f12.google.com [74.125.225.76])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 976F856C658
-	for <linux-arm-msm@vger.kernel.org>; Tue, 22 Sep 2026 16:57:49 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.225.141
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D078E566C55
+	for <linux-arm-msm@vger.kernel.org>; Tue, 22 Sep 2026 16:57:51 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.225.76
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790096272; cv=none; b=jgRsCwNUqQo9+VA5l6dwXcXgCCP8ZWBfkaP7xFz7A5PqaondmsaN9w67wk7HnMiKl+wW+5FfRoUbNIeBgIMlbk1Z/SNUZThNI6oXly9JltE9K5drcC1tP4GAViM0Bu0pUDy0jsphKM3fET+mjtXpeP+3QfACQERlppB8luAlDdQ=
+	t=1790096274; cv=none; b=mZBUiXqON7tp3kyfx8ftAo3cfb6NwpnhtaLgyTucCZrby32y0hS33SGnyD80rvx1+jdGXlkTbUQLnkYvovOORxNBZ5VlsXyNoGEQlxU12FOt8UZWidPq+12zM4wSbHTWiPVh//SkgheY3ZinD+06VroZeFdRKq9gPAGRq2ZgzJo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790096272; c=relaxed/simple;
-	bh=aid97Yjimc76nz+M6o0QWk1KtiDp95Qtk/akmNNnZ3Y=;
+	s=arc-20240116; t=1790096274; c=relaxed/simple;
+	bh=gQp5P6A4HKZPmr2RXt5nnsqu1turFNqjNRfQGzceh+w=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=CuWFWCKQV60hFZEM/KweqHH0EtANAfrsvj9v9dUesYcnN0P+Mv8vn06qbBwaPUNLtrH4138ziWLsLkbYN0v4dqgC34htC/qDsEV4W4QgtIEh167poTuyXR6lEuwD+XkargWZgi+FG3v8VYEiJw3r2224dCksKMB7StLaS2Od19k=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=b7MlO8GL; arc=none smtp.client-ip=74.125.225.141
+	 MIME-Version; b=gw1uZrXyYhAS5naxf0xy9+7c8tjd+IliIYOz9YliafGHn/TgtQH0ZkNAWn0wXAuBSIRtLq2OmrLAqbRGirbun/U1vgm+1ZQxPF3zpKyV/qu6WB86Mi3X8lZwP5Dujo/N280mdANo8zcthYCA93QQxMTYDSU/RZzI2tEn7bSkIRQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=ZABkxZUf; arc=none smtp.client-ip=74.125.225.76
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="b7MlO8GL"
-Received: by mail-wm2-f13.google.com with SMTP id 5b1f17b1804b1-49e79a408deso3365e9.2
-        for <linux-arm-msm@vger.kernel.org>; Tue, 22 Sep 2026 09:57:49 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="ZABkxZUf"
+Received: by mail-wr2-f12.google.com with SMTP id ffacd0b85a97d-4834977ae75so118205f8f.3
+        for <linux-arm-msm@vger.kernel.org>; Tue, 22 Sep 2026 09:57:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1790096268; x=1790701068; darn=vger.kernel.org;
+        d=gmail.com; s=20251104; t=1790096270; x=1790701070; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=Qdwj3z7uTqgFd/9Tfs5y2p+1zT+FzwY0f8o+/81CJMs=;
-        b=b7MlO8GLMCViwPcId7mm4Ioo2dqkBXcWt9Q/mxK1t+h0RkhUDQR3ZCtTMHiP6ORKqA
-         r+mbYqcRTIy2eAZYNBHDzTa5OORT2inB3NsQbIVEb40CkTtML64Kjp1bHkfiROIgMbjr
-         pvV9EKpfpC/x75de7w86rxcOoQHN8YTweBqL9Zurk+VeqMiwJ0G3nWX/rzLvZJCDzkRR
-         5dBfbox/zL1JaJVrzD/QKscyTTZxqRrPu88UvTA9SYDl1gwed5BDNo2tP4p6JQ44pemp
-         uazuvCnIpiry0ggzr0y2lea8PKDZxYZ6ilBwu6mF3m1pWxlygNoiV0Z2sGIGtskK3WBP
-         frDw==
+        bh=/eycLZYI0OnWON4y4DQc42djuKTXBLKJTdaLEQ0NYzI=;
+        b=ZABkxZUf0otGT+/5inGL3hhjZ1nWQrK0hU9ek87pyACpySKaLceOTqRKQEvfQ9IQJa
+         Vl1WQTc4mF/d2ivT3nZsoIzlT8DAyWRM7C1w5Rfgs/io9rTSZmZNenfmUJKSm9G4XcPk
+         gtW4S7a3qe1DKqv25xVInlKdZ7lQX0Bi9uJJkn9WS4RyBb+bWNZ3o/LPF9Kxq7zTH0TC
+         FdPsD669QYi+pD8PfEBLKffMjPBVZBGej3TwSS6QrGsl4ATmlROiOeHVz1pD0PsLENkm
+         5g8si/AE/bzLFdGn67Sulg9uwoZ1dOe8+0rI6DiPQR/pcQuQ8bqbSy4VtQAHzizMlx07
+         mPNA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790096268; x=1790701068;
+        d=1e100.net; s=20260707; t=1790096270; x=1790701070;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=Qdwj3z7uTqgFd/9Tfs5y2p+1zT+FzwY0f8o+/81CJMs=;
-        b=o5MyVduiKpYNoxCkMDrsWDT+GYq6YBEmX12OKLlR+wx3gE8Ezh5HTZsKLBXW8Xpk3J
-         iUPS3OmNXCvgTpFjq2QBoNy44PB017u2cdLVhs29dKCVWstEYTkNvu3WPmoR7W4VHG5e
-         WrpEq/g2YINLRbCuuLLXLDSRhUIPV/CW3wjAnP06Z8JzrA6aoUN0DYV71+6nmJwUmQct
-         XsNlfLdVy0lDQfXCEPi/VxLBVEueBcGzshIR6U4l0hOrWDbEu9WNW6zmUmvbWDpcJolH
-         1lu7eD+G6hA53ZQMfdyhwzoy5IFpZocnaRISx0rwk/y6NjJQxfiWlmWB59JhWpP20GMH
-         hFCg==
-X-Gm-Message-State: AFuF++mKYD4faDbjQQ5s42ioCG3ws6oIDI3adX9gw3u6ErUWfbadJ9cv
-	//fZrIiWwwFnzGJjX7qVHzxJbuZxgIRBkyFwzunSyDuADxEsah8l81fp
-X-Gm-Gg: AYBFou3pj9d5mvDTzSjJD1a+xevwBpBiV0q61yCzECTRks0kDieXOUwuc7QjpMDBexi
-	pCMP0WSmIyuiUv6X9+NJCPQjbPUJZg7zIQ1dT+RBHNJVsP111BhlSr6TmepnANvOsQN6lhArZmU
-	WEKsVpkoN2q3IQKn/KeVAxfOJIS2yzDFQu6CgS2I7gmg1ZR+z/qs6YgZi8gVSdaV4Auo/bfrvoR
-	Fk970nZDq+M6GjRi/qjEGv6PgucgF8VX2zraX9xpTfBk156lDa1piNkQ1caB55XDkdro9EVEXj3
-	CsciRMz/l/RbciCTzrjDk1u5B8vwssGPQuzzbBEPQdPuxhjvgRnTnNTvWG7SzWK4CbGsnaxOnKr
-	Rtxd5MwFA2AaE8QAiYfNHfI8Y9t/UbZ0nAp0gI/5pv06PuIiQ3aUUu+264vtp50dwGy4HRYsEyA
-	Fdfe0Hvk/FtN/eCaLjaCsBubUKZCskiUgxRRJazyX88fQvDNaUA8PONbNqieTPYCEMvNJOyzcm6
-	Fon3CzI6/BMDn8h+Q==
-X-Received: by 2002:a05:600c:19cb:b0:49e:8184:f619 with SMTP id 5b1f17b1804b1-49fc57410f2mr206302025e9.22.1790096267744;
-        Tue, 22 Sep 2026 09:57:47 -0700 (PDT)
+        bh=/eycLZYI0OnWON4y4DQc42djuKTXBLKJTdaLEQ0NYzI=;
+        b=S+bFwVyAwB+sMfSDrVpJpeM9tlPz0U3IyQJ0btVv4CShDlTc8FtUGqikQWY6nm9Xnp
+         NQg2a4a4Pzn9IrkOUrO05spoDAPY+61gfORxBC61ZfLgZUXJt2n7uEGTXK5M3u3Vx+MY
+         pAHPGqwz7dEh07eoxo3F197WoIpy5FaoLNhnUCX7Z75L0kP8yDOMgsGdQ0JbEptPhfOV
+         BVqo/evP52YG66l9zSvOTNprpsN1gTd3VZtetis9c8U/ELyKzC1AAVpPL5hMHLhRhF/N
+         c2/vou4tbmgIAdvLR8z+EA/bZYlEvHIONmhDZ/3rJRNaXxCjMka8/SwHOsKl0IuLUzbb
+         z+aw==
+X-Gm-Message-State: AFuF++kQOR1sTBhGGjiUSZk0b0BbVhM/ST9NElrOktEaKq2ukSffBlUU
+	2z1WoRPuauuPAbqtuEgre2QubVhss6Rs7F5imXUG4MhGq9OCRRyufivQ
+X-Gm-Gg: AYBFou2d2KwJqiU+kqdB4fzemaEOTT7V0PU7WzQsSZupax/VPbwyzgEGkOdWo2s6pfs
+	H89SAz4dM+ertQtCf6TtQ2ZQZoCT0rTJy/7v2iXP16trqgd7Ez3+XRSiln5xuuGAZe3I03y/ZJl
+	ak/QfxkYZ6UINr71dlUShrVuZEjzZi0u9sVftgdY1VCKAiv7ym2KVOQVTSO5VTHn8V+boUQdDBO
+	JcglKVUuOsdktAqxrtEbEvRbeBvxOqEHI6uhYXX41FXKICZiWYwcVdfJjZzV26ArVF0AozTUkxt
+	CanNR6PBam7GGuQahv/1P5Z+RMPwenlv7r6T+igH3elgVrNuZ4zUx7N64kCSBxhOLxkazDpEIgb
+	/o0xO2UMgzE2a5Ks4fZ/w2cL4LNia4u23v3vS0WtcScWFuNSYRWLYZqcZzZOxHOs7ti4x5PomzL
+	2sp+R1LkhvnOIZe4zD1K1tDyesqe6KVqWkJ2iwC02afRTbqOsqGIGyQY8zpZ+EbvnG2vjihrhPN
+	8Wqbw0=
+X-Received: by 2002:a05:600c:64c5:b0:49e:6c11:c4fc with SMTP id 5b1f17b1804b1-49fc56aa4e8mr216310585e9.7.1790096269744;
+        Tue, 22 Sep 2026 09:57:49 -0700 (PDT)
 Received: from localhost.localdomain ([94.252.75.113])
-        by smtp.googlemail.com with ESMTPSA id 5b1f17b1804b1-49fdabe8a2asm68693625e9.4.2026.09.22.09.57.46
+        by smtp.googlemail.com with ESMTPSA id 5b1f17b1804b1-49fdabe8a2asm68693625e9.4.2026.09.22.09.57.48
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 22 Sep 2026 09:57:47 -0700 (PDT)
+        Tue, 22 Sep 2026 09:57:49 -0700 (PDT)
 From: Oleg Keri <okerixx@gmail.com>
 To: Rob Herring <robh@kernel.org>,
 	Krzysztof Kozlowski <krzk+dt@kernel.org>,
@@ -73,11 +73,10 @@ Cc: linux-arm-msm@vger.kernel.org,
 	devicetree@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
 	platform-driver-x86@vger.kernel.org,
-	linux-hwmon@vger.kernel.org,
-	Conor Dooley <conor.dooley@microchip.com>
-Subject: [PATCH v4 1/3] dt-bindings: embedded-controller: add Lenovo Yoga Slim 7x Gen 11 EC
-Date: Tue, 22 Sep 2026 18:57:35 +0200
-Message-ID: <20260922165737.260443-2-okerixx@gmail.com>
+	linux-hwmon@vger.kernel.org
+Subject: [PATCH v4 3/3] arm64: dts: qcom: glymur-lenovo-yoga-slim7x: add the embedded controller
+Date: Tue, 22 Sep 2026 18:57:37 +0200
+Message-ID: <20260922165737.260443-4-okerixx@gmail.com>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20260922165737.260443-1-okerixx@gmail.com>
 References: <20260922165737.260443-1-okerixx@gmail.com>
@@ -89,100 +88,52 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Document the Compal embedded controller found on the Lenovo Yoga Slim 7x
-Gen 11, a Qualcomm Snapdragon X2 Elite (glymur) laptop. It sits on I2C at
-address 0x70 and is distinct from the Qualcomm reference EC that the
-reference designs place at 0x76.
+Describe the Compal embedded controller on I2C at address 0x70. It
+provides the board thermistors, the battery cell voltages and the CPU fan
+speed, and drives the keyboard backlight. Its interrupt line is TLMM
+gpio66, falling edge, for which the file already carries a pin state.
+
+That state leaves the pin without a bias. gpio66 has no external pull
+and floats when the EC is not driving it, which shows up as a steady
+stream of spurious edges; the vendor ACPI tables describe the same pin
+as GpioInt(Edge, ActiveLow, Exclusive, PullUp). Enable the pull-up.
 
 Signed-off-by: Oleg Keri <okerixx@gmail.com>
-Acked-by: Conor Dooley <conor.dooley@microchip.com>
 ---
- .../lenovo,yoga-slim7x-gen11-ec.yaml          | 56 +++++++++++++++++++
- MAINTAINERS                                   |  8 +++
- 2 files changed, 64 insertions(+)
- create mode 100644 Documentation/devicetree/bindings/embedded-controller/lenovo,yoga-slim7x-gen11-ec.yaml
+ .../boot/dts/qcom/glymur-lenovo-yoga-slim7x.dts      | 12 ++++++++++--
+ 1 file changed, 10 insertions(+), 2 deletions(-)
 
-diff --git a/Documentation/devicetree/bindings/embedded-controller/lenovo,yoga-slim7x-gen11-ec.yaml b/Documentation/devicetree/bindings/embedded-controller/lenovo,yoga-slim7x-gen11-ec.yaml
-new file mode 100644
-index 000000000000..37337de86b0b
---- /dev/null
-+++ b/Documentation/devicetree/bindings/embedded-controller/lenovo,yoga-slim7x-gen11-ec.yaml
-@@ -0,0 +1,56 @@
-+# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
-+%YAML 1.2
-+---
-+$id: http://devicetree.org/schemas/embedded-controller/lenovo,yoga-slim7x-gen11-ec.yaml#
-+$schema: http://devicetree.org/meta-schemas/core.yaml#
-+
-+title: Lenovo Yoga Slim 7x Gen 11 Embedded Controller
-+
-+maintainers:
-+  - Oleg Keri <okerixx@gmail.com>
-+
-+description:
-+  The Lenovo Yoga Slim 7x Gen 11, a Qualcomm Snapdragon X2 Elite (glymur)
-+  laptop, has a Compal embedded controller on I2C. It reports board
-+  thermistors, battery cell voltages and CPU fan speed, and drives the
-+  keyboard backlight.
-+
-+  This controller is not the Qualcomm reference EC that the Snapdragon
-+  reference designs place at address 0x76; it speaks a different command
-+  set and answers at 0x70.
-+
-+properties:
-+  compatible:
-+    const: lenovo,yoga-slim7x-gen11-ec
-+
-+  reg:
-+    const: 0x70
-+
-+  interrupts:
-+    maxItems: 1
-+    description:
-+      The controller pulses this line while it has events queued.
-+
-+required:
-+  - compatible
-+  - reg
-+  - interrupts
-+
-+additionalProperties: false
-+
-+examples:
-+  - |
-+    #include <dt-bindings/interrupt-controller/irq.h>
-+
-+    i2c {
-+        #address-cells = <1>;
-+        #size-cells = <0>;
-+
-+        embedded-controller@70 {
-+            compatible = "lenovo,yoga-slim7x-gen11-ec";
-+            reg = <0x70>;
-+
-+            interrupts-extended = <&tlmm 66 IRQ_TYPE_EDGE_FALLING>;
-+        };
-+    };
-+...
-diff --git a/MAINTAINERS b/MAINTAINERS
-index be096be5fff6..11d459c17caf 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -14966,6 +14966,14 @@ S:	Maintained
- F:	Documentation/ABI/testing/sysfs-driver-lenovo-yb9-kbdock
- F:	drivers/platform/x86/lenovo/yb9-kbdock.c
+diff --git a/arch/arm64/boot/dts/qcom/glymur-lenovo-yoga-slim7x.dts b/arch/arm64/boot/dts/qcom/glymur-lenovo-yoga-slim7x.dts
+index 769f195c99d9..bc840fd8e458 100644
+--- a/arch/arm64/boot/dts/qcom/glymur-lenovo-yoga-slim7x.dts
++++ b/arch/arm64/boot/dts/qcom/glymur-lenovo-yoga-slim7x.dts
+@@ -659,7 +659,15 @@ &i2c9 {
  
-+LENOVO YOGA SLIM 7X GEN 11 EMBEDDED CONTROLLER DRIVER
-+M:	Oleg Keri <okerixx@gmail.com>
-+L:	linux-arm-msm@vger.kernel.org
-+S:	Maintained
-+F:	Documentation/ABI/testing/sysfs-driver-lenovo-yoga-slim7x-gen11-ec
-+F:	Documentation/devicetree/bindings/embedded-controller/lenovo,yoga-slim7x-gen11-ec.yaml
-+F:	drivers/platform/arm64/lenovo-yoga-slim7x-gen11-ec.c
+ 	status = "okay";
+ 
+-	/* EC @ 0x70, irq = TLMM 66 */
++	embedded-controller@70 {
++		compatible = "lenovo,yoga-slim7x-gen11-ec";
++		reg = <0x70>;
 +
- LETSKETCH HID TABLET DRIVER
- M:	Hans de Goede <hansg@kernel.org>
- L:	linux-input@vger.kernel.org
++		interrupts-extended = <&tlmm 66 IRQ_TYPE_EDGE_FALLING>;
++
++		pinctrl-0 = <&ec_int_n_default>;
++		pinctrl-names = "default";
++	};
+ };
+ 
+ &lpass_vamacro {
+@@ -990,7 +998,7 @@ reset-n-pins {
+ 	ec_int_n_default: ec-int-n-state {
+ 		pins = "gpio66";
+ 		function = "gpio";
+-		bias-disable;
++		bias-pull-up;
+ 	};
+ 
+ 	kybd_default: kybd-default-state {
+base-commit: 5c4d4169604b335c38bbc79bc1fc03042981fc6f
 -- 
 2.55.0
 
