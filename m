@@ -1,185 +1,119 @@
-Received: from mail-pj2-f13.google.com (mail-pj2-f13.google.com [74.125.227.141])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CCBAA4534BB
-	for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 07:43:30 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.227.141
+Received: from azure-sdnproxy.icoremail.net (azure-sdnproxy.icoremail.net [13.75.44.102])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 33D3C3C0635;
+	Wed, 23 Sep 2026 07:49:27 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=13.75.44.102
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790149413; cv=none; b=fg3QxBS6VOHSdIWkWg0SvfVbwZdSOdXvsnCg6wkatlbI2egP4wUukM3Tdm1icq6xW7ykHKz/Kk9w5BUXlSnZHN074Oy8ilzVx49fxCpzBTGFpW21rzuRsBwLq+VO959Gm2/5uv/gPLZuc3y9Z7Ssbw4t8kMvY0qJwajrZgY8r1o=
+	t=1790149782; cv=none; b=uXJwQQ7goSkviT/8YcAoUJW8tWfxrTkkp4ax4MwDaotZxKAvb/O6ICii1/HlUaUf4h1lgm3Xoxm0QTVebhs4a/0azxDD8glwLRsReUdowDxPXf474593b3uSIH6CurxtnNGTVtqb0qYH9eBwNlkDdamuwY4N2IQz2X/kwKsT5dg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790149413; c=relaxed/simple;
-	bh=3ynPRFOw69zBjBhXGv5WUX93AMW2qHMo6hMQrCg0Zko=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=G4RynaLgiAGSNH4gXAu/KIUivm9wHkNsokeSRvv/v91RCKhwGVoIfBmONFbYMV3tWrRb3p5u+F4jY0UpwEbE4bjRg2AntZZ7/CnzjzwIgIiPi4gaCXkUbBMwrTXYyaS8uxe8uaVA2pnnWzzvaGNcKmRHfh64GA9YipQl1Kik3Sg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=GWqJQX5b; arc=none smtp.client-ip=74.125.227.141
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="GWqJQX5b"
-Received: by mail-pj2-f13.google.com with SMTP id d9443c01a7336-2dd4b8eb7f9so494255ad.3
-        for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 00:43:30 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1790149409; x=1790754209; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:mime-version:references
-         :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=rEwYnSIhHf9oeFrDmCKSYOnbIRlltkd0nAWN7h+lPkw=;
-        b=GWqJQX5bqpgx4DZGBxAGlxY8sLNBaOojyG+3EkDon1uJ58xRR4QrW2fJBiGYaQVMS2
-         QlCyOjAz1LSHZZUbAmGDch0xCCZ0WUTqFAb9cRyVNfazhVcR8jRlrKPUNSroEkXwuNDq
-         GbT2vHlc2j+XMRnglpJ0aAN05H9g2K5ZZtJR9gG5vzdVUnFSkaP2gnrL1evYUN2K/ikQ
-         W/AISyCYbmG28R9VrDE5ERJwIkk4qTDaozTJHP/Guo2nqOPp3F/YgnKbR8CkT9Ii9ena
-         31nsrw5Q82rPXk3kSKZTw4f5vnHBOo/K1tR8TRpWh1Hz26lGn48WWNu6HNV7Hva5eV2e
-         T2HQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790149409; x=1790754209;
-        h=content-transfer-encoding:content-type:mime-version:references
-         :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=rEwYnSIhHf9oeFrDmCKSYOnbIRlltkd0nAWN7h+lPkw=;
-        b=cdWLGv/i4thNAxZpkKXPwdOeRNsMTeLtL9uyc6dEEX6xPPZ9iu9XUrSLiBIQgeMqEX
-         wphjiBh6PVNWXlNcrdF+zzutICsJUaiPBib6PKwBn26A7SH4zFzTS+9BquXDFaxeeain
-         b5c/R2AMgU8Joz4vntpDW+/ikHmRda4KDPnM6zNP62Ui1z+Fr5tj0Nr1oZWdBnys2ntN
-         6DmZ8TssKDsppnw7rUvno1WbQd3WEV9afQ8qlAGTCKNRifteUTfSIcTEGnNZVGR2Y6X7
-         4CK8NjUVV/dZRFgSn2GEgzds1orF84yIs3IgKnncW+96EzRR/W0Klh7s/2IEOerzcL36
-         PGqA==
-X-Gm-Message-State: AFuF++mj9/v//mprh9n+t9Q/hJpMVgvH9EWyo1joy7A+QkARqyHF7try
-	QTY0QHQsQ02ZlK1w5CTS9TrBWx9ZXov611qUOSvF0K/i5922AYs64jFG
-X-Gm-Gg: AYBFou3uUoKtw3Y5aW/Eg7K2UKx1MUZfI68NGy3YmnC+5bHyP+hAhvkq9/P3ihwzo4V
-	8uCL74PSd5QW6ntiGStS2KPhaI3CUd/fWLcDyniIpts612gHxghHLvRRhaAK4tC/AKQ50rTE6no
-	SbtZOaNABtstwE/otwNhOykSHWFeH3iks8sN5HxqmiJiRD+ONknQk/jKq8A0iYqV/xzHeIHbZRM
-	s25a0HLYUPuSxz15JphHQPUEmCcC67aWo5ORnLmS0H+3nFv+nMHpmAGf5nH13/LoZ2qQneaYUo1
-	bl/vm4A3EsNFHZ/W1lPuWXTIXJLxf+qoxWcTYJNVy8WNIf0ny4YrGX8qwxfzwet42Hl47NxpfPb
-	76bBcJiVvMd1N0AMLvAkw2bTYuMNdm2eoTEtqsmEnJkKtwRHvXNtQypw2WKv98pd4N0J4zB80bd
-	5fsAQ1E6jfi5A6WZtzIJ1JHscJ5jMN5Z3NpoR4oqBKT9IJCX6XDQOPAQ4k8fLL2u1wfJgCgA6o5
-	WLHau9/c90I81Cx9tYkBDFg
-X-Received: by 2002:a17:903:286:b0:2d8:d29b:c1e5 with SMTP id d9443c01a7336-2df69bec023mr25035305ad.0.1790149408727;
-        Wed, 23 Sep 2026 00:43:28 -0700 (PDT)
-Received: from jfliu-sfa1411.. ([129.227.183.200])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2df6a5d9273sm6406785ad.50.2026.09.23.00.43.23
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 23 Sep 2026 00:43:28 -0700 (PDT)
-From: Jianfeng Liu <liujianfeng1994@gmail.com>
-To: dri-devel@lists.freedesktop.org,
-	linux-media@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Cc: linux-arm-msm@vger.kernel.org,
-	Jessica Zhang <jesszhan0024@gmail.com>,
-	Sumit Semwal <sumit.semwal@linaro.org>,
-	linaro-mm-sig@lists.linaro.org,
-	=?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>,
-	Rob Clark <robin.clark@oss.qualcomm.com>,
-	Sean Paul <sean@poorly.run>,
-	Simona Vetter <simona@ffwll.ch>,
-	freedreno@lists.freedesktop.org,
-	Marijn Suijten <marijn.suijten@somainline.org>,
-	David Airlie <airlied@gmail.com>,
-	Dmitry Baryshkov <lumag@kernel.org>,
-	Abhinav Kumar <abhinav.kumar@linux.dev>,
-	Jianfeng Liu <liujianfeng1994@gmail.com>
-Subject: [RFC PATCH v1 2/2] drm/msm: reject dma-buf imports without struct page info
-Date: Wed, 23 Sep 2026 15:42:23 +0800
-Message-ID: <20260923074256.9357-3-liujianfeng1994@gmail.com>
-X-Mailer: git-send-email 2.47.3
-In-Reply-To: <20260923074256.9357-1-liujianfeng1994@gmail.com>
-References: <20260923074256.9357-1-liujianfeng1994@gmail.com>
+	s=arc-20240116; t=1790149782; c=relaxed/simple;
+	bh=m/cEceOzCnDodbXJi1kYlQoLj5ukhZwRLEOl76ErlNE=;
+	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=EcXF0clRBrxvDlz+kT44y14wUHFQNukFVeDHJO33G/jqREtGEgEsZ7WMlNiOeXPOYLZpzJadtHnZCZPX6L6lMBJg3T7F2YJCiqm63VUqAxgwHvVh4knBntb0GeGa6RW+tMvj0X7N561dSAROTERhHJa9qAYXBzz1MdaiaSqSa4I=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=zju.edu.cn; spf=pass smtp.mailfrom=zju.edu.cn; arc=none smtp.client-ip=13.75.44.102
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=zju.edu.cn
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=zju.edu.cn
+Received: from zju.edu.cn (unknown [10.98.66.117])
+	by mtasvr (Coremail) with SMTP id _____wAHAYWEhLNq6vwwAQ--.6303S3;
+	Wed, 23 Sep 2026 15:49:25 +0800 (CST)
+Received: from localhost.localdomain (unknown [10.98.66.117])
+	by mail-app4 (Coremail) with SMTP id zi_KCgAnezODhLNq65_OAw--.39044S2;
+	Wed, 23 Sep 2026 15:49:23 +0800 (CST)
+From: Fan Wu <fanwu01@zju.edu.cn>
+To: Heikki Krogerus <heikki.krogerus@linux.intel.com>
+Cc: linux-usb@vger.kernel.org,
+	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+	linux-arm-msm@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	Fan Wu <fanwu01@zju.edu.cn>,
+	stable@vger.kernel.org,
+	Song Li <songl@zju.edu.cn>
+Subject: [PATCH] usb: typec: ucsi: yoga-c630: unregister EC notifier before UCSI teardown
+Date: Wed, 23 Sep 2026 07:48:28 +0000
+Message-Id: <20260923074828.489562-1-fanwu01@zju.edu.cn>
+X-Mailer: git-send-email 2.34.1
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
+X-CM-TRANSID:zi_KCgAnezODhLNq65_OAw--.39044S2
+X-CM-SenderInfo: qrstjiaswqq6lmxovvfxof0/
+X-CM-DELIVERINFO: =?B?7bhr7wXKKxbFmtjJiESix3B1w3vZ3A9ovKVTomAyoQazvoRs/NHSP8GI2EvgeEEW7R
+	sfnXz+g1OQfMo27QHy5TwQyZwE/vSQZ160CDmmYAs9ddiCPQNmRWzJkHDvskmO3z+yVcoJ
+	pDGAI6upKb0vpIyZY2Op9E6mavGmQbzmcFsnzP86
+X-Coremail-Antispam: 1Uk129KBj93XoW7tw45XF1rtrWUCw1DXry5Awc_yoW5JF4Dpr
+	nIkaykGrW0qF45Ww45u3W5JFy5AF97JFWUZ347W348Krs8Jas7ua97AFy5ZFy5Ar1DCF47
+	tw45K3y5Z398A3gCm3ZEXasCq-sJn29KB7ZKAUJUUUUU529EdanIXcx71UUUUU7KY7ZEXa
+	sCq-sGcSsGvfJ3Ic02F40EFcxC0VAKzVAqx4xG6I80ebIjqfuFe4nvWSU5nxnvy29KBjDU
+	0xBIdaVrnRJUUU9Gb4IE77IF4wAFF20E14v26r4j6ryUM7CY07I20VC2zVCF04k26cxKx2
+	IYs7xG6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48v
+	e4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_tr0E3s1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI
+	0_Gr1j6F4UJwA2z4x0Y4vEx4A2jsIE14v26rxl6s0DM28EF7xvwVC2z280aVCY1x0267AK
+	xVW0oVCq3wAac4AC62xK8xCEY4vEwIxC4wAS0I0E0xvYzxvE52x082IY62kv0487Mc804V
+	CY07AIYIkI8VC2zVCFFI0UMc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0I7IYx2IY67AK
+	xVWUJVWUGwAv7VC2z280aVAFwI0_Gr0_Cr1lOx8S6xCaFVCjc4AY6r1j6r4UM4x0Y48Icx
+	kI7VAKI48JM4x0Y48IcxkI7VAKI48G6xCjnVAKz4kxMxAIw28IcxkI7VAKI48JMxC20s02
+	6xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8CrVAFwI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_Jr
+	I_JrWlx4CE17CEb7AF67AKxVWUtVW8ZwCIc40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v2
+	6r1j6r1xMIIF0xvE2Ix0cI8IcVCY1x0267AKxVWUJVW8JwCI42IY6xAIw20EY4v20xvaj4
+	0_Jr0_JF4lIxAIcVC2z280aVAFwI0_Gr0_Cr1lIxAIcVC2z280aVCY1x0267AKxVW8JVW8
+	JrUvcSsGvfC2KfnxnUUI43ZEXa7IU86c_DUUUUU==
 
-msm_gem_import() fills the GEM object's page array with the deprecated
-drm_prime_sg_to_page_array() and stores the attachment sg_table for
-later mapping into the GPU's own pagetables via iommu_map_sgtable().
-Both need the struct page of the sg_table:
+Both yoga_c630_ucsi_remove() and the probe error path call
+ucsi_unregister() while the EC notifier is still registered.
+ucsi_unregister() frees the connector array, so an EC event (USB, HPD or
+UCSI) arriving before yoga_c630_ec_unregister_notify() makes
+yoga_c630_ucsi_notify() run on freed memory: typec_set_orientation() on the
+freed port and ucsi_connector_change() queuing work in the freed connector
+array. USB and HPD events do not depend on the UCSI notification-enable
+state, so the disable command ucsi_unregister() sends to the EC does not
+close this window.
 
- - iommu_map_sg() maps sg_phys() of each entry, and
- - drm_prime_sg_to_page_array() iterates with for_each_sgtable_page,
-   which walks sg->length.
+Fix this by unregistering the EC notifier before ucsi_unregister() in both
+paths, restoring the teardown ordering from before the error and remove
+paths were reworked. blocking_notifier_chain_unregister() waits for a
+running callback, so once it returns the EC interrupt thread can no longer
+reach the UCSI instance and ucsi_unregister() can tear the connectors down
+undisturbed.
 
-When CONFIG_DMABUF_DEBUG=y, dma_buf_map_attachment() hands importers
-a copy of the sg_table with the page pointers stripped and sg->length
-zeroed.  In that case drm_prime_sg_to_page_array() "succeeds" while
-filling zero entries, leaving msm_obj->pages uninitialized garbage
-(kvmalloc_objs() does not zero).  The buffer is imported anyway, and
-the first VM_BIND map of it fails asynchronously in the scheduler job
-run - after userspace has already enqueued GPU work referencing the
-mapping.  Userspace then observes arm-smmu translation faults from
-UCHE, e.g. hardware video decode in clapper/chromium:
+The callback is also the only external source that requeues the connector
+work, so the cancel_work_sync() calls in ucsi_unregister() can no longer
+race with a new connector-change event.
 
-  gpu fault: ttbr0=000000088a889000 iova=000000010741c000 dir=READ
-  type=TRANSLATION source=UCHE
+This issue was found by an in-house static analysis tool.
 
-Replace the deprecated helper with an explicit loop so that a missing
-or short page list is detected at import time and rejected with
--EINVAL.  This turns the silent memory corruption into a clean import
-error, letting userspace fall back instead of crashing the GPU.
-
-Note that msm fundamentally cannot map a page-less sg_table into its
-per-process GPU pagetables (it needs the physical addresses), so
-imports of such buffers can never work until msm is converted to
-build its GPU mappings from the attachment's DMA addresses.
-
-Signed-off-by: Jianfeng Liu <liujianfeng1994@gmail.com>
-
+Fixes: 168c3896f32e ("usb: typec: ucsi: yoga-c630: fix error and remove paths")
+Cc: stable@vger.kernel.org
+Co-developed-by: Song Li <songl@zju.edu.cn>
+Signed-off-by: Song Li <songl@zju.edu.cn>
+Signed-off-by: Fan Wu <fanwu01@zju.edu.cn>
 ---
+ drivers/usb/typec/ucsi/ucsi_yoga_c630.c | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
- drivers/gpu/drm/msm/msm_gem.c | 31 ++++++++++++++++++++++++++++---
- 1 file changed, 28 insertions(+), 3 deletions(-)
-
-diff --git a/drivers/gpu/drm/msm/msm_gem.c b/drivers/gpu/drm/msm/msm_gem.c
-index c4cff3d53d81b..0d5a91181d05b 100644
---- a/drivers/gpu/drm/msm/msm_gem.c
-+++ b/drivers/gpu/drm/msm/msm_gem.c
-@@ -1307,7 +1307,8 @@ struct drm_gem_object *msm_gem_import(struct drm_device *dev,
- 	struct msm_gem_object *msm_obj;
- 	struct drm_gem_object *obj;
- 	struct dma_buf *dmabuf = attach->dmabuf;
--	size_t size, npages;
-+	struct sg_page_iter piter;
-+	size_t size, npages, filled = 0;
- 	int ret;
+diff --git a/drivers/usb/typec/ucsi/ucsi_yoga_c630.c b/drivers/usb/typec/ucsi/ucsi_yoga_c630.c
+index 1be18d1..59738dc 100644
+--- a/drivers/usb/typec/ucsi/ucsi_yoga_c630.c
++++ b/drivers/usb/typec/ucsi/ucsi_yoga_c630.c
+@@ -296,7 +296,9 @@ static int yoga_c630_ucsi_probe(struct auxiliary_device *adev,
+ 	return 0;
  
- 	size = PAGE_ALIGN(dmabuf->size);
-@@ -1333,8 +1334,32 @@ struct drm_gem_object *msm_gem_import(struct drm_device *dev,
- 		goto fail;
- 	}
+ err_ucsi_unregister:
++	yoga_c630_ec_unregister_notify(uec->ec, &uec->nb);
+ 	ucsi_unregister(uec->ucsi);
++	goto err_destroy;
  
--	ret = drm_prime_sg_to_page_array(sgt, msm_obj->pages, npages);
--	if (ret) {
-+	/*
-+	 * Fill the page array ourselves instead of using the deprecated
-+	 * drm_prime_sg_to_page_array(), so that we can detect sg_tables
-+	 * that carry no struct page at all.  Those must be rejected:
-+	 * msm maps imported buffers into the GPU's own pagetables with
-+	 * iommu_map_sgtable(), which needs the physical pages, so an
-+	 * import without page information could never be mapped.  The
-+	 * most prominent case is the page-stripping sg_table wrapper that
-+	 * dma_buf_map_attachment() hands out when CONFIG_DMABUF_DEBUG=y.
-+	 *
-+	 * drm_prime_sg_to_page_array() would "succeed" with zero entries
-+	 * filled in that case and leave msm_obj->pages uninitialized,
-+	 * which later blows up as arm-smmu translation faults from UCHE.
-+	 */
-+	for_each_sgtable_page(sgt, &piter, 0) {
-+		if (WARN_ON(filled >= npages)) {
-+			ret = -EINVAL;
-+			goto fail;
-+		}
-+		msm_obj->pages[filled++] = sg_page_iter_page(&piter);
-+	}
-+	if (filled != npages) {
-+		DRM_DEV_ERROR(dev->dev,
-+			      "import of dmabuf from '%s' rejected: sg_table has no/misaligned struct page info\n",
-+			      dmabuf->exp_name ?: "?");
-+		ret = -EINVAL;
- 		goto fail;
- 	}
+ err_unregister:
+ 	yoga_c630_ec_unregister_notify(uec->ec, &uec->nb);
+@@ -311,8 +313,8 @@ static void yoga_c630_ucsi_remove(struct auxiliary_device *adev)
+ {
+ 	struct yoga_c630_ucsi *uec = auxiliary_get_drvdata(adev);
  
--- 
-2.47.3
+-	ucsi_unregister(uec->ucsi);
+ 	yoga_c630_ec_unregister_notify(uec->ec, &uec->nb);
++	ucsi_unregister(uec->ucsi);
+ 	ucsi_destroy(uec->ucsi);
+ }
+ 
 
