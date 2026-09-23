@@ -1,89 +1,95 @@
-Received: from vps0.lunn.ch (vps0.lunn.ch [156.67.10.101])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mta1.migadu.com (out-43.mta1.migadu.com [95.215.58.43])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 95ABE481255;
-	Wed, 23 Sep 2026 15:16:35 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=156.67.10.101
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7FF9B382F1A
+	for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 15:25:35 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=95.215.58.43
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790176597; cv=none; b=RVUqxkPL+rHPdWtW3zQ7odF7AikSxHTYpS2rO/3+Z+rvDifnRvVzl4NFxUrll/5X+1Tgv2lCRn+4+X9nSEXGDEIFFis1mkchv66XdarvfC9SYBCK8HqfXERjW6S/mL5hkGYNdST+z6cQEagrmtCamtGph4h9JbSo8Z007VBQlXE=
+	t=1790177143; cv=none; b=mE2zmn632kIJy2jiXhWcj3OOuvXPOCxG4As8CnNI8Umy/WYl5zo1CUinc8JFLu85jQeXmWUN+uh+YVllZoyJScuPKpn8LgcIrIN9PXUhKR1pzjMUADZcqWDQ2It3UB/c8RezddJHJueLZzikjfXkHpQNJiHbYTWbozP7+s+LW3c=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790176597; c=relaxed/simple;
-	bh=05dlzMt6G88nV3zR2PPD19DDLvKz4gMdaNvj7ZzU0lo=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=n+0vXmzdTWFQDySaIDU5NjdJBT1SNjhsOywvqze7vBdKOX4YTxk6L2udtt6qaITl8jO6suzsRAw+7oP0lScy+oi0pfgvItTQFWz3j5Um38i2xlEKS8SEImnSxATPjxWcBzczz506D+lda9fIeu9DtVlLJDHaZVv16xLy078GSIU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lunn.ch; spf=pass smtp.mailfrom=lunn.ch; dkim=pass (1024-bit key) header.d=lunn.ch header.i=@lunn.ch header.b=mAps+FK/; arc=none smtp.client-ip=156.67.10.101
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lunn.ch
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lunn.ch
+	s=arc-20240116; t=1790177143; c=relaxed/simple;
+	bh=3ROL16dsAh+c8sg22iUPVfDiQwxBVc7mKsfDKO9pLq8=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=QpMSEh0n9T6NBSV25dIhQGqwg293ZDGof/yWkw4lfXEkNelnRW4MbrHl1JealHqtjPcGWRN/2QlQ6NyIWmVR+0xIYESrtbF0KF9kv/poV9Gu0q7F77TkuwymoUJX1YT8Lz7i/0E7VykR6Of2ZD8edFSGUrlInh7DNG6dKG3m7zc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=akao.au; spf=pass smtp.mailfrom=akao.au; dkim=pass (2048-bit key) header.d=akao.au header.i=@akao.au header.b=eh3PIzuJ; arc=none smtp.client-ip=95.215.58.43
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=akao.au
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=akao.au
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=lunn.ch header.i=@lunn.ch header.b="mAps+FK/"
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=lunn.ch;
-	s=20171124; h=In-Reply-To:Content-Disposition:Content-Type:MIME-Version:
-	References:Message-ID:Subject:Cc:To:From:Date:From:Sender:Reply-To:Subject:
-	Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:
-	Content-ID:Content-Description:Content-Disposition:In-Reply-To:References;
-	bh=DpKeGCK87szjoNyGISCstPHlTshXz1Y1JnVLiGLvX08=; b=mAps+FK/IKHLGJ6ryyNEBZvMiy
-	bcob3AzJv2CKb4NGjVgsMdiqL88mKJMrEMrOitydGxlvnFVAH7TAL0K0g5ZmX0seI42XjRW1qWwFs
-	9Z2qzk2hlUukq5g+5UsTbSlX/yXgea5nXAmrpo2fjnbSub8+8MUOwkdr6Ko4Dq9tAF7Y=;
-Received: from andrew by vps0.lunn.ch with local (Exim 4.94.2)
-	(envelope-from <andrew@lunn.ch>)
-	id 1x9OhO-006pZU-S5; Wed, 23 Sep 2026 17:15:54 +0200
-Date: Wed, 23 Sep 2026 17:15:54 +0200
-From: Andrew Lunn <andrew@lunn.ch>
-To: Zhangfei Gao <zhangfei.gao@oss.qualcomm.com>
-Cc: Mohd Ayaan Anwar <mohd.anwar@oss.qualcomm.com>,
-	Andrew Lunn <andrew+netdev@lunn.ch>,
-	"David S. Miller" <davem@davemloft.net>,
-	Eric Dumazet <edumazet@google.com>,
-	Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
+	dkim=pass (2048-bit key) header.d=akao.au header.i=@akao.au header.b="eh3PIzuJ"
+X-Envelope-To: linux-arm-msm@vger.kernel.org
+DKIM-Signature: a=rsa-sha256; bh=3ROL16dsAh+c8sg22iUPVfDiQwxBVc7mKsfDKO9pLq8=;
+ c=simple/simple; d=akao.au;
+ h=from:to:subject:date:message-id:mime-version:content-type; s=key1;
+ t=1790177132; v=1; x=1790781932;
+ b=eh3PIzuJdtkTzNASTqrfWxAHggwqNNw4+qddWx4WFrO/OwG7uAm8/REC+s2sbpQKwnqZ3yJ2
+ KgupTGEexkHjpo6w6bHo/WCtVcRQhJmJHnAvrLPOQ1Sojqp+KHYrh58abERCy2xGJ3vFtfmpuxA
+ ZrGM8dJuO9sPW3jQIcOIb4DNFQvoIOLEyiP4hjZTvQ2r/tyz6nHR4n3QAZilk9mDuf0mIiIYWyJ
+ JYRPlMD2IfSZpeKPbPD5XaNnC4/DHR2REZ2nb7eI97A+ORNvtjGIxSXEjtPgZbBcNG4LRD4og2V
+ 3sKUSH3UHl0EsRVuyGjslnXwMksW+XNYOdRbAPjDF03Rg==
+X-Envelope-To: linux-arm-msm@vger.kernel.org
+Received: by smtp.migadu.com with ESMTPS id 80ca941ee9d5e72b;
+	Wed, 23 Sep 2026 15:25:23 +0000
+X-Mizu-Trace-ID: 80ca941ee9d5e72b
+X-Migadu-Flow: FLOW_OUT
+From: Charlie Garner <charlie@akao.au>
+To: Bjorn Andersson <andersson@kernel.org>,
+	Konrad Dybcio <konradybcio@kernel.org>
+Cc: Abel Vesa <abelvesa@kernel.org>,
 	Rob Herring <robh@kernel.org>,
 	Krzysztof Kozlowski <krzk+dt@kernel.org>,
 	Conor Dooley <conor+dt@kernel.org>,
-	Serge Semin <fancer.lancer@gmail.com>,
-	Heiner Kallweit <hkallweit1@gmail.com>,
-	Russell King <linux@armlinux.org.uk>,
-	Richard Cochran <richardcochran@gmail.com>,
-	Bjorn Andersson <andersson@kernel.org>,
-	Konrad Dybcio <konradybcio@kernel.org>,
-	Alexandre Torgue <alexandre.torgue@foss.st.com>,
-	Giuseppe Cavallaro <peppe.cavallaro@st.com>,
-	Jose Abreu <joabreu@synopsys.com>,
-	Maxime Chevallier <maxime.chevallier@bootlin.com>,
-	Maxime Coquelin <mcoquelin.stm32@gmail.com>, netdev@vger.kernel.org,
-	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+	Val Packett <val@packett.cool>,
+	Laurentiu Tudor <laurentiu.tudor1@dell.com>,
+	Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
 	linux-arm-msm@vger.kernel.org,
-	linux-stm32@st-md-mailman.stormreply.com,
-	linux-arm-kernel@lists.infradead.org,
-	Lorenzo Bianconi <lorenzo.bianconi@oss.qualcomm.com>,
-	Shawn Guo <shengchao.guo@oss.qualcomm.com>,
-	Jitendra Vegiraju <jitendra.vegiraju@broadcom.com>
-Subject: Re: [PATCH RFC net-next 0/9] net: introduce Qualcomm XPCS support
- and add Nord Ethernet plumbing
-Message-ID: <5e6dc1ec-3602-4cbf-95e8-58e2b94feed9@lunn.ch>
-References: <20260923-qcom_xpcs_nord_emac-v1-0-4b1c682af70f@oss.qualcomm.com>
- <CAFkd8hsUzJEsDYjGSM3tsJzzwByuEkA+G4k1c75uYD-y5qU3iA@mail.gmail.com>
+	devicetree@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	Charlie Garner <charlie@akao.au>
+Subject: [PATCH 0/2] arm64: dts: qcom: Dell Inspiron 14 Plus 7441 backlight and touchscreen fixes
+Date: Thu, 24 Sep 2026 00:55:04 +0930
+Message-ID: <20260923152506.44989-1-charlie@akao.au>
+X-Mailer: git-send-email 2.55.0
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <CAFkd8hsUzJEsDYjGSM3tsJzzwByuEkA+G4k1c75uYD-y5qU3iA@mail.gmail.com>
+Content-Transfer-Encoding: 8bit
 
-> Good Job, Mohd
-> 
-> Tested-by: Zhangfei Gao <zhangfei.gao@oss.qualcomm.com>
-> 
-> Tested on both IQ10 RRD and Ride
+Two fixes for the Dell Inspiron 14 Plus 7441.
 
-Thanks for testing, but its a bit early yet. You might want to wait
-until we get to version 5 or more, and it is no longer RFC, code the
-author no longer is requesting comments on but is Mainline Linux
-production quality. And after the AI reviews have stopped pointing out
-issues.  Only then does a tested-by: make any real sense.
+Patch 1 gives the eDP panel a PWM backlight. The AUO B140QAX01.H panel
+only supports PWM-pin brightness, so the DP AUX fallback registers a
+backlight with max_brightness 0 and brightness cannot be changed. The PWM
+wiring (PMK8550 gpio5 func3, pmk8550_pwm) matches the HP OmniBook X14.
+It goes in the Inspiron DT rather than x1-dell-thena.dtsi, because the
+Latitude 7455 was submitted with a different panel and a working
+backlight, and only the Inspiron has been tested. The dtsi only gains a
+panel label, which leaves the Latitude DTB functionally unchanged. If a
+Latitude 7455 owner can confirm the same PWM wiring, this can move to the
+dtsi.
 
-Reporting your test results internally is probably appreciated as the
-patchset goes through revisions.
+Patch 2 moves the touchscreen from 0x10, where nothing responds, to 0x09.
+That is where the HID-over-I2C device answers, where the firmware's DSDT
+places it on this machine, and where the Latitude 7455 DT already has the
+same part.
 
-	 Andrew
+As far as I know, no Inspiron 14 Plus 7441 has its touchscreen at 0x10.
+The original node matches the CRD, XPS 13 9345 and T14s nodes the DT was
+based on.
+
+Charlie Garner (2):
+  arm64: dts: qcom: x1e80100-dell-inspiron-14-plus-7441: add PWM
+    backlight
+  arm64: dts: qcom: x1e80100-dell-inspiron-14-plus-7441: fix touchscreen
+    i2c address
+
+ arch/arm64/boot/dts/qcom/x1-dell-thena.dtsi   |  2 +-
+ .../x1e80100-dell-inspiron-14-plus-7441.dts   | 31 +++++++++++++++++--
+ 2 files changed, 30 insertions(+), 3 deletions(-)
+
+
+base-commit: 32afff1e816e10185bb571aa9d89dc2eb061d548
+-- 
+2.55.0
+
