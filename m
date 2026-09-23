@@ -1,90 +1,100 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from vps0.lunn.ch (vps0.lunn.ch [156.67.10.101])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DE87054CF54;
-	Wed, 23 Sep 2026 16:40:16 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C3ED051615B;
+	Wed, 23 Sep 2026 18:35:56 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=156.67.10.101
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790181630; cv=none; b=mhecWSxo3vfhKYn5/N5R7sMoxA9qDOFTyVmICyLzhVKfkcqDTmfy7KTgX4YhurMghRt1rI8X+GfwndlqSTb1aW/GhzBiUdIYIDtJ1nGAPXlv245XwlhJZ+m/pwMIDVeKL5oNSoG2bA3oWyBEh2PIYegJbivB2FhmeUakGnzkuR4=
+	t=1790188565; cv=none; b=ds/vfYzGUo2nycK/npTY+LYoZ2WHzrHzrTcuHuOgb5WWS5nUYhQdJpJk5ZTDQrj5594f6otDChbIyoF8bIbYM7YwXDuIbrs3/KHgH0eiUyugSmI2qDlGaT4bAvrymf6GvnqiBJ3VAfwYdYjURPylxfAM7YEUGkN+LCfVlQ3bO2o=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790181630; c=relaxed/simple;
-	bh=HMiV1lfIaDk5DHsbSxdwUFDcgU3l31krtmmNDs2cJrg=;
+	s=arc-20240116; t=1790188565; c=relaxed/simple;
+	bh=q4HUdbYJbdNB46N8Hk+HNN2RCzv/8hW08osPcRdAG/o=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=uf1oBg/GUMti1dDUVVxE54bAGK0aQDv9+rF8VE5Xw3GMgAgOc6Kbat0c7djs/JzfwMImyjDmui0W5XtT2MIk5KLcdpF/FQ10f1rnLNrtFYHgSqYSR3Enys7oPJCXh049ULAFBBP4H/YvLkNNcy0eQbsFxFufHyW2uL/t9/OOw5A=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=m9XbphuR; arc=none smtp.client-ip=100.103.45.18
+	 Content-Type:Content-Disposition:In-Reply-To; b=JSSjMFto4Znz8rk67zEjWxhREemzRHmfLFV1ILk9yta+Ncf4LPF9cJ85by/Ci37QaJ/hXFY+sRSraGGVAH7/4weAJeVR7jgn6HH1r+2NbCZXzRrFjcvcN6YDAE63xslEupxVdNio5GMPNLtnQJBm5rN+ZNZHqFrikEVE7JeIRdA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lunn.ch; spf=pass smtp.mailfrom=lunn.ch; dkim=pass (1024-bit key) header.d=lunn.ch header.i=@lunn.ch header.b=iKAwokD+; arc=none smtp.client-ip=156.67.10.101
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lunn.ch
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lunn.ch
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="m9XbphuR"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 279F11F00893;
-	Wed, 23 Sep 2026 16:40:07 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1790181614;
-	bh=pJuvljr4VJrwhkS2WB5iCaspV3ZEJ4xcFgJqC1vtnGg=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=m9XbphuRQlcHxv/dIcs/B0xX7P6p+A4iWPybU/3YwAAAaBzvF6sjQzP7t4HTjjjg9
-	 ZeIIJ4x1eOXrnjwvp4pZvQaY7H2KL8ILGII9aZ2um1GBWK2/P/+6H0FTL5uJ2h1H5a
-	 S6ks5u66CrHUX11jmZ1FONtFut0a047A27JLGTMDDVHxq+jd8nZq+qM4A9p1b1EIGY
-	 pDtXT+VJZ6tysEBC7ykFlsFG2RLITC8gJjLCRFinsIKbSBEhaZhNrfoP+htoWErD44
-	 a19iPOU6RI6I4/siJo9XYSzFpHC8C2zSx6YSLwXzJABl7FHYgz0acqKQCBlmdLvEqO
-	 oWIMUu4hpYitw==
-Date: Wed, 23 Sep 2026 18:40:02 +0200
-From: Manivannan Sadhasivam <mani@kernel.org>
-To: Youssef Samir <youssef.abdulrahman@oss.qualcomm.com>
-Cc: "David S. Miller" <davem@davemloft.net>, 
-	Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>, 
-	Paolo Abeni <pabeni@redhat.com>, Simon Horman <horms@kernel.org>, 
-	Jeff Johnson <jjohnson@kernel.org>, linux-arm-msm@vger.kernel.org, netdev@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, linux-wireless@vger.kernel.org, ath11k@lists.infradead.org, 
-	ath12k@lists.infradead.org, Bjorn Andersson <andersson@kernel.org>, 
-	Chris Lew <christopher.lew@oss.qualcomm.com>, Deepak Kumar Singh <deepak.singh@oss.qualcomm.com>, 
-	Raj Kumar Bhagat <raj.bhagat@oss.qualcomm.com>, Juha-Matti Tilli <juha-matti.tilli@iki.fi>, 
-	Jeff Hugo <jeff.hugo@oss.qualcomm.com>
-Subject: Re: [PATCH v2 1/4] net: qrtr: Allow the host QRTR to assign a unique
- node id
-Message-ID: <l32syvvxm7h22li5bj2n4unqjqor7bgehlbg3pzly7i43l4xkl@xr7xzaf4ydyj>
-References: <20260921-qrtr-multi-ep-v2-0-27dd80d841a0@oss.qualcomm.com>
- <20260921-qrtr-multi-ep-v2-1-27dd80d841a0@oss.qualcomm.com>
- <3f5da6c9-7394-4452-92f8-b773cd34aecf@oss.qualcomm.com>
+	dkim=pass (1024-bit key) header.d=lunn.ch header.i=@lunn.ch header.b="iKAwokD+"
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=lunn.ch;
+	s=20171124; h=In-Reply-To:Content-Disposition:Content-Type:MIME-Version:
+	References:Message-ID:Subject:Cc:To:From:Date:From:Sender:Reply-To:Subject:
+	Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:
+	Content-ID:Content-Description:Content-Disposition:In-Reply-To:References;
+	bh=HXJnRJRTxgy4hjZ9q9bU+112uVIymJuRU1zRdHwHYCA=; b=iKAwokD+QZzNxHtib6CZO8slHG
+	6a9ePUyZsbIPtW4/T3Hab0cy186YRSmwntzxMx+VRURlU6Th6lfT0b1Edbcu5hCNQ8o5Pr7O1g/fL
+	YVecv794yM7XumvEu6aApqdRlWO1ZAkKj9lIr256PTNsIDLQDqJgD6ow4XnRUe3XWAeI=;
+Received: from andrew by vps0.lunn.ch with local (Exim 4.94.2)
+	(envelope-from <andrew@lunn.ch>)
+	id 1x9Rod-006r79-Tp; Wed, 23 Sep 2026 20:35:35 +0200
+Date: Wed, 23 Sep 2026 20:35:35 +0200
+From: Andrew Lunn <andrew@lunn.ch>
+To: Coia Prant <coiaprant@gmail.com>
+Cc: Mohd Ayaan Anwar <mohd.anwar@oss.qualcomm.com>,
+	Maxime Chevallier <maxime.chevallier@bootlin.com>,
+	Andrew Lunn <andrew+netdev@lunn.ch>,
+	"David S. Miller" <davem@davemloft.net>,
+	Eric Dumazet <edumazet@google.com>,
+	Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Serge Semin <fancer.lancer@gmail.com>,
+	Heiner Kallweit <hkallweit1@gmail.com>,
+	Russell King <linux@armlinux.org.uk>,
+	Richard Cochran <richardcochran@gmail.com>,
+	Bjorn Andersson <andersson@kernel.org>,
+	Konrad Dybcio <konradybcio@kernel.org>,
+	Alexandre Torgue <alexandre.torgue@foss.st.com>,
+	Giuseppe Cavallaro <peppe.cavallaro@st.com>,
+	Jose Abreu <joabreu@synopsys.com>,
+	Maxime Coquelin <mcoquelin.stm32@gmail.com>,
+	Jan Petrous <jan.petrous@oss.nxp.com>,
+	"Jose.Abreu@synopsys.com" <Jose.Abreu@synopsys.com>,
+	netdev@vger.kernel.org, devicetree@vger.kernel.org,
+	linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+	linux-stm32@st-md-mailman.stormreply.com,
+	linux-arm-kernel@lists.infradead.org,
+	Lorenzo Bianconi <lorenzo.bianconi@oss.qualcomm.com>,
+	Shawn Guo <shengchao.guo@oss.qualcomm.com>,
+	Zhangfei Gao <zhangfei.gao@oss.qualcomm.com>,
+	Jitendra Vegiraju <jitendra.vegiraju@broadcom.com>
+Subject: Re: [PATCH RFC net-next 0/9] net: introduce Qualcomm XPCS support
+ and add Nord Ethernet plumbing
+Message-ID: <ca67076e-3877-49ca-8c67-a6dc1b70e667@lunn.ch>
+References: <20260923-qcom_xpcs_nord_emac-v1-0-4b1c682af70f@oss.qualcomm.com>
+ <5135e15d-b6ac-476c-9a7d-b7d64e4eed5c@bootlin.com>
+ <arOtU15iv5CWPUEu@oss.qualcomm.com>
+ <CALj3r0gAaQ_CoS5_9Mmf5HY+Fu5_e74fbb+r0LstafMhagHx6A@mail.gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <3f5da6c9-7394-4452-92f8-b773cd34aecf@oss.qualcomm.com>
+In-Reply-To: <CALj3r0gAaQ_CoS5_9Mmf5HY+Fu5_e74fbb+r0LstafMhagHx6A@mail.gmail.com>
 
-On Tue, Sep 22, 2026 at 06:08:11PM +0100, Youssef Samir wrote:
-> 
-> 
-> On 9/21/2026 12:23 PM, Manivannan Sadhasivam via B4 Relay wrote:
-> > +/* Replace the node id in the control packet with 'node->nid', if both are
-> > + * different.
-> > + */
-> > +static void qrtr_node_rewrite_ctrl(struct qrtr_node *node, unsigned int type,
-> > +				   struct sk_buff *skb)
-> > +{
-> > +	struct qrtr_ctrl_pkt *pkt;
-> > +	__le32 *nid;
-> > +
-> > +	if (node->nid == node->ep_nid)
-> > +		return;
-> > +
-> > +	if (skb->len < sizeof(*pkt))
-> > +		return;
-> > +
-> > +	pkt = (struct qrtr_ctrl_pkt *)skb->data;
-> > +	if (type == QRTR_TYPE_DEL_CLIENT)
-> qrtr_tx_wait() will create a qrtr_tx_flow object keyed by qrtr_node->nid.
-> qrtr_tx_resume will attempt to retrieve it with qrtr_node->ep_nid, which
-> will fail. This leads to the HTD path pending packets reaching
-> QRTR_TX_FLOW_HIGH and block indefinitely. QRTR_TYPE_RESUME_TX should
-> be handled here.> +		nid = &pkt->client.node;
+> Non-existent MMDs
+> -----------------
+> Returning 0xffff on reads and silently discarding writes is what a
+> floating bus / unimplemented feature looks like, so I agree with that
+> direction. My pcs-xpcs-rk does the same.
 
-You are right! I've already fixed this issue in v3.
+Did you read 802.3?
 
-- Mani
+  45.2:
 
--- 
-மணிவண்ணன் சதாசிவம்
+  If a device supports the MDIO interface it shall respond to all
+  possible register addresses for the device and return a value of
+  zero for undefined and unsupported registers. Writes to undefined
+  registers and read-only registers shall have no effect. The
+  operation of an MMD shall not be affected by writes to reserved and
+  unsupported register bits, and such register bits shall return a
+  value of zero when read.
+
+This is what i was commenting about in my review, returning EOPNOTSUPP
+is not correct according to the standard.
+
+	Andrew
