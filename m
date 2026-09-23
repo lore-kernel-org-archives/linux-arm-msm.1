@@ -1,110 +1,181 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B979C542EEA;
-	Wed, 23 Sep 2026 15:33:03 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E9990535FC8
+	for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 15:42:21 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790177595; cv=none; b=nkNqbz5bBbqmpu02pYWN9P/3ddhc0o2o7kTWTffnRvYTgacPWQi8UdPts/RboHBbOrLv+6oLuf1LwKBqxPKEX3YS7GuI4bhcnsDQ/rD70/7w7S19I04h771pny0cUkjMfLoHMGyjuju3Ez0cqWUYw55jbME9061RWk4hQLDoLwY=
+	t=1790178143; cv=none; b=HzFFIEwOGZqHKAH7ocgEuRGGNixU98hvVhIyhgdPPZmkEmuPceWlUIeKykiUtaEAvwqMpcSeNYDggKpiZe8VpuPuWr0yr0lAQPkwnKMaHDijW/gugRH3IqIMzbWjhilMXY7bJBsVOYAwOJa2zJ/QuEy0rXoeUGQnupTMJ2WDsxQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790177595; c=relaxed/simple;
-	bh=NuLeoh6Ugld7iV7SnT50xGGVF9b/mTHr305p/mbI9Go=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=ptYqGnreUkFBF1f3Z8txUm3DcbJDFMZdXQbIf5/hKZ+MM/DoiZnLUxwIJ/tMa45YyvRdXBzxVYlibQfxDKWe7/7GGDNa5sojv6HjUvRfwyJ2cPFQoX2dAl8Hf+hD7mU6yKb72qN8bh3fflLIreq63OvSb+o5nKe+LvVVekQCpoo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=fsqwuNQE; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1790178143; c=relaxed/simple;
+	bh=m4SroQDjW8TNwKldqJ7a93glAT68I1794bo+GHS0J6c=;
+	h=Message-ID:Date:MIME-Version:From:Subject:To:References:
+	 In-Reply-To:Content-Type; b=uyuJpdRHzk/aiitWW/gtd0/xtW/QytuqXF90wP4DAW9wqc509pZAUMUucwoLuMMuJ4Kc7zFVZDPWFQf+SL4YLxsrLZKdgLbIUQan3kRGLNOBzeJDcyeHz4b8REVe4HMa6Cfwko30YB3zOncYlSUm3y8XdYCkfBSKWlsq1O6MnnM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=jHOVjEwh; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=BH+rBqqo; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="fsqwuNQE"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 962CA1F00893;
-	Wed, 23 Sep 2026 15:32:59 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1790177579;
-	bh=7An/+u7SJBrDQANdjifBoZvri2cNNci83aas+f72qng=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=fsqwuNQEU9yVEm6+99I7mYuQ0BDYPv/tBTCdeF7z6k/mz160aby73BGTMt1o0eku2
-	 8gJWcNIyVP/HmmFZRtIquSBhwJMGVsZm88w2KjF0H1JNbQW1WUrjRJkNPKD3tm9GTf
-	 d4y3g1vIZO5ygi6TuKrnWbFYrPmZ7zE8ew2c6JQW0F5JS0zu/PSelXRs77YRUjFMM6
-	 U42wNptOL2Fygfnuq+UoT5fRe8E5jIGiLaZ5H/9e9SkRpg4Ajy7TQCJs4Hc/welA3h
-	 u13PMpdHMKWwAnUwEpkSZW+S4Oto7qlNt27A/yCYTnM8wUg0EiicZz4wVfJaJn3F1U
-	 cwHYZtbW6C5BA==
-Received: by finisterre.sirena.org.uk (Postfix, from userid 1000)
-	id 28DDD1AC573C; Wed, 23 Sep 2026 16:32:54 +0100 (BST)
-Date: Wed, 23 Sep 2026 17:32:54 +0200
-From: Mark Brown <broonie@kernel.org>
-To: Prasad Kumpatla <prasad.kumpatla@oss.qualcomm.com>
-Cc: Srinivas Kandagatla <srini@kernel.org>,
-	Liam Girdwood <lgirdwood@gmail.com>, Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Bjorn Andersson <andersson@kernel.org>,
-	Konrad Dybcio <konradybcio@kernel.org>,
-	Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>,
-	Abel Vesa <abelvesa@kernel.org>, linux-sound@vger.kernel.org,
-	linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v1 0/8] ASoC: qcom: Add audio support for Hawi and Maili
- platforms
-Message-ID: <arPxJqKoCXfF4TCu@sirena.co.uk>
-References: <20260923084627.748920-1-prasad.kumpatla@oss.qualcomm.com>
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="jHOVjEwh";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="BH+rBqqo"
+Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68NDKdrq322110
+	for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 15:42:21 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	lAmI+4l4jOMpvFGgOUL3UKDgOJQ+P1Ua774K7isTWf8=; b=jHOVjEwh4O5Fd5TV
+	s1O4AgA/k83pSLHZXHr4MCtkqPzjalzaR8gQnJeLLql8C+fZtkxV5fSBROrqZowY
+	cn+WqQCfLkPs+qAkMBFHpsXVb4suhO0wkNo5plb4HeT3ekACo8kX5EkTKwTcRaD7
+	i27vMDQbe9PEwDgFw2ya9MQLbOzGboRY7T53860rPRLuEMLzPHzLguhtRTO7zp5N
+	/fQIW77qNgZ1zdmnlCoqOfSckoEUM7WVxtkKUyTejkRA9dHpV9udyaVR7bBs3Vb1
+	XVCpdlCsR41bs8ksQZKG1mmZtcgwtI+Ev7GECaO1PCmZB47sPGE1z0db2gDkcZcc
+	5H1h8A==
+Received: from mail-ua1-f72.google.com (mail-ua1-f72.google.com [209.85.222.72])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gvfjsgngc-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 15:42:21 +0000 (GMT)
+Received: by mail-ua1-f72.google.com with SMTP id a1e0cc1a2514c-97e8d95121cso296791241.0
+        for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 08:42:20 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1790178140; x=1790782940; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :references:to:subject:from:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=lAmI+4l4jOMpvFGgOUL3UKDgOJQ+P1Ua774K7isTWf8=;
+        b=BH+rBqqoML/hnsef3oSG5JZLJyygdQlw0xPHEOByHQBKJYc8lsP8hEm1KVVY/mBSHX
+         7r8UnZK6EtmGAnI/6a+1Q+gYPpe9eAcjv3PKDzjdQkWRGOskmHysOlYtJ2Xj3W4tFZ9q
+         buwhLfNhq45E8Kqbsa1LUq64U9hNut5K1vmv02HGKFQ1Suol4YarMI9Z30X85SPKH13M
+         PeD+LsVFhtwffPgfjBWDxEm+Ya0n0xyDVhY8lHDm+ZQu3gNaMNsGFCcSJOJ6BiN3EX7j
+         bQE8RNiJh8lXqjx1i26dAQ2CGWGN88wYCHI48ajAxa6PuPCf9wg9k+dXk6pDTeB93KZq
+         SHaA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1790178140; x=1790782940;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :references:to:subject:from:user-agent:mime-version:date:message-id
+         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=lAmI+4l4jOMpvFGgOUL3UKDgOJQ+P1Ua774K7isTWf8=;
+        b=FkgABp32HrQ7c+XrSXS6P8zHuCghS54NfMoKQuWFSIBYhVN4LDgoIcTvJ+JAuwgMdz
+         804hAbN7MCO/eeGg7zihiDmCyEADkiNKXrdKXBX/IQwmGXrLoAdJ/cM2LSaJKJ0zTZTS
+         loF6hs/FdWMnYaHgavFCv2G6IezkDI/WuihIC8EXKIE9mCJ41xSNH3uciHdaaQMSELeG
+         fCd69Odq0v0zAKkI2GyiWWmS3R9yju0b2uxRG+lykAM1j5l0/Hn/NRo/JIPA/IfdoCt6
+         Ru+iFXb2Q/6xJR1tfMwn9Ch+wcTENo18MEAQ1Z28X/xAWGrSHW2KRM03mNhY9kjpOJh4
+         wZhA==
+X-Forwarded-Encrypted: i=1; AKwUvBzEPp3hJI40CAGf3hJ5kxsqxkWadP9I/3TuNB/QqW5JlSprcbNqXGkjqpvdB+cZu0Tz0d8FOCLkbLJK0OxC@vger.kernel.org
+X-Gm-Message-State: AFuF++lfXfqSVe5R/gyoTJbNqIyUSihCjPFJBxPwqe739E+fbr3QRb0N
+	IBwEXOMTPajdRkelLdpRYvopCqj34FFhJwfPFZO7tLuhmO0X5rTfK8nkz7/f81KXj3M4UjlWwDq
+	yaaP4yo8Qof7JK21Oj4Dr33agLL4PUPHZIc7vsaYgVX7UkcBj63btUu8zY92i+bPkD/sj
+X-Gm-Gg: AYBFou2rLgos6kwhwPb5twC1zFkkDMvnM3frWOQIjTTwfL5IfCiyksMDqvYffT4Pf25
+	sF5pGW7B2hz1feVUuaCS3aABM73QqmKCOsglCy/Bk+0xd5DILknAQL24fXRspnu94BQfF0v/SLt
+	H5Dsf0DVHoivXFNFflH136oiAv0ger/iZ7wLgLwLN0gAH6wgfVfhuMYHba2sjCqsZNSqOfxlT7w
+	sK173w03Oqo2SJu6dK15u60h/PX41RFCRA2aoytGhIHEfG+KC2RhMlGuL3iOxfsLo6upA5orDRE
+	faRl4jX/NG7tNcJhc3Biys5zovuCmaj9A+rkojydwsXq8s8J5oo2/eL5Nspv2xiKX/kyNYnfGgf
+	CBJLRixmCmJ9Ya4nr5bD+kjAcQPrShdG8rIwl4RvIwL+j2FC8WUUdZkk+Q4lceSSi39gR+F9npb
+	BSKf2xmKYvvH/OOpdokT36mMKR4DSu02b69Gtkunv2Fnq4qAbsbOljrZP+NHdL1lKweg==
+X-Received: by 2002:a05:6102:951:b0:7a5:213f:9a1f with SMTP id ada2fe7eead31-7ac1db33a7amr2601066137.18.1790178137737;
+        Wed, 23 Sep 2026 08:42:17 -0700 (PDT)
+X-Received: by 2002:a05:6102:951:b0:7a5:213f:9a1f with SMTP id ada2fe7eead31-7ac1db33a7amr2601039137.18.1790178137281;
+        Wed, 23 Sep 2026 08:42:17 -0700 (PDT)
+Received: from ?IPV6:2001:1c00:c32:7800:5bfa:a036:83f0:f9ec? (2001-1c00-0c32-7800-5bfa-a036-83f0-f9ec.cable.dynamic.v6.ziggo.nl. [2001:1c00:c32:7800:5bfa:a036:83f0:f9ec])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c2aae5c6022sm144907666b.14.2026.09.23.08.42.15
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 23 Sep 2026 08:42:16 -0700 (PDT)
+Message-ID: <839b884b-9db0-4215-9715-40549d1c6a26@oss.qualcomm.com>
+Date: Wed, 23 Sep 2026 17:42:15 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="c292jOMaxEiICJ7D"
-Content-Disposition: inline
-In-Reply-To: <20260923084627.748920-1-prasad.kumpatla@oss.qualcomm.com>
-X-Cookie: Elevators smell different to midgets.
+User-Agent: Mozilla Thunderbird
+From: Hans de Goede <johannes.goede@oss.qualcomm.com>
+Subject: Re: [PATCH v7 1/2] module: add SCMI device table alias support
+To: Sudeep Holla <sudeep.holla@kernel.org>,
+        =?UTF-8?Q?Uwe_Kleine-K=C3=B6nig?= <u.kleine-koenig@baylibre.com>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Cristian Marussi <cristian.marussi@arm.com>,
+        Daniel Lezcano <daniel.lezcano@oss.qualcomm.com>,
+        Bjorn Andersson <bjorn.andersson@oss.qualcomm.com>,
+        Frank.Li@kernel.org, arm-scmi@vger.kernel.org,
+        linux-arm-kernel@lists.infradead.org, linux-arm-msm@vger.kernel.org,
+        imx@lists.linux.dev, linux-kernel@vger.kernel.org
+References: <20260918092951.5656-1-johannes.goede@oss.qualcomm.com>
+ <20260918092951.5656-2-johannes.goede@oss.qualcomm.com>
+ <arFKVhlgJge5EZyj@monoceros>
+ <20260923-sceptical-mauve-firefly-f5456d@sudeepholla>
+ <6b5a8300-ebf9-4717-bd39-952e89fc5e78@oss.qualcomm.com>
+ <20260923-snake-of-magic-satiation-c3b857@sudeepholla>
+ <a5e56180-b96f-4fac-980e-e837e84cd5a5@oss.qualcomm.com>
+ <20260923-calculating-positive-inchworm-28d3cc@sudeepholla>
+ <arPMAXs4jjUeu1DE@monoceros>
+ <20260923-groovy-airborne-rook-e1efc6@sudeepholla>
+Content-Language: en-US, nl
+In-Reply-To: <20260923-groovy-airborne-rook-e1efc6@sudeepholla>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTIzMDA2MiBTYWx0ZWRfXxWIter5WXsHF
+ +HewbP8t4XV4Fubl5/xMHo9E1oDikaBS+6rucBFGiPSu7WBxJGSscdbG1yHwdXtxfQ8grmoR5Ph
+ Y4KQMqkB7GTeLsJIYd1cAUmjV+qKyGqNyuwOlhs7yBHWBaqWppUOjT6deS6WIKyelOWXfOpW8uX
+ L2ToIHZPkXPZVUKf/hn5uFHZtrMHZcUMnHahZgYcJrW/3hVdUdD74vIhIvB2Xml5dtuAOcB0Iom
+ wMEIt550zZPktUwIY/mUA4JbyeeINN5KuApRcAj5AtOCSADcqHK2v7hnLU3sh4WqqWo0sz6P0Hh
+ ZBi3XmiaB3TyIMhn4IeIDi8vA0OrCBtFfuK6vksy0OuOuHqRvAyqfLbUBg8jvNMr7p4dXYN0bYW
+ cW1dtsNVfIcfxHegrXH40MwbaktAJyCWrpFRdyEk4uHPUecdvtEAzBJuumXFCmvrHn+fqfSTa0M
+ k75QMl34239BBlrMSGQ==
+X-Proofpoint-GUID: fMyW5gmCxlPl4KD8eG_GQhTAYvrVRDdu
+X-Proofpoint-ORIG-GUID: fMyW5gmCxlPl4KD8eG_GQhTAYvrVRDdu
+X-Authority-Analysis: v=2.4 cv=K4+3jCWI c=1 sm=1 tr=0 ts=6ab3f35d cx=c_pps
+ a=ULNsgckmlI/WJG3HAyAuOQ==:117 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
+ a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22 a=IpJZQVW2AAAA:8
+ a=wmcOPm1-qqoyX47EQMsA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+ a=1WsBpfsz9X-RYQiigVTh:22 a=IawgGOuG5U0WyFbmm1f5:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTIzMDA2MiBTYWx0ZWRfXz4mWKMI7a7eM
+ XNYeU/E7/DtJRzwJugJE6puN3Nji9i+Dra9zoRE1zkjlcN9uzWmPifbfiTlRRAN3fsTfP1J/cWQ
+ TCMGsJTdS6AIOOLr7gdcIk7Q29LfbJE=
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-09-23_04,2026-09-21_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ impostorscore=0 phishscore=0 suspectscore=0 priorityscore=1501 spamscore=0
+ lowpriorityscore=0 malwarescore=0 adultscore=0 bulkscore=0 clxscore=1015
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609230062
 
+Hi,
 
---c292jOMaxEiICJ7D
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+On 23-Sep-26 16:25, Sudeep Holla wrote:
+> On Wed, Sep 23, 2026 at 02:55:26PM +0200, Uwe Kleine-König wrote:
+>> On Wed, Sep 23, 2026 at 01:01:44PM +0100, Sudeep Holla wrote:
+>>> If Uwe is fine, yes I can take v7 as is.
+>>
+>> Fine for me.
+>>
+>> Acked-by: Uwe Kleine-König <u.kleine-koenig@baylibre.com>
+>>
+> 
+> Thanks Uwe!
+> 
+>> The nice thing is that the device_id structs are not API, so this can
+>> also be addressed later if someone comes up with a clever idea how to
+>> implement it.
+>>
+> 
+> Agreed.
+> 
+> Hans,
+> 
+> There were other changes in bus.c that conflicted with this. I have
+> resolved the conflicts and pushed to my for-next/scmi/updates[1]
+> 
+> If anything is wrong or if you prefer, you can post a rebased version
+> that I can pick up.
 
-On Wed, Sep 23, 2026 at 02:16:19PM +0530, Prasad Kumpatla wrote:
+I've given your for-next/scmi/updates branch a test run and
+the scmi-cpufreq module autuloads correctly, so everything is looking
+good from my pov.
 
-> base-commit: 6c58e38b255a3e0c11e513e3b8de85eb26fb02b5
-> prerequisite-patch-id: e6735f29343dd80d0e7ad48b6874eab4a5d7efc6
-> prerequisite-patch-id: ac7bc5ad958bb392a57871dde1f79c2fc520d482
-> prerequisite-patch-id: 332b888996b9d6c58e8c90eada37dc14137755ea
-> prerequisite-patch-id: 21e9dfd02f282ea4239f12d91ac8a2be76aaad29
-> prerequisite-patch-id: 52f17e16e09853e366ecc3da2676654df79daf06
-> prerequisite-patch-id: f0b1cd1f1f8daf0e1814a338446d493d64c9469f
-> prerequisite-patch-id: 29a1620a2ea61c0b7b052220e5ea522b1fbf2ad8
-> prerequisite-patch-id: 0872295385e6712bf342d84f095ec3710abde8d8
-> prerequisite-patch-id: 69807d41bbbd6177da4374639ae280501f3f60df
-> prerequisite-patch-id: d9f8613cac873926d6d2fd77e45002d34954b434
-> prerequisite-patch-id: 446fe28b27dbf5ce4240704d89296a5af69e8b21
-> prerequisite-patch-id: dc5ac9645789f25b3742dc4fca08dab4c1e4826d
-> prerequisite-patch-id: 0521512205679cad2462ecda959239aadc48cce6
+Regards,
 
-As I have repeatedly told Qualcomm people please stop sending me patches
-that don't apply, please collaborate with your colleagues to get
-whatever it is you depend on merged and once that has happened send your
-new stuff.  Qualcomm is sending a very high volume of patches, they seem
-to get limited review from other Qualcomm people and progress very
-slowly.  I'm getting a lot of Qualcomm code sent to me, in hard to
-manage forms.  Please also consider helping out with review of other
-code, not just submitting your own.  This is not directed to you
-specifically, this is more Qualcomm as a whole.
+Hans
 
-I've dropped this for now, please resend once it can at least be
-applied.
-
---c292jOMaxEiICJ7D
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAABCgAdFiEEreZoqmdXGLWf4p/qJNaLcl1Uh9AFAmqz8SIACgkQJNaLcl1U
-h9CAWgf+Mtzx9WxeJ2oDuphhA2V0HsNyVXrUseYeu3W/d25j1u3IKdEz94s2kKz3
-rx+T7mlVVrqcKYaH7UiLYsoaBuBXxxMmm8WpTtrVxjeuCF/Zpmz8ZzS9I+8D1S3Q
-UwgkJE2vkKSEmnf3oSrWHBUk56Y2ZlayEBVGOHgquwcR71qm+tkY1jMI8Y2h+vF7
-UgKYqVuAdN1G0Co5KSWldl0mzY5ODkq2iVzQDsKM0PpwT+mQRJMYo2O3cAQqhFDX
-JiY+R9pB5bmIRIJ6v333FwRwvx8I93UaPWNRi1OBl3II/7jYoxiEkNyK2EAc4zhP
-I9EhksTv79EAH0jqibpFkVL/HK92OQ==
-=wBT9
------END PGP SIGNATURE-----
-
---c292jOMaxEiICJ7D--
