@@ -1,62 +1,64 @@
-Received: from mail-pj2-f12.google.com (mail-pj2-f12.google.com [74.125.227.140])
+Received: from mail-pj2-f13.google.com (mail-pj2-f13.google.com [74.125.227.141])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 364DB448D11
-	for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 07:43:17 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.227.140
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8B9324519A7
+	for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 07:43:23 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.227.141
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790149400; cv=none; b=cWBbDN88IVuAd2VKimtUw5sMs/9JEOlMgYfeWQEcZWWHAS4QtcFnQrjG8kW/WwISQ5JGdNDCWG/fZrrcHcG7xFXjkVZ9LXbDaG+hFblbxISVYikgHIKnyg3YIN6xEVxMgq6Z2Z9kolwW2OTMGwuCA7Mk9xqcggsDOx/1V0H2ieA=
+	t=1790149405; cv=none; b=NLw99Ch2LLBKvPwju4XGOhmVdtRnHQJJyLobZVGf6hlOPFjWggsZSy2gUmagvccv3TD+fkffsmdIQC2+p5Q4lAvr/oZDvFghoPgrqipp0jXwWrh5sYpLVz4LmcJYfrYbLR1FANHCQtMBVbvNuiz8LWCGKCPG18QdMms3i9RFmUs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790149400; c=relaxed/simple;
-	bh=bRn8wL+CCBZ/kEqmxJu5dtRyylJpKptEMTVfqYig3FA=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=rdVc+LkdMtwx/Y6QPsUWdnr5uHffa9PuIJ4SbmUfZ+J5+/8ndzhMLSf9zfBNDTt7J+106bjh8PoNg83agvx1ZW/1OYgHxu+iL38DHZpE59Stch/TTpd/0I1lBWmrPsS7HLWzTCHbSAovFOJZTLA4Zi/FMij2K+0TzVAjypO2YFk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=gZHi11sz; arc=none smtp.client-ip=74.125.227.140
+	s=arc-20240116; t=1790149405; c=relaxed/simple;
+	bh=tAwt1UHEbyP42ASJ1X5HiAjvk5UC20sOlxN5oqFNYf4=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=PrFAu3A8FSxWqLz+V6qEXbY2Joz4Gv8oNby79CGPM925wpzsci2Ltda6SIUI6kW2hs0YPP6hYdlB1MPf32driSstWyLj//GJU6wkhEMqGPLexM/6ajkoieEo6RLr4JMTZ4MSWJiOia4mLzBCupj+jVyqK7CpPiIa1360BGi5mwg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=nCK9By0J; arc=none smtp.client-ip=74.125.227.141
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="gZHi11sz"
-Received: by mail-pj2-f12.google.com with SMTP id d9443c01a7336-2d6ff2b84f1so213755ad.2
-        for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 00:43:17 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="nCK9By0J"
+Received: by mail-pj2-f13.google.com with SMTP id 98e67ed59e1d1-39dfedbf80fso81479a91.3
+        for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 00:43:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1790149397; x=1790754197; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:mime-version:message-id:date
-         :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=DTfLJperzfUzEeNbOZUt7XXLJ7Q/DdPcSG6fXcqgoAo=;
-        b=gZHi11szns4Q03fYQTEfus7aXi8m2dD8n9e9InAJ8StCqbIx5L0NV3TP8Pbai015E1
-         6AozKi1wnF9Ps6gMqKQ1j1MozIJei6FilhXXkRvjGJ84D/HI2zlWcA4nv8ZGOxtmGMaT
-         FZqFse444N2mbXwpzZHjuwpXwYOllRouL8fSZrqlxQFx4ne8TiD6q0GNU7zSsNK2nx+q
-         Fdnufjo+kjHbajYGLqJKI0UFBfzpMxPrI/5XlV5mlNp2zcXflrNeS2edg6iIlfnA3Ubw
-         PcGgdQYXyTUZgXC44cC7rSSnsDtfbBhGULWTgOI7EclkW4rdb/DN/Z1IaoAvxfAxJBec
-         hDXQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790149397; x=1790754197;
-        h=content-transfer-encoding:content-type:mime-version:message-id:date
-         :subject:cc:to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject
+        d=gmail.com; s=20251104; t=1790149403; x=1790754203; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:mime-version:references
+         :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
          :date:message-id:reply-to:content-type;
-        bh=DTfLJperzfUzEeNbOZUt7XXLJ7Q/DdPcSG6fXcqgoAo=;
-        b=TekNIH+5acPnLPDCSRTQX846GQzTMdm5kbLYATlShJSr8M3HgumE6H74cRZoNAM6bB
-         yEasxCRLPkob6YeqC+6EqCGNySHkdY/pz1z6J6bw/nMLaPJyGHOwzqmIl4EL3BUnSJBN
-         HH7BobPuieMtSFqj+xuW3z6aujYVXgOSHludvDgX3lsLq7qcHCch5IREW3o96+K1eu/Y
-         BIYSWQSJiLzG3/e2xPDC/PyuxKWDDFCFfv/ptw/ZavtVAIzKKzqHBfJNBgRrv7i8p/Cp
-         lssL/gxOE+G8Bjz/ptfRQiDaQid54Sj+H2RvekRV1LZu8qfg3RAlp1OOOfR806riWvVi
-         VRwA==
-X-Gm-Message-State: AFuF++m/Vt727ihc5I8RdkGcxQhxZe7CECrIfNFIWVM5sCiUc/p9+5fB
-	kw4MD0x4ckWutbHAaWELUnwA/slRM+NwD7pdGUwCT50kGgqIpAqwnUfE
-X-Gm-Gg: AYBFou0uMbMcOkIt8bn0GyNOF9QX7NsCZ+eZdYUeNu1UkfEnKoJCDATgQDmEDeK6ay6
-	3gfwktz6ChIEAG1XO208EGXMgLRRHSpRuajksi4GYv0w4FEnhYbUgUcRhFbdLa9GxX4Sceh/x7o
-	fknPO35Zhj1oOCzMvuv0nC/HJ6JjLtQCmmhU4KYD5uQk6XiJpXQL/pojx/d8fQWlxw+etG3iXb3
-	jSqfAdUpZCEO4lcWeb7aVOMwJT9kqTl8dci/1+IdHgqJYBXWHHnz+HLMlfbt34Qlt4e0pVaZ2tM
-	AU9LAbvAomdhU2wUv76X6wyCc3lhaBoEuXo2+nchGfpY7LuZRWVE+KCVMKj+iAYq0uIOk1cO3UC
-	CpYaFR2Jdrw0YeGVsEwXh39RIqvLpz46nXB4fxIt/nGqxxtid9TFpgkPrf6jhRLqkhdrTrzQdVm
-	GhWprooypjGdW6b1VSjKXbXuBhH2M8BjMPYQdXywSw6uFxqVuN2rszxGNwGgrQHs3YKEzHEONwo
-	aXiuSF0/FcjBw==
-X-Received: by 2002:a17:902:ec90:b0:2db:2e9e:11a4 with SMTP id d9443c01a7336-2df69d1922dmr27273785ad.1.1790149397278;
-        Wed, 23 Sep 2026 00:43:17 -0700 (PDT)
+        bh=/3yqINp8iie30Eysp9fZFTFNFw0R4zJwE8ZATQluE4I=;
+        b=nCK9By0JtLKgw4QsJWKPmgPl+S4zxxVdvvEn7PWf3uXLROQt+Bpp+oMLqLGOWXCZnW
+         VIP/Tdm7ZzlgH8bzDFzf0ELcVKBGfBMAUjlZInoucOykHmMQrookApa30BnNk3M8xlBW
+         5k0SzMffUebJKNW7v9AkiBDCm74xcpZmreNubZ9pTZHgLTL5BQiGNskBhaVBtlMfHBBK
+         3bGM9Qf1QXP4+lQ/nr4IPvu53A4XQel/iFv4dDmKdkEDWgttvXlMGgYew3Rj5HGBhG0f
+         uDFitHO3X/Iu5tDCQV8T9P4HyDUaxphPfyOEQ8nz/K2BAWRflr1+ugQZDmpY2qRHy+rp
+         i/qQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1790149403; x=1790754203;
+        h=content-transfer-encoding:content-type:mime-version:references
+         :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=/3yqINp8iie30Eysp9fZFTFNFw0R4zJwE8ZATQluE4I=;
+        b=Xt6/vfkMPfG6OQnNi3VhEL7cRpUVbDgxxja0G5tFsarH1bqqzSnql32LOD213jLal1
+         7Sz1QeA/mXYnqqjfbTOFetLxVlyRumG3qGSk1kKnTcvm9a1+odeUQrznpmzYs/Tvoz/s
+         tny1fJIQHtr7tvctZ8bohjmhrK2fVue+w/oOaHrq5ZKtCrGRQfPl1SjS3snfiLpgwq8l
+         K6o3+WgWrGTzBJ6lfX2NYXYpG04s+YXa8dUv0jCp+ln5Q296G5Kb6Z5qYJZh4V/mTFRL
+         dWXiE5x0TpGnQu27TuOhFrtD9p3APflTrTsCHEkO+pB/EtTUhy0FyvNF6pLtaSnEildG
+         R/4g==
+X-Gm-Message-State: AFuF++kA22LDuw9mBp25qw/7T5VANKes0m2COK7aiI4yLK0JEyLDdUvi
+	0thuXittrqsN7Mv275YnrXlnqazyuepSDdc93v/WLtlKhQvPXJpYOVVZ
+X-Gm-Gg: AYBFou0/K0Hf67+52GtxARhEeQJmcsQlJFHJ+cDBpktHZ2YXz2a1j7O26ZDRPBX1d87
+	Kzb+fmQBFePkh7eLM3UzLQ6ImI8k1EVb4h8QJDEhyj5iarPjQUBGf+WLk29oaWIlY2ZWFSlLRFV
+	FJHRdRcg3w5H8yyUW1AGAlNk3WhEzToHaXcxTyk1jge/LICf2ilBT0232SrsNq+RwXzO4DVX8B0
+	csb4lFhQnWNlDAK38FmuXzZOKSNenLBuzl53lBnRAJQJBM8VXrCH/+II09uJpu5Or9tooBGGFeI
+	htrCN4fCXs5Jkc50W0pNJ0afdK/SbdHbLzg4ajDqH+YiKIhc7XsORsRNju804TtRr8wBTu3HsbU
+	+UFwcVAojOZBvm+XoDakZonnVqDml4gal6MX9EtcOicS/JyO/dYSp+6WflP1oGuksoB/GY+uYlD
+	rFuKerhBBWKCQJZIZbscu0CNZ4mCgQjAWUBdM5w7uCWo5ibZIeizZqNAafq+5yMZwSie+YfK94P
+	gOGJWFTDJV60w==
+X-Received: by 2002:a17:902:d2cb:b0:2d6:3c1a:85ef with SMTP id d9443c01a7336-2df69e1769bmr25554635ad.4.1790149402890;
+        Wed, 23 Sep 2026 00:43:22 -0700 (PDT)
 Received: from jfliu-sfa1411.. ([129.227.183.200])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2df6a5d9273sm6406785ad.50.2026.09.23.00.43.12
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2df6a5d9273sm6406785ad.50.2026.09.23.00.43.17
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 23 Sep 2026 00:43:16 -0700 (PDT)
+        Wed, 23 Sep 2026 00:43:22 -0700 (PDT)
 From: Jianfeng Liu <liujianfeng1994@gmail.com>
 To: dri-devel@lists.freedesktop.org,
 	linux-media@vger.kernel.org,
@@ -76,10 +78,12 @@ Cc: linux-arm-msm@vger.kernel.org,
 	Abhinav Kumar <abhinav.kumar@linux.dev>,
 	Jianfeng Liu <liujianfeng1994@gmail.com>,
 	Karl Mehltretter <kmehltretter@gmail.com>
-Subject: [RFC PATCH v1 0/2] Fix the v7.3-rc4 DMABUF_DEBUG regression breaking drm/msm hardware video decode
-Date: Wed, 23 Sep 2026 15:42:21 +0800
-Message-ID: <20260923074256.9357-1-liujianfeng1994@gmail.com>
+Subject: [RFC PATCH v1 1/2] dma-buf: keep DMABUF_DEBUG off by default
+Date: Wed, 23 Sep 2026 15:42:22 +0800
+Message-ID: <20260923074256.9357-2-liujianfeng1994@gmail.com>
 X-Mailer: git-send-email 2.47.3
+In-Reply-To: <20260923074256.9357-1-liujianfeng1994@gmail.com>
+References: <20260923074256.9357-1-liujianfeng1994@gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -89,73 +93,59 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
+Commit 143755bdabaa9 ("dma-buf: Make DMABUF_DEBUG default to y on
+DEBUG_KERNEL kernels") fixed a dangling reference in the DMABUF_DEBUG
+default, which had the side effect of enabling the option (and with it
+the page-stripping sg_table wrapper handed to importers) on every
+kernel with DEBUG_KERNEL=y - i.e. virtually every distro kernel.
 
-Hardware video decode in clapper and chromium (V4L2 decoder output
-buffers imported into drm/msm for rendering and scanout) breaks on
-v7.3-rc4 with arm-smmu translation faults:
+drm/msm is broken by this: it maps imported dma-bufs into the GPU's
+own pagetables with iommu_map_sgtable(), which needs the struct page
+of the attachment sg_table, and it fills the GEM object's page array
+through drm_prime_sg_to_page_array().  With the debug wrapper in
+place both silently produce garbage (the wrapper zeroes sg->length,
+so the page iterator yields nothing and an uninitialized array is
+kept).  The VM_BIND map job then fails asynchronously after userspace
+has already enqueued GPU work referencing the mapping, which shows up
+as an arm-smmu translation fault from UCHE, e.g.:
 
   gpu fault: ttbr0=000000088a889000 iova=000000010741c000 dir=READ
   type=TRANSLATION source=UCHE
 
-v7.3-rc3 works fine. Bisecting between the two points at
-143755bdabaa9 ("dma-buf: Make DMABUF_DEBUG default to y on
-DEBUG_KERNEL kernels"), which fixed a dangling reference in the
-DMABUF_DEBUG default and thereby silently enabled the option - and
-with it the page-stripping sg_table wrapper that
-dma_buf_map_attachment() hands to importers - on every kernel with
-DEBUG_KERNEL=y, i.e. virtually every distro kernel.
+This breaks hardware video decode (clapper, chromium) on Adreno
+systems; bisected on a Snapdragon laptop as v7.3-rc3 good,
+v7.3-rc4 bad, culprit 143755bdabaa9.
 
-drm/msm is affected in two places. It fills the page array of
-imported GEM objects through the deprecated
-drm_prime_sg_to_page_array(), and it maps the attachment sg_table
-into the GPU's own pagetables with iommu_map_sgtable(). Both need
-the struct page of the sg_table, which the debug wrapper removes
-(and it zeroes sg->length, so the page iterator yields nothing while
-the uninitialized page array is kept, with the helper still
-returning success).
+Revert the default until importers that legitimately need to build
+phys-based mappings have been converted.
 
-When such an import is used for rendering, the VM_BIND map job then
-fails asynchronously after userspace has already enqueued GPU work
-referencing the mapping, which surfaces as the UCHE translation
-fault above instead of a clean error.
-
-Patch 1 restores the DMABUF_DEBUG default to n until msm can be
-converted to build its GPU mappings from the attachment's DMA
-addresses. Patch 2 replaces the deprecated helper in msm with an
-explicit loop that rejects page-less sg_tables at import time, so
-userspace gets a clean -EINVAL and can fall back instead of
-crashing the GPU.
-
-Tested on a Snapdragon laptop with an Adreno GPU and arm-smmu
-(v7.3-rc4):
-
-- DMABUF_DEBUG off: hardware video decode works as on v7.3-rc3
-- DMABUF_DEBUG on, without patch 2: GPU faults as above
-- DMABUF_DEBUG on, with patch 2: imports are rejected cleanly
-  ("import of dmabuf from 'videobuf2_dma_contig' rejected: sg_table
-  has no/misaligned struct page info"), no GPU faults. clapper falls
-  back to a working display path; chromium shows a black window as
-  it has no fallback for a failed zero-copy import.
-
-A full fix for DMABUF_DEBUG=y requires msm to map imported buffers
-from their DMA addresses rather than struct pages; that conversion
-is left as future work.
-
-Comments welcome.
-
-
-Jianfeng Liu (2):
-  dma-buf: keep DMABUF_DEBUG off by default
-  drm/msm: reject dma-buf imports without struct page info
-
- drivers/dma-buf/Kconfig       |  9 ++++++++-
- drivers/gpu/drm/msm/msm_gem.c | 31 ++++++++++++++++++++++++++++---
- 2 files changed, 36 insertions(+), 4 deletions(-)
-
+Fixes: 143755bdabaa9 ("dma-buf: Make DMABUF_DEBUG default to y on DEBUG_KERNEL kernels")
+Signed-off-by: Jianfeng Liu <liujianfeng1994@gmail.com>
 ---
-base-commit: 93f51579e7df248780214094418f205253383cc5
-branch: fix/dmabuf-debug-msm-import
 
+ drivers/dma-buf/Kconfig | 9 ++++++++-
+ 1 file changed, 8 insertions(+), 1 deletion(-)
+
+diff --git a/drivers/dma-buf/Kconfig b/drivers/dma-buf/Kconfig
+index e4f078a326a41..b3c581ef4c987 100644
+--- a/drivers/dma-buf/Kconfig
++++ b/drivers/dma-buf/Kconfig
+@@ -43,7 +43,14 @@ config UDMABUF
+ config DMABUF_DEBUG
+ 	bool "DMA-BUF debug checks"
+ 	depends on DMA_SHARED_BUFFER
+-	default y if DEBUG_KERNEL
++	# NOTE: keep this default n.  The page-stripping sg_table wrapper that
++	# this option installs for importers breaks drivers that build a
++	# second-stage IOMMU mapping (phys -> iova) from the attachment sg_table
++	# and therefore still need the struct page, e.g. drm/msm with its
++	# per-process GPU pagetables.  Until those importers are fixed, making
++	# this default y breaks hardware video decode and GPU workloads out of
++	# the box on affected systems.
++	default n
+ 	help
+ 	  This option enables additional checks for DMA-BUF importers and
+ 	  exporters. Specifically it validates that importers do not peek at the
 -- 
 2.47.3
 
