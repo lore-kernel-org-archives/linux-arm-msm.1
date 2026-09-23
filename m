@@ -1,218 +1,132 @@
-Received: from BN8PR05CU002.outbound.protection.outlook.com (mail-eastus2azon11011033.outbound.protection.outlook.com [52.101.57.33])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F3144455635;
-	Wed, 23 Sep 2026 08:03:36 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=52.101.57.33
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790150618; cv=fail; b=QdP90L/QWxugEnuzsmk5VnKajXrgvCtfVu45I0trCTi9b+ufJZ87a5+iaRbg0nrf+jYf90m5H1vqswVvAh103YyJsIXHe1ohJyaZsCp7xniM4qbXQtEHukZTWlAd7wqpmMoWLCDOD0moocPcxpvSDw1xHMsMRmC/J5oCFCzBLQk=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790150618; c=relaxed/simple;
-	bh=iNcigU8SKKS4UCAyTgtwdz9vnKIHgAnymJ3icWIyHUs=;
-	h=Message-ID:Date:Subject:To:Cc:References:From:In-Reply-To:
-	 Content-Type:MIME-Version; b=OxW1nviFcybtTQHD8JlV7JL9eQWJiUDNov6CgRPdMv6TA3IWb+VgnEG1mU09aR+uFE/m5+G+lHrp0QCT28/MyLaJAfv/CXTd2Uzc8vVBwvl3I6ncKey3tr8Zst0doorLg6bS0VeUPS5qw2CfjUNIafgMULvMx2CAyD7LPd3rqec=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=amd.com; spf=fail smtp.mailfrom=amd.com; dkim=pass (1024-bit key) header.d=amd.com header.i=@amd.com header.b=4COAFWss; arc=fail smtp.client-ip=52.101.57.33
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=amd.com
-Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=amd.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E2B07463B70;
+	Wed, 23 Sep 2026 08:06:06 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1790150768; cv=none; b=PpyFmr2FAtM/YLxoJG02UhkTb9+KBv+LqbZXgVJArMrPmX99XmVucL3UIoQP1QyBwlFVs/ED6LlKMh/C3juq06Zb3KaWsnKObGV0/dloepAzmHfxsptsbIqi1Vp+oLtAU+166PBrRAldMe6z4xbOJut0H4DYTJJCya8FL0Df8OQ=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1790150768; c=relaxed/simple;
+	bh=1PZwIE8TVU5soElAe+9hqBxDNKLiuQmotjGe3sg8bxA=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=Zx4/HZmlG0xqaB1DbUmOYIeqHhY3R7qRv0+jgsL2tawJpv3jUeX/nGvzUkPIxTvyY+csNCg6oIOLbDDqi9MnEENb38dRce5IY8Zgs/213LcP9htq/Z6Eb3YfJ5lwnrYgG5mJhfMq/vqSO6TGB86O7uRBbOdXLuPz5IH2lIKLDPE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=m/1ZYNir; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=amd.com header.i=@amd.com header.b="4COAFWss"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=lenqgBmgwcLfp/Ogk9ZF8wJsIP3SEvyoLJTqWwzjYTaRiNRitcc6RBo0zQ4gP2ko1js+7acrlxdpva2QQLpaab75A5CDqOsCVfFTgJi4YvS3jktpXMxWtve+8ZMEkXK6po6lS9x+DW6b98SGSFLOJbDyz+YWosGMuObAkLBlH352nKuGB4rsIUdvxRH/T+SL3K/7jbuOVT+C3egJGD0XgrC4axcHaZlYJlJMrWyo4w2kyz4czQevUg2scXQDPpY8WJ2bWeiqSM6gSyw/mKOYhEcvVO4eSATLUbnkIxPq7tTv1597WBszxdgFFBOykmow2PAXeOC6Ak4CQUO2zUbSSg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=xwJHULXrUqe3nJ1D9ShD1Iz5v9mjdwj9roFfAm9+b5k=;
- b=MqdqFSPUAOBmgy1bbvmiVmSKCO04OszTeoIRv34NY6EwAQRCHE0PxsfaV/RiOOYRlxzAKlrudAl3hXAbepQTs5Uo+TJDBU4TNzkTdr099P2cNh2eOmZLGWbirvI3rqlrfnSXo0bXDHJGtkF/AzLwTaewSVKolTnD/2GFITS+Q2yZMGu0Dwd9CGPm5AOnapXWTfoqZTOqICCi0LaGkhhYNAsnHj9kV3wHYr91du3jRIaSknc6bZip/P7SEiURdomNz8XfpON7BQtnZoFgBPwvB++8Wg2kctP99MZgfmPqUQ829PYJmHfdYsGkL27OAcBeV5pNT19uM/leaCQgVcPUCA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=xwJHULXrUqe3nJ1D9ShD1Iz5v9mjdwj9roFfAm9+b5k=;
- b=4COAFWss5kIw03jr4Ir5xjq/h3xyTV1oiUto3aDEymFLNXeO4uuiSXq9mRA9NZu3I9yGHnnIrgJBGT1V9UwsfA2HOZq+CbcROu4mdQqpklGvRgXXVfJTr+qJas+0mWkMbOH/Lf4n1+XNxZeprxLEhbC0Gq0DQF6dFlY2Inh5yGI=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=amd.com;
-Received: from PH7PR12MB5685.namprd12.prod.outlook.com (2603:10b6:510:13c::22)
- by DS7PR12MB8419.namprd12.prod.outlook.com (2603:10b6:8:e9::20) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.451.16; Wed, 23 Sep
- 2026 08:03:27 +0000
-Received: from PH7PR12MB5685.namprd12.prod.outlook.com
- ([fe80::ce69:cfae:774d:a65c]) by PH7PR12MB5685.namprd12.prod.outlook.com
- ([fe80::ce69:cfae:774d:a65c%3]) with mapi id 15.21.0451.014; Wed, 23 Sep 2026
- 08:03:26 +0000
-Message-ID: <fe3a4297-f300-451d-9763-0b3016706111@amd.com>
-Date: Wed, 23 Sep 2026 10:03:21 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH v1 1/2] dma-buf: keep DMABUF_DEBUG off by default
-To: Jianfeng Liu <liujianfeng1994@gmail.com>,
- dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org,
- linux-kernel@vger.kernel.org
-Cc: linux-arm-msm@vger.kernel.org, Jessica Zhang <jesszhan0024@gmail.com>,
- Sumit Semwal <sumit.semwal@linaro.org>, linaro-mm-sig@lists.linaro.org,
- Rob Clark <robin.clark@oss.qualcomm.com>, Sean Paul <sean@poorly.run>,
- Simona Vetter <simona@ffwll.ch>, freedreno@lists.freedesktop.org,
- Marijn Suijten <marijn.suijten@somainline.org>,
- David Airlie <airlied@gmail.com>, Dmitry Baryshkov <lumag@kernel.org>,
- Abhinav Kumar <abhinav.kumar@linux.dev>,
- Karl Mehltretter <kmehltretter@gmail.com>
-References: <20260923074256.9357-1-liujianfeng1994@gmail.com>
- <20260923074256.9357-2-liujianfeng1994@gmail.com>
-Content-Language: en-US
-From: =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>
-In-Reply-To: <20260923074256.9357-2-liujianfeng1994@gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: FR4P281CA0315.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:f6::11) To PH7PR12MB5685.namprd12.prod.outlook.com
- (2603:10b6:510:13c::22)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="m/1ZYNir"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 567B11F000FF;
+	Wed, 23 Sep 2026 08:06:01 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1790150766;
+	bh=Xil8py5E3/ndIBs9IcR+eVULmt4f0WzoAU5Rtvj5GqA=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To;
+	b=m/1ZYNirgaoPCynZpFJy/4+yEbz3WvWqPgEpgsFnWqQZ7y/UKyBvF9rUuS1qoHN8j
+	 pDibh2CeJH6fXVmwlF6WQ1eh+9WIJExXiP6cC3M6/s7ns32q3GIFvJgiW1JeXpsc8c
+	 mKR5tvDNeHrS2DpQjoWz7U1keT+Wg0MrdvkjQooIEAh17fnh8I+kcHIqMifEvBSvx5
+	 0lIY/xIleJr8B1hSC+ASQKXZynZyiInQX53cfcStII+GE5yd7GUKrxGf/K03CXSVX3
+	 o44XS1vz/M5hCpWSODu7eou6pUSpo+tLuSZsT/yjpOhrDWPWLzd2axlo8e2lPx4r9e
+	 KkSnHNDqfm+NA==
+Message-ID: <26d37b51-fa03-4d91-b160-3c0b8b7e1bb3@kernel.org>
+Date: Wed, 23 Sep 2026 10:05:55 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PH7PR12MB5685:EE_|DS7PR12MB8419:EE_
-X-MS-Office365-Filtering-Correlation-Id: 4ea54156-8de6-4d0d-aecf-08df194925c4
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|1800799024|366016|7416014|376014|23010399003|6133799003|22082099003|18002099003|56012099006|11063799006|5023799004|10067099003|4143699003;
-X-Microsoft-Antispam-Message-Info:
-	9ekffflhBCx6uxh/xf32orR1uAdoiEaRJnv4FtnS+cxx520OdoACxIT2m0Gu1eradp/ABYHHXdldoUKP0P57c6Y8MCSXh6ysBHrUaazBJKeVAjuIukwKhB1uMqT80PdtMo7xq9cXVyk5/JKqBJZqfbICAmn7NAREWeTgBdKZP6AmLHpxro1oeg38DuSeoxcu4nT2S8/mVxms8cEJfN7Iop9XAGZpGwIGoGEj6pNK+fy+Iu+sd+wvhNF2B5hO+h2jzH6GhSApH/0nHxvUHcBotfb0EB6fjIMjDBnqRQtVnjjbalbO/ttz4i3qaI+fLKw029JYeaQxyL2opJeJsPN+q0FAQaX1nbucgzL/AJnlZx5Qy6fkX5L+xDy4fKTVwi6Uhf+YW0WNBQVB4Dhpa6hsq7ca9dk5+n4kXvcFCLDYhTcQGLhK5ZlMgI2T132WznwuOApSnOdBT9X4E2UCSTBdPVz+frX5y6KkDDs/yjy4o5m6ms+aey5g2HdDlH9QibPyUaejCy+2Xn19X8M4d9D9RL2AHSmaBOxk13A6vvBzZdeH7cRWjfGL1j8o9MV2kA2qdi8KKTjLUeQLA85Pcs/OgDhOBoE5q5619jkcfGsRfN2VO/nS2/svO3OxJ4AsPDmdyNAnHn2mWSbUU7+irnZDMiHwiRwt5E8HZ3P/D0GGwTs=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PH7PR12MB5685.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(366016)(7416014)(376014)(23010399003)(6133799003)(22082099003)(18002099003)(56012099006)(11063799006)(5023799004)(10067099003)(4143699003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?cGRidzVMOTBkZjNvWDcwSGliZXVyRVBiL3RLWTJkL1FmczNia1NuTjRTbjcx?=
- =?utf-8?B?U1g2RVRuUjNXZ21kRDJRQms1c01EU3VSTzFkVEoyNUZVZDl0WGthRlBrY2tu?=
- =?utf-8?B?WVkzeWFUOTNNUnZ3Y0x5Mk8wZDUrMzR6UWs0N09QTjlGZktRU0NlYSszZWlY?=
- =?utf-8?B?QjVoeEFHcG91dURZMDcvWklZeDR5cXZ4OHkrLzFoTU5mQkpnd1ZseURWakdK?=
- =?utf-8?B?MnRrMi9QdDM5cXNwQzlCTmh0TlhGbkJsRU1Pd0RFTCs5VVBrVmxtNHdWczFJ?=
- =?utf-8?B?L3hVVFRoVEQyZU5kMTVkSDNtZmZmS1ZRVFN1YWZkVUhQYWJtNnFYQVJHQWRY?=
- =?utf-8?B?R1ZSY0RoQ0ROeHhZcERMYkVmSTkrSUNpNk83VjgrWHl5M05Ed2RSQmc3Wmlh?=
- =?utf-8?B?TndROUx5OSs0ckVZREJtNG1GMlBTdThvbWs5eFlYSE15SFRFQnJZTXJpVU5o?=
- =?utf-8?B?K2tKVHVqK0VPOWhaZDlwb1ZSOUxjWEdZcldGenFNbVkzclFnVjBOb0MycUhT?=
- =?utf-8?B?OFdXa1d3ZUF4bytIbG9qeVdMRkljTS9YTzI0MS90NmpKYVBtL3pMbVdCYXh1?=
- =?utf-8?B?L2R4UFRNbzBPMkVUSjdhQjI3MkVBZHFmbnp2ME1LVXlWYUtoZEpLTGhxZVdJ?=
- =?utf-8?B?QWxsd3J3bHl3ZDluZkNUajI2d3prZ1MxTUM3dnBTVUVyK0NhVDZueHdnRHJ2?=
- =?utf-8?B?bjR5eFdSNmNHMkFUbkdOeEpNVlYvVkVWcWNvcU9wR3IyenlxS0QyUTVUaTdO?=
- =?utf-8?B?dFlZVUU2cmdWQXc1SlY1UlE0NmI1NENtbDNNaUdiKzhtTG1rM0RhRDBMWTBB?=
- =?utf-8?B?TzlKVG1HV2YwM1NpbzNIY2pqRk9iaGpsaFNDdkFDdzlPdndVb1Avd05UVkNk?=
- =?utf-8?B?aVh2enI1Y1UrQkN2djhuSHEybWxKK3R1UW1tMzZRWHAyOUVQbWF2VDdMd3hZ?=
- =?utf-8?B?UkFyZnViSFk4VUcvcWovSnhhQU1jakVGYXFvbnNUaWJWVVcxQXRIbVZLTUh2?=
- =?utf-8?B?Y2RzTlZLT2FxZWhtTUlJUlROZUNPNTVGZ0R1MlB3VXRMbVFoN2ZrdkRJNHBp?=
- =?utf-8?B?Qlh2Vmt1ZTZqN0s0a0I2UFJHYTloa0kyWk50a0Q2RXcrZ0NwOU1iYkU2UWFW?=
- =?utf-8?B?TENWUEgxSGgwak1HaktXbUlUNXNOempid2FFUFdSNkxuZEF0N1hROUZBTWtN?=
- =?utf-8?B?UXlrTWhzaEtia2pKREdMc0s5ai9SeTR4VjlqaXVtMkFYRnQzeTdka29DNjlF?=
- =?utf-8?B?Z004eUZqbXFiYVRaTkhjVzNGSlBSbXlWV0hjcTFkZGszYjk2L2syeWtJTUtV?=
- =?utf-8?B?UTFTTzl1bU9aZWttNE9jUUVEdmxITS9mbGpGYk9lbkpIQ0trWjE3K0RmUmtQ?=
- =?utf-8?B?ZDd0UDE1S1RucHc4WFlmS0FFUzd3RFFLYVRBYUZhV2ZIY1dHZlhZcEJjdE5k?=
- =?utf-8?B?UG9VT0psRDJYa3I3YXJkRGhzV09uOVB1TU1xdUdhK2ZZaFBSL0h6VnFTMUVN?=
- =?utf-8?B?QktEWElZalZnZ3JWMW1XTDgzWkRaK0JNcDhuTU9OLzI1Q1VwRkpZaFNPYzdS?=
- =?utf-8?B?THY5NTFZcmVObEo0dlFldUpvMUtPaWoyWHVaL20rZFBLZWQ5UENEbjg4NWRw?=
- =?utf-8?B?ZHJRWFZseGZ4OHl1RDlGRk4yNGE5bTlFV0o1cDNSZjljN1RRc2NQVitGUm9x?=
- =?utf-8?B?TXBzcmRuT1NNQWVpR1JEUEFBZk1tcEsydEZ0N3hwZFFCcFZ3c2lab1ZpTkEz?=
- =?utf-8?B?QVd2L2pJRkhsTTdCZzVRZkpLbWR3bEpucEI0YmJ2MWdlYTVhZGRFbFJIb3l4?=
- =?utf-8?B?QTZSbUlEb2p3aTBVVDk5VGV0N21NS2pvcUJqMCtoTTRxaWVINy9iRVd0TDUx?=
- =?utf-8?B?enN3VHU1YjN2TDdRVTYvVUc0MzUzNkJMUFlLN0dvNkFxS1JoYU5KVWUvSWZz?=
- =?utf-8?B?RWxGTWtzcmg2QUlGS3dNMFIvNE1DcGxZWTdXRDJxQWMwVXRoNHB2dlArQlUx?=
- =?utf-8?B?eU40eGlST2ZTQjVtK3VSaWc1MUVJQXRNQWR6NERUbXpEMWx5MzNDcEtKUmJ5?=
- =?utf-8?B?SUtSM2dxUTdtRjd2VzU4bEg1U3IrbG5KQ3JkWTA5Z1plUForYjNJUmpKMGJh?=
- =?utf-8?B?YkhlNDhuTEp2YXpmSEVvb0tZS1JQN0U2WU9yOUdBR25xcGZranlobCt2Y3Zr?=
- =?utf-8?B?dGJDOXlLdzdqekFsSkoxNWJJQXhYSzYvSkQ0d1VVa0EvbDRuOFJZbkZ1Y0I2?=
- =?utf-8?B?S3RndUxrS21uNGV3MGZSVHg5cThjazJrbEpMR0RjL1dLZXFpNGE3QUFqRjRw?=
- =?utf-8?Q?tUAreIR3hLYCCAjWRE?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 4ea54156-8de6-4d0d-aecf-08df194925c4
-X-MS-Exchange-CrossTenant-AuthSource: PH7PR12MB5685.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Sep 2026 08:03:26.8371
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: JEMman8ulaQugxz95TQ0xYcyHXIDpICzT/FxljpBxoqrlJfyFQ6pMqIAeCLcRF2R
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS7PR12MB8419
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 7/8] dt-bindings: sound: qcom: add Tambora WCD9378 SDCA
+ codec
+To: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>,
+ Mark Brown <broonie@kernel.org>, Liam Girdwood <lgirdwood@gmail.com>,
+ Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>,
+ Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
+ Conor Dooley <conor+dt@kernel.org>,
+ Bard Liao <yung-chuan.liao@linux.intel.com>,
+ Pierre-Louis Bossart <pierre-louis.bossart@linux.dev>,
+ Charles Keepax <ckeepax@opensource.cirrus.com>,
+ Maciej Strozek <mstrozek@opensource.cirrus.com>
+Cc: linux-sound@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+ patches@opensource.cirrus.com
+References: <20260918131914.681588-1-srinivas.kandagatla@oss.qualcomm.com>
+ <20260918131914.681588-8-srinivas.kandagatla@oss.qualcomm.com>
+From: Krzysztof Kozlowski <krzk@kernel.org>
+Content-Language: en-US
+Autocrypt: addr=krzk@kernel.org; keydata=
+ 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
+In-Reply-To: <20260918131914.681588-8-srinivas.kandagatla@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On 9/23/26 09:42, Jianfeng Liu wrote:
-> [Sie erhalten nicht häufig E-Mails von liujianfeng1994@gmail.com. Weitere Informationen, warum dies wichtig ist, finden Sie unter https://aka.ms/LearnAboutSenderIdentification ]
-> 
-> Commit 143755bdabaa9 ("dma-buf: Make DMABUF_DEBUG default to y on
-> DEBUG_KERNEL kernels") fixed a dangling reference in the DMABUF_DEBUG
-> default, which had the side effect of enabling the option (and with it
-> the page-stripping sg_table wrapper handed to importers) on every
-> kernel with DEBUG_KERNEL=y - i.e. virtually every distro kernel.
-> 
-> drm/msm is broken by this: it maps imported dma-bufs into the GPU's
-> own pagetables with iommu_map_sgtable(), which needs the struct page
-> of the attachment sg_table, and it fills the GEM object's page array
-> through drm_prime_sg_to_page_array().  With the debug wrapper in
-> place both silently produce garbage (the wrapper zeroes sg->length,
+On 18/09/2026 15:19, Srinivas Kandagatla wrote:
+> +  vdd-mic-bias-supply:
+> +    description: Mic bias supply.
+> +
+> +  '#sound-dai-cells':
+> +    const: 1
+> +
+> +required:
+> +  - compatible
+> +  - reg
+> +  - qcom,sdca-compliant
+> +  - qcom,port-mapping
+> +  - reset-gpios
+> +  - vdd-buck-supply
+> +  - vdd-rxtx-supply
+> +  - vdd-io-supply
+> +  - vdd-mic-bias-supply
+> +  - '#sound-dai-cells'
+> +
 
-Interesting point, we should probably change that.
+You need $ref to dai-common.yaml
 
-> so the page iterator yields nothing and an uninitialized array is
-> kept).  The VM_BIND map job then fails asynchronously after userspace
-> has already enqueued GPU work referencing the mapping, which shows up
-> as an arm-smmu translation fault from UCHE, e.g.:
-> 
->   gpu fault: ttbr0=000000088a889000 iova=000000010741c000 dir=READ
->   type=TRANSLATION source=UCHE
-> 
-> This breaks hardware video decode (clapper, chromium) on Adreno
-> systems; bisected on a Snapdragon laptop as v7.3-rc3 good,
-> v7.3-rc4 bad, culprit 143755bdabaa9.
-> 
-> Revert the default until importers that legitimately need to build
-> phys-based mappings have been converted.
+> +additionalProperties: false
 
-Well that won't work like this, pointing those things out is exactly what DMABUF_DEBUG is made for.
+And this becomes unevaluatedProperties.
 
-What MSM is doing here is not allowed at all and can break badly. We gave drivers 5 years to get that fixed and I'm now pushing for completely deprecating that hack.
 
-See patch 84335675f2223cbd25d0de7d38ecc7d40b95bd4a:
 
-Author: Simona Vetter <simona.vetter@ffwll.ch>
-Date:   Fri Jan 15 17:47:39 2021 +0100
-
-    dma-buf: Add debug option
-
-When MSM needs the struct page then it must import a shmemfd and not a DMA-buf. What we could do is to either fix MSM or mark it as broken.
-
-Regards,
-Christian.
-
-> 
-> Fixes: 143755bdabaa9 ("dma-buf: Make DMABUF_DEBUG default to y on DEBUG_KERNEL kernels")
-> Signed-off-by: Jianfeng Liu <liujianfeng1994@gmail.com>
-> ---
-> 
->  drivers/dma-buf/Kconfig | 9 ++++++++-
->  1 file changed, 8 insertions(+), 1 deletion(-)
-> 
-> diff --git a/drivers/dma-buf/Kconfig b/drivers/dma-buf/Kconfig
-> index e4f078a326a41..b3c581ef4c987 100644
-> --- a/drivers/dma-buf/Kconfig
-> +++ b/drivers/dma-buf/Kconfig
-> @@ -43,7 +43,14 @@ config UDMABUF
->  config DMABUF_DEBUG
->         bool "DMA-BUF debug checks"
->         depends on DMA_SHARED_BUFFER
-> -       default y if DEBUG_KERNEL
-> +       # NOTE: keep this default n.  The page-stripping sg_table wrapper that
-> +       # this option installs for importers breaks drivers that build a
-> +       # second-stage IOMMU mapping (phys -> iova) from the attachment sg_table
-> +       # and therefore still need the struct page, e.g. drm/msm with its
-> +       # per-process GPU pagetables.  Until those importers are fixed, making
-> +       # this default y breaks hardware video decode and GPU workloads out of
-> +       # the box on affected systems.
-> +       default n
->         help
->           This option enables additional checks for DMA-BUF importers and
->           exporters. Specifically it validates that importers do not peek at the
-> --
-> 2.47.3
-> 
-
+Best regards,
+Krzysztof
