@@ -1,87 +1,88 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9EA2A3C2BA2
-	for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 16:34:05 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3B40C377AA5
+	for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 16:34:12 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790181249; cv=none; b=B3SFdk3an71Hzsbdb1FvhASfipG4AEf3wia7Yr4wBJSgIKAWqOvdyL/3SpACMGuCXLLJKOOC5OHZoY0Uw3hc6tiyFieSEbdlq+IjEwsj0aebGZUuyW8Za8h15ozRwSZFp71uhjHxLO57YbQnpHqA+gdY0sYcT3X+nCWC2H7vYnw=
+	t=1790181258; cv=none; b=TwCGWygLOi3u36AuXEXf73LUgFUnbOMbmpWrWokvQo3REdb/Co4AVKtO/brvUvDDyoO2AlfFfYhPLr3rgGPrgCu5pqYMf7tBiniTnCt8w1v/QlAx2ABZQdZ7Yak+b3nhcfvrBXJ6QRkF1jvRcaq+0YMyfb/1LGMexERlr8w6EuU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790181249; c=relaxed/simple;
-	bh=coYj6sdykkd1PCi2KNjcYdAGy8fu1yFBf4PZfUBvnrY=;
+	s=arc-20240116; t=1790181258; c=relaxed/simple;
+	bh=47loNT4DhVEf9UzFy8r4935vDPnfMGM+QfqANZwjVU4=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=m8/ycDk/MmA/9wAol2fWvSW0zICrsriAXx+SqY+Xx7sVH6j1B1krQG8iePMwI643jukamp3zhsORvPs+KFmayx9W3gNE5ZBUFO+pdwUAqVYZkGim5dQ4M2HT/m6zIlU/IoF32oaIYTjlhzKsrR+/QpdwrIMY4bp3Vbi2+G0Mt1Q=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=U2LWSuA9; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=jAZT0ooo; arc=none smtp.client-ip=205.220.168.131
+	 In-Reply-To:To:Cc; b=GtjdAncuuc1Zy5usO+f4iXGwA/W++6n9arZuZoXKIQmuoeBpUnpCFdi50/YbO4H9kFanzmkGjJihkDDyPF1Dy5gBC9Ak0kg6YaSOW89HzUf5G2Pzd0FgmJbc19FaOGPX37cyI73QFVjPhWuFYwqONb/K0LUKvHhiN5eu2GIZie0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=CQ9q1ZwU; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=Hg+VB9zW; arc=none smtp.client-ip=205.220.180.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="U2LWSuA9";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="jAZT0ooo"
-Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68NGTilv2470183
-	for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 16:34:02 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="CQ9q1ZwU";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Hg+VB9zW"
+Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68NGUEFr3799813
+	for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 16:34:08 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	llOjDMEuBFDv+DyQdi/V2z3mxuMuRRhWgPZ4yTvTgrw=; b=U2LWSuA9ySbC9DCv
-	oxBX5bPcUF7vpwb+ebNWmeTDI/8DmP8rIYhSSyMr/L13/5kX3Zjq4feHf/XlD4pS
-	/1LdmbKvfDr0LkK4zyy71hJLrSUx96gJm/qXABVc9UNw4U0nx0VnFcVHM3q6ygqR
-	J31VkBwr2MRdO9/zJX/BcUWJuQF29nQN/jHrpc95HEYpQrR69IWH+RcxNYa1GmEC
-	CASNA1IRQfAakvJrU/ff3iqHKAsQrZ7JDg2ZTeNfEMyfDf4aaBnV2FhfCi8V5DaO
-	w2a1xoe6qOcbZRzp38FT+9h88POIqobtecGmuoEmWlHX3mc6Nnn9mNBR/iXBsz6J
-	BMH/xA==
-Received: from mail-pl1-f197.google.com (mail-pl1-f197.google.com [209.85.214.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gvfjv0w3u-1
+	/W1G/LfLwb41fze/tokJxczt1bqU2MY41K03t9d4wwk=; b=CQ9q1ZwUMbMw17qG
+	xv0rVQ5/eHpQnr6m+fz6qjftNssQppeiNaOV7/F+v6V/hx6sTKmYiqATN4kLS1u0
+	oCHh7eZIkTKKPqRRnyHYHnVtuPC2Cvf17EzLCyrcYJvERKqpowZ6rmuBJkABLnns
+	gy7iQVA8Cupwi/VsO5et3yHtFkvf93b8RBQ3H51t6n06IivVZ3UE6g3fmgR6YKHJ
+	SHzGhx/EgX3LlJwLezpG9NdD7jj+E5iGS419rfrEtXOlRJHdIlQl3cjefBfjxXSZ
+	1s4BQM+c/ylCBai/0c+d2B3yhIMmWD0s5YSwz3fwhH5v4JCOGXS3/ksIi6q5bVRV
+	+jVl2Q==
+Received: from mail-pl1-f199.google.com (mail-pl1-f199.google.com [209.85.214.199])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gvhsb0638-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 16:34:02 +0000 (GMT)
-Received: by mail-pl1-f197.google.com with SMTP id d9443c01a7336-2cee1ec30f2so11410935ad.3
-        for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 09:34:02 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 16:34:07 +0000 (GMT)
+Received: by mail-pl1-f199.google.com with SMTP id d9443c01a7336-2dc92350888so17716825ad.3
+        for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 09:34:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1790181242; x=1790786042; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1790181247; x=1790786047; darn=vger.kernel.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=llOjDMEuBFDv+DyQdi/V2z3mxuMuRRhWgPZ4yTvTgrw=;
-        b=jAZT0oooBgcDa9O/kLR9M5vCeODvhRctJOpVOlBafLgzIEPIDQNKyXxEOGw8LDIYdg
-         M+CDXj6YwUhK6pW06bD966TOH8pFO7xiTw1//YwQOul1Wm4xCvpBPBG69XUHXoSO1LuK
-         QR49Jig36y6u8BUCVLc1MxvdDiUMBuK9N9PTwtTjiR/8GU/nxof7VVUg9Rq+rLqMqryA
-         +hCXbjXU/9UAsFXKbN4RI5Al8At0b88yGNF21x/HBru4xBijm18nOajJnqdox7G6ddWq
-         LH3JHC58un47Aj0DbLedE02/NKEJvODUH8rDAIgE1GJbEaCscKEPdmcxhlHBy18ZJlWy
-         jh0g==
+        bh=/W1G/LfLwb41fze/tokJxczt1bqU2MY41K03t9d4wwk=;
+        b=Hg+VB9zWyLN6qMn2mlbGhT370Tpfj6mIU9OisIKxmKhf9MSSQox6+jJ9q5udBF0eSO
+         0G/Ju6ymb53GMuKj1Er1OSXBhCQwWI8FPpUI+TrYaG2zEguEkBzZOHJ9UWT+GG8/oZUC
+         SURtMKLN0VYM0UW6Fyet2i4+omDX44+HUKhnPYy5b1Xgrghz0LU2dYmKNSXeaqKfmgUP
+         kBL6C6DATkfGjqJOVhe4jnZBns0UQsZl0ezWlxlcdPAi9lm1ydxCnE/D0ugWyVEM8ezT
+         yCjlbUMEjV5OErldauvtWuf+k+46YL4veykQCzRa23wF05FNG9UqYL+lKPz5xrZAddzv
+         m6Cw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790181242; x=1790786042;
+        d=1e100.net; s=20260707; t=1790181247; x=1790786047;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=llOjDMEuBFDv+DyQdi/V2z3mxuMuRRhWgPZ4yTvTgrw=;
-        b=L9nFdGxxwZg6Vps6k2XVDSDS8l0Q7ftDH+dj5+tLUrX6vzaxQCS5Kcn4keYm11hzYp
-         NPDCy8S7RzFEPmYkEVk3ZeIpYe/mkojixc68VkjbGOlup7iQD18SDXcQwE75whGT7ak2
-         v00EZmTtW4vI8o70ISzgag/G/Qx6RAOHtoCJcakVzcd4HQdmIss0+flKIBIS4xaJ5YWS
-         CcdxTPjlrMyia3xe/XlE5ym40wLbgACYuMAOOZ4hDt2FVqH4/ftJR5BRYLbmce6KW449
-         quYBvkeV51zj6scwQ8ukoDuhDR2YNiCunA3vuipcmG/9K4cyWo77NwWGLX61X0nKGj9g
-         X1Rw==
-X-Forwarded-Encrypted: i=1; AKwUvByCfI2Lm5fF/aUaLPhL/x3ZhpKj/G7HjpCpEfmOlDg7aSafDdUoMeNoeqp0YPav0p0aWOD5rvZS9UR64SDx@vger.kernel.org
-X-Gm-Message-State: AFuF++mcnowf+e4QavxE9Mmmlzh85NDNGPqROBYqBmsxF8aR9aMcCcvL
-	zL4UcGTLQZvWKMPGfSufv5Fnee+b9qZ2SwHHEYN03RIbpUb49CFOusEC7veVBlLgiHggzmQERyJ
-	eeEBL1wfE2bqpH8etiR4y/k7HK9LOIE2ePSkPZLJdoDMe+8/8mMRXahoaSUedx0o63g8P
-X-Gm-Gg: AYBFou39jAGz+WrO7jwm0zAkpaQMMLZKLt5au1sla6G9KKIAWSqB7aoNs5XtEDsw7lr
-	VjviWoW5RRSjor6nTlE1UEt6cbJ43x5K0BoQwhclkajzbZWYiGI0LsotV0armsSodASNI9hT+9j
-	sg1NlRjfg2GCQt8Qk4dDDiP1XFHSozUVBnDcZM9IaRQG93eATauVraZiAoSeyKu23kX2x9sBIPv
-	uoaV2KgvaYoa3gBdmlzphu11h/vaEZKunv1RyHHvnt4t68KyGNvQ4JY6tPojwRCPwdimTjhQxiz
-	9fYtDRlw8vAvE0CtTy+uanaXGP9BG5+bph/egMzlXb+WIXprRrFzJQPVMeA2lEvg3UREOShEkV8
-	nPxVHocun9zCvstDutI/qyU6LAzc=
-X-Received: by 2002:a17:903:2f85:b0:2dd:c053:ec71 with SMTP id d9443c01a7336-2df69dc771dmr26576325ad.36.1790181241888;
-        Wed, 23 Sep 2026 09:34:01 -0700 (PDT)
-X-Received: by 2002:a17:903:2f85:b0:2dd:c053:ec71 with SMTP id d9443c01a7336-2df69dc771dmr26575935ad.36.1790181241272;
-        Wed, 23 Sep 2026 09:34:01 -0700 (PDT)
+        bh=/W1G/LfLwb41fze/tokJxczt1bqU2MY41K03t9d4wwk=;
+        b=XZuRf9pl5yv+Ha2SgkYxPXHiPzuFRSUZshTPyozn19sultlrrMt9CNVNX09D8VnEvC
+         5mf8Skeei4WZxVf23iRUmth5gQ7uG1ZZ4xA31Hp7NBCisK1cx5TErmtkcRmowaJKgHEM
+         YSf3dIHNrqBz2/6K74OPP+kWKbhK851jVA3QZfeNHu368hMEzB3NXo2TYgGxOssOQfTX
+         hqzr/UAGwNsgojR1tRLqNpk7qSWBnvbaa15+Dsg/Ciqfxa62jYFX6MaJFIBGVZ0WU6i7
+         RDoi9LiwO6Ymx+iQZgWy9d7cJMxQwchWn38acrrIOEiukxEqcJDsc768ecoY/7PvZj90
+         KaWA==
+X-Forwarded-Encrypted: i=1; AKwUvBwgwZkWJ58TFa7yz/ZbNgmbuiqcaJHbMmk97WexHdIm4m9dlDPIMfB1qppAG894liMmZ2yfsemA5+i+4ULn@vger.kernel.org
+X-Gm-Message-State: AFuF++kQ1st7mf7FOVBEexFkKzA4g8yJgqfJZJQSddKMPv6CjQbeyMQB
+	fhM8rWbDpI8bImZQPkYFvBILgQVG9N7YTYI5EGltij9vrOlnqgG9Urt4unh2W95U0VS06+u5P/e
+	BB1ZzXL5id4rgxv2wfTtq+y58vxfDZC+NmWQfu0afDkPJAl8za8UGUKQDwS+JeRsV6qfYlQxFq9
+	YQ
+X-Gm-Gg: AYBFou26o+dtyk8DNpkSwYWkYDTNvnxrV6j1X7FSi398fdY7kNCrIWKyRwZ8SbQBOFf
+	RV+sXjlRE08kYXzD6Oe3QRwS2oPxJmfw6z0EYW1AwxDS2QBHWW9BLOvnZ6yDLQRk9WIvvCpazhs
+	mlZJ/AbCLDZwOhoYLM14weAqLcXUnGcqqYdYOBv44WoHxgH+rQ22/kZk+eEQvCfamL/fAo9oKhq
+	EPksURWYsm42t7Zvpr1HNWlwNhvpWHovaxX7lzfNgFe4lJoFVXEmwqPGcUyeO4GyisZOS18f/4u
+	tS8SpNAmu7sBtxzGBxsMtd16Ox64qp3j3ocmjum2Md3ucD/kXkUcNa+q5Jchj619Xk2Di5PSv2b
+	LkMKsC4HrSAXzGneudIsSvvU+8pGszhdNAibVZw==
+X-Received: by 2002:a17:903:160c:b0:2dd:c100:a5df with SMTP id d9443c01a7336-2df69e0c503mr28604885ad.51.1790181246701;
+        Wed, 23 Sep 2026 09:34:06 -0700 (PDT)
+X-Received: by 2002:a17:903:160c:b0:2dd:c100:a5df with SMTP id d9443c01a7336-2df69e0c503mr28604455ad.51.1790181246206;
+        Wed, 23 Sep 2026 09:34:06 -0700 (PDT)
 Received: from hu-nandam-hyd.qualcomm.com ([202.46.22.19])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2df6a5a6d35sm13994895ad.19.2026.09.23.09.33.56
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2df6a5a6d35sm13994895ad.19.2026.09.23.09.34.01
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 23 Sep 2026 09:34:01 -0700 (PDT)
+        Wed, 23 Sep 2026 09:34:05 -0700 (PDT)
 From: Ajay Kumar Nandam <ajay.nandam@oss.qualcomm.com>
-Date: Wed, 23 Sep 2026 22:03:38 +0530
-Subject: [PATCH v6 1/4] ASoC: qcom: q6apm: clear g_apm on driver removal
+Date: Wed, 23 Sep 2026 22:03:39 +0530
+Subject: [PATCH v6 2/4] ASoC: qcom: qdsp6: generalize GPR service domain
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -90,7 +91,7 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260923-vmid-v4-v6-1-3d61a0319b1c@oss.qualcomm.com>
+Message-Id: <20260923-vmid-v4-v6-2-3d61a0319b1c@oss.qualcomm.com>
 References: <20260923-vmid-v4-v6-0-3d61a0319b1c@oss.qualcomm.com>
 In-Reply-To: <20260923-vmid-v4-v6-0-3d61a0319b1c@oss.qualcomm.com>
 To: Srinivas Kandagatla <srini@kernel.org>,
@@ -102,62 +103,227 @@ To: Srinivas Kandagatla <srini@kernel.org>,
         Conor Dooley <conor+dt@kernel.org>
 Cc: ajay.nandam@oss.qualcomm.com, linux-sound@vger.kernel.org,
         linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
-        devicetree@vger.kernel.org
+        devicetree@vger.kernel.org,
+        Pratyush Meduri <mpratyus@qti.qualcomm.com>
 X-Mailer: b4 0.15.0
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTIzMDA2NiBTYWx0ZWRfX/UjzcRWr1cj5
- dlSbqGSiT9Z6/+XmSLnC4chnDcgqqBsmUX+AHb/FLCcZtuJrqTDQs7jKX31M8FIE7Ccwp1IEwtk
- kYnh2Kul+ZdWiK4JGHLYnr2zaxDtejgEHx+f2/hHChNqCl5yxft+5/PoVBr/cfwfWlnO/lyAXji
- pz7S4odw0mqL5OMauiPqJW9pYg9ucvyRGo4xsucFOvgpBbwi5uHeAmhVQBWiAGbfMjWo6gkIpnU
- JJmn6Vqb7y+SFYGoTRQ2KwmnOByNG+eaQgFV278IK8VRiDD7ZM61VPKwShweuzQjGB/RA4+JIj9
- BvLagrY/y7WGhqlGuVi6wKKVXT3v64qtVRVuP1hsGGHBT9uab5FbGWV8Pfk0GZN21yWcOTiEUEQ
- 7xrAG7tBJ8lgnrkiVgh2sDmQoeoAya4Aui45lUJ6hgir1ON0Qq93ddjme+mKrNFVR2bLNzKKzgL
- G9b477HFWpcZSDdUyjw==
-X-Authority-Analysis: v=2.4 cv=aIxlOr9m c=1 sm=1 tr=0 ts=6ab3ff7a cx=c_pps
- a=cmESyDAEBpBGqyK7t0alAg==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
+X-Proofpoint-GUID: ib3vg4mDtpAuw3VzcriC794BmxN_SZlP
+X-Proofpoint-ORIG-GUID: ib3vg4mDtpAuw3VzcriC794BmxN_SZlP
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTIzMDA2NiBTYWx0ZWRfXzS1tR6UYrR6K
+ E/74p/BYC1SsUXFL5Yv6csnP+pKve9cG2bGkuTd7IqU1UtMeLojpuqT63tcCUwgi2eV7066rf4M
+ i7uOPmFGKv9IanMt2XEjGgr1wWkNbq+Ry/mpR+qP60clq1X67oX+BwnQ2UoCUvE7fikZJPMzGMo
+ 2vhRZesp6V8dm7ak8H5cjfd4ahF1aMEhC0nabeTg7O02Yz7lywKAmJyUZjLcM1l3i39/yT8WAtK
+ yskapkZw+Sf0P4Wgoi5TN1YeCobjwQxV91jVpriH49YAHBSjud7PTlNCIQA7EjXrK5fBqR7wtg9
+ cUBv6BA3QELVpmn5Lq9BCpYkJ8C5LobWnuP4PT2uPkmVYTFKv1MMTR+5+3WV/4+/Tj8cmRrRJ/P
+ bx7/Oqw5sib8aJ4WzQlDZLDVH3t+XcBwSz0Y4Uc7/B1MvqkqtNXtacQuVHAE8Gx8TTrGzTdoQ7n
+ wtXMnM7tVgFK1DBA/Nw==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTIzMDA2NiBTYWx0ZWRfXzN9tLru1OmGC
+ Vy9/WbYjIWUmXdjE8JxPMmogrFM5KjH3X7sPpWuDWzD7oohqeOtGF1hqAC52qlWvJdgcnvIb0Ej
+ tvL8zCwOfakPT4M1RI4cluXnXOxIFu4=
+X-Authority-Analysis: v=2.4 cv=f7vdl+yM c=1 sm=1 tr=0 ts=6ab3ff7f cx=c_pps
+ a=JL+w9abYAAE89/QcEU+0QA==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
  a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
- a=EUspDBNiAAAA:8 a=i9zpEd1wrD5FINdKp7YA:9 a=QEXdDO2ut3YA:10
- a=1OuFwYUASf3TG4hYMiVC:22
-X-Proofpoint-GUID: bVg-RpgiTJqEbOL9GSsC0obbTG1vVdoa
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTIzMDA2NiBTYWx0ZWRfX9Dmej05UNX6E
- /f2bZBcJMhrzuKjXcOY/rE/mHl58hi2zcXATA5ji5JaPgqvoSz468kUtF1Xv4/BNoz6AC+B0hHu
- NXASinMs64+sk0BlzSKVyFNA8+v1M58=
-X-Proofpoint-ORIG-GUID: bVg-RpgiTJqEbOL9GSsC0obbTG1vVdoa
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
+ a=EUspDBNiAAAA:8 a=06UwNDcAWG1pVACfRQkA:9 a=QEXdDO2ut3YA:10
+ a=324X-CrmTo6CU4MGRt3R:22
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-09-23_06,2026-09-21_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 suspectscore=0 priorityscore=1501 spamscore=0 phishscore=0
- malwarescore=0 lowpriorityscore=0 adultscore=0 bulkscore=0 clxscore=1015
+ clxscore=1015 phishscore=0 lowpriorityscore=0 suspectscore=0 spamscore=0
+ bulkscore=0 impostorscore=0 adultscore=0 priorityscore=1501 malwarescore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609230066
 
-The global g_apm pointer is set during apm_probe() but never cleared
-in apm_remove(). After the driver is removed the devm-managed struct
-q6apm is freed, leaving g_apm dangling. A subsequent call to
-q6apm_is_adsp_ready() dereferences the freed pointer.
+AudioReach builds APM and PRM command packets with the GPR destination
+domain hardcoded to GPR_DOMAIN_ID_ADSP. This assumes audio is always
+served by the ADSP, which is true for all currently supported targets.
 
-Clear g_apm in apm_remove() before the component is unregistered so
-that q6apm_is_adsp_ready() returns false instead of triggering a
-use-after-free.
+On platforms such as Qualcomm Shikra, audio is served by the modem DSP
+(mDSP) instead. The GPR node in DT already describes which DSP backs
+the service via its qcom,domain property (e.g. GPR_DOMAIN_ID_MODEM),
+and the GPR core exposes it as gdev->domain_id. But the AudioReach
+packet builders ignore this and always target the ADSP, so every
+APM/PRM command is routed to the wrong DSP on mDSP targets and audio
+does not function.
 
-Fixes: 5477518b8a0e ("ASoC: qdsp6: audioreach: add q6apm support")
+Fix this by reading the GPR destination domain from gdev->domain_id
+and stamping it in the send helpers (q6apm_send_cmd_sync,
+audioreach_graph_send_cmd_sync, q6prm_send_cmd_sync) just before
+dispatch. This centralizes the domain decision at the send layer
+rather than threading it through every packet-allocation call site.
+For the small number of async data-path sends that bypass the sync
+helpers (write, read, compr, EOS), the domain is stamped inline
+before gpr_send_port_pkt(). When no domain is available the helper
+falls back to GPR_DOMAIN_ID_ADSP, so all existing ADSP targets
+remain unchanged.
+
+Co-developed-by: Pratyush Meduri <mpratyus@qti.qualcomm.com>
+Signed-off-by: Pratyush Meduri <mpratyus@qti.qualcomm.com>
 Signed-off-by: Ajay Kumar Nandam <ajay.nandam@oss.qualcomm.com>
 ---
- sound/soc/qcom/qdsp6/q6apm.c | 1 +
- 1 file changed, 1 insertion(+)
+ sound/soc/qcom/qdsp6/audioreach.c | 12 +++++++++---
+ sound/soc/qcom/qdsp6/audioreach.h | 22 +++++++++++++++-------
+ sound/soc/qcom/qdsp6/q6apm.c      |  8 +++++++-
+ sound/soc/qcom/qdsp6/q6apm.h      |  2 +-
+ sound/soc/qcom/qdsp6/q6prm.c      |  2 ++
+ 5 files changed, 34 insertions(+), 12 deletions(-)
 
+diff --git a/sound/soc/qcom/qdsp6/audioreach.c b/sound/soc/qcom/qdsp6/audioreach.c
+index cce0ad31ff0c..d2dc5d37bccf 100644
+--- a/sound/soc/qcom/qdsp6/audioreach.c
++++ b/sound/soc/qcom/qdsp6/audioreach.c
+@@ -593,10 +593,10 @@ EXPORT_SYMBOL_GPL(audioreach_alloc_graph_pkt);
+ int audioreach_send_cmd_sync(struct device *dev, gpr_device_t *gdev,
+ 			     struct gpr_ibasic_rsp_result_t *result, struct mutex *cmd_lock,
+ 			     gpr_port_t *port, wait_queue_head_t *cmd_wait,
+-			     const struct gpr_pkt *pkt, uint32_t rsp_opcode)
++			     struct gpr_pkt *pkt, uint32_t rsp_opcode)
+ {
+ 
+-	const struct gpr_hdr *hdr = &pkt->hdr;
++	struct gpr_hdr *hdr = &pkt->hdr;
+ 	int rc;
+ 
+ 	mutex_lock(cmd_lock);
+@@ -636,10 +636,12 @@ int audioreach_send_cmd_sync(struct device *dev, gpr_device_t *gdev,
+ }
+ EXPORT_SYMBOL_GPL(audioreach_send_cmd_sync);
+ 
+-int audioreach_graph_send_cmd_sync(struct q6apm_graph *graph, const struct gpr_pkt *pkt,
++int audioreach_graph_send_cmd_sync(struct q6apm_graph *graph, struct gpr_pkt *pkt,
+ 				   uint32_t rsp_opcode)
+ {
+ 
++	pkt->hdr.dest_domain = audioreach_gpr_dest_domain(graph->apm->gdev);
++
+ 	return audioreach_send_cmd_sync(graph->dev, NULL,  &graph->result, &graph->lock,
+ 					graph->port, &graph->cmd_wait, pkt, rsp_opcode);
+ }
+@@ -994,6 +996,8 @@ int audioreach_compr_set_param(struct q6apm_graph *graph,
+ 	if (rc)
+ 		return rc;
+ 
++	pkt->hdr.dest_domain = audioreach_gpr_dest_domain(graph->apm->gdev);
++
+ 	return gpr_send_port_pkt(graph->port, pkt);
+ }
+ EXPORT_SYMBOL_GPL(audioreach_compr_set_param);
+@@ -1609,6 +1613,8 @@ int audioreach_shared_memory_send_eos(struct q6apm_graph *graph)
+ 
+ 	eos->policy = WR_SH_MEM_EP_EOS_POLICY_LAST;
+ 
++	pkt->hdr.dest_domain = audioreach_gpr_dest_domain(graph->apm->gdev);
++
+ 	return gpr_send_port_pkt(graph->port, pkt);
+ }
+ EXPORT_SYMBOL_GPL(audioreach_shared_memory_send_eos);
+diff --git a/sound/soc/qcom/qdsp6/audioreach.h b/sound/soc/qcom/qdsp6/audioreach.h
+index 35541b2d8c99..587f14ce71d2 100644
+--- a/sound/soc/qcom/qdsp6/audioreach.h
++++ b/sound/soc/qcom/qdsp6/audioreach.h
+@@ -1002,14 +1002,19 @@ struct audioreach_module_config {
+ };
+ 
+ /* Packet Allocation routines */
+-void *audioreach_alloc_apm_cmd_pkt(int pkt_size, uint32_t opcode, uint32_t
+-				    token);
++static inline u16 audioreach_gpr_dest_domain(gpr_device_t *gdev)
++{
++	return gdev && gdev->domain_id ? gdev->domain_id : GPR_DOMAIN_ID_ADSP;
++}
++
++void *audioreach_alloc_apm_cmd_pkt(int pkt_size, uint32_t opcode,
++				   uint32_t token);
+ void audioreach_set_default_channel_mapping(u8 *ch_map, int num_channels);
+ void *audioreach_alloc_cmd_pkt(int payload_size, uint32_t opcode,
+ 			       uint32_t token, uint32_t src_port,
+ 			       uint32_t dest_port);
+ void *audioreach_alloc_apm_pkt(int pkt_size, uint32_t opcode, uint32_t token,
+-				uint32_t src_port);
++			       uint32_t src_port);
+ void *audioreach_alloc_pkt(int payload_size, uint32_t opcode,
+ 			   uint32_t token, uint32_t src_port,
+ 			   uint32_t dest_port);
+@@ -1020,10 +1025,13 @@ int audioreach_tplg_init(struct snd_soc_component *component);
+ 
+ /* Module specific */
+ void audioreach_graph_free_buf(struct q6apm_graph *graph);
+-int audioreach_send_cmd_sync(struct device *dev, gpr_device_t *gdev, struct gpr_ibasic_rsp_result_t *result,
+-			     struct mutex *cmd_lock, gpr_port_t *port, wait_queue_head_t *cmd_wait,
+-			     const struct gpr_pkt *pkt, uint32_t rsp_opcode);
+-int audioreach_graph_send_cmd_sync(struct q6apm_graph *graph, const struct gpr_pkt *pkt,
++int audioreach_send_cmd_sync(struct device *dev, gpr_device_t *gdev,
++			     struct gpr_ibasic_rsp_result_t *result,
++			     struct mutex *cmd_lock, gpr_port_t *port,
++			     wait_queue_head_t *cmd_wait,
++			     struct gpr_pkt *pkt, uint32_t rsp_opcode);
++int audioreach_graph_send_cmd_sync(struct q6apm_graph *graph,
++				   struct gpr_pkt *pkt,
+ 				   uint32_t rsp_opcode);
+ int audioreach_set_media_format(struct q6apm_graph *graph,
+ 				const struct audioreach_module *module,
 diff --git a/sound/soc/qcom/qdsp6/q6apm.c b/sound/soc/qcom/qdsp6/q6apm.c
-index f167b9dae3fa..eef4b496d2aa 100644
+index eef4b496d2aa..ea6680925f21 100644
 --- a/sound/soc/qcom/qdsp6/q6apm.c
 +++ b/sound/soc/qcom/qdsp6/q6apm.c
-@@ -900,6 +900,7 @@ static int apm_probe(gpr_device_t *gdev)
+@@ -29,11 +29,13 @@ struct apm_graph_mgmt_cmd {
  
- static void apm_remove(gpr_device_t *gdev)
+ static struct q6apm *g_apm;
+ 
+-int q6apm_send_cmd_sync(struct q6apm *apm, const struct gpr_pkt *pkt,
++int q6apm_send_cmd_sync(struct q6apm *apm, struct gpr_pkt *pkt,
+ 			uint32_t rsp_opcode)
  {
-+	g_apm = NULL;
- 	of_platform_depopulate(&gdev->dev);
- 	snd_soc_unregister_component(&gdev->dev);
+ 	gpr_device_t *gdev = apm->gdev;
+ 
++	pkt->hdr.dest_domain = audioreach_gpr_dest_domain(gdev);
++
+ 	return audioreach_send_cmd_sync(&gdev->dev, gdev, &apm->result, &apm->lock,
+ 					NULL, &apm->wait, pkt, rsp_opcode);
+ }
+@@ -502,6 +504,8 @@ int q6apm_write_async(struct q6apm_graph *graph, uint32_t len, uint32_t msw_ts,
+ 
+ 	mutex_unlock(&graph->lock);
+ 
++	pkt->hdr.dest_domain = audioreach_gpr_dest_domain(graph->apm->gdev);
++
+ 	return gpr_send_port_pkt(graph->port, pkt);
+ }
+ EXPORT_SYMBOL_GPL(q6apm_write_async);
+@@ -536,6 +540,8 @@ int q6apm_read(struct q6apm_graph *graph)
+ 
+ 	mutex_unlock(&graph->lock);
+ 
++	pkt->hdr.dest_domain = audioreach_gpr_dest_domain(graph->apm->gdev);
++
+ 	return gpr_send_port_pkt(graph->port, pkt);
+ }
+ EXPORT_SYMBOL_GPL(q6apm_read);
+diff --git a/sound/soc/qcom/qdsp6/q6apm.h b/sound/soc/qcom/qdsp6/q6apm.h
+index 5cb51ca491dc..9092359ccf90 100644
+--- a/sound/soc/qcom/qdsp6/q6apm.h
++++ b/sound/soc/qcom/qdsp6/q6apm.h
+@@ -147,7 +147,7 @@ int q6apm_alloc_fragments(struct q6apm_graph *graph,
+ int q6apm_free_fragments(struct q6apm_graph *graph, unsigned int dir);
+ int q6apm_unmap_memory_fixed_region(struct device *dev, unsigned int graph_id);
+ /* Helpers */
+-int q6apm_send_cmd_sync(struct q6apm *apm, const struct gpr_pkt *pkt,
++int q6apm_send_cmd_sync(struct q6apm *apm, struct gpr_pkt *pkt,
+ 			uint32_t rsp_opcode);
+ 
+ /* Callback for graph specific */
+diff --git a/sound/soc/qcom/qdsp6/q6prm.c b/sound/soc/qcom/qdsp6/q6prm.c
+index 1f3ce4cc0837..2042ff1e8ff1 100644
+--- a/sound/soc/qcom/qdsp6/q6prm.c
++++ b/sound/soc/qcom/qdsp6/q6prm.c
+@@ -57,6 +57,8 @@ struct prm_cmd_release_rsc {
+ 
+ static int q6prm_send_cmd_sync(struct q6prm *prm, struct gpr_pkt *pkt, uint32_t rsp_opcode)
+ {
++	pkt->hdr.dest_domain = audioreach_gpr_dest_domain(prm->gdev);
++
+ 	return audioreach_send_cmd_sync(prm->dev, prm->gdev, &prm->result, &prm->lock,
+ 					NULL, &prm->wait, pkt, rsp_opcode);
  }
 
 -- 
