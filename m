@@ -1,471 +1,160 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from lahtoruutu.iki.fi (lahtoruutu.iki.fi [185.185.170.37])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C63D73AF641
-	for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 06:16:59 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790144222; cv=none; b=oCCHVNEFnJLNU0WkT/SMRCRx8sB+bvshI00PSQCRAEMtBUdipESY2vl+ByQH/rvEmrQqz3tOW8xv8Fph/lZS7Ar15hUOnI0YI7AP1EDfDjcx/SAniJWtDXQGyjjYHjOAeMdgYADP1oeH/ig2Mj2q+YKa1ZxeYJus0OWSN4iBvBM=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790144222; c=relaxed/simple;
-	bh=peXXU50xndQ4gAoFBh6lBioyyPiw7OjAKlIqeV7t6ic=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=FyV8f5qzGzcf8fCPhFJ6BJpIy5jLbDbubl3E1m9kaQKD89cLVyRmYqGzbxcr3rl2wU3BlvyEbghj0L/TmDRH8BJxx9uJRJTAEkgYLEV2PbXZhhNxGNKNTtQb6zkUY0lOFMsgu6DNppNqUCcDHIXJd9GxVbM3raZ86so3snRP8yg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=LTGNdvh+; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=aBYvZmOX; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 21DA730ACEE;
+	Wed, 23 Sep 2026 06:43:18 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=185.185.170.37
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1790145805; cv=pass; b=IF6Oa+9YG5L/RJNiFxKFNfGjecVwYKNQFPESXmL47rp+1qhvKtCKfZAhqw2c190QhJhb/GhXVXdikY0ujbHwo8ZIJ5fXuRL2apZmulao0q2Acy5FWOaaFVQPg5XfFsuvwQ2xkCaQHu5v8k88cXyimsc/SvwlRbUM/hfJnLIYaqY=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1790145805; c=relaxed/simple;
+	bh=rYNUtYVo/DE4BajXfdVfAGUQ1KL8Prik0dfzkqOMPgg=;
+	h=MIME-Version:Date:From:To:Cc:Message-Id:In-Reply-To:References:
+	 Subject:Content-Type; b=QjdIwiwEJKvXjiOdYqV0xv6Fh7GSuw/vLfycM+AUB8VONrLp6rqSopgNGW0Gqzcb9LCreo4davxlLG8rau7ej81n5ADIa1xviV/BTudK6wUYUBxN+VsbHe/2l9wSvQIE2QxvNKs4okmJgrXaS24Rp6Doa4F6EiT439ACEatE3NA=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=iki.fi; spf=pass smtp.mailfrom=iki.fi; dkim=pass (2048-bit key) header.d=iki.fi header.i=@iki.fi header.b=L2J86SbM; arc=pass smtp.client-ip=185.185.170.37
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=iki.fi
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=iki.fi
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="LTGNdvh+";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="aBYvZmOX"
-Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68N3iOUZ1986066
-	for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 06:16:58 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	XAVSQafxI3Jl7WTU6fUPik0vtCcJL5EtlAGkPjfSPC8=; b=LTGNdvh+tK4uTGe3
-	dBVpvQxGhbf9BoBC++S/Kx47e6bhEBx6Y7GO3GBfExQ1IMaljtbScDjHP/Mb2kTD
-	TY87oyqfAjnTfbN6tZTLUkRJpOjxI+oZ9Drr+4NkWoTROCmNG5NwgfIZ2C8mFR40
-	6Y0NO4vS+0MU4e6DLHN/Zebg2d40KaUAJxdDKx9EmDOUCRvUnRuhBuUDcS34b0x3
-	DxLgfMixbbks82ORZavdA9VU/zx3l8ZpQgmM7JbbbZrVT/6SBO7Dthi3mTgv2qRW
-	NN0Hpq7Wwq+YevdOHzudqa0YK3IlHSb137KDPPgmthg17kyzEipCkx0cf+DQ8RBT
-	6/OamQ==
-Received: from mail-dy1-f200.google.com (mail-dy1-f200.google.com [74.125.82.200])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gv3319as4-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 06:16:58 +0000 (GMT)
-Received: by mail-dy1-f200.google.com with SMTP id 5a478bee46e88-30f1b904861so745123eec.0
-        for <linux-arm-msm@vger.kernel.org>; Tue, 22 Sep 2026 23:16:58 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1790144217; x=1790749017; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from:references
-         :cc:to:content-language:subject:user-agent:mime-version:date
-         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=XAVSQafxI3Jl7WTU6fUPik0vtCcJL5EtlAGkPjfSPC8=;
-        b=aBYvZmOXP6lkAcU5i+XOYZTNZiIsxDQCygSG+CT/QwVN35BOdFpG6MI1L42ZrP09D3
-         gLTaJDz2VbIVLAwfCeOn0M8Ui8N1+InJSymZyKrkn7Vv9hMvrrEUSGmFI9gceke7w7Ry
-         CaDhOzHtRjlXusnIF2DMdn3l0rbYblYVkrn9TN+AgI22PDef8dkhKa0yrAt8777qnoQm
-         IRecteWp/Lul8fmP+oYY1JTI3yzm/UNEPmcGWoAAfE/QHrT3Sr3rWW+NZDrW5mZA7n/L
-         /iWrE/XpBTOQm27n8VF4HPuUGgEb7WpY3kTtbC6oaadngyS0kKh3XOYDZDqv1ttvPILg
-         lS6A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790144217; x=1790749017;
-        h=content-transfer-encoding:content-type:in-reply-to:from:references
-         :cc:to:content-language:subject:user-agent:mime-version:date
-         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=XAVSQafxI3Jl7WTU6fUPik0vtCcJL5EtlAGkPjfSPC8=;
-        b=QvIwJ72311fEBjNP6ZoRojsxJl8xtT8hluQ7FHXqRPbYdtc8rWxKkTPR4HPt/1zyW+
-         NSeAfj92FJcjB9m+o22IXNU2QjuITMQr6COfeXUMWeG7q068XQYq/JJY3MAtVOe3/Be1
-         yOstsuBDTTrZ2eo+4d/8tHMKmSi38NdCxWL1wteFxO71tGJqBbL+FOWY/gh1bEheRSIu
-         EkU8e8g9yFAi+nZae/m73Ivz+XFONDxLHMwfkPOrNd0kr/GbHp3KmmTW/ObCdY096ohE
-         WUqSnz07TtjcBpitvu9Gkse6hM1AfCdNh/A0x5/uEnI6ekfZ/JIP7FUJ+60eMJksnyyC
-         xw3A==
-X-Forwarded-Encrypted: i=1; AKwUvBx9NPaP506wHEwxbeUoly19QSWI+RwejPhCSUfLGlL7adWf7AZyfPl0KJaDIDj4ndWuby+xvBFzIQ5YKvBO@vger.kernel.org
-X-Gm-Message-State: AFuF++nAM5YobBThzXgXPcVsfIoasWdTBE6rp6j7QtUBndHqZY6JruPE
-	UyWx6Ly7XyqTWUK5Sey8C7SsMaOO96jfGclgd/JHZt3FdZTFgucU/dA0/glgmw4yG/9zWwkKZfD
-	zbG8b6KwR0byyYIN4PVEWaWSUH1BA6DGhpPLi1Dnw89Sr9GypWNuM390rIMO5n6oU4vkl
-X-Gm-Gg: AYBFou3HUzex7aCo4+IdtjxMWqj16psBk81+a4/NETSPcUQmnLikmqokhyvOfJPBCJG
-	OrXj6A+jpu0d5i1yAFeVYdNG0t6r3XhFHVFPRSaMTLwjHIwDfcxjVwrI9CagizoLu3B0b/PSelh
-	PQc82fKeQkT6EPnfx9XGJ6gRlhgYs8QfMfMhJZP2fvAB75OtzfEmxeo+MMQ+hzMvUaz9935TOPe
-	1Bke2s4/Rjv1bcVhK6eqwdglSgFvsK1PuyN6vFIawrxNi7BHqSVD6kOGSDrOIsAePBaEmajIc0c
-	O2TcIx17Lmk8T6Sp3IofAz9JMeBjDlvRMJD3mBsPlJ7bhVzz3AlGMIey6JsnuGtB/iJkhgN6Qo0
-	JS9NqStYKaYgWVbYrdZHwVr9t8zAoSG8=
-X-Received: by 2002:a05:7022:208a:b0:137:f532:e360 with SMTP id a92af1059eb24-144f9086f02mr1827454c88.3.1790144217231;
-        Tue, 22 Sep 2026 23:16:57 -0700 (PDT)
-X-Received: by 2002:a05:7022:208a:b0:137:f532:e360 with SMTP id a92af1059eb24-144f9086f02mr1827431c88.3.1790144216582;
-        Tue, 22 Sep 2026 23:16:56 -0700 (PDT)
-Received: from [10.206.101.140] ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-33e96e498f0sm3375833eec.27.2026.09.22.23.16.51
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 22 Sep 2026 23:16:56 -0700 (PDT)
-Message-ID: <023d4410-a730-a5e5-ea84-474e957d7a5b@oss.qualcomm.com>
-Date: Wed, 23 Sep 2026 11:46:49 +0530
+	dkim=pass (2048-bit key) header.d=iki.fi header.i=@iki.fi header.b="L2J86SbM"
+Received: from fauth-c2-smtp.messagingengine.com (fauth-c2-smtp.messagingengine.com [204.75.18.201])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange x25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	(Authenticated sender: jmtilli)
+	by lahtoruutu.iki.fi (Postfix) with ESMTPSA id 4hqS8b0Gh5z49Q7P;
+	Wed, 23 Sep 2026 09:43:10 +0300 (EEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iki.fi; s=lahtoruutu;
+	t=1790145791;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=7wOWxYY4eY9XU25OMHVx3sfwNw2fYVAY+jnGCl+7xTA=;
+	b=L2J86SbMjEGywVetJbAFl10zJowdDWQM07D3vE1cwVZkYPyJWIqJfDNKv3jQgY+IVSD/RO
+	+iJP90HJFNiC5aHlBhfOefGRnCY54oQs6AL5AKoYU79V9iYSZsm9gY1vGWkUkM4OS1nz2I
+	XMG1OfZSbcJlki4EPKroRJ4n5Z1/F4ymhKmJGpHc9JVVuqwG0ZLbeVdYp4LxHGy5YcsMSa
+	zqOZUNPqwH3ooRAqyRmZANqWmxB1J4FPJ8GHHEiChAOMUg7uNKG9dNoZkdnmQ4x5dNzWuO
+	FLv3srBQxPf7Tup4E0qr1n9WkfUDgYszoTT1CMJuNDu3Vdznozd9S8GpxyG46w==
+ARC-Seal: i=1; a=rsa-sha256; d=iki.fi; s=lahtoruutu; cv=none; t=1790145791;
+	b=X3JZL2SuTJ9/lESUDZV8bqVUsqxTkRL/F7XS+ZgXAqoXzJDayZfkB6z8FLdUhihoErC7pQ
+	PJhxAvraTvXrFn0OhU3d/dep8GJax5UE+ybqTthzoU9ef1ROTCWEeBygCf7CX96KYjlAXw
+	y5aZS21pg50MhtyTILUMFwIttUILUatYELk/ft9Dv+qAQFd2+JPNC8dnNc5XMoqxSGm727
+	HVFNHbUghp3dGYh+QIIURoscOkD7Rajjv76lIppyN/Wafq0tQHUYidDODmBNGI7bBHWDhz
+	lzi7C4XRDUyFjWgvfH0gDQninCOsptaek1I5D2GG4I++juTDK1kNNbn0N/rSzg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=iki.fi;
+	s=lahtoruutu; t=1790145791;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=7wOWxYY4eY9XU25OMHVx3sfwNw2fYVAY+jnGCl+7xTA=;
+	b=tccHAp6omQj8HSZMFOMZAiBvDg/Isjj4Drl75SRdZeoEH0eQTX5v0a5bOd8E8fHOUIy8Ez
+	MvOwEaPNdJkIVhgUM8QwhTZE7p9CHg4P/j0URJt3zZHj6nlaEWWDpBlXUJaV7OqzVkJcyr
+	Ak5ldbd0ACyW+IffvJpIH9RxFzkSNL1XbZWw/81OJVHF1ZieYWTfRhRtBXw3sFc1wf1XX0
+	0pw/0qGD+3LSbCAQofVi0hQ5Nis9Jp0HUJRFiAnRxZHsdVnsmhq2Rs4NdbgoZvmFGFoAeO
+	CJ6IRY5E3WWtn3Gy94NuXNizstndWwXzuB2rgHM1OxgA3Mvovw/1VbFCSmt2AA==
+ARC-Authentication-Results: i=1;
+	ORIGINATING;
+	auth=pass smtp.auth=jmtilli smtp.mailfrom=juha-matti.tilli@iki.fi
+Received: from ams-compute-02.internal (ams-compute-02.internal [10.64.2.62])
+	by mailfauth.ams.internal (Postfix) with ESMTP id 47C9C198004A;
+	Wed, 23 Sep 2026 02:43:10 -0400 (EDT)
+Received: from ams-imap-13 ([10.64.2.33])
+  by ams-compute-02.internal (MEProxy); Wed, 23 Sep 2026 02:43:10 -0400
+X-ME-Sender: <xms:-3SzakVwe1VxyDXHb413WQaKDq6_3zS5KetTsI54C_mSAwQH0mt_sA>
+    <xme:-3Szajafl31YUfXA6zZn9bh6EicH2OMotgMoN4ROKMs4jH_N-D7ceHqCbHsjzolOu
+    sDl_DA72TNnX6OjN3J1xer5Ma-yJC6sXTf3IB8fogpEbNvdVw_yRvM>
+X-ME-Proxy-Cause: dmFkZTFZGTj3GjzbP5lYRKQxP+eSpNJWuoi9GAhHtMOeLYfiHKA0AKIj1Kd2GGDDkxTBLQ
+    4MDet04aCmyUWslVn60gIvcdy66Uw/Kl9xZ4fbg5csse8A1LyE3KT+sl+WNTnWti4S34vi
+    K3VAMHoqN0HOf7wqh2GI7+SjgeXMDlXjJSADQctWRxmn28w9PzX6kZFYR+BkQoKkIXXri4
+    DxYtKkj90b18TYFd2Y+VPF3EYEpE+NhRRtWYRkHrpclSqpVjwDFI/hjvCrZN97Wr/OrU9o
+    HRvNsq+S+iEsP+6E8AEjSgtkw+nmJ/A5ZhtfcHVDlPmeTCkRMMNLbNEgiFeNWnLihnXTOj
+    u+Z4YjcR7unRGpzGBPc15f1rg0udjNxofqmGerLDYFu1uTWwVjN76Z1Q6/Aixb6poAxTO5
+    vY1QNdSzmFNIuu29EHc6qFe6ZFPiFDwpIs2BjrB+vWrPbg9dchmr4vxgYCnvFtXUvyLkf5
+    64jzDe6/rnpD/DO9oTypgquLbQApXc+GF1dmAcZSLeppr//4+S7Vma+EXXsyExj77GEHmL
+    DpcfNh8DDKGX7vU9m6d6XVqYk8sqOIsX5buSn3UfGZRuHVq3bYX0Qe0Neca+PwRKZh2vZd
+    xCXvBqu6UlKeUniQNtLDNsRaKdZf976LYb5BHQNxCUb8SUB6zvxCxEcgrvew
+X-ME-Proxy: <xmx:_nSzas1dJCHZrnRNJjNGhY-P-tN9iTd28AuGv2pcygktRRX2JZi2HQ>
+    <xmx:_nSzarW6uNVDeY5Ma5O7pAZiV2v5NtMrGWWiYJNuXB3GrrWiOu2iYQ>
+    <xmx:_nSzaocQkw6MFOLUVjXGq-H3U2BIb3LIOGChOniranpEf1pta-u_eQ>
+    <xmx:_nSzak9kF_xpDo5CtpZP9WJtwp3JHcWPWbi5ZveYyqvRRRG9B37BPg>
+    <xmx:_nSzaoZ_i2H8ufpkLRt4jBZSPqE0pmWboi2feJDFtcKu7x6eS2f8YheB>
+Feedback-ID: i02414972:Fastmail
+Received: by mailuser.ams.internal (Postfix, from userid 501)
+	id 15044F8008B; Wed, 23 Sep 2026 02:43:07 -0400 (EDT)
+X-Mailer: MessagingEngine.com Webmail Interface
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.8.0
-Subject: Re: [PATCH v9 01/19] Revert "media: iris: Add Gen2 firmware
- autodetect and fallback"
-Content-Language: en-US
-To: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
-        Vikash Garodia <vikash.garodia@oss.qualcomm.com>,
-        Abhinav Kumar <abhinav.kumar@linux.dev>,
-        Bryan O'Donoghue <bod@kernel.org>,
-        Mauro Carvalho Chehab <mchehab@kernel.org>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>
-Cc: linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-        linux-kernel@vger.kernel.org, devicetree@vger.kernel.org,
-        Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>
-References: <20260731-iris-ar50lt-v9-0-d71a782001c0@oss.qualcomm.com>
- <20260731-iris-ar50lt-v9-1-d71a782001c0@oss.qualcomm.com>
-From: Vishnu Reddy <busanna.reddy@oss.qualcomm.com>
-In-Reply-To: <20260731-iris-ar50lt-v9-1-d71a782001c0@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8
+X-ThreadId: ArNQnYYOpCrZ
+Date: Wed, 23 Sep 2026 09:42:46 +0300
+From: "Juha-Matti Tilli" <juha-matti.tilli@iki.fi>
+To: "Manivannan Sadhasivam" <manivannan.sadhasivam@oss.qualcomm.com>,
+ "Manivannan Sadhasivam" <mani@kernel.org>,
+ "David S . Miller" <davem@davemloft.net>,
+ "Eric Dumazet" <edumazet@google.com>, "Jakub Kicinski" <kuba@kernel.org>,
+ "Paolo Abeni" <pabeni@redhat.com>, "Simon Horman" <horms@kernel.org>,
+ "Jeff Johnson" <jjohnson@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, netdev@vger.kernel.org,
+ linux-kernel@vger.kernel.org, linux-wireless@vger.kernel.org,
+ ath11k@lists.infradead.org, ath12k@lists.infradead.org,
+ "Bjorn Andersson" <andersson@kernel.org>,
+ "Chris Lew" <christopher.lew@oss.qualcomm.com>,
+ "Deepak Kumar Singh" <deepak.singh@oss.qualcomm.com>,
+ "Raj Kumar Bhagat" <raj.bhagat@oss.qualcomm.com>,
+ "Jeff Hugo" <jeff.hugo@oss.qualcomm.com>,
+ "Vasanthakumar Thiagarajan" <vasanthakumar.thiagarajan@oss.qualcomm.com>
+Message-Id: <f4cba44d-d566-45d7-8772-c08af41dfdbf@app.fastmail.com>
+In-Reply-To: <20260922-qrtr-multi-ep-v3-4-c00831e88957@oss.qualcomm.com>
+References: <20260922-qrtr-multi-ep-v3-0-c00831e88957@oss.qualcomm.com>
+ <20260922-qrtr-multi-ep-v3-4-c00831e88957@oss.qualcomm.com>
+Subject: Re: [PATCH v3 4/4] wifi: ath12k: Connect to the QMI server belonging to the
+ device owned by this driver
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
-X-Proofpoint-GUID: ttzhpmYNFq0G5plhyieW-qDYns2Tdebd
-X-Authority-Analysis: v=2.4 cv=HdaB3SE8 c=1 sm=1 tr=0 ts=6ab36eda cx=c_pps
- a=PfFC4Oe2JQzmKTvty2cRDw==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
- a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
- a=EUspDBNiAAAA:8 a=fAD_4TVitci44sXei48A:9 a=QEXdDO2ut3YA:10
- a=6Ab_bkdmUrQuMsNx7PHu:22
-X-Proofpoint-ORIG-GUID: ttzhpmYNFq0G5plhyieW-qDYns2Tdebd
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTIzMDAyNCBTYWx0ZWRfX3pR6fIO0K2ug
- 2FHhTua340LQXOCmryHE5ZEb2Oojcnj0NrPUVwi3LazJ1VxKZkFz/uuo0U48yp7bAOQqA6P554x
- tLoOwh71ZPJb/RlHRRy+9Px1L/UHAMf5xQYnNsef9+rmw81tjF2DgH4aiA+cuTmLfXFPO7B/PQA
- uM6TW3ju+rxe8vaAsOfJHSowQ1pgxI7KxPPPuG8FK4y2Q83lRSdYUFX/0pm1nePo0N0/YTqFwsg
- WYJtq8gMKtWhlIPUoFfUMHx93i6Ks6AaES0eIHkM3CzEMskpGYNwm7JlH8FtTqa/GL3aPK0yi4g
- Zt/kcf58el5lX/n0bC8jucYhgyMi3wIUyU9tqZKoBB3tfEFm/MmcuvOYnSdNqz6u6IemIP4zHEy
- rilBi7ZQC6jHiYJkOvFbOM7XKwR/BJAWn2b+a0Z/xJsJBrw9f6R04BPlCbMdU3ccM2fPSm8opYK
- C7ZTJ/e6DvTxxKUOW4Q==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTIzMDAyNCBTYWx0ZWRfX6XWLpBNuC/jC
- xB0C+GI+F81y6851QH1K6eDIVrIzYbDmaX+ew+TmofOWBBnWrnu0RIpusz8wE/CYQH6bSH9jvXr
- uNSO5gNljZCLbub8siq+E9C7kb0C760=
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-23_02,2026-09-21_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 phishscore=0 lowpriorityscore=0 spamscore=0 bulkscore=0
- priorityscore=1501 clxscore=1015 suspectscore=0 adultscore=0 malwarescore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609230024
 
+On Tue, Sep 22, 2026, at 16:41, Manivannan Sadhasivam via B4 Relay wrote:
+> From: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
+> 
+> When two identical ath12k PCIe devices are connected to the same host, both
+> advertise the WLFW service with the same service and instance id. The QMI
+> lookup reports both servers to each device, so a device may connect to the
+> firmware running on the other device.
+> 
+> But now, QRTR provides each MHI endpoint a unique node id which is
+> different from the node id announced by the device. So use the same id to
+> pick the correct server. Add a get_qrtr_node_id() HIF callback that returns
+> the node id derived from the MHI controller index and zero for transports
+> that do not assign one. In the new_server callback, skip any service whose
+> node id does not match. A node id of zero disables the check, so transports
+> that do not assign one keep their current behavior.
+> 
+> Tested-on: 2x WCN7850 hw2.0 WLAN.IOE_HMT.1.1-00018-QCAHMTSWPL_V1.0_V2.0_SILICONZ-1
+> Tested-on: 1x WCN6855 ath11k + 1x WCN7850 ath12k
+> 
+> Tested-by: Juha-Matti Tilli <juha-matti.tilli@iki.fi>
+> Reviewed-by: Vasanthakumar Thiagarajan <vasanthakumar.thiagarajan@oss.qualcomm.com>
+> Signed-off-by: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
 
-On 7/31/2026 5:18 AM, Dmitry Baryshkov wrote:
-> The commit 412a2e5955e0 ("media: iris: Add Gen2 firmware autodetect and
-> fallback") added support for detecting the firmware HFI interface based
-> on the firmware contents, but it has issues with the MDT split files and
-> with synchronisation / locking. Revert the commit, it will be replaced
-> by the better version.
->
-> Fixes: 412a2e5955e0 ("media: iris: Add Gen2 firmware autodetect and fallback")
-> Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-> ---
->  drivers/media/platform/qcom/iris/iris_firmware.c   | 119 +++------------------
->  .../platform/qcom/iris/iris_platform_common.h      |   6 +-
->  .../media/platform/qcom/iris/iris_platform_vpu2.c  |  11 +-
->  .../media/platform/qcom/iris/iris_platform_vpu3x.c |  10 +-
->  drivers/media/platform/qcom/iris/iris_probe.c      |   4 +
->  drivers/media/platform/qcom/iris/iris_vidc.c       |   3 -
->  6 files changed, 33 insertions(+), 120 deletions(-)
->
-> diff --git a/drivers/media/platform/qcom/iris/iris_firmware.c b/drivers/media/platform/qcom/iris/iris_firmware.c
-> index 965384fdd339..1a476146d758 100644
-> --- a/drivers/media/platform/qcom/iris/iris_firmware.c
-> +++ b/drivers/media/platform/qcom/iris/iris_firmware.c
-> @@ -16,109 +16,20 @@
->  
->  #define MAX_FIRMWARE_NAME_SIZE	128
->  
-> -/* Detect Gen2 firmware by scanning the blob for:
-> - *   QC_IMAGE_VERSION_STRING=<version>
-> - * and then checking:
-> - *   - version starts with "vfw", OR
-> - *   - version matches "video-firmware.N.M" with N >= 2
-> - */
-> -
-> -static bool iris_detect_gen2_from_fwdata(const u8 *data, size_t size)
-> -{
-> -	static const char *marker = "QC_IMAGE_VERSION_STRING=";
-> -	const size_t mlen = strlen(marker);
-> -	static const char *vfw = "vfw";
-> -	const size_t vfwlen = strlen(vfw);
-> -	static const char *vf = "video-firmware.";
-> -	const size_t vflen = strlen(vf);
-> -
-> -	for (size_t i = 0; i + mlen < size; i++) {
-> -		const char *found;
-> -
-> -		if (memcmp(data + i, marker, mlen))
-> -			continue;
-> -
-> -		found = data + i + mlen;
-> -		size -= i + mlen;
-> -
-> -		/* vfw => Gen2 */
-> -		if (size > vfwlen && !memcmp(found, vfw, vfwlen))
-> -			return true;
-> -
-> -		if (size < vflen ||
-> -		    memcmp(found, vf, vflen))
-> -			return false;
-> -
-> -		found += vflen;
-> -		size -= vflen;
-> -
-> -		/*
-> -		 * video-firmware.1.x is Gen1.
-> -		 * video-firmware.2.x and video-firmware.10.x are Gen2.
-> -		 */
-> -		return size >= 2 &&
-> -			(*found >= '2' || (*found == '1' && found[1] != '.'));
-> -	}
-> -
-> -	return false;
-> -}
-> -
-> -static const struct firmware *iris_detect_firmware(struct iris_core *core,
-> -						   const char **fw_name)
-> -{
-> -	const struct firmware *firmware;
-> -	bool has_both_gens;
-> -	int ret;
-> -
-> -	*fw_name = NULL;
-> -	if (core->iris_platform_data->firmware_desc_gen2)
-> -		core->iris_firmware_desc = core->iris_platform_data->firmware_desc_gen2;
-> -	else if (core->iris_platform_data->firmware_desc_gen1)
-> -		core->iris_firmware_desc = core->iris_platform_data->firmware_desc_gen1;
-> -	else
-> -		return ERR_PTR(-EINVAL);
-> -
-> -	has_both_gens = core->iris_platform_data->firmware_desc_gen2 &&
-> -		core->iris_platform_data->firmware_desc_gen1;
-> -
-> -	ret = of_property_read_string_index(dev_of_node(core->dev), "firmware-name", 0, fw_name);
-> -	if (ret) {
-> -		*fw_name = core->iris_firmware_desc->fwname;
-> -		ret = request_firmware(&firmware, *fw_name, core->dev);
-> -		if (ret && has_both_gens) {
-> -			core->iris_firmware_desc = core->iris_platform_data->firmware_desc_gen1;
-> -			*fw_name = core->iris_firmware_desc->fwname;
-> -			ret = request_firmware(&firmware, *fw_name, core->dev);
-> -		}
-> -
-> -		return ret ? ERR_PTR(ret) : firmware;
-> -	}
-> -
-> -	ret = request_firmware(&firmware, *fw_name, core->dev);
-> -	if (ret)
-> -		return ERR_PTR(ret);
-> -
-> -	if (has_both_gens &&
-> -	    !iris_detect_gen2_from_fwdata((const u8 *)firmware->data, firmware->size)) {
-> -		dev_info(core->dev, "Gen1 FW detected in %s\n", *fw_name);
-> -		core->iris_firmware_desc = core->iris_platform_data->firmware_desc_gen1;
-> -	}
-> -
-> -	return firmware;
-> -}
-> -
-> -static int iris_load_fw_to_memory(struct iris_core *core)
-> +static int iris_load_fw_to_memory(struct iris_core *core, const char *fw_name)
->  {
->  	const struct firmware *firmware = NULL;
->  	struct device *dev = core->dev;
->  	struct resource res;
->  	phys_addr_t mem_phys;
-> -	const char *fw_name;
->  	size_t res_size;
->  	ssize_t fw_size;
->  	void *mem_virt;
->  	int ret;
->  
-> +	if (strlen(fw_name) >= MAX_FIRMWARE_NAME_SIZE - 4)
-> +		return -EINVAL;
-> +
->  	ret = of_reserved_mem_region_to_resource(dev->of_node, 0, &res);
->  	if (ret)
->  		return ret;
-> @@ -126,11 +37,9 @@ static int iris_load_fw_to_memory(struct iris_core *core)
->  	mem_phys = res.start;
->  	res_size = resource_size(&res);
->  
-> -	firmware = iris_detect_firmware(core, &fw_name);
-> -	if (IS_ERR(firmware))
-> -		return PTR_ERR(firmware);
-> -
-> -	core->iris_firmware_data = core->iris_firmware_desc->firmware_data;
-> +	ret = request_firmware(&firmware, fw_name, dev);
-> +	if (ret)
-> +		return ret;
->  
->  	fw_size = qcom_mdt_get_size(firmware);
->  	if (fw_size < 0 || res_size < (size_t)fw_size) {
-> @@ -157,12 +66,18 @@ static int iris_load_fw_to_memory(struct iris_core *core)
->  int iris_fw_load(struct iris_core *core)
->  {
->  	const struct tz_cp_config *cp_config;
-> +	const char *fwpath = NULL;
->  	int i, ret;
->  
-> -	ret = iris_load_fw_to_memory(core);
-> +	ret = of_property_read_string_index(core->dev->of_node, "firmware-name", 0,
-> +					    &fwpath);
-> +	if (ret)
-> +		fwpath = core->iris_firmware_desc->fwname;
-> +
-> +	ret = iris_load_fw_to_memory(core, fwpath);
->  	if (ret) {
-> -		dev_err(core->dev, "firmware download failed %d\n", ret);
-> -		return ret;
-> +		dev_err(core->dev, "firmware download failed\n");
-> +		return -ENOMEM;
->  	}
->  
->  	ret = qcom_scm_pas_auth_and_reset(IRIS_PAS_ID);
-> @@ -184,7 +99,7 @@ int iris_fw_load(struct iris_core *core)
->  		}
->  	}
->  
-> -	return 0;
-> +	return ret;
->  }
->  
->  int iris_fw_unload(struct iris_core *core)
-> diff --git a/drivers/media/platform/qcom/iris/iris_platform_common.h b/drivers/media/platform/qcom/iris/iris_platform_common.h
-> index 974809509146..a9453d539fc2 100644
-> --- a/drivers/media/platform/qcom/iris/iris_platform_common.h
-> +++ b/drivers/media/platform/qcom/iris/iris_platform_common.h
-> @@ -292,7 +292,11 @@ struct iris_firmware_desc {
->  };
->  
->  struct iris_platform_data {
-> -	const struct iris_firmware_desc *firmware_desc_gen1, *firmware_desc_gen2;
-> +	/*
-> +	 * XXX: replace with gen1 / gen2 pointers once we have platforms
-> +	 * supporting both firmware kinds.
-> +	 */
-> +	const struct iris_firmware_desc *firmware_desc;
->  
->  	const struct vpu_ops *vpu_ops;
->  	const struct icc_info *icc_tbl;
-> diff --git a/drivers/media/platform/qcom/iris/iris_platform_vpu2.c b/drivers/media/platform/qcom/iris/iris_platform_vpu2.c
-> index bbdbf21961d7..fa5bb143158d 100644
-> --- a/drivers/media/platform/qcom/iris/iris_platform_vpu2.c
-> +++ b/drivers/media/platform/qcom/iris/iris_platform_vpu2.c
-> @@ -29,12 +29,6 @@ static const struct iris_firmware_desc iris_vpu20_p1_gen1_desc = {
->  	.fwname = "qcom/vpu/vpu20_p1.mbn",
->  };
->  
-> -static const struct iris_firmware_desc iris_vpu20_p1_gen2_s6_desc = {
-> -	.firmware_data = &iris_hfi_gen2_data,
-> -	.get_vpu_buffer_size = iris_vpu33_buf_size,
-> -	.fwname = "qcom/vpu/vpu20_p1_gen2_s6.mbn",
-> -};
-> -
->  static const struct iris_firmware_desc iris_vpu20_p4_gen1_desc = {
->  	.firmware_data = &iris_hfi_gen1_data,
->  	.get_vpu_buffer_size = iris_vpu_buf_size,
-> @@ -106,8 +100,7 @@ const struct iris_platform_data milos_data = {
->  };
->  
->  const struct iris_platform_data sc7280_data = {
-> -	.firmware_desc_gen1 = &iris_vpu20_p1_gen1_desc,
-> -	.firmware_desc_gen2 = &iris_vpu20_p1_gen2_s6_desc,
-> +	.firmware_desc = &iris_vpu20_p1_gen1_desc,
->  	.vpu_ops = &iris_vpu2_ops,
->  	.icc_tbl = iris_icc_info_vpu2,
->  	.icc_tbl_size = ARRAY_SIZE(iris_icc_info_vpu2),
-> @@ -136,7 +129,7 @@ const struct iris_platform_data sc7280_data = {
->  };
->  
->  const struct iris_platform_data sm8250_data = {
-> -	.firmware_desc_gen1 = &iris_vpu20_p4_gen1_desc,
-> +	.firmware_desc = &iris_vpu20_p4_gen1_desc,
->  	.vpu_ops = &iris_vpu2_ops,
->  	.icc_tbl = iris_icc_info_vpu2,
->  	.icc_tbl_size = ARRAY_SIZE(iris_icc_info_vpu2),
-> diff --git a/drivers/media/platform/qcom/iris/iris_platform_vpu3x.c b/drivers/media/platform/qcom/iris/iris_platform_vpu3x.c
-> index 74626b35d9cb..2c63adbc5579 100644
-> --- a/drivers/media/platform/qcom/iris/iris_platform_vpu3x.c
-> +++ b/drivers/media/platform/qcom/iris/iris_platform_vpu3x.c
-> @@ -90,7 +90,7 @@ static const struct tz_cp_config tz_cp_config_vpu3[] = {
->   * - inst_caps to platform_inst_cap_qcs8300
->   */
->  const struct iris_platform_data qcs8300_data = {
-> -	.firmware_desc_gen2 = &iris_vpu30_p4_s6_gen2_desc,
-> +	.firmware_desc = &iris_vpu30_p4_s6_gen2_desc,
->  	.vpu_ops = &iris_vpu3_ops,
->  	.icc_tbl = iris_icc_info_vpu3x,
->  	.icc_tbl_size = ARRAY_SIZE(iris_icc_info_vpu3x),
-> @@ -119,7 +119,7 @@ const struct iris_platform_data qcs8300_data = {
->  };
->  
->  const struct iris_platform_data sm8550_data = {
-> -	.firmware_desc_gen2 = &iris_vpu30_p4_gen2_desc,
-> +	.firmware_desc = &iris_vpu30_p4_gen2_desc,
->  	.vpu_ops = &iris_vpu3_ops,
->  	.icc_tbl = iris_icc_info_vpu3x,
->  	.icc_tbl_size = ARRAY_SIZE(iris_icc_info_vpu3x),
-> @@ -154,7 +154,7 @@ const struct iris_platform_data sm8550_data = {
->   * - controller_rst_tbl to sm8650_controller_reset_table
->   */
->  const struct iris_platform_data sm8650_data = {
-> -	.firmware_desc_gen2 = &iris_vpu33_p4_gen2_desc,
-> +	.firmware_desc = &iris_vpu33_p4_gen2_desc,
->  	.vpu_ops = &iris_vpu33_ops,
->  	.icc_tbl = iris_icc_info_vpu3x,
->  	.icc_tbl_size = ARRAY_SIZE(iris_icc_info_vpu3x),
-> @@ -185,7 +185,7 @@ const struct iris_platform_data sm8650_data = {
->  };
->  
->  const struct iris_platform_data sm8750_data = {
-> -	.firmware_desc_gen2 = &iris_vpu35_p4_gen2_desc,
-> +	.firmware_desc = &iris_vpu35_p4_gen2_desc,
->  	.vpu_ops = &iris_vpu35_ops,
->  	.icc_tbl = iris_icc_info_vpu3x,
->  	.icc_tbl_size = ARRAY_SIZE(iris_icc_info_vpu3x),
-> @@ -220,7 +220,7 @@ const struct iris_platform_data sm8750_data = {
->   * - different num_vpp_pipe
->   */
->  const struct iris_platform_data x1p42100_data = {
-> -	.firmware_desc_gen2 = &iris_vpu30_p1_gen2_desc,
-> +	.firmware_desc = &iris_vpu30_p1_gen2_desc,
->  	.vpu_ops = &iris_vpu3_ops,
->  	.icc_tbl = iris_icc_info_vpu3x,
->  	.icc_tbl_size = ARRAY_SIZE(iris_icc_info_vpu3x),
-> diff --git a/drivers/media/platform/qcom/iris/iris_probe.c b/drivers/media/platform/qcom/iris/iris_probe.c
-> index 5db6398433a4..81cccb756b94 100644
-> --- a/drivers/media/platform/qcom/iris/iris_probe.c
-> +++ b/drivers/media/platform/qcom/iris/iris_probe.c
-> @@ -253,6 +253,8 @@ static int iris_probe(struct platform_device *pdev)
->  		return core->irq;
->  
->  	core->iris_platform_data = of_device_get_match_data(core->dev);
-> +	core->iris_firmware_desc = core->iris_platform_data->firmware_desc;
-> +	core->iris_firmware_data = core->iris_firmware_desc->firmware_data;
->  
->  	core->ubwc_cfg = qcom_ubwc_config_get_data();
->  	if (IS_ERR(core->ubwc_cfg))
-> @@ -271,6 +273,8 @@ static int iris_probe(struct platform_device *pdev)
->  	if (ret)
->  		return ret;
->  
-> +	iris_session_init_caps(core);
-> +
->  	ret = v4l2_device_register(dev, &core->v4l2_dev);
->  	if (ret)
->  		return ret;
-> diff --git a/drivers/media/platform/qcom/iris/iris_vidc.c b/drivers/media/platform/qcom/iris/iris_vidc.c
-> index fcbc60016bee..1c052ca235be 100644
-> --- a/drivers/media/platform/qcom/iris/iris_vidc.c
-> +++ b/drivers/media/platform/qcom/iris/iris_vidc.c
-> @@ -9,7 +9,6 @@
->  #include <media/v4l2-mem2mem.h>
->  #include <media/videobuf2-dma-contig.h>
->  
-> -#include "iris_ctrls.h"
->  #include "iris_vidc.h"
->  #include "iris_instance.h"
->  #include "iris_vdec.h"
-> @@ -197,8 +196,6 @@ int iris_open(struct file *filp)
->  		goto fail_m2m_release;
->  	}
->  
-> -	iris_session_init_caps(core);
-> -
->  	if (inst->domain == DECODER)
->  		ret = iris_vdec_inst_init(inst);
->  	else if (inst->domain == ENCODER)
+Ok, you can retain my Tested-by tag despite the changes to v3.
 
-Reviewed-by: Vishnu Reddy <busanna.reddy@oss.qualcomm.com>
+Backported to kernel 6.18.53, all regdb issues are gone, and when I
+attached antennas to the secondary WiFi card, the statistics fetching
+dmesg issues are gone now.
 
+I have two cards, both of them work simultaneously, on the v3 patchset.
+
+The only remaining issue I have is this on the access point card:
+
+ath12k_pci 0001:01:00.0: dp_tx: failed to find the peer with peer_id 2
+
+Google's AI (Gemini) tells me it's not worrying if the connection works
+(like it does for me).
+
+Thank you for the effort! I'll take the 6.18.53 LTS version into use
+with these patches.
+
+BR, Juha-Matti
