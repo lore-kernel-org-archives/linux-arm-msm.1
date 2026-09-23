@@ -1,257 +1,110 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AAD142765E2;
-	Wed, 23 Sep 2026 15:32:00 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B979C542EEA;
+	Wed, 23 Sep 2026 15:33:03 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790177526; cv=none; b=JzAs11aJguqa/bCWQ97vcMRFD6tRwU0dS5YnpBhkDMFLrfGHKmijlOJbwI4DUjMoEpxzDNxSH3U3EuaK9nqP8wyUW5O5BsjHG+GEt6Z7LwdhlOYOC32iGWewuOYFdbsSSeOdOfPzNEE1etf+Jx506H8n8PecAoa/JkSuhIT5lCI=
+	t=1790177595; cv=none; b=nkNqbz5bBbqmpu02pYWN9P/3ddhc0o2o7kTWTffnRvYTgacPWQi8UdPts/RboHBbOrLv+6oLuf1LwKBqxPKEX3YS7GuI4bhcnsDQ/rD70/7w7S19I04h771pny0cUkjMfLoHMGyjuju3Ez0cqWUYw55jbME9061RWk4hQLDoLwY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790177526; c=relaxed/simple;
-	bh=16GtAyWXg9XHT6NYcnN6c6+63crY4W8msaHGFRCzii4=;
-	h=Subject:From:To:Cc:Date:Message-ID:In-Reply-To:References:
-	 Content-Type:MIME-Version; b=rXMI82gydl9u2w9wiRvvoa3Od4/YXfGloy6y+3/rkxfYRT+m+3AF8ly4zQ8D8ZBPCHXVMMajvsUg1zGVokTUoiSZXOjQv5rKtgJoKTI5ve/SQxB7npXd6XNz73+pqM3tJ6Uz/N8d3s25X94WbfsZ2oPeEFxXLCboR3KwT7KqXB4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=KQrd7bY3; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1790177595; c=relaxed/simple;
+	bh=NuLeoh6Ugld7iV7SnT50xGGVF9b/mTHr305p/mbI9Go=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=ptYqGnreUkFBF1f3Z8txUm3DcbJDFMZdXQbIf5/hKZ+MM/DoiZnLUxwIJ/tMa45YyvRdXBzxVYlibQfxDKWe7/7GGDNa5sojv6HjUvRfwyJ2cPFQoX2dAl8Hf+hD7mU6yKb72qN8bh3fflLIreq63OvSb+o5nKe+LvVVekQCpoo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=fsqwuNQE; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="KQrd7bY3"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 95AF51F000FF;
-	Wed, 23 Sep 2026 15:31:56 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="fsqwuNQE"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 962CA1F00893;
+	Wed, 23 Sep 2026 15:32:59 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1790177517;
-	bh=U1Bvd6/p/gkQXGYEOxDXN7iUZg0k/gL9HPhVzPJ3J5o=;
-	h=Subject:From:To:Cc:Date:In-Reply-To:References;
-	b=KQrd7bY3+yTVOBqTgyfdP0Yqd7j6FFJkIPqNGFL8t1+/xnf9K+ZSMfc2WXZ0y8mTv
-	 FgeAafl+mjI/N1YuknJtgANlyVLJRFGoa8UpN7Zm4KtimcLy3duVE42sw+zlju0bNa
-	 iTUaODYP82jQKSiNmCRavjXzuwhKpcyNKvtf+7DJb+WLv3wTpY12ONZ5ypOFcOAdxi
-	 +6IU4FO+Tj75bqkK/846/OewWIY+jWGLmA74ic3PURKdzg891A3Bifrqu98B1CN0eG
-	 LE4+immFNaHHVNEaXKknGA7zdqrMx4jc012cQlGpOb91mzAdYhxmKeivn7iCfzpoeG
-	 wjpqWVz7XDl+g==
-Subject: Re: [PATCH] net: qrtr: ns: validate msglen and sq_port in
- qrtr_ns_worker() and ctrl_cmd_bye()
-From: netdev-bot+sashiko@kernel.org
-To: benquike@gmail.com
-Cc: mani@kernel.org, davem@davemloft.net, edumazet@google.com, kuba@kernel.org,
- pabeni@redhat.com, horms@kernel.org, linux-arm-msm@vger.kernel.org,
- netdev@vger.kernel.org, linux-kernel@vger.kernel.org
-Date: Wed, 23 Sep 2026 15:31:56 +0000
-Message-ID: <179017751615.2160803.4681331359759254914@kernel.org>
-In-Reply-To: <20260919212850.3240353-1-benquike@gmail.com>
-References: <20260919212850.3240353-1-benquike@gmail.com>
-X-sashiko-severity: High
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
+	s=k20260515; t=1790177579;
+	bh=7An/+u7SJBrDQANdjifBoZvri2cNNci83aas+f72qng=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=fsqwuNQEU9yVEm6+99I7mYuQ0BDYPv/tBTCdeF7z6k/mz160aby73BGTMt1o0eku2
+	 8gJWcNIyVP/HmmFZRtIquSBhwJMGVsZm88w2KjF0H1JNbQW1WUrjRJkNPKD3tm9GTf
+	 d4y3g1vIZO5ygi6TuKrnWbFYrPmZ7zE8ew2c6JQW0F5JS0zu/PSelXRs77YRUjFMM6
+	 U42wNptOL2Fygfnuq+UoT5fRe8E5jIGiLaZ5H/9e9SkRpg4Ajy7TQCJs4Hc/welA3h
+	 u13PMpdHMKWwAnUwEpkSZW+S4Oto7qlNt27A/yCYTnM8wUg0EiicZz4wVfJaJn3F1U
+	 cwHYZtbW6C5BA==
+Received: by finisterre.sirena.org.uk (Postfix, from userid 1000)
+	id 28DDD1AC573C; Wed, 23 Sep 2026 16:32:54 +0100 (BST)
+Date: Wed, 23 Sep 2026 17:32:54 +0200
+From: Mark Brown <broonie@kernel.org>
+To: Prasad Kumpatla <prasad.kumpatla@oss.qualcomm.com>
+Cc: Srinivas Kandagatla <srini@kernel.org>,
+	Liam Girdwood <lgirdwood@gmail.com>, Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Bjorn Andersson <andersson@kernel.org>,
+	Konrad Dybcio <konradybcio@kernel.org>,
+	Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>,
+	Abel Vesa <abelvesa@kernel.org>, linux-sound@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v1 0/8] ASoC: qcom: Add audio support for Hawi and Maili
+ platforms
+Message-ID: <arPxJqKoCXfF4TCu@sirena.co.uk>
+References: <20260923084627.748920-1-prasad.kumpatla@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="c292jOMaxEiICJ7D"
+Content-Disposition: inline
+In-Reply-To: <20260923084627.748920-1-prasad.kumpatla@oss.qualcomm.com>
+X-Cookie: Elevators smell different to midgets.
 
-Thank you for your contribution! Sashiko AI review found 3 potential
-issue(s) to consider.
 
-Critical: 0 · High: 1 · Medium: 2 · Low: 0
+--c292jOMaxEiICJ7D
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-If you believe none of the issues are legitimate, please reply to each
-issue of Medium severity or higher and explain why the AI is wrong.
-If any of them are legitimate and you plan to respin, please let patchwork
-know by including "pw-bot: cr" as a separate line at the end of your reply
-(one such reply per series is enough).
+On Wed, Sep 23, 2026 at 02:16:19PM +0530, Prasad Kumpatla wrote:
 
-- [High] Over-broad minimum-length gate in net/qrtr/ns.c:qrtr_ns_worker()
-  (lines 645-646, `if (msglen < sizeof(*pkt)) continue;`) silently…
-- [Medium] The commit message contains two factually incorrect supporting
-  claims.
-- [Medium] The new unconditional `if (from->sq_port != QRTR_PORT_CTRL)
-  return -EINVAL;` in net/qrtr/ns.c:ctrl_cmd_bye() (lines 350-351) also…
+> base-commit: 6c58e38b255a3e0c11e513e3b8de85eb26fb02b5
+> prerequisite-patch-id: e6735f29343dd80d0e7ad48b6874eab4a5d7efc6
+> prerequisite-patch-id: ac7bc5ad958bb392a57871dde1f79c2fc520d482
+> prerequisite-patch-id: 332b888996b9d6c58e8c90eada37dc14137755ea
+> prerequisite-patch-id: 21e9dfd02f282ea4239f12d91ac8a2be76aaad29
+> prerequisite-patch-id: 52f17e16e09853e366ecc3da2676654df79daf06
+> prerequisite-patch-id: f0b1cd1f1f8daf0e1814a338446d493d64c9469f
+> prerequisite-patch-id: 29a1620a2ea61c0b7b052220e5ea522b1fbf2ad8
+> prerequisite-patch-id: 0872295385e6712bf342d84f095ec3710abde8d8
+> prerequisite-patch-id: 69807d41bbbd6177da4374639ae280501f3f60df
+> prerequisite-patch-id: d9f8613cac873926d6d2fd77e45002d34954b434
+> prerequisite-patch-id: 446fe28b27dbf5ce4240704d89296a5af69e8b21
+> prerequisite-patch-id: dc5ac9645789f25b3742dc4fca08dab4c1e4826d
+> prerequisite-patch-id: 0521512205679cad2462ecda959239aadc48cce6
 
---
+As I have repeatedly told Qualcomm people please stop sending me patches
+that don't apply, please collaborate with your colleagues to get
+whatever it is you depend on merged and once that has happened send your
+new stuff.  Qualcomm is sending a very high volume of patches, they seem
+to get limited review from other Qualcomm people and progress very
+slowly.  I'm getting a lot of Qualcomm code sent to me, in hard to
+manage forms.  Please also consider helping out with review of other
+code, not just submitting your own.  This is not directed to you
+specifically, this is more Qualcomm as a whole.
 
-net: qrtr: ns: validate msglen and sq_port in qrtr_ns_worker() and ctrl_cmd_bye()
+I've dropped this for now, please resend once it can at least be
+applied.
 
-This adds two checks to the in-kernel QRTR nameservice: a minimum length
-test of sizeof(struct qrtr_ctrl_pkt) on every control datagram received by
-qrtr_ns_worker(), and a requirement that BYE messages arrive with
-from->sq_port == QRTR_PORT_CTRL in ctrl_cmd_bye().
+--c292jOMaxEiICJ7D
+Content-Type: application/pgp-signature; name="signature.asc"
 
-A few questions about the commit message and the two new checks below.
+-----BEGIN PGP SIGNATURE-----
 
-> 1. `qrtr_ns_worker()` receives control packets into a single reused
->    4096-byte `recv_buf` via `kernel_recvmsg()` without checking that
->    `msglen >= sizeof(*pkt)` (20 bytes). If a short packet arrives on
->    `qrtr_ns.sock`, `qrtr_ns_worker()` reads stale bytes from previous
->    control messages (or uninitialized heap memory on the first packet)
->    when parsing `pkt->cmd` and its union fields.
+iQEzBAABCgAdFiEEreZoqmdXGLWf4p/qJNaLcl1Uh9AFAmqz8SIACgkQJNaLcl1U
+h9CAWgf+Mtzx9WxeJ2oDuphhA2V0HsNyVXrUseYeu3W/d25j1u3IKdEz94s2kKz3
+rx+T7mlVVrqcKYaH7UiLYsoaBuBXxxMmm8WpTtrVxjeuCF/Zpmz8ZzS9I+8D1S3Q
+UwgkJE2vkKSEmnf3oSrWHBUk56Y2ZlayEBVGOHgquwcR71qm+tkY1jMI8Y2h+vF7
+UgKYqVuAdN1G0Co5KSWldl0mzY5ODkq2iVzQDsKM0PpwT+mQRJMYo2O3cAQqhFDX
+JiY+R9pB5bmIRIJ6v333FwRwvx8I93UaPWNRi1OBl3II/7jYoxiEkNyK2EAc4zhP
+I9EhksTv79EAH0jqibpFkVL/HK92OQ==
+=wBT9
+-----END PGP SIGNATURE-----
 
-[Severity: Medium]
-Is the "uninitialized heap memory on the first packet" part accurate?
-qrtr_ns_worker() allocates the buffer with kzalloc():
-
-net/qrtr/ns.c:qrtr_ns_worker() {
-	recv_buf = kzalloc(recv_buf_size, GFP_KERNEL);
-	if (!recv_buf)
-		return;
-}
-
-so every byte not written by the first kernel_recvmsg() reads as zero.  The
-remaining exposure looks like stale data from an earlier, longer datagram
-handled in the same worker invocation, since the buffer is reused across
-loop iterations without being re-zeroed.  Could the changelog be narrowed
-to that, so the bug is not triaged as an uninitialized-memory/infoleak
-class issue?
-
-> 2. Unlike `ctrl_cmd_del_client()`, `ctrl_cmd_bye()` does not verify that
->    `from->sq_port == QRTR_PORT_CTRL`, allowing any unprivileged local
->    `AF_QIPCRTR` socket to send a `QRTR_TYPE_BYE` packet and purge all
->    registered services for the local node.
-
-Does ctrl_cmd_del_client() actually contain that check?  The sender
-validation there is:
-
-net/qrtr/ns.c:ctrl_cmd_del_client() {
-	/* Don't accept spoofed messages */
-	if (from->sq_node != node_id)
-		return -EINVAL;
-
-	/* Local DEL_CLIENT messages comes from the port being closed */
-	if (from->sq_node == qrtr_ns.local_node && from->sq_port != port)
-		return -EINVAL;
-}
-
-QRTR_PORT_CTRL does not appear, and the second test deliberately requires
-the client port being closed rather than the control port.  The new BYE
-rule is an unconditional authorization requirement instead of a match to an
-existing sibling check, so could the comparison be reworded?
-
-> diff --git a/net/qrtr/ns.c b/net/qrtr/ns.c
-> index bcb090ee79d4..d7e1a37f0717 100644
-> --- a/net/qrtr/ns.c
-> +++ b/net/qrtr/ns.c
-> @@ -347,6 +347,9 @@ static int ctrl_cmd_bye(struct sockaddr_qrtr *from)
->  	iv.iov_base = &pkt;
->  	iv.iov_len = sizeof(pkt);
->  
-> +	if (from->sq_port != QRTR_PORT_CTRL)
-> +		return -EINVAL;
-> +
-
-[Severity: Medium]
-Can this reject BYE messages from remote endpoints that encode their
-control source port as the legacy value?  net/qrtr/af_qrtr.c defines:
-
-#define QRTR_PORT_CTRL_LEGACY 0xffff
-
-and qrtr_endpoint_post() only normalizes the destination:
-
-net/qrtr/af_qrtr.c:qrtr_endpoint_post() {
-	...
-	if (cb->dst_port == QRTR_PORT_CTRL_LEGACY)
-		cb->dst_port = QRTR_PORT_CTRL;
-}
-
-For QRTR_PROTO_VER_1 the source port is taken raw:
-
-	cb->src_port = le32_to_cpu(v1->src_port_id);
-
-and the v2 path only maps (u16)QRTR_PORT_CTRL, i.e. 0xfffe, not 0xffff.
-qrtr_recvmsg() then copies it verbatim:
-
-	addr->sq_port = cb->src_port;
-
-So a BYE arriving with src_port 0xffff would now return -EINVAL before any
-teardown runs.  Since ctrl_cmd_bye() is the only place that does:
-
-net/qrtr/ns.c:ctrl_cmd_bye() {
-	xa_for_each(&node->servers, index, srv)
-		server_del(node, srv->port, true);
-	...
-delete_node:
-	xa_erase(&nodes, from->sq_node);
-	kfree(node);
-	node_count--;
-}
-
-does an early return here leak the struct qrtr_node and all of its struct
-qrtr_server objects, keep one of the QRTR_NS_MAX_NODES slots occupied for
-the module lifetime, and leave the dead node's services advertised, with
-only a rate-limited pr_err as a symptom?
-
-The neighbouring handlers restrict the source port only for local-node
-messages:
-
-net/qrtr/ns.c:ctrl_cmd_del_client() {
-	/* Local DEL_CLIENT messages comes from the port being closed */
-	if (from->sq_node == qrtr_ns.local_node && from->sq_port != port)
-		return -EINVAL;
-}
-
-Would gating the BYE check on from->sq_node == qrtr_ns.local_node, or
-normalizing legacy source ports in qrtr_endpoint_post(), block the local
-abuse described in the changelog while keeping remote node cleanup working?
-
->  	node = node_get(from->sq_node);
->  	if (!node)
->  		return 0;
-
-[ ... ]
-
-> @@ -639,6 +642,9 @@ static void qrtr_ns_worker(struct work_struct *work)
->  			break;
->  		}
->  
-> +		if (msglen < sizeof(*pkt))
-> +			continue;
-> +
-
-[Severity: High]
-Does this blanket 20-byte floor drop control packets that the router itself
-treats as valid?  qrtr_endpoint_post() only requires the full
-struct qrtr_ctrl_pkt for two types:
-
-net/qrtr/af_qrtr.c:qrtr_endpoint_post() {
-	if (!size || size > len || len != ALIGN(size, 4) + hdrlen)
-		goto err;
-
-	if ((cb->type == QRTR_TYPE_NEW_SERVER ||
-	     cb->type == QRTR_TYPE_RESUME_TX) &&
-	    size < sizeof(struct qrtr_ctrl_pkt))
-		goto err;
-
-	if (cb->dst_port != QRTR_PORT_CTRL && cb->type != QRTR_TYPE_DATA &&
-	    cb->type != QRTR_TYPE_RESUME_TX)
-		goto err;
-}
-
-Everything else with a 4-byte payload is accepted and queued to
-QRTR_PORT_CTRL, and qrtr_sendmsg() states the same lower bound for control
-port senders:
-
-net/qrtr/af_qrtr.c:qrtr_sendmsg() {
-	if (ipc->us.sq_port == QRTR_PORT_CTRL) {
-		if (len < 4) {
-			rc = -EINVAL;
-}
-
-The per-command needs in ns.c look like 4 bytes for HELLO and BYE (neither
-handler reads the union), 12 bytes for DEL_CLIENT, NEW_LOOKUP and
-DEL_LOOKUP, and 20 bytes only for NEW_SERVER and DEL_SERVER.
-
-With this check, does a 4-byte HELLO get discarded by the bare continue
-with no diagnostic, so ctrl_cmd_hello() and announce_servers() never run
-and local services are never announced to that node?
-
-And does a 4-byte BYE now skip ctrl_cmd_bye() entirely, leaking the
-struct qrtr_node plus its struct qrtr_server objects and consuming a node
-slot permanently, since that function is the only node teardown path?
-
-Would per-command length checks mirroring af_qrtr.c (4 /
-offsetofend(struct qrtr_ctrl_pkt, client.port) / sizeof(*pkt)), or simply
-memset()ing recv_buf at the top of each loop iteration, remove the stale
-byte read without dropping traffic the router considers legal?
-
->  		pkt = recv_buf;
->  		cmd = le32_to_cpu(pkt->cmd);
->  		if (cmd < ARRAY_SIZE(qrtr_ctrl_pkt_strings) &&
-
--- 
-Sashiko AI review · https://netdev-ai.bots.linux.dev/sashiko/#/patchset/20260919212850.3240353-1-benquike%40gmail.com
+--c292jOMaxEiICJ7D--
