@@ -1,87 +1,86 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5237D439F7E
-	for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 05:41:55 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C63D73AF641
+	for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 06:16:59 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790142116; cv=none; b=u8QzHPaQAv+yuIWB76EhHBLJLNFxp5orY+5otUh+BDU8zuutVyFQy04hW28/uMdbrHnTICTAd7uw6azAYIeFc3eKDOF7wYtzeqVTuxhDDgV4ABRgjl2snu7zmyl0m1UGvgwRF8tpKeumJAKQXy+i6Y/45avez4d9xNqq8jEy5mc=
+	t=1790144222; cv=none; b=oCCHVNEFnJLNU0WkT/SMRCRx8sB+bvshI00PSQCRAEMtBUdipESY2vl+ByQH/rvEmrQqz3tOW8xv8Fph/lZS7Ar15hUOnI0YI7AP1EDfDjcx/SAniJWtDXQGyjjYHjOAeMdgYADP1oeH/ig2Mj2q+YKa1ZxeYJus0OWSN4iBvBM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790142116; c=relaxed/simple;
-	bh=UIAx05CZrvM8N5t8BucuFcjpo4iq7isDMnPF5+mhZsk=;
+	s=arc-20240116; t=1790144222; c=relaxed/simple;
+	bh=peXXU50xndQ4gAoFBh6lBioyyPiw7OjAKlIqeV7t6ic=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=f5KrBGEPDljLs/ECUIGfG55NY98ONIK0DFalbhfPJzJ2/RMrgTq6gqEaSggTdxoq+VI0pY9kMEmaGATOUN8u3FAwKWb07R5q6Km9nmkuwKX6XpyJ1Fbi6hysKx+e+zPamoVR67GjX0IO9QoynMrV1E7uyLYtWqwQ52QxQ+UFoPk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=jxKFFDsB; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=ZOumyeZg; arc=none smtp.client-ip=205.220.168.131
+	 In-Reply-To:Content-Type; b=FyV8f5qzGzcf8fCPhFJ6BJpIy5jLbDbubl3E1m9kaQKD89cLVyRmYqGzbxcr3rl2wU3BlvyEbghj0L/TmDRH8BJxx9uJRJTAEkgYLEV2PbXZhhNxGNKNTtQb6zkUY0lOFMsgu6DNppNqUCcDHIXJd9GxVbM3raZ86so3snRP8yg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=LTGNdvh+; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=aBYvZmOX; arc=none smtp.client-ip=205.220.180.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="jxKFFDsB";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="ZOumyeZg"
-Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68N3iRjP1399305
-	for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 05:41:54 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="LTGNdvh+";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="aBYvZmOX"
+Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68N3iOUZ1986066
+	for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 06:16:58 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	G/aKOtHIofqNw5/DRlGI2QTk8pCfM57nPrUMsZyHrh4=; b=jxKFFDsBPSA38++5
-	WNRY7oUGBrf7pXW+w8jns5gCg7oMJf1eOsGgCAG2O9O69HB6zn5B8Iw4SpArKzyV
-	9nCxPYSnlYarNwO4WcM/o0jDT0vcJgjMKSqVLYrzA3FBOpMrEf4xJUFHCTdYup7C
-	QQjlOrIrbPvorCFvHJrgO7+FaTMeTxyEY41/OgulmmDx0f2mVP9g62P4Kgh9JJao
-	ZKtMv241Md2x2swRm8JzOjpVboawXUNbGc0zpGmicNmeREIYRYAyBGa8XNzgqZPw
-	4lrNNlK4X8OkvgSOqP5cx9QDMU1kUg/+vqYwf+J8BMsnLVBHeFifscBqwnq9hZlG
-	mjHXrA==
-Received: from mail-dy1-f197.google.com (mail-dy1-f197.google.com [74.125.82.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4guuec3rft-1
+	XAVSQafxI3Jl7WTU6fUPik0vtCcJL5EtlAGkPjfSPC8=; b=LTGNdvh+tK4uTGe3
+	dBVpvQxGhbf9BoBC++S/Kx47e6bhEBx6Y7GO3GBfExQ1IMaljtbScDjHP/Mb2kTD
+	TY87oyqfAjnTfbN6tZTLUkRJpOjxI+oZ9Drr+4NkWoTROCmNG5NwgfIZ2C8mFR40
+	6Y0NO4vS+0MU4e6DLHN/Zebg2d40KaUAJxdDKx9EmDOUCRvUnRuhBuUDcS34b0x3
+	DxLgfMixbbks82ORZavdA9VU/zx3l8ZpQgmM7JbbbZrVT/6SBO7Dthi3mTgv2qRW
+	NN0Hpq7Wwq+YevdOHzudqa0YK3IlHSb137KDPPgmthg17kyzEipCkx0cf+DQ8RBT
+	6/OamQ==
+Received: from mail-dy1-f200.google.com (mail-dy1-f200.google.com [74.125.82.200])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gv3319as4-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 05:41:54 +0000 (GMT)
-Received: by mail-dy1-f197.google.com with SMTP id 5a478bee46e88-331b2ec616fso2164320eec.1
-        for <linux-arm-msm@vger.kernel.org>; Tue, 22 Sep 2026 22:41:54 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 06:16:58 +0000 (GMT)
+Received: by mail-dy1-f200.google.com with SMTP id 5a478bee46e88-30f1b904861so745123eec.0
+        for <linux-arm-msm@vger.kernel.org>; Tue, 22 Sep 2026 23:16:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1790142109; x=1790746909; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=G/aKOtHIofqNw5/DRlGI2QTk8pCfM57nPrUMsZyHrh4=;
-        b=ZOumyeZgLS1QN4FKFaSHhVVDwslLn/7oFQfBpqylLhBEFrTGr4FT6b00UugXWFmVfj
-         pLqYNgzWHfGYlL3wFuHiXFOJBX/Sgwnq7/+6EMSXbNhNaUeVbRYeL9sULIBShXMd7zva
-         duoX3DQ72rQaVoUBIOcDkhKqaXR2qzf3xxOSerN2haPl9OwsGhxAivws0ZclJY+yqbhl
-         Jn0kSusGzXgkVe9hnD3X9jcrjWOha4IhibM8qXuxTsOtYfkTCUdPUieZnddcdPJQbC3R
-         cWNUMMbiDE6E92ZCqjN9GkKC3BwS45KqEF7Kuv4CPTHX1ShruNnQmBcM/eqfeOGxv/Eo
-         LKOA==
+        d=oss.qualcomm.com; s=google; t=1790144217; x=1790749017; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from:references
+         :cc:to:content-language:subject:user-agent:mime-version:date
+         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=XAVSQafxI3Jl7WTU6fUPik0vtCcJL5EtlAGkPjfSPC8=;
+        b=aBYvZmOXP6lkAcU5i+XOYZTNZiIsxDQCygSG+CT/QwVN35BOdFpG6MI1L42ZrP09D3
+         gLTaJDz2VbIVLAwfCeOn0M8Ui8N1+InJSymZyKrkn7Vv9hMvrrEUSGmFI9gceke7w7Ry
+         CaDhOzHtRjlXusnIF2DMdn3l0rbYblYVkrn9TN+AgI22PDef8dkhKa0yrAt8777qnoQm
+         IRecteWp/Lul8fmP+oYY1JTI3yzm/UNEPmcGWoAAfE/QHrT3Sr3rWW+NZDrW5mZA7n/L
+         /iWrE/XpBTOQm27n8VF4HPuUGgEb7WpY3kTtbC6oaadngyS0kKh3XOYDZDqv1ttvPILg
+         lS6A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790142109; x=1790746909;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=1e100.net; s=20260707; t=1790144217; x=1790749017;
+        h=content-transfer-encoding:content-type:in-reply-to:from:references
+         :cc:to:content-language:subject:user-agent:mime-version:date
+         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=G/aKOtHIofqNw5/DRlGI2QTk8pCfM57nPrUMsZyHrh4=;
-        b=0acr7S9NE3N8c9zj04HNkHO1jrch07yU8WKo9jUof7aW28zZ2K6WzXmDixv9u2EHCb
-         sJMJTXnbLvn6lXliKbqsztmW7GnNPW98DxBx8CpThgnupEOL3nFMDp0rzS0z3VU/U9kj
-         8nChB2dtRRbhzUbkr6fsHxFjIthxO6xojh/D2+x7AP4gvDxvsQGGEKIt3Q2zams6hqaM
-         kvNojLH9zXlLFl93MDYIRo1ysiBb6SPBwl1SC6eWjUhhFQ5ARtvz7zOKi9YQBoT3b68h
-         X79M1kLF8s6N5i4zArqKw7DjuNUARwOdXjeNw5Xmu+tweSFWKAh7YwZSVGKBZ9sRUqyz
-         bDgw==
-X-Forwarded-Encrypted: i=1; AKwUvByPwkUwVhmfGmNA3S3iwIbb1//54ZUpNqRCcsqCQ1KjpnNPcSNrST+In88+tZ+6lv8WRgJA5TtJIJcPei6U@vger.kernel.org
-X-Gm-Message-State: AFuF++kxnwGrzTml0w0IcYPejnTQYGQRNg8N63U0YSeIhDM6MGIF7qnG
-	/PSAr9FJxDQv8mA4S/0lg/fU68KhxBdj6ciEeQjP3lkF2TkoPnctNWlKhCZm+TMRd6XXAqClxnl
-	tNWXOuttmItLPsoOmp1LJnGzRTjoqk0PtCpUbcCSB9wc5UiMuEu0Ym6h8SRUiZi/f+zRV
-X-Gm-Gg: AYBFou226yL7aFRlU2wv3imfxD5b733zgZpsq2wvcKyO6sy0chd7gc16B9hFyLifOIK
-	Rs+3ZxVksd/HyQJD/j9H0B55gOiw7hW6a5JRq2Yf9lM2ItrtOizmt9JW9y3YdtCzbRxWF/NmSo2
-	VVqCqoMGNGfDKr1z2qijHG7Aj2YfY54+8xWhWAQ7Qw+jguNmpybvj4snNpITXH/U02Mc6mNcc46
-	iLvDzgGQSNHWAh5kWnX5VsOGJMLbYunjoFlipCBqfdmzHUCpwMC6d/vwnIpgaNorg0Hombyrb+A
-	3lDjzvsYki4PgzhbB5sGpF1dFxnXX3yM9xJuzBgY+NL8nJqIrraO0EdZz2PIuTTRoPbsym4t2GO
-	nJOzuFIxrETr8E0gBwSAc0whZ5d1RmCQ=
-X-Received: by 2002:a05:7300:b291:b0:33b:e21e:4a3a with SMTP id 5a478bee46e88-33e8e69cb4bmr1709632eec.40.1790142108741;
-        Tue, 22 Sep 2026 22:41:48 -0700 (PDT)
-X-Received: by 2002:a05:7300:b291:b0:33b:e21e:4a3a with SMTP id 5a478bee46e88-33e8e69cb4bmr1709602eec.40.1790142108165;
-        Tue, 22 Sep 2026 22:41:48 -0700 (PDT)
+        bh=XAVSQafxI3Jl7WTU6fUPik0vtCcJL5EtlAGkPjfSPC8=;
+        b=QvIwJ72311fEBjNP6ZoRojsxJl8xtT8hluQ7FHXqRPbYdtc8rWxKkTPR4HPt/1zyW+
+         NSeAfj92FJcjB9m+o22IXNU2QjuITMQr6COfeXUMWeG7q068XQYq/JJY3MAtVOe3/Be1
+         yOstsuBDTTrZ2eo+4d/8tHMKmSi38NdCxWL1wteFxO71tGJqBbL+FOWY/gh1bEheRSIu
+         EkU8e8g9yFAi+nZae/m73Ivz+XFONDxLHMwfkPOrNd0kr/GbHp3KmmTW/ObCdY096ohE
+         WUqSnz07TtjcBpitvu9Gkse6hM1AfCdNh/A0x5/uEnI6ekfZ/JIP7FUJ+60eMJksnyyC
+         xw3A==
+X-Forwarded-Encrypted: i=1; AKwUvBx9NPaP506wHEwxbeUoly19QSWI+RwejPhCSUfLGlL7adWf7AZyfPl0KJaDIDj4ndWuby+xvBFzIQ5YKvBO@vger.kernel.org
+X-Gm-Message-State: AFuF++nAM5YobBThzXgXPcVsfIoasWdTBE6rp6j7QtUBndHqZY6JruPE
+	UyWx6Ly7XyqTWUK5Sey8C7SsMaOO96jfGclgd/JHZt3FdZTFgucU/dA0/glgmw4yG/9zWwkKZfD
+	zbG8b6KwR0byyYIN4PVEWaWSUH1BA6DGhpPLi1Dnw89Sr9GypWNuM390rIMO5n6oU4vkl
+X-Gm-Gg: AYBFou3HUzex7aCo4+IdtjxMWqj16psBk81+a4/NETSPcUQmnLikmqokhyvOfJPBCJG
+	OrXj6A+jpu0d5i1yAFeVYdNG0t6r3XhFHVFPRSaMTLwjHIwDfcxjVwrI9CagizoLu3B0b/PSelh
+	PQc82fKeQkT6EPnfx9XGJ6gRlhgYs8QfMfMhJZP2fvAB75OtzfEmxeo+MMQ+hzMvUaz9935TOPe
+	1Bke2s4/Rjv1bcVhK6eqwdglSgFvsK1PuyN6vFIawrxNi7BHqSVD6kOGSDrOIsAePBaEmajIc0c
+	O2TcIx17Lmk8T6Sp3IofAz9JMeBjDlvRMJD3mBsPlJ7bhVzz3AlGMIey6JsnuGtB/iJkhgN6Qo0
+	JS9NqStYKaYgWVbYrdZHwVr9t8zAoSG8=
+X-Received: by 2002:a05:7022:208a:b0:137:f532:e360 with SMTP id a92af1059eb24-144f9086f02mr1827454c88.3.1790144217231;
+        Tue, 22 Sep 2026 23:16:57 -0700 (PDT)
+X-Received: by 2002:a05:7022:208a:b0:137:f532:e360 with SMTP id a92af1059eb24-144f9086f02mr1827431c88.3.1790144216582;
+        Tue, 22 Sep 2026 23:16:56 -0700 (PDT)
 Received: from [10.206.101.140] ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-33e96258351sm3193280eec.12.2026.09.22.22.41.41
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-33e96e498f0sm3375833eec.27.2026.09.22.23.16.51
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 22 Sep 2026 22:41:47 -0700 (PDT)
-Message-ID: <335528fa-72b1-b61c-a2f2-aa1e15c8f3ec@oss.qualcomm.com>
-Date: Wed, 23 Sep 2026 11:11:39 +0530
+        Tue, 22 Sep 2026 23:16:56 -0700 (PDT)
+Message-ID: <023d4410-a730-a5e5-ea84-474e957d7a5b@oss.qualcomm.com>
+Date: Wed, 23 Sep 2026 11:46:49 +0530
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -90,141 +89,383 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
  Thunderbird/102.8.0
-Subject: Re: [PATCH v11 1/9] dt-bindings: media: qcom,glymur-iris: Add glymur
- video codec
-To: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-Cc: Bryan O'Donoghue <bod@kernel.org>,
-        Vikash Garodia <vikash.garodia@oss.qualcomm.com>,
-        Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>,
-        Abhinav Kumar <abhinav.kumar@linux.dev>,
-        Mauro Carvalho Chehab <mchehab@kernel.org>,
-        "Joerg Roedel (AMD)" <joro@8bytes.org>, Will Deacon <will@kernel.org>,
-        Robin Murphy <robin.murphy@arm.com>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley
- <conor+dt@kernel.org>,
-        Stanimir Varbanov <stanimir.k.varbanov@gmail.com>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Abel Vesa <abelvesa@kernel.org>, Krzysztof Kozlowski <krzk@kernel.org>,
-        linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-        iommu@lists.linux.dev, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-References: <20260917-glymur-v11-0-e0c8bc914742@oss.qualcomm.com>
- <20260917-glymur-v11-1-e0c8bc914742@oss.qualcomm.com>
- <pk5j7gr5m23eocsliy2rtqcwbtzonzxidxdon7w3doysgehiiy@yxtjrrp337ex>
+Subject: Re: [PATCH v9 01/19] Revert "media: iris: Add Gen2 firmware
+ autodetect and fallback"
 Content-Language: en-US
+To: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+        Vikash Garodia <vikash.garodia@oss.qualcomm.com>,
+        Abhinav Kumar <abhinav.kumar@linux.dev>,
+        Bryan O'Donoghue <bod@kernel.org>,
+        Mauro Carvalho Chehab <mchehab@kernel.org>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>
+Cc: linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+        linux-kernel@vger.kernel.org, devicetree@vger.kernel.org,
+        Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>
+References: <20260731-iris-ar50lt-v9-0-d71a782001c0@oss.qualcomm.com>
+ <20260731-iris-ar50lt-v9-1-d71a782001c0@oss.qualcomm.com>
 From: Vishnu Reddy <busanna.reddy@oss.qualcomm.com>
-In-Reply-To: <pk5j7gr5m23eocsliy2rtqcwbtzonzxidxdon7w3doysgehiiy@yxtjrrp337ex>
+In-Reply-To: <20260731-iris-ar50lt-v9-1-d71a782001c0@oss.qualcomm.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTIzMDAyMiBTYWx0ZWRfX5dgYjTNVCVNq
- s+s4552TJ9UqsSFCSMiAlYP4is+LkLFMfcWO2P6W7IqNw+suMjghx4iqHNBkQVK7KVfT57aw6/G
- JYYMBhp4u9nAvahZKfE8NAgf3aDfNwCMm+SdBJXXQb1Iwb69A4KSqRGRl3NctIMCDzEcheKrT87
- /zGF8xv4iY7rrpk8sT1fSsLppQmIfc3JlKvrv/Rx9sVlXDZcaMCqpY9u4j5qd0guSFhcZN9XAaR
- RuPqHuEsWeC969La7DSfGWG7imFBwPkWBF7OptWsiX6dn3HZq5Hf8tq0IMAtC6JynCm5eseFXxr
- RYoX8+J+im66TFjYbaWdzgf8VFUc94x7wConT/nGiwPSCIC3tlXlSoY319Z6lJ5A/02PFDutzaO
- KCnjtwE/edaRR8H9REE6yhaxFAUaXO7kqEVulwrxujzhzOkSOxtR133w9GAftzIDYcuxjCDaakU
- Un2o7dTN12CGr1Yy+dA==
-X-Authority-Analysis: v=2.4 cv=VKdIDNPX c=1 sm=1 tr=0 ts=6ab366a2 cx=c_pps
- a=Uww141gWH0fZj/3QKPojxA==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
+X-Proofpoint-GUID: ttzhpmYNFq0G5plhyieW-qDYns2Tdebd
+X-Authority-Analysis: v=2.4 cv=HdaB3SE8 c=1 sm=1 tr=0 ts=6ab36eda cx=c_pps
+ a=PfFC4Oe2JQzmKTvty2cRDw==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
  a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22
- a=gEfo2CItAAAA:8 a=EUspDBNiAAAA:8 a=6X4DAO4X2HBH6bcfxsAA:9 a=QEXdDO2ut3YA:10
- a=PxkB5W3o20Ba91AHUih5:22 a=sptkURWiP4Gy88Gu7hUp:22
-X-Proofpoint-GUID: 9kIocdkBmlCP5clLxfON-s9uY0-WfFav
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTIzMDAyMiBTYWx0ZWRfX2ZLtx8kBSQSO
- /uu2Ar7r3V82Y2lEgGJnMrqpiLvMtOw2vNvUJRqXscGRtnJ4W2dBWbhfqm0oLM9jbI5phUj5vSz
- Vuwge+tGYlNvdrb9b/RcA74jxpwz1M0=
-X-Proofpoint-ORIG-GUID: 9kIocdkBmlCP5clLxfON-s9uY0-WfFav
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
+ a=EUspDBNiAAAA:8 a=fAD_4TVitci44sXei48A:9 a=QEXdDO2ut3YA:10
+ a=6Ab_bkdmUrQuMsNx7PHu:22
+X-Proofpoint-ORIG-GUID: ttzhpmYNFq0G5plhyieW-qDYns2Tdebd
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTIzMDAyNCBTYWx0ZWRfX3pR6fIO0K2ug
+ 2FHhTua340LQXOCmryHE5ZEb2Oojcnj0NrPUVwi3LazJ1VxKZkFz/uuo0U48yp7bAOQqA6P554x
+ tLoOwh71ZPJb/RlHRRy+9Px1L/UHAMf5xQYnNsef9+rmw81tjF2DgH4aiA+cuTmLfXFPO7B/PQA
+ uM6TW3ju+rxe8vaAsOfJHSowQ1pgxI7KxPPPuG8FK4y2Q83lRSdYUFX/0pm1nePo0N0/YTqFwsg
+ WYJtq8gMKtWhlIPUoFfUMHx93i6Ks6AaES0eIHkM3CzEMskpGYNwm7JlH8FtTqa/GL3aPK0yi4g
+ Zt/kcf58el5lX/n0bC8jucYhgyMi3wIUyU9tqZKoBB3tfEFm/MmcuvOYnSdNqz6u6IemIP4zHEy
+ rilBi7ZQC6jHiYJkOvFbOM7XKwR/BJAWn2b+a0Z/xJsJBrw9f6R04BPlCbMdU3ccM2fPSm8opYK
+ C7ZTJ/e6DvTxxKUOW4Q==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTIzMDAyNCBTYWx0ZWRfX6XWLpBNuC/jC
+ xB0C+GI+F81y6851QH1K6eDIVrIzYbDmaX+ew+TmofOWBBnWrnu0RIpusz8wE/CYQH6bSH9jvXr
+ uNSO5gNljZCLbub8siq+E9C7kb0C760=
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-09-23_02,2026-09-21_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 impostorscore=0 phishscore=0 spamscore=0 malwarescore=0
- suspectscore=0 bulkscore=0 clxscore=1015 adultscore=0 lowpriorityscore=0
+ impostorscore=0 phishscore=0 lowpriorityscore=0 spamscore=0 bulkscore=0
+ priorityscore=1501 clxscore=1015 suspectscore=0 adultscore=0 malwarescore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609230022
+ reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609230024
 
 
-On 9/22/2026 6:29 PM, Dmitry Baryshkov wrote:
-> On Thu, Sep 17, 2026 at 10:30:20AM +0530, Vishnu Reddy wrote:
->> Add device tree binding for the Qualcomm Glymur Iris video codec. Glymur
->> is a new generation of video IP that introduces a dual-core architecture.
->> The second core brings its own power domain, clocks, and reset lines,
->> requiring additional power domains and clocks in the power sequence. The
->> current maxItems constraints for clocks, power-domains and non-pixel
->> iommus in the common venus schema were sized for platforms available at
->> the time of authoring. The glymur platform introduces a dual core
->> architecture that requires more clocks and power domains, exceeding these
->> limits. Raise maxItems for clocks, clock-names, power-domains,
->> power-domain-names and non-pixel iommus to accommodate glymur platform.
->> The glymur platform specific schema have fixed constraints for these
->> properties, so the common schema only acts as an upper bound. Since the
->> common schema now only acts as an upper bound, add explicit maxItems
->> overrides for the non-pixel iommus in the qcom,sm8550-iris and
->> qcom,sm8750-iris schemas to keep the fixed constraints as before.
->>
->> Signed-off-by: Vishnu Reddy <busanna.reddy@oss.qualcomm.com>
->> ---
->>  .../bindings/media/qcom,glymur-iris.yaml           | 218 +++++++++++++++++++++
->>  .../bindings/media/qcom,sm8550-iris.yaml           |   6 +
->>  .../bindings/media/qcom,sm8750-iris.yaml           |   6 +
->>  .../bindings/media/qcom,venus-common.yaml          |  11 +-
->>  4 files changed, 236 insertions(+), 5 deletions(-)
->>
->> diff --git a/Documentation/devicetree/bindings/media/qcom,glymur-iris.yaml b/Documentation/devicetree/bindings/media/qcom,glymur-iris.yaml
->> new file mode 100644
->> index 000000000000..de4792f3b658
->> --- /dev/null
->> +++ b/Documentation/devicetree/bindings/media/qcom,glymur-iris.yaml
->> @@ -0,0 +1,218 @@
->> +# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
->> +%YAML 1.2
->> +---
->> +$id: http://devicetree.org/schemas/media/qcom,glymur-iris.yaml#
->> +$schema: http://devicetree.org/meta-schemas/core.yaml#
->> +
->> +title: Qualcomm Glymur SoC Iris video encoder and decoder
->> +
->> +maintainers:
->> +  - Vishnu Reddy <busanna.reddy@oss.qualcomm.com>
->> +
->> +description:
->> +  The Iris video processing unit on Qualcomm Glymur SoC is a video encode and
->> +  decode accelerator.
->> +
->> +properties:
->> +  compatible:
->> +    const: qcom,glymur-iris
->> +
->> +  clocks:
->> +    maxItems: 9
->> +
->> +  clock-names:
->> +    items:
->> +      - const: core_iface
->> +      - const: core
->> +      - const: vcodec0_core
->> +      - const: vcodec0_iface
->> +      - const: core_freerun
->> +      - const: vcodec0_core_freerun
->> +      - const: vcodec1_iface
->> +      - const: vcodec1_core
-> Nit: is there any logic in the order of the clocks? Why vcodec0_core
-> comes before vcodec0_iface, but vcodec1_core comes after vcodec1_iface?
-
-I followed the clock ordering from the SM8750 binding for the existing entries.
-For the additional glymur clocks, I appended them at the end and kept the new
-pair in the same interface-before-core style as the inherited clock list. That
-is why vcodec1_iface appears before vcodec1_core. There was no specific
-functional dependency intended by this ordering. Let me know if you have any
-preference on reordering.
-
->> +      - const: vcodec1_core_freerun
->> +
->> +  dma-coherent: true
->> +
->> +  interconnects:
->> +    maxItems: 2
+On 7/31/2026 5:18 AM, Dmitry Baryshkov wrote:
+> The commit 412a2e5955e0 ("media: iris: Add Gen2 firmware autodetect and
+> fallback") added support for detecting the firmware HFI interface based
+> on the firmware contents, but it has issues with the MDT split files and
+> with synchronisation / locking. Revert the commit, it will be replaced
+> by the better version.
 >
+> Fixes: 412a2e5955e0 ("media: iris: Add Gen2 firmware autodetect and fallback")
+> Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+> ---
+>  drivers/media/platform/qcom/iris/iris_firmware.c   | 119 +++------------------
+>  .../platform/qcom/iris/iris_platform_common.h      |   6 +-
+>  .../media/platform/qcom/iris/iris_platform_vpu2.c  |  11 +-
+>  .../media/platform/qcom/iris/iris_platform_vpu3x.c |  10 +-
+>  drivers/media/platform/qcom/iris/iris_probe.c      |   4 +
+>  drivers/media/platform/qcom/iris/iris_vidc.c       |   3 -
+>  6 files changed, 33 insertions(+), 120 deletions(-)
+>
+> diff --git a/drivers/media/platform/qcom/iris/iris_firmware.c b/drivers/media/platform/qcom/iris/iris_firmware.c
+> index 965384fdd339..1a476146d758 100644
+> --- a/drivers/media/platform/qcom/iris/iris_firmware.c
+> +++ b/drivers/media/platform/qcom/iris/iris_firmware.c
+> @@ -16,109 +16,20 @@
+>  
+>  #define MAX_FIRMWARE_NAME_SIZE	128
+>  
+> -/* Detect Gen2 firmware by scanning the blob for:
+> - *   QC_IMAGE_VERSION_STRING=<version>
+> - * and then checking:
+> - *   - version starts with "vfw", OR
+> - *   - version matches "video-firmware.N.M" with N >= 2
+> - */
+> -
+> -static bool iris_detect_gen2_from_fwdata(const u8 *data, size_t size)
+> -{
+> -	static const char *marker = "QC_IMAGE_VERSION_STRING=";
+> -	const size_t mlen = strlen(marker);
+> -	static const char *vfw = "vfw";
+> -	const size_t vfwlen = strlen(vfw);
+> -	static const char *vf = "video-firmware.";
+> -	const size_t vflen = strlen(vf);
+> -
+> -	for (size_t i = 0; i + mlen < size; i++) {
+> -		const char *found;
+> -
+> -		if (memcmp(data + i, marker, mlen))
+> -			continue;
+> -
+> -		found = data + i + mlen;
+> -		size -= i + mlen;
+> -
+> -		/* vfw => Gen2 */
+> -		if (size > vfwlen && !memcmp(found, vfw, vfwlen))
+> -			return true;
+> -
+> -		if (size < vflen ||
+> -		    memcmp(found, vf, vflen))
+> -			return false;
+> -
+> -		found += vflen;
+> -		size -= vflen;
+> -
+> -		/*
+> -		 * video-firmware.1.x is Gen1.
+> -		 * video-firmware.2.x and video-firmware.10.x are Gen2.
+> -		 */
+> -		return size >= 2 &&
+> -			(*found >= '2' || (*found == '1' && found[1] != '.'));
+> -	}
+> -
+> -	return false;
+> -}
+> -
+> -static const struct firmware *iris_detect_firmware(struct iris_core *core,
+> -						   const char **fw_name)
+> -{
+> -	const struct firmware *firmware;
+> -	bool has_both_gens;
+> -	int ret;
+> -
+> -	*fw_name = NULL;
+> -	if (core->iris_platform_data->firmware_desc_gen2)
+> -		core->iris_firmware_desc = core->iris_platform_data->firmware_desc_gen2;
+> -	else if (core->iris_platform_data->firmware_desc_gen1)
+> -		core->iris_firmware_desc = core->iris_platform_data->firmware_desc_gen1;
+> -	else
+> -		return ERR_PTR(-EINVAL);
+> -
+> -	has_both_gens = core->iris_platform_data->firmware_desc_gen2 &&
+> -		core->iris_platform_data->firmware_desc_gen1;
+> -
+> -	ret = of_property_read_string_index(dev_of_node(core->dev), "firmware-name", 0, fw_name);
+> -	if (ret) {
+> -		*fw_name = core->iris_firmware_desc->fwname;
+> -		ret = request_firmware(&firmware, *fw_name, core->dev);
+> -		if (ret && has_both_gens) {
+> -			core->iris_firmware_desc = core->iris_platform_data->firmware_desc_gen1;
+> -			*fw_name = core->iris_firmware_desc->fwname;
+> -			ret = request_firmware(&firmware, *fw_name, core->dev);
+> -		}
+> -
+> -		return ret ? ERR_PTR(ret) : firmware;
+> -	}
+> -
+> -	ret = request_firmware(&firmware, *fw_name, core->dev);
+> -	if (ret)
+> -		return ERR_PTR(ret);
+> -
+> -	if (has_both_gens &&
+> -	    !iris_detect_gen2_from_fwdata((const u8 *)firmware->data, firmware->size)) {
+> -		dev_info(core->dev, "Gen1 FW detected in %s\n", *fw_name);
+> -		core->iris_firmware_desc = core->iris_platform_data->firmware_desc_gen1;
+> -	}
+> -
+> -	return firmware;
+> -}
+> -
+> -static int iris_load_fw_to_memory(struct iris_core *core)
+> +static int iris_load_fw_to_memory(struct iris_core *core, const char *fw_name)
+>  {
+>  	const struct firmware *firmware = NULL;
+>  	struct device *dev = core->dev;
+>  	struct resource res;
+>  	phys_addr_t mem_phys;
+> -	const char *fw_name;
+>  	size_t res_size;
+>  	ssize_t fw_size;
+>  	void *mem_virt;
+>  	int ret;
+>  
+> +	if (strlen(fw_name) >= MAX_FIRMWARE_NAME_SIZE - 4)
+> +		return -EINVAL;
+> +
+>  	ret = of_reserved_mem_region_to_resource(dev->of_node, 0, &res);
+>  	if (ret)
+>  		return ret;
+> @@ -126,11 +37,9 @@ static int iris_load_fw_to_memory(struct iris_core *core)
+>  	mem_phys = res.start;
+>  	res_size = resource_size(&res);
+>  
+> -	firmware = iris_detect_firmware(core, &fw_name);
+> -	if (IS_ERR(firmware))
+> -		return PTR_ERR(firmware);
+> -
+> -	core->iris_firmware_data = core->iris_firmware_desc->firmware_data;
+> +	ret = request_firmware(&firmware, fw_name, dev);
+> +	if (ret)
+> +		return ret;
+>  
+>  	fw_size = qcom_mdt_get_size(firmware);
+>  	if (fw_size < 0 || res_size < (size_t)fw_size) {
+> @@ -157,12 +66,18 @@ static int iris_load_fw_to_memory(struct iris_core *core)
+>  int iris_fw_load(struct iris_core *core)
+>  {
+>  	const struct tz_cp_config *cp_config;
+> +	const char *fwpath = NULL;
+>  	int i, ret;
+>  
+> -	ret = iris_load_fw_to_memory(core);
+> +	ret = of_property_read_string_index(core->dev->of_node, "firmware-name", 0,
+> +					    &fwpath);
+> +	if (ret)
+> +		fwpath = core->iris_firmware_desc->fwname;
+> +
+> +	ret = iris_load_fw_to_memory(core, fwpath);
+>  	if (ret) {
+> -		dev_err(core->dev, "firmware download failed %d\n", ret);
+> -		return ret;
+> +		dev_err(core->dev, "firmware download failed\n");
+> +		return -ENOMEM;
+>  	}
+>  
+>  	ret = qcom_scm_pas_auth_and_reset(IRIS_PAS_ID);
+> @@ -184,7 +99,7 @@ int iris_fw_load(struct iris_core *core)
+>  		}
+>  	}
+>  
+> -	return 0;
+> +	return ret;
+>  }
+>  
+>  int iris_fw_unload(struct iris_core *core)
+> diff --git a/drivers/media/platform/qcom/iris/iris_platform_common.h b/drivers/media/platform/qcom/iris/iris_platform_common.h
+> index 974809509146..a9453d539fc2 100644
+> --- a/drivers/media/platform/qcom/iris/iris_platform_common.h
+> +++ b/drivers/media/platform/qcom/iris/iris_platform_common.h
+> @@ -292,7 +292,11 @@ struct iris_firmware_desc {
+>  };
+>  
+>  struct iris_platform_data {
+> -	const struct iris_firmware_desc *firmware_desc_gen1, *firmware_desc_gen2;
+> +	/*
+> +	 * XXX: replace with gen1 / gen2 pointers once we have platforms
+> +	 * supporting both firmware kinds.
+> +	 */
+> +	const struct iris_firmware_desc *firmware_desc;
+>  
+>  	const struct vpu_ops *vpu_ops;
+>  	const struct icc_info *icc_tbl;
+> diff --git a/drivers/media/platform/qcom/iris/iris_platform_vpu2.c b/drivers/media/platform/qcom/iris/iris_platform_vpu2.c
+> index bbdbf21961d7..fa5bb143158d 100644
+> --- a/drivers/media/platform/qcom/iris/iris_platform_vpu2.c
+> +++ b/drivers/media/platform/qcom/iris/iris_platform_vpu2.c
+> @@ -29,12 +29,6 @@ static const struct iris_firmware_desc iris_vpu20_p1_gen1_desc = {
+>  	.fwname = "qcom/vpu/vpu20_p1.mbn",
+>  };
+>  
+> -static const struct iris_firmware_desc iris_vpu20_p1_gen2_s6_desc = {
+> -	.firmware_data = &iris_hfi_gen2_data,
+> -	.get_vpu_buffer_size = iris_vpu33_buf_size,
+> -	.fwname = "qcom/vpu/vpu20_p1_gen2_s6.mbn",
+> -};
+> -
+>  static const struct iris_firmware_desc iris_vpu20_p4_gen1_desc = {
+>  	.firmware_data = &iris_hfi_gen1_data,
+>  	.get_vpu_buffer_size = iris_vpu_buf_size,
+> @@ -106,8 +100,7 @@ const struct iris_platform_data milos_data = {
+>  };
+>  
+>  const struct iris_platform_data sc7280_data = {
+> -	.firmware_desc_gen1 = &iris_vpu20_p1_gen1_desc,
+> -	.firmware_desc_gen2 = &iris_vpu20_p1_gen2_s6_desc,
+> +	.firmware_desc = &iris_vpu20_p1_gen1_desc,
+>  	.vpu_ops = &iris_vpu2_ops,
+>  	.icc_tbl = iris_icc_info_vpu2,
+>  	.icc_tbl_size = ARRAY_SIZE(iris_icc_info_vpu2),
+> @@ -136,7 +129,7 @@ const struct iris_platform_data sc7280_data = {
+>  };
+>  
+>  const struct iris_platform_data sm8250_data = {
+> -	.firmware_desc_gen1 = &iris_vpu20_p4_gen1_desc,
+> +	.firmware_desc = &iris_vpu20_p4_gen1_desc,
+>  	.vpu_ops = &iris_vpu2_ops,
+>  	.icc_tbl = iris_icc_info_vpu2,
+>  	.icc_tbl_size = ARRAY_SIZE(iris_icc_info_vpu2),
+> diff --git a/drivers/media/platform/qcom/iris/iris_platform_vpu3x.c b/drivers/media/platform/qcom/iris/iris_platform_vpu3x.c
+> index 74626b35d9cb..2c63adbc5579 100644
+> --- a/drivers/media/platform/qcom/iris/iris_platform_vpu3x.c
+> +++ b/drivers/media/platform/qcom/iris/iris_platform_vpu3x.c
+> @@ -90,7 +90,7 @@ static const struct tz_cp_config tz_cp_config_vpu3[] = {
+>   * - inst_caps to platform_inst_cap_qcs8300
+>   */
+>  const struct iris_platform_data qcs8300_data = {
+> -	.firmware_desc_gen2 = &iris_vpu30_p4_s6_gen2_desc,
+> +	.firmware_desc = &iris_vpu30_p4_s6_gen2_desc,
+>  	.vpu_ops = &iris_vpu3_ops,
+>  	.icc_tbl = iris_icc_info_vpu3x,
+>  	.icc_tbl_size = ARRAY_SIZE(iris_icc_info_vpu3x),
+> @@ -119,7 +119,7 @@ const struct iris_platform_data qcs8300_data = {
+>  };
+>  
+>  const struct iris_platform_data sm8550_data = {
+> -	.firmware_desc_gen2 = &iris_vpu30_p4_gen2_desc,
+> +	.firmware_desc = &iris_vpu30_p4_gen2_desc,
+>  	.vpu_ops = &iris_vpu3_ops,
+>  	.icc_tbl = iris_icc_info_vpu3x,
+>  	.icc_tbl_size = ARRAY_SIZE(iris_icc_info_vpu3x),
+> @@ -154,7 +154,7 @@ const struct iris_platform_data sm8550_data = {
+>   * - controller_rst_tbl to sm8650_controller_reset_table
+>   */
+>  const struct iris_platform_data sm8650_data = {
+> -	.firmware_desc_gen2 = &iris_vpu33_p4_gen2_desc,
+> +	.firmware_desc = &iris_vpu33_p4_gen2_desc,
+>  	.vpu_ops = &iris_vpu33_ops,
+>  	.icc_tbl = iris_icc_info_vpu3x,
+>  	.icc_tbl_size = ARRAY_SIZE(iris_icc_info_vpu3x),
+> @@ -185,7 +185,7 @@ const struct iris_platform_data sm8650_data = {
+>  };
+>  
+>  const struct iris_platform_data sm8750_data = {
+> -	.firmware_desc_gen2 = &iris_vpu35_p4_gen2_desc,
+> +	.firmware_desc = &iris_vpu35_p4_gen2_desc,
+>  	.vpu_ops = &iris_vpu35_ops,
+>  	.icc_tbl = iris_icc_info_vpu3x,
+>  	.icc_tbl_size = ARRAY_SIZE(iris_icc_info_vpu3x),
+> @@ -220,7 +220,7 @@ const struct iris_platform_data sm8750_data = {
+>   * - different num_vpp_pipe
+>   */
+>  const struct iris_platform_data x1p42100_data = {
+> -	.firmware_desc_gen2 = &iris_vpu30_p1_gen2_desc,
+> +	.firmware_desc = &iris_vpu30_p1_gen2_desc,
+>  	.vpu_ops = &iris_vpu3_ops,
+>  	.icc_tbl = iris_icc_info_vpu3x,
+>  	.icc_tbl_size = ARRAY_SIZE(iris_icc_info_vpu3x),
+> diff --git a/drivers/media/platform/qcom/iris/iris_probe.c b/drivers/media/platform/qcom/iris/iris_probe.c
+> index 5db6398433a4..81cccb756b94 100644
+> --- a/drivers/media/platform/qcom/iris/iris_probe.c
+> +++ b/drivers/media/platform/qcom/iris/iris_probe.c
+> @@ -253,6 +253,8 @@ static int iris_probe(struct platform_device *pdev)
+>  		return core->irq;
+>  
+>  	core->iris_platform_data = of_device_get_match_data(core->dev);
+> +	core->iris_firmware_desc = core->iris_platform_data->firmware_desc;
+> +	core->iris_firmware_data = core->iris_firmware_desc->firmware_data;
+>  
+>  	core->ubwc_cfg = qcom_ubwc_config_get_data();
+>  	if (IS_ERR(core->ubwc_cfg))
+> @@ -271,6 +273,8 @@ static int iris_probe(struct platform_device *pdev)
+>  	if (ret)
+>  		return ret;
+>  
+> +	iris_session_init_caps(core);
+> +
+>  	ret = v4l2_device_register(dev, &core->v4l2_dev);
+>  	if (ret)
+>  		return ret;
+> diff --git a/drivers/media/platform/qcom/iris/iris_vidc.c b/drivers/media/platform/qcom/iris/iris_vidc.c
+> index fcbc60016bee..1c052ca235be 100644
+> --- a/drivers/media/platform/qcom/iris/iris_vidc.c
+> +++ b/drivers/media/platform/qcom/iris/iris_vidc.c
+> @@ -9,7 +9,6 @@
+>  #include <media/v4l2-mem2mem.h>
+>  #include <media/videobuf2-dma-contig.h>
+>  
+> -#include "iris_ctrls.h"
+>  #include "iris_vidc.h"
+>  #include "iris_instance.h"
+>  #include "iris_vdec.h"
+> @@ -197,8 +196,6 @@ int iris_open(struct file *filp)
+>  		goto fail_m2m_release;
+>  	}
+>  
+> -	iris_session_init_caps(core);
+> -
+>  	if (inst->domain == DECODER)
+>  		ret = iris_vdec_inst_init(inst);
+>  	else if (inst->domain == ENCODER)
+
+Reviewed-by: Vishnu Reddy <busanna.reddy@oss.qualcomm.com>
+
