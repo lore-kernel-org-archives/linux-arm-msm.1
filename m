@@ -1,133 +1,144 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 15F1C476CE7;
-	Wed, 23 Sep 2026 09:07:33 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4CAFD415F15
+	for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 09:07:59 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790154455; cv=none; b=iUCBICDZFO9nG6iWJWFxChJ+eah1X0+0EW5dYPsCS+LcbBnCAIUgW9DZITVctOBPluPGxVD+cmb7fkw7skgZkdSA8l290CjQnYpOU6YuEPx2+HeBtT1cr3IRWut74KIh4rRnIvbHgOpv20gajCNHuhHccLtAg3IW3WcAEtP7GK8=
+	t=1790154480; cv=none; b=o/PA/Q7fjAnCLb6g8Pq/n/PH4T1UoHywfpg6c8KgBJF25Ljjg6bPszSmWoPZQTK6h61xTVetD5RwQX8tQPNqe8jwX2URsb3lHjyPBuRLv25zIDDJ4QbQp0nZiFQP/oDoeMqd8cNQvypHHqsxp+MohII//1A2beDoH/M+mMZxhlg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790154455; c=relaxed/simple;
-	bh=ydjqv+vhCg/bF+IeIDvGwKCcrZqtPWRIkTwkdhYtCGE=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=J1Fzbe3M8ER/GRvsvjwQgXvdToCjRpq8Ju7dSpduLBWehhghKvkmsy84T/dCLldis4zmxsDO7muSTPKQDw5WQoW4oScRSuYLwd17UTLY0RcQKs9bmYG0CyyxCjOlFndxekcL+6eLT+MrcZFNZRyalpXubnx0K8xWsqOTtcNh80Y=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=KflVallC; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1790154480; c=relaxed/simple;
+	bh=IUM/k86M0HMHRzXZI25n7LcEaTa2SkGEuLDxUp6qdUc=;
+	h=From:In-Reply-To:MIME-Version:References:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=lcP4d9EKQ1YrMorUCPpuD+qIZCKbyFyMw0EmZo7+3g6UUg0CJ86d9nNg+/7W6Xsq9D3j5gDaluPi69mZK+RGJAw/9dVzTLyqHlkCH0uJxWauzPb3Nrq84PZocBH5hbUwTTNT9ojYJdbWeFQQG9cSiiaLfagkMYsEkj6YE16dC4I=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Tzp9eCoO; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="KflVallC"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A91061F000FF;
-	Wed, 23 Sep 2026 09:07:31 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Tzp9eCoO"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id EB3441F00899
+	for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 09:07:58 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1790154453;
-	bh=8qYfBP3l0bIaYYx9lxJyE2I7qM/U4w1XTrG1Nu4ZagQ=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=KflVallCyNsdpqhTOTGscBnbizb4oRfsGlcpFCeI0AItfzqu1DZ1WGdshpUeWaBC7
-	 0xjv55o/CEsYZL32mmIn6crZRcelbeZH7S+aQ4ffKsBi89PbqTi+8HSTTzaucjqAkI
-	 sX2Y9Hh3F0QoEn/gL1OCwDXOB5u330/fkg1Pzcs1B89uNDT7mHiMoOHs19i5nFtsqg
-	 EiY5oFDN5gwX24GflFiL7jk/m5AfS83xahfSpjeHjSvUUnSbWboOEX6gGG6TTlu3YE
-	 /l9bsljv1N2Dl2nRvH1KG8JtnYqIWHfhknp9zhF5NqOwnZ8xecGKRf0x7nQv/s7vh6
-	 ZrOgieiDoTbOw==
-Date: Wed, 23 Sep 2026 10:07:29 +0100
-From: Sudeep Holla <sudeep.holla@kernel.org>
-To: Hans de Goede <johannes.goede@oss.qualcomm.com>
-Cc: Uwe =?iso-8859-1?Q?Kleine-K=F6nig?= <u.kleine-koenig@baylibre.com>,
-	Bjorn Andersson <andersson@kernel.org>,
-	Sudeep Holla <sudeep.holla@kernel.org>,
-	Cristian Marussi <cristian.marussi@arm.com>,
-	Daniel Lezcano <daniel.lezcano@oss.qualcomm.com>,
-	Bjorn Andersson <bjorn.andersson@oss.qualcomm.com>,
-	Frank.Li@kernel.org, arm-scmi@vger.kernel.org,
-	linux-arm-kernel@lists.infradead.org, linux-arm-msm@vger.kernel.org,
-	imx@lists.linux.dev, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v7 1/2] module: add SCMI device table alias support
-Message-ID: <20260923-sceptical-mauve-firefly-f5456d@sudeepholla>
-References: <20260918092951.5656-1-johannes.goede@oss.qualcomm.com>
- <20260918092951.5656-2-johannes.goede@oss.qualcomm.com>
- <arFKVhlgJge5EZyj@monoceros>
+	s=k20260515; t=1790154479;
+	bh=rvHgMZ0dWD7lgj67arf01dNq7VRxt7WQ1KerphseR/I=;
+	h=From:In-Reply-To:References:Date:Subject:To:Cc;
+	b=Tzp9eCoONKaGir1quxt2td51CW2dbzO/YppIPlt/BI56+U7LDQkKLggnvUO/6+bW6
+	 lmZmIa8rLCZJJhO4iYI0hwEoWCKlpedQ4ds4O57MpOfnSjNJvmwQiXUpyyO1cx75GB
+	 mkAxCPxmTUEZVK2iCXygh7Hi7+XKV8OPWLOKEIbAexaCdc9k7LTSw8+ZVXDUckSp/6
+	 h6bQW5hh/UMra9QVcYzsQvURDijRnjTMoA996V/U7/0/KzgNGRhAYPqcp9vB2gNb5m
+	 zS7YQxh8qMTD+2rw/9Z+7zmZXfZ25fjy2RbSgRRzklnfcYYlCv1OxVv/GD3EjKdyLv
+	 utEwLjZW7B/jA==
+Received: by mail-lf2-f13.google.com with SMTP id 2adb3069b0e04-5b76668f4ddso206664e87.1
+        for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 02:07:58 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AKwUvBxHhPxAA3ZAOBH4JCoF8MQeM4Ojj9136cBhnRtrPElEJV7v+9AuHaL0WYqO9+XPtt68liyEi5k+/q+mmT35@vger.kernel.org
+X-Gm-Message-State: AFuF++lL0AN+r9xefEnKxzZqgbs/xVKpBg6EpmBqBvmiVFCd0Y+42EgP
+	QJN8v/ppWl7m1oTIklylyWxBKRUkpCPWDQ4BitzS6kOBTnPUAeVB4hC7giDKNfD3BLrOtQc3c9d
+	RjPFcF1CUfD+V9/CWkJHfnVhLfI+p+SAh3RWVq6lzhw==
+X-Received: by 2002:a05:6512:2243:b0:5aa:62df:cd0f with SMTP id
+ 2adb3069b0e04-5b8d863a8efmr644237e87.2.1790154477561; Wed, 23 Sep 2026
+ 02:07:57 -0700 (PDT)
+Received: from 969154062570 named unknown by gmailapi.google.com with
+ HTTPREST; Wed, 23 Sep 2026 02:07:56 -0700
+Received: from 969154062570 named unknown by gmailapi.google.com with
+ HTTPREST; Wed, 23 Sep 2026 02:07:56 -0700
+From: Bartosz Golaszewski <brgl@kernel.org>
+In-Reply-To: <20260922065908.477523-1-shengchao.guo@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <arFKVhlgJge5EZyj@monoceros>
+References: <20260922065908.477523-1-shengchao.guo@oss.qualcomm.com>
+Date: Wed, 23 Sep 2026 02:07:56 -0700
+X-Gmail-Original-Message-ID: <CAMRc=MfrBwqdMnT5TynJ0NVBf3OWKF7BSGr1cy4YjyCVrZdX1A@mail.gmail.com>
+X-Gm-Features: AcwNN1V3JM8lRZKBpz6lxEaP1AAZEm_g_UsomoC_BosRwITdPdApr_IvPVD7mTg
+Message-ID: <CAMRc=MfrBwqdMnT5TynJ0NVBf3OWKF7BSGr1cy4YjyCVrZdX1A@mail.gmail.com>
+Subject: Re: [PATCH v2] pinctrl: qcom: spmi-gpio: make direction changes exclusive
+To: Shawn Guo <shengchao.guo@oss.qualcomm.com>
+Cc: Bartosz Golaszewski <brgl@kernel.org>, Bjorn Andersson <andersson@kernel.org>, 
+	Neil Armstrong <neil.armstrong@linaro.org>, Yu Zhang <yu.zhang@oss.qualcomm.com>, 
+	linux-gpio@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, Linus Walleij <linusw@kernel.org>
+Content-Type: text/plain; charset="UTF-8"
 
-On Mon, Sep 21, 2026 at 05:19:45PM +0200, Uwe Kleine-König wrote:
-> On Fri, Sep 18, 2026 at 11:29:50AM +0200, Hans de Goede wrote:
-> > From: Bjorn Andersson <bjorn.andersson@oss.qualcomm.com>
-> > 
-> > SCMI client drivers already describe their bus match data with
-> > MODULE_DEVICE_TABLE(scmi, ...), but modpost does not know how to consume
-> > SCMI device tables. As a result, SCMI modules do not get generated module
-> > aliases from their id tables.
-> > 
-> > Move struct scmi_device_id to mod_devicetable.h so it has a fixed layout
-> > visible to modpost, add the corresponding generated offsets and teach
-> > file2alias to emit scmi:<protocol>:<name> aliases.
-> > 
-> > Use the same stable alias format for SCMI device uevents and sysfs
-> > modaliases. The previous string included the instance-specific device
-> > name, which is not useful for matching modules.
-> > 
-> > Assisted-by: Codex:GPT-5.5
-> > Reviewed-by: Hans de Goede <johannes.goede@oss.qualcomm.com>
-> > Tested-by: Hans de Goede <johannes.goede@oss.qualcomm.com>
-> > Signed-off-by: Bjorn Andersson <bjorn.andersson@oss.qualcomm.com>
-> > Signed-off-by: Hans de Goede <johannes.goede@oss.qualcomm.com>
+On Tue, 22 Sep 2026 08:59:08 +0200, Shawn Guo
+<shengchao.guo@oss.qualcomm.com> said:
+> pmic_gpio_populate() seeds pad->input_enabled and pad->output_enabled from
+> the hardware MODE_CTL register, so a pad left in DIGITAL_INPUT or
+> DIGITAL_INPUT_OUTPUT mode by the bootloader starts out with the input
+> buffer enabled.  Neither direction callback clears the opposite buffer:
+> .direction_output() only packs PIN_CONFIG_LEVEL, which sets
+> output_enabled, and .direction_input() only packs PIN_CONFIG_INPUT_ENABLE,
+> which sets input_enabled.  Requesting either direction on such a pad
+> therefore programs MODE_DIGITAL_INPUT_OUTPUT rather than the requested
+> direction.
+>
+> That silently breaks both directions.  After gpiod_direction_input() the
+> pad keeps driving the line, since the output buffer is never disabled.
+> And after gpiod_direction_output() pmic_gpio_get_direction() still reports
+> GPIO_LINE_DIRECTION_IN, because it cannot tell plain input from
+> input+output, which makes gpiolib consider the line an input while the
+> driver is driving it.  On a board where several regulator-fixed nodes
+> share one PMIC GPIO the shared GPIO proxy reads that direction back and
+> rejects every consumer after the first:
+>
+>   reg-fixed-voltage regulator-wcn-core-vm-1p35: setup of GPIO (default) failed: -1
+>   reg-fixed-voltage regulator-wcn-core-vm-1p35: error -EPERM: can't get GPIO
+>
+> Pack the opposite buffer's PIN_CONFIG_*_ENABLE along with the requested
+> direction so that the resulting MODE_CTL is DIGITAL_INPUT or
+> DIGITAL_OUTPUT, never both.  pmic_gpio_config_set() programs the registers
+> once after walking all configs, so this stays a single register write.
+>
+> Pads that are genuinely bidirectional can still be described that way
+> through pinconf, which is the interface that has always been able to
+> express it; the gpiolib direction callbacks now mean what gpiolib says
+> they mean.
+>
+> Fixes: 263447532463 ("pinctrl: qcom: spmi-gpio: implement .get_direction()")
+> Assisted-by: LLM
+> Signed-off-by: Shawn Guo <shengchao.guo@oss.qualcomm.com>
+> ---
+> Changes for v2:
+> - Drop GPIO shared-proxy patch
+> - Update Fixes tag (Thanks Neil!)
+> - Link to v1: https://lore.kernel.org/all/20260915014447.282121-1-shengchao.guo@oss.qualcomm.com/
+>
+>  drivers/pinctrl/qcom/pinctrl-spmi-gpio.c | 16 ++++++++++------
+>  1 file changed, 10 insertions(+), 6 deletions(-)
+>
+> diff --git a/drivers/pinctrl/qcom/pinctrl-spmi-gpio.c b/drivers/pinctrl/qcom/pinctrl-spmi-gpio.c
+> index f6dc43e27b38..eb4431591331 100644
+> --- a/drivers/pinctrl/qcom/pinctrl-spmi-gpio.c
+> +++ b/drivers/pinctrl/qcom/pinctrl-spmi-gpio.c
+> @@ -741,22 +741,26 @@ static int pmic_gpio_get_direction(struct gpio_chip *chip, unsigned pin)
+>  static int pmic_gpio_direction_input(struct gpio_chip *chip, unsigned pin)
+>  {
+>  	struct pmic_gpio_state *state = gpiochip_get_data(chip);
+> -	unsigned long config;
+> +	unsigned long configs[2];
+>
+> -	config = pinconf_to_config_packed(PIN_CONFIG_INPUT_ENABLE, 1);
+> +	configs[0] = pinconf_to_config_packed(PIN_CONFIG_OUTPUT_ENABLE, 0);
+> +	configs[1] = pinconf_to_config_packed(PIN_CONFIG_INPUT_ENABLE, 1);
+>
+> -	return pmic_gpio_config_set(state->ctrl, pin, &config, 1);
+> +	return pmic_gpio_config_set(state->ctrl, pin, configs,
+> +				    ARRAY_SIZE(configs));
+>  }
+>
+>  static int pmic_gpio_direction_output(struct gpio_chip *chip,
+>  				      unsigned pin, int val)
+>  {
+>  	struct pmic_gpio_state *state = gpiochip_get_data(chip);
+> -	unsigned long config;
+> +	unsigned long configs[2];
+>
+> -	config = pinconf_to_config_packed(PIN_CONFIG_LEVEL, val);
+> +	configs[0] = pinconf_to_config_packed(PIN_CONFIG_INPUT_ENABLE, 0);
 
-[...]
+Sashiko's comment basically says that for open-drain GPIOs, if we set direction
+to output via GPIOLIB and disable the input buffer, then later call
+gpiod_get_value() on that GPIO, we'll never read what's really on the wire. Can
+we not disable the input buffer for open-drain pins?
 
-> > diff --git a/include/linux/device-id/scmi.h b/include/linux/device-id/scmi.h
-> > new file mode 100644
-> > index 000000000000..1b4ccfa9dcc5
-> > --- /dev/null
-> > +++ b/include/linux/device-id/scmi.h
-> > @@ -0,0 +1,17 @@
-> > +/* SPDX-License-Identifier: GPL-2.0-only */
-> > +#ifndef LINUX_DEVICE_ID_SCMI_H
-> > +#define LINUX_DEVICE_ID_SCMI_H
-> > +
-> > +#ifdef __KERNEL__
-> > +#include <linux/types.h>
-> > +#endif
-> > +
-> > +#define SCMI_NAME_SIZE		32
-> > +#define SCMI_MODULE_PREFIX	"scmi:"
-> > +
-> > +struct scmi_device_id {
-> > +	__u8 protocol_id;
-> > +	char name[SCMI_NAME_SIZE];
-> 
-> I wonder if you tried to keep this a char *. ISTR someone did something
-> similar recently and they claimed it worked. That would get rid of the
-> artificial name size limit and simplify this patch.
-> 
-
-I agree with this. 
-
-[...]
-
-> > @@ -1491,6 +1502,7 @@ static const struct devtable devtable[] = {
-> >  	{"virtio", SIZE_virtio_device_id, do_virtio_entry},
-> >  	{"vmbus", SIZE_hv_vmbus_device_id, do_vmbus_entry},
-> >  	{"rpmsg", SIZE_rpmsg_device_id, do_rpmsg_entry},
-> > +	{"scmi", SIZE_scmi_device_id, do_scmi_entry},
-> >  	{"i2c", SIZE_i2c_device_id, do_i2c_entry},
-> >  	{"i3c", SIZE_i3c_device_id, do_i3c_entry},
-> >  	{"slim", SIZE_slim_device_id, do_slim_entry},
-> 
-> I wonder if this is supposed to be ordered alphabetically ...
-> 
-
-This may be hard, just the best effort unless it is cleaned up first.
-
-Anyways, I plan to send PR by end of the week, so I really need this
-in by tomorrow worst case. I am bit worried if there will conflict all
-over the place in this file as I know couple of other patches that may
-come via other trees touching same entries(one is SMCCC)🤞.
-
--- 
-Regards,
-Sudeep
+Bart
