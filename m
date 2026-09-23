@@ -1,173 +1,360 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A369749F128
-	for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 11:05:20 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AC11846C847
+	for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 11:05:35 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790161525; cv=none; b=VkpGZQDPa1Aq+gPjKNcF4NRrJM8KA1eHBmpmAIZRTIegRK1XeL5TgJezkmsZBx4TC2Sn/xi4iC2fXhVBMCfz6NH8R8t4ooDq+p59GlgqtaXe4egVnJ080thOzGAK1PJleXZQ7mysUbzBhwMyI0d+15eY6RjVLC3LwJmCVh3ZuRY=
+	t=1790161540; cv=none; b=YQdhBfPDmdcsIkLUNw8SiH4w/V6Uy1kdDKkLmmvKzrInog8/nnivgj2z3JYxQyZRKl4Vv/XZZ7KYOUK3/x/43uywCCdOfwLJ8APz/Gtx69+vO4FpqtSNOhVbdipFyfD1jEmdQS6CVLFmsMvw63QjnmLttp2YRQBL4PPax85bS08=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790161525; c=relaxed/simple;
-	bh=bqn6l4iYdSOuw4aeXmyQs004lZO8LwBG9YK/8wnvAZU=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=eSb2PWymafsL1JBgdZGPkOgebrZVPJmRIC8TFLmUa04gYSbEiFCoWwJtKFniPbVnJcuhrP2OBxVw8qPDTF+CZKvMqfFegWaXKu0cBT2y2VtoyCAzO6TJMf3ROp2mghiKDnO2eZuRTuGrct6Fw8b3vVBoxRv+0hl7M2kIV8s/Nns=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=YsifitFZ; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=ggX7aE/o; arc=none smtp.client-ip=205.220.180.131
+	s=arc-20240116; t=1790161540; c=relaxed/simple;
+	bh=K0jycMTvi6wKLbEUqdHCJShvK5Y3X5IYyfoja2Jkq5Q=;
+	h=Message-ID:Date:MIME-Version:From:Subject:To:Cc:References:
+	 In-Reply-To:Content-Type; b=nuMOMhH42eX1G0KMazG05LfqW+TK6WNWASR7wGrT0pmpTsYt159z+YX7AtsJWmltLCqwfsdAirB/6JglO4BDEJ6I/UuE7RNv2E4NgXIUlartsmfWLh+OlYXRFRPQJCwDmP+JtO5PllSiKIbzK4pzZAIw12tOdn3bb/et7n4uCUM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=l99FXg0U; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=f37NjvnT; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="YsifitFZ";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="ggX7aE/o"
-Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68NA3D242262150
-	for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 11:05:17 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="l99FXg0U";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="f37NjvnT"
+Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68NA2eNc2429390
+	for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 11:05:31 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	tP8weeZGltbzWUDFxZtPBBXtLhbxGEarqFnYs8T3UCw=; b=YsifitFZEhisGooO
-	Drib5a6RQR+GHx4EltajtUmLprp7Vnic7nEWaijgrheQAyOCSocH7wIXG46DitSj
-	1SLKHTVEsXVMnDRKPYfblNUHalln9XsqFGiB/H17uAssa+6s1LJnejR6QIEnV4gT
-	p07I3tX2ZDfpOAN8lDZp2BZBXN6fr9qwxXzNO/LrY6tMSft8iXCXMk3nbMMxOyJm
-	Wf6WFV17EB2xy6chFs5BL/fn15oSHDtvjc8MLTCJc6gn/SlQFba7OG46bUFpUrJ6
-	OYaq/xQoik9HQpJ69jWgB6GkeJquhok+1NrtYbztaUoin5IVfsOA1OTCPq8DH7SW
-	elPIkw==
-Received: from mail-dy1-f200.google.com (mail-dy1-f200.google.com [74.125.82.200])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4guy2c3p4w-1
+	JPqyhRbpOf17HmSBmiSMBHQE6Y0S0sQtUmXib+0l6+A=; b=l99FXg0UpAhzLGUt
+	+6Q8K/jLHntnFymV2NDkyNb2/Ac43ZvW+fyp23PDom3wqiO4njAyx8gJ4Bm2fMUe
+	PtQISjo3y5sp7aUMRcS07CoO/FWLVnAxtoRRAoDsxodbKSx2cSgOm4bHW56s5QLY
+	juIVBFLoQCWfsQVkubqNs07OL1niyWMNpqB4zpsIilSQAP5LYzckvULmNlhJLR+w
+	DG+odcyk19O50xFE9mDVW7S3qcTKpjRWr1tAWlIm2eAekQJmLYCvdEsabz1LNEv8
+	1WUWQJonr6QZ58zmXiadyGqCYGoEfTVR2HlJIET+g+TmQVLNmZ4H3hrdeIo4BfMN
+	aCw4UQ==
+Received: from mail-dy1-f197.google.com (mail-dy1-f197.google.com [74.125.82.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gv9bqh6tu-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 11:05:17 +0000 (GMT)
-Received: by mail-dy1-f200.google.com with SMTP id 5a478bee46e88-313d1015161so2042450eec.1
-        for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 04:05:17 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 11:05:31 +0000 (GMT)
+Received: by mail-dy1-f197.google.com with SMTP id 5a478bee46e88-331b2ec616fso2939544eec.1
+        for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 04:05:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1790161516; x=1790766316; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=tP8weeZGltbzWUDFxZtPBBXtLhbxGEarqFnYs8T3UCw=;
-        b=ggX7aE/oJ7rXDIXBJRmLJBj3IGziDu8R872h/NLcpUOK2nFAmj2PUq4fj8jqUITqzL
-         6LF8iR3obASRjyImDU684t5ryspBeFCByDWf9ZXgjV4fNOvztM1lZmVKMtN5A0vds1rM
-         3+8/4YpxkJRhjWrEK5Fta/H1bPr5mT2RlzA1Gz5aRpCrv+Vo8D3HDDTeKiabluI46XxW
-         UdvESNkpbzmw7gVlDKZZjwiYyQ4bzfJwxhphQngC8/u6oXNAZ10LlMR/ZMqHIB6AzCuI
-         +94DXIroouULyDBBLOl3GUDgWv6R6F/3ARXCIKAiGA8XlGtxKMeGk1N06PSsvFDRVwV3
-         WwsA==
+        d=oss.qualcomm.com; s=google; t=1790161531; x=1790766331; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :references:cc:to:subject:from:user-agent:mime-version:date
+         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=JPqyhRbpOf17HmSBmiSMBHQE6Y0S0sQtUmXib+0l6+A=;
+        b=f37NjvnTuEebAGQEvNyVdI08JSm4uVzZpcAgYxPjOBGiFYHiW5Le8hfP0D3xNU8mOV
+         S1x5VAPdI5Mq39dHx8S/1wHCVKXozqCXZKyurjE3XVLGSkZroaeMYTnUskv22pWW60jT
+         W1w+fVPQNQs98UTjy4befa3kXpI9IANnFBHUL704p6QqCVxbRBQmit0owpxoafiPaX+O
+         NSq4cFkKjTE3pwqgM3kLBPsbrbV3viOndvwxD6s5O2E+wSBn9XofmcjipVRppXH9kfHs
+         8inM1uXOm3bpYQJNDQKBSAAZQ+o9czByRJi9Uk5ZKrhlcOImdDeWx7HV+1CdHvvD8fT9
+         srRA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790161516; x=1790766316;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=tP8weeZGltbzWUDFxZtPBBXtLhbxGEarqFnYs8T3UCw=;
-        b=McDQ3w5jg0gE6ZCrbBkq9VyN2H4pR8dEA8MhZIfogSo8GA2f06wK+LCsxMuBsSkChh
-         /JMfBzrR+/8WOgmoeRi9pMs4Ig2NToGDjm1nMf6npGcHLi732az3KyoDaz17yiIZ1T1G
-         lcK8KLPirqdwMDinEjHxyiruD+W7gA9B6T3cbTNi5o/XUSnm/5rymO+PJauNZs+C/Qww
-         5KEbALCzr0upeUX+FE9561lAsf2fkOYhazKjByZkU6ZgBamEG/3FuNcYU9axEhPz680z
-         NLSRNrcjFMPpGv2DYNB0ys+oXQ1P3EdcX6aLLW0uLrOxW7Syu2fQ8+RnkyRukuu2Jw6O
-         0Z3w==
-X-Gm-Message-State: AFuF++luN+5c3RSQ1u5rcj3Lktpzu/t7BLqRN7DVGwvGMUGN2GZjNHhD
-	S2VdYFXZOXjq91QQoOo+VmtdBtfSZL5t7uzQpo3W07VT5+zNtDITcjGb8KhXSwhrvcMoE6AZNJq
-	cUhZX/GKSyfYNJYLpRRdPkbpVtm52uguzLOHC143r1Uri5G0d9XOswocFnvGb6dcqhrcUYvkePe
-	fA
-X-Gm-Gg: AYBFou2xqwIwhMktwMUh6Vm9O4FNXL5M3HsEBrgXWjOMLA3ADRpRNVlCnVtegWxWmCo
-	MJCK7crAKki1e08Hm8cFA2rY52tdajKL4uylq6MlDA2wudGsWUHHGBqxq8XHPOCWPptLh1KSaaU
-	KaT01LK+KtzWiQXnAsico/ETYem9KXdLehyUpKCXEt429wXr+rTmie+tLHEjH68J3LZs6e9LkGB
-	f2upVmM9IUeK/kwBzdlwReFOGGotzDy5qiwb52iaSKT8MOm+dqRBxVtUzrjjl9H0sJq8mBnhdpH
-	xBtuK/BaCj218Wm6YcI+dcOmli4t2/iYhZZpUL/vGRZRcnWXLbdJGMzx+E0TcdeA6r+VBpe2eC0
-	uQ1lXfw5TzgTkel5z1+/fqlAjmaHK9A==
-X-Received: by 2002:a05:7300:8242:b0:33b:db21:9877 with SMTP id 5a478bee46e88-33e8d9cd464mr2014776eec.20.1790161516411;
-        Wed, 23 Sep 2026 04:05:16 -0700 (PDT)
-X-Received: by 2002:a05:7300:8242:b0:33b:db21:9877 with SMTP id 5a478bee46e88-33e8d9cd464mr2014744eec.20.1790161515889;
-        Wed, 23 Sep 2026 04:05:15 -0700 (PDT)
-Received: from hu-nihalkum-hyd.qualcomm.com ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-33e9625825asm5905377eec.13.2026.09.23.04.05.08
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 23 Sep 2026 04:05:14 -0700 (PDT)
-From: Nihal Kumar Gupta <nihal.gupta@oss.qualcomm.com>
-Date: Wed, 23 Sep 2026 16:32:46 +0530
-Subject: [PATCH RFC 15/15] arm64: defconfig: Enable S5KJN5 camera sensor
- for Qualcomm boards
+        d=1e100.net; s=20260707; t=1790161531; x=1790766331;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :references:cc:to:subject:from:user-agent:mime-version:date
+         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=JPqyhRbpOf17HmSBmiSMBHQE6Y0S0sQtUmXib+0l6+A=;
+        b=haxJuT60nlZdLwAXMWPXNIwmppp8wnZd7l3C1p46KeB7ERt3mpMwczx+GdIbKQZmPA
+         VffLNRMPkMLAHUne2cnrrKlFTTyZHSX8prhUI6SdlbkLGMxHD9xrBBkKSQWfoA5SANvX
+         nI/zYBuqm/pnTPSj8xycYIXjY0vsL6UCrZmTPG17Bv4EvrkVZS8ZnA7k5njfvqJMk6Dp
+         WjIRZQR/u26ZDl1XEo5MD6XJ0P5ya30zenIRt1QemCm51WBOolXCRuhX867V8LZMSwXm
+         6HpNPgMF3aED48RrGRr6l5Y+GabxmfTqKteNHMWVcMBJBDu0ZluVKDhHVaeudDK1v89b
+         M+sw==
+X-Gm-Message-State: AFuF++kRmvP+nFCrwgjCi3qhmbNqur/pZU15jrwm/FNhI69CqwK3VwDD
+	1FgINIi6i5B0H5/h6iKb3dgjkid7pTeKI893eJYMgatROPZyG15pD3+v47dAxhxqvWhQuEjGGpI
+	HT5iNXOuRtFO37nuRb2lMMwmweaCdES/jKuEGp/Qmwhq/OFCWrD4VGL0i2gXy9Yagmmc=
+X-Gm-Gg: AYBFou2MxoW78pgvNGYBkzpHOAiY/bICRfoyh7tsOMl1DrDfLY+EVm21gepaqnkfO9W
+	ixehoGQ+wMY86lQVWwROnlaGuMsnwRdl8KaiECtX/NHuJKbO3rRiuo0/iO+Jf9Z2fLwZASIflYY
+	93dRsoWPqj97nU0tfViFStoUQVoWTJrAeVi1Tt8VX0R/SbqSzmd6g7IKPF3JM+F+jaD3EJwEj2z
+	ZZMt7zrQaLF4WRHDFGdhO77M+AbCDo7nkDCyaLR26ivKxnbt4mXCTJ/l7zCMfLm2KVEBqnZPGy8
+	N4eaJMkq/MkOCMmdnxw+ZlAzPurCvjnlZRIY1AhqW/dpAOPIuJoR9GrmW9DdA5NMJd8zN5qjGDp
+	YoElpuI2bicJsUWvRKBzfYMr+hGB5UsHkwXonkPXE
+X-Received: by 2002:a05:7022:7f0b:b0:13f:c02f:60b8 with SMTP id a92af1059eb24-144f9166ab0mr2272822c88.6.1790161530746;
+        Wed, 23 Sep 2026 04:05:30 -0700 (PDT)
+X-Received: by 2002:a05:7022:7f0b:b0:13f:c02f:60b8 with SMTP id a92af1059eb24-144f9166ab0mr2272778c88.6.1790161529904;
+        Wed, 23 Sep 2026 04:05:29 -0700 (PDT)
+Received: from [10.218.33.235] ([202.46.22.19])
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-144f983d73fsm7741663c88.6.2026.09.23.04.05.23
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 23 Sep 2026 04:05:29 -0700 (PDT)
+Message-ID: <1188ca90-d3c9-40ce-ae8a-56262b4192d1@oss.qualcomm.com>
+Date: Wed, 23 Sep 2026 16:35:22 +0530
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260923-hawi-maili-camss-v1-15-cbbb42e534ef@oss.qualcomm.com>
-References: <20260923-hawi-maili-camss-v1-0-cbbb42e534ef@oss.qualcomm.com>
-In-Reply-To: <20260923-hawi-maili-camss-v1-0-cbbb42e534ef@oss.qualcomm.com>
-To: Loic Poulain <loic.poulain@oss.qualcomm.com>,
-        Robert Foss <rfoss@kernel.org>, Andi Shyti <andi.shyti@kernel.org>,
-        Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>, Bryan O'Donoghue <bod@kernel.org>,
-        Manivannan Sadhasivam <mani@kernel.org>,
-        Hangxiang Ma <hangxiang.ma@oss.qualcomm.com>,
-        Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Abel Vesa <abelvesa@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, linux-i2c@vger.kernel.org,
-        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-media@vger.kernel.org,
-        Suresh Vankadara <svankada@qti.qualcomm.com>,
-        Vikram Sharma <vikram.sharma@oss.qualcomm.com>,
-        Nihal Kumar Gupta <nihal.gupta@oss.qualcomm.com>
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1790161355; l=708;
- i=nihal.gupta@oss.qualcomm.com; s=20260608; h=from:subject:message-id;
- bh=bqn6l4iYdSOuw4aeXmyQs004lZO8LwBG9YK/8wnvAZU=;
- b=BtMxks8910ezL91AonRWICuUmO6BybjXRpW34O+cKL9X7/xTV0D9Ks9n9yUFV5WtXfam3m+fa
- Sjm5Agw9OTJA50XtKxXrPLrNgIhqSX5hLQSEmrOZCA4kQsXcoINDM7s
-X-Developer-Key: i=nihal.gupta@oss.qualcomm.com; a=ed25519;
- pk=DIbyFMNwqU/iMvU/0pCQp2wmRVgtHFBT3PcSu+A+Ncw=
-X-Proofpoint-GUID: e120sVEcqmdWrUBYN2YUFL138nCyjyFF
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTIzMDA0NCBTYWx0ZWRfX6fTclxOfMYfI
- ZVVeBwI0bF/gUWUvvivv1JKdCiaN07TqqmC5Ji7td31qld4U3mcxQWCJ7h1pVJjQGEhizpDYfRM
- LN+xdst5G9KhggSlVvRPYIQ/T6gy2SA=
-X-Authority-Analysis: v=2.4 cv=Zsh4uN7G c=1 sm=1 tr=0 ts=6ab3b26d cx=c_pps
- a=PfFC4Oe2JQzmKTvty2cRDw==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
+User-Agent: Mozilla Thunderbird
+From: Faruque Ansari <faruque.ansari@oss.qualcomm.com>
+Subject: Re: [PATCH v14 3/6] reboot: add parsable tokens for power state
+ change reasons
+To: Matti Vaittinen <mazziesaccount@gmail.com>,
+        Sebastian Reichel <sre@kernel.org>, Benson Leung <bleung@chromium.org>,
+        Tzung-Bi Shih <tzungbi@kernel.org>,
+        Guenter Roeck <groeck@chromium.org>,
+        Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>,
+        "Rafael J. Wysocki" <rafael@kernel.org>,
+        Daniel Lezcano <daniel.lezcano@kernel.org>,
+        Zhang Rui <rui.zhang@intel.com>, Lukasz Luba <lukasz.luba@arm.com>,
+        Oleksij Rempel <o.rempel@pengutronix.de>,
+        Pengutronix Kernel Team <kernel@pengutronix.de>
+Cc: linux-arm-msm@vger.kernel.org, linux-pm@vger.kernel.org,
+        linux-kernel@vger.kernel.org, chrome-platform@lists.linux.dev,
+        avaneesh.dwivedi@oss.qualcomm.com,
+        Umang Chheda <umang.chheda@oss.qualcomm.com>
+References: <20260921-pscrr-framework-v14-0-a16290003b7c@oss.qualcomm.com>
+ <20260921-pscrr-framework-v14-3-a16290003b7c@oss.qualcomm.com>
+ <f4d2e209-1c89-447a-a5d1-92696b51b614@gmail.com>
+Content-Language: en-US
+In-Reply-To: <f4d2e209-1c89-447a-a5d1-92696b51b614@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-GUID: h66CvO30EQC-3Zz6EZoBYA7wkyoTjuU9
+X-Proofpoint-ORIG-GUID: h66CvO30EQC-3Zz6EZoBYA7wkyoTjuU9
+X-Authority-Analysis: v=2.4 cv=WZuZ+EhX c=1 sm=1 tr=0 ts=6ab3b27b cx=c_pps
+ a=Uww141gWH0fZj/3QKPojxA==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
  a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22
- a=EUspDBNiAAAA:8 a=xpjZ0Ymiy3z0-qgt9i4A:9 a=QEXdDO2ut3YA:10
- a=6Ab_bkdmUrQuMsNx7PHu:22
-X-Proofpoint-ORIG-GUID: e120sVEcqmdWrUBYN2YUFL138nCyjyFF
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTIzMDA0NCBTYWx0ZWRfX/Tjne/o+vpkb
- W5uZDv0+Jb2Vi+y0wDQW5962YdUHJyZk4C/nwfp7DoSeSuRqBLEOWvX/IwUWqoZUclzuPF5MHCL
- rIBGl6LHwhH93qglucGIlrM6SSyQ3fuhO0SXkpQ7yzv1XRwbLZS9fXiQej3hueoB4lpxD1iziab
- oowVLwBA4iZZazROSvCJhg+s7ZhlJUZSx6BO0tsg7X6sLCQ/FFBW1ggBomNou+b1/lSj4xVogXG
- aW/4GIiasHn2GQposNrYcnJYn2uvLpkzeZqauX3Ae+qEt3m82fPi1lTmIN7+hJbvQPev0zFhc44
- Or08acX6K52tJDExwVD1j/gb+XevofVx5C2JyeHhTp3uyrqBf8pf5OBCYhd6tRYvu8MrxDzRRkZ
- /wfdEz6RKy+E4s5fP7E29VlX3wTStV/YgHmrKL0QZKeLioPJ5uEud6kwyxNuWOHNp9L8waMs4K0
- KUWyfquiYt+BRUsTRxg==
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
+ a=EUspDBNiAAAA:8 a=pGLkceISAAAA:8 a=6S1-GrwmiCmPnoYEXswA:9 a=3ZKOabzyN94A:10
+ a=QEXdDO2ut3YA:10 a=PxkB5W3o20Ba91AHUih5:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTIzMDA0NCBTYWx0ZWRfX9jGFXfa/ckC6
+ X790KIy12YVccJj99fmDxJOsWzVt/hFZD42dbcJox7DSFJWfAukKdGQpfDkdhhOegqhSAe0s4xu
+ FLF9P+lxKbKVLMAxFt7aDZKmfSlotBw=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTIzMDA0NCBTYWx0ZWRfX1VZ0y7hRdw6T
+ YPkAnl1PXjJ/jgjl5GfpLRmHr2axTsdihJdS55pbZq8iUZuLiBeKyO1pMZbqWglLkC0JZVVGzj4
+ qYufVBgaqQELzf5aMpIcNLta6xZF/2aOM0hiBIFtZFUrqCBTSfcujyue43rt7yWGhmMhfpSMhc7
+ rLp+R4B6wGvjj8tXTmgk+qWyzncVLOAkFxgbKUHMNJMRIxcO2PB/89skCd1wVvGJiHK/5NH5+2+
+ OTZvbnx5Ri5ZzW9ukLVuTRQrmjys2WwCSziHtLsC+E7FjPJ3VG86uYLE24ENEuj912hZI31thuK
+ IGq8sKT/ZRRpSpWTIYliwb/7+8R6N8jedtb1NbkcBiBB6HUMo9kKhdLjWIy9LYC+JzgUSoEm5V2
+ 3CpXeArchHRA0O2QAKwZsUebdhlqj/Ms1V6c28kwCNGmDxND6kIu5yTyKXE3d2n9Z3cb0s95lXk
+ icixJDcT8CT0C61QUJQ==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-09-23_04,2026-09-21_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 adultscore=0 clxscore=1015 priorityscore=1501 phishscore=0
- bulkscore=0 suspectscore=0 malwarescore=0 spamscore=0 lowpriorityscore=0
+ bulkscore=0 malwarescore=0 lowpriorityscore=0 adultscore=0 priorityscore=1501
+ suspectscore=0 clxscore=1015 impostorscore=0 phishscore=0 spamscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609230044
 
-Enable the S5KJN5 driver which is used for the camera sensor on the
-Qualcomm Hawi and Maili MTP boards.
+Hi Matti Vaittinen,
 
-Signed-off-by: Nihal Kumar Gupta <nihal.gupta@oss.qualcomm.com>
----
- arch/arm64/configs/defconfig | 1 +
- 1 file changed, 1 insertion(+)
+On 22-Sep-26 1:07 PM, Matti Vaittinen wrote:
+> On 21/09/2026 20:44, Faruque Ansari wrote:
+>> psc_reason_to_str() returns human-readable labels that contain 
+>> spaces
+>> (e.g. "over temperature"). Those are fine for logs but unusable as
+>> values in a space-separated sysfs list or as a write target.
+>>
+>> Extend the single reason descriptor table with a stable, space- 
+>> free
+>> token next to the existing label, and add psc_reason_to_token() 
+>> and
+>> psc_reason_from_token() so consumers can emit and parse reasons 
+>> without
+>> inventing their own string table.
+>>
+>> Co-developed-by: Oleksij Rempel <o.rempel@pengutronix.de>
+>> Signed-off-by: Oleksij Rempel <o.rempel@pengutronix.de>
+>> Signed-off-by: Faruque Ansari <faruque.ansari@oss.qualcomm.com>
+>>
+>> changes v12:
+>> - new patch
+>> ---
+>>   include/linux/reboot.h |  2 ++
+>>   kernel/reboot.c        | 77 +++++++++++++++++++++++++++++++++ 
+>> ++++++-----------
+>>   2 files changed, 63 insertions(+), 16 deletions(-)
+>>
+>> diff --git a/include/linux/reboot.h b/include/linux/reboot.h
+>> index 08a7549bbc40..4c5327dd7645 100644
+>> --- a/include/linux/reboot.h
+>> +++ b/include/linux/reboot.h
+>> @@ -244,6 +244,8 @@ enum psc_reason {
+>>   #define PSCR_MAX_REASON    (PSCR_REASON_COUNT - 1)
+>>   const char *psc_reason_to_str(enum psc_reason reason);
+>> +const char *psc_reason_to_token(enum psc_reason reason);
+>> +int psc_reason_from_token(const char *token, enum psc_reason 
+>> *reason);
+>>   /**
+>>    * enum hw_protection_action - Hardware protection action
+>> diff --git a/kernel/reboot.c b/kernel/reboot.c
+>> index d5a45db82c3d..e53fb31bad06 100644
+>> --- a/kernel/reboot.c
+>> +++ b/kernel/reboot.c
+>> @@ -1084,34 +1084,79 @@ void set_psc_reason(enum psc_reason 
+>> reason)
+>>   }
+>>   EXPORT_SYMBOL_GPL(set_psc_reason);
+>> -static const char * const pscr_reason_strs[] = {
+>> -    [PSCR_UNKNOWN]            = POWER_ON_REASON_UNKNOWN,
+>> -    [PSCR_UNDER_VOLTAGE]      = POWER_ON_REASON_BROWN_OUT,
+>> -    [PSCR_OVER_CURRENT]       = POWER_ON_REASON_OVER_CURRENT,
+>> -    [PSCR_REGULATOR_FAILURE]  = 
+>> POWER_ON_REASON_REGULATOR_FAILURE,
+>> -    [PSCR_OVER_TEMPERATURE]   = POWER_ON_REASON_OVER_TEMPERATURE,
+>> -    [PSCR_EC_PANIC]           = POWER_ON_REASON_EC_PANIC,
+>> +/**
+>> + * struct psc_reason_desc - Descriptor for a power state 
+>> change reason.
+>> + * @token: Stable, parsable identifier without spaces (e.g. 
+>> "over-temperature").
+>> + *       Suitable for use in sysfs values and as a user/kernel 
+>> contract.
+>> + * @label: Human-readable description (e.g. "over 
+>> temperature"), for logs.
+>> + */
+>> +struct psc_reason_desc {
+>> +    const char *token;
+>> +    const char *label;
+>> +};
+>> +
+>> +static const struct psc_reason_desc psc_reason_descs[] = {
+>> +    [PSCR_UNKNOWN]         = { "unknown",          
+>> POWER_ON_REASON_UNKNOWN },
+>> +    [PSCR_UNDER_VOLTAGE]     = { "under-voltage",      
+>> POWER_ON_REASON_BROWN_OUT },
+>> +    [PSCR_OVER_CURRENT]     = { "over-current",      
+>> POWER_ON_REASON_OVER_CURRENT },
+>> +    [PSCR_REGULATOR_FAILURE] = { "regulator-failure", 
+>> POWER_ON_REASON_REGULATOR_FAILURE },
+>> +    [PSCR_OVER_TEMPERATURE]     = { "over-temperature",  
+>> POWER_ON_REASON_OVER_TEMPERATURE },
+>> +    [PSCR_EC_PANIC]         = { "ec-panic",      
+>> POWER_ON_REASON_EC_PANIC },
+>>   };
+> 
+> nit:
+> Is there a reason for having the label as a define while token is 
+> a plain string? It may be just me, but I would have expected the 
+> userland contract to be defined in a header. (It may be just my 
+> false expectation though!).
 
-diff --git a/arch/arm64/configs/defconfig b/arch/arm64/configs/defconfig
-index 5217de386edc5e32289e453288db0bd9449d4c6f..fa35db683bb253e83af6bb25f702e3127761c086 100644
---- a/arch/arm64/configs/defconfig
-+++ b/arch/arm64/configs/defconfig
-@@ -960,6 +960,7 @@ CONFIG_VIDEO_IMX412=m
- CONFIG_VIDEO_OV5640=m
- CONFIG_VIDEO_OV5645=m
- CONFIG_VIDEO_S5KJN1=m
-+CONFIG_VIDEO_S5KJN5=m
- CONFIG_AUXDISPLAY=y
- CONFIG_SEG_LED_GPIO=m
- CONFIG_DRM=m
+Thanks for the review.
 
--- 
-2.34.1
+On token vs. label: I'd prefer to keep token as a plain literal 
+in reboot.c. Unlike label, which mirrors the shared 
+POWER_ON_REASON_* definitions and is used by code outside 
+reboot.c, token is introduced by this patch and is only produced 
+and consumed by psc_reason_to_token() and psc_reason_from_token() 
+within this file.
+Since there are no external users that need the string to be 
+shared, moving it to a header doesn't provide additional benefit.
+
+> 
+>>   /**
+>> - * psc_reason_to_str - Converts a power state change reason 
+>> enum to a string.
+>> - * @reason: The `psc_reason` enum value to be converted.
+>> - *
+>> - * This function provides a human-readable string 
+>> representation of the power
+>> - * state change reason, making it easier to interpret logs and 
+>> debug messages.
+>> + * psc_reason_to_str - Human-readable label for a power state 
+>> change reason.
+>> + * @reason: The `psc_reason` value to convert.
+>>    *
+>> - * Return:
+>> - * - A string corresponding to the given `psc_reason` value.
+>> - * - `"Invalid"` if the value is not recognized.
+>> + * Return: The label string, or "Invalid" if @reason is out of 
+>> range. For a
+>> + * stable, parsable form use psc_reason_to_token() instead.
+>>    */
+>>   const char *psc_reason_to_str(enum psc_reason reason)
+>>   {
+>>       if (reason < 0 || reason >= PSCR_REASON_COUNT)
+>>           return "Invalid";
+>> -    return pscr_reason_strs[reason];
+>> +    return psc_reason_descs[reason].label;
+> 
+> nit:
+> I would feel a tad safer if the psc_reason_descs[] was always 
+> guaranteed to be initialized up-to PSCR_REASON_COUNT. Having the 
+> enum and PSCR_REASON_COUNT defined in one place, and 
+> psc_reason_descs[] initialized here, adds a window for: "I added 
+> new enum value, forgot to update the psc_reason_descs[]". Can we 
+> add a NULL check or are we on a very performance critical path here?
+> 
+
+Thanks for pointing this out. I'll fix it in the next revision.
+
+>>   }
+>>   EXPORT_SYMBOL_GPL(psc_reason_to_str);
+>> +/**
+>> + * psc_reason_to_token - Stable, parsable token for a power 
+>> state change reason.
+>> + * @reason: The `psc_reason` value to convert.
+>> + *
+>> + * Return: The token string (no spaces), or "invalid" if 
+>> @reason is out of
+>> + * range. Round-trips with psc_reason_from_token().
+>> + */
+>> +const char *psc_reason_to_token(enum psc_reason reason)
+>> +{
+>> +    if (reason < 0 || reason >= PSCR_REASON_COUNT)
+>> +        return "invalid";
+>> +    return psc_reason_descs[reason].token;
+> 
+> Please, see my comment above.
+> 
+>> +}
+>> +EXPORT_SYMBOL_GPL(psc_reason_to_token);
+>> +
+>> +/**
+>> + * psc_reason_from_token - Parse a reason token into a 
+>> `psc_reason` value.
+>> + * @token: A token as returned by psc_reason_to_token(). A 
+>> trailing newline is
+>> + *       tolerated.
+>> + * @reason: Output; set on success.
+>> + *
+>> + * Return: 0 on success or -EINVAL if @token matches no known 
+>> reason.
+>> + */
+>> +int psc_reason_from_token(const char *token, enum psc_reason 
+>> *reason)
+>> +{
+>> +    int i;
+>> +
+>> +    for (i = 0; i < PSCR_REASON_COUNT; i++) {
+>> +        if (sysfs_streq(token, psc_reason_descs[i].token)) {
+> 
+> I suppose my comment applies here as well.
+> 
+>> +            *reason = i;
+>> +            return 0;
+>> +        }
+>> +    }
+>> +
+>> +    return -EINVAL;
+>> +}
+>> +EXPORT_SYMBOL_GPL(psc_reason_from_token);
+>> +
+>>   /**
+>>    * __hw_protection_trigger - Trigger an emergency system 
+>> shutdown or reboot
+>>    *
+> 
+> After all these years in the business - it's hard to be as 
+> confident as I used to. ;) So, I won't say [aloud] that my 
+> preferred way is the only correct way. Please weigh my comments 
+> and decide as you see best, this is "good enough" for me if you 
+> don't agree with my suggestions.
+
+I agree with your suggestion and will incorporate it in the next 
+version.
+
+Thanks,
+Faruque Ansari
+
+> 
+> Reviewed-by: Matti Vaittinen <mazziesaccount@gmail.com>
+> 
+> Yours,
+>    -- Matti
+> 
 
