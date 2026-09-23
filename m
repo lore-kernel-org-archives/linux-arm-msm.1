@@ -1,117 +1,430 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wm2-f13.google.com (mail-wm2-f13.google.com [74.125.225.141])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 50F3347A88C;
-	Wed, 23 Sep 2026 20:43:52 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E10C257C700
+	for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 20:58:24 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.225.141
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790196233; cv=none; b=QOJFdcaIc420DZ37P3Gi0CjbrfFH3mwp5pCEUqMBDXbAUBOAGLYePShIRm6KdBu0Nm17hrHa6FwORkOWX268VMmnBUP/uQbCjoJPoJkeGLEGrdHR6UqHEw/ADotaSSQ7Oj4DyH5wXt01gaA43eT4UlriemhfCFXzMUFmQofkfEs=
+	t=1790197108; cv=none; b=VQZbzpcFYYPDTCYdk/QiU6KYYXxkQRHk7YCkuU4dkyDjkvbNSZ+/aoYSAkCDg/cqvNDGlud7FBRq0oj5BKhEfcuHFWhiaCH3Kr1m/Q1tCk3PD2XQV7hW3eWzh6boZX5cbbphtLe6E0cRN8cHaeq15KTZ4ZwUBP0hPQUHOejsy+8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790196233; c=relaxed/simple;
-	bh=dtvFI/vQCtkkMDo2BD7xIr64VrQgs++rTHfumxPrzbc=;
-	h=Date:From:To:Cc:Subject:Message-ID:MIME-Version:Content-Type:
-	 Content-Disposition:In-Reply-To; b=J/z+aQBR824RSBjr6DlOwm8Kyk4MtozMiKfykboe45rkZmUi0quTH+i6gxk5WgARF9aRJEBDR5aSdyuwSYFplMOj3xoC2QOvnI992ZOZzE+As+5wu8j5EUVOIsJ3xWK4cZZgG5c/jW2+FkHYtUZo91WPzHU0qzbKWjvOvEoCH9Y=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=MshDnlrd; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1790197108; c=relaxed/simple;
+	bh=CnMF7v4cVD2NWW476ulng2IfM18YIgH5scwjktb+jms=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
+	 MIME-Version:Content-Type; b=QbMyW6J5EBopoft7Yxi8IJpVJq1FYmJa9Ya4wN354bk33vFGI/p2EWJgMXgSBbdsWtwb74qIxpNgjK/ejssfUgP+JzyUz1nTBw4IDlk4Jslzc1vtgrTc35TDZEbkWlhalHomsG6qyAWtDu+aNeVqerthGW6PmtX3e8HD0iJ3J98=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com; spf=pass smtp.mailfrom=baylibre.com; dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b=NvOuet18; arc=none smtp.client-ip=74.125.225.141
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=baylibre.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="MshDnlrd"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9DD851F000FF;
-	Wed, 23 Sep 2026 20:43:51 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1790196231;
-	bh=voiUb6QnCZbO98VVdjWK/+608qybEmwTk7Sv7qhmSoE=;
-	h=Date:From:To:Cc:Subject:In-Reply-To;
-	b=MshDnlrdTWGQZtR+3xeic5pWQYFP8zy6ssk4iMQFtHkWxGES/lLL+fbS2N0EhpT3R
-	 XFuhOyg/q097LKANGXCK+kRrnNUhbr132DSiLFQCbyT6UoON+BA15uaYsGeTb7rkYk
-	 /hdJ3ZhztA68pe3FAReG13dSaBaII4XsbUP0tl4bcIF3zlis/vtXYyhZtDnDyvkPhC
-	 JTikZY8rzm/IiMk2RqJnINSNw7eWxCPOlvq9LWvHwVpzWcHSsVSXwSL50lgHQI+OZw
-	 aTPds6jKb8I/aJAeOjj+omlIa6Oc/zsinMxRFONi7FqSavCE1dZal8zLdLKxpbAAjH
-	 MV3wEkFcqt5DQ==
-Date: Wed, 23 Sep 2026 15:43:50 -0500
-From: Bjorn Helgaas <helgaas@kernel.org>
-To: Lorenzo Bianconi <lorenzo.bianconi@oss.qualcomm.com>
-Cc: Bjorn Helgaas <bhelgaas@google.com>,
-	Lorenzo Pieralisi <lpieralisi@kernel.org>,
-	Krzysztof =?utf-8?Q?Wilczy=C5=84ski?= <kwilczynski@kernel.org>,
-	Manivannan Sadhasivam <mani@kernel.org>,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>,
-	Linus Walleij <linusw@kernel.org>,
-	Bartosz Golaszewski <brgl@kernel.org>,
-	Bjorn Andersson <andersson@kernel.org>,
-	Konrad Dybcio <konradybcio@kernel.org>,
-	Michael Walle <mwalle@kernel.org>, Alex Elder <elder@riscstar.com>,
-	Daniel Thompson <daniel@riscstar.com>,
-	Sushrut Shree Trivedi <sushrut.trivedi@oss.qualcomm.com>,
-	linux-pci@vger.kernel.org, devicetree@vger.kernel.org,
-	linux-gpio@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-	Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>,
-	Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>,
-	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
-	Abel Vesa <abel.vesa@oss.qualcomm.com>
-Subject: Re: [PATCH v5 0/5] PCI/pwrctrl: tc9563: Introduce support for
- embedded GPIO controller
-Message-ID: <20260923204350.GA1939701@bhelgaas>
+	dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b="NvOuet18"
+Received: by mail-wm2-f13.google.com with SMTP id 5b1f17b1804b1-49b912df756so10035625e9.3
+        for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 13:58:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=baylibre.com; s=google; t=1790197103; x=1790801903; darn=vger.kernel.org;
+        h=content-type:mime-version:message-id:date:references:in-reply-to
+         :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=Z4Mxoo0BjytpbcPdlZ9wg50FxPDTNNYaSFfcT2mT85c=;
+        b=NvOuet18ag6cuq2O65ZBbBn+J9q2Vihac91rIOl5eww0tiKs1X31bJH/enZC37IfjH
+         py7PIZWzNX8sXe27jWwcasWfW3qvz2dAYgqIh8xEimCXCRlRP3dQkB6Y+3GqNk4W3x1F
+         6+6rnw8AqVEfYGKLGLdf4PRLXn+Z5Rm4dQC5W79q9q9JAF1SdLhrHEIlcjOLcqAO/B0E
+         N5syi61UAc0HRm2zF9h5iPDP+vEVlmmMPFIgnuvEmWMPz8F5qG0TA30eTDv6Cid0Lafb
+         haoBH1+diXOmkjQvRv3DmhDSZYlQTrpUJ4W+4EgCfv8frTkvrmWt5+Y3zQHXzjQZYZv7
+         Rw5w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1790197103; x=1790801903;
+        h=content-type:mime-version:message-id:date:references:in-reply-to
+         :subject:cc:to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=Z4Mxoo0BjytpbcPdlZ9wg50FxPDTNNYaSFfcT2mT85c=;
+        b=OpUcL67aEr2maj//EGmofp6mhL18K9ptifWvTZJcuhZD06X0of5TpAtQta5+ut/22W
+         IVyA6kYo+dG/kJ5TAQj+iKE5a+G4T5Ps4ohAW+FuxvBiwDHTwdxBhMRQNgmTFGpZa9I6
+         K9d/zWbyqd1r1d1KI2BdSk1RyVuuR8l8Dj4YT75cbHbvkl4ep3R37n0MwXpgoPmp6Pvs
+         itWfb/9ZeS+qEs24TNPJ9WEKxAMLn9N/29k+lXN2M7NDa8n/CeswgRsYyo4wMqUqD7zA
+         WTCABjDTyAUdjDXILvXhoiMQCKJFhFZOKtPA7xCfGePSYzdTkhSS3CWuNQXjLd6KWN/G
+         6g6A==
+X-Forwarded-Encrypted: i=1; AKwUvBxoUvdsY1gq4L51D6OYdq70oMxx3nyv69QFgWFFw8iscrG4LO4ubf09YDn8mCLgy/TGpeFxayYdbcNea9c6@vger.kernel.org
+X-Gm-Message-State: AFuF++nrl7h55rCwyqjKnZ3R5fVBjBnkSspqsEeD//DTKCRL1ntI/idF
+	/yIyu1o2xXp91gj7dl/zCrb/8bdk7i/PcdpB3cialcl10uX+0Rf4RYYgRX/mSSLfcy0=
+X-Gm-Gg: AYBFou1vjs2w645AUzhMN9fAhZvvdEQzyveyecU6BiPErzZVgO8jKjOOeYmH22WryH7
+	l5rEhsq5F0feM1H8EsPZV+jgxMtv/gFbiiaYWbNrkGvLGMW2t8xR3PERzQJJGrlflCfWbWzoYOk
+	jontaAn6HqTsBQk6ddHAg388YRt2GVu+m1dAM8zzVR2vME+cLpQaCxEnp/HQB1kZgVJL9Ao90rj
+	1qNF6kAj8EfZ+azUp9A2f/Wh+JfqiTmpvAxcuM290uwGUjuyXmpyC5RPB/LpsiBY1aP2WB7bba4
+	O/cMdydZq64cMSLkRVAu41B4eY4V5G6jG0gmc7f9FBMrOcDC1HIHgKx0o6vAvfYrra+ExX+Edfu
+	iGdhgOT4mNVs9rsxz3t4LJGht7jystn53C5d1dvMvP+B6nQeORaBIJtDT8SKe4fvV0wkcAbRyEb
+	ajAjqf/n1b+qwrE7mhVSe2KsAhjDUWIhojQjo8hOjO6nzdHagsc4jVKWXKdyGG5P5WgZrh2HDPp
+	3ax7ciDEJ0bkW7SVtU=
+X-Received: by 2002:a05:600c:4689:b0:499:be2d:c290 with SMTP id 5b1f17b1804b1-49fe66b4001mr7015405e9.9.1790197103011;
+        Wed, 23 Sep 2026 13:58:23 -0700 (PDT)
+Received: from localhost (82-67-6-57.subs.proxad.net. [82.67.6.57])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-49fe5ded2b7sm12132335e9.10.2026.09.23.13.58.22
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 23 Sep 2026 13:58:22 -0700 (PDT)
+From: Jerome Brunet <jbrunet@baylibre.com>
+To: Alex Elder <elder@riscstar.com>, Brian Masney <bmasney@redhat.com>
+Cc: sboyd@kernel.org, bmasney+clk@redhat.com, jbrunet+clk@baylibre.com,
+ robh@kernel.org, krzk+dt@kernel.org, conor+dt@kernel.org, lee@kernel.org,
+ andersson@kernel.org, konradybcio@kernel.org, abelvesa@kernel.org,
+ kees@kernel.org, gustavoars@kernel.org, p.zabel@pengutronix.de,
+ daniel@riscstar.com, mohd.anwar@oss.qualcomm.com,
+ lorenzo.bianconi@oss.qualcomm.com, linux-clk@vger.kernel.org,
+ devicetree@vger.kernel.org, mfd@lists.linux.dev,
+ linux-arm-msm@vger.kernel.org, linux-hardening@vger.kernel.org,
+ linux-kernel@vger.kernel.org
+Subject: Re: [PATCH 3/4] clk: toshiba: introduce a TC9564 SoC clock and
+ reset driver
+In-Reply-To: <0785235b-de06-44d4-9068-ec706eeba848@riscstar.com>
+References: <20260918165234.687224-1-elder@riscstar.com>
+ <20260918165234.687224-4-elder@riscstar.com> <arG238GS8bMB6DkW@redhat.com>
+ <0785235b-de06-44d4-9068-ec706eeba848@riscstar.com>
+Date: Wed, 23 Sep 2026 22:58:21 +0200
+Message-ID: <1jcxu3adn6.fsf@starbuckisacylon.baylibre.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260909-pci-tc9563-aux-v5-0-c9b33f56c8d3@oss.qualcomm.com>
+Content-Type: text/plain
 
-On Wed, Sep 09, 2026 at 04:55:52PM +0200, Lorenzo Bianconi wrote:
-> The TC9563 embeds a GPIO controller currently used for per-port reset
-> signals.
-> Add a driver for the GPIO controller embedded in the Toshiba TC9563 PCIe
-> switch providing 37 GPIO lines. The controller is registered as an auxiliary
-> device by the TC9563 power controller driver and accessed through the same
-> i2c device.
-> Please note this series is based on pwrctrl upstream branch.
-> 
-> ---
-> Changes in v5:
-> - Fix GPIO controller binding for Toshiba TC9563 PCIe switch.
-> - Link to v4: https://lore.kernel.org/r/20260908-pci-tc9563-aux-v4-0-c7fc7778292b@oss.qualcomm.com
-> 
-> Changes in v4:
-> - Do not always use 0 as aux device id.
-> - Link to v3: https://lore.kernel.org/r/20260904-pci-tc9563-aux-v3-0-5b1449d62ba2@oss.qualcomm.com
-> 
-> Changes in v3:
-> - Describe gpio-controller support in TC9563 binding instead of defining
->   a gpio child node.
-> - Link to v2: https://lore.kernel.org/r/20260903-pci-tc9563-aux-v2-0-34c625b542c1@oss.qualcomm.com
-> 
-> Changes in v2:
-> - Fix PCI_PWRCTRL_TC9563 Kconfig dependency
-> - Move of_node refcounting management in tc9563_pwrctrl_adev_add().
-> - Link to v1: https://lore.kernel.org/r/20260901-pci-tc9563-aux-v1-0-dd9b80738e70@oss.qualcomm.com
-> 
-> ---
-> Alex Elder (1):
->       gpio: tc9563: Add support for the embedded GPIO controller
-> 
-> Lorenzo Bianconi (4):
->       dt-bindings: PCI: toshiba,tc9563: Document embedded GPIO controller
->       PCI/pwrctrl: tc9563: Add GPIO auxiliary device support
->       PCI/pwrctrl: tc9563: Switch per-port reset to GPIO descriptor API
->       arm64: dts: qcom: qcs6490-rb3gen2: Enable TC9563 embedded GPIO controller
-> 
->  .../devicetree/bindings/pci/toshiba,tc9563.yaml    |  14 +-
->  arch/arm64/boot/dts/qcom/qcs6490-rb3gen2.dts       |   7 +-
->  drivers/gpio/Kconfig                               |  11 ++
->  drivers/gpio/Makefile                              |   1 +
->  drivers/gpio/gpio-tc9563.c                         |  99 +++++++++++++
->  drivers/pci/pwrctrl/Kconfig                        |   1 +
->  drivers/pci/pwrctrl/pci-pwrctrl-tc9563.c           | 165 +++++++++++++++++++--
->  include/linux/soc/qcom/tc9563.h                    |  19 +++
->  8 files changed, 300 insertions(+), 17 deletions(-)
-> ---
-> base-commit: 028f86457e822ab9de5b0d6d23efddc1b8b54ae1
-> change-id: 20260731-pci-tc9563-aux-66a29d438f60
+On mar. 22 sept. 2026 at 08:33, Alex Elder <elder@riscstar.com> wrote:
 
-Applied on pci/pwrctrl for v7.4, thank you!
+> On 9/21/26 5:59 PM, Brian Masney wrote:
+>> Hi Alex,
+>> 
+>> On Fri, Sep 18, 2026 at 11:52:32AM -0500, Alex Elder wrote:
+>>> Define a new platform driver that manages clock and reset signals
+>>> within the TC9564 SoC.  There are 21 clocks, which can only be
+>>> enabled and disabled, as well as 13 reset signals.
+>>>
+>>> Two registers manage the state of the clocks and two others manage
+>>> the state of the resets.  The registers are accessed via a regmap
+>>> supplied by a system controller, which coordinates access to a
+>>> region of memory that will be shared with another driver.
+>>>
+>>> Access to the memory region is provided via a BAR on a PCIe endpoint
+>>> function embedded in the TC9564 SoC.  For that reason, neither the
+>>> PCIe clock nor PCIe reset can be manipulated by this driver (they
+>>> are assumed always on and deasserted, respectively).
+>>>
+>>> Similarly, control is not available for the I2C clock and reset,
+>>> because the PCIe subsystem on the TC9564 relies on I2C
+>>>
+>>> Co-developed-by: Daniel Thompson <daniel@riscstar.com>
+>>> Signed-off-by: Daniel Thompson <daniel@riscstar.com>
+>>> Signed-off-by: Alex Elder <elder@riscstar.com>
+>>> ---
+>>>   MAINTAINERS              |   1 +
+>>>   drivers/clk/Kconfig      |  11 ++
+>>>   drivers/clk/Makefile     |   1 +
+>>>   drivers/clk/clk-tc9564.c | 366 +++++++++++++++++++++++++++++++++++++++
+>>>   4 files changed, 379 insertions(+)
+>>>   create mode 100644 drivers/clk/clk-tc9564.c
+>>>
+>>> diff --git a/MAINTAINERS b/MAINTAINERS
+>>> index 66d0e7e65adcb..39346a5cd9a7f 100644
+>>> --- a/MAINTAINERS
+>>> +++ b/MAINTAINERS
+>>> @@ -27675,6 +27675,7 @@ M:	Alex Elder <elder@kernel.org>
+>>>   M:	Daniel Thompson <danielt@kernel.org>
+>>>   S:	Maintained
+>>>   F:	Documentation/devicetree/bindings/clock/toshiba,tc9564-clock.yaml
+>>> +F:	drivers/clk/clk-tc9564.c
+>>>   F:	include/dt-bindings/clock/toshiba,tc9564.h
+>>>   
+>>>   TOSHIBA TC9564 PCI DRIVER
+>>> diff --git a/drivers/clk/Kconfig b/drivers/clk/Kconfig
+>>> index f9592fd9ec2bb..50efa10d48450 100644
+>>> --- a/drivers/clk/Kconfig
+>>> +++ b/drivers/clk/Kconfig
+>>> @@ -292,6 +292,17 @@ config COMMON_CLK_S2MPS11
+>>>   	  clock. These multi-function devices have two (S2MPS14) or three
+>>>   	  (S2MPS11, S5M8767) fixed-rate oscillators, clocked at 32KHz each.
+>>>   
+>>> +config COMMON_CLK_TC9564
+>>> +	tristate "Toshiba TC9564 clock support"
+>>> +	depends on TC9564_PCI
+>> 
+>> select RESET_CONTROLLER
+>
+> Thank you.  The reset and clock drivers were previously separate
+> and the reset only became available if RESET_CONTROLLER was enabled.
+> Combining them means I need this.  I will add it.
+
+Why did you combine them ?
+
+it would be a lot better if the reset were handled in
+drivers/reset rather than in clock. There has already been some work to
+move reset from clock back to reset. This often involve auxiliary drivers.
+
+>
+> I also need to select MFD_SYSCON to get syscon_node_to_regmap()
+> (or perhaps something similar, depending on the answers to my
+> questions about the proper way to define the syscon).
+>> 
+>>> +	default m
+>> 
+>> default n
+>
+> This depends on TC9564_PCI, and if TC9564_PCI is enabled I would
+> like this to (automatically) be available (at least as a module).
+>
+> Why do you recommend "n"?
+>
+>>> +	help
+>>> +	  This enables support for the clock and reset controller embedded
+>>> +	  in the Toshiba TC9564 (and Qualcomm QPS615) SoC.  The state of
+>>> +	  clock and reset lines is controlled by MMIO to a region managed
+>>> +	  by a system controller; this ensures access to the region is
+>>> +	  coordinated between this and other drivers.
+>> 
+>> Rather than 'other drivers', outline specifically which other drivers.
+>
+> I was intentionally vague at this point because the one other driver
+> has not yet gone out for upstream review for this iteration of the
+> code.  But I do agree with you, so I'll change this to say:
+>
+>     ... between this and the XGMAC (stmmac) driver.
+>
+> Then it will be correct without modification once that driver goes
+> out for review.  Is that better, or do you suggest something else?
+>
+>>> +
+>>>   config CLK_TWL
+>>>   	tristate "Clock driver for the TWL PMIC family"
+>>>   	depends on TWL4030_CORE
+>>> diff --git a/drivers/clk/Makefile b/drivers/clk/Makefile
+>>> index b18af485d7f03..a98ea8ff92066 100644
+>>> --- a/drivers/clk/Makefile
+>>> +++ b/drivers/clk/Makefile
+>>> @@ -110,6 +110,7 @@ obj-$(CONFIG_COMMON_CLK_SI570)		+= clk-si570.o
+>>>   obj-$(CONFIG_COMMON_CLK_SP7021)		+= clk-sp7021.o
+>>>   obj-$(CONFIG_COMMON_CLK_STM32F)		+= clk-stm32f4.o
+>>>   obj-$(CONFIG_COMMON_CLK_STM32H7)	+= clk-stm32h7.o
+>>> +obj-$(CONFIG_COMMON_CLK_TC9564)		+= clk-tc9564.o
+>>>   obj-$(CONFIG_COMMON_CLK_TPS68470)      += clk-tps68470.o
+>>>   obj-$(CONFIG_CLK_TWL6040)		+= clk-twl6040.o
+>>>   obj-$(CONFIG_CLK_TWL)			+= clk-twl.o
+>>> diff --git a/drivers/clk/clk-tc9564.c b/drivers/clk/clk-tc9564.c
+>>> new file mode 100644
+>>> index 0000000000000..4f900bc8994a7
+>>> --- /dev/null
+>>> +++ b/drivers/clk/clk-tc9564.c
+>>> @@ -0,0 +1,366 @@
+>>> +// SPDX-License-Identifier: GPL-2.0-only
+>>> +
+>>> +/*
+>>> + * Copyright (C) 2026 by RISCstar Solutions Corporation.  All rights reserved.
+>>> + */
+>>> +
+>>> +#include <linux/bits.h>
+>>> +#include <linux/clk-provider.h>
+>>> +#include <linux/mfd/syscon.h>
+>>> +#include <linux/mod_devicetable.h>
+>> 
+>> Uwe already pointed out removing this.
+>
+> Yes, done.
+>
+>> 
+>>> +#include <linux/module.h>
+>>> +#include <linux/platform_device.h>
+>>> +#include <linux/regmap.h>
+>>> +#include <linux/reset-controller.h>
+>>> +
+>>> +#include <dt-bindings/clock/toshiba,tc9564.h>
+>>> +
+>>> +#define CLK_CTRL0_OFFSET	0x1004
+>>> +#define RST_CTRL0_OFFSET	0x1008
+>>> +#define CLK_CTRL1_OFFSET	0x100c
+>>> +#define RST_CTRL1_OFFSET	0x1010
+>>> +
+>>> +struct tc9564_clock_init {
+>>> +	const char *name;	/* NULL means unused entry */
+>>> +	u32 offset;
+>>> +	u32 mask;
+>>> +};
+>>> +
+>>> +struct tc9564_clock {
+>>> +	struct clk_hw hw;
+>>> +	u32 which;
+>>> +	u32 offset;		/* CLK_CTRL0_OFFSET or CLK_CTRL1_OFFSET */
+>>> +	u32 mask;		/* Zero means undefined clock */
+>>> +};
+>>> +
+>>> +struct tc9564_reset {
+>>> +	u32 offset;		/* RST_CTRL0_OFFSET or RST_CTRL1_OFFSET */
+>>> +	u32 mask;		/* Zero means undefined reset */
+>>> +};
+>>> +
+>>> +struct tc9564_clocks {
+>>> +	struct device *dev;
+>>> +	struct regmap *regmap;
+>>> +	struct reset_controller_dev rcdev;
+>>> +	size_t clock_count;
+>>> +	struct tc9564_clock clocks[] __counted_by(clock_count);
+>>> +};
+>>> +
+>>> +#define TC9564_CLOCK_INIT0(_name, _bit)	__TC9564_CLOCK_INIT(_name, 0, _bit)
+>>> +#define TC9564_CLOCK_INIT1(_name, _bit)	__TC9564_CLOCK_INIT(_name, 1, _bit)
+>>> +
+>>> +#define __TC9564_CLOCK_INIT(_name, _reg, _bit)		\
+>>> +	[CLOCK_##_name] = {				\
+>>> +		.name	= #_name,			\
+>>> +		.offset	= CLK_CTRL ## _reg ## _OFFSET,	\
+>>> +		.mask	= BIT(_bit),			\
+>>> +	}
+>>> +
+>>> +#define TC9564_RESET_INIT0(_name, _bit)	__TC9564_RESET_INIT(_name, 0, _bit)
+>>> +#define TC9564_RESET_INIT1(_name, _bit)	__TC9564_RESET_INIT(_name, 1, _bit)
+>>> +
+>>> +#define __TC9564_RESET_INIT(_name, _reg, _bit)		\
+>>> +	[RESET_##_name] = {				\
+>>> +		.offset	= RST_CTRL ## _reg ## _OFFSET,	\
+>>> +		.mask = BIT(_bit),			\
+>>> +	}
+>>> +
+>>> +static const struct tc9564_clock_init tc9564_clock_init[] = {
+>>> +	TC9564_CLOCK_INIT0(MCU, 0),
+>>> +	TC9564_CLOCK_INIT0(INTC, 4),
+>>> +	/* TC9564_CLOCK_INIT0(PCIE, 9), */
+>>> +	/* TC9564_CLOCK_INIT0(I2C, 12), */
+>> 
+>> A comment would be useful here to outline why these are commented out.
+>> Is the PCIE one comment out because of what's outlined in the commit
+>> message?
+>
+> Yes, that is why.  We are downstream of PCIe, and PCIe in this
+> case depends on I2C.  So we don't want to mess with these two
+> clocks or their reset counterparts.
+>
+> I only provide this for the benefit of documentation.  If someone
+> happens to see bit 9 set in this register, it means the PCIe clock
+> is enabled.
+>
+> Anyway, others have suggested simply removing these comments.
+> So I'll do what you suggest, but I'm interested to know whether
+> you would favor just deleting them instead.
+>> 
+>>> +	TC9564_CLOCK_INIT0(SRAM, 13),
+>>> +	TC9564_CLOCK_INIT0(UART, 16),
+>>> +	TC9564_CLOCK_INIT0(MSIGEN, 18),
+>>> +	TC9564_CLOCK_INIT0(PLL, 24),
+>>> +	TC9564_CLOCK_INIT0(SGMII, 25),
+>>> +	TC9564_CLOCK_INIT0(REFCLKO, 26),
+>
+> . . .
+>
+>>> +static const struct reset_control_ops tc9564_reset_control_ops = {
+>>> +	.assert		= tc9564_reset_assert,
+>>> +	.deassert	= tc9564_reset_deassert,
+>> 
+>> I'd rather not have the extra spaces because sometimes these get out of
+>> line with new members that need more space. Also tc9564_clk_ops above
+>> doesn't have the extra spaces.
+>
+> That's OK with me.  I normally align assignments like this for
+> readability, but it's obviously an arbitrary stylistic choice.
+> I'll just use one space, no alignment (just as the clk_ops do
+> above).  I'll do the same in the platform driver structure
+> assignments.
+>> 
+>>> +};
+>>> +
+>>> +static void tc9564_reset_assert_all(struct tc9564_clocks *clocks)
+>>> +{
+>>> +	for (u32 id = 0; id < TC9564_RESET_COUNT; id++)
+>>> +		if (tc9564_reset[id].mask)
+>>> +			tc9564_reset_manage(&clocks->rcdev, id, true);
+>>> +}
+>>> +
+>>> +static int tc9564_reset_init(struct tc9564_clocks *clocks)
+>>> +{
+>>> +	struct reset_controller_dev *rcdev = &clocks->rcdev;
+>>> +
+>>> +	rcdev->ops = &tc9564_reset_control_ops;
+>>> +	rcdev->owner = THIS_MODULE;
+>>> +	rcdev->dev = clocks->dev;
+>>> +	rcdev->of_node = dev_of_node(clocks->dev);
+>>> +	rcdev->nr_resets = TC9564_RESET_COUNT;
+>>> +
+>>> +	return devm_reset_controller_register(clocks->dev, rcdev);
+>>> +}
+>>> +
+>>> +static int tc9564_clk_probe(struct platform_device *pdev)
+>>> +{
+>>> +	struct device *dev = &pdev->dev;
+>>> +	struct tc9564_clocks *clocks;
+>>> +	int ret;
+>>> +
+>>> +	if (!dev_of_node(dev))
+>>> +		return dev_err_probe(dev, -EINVAL, "no devicetree node\n");
+>>> +
+>>> +	clocks = tc9564_clk_init(dev);
+>>> +	if (IS_ERR(clocks))
+>>> +		return dev_err_probe(dev, PTR_ERR(clocks),
+>>> +				     "failed to initialize clocks\n");
+>>> +
+>>> +	ret = tc9564_reset_init(clocks);
+>>> +	if (ret)
+>>> +		return dev_err_probe(dev, ret, "failed to initialize resets\n");
+>>> +
+>>> +	/* Force all resets to be initially asserted */
+>>> +	tc9564_reset_assert_all(clocks);
+>>> +
+>>> +	/* Force all clocks to be initially disabled */
+>>> +	tc9564_clock_disable_all(clocks);
+>>> +
+>>> +	platform_set_drvdata(pdev, clocks);
+>>> +
+>>> +	return 0;
+>>> +}
+>>> +
+>>> +static void tc9564_clk_remove(struct platform_device *pdev)
+>>> +{
+>>> +	struct tc9564_clocks *clocks = platform_get_drvdata(pdev);
+>>> +
+>>> +	/* Leave all resets to be deasserted when done */
+>>> +	tc9564_reset_assert_all(clocks);
+>> 
+>> The comment says deasserted but the code calls assert_all.
+>
+> Oops.  Will fix.  Thank you very much for your review Brian.
+>
+> 					-Alex
+>
+>> 
+>> Brian
+>> 
+>> 
+>>> +
+>>> +	/* Leave all clocks disabled when done */
+>>> +	tc9564_clock_disable_all(clocks);
+>>> +}
+>>> +
+>>> +static const struct of_device_id tc9564_clk_ids[] = {
+>>> +	{ .compatible = "toshiba,tc9564-clock" },
+>>> +	{ },
+>>> +};
+>>> +MODULE_DEVICE_TABLE(of, tc9564_clk_ids);
+>>> +
+>>> +static struct platform_driver tc9564_clk_driver = {
+>>> +	.probe	= tc9564_clk_probe,
+>>> +	.remove	= tc9564_clk_remove,
+>>> +	.driver	= {
+>>> +		.name		= KBUILD_MODNAME,
+>>> +		.of_match_table = tc9564_clk_ids,
+>>> +		.probe_type	= PROBE_PREFER_ASYNCHRONOUS,
+>>> +	},
+>>> +};
+>>> +module_platform_driver(tc9564_clk_driver);
+>>> +
+>>> +MODULE_DESCRIPTION("Toshiba TC9564 Clock and Reset Driver");
+>>> +MODULE_LICENSE("GPL");
+>>> -- 
+>>> 2.53.0
+>>>
+>> 
+>
+
+-- 
+Jerome
