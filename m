@@ -1,87 +1,86 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A796149B21D
-	for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 11:18:23 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F04B9494835
+	for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 11:19:37 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790162305; cv=none; b=DGVJyT8e0X1YvD9+Q6HkmKAFGvatT3Wm7eT5Vma0CJRKTcWWvObD5dyEK49UqdBKAo0aDl2nawUfRVl+1CnVulsydNi72K9kwq9MGZAqSAKiZ5X9xmKJ5SvETTPhaLzncIPTpv/HMJBTqZGOAWB4EWnRWVUrH/glHPE3/FaukjM=
+	t=1790162379; cv=none; b=OPR56OJRbh8XexTbAexBUfRkcwlvdl+fcGWqPhxS46SeJHi/wxyniJDCsPgi1nQQIvKG4J8mK8GJXhCNYGEJUDTiPHE36J0obi9VBFOYn5Vs2uVzQ/a4ggz0lbsdVZ656po1IKGGxJgL10+ScbakgWpoYxwLHoff6XGRF/qo17k=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790162305; c=relaxed/simple;
-	bh=maTSaclQ16IhwN9YZzXL2nmAdX43DWT4iQJpYDEEsAY=;
+	s=arc-20240116; t=1790162379; c=relaxed/simple;
+	bh=e3RItfsQ0FfH0wPgzNNhnyjLb0vKv35XtQWm7X0h0+0=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=Hc46FBKELmjLpzv3lB9qSCV3LZEp8vybhNIAIQp7WqhtghPvXReRT5uKvJlt9LgtcbEPsSshEtmmEDaY0w0RMdzBLpe1Jz6Ql96dtYEiucfv18+genwgHBqS1KFJc49NXW5IgCQSdIKqjXUJUVvXKTe+pZsiJad/hhatjIdWJ/0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=n6t8J6vi; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=Y654ajXt; arc=none smtp.client-ip=205.220.168.131
+	 In-Reply-To:Content-Type; b=tlg4PdPebEXak/heAM5zwl7ko5N42NJGaWIqvXyneFG/q5jElXioYsdFX38k6gZmzQtIhTWG0S/JftkgZRLwuGpFpZYxduKapODP6gj9njcgJj88u6o3Xv+O7poclRJOFSpaeHfRJq2vlCDI1zeb50M35CuWy2eLOnF2CPUvX0g=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=XmKMDuOE; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=SHMZ4fSn; arc=none smtp.client-ip=205.220.180.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="n6t8J6vi";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Y654ajXt"
-Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68NA2kb43087121
-	for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 11:18:23 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="XmKMDuOE";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="SHMZ4fSn"
+Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68NA3BQh2262031
+	for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 11:19:37 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	Y5HvJEnsTYcbFbHF9VSG+7AqvWxgJBjz8BE23CP1doU=; b=n6t8J6viQBHuQx0Z
-	pC5UuZ0f2h1zGjtmqozBoFR6EJGtFqrxr3pReq3t6R9bTgqDm8QOUBbEXArJVI8z
-	3g9ZjCaLkUdpMLuAzbd4Zl7ugBHCJncyI/aAVZeZ2PfnTvwZU4n8L6Sh58dzcFXS
-	nf43IpxmpoMhPFDIC1nrz/q1+iRnsq7VLOLW1cQlThBagT9QvgXs1Pjg0/XCXHeb
-	ayz6Jiacpkgs7NlXwhxujVcp/RY9MCSBbqgTTDVZ85CA9NfkWQnmcWfuf7GluAL0
-	HjxKQNAMi3jJTca0PKPPYEPaF2dy/c/ejtA1eLtMH+F+5o99aazUgvX4UOTwsxI9
-	1B/LKA==
+	R5RKExqH8rkcjkWpfakw6QznRsAOVeNLpg7vGSvB+OI=; b=XmKMDuOE6bXqez7z
+	tbM6dnwVKDwMq5/ZYdxVL3+CLxnqvIdHTtV3FlY2/hq4TTgETuTt+FekgtNmdkXB
+	3vcV8sipk+j2AZ10ZAj2Zl/ja7XaR0WALyIZM97cQfXyRbJuLj/IKUgX5eZRnrd7
+	va9wEE3SWLXdURejmEPlt0qUh+1cqSxEQAtz/gMJ0yqYWGGZ5Z6vTyQ2oC4x1+wJ
+	5O+NHWmiJD22LhpIWePwptLJ3XhGKFUL1vkTfH2Uy1TynoYzOD9wvrRURa2lZh6o
+	stlWKhILWwNSnc6VgB/tkDj2Orsf3K+7RW4HYgnHyLThw3b6jHWbz/Kx4f9GhOFE
+	TQy94w==
 Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com [209.85.222.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gvbwm8gv1-1
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4guy2c3qpk-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 11:18:22 +0000 (GMT)
-Received: by mail-qk1-f198.google.com with SMTP id af79cd13be357-939f4002c1aso15405585a.1
-        for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 04:18:22 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 11:19:36 +0000 (GMT)
+Received: by mail-qk1-f198.google.com with SMTP id af79cd13be357-92eebb130dcso25531685a.1
+        for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 04:19:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1790162302; x=1790767102; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1790162376; x=1790767176; darn=vger.kernel.org;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=Y5HvJEnsTYcbFbHF9VSG+7AqvWxgJBjz8BE23CP1doU=;
-        b=Y654ajXtU1bZPfrfGglGWIWB+Rw2o8c5SNcnNITXW9YN6nag99Th22pIQ/qYcK0goA
-         hQDwvIXawqBCaEb9COCwM9pLiyLtZhf30UYU4sXknOWQvI3FOYxQI31Mvf/ElQltBUo/
-         6QNSi9XVlYQVMfHtwIUOiwPNkHGNmCHiRpbaTLpePz3+Go8/g+UpcElFsduKrq6/Wd5Y
-         vGljh/5yhWxK+eqMeFs1w9nrNe4dwPiNlYretKbOqZZWmungGcNdnaBk5cDi1QnjNLP0
-         Uk8wpNGzBZTcaDkZrJ7LuXa4PCD1gHDIbYjuTc6klXatdVeuFwBP/BXu/m2DuVh/qw4b
-         zr8A==
+        bh=R5RKExqH8rkcjkWpfakw6QznRsAOVeNLpg7vGSvB+OI=;
+        b=SHMZ4fSnN7yr1n9AplPVqd+bmStrwT3g4vEHDd326qIRDFsdCNgN+8OHuMJvIGB4K2
+         8Dxc3Mk5ZkMBk1Ff9YdmIsyhigGMAsjI38E2028oiQh4lrBFkCaueM+J5fe1D+P+Itv5
+         jwGrgUl3FXwvvEdxKZ9PMqgI9gBunAqkokRJypkCwqtzc9lESTrwXgHiA6uIe0U5ZGP2
+         Lu91o9mD7JI+V4m8Cy55YgXYOE7HQcruSnEBttIemZD00UBJs4Ety3Ya8IJUSxouNv1J
+         nJ/+astVMdh7iyFEUBOWgTYx6P3ofLBLfWsEo7JT5z3Q2/9qUKQ9FtH71WChssVnHXr0
+         p+Yg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790162302; x=1790767102;
+        d=1e100.net; s=20260707; t=1790162376; x=1790767176;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=Y5HvJEnsTYcbFbHF9VSG+7AqvWxgJBjz8BE23CP1doU=;
-        b=0Iyn2t44awFZK8udA4CKYyupcOdEttITF5uvU2pPFfM2SueR3v5Vr/gmYPo6NVi/fb
-         iSqXW8KGZtwNSDHtInwNgzWs3fyWE71RrjRKEvGbLNV5HlFzFPYlXtnI552/FN96fCWO
-         HvbClg21/9Wp0DHQpYL0aAmoTNESTk8go+x6xTt/t5AyPmbFQslqU5Ve3xOnjelhM3VN
-         P/VvY2uzY1Ms2toRAnTbqiw046VjFB0K9lPo7GthFFV134xJUaAtUsv6oQYaK0JhIjbk
-         apt5GuUsRgulnp982vmpbP5gj0lsHW9FzcSCFl9GCG8tscJYvgx5JQi6PIE9Ahr3e9kW
-         fGAQ==
-X-Gm-Message-State: AFuF++kjvgr3s5YP54trRL8/g+j20r2p+tDZrY69OclTT65fqIHu0ioU
-	MAjzVa9k50hjrMjRmT9C6jTAayh4opztu8OeVnhv2LTD/NLUR4qT80UpfuU2PDnpatuzUFnNcYu
-	rI7ezL9rzH2JWSRa0kl/Q5d0SeK5x6oPe1BJMC7tyIh7gxK0ZfL2xuvx2oVAwphWLFJYBoSNtKc
-	sw
-X-Gm-Gg: AYBFou3naXXmsp3oOat75VJafkxS6fbvUXFU0oY/PTPQSW7i2v2WiQP4K364O7Ec2XY
-	NlZOIb8CyiqOSfL9x4srBlW54CYLL1C4zjWmrel0B//9wm6hX9xk60hI8T25qOJstK9mAN5mF1m
-	zPfo2qBRu4Zu6zsUjIOLOL+THg4xVLMduVuB/jpVIYqwxXByqMj+78rlAu8vFJ+/oT36q5Cwx8I
-	5q+wIjvqTSOHuppyNJa2v1AeKS30Wz1Pb5QSCIzKjeIpSBZtENvXA//SX5etdgdAcf+rD6whapP
-	5tjuM4S5bS5npSU9gJY1ILxUmQ258qfiBkWZQnFYM7qi5/095MIbdapI4r+ebb4IEue4qhgMXE1
-	HuYYBJH0bTzqj0AEJLz88LsXE5MCv0o53
-X-Received: by 2002:a05:620a:438c:b0:93a:19cc:107a with SMTP id af79cd13be357-93c250972e1mr336214485a.1.1790162301572;
-        Wed, 23 Sep 2026 04:18:21 -0700 (PDT)
-X-Received: by 2002:a05:620a:438c:b0:93a:19cc:107a with SMTP id af79cd13be357-93c250972e1mr336210185a.1.1790162301150;
-        Wed, 23 Sep 2026 04:18:21 -0700 (PDT)
+        bh=R5RKExqH8rkcjkWpfakw6QznRsAOVeNLpg7vGSvB+OI=;
+        b=HOqp43zbgjrNPFu+Ogso+59nQjpmiUHAjFUGZ1Rvkip2mLr60NDlWFf3111Eb5DZ2H
+         r2PTD3C9AoY4A3eWR37s3gTV42cmLziAt6JIRqIShuSh5fCE1Hc3gupD+xufqmj6gVEr
+         G2VRT7HL34FPOTUlQHWDtHBafJdmUeGYJf35UpdojnfP6NgE2yl948RFzSGHJ+9p/ZJt
+         DSEP9C+kMRuGiclQ2UHQtv05I8lwk702eva6PqNIXBYJ7l4f2PAPlOSKZEPLQjhOm/Vt
+         HruMN73dzLf87KsKikp6q2FvZcqtOO19vfpbynpjseSEmtpWB0XS+dBTe+LF9+xgNhAd
+         K1Bg==
+X-Gm-Message-State: AFuF++lQIBmtmaJqOstHng6y2hMIXqUeT7wd5xQQXrN9wTxk5pob1a3w
+	tWyL+6dC3/uvor95X/qNXpN3lwfcaQaeVHvM8Iv81GRpoVNTSQ7VELAoK4Qni7Idrp8Iy/vOx3Y
+	DHfEIGtaXf4fsvJKzNFK5bUhGjm83cf49p48PGfYOVFA0hjTrY5fNfSnjSzN5TSTUVICd
+X-Gm-Gg: AYBFou3LFfp2VjZd7hErXxvWN0t44Kzws9DXSe3HTZeScGNQ1w8rXOo4EPybdVs6Roj
+	ZZX486JmerVrL6ox0kn2Nm2sDD5UxTmezt8MoZlte/VPeQj0DaOnlNdQ11sK80a0EZ4J+VRihrq
+	u8iogbxxoBRH7NRrBDO8o6liM/FQLfgD8R+h+8zvOWM5WLopGqyZof0yCusvDDTdl9Kz9CeXGCk
+	UXU2OcoIVDhFGVwzIYNIKEIjctG8gHuHsJ5GsOgWC9CmiWdx9zlNMx1mcCiuebcuEidoB6YmWc2
+	ps72y2Xk7bhM1fKNX3S9m/GMzPZ0+kPAWo5KalRsCQgtgynPSKtnrXg1oXQK2cjtklsclIpYRGl
+	zM2UodWDeZn7bNfErpeQoXQ==
+X-Received: by 2002:a05:620a:4547:b0:93c:203b:3e8d with SMTP id af79cd13be357-93c252f9ba7mr335754285a.6.1790162376233;
+        Wed, 23 Sep 2026 04:19:36 -0700 (PDT)
+X-Received: by 2002:a05:620a:4547:b0:93c:203b:3e8d with SMTP id af79cd13be357-93c252f9ba7mr335750985a.6.1790162375775;
+        Wed, 23 Sep 2026 04:19:35 -0700 (PDT)
 Received: from [192.168.202.12] ([178.235.128.140])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c2aae6e3677sm100600266b.62.2026.09.23.04.18.18
+        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-6aab386e7bcsm1458942a12.10.2026.09.23.04.19.32
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 23 Sep 2026 04:18:20 -0700 (PDT)
-Message-ID: <75d01a06-b943-4dc8-85e7-0eb578bd0e27@oss.qualcomm.com>
-Date: Wed, 23 Sep 2026 13:18:17 +0200
+        Wed, 23 Sep 2026 04:19:34 -0700 (PDT)
+Message-ID: <cfbee1b9-4b13-4a7a-b1ba-0fc666b149a5@oss.qualcomm.com>
+Date: Wed, 23 Sep 2026 13:19:31 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -89,7 +88,7 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 01/15] drm/msm/a6xx: Honor perfmode_bw threshold on A8x
+Subject: Re: [PATCH 06/15] drm/msm/a6xx: Clamp MX dependency vote
 To: Akhil P Oommen <akhilpo@oss.qualcomm.com>,
         Rob Clark <robin.clark@oss.qualcomm.com>, Sean Paul <sean@poorly.run>,
         Konrad Dybcio <konradybcio@kernel.org>,
@@ -109,45 +108,45 @@ Cc: linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org,
         freedreno@lists.freedesktop.org, linux-kernel@vger.kernel.org,
         devicetree@vger.kernel.org
 References: <20260923-hawi-gpu-v1-0-0c3c79a1a470@oss.qualcomm.com>
- <20260923-hawi-gpu-v1-1-0c3c79a1a470@oss.qualcomm.com>
+ <20260923-hawi-gpu-v1-6-0c3c79a1a470@oss.qualcomm.com>
 Content-Language: en-US
 From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-In-Reply-To: <20260923-hawi-gpu-v1-1-0c3c79a1a470@oss.qualcomm.com>
+In-Reply-To: <20260923-hawi-gpu-v1-6-0c3c79a1a470@oss.qualcomm.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTIzMDA0NCBTYWx0ZWRfX/+Oq58+AMbNk
- jMTPuSwzx5Ph5m7HrmHUnMF5cwhxW3vgRRdsOkd8eyWT/z/fxMdB97w/BSJttRzUaY3BCTorR74
- A3m8iBBac0lNgFj6h87Ufxtdz/ff+jc=
-X-Authority-Analysis: v=2.4 cv=R/6WitRX c=1 sm=1 tr=0 ts=6ab3b57e cx=c_pps
+X-Proofpoint-GUID: oTUWyYxdM2FQKQf4u8YyPdYQF7g38eFF
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTIzMDA0NSBTYWx0ZWRfXzz3bnc30MQ7l
+ vOdGVLquKBdGOiBDxbe5eNcYZ5BVf+VjWrj1/cnDqG3SwgHMfdVm5FPE64x2g9qTGAetfVB3sUS
+ uDbidJT23u235qtnpp/W0BSLmaX6x/4=
+X-Authority-Analysis: v=2.4 cv=Zsh4uN7G c=1 sm=1 tr=0 ts=6ab3b5c8 cx=c_pps
  a=qKBjSQ1v91RyAK45QCPf5w==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
  a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22
- a=EUspDBNiAAAA:8 a=YJv5aonfaXPMDC4gfg4A:9 a=QEXdDO2ut3YA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22
+ a=EUspDBNiAAAA:8 a=2GDL5SuO4PwTqS1bYXoA:9 a=QEXdDO2ut3YA:10
  a=NFOGd7dJGGMPyQGDc5-O:22
-X-Proofpoint-GUID: -Sm1HtG2EIVDMdULpjdE5i1p59rQLkks
-X-Proofpoint-ORIG-GUID: -Sm1HtG2EIVDMdULpjdE5i1p59rQLkks
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTIzMDA0NCBTYWx0ZWRfXx53QD5u9KVxp
- t6+zJCrNZ+cnAXOfHyyEjTtAPlaF1twWzKaVGPfRClDUqsuzQmp6MlRcTEndnQTI4MOjVuFlv8y
- /OolZsfv2QzShf9smqaaogOd+k8TB9hH7ztngHvjEqksHW3gwh5Y1xDfE4DqLNTCE4FLGln3zAl
- RCbDOKHaDZlKva7yV84kPzrKpr/xY3MOz0ettGQRxQbkdCpiejtKPoh8IObIJP6301GjGi7j9GU
- 2nz43uxZHfOzx1x5/bs5CncYOPB7iZHwEYpEtUdPA2x4gWISSMLFVaW9I3vtVD9XQRGA8V4iazJ
- xaOEbxsClJ3gAXLrL2tYm+VLLRdQhKT/OKwba0IyarTn0TVYi0XqGpF8vQBsGMw+wCKuX65e/jZ
- LxaqiEcvrFtKRyPkRo7KdZd+7QR12xxbnz1jpdYVdht2mfk8oeo2vS7EpugfarCVYw2Ik8j4Gre
- hKrxTX/ICwuyUv5NAxg==
+X-Proofpoint-ORIG-GUID: oTUWyYxdM2FQKQf4u8YyPdYQF7g38eFF
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTIzMDA0NSBTYWx0ZWRfX4zdWG1O8V3JG
+ RdpSSjU3Dkee8nb3DZSZ4/XwASnHXzHKvR9etKTtyeWCvig89tx+h94w/YKAqFshe//vS7J/HyB
+ ceIv5GzWce3aMiWQNZvn8qjaQq2ZIvrlBSD8iZvIIHOPEv7lAQtfMm2MdMwKpigSMbCREXg1PpP
+ C+naKcEjQO2aPOw96hq0aB4AXAdoM/vBP7NpYOmrxcx+BFkYIYBDXd5JM3GVgMim/HUIti5N506
+ qUk7HMUShnGWLkg6uimgFs9mJQAB4v5qBDT+gcdRlMBgmSXV6Fqn+NAflzDoEEAknA3bZYhvXwM
+ DOBM9xTsqKEvQAV3EU82+gUc2Qp1nRsB8k06hHLLO9Xgi643fCheCgi4HDCuewG7RaHa9tK0xjn
+ nySGvKw0FCQ7BNE64BoGts1o2WDvkSOsm+yBIKAn4/PA4k4Gd1a5GHSR9dr4VQETZ7fmzaL18eE
+ wThYYWhgg2RzqWMDApA==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-09-23_04,2026-09-21_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- bulkscore=0 clxscore=1015 malwarescore=0 impostorscore=0 priorityscore=1501
- lowpriorityscore=0 spamscore=0 suspectscore=0 phishscore=0 adultscore=0
+ impostorscore=0 adultscore=0 clxscore=1015 priorityscore=1501 phishscore=0
+ bulkscore=0 suspectscore=0 malwarescore=0 spamscore=0 lowpriorityscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609230044
+ reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609230045
 
 On 9/23/26 12:25 PM, Akhil P Oommen wrote:
-> Instead of voting ACV for all bw corners for A8x GPU, restrict it to BW
-> votes above the perfmode_bw threshold, similar to the A7x GPUs.
+> In some chipsets like Hawi, the GPU arc level can exceed the highest
+> available MX corner. In that case, use the highest non-zero MX vote instead
+> of failing GMU initialization.
 > 
-> Fixes: 288a93200892 ("drm/msm/adreno: Introduce A8x GPU Support")
 > Signed-off-by: Akhil P Oommen <akhilpo@oss.qualcomm.com>
 > ---
 
