@@ -1,119 +1,160 @@
-Received: from mail-wr2-f12.google.com (mail-wr2-f12.google.com [74.125.225.76])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8947C40F759
-	for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 22:48:48 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.225.76
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 46BB4408626;
+	Wed, 23 Sep 2026 22:49:20 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790203730; cv=none; b=XNKltQzFCsOyFapjwwUZQ8LRUxmDy8IE2EuZjKlsYKwpOT7MDwtQ/kFKbDy4S3lNv/jBqX/2dNCwHJBdb8HTWHQUJpSwpksgSQVpCvN0oILKhsXFthJToUyi3U5PXpfLVSvr1ro9XiTrdbKhQaOH4ppbh43pBlFAmZI1bM4SEvg=
+	t=1790203762; cv=none; b=kh/al7/IfwwykZxVIRTOGmrhwOyHxnWHFSPStjT9KG/oDeUM2z+HGPh2YW41w+rLGJPvIwh51B8Y7Z7gUNvox4rfSU2h+fFprS12sNWQExkCsBgt4/6s5SZqozj80D5W5X94kMai8XMGL3fL98wzs+QeGq+L5ano4xUUYvrLKmE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790203730; c=relaxed/simple;
-	bh=6Nk6QdgYo95ZGM13mOWSLDDAGGI4lM1uB9pdRziF/P0=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=H3+LdKppSm8sTqOemNLb9XBjrbAhXdNRoIa1WbthlH5KApbEi0zvGYq3JT+Ut5QnNei5tXOdvX//Z2pcUlR6vYLCdse2nXqeFul8c0R2wBa2j1IkvfE5RfNBziF1Nc7UxpozwaIpZgO9/vLsJAhKftpwNoT4Jc4v9bEwibnpAPE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=mWp+f43c; arc=none smtp.client-ip=74.125.225.76
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	s=arc-20240116; t=1790203762; c=relaxed/simple;
+	bh=mkzGYuT6ylnxihsZut8fAYz9U/x/x50/sKPJVuRvxVo=;
+	h=Subject:From:To:Cc:Date:Message-ID:In-Reply-To:References:
+	 Content-Type:MIME-Version; b=J8LMpo37+hKIzrkC0xnN91uGt3SOnXOcIcAD51BXgKHKlkigrW9CPVLBCc5gBZKXcE6XScNHrmn58SpZSPB9AMpPtkRpPbsoaT1fKMMTu5yd0WowGiYa9QZGg5BzW1/XI1SDvTh9i2b6TRmLoJd8NBQQ9Q+nlxRd41t3ug915sk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=SERLnCPA; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="mWp+f43c"
-Received: by mail-wr2-f12.google.com with SMTP id ffacd0b85a97d-485b1d2874aso1175993f8f.1
-        for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 15:48:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1790203727; x=1790808527; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:reply-to:message-id:subject:cc:to:from:date:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=0bBcYE+SQRKaZ3abUhRDaAJqY0dLEhd7Hp6zqwKtzbA=;
-        b=mWp+f43caqaOgJy3Me2J0R5EcGIgkYvvgdxqxJwqQgvEnPSsWuOVAfdZh7h/nFxWCY
-         yEOJagKxXKUAejeaebs48LLa68oxSQttr4TTbdpfiz6CM/wW7fcVZWTzK2SASHE6ZgsF
-         72UmOgwOUXKlaAvips1w8LHSxSfHrknpGZCT7oBsexbtjTegcyzc9EovYlSvDQB5JDLe
-         4w7k8DB1sBkl1vpJUBFO82hB01mx6GFRiM9HfvU4EqRQnLKhxGGTYoyU/sXPyzRNjyPP
-         3Igbr61kGGAPFun6Lq7g9v9K5GxVr3krukblaK/vIbK/HsW39KOOMNC+npWdYJlNCuYP
-         NMYg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790203727; x=1790808527;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:reply-to:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=0bBcYE+SQRKaZ3abUhRDaAJqY0dLEhd7Hp6zqwKtzbA=;
-        b=WLQ1dvCO99fRuYbGL4JLsfFWKkbuG22v6GhhWcoWiGsBcZOw+9DZVhQR6cY3IpChwz
-         nH0lWTJUgTbGrUdRBvWywA0nygn8dHDtucI4q7gy9BtdEAUyzhoAyvJgJ3q6u2biXCBr
-         ROm5wiUulRR9WQ9X8/JzBuDcxNkeW8SZ7k+k6qnogiiCFXa//FNjvJdtxGPl2iMfhc6A
-         RN9YYOhCxFTpRPgD8Qwa6sbHdGt5qpHf8836uzYH2o3joMkCXAHfxPIXflerObyvsguI
-         1F7bg5KRWQNpqVWGO+WlWI7noqFpjfNbmiJd3/xNX+EiYKokSDIJOXDWA9oNHtAbIv3r
-         +2AA==
-X-Forwarded-Encrypted: i=1; AKwUvBxHTVH48haebAhlc7hLL8gPglVZ9/dkPrYF7ULw7l+JT2hppG0rvq6sm6flR/P/9aKRKVulkGUJbkJz++xG@vger.kernel.org
-X-Gm-Message-State: AFuF++lpnya+fxtuQ1/bewswjimxnCILmVTdY8cazph0ChCvHRMXddCC
-	/bj/uAJf6G2P82PAhwXYP8mR3kJ9fDOkCxmmOayb5MK8j0dFyePQKvxZ
-X-Gm-Gg: AYBFou20j8MdrPToKyvljIYaj7y8KECfBZvlX2NoBI++pOMabBUyTDnMVgzvl17oPqo
-	ZPMPTvzJOYJCrUXGLCVvFa4epqNfvVV+PxOmUP4Bd1xZSChferT1080nbP0Ma5a5Ll33c4Z0tS6
-	7+WejihMFY4Gtu18YU+9ZJiJGJY/A5MVuwHUXWdvtcMPPh+jbfcqsfUHNemQ9uClOcZLchwEVd4
-	E+loMVM+iIcJDmRMDO0H6+9e0QKwuJB8ord33dtaUqbel+/2xGOcw1c/U5fy07poGYB5D+dex2g
-	IfuNpHUK4WCDqTiHq9iBIIFqERr3yuD8Ty0rCc7aLBARUbAnyZxUo5tZzxbQEGHYMM/UUnycLzN
-	OYVa4++/C1oxnOa6Nlp+AKc88uDQUvhAq9tXQbKt/h50sc+aGG60wLd6zuOT5WJNDoFsr2xr3Fs
-	hkSikfxZ8OhAn/mgbBkwUVOfhvbfUT9qdkhsW2j8xMji+bqfNM5bvAidZJrLNvURBVPeKNQikWr
-	P+a1yvWA4oVZuLJVAYhh7ggw6rIFIzEGeo=
-X-Received: by 2002:a5d:6f1c:0:b0:487:27f9:83b with SMTP id ffacd0b85a97d-48871718605mr854372f8f.48.1790203726768;
-        Wed, 23 Sep 2026 15:48:46 -0700 (PDT)
-Received: from pevik (gw1.ms-free.net. [185.243.124.10])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4886877a2a5sm10789083f8f.26.2026.09.23.15.48.45
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 23 Sep 2026 15:48:46 -0700 (PDT)
-Date: Thu, 24 Sep 2026 00:48:43 +0200
-From: Petr Vorel <petr.vorel@gmail.com>
-To: devnull+david.ixit.cz@kernel.org
-Cc: abelvesa@kernel.org, airlied@gmail.com, andersson@kernel.org,
-	conor+dt@kernel.org, david@ixit.cz, devicetree@vger.kernel.org,
-	dri-devel@lists.freedesktop.org, dsankouski@gmail.com,
-	jesszhan0024@gmail.com, konradybcio@kernel.org, krzk+dt@kernel.org,
-	linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
-	maarten.lankhorst@linux.intel.com, mripard@kernel.org,
-	neil.armstrong@linaro.org, phone-devel@vger.kernel.org,
-	robh@kernel.org, simona@ffwll.ch, tzimmermann@suse.de
-Subject: Re: [PATCH 09/11] arm64: dts: qcom: sdm845-samsung-starqltechn:
- Update
-Message-ID: <20260923224843.GA185053@pevik>
-Reply-To: Petr Vorel <petr.vorel@gmail.com>
-References: <20260920-crosshatch-panel-v1-9-de6e9512da96@ixit.cz>
- <20260923222521.188197-1-petr.vorel@gmail.com>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="SERLnCPA"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 403A51F00893;
+	Wed, 23 Sep 2026 22:49:20 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1790203760;
+	bh=HC8VbvOSIKaqyHmIyF7SUUi2UNRhEpY8FwJ4bl0y2Cc=;
+	h=Subject:From:To:Cc:Date:In-Reply-To:References;
+	b=SERLnCPApAGnok1T5LPMo3KsD4xA9m4p3jiA1Ueuf2Z+doplz6X5eYQhaj2A5pFNZ
+	 +5pwlvAr3HTPYDeB9V1SzZHNc0eRw5G4x3qcSILItxoF/o7CZxZRJut8E7jtW7pE7f
+	 BO1MMqz1ADGaWcvdnMecajuqmY9j8sqXa5oaub25Z0aXvRAdtuCrH9N81pQCO0iC6w
+	 IfefcYTnGt0tBvPWg8HzN12nVw6hCdtgqT0j08HeDaz7ZPtYXA5K1hNbgTfmPc51tE
+	 nVHtJ/XKayQcEWru/M4wig/gINa9DGdzR0L8woWQ1FEpNsY/YGw5H/PfRtjdjYAHmT
+	 RNNXu87JKdy/Q==
+Subject: Re: [PATCH] net: qrtr: fix kernel stack infoleak in qrtr_getname()
+ and qrtr_ioctl()
+From: netdev-bot+sashiko@kernel.org
+To: benquike@gmail.com
+Cc: mani@kernel.org, davem@davemloft.net, edumazet@google.com, kuba@kernel.org,
+ pabeni@redhat.com, horms@kernel.org, linux-arm-msm@vger.kernel.org,
+ netdev@vger.kernel.org, linux-kernel@vger.kernel.org
+Date: Wed, 23 Sep 2026 22:49:19 +0000
+Message-ID: <179020375975.2160803.687922264808260369@kernel.org>
+In-Reply-To: <20260919212849.3240271-1-benquike@gmail.com>
+References: <20260919212849.3240271-1-benquike@gmail.com>
+X-sashiko-severity: Medium
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260923222521.188197-1-petr.vorel@gmail.com>
 
-...
-> > +++ b/arch/arm64/boot/dts/qcom/sdm845-samsung-starqltechn.dts
-> > @@ -262,23 +262,23 @@ &mdss {
-> >  	status = "okay";
-> >  };
+Thank you for your contribution! Sashiko AI review found 1 potential
+issue(s) to consider.
 
-> >  &mdss_dsi0 {
-> >  	vdda-supply = <&vreg_l26a_1p2>;
-> >  	status = "okay";
+Critical: 0 · High: 0 · Medium: 1 · Low: 0
 
-> >  	panel@0 {
-> > -		compatible = "samsung,s6e3ha8";
-> > +		compatible = "samsung,s6e3ha8-amb577px01";
+If you believe none of the issues are legitimate, please reply to each
+issue of Medium severity or higher and explain why the AI is wrong.
+If any of them are legitimate and you plan to respin, please let patchwork
+know by including "pw-bot: cr" as a separate line at the end of your reply
+(one such reply per series is enough).
 
-> I guess that keeping the original "samsung,s6e3ha8" would cause that ABI break ABI, right?
+- [Medium] Commit message factually misdescribes the bug being fixed in
+  `qrtr_ioctl()` (SIOCGIFADDR) and mislabels the memory class of the…
 
-> compatible = "samsung,s6e3ha8-amb577px01", "samsung,s6e3ha8";
+--
 
-OK, I now see the deprecation in 4th patch.
+net: qrtr: fix kernel stack infoleak in qrtr_getname() and qrtr_ioctl()
 
-{ .compatible = "samsung,s6e3ha8" }, /* deprecated */
+This zero-initializes the on-stack sockaddr_qrtr in qrtr_getname() and
+clears ifr.ifr_addr in the SIOCGIFADDR path of qrtr_ioctl(), then copies
+the individual struct members instead of doing aggregate struct
+assignments, so the 2-byte padding hole in struct sockaddr_qrtr is no
+longer copied out to userspace.
 
-Kind regards,
-Petr
+> diff --git a/net/qrtr/af_qrtr.c b/net/qrtr/af_qrtr.c
+> index 78347c937af7..ee3cc2c32b73 100644
+> --- a/net/qrtr/af_qrtr.c
+> +++ b/net/qrtr/af_qrtr.c
 
-> Anyway, LGTM.
-> Reviewed-by: Petr Vorel <petr.vorel@gmail.com>
+[ ... ]
 
-> Kind regards,
-> Petr
+> @@ -1233,8 +1235,11 @@ static int qrtr_ioctl(struct socket *sock, unsigned int cmd, unsigned long arg)
+>  			break;
+>  		}
+>  
+> +		memset(&ifr.ifr_addr, 0, sizeof(ifr.ifr_addr));
+>  		sq = (struct sockaddr_qrtr *)&ifr.ifr_addr;
+> -		*sq = ipc->us;
+> +		sq->sq_family = ipc->us.sq_family;
+> +		sq->sq_node = ipc->us.sq_node;
+> +		sq->sq_port = ipc->us.sq_port;
+>  		if (put_user_ifreq(&ifr, argp)) {
+>  			rc = -EFAULT;
+>  			break;
+
+[Severity: Medium]
+Is the description of the qrtr_ioctl() part of this fix accurate?  The
+changelog says:
+
+    Similarly, in qrtr_ioctl() (`SIOCGIFADDR`), writing the 12-byte
+    `struct sockaddr_qrtr` into the 16-byte `ifr.ifr_addr` without
+    clearing `ifr.ifr_addr` leaves both the 2-byte padding hole and the
+    trailing 4 bytes of `ifr.ifr_addr` uninitialized before
+    `put_user_ifreq()`.
+
+The SIOCGIFADDR case reaches the address store only after a successful
+get_user_ifreq(&ifr, NULL, argp), and that helper initializes the whole
+on-stack struct ifreq on both paths:
+
+net/socket.c:get_user_ifreq() {
+	if (in_compat_syscall()) {
+		struct compat_ifreq *ifr32 = (struct compat_ifreq *)ifr;
+
+		memset(ifr, 0, sizeof(*ifr));
+		if (copy_from_user(ifr32, arg, sizeof(*ifr32)))
+			return -EFAULT;
+	...
+	if (copy_from_user(ifr, arg, sizeof(*ifr)))
+		return -EFAULT;
+	...
+}
+
+So wouldn't the trailing 4 bytes of ifr_addr hold the caller's own data
+in the native case and zeros in the compat case, rather than
+uninitialized kernel data?  In that reading the new memset() makes the
+returned tail deterministic but does not close a disclosure there.
+
+Along the same lines, does the subject's "kernel stack infoleak" match
+the ioctl path?  The only bytes with kernel-side content there are the
+two padding bytes that the old aggregate copy *sq = ipc->us propagated,
+and ipc->us lives in the qrtr_sock allocated by sk_alloc()/
+sk_prot_alloc(), which does not zero the private area unless
+want_init_on_alloc() is true:
+
+net/core/sock.c:sk_prot_alloc() {
+	...
+		sk = kmem_cache_alloc(slab, priority & ~__GFP_ZERO);
+		if (!sk)
+			return sk;
+		if (want_init_on_alloc(priority))
+			sk_prot_clear_nulls(sk, prot->obj_size);
+	...
+}
+
+ipc->us is only ever assigned member-wise, in qrtr_create():
+
+	ipc->us.sq_family = AF_QIPCRTR;
+	ipc->us.sq_node = qrtr_local_nid;
+	ipc->us.sq_port = 0;
+
+and in __qrtr_bind(), so the padding hole carries stale slab bytes, not
+stack bytes.
+
+Could the subject and body be narrowed to say that the getname() change
+fixes the stack padding disclosure, and that the ioctl change sanitizes
+a 2-byte slab-sourced padding hole in the SIOCGIFADDR output?  As
+written, the stable backport rationale rests on claims that the cited
+code does not support.
+
+-- 
+Sashiko AI review · https://netdev-ai.bots.linux.dev/sashiko/#/patchset/20260919212849.3240271-1-benquike%40gmail.com
