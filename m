@@ -1,222 +1,93 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D24FF5372F8
-	for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 14:03:23 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 53C515304DD;
+	Wed, 23 Sep 2026 14:25:31 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790172205; cv=none; b=rmo33Of50OLqGKS+ngqrr6/zG0y/IDuQuDCumGjMd1roiDrpkiXuh0QjRy5JZYZ8Sz+HScsWc7mPda3cuCEShl2dmA6IAM3H+6yEnxXr+gg6jLrPQ9uZo4pBVtzebMOVkr1ymrVEtqlcoimqOH+0bLKTX/4+CZeEPpWfLEAubDc=
+	t=1790173532; cv=none; b=P/vD3cjEjvN5l7r5D/RdxG0BaVE8XPWeY6kSkarx0Fr8iber+NatkTNV+qXWfb/TzRAOK0aqLo/T0fRCt8hYgI97+12I6cfDk2UOEWSUm8u0qzKh2PubArl9l8gtfR9JTjAh8QLcqitTBtpdMX5RvOeFvzfuhFwZ3+YWDh15Cpc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790172205; c=relaxed/simple;
-	bh=GSQllyyTxbdIQGfOjUU0cPCdBxDt67B5m+P3z57pWoI=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=b3t2XK49Jerg7a6UPOWD7+OvcUdg8O9oQRCx04hkWu75N3K17Xha7/+rU+QMkDrXa0o/eTpS1NP3701CeqvshtjPV2QjfOs4E9BVKcRGW07/Zo2PJJ68TfwROauLZ1fkWIU0lUtkgFFJYpjOK9KFr3tVudJLv6ECWVlOKE0cfmw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=O1YyJPzH; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=dSTaZ701; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1790173532; c=relaxed/simple;
+	bh=/WNOjdQID9kTMoLh/d9iUfAVyC0VUflgmgHiLGHVyuk=;
+	h=Date:From:To:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=FJ5SXK7bggzNt3x67ouDAY4gYQfqtbZIddjl8igOB9O8IziKxnf6970IlKEfk3nxwqwXFZZS5XsYhhrXg6WctNGOhclGgEakXX+wy8WYjG4Ely+j2dEBMiBZTw0RXgdLbwl7W+cOaiXAgJM8LTVemY/rua5LkJJ2nQQouSsKR1g=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=dAhw3uKN; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="O1YyJPzH";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="dSTaZ701"
-Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68NDLuv63842796
-	for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 14:03:22 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-type:date:from:in-reply-to:message-id:mime-version
-	:references:subject:to; s=qcppdkim1; bh=zLOh9Kb/p8pBZNay6kbh5A1C
-	JFhDDZYL59AUqu/b/gA=; b=O1YyJPzH+HP6pm6E8uwn/gVhKqzy4B81mCuRhqh5
-	braQwxSA4e5IDI8LmTnnWPCPAgaZ3nT/khK5bIezROpCUttIkxkpfQxWe2OC7cUB
-	857enoXG8KAe9nStaZdZhtAsXAnQjItJRac79cfVh16Ws2OHRIAbHQnd4yLuVpPi
-	IEpiGX7fxA505iwdpi4FCuq4VBxePNn2uX1N87b772VCVtZUCzkzeRu3eSO4QFkU
-	rzPGEwNtmWQqjnT/HkxI8tbKg/xOfIb6bW7VXePlslG9EwwLqYcuMYeRxR7qMVSe
-	Puxyne0tqSKUI4J/0PED4k1WRvtKAF8J+va8dwEw2G+D6w==
-Received: from mail-pf1-f198.google.com (mail-pf1-f198.google.com [209.85.210.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gvfkbg5wp-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 14:03:22 +0000 (GMT)
-Received: by mail-pf1-f198.google.com with SMTP id d2e1a72fcca58-868db1b2c64so806988b3a.3
-        for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 07:03:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1790172201; x=1790777001; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=zLOh9Kb/p8pBZNay6kbh5A1CJFhDDZYL59AUqu/b/gA=;
-        b=dSTaZ701kIQl/gJ/oMC33lxJBvx8DIvf2tdfbJa7mHA/c8rDIzZ5BVn1/IndjvvCnK
-         +R+qTsO0jrw+coo7FdrSK5duZwng2HPwW9B71adugPYZRlzjUqD4cZ6tvK3sOUnaOovM
-         duFv0UlRQMZOVaxytpE7VwD0HlTSV084g/tMINxOSJi7dES/dtQShsiZ/qzMHZatGzTc
-         D7l5Kz5Y5bMjBHFcap8zvtbYsMV3YULeme2Crwmzyi/h2MXd24/kbtRe5FGraHa1WQof
-         zJaOXowNY1hQF+ia9T1e/+eFEt2qySg3SFZfBq2LH90pYt9QR+LkrAu0fo00rTXQZu56
-         Ib2w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790172201; x=1790777001;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=zLOh9Kb/p8pBZNay6kbh5A1CJFhDDZYL59AUqu/b/gA=;
-        b=efEWkG7GvchkG38a98sOjY1N6D+yY9rl5aLPdCqRmxGOnVMnPuhzkPA9eE7odcj5VQ
-         /hYb1iBW118Rto3EkVYpYarYzDY+HtC5CXek8aXH0BNTlgWq7jmteD/7bO8JzyxAGzH2
-         2oJdKfgyisdlt/uQ7QhCKB6tuWx+9mbiEoTOhkvnbPoctZ9/JvVlhuWOfAHaM+67rVrB
-         6AmgTB1s2rmDQcwoLy2ilBXftMsB1KpzMg3UQOrchWmn1tBM9K2MtTLhwbUT22e2QQhS
-         WRdj4diTpIhxNW/fDpZp5uc2jFKbi4F2bQLSr3VbM5CqlARjkU3NKOQbX1IMAHOPifU+
-         oWUQ==
-X-Forwarded-Encrypted: i=1; AKwUvByo556DN5mTs5/5+vtxORn4l7xPBokBBCamSDVqgi+Uh9raWfkXG6y8pgG541lLBcTb73tMCYC+gyGrAA0p@vger.kernel.org
-X-Gm-Message-State: AFuF++mhhcXzB7MAGqv4Jf0PUWyGwiEKa57hWQ/Z+/4RKlLlzXo1cpdO
-	hzQXsgchVmitDi8bldwhuKAECGaI9mV9nltJ4ODkgFlsYZT8G6+6ruVsQ7DvByODALdxclow+6+
-	hynhMbQu9e0iFtWlK8VXQPuIn2K9XrrLWimOpcm/sY7Nup+I2WU/zsYdrHrdJRw+PwUOt
-X-Gm-Gg: AYBFou1SFqJvYOzk1KYGUk+FpPkQIB0BsmhTFIhXEjMxyfWkzzL2ajpcMWxp2bcPC9T
-	EbVQ7QorYQCZAnC8dBCOTqlx871mVKMT68+hrm47uXVV05toqY5WaGVFvnoof9/ccFewNUhfK/T
-	OvKadfpMh8X+8/nP1fPEHc6iqVAtQUhTJd7/1NdidL2f6bGCjjoRy1S3NF1Ns0ohHkEIkUtTdGe
-	R5oN9+5HM6YO+aH525XoGB9Gt6PSPQIBOanrY4K4ALQq3mBr0KWMbHiOoyCdUyZtSO5flJCxZ69
-	A+Cxs4Dzv14rIiw9VOU2jn5ve72fqu1mUR9cf70j5tMPulAJqaP6OwiOoEQNcP8Rx3Db8L9C2y+
-	gsTCg1Z6i9u2T
-X-Received: by 2002:a05:6a00:4c1a:b0:873:e3b4:5d4 with SMTP id d2e1a72fcca58-87d18d6d036mr2571714b3a.2.1790172201337;
-        Wed, 23 Sep 2026 07:03:21 -0700 (PDT)
-X-Received: by 2002:a05:6a00:4c1a:b0:873:e3b4:5d4 with SMTP id d2e1a72fcca58-87d18d6d036mr2571644b3a.2.1790172200645;
-        Wed, 23 Sep 2026 07:03:20 -0700 (PDT)
-Received: from oss.qualcomm.com ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-87d1afb99f0sm1366950b3a.6.2026.09.23.07.03.11
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 23 Sep 2026 07:03:20 -0700 (PDT)
-Date: Wed, 23 Sep 2026 19:33:09 +0530
-From: Mohd Ayaan Anwar <mohd.anwar@oss.qualcomm.com>
-To: Coia Prant <coiaprant@gmail.com>
-Cc: Maxime Chevallier <maxime.chevallier@bootlin.com>,
-        Andrew Lunn <andrew+netdev@lunn.ch>,
-        "David S. Miller" <davem@davemloft.net>,
-        Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>,
-        Paolo Abeni <pabeni@redhat.com>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>,
-        Serge Semin <fancer.lancer@gmail.com>, Andrew Lunn <andrew@lunn.ch>,
-        Heiner Kallweit <hkallweit1@gmail.com>,
-        Russell King <linux@armlinux.org.uk>,
-        Richard Cochran <richardcochran@gmail.com>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Alexandre Torgue <alexandre.torgue@foss.st.com>,
-        Giuseppe Cavallaro <peppe.cavallaro@st.com>,
-        Jose Abreu <joabreu@synopsys.com>,
-        Maxime Coquelin <mcoquelin.stm32@gmail.com>,
-        Jan Petrous <jan.petrous@oss.nxp.com>,
-        "Jose.Abreu@synopsys.com" <Jose.Abreu@synopsys.com>,
-        netdev@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-        linux-stm32@st-md-mailman.stormreply.com,
-        linux-arm-kernel@lists.infradead.org,
-        Lorenzo Bianconi <lorenzo.bianconi@oss.qualcomm.com>,
-        Shawn Guo <shengchao.guo@oss.qualcomm.com>,
-        Zhangfei Gao <zhangfei.gao@oss.qualcomm.com>,
-        Jitendra Vegiraju <jitendra.vegiraju@broadcom.com>,
-        Alex Elder <elder@riscstar.com>, Daniel Thompson <daniel@riscstar.com>
-Subject: Re: [PATCH RFC net-next 0/9] net: introduce Qualcomm XPCS support
- and add Nord Ethernet plumbing
-Message-ID: <arPcHSGFLrxXFEyC@oss.qualcomm.com>
-References: <20260923-qcom_xpcs_nord_emac-v1-0-4b1c682af70f@oss.qualcomm.com>
- <5135e15d-b6ac-476c-9a7d-b7d64e4eed5c@bootlin.com>
- <arOtU15iv5CWPUEu@oss.qualcomm.com>
- <CALj3r0gAaQ_CoS5_9Mmf5HY+Fu5_e74fbb+r0LstafMhagHx6A@mail.gmail.com>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="dAhw3uKN"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id DEE9B1F00893;
+	Wed, 23 Sep 2026 14:25:28 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1790173531;
+	bh=5VAvvdSrfVlwZUnwPbQ2SBZe8CezYqvP4YPopdOx8gA=;
+	h=Date:From:To:Subject:References:In-Reply-To;
+	b=dAhw3uKNokZzF7PVP6DNUNhPRP5TgMtmjXCfzaRzvIzZ/EDlA/W7aYqvR3pVbx51M
+	 NFWU/fzMQA+/kDLKggSDlYpg/eGdjYT8bSwMitZbxPrEJzFARFUJs5d5lRIMhJf2RS
+	 dkLcb6CjZeK2zfPt+LauRcs5GoQc+2pw8j/DI3ioC+YQ1/CkoDJh+ibFLQ2SqB2fic
+	 h+GsO2K1S6gD/DdLcFxC+ckgYGh/EQTN9j17KpGVvoaY5trEg22bHIoOe+J6PyZe7H
+	 A7VFWTB2a4uJBjxHQOHfzVvk02jgddwRsupnBSWsYPGhVeTiTRbpZehRXy08hkmmQ1
+	 IoipRCEq09Y8Q==
+Date: Wed, 23 Sep 2026 15:25:26 +0100
+From: Sudeep Holla <sudeep.holla@kernel.org>
+To: Hans de Goede <johannes.goede@oss.qualcomm.com>,
+	Uwe =?iso-8859-1?Q?Kleine-K=F6nig?= <u.kleine-koenig@baylibre.com>,
+	Bjorn Andersson <andersson@kernel.org>,
+	Sudeep Holla <sudeep.holla@kernel.org>,
+	Cristian Marussi <cristian.marussi@arm.com>,
+	Daniel Lezcano <daniel.lezcano@oss.qualcomm.com>,
+	Bjorn Andersson <bjorn.andersson@oss.qualcomm.com>,
+	Frank.Li@kernel.org, arm-scmi@vger.kernel.org,
+	linux-arm-kernel@lists.infradead.org, linux-arm-msm@vger.kernel.org,
+	imx@lists.linux.dev, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v7 1/2] module: add SCMI device table alias support
+Message-ID: <20260923-groovy-airborne-rook-e1efc6@sudeepholla>
+References: <20260918092951.5656-1-johannes.goede@oss.qualcomm.com>
+ <20260918092951.5656-2-johannes.goede@oss.qualcomm.com>
+ <arFKVhlgJge5EZyj@monoceros>
+ <20260923-sceptical-mauve-firefly-f5456d@sudeepholla>
+ <6b5a8300-ebf9-4717-bd39-952e89fc5e78@oss.qualcomm.com>
+ <20260923-snake-of-magic-satiation-c3b857@sudeepholla>
+ <a5e56180-b96f-4fac-980e-e837e84cd5a5@oss.qualcomm.com>
+ <20260923-calculating-positive-inchworm-28d3cc@sudeepholla>
+ <arPMAXs4jjUeu1DE@monoceros>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
-In-Reply-To: <CALj3r0gAaQ_CoS5_9Mmf5HY+Fu5_e74fbb+r0LstafMhagHx6A@mail.gmail.com>
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTIzMDA1NSBTYWx0ZWRfX7+6VCNPiLTDt
- TugCGmtgcEmFqR7IdmVR0oO9nVVqjtQ/SrTHZBGYNxnMdNmMtTgzOFLgan7qD/LYvtT5MkAZkJ4
- Qq2Ww+kAFXJtUAZDy+C+qClDAzi3ueY=
-X-Proofpoint-GUID: nx7PFeW8h7TBoM03c0o_ZOzkp1em-1pn
-X-Authority-Analysis: v=2.4 cv=RYMFmFtv c=1 sm=1 tr=0 ts=6ab3dc2a cx=c_pps
- a=m5Vt/hrsBiPMCU0y4gIsQw==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
- a=kj9zAlcOel0A:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_glEPmIy2e8OvE2BGh3C:22
- a=VwQbUJbxAAAA:8 a=ee_2aqc6AAAA:8 a=dR3U5T3Y49Kxp-nVN2AA:9 a=CjuIK1q_8ugA:10
- a=IoOABgeZipijB_acs4fv:22 a=VOpmJXOdbJOWo2YY3GeN:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTIzMDA1NSBTYWx0ZWRfX7OwbR++Qq1g3
- k4LbNIidossLzLWV3gnGno9p/sV2vh5VXnCW/ah/rL8V9imG+ZVVsP6d9d5pmRV1JeFBXUwZffT
- jBP/Svg3Vu5aKx+rNVxh8LurKeLMLJF9BmydEaUhVAvrsc1kBtuyqMM3qg/hHVLHeco0fAWnJC/
- v+dCDi4aRYS2HCPrPdZharxMsF1j1sETg8f+N5/DROty2r0W3hETUuw5WiOE65mKyFfqRBCqEAL
- XasfOjrcRud8LUNDF5GMdyTvqvmgdYsKGE86ptwvKLDgLl0AhLrACL3GL0/w8RuB3kNla1YNxBa
- rECgDpOdTISio6EiSEIE9wB4q75tiK4wHpfF8w19lNwslxHldZlgmxdoKnDHzSnxbpPJIuSkEjg
- /hLwMcZFPVrDm6YB5EARVixjQaVbZwnuv1Nhg0BQEWa3Rc988txtJYWbrUTQmU5golo6P7qCUjt
- B0E9MRlRY/Ot4UM2RXQ==
-X-Proofpoint-ORIG-GUID: nx7PFeW8h7TBoM03c0o_ZOzkp1em-1pn
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-23_04,2026-09-21_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- spamscore=0 suspectscore=0 clxscore=1015 priorityscore=1501 phishscore=0
- adultscore=0 impostorscore=0 lowpriorityscore=0 bulkscore=0 malwarescore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609230055
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <arPMAXs4jjUeu1DE@monoceros>
 
-On Wed, Sep 23, 2026 at 09:17:44PM +0800, Coia Prant wrote:
-> Hello,
+On Wed, Sep 23, 2026 at 02:55:26PM +0200, Uwe Kleine-König wrote:
+> On Wed, Sep 23, 2026 at 01:01:44PM +0100, Sudeep Holla wrote:
+> > If Uwe is fine, yes I can take v7 as is.
 > 
-> Thanks for the RFC. A few comments.
+> Fine for me.
 > 
-> XPCS_ID
-> -------
-> Is 0x00000030 documented for Qualcomm, or is it derived from
-> NXP_SJA1110_XPCS_ID + 0x10? If it's the latter, it's a magic value and
-> I'd rather see it confirmed against the Qualcomm documentation or a
-> register dump from real hardware before it's used for platform
-> identification.
+> Acked-by: Uwe Kleine-König <u.kleine-koenig@baylibre.com>
 > 
 
-It's the latter (NXP XPCS ID + 0x10). The Qualcomm hardware returns the
-standard XPCS identifier (0x7996ced0) upon reading the 3.2, 3.3
-PCS_DEV_ID registers. I tried following a similar approach to the NXP
-DSA driver of reporting a synthetic value to bind to the Qualcomm part. 
+Thanks Uwe!
 
-All this was just to make it work with pcs-xpcs-plat without introducing
-a ton of code.
-
-> Structure
-> ---------
-> pcs-xpcs-plat is itself a platform glue driver, for SoCs that don't
-> need any platform-specific handling. Adding another abstraction layer
-> on top of it to cover Qualcomm would be glue on glue. Generic, Qualcomm
-> and Rockchip differ in power management, address window size (2M vs 8M,
-> ...) and MMD redirection, so they don't share a probe path.
-> 
-> Pushing that into pcs-xpcs-plat would also drag every existing user of
-> the generic glue along: they would suddenly depend on GENERIC_PHY,
-> PM_GENERIC_DOMAINS and whatever else the Qualcomm path needs, or they
-> would have to carry per-platform branches in a driver that is supposed
-> to be platform-agnostic. A per-SoC-family glue driver, the same way
-> dwmac-intel, dwmac-rk, dwmac-renesas-gbeth and dwmac-rzn1 are
-> separate, keeps each integration self-contained and leaves the generic
-> glue alone.
-> 
-> Would it make sense to take that route here? My pcs-xpcs-rk does the
-> MMD redirection through a custom MDIO bus; maybe the Qualcomm glue can
-> reuse that idea directly instead of extending pcs-xpcs-plat. Happy to
-> help with the generic parts if that's useful.
+> The nice thing is that the device_id structs are not API, so this can
+> also be addressed later if someone comes up with a clever idea how to
+> implement it.
 > 
 
-I agree with your concerns regarding the glue on glue architecture. I
-also don't know if each platform glue should define a custom MDIO bus
-with similar logic. Maybe we can have a generic abstraction for it?
+Agreed.
 
-I know that Alex had a patch introducing pcs-xpcs-regmap.c [1]. My
-original code for this platform actually built on top of it before I
-moved to the current implementation.
+Hans,
 
-At least I now know that multiple vendors have an MMIO based XPCS,
-albeit with differing MMD redirection mechanisms.
+There were other changes in bus.c that conflicted with this. I have
+resolved the conflicts and pushed to my for-next/scmi/updates[1]
 
-I am going through the pcs-xpcs-rk patch and the eee_clk already stood
-out to me. On my board, the PCS link does not come up if the EEE clock
-is stopped. Going through the databook, I did find a barebones
-explanation of why that might be happening for USXGMII, but I need to
-dig more into it.
+If anything is wrong or if you prefer, you can post a rebased version
+that I can pick up.
 
-Thank you for the review.
+-- 
+Regards,
+Sudeep
 
-	Ayaan
-
-[1] https://lore.kernel.org/netdev/20260501155421.3329862-2-elder@riscstar.com/
+[1] https://git.kernel.org/sudeep.holla/h/for-next/scmi/updates
