@@ -1,137 +1,205 @@
-Received: from mail-qk2-f42.google.com (mail-qk2-f42.google.com [74.125.230.234])
+Received: from mail-ej2-f12.google.com (mail-ej2-f12.google.com [74.125.228.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 52C46474258
-	for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 21:33:39 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.230.234
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 34E473EC6B2
+	for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 21:59:15 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.228.140
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790199221; cv=none; b=K6auBQtUQnjDRExg8c7VXmCSm2CCwmZxrq79cDUs6cnSzNQL//xetpb+4v9CvQeTrbvimP+n72si18RK1SWuRryq3w6BUKpLMpZ0yz1r9ByO7KU3g+5Aio6il5PGxRPKykczjDtOGf/M/lOzbRlPOTyReA/rbZ9FyjE/BP3qYaQ=
+	t=1790200757; cv=none; b=l7ldDIS+uqjE5CX4C1PnLN2xKBqGvCPhUQfslp2r8hq4dJ67wgdQWJtmN3NR1F5hghsx2plMJ6/3yZgBMKRb0wYvfguptq1kUOxo8SN/f/SMt/uwlrZPXBV/hclStIQ+EfRECdsy6LIuDRtGHW3qb6SjDDbFXDR2s6pMv1JiaWs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790199221; c=relaxed/simple;
-	bh=AIosAjl/qfQ0+4SRj6KraAsMA9o8Ij1Mh3Om3uxMQ5M=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=QhdSsvG4dLZRqqP4OE6cbRLJ0v2K4eYu/WWbGGLyThJ8/2UY9quPx2eNhAABhdR9amhBRu4yY+AO6T7Q52iFL5LLW9mYUky7wHWvG1ZmwYT52SHyiC0vGF6XPG/jrfK9eNCiUE+84tkmyvn7oi0nrTmrE93YqBzTV0hy13gUeh4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=riscstar.com; spf=pass smtp.mailfrom=riscstar.com; dkim=pass (2048-bit key) header.d=riscstar-com.20251104.gappssmtp.com header.i=@riscstar-com.20251104.gappssmtp.com header.b=jd3c43c7; arc=none smtp.client-ip=74.125.230.234
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=riscstar.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=riscstar.com
+	s=arc-20240116; t=1790200757; c=relaxed/simple;
+	bh=8RGeXtjXxObOBlh27DtryI+xEEeTDaHvX+2W2+vTgIQ=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=D2EdkBeB3lOL6aoyxl6FP3pLFflNFaVzZhOwf7xYEZGoR7FuflTMnmFQQfVQc2ZZYfRrQTzE2NiPcxSEuKiA9M9ZO1NVO8OnbK6xCk5gFdpCQ6AtxvoVPuzO1BkGCQrltzmA3xkMVeC75ZsFWsLTwDubL8+TGI+8RLK7xYWn2iA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=OVaHzNiK; arc=none smtp.client-ip=74.125.228.140
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=riscstar-com.20251104.gappssmtp.com header.i=@riscstar-com.20251104.gappssmtp.com header.b="jd3c43c7"
-Received: by mail-qk2-f42.google.com with SMTP id d75a77b69052e-530fa0716f6so15900701cf.3
-        for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 14:33:39 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="OVaHzNiK"
+Received: by mail-ej2-f12.google.com with SMTP id a640c23a62f3a-c254f8694aeso96364266b.0
+        for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 14:59:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=riscstar-com.20251104.gappssmtp.com; s=20251104; t=1790199218; x=1790804018; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=dJzkV1wEUwUk4mOjqXcbC0Tz78XuSDZNKDr6Z/EZbvA=;
-        b=jd3c43c7nauj+yMvirxC4UfGyRphA/GxL/+2BJnU9jziqab/ma0IjDy9juAzUTwhnM
-         ga5RRcAOzSI8z05NWeZgmUyHrhukQNW2ztBRDGTNni1MpDSI1ko51SXAsXpzxsmGyg5l
-         qaPL9/OxYvoxZYTiC8w/8d1qANNb6Y51PuTWFSeQNLErFwVg6MUQETBt8fw3r+EIscYM
-         d5OJ5eB3Z0bhbaHP14KevkHQ7SBAiYLoeknr4BQKoBKYLA/V3vua3fFCRQNw+aLpckLq
-         iJiPsW77MEzSsHPiOza9/C3bNRYXZFR+l5hZVHQOs3WMmVuLUe1pShMwyjWfiUf2qwCR
-         mFBA==
+        d=gmail.com; s=20251104; t=1790200753; x=1790805553; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=25b6rXxcvDVFluQ29z+eb44YMWbVsajT92YPOJsFwDw=;
+        b=OVaHzNiKBqx/cr/Ll3JDJZ7dYL3Fn+7fMw4pizbJCd9e3P40Sj0XPMLtiS8YLUCxsf
+         /9+X3fr5DoXx8vCjvQSK/L3M10gdbQe+dnXTCyNDIOxmnvfPBnpVLKmJSLuly1qDNlcl
+         o1mZJav7Fm6NxxbCDbOVPWIaWv/P1sFvsLlEAayLut3ZyWi6kpWFaRWCCSh7FqaVcJum
+         lihbTEfqe/g265nj6v38zxEuHNz7LLuTvES2CpLeo4JDKx+yc1r0U2hQA7aPdXsiruDA
+         p05nESDNvkzAHiLJoo4I0m6ZxSl9YAAfDXfDexdWg2pyWkKCDHsmPZTTrGC7Jd2XxOsL
+         1uHQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790199218; x=1790804018;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=1e100.net; s=20260707; t=1790200753; x=1790805553;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=dJzkV1wEUwUk4mOjqXcbC0Tz78XuSDZNKDr6Z/EZbvA=;
-        b=vowPrNb25pFHNcQ1MfvzoXigQZQ8hT4IDYeC+20jhPjsnbSA9KaeJukc00eDGduhmU
-         WZ8eWiQHLGedYmYvIF38nNvdmWCyWdpOAwSRmwp77f7Q5U2FttZFAlfGQwMjRlAp2fQ7
-         MExulQALafauIMzPOownUHpvZxF5EyN0uXot9u1t4a/cPS3bLeqrZiBYFa9w165C5JG0
-         3Fvfcgec6VXtojJ4ZRG2fqZ4UZeneC2IlGpfyyXYdloQNOLqWSArTFJNozcsC2mgU3DD
-         isbUQb0YelooHVkU7ZgLtFIJws6cR7WpwXJuZsHUlRTltx8+EOOca61wdQLaIVSolo5y
-         oWdw==
-X-Forwarded-Encrypted: i=1; AKwUvBx2oWsZyRzwpSa06+gqv+w76HojXj65rIp2baiVkRg99LS0MmSnsFnfcIeIITOYpMhCQ3XTGjfy+MZrfm7a@vger.kernel.org
-X-Gm-Message-State: AFuF++nfOjgUEDtE0ig6+EVfAVAm8JxdOmyIipBRD/szmf/extmC2cYN
-	XomgrL3GmYzvN2P9htWjznoYIb1+emuTxrBkX8GFHTstN1HNp+vnBaGErCNo15dKXGY=
-X-Gm-Gg: AYBFou1UIa22Y48W2LefeVm4A6Q+8zZsNgXY2Cti9dfy0KQHFpbIN/sfC72pMInfSL+
-	+nA6E1fmlAewjFqAM6dnCrm4EWghq9U+4cDb/m2sEWPCDvpnYySodpoSpIWBa83NzCMuBEnGAka
-	yZjNpIWbLrN2Esqbawzb1VGFw4Yllm61ph9ZulzWlJReEoffmeV8PXzkEM+aJpTJZA7ZAV3v1XZ
-	b4G5sXZnjEHwKO7we0zvvKwkcnY1hypbha3Fp2Nbc4mZhRA6mmqpmJF41PpbsKwMAR6MYjHatvC
-	nt0Apewr8/CC3/fiahrT8LEb+jhyVsGwfj9Jt3rTUy1QOfBTWZCj7E7r6+Ukzxmpjrz0cEAfFpj
-	pyLX15ia63wG8tNgJ7ZsGDC1YrTTMrsdETovzFvkMrML43Gw8WHyGl38NYaB3jG80iQ/9/DlccZ
-	KGt40W1kww+04vmiLnoPSlHihcHb86wHq5TTyFue7+2HZCeFgjJXg+wumbMlOhv7l/3IOI5f4=
-X-Received: by 2002:a05:622a:1806:b0:531:d7d:64ea with SMTP id d75a77b69052e-532fb63b162mr8219331cf.26.1790199218185;
-        Wed, 23 Sep 2026 14:33:38 -0700 (PDT)
-Received: from [172.22.22.28] ([73.62.185.64])
-        by smtp.gmail.com with ESMTPSA id d75a77b69052e-532fb287d92sm3634361cf.20.2026.09.23.14.33.36
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 23 Sep 2026 14:33:37 -0700 (PDT)
-Message-ID: <7147ce22-fc6d-4cff-9470-98e341da0a87@riscstar.com>
-Date: Wed, 23 Sep 2026 16:33:35 -0500
+        bh=25b6rXxcvDVFluQ29z+eb44YMWbVsajT92YPOJsFwDw=;
+        b=Dh3hA7ThffpjrGPb99M6iYNuJzUD6Mcg+MQJX8gOCaHvTukcNyRSJe4LVuAXkBYMwZ
+         pGuupj5nBws6zMY5kU6v3VGxgBgVX7N95sLV8TWlrgfKnQYlw1SNk3aHu3Y/v8qZDIIE
+         y5/i0aZoZopfLpTHG2kpe3PhlsNmRJaEsQvy5dDXpRhocS/5lbmhrGMKNuuOjN8pBdFz
+         8tZJ71zpsL4jDK7Zf30/VI/p8kJd5FwF8TL47LLXaTkIOV7WCOzGbU2EDMfxPVjqCIOg
+         H4gJBgf1H7Tt5wyFUAuMWnCBLMrtGqjFi5UpjK+5tkQtymA6J9M0XEKuWBAV52Mu7lRf
+         HkBw==
+X-Forwarded-Encrypted: i=1; AKwUvBz07izRW1PUvOd6aqaEGu7Fc/uysGqVEF2nzvDoruTYlgkb0hRYhN2lWfbdAeOZtxsjlh9fSYNBL0MMW/xD@vger.kernel.org
+X-Gm-Message-State: AFuF++mluRcA3Tnd1f2K+Usb5JPpwEG5pZxenxMql7lylzA6RD499yaV
+	zHwiQR/225+0XqOpJ00/q5e0hiK7mW/EP4XQg8kYeYf82xnCOvcOSkZ9
+X-Gm-Gg: AYBFou1lsJbvhYwt/hKcAfvCEYQPrjioBC6PQ4c8QuALCZo+TyHZCdPVjk1iFjbtPMd
+	wErqd/NojIMCdBfTqb6g+tBYAwm164qe+Mcf4KR5Ej5yL1QeFmcF5EuPfxjjlGeQg8Ee71H3hEW
+	bktfCMbfkciq6012DUfEYxsAM0Sc1fnhL+4bpdtYX4GRvpTqdt9ipZu9gMS3jkuAgo5nbMNhW2L
+	/N1mcFRyzPPFb0d2x7Py03Ve472m1lmvXFTgn09bf07QPpLjCztXP2/Zrlg1xgToKeZ2qTDm7JO
+	Tf+2c2Krz9xMuO9pxvYr7cFdo5NTnT98vUZPZLmLnW+SOp0N8AnTvhfXBerKCKRShe4L7PDujRc
+	ofn1mbZOVEthT/6RNmH99mVahcFKpxh40UtWzcidxibqyAi8Xar8Dnynbioipw1Ot+OPamUTRc4
+	malvsZYQkW9vf0pwJojrE2rl6ZMDeQTQSdY0irDXfhmGMdS7DHmqV20/e5QhSBcfW1BzbcyW2Ke
+	HpfPz5kPmAg05Do2GznXfvkT0AgrKaiBBIZi673NXGp7+y/JMaO37WQt0yyGgtiavRlSu5P1Ypt
+	ivymGwrC6D1tvAqOVHUP
+X-Received: by 2002:a17:907:6a11:b0:c25:f7db:4beb with SMTP id a640c23a62f3a-c2ac236053emr38359966b.17.1790200753378;
+        Wed, 23 Sep 2026 14:59:13 -0700 (PDT)
+Received: from localhost.localdomain (83-233-130-25.cust.bredband2.com. [83.233.130.25])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c2aae6dcf0dsm197647666b.61.2026.09.23.14.59.11
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 23 Sep 2026 14:59:12 -0700 (PDT)
+From: Yongzhao Chen <yongzhao.derek@gmail.com>
+To: netdev@vger.kernel.org
+Cc: "David S. Miller" <davem@davemloft.net>,
+	Eric Dumazet <edumazet@google.com>,
+	Jakub Kicinski <kuba@kernel.org>,
+	Paolo Abeni <pabeni@redhat.com>,
+	Simon Horman <horms@kernel.org>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Shuah Khan <skhan@linuxfoundation.org>,
+	Randy Dunlap <rdunlap@infradead.org>,
+	Florian Fainelli <florian.fainelli@broadcom.com>,
+	Jonas Gorski <jonas.gorski@gmail.com>,
+	Andrew Lunn <andrew@lunn.ch>,
+	Vladimir Oltean <olteanv@gmail.com>,
+	Woojung Huh <woojung.huh@microchip.com>,
+	UNGLinuxDriver@microchip.com,
+	Christian Marangi <ansuelsmth@gmail.com>,
+	Heiner Kallweit <hkallweit1@gmail.com>,
+	Russell King <linux@armlinux.org.uk>,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org,
+	Ziyang Huang <hzyitc@outlook.com>
+Subject: [RFC PATCH net-next v3 0/5] net: dsa: qca8k: add a QCA8337 CPU PHY consumer
+Date: Wed, 23 Sep 2026 23:58:52 +0200
+Message-ID: <20260923215858.1653-1-yongzhao.derek@gmail.com>
+X-Mailer: git-send-email 2.45.2.windows.1
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 3/4] clk: toshiba: introduce a TC9564 SoC clock and reset
- driver
-To: Jerome Brunet <jbrunet@baylibre.com>, Brian Masney <bmasney@redhat.com>
-Cc: sboyd@kernel.org, bmasney+clk@redhat.com, jbrunet+clk@baylibre.com,
- robh@kernel.org, krzk+dt@kernel.org, conor+dt@kernel.org, lee@kernel.org,
- andersson@kernel.org, konradybcio@kernel.org, abelvesa@kernel.org,
- kees@kernel.org, gustavoars@kernel.org, p.zabel@pengutronix.de,
- daniel@riscstar.com, mohd.anwar@oss.qualcomm.com,
- lorenzo.bianconi@oss.qualcomm.com, linux-clk@vger.kernel.org,
- devicetree@vger.kernel.org, mfd@lists.linux.dev,
- linux-arm-msm@vger.kernel.org, linux-hardening@vger.kernel.org,
- linux-kernel@vger.kernel.org
-References: <20260918165234.687224-1-elder@riscstar.com>
- <20260918165234.687224-4-elder@riscstar.com> <arG238GS8bMB6DkW@redhat.com>
- <0785235b-de06-44d4-9068-ec706eeba848@riscstar.com>
- <1jcxu3adn6.fsf@starbuckisacylon.baylibre.com>
-Content-Language: en-US
-From: Alex Elder <elder@riscstar.com>
-In-Reply-To: <1jcxu3adn6.fsf@starbuckisacylon.baylibre.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-On 9/23/26 3:58 PM, Jerome Brunet wrote:
->>>> diff --git a/drivers/clk/Kconfig b/drivers/clk/Kconfig
->>>> index f9592fd9ec2bb..50efa10d48450 100644
->>>> --- a/drivers/clk/Kconfig
->>>> +++ b/drivers/clk/Kconfig
->>>> @@ -292,6 +292,17 @@ config COMMON_CLK_S2MPS11
->>>>    	  clock. These multi-function devices have two (S2MPS14) or three
->>>>    	  (S2MPS11, S5M8767) fixed-rate oscillators, clocked at 32KHz each.
->>>>    
->>>> +config COMMON_CLK_TC9564
->>>> +	tristate "Toshiba TC9564 clock support"
->>>> +	depends on TC9564_PCI
->>> select RESET_CONTROLLER
->> Thank you.  The reset and clock drivers were previously separate
->> and the reset only became available if RESET_CONTROLLER was enabled.
->> Combining them means I need this.  I will add it.
-> Why did you combine them ?
-> 
-> it would be a lot better if the reset were handled in
-> drivers/reset rather than in clock. There has already been some work to
-> move reset from clock back to reset. This often involve auxiliary drivers.
-To be honest, I got a suggestion from someone to combine them, but
-I said "no, I got feedback last year that separating them was
-better."  But then a second person told me that these are often
-combined, so I took that as "two against one" and decided to
-merge them.
+The qca83xx PHY driver is already in net-next. This series allows
+passing PHY flags on DSA shared ports and adds support for a QCA8337
+internal CPU PHY. It implements CPU port selection, serializes MAC state
+across global MTU updates, and proposes disabling SmartSpeed prior to
+CPU PHY resets.
 
-The other reason is that four registers are used:
-   #define CLK_CTRL0_OFFSET	0x1004
-   #define RST_CTRL0_OFFSET	0x1008
-   #define CLK_CTRL1_OFFSET	0x100c
-   define RST_CTRL1_OFFSET	0x1010
+The first patch extends the DSA core interface; the qca8k patches
+provide its concrete user. No board-name matching or board-specific DT
+properties are introduced.
 
-They alternate between clock and reset.  The previous separated
-drivers specified the two offsets for each driver in the reg
-property.  But somehow these interleaved registers seemed a
-little off, so I thought the combined driver cleaned that up
-a little.
+The minimal topology uses a single CPU link: a conduit PHY connects over
+MDI to QCA8337 PHY4 on switch port 5, with each endpoint having its own
+phy-handle. A reduced devicetree fixture based on Redmi AX5400 wiring
+passed dtc and validation against the complete net-next schema set. This
+is a binding fixture rather than a bootable board description. Because
+the pinned base tree lacks the IPQ5018 Ethernet MAC driver and RA74
+board support, this series has not been boot-tested on RA74 under pure
+net-next.
 
-I don't have any strong preference one way or another.  If you
-think they're better separate, I don't mind separating them
-again.  The two drivers are extremely simple.
+On one RA74 board, diagnostic boot logs showed PHY4 advertising
+1000BASE-T full duplex after generic config_aneg() succeeded, but a
+later read found the advertisement missing. No intervening write was
+found through the instrumented Clause 22 BMCR/CTRL1000 path; other paths
+were not excluded. The exact trigger remains unknown. Clearing
+SmartSpeed before the initial reset preserved the 1 Gb/s internal link
+during the tested boot sequence. Runtime testing did not establish
+late-peer causality, a broken pair, or successful fallback to 100 Mb/s.
 
-					-Alex
+Two scope questions remain for this RFC:
+
+1. Internal CPU port selection currently falls back to ports 1 through 5
+   only on QCA8337. Dedicated ports 0 and 6 retain priority on all
+   models, including mixed CPU port descriptions. AR8327 documentation
+   describes per-port headers and destination bitmaps, but I have not
+   established its internal CPU link behavior. Should this fallback
+   remain limited to QCA8337, or can maintainers confirm the same support
+   for QCA8327?
+
+2. The proposed SmartSpeed policy applies to QCA8337 internal CPU PHYs.
+   SmartSpeed is the hardware downshift feature, so disabling it removes
+   that fallback behavior. Current hardware evidence is limited to PHY4
+   on a single RA74 board. Is the internal CPU link role sufficient
+   justification for this policy, or should the quirk be scoped more
+   narrowly?
+
+Changes since v2:
+- Patch 2 uses reg_mutex across the MTU pause, frame-size write, and
+  state restoration. Variable declarations now follow reverse
+  Christmas-tree order. This patch precedes topology support so MTU
+  protection is in place when internal CPU ports become available.
+- Patch 3 adds internal CPU port fallback while retaining port 0 and 6
+  priority, leaving QCA8327 support as an explicit RFC question.
+- Patch 4 masks the revision before setting the CPU PHY flag, clarifies
+  SmartSpeed downshift behavior, and drops the delayed-conduit causal
+  claim.
+- Patch 5 clarifies reset and config_aneg ordering along with hardware
+  evidence limits, keeping generic config_aneg.
+
+This series depends on the separate net patch "net: dsa: qca8k:
+propagate MDIO errors":
+https://lore.kernel.org/netdev/20260923215748.1336-1-yongzhao.derek@gmail.com/
+
+Testing:
+Fault injection against the actual MDIO/PHY functions and kernel polling
+macros covered busy-read errors, timeouts and successful transactions.
+The old polling code reproduced false success on read error; the fixed
+path blocked SmartSpeed writes and initial/resume resets. Tests with
+mocked hardware also covered flag scope, CPU-port selection and
+MDIO-to-MTU error handling.
+
+The changed qca8k-8xxx.o built with W=1 for x86_64 and ARM64 under
+allyesconfig and allmodconfig, with no compiler diagnostics. Unchanged
+qca8k-common.o and MTU locking retain the earlier build and concurrency
+test results. Hardware tests used downstream RA74 firmware. This
+revision has no full kernel image/modules build, pure net-next RA74 boot
+or hardware lockdep run.
+
+Original RFC:
+https://lore.kernel.org/netdev/20260919085406.1395-1-yongzhao.derek@gmail.com/
+
+v2:
+https://lore.kernel.org/netdev/20260922202653.1153-1-yongzhao.derek@gmail.com/
+
+Base: net-next 8830e65ed46de41f849eefb8ba227d4852c460f6.
+Local prerequisite: 3ba847ea54227f704ee3b04f95d4b52d4e22d483.
+
+Yongzhao Chen (4):
+  net: dsa: pass PHY flags when connecting shared ports
+  net: dsa: qca8k: serialize CPU MAC pause during MTU changes
+  net: dsa: qca8k: flag QCA8337 internal CPU PHYs for SmartSpeed
+  net: phy: qca83xx: disable SmartSpeed before resetting CPU PHYs
+
+Ziyang Huang (1):
+  net: dsa: qca8k: support QCA8337 internal PHY CPU links
+
+ Documentation/networking/dsa/dsa.rst |  2 +
+ MAINTAINERS                          |  1 +
+ drivers/net/dsa/bcm_sf2.c            |  4 ++
+ drivers/net/dsa/microchip/ksz8.c     |  4 ++
+ drivers/net/dsa/qca/qca8k-8xxx.c     | 39 +++++++++-----
+ drivers/net/dsa/qca/qca8k-common.c   | 79 ++++++++++++++++++++++------
+ drivers/net/phy/qcom/qca83xx.c       | 32 +++++++++--
+ include/linux/qca83xx.h              | 11 ++++
+ net/dsa/port.c                       |  6 ++-
+ 9 files changed, 145 insertions(+), 33 deletions(-)
+ create mode 100644 include/linux/qca83xx.h
+
+-- 
+2.43.0
+
