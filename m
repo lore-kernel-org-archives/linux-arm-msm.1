@@ -1,360 +1,544 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.223.131])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AC11846C847
-	for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 11:05:35 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3C29B43C7B6;
+	Wed, 23 Sep 2026 11:05:56 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=195.135.223.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790161540; cv=none; b=YQdhBfPDmdcsIkLUNw8SiH4w/V6Uy1kdDKkLmmvKzrInog8/nnivgj2z3JYxQyZRKl4Vv/XZZ7KYOUK3/x/43uywCCdOfwLJ8APz/Gtx69+vO4FpqtSNOhVbdipFyfD1jEmdQS6CVLFmsMvw63QjnmLttp2YRQBL4PPax85bS08=
+	t=1790161564; cv=none; b=eORLBflhC94VztiKe3OK/70e4yxvWxSCY9AEixTj5qR6xyb4asTOgJhEq7ZRbX+jlGTb38fFfAVFUysGuYQAgIKZ4JyPFdUR7xz3o7wJYsF6/b6XTU3ERefVhEuoKUiSzoP3rAY7z+P7UP67I+ssqN5/H6e9THmLXgxxfeMcTwM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790161540; c=relaxed/simple;
-	bh=K0jycMTvi6wKLbEUqdHCJShvK5Y3X5IYyfoja2Jkq5Q=;
-	h=Message-ID:Date:MIME-Version:From:Subject:To:Cc:References:
-	 In-Reply-To:Content-Type; b=nuMOMhH42eX1G0KMazG05LfqW+TK6WNWASR7wGrT0pmpTsYt159z+YX7AtsJWmltLCqwfsdAirB/6JglO4BDEJ6I/UuE7RNv2E4NgXIUlartsmfWLh+OlYXRFRPQJCwDmP+JtO5PllSiKIbzK4pzZAIw12tOdn3bb/et7n4uCUM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=l99FXg0U; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=f37NjvnT; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1790161564; c=relaxed/simple;
+	bh=N8pnUveQFZFLClDdCNlSw1Y9bK7H+xqHbIvnBolILtk=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=k2LhvoK11WNpL6Howu8t/rSDLstAPXc6CvFe/v14bSuGGXJd2nNwTc4n11hTQCDJuLN+D3to2zFcl66HwMLl9EheBSE3mpAZLVjA+VHrEPOCl/stGsnsST8GVcIha3zPCIs8PurlW6p7n9T8gnTiwffrdAv0eI+P7Wz1B9o/LNY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=suse.de; spf=pass smtp.mailfrom=suse.de; dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b=am86Hs5S; dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b=t04Wrm0N; dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b=qrWP0cSI; dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b=8B6qKeMP; arc=none smtp.client-ip=195.135.223.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=suse.de
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=suse.de
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="l99FXg0U";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="f37NjvnT"
-Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68NA2eNc2429390
-	for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 11:05:31 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	JPqyhRbpOf17HmSBmiSMBHQE6Y0S0sQtUmXib+0l6+A=; b=l99FXg0UpAhzLGUt
-	+6Q8K/jLHntnFymV2NDkyNb2/Ac43ZvW+fyp23PDom3wqiO4njAyx8gJ4Bm2fMUe
-	PtQISjo3y5sp7aUMRcS07CoO/FWLVnAxtoRRAoDsxodbKSx2cSgOm4bHW56s5QLY
-	juIVBFLoQCWfsQVkubqNs07OL1niyWMNpqB4zpsIilSQAP5LYzckvULmNlhJLR+w
-	DG+odcyk19O50xFE9mDVW7S3qcTKpjRWr1tAWlIm2eAekQJmLYCvdEsabz1LNEv8
-	1WUWQJonr6QZ58zmXiadyGqCYGoEfTVR2HlJIET+g+TmQVLNmZ4H3hrdeIo4BfMN
-	aCw4UQ==
-Received: from mail-dy1-f197.google.com (mail-dy1-f197.google.com [74.125.82.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gv9bqh6tu-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 11:05:31 +0000 (GMT)
-Received: by mail-dy1-f197.google.com with SMTP id 5a478bee46e88-331b2ec616fso2939544eec.1
-        for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 04:05:31 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1790161531; x=1790766331; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:content-language
-         :references:cc:to:subject:from:user-agent:mime-version:date
-         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=JPqyhRbpOf17HmSBmiSMBHQE6Y0S0sQtUmXib+0l6+A=;
-        b=f37NjvnTuEebAGQEvNyVdI08JSm4uVzZpcAgYxPjOBGiFYHiW5Le8hfP0D3xNU8mOV
-         S1x5VAPdI5Mq39dHx8S/1wHCVKXozqCXZKyurjE3XVLGSkZroaeMYTnUskv22pWW60jT
-         W1w+fVPQNQs98UTjy4befa3kXpI9IANnFBHUL704p6QqCVxbRBQmit0owpxoafiPaX+O
-         NSq4cFkKjTE3pwqgM3kLBPsbrbV3viOndvwxD6s5O2E+wSBn9XofmcjipVRppXH9kfHs
-         8inM1uXOm3bpYQJNDQKBSAAZQ+o9czByRJi9Uk5ZKrhlcOImdDeWx7HV+1CdHvvD8fT9
-         srRA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790161531; x=1790766331;
-        h=content-transfer-encoding:content-type:in-reply-to:content-language
-         :references:cc:to:subject:from:user-agent:mime-version:date
-         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=JPqyhRbpOf17HmSBmiSMBHQE6Y0S0sQtUmXib+0l6+A=;
-        b=haxJuT60nlZdLwAXMWPXNIwmppp8wnZd7l3C1p46KeB7ERt3mpMwczx+GdIbKQZmPA
-         VffLNRMPkMLAHUne2cnrrKlFTTyZHSX8prhUI6SdlbkLGMxHD9xrBBkKSQWfoA5SANvX
-         nI/zYBuqm/pnTPSj8xycYIXjY0vsL6UCrZmTPG17Bv4EvrkVZS8ZnA7k5njfvqJMk6Dp
-         WjIRZQR/u26ZDl1XEo5MD6XJ0P5ya30zenIRt1QemCm51WBOolXCRuhX867V8LZMSwXm
-         6HpNPgMF3aED48RrGRr6l5Y+GabxmfTqKteNHMWVcMBJBDu0ZluVKDhHVaeudDK1v89b
-         M+sw==
-X-Gm-Message-State: AFuF++kRmvP+nFCrwgjCi3qhmbNqur/pZU15jrwm/FNhI69CqwK3VwDD
-	1FgINIi6i5B0H5/h6iKb3dgjkid7pTeKI893eJYMgatROPZyG15pD3+v47dAxhxqvWhQuEjGGpI
-	HT5iNXOuRtFO37nuRb2lMMwmweaCdES/jKuEGp/Qmwhq/OFCWrD4VGL0i2gXy9Yagmmc=
-X-Gm-Gg: AYBFou2MxoW78pgvNGYBkzpHOAiY/bICRfoyh7tsOMl1DrDfLY+EVm21gepaqnkfO9W
-	ixehoGQ+wMY86lQVWwROnlaGuMsnwRdl8KaiECtX/NHuJKbO3rRiuo0/iO+Jf9Z2fLwZASIflYY
-	93dRsoWPqj97nU0tfViFStoUQVoWTJrAeVi1Tt8VX0R/SbqSzmd6g7IKPF3JM+F+jaD3EJwEj2z
-	ZZMt7zrQaLF4WRHDFGdhO77M+AbCDo7nkDCyaLR26ivKxnbt4mXCTJ/l7zCMfLm2KVEBqnZPGy8
-	N4eaJMkq/MkOCMmdnxw+ZlAzPurCvjnlZRIY1AhqW/dpAOPIuJoR9GrmW9DdA5NMJd8zN5qjGDp
-	YoElpuI2bicJsUWvRKBzfYMr+hGB5UsHkwXonkPXE
-X-Received: by 2002:a05:7022:7f0b:b0:13f:c02f:60b8 with SMTP id a92af1059eb24-144f9166ab0mr2272822c88.6.1790161530746;
-        Wed, 23 Sep 2026 04:05:30 -0700 (PDT)
-X-Received: by 2002:a05:7022:7f0b:b0:13f:c02f:60b8 with SMTP id a92af1059eb24-144f9166ab0mr2272778c88.6.1790161529904;
-        Wed, 23 Sep 2026 04:05:29 -0700 (PDT)
-Received: from [10.218.33.235] ([202.46.22.19])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-144f983d73fsm7741663c88.6.2026.09.23.04.05.23
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 23 Sep 2026 04:05:29 -0700 (PDT)
-Message-ID: <1188ca90-d3c9-40ce-ae8a-56262b4192d1@oss.qualcomm.com>
-Date: Wed, 23 Sep 2026 16:35:22 +0530
+	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b="am86Hs5S";
+	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="t04Wrm0N";
+	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b="qrWP0cSI";
+	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="8B6qKeMP"
+Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org [IPv6:2a07:de40:b281:104:10:150:64:97])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	(No client certificate requested)
+	by smtp-out2.suse.de (Postfix) with ESMTPS id DC2B51FE5A;
+	Wed, 23 Sep 2026 11:05:42 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+	t=1790161547; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=c63V2Gp1JS9CR7p7tvaqVgBb4SbS9Zy4MKVShTCxRjo=;
+	b=am86Hs5SzM0vtJRqP26uCDi+okE67Fxu2Nox77NiNVonPt47N7qkA+7SVvmzaEk+ixACkM
+	QURG4D4GRjI6hJEz338wx3xu5ShJVO73IE6tMv14Ujom8ju1SQwUVg5DofyQyzuyF2Gk3G
+	eK+pZ/+kVz8vZDdfO/cpkLrXc6LswIY=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+	s=susede2_ed25519; t=1790161547;
+	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=c63V2Gp1JS9CR7p7tvaqVgBb4SbS9Zy4MKVShTCxRjo=;
+	b=t04Wrm0NMfC/DgIT3C1rWZK1DLZaGapQT89QLICyiufY7cVPEA/Rug4kR/jzRdjShECGDP
+	FGbzaQNUTNxFsEDA==
+Authentication-Results: smtp-out2.suse.de;
+	dkim=pass header.d=suse.de header.s=susede2_rsa header.b=qrWP0cSI;
+	dkim=pass header.d=suse.de header.s=susede2_ed25519 header.b=8B6qKeMP
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+	t=1790161542; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=c63V2Gp1JS9CR7p7tvaqVgBb4SbS9Zy4MKVShTCxRjo=;
+	b=qrWP0cSIgJr6G7+0cxFD93/72xkKWsXHSsnStWaRlWB+EsbA4rsCrUBdTUDsUVB4bRdew4
+	itoIDVGhEGksZLuDXmDHIRF1DffOrhDaBIpi03X7PR8VT0p8iz9kv9C3OATqORr+Ug98Ad
+	cfhS98H+wO1CEVeszidexOCpoi56E6A=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+	s=susede2_ed25519; t=1790161542;
+	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=c63V2Gp1JS9CR7p7tvaqVgBb4SbS9Zy4MKVShTCxRjo=;
+	b=8B6qKeMP4hsdfTRqAXCiAD744eWwKiovGlxJlurf4ruaVhWTLeWgxpIVzmdaWzV4pHHJnQ
+	bfHRio1J+yEWsxAA==
+Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	(No client certificate requested)
+	by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 4F48113A6B;
+	Wed, 23 Sep 2026 11:05:42 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
+	by imap1.dmz-prg2.suse.org with ESMTPSA
+	id VCF1C4Wys2qeBAAAD6G6ig:T3
+	(envelope-from <tzimmermann@suse.de>); Wed, 23 Sep 2026 11:05:42 +0000
+From: Thomas Zimmermann <tzimmermann@suse.de>
+To: jfalempe@redhat.com,
+	javierm@redhat.com,
+	maarten.lankhorst@linux.intel.com,
+	mripard@kernel.org,
+	airlied@gmail.com,
+	simona@ffwll.ch
+Cc: dri-devel@lists.freedesktop.org,
+	amd-gfx@lists.freedesktop.org,
+	linux-arm-kernel@lists.infradead.org,
+	linux-samsung-soc@vger.kernel.org,
+	intel-gfx@lists.freedesktop.org,
+	intel-xe@lists.freedesktop.org,
+	linux-arm-msm@vger.kernel.org,
+	freedreno@lists.freedesktop.org,
+	nouveau@lists.freedesktop.org,
+	linux-rockchip@lists.infradead.org,
+	linux-tegra@vger.kernel.org,
+	sashiko-reviews@lists.linux.dev,
+	Thomas Zimmermann <tzimmermann@suse.de>
+Subject: [PATCH 2/2] drm/fbdev: Move fbdev helpers into client library
+Date: Wed, 23 Sep 2026 12:59:10 +0200
+Message-ID: <20260923110537.451614-3-tzimmermann@suse.de>
+X-Mailer: git-send-email 2.55.0
+In-Reply-To: <20260923110537.451614-1-tzimmermann@suse.de>
+References: <20260923110537.451614-1-tzimmermann@suse.de>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: Faruque Ansari <faruque.ansari@oss.qualcomm.com>
-Subject: Re: [PATCH v14 3/6] reboot: add parsable tokens for power state
- change reasons
-To: Matti Vaittinen <mazziesaccount@gmail.com>,
-        Sebastian Reichel <sre@kernel.org>, Benson Leung <bleung@chromium.org>,
-        Tzung-Bi Shih <tzungbi@kernel.org>,
-        Guenter Roeck <groeck@chromium.org>,
-        Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>,
-        "Rafael J. Wysocki" <rafael@kernel.org>,
-        Daniel Lezcano <daniel.lezcano@kernel.org>,
-        Zhang Rui <rui.zhang@intel.com>, Lukasz Luba <lukasz.luba@arm.com>,
-        Oleksij Rempel <o.rempel@pengutronix.de>,
-        Pengutronix Kernel Team <kernel@pengutronix.de>
-Cc: linux-arm-msm@vger.kernel.org, linux-pm@vger.kernel.org,
-        linux-kernel@vger.kernel.org, chrome-platform@lists.linux.dev,
-        avaneesh.dwivedi@oss.qualcomm.com,
-        Umang Chheda <umang.chheda@oss.qualcomm.com>
-References: <20260921-pscrr-framework-v14-0-a16290003b7c@oss.qualcomm.com>
- <20260921-pscrr-framework-v14-3-a16290003b7c@oss.qualcomm.com>
- <f4d2e209-1c89-447a-a5d1-92696b51b614@gmail.com>
-Content-Language: en-US
-In-Reply-To: <f4d2e209-1c89-447a-a5d1-92696b51b614@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-GUID: h66CvO30EQC-3Zz6EZoBYA7wkyoTjuU9
-X-Proofpoint-ORIG-GUID: h66CvO30EQC-3Zz6EZoBYA7wkyoTjuU9
-X-Authority-Analysis: v=2.4 cv=WZuZ+EhX c=1 sm=1 tr=0 ts=6ab3b27b cx=c_pps
- a=Uww141gWH0fZj/3QKPojxA==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
- a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
- a=EUspDBNiAAAA:8 a=pGLkceISAAAA:8 a=6S1-GrwmiCmPnoYEXswA:9 a=3ZKOabzyN94A:10
- a=QEXdDO2ut3YA:10 a=PxkB5W3o20Ba91AHUih5:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTIzMDA0NCBTYWx0ZWRfX9jGFXfa/ckC6
- X790KIy12YVccJj99fmDxJOsWzVt/hFZD42dbcJox7DSFJWfAukKdGQpfDkdhhOegqhSAe0s4xu
- FLF9P+lxKbKVLMAxFt7aDZKmfSlotBw=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTIzMDA0NCBTYWx0ZWRfX1VZ0y7hRdw6T
- YPkAnl1PXjJ/jgjl5GfpLRmHr2axTsdihJdS55pbZq8iUZuLiBeKyO1pMZbqWglLkC0JZVVGzj4
- qYufVBgaqQELzf5aMpIcNLta6xZF/2aOM0hiBIFtZFUrqCBTSfcujyue43rt7yWGhmMhfpSMhc7
- rLp+R4B6wGvjj8tXTmgk+qWyzncVLOAkFxgbKUHMNJMRIxcO2PB/89skCd1wVvGJiHK/5NH5+2+
- OTZvbnx5Ri5ZzW9ukLVuTRQrmjys2WwCSziHtLsC+E7FjPJ3VG86uYLE24ENEuj912hZI31thuK
- IGq8sKT/ZRRpSpWTIYliwb/7+8R6N8jedtb1NbkcBiBB6HUMo9kKhdLjWIy9LYC+JzgUSoEm5V2
- 3CpXeArchHRA0O2QAKwZsUebdhlqj/Ms1V6c28kwCNGmDxND6kIu5yTyKXE3d2n9Z3cb0s95lXk
- icixJDcT8CT0C61QUJQ==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-23_04,2026-09-21_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- bulkscore=0 malwarescore=0 lowpriorityscore=0 adultscore=0 priorityscore=1501
- suspectscore=0 clxscore=1015 impostorscore=0 phishscore=0 spamscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609230044
+X-Spam-Score: -3.01
+X-Rspamd-Queue-Id: DC2B51FE5A
+X-Rspamd-Server: rspamd1.dmz-prg2.suse.org
+X-Spam-Level: 
+X-Rspamd-Action: no action
+X-Spamd-Result: default: False [-3.01 / 50.00];
+	BAYES_HAM(-3.00)[100.00%];
+	NEURAL_HAM_LONG(-1.00)[-1.000];
+	MID_CONTAINS_FROM(1.00)[];
+	R_MISSING_CHARSET(0.50)[];
+	R_DKIM_ALLOW(-0.20)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
+	NEURAL_HAM_SHORT(-0.20)[-1.000];
+	MIME_GOOD(-0.10)[text/plain];
+	MX_GOOD(-0.01)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[imap1.dmz-prg2.suse.org:helo,imap1.dmz-prg2.suse.org:rdns,suse.de:dkim,suse.de:email,suse.de:mid,intel.com:email];
+	ARC_NA(0.00)[];
+	RCVD_TLS_ALL(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[19];
+	MIME_TRACE(0.00)[0:+];
+	FREEMAIL_ENVRCPT(0.00)[gmail.com];
+	TO_MATCH_ENVRCPT_ALL(0.00)[];
+	FREEMAIL_TO(0.00)[redhat.com,linux.intel.com,kernel.org,gmail.com,ffwll.ch];
+	FROM_EQ_ENVFROM(0.00)[];
+	SPAMHAUS_XBL(0.00)[2a07:de40:b281:104:10:150:64:97:from];
+	FROM_HAS_DN(0.00)[];
+	RCVD_COUNT_TWO(0.00)[2];
+	TO_DN_SOME(0.00)[];
+	DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
+	DKIM_TRACE(0.00)[suse.de:+]
+X-Spam-Flag: NO
 
-Hi Matti Vaittinen,
+DRM's fbdev helpers are for the fbdev-emulation clients. Move them
+into the client-library module. Fix include statements throughout
+DRM drivers.
 
-On 22-Sep-26 1:07 PM, Matti Vaittinen wrote:
-> On 21/09/2026 20:44, Faruque Ansari wrote:
->> psc_reason_to_str() returns human-readable labels that contain 
->> spaces
->> (e.g. "over temperature"). Those are fine for logs but unusable as
->> values in a space-separated sysfs list or as a write target.
->>
->> Extend the single reason descriptor table with a stable, space- 
->> free
->> token next to the existing label, and add psc_reason_to_token() 
->> and
->> psc_reason_from_token() so consumers can emit and parse reasons 
->> without
->> inventing their own string table.
->>
->> Co-developed-by: Oleksij Rempel <o.rempel@pengutronix.de>
->> Signed-off-by: Oleksij Rempel <o.rempel@pengutronix.de>
->> Signed-off-by: Faruque Ansari <faruque.ansari@oss.qualcomm.com>
->>
->> changes v12:
->> - new patch
->> ---
->>   include/linux/reboot.h |  2 ++
->>   kernel/reboot.c        | 77 +++++++++++++++++++++++++++++++++ 
->> ++++++-----------
->>   2 files changed, 63 insertions(+), 16 deletions(-)
->>
->> diff --git a/include/linux/reboot.h b/include/linux/reboot.h
->> index 08a7549bbc40..4c5327dd7645 100644
->> --- a/include/linux/reboot.h
->> +++ b/include/linux/reboot.h
->> @@ -244,6 +244,8 @@ enum psc_reason {
->>   #define PSCR_MAX_REASON    (PSCR_REASON_COUNT - 1)
->>   const char *psc_reason_to_str(enum psc_reason reason);
->> +const char *psc_reason_to_token(enum psc_reason reason);
->> +int psc_reason_from_token(const char *token, enum psc_reason 
->> *reason);
->>   /**
->>    * enum hw_protection_action - Hardware protection action
->> diff --git a/kernel/reboot.c b/kernel/reboot.c
->> index d5a45db82c3d..e53fb31bad06 100644
->> --- a/kernel/reboot.c
->> +++ b/kernel/reboot.c
->> @@ -1084,34 +1084,79 @@ void set_psc_reason(enum psc_reason 
->> reason)
->>   }
->>   EXPORT_SYMBOL_GPL(set_psc_reason);
->> -static const char * const pscr_reason_strs[] = {
->> -    [PSCR_UNKNOWN]            = POWER_ON_REASON_UNKNOWN,
->> -    [PSCR_UNDER_VOLTAGE]      = POWER_ON_REASON_BROWN_OUT,
->> -    [PSCR_OVER_CURRENT]       = POWER_ON_REASON_OVER_CURRENT,
->> -    [PSCR_REGULATOR_FAILURE]  = 
->> POWER_ON_REASON_REGULATOR_FAILURE,
->> -    [PSCR_OVER_TEMPERATURE]   = POWER_ON_REASON_OVER_TEMPERATURE,
->> -    [PSCR_EC_PANIC]           = POWER_ON_REASON_EC_PANIC,
->> +/**
->> + * struct psc_reason_desc - Descriptor for a power state 
->> change reason.
->> + * @token: Stable, parsable identifier without spaces (e.g. 
->> "over-temperature").
->> + *       Suitable for use in sysfs values and as a user/kernel 
->> contract.
->> + * @label: Human-readable description (e.g. "over 
->> temperature"), for logs.
->> + */
->> +struct psc_reason_desc {
->> +    const char *token;
->> +    const char *label;
->> +};
->> +
->> +static const struct psc_reason_desc psc_reason_descs[] = {
->> +    [PSCR_UNKNOWN]         = { "unknown",          
->> POWER_ON_REASON_UNKNOWN },
->> +    [PSCR_UNDER_VOLTAGE]     = { "under-voltage",      
->> POWER_ON_REASON_BROWN_OUT },
->> +    [PSCR_OVER_CURRENT]     = { "over-current",      
->> POWER_ON_REASON_OVER_CURRENT },
->> +    [PSCR_REGULATOR_FAILURE] = { "regulator-failure", 
->> POWER_ON_REASON_REGULATOR_FAILURE },
->> +    [PSCR_OVER_TEMPERATURE]     = { "over-temperature",  
->> POWER_ON_REASON_OVER_TEMPERATURE },
->> +    [PSCR_EC_PANIC]         = { "ec-panic",      
->> POWER_ON_REASON_EC_PANIC },
->>   };
-> 
-> nit:
-> Is there a reason for having the label as a define while token is 
-> a plain string? It may be just me, but I would have expected the 
-> userland contract to be defined in a header. (It may be just my 
-> false expectation though!).
+While at it, rename the files from drm_fb_helper to drm_fbdev_helper.
+The old name was too reminiscent of DRM's framebuffer code.
 
-Thanks for the review.
+The GEM support code for fbdev remains part of DRM's memory managers.
 
-On token vs. label: I'd prefer to keep token as a plain literal 
-in reboot.c. Unlike label, which mirrors the shared 
-POWER_ON_REASON_* definitions and is used by code outside 
-reboot.c, token is introduced by this patch and is only produced 
-and consumed by psc_reason_to_token() and psc_reason_from_token() 
-within this file.
-Since there are no external users that need the string to be 
-shared, moving it to a header doesn't provide additional benefit.
+Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
+---
+ drivers/gpu/drm/Makefile                                      | 1 -
+ drivers/gpu/drm/amd/amdgpu/amdgpu_display.c                   | 2 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_kms.c                       | 2 +-
+ drivers/gpu/drm/clients/Makefile                              | 3 ++-
+ drivers/gpu/drm/clients/drm_fbdev_client.c                    | 2 +-
+ .../gpu/drm/{drm_fb_helper.c => clients/drm_fbdev_helper.c}   | 2 +-
+ drivers/gpu/drm/drm_fbdev_dma.c                               | 2 +-
+ drivers/gpu/drm/drm_fbdev_shmem.c                             | 2 +-
+ drivers/gpu/drm/drm_fbdev_ttm.c                               | 2 +-
+ drivers/gpu/drm/exynos/exynos_drm_fbdev.c                     | 2 +-
+ drivers/gpu/drm/gma500/fbdev.c                                | 2 +-
+ drivers/gpu/drm/i915/display/intel_fbdev.c                    | 2 +-
+ drivers/gpu/drm/msm/msm_debugfs.c                             | 2 +-
+ drivers/gpu/drm/msm/msm_fbdev.c                               | 2 +-
+ drivers/gpu/drm/nouveau/dispnv50/disp.c                       | 1 -
+ drivers/gpu/drm/omapdrm/omap_debugfs.c                        | 2 +-
+ drivers/gpu/drm/omapdrm/omap_fbdev.c                          | 2 +-
+ drivers/gpu/drm/radeon/radeon_device.c                        | 2 +-
+ drivers/gpu/drm/radeon/radeon_fbdev.c                         | 2 +-
+ drivers/gpu/drm/rockchip/rockchip_drm_gem.c                   | 2 +-
+ drivers/gpu/drm/sitronix/st7571.c                             | 1 -
+ drivers/gpu/drm/tegra/fbdev.c                                 | 2 +-
+ drivers/gpu/drm/vboxvideo/vbox_mode.c                         | 2 +-
+ include/drm/{drm_fb_helper.h => clients/drm_fbdev_helper.h}   | 4 ++--
+ 24 files changed, 23 insertions(+), 25 deletions(-)
+ rename drivers/gpu/drm/{drm_fb_helper.c => clients/drm_fbdev_helper.c} (99%)
+ rename include/drm/{drm_fb_helper.h => clients/drm_fbdev_helper.h} (99%)
 
-> 
->>   /**
->> - * psc_reason_to_str - Converts a power state change reason 
->> enum to a string.
->> - * @reason: The `psc_reason` enum value to be converted.
->> - *
->> - * This function provides a human-readable string 
->> representation of the power
->> - * state change reason, making it easier to interpret logs and 
->> debug messages.
->> + * psc_reason_to_str - Human-readable label for a power state 
->> change reason.
->> + * @reason: The `psc_reason` value to convert.
->>    *
->> - * Return:
->> - * - A string corresponding to the given `psc_reason` value.
->> - * - `"Invalid"` if the value is not recognized.
->> + * Return: The label string, or "Invalid" if @reason is out of 
->> range. For a
->> + * stable, parsable form use psc_reason_to_token() instead.
->>    */
->>   const char *psc_reason_to_str(enum psc_reason reason)
->>   {
->>       if (reason < 0 || reason >= PSCR_REASON_COUNT)
->>           return "Invalid";
->> -    return pscr_reason_strs[reason];
->> +    return psc_reason_descs[reason].label;
-> 
-> nit:
-> I would feel a tad safer if the psc_reason_descs[] was always 
-> guaranteed to be initialized up-to PSCR_REASON_COUNT. Having the 
-> enum and PSCR_REASON_COUNT defined in one place, and 
-> psc_reason_descs[] initialized here, adds a window for: "I added 
-> new enum value, forgot to update the psc_reason_descs[]". Can we 
-> add a NULL check or are we on a very performance critical path here?
-> 
-
-Thanks for pointing this out. I'll fix it in the next revision.
-
->>   }
->>   EXPORT_SYMBOL_GPL(psc_reason_to_str);
->> +/**
->> + * psc_reason_to_token - Stable, parsable token for a power 
->> state change reason.
->> + * @reason: The `psc_reason` value to convert.
->> + *
->> + * Return: The token string (no spaces), or "invalid" if 
->> @reason is out of
->> + * range. Round-trips with psc_reason_from_token().
->> + */
->> +const char *psc_reason_to_token(enum psc_reason reason)
->> +{
->> +    if (reason < 0 || reason >= PSCR_REASON_COUNT)
->> +        return "invalid";
->> +    return psc_reason_descs[reason].token;
-> 
-> Please, see my comment above.
-> 
->> +}
->> +EXPORT_SYMBOL_GPL(psc_reason_to_token);
->> +
->> +/**
->> + * psc_reason_from_token - Parse a reason token into a 
->> `psc_reason` value.
->> + * @token: A token as returned by psc_reason_to_token(). A 
->> trailing newline is
->> + *       tolerated.
->> + * @reason: Output; set on success.
->> + *
->> + * Return: 0 on success or -EINVAL if @token matches no known 
->> reason.
->> + */
->> +int psc_reason_from_token(const char *token, enum psc_reason 
->> *reason)
->> +{
->> +    int i;
->> +
->> +    for (i = 0; i < PSCR_REASON_COUNT; i++) {
->> +        if (sysfs_streq(token, psc_reason_descs[i].token)) {
-> 
-> I suppose my comment applies here as well.
-> 
->> +            *reason = i;
->> +            return 0;
->> +        }
->> +    }
->> +
->> +    return -EINVAL;
->> +}
->> +EXPORT_SYMBOL_GPL(psc_reason_from_token);
->> +
->>   /**
->>    * __hw_protection_trigger - Trigger an emergency system 
->> shutdown or reboot
->>    *
-> 
-> After all these years in the business - it's hard to be as 
-> confident as I used to. ;) So, I won't say [aloud] that my 
-> preferred way is the only correct way. Please weigh my comments 
-> and decide as you see best, this is "good enough" for me if you 
-> don't agree with my suggestions.
-
-I agree with your suggestion and will incorporate it in the next 
-version.
-
-Thanks,
-Faruque Ansari
-
-> 
-> Reviewed-by: Matti Vaittinen <mazziesaccount@gmail.com>
-> 
-> Yours,
->    -- Matti
-> 
+diff --git a/drivers/gpu/drm/Makefile b/drivers/gpu/drm/Makefile
+index f0c340aa2ec6..3a0f2095de3c 100644
+--- a/drivers/gpu/drm/Makefile
++++ b/drivers/gpu/drm/Makefile
+@@ -158,7 +158,6 @@ drm_kms_helper-y := \
+ drm_kms_helper-$(CONFIG_DRM_PANEL_BRIDGE) += bridge/panel.o
+ drm_kms_helper-$(CONFIG_DRM_PANIC_HELPER) += drm_panic_helper.o
+ drm_kms_helper-$(CONFIG_DRM_PANIC_SCREEN_QR_CODE) += drm_panic_helper_qr.o
+-drm_kms_helper-$(CONFIG_DRM_FBDEV_EMULATION) += drm_fb_helper.o
+ obj-$(CONFIG_DRM_KMS_HELPER) += drm_kms_helper.o
+ 
+ #
+diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_display.c b/drivers/gpu/drm/amd/amdgpu/amdgpu_display.c
+index 59ea338b554c..126bfd9bb89e 100644
+--- a/drivers/gpu/drm/amd/amdgpu/amdgpu_display.c
++++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_display.c
+@@ -38,11 +38,11 @@
+ 
+ #include <linux/pci.h>
+ #include <linux/pm_runtime.h>
++#include <drm/clients/drm_fbdev_helper.h>
+ #include <drm/drm_crtc_helper.h>
+ #include <drm/drm_damage_helper.h>
+ #include <drm/drm_drv.h>
+ #include <drm/drm_edid.h>
+-#include <drm/drm_fb_helper.h>
+ #include <drm/drm_gem_framebuffer_helper.h>
+ #include <drm/drm_fourcc.h>
+ #include <drm/drm_modeset_helper.h>
+diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_kms.c b/drivers/gpu/drm/amd/amdgpu/amdgpu_kms.c
+index f2f179421c4d..51a7a4091376 100644
+--- a/drivers/gpu/drm/amd/amdgpu/amdgpu_kms.c
++++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_kms.c
+@@ -28,8 +28,8 @@
+ 
+ #include "amdgpu.h"
+ #include <drm/amdgpu_drm.h>
++#include <drm/clients/drm_fbdev_helper.h>
+ #include <drm/drm_drv.h>
+-#include <drm/drm_fb_helper.h>
+ #include "amdgpu_uvd.h"
+ #include "amdgpu_vce.h"
+ #include "atom.h"
+diff --git a/drivers/gpu/drm/clients/Makefile b/drivers/gpu/drm/clients/Makefile
+index c16addbc327f..1304ff358509 100644
+--- a/drivers/gpu/drm/clients/Makefile
++++ b/drivers/gpu/drm/clients/Makefile
+@@ -4,5 +4,6 @@ subdir-ccflags-y += -I$(src)/..
+ 
+ drm_client_lib-y := drm_client_setup.o
+ drm_client_lib-$(CONFIG_DRM_CLIENT_LOG) += drm_log.o
+-drm_client_lib-$(CONFIG_DRM_FBDEV_EMULATION) += drm_fbdev_client.o
++drm_client_lib-$(CONFIG_DRM_FBDEV_EMULATION) += drm_fbdev_client.o \
++						drm_fbdev_helper.o
+ obj-$(CONFIG_DRM_CLIENT_LIB) += drm_client_lib.o
+diff --git a/drivers/gpu/drm/clients/drm_fbdev_client.c b/drivers/gpu/drm/clients/drm_fbdev_client.c
+index 7574bd36f45e..eec463d19943 100644
+--- a/drivers/gpu/drm/clients/drm_fbdev_client.c
++++ b/drivers/gpu/drm/clients/drm_fbdev_client.c
+@@ -1,9 +1,9 @@
+ // SPDX-License-Identifier: MIT
+ 
++#include <drm/clients/drm_fbdev_helper.h>
+ #include <drm/drm_client.h>
+ #include <drm/drm_crtc_helper.h>
+ #include <drm/drm_drv.h>
+-#include <drm/drm_fb_helper.h>
+ #include <drm/drm_fourcc.h>
+ #include <drm/drm_print.h>
+ 
+diff --git a/drivers/gpu/drm/drm_fb_helper.c b/drivers/gpu/drm/clients/drm_fbdev_helper.c
+similarity index 99%
+rename from drivers/gpu/drm/drm_fb_helper.c
+rename to drivers/gpu/drm/clients/drm_fbdev_helper.c
+index 76195410db60..fff3cf6a0aed 100644
+--- a/drivers/gpu/drm/drm_fb_helper.c
++++ b/drivers/gpu/drm/clients/drm_fbdev_helper.c
+@@ -32,9 +32,9 @@
+ #include <linux/console.h>
+ #include <linux/export.h>
+ 
++#include <drm/clients/drm_fbdev_helper.h>
+ #include <drm/drm_atomic.h>
+ #include <drm/drm_drv.h>
+-#include <drm/drm_fb_helper.h>
+ #include <drm/drm_fourcc.h>
+ #include <drm/drm_framebuffer.h>
+ #include <drm/drm_gem_framebuffer_helper.h>
+diff --git a/drivers/gpu/drm/drm_fbdev_dma.c b/drivers/gpu/drm/drm_fbdev_dma.c
+index 9412d9fdd74b..452f84400350 100644
+--- a/drivers/gpu/drm/drm_fbdev_dma.c
++++ b/drivers/gpu/drm/drm_fbdev_dma.c
+@@ -4,10 +4,10 @@
+ #include <linux/fb.h>
+ #include <linux/vmalloc.h>
+ 
++#include <drm/clients/drm_fbdev_helper.h>
+ #include <drm/drm_drv.h>
+ #include <drm/drm_fbdev_dma.h>
+ #include <drm/drm_fb_dma_helper.h>
+-#include <drm/drm_fb_helper.h>
+ #include <drm/drm_framebuffer.h>
+ #include <drm/drm_gem_dma_helper.h>
+ #include <drm/drm_print.h>
+diff --git a/drivers/gpu/drm/drm_fbdev_shmem.c b/drivers/gpu/drm/drm_fbdev_shmem.c
+index 458c899b5d4f..8eb05fe9bc98 100644
+--- a/drivers/gpu/drm/drm_fbdev_shmem.c
++++ b/drivers/gpu/drm/drm_fbdev_shmem.c
+@@ -3,9 +3,9 @@
+ #include <linux/export.h>
+ #include <linux/fb.h>
+ 
++#include <drm/clients/drm_fbdev_helper.h>
+ #include <drm/drm_drv.h>
+ #include <drm/drm_fbdev_shmem.h>
+-#include <drm/drm_fb_helper.h>
+ #include <drm/drm_framebuffer.h>
+ #include <drm/drm_gem_framebuffer_helper.h>
+ #include <drm/drm_gem_shmem_helper.h>
+diff --git a/drivers/gpu/drm/drm_fbdev_ttm.c b/drivers/gpu/drm/drm_fbdev_ttm.c
+index 160bc35d8738..8eb59c2ac5ea 100644
+--- a/drivers/gpu/drm/drm_fbdev_ttm.c
++++ b/drivers/gpu/drm/drm_fbdev_ttm.c
+@@ -4,9 +4,9 @@
+ #include <linux/moduleparam.h>
+ #include <linux/vmalloc.h>
+ 
++#include <drm/clients/drm_fbdev_helper.h>
+ #include <drm/drm_crtc_helper.h>
+ #include <drm/drm_drv.h>
+-#include <drm/drm_fb_helper.h>
+ #include <drm/drm_framebuffer.h>
+ #include <drm/drm_gem.h>
+ #include <drm/drm_print.h>
+diff --git a/drivers/gpu/drm/exynos/exynos_drm_fbdev.c b/drivers/gpu/drm/exynos/exynos_drm_fbdev.c
+index 8641c9e84d4c..f412269d6323 100644
+--- a/drivers/gpu/drm/exynos/exynos_drm_fbdev.c
++++ b/drivers/gpu/drm/exynos/exynos_drm_fbdev.c
+@@ -10,9 +10,9 @@
+ 
+ #include <linux/fb.h>
+ 
++#include <drm/clients/drm_fbdev_helper.h>
+ #include <drm/drm_crtc_helper.h>
+ #include <drm/drm_drv.h>
+-#include <drm/drm_fb_helper.h>
+ #include <drm/drm_framebuffer.h>
+ #include <drm/drm_gem_framebuffer_helper.h>
+ #include <drm/drm_prime.h>
+diff --git a/drivers/gpu/drm/gma500/fbdev.c b/drivers/gpu/drm/gma500/fbdev.c
+index d1e93588234f..428912574f20 100644
+--- a/drivers/gpu/drm/gma500/fbdev.c
++++ b/drivers/gpu/drm/gma500/fbdev.c
+@@ -7,9 +7,9 @@
+ 
+ #include <linux/fb.h>
+ 
++#include <drm/clients/drm_fbdev_helper.h>
+ #include <drm/drm_crtc_helper.h>
+ #include <drm/drm_drv.h>
+-#include <drm/drm_fb_helper.h>
+ #include <drm/drm_framebuffer.h>
+ 
+ #include "gem.h"
+diff --git a/drivers/gpu/drm/i915/display/intel_fbdev.c b/drivers/gpu/drm/i915/display/intel_fbdev.c
+index db0e36dd8722..219ee17de3f6 100644
+--- a/drivers/gpu/drm/i915/display/intel_fbdev.c
++++ b/drivers/gpu/drm/i915/display/intel_fbdev.c
+@@ -38,10 +38,10 @@
+ #include <linux/vga_switcheroo.h>
+ 
+ #include <drm/clients/drm_client_setup.h>
++#include <drm/clients/drm_fbdev_helper.h>
+ #include <drm/intel/display_parent_interface.h>
+ #include <drm/drm_crtc.h>
+ #include <drm/drm_crtc_helper.h>
+-#include <drm/drm_fb_helper.h>
+ #include <drm/drm_fourcc.h>
+ #include <drm/drm_gem.h>
+ #include <drm/drm_gem_framebuffer_helper.h>
+diff --git a/drivers/gpu/drm/msm/msm_debugfs.c b/drivers/gpu/drm/msm/msm_debugfs.c
+index f12701e286ec..d05307bfa123 100644
+--- a/drivers/gpu/drm/msm/msm_debugfs.c
++++ b/drivers/gpu/drm/msm/msm_debugfs.c
+@@ -9,8 +9,8 @@
+ #include <linux/debugfs.h>
+ #include <linux/fault-inject.h>
+ 
++#include <drm/clients/drm_fbdev_helper.h>
+ #include <drm/drm_debugfs.h>
+-#include <drm/drm_fb_helper.h>
+ #include <drm/drm_file.h>
+ #include <drm/drm_framebuffer.h>
+ 
+diff --git a/drivers/gpu/drm/msm/msm_fbdev.c b/drivers/gpu/drm/msm/msm_fbdev.c
+index dd6d6c507d77..f37cc3f97a21 100644
+--- a/drivers/gpu/drm/msm/msm_fbdev.c
++++ b/drivers/gpu/drm/msm/msm_fbdev.c
+@@ -6,9 +6,9 @@
+ 
+ #include <linux/fb.h>
+ 
++#include <drm/clients/drm_fbdev_helper.h>
+ #include <drm/drm_drv.h>
+ #include <drm/drm_crtc_helper.h>
+-#include <drm/drm_fb_helper.h>
+ #include <drm/drm_file.h>
+ #include <drm/drm_fourcc.h>
+ #include <drm/drm_framebuffer.h>
+diff --git a/drivers/gpu/drm/nouveau/dispnv50/disp.c b/drivers/gpu/drm/nouveau/dispnv50/disp.c
+index add19d479ebe..e91130f93db6 100644
+--- a/drivers/gpu/drm/nouveau/dispnv50/disp.c
++++ b/drivers/gpu/drm/nouveau/dispnv50/disp.c
+@@ -40,7 +40,6 @@
+ #include <drm/drm_atomic_helper.h>
+ #include <drm/drm_edid.h>
+ #include <drm/drm_eld.h>
+-#include <drm/drm_fb_helper.h>
+ #include <drm/drm_fixed.h>
+ #include <drm/drm_probe_helper.h>
+ #include <drm/drm_vblank.h>
+diff --git a/drivers/gpu/drm/omapdrm/omap_debugfs.c b/drivers/gpu/drm/omapdrm/omap_debugfs.c
+index 9edc1b3f9f95..1c40c489ed72 100644
+--- a/drivers/gpu/drm/omapdrm/omap_debugfs.c
++++ b/drivers/gpu/drm/omapdrm/omap_debugfs.c
+@@ -6,10 +6,10 @@
+ 
+ #include <linux/seq_file.h>
+ 
++#include <drm/clients/drm_fbdev_helper.h>
+ #include <drm/drm_crtc.h>
+ #include <drm/drm_debugfs.h>
+ #include <drm/drm_file.h>
+-#include <drm/drm_fb_helper.h>
+ #include <drm/drm_framebuffer.h>
+ #include <drm/drm_print.h>
+ 
+diff --git a/drivers/gpu/drm/omapdrm/omap_fbdev.c b/drivers/gpu/drm/omapdrm/omap_fbdev.c
+index 4881777642d2..e1dcc3cb7c55 100644
+--- a/drivers/gpu/drm/omapdrm/omap_fbdev.c
++++ b/drivers/gpu/drm/omapdrm/omap_fbdev.c
+@@ -7,9 +7,9 @@
+ #include <linux/fb.h>
+ 
+ #include <drm/clients/drm_client_setup.h>
++#include <drm/clients/drm_fbdev_helper.h>
+ #include <drm/drm_drv.h>
+ #include <drm/drm_crtc_helper.h>
+-#include <drm/drm_fb_helper.h>
+ #include <drm/drm_file.h>
+ #include <drm/drm_fourcc.h>
+ #include <drm/drm_framebuffer.h>
+diff --git a/drivers/gpu/drm/radeon/radeon_device.c b/drivers/gpu/drm/radeon/radeon_device.c
+index 9523240110a6..fdbdcefa84e7 100644
+--- a/drivers/gpu/drm/radeon/radeon_device.c
++++ b/drivers/gpu/drm/radeon/radeon_device.c
+@@ -33,11 +33,11 @@
+ #include <linux/vga_switcheroo.h>
+ #include <linux/vgaarb.h>
+ 
++#include <drm/clients/drm_fbdev_helper.h>
+ #include <drm/drm_cache.h>
+ #include <drm/drm_client_event.h>
+ #include <drm/drm_crtc_helper.h>
+ #include <drm/drm_device.h>
+-#include <drm/drm_fb_helper.h>
+ #include <drm/drm_file.h>
+ #include <drm/drm_framebuffer.h>
+ #include <drm/drm_probe_helper.h>
+diff --git a/drivers/gpu/drm/radeon/radeon_fbdev.c b/drivers/gpu/drm/radeon/radeon_fbdev.c
+index 3e243f5e2f44..e40c23d9dff2 100644
+--- a/drivers/gpu/drm/radeon/radeon_fbdev.c
++++ b/drivers/gpu/drm/radeon/radeon_fbdev.c
+@@ -29,9 +29,9 @@
+ #include <linux/pm_runtime.h>
+ #include <linux/vga_switcheroo.h>
+ 
++#include <drm/clients/drm_fbdev_helper.h>
+ #include <drm/drm_crtc_helper.h>
+ #include <drm/drm_drv.h>
+-#include <drm/drm_fb_helper.h>
+ #include <drm/drm_fourcc.h>
+ #include <drm/drm_framebuffer.h>
+ #include <drm/drm_gem_framebuffer_helper.h>
+diff --git a/drivers/gpu/drm/rockchip/rockchip_drm_gem.c b/drivers/gpu/drm/rockchip/rockchip_drm_gem.c
+index 9a1dc9f12072..b55113a7a00b 100644
+--- a/drivers/gpu/drm/rockchip/rockchip_drm_gem.c
++++ b/drivers/gpu/drm/rockchip/rockchip_drm_gem.c
+@@ -8,9 +8,9 @@
+ #include <linux/iommu.h>
+ #include <linux/vmalloc.h>
+ 
++#include <drm/clients/drm_fbdev_helper.h>
+ #include <drm/drm.h>
+ #include <drm/drm_dumb_buffers.h>
+-#include <drm/drm_fb_helper.h>
+ #include <drm/drm_gem.h>
+ #include <drm/drm_gem_dma_helper.h>
+ #include <drm/drm_prime.h>
+diff --git a/drivers/gpu/drm/sitronix/st7571.c b/drivers/gpu/drm/sitronix/st7571.c
+index fc3ba5e8600f..5e60c4685671 100644
+--- a/drivers/gpu/drm/sitronix/st7571.c
++++ b/drivers/gpu/drm/sitronix/st7571.c
+@@ -20,7 +20,6 @@
+ #include <drm/drm_damage_helper.h>
+ #include <drm/drm_drv.h>
+ #include <drm/drm_encoder.h>
+-#include <drm/drm_fb_helper.h>
+ #include <drm/drm_fbdev_shmem.h>
+ #include <drm/drm_fourcc.h>
+ #include <drm/drm_framebuffer.h>
+diff --git a/drivers/gpu/drm/tegra/fbdev.c b/drivers/gpu/drm/tegra/fbdev.c
+index 003e80cf7b9a..64c2e64f219b 100644
+--- a/drivers/gpu/drm/tegra/fbdev.c
++++ b/drivers/gpu/drm/tegra/fbdev.c
+@@ -11,9 +11,9 @@
+ #include <linux/fb.h>
+ #include <linux/vmalloc.h>
+ 
++#include <drm/clients/drm_fbdev_helper.h>
+ #include <drm/drm_drv.h>
+ #include <drm/drm_crtc_helper.h>
+-#include <drm/drm_fb_helper.h>
+ #include <drm/drm_fourcc.h>
+ #include <drm/drm_framebuffer.h>
+ #include <drm/drm_gem_framebuffer_helper.h>
+diff --git a/drivers/gpu/drm/vboxvideo/vbox_mode.c b/drivers/gpu/drm/vboxvideo/vbox_mode.c
+index bb3f7f0ad7c4..7c34299fa531 100644
+--- a/drivers/gpu/drm/vboxvideo/vbox_mode.c
++++ b/drivers/gpu/drm/vboxvideo/vbox_mode.c
+@@ -13,11 +13,11 @@
+ #include <linux/iosys-map.h>
+ #include <linux/export.h>
+ 
++#include <drm/clients/drm_fbdev_helper.h>
+ #include <drm/drm_atomic.h>
+ #include <drm/drm_atomic_helper.h>
+ #include <drm/drm_blend.h>
+ #include <drm/drm_edid.h>
+-#include <drm/drm_fb_helper.h>
+ #include <drm/drm_fourcc.h>
+ #include <drm/drm_framebuffer.h>
+ #include <drm/drm_gem_atomic_helper.h>
+diff --git a/include/drm/drm_fb_helper.h b/include/drm/clients/drm_fbdev_helper.h
+similarity index 99%
+rename from include/drm/drm_fb_helper.h
+rename to include/drm/clients/drm_fbdev_helper.h
+index 0c5e5ed7b5e7..7575aaf34c62 100644
+--- a/include/drm/drm_fb_helper.h
++++ b/include/drm/clients/drm_fbdev_helper.h
+@@ -27,8 +27,8 @@
+  *      Dave Airlie <airlied@linux.ie>
+  *      Jesse Barnes <jesse.barnes@intel.com>
+  */
+-#ifndef DRM_FB_HELPER_H
+-#define DRM_FB_HELPER_H
++#ifndef DRM_FBDEV_HELPER_H
++#define DRM_FBDEV_HELPER_H
+ 
+ struct drm_clip_rect;
+ struct drm_fb_helper;
+-- 
+2.55.0
 
