@@ -1,37 +1,38 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AEC0E50129B;
-	Wed, 23 Sep 2026 12:05:23 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3729A511E8A;
+	Wed, 23 Sep 2026 12:05:25 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790165123; cv=none; b=i8qVXaaGXu/ciCQVSfouVr2RQejzrthsDTWLdLOlDIdso56f04DUQsKtF3HqWzY3s1zfcjtWefmhsyTbY0rY4yq6MCrQoUYo+GnLPzVno1GGRgm0n2kNkjsesjEesfAIklkx0V17VH4i4TB2/4fBNbFwM/PEMgyekEfiPJNE5sE=
+	t=1790165125; cv=none; b=d3Q5ks4vCtJcp/rCpvi+abmU+JTCbnsLYWygDgQ8uK0rIZIFmxw9hMFjN/uGjONuCkWqPnuBhdjlUDykSOg6tk02I1yScQ7gNWb8RhVbHsgyUX6bYtQ5Q9LVAHRJbgBPYpUIQauVtIlRqQE4u0hCRatBixUUSSxqsA6IMe0BFcs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790165123; c=relaxed/simple;
-	bh=cL5+YFpsqpZKGpz68YOUSSKCHE8atf18HiZnV4MKXmo=;
+	s=arc-20240116; t=1790165125; c=relaxed/simple;
+	bh=EhK0W4v/QWQboSgQv0FiQZyCRjGIoZ4QrJsYKB6dfn8=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=updOnLmt/6V+SApJmNYSxDGOAV7eZkKseQOL+KPKaOtr9UJ8TSkegExib78kegjkYYIJp5cQ5QVBdFi93WxON9e58dC0doscScSEiMDYIJfhRWvs94FHBEJ3EJXnTqmmiOkVvaT12zrKQUmgDmcMD6g8HUjQkk65bWwYFXmB7/c=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=vAK5zYOt; arc=none smtp.client-ip=10.30.226.201
+	 In-Reply-To:To:Cc; b=IvrVkx9whuwx34M5/9Om/yLTEBAAogWPiwrchHPRLpoIRXgSaV+x3yi4F4SglK7owW3B1VS9RqwKxtmSXqFtKhrAdXQZhQw9tPn88xggFQDPUOPSNmivLetIVaHv3kzdtL/WJwHAR1nkHtgjjq84xyN1cwdUecGEDqeIeu35pNo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=EReKHZsV; arc=none smtp.client-ip=10.30.226.201
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="vAK5zYOt"
-Received: by smtp.kernel.org (Postfix) with ESMTPS id C1923C4AF0B;
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="EReKHZsV"
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 6077DC32786;
 	Wed, 23 Sep 2026 12:05:21 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
 	s=k20201202; t=1790165121;
-	bh=cL5+YFpsqpZKGpz68YOUSSKCHE8atf18HiZnV4MKXmo=;
+	bh=EhK0W4v/QWQboSgQv0FiQZyCRjGIoZ4QrJsYKB6dfn8=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
-	b=vAK5zYOtijl1haOI9gXqsv8ACUPMutJwUPLC6WTnT1AZh3Y6sZE3xXDrp6OiFM7JK
-	 UVObtbnF9HeL0DjifTgJ56SIYL5et9/OfuUH4g97Q1mLDfQJ2Kzxm5yvyumOCH9puM
-	 oaAVBiUpFVCTibcsfJCs9Am84DrNXPNf43UtmpLXD6+bnPe05S6CkClPLU+QZXuPhB
-	 YRa1xpIo76ugmj3f1v8SWVG272xJjlV3vYBBS/hxxBdNEYh4qVoCku9K6f2BZECF97
-	 33lByZA+6YX4xc+SyIuf+wyT3RfRlX9Z5LNHF3qk7wEV4T6lGh9QrygnHV9gbXEHoP
-	 MV3vRJo6IOqgg==
+	b=EReKHZsVjtaj262kHJ+tkTTga2kFSlEl/P0mW65wYJITyoVMFYhKEp+dFzD4U450N
+	 8breq4yZKDsQhjc2VfRatTVggL60n46NvLn2ikvNEOQvRc58nYaaLKylsvf0ccQUvR
+	 nPYmb3VVvqy0j4svCJQf5CI75Ocrw5OsY/aJIVEe4ZFRdmIO+b2XLdFpjjAOjCN6zk
+	 8DAygTlrzuYwLdV8qpyT92Luu9oXVk9YeuttVIfYlSPEgSFw4yPgMJbqJ/MNw1b5ps
+	 3VvEaS3LeH2Pq5XDtBeg0ifVnh5AFGqpesUOfG/bblV80n2ih1V9DC4TQ0Cbe5g2uu
+	 rBJiZQulPxyWA==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AD9AEC982FA;
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4D205C9830D;
 	Wed, 23 Sep 2026 12:05:21 +0000 (UTC)
 From: George Moussalem via B4 Relay <devnull+george.moussalem.outlook.com@kernel.org>
-Date: Wed, 23 Sep 2026 16:05:22 +0400
-Subject: [PATCH ath-next 16/16] wifi: ath11k: add QCN6122 device support
+Date: Wed, 23 Sep 2026 16:05:16 +0400
+Subject: [PATCH ath-next 10/16] dt-bindings: net: wireless: ath11k: Add
+ bindings for QCN6122
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -40,7 +41,7 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260923-ipq5018-qcn6122-mpd-v1-16-86729521a75c@outlook.com>
+Message-Id: <20260923-ipq5018-qcn6122-mpd-v1-10-86729521a75c@outlook.com>
 References: <20260923-ipq5018-qcn6122-mpd-v1-0-86729521a75c@outlook.com>
 In-Reply-To: <20260923-ipq5018-qcn6122-mpd-v1-0-86729521a75c@outlook.com>
 To: Johannes Berg <johannes@sipsolutions.net>, 
@@ -55,11 +56,11 @@ Cc: linux-wireless@vger.kernel.org, devicetree@vger.kernel.org,
  linux-arm-msm@vger.kernel.org, 
  George Moussalem <george.moussalem@outlook.com>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1790165117; l=2721;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1790165117; l=9542;
  i=george.moussalem@outlook.com; s=20250321; h=from:subject:message-id;
- bh=N0lWRlkViy66JiabYe3wnlNpM0tjJSjRzUVdOXoZ9Gs=;
- b=ToSFrdMAsPUqm34M8ORvBROXcmsCcULlAR9RBecaTVXwiXWOjpr9vkoHJZdK+tfkF0OdSXTgR
- 8mBh+8gPFSZDoPSuVKzWN20Nk8CGHwe/JuaZ7Nci5MMz30OhGbHNugr
+ bh=AMmUM3ppUAEMYWiKIHUzMgENqvh58tpVmet+RfpQRGA=;
+ b=KddqHTm2dhPWaE2pvLI3lphALP/XjHvwb66YiQi0ATFRsAwBVw1o7rW8eU8f7RMsko7i5Qy4G
+ VPH400sOf2dBPijM66rmtkG3yrwzaGbdnlvpuaVMpkxXkPSWR3QMIsr
 X-Developer-Key: i=george.moussalem@outlook.com; a=ed25519;
  pk=/PuRTSI9iYiHwcc6Nrde8qF4ZDhJBlUgpHdhsIjnqIk=
 X-Endpoint-Received: by B4 Relay for george.moussalem@outlook.com/20250321
@@ -69,77 +70,234 @@ Reply-To: george.moussalem@outlook.com
 
 From: George Moussalem <george.moussalem@outlook.com>
 
-QCN6122 is a 2x2 11AX PCIe based chipset, but it is attached to the WPSS
-(Wireless Processor SubSystem) Q6 processor, hence it is enumerated
-by the Q6 processor. It is registered to the APSS processor as a
-platform device (AHB).
+Add bindings for QCN6122, which is a companion chip to IPQ5018. The
+QCN6122 is a 5G/6G WiFi chip that is used in conjunction with the
+IPQ5018 SoC in a multi-PD (MPD) configuration.
 
-Q6 firmware segments for QCN6122 are contained within the multi-PD
-version of the shared firmware package for IPQ5018. Each (up to 2)
-QCN6122 radio present runs in its own user PD which the ath11k driver
-manages to power it up or down.
+WiFi on IPQ5018 boards come in one of the following configurations:
+1. IPQ5018 (standalone) + optional 5G/6G WiFi card (such as QCN9074)
+2. IPQ5018 (MPD) + one or two 5G/6G QCN6122 WiFi chips.
 
-Also, device information like BAR and its size is not known to the APSS
-processor as the chip is enumerated by WPSS Q6. These details are
-fetched over QMI.
+IPQ5018 implements the multi-PD architecture as follows:
 
-The QCN6122 chip supports STA, AP, and MESH modes.
+                     +-----------------------------+
+                     |     Q6 Remote Processor     |
+                     |            RootPD           |
+                     +--------------+--------------+
+                                    |
+                                    |
+                                    |
+              +---------------------+---------------------+
+              |                     |                     |
+        +-----v-----+         +-----v-----+         +-----v-----+
+        |  UserPD1  |         |  UserPD2  |         |  UserPD3  |
+        |  IPQ5018  |         | QCN6122 #1|         | QCN6122 #2|
+        |  (Radio)  |         |  (Radio)  |         |  (Radio)  |
+        +-----------+         +-----------+         +-----------+
 
-Tested on: Linksys MX2000 and GLiNET B3000 wireless access points for
-prolonged duration tests spanning multiple days with multiple clients
-connected with firmware WLAN.HK.2.7.0.1-01744-QCAHKSWPL_SILICONZ-1
+The rootPD is responsible for managing the lifecycle of the UserPD and
+shared resources and providing SSR notifiers. There are different
+firmware blobs that include either the rootPD and userPD binaries for
+IPQ5018-only which auto-spawns the userPD for IPQ5018 WiFi, or for
+IPQ5018 and QCN6122 for which the userPDs for each radio must be spawned
+by the ath11k driver.
+
+SMP2P is used for signaling between the host and the Q6 remote processor
+to manage the lifecycle of the userPDs, so add the required interrupts
+and smem-states for incoming and outgoing interrupts in the case of the
+IPQ5018 + QCN6122 MPD configuration. Otherwise, the SMP2P interrupts and
+smem-states are not required for the IPQ5018-only configuration.
+
+In addition, document the memory regions needed for loading the BDF and
+M3 firmware as well as for assigning the M3 dump memory block.
+
+It's worth noting that QCN6122 does not have its own Q6 firmware blobs.
+Instead, the firmware segments for QCN6122 are included in the IPQ5018
+MPD firmware blob(s). In addition, the QCN6122 M3 firmware which does
+come separately is loaded into the Q6 memory carveout of IPQ5018, hence
+the need for a dedicated "m3-region" reserved memory region.
 
 Signed-off-by: George Moussalem <george.moussalem@outlook.com>
 ---
- drivers/net/wireless/ath/ath11k/ahb.c  | 7 +++++++
- drivers/net/wireless/ath/ath11k/pcic.c | 9 +++++++++
- 2 files changed, 16 insertions(+)
+ .../bindings/net/wireless/qcom,ath11k.yaml         | 144 ++++++++++++++++++++-
+ 1 file changed, 142 insertions(+), 2 deletions(-)
 
-diff --git a/drivers/net/wireless/ath/ath11k/ahb.c b/drivers/net/wireless/ath/ath11k/ahb.c
-index 26110c927577..51908e779b7c 100644
---- a/drivers/net/wireless/ath/ath11k/ahb.c
-+++ b/drivers/net/wireless/ath/ath11k/ahb.c
-@@ -46,6 +46,9 @@ static const struct of_device_id ath11k_ahb_of_match[] = {
- 	{ .compatible = "qcom,ipq5018-wifi",
- 	  .data = (void *)ATH11K_HW_IPQ5018_HW10,
- 	},
-+	{ .compatible = "qcom,qcn6122-wifi",
-+	  .data = (void *)ATH11K_HW_QCN6122_HW10,
-+	},
- 	{ }
- };
+diff --git a/Documentation/devicetree/bindings/net/wireless/qcom,ath11k.yaml b/Documentation/devicetree/bindings/net/wireless/qcom,ath11k.yaml
+index 621ad6d4ddad..10102b5ea8c8 100644
+--- a/Documentation/devicetree/bindings/net/wireless/qcom,ath11k.yaml
++++ b/Documentation/devicetree/bindings/net/wireless/qcom,ath11k.yaml
+@@ -20,6 +20,7 @@ properties:
+       - qcom,ipq5018-wifi
+       - qcom,ipq6018-wifi
+       - qcom,ipq8074-wifi
++      - qcom,qcn6122-wifi
+       - qcom,wcn6750-wifi
  
-@@ -1395,6 +1398,10 @@ static int ath11k_ahb_setup_msi_resources(struct ath11k_base *ab)
- 	ab->pci.msi.addr_hi = upper_32_bits(msi_addr_iova);
+   reg:
+@@ -30,11 +31,11 @@ properties:
+     maxItems: 52
  
- 	ret = of_property_read_u32_index(ab->dev->of_node, "interrupts", 1, &int_prop);
-+	if (ret == -EINVAL)
-+		ret = of_property_read_u32_index(ab->dev->of_node,
-+						 "interrupts-extended", 2,
-+						 &int_prop);
- 	if (ret)
- 		return ret;
+   interrupts-extended:
+-    minItems: 56
++    minItems: 17
+     maxItems: 56
  
-diff --git a/drivers/net/wireless/ath/ath11k/pcic.c b/drivers/net/wireless/ath/ath11k/pcic.c
-index 2259adc3bbdc..cdcf3df26438 100644
---- a/drivers/net/wireless/ath/ath11k/pcic.c
-+++ b/drivers/net/wireless/ath/ath11k/pcic.c
-@@ -138,6 +138,15 @@ static const struct ath11k_msi_config ath11k_msi_config[] = {
- 		},
- 		.hw_rev = ATH11K_HW_QCA6698AQ_HW21,
- 	},
-+	{
-+		.total_vectors = 13,
-+		.total_users = 2,
-+		.users = (struct ath11k_msi_user[]) {
-+			{ .name = "CE", .num_vectors = 5, .base_vector = 0 },
-+			{ .name = "DP", .num_vectors = 8, .base_vector = 5 },
-+		},
-+		.hw_rev = ATH11K_HW_QCN6122_HW10,
-+	},
- };
+   interrupt-names:
+-    minItems: 32
++    minItems: 17
+     maxItems: 56
  
- int ath11k_pcic_init_msi_config(struct ath11k_base *ab)
+   qcom,rproc:
+@@ -459,6 +460,93 @@ allOf:
+       required:
+         - interrupt-names
+ 
++  - if:
++      properties:
++        compatible:
++          contains:
++            enum:
++              - qcom,qcn6122-wifi
++    then:
++      properties:
++        interrupts-extended:
++          items:
++            - description: interrupt event for ring CE1
++            - description: interrupt event for ring CE2
++            - description: interrupt event for ring CE3
++            - description: interrupt event for ring CE4
++            - description: interrupt event for ring CE5
++            - description: interrupt event for ring DP1
++            - description: interrupt event for ring DP2
++            - description: interrupt event for ring DP3
++            - description: interrupt event for ring DP4
++            - description: interrupt event for ring DP5
++            - description: interrupt event for ring DP6
++            - description: interrupt event for ring DP7
++            - description: interrupt event for ring DP8
++            - description: Q6 firmware user PD fatal interrupt event
++            - description: Q6 firmware user PD ready interrupt event
++            - description: Q6 firmware user PD spawn interrupt event
++            - description: Q6 firmware user PD stop ack interrupt event
++        interrupt-names:
++          minItems: 17
++          items:
++            - const: ce1
++            - const: ce2
++            - const: ce3
++            - const: ce4
++            - const: ce5
++            - const: dp1
++            - const: dp2
++            - const: dp3
++            - const: dp4
++            - const: dp5
++            - const: dp6
++            - const: dp7
++            - const: dp8
++            - const: fatal
++            - const: ready
++            - const: spawn
++            - const: stop-ack
++        memory-region:
++          minItems: 1
++          items:
++            - description: memory region for Q6 firmware
++            - description: memory region for M3 firmware
++            - description: memory region for M3 dump
++        memory-region-names:
++          minItems: 1
++          items:
++            - const: q6-region
++            - const: m3-region
++            - const: m3-dump
++        qcom,smem-states:
++          items:
++            - description: Signal bit used to shutdown Q6 user PD
++              items:
++                - description: Phandle to the Shared Memory Point 2 Point device
++                - description: Single bit index to toggle in the value sent to the remote processor
++                  maximum: 32
++            - description: Signal bit used to stop Q6 user PD
++              items:
++                - description: Phandle to the Shared Memory Point 2 Point device
++                - description: Single bit index to toggle in the value sent to the remote processor
++                  maximum: 32
++            - description: Signal bit used to spawn Q6 user PD
++              items:
++                - description: Phandle to the Shared Memory Point 2 Point device
++                - description: Single bit index to toggle in the value sent to the remote processor
++                  maximum: 32
++        qcom,smem-state-names:
++          items:
++            - const: shutdown
++            - const: stop
++            - const: spawn
++      required:
++        - interrupts-extended
++        - interrupt-names
++        - qcom,smem-states
++        - qcom,smem-state-names
++
+   - if:
+       properties:
+         compatible:
+@@ -861,3 +949,55 @@ examples:
+ 
+         qcom,rproc = <&q6v5_wcss>;
+     };
++
++    wifi1: wifi@b00a040 {
++        reg = <0x0b00a040 0x0>;
++        compatible = "qcom,qcn6122-wifi";
++
++        interrupts-extended = <&intc GIC_SPI 416 IRQ_TYPE_EDGE_RISING>,
++                              <&intc GIC_SPI 417 IRQ_TYPE_EDGE_RISING>,
++                              <&intc GIC_SPI 418 IRQ_TYPE_EDGE_RISING>,
++                              <&intc GIC_SPI 419 IRQ_TYPE_EDGE_RISING>,
++                              <&intc GIC_SPI 420 IRQ_TYPE_EDGE_RISING>,
++                              <&intc GIC_SPI 421 IRQ_TYPE_EDGE_RISING>,
++                              <&intc GIC_SPI 422 IRQ_TYPE_EDGE_RISING>,
++                              <&intc GIC_SPI 423 IRQ_TYPE_EDGE_RISING>,
++                              <&intc GIC_SPI 424 IRQ_TYPE_EDGE_RISING>,
++                              <&intc GIC_SPI 425 IRQ_TYPE_EDGE_RISING>,
++                              <&intc GIC_SPI 426 IRQ_TYPE_EDGE_RISING>,
++                              <&intc GIC_SPI 427 IRQ_TYPE_EDGE_RISING>,
++                              <&intc GIC_SPI 428 IRQ_TYPE_EDGE_RISING>,
++                              <&wcss_smp2p_in 16 IRQ_TYPE_NONE>,
++                              <&wcss_smp2p_in 17 IRQ_TYPE_NONE>,
++                              <&wcss_smp2p_in 20 IRQ_TYPE_NONE>,
++                              <&wcss_smp2p_in 19 IRQ_TYPE_NONE>;
++        interrupt-names = "ce1",
++                          "ce2",
++                          "ce3",
++                          "ce4",
++                          "ce5",
++                          "dp1",
++                          "dp2",
++                          "dp3",
++                          "dp4",
++                          "dp5",
++                          "dp6",
++                          "dp7",
++                          "dp8",
++                          "fatal",
++                          "ready",
++                          "spawn",
++                          "stop-ack";
++
++        qcom,smem-states = <&wcss_smp2p_out 16>,
++                           <&wcss_smp2p_out 17>,
++                           <&wcss_smp2p_out 18>;
++        qcom,smem-state-names = "shutdown",
++                                "stop",
++                                "spawn";
++
++        memory-region = <&q6_region_qcn6122_1>, <&q6_region_ipq5018>, <&m3_dump_qcn6122_1>;
++        memory-region-names = "q6-region", "m3-region", "m3-dump";
++
++        status = "disabled";
++    };
 
 -- 
 2.53.0
