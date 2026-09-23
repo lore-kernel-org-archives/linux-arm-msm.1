@@ -1,427 +1,149 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 08BCA3E49DA;
-	Wed, 23 Sep 2026 08:46:50 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6B03D3CF212;
+	Wed, 23 Sep 2026 08:47:22 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790153219; cv=none; b=VcMBYeQTbFfifpAUfCU7zi/+Jf7EAteSJKF+9NbJ2B0j2sbY3rCmXkCrA1NIqer8pY7zzPJsW+DHKDNLk54E4lKfkH7VYWCMIYNv1U5pNjWwL6mmlWYpd8Q2QITnXSIN6ERbYHIDajwG4rHHiaX3tQg7GUJgAlBhDOLdzkbMutI=
+	t=1790153243; cv=none; b=t0973XI/vRYa6pOm5rE82CMYMcWvXn5TtW9cRctnljSYuWn9kxi6EDmT/XeAc6u41dfHsTPredp2o0jRyQ+dIbvYGmCrkXHGn8UcGHGKQCu3JE/sRErKbrT1jBxpZwc0buG3ULWJfDHP4umuWHtz1RMicSM3175+lJjX3Ka+WkE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790153219; c=relaxed/simple;
-	bh=f8RH3IvKprirEDs1l58PQBvaE296Ugdy1ZRiV07VDTs=;
-	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
-	 MIME-Version; b=t9TX7kVB/enjlWEurv01mQlWd7dTmQiExn8QjJzcFweNbRLkhN+E10Nf+dRlLhn5CNRdZilJ84amt4ntqwV517h7Avu0b9dJLc29nZp6GYYqxwS8Ufrx08jxqyVoX2gNtN3U4+Aoy4/TEHcTcHz230/n7SAe+9xy5ThuVhrQdnA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=H7jSuPF2; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=qualcomm.com
+	s=arc-20240116; t=1790153243; c=relaxed/simple;
+	bh=yrhtnP/4VzwSeurIHdTYU22vzBJHxHoT0+Nf6cZiNGw=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=KZMIUjes1JOiNLpKHDr11XCZCkmmfENZttjYpDA9/2PTmbqgxyFoCS6TD7ciofCV3vZDl5iKaqtKUUb2BAWO/whbEMeBE+z+OvI0B4qQsf4muGeQ4u7utzbZahRnX6c+XA6GVInFl6qS5Xplldps5RUThV8lkQvx2x/klnI1WVU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=XOOnpYVF; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="H7jSuPF2"
-Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68N8JfFe2975584;
-	Wed, 23 Sep 2026 08:46:40 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:date:from:in-reply-to:message-id
-	:mime-version:references:subject:to; s=qcppdkim1; bh=hD2T7L1G04t
-	NtQqk5uS3fSuWFRZwLtwDCuLNV9p/gso=; b=H7jSuPF2MtN1IAqaQ1psRYyz331
-	a9jig2XMeG7BwE1YcdtH3VKqNbJSuA4EMr6PAbldZxXZHdbk9PQshu85hNNJIioy
-	IP++tj544mqJ87sn7Tq3PdAnwoJ/2qlgXuVMWAmJgKzEMwwLyTa5BQt7iu5sEdlq
-	dvXOyLEhGL88pSE/5lHUJ5L9VmxmNwbeTz/D7rCVqt2H+pR0fDOCbNlt1GMJ6pU0
-	DIzxyAS3aKE1OoeTgEz2aTD5QAFo7G9k9RqcWFt6A4DijZw5Xd8SY+UibvdEnHVr
-	RslXr86G9qdnxyy8Dr/E7Axv0PflrMBddSE6em/MeFJH+1n5Iq6IZ8seXdA==
-Received: from apblrppmta02.qualcomm.com (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com [103.229.18.19])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gv78n122h-1
-	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
-	Wed, 23 Sep 2026 08:46:39 +0000 (GMT)
-Received: from pps.filterd (apblrppmta02.qualcomm.com [127.0.0.1])
-	by APBLRPPMTA02.qualcomm.com (8.18.1.11/8.18.1.11) with ESMTP id 68N8kbv21728490;
-	Wed, 23 Sep 2026 08:46:37 GMT
-Received: from hu-devc-hyd-u22-c.qualcomm.com (hu-pkumpatl-hyd.qualcomm.com [10.147.245.204])
-	by APBLRPPMTA02.qualcomm.com (PPS) with ESMTPS id 68N8kbNW1728469
-	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
-	Wed, 23 Sep 2026 08:46:37 +0000 (GMT)
-Received: by hu-devc-hyd-u22-c.qualcomm.com (Postfix, from userid 3914174)
-	id 3A4D764D; Wed, 23 Sep 2026 14:16:35 +0530 (+0530)
-From: Prasad Kumpatla <prasad.kumpatla@oss.qualcomm.com>
-To: Srinivas Kandagatla <srini@kernel.org>,
-        Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>,
-        Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>
-Cc: Abel Vesa <abelvesa@kernel.org>, linux-sound@vger.kernel.org,
-        linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org,
-        Prasad Kumpatla <prasad.kumpatla@oss.qualcomm.com>
-Subject: [PATCH v1 6/8] arm64: dts: qcom: maili: add LPASS audio subsystem nodes
-Date: Wed, 23 Sep 2026 14:16:25 +0530
-Message-Id: <20260923084627.748920-7-prasad.kumpatla@oss.qualcomm.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20260923084627.748920-1-prasad.kumpatla@oss.qualcomm.com>
-References: <20260923084627.748920-1-prasad.kumpatla@oss.qualcomm.com>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="XOOnpYVF"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7356A1F000FF;
+	Wed, 23 Sep 2026 08:47:16 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1790153242;
+	bh=DYGGTWVypQbVzCmwzBlA2oLMr7qCLO+4PaACX6cXkl0=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To;
+	b=XOOnpYVFPPDjKilkWKaFW/kygShw6g6Mp4Y+jgV4Bu+yOnSwtspYPxfDNGX/Nygq3
+	 pXzlQSHZ/rfgeYUU1GCsmyFp3a1cPCSwmHJKDPfxYydb/Lv4G1goZCVZlx/N8rig/q
+	 Wqv+JylB0PHRFujuuPU1BaTNksjOlI7Fnn/uV+xzJ8lqkAkIvuB+Qzm9C8wTAktwWM
+	 x378yKodQotpUOCEiMtcEfUUcbKaqsDSqCzXDq2g5qSUqZu0AfdABNRWWdUSquAzdX
+	 DXWj7Pb3++uNlKGfI7FJK8eKC4pbZIifiawSso+IzNyTli3mV/iE8lQnqm1jZSP+8A
+	 VRqf+k7QsmeYQ==
+Message-ID: <62a5fabc-3a06-42fa-9c6b-6504650e712b@kernel.org>
+Date: Wed, 23 Sep 2026 10:47:14 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-Reinject: loops=2 maxloops=12
-X-QCInternal: smtphost
-X-QCInternal: smtphost
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTIzMDAzNCBTYWx0ZWRfX0fpE1GJMJlDe
- ONeb5FULkrTojSXd8wh9ZTCBvQbWlWsLAncu055lnyLwpCyWApV2BX2OLvdKspsyUoVCM6+m8jI
- pwO2XYmwUK3VxRmJ4td27tJw6C2IJxw=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTIzMDAzNCBTYWx0ZWRfXwADsK0N7p0aG
- MvqDT1PrfUKMMg/h26+x+bH1f02wQlM3Tcrhr9L9iAlhWCmmMybofzJy3v3VH+JQXZXcqTgygJ9
- 8tKwDO6ZS2lffBYqXGg7lu8zelF8Nl+jY/mdvzysMlWseiG2TOSZ0XI8J85afQXVcCjJCAr2jD8
- +SOD1TcVLJDCPnQUZslCuw0s7BBt5Qlw8scMdDEg40vd1N692JpGOYZaY0sZY7Xs87fp5P0akbo
- sLUofEXE7K4o+eacZ70c06eL6KZsnXvCRxArIsr+QxesAfAm4SY+sz0fQ7s/Fdiw4SyGBJWnL7S
- AoCPtNYRA/sJKjuGjKqdWhtORK5oWP86j+bPMgr/JGpfhfJNVlUVSjm0/FytSlMTU4dx0OLeOkI
- v0sN6Sjf1o1F7iRHTGrgtFRvpr/SiSxmYKoSH2vuZ2v2+rO0c7Se5RGfegldve2yzkqYUEJig5O
- povJ828d+pmO6hCdQ6A==
-X-Proofpoint-ORIG-GUID: _Eu1oGQ5j0KdDjflAQ0SyLkG55Dv30lX
-X-Authority-Analysis: v=2.4 cv=aNFlOr9m c=1 sm=1 tr=0 ts=6ab391f0 cx=c_pps
- a=Ou0eQOY4+eZoSc0qltEV5Q==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
- a=VdqzKS8jKosA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
- a=gowsoOTTUOVcmtlkKump:22 a=EUspDBNiAAAA:8 a=xH1pX27c9His-OQcG9wA:9
-X-Proofpoint-GUID: _Eu1oGQ5j0KdDjflAQ0SyLkG55Dv30lX
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-23_04,2026-09-21_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 spamscore=0 lowpriorityscore=0 bulkscore=0 malwarescore=0
- priorityscore=1501 adultscore=0 phishscore=0 impostorscore=0 suspectscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609230034
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 05/11] dt-bindings: clock: qcom: ipq5332-gcc: Describe
+ clock inputs per compatible
+To: Kathiravan Thirumoorthy <kathiravan.thirumoorthy@oss.qualcomm.com>,
+ Bjorn Andersson <andersson@kernel.org>, Stephen Boyd <sboyd@kernel.org>,
+ Brian Masney <bmasney+clk@redhat.com>,
+ Jerome Brunet <jbrunet+clk@baylibre.com>, Rob Herring <robh@kernel.org>,
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
+ <conor+dt@kernel.org>, Georgi Djakov <djakov@kernel.org>,
+ Konrad Dybcio <konradybcio@kernel.org>,
+ Varadarajan Narayanan <quic_varada@quicinc.com>,
+ Dmitry Baryshkov <lumag@kernel.org>, Abel Vesa <abelvesa@kernel.org>,
+ Gokul Sriram Palanisamy <quic_gokulsri@quicinc.com>,
+ Sricharan Ramabadhran <quic_srichara@quicinc.com>,
+ Kathiravan T <quic_kathirav@quicinc.com>
+Cc: linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org,
+ linux-kernel@vger.kernel.org, devicetree@vger.kernel.org,
+ linux-pm@vger.kernel.org
+References: <20260921-ipq_clk_changes-v1-0-d242e3d49648@oss.qualcomm.com>
+ <20260921-ipq_clk_changes-v1-5-d242e3d49648@oss.qualcomm.com>
+From: Krzysztof Kozlowski <krzk@kernel.org>
+Content-Language: en-US
+Autocrypt: addr=krzk@kernel.org; keydata=
+ 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
+In-Reply-To: <20260921-ipq_clk_changes-v1-5-d242e3d49648@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Add the Low Power Audio SubSystem (LPASS) device tree infrastructure
-for Maili, mirroring the Hawi SoC, so the ADSP-based audio pipeline can
-be described by boards.
+On 21/09/2026 08:19, Kathiravan Thirumoorthy wrote:
+> The IPQ5332 and IPQ5424 GCC blocks use different clock input orderings.
+> Document the clock inputs in compatible-specific schema constraints instead
+> of using a common clock description.
+> 
+> Also add the 375 MHz PPE clock generated by the CMN PLL to the IPQ5424
+> clock input list.
+> 
+> This keeps the binding aligned with the clock ordering used by the
+> existing DTS and GCC driver implementations.
+> 
+> Signed-off-by: Kathiravan Thirumoorthy <kathiravan.thirumoorthy@oss.qualcomm.com>
+> ---
+>  .../bindings/clock/qcom,ipq5332-gcc.yaml           | 26 +++++++++++++---------
+>  1 file changed, 16 insertions(+), 10 deletions(-)
+> 
+> diff --git a/Documentation/devicetree/bindings/clock/qcom,ipq5332-gcc.yaml b/Documentation/devicetree/bindings/clock/qcom,ipq5332-gcc.yaml
+> index 1230183fc0a9..fb39dffca988 100644
+> --- a/Documentation/devicetree/bindings/clock/qcom,ipq5332-gcc.yaml
+> +++ b/Documentation/devicetree/bindings/clock/qcom,ipq5332-gcc.yaml
+> @@ -25,14 +25,7 @@ properties:
+>  
+>    clocks:
+>      minItems: 5
+> -    items:
+> -      - description: Board XO clock source
+> -      - description: Sleep clock source
+> -      - description: PCIE 2lane PHY pipe clock source
+> -      - description: PCIE 2lane x1 PHY pipe clock source (For second lane)
+> -      - description: USB PCIE wrapper pipe clock source
+> -      - description: PCIE 2-lane PHY2 pipe clock source
+> -      - description: PCIE 2-lane PHY3 pipe clock source
 
-This adds under the ADSP GLINK edge the GPR (Generic Packet Router)
-node with the q6apm and q6prm services, and on the SoC bus the RX, TX
-and VA Bolero macro codecs, their RX/TX SoundWire controllers, the VA
-CSR heartbeat clock provider, and the LPASS LPI TLMM pinctrl node with
-the DMIC, I2S and SoundWire pin states used by the audio blocks.
 
-The SoundWire controllers are left status = "disabled" here; boards
-enable them once the attached codecs are described.
-Signed-off-by: Prasad Kumpatla <prasad.kumpatla@oss.qualcomm.com>
----
- arch/arm64/boot/dts/qcom/maili.dtsi | 291 ++++++++++++++++++++++++++++
- 1 file changed, 291 insertions(+)
+You are changing the order which is ABI break. Describe the actual
+problem to justify such change. Are you saying this was broken since
+beginning or what exactly is not working here? The driver was added by
+Qualcomm in 2024, so how did it even work? It's not some 10 yo legacy
+where we did some mistakes in binding while converting from TXT.
 
-diff --git a/arch/arm64/boot/dts/qcom/maili.dtsi b/arch/arm64/boot/dts/qcom/maili.dtsi
-index 6053b61cab6f..d4267c22157b 100644
---- a/arch/arm64/boot/dts/qcom/maili.dtsi
-+++ b/arch/arm64/boot/dts/qcom/maili.dtsi
-@@ -20,6 +20,8 @@
- #include <dt-bindings/soc/qcom,rpmh-rsc.h>
- 
- #include "maili-ipcc.h"
-+#include <dt-bindings/soc/qcom,gpr.h>
-+#include <dt-bindings/sound/qcom,q6dsp-lpass-ports.h>
- 
- / {
- 	interrupt-parent = <&intc>;
-@@ -4008,6 +4010,295 @@ compute-cb@8 {
- 						dma-coherent;
- 					};
- 				};
-+
-+				gpr {
-+					compatible = "qcom,gpr";
-+					qcom,glink-channels = "adsp_apps";
-+					qcom,domain = <GPR_DOMAIN_ID_ADSP>;
-+					qcom,intents = <512 20>;
-+					#address-cells = <1>;
-+					#size-cells = <0>;
-+
-+					q6apm: service@1 {
-+						compatible = "qcom,q6apm";
-+						reg = <GPR_APM_MODULE_IID>;
-+						#sound-dai-cells = <0>;
-+						qcom,protection-domain = "avs/audio",
-+									 "msm/adsp/audio_pd";
-+
-+						q6apmbedai: bedais {
-+							compatible = "qcom,q6apm-lpass-dais";
-+							#address-cells = <1>;
-+							#size-cells = <0>;
-+							#sound-dai-cells = <1>;
-+						};
-+
-+						q6apmdai: dais {
-+							compatible = "qcom,q6apm-dais";
-+							iommus = <&apps_smmu 0x0c01 0x80>,
-+								 <&apps_smmu 0x0c41 0x20>;
-+						};
-+					};
-+
-+					q6prm: service@2 {
-+						compatible = "qcom,q6prm";
-+						reg = <GPR_PRM_MODULE_IID>;
-+						qcom,protection-domain = "avs/audio",
-+									 "msm/adsp/audio_pd";
-+
-+						q6prmcc: clock-controller {
-+							compatible = "qcom,q6prm-lpass-clocks";
-+							#clock-cells = <2>;
-+						};
-+					};
-+				};
-+			};
-+		};
-+
-+		lpass_rxmacro: codec@72c0000 {
-+			compatible = "qcom,maili-lpass-rx-macro", "qcom,hawi-lpass-rx-macro";
-+			reg = <0x0 0x072c0000 0x0 0x1000>;
-+			clocks = <&q6prmcc LPASS_CLK_ID_RX_CORE_TX_MCLK LPASS_CLK_ATTRIBUTE_COUPLE_NO>,
-+				 <&q6prmcc LPASS_HW_LPR_VOTE LPASS_CLK_ATTRIBUTE_COUPLE_NO>,
-+				 <&q6prmcc LPASS_HW_DCODEC_VOTE LPASS_CLK_ATTRIBUTE_COUPLE_NO>,
-+				 <&lpass_vamacro>;
-+			clock-names = "mclk", "lpr", "dcodec", "fsgen";
-+
-+			#clock-cells = <0>;
-+			clock-output-names = "mclk";
-+			#sound-dai-cells = <1>;
-+		};
-+
-+		swr1: soundwire@72d0000 {
-+			compatible = "qcom,soundwire-v3.1.0";
-+			reg = <0x0 0x072d0000 0x0 0x10000>;
-+			interrupts = <GIC_ESPI 219 IRQ_TYPE_LEVEL_HIGH>;
-+			clocks = <&lpass_rxmacro>;
-+			clock-names = "iface";
-+			label = "RX";
-+
-+			pinctrl-0 = <&rx_swr_active>;
-+			pinctrl-names = "default";
-+
-+			qcom,din-ports = <1>;
-+			qcom,dout-ports = <11>;
-+			qcom,ports-sinterval = /bits/ 16 <0x03 0x3f 0x1f 0x07 0x00 0x18f 0xff 0xff 0xff 0xff 0xff 0xff>;
-+			qcom,ports-offset1 = /bits/ 8 <0x00 0x00 0x0b 0x01 0x00 0x00 0xff 0xff 0xff 0xff 0xff 0xff>;
-+			qcom,ports-offset2 = /bits/ 8 <0x00 0x00 0x0b 0x00 0x00 0x00 0xff 0xff 0xff 0xff 0xff 0xff>;
-+			qcom,ports-hstart =		/bits/ 8 <0xff 0x03 0xff 0xff 0xff 0x08 0xff 0xff 0xff 0xff 0xff 0xff>;
-+			qcom,ports-hstop =		/bits/ 8 <0xff 0x06 0xff 0xff 0xff 0x08 0xff 0xff 0xff 0xff 0xff 0xff>;
-+			qcom,ports-word-length = /bits/ 8 <0x01 0x07 0x04 0xff 0xff 0x0f 0xff 0xff 0xff 0xff 0xff 0xff>;
-+			qcom,ports-block-pack-mode = /bits/ 8 <0xff 0x00 0x01 0xff 0xff 0x00 0xff 0xff 0xff 0xff 0xff 0xff>;
-+			qcom,ports-block-group-count = /bits/ 8 <0xff 0xff 0xff 0xff 0x00 0x00 0xff 0xff 0xff 0xff 0xff 0xff>;
-+			qcom,ports-lane-control = /bits/ 8 <0x01 0x00 0x00 0x00 0x00 0x00 0xff 0xff 0xff 0xff 0xff 0xff>;
-+
-+			#address-cells = <2>;
-+			#size-cells = <0>;
-+			#sound-dai-cells = <1>;
-+
-+			status = "disabled";
-+		};
-+
-+		lpass_txmacro: codec@72e0000 {
-+			compatible = "qcom,maili-lpass-tx-macro", "qcom,hawi-lpass-tx-macro";
-+			reg = <0x0 0x72e0000 0x0 0x1000>;
-+			clocks = <&q6prmcc LPASS_CLK_ID_TX_CORE_MCLK LPASS_CLK_ATTRIBUTE_COUPLE_NO>,
-+				 <&q6prmcc LPASS_HW_LPR_VOTE LPASS_CLK_ATTRIBUTE_COUPLE_NO>,
-+				 <&q6prmcc LPASS_HW_DCODEC_VOTE LPASS_CLK_ATTRIBUTE_COUPLE_NO>,
-+				 <&lpass_vamacro>;
-+			clock-names = "mclk", "lpr", "dcodec", "fsgen";
-+
-+			#clock-cells = <0>;
-+			clock-output-names = "mclk";
-+			#sound-dai-cells = <1>;
-+		};
-+
-+		swr2: soundwire@7e90000 {
-+			compatible = "qcom,soundwire-v3.1.0";
-+			reg = <0x0 0x7e90000 0x0 0x10000>;
-+			interrupts = <GIC_SPI 272 IRQ_TYPE_LEVEL_HIGH>,
-+				     <GIC_SPI 296 IRQ_TYPE_LEVEL_HIGH>;
-+			interrupt-names = "core", "wakeup";
-+			clocks = <&lpass_txmacro>;
-+			clock-names = "iface";
-+			label = "TX";
-+
-+			pinctrl-0 = <&tx_swr_active>;
-+			pinctrl-names = "default";
-+
-+			qcom,din-ports = <4>;
-+			qcom,dout-ports = <0>;
-+			qcom,ports-sinterval-low = /bits/ 8 <0x01 0x01 0x01 0x03>;
-+			qcom,ports-offset1 = /bits/ 8 <0x00 0x00 0x00 0x01>;
-+			qcom,ports-offset2 = /bits/ 8 <0x00 0x00 0x00 0x00>;
-+			qcom,ports-hstart = /bits/ 8 <0xff 0xff 0x00 0xff>;
-+			qcom,ports-hstop = /bits/ 8 <0xff 0xff 0x0f 0xff>;
-+			qcom,ports-word-length = /bits/ 8 <0xff 0x00 0x00 0xff>;
-+			qcom,ports-block-pack-mode = /bits/ 8 <0xff 0xff 0x00 0xff>;
-+			qcom,ports-block-group-count = /bits/ 8 <0xff 0xff 0x00 0xff>;
-+			qcom,ports-lane-control = /bits/ 8 <0x01 0x00 0x01 0x00>;
-+
-+			#address-cells = <2>;
-+			#size-cells = <0>;
-+			#sound-dai-cells = <1>;
-+
-+			status = "disabled";
-+		};
-+
-+		lpass_vamacro: codec@7ec0000 {
-+			compatible = "qcom,maili-lpass-va-macro", "qcom,hawi-lpass-va-macro";
-+			reg = <0x0 0x07ec0000 0x0 0x2000>;
-+			clocks = <&q6prmcc LPASS_CLK_ID_TX_CORE_MCLK LPASS_CLK_ATTRIBUTE_COUPLE_NO>,
-+				 <&q6prmcc LPASS_HW_LPR_VOTE LPASS_CLK_ATTRIBUTE_COUPLE_NO>,
-+				 <&q6prmcc LPASS_HW_DCODEC_VOTE LPASS_CLK_ATTRIBUTE_COUPLE_NO>,
-+				 <&lpass_va_csr>;
-+			clock-names = "mclk", "lpr", "dcodec", "heartbeatpulse";
-+
-+			#clock-cells = <0>;
-+			clock-output-names = "fsgen";
-+			#sound-dai-cells = <1>;
-+		};
-+
-+		lpass_va_csr: va-csr@7ee0000 {
-+			compatible = "qcom,hawi-lpass-va-csr";
-+			reg = <0x0 0x07ee0000 0x0 0xe000>;
-+			clocks = <&q6prmcc LPASS_HW_LPR_VOTE LPASS_CLK_ATTRIBUTE_COUPLE_NO>,
-+				 <&q6prmcc LPASS_HW_DCODEC_VOTE LPASS_CLK_ATTRIBUTE_COUPLE_NO>;
-+			clock-names = "lpr", "audio";
-+			#clock-cells = <0>;
-+		};
-+
-+		lpass_tlmm: pinctrl@7f60000 {
-+			compatible = "qcom,hawi-lpass-lpi-pinctrl";
-+			reg = <0x0 0x07f60000 0x0 0x20000>;
-+
-+			clocks = <&q6prmcc LPASS_HW_LPR_VOTE
-+					  LPASS_CLK_ATTRIBUTE_COUPLE_NO>,
-+				 <&q6prmcc LPASS_HW_DCODEC_VOTE LPASS_CLK_ATTRIBUTE_COUPLE_NO>;
-+			clock-names = "lpr", "audio";
-+
-+			gpio-controller;
-+			#gpio-cells = <2>;
-+			gpio-ranges = <&lpass_tlmm 0 0 23>;
-+
-+			dmic01_default: dmic01-default-state {
-+				clk-pins {
-+					pins = "gpio6";
-+					function = "dmic1_clk";
-+					drive-strength = <8>;
-+					output-high;
-+				};
-+
-+				data-pins {
-+					pins = "gpio7";
-+					function = "dmic1_data";
-+					drive-strength = <8>;
-+					input-enable;
-+				};
-+			};
-+
-+			dmic23_default: dmic23-default-state {
-+				clk-pins {
-+					pins = "gpio8";
-+					function = "dmic2_clk";
-+					drive-strength = <8>;
-+					output-high;
-+				};
-+
-+				data-pins {
-+					pins = "gpio9";
-+					function = "dmic2_data";
-+					drive-strength = <8>;
-+					input-enable;
-+				};
-+			};
-+
-+			lpi_i2s1_active: lpi-i2s1-active-state {
-+				clk-pins {
-+					pins = "gpio10";
-+					function = "i2s1_clk";
-+					drive-strength = <8>;
-+					bias-disable;
-+					output-high;
-+				};
-+
-+				ws-pins {
-+					pins = "gpio11";
-+					function = "i2s1_ws";
-+					drive-strength = <8>;
-+					bias-disable;
-+					output-high;
-+				};
-+
-+				data-pins {
-+					pins = "gpio15", "gpio16";
-+					function = "i2s1_data";
-+					drive-strength = <8>;
-+					bias-disable;
-+					output-high;
-+				};
-+			};
-+
-+			lpi_i2s1_sleep: lpi-i2s1-sleep-state {
-+				clk-pins {
-+					pins = "gpio10";
-+					function = "i2s1_clk";
-+					drive-strength = <2>;
-+					bias-pull-down;
-+					input-enable;
-+				};
-+
-+				ws-pins {
-+					pins = "gpio11";
-+					function = "i2s1_ws";
-+					drive-strength = <2>;
-+					bias-pull-down;
-+					input-enable;
-+				};
-+
-+				data-pins {
-+					pins = "gpio15", "gpio16";
-+					function = "i2s1_data";
-+					drive-strength = <2>;
-+					bias-pull-down;
-+					input-enable;
-+				};
-+			};
-+
-+			rx_swr_active: rx-swr-active-state {
-+				clk-pins {
-+					pins = "gpio3";
-+					function = "swr_rx_clk";
-+					drive-strength = <2>;
-+					slew-rate = <1>;
-+					bias-disable;
-+				};
-+
-+				data-pins {
-+					pins = "gpio4", "gpio5";
-+					function = "swr_rx_data";
-+					drive-strength = <2>;
-+					slew-rate = <1>;
-+					bias-bus-hold;
-+				};
-+			};
-+
-+			tx_swr_active: tx-swr-active-state {
-+				clk-pins {
-+					pins = "gpio0";
-+					function = "swr_tx_clk";
-+					drive-strength = <2>;
-+					slew-rate = <1>;
-+					bias-disable;
-+				};
-+
-+				data-pins {
-+					pins = "gpio1", "gpio2", "gpio14";
-+					function = "swr_tx_data";
-+					drive-strength = <2>;
-+					slew-rate = <1>;
-+					bias-bus-hold;
-+				};
- 			};
- 		};
- 
--- 
-2.34.1
+Also, I do not get why the list cannot be shared.
 
+Best regards,
+Krzysztof
