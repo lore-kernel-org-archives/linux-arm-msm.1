@@ -1,492 +1,158 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from mail-244121.protonmail.ch (mail-244121.protonmail.ch [109.224.244.121])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6A09433993
-	for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 00:04:56 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 619AB1FE451
+	for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 00:10:58 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=109.224.244.121
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790121904; cv=none; b=uKS3j4i5AjQrMwcu0Bj8WM+RLyG/lsEEY+xWfDk2hS4KKXXXIN0YQUqGCu3GDkl9yZzy1VZtkwOwZZOEPki/QaDNmyfZnNpRFfQgQJEIepvt6Z39xiFpEpSeUxgikJklD+fHPxxXCMic/iEQzPRMi2s/q5TttPDBXsyQS0pav9E=
+	t=1790122260; cv=none; b=jDIQPttQu1W4an4Ge4w6Atnucng93ZUOvGemwaCD30E06/261ptfCNly5mzB9ZKr3/fu5F1g+L7HDbaTu84QRpxYQ5xWEEQr/m/LhunORDyvZH3OnM1OwAcNPS8tghb+DUuBpcynyy8ffD/Yn3W4/SlbQelGzG8QMWROMfMxDnk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790121904; c=relaxed/simple;
-	bh=ed4vbtYjyj1FMsT2CGuXKcms1U/AqYCuj5E6b3piyi8=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=Uv2miclYI9bBw57yj+JyChOy7eGGjEZQ+yVpUsN10Jphvbb48/mqmSBvS4GfrwejajqOxZe/lNZEJiogezxcOnxpBOqvLw90O7EdWwr67j0hDPGQy7CoiUMxbwfp1xi3mnpkpfukNA0txsDz8IHr3+MPsirjZNd4KkTpi0VyM1M=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=Jh4+osgx; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=cKsbSMVw; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1790122260; c=relaxed/simple;
+	bh=achqBSDLTbG7ys9axw9+AqXqOsnM37AE7sOtn/+zDyI=;
+	h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=cQy1R0/88VJ7PSylwKC3E22tAGRJKx4cB5vt5VoZ0VelH/TCo63Ym6HTRUAKWSap1KcvuPEZQAGLMxecit+u6TirC73Z0rZuXsSmILoxZVmIIb/8iP9tDhsuOsLv1DfsiQMIXwJlBCl6nNqFAp5njjkuToVxEcHtQGkGUCt0k5U=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=pm.me; spf=pass smtp.mailfrom=pm.me; dkim=pass (2048-bit key) header.d=pm.me header.i=@pm.me header.b=S+xGxBKl; arc=none smtp.client-ip=109.224.244.121
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=pm.me
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=pm.me
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="Jh4+osgx";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="cKsbSMVw"
-Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68MI6u8S178663
-	for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 00:04:54 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	e/ysu29aKJweaPEu9PZ8v1cCpqjGEqBIBOA3xJ0Rr20=; b=Jh4+osgxK7h37ICi
-	LvSU3Qua0di2wwJYAbaUOmRCzDEzPY0S74pR+7tckH57zz3RWuIkiMUy96yAO61X
-	T4iLN4fqSk9CHzc3+1t8vQU2WhAQsYm7sGmC/agcESIUWB/Gi6Ca+T+N4UF/HOyB
-	8UwybVlwyaduY8Qy/or92e8N0GwEyLJyAIacmNVfk3qxNj/+mBsW6Lm3dMxb4Sdm
-	fr74OxCpcHDXOvE5Rwe6L82Uns5kXleiyErF9SNrmenTd65tegZwpM3MgfyDH1Df
-	WR5Sq9Z5AqdzddbCAaLKvSKKp4tqQ4TYbWN58f+0iMcaoBie7W4GSZO+a01Zxew2
-	1Ps1VQ==
-Received: from mail-dy1-f198.google.com (mail-dy1-f198.google.com [74.125.82.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4guuec2p5x-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 00:04:54 +0000 (GMT)
-Received: by mail-dy1-f198.google.com with SMTP id 5a478bee46e88-30bcb065bfdso457805eec.0
-        for <linux-arm-msm@vger.kernel.org>; Tue, 22 Sep 2026 17:04:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1790121893; x=1790726693; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=e/ysu29aKJweaPEu9PZ8v1cCpqjGEqBIBOA3xJ0Rr20=;
-        b=cKsbSMVwkLjmjvkUem1uv8An20DVu/R+qJ92i0M/0YxudMH8MRiDBiThLHFgBhAL2Y
-         CD+sMm536tIyFpJe4KqPrL6RKJknuq6lNm8q7nL+RfNfltKLs36DgVMLYoEOOPI4pAEp
-         A/jmY7DRv0vbyfD+0OiaHgFkxLmjjJsy6OYyq9ybBnfFx0ODnZLJeu5Zaq80lVKMJr1v
-         RiQyYBhEEcdxkCa/QhgnWkka1zSvQj+/shVzFnFSHJyxKJnHDA4WsWUqtZZ2BPZf64GK
-         myqkghy7v1jynRb/Mx/PedkKrx3V17g6sCLdGUrfNmSkTEasNHbNrw7r+FgOQ5a6gNuV
-         yHKQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790121894; x=1790726694;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=e/ysu29aKJweaPEu9PZ8v1cCpqjGEqBIBOA3xJ0Rr20=;
-        b=l/pYrgM+m2y3SwnQ/iHcfswvtCGBDD2a3aNJugR/iTsbk8HJEa1X3WJzPvw9OWMY/C
-         eHakWeeXzYODKA0eiRJ7JInNjcenfDPD4xflsUxFL3MojoRKjOGZHzbyigrvZVo/4jJS
-         fEv40l0NMM+23zaRbWzks6/f+B2Km5Zkx2T+wmv1qpYgpYji0bug4wSvtJHK95Npzjtj
-         T4dGHEPep5Pzv3hytSFASqaf7ulizlV/xbyLeaiInIE8TAo19xthwrzWSlH5QOU2bqB8
-         I58gxgqJ2kdDxLgiAOpSHIb3c87v/Veg+3m9Vl0or5r+97TZWhXMdoeHdHDtvv7s58Yf
-         CerA==
-X-Gm-Message-State: AFuF++m3aW7HzADQftcpxzc6OBPVUX7K9kMqSFT5CvIcQogDD+WHJ2H2
-	E1WQMqu27QEF2aHsWnx1R8AG7qUdMeRgZ/MjyDAfll9Ct1M9Ko3F1MUdyQX/3H1rHKYApGms0Bf
-	DzTdESzvYgI8iW22qEyG1OigSAQaTIHTo5Crz/qU/si/lWcNfrQ0np1kwtYEpzH96hi5B14q6Fl
-	zM
-X-Gm-Gg: AYBFou3i+eStHfpwFg8iXF9nGDelI9lW4qNod35eWUr/2loSl0a4vX4v2k3sDXpPyUK
-	0QlZuK3LYYjs0/7Y/PZBCuAZb+qRGM+uFHn+A1B0reTtZyf/ONdozI42rkf9X82AtXuBY9pytHZ
-	QZMT5nY2SylPeyL2YZojQ+BHBOqHsnzSdGzq00Po8Yg0VQGWCLW7O9CJsNAOy86B2dplFOLS9CF
-	Or9vMr6JO1CNxB1FgzVRDMZl4RJQC1JC1S3eGOoMd/1GlhR2/sNrd8jAYLKaRZH5717BOeZwVZ/
-	SYrGUyW77TMKHDIDBcNXoJ9XLUT87uKOEdkVkNKd/FREVkcK3aVqEyrbic8SRtUcl7yNniEQ4D1
-	Vr3P0HQ+9FTahwB2uNRqhBxVatDgMcFmXk0mOP+o=
-X-Received: by 2002:a05:7022:1402:b0:143:2719:566c with SMTP id a92af1059eb24-144f9198b49mr1187610c88.40.1790121893295;
-        Tue, 22 Sep 2026 17:04:53 -0700 (PDT)
-X-Received: by 2002:a05:7022:1402:b0:143:2719:566c with SMTP id a92af1059eb24-144f9198b49mr1187555c88.40.1790121892587;
-        Tue, 22 Sep 2026 17:04:52 -0700 (PDT)
-Received: from hu-mohdayaa-hyd.qualcomm.com ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-33e939fd955sm1688347eec.1.2026.09.22.17.04.47
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 22 Sep 2026 17:04:52 -0700 (PDT)
-From: Mohd Ayaan Anwar <mohd.anwar@oss.qualcomm.com>
-Date: Wed, 23 Sep 2026 05:34:19 +0530
-Subject: [PATCH 3/3] phy: qcom: sgmii-eth: add Nord USXGMII support
+	dkim=pass (2048-bit key) header.d=pm.me header.i=@pm.me header.b="S+xGxBKl"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=pm.me;
+	s=protonmail3; t=1790122255; x=1790381455;
+	bh=8Y9YIRMA/aNqzz8j7tnX4LACjbsTyfhJDnCkbsQY3r0=;
+	h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
+	 Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
+	 Message-ID:BIMI-Selector;
+	b=S+xGxBKlSxOZ+/Tal2aI2zTaF20nMS+pR/2XDu3LidipckeZcL++k4UhbktFpW7Ps
+	 NmjR6biFRb3JzbVYGtIHwbSlACj4WcdGoBDk3iZq2QVl/rDZo1K9adFthzuz7nFcb7
+	 +KWcJ7tzg71edzHEC82hsdyfbsjlCayLvm5d3cnG3JWfWPwkmQkJ2ZLjhlb4UA8dJf
+	 bqVVEJejINaXJ5NX4EGZenBA9u/TmpdBxtKLTt9bnMw4NPDyXoQLHenGaJg+2rRGHm
+	 rK3VX1PGsEJuAeJFP+DMeW1wI8AeedeVfjfmAadMBUYdRzni2zONhMmlOdw2WAviN+
+	 wxdfcEgTjlkOQ==
+Date: Wed, 23 Sep 2026 00:10:51 +0000
+To: Qiang Yu <qiang.yu@oss.qualcomm.com>, Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+From: Birk Skyum <birk.skyum@pm.me>
+Cc: "mani@kernel.org" <mani@kernel.org>, "linux-pci@vger.kernel.org" <linux-pci@vger.kernel.org>, "linux-arm-msm@vger.kernel.org" <linux-arm-msm@vger.kernel.org>
+Subject: Re: X1E80100 USB4 PCI0 MSI-X routing under EL1/Gunyah
+Message-ID: <C8SBDdV0hyOxs4G2FfZBHt4_1PSRVoxaNFSmy_riJk91MhqFMRAt30lpxdyniPMLWnc5Ph93lS0R1nCkVbuV941UrNmWyPNbDER9zIHlrJg=@pm.me>
+In-Reply-To: <arEjxhvfIFGGo9O9@hu-qianyu-lv.qualcomm.com>
+References: <g7V4kc2AO9xogkH0h-XHDvPbjDXcnS11cp1q3hv0X96KPW-zed6V79HUJY5BFA4pBWUE-p2MBYCeDcjWwUGBIU2hXjDpodiWaxB38obe8RE=@pm.me> <arEjxhvfIFGGo9O9@hu-qianyu-lv.qualcomm.com>
+Feedback-ID: 21326998:user:proton
+X-Pm-Message-ID: 7695b5694f43d1f15643b036999988c94dcea520
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260923-nord_ethernet_serdes-v1-3-f8ac1c487882@oss.qualcomm.com>
-References: <20260923-nord_ethernet_serdes-v1-0-f8ac1c487882@oss.qualcomm.com>
-In-Reply-To: <20260923-nord_ethernet_serdes-v1-0-f8ac1c487882@oss.qualcomm.com>
-To: Vinod Koul <vkoul@kernel.org>, Neil Armstrong <neil.armstrong@linaro.org>,
-        Manivannan Sadhasivam <mani@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>,
-        Bartosz Golaszewski <brgl@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, linux-phy@lists.infradead.org,
-        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-        Lorenzo Bianconi <lorenzo.bianconi@oss.qualcomm.com>,
-        Shawn Guo <shengchao.guo@oss.qualcomm.com>,
-        Zhangfei Gao <zhangfei.gao@oss.qualcomm.com>,
-        Mohd Ayaan Anwar <mohd.anwar@oss.qualcomm.com>
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1790121872; l=17640;
- i=mohd.anwar@oss.qualcomm.com; s=20250907; h=from:subject:message-id;
- bh=ed4vbtYjyj1FMsT2CGuXKcms1U/AqYCuj5E6b3piyi8=;
- b=9iw1gS9LvwyAoNdKif9vwnYW2s9eBv5f8J589WCt1NJdKSWSH4zJpcGI+qF0ezsfDaE0sFnS1
- UQOg/NmHgF3DWb36FwfkaIxoj87qJE6eVIZLxH93Qudjtao4cxN4pyu
-X-Developer-Key: i=mohd.anwar@oss.qualcomm.com; a=ed25519;
- pk=7JNY72mz7r6hQstsamPYlUbLhQ5+W64pY4LgfSh9DJU=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTIzMDAwMCBTYWx0ZWRfX2bYj4lsztaDA
- ayVU0fpo8X9nWpiIetn62OXIPopAy0g2UjSc0EVqSg0NGkBcaRUQml8PhIiTmYUHYgNJh94OyK7
- 3r6+tGjiX9ehiLnotxPFzI/jDyiyeO1ecQsegqdtUUgkcULLthl67FzOV4+qtqqX2uk0yL4ry24
- nUWLRO8SbzR2GkkOf+iGIxOJcvf1TQ6WpesGXVjZ2eYwM9IsOlql5N1IhV3u2Mui/HgX3cKzhwp
- ehvB4WfEpy0ExPwmGBhKPzntOY+y8oKRV9D/2d3Dnhh1tgj4Cln/vmDEG7LUPW9GkdxTPMIefG4
- ZucpIxkeEG8II+DtC8cuhB45+pxilCj7BlwneI8mAiP6EiOLFkWwpnzednlkBXkooa+742Q3lAQ
- dsgiX4+9sI1gj6PXcNZsbXaPR0pfePSuTGM/HrBBVWATfrb8jmVFddwlEMp7LOiutqAJPR/bxTK
- aZbPHaEsVf2XHpvs5WA==
-X-Authority-Analysis: v=2.4 cv=VKdIDNPX c=1 sm=1 tr=0 ts=6ab317a6 cx=c_pps
- a=wEP8DlPgTf/vqF+yE6f9lg==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
- a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22
- a=EUspDBNiAAAA:8 a=-j1QTKR700wLKSosX1UA:9 a=QEXdDO2ut3YA:10
- a=bBxd6f-gb0O0v-kibOvt:22
-X-Proofpoint-GUID: gG9ab7NdHBQy9OffLGRwJwc5BERSndJz
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTIzMDAwMCBTYWx0ZWRfX4oI/pQDV30IH
- jfPKfGbucga3/PxM9nZj0e1BMw2acavZCFhO+pFajo0Dps9MLq6Qsk5b1vS0/XpxqLAC2fX6JhU
- Y7RjypGvdFStb7fhIQyurqtX2A/soxY=
-X-Proofpoint-ORIG-GUID: gG9ab7NdHBQy9OffLGRwJwc5BERSndJz
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-22_03,2026-09-21_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 impostorscore=0 phishscore=0 spamscore=0 malwarescore=0
- suspectscore=0 bulkscore=0 clxscore=1015 adultscore=0 lowpriorityscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609230000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-Nord uses a QMP v7 SerDes block which is an updated version of the
-SGMII SerDes PHY IP.
 
-The SGMII SerDes PHY supports multiple operating modes by programming
-different SerDes line rates. The driver currently handles SGMII and
-2500BASE-X configurations only.
+Hi Qiang and Konrad,
 
-Add support for configuring the SerDes to operate at 10.3125 Gbaud,
-enabling both USXGMII and 10GBASE-R PHY interface modes. Finally, add a
-driver compatible for Nord.
+Thank you, that was exactly what was missing. With your interrupts and with=
+out msi-map, the NVMe behind the USB4 tunnel now gets real MSI-X at EL1. My=
+ LaCie external SSD reads at about 2.6 GB/s and writes at 2.8 GB/s (16 GiB =
+direct I/O on ext4), and safe removal and reconnect work repeatedly.
 
-Select USXGMII as the initial interface mode for Nord. phy_power_on()
-can run before the consumer calls set_mode(), so this ensures that the
-first calibration selects the 10.3125 Gbaud programming sequence.
+Two details were needed on top of the DT. The DBI MSI registers (0x820 to 0=
+x830) had to be programmed after the tunnel BCR reset and the router reset =
+requests, and MSI on the root port itself had to be opted out.
 
-Signed-off-by: Mohd Ayaan Anwar <mohd.anwar@oss.qualcomm.com>
----
- drivers/phy/qualcomm/phy-qcom-qmp-pcs-sgmii.h      |   5 +
- drivers/phy/qualcomm/phy-qcom-qmp-qserdes-com-v7.h |   2 +
- .../phy/qualcomm/phy-qcom-qmp-qserdes-txrx-v7.h    |   9 ++
- drivers/phy/qualcomm/phy-qcom-sgmii-eth.c          | 166 ++++++++++++++++++++-
- 4 files changed, 177 insertions(+), 5 deletions(-)
+How would you like this to go upstream? Konrad mentioned that the Qualcomm =
+USB4 router driver will be posted, so I've added him here. I'm happy to sen=
+d the pcie0 interrupt setup as a patch, or leave it to that series if you'd=
+ rather carry it there.
 
-diff --git a/drivers/phy/qualcomm/phy-qcom-qmp-pcs-sgmii.h b/drivers/phy/qualcomm/phy-qcom-qmp-pcs-sgmii.h
-index 4d8c962f5e0f52974f3edd5d1acdd8da535de200..67ab2fe085de3d90520cfc43cc0ac7abaab1f21d 100644
---- a/drivers/phy/qualcomm/phy-qcom-qmp-pcs-sgmii.h
-+++ b/drivers/phy/qualcomm/phy-qcom-qmp-pcs-sgmii.h
-@@ -10,11 +10,16 @@
- #define QPHY_PCS_POWER_DOWN_CONTROL			0x004
- #define QPHY_PCS_SW_RESET				0x008
- #define QPHY_PCS_LINE_RESET_TIME			0x00c
-+#define QPHY_PCS_RETIME_BUFFER_EN			0x018
- #define QPHY_PCS_TX_LARGE_AMP_DRV_LVL			0x020
-+#define QPHY_PCS_TX_LARGE_AMP_POST_EMP_LVL		0x024
- #define QPHY_PCS_TX_SMALL_AMP_DRV_LVL			0x028
-+#define QPHY_PCS_TX_SMALL_AMP_POST_EMP_LVL		0x02c
-+#define QPHY_PCS_RX_SIGDET_CTRL2				0x08c
- #define QPHY_PCS_PCS_READY_STATUS			0x094
- #define QPHY_PCS_TX_MID_TERM_CTRL1			0x0d8
- #define QPHY_PCS_TX_MID_TERM_CTRL2			0x0dc
-+#define QPHY_PCS_SGMII_MISC_CTRL7			0x114
- #define QPHY_PCS_SGMII_MISC_CTRL8			0x118
- 
- #endif
-diff --git a/drivers/phy/qualcomm/phy-qcom-qmp-qserdes-com-v7.h b/drivers/phy/qualcomm/phy-qcom-qmp-qserdes-com-v7.h
-index 7430f49214779855df1cf40acac96440957f9e6d..e8b4a26b361adab6e2b0bd3c91e719f84d1ffbc1 100644
---- a/drivers/phy/qualcomm/phy-qcom-qmp-qserdes-com-v7.h
-+++ b/drivers/phy/qualcomm/phy-qcom-qmp-qserdes-com-v7.h
-@@ -58,6 +58,7 @@
- #define QSERDES_V7_COM_CLK_ENABLE1				0xe0
- #define QSERDES_V7_COM_SYS_CLK_CTRL				0xe4
- #define QSERDES_V7_COM_SYSCLK_BUF_ENABLE			0xe8
-+#define QSERDES_V7_COM_PLL_EN					0xec
- #define QSERDES_V7_COM_PLL_IVCO					0xf4
- #define QSERDES_V7_COM_PLL_IVCO_MODE1				0xf8
- #define QSERDES_V7_COM_SYSCLK_EN_SEL				0x110
-@@ -75,6 +76,7 @@
- #define QSERDES_V7_COM_CMN_MISC_1				0x184
- #define QSERDES_V7_COM_CMN_MODE					0x188
- #define QSERDES_V7_COM_PLL_VCO_DC_LEVEL_CTRL			0x198
-+#define QSERDES_V7_COM_BIN_VCOCAL_HSCLK_SEL_1			0x19c
- #define QSERDES_V7_COM_AUTO_GAIN_ADJ_CTRL_1			0x1a4
- #define QSERDES_V7_COM_AUTO_GAIN_ADJ_CTRL_2			0x1a8
- #define QSERDES_V7_COM_AUTO_GAIN_ADJ_CTRL_3			0x1ac
-diff --git a/drivers/phy/qualcomm/phy-qcom-qmp-qserdes-txrx-v7.h b/drivers/phy/qualcomm/phy-qcom-qmp-qserdes-txrx-v7.h
-index 6ab943ff57ff666e4f23f4ad0b4eff211c6dbfd0..0c38d62284e4d0e64a27fb82c468f47aee3760bb 100644
---- a/drivers/phy/qualcomm/phy-qcom-qmp-qserdes-txrx-v7.h
-+++ b/drivers/phy/qualcomm/phy-qcom-qmp-qserdes-txrx-v7.h
-@@ -7,9 +7,11 @@
- #define QCOM_PHY_QMP_QSERDES_TXRX_V7_H_
- 
- #define QSERDES_V7_TX_CLKBUF_ENABLE				0x08
-+#define QSERDES_V7_TX_TX_EMP_POST1_LVL				0x0c
- #define QSERDES_V7_TX_RESET_TSYNC_EN				0x1c
- #define QSERDES_V7_TX_PRE_STALL_LDO_BOOST_EN			0x20
- #define QSERDES_V7_TX_TX_BAND					0x24
-+#define QSERDES_V7_TX_SLEW_CNTL					0x28
- #define QSERDES_V7_TX_INTERFACE_SELECT				0x2c
- #define QSERDES_V7_TX_RES_CODE_LANE_TX				0x34
- #define QSERDES_V7_TX_RES_CODE_LANE_RX				0x38
-@@ -35,26 +37,32 @@
- #define QSERDES_V7_RX_UCDR_FASTLOCK_COUNT_LOW			0x3c
- #define QSERDES_V7_RX_UCDR_FASTLOCK_COUNT_HIGH			0x40
- #define QSERDES_V7_RX_UCDR_PI_CONTROLS				0x44
-+#define QSERDES_V7_RX_UCDR_PI_CTRL2				0x48
- #define QSERDES_V7_RX_UCDR_SB2_THRESH1				0x4c
- #define QSERDES_V7_RX_UCDR_SB2_THRESH2				0x50
- #define QSERDES_V7_RX_UCDR_SB2_GAIN1				0x54
- #define QSERDES_V7_RX_UCDR_SB2_GAIN2				0x58
- #define QSERDES_V7_RX_AUX_DATA_TCOARSE_TFINE			0x60
-+#define QSERDES_V7_RX_RX_TERM_BW					0x80
- #define QSERDES_V7_RX_TX_ADAPT_PRE_THRESH1			0xc4
- #define QSERDES_V7_RX_TX_ADAPT_PRE_THRESH2			0xc8
- #define QSERDES_V7_RX_TX_ADAPT_POST_THRESH			0xcc
- #define QSERDES_V7_RX_VGA_CAL_CNTRL1				0xd4
- #define QSERDES_V7_RX_VGA_CAL_CNTRL2				0xd8
- #define QSERDES_V7_RX_GM_CAL					0xdc
-+#define QSERDES_V7_RX_RX_EQU_ADAPTOR_CNTRL1			0xe8
- #define QSERDES_V7_RX_RX_EQU_ADAPTOR_CNTRL2			0xec
- #define QSERDES_V7_RX_RX_EQU_ADAPTOR_CNTRL3			0xf0
- #define QSERDES_V7_RX_RX_EQU_ADAPTOR_CNTRL4			0xf4
- #define QSERDES_V7_RX_RX_IDAC_TSETTLE_LOW			0xf8
- #define QSERDES_V7_RX_RX_IDAC_TSETTLE_HIGH			0xfc
-+#define QSERDES_V7_RX_RX_IDAC_MEASURE_TIME			0x100
- #define QSERDES_V7_RX_RX_EQ_OFFSET_ADAPTOR_CNTRL1		0x110
-+#define QSERDES_V7_RX_RX_OFFSET_ADAPTOR_CNTRL2			0x114
- #define QSERDES_V7_RX_SIGDET_ENABLES				0x118
- #define QSERDES_V7_RX_SIGDET_CNTRL				0x11c
- #define QSERDES_V7_RX_SIGDET_DEGLITCH_CNTRL			0x124
-+#define QSERDES_V7_RX_RX_BAND					0x128
- #define QSERDES_V7_RX_RX_MODE_00_LOW				0x15c
- #define QSERDES_V7_RX_RX_MODE_00_HIGH				0x160
- #define QSERDES_V7_RX_RX_MODE_00_HIGH2				0x164
-@@ -75,6 +83,7 @@
- #define QSERDES_V7_RX_DCC_CTRL1					0x1a8
- #define QSERDES_V7_RX_VTH_CODE					0x1b0
- #define QSERDES_V7_RX_SIGDET_CAL_CTRL1				0x1e4
-+#define QSERDES_V7_RX_SIGDET_CAL_CTRL2_AND_CDR_LOCK_EDGE	0x1e8
- #define QSERDES_V7_RX_SIGDET_CAL_TRIM				0x1f8
- 
- #endif
-diff --git a/drivers/phy/qualcomm/phy-qcom-sgmii-eth.c b/drivers/phy/qualcomm/phy-qcom-sgmii-eth.c
-index 029dafacee7853648ef24afd0d9c4b83a549badf..3c68bfe0ea443ef5cf7f17cead4974862dc04884 100644
---- a/drivers/phy/qualcomm/phy-qcom-sgmii-eth.c
-+++ b/drivers/phy/qualcomm/phy-qcom-sgmii-eth.c
-@@ -15,7 +15,9 @@
- 
- #include "phy-qcom-qmp-pcs-sgmii.h"
- #include "phy-qcom-qmp-qserdes-com-v5.h"
-+#include "phy-qcom-qmp-qserdes-com-v7.h"
- #include "phy-qcom-qmp-qserdes-txrx-v5.h"
-+#include "phy-qcom-qmp-qserdes-txrx-v7.h"
- 
- #define QSERDES_QMP_PLL					0x0
- #define QSERDES_RX					0x600
-@@ -221,6 +223,114 @@ static void qcom_dwmac_sgmii_phy_init_2p5g(struct regmap *regmap)
- 	regmap_write(regmap, QSERDES_PCS + QPHY_PCS_PHY_START, 0x01);
- }
- 
-+static void qcom_dwmac_sgmii_phy_init_10g(struct regmap *regmap)
-+{
-+	regmap_write(regmap, QSERDES_PCS + QPHY_PCS_SW_RESET, 0x01);
-+	regmap_write(regmap, QSERDES_PCS + QPHY_PCS_POWER_DOWN_CONTROL, 0x01);
-+
-+	regmap_write(regmap, QSERDES_QMP_PLL + QSERDES_V7_COM_BG_TIMER, 0x0A);
-+	regmap_write(regmap, QSERDES_QMP_PLL + QSERDES_V7_COM_PLL_IVCO, 0x0F);
-+	regmap_write(regmap, QSERDES_QMP_PLL + QSERDES_V7_COM_PLL_BIAS_EN_CLK_BUFLR_EN, 0x07);
-+	regmap_write(regmap, QSERDES_QMP_PLL + QSERDES_V7_COM_CLK_ENABLE1, 0x0F);
-+	regmap_write(regmap, QSERDES_QMP_PLL + QSERDES_V7_COM_CP_CTRL_MODE0, 0x08);
-+	regmap_write(regmap, QSERDES_QMP_PLL + QSERDES_V7_COM_PLL_RCTRL_MODE0, 0x16);
-+	regmap_write(regmap, QSERDES_QMP_PLL + QSERDES_V7_COM_PLL_CCTRL_MODE0, 0x36);
-+	regmap_write(regmap, QSERDES_QMP_PLL + QSERDES_V7_COM_INTEGLOOP_GAIN0_MODE0, 0x1F);
-+	regmap_write(regmap, QSERDES_QMP_PLL + QSERDES_V7_COM_INTEGLOOP_GAIN1_MODE0, 0x00);
-+	regmap_write(regmap, QSERDES_QMP_PLL + QSERDES_V7_COM_PLL_EN, 0x03);
-+	regmap_write(regmap, QSERDES_QMP_PLL + QSERDES_V7_COM_SYSCLK_EN_SEL, 0x1A);
-+	regmap_write(regmap, QSERDES_QMP_PLL + QSERDES_V7_COM_LOCK_CMP1_MODE0, 0x23);
-+	regmap_write(regmap, QSERDES_QMP_PLL + QSERDES_V7_COM_LOCK_CMP2_MODE0, 0x43);
-+	regmap_write(regmap, QSERDES_QMP_PLL + QSERDES_V7_COM_DEC_START_MODE0, 0x43);
-+	regmap_write(regmap, QSERDES_QMP_PLL + QSERDES_V7_COM_DIV_FRAC_START1_MODE0, 0x00);
-+	regmap_write(regmap, QSERDES_QMP_PLL + QSERDES_V7_COM_DIV_FRAC_START2_MODE0, 0x38);
-+	regmap_write(regmap, QSERDES_QMP_PLL + QSERDES_V7_COM_DIV_FRAC_START3_MODE0, 0x02);
-+	regmap_write(regmap, QSERDES_QMP_PLL + QSERDES_V7_COM_VCO_TUNE1_MODE0, 0xE6);
-+	regmap_write(regmap, QSERDES_QMP_PLL + QSERDES_V7_COM_VCO_TUNE2_MODE0, 0x01);
-+	regmap_write(regmap, QSERDES_QMP_PLL + QSERDES_V7_COM_VCO_TUNE_INITVAL2, 0x00);
-+	regmap_write(regmap, QSERDES_QMP_PLL + QSERDES_V7_COM_HSCLK_SEL_1, 0x00);
-+	regmap_write(regmap, QSERDES_QMP_PLL + QSERDES_V7_COM_HSCLK_HS_SWITCH_SEL_1, 0x00);
-+	regmap_write(regmap, QSERDES_QMP_PLL + QSERDES_V7_COM_PLL_CORE_CLK_DIV_MODE0, 0x04);
-+	regmap_write(regmap, QSERDES_QMP_PLL + QSERDES_V7_COM_CORE_CLK_EN, 0x30);
-+	regmap_write(regmap, QSERDES_QMP_PLL + QSERDES_V7_COM_CMN_CONFIG_1, 0x16);
-+	regmap_write(regmap, QSERDES_QMP_PLL + QSERDES_V7_COM_BIN_VCOCAL_CMP_CODE1_MODE0, 0xD7);
-+	regmap_write(regmap, QSERDES_QMP_PLL + QSERDES_V7_COM_BIN_VCOCAL_CMP_CODE2_MODE0, 0x0F);
-+	regmap_write(regmap, QSERDES_QMP_PLL + QSERDES_V7_COM_BIN_VCOCAL_HSCLK_SEL_1, 0x11);
-+
-+	regmap_write(regmap, QSERDES_TX + QSERDES_V7_TX_CLKBUF_ENABLE, 0x0D);
-+	regmap_write(regmap, QSERDES_TX + QSERDES_V7_TX_TX_BAND, 0x04);
-+	regmap_write(regmap, QSERDES_TX + QSERDES_V7_TX_SLEW_CNTL, 0x08);
-+	regmap_write(regmap, QSERDES_TX + QSERDES_V7_TX_RES_CODE_LANE_OFFSET_TX, 0x09);
-+	regmap_write(regmap, QSERDES_TX + QSERDES_V7_TX_RES_CODE_LANE_OFFSET_RX, 0x09);
-+	regmap_write(regmap, QSERDES_TX + QSERDES_V7_TX_LANE_MODE_1, 0xF5);
-+	regmap_write(regmap, QSERDES_TX + QSERDES_V7_TX_LANE_MODE_2, 0x06);
-+	regmap_write(regmap, QSERDES_TX + QSERDES_V7_TX_LANE_MODE_3, 0x3F);
-+	regmap_write(regmap, QSERDES_TX + QSERDES_V7_TX_LANE_MODE_4, 0x3F);
-+	regmap_write(regmap, QSERDES_TX + QSERDES_V7_TX_LANE_MODE_5, 0x5F);
-+	regmap_write(regmap, QSERDES_TX + QSERDES_V7_TX_RCV_DETECT_LVL_2, 0x12);
-+	regmap_write(regmap, QSERDES_TX + QSERDES_V7_TX_TRAN_DRVR_EMP_EN, 0x0F);
-+	regmap_write(regmap, QSERDES_TX + QSERDES_V7_TX_TX_EMP_POST1_LVL, 0x2B);
-+
-+	regmap_write(regmap, QSERDES_RX + QSERDES_V7_RX_UCDR_FO_GAIN, 0x0D);
-+	regmap_write(regmap, QSERDES_RX + QSERDES_V7_RX_UCDR_SO_GAIN, 0x03);
-+	regmap_write(regmap, QSERDES_RX + QSERDES_V7_RX_UCDR_FASTLOCK_FO_GAIN, 0x0A);
-+	regmap_write(regmap, QSERDES_RX + QSERDES_V7_RX_UCDR_SO_SATURATION_AND_ENABLE, 0x7F);
-+	regmap_write(regmap, QSERDES_RX + QSERDES_V7_RX_UCDR_FASTLOCK_COUNT_LOW, 0x00);
-+	regmap_write(regmap, QSERDES_RX + QSERDES_V7_RX_UCDR_FASTLOCK_COUNT_HIGH, 0x01);
-+	regmap_write(regmap, QSERDES_RX + QSERDES_V7_RX_UCDR_PI_CONTROLS, 0x81);
-+	regmap_write(regmap, QSERDES_RX + QSERDES_V7_RX_UCDR_PI_CTRL2, 0x81);
-+	regmap_write(regmap, QSERDES_RX + QSERDES_V7_RX_UCDR_SB2_THRESH1, 0x11);
-+	regmap_write(regmap, QSERDES_RX + QSERDES_V7_RX_UCDR_SB2_THRESH2, 0x22);
-+	regmap_write(regmap, QSERDES_RX + QSERDES_V7_RX_RX_TERM_BW, 0x03);
-+	regmap_write(regmap, QSERDES_RX + QSERDES_V7_RX_VGA_CAL_CNTRL2, 0x08);
-+	regmap_write(regmap, QSERDES_RX + QSERDES_V7_RX_GM_CAL, 0x0F);
-+	regmap_write(regmap, QSERDES_RX + QSERDES_V7_RX_RX_EQU_ADAPTOR_CNTRL1, 0x04);
-+	regmap_write(regmap, QSERDES_RX + QSERDES_V7_RX_RX_EQU_ADAPTOR_CNTRL2, 0x00);
-+	regmap_write(regmap, QSERDES_RX + QSERDES_V7_RX_RX_EQU_ADAPTOR_CNTRL3, 0x4A);
-+	regmap_write(regmap, QSERDES_RX + QSERDES_V7_RX_RX_EQU_ADAPTOR_CNTRL4, 0x5A);
-+	regmap_write(regmap, QSERDES_RX + QSERDES_V7_RX_RX_IDAC_TSETTLE_LOW, 0x80);
-+	regmap_write(regmap, QSERDES_RX + QSERDES_V7_RX_RX_IDAC_TSETTLE_HIGH, 0x01);
-+	regmap_write(regmap, QSERDES_RX + QSERDES_V7_RX_RX_IDAC_MEASURE_TIME, 0x20);
-+	regmap_write(regmap, QSERDES_RX + QSERDES_V7_RX_RX_EQ_OFFSET_ADAPTOR_CNTRL1, 0x17);
-+	regmap_write(regmap, QSERDES_RX + QSERDES_V7_RX_RX_OFFSET_ADAPTOR_CNTRL2, 0x00);
-+	regmap_write(regmap, QSERDES_RX + QSERDES_V7_RX_SIGDET_CNTRL, 0x0F);
-+	regmap_write(regmap, QSERDES_RX + QSERDES_V7_RX_SIGDET_DEGLITCH_CNTRL, 0x1E);
-+	regmap_write(regmap, QSERDES_RX + QSERDES_V7_RX_RX_BAND, 0x18);
-+	regmap_write(regmap, QSERDES_RX + QSERDES_V7_RX_RX_MODE_00_LOW, 0x1F);
-+	regmap_write(regmap, QSERDES_RX + QSERDES_V7_RX_RX_MODE_00_HIGH, 0xBF);
-+	regmap_write(regmap, QSERDES_RX + QSERDES_V7_RX_RX_MODE_00_HIGH2, 0xFF);
-+	regmap_write(regmap, QSERDES_RX + QSERDES_V7_RX_RX_MODE_00_HIGH3, 0xDF);
-+	regmap_write(regmap, QSERDES_RX + QSERDES_V7_RX_RX_MODE_00_HIGH4, 0xEF);
-+	regmap_write(regmap, QSERDES_RX + QSERDES_V7_RX_RX_MODE_01_LOW, 0xE5);
-+	regmap_write(regmap, QSERDES_RX + QSERDES_V7_RX_RX_MODE_01_HIGH, 0xC8);
-+	regmap_write(regmap, QSERDES_RX + QSERDES_V7_RX_RX_MODE_01_HIGH2, 0xC8);
-+	regmap_write(regmap, QSERDES_RX + QSERDES_V7_RX_RX_MODE_01_HIGH3, 0x14);
-+	regmap_write(regmap, QSERDES_RX + QSERDES_V7_RX_RX_MODE_01_HIGH4, 0xB6);
-+	regmap_write(regmap, QSERDES_RX + QSERDES_V7_RX_RX_MODE_10_LOW, 0xE0);
-+	regmap_write(regmap, QSERDES_RX + QSERDES_V7_RX_RX_MODE_10_HIGH, 0xC8);
-+	regmap_write(regmap, QSERDES_RX + QSERDES_V7_RX_RX_MODE_10_HIGH2, 0xC8);
-+	regmap_write(regmap, QSERDES_RX + QSERDES_V7_RX_RX_MODE_10_HIGH3, 0x3B);
-+	regmap_write(regmap, QSERDES_RX + QSERDES_V7_RX_RX_MODE_10_HIGH4, 0xB7);
-+	regmap_write(regmap, QSERDES_RX + QSERDES_V7_RX_DCC_CTRL1, 0x0C);
-+
-+	regmap_write(regmap, QSERDES_PCS + QPHY_PCS_LINE_RESET_TIME, 0x00);
-+	regmap_write(regmap, QSERDES_PCS + QPHY_PCS_TX_SMALL_AMP_DRV_LVL, 0x03);
-+	regmap_write(regmap, QSERDES_PCS + QPHY_PCS_TX_LARGE_AMP_DRV_LVL, 0x1A);
-+	regmap_write(regmap, QSERDES_PCS + QPHY_PCS_TX_SMALL_AMP_POST_EMP_LVL, 0x00);
-+	regmap_write(regmap, QSERDES_PCS + QPHY_PCS_TX_LARGE_AMP_POST_EMP_LVL, 0x0B);
-+	regmap_write(regmap, QSERDES_PCS + QPHY_PCS_TX_MID_TERM_CTRL1, 0x83);
-+	regmap_write(regmap, QSERDES_PCS + QPHY_PCS_TX_MID_TERM_CTRL2, 0x08);
-+	regmap_write(regmap, QSERDES_RX + QSERDES_V7_RX_SIGDET_CAL_CTRL1, 0x00);
-+	regmap_write(regmap, QSERDES_RX + QSERDES_V7_RX_SIGDET_CAL_CTRL2_AND_CDR_LOCK_EDGE, 0x00);
-+	regmap_write(regmap, QSERDES_PCS + QPHY_PCS_RX_SIGDET_CTRL2, 0xCC);
-+	regmap_write(regmap, QSERDES_PCS + QPHY_PCS_SGMII_MISC_CTRL7, 0x00);
-+	regmap_write(regmap, QSERDES_PCS + QPHY_PCS_SGMII_MISC_CTRL8, 0x14);
-+	regmap_write(regmap, QSERDES_PCS + QPHY_PCS_RETIME_BUFFER_EN, 0x01);
-+	regmap_write(regmap, QSERDES_PCS + QPHY_PCS_SW_RESET, 0x00);
-+
-+	regmap_write(regmap, QSERDES_PCS + QPHY_PCS_PHY_START, 0x01);
-+}
-+
- static inline int
- qcom_dwmac_sgmii_phy_poll_status(struct regmap *regmap, unsigned int reg,
- 				 unsigned int bit)
-@@ -265,6 +375,40 @@ static int qcom_dwmac_sgmii_phy_poll_sgmii_ready(struct device *dev,
- 	return 0;
- }
- 
-+static int qcom_dwmac_sgmii_phy_poll_usxgmii_ready(struct device *dev,
-+						     struct regmap *regmap)
-+{
-+	if (qcom_dwmac_sgmii_phy_poll_status(regmap,
-+					     QSERDES_QMP_PLL + QSERDES_V7_COM_C_READY_STATUS,
-+					     QSERDES_COM_C_READY)) {
-+		dev_err(dev, "QSERDES_COM_C_READY_STATUS timed-out");
-+		return -ETIMEDOUT;
-+	}
-+
-+	if (qcom_dwmac_sgmii_phy_poll_status(regmap,
-+					     QSERDES_PCS + QPHY_PCS_PCS_READY_STATUS,
-+					     QSERDES_PCS_READY)) {
-+		dev_err(dev, "PCS_READY timed-out");
-+		return -ETIMEDOUT;
-+	}
-+
-+	if (qcom_dwmac_sgmii_phy_poll_status(regmap,
-+					     QSERDES_PCS + QPHY_PCS_PCS_READY_STATUS,
-+					     QSERDES_PCS_SGMIIPHY_READY)) {
-+		dev_err(dev, "SGMIIPHY_READY timed-out");
-+		return -ETIMEDOUT;
-+	}
-+
-+	if (qcom_dwmac_sgmii_phy_poll_status(regmap,
-+					     QSERDES_QMP_PLL + QSERDES_V7_COM_CMN_STATUS,
-+					     QSERDES_COM_C_PLL_LOCKED)) {
-+		dev_err(dev, "PLL Lock Status timed-out");
-+		return -ETIMEDOUT;
-+	}
-+
-+	return 0;
-+}
-+
- static int qcom_dwmac_sgmii_phy_calibrate(struct phy *phy)
- {
- 	struct qcom_dwmac_sgmii_phy_data *data = phy_get_drvdata(phy);
-@@ -275,16 +419,19 @@ static int qcom_dwmac_sgmii_phy_calibrate(struct phy *phy)
- 	case PHY_INTERFACE_MODE_1000BASEX:
- 		/* 1.25Gbps mode */
- 		qcom_dwmac_sgmii_phy_init_1g(data->regmap);
--		break;
-+		return qcom_dwmac_sgmii_phy_poll_sgmii_ready(dev, data->regmap);
- 	case PHY_INTERFACE_MODE_2500BASEX:
- 		/* 3.125Gbps mode */
- 		qcom_dwmac_sgmii_phy_init_2p5g(data->regmap);
--		break;
-+		return qcom_dwmac_sgmii_phy_poll_sgmii_ready(dev, data->regmap);
-+	case PHY_INTERFACE_MODE_USXGMII:
-+	case PHY_INTERFACE_MODE_10GBASER:
-+		/* 10.3125Gbps mode */
-+		qcom_dwmac_sgmii_phy_init_10g(data->regmap);
-+		return qcom_dwmac_sgmii_phy_poll_usxgmii_ready(dev, data->regmap);
- 	default:
- 		return -EINVAL;
- 	}
--
--	return qcom_dwmac_sgmii_phy_poll_sgmii_ready(dev, data->regmap);
- }
- 
- static int qcom_dwmac_sgmii_phy_power_on(struct phy *phy)
-@@ -340,7 +487,9 @@ static int qcom_dwmac_sgmii_phy_validate(struct phy *phy, enum phy_mode mode,
- 
- 	if (submode == PHY_INTERFACE_MODE_SGMII ||
- 	    submode == PHY_INTERFACE_MODE_1000BASEX ||
--	    submode == PHY_INTERFACE_MODE_2500BASEX)
-+	    submode == PHY_INTERFACE_MODE_2500BASEX ||
-+	    submode == PHY_INTERFACE_MODE_USXGMII ||
-+	    submode == PHY_INTERFACE_MODE_10GBASER)
- 		return 0;
- 
- 	return -EINVAL;
-@@ -434,12 +583,19 @@ static int qcom_dwmac_sgmii_phy_probe(struct platform_device *pdev)
- 	return 0;
- }
- 
-+static const struct qcom_dwmac_sgmii_phy_match_data nord_match_data = {
-+	.default_interface = PHY_INTERFACE_MODE_USXGMII,
-+};
-+
- static const struct qcom_dwmac_sgmii_phy_match_data sa8775p_match_data = {
- 	.default_interface = PHY_INTERFACE_MODE_SGMII,
- };
- 
- static const struct of_device_id qcom_dwmac_sgmii_phy_of_match[] = {
- 	{
-+		.compatible = "qcom,nord-dwmac-sgmii-phy",
-+		.data = &nord_match_data,
-+	}, {
- 		.compatible = "qcom,sa8775p-dwmac-sgmii-phy",
- 		.data = &sa8775p_match_data,
- 	},
+Konrad, I'd be glad to test the router driver on the Yoga Slim 7x as soon a=
+s it's posted and report back with a Tested-by. Two things I've seen may ma=
+tter for it. Now and then the PMIC firmware misses the cable e-marker at at=
+tach (CCSts=3D2, PwrSts=3D1C, no VCONN), so the port stays in USB3 and neve=
+r enters USB4 until a replug. And the PS8830 on the Yoga works in USB4 mode=
+, while Jens Glathe's ps883x series from July would set parade,disable-usb4=
+ on the Yoga.
 
--- 
-2.34.1
+Thanks again,
+Birk
 
+
+On Monday, September 21st, 2026 at 14:32, Qiang Yu <qiang.yu@oss.qualcomm.c=
+om> wrote:
+
+> On Sat, Sep 19, 2026 at 08:33:20PM +0000, Birk Skyum wrote:
+> > Hi Mani,
+> >
+> > I'm working on experimental USB4 support for the Lenovo Yoga Slim 7x
+> > (83ED, X1E80100), building on Jim Martin's published Glymur stack. This=
+ is
+> > an out-of-tree bring-up, not a regression report against mainline.
+> >
+> > A directly connected LaCie Rugged SSD4 negotiates USB4, enumerates thro=
+ugh
+> > a PCIe tunnel and completes a 4096-byte read into RAM. However, NVMe
+> > completions are recovered through timeout polling, with zero
+> > device-generated interrupts recorded.
+> >
+> > MSI-X is enabled and unmasked, and the table matches Linux's programmed
+> > messages. Software ITS INT commands reach the NVMe handlers. In a
+> > separate test, redirecting one MSI-X vector to owned coherent RAM
+> > captured the expected endpoint payload, but that does not prove deliver=
+y
+> > to the ITS.
+> >
+> > The endpoint RID is 0x0100. The captured firmware IORT and our DT agree
+> > on DeviceID 0x80100, with MSI address 0x17050040 and event data 0/1. Th=
+e
+> > PCIe SMMU remains firmware-owned.
+> >
+> > Source and test results are published here:
+> > https://github.com/birkskyum/yoga-slim7x-usb4
+> >
+> > Is direct ITS delivery the intended route for USB4 PCI0 under EL1/Gunya=
+h?
+> > Is additional controller forwarding or DeviceID setup required?
+> >
+> > I also found the QCS8550 change using the internal DWC MSI receiver to
+> > avoid a Gunyah limitation:
+> > https://github.com/torvalds/linux/commit/33cae252054a694269f9dcd41b3540=
+63193c8f59
+> >
+> > I realise that involves different hardware and symptoms. If an internal
+> > receiver is appropriate for X1 PCI0, where can I find its parent IRQ an=
+d
+> > required initialization?
+> >
+>=20
+> Hi Birk,
+>=20
+> Please add below dts change in pcie0 dts node and also remove msi-map if =
+you added,
+>=20
+> interrupts =3D <GIC_SPI 655 IRQ_TYPE_LEVEL_HIGH>,
+>              <GIC_SPI 657 IRQ_TYPE_LEVEL_HIGH>,
+>              <GIC_SPI 664 IRQ_TYPE_LEVEL_HIGH>,
+>              <GIC_SPI 668 IRQ_TYPE_LEVEL_HIGH>,
+>              <GIC_SPI 348 IRQ_TYPE_LEVEL_HIGH>,
+>              <GIC_SPI 349 IRQ_TYPE_LEVEL_HIGH>,
+>              <GIC_SPI 351 IRQ_TYPE_LEVEL_HIGH>,
+>              <GIC_SPI 702 IRQ_TYPE_LEVEL_HIGH>,
+>              <GIC_SPI 167 IRQ_TYPE_LEVEL_HIGH>;
+> interrupt-names =3D "msi0",
+>                   "msi1",
+>                   "msi2",
+>                   "msi3",
+>                   "msi4",
+>                   "msi5",
+>                   "msi6",
+>                   "msi7",
+>                   "global";
+>=20
+> #interrupt-cells =3D <1>;
+> interrupt-map-mask =3D <0 0 0 0x7>;
+> interrupt-map =3D <0 0 0 1 &intc 0 0 GIC_SPI 703 IRQ_TYPE_LEVEL_HIGH>,
+>                 <0 0 0 2 &intc 0 0 GIC_SPI 708 IRQ_TYPE_LEVEL_HIGH>,
+>                 <0 0 0 3 &intc 0 0 GIC_SPI 714 IRQ_TYPE_LEVEL_HIGH>,
+>                 <0 0 0 4 &intc 0 0 GIC_SPI 716 IRQ_TYPE_LEVEL_HIGH>;
+>=20
+> - Qiang Yu
+> 
