@@ -1,67 +1,68 @@
-Received: from mail-wr2-f12.google.com (mail-wr2-f12.google.com [74.125.225.76])
+Received: from mail-wm2-f13.google.com (mail-wm2-f13.google.com [74.125.225.141])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B6A4B5158B8
-	for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 12:16:40 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.225.76
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 81D2551356F
+	for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 12:16:42 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.225.141
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790165805; cv=none; b=p5ZfYEEP/DBZMajDvZXFAdnUHCpEIf4mpL1nnFk+8JR5RBwOaKqpl1EFrq4t2dtXKf6pc5wlkum22P0LEVoPm4Yi8zKEzDTS70Vd7/Sy6L+p7Kz+zPVDw25gd4EAfn42Xjw6EtzXhXxgMhDPl714X0y/yVVjt3PUAy4O7c3K4ac=
+	t=1790165808; cv=none; b=RTc7K1GIXo1rXZByfMA+USTPsp7+IqgX8JDsZm6fEhAo/BX3jCtFKUE91zJ4Ybf+sq69Kuy4Sng3vgjjcdM5zTIRueRQvRprLuetVwxvgsdVd8kBiBq9R/uHHrROAYJmpUIszDuW5CL4TZ3fB59ieDXDQAD7jX+4RKJnvgYfz34=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790165805; c=relaxed/simple;
-	bh=3fuxE0K0pdKY88jlD8b9+b8jsBFzputLxXJvAFlNEoc=;
-	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=d1m8dzcyICMLi1t3PhdbeXpqlOa86127sEFLHu6qpmyAwIC/efYLhBu+VbV/VkyrMRhbTAT/ObfWRTyy2Xh/Uxm1M5LXBrM1Ct7puVgJKngOxi0sD2Wz8XX/5KL7oNsmGlRbzqdQBGR3RukD1Kncyun66xItJPT5JImQuBteEkE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=QuNQG72c; arc=none smtp.client-ip=74.125.225.76
+	s=arc-20240116; t=1790165808; c=relaxed/simple;
+	bh=DRDBx8uJu/gmNOt8neF/NrrQZ8Y1qYuByeAf3Z74Z9c=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
+	 In-Reply-To:To:Cc; b=mBzQnevh47WAvSCQwrscS6WqoIAVPS0gErRelQDsUxdsddmepEb/vRKcVGrMoa8rr0WaVi1Rt1YoRBgtaeMDzOlOM0MvituXSnmzdQodXtk8x5Ttmp+LMhgR05SUqaXcbzRczY7Mbr0GLL34TNGAPqK5MXswLXHytD1NWQvsHc8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=oD1AeWDl; arc=none smtp.client-ip=74.125.225.141
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="QuNQG72c"
-Received: by mail-wr2-f12.google.com with SMTP id ffacd0b85a97d-482f633ecdeso719892f8f.2
-        for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 05:16:40 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="oD1AeWDl"
+Received: by mail-wm2-f13.google.com with SMTP id 5b1f17b1804b1-49e71cdb22bso5740855e9.2
+        for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 05:16:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1790165798; x=1790770598; darn=vger.kernel.org;
-        h=cc:to:content-transfer-encoding:content-type:mime-version
-         :message-id:date:subject:from:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=B3p/QU7OMVVYXBcpiGeqAoPHE1xk40WRckQQBqak4y4=;
-        b=QuNQG72cCnzHBrizFkkcS/yV53tq09AzzS3e/jSS3v2VPdMsJ2ePthzOOVNcnU1bZN
-         RsvyzwiIxurFD4zP03/1+ts4bHpmaci6jSQLBGPpprLBCJQlNGrBWDfKiB/y+UFx7EJj
-         lQzs6X5iGA2y9F/8YMbGlhjajywlbvNZ9cyHaV7K/TzMd6tcDd5MN0vj2xOoP5VWKyyI
-         C2tbhEYNK4a/eleB+6IsKC2hFxxo5Ib6fJaQOVvR/DoXQlljeCRuj5q1KoYVA8hzYMfO
-         OIJf8m0Z+AXaSeikAyS1IKq0t1s3X+8zriwFTJb9FQgPn0QUMekv2yJ8tD2ZlcFM6ESn
-         N3+Q==
+        d=linaro.org; s=google; t=1790165799; x=1790770599; darn=vger.kernel.org;
+        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=CZcSVYTseMvcfqltwTfiGnUkc5ciw/nLJHbubGeUkOo=;
+        b=oD1AeWDlnFEvfsZixi3ktzLtCDJvW36XXqWeNcqI4KgQMX+EXI9S4E8sUCGoBAkgGT
+         ZTTAHCks2m+ACVLy89wqDoT4uNy51KSoU8CnJRVfgyuGm3atjaCmAiQHl57e2MwBGYqR
+         T7xFIuTzFl0hq1Gch+Gm8wk55gHa2jBKSSqf6McshobAEeqLIOIExZhyroKAcoynuQcT
+         FOUYnPUgTImsEv/133dLd/DTR1nHxD8qz8/xuOHPzIvwiWUbQovJ4WZK6xhyYPXurAzT
+         z18KnZ94S19U6+etfdEKJvXSyUoNUp4XCf2/et98USziM86J1mDw6yphxbljdFJFxmWG
+         CPEg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790165798; x=1790770598;
-        h=cc:to:content-transfer-encoding:content-type:mime-version
-         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=B3p/QU7OMVVYXBcpiGeqAoPHE1xk40WRckQQBqak4y4=;
-        b=F8T72Je6Ks9GXnwBhTpaQGqb4YMc6x2H31zNtlfpo/qT6gUQLaHtAvn8Q4c9nrM2Iq
-         5+r28CfJirLawAreA5hi/75mDIlG0abyNHFScvgC/O0UHJq2IctZg+C/s3D+4+B8kJex
-         i8cneLs0zMnpEgDpcelVkUAsciv9qSSXnM53/kT02tyyP5GvAx8Lpgb9h8dtWtofNpzc
-         3BbDv80JEMmBZbq4cVHeheqKT4/V5EZLuNkZG/I7SCUPpoG+c7esRXkyAO/0qPm1tLu8
-         C6P2FA6BWMdSOIxkhhfbltnhqoy9h1sp8AHfTaSlVb6Y/xPRas7uqgG44rkJt4pzF9Fz
-         4J1g==
-X-Gm-Message-State: AFuF++ko37hcfAhmV1G7oTDoToqLaq/Xgw0QkEIFSlsyPhDcdus7Vzqr
-	LJFE7CGxEzJqi3Gl2Yqjh202whU+jTdMq+ni5meTRTSATBEmXzpWC9pTjZR9ecbEoLw=
-X-Gm-Gg: AYBFou1RrgCo+ONdnVFWPfnaBlq6e6MZCb12CdoVij5bmf2TXGF8Gs+EhUvneyw81qo
-	Hy0Pn13PsRL7wRouohXbRV6ZRXF/4dL0rUrjZA9Vi/QvQ6W2tP03laIFv24O4nvE8bGJqY/YIOq
-	pPtRJzKK+YqXh0r815xHXhOPclcYfXYzqrWrhLPqfSjIoqIWwNW7eQM0bYXgz7r2kYIcOyUgCNh
-	iTOyWoU/jODFPdZISt3FgJYJND5tXsg07MOKCSZkYlNsEtiwj7Lmrw+z5rhv0T2E6u2t4ULJ+LM
-	s+N6PxK37sEQbc/xmxdwt9nXShELa60uniUtZa+SHlDda6iu8Jkyt8jPQBDNfTU5F9I/ljxJ5lL
-	H25j0m1MNnikplaXEipf97nxQgz15EB7dW+PeI30g1UUc7f0XdNwViYK1+SEnjMgtU5CorIyQc7
-	UOnSihGzzPSzDk9r5tKHNAy6Z/GXZ3PWneusE/vRc+gfHSjWreyNXtHAUp2Oc8yCPaeccfL5Ify
-	uTq4eikkgOyuVdvBmM=
-X-Received: by 2002:a05:6000:2506:b0:487:c4c:b7fc with SMTP id ffacd0b85a97d-4886704a279mr4171071f8f.4.1790165797727;
-        Wed, 23 Sep 2026 05:16:37 -0700 (PDT)
+        d=1e100.net; s=20260707; t=1790165799; x=1790770599;
+        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+         :content-type:mime-version:subject:date:from:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=CZcSVYTseMvcfqltwTfiGnUkc5ciw/nLJHbubGeUkOo=;
+        b=R2D4q3OFnrtAeJvMX6ekjTgZ/O6y2TXacFi618+xXz8SKLJNOuz8MgklgQjcKm6+a9
+         4yIUk6hgJPqHKs4K0DEH4bPP2ge3a0w6KQw2WuoSDta0MF8x2ucAboSYG2xi/ys7KYXY
+         buB2p9VV9t6tuNNhk0o+HE2Wcqjhur0gNw/SS4yKSrJwfkAKM+RB3t3l335bTlevvNmh
+         Cbdc7sUoksaiSQlYQC8PnLxIGk2yE/IkLNcU89FfFtY0RBaf92PMkPXEuQOv/7FE+Rl7
+         b0XdmK0lGzEnF5KAgBzzl92xLB0QLgC0DNSqidmcxvstJeKDkKA5sK4HKbF+8JXk+Icd
+         SQMg==
+X-Gm-Message-State: AFuF++lG7p0AiL2cKVAcORyiBI0cRz2C138SqWxHQGKDrE+EvfwhkLxF
+	GAHNOqkP+jrx/1aqGm9OAewlBOYZ9NVsoeeEBMU4JjGFqN/e4vbRx9YQ0p6Y8GQpvWk=
+X-Gm-Gg: AYBFou2eW5WQm7H1YXcaHJTsII2vl5DOPRtnejZQa6oKZNNPD3CxniafTJqOFuKeQWa
+	cY5x3YUJiYKchIZyQt6yDeqDp1tNXsFkx5O9l7UI0qJmYxtXmLJb72xecsznD1Xb+LZ/1gxESQk
+	SNKoNsU71fma2mO/JbxnsxGKSfvJdt17ZTGy8IMjXEq662CSbHOxwYnaVQ9gM+YtSp65wXhrDYr
+	+WUjcN2NCOIq5Jqkp/v+twIfWNgyDfbKmM5KaKl/8RMo/fTytGTiCy+kV/apwMtl5ZMfYPq/aoc
+	UhMj65qbD9QSiJxuJ0M8eB1OeqTSNEnY5XbFMuUacl8iCqZQzlYHlvuiCKl24mmp2C7MRB3Uq1P
+	dCIDJA5DdoQSROio0nvOGAYBa7RoGtbnqZg9UzSkDGLccPa+YMBBdCZxIRm8Zn5J8U1NDZ8omGV
+	b8+AHK+hc73cTxViKvSDJF455Qxic4lVPr3rcQfGMyBFTg7+KKpkD+Lix4dz7084uLYhWYCzpZQ
+	/JqfYT0XvKJY+2RvYaAYiio2FYnRw==
+X-Received: by 2002:a05:600c:c16d:b0:49c:ff9f:f6b6 with SMTP id 5b1f17b1804b1-49fdee0b7f2mr31248345e9.6.1790165798862;
+        Wed, 23 Sep 2026 05:16:38 -0700 (PDT)
 Received: from arrakeen.starnux.net ([2a01:e0a:106d:1080:52eb:f6ff:feb3:451a])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48868889376sm5410298f8f.33.2026.09.23.05.16.36
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48868889376sm5410298f8f.33.2026.09.23.05.16.37
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 23 Sep 2026 05:16:36 -0700 (PDT)
+        Wed, 23 Sep 2026 05:16:38 -0700 (PDT)
 From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: [PATCH v2 0/2] arm64: dts: qcom: sm8650: add support from Valve
- Deckard headset
-Date: Wed, 23 Sep 2026 14:16:31 +0200
-Message-Id: <20260923-topic-sm8650-deckard-initial-dt-v2-0-8361c4548efa@linaro.org>
+Date: Wed, 23 Sep 2026 14:16:32 +0200
+Subject: [PATCH v2 1/2] dt-bindings: arm: qcom: document the Valve Deckard
+ headset
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -70,11 +71,9 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAB/Ds2oC/4WOwQ6CMBAFf4X07Jq2sUU8+R+GQ2lXWMWWtJVoC
- P8uYDx7nGTy5k0sYSRM7FRMLOJIiYJfQO4KZjvjWwRyCzPJpeaVFJDDQBbS46gVB4f2bqID8pT
- J9OAyiMooLXQjeGXYsjJEvNJrK1zqL6dnc0Ob19nV6CjlEN/bhVGs3q8m/9ZGARysVFiWqnL8Y
- M49eRPDPsSW1fM8fwDIIw034QAAAA==
-X-Change-ID: 20260921-topic-sm8650-deckard-initial-dt-19a5616b109a
+Message-Id: <20260923-topic-sm8650-deckard-initial-dt-v2-1-8361c4548efa@linaro.org>
+References: <20260923-topic-sm8650-deckard-initial-dt-v2-0-8361c4548efa@linaro.org>
+In-Reply-To: <20260923-topic-sm8650-deckard-initial-dt-v2-0-8361c4548efa@linaro.org>
 To: Bjorn Andersson <andersson@kernel.org>, 
  Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>, 
  Krzysztof Kozlowski <krzk+dt@kernel.org>, 
@@ -84,57 +83,45 @@ To: Bjorn Andersson <andersson@kernel.org>,
 Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
  linux-kernel@vger.kernel.org, Neil Armstrong <neil.armstrong@linaro.org>
 X-Mailer: b4 0.15.1
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1409;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=811;
  i=neil.armstrong@linaro.org; h=from:subject:message-id;
- bh=3fuxE0K0pdKY88jlD8b9+b8jsBFzputLxXJvAFlNEoc=;
- b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBqs8MjiU0x/zgmEClWkgsaJjjQSqOX50KRJE6fETJM
- vLjSdzKJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCarPDIwAKCRB33NvayMhJ0dAdD/
- 92PxwPuQFzpWbvqldCJYKmTFyhV7ZKbzcPXp9lnnss8iBvzHrP0EnPo5MYIXTSKtEYEz96nbuaFx3h
- 5iFIVLbvPN7HgZ22YI8ibfOz8n4HNK6NXw1uYq6ywjBqyhSuK7SH+dv1glevNd9lJOgIrUmY+vKjek
- vK4sH+RfuWahRp3uPf0CyWok0KkOjV1Lz4lTjElKYnwioVU9YlwCE2TH0i4SXvWPOSLw9r8ZCt/5bs
- GkDeQ0yz5RkPLlUQg34KpihjW76ZOPYicKp0rx7wZSCLxRxbUnCI7780QdhpA/lxNCuWg4FFpGljnf
- 3Dr0sDUNSXGPXMai2q7rfe4u5LY9N8inrAfOj03iYnIDB+iX2oeDguFkoYHAWl4H/lP5vMa35E1uDv
- 830YxzyPXL6R/5MvahLzDabSY4AzVAMlYkNrYUGXiBTnQAWfWyNdh6VTaLDr/2h4OORl/qWWgYqqSJ
- 5s5f6Nm6VqwF6ZdTPgPOcQYAfVOqKLsAtTIy6Q5pEsWAM1/vw3iCYRZIRUIEuwEFYkXDg3Rnp7cEBX
- 6lQvq+kCOc/kxTYxIi7QMGrd4BxGEzjZVAOdUmYGDyzYaOUtV1IjW02YPKW9DEQt4+MeYFbx2d9u6X
- IN8LK+k7d6iliVyBXDYIr7nXeIpgIg8yM6F/3oWGD0T4OtBbOyCKXxcauVOw==
+ bh=DRDBx8uJu/gmNOt8neF/NrrQZ8Y1qYuByeAf3Z74Z9c=;
+ b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBqs8Mj5TJDcH5ec052eG5KgX9HZ7Ea/UFuN9GKHSfL
+ YRIfyL6JAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCarPDIwAKCRB33NvayMhJ0Q13D/
+ 9bdnhDVIsRT15xrCfzJ70ZyN2qHEoRoFvMbulhLAZXqZFJQT38TK5Lg3mrz7+UAyJGbvsR0tp+1O6l
+ RdTJ+vhu0oRIsFzY8QWA12MmPcZuJeJFqScye8urN4Khv1bWjn0pKlrgB6er1HnlofE6sz9VCwmrI4
+ pskYBxxO6BGX35w7n5+VkPNFVT/y68M63loyEv438YAjLO0Vw1MkRMmLbtPPbWF4U9Kfi3PaBDQb5i
+ x9bAX0r+HuAvW5l5NXfGykqamkgS9JBY8cqpijCQYmilIf/EJNvUPv59MXo9G/dx6tB6ASWE7dnR5c
+ j9oENYfZfIpwdQU9Tcyy+4ZBpN/objqqWTRHoGGZIZ4GqSKTFWyWNg3EnuVnFByZ5giysL9Mq8pmo8
+ qi/mZJBftaZ/cdH+XE83qCuKAFtDy1pyYB/vNo1kpdJTJTD9xcWhPecQaGK05agiXk+Rnz9fzhs/6m
+ FrN4xg57csDR0PTOSu49laN3xoOE/1Eb8mX7sp5/XatW3fLMIbXIrN8leQ79SiuVh7m51hfCgT3BZU
+ ro68cmxLNNah2n9YvaXE5oQU2Oh8girZZVXgJAUWb+aSjsyka0AeWbSzESEuKEq9l1L4VOJGOxFkQE
+ yEeBi0SXKB8KViQzSMXZyzw3Ow7LOo7d57dT3SaBgHVY5hjJmm6qH5VmnWvg==
 X-Developer-Key: i=neil.armstrong@linaro.org; a=openpgp;
  fpr=89EC3D058446217450F22848169AB7B1A4CFF8AE
 
-Document and add initial DeviceTree for the Valve "Steam Frame"
-codename Deckard. The Steam Frame is a virtual reality headset
-based on the Qualcomm Snapdragon 8 Gen 3 SoC (SM8650).
-
-Product Website: [1]
-
-Dependencies: None
-
-[1] https://store.steampowered.com/hardware/steamframe
+Document the Valve "Steam Frame" codename Deckard.
+The Steam Frame is a virtual reality headset based on the
+Qualcomm Snapdragon 8 Gen 3 SoC (SM8650).
 
 Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
 ---
-Changes in v2:
-- Added labels to smp2p to make removal of the nodes cleaner
-- Reorganized properties (ranges after #*-cells, <prop>-names after <prop>)
-- Use "0" instead of "0x0" in the reserved memory reg properties
-- Use proper supply properties for vcnl4040
-- Link to v1: https://patch.msgid.link/20260922-topic-sm8650-deckard-initial-dt-v1-0-c25e7759d04a@linaro.org
+ Documentation/devicetree/bindings/arm/qcom.yaml | 1 +
+ 1 file changed, 1 insertion(+)
 
----
-Neil Armstrong (2):
-      dt-bindings: arm: qcom: document the Valve Deckard headset
-      arm64: dts: qcom: sm8650: Add initial Valve Deckard devicetree
+diff --git a/Documentation/devicetree/bindings/arm/qcom.yaml b/Documentation/devicetree/bindings/arm/qcom.yaml
+index ff8a35df7862..0130bf93987c 100644
+--- a/Documentation/devicetree/bindings/arm/qcom.yaml
++++ b/Documentation/devicetree/bindings/arm/qcom.yaml
+@@ -1164,6 +1164,7 @@ properties:
+               - qcom,sm8650-hdk
+               - qcom,sm8650-mtp
+               - qcom,sm8650-qrd
++              - valve,deckard
+           - const: qcom,sm8650
+ 
+       - items:
 
- Documentation/devicetree/bindings/arm/qcom.yaml   |    1 +
- arch/arm64/boot/dts/qcom/Makefile                 |    1 +
- arch/arm64/boot/dts/qcom/sm8650-valve-deckard.dts | 1288 +++++++++++++++++++++
- arch/arm64/boot/dts/qcom/sm8650.dtsi              |    6 +-
- 4 files changed, 1293 insertions(+), 3 deletions(-)
----
-base-commit: 506632261e6aeb1aa05c3ebe4da0a9439153d746
-change-id: 20260921-topic-sm8650-deckard-initial-dt-19a5616b109a
-
-Best regards,
---  
-Neil Armstrong <neil.armstrong@linaro.org>
+-- 
+2.34.1
 
