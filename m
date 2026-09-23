@@ -1,282 +1,1276 @@
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.223.130])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BEAC347D452;
-	Wed, 23 Sep 2026 11:06:19 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=195.135.223.130
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B8939495030
+	for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 11:06:58 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790161581; cv=none; b=tMawIz4T30uc8AwNBhLI0TUJlF4mbilmF+HmfR/2ZVhZ/ekGWLqfC6zwExeYeexiQ9VIto2c1/oG5TPJygOboXAIuSPj1mZYp+ZGrscclunHaWQ7DiWlxqs8e/kZnkXJp5M5iGB0NpmZSFuymDpXLMWdPz8COezlj4hrmIavGk4=
+	t=1790161622; cv=none; b=KyhTdBo9Q3MdVK5CUQ/j1VsBqMgfaL6EZfJ+21EDpqUavDhy3mRAxAPvSgU8MIDorizO4AB1TGDvzfnU51Na1/Os5JxxU5qm2VuqGn0nM/MXCNogqVc7gux1vc4olcLismMmZ+CZX5ECiF6ExViWjiTkoIYcDC9f9sIHIlGKd4Q=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790161581; c=relaxed/simple;
-	bh=EfSCluBLWw2BsEgI5zAviR9MvB1MLhjmt9o++Hl7KW0=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=vAd0UXdvIyzRfST5SL2gws1H2e0wJmci8fwb8/KMyBuS8y50jtwQaUqIUyNzfynG32Uv5GTQ6Y9UOqwaosEanR07ukvtAED0pXLFHPEk2vczxl3EOpWMBzPDFUz9yCL/UiMT7ccr9TbvkF8EvZTTmXpnHOaM/cJ3DyRhArrCbXU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=suse.de; spf=pass smtp.mailfrom=suse.de; dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b=oiRrHK+C; dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b=luhlt1sm; dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b=YecCcbCC; dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b=4X0Xrs7c; arc=none smtp.client-ip=195.135.223.130
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=suse.de
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=suse.de
+	s=arc-20240116; t=1790161622; c=relaxed/simple;
+	bh=9hdKIf6nn0gMSQvgpYWFBFzWKyzF5h3+/9kpYKe5nEs=;
+	h=Message-ID:Date:MIME-Version:From:Subject:To:Cc:References:
+	 In-Reply-To:Content-Type; b=oP+Vu3ncWZAqrGLj2Vs+VSIopvuXplBxGwgJcBcsK6GCDxrhbFiXr3d+6d+HAYMJQ86APOiGlXOq/6pceyAO82E7JV210EtXVV6mdPtXBBOvgBpBYJ/cWSQDQ90n1hSC+1STN/NcOb8RL5ghEMvOFfgJ0rNwANFiEKYtZm7uRJ4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=L2rHCDEy; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=hREuEJv2; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b="oiRrHK+C";
-	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="luhlt1sm";
-	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b="YecCcbCC";
-	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="4X0Xrs7c"
-Received: from imap1.dmz-prg2.suse.org (unknown [10.150.64.97])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
-	(No client certificate requested)
-	by smtp-out1.suse.de (Postfix) with ESMTPS id 686FC21D30;
-	Wed, 23 Sep 2026 11:05:42 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
-	t=1790161546; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=1It3FSjuRcVyjIsOIw0Z1T0tf5vC/JVqner4HFLakPY=;
-	b=oiRrHK+CbKT0xKCxL5gPLQfHJ+V7qAtEc5TSDqI3Ne+8A/jb2mpPcdczVfnM7H72S8xxbP
-	uj1UPe9M3yiJ8PtZ6jW5Tvp48/M/HkAnzXD5yp2Gpzat3gXp1EEjusuIskOC18qNLSOla5
-	YI8pXKV7I7O7uQNWMPxibFdPr85Al8E=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
-	s=susede2_ed25519; t=1790161546;
-	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=1It3FSjuRcVyjIsOIw0Z1T0tf5vC/JVqner4HFLakPY=;
-	b=luhlt1smwWeQMYvkkb1DqmGGjzmJsVDTfXyn+LqJ9vU7YMeJN3WPVA0w/4Rgl7AfQbtSzF
-	HPvDbiDji0CavXDQ==
-Authentication-Results: smtp-out1.suse.de;
-	none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
-	t=1790161542; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=1It3FSjuRcVyjIsOIw0Z1T0tf5vC/JVqner4HFLakPY=;
-	b=YecCcbCCuvSnVo99i56Z109IC3RhCOMu+5w+HjMHoihI1cwhcl/WSnKi9lZZwIMrOiE9IN
-	zR1v7dXxX3RtXRL/5Tg2MaeKlbrp73yGM3dgKWR/pmbXyP7zczXpv6bYUiptkZhfzh9sLP
-	n7L9DQ3fL5alSB42vyGMO4QeJraDPz4=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
-	s=susede2_ed25519; t=1790161542;
-	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=1It3FSjuRcVyjIsOIw0Z1T0tf5vC/JVqner4HFLakPY=;
-	b=4X0Xrs7cQOT8RfOyanQYnDNMC4oALPHRSSF1N4q1DFSUyC+tw86d5I07+XgFJfnJv6i8tF
-	wrVx2fvzTTNizzCQ==
-Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
-	(No client certificate requested)
-	by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id CDF2413A6A;
-	Wed, 23 Sep 2026 11:05:41 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
-	by imap1.dmz-prg2.suse.org with ESMTPSA
-	id VCF1C4Wys2qeBAAAD6G6ig:T2
-	(envelope-from <tzimmermann@suse.de>); Wed, 23 Sep 2026 11:05:41 +0000
-From: Thomas Zimmermann <tzimmermann@suse.de>
-To: jfalempe@redhat.com,
-	javierm@redhat.com,
-	maarten.lankhorst@linux.intel.com,
-	mripard@kernel.org,
-	airlied@gmail.com,
-	simona@ffwll.ch
-Cc: dri-devel@lists.freedesktop.org,
-	amd-gfx@lists.freedesktop.org,
-	linux-arm-kernel@lists.infradead.org,
-	linux-samsung-soc@vger.kernel.org,
-	intel-gfx@lists.freedesktop.org,
-	intel-xe@lists.freedesktop.org,
-	linux-arm-msm@vger.kernel.org,
-	freedreno@lists.freedesktop.org,
-	nouveau@lists.freedesktop.org,
-	linux-rockchip@lists.infradead.org,
-	linux-tegra@vger.kernel.org,
-	sashiko-reviews@lists.linux.dev,
-	Thomas Zimmermann <tzimmermann@suse.de>
-Subject: [PATCH 1/2] drm/fbdev: Move fbdev module parameters next to module init
-Date: Wed, 23 Sep 2026 12:59:09 +0200
-Message-ID: <20260923110537.451614-2-tzimmermann@suse.de>
-X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20260923110537.451614-1-tzimmermann@suse.de>
-References: <20260923110537.451614-1-tzimmermann@suse.de>
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="L2rHCDEy";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="hREuEJv2"
+Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68NA2sAc2951639
+	for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 11:06:57 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	a/kAeX86/wSRyIa2SMCAOYNpaVRZoGbMTjYSRJZI1rw=; b=L2rHCDEyujon4Qrn
+	LKun4e2p5EzMdpgU/RYJ6m5LbU0ZUI5IV/zNi4aKCHhRTDX+vdMqdl9qbWNo7ZzY
+	/tXqo7zbRkpB7+TuFQjIFS0BAMcfNhAFBjErdDd5WJv0D7EKtJPECuR84Lqah22U
+	h+TOQMRGpCL+uoAZdKY7TnAVP+CXl1mb6LdfHXzURah06ogs09N+p6gA+Iv+ge2D
+	9jBlVowJctNqC9+YW1wCUJ8eTGibqsNFfyDggzsv8VaYFdEotwI8odRjJx4e5XKB
+	niXKF7rYdNvkvs9N5W2Gag+fxnhA3Bpy/GNvVq5s7e5nml7YkKIudbXEWsYhM8n3
+	f1MwpA==
+Received: from mail-dy1-f199.google.com (mail-dy1-f199.google.com [74.125.82.199])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gv32qtgfb-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 11:06:57 +0000 (GMT)
+Received: by mail-dy1-f199.google.com with SMTP id 5a478bee46e88-331b2ec616fso2943284eec.1
+        for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 04:06:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1790161616; x=1790766416; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :references:cc:to:subject:from:user-agent:mime-version:date
+         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=a/kAeX86/wSRyIa2SMCAOYNpaVRZoGbMTjYSRJZI1rw=;
+        b=hREuEJv2RT1ykonkncbJAY7+KCMdWPe+G2fkd7eBKKXF77uu7Wt5iNqlF2CtJmf5TY
+         vzYrR95JL+6ITsSMruuaqdqGTPtfexuXvxXvX/acPrA/f7BTwN5vT9x50/XUCFyXTul/
+         1MRjspJXaiXOAnrdoivFXx3ip/wjZYrZs2KwKGBz/JTm/Sgv/xqr41vY//AGI4SE06Yw
+         9bLL4ZzSOA/vkZyWse46gUlIx/w6llP607VPq9L8tMRgxVZywiG6DuutItoMmDzbPBPn
+         kd8z4WS2PFW8YKl5eOS3xUvbYN/aKiwJnXrfjjCfzH6KZOQ8b7PNKC9v6PqU6eAZXgvI
+         RThw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1790161616; x=1790766416;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :references:cc:to:subject:from:user-agent:mime-version:date
+         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=a/kAeX86/wSRyIa2SMCAOYNpaVRZoGbMTjYSRJZI1rw=;
+        b=kEJlTwavQUTgO9ddh+9fydNk7A7T5GpPIqyha+i3SOfPW7bwdopMHPVfPcq/rrPcxT
+         MY8sQnTT/lBuE3xNnF2uQL7mOPzgIIQbZLk+lH4Rm6dRWK3pfpvqcdBS9MilLWRSzLVb
+         R2UUgfVmHUbJLZzqenXkR2ErUc00piENgky6aEn1xMv2rhvM7B+pC8SG9gNukPlrsUH3
+         4ROMN+nZK0T6+24MQHEFFWFvhjvywnUvSNeb92yr4qgRUYs4ysLM4kIKPHquUHC2rlnB
+         VD3APaOgTUuIEjWLVv8ZxUVLqsDDXVnknJH5EBQM7WtXiEM/O8VPoGASIR7pjtBoi02Q
+         GXcA==
+X-Gm-Message-State: AFuF++nRcYluUDsW0fwE7Zou0pVzu3GGQ96XlkI9KWCjUsQtQmNyEU9y
+	ODOCJXDiTHkS2uBrWs3W9hbObioos19Qgicyj+1iqgI3v27c2u9JWqlKczaUW0Jl72UHXwTcQpG
+	4bJoyKv2MzgzeieWb+JKZ9sbWuRZY7Ck3JTkV/ICbw0UZgZabf3dc9QCUG7eWl58bKvo=
+X-Gm-Gg: AYBFou2FwE3BF+GRwLWCS8V96cDFMu58M9gpt0zhBK6czjn4w5IxqFE4xcg8hiiURb4
+	rILjwIdQ+ZI2C3hiDVPF/1y9zkXNOqocZVtcQcXf9UqSgqK5P+qTPuwLdpnP5Qh4jZhsTZH9FXk
+	Wsa4k9jX/eLwJjgrtNZfhxotB7lJ9KZ8nOvuMnfxrDLsSOpmIX/naAhZKWSpjpgcGkkKSjNXxLv
+	X/ihBATf7fzwu74RVWJbGTXRchzIsgUf48bs64y9nh28IYbSC8M1ClAv4RN5ReXhlboEMA/wpt/
+	I9GrZLBA4QYbUUcxTcewb3m79GnN3MIwQD8NFBJaB4sxH7Wcv0nJ6aw2jK35JMb2CINjUCDyvhR
+	ePIEDy0bAmTpXZAmfyPWp0N2Yr4bfNg==
+X-Received: by 2002:a05:7300:cd93:b0:32e:ca1f:e285 with SMTP id 5a478bee46e88-33e8c44513cmr3300989eec.14.1790161615680;
+        Wed, 23 Sep 2026 04:06:55 -0700 (PDT)
+X-Received: by 2002:a05:7300:cd93:b0:32e:ca1f:e285 with SMTP id 5a478bee46e88-33e8c44513cmr3300942eec.14.1790161614746;
+        Wed, 23 Sep 2026 04:06:54 -0700 (PDT)
+Received: from [10.218.33.235] ([202.46.22.19])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-33e95c7cfd9sm6162361eec.5.2026.09.23.04.06.48
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 23 Sep 2026 04:06:54 -0700 (PDT)
+Message-ID: <51e4cbc2-445f-4b18-a0de-64bc62ded1b0@oss.qualcomm.com>
+Date: Wed, 23 Sep 2026 16:36:47 +0530
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+From: Faruque Ansari <faruque.ansari@oss.qualcomm.com>
+Subject: Re: [PATCH v14 5/6] power: reset: Introduce PSCR Recording Framework
+ for Non-Volatile Storage
+To: Matti Vaittinen <mazziesaccount@gmail.com>,
+        Sebastian Reichel <sre@kernel.org>, Benson Leung <bleung@chromium.org>,
+        Tzung-Bi Shih <tzungbi@kernel.org>,
+        Guenter Roeck <groeck@chromium.org>,
+        Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>,
+        "Rafael J. Wysocki" <rafael@kernel.org>,
+        Daniel Lezcano <daniel.lezcano@kernel.org>,
+        Zhang Rui <rui.zhang@intel.com>, Lukasz Luba <lukasz.luba@arm.com>,
+        Oleksij Rempel <o.rempel@pengutronix.de>,
+        Pengutronix Kernel Team <kernel@pengutronix.de>
+Cc: linux-arm-msm@vger.kernel.org, linux-pm@vger.kernel.org,
+        linux-kernel@vger.kernel.org, chrome-platform@lists.linux.dev,
+        avaneesh.dwivedi@oss.qualcomm.com,
+        Umang Chheda <umang.chheda@oss.qualcomm.com>,
+        Francesco Valla <francesco@valla.it>
+References: <20260921-pscrr-framework-v14-0-a16290003b7c@oss.qualcomm.com>
+ <20260921-pscrr-framework-v14-5-a16290003b7c@oss.qualcomm.com>
+ <05f38c18-812c-4fbc-9e79-69fd3b78ba3d@gmail.com>
+Content-Language: en-US
+In-Reply-To: <05f38c18-812c-4fbc-9e79-69fd3b78ba3d@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Spam-Score: -2.80
-X-Spam-Level: 
-X-Spamd-Result: default: False [-2.80 / 50.00];
-	BAYES_HAM(-3.00)[100.00%];
-	MID_CONTAINS_FROM(1.00)[];
-	NEURAL_HAM_LONG(-1.00)[-1.000];
-	R_MISSING_CHARSET(0.50)[];
-	NEURAL_HAM_SHORT(-0.20)[-0.999];
-	MIME_GOOD(-0.10)[text/plain];
-	FREEMAIL_TO(0.00)[redhat.com,linux.intel.com,kernel.org,gmail.com,ffwll.ch];
-	ARC_NA(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[19];
-	MIME_TRACE(0.00)[0:+];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
-	TO_MATCH_ENVRCPT_ALL(0.00)[];
-	FROM_EQ_ENVFROM(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	TO_DN_SOME(0.00)[];
-	RCVD_TLS_ALL(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[suse.de:mid,suse.de:email,imap1.dmz-prg2.suse.org:helo];
-	RCVD_COUNT_TWO(0.00)[2];
-	FREEMAIL_ENVRCPT(0.00)[gmail.com]
-X-Spam-Flag: NO
+X-Authority-Analysis: v=2.4 cv=SJnXx+vH c=1 sm=1 tr=0 ts=6ab3b2d1 cx=c_pps
+ a=cFYjgdjTJScbgFmBucgdfQ==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
+ a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
+ a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=7CQSdrXTAAAA:8 a=pGLkceISAAAA:8
+ a=5J6y4tE9bfQiaKIQl-UA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+ a=scEy_gLbYbu1JhEsrz4S:22 a=a-qgeE7W1pNrGK8U0ZQC:22
+X-Proofpoint-GUID: tIeajLuL15Ml-4kDhwxabLoA0frCiefr
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTIzMDA0NCBTYWx0ZWRfXzUGKTIsgQ9lH
+ 0T834JkZ73gC4zsFZGSeEVzAcdNNrfq/rWoh3b4D2Y12Lgo3a7/vXWZ0FBIa03rO/tkc7RLLnab
+ +rsF2QqA8fYNobQf67LrNBh0I8ULBbM=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTIzMDA0NCBTYWx0ZWRfX3p1sIde1s414
+ EBJ5JgniAaxY5RAYqmqkG+kffoWhqdCQ3vGpdQjrKW8GeGRYnoEFfzTLUjaaxkKFPusyqIo5+JQ
+ jWx5aCtsfr0apQTgsYkKiUOuyrXTP40jzeYgcdd0rITjrFOFdifc07YiKrPr/Y2PTvNM6mNO++J
+ uz/z9ALhjHHm7c5+06lLqcyn+7io/PDLnGsjkL8ajcAZNsMW4B7IuB+UBK+RDSk9ZoqsRccKG9n
+ 0k28KyMBxCcoXWxW3Yk2g1rLI4eNaD9H3aWeQYZyUfndxC0xhE29It/ecKOvV37uO8r4FGTYR38
+ nRen0l5bQzSXkzhyLUIxH9AqXxDrGHqWjT53Ov5MBgLzCULyVpDk8ofZysXUKoP5f9/SoUkCso0
+ 0OsPPPo3n7MmQEoNywBFZ83ntTOKNKjwrxQxaJEsuijna+Y6L6bITaoCZq13trLT+1y/s2e4HzJ
+ KHTwmkXkK697RbF+pRQ==
+X-Proofpoint-ORIG-GUID: tIeajLuL15Ml-4kDhwxabLoA0frCiefr
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-09-23_04,2026-09-21_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ phishscore=0 impostorscore=0 spamscore=0 suspectscore=0 lowpriorityscore=0
+ clxscore=1015 bulkscore=0 adultscore=0 priorityscore=1501 malwarescore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609230044
 
-Define the parameters for fbdev emulation in the source file with the
-module-initialization and exit code of drm_kms_helper.ko. The parameters
-control some aspects of DRM's fbdev emulation. Common usage looks like
+Hi Matti Vaittinen,
 
-  drm_kms_helper.drm_fbdev_overalloc=200
+On 22-Sep-26 2:33 PM, Matti Vaittinen wrote:
+> On 21/09/2026 20:44, Faruque Ansari wrote:
+>> Introduce the Power State Change Reasons Recording (PSCRR) 
+>> framework: a
+>> generic mechanism to record why the last power state change 
+>> (shutdown or
+>> reboot) happened - under-voltage, thermal, watchdog, software- 
+>> triggered,
+>> etc. - so a postmortem reason survives a reboot or an abrupt 
+>> power loss.
+>>
+>> PSCRR is built around providers. A provider is either a 
+>> hardware reason
+>> source (a PMIC, SoC reset controller or watchdog exposing a 
+>> reset cause)
+>> or a recorder that persists the reason across a power cycle (an 
+>> NVMEM or
+>> RTC scratch cell). Each provider gets a directory under
+>> /sys/kernel/pscrr/providerN/ exposing its name, backing device, 
+>> the set
+>> of observed reasons (as tokens), its capabilities, the reasons it
+>> supports and - for recorders - a record policy. The reason set is
+>> deliberately not collapsed to a single winning cause, since 
+>> resets are
+>> often multi-causal.
+>>
+>> Reasons are the numeric enum psc_reason values from reboot.h, 
+>> shared with
+>> the POWER_ON_REASON_* vocabulary, so they store compactly in small
+>> battery-backed cells. The current reason (get/set_psc_reason(), 
+>> set by
+>> the thermal/regulator/hw_protection paths) is written to every 
+>> recorder
+>> from the reboot notifier.
+>>
+>> Co-developed-by: Oleksij Rempel <o.rempel@pengutronix.de>
+>> Signed-off-by: Oleksij Rempel <o.rempel@pengutronix.de>
+>> Reported-by: Francesco Valla <francesco@valla.it>
+>> Closes: https://lore.kernel.org/ 
+>> all/178749889134.204450.5740187753642158305.b4-review@b4/
+>> Signed-off-by: Faruque Ansari <faruque.ansari@oss.qualcomm.com>
+>>
+>> changes v13:
+>> - Narrow pscrr_lock usage in pscrr_provider_register() to only 
+>> protect
+>>    pscrr_dirs list updates.
+>> - Check pscrr_root before allocation and limit locking around
+>>    ida_alloc() and kobject/sysfs setup.
+>> changes v12:
+>> - rework into a multi-provider framework: one sysfs directory per
+>>    provider instead of a single backend
+>> - add per-provider capabilities, supported_reasons and record 
+>> policy
+>> - register providers through a const ops table via
+>>    (devm_)pscrr_provider_register()
+>> - report reasons as parsable tokens
+>> - move the sources under drivers/power/reset/pscrr/
+>> - add a MAINTAINERS entry; PSCRR depends on POWER_RESET
+>> - drop Reviewed-by: Matti Vaittinen; the framework was 
+>> substantially
+>>    reworked since it was given
+>> changes v10:
+>> - make g_pscrr static
+>> changes v8:
+>> - introduce struct pscrr_core to encapsulate backend and locking
+>> - replace global mutex and backend pointer with centralized 
+>> pscrr_core
+>> - use DEFINE_GUARD() + guard(g_pscrr) for scoped mutex locking
+>> - simplify code using local backend pointer after locking
+>> - prepare code structure for future multi-backend support
+>> changes v7:
+>> - make write_reason optional
+>> - update documentation
+>> changes v6:
+>> - move enum pscr_reason to kernel reboot core
+>> - move reason storage to reboot core
+>> - add locking
+>> ---
+>>   MAINTAINERS                        |  11 +
+>>   drivers/power/reset/Kconfig        |   2 +
+>>   drivers/power/reset/Makefile       |   1 +
+>>   drivers/power/reset/pscrr/Kconfig  |  33 ++
+>>   drivers/power/reset/pscrr/Makefile |   2 +
+>>   drivers/power/reset/pscrr/pscrr.c  | 633 ++++++++++++++++++++ 
+>> +++++++++++++++++
+>>   include/linux/pscrr.h              | 107 +++++++
+>>   7 files changed, 789 insertions(+)
+>>
+>> diff --git a/MAINTAINERS b/MAINTAINERS
+>> index 05215fcc18a5..a7145dbb6eb7 100644
+>> --- a/MAINTAINERS
+>> +++ b/MAINTAINERS
+>> @@ -21967,6 +21967,17 @@ F:    Documentation/devicetree/ 
+>> bindings/connector/pcie-m2-e-connector.yaml
+>>   F:    Documentation/devicetree/bindings/connector/pcie-m2-m- 
+>> connector.yaml
+>>   F:    drivers/power/sequencing/pwrseq-pcie-m2.c
+>> +POWER STATE CHANGE REASON RECORDING (PSCRR)
+>> +M:    Oleksij Rempel <o.rempel@pengutronix.de>
+>> +M:    Faruque Ansari <faruque.ansari@oss.qualcomm.com>
+>> +R:    Pengutronix Kernel Team <kernel@pengutronix.de>
+>> +L:    linux-pm@vger.kernel.org
+>> +S:    Maintained
+>> +F:    Documentation/ABI/testing/sysfs-kernel-pscrr
+>> +F:    drivers/power/reset/pscrr/
+>> +F:    include/linux/pscrr.h
+>> +F:    tools/testing/selftests/pscrr/
+>> +
+>>   POWER STATE COORDINATION INTERFACE (PSCI)
+>>   M:    Mark Rutland <mark.rutland@arm.com>
+>>   M:    Lorenzo Pieralisi <lpieralisi@kernel.org>
+>> diff --git a/drivers/power/reset/Kconfig b/drivers/power/reset/ 
+>> Kconfig
+>> index bce996bbef28..f24ff89dd94e 100644
+>> --- a/drivers/power/reset/Kconfig
+>> +++ b/drivers/power/reset/Kconfig
+>> @@ -377,3 +377,5 @@ config POWER_RESET_QEMU_VIRT_CTRL
+>>         provides this controller, such as the m68k virt machine.
+>>   endif
+>> +
+>> +source "drivers/power/reset/pscrr/Kconfig"
+>> diff --git a/drivers/power/reset/Makefile b/drivers/power/ 
+>> reset/Makefile
+>> index e31cab4ba78e..c73dc747e36c 100644
+>> --- a/drivers/power/reset/Makefile
+>> +++ b/drivers/power/reset/Makefile
+>> @@ -37,6 +37,7 @@ obj-$(CONFIG_POWER_RESET_KEYSTONE) += 
+>> keystone-reset.o
+>>   obj-$(CONFIG_POWER_RESET_SYSCON) += syscon-reboot.o
+>>   obj-$(CONFIG_POWER_RESET_SYSCON_POWEROFF) += syscon-poweroff.o
+>>   obj-$(CONFIG_POWER_RESET_RMOBILE) += rmobile-reset.o
+>> +obj-$(CONFIG_PSCRR) += pscrr/
+>>   obj-$(CONFIG_REBOOT_MODE) += reboot-mode.o
+>>   obj-$(CONFIG_SYSCON_REBOOT_MODE) += syscon-reboot-mode.o
+>>   obj-$(CONFIG_POWER_RESET_SC27XX) += sc27xx-poweroff.o
+>> diff --git a/drivers/power/reset/pscrr/Kconfig b/drivers/power/ 
+>> reset/pscrr/Kconfig
+>> new file mode 100644
+>> index 000000000000..72de82731b53
+>> --- /dev/null
+>> +++ b/drivers/power/reset/pscrr/Kconfig
+>> @@ -0,0 +1,33 @@
+>> +# SPDX-License-Identifier: GPL-2.0-only
+>> +menuconfig PSCRR
+>> +    bool "Power State Change Reasons Recording (PSCRR) Framework"
+>> +    depends on POWER_RESET
+>> +    help
+>> +      Enables the Power State Change Reasons Recording (PSCRR) 
+>> framework.
+>> +
+>> +      PSCRR records why the system last shut down or rebooted 
+>> into
+>> +      non-volatile storage, so the reason survives the reset 
+>> and can be
+>> +      read by the bootloader or early user space on the next 
+>> boot. Reasons
+>> +      come from software (thermal or regulator hardware- 
+>> protection events,
+>> +      a watchdog pretimeout, a kernel panic, a controlled 
+>> reboot) or from
+>> +      hardware reset-cause registers (PMIC, SoC reset 
+>> controller, watchdog).
+>> +
+>> +      It helps whenever the real cause would otherwise be lost 
+>> or ambiguous
+>> +      on the next boot, for example:
+>> +
+>> +      - the reset is abrupt and block storage (eMMC/NAND) may 
+>> not survive
+>> +        it; on systems that can detect the event in time - 
+>> such as an
+>> +        imminent power loss with a short backup-capacitor 
+>> window - the
+>> +        reason can still be persisted first;
+>> +
+>> +      - the hardware does not preserve the cause and the boot 
+>> looks like a
+>> +        plain power-on reset, e.g. a watchdog pretimeout that 
+>> escalates
+>> +        into a panic reboot would otherwise be 
+>> indistinguishable from a
+>> +        POR.
+>> +
+>> +      The framework is extensible and exposes software-defined 
+>> and
+>> +      hardware-reported reasons through one interface. Sudden 
+>> power cuts,
+>> +      CPU freezes or other uncontrolled resets may still go 
+>> unrecorded
+>> +      unless hardware provides the reset cause.
+>> +
+>> +      If unsure, say N.
+>> diff --git a/drivers/power/reset/pscrr/Makefile b/drivers/ 
+>> power/reset/pscrr/Makefile
+>> new file mode 100644
+>> index 000000000000..e5530a858971
+>> --- /dev/null
+>> +++ b/drivers/power/reset/pscrr/Makefile
+>> @@ -0,0 +1,2 @@
+>> +# SPDX-License-Identifier: GPL-2.0
+>> +obj-$(CONFIG_PSCRR) += pscrr.o
+>> diff --git a/drivers/power/reset/pscrr/pscrr.c b/drivers/power/ 
+>> reset/pscrr/pscrr.c
+>> new file mode 100644
+>> index 000000000000..ab0974d0423e
+>> --- /dev/null
+>> +++ b/drivers/power/reset/pscrr/pscrr.c
+>> @@ -0,0 +1,633 @@
+>> +// SPDX-License-Identifier: GPL-2.0
+>> +/*
+>> + * pscrr.c - Core Power State Change Reason Recording
+>> + *
+>> + * PSCRR records why the last power state change (shutdown/ 
+>> reboot) happened.
+>> + * Reasons come from providers: hardware reset-cause registers 
+>> (PMIC, SoC reset
+>> + * controller, watchdog), persistent recorders (NVMEM/RTC 
+>> scratch), the
+>> + * bootloader's device-tree /chosen/reset-source (a built-in 
+>> provider here), or
+>> + * test stubs. Each provider gets a directory under /sys/ 
+>> kernel/pscrr/ and reports
+>> + * the full set of reasons it observed - the picture is 
+>> deliberately not
+>> + * collapsed to a single "winning" cause, since resets are 
+>> often multi-causal.
+>> + *
+>> + * Sysfs (per provider, under /sys/kernel/pscrr/providerN/):
+>> + *   name               ro  human label of the provider
+>> + *   device             symlink to the backing device (if any)
+>> + *   reason             the provider's reason set, as tokens; 
+>> writable (record
+>> + *                      one reason) when the provider supports it
+>> + *   caps               ro  non-default capabilities 
+>> ("writable"); empty for a
+>> + *                      read-only, single-slot provider
+>> + *   supported_reasons  ro  reasons this provider can report 
+>> or record
+>> + *   record_policy      recorders only: keep the "first" or 
+>> "last" reason
+>> + *                      recorded in a power cycle
+>> + *
+>> + * The kernel keeps the first (root cause) and last power- 
+>> state-change reason
+>> + * (get_psc_first_reason()/get_psc_reason(), set by the 
+>> thermal, regulator and
+>> + * hw_protection paths). At reboot each recorder is given the 
+>> first or the last
+>> + * reason according to its record policy.
+>> + *
+>> + * Copyright (C) 2025 Pengutronix, Oleksij Rempel 
+>> <o.rempel@pengutronix.de>
+>> + */
+>> +
+>> +#define pr_fmt(fmt) "PSCRR: " fmt
+>> +
+>> +#include <linux/bitmap.h>
+>> +#include <linux/device.h>
+>> +#include <linux/idr.h>
+>> +#include <linux/kernel.h>
+>> +#include <linux/kobject.h>
+>> +#include <linux/list.h>
+>> +#include <linux/module.h>
+>> +#include <linux/mutex.h>
+>> +#include <linux/notifier.h>
+>> +#include <linux/of.h>
+>> +#include <linux/pscrr.h>
+>> +#include <linux/reboot.h>
+>> +#include <linux/slab.h>
+>> +#include <linux/string.h>
+>> +#include <linux/sysfs.h>
+>> +
+>> +static struct kobject *pscrr_root;
+>> +static DEFINE_MUTEX(pscrr_lock);
+>> +static LIST_HEAD(pscrr_dirs);
+>> +static DEFINE_IDA(pscrr_ida);
+>> +
+>> +/*
+>> + * Record policy: when several reasons are recorded in one 
+>> power cycle, keep the
+>> + * first (root cause) or overwrite with the last. Global, 
+>> tunable via sysfs.
+>> + */
+>> +enum pscrr_record_policy {
+>> +    PSCRR_RECORD_FIRST,
+>> +    PSCRR_RECORD_LAST,
+>> +};
+>> +
+>> +/*
+>> + * Per-provider sysfs directory. Core-owned and self-freeing 
+>> on kobject_put(),
+>> + * so its lifetime is decoupled from the caller-owned struct 
+>> pscrr_provider.
+> 
+> nit: Seeing this comment and then seeing the seemingly unprotected:
+> to_pscrr_dir(kobj)->provider->XXX in sysfs operations directly 
+> below, required me to go through the tear-down stuff. Is it 
+> possible to add a word as to why the direct access to provider 
+> pointer is still Ok, so others don't have to do the same :)
+> 
 
-on the kernel's command line. This has been possible for many years
-and changing it would likely upset users.
+Thanks for the review.
+I agree with the feedback and will update the comments in the 
+next version.
 
-The emulation code is supposed to be moved into the module for DRM
-clients. Keeping the parameters in drm_kms_helper.ko avoids breaking
-systems the use them in the way described above.
+>> + */
+>> +struct pscrr_provider_dir {
+>> +    struct kobject kobj;
+>> +    struct pscrr_provider *provider;
+>> +    struct list_head node;
+>> +    int id;
+>> +    enum pscrr_record_policy policy;    /* single-slot 
+>> recorder: keep first/last */
+>> +    bool recorded;        /* a reason was recorded this power 
+>> cycle */
+>> +};
+>> +
+>> +static inline struct pscrr_provider_dir *to_pscrr_dir(struct 
+>> kobject *kobj)
+>> +{
+>> +    return container_of(kobj, struct pscrr_provider_dir, kobj);
+>> +}
+>> +
+>> +/ 
+>> *----------------------------------------------------------------------*/
+>> +/* Per-provider attributes */
+>> +/ 
+>> *----------------------------------------------------------------------*/
+>> +
+>> +static ssize_t name_show(struct kobject *kobj, struct 
+>> kobj_attribute *attr,
+>> +             char *buf)
+>> +{
+>> +    return sysfs_emit(buf, "%s\n", to_pscrr_dir(kobj)- 
+>> >provider->name);
+>> +}
+>> +
+>> +static struct kobj_attribute pscrr_name_attr = __ATTR_RO(name);
+>> +
+>> +static int pscrr_parse_reason(const char *buf, enum psc_reason 
+>> *out)
+>> +{
+>> +    unsigned int val;
+>> +
+>> +    /* Accept either a decimal index or a reason token. */
+>> +    if (!kstrtouint(buf, 0, &val)) {
+>> +        if (val >= PSCR_REASON_COUNT)
+>> +            return -ERANGE;
+>> +        *out = val;
+>> +        return 0;
+>> +    }
+>> +
+>> +    return psc_reason_from_token(buf, out);
+>> +}
+>> +
+>> +static ssize_t reason_show(struct kobject *kobj, struct 
+>> kobj_attribute *attr,
+>> +               char *buf)
+>> +{
+>> +    struct pscrr_provider *p = to_pscrr_dir(kobj)->provider;
+>> +    DECLARE_BITMAP(reasons, PSCR_REASON_COUNT);
+>> +    ssize_t len = 0;
+>> +    int bit, ret;
+>> +
+>> +    bitmap_zero(reasons, PSCR_REASON_COUNT);
+>> +
+>> +    ret = p->ops->read_reasons(p, reasons);
+>> +    if (ret)
+>> +        return ret;
+>> +
+>> +    for_each_set_bit(bit, reasons, PSCR_REASON_COUNT)
+>> +        len += sysfs_emit_at(buf, len, "%s%s", len ? " " : "",
+>> +                     psc_reason_to_token(bit));
+>> +    len += sysfs_emit_at(buf, len, "\n");
+>> +
+>> +    return len;
+>> +}
+>> +
+>> +/* Record @reason into @dir honouring the global record 
+>> policy. */
+>> +static int pscrr_do_record(struct pscrr_provider_dir *dir, 
+>> enum psc_reason reason)
+>> +{
+>> +    struct pscrr_provider *p = dir->provider;
+>> +    int ret;
+>> +
+>> +    if (!p->ops->write_reason)
+>> +        return -EPERM;
+> 
+> nit: To me this is more of -EOPNOTSUPP, see below.
+> 
+>> +
+>> +    /*
+>> +     * PSCR_UNKNOWN clears the slot and releases the latch, 
+>> regardless of
+>> +     * policy, so a reason recorded afterwards is taken again.
+>> +     */
+>> +    if (reason == PSCR_UNKNOWN) {
+>> +        ret = p->ops->write_reason(p, reason);
+>> +        if (ret)
+>> +            return ret;
+>> +
+>> +        dir->recorded = false;
+>> +        return 0;
+>> +    }
+>> +
+>> +    /* Reject reasons the provider does not advertise (NULL == 
+>> all). */
+>> +    if (p->supported_reasons && !test_bit(reason, p- 
+>> >supported_reasons))
+>> +        return -EOPNOTSUPP;
+> 
+> nit: I'd use -EINVAL here, see below.
+> 
+>> +
+>> +    /* "first" policy: keep the first reason recorded this 
+>> power cycle. */
+>> +    if (dir->policy == PSCRR_RECORD_FIRST && dir->recorded)
+>> +        return 0;
+>> +
+>> +    ret = p->ops->write_reason(p, reason);
+>> +    if (ret)
+>> +        return ret;
+>> +
+>> +    dir->recorded = true;
+>> +
+>> +    return 0;
+>> +}
+>> +
+>> +static ssize_t reason_store(struct kobject *kobj, struct 
+>> kobj_attribute *attr,
+>> +                const char *buf, size_t count)
+>> +{
+>> +    struct pscrr_provider_dir *dir = to_pscrr_dir(kobj);
+>> +    enum psc_reason reason;
+>> +    int ret;
+>> +
+>> +    if (!dir->provider->ops->write_reason)
+>> +        return -EPERM;
+> 
+> nit: Why not the "not supported" instead? EPERM would make me to 
+> doubt the user privileges, not capablility of the backing device. 
+> (Oh, I just noticed the -EOPNOTSUPP when specific reason is not 
+> supported - I'd say this is more of -EOPNOTSUPP, while giving 
+> unsupported reason as argument is more of -EINVAL to me).
+> 
 
-Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
----
- drivers/gpu/drm/drm_crtc_helper_internal.h |  9 +++++
- drivers/gpu/drm/drm_fb_helper.c            | 32 +-----------------
- drivers/gpu/drm/drm_kms_helper_common.c    | 39 ++++++++++++++++++++++
- 3 files changed, 49 insertions(+), 31 deletions(-)
+Good catch, thanks for pointing that out. I agree. I'll address 
+this in the next version.
 
-diff --git a/drivers/gpu/drm/drm_crtc_helper_internal.h b/drivers/gpu/drm/drm_crtc_helper_internal.h
-index bae73936acf9..adcc9a2e24ee 100644
---- a/drivers/gpu/drm/drm_crtc_helper_internal.h
-+++ b/drivers/gpu/drm/drm_crtc_helper_internal.h
-@@ -29,6 +29,8 @@
- #ifndef __DRM_CRTC_HELPER_INTERNAL_H__
- #define __DRM_CRTC_HELPER_INTERNAL_H__
- 
-+#include <linux/types.h>
-+
- enum drm_mode_status;
- struct drm_connector;
- struct drm_crtc;
-@@ -36,6 +38,13 @@ struct drm_display_mode;
- struct drm_encoder;
- struct drm_modeset_acquire_ctx;
- 
-+/* drm_kms_helper_common.c */
-+#if IS_ENABLED(CONFIG_DRM_FBDEV_EMULATION)
-+extern bool drm_fbdev_emulation;
-+extern int drm_fbdev_overalloc;
-+extern bool drm_leak_fbdev_smem;
-+#endif
-+
- /* drm_probe_helper.c */
- enum drm_mode_status drm_crtc_mode_valid(struct drm_crtc *crtc,
- 					 const struct drm_display_mode *mode);
-diff --git a/drivers/gpu/drm/drm_fb_helper.c b/drivers/gpu/drm/drm_fb_helper.c
-index d4664ed468b2..76195410db60 100644
---- a/drivers/gpu/drm/drm_fb_helper.c
-+++ b/drivers/gpu/drm/drm_fb_helper.c
-@@ -43,39 +43,9 @@
- #include <drm/drm_vblank.h>
- 
- #include "drm_internal.h"
-+#include "drm_crtc_helper_internal.h"
- #include "drm_crtc_internal.h"
- 
--static bool drm_fbdev_emulation = true;
--module_param_named(fbdev_emulation, drm_fbdev_emulation, bool, 0600);
--MODULE_PARM_DESC(fbdev_emulation,
--		 "Enable legacy fbdev emulation [default=true]");
--
--static int drm_fbdev_overalloc = CONFIG_DRM_FBDEV_OVERALLOC;
--module_param(drm_fbdev_overalloc, int, 0444);
--MODULE_PARM_DESC(drm_fbdev_overalloc,
--		 "Overallocation of the fbdev buffer (%) [default="
--		 __MODULE_STRING(CONFIG_DRM_FBDEV_OVERALLOC) "]");
--
--/*
-- * In order to keep user-space compatibility, we want in certain use-cases
-- * to keep leaking the fbdev physical address to the user-space program
-- * handling the fbdev buffer.
-- *
-- * This is a bad habit, essentially kept to support closed-source OpenGL
-- * drivers that should really be moved into open-source upstream projects
-- * instead of using legacy physical addresses in user space to communicate
-- * with other out-of-tree kernel modules.
-- *
-- * This module_param *should* be removed as soon as possible and be
-- * considered as a broken and legacy behaviour from a modern fbdev device.
-- */
--static bool drm_leak_fbdev_smem;
--#if IS_ENABLED(CONFIG_DRM_FBDEV_LEAK_PHYS_SMEM)
--module_param_unsafe(drm_leak_fbdev_smem, bool, 0600);
--MODULE_PARM_DESC(drm_leak_fbdev_smem,
--		 "Allow unsafe leaking fbdev physical smem address [default=false]");
--#endif
--
- /**
-  * DOC: fbdev helpers
-  *
-diff --git a/drivers/gpu/drm/drm_kms_helper_common.c b/drivers/gpu/drm/drm_kms_helper_common.c
-index b5d5b469b444..1e55ecac4698 100644
---- a/drivers/gpu/drm/drm_kms_helper_common.c
-+++ b/drivers/gpu/drm/drm_kms_helper_common.c
-@@ -25,10 +25,49 @@
-  *
-  */
- 
-+#include <linux/export.h>
- #include <linux/module.h>
-+#include <linux/moduleparam.h>
- 
-+#include "drm_crtc_helper_internal.h"
- #include "drm_panic_internal.h"
- 
-+#if IS_ENABLED(CONFIG_DRM_FBDEV_EMULATION)
-+bool drm_fbdev_emulation = true;
-+EXPORT_SYMBOL(drm_fbdev_emulation);
-+module_param_named(fbdev_emulation, drm_fbdev_emulation, bool, 0600);
-+MODULE_PARM_DESC(fbdev_emulation, "Enable legacy fbdev emulation [default=true]");
-+
-+int drm_fbdev_overalloc = CONFIG_DRM_FBDEV_OVERALLOC;
-+EXPORT_SYMBOL(drm_fbdev_overalloc);
-+module_param(drm_fbdev_overalloc, int, 0444);
-+MODULE_PARM_DESC(drm_fbdev_overalloc,
-+		 "Overallocation of the fbdev buffer (%) [default="
-+		 __MODULE_STRING(CONFIG_DRM_FBDEV_OVERALLOC) "]");
-+
-+/*
-+ * In order to keep user-space compatibility, we want in certain use-cases
-+ * to keep leaking the fbdev physical address to the user-space program
-+ * handling the fbdev buffer.
-+ *
-+ * This is a bad habit, essentially kept to support closed-source OpenGL
-+ * drivers that should really be moved into open-source upstream projects
-+ * instead of using legacy physical addresses in user space to communicate
-+ * with other out-of-tree kernel modules.
-+ *
-+ * This module_param *should* be removed as soon as possible and be
-+ * considered as a broken and legacy behaviour from a modern fbdev device.
-+ */
-+bool drm_leak_fbdev_smem;
-+EXPORT_SYMBOL(drm_leak_fbdev_smem);
-+#if IS_ENABLED(CONFIG_DRM_FBDEV_LEAK_PHYS_SMEM)
-+module_param_unsafe(drm_leak_fbdev_smem, bool, 0600);
-+MODULE_PARM_DESC(drm_leak_fbdev_smem,
-+		 "Allow unsafe leaking fbdev physical smem address [default=false]");
-+#endif
-+
-+#endif
-+
- static int __init drm_kms_helper_init(void)
- {
- 	return drm_panic_helper_init();
--- 
-2.55.0
+Thanks,
+Faruque Ansari
+
+>> +
+>> +    ret = pscrr_parse_reason(buf, &reason);
+>> +    if (ret)
+>> +        return ret;
+>> +
+>> +    /* Serialise the record state against concurrent stores 
+>> and the notifier. */
+>> +    scoped_guard(mutex, &pscrr_lock)
+>> +        ret = pscrr_do_record(dir, reason);
+>> +    if (ret)
+>> +        return ret;
+>> +
+>> +    return count;
+>> +}
+>> +
+>> +static struct kobj_attribute pscrr_reason_attr =
+>> +    __ATTR(reason, 0644, reason_show, reason_store);
+>> +
+>> +static ssize_t caps_show(struct kobject *kobj, struct 
+>> kobj_attribute *attr,
+>> +             char *buf)
+>> +{
+>> +    struct pscrr_provider *p = to_pscrr_dir(kobj)->provider;
+>> +    ssize_t len = 0;
+>> +
+>> +    /* Readable and single-slot are the defaults and not 
+>> listed. */
+>> +    if (p->ops->write_reason)
+>> +        len += sysfs_emit_at(buf, len, "writable");
+>> +
+>> +    return len + sysfs_emit_at(buf, len, "\n");
+>> +}
+>> +
+>> +static struct kobj_attribute pscrr_caps_attr = __ATTR_RO(caps);
+>> +
+>> +static ssize_t supported_reasons_show(struct kobject *kobj,
+>> +                      struct kobj_attribute *attr, char *buf)
+>> +{
+>> +    struct pscrr_provider *p = to_pscrr_dir(kobj)->provider;
+>> +    const unsigned long *sup = p->supported_reasons;
+>> +    ssize_t len = 0;
+>> +    int i;
+>> +
+>> +    for (i = 0; i < PSCR_REASON_COUNT; i++) {
+>> +        if (sup && !test_bit(i, sup))    /* NULL means all */
+>> +            continue;
+>> +        len += sysfs_emit_at(buf, len, "%s%s", len ? " " : "",
+>> +                     psc_reason_to_token(i));
+>> +    }
+>> +
+>> +    return len + sysfs_emit_at(buf, len, "\n");
+>> +}
+>> +
+>> +static struct kobj_attribute pscrr_supported_attr =
+>> +    __ATTR(supported_reasons, 0444, supported_reasons_show, 
+>> NULL);
+>> +
+>> +static ssize_t record_policy_show(struct kobject *kobj,
+>> +                  struct kobj_attribute *attr, char *buf)
+>> +{
+>> +    struct pscrr_provider_dir *dir = to_pscrr_dir(kobj);
+>> +
+>> +    return sysfs_emit(buf, "%s\n",
+>> +              READ_ONCE(dir->policy) == PSCRR_RECORD_FIRST ?
+>> +              "first" : "last");
+>> +}
+>> +
+>> +static ssize_t record_policy_store(struct kobject *kobj,
+>> +                   struct kobj_attribute *attr,
+>> +                   const char *buf, size_t count)
+>> +{
+>> +    struct pscrr_provider_dir *dir = to_pscrr_dir(kobj);
+>> +
+>> +    guard(mutex)(&pscrr_lock);
+>> +
+>> +    if (sysfs_streq(buf, "first"))
+>> +        WRITE_ONCE(dir->policy, PSCRR_RECORD_FIRST);
+>> +    else if (sysfs_streq(buf, "last"))
+>> +        WRITE_ONCE(dir->policy, PSCRR_RECORD_LAST);
+>> +    else
+>> +        return -EINVAL;
+>> +
+>> +    return count;
+>> +}
+>> +
+>> +static struct kobj_attribute pscrr_record_policy_attr =
+>> +    __ATTR(record_policy, 0644, record_policy_show, 
+>> record_policy_store);
+>> +
+>> +static struct attribute *pscrr_dir_attrs[] = {
+>> +    &pscrr_name_attr.attr,
+>> +    &pscrr_reason_attr.attr,
+>> +    &pscrr_caps_attr.attr,
+>> +    &pscrr_supported_attr.attr,
+>> +    &pscrr_record_policy_attr.attr,
+>> +    NULL,
+>> +};
+>> +
+>> +static umode_t pscrr_dir_is_visible(struct kobject *kobj, 
+>> struct attribute *attr,
+>> +                    int n)
+>> +{
+>> +    struct pscrr_provider *p = to_pscrr_dir(kobj)->provider;
+>> +
+>> +    /* A provider without write_reason() exposes reason read- 
+>> only. */
+>> +    if (attr == &pscrr_reason_attr.attr && !p->ops->write_reason)
+>> +        return 0444;
+>> +
+>> +    /* record_policy only applies to a (single-slot) recorder. */
+>> +    if (attr == &pscrr_record_policy_attr.attr && !p->ops- 
+>> >write_reason)
+>> +        return 0;
+>> +
+>> +    return attr->mode;
+>> +}
+>> +
+>> +static const struct attribute_group pscrr_dir_group = {
+>> +    .attrs        = pscrr_dir_attrs,
+>> +    .is_visible    = pscrr_dir_is_visible,
+>> +};
+>> +
+>> +static const struct attribute_group *pscrr_dir_groups[] = {
+>> +    &pscrr_dir_group,
+>> +    NULL,
+>> +};
+>> +
+>> +static void pscrr_dir_release(struct kobject *kobj)
+>> +{
+>> +    kfree(to_pscrr_dir(kobj));
+>> +}
+>> +
+>> +static const struct kobj_type pscrr_dir_ktype = {
+>> +    .sysfs_ops    = &kobj_sysfs_ops,
+>> +    .release    = pscrr_dir_release,
+>> +    .default_groups    = pscrr_dir_groups,
+>> +};
+>> +
+>> +/ 
+>> *----------------------------------------------------------------------*/
+>> +/* Provider registration */
+>> +/ 
+>> *----------------------------------------------------------------------*/
+>> +
+>> +/**
+>> + * pscrr_provider_register - register a power state change 
+>> reason provider
+>> + * @p: caller-owned provider description
+>> + *
+>> + * Creates /sys/kernel/pscrr/providerN/ with "name" and 
+>> "reason" attributes
+>> + * and, when @p->dev is set, a "device" symlink. @p->reason is 
+>> writable when
+>> + * @p provides write_reason(). The provider must outlive the 
+>> matching
+>> + * pscrr_provider_unregister() call.
+>> + *
+>> + * Return: 0 on success or a negative errno.
+>> + */
+>> +int pscrr_provider_register(struct pscrr_provider *p)
+>> +{
+>> +    struct pscrr_provider_dir *dir;
+>> +    int ret;
+>> +
+>> +    if (!p || !p->name || !p->ops || !p->ops->read_reasons)
+>> +        return -EINVAL;
+>> +
+>> +    /*
+>> +     * pscrr_root is set once at core init and cleared at core 
+>> exit;
+>> +     * neither transition is serialised against this function by
+>> +     * pscrr_lock, so check it up front rather than under the 
+>> lock below.
+>> +     */
+>> +    if (!pscrr_root)
+>> +        return -ENODEV;
+>> +
+>> +    dir = kzalloc_obj(*dir);
+>> +    if (!dir)
+>> +        return -ENOMEM;
+>> +
+>> +    dir->provider = p;
+>> +    dir->policy = PSCRR_RECORD_FIRST;
+>> +
+>> +    /* ida_alloc() and the kobject/sysfs calls below are 
+>> individually thread-safe. */
+>> +    dir->id = ida_alloc(&pscrr_ida, GFP_KERNEL);
+>> +    if (dir->id < 0) {
+>> +        ret = dir->id;
+>> +        kfree(dir);
+>> +        return ret;
+>> +    }
+>> +
+>> +    ret = kobject_init_and_add(&dir->kobj, &pscrr_dir_ktype, 
+>> pscrr_root,
+>> +                   "provider%d", dir->id);
+>> +    if (ret) {
+>> +        /*
+>> +         * kobject_init_and_add() failed: per its contract only
+>> +         * kobject_put() may follow, no kobject_del().
+>> +         */
+>> +        ida_free(&pscrr_ida, dir->id);
+>> +        kobject_put(&dir->kobj);
+>> +        return ret;
+>> +    }
+>> +
+>> +    if (p->dev) {
+>> +        ret = sysfs_create_link(&dir->kobj, &p->dev->kobj, 
+>> "device");
+>> +        if (ret)
+>> +            goto err_del;
+>> +    }
+>> +
+>> +    /* pscrr_lock only serialises pscrr_dirs against 
+>> concurrent (un)registration. */
+>> +    scoped_guard(mutex, &pscrr_lock)
+>> +        list_add_tail(&dir->node, &pscrr_dirs);
+>> +
+>> +    return 0;
+>> +
+>> +err_del:
+>> +    kobject_del(&dir->kobj);
+>> +    ida_free(&pscrr_ida, dir->id);
+>> +    kobject_put(&dir->kobj);
+>> +    return ret;
+>> +}
+>> +EXPORT_SYMBOL_GPL(pscrr_provider_register);
+>> +
+>> +/**
+>> + * pscrr_provider_unregister - remove a previously registered 
+>> provider
+>> + * @p: the provider passed to pscrr_provider_register()
+>> + */
+>> +void pscrr_provider_unregister(struct pscrr_provider *p)
+>> +{
+>> +    struct pscrr_provider_dir *dir = NULL, *iter;
+>> +
+>> +    scoped_guard(mutex, &pscrr_lock) {
+>> +        list_for_each_entry(iter, &pscrr_dirs, node) {
+>> +            if (iter->provider == p) {
+>> +                dir = iter;
+>> +                list_del(&dir->node);
+>> +                break;
+>> +            }
+>> +        }
+>> +    }
+>> +
+>> +    if (!dir)
+>> +        return;
+>> +
+>> +    /*
+>> +     * Tear the sysfs directory down outside pscrr_lock: 
+>> kobject_del()
+>> +     * drains in-flight reason/record_policy stores, which 
+>> take pscrr_lock,
+>> +     * so holding it here would deadlock. Release the id only 
+>> once the
+>> +     * directory is gone, so a concurrent register cannot 
+>> reuse it and
+>> +     * collide on the providerN name.
+>> +     */
+>> +    if (p->dev)
+>> +        sysfs_remove_link(&dir->kobj, "device");
+>> +    kobject_del(&dir->kobj);
+>> +    ida_free(&pscrr_ida, dir->id);
+>> +    kobject_put(&dir->kobj);
+>> +}
+>> +EXPORT_SYMBOL_GPL(pscrr_provider_unregister);
+>> +
+>> +static void pscrr_provider_devm_release(void *p)
+>> +{
+>> +    pscrr_provider_unregister(p);
+>> +}
+>> +
+>> +/**
+>> + * devm_pscrr_provider_register - device-managed reason 
+>> provider registration
+>> + * @dev: device the provider belongs to; also backs the 
+>> "device" symlink
+>> + * @name: human-readable provider label
+>> + * @ops: provider callback table; read_reasons() is required, 
+>> write_reason() is
+>> + *     optional and makes the provider a recorder
+>> + * @supported_reasons: bitmap of the reasons the provider 
+>> supports, or NULL
+>> + *     for all; set before the provider is exposed in sysfs
+>> + * @priv: provider private data, handed back to the @ops 
+>> callbacks
+>> + *
+>> + * Allocates and registers a struct pscrr_provider and 
+>> schedules its
+>> + * unregistration when @dev is unbound, so the caller keeps no 
+>> reference to it.
+>> + *
+>> + * Return: the registered provider on success or an ERR_PTR() 
+>> on failure. When
+>> + * CONFIG_PSCRR is disabled the call resolves to a stub 
+>> returning NULL, so
+>> + * callers need no IS_ENABLED() guard.
+>> + */
+>> +struct pscrr_provider *
+>> +devm_pscrr_provider_register(struct device *dev, const char 
+>> *name,
+>> +                 const struct pscrr_provider_ops *ops,
+>> +                 const unsigned long *supported_reasons, void 
+>> *priv)
+>> +{
+>> +    struct pscrr_provider *p;
+>> +    int ret;
+>> +
+>> +    p = devm_kzalloc(dev, sizeof(*p), GFP_KERNEL);
+>> +    if (!p)
+>> +        return ERR_PTR(-ENOMEM);
+>> +
+>> +    p->name = name;
+>> +    p->dev = dev;
+>> +    p->ops = ops;
+>> +    p->supported_reasons = supported_reasons;
+>> +    p->priv = priv;
+>> +
+>> +    ret = pscrr_provider_register(p);
+>> +    if (ret)
+>> +        return ERR_PTR(ret);
+>> +
+>> +    ret = devm_add_action_or_reset(dev, 
+>> pscrr_provider_devm_release, p);
+>> +    if (ret)
+>> +        return ERR_PTR(ret);
+>> +
+>> +    return p;
+>> +}
+>> +EXPORT_SYMBOL_GPL(devm_pscrr_provider_register);
+>> +
+>> +/ 
+>> *----------------------------------------------------------------------*/
+>> +/* Record path: reboot notifier writes the current reason to 
+>> recorders */
+>> +/ 
+>> *----------------------------------------------------------------------*/
+>> +
+>> +/*
+>> + * Record the current power-state-change reason into every 
+>> provider, giving
+>> + * each the first (root cause) or the last reason according to 
+>> its record
+>> + * policy. The kernel keeps both, so "first" is meaningful 
+>> even when later
+>> + * events overwrite the last reason. The caller holds 
+>> pscrr_lock, or runs where
+>> + * the provider list is stable (panic).
+>> + */
+>> +static void pscrr_record_current(void)
+>> +{
+>> +    enum psc_reason first = get_psc_first_reason();
+>> +    enum psc_reason last = get_psc_reason();
+>> +    struct pscrr_provider_dir *dir;
+>> +
+>> +    list_for_each_entry(dir, &pscrr_dirs, node)
+>> +        pscrr_do_record(dir, dir->policy == PSCRR_RECORD_FIRST ?
+>> +                         first : last);
+>> +}
+>> +
+>> +static int pscrr_reboot_notifier(struct notifier_block *nb,
+>> +                 unsigned long action, void *unused)
+>> +{
+>> +    guard(mutex)(&pscrr_lock);
+>> +
+>> +    /*
+>> +     * A reboot, halt or power-off that reaches here with no 
+>> more specific
+>> +     * reason is software-initiated by definition. Record it 
+>> as such rather
+>> +     * than leaving it unattributed; a real cause set earlier 
+>> (thermal,
+>> +     * under-voltage, ...) is already latched and left untouched.
+>> +     */
+>> +    if (get_psc_reason() == PSCR_UNKNOWN)
+>> +        set_psc_reason(PSCR_SOFTWARE);
+>> +
+>> +    pscrr_record_current();
+>> +
+>> +    return NOTIFY_DONE;
+>> +}
+>> +
+>> +static struct notifier_block pscrr_reboot_nb = {
+>> +    .notifier_call = pscrr_reboot_notifier,
+>> +};
+>> +
+>> +/ 
+>> *----------------------------------------------------------------------*/
+>> +/* Built-in provider: device-tree /chosen/reset- 
+>> source                  */
+>> +/ 
+>> *----------------------------------------------------------------------*/
+>> +
+>> +/*
+>> + * Bootloaders such as barebox record the SoC reset cause in 
+>> the standard
+>> + * device-tree /chosen/reset-source property. When it is 
+>> present, surface it as
+>> + * a read-only, device-less provider so the bootloader's view 
+>> of the last reset
+>> + * shows up next to any hardware or software providers - the 
+>> framework just
+>> + * reads the property already there, with no dedicated node or 
+>> new binding.
+>> + */
+>> +static const struct {
+>> +    const char *name;
+>> +    enum psc_reason reason;
+>> +} pscrr_reset_source_map[] = {
+>> +    { "POR",      PSCR_POWER_ON },
+>> +    { "RST",      PSCR_SOFTWARE },
+>> +    { "WDG",      PSCR_WATCHDOG },
+>> +    { "THERM",    PSCR_OVER_TEMPERATURE },
+>> +    { "EXT",      PSCR_EXTERNAL },
+>> +    { "BROWNOUT", PSCR_UNDER_VOLTAGE },
+>> +};
+>> +
+>> +static const unsigned long
+>> +pscrr_reset_source_supported[BITS_TO_LONGS(PSCR_REASON_COUNT)] 
+>> = {
+>> +    BIT(PSCR_UNDER_VOLTAGE) | BIT(PSCR_OVER_TEMPERATURE) |
+>> +    BIT(PSCR_POWER_ON) | BIT(PSCR_WATCHDOG) | 
+>> BIT(PSCR_SOFTWARE) |
+>> +    BIT(PSCR_EXTERNAL),
+>> +};
+>> +
+>> +/* Parsed once at init; read back by the provider's 
+>> read_reasons(). */
+>> +static enum psc_reason pscrr_reset_source_reason = PSCR_UNKNOWN;
+>> +
+>> +static int pscrr_reset_source_read(struct pscrr_provider *p,
+>> +                   unsigned long *reasons)
+>> +{
+>> +    set_bit(pscrr_reset_source_reason, reasons);
+>> +
+>> +    return 0;
+>> +}
+>> +
+>> +static const struct pscrr_provider_ops pscrr_reset_source_ops = {
+>> +    .read_reasons = pscrr_reset_source_read,
+>> +};
+>> +
+>> +static struct pscrr_provider pscrr_reset_source_provider = {
+>> +    .name            = "reset-source",
+>> +    .ops            = &pscrr_reset_source_ops,
+>> +    .supported_reasons    = pscrr_reset_source_supported,
+>> +};
+>> +
+>> +static void __init pscrr_register_reset_source(void)
+>> +{
+>> +    const char *name;
+>> +    int i, ret;
+>> +
+>> +    if (!IS_ENABLED(CONFIG_OF) || !of_chosen)
+>> +        return;
+>> +
+>> +    if (of_property_read_string(of_chosen, "reset-source", 
+>> &name))
+>> +        return;
+>> +
+>> +    for (i = 0; i < ARRAY_SIZE(pscrr_reset_source_map); i++)
+>> +        if (!strcmp(name, pscrr_reset_source_map[i].name)) {
+>> +            pscrr_reset_source_reason = 
+>> pscrr_reset_source_map[i].reason;
+>> +            break;
+>> +        }
+>> +
+>> +    ret = pscrr_provider_register(&pscrr_reset_source_provider);
+>> +    if (ret)
+>> +        pr_warn("failed to register the reset-source provider: 
+>> %d\n", ret);
+>> +}
+>> +
+>> +/ 
+>> *----------------------------------------------------------------------*/
+>> +/* Module init/exit */
+>> +/ 
+>> *----------------------------------------------------------------------*/
+>> +
+>> +static int __init pscrr_core_init(void)
+>> +{
+>> +    int ret;
+>> +
+>> +    pscrr_root = kobject_create_and_add("pscrr", kernel_kobj);
+>> +    if (!pscrr_root)
+>> +        return -ENOMEM;
+>> +
+>> +    ret = register_reboot_notifier(&pscrr_reboot_nb);
+>> +    if (ret) {
+>> +        kobject_put(pscrr_root);
+>> +        pscrr_root = NULL;
+>> +        return ret;
+>> +    }
+>> +
+>> +    pscrr_register_reset_source();
+>> +
+>> +    return 0;
+>> +}
+>> +
+>> +static void __exit pscrr_core_exit(void)
+>> +{
+>> +    pscrr_provider_unregister(&pscrr_reset_source_provider);
+>> +    unregister_reboot_notifier(&pscrr_reboot_nb);
+>> +    kobject_put(pscrr_root);
+>> +    pscrr_root = NULL;
+>> +    ida_destroy(&pscrr_ida);
+>> +}
+>> +
+>> +/* Bring the core up before device drivers probe and register 
+>> providers. */
+>> +subsys_initcall(pscrr_core_init);
+>> +module_exit(pscrr_core_exit);
+>> +
+>> +MODULE_AUTHOR("Oleksij Rempel <o.rempel@pengutronix.de>");
+>> +MODULE_AUTHOR("Faruque Ansari 
+>> <faruque.ansari@oss.qualcomm.com>");
+>> +MODULE_DESCRIPTION("Power State Change Reason Recording 
+>> (PSCRR) core");
+>> +MODULE_LICENSE("GPL");
+>> diff --git a/include/linux/pscrr.h b/include/linux/pscrr.h
+>> new file mode 100644
+>> index 000000000000..330d6ac191bd
+>> --- /dev/null
+>> +++ b/include/linux/pscrr.h
+>> @@ -0,0 +1,107 @@
+>> +/* SPDX-License-Identifier: GPL-2.0 */
+>> +/*
+>> + * pscrr.h - Public header for Power State Change Reason 
+>> Recording (PSCRR).
+>> + *
+>> + * Copyright (C) 2025 Pengutronix, Oleksij Rempel 
+>> <o.rempel@pengutronix.de>
+>> + */
+>> +
+>> +#ifndef __PSCRR_H__
+>> +#define __PSCRR_H__
+>> +
+>> +#include <linux/reboot.h>
+>> +
+>> +struct device;
+>> +struct pscrr_provider;
+>> +
+>> +/**
+>> + * struct pscrr_provider_ops - Provider callbacks.
+>> + * @read_reasons: Fill @reasons with the complete set this 
+>> source observed.
+>> + *        @reasons is a bitmap of PSCR_REASON_COUNT bits; set 
+>> members
+>> + *        with set_bit(PSCR_x, reasons). Return 0 on success or a
+>> + *        negative errno. Required. Driver state is reached 
+>> via p->priv.
+>> + * @write_reason: Persist @reason. Called from the reboot 
+>> notifier for
+>> + *        recorder-capable providers so the cause survives the 
+>> power
+>> + *        cycle. Leave NULL for read-only hardware sources.
+>> + *
+>> + * A const ops table per provider type; extend it with new 
+>> callbacks without
+>> + * touching the registration signature or existing callers.
+>> + */
+>> +struct pscrr_provider_ops {
+>> +    int (*read_reasons)(struct pscrr_provider *p, unsigned 
+>> long *reasons);
+>> +    int (*write_reason)(struct pscrr_provider *p, enum 
+>> psc_reason reason);
+>> +};
+>> +
+>> +/**
+>> + * struct pscrr_provider - A source (and optionally recorder) 
+>> of power state
+>> + *               change reasons.
+>> + *
+>> + * A provider represents one place the system can learn *why* 
+>> the last power
+>> + * state change happened: a hardware reset-cause register 
+>> (PMIC, SoC SRC,
+>> + * watchdog), a persistent recorder (NVMEM/RTC scratch), or a 
+>> test stub. Each
+>> + * registered provider gets its own directory under /sys/ 
+>> kernel/pscrr/, so the
+>> + * full, un-prioritised picture is visible: several providers 
+>> - and several
+>> + * reasons within one provider - can be reported simultaneously.
+>> + *
+>> + * @name:    Human-readable label, exported as the "name" 
+>> attribute. The
+>> + *        directory itself is core-indexed (providerN), so 
+>> this need not
+>> + *        be unique. Required.
+>> + * @dev:    Backing device. When set it is exported as the 
+>> "device" symlink
+>> + *        in the provider directory, tying the reason to real 
+>> hardware.
+>> + *        May be NULL (e.g. for a test provider).
+>> + * @ops:    Provider callbacks. Required.
+>> + * @supported_reasons: Bitmap of the reasons this provider can 
+>> store or report,
+>> + *        limited e.g. by the storage size. 0 means all reasons.
+>> + * @priv:    Provider private data, passed back through the 
+>> callbacks.
+>> + *
+>> + * Providers are readable and single-slot by default; only 
+>> capabilities beyond
+>> + * that (currently: writable) are advertised.
+>> + */
+>> +struct pscrr_provider {
+>> +    const char *name;
+>> +    struct device *dev;
+>> +    const struct pscrr_provider_ops *ops;
+>> +    const unsigned long *supported_reasons;
+>> +    void *priv;
+>> +};
+>> +
+>> +#if IS_ENABLED(CONFIG_PSCRR)
+>> +int pscrr_provider_register(struct pscrr_provider *p);
+>> +void pscrr_provider_unregister(struct pscrr_provider *p);
+>> +
+>> +/**
+>> + * devm_pscrr_provider_register - allocate, fill and register 
+>> a provider
+>> + * @dev: device the provider belongs to (also the "device" 
+>> symlink target)
+>> + * @name: provider label
+>> + * @ops: provider callbacks
+>> + * @supported_reasons: bitmap of supported reasons, or NULL 
+>> for all
+>> + * @priv: driver state passed back through the callbacks
+>> + *
+>> + * The provider is unregistered automatically on device teardown.
+>> + *
+>> + * Return: the provider on success, ERR_PTR() on failure, or 
+>> NULL when PSCRR
+>> + * is not built (so the caller need not guard the call).
+>> + */
+>> +struct pscrr_provider *
+>> +devm_pscrr_provider_register(struct device *dev, const char 
+>> *name,
+>> +                 const struct pscrr_provider_ops *ops,
+>> +                 const unsigned long *supported_reasons, void 
+>> *priv);
+> 
+> I really like the stuff in this header! After a glance, this 
+> looks like something even I might be able to add out PMIC 
+> drivers! Nice!
+> 
+> Reviewed-by: Matti Vaittinen <mazziesaccount@gmail.com>
+> 
+>> +#else
+>> +static inline int pscrr_provider_register(struct 
+>> pscrr_provider *p)
+>> +{
+>> +    return -EOPNOTSUPP;
+>> +}
+>> +
+>> +static inline void pscrr_provider_unregister(struct 
+>> pscrr_provider *p)
+>> +{
+>> +}
+>> +
+>> +static inline struct pscrr_provider *
+>> +devm_pscrr_provider_register(struct device *dev, const char 
+>> *name,
+>> +                 const struct pscrr_provider_ops *ops,
+>> +                 const unsigned long *supported_reasons, void 
+>> *priv)
+>> +{
+>> +    return NULL;
+>> +}
+>> +#endif
+>> +
+>> +#endif /* __PSCRR_H__ */
+>>
+> 
+> 
 
