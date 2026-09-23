@@ -1,86 +1,88 @@
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DA5423101C8
-	for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 10:18:28 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B39334718EF
+	for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 10:23:56 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790158713; cv=none; b=fiGuZsWXOJjS7G2es7EDoqF8ETBGFCPNB2PYvQx4ttjv1rvV7y5KA/FnmcZQ/upI+dOjGsga/5wIz/WhsN9qPpOJQYok+6sC6fENT0N1m9WqQKVfR3VdGvl/gYc7HDjzcPQCbqkCB0zZsv6G6fR4iYB1+HH9DH+95hSeCFxzwBQ=
+	t=1790159039; cv=none; b=jKu+r5N5/Gl47sHzPPAXwxWyixL54DdixYwJZbzCrZHp2DrfQqkgyrGK2dQq6OwHjnO2JEM8cjIbWwedQkErDyvym3u1HlGHKdkho2hSNVElrsFmw5wZ64BggjrkPHOtEM+xQmyn5BsVPSzFupUe2Pa/0rmgahab56TgDOUdQOc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790158713; c=relaxed/simple;
-	bh=U28DVFU357LkJoiafayvKcqMbcLV9ZAPhADRG51qCAA=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=HkpE6DJx3/J4UharoRrQAYQBL31yEH80StPeKq0RLeeGJw28Q1PSmmgzPFT8Fr4DibW4Gntep9btUH/Rhk46o7P+qSlmcG/YOoU20mpncUxuKK/vE52nCicbouTcd2DeiBODMZAdFYNPt9q6SFa/8fGfUjTPflCGMdXHXTFyWWQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=Nh+FiLXs; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=MuHSn1+Q; arc=none smtp.client-ip=205.220.168.131
+	s=arc-20240116; t=1790159039; c=relaxed/simple;
+	bh=I36qGOuxVt8F3AlJqr9uyF/OJ9zasBeEUQSsZkyEIs8=;
+	h=Message-ID:Date:MIME-Version:From:Subject:To:Cc:References:
+	 In-Reply-To:Content-Type; b=DncTieTFoaGZ8J1xL7sc+g5KDcv6lf8R+QEq2t/avXsvtSGUSAsoiK13oQxWNEVkvL7icU20613wFlInkwJ9sGLDV4F1uwjARwTeMcKvfrqUXZrfDe5lr69clqZADFMJ7beKO2NYTYdNiXP8+2F1p+Mo1hhMK4r++F8YZ0GQy8o=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=TaRJB3UV; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=giJrPH7U; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="Nh+FiLXs";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="MuHSn1+Q"
-Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68NA2kC93087103
-	for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 10:18:24 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="TaRJB3UV";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="giJrPH7U"
+Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68NA30T23936232
+	for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 10:23:55 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	ZdMQErsMoZLbknktARtbpxGeoP2NWqi+elqKiSGB658=; b=Nh+FiLXs6FR41Ayi
-	7Tu44a4M8Qw6KFvvGUtrajB4Qn0m75ToNai1stP56mKuVbC1iih/RquBW8aUglYD
-	gJbbvvCY9GVOt96zIS7csnc1ARWlg3UDJw1GrKOO3dR0EX6R8rMvLbNTyBg/+jZc
-	8eyYY4z+Rl31mxVC+qulvdMEo5c1+lpqmtD86TIRL37j2Je21Z3jCuqOo6exH1hR
-	r7n3XKA/DCNyZn6VJr/6/dsiTDGrZcVj3AnzDkeNd3PgLqzINc0gwKST1SdVkJnw
-	MZQMNvb2m7TMGgfVsneWA/744Xl+TFD5gKgJLRmRf75fJ797pSctNNe4UwQeXNN/
-	x1VHKQ==
-Received: from mail-dy1-f197.google.com (mail-dy1-f197.google.com [74.125.82.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gvbwm89k9-1
+	qqAd5JNFcVVUGGHw+F5n3YPtLs+f6/Hd4jYN9BmnscU=; b=TaRJB3UVujqW9vZ+
+	voiYv8TnbmOdQJMJ2l/dGQPlR7mYByH0ncy5tgTWY9lxdqGQF21m8KsAWFoCVrbO
+	jK9qM/nQPGluIb6oUi+KCLZhIo6r+RNSE79lWPiDv0Z/jhWnASyjliAKrW7FfPFT
+	CiaP7R9TPfVsK1QqK+RCRb463A5GnEnH13R/GjGSTnYk14LRcRGcH9LtK39Ht8+q
+	kDpp2V6IRUFAhCzgv6Sr46WFTX12CMLQfrLyJyEPtREeJSAEAuUbkYsDxwnNaaoH
+	zDCIWWcDRaEk9W5PGnIBVIa38Vko1S1W6zp12LCsyjtm9O4LOLLLn1SmakLHsYxn
+	luB1wg==
+Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com [209.85.222.198])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gv428t7mn-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 10:18:24 +0000 (GMT)
-Received: by mail-dy1-f197.google.com with SMTP id 5a478bee46e88-32b8c2b30c4so1097247eec.1
-        for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 03:18:24 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 10:23:54 +0000 (GMT)
+Received: by mail-qk1-f198.google.com with SMTP id af79cd13be357-93a183a0e93so188406585a.1
+        for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 03:23:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1790158703; x=1790763503; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=ZdMQErsMoZLbknktARtbpxGeoP2NWqi+elqKiSGB658=;
-        b=MuHSn1+Qija3zRPqJju9bzmip02pbroakRErVcBPKtUGSfNBxyJKJ1ypq33qoHdbSw
-         fhCmzyfeM0IR6rVtvCMYiSNwoLvlTkEJ8bdgQRYwb7yvYfsPBlVLxEjsgX+L8gKC6TZS
-         rehRujW29FJMrJN+PRhrpjX6GSKYJxlej//cIA4RquJpEqmXjgKUBf5X2JbbNrMjVgkM
-         9Xn/wmXsOClHgg6dz1GrgN9k7W+ngkNxV4A+JbxRzwcCNn+gX82J6EyBIiNfjb0BTS1v
-         /ABxeiQxhyOSxSkjCXyJ5+LY8HFbtLXt+0AvUsQidM6XuQiEpafIGc5oEqncWajjiJzn
-         OZ6w==
+        d=oss.qualcomm.com; s=google; t=1790159033; x=1790763833; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :references:cc:to:subject:from:user-agent:mime-version:date
+         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=qqAd5JNFcVVUGGHw+F5n3YPtLs+f6/Hd4jYN9BmnscU=;
+        b=giJrPH7UudZuLrU30o4Qg+cST/Rl195bccZ971HsngxtVlCqnLf318eChlSeoRQYv2
+         SC67w2v/zEsmJDWKhMI6gZW2gBepJU1zunBI0dUILQD6qex6AJDKzsGPi1iKomiEm8b8
+         xK60s2oo3ZJskERu5BFaLKMbirfg2O+RO3a7GnyhHzxnSc5DN+sdiBGRi8x5ir6CMWE7
+         O2zXdo0vK6jhgeibIxFlKFZkOXMoqsWRTAgYBdDx11PAyCrsb7FvYO3bErtQliiho4GJ
+         lOUcvFWaia/4WUALkre9T3elZjPViAR7J8VDFzKjR2Ww8f6HHM0/u2NfzOXCqumrHKTe
+         IhyA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790158703; x=1790763503;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=1e100.net; s=20260707; t=1790159033; x=1790763833;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :references:cc:to:subject:from:user-agent:mime-version:date
+         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=ZdMQErsMoZLbknktARtbpxGeoP2NWqi+elqKiSGB658=;
-        b=kSoFEjcU6AiNhaJCGnEO7bti4ZDgCJVRDdfnsXDSalAtpGQN07/EVbVCKRAiVCGkzi
-         PYhgsnOvyXQd1zhPQmDJ2XlnLT+6Ee6AJ3r/BL2keztHIo+lQc1j4tpIwB6ZgWtRQe88
-         dX2tQrAVnMRO96jnnrx1Ob+WktAxzAfJZ6x6CW8A0YJAZevK8ftNQkdnJnA3u5dCvgbe
-         dV0XfkVQPO1NuC46vNhVWIYPJB/E4MbfJme/POeCfd5xZ5qibZoi734KnvGDZfzRkgQS
-         kH84HBkrYZf/k6FMggC3uN3IZPRdTULdeG+5ZSyC6iB9WV9bca9kSItcD/Vc0AnulkB7
-         OHMA==
-X-Gm-Message-State: AFuF++nZRvjjwfWxDoh/F2+SMrauqpZF5CnMuF7/ICoAkgXddajys3hT
-	pKR7jB2vXAd/h+Ou0B0kEFq5m0Rze3EDrPpwGxhrJ118ncO4SeGlqJF3KIKpJE5isC96XTY/Yvw
-	oZucccbh3bsTnTE/RhcAA0wwZIfmzy7pxHoRlzxhAwj4yRYlI6ZDoXVmN7ioNQu86POOb
-X-Gm-Gg: AYBFou1ErSnzkFEsLNScjuqUTTI03z3P89gLbEiy0JsHEZZblpbSJTzpSJ6H4gBX6S9
-	cb+HB4CKqhN6/B+NDvNsNbyy2hlL+/ySBSFCYPY1xhRaA9Iydpg27TAP7Hza09XAge4WjRpnR4S
-	DjoM5m9bCrR36eSwT5XGk/Zu01AIj1GCs8Okofcmq/8Sstm35o8/wjNlxrsENaEqhKQ+b/HQzS5
-	8spINimQ8tqKOWt4c9rYH0XkpPbFG3HJcS/ldeahQX5+0+dEX22h0NxTk0Mr2glvwc75SV8VFhf
-	CbNhlOcWPX5XNS6WIXDD6Xr1+QCCzHE45SmwCesO7OxV88wLzTnXr8bV5i3O3muGSJTMloyatoJ
-	e3JvgIP5TnOYW8xJXmWbczvDNs6Z7
-X-Received: by 2002:a05:693c:801c:b0:33b:ef1f:14b9 with SMTP id 5a478bee46e88-33e8c250524mr2546657eec.15.1790158703484;
-        Wed, 23 Sep 2026 03:18:23 -0700 (PDT)
-X-Received: by 2002:a05:693c:801c:b0:33b:ef1f:14b9 with SMTP id 5a478bee46e88-33e8c250524mr2546631eec.15.1790158702865;
-        Wed, 23 Sep 2026 03:18:22 -0700 (PDT)
-Received: from [10.218.7.34] ([202.46.22.19])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-33e95c7c23asm5038225eec.6.2026.09.23.03.18.17
+        bh=qqAd5JNFcVVUGGHw+F5n3YPtLs+f6/Hd4jYN9BmnscU=;
+        b=K84Qw1Lm2TbEO7RgGiaKgsLvK6X/N/sdOb6/0NmqAxR6forPt3IzOBeD1baodD9ZL1
+         V52lgfXECN5B9TXYRKDagXQiPaquNfsNAl64TKl15pSStTm6KlDpjaGOSZngXc+IY8Zu
+         6e2w1sTQjvq9djgXSWjIqrFW8dQFrwcE+ErDHAAbwCcYRGsiVzZvtwA8WVwvSFyXBuic
+         UTFsJAz2dnOG+En2TRZcoPJXk/EQ9uy7IlRk18aLiEPTOfQ1g8pHBGV/cHD7zs1cdvrR
+         HAs3XaahWGoNkb55KLKQ+Vsh45YJSvn900+ttqn3/pi81qUYvtde5joVIdbVnx1jUm4n
+         PlOg==
+X-Forwarded-Encrypted: i=1; AKwUvBwqjZcAZWZw1bDD4eLChpelzmpkMsUsSjYeAI2R+Hd9o688ffZjtbK+KU5k205fqyQTnZ1GD/p62+EFekPJ@vger.kernel.org
+X-Gm-Message-State: AFuF++m9nx+7HB2Mmzmz99iuqVpnWYsJQfB2v38kF2zJPNI8FhPwmOPR
+	OfPWFPd+2i1Cjd0hPaCuaDcHE2e1Jns0B3HW7cboOLcV3RkVJwOvRqIAlWTcWuWS+pwPIEKI5ZF
+	Lz+YWVNoTlLRHGpOxJunRHnLhVY2Z18BUmoxKN/RAEB6nGsS5nLWyLZMvionxdAXR8lv7
+X-Gm-Gg: AYBFou3tzG/mGRQ7omDUV/peN4FQOQf0RDA7THfMhsiA/DMyLT9A4IuWw4NIIuY4Umg
+	t0fVW9Kb4K8E5Ni/Sa+AzS7cTtW60FgkPFCjtkXiVuM9ATB+S3X81IxfFzwFmIogVTInN8Z7vLG
+	GIXzwefrgdzfnvz6Ylc5g2mqdIQuJXld3EPxDI797nVW64bgXIKKMrWEMvbuMm7zcn0hA/fnLRh
+	EndrWjjmp80x7VgYGIXAGsGo6uC+N1+4sBLyKlcjJEokj5r0T0CYyX5XuIc+N9fOMqDEp42Ygy+
+	y4+aq6OQBdeBir58JnGCk1k/q0lCRM7do0b8NZw7GVCCH8sxs7KmWT6Du2rmpUcIFdhpCufTJFk
+	vzuBZLW7L792JAPYjdwAKyAYgnc+gXvW4riOK+G5+gbvsaq0QSqTnDmDujUbWoDq61JvqbNdgsi
+	WL/mz0enzad8FsGxhndK4Smi+EE7v+R9jZwdYMHFcSfhNtoYAOjmcurbzySnF+DfQ+zNYCkWLw1
+	t2YQA==
+X-Received: by 2002:a05:620a:29c6:b0:93a:34e2:b7b4 with SMTP id af79cd13be357-93c250971a1mr331000985a.15.1790159032927;
+        Wed, 23 Sep 2026 03:23:52 -0700 (PDT)
+X-Received: by 2002:a05:620a:29c6:b0:93a:34e2:b7b4 with SMTP id af79cd13be357-93c250971a1mr330999685a.15.1790159032492;
+        Wed, 23 Sep 2026 03:23:52 -0700 (PDT)
+Received: from ?IPV6:2001:1c00:c32:7800:5bfa:a036:83f0:f9ec? (2001-1c00-0c32-7800-5bfa-a036-83f0-f9ec.cable.dynamic.v6.ziggo.nl. [2001:1c00:c32:7800:5bfa:a036:83f0:f9ec])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c2aae6610a6sm86540666b.39.2026.09.23.03.23.51
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 23 Sep 2026 03:18:22 -0700 (PDT)
-Message-ID: <49dfb307-8d12-4008-8e1d-63d35ffb50b3@oss.qualcomm.com>
-Date: Wed, 23 Sep 2026 15:48:15 +0530
+        Wed, 23 Sep 2026 03:23:51 -0700 (PDT)
+Message-ID: <6b5a8300-ebf9-4717-bd39-952e89fc5e78@oss.qualcomm.com>
+Date: Wed, 23 Sep 2026 12:23:50 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -88,105 +90,159 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 4/6] mfd: qcom-pm8008: Add PM8010 support
-To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
-        Lee Jones
- <lee@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley
- <conor+dt@kernel.org>,
-        Guru Das Srinagesh <linux@gurudas.dev>,
-        Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, mfd@lists.linux.dev,
-        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-        Dhruvin Rajpura <drajpura@qti.qualcomm.com>,
-        Nihal Kumar Gupta <nihal.gupta@oss.qualcomm.com>,
-        Kamal Wadhwa <kamal.wadhwa@oss.qualcomm.com>,
-        Oleg Keri <okerixx@gmail.com>
-References: <20260918-pm8010_i2c_support-v1-0-de33d78fad9d@oss.qualcomm.com>
- <20260918-pm8010_i2c_support-v1-4-de33d78fad9d@oss.qualcomm.com>
- <90d203ad-525c-44dc-83d6-1548b42c131d@oss.qualcomm.com>
-Content-Language: en-US
-From: Jishnu Prakash <jishnu.prakash@oss.qualcomm.com>
-In-Reply-To: <90d203ad-525c-44dc-83d6-1548b42c131d@oss.qualcomm.com>
+From: Hans de Goede <johannes.goede@oss.qualcomm.com>
+Subject: Re: [PATCH v7 1/2] module: add SCMI device table alias support
+To: Sudeep Holla <sudeep.holla@kernel.org>
+Cc: =?UTF-8?Q?Uwe_Kleine-K=C3=B6nig?= <u.kleine-koenig@baylibre.com>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Cristian Marussi <cristian.marussi@arm.com>,
+        Daniel Lezcano <daniel.lezcano@oss.qualcomm.com>,
+        Bjorn Andersson <bjorn.andersson@oss.qualcomm.com>,
+        Frank.Li@kernel.org, arm-scmi@vger.kernel.org,
+        linux-arm-kernel@lists.infradead.org, linux-arm-msm@vger.kernel.org,
+        imx@lists.linux.dev, linux-kernel@vger.kernel.org
+References: <20260918092951.5656-1-johannes.goede@oss.qualcomm.com>
+ <20260918092951.5656-2-johannes.goede@oss.qualcomm.com>
+ <arFKVhlgJge5EZyj@monoceros>
+ <20260923-sceptical-mauve-firefly-f5456d@sudeepholla>
+Content-Language: en-US, nl
+In-Reply-To: <20260923-sceptical-mauve-firefly-f5456d@sudeepholla>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTIzMDA0MCBTYWx0ZWRfXzebubIbbd1JU
- BWNEOomZprxGshq7zMx+eB45tkzkVIziKEowoc3xUxoLsN8xZNW73BM5JxvkqEeD8KA+KvRY6IE
- CsxMQHiIPTfVxsW6xM25RhNApVy5FeM=
-X-Authority-Analysis: v=2.4 cv=R/6WitRX c=1 sm=1 tr=0 ts=6ab3a770 cx=c_pps
- a=Uww141gWH0fZj/3QKPojxA==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
- a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22
- a=jxTK5DOZuom5vZOH12gA:9 a=QEXdDO2ut3YA:10 a=PxkB5W3o20Ba91AHUih5:22
-X-Proofpoint-GUID: o8Iw0HUqemkX1eCu7y1WTXuMbfMATNne
-X-Proofpoint-ORIG-GUID: o8Iw0HUqemkX1eCu7y1WTXuMbfMATNne
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTIzMDA0MCBTYWx0ZWRfX341N02PsDgKD
- ByUAOQbt+gefgUUNIWd1kyiX+4spWc4hLUmH9rdGJqGZhchYxPZeGwUqtInIURHT03QHuGxG2DM
- uIpGYcY7MD5CquC84dlYj6T8U12OKt183X0FMC8PdJKHyVF6GtEHtcgfQg25cEaH8lrBXxKAAGY
- olCvn7EVo5Lr+CoqQpXP+dvCMeDHjjft0pm0WuyKxL6YLBZ0/rlGMAkA+2FRD81Tffs53m79Hdu
- W/VcKoHgAyFwuBlBfFY2bOgif0RXb2sZmQEo9TtpzZh0KxouAqPxWOBhQS9iHlqbrAr18mwUtvo
- NdTMB4Yl/AaGXtMRjhi7L2iqx7VUGkSMEvviHSl5Xml34UG++pOR7Io5+r8B3dvu+RgkJSLQQHX
- 1ZWunapo1gYxke9+/FHpMPcouP/ziwW7kipjsy6NlSJiyKDmNCF1A1b5UfyiqXGu0IW1z41H4rn
- 8XpR+k0+/FY5lMEDriw==
+Content-Transfer-Encoding: 8bit
+X-Authority-Analysis: v=2.4 cv=EZdd0/mC c=1 sm=1 tr=0 ts=6ab3a8ba cx=c_pps
+ a=qKBjSQ1v91RyAK45QCPf5w==:117 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
+ a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22 a=EUspDBNiAAAA:8
+ a=IBvwG5UjtWMghLoup9EA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+ a=NFOGd7dJGGMPyQGDc5-O:22
+X-Proofpoint-ORIG-GUID: hIUP1ZkbgrBaKi44v5FAwWvEa_oLhirM
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTIzMDA0MSBTYWx0ZWRfXy5eIXDZS4BND
+ XTvX/RG8PUhV0GYdqyPcJnfB7CldtudsMcGMk4P6BLQf7pdP9WhINW/yKLCA6dce7x6TkJZoe+C
+ OtRACtpzp4MNbUjR2EwotyfnfzspPs3p9A2ayyKnwU/9tyBqsX1nyKiBKd+SRXniaKmZSkj9swC
+ bUpMXczdnEQ5LEXV3QLCRZqvMGep+Mfa/m0wXHa6sew5a/5QpoT4Aocbr/LJJIdvV08V7QeNYci
+ W/o45MkHEarHIKviylkLJcDljhUvwJ2IDx5gGkqp2mRQ2eWZb+hcqdR5f0fdvpL4/J+1J+3ENNF
+ PthlR+GQRNS30xupOyZiJsns/UCMu9PpAv/JNFJjRaq3wf3dsIsplFnr7bOpPR0UfaGXdwIXpUU
+ hiXWlyOqpRnPqBbMI1TAgJHePt93HFoAfUcMKcPfZ816d4SlsQZjfEgJO1b1tiXoZBgr7+hrOT9
+ NTvw7ZKvdPkvdnU8DEA==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTIzMDA0MSBTYWx0ZWRfXy8nhJqvHfkFC
+ Ho3B5qxW/QS0Y0hEacDZLnmts562wWlSwYOGDqr0nhD6/Ok9vj4TuwS5TBg/z2eVmPMUvGUvIAD
+ RTj6Pe9F8K7W438vf3Q0xqiuv4Y5aks=
+X-Proofpoint-GUID: hIUP1ZkbgrBaKi44v5FAwWvEa_oLhirM
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-09-23_04,2026-09-21_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- bulkscore=0 clxscore=1015 malwarescore=0 impostorscore=0 priorityscore=1501
- lowpriorityscore=0 spamscore=0 suspectscore=0 phishscore=0 adultscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609230040
+ clxscore=1015 suspectscore=0 bulkscore=0 adultscore=0 spamscore=0
+ lowpriorityscore=0 phishscore=0 priorityscore=1501 impostorscore=0
+ malwarescore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2609040000
+ definitions=main-2609230041
 
-On 9/21/2026 7:03 PM, Konrad Dybcio wrote:
-> On 9/18/26 6:42 PM, Jishnu Prakash wrote:
+Hi,
 
-...
-
+On 23-Sep-26 11:07, Sudeep Holla wrote:
+> On Mon, Sep 21, 2026 at 05:19:45PM +0200, Uwe Kleine-König wrote:
+>> On Fri, Sep 18, 2026 at 11:29:50AM +0200, Hans de Goede wrote:
+>>> From: Bjorn Andersson <bjorn.andersson@oss.qualcomm.com>
+>>>
+>>> SCMI client drivers already describe their bus match data with
+>>> MODULE_DEVICE_TABLE(scmi, ...), but modpost does not know how to consume
+>>> SCMI device tables. As a result, SCMI modules do not get generated module
+>>> aliases from their id tables.
+>>>
+>>> Move struct scmi_device_id to mod_devicetable.h so it has a fixed layout
+>>> visible to modpost, add the corresponding generated offsets and teach
+>>> file2alias to emit scmi:<protocol>:<name> aliases.
+>>>
+>>> Use the same stable alias format for SCMI device uevents and sysfs
+>>> modaliases. The previous string included the instance-specific device
+>>> name, which is not useful for matching modules.
+>>>
+>>> Assisted-by: Codex:GPT-5.5
+>>> Reviewed-by: Hans de Goede <johannes.goede@oss.qualcomm.com>
+>>> Tested-by: Hans de Goede <johannes.goede@oss.qualcomm.com>
+>>> Signed-off-by: Bjorn Andersson <bjorn.andersson@oss.qualcomm.com>
+>>> Signed-off-by: Hans de Goede <johannes.goede@oss.qualcomm.com>
+> 
+> [...]
+> 
+>>> diff --git a/include/linux/device-id/scmi.h b/include/linux/device-id/scmi.h
+>>> new file mode 100644
+>>> index 000000000000..1b4ccfa9dcc5
+>>> --- /dev/null
+>>> +++ b/include/linux/device-id/scmi.h
+>>> @@ -0,0 +1,17 @@
+>>> +/* SPDX-License-Identifier: GPL-2.0-only */
+>>> +#ifndef LINUX_DEVICE_ID_SCMI_H
+>>> +#define LINUX_DEVICE_ID_SCMI_H
+>>> +
+>>> +#ifdef __KERNEL__
+>>> +#include <linux/types.h>
+>>> +#endif
+>>> +
+>>> +#define SCMI_NAME_SIZE		32
+>>> +#define SCMI_MODULE_PREFIX	"scmi:"
+>>> +
+>>> +struct scmi_device_id {
+>>> +	__u8 protocol_id;
+>>> +	char name[SCMI_NAME_SIZE];
 >>
->> diff --git a/drivers/mfd/qcom-pm8008.c b/drivers/mfd/qcom-pm8008.c
->> index 60204cc9a2dc..ed656f0d6df2 100644
->> --- a/drivers/mfd/qcom-pm8008.c
->> +++ b/drivers/mfd/qcom-pm8008.c
->> @@ -34,6 +34,7 @@ enum {
->>  	PM8008_GPIO1,
->>  	PM8008_GPIO2,
->>  	PM8008_NUM_PERIPHS,
->> +	PM8010_NUM_PERIPHS = 2,
->>  };
+>> I wonder if you tried to keep this a char *. ISTR someone did something
+>> similar recently and they claimed it worked. That would get rid of the
+>> artificial name size limit and simplify this patch.
+>>
 > 
-> diff --git a/drivers/mfd/qcom-pm8008.c b/drivers/mfd/qcom-pm8008.c
-> index 8408d045e754..84c2d50545af 100644
-> --- a/drivers/mfd/qcom-pm8008.c
-> +++ b/drivers/mfd/qcom-pm8008.c
-> @@ -35,7 +35,9 @@
->  enum {
->         PM8008_MISC,
->         PM8008_TEMP_ALARM,
-> -       PM8008_GPIO1,
-> +       /* The GPIOs on PM8010 are fixed-function */
-> +       PM8010_NUM_PERIPHS,
-> +       PM8008_GPIO1 = PM8010_NUM_PERIPHS,
->         PM8008_GPIO2,
->         PM8008_NUM_PERIPHS,
+> I agree with this. 
+
+Ok, so I checked and no other include/linux/device-id/*.h file
+defines a foo_device_id field with a type of "char *" and
+then uses that field in scripts/mod/devicetable-offsets.c /
+scripts/mod/file2alias.c .
+
+2 device-id/foo.h headers (dmi, pcmcia) do define a "char *"
+field, but then do NOT use that to generate a modalias.
+
+So scmi_device_id would be the first to do this.
+
+Despite that I still gave this a try. Things do compile,
+but it results in a modalias for the scmi-cpufreq driver
+of: scmi:13:(null) and auto-loading unsurprisingly does
+not work.
+
+TL;DR: using 'char *' instead of char [<max-len>] in
+a device-id struct field that is used for modaliases
+does NOT work.
+
+So I believe that this v7 is ready to merge as is.
+
+> [...]
 > 
+>>> @@ -1491,6 +1502,7 @@ static const struct devtable devtable[] = {
+>>>  	{"virtio", SIZE_virtio_device_id, do_virtio_entry},
+>>>  	{"vmbus", SIZE_hv_vmbus_device_id, do_vmbus_entry},
+>>>  	{"rpmsg", SIZE_rpmsg_device_id, do_rpmsg_entry},
+>>> +	{"scmi", SIZE_scmi_device_id, do_scmi_entry},
+>>>  	{"i2c", SIZE_i2c_device_id, do_i2c_entry},
+>>>  	{"i3c", SIZE_i3c_device_id, do_i3c_entry},
+>>>  	{"slim", SIZE_slim_device_id, do_slim_entry},
+>>
+>> I wonder if this is supposed to be ordered alphabetically ...
+>>
 > 
-> or drop the GPIO support altogether, if we conclude that they are
-> fixed-function on PM8008 too (I couldn't find clear info)
+> This may be hard, just the best effort unless it is cleaned up first.
 > 
+> Anyways, I plan to send PR by end of the week, so I really need this
+> in by tomorrow worst case. I am bit worried if there will conflict all
+> over the place in this file as I know couple of other patches that may
+> come via other trees touching same entries(one is SMCCC)🤞.
 
-Hi Konrad,
+Thank you for the ping, as mentioned above I give Uwe's suggestion
+a try but it does not work.
 
-From what I could see in the relevant HW documents, the GPIO
-functions are fixed on both PM8008 and PM8010, so it would
-be best to drop it from the driver. I can a separate fix
-change for this.
+So I believe that this v7 is ready for merging as is.
 
-Do you think we also need to make binding and DT changes
-for dropping this GPIO support?
+Regards,
 
-Thanks,
-Jishnu
+Hans
 
-> Konrad
 
