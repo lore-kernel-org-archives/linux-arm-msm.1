@@ -1,298 +1,118 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6207144F570
-	for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 08:50:50 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=205.220.168.131
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790153452; cv=pass; b=Chrk2gJ/b0AWJWIfXa14iDbrgJdAxSS1SgW8qTgSIWXO342CJTrjRIj4XHKuVTP5+gwylnbEoX6LodK1XZuMGcSHUgMpoG2naPRFRe+0qSTEVilVjzPVVEZbFnHMh7oi8HyBAJ5pORi2WVumXU53VNw8hpaYpfvhzoq3Uy6mViw=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790153452; c=relaxed/simple;
-	bh=7v2013CmmvcfqVlNh6omWvZ+UMQjVGTi7ffXQjdnqL8=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=AhnjdiRX/UYc5NSdu9BUaqm7HtbZ22btGscGHL9O+hbFUr3OkJoBG2CGLYb2ra5MhqP8/3upAC/NhViwbQnZPQDlVt0EV93vN+/vBwE6e1E8TmamJSUu5FU1k/LbsL/0fHxSK4jB11DOtxP9cjFZ441+lM6GF/6y/C4+uhdesvU=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=gum4gTJd; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=Nd4O6cg9; arc=pass smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 08F334119E7;
+	Wed, 23 Sep 2026 08:51:23 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1790153485; cv=none; b=GC55dWclQiIYAyAHktc2HwMgkZYRTN30WXNwCvJwFPUTO3H3LCDJu8sRX6qZhG1iipuH1cpFg6qOUqDmGSuw/OviqRTCNw3fYv2IcTAtdnM44wpbqT2HObTnk8/4mijMisdSE771Li6Juf51cMKDr5NTd5/DD/M4EKY4PgeNAx0=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1790153485; c=relaxed/simple;
+	bh=pAiXyjIlFRFFdEXD+mcNEdc87dCSOTW/3hoAz9VNsHA=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=QiOmg5GdmybNtOiu/iehnTwzkvcV9x0k9/GypmZJw4TS6MuSrSp4R0JVH7k09IHJLwg3BuYa6CEIEiam9x6sYP4ARknJlq3f933q28npy2Fn2pIfxzlQuhRnmmD7tF1AEYgVXZ0cQZDBZ3NMyQMOuMd/7n8Hm/t+TtqlAYUkQRw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=NrTG9rCg; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="gum4gTJd";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Nd4O6cg9"
-Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68N8JaJj3701706
-	for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 08:50:49 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	jVlz6wozUNJU7Ozc0pFD8STVyfYjHeBzDGHFKBRICIM=; b=gum4gTJdGnvbTqQj
-	VnGZ48CvO5dXwaN703L4zRE+4OtxCXP5YLO9HxLDqbQqTpRsEzXa2GmXaZ43lhVS
-	n+OKqyo+WE/T88KyggyHH+qNqi2dQVtHMHc+pizRqRZsvuYBer0Ht6ZtOc+cCjvP
-	HNyGX4cKRPFjoAEVbmnwlwX/SMjRCzt+A7/LKtFh+7FiflXxbMoUMVERD7da0luG
-	sp1Sp96ptBTmKOsZFaVb37aZVxVyoCL5lvAk7iceuIj5P4yKTsooBB9nNRB3o7y+
-	Qma7KtaxD5RsFujeiUtayu16T088CgsnEIKghjg5R2hakTAnVU0UJ+0EUtQ1cMKh
-	Bd0+6w==
-Received: from mail-pf1-f200.google.com (mail-pf1-f200.google.com [209.85.210.200])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gv428st75-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 08:50:49 +0000 (GMT)
-Received: by mail-pf1-f200.google.com with SMTP id d2e1a72fcca58-86ab8302b54so586001b3a.1
-        for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 01:50:49 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1790153448; cv=none;
-        d=google.com; s=arc-20260327;
-        b=pzsBswjWYdgR0ksH4SJ3aulHGpK+L6GSDwu2mXNlg25xT0W5WrrU76V2o7LO6arCb6
-         GB9Py17NUGkAqja2h5Zy5Cr2BtOeQB7fsKqVFnvlT9TDByk1zlh7eTa1yp/Zuuc0mYxM
-         9mF9VTJs3JVl2iuWuHg6lXmuK2NOjd/KSPVeXFtl7gflG32F+Nb7UXZax7CJ20HqFoCn
-         IV77rn2puMwK1VYfYwkRBQge/ko4du7vod7zP+wGkuN9yzFm9bk2XK8RCc5NMQqTfuKB
-         +1x6X5FJpDFaFnhcaT0sEmbuWNv/sX8sNxiNydERFdh9wR4hX3syi5lzxMUgnFUnUnKM
-         HjFA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=jVlz6wozUNJU7Ozc0pFD8STVyfYjHeBzDGHFKBRICIM=;
-        fh=KuPx97LVHHg8eDCyRYwNcw4+tLEysWk5e5kMSGRZeBY=;
-        b=MRzj+YXQZWp+UqkyLe7s0MnPaJTMqYfWiIuN+Nzb5SPFcHFHTUUaXU1Ser33cwZp6H
-         G6nEYUhUozw21xurDLprk0FJDGqsJkSkivQtlFFr3TvHCVs6bj2tW72rJNuUe09DwYaO
-         YanUj0ciP1a7Y3d4tLT9rS+dyX6U9O/Bd0r4/GydL+2uYd5g6U/LHWr4fXWNe7Nyl5nX
-         IR95/G31dTEgYiusdR8qtX4o/7ycWcmzAAksr556LSwWVxax00nuKZ7hlWEBSxona6+o
-         oRLdP+O1u8pS9YhmcHB+2kNpS402RS6TlKqm5C7hXrLKKOZGAKVtxIGByfeFjhlEO+TV
-         XcMA==;
-        darn=vger.kernel.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1790153448; x=1790758248; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=jVlz6wozUNJU7Ozc0pFD8STVyfYjHeBzDGHFKBRICIM=;
-        b=Nd4O6cg9gC71bxpe/FoyVPMHWhK4XlUIEtpt0H0CEtsVe2HeztvsxYLMDiaOuie5Mq
-         v/sEQHU/9tassB0Qp7K2QSIXXkfXFeMGWzTPcRJtYrpFaDxM+/0wE5MMzbF1yPkgXIzl
-         5dGLxwl4wJKRWgZIOX4XPmaJRYP5u/Y+5or6XODIupOSMRkp2Gh7dvfu+gWpv8SkpkaH
-         T6qxUcUSMi7PohDgpD8zkDvBcJLSM/DbEbmn0+E33LXc7RIVAZRtvUugPg8uDHw8uMyx
-         luH5iYBKgfs5mJNV/xyg3rLL41TwPIwgeeBCnoswv+5VfLKM4EbnIg7yWYZFJO2x5LD/
-         B0Pw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790153448; x=1790758248;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=jVlz6wozUNJU7Ozc0pFD8STVyfYjHeBzDGHFKBRICIM=;
-        b=AdGhOFTrbCLFh2EuZ6gs7vQsfp52itqDdz7D9I3uYL4M3CfacL5tnI62+ty5S1crQW
-         4QvvEvrTL40JXJ6ep3zjJjwnShFiWOkec7HiG9a/9CDA21zg7MxeS/UQ0U+VO6d5twTG
-         aRZPLnnrrxIzxXQ1fHMKKaHrkPM0iT1/52SLj7N3jvS8CfuQv/mCWzqZkvBh7uPgOyUZ
-         yDcEa7/sPyTDLXjmWDuocKeWaPlQm1JzJ88tkaCu2IIUbEkRwkmIHcHUVJKSnnLV9Ojb
-         kwTxfEkXHgbmJY6zovqOzRw6UJBvDe3Xl8lbvTLzivmUAZ+8WiPyQrxv6ZZy8rzLldRA
-         hV/A==
-X-Forwarded-Encrypted: i=1; AKwUvBznlhqvpXmeaBRm6GuQ1lDYZW5yAfUC+6L5+w0stLVAa554d+Sk2u7ViBN0CEp1n4yyB+RDta2edhqpYY0N@vger.kernel.org
-X-Gm-Message-State: AFuF++nl/bHGOYeall9dOZJm5im4oe5YqPusFoaifofX/yW7aN5cFJY2
-	Y7uUp7UQ8sHYlYlG0Gw+2wxFsOe6wGZi3MJmahhBH/RGcnJuTQivLbcTpH+E+j4BBFSD9rB4mpo
-	OQWnHiAEh5mMGwGdM1dFRf8pyGSii9M4bEA2SinJ3UvhiBTDq1JJOM6JEKPw+n8xt57CWmQVItf
-	jo5+WOal9GjUzp+3JNZCgQoHUYCGSrLoFHNQn7taS55q0=
-X-Gm-Gg: AYBFou0Xx6n0icLKL6STdIQYNBanbppqJUlC5zouS/E3q2NJNE/C28GJIrdfn3Fiq2U
-	yburtZGGT3LBxLaJOV6aHnJ/USxU7I9f9gpCLxbDUlTzkmzT8Ywp7UWT7ZLVpTINOzs9Rt+JxMF
-	cRlRrVQrwrnTr1+oAFIPaqe8S2PvaRBut/fQKFTJaT/rD7U93QrkCNFDRLnNcd2mE4ENpt
-X-Received: by 2002:a05:6a00:2e9e:b0:874:706d:9629 with SMTP id d2e1a72fcca58-87d1b6a89bdmr1526844b3a.27.1790153448474;
-        Wed, 23 Sep 2026 01:50:48 -0700 (PDT)
-X-Received: by 2002:a05:6a00:2e9e:b0:874:706d:9629 with SMTP id
- d2e1a72fcca58-87d1b6a89bdmr1526838b3a.27.1790153447969; Wed, 23 Sep 2026
- 01:50:47 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="NrTG9rCg"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 843511F00893;
+	Wed, 23 Sep 2026 08:51:18 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1790153483;
+	bh=A23uT6sLOE0jaA7RFV8PlLdA6BkhCPPluBDeAFfMVkg=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To;
+	b=NrTG9rCgkRUctTP+5KRwjQxA9tT0T+HH5g/mvf+Frlp7Fh5vKonXtvVp+WhXXFi6o
+	 aRP3WJW4qfd3qO7Tpco7dpupI6hfUHhsgvSOnbB4UJHvMcOjY/pYp+RyQqKJEM+7U5
+	 JRrwaXI74CvPSWtdLYHi5Z4jtNtp9JJt74yD0N18un0XLg1xU+bF2GKgJCioJcejs3
+	 JGZl1GNK3bBQKxDgp76k4eKOYwWGF+Uuxa8J6HKX+x+FzOT8m8Z7z5VxZ7RlSP4AST
+	 TiQ4wtKE6BBqKo9mNE0u8okaQ7D2IpT0erN7/9IrdRrN3enVk4lJyfnD1k5Zj5yzOG
+	 4SmxwGllaz+dw==
+Message-ID: <eeceb9de-901d-4c18-b305-772044a852b6@kernel.org>
+Date: Wed, 23 Sep 2026 10:51:16 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260923-qcom_xpcs_nord_emac-v1-0-4b1c682af70f@oss.qualcomm.com>
-In-Reply-To: <20260923-qcom_xpcs_nord_emac-v1-0-4b1c682af70f@oss.qualcomm.com>
-From: Zhangfei Gao <zhangfei.gao@oss.qualcomm.com>
-Date: Wed, 23 Sep 2026 16:50:36 +0800
-X-Gm-Features: AcwNN1UGyeerkYZHrx1isWt7YiSI0LmE8lI6EzIuvsSU-2kHZ8m2Q4mcnuwVcxA
-Message-ID: <CAFkd8hsUzJEsDYjGSM3tsJzzwByuEkA+G4k1c75uYD-y5qU3iA@mail.gmail.com>
-Subject: Re: [PATCH RFC net-next 0/9] net: introduce Qualcomm XPCS support and
- add Nord Ethernet plumbing
-To: Mohd Ayaan Anwar <mohd.anwar@oss.qualcomm.com>
-Cc: Andrew Lunn <andrew+netdev@lunn.ch>,
-        "David S. Miller" <davem@davemloft.net>,
-        Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>,
-        Paolo Abeni <pabeni@redhat.com>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>,
-        Serge Semin <fancer.lancer@gmail.com>, Andrew Lunn <andrew@lunn.ch>,
-        Heiner Kallweit <hkallweit1@gmail.com>,
-        Russell King <linux@armlinux.org.uk>,
-        Richard Cochran <richardcochran@gmail.com>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Alexandre Torgue <alexandre.torgue@foss.st.com>,
-        Giuseppe Cavallaro <peppe.cavallaro@st.com>,
-        Jose Abreu <joabreu@synopsys.com>,
-        Maxime Chevallier <maxime.chevallier@bootlin.com>,
-        Maxime Coquelin <mcoquelin.stm32@gmail.com>, netdev@vger.kernel.org,
-        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-arm-msm@vger.kernel.org,
-        linux-stm32@st-md-mailman.stormreply.com,
-        linux-arm-kernel@lists.infradead.org,
-        Lorenzo Bianconi <lorenzo.bianconi@oss.qualcomm.com>,
-        Shawn Guo <shengchao.guo@oss.qualcomm.com>,
-        Jitendra Vegiraju <jitendra.vegiraju@broadcom.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Authority-Analysis: v=2.4 cv=EZdd0/mC c=1 sm=1 tr=0 ts=6ab392e9 cx=c_pps
- a=mDZGXZTwRPZaeRUbqKGCBw==:117 a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10
- a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
- a=Um2Pa8k9VHT-vaBCBUpS:22 a=VwQbUJbxAAAA:8 a=Q-fNiiVtAAAA:8 a=NEAV23lmAAAA:8
- a=EUspDBNiAAAA:8 a=Gcu-WNPWmvmYkCXGu7wA:9 a=QEXdDO2ut3YA:10
- a=zc0IvFSfCIW2DFIPzwfm:22
-X-Proofpoint-ORIG-GUID: 0FGGPD7UwPwktvDG5U0GALQXp4_ZpUjR
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTIzMDAzNSBTYWx0ZWRfX/zGl3Z5sL7ZA
- lRlk3OYLAx6davVNzunZSEzH4ReB9r46ysMn8aSLmKRssnQGNwAOhayZ100ObrskRxval/lLAyd
- TfmYm+1s7qsQ7QwPjTwg7cp8fNjYslSK5GKvPB8DMfLP1bacd2TLvty+EfI2nBrQyXhO+YCj59O
- 3YgB8dxiT83j27YloypFvwS4rOEe57LWCrGG3aSugfiJmfDgHIfTq7bqDtCoWiIw7BSBO/GV0Yb
- U785SOpZcV4iMTJNb5wNMbN4UE26SuswHFh3OqlaxbBTKfjpRoE7Y13clML0Q4imF11ZrbkquUV
- Csg1c4hUuMfymi5BWwrl1OO8LceLopbGwJcAL7a91TVRsoJWaSKM3hP42KgS5CVUPGwqEjJ0F+l
- BVeDB4ymFukDmC4KOBc/0AU/EdDuIwSOTBp1ZkHFxWnC5wiT3k3ZwECy0qsok1QS+bQ/tk+NdI4
- dABlbUE4VcCmHA5RpmQ==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTIzMDAzNSBTYWx0ZWRfX1z1dmYLLM0gG
- wFtyBwaa9B1jqGwp8o3R9LVgLLh5K2cwcld/I/mDiOJIB12yMPMod/hwVr5WxdZG4yTFzQC2PoQ
- czNHrrbvyqtQrUOulJ4Lptc4TsdvrUQ=
-X-Proofpoint-GUID: 0FGGPD7UwPwktvDG5U0GALQXp4_ZpUjR
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-23_04,2026-09-21_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 suspectscore=0 bulkscore=0 adultscore=0 spamscore=0
- lowpriorityscore=0 phishscore=0 priorityscore=1501 impostorscore=0
- malwarescore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2609040000
- definitions=main-2609230035
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v1 3/8] ASoC: dt-bindings: qcom: Add Maili LPASS macro
+ codecs
+To: Prasad Kumpatla <prasad.kumpatla@oss.qualcomm.com>,
+ Srinivas Kandagatla <srini@kernel.org>, Liam Girdwood <lgirdwood@gmail.com>,
+ Mark Brown <broonie@kernel.org>, Rob Herring <robh@kernel.org>,
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
+ <conor+dt@kernel.org>, Bjorn Andersson <andersson@kernel.org>,
+ Konrad Dybcio <konradybcio@kernel.org>, Jaroslav Kysela <perex@perex.cz>,
+ Takashi Iwai <tiwai@suse.com>
+Cc: Abel Vesa <abelvesa@kernel.org>, linux-sound@vger.kernel.org,
+ linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
+ linux-kernel@vger.kernel.org
+References: <20260923084627.748920-1-prasad.kumpatla@oss.qualcomm.com>
+ <20260923084627.748920-4-prasad.kumpatla@oss.qualcomm.com>
+From: Krzysztof Kozlowski <krzk@kernel.org>
+Content-Language: en-US
+Autocrypt: addr=krzk@kernel.org; keydata=
+ xsFNBFVDQq4BEAC6KeLOfFsAvFMBsrCrJ2bCalhPv5+KQF2PS2+iwZI8BpRZoV+Bd5kWvN79
+ cFgcqTTuNHjAvxtUG8pQgGTHAObYs6xeYJtjUH0ZX6ndJ33FJYf5V3yXqqjcZ30FgHzJCFUu
+ JMp7PSyMPzpUXfU12yfcRYVEMQrmplNZssmYhiTeVicuOOypWugZKVLGNm0IweVCaZ/DJDIH
+ gNbpvVwjcKYrx85m9cBVEBUGaQP6AT7qlVCkrf50v8bofSIyVa2xmubbAwwFA1oxoOusjPIE
+ J3iadrwpFvsZjF5uHAKS+7wHLoW9hVzOnLbX6ajk5Hf8Pb1m+VH/E8bPBNNYKkfTtypTDUCj
+ NYcd27tjnXfG+SDs/EXNUAIRefCyvaRG7oRYF3Ec+2RgQDRnmmjCjoQNbFrJvJkFHlPeHaeS
+ BosGY+XWKydnmsfY7SSnjAzLUGAFhLd/XDVpb1Een2XucPpKvt9ORF+48gy12FA5GduRLhQU
+ vK4tU7ojoem/G23PcowM1CwPurC8sAVsQb9KmwTGh7rVz3ks3w/zfGBy3+WmLg++C2Wct6nM
+ Pd8/6CBVjEWqD06/RjI2AnjIq5fSEH/BIfXXfC68nMp9BZoy3So4ZsbOlBmtAPvMYX6U8VwD
+ TNeBxJu5Ex0Izf1NV9CzC3nNaFUYOY8KfN01X5SExAoVTr09ewARAQABzSVLcnp5c3p0b2Yg
+ S296bG93c2tpIDxrcnprQGtlcm5lbC5vcmc+wsGPBBMBCgA5AhsDBgsJCAcDAgYVCAIJCgsE
+ FgIDAQIeAQIXgBYhBJvQfg4MUfjVlne3VBuTQ307QWKbBQJp2mE8AAoJEBuTQ307QWKbeaIP
+ /ihHTkTW4KsN/DQ945JJbyu5tI0J80Wue7QyyLPglyKfhgb5cLLNPpOC8cCIJsc7+W3i2P38
+ s2c1cOH6CYGE7E9ur3Vfme8NW2S2I/Z8VC7bZnzyS23wT17LrsdS/qCpx4o8U+pt/xdXDKph
+ EGRYrIEmMpUWvyYzyYKGIe25FtaayIIKpq8eZYyFcp2f/sG5IkOW5uZzHPMPdcm87jU7fyuQ
+ rAU2vx9r+ulUfQ/q9Z2roC/ode3l7t2pN7BCBCsUDp6JCrUyZrtT1e7EbA0ZRP3aOBNk2P2E
+ DQOgJGjGdO5Yx2Y9LFtltu6JbsBJHi1syGRX3AtQYOMc4Y1WGoeZJmMlvKj2ZqqXNkcWi2DS
+ IQEWB0uW6CqFsBBIMGDa+6OzdaVO/uAVXWDWml02Men3CILdI1MbVjoh8ECqYUY7OQ+JJvNN
+ vnliuq5WM3Ghd3jg/LZZrxXjdIginRHFQCjIJYLKpLZWm1/iDFedcfzqRNYmTtqscdCNHW41
+ oT3Z7BmO9xwdjuwBS6nmS6JJwkbf5Ot2QR4pB/DRU7ZwjT1qHe+9r9gF32wXVQatHNGK/VVu
+ sfwOnkdxCWkp/qb2gdQRmZh+SedStWshigH6sNfuHBloF/q+hjMRc8b2m326OZdrbSHwY1Sz
+ vti8Hn7n8NjdHO9LKB7BIdjkA9DA5WsqOuVCzsFNBFVDXDQBEADNkrQYSREUL4D3Gws46JEo
+ Z9HEQOKtkrwjrzlw/tCmqVzERRPvz2Xg8n7+HRCrgqnodIYoUh5WsU84N03KlLueMNsWLJBv
+ BaubYN4JuJIdRr4dS4oyF1/fQAQPHh8Thpiz0SAZFx6iWKB7Qrz3OrGCjTPcW6eiOMheesVS
+ 5hxietSmlin+SilmIAPZHx7n242u6kdHOh+/SyLImKn/dh9RzatVpUKbv34eP1wAGldWsRxb
+ f3WP9pFNObSzI/Bo3kA89Xx2rO2roC+Gq4LeHvo7ptzcLcrqaHUAcZ3CgFG88CnA6z6lBZn0
+ WyewEcPOPdcUB2Q7D/NiUY+HDiV99rAYPJztjeTrBSTnHeSBPb+qn5ZZGQwIdUW9YegxWKvX
+ XHTwB5eMzo/RB6vffwqcnHDoe0q7VgzRRZJwpi6aMIXLfeWZ5Wrwaw2zldFuO4Dt91pFzBSO
+ IpeMtfgb/Pfe/a1WJ/GgaIRIBE+NUqckM+3zJHGmVPqJP/h2Iwv6nw8U+7Yyl6gUBLHFTg2h
+ YnLFJI4Xjg+AX1hHFVKmvl3VBHIsBv0oDcsQWXqY+NaFahT0lRPjYtrTa1v3tem/JoFzZ4B0
+ p27K+qQCF2R96hVvuEyjzBmdq2esyE6zIqftdo4MOJho8uctOiWbwNNq2U9pPWmu4vXVFBYI
+ GmpyNPYzRm0QPwARAQABwsF2BBgBCgAgAhsMFiEEm9B+DgxR+NWWd7dUG5NDfTtBYpsFAmna
+ YUkACgkQG5NDfTtBYptX+BAApg32CkxwNucNEi8WfWA8oKkW0y8YDuY6ORMo9FWNGiT/OTy0
+ vyJrLocrpn86zwfjVp+eCrssPYh8eqJfnWqmYv6ACQtHPYzPZQ3mSo8H97Z01oUxITzCxpXm
+ ZkLgPIqtDPcC2E3dPM/fVxcyowM8XsaMA9wcsaUYrta8toOq2b9tKcjleKMfMrm0gQ9u7wUc
+ QbLkwj6TCLOwucb07GXzLTNF9PZmaDUpKAZjMjmrW+le+SFvQbhamx0rxLWPR0NWntXpbCn+
+ +ACch03p/JyTBVktxFsFyCt7pTPE1kEaeuXBTe/a2D9iQvRxRW19LvuO2e59/u1wYUiH/orz
+ wbIC2S4dBsPAPihL3ztOU1yE86GPyQtSE0kU+/7snnLt4QGi6PChf3t5gnNjAzjUUovO8rgI
+ c+5yN5heq5loYHgK6OQ9OlHzsPHO9e9MOQcKlFycs1pyijFGzDwdNUm/SchK8iWT2QApTx4A
+ K9bCVaboTA2T77QYkRcRJYSsO1alGX0ome/hMLD1daXlkrNUp1HWa3K4iytLRXjCSIorWiGs
+ n+q3krnpXu3TFkA8qtOFZMdnIiFuiq1yLT8hptsV5xh1TA2nsVvSYiaCr3q4s4BKjS/KrLDb
+ qoxzw8ISjdUp4pA85vb6YLCmb39NgidD+7PmAr65lBNveIFynTgsja1rRQ4=
+In-Reply-To: <20260923084627.748920-4-prasad.kumpatla@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Wed, Sep 23, 2026 at 9:08=E2=80=AFAM Mohd Ayaan Anwar
-<mohd.anwar@oss.qualcomm.com> wrote:
->
-> Hi,
->
-> This is an early RFC which adds the XPCS and ETHQOS plumbing required
-> to enable 10 Gigabit Ethernet on the Qualcomm Nord SoC. This is the
-> first time USXGMII together with an external PCS is being supported by
-> the dwmac-qcom-ethqos driver.
->
-> This platform was somewhat tricky to work on, with several new pieces
-> having to come together across the MAC, XPCS and SerDes layers. Any
-> feedback would be appreciated, particularly around the XPCS modelling
-> and the generic stmmac register-layout changes.
->
-> The overall hardware path looks like this:
->
->   +------------------+      +------------------+      +------------------=
-+      +------------------+
->   |    DW25GMAC      | ---> |  Synopsys XPCS   | ---> | QCOM SGMII PHY   =
-| =3D=3D=3D> | Ext PHY / Switch |
->   | + QCOM ETHQOS    |      | + QCOM wrapper   |      |    (SerDes)      =
-|      | USX/10GBASE-R    |
->   +------------------+      +------------------+      +------------------=
-+      +------------------+
->
-> The series can be broadly divided into two areas:
->
-> 1. Qualcomm XPCS support
->
-> Nord integrates a Synopsys DesignWare XPCS, but exposes the PCS,
-> PMA/PMD and MII MMD register regions through separate direct-MMIO
-> windows instead of the standard contiguous or indirect XPCS mappings.
-> Patches 1 through 5 add the binding, generic platform register-access
-> hooks, the Qualcomm MMD-to-MMIO translation, and the runtime-PM handling
-> needed for the CSR clock.
->
-> The XPCS also uses Clause 37 control and status for USXGMII, while the
-> generic XPCS support currently handles USXGMII using Clause 73. Patch 2
-> adds the required Clause 37 USXGMII configuration and link-state path.
->
-> Using a small Qualcomm-specific access layer around the existing XPCS
-> core was the most straightforward way I could find to model this IP.
-> The core already uses synthetic IDs for the NXP integrations and has
-> vendor-specific hooks for other XPCS implementations, so this series
-> follows a similar approach. I am very much open to suggestions if there
-> is a cleaner way to represent the non-standard register mapping.
->
-> 2. DW25GMAC and Qualcomm ETHQOS support
->
-> Patches 6 through 9 add the Nord ETHQOS binding and driver support. The
-> Nord integration has sparse, platform-specific MTL queue and DMA channel
-> addresses, as well as a relocated timestamp register bank. The series
-> therefore adds optional XGMAC register-layout data while preserving the
-> standard layout for existing platforms.
->
-> The ETHQOS driver then selects the XPCS provided through pcs-handle and
-> adds the Nord wrapper programming required for USXGMII, including the
-> EEE clock vote needed for PCS link-up and the platform-specific SerDes
-> loopback control.
->
-> This series has an obvious dependency on Jitendra Vegiraju's DW25GMAC
-> work:
-> https://lore.kernel.org/netdev/20260402213629.1996133-1-jitendra.vegiraju=
-@broadcom.com/
->
-> I understand that a v10 of that series is planned. While bringing up
-> Nord, I also needed a few fixes on top of the DW25GMAC series. Those are
-> not included here; I will share them separately with Jitendra in case
-> they are useful for the next revision.
->
-> Testing:
-> Initial testing was done on the Nord Ride SX platform, where both
-> Ethernet ports connect to the on-board MV-Q6223 switch using fixed-link
-> USXGMII at 10 Gbps. The testing tree included the DW25GMAC dependency
-> and the additional fixups mentioned above.
->
-> Signed-off-by: Mohd Ayaan Anwar <mohd.anwar@oss.qualcomm.com>
-> ---
-> Mohd Ayaan Anwar (9):
->       dt-bindings: net: pcs: add Qualcomm Nord XPCS
->       net: pcs: xpcs: add USXGMII Clause 37 autoneg support
->       net: pcs: xpcs: add custom platform register accessors
->       net: pcs: xpcs: add Qualcomm Nord platform support
->       net: pcs: xpcs: initialize runtime PM as suspended
->       dt-bindings: net: qcom,ethqos: add Qualcomm Nord
->       net: stmmac: support custom XGMAC register layouts
->       net: stmmac: qcom-ethqos: support external PCS
->       net: stmmac: qcom-ethqos: add Qualcomm Nord support
->
->  .../devicetree/bindings/net/pcs/snps,dw-xpcs.yaml  |  17 +++
->  .../devicetree/bindings/net/qcom,ethqos.yaml       |  57 ++++++--
->  .../devicetree/bindings/net/snps,dwmac.yaml        |   2 +
->  drivers/net/ethernet/stmicro/stmmac/common.h       |   1 +
->  .../ethernet/stmicro/stmmac/dwmac-qcom-ethqos.c    | 162 +++++++++++++++=
-+++++-
->  .../net/ethernet/stmicro/stmmac/dwmac-socfpga.c    |   2 +-
->  drivers/net/ethernet/stmicro/stmmac/dwxgmac2.h     |  94 ++++++++----
->  .../net/ethernet/stmicro/stmmac/dwxgmac2_core.c    |  34 +++--
->  drivers/net/ethernet/stmicro/stmmac/dwxgmac2_dma.c | 128 +++++++++------=
--
->  drivers/net/ethernet/stmicro/stmmac/hwif.c         |   5 +-
->  .../net/ethernet/stmicro/stmmac/stmmac_ethtool.c   |   5 +-
->  drivers/net/ethernet/stmicro/stmmac/stmmac_fpe.c   |  15 +-
->  drivers/net/pcs/Makefile                           |   3 +-
->  drivers/net/pcs/pcs-xpcs-plat.c                    |  47 +++++-
->  drivers/net/pcs/pcs-xpcs-qcom.c                    |  86 +++++++++++
->  drivers/net/pcs/pcs-xpcs-qcom.h                    |  16 ++
->  drivers/net/pcs/pcs-xpcs.c                         | 126 +++++++++++++++=
-+
->  drivers/net/pcs/pcs-xpcs.h                         |  15 ++
->  include/linux/pcs/pcs-xpcs.h                       |   2 +
->  include/linux/stmmac.h                             |  11 ++
->  20 files changed, 707 insertions(+), 121 deletions(-)
-> ---
-> base-commit: 6598456d72e48d779445bfec8f72114747f8b8d7
-> change-id: 20260923-qcom_xpcs_nord_emac-bf296eb48e4b
->
-> Best regards,
-> --
-> Mohd Ayaan Anwar <mohd.anwar@oss.qualcomm.com>
->
+On 23/09/2026 10:46, Prasad Kumpatla wrote:
+> diff --git a/Documentation/devicetree/bindings/sound/qcom,lpass-rx-macro.yaml b/Documentation/devicetree/bindings/sound/qcom,lpass-rx-macro.yaml
+> index 6aa8ccd60c01..de65a3159380 100644
+> --- a/Documentation/devicetree/bindings/sound/qcom,lpass-rx-macro.yaml
+> +++ b/Documentation/devicetree/bindings/sound/qcom,lpass-rx-macro.yaml
+> @@ -29,6 +29,9 @@ properties:
+>                - qcom,sm8750-lpass-rx-macro
+>                - qcom,x1e80100-lpass-rx-macro
+>            - const: qcom,sm8550-lpass-rx-macro
+> +      - items:
+> +          - const: qcom,maili-lpass-rx-macro
+> +          - const: qcom,hawi-lpass-rx-macro
 
-Good Job, Mohd
 
-Tested-by: Zhangfei Gao <zhangfei.gao@oss.qualcomm.com>
+You miss hawi compatible used alone. At least on a next from a 18th.
 
-Tested on both IQ10 RRD and Ride
-
-Full test patch is in the git
-https://github.com/zhangfei-gao/kernel-topics/tree/next-9.23
+Best regards,
+Krzysztof
