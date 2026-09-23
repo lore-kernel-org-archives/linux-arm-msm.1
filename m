@@ -1,170 +1,333 @@
 Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 64AD63B3BEC
-	for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 08:38:11 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DE2263C1404
+	for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 08:40:11 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790152724; cv=none; b=IebYnRWzlzLvOydO8AIssfZrAn5YbvSeWGbhd4a9d+5F+X8mQoQrERHIqqrNUgtwauGWafJyLOVp3LGbEo/u2QlDasJXYcMOmnPGwBAcpsoStjJOtumNtiuGCXLMhk+W35vpSBWoBsXP1xsE8ihynnwI4SR5ouKmLkSvcoSXtb0=
+	t=1790152823; cv=none; b=W0FLQrOf96JwrEU2pcTNXjKBLpXS7cXXw7tJPpz+rE1iI2p4K2E3frVCW+8pmUyKor0GZLr6n5acsEVbfhdxIMovoGnyiSUXiwqWn8Yb7l7dxaygwbsPquYaoOVXKfSCi+TBzThb/OONfLyaUm1lyTkR5NbrcvhcsiNR0pi8/Ho=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790152724; c=relaxed/simple;
-	bh=yyO1TjjuZ73WiNg4/ZkbI22ApDsMSWGk15dUuD4XbsM=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=o7AB5p9CyxzR7GI9AL1g9Y/wCdgo3ckzsz5n2VpxGN1Ctu7OWqgnZWlnz40ioUJzom1xOE2gJa/Kh9wwIpEx3JYvGCzI9TZ9uKJrD8/xiYtUI383lflhSI/sUqOijeipMqHD6NRsRgHD5VzJvskgFoCZpPNxYp9AqTLdyzeXgp0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=gtxTY3Lg; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=Zhn2gsns; arc=none smtp.client-ip=205.220.180.131
+	s=arc-20240116; t=1790152823; c=relaxed/simple;
+	bh=2NFyyzgKwY0d5hBYe7MwLGfgwcNpViosAh7hxpTEgkg=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
+	 In-Reply-To:To:Cc; b=qJB9KpOUlUSsjgJszgG1jhnXRjh7lc/nB8X89/iDRZwuFNLWMaJwnwELKVqAXO09+GqPkbxT97q05Q44B5DPWsLGK4+KD2GlW8I9ScDFIGzqWyhSrYoje1mDnHP/w/UbUpl66QcF5lz/d+faU653Mc8wVVZldrmW5FgVBLovCK0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=b4/0w7Jn; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=YAfXAUOQ; arc=none smtp.client-ip=205.220.180.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="gtxTY3Lg";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Zhn2gsns"
-Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68N8Jbbp3178027
-	for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 08:38:07 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="b4/0w7Jn";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="YAfXAUOQ"
+Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68N8Ji4L3332943
+	for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 08:40:04 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-type:date:from:in-reply-to:message-id:mime-version
-	:references:subject:to; s=qcppdkim1; bh=cDb0sGso1ETTrzZaYUFiyqOj
-	3EvRajpbPDzXFX1BXvU=; b=gtxTY3Lgmo0J0t3fEs82mwgejpRgmqwLUASBH8J4
-	Ki5McU9Wa1putLIOnCfeR2umYGTLZ6dtjd1ldPWAKWKVn0+w/voJ4XwJk9Nk10sf
-	W9KLmbiD0eHslzVSQMR3TXdKVYrNK/iPV72ioqmV9QIMX3dFcY7fUPWfIogvp95O
-	tFEn/ctHVnLWvtBvr/G0nS28K6k4pyyo280LToKcJaaM2dqRv6X8Wt30Wd9A/h53
-	oBufjpMbb6PvGqZVBOyfmUhbDS8DKbmYehYdOogamQvaZ+8nS5ZNkAlFHv6jhukm
-	O1op1TidfRMkeIimSZA9w9fkPzmjcp4o89brDadfG0SZ2A==
-Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com [209.85.222.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gux863dsj-1
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	tWqTLAkW4i1E1lvz+cnZILkUyZ8Lt+Lp/+qHaxdTMmQ=; b=b4/0w7Jn9teCNeyn
+	0yOhAx2//r7QxLON/6ARL6fPGV1kt74+4rTxnVgKkgZB2/Y1R7tPF5YPdtUL1BNc
+	UZ/rmGRrqzvONyNWr/Q2cE2ZT5MTxHTUtgo4ICcb8hjKOv6kL4eh1J1ydF86CgXY
+	M/eF+qtYxAWXTzeCPOtdsqXELS/KnuWSxzbbtPIbwMlMY/OY5SO32A6SmV6ZiRrv
+	RbujksR1ebVEeQRLXtCqn5CqkFWr+1wE18fxq4t4DZQtKg/OhBmzImzCVigOzIBs
+	1M0T0452jO9xxBbEGchOM47+xBB34ydJ3ZoBcdADgHkLWhG5LOYzQw03DD2Zam7D
+	qSTYuA==
+Received: from mail-dl1-f69.google.com (mail-dl1-f69.google.com [74.125.82.69])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gux7xudnp-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 08:38:06 +0000 (GMT)
-Received: by mail-qk1-f198.google.com with SMTP id af79cd13be357-939f248907fso70161985a.3
-        for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 01:38:06 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 08:40:03 +0000 (GMT)
+Received: by mail-dl1-f69.google.com with SMTP id a92af1059eb24-14318be7d79so735165c88.0
+        for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 01:40:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1790152685; x=1790757485; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=cDb0sGso1ETTrzZaYUFiyqOj3EvRajpbPDzXFX1BXvU=;
-        b=Zhn2gsnsHhS6Nzv8y+/c+rW3oWJCtPmHGsG1mtV3+NptTYpprjv2hshm/SfvNImBGJ
-         d0EwYgTxKifE0H9DtIrN3yP5751Y8dBuII1gU0e5t/p6yR7RwM/K9KjYk4EXcqTxLm1i
-         9NcjIFiHXY454YqxV0nSlunE7Tg2O1Suc+vZLodVqM3blUUIkEJkXCsOwA4jhegtBNnN
-         O7M30ltE9K9UIKucvWnJbXpM4kYqGnFTOFM4YKwpy4smpoEFV0OFVb5MxzT2fHKXKp9k
-         haiaDJQQ5jxZkGQiQVCDfCm2Pmdn8JqBNFc8VzIgSWy5FaxvQRV8pfEOaYvkzcKSMzv4
-         rlig==
+        d=oss.qualcomm.com; s=google; t=1790152803; x=1790757603; darn=vger.kernel.org;
+        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=tWqTLAkW4i1E1lvz+cnZILkUyZ8Lt+Lp/+qHaxdTMmQ=;
+        b=YAfXAUOQv2eRmDeO3PMJAt06zvJT4wTuXrOYsWthLQTZ2vAr3YsGNqED4lbbTqaoDx
+         V/UjaOpX2attdMpeSVGAawCZ9aJn8WmUpVoe2yo9Fip1FnXfgw5wmmEfd6A1Fru1LtxM
+         WfwG/a7i60UIsXitrYfbme5QMS09nm4Jk6kjefEdScyJyRHzo9e5yIRiePVxMKSImIiO
+         eSnbLrCMGGw4f/vYhnmO+WkspfFeEVuUdxIqhE7RFWGPrbF4c2IrkqfMZkv2tWACj8GN
+         iDULCpVhQBXv3jPqgfTVzviekTCDIxIPXTKMPBHsnhuFTZgBMLnUpm+3fi0hj2yIVjwC
+         4ZzQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790152685; x=1790757485;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:x-gm-gg
+        d=1e100.net; s=20260707; t=1790152803; x=1790757603;
+        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+         :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=cDb0sGso1ETTrzZaYUFiyqOj3EvRajpbPDzXFX1BXvU=;
-        b=13JX6xaxdeIzNExhIL5gT/KFElgeytsf8EEXyoAOaWNfcKIIs4o9UBeRomxm8RZSiV
-         M7rPIhnRfkx6YHYwtRPaXRY8gz5ahRwGe60pY+VSmDSjXKGbMfnOZssVq0p2IMBsNHfv
-         Z1jkQmHG3X7+zsYm8WTp7jTc07UGsLsTAmoorun/fn2qLXNL6cD2Xu51lwU4FSvPJC38
-         FSZvNpDItDY9AWLLbwFb8Jjg/rA0VHtQg4V8VO4KTxbT+v529G0l3JjoLykdyOJWXlpD
-         RPOKSZA4hFbdxAS+4FvKy4buDE0+0Bj80MDw5pYS+IfE1TCb3HNmZlo5sQXkJ+ZLCd4J
-         Wf6w==
-X-Forwarded-Encrypted: i=1; AKwUvBxFg0iGeq0sledN3iAvNnEJJahS86l2iD+MTOUPFzK70/WQEu2RT6I1yMkpqPZa1K2fIrEtgcaa6twrHdhN@vger.kernel.org
-X-Gm-Message-State: AFuF++nttS6ucUHnWGJaH1mJIWzdY7cuN74zqRbBzBoa2RmpyeeA7cDM
-	BW2uQiyldHj9lHxj/01wkeezGXRunjuwBxfdljI43Tu1sgP3TqrT/WL5tIX398gLPDPHjxlAujL
-	OPiscDk2QicbidCD3nxJ1GxNm+qLxehrmJRXqxUuTd7OnjvQ9CwbHmS0Uw3RJIJTWikIrEGtkqD
-	fk
-X-Gm-Gg: AYBFou1sRXArFhaG/4bZgEaTjT/DTI30H/pPQhCOvMCpg6yZWDzJhhFQVHwFO7sj+Yj
-	8zNR7e4H5DvTQE1uz5fJjMl/wrUTALKOAokCgpaqkgNulS+QfVUGtvanEC4jQ8p74tomSUzTpYl
-	Ne+UFfyYoZ1rpA8KyEwD42Ctgq2nqD+K5DeLKlFtem/5hMeXStB+wJYYXZO3CbS28rN1A8IFWSv
-	j26hr++F1puXvhVq6v+kaJ3epTuk0zBnd1+H2mcYCVtFvm+Qg/GQ76QKmj78MqAltZEwcj9TIrA
-	xZcd+FJEKvFRZJyrRYppidEONOWO4AC8LTiVt7892GJsMjox761lOGNxJmlIkqQI81GBufNEte2
-	Xh6hPywftEfuPAHJRQ5xMynWajrwGtVlaQkxggL/mgaKfMXNqD3oa+Cfojic70CXyUDBRz8aOa7
-	Xo6yDeRG1qyiTG
-X-Received: by 2002:a05:620a:4054:b0:93b:c581:2e16 with SMTP id af79cd13be357-93c250cdf90mr298720485a.30.1790152685337;
-        Wed, 23 Sep 2026 01:38:05 -0700 (PDT)
-X-Received: by 2002:a05:620a:4054:b0:93b:c581:2e16 with SMTP id af79cd13be357-93c250cdf90mr298718685a.30.1790152684724;
-        Wed, 23 Sep 2026 01:38:04 -0700 (PDT)
-Received: from umbar.lan (2001-14ba-a073-af00-264b-feff-fe8b-be8a.rev.dnainternet.fi. [2001:14ba:a073:af00:264b:feff:fe8b:be8a])
-        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5b8d859652esm418457e87.83.2026.09.23.01.38.03
+        bh=tWqTLAkW4i1E1lvz+cnZILkUyZ8Lt+Lp/+qHaxdTMmQ=;
+        b=MXhU/tps+DTa49iIFRrn4RNZLGFBMo8v9df21hmcC+/PEBb3v97Ag47MtSCgHQtGIw
+         0Y1yY7dTtoSa3ewSvt8zFBWVw+Qo2SHZpMCM37hRf4sRLil3e2Irt+NI582pgr6B9rkE
+         ldK+ifuxU4nH0hnuA8X292AHypApDSyLudkysWeGSH55vyRcfO/7Xh03S9SPLlfxhkK1
+         BvWlrPQhsBEbTwTngMZ7rmnamFyeu2TS9OcSX2/auN0UQvTQcdWxf02Jw8nD2wIHuFsH
+         xecHtVzWUTWggM2SfKMSha9MIyB7zN7rFOuX1HMvLC0/ZkzQgbcHt6Z/9wohB57TqZg6
+         jpOQ==
+X-Gm-Message-State: AFuF++kB1f9zcS2LvbrfzYBIi8nLDRL+x3HVPlPw+Jmpkr+zXPP4tFCo
+	/PboTaJC0B7FIa426BZ3qS+sKEny1j+w0K4WjY7lh6CUocbNqtXIjyflH0jxMbEpjL7wSSDWjWO
+	9kLSZc/8yOq4slkJR+nd1I11I1v/w/WFg0wjyodhKJxbiwXsvNOYOyxDrkiff4e7B19x3
+X-Gm-Gg: AYBFou36nkS3oH8GrhHwPlVQ6P4QoG8xTnjArIoYBcwr6kHD3oxJud7GaUOGqGdjvPk
+	/Jo0ZT0jwJRDjeFYrngj5dLA3eXzGnXE62CrF05T02jwpDjUF5X6pugqYvbfCNdE24ImHfbQF5L
+	8pJeuG1CRT7lqHBHa+mVQ1o0t838vLdW27PgpGzW0JlPW7i0Km4mSqgQfJ/Pzkbjxyu3v0EE+pe
+	1I6LXe2gxl3f60UbgRKJ9fzHOF2WOVXDfcorTveZdYAaRYHrRW7IbvHiZKraht77BiTiHHDpF67
+	BR2zOtOU8GRD3H89UiuTeFWqqr8Haurp9xm2NsC9IncvJXlE69kPuo5v3Bm8WYOFF/lahlt+gDx
+	PFggfMfAOG0pXRDgVUr9J6Gm4ajYPC1Kd
+X-Received: by 2002:a05:7022:3a08:b0:143:26ed:2dd5 with SMTP id a92af1059eb24-144f917a486mr2880968c88.31.1790152802721;
+        Wed, 23 Sep 2026 01:40:02 -0700 (PDT)
+X-Received: by 2002:a05:7022:3a08:b0:143:26ed:2dd5 with SMTP id a92af1059eb24-144f917a486mr2880932c88.31.1790152802151;
+        Wed, 23 Sep 2026 01:40:02 -0700 (PDT)
+Received: from hu-vkatoch-hyd.qualcomm.com ([202.46.23.25])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-33e96d497e1sm4701275eec.25.2026.09.23.01.39.57
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 23 Sep 2026 01:38:03 -0700 (PDT)
-Date: Wed, 23 Sep 2026 11:38:01 +0300
-From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-To: Fan Wu <fanwu01@zju.edu.cn>
-Cc: Heikki Krogerus <heikki.krogerus@linux.intel.com>,
-        linux-usb@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-        linux-kernel@vger.kernel.org, stable@vger.kernel.org,
-        Song Li <songl@zju.edu.cn>
-Subject: Re: [PATCH] usb: typec: ucsi: yoga-c630: unregister EC notifier
- before UCSI teardown
-Message-ID: <z7v6erddxh2ydm63xavvfb3sckvwsaruife4bz3r7cpwmyg65r@j44ta55rkcgg>
-References: <20260923074828.489562-1-fanwu01@zju.edu.cn>
+        Wed, 23 Sep 2026 01:40:01 -0700 (PDT)
+From: Vinayak Katoch <vinayak.katoch@oss.qualcomm.com>
+Date: Wed, 23 Sep 2026 14:09:33 +0530
+Subject: [PATCH v5 1/3] misc: fastrpc: iterate CB nodes manually instead of
+ of_platform_populate
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260923074828.489562-1-fanwu01@zju.edu.cn>
-X-Proofpoint-GUID: cDBbykI9Tb6-74EqXj1xFFBZScca0JvF
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTIzMDAzNCBTYWx0ZWRfX5zkRku+B3cl7
- Z3/RgN3i8x6tb/CJjZeCa3TN3SXbjLNY7Wl+Nbl0UVopWg/YI7RTNM7Esb/6BILMn4uhDkkj141
- 64Q2lFYloZENuHNNzv4vVub4vFuxQAA=
-X-Proofpoint-ORIG-GUID: cDBbykI9Tb6-74EqXj1xFFBZScca0JvF
-X-Authority-Analysis: v=2.4 cv=eIOGH3p1 c=1 sm=1 tr=0 ts=6ab38fef cx=c_pps
- a=qKBjSQ1v91RyAK45QCPf5w==:117 a=xqWC_Br6kY4A:10 a=kj9zAlcOel0A:10
- a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=_glEPmIy2e8OvE2BGh3C:22 a=VwQbUJbxAAAA:8
- a=EUspDBNiAAAA:8 a=pIWJAyJa_h66JnIjfXsA:9 a=CjuIK1q_8ugA:10
- a=NFOGd7dJGGMPyQGDc5-O:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTIzMDAzNCBTYWx0ZWRfX+PNREhHkfZWs
- nYnMfNW1bH+cG3R4QFvQZnNlSKC19LW7xhqm/QmCr0l+JFbwV4XpyG3JYuXEKBarYYQUJzXZvU6
- wisOv701bqMIPiXz2ubl6CivvXiOd4rZGJR4FsBF7UJbJGRsk1JRkzM1NrecwJNb/BJoMfei3uz
- 6etiPb8UK/xkd8byQx2toxR7If1zYhNuEyURfHKZfzMBOvB6axrVxjeoNjWR6qF1/ratUq7NxhD
- DhrHYV5X1MIKwdX6F8FOUMzJQP1nex5x6pEdIZ8c6VQfYT3x5dIvCSDCf97RJAP7TmEgixl7War
- i8JRq/A8iRA8lFD42qn55ZU1t0i7ylYssDLeSNNSQSg6AaLfLs+GPZSv3rWr97vDKaQVFT5X4dC
- MsYW9N4eLLlUYFleaOfpUxgbR77yYAWY/9qnKGmE3APma/gfE5aGqPbv21JqGy7Z/YypsQhDK3H
- LBhjZ7G2aCdStj7T7Xg==
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260923-dup-sessions-v5-1-e953133a1827@oss.qualcomm.com>
+References: <20260923-dup-sessions-v5-0-e953133a1827@oss.qualcomm.com>
+In-Reply-To: <20260923-dup-sessions-v5-0-e953133a1827@oss.qualcomm.com>
+To: Srinivas Kandagatla <srini@kernel.org>,
+        Amol Maheshwari <amahesh@qti.qualcomm.com>,
+        Arnd Bergmann <arnd@arndb.de>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>,
+        Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>
+Cc: linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org,
+        linux-kernel@vger.kernel.org, Bharath Kumar <bkumar@qti.qualcomm.com>,
+        Chenna Kesava Raju <chennak@qti.qualcomm.com>,
+        devicetree@vger.kernel.org,
+        Vinayak Katoch <vinayak.katoch@oss.qualcomm.com>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1790152791; l=5975;
+ i=vinayak.katoch@oss.qualcomm.com; s=20260609; h=from:subject:message-id;
+ bh=2NFyyzgKwY0d5hBYe7MwLGfgwcNpViosAh7hxpTEgkg=;
+ b=mONT7plOj00vBr7bPCkQ+mur2h34QQjSDvPD2H0kmekMmjOUwMSZwsS3ccbS3yc+6u4KmFLGf
+ bYX09Z4pyaiC54+aur6tmXDbvknthilgX/NO2T3HuR2pJi8XmJEMcSx
+X-Developer-Key: i=vinayak.katoch@oss.qualcomm.com; a=ed25519;
+ pk=UrGeKKxjIjpHZIjsbQKS/8rrVaP9KVGki69pFclCH08=
+X-Proofpoint-GUID: 9m3ycOSXY74YJl6p77T3Code5MI1pCsQ
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTIzMDAzNCBTYWx0ZWRfX2MmeXys7fbWB
+ iSXvLC8DjvsFy6l1+RM4Our9mtQX3i/Tb5XA6iV4Z9Duz+Xnz3LFXOqkAYrWJ96XTeu9E22zD2F
+ MsOlZmnVSPpPlRXqlwf6RLq/Ix5AQk5y4bB1Dcl7ZIeNw0Id7nuMxcLQYr/i89PpVd8ayT/tsKo
+ ATmkIWshElS4JerrzN9PnbB06EWIHT+4fwxnCYfWPGsIpmClIWUgFDY630yJqEAhRShlmClqXm0
+ vGs6VtRmd5Pi5XQWF7y07vQpzDlDHNckunf8cXsIt4BfbC6yumi1bA9o35HQijzfizEzCh8ar2B
+ 96PSLyv9OVJR63dmJQaTsIXJ9IcRd0rLAhHdRL0mCMq9EAoEFy7Bn4Msd3AuNfvsaYNf0bWoGDB
+ /R6t0mk2ihWkOQBuNWUVv/UJZXM1BqStmFlUBCTMkZEQ1hIAfzPR6o4Mr6GTH4iEnPIEa9j5fQ0
+ p2tm8Fg5gUUtxCA6OZw==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTIzMDAzNCBTYWx0ZWRfX4S0K/jSNsKBx
+ lwWjVpel16WhxWhuZoX3o/e4wrQbFml3lPPocUdinxOmeEcZBFRra5qjDIiaq5iiyYjJeyxggFr
+ 5NYM4PdyQ2E4KlS0KDit/clmP8N08xs=
+X-Authority-Analysis: v=2.4 cv=QsDLTlyd c=1 sm=1 tr=0 ts=6ab39063 cx=c_pps
+ a=kVLUcbK0zfr7ocalXnG1qA==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
+ a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22
+ a=EUspDBNiAAAA:8 a=mOEaRXDu9pUODS4UlNoA:9 a=QEXdDO2ut3YA:10
+ a=vr4QvYf-bLy2KjpDp97w:22
+X-Proofpoint-ORIG-GUID: 9m3ycOSXY74YJl6p77T3Code5MI1pCsQ
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-09-23_04,2026-09-21_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 bulkscore=0 malwarescore=0 spamscore=0 lowpriorityscore=0
- phishscore=0 clxscore=1015 priorityscore=1501 suspectscore=0 adultscore=0
+ priorityscore=1501 clxscore=1015 lowpriorityscore=0 phishscore=0 bulkscore=0
+ suspectscore=0 impostorscore=0 adultscore=0 malwarescore=0 spamscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609230034
 
-On Wed, Sep 23, 2026 at 07:48:28AM +0000, Fan Wu wrote:
-> Both yoga_c630_ucsi_remove() and the probe error path call
-> ucsi_unregister() while the EC notifier is still registered.
-> ucsi_unregister() frees the connector array, so an EC event (USB, HPD or
-> UCSI) arriving before yoga_c630_ec_unregister_notify() makes
-> yoga_c630_ucsi_notify() run on freed memory: typec_set_orientation() on the
-> freed port and ucsi_connector_change() queuing work in the freed connector
-> array. USB and HPD events do not depend on the UCSI notification-enable
-> state, so the disable command ucsi_unregister() sends to the EC does not
-> close this window.
-> 
-> Fix this by unregistering the EC notifier before ucsi_unregister() in both
-> paths, restoring the teardown ordering from before the error and remove
-> paths were reworked. blocking_notifier_chain_unregister() waits for a
-> running callback, so once it returns the EC interrupt thread can no longer
-> reach the UCSI instance and ucsi_unregister() can tear the connectors down
-> undisturbed.
-> 
-> The callback is also the only external source that requeues the connector
-> work, so the cancel_work_sync() calls in ucsi_unregister() can no longer
-> race with a new connector-change event.
-> 
-> This issue was found by an in-house static analysis tool.
-> 
-> Fixes: 168c3896f32e ("usb: typec: ucsi: yoga-c630: fix error and remove paths")
-> Cc: stable@vger.kernel.org
-> Co-developed-by: Song Li <songl@zju.edu.cn>
-> Signed-off-by: Song Li <songl@zju.edu.cn>
-> Signed-off-by: Fan Wu <fanwu01@zju.edu.cn>
-> ---
->  drivers/usb/typec/ucsi/ucsi_yoga_c630.c | 4 +++-
->  1 file changed, 3 insertions(+), 1 deletion(-)
-> 
+of_platform_populate() only guarantees that child devices are registered,
+not that their probes have completed before it returns. This creates a
+window where fastrpc_cb_init() may not have run for all context bank
+nodes, leaving the channel context partially initialised.
 
-Reviewed-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+Introduce fastrpc_cb_devices_create() to iterate over child DT nodes
+directly and call fastrpc_cb_init() synchronously for each
+qcom,fastrpc-compute-cb node. This ensures all context banks are fully
+initialised before fastrpc_rpmsg_probe() returns.
 
+Introduce fastrpc_cb_devices_destroy() as the symmetric counterpart.
+Before destroying the CB platform devices, invalidate all sessions under
+the channel lock so that any fastrpc_user still holding a reference to
+the channel context cannot acquire a new session backed by a destroyed
+device.
+
+Since fastrpc_cb_driver is no longer needed as an independent platform
+driver, remove it along with its match table and remove callback. Use
+module_rpmsg_driver() now that only a single driver registration remains.
+
+Signed-off-by: Vinayak Katoch <vinayak.katoch@oss.qualcomm.com>
+---
+ drivers/misc/fastrpc.c | 104 ++++++++++++++++++++++++-------------------------
+ 1 file changed, 52 insertions(+), 52 deletions(-)
+
+diff --git a/drivers/misc/fastrpc.c b/drivers/misc/fastrpc.c
+index af18ff1992ee..f20d3e5ecc81 100644
+--- a/drivers/misc/fastrpc.c
++++ b/drivers/misc/fastrpc.c
+@@ -2333,7 +2333,7 @@ static const struct file_operations fastrpc_fops = {
+ 	.compat_ioctl = fastrpc_device_ioctl,
+ };
+ 
+-static int fastrpc_cb_probe(struct platform_device *pdev)
++static int fastrpc_cb_init(struct platform_device *pdev)
+ {
+ 	struct fastrpc_channel_ctx *cctx;
+ 	struct fastrpc_session_ctx *sess;
+@@ -2355,7 +2355,7 @@ static int fastrpc_cb_probe(struct platform_device *pdev)
+ 	spin_lock_irqsave(&cctx->lock, flags);
+ 	if (cctx->sesscount >= FASTRPC_MAX_SESSIONS) {
+ 		spin_unlock_irqrestore(&cctx->lock, flags);
+-		dev_err(&pdev->dev, "too many sessions\n");
++		dev_err(dev, "too many sessions\n");
+ 		return -ENOSPC;
+ 	}
+ 	dma_bits = cctx->soc_data->dma_addr_bits_default;
+@@ -2389,37 +2389,63 @@ static int fastrpc_cb_probe(struct platform_device *pdev)
+ 	return 0;
+ }
+ 
+-static void fastrpc_cb_remove(struct platform_device *pdev)
++static void fastrpc_cb_devices_destroy(struct rpmsg_device *rpdev)
+ {
+-	struct fastrpc_channel_ctx *cctx = dev_get_drvdata(pdev->dev.parent);
+-	struct fastrpc_session_ctx *sess = dev_get_drvdata(&pdev->dev);
++	struct fastrpc_channel_ctx *cctx = dev_get_drvdata(&rpdev->dev);
++	struct device *rdev = &rpdev->dev;
++	struct platform_device *pdev;
++	struct device_node *np;
+ 	unsigned long flags;
+ 	int i;
+ 
+ 	spin_lock_irqsave(&cctx->lock, flags);
+-	for (i = 0; i < FASTRPC_MAX_SESSIONS; i++) {
+-		if (cctx->session[i].sid == sess->sid) {
+-			cctx->session[i].valid = false;
+-			cctx->sesscount--;
++	for (i = 0; i < cctx->sesscount; i++)
++		cctx->session[i].valid = false;
++	spin_unlock_irqrestore(&cctx->lock, flags);
++
++	for_each_available_child_of_node(rdev->of_node, np) {
++		if (!of_device_is_compatible(np, "qcom,fastrpc-compute-cb")) {
++			of_node_put(np);
++			continue;
+ 		}
++
++		pdev = of_find_device_by_node(np);
++		of_node_put(np);
++		if (pdev)
++			of_platform_device_destroy(&pdev->dev, NULL);
+ 	}
+-	spin_unlock_irqrestore(&cctx->lock, flags);
+ }
+ 
+-static const struct of_device_id fastrpc_match_table[] = {
+-	{ .compatible = "qcom,fastrpc-compute-cb" },
+-	{ }
+-};
++static int fastrpc_cb_devices_create(struct rpmsg_device *rpdev)
++{
++	struct device *rdev = &rpdev->dev;
++	struct platform_device *pdev;
++	struct device_node *np;
++	int err;
+ 
+-static struct platform_driver fastrpc_cb_driver = {
+-	.probe = fastrpc_cb_probe,
+-	.remove = fastrpc_cb_remove,
+-	.driver = {
+-		.name = "qcom,fastrpc-cb",
+-		.of_match_table = fastrpc_match_table,
+-		.suppress_bind_attrs = true,
+-	},
+-};
++	for_each_available_child_of_node(rdev->of_node, np) {
++		if (!of_device_is_compatible(np, "qcom,fastrpc-compute-cb")) {
++			of_node_put(np);
++			continue;
++		}
++
++		pdev = of_platform_device_create(np, NULL, rdev);
++		if (!pdev) {
++			of_node_put(np);
++			fastrpc_cb_devices_destroy(rpdev);
++			return -EINVAL;
++		}
++
++		err = fastrpc_cb_init(pdev);
++		if (err) {
++			of_node_put(np);
++			fastrpc_cb_devices_destroy(rpdev);
++			return err;
++		}
++	}
++
++	return 0;
++}
+ 
+ static int fastrpc_device_register(struct device *dev, struct fastrpc_channel_ctx *cctx,
+ 				   bool is_secured, const char *domain)
+@@ -2639,7 +2665,7 @@ static int fastrpc_rpmsg_probe(struct rpmsg_device *rpdev)
+ 	data->rpdev = rpdev;
+ 	dev_set_drvdata(&rpdev->dev, data);
+ 
+-	err = of_platform_populate(rdev->of_node, NULL, NULL, rdev);
++	err = fastrpc_cb_devices_create(rpdev);
+ 	if (err)
+ 		goto err_deregister_fdev;
+ 
+@@ -2711,7 +2737,7 @@ static void fastrpc_rpmsg_remove(struct rpmsg_device *rpdev)
+ 				&cctx->remote_heap_addr, cctx->remote_heap_size, err);
+ 	}
+ 
+-	of_platform_depopulate(&rpdev->dev);
++	fastrpc_cb_devices_destroy(rpdev);
+ 
+ 	fastrpc_channel_ctx_put(cctx);
+ }
+@@ -2798,33 +2824,7 @@ static struct rpmsg_driver fastrpc_driver = {
+ 	},
+ };
+ 
+-static int fastrpc_init(void)
+-{
+-	int ret;
+-
+-	ret = platform_driver_register(&fastrpc_cb_driver);
+-	if (ret < 0) {
+-		pr_err("fastrpc: failed to register cb driver\n");
+-		return ret;
+-	}
+-
+-	ret = register_rpmsg_driver(&fastrpc_driver);
+-	if (ret < 0) {
+-		pr_err("fastrpc: failed to register rpmsg driver\n");
+-		platform_driver_unregister(&fastrpc_cb_driver);
+-		return ret;
+-	}
+-
+-	return 0;
+-}
+-module_init(fastrpc_init);
+-
+-static void fastrpc_exit(void)
+-{
+-	platform_driver_unregister(&fastrpc_cb_driver);
+-	unregister_rpmsg_driver(&fastrpc_driver);
+-}
+-module_exit(fastrpc_exit);
++module_rpmsg_driver(fastrpc_driver);
+ 
+ MODULE_DESCRIPTION("Qualcomm FastRPC");
+ MODULE_LICENSE("GPL v2");
 
 -- 
-With best wishes
-Dmitry
+2.34.1
+
