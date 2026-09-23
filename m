@@ -1,183 +1,147 @@
-Received: from mail-ed2-f12.google.com (mail-ed2-f12.google.com [74.125.228.76])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DD1F64A0EED
-	for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 10:48:28 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.228.76
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7BC3B49D5A3;
+	Wed, 23 Sep 2026 10:49:55 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790160517; cv=none; b=eLrVx8YzVzROPN/IyeGyeRFO6ZdJgS4RNbRKZSdyMSJyNBX/i0ijykyBUjxy4BzMKu99yiIMIHc5BFu/S5UxVV2GsUnnSuxh6F7Qnkp+oiGk9dUtcqni1Nz83a1oMzkHG75zksGya09t/pk0aLLvxd+vGGa/jpP12dmAGWYC6yg=
+	t=1790160611; cv=none; b=J6xCJTuaP77EiJQC92Jaq3SxQO1+I8rIrMgTCMg8UucScz2EU9LR2IMhEQbptFRbP8wqqvxfpZbq4tbEj3P1ZwThJXx2x1bPXvnPLVB31IObgLLiUzJ0v0VuhI+yFD87+x3eJNN6i/R/AK95Ug9lh/xmWPSRI2/Q8523fPObP/E=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790160517; c=relaxed/simple;
-	bh=00LliydZFbWhN9/JMAzKVWb41FNb6WBNeqfGEFRG2kg=;
-	h=Message-ID:Date:MIME-Version:From:Subject:To:Cc:References:
-	 In-Reply-To:Content-Type; b=QWq1pEhk6mPv4wqWtbaogohcsFvZ7+zJuzQDRZJZl2/fCLyLmHVo9nGDT5jDsg4KwvNRSqO5yzDlbO6n8bgu+0IPIkpA4nv5GW6gtoMYpvL8bvr9sctffzqJKjp1DYVn0C6CN4xkvvJXiht0A42gHG9PEhxel1fMEmbcG5JDCko=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=r0IABQMu; arc=none smtp.client-ip=74.125.228.76
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
+	s=arc-20240116; t=1790160611; c=relaxed/simple;
+	bh=fe2Be574znYaJhn5KcQG9t5eDv/cCcGyQskQTpJ670A=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=nT22mYPWwlk2si3h/IvzsHA7QvLzKNLiCPR9YNomFezuQGXRH2NBzegxtds70YJsQ9qeAFqluE/KBS5PWUeu8Po6LWQ1KrraC3mfMBYyl5IHxN5zooXna7QZKRlnpiCpM/ZmW1s3S17LryJJNl3g5a8Muy+u4ZH16R8XkiHxlqA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=m7zQ4UMF; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="r0IABQMu"
-Received: by mail-ed2-f12.google.com with SMTP id 4fb4d7f45d1cf-6a6063d7dc4so977758a12.3
-        for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 03:48:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1790160502; x=1790765302; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:organization
-         :autocrypt:content-language:references:cc:to:subject:reply-to:from
-         :user-agent:mime-version:date:message-id:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=ZdJeS2NWmvwKi1c64k6v6zLwI+NJ1nsn1DFESP4VK7w=;
-        b=r0IABQMuL0y0pNWY6MK03jt7Yslr3rYLDYj5OJGgmY6DzpjbuBgQ6wRWoY85S7BPcC
-         5Yezmzf+nSS/h6ybdVQAox3g74WwFYGtXU39ziG6HD4hjH/RR5ZhdxulJgfgjJt23dpc
-         ZMIqUCc1tSNHSY2ikxkVh+BHdUC1hd2Hvt/JDzxC5MkzFfCU8ivV1057FVCrhIUhW4gw
-         TngLjSParB4QVbZNuFr3yKIyhQtwyFjCj6GLvyzcy10pZpx55wri9QsrMSuzHHMaFKMk
-         x0OdJiU4qQU0Qs6QchTf9u5KW0gZGKBxmncaUsun8xP4nMkNtdCuUgXTjSjqG9hPKlJs
-         +3Wg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790160502; x=1790765302;
-        h=content-transfer-encoding:content-type:in-reply-to:organization
-         :autocrypt:content-language:references:cc:to:subject:reply-to:from
-         :user-agent:mime-version:date:message-id:x-gm-gg:x-gm-message-state
-         :from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=ZdJeS2NWmvwKi1c64k6v6zLwI+NJ1nsn1DFESP4VK7w=;
-        b=ruA0bPtWKxFmAVsI1B5bBXfcXorQyX/96kzs5L3dIm4oOodeAhRiFuWij6HVQWNKIK
-         JeGThNhzSfrNwpQfQfTs7d4y0SCGUcoQxocxbeQpGpR1bI4HCVuL92nn3DqF8HNF403G
-         CCmG6PnHMHnEcGEbjxZrPJd8exmle5pRd7x6cXy89Orpn+zK1+iFvChX3/KRJ6JOG90C
-         qcdrJhAZ2TikCr7kjbXwvNdfpkbLDKZtMGlx7NkoR1Ds1dl18qOr/0CEhPMnG3gwZkQg
-         GBAt30QpYuw48v1JmfrTDTnoSujySndRTNEfkWpx9I3Ei278VcT2mzkb6rtzK+u9eWhN
-         73GQ==
-X-Forwarded-Encrypted: i=1; AKwUvBxFw1zIBpVxz2TfsSW5Flo9faQwfD57R0xdpgjqzS7blp2D2jK0xvJ3Ew/r4eBlmoT2/RbR0ugRUBohQlPx@vger.kernel.org
-X-Gm-Message-State: AFuF++koOcIfO6TqZtIeXgVLgeF4TDQcKS8JnobrSGHOloFfvQ+KGow2
-	omNfty6+Wy4vFwHRRfojMKYDYvLoLLk9jNoZ3ssDqApjygiAIgMJWs1ZkLKoEqInBag=
-X-Gm-Gg: AYBFou3929FgsbnvH5H3VrcBSC7YMH1B9CDvDRCbJb73ikaE4+DdARTu1IBAm0VbPhZ
-	M3qGg9FhLDDPDnbkYGpG4GGgJErBcWDI+gv0yYhryybtpIk7c2edAVzfDg3F/zoZiw+0InbxB50
-	lHrY4OOlADOeZNJYkWm6uzacScSRhGx5vTYLlR1GtlIcscg642NLEha1LmtFQnO/NCvAFdpPpSg
-	FX/nMx6t/XVrj0SwmhIlQGrQkPkzWDKwnQX47ONoqIuUfI/qUr9xNS2pgGu3nNL6toqTqSAJ4i/
-	DWan5+zq8X8Z/FfP/8pwNUqARsBQxO3QkWQ/gaTz+oDF4PDS0Wwfv9t/4deW98LkKkOT2/Sy4fi
-	oy3gs+hRQaLRzM3POpQ3WMwr6IgAhX8U46GKCrgUWfJ5CEkXL+SwZzcdaoVxlyusu5qIiPYSTd4
-	wONxSEK15bYoBXY5nsDJlFhxBbf1miaSHm/lXFQu/sdg32wO0ERtDj0It3BM8gpKkjWH4d7IUS+
-	RxDfMdEcCn3yROxkQWiRR26hJxv71PN4t7XSyTs4zIMCqUWqhQHIA==
-X-Received: by 2002:a05:6402:52c5:b0:6a9:d0f0:69a0 with SMTP id 4fb4d7f45d1cf-6aab3b0a3e2mr1757911a12.11.1790160502330;
-        Wed, 23 Sep 2026 03:48:22 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:106d:1080:4140:d290:ef49:44ba? ([2a01:e0a:106d:1080:4140:d290:ef49:44ba])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48868266822sm6706162f8f.5.2026.09.23.03.48.21
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 23 Sep 2026 03:48:21 -0700 (PDT)
-Message-ID: <f77e53d3-fb80-4832-aff7-4ab1244ee4a4@linaro.org>
-Date: Wed, 23 Sep 2026 12:48:21 +0200
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="m7zQ4UMF"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 958D31F000FF;
+	Wed, 23 Sep 2026 10:49:52 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1790160594;
+	bh=4TNTZUCyt+nYb86hesWCgcuezHWkYRWLREOW42Tf/CM=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=m7zQ4UMFe+ukGceYuiH955FOdy0QKHYeoWa0yC22y3jlrRmNNI2wdT7zLOBQqNWhG
+	 Hby41LB74rkVFIaMWn0O6rNmalZN2lvD/LR5Q8slMaZCdXRbWiHHwxWp7wKC0KpdIj
+	 s6KeeFHdGyVdjqRZXcQHns0YpHK8Fes68MeEMmOsM9afUqMX7G/kKeCXUOvWELTtSK
+	 Gi3DwUH1XPS0NqyUweQeDXzAy4Cwlq6KWzdntKptrTVdlMvGr1rBp/7xOmmdbM+qvN
+	 8O+zQaD/CuWBHX6+PE749Vrvu5i/3O+s0V6uPrEIDsNDkLicxp9robhaufiPBxQ5Lx
+	 hSowP9phV3gpQ==
+Date: Wed, 23 Sep 2026 11:49:50 +0100
+From: Sudeep Holla <sudeep.holla@kernel.org>
+To: Hans de Goede <johannes.goede@oss.qualcomm.com>,
+	Uwe =?iso-8859-1?Q?Kleine-K=F6nig?= <u.kleine-koenig@baylibre.com>
+Cc: Bjorn Andersson <andersson@kernel.org>,
+	Cristian Marussi <cristian.marussi@arm.com>,
+	Daniel Lezcano <daniel.lezcano@oss.qualcomm.com>,
+	Bjorn Andersson <bjorn.andersson@oss.qualcomm.com>,
+	Frank.Li@kernel.org, arm-scmi@vger.kernel.org,
+	linux-arm-kernel@lists.infradead.org, linux-arm-msm@vger.kernel.org,
+	imx@lists.linux.dev, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v7 1/2] module: add SCMI device table alias support
+Message-ID: <20260923-snake-of-magic-satiation-c3b857@sudeepholla>
+References: <20260918092951.5656-1-johannes.goede@oss.qualcomm.com>
+ <20260918092951.5656-2-johannes.goede@oss.qualcomm.com>
+ <arFKVhlgJge5EZyj@monoceros>
+ <20260923-sceptical-mauve-firefly-f5456d@sudeepholla>
+ <6b5a8300-ebf9-4717-bd39-952e89fc5e78@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: neil.armstrong@linaro.org
-Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [REGRESSION] Resolutions broken after "drm/msm: dsi: fix PLL init
- in bonded mode"
-To: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
- Thorsten Leemhuis <regressions@leemhuis.info>
-Cc: Mohit Dsor <mohit.dsor@oss.qualcomm.com>, linux-arm-msm@vger.kernel.org,
- dri-devel@lists.freedesktop.org, freedreno@lists.freedesktop.org,
- linux-kernel@vger.kernel.org, vishnu.saini@qualcomm.oss.com,
- Linux kernel regressions list <regressions@lists.linux.dev>
-References: <20251027-topic-sm8x50-fix-dsi-bonded-v1-1-a477cd3f907d@linaro.org>
- <ae07cef84AmXK43H@hu-mdsor-hyd.qualcomm.com>
- <wrhuksrzlxw2pjlvjm37dwjuztcv7qs5t6mqiav4ujecwqdkwj@ozbfxpbgaimt>
- <CAJfMnmEVwUwt=wMJ-8HKH1yz9+erWLrRGB+6wVYCdSGDK+_T_Q@mail.gmail.com>
- <114b9be8-1fca-4762-822e-1d53838d5de5@leemhuis.info>
- <o64cxeq5f4ffqpdmbai5cvsmxei2cnw3p6acvu55xl3cj5w3z3@6o6kokszvng7>
- <akt6z1irWlXA5UIy@hu-mdsor-hyd.qualcomm.com>
- <493b8d4c-164e-43c9-93c8-40cc251b1c3b@leemhuis.info>
- <d7v4kwmc42k5ymgdt4mn2qc7dkrf5jj2l5afgyjqrm3pxterl4@guulk22xwlzs>
-Content-Language: en-US, fr
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro
-In-Reply-To: <d7v4kwmc42k5ymgdt4mn2qc7dkrf5jj2l5afgyjqrm3pxterl4@guulk22xwlzs>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
+In-Reply-To: <6b5a8300-ebf9-4717-bd39-952e89fc5e78@oss.qualcomm.com>
 
-Hi,
-
-On 7/8/26 15:31, Dmitry Baryshkov wrote:
-> On Wed, Jul 08, 2026 at 09:26:04AM +0200, Thorsten Leemhuis wrote:
->> On 7/6/26 11:52, Mohit Dsor wrote:
->>> On Wed, Jun 03, 2026 at 03:11:34PM +0300, Dmitry Baryshkov wrote:
->>>> On Wed, Jun 03, 2026 at 11:56:15AM +0200, Thorsten Leemhuis wrote:
->>>>> On 5/4/26 22:09, Mohit Dsor wrote:
->>>>>> Sorry for theÂ late reply. I am attaching clk_summary and reg_dump in
->>>>>> working and non working case. Lilliput is just a normal display working
->>>>>> with hdmi and has 720p as preferred mode. Yes, I was talking about RB3
->>>>>> Gen2 only.
->>>>>
->>>>> Neil, Dmitry, and Mohit: what's the status here? From the outside it
->>>>> looks like this regression is still unfixed with nothing happening for
->>>>> weeks now. Or has progress been made and I just missed it?
->>>>
->>>> Thanks as a reminder. Unfortunately, it takes some more time (and I've
->>>> been a bit overloaded lately). Worst case I will send a revert soon.
->>>>
->>> Just wanted to check if you had a chance to look into this issue and whether there's any update on the investigation from your side.
->> Hmm, no reply. Given that we are entering holiday season and are way
->> past what Linus expects in a situation like this[1] I'd say we should go
->> for a revert, unless some fix shows up really soon now.
-
-Sorry I'm very late to the party, and checked again, reverting this breaks all dual-DSI setup
-on SM8650, and probably other similar SoCs.
-
-Here's a complete log of the breakage which appears on the Ayaneo PS2 running v7.3-rc3 with mainline panel driver: https://gitlab.postmarketos.org/-/snippets/65
-
-I don't see why my fix did break this use case since it reverted the way the dual DSI PHYs
-were initialized to actually allow the dual-DSI setup.
-
-Thanks,
-Neil
-
->>
->> Ciao, Thorsten
+On Wed, Sep 23, 2026 at 12:23:50PM +0200, Hans de Goede wrote:
+> Hi,
 > 
-> Please send a revert.
+> On 23-Sep-26 11:07, Sudeep Holla wrote:
+> > On Mon, Sep 21, 2026 at 05:19:45PM +0200, Uwe Kleine-König wrote:
+> >> On Fri, Sep 18, 2026 at 11:29:50AM +0200, Hans de Goede wrote:
+> >>> From: Bjorn Andersson <bjorn.andersson@oss.qualcomm.com>
+> >>>
+> >>> SCMI client drivers already describe their bus match data with
+> >>> MODULE_DEVICE_TABLE(scmi, ...), but modpost does not know how to consume
+> >>> SCMI device tables. As a result, SCMI modules do not get generated module
+> >>> aliases from their id tables.
+> >>>
+> >>> Move struct scmi_device_id to mod_devicetable.h so it has a fixed layout
+> >>> visible to modpost, add the corresponding generated offsets and teach
+> >>> file2alias to emit scmi:<protocol>:<name> aliases.
+> >>>
+> >>> Use the same stable alias format for SCMI device uevents and sysfs
+> >>> modaliases. The previous string included the instance-specific device
+> >>> name, which is not useful for matching modules.
+> >>>
+> >>> Assisted-by: Codex:GPT-5.5
+> >>> Reviewed-by: Hans de Goede <johannes.goede@oss.qualcomm.com>
+> >>> Tested-by: Hans de Goede <johannes.goede@oss.qualcomm.com>
+> >>> Signed-off-by: Bjorn Andersson <bjorn.andersson@oss.qualcomm.com>
+> >>> Signed-off-by: Hans de Goede <johannes.goede@oss.qualcomm.com>
+> > 
+> > [...]
+> > 
+> >>> diff --git a/include/linux/device-id/scmi.h b/include/linux/device-id/scmi.h
+> >>> new file mode 100644
+> >>> index 000000000000..1b4ccfa9dcc5
+> >>> --- /dev/null
+> >>> +++ b/include/linux/device-id/scmi.h
+> >>> @@ -0,0 +1,17 @@
+> >>> +/* SPDX-License-Identifier: GPL-2.0-only */
+> >>> +#ifndef LINUX_DEVICE_ID_SCMI_H
+> >>> +#define LINUX_DEVICE_ID_SCMI_H
+> >>> +
+> >>> +#ifdef __KERNEL__
+> >>> +#include <linux/types.h>
+> >>> +#endif
+> >>> +
+> >>> +#define SCMI_NAME_SIZE		32
+> >>> +#define SCMI_MODULE_PREFIX	"scmi:"
+> >>> +
+> >>> +struct scmi_device_id {
+> >>> +	__u8 protocol_id;
+> >>> +	char name[SCMI_NAME_SIZE];
+> >>
+> >> I wonder if you tried to keep this a char *. ISTR someone did something
+> >> similar recently and they claimed it worked. That would get rid of the
+> >> artificial name size limit and simplify this patch.
+> >>
+> > 
+> > I agree with this. 
 > 
->>
->> [1] To quote Linus statements from
->> https://www.kernel.org/doc/html/latest/process/handling-regressions.html#on-how-quickly-regressions-should-be-fixed
->>
->> """
->>  From 2026-01-22:
->>
->>   But a user complaining should basically result in an immediate fix -
->>   possibly a "revert and rethink".
->>
->> With a later clarification on 2026-01-28:
->>
->>   It's also worth noting that "immediate" obviously doesn't mean "right
->>   this *second* when the problem has been reported".
->>
->>   But if it's a regression with a known commit that caused it, I think
->>   the rule of thumb should generally be "within a week", preferably
->>   before the next rc.
->> """
+> Ok, so I checked and no other include/linux/device-id/*.h file
+> defines a foo_device_id field with a type of "char *" and
+> then uses that field in scripts/mod/devicetable-offsets.c /
+> scripts/mod/file2alias.c .
 > 
 
+I looked at hda_device_id and its uses. It looks like it does use
+char * and there were loads of drivers initialising the string. I must
+be missing something then ?
+
+> 2 device-id/foo.h headers (dmi, pcmcia) do define a "char *"
+> field, but then do NOT use that to generate a modalias.
+> 
+> So scmi_device_id would be the first to do this.
+> 
+
+Your response made me dig further and I found snd_hdac_codec_modalias()
+which seems to do the magic there.
+
+> Despite that I still gave this a try. Things do compile,
+> but it results in a modalias for the scmi-cpufreq driver
+> of: scmi:13:(null) and auto-loading unsurprisingly does
+> not work.
+> 
+
+Fair enough, looking at snd_hdac_codec_modalias() it sounds right.
+
+Uwe, do you think we need to follow something like snd_hdac_codec_modalias()
+or this size limit is okay ?
+
+-- 
+Regards,
+Sudeep
