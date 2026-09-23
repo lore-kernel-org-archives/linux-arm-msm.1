@@ -1,79 +1,73 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9BC3D351C10
-	for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 07:09:02 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E715D448B97
+	for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 07:09:50 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790147343; cv=none; b=GnTxHqz+Gl/NvFoRd6OIVADQsvunmGGtyN8QiV7UQadL46aeiAaS0K3CaRkUS3tjzOTjBIc2tM1AJ7MsB5YRAZsdrJnv91pzJkdo1qePGVkXZXNJwvJlrHKq+k25Ft9bXlZR72B4w2bEMQ4B9l4jcvljTFw7HRseZ53QhvjGbos=
+	t=1790147393; cv=none; b=I08Q5D/CrUFZvsP4U4eQTAwS5rayv6umvBff3+BcAczdrFic+IDiPHPoFeId5mAq42E13vCcsH3OPpmakLZCQ1Y+b50fCAO1w+k7xXOpONWksyyWx5wKUJAbsucYObXl09a4jOGO8CSGKYGDocQ/5QIdtrYqjV0klwp1nHdVLJc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790147343; c=relaxed/simple;
-	bh=TEDBnX1lzLmQHX4CFyGy7UEUczM3xTnw+yYkHXz3xP4=;
+	s=arc-20240116; t=1790147393; c=relaxed/simple;
+	bh=eHfMOe6yj02YxaPLLtIkd4gQOtdahdLmLAMh8gnz3bg=;
 	h=From:In-Reply-To:MIME-Version:References:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=ED2uLuVKXn6HG+srPUDTdisKiFFC9++5wIeNE1Aj8spbVahu35PIMAdcGZCFwukTkJdAtBeCLJBbR9l9l9k4sduQ1SjJVPGRhsBHUL9fSNrT4OYmidez2+LaXbJDspGsUGr4kZ5yLjV9uzgcmYeXaQWq4qLnbGMVPX0spUNVNWg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=kOYhSaBu; arc=none smtp.client-ip=100.103.45.18
+	 To:Cc:Content-Type; b=NheEg9lFp0LLa3vHmDiYzXT7C/kryE/pzNwuCSevszXd5WJpNt5DQ8okIGnFGrjCn6gJBDFakTcZVs8Qn260NH/gL8qBHh0QAEndO3bgOy2l+v80PLt6IKWlOXxjRHrgDOFvJ3pbkraeGhV872F1ajbZWb7g6Q8f9URWIm6vh2k=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=k6WRnefT; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="kOYhSaBu"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7104B1F0089E
-	for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 07:09:02 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="k6WRnefT"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3A9351F0089A
+	for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 07:09:49 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1790147342;
-	bh=TEDBnX1lzLmQHX4CFyGy7UEUczM3xTnw+yYkHXz3xP4=;
+	s=k20260515; t=1790147389;
+	bh=eHfMOe6yj02YxaPLLtIkd4gQOtdahdLmLAMh8gnz3bg=;
 	h=From:In-Reply-To:References:Date:Subject:To:Cc;
-	b=kOYhSaBuaEMdwZYyUJxUpENL4labCdjRU2gD1CSJLo4ilU/644HDFsUGrDKI5/Uhw
-	 nwwTBTC2VD3u75DuWTwwywxfGtwL67CvaQzZ6UZdSYbNEpL8hs/JfyMC97VP5dYvqA
-	 6wLPY/y8Wgfqsx2g/pOxS8ZaFGCtpjtiCgbrO/rNQtkZliG8uuVjqqpfAqYUS9Fp7o
-	 WH+Gmjh1du3ZEhUwFMy1Zp9cnRCNJKuN1NqakFnODsIP++VJVoiBTHQ+dJkZZ/bRQg
-	 yLCllWZWJEenwBC7aWaFBkxtN/tDLgbUInZ3SLDVNc+y7rBpXuTCuYaDI0kBgK3hg4
-	 xvxaCu9aYTBWQ==
-Received: by mail-lj1-f170.google.com with SMTP id 38308e7fff4ca-3a49a40209dso10586631fa.0
-        for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 00:09:02 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AKwUvByYIGeeHFCbugV5fKEPMofRvY8cQvgvuXxhIXPk1r+x874njX9R0c6OCXSLgE4X/pOwAWRiDNfeXkYHKaBA@vger.kernel.org
-X-Gm-Message-State: AFuF++mjOhMLg31dtfk6TIdcXHzvntJVpX76obrsbyyKFkX5QUtwgyIP
-	x8tGdPWUxN4kffF5QppL794FHpqFkSjhAenxCti4fUVYaodsrAPa8qWZI4NpZq5PH7oGERhMX4A
-	uFh5jky17aTnXZy/Aam5Js1iRHiwJHDDJ1Nuoly36sg==
-X-Received: by 2002:a05:651c:982:b0:3a5:d78c:c0df with SMTP id
- 38308e7fff4ca-3a624d707cemr10895031fa.13.1790147340949; Wed, 23 Sep 2026
- 00:09:00 -0700 (PDT)
+	b=k6WRnefTPBUOG1x03Ga0DPz0yhzIZqAifGXC0g33jzH03dN+Q8zPmfpVL/JWdKp8Z
+	 tzo6oDNE6myn53NNdLOkytHkU4sFatSFSsrhs5RZinoFHLi2pbRQbrbNi/tRzGS3Q1
+	 pUDBjELxM6zUfGTc4YOf/fm9Hdz2lGs+s4yxaABW1seGLQizvzql6hFm0X8tnLYSw3
+	 IFbh9mEJN/Ux3AYpU5AbIZiDj+kAu3aDQFRErMp7P6tC65EBnzT0anS0ut49A9Z/lC
+	 2ZveVFR1bFku3UMc3jYdzUhGmyewHbMQmDsT4WHZ52+Hm+Ps1aMBy3kt0QOOfNabU0
+	 Wvv9EMepHaZZQ==
+Received: by mail-lr2-f40.google.com with SMTP id 38308e7fff4ca-3a5da7416f9so4268551fa.2
+        for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 00:09:49 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AKwUvBzWK3LMMBFnuDr40Uk6mbeXUZvx/MgUiLVGqEoAHKPXI0s+KLNnb9LWNyzDlu5sDHmB09AdZkYqSWkXnSK1@vger.kernel.org
+X-Gm-Message-State: AFuF++lQOTdfmC8ip+UHPI9lCz5sOLDcib9Vvcj8vZWJgq5JQjcz3u4I
+	Sz9P426FcLX8Vb5GEIblumy3Bz7CTPVlVJedyEqGj6P3JhejvQt8LTpAzjgBK2ZlBeGt0RUFgjW
+	QnDhpit1jw6/UFh6nsYQOuKjK/wGlt1D7O0wUlS82zA==
+X-Received: by 2002:a05:651c:1507:b0:3a5:dfd3:41b6 with SMTP id
+ 38308e7fff4ca-3a63056d051mr3233361fa.0.1790147387898; Wed, 23 Sep 2026
+ 00:09:47 -0700 (PDT)
 Received: from 969154062570 named unknown by gmailapi.google.com with
- HTTPREST; Wed, 23 Sep 2026 00:08:59 -0700
+ HTTPREST; Wed, 23 Sep 2026 02:09:46 -0500
 Received: from 969154062570 named unknown by gmailapi.google.com with
- HTTPREST; Wed, 23 Sep 2026 00:08:59 -0700
+ HTTPREST; Wed, 23 Sep 2026 02:09:46 -0500
 From: Bartosz Golaszewski <brgl@kernel.org>
-In-Reply-To: <20260922091735.491481-1-shengchao.guo@oss.qualcomm.com>
+In-Reply-To: <20260922093446.493606-1-shengchao.guo@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260922091735.491481-1-shengchao.guo@oss.qualcomm.com>
-Date: Wed, 23 Sep 2026 00:08:59 -0700
-X-Gmail-Original-Message-ID: <CAMRc=MdmCgbxc+WQHCWvXZ5Wywv+3x7Ncy5kQ5HF=V6u5-gsiQ@mail.gmail.com>
-X-Gm-Features: AcwNN1V-Og3bFufMot9xYEqrGg76kE38VSvV-ukP2Jt5ACNQwZyhsphBMWLukHc
-Message-ID: <CAMRc=MdmCgbxc+WQHCWvXZ5Wywv+3x7Ncy5kQ5HF=V6u5-gsiQ@mail.gmail.com>
-Subject: Re: [PATCH] arm64: dts: qcom: nord: Add LLCC node
+References: <20260922093446.493606-1-shengchao.guo@oss.qualcomm.com>
+Date: Wed, 23 Sep 2026 02:09:46 -0500
+X-Gmail-Original-Message-ID: <CAMRc=Mea4jjSz5L5C0jMiQxovC13xSLODJ7ZGEJomCkjvuBAEA@mail.gmail.com>
+X-Gm-Features: AcwNN1X3aGV2TxSGMG-9SN0VSQVmz27NKmgIHphO1b8cBVjG9WNWFgpOpDyyI7k
+Message-ID: <CAMRc=Mea4jjSz5L5C0jMiQxovC13xSLODJ7ZGEJomCkjvuBAEA@mail.gmail.com>
+Subject: Re: [PATCH] arm64: dts: qcom: nord: Add PMU node
 To: Shawn Guo <shengchao.guo@oss.qualcomm.com>
 Cc: Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>, 
 	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
 	Bartosz Golaszewski <brgl@kernel.org>, devicetree@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, 
-	Anurag Pateriya <anurag.pateriya@oss.qualcomm.com>, Bjorn Andersson <andersson@kernel.org>
+	linux-kernel@vger.kernel.org, Anurag Pateriya <apateriy@qti.qualcomm.com>, 
+	Bjorn Andersson <andersson@kernel.org>
 Content-Type: text/plain; charset="UTF-8"
 
-On Tue, 22 Sep 2026 11:17:35 +0200, Shawn Guo
+On Tue, 22 Sep 2026 11:34:46 +0200, Shawn Guo
 <shengchao.guo@oss.qualcomm.com> said:
-> From: Anurag Pateriya <anurag.pateriya@oss.qualcomm.com>
+> From: Anurag Pateriya <apateriy@qti.qualcomm.com>
 >
-> Add the system cache controller. All sixteen banks are listed, four per
-> DDR slice at 0x100000 strides from slice + 0x800000, followed by the
-> global broadcast OR/AND regions, which the driver expects at the reg
-> indices right after the last bank.
+> Add the top-level pmu node so perf events can be collected on Nord.
 >
-> No ECC interrupt is described, as the Nord interrupt map does not expose
-> one for the LLCC. The driver treats it as optional.
->
-> Signed-off-by: Anurag Pateriya <anurag.pateriya@oss.qualcomm.com>
+> Signed-off-by: Anurag Pateriya <apateriy@qti.qualcomm.com>
 > Signed-off-by: Shawn Guo <shengchao.guo@oss.qualcomm.com>
 > ---
 
