@@ -1,88 +1,88 @@
 Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7DF1C385D61
-	for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 02:42:06 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 20F9D38D406
+	for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 02:42:11 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790131329; cv=none; b=QB6Eh65iX3ZOUWHZMoow1sKtkqk+frOJzrfIEo79EI+ya1D0unXR/CaL/VChmUx/bp7bQgA13RGGMuMHs7sLo6yPeIEpt00OhKuXuLdPZaLwyFluLkx88mP1oh1iwZbH1Eabxw/4BtvdAT4upphyy70FcIR5v+1REtbtwtr7ylk=
+	t=1790131332; cv=none; b=rJFZosGyd5g5jJfK+ityp49rNTdr7RDne32bhmzSGklkt1ssMpz9FbwalLzU/mD220JSyalfAxTkq1ZMsSAn1NafXhelUnaxZcw3lQwtgnFy3JutlpCGX52gatoIseXsjaB0d9JbiX4LoixC1KUK59SPTHWCyjJ4gVCKVsHnfkc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790131329; c=relaxed/simple;
-	bh=QPQurn8wyM8yfsOn+6HKwoOwGyjVC1Ms9RUafI+wxO0=;
+	s=arc-20240116; t=1790131332; c=relaxed/simple;
+	bh=NIhNVuVEby05+ttPZxNAlBHKKYzqjKUQzmxJtSYqNIA=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=GE+wtOLOWILKxLXAxTVWYt6Xmv5X2Tjy7dlSOleQxnEF0hgbFOj6bQdmYungpNL2h+WidIPzzokDLxRfmFT3Z5L0AT4MrJPRC2+FO5/1Mv6YsdWb+sRPZABodjPKwm1nGwwN2hr4KJ+UQR2iUwHJOU50IKSDPNrqbRkGlqq4yiQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=kAnsLlmp; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=NIobdwRe; arc=none smtp.client-ip=205.220.180.131
+	 In-Reply-To:To:Cc; b=qAJxq9ZBflNQ5gHC4umvwgMoAiNx3gL+I2Pyl8m9Y+Kt05n/LC0BcpDjVBLVuWBUYE7Rv4YNyFmlmaLXN+lHD6KHB8UyVS6z6l9s0Qk9mYdcrZjUXvJJQ1WzZn9yzuB7HLOWqccfB3xX4hHl7pl+6IS5MQXXrm5Nbwpj0c4vjGc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=Y0NbSzgp; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=QWN7sBiN; arc=none smtp.client-ip=205.220.180.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="kAnsLlmp";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="NIobdwRe"
-Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68MI731G1509147
-	for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 02:42:05 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="Y0NbSzgp";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="QWN7sBiN"
+Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68MIXU9I268471
+	for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 02:42:10 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	IpaPFIt7znDPfPmnvTWgNacj8ocBLqca5+NXSpghQnI=; b=kAnsLlmph31clxbe
-	s71AEul1HNzOZdjCHUA8nHGZV7AuTno/T5iTulqKLXNvp6OsfRwVguxxNJDjR9IE
-	1esuy2Alxj3A+HoiEMWwZKuMIkBBIn0DDtheqR5iqmXVSP7cL/iA+sJt96+Lx4xH
-	jQX8dZBrtjpPZ32Jf+vMWh75KS1klNBujgZqJ8NlM7EkoVVjpkab/6T+mXo0lGBS
-	LiTjbDvGjXGHjU5xdhlpOeUPVrOOb2MEJM13GS5KEk707pUjpDC2XjIn8YkehrBE
-	kOeUEIabO7f3wT2BGoAF+XeMlg2ZRNaPsFAI7Z4DQDpIptZ7qHhvICgZDXv+m9Ao
-	btBQrw==
-Received: from mail-pj1-f69.google.com (mail-pj1-f69.google.com [209.85.216.69])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gux7xt4h0-1
+	JDCg0tf0ecoYoF2837PPfGTHEgxmlnU2xZXRZ38KHSk=; b=Y0NbSzgp2pj4tK3Y
+	qHXS3CYhp0ak1Ph8qCsMekrwI9HvS8NDedSmubGdGs4bPcCZiRp+Of9MSfPjf74e
+	mgL15cwmga28YSC0hZPKk+Lo0PYbWEbawR2SpGaH2lxy7jCNpk/AW2GvLugr4ukx
+	DCQ5diAKifq5tv1MqJl8c8C3CcdtedjBhHTX6BvrLtsCy9oYr0r6c8T4bfRovDlX
+	Ur/kQPhW82fw2wwR3fdnw/jdbbkbGWq61QxvIBBcgg4bySql1sumbtvUux3Wmv+D
+	fuILK+3SqbHf3MHIketGkp1g9GrmwWkxdU5+Abry0Au0vpXekThGtliZIL/2vIOP
+	5SXf6w==
+Received: from mail-pj1-f71.google.com (mail-pj1-f71.google.com [209.85.216.71])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4guy2c1t3m-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 02:42:05 +0000 (GMT)
-Received: by mail-pj1-f69.google.com with SMTP id 98e67ed59e1d1-38e8fee6af3so448630a91.1
-        for <linux-arm-msm@vger.kernel.org>; Tue, 22 Sep 2026 19:42:04 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 02:42:10 +0000 (GMT)
+Received: by mail-pj1-f71.google.com with SMTP id 98e67ed59e1d1-398dcfabbf8so1147227a91.0
+        for <linux-arm-msm@vger.kernel.org>; Tue, 22 Sep 2026 19:42:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1790131324; x=1790736124; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1790131329; x=1790736129; darn=vger.kernel.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=IpaPFIt7znDPfPmnvTWgNacj8ocBLqca5+NXSpghQnI=;
-        b=NIobdwResq6l5mQuoAohHYjVh72SxeDWANKwjIArvhTUaB0cEzZnRQyddLwN6Waes0
-         Wy9chD9aPTNs+1xXkJYfqb3nT6Sz9DWKrR19440yZjVRxJuCtceQX9YNCoVdZ3q3l+gC
-         oz3wH3/t31MuSBDkmv0+6WM7ufwvp8+a45nF79fZ7Yh77GmW0Zaa0lhvPDyhSB8av5fK
-         /xlQHHmTDObUUNZsm1gB89LwA7W9NxLrbsqRoBDKmyVhwS7mpt+v52pDuBPJ2shAxYkB
-         TpkSy+kOVLEugKvKXXia1FSc7NBmlgq8rMKez7VCipAEdZiihQpr2gdsK3Kc32yJMwPP
-         tAkA==
+        bh=JDCg0tf0ecoYoF2837PPfGTHEgxmlnU2xZXRZ38KHSk=;
+        b=QWN7sBiNvkS7O3f2CRKqFzS86EhTJk3BoWIU4BcKwIiaNtxwtvbkTHL2fPZ6cLuWlJ
+         B6S+jEk2V+kbKkzur7wb26VzfHFd+AP9CfSN8TiJLFA+fQdtjw/oZjfezURSgpmLq+CU
+         oTDXmU4ihdxtfYNwPPKC506RtVDGj8vdjjfBOTKO1ugysfIqDO2HgbOvnRaJiPyUjfwe
+         X28erIiY7avN7wzFs1i5mhIo9IgNzT1tHT0b19xGzv3bmCcJLMRDiWDPILJrWIDyMy5L
+         ruzzQ7cSt6Ujt8hPpivoKy1a/dJacc4JFtrDgkHcLPGXx0L7sGxJ1y81bWrdpLQBWR54
+         xRkA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790131324; x=1790736124;
+        d=1e100.net; s=20260707; t=1790131329; x=1790736129;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=IpaPFIt7znDPfPmnvTWgNacj8ocBLqca5+NXSpghQnI=;
-        b=PXFWuZxT/b0uTOsFOvHwqq3bRWt35lA4DIM4g6ACSgH5vdUQTyMGJ/v8od2HTbWKWj
-         RuxH0M/Bp5BMmH6MUp/k9PnUYghtgUTX+/XSUxSUPLOR8iuzuZEDcDv996xnK5elrLV1
-         zmUfTR8XgpneYrSI2shxBxY8HKaw/ueMiWIS1gODKbjrrrcMYe/DpfhnZWxRsM2EOHHA
-         2yNRd+8SbpKe6SkI2ONGklWQH79xF5d1yKv1oboG/RJvk+g8wjfmrNa593syVeCLLJcv
-         Km0dDeuCPdQGoAFJaID3tqxwvjN9q6cqpoIDWdzj2S0S7y4P1Z2ssRG1kctV+j5RvRs3
-         OCwg==
-X-Forwarded-Encrypted: i=1; AKwUvBwbvWynsZSFEjzAK58PkXkA3DOEd7Je2RwgeHF092F2XGWZsHNCxFDiS0bG/01AMkQwaqZg08WDbcXWpboX@vger.kernel.org
-X-Gm-Message-State: AFuF++mD8yBy1Nql3sHodJ5pllu7aw36rXKN4IO4joxwRt8Lljf/9LzB
-	mDIClk2POTsNblPeLzwBpeqi+h4efm48+sIdK/rGnQqsD+0czmw1UOvlF0OwrSdWNbnKIUDuDuc
-	lD7N9j7Q1k6gPyTlvQtP03zF+U8u4J0QlCJmEVTE0e4edMfnqK9yZ2sPKN+b4uYCY/O/6
-X-Gm-Gg: AYBFou11GUlTYRKfNKo4tk0sYY89c6jvPlIX3AgJIbxJ9Vc8ZyStH0Txi/QNn7q8deB
-	fucr/tM9tFghMaih92nI7Y1DOma/GipcZzm413nWzoUozqnVF4OGV+LOfejoVbw9WnCq1BaC7Me
-	iXaxQqiZWtwKI9QKmBvj3UESPv7fN2bGtLTlySo3JkNdVClmhqg4mXwCMOSf1J1hdJl1mhBHVaw
-	HZ1AJvjS+7HvbOZjbgATK0izFjU6zdy5oalCaL6QCN0oaU6E6Ji9wSTOnjHL6Sdp5lTEwTvRHJ4
-	GotUODdiUDSjCZNQ+EkTWNJszWXHEPErLUhadXGTCNttxisLPysJEqN5SjOOBdWr+e8e0OpsdE7
-	XFX3uxvQvfd2tT9w4hlGqx9ts6dO2+dzvPglE5eD95OCUQ1ucUESplfHlgfoA9Zf7YllNaGLLzw
-	==
-X-Received: by 2002:a17:90b:1c8f:b0:39e:4c80:f67d with SMTP id 98e67ed59e1d1-3a07e5f0054mr1111801a91.28.1790131324063;
-        Tue, 22 Sep 2026 19:42:04 -0700 (PDT)
-X-Received: by 2002:a17:90b:1c8f:b0:39e:4c80:f67d with SMTP id 98e67ed59e1d1-3a07e5f0054mr1111790a91.28.1790131323594;
-        Tue, 22 Sep 2026 19:42:03 -0700 (PDT)
+        bh=JDCg0tf0ecoYoF2837PPfGTHEgxmlnU2xZXRZ38KHSk=;
+        b=qSB7NNK2D2TVIBQvozh81BpXRqbSnogwLCumZJkGIkBo8vmkj8QliujUjJ841i7XIk
+         PXHkPmXvyGfATHC3PKTBJXy1O4v17xZV3dy895exwPNyAesoA14PmUTC0IS0EoKfJ/m/
+         QFtorczGLr154ANgc1RR/LtEt8jRkigFKKhPPMLOz58aC74eeFBhzWq40CJBHCsY46cl
+         hTspsDN2GesxvdSihtoLDhinWMqylqjqf9bMzV3akngQBwq2f1g82epfY6h2fgeFLcpJ
+         bXKJyTI6XhSQV4pTQqb/eYPAhx4qb4ItwbGeRyezUHB7LOomAW8ytG5vBwAp9rNzsUUU
+         dsSg==
+X-Forwarded-Encrypted: i=1; AKwUvBxLhbsCT5CG8KXgOn0NCl6elahusgODjFwUBzxnaNUMFh7TOASmP82i4zKvhYLtWo0tNtQI2BABXe0o4OMX@vger.kernel.org
+X-Gm-Message-State: AFuF++lesBir+gA8znXJ2TfbVc+bHSHYzItCf1PfiGd2oVvfHAbj7bey
+	0F9928yZwaCPWIrcC/4h0zzs9g3j1dTEX8dbkqu9vXF2QTaqZequvdSmFBUt8z90aIl0kt18aIo
+	eeYIbaIPuP7znrmiB/n64462EJTw2MhHs2FCr+IZMZEk+aXfJL2/zDJoeIi74mjd0R8+B
+X-Gm-Gg: AYBFou3nAtFn8oBFhIJBquSSZtJ/70rlH7cpnM2pMBlwRsrFjtjEBGsCZw9wY6kTl4P
+	2DZ6KzLJwkTKrKN4v3+VO+ter0S7U9DMazIjdShKxMezYRcXDesQUCR2e8oZS5LDFxnkewtXozA
+	10dXdZZ6CnWw8+sYrt8+w73YHC3ZZA5uWlAptd+v7UfRmOGa7/FVB0u3poYiYThGqNzN+uYGxGn
+	Mz9R+3IDQN5oZDnoLHA//wbQUOD+YnVeCrSbJf2KmPA5Kh2sAYlADwaOFRqJPe32psUq5OPDGsi
+	87SABRUjsvn7hbcuzftP22TGfIl2Zh3RH4ZuaUwwG8GRpSaBdaczvzauMVT/2Ehg4008QMG+ZqV
+	mNk0wObngVTiEU8/zzUaWR/66Iyv2O/eQc6/jQ00ywgtdejimdAg6r9hPJ24YVHK/HweMpWk9tg
+	WcxpXmW/ci
+X-Received: by 2002:a17:90a:d60e:b0:3a0:4444:ef1e with SMTP id 98e67ed59e1d1-3a07e567098mr1177563a91.29.1790131329201;
+        Tue, 22 Sep 2026 19:42:09 -0700 (PDT)
+X-Received: by 2002:a17:90a:d60e:b0:3a0:4444:ef1e with SMTP id 98e67ed59e1d1-3a07e567098mr1177531a91.29.1790131328795;
+        Tue, 22 Sep 2026 19:42:08 -0700 (PDT)
 Received: from WANGAOW-LAB01.ap.qualcomm.com (tpe-colo-wan-fw-bordernet.qualcomm.com. [103.229.16.4])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3a07ddaf4f5sm2102026a91.4.2026.09.22.19.41.58
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3a07ddaf4f5sm2102026a91.4.2026.09.22.19.42.03
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 22 Sep 2026 19:42:03 -0700 (PDT)
+        Tue, 22 Sep 2026 19:42:08 -0700 (PDT)
 From: Wangao Wang <wangao.wang@oss.qualcomm.com>
-Date: Wed, 23 Sep 2026 10:41:15 +0800
-Subject: [PATCH v2 5/6] arm64: dts: qcom: maili: add iris video codec node
+Date: Wed, 23 Sep 2026 10:41:16 +0800
+Subject: [PATCH v2 6/6] arm64: dts: qcom: maili: enable iris on mtp board
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -91,7 +91,7 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260923-add_iris_for_maili-v2-5-7223738e330d@oss.qualcomm.com>
+Message-Id: <20260923-add_iris_for_maili-v2-6-7223738e330d@oss.qualcomm.com>
 References: <20260923-add_iris_for_maili-v2-0-7223738e330d@oss.qualcomm.com>
 In-Reply-To: <20260923-add_iris_for_maili-v2-0-7223738e330d@oss.qualcomm.com>
 To: Bryan O'Donoghue <bod@kernel.org>,
@@ -109,188 +109,63 @@ Cc: linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
         devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
         Wangao Wang <wangao.wang@oss.qualcomm.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1790131292; l=4558;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1790131292; l=644;
  i=wangao.wang@oss.qualcomm.com; s=20251021; h=from:subject:message-id;
- bh=QPQurn8wyM8yfsOn+6HKwoOwGyjVC1Ms9RUafI+wxO0=;
- b=PSMadDqZFJLc+5rBsQE4d872sy3zJ058vT8gW6DW78+RD+lWBcKiptBIoIMxp0mMTdaMLaWps
- 4/AXZSsweRZCNd2UJzNkbhMgsS7GqfMLvTiMjCpALxy0xRx5BYv48o+
+ bh=NIhNVuVEby05+ttPZxNAlBHKKYzqjKUQzmxJtSYqNIA=;
+ b=8/EFS69F1tqXVU1ZtSteZJh7gbva4OFxGkVdb9rJGsoIxjNhY53t/WOJdVvpRqp6kM0A+qLA9
+ VRcEaK06/fVC6gDNToxw6WydifR5TUoBQ2mQc5+ivy8ahFXMvEFxXG+
 X-Developer-Key: i=wangao.wang@oss.qualcomm.com; a=ed25519;
  pk=bUPgYblBUAsoPyGfssbNR7ZXUSGF8v1VF4FJzSO6/aA=
-X-Proofpoint-GUID: XBdhhs_whNNMXMA9vH9IVb3VAUbKx7C9
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTIzMDAxMCBTYWx0ZWRfXwUbXNTvOAn5U
- F3UbCc270Lee/ZMTj0PRhcV4g7Vt7unKr0jF1yY8sFERfrZEv7WVOoAA9weY4Zt6j0tWZt9Pu6R
- pErSxo3Ojeg2UbbRfK0ObAZGfYtQE5MrjWU2eXNPQxPTFmAV2pbaevoCjd6T0uadgCvoZKDiCAA
- I9Qp8QbzxYaqL4M15MSl7SlNkfmyIjFQlXUUDTp2v+PwduFMCn4wYfi6Toa1cCbihNrRoeuEd7A
- YS+TGvnqESOQlV4vfNAuM18Ie7BuPKBo80CEuIl4k/ac+9/Oia5AMPYgVDaPXpAZwMdvTDo/WCQ
- JyQbp9rKzwlo1K9m8P+iuEdynRUE+OIfDH/SHgT+hmGQrSbqdVgcJHFbwgguXotcBDXEi/Q/EAq
- mdBATipLssnuO7d1c6dXLlyzPG0w8zOapzRW3h+R1vHY+ecXfkfAr2Fs2567qhMAFU1v9mDM6Ed
- h6Zdz+EmykBXPCgRv1A==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTIzMDAxMCBTYWx0ZWRfXwbJIy650fzls
- 9V0gBX0UPi8AsCutqs+rbOfE4/eYkXw1nfo/XVXMt53ZxeaRrLv9H3OWFgWvEcS1srk1siUPgwQ
- Y6YU++M2Fz4/8q2SDWObORdLRW/g9UM=
-X-Authority-Analysis: v=2.4 cv=QsDLTlyd c=1 sm=1 tr=0 ts=6ab33c7d cx=c_pps
- a=vVfyC5vLCtgYJKYeQD43oA==:117 a=nuhDOHQX5FNHPW3J6Bj6AA==:17
+X-Proofpoint-GUID: QAFnxYkVtU6P04GTO3n3EPkyMPwYHt_j
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTIzMDAxMCBTYWx0ZWRfX4Zi1VuEsKSpp
+ qVXSGYgETEyNkteH18aXc6pFy9diLITTyBfpeIDVDA3hyPnLB5Y8WLrGLH9ziorjMPP7x7U/5SF
+ VIFFhX4jsjAprlVTOX/GLX82Lou0wok=
+X-Authority-Analysis: v=2.4 cv=Zsh4uN7G c=1 sm=1 tr=0 ts=6ab33c82 cx=c_pps
+ a=UNFcQwm+pnOIJct1K4W+Mw==:117 a=nuhDOHQX5FNHPW3J6Bj6AA==:17
  a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22
- a=EUspDBNiAAAA:8 a=4Uxp26bCVegRMv0i2ZEA:9 a=QEXdDO2ut3YA:10
- a=rl5im9kqc5Lf4LNbBjHf:22
-X-Proofpoint-ORIG-GUID: XBdhhs_whNNMXMA9vH9IVb3VAUbKx7C9
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22
+ a=EUspDBNiAAAA:8 a=1_ts_jfFenCfOmJzNDUA:9 a=QEXdDO2ut3YA:10
+ a=uKXjsCUrEbL0IQVhDsJ9:22
+X-Proofpoint-ORIG-GUID: QAFnxYkVtU6P04GTO3n3EPkyMPwYHt_j
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTIzMDAxMCBTYWx0ZWRfXx/3W6Kl63KzJ
+ FnhvY16yHWaPvPxMuK+eusXCX0qWPe+EUU4xz7FL3A234dZU47w54j/KFoSgii0Te1X0WYnKvbb
+ 96FNcO1O0jsfTpk96a/gFRXGeKnYb+mOETUWOYz8VC+hDXY/BM2Wa+rPk8/Xyqhil5e/xC8ltW1
+ lUzIST45EZEXgYBDGdrpY2DS5HaTjVSvcfBISRZH3WRiljB+NFWS/YH1W9BsuTvpBwSB+ZuSURs
+ 0upuoqf9e92RneDe0A+j1KaBu4h9lw5Xh+/d2KnZfCbP7B6XEw7jU+Xi/dwFfQtJD0hVP/KoB6B
+ cdqVOqU9bL/0Rl+andVbAsmpKRqjv7qPvA4Dk6CBZm1qUhH/6BBGrXXqe9wJKruqt+KqcPNCaht
+ H2KdEbxDAL3pIsdwIQOVbeNnwlhbvURa7lCUfYzk/JjB2fvYSBzLC1JY9hzNYNoWjrkx9j3hCkp
+ k4d/WA4Pz5i4WMp9X3g==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-09-22_03,2026-09-21_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 clxscore=1015 lowpriorityscore=0 phishscore=0 bulkscore=0
- suspectscore=0 impostorscore=0 adultscore=0 malwarescore=0 spamscore=0
+ impostorscore=0 adultscore=0 clxscore=1015 priorityscore=1501 phishscore=0
+ bulkscore=0 suspectscore=0 malwarescore=0 spamscore=0 lowpriorityscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609230010
 
-Add the iris video codec device node for the maili SoC, describing the
-register space, interrupt, five power domains, eight clocks, two
-interconnect paths for CPU config and video memory bandwidth, IOMMU
-Mappings, and the operating point table covering 240 MHz to 1000 MHz.
+Enable the iris video codec on the maili MTP reference board.
 
 Signed-off-by: Wangao Wang <wangao.wang@oss.qualcomm.com>
 ---
- arch/arm64/boot/dts/qcom/maili.dtsi | 126 ++++++++++++++++++++++++++++++++++++
- 1 file changed, 126 insertions(+)
+ arch/arm64/boot/dts/qcom/maili-mtp.dts | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/arch/arm64/boot/dts/qcom/maili.dtsi b/arch/arm64/boot/dts/qcom/maili.dtsi
-index 886d307e536be6152906e344289d5b3fb290f0a4..3d9792915112554842256534ba4b85adf3a1441a 100644
---- a/arch/arm64/boot/dts/qcom/maili.dtsi
-+++ b/arch/arm64/boot/dts/qcom/maili.dtsi
-@@ -3591,6 +3591,132 @@ ice: crypto@1d88000 {
- 			power-domains = <&gcc GCC_UFS_PHY_GDSC>;
- 		};
+diff --git a/arch/arm64/boot/dts/qcom/maili-mtp.dts b/arch/arm64/boot/dts/qcom/maili-mtp.dts
+index 1fdc91e03271c40640910b57f3187311b6077ea9..88b452ec7e985dc1f1b87a56a16aa2e5dddf96b4 100644
+--- a/arch/arm64/boot/dts/qcom/maili-mtp.dts
++++ b/arch/arm64/boot/dts/qcom/maili-mtp.dts
+@@ -743,6 +743,10 @@ vreg_l7n_3p3: ldo7 {
+ 	};
+ };
  
-+		iris: video-codec@2000000 {
-+			compatible = "qcom,maili-iris";
-+			reg = <0x0 0x02000000 0x0 0xf0000>;
++&iris {
++	status = "okay";
++};
 +
-+			interrupts = <GIC_ESPI 238 IRQ_TYPE_LEVEL_HIGH>;
-+
-+			power-domains = <&videocc VIDEO_CC_MVS0C_GDSC>,
-+					<&videocc VIDEO_CC_MVS0_GDSC>,
-+					<&rpmhpd RPMHPD_MXC>,
-+					<&rpmhpd RPMHPD_MMCX>,
-+					<&videocc VIDEO_CC_MVS0_VPP0_GDSC>;
-+			power-domain-names = "venus",
-+					     "vcodec0",
-+					     "mxc",
-+					     "mmcx",
-+					     "vpp0";
-+
-+			clocks = <&gcc GCC_VIDEO_AXI0_CLK>,
-+				 <&videocc VIDEO_CC_MVS0C_CLK>,
-+				 <&videocc VIDEO_CC_MVS0_CLK>,
-+				 <&gcc GCC_VIDEO_AXI0C_CLK>,
-+				 <&videocc VIDEO_CC_MVS0C_FREERUN_CLK>,
-+				 <&videocc VIDEO_CC_MVS0_FREERUN_CLK>,
-+				 <&videocc VIDEO_CC_MVS0B_CLK>,
-+				 <&videocc VIDEO_CC_MVS0_VPP0_CLK>;
-+			clock-names = "iface",
-+				      "core",
-+				      "vcodec0_core",
-+				      "iface1",
-+				      "core_freerun",
-+				      "vcodec0_core_freerun",
-+				      "vcodec_bse",
-+				      "vcodec_vpp0";
-+
-+			operating-points-v2 = <&iris_opp_table>;
-+
-+			interconnects = <&gem_noc MASTER_APPSS_PROC QCOM_ICC_TAG_ACTIVE_ONLY
-+					 &config_noc SLAVE_IRIS_CFG QCOM_ICC_TAG_ACTIVE_ONLY>,
-+					<&mmss_noc MASTER_VIDEO_MVP QCOM_ICC_TAG_ALWAYS
-+					 &mc_virt SLAVE_EBI1 QCOM_ICC_TAG_ALWAYS>;
-+			interconnect-names = "cpu-cfg",
-+					     "video-mem";
-+
-+			memory-region = <&video_mem>;
-+
-+			resets = <&gcc GCC_VIDEO_AXI0_CLK_ARES>,
-+				 <&gcc GCC_VIDEO_AXI0C_CLK_ARES>,
-+				 <&videocc VIDEO_CC_MVS0C_FREERUN_CLK_ARES>,
-+				 <&videocc VIDEO_CC_MVS0_FREERUN_CLK_ARES>;
-+			reset-names = "bus0",
-+				      "bus1",
-+				      "core",
-+				      "vcodec0_core";
-+
-+			dma-coherent;
-+
-+			#address-cells = <1>;
-+			#size-cells = <1>;
-+			dma-ranges = <0x0 0x0 0x0 0xffc00000>;
-+
-+			status = "disabled";
-+
-+			iris_non_pixel: non-pixel {
-+				iommus = <&apps_smmu 0x1540 0x0000>,
-+					 <&apps_smmu 0x1620 0x0000>,
-+					 <&apps_smmu 0x1544 0x0000>;
-+				iommu-ranges = <0x25800000 0xda400000>;
-+			};
-+
-+			iris_pixel: pixel {
-+				iommus = <&apps_smmu 0x1543 0x0000>;
-+			};
-+
-+			iris_opp_table: opp-table {
-+				compatible = "operating-points-v2";
-+
-+				opp-240000000 {
-+					opp-hz = /bits/ 64 <240000000 240000000 360000000>;
-+					required-opps = <&rpmhpd_opp_low_svs_d2>,
-+							<&rpmhpd_opp_low_svs_d1>;
-+				};
-+
-+				opp-338000000 {
-+					opp-hz = /bits/ 64 <338000000 338000000 507000000>;
-+					required-opps = <&rpmhpd_opp_low_svs_d1>,
-+							<&rpmhpd_opp_low_svs>;
-+				};
-+
-+				opp-420000000 {
-+					opp-hz = /bits/ 64 <420000000 420000000 630000000>;
-+					required-opps = <&rpmhpd_opp_svs>,
-+							<&rpmhpd_opp_svs>;
-+				};
-+
-+				opp-444000000 {
-+					opp-hz = /bits/ 64 <444000000 444000000 666000000>;
-+					required-opps = <&rpmhpd_opp_svs>,
-+							<&rpmhpd_opp_svs_l1>;
-+				};
-+
-+				opp-600000000 {
-+					opp-hz = /bits/ 64 <600000000 533000000 800000000>;
-+					required-opps = <&rpmhpd_opp_svs_l1>,
-+							<&rpmhpd_opp_nom>;
-+				};
-+
-+				opp-630000000 {
-+					opp-hz = /bits/ 64 <630000000 630000000 1104000000>;
-+					required-opps = <&rpmhpd_opp_svs_l1>,
-+							<&rpmhpd_opp_turbo>;
-+				};
-+
-+				opp-800000000 {
-+					opp-hz = /bits/ 64 <800000000 630000000 1260000000>;
-+					required-opps = <&rpmhpd_opp_svs_l1>,
-+							<&rpmhpd_opp_turbo_l1>;
-+				};
-+
-+				opp-1000000000 {
-+					opp-hz = /bits/ 64 <1000000000 800000000 1260000000>;
-+					required-opps = <&rpmhpd_opp_nom>,
-+							<&rpmhpd_opp_turbo_l3>;
-+				};
-+			};
-+		};
-+
- 		videocc: clock-controller@20f0000 {
- 			compatible = "qcom,maili-videocc";
- 			reg = <0x0 0x020f0000 0x0 0x10000>;
+ &pcie0 {
+ 	status = "okay";
+ };
 
 -- 
 2.43.0
