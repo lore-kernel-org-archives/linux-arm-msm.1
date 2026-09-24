@@ -1,80 +1,146 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3900F387590;
-	Thu, 24 Sep 2026 13:08:50 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 227314734CD
+	for <linux-arm-msm@vger.kernel.org>; Thu, 24 Sep 2026 13:11:06 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.129.124
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790255332; cv=none; b=i1SxhMPRfka5XIJ1e0sEC6Wz60GTOLnikcAT/JUMhtj6gdPjbJIDLPLM8JBfP9utaf6KMQikeeQ91Pj1lPiqpaEgLjqcSwoxWqmLuHrm3V+DqawwRJmhfJmQG5DUuRRqqH0b43gOTQfviUSCmeaA5Tlev61Pq6KbKPXFX6yEEeU=
+	t=1790255468; cv=none; b=EQtfQipxqiyIrvz8kHUCXgQ6LEPtGToXBdaBJ5TSGQ/n1BJMyz69dLTS7UuNvaVotkgbhFliKh1is0tLOiiQHaerE2Vx6fHHgek2QCGH03VsI5q9lx1qmlQERZckkCCSQYfLd3FcGiCu5MeRnvHyAwclln1KzQAAfEa5zPyQzlE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790255332; c=relaxed/simple;
-	bh=VZI8N/6gYLzZLpoXfBFDH6LznFXLoUL16QxpdfMrlD8=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=o+dYLAApED8IgvVB272ZesCSACHR2Oh3GSTWZKg47bjaAYLohGLHmutxea1DHonZQi2V21rhOBYUAb/2Hf/m0ifwlFxB0gGajVMYDWUgc/rWQstlTMU833+obx6kyBGhm4VpoEkBeJZt55YgOZjaeROMGVmXgOOYvNqyGxClRoI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Nvc/kL1C; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1790255468; c=relaxed/simple;
+	bh=RpE473KszzH17HYgMUb8LduON/1ifwDjCRqC7DttZcc=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=uh4MatksBvH2GrYOPhbdddOxKSR35K2W0P35Goe9a7nkZvQu5edDY2D19XzqwM3Z9fQO5OrSTwxki9d5GwmHyDM8E01XeWdjLc43ObtzRKPhCqkchimLJtLjYH87eO+Blg9ubXM8F1DmMK0bww15J2Y9f6WEp1ci1Hm9QyfCNyk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=TiDYRlCp; arc=none smtp.client-ip=170.10.129.124
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Nvc/kL1C"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5A7351F000FF;
-	Thu, 24 Sep 2026 13:08:49 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1790255330;
-	bh=JNe0+MEvtNypgipOUMWCXmfWLOPV9rh+tWFM3Th3Ytk=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=Nvc/kL1CW2y0ABPY+myLno+5JzQjxspwUjAueSpk90kyvYN58g/YGGbXFjh9Kw9L6
-	 DZQziEBkhgkvMLbzCVSDhhuqSvHGMhjYVbkgUnZrzb1HpgQxW0dgE0OQnOBH7lXV2C
-	 Fq6zacZvIkdCvQNVxE+vvFWQDrGxPElHMNRZ7G0wpQUlCNZNBwRVeVwXRvbPmWXDHX
-	 Zd7oBib2Qk3lRY55QatoCqQaVy8JkVpgXQIPAoiV02sEK69POoNPzZpmGmRFSJLc9p
-	 FQPo3C7+OTMWtWK9eTOUbXMxxw57T5qQsjnS6TQ9Lwnwi57UNvkIfj9qX+mg+F7CTu
-	 l6ZvWrwQap98g==
-Date: Thu, 24 Sep 2026 15:08:46 +0200
-From: Krzysztof Kozlowski <krzk@kernel.org>
-To: Maxim Storetvedt <mstoretv@cern.ch>
-Cc: andersson@kernel.org, robh@kernel.org, krzk+dt@kernel.org, 
-	conor+dt@kernel.org, marcus@nazgul.ch, marijn.suijten@somainline.org, 
-	linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	abel.vesa@linaro.org, abel.vesa@oss.qualcomm.com, johan@kernel.org, 
-	konradybcio@kernel.org, kirill@korins.ky
-Subject: Re: [PATCH v7 3/3] arm64: dts: qcom: Add hamoa Samsung Galaxy Book4
- Edge devicetrees
-Message-ID: <20260924-curious-sociable-nightingale-66ffaf@quoll>
-References: <20260920184148.31541-1-mstoretv@cern.ch>
- <20260920184148.31541-4-mstoretv@cern.ch>
+	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="TiDYRlCp"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1790255466;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding;
+	bh=wGd/N7e0wZbIXsO++vGg001i2u9cJCsA0SFI/XMX5f0=;
+	b=TiDYRlCpbft74gOW8YqeLcvJ0FIHLt6hKscVfmilk8C3SHpSbyaYEp1Bl+sBkng5CQRnX4
+	sZ+E/HP4nJODiRx3LwsIHfqReIgO3oeteKVP6KTqjlG8ovUxcp0U6+NrUzCRWpvMcc6slg
+	/5qBTWHq923/Eovx4bFJciK+zpU/rfo=
+Received: from mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
+ relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-49-49qdQ0b-PkGh4ytzlUmRVA-1; Thu,
+ 24 Sep 2026 09:11:04 -0400
+X-MC-Unique: 49qdQ0b-PkGh4ytzlUmRVA-1
+X-Mimecast-MFC-AGG-ID: 49qdQ0b-PkGh4ytzlUmRVA_1790255463
+Received: from mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com (mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.93])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS id DCEDB195DE22;
+	Thu, 24 Sep 2026 13:11:02 +0000 (UTC)
+Received: from aesteve-thinkpadp1gen8.rmtes.csb (headnet04.pony-001.prod.iad2.dc.redhat.com [10.2.32.116])
+	by mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS id B7E68180049F;
+	Thu, 24 Sep 2026 13:11:00 +0000 (UTC)
+From: Albert Esteve <aesteve@redhat.com>
+Subject: [PATCH v3 0/4] Add automotive SMEM hardening for Qualcomm
+ platforms
+Date: Thu, 24 Sep 2026 15:10:34 +0200
+Message-Id: <20260924-port-smem-v3-0-fbc2ea81a654@redhat.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <20260920184148.31541-4-mstoretv@cern.ch>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/1WMQQ7CIBQFr9KwFgMUBFx5D+OiwK9l0dIAIZqmd
+ 5c2JtblvLyZBSWIHhK6NguKUHzyYarQnhpkh256AvauMmKEXYiiGs8hZpxGGLEUVFkpreZUoPq
+ fI/T+tbfuj8qDTznE954udFu/FUYOlUIxwY7qjoteqNb0twhu6PLZhhFtmcJ+qib8qLKqGsO1d
+ K61XJk/dV3XD4BM57TeAAAA
+X-Change-ID: 20260819-port-smem-7518c77c9415
+To: Bjorn Andersson <andersson@kernel.org>, 
+ Konrad Dybcio <konradybcio@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org, 
+ Albert Esteve <aesteve@redhat.com>, 
+ Sarannya S <quic_sarannya@oss.qualcomm.com>, 
+ Pranav Mahesh Phansalkar <quic_pphansal@oss.qualcomm.com>, 
+ Sudeepgoud Patil <quic_sudeepgo@oss.qualcomm.com>, 
+ Tony Truong <quic_truong@oss.qualcomm.com>, 
+ Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1790255460; l=2638;
+ i=aesteve@redhat.com; s=20260827; h=from:subject:message-id;
+ bh=RpE473KszzH17HYgMUb8LduON/1ifwDjCRqC7DttZcc=;
+ b=bE5ZoPo5xrvZVwx3zLVrDc64TpTQw4dYhpM8zpMny0FF5UtmrF/JLu9UmZUktgsoIWricpLNZ
+ t2szL1VjO6AA3ZrL2e19dGU1SUIebQGC11VZbpS4wHsixTDQaNP35Gm
+X-Developer-Key: i=aesteve@redhat.com; a=ed25519;
+ pk=zI2RBeZgocwYm3AkJW4CtjoJnKoDZrfBl1xe5Ed6h+U=
+X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.93
 
-On Sun, Sep 20, 2026 at 08:41:04PM +0200, Maxim Storetvedt wrote:
-> Adds devicetrees for the 14-inch and 16-inch hamoa SKUs of the Samsung Galaxy Book4 Edge.
-> 
-> These use a common dtsi derived from nodes that were able to work on Linux
-> from the initial Galaxy Book4 Edge DTS by Marcus:
-> 
-> Link: https://lore.kernel.org/all/p3mhtj2rp6y2ezuwpd2gu7dwx5cbckfu4s4pazcudi4j2wogtr@4yecb2bkeyms/
-> 
-> combined with the patch series the Honor Magicbook Art 14, which shares device similarities:
-> 
-> Link: https://lore.kernel.org/all/20260629154812.9066-1-mail@etehtsea.me/
-> 
-> as well as a few more adjustments on top of that again to get additional features working.
-> Special thanks to Jesse Ahn for helping expand on what would eventually become this dtsi.
-> 
-> Based-on-a-patch-by: Marcus Glocker <marcus@nazgul.ch>
-> Based-on-a-patch-by: Kirill A. Korinsky <kirill@korins.ky>
+The Qualcomm SMEM driver manages shared memory partitions used for
+inter-processor communication on Qualcomm SoCs, including the
+automotive SA8775P platform. Vendor trees carry additional validation
+and partition-enumeration logic that is not yet present in master.
 
-There are no such tags. Don't invent own.
+Patch 1 adds IN_PARTITION_RANGE() for pointer+size checks against a region.
 
-Either they provided SoB for the code you used, or not. If they did,
-then you could take them. Otherwise not and read obligations on your
-side expressed in DCO.
+Patch 2 adds bounds checks when walking private uncached and cached
+entry lists.
 
-Also look at Co-developed tag, if that's applicable.
+Patch 3 validates item payload size and pointer once a matching entry is
+found.
+
+Patch 4 skips multi-remote-host partitions during enumeration. SMEM
+now supports partitions involving more than one remote host, but the
+driver does not implement that case yet.
+
+The first three patches split the original vendor boundary-check change
+so each class of condition can be reviewed on its own. All four are
+based on public vendor patches from Qualcomm [1][2]. Adapted for
+master. In particular:
+
+ - Dropped the xarray partition rework, which is already present in
+   master (79602b750b96c, "soc: qcom: smem: Switch partitions to
+   xarray")
+
+Built on master (Linux 7.3-rc4), and tested (prior to rebase, with
+Linux 7.2.0-rc6+) on Qualcomm SA8775P Ride V3 board. SMEM platform device
+binds and initializes successfully.
+
+[1] https://git.codelinaro.org/clo/la/kernel/qcom/-/commit/3e521f2641c8f01f00fd74a088206942ce23d6d4
+[2] https://git.codelinaro.org/clo/la/kernel/qcom/-/commit/842dd28b0276b3824a607e067b3c20e266bcf230
+
+Signed-off-by: Albert Esteve <aesteve@redhat.com>
+---
+Changes in v3:
+- Rebased to v7.3-rc4
+- Split the overflow/boundary patch into helper, list-walk, and payload
+  validation patches
+- Fixed qcom_smem_get_private() while loop condition
+- Fixed indentations
+- Link to v2: https://lore.kernel.org/r/20260904-port-smem-v2-0-bb497dd3c48b@redhat.com
+
+Changes in v2:
+- Update patch 1 authorship to Sarannya
+- Update all emails from @quicinc.com to @oss.qualcomm.com
+- Make smem.c copyright yearless
+- Link to v1: https://lore.kernel.org/r/20260820-port-smem-v1-0-d19a45f583bf@redhat.com
+
+---
+Sarannya S (3):
+      soc: qcom: smem: add IN_PARTITION_RANGE helper
+      soc: qcom: smem: validate private entry list walks
+      soc: qcom: smem: validate private item payloads
+
+Tony Truong (1):
+      soc: qcom: smem: ignore multi remote host partitions
+
+ drivers/soc/qcom/smem.c | 107 ++++++++++++++++++++++++++++++++++--------------
+ 1 file changed, 76 insertions(+), 31 deletions(-)
+---
+base-commit: 62f4c998b297cf233997a2b4cd6fc2d2df0319c9
+change-id: 20260819-port-smem-7518c77c9415
 
 Best regards,
-Krzysztof
+-- 
+Albert Esteve <aesteve@redhat.com>
 
