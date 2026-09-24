@@ -1,450 +1,341 @@
-Received: from mail-wr2-f31.google.com (mail-wr2-f31.google.com [74.125.225.95])
+Received: from mail-ej2-f12.google.com (mail-ej2-f12.google.com [74.125.228.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 604F34825CE
-	for <linux-arm-msm@vger.kernel.org>; Thu, 24 Sep 2026 13:28:14 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.225.95
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2E87C4908BA
+	for <linux-arm-msm@vger.kernel.org>; Thu, 24 Sep 2026 13:36:12 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.228.140
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790256501; cv=none; b=HUEkh+iiUz5NZpZeW23w/QRzztIV5HpCoshw6qCm1UHlYtgdwbmIJ6Xy0owHcUY6ceQMIE8HDzjrwpoERZFxsPezZqPM1ErU4e/cdz0hT8SgkoCerd3juMVMrXdPuFLzDYjAXAnXc7OBGCXUAjeam3qHHmcw7mtdLZQOzWQaF1M=
+	t=1790256981; cv=none; b=KUQQt5CZhIjmLkzHTWBQsSvsenf7QXvHEv2BkSMF1XvSAMNLfZ3fvowixKN+RsgcYzJXgJ6ktwg1+BCAC6/J5lQzNgaG0iaFXZr+lZsfv5sPE/evCiw8xiYlM4j2K1+kLlOUD4BSQ+cT7QK48/CdHjKewR7qYZR8WkMXhMQLXCA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790256501; c=relaxed/simple;
-	bh=MdgPczoNoNMCkrjEiikVz4RwVL+WmQkIgnq7wNJbwIc=;
-	h=Message-ID:Date:MIME-Version:From:Subject:To:Cc:References:
-	 In-Reply-To:Content-Type; b=nLReAtg92cMKkqleg46a+YWcNw15FSzhon4R0XSDMXDzRteoIbpyWR03D6C5n2T0LW/Lnaeuhbw2rjf/GWe0CKgs9bjaZUA3p4OjYy9p59+q+NJwTVAe0tQ0n6dhwlgI+meKYVNzp8405v5PQ9VQImtfj1JaXfXLe7pA1WprSOM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=u9RyAumt; arc=none smtp.client-ip=74.125.225.95
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
+	s=arc-20240116; t=1790256981; c=relaxed/simple;
+	bh=kfLdGopO3W7+26XI2/lxPrEVNfdmcRBoDST0239sT5I=;
+	h=Mime-Version:Content-Type:Date:Message-Id:Cc:Subject:From:To:
+	 References:In-Reply-To; b=mPM1b4TBkHn4lBhsNSkLI5GzmdjS0jIlxOAxPl1xaUPODGJ1HUSSvUvvGwUcRs++i7oD7XFRxNZhcndeXHvBlsd58ixIV5ZxnXiCelXOLRUgzqxZgsOayKqpEOqmeZ2eZh/TEYUNwDjQUfHQXFWODe48lE1KX6N1ojYCI3TODlA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=fairphone.com; spf=pass smtp.mailfrom=fairphone.com; dkim=pass (2048-bit key) header.d=fairphone.com header.i=@fairphone.com header.b=FE3SXy6y; arc=none smtp.client-ip=74.125.228.140
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=fairphone.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=fairphone.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="u9RyAumt"
-Received: by mail-wr2-f31.google.com with SMTP id ffacd0b85a97d-4843c2790ccso1362242f8f.1
-        for <linux-arm-msm@vger.kernel.org>; Thu, 24 Sep 2026 06:28:14 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=fairphone.com header.i=@fairphone.com header.b="FE3SXy6y"
+Received: by mail-ej2-f12.google.com with SMTP id a640c23a62f3a-c254f55efe5so335077866b.2
+        for <linux-arm-msm@vger.kernel.org>; Thu, 24 Sep 2026 06:36:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1790256490; x=1790861290; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:organization
-         :autocrypt:content-language:references:cc:to:subject:reply-to:from
-         :user-agent:mime-version:date:message-id:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=KufIearRKYFQh9ElqR70cpFACtmBDPR2ZlFhi0r1RQg=;
-        b=u9RyAumta75b0S2k/Sgewdx6FE3sa/lumjgoZcDJ9ZZYxmxw0v0pB3wAapD8jOUVXf
-         cYOL/vdDWcNGCy0my+YRpCmfFPjXyLR4kZPwPZNA0bijhxBz0UzVWwzno5RQR+6dF/ft
-         u2jZXls4oP1QLrbeb2YU2XJbaf4U03j06UujzrsFNvuhmvXWBTCxoXEwze9ai7+f54aK
-         jmged2THyJ/hT4JatMewh7g60nQv68DJQnCLfVXovw7bNxJ9ps3JQtaS4T1r9n5ogJCr
-         T8HGIF80S3FLDZgxIPQymsV2xkFtPVw4DepmCurxZ8gGVhxLsc8JXfSLTi0lddtJKJgh
-         LREg==
+        d=fairphone.com; s=fair; t=1790256968; x=1790861768; darn=vger.kernel.org;
+        h=in-reply-to:references:to:from:subject:cc:message-id:date
+         :content-type:content-transfer-encoding:mime-version:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=qbis09Q+KRjx9IyPuxFMqUf7Bej9ELQ4/FObbQ4rTIM=;
+        b=FE3SXy6yrlv0mV6ujvP+B20NDAyOp+3jBWaldJ8ojs+tdCBQmPzIsSrnXtSUySoqyU
+         SejLQC0/uiX6Xe2Ga4Ev+AnkdwOfmqujtwUuIY5oShZODY0Ykkrl4QpMNXjEqISTAYEI
+         rVN/SlZYsIRwzozXwslJjVsF1x0/PuJjZGhVVABHgxhoaDj6UuOeUoShEG+Og+KzS5Uk
+         06gkicje1NfBpDtCV3xYnCdh2a/Up/RG8v/2EGnrrsJCftDMa/0/Qzceg9D25/I/PTAS
+         0xA2wCIPS6Hvok4Qve5Q/wNi6fo4ZKh88XzgmJvNMpvWfM3uTxbogDcVzQAZwt5c0Erp
+         xWug==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790256490; x=1790861290;
-        h=content-transfer-encoding:content-type:in-reply-to:organization
-         :autocrypt:content-language:references:cc:to:subject:reply-to:from
-         :user-agent:mime-version:date:message-id:x-gm-gg:x-gm-message-state
-         :from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=KufIearRKYFQh9ElqR70cpFACtmBDPR2ZlFhi0r1RQg=;
-        b=BmI4Y+5YkI6mlC2doxWRqmm4+3lmZ1x331W36T8TMl9YR+iz8IVCDZhZO8QEgv4fIs
-         P0tyEKGG0j+VPzO/T22i4YoL13gufTkc8paNfaN8G/4JYgFTAvVOmst/eeOIHocJxcsw
-         GBw2Ujocc/BlczqLf85HRrD4jQvLptoMt5SsJRui6sI4VObTw++bkn2fj236yMrc4200
-         RjQzwvkEwApvr5qTm3aD0UrzYgAY21/VOqXOsHJ6FYJQvPASrR33iDCFRjERzXmlP3RI
-         CdV/8R2dVEw4ofiBy5kanBcr4eCHmtPB1aw1and8uPD97xN9b7zveKF6M1G6dAQIf8mA
-         JlfA==
-X-Forwarded-Encrypted: i=1; AKwUvBwEND6FrK2kf4nVo2UrU2u7BLR3wHJBCtiNCSugy2YwPtb0z7xVhBiiKbL8ZGGSu5qc+d5AWWz8VanSxV6B@vger.kernel.org
-X-Gm-Message-State: AFuF++nlzssVwLOMSkzohI5mqpOn8KES/QMmercRGKop5Pyt5v1w9zJK
-	XeS/aQ9hBvvLI9mNR1Wv6pPOdPUT7VYqVhdCR/h1s42rExZ3KWMAA/1An8XFzx2XloI=
-X-Gm-Gg: AYBFou3tebVFiVcfRAjnkWLrV5Dkb5c5F79NWs9M8p5tXiZvLJ9Id9x6ngZLT2eYOhf
-	3HE1J3T1kkvEIroi9XpLOK/uIFCRjlIeBDtG3/FA05Fv9rEqLLeKa2W/L08PRZcTUkr42pE0Oh+
-	CtkLlzc4LFRh4DKRKtLaIpleOzWGV9AoFiXeFz8UgOYchH/j0X408mskpLXkAIgJPbtvBpC9wCo
-	F4RoVPmZ+6r5Y8iFDkSk2qTc074YGl9SbQtsREiMPRrBS8i/I43zKanZ8xo/6bVqD1YiTqjvDSD
-	KMzyP3CsEQHUs3hGuX/dnv6Wp4a42/ny4gNH+xjETUktB/QWVHHXcEXZccXYLHws+kA8uObjhSo
-	ZYk/zTTRKMNzzNjz668pTfOisrpf0flonf8zsl2uU9LiqBOmhQok/tuC0dYYT0PSxkaOyj0k5mj
-	hWRSG6NETilBx7zJxRDDgzSqOAjTdpC5/4+Za+5FpC/7cPEz7+Gwyeh0b8qTtnehekiR2gpP5CN
-	tZx2QDsXBnn9dZLELZauYyFM65F3KfryGRrn7dOtKT5ihqAxR42hw==
-X-Received: by 2002:a05:600c:4e14:b0:49f:ce78:3563 with SMTP id 5b1f17b1804b1-49fe66f1a7bmr38166695e9.20.1790256489617;
-        Thu, 24 Sep 2026 06:28:09 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:106d:1080:336e:a1a0:8f96:9f7a? ([2a01:e0a:106d:1080:336e:a1a0:8f96:9f7a])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-49fe667ae2fsm66309875e9.13.2026.09.24.06.28.08
+        d=1e100.net; s=20260707; t=1790256968; x=1790861768;
+        h=in-reply-to:references:to:from:subject:cc:message-id:date
+         :content-type:content-transfer-encoding:mime-version:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=qbis09Q+KRjx9IyPuxFMqUf7Bej9ELQ4/FObbQ4rTIM=;
+        b=g+VpzUxBtBRYXsFQFOxLe328o8Rr1VPb7PxzRfGNGdz6DFizfBvV8i+feNg8JbzgUL
+         ZzkYvx/+Iw9P+hFqlzd7NtR0st05AV3OBic/IXT6IDOZCq9lbpCbbYP+jQeepmSxXplS
+         ozM2ZFyUKbsxXGLuRLTfc//5enccRCkA8nH4iCdTm+eRowuEjT5+6O0u6ok4A8dD1Frf
+         OBVu8TJAmVTwccEu8Nf23DPsHWOVBbaJK7OGgV6ZOAqEfFj3w8I67fmB+ZC7wYSq3Bmq
+         buM/ZQU6AX/89+XFq6XCGZy1qmEBHlcCThTufmqZX7aVCXnIv0ICuCQ8/4Lqx97IEXO2
+         +Ztw==
+X-Gm-Message-State: AFuF++nH7NwX3dmSUkVdm/qVqgUetWl1UtiOOTbqALOvbBj7iE3naLXd
+	x+sYhb1KEKb3lQR+aGP3qzyIMdB+5xyUpZTQM/491NPerk76E8QuRVcpamuhxCLrfNQ=
+X-Gm-Gg: AYBFou2OLMI8hI3XxUblBqG8jlkP4kvh70IA8o6/5KFxYf/z11kwfXhN0g0WAO2qEfl
+	ovsL3lqWLa06cMcobviGHNgqCq32Ut+ds6eZTnXI341TaF/gn4h43C3xfOhBLBop4QN+3+3LRBl
+	NRdn8ifoRwoCb0acSTAucC5theW4JeXfbw2IBRFolNdE/cFSIUrLuqxJZ8/UusrOtrGKyeR8P6c
+	e0DDfrC9HwVwH2HDO7syCnTTANpY4Kf1mvctPo02RKasOSno0ACn9+Vx/+iw0XZn4aOuKZ0YlYF
+	eefsuwdFcYvX5NuGnmU5I/8r8/4FpOF7s45ojkafPbze4N8MtxRsRQpMMjs8Ta9t5EtB/4/R1vj
+	pEj3pBVCKE/tLlYoHMIjG+YYUrrU72KyTpTNoVitHQKoqOHHXOk9BQmuz2nxswde1tyDOTGK5DB
+	zz3ES2525GDve9Ytj6XN4llwd49h9UZUMbvi4SuZYxL5r7lNG8x7TE/d0P88/gpFxTSlXATQu3C
+	gy95Pq2uT8=
+X-Received: by 2002:a17:907:3f89:b0:c29:61b9:7b3b with SMTP id a640c23a62f3a-c2ac25b1f23mr204543866b.49.1790256968563;
+        Thu, 24 Sep 2026 06:36:08 -0700 (PDT)
+Received: from localhost ([145.15.244.233])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c2aae6149e6sm294506266b.28.2026.09.24.06.36.06
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 24 Sep 2026 06:28:09 -0700 (PDT)
-Message-ID: <2abce34e-4969-4ce1-9c3d-ec130245bcf7@linaro.org>
-Date: Thu, 24 Sep 2026 15:28:08 +0200
+        Thu, 24 Sep 2026 06:36:08 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH 08/11] drm/panel: s6e3ha8: add Samsung AMB630QY01 (Google
- Pixel 3 XL) panel
-To: david@ixit.cz, Dzmitry Sankouski <dsankouski@gmail.com>,
- Jessica Zhang <jesszhan0024@gmail.com>, David Airlie <airlied@gmail.com>,
- Simona Vetter <simona@ffwll.ch>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
- Conor Dooley <conor+dt@kernel.org>, Bjorn Andersson <andersson@kernel.org>,
- Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>
-Cc: dri-devel@lists.freedesktop.org, devicetree@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org,
- phone-devel@vger.kernel.org
-References: <20260920-crosshatch-panel-v1-0-de6e9512da96@ixit.cz>
- <20260920-crosshatch-panel-v1-8-de6e9512da96@ixit.cz>
-Content-Language: en-US, fr
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro
-In-Reply-To: <20260920-crosshatch-panel-v1-8-de6e9512da96@ixit.cz>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Mime-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Date: Thu, 24 Sep 2026 15:36:05 +0200
+Message-Id: <DLNL4OAG2D1L.2EI2N80LMZV8N@fairphone.com>
+Cc: <linux-arm-msm@vger.kernel.org>, <dri-devel@lists.freedesktop.org>,
+ <freedreno@lists.freedesktop.org>, <linux-kernel@vger.kernel.org>
+Subject: Re: [PATCH] drm/msm/dsi/phy: power up the digital top before
+ starting the 7nm PLL
+From: "Luca Weiss" <luca.weiss@fairphone.com>
+To: "Dmitry Baryshkov" <dmitry.baryshkov@oss.qualcomm.com>, "Rob Clark"
+ <robin.clark@oss.qualcomm.com>, "Dmitry Baryshkov" <lumag@kernel.org>,
+ "Abhinav Kumar" <abhinav.kumar@linux.dev>, "Jessica Zhang"
+ <jesszhan0024@gmail.com>, "Sean Paul" <sean@poorly.run>, "Marijn Suijten"
+ <marijn.suijten@somainline.org>, "David Airlie" <airlied@gmail.com>,
+ "Simona Vetter" <simona@ffwll.ch>, "Jonathan Marek" <jonathan@marek.ca>,
+ "Val Packett" <val@packett.cool>, "Bjorn Andersson" <andersson@kernel.org>
+X-Mailer: aerc 0.22.0-0-gc2f86b7abde3-dirty
+References: <20260924-dsi-7nm-pll-digtop-v1-1-c2b24c8e218d@oss.qualcomm.com>
+In-Reply-To: <20260924-dsi-7nm-pll-digtop-v1-1-c2b24c8e218d@oss.qualcomm.com>
 
-On 9/20/26 13:05, David Heidelberg via B4 Relay wrote:
-> From: David Heidelberg <david@ixit.cz>
-> 
-> The Google Pixel 3 XL (crosshatch) uses a Samsung AMB630QY01 6.3"
-> 1440x2960 flexible AMOLED panel, driven by the same S6E3HA8 DDIC as
-> the Galaxy S9 panel this driver already supports.
-> 
-> The init/teardown sequences and timings are taken from the downstream
-> dsi-panel-s6e3ha8-dsc-wqhd-cmd.dtsi (Google bluecross kernel). The
-> downstream DSI host neither appends EOT packets nor keeps the clock
-> lane in HS, so mirror that with the corresponding mode flags, and set
-> the RAM window explicitly since the kernel DSI host never sends the
-> column/page addresses the downstream one does.
-> 
-> Unlike the S9 panel, brightness is controlled with standard DCS
-> commands (10-bit), so register a backlight device for it. Brightness
-> readback is intentionally not implemented: DCS reads wedge the DSI
-> host command engine and take the display pipeline down with it.
-> 
-> Cosmtetics: update Copyright header and add myself.
+Hi Dmitry,
 
-=> Cosmetics
+On Thu Sep 24, 2026 at 2:51 AM CEST, Dmitry Baryshkov wrote:
+> dsi_pll_7nm_vco_prepare() de-asserts PLL_SHUTDOWNB and starts the PLL,
+> but leaves the PHY digital top powered down; only dsi_7nm_phy_enable()
+> sets DIGTOP_PWRDN_B.  The PLL cannot lock in that state.  This went
+> unnoticed for as long as the PLL was only ever prepared from the DSI
+> host's enable path, after the PHY had been enabled.
+>
+> Since commit acf7a91d0b0e ("clk: qcom: dispcc-sm8250: Enable parents for
+> pixel clocks") the clock framework enables the PHY PLL on its own while
+> applying the DT's assigned-clock-parents from of_clk_set_defaults(), at
+> probe time, before the PHY has been touched.  The lock fails, the failed
+> enable leaves the pixel clock with an unbalanced enable count, and the
+> retries on every probe attempt stall the boot for tens of seconds:
+>
+>   DSI PLL(0) lock failed, status=3D0x00000000
+>   PLL(0) lock failed
+>   dsi0_phy_pll_out_dsiclk already disabled
+>   WARNING: drivers/clk/clk.c:1188 at clk_core_disable+0x244/0x24c
+>    clk_core_disable
+>    __clk_set_parent_after
+>    clk_core_set_parent_nolock
+>    clk_set_parent
+>    of_clk_set_defaults
+>    platform_probe
+>
+> CMN_CTRL_0 reads 0x20 at the failing attempt: PLL_SHUTDOWNB set,
+> DIGTOP_PWRDN_B clear.  Setting DIGTOP_PWRDN_B alone makes the same PLL
+> lock, with no rate change and no other register touched.
+>
+> Power up the digital top together with the PLL bias, and power it down
+> again with it.  The normal enable path is unaffected: dsi_7nm_phy_enable(=
+)
+> holds the bias reference and writes CMN_CTRL_0 in full anyway.
 
-> 
+FWIW the same fix seems to help on the 10nm with this error on bootup
+
+[    0.503085] msm_dsi_phy ae94400.phy: [drm:dsi_pll_10nm_vco_prepare] *ERR=
+OR* DSI PLL(0) lock failed, status=3D0x00000000
+[    0.503168] msm_dsi_phy ae94400.phy: [drm:dsi_pll_10nm_vco_prepare] *ERR=
+OR* PLL(0) lock failed
+
+I've also ported more commits from 7nm to 10nm locally, will send them
+soon, since anyway they should be good fixes and code quality
+improvements
+
+drm/msm/dsi_phy_10nm: Protect PHY_CMN_CLK_CFG0 updated from driver side
+drm/msm/dsi_phy_10nm: Protect PHY_CMN_CLK_CFG1 against clock driver
+drm/msm/dsi_phy_10nm: Do not overwite PHY_CMN_CLK_CFG1 when choosing bitclk=
+ source
+drm/msm/dsi_phy_10nm: Define PHY_CMN_CLK_CFG[01] bitfields and simplify sav=
+ing
+drm/msm/dsi_phy_10nm: Define PHY_CMN_CTRL_0 bitfields
+drm/msm/dsi_phy_10nm: Fix reading zero as PLL rates when unprepared
+
+Unfortunately some other warnings/errors still persist on bootup that I
+can't figure out... maybe you have some idea?
+
+If not, I don't want to bring this thread too much offtopic :)
+
+[    1.197104] ------------[ cut here ]------------
+[    1.197113] dsi0_pll_bit_clk: Zero divisor and CLK_DIVIDER_ALLOW_ZERO no=
+t set
+[    1.197134] WARNING: drivers/clk/clk-divider.c:145 at divider_recalc_rat=
+e+0xac/0xd4, CPU#0: kworker/u32:0/12
+[    1.197150] Modules linked in:
+[    1.197160] CPU: 0 UID: 0 PID: 12 Comm: kworker/u32:0 Not tainted 7.2.0-=
+00088-gddc402c24fff #86 PREEMPTLAZY=20
+[    1.197166] Hardware name: Fairphone 4 (DT)
+[    1.197170] Workqueue: events_unbound deferred_probe_work_func
+[    1.197181] pstate: 60400005 (nZCv daif +PAN -UAO -TCO -DIT -SSBS BTYPE=
+=3D--)
+[    1.197186] pc : divider_recalc_rate+0xac/0xd4
+[    1.197190] lr : divider_recalc_rate+0xac/0xd4
+[    1.197195] sp : ffff8000800b2720
+[    1.197197] x29: ffff8000800b2720 x28: ffff0000858b9080 x27: 00000000000=
+00000
+[    1.197204] x26: ffff0000859eb5c0 x25: 0000000000000000 x24: 00000000072=
+a88a0
+[    1.197211] x23: ffff000080394c10 x22: ffff0000859eac00 x21: ffff000080a=
+9fe00
+[    1.197217] x20: 0000000072a88a00 x19: ffff000084c92400 x18: fffffffffff=
+e9898
+[    1.197224] x17: 000000040044ffff x16: 045000f2b5503510 x15: fffffffffff=
+e9848
+[    1.197232] x14: 0000000000000050 x13: 0a74657320746f6e x12: 204f52455a5=
+f574f
+[    1.197238] x11: ffffd97c73dedd58 x10: 00000000000001fa x9 : ffffd97c73d=
+edd58
+[    1.197245] x8 : 3fffffffffffefff x7 : ffffd97c73e45d58 x6 : 00000000000=
+00000
+[    1.197251] x5 : 0000000000000001 x4 : 0000000000000000 x3 : 00000000fff=
+fffff
+[    1.197257] x2 : 0000000000000000 x1 : 0000000000000000 x0 : ffff0000801=
+c0000
+[    1.197265] Call trace:
+[    1.197268]  divider_recalc_rate+0xac/0xd4 (P)
+[    1.197275]  clk_divider_recalc_rate+0x58/0x80
+[    1.197279]  clk_recalc+0x74/0xc0
+[    1.197287]  clk_calc_subtree+0x50/0x80
+[    1.197293]  clk_calc_subtree+0x68/0x80
+[    1.197298]  clk_calc_new_rates+0x1a8/0x208
+[    1.197305]  clk_calc_new_rates+0x12c/0x208
+[    1.197311]  clk_calc_new_rates+0x12c/0x208
+[    1.197316]  clk_calc_new_rates+0x12c/0x208
+[    1.197323]  clk_calc_new_rates+0x12c/0x208
+[    1.197329]  clk_calc_new_rates+0x18c/0x208
+[    1.197335]  clk_core_set_rate_nolock+0xc0/0x2d0
+[    1.197340]  clk_set_rate+0x38/0x14c
+[    1.197344]  _set_opp+0x140/0x5c0
+[    1.197352]  dev_pm_opp_set_rate+0x110/0x2f4
+[    1.197358]  dsi_link_clk_set_rate_6g+0x44/0x100
+[    1.197366]  msm_dsi_host_power_on+0xb8/0x99c
+[    1.197371]  dsi_mgr_bridge_pre_enable+0x19c/0x3c0
+[    1.197376]  drm_atomic_bridge_call_pre_enable+0x40/0x54
+[    1.197384]  drm_atomic_bridge_chain_pre_enable+0xe0/0x14c
+[    1.197390]  drm_atomic_helper_commit_encoder_bridge_pre_enable+0xb4/0xf=
+c
+[    1.197399]  drm_atomic_helper_commit_modeset_enables+0x28/0x58
+[    1.197406]  msm_atomic_commit_tail+0x1ac/0x55c
+[    1.197412]  commit_tail+0xa4/0x1a0
+[    1.197416]  drm_atomic_helper_commit+0x178/0x1a0
+[    1.197421]  drm_atomic_commit+0x8c/0xd0
+[    1.197427]  drm_client_modeset_commit_atomic+0x214/0x280
+[    1.197434]  drm_client_modeset_commit_locked+0x60/0x178
+[    1.197442]  drm_client_modeset_commit+0x2c/0x60
+[    1.197448]  __drm_fb_helper_restore_fbdev_mode_unlocked.part.0+0x84/0x8=
+c
+[    1.197456]  drm_fb_helper_set_par+0x58/0x74
+[    1.197462]  fbcon_init+0x4c0/0x4e4
+[    1.197470]  visual_init+0xb4/0x104
+[    1.197478]  do_bind_con_driver.isra.0+0x1c4/0x360
+[    1.197483]  do_take_over_console+0x1c0/0x214
+[    1.197487]  do_fbcon_takeover+0x78/0xf4
+[    1.197493]  fbcon_fb_registered+0x17c/0x1e8
+[    1.197498]  do_register_framebuffer+0x19c/0x250
+[    1.197504]  register_framebuffer+0x28/0x50
+[    1.197509]  __drm_fb_helper_initial_config_and_unlock+0x324/0x5a0
+[    1.197516]  drm_fb_helper_initial_config+0x38/0x44
+[    1.197523]  drm_fbdev_client_hotplug+0x7c/0xd4
+[    1.197529]  drm_client_register+0x58/0x9c
+[    1.197535]  drm_fbdev_client_setup+0xa4/0x1c0
+[    1.197540]  drm_client_setup+0xac/0xe0
+[    1.197546]  msm_drm_kms_post_init+0x28/0x40
+[    1.197552]  msm_drm_init+0x15c/0x1d4
+[    1.197558]  msm_drm_bind+0x48/0x60
+[    1.197562]  try_to_bring_up_aggregate_device+0x16c/0x1e0
+[    1.197569]  __component_add+0xa4/0x170
+[    1.197574]  component_add+0x14/0x20
+[    1.197579]  dsi_dev_attach+0x20/0x38
+[    1.197585]  dsi_host_attach+0x140/0x158
+[    1.197591]  mipi_dsi_attach+0x2c/0x50
+[    1.197596]  hx83112a_probe+0xec/0x1bc
+[    1.197601]  mipi_dsi_drv_probe+0x1c/0x28
+[    1.197606]  really_probe+0xbc/0x2c0
+[    1.197612]  __driver_probe_device+0x118/0x16c
+[    1.197618]  driver_probe_device+0x3c/0x120
+[    1.197623]  __device_attach_driver+0xa4/0x108
+[    1.197628]  bus_for_each_drv+0x84/0xe4
+[    1.197633]  __device_attach+0x9c/0x1a0
+[    1.197639]  device_initial_probe+0x54/0x5c
+[    1.197644]  bus_probe_device+0x34/0x98
+[    1.197649]  device_add+0x5c4/0x7dc
+[    1.197654]  mipi_dsi_device_register_full+0xd8/0x168
+[    1.197659]  mipi_dsi_host_register+0xb8/0x178
+[    1.197663]  msm_dsi_host_register+0x3c/0x60
+[    1.197668]  msm_dsi_manager_register+0x148/0x220
+[    1.197673]  dsi_dev_probe+0x18c/0x220
+[    1.197679]  platform_probe+0x80/0xac
+[    1.197686]  really_probe+0xbc/0x2c0
+[    1.197691]  __driver_probe_device+0x118/0x16c
+[    1.197697]  driver_probe_device+0x3c/0x120
+[    1.197703]  __device_attach_driver+0xa4/0x108
+[    1.197708]  bus_for_each_drv+0x84/0xe4
+[    1.197713]  __device_attach+0x9c/0x1a0
+[    1.197718]  device_initial_probe+0x54/0x5c
+[    1.197723]  bus_probe_device+0x34/0x98
+[    1.197729]  deferred_probe_work_func+0x88/0xc0
+[    1.197734]  process_one_work+0x150/0x280
+[    1.197743]  worker_thread+0x18c/0x2e0
+[    1.197748]  kthread+0x11c/0x13c
+[    1.197754]  ret_from_fork+0x10/0x20
+[    1.197761] ---[ end trace 0000000000000000 ]---
+[    1.197768] ------------[ cut here ]------------
+[    1.197769] dsi0_phy_pll_out_dsiclk: Zero divisor and CLK_DIVIDER_ALLOW_=
+ZERO not set
+[    1.197785] WARNING: drivers/clk/clk-divider.c:145 at divider_recalc_rat=
+e+0xac/0xd4, CPU#0: kworker/u32:0/12
+
+Regards
+Luca
+
+>
+> Fixes: 1ef7c99d145c ("drm/msm/dsi: add support for 7nm DSI PHY/PLL")
+> Fixes: acf7a91d0b0e ("clk: qcom: dispcc-sm8250: Enable parents for pixel =
+clocks")
 > Assisted-by: LLM
-> Signed-off-by: David Heidelberg <david@ixit.cz>
+> Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
 > ---
->   drivers/gpu/drm/panel/panel-samsung-s6e3ha8.c | 173 +++++++++++++++++++++++++-
->   1 file changed, 168 insertions(+), 5 deletions(-)
-> 
-> diff --git a/drivers/gpu/drm/panel/panel-samsung-s6e3ha8.c b/drivers/gpu/drm/panel/panel-samsung-s6e3ha8.c
-> index 2591b8c1a7753..e02f1d9f0dcd0 100644
-> --- a/drivers/gpu/drm/panel/panel-samsung-s6e3ha8.c
-> +++ b/drivers/gpu/drm/panel/panel-samsung-s6e3ha8.c
-> @@ -1,36 +1,42 @@
->   // SPDX-License-Identifier: GPL-2.0-only
-> -//
-> -// Generated with linux-mdss-dsi-panel-driver-generator from vendor device tree:
-> -//	Copyright (c) 2013, The Linux Foundation. All rights reserved.
-> -// Copyright (c) 2024 Dzmitry Sankouski <dsankouski@gmail.com>
-> -
-> +/*
-> + * Generated with linux-mdss-dsi-panel-driver-generator from vendor device tree:
-> + *	Copyright (c) 2013, The Linux Foundation. All rights reserved.
-> + * Copyright (c) 2024 Dzmitry Sankouski <dsankouski@gmail.com>
-> + * Copyright David Heidelberg
-> + */
-> +
-> +#include <linux/backlight.h>
->   #include <linux/delay.h>
->   #include <linux/gpio/consumer.h>
->   #include <linux/module.h>
->   #include <linux/of.h>
->   #include <linux/property.h>
->   #include <linux/regulator/consumer.h>
->   
-> +#include <video/mipi_display.h>
-> +
->   #include <drm/display/drm_dsc.h>
->   #include <drm/display/drm_dsc_helper.h>
->   #include <drm/drm_mipi_dsi.h>
->   #include <drm/drm_probe_helper.h>
->   #include <drm/drm_panel.h>
->   
->   #include "panel-samsung-dsi.h"
->   
->   struct s6e3ha8_desc {
->   	const struct drm_panel_funcs *funcs;
->   	const struct drm_display_mode *mode;
->   	unsigned long mode_flags;
->   	const struct regulator_bulk_data *supplies;
->   	unsigned int num_supplies;
->   	bool broken_reset_polarity;
-> +	bool has_backlight;
->   };
->   
->   struct s6e3ha8 {
->   	struct drm_panel panel;
->   	struct mipi_dsi_device *dsi;
->   	const struct s6e3ha8_desc *desc;
->   	struct drm_dsc_config dsc;
->   	struct gpio_desc *reset_gpio;
-> @@ -38,16 +44,23 @@ struct s6e3ha8 {
->   };
->   
->   static const struct regulator_bulk_data s6e3ha8_vddr_supplies[] = {
->   	{ .supply = "vdd3" },
->   	{ .supply = "vci" },
->   	{ .supply = "vddr" },
->   };
->   
-> +static const struct regulator_bulk_data s6e3ha8_boost_supplies[] = {
-> +	{ .supply = "vdd3" },
-> +	{ .supply = "vci" },
-> +	{ .supply = "vddpos" },
-> +	{ .supply = "vddneg" },
-> +};
-> +
->   static inline struct s6e3ha8 *to_s6e3ha8(struct drm_panel *panel)
->   {
->   	return container_of(panel, struct s6e3ha8, panel);
->   }
->   
->   #define s6e3ha8_afc_off(ctx) \
->   	mipi_dsi_dcs_write_seq_multi(ctx, 0xe2, 0x00, 0x00)
->   
-> @@ -72,16 +85,26 @@ static void s6e3ha8_amb577px01_wqhd_reset(struct s6e3ha8 *priv)
->   	gpiod_set_value_cansleep(priv->reset_gpio, 0);
->   	usleep_range(5000, 6000);
->   	gpiod_set_value_cansleep(priv->reset_gpio, 1);
->   	usleep_range(5000, 6000);
->   	gpiod_set_value_cansleep(priv->reset_gpio, 0);
->   	usleep_range(5000, 6000);
->   }
->   
-> +static void s6e3ha8_amb630qy01_reset(struct s6e3ha8 *priv)
-> +{
-> +	gpiod_set_value_cansleep(priv->reset_gpio, 0);
-> +	usleep_range(10000, 11000);
-> +	gpiod_set_value_cansleep(priv->reset_gpio, 1);
-> +	usleep_range(1000, 2000);
-> +	gpiod_set_value_cansleep(priv->reset_gpio, 0);
-> +	usleep_range(5000, 6000);
-> +}
-> +
->   static int s6e3ha8_amb577px01_wqhd_on(struct s6e3ha8 *priv)
->   {
->   	struct mipi_dsi_device *dsi = priv->dsi;
->   	struct mipi_dsi_multi_context ctx = { .dsi = dsi };
->   
->   	dsi->mode_flags |= MIPI_DSI_MODE_LPM;
->   
->   	samsung_dsi_test_key_on_lvl1(&ctx);
-> @@ -266,16 +289,146 @@ static const struct s6e3ha8_desc s6e3ha8_amb577px01_wqhd_desc = {
->   	.mode = &s6e3ha8_amb577px01_wqhd_mode,
->   	.mode_flags = MIPI_DSI_CLOCK_NON_CONTINUOUS |
->   		MIPI_DSI_MODE_VIDEO_NO_HFP | MIPI_DSI_MODE_VIDEO_NO_HBP |
->   		MIPI_DSI_MODE_VIDEO_NO_HSA | MIPI_DSI_MODE_NO_EOT_PACKET,
->   	.supplies = s6e3ha8_vddr_supplies,
->   	.num_supplies = ARRAY_SIZE(s6e3ha8_vddr_supplies),
->   };
->   
-> +static int s6e3ha8_amb630qy01_prepare(struct drm_panel *panel)
-> +{
-> +	struct s6e3ha8 *priv = to_s6e3ha8(panel);
-> +	struct mipi_dsi_multi_context ctx = { .dsi = priv->dsi };
-> +	struct drm_dsc_picture_parameter_set pps;
-> +	int ret;
-> +
-> +	ret = regulator_bulk_enable(priv->desc->num_supplies, priv->supplies);
-> +	if (ret < 0)
-> +		return ret;
-> +
-> +	s6e3ha8_amb630qy01_reset(priv);
-> +
-> +	mipi_dsi_compression_mode_multi(&ctx, true);
-> +
-> +	mipi_dsi_dcs_exit_sleep_mode_multi(&ctx);
-> +	mipi_dsi_msleep(&ctx, 120);
-> +
-> +	mipi_dsi_dcs_write_seq_multi(&ctx, MIPI_DCS_WRITE_CONTROL_DISPLAY, 0x20);
-> +	mipi_dsi_dcs_set_tear_on_multi(&ctx, MIPI_DSI_DCS_TEAR_MODE_VBLANK);
-> +
-> +	/*
-> +	 * Unlike the downstream DSI host, the kernel one never sends the
-> +	 * column/page addresses, so set the RAM window explicitly.
-> +	 */
-> +	mipi_dsi_dcs_set_column_address_multi(&ctx, 0, 1440 - 1);
-> +	mipi_dsi_dcs_set_page_address_multi(&ctx, 0, 2960 - 1);
-> +
-> +	samsung_dsi_test_key_on_lvl2(&ctx);
-> +	mipi_dsi_dcs_write_seq_multi(&ctx, 0xb9,
-> +				     0x01, 0xb0, 0x81, 0x09, 0x00, 0x00, 0x00,
-> +				     0x11, 0x03); /* TSP HSYNC Setting */
-> +	samsung_dsi_test_key_off_lvl2(&ctx);
-> +
-> +	drm_dsc_pps_payload_pack(&pps, &priv->dsc);
-> +	mipi_dsi_picture_parameter_set_multi(&ctx, &pps);
-> +
-> +	if (ctx.accum_err) {
-> +		gpiod_set_value_cansleep(priv->reset_gpio, 1);
-> +		regulator_bulk_disable(priv->desc->num_supplies, priv->supplies);
-> +	}
-> +
-> +	return ctx.accum_err;
-> +}
-> +
-> +static int s6e3ha8_amb630qy01_enable(struct drm_panel *panel)
-> +{
-> +	struct s6e3ha8 *priv = to_s6e3ha8(panel);
-> +	struct mipi_dsi_multi_context ctx = { .dsi = priv->dsi };
-> +
-> +	mipi_dsi_dcs_set_display_on_multi(&ctx);
-> +
-> +	return ctx.accum_err;
-> +}
-> +
-> +static int s6e3ha8_amb630qy01_disable(struct drm_panel *panel)
-> +{
-> +	struct s6e3ha8 *priv = to_s6e3ha8(panel);
-> +	struct mipi_dsi_multi_context ctx = { .dsi = priv->dsi };
-> +
-> +	mipi_dsi_dcs_set_display_off_multi(&ctx);
-> +	mipi_dsi_msleep(&ctx, 10);
-> +	mipi_dsi_dcs_enter_sleep_mode_multi(&ctx);
-> +	mipi_dsi_msleep(&ctx, 120);
-> +
-> +	return ctx.accum_err;
-> +}
-> +
-> +static const struct drm_display_mode s6e3ha8_amb630qy01_mode = {
-> +	.clock = (1440 + 116 + 44 + 116) * (2960 + 124 + 120 + 80) * 60 / 1000,
-> +	.hdisplay = 1440,
-> +	.hsync_start = 1440 + 116,
-> +	.hsync_end = 1440 + 116 + 44,
-> +	.htotal = 1440 + 116 + 44 + 116,
-> +	.vdisplay = 2960,
-> +	.vsync_start = 2960 + 124,
-> +	.vsync_end = 2960 + 124 + 120,
-> +	.vtotal = 2960 + 124 + 120 + 80,
-> +	.width_mm = 70,
-> +	.height_mm = 144,
-> +};
-> +
-> +static const struct drm_panel_funcs s6e3ha8_amb630qy01_panel_funcs = {
-> +	.prepare = s6e3ha8_amb630qy01_prepare,
-> +	.unprepare = s6e3ha8_unprepare,
-> +	.get_modes = s6e3ha8_get_modes,
-> +	.enable = s6e3ha8_amb630qy01_enable,
-> +	.disable = s6e3ha8_amb630qy01_disable,
-> +};
-> +
-> +static const struct s6e3ha8_desc s6e3ha8_amb630qy01_desc = {
-> +	.funcs = &s6e3ha8_amb630qy01_panel_funcs,
-> +	.mode = &s6e3ha8_amb630qy01_mode,
-> +	.mode_flags = MIPI_DSI_MODE_LPM | MIPI_DSI_CLOCK_NON_CONTINUOUS |
-> +		      MIPI_DSI_MODE_NO_EOT_PACKET,
-> +	.supplies = s6e3ha8_boost_supplies,
-> +	.num_supplies = ARRAY_SIZE(s6e3ha8_boost_supplies),
-> +	.has_backlight = true,
-> +};
-> +
-> +static int s6e3ha8_bl_update_status(struct backlight_device *bl)
-> +{
-> +	struct mipi_dsi_device *dsi = bl_get_data(bl);
-> +	u16 brightness = backlight_get_brightness(bl);
-> +
-> +	return mipi_dsi_dcs_set_display_brightness_large(dsi, brightness);
-> +}
-> +
-> +/*
-> + * No .get_brightness: DCS reads wedge the DSI host command engine and
-> + * take the whole display pipeline down with it.
-> + */
-> +static const struct backlight_ops s6e3ha8_bl_ops = {
-> +	.update_status = s6e3ha8_bl_update_status,
-> +};
-> +
-> +static struct backlight_device *
-> +s6e3ha8_create_backlight(struct mipi_dsi_device *dsi)
-> +{
-> +	struct device *dev = &dsi->dev;
-> +	const struct backlight_properties props = {
-> +		.type = BACKLIGHT_RAW,
-> +		.brightness = 512,
-> +		.max_brightness = 1023,
-> +	};
-> +
-> +	return devm_backlight_device_register(dev, dev_name(dev), dev, dsi,
-> +					      &s6e3ha8_bl_ops, &props);
-> +}
-> +
->   static int s6e3ha8_probe(struct mipi_dsi_device *dsi)
->   {
->   	struct device *dev = &dsi->dev;
->   	const struct s6e3ha8_desc *desc;
->   	struct s6e3ha8 *priv;
->   	int ret;
->   
->   	desc = device_get_match_data(dev);
-> @@ -308,16 +461,23 @@ static int s6e3ha8_probe(struct mipi_dsi_device *dsi)
->   	mipi_dsi_set_drvdata(dsi, priv);
->   
->   	dsi->lanes = 4;
->   	dsi->format = MIPI_DSI_FMT_RGB888;
->   	dsi->mode_flags = priv->desc->mode_flags;
->   
->   	priv->panel.prepare_prev_first = true;
->   
-> +	if (priv->desc->has_backlight) {
-> +		priv->panel.backlight = s6e3ha8_create_backlight(dsi);
-> +		if (IS_ERR(priv->panel.backlight))
-> +			return dev_err_probe(dev, PTR_ERR(priv->panel.backlight),
-> +					     "Failed to create backlight\n");
-> +	}
-> +
->   	ret = devm_drm_panel_add(dev, &priv->panel);
->   	if (ret)
->   		return ret;
->   
->   	/* This panel only supports DSC; unconditionally enable it */
->   	dsi->dsc = &priv->dsc;
->   
->   	priv->dsc.dsc_version_major = 1;
-> @@ -343,16 +503,19 @@ static int s6e3ha8_probe(struct mipi_dsi_device *dsi)
->   static const struct of_device_id s6e3ha8_of_match[] = {
->   	{
->   		/* deprecated */
->   		.compatible = "samsung,s6e3ha8",
->   		.data = &s6e3ha8_amb577px01_wqhd_desc_legacy,
->   	}, {
->   		.compatible = "samsung,s6e3ha8-amb577px01",
->   		.data = &s6e3ha8_amb577px01_wqhd_desc,
-> +	}, {
-> +		.compatible = "samsung,s6e3ha8-amb630qy01",
-> +		.data = &s6e3ha8_amb630qy01_desc,
->   	},
->   	{ /* sentinel */ }
->   };
->   MODULE_DEVICE_TABLE(of, s6e3ha8_of_match);
->   
->   static struct mipi_dsi_driver s6e3ha8_driver = {
->   	.probe = s6e3ha8_probe,
->   	.driver = {
-> 
+> Single fix for the DSI PLL lock failure and the clk_core_disable() WARN
+> seen at probe on SM8150/SM8250/SM8350/SC8180X since the dispcc-sm8250
+> pixel clock sources gained CLK_OPS_PARENT_ENABLE.  The clock framework
+> now enables the PHY PLL while applying assigned-clock-parents, before the
+> PHY driver has powered up the PHY's digital top, and the PLL cannot lock
+> without it.
+>
+> Found by forcing the missing bit on a failing boot: CMN_CTRL_0 read 0x20
+> at the failed attempt, and setting DIGTOP_PWRDN_B alone made the same
+> PLL lock.  Verified on QRB5165 RB5 and SM8350 HDK with the current DTs,
+> and with the link clock sources moved into the driver; the fix is
+> independent of that series and makes it unnecessary as a fix.
+> ---
+>  drivers/gpu/drm/msm/dsi/phy/dsi_phy_7nm.c | 6 ++++--
+>  1 file changed, 4 insertions(+), 2 deletions(-)
+>
+> diff --git a/drivers/gpu/drm/msm/dsi/phy/dsi_phy_7nm.c b/drivers/gpu/drm/=
+msm/dsi/phy/dsi_phy_7nm.c
+> index 5d805a797abd..7bacc1031187 100644
+> --- a/drivers/gpu/drm/msm/dsi/phy/dsi_phy_7nm.c
+> +++ b/drivers/gpu/drm/msm/dsi/phy/dsi_phy_7nm.c
+> @@ -413,7 +413,8 @@ static void dsi_pll_disable_pll_bias(struct dsi_pll_7=
+nm *pll)
+>  	} /* else: =3D=3D 0 */
+> =20
+>  	data =3D readl(pll->phy->base + REG_DSI_7nm_PHY_CMN_CTRL_0);
+> -	data &=3D ~DSI_7nm_PHY_CMN_CTRL_0_PLL_SHUTDOWNB;
+> +	data &=3D ~(DSI_7nm_PHY_CMN_CTRL_0_DIGTOP_PWRDN_B |
+> +		  DSI_7nm_PHY_CMN_CTRL_0_PLL_SHUTDOWNB);
+>  	writel(0, pll->phy->pll_base + REG_DSI_7nm_PHY_PLL_SYSTEM_MUXES);
+>  	writel(data, pll->phy->base + REG_DSI_7nm_PHY_CMN_CTRL_0);
+>  	spin_unlock_irqrestore(&pll->pll_enable_lock, flags);
+> @@ -433,7 +434,8 @@ static void dsi_pll_enable_pll_bias(struct dsi_pll_7n=
+m *pll)
+>  	}
+> =20
+>  	data =3D readl(pll->phy->base + REG_DSI_7nm_PHY_CMN_CTRL_0);
+> -	data |=3D DSI_7nm_PHY_CMN_CTRL_0_PLL_SHUTDOWNB;
+> +	data |=3D DSI_7nm_PHY_CMN_CTRL_0_DIGTOP_PWRDN_B |
+> +		DSI_7nm_PHY_CMN_CTRL_0_PLL_SHUTDOWNB;
+>  	writel(data, pll->phy->base + REG_DSI_7nm_PHY_CMN_CTRL_0);
+> =20
+>  	writel(0xc0, pll->phy->pll_base + REG_DSI_7nm_PHY_PLL_SYSTEM_MUXES);
+>
+> ---
+> base-commit: a15fac810c76397ec9f62a6fc26c4d7ab6e238a7
+> change-id: 20260924-dsi-7nm-pll-digtop-9939220a453a
+>
+> Best regards,
+> -- =20
+> With best wishes
+> Dmitry
 
-With typo fixed:
-Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
 
-Thanks,
-Neil
