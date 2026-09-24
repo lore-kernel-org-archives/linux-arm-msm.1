@@ -1,394 +1,186 @@
-Received: from mail-qt1-f175.google.com (mail-qt1-f175.google.com [209.85.160.175])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from ZR1P278CU001.outbound.protection.outlook.com (mail-switzerlandnorthazon11012066.outbound.protection.outlook.com [40.107.168.66])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CAC2441D4F1
-	for <linux-arm-msm@vger.kernel.org>; Thu, 24 Sep 2026 20:36:26 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=209.85.160.175
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EEA1735C6B2;
+	Thu, 24 Sep 2026 20:46:41 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=40.107.168.66
 ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790282189; cv=pass; b=KBIVEDMFd89kiLo1NafhXqU+QBIfOMDKNjPzTO7ft63a8MPuqX42JDeWzEqIjnua8bjABh0m2+AkphhnnjXz4FLHVNoSN+NuoXmik+Xr3yNrOIb2hpmH3I0ZR7p7WeCufa2jgDrdzMnUvU4UEoXcTsH3r3jiV8SejZsx0HQoM1E=
+	t=1790282805; cv=fail; b=MhLcONv7ySIOjS4yh2+/IPw4IWH0fsK08Wr8uw7iEmenJ+0Y8G+qUn/AdlAN5t4vL2oLRz9hVt4fvrONV+3c59z8+/KH9NVIzsjklGGnf1tEkLCleepy/8Cfq33pUbBWtJIKdSwmcrKrWZCvGV7tZa57k7DYiOw821prJHsEWSM=
 ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790282189; c=relaxed/simple;
-	bh=1DI5rrWvXbZEzrtTlhc+ovfTuoK1RIGdDuuJGBPbrPY=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=DkANY/Xzl7/Tgc6v21oQIMlQR3i5h9Ciyn3Y5Kjq9UsalMMV2e16uvpk85tp/MU33bcEn3sIV8Mah29Cdy1MKpknhaJ60Y8j5feJnQ5SzouXHkfyAjCEJIQRfxqZ1qKSEYqnnq/8lqI4sU6wgUp7UHXeDsv3e706umrlG+lHKTQ=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=Cf/KHokv; arc=pass smtp.client-ip=209.85.160.175
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=google.com
+	s=arc-20240116; t=1790282805; c=relaxed/simple;
+	bh=TwCS5BKXoEVDTyQbDIcMR7LUpr3zSf9RylqtYBwJjNQ=;
+	h=Message-ID:Date:Subject:To:Cc:References:From:In-Reply-To:
+	 Content-Type:MIME-Version; b=Y7lpdM4aab0L9ilorMPMovFgnHOa1EM2DpNqwa4mVWdI3drDfjH/cX2dy7UPozN5Pkiiy0ygEa1qTbLhYUP4GRzDJjWPXLmsKiu8zluindOcsRQU9mFFugdg/eaQ61G3QISm4Tlo43IbL1XM6d8CGRDzEwktB43DmVBLJRMLbtM=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=cern.ch; spf=pass smtp.mailfrom=cern.ch; dkim=pass (1024-bit key) header.d=cern.ch header.i=@cern.ch header.b=ZooMBncW; dkim=pass (1024-bit key) header.d=cern.ch header.i=@cern.ch header.b=ZooMBncW; arc=fail smtp.client-ip=40.107.168.66
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=cern.ch
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=cern.ch
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="Cf/KHokv"
-Received: by mail-qt1-f175.google.com with SMTP id d75a77b69052e-532e9ad9a1eso84451cf.0
-        for <linux-arm-msm@vger.kernel.org>; Thu, 24 Sep 2026 13:36:26 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1790282185; cv=none;
-        d=google.com; s=arc-20260327;
-        b=jY/xJZDtaqb7TfnuSO8li1mjKy3Cz5n7nNZZnuH4m2oU7UbhRqSrMe7OtqdT3YUFzL
-         PNv46RcaQ70F9SaxFXTE+sq+uyjHd3z8BMBqxWChhXVdKRblPRVr3d34L+vcANrHuBcw
-         JrfcJDEA/k05zfbw8c5X27/XZY98nmQXJdNj7llbX4I7gGYD4BfryWrDklqxqHYmXQvD
-         05dwwn9BrIk9/tSdB6HyZntJ0ymyD4hsTJiIGvtir9v6gQl3GJeBq7odcWTBoRxu+01r
-         VEgw3Jzj7EzhVgsuU4TkW87HOePb+MyT5JNZWVsN/iIclvlet5l8pVhqsM4UDLhSFjUv
-         Vp3A==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=pAXAvIz7zlOWq5JW1V29jLS6pvvcRbCsb7OX7n/liA4=;
-        fh=a1pXA17Qj1EWbH/KAxiY652S3NWdDdU/LmLJWgKmVWY=;
-        b=r2VCaTQx3xlNy0z3RL9KFO/dOAEUa/jT2N4HBRiON31b0tEHQFTLGtR02yMaV4xGR8
-         F0vSsph4Zm0id4xVZhiFSicFnnoksFlJ/aHTVMtDMXO9ISzjdxq9grWFbWQ6F9j4IkH6
-         ZVx7CjRzhFZCrswKPMb7QUFTobVh7ZxH9Oj0hnh0YFfx8fAWOq8Nl3N6gSZkArUDvT4Y
-         PngLtwRWf8fjyNa44y5aPVo8iPP/5IKk52xRvRjLGf8t1QQPZ1g/mN0CViqwvgGoEsab
-         +/FhDvwoVL2Ct/vX0XkxJpbOlv7lSAjOVX63GUd1rfpnX1LhFAOqHfxvNmHIZJwa7h0a
-         B8SA==;
-        darn=vger.kernel.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20251104; t=1790282185; x=1790886985; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=pAXAvIz7zlOWq5JW1V29jLS6pvvcRbCsb7OX7n/liA4=;
-        b=Cf/KHokvqm6h2o0kwBSzPdJcpKzvpIv7Ns9agF957LfLzn1J1fusAZDGpja7RdPXZ5
-         ggoREJ04w4zPiD0xSLcjT1rU3wBTV17lv++TS3a2eDsoywYh9dqnuuwrFj0eUCbc19EM
-         hnSGiUDXYN9AzpI56uAwSmWHzjqqcZKGafUTiAMrSA1br0C0LoVlTbEOsJ0XR+evM9mb
-         oFKGuvPVMDW7ktKXFclsumSB5mAUGZIxfUOKeKMWlzNdIOY/UhlrdFuQoamPVgOPbka2
-         353DStr9LTj3Ce9n3G3djFhuygAM8ZnM/lbR7FwRcIXCci4y/sakuRzIGZQNrregfwc/
-         24VQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790282185; x=1790886985;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=pAXAvIz7zlOWq5JW1V29jLS6pvvcRbCsb7OX7n/liA4=;
-        b=SLXvKt0+RRljI3JnuCgZHzxGf286fl3N4d+UsOsnt+nCyEgrY5xw9ad+nFRt78NG90
-         Fql4iM/crB4eQBvwcdRBaSyfiTFurzp9GY3XfSRC6CzOzbMtJplu5Wo9W0G4TrwtWCxX
-         GFb3A1qYcfft9ZlKxlmKpxamRZ0xABjojhPbZuyLKRZokwxrQwrP5ocdENRkaiK94/V/
-         MjAQL3Ff8LcKJT3cCpxpsKLeJ7NEzvRlfrNDy9jBldraLkUospbi5CQVef2uuxNTUmxG
-         PEWR5pA1MNotBPpX1vk0hSHp+/qd7O6xNd9oqdK1bx+Cutl/31TPuTkryQlN6rq9PXkO
-         2ZCA==
-X-Forwarded-Encrypted: i=1; AKwUvBzpi02iBu7P0kRCdxsLsRs1bhZMpIgNyto2X2aLn1bV/bNp3Q7fTYGb1U4NUy5QU2FiwDqKhxEvw6WTC3hv@vger.kernel.org
-X-Gm-Message-State: AFuF++lxgsHJ0dFv7Jn0iaxb8Sgjah0d8kalr4hSDBjyD1SE4HLB4bq1
-	fvSFsmcvYa3/QdlNLg4uSNUuwC4HynvLW8EkUnfhcJGNLhKvYhAZiRUwwimRQHlfe0yn672ZlKX
-	aEXcxr07WN4sESvB+en7fm2MSpLPcwgSlZHRj1ka4
-X-Gm-Gg: AYBFou1jDR+ElV8I/HtzIn9Ry0zgarjnQHpq71I6DD3+9auYhLQ85h/DtCMg7sYxRDQ
-	6maWsj318CMqxOfd3Mt/h0BExUPmI0dweAOcqU8k9QFJoJDhZefyGkq1nM8RC10DmCmiA/7k3VW
-	l2cLtiLUdGTUdCfMGhaFCJsUApxil87ok/ANoSJ2FkfqKFwz4UZax26UAN6gAQYG2CUSWCiKbmD
-	tg2hyBE4a3u6wB1WhPrzKVX5jJ7fkiJoSbUy3xTeRIEHkNg9bJ8/PG7xPvKYhUtqFJTXkLLw+Xv
-	qBqM4y+Qy4y5YR2z1mB3KAK8BCJMozU2S24mgJJ1g5t4dvyjovhb
-X-Received: by 2002:a05:622a:c2:b0:532:d72d:3e9c with SMTP id
- d75a77b69052e-5330c0eb219mr1811851cf.6.1790282183927; Thu, 24 Sep 2026
- 13:36:23 -0700 (PDT)
+	dkim=pass (1024-bit key) header.d=cern.ch header.i=@cern.ch header.b="ZooMBncW";
+	dkim=pass (1024-bit key) header.d=cern.ch header.i=@cern.ch header.b="ZooMBncW"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=junAjtRDGSZzefiL+kRC+UXy1THRBflvoyzja0wgiTKGSnJLXP231gkE3QXfEeGNMTVGG2XzSA8BgejismG3wsNfl9EFPLl69C8vfjpHEwAlRKKrkdQwpevh+hsOPS7MdYr7g4DZlMAzbvX67bjrrzpzGlRsgYHxVtWkcyxQTaqo0xkSlvrDv+EPBw2C1sx1TNI79zAe5p/QEOfYXVsftSSSV3DYxqjMOx7j780C9Ad10VeD3Evllu9E6yaBBwNd/u+HwEThJJDqWrRFQiCKMgoY9LnWi7qmfGIullzRv4wI2CX00rxkQZ8Y4WvtX3xzOyCMiCHjrU034j0pZG48Pg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=UHgoa2jL1wubqP58mT1Fbrhtaw3zA0VODx6Dgt1ci/U=;
+ b=L7c/9XfqXdx+T/PjaHrl1P7jRqGlV49Xzyv/ziBOcGZY5huAwI4PCdogC7TM1xNy4jH6ne/rQB6BKQE7pY1B7wd/042QIrhzXdjgNB2LD0KbuCFCLPvlgIjEcjPOIfcZRkiPY3g/Ic29E8bRTrA0TDud0kJWt05JKTR4ztAh1PwTKe/Yy3SWMO08GL2fbY3o1ABmVlyQqSitk0l/WLfMLPRfZETNSnjAKH5bqE+OmzJpc89K/Kyf3Vuv8P7V1Ha1+DwfYrzWaPrFAcr/z+WE9xnMpCCE1awuUdjExNRIhEKCwr87kPwUUG0CH3QKUi1CY2165YRzEP1loe4dWU0p6w==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 20.208.138.155) smtp.rcpttodomain=kernel.org smtp.mailfrom=cern.ch;
+ dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=cern.ch;
+ dkim=pass (signature was verified) header.d=cern.ch; arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cern.ch; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=UHgoa2jL1wubqP58mT1Fbrhtaw3zA0VODx6Dgt1ci/U=;
+ b=ZooMBncW8G+7krzMZLTKlmJyaqkz5ORXYefxZ+W0g7+EM2c9GqO7+TVzZT7aj/No4kjxWLRxCtduBg+dzd6vulGs6aPkRcAonOVSRLM7ea+RzS49zp4KbGrDF8E1ZlexIqBssbV1eQ1LxSJe0ZofdvNKkxaWiPNEIbsyrtrLfNs=
+Received: from VI1PR07CA0286.eurprd07.prod.outlook.com (2603:10a6:800:130::14)
+ by ZR0P278MB1513.CHEP278.PROD.OUTLOOK.COM (2603:10a6:910:a5::7) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.451.18; Thu, 24 Sep
+ 2026 20:46:38 +0000
+Received: from ZR1PEPF0000E460.eurprd04.prod.outlook.com
+ (2603:10a6:800:130:cafe::a4) by VI1PR07CA0286.outlook.office365.com
+ (2603:10a6:800:130::14) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.451.18 via Frontend Transport; Thu,
+ 24 Sep 2026 20:46:37 +0000
+X-MS-Exchange-Authentication-Results: mx.microsoft.com 1; spf=pass (sender IP
+ is 20.208.138.155) smtp.mailfrom=cern.ch; dkim=pass (signature was verified)
+ header.d=cern.ch;dmarc=pass action=none header.from=cern.ch;
+Received-SPF: Pass (protection.outlook.com: domain of cern.ch designates
+ 20.208.138.155 as permitted sender) receiver=protection.outlook.com;
+ client-ip=20.208.138.155; helo=mx3.crn.activeguard.cloud; pr=C
+Received: from mx3.crn.activeguard.cloud (20.208.138.155) by
+ ZR1PEPF0000E460.mail.protection.outlook.com (10.167.241.58) with Microsoft
+ SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.21.451.8
+ via Frontend Transport; Thu, 24 Sep 2026 20:46:37 +0000
+Authentication-Results-Original: auth.opendkim.xorlab.com;	dkim=pass (1024-bit
+ key; unprotected) header.d=cern.ch header.i=@cern.ch header.a=rsa-sha256
+ header.s=selector1 header.b=ZooMBncW
+Received: from ZRAP278CU002.outbound.protection.outlook.com (mail-switzerlandnorthazlp17010021.outbound.protection.outlook.com [40.93.85.21])
+	by mx3.crn.activeguard.cloud (Postfix) with ESMTPS id A3B7281377;
+	Thu, 24 Sep 2026 22:46:36 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cern.ch; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=UHgoa2jL1wubqP58mT1Fbrhtaw3zA0VODx6Dgt1ci/U=;
+ b=ZooMBncW8G+7krzMZLTKlmJyaqkz5ORXYefxZ+W0g7+EM2c9GqO7+TVzZT7aj/No4kjxWLRxCtduBg+dzd6vulGs6aPkRcAonOVSRLM7ea+RzS49zp4KbGrDF8E1ZlexIqBssbV1eQ1LxSJe0ZofdvNKkxaWiPNEIbsyrtrLfNs=
+Authentication-Results-Original: mx.microsoft.com 1; dkim=none (message not
+ signed) header.d=none;dmarc=none action=none header.from=cern.ch;
+Received: from ZR2P278MB1053.CHEP278.PROD.OUTLOOK.COM (2603:10a6:910:5d::11)
+ by ZR4P278MB1785.CHEP278.PROD.OUTLOOK.COM (2603:10a6:910:b4::19) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.451.18; Thu, 24 Sep
+ 2026 20:46:35 +0000
+Received: from ZR2P278MB1053.CHEP278.PROD.OUTLOOK.COM
+ ([fe80::79ac:8d79:4b56:709c]) by ZR2P278MB1053.CHEP278.PROD.OUTLOOK.COM
+ ([fe80::79ac:8d79:4b56:709c%5]) with mapi id 15.21.0451.014; Thu, 24 Sep 2026
+ 20:46:35 +0000
+Message-ID: <b42f6bb6-5315-48aa-ac14-e858f3d11e39@cern.ch>
+Date: Thu, 24 Sep 2026 22:46:33 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v7 3/3] arm64: dts: qcom: Add hamoa Samsung Galaxy Book4
+ Edge devicetrees
+To: Krzysztof Kozlowski <krzk@kernel.org>
+Cc: andersson@kernel.org, robh@kernel.org, krzk+dt@kernel.org,
+ conor+dt@kernel.org, marcus@nazgul.ch, marijn.suijten@somainline.org,
+ linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
+ linux-kernel@vger.kernel.org, abel.vesa@linaro.org,
+ abel.vesa@oss.qualcomm.com, johan@kernel.org, konradybcio@kernel.org,
+ kirill@korins.ky
+References: <20260920184148.31541-1-mstoretv@cern.ch>
+ <20260920184148.31541-4-mstoretv@cern.ch>
+ <20260924-curious-sociable-nightingale-66ffaf@quoll>
+Content-Language: en-US
+From: Maxim Storetvedt <mstoretv@cern.ch>
+In-Reply-To: <20260924-curious-sociable-nightingale-66ffaf@quoll>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: PR1P264CA0155.FRAP264.PROD.OUTLOOK.COM
+ (2603:10a6:102:346::15) To ZR2P278MB1053.CHEP278.PROD.OUTLOOK.COM
+ (2603:10a6:910:5d::11)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260921-iommu_contig_hint-v5-1-e7fbd1c3774d@oss.qualcomm.com>
-In-Reply-To: <20260921-iommu_contig_hint-v5-1-e7fbd1c3774d@oss.qualcomm.com>
-From: Daniel Mentz <danielmentz@google.com>
-Date: Thu, 24 Sep 2026 13:36:12 -0700
-X-Gm-Features: AclHuK9Edhkw7dI8hy3s30oHjoVQuRqWKT854I2fNS_opd9KtYkgWbWonloZqbA
-Message-ID: <CAE2F3rAMAnV9+WNLZtGQX6cHPsZ6wbfRJ1Z3d5mF1+8WHL-uMA@mail.gmail.com>
-Subject: Re: [PATCH v5] iommu/io-pgtable-arm: Add support for contiguous hint bit
-To: Vijayanand Jitta <vijayanand.jitta@oss.qualcomm.com>
-Cc: Will Deacon <will@kernel.org>, Robin Murphy <robin.murphy@arm.com>, 
-	"Joerg Roedel (AMD)" <joro@8bytes.org>, linux-arm-msm@vger.kernel.org, 
-	linux-arm-kernel@lists.infradead.org, iommu@lists.linux.dev, 
-	linux-kernel@vger.kernel.org, Prakash Gupta <prakash.gupta@oss.qualcomm.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-MS-TrafficTypeDiagnostic:
+	ZR2P278MB1053:EE_|ZR4P278MB1785:EE_|ZR1PEPF0000E460:EE_|ZR0P278MB1513:EE_
+X-MS-Office365-Filtering-Correlation-Id: 2ab74593-2e3c-4a67-649d-08df1a7cedbc
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam-Untrusted:
+ BCL:0;ARA:13230040|786006|19092799006|23010399003|376014|7416014|366016|1800799024|10067099003|56012099006|5023799004|11063799006|4143699003|18002099003|22082099003;
+X-Microsoft-Antispam-Message-Info-Original:
+ gGuAjtSxg2uI+FlRo3zorUFhJ3ZnJ1rWlaiN45rCNkf695btk4nxvBvMHD4lXMdPwWduWuGuTA2f7yDGyqe0ir6OIhgEY4hbEQYBfvhOCMhvQtUIBTF0mtNaYM0OkIJKUT1/CMrd4ABuZWwHeYh4/uF10HCmdLQCc2KnruvJfD+/8dlWOGvtmV0ol2QzRECiaSV5p5RTvgq8tMmgyFSdz0oboAk3QbI1ttzFxp11SkBO3pFGx5Y9gznFxOlynrXB0lTGnS54OYTV61FjKCAHLwEKtVa/uZOVu6Cb+iQylRYsPuLqre4Nvf6U1lTRTXr0L0dbzVdQsKWFNeFaVwld+tPP3htYWIM/gUqUNF2Y0PmMGkpt7DJhgcmAg9c7hWnDxDhcynSlXUVE+gy5D6SjMPOj6FR1O0dmcJL74VUGKdHHbklgX3qkQLWB/oZNeXE/BwgzaI8OR8kMyVDOgco2Y7WLdfixCqMlsKc07Hk4nTuFEa32wHJ0MmxqewY0UloXtdS/07lrNWRnznP+PGR6lL0qhVro3wEx97uKJf6Cpa9q5IOaplE4hXsdPSYmLOM3lwICgMUoyXsLraKeLhKQRmmR2a9OFlL7P+VqhOIIKCo=
+X-Forefront-Antispam-Report-Untrusted:
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:ZR2P278MB1053.CHEP278.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(786006)(19092799006)(23010399003)(376014)(7416014)(366016)(1800799024)(10067099003)(56012099006)(5023799004)(11063799006)(4143699003)(18002099003)(22082099003);DIR:OUT;SFP:1101;
+X-Exchange-RoutingPolicyChecked:
+ EVA3IjF7n2CHTd1D9zf+iPLJFwGdsGDEQhX4oPabGwtJALsHnJedxzeHn+JIwlPQFG54SLjV0Qhj+5q68aszMGLVZPYVB38Jo8q0/bZsLmVj8UNd76hf2cFz2AgPYrb4biKPKrU4CfUwwZC7hVqy6Apt3FlRW3l7O6dQebn5lwx3iWSTNuu7M7DgGo9ry1VIKe8id+mFMzg7Eh8VAGDAFk7DYjnsmvg5FidUfIfBET0vyOJHESXZ/BCT/5odfevGFbypYsVFXcB1ShdGVxBZhUg1rYK5tLIrX+EJlYuKxZ/SFtI0BUkF8h/r4kYXjmXpBP8h4thTkHuIZJeQ/q2nQg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: ZR4P278MB1785
+X-EOPAttributedMessage: 0
+X-MS-Exchange-Transport-CrossTenantHeadersStripped:
+ ZR1PEPF0000E460.eurprd04.prod.outlook.com
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id-Prvs:
+	4d922db7-06e0-4021-e249-08df1a7cec55
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|36860700016|786006|82310400026|19092799006|30052699003|23010399003|1800799024|35042699022|7416014|376014|14060799003|13003099007|4143699003|56012099006|10067099003|5023799004|11063799006|18002099003|22082099003;
+X-Microsoft-Antispam-Message-Info:
+	EGRy43bhM3ziTL7d4x5h7cw4vAiOzUovuGlTL3QFlBx4tmKxyf5RfWLxh2rmr6iY1/qPvR05Hvg2Ptir5qVLTJcZgk21ROG+NKRVBids2tnW5fgZ9vHooSusspb4jpHH82Qrv0J5qByVj3itevFQMXhhk62s5ZbLKcPncU/agQJhWv4bs9Dyu9Lj7cNqFUEZVZKEEVzAzub8kfNxXZ0yfkETZMShbxGGivr6vgIZogViV02JDPNvmlXxbbPuIRsKJ+RA9T6bf0d9aHDvwL4c6oh/ZrKtFaPNjVIPclODW93H6qqO+aY7NhBmo5UWFGc8hF4vYxymtmEhNt4l03b58qLXmh5O+gKPUhCGtiLAhP3A/h1JdR4hVvIGtsVd1+oNN7jZBatppf/DSyR6R4mK8S96dQU0vSgsLZsMk3OcmI1vJCTFs50khimoZjjG2Ijdb/8ikfeoxAlkgfEnMCxu9Xv/baX1nHLV5mK9v3dehAoMkt08VM1bX7DD8twOadmVXXfULv+Gy0WwuccCZ2I/q4CdpP8kLdKQZOP/VONGAP0Wi4o+CCcB9rMDfCiTs6BOGXs6Ac/1ukKCdFoiJO/uacPRD3IqlmDoVJFUaWCVOQUNhl+bJ8pXNrl4p/okU2L600BEqB1JWGu05GkIORSo/g==
+X-Forefront-Antispam-Report:
+	CIP:20.208.138.155;CTRY:CH;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:mx3.crn.activeguard.cloud;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(36860700016)(786006)(82310400026)(19092799006)(30052699003)(23010399003)(1800799024)(35042699022)(7416014)(376014)(14060799003)(13003099007)(4143699003)(56012099006)(10067099003)(5023799004)(11063799006)(18002099003)(22082099003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	KqlX2LIbTpLDkn3XbqIUsprjh/iPNDxDU1zQeMsnaX1y4DvbEa49K5uSZ1jELOJxZCv0NIow9OSK1oEippLXYcKKMUsIQO3n64Mi3/JJQmmNujwy4F4pv34sIMm3aF90q6aoQlJx05wOc7eznde9QEoEAw15Re+BnSRN1YJZ1XtKAdZJazvB9q1Nkmz1z1LfQ0RwBmK21AbJkSKNKscP3qA+e3HwS6wwE6nwUqGp92MzH+tVCGKQTOkGCIt7NruyqSMm3vhTwa6LQflsNvJ0o1nIxJLrxTKAJsltB6HGuqbrLrnZew8Ntvjl10W6klO/L+VQnkHAeNBJXO4r5Vo4E6c+gz8X+ZmkqBrDjKJfAoufmGTqQGhXm3EfxvjJaSV/gZdgiqAVQh+j/iA2m8oNUMRxDv7MiILnmNil+gCMqxzhUnKmJnoqTtgtwdkr+jNC
+X-OriginatorOrg: cern.ch
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Sep 2026 20:46:37.6264
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 2ab74593-2e3c-4a67-649d-08df1a7cedbc
+X-MS-Exchange-CrossTenant-Id: c80d3499-4a40-4a8c-986e-abce017d6b19
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=c80d3499-4a40-4a8c-986e-abce017d6b19;Ip=[20.208.138.155];Helo=[mx3.crn.activeguard.cloud]
+X-MS-Exchange-CrossTenant-AuthSource:
+	ZR1PEPF0000E460.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: ZR0P278MB1513
 
-On Mon, Sep 21, 2026 at 4:44=E2=80=AFAM Vijayanand Jitta
-<vijayanand.jitta@oss.qualcomm.com> wrote:
-> diff --git a/drivers/iommu/io-pgtable-arm.c b/drivers/iommu/io-pgtable-ar=
-m.c
-> index 476c0e25631af..01d98959c514f 100644
-> --- a/drivers/iommu/io-pgtable-arm.c
-> +++ b/drivers/iommu/io-pgtable-arm.c
-> @@ -86,6 +86,21 @@
->  /* Software bit for solving coherency races */
->  #define ARM_LPAE_PTE_SW_SYNC           (((arm_lpae_iopte)1) << 55)
->
-> +/* PTE Contiguous Bit */
-> +#define ARM_LPAE_PTE_CONT              (((arm_lpae_iopte)1) << 52)
-> +
-> +/*
-> + * Contiguous hint group sizes per granule:
-> + *
-> + *------------------------------------------------------------------
-> + *| Page Size | CONT PTE |  Block  | CONT Block | L1 Block | CONT L1 |
-> + *------------------------------------------------------------------
-> + *|     4K    |   64K    |   2M    |    32M     |    1G    |   16G   |
-> + *|    16K    |    2M    |  32M    |     1G     |          |         |
-> + *|    64K    |    2M    | 512M    |    16G     |          |         |
-> + *------------------------------------------------------------------
-> + */
 
-I find this comment redundant. People can find this information in the
-Arm architecture specification.
+On 9/24/26 15:08, Krzysztof Kozlowski wrote:
+> On Sun, Sep 20, 2026 at 08:41:04PM +0200, Maxim Storetvedt wrote:
+>> Adds devicetrees for the 14-inch and 16-inch hamoa SKUs of the Samsung Galaxy Book4 Edge.
+>>
+>> These use a common dtsi derived from nodes that were able to work on Linux
+>> from the initial Galaxy Book4 Edge DTS by Marcus:
+>>
+>> Link: https://lore.kernel.org/all/p3mhtj2rp6y2ezuwpd2gu7dwx5cbckfu4s4pazcudi4j2wogtr@4yecb2bkeyms/
+>>
+>> combined with the patch series the Honor Magicbook Art 14, which shares device similarities:
+>>
+>> Link: https://lore.kernel.org/all/20260629154812.9066-1-mail@etehtsea.me/
+>>
+>> as well as a few more adjustments on top of that again to get additional features working.
+>> Special thanks to Jesse Ahn for helping expand on what would eventually become this dtsi.
+>>
+>> Based-on-a-patch-by: Marcus Glocker <marcus@nazgul.ch>
+>> Based-on-a-patch-by: Kirill A. Korinsky <kirill@korins.ky>
+> 
+> There are no such tags. Don't invent own.
+> 
+> Either they provided SoB for the code you used, or not. If they did,
+> then you could take them. Otherwise not and read obligations on your
+> side expressed in DCO.
+> 
+> Also look at Co-developed tag, if that's applicable.
+> 
+> Best regards,
+> Krzysztof
+> 
 
-> +static int arm_lpae_num_cont(size_t size)
-> +{
-> +       switch (size) {
-> +       case SZ_4K:
-> +       case SZ_2M:
-> +       case SZ_1G:
-> +               return 16;
+Not formal tags by any means; both of these patches have been very
+useful though, and should somehow be highlighted. Bon, to be revisited.
 
-I'm thinking that if you use something like
+In the meantime, there seem to be some sashiko warnings that need to be
+addressed before this series can continue in any case.
 
-return BITS_PER_TYPE(size_t) >=3D 64 ? 16 : 1
+Cheers,
+-Max
 
-i.e. return 16 only on 64 bit platforms, then you can avoid those
-overflow checks in various places. Same for the SZ_512M cases.
-
-> +       case SZ_64K:
-> +       case SZ_32M:
-> +       case SZ_512M:
-> +               return 32;
-> +       case SZ_16K:
-> +               return 128;
-> +       default:
-> +               return 1;
-> +       }
-> +}
-> +
->  static int __arm_lpae_map(struct arm_lpae_io_pgtable *data, unsigned lon=
-g iova,
->                           phys_addr_t paddr, size_t size, size_t pgcount,
->                           arm_lpae_iopte prot, int lvl, arm_lpae_iopte *p=
-tep,
-> @@ -462,20 +495,41 @@ static int __arm_lpae_map(struct arm_lpae_io_pgtabl=
-e *data, unsigned long iova,
->         size_t block_size =3D ARM_LPAE_BLOCK_SIZE(lvl, data);
->         size_t tblsz =3D ARM_LPAE_GRANULE(data);
->         struct io_pgtable_cfg *cfg =3D &data->iop.cfg;
-> -       int ret =3D 0, num_entries, max_entries, map_idx_start;
-> +       int num_cont =3D arm_lpae_num_cont(block_size);
-> +       size_t cont_size =3D 0, entries_per_map;
-> +       int num_entries, max_entries, map_idx_start;
-> +       bool cont =3D false;
-> +
-> +       if (num_cont > 1 && block_size <=3D SIZE_MAX / num_cont)
-> +               cont_size =3D num_cont * block_size;
->
->         /* Find our entry at the current level */
->         map_idx_start =3D ARM_LPAE_LVL_IDX(iova, lvl, data);
->         ptep +=3D map_idx_start;
->
->         /* If we can install a leaf entry at this level, then do so */
-> -       if (size =3D=3D block_size) {
-> +       if (size =3D=3D block_size ||
-> +           (!(cfg->quirks & IO_PGTABLE_QUIRK_ARM_NO_CONT_HINT) &&
-
-I'm thinking that the check for IO_PGTABLE_QUIRK_ARM_NO_CONT_HINT is
-redundant. If this quirk is active, none of the contiguous sizes were
-advertised, so no one should call this function with any of the
-contiguous sizes.
-
-> +            size =3D=3D cont_size)) {
-> +               int ret;
-> +
-> +               cont =3D size =3D=3D cont_size;
-> +               if (cont && (!IS_ALIGNED(iova, size) || !IS_ALIGNED(paddr=
-, size)))
-
-These alignment checks are also redundant. We can rely on the caller
-to pass properly aligned values. It's also inconsistent, because it
-verifies alignment only for contiguous sizes.
-
-> +                       return -EINVAL;
-> +
-> +               entries_per_map =3D size / block_size;
-
-Can't you just do
-
-pgcount *=3D num_cont;
-
-Wouldn't that be easier?
-
->                 max_entries =3D arm_lpae_max_entries(map_idx_start, data)=
-;
-> -               num_entries =3D min_t(int, pgcount, max_entries);
-> -               ret =3D arm_lpae_init_pte(data, iova, paddr, prot, lvl, n=
-um_entries, ptep);
-> +               num_entries =3D min_t(size_t, pgcount,
-> +                                   max_entries / entries_per_map) * entr=
-ies_per_map;
-> +               if (!num_entries)
-> +                       return -EINVAL;
-
-I believe this check is also redundant. Can we remove it?
-
-> +               if (cont)
-> +                       prot |=3D ARM_LPAE_PTE_CONT;
-> +
-> +               ret =3D arm_lpae_init_pte(data, iova, paddr, prot, lvl,
-> +                                       num_entries, ptep);
->                 if (!ret)
-> -                       *mapped +=3D num_entries * size;
-> -
-> +                       *mapped +=3D num_entries * block_size;
->                 return ret;
->         }
->
-> @@ -660,12 +714,18 @@ static size_t __arm_lpae_unmap(struct arm_lpae_io_p=
-gtable *data,
->  {
->         arm_lpae_iopte pte;
->         struct io_pgtable *iop =3D &data->iop;
-> +       size_t block_size =3D ARM_LPAE_BLOCK_SIZE(lvl, data);
-> +       int num_cont =3D arm_lpae_num_cont(block_size);
-> +       size_t cont_size =3D 0, entries_per_map;
->         int i =3D 0, num_entries, max_entries, unmap_idx_start;
->
->         /* Something went horribly wrong and we ran out of page table */
->         if (WARN_ON(lvl =3D=3D ARM_LPAE_MAX_LEVELS))
->                 return 0;
->
-> +       if (num_cont > 1 && block_size <=3D SIZE_MAX / num_cont)
-> +               cont_size =3D num_cont * block_size;
-> +
->         unmap_idx_start =3D ARM_LPAE_LVL_IDX(iova, lvl, data);
->         ptep +=3D unmap_idx_start;
->         pte =3D READ_ONCE(*ptep);
-> @@ -675,9 +735,27 @@ static size_t __arm_lpae_unmap(struct arm_lpae_io_pg=
-table *data,
->         }
->
->         /* If the size matches this level, we're in the right place */
-> -       if (size =3D=3D ARM_LPAE_BLOCK_SIZE(lvl, data)) {
-> +       if (size =3D=3D block_size ||
-> +           (!(data->iop.cfg.quirks & IO_PGTABLE_QUIRK_ARM_NO_CONT_HINT) =
-&&
-
-Checking for IO_PGTABLE_QUIRK_ARM_NO_CONT_HINT is redundant. Can we remove =
-it?
-
-> +            size =3D=3D cont_size)) {
-> +               entries_per_map =3D size / block_size;
->                 max_entries =3D arm_lpae_max_entries(unmap_idx_start, dat=
-a);
-> -               num_entries =3D min_t(int, pgcount, max_entries);
-> +               num_entries =3D min_t(size_t, pgcount,
-> +                                   max_entries / entries_per_map) * entr=
-ies_per_map;
-> +               if (!num_entries)
-> +                       return 0;
-> +
-> +               /*
-> +                * A CONT group must be invalidated as a unit. Reject a r=
-equest that
-> +                * starts or ends inside a tagged group before changing a=
-ny PTEs.
-> +                */
-> +               if ((READ_ONCE(*ptep) & ARM_LPAE_PTE_CONT &&
-> +                    !IS_ALIGNED(iova, cont_size)) ||
-> +                   (READ_ONCE(ptep[num_entries - 1]) & ARM_LPAE_PTE_CONT=
- &&
-> +                    !IS_ALIGNED(iova + num_entries * block_size, cont_si=
-ze))) {
-> +                       WARN_ONCE(true, "Unmap of a partial CONT IOPTE gr=
-oup is not allowed");
-> +                       return 0;
-> +               }
->
->                 /* Find and handle non-leaf entries */
->                 for (i =3D 0; i < num_entries; i++) {
-> @@ -691,7 +769,8 @@ static size_t __arm_lpae_unmap(struct arm_lpae_io_pgt=
-able *data,
->                                 __arm_lpae_clear_pte(&ptep[i], &iop->cfg,=
- 1);
->
->                                 /* Also flush any partial walks */
-> -                               io_pgtable_tlb_flush_walk(iop, iova + i *=
- size, size,
-> +                               io_pgtable_tlb_flush_walk(iop,
-> +                                                         iova + i * bloc=
-k_size, block_size,
->                                                           ARM_LPAE_GRANUL=
-E(data));
->                                 __arm_lpae_free_pgtable(data, lvl + 1, io=
-pte_deref(pte, data));
->                         }
-> @@ -702,9 +781,10 @@ static size_t __arm_lpae_unmap(struct arm_lpae_io_pg=
-table *data,
->
->                 if (gather && !iommu_iotlb_gather_queued(gather))
->                         for (int j =3D 0; j < i; j++)
-> -                               io_pgtable_tlb_add_page(iop, gather, iova=
- + j * size, size);
-> +                               io_pgtable_tlb_add_page(iop, gather,
-> +                                                       iova + j * block_=
-size, block_size);
->
-> -               return i * size;
-> +               return i * block_size;
->         } else if (iopte_leaf(pte, lvl, iop->fmt)) {
->                 WARN_ONCE(true, "Unmap of a partial large IOPTE is not al=
-lowed");
->                 return 0;
-> @@ -943,8 +1023,23 @@ static void arm_lpae_restrict_pgsizes(struct io_pgt=
-able_cfg *cfg)
-
-I want to re-iterate what I wrote earlier: I think we should change
-this function's name. This is what our AI model has to say:
-
-Originally, arm_lpae_restrict_pgsizes() performed a purely monotonic reduct=
-ion:
-
-  1. Identified the translation granule (e.g. matching CPU PAGE_SIZE).
-  2. Performed a bitwise-AND (cfg->pgsize_bitmap &=3D page_sizes) to
-discard non-granule sizes.
-  3. Clamped ias and oas.
-
-With this commit, it now:
-
-  1. Restricts to the base granule sizes (&=3D page_sizes).
-  2. Expands the bitmap with synthesized contiguous sizes (|=3D num_cont * =
-size).
-  3. Restricts again against ias and oas (&=3D GENMASK_ULL(...)).
-
-Calling a function ..._restrict_... when it actively synthesizes and
-injects new page sizes violates the principle of least astonishment.
-
->         }
->
->         cfg->pgsize_bitmap &=3D page_sizes;
-> +       if (!(cfg->quirks & IO_PGTABLE_QUIRK_ARM_NO_CONT_HINT)) {
-> +               unsigned long sizes =3D cfg->pgsize_bitmap;
-> +
-> +               while (sizes) {
-> +                       unsigned long size =3D BIT(__ffs(sizes));
-> +                       int num_cont =3D arm_lpae_num_cont(size);
-> +
-> +                       if (size <=3D ULONG_MAX / num_cont)
-> +                               cfg->pgsize_bitmap |=3D num_cont * size;
-> +                       sizes &=3D ~size;
-> +               }
-> +       }
-> +
->         cfg->ias =3D min(cfg->ias, max_addr_bits);
->         cfg->oas =3D min(cfg->oas, max_addr_bits);
-> +       cfg->pgsize_bitmap &=3D GENMASK_ULL(cfg->ias, 0);
-> +       cfg->pgsize_bitmap &=3D GENMASK_ULL(cfg->oas, 0);
->  }
-
-Gemini added the following. I have to admit, though, that I'm not
-familiar enough with dirty bit tracking to determine if this is a real
-concern.
-
-Interaction with Hardware Dirty Tracking (IO_PGTABLE_QUIRK_ARM_HD)
-
-When Hardware Dirty Tracking (ARM_LPAE_PTE_DBM) is enabled on Stage-1 table=
-s:
- * In visit_dirty() / arm_lpae_read_and_clear_dirty(), dirty bits are
-queried and cleared on a page-by-page granularity
-(iopte_set_writeable_clean(ptep)).
- * If a single 4KB page within a 64KB CONT group is marked clean while
-neighboring pages remain marked dirty/writeable, the descriptors in
-that group will differ in access permissions (AP[2]).
- * According to Arm ARM D8.3.1, all descriptors in a contiguous block
-must share identical permissions and attributes. If dirty tracking is
-active on a domain, consider whether IO_PGTABLE_QUIRK_ARM_NO_CONT_HINT
-should be set or whether CONT sizes should be suppressed when
-IO_PGTABLE_QUIRK_ARM_HD is active.
