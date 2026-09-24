@@ -1,132 +1,131 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-ej2-f12.google.com (mail-ej2-f12.google.com [74.125.228.140])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6D21C41E6C5;
-	Thu, 24 Sep 2026 23:19:32 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D843A30DEA3
+	for <linux-arm-msm@vger.kernel.org>; Thu, 24 Sep 2026 23:48:30 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.228.140
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790291973; cv=none; b=pDTHu6CVd5mrRVLrC0uEAIq5cLzsANFc5/5WIED/AxveJzAxsa6rHC5i+P1d07BYXSSno8LAQESJm0i6swtbk49uDSswgzguIVllSK40dDhxuGbXIfVYLjCESCDXptHCs3ANyfgQHoV4gFiGbDLMIFYP8nelDIRmyUavOixkW4c=
+	t=1790293712; cv=none; b=t1LH6Z0S8kUNGez6vNsXWsWwaMkAarVYg0DqDqemLQ6nJNhbzdxyFqIlNe2fdqSYVQmomNWDPAarC1ZqS3nN7qAI2GQsaPEltzas/VzjWpWmbn3XjH+qiquJLXXzUYKncqTHYNIxp2iZAu/nxZad5zygHb2y/SE61PYG2/zGMN0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790291973; c=relaxed/simple;
-	bh=VUYEEE3HevbpBaBEh98rRlQ6afkhGNAfaMMbUMmhrRU=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=VH8Jcq44S98dbzhcBMJNCmYN0/xmMdE93XJe4VfYmiOq4MYgNed1JS4cTFNkECX0o5NKSHZLYaDKb9gP2WaUQRDfu0XNPCrXjVTYwIZYcov2QSYLecSf2luvlzlZcgaEWUKwMNCs62ZBFOUPrt2qucdWKBKOuCqNO/PX7XBIWgU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Hx/LMMZp; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1790293712; c=relaxed/simple;
+	bh=hTYJ14te7p3/8tBxHYBWaHZUm0lfhODe827miPf3xkE=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=FKGraM4DXJWZn7pQTLwEYF1gYNC+5FPRmNuBRGH/AVxjjceDAwoJTRbKJg9X1xvePdhk5GBHJaBsPOMT1ZfHa9u9XXu8QvyvAOHQMySCpcgbO3iqXmNeWiCi3EucYwMeOGDl1H2eUdo3DIr8Gka6wTBOmigGGoCqTeDs/SIgO/A=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=qBVFtLBH; arc=none smtp.client-ip=74.125.228.140
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Hx/LMMZp"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id CB38A1F00893;
-	Thu, 24 Sep 2026 23:19:29 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1790291971;
-	bh=58txGiUYq2o3vDEpNYOXBhgESMZOWm8Yh5OzD7flxWs=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=Hx/LMMZpDqXxSUq4Ps9iyk/DvO84jO7vrOHI7QGUK0/3u+qPYj1fbPk9HjocHzPHa
-	 GCQC6ftH+HYwS0E14C4lXK/gFIJ0IOrqW/rXyaU/R82RSjd7GeMYDIDC2/0hVPr7y3
-	 Iqoef6j89dA8muGvk1Uxzy/QDWLV03WptSO0Osu0LIcepbOHLuXvEYsT7vGrX7vwZL
-	 gg/L8HvHjoQHYvISgobMg/RwBVEYfFsRFDyn8CAjzpWdKxq2TpbkhgMzPtLEGtODf/
-	 WpdA+ESbaem7uXhuKp+jX1oFk09qjjE6Zj1u8x8A+ujPSJ9xzrP0Z5kqf6F7J9rn1B
-	 coSq3UH3GMp2w==
-Date: Fri, 25 Sep 2026 00:19:27 +0100
-From: Mark Brown <broonie@kernel.org>
-To: Konrad Dybcio <konradybcio@kernel.org>
-Cc: Georgi Djakov <djakov@kernel.org>, Evan Green <evgreen@chromium.org>,
-	Yassine Oudjana <y.oudjana@protonmail.com>,
-	Dmitry Baryshkov <lumag@kernel.org>,
-	Adam Skladowski <a39.skl@gmail.com>, linux-arm-msm@vger.kernel.org,
-	linux-pm@vger.kernel.org, linux-kernel@vger.kernel.org,
-	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
-	Aishwarya.TCV@arm.com
-Subject: Re: [PATCH 0/6] Assorted fixes for icc-rpm
-Message-ID: <a4439f1d-6c2c-43ee-966c-239eaee148df@sirena.org.uk>
-References: <20260909-topic-icc_rpm_smd_qol-v1-0-6dc5b5e97626@oss.qualcomm.com>
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="qBVFtLBH"
+Received: by mail-ej2-f12.google.com with SMTP id a640c23a62f3a-c294af0caa8so40942066b.1
+        for <linux-arm-msm@vger.kernel.org>; Thu, 24 Sep 2026 16:48:30 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1790293709; x=1790898509; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=hTYJ14te7p3/8tBxHYBWaHZUm0lfhODe827miPf3xkE=;
+        b=qBVFtLBHXgfqQCXXcoxj7qkzhAsEivvXU6kw4vyxa1TKK6wRL79uYkcq+a9EAl7nZI
+         K0CaNxnX3fg+uHjmPuWaQXbTdOAi96NkVZ7QZ9ZC2X9Ik1W8qGh4vIpa+DxYQprpCug6
+         Ex7gB96zEO5fot+yVby4Gor4bw5nNFpOVAcZm3s63cAV2ZmSpNPtJNS70KLVHozKDwqK
+         WpJb4tTNMFAap7Rxtdgj+gx4tTB+iLHgXalyO8duI1sN5kVCOuxy+zcsShp0fBN4oX5d
+         leZweJz501CDmXn8Dx+dqW0m8I5vAgg9XzoacPCPvUP3euVyoQ65UJOiXYyRRTdCh1X7
+         4Ufw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1790293709; x=1790898509;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=hTYJ14te7p3/8tBxHYBWaHZUm0lfhODe827miPf3xkE=;
+        b=KOQ9MLoxXgWstpYppsuGXFBFCUwRGxuKEdnq6y5hY8ZjbkqnESONqftPX98Yg8s53R
+         vSCUfXrU9y0zjxkyP0OklWzjV0KSajGQROqdad0f8ttwyBp8Q4oLiVb0rXaVBT64ezbv
+         dnnG5AbslzvMlSixYulmRzRiP0ZkNZV4mYlh9/NwL5dA5ezDPHKRRILsnmBhCBARUpIt
+         Hi5qqnMr63waPaizzquYf5GWoP15LizLZY89dHDaOVGOCzCdTinFxoHNFLOSXMoy40wG
+         EC7T99Wu7wScWT1z18G4vYDsq+Pifl7jHcfVLVaeS5VvEFl47vlqhDnSUSFl6HwCdO1V
+         kVUg==
+X-Forwarded-Encrypted: i=1; AKwUvBz9N0fi9KvHKVItK4MUBRcU3AGukqYuhAJTt2ROFEFuDDGYvNku6fYRL0xCCy/w3tDrnjx2KHbN161DO89J@vger.kernel.org
+X-Gm-Message-State: AFuF++lqgsL6KVNTW6GtQo1WtmcKn7nvu8NU/8braNp4VIfYzY2UUGjX
+	51e/GODnl1TT5SaGKpMuJafaRFsYl52k/G8KA6odL40WLLpe3qXgnNAg
+X-Gm-Gg: AYBFou2/UlXEAoh4tyGP/rwG8vsQS1DyBF7M+aryD69IE9+rjYwlTKemFEBp/RFd9FS
+	dvACBEGxH0bWLCmW57KsqLyS1TpioZk3vj8IpF9i9T02+lSHQFbb1G7ESyJtvXWr61qcBvtbL0Q
+	iyJXm4RMe58OqOPbdmgm45Noh0oyf2O3RorMV6hdoiCQwab/7sr6eoiFtdCkTAIHY6BDOgpxpTa
+	6uToO7OTUOw5wOM+jEvicL6FeYJLaCn75bj+I/k/bQpjkUxHJs+AtayBi18+rsARl8l9qJZ2Iv7
+	uUKU7cZvVtOfmu/NyXcit3kxYYCaT908j47Qe9QTQ74p5+UHWvFw7A9+7mCMBrQ+U/YqYaF8BNL
+	kMNqte/ocprJPegCcvqopCtqolfQRgEUkQRtEWfB8DgQI64wcHKYc7zukg6YdE3mEjZmtQ6Vm4X
+	/5SfY7ko5r6CBV9Gg/+KlrU5oJf88/LCdOIgXFi6sxJFxdhoXNrTvKREieAoMgLIHM0kaB7CQPU
+	Cf4Jnz1nQbFKKdKg2oOt3kgI1IPxL75TXpRwDWp/o4GrBHAZSbBxZ8zDX94e9CARM0Hg0OkGqcn
+	3CnqXDQH5mp2zL/yhe+k
+X-Received: by 2002:a17:907:94cc:b0:c1f:e9d9:64d4 with SMTP id a640c23a62f3a-c2ac24747fbmr368025566b.11.1790293708996;
+        Thu, 24 Sep 2026 16:48:28 -0700 (PDT)
+Received: from localhost.localdomain (31-208-26-100.cust.bredband2.com. [31.208.26.100])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c2ae757b9c1sm30757766b.33.2026.09.24.16.48.27
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 24 Sep 2026 16:48:28 -0700 (PDT)
+From: Yongzhao Chen <yongzhao.derek@gmail.com>
+To: Andrew Lunn <andrew@lunn.ch>
+Cc: netdev@vger.kernel.org,
+	"David S. Miller" <davem@davemloft.net>,
+	Eric Dumazet <edumazet@google.com>,
+	Jakub Kicinski <kuba@kernel.org>,
+	Paolo Abeni <pabeni@redhat.com>,
+	Florian Fainelli <florian.fainelli@broadcom.com>,
+	Vladimir Oltean <olteanv@gmail.com>,
+	Christian Marangi <ansuelsmth@gmail.com>,
+	Heiner Kallweit <hkallweit1@gmail.com>,
+	Russell King <linux@armlinux.org.uk>,
+	linux-kernel@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org,
+	Ziyang Huang <hzyitc@outlook.com>
+Subject: Re: [RFC PATCH net-next v3 4/5] net: dsa: qca8k: flag QCA8337 internal CPU PHYs for SmartSpeed
+Date: Fri, 25 Sep 2026 01:48:14 +0200
+Message-ID: <20260924234814.1734-1-yongzhao.derek@gmail.com>
+X-Mailer: git-send-email 2.45.2.windows.1
+In-Reply-To: <09d669ff-7aad-4414-880a-21c2e7bf2cd7@lunn.ch>
+References: <20260923215858.1653-1-yongzhao.derek@gmail.com> <20260923215858.1653-5-yongzhao.derek@gmail.com> <09d669ff-7aad-4414-880a-21c2e7bf2cd7@lunn.ch>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="viEvHksDB/4cQVa2"
-Content-Disposition: inline
-In-Reply-To: <20260909-topic-icc_rpm_smd_qol-v1-0-6dc5b5e97626@oss.qualcomm.com>
-X-Cookie: A grammarian's life is always in tense.
+Content-Transfer-Encoding: 8bit
 
+Hi Andrew,
 
---viEvHksDB/4cQVa2
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+The register 0x14 configuration is in patch 5. For a QCA8337 CPU PHY
+marked by patch 4, qca8337_soft_reset() clears SmartSpeed enable and
+bypass before the software reset. I should have made that relationship
+explicit in patch 4.
 
-On Wed, Sep 09, 2026 at 06:41:53PM +0200, Konrad Dybcio wrote:
-> This series brings multi-port QoS programming and squashes some
-> minor existing issues. No dependencies.
+I have a local read_status change for QCA8337, which I plan to include
+in the next RFC. When autonegotiation is enabled, it reads the resolved
+speed and duplex from register 0x11, retaining generic link-partner and
+master/slave handling. It holds the link down until those values are
+valid; forced mode keeps the generic BMCR handling. Local tests that run
+the callback and the PHY state machine against a simulated MDIO bus
+pass, including a case where 0x11 reports 100 Mb/s while the generic
+path resolves 1 Gb/s. W=1 object builds for x86 and arm64 are clean.
 
-Something about this series seems to break network boot on db845c, the
-system comes up but the USB and network never appears and eventually the
-board reboots (I guess a watchdog?):
+I also tested it on RA74 in an OpenWrt backport on Linux 6.18.52, not
+the net-next series itself, with the existing CPU SmartSpeed workaround.
+On normal 100 and 1000 Mb/s LAN links the reported speed matched 0x11,
+including after renegotiating the 100 Mb/s port and after a warm
+reboot. These were normal links; I could not force a downshift, so the
+downshifted case is only covered by the simulated test.
 
-<6>[    3.127987] Trying to probe devices needed for running init ...
-<4>[    3.131178] qcom-pcie 1c00000.pcie: supply vdda not found, using dummy regulator
-<4>[    3.133600] qcom-pcie 1c08000.pcie: supply vdda not found, using dummy regulator
-<4>[    3.133765] qcom-pcie 1c08000.pcie: supply vddpe-3v3 not found, using dummy regulator
-<4>[    3.145996] qcom-pcie 1c00000.pcie: supply vdda not found, using dummy regulator
-<4>[    3.147172] qcom-pcie 1c08000.pcie: supply vdda not found, using dummy regulator
-<4>[    3.147292] qcom-pcie 1c08000.pcie: supply vddpe-3v3 not found, using dummy regulator
-Format: Log Type - Time(microsec) - Message - Optional Info
-Log Type: B - Since Boot(Power On Reset),  D - Delta,  S - Statistic
+The existing at803x downshift tunable cannot be reused directly here.
+Its setter calls phy_init_hw() after writing 0x14, which would run
+qca8337_soft_reset() and clear a requested enable on the flagged CPU
+PHY. This shared-port PHY also has no net_device->phydev through which
+ethtool can reach it; ethtool on the conduit or wan addresses a
+different PHY. I have left tunable support out of this follow-up.
 
-bisect log seems to coverge fairly nicely, but only on the merge commit
-unfortunately:
+I don't know whether downshift is broken in general or only in
+switch-integrated PHYs. My only data point is the RA74 CPU link
+failure, and I have no downshift results from user ports or discrete
+at803x PHYs. phydev->is_internal is set for every PHY that qca83xx
+matches, since they are all switch-internal, including user ports and
+QCA8327, so it cannot select just the CPU link. I have not found a
+verified erratum for this switch revision.
 
-git bisect start
-# status: waiting for both good and bad commits
-# good: [93f51579e7df248780214094418f205253383cc5] Linux 7.3-rc4
-git bisect good 93f51579e7df248780214094418f205253383cc5
-# status: waiting for bad commit, 1 good commit known
-# bad: [3d7783543c2646af69ad65825e810060494bea21] Add linux-next specific files for 20260923
-git bisect bad 3d7783543c2646af69ad65825e810060494bea21
-# skip: [f5c66cf1cc3d0412aae3a79defe24f2558fd3796] Merge branch 'main' of https://git.kernel.org/pub/scm/linux/kernel/git/netdev/net-next.git
-git bisect skip f5c66cf1cc3d0412aae3a79defe24f2558fd3796
-# good: [f5c66cf1cc3d0412aae3a79defe24f2558fd3796] Merge branch 'main' of https://git.kernel.org/pub/scm/linux/kernel/git/netdev/net-next.git
-git bisect good f5c66cf1cc3d0412aae3a79defe24f2558fd3796
-# good: [25bd2398be78da6f80b39de910027470b29617ae] Merge branch 'for-next' of https://git.kernel.org/pub/scm/linux/kernel/git/broonie/sound.git
-git bisect good 25bd2398be78da6f80b39de910027470b29617ae
-# good: [294dea4858e9113fd11d22a1b8cbf1e8c0aa7876] Merge branch 'for-next' of https://git.kernel.org/pub/scm/linux/kernel/git/tj/wq.git
-git bisect good 294dea4858e9113fd11d22a1b8cbf1e8c0aa7876
-# bad: [23c47f595e5eb361f426eb541d56fd2cdb96b30f] Merge branch 'staging-next' of https://git.kernel.org/pub/scm/linux/kernel/git/gregkh/staging.git
-git bisect bad 23c47f595e5eb361f426eb541d56fd2cdb96b30f
-# bad: [ffa9e57e6ed0b967209bf65aad8d834fe2103e1d] Merge branch 'icc-next' of https://git.kernel.org/pub/scm/linux/kernel/git/djakov/icc.git
-git bisect bad ffa9e57e6ed0b967209bf65aad8d834fe2103e1d
-# good: [ade03fa0fb64ac61c6eb1b409baa2c2f710c27d8] Merge branch 'driver-core-next' of https://git.kernel.org/pub/scm/linux/kernel/git/driver-core/driver-core.git
-git bisect good ade03fa0fb64ac61c6eb1b409baa2c2f710c27d8
-# good: [bbed88f72dbbb960080282de3b90ca0933fa6226] usb: dwc2: fix typos in comments
-git bisect good bbed88f72dbbb960080282de3b90ca0933fa6226
-# good: [f9b0809c23123401290e3a144d231aa40fff692e] Merge branch 'char-misc-next' of https://git.kernel.org/pub/scm/linux/kernel/git/gregkh/char-misc.git
-git bisect good f9b0809c23123401290e3a144d231aa40fff692e
-# bad: [07bf225c62c00b9b934b9125e78e2208b961d9c3] Merge branch 'icc-rpm' into icc-next
-git bisect bad 07bf225c62c00b9b934b9125e78e2208b961d9c3
-# good: [041e725a102fbf3a4e484e28abe66575bc515888] Merge branch 'icc-milos' into icc-next
-git bisect good 041e725a102fbf3a4e484e28abe66575bc515888
-# good: [ddbacca26d1db5bd9c477253b0af83b028136a24] interconnect: qcom: icc-rpm: Program SMD RPM auxiliary QoS ports
-git bisect good ddbacca26d1db5bd9c477253b0af83b028136a24
-# good: [cc91c1b99101f2dcd2f624a27bec6f6f557e5421] interconnect: qcom: msm8976: Configure auxiliary GPU QoS port
-git bisect good cc91c1b99101f2dcd2f624a27bec6f6f557e5421
-# good: [24e7422ce31189502d07279c083646aaca513311] interconnect: qcom: use 64-bit SMD RPM bus votes
-git bisect good 24e7422ce31189502d07279c083646aaca513311
-# first bad commit: [07bf225c62c00b9b934b9125e78e2208b961d9c3] Merge branch 'icc-rpm' into icc-next
-
---viEvHksDB/4cQVa2
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAABCgAdFiEEreZoqmdXGLWf4p/qJNaLcl1Uh9AFAmq1r/4ACgkQJNaLcl1U
-h9Dh9gf/eGI/sxImujr0Sy/J0ViycI4sDeeZsyoN/+XpufUAbGSqYfgGWcEzcw8N
-Fy4s0lr6rGF5wusBlBbSubkJt/AJL4wbA4WnMMrYJzkt0SPby3CBp+5yYV+dk8NP
-shNeo4vgPVdESbC/vbYab91uhni3HPNWQq5HE7xsXQEUfHXc2m0DuzNUwffJCJ0X
-Ym+jsciOCK9VvC1T0AY+kaHlcPf34PMovWi0+8uweLZFn2u/6jrPUMfuFDsR/Pll
-Anr09x/LsxBjteZ9lpUMyvyFD/uwlZviNDO8EcIviqHf4oiFpnteLleyq/Fsnals
-vdtIk/VJB+lpGOd8yaGqSQs2Whw93w==
-=2+KG
------END PGP SIGNATURE-----
-
---viEvHksDB/4cQVa2--
+Thanks,
+Yongzhao Chen
