@@ -1,163 +1,217 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from mail-4323.protonmail.ch (mail-4323.protonmail.ch [185.70.43.23])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F091B437472;
-	Thu, 24 Sep 2026 10:34:35 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 92C382E266C;
+	Thu, 24 Sep 2026 10:36:42 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.70.43.23
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790246077; cv=none; b=SUktGZEnLuACzvEJfPFVqEmvCfDJrtr6BnxsvLNK1YVBOTmhGsUfwZdTxUGQ6nWW33k/VDsLSnzgfr5pvWOSLRgq5eTuHiW6WmqTXEnfbwDX+YuVF9AcOfD76wL9w03MCRPJ86TCl5N7/h0P0AveB621Dv9sxXpiBcbBiEXLJug=
+	t=1790246206; cv=none; b=Eu0udFn7xrYReLc3MMcLi8ZhtUbSnwnTW1RSPjnfX44KpYQrH2R7BaMuF+iQsTRVR+YFWG4XXyrUiHIna1x+4+5U3r0eYxaFngpLJIbS8i+DT6x9jnX/cnQ7aGtjLXJzfk8Lzb8DJjW466Q8OAVkGLzoT7yBTT05vchnR/3NeBs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790246077; c=relaxed/simple;
-	bh=N2l6r0cOEWQcHFZ8LcTLMFDpM9/zGx7ZzJvtj9HaNOU=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=RfjS8svqM1Dpv0+IJ0PbNx7hqgB7kCasHAS5llxN5WsT1sCpZ/5LWGg8jRPZieBLobDtd+KxbvcPk6+nLmBmCwXTfcCk4AdL13UTW2aI7BslDcz0MNEoszVoDHfSQIr1m3yclhGNNpWvXJ1wNwmoFmakdVWJfac7il38rv0f6Fw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=SE6JRfs/; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1790246206; c=relaxed/simple;
+	bh=sIaQCM/zVQP8UahTCWbTCOaVnjUb1AGHtQ8usqmu1Ho=;
+	h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=jKnM2uZlIyN6hwZMz6okFxqiCdd0WTBtTAnHGy7YIjZ2ETtck+JrRrZwajTLFNvaqrmm6Giid5Oay9j8547+QPBUG3SFZmvgGsTtFhARUBX9362ojRwo1uEOk2n7ir4FH9L5CHuIOJvtHWUK+lNdKVUQge03ULG1oHic8LEW3dA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=nxsw.ie; spf=pass smtp.mailfrom=nxsw.ie; dkim=pass (2048-bit key) header.d=nxsw.ie header.i=@nxsw.ie header.b=PPSFoIhA; arc=none smtp.client-ip=185.70.43.23
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=nxsw.ie
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=nxsw.ie
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="SE6JRfs/"
-Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68OA5Lsc1175616;
-	Thu, 24 Sep 2026 10:34:00 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:message-id
-	:mime-version:subject:to; s=qcppdkim1; bh=ZZnMrO7aHOO2jruA9T+2Gn
-	1sViU9nh5E9eCSpq2a5vk=; b=SE6JRfs/EdHmiNEmKeFIhunzGHGpCSE8wIjiSk
-	T+VKIBv1kjlpUqkecsFc+P+/9ctY3XIsyw2rjZwPY0ARgS4Df5nk3IRnINJNpFj7
-	pi7snGbyPYqMJROg1QQOYgGv3ii+svMqUOiLVfDIeQqgo+7NgUnFTj6pxIt0LaxZ
-	Z/Ldflw/OtaXJNakk3xppkwNbkp8qLSAi/elGHfDFK+p1KXmd7GbNMzrnTdZb0d+
-	4HSOF/M22H+SEnv3QPN9qRR40nl7U6Qo72qPSXfBIoICN8L+tGPqHelGApqOvj7e
-	za7GkFUUkbq8uNRo++58/ZrO3J5bw2ZwVQZPT8bhSO7Ll12g==
-Received: from apblrppmta01.qualcomm.com (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com [103.229.18.19])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gw1t7r3br-1
-	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
-	Thu, 24 Sep 2026 10:33:59 +0000 (GMT)
-Received: from pps.filterd (apblrppmta01.qualcomm.com [127.0.0.1])
-	by APBLRPPMTA01.qualcomm.com (8.18.1.11/8.18.1.11) with ESMTP id 68OAXu8I2494666;
-	Thu, 24 Sep 2026 10:33:56 GMT
-Received: from hu-devc-hyd-u22-c.qualcomm.com (hu-arpisain-hyd.qualcomm.com [10.147.248.17])
-	by APBLRPPMTA01.qualcomm.com (PPS) with ESMTPS id 68OAXtkT2494659
-	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
-	Thu, 24 Sep 2026 10:33:55 +0000 (GMT)
-Received: from hu-arpisain-hyd.qualcomm.com (localhost [127.0.0.1])
-	by hu-devc-hyd-u22-c.qualcomm.com (Postfix) with ESMTP id BFFC463A;
-	Thu, 24 Sep 2026 16:03:54 +0530 (+0530)
-From: Arpit Saini <arpit.saini@oss.qualcomm.com>
-Date: Thu, 24 Sep 2026 16:03:46 +0530
-Subject: [PATCH] drm/bridge: anx7625: Fix register access in low-power mode
+	dkim=pass (2048-bit key) header.d=nxsw.ie header.i=@nxsw.ie header.b="PPSFoIhA"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nxsw.ie;
+	s=protonmail2; t=1790246194; x=1790505394;
+	bh=F/ZACrV0aO4tIi1yz6r8avu0F7Wz4cAKOEl6OlC0s8M=;
+	h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
+	 Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
+	 Message-ID:BIMI-Selector;
+	b=PPSFoIhAHCReWnNEt/yAkqwhMU4gOeJGrRwd/T5v1b/abU2dTq79+izGTsXdrVqxF
+	 LHxR8f7LDAVZh5X07ZY2qrfmQA7LTN4ufjJFpWVg+RRWKpxpMrBM9OdujSDzTIuUFg
+	 bQNOX4PmLowms8RYAMU+B37XZL8aKeRfi4aJ5lfpXwIZpo1bEEOyNud+UOzIrh0N7G
+	 SOwL98xWljNdYX/R1oIVj05NIBoA/DuqwKDAWCjaPLwcEWqYMZKufQAsdsaoxEVxd/
+	 5ysghwseELMjho+iQA8F5uhHm2ZbIot/05lXqS3N0UQBUhFv0Zxi+ag8KTt/0M6k5d
+	 78eqpEcda6SJA==
+Date: Thu, 24 Sep 2026 10:36:28 +0000
+To: Jianfeng Liu <liujianfeng1994@gmail.com>, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, linux-kernel@vger.kernel.org
+From: Bryan O'Donoghue <bod.linux@nxsw.ie>
+Cc: linux-arm-msm@vger.kernel.org, Jessica Zhang <jesszhan0024@gmail.com>, Sumit Semwal <sumit.semwal@linaro.org>, linaro-mm-sig@lists.linaro.org, =?utf-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, Rob Clark <robin.clark@oss.qualcomm.com>, Sean Paul <sean@poorly.run>, Simona Vetter <simona@ffwll.ch>, freedreno@lists.freedesktop.org, Marijn Suijten <marijn.suijten@somainline.org>, David Airlie <airlied@gmail.com>, Dmitry Baryshkov <lumag@kernel.org>, Abhinav Kumar <abhinav.kumar@linux.dev>
+Subject: Re: [RFC PATCH v1 2/2] drm/msm: reject dma-buf imports without struct page info
+Message-ID: <bfd744b0-c51a-4b9a-9f30-0d5aa9c79512@nxsw.ie>
+In-Reply-To: <20260923074256.9357-3-liujianfeng1994@gmail.com>
+References: <20260923074256.9357-1-liujianfeng1994@gmail.com> <20260923074256.9357-3-liujianfeng1994@gmail.com>
+Feedback-ID: 136405006:user:proton
+X-Pm-Message-ID: 43bcfb19f2be4ecc4f397510c6eb20c44cd61e73
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260924-latest_tag-v1-1-7150d373f042@oss.qualcomm.com>
-X-B4-Tracking: v=1; b=H4sIAIn8tGoC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
- vPSU3UzU4B8JSMDIzMDSyMT3ZzEktTikviSxHRdA4vUxORU05QUC4NEJaCGgqLUtMwKsGHRsbW
- 1ALtePDVcAAAA
-X-Change-ID: 20260924-latest_tag-08eace5dd80a
-To: Andrzej Hajda <andrzej.hajda@intel.com>,
-        Neil Armstrong <neil.armstrong@linaro.org>,
-        Robert Foss <rfoss@kernel.org>,
-        Laurent Pinchart <Laurent.pinchart@ideasonboard.com>,
-        Jonas Karlman <jonas@kwiboo.se>,
-        Jernej Skrabec <jernej.skrabec@gmail.com>,
-        Luca Ceresoli <luca.ceresoli@bootlin.com>,
-        Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
-        Maxime Ripard <mripard@kernel.org>,
-        Thomas Zimmermann <tzimmermann@suse.de>,
-        David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
-        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
-        Xin Ji <xji@analogixsemi.com>,
-        Heikki Krogerus <heikki.krogerus@linux.intel.com>
-Cc: linux-arm-msm@vger.kernel.org, ayushi.makhija@oss.qualcomm.com,
-        rajeevny@qti.qualcomm.com, dri-devel@lists.freedesktop.org,
-        linux-kernel@vger.kernel.org, arpit.saini@oss.qualcomm.com,
-        Salendarsingh Gaud <sgaud@qti.qualcomm.com>
-X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1790246034; l=1817;
- i=arpit.saini@oss.qualcomm.com; h=from:subject:message-id;
- bh=N2l6r0cOEWQcHFZ8LcTLMFDpM9/zGx7ZzJvtj9HaNOU=;
- b=njF75fOau/EXPNPMKYdnbjZtzK1ZrjBoTzsX8dvCtyPuEJUNYO9gM2GOt83uskicQNA9He1Zz
- 3c/dHzqWC6CBdSi9hhLQHShoGXRXuvF/NwquIOC28fK1nY0WujjeNwK
-X-Developer-Key: i=arpit.saini@oss.qualcomm.com; a=ed25519;
- pk=OGOh7FGwrnkILHNlcTTABbBMQxxo319duzbTg0YPDAc=
-X-Proofpoint-Reinject: loops=2 maxloops=12
-X-QCInternal: smtphost
-X-QCInternal: smtphost
-X-Proofpoint-GUID: ruGxyRo_qcHgjlck7joT9CeM2Gz7DEeW
-X-Authority-Analysis: v=2.4 cv=U/MHnuru c=1 sm=1 tr=0 ts=6ab4fc97 cx=c_pps
- a=Ou0eQOY4+eZoSc0qltEV5Q==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
- a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22 a=EUspDBNiAAAA:8
- a=-5D3cT9HNYT4-cb-j94A:9 a=QEXdDO2ut3YA:10
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTI0MDA0MyBTYWx0ZWRfX+f9r3xwfd7Wr
- EwbZJOjZF9LfaQGad6WCfatiA8xkn557m98fMfrxn2xkhkbhRztoPz/CqgI6wN7D0X/elqYBRy7
- J5QxLw0kRwE1xis3B9uhPxAbAiuYeMPl9I7nMmEydPD+Zz/WwODAy4dHvYfUj3iF03S/pg/8sOX
- /NZeHHIBJcCsLmrzom6+d7uqT9LSTENw1pPGJw+NJEE14XO1VBgo7DGo2tD1gga9b0fuHfsxJlu
- pkpEQXgekrVzdT4YWtjE01WyrboYDOjUuGeCoIfkT3jcx9ah6SeHrjbltE7fwJExnudOXegw1uo
- 0/Ltm4DvotyofircKHEnIhgUJpGJz/jDO/mHfiW3I+q0sV84SslSLgUh5P+4lNq1uz3ZFDdCshF
- JBdJEyqIy+awmgpznVY1T9ZYHtOqtEkXjFQD02bvg4aXfKjbkRh1ai4rfBh5+k2A7swb/CxzaOe
- tNchtfiHVdIYiiJdRKg==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTI0MDA0MyBTYWx0ZWRfX4zAiGRSTYhws
- 18sKSPjzcI015lOICR4IIYcDqWKUCcnG/P0SSpByqDDQjg6cAtVQDQUrPCN/11p+bZzB9OjDTta
- 28WsoyGl/tmeSJqy9Vn7MD5LB9A9a5U=
-X-Proofpoint-ORIG-GUID: ruGxyRo_qcHgjlck7joT9CeM2Gz7DEeW
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-24_02,2026-09-21_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0 spamscore=0 lowpriorityscore=0 suspectscore=0 adultscore=0
- priorityscore=1501 bulkscore=0 clxscore=1011 impostorscore=0 phishscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609240043
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-The INTERFACE_CHANGE_INT_MASK register was accessed outside the
-Type-C initialization path added for minimal Type-C support.
+On 23/09/2026 08:42, Jianfeng Liu wrote:
+> msm_gem_import() fills the GEM object's page array with the deprecated
+> drm_prime_sg_to_page_array() and stores the attachment sg_table for
+> later mapping into the GPU's own pagetables via iommu_map_sgtable().
+> Both need the struct page of the sg_table:
+>=20
+>   - iommu_map_sg() maps sg_phys() of each entry, and
+>   - drm_prime_sg_to_page_array() iterates with for_each_sgtable_page,
+>     which walks sg->length.
+>=20
+> When CONFIG_DMABUF_DEBUG=3Dy, dma_buf_map_attachment() hands importers
+> a copy of the sg_table with the page pointers stripped and sg->length
+> zeroed.  In that case drm_prime_sg_to_page_array() "succeeds" while
+> filling zero entries, leaving msm_obj->pages uninitialized garbage
+> (kvmalloc_objs() does not zero).  The buffer is imported anyway, and
+> the first VM_BIND map of it fails asynchronously in the scheduler job
+> run - after userspace has already enqueued GPU work referencing the
+> mapping.  Userspace then observes arm-smmu translation faults from
+> UCHE, e.g. hardware video decode in clapper/chromium:
+>=20
+>    gpu fault: ttbr0=3D000000088a889000 iova=3D000000010741c000 dir=3DREAD
+>    type=3DTRANSLATION source=3DUCHE
+>=20
+> Replace the deprecated helper with an explicit loop so that a missing
+> or short page list is detected at import time and rejected with
+> -EINVAL.  This turns the silent memory corruption into a clean import
+> error, letting userspace fall back instead of crashing the GPU.
+>=20
+> Note that msm fundamentally cannot map a page-less sg_table into its
+> per-process GPU pagetables (it needs the physical addresses), so
+> imports of such buffers can never work until msm is converted to
+> build its GPU mappings from the attachment's DMA addresses.
+>=20
+> Signed-off-by: Jianfeng Liu <liujianfeng1994@gmail.com>
+>=20
+> ---
+>=20
+>   drivers/gpu/drm/msm/msm_gem.c | 31 ++++++++++++++++++++++++++++---
+>   1 file changed, 28 insertions(+), 3 deletions(-)
+>=20
+> diff --git a/drivers/gpu/drm/msm/msm_gem.c b/drivers/gpu/drm/msm/msm_gem.=
+c
+> index c4cff3d53d81b..0d5a91181d05b 100644
+> --- a/drivers/gpu/drm/msm/msm_gem.c
+> +++ b/drivers/gpu/drm/msm/msm_gem.c
+> @@ -1307,7 +1307,8 @@ struct drm_gem_object *msm_gem_import(struct drm_de=
+vice *dev,
+>   =09struct msm_gem_object *msm_obj;
+>   =09struct drm_gem_object *obj;
+>   =09struct dma_buf *dmabuf =3D attach->dmabuf;
+> -=09size_t size, npages;
+> +=09struct sg_page_iter piter;
+> +=09size_t size, npages, filled =3D 0;
+>   =09int ret;
+>=20
+>   =09size =3D PAGE_ALIGN(dmabuf->size);
+> @@ -1333,8 +1334,32 @@ struct drm_gem_object *msm_gem_import(struct drm_d=
+evice *dev,
+>   =09=09goto fail;
+>   =09}
+>=20
+> -=09ret =3D drm_prime_sg_to_page_array(sgt, msm_obj->pages, npages);
+> -=09if (ret) {
+> +=09/*
+> +=09 * Fill the page array ourselves instead of using the deprecated
+> +=09 * drm_prime_sg_to_page_array(), so that we can detect sg_tables
+> +=09 * that carry no struct page at all.  Those must be rejected:
+> +=09 * msm maps imported buffers into the GPU's own pagetables with
+> +=09 * iommu_map_sgtable(), which needs the physical pages, so an
+> +=09 * import without page information could never be mapped.  The
+> +=09 * most prominent case is the page-stripping sg_table wrapper that
+> +=09 * dma_buf_map_attachment() hands out when CONFIG_DMABUF_DEBUG=3Dy.
+> +=09 *
+> +=09 * drm_prime_sg_to_page_array() would "succeed" with zero entries
+> +=09 * filled in that case and leave msm_obj->pages uninitialized,
+> +=09 * which later blows up as arm-smmu translation faults from UCHE.
+> +=09 */
+> +=09for_each_sgtable_page(sgt, &piter, 0) {
+> +=09=09if (WARN_ON(filled >=3D npages)) {
+> +=09=09=09ret =3D -EINVAL;
+> +=09=09=09goto fail;
+> +=09=09}
+> +=09=09msm_obj->pages[filled++] =3D sg_page_iter_page(&piter);
+> +=09}
+> +=09if (filled !=3D npages) {
+> +=09=09DRM_DEV_ERROR(dev->dev,
+> +=09=09=09      "import of dmabuf from '%s' rejected: sg_table has no/mis=
+aligned struct page info\n",
+> +=09=09=09      dmabuf->exp_name ?: "?");
+> +=09=09ret =3D -EINVAL;
+>   =09=09goto fail;
+>   =09}
+>=20
+> --
+> 2.47.3
+>=20
+>=20
 
-On platforms without Type-C support, this causes the driver to access
-the RX-P0 I2C client while the ANX7625 is in its low-power configuration.
-The access fails during probe and results in errors such as:
+This very much looks like an LLM generated patch - the commit log, the=20
+large comment in the code and TBH the solution too.
 
-[drm:i2c_access_workaround.isra.0 [anx7625]] *ERROR* fail to access i2c id=3f :39
-[drm:anx7625_i2c_probe [anx7625]] *ERROR* fail to write i2c id=3f :43
+Why is the fix Adreno specific ?
 
-Keep the interrupt-mask update within the low-power-mode check block.
+Shouldn't this function be ammended with
 
-Fixes: f81455b2d332 ("drm: bridge: anx7625: implement minimal Type-C support")
-Reported-by: Salendarsingh Gaud <sgaud@qti.qualcomm.com>
-Signed-off-by: Arpit Saini <arpit.saini@oss.qualcomm.com>
+ > +=09if (filled !=3D npages)
+
+instead ?
+
+/**
+  * drm_prime_sg_to_page_array - convert an sg table into a page array
+  * @sgt: scatter-gather table to convert
+  * @pages: array of page pointers to store the pages in
+  * @max_entries: size of the passed-in array
+  *
+  * Exports an sg table into an array of pages.
+  *
+  * This function is deprecated and strongly discouraged to be used.
+  * The page array is only useful for page faults and those can corrupt=20
+fields
+  * in the struct page if they are not handled by the exporting driver.
+  */
+int __deprecated drm_prime_sg_to_page_array(struct sg_table *sgt,
+                                             struct page **pages,
+                                             int max_entries)
+{
+         struct sg_page_iter page_iter;
+         struct page **p =3D pages;
+
+         for_each_sgtable_page(sgt, &page_iter, 0) {
+                 if (WARN_ON(p - pages >=3D max_entries))
+                         return -1;
+                 *p++ =3D sg_page_iter_page(&page_iter);
+         }
+         return 0;
+}
+EXPORT_SYMBOL(drm_prime_sg_to_page_array);
+
+All the LLM seems to have done here is copy the code out of=20
+drm_prime_sg_to_page_array() and then add a check for filled !=3D npages
+
+But if that is a valid check for Adreno - then it is a valid check for:
+
+  grep drm_prime_sg_to_page_array drivers/* -r
+drivers/gpu/drm/vmwgfx/vmwgfx_blit.c:=09=09ret =3D=20
+drm_prime_sg_to_page_array(src->ttm->sg, src_pages,
+drivers/gpu/drm/vmwgfx/vmwgfx_blit.c:=09=09ret =3D=20
+drm_prime_sg_to_page_array(dst->ttm->sg, dst_pages,
+drivers/gpu/drm/omapdrm/omap_gem.c:=09=09ret =3D=20
+drm_prime_sg_to_page_array(sgt, pages, npages);
+drivers/gpu/drm/etnaviv/etnaviv_gem_prime.c:=09ret =3D=20
+drm_prime_sg_to_page_array(sgt, etnaviv_obj->pages, npages);
+drivers/gpu/drm/drm_prime.c: * drm_prime_sg_to_page_array - convert an=20
+sg table into a page array
+drivers/gpu/drm/drm_prime.c:int __deprecated=20
+drm_prime_sg_to_page_array(struct sg_table *sgt,
+drivers/gpu/drm/drm_prime.c:EXPORT_SYMBOL(drm_prime_sg_to_page_array);
+drivers/gpu/drm/msm/msm_gem.c:=09ret =3D drm_prime_sg_to_page_array(sgt,=20
+msm_obj->pages, npages);
+drivers/gpu/drm/xen/xen_drm_front_gem.c:=09ret =3D=20
+drm_prime_sg_to_page_array(sgt, xen_obj->pages,
+
+and should live in the helper function with an appropriate Fixes: tag=20
+for backporting...
+
 ---
- drivers/gpu/drm/bridge/analogix/anx7625.c | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
-
-diff --git a/drivers/gpu/drm/bridge/analogix/anx7625.c b/drivers/gpu/drm/bridge/analogix/anx7625.c
-index c3af88e14f8b..00f2132c7c47 100644
---- a/drivers/gpu/drm/bridge/analogix/anx7625.c
-+++ b/drivers/gpu/drm/bridge/analogix/anx7625.c
-@@ -2930,11 +2930,11 @@ static int anx7625_i2c_probe(struct i2c_client *client)
- 
- 		pm_runtime_get_sync(dev);
- 		_anx7625_hpd_polling(platform, 5000 * 100);
--	}
- 
--	if (platform->pdata.intp_irq)
--		anx7625_reg_write(platform, platform->i2c.rx_p0_client,
--				  INTERFACE_CHANGE_INT_MASK, 0);
-+		if (platform->pdata.intp_irq)
-+			anx7625_reg_write(platform, platform->i2c.rx_p0_client,
-+					  INTERFACE_CHANGE_INT_MASK, 0);
-+	}
- 
- 	/* After getting runtime handle */
- 	ret = anx7625_typec_register(platform);
-
----
-base-commit: 3d7783543c2646af69ad65825e810060494bea21
-change-id: 20260924-latest_tag-08eace5dd80a
-
-Best regards,
--- 
-Arpit Saini <arpit.saini@oss.qualcomm.com>
+bod
 
