@@ -1,265 +1,141 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 46F134418EC
-	for <linux-arm-msm@vger.kernel.org>; Thu, 24 Sep 2026 08:56:15 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2B607440A0A;
+	Thu, 24 Sep 2026 08:57:30 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790240178; cv=none; b=bmh2AaQbqcBQErV5p3IWVae3+9vJaMx1kje27KrfDVsN4RVfVWVGNRWgf+vLVo4owXPbkuGsZlUDHBCih9TGj1OJgwDlBSaz/mlwhIsLDlauqAFBtVT3Un8f5XaqJ8/nnsNEz7cZNMDJei4HbQejH6TVVhjHJSPn0ESWjKJUqI8=
+	t=1790240253; cv=none; b=FtGh/EX9IjAvnVieWwL9SftCA/McbhWRa4iN8sk3KBbortIzwiZ/ouwd+F/4/3ovzlVshfvLmYA1nGceXqNFUpk/deCW0FJ1pSMN0dFjcmqHCWYjrOma1e6HZRLENMghM3I+UHXKj75F3G0+XUAR59nvk27SOY2ajD3yWpM9S3M=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790240178; c=relaxed/simple;
-	bh=Nup17ENEmXpV9ZwGGRFtcICN35ExK3wjqeYVDJVYpJ0=;
+	s=arc-20240116; t=1790240253; c=relaxed/simple;
+	bh=xsiuJQwIZ5xEk8gorL2gE4ZMImjXNE15Fspti5LUvPY=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=SbTe5YEr2YV6E6Gm6vhKxJGtuxVY1Jj1/PqjFuiuW4RxCahoCn8lyqrxuRv/Haeyu76yHHO4yJI3ebVwPuXhqIeME5yMNyUvzw0skQQNeHKPpQvs1vFsptZHQskoiI4HxLggHAqNpGLi58IRGfYtB1NvcOCYX00EfF6qGls5DzY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=XTX7ktsl; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=e+Y6g8Kj; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	 Content-Type:Content-Disposition:In-Reply-To; b=tk34WMAHsFrRyDuqkbeD36b8lgmQFC7bEf1oj4Yzu503Cun+2j0TFuxdn7tsad1FSmoCVuC3sSOD1mdIEOYC77UkVMSlz5l2v3dbjHXE+gWTN1Jc4CePrvY+UysK+zEXfA6BrvdWE+dIverdSdx+88oHQWVZhowJePdr2kRRX1Y=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Y66Nn1F7; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="XTX7ktsl";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="e+Y6g8Kj"
-Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68O5eM6S1278337
-	for <linux-arm-msm@vger.kernel.org>; Thu, 24 Sep 2026 08:56:15 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-type:date:from:in-reply-to:message-id:mime-version
-	:references:subject:to; s=qcppdkim1; bh=Bxt3q8Jtf9Fw4kHeMbUugrOi
-	qJ2FR8QUG1VRmITBYC4=; b=XTX7ktslLowmfmnbQRFjDshYze/T8wCX9Z3ayS9n
-	RM8AmilfvLS5mKnFr9QdowjTr1baO3y2sZJhPlJ0G0V6twHbapqcTqvHWHgvroDl
-	gnRqAvTzQmzxrrkGxboPeRvV24jiEP/YMpcVOmDcgFwkxv7MgXPQ+8cNvXewdJSB
-	g3xHyUUSIcTf283P0a3njGUtZ3zeBgQcYyG0lWGAMoenEKKxlIloWA8lXNPdbliO
-	RFfvh3f2RfyRUp8NwUS15x3o0uhwvlAqjFnUxv0PLTh57TlFXXvZkRPQR55gw/oD
-	lwjJw5i6AQ76aZmnxLYHbhz2IB0kCCscPCEywrGdWDtjYQ==
-Received: from mail-dl1-f69.google.com (mail-dl1-f69.google.com [74.125.82.69])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gvhsb3hg8-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Thu, 24 Sep 2026 08:56:14 +0000 (GMT)
-Received: by mail-dl1-f69.google.com with SMTP id a92af1059eb24-1431ba79941so2197180c88.1
-        for <linux-arm-msm@vger.kernel.org>; Thu, 24 Sep 2026 01:56:14 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1790240174; x=1790844974; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=Bxt3q8Jtf9Fw4kHeMbUugrOiqJ2FR8QUG1VRmITBYC4=;
-        b=e+Y6g8KjlXDyC4VC3i84Vzxq4QUFlbSN5Xr2b3ZE3nTyWuS5gOkCfllzcv9ihGX9VH
-         Q0UPQxR6F8+pw1bHKGyxD4UDD9k2uzCDwgsbWt/y6MI8o4F/F6XDes36QGXG4kZ3+pti
-         kutcPP6e7terVWH/P8br2ziFKwqPRlt0Ys8OFUL9jdc0YH+dhTcZ28Ast3tUJUeGiS21
-         6F4jr+CblJKrpc4FanmHRzo/Ob9cPkwxlJpaiNyI7sI+uuYhifIYB0fJb4/IpzqFX0kP
-         5F74F7Ei8Y8Kf3CPihFtiTATYuUN4UJEH2wdGwJqnDIq1bImhbWmpvl14ShjVM/zw2Cp
-         mT6A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790240174; x=1790844974;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=Bxt3q8Jtf9Fw4kHeMbUugrOiqJ2FR8QUG1VRmITBYC4=;
-        b=mlNeMRsHyWPAaWiJKOMpVSRpfEb16vKJGvYXr1Ry5vASLdxuxllZArg414jZ6I8tL3
-         mgog59hoUAY+ca2BjZS0Ipiz6s9G/mGm2gD62UXIZg4HpmvFQkIlAo45Jk13cuv9MXQ+
-         79HFkxqxebl51ghE0qVSP1IQVsFNSrDP2QuHXnCMSoeYx7fmlquKktFGWuknAVSJBASX
-         ekLBGD+z1CEXbMtN13LLjoUAApTCJ1YJOHRq7E6EjwIVZxiznWN/LO3B9nreBKZUDgQ/
-         3QzyKyJqnpeACUnD1gDWHnnDhrmyha1T9hYN4flRvewiqRy4d0QuhTtXwvDrLWXYXXGR
-         AVHg==
-X-Forwarded-Encrypted: i=1; AKwUvBzCmBTNVCg8I8J/JlWA23xjoJ6Tmr6FBXibTuCgIe7VGmQfNZBhn+YTBEXCQ89gdW+Xp/+9E2vr0HfhwlCn@vger.kernel.org
-X-Gm-Message-State: AFuF++koDeYWcND7T7tPzvgs4OvBMNBZPpDt5naUmlv0G5jDYUJubrzR
-	RA8ZibouHx7vTUixHk59AE9UoTb1Eqr0xoVPQZqiqdOKMWzKWW/6vFernPuv6bAf8BTCN6d7BB0
-	G2prok4Ob8UZw6qWLUNfNs1guN6aC7rGayGNWt/XgDQ/fN5z9B1qmcCuxJvc2Z8mu81el
-X-Gm-Gg: AYBFou0Sq5ATNWB3huetnQ5lEqJ2a+c+4YLQHTf4MAhdgxTHn4eoyaHmZUg2nd38WqV
-	K38n1yjiVOdotQmdzH8iRZghGVaZdte1mXzDsRZ2elElq/soxPZrmTamyDEiQ2GT7a5yQuQlc0D
-	Li9rT0YvrKV2JUWuivZki5JXEeeKdSxxONfwuAE8jOke3FIuY+QxqYX/DWz62jhzhIdB1yioHkO
-	J0DgGeDoCarb8XnU3cQDnR3xzTNhVojQ6HevAF68i4ouBtfkTlT7XkRhfZ6yHhxsJUc2JfIG+gu
-	4vyVc2AZpTdskncM6iU6LLUE1V3a4leknzNwwywCvb++RtzcReBh5xzBLuCQJhNUZNHlzEnqK9J
-	QGYwvGTY+lr0nM/VE1T0ps3iwQP3FYOMlNYjyMbxYdA==
-X-Received: by 2002:a05:701b:418e:20b0:143:298e:913b with SMTP id a92af1059eb24-145040d3ecamr1278185c88.45.1790240173738;
-        Thu, 24 Sep 2026 01:56:13 -0700 (PDT)
-X-Received: by 2002:a05:701b:418e:20b0:143:298e:913b with SMTP id a92af1059eb24-145040d3ecamr1278165c88.45.1790240173132;
-        Thu, 24 Sep 2026 01:56:13 -0700 (PDT)
-Received: from QCOM-aGQu4IUr3Y (i-global052.qualcomm.com. [199.106.103.52])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-144f98a288esm19986937c88.13.2026.09.24.01.56.08
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 24 Sep 2026 01:56:12 -0700 (PDT)
-Date: Thu, 24 Sep 2026 16:56:06 +0800
-From: Shawn Guo <shengchao.guo@oss.qualcomm.com>
-To: Taniya Das <taniya.das@oss.qualcomm.com>
-Cc: Bjorn Andersson <andersson@kernel.org>, Stephen Boyd <sboyd@kernel.org>,
-        Brian Masney <bmasney+clk@redhat.com>,
-        Jerome Brunet <jbrunet+clk@baylibre.com>,
-        Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>, Abel Vesa <abelvesa@kernel.org>,
-        Ajit Pandey <ajit.pandey@oss.qualcomm.com>,
-        Imran Shaik <imran.shaik@oss.qualcomm.com>,
-        Jagadeesh Kona <jagadeesh.kona@oss.qualcomm.com>,
-        linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org,
-        linux-kernel@vger.kernel.org, devicetree@vger.kernel.org
-Subject: Re: [PATCH v2 2/3] dt-bindings: clock: qcom: document the Nord DPRX
- Clock Controller
-Message-ID: <arTlpnQCjyXk2clV@QCOM-aGQu4IUr3Y>
-References: <20260924-nords_dprx-v2-0-fa4364e087ef@oss.qualcomm.com>
- <20260924-nords_dprx-v2-2-fa4364e087ef@oss.qualcomm.com>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Y66Nn1F7"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9AAFF1F00893;
+	Thu, 24 Sep 2026 08:57:27 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1790240248;
+	bh=KsfA+7ZRfaMaOYHf9FLzqm+87QxZc0nf8pdVelteCEk=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=Y66Nn1F70+EOrXieRS0criFH3uxMANVUI7oanFcCoy8GmyXIy+pJT4bYVlm/thmPG
+	 N7qIdDiz1YmSsvWNdouFIMEZW4BAqVieOEmxdbjyjg8VeCwPdmNl98xvvOpohxm65Y
+	 GyNzGB6Z7BI3y56gBKntItSCJRjU51zGLLQXLvZnr16k3FQ6buDS49+J1C+07Q9T63
+	 n6nHxyci7fO61wmUlSLUGoMKJe5Tmzp5UMO6z0QysEePeglKrYmnlnSTGRtL4Xmc0R
+	 znGcbePU3j8NmjIOaR7E0m14ncuBzwafBVjkGLhSAzXI59gpYQZewywAESCZXVQDnZ
+	 5vqxv1raD/1Pw==
+Date: Thu, 24 Sep 2026 10:57:24 +0200
+From: Maxime Ripard <mripard@kernel.org>
+To: Linus Walleij <linusw@kernel.org>
+Cc: Luca Ceresoli <luca.ceresoli@bootlin.com>, 
+	Andrzej Hajda <andrzej.hajda@intel.com>, Neil Armstrong <neil.armstrong@linaro.org>, 
+	Robert Foss <rfoss@kernel.org>, Laurent Pinchart <Laurent.pinchart@ideasonboard.com>, 
+	Jonas Karlman <jonas@kwiboo.se>, Jernej Skrabec <jernej.skrabec@gmail.com>, 
+	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Thomas Zimmermann <tzimmermann@suse.de>, 
+	David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, 
+	Jessica Zhang <jesszhan0024@gmail.com>, Laurentiu Palcu <laurentiu.palcu@oss.nxp.com>, 
+	Lucas Stach <l.stach@pengutronix.de>, Frank Li <Frank.Li@nxp.com>, 
+	Sascha Hauer <s.hauer@pengutronix.de>, Pengutronix Kernel Team <kernel@pengutronix.de>, 
+	Fabio Estevam <festevam@gmail.com>, Paul Cercueil <paul@crapouillou.net>, 
+	Paul Kocialkowski <paulk@sys-base.io>, Inki Dae <inki.dae@samsung.com>, 
+	Jagan Teki <jagan@amarulasolutions.com>, Marek Szyprowski <m.szyprowski@samsung.com>, 
+	Sean Paul <sean@poorly.run>, Jonathan Corbet <corbet@lwn.net>, 
+	Shuah Khan <skhan@linuxfoundation.org>, Randy Dunlap <rdunlap@infradead.org>, 
+	Albert Esteve <aesteve@redhat.com>, Anusha Srivatsa <asrivats@redhat.com>, 
+	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>, Hui Pu <Hui.Pu@gehealthcare.com>, 
+	Ian Ray <ian.ray@gehealthcare.com>, Thomas Petazzoni <thomas.petazzoni@bootlin.com>, 
+	dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, imx@lists.linux.dev, 
+	linux-arm-kernel@lists.infradead.org, linux-mips@vger.kernel.org, linux-rockchip@lists.infradead.org, 
+	linux-stm32@st-md-mailman.stormreply.com, asahi@lists.linux.dev, linux-arm-msm@vger.kernel.org, 
+	freedreno@lists.freedesktop.org, linux-tegra@vger.kernel.org, linux-doc@vger.kernel.org, 
+	linux-samsung-soc@vger.kernel.org
+Subject: Re: [PATCH v3 12/19] drm/mcde: dsi: don't create a panel_bridge
+Message-ID: <arTlpd-KAsVpj3UH@houat>
+References: <20260916-drm-bridge-every-panel-v3-0-83afb4f1a707@bootlin.com>
+ <20260916-drm-bridge-every-panel-v3-12-83afb4f1a707@bootlin.com>
+ <arInho2bsfJiCgjV@houat>
+ <DLNCQEG62F5N.O98WAO4U2FJO@bootlin.com>
+ <CAD++jLkk-a0MrQUiaDD8OoDDoYVwBwSjFTj5ZBy=Xo7MS4+01g@mail.gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: multipart/signed; micalg=pgp-sha384;
+	protocol="application/pgp-signature"; boundary="fta6xv3zcvscpec2"
 Content-Disposition: inline
-In-Reply-To: <20260924-nords_dprx-v2-2-fa4364e087ef@oss.qualcomm.com>
-X-Proofpoint-GUID: FqT5vyXE5v8Cp3m-siQJfe0ddWdrl70q
-X-Proofpoint-ORIG-GUID: FqT5vyXE5v8Cp3m-siQJfe0ddWdrl70q
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTI0MDAzNyBTYWx0ZWRfX6txeSwwDYm7/
- CSx0iO2Uoc+xwXW1ppCDxwbctDyFon/58LHU/mbsONbmBL7zzwMx+ssjYR1f4+Y3fqJgLr47FT0
- +IivzG6sO1HdhgPTpi13mi4dbr1dqY1jhGIIAZ7U5AHEmWr6sUXX5MfQNE6CVngRRTKwOZX1EUx
- vXvZsW2iMOJoGeJqcYAQY7uLC/RIOAA+myknmoWYDz97wBhqvXNElQRt/SvmGAjLxsfIp0m++c3
- a32lyffRLtqGSJwRSiMp8rSFLHhMACS1tymnPhFRz2aQlO/pMQsMGAJKXLn+kbnxz69sXMrJGnU
- tStr00ouZ7tNHPdJvfxIOzzcoy7cOfhm04yNHqjlrlkKJh1iwZN40rvXOxqzwU7IIXLYl9kbHGl
- kBRCqgOL9Dj6wQa0HMLPpAy1UZcuf1nEpCioq3rrgB2O/WQPKZRmvI6oEGMPQ39FAYFSVX4kdoM
- r1xpw9agRqQaN5XUghw==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTI0MDAzNyBTYWx0ZWRfX20MYeujwL5+w
- uOeo0rdpT3ikrWdzo+k7u/o1aTKZjeCKosX4ShXYSUwdMakGKgyNvtVQpqAhH6q5nvwDTlJYwZc
- OYe4DOQ4HoRwCHzmttKiArqC+cjQ6yo=
-X-Authority-Analysis: v=2.4 cv=f7vdl+yM c=1 sm=1 tr=0 ts=6ab4e5ae cx=c_pps
- a=kVLUcbK0zfr7ocalXnG1qA==:117 a=b9+bayejhc3NMeqCNyeLQQ==:17
- a=kj9zAlcOel0A:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
- a=gEfo2CItAAAA:8 a=EUspDBNiAAAA:8 a=cg-lLse-URA5QQXuI28A:9 a=CjuIK1q_8ugA:10
- a=vr4QvYf-bLy2KjpDp97w:22 a=sptkURWiP4Gy88Gu7hUp:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-24_02,2026-09-21_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 phishscore=0 lowpriorityscore=0 suspectscore=0 spamscore=0
- bulkscore=0 impostorscore=0 adultscore=0 priorityscore=1501 malwarescore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609240037
+In-Reply-To: <CAD++jLkk-a0MrQUiaDD8OoDDoYVwBwSjFTj5ZBy=Xo7MS4+01g@mail.gmail.com>
 
-On Thu, Sep 24, 2026 at 12:51:32AM +0530, Taniya Das wrote:
-> Add bindings documentation for the Nord DisplayPort Receiver (DPRX)
-> Clock Controller.
-> 
-> Signed-off-by: Taniya Das <taniya.das@oss.qualcomm.com>
-> ---
->  .../bindings/clock/qcom,nord-dprxcc.yaml           | 68 ++++++++++++++++++++++
->  include/dt-bindings/clock/qcom,nord-dprxcc.h       | 27 +++++++++
->  2 files changed, 95 insertions(+)
-> 
-> diff --git a/Documentation/devicetree/bindings/clock/qcom,nord-dprxcc.yaml b/Documentation/devicetree/bindings/clock/qcom,nord-dprxcc.yaml
-> new file mode 100644
-> index 0000000000000000000000000000000000000000..e3553e0eecd5027155b4dca5c0596e3140641aa9
-> --- /dev/null
-> +++ b/Documentation/devicetree/bindings/clock/qcom,nord-dprxcc.yaml
-> @@ -0,0 +1,68 @@
-> +# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
-> +%YAML 1.2
-> +---
-> +$id: http://devicetree.org/schemas/clock/qcom,nord-dprxcc.yaml#
-> +$schema: http://devicetree.org/meta-schemas/core.yaml#
-> +
-> +title: Qualcomm DPRX Clock & Reset Controller on Nord
-> +
-> +maintainers:
-> +  - Taniya Das <taniya.das@oss.qualcomm.com>
-> +
-> +description: |
 
-We agreed to drop " |", didn't we?
+--fta6xv3zcvscpec2
+Content-Type: text/plain; protected-headers=v1; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+Subject: Re: [PATCH v3 12/19] drm/mcde: dsi: don't create a panel_bridge
+MIME-Version: 1.0
 
-> +  Qualcomm dprx clock control module provides the clocks, and resets
-> +  domains on Nord.
+On Thu, Sep 24, 2026 at 09:51:53AM +0200, Linus Walleij wrote:
+> Hi Luca,
+>=20
+> sorry for my slowness!
+>=20
+> On Thu, Sep 24, 2026 at 9:01=E2=80=AFAM Luca Ceresoli <luca.ceresoli@boot=
+lin.com> wrote:
+> > On Tue Sep 22, 2026 at 9:09 AM CEST, Maxime Ripard wrote:
+>=20
+> > >> -    } else if (bridge) {
+> > >> +    if (!bridge) {
+> > >> +            dev_err(dev, "no bridge\n");
+> > >> +            return -ENODEV;
+> > >> +    } else if (!drm_bridge_is_panel(bridge)) {
+> > >>              /* TODO: AV8100 HDMI encoder goes here for example */
+> > >>              dev_info(dev, "connected to non-panel bridge (unsupport=
+ed)\n");
+> > >>              return -ENODEV;
+> > >
+> > > I wonder if we still need that branch. Every panel is a bridge now, a=
+nd
+> > > it looks like we don't have any specific panel handling in this drive=
+r,
+> > > so I guess it supports bridges already?
+> > >
+> > > Linus, do you know why this condition was here in the first place?
+> >
+> > I had the same thought while writing the patch, but I chose to be
+> > conservative.
+> >
+> > Linus, unless you have more info I'm going to apply the patch as
+> > is. Removing this special case would be welcome as a later patch.
+>=20
+> I'd say go ahead as-is.
 
-You fixed it partially by dropping "power" but keeping "domains".
+I'm fine with that, but I really want this removed at some point.
 
-Shawn
+> I do have the idea to code up and submit the AV8100 encoder
+> and I have the hardware to test it, but every other user should
+> be using panels directly, and I would be the only non-panel
+> user so I can deal with it when it comes up.
 
-> +
-> +  See also:
-> +    include/dt-bindings/clock/qcom,nord-dprxcc.h
-> +
-> +properties:
-> +  compatible:
-> +    enum:
-> +      - qcom,nord-dprxcc0
-> +      - qcom,nord-dprxcc1
-> +
-> +  clocks:
-> +    items:
-> +      - description: XO clock source
-> +      - description: DPRX CFG AHB clock from NWGCC
-> +      - description: Sleep clock source
-> +
-> +  power-domains:
-> +    description:
-> +      MMCX power domain.
-> +    maxItems: 1
-> +
-> +  required-opps:
-> +    description:
-> +      MMCX performance point.
-> +    maxItems: 1
-> +
-> +required:
-> +  - compatible
-> +  - clocks
-> +  - power-domains
-> +  - required-opps
-> +
-> +allOf:
-> +  - $ref: qcom,gcc.yaml#
-> +
-> +unevaluatedProperties: false
-> +
-> +examples:
-> +  - |
-> +    #include <dt-bindings/clock/qcom,nord-nwgcc.h>
-> +    #include <dt-bindings/clock/qcom,rpmh.h>
-> +    #include <dt-bindings/power/qcom,rpmhpd.h>
-> +    clock-controller@a940000 {
-> +      compatible = "qcom,nord-dprxcc0";
-> +      reg = <0x0a940000 0xc000>;
-> +      clocks = <&rpmhcc RPMH_CXO_CLK>,
-> +               <&nwgcc NW_GCC_DPRX0_CFG_AHB_CLK>,
-> +               <&sleep_clk>;
-> +      power-domains = <&rpmhpd RPMHPD_MMCX>;
-> +      required-opps = <&rpmhpd_opp_low_svs>;
-> +      #clock-cells = <1>;
-> +      #reset-cells = <1>;
-> +    };
-> +...
-> diff --git a/include/dt-bindings/clock/qcom,nord-dprxcc.h b/include/dt-bindings/clock/qcom,nord-dprxcc.h
-> new file mode 100644
-> index 0000000000000000000000000000000000000000..62c26b58ebef04f05ea1dc77664c03aaad65baa4
-> --- /dev/null
-> +++ b/include/dt-bindings/clock/qcom,nord-dprxcc.h
-> @@ -0,0 +1,27 @@
-> +/* SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
-> +/*
-> + * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
-> + */
-> +
-> +#ifndef _DT_BINDINGS_CLK_QCOM_DPRX_CC_NORD_H
-> +#define _DT_BINDINGS_CLK_QCOM_DPRX_CC_NORD_H
-> +
-> +/* DPRX_CC clocks */
-> +#define DPRX_CC_AHB_CLK					0
-> +#define DPRX_CC_AUD_CLK					1
-> +#define DPRX_CC_AUDIO_CLK_SRC				2
-> +#define DPRX_CC_CORE_AHB_DIV_CLK_SRC			3
-> +#define DPRX_CC_CORE_AUD_DIV_CLK_SRC			4
-> +#define DPRX_CC_CORE_RCG0_CLK_SRC			5
-> +#define DPRX_CC_CORE_RCG2_CLK_SRC			6
-> +#define DPRX_CC_CORE_RCG3_CLK_SRC			7
-> +#define DPRX_CC_MDP_MEM_CLK				8
-> +#define DPRX_CC_MMCX_XO_CLK				9
-> +#define DPRX_CC_PLL0					10
-> +#define DPRX_CC_PLL1					11
-> +#define DPRX_CC_VID_MEM_CLK				12
-> +
-> +/* DPRX_CC resets */
-> +#define DPRX_CC_DPRX_BLK_BCR				0
-> +
-> +#endif
-> 
-> -- 
-> 2.34.1
-> 
+It won't change a thing. All existing "panel" users will be bridge users
+after this patch is merged. So whether you want to enable a bridge or
+not shouldn't matter, the only thing that does is whether the existing
+users would still work.
+
+Maxime
+
+--fta6xv3zcvscpec2
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iJUEABMJAB0WIQTkHFbLp4ejekA/qfgnX84Zoj2+dgUCarTl8wAKCRAnX84Zoj2+
+dhwWAXwI9qMs84ZRfc2g48IeAyQiE/CtbfMWnKHKCoJcY62gOn2KtPtJlfAUSVSt
+Fz2FzIoBf1P/bkrhzAS0uao6/CjJ0F2xh689BoYPK8a7rDMJeckpdh6Df4f795pW
+2kQWWS2bNQ==
+=k5VA
+-----END PGP SIGNATURE-----
+
+--fta6xv3zcvscpec2--
