@@ -1,37 +1,38 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4489448380C;
-	Thu, 24 Sep 2026 13:24:11 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 80047485951;
+	Thu, 24 Sep 2026 13:24:13 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790256252; cv=none; b=hYQ0b4eDveUKf06BBnCZrnWthQQNTriR5kG23Nfjgsgc1o9wM2k46m2pRTcay1PYerp6FNS731qI3ZHrD6AROC2xTmOBeg/0BasOW7HagW+ymsdv55QFm/PlH+4FvBHm4ekK3RBtgic82efPV3cfi2SjHawSdzQukPld1jZLMs8=
+	t=1790256253; cv=none; b=c476ir9cvFGSupjvvxe1oHHp5HIGIhnAGuuOe/ixs/MPb6xz0tSnO8eflQvMDbzDlwc1unwYj5dSydOImi3drxBoWY2vcjAQM9H6LykrLL27VmhcX+rhtVrEOyzlcNfLTnhCdDKIL5y62WZxTwie190aS5ClOt7rSLoFlYyqzWM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790256252; c=relaxed/simple;
-	bh=D46BWG2qTVt1t0AiaUNt4R05+bK4fA19/1UAlFczTXU=;
+	s=arc-20240116; t=1790256253; c=relaxed/simple;
+	bh=oZSWGCJrS29pCfTPeI3C6HwaJyqxPJe5p0cr2w9mLh0=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=kKGAh95fcMpznGzWacoOcucqWLL77E9J19heYNUhiBOrJr2X9Eg6jV3vjDBpZ04roa5eHBO+3A/t3/huUlE+CP5pZLn7aVBCUG3U1upwD70q9L7dGQvEPFbgMfODuEU3XtJ69FpoRESqkHIrqxYTXW6swDL4Wgv0nVWA8Sn8y1A=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=uIIm8jlL; arc=none smtp.client-ip=10.30.226.201
+	 In-Reply-To:To:Cc; b=gSpH+XlHoJXPErELJgDrQ7SexClblw1ryPEuzz/58iAyAxu3hnpejLMD4sXEIncuIA7I4kM0nPv6c03rnT6qwM30loShgtj1YD9+yLlGKv+ZB3NyEngdEv6nAZ/k9e4OAqfNs7mWCCKKqhfnV8I2nWOPwEC9ooIGIBz5J+MMEis=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=jX6Yqm5B; arc=none smtp.client-ip=10.30.226.201
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="uIIm8jlL"
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 740FEC2BCF7;
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="jX6Yqm5B"
+Received: by smtp.kernel.org (Postfix) with ESMTPS id B7D7EC32786;
 	Thu, 24 Sep 2026 13:24:11 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
 	s=k20201202; t=1790256251;
-	bh=D46BWG2qTVt1t0AiaUNt4R05+bK4fA19/1UAlFczTXU=;
+	bh=oZSWGCJrS29pCfTPeI3C6HwaJyqxPJe5p0cr2w9mLh0=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
-	b=uIIm8jlLv9xkIw1gb0gFU/SGvP76jtpbIGz48/zZR6dzMyoVzHxyrejf9PQKygGVY
-	 Bfpfpa4kkmrbWj5uvvoFZTOT53+IBf6vILqlKVvq7JUnmkGc4IWdNbvgec/CLntvoz
-	 5dFDJYlrhzR1Lr/fgIEoVMxqr3Kzf6WtFT3/229d6FuBrFjIz2sh0Y0hXeTmeVQ7mh
-	 lry2x2knC2tdQq2mg3Q/NfPjU7hijeR1ZzVAsjriQqY9k5eK5Nw6ZsB0ByqrS5tSwX
-	 9Bq6o824a0Lda0C7fp/6BKzGY+sLyMaJ5Fh1GQ2TfT8Em7qla6XFvhaNBB05v+XVZA
-	 1oX/kG3lhH0bQ==
+	b=jX6Yqm5B8wbaVHyllTSMGZYz5tTfxElukuq2NkyYmhi/pxa83KVFvDPPK7e/WpOB7
+	 JD5nDeFzS1/v/sd4JO6Ae+fwvjFLByu0+Gjh4jQ7wvlP17+9z0rwbG7EJVJQCKpMCF
+	 kBXSOGpAxt4kbWAi7sp+oRHjCKnCnftd9gE2zTdzGtbf2bEFIAEIXUVIGxX2AyWNaX
+	 bezAQ1KyUE6aQ86iEbgemwh+hBvCTBe67RrImuav9lcLQN3cqwI3LTNjIGP7ldhTQK
+	 RdVnViKMaZB8uVF42VKyLZVJRz8vIy+CE9nDQClbcWyaOCETmeYSOX/JZOr0dGTfEE
+	 zbctnCM6PQ0Aw==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 53A7AC98317;
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A44D7C9830E;
 	Thu, 24 Sep 2026 13:24:11 +0000 (UTC)
 From: David Heidelberg via B4 Relay <devnull+david.ixit.cz@kernel.org>
-Date: Thu, 24 Sep 2026 15:24:06 +0200
-Subject: [PATCH v4 1/8] ASoC: qcom: sdm845: Demystify TDM masks a bit
+Date: Thu, 24 Sep 2026 15:24:11 +0200
+Subject: [PATCH v4 6/8] arm64: dts: qcom: sdm845-google: Add basic audio
+ support
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -40,7 +41,7 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260924-pixel3-audio-v4-1-85b5d133aa5e@ixit.cz>
+Message-Id: <20260924-pixel3-audio-v4-6-85b5d133aa5e@ixit.cz>
 References: <20260924-pixel3-audio-v4-0-85b5d133aa5e@ixit.cz>
 In-Reply-To: <20260924-pixel3-audio-v4-0-85b5d133aa5e@ixit.cz>
 To: Srinivas Kandagatla <srini@kernel.org>, 
@@ -58,21 +59,21 @@ Cc: linux-sound@vger.kernel.org, linux-arm-msm@vger.kernel.org,
  devicetree@vger.kernel.org, phone-devel@vger.kernel.org, 
  David Heidelberg <david@ixit.cz>
 X-Mailer: b4 0.16.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2687; i=david@ixit.cz;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=5502; i=david@ixit.cz;
  h=from:subject:message-id;
- bh=cPwrEY4ZNqiKfvbC0ASAoVk96Jl21/NzxFU+I7j9SBQ=;
- b=owEBbQKS/ZANAwAIAWACP8TTSSByAcsmYgBqtSR4CdXPX4fxfrnimtJp4etwH8+O17yUrxJVI
- 8WIsEP0ddWJAjMEAAEIAB0WIQTXegnP7twrvVOnBHRgAj/E00kgcgUCarUkeAAKCRBgAj/E00kg
- clWDD/0Sd3LJ+PT0/UTmsZUocLrgsYHAzq5DzXV68p84rNdFSOSYLFx+uhkRwKd2F/ZdiVkKNrT
- 4ZxOzHP3lRFw5KA33eR5kr8DchuFeP4l4o1d/CQIc++sDTJD/Bz5Nt4+BNLEopU4g0ipT4cJ2yY
- PRE/pRYoOBZgtNsoCPjIjKWY/csu8COvq9SfaHIgFOhSdWKH0lFux+9kocZO8hi546ikwYkJbdC
- b7HIJwvSInquu2ehVY82ilO7VHb4dAbxi/bkDOm0Y/MCQEIqMp15u2i/pOxS5LtzqqCpFB80jMO
- oDAgxIqEW8CLixiPb3e6Sh+KAduN6K4B7pVAoK2chep4zxx38rkkR8nK/7WJWDJIB3jPRNAIJrk
- TeAcvLZiLZRS+b1B5l/XU6KVcQvv5kjrEOf08zz8wnD/AAnEgTQjkbOan08kv0zrF/2pe8CG+iW
- hcObixWXxTVdorWo7ce8lkJ/Wajr+gXW61QMtroJAtpRXFwuoj2oPh4Qu2wUqZK3Eaud6Hh9PHe
- CVrmrXAp6Le+LCNiGTIV4kmbJwZ/qMlNWSILR17ss84NygaIxXAvRKgGgSm4ikJPsrvqXbocI3Y
- +nkCcyTCdpQ30ElzGokcU0CJCfZS7cKeyBO9xyytzhsAA6HvG07oGBTxULR7CIE6iVPRHlAVIlO
- FpnFpcYaSQnXQfQ==
+ bh=tCA2wrGmYAOXszuoJHsZBlVOzstBSAb0Uqddhj9U2gw=;
+ b=owEBbQKS/ZANAwAIAWACP8TTSSByAcsmYgBqtSR5jHTX8H0OwrpTHlqE4ZEZ1gWEh3L4GK+NZ
+ 6MQ5nzdG1yJAjMEAAEIAB0WIQTXegnP7twrvVOnBHRgAj/E00kgcgUCarUkeQAKCRBgAj/E00kg
+ ctzqD/4vOhXRTi6MwwjUtgHsr36kVlLwHx/6TinCzhEHsF2bahmXN/+tRJC1uzEomanpZVOqeCL
+ h9WNnxzVP6StP1clinp4IKwhVSGqUhkkxWHfnPh/dIomLaATSmrfVoMJAjyGtT+/HAPdcTMs/7d
+ AGlZsUNduGnd7kPggXBuPHAaZb48hYI0FtExYX8r7rWj0T7t8fFbl0kHc9mIjPIybpNXYE8oxP0
+ E29nVP1+SAYHD5APVedTRgw6FQ3HvCeFeVlO6p0w3pU/gx5REQB2Z4QUczfAziyDbAwGth4nBcS
+ s8hfPtRaD3f4fuJr3KcANFVKrTIjjXJpiBsZc0fdXiyYYfw/7urfcjmz1IHyvJpM1uRZ2dPXJbg
+ TG6eom8tBJHrlTR2p/5KW3ZWWzt8n9sBNlyreqpHvLiwmd4O78mL5x9HhRF5A68U8gEdXb+p+Tb
+ 23horlyf+zobA9c30dFamqOfkuR5NX+tNuX/zPq4BLnCe2hhom4ysHjeQ1FvduqaSQEZI9GwHDz
+ XGAerdk3UTIg6DqTius3leWA3ber1NLr+c31a1I4XJkhiD9j25RRS3gF808Vw4jyAPneBicnR6k
+ JaVsTC7ku6l+O2MMeItaw9L4rMOdNkVyTz21ex3jVnI+xEl3ban8dXmzbUXoOTeFmDLF/VUyEvL
+ 30GHmaRa5pnH+bA==
 X-Developer-Key: i=david@ixit.cz; a=openpgp;
  fpr=D77A09CFEEDC2BBD53A7047460023FC4D3492072
 X-Endpoint-Received: by B4 Relay for david@ixit.cz/default with auth_id=355
@@ -81,86 +82,238 @@ Reply-To: david@ixit.cz
 
 From: David Heidelberg <david@ixit.cz>
 
-Describe the mask with the bits used for each RX/TX.
+Introduce support for sound card and wire two CS35L36 audio codecs for
+top and bottom speakers.
+
+Inspired by commit from Joel Selvaraj.
 
 Signed-off-by: David Heidelberg <david@ixit.cz>
 ---
- sound/soc/qcom/sdm845.c | 21 ++++++++++++++-------
- 1 file changed, 14 insertions(+), 7 deletions(-)
+ arch/arm64/boot/dts/qcom/sdm845-google-common.dtsi | 132 ++++++++++++++++++++-
+ 1 file changed, 130 insertions(+), 2 deletions(-)
 
-diff --git a/sound/soc/qcom/sdm845.c b/sound/soc/qcom/sdm845.c
-index 6843ab8ba017e..0ce8265ab1c1f 100644
---- a/sound/soc/qcom/sdm845.c
-+++ b/sound/soc/qcom/sdm845.c
-@@ -18,19 +18,24 @@
- #include "sdw.h"
- #include "../codecs/rt5663.h"
+diff --git a/arch/arm64/boot/dts/qcom/sdm845-google-common.dtsi b/arch/arm64/boot/dts/qcom/sdm845-google-common.dtsi
+index f1379857e2742..bc826d211e4a7 100644
+--- a/arch/arm64/boot/dts/qcom/sdm845-google-common.dtsi
++++ b/arch/arm64/boot/dts/qcom/sdm845-google-common.dtsi
+@@ -2,16 +2,18 @@
  
- #define DRIVER_NAME	"sdm845"
- #define DEFAULT_SAMPLE_RATE_48K		48000
- #define DEFAULT_MCLK_RATE		24576000
- #define TDM_BCLK_RATE		6144000
- #define MI2S_BCLK_RATE		1536000
--#define LEFT_SPK_TDM_TX_MASK    0x30
--#define RIGHT_SPK_TDM_TX_MASK   0xC0
--#define SPK_TDM_RX_MASK         0x03
-+#define LEFT_SPK_TDM_RX_MASK	BIT(0)
-+#define RIGHT_SPK_TDM_RX_MASK	BIT(1)
-+#define SPK_TDM_RX_MASK		(LEFT_SPK_TDM_RX_MASK | RIGHT_SPK_TDM_RX_MASK)
-+#define MIC1_TDM_RX_MASK	BIT(2)
-+#define MIC2_TDM_RX_MASK	BIT(3)
-+#define MIC_TDM_RX_MASK		(MIC1_TDM_RX_MASK | MIC2_TDM_RX_MASK)
-+#define LEFT_SPK_TDM_TX_MASK	(BIT(4) | BIT(5))
-+#define RIGHT_SPK_TDM_TX_MASK	(BIT(6) | BIT(7))
- #define NUM_TDM_SLOTS           8
- #define SLIM_MAX_TX_PORTS 16
- #define SLIM_MAX_RX_PORTS 13
- #define WCD934X_DEFAULT_MCLK_RATE	9600000
+ /dts-v1/;
  
- struct sdm845_snd_data {
- 	struct snd_soc_jack jack;
- 	bool jack_setup;
-@@ -107,34 +112,36 @@ static int sdm845_tdm_snd_hw_params(struct snd_pcm_substream *substream,
- 	default:
- 		dev_err(rtd->dev, "%s: invalid param format 0x%x\n",
- 				__func__, params_format(params));
- 		return -EINVAL;
- 	}
+ #include <dt-bindings/arm/qcom,ids.h>
+ #include <dt-bindings/dma/qcom-gpi.h>
+ #include <dt-bindings/input/linux-event-codes.h>
+ #include <dt-bindings/interrupt-controller/irq.h>
+ #include <dt-bindings/regulator/qcom,rpmh-regulator.h>
++#include <dt-bindings/sound/qcom,q6afe.h>
++#include <dt-bindings/sound/qcom,q6asm.h>
  
- 	channels = params_channels(params);
- 	if (substream->stream == SNDRV_PCM_STREAM_PLAYBACK) {
--		ret = snd_soc_dai_set_tdm_slot(cpu_dai, 0, 0x3,
--				8, slot_width);
-+		ret = snd_soc_dai_set_tdm_slot(cpu_dai, 0, SPK_TDM_RX_MASK,
-+					       NUM_TDM_SLOTS, slot_width);
- 		if (ret < 0) {
- 			dev_err(rtd->dev, "%s: failed to set tdm slot, err:%d\n",
- 					__func__, ret);
- 			goto end;
- 		}
+ #include "sdm845.dtsi"
+ #include "pm8998.dtsi"
+ #include "pmi8998.dtsi"
  
- 		ret = snd_soc_dai_set_channel_map(cpu_dai, 0, NULL,
- 				channels, tdm_slot_offset);
- 		if (ret < 0) {
- 			dev_err(rtd->dev, "%s: failed to set channel map, err:%d\n",
- 					__func__, ret);
- 			goto end;
- 		}
- 	} else {
--		ret = snd_soc_dai_set_tdm_slot(cpu_dai, 0xf, 0,
--				8, slot_width);
-+		ret = snd_soc_dai_set_tdm_slot(cpu_dai,
-+					       SPK_TDM_RX_MASK |
-+					       MIC_TDM_RX_MASK, 0,
-+					       NUM_TDM_SLOTS, slot_width);
- 		if (ret < 0) {
- 			dev_err(rtd->dev, "%s: failed to set tdm slot, err:%d\n",
- 					__func__, ret);
- 			goto end;
- 		}
+ /delete-node/ &mpss_region;
+ /delete-node/ &venus_mem;
+ /delete-node/ &cdsp_mem;
+@@ -406,19 +408,61 @@ nfc@28 {
+ 		firmware-gpios = <&tlmm 79 GPIO_ACTIVE_HIGH>;
  
- 		ret = snd_soc_dai_set_channel_map(cpu_dai, channels,
- 				tdm_slot_offset, 0, NULL);
+ 		pinctrl-0 = <&nfc_default>;
+ 		pinctrl-names = "default";
+ 	};
+ };
+ 
+ &i2c12 {
+-	/* Bottom spkr (right) CS35L36 @ 40 */
++	status = "okay";
++
++	cs35l36_bottom: audio-codec@40 {
++		compatible = "cirrus,cs35l36";
++		reg = <0x40>;
++		reset-gpios = <&tlmm 112 GPIO_ACTIVE_HIGH>;
++		#sound-dai-cells = <0>;
++		sound-name-prefix = "Right"; /* Bottom */
++		VA-supply = <&vreg_s4a_1p8>;
++		interrupts-extended = <&tlmm 115 IRQ_TYPE_LEVEL_LOW>;
++
++		pinctrl-0 = <&cs35l36_bottom_default_state>;
++		pinctrl-names = "default";
++
++		cirrus,boost-ind-nanohenry = <1000>;
++		cirrus,boost-ctl-select = <1>;
++		cirrus,boost-ctl-millivolt = <10000>;
++		cirrus,boost-peak-milliamp = <3700>;
++		cirrus,temp-warn-threshold = <1>;
++		cirrus,multi-amp-mode;
++		cirrus,irq-drive-select = <0>;
++		cirrus,irq-gpio-select = <0>;
++	};
++
++	cs35l36_top: audio-codec@41 {
++		compatible = "cirrus,cs35l36";
++		reg = <0x41>;
++		reset-gpios = <&tlmm 75 GPIO_ACTIVE_HIGH>;
++		#sound-dai-cells = <0>;
++		sound-name-prefix = "Left"; /* Top */
++		VA-supply = <&vreg_s4a_1p8>;
++		interrupts-extended = <&tlmm 40 IRQ_TYPE_LEVEL_LOW>;
+ 
+-	/* Top spkr (left) CS35L36 @ 41 */
++		pinctrl-0 = <&cs35l36_top_default_state>;
++		pinctrl-names = "default";
++
++		cirrus,boost-ind-nanohenry = <1000>;
++		cirrus,boost-ctl-select = <0x01>;
++		cirrus,boost-ctl-millivolt = <10000>;
++		cirrus,boost-peak-milliamp = <3700>;
++		cirrus,temp-warn-threshold = <1>;
++		cirrus,multi-amp-mode;
++		cirrus,irq-drive-select = <0>;
++		cirrus,irq-gpio-select = <0>;
++	};
+ };
+ 
+ &ipa {
+ 	firmware-name = "qcom/sdm845/Google/blueline/ipa_fws.mbn";
+ 	memory-region = <&ipa_fw_mem>;
+ 
+ 	status = "okay";
+ };
+@@ -451,16 +495,35 @@ &pm8998_resin {
+ };
+ 
+ &pmi8998_charger {
+ 	monitored-battery = <&battery>;
+ 
+ 	status = "okay";
+ };
+ 
++&q6afedai {
++	dai@72 {
++		reg = <QUATERNARY_TDM_RX_0>;
++
++		qcom,tdm-sync-mode = <0>;
++		qcom,tdm-sync-src = <1>;
++		qcom,tdm-data-out = <0>;
++		qcom,tdm-invert-sync = <0>;
++		qcom,tdm-data-delay = <1>;
++		qcom,tdm-data-align = <0>;
++	};
++};
++
++&q6asmdai {
++	dai@0 {
++		reg = <MSM_FRONTEND_DAI_MULTIMEDIA1>;
++	};
++};
++
+ &qupv3_id_0 {
+ 	status = "okay";
+ };
+ 
+ &qupv3_id_1 {
+ 	status = "okay";
+ };
+ 
+@@ -469,16 +532,49 @@ &qup_uart9_rx {
+ 	bias-pull-up;
+ };
+ 
+ &qup_uart9_tx {
+ 	drive-strength = <2>;
+ 	bias-disable;
+ };
+ 
++&sound {
++	compatible = "qcom,sdm845-sndcard";
++	model = "blueline";
++	pinctrl-0 = <&quat_mi2s_active>, <&quat_mi2s_sd0_active>,
++		    <&quat_mi2s_sd1_active>;
++	pinctrl-names = "default";
++
++	/* mm[0-9]-dai-link nodes must be positioned first regardless of sorting */
++	mm1-dai-link {
++		link-name = "MultiMedia1";
++
++		cpu {
++			sound-dai = <&q6asmdai MSM_FRONTEND_DAI_MULTIMEDIA1>;
++		};
++	};
++
++	cs35l36-dai-link {
++		link-name = "Speaker Playback";
++
++		codec {
++			sound-dai = <&cs35l36_bottom>, <&cs35l36_top>;
++		};
++
++		cpu {
++			sound-dai = <&q6afedai QUATERNARY_TDM_RX_0>;
++		};
++
++		platform {
++			sound-dai = <&q6routing>;
++		};
++	};
++};
++
+ &tlmm {
+ 	gpio-reserved-ranges = < 0 4>, /* SPI (Intel MNH Pixel Visual Core) */
+ 			       <81 4>; /* SPI (most likely Fingerprint Cards FPC1075) */
+ 
+ 	nfc_default: nfc-default-state {
+ 		enable-pins {
+ 			pins = "gpio25";
+ 			function = "gpio";
+@@ -517,16 +613,48 @@ touchscreen_pins: ts-pins-gpio-state {
+ 	};
+ 
+ 	touchscreen_i2c_pins: qup-i2c2-gpio-state {
+ 		pins = "gpio27", "gpio28";
+ 		function = "gpio";
+ 		drive-strength = <2>;
+ 		bias-disable;
+ 	};
++
++	cs35l36_bottom_default_state: cs35l36-bottom-default-state {
++		reset-pins {
++			pins = "gpio112";
++			function = "gpio";
++			drive-strength = <2>;
++			bias-disable;
++		};
++
++		irq-pins {
++			pins = "gpio115";
++			function = "gpio";
++			drive-strength = <2>;
++			bias-pull-up;
++		};
++	};
++
++	cs35l36_top_default_state: cs35l36-top-default-state {
++		irq-pins {
++			pins = "gpio40";
++			function = "gpio";
++			drive-strength = <2>;
++			bias-pull-up;
++		};
++
++		reset-pins {
++			pins = "gpio75";
++			function = "gpio";
++			drive-strength = <2>;
++			bias-disable;
++		};
++	};
+ };
+ 
+ &uart6 {
+ 	pinctrl-0 = <&qup_uart6_4pin>;
+ 
+ 	status = "okay";
+ 
+ 	bluetooth {
 
 -- 
 2.55.0
