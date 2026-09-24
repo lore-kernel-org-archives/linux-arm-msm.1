@@ -1,194 +1,186 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-ed2-f30.google.com (mail-ed2-f30.google.com [74.125.228.94])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D29C2217F27
-	for <linux-arm-msm@vger.kernel.org>; Thu, 24 Sep 2026 12:33:25 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7F247409632
+	for <linux-arm-msm@vger.kernel.org>; Thu, 24 Sep 2026 12:37:03 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.228.94
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790253207; cv=none; b=uNpmdzm/s0dnWPKhn3O70eBMG0WEmvtcRHcfQhk9pJtLX4TXV8vy1JI5TMysG+A5Ya9ZyihP8XlIYhx6CAtrfOl8egqrXcG9UJi5fRIOD16a8wkM0fclM/f48+nnybL7QOXE1uKHs/M690/osN7yAogNfZQnRvtnqa927h0w4qo=
+	t=1790253425; cv=none; b=HxWunLx+5DH5y+kXHvyVZjcQ5kgtqkInWOR8Xw7riAEb7VZUPFIGbk0hG55uv33vDOk85kemIRt6fZKh3IPLz4a936i5LdfYOh6T77HsQcc4dktEkk4mawjJX0di5wIxcxSLRnWPak8Y9hb2HlKCUtpM8qJSMgYvyc3bdfsrPlk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790253207; c=relaxed/simple;
-	bh=BAn5aAgxV8jkvZUUVJzIoWcDo2Jh/DvgwG+zj1G9UHQ=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=DZ3me+/W2suLmg0FtzvVJC/VLuG0uJDXywWKpQPR4t39rCUE5BIKFMJCD/HJY35M4Fc/uQ8a/WfXKkYwE2PBtIvgUchCaqWg2TNtxOlBnqyjzDdO+GHXpvkniUeOiWuj9C+edTDJdL3YnhWc3nIH9H27xXfVVJoRcFhog1+0Jj0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=las+aDOs; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=O7P8ACDA; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1790253425; c=relaxed/simple;
+	bh=uTofbiv5PGwwQfTIX8LTF3s7MEFpysPum854bwqS22U=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=BTmK+C8ELoZD+Vl+oA6Fb9hL8GPgv7OlWZ1pXfncoGB6BZXDpsc5nNuxumMkHkKtnDWJAS50PtfVijcAmFIAqgta1Qp99KsLxlElVMCapQoLd15G+uD5QYs9K3hacZbk4JAM0L1wt2ycYH8F9wJZt1YDUbglgefIq1iUulvGZ6I=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=XLAZIvFE; arc=none smtp.client-ip=74.125.228.94
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="las+aDOs";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="O7P8ACDA"
-Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68OC53252002556
-	for <linux-arm-msm@vger.kernel.org>; Thu, 24 Sep 2026 12:33:24 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:message-id
-	:mime-version:subject:to; s=qcppdkim1; bh=j1JhjxYMfO7BOGaU49ffGn
-	g16NJOkOo+MKEHoAorM98=; b=las+aDOsuQhh9IozvnoicSZFgQ9M+0at4qgXtI
-	RpDDpLkb/SMQWMxI14iRTVChMu9zSu5Fu+gRqQ/l9orFlQWCkvv6e02q1MA7bfbT
-	kEN4ant2pFZtreB98f/UU9BXTKWUfxfMWymAXg26N9oy2k3EfAInq/uCjNk1OERv
-	23nLpVDopiscrroKnxUsjDHOgH3hj7d3mRf3yr+vAwpVfE9CU16C6+FmdvkbI8Pc
-	GnGuqxzN3XC64uULEx7ZASnDHJYicfRe11IXMxMVsFqPkWzufJ9U+7bDHfmJSDcB
-	1IN+aofu+mmDvUpimcNqWCFSiXQpPSQMbo0wd68diM7Rzcng==
-Received: from mail-pl1-f197.google.com (mail-pl1-f197.google.com [209.85.214.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gvmrrbh85-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Thu, 24 Sep 2026 12:33:24 +0000 (GMT)
-Received: by mail-pl1-f197.google.com with SMTP id d9443c01a7336-2db8c152622so13275695ad.2
-        for <linux-arm-msm@vger.kernel.org>; Thu, 24 Sep 2026 05:33:24 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="XLAZIvFE"
+Received: by mail-ed2-f30.google.com with SMTP id 4fb4d7f45d1cf-6aa06e51bc3so3316564a12.2
+        for <linux-arm-msm@vger.kernel.org>; Thu, 24 Sep 2026 05:37:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1790253203; x=1790858003; darn=vger.kernel.org;
-        h=cc:to:message-id:content-transfer-encoding:content-type
-         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=j1JhjxYMfO7BOGaU49ffGng16NJOkOo+MKEHoAorM98=;
-        b=O7P8ACDAxEijSuWDo7pssFc3mRcx9lOS8t0pwQD5Fr0CrZ7iQbF49gAcCp+duPj20F
-         y7SeWgj/rk0kdlsh/ww7Bdd3f6J3K+Ydeu6WVXuZsa0Q94WNbZigEYMc0m3ftERvMQe3
-         TMuX9pXZHcTEyAz9xBWHS9ECBhTQmysD4nCQw8HX9XD8qW/JQXptOmve1Ajpc3BMS5RR
-         vdBqZI7Z9BHwNN/S3B2gcCLWriVeoKVnGgtfIJ3eNRGpLe5sRykRKMAox5QKetmXA8jN
-         h/QzpnUeGCN4TW5pntDjBwv2VKwf06cVGNbmVBR65GuGVaHznsEmcNwA/aOZ+ruir44D
-         10LQ==
+        d=linaro.org; s=google; t=1790253422; x=1790858222; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :from:references:cc:to:subject:user-agent:mime-version:date
+         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=8WR8pmB+jYgHS1HBlWGZgS/Xwn9pj8L3GvfaFa/VtnY=;
+        b=XLAZIvFE1qHixlDUIbqNszybFfVEegD6sECtis0RfGvLXrtsEm/UhvfJwW77voeZCq
+         iiFy9ft39yQoQsZADgO5JVsJz/aGso7ayBUHziyYpIGVYebDLF+LFAWRG+lwerOm5e7O
+         UK2mATxJV1jxpKhfTLoieNjnLJfPOqmArUBLw6j/cFZpTEOOVcCFkcOgjM2LwtY3cdr0
+         qETRRgZ7I2piujtBSHtyDnRmc67NlSSfcSzmPPLmWy+iqqv8qME2MEEuksM7/TTP1Cjw
+         coq4i7RUbBFs5TputOhvC5N8p2AxX3rc/YdrLU3B1Cl2IZc7TMin8XnqyqpIo4dmY6LS
+         Ux6w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790253203; x=1790858003;
-        h=cc:to:message-id:content-transfer-encoding:content-type
-         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to:content-type;
-        bh=j1JhjxYMfO7BOGaU49ffGng16NJOkOo+MKEHoAorM98=;
-        b=BjsanQfTGjHJOfRnXyKTMGoHc10U578Pe330TaXhwfdNOTleAld7HcILx2VtmtDx5u
-         x9VfBF4Q6cqUSd3hdZZRtXFdiKfSekE0jO2NYLhkhohQgCbA+3Us7c5EqpCIvz/FjGXJ
-         P8Cg3F6arL9JVgpZ6FOqysfbmJVcYnRHXi5WtXCGBjmYZz7ydAqvrWj7mzGPyqb0fBjI
-         ktLT2q8Zsp5sbTIR9fRH4Ofgo9gCKEgiwYB45m4SsQY8DPDwpB98YDYR18g19WbNvJXz
-         Rv5oL/dpBM6si8T0j7YUMAxLDDOUzJ14v8Zt/yFMvqZo+Fs7xfiMh1iCYoln+oIvoZ6e
-         7Nlg==
-X-Gm-Message-State: AFuF++m04aHznqdluKicoP49Dc5i4NwVTBF1QPQs3bF+YLfacmyu6Ztn
-	zgRoCi31rBP1rtYwh/AN6HGOXNKo4iK0D+Eu5EYPbIvTHkunbkDkKt8aiTX+4+t2pvBz50QODFc
-	o61GuDmvnzQNVlF+9yWYMd2C9+HlsVhqnLrTwCHskY5xXMiiDLxPMHsjtv5scD+2JGk0K
-X-Gm-Gg: AYBFou258q9f/kmb+5Fsb/yR2izTJmS26cVu1O8HQDOB3NR7EqVPCZpbNpaAJGPfuAa
-	G8SYVtgpAaIt2qZIdvOmrko6gccwYH3Gu1z3f9xCLyUG7meYuG43kR2rand3hwPjWRu8VajUsbN
-	yUw33ZC0fhJwhZSAbQUIjpsloiMpjWEEAOIesOvAEl8dZC9HeCzaNuN5rrB31B+HXokmyZ1ESZv
-	lbnqHXai/g8uCHmfqjd8AUwFruZR9NMLq7b4sg6hD/KE404LNxZaq+yQyrfjQUDyTWVJESWFfDX
-	AcQ6Yata2TKFvgsaIFNq+f4qFGhHFwK6meHpYWSOvcRCZpKd7qY5570qmjM1ofc8zN41Pj3ITAf
-	w4UBXB9cgidkWWw==
-X-Received: by 2002:a17:903:1a24:b0:2da:ef81:37e7 with SMTP id d9443c01a7336-2df7de905damr19626615ad.21.1790253198390;
-        Thu, 24 Sep 2026 05:33:18 -0700 (PDT)
-X-Received: by 2002:a17:903:1a24:b0:2da:ef81:37e7 with SMTP id d9443c01a7336-2df7de905damr19624505ad.21.1790253193100;
-        Thu, 24 Sep 2026 05:33:13 -0700 (PDT)
-Received: from [10.213.101.118] ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2df6a5164c0sm26298365ad.6.2026.09.24.05.33.08
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 24 Sep 2026 05:33:12 -0700 (PDT)
-From: Komal Bajaj <komal.bajaj@oss.qualcomm.com>
-Date: Thu, 24 Sep 2026 18:03:02 +0530
-Subject: [PATCH] arm64: dts: qcom: shikra-evk: Add GPIO expanders
+        d=1e100.net; s=20260707; t=1790253422; x=1790858222;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :from:references:cc:to:subject:user-agent:mime-version:date
+         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=8WR8pmB+jYgHS1HBlWGZgS/Xwn9pj8L3GvfaFa/VtnY=;
+        b=LfZDDke9NU8VWWdRSn5wGxjf6qQrDfL+vsOPJtU4t4PUkNAq7qtx1/g6Tq9isTGH3k
+         fKNYjZawojbWqdtj1SdTYXF1UnjSWwp3hEIdTNNpUqMDaa7WGj2WuUvqvHe21nP+wc1M
+         B+lCPuJalsmWjbXtr6mZm/FTQ25yGG6VM7eX+fCiVavCG0ovGdYSq/XH9pBACJh6I3Pu
+         7Ej62h1EUc8JBVkbZH4Rrs9mLLLq1KCCLG1PdzYl70S0wpEuOeXoD+yosdGYUokF3ASs
+         Kylz7wRxmRFhgIZwGneuLqu2onDJtrWTKlPFuJx9wTR3qu0V0szD1ofgk1t1MXBIvNZe
+         D8Qw==
+X-Forwarded-Encrypted: i=1; AKwUvBxtbgSmWGNSSNsgf9qTLN7hvEAiuPpJRZ4mDNZD2X5xHcwf6Y6xjI37svWNRmW/jK3gR0NwH0OhAZOs2N96@vger.kernel.org
+X-Gm-Message-State: AFuF++ljMNyL3CTylPal4SU7nVceanJBDZ9/Kc8dMRB981G5DerUzNjD
+	E4cGIHndOQbG/InvwvoqHKLOYp5Gn0dNiqxtDejoxuZbG1FKX5zXziggaJlVN2FVzjM=
+X-Gm-Gg: AYBFou0il/ctOQQ3INR/vVjHOKAxEXy3KnGBTS4w2sSNoaynugqOs95Mnx1ebgwNt+r
+	UrxyKGt/IrrM1ahaNoSmv7YwcxFGdAI87c+nuDCb371aP96gqB+YBulibMVZ4KGEzQKJVjI2Q19
+	qj0eabGjmPypgqRGGsxRq0Tnd+4an2Xeqbz/FFK94L7t/AU9RKx42VV5vxBhj44w2f9cmyFwa9A
+	xNizZu4uvCD8wviMjVBsNDTpWMv7fxqXOh+qaFTYReHUFqz3uOWjZJpzLlxKoRglSFh5LIfvUkh
+	bWGRXlbkGzDWVbJOTPfZq61ViaWldyxFXJVjOTWq9ly3e9elgVc4c1PDI4nUzt1LmL7Jx2E+2Mu
+	Imww/ej06LI/oeuE+0c73/r/FWuC6WaXEGcfcEZ04N5JmCiRt5+lmwd73A+iYcEzlu0JxDrCsVN
+	Tj2Z/2T1oihMuWLVCaYMACa5xNXgdJDjhraOmoSANX1dSuPRHZGeGj5y8btpwz8+ejOWlsdKWlm
+	c63bwh6RtzF
+X-Received: by 2002:a17:907:1ca2:b0:c29:6de8:d143 with SMTP id a640c23a62f3a-c2ac23d7742mr209160366b.19.1790253421677;
+        Thu, 24 Sep 2026 05:37:01 -0700 (PDT)
+Received: from [192.168.0.167] ([78.152.210.157])
+        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-6aab386e5b9sm3701581a12.8.2026.09.24.05.37.00
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 24 Sep 2026 05:37:01 -0700 (PDT)
+Message-ID: <bbf66d18-0587-41d1-a902-32686f66fa76@linaro.org>
+Date: Thu, 24 Sep 2026 13:36:58 +0100
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260924-shikra-gpio-expander-v1-1-71929498ea44@oss.qualcomm.com>
-X-B4-Tracking: v=1; b=H4sIAH0YtWoC/x3MMQqAMAxA0atIZgMaqqhXEYeiaQ1CLSmIUHp3i
- +Mb/s+QWIUTLE0G5UeS3KGibxvYTxs8oxzVQB2N3UwG0ymXWvRRbuQ32nCwIg3OGUvzPpkJahq
- Vnbz/dt1K+QCK7gmcZgAAAA==
-X-Change-ID: 20260924-shikra-gpio-expander-25ff4a29c848
-To: Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Abel Vesa <abelvesa@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org,
-        Faruque Ansari <faruque.ansari@oss.qualcomm.com>,
-        Komal Bajaj <komal.bajaj@oss.qualcomm.com>
-X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1790253188; l=1433;
- i=komal.bajaj@oss.qualcomm.com; s=20250710; h=from:subject:message-id;
- bh=BAn5aAgxV8jkvZUUVJzIoWcDo2Jh/DvgwG+zj1G9UHQ=;
- b=R6GAmqVgeX0epgeuCzE+91Oh6SxFUp6mRCOFLzKb9fMJuxMtjjZfFnpEIfLE6wpNywnt7KsJr
- ZLS64eUrRi0BaETNOW8AJcm3IGIOOzoTavVjlWLWzBAdNYQRZMdBa0C
-X-Developer-Key: i=komal.bajaj@oss.qualcomm.com; a=ed25519;
- pk=wKh8mgDh+ePUZ4IIvpBhQOqf16/KvuQHvSvHK20LXNU=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTI0MDA1MSBTYWx0ZWRfX9uz1JxWFtp+J
- ajl3tHCqCibaWn9WIBFietKVGZiHNkwLUbIJh+jW1VftZxaXZDWg4IG+ll19ynYDps/aGS9sidZ
- PoqWyEw/F+Irh1b0Kts1LxTfQShs7Wlyg86RUbv2yiY7GqXvRvdKx7PZeuHn0pEyIUOEv7mDrjm
- aW3Nlx7jsBK7nBAWVjj6oSbKtlgKFzzL9NYYs8pY5diCjoh8hOtEttUlETYMcPZiWaVWLogkTPN
- a+cqWPj4bxNXvlWGtFY0n7WvVyR4kmI+LmcM4Ql8xg8tXAyNrwyvATvAQrTw3FSJWHzlMCFAdDB
- p1/laiqrteTy4Dg9Gcjxlju2oWPwhsOwYmpkJd2K849CG7cOiYmhO0fQdL6qX6i0WsnWfe7a2Za
- aUmw5vI5MDsTYQTBFQb8S/YKO4pBlrERbVpM7nWfqgCj7RVvllNLcSPYxtATiFmmvjGLjNjm9lh
- 7Zx1veq5ZFFsdVLPbgw==
-X-Authority-Analysis: v=2.4 cv=TYwDJhQh c=1 sm=1 tr=0 ts=6ab51894 cx=c_pps
- a=cmESyDAEBpBGqyK7t0alAg==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
- a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
- a=EUspDBNiAAAA:8 a=vI5slWehT91-5SZ2dYMA:9 a=QEXdDO2ut3YA:10
- a=1OuFwYUASf3TG4hYMiVC:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTI0MDA1MSBTYWx0ZWRfX4Bogj4rI5c+t
- QD+J87LTKO6crdosYyLOkth8UPX2YSUY+dhAY8In9gkFfv+8nPvupPoUWJwopBeyOomEE4N9kD7
- BY9Rct0GqWJXX0DjIJdJPnAB0V7NJHA=
-X-Proofpoint-GUID: U40X788MkV_zeKkLeUfTT-Mozo0sJX-D
-X-Proofpoint-ORIG-GUID: U40X788MkV_zeKkLeUfTT-Mozo0sJX-D
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-24_03,2026-09-21_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- suspectscore=0 malwarescore=0 phishscore=0 spamscore=0 lowpriorityscore=0
- bulkscore=0 clxscore=1015 adultscore=0 priorityscore=1501 impostorscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609240051
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v9 02/19] media: iris: Add Gen2 firmware autodetect and
+ fallback
+To: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+ Vikash Garodia <vikash.garodia@oss.qualcomm.com>,
+ Abhinav Kumar <abhinav.kumar@linux.dev>, Bryan O'Donoghue <bod@kernel.org>,
+ Mauro Carvalho Chehab <mchehab@kernel.org>,
+ Bjorn Andersson <andersson@kernel.org>,
+ Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
+ <conor+dt@kernel.org>, Vishnu Reddy <busanna.reddy@oss.qualcomm.com>
+Cc: linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+ linux-kernel@vger.kernel.org, devicetree@vger.kernel.org,
+ Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>
+References: <20260731-iris-ar50lt-v9-0-d71a782001c0@oss.qualcomm.com>
+ <20260731-iris-ar50lt-v9-2-d71a782001c0@oss.qualcomm.com>
+From: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
+Content-Language: en-GB
+In-Reply-To: <20260731-iris-ar50lt-v9-2-d71a782001c0@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-Add the EVK GPIO expander definitions on the I2C3 bus. Describe the
-TCA9538 and TCA9539 expanders used by EVK boards.
+On 31/07/2026 00:48, Dmitry Baryshkov wrote:
+> +
+> +/*
+> + * Detect the firmware generation and publish the descriptor. Run only after
+> + * qcom_mdt_load() has succeeded, so the driver commits to a HFI generation
+> + * only for a firmware image that has actually been loaded.
+> + *
+> + * The generation is detected from the loaded image (@data / @size point at the
+> + * reserved memory region populated by qcom_mdt_load()) rather than from the
+> + * request_firmware() blob: for a split .mdt the latter holds only the ELF
+> + * headers, while QC_IMAGE_VERSION_STRING lives in the .bNN data segments.
+> + *
+> + * The descriptor and firmware data are published exactly once, before any
+> + * session exists, so the lockless readers in the ioctl paths never observe a
+> + * reassignment. Later bring-ups reuse the already published descriptor.
+> + */
+> +static void iris_detect_firmware(struct iris_core *core, const char *fw_name,
+> +				 const u8 *data, size_t size,
+> +				 const struct iris_firmware_desc *desc)
+> +{
+> +	if (core->iris_firmware_desc)
+> +		return;
+> +
+> +	/*
+> +	 * With a DT firmware-name override on a dual-generation platform the
+> +	 * image on disk decides the generation, so inspect it and switch to the
+> +	 * Gen1 descriptor when a Gen1 image was loaded.
+> +	 */
+> +	if (desc == core->iris_platform_data->firmware_desc_gen2 &&
+> +	    core->iris_platform_data->firmware_desc_gen1 &&
+> +	    of_property_present(dev_of_node(core->dev), "firmware-name") &&
+> +	    !iris_detect_gen2_from_fwdata(data, size)) {
+> +		dev_info(core->dev, "Gen1 FW detected in %s\n", fw_name);
+> +		desc = core->iris_platform_data->firmware_desc_gen1;
+> +	}
+> +
+> +	/* Publish iris_firmware_data first, then iris_firmware_desc (the guard). */
+> +	core->iris_firmware_data = desc->firmware_data;
+> +	core->iris_firmware_desc = desc;
+> +}
+> +
 
-Co-developed-by: Faruque Ansari <faruque.ansari@oss.qualcomm.com>
-Signed-off-by: Faruque Ansari <faruque.ansari@oss.qualcomm.com>
-Signed-off-by: Komal Bajaj <komal.bajaj@oss.qualcomm.com>
----
- arch/arm64/boot/dts/qcom/shikra-evk.dtsi | 28 ++++++++++++++++++++++++++++
- 1 file changed, 28 insertions(+)
+In function ‘iris_detect_firmware’,
+     inlined from ‘iris_load_fw_to_memory’ at 
+drivers/media/platform/qcom/iris/iris_firmware.c:216:3:
+drivers/media/platform/qcom/iris/iris_firmware.c:161:12: warning: ‘desc’ 
+may be used uninitialized [-Wmaybe-uninitialized]
+   161 |         if (desc == core->iris_platform_data->firmware_desc_gen2 &&
+       |            ^
+drivers/media/platform/qcom/iris/iris_firmware.c: In function 
+‘iris_load_fw_to_memory’:
+drivers/media/platform/qcom/iris/iris_firmware.c:176:42: note: ‘desc’ 
+was declared here
+   176 |         const struct iris_firmware_desc *desc;
+       |                                          ^~~~
+In function ‘iris_detect_firmware’,
+     inlined from ‘iris_load_fw_to_memory’ at 
+drivers/media/platform/qcom/iris/iris_firmware.c:216:3:
+drivers/media/platform/qcom/iris/iris_firmware.c:170:40: warning: ‘desc’ 
+may be used uninitialized [-Wmaybe-uninitialized]
+   170 |         core->iris_firmware_data = desc->firmware_data;
+       |                                    ~~~~^~~~~~~~~~~~~~~
+drivers/media/platform/qcom/iris/iris_firmware.c: In function 
+‘iris_load_fw_to_memory’:
+drivers/media/platform/qcom/iris/iris_firmware.c:176:42: note: ‘desc’ 
+was declared here
+   176 |         const struct iris_firmware_desc *desc;
+       |                                          ^~~~
+. "$TS_DIR"/lib/common-end.sh
+#!/bin/sh
+# Copyright 2024 Google LLC
 
-diff --git a/arch/arm64/boot/dts/qcom/shikra-evk.dtsi b/arch/arm64/boot/dts/qcom/shikra-evk.dtsi
-index 0115fc9095b3..04faf09b21ae 100644
---- a/arch/arm64/boot/dts/qcom/shikra-evk.dtsi
-+++ b/arch/arm64/boot/dts/qcom/shikra-evk.dtsi
-@@ -29,4 +29,32 @@ tpm@0 {
- 
- &uart0 {
- 	status = "okay";
+Proposed fix
+
+╰─$ git diff
+diff --git a/drivers/media/platform/qcom/iris/iris_firmware.c 
+b/drivers/media/platform/qcom/iris/iris_firmware.c
+index dfc4c184646c6..39558a300d38c 100644
+--- a/drivers/media/platform/qcom/iris/iris_firmware.c
++++ b/drivers/media/platform/qcom/iris/iris_firmware.c
+@@ -153,6 +153,9 @@ static void iris_detect_firmware(struct iris_core 
+*core, const char *fw_name,
+        if (core->iris_firmware_desc)
+                return;
+
++      if (!desc)
++              return;
 +
-+	expander0: pca953x@38 {
-+		compatible = "ti,tca9538";
-+		reg = <0x38>;
-+		#gpio-cells = <2>;
-+		gpio-controller;
-+	};
-+
-+	expander1: pca953x@3c {
-+		compatible = "ti,tca9538";
-+		reg = <0x3c>;
-+		#gpio-cells = <2>;
-+		gpio-controller;
-+	};
-+
-+	expander2: pca953x@20 {
-+		compatible = "ti,tca9539";
-+		reg = <0x20>;
-+		#gpio-cells = <2>;
-+		gpio-controller;
-+	};
-+
-+	expander3: pca953x@21 {
-+		compatible = "ti,tca9539";
-+		reg = <0x21>;
-+		#gpio-cells = <2>;
-+		gpio-controller;
-+	};
- };
-
----
-base-commit: 3d7783543c2646af69ad65825e810060494bea21
-change-id: 20260924-shikra-gpio-expander-25ff4a29c848
-
-Best regards,
--- 
-Komal Bajaj <komal.bajaj@oss.qualcomm.com>
+        /*
+         * With a DT firmware-name override on a dual-generation 
+platform the
+         * image on disk decides the generation, so inspect it and 
+switch to the
 
