@@ -1,101 +1,265 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 07F15401A01
-	for <linux-arm-msm@vger.kernel.org>; Thu, 24 Sep 2026 08:56:04 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 46F134418EC
+	for <linux-arm-msm@vger.kernel.org>; Thu, 24 Sep 2026 08:56:15 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790240166; cv=none; b=Bl+BOXUhXPBfCaCa+QapF0yB5hZW9JuVLRa781W59HhKfXJZlzXNgM4YzkweVxQ5txDnnxnGr2ELGKD34isDFCQnAS7piTZKPnEojMIzfMYsUiJw4iROrxsIpK5VrpV/nBCupR8R/yGEfcjVRzWBzCCt1TWBGR5ZBqKjQ0bME2E=
+	t=1790240178; cv=none; b=bmh2AaQbqcBQErV5p3IWVae3+9vJaMx1kje27KrfDVsN4RVfVWVGNRWgf+vLVo4owXPbkuGsZlUDHBCih9TGj1OJgwDlBSaz/mlwhIsLDlauqAFBtVT3Un8f5XaqJ8/nnsNEz7cZNMDJei4HbQejH6TVVhjHJSPn0ESWjKJUqI8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790240166; c=relaxed/simple;
-	bh=cqtnu7IaIGoRYZElCxIR5LPn7c5+fBNV9m+k2cDqIEo=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=Jit1NNyyMN4YMcDcXFZPZE1vzkRRJKv4e8PvK/khSZY8v+b9zHWBQH+WnVhfN/GcXMGVkWQJVd/GXO+z4N63zwvnS3cbYUIG1cZ+W8wEvOf6+u5Cs8OeY4dAnZzW6Ry8NewI08wRfmPoJk461vn1NBqrUkKw/FdK24UFGDAS6Gw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Qwne6CN2; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1790240178; c=relaxed/simple;
+	bh=Nup17ENEmXpV9ZwGGRFtcICN35ExK3wjqeYVDJVYpJ0=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=SbTe5YEr2YV6E6Gm6vhKxJGtuxVY1Jj1/PqjFuiuW4RxCahoCn8lyqrxuRv/Haeyu76yHHO4yJI3ebVwPuXhqIeME5yMNyUvzw0skQQNeHKPpQvs1vFsptZHQskoiI4HxLggHAqNpGLi58IRGfYtB1NvcOCYX00EfF6qGls5DzY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=XTX7ktsl; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=e+Y6g8Kj; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Qwne6CN2"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A16EB1F00893
-	for <linux-arm-msm@vger.kernel.org>; Thu, 24 Sep 2026 08:56:04 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1790240164;
-	bh=cqtnu7IaIGoRYZElCxIR5LPn7c5+fBNV9m+k2cDqIEo=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc;
-	b=Qwne6CN2u5fG+L2GUTitcbeg3ah8UOMkGFKrOhQvITofXsS7eaat20syjZ2PZMgOD
-	 c0GS4MeaAmamYFxLSpwlXINRozq42rBSKL/zQoeypjyK28CN6oPXjrIwyseuM78b24
-	 fTkAK7wEr6jQ34/jvLLuKLFIyOtfmjLwHut5dE7rC62jmjh/A9zXKBAXSrad/GAeU0
-	 8dyxQiqmQNvFJ6G+dgJ1JjeUCJD31B6/FQ4bOW7XHj0HNWu1ApVTvnmdu+vmSTUZ93
-	 3SUVYe/oWAHVrwF47EnvvBa3CCNwUQwSTvM3GnlSvgkMwqBA4mpCrA0MdGReE6GJAU
-	 8mDiQVebw8P/Q==
-Received: by mail-lf2-f13.google.com with SMTP id 2adb3069b0e04-5b5e4f16f15so1681182e87.3
-        for <linux-arm-msm@vger.kernel.org>; Thu, 24 Sep 2026 01:56:04 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AKwUvBzfD85DfyN5pnwsd8hIpa+2cSNxnUbKAiA10Ws+QXtl8z/aGhSGYAbWy6qlMd5iAS0RnmXn+aX+RnbZaJy2@vger.kernel.org
-X-Gm-Message-State: AFuF++kRBc0+NTx9SulpvjYKdoo8KLnKx/RFAD3J3Ax+m/5duYd6unWX
-	qag5HjyFAmpZJO0yWeq8HCCsS0+NmdHBgH6TczsjDq0JMN+2qTSrEQvDv3r0ixQ0d5Yv0Esegtc
-	QcwX6joIzMIfgGvoMSXrrgFBGeS3KEg7lIAeWuvN3JQ==
-X-Received: by 2002:ac2:48a1:0:b0:5b8:bc5e:d102 with SMTP id
- 2adb3069b0e04-5b8df09cffbmr482966e87.44.1790240163343; Thu, 24 Sep 2026
- 01:56:03 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="XTX7ktsl";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="e+Y6g8Kj"
+Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68O5eM6S1278337
+	for <linux-arm-msm@vger.kernel.org>; Thu, 24 Sep 2026 08:56:15 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-type:date:from:in-reply-to:message-id:mime-version
+	:references:subject:to; s=qcppdkim1; bh=Bxt3q8Jtf9Fw4kHeMbUugrOi
+	qJ2FR8QUG1VRmITBYC4=; b=XTX7ktslLowmfmnbQRFjDshYze/T8wCX9Z3ayS9n
+	RM8AmilfvLS5mKnFr9QdowjTr1baO3y2sZJhPlJ0G0V6twHbapqcTqvHWHgvroDl
+	gnRqAvTzQmzxrrkGxboPeRvV24jiEP/YMpcVOmDcgFwkxv7MgXPQ+8cNvXewdJSB
+	g3xHyUUSIcTf283P0a3njGUtZ3zeBgQcYyG0lWGAMoenEKKxlIloWA8lXNPdbliO
+	RFfvh3f2RfyRUp8NwUS15x3o0uhwvlAqjFnUxv0PLTh57TlFXXvZkRPQR55gw/oD
+	lwjJw5i6AQ76aZmnxLYHbhz2IB0kCCscPCEywrGdWDtjYQ==
+Received: from mail-dl1-f69.google.com (mail-dl1-f69.google.com [74.125.82.69])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gvhsb3hg8-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 24 Sep 2026 08:56:14 +0000 (GMT)
+Received: by mail-dl1-f69.google.com with SMTP id a92af1059eb24-1431ba79941so2197180c88.1
+        for <linux-arm-msm@vger.kernel.org>; Thu, 24 Sep 2026 01:56:14 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1790240174; x=1790844974; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=Bxt3q8Jtf9Fw4kHeMbUugrOiqJ2FR8QUG1VRmITBYC4=;
+        b=e+Y6g8KjlXDyC4VC3i84Vzxq4QUFlbSN5Xr2b3ZE3nTyWuS5gOkCfllzcv9ihGX9VH
+         Q0UPQxR6F8+pw1bHKGyxD4UDD9k2uzCDwgsbWt/y6MI8o4F/F6XDes36QGXG4kZ3+pti
+         kutcPP6e7terVWH/P8br2ziFKwqPRlt0Ys8OFUL9jdc0YH+dhTcZ28Ast3tUJUeGiS21
+         6F4jr+CblJKrpc4FanmHRzo/Ob9cPkwxlJpaiNyI7sI+uuYhifIYB0fJb4/IpzqFX0kP
+         5F74F7Ei8Y8Kf3CPihFtiTATYuUN4UJEH2wdGwJqnDIq1bImhbWmpvl14ShjVM/zw2Cp
+         mT6A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1790240174; x=1790844974;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=Bxt3q8Jtf9Fw4kHeMbUugrOiqJ2FR8QUG1VRmITBYC4=;
+        b=mlNeMRsHyWPAaWiJKOMpVSRpfEb16vKJGvYXr1Ry5vASLdxuxllZArg414jZ6I8tL3
+         mgog59hoUAY+ca2BjZS0Ipiz6s9G/mGm2gD62UXIZg4HpmvFQkIlAo45Jk13cuv9MXQ+
+         79HFkxqxebl51ghE0qVSP1IQVsFNSrDP2QuHXnCMSoeYx7fmlquKktFGWuknAVSJBASX
+         ekLBGD+z1CEXbMtN13LLjoUAApTCJ1YJOHRq7E6EjwIVZxiznWN/LO3B9nreBKZUDgQ/
+         3QzyKyJqnpeACUnD1gDWHnnDhrmyha1T9hYN4flRvewiqRy4d0QuhTtXwvDrLWXYXXGR
+         AVHg==
+X-Forwarded-Encrypted: i=1; AKwUvBzCmBTNVCg8I8J/JlWA23xjoJ6Tmr6FBXibTuCgIe7VGmQfNZBhn+YTBEXCQ89gdW+Xp/+9E2vr0HfhwlCn@vger.kernel.org
+X-Gm-Message-State: AFuF++koDeYWcND7T7tPzvgs4OvBMNBZPpDt5naUmlv0G5jDYUJubrzR
+	RA8ZibouHx7vTUixHk59AE9UoTb1Eqr0xoVPQZqiqdOKMWzKWW/6vFernPuv6bAf8BTCN6d7BB0
+	G2prok4Ob8UZw6qWLUNfNs1guN6aC7rGayGNWt/XgDQ/fN5z9B1qmcCuxJvc2Z8mu81el
+X-Gm-Gg: AYBFou0Sq5ATNWB3huetnQ5lEqJ2a+c+4YLQHTf4MAhdgxTHn4eoyaHmZUg2nd38WqV
+	K38n1yjiVOdotQmdzH8iRZghGVaZdte1mXzDsRZ2elElq/soxPZrmTamyDEiQ2GT7a5yQuQlc0D
+	Li9rT0YvrKV2JUWuivZki5JXEeeKdSxxONfwuAE8jOke3FIuY+QxqYX/DWz62jhzhIdB1yioHkO
+	J0DgGeDoCarb8XnU3cQDnR3xzTNhVojQ6HevAF68i4ouBtfkTlT7XkRhfZ6yHhxsJUc2JfIG+gu
+	4vyVc2AZpTdskncM6iU6LLUE1V3a4leknzNwwywCvb++RtzcReBh5xzBLuCQJhNUZNHlzEnqK9J
+	QGYwvGTY+lr0nM/VE1T0ps3iwQP3FYOMlNYjyMbxYdA==
+X-Received: by 2002:a05:701b:418e:20b0:143:298e:913b with SMTP id a92af1059eb24-145040d3ecamr1278185c88.45.1790240173738;
+        Thu, 24 Sep 2026 01:56:13 -0700 (PDT)
+X-Received: by 2002:a05:701b:418e:20b0:143:298e:913b with SMTP id a92af1059eb24-145040d3ecamr1278165c88.45.1790240173132;
+        Thu, 24 Sep 2026 01:56:13 -0700 (PDT)
+Received: from QCOM-aGQu4IUr3Y (i-global052.qualcomm.com. [199.106.103.52])
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-144f98a288esm19986937c88.13.2026.09.24.01.56.08
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 24 Sep 2026 01:56:12 -0700 (PDT)
+Date: Thu, 24 Sep 2026 16:56:06 +0800
+From: Shawn Guo <shengchao.guo@oss.qualcomm.com>
+To: Taniya Das <taniya.das@oss.qualcomm.com>
+Cc: Bjorn Andersson <andersson@kernel.org>, Stephen Boyd <sboyd@kernel.org>,
+        Brian Masney <bmasney+clk@redhat.com>,
+        Jerome Brunet <jbrunet+clk@baylibre.com>,
+        Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>, Abel Vesa <abelvesa@kernel.org>,
+        Ajit Pandey <ajit.pandey@oss.qualcomm.com>,
+        Imran Shaik <imran.shaik@oss.qualcomm.com>,
+        Jagadeesh Kona <jagadeesh.kona@oss.qualcomm.com>,
+        linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org,
+        linux-kernel@vger.kernel.org, devicetree@vger.kernel.org
+Subject: Re: [PATCH v2 2/3] dt-bindings: clock: qcom: document the Nord DPRX
+ Clock Controller
+Message-ID: <arTlpnQCjyXk2clV@QCOM-aGQu4IUr3Y>
+References: <20260924-nords_dprx-v2-0-fa4364e087ef@oss.qualcomm.com>
+ <20260924-nords_dprx-v2-2-fa4364e087ef@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260921-nord-gpi-dts-v2-0-4f297c983b94@oss.qualcomm.com>
- <20260921-nord-gpi-dts-v2-1-4f297c983b94@oss.qualcomm.com>
- <16f1b504-c414-4072-98d3-49f60d552028@oss.qualcomm.com> <CAMRc=MfBGgJXhn_c6RY9qhe-JAYjcy8vZOeKgK=cSpOW1ap0zA@mail.gmail.com>
- <79fc7d1b-98b2-455f-9a3d-d93602bb2bf8@oss.qualcomm.com> <09715ff3-df00-4ba7-8d9d-52b15e8b86df@oss.qualcomm.com>
-In-Reply-To: <09715ff3-df00-4ba7-8d9d-52b15e8b86df@oss.qualcomm.com>
-From: Bartosz Golaszewski <brgl@kernel.org>
-Date: Thu, 24 Sep 2026 10:55:51 +0200
-X-Gmail-Original-Message-ID: <CAMRc=MfqztXugCfGQ9_x8spNeWGH6C3dHLzdknH42Pt8WV8HNQ@mail.gmail.com>
-X-Gm-Features: AclHuK8MBQ4rBng-BJk6WQWaJXowIlUzQObMWJORuFQlrETQhiaHdUkdd8Fk85c
-Message-ID: <CAMRc=MfqztXugCfGQ9_x8spNeWGH6C3dHLzdknH42Pt8WV8HNQ@mail.gmail.com>
-Subject: Re: [PATCH v2 1/2] arm64: dts: qcom: nord: add GPI DMA controller nodes
-To: Mukesh Savaliya <mukesh.savaliya@oss.qualcomm.com>
-Cc: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, linux-arm-msm@vger.kernel.org, 
-	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>, Shawn Guo <shawnguo@kernel.org>, 
-	Bjorn Andersson <andersson@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>, 
-	Abel Vesa <abelvesa@kernel.org>, Rob Herring <robh@kernel.org>, 
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260924-nords_dprx-v2-2-fa4364e087ef@oss.qualcomm.com>
+X-Proofpoint-GUID: FqT5vyXE5v8Cp3m-siQJfe0ddWdrl70q
+X-Proofpoint-ORIG-GUID: FqT5vyXE5v8Cp3m-siQJfe0ddWdrl70q
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTI0MDAzNyBTYWx0ZWRfX6txeSwwDYm7/
+ CSx0iO2Uoc+xwXW1ppCDxwbctDyFon/58LHU/mbsONbmBL7zzwMx+ssjYR1f4+Y3fqJgLr47FT0
+ +IivzG6sO1HdhgPTpi13mi4dbr1dqY1jhGIIAZ7U5AHEmWr6sUXX5MfQNE6CVngRRTKwOZX1EUx
+ vXvZsW2iMOJoGeJqcYAQY7uLC/RIOAA+myknmoWYDz97wBhqvXNElQRt/SvmGAjLxsfIp0m++c3
+ a32lyffRLtqGSJwRSiMp8rSFLHhMACS1tymnPhFRz2aQlO/pMQsMGAJKXLn+kbnxz69sXMrJGnU
+ tStr00ouZ7tNHPdJvfxIOzzcoy7cOfhm04yNHqjlrlkKJh1iwZN40rvXOxqzwU7IIXLYl9kbHGl
+ kBRCqgOL9Dj6wQa0HMLPpAy1UZcuf1nEpCioq3rrgB2O/WQPKZRmvI6oEGMPQ39FAYFSVX4kdoM
+ r1xpw9agRqQaN5XUghw==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTI0MDAzNyBTYWx0ZWRfX20MYeujwL5+w
+ uOeo0rdpT3ikrWdzo+k7u/o1aTKZjeCKosX4ShXYSUwdMakGKgyNvtVQpqAhH6q5nvwDTlJYwZc
+ OYe4DOQ4HoRwCHzmttKiArqC+cjQ6yo=
+X-Authority-Analysis: v=2.4 cv=f7vdl+yM c=1 sm=1 tr=0 ts=6ab4e5ae cx=c_pps
+ a=kVLUcbK0zfr7ocalXnG1qA==:117 a=b9+bayejhc3NMeqCNyeLQQ==:17
+ a=kj9zAlcOel0A:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
+ a=gEfo2CItAAAA:8 a=EUspDBNiAAAA:8 a=cg-lLse-URA5QQXuI28A:9 a=CjuIK1q_8ugA:10
+ a=vr4QvYf-bLy2KjpDp97w:22 a=sptkURWiP4Gy88Gu7hUp:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-09-24_02,2026-09-21_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ clxscore=1015 phishscore=0 lowpriorityscore=0 suspectscore=0 spamscore=0
+ bulkscore=0 impostorscore=0 adultscore=0 priorityscore=1501 malwarescore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609240037
 
-On Thu, Sep 24, 2026 at 10:50=E2=80=AFAM Mukesh Savaliya
-<mukesh.savaliya@oss.qualcomm.com> wrote:
-> >>>
-> >>> we should be keeping GPI node default enabled similar to common QUPv3
-> >>> wrapper node.
-> >>> status =3D "ok" for all the nodes.
-> >>>
-> >>
-> >> The pattern across Qualcomm platforms seems to disable the GPI DMA nod=
-es at
-> >> SoC-level and only enable them at board-level.
-> >
-> > For no reason - the DMA engines may be reserved through TZ config,
-> > but for the past (high) N years that hasn't been the case
-> >
->
-> There is a reason to reserve this from TZ. Some use cases require GPI to
-> be available during early boot, before Linux is up and running, which
-> necessitates keeping the GPI instance enabled.
->
-> Also, GPII is allocated per SE, while the GPI instance itself is shared
-> across all SEs within a QUP. Given that a QUP typically contains eight
-> SEs, it is likely that at least one SE will require GPI operation.
->
-> For that reason, my preference is to keep the GPI node enabled by
-> default. However, if there is a strong preference to make this
-> board-specific and enable it only where required, I can work with that
-> approach as well.
->
-> I think it would be better to align on the expected default behavior
-> now, rather than revisiting it later once additional users start
-> depending on it.
+On Thu, Sep 24, 2026 at 12:51:32AM +0530, Taniya Das wrote:
+> Add bindings documentation for the Nord DisplayPort Receiver (DPRX)
+> Clock Controller.
+> 
+> Signed-off-by: Taniya Das <taniya.das@oss.qualcomm.com>
+> ---
+>  .../bindings/clock/qcom,nord-dprxcc.yaml           | 68 ++++++++++++++++++++++
+>  include/dt-bindings/clock/qcom,nord-dprxcc.h       | 27 +++++++++
+>  2 files changed, 95 insertions(+)
+> 
+> diff --git a/Documentation/devicetree/bindings/clock/qcom,nord-dprxcc.yaml b/Documentation/devicetree/bindings/clock/qcom,nord-dprxcc.yaml
+> new file mode 100644
+> index 0000000000000000000000000000000000000000..e3553e0eecd5027155b4dca5c0596e3140641aa9
+> --- /dev/null
+> +++ b/Documentation/devicetree/bindings/clock/qcom,nord-dprxcc.yaml
+> @@ -0,0 +1,68 @@
+> +# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
+> +%YAML 1.2
+> +---
+> +$id: http://devicetree.org/schemas/clock/qcom,nord-dprxcc.yaml#
+> +$schema: http://devicetree.org/meta-schemas/core.yaml#
+> +
+> +title: Qualcomm DPRX Clock & Reset Controller on Nord
+> +
+> +maintainers:
+> +  - Taniya Das <taniya.das@oss.qualcomm.com>
+> +
+> +description: |
 
-If I understood Konrad correctly, he too is in favor of enabling the
-GPI nodes. I was about to resend v3 with that changed.
+We agreed to drop " |", didn't we?
 
-Bart
+> +  Qualcomm dprx clock control module provides the clocks, and resets
+> +  domains on Nord.
+
+You fixed it partially by dropping "power" but keeping "domains".
+
+Shawn
+
+> +
+> +  See also:
+> +    include/dt-bindings/clock/qcom,nord-dprxcc.h
+> +
+> +properties:
+> +  compatible:
+> +    enum:
+> +      - qcom,nord-dprxcc0
+> +      - qcom,nord-dprxcc1
+> +
+> +  clocks:
+> +    items:
+> +      - description: XO clock source
+> +      - description: DPRX CFG AHB clock from NWGCC
+> +      - description: Sleep clock source
+> +
+> +  power-domains:
+> +    description:
+> +      MMCX power domain.
+> +    maxItems: 1
+> +
+> +  required-opps:
+> +    description:
+> +      MMCX performance point.
+> +    maxItems: 1
+> +
+> +required:
+> +  - compatible
+> +  - clocks
+> +  - power-domains
+> +  - required-opps
+> +
+> +allOf:
+> +  - $ref: qcom,gcc.yaml#
+> +
+> +unevaluatedProperties: false
+> +
+> +examples:
+> +  - |
+> +    #include <dt-bindings/clock/qcom,nord-nwgcc.h>
+> +    #include <dt-bindings/clock/qcom,rpmh.h>
+> +    #include <dt-bindings/power/qcom,rpmhpd.h>
+> +    clock-controller@a940000 {
+> +      compatible = "qcom,nord-dprxcc0";
+> +      reg = <0x0a940000 0xc000>;
+> +      clocks = <&rpmhcc RPMH_CXO_CLK>,
+> +               <&nwgcc NW_GCC_DPRX0_CFG_AHB_CLK>,
+> +               <&sleep_clk>;
+> +      power-domains = <&rpmhpd RPMHPD_MMCX>;
+> +      required-opps = <&rpmhpd_opp_low_svs>;
+> +      #clock-cells = <1>;
+> +      #reset-cells = <1>;
+> +    };
+> +...
+> diff --git a/include/dt-bindings/clock/qcom,nord-dprxcc.h b/include/dt-bindings/clock/qcom,nord-dprxcc.h
+> new file mode 100644
+> index 0000000000000000000000000000000000000000..62c26b58ebef04f05ea1dc77664c03aaad65baa4
+> --- /dev/null
+> +++ b/include/dt-bindings/clock/qcom,nord-dprxcc.h
+> @@ -0,0 +1,27 @@
+> +/* SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
+> +/*
+> + * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+> + */
+> +
+> +#ifndef _DT_BINDINGS_CLK_QCOM_DPRX_CC_NORD_H
+> +#define _DT_BINDINGS_CLK_QCOM_DPRX_CC_NORD_H
+> +
+> +/* DPRX_CC clocks */
+> +#define DPRX_CC_AHB_CLK					0
+> +#define DPRX_CC_AUD_CLK					1
+> +#define DPRX_CC_AUDIO_CLK_SRC				2
+> +#define DPRX_CC_CORE_AHB_DIV_CLK_SRC			3
+> +#define DPRX_CC_CORE_AUD_DIV_CLK_SRC			4
+> +#define DPRX_CC_CORE_RCG0_CLK_SRC			5
+> +#define DPRX_CC_CORE_RCG2_CLK_SRC			6
+> +#define DPRX_CC_CORE_RCG3_CLK_SRC			7
+> +#define DPRX_CC_MDP_MEM_CLK				8
+> +#define DPRX_CC_MMCX_XO_CLK				9
+> +#define DPRX_CC_PLL0					10
+> +#define DPRX_CC_PLL1					11
+> +#define DPRX_CC_VID_MEM_CLK				12
+> +
+> +/* DPRX_CC resets */
+> +#define DPRX_CC_DPRX_BLK_BCR				0
+> +
+> +#endif
+> 
+> -- 
+> 2.34.1
+> 
