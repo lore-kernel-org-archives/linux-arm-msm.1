@@ -1,341 +1,267 @@
-Received: from mail-ej2-f12.google.com (mail-ej2-f12.google.com [74.125.228.140])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2E87C4908BA
-	for <linux-arm-msm@vger.kernel.org>; Thu, 24 Sep 2026 13:36:12 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.228.140
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C2DCD3F86E6
+	for <linux-arm-msm@vger.kernel.org>; Thu, 24 Sep 2026 13:41:38 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790256981; cv=none; b=KUQQt5CZhIjmLkzHTWBQsSvsenf7QXvHEv2BkSMF1XvSAMNLfZ3fvowixKN+RsgcYzJXgJ6ktwg1+BCAC6/J5lQzNgaG0iaFXZr+lZsfv5sPE/evCiw8xiYlM4j2K1+kLlOUD4BSQ+cT7QK48/CdHjKewR7qYZR8WkMXhMQLXCA=
+	t=1790257303; cv=none; b=W8kCHEXqJdvy55B/YNNoZsAqYcjloHqURD4UGnKV+X9TTMwqP1ySO27m35Z9isolfWe15EP8iTQADo8/uSlyOh2HT+4cg1i//CT7APgom6spqtrecDGvIsUcxrWaip36HkWADeJqaZVHccv3KlbEKjkoEPluCJqP9QcHMeLwW/8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790256981; c=relaxed/simple;
-	bh=kfLdGopO3W7+26XI2/lxPrEVNfdmcRBoDST0239sT5I=;
-	h=Mime-Version:Content-Type:Date:Message-Id:Cc:Subject:From:To:
-	 References:In-Reply-To; b=mPM1b4TBkHn4lBhsNSkLI5GzmdjS0jIlxOAxPl1xaUPODGJ1HUSSvUvvGwUcRs++i7oD7XFRxNZhcndeXHvBlsd58ixIV5ZxnXiCelXOLRUgzqxZgsOayKqpEOqmeZ2eZh/TEYUNwDjQUfHQXFWODe48lE1KX6N1ojYCI3TODlA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=fairphone.com; spf=pass smtp.mailfrom=fairphone.com; dkim=pass (2048-bit key) header.d=fairphone.com header.i=@fairphone.com header.b=FE3SXy6y; arc=none smtp.client-ip=74.125.228.140
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=fairphone.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=fairphone.com
+	s=arc-20240116; t=1790257303; c=relaxed/simple;
+	bh=aWAGrhyCX9motQNWAluLG+QkdSPnPvrsexRft0qrURk=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=pn8J+04k9ctkHNzsonnLTu/+WlM0D+J5T57SdUf7WWJQ7zpDyADRYxGweo/Xs5XP/qYBl16Ugv+CHv89xjfWvebRCcQK+a85oaI5H5SAw0pBjf1l9dkicEV9xhqA065uh5+vzmJjU5Z/lu/CxlilM4DE6N3/eYNRZ16vyqoPrlA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=Ne/GjaE9; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=BzDJGnyU; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=fairphone.com header.i=@fairphone.com header.b="FE3SXy6y"
-Received: by mail-ej2-f12.google.com with SMTP id a640c23a62f3a-c254f55efe5so335077866b.2
-        for <linux-arm-msm@vger.kernel.org>; Thu, 24 Sep 2026 06:36:12 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="Ne/GjaE9";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="BzDJGnyU"
+Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68OC58aN1430283
+	for <linux-arm-msm@vger.kernel.org>; Thu, 24 Sep 2026 13:41:34 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	QEYYv0cWpRHAP3FDxsLq4vXa1ZOHiCaWsZmD4zy72Q4=; b=Ne/GjaE9uyckCFt/
+	p0/89XjL/xwCoQ9isszFuJo3idOD9dW3SJL106ZqA7rlEJN8mQBzfqf5g3YnxK+f
+	3LdSU5UUqA6A18+p0+di+kxKzsyLSEpKB8aSC+f6Ow8hu11cF+CClfrRzdTqrlCs
+	bZRzOqKHMcz7MYiT8WcbPbxjbmJz1oIppdMAc+phXvStU57lR5qunx2oN4aNEN2P
+	3ltuD+j35Yh4UkEhlrB0c5srLVuXhox71gI/ID8m3HOx+lE+8g3xc2RubfiRay3b
+	aAPLXWRFmSK/zu832WvyafWqr5f7+LyvVhoJNF3vjqiJYyTPI+lBU/lyBw8icUP+
+	+crHUw==
+Received: from mail-pl1-f197.google.com (mail-pl1-f197.google.com [209.85.214.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gvvgha989-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 24 Sep 2026 13:41:34 +0000 (GMT)
+Received: by mail-pl1-f197.google.com with SMTP id d9443c01a7336-2cee1ec30f2so22442735ad.3
+        for <linux-arm-msm@vger.kernel.org>; Thu, 24 Sep 2026 06:41:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=fairphone.com; s=fair; t=1790256968; x=1790861768; darn=vger.kernel.org;
-        h=in-reply-to:references:to:from:subject:cc:message-id:date
-         :content-type:content-transfer-encoding:mime-version:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=qbis09Q+KRjx9IyPuxFMqUf7Bej9ELQ4/FObbQ4rTIM=;
-        b=FE3SXy6yrlv0mV6ujvP+B20NDAyOp+3jBWaldJ8ojs+tdCBQmPzIsSrnXtSUySoqyU
-         SejLQC0/uiX6Xe2Ga4Ev+AnkdwOfmqujtwUuIY5oShZODY0Ykkrl4QpMNXjEqISTAYEI
-         rVN/SlZYsIRwzozXwslJjVsF1x0/PuJjZGhVVABHgxhoaDj6UuOeUoShEG+Og+KzS5Uk
-         06gkicje1NfBpDtCV3xYnCdh2a/Up/RG8v/2EGnrrsJCftDMa/0/Qzceg9D25/I/PTAS
-         0xA2wCIPS6Hvok4Qve5Q/wNi6fo4ZKh88XzgmJvNMpvWfM3uTxbogDcVzQAZwt5c0Erp
-         xWug==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790256968; x=1790861768;
-        h=in-reply-to:references:to:from:subject:cc:message-id:date
-         :content-type:content-transfer-encoding:mime-version:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+        d=oss.qualcomm.com; s=google; t=1790257294; x=1790862094; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=qbis09Q+KRjx9IyPuxFMqUf7Bej9ELQ4/FObbQ4rTIM=;
-        b=g+VpzUxBtBRYXsFQFOxLe328o8Rr1VPb7PxzRfGNGdz6DFizfBvV8i+feNg8JbzgUL
-         ZzkYvx/+Iw9P+hFqlzd7NtR0st05AV3OBic/IXT6IDOZCq9lbpCbbYP+jQeepmSxXplS
-         ozM2ZFyUKbsxXGLuRLTfc//5enccRCkA8nH4iCdTm+eRowuEjT5+6O0u6ok4A8dD1Frf
-         OBVu8TJAmVTwccEu8Nf23DPsHWOVBbaJK7OGgV6ZOAqEfFj3w8I67fmB+ZC7wYSq3Bmq
-         buM/ZQU6AX/89+XFq6XCGZy1qmEBHlcCThTufmqZX7aVCXnIv0ICuCQ8/4Lqx97IEXO2
-         +Ztw==
-X-Gm-Message-State: AFuF++nH7NwX3dmSUkVdm/qVqgUetWl1UtiOOTbqALOvbBj7iE3naLXd
-	x+sYhb1KEKb3lQR+aGP3qzyIMdB+5xyUpZTQM/491NPerk76E8QuRVcpamuhxCLrfNQ=
-X-Gm-Gg: AYBFou2OLMI8hI3XxUblBqG8jlkP4kvh70IA8o6/5KFxYf/z11kwfXhN0g0WAO2qEfl
-	ovsL3lqWLa06cMcobviGHNgqCq32Ut+ds6eZTnXI341TaF/gn4h43C3xfOhBLBop4QN+3+3LRBl
-	NRdn8ifoRwoCb0acSTAucC5theW4JeXfbw2IBRFolNdE/cFSIUrLuqxJZ8/UusrOtrGKyeR8P6c
-	e0DDfrC9HwVwH2HDO7syCnTTANpY4Kf1mvctPo02RKasOSno0ACn9+Vx/+iw0XZn4aOuKZ0YlYF
-	eefsuwdFcYvX5NuGnmU5I/8r8/4FpOF7s45ojkafPbze4N8MtxRsRQpMMjs8Ta9t5EtB/4/R1vj
-	pEj3pBVCKE/tLlYoHMIjG+YYUrrU72KyTpTNoVitHQKoqOHHXOk9BQmuz2nxswde1tyDOTGK5DB
-	zz3ES2525GDve9Ytj6XN4llwd49h9UZUMbvi4SuZYxL5r7lNG8x7TE/d0P88/gpFxTSlXATQu3C
-	gy95Pq2uT8=
-X-Received: by 2002:a17:907:3f89:b0:c29:61b9:7b3b with SMTP id a640c23a62f3a-c2ac25b1f23mr204543866b.49.1790256968563;
-        Thu, 24 Sep 2026 06:36:08 -0700 (PDT)
-Received: from localhost ([145.15.244.233])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c2aae6149e6sm294506266b.28.2026.09.24.06.36.06
+        bh=QEYYv0cWpRHAP3FDxsLq4vXa1ZOHiCaWsZmD4zy72Q4=;
+        b=BzDJGnyUjpOGFvIaMoE2VZB7gae+LDW0fVBJyxrXFvmu9STOxRr5Ozl/VRl4wr0JHD
+         6QoykgN//hnLKiYAz0BvMqFBDzSqwfrIU2sxf7DVU9u6C8q5s2Lys2lUcLOSanzceY/L
+         ZCQ/AMKLkCmXKJyoIBQI71ORpxHeCs8/UAq6yyrwguq3G2EhfVKdYrkKMiA7LgLDIyPD
+         l5WsvRkz5gtpWqb4eIzVxWYWVpuCgK6OOvUWqT2cROC0dns8A2kdl3DPklIr6ZijUO+2
+         Qs7l0jtqEWScRoriPwGwM/fVyDDB/uLo/hFnHNARihIteGc4NFhsCPbLA3XBv6Di4fep
+         9RWg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1790257294; x=1790862094;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=QEYYv0cWpRHAP3FDxsLq4vXa1ZOHiCaWsZmD4zy72Q4=;
+        b=vYRDs38b87GYKVDOCWjOHZqQmkDVjuw1qLuXMX1TwZXidbckpnNzErM6DVOvCdVhZH
+         pX69pM+TNBh1Ww1SxMlZ1SiGHUzjsiP/WTz+0CEC3rqVMsWm5ZthUuq2XcOPQqibRvVS
+         cd1cRa2oAenc9D8rN7oQhmEFdECd+gmBaY1zQRlGX6gPdBLh+Iq066Bg3fUpdwcW4hc2
+         9N6bilYqVhvD4ltP7cr8v1QG/CgfVNuTJKrCRKW7sJxNJSO+/Ubp/V13dNeHwrwrepVu
+         POpxOE/MK3y7fyD/5M/AXM9v4uBY/NdymGexK84e3+x8Zfb0nThPONg4kmypYWUxUO9Q
+         aqjg==
+X-Forwarded-Encrypted: i=1; AKwUvBydN+eY5DhLoHQ4zdw+6yNwqYtEdn/wkinGj3nw7wDSICiozn4m0mUlBKlvrGK8nvnrwJSIBayL5u0HPQW9@vger.kernel.org
+X-Gm-Message-State: AFuF++mPyVSJ98cGmGX/HdoNdiUHYKqTX5wjPPzgntK27MdhCfsVukSI
+	n3fBXpVmBYhp+GvIxu9+Tb0cnJVZo44fAjN2m1xtGnkdEYCpWqYA5jCxgjpgus2/G+24mFEEwws
+	2wLdhac4Tf1ftGc0JvBTkEADFz8ScVCdMHwuoGExdCVq+E6wLvOKNr2j1GOjeIqbeA+yE
+X-Gm-Gg: AYBFou27VbfzokKCdKDmKxs6DCHQAzfyCbEEHwdCWclaZF7PP4ZlOkmWgGKmpn5pYWn
+	zvQia81tiKc/81XzWxZ+BNmMk3LODEDZa1zYSGivesGD/rX5sg+otJpG6qUhLpKTZC+k3jVRb9K
+	hVKNsbhriOBR7mFZQ6PwdqX5H/egQl8c5foAV8c2SY8NrjmVY8Yzgl5azYyXMulVYABZaAcgsCM
+	31+wNMhPOk75gS9tElCqOoDteayHwviDsfKDsNWiTDGMT6lMO8gRWTdQ3tRH9vGmttsV7ze1Xks
+	weLTHpskN2gBl4oLz7bRzW8FH2J8y6sHD559Jpl8BVXs+A/4Bxiqj3ZjVDiDWUEu8OiCoLhi2hi
+	OcOM/AlEUtlqEcWhegTujGQ==
+X-Received: by 2002:a17:902:e54a:b0:2dd:c100:424d with SMTP id d9443c01a7336-2df7e246248mr24330605ad.49.1790257293604;
+        Thu, 24 Sep 2026 06:41:33 -0700 (PDT)
+X-Received: by 2002:a17:902:e54a:b0:2dd:c100:424d with SMTP id d9443c01a7336-2df7e246248mr24330195ad.49.1790257293024;
+        Thu, 24 Sep 2026 06:41:33 -0700 (PDT)
+Received: from [192.168.1.8] ([106.222.235.96])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2df6a5f52dcsm27897905ad.69.2026.09.24.06.41.25
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 24 Sep 2026 06:36:08 -0700 (PDT)
+        Thu, 24 Sep 2026 06:41:32 -0700 (PDT)
+Message-ID: <692ff69a-330e-40db-bffc-a53987fa4bce@oss.qualcomm.com>
+Date: Thu, 24 Sep 2026 19:11:24 +0530
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
-Mime-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 00/15] drm/msm: Support for Hawi & Maili GPU
+To: Connor Abbott <cwabbott0@gmail.com>
+Cc: Rob Clark <robin.clark@oss.qualcomm.com>, Sean Paul <sean@poorly.run>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        Dmitry Baryshkov <lumag@kernel.org>,
+        Abhinav Kumar <abhinav.kumar@linux.dev>,
+        Jessica Zhang <jesszhan0024@gmail.com>,
+        Marijn Suijten <marijn.suijten@somainline.org>,
+        David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+        Jordan Crouse <jordan@cosmicpenguin.net>,
+        Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+        Maxime Ripard <mripard@kernel.org>,
+        Thomas Zimmermann <tzimmermann@suse.de>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>,
+        Bjorn Andersson <andersson@kernel.org>, linux-arm-msm@vger.kernel.org,
+        dri-devel@lists.freedesktop.org, freedreno@lists.freedesktop.org,
+        linux-kernel@vger.kernel.org, devicetree@vger.kernel.org,
+        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+        Bhaskar Reddy Valluru <bvalluru@qti.qualcomm.com>
+References: <20260923-hawi-gpu-v1-0-0c3c79a1a470@oss.qualcomm.com>
+ <CACu1E7GndBnSj75ZVqic9NxdSakZJL3ZJOuz7D+RbVWA4DUqTQ@mail.gmail.com>
+Content-Language: en-US
+From: Akhil P Oommen <akhilpo@oss.qualcomm.com>
+In-Reply-To: <CACu1E7GndBnSj75ZVqic9NxdSakZJL3ZJOuz7D+RbVWA4DUqTQ@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8
-Date: Thu, 24 Sep 2026 15:36:05 +0200
-Message-Id: <DLNL4OAG2D1L.2EI2N80LMZV8N@fairphone.com>
-Cc: <linux-arm-msm@vger.kernel.org>, <dri-devel@lists.freedesktop.org>,
- <freedreno@lists.freedesktop.org>, <linux-kernel@vger.kernel.org>
-Subject: Re: [PATCH] drm/msm/dsi/phy: power up the digital top before
- starting the 7nm PLL
-From: "Luca Weiss" <luca.weiss@fairphone.com>
-To: "Dmitry Baryshkov" <dmitry.baryshkov@oss.qualcomm.com>, "Rob Clark"
- <robin.clark@oss.qualcomm.com>, "Dmitry Baryshkov" <lumag@kernel.org>,
- "Abhinav Kumar" <abhinav.kumar@linux.dev>, "Jessica Zhang"
- <jesszhan0024@gmail.com>, "Sean Paul" <sean@poorly.run>, "Marijn Suijten"
- <marijn.suijten@somainline.org>, "David Airlie" <airlied@gmail.com>,
- "Simona Vetter" <simona@ffwll.ch>, "Jonathan Marek" <jonathan@marek.ca>,
- "Val Packett" <val@packett.cool>, "Bjorn Andersson" <andersson@kernel.org>
-X-Mailer: aerc 0.22.0-0-gc2f86b7abde3-dirty
-References: <20260924-dsi-7nm-pll-digtop-v1-1-c2b24c8e218d@oss.qualcomm.com>
-In-Reply-To: <20260924-dsi-7nm-pll-digtop-v1-1-c2b24c8e218d@oss.qualcomm.com>
+Content-Transfer-Encoding: 8bit
+X-Authority-Analysis: v=2.4 cv=KYhHIgYD c=1 sm=1 tr=0 ts=6ab5288e cx=c_pps
+ a=cmESyDAEBpBGqyK7t0alAg==:117 a=36LQ094ZKnh52kRnC0Brrg==:17
+ a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22
+ a=EUspDBNiAAAA:8 a=VwQbUJbxAAAA:8 a=pGLkceISAAAA:8 a=tVI0ZWmoAAAA:8
+ a=MmXTpdYTAAAA:8 a=QyXUC8HyAAAA:8 a=e5mUnYsNAAAA:8 a=Kr7SBsR4NPCIxS1kjiwA:9
+ a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10 a=1OuFwYUASf3TG4hYMiVC:22
+ a=-BPWgnxRz2uhmvdm1NTO:22 a=7hoCnnChfAR1N-e-f1W3:22 a=Vxmtnl_E_bksehYqCbjh:22
+X-Proofpoint-GUID: MxDHySsU4okDi-tgc2xpkQVa1SE0VDwS
+X-Proofpoint-ORIG-GUID: MxDHySsU4okDi-tgc2xpkQVa1SE0VDwS
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTI0MDA1NiBTYWx0ZWRfX4R0nJ93c1+MK
+ 97oOilqHBMErnWNt8LzUvmgB8oQNQ9vhI7B6TBawTkeJ16g8asqqviw6KtPwCV9x8r/IQxsOG/r
+ 5JdgxnVIhPVxiimcyvIOFUDxskT7ltU=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTI0MDA1NiBTYWx0ZWRfX8svI+5WdG8Sy
+ uait8Nms6D893jBU5TeIo6p9X2x+ptJUTKZhU9XK1x3OGK5yLuvxH1ab3z3Kd3Qzpj8oaNSnaoo
+ 7QkXRUcTfTLrXab/QP+0OCFCWKm/vrEt+zKyQldyndeb1lh4sHTe0zBhv0NGWNglrY0P+t069w0
+ nE8sZSdUfBVs9Z/cvTTSXb8Y00TQT7zErs2Z2JtJ4y6qgkhVmiZRPxr4cHwuFKAR2lfFk+DX9o8
+ u5RcLkQjOAPfCeiAyVzb5s58hgaiHxT/qrB8wQONSAxAP/QVuvCvAgeMMKV4/L7sE3qW93uwBan
+ v9O+Oh8oSsRbKQp0uTdl1JGuPMLIkh8uDPXWtHU9tUqeI0LD7Xf3jLHUzaPcNAQSFPXsGbQqCiD
+ 55X78r/PiznCZHk+9r4HydZFnsjYa0rnfLnB2e3Wmv4Trn9B9JRLeieYleW45kH+jmxQO8/NWe4
+ Ft69OHD6DBSd5gPFvnA==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-09-24_03,2026-09-21_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ malwarescore=0 impostorscore=0 adultscore=0 lowpriorityscore=0 bulkscore=0
+ clxscore=1015 spamscore=0 suspectscore=0 phishscore=0 priorityscore=1501
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609240056
 
-Hi Dmitry,
 
-On Thu Sep 24, 2026 at 2:51 AM CEST, Dmitry Baryshkov wrote:
-> dsi_pll_7nm_vco_prepare() de-asserts PLL_SHUTDOWNB and starts the PLL,
-> but leaves the PHY digital top powered down; only dsi_7nm_phy_enable()
-> sets DIGTOP_PWRDN_B.  The PLL cannot lock in that state.  This went
-> unnoticed for as long as the PLL was only ever prepared from the DSI
-> host's enable path, after the PHY had been enabled.
->
-> Since commit acf7a91d0b0e ("clk: qcom: dispcc-sm8250: Enable parents for
-> pixel clocks") the clock framework enables the PHY PLL on its own while
-> applying the DT's assigned-clock-parents from of_clk_set_defaults(), at
-> probe time, before the PHY has been touched.  The lock fails, the failed
-> enable leaves the pixel clock with an unbalanced enable count, and the
-> retries on every probe attempt stall the boot for tens of seconds:
->
->   DSI PLL(0) lock failed, status=3D0x00000000
->   PLL(0) lock failed
->   dsi0_phy_pll_out_dsiclk already disabled
->   WARNING: drivers/clk/clk.c:1188 at clk_core_disable+0x244/0x24c
->    clk_core_disable
->    __clk_set_parent_after
->    clk_core_set_parent_nolock
->    clk_set_parent
->    of_clk_set_defaults
->    platform_probe
->
-> CMN_CTRL_0 reads 0x20 at the failing attempt: PLL_SHUTDOWNB set,
-> DIGTOP_PWRDN_B clear.  Setting DIGTOP_PWRDN_B alone makes the same PLL
-> lock, with no rate change and no other register touched.
->
-> Power up the digital top together with the PLL bias, and power it down
-> again with it.  The normal enable path is unaffected: dsi_7nm_phy_enable(=
-)
-> holds the bias reference and writes CMN_CTRL_0 in full anyway.
 
-FWIW the same fix seems to help on the 10nm with this error on bootup
+On 9/24/2026 12:54 AM, Connor Abbott wrote:
+> On Wed, Sep 23, 2026 at 6:26 AM Akhil P Oommen <akhilpo@oss.qualcomm.com> wrote:
+>>
+>> Adreno 850 is the next generation of A8x GPU present in Hawi SoC. It shares
+>> the ADRENO_8XX_GEN2 family and slice architecture with A840, but has many
+>> architectural improvements. There is a new block Matrix core (MALU) which
+>> helps to accelerate certain compute workloads. Also, there is a new Bx rail
+>> that powes a part of the GPU IP. GMU is now powered by a dedicated GDSC
+>> powered by MxG rail.
+> 
+> If there is a dedicated rail for GMU, then
+> VK_KHR_calibrated_timestamps is likely broken, assuming that the GMU
+> AO counter is on this rail. The AO offset logic in kgsl probably needs
+> to be ported here. Has this been tested?
 
-[    0.503085] msm_dsi_phy ae94400.phy: [drm:dsi_pll_10nm_vco_prepare] *ERR=
-OR* DSI PLL(0) lock failed, status=3D0x00000000
-[    0.503168] msm_dsi_phy ae94400.phy: [drm:dsi_pll_10nm_vco_prepare] *ERR=
-OR* PLL(0) lock failed
+Not sure how GMU core's power domain affect the AO timer. Could you please point
+me to the AO offset related change in KGSL? I will check.
 
-I've also ported more commits from 7nm to 10nm locally, will send them
-soon, since anyway they should be good fixes and code quality
-improvements
-
-drm/msm/dsi_phy_10nm: Protect PHY_CMN_CLK_CFG0 updated from driver side
-drm/msm/dsi_phy_10nm: Protect PHY_CMN_CLK_CFG1 against clock driver
-drm/msm/dsi_phy_10nm: Do not overwite PHY_CMN_CLK_CFG1 when choosing bitclk=
- source
-drm/msm/dsi_phy_10nm: Define PHY_CMN_CLK_CFG[01] bitfields and simplify sav=
-ing
-drm/msm/dsi_phy_10nm: Define PHY_CMN_CTRL_0 bitfields
-drm/msm/dsi_phy_10nm: Fix reading zero as PLL rates when unprepared
-
-Unfortunately some other warnings/errors still persist on bootup that I
-can't figure out... maybe you have some idea?
-
-If not, I don't want to bring this thread too much offtopic :)
-
-[    1.197104] ------------[ cut here ]------------
-[    1.197113] dsi0_pll_bit_clk: Zero divisor and CLK_DIVIDER_ALLOW_ZERO no=
-t set
-[    1.197134] WARNING: drivers/clk/clk-divider.c:145 at divider_recalc_rat=
-e+0xac/0xd4, CPU#0: kworker/u32:0/12
-[    1.197150] Modules linked in:
-[    1.197160] CPU: 0 UID: 0 PID: 12 Comm: kworker/u32:0 Not tainted 7.2.0-=
-00088-gddc402c24fff #86 PREEMPTLAZY=20
-[    1.197166] Hardware name: Fairphone 4 (DT)
-[    1.197170] Workqueue: events_unbound deferred_probe_work_func
-[    1.197181] pstate: 60400005 (nZCv daif +PAN -UAO -TCO -DIT -SSBS BTYPE=
-=3D--)
-[    1.197186] pc : divider_recalc_rate+0xac/0xd4
-[    1.197190] lr : divider_recalc_rate+0xac/0xd4
-[    1.197195] sp : ffff8000800b2720
-[    1.197197] x29: ffff8000800b2720 x28: ffff0000858b9080 x27: 00000000000=
-00000
-[    1.197204] x26: ffff0000859eb5c0 x25: 0000000000000000 x24: 00000000072=
-a88a0
-[    1.197211] x23: ffff000080394c10 x22: ffff0000859eac00 x21: ffff000080a=
-9fe00
-[    1.197217] x20: 0000000072a88a00 x19: ffff000084c92400 x18: fffffffffff=
-e9898
-[    1.197224] x17: 000000040044ffff x16: 045000f2b5503510 x15: fffffffffff=
-e9848
-[    1.197232] x14: 0000000000000050 x13: 0a74657320746f6e x12: 204f52455a5=
-f574f
-[    1.197238] x11: ffffd97c73dedd58 x10: 00000000000001fa x9 : ffffd97c73d=
-edd58
-[    1.197245] x8 : 3fffffffffffefff x7 : ffffd97c73e45d58 x6 : 00000000000=
-00000
-[    1.197251] x5 : 0000000000000001 x4 : 0000000000000000 x3 : 00000000fff=
-fffff
-[    1.197257] x2 : 0000000000000000 x1 : 0000000000000000 x0 : ffff0000801=
-c0000
-[    1.197265] Call trace:
-[    1.197268]  divider_recalc_rate+0xac/0xd4 (P)
-[    1.197275]  clk_divider_recalc_rate+0x58/0x80
-[    1.197279]  clk_recalc+0x74/0xc0
-[    1.197287]  clk_calc_subtree+0x50/0x80
-[    1.197293]  clk_calc_subtree+0x68/0x80
-[    1.197298]  clk_calc_new_rates+0x1a8/0x208
-[    1.197305]  clk_calc_new_rates+0x12c/0x208
-[    1.197311]  clk_calc_new_rates+0x12c/0x208
-[    1.197316]  clk_calc_new_rates+0x12c/0x208
-[    1.197323]  clk_calc_new_rates+0x12c/0x208
-[    1.197329]  clk_calc_new_rates+0x18c/0x208
-[    1.197335]  clk_core_set_rate_nolock+0xc0/0x2d0
-[    1.197340]  clk_set_rate+0x38/0x14c
-[    1.197344]  _set_opp+0x140/0x5c0
-[    1.197352]  dev_pm_opp_set_rate+0x110/0x2f4
-[    1.197358]  dsi_link_clk_set_rate_6g+0x44/0x100
-[    1.197366]  msm_dsi_host_power_on+0xb8/0x99c
-[    1.197371]  dsi_mgr_bridge_pre_enable+0x19c/0x3c0
-[    1.197376]  drm_atomic_bridge_call_pre_enable+0x40/0x54
-[    1.197384]  drm_atomic_bridge_chain_pre_enable+0xe0/0x14c
-[    1.197390]  drm_atomic_helper_commit_encoder_bridge_pre_enable+0xb4/0xf=
-c
-[    1.197399]  drm_atomic_helper_commit_modeset_enables+0x28/0x58
-[    1.197406]  msm_atomic_commit_tail+0x1ac/0x55c
-[    1.197412]  commit_tail+0xa4/0x1a0
-[    1.197416]  drm_atomic_helper_commit+0x178/0x1a0
-[    1.197421]  drm_atomic_commit+0x8c/0xd0
-[    1.197427]  drm_client_modeset_commit_atomic+0x214/0x280
-[    1.197434]  drm_client_modeset_commit_locked+0x60/0x178
-[    1.197442]  drm_client_modeset_commit+0x2c/0x60
-[    1.197448]  __drm_fb_helper_restore_fbdev_mode_unlocked.part.0+0x84/0x8=
-c
-[    1.197456]  drm_fb_helper_set_par+0x58/0x74
-[    1.197462]  fbcon_init+0x4c0/0x4e4
-[    1.197470]  visual_init+0xb4/0x104
-[    1.197478]  do_bind_con_driver.isra.0+0x1c4/0x360
-[    1.197483]  do_take_over_console+0x1c0/0x214
-[    1.197487]  do_fbcon_takeover+0x78/0xf4
-[    1.197493]  fbcon_fb_registered+0x17c/0x1e8
-[    1.197498]  do_register_framebuffer+0x19c/0x250
-[    1.197504]  register_framebuffer+0x28/0x50
-[    1.197509]  __drm_fb_helper_initial_config_and_unlock+0x324/0x5a0
-[    1.197516]  drm_fb_helper_initial_config+0x38/0x44
-[    1.197523]  drm_fbdev_client_hotplug+0x7c/0xd4
-[    1.197529]  drm_client_register+0x58/0x9c
-[    1.197535]  drm_fbdev_client_setup+0xa4/0x1c0
-[    1.197540]  drm_client_setup+0xac/0xe0
-[    1.197546]  msm_drm_kms_post_init+0x28/0x40
-[    1.197552]  msm_drm_init+0x15c/0x1d4
-[    1.197558]  msm_drm_bind+0x48/0x60
-[    1.197562]  try_to_bring_up_aggregate_device+0x16c/0x1e0
-[    1.197569]  __component_add+0xa4/0x170
-[    1.197574]  component_add+0x14/0x20
-[    1.197579]  dsi_dev_attach+0x20/0x38
-[    1.197585]  dsi_host_attach+0x140/0x158
-[    1.197591]  mipi_dsi_attach+0x2c/0x50
-[    1.197596]  hx83112a_probe+0xec/0x1bc
-[    1.197601]  mipi_dsi_drv_probe+0x1c/0x28
-[    1.197606]  really_probe+0xbc/0x2c0
-[    1.197612]  __driver_probe_device+0x118/0x16c
-[    1.197618]  driver_probe_device+0x3c/0x120
-[    1.197623]  __device_attach_driver+0xa4/0x108
-[    1.197628]  bus_for_each_drv+0x84/0xe4
-[    1.197633]  __device_attach+0x9c/0x1a0
-[    1.197639]  device_initial_probe+0x54/0x5c
-[    1.197644]  bus_probe_device+0x34/0x98
-[    1.197649]  device_add+0x5c4/0x7dc
-[    1.197654]  mipi_dsi_device_register_full+0xd8/0x168
-[    1.197659]  mipi_dsi_host_register+0xb8/0x178
-[    1.197663]  msm_dsi_host_register+0x3c/0x60
-[    1.197668]  msm_dsi_manager_register+0x148/0x220
-[    1.197673]  dsi_dev_probe+0x18c/0x220
-[    1.197679]  platform_probe+0x80/0xac
-[    1.197686]  really_probe+0xbc/0x2c0
-[    1.197691]  __driver_probe_device+0x118/0x16c
-[    1.197697]  driver_probe_device+0x3c/0x120
-[    1.197703]  __device_attach_driver+0xa4/0x108
-[    1.197708]  bus_for_each_drv+0x84/0xe4
-[    1.197713]  __device_attach+0x9c/0x1a0
-[    1.197718]  device_initial_probe+0x54/0x5c
-[    1.197723]  bus_probe_device+0x34/0x98
-[    1.197729]  deferred_probe_work_func+0x88/0xc0
-[    1.197734]  process_one_work+0x150/0x280
-[    1.197743]  worker_thread+0x18c/0x2e0
-[    1.197748]  kthread+0x11c/0x13c
-[    1.197754]  ret_from_fork+0x10/0x20
-[    1.197761] ---[ end trace 0000000000000000 ]---
-[    1.197768] ------------[ cut here ]------------
-[    1.197769] dsi0_phy_pll_out_dsiclk: Zero divisor and CLK_DIVIDER_ALLOW_=
-ZERO not set
-[    1.197785] WARNING: drivers/clk/clk-divider.c:145 at divider_recalc_rat=
-e+0xac/0xd4, CPU#0: kworker/u32:0/12
-
-Regards
-Luca
-
->
-> Fixes: 1ef7c99d145c ("drm/msm/dsi: add support for 7nm DSI PHY/PLL")
-> Fixes: acf7a91d0b0e ("clk: qcom: dispcc-sm8250: Enable parents for pixel =
-clocks")
-> Assisted-by: LLM
-> Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-> ---
-> Single fix for the DSI PLL lock failure and the clk_core_disable() WARN
-> seen at probe on SM8150/SM8250/SM8350/SC8180X since the dispcc-sm8250
-> pixel clock sources gained CLK_OPS_PARENT_ENABLE.  The clock framework
-> now enables the PHY PLL while applying assigned-clock-parents, before the
-> PHY driver has powered up the PHY's digital top, and the PLL cannot lock
-> without it.
->
-> Found by forcing the missing bit on a failing boot: CMN_CTRL_0 read 0x20
-> at the failed attempt, and setting DIGTOP_PWRDN_B alone made the same
-> PLL lock.  Verified on QRB5165 RB5 and SM8350 HDK with the current DTs,
-> and with the link clock sources moved into the driver; the fix is
-> independent of that series and makes it unnecessary as a fix.
-> ---
->  drivers/gpu/drm/msm/dsi/phy/dsi_phy_7nm.c | 6 ++++--
->  1 file changed, 4 insertions(+), 2 deletions(-)
->
-> diff --git a/drivers/gpu/drm/msm/dsi/phy/dsi_phy_7nm.c b/drivers/gpu/drm/=
-msm/dsi/phy/dsi_phy_7nm.c
-> index 5d805a797abd..7bacc1031187 100644
-> --- a/drivers/gpu/drm/msm/dsi/phy/dsi_phy_7nm.c
-> +++ b/drivers/gpu/drm/msm/dsi/phy/dsi_phy_7nm.c
-> @@ -413,7 +413,8 @@ static void dsi_pll_disable_pll_bias(struct dsi_pll_7=
-nm *pll)
->  	} /* else: =3D=3D 0 */
-> =20
->  	data =3D readl(pll->phy->base + REG_DSI_7nm_PHY_CMN_CTRL_0);
-> -	data &=3D ~DSI_7nm_PHY_CMN_CTRL_0_PLL_SHUTDOWNB;
-> +	data &=3D ~(DSI_7nm_PHY_CMN_CTRL_0_DIGTOP_PWRDN_B |
-> +		  DSI_7nm_PHY_CMN_CTRL_0_PLL_SHUTDOWNB);
->  	writel(0, pll->phy->pll_base + REG_DSI_7nm_PHY_PLL_SYSTEM_MUXES);
->  	writel(data, pll->phy->base + REG_DSI_7nm_PHY_CMN_CTRL_0);
->  	spin_unlock_irqrestore(&pll->pll_enable_lock, flags);
-> @@ -433,7 +434,8 @@ static void dsi_pll_enable_pll_bias(struct dsi_pll_7n=
-m *pll)
->  	}
-> =20
->  	data =3D readl(pll->phy->base + REG_DSI_7nm_PHY_CMN_CTRL_0);
-> -	data |=3D DSI_7nm_PHY_CMN_CTRL_0_PLL_SHUTDOWNB;
-> +	data |=3D DSI_7nm_PHY_CMN_CTRL_0_DIGTOP_PWRDN_B |
-> +		DSI_7nm_PHY_CMN_CTRL_0_PLL_SHUTDOWNB;
->  	writel(data, pll->phy->base + REG_DSI_7nm_PHY_CMN_CTRL_0);
-> =20
->  	writel(0xc0, pll->phy->pll_base + REG_DSI_7nm_PHY_PLL_SYSTEM_MUXES);
->
-> ---
-> base-commit: a15fac810c76397ec9f62a6fc26c4d7ab6e238a7
-> change-id: 20260924-dsi-7nm-pll-digtop-9939220a453a
->
-> Best regards,
-> -- =20
-> With best wishes
-> Dmitry
-
+-Akhil.
+> 
+> Connor
+> 
+>>
+>> Maili GPU (Adreno 845) is very similar to A850, except that it doesn't
+>> have the MALU block.
+>>
+>> We will post the Mesa support and linux-firmware support soon. MALU support
+>> will be brought in separately along with its support in Mesa.
+>>
+>> As there is no display support available for Hawi/Maili, validated offscreen
+>> testcases that render basic triangles, glmark2-offscreen etc.
+>>
+>> The driver/dt-binding patches are for Rob to pickup and the DT patches
+>> are for Bjorn.
+>>
+>> Signed-off-by: Akhil P Oommen <akhilpo@oss.qualcomm.com>
+>> ---
+>> To: Rob Clark <robin.clark@oss.qualcomm.com>
+>> To: Sean Paul <sean@poorly.run>
+>> To: Konrad Dybcio <konradybcio@kernel.org>
+>> To: Akhil P Oommen <akhilpo@oss.qualcomm.com>
+>> To: Dmitry Baryshkov <lumag@kernel.org>
+>> To: Abhinav Kumar <abhinav.kumar@linux.dev>
+>> To: Jessica Zhang <jesszhan0024@gmail.com>
+>> To: Marijn Suijten <marijn.suijten@somainline.org>
+>> To: David Airlie <airlied@gmail.com>
+>> To: Simona Vetter <simona@ffwll.ch>
+>> To: Jordan Crouse <jordan@cosmicpenguin.net>
+>> To: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>
+>> To: Maxime Ripard <mripard@kernel.org>
+>> To: Thomas Zimmermann <tzimmermann@suse.de>
+>> To: Rob Herring <robh@kernel.org>
+>> To: Krzysztof Kozlowski <krzk+dt@kernel.org>
+>> To: Conor Dooley <conor+dt@kernel.org>
+>> To: Bjorn Andersson <andersson@kernel.org>
+>> Cc: linux-arm-msm@vger.kernel.org
+>> Cc: dri-devel@lists.freedesktop.org
+>> Cc: freedreno@lists.freedesktop.org
+>> Cc: linux-kernel@vger.kernel.org
+>> Cc: devicetree@vger.kernel.org
+>>
+>> ---
+>> Akhil P Oommen (11):
+>>       drm/msm/a6xx: Honor perfmode_bw threshold on A8x
+>>       drm/msm/a6xx: Fix secondary rail vote in ARC votes
+>>       drm/msm/a6xx: Fix RPMH dependency votes
+>>       drm/msm/a6xx: Factor out RPMh arc-vote helpers
+>>       drm/msm/a6xx: Add BX rail support to GMU dependency votes
+>>       drm/msm/a6xx: Clamp MX dependency vote
+>>       drm/msm/a8xx: Add Adreno 850 support
+>>       drm/msm/a6xx: Send THINMEM config to GMU for A850
+>>       dt-bindings: display/msm: Document A850 GPU and GMU
+>>       arm64: dts: qcom: hawi: Add GPU support
+>>       arm64: dts: qcom: hawi-mtp: Enable GPU
+>>
+>> Bhaskar Reddy Valluru (4):
+>>       drm/msm/a8xx: Add Adreno 845 support
+>>       dt-bindings: display/msm: Document A845 GPU and GMU
+>>       arm64: dts: qcom: maili: Add GPU support
+>>       arm64: dts: qcom: maili-mtp: Enable GPU
+>>
+>>  .../devicetree/bindings/display/msm/gmu.yaml       |  90 ++++-
+>>  .../devicetree/bindings/display/msm/gpu.yaml       |   4 +
+>>  arch/arm64/boot/dts/qcom/hawi-mtp.dts              |   8 +
+>>  arch/arm64/boot/dts/qcom/hawi.dtsi                 | 336 ++++++++++++++++
+>>  arch/arm64/boot/dts/qcom/maili-mtp.dts             |   8 +
+>>  arch/arm64/boot/dts/qcom/maili.dtsi                | 309 ++++++++++++++
+>>  drivers/gpu/drm/msm/adreno/a6xx_catalog.c          | 446 +++++++++++++++++++++
+>>  drivers/gpu/drm/msm/adreno/a6xx_gmu.c              | 231 +++++++----
+>>  drivers/gpu/drm/msm/adreno/a6xx_gmu.h              |   1 +
+>>  drivers/gpu/drm/msm/adreno/a6xx_gpu.h              |   2 +
+>>  drivers/gpu/drm/msm/adreno/a6xx_hfi.c              |  25 ++
+>>  drivers/gpu/drm/msm/adreno/a6xx_hfi.h              |   1 +
+>>  drivers/gpu/drm/msm/adreno/a8xx_gpu.c              |  16 +-
+>>  drivers/gpu/drm/msm/adreno/adreno_gpu.h            |  21 +
+>>  drivers/gpu/drm/msm/registers/adreno/a6xx.xml      |   8 +
+>>  15 files changed, 1407 insertions(+), 99 deletions(-)
+>> ---
+>> base-commit: 1e9b8055458b92f9ebab6f39d97ade5265a0b012
+>> change-id: 20260811-hawi-gpu-05b4ecfc3c4c
+>> prerequisite-message-id: 20260923-hawi-dt-post-v1-0-e41473b6298b@oss.qualcomm.com
+>> prerequisite-patch-id: 239c169e15da44519b2dad09ecd92f0052757929
+>> prerequisite-patch-id: 6c586be864944bb1eed773e8c211b898bb1289fe
+>> prerequisite-patch-id: f3d8748ccdb6760563f3e07f701a18388a9408ed
+>> prerequisite-patch-id: b1639353868bed10fd3cbfcd01cfb88b7e737ead
+>> prerequisite-message-id: 20260922-maili-dts-v1-0-ac2b1b76bfd9@oss.qualcomm.com
+>> prerequisite-patch-id: 36f12c16bf9cb0411d8be2f396407c724162189d
+>> prerequisite-patch-id: 28ede1ab83d4b5b56423ebb09bae74b6599b3bac
+>> prerequisite-patch-id: 6b3e28c55c07bfcdca8bfa9219fa0c6c763c6f6e
+>> prerequisite-patch-id: a2007fdaaeaf2981860c54ae5514f5a6f06c6bb3
+>> prerequisite-patch-id: af8aa3c630647336bdaeffa9c88de3650f1e49e4
+>>
+>> Best regards,
+>> --
+>> Akhil P Oommen <akhilpo@oss.qualcomm.com>
+>>
 
