@@ -1,114 +1,78 @@
-Received: from mail-qk2-f13.google.com (mail-qk2-f13.google.com [74.125.230.205])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9C6C738F25C
-	for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 23:54:34 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.230.205
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C4B923BB57;
+	Thu, 24 Sep 2026 00:01:16 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790207676; cv=none; b=nklSTqhrvMr3SJ1rF8/S0DTzOKSNdZTVmhNZ2m4jz0+9OKzC7USkYIXwzt6Sothbyw/fIr55fQ6Tovv8Kur5092y50taKQxHmalRlAnIjtg+cg/sK2WrbWfdLFjic0PYmG5L+duB0m92MC4/fCPOdAHeSji+bWlSZ2YLR6my/OI=
+	t=1790208077; cv=none; b=PXDcApwMO1Lj1Vf3uQggM4v4TkO2AwfakfVc5iNysr1pqNuunYFA84CmD2GAGIoGI48U0jhgMmWLGjjZB2RssLt4KaQ5EAEbgmsiDrvwnPxofgU1EqiwAQTedz9wvZFOKUXc5Sd2NhInEuNKVoc0soznSQMbqU7MTZKoTfRfw/o=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790207676; c=relaxed/simple;
-	bh=xSwgtNXTlPhev8I96YN0byX+CJhMkcrtEIVhpD2ZkgA=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=sCeiHcUDMEcpVueAdW6McBTCtVT+iqJ/lkN3l3BVWBn9zb+ET9mXmaX8noP0bM61q4HSL9cYpYL16Z5QCSYTILQJtVsH6cVLDS7S7lIEv7cmDxBrCWjGDK433V9XSZKBMgV0+JnPMyWx96I0w7ZUWhxIKEUv4Vy6Q9SwFkQ1tms=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=ZI0mWjpD; arc=none smtp.client-ip=74.125.230.205
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	s=arc-20240116; t=1790208077; c=relaxed/simple;
+	bh=GupVj96H8dz2QFcvfvHdFq7LSHLNcZzD9x2lDjkSwGc=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=Y7KwK0+wbr2x39hDQsM6E0zGN4pmKpA+WryE9CNT1g2NWtOID3VwUa587dp5aSGb+UYXLvIkJP6L9fzDsrN+1iHwVl7r+1muTpqS8mPbf9KdiYnutY/Mn06K7gewRJsUcrPhOnr4/4tZOZf/+AOU2GQhPVCZX5f64bWENpV6ePw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=XMMv5Yrs; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="ZI0mWjpD"
-Received: by mail-qk2-f13.google.com with SMTP id d75a77b69052e-530e2f50d01so14053661cf.0
-        for <linux-arm-msm@vger.kernel.org>; Wed, 23 Sep 2026 16:54:34 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1790207673; x=1790812473; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=+YWsyN2G9LWwioqrNVsniXHUK5Ay6GmJ3BIrxT0YNvA=;
-        b=ZI0mWjpDhgCfW0rbsUA2IN9TM0hifSzOS5lp7uWf7am5eYjNY0gkFtrWIZ6ouK1/TS
-         GF20vpeUf4gMgC+xVwNJg00+7RmgTQkDD522SuhHMqZCZeYZFKfe2/L1GHZ+8QtzhNVK
-         F4HeF6K1XigGs90MlMWxcBvW5l15sgCOSpcmN6uKO/UYvonq9pkMgj+dh4T+IayoQeD3
-         kNxG9Gc07OyS+n85ggwtNX8IH/85Navn953Ko9YtETES3EDAZG13STkpPA6hdE36aBvV
-         s9ZOj6PkEi1tDUHE43tcVH7QyLAQXawPzr/H82KkLP7wPVgtEx/K+bxKtUOXPUgChUU0
-         XQKQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790207673; x=1790812473;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=+YWsyN2G9LWwioqrNVsniXHUK5Ay6GmJ3BIrxT0YNvA=;
-        b=Sbl8PXQ8PpuuuTRCwK9nmw8q7J/RyyJ8uyz/Z5EGJXdDq81yieKY8X0Vlaru/pqPTm
-         z9mlv6h5SNlbqStBhxpyMX13nbOjKmg2xCHoYgnNIoIpepMKUw3x7SkpkGH8Yz336+gp
-         Z3+0SVDGxwv4TMcYYM6VEz31qufiVnFmPdwh/f3pRac/NGvSvxBEPx17TTnsYd4Jv9RB
-         5kHnLk6A2nnf6iBH6wdmJc8erN4Dlx7PGZ2SHfPRkwmatN1xv395MZhT8AiZSDzo1Cyc
-         MZSHv77c1aRqn2pzeJG8dMw7Vm0Eq0Nw1Y7T02pP2CqwVknuS2FK9BnQtcEM8CItrOao
-         6CAA==
-X-Forwarded-Encrypted: i=1; AKwUvBz3rdq3JN19mpKNraQoVXC9WxDT1C1niVilIHYftPwJGPy/Qh7T2q7qm+dI9lHAk06xpnt1ewxpXsf0aUYJ@vger.kernel.org
-X-Gm-Message-State: AFuF++mvP3KPWCqADfRJz+Q8461HR6u526M4U/Q+XmXK1RfJ8Q+d+/9N
-	AnKjZKRUeOGnOBv/EWe734KZaFBADMxiMVHMTVUw6OGt5hzPEtsZawZE
-X-Gm-Gg: AYBFou317sieKR/d3DiUef1Wn5f4Vt2Wf9m1/mmyLVH0s+l5+U9Zt7tfHCic/+0E5x3
-	cxYhKdPo1YEtMRULAsk7Bji1iB6Em9dESRrvS0o4c5orQS+XDwi2zU3BeDglrSTCCpd19n1ID7U
-	rTTUCxnYkMGi8l1aJ2OmC0lkxgSUX1GaUtrYIZPLam9grRjJIUv4ySXp9B8LWdhpFvPHKJfTlkW
-	DvypJmt8dkPj1BE3g7f3I6cyhnAHK7TxgdXk9PfBLexr6OR+qrhj5evXfUrEGU75ZqDf+hpbKT5
-	Bnt6Gzey+ZdSq1/9h92x6ceLTUDiXlwpfHj6Rv+HNreSULJmrm5XhFyED+jOkG/JQglDsyJumfH
-	+TCNRk2pQ5VbnVLbPtb8IlyDq1S+wfQtUIP5rTiKDzTWwrcWxn9NUVTLJWY8cRd0HueW3mQJ8nL
-	5XXm51qQebphIBXyRUw6sstbX1fMnPrEelfiG1XAPIBJX8XvQUOUmqw0qETEoCP+v6T/hkLeTQG
-	TVG8HmFrbmZtB2e0HiwFaQ=
-X-Received: by 2002:a05:622a:1b24:b0:532:ca19:afc1 with SMTP id d75a77b69052e-532fb640a29mr12355801cf.29.1790207673650;
-        Wed, 23 Sep 2026 16:54:33 -0700 (PDT)
-Received: from i4-gl-tmk5904.ad.psu.edu ([130.203.156.186])
-        by smtp.gmail.com with ESMTPSA id 6a1803df08f44-9142183c40asm281206d6.4.2026.09.23.16.54.33
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 23 Sep 2026 16:54:33 -0700 (PDT)
-From: Yuho Choi <oss.patchbox@gmail.com>
-To: Manivannan Sadhasivam <mani@kernel.org>
-Cc: Jeff Hugo <jeff.hugo@oss.qualcomm.com>,
-	mhi@lists.linux.dev,
-	linux-arm-msm@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	Yuho Choi <oss.patchbox@gmail.com>
-Subject: [PATCH v1] bus: mhi: ep: Use IRQF_NO_AUTOEN flag in request_irq()
-Date: Wed, 23 Sep 2026 19:54:21 -0400
-Message-ID: <20260923235430.703236-1-oss.patchbox@gmail.com>
-X-Mailer: git-send-email 2.43.0
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="XMMv5Yrs"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B6DBE1F000FF;
+	Thu, 24 Sep 2026 00:01:15 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1790208076;
+	bh=dZlzId3RS58Gzb7rS+WrfiYVKCUjniJG45GhMMYyUAA=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References;
+	b=XMMv5Yrsl4aQD7dHYOUOmTpQomAT1s1PDxFXs1vjIu70NmsySFLJ/i/ZSzTWSB319
+	 FSCZspxDdtJIK7FjgbHKsT4gGKJqQhPmZfkfinJzMSBNo4ZIhftLdD/VL0fI2x80Or
+	 kIWy5bHCnab6pUkxU1HWm8SdLeqt/BmY/dugGVdeGM2RDEnDU/A/0I5MbDw+nRY4d7
+	 amnRDKn3k3D9RZGZ97iCklwT1iIZUCtLlPd8LE90YURe+CDnd195RXpXO00QvBnRA3
+	 9YLda4HsD6HyZ+oq1+ozRjpbH89RoTliIIQY7nLXAXL3hXUOZyZ8nK76YbQbS6R6cZ
+	 l5xysaXPH6Jnw==
+From: Bjorn Andersson <andersson@kernel.org>
+To: Mathieu Poirier <mathieu.poirier@linaro.org>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Konrad Dybcio <konradybcio@kernel.org>,
+	Manivannan Sadhasivam <mani@kernel.org>,
+	Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>
+Cc: linux-arm-msm@vger.kernel.org,
+	linux-remoteproc@vger.kernel.org,
+	devicetree@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v2 0/3] dt-bindings/dts: qcom: Consolidate SDX75/Hawi/Maili MPSS onto SM8650 fallback
+Date: Wed, 23 Sep 2026 19:01:11 -0500
+Message-ID: <179020806086.529109.15678139725722719430.b4-ty@kernel.org>
+X-Mailer: git-send-email 2.53.0
+In-Reply-To: <20260805132129.2713174-1-mukesh.ojha@oss.qualcomm.com>
+References: <20260805132129.2713174-1-mukesh.ojha@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 
-mhi_ep_register_controller() sets IRQ_NOAUTOEN on the doorbell IRQ
-descriptor before request_irq(), and the flag is never cleared on the
-error paths or in mhi_ep_unregister_controller(), so it stays on the
-descriptor after the IRQ is freed.
 
-Pass IRQF_NO_AUTOEN to request_irq() instead. It keeps the IRQ disabled
-until mhi_ep_power_up() enables it, without leaving state behind on the
-descriptor.
+On Wed, 05 Aug 2026 18:51:26 +0530, Mukesh Ojha wrote:
+> The MPSS remoteproc block on the SDX75, Hawi, and Maili SoCs is compatible
+> with the SM8650 MPSS - identical interrupts, memory-region layout, and
+> power-domain topology. Today SDX75 and SM8650 MPSS each carry their own
+> standalone compatible and are repeated in every "mpss" allOf conditional.
+> The duplication hides the hardware relationship and grows every time a new
+> SoC reuses the block.
+> 
+> [...]
 
-Signed-off-by: Yuho Choi <oss.patchbox@gmail.com>
----
-Compile-tested only (x86_64 and arm64 defconfig + CONFIG_MHI_BUS_EP=m, W=1).
+Applied, thanks!
 
- drivers/bus/mhi/ep/main.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+[1/3] dt-bindings: remoteproc: qcom,sm8550-pas: Add Hawi and Maili MPSS as SM8650 fallback
+      commit: bd79ab72b62c0e0f1466d3dca53dcb12d5a072d9
+[2/3] dt-bindings: remoteproc: qcom,sm8550-pas: Make SDX75 MPSS fallback to SM8650
+      commit: 96e47e798cd157d32face71551242d2b6fe42b89
+[3/3] arm64: dts: qcom: sdx75: Use SM8650 MPSS as fallback compatible
+      commit: 106aaacd18cdd0dc13d9e1a7d8cf8e1e5d965384
 
-diff --git a/drivers/bus/mhi/ep/main.c b/drivers/bus/mhi/ep/main.c
-index db7ee6547eef..da498570113a 100644
---- a/drivers/bus/mhi/ep/main.c
-+++ b/drivers/bus/mhi/ep/main.c
-@@ -1534,8 +1534,8 @@ int mhi_ep_register_controller(struct mhi_ep_cntrl *mhi_cntrl,
- 
- 	mhi_cntrl->index = ret;
- 
--	irq_set_status_flags(mhi_cntrl->irq, IRQ_NOAUTOEN);
--	ret = request_irq(mhi_cntrl->irq, mhi_ep_irq, IRQF_TRIGGER_HIGH,
-+	ret = request_irq(mhi_cntrl->irq, mhi_ep_irq,
-+			  IRQF_TRIGGER_HIGH | IRQF_NO_AUTOEN,
- 			  "doorbell_irq", mhi_cntrl);
- 	if (ret) {
- 		dev_err(mhi_cntrl->cntrl_dev, "Failed to request Doorbell IRQ\n");
-
-base-commit: f0100363d8c374bd8e9ea7c9ba02744f0b802ca4
+Best regards,
 -- 
-2.43.0
-
+Bjorn Andersson <andersson@kernel.org>
