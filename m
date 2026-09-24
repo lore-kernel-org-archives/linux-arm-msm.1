@@ -1,593 +1,189 @@
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.223.130])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D88CE382368;
-	Thu, 24 Sep 2026 09:31:17 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=195.135.223.130
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 886A739A80E
+	for <linux-arm-msm@vger.kernel.org>; Thu, 24 Sep 2026 09:32:38 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790242282; cv=none; b=VwHYpK7j/41W5wWPKuhZvRP2mfK663lBnC/AN5OhqHg25ggu50te1t1uud6JsSUQ5UFQc2ihKI1PyMr2uZidQElmOwnsgknnD9JMAeAwVCXgTSIPEdZ+JSKNurQr6rvjSLDFb99OP0wxxuDDkUD/4ii7XqoFLHs/GXNIwvLFUwI=
+	t=1790242360; cv=none; b=ptcausjoMSWrcbm2sMC3lcRpGgLqXfAqnzKTt6E2E3n7e8HCC/pz3Q4dG6QmTquwdD4c3V6ma+lhWTBkZdrPQlqgp00fsBSVDLBC0evMyht1BTjmaBu5ebuS1GaMf6DFBxvMgmsZECZCKO5JowJlBPySCQOHGNRNJiRuQDe3/+w=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790242282; c=relaxed/simple;
-	bh=SWD7UuNCHF3lQx+qt62KDyEwtR/jSPvgf92rCGQrzcw=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=WGYiKKzsYdmdmS3k1dRi/OUjV6dYCDhJT1fBslV3n5cKdC7JfM6ATNrZ9eG5DO4XftmHHpGk1+6CnaMr4jfAla9ms2oktb2QoXNJgMtyc0hT6qTehxuzXSavt5mHPCfno0XJT9JQYZxeFZ+pZcFiMH63DtaSOxe5c49Zgs3GKQA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=suse.de; spf=pass smtp.mailfrom=suse.de; dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b=p+BhUeAK; dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b=BU6fSTet; dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b=J5OeEiSb; dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b=Bwzdt44s; arc=none smtp.client-ip=195.135.223.130
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=suse.de
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=suse.de
+	s=arc-20240116; t=1790242360; c=relaxed/simple;
+	bh=rwxv8tLdSgWEik0hiYWE6kOHX12q7aE4xGYPQuj35g8=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=L8CAU/gTUtIUQ9nex7WwrrX/ORQDdl9LYMPDwXyvm0xaFFi/b3/WwGig/EsmLpQHARC7fvAeK4mS33Wg6l+zZ9fUA61FY9ZIVrgsoHM9pnKFnEbbdYx+iZzkqjNmfFZ1qwwdEK/lw9Xwe7OXgCKjF2y3KQ7nSb91qRj5pNTiGxg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=dfjCoWHC; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=VHyqEEzZ; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b="p+BhUeAK";
-	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="BU6fSTet";
-	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b="J5OeEiSb";
-	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="Bwzdt44s"
-Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org [IPv6:2a07:de40:b281:104:10:150:64:97])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
-	(No client certificate requested)
-	by smtp-out1.suse.de (Postfix) with ESMTPS id 87AD921E7D;
-	Thu, 24 Sep 2026 09:30:48 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
-	t=1790242252; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=4B3LaegPwkv2RB4rLF8EsjDYl0Zo7A9//9lFJY8tWIo=;
-	b=p+BhUeAKwis+7Pveqn50Kd8hidhfMkAG7C98UjRPF6a9+wK0b8BTUJ5dnKXlki3xLp7KEl
-	IwRalfiKpSxB+EKUlfhd4mMaJOaohRFuySIjzBONTPDAcB3OXLPkL4caFkfDSmRlvolGe3
-	IiBKL+z+qRLKkNCGZ0EjukLKVxb3rmM=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
-	s=susede2_ed25519; t=1790242252;
-	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=4B3LaegPwkv2RB4rLF8EsjDYl0Zo7A9//9lFJY8tWIo=;
-	b=BU6fSTet7EFkX8NjVcwtXqUjYYa8xFdNo2YEIZnIo/7TTUdvh2HMQRkY9lj/MpW6fQ/Qe4
-	mR4rkl4aGDEYC4BQ==
-Authentication-Results: smtp-out1.suse.de;
-	dkim=pass header.d=suse.de header.s=susede2_rsa header.b=J5OeEiSb;
-	dkim=pass header.d=suse.de header.s=susede2_ed25519 header.b=Bwzdt44s
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
-	t=1790242248; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=4B3LaegPwkv2RB4rLF8EsjDYl0Zo7A9//9lFJY8tWIo=;
-	b=J5OeEiSbj/uzEKnmiI+1p+gOzt3+JFQ814a1QUuhW9f+U8Is7OBmZdcgq1DYuJUhCospwL
-	Zf2TsO6gLInQ2nXpuVV8I02bhYTatip+DDxr1LNzd4USKsQVwVxNpPeZOmpQkFSp+4TVOR
-	znrFrf8FyfrxJa5tRE4MNQpmLExkPXY=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
-	s=susede2_ed25519; t=1790242248;
-	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=4B3LaegPwkv2RB4rLF8EsjDYl0Zo7A9//9lFJY8tWIo=;
-	b=Bwzdt44s0b+M/jpkQAo4NrWHOp+t/YO/PZGq+NrBP7m3AgXaEYIARPGikj6WBDJeCkU2LD
-	a5t9D34CWmgy0qAQ==
-Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
-	(No client certificate requested)
-	by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 96837136ED;
-	Thu, 24 Sep 2026 09:30:47 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
-	by imap1.dmz-prg2.suse.org with ESMTPSA
-	id 2es5CcbttGp+IgAAD6G6ig:T3
-	(envelope-from <tzimmermann@suse.de>); Thu, 24 Sep 2026 09:30:47 +0000
-From: Thomas Zimmermann <tzimmermann@suse.de>
-To: jfalempe@redhat.com,
-	javierm@redhat.com,
-	maarten.lankhorst@linux.intel.com,
-	mripard@kernel.org,
-	airlied@gmail.com,
-	simona@ffwll.ch,
-	jani.nikula@linux.intel.com,
-	Alexander.Deucher@amd.com
-Cc: dri-devel@lists.freedesktop.org,
-	amd-gfx@lists.freedesktop.org,
-	linux-arm-kernel@lists.infradead.org,
-	linux-samsung-soc@vger.kernel.org,
-	intel-gfx@lists.freedesktop.org,
-	intel-xe@lists.freedesktop.org,
-	linux-arm-msm@vger.kernel.org,
-	freedreno@lists.freedesktop.org,
-	nouveau@lists.freedesktop.org,
-	linux-rockchip@lists.infradead.org,
-	linux-tegra@vger.kernel.org,
-	sashiko-reviews@lists.linux.dev,
-	Thomas Zimmermann <tzimmermann@suse.de>,
-	Alex Deucher <alexander.deucher@amd.com>,
-	Jani Nikula <jani.nikula@intel.com>
-Subject: [PATCH v2 2/2] drm/fbdev: Move fbdev helpers into client library
-Date: Thu, 24 Sep 2026 11:29:14 +0200
-Message-ID: <20260924093036.82356-3-tzimmermann@suse.de>
-X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20260924093036.82356-1-tzimmermann@suse.de>
-References: <20260924093036.82356-1-tzimmermann@suse.de>
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="dfjCoWHC";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="VHyqEEzZ"
+Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68O9PCWT2025620
+	for <linux-arm-msm@vger.kernel.org>; Thu, 24 Sep 2026 09:32:37 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	D044GLB66qpCbxwLa31iTBfwL9c0q5C1qDPuwruympk=; b=dfjCoWHCxVPZ8bcS
+	vtMjfKASYygu+TGxtrUydJ3JY/FmhufyuSHXI5rbSYJrE7Gr6fAs1mFVsKAgrzlN
+	6ADJNfQ+T9Lsnau9TDj1O4cBZclAa9KWURGyjWWj+2SfXGDZRTh21nRtZhu6HxA2
+	tJrMcw+Aw9EtmSZagqArXZyJ1zmBIZ+w+k7KPIy4sF98Ta/rmZyXYuIWWyPWCfEl
+	h8TpPK/Ez9fggx7BLPRjOFva8UHNwoPC1g1+5OXkD2A9j42xjzygodqS672FiZuY
+	lp9MqlYtA8mtFws9pyVWvPvA/u1wvUVY8GjL4nsoW6Boid2kR2dIMIrWX5YVr1QU
+	AcfiEw==
+Received: from mail-dy1-f197.google.com (mail-dy1-f197.google.com [74.125.82.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gvsfgsqx3-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 24 Sep 2026 09:32:37 +0000 (GMT)
+Received: by mail-dy1-f197.google.com with SMTP id 5a478bee46e88-30c0d568830so3460709eec.1
+        for <linux-arm-msm@vger.kernel.org>; Thu, 24 Sep 2026 02:32:37 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1790242356; x=1790847156; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=D044GLB66qpCbxwLa31iTBfwL9c0q5C1qDPuwruympk=;
+        b=VHyqEEzZvPOe/q7pvji36Oe+83aFyA6rh1x5C4fOU7vIW7E/gg30PsD6M2aONcHVhL
+         gmdVyb0VC8DDJOHaCpEBvpAQzg7iTT51FjHj9j89+Uh5MUPXX/bQ3g9nDRGKctwoGchm
+         uFDS9IPD4gCEq+sFaY/3h0I0DlJeV4NkfJyPwzuViPgmhmYfGAHMlbWxLAVOqlZ8TszA
+         ZRvJMDqCrnfl5nN/bXluL6iEQW+EvUi9XtGwjRvyAHRED2MNfx4lUUMmh4O8hvCwScZ6
+         K7VnfrGHQHjZfhj7CPHMrVEqGwNBAbd+kob6GYz0hjlUAmXWWYBXdgsq1yqyZ2S8rFf0
+         WpwQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1790242356; x=1790847156;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=D044GLB66qpCbxwLa31iTBfwL9c0q5C1qDPuwruympk=;
+        b=JbABIcMoPhDhNBeCgTAarNPM4BmqnXb2YQMLlFKauMt/W/rfEl71EG46hVhMuNFkS0
+         7TWu7PRbUr2GGywP6M8xQrhy/SXhDKvaHyv4/d//vWjSGFMVRTsS07GwV5e6tpa9gpHz
+         Fgc6jRBlS6b3ZkVlmo4qhdM8iJoMWonOLTE8IWsqIpqroBatjDrod4wf3/FL+1DU7rd8
+         EBGM0h1u8b9EcmiLeUNkyypdScUKZwq5UVanJwvsXToairnjjhjBFFp8vRDLoet47eD6
+         5ZBaMHSnbmXGp61md/w2zEaSO5gyRQqWgIUbzRBqeZC2c/0KALpus1KiQtBsdJaO2GKu
+         DJXg==
+X-Forwarded-Encrypted: i=1; AKwUvBzTAVOJnu15PpyW++7mfmwLgQ+VDj3nJilX8b1hu1X+RJYq9uJjqh3blb0258RqXuFXuZuoj2DBSFjSlCou@vger.kernel.org
+X-Gm-Message-State: AFuF++nPGfNLmqsUIEbC4UTM8gwG1H98b2qOPILITtWKdxBJZbpUDJn9
+	47SkuUbB9UX/4xQlEdGIaVX85stdItOJfz60XFpb1O7VCITqsGb63aVJC2q3w6sMgP0qOE56xAO
+	Ch6UQ0Xv/wlAd+fz1AyElQNn2K5KJwp32tTFtvz9iUhkM1GC7QqkeSl03ZnB5qsbJYyaq
+X-Gm-Gg: AYBFou11mWzSSLtbavEXhRjIG91zvmDNiwO6oekxRH9vpERiLcYUbmq0puQ+EdTbCfi
+	0o0tqpBXzjmja6OQZzKIYiGqw581Gd0NBySFjLc8rYW/yPq56y82D0zcGxw5DyxAvVPSFG1meSB
+	5WlUF4kAVDSZEQVnQMSCHc3DYQdfImZQS0PrZD80M73SX6CPn4iSKLkuv0T8PSbLsR72INaxB2E
+	br5iIQaX9xeFUqGrYmIPoOS4kBHIrm2QkoCTGd7dj69dmziwgwgVPYTxcpBSioRJQH3HbWS4X+L
+	daq001UehJ+ID6noqsKW7D8h6Nvz834LuxEhNJxLRhybXPYAX59D5zNE+ETL1dACzf50nqfjqOY
+	1v75HYiBIx4sNIrcy6ec+JkWrMWK4
+X-Received: by 2002:a05:7301:5511:b0:33c:e63:f2fc with SMTP id 5a478bee46e88-34000449db5mr1625534eec.23.1790242355982;
+        Thu, 24 Sep 2026 02:32:35 -0700 (PDT)
+X-Received: by 2002:a05:7301:5511:b0:33c:e63:f2fc with SMTP id 5a478bee46e88-34000449db5mr1625502eec.23.1790242355277;
+        Thu, 24 Sep 2026 02:32:35 -0700 (PDT)
+Received: from [10.217.216.70] ([202.46.22.19])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-33e939fdabcsm13400388eec.3.2026.09.24.02.32.30
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 24 Sep 2026 02:32:34 -0700 (PDT)
+Message-ID: <b0a01589-a3ed-4c4c-8222-64131b0e6db1@oss.qualcomm.com>
+Date: Thu, 24 Sep 2026 15:02:18 +0530
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Spam-Level: 
-X-Rspamd-Action: no action
-X-Rspamd-Server: rspamd2.dmz-prg2.suse.org
-X-Rspamd-Queue-Id: 87AD921E7D
-X-Spamd-Result: default: False [-3.01 / 50.00];
-	BAYES_HAM(-3.00)[100.00%];
-	MID_CONTAINS_FROM(1.00)[];
-	NEURAL_HAM_LONG(-1.00)[-1.000];
-	R_MISSING_CHARSET(0.50)[];
-	R_DKIM_ALLOW(-0.20)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
-	NEURAL_HAM_SHORT(-0.20)[-1.000];
-	MIME_GOOD(-0.10)[text/plain];
-	MX_GOOD(-0.01)[];
-	TO_MATCH_ENVRCPT_ALL(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	ARC_NA(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[23];
-	DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
-	RBL_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:104:10:150:64:97:from];
-	FREEMAIL_TO(0.00)[redhat.com,linux.intel.com,kernel.org,gmail.com,ffwll.ch,amd.com];
-	RCVD_TLS_ALL(0.00)[];
-	DKIM_TRACE(0.00)[suse.de:+];
-	RCVD_COUNT_TWO(0.00)[2];
-	FROM_EQ_ENVFROM(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	TO_DN_SOME(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[imap1.dmz-prg2.suse.org:rdns,imap1.dmz-prg2.suse.org:helo,amd.com:email,suse.de:dkim,suse.de:email,suse.de:mid,intel.com:email];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	RECEIVED_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:106:10:150:64:167:received];
-	R_RATELIMIT(0.00)[to_ip_from(RLgosu6qu4h11rje89ht7rjgg5)];
-	FREEMAIL_ENVRCPT(0.00)[gmail.com]
-X-Spam-Flag: NO
-X-Spam-Score: -3.01
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] clk: qcom: smd-rpm: Skip proxy votes on clocks for
+ QCM2290
+To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Stephen Boyd <sboyd@kernel.org>, Brian Masney <bmasney+clk@redhat.com>,
+        Jerome Brunet <jbrunet+clk@baylibre.com>,
+        Rob Herring <robh@kernel.org>, Georgi Djakov <djakov@kernel.org>
+Cc: Ajit Pandey <ajit.pandey@oss.qualcomm.com>,
+        Taniya Das <taniya.das@oss.qualcomm.com>,
+        Jagadeesh Kona <jagadeesh.kona@oss.qualcomm.com>,
+        Stephen Boyd <sboyd@codeaurora.org>, linux-arm-msm@vger.kernel.org,
+        linux-clk@vger.kernel.org, linux-kernel@vger.kernel.org
+References: <20260910-clk-smd-rpm-skip-proxy-v1-1-1cb5694a99d9@oss.qualcomm.com>
+ <dab99b27-ebc2-477e-b56a-26250aceee23@oss.qualcomm.com>
+ <ad4aff4f-2d66-425a-a358-6cefaaa1319e@oss.qualcomm.com>
+ <bbf2e7e8-42cf-4146-a2ec-b5182a161109@oss.qualcomm.com>
+Content-Language: en-US
+From: Imran Shaik <imran.shaik@oss.qualcomm.com>
+In-Reply-To: <bbf2e7e8-42cf-4146-a2ec-b5182a161109@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Authority-Analysis: v=2.4 cv=YfoodARf c=1 sm=1 tr=0 ts=6ab4ee35 cx=c_pps
+ a=Uww141gWH0fZj/3QKPojxA==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
+ a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
+ a=EUspDBNiAAAA:8 a=mssyiQsI3MLSchi5Q0YA:9 a=QEXdDO2ut3YA:10
+ a=PxkB5W3o20Ba91AHUih5:22
+X-Proofpoint-ORIG-GUID: mV28-hyfLmVQudA6ozXkNxS15Tt16Nxd
+X-Proofpoint-GUID: mV28-hyfLmVQudA6ozXkNxS15Tt16Nxd
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTI0MDAzOSBTYWx0ZWRfX8t0RaYd0LKMx
+ EDMuZ97VzMJPSq4RwCwB6Me7fokntZxqFEg7ZKwuqwWlo8DuOP9cuUkiLBHqZiTyXlc+ZPh+WoP
+ /G+UyhTG+sYNy+7QTdku8Hqs+G188bw=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTI0MDAzOSBTYWx0ZWRfX8WX0PDHwHkCB
+ Uhh1zsGSRJiFb1gh5mxCfHubGnQj0Lt/rkvUqDERQWOnXU6HSS/4mhnqtIoST9sGlXnPIH61E+i
+ kqDj9QgpaLHazWnW5ejyFDlyA3Tpf0Vhikw/WlCEqTpUulLPBWo9KgaHPjjNyEvREoCf9inwkNM
+ a1OFiWmOlNcy5qJc/xW3X53VZQg0GoVfRMCGIW71Jb/kU7RgVzI8h8iBp84VcHm8vzCJROZ5uLC
+ CvE6CcPrCkLjqZMUGYQuDTieCQHQtHtntA+BPygT0q+1wxkQ3XBR5fNsBT3c1MPBYh7M6kyhh4T
+ 0RyK1By42DVsFVUNv3mEwi2UtF4bf86znfdQXxl4X7/MAnEQy5jVj1rKkNRWrz681Mt709MvC9m
+ mO3lPERpMWZZQPKSGo/Z1/Q4Y2+nyjuB89DCCuwOigDJlRwomfhz8DbEXO/kZvG2+82JgbYVwKH
+ qB9MtT/kMKwvjUmWQPw==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-09-24_02,2026-09-21_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ suspectscore=0 clxscore=1015 lowpriorityscore=0 spamscore=0
+ priorityscore=1501 phishscore=0 adultscore=0 malwarescore=0 bulkscore=0
+ impostorscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2609040000
+ definitions=main-2609240039
 
-DRM's fbdev helpers are for the fbdev-emulation clients. Move them
-into the client-library module. Fix include statements throughout
-DRM drivers.
 
-While at it, rename the files from drm_fb_helper to drm_fbdev_helper.
-The old name was too reminiscent of DRM's framebuffer code.
 
-The GEM support code for fbdev remains part of DRM's memory managers.
+On 21-09-2026 02:23 pm, Konrad Dybcio wrote:
+> On 9/16/26 1:05 PM, Imran Shaik wrote:
+>>
+>>
+>> On 11-09-2026 02:36 pm, Konrad Dybcio wrote:
+>>> On 9/10/26 3:44 PM, Imran Shaik wrote:
+>>>> clk_smd_rpm_handoff() votes both active and sleep RPM resource states for
+>>>> every clock, keeping them non-zero until a consumer takes over. If there
+>>>> is no consumer, those clocks will remain active in the idle scenario as
+>>>> well, and the sleep vote is never cleared, blocking XO shutdown.
+>>>>
+>>>> Introduce the skip_clks_handoff flag to handle this on QCM2290 clocks,
+>>>> keeping other targets unaffected.
+>>>>
+>>>> Fixes: 00f64b58874e ("clk: qcom: Add support for SMD-RPM Clocks")
+>>>> Signed-off-by: Imran Shaik <imran.shaik@oss.qualcomm.com>
+>>>> ---
+>>>
+>>> Are you booting with clk_ignore_unused?
+>>>
+>>
+>> No Konrad, clk_ignore_unused is not present.
+>>
+>> Irrespective of clk_ignore_unused, the proxy votes are placed to RPM
+>> during handoff. If no consumer takes over, those votes remain active,
+>> keeping the resource ON in idle and preventing XO shutdown.
+> 
+> I re-read this and yeah you're right
+> 
+> Is the handoff functionality necessary at all for non-icc clocks?
 
-v2:
-- update armada und docs
+Actually, if any consumers surviving on these proxy votes on other
+targets as of today, removing the handoff logic could impact boot-up as
+well. Hence, introduced the skip_clk_handoff flag to maintain backward
+compatibility on other targets.
 
-Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
-Reviewed-by: Alex Deucher <alexander.deucher@amd.com>
-Acked-by: Jani Nikula <jani.nikula@intel.com>
----
- Documentation/gpu/drm-kms-helpers.rst                       | 6 +++---
- drivers/gpu/drm/Makefile                                    | 1 -
- drivers/gpu/drm/amd/amdgpu/amdgpu_display.c                 | 2 +-
- drivers/gpu/drm/amd/amdgpu/amdgpu_kms.c                     | 2 +-
- drivers/gpu/drm/armada/armada_fbdev.c                       | 2 +-
- drivers/gpu/drm/clients/Makefile                            | 3 ++-
- drivers/gpu/drm/clients/drm_fbdev_client.c                  | 2 +-
- .../gpu/drm/{drm_fb_helper.c => clients/drm_fbdev_helper.c} | 2 +-
- drivers/gpu/drm/drm_fbdev_dma.c                             | 2 +-
- drivers/gpu/drm/drm_fbdev_shmem.c                           | 2 +-
- drivers/gpu/drm/drm_fbdev_ttm.c                             | 2 +-
- drivers/gpu/drm/exynos/exynos_drm_fbdev.c                   | 2 +-
- drivers/gpu/drm/gma500/fbdev.c                              | 2 +-
- drivers/gpu/drm/i915/display/intel_fbdev.c                  | 2 +-
- drivers/gpu/drm/msm/msm_debugfs.c                           | 2 +-
- drivers/gpu/drm/msm/msm_fbdev.c                             | 2 +-
- drivers/gpu/drm/nouveau/dispnv50/disp.c                     | 1 -
- drivers/gpu/drm/omapdrm/omap_debugfs.c                      | 2 +-
- drivers/gpu/drm/omapdrm/omap_fbdev.c                        | 2 +-
- drivers/gpu/drm/radeon/radeon_device.c                      | 2 +-
- drivers/gpu/drm/radeon/radeon_fbdev.c                       | 2 +-
- drivers/gpu/drm/rockchip/rockchip_drm_gem.c                 | 2 +-
- drivers/gpu/drm/sitronix/st7571.c                           | 1 -
- drivers/gpu/drm/tegra/fbdev.c                               | 2 +-
- drivers/gpu/drm/vboxvideo/vbox_mode.c                       | 2 +-
- include/drm/{drm_fb_helper.h => clients/drm_fbdev_helper.h} | 4 ++--
- 26 files changed, 27 insertions(+), 29 deletions(-)
- rename drivers/gpu/drm/{drm_fb_helper.c => clients/drm_fbdev_helper.c} (99%)
- rename include/drm/{drm_fb_helper.h => clients/drm_fbdev_helper.h} (99%)
+Thanks,
+Imran
 
-diff --git a/Documentation/gpu/drm-kms-helpers.rst b/Documentation/gpu/drm-kms-helpers.rst
-index 400cd0112713..65bc16b96f8f 100644
---- a/Documentation/gpu/drm-kms-helpers.rst
-+++ b/Documentation/gpu/drm-kms-helpers.rst
-@@ -109,13 +109,13 @@ VBLANK Helper Reference
- fbdev Helper Functions Reference
- ================================
- 
--.. kernel-doc:: drivers/gpu/drm/drm_fb_helper.c
-+.. kernel-doc:: drivers/gpu/drm/clients/drm_fbdev_helper.c
-    :doc: fbdev helpers
- 
--.. kernel-doc:: include/drm/drm_fb_helper.h
-+.. kernel-doc:: include/drm/clients/drm_fbdev_helper.h
-    :internal:
- 
--.. kernel-doc:: drivers/gpu/drm/drm_fb_helper.c
-+.. kernel-doc:: drivers/gpu/drm/clients/drm_fbdev_helper.c
-    :export:
- 
- Draw Helper Functions Reference
-diff --git a/drivers/gpu/drm/Makefile b/drivers/gpu/drm/Makefile
-index f0c340aa2ec6..3a0f2095de3c 100644
---- a/drivers/gpu/drm/Makefile
-+++ b/drivers/gpu/drm/Makefile
-@@ -158,7 +158,6 @@ drm_kms_helper-y := \
- drm_kms_helper-$(CONFIG_DRM_PANEL_BRIDGE) += bridge/panel.o
- drm_kms_helper-$(CONFIG_DRM_PANIC_HELPER) += drm_panic_helper.o
- drm_kms_helper-$(CONFIG_DRM_PANIC_SCREEN_QR_CODE) += drm_panic_helper_qr.o
--drm_kms_helper-$(CONFIG_DRM_FBDEV_EMULATION) += drm_fb_helper.o
- obj-$(CONFIG_DRM_KMS_HELPER) += drm_kms_helper.o
- 
- #
-diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_display.c b/drivers/gpu/drm/amd/amdgpu/amdgpu_display.c
-index 59ea338b554c..126bfd9bb89e 100644
---- a/drivers/gpu/drm/amd/amdgpu/amdgpu_display.c
-+++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_display.c
-@@ -38,11 +38,11 @@
- 
- #include <linux/pci.h>
- #include <linux/pm_runtime.h>
-+#include <drm/clients/drm_fbdev_helper.h>
- #include <drm/drm_crtc_helper.h>
- #include <drm/drm_damage_helper.h>
- #include <drm/drm_drv.h>
- #include <drm/drm_edid.h>
--#include <drm/drm_fb_helper.h>
- #include <drm/drm_gem_framebuffer_helper.h>
- #include <drm/drm_fourcc.h>
- #include <drm/drm_modeset_helper.h>
-diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_kms.c b/drivers/gpu/drm/amd/amdgpu/amdgpu_kms.c
-index f2f179421c4d..51a7a4091376 100644
---- a/drivers/gpu/drm/amd/amdgpu/amdgpu_kms.c
-+++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_kms.c
-@@ -28,8 +28,8 @@
- 
- #include "amdgpu.h"
- #include <drm/amdgpu_drm.h>
-+#include <drm/clients/drm_fbdev_helper.h>
- #include <drm/drm_drv.h>
--#include <drm/drm_fb_helper.h>
- #include "amdgpu_uvd.h"
- #include "amdgpu_vce.h"
- #include "atom.h"
-diff --git a/drivers/gpu/drm/armada/armada_fbdev.c b/drivers/gpu/drm/armada/armada_fbdev.c
-index 8bbae94804f8..f35afec2125f 100644
---- a/drivers/gpu/drm/armada/armada_fbdev.c
-+++ b/drivers/gpu/drm/armada/armada_fbdev.c
-@@ -9,9 +9,9 @@
- #include <linux/kernel.h>
- #include <linux/module.h>
- 
-+#include <drm/clients/drm_fbdev_helper.h>
- #include <drm/drm_crtc_helper.h>
- #include <drm/drm_drv.h>
--#include <drm/drm_fb_helper.h>
- #include <drm/drm_fourcc.h>
- #include <drm/drm_print.h>
- 
-diff --git a/drivers/gpu/drm/clients/Makefile b/drivers/gpu/drm/clients/Makefile
-index c16addbc327f..1304ff358509 100644
---- a/drivers/gpu/drm/clients/Makefile
-+++ b/drivers/gpu/drm/clients/Makefile
-@@ -4,5 +4,6 @@ subdir-ccflags-y += -I$(src)/..
- 
- drm_client_lib-y := drm_client_setup.o
- drm_client_lib-$(CONFIG_DRM_CLIENT_LOG) += drm_log.o
--drm_client_lib-$(CONFIG_DRM_FBDEV_EMULATION) += drm_fbdev_client.o
-+drm_client_lib-$(CONFIG_DRM_FBDEV_EMULATION) += drm_fbdev_client.o \
-+						drm_fbdev_helper.o
- obj-$(CONFIG_DRM_CLIENT_LIB) += drm_client_lib.o
-diff --git a/drivers/gpu/drm/clients/drm_fbdev_client.c b/drivers/gpu/drm/clients/drm_fbdev_client.c
-index 7574bd36f45e..eec463d19943 100644
---- a/drivers/gpu/drm/clients/drm_fbdev_client.c
-+++ b/drivers/gpu/drm/clients/drm_fbdev_client.c
-@@ -1,9 +1,9 @@
- // SPDX-License-Identifier: MIT
- 
-+#include <drm/clients/drm_fbdev_helper.h>
- #include <drm/drm_client.h>
- #include <drm/drm_crtc_helper.h>
- #include <drm/drm_drv.h>
--#include <drm/drm_fb_helper.h>
- #include <drm/drm_fourcc.h>
- #include <drm/drm_print.h>
- 
-diff --git a/drivers/gpu/drm/drm_fb_helper.c b/drivers/gpu/drm/clients/drm_fbdev_helper.c
-similarity index 99%
-rename from drivers/gpu/drm/drm_fb_helper.c
-rename to drivers/gpu/drm/clients/drm_fbdev_helper.c
-index 76195410db60..fff3cf6a0aed 100644
---- a/drivers/gpu/drm/drm_fb_helper.c
-+++ b/drivers/gpu/drm/clients/drm_fbdev_helper.c
-@@ -32,9 +32,9 @@
- #include <linux/console.h>
- #include <linux/export.h>
- 
-+#include <drm/clients/drm_fbdev_helper.h>
- #include <drm/drm_atomic.h>
- #include <drm/drm_drv.h>
--#include <drm/drm_fb_helper.h>
- #include <drm/drm_fourcc.h>
- #include <drm/drm_framebuffer.h>
- #include <drm/drm_gem_framebuffer_helper.h>
-diff --git a/drivers/gpu/drm/drm_fbdev_dma.c b/drivers/gpu/drm/drm_fbdev_dma.c
-index 9412d9fdd74b..452f84400350 100644
---- a/drivers/gpu/drm/drm_fbdev_dma.c
-+++ b/drivers/gpu/drm/drm_fbdev_dma.c
-@@ -4,10 +4,10 @@
- #include <linux/fb.h>
- #include <linux/vmalloc.h>
- 
-+#include <drm/clients/drm_fbdev_helper.h>
- #include <drm/drm_drv.h>
- #include <drm/drm_fbdev_dma.h>
- #include <drm/drm_fb_dma_helper.h>
--#include <drm/drm_fb_helper.h>
- #include <drm/drm_framebuffer.h>
- #include <drm/drm_gem_dma_helper.h>
- #include <drm/drm_print.h>
-diff --git a/drivers/gpu/drm/drm_fbdev_shmem.c b/drivers/gpu/drm/drm_fbdev_shmem.c
-index 458c899b5d4f..8eb05fe9bc98 100644
---- a/drivers/gpu/drm/drm_fbdev_shmem.c
-+++ b/drivers/gpu/drm/drm_fbdev_shmem.c
-@@ -3,9 +3,9 @@
- #include <linux/export.h>
- #include <linux/fb.h>
- 
-+#include <drm/clients/drm_fbdev_helper.h>
- #include <drm/drm_drv.h>
- #include <drm/drm_fbdev_shmem.h>
--#include <drm/drm_fb_helper.h>
- #include <drm/drm_framebuffer.h>
- #include <drm/drm_gem_framebuffer_helper.h>
- #include <drm/drm_gem_shmem_helper.h>
-diff --git a/drivers/gpu/drm/drm_fbdev_ttm.c b/drivers/gpu/drm/drm_fbdev_ttm.c
-index 160bc35d8738..8eb59c2ac5ea 100644
---- a/drivers/gpu/drm/drm_fbdev_ttm.c
-+++ b/drivers/gpu/drm/drm_fbdev_ttm.c
-@@ -4,9 +4,9 @@
- #include <linux/moduleparam.h>
- #include <linux/vmalloc.h>
- 
-+#include <drm/clients/drm_fbdev_helper.h>
- #include <drm/drm_crtc_helper.h>
- #include <drm/drm_drv.h>
--#include <drm/drm_fb_helper.h>
- #include <drm/drm_framebuffer.h>
- #include <drm/drm_gem.h>
- #include <drm/drm_print.h>
-diff --git a/drivers/gpu/drm/exynos/exynos_drm_fbdev.c b/drivers/gpu/drm/exynos/exynos_drm_fbdev.c
-index 8641c9e84d4c..f412269d6323 100644
---- a/drivers/gpu/drm/exynos/exynos_drm_fbdev.c
-+++ b/drivers/gpu/drm/exynos/exynos_drm_fbdev.c
-@@ -10,9 +10,9 @@
- 
- #include <linux/fb.h>
- 
-+#include <drm/clients/drm_fbdev_helper.h>
- #include <drm/drm_crtc_helper.h>
- #include <drm/drm_drv.h>
--#include <drm/drm_fb_helper.h>
- #include <drm/drm_framebuffer.h>
- #include <drm/drm_gem_framebuffer_helper.h>
- #include <drm/drm_prime.h>
-diff --git a/drivers/gpu/drm/gma500/fbdev.c b/drivers/gpu/drm/gma500/fbdev.c
-index d1e93588234f..428912574f20 100644
---- a/drivers/gpu/drm/gma500/fbdev.c
-+++ b/drivers/gpu/drm/gma500/fbdev.c
-@@ -7,9 +7,9 @@
- 
- #include <linux/fb.h>
- 
-+#include <drm/clients/drm_fbdev_helper.h>
- #include <drm/drm_crtc_helper.h>
- #include <drm/drm_drv.h>
--#include <drm/drm_fb_helper.h>
- #include <drm/drm_framebuffer.h>
- 
- #include "gem.h"
-diff --git a/drivers/gpu/drm/i915/display/intel_fbdev.c b/drivers/gpu/drm/i915/display/intel_fbdev.c
-index db0e36dd8722..219ee17de3f6 100644
---- a/drivers/gpu/drm/i915/display/intel_fbdev.c
-+++ b/drivers/gpu/drm/i915/display/intel_fbdev.c
-@@ -38,10 +38,10 @@
- #include <linux/vga_switcheroo.h>
- 
- #include <drm/clients/drm_client_setup.h>
-+#include <drm/clients/drm_fbdev_helper.h>
- #include <drm/intel/display_parent_interface.h>
- #include <drm/drm_crtc.h>
- #include <drm/drm_crtc_helper.h>
--#include <drm/drm_fb_helper.h>
- #include <drm/drm_fourcc.h>
- #include <drm/drm_gem.h>
- #include <drm/drm_gem_framebuffer_helper.h>
-diff --git a/drivers/gpu/drm/msm/msm_debugfs.c b/drivers/gpu/drm/msm/msm_debugfs.c
-index f12701e286ec..d05307bfa123 100644
---- a/drivers/gpu/drm/msm/msm_debugfs.c
-+++ b/drivers/gpu/drm/msm/msm_debugfs.c
-@@ -9,8 +9,8 @@
- #include <linux/debugfs.h>
- #include <linux/fault-inject.h>
- 
-+#include <drm/clients/drm_fbdev_helper.h>
- #include <drm/drm_debugfs.h>
--#include <drm/drm_fb_helper.h>
- #include <drm/drm_file.h>
- #include <drm/drm_framebuffer.h>
- 
-diff --git a/drivers/gpu/drm/msm/msm_fbdev.c b/drivers/gpu/drm/msm/msm_fbdev.c
-index dd6d6c507d77..f37cc3f97a21 100644
---- a/drivers/gpu/drm/msm/msm_fbdev.c
-+++ b/drivers/gpu/drm/msm/msm_fbdev.c
-@@ -6,9 +6,9 @@
- 
- #include <linux/fb.h>
- 
-+#include <drm/clients/drm_fbdev_helper.h>
- #include <drm/drm_drv.h>
- #include <drm/drm_crtc_helper.h>
--#include <drm/drm_fb_helper.h>
- #include <drm/drm_file.h>
- #include <drm/drm_fourcc.h>
- #include <drm/drm_framebuffer.h>
-diff --git a/drivers/gpu/drm/nouveau/dispnv50/disp.c b/drivers/gpu/drm/nouveau/dispnv50/disp.c
-index add19d479ebe..e91130f93db6 100644
---- a/drivers/gpu/drm/nouveau/dispnv50/disp.c
-+++ b/drivers/gpu/drm/nouveau/dispnv50/disp.c
-@@ -40,7 +40,6 @@
- #include <drm/drm_atomic_helper.h>
- #include <drm/drm_edid.h>
- #include <drm/drm_eld.h>
--#include <drm/drm_fb_helper.h>
- #include <drm/drm_fixed.h>
- #include <drm/drm_probe_helper.h>
- #include <drm/drm_vblank.h>
-diff --git a/drivers/gpu/drm/omapdrm/omap_debugfs.c b/drivers/gpu/drm/omapdrm/omap_debugfs.c
-index 9edc1b3f9f95..1c40c489ed72 100644
---- a/drivers/gpu/drm/omapdrm/omap_debugfs.c
-+++ b/drivers/gpu/drm/omapdrm/omap_debugfs.c
-@@ -6,10 +6,10 @@
- 
- #include <linux/seq_file.h>
- 
-+#include <drm/clients/drm_fbdev_helper.h>
- #include <drm/drm_crtc.h>
- #include <drm/drm_debugfs.h>
- #include <drm/drm_file.h>
--#include <drm/drm_fb_helper.h>
- #include <drm/drm_framebuffer.h>
- #include <drm/drm_print.h>
- 
-diff --git a/drivers/gpu/drm/omapdrm/omap_fbdev.c b/drivers/gpu/drm/omapdrm/omap_fbdev.c
-index 4881777642d2..e1dcc3cb7c55 100644
---- a/drivers/gpu/drm/omapdrm/omap_fbdev.c
-+++ b/drivers/gpu/drm/omapdrm/omap_fbdev.c
-@@ -7,9 +7,9 @@
- #include <linux/fb.h>
- 
- #include <drm/clients/drm_client_setup.h>
-+#include <drm/clients/drm_fbdev_helper.h>
- #include <drm/drm_drv.h>
- #include <drm/drm_crtc_helper.h>
--#include <drm/drm_fb_helper.h>
- #include <drm/drm_file.h>
- #include <drm/drm_fourcc.h>
- #include <drm/drm_framebuffer.h>
-diff --git a/drivers/gpu/drm/radeon/radeon_device.c b/drivers/gpu/drm/radeon/radeon_device.c
-index 9523240110a6..fdbdcefa84e7 100644
---- a/drivers/gpu/drm/radeon/radeon_device.c
-+++ b/drivers/gpu/drm/radeon/radeon_device.c
-@@ -33,11 +33,11 @@
- #include <linux/vga_switcheroo.h>
- #include <linux/vgaarb.h>
- 
-+#include <drm/clients/drm_fbdev_helper.h>
- #include <drm/drm_cache.h>
- #include <drm/drm_client_event.h>
- #include <drm/drm_crtc_helper.h>
- #include <drm/drm_device.h>
--#include <drm/drm_fb_helper.h>
- #include <drm/drm_file.h>
- #include <drm/drm_framebuffer.h>
- #include <drm/drm_probe_helper.h>
-diff --git a/drivers/gpu/drm/radeon/radeon_fbdev.c b/drivers/gpu/drm/radeon/radeon_fbdev.c
-index 3e243f5e2f44..e40c23d9dff2 100644
---- a/drivers/gpu/drm/radeon/radeon_fbdev.c
-+++ b/drivers/gpu/drm/radeon/radeon_fbdev.c
-@@ -29,9 +29,9 @@
- #include <linux/pm_runtime.h>
- #include <linux/vga_switcheroo.h>
- 
-+#include <drm/clients/drm_fbdev_helper.h>
- #include <drm/drm_crtc_helper.h>
- #include <drm/drm_drv.h>
--#include <drm/drm_fb_helper.h>
- #include <drm/drm_fourcc.h>
- #include <drm/drm_framebuffer.h>
- #include <drm/drm_gem_framebuffer_helper.h>
-diff --git a/drivers/gpu/drm/rockchip/rockchip_drm_gem.c b/drivers/gpu/drm/rockchip/rockchip_drm_gem.c
-index 9a1dc9f12072..b55113a7a00b 100644
---- a/drivers/gpu/drm/rockchip/rockchip_drm_gem.c
-+++ b/drivers/gpu/drm/rockchip/rockchip_drm_gem.c
-@@ -8,9 +8,9 @@
- #include <linux/iommu.h>
- #include <linux/vmalloc.h>
- 
-+#include <drm/clients/drm_fbdev_helper.h>
- #include <drm/drm.h>
- #include <drm/drm_dumb_buffers.h>
--#include <drm/drm_fb_helper.h>
- #include <drm/drm_gem.h>
- #include <drm/drm_gem_dma_helper.h>
- #include <drm/drm_prime.h>
-diff --git a/drivers/gpu/drm/sitronix/st7571.c b/drivers/gpu/drm/sitronix/st7571.c
-index fc3ba5e8600f..5e60c4685671 100644
---- a/drivers/gpu/drm/sitronix/st7571.c
-+++ b/drivers/gpu/drm/sitronix/st7571.c
-@@ -20,7 +20,6 @@
- #include <drm/drm_damage_helper.h>
- #include <drm/drm_drv.h>
- #include <drm/drm_encoder.h>
--#include <drm/drm_fb_helper.h>
- #include <drm/drm_fbdev_shmem.h>
- #include <drm/drm_fourcc.h>
- #include <drm/drm_framebuffer.h>
-diff --git a/drivers/gpu/drm/tegra/fbdev.c b/drivers/gpu/drm/tegra/fbdev.c
-index 003e80cf7b9a..64c2e64f219b 100644
---- a/drivers/gpu/drm/tegra/fbdev.c
-+++ b/drivers/gpu/drm/tegra/fbdev.c
-@@ -11,9 +11,9 @@
- #include <linux/fb.h>
- #include <linux/vmalloc.h>
- 
-+#include <drm/clients/drm_fbdev_helper.h>
- #include <drm/drm_drv.h>
- #include <drm/drm_crtc_helper.h>
--#include <drm/drm_fb_helper.h>
- #include <drm/drm_fourcc.h>
- #include <drm/drm_framebuffer.h>
- #include <drm/drm_gem_framebuffer_helper.h>
-diff --git a/drivers/gpu/drm/vboxvideo/vbox_mode.c b/drivers/gpu/drm/vboxvideo/vbox_mode.c
-index bb3f7f0ad7c4..7c34299fa531 100644
---- a/drivers/gpu/drm/vboxvideo/vbox_mode.c
-+++ b/drivers/gpu/drm/vboxvideo/vbox_mode.c
-@@ -13,11 +13,11 @@
- #include <linux/iosys-map.h>
- #include <linux/export.h>
- 
-+#include <drm/clients/drm_fbdev_helper.h>
- #include <drm/drm_atomic.h>
- #include <drm/drm_atomic_helper.h>
- #include <drm/drm_blend.h>
- #include <drm/drm_edid.h>
--#include <drm/drm_fb_helper.h>
- #include <drm/drm_fourcc.h>
- #include <drm/drm_framebuffer.h>
- #include <drm/drm_gem_atomic_helper.h>
-diff --git a/include/drm/drm_fb_helper.h b/include/drm/clients/drm_fbdev_helper.h
-similarity index 99%
-rename from include/drm/drm_fb_helper.h
-rename to include/drm/clients/drm_fbdev_helper.h
-index 0c5e5ed7b5e7..7575aaf34c62 100644
---- a/include/drm/drm_fb_helper.h
-+++ b/include/drm/clients/drm_fbdev_helper.h
-@@ -27,8 +27,8 @@
-  *      Dave Airlie <airlied@linux.ie>
-  *      Jesse Barnes <jesse.barnes@intel.com>
-  */
--#ifndef DRM_FB_HELPER_H
--#define DRM_FB_HELPER_H
-+#ifndef DRM_FBDEV_HELPER_H
-+#define DRM_FBDEV_HELPER_H
- 
- struct drm_clip_rect;
- struct drm_fb_helper;
--- 
-2.55.0
+> I'm suspecting that this was just a port of the ancient msm-3.10
+> logic where the (modified) clock framework had a handoff mechanism
+> similar to today's sync_state, except the toning-down of these
+> clocks was never added
+> 
+> Konrad
 
