@@ -1,166 +1,266 @@
-Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B8E823E4C96;
-	Thu, 24 Sep 2026 07:01:53 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.171.202.116
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1BEEB41DE1B
+	for <linux-arm-msm@vger.kernel.org>; Thu, 24 Sep 2026 07:03:49 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790233319; cv=none; b=ChRpajS33GzWfPU+92eQims104ibRpEKCw1TMowL2OzOq9Bo+nCmgD6NXiaH//ucXWPdZJ44cfhCgY/PjfgcB0RKdiMhwGq7pbguLkCMXH0qC5CtUrO1ZIm/QYN8iQh9YqV+d50zO0yfR2RCHbms6nhMVAhqayhvMvHPm5dSNfo=
+	t=1790233433; cv=none; b=NY3QLq6cDsN9rAnCT3RSeAMsRcaJP62UyhAoPg/NRFXhqnqquEuPrilF27nHMxn351WiADwr/s9Y+7cbMQpfXVmucJtZq1g79L57UzUNgFtZ0iyvWbZxgVTOeER5i3nlMR5EMGfceibOJNeQ+S7Fm1awDxRhzaz9n3+BeW41M18=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790233319; c=relaxed/simple;
-	bh=21vHPs+cccmI0GIDrI9wBRtngdr4EBlpl0EvM5Z31P0=;
-	h=Mime-Version:Content-Type:Date:Message-Id:Cc:To:From:Subject:
-	 References:In-Reply-To; b=fizDNc3pNoHXrAPDf0Kzv/ke+PFF16UeAjwB+6VZwWlGf7efM7kPL+WROqRzXc31wnwanfybbH4osmEPu5gxJg2MW18ez6Ex1ia1cnGjtXgbUE18PFMd/HwZIN4PAPQu+k4kNPkgzYxo9jKv0neeYYSPR1hSSAsM2vEkd2oRjb0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=VfDv7S7f; arc=none smtp.client-ip=185.171.202.116
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
+	s=arc-20240116; t=1790233433; c=relaxed/simple;
+	bh=HThu999JdrJsgMHwqzxbZIWm9oNlifMrfJOz7Lutz6Y=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=Hi6wP0ydFc2Mgx4BxduyDWTvG4zmdlmcnokEIezJYaAzrbjRHBKw51vFYRWCmYI09GIjLjHowRy2VmWoWsR8GboWGxZtY548lBdp7OtD7iNSZw0mRkb8Y0NvgIzbcvOgYFJjWcs/nPSF+EeNsXDjpw00X9ryfUHV70hMBLsnc0Y=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=WLs3Z1Y4; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=PP77nBnG; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="VfDv7S7f"
-Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
-	by smtpout-04.galae.net (Postfix) with ESMTPS id 58E1FC211CF;
-	Thu, 24 Sep 2026 07:02:31 +0000 (UTC)
-Received: from mail.galae.net (mail.galae.net [212.83.136.155])
-	by smtpout-01.galae.net (Postfix) with ESMTPS id EA2AA5FB45;
-	Thu, 24 Sep 2026 07:01:43 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id B2EEF103294A6;
-	Thu, 24 Sep 2026 09:01:19 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
-	t=1790233298; h=from:subject:date:message-id:to:cc:mime-version:content-type:
-	 content-transfer-encoding:in-reply-to:references;
-	bh=3oGwBuyJVzkAjrauN/FxJTxwMCY3sLnXn9ixXjUrD2A=;
-	b=VfDv7S7faDApBOx+DPqMCyWHBKUPlODcB1xuNfsFjM3RNlzyRMcdJhIP0bigttbKx1o5jy
-	+B3mEF8B/s9ysd2wfnmGpCg4NZheR3VGvS94Ic0SKnLPviSK0O4PMC4viKTqfmdCj+9vMX
-	uaR7ncMHlkENvjrtg1sfppR2+2rB1w3yNHl15P3vTuCFyK7Bv7Ut1MV2dfvSol7696XXmK
-	vqgt//ttjMMGzJqmyWKqUW/+naiLm3TqTzPFnvGHAOfowEfbjOv664AYGg+P4m03YFGXZS
-	W/ZrKJoYs3u+wZqS+nmUIHWaVMRI8biPPQkNoSk2GzQUV+7Bbe8V7J315PgOJg==
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="WLs3Z1Y4";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="PP77nBnG"
+Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68O5eBP8772439
+	for <linux-arm-msm@vger.kernel.org>; Thu, 24 Sep 2026 07:03:46 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:date:from:message-id:mime-version
+	:subject:to; s=qcppdkim1; bh=/fJFsThCRy735OBr32VrOnDr17SixmR1mu1
+	90oUUl6I=; b=WLs3Z1Y4cZRfEeoiZazWeki9a+bZk8LcUjbcX6YndjZyvEZ8R4S
+	jmb2YFDfkYPbRx6EzkJJ/cPFTAiLqKpHgYpc2laF53BXz2a4HPqBYih+dAiZEOdk
+	TCSKO5htqjTUkrnDaCYB5EIoJgejdWJ49tuwcwr8MFlm6M2LC41c4kH692U+bMFt
+	2MfRMDQ8dTGr1HwC8NiHIKcL6xUMpscssqVpBtKzxV8fURZIxnUoWKwgcmHUJxAP
+	wPdA4PMhbn2971Mxh4KBduZ2Uplk1bExpXORIUm9olHj9jYfAKiXNZD3ZdQ1gFjl
+	Gwf/iGpzO/QCrtUA2Z1MVGQo26kzMvhw11w==
+Received: from mail-dl1-f69.google.com (mail-dl1-f69.google.com [74.125.82.69])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gvr909gqf-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 24 Sep 2026 07:03:46 +0000 (GMT)
+Received: by mail-dl1-f69.google.com with SMTP id a92af1059eb24-1416f32fe11so2541974c88.0
+        for <linux-arm-msm@vger.kernel.org>; Thu, 24 Sep 2026 00:03:46 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1790233426; x=1790838226; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=/fJFsThCRy735OBr32VrOnDr17SixmR1mu190oUUl6I=;
+        b=PP77nBnG30IZQnh6RuInOjG7xTi4AZ8ySC5qSJ3zYejU6V64hbwTuIwhgvsDxSsL9U
+         D9v/+1Bjiiyfe+e5TdFcayotiRCj6EmgxJE1dGB3R1vmCp88nttqZI7sINaS31i+pe2R
+         hDbOtQqQv0VXSHPV8a2LQ6+zL4oI1OVd3dbOuBqNScJXXPPM4XanQdz3QDHzR90gMxTF
+         mzcHbJ95kydMy22DcXAncZsSKYOlC9ub1QmLnBO1thHKoETkLalHHWpPqKbikhkxzJKb
+         ZhOcPj+ldMdqLz52ibElTXib9QYlbpLZhnQRXLLz1ZkCPAB9wt/bEQLwbf4U8KHk3sYU
+         ffkQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1790233426; x=1790838226;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=/fJFsThCRy735OBr32VrOnDr17SixmR1mu190oUUl6I=;
+        b=Hy/gH8p8bw0KD6yXPzwR6I5AS8l/I5gNk2gx6j6TnKkfYQ4pNdYCyhElmX3xytR0KG
+         6w4y6PtOLFXqEaqnsBV4GFGWA9ZwA/XHYApO9HUNdP3XDNOQMWBEp2ElMFumAWSGRoY7
+         nLw+GJq4JHBtWsIEDtScDv4oiNt3RTDo84otaROOwhlseVIlVMPBWVnooecsyvDDZVCR
+         MehyuwFP+O7g31K4e2ddAe/vEeUEd2XXojjeGlUX7dqIOe2fBHNjHqvmT7qRXsMybZhD
+         YmJ40kBmNSM4YWnjPH06uXASHOcadMTKdXnZWnmrO8e5VXokJfCATiaNEsL1EAVZ1hrP
+         3L2Q==
+X-Forwarded-Encrypted: i=1; AKwUvBxBN1vSk7XQvRr90VAXnVOexc5E0kGE5UPXPhjH9fE1QuxtUGK7GVPIokZ+upS+kulQs6HZsKb/Wqxbpqw0@vger.kernel.org
+X-Gm-Message-State: AFuF++nLQoD8wvnHOuMopvhE3GdmPVL0InYKOOe2pz3Kms3ZTLApsM1g
+	jgLRcUXSVFIm3BqeNPbL6KsiBZ0fgGTwO+mLN51QVNiqI+TFcdYPV6GUMS9gaNJIDcCp7a2+JEL
+	pCujme7KCWE6H5zBO42S/Rq3nESP6WsKGM+bFptAtM5gxDZoCquRiQSUF7i2ZiVh1crbm8Wh9DH
+	TlmMM=
+X-Gm-Gg: AYBFou1skJkIW8ZDyvYyhvX9/MY01CRf3jw7aDkG/bi2426ftH6IAAQ2vqWH074MWGZ
+	ixb+YnG3cPLPa5IblRKYRKP0RPyzHRJwMO7ApdTaWL97ad7ZZ04lV1S0MWIsEh8+58c9+/augcZ
+	C3SCYVOnwaOinjG8djikIokHEHuiPu4/gN4a4xhE2f+4ZGM8v905bTa6WyQstnQlD4ueXpkKipe
+	ky5MdyYM5XtQuyGQxe/vwxzAYP61KO4rx7fmI4wfS+uoUqrWVic+2elDBH5HG1Sq3t92HZB3Xha
+	nxJFyzQjY+tQ/s60gzNtocmVJBifEwdUHlEe4N03HaHDKQh2MnKYUqhswUEttq3+RV4EDmteutr
+	1AvuXvvRrq4s72f0V7eB23LR+9Kp9mCXBoAseuTmdJT7zpNFeb6wDgMKiaso=
+X-Received: by 2002:a05:701b:4504:20b0:144:fdf0:9d91 with SMTP id a92af1059eb24-14504031b58mr1138274c88.24.1790233425579;
+        Thu, 24 Sep 2026 00:03:45 -0700 (PDT)
+X-Received: by 2002:a05:701b:4504:20b0:144:fdf0:9d91 with SMTP id a92af1059eb24-14504031b58mr1138236c88.24.1790233424620;
+        Thu, 24 Sep 2026 00:03:44 -0700 (PDT)
+Received: from QCOM-aGQu4IUr3Y.qualcomm.com (i-global052.qualcomm.com. [199.106.103.52])
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-144f983d73fsm14289599c88.6.2026.09.24.00.03.41
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 24 Sep 2026 00:03:44 -0700 (PDT)
+From: Shawn Guo <shengchao.guo@oss.qualcomm.com>
+To: Linus Walleij <linusw@kernel.org>
+Cc: Bartosz Golaszewski <brgl@kernel.org>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Neil Armstrong <neil.armstrong@linaro.org>,
+        Yu Zhang <yu.zhang@oss.qualcomm.com>, linux-gpio@vger.kernel.org,
+        linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
+        Shawn Guo <shengchao.guo@oss.qualcomm.com>
+Subject: [PATCH v4] pinctrl: qcom: spmi-gpio: make direction changes exclusive
+Date: Thu, 24 Sep 2026 15:03:22 +0800
+Message-ID: <20260924070323.983528-1-shengchao.guo@oss.qualcomm.com>
+X-Mailer: git-send-email 2.43.0
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
-Mime-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
-Date: Thu, 24 Sep 2026 09:01:18 +0200
-Message-Id: <DLNCQEG62F5N.O98WAO4U2FJO@bootlin.com>
-Cc: "Andrzej Hajda" <andrzej.hajda@intel.com>, "Neil Armstrong"
- <neil.armstrong@linaro.org>, "Robert Foss" <rfoss@kernel.org>, "Laurent
- Pinchart" <Laurent.pinchart@ideasonboard.com>, "Jonas Karlman"
- <jonas@kwiboo.se>, "Jernej Skrabec" <jernej.skrabec@gmail.com>, "Maarten
- Lankhorst" <maarten.lankhorst@linux.intel.com>, "Thomas Zimmermann"
- <tzimmermann@suse.de>, "David Airlie" <airlied@gmail.com>, "Simona Vetter"
- <simona@ffwll.ch>, "Jessica Zhang" <jesszhan0024@gmail.com>, "Laurentiu
- Palcu" <laurentiu.palcu@oss.nxp.com>, "Lucas Stach"
- <l.stach@pengutronix.de>, "Frank Li" <Frank.Li@nxp.com>, "Sascha Hauer"
- <s.hauer@pengutronix.de>, "Pengutronix Kernel Team"
- <kernel@pengutronix.de>, "Fabio Estevam" <festevam@gmail.com>, "Paul
- Cercueil" <paul@crapouillou.net>, "Paul Kocialkowski" <paulk@sys-base.io>,
- "Linus Walleij" <linusw@kernel.org>, "Inki Dae" <inki.dae@samsung.com>,
- "Jagan Teki" <jagan@amarulasolutions.com>, "Marek Szyprowski"
- <m.szyprowski@samsung.com>, "Sean Paul" <sean@poorly.run>, "Jonathan
- Corbet" <corbet@lwn.net>, "Shuah Khan" <skhan@linuxfoundation.org>, "Randy
- Dunlap" <rdunlap@infradead.org>, "Albert Esteve" <aesteve@redhat.com>,
- "Anusha Srivatsa" <asrivats@redhat.com>, "Dmitry Baryshkov"
- <dmitry.baryshkov@oss.qualcomm.com>, "Hui Pu" <Hui.Pu@gehealthcare.com>,
- "Ian Ray" <ian.ray@gehealthcare.com>, "Thomas Petazzoni"
- <thomas.petazzoni@bootlin.com>, <dri-devel@lists.freedesktop.org>,
- <linux-kernel@vger.kernel.org>, <imx@lists.linux.dev>,
- <linux-arm-kernel@lists.infradead.org>, <linux-mips@vger.kernel.org>,
- <linux-rockchip@lists.infradead.org>,
- <linux-stm32@st-md-mailman.stormreply.com>, <asahi@lists.linux.dev>,
- <linux-arm-msm@vger.kernel.org>, <freedreno@lists.freedesktop.org>,
- <linux-tegra@vger.kernel.org>, <linux-doc@vger.kernel.org>,
- <linux-samsung-soc@vger.kernel.org>
-To: "Maxime Ripard" <mripard@kernel.org>, "Luca Ceresoli"
- <luca.ceresoli@bootlin.com>
-From: "Luca Ceresoli" <luca.ceresoli@bootlin.com>
-Subject: Re: [PATCH v3 12/19] drm/mcde: dsi: don't create a panel_bridge
-X-Mailer: aerc 0.22.0
-References: <20260916-drm-bridge-every-panel-v3-0-83afb4f1a707@bootlin.com>
- <20260916-drm-bridge-every-panel-v3-12-83afb4f1a707@bootlin.com>
- <arInho2bsfJiCgjV@houat>
-In-Reply-To: <arInho2bsfJiCgjV@houat>
-X-Last-TLS-Session-Version: TLSv1.3
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTI0MDAyOSBTYWx0ZWRfX3dj18AnvH5Aj
+ TzJzkoO3nP/SYstGB5MSGRKixcRYSAD8Mf5rfXp+UNygbYX72fy8+bFa01tQuDqKm7wB+s/FN3R
+ 7Zc4m2kpzz1PJ06uysZp1dAJZqyw2qQ=
+X-Proofpoint-GUID: oALFV0yUBHFGuLdMGJdUIN4SbzlvfPCl
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTI0MDAyOSBTYWx0ZWRfX1DLMqVE1xPFX
+ w+tTZ1EnIFSZ3+BBobd9XNFUj6YizzLWRT4BPnofNP/qTYtK0ElF5IZ113duH+TFKy//Ctu9tog
+ NX+ErUI9v+uew8IiKYRbgVqXlGVT9+QpnnaVFV6sOXyey8G7wx8WZ/z2jdamKfNsIaAICuQjETo
+ 1QUwQYrweSB5B8AJpOU0lp42l/nf6WI3NWPDKhQbVrjfuIwkH+4ODz/SWLmLh/jnd3skqfS6ZIG
+ LLpmZAPTejvwKhw0sKZpiOm4bpGeT7i7VFCTt4ZVLKWADQUxHVM8G81TBNYE58QwwUiSsWu64ki
+ IowrEzLh1ljvmusMZb9jATGNk5bF6VK/N+nxiw1SgubfadBRktTE18wumKlPFEV/InxHoG9wzKk
+ 9K7BG9okjPj06SjT31iD+AY+U1lYeTRu+qevbYnLrWacvEETPMK11407xFbLkzXxqf0qAWnVHSQ
+ xMdoEYVdsraHUZV3FoA==
+X-Proofpoint-ORIG-GUID: oALFV0yUBHFGuLdMGJdUIN4SbzlvfPCl
+X-Authority-Analysis: v=2.4 cv=fMusTpae c=1 sm=1 tr=0 ts=6ab4cb52 cx=c_pps
+ a=kVLUcbK0zfr7ocalXnG1qA==:117 a=b9+bayejhc3NMeqCNyeLQQ==:17
+ a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22 a=VwQbUJbxAAAA:8
+ a=EUspDBNiAAAA:8 a=E7y4-Cke29mXp6t5dL8A:9 a=vr4QvYf-bLy2KjpDp97w:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-09-24_02,2026-09-21_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ suspectscore=0 bulkscore=0 adultscore=0 lowpriorityscore=0 spamscore=0
+ clxscore=1015 impostorscore=0 malwarescore=0 priorityscore=1501 phishscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609240029
 
-Hi Linus, Maxime,
+pmic_gpio_populate() seeds pad->input_enabled and pad->output_enabled from
+the hardware MODE_CTL register, so a pad left in DIGITAL_INPUT or
+DIGITAL_INPUT_OUTPUT mode by the bootloader starts out with the input
+buffer enabled.  Neither direction callback clears the opposite buffer:
+.direction_output() only packs PIN_CONFIG_LEVEL, which sets
+output_enabled, and .direction_input() only packs PIN_CONFIG_INPUT_ENABLE,
+which sets input_enabled.  Requesting either direction on such a pad
+therefore programs MODE_DIGITAL_INPUT_OUTPUT rather than the requested
+direction.
 
-On Tue Sep 22, 2026 at 9:09 AM CEST, Maxime Ripard wrote:
-> On Wed, Sep 16, 2026 at 03:45:36PM +0200, Luca Ceresoli wrote:
->> Now a panel_bridge is automatically created for every drm_panel and the
->> panel-bridge API is just a deprecated wrapper to access it.
->>
->> Update and simplify the code by just getting a reference to the
->> already-existing bridge using of_drm_find_and_get_bridge().
->>
->> Also keep the "connected to non-panel bridge (unsupported)\n" error logi=
-c
->> by using the drm_bridge_is_panel() function.
->>
->> Signed-off-by: Luca Ceresoli <luca.ceresoli@bootlin.com>
+That silently breaks both directions.  After gpiod_direction_input() the
+pad keeps driving the line.  And after gpiod_direction_output()
+pmic_gpio_get_direction() still reports GPIO_LINE_DIRECTION_IN, because it
+cannot tell plain input from input+output, which makes gpiolib consider
+the line an input while the driver is driving it.  On a board where
+several regulator-fixed nodes share one PMIC GPIO the shared GPIO proxy
+reads that direction back and rejects every consumer after the first:
 
-[...]
+  reg-fixed-voltage regulator-wcn-core-vm-1p35: setup of GPIO (default) failed: -1
+  reg-fixed-voltage regulator-wcn-core-vm-1p35: error -EPERM: can't get GPIO
 
->> @@ -1102,40 +1100,21 @@ static int mcde_dsi_bind(struct device *dev, str=
-uct device *master,
->>
->>  	/* Look for a panel as a child to this node */
->>  	for_each_available_child_of_node_scoped(dev->of_node, child) {
->> -		panel =3D of_drm_find_panel(child);
->> -		if (IS_ERR(panel)) {
->> -			dev_err(dev, "failed to find panel try bridge (%ld)\n",
->> -				PTR_ERR(panel));
->> -			panel =3D NULL;
->> -
->> -			bridge =3D of_drm_find_and_get_bridge(child);
->> -			if (!bridge) {
->> -				dev_err(dev, "failed to find bridge\n");
->> -				return -EINVAL;
->> -			}
->> +		bridge =3D of_drm_find_and_get_bridge(child);
->> +		if (!bridge) {
->> +			dev_err(dev, "failed to find bridge\n");
->> +			return -EINVAL;
->>  		}
->>
->> -		if (panel || bridge)
->> -			break;
->> +		break;
->>  	}
->> -	if (panel) {
->> -		bridge =3D drm_panel_bridge_add_typed(panel,
->> -						    DRM_MODE_CONNECTOR_DSI);
->> -		drm_panel_put(panel);
->> -		if (IS_ERR(bridge)) {
->> -			dev_err(dev, "error adding panel bridge\n");
->> -			return PTR_ERR(bridge);
->> -		}
->> -		drm_bridge_get(bridge);
->> -		dev_info(dev, "connected to panel\n");
->> -		d->panel =3D panel;
->> -	} else if (bridge) {
->> +	if (!bridge) {
->> +		dev_err(dev, "no bridge\n");
->> +		return -ENODEV;
->> +	} else if (!drm_bridge_is_panel(bridge)) {
->>  		/* TODO: AV8100 HDMI encoder goes here for example */
->>  		dev_info(dev, "connected to non-panel bridge (unsupported)\n");
->>  		return -ENODEV;
->
-> I wonder if we still need that branch. Every panel is a bridge now, and
-> it looks like we don't have any specific panel handling in this driver,
-> so I guess it supports bridges already?
->
-> Linus, do you know why this condition was here in the first place?
+Pack the opposite buffer's PIN_CONFIG_*_ENABLE along with the requested
+direction so that the resulting MODE_CTL is DIGITAL_INPUT or
+DIGITAL_OUTPUT, never both.  pmic_gpio_config_set() programs the registers
+once after walking all configs, so this stays a single register write.
 
-I had the same thought while writing the patch, but I chose to be
-conservative.
+Open-drain and open-source outputs are the exception: such a pad only ever
+drives one rail, so DIGITAL_INPUT_OUTPUT is physically correct for it, and
+pmic_gpio_get() needs the input buffer to sample the line rather than
+return the value last written.  So .direction_output() programs the input
+buffer from pad->buffer_type in either case, rather than only clearing it
+for a CMOS pad: the buffer may have been left off by the bootloader or by
+an earlier direction change made with a different buffer type, and an
+open-drain pad that keeps it off would fall back to reporting the value
+last written.  gpiolib applies PIN_CONFIG_DRIVE_OPEN_DRAIN before calling
+.direction_output(), so pad->buffer_type is up to date there.  Key
+pmic_gpio_get_direction() off output_enabled so that these pads still read
+back as outputs.
 
-Linus, unless you have more info I'm going to apply the patch as
-is. Removing this special case would be welcome as a later patch.
+An input must not drive the line whatever the buffer type, so
+.direction_input() clears output_enabled unconditionally.
 
-Luca
+Pads that are genuinely bidirectional can still be described that way
+through pinconf, which is the interface that has always been able to
+express it; the gpiolib direction callbacks now mean what gpiolib says
+they mean.
 
---
-Luca Ceresoli, Bootlin
-Embedded Linux and Kernel engineering
-https://bootlin.com
+Fixes: 263447532463 ("pinctrl: qcom: spmi-gpio: implement .get_direction()")
+Assisted-by: LLM
+Signed-off-by: Shawn Guo <shengchao.guo@oss.qualcomm.com>
+---
+Changes for v4:
+- .direction_output() now programs PIN_CONFIG_INPUT_ENABLE unconditionally
+  from pad->buffer_type, instead of only clearing it for a CMOS pad,
+  so an open-drain or open-source pad whose input buffer was already off
+  gets it re-enabled rather than falling back to reporting the value last
+  written.
+- Link to v3: https://lore.kernel.org/all/20260924032314.948638-1-shengchao.guo@oss.qualcomm.com/
+
+Changes for v3:
+- .direction_output() clears PIN_CONFIG_INPUT_ENABLE only for
+  PMIC_GPIO_OUT_BUF_CMOS pads; open-drain/open-source keep the input
+  buffer so pmic_gpio_get() samples the wire.
+- pmic_gpio_get_direction() now keys on output_enabled instead of
+  input_enabled - required, or an open-drain output reports IN again and
+  the -EPERM regression returns.
+- Link to v2: https://lore.kernel.org/all/20260922065908.477523-1-shengchao.guo@oss.qualcomm.com/
+
+Changes for v2:
+- Drop GPIO shared-proxy patch
+- Update Fixes tag (Thanks Neil!)
+- Link to v1: https://lore.kernel.org/all/20260915014447.282121-1-shengchao.guo@oss.qualcomm.com/
+
+ drivers/pinctrl/qcom/pinctrl-spmi-gpio.c | 37 +++++++++++++++++++-----
+ 1 file changed, 29 insertions(+), 8 deletions(-)
+
+diff --git a/drivers/pinctrl/qcom/pinctrl-spmi-gpio.c b/drivers/pinctrl/qcom/pinctrl-spmi-gpio.c
+index f6dc43e27b38..9163bb14d703 100644
+--- a/drivers/pinctrl/qcom/pinctrl-spmi-gpio.c
++++ b/drivers/pinctrl/qcom/pinctrl-spmi-gpio.c
+@@ -734,29 +734,50 @@ static int pmic_gpio_get_direction(struct gpio_chip *chip, unsigned pin)
+ 	    (!pad->input_enabled && !pad->output_enabled))
+ 		return -EINVAL;
+ 
+-	/* Make sure the state is aligned on what pmic_gpio_get() returns */
+-	return pad->input_enabled ? GPIO_LINE_DIRECTION_IN : GPIO_LINE_DIRECTION_OUT;
++	/*
++	 * An open-drain or open-source pad keeps its input buffer enabled while
++	 * driving, so the output buffer is what tells the direction.
++	 */
++	return pad->output_enabled ? GPIO_LINE_DIRECTION_OUT : GPIO_LINE_DIRECTION_IN;
+ }
+ 
+ static int pmic_gpio_direction_input(struct gpio_chip *chip, unsigned pin)
+ {
+ 	struct pmic_gpio_state *state = gpiochip_get_data(chip);
+-	unsigned long config;
++	unsigned long configs[2];
+ 
+-	config = pinconf_to_config_packed(PIN_CONFIG_INPUT_ENABLE, 1);
++	configs[0] = pinconf_to_config_packed(PIN_CONFIG_OUTPUT_ENABLE, 0);
++	configs[1] = pinconf_to_config_packed(PIN_CONFIG_INPUT_ENABLE, 1);
+ 
+-	return pmic_gpio_config_set(state->ctrl, pin, &config, 1);
++	return pmic_gpio_config_set(state->ctrl, pin, configs,
++				    ARRAY_SIZE(configs));
+ }
+ 
+ static int pmic_gpio_direction_output(struct gpio_chip *chip,
+ 				      unsigned pin, int val)
+ {
+ 	struct pmic_gpio_state *state = gpiochip_get_data(chip);
+-	unsigned long config;
++	struct pmic_gpio_pad *pad = state->ctrl->desc->pins[pin].drv_data;
++	unsigned long configs[2];
+ 
+-	config = pinconf_to_config_packed(PIN_CONFIG_LEVEL, val);
++	/*
++	 * An open-drain or open-source pad only ever drives one rail, so the
++	 * line can still be sampled while the pad is an output.  Keep the input
++	 * buffer enabled for those, so that pmic_gpio_get() reports what is on
++	 * the wire rather than the value last written, and disable it for a
++	 * CMOS pad, so that the pad ends up in DIGITAL_OUTPUT rather than
++	 * DIGITAL_INPUT_OUTPUT.  Program it either way, as the buffer may have
++	 * been left in the opposite state by the bootloader or by an earlier
++	 * direction change with a different buffer type.  gpiolib applies
++	 * PIN_CONFIG_DRIVE_OPEN_DRAIN before calling this, so buffer_type is
++	 * already up to date here.
++	 */
++	configs[0] = pinconf_to_config_packed(PIN_CONFIG_INPUT_ENABLE,
++					     pad->buffer_type != PMIC_GPIO_OUT_BUF_CMOS);
++	configs[1] = pinconf_to_config_packed(PIN_CONFIG_LEVEL, val);
+ 
+-	return pmic_gpio_config_set(state->ctrl, pin, &config, 1);
++	return pmic_gpio_config_set(state->ctrl, pin, configs,
++				    ARRAY_SIZE(configs));
+ }
+ 
+ static int pmic_gpio_get(struct gpio_chip *chip, unsigned pin)
+-- 
+2.43.0
+
