@@ -1,186 +1,141 @@
-Received: from mail-ed2-f30.google.com (mail-ed2-f30.google.com [74.125.228.94])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7F247409632
-	for <linux-arm-msm@vger.kernel.org>; Thu, 24 Sep 2026 12:37:03 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.228.94
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0BFB330274D;
+	Thu, 24 Sep 2026 12:46:50 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790253425; cv=none; b=HxWunLx+5DH5y+kXHvyVZjcQ5kgtqkInWOR8Xw7riAEb7VZUPFIGbk0hG55uv33vDOk85kemIRt6fZKh3IPLz4a936i5LdfYOh6T77HsQcc4dktEkk4mawjJX0di5wIxcxSLRnWPak8Y9hb2HlKCUtpM8qJSMgYvyc3bdfsrPlk=
+	t=1790254011; cv=none; b=ewLTg0yPp9fhSwFOsHzLlV9PrPb4x9A50KmNV1k0Bp/WiumCLWLjdgks8PbKlEB0EOJ3QLm0PJnqOMt08X+m/Xb7/SbkthOMOJ3K45IoJfRnLQ7wED+qvx5+wMZ86dd+ozw8c1B8eSvwAykn80OyJcLOlgr4igsAPmhEJKKGhFo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790253425; c=relaxed/simple;
-	bh=uTofbiv5PGwwQfTIX8LTF3s7MEFpysPum854bwqS22U=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=BTmK+C8ELoZD+Vl+oA6Fb9hL8GPgv7OlWZ1pXfncoGB6BZXDpsc5nNuxumMkHkKtnDWJAS50PtfVijcAmFIAqgta1Qp99KsLxlElVMCapQoLd15G+uD5QYs9K3hacZbk4JAM0L1wt2ycYH8F9wJZt1YDUbglgefIq1iUulvGZ6I=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=XLAZIvFE; arc=none smtp.client-ip=74.125.228.94
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
+	s=arc-20240116; t=1790254011; c=relaxed/simple;
+	bh=WCww17Nbz5msM318Y+YiigiK/lae/kU3t0OrPKXBYxA=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=eMVZ7ui6WanhF0yXJ9BHgtFgIGXoqGbVUC9p7JSh81AGXUThZZp/0jsZxk406laS/AW7dqVUE+HUwwWsfEM4E7BltIiaERQDeKlwxXriBQT1SsJHKohU85xRIP4fNh3P0nyF3HFiL2cF3ZRTdNBZYziFH/e0ShAQaj5jfMFEYLg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=h9QJ88im; arc=none smtp.client-ip=10.30.226.201
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="XLAZIvFE"
-Received: by mail-ed2-f30.google.com with SMTP id 4fb4d7f45d1cf-6aa06e51bc3so3316564a12.2
-        for <linux-arm-msm@vger.kernel.org>; Thu, 24 Sep 2026 05:37:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1790253422; x=1790858222; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:content-language
-         :from:references:cc:to:subject:user-agent:mime-version:date
-         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=8WR8pmB+jYgHS1HBlWGZgS/Xwn9pj8L3GvfaFa/VtnY=;
-        b=XLAZIvFE1qHixlDUIbqNszybFfVEegD6sECtis0RfGvLXrtsEm/UhvfJwW77voeZCq
-         iiFy9ft39yQoQsZADgO5JVsJz/aGso7ayBUHziyYpIGVYebDLF+LFAWRG+lwerOm5e7O
-         UK2mATxJV1jxpKhfTLoieNjnLJfPOqmArUBLw6j/cFZpTEOOVcCFkcOgjM2LwtY3cdr0
-         qETRRgZ7I2piujtBSHtyDnRmc67NlSSfcSzmPPLmWy+iqqv8qME2MEEuksM7/TTP1Cjw
-         coq4i7RUbBFs5TputOhvC5N8p2AxX3rc/YdrLU3B1Cl2IZc7TMin8XnqyqpIo4dmY6LS
-         Ux6w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790253422; x=1790858222;
-        h=content-transfer-encoding:content-type:in-reply-to:content-language
-         :from:references:cc:to:subject:user-agent:mime-version:date
-         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=8WR8pmB+jYgHS1HBlWGZgS/Xwn9pj8L3GvfaFa/VtnY=;
-        b=LfZDDke9NU8VWWdRSn5wGxjf6qQrDfL+vsOPJtU4t4PUkNAq7qtx1/g6Tq9isTGH3k
-         fKNYjZawojbWqdtj1SdTYXF1UnjSWwp3hEIdTNNpUqMDaa7WGj2WuUvqvHe21nP+wc1M
-         B+lCPuJalsmWjbXtr6mZm/FTQ25yGG6VM7eX+fCiVavCG0ovGdYSq/XH9pBACJh6I3Pu
-         7Ej62h1EUc8JBVkbZH4Rrs9mLLLq1KCCLG1PdzYl70S0wpEuOeXoD+yosdGYUokF3ASs
-         Kylz7wRxmRFhgIZwGneuLqu2onDJtrWTKlPFuJx9wTR3qu0V0szD1ofgk1t1MXBIvNZe
-         D8Qw==
-X-Forwarded-Encrypted: i=1; AKwUvBxtbgSmWGNSSNsgf9qTLN7hvEAiuPpJRZ4mDNZD2X5xHcwf6Y6xjI37svWNRmW/jK3gR0NwH0OhAZOs2N96@vger.kernel.org
-X-Gm-Message-State: AFuF++ljMNyL3CTylPal4SU7nVceanJBDZ9/Kc8dMRB981G5DerUzNjD
-	E4cGIHndOQbG/InvwvoqHKLOYp5Gn0dNiqxtDejoxuZbG1FKX5zXziggaJlVN2FVzjM=
-X-Gm-Gg: AYBFou0il/ctOQQ3INR/vVjHOKAxEXy3KnGBTS4w2sSNoaynugqOs95Mnx1ebgwNt+r
-	UrxyKGt/IrrM1ahaNoSmv7YwcxFGdAI87c+nuDCb371aP96gqB+YBulibMVZ4KGEzQKJVjI2Q19
-	qj0eabGjmPypgqRGGsxRq0Tnd+4an2Xeqbz/FFK94L7t/AU9RKx42VV5vxBhj44w2f9cmyFwa9A
-	xNizZu4uvCD8wviMjVBsNDTpWMv7fxqXOh+qaFTYReHUFqz3uOWjZJpzLlxKoRglSFh5LIfvUkh
-	bWGRXlbkGzDWVbJOTPfZq61ViaWldyxFXJVjOTWq9ly3e9elgVc4c1PDI4nUzt1LmL7Jx2E+2Mu
-	Imww/ej06LI/oeuE+0c73/r/FWuC6WaXEGcfcEZ04N5JmCiRt5+lmwd73A+iYcEzlu0JxDrCsVN
-	Tj2Z/2T1oihMuWLVCaYMACa5xNXgdJDjhraOmoSANX1dSuPRHZGeGj5y8btpwz8+ejOWlsdKWlm
-	c63bwh6RtzF
-X-Received: by 2002:a17:907:1ca2:b0:c29:6de8:d143 with SMTP id a640c23a62f3a-c2ac23d7742mr209160366b.19.1790253421677;
-        Thu, 24 Sep 2026 05:37:01 -0700 (PDT)
-Received: from [192.168.0.167] ([78.152.210.157])
-        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-6aab386e5b9sm3701581a12.8.2026.09.24.05.37.00
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 24 Sep 2026 05:37:01 -0700 (PDT)
-Message-ID: <bbf66d18-0587-41d1-a902-32686f66fa76@linaro.org>
-Date: Thu, 24 Sep 2026 13:36:58 +0100
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="h9QJ88im"
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 926F2C2BCB3;
+	Thu, 24 Sep 2026 12:46:50 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1790254010;
+	bh=WCww17Nbz5msM318Y+YiigiK/lae/kU3t0OrPKXBYxA=;
+	h=From:Subject:Date:To:Cc:Reply-To:From;
+	b=h9QJ88imIePzlbdnTRmvPzkjo9bUAFbPcSghL5bzdZQMo8R3uqAImn0SiT58wu2gW
+	 14OfISweK7f8Orze2ZUNim2MS3TfC0h8UyMhcmPdux5NaN5eGfhECisoM3JuFD1EGA
+	 EphoByz3NUJEZokoas48ukt/XBu7nqqxvQmSjiZkSKhO4vHDFzrx1Y9BE6BhOjlp9m
+	 umYGIwfE3z+wCOlXyDuRGxzwytwd8+gXigI6rmAVAORyJKhMNSOWu7AGV/AfGItUPY
+	 QkPDt8qsmImHnnIN9/LcilOjrNknOmGne3vhnRVLNEBcrxzoQyQ1srxjxTE6Nb3Kv3
+	 tn7dX3v2j8SLA==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6A97FC9830E;
+	Thu, 24 Sep 2026 12:46:50 +0000 (UTC)
+From: David Heidelberg via B4 Relay <devnull+david.ixit.cz@kernel.org>
+Subject: [PATCH v3 0/8] Speakers for Pixel 3 / 3 XL
+Date: Thu, 24 Sep 2026 14:46:44 +0200
+Message-Id: <20260924-pixel3-audio-v3-0-5d06460fc8a9@ixit.cz>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v9 02/19] media: iris: Add Gen2 firmware autodetect and
- fallback
-To: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
- Vikash Garodia <vikash.garodia@oss.qualcomm.com>,
- Abhinav Kumar <abhinav.kumar@linux.dev>, Bryan O'Donoghue <bod@kernel.org>,
- Mauro Carvalho Chehab <mchehab@kernel.org>,
- Bjorn Andersson <andersson@kernel.org>,
- Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
- Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
- <conor+dt@kernel.org>, Vishnu Reddy <busanna.reddy@oss.qualcomm.com>
-Cc: linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
- linux-kernel@vger.kernel.org, devicetree@vger.kernel.org,
- Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>
-References: <20260731-iris-ar50lt-v9-0-d71a782001c0@oss.qualcomm.com>
- <20260731-iris-ar50lt-v9-2-d71a782001c0@oss.qualcomm.com>
-From: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
-Content-Language: en-GB
-In-Reply-To: <20260731-iris-ar50lt-v9-2-d71a782001c0@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/12Oyw6CMBBFf8V0bU0fUqgr/8O4oHQqkxjAFhqU8
+ O8WWaAu752cc2ciATxCIKfdRDxEDNg2Kcj9jlR12dyAok2ZCCYUU1zSDke4S1oOFltqrHHmqKF
+ gMicJ6Ty4dF90l+uaPTyGZO23ssbQt/75mYx8aVd7zrJfe+SUUWmUclIWmXb8jCP2h+pFFk0UG
+ 6rZ32NRJDSvhACreSb0FzrP8xveBPUs9gAAAA==
+X-Change-ID: 20260613-pixel3-audio-bdbfb49e8037
+To: Srinivas Kandagatla <srini@kernel.org>, 
+ Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>, 
+ Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>, 
+ David Rhodes <david.rhodes@cirrus.com>, 
+ Richard Fitzgerald <rf@opensource.cirrus.com>, 
+ Bjorn Andersson <andersson@kernel.org>, 
+ Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>, 
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ David Rhodes <drhodes@opensource.cirrus.com>, 
+ Conor Dooley <conor+dt@kernel.org>
+Cc: linux-sound@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, patches@opensource.cirrus.com, 
+ devicetree@vger.kernel.org, phone-devel@vger.kernel.org, 
+ David Heidelberg <david@ixit.cz>, 
+ Charles Keepax <ckeepax@opensource.cirrus.com>
+X-Mailer: b4 0.16.0
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2368; i=david@ixit.cz;
+ h=from:subject:message-id;
+ bh=WCww17Nbz5msM318Y+YiigiK/lae/kU3t0OrPKXBYxA=;
+ b=owEBbQKS/ZANAwAIAWACP8TTSSByAcsmYgBqtRu33V70vGPgoK9kRrmF2zP8lixWUhtWMOIjj
+ QJMDZckuYqJAjMEAAEIAB0WIQTXegnP7twrvVOnBHRgAj/E00kgcgUCarUbtwAKCRBgAj/E00kg
+ csAxEAC2My1jTW1COPi529iCest+b+a27uNQ3d8MeloVj0nrXvwqgpr3nAGkGivckem3Mdet8Sa
+ r77/Vy4C77CGHjL/LJp/t2rDg3J0rKk1bltL8M7Grrmbng6NuQadd1MxVhwKo+/7gJH+UQOz+v+
+ LXzKf0Aod8+BlwK+ZTWKm/jYyoKz75yLJUOvgeYUcCAfz/WsqX30THqSr+uFc/kzP/H1igtGto6
+ Caeq4tj0Wm7v9y6TWEPpfdjvI6o+NCWwHl29K5fDP/LwvJcYPjOWJ8w/306C/EJYnzGHihTwOmi
+ op/7tUxtHEHXTfgKeYS2wny2elDUyapRfXvHrMrqv/FLDLVb/yHF9rHYygtevti86TM2B1tKhD6
+ okd13WI5/WwJR7pE0NCvDIHaXq9XMvQ7h3jhiDa6kOOx1CxVm9RXL6NmKIauN1fJ+vh0QFgvyCD
+ AIvUpd+sxxY4LO9Rdc9hbhzdZmWlrOmGTK+ryoTpqJhBo/wSrGAXRBPQEZwfZM4NXZcQtI3cjoz
+ LeF+a96vKlumc3Ol6SmhRo8d8qg+T9u35M8F7kRmYfkxxcnfXXp3gDtNni+zfgOq5VjldjpVKtO
+ Nk4W2nD3EVJQ8TBryNGGAjuPxuKvEVZjBTRzAyWVN24EG1BFbe6kmhLtnTimGBrQ6ejL8gp9fg1
+ t/Gn1A0qp4i+svQ==
+X-Developer-Key: i=david@ixit.cz; a=openpgp;
+ fpr=D77A09CFEEDC2BBD53A7047460023FC4D3492072
+X-Endpoint-Received: by B4 Relay for david@ixit.cz/default with auth_id=355
+X-Original-From: David Heidelberg <david@ixit.cz>
+Reply-To: david@ixit.cz
 
-On 31/07/2026 00:48, Dmitry Baryshkov wrote:
-> +
-> +/*
-> + * Detect the firmware generation and publish the descriptor. Run only after
-> + * qcom_mdt_load() has succeeded, so the driver commits to a HFI generation
-> + * only for a firmware image that has actually been loaded.
-> + *
-> + * The generation is detected from the loaded image (@data / @size point at the
-> + * reserved memory region populated by qcom_mdt_load()) rather than from the
-> + * request_firmware() blob: for a split .mdt the latter holds only the ELF
-> + * headers, while QC_IMAGE_VERSION_STRING lives in the .bNN data segments.
-> + *
-> + * The descriptor and firmware data are published exactly once, before any
-> + * session exists, so the lockless readers in the ioctl paths never observe a
-> + * reassignment. Later bring-ups reuse the already published descriptor.
-> + */
-> +static void iris_detect_firmware(struct iris_core *core, const char *fw_name,
-> +				 const u8 *data, size_t size,
-> +				 const struct iris_firmware_desc *desc)
-> +{
-> +	if (core->iris_firmware_desc)
-> +		return;
-> +
-> +	/*
-> +	 * With a DT firmware-name override on a dual-generation platform the
-> +	 * image on disk decides the generation, so inspect it and switch to the
-> +	 * Gen1 descriptor when a Gen1 image was loaded.
-> +	 */
-> +	if (desc == core->iris_platform_data->firmware_desc_gen2 &&
-> +	    core->iris_platform_data->firmware_desc_gen1 &&
-> +	    of_property_present(dev_of_node(core->dev), "firmware-name") &&
-> +	    !iris_detect_gen2_from_fwdata(data, size)) {
-> +		dev_info(core->dev, "Gen1 FW detected in %s\n", fw_name);
-> +		desc = core->iris_platform_data->firmware_desc_gen1;
-> +	}
-> +
-> +	/* Publish iris_firmware_data first, then iris_firmware_desc (the guard). */
-> +	core->iris_firmware_data = desc->firmware_data;
-> +	core->iris_firmware_desc = desc;
-> +}
-> +
+This series address:
 
-In function ‘iris_detect_firmware’,
-     inlined from ‘iris_load_fw_to_memory’ at 
-drivers/media/platform/qcom/iris/iris_firmware.c:216:3:
-drivers/media/platform/qcom/iris/iris_firmware.c:161:12: warning: ‘desc’ 
-may be used uninitialized [-Wmaybe-uninitialized]
-   161 |         if (desc == core->iris_platform_data->firmware_desc_gen2 &&
-       |            ^
-drivers/media/platform/qcom/iris/iris_firmware.c: In function 
-‘iris_load_fw_to_memory’:
-drivers/media/platform/qcom/iris/iris_firmware.c:176:42: note: ‘desc’ 
-was declared here
-   176 |         const struct iris_firmware_desc *desc;
-       |                                          ^~~~
-In function ‘iris_detect_firmware’,
-     inlined from ‘iris_load_fw_to_memory’ at 
-drivers/media/platform/qcom/iris/iris_firmware.c:216:3:
-drivers/media/platform/qcom/iris/iris_firmware.c:170:40: warning: ‘desc’ 
-may be used uninitialized [-Wmaybe-uninitialized]
-   170 |         core->iris_firmware_data = desc->firmware_data;
-       |                                    ~~~~^~~~~~~~~~~~~~~
-drivers/media/platform/qcom/iris/iris_firmware.c: In function 
-‘iris_load_fw_to_memory’:
-drivers/media/platform/qcom/iris/iris_firmware.c:176:42: note: ‘desc’ 
-was declared here
-   176 |         const struct iris_firmware_desc *desc;
-       |                                          ^~~~
-. "$TS_DIR"/lib/common-end.sh
-#!/bin/sh
-# Copyright 2024 Google LLC
+0. demistify the hex to BIT() macro and add left/right rx spk
+1. most likely wrongly set DSP_B in sdm845.c
+   my guess this is because TDM was never used in the mainline with
+   sdm845
+2. applying correct mask to left/right speaker for the TDM in sdm845.c,
+   so both speakers can work simultaneusly
+3. setting sysclk at startups, which some codecs need (such as cs35l36)
+4. setting proper tdm slot in the cs35l36 driver
+5. device-tree wiring for Pixel 3 / 3 XL
 
-Proposed fix
+As per previous discussion not seding patch removing the "Input Mux"
+which now interferes with TDM callback. If wanted, I can send it as a
+follow-up.
 
-╰─$ git diff
-diff --git a/drivers/media/platform/qcom/iris/iris_firmware.c 
-b/drivers/media/platform/qcom/iris/iris_firmware.c
-index dfc4c184646c6..39558a300d38c 100644
---- a/drivers/media/platform/qcom/iris/iris_firmware.c
-+++ b/drivers/media/platform/qcom/iris/iris_firmware.c
-@@ -153,6 +153,9 @@ static void iris_detect_firmware(struct iris_core 
-*core, const char *fw_name,
-        if (core->iris_firmware_desc)
-                return;
+Signed-off-by: David Heidelberg <david@ixit.cz>
+---
+Changes in v3:
+- De-RFC, applied Reviewed-by tag.
+- Link to v2: https://patch.msgid.link/20260903-pixel3-audio-v2-0-7c22ed915291@ixit.cz
 
-+      if (!desc)
-+              return;
-+
-        /*
-         * With a DT firmware-name override on a dual-generation 
-platform the
-         * image on disk decides the generation, so inspect it and 
-switch to the
+Changes in v2:
+- Device-tree name sorting, with exception keeping mm1-dai-link in it's
+  place. (Konrad)
+- Make set_tdm_slot cleaner and less leveled. (Konrad)
+- Added TDM MIC defines in sdm845.c.
+  Should we in capture use speaker mask?
+- Renamed model from 'Google Pixel 3' to 'blueline', I would love to
+  hear feedback on this one.
+- Link to v1: https://lore.kernel.org/r/20260705-pixel3-audio-v1-0-3b66f33859f1@ixit.cz
+
+---
+David Heidelberg (8):
+      ASoC: qcom: sdm845: Demystify TDM masks a bit
+      ASoC: qcom: sdm845: use DSP_A format for TDM codec DAIs
+      ASoC: qcom: sdm845: Use per-speaker RX masks for TDM slot assignment
+      ASoC: qcom: sdm845: Set codec dai and component sysclk during startup
+      ASoC: cs35l36: Implement set_tdm_slot to program RX and TX slots
+      arm64: dts: qcom: sdm845-google: Add basic audio support
+      slimbus: qcom-ngd-ctrl: Remove data channels on stream disable
+      arm64: dts: qcom: sdm845-google: Add WCD9340 codec and microphone capture
+
+ arch/arm64/boot/dts/qcom/sdm845-google-common.dtsi | 195 ++++++++++++++++++++-
+ drivers/slimbus/qcom-ngd-ctrl.c                    |  81 +++++++++
+ sound/soc/codecs/cs35l36.c                         |  44 +++++
+ sound/soc/qcom/sdm845.c                            |  49 ++++--
+ 4 files changed, 357 insertions(+), 12 deletions(-)
+---
+base-commit: 7079a12d7506b07fb53b54a664bfad5fa9b16d70
+change-id: 20260613-pixel3-audio-bdbfb49e8037
+
+Best regards,
+--  
+David Heidelberg <david@ixit.cz>
+
 
