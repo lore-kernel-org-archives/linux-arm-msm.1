@@ -1,172 +1,203 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wm2-f13.google.com (mail-wm2-f13.google.com [74.125.225.141])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9E444441619
-	for <linux-arm-msm@vger.kernel.org>; Thu, 24 Sep 2026 11:33:18 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B9391292B2E
+	for <linux-arm-msm@vger.kernel.org>; Thu, 24 Sep 2026 11:33:52 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.225.141
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790249601; cv=none; b=F5bnpJxEDHJ4XGxW+w5mC90V9+zGI4TMSmgm71O1Fpk8BA2K4H15SWX5C3F3H2/89VOtYxtO/6G3tpUX/J47wIs/n2VPaHJ7FEAl+faFkTzVDULM60CTv9UBAVpRp72MLnZInCUTEYdjYTCkncEAogYirZExoENDqT9AyPn7UxU=
+	t=1790249636; cv=none; b=p2NkTGMJp8gSE+io3GwMhY68WDjX0lM8CeWhOCFfTsawXg9RO9Vdx7gfLFzS7ti7W23jGRINwKMg1PssWh4gTagdJJpVWf1i7ZnZiunKsMJAUoKhkpr5WQFvhKbhkgxlnAkGRqg97cNdtrqhocCj5oSVR4I6oBlwZdyLSxjVsRs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790249601; c=relaxed/simple;
-	bh=wCnUXCK0WZO4NnQlqvBDKz+4inN5YfMZjMTHZjG1y3w=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=dSUfKmXKrfdWAB4+jNkDE/veI/a0Du7APjEl7NcCw+W7oATD9KjET5tCIUkBNqU4SfpKDVnT/mPkZusDhqBVaykQsQNPgBvE3Lsb1Em+q3kGD2xQ4M7Sbi5Tr7ZIX9PSb8pZruzdhLc+mnHlQODeW8K47z5o9KW/Z5GC6Xp4hG4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=IsRFmiJj; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=MdltRVPw; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1790249636; c=relaxed/simple;
+	bh=xz9dxi3INaU36pJpNlvgHWawp1/NGShtakUc/gOosvI=;
+	h=Message-ID:Date:MIME-Version:From:Subject:To:Cc:References:
+	 In-Reply-To:Content-Type; b=kbsPMvUE0r1i3MQOWaI/dbM8OzSzDsmBFPUxz95eYIOJ1OrNJA7p2Mx4BeCM8q2muekY68GhCb/eBHTbgrDiClvc0e6o+RZu9fxTkKsxHqKqHrXcJj03Hsg0ejQGeGkkH2LsjgFAgiuo8EE/ySvKVgXEUcrBH8z8pWTSFxCZSWw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=SXymEBl5; arc=none smtp.client-ip=74.125.225.141
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="IsRFmiJj";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="MdltRVPw"
-Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68O9PhsB1270240
-	for <linux-arm-msm@vger.kernel.org>; Thu, 24 Sep 2026 11:33:17 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-type:date:from:in-reply-to:message-id:mime-version
-	:references:subject:to; s=qcppdkim1; bh=XkseKV+yt4Jy0qKqCZ9EMQvZ
-	YwHKUGqrc30BMVfNwi4=; b=IsRFmiJj/bR+E/pi+HBhTPjZtcPG4aSH3W7uzcoP
-	1AkmcbvhlkMXrU9Kay6CwMrAeFLak4U+y2UmuPio/SjPY4xngSZGD2+gxEyJemzI
-	IJxDUUb0pg97yRRgsPOjhikSH6Onvg4BfV3KHlv/tWZ3OqsFS6g2/uCv1bjjFT+D
-	AySxXmdD/nMnXdNkPO0EmCRLd3I3Obagxa2F8Q5ZwOexqslBBci0YU368qbxuLni
-	eAzXLAbkdXpUX5F/D7wrCpJj8OHHBajtIXEKMvz+Kl4baXMYgNhzlkbh8Pwc3e5w
-	O72MS1DkdNb345i/I79xp9uh/sw8jNmrTNeSATwqQhrjyg==
-Received: from mail-vs1-f71.google.com (mail-vs1-f71.google.com [209.85.217.71])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gvr90asur-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Thu, 24 Sep 2026 11:33:16 +0000 (GMT)
-Received: by mail-vs1-f71.google.com with SMTP id ada2fe7eead31-7a532e31dadso1905010137.1
-        for <linux-arm-msm@vger.kernel.org>; Thu, 24 Sep 2026 04:33:16 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="SXymEBl5"
+Received: by mail-wm2-f13.google.com with SMTP id 5b1f17b1804b1-49fe8bf173aso2611425e9.3
+        for <linux-arm-msm@vger.kernel.org>; Thu, 24 Sep 2026 04:33:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1790249596; x=1790854396; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=XkseKV+yt4Jy0qKqCZ9EMQvZYwHKUGqrc30BMVfNwi4=;
-        b=MdltRVPwKpi7SrLkC1Vp15c3p5Qb5PXhxlSqBq/JYWwkN1xWaj7fCnucm75huW8aDD
-         QUvkn9hJjx+mxOPBGlO4Z+EwzVGcmmR3e/9234lMWe7gcVTrS8XyypcJaChAjKyehcg8
-         RA3+H+2B60dCEC1suMzQ4H+x5zb+gMTfnyaHD0+CO5S+ApxuM0iYq3w1H2LqLM0jA15A
-         LwkMRzEeSR8/Zx06pejKA8T94jXH8Bb5+wAquR+wK1R11rxCb9nz61BjV3w0mt5pKufQ
-         kW+vhHC9yjIeNRGw6TXE8siXrbaH02knIGzR0f9bCmSq1jADSanmZiQtPsl8NWU3ZckT
-         SPFA==
+        d=gmail.com; s=20251104; t=1790249629; x=1790854429; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :references:cc:to:subject:from:user-agent:mime-version:date
+         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=3Q9bv5GdJS4737ZoflJrDPxuZu2bDsMMhiRIqFZTTwg=;
+        b=SXymEBl5mkPDEqgdQD/07QFHI0ZqPsCFqzb4iA5SKwEteGdbc2X/C2MmvL+1lAxMwk
+         t2d3xfRNKBFgj9tVTj0vaeMz0rSaz0Pslg9jBlbOa1dHa6l2TG9xLST2nf4Fct/RWStT
+         vu5aTEMuZORu837Nn8PwyBmjG/NVbStka4rT1oZe/NL9dvasP/oPH39rGOocvfEseruu
+         CqV3DSNOl7AGNoRnZ6Dtf1ikNL3PJcTGhTEQ3F8+s2YKjAbHtWpdCMUKdfsn3lhz5bFf
+         +NdTDymd1Pw38BQKAKESu6r/jnb1j6f1pe4cu2UfejymWwk08Zm7WSOPjcSl8bmptUjP
+         xsHQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790249596; x=1790854396;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=XkseKV+yt4Jy0qKqCZ9EMQvZYwHKUGqrc30BMVfNwi4=;
-        b=W5tjPVDonjxB78L95lxYm0RDXmg0KswmP9DmTSpRKT730qQzxmSaRemTOtrrRAa/JY
-         jdynkmZX01902T6OOBQrxwMm6rEWgvSVIY2kHoeI1PnLQ8j9lDDV13gunh//f5JqMgwC
-         HUgEXXHgPLNa8CM2G+UiZ1OemBQxkyVgYSC1tVgti08Tt7+kZ4DKdkcqcdcQ+Tc6i8+O
-         SOQdWEwTueb5PWiU48z0OI/UBbv9REfPE9gUPfRMD+1piUmoovxHFMuBvx4WlaBsnGiP
-         HVRK9q3EvM5N0mZeiaOTHK+8M1FWmR1QDuY2kv3YfGDemfMKZR6lWcpu2lZugAyx4b/k
-         06Gg==
-X-Forwarded-Encrypted: i=1; AKwUvBzMrypn1B6p/l4Lo2Bf/kuduuvkt3BCidesw9qj20CMuuuxNzlU4Ay0mPFF5+HYwr3AsXvwZoQZHyjFqHKI@vger.kernel.org
-X-Gm-Message-State: AFuF++lCfiM3KQfEu+BEjfvZmoLVlqCv+Uur1JB6OR/IHuoKvapMHsdR
-	2DrtEyctWBX6KKfChTIof7JICwKSv/VAtBzgbdYroO+xG9VbEI4sTX20Jl8pHWM7+OyqrPYQR0E
-	00QeNVbnsmUwiWCXb/1Dx1aO5tFYWnOcdtl0rU+lPZ60Km851LDCUpgw01OB0w+PSTtAFAEfMbR
-	qT
-X-Gm-Gg: AYBFou0hGsa5C5AUPqqT0IwBmsSkOKlb95uk6uZ8yjeYS00lc/pTZNLQ6+yCxGY2Ian
-	P/TujLMaj2iczALv8GnKbA1kBlw2UYbjxJKwPWysY6vKmNzIqzoXExEX2IacFc8tBUWBbH4R9Lq
-	UuZH1Bq+8aBe8vPQ4ihyIpi51Xpon+DZYWbohh1dSiU2dEtLDJvw8SjZwXTbaAJW8NiXEpAUc+F
-	GFljdw3K6m4+WhGpmljDJ+ykhvI1DIhbapkARxWcKOu59uKUwD2DbST/QS28nptVfxC6n1Y1N8S
-	9fsVtY18QGkWL9JAVEfsueUL3Kvyt8HnPLNJFD8qtZRunpKldeto2zboIjKkQ+DmkiQKf21TACm
-	XWrIv1HuSc4gE1Ns=
-X-Received: by 2002:a05:6102:1489:b0:7a1:f7e2:aae2 with SMTP id ada2fe7eead31-7af1e6f380emr1107594137.20.1790249595773;
-        Thu, 24 Sep 2026 04:33:15 -0700 (PDT)
-X-Received: by 2002:a05:6102:1489:b0:7a1:f7e2:aae2 with SMTP id ada2fe7eead31-7af1e6f380emr1107577137.20.1790249595157;
-        Thu, 24 Sep 2026 04:33:15 -0700 (PDT)
-Received: from oss.qualcomm.com ([86.121.170.232])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48868889130sm13762102f8f.37.2026.09.24.04.33.12
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 24 Sep 2026 04:33:14 -0700 (PDT)
-Date: Thu, 24 Sep 2026 14:33:12 +0300
-From: Abel Vesa <abel.vesa@oss.qualcomm.com>
-To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-Cc: Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>, Hans de Goede <hansg@kernel.org>,
-        Ilpo =?utf-8?B?SsOkcnZpbmVu?= <ilpo.jarvinen@linux.intel.com>,
-        Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
-        Guenter Roeck <linux@roeck-us.net>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Abel Vesa <abelvesa@kernel.org>, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org, platform-driver-x86@vger.kernel.org,
-        linux-hwmon@vger.kernel.org, linux-arm-msm@vger.kernel.org
-Subject: Re: [PATCH v2 3/3] arm64: dts: qcom: glymur-zenbook-a16: Add
- Embedded Controller
-Message-ID: <mkqgu53cyajjjbrvwyqv3vukag643g7x5ypjhzh5vomrd3lsvk@yq4oely74xw6>
-References: <20260922-topic-asus_ec-v2-0-0bd923d1b853@oss.qualcomm.com>
- <20260922-topic-asus_ec-v2-3-0bd923d1b853@oss.qualcomm.com>
- <uv52rxc6llmlas45mejbeeriryiozh3v2f2itbvfzo4f2sgazm@ly37763jkftd>
- <8c9777c5-f323-406d-a996-17bd1a5b8946@oss.qualcomm.com>
+        d=1e100.net; s=20260707; t=1790249629; x=1790854429;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :references:cc:to:subject:from:user-agent:mime-version:date
+         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=3Q9bv5GdJS4737ZoflJrDPxuZu2bDsMMhiRIqFZTTwg=;
+        b=P9iOEbdPfTgFdhoZtaNKijPFu9R8Dc9F7ttwIbxYIBGSP9vfY5rij5C8vZUIQxG+RR
+         Lax70igUqN42voJKmjmTWscq9Y+OXTUYI+zAe/GWqQAeulJ8/EyKBeAk4/cNbicdoMfh
+         M7tRw3Dtyeg9cpIwFhdnb8L7ygmG5sPN9sMfSs1VEXIUOXPdFDN+eDqeogsWpDFfUv5Y
+         ttU+Q0Moe3bS+O/8khREjsngnNcVxBSmaNwKfIhgIgm+ZFioMH7nGrYrq2M3+zNKsll7
+         WvHL2mGaQLE/Tx2pYecs8sCJHuDBJNXZ6XPPJhb+9Z+uje8lNz1I2iYE9EgXaP0RsR+l
+         rlyg==
+X-Forwarded-Encrypted: i=1; AKwUvBzk3DTHYZ7+1C9BHXUbHcTxaFUBmlasm4niSvt02X0r+rJ6PltQiuMton7f2Ad/t0256i+Q5Hdx2uJ3VkKI@vger.kernel.org
+X-Gm-Message-State: AFuF++mIqATakfOW3K3A29w4X5ElDgPHg/kp3c6esjP+2Tld1sS8h3ST
+	YBgqYg08Xm+f/Ld2d4q2nXkwfB4fOpipj75kX5rOGu5uAjjJ8rcZZdUz
+X-Gm-Gg: AYBFou34wBcver4QdqPU+qi+Dm2DeZXlbg8+/cIZGKuZqzWjy9og1JvA2lpe27fwaxt
+	B2CHIB8ALN1+ns3bNyKgdOqVzxjzjATbUO/hyctr8iVGVjjZf+WeJxQASOWchNqKEtVz+nynykl
+	lc6qibfqZMJoAiEuNga/ORxLsyBBhLGHFp5dmJVODsyguK+euPRs9FuP/KySL5g7qdqh0OC/xnC
+	tZkoxFmbXIMCMa3rkdlXbNhMVkvSXuhFtmbxzpLcsAVwgeRB4mXCIz1ITs+XYoK+QGV86C9QQ95
+	LpA3u6S+/iU7LWawbiw9RjtDl2yomqthyuvukryLA7jIHc9unNr833BIcXDIDzUkeJY3xrHcYYd
+	sFldJbMKRUAueQhmMXwQgVvATKcJfQRva9UGD7BMU50CxNeXn0wXmvwUP6dGMx0SicDDv39odp6
+	HNziVka2e/51RIlRQAqJeLIrs6tNnFHapBsTF+yYzdVITPLn+hnaJKCKLvxZuCM8OkO4wbevKTE
+	hcFQJ9lToXqijdLfTacJF06X69ZA+mLTAqZsg==
+X-Received: by 2002:a05:600c:4594:b0:49e:6249:268b with SMTP id 5b1f17b1804b1-49fe6707f69mr40469475e9.32.1790249629279;
+        Thu, 24 Sep 2026 04:33:49 -0700 (PDT)
+Received: from [192.168.20.170] (5403F394.catv.pool.telekom.hu. [84.3.243.148])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-488682668dcsm15098556f8f.1.2026.09.24.04.33.46
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 24 Sep 2026 04:33:48 -0700 (PDT)
+Message-ID: <f2ccd6b6-e5a2-4d36-a12c-124638c31280@gmail.com>
+Date: Thu, 24 Sep 2026 13:33:46 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <8c9777c5-f323-406d-a996-17bd1a5b8946@oss.qualcomm.com>
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTI0MDA0NyBTYWx0ZWRfX/yN/CyVwOebK
- nFxQ2uB720iU/tzRupB9aLCNIesVDxJ4oYZEd8h9ueTmvDrXcZtLSLiRIsyKKciN5i6ug7pMx8r
- /tQgeH0IQhAepiDY5+CJiyq9V0bG4R8=
-X-Proofpoint-GUID: immAuGPdFgYuV45Ez-_y-R8Jpk36L2Fn
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTI0MDA0NyBTYWx0ZWRfX45h8MA++9B3w
- jsosG2w1Uft1ZicyN8ySrh5kc/2Ihs90Oa5afyK+OhR2adtQyWPK73/EC0MjGn2AEIxEexIHm+2
- 7yjoLvLeS3YKGf9+GZdpGy+tPb779rZBy3v0pOymzDitj4E8UjZvHFqtUzJ4FxkYJ8Y4nA4AV9V
- +sYkkaqf/a4FvIFAQFpm6+uXpmZXTmUTkajjAJ2Sr/Qjb/1L6iSSmt/wXG/QI/SV7G5p49uSSj3
- XidcAJ0S1+/gMP2nqEQfImWATEnI9lFb3MbUANBhURobBHOIQYgN/WGELmudImGlU1hpzv4t/4T
- 2XO4A9Iyj94KKQGGY35IIX1f9XWHxKEcQcpKdL+GDFz9UP9rwVoHAWbSyUMWg0tfbeNZY3UZFlr
- 3m7yNtqIPYqDD3F1uDjfmXBui0qUbzX3Ur2J/wfTq7orYRbMzMcaw/m42j5rS+uMhnHadBe+rd2
- v3FdpuJnqfiY9tEqoTw==
-X-Proofpoint-ORIG-GUID: immAuGPdFgYuV45Ez-_y-R8Jpk36L2Fn
-X-Authority-Analysis: v=2.4 cv=fMusTpae c=1 sm=1 tr=0 ts=6ab50a7c cx=c_pps
- a=P2rfLEam3zuxRRdjJWA2cw==:117 a=po8fGBi+ks8MzcVQGuqtFQ==:17
- a=kj9zAlcOel0A:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
- a=EUspDBNiAAAA:8 a=kDAAnAmS2xGMtcqLAaUA:9 a=CjuIK1q_8ugA:10
- a=ODZdjJIeia2B_SHc_B0f:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-24_02,2026-09-21_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- suspectscore=0 bulkscore=0 adultscore=0 lowpriorityscore=0 spamscore=0
- clxscore=1015 impostorscore=0 malwarescore=0 priorityscore=1501 phishscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609240047
+User-Agent: Mozilla Thunderbird
+From: Gabor Juhos <j4g8y7@gmail.com>
+Subject: Re: [PATCH] clk: qcom: gcc-ipq5018: mark 'gpll0_main' clock as
+ critical
+To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+ Bjorn Andersson <andersson@kernel.org>, Stephen Boyd <sboyd@kernel.org>,
+ Brian Masney <bmasney+clk@redhat.com>,
+ Jerome Brunet <jbrunet+clk@baylibre.com>,
+ Konrad Dybcio <konradybcio@kernel.org>,
+ Abel Vesa <abel.vesa@oss.qualcomm.com>,
+ Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>,
+ Gokul Sriram Palanisamy <quic_gokulsri@quicinc.com>,
+ Sricharan Ramabadhran <quic_srichara@quicinc.com>
+Cc: Stanislaw Pal <kuncy7@gmail.com>, Mieczyslaw Nalewaj <namiltd@yahoo.com>,
+ Jie Luo <jie.luo@oss.qualcomm.com>, Georg Seema <georgseema@gmail.com>,
+ linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org,
+ linux-kernel@vger.kernel.org, stable@vger.kernel.org
+References: <20260918-ipq5018-mark-gpll0_main-critical-v1-1-fbe8f27a0106@gmail.com>
+ <e16cf23c-82aa-465b-81b2-6240f4a0f4d9@oss.qualcomm.com>
+Content-Language: hu
+In-Reply-To: <e16cf23c-82aa-465b-81b2-6240f4a0f4d9@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On 26-09-23 12:04:32, Konrad Dybcio wrote:
-> On 9/22/26 10:31 PM, Abel Vesa wrote:
-> > On 26-09-22 11:33:38, Konrad Dybcio wrote:
-> >> From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-> >>
-> >> The Glymur-based Zenbook A16 features an Embedded Controller running
-> >> custom ASUS firmware (which is loosely based on the reference Qualcomm
-> >> Hamoa EC one with a lot of modifications). It provides keyboard
-> >> backlight control, additional temperature sensor readouts, fan speed
-> >> monitoring and a number of miscellaneous functions.
-> >>
-> >> Describe it.
-> >>
-> >> Signed-off-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-> >> ---
-> >>  .../boot/dts/qcom/glymur-asus-zenbook-a16-ux3607oa.dts    | 15 +++++++++++++--
-> >>  1 file changed, 13 insertions(+), 2 deletions(-)
-> >>
-> >> diff --git a/arch/arm64/boot/dts/qcom/glymur-asus-zenbook-a16-ux3607oa.dts b/arch/arm64/boot/dts/qcom/glymur-asus-zenbook-a16-ux3607oa.dts
-> >> index 40433dc2d6cf..d3356fcd25f0 100644
-> >> --- a/arch/arm64/boot/dts/qcom/glymur-asus-zenbook-a16-ux3607oa.dts
-> >> +++ b/arch/arm64/boot/dts/qcom/glymur-asus-zenbook-a16-ux3607oa.dts
-> >> @@ -670,8 +670,19 @@ &i2c9 {
-> >>  
-> >>  	status = "okay";
-> >>  
-> >> -	/* EC subdevice @ 0x5b */
-> > 
-> > So what is on this address then ?
+Hi Konrad,
+
+2026. 09. 23. 15:32 keltezéssel, Konrad Dybcio írta:
+> On 9/18/26 11:27 AM, Gabor Juhos wrote:
+>> On IPQ5018, the APCS core clock feeds the CPUs. It can use
+>> different clocks as its parent, but during system boot it
+>> utilizes GPLL0.
+>>
+>> Under some cicumstances, the 'gpll0_main' clock is getting
+>> disabled during kernel start which results in a system hang
+>> then the hardware watchdog restarts the board after a while.
+>>
+>> This can happen when a driver gets a clock in its probe function,
+>> then releases it either directly or by devres cleanup on probe
+>> failure.
+>>
+>> For example, since v6.18 the kernel often fails to boot on the
+>> TP-Link Archer AX55 v1 board by using the in-tree dts. In the
+>> failing configuration, the 'ipq-cmn-pll' driver is built into
+>> the kernel and the problem is caused by the pm_runtim_put()
+>> call in the ipq_cmn_pll_clk_probe() function. Due to this call,
+>> runtime pm disables the 'gcc_cmn_blk_ahb_clk' clock asynchronously
+>> which results in disabling 'gpll0_main' as well.
+>>
+>> Mark the clock as critical in order to avoid such hangs.
+>>
+>> Cc: stable@vger.kernel.org
+>> Fixes: e3fdbef1bab8 ("clk: qcom: Add Global Clock controller (GCC) driver for IPQ5018")
+>> Signed-off-by: Gabor Juhos <j4g8y7@gmail.com>
+>> ---
+>> Note:
+>> There is a patch [1] awaiting upstream which intends to solve the
+>> problem in the case of the 'ipq-cmn-pll' driver. However the same
+>> hang can be reproduced with several other drivers by triggering a
+>> probe failure in them.
+>>
+>> The actual patch aims to solve the root cause.
 > 
-> The driver spawns a secondary i2c device there to service some
-> of the EC communication
+> This is a good workaround. Ideally, we would resolve why this
+> happens in the first place.
+> 
+> At a glance, we have the CPUs consuming
+> &apcs_glb APCS_ALIAS0_CORE_CLK
+> 
+> which takes XO/GPLL0/A53PLL as parents.
+> 
+> GPLL0 is a child of GPLL0_MAIN, so this should never be gated in
+> practice. devlink and probe deferrals should make sure you always
+> get a valid clock handle for the cpufreq driver..
 
-Thanks for clarifying.
+Yes, the cpufreq driver gets a valid clock handle. However the hang happens
+early, when the 'apcs_alias0_core' clock is not registered yet. So CCF does not
+know that the clock (hence the CPU) is a consumer of GPLL0.
+
+The reason behind the late registration of the 'apcs_alias0_core' clock is that
+probing of the 'mailbox@b111000' device is deferred probably because it requires
+the '&a53pll' and the '&gcc GPLL0' clocks. This can be easily seen by enabling
+debug in 'drivers/base/dd.c':
+
+...[    0.627289] platform b111000.mailbox: bus: 'platform':
+__driver_probe_device: matched device with driver qcom_apcs_ipc
+[    0.627535] platform b111000.mailbox: Added to deferred list
+...
+[    0.967199] platform 9b000.clock-controller: bus: 'platform':
+__driver_probe_device: matched device with driver ipq_cmn_pll
+[    0.974373] platform 9b000.clock-controller: bus: 'platform': really_probe:
+probing driver ipq_cmn_pll with device
+...
+### without the patch, the hang happens here ###...
+[    2.272775] platform b111000.mailbox: Retrying from deferred list
+[    2.280683] platform b111000.mailbox: bus: 'platform': __driver_probe_device:
+matched device with driver qcom_apcs_ipc
+[    2.286054] platform b111000.mailbox: bus: 'platform': really_probe: probing
+driver qcom_apcs_ipc with device
+[    2.301354] platform qcom,apss-ipq6018-clk.0.auto: bus: 'platform':
+__driver_probe_device: matched device with driver qcom,apss-ipq6018-clk
+[    2.306621] platform qcom,apss-ipq6018-clk.0.auto: bus: 'platform':
+really_probe: probing driver qcom,apss-ipq6018-clk with device
+[    2.323267] qcom,apss-ipq6018-clk qcom,apss-ipq6018-clk.0.auto: driver:
+'qcom,apss-ipq6018-clk': driver_bound: bound to device
+[    2.332307] qcom,apss-ipq6018-clk qcom,apss-ipq6018-clk.0.auto: bus:
+'platform': really_probe: bound device to driver qcom,apss-ipq6018-clk
+[    2.342573] qcom_apcs_ipc b111000.mailbox: driver: 'qcom_apcs_ipc':
+driver_bound: bound to device
+[    2.355998] qcom_apcs_ipc b111000.mailbox: bus: 'platform': really_probe:
+bound device to driver qcom_apcs_ipc
+Now that the 'apcs_alias0_core' clock is registered, the cpufreq driver can
+switch the clock's parent from GPLL0 to A53PLL:
+
+[    2.427166] platform cpufreq-dt: Retrying from deferred list
+[    2.437131] platform cpufreq-dt: bus: 'platform': __driver_probe_device:
+matched device with driver cpufreq-dt
+[    2.442776] platform cpufreq-dt: bus: 'platform': really_probe: probing
+driver cpufreq-dt with device
+[    2.461285] cpufreq: cpufreq_policy_online: CPU0: Running at unlisted initial
+frequency: 799999 kHz, changing to: 800000 kHz
+[    2.479751] cpufreq-dt cpufreq-dt: driver: 'cpufreq-dt': driver_bound: bound
+to device
+[    2.481435] cpufreq-dt cpufreq-dt: bus: 'platform': really_probe: bound
+device to driver cpufreq-dt
+
+I have not found a better solution which prevents 'gpll0_main' from being
+disabled until the 'apcs_alias0_core' clock gets registered.
+
+On the vast majority of the boards, one or more consumers of the PLL are always
+active during runtime, so in practice it always runs anyway.
+
+Regards,
+Gabor
