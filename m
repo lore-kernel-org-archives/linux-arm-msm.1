@@ -1,144 +1,156 @@
-Received: from mail-qt1-f177.google.com (mail-qt1-f177.google.com [209.85.160.177])
+Received: from mail-ua2-f12.google.com (mail-ua2-f12.google.com [74.125.226.204])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A902126AE5
-	for <linux-arm-msm@vger.kernel.org>; Thu, 24 Sep 2026 18:50:05 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=209.85.160.177
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790275810; cv=pass; b=sePMdUeOR8JTfAjFEksvX3KIYo6Lb5Prir3C2V6gU9OROvzf/afRrL9+a79YfBPYNlmcqqNYaMPztxsH378dqGt7eqNTQlEt1uq6iniW6UBktgld6IIDpOQqBd6mYa+YELqTKoNtlkoblmAYZhGs370H8zLZvFG64EnnyuknK+A=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790275810; c=relaxed/simple;
-	bh=ovV3+8HhIOogBXh04yQPFlm05GeVlvyXWO/9SfNBaaI=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=lGun2PwI88lupGdJk75wE4M+ofX8hxuXi6K4RoO9y+X8IsTMwtTFg5Q+eFIPYKC4OvSrVQ3/7s32w2py0fTQ/b5T7kiYPr0j+x6hX6bxDoTJ59gTmjhNco7eTRjVEOIpmkqCOAp2Ttt5ZqthSD93cwzrFAVnEEzVk3PCGcB0o0M=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=eKcp3EeR; arc=pass smtp.client-ip=209.85.160.177
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=google.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7C5EA4BFE96
+	for <linux-arm-msm@vger.kernel.org>; Thu, 24 Sep 2026 19:02:18 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.226.204
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1790276545; cv=none; b=krsOJMWh39TQhtCw8OSE1NeSpP07DMLQ0JsF+iJpJuxF3Vis9M3jvv//I9E10AZ4XDxEa6APCDBrLbTHitJ2E74ysjgOcpNGQFd6x5OVsfYiy2WjyZXyZWeJuLlONSrfX6evAUAmVIHDrc5uyUOx6DTh1WmKWmRc0bsr2/1fmMU=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1790276545; c=relaxed/simple;
+	bh=I9rjMdylwRXMbZI50fmpd3PtoFlN+qirBSdlSQ+FEgg=;
+	h=Subject:To:Cc:References:From:Message-ID:Date:MIME-Version:
+	 In-Reply-To:Content-Type; b=qgQ2OaB+9NXajb0k9Tu8Tz+IS9UT7OuLBk9m5iL1kbSHWi898CFFsFXIkCcBeVuuVRGxTOzNSo2wouJZIIpg09PrackXksnYj6Op/UeD3IOV+1cR2CIBUB4BLJmgw1HP8Q8om2N+r4qUI1YwNiWstc5Hty/U9Pjctf67yPy0RDg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=marek.ca; spf=pass smtp.mailfrom=marek.ca; dkim=pass (2048-bit key) header.d=marek.ca header.i=@marek.ca header.b=ARqz6Czv; arc=none smtp.client-ip=74.125.226.204
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=marek.ca
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=marek.ca
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="eKcp3EeR"
-Received: by mail-qt1-f177.google.com with SMTP id d75a77b69052e-53113d72966so33131cf.1
-        for <linux-arm-msm@vger.kernel.org>; Thu, 24 Sep 2026 11:50:05 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1790275803; cv=none;
-        d=google.com; s=arc-20260327;
-        b=YBi3TGAIZNLtFX9kE+qqd92LOl3B33IpevKFJVeJGoLMAn8i3m4ueOZiiks5AcwAkp
-         hYdM0dpsJkh/0px1/FKvEoRTywgb4sf5JVP6dSU1o11ZzCYhVfojSfsw3BPBd6rhYAsh
-         G85F9dr5qaCJV9KWT6NjyI7u8Is482sbI3S3JhNyV6JLgTaITrKB0+NPtIfxHxXUf7MK
-         KqVvHEJMXyE4NTDL7rfM6q11eypwLRjG8BTssU/sd97jb3AHd2dkO7InCiL2tbijXjOl
-         HeDHZa4/MQSlaZMF7wUsLf2wLh2z7lrBJ33Php4YyS9AnatTqOlLQrUUaTffDdDutHkO
-         2QNg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=ovV3+8HhIOogBXh04yQPFlm05GeVlvyXWO/9SfNBaaI=;
-        fh=6X6Adm3K89TIAvwmBMj1A8Me+UvBNYGRwzZ22OnAm/M=;
-        b=NVQajUnDjhojyDxMU7A08lhJt7C6Oe9goVfrrkAfKmZD1MUbAqy9YtSEnFjcujHGAk
-         0j66iWTRyrEwCnHsWOVjeo9DCsVQCzC6Rcr4OHUxxcH6dUS0R0t5Lqli/NJ5kgf2MBOA
-         YnHqg1jbAuGQP0QF74FfjHC6WRa3E/683iiyHk43SDLHw0D+t5YH4bn/86gIIGepGQct
-         zRqB+jGURBR2DTC3gtAlhCxMg8LcPbfy46njuOng+L7D73WcOnYYqRMyczZ+ZTz6eked
-         5ngFnFwkHOBpfkcJ7uZuGHv70anP+KWqdS+nx/dFqj2/Q7D+QuP3IvEOKf0TH0h1aBe4
-         3bZw==;
-        darn=vger.kernel.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+	dkim=pass (2048-bit key) header.d=marek.ca header.i=@marek.ca header.b="ARqz6Czv"
+Received: by mail-ua2-f12.google.com with SMTP id a1e0cc1a2514c-97e7c7b4ed2so123736241.2
+        for <linux-arm-msm@vger.kernel.org>; Thu, 24 Sep 2026 12:02:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20251104; t=1790275802; x=1790880602; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=ovV3+8HhIOogBXh04yQPFlm05GeVlvyXWO/9SfNBaaI=;
-        b=eKcp3EeRY3Exs24ydlk+X22pdW0CNzGOGPzcn0hcoq17U7b9zOjtCI02uTfJ0oCCV/
-         3aODYtFKGiGxGehMoRF/rFpbv9YyW0iB0jS69QuhU5H274S1DZyo6Y53v2pd3XcqOWTn
-         QQ7oi+h8KoryA1W5QxMYo3NW3m8KIIUmws/bl2SRMgs+87NsNpKNzczdw4ZnUIzHM1gw
-         WpQGcMgagWXkzHq79dW7H6GldOsRZf4zpvLkSWe7g5GGsl2bAbIVp3hOBncKL3f7HcYH
-         2EQrGvVnCZi9xhNtPyfoNaALWtqIWiahb20eNkwe/iVQlcxhtYB4WISQjjiqZZMjLJ6i
-         Igyw==
+        d=marek.ca; s=google; t=1790276536; x=1790881336; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-language:content-type:in-reply-to
+         :mime-version:user-agent:date:message-id:from:references:cc:to
+         :subject:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=FWQWTkpRc4mjMwr+vW7xfwNCAyBMZNGtR2Jki2MQhHc=;
+        b=ARqz6CzvBJHEdx5GkyMPwb5HgkwVuHhCUBU2C4uKpjxxodRk9ko6nIfHGSoXOzCRe3
+         3MWjHj9npWLFN02JRMwOSymEe9gPdj5FvEX8mSu/Swo2h5hnlK21UPtKlo/Fvo+SN8SN
+         U1cYlmfV7ULFXk38xNY3Mkmo0OwcRG7XDseg9qPiOg2+Cl4Iz86tB245zwvYBL49e+Dr
+         BdN874tZ2dadCH98HCAjHI7qwAriRqXUT+8ZNmS+NqlutvdvLfBpMLCynOtjrMzZz4+M
+         Ky/mxdiIvrX3rFXZwlWC5qrJkeadad3vjtj6uLFQ7MaS/uhNUUbXh5wK/0kNioOb/myG
+         +OxQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790275802; x=1790880602;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=ovV3+8HhIOogBXh04yQPFlm05GeVlvyXWO/9SfNBaaI=;
-        b=SaOnpXoVPbHEsnCwAZYdB36ZLOLnKP3SZyWGXkKKRYrs6AIMEmCsnnYxRQlbuCy1i0
-         Ue5DlHQ+/6qwW4gK39L+5fSrPGPx5bm7c55pOnljwWtX++TeyDBBCPNjdy7zX0FFPhDv
-         d4nVyno/JJcqxeXOgnAgrAvtMYXoyKhujbjvOSc3CVw71fAK3CTH/41+PPMmBj59hM3S
-         QETl7JJVcQ0RIIdw6v7ZpBYtP8Pv1TcdH4apseTNWvbzSaU55i1NjUKT1sdxOO6tWMNo
-         k0Cyafw6aHWbpud7MjFYN+ABMWSmqLi4MQVUZj2UaOfMUGrMMsUoRK5e9vmfhHIx6Q/I
-         FbYw==
-X-Forwarded-Encrypted: i=1; AKwUvBxoGPeDEIEmNb/DrlnnGTFhxjykhLmlzhoEQvGL44vm6az5+oYHP9uWytZ8QGkkIlE799Xao4SX3YUEAFNg@vger.kernel.org
-X-Gm-Message-State: AFuF++mA82WDkpg2can1i1vRfyP31mgjtKuXeMNGWLruNLLDAFl2RlcM
-	ObSZL/bjlXrNqoB4w70EmvjkKsv0STiZe3kSDUuDvgIJKyKHSePXxTctjXfHb/ZQouZFXlhTIL2
-	2+nWx0RFxa6pitGz9ndsmfk/2T6k2xEctElli4pLc
-X-Gm-Gg: AYBFou2p/avZ/MhWes/MVUTk9vcaRKHvjpUJyXU/KKq3WHTOMNRknkWOb47bc3qQArq
-	XsQB8DNbzgW5wyE6cXpA0CJk4H8x3NPzfhG9AKfF6sC4rw7iFGfHc4U1cowZgtr+3oiE1eexQnn
-	3NiP6CSvvp1JiEn6OkuoZSsIdpOCApDOM4fdy4k5wkHK0YLdvBIC2cp+dglbI9I1sBpGfXbT8IS
-	UBB3nxHeVXqMQ/h9mQLBkU4jeYsHP64TI4W0+FQYujmTe5Knl60/PoGdLu0ZFl5+zRhyDuWBg0L
-	fJmlYQM7qMhnpthZGzj4nEOXXx7NESKcX9K67hm+peWNGeP7rwa8
-X-Received: by 2002:ac8:5a47:0:b0:52f:9ed4:8d75 with SMTP id
- d75a77b69052e-5330b91b69amr764001cf.15.1790275801917; Thu, 24 Sep 2026
- 11:50:01 -0700 (PDT)
+        d=1e100.net; s=20260707; t=1790276536; x=1790881336;
+        h=content-transfer-encoding:content-language:content-type:in-reply-to
+         :mime-version:user-agent:date:message-id:from:references:cc:to
+         :subject:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=FWQWTkpRc4mjMwr+vW7xfwNCAyBMZNGtR2Jki2MQhHc=;
+        b=IutWYdWOc9PhWGtsn5YX91M2EC1sr61iR02x2xspj3FNkS0H8qqORAFhlfSeJqMhCI
+         pR/+s0iakbfIbJ6Akx/+ThCPB2Bhd7MPChr7deJnuxT/8LZRMT+fXNo7lW4lIrwB9ZPY
+         8mrRZdEcHnzxBN7S1ItHEnjaxTc8Jfbuyz8586MXpHBzmLjkGYVa1bHwL/jyhg3OeRZi
+         +WdbNFrsHE38U/6rG75nMzcG/FD7flKSh4SwukG1JT3QRptNYC8gQqJilne+pzQJQsJZ
+         z9SGg7FrZL/OvKoA1+vUsKLkZKWff40lNI10EUCVFk0m8pbhoSeLcKbNzYO5s3iv8F9d
+         fAFQ==
+X-Forwarded-Encrypted: i=1; AKwUvBwpB4r4V243dXWsFrMk0BwvXUHAWNB8yq7h4Jdu49Il6esY5Zs3kZtVid/9qfSGQPSIZL6LbLU1z4dxPHqH@vger.kernel.org
+X-Gm-Message-State: AFuF++n5JJ8Bd6BA5uUZIGAW4COpl/vUSFhapqKOYQeanLIHIUYJdjJG
+	Ob5gt6++oK/11EhyRa4ims3pnCC1pVRtTIbKyIeXZyVVMyLQ8LDepJRWtgKBsAPDCpU=
+X-Gm-Gg: AYBFou37FfiCP8s5uzgGMocKuV6SzSTh8RsGEFKFx4d+XNafTxyL9YEeoh3Ah/MBZ/2
+	OH2dQ6QfrI1oihJHCpNEd59DUB0ESJdxY0rKFsaalD5QIJJr5ee1fZ9enc4jYovp9G7ueTELaAD
+	XdIy2TW0A7fuZtUAVAwBwryC33aff+PAy6hVkqgxuCINtkQmlPKNVOwYoftYWH/4EzuEQuFBDUO
+	NQiIlD1pHlSy075mfv3y/cT5sbBkRTlICaKMIwm76f/zp7adxdYHo3t31JTviBT9NOfZt1KAhKN
+	NFw4lRHiiJJx+GMDf/2sDRKB4TQAHtsO/RlOEn1tJANqfGBb3BSE/MjuiIEAI92G/RlLPGRPkBH
+	jQ+h6LxRqEp7DwzuPqOk3p4Ypi06cvFCNqYxq9e2hjwZeNqY8PoopGA73UoZIx7rDGPE1ls3HbK
+	mI4iIabmyJIc+gpe4i2xdn+keXFFTsnI7RyxpPKNJvG7SgXoqyJ8Uh127oPjsPNC3m5DD0i1qMj
+	o2YVidDYkLwOEQQDTOlhPvCQQZiIL4E0C5ltnWz5Kzq
+X-Received: by 2002:a05:6102:441e:b0:7a6:a24e:811f with SMTP id ada2fe7eead31-7af1c79966cmr1958653137.7.1790276535690;
+        Thu, 24 Sep 2026 12:02:15 -0700 (PDT)
+Received: from [192.168.0.189] (modemcable125.110-19-135.mc.videotron.ca. [135.19.110.125])
+        by smtp.gmail.com with ESMTPSA id a1e0cc1a2514c-9851e8c4f2csm5199683241.10.2026.09.24.12.02.14
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 24 Sep 2026 12:02:15 -0700 (PDT)
+Subject: Re: [PATCH] ASoC: codecs: lpass-wsa-macro: rewrite the interpolator
+ volume after enabling clocks
+To: Liviu Nicoara <lnicoara@thinkoid.org>,
+ Srinivas Kandagatla <srini@kernel.org>, Mark Brown <broonie@kernel.org>,
+ Liam Girdwood <lgirdwood@gmail.com>
+Cc: Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>,
+ Johan Hovold <johan@kernel.org>, linux-sound@vger.kernel.org,
+ linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org
+References: <20260924125940.22665-1-lnicoara@thinkoid.org>
+From: Jonathan Marek <jonathan@marek.ca>
+Message-ID: <54f8af3d-a01c-d1fb-36b4-7eac71174f92@marek.ca>
+Date: Thu, 24 Sep 2026 14:57:01 -0400
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.2.2
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260921-iommu_contig_hint-v5-1-e7fbd1c3774d@oss.qualcomm.com> <20260924001502.GO1540250@ziepe.ca>
-In-Reply-To: <20260924001502.GO1540250@ziepe.ca>
-From: Daniel Mentz <danielmentz@google.com>
-Date: Thu, 24 Sep 2026 11:49:50 -0700
-X-Gm-Features: AclHuK8NxjjK4LAAInZh9B-AiWvxMmczV1znpTfWeKjoAyhZX_I7iFt3P7YZv3g
-Message-ID: <CAE2F3rCVh0CmW6+a__PcCrBgsMJVompKJX_qYBdQ=exj3bYtCg@mail.gmail.com>
-Subject: Re: [PATCH v5] iommu/io-pgtable-arm: Add support for contiguous hint bit
-To: Jason Gunthorpe <jgg@ziepe.ca>
-Cc: Vijayanand Jitta <vijayanand.jitta@oss.qualcomm.com>, Will Deacon <will@kernel.org>, 
-	Robin Murphy <robin.murphy@arm.com>, "Joerg Roedel (AMD)" <joro@8bytes.org>, linux-arm-msm@vger.kernel.org, 
-	linux-arm-kernel@lists.infradead.org, iommu@lists.linux.dev, 
-	linux-kernel@vger.kernel.org, Prakash Gupta <prakash.gupta@oss.qualcomm.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+In-Reply-To: <20260924125940.22665-1-lnicoara@thinkoid.org>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 
-On Wed, Sep 23, 2026 at 5:15=E2=80=AFPM Jason Gunthorpe <jgg@ziepe.ca> wrot=
-e:
->
-> On Mon, Sep 21, 2026 at 04:44:07PM +0530, Vijayanand Jitta wrote:
-> > From: Prakash Gupta <prakash.gupta@oss.qualcomm.com>
-> >
-> > Add support for the contiguous hint (CONT) bit in ARM LPAE page tables.
-> > When a set of consecutive PTEs map a naturally aligned contiguous block=
- of
-> > memory, set CONT on every descriptor in that group so the hardware can
-> > combine translations and improve TLB reach.
-> >
-> > Advertise the supported CONT group sizes in pgsize_bitmap. Callers sele=
-ct
-> > those sizes through the normal page-size selection path; io-pgtable-arm
-> > then installs the corresponding tagged descriptors directly. A partial
-> > unmap of a tagged CONT group is rejected before modifying any descripto=
-r,
-> > so a rejected request cannot leave the group partly unmapped.
-> >
-> > The IO_PGTABLE_QUIRK_ARM_NO_CONT_HINT quirk allows SMMU drivers to disa=
-ble
-> > CONT support for hardware with implementation-specific errata.
->
-> smmuv3 has this errata, it must be disabled there too. I didn't notice
-> it in this patch?
+this is just papering over the real problem, which would be the regmap 
+cache being out of sync with the HW registers. there's no requirement 
+that the volume register be written after the int/path clock enable
 
-SMMU is an architecture specification. I am not aware of errors in
-this architecture specification that would preclude the usage of the
-contiguous bit. I understand that Arm MMU-700 has the following
-erratum
+(fwiw, this problem doesn't reproduce on my setup, where this driver 
+does not autosuspend and the regmap doesn't go into cache-only mode)
 
-3777127 Under invalidation in TBU possible when using contiguous page
-table entries
-
-The recommended workaround is described as
-
-"Ensure that contiguous page tables are removed using a single range
-invalidation. Arm recommends using range invalidations to remove
-contiguous entries anyway for performance reasons."
-
-and I believe we are already doing this.
-
-Which specific implementations of SMMUv3 do you have in mind that have
-errata precluding the usage of the contiguous bit?
+On 9/24/26 8:59 AM, Liviu Nicoara wrote:
+> Commit 902f497a1ff5 ("ASoC: codecs: lpass-wsa-macro: remove useless
+> gain read/write sequence") removed the read and write of the digital
+> volume register in wsa_macro_enable_interpolator(), on the grounds that
+> writing back the value just read does nothing. The comment above it,
+> "apply gain after int clk is enabled", was left in place.
+> 
+> On the Dell XPS 13 9345 (X1E80100, four WSA8845 amplifiers on two WSA
+> macros) the write does something: a volume change made while the path
+> is idle does not take effect when playback starts. Lowering the digital
+> volume from 81 to 63 with nothing playing, then playing a test tone,
+> gave about the same level as before the change. With the rewrite
+> restored, lowering it from 81 to 69 while idle played audibly quieter,
+> and restoring 81 while idle brought the level back. Changes made during
+> playback take effect with or without the rewrite.
+> 
+> This is the behaviour described in commit 46188db080bd ("ASoC: codecs:
+> lpass-wsa-macro: fix compander volume hack"): "the volume registers
+> still need to be written after enabling clocks in order for any prior
+> updates to take effect." The value read comes from the register cache,
+> so the write pushes the last requested volume to the hardware once its
+> clock runs.
+> 
+> Restore the rewrite in the interpolator's POST_PMU event only. The mix
+> path event removed later in the same series is not brought back.
+> 
+> Fixes: 902f497a1ff5 ("ASoC: codecs: lpass-wsa-macro: remove useless gain read/write sequence")
+> Assisted-by: Claude:claude-opus-5-5
+> Signed-off-by: Liviu Nicoara <lnicoara@thinkoid.org>
+> ---
+> 
+> Notes:
+>      Tested on v7.2.6 on the machine above, by listening. This function is
+>      unchanged between v7.2 and for-next; the driver's clocks moved to the
+>      PM clock framework in cd054a6e272c after v7.2, which was not tested
+>      here. Build-tested on broonie/for-next (arm64 defconfig).
+> 
+>   sound/soc/codecs/lpass-wsa-macro.c | 3 +++
+>   1 file changed, 3 insertions(+)
+> 
+> diff --git a/sound/soc/codecs/lpass-wsa-macro.c b/sound/soc/codecs/lpass-wsa-macro.c
+> index 4242366601a5..899c8bee4645 100644
+> --- a/sound/soc/codecs/lpass-wsa-macro.c
+> +++ b/sound/soc/codecs/lpass-wsa-macro.c
+> @@ -1849,6 +1849,7 @@ static int wsa_macro_enable_interpolator(struct snd_soc_dapm_widget *w,
+>   					 int event)
+>   {
+>   	struct snd_soc_component *component = snd_soc_dapm_to_component(w->dapm);
+> +	unsigned int gain;
+>   	u16 gain_reg;
+>   	u16 reg;
+>   	struct wsa_macro *wsa = snd_soc_component_get_drvdata(component);
+> @@ -1890,6 +1891,8 @@ static int wsa_macro_enable_interpolator(struct snd_soc_dapm_widget *w,
+>   					CDC_WSA_RX_PGA_HALF_DB_MASK,
+>   					CDC_WSA_RX_PGA_HALF_DB_ENABLE);
+>   		}
+> +		gain = snd_soc_component_read(component, gain_reg);
+> +		snd_soc_component_write(component, gain_reg, gain);
+>   		wsa_macro_config_ear_spkr_gain(component, wsa,
+>   						event, gain_reg);
+>   		break;
+> 
